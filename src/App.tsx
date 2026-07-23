@@ -348,6 +348,8 @@ function Home({
         onProfileChange={onProfileChange}
         onSignOut={onSignOut}
         onToggleItem={onToggleItem}
+        assessmentCards={assessmentCards}
+        onOpenAssessment={onOpenAssessment}
       />
     )
   }

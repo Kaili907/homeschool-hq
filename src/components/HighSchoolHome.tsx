@@ -8,6 +8,7 @@ import { ALGEBRA_TOPIC_IDS, GEOMETRY_UNITS, GEOMETRY_UNIT_IDS } from '../hs/hsCa
 import { geometryFresh } from '../hs/geometryGen'
 import { algebraQuestion, buildAlgebraDeck } from '../hs/algebraGen'
 import type { HsQuestion } from '../hs/hsQuestion'
+import type { HomeAssessmentCard } from './assessment/homeCards'
 import {
   courseProgress,
   ensureHsDefaults,
@@ -37,6 +38,10 @@ interface Props {
   onProfileChange: (p: Profile) => void
   onSignOut: () => void
   onToggleItem: (itemId: string, done: boolean) => void
+  // MA×M4 integration: assessments are HS content, so the teen home surfaces
+  // the same assigned-assessment cards MA renders on the kids' home.
+  assessmentCards: HomeAssessmentCard[]
+  onOpenAssessment: (testId: string) => void
 }
 
 const rnd = <T,>(arr: readonly T[]): T => arr[Math.floor(Math.random() * arr.length)]
@@ -59,7 +64,14 @@ const longestStreak = (recs: HsQuizRecord[]) => {
   return best
 }
 
-export function HighSchoolHome({ profile: rawProfile, onProfileChange, onSignOut, onToggleItem }: Props) {
+export function HighSchoolHome({
+  profile: rawProfile,
+  onProfileChange,
+  onSignOut,
+  onToggleItem,
+  assessmentCards,
+  onOpenAssessment,
+}: Props) {
   const t = useTheme()
   const [screen, setScreen] = useState<HsScreen>({ kind: 'home' })
   const seenRef = useRef(new Set<string>())
@@ -194,6 +206,32 @@ export function HighSchoolHome({ profile: rawProfile, onProfileChange, onSignOut
           <span className={`${t.statPill} px-3 py-1 text-slate-600`}>{profile.totals.correct} correct</span>
           <span className={`${t.statPill} px-3 py-1 text-slate-600`}>{profile.totals.sessions} sessions</span>
           <span className={`${t.statPill} px-3 py-1 text-slate-600`}>{profile.totals.questionsAnswered} answered</span>
+        </div>
+      )}
+
+      {/* MA×M4 integration: assigned assessments (HS content) sit at the very top */}
+      {assessmentCards.length > 0 && (
+        <div className="mt-6 space-y-3">
+          {assessmentCards.map(({ test, status }) => (
+            <button
+              key={test.id}
+              onClick={() => onOpenAssessment(test.id)}
+              className="flex w-full items-center gap-3 rounded-xl border border-slate-300 bg-white p-4 text-left shadow-sm transition-colors hover:border-slate-500"
+            >
+              <span className="text-3xl">📋</span>
+              <span className="flex-1">
+                <span className="block font-bold text-slate-900">{test.title}</span>
+                <span className="block text-sm font-semibold text-slate-500">
+                  {status === 'in-progress'
+                    ? 'In progress — see Dad to continue'
+                    : 'Placement — see Dad before starting'}
+                </span>
+              </span>
+              <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500">
+                {status === 'in-progress' ? 'resume' : 'start'}
+              </span>
+            </button>
+          ))}
         </div>
       )}
 
