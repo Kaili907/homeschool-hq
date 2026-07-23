@@ -9,6 +9,10 @@ export type Visual =
   | { kind: 'fraction'; num: number; den: number }
   | { kind: 'fractionPair'; a: [number, number]; b: [number, number] }
   | { kind: 'rect'; w: number; h: number; labels: boolean }
+  | { kind: 'numberLine'; min: number; max: number; value: number }
+  | { kind: 'coordGrid'; x: number; y: number }
+  | { kind: 'ratioTable'; headers: [string, string]; rows: [string, string][] }
+  | { kind: 'angle'; degrees: number }
 
 export interface Question {
   skillId: SkillId

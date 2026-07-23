@@ -1,5 +1,5 @@
-import { SKILLS, type SkillId } from './skills'
-import type { AnswerRecord, Difficulty, Profile, SkillStatus } from './types'
+import { skillsForGrade, type SkillId } from './skills'
+import type { AnswerRecord, Difficulty, Grade, Profile, SkillStatus } from './types'
 import { getStat, isoToday } from './appState'
 
 export const PLACEMENT_TOTAL = 20
@@ -17,8 +17,8 @@ function shuffle<T>(arr: readonly T[]): T[] {
 // ---------- placement ----------
 
 /** Skill order for the placement test: every skill once, then a reshuffled second pass. */
-export function placementOrder(): SkillId[] {
-  const ids = SKILLS.map((s) => s.id)
+export function placementOrder(grade: Grade): SkillId[] {
+  const ids = skillsForGrade(grade).map((s) => s.id)
   return [...shuffle(ids), ...shuffle(ids)].slice(0, PLACEMENT_TOTAL)
 }
 
@@ -40,8 +40,8 @@ export interface PlacementSkillResult {
   seedMastery: number
 }
 
-export function summarizePlacement(history: AnswerRecord[]): PlacementSkillResult[] {
-  return SKILLS.map((s) => {
+export function summarizePlacement(history: AnswerRecord[], grade: Grade): PlacementSkillResult[] {
+  return skillsForGrade(grade).map((s) => {
     const recs = history.filter((r) => r.question.skillId === s.id)
     const asked = recs.length
     const correct = recs.filter((r) => r.correct).length
@@ -93,12 +93,13 @@ export function difficultyFor(mastery: number): Difficulty {
   return mastery < 35 ? 1 : mastery < 70 ? 2 : 3
 }
 
-/** Weighted plan: weaker skills appear more often. */
+/** Weighted plan: weaker skills appear more often. Uses the profile's grade tree. */
 export function buildPracticePlan(p: Profile, count = PRACTICE_TOTAL): PlanItem[] {
-  const weighted = SKILLS.map((s) => {
+  const weighted = skillsForGrade(p.grade).map((s) => {
     const mastery = getStat(p, s.id).mastery
     return { id: s.id, mastery, w: Math.max(10, 115 - mastery) }
   })
+  if (weighted.length === 0) return [] // grades without a trainer yet
   const totalW = weighted.reduce((acc, x) => acc + x.w, 0)
   const plan: PlanItem[] = []
   for (let i = 0; i < count; i++) {

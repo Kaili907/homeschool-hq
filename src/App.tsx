@@ -230,7 +230,7 @@ export default function App() {
               generateFresh(screen.order[index], placementDifficulty(history), seenRef.current)
             }
             onFinish={(history) => {
-              const results = summarizePlacement(history)
+              const results = summarizePlacement(history, active.grade)
               // a finished placement counts as the day's math session too
               setProfile(autoCompletePractice(finishSession(applyPlacement(active, results), 0)))
               setScreen({ kind: 'placementResults', results })
@@ -284,7 +284,7 @@ export default function App() {
             onEnsureToday={() => setProfile(ensureToday(active))}
             onToggleItem={(itemId, done) => setProfile(setItemDone(active, itemId, done))}
             onSignOut={signOut}
-            onPlacement={() => setScreen({ kind: 'placement', order: placementOrder() })}
+            onPlacement={() => setScreen({ kind: 'placement', order: placementOrder(active.grade) })}
             onPractice={() => setScreen({ kind: 'practice', plan: buildPracticePlan(active) })}
           />
         )}
@@ -311,7 +311,7 @@ function Home({
   onPractice: () => void
 }) {
   const t = useTheme()
-  const isTrainerReady = profile.grade === '3'
+  const isTrainerReady = profile.grade === '3' || profile.grade === '4' || profile.grade === '6'
   const hasToday = !!profile.missions[isoToday()]
   useEffect(() => {
     if (!hasToday) onEnsureToday()
@@ -357,21 +357,35 @@ function Home({
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <button
               onClick={onPlacement}
-              className="rounded-3xl border-b-8 border-fuchsia-700 bg-gradient-to-br from-fuchsia-500 to-violet-600 p-6 text-left shadow-xl transition-all hover:scale-[1.02] active:translate-y-1 active:border-b-4"
+              className={
+                t.id === 'playful'
+                  ? 'rounded-3xl border-b-8 border-fuchsia-700 bg-gradient-to-br from-fuchsia-500 to-violet-600 p-6 text-left shadow-xl transition-all hover:scale-[1.02] active:translate-y-1 active:border-b-4'
+                  : `${t.card} p-6 text-left transition-all hover:border-cyan-400`
+              }
             >
               <div className="text-4xl">🗺️</div>
-              <div className="mt-1 text-2xl font-extrabold text-white">
+              <div className={`mt-1 text-2xl font-extrabold ${t.id === 'playful' ? 'text-white' : t.heading}`}>
                 {profile.placementDone ? 'Retake Placement Quest' : 'Placement Quest'}
               </div>
-              <div className="font-bold text-fuchsia-100">20 questions to map out your skills!</div>
+              <div className={`font-bold ${t.id === 'playful' ? 'text-fuchsia-100' : t.sub}`}>
+                20 questions to map out your skills
+              </div>
             </button>
             <button
               onClick={onPractice}
-              className="rounded-3xl border-b-8 border-emerald-700 bg-gradient-to-br from-emerald-500 to-teal-600 p-6 text-left shadow-xl transition-all hover:scale-[1.02] active:translate-y-1 active:border-b-4"
+              className={
+                t.id === 'playful'
+                  ? 'rounded-3xl border-b-8 border-emerald-700 bg-gradient-to-br from-emerald-500 to-teal-600 p-6 text-left shadow-xl transition-all hover:scale-[1.02] active:translate-y-1 active:border-b-4'
+                  : `${t.card} p-6 text-left transition-all hover:border-cyan-400`
+              }
             >
               <div className="text-4xl">✏️</div>
-              <div className="mt-1 text-2xl font-extrabold text-white">Daily Practice</div>
-              <div className="font-bold text-emerald-100">15 questions picked just for you!</div>
+              <div className={`mt-1 text-2xl font-extrabold ${t.id === 'playful' ? 'text-white' : t.heading}`}>
+                Daily Practice
+              </div>
+              <div className={`font-bold ${t.id === 'playful' ? 'text-emerald-100' : t.sub}`}>
+                15 questions picked just for you
+              </div>
             </button>
           </div>
 

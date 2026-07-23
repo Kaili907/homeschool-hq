@@ -27,18 +27,17 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
         ],
       }
     case '4':
-      // same shape as 3rd; practice flips to auto when her trainer ships (M3)
       return {
         weekday: [
           { id: 'math-lesson', label: 'Math lesson with Dad' },
-          { id: 'math-practice', label: 'Math practice' },
+          { id: 'math-practice', label: 'Math practice (15 questions)', auto: true },
           { id: 'read-aloud', label: 'Read aloud 15 minutes' },
           { id: 'read-self', label: 'Read to self 15 minutes' },
           { id: 'writing', label: 'Writing or Spelling' },
           { id: 'science-ss', label: 'Science or Social Studies' },
         ],
         friday: [
-          { id: 'math-practice', label: 'Math practice' },
+          { id: 'math-practice', label: 'Math practice (15 questions)', auto: true },
           { id: 'read-self', label: 'Read to self 15 minutes' },
           { id: 'fun-project', label: 'Fun Friday project' },
         ],
@@ -46,7 +45,7 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
     case '6':
       return {
         weekday: [
-          { id: 'math-work', label: 'Independent math work' },
+          { id: 'math-practice', label: 'Math practice (15 questions)', auto: true },
           { id: 'math-check', label: 'Check answers with Dad' },
           { id: 'reading', label: 'Reading 20 minutes' },
           { id: 'writing', label: 'Writing' },
@@ -54,7 +53,7 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           { id: 'planner', label: 'Plan tomorrow in your planner' },
         ],
         friday: [
-          { id: 'math-work', label: 'Math catch-up or challenge' },
+          { id: 'math-practice', label: 'Math practice (15 questions)', auto: true },
           { id: 'reading', label: 'Reading 20 minutes' },
           { id: 'project', label: 'Friday project time' },
         ],
