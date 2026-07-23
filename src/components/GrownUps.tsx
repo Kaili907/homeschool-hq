@@ -9,6 +9,7 @@ import {
 } from '../appState'
 import { emptyProfile, SCHEMA_VERSION } from '../migration'
 import { defaultTemplateFor, isDayComplete, templateFor } from '../missions'
+import { AssessmentAdmin } from './assessment/AssessmentAdmin'
 
 interface GrownUpsProps {
   state: AppState
@@ -19,7 +20,10 @@ interface GrownUpsProps {
 
 export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: GrownUpsProps) {
   const [msg, setMsg] = useState('')
-  const [expanded, setExpanded] = useState<{ id: string; tab: 'template' | 'history' } | null>(null)
+  const [expanded, setExpanded] = useState<{
+    id: string
+    tab: 'template' | 'history' | 'assessments'
+  } | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const backupKeys = listV1BackupKeys()
 
@@ -120,6 +124,20 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
                   >
                     History
                   </button>
+                  {(p.grade === '10' || p.grade === '12') && (
+                    <button
+                      onClick={() =>
+                        setExpanded(
+                          expanded?.id === p.id && expanded.tab === 'assessments'
+                            ? null
+                            : { id: p.id, tab: 'assessments' },
+                        )
+                      }
+                      className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                    >
+                      Assessments
+                    </button>
+                  )}
                   {p.pin && (
                     <button
                       onClick={() => {
@@ -144,6 +162,13 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
               )}
               {expanded?.id === p.id && expanded.tab === 'history' && (
                 <MissionHistory profile={p} />
+              )}
+              {expanded?.id === p.id && expanded.tab === 'assessments' && (
+                <AssessmentAdmin
+                  profile={p}
+                  nowISO={new Date().toISOString()}
+                  onPatch={patchProfile}
+                />
               )}
             </div>
           ))}

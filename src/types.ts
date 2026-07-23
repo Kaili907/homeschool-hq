@@ -1,4 +1,5 @@
 import type { SkillId } from './skills'
+import type { AssessmentState } from './assessment/types'
 
 // ---------- questions (unchanged from v1) ----------
 
@@ -100,6 +101,8 @@ export interface Profile {
   placementDone: boolean
   totals: ProfileTotals
   lastPracticeDate?: ISODate
+  /** additive (MA): fixed-form assessments. undefined = none assigned/taken yet. */
+  assessments?: AssessmentState
 }
 
 export interface AppState {

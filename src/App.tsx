@@ -32,6 +32,8 @@ import { Picker } from './components/Picker'
 import { PinPad } from './components/PinPad'
 import { GrownUps } from './components/GrownUps'
 import { Confetti } from './components/Confetti'
+import { AssessmentRunner } from './components/assessment/AssessmentRunner'
+import { assignedOpenTests } from './components/assessment/homeCards'
 
 type Screen =
   | { kind: 'picker' }
@@ -45,6 +47,7 @@ type Screen =
   | { kind: 'parentPin' }
   | { kind: 'parentPinCreate'; firstEntry?: string }
   | { kind: 'grownups' }
+  | { kind: 'assessment'; testId: string }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
@@ -218,6 +221,19 @@ export default function App() {
     )
   }
 
+  // MA mount point — self-styled (clean), rendered full-bleed outside the theme wrapper
+  if (screen.kind === 'assessment') {
+    return (
+      <AssessmentRunner
+        profile={active}
+        testId={screen.testId}
+        nowISO={() => new Date().toISOString()}
+        onPatch={setProfile}
+        onHome={() => setScreen({ kind: 'home' })}
+      />
+    )
+  }
+
   return (
     <ThemeContext.Provider value={tokens}>
       <div style={{ fontFamily: tokens.font, background: tokens.appBg }} className="min-h-screen">
@@ -286,6 +302,7 @@ export default function App() {
             onSignOut={signOut}
             onPlacement={() => setScreen({ kind: 'placement', order: placementOrder(active.grade) })}
             onPractice={() => setScreen({ kind: 'practice', plan: buildPracticePlan(active) })}
+            onOpenAssessment={(testId) => setScreen({ kind: 'assessment', testId })}
           />
         )}
       </div>
@@ -302,6 +319,7 @@ function Home({
   onSignOut,
   onPlacement,
   onPractice,
+  onOpenAssessment,
 }: {
   profile: Profile
   onEnsureToday: () => void
@@ -309,8 +327,10 @@ function Home({
   onSignOut: () => void
   onPlacement: () => void
   onPractice: () => void
+  onOpenAssessment: (testId: string) => void
 }) {
   const t = useTheme()
+  const assessmentCards = assignedOpenTests(profile)
   const isTrainerReady = profile.grade === '3' || profile.grade === '4' || profile.grade === '6'
   const hasToday = !!profile.missions[isoToday()]
   useEffect(() => {
@@ -345,6 +365,31 @@ function Home({
           <span className={`${t.statPill} px-4 py-1 text-sky-600`}>
             📚 {profile.totals.sessions} sessions
           </span>
+        </div>
+      )}
+
+      {assessmentCards.length > 0 && (
+        <div className="mt-6 space-y-3">
+          {assessmentCards.map(({ test, status }) => (
+            <button
+              key={test.id}
+              onClick={() => onOpenAssessment(test.id)}
+              className="flex w-full items-center gap-3 rounded-xl border border-slate-300 bg-white p-4 text-left shadow-sm transition-colors hover:border-slate-500"
+            >
+              <span className="text-3xl">📋</span>
+              <span className="flex-1">
+                <span className="block font-bold text-slate-900">{test.title}</span>
+                <span className="block text-sm font-semibold text-slate-500">
+                  {status === 'in-progress'
+                    ? 'In progress — see Dad to continue'
+                    : 'Placement — see Dad before starting'}
+                </span>
+              </span>
+              <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500">
+                {status === 'in-progress' ? 'resume' : 'start'}
+              </span>
+            </button>
+          ))}
         </div>
       )}
 
