@@ -84,6 +84,38 @@ export interface ProfileTotals {
   sessions: number
 }
 
+// ---------- M4 high school mode (all additive & optional; no schema bump) ----------
+
+/** Rolling practice tally for one HS unit (geometry unit or algebra topic). */
+export interface HsUnitStat {
+  attempts: number
+  correct: number
+  lastSeen?: ISODate
+}
+
+/** One tickable unit inside a manually-tracked course. */
+export interface CourseUnit {
+  id: string
+  label: string
+  done: boolean
+}
+
+/** A whole-year course whose units Dad or the girl checks off (English, Science, …). */
+export interface CourseTrack {
+  id: string
+  name: string
+  units: CourseUnit[]
+}
+
+/** A senior's college-application to-do with an optional due date. */
+export interface CollegeTask {
+  id: string
+  label: string
+  /** ISO date, or '' for no due date. */
+  due: ISODate | ''
+  done: boolean
+}
+
 export interface Profile {
   id: string
   name: string
@@ -103,6 +135,13 @@ export interface Profile {
   lastPracticeDate?: ISODate
   /** additive (MA): fixed-form assessments. undefined = none assigned/taken yet. */
   assessments?: AssessmentState
+  // ---- M4 (high-school mode) additive fields; undefined until first HS view ----
+  /** per-unit HS practice stats, keyed by geometry-unit / algebra-topic id */
+  hsStats?: Record<string, HsUnitStat>
+  /** manual whole-year course progress checklists */
+  courses?: CourseTrack[]
+  /** senior's Dad-editable college-application task list */
+  collegeTasks?: CollegeTask[]
 }
 
 export interface AppState {
