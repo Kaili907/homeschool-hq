@@ -81,20 +81,28 @@ export function statusOf(stat: SkillState | undefined): SkillStatus {
   return stat.mastery >= 75 ? 'mastered' : 'developing'
 }
 
-/** Update mastery after one answered question. Returns a new profile object. */
+/**
+ * Update mastery after one answered question. Returns a new profile object.
+ * `weight` is 'full' for a normal question and 'retry' for the MT-1
+ * "try one like it" question after a walkthrough — a right retry still counts,
+ * but at reduced mastery weight (a walkthrough-assisted win isn't a full win).
+ */
 export function recordAnswer(
   p: Profile,
   skillId: SkillId,
   difficulty: number,
   correct: boolean,
+  weight: 'full' | 'retry' = 'full',
 ): Profile {
   const prev = getStat(p, skillId)
+  const gain = weight === 'retry' ? 2 : 4 + difficulty * 2
+  const drop = weight === 'retry' ? 3 : 7
   const stat: SkillState = {
     attempts: prev.attempts + 1,
     correct: prev.correct + (correct ? 1 : 0),
     mastery: correct
-      ? Math.min(100, prev.mastery + 4 + difficulty * 2)
-      : Math.max(5, prev.mastery - 7),
+      ? Math.min(100, prev.mastery + gain)
+      : Math.max(5, prev.mastery - drop),
     lastSeen: isoToday(),
   }
   return {

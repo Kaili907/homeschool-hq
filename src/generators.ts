@@ -510,6 +510,9 @@ const GENERATORS: Record<SkillId, Gen> = {
   ...GENERATORS6,
 }
 
+/** Every skill id with a registered question generator (the g3/4/6 trainer set). */
+export const GENERATOR_SKILL_IDS = Object.keys(GENERATORS) as SkillId[]
+
 export function generateQuestion(skillId: SkillId, difficulty: Difficulty): Question {
   return GENERATORS[skillId](difficulty)
 }

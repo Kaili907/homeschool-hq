@@ -11,6 +11,7 @@ import { emptyProfile, SCHEMA_VERSION } from '../migration'
 import { defaultTemplateFor, isDayComplete, templateFor } from '../missions'
 import { AssessmentAdmin } from './assessment/AssessmentAdmin'
 import { HsGrownUps } from './HsGrownUps'
+import { NeedsDadFlags, TutorControls } from './TutorPanel'
 
 interface GrownUpsProps {
   state: AppState
@@ -191,6 +192,14 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
             </div>
           ))}
         </div>
+
+        {/* needs-dad flags (MT-1 escalation) */}
+        <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Needs Dad</h2>
+        <NeedsDadFlags state={state} onStateChange={onStateChange} />
+
+        {/* tutor voice (MT-1) */}
+        <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Tutor &amp; Voice</h2>
+        <TutorControls state={state} onStateChange={onStateChange} />
 
         {/* backup */}
         <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Backup</h2>
