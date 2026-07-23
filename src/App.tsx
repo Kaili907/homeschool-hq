@@ -27,6 +27,7 @@ import { autoCompletePractice, ensureToday, setItemDone } from './missions'
 import { THEMES, ThemeContext, useTheme } from './theme'
 import { MissionCard } from './components/MissionCard'
 import { QuizSession } from './components/QuizSession'
+import { HighSchoolHome } from './components/HighSchoolHome'
 import { SkillTree } from './components/SkillTree'
 import { Picker } from './components/Picker'
 import { PinPad } from './components/PinPad'
@@ -299,6 +300,7 @@ export default function App() {
             profile={active}
             onEnsureToday={() => setProfile(ensureToday(active))}
             onToggleItem={(itemId, done) => setProfile(setItemDone(active, itemId, done))}
+            onProfileChange={setProfile}
             onSignOut={signOut}
             onPlacement={() => setScreen({ kind: 'placement', order: placementOrder(active.grade) })}
             onPractice={() => setScreen({ kind: 'practice', plan: buildPracticePlan(active) })}
@@ -316,6 +318,7 @@ function Home({
   profile,
   onEnsureToday,
   onToggleItem,
+  onProfileChange,
   onSignOut,
   onPlacement,
   onPractice,
@@ -324,6 +327,7 @@ function Home({
   profile: Profile
   onEnsureToday: () => void
   onToggleItem: (itemId: string, done: boolean) => void
+  onProfileChange: (p: Profile) => void
   onSignOut: () => void
   onPlacement: () => void
   onPractice: () => void
@@ -336,6 +340,17 @@ function Home({
   useEffect(() => {
     if (!hasToday) onEnsureToday()
   }, [hasToday, onEnsureToday])
+  // M4 mount point: the two teens get high-school mode (real code in HighSchoolHome)
+  if (profile.grade === '10' || profile.grade === '12') {
+    return (
+      <HighSchoolHome
+        profile={profile}
+        onProfileChange={onProfileChange}
+        onSignOut={onSignOut}
+        onToggleItem={onToggleItem}
+      />
+    )
+  }
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-6">
       <header className="flex items-start justify-between gap-3">

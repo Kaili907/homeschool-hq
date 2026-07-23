@@ -10,6 +10,7 @@ import {
 import { emptyProfile, SCHEMA_VERSION } from '../migration'
 import { defaultTemplateFor, isDayComplete, templateFor } from '../missions'
 import { AssessmentAdmin } from './assessment/AssessmentAdmin'
+import { HsGrownUps } from './HsGrownUps'
 
 interface GrownUpsProps {
   state: AppState
@@ -22,7 +23,7 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
   const [msg, setMsg] = useState('')
   const [expanded, setExpanded] = useState<{
     id: string
-    tab: 'template' | 'history' | 'assessments'
+    tab: 'template' | 'history' | 'assessments' | 'hs'
   } | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const backupKeys = listV1BackupKeys()
@@ -138,6 +139,20 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
                       Assessments
                     </button>
                   )}
+                  {(p.grade === '10' || p.grade === '12') && (
+                    <button
+                      onClick={() =>
+                        setExpanded(
+                          expanded?.id === p.id && expanded.tab === 'hs'
+                            ? null
+                            : { id: p.id, tab: 'hs' },
+                        )
+                      }
+                      className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                    >
+                      HS setup
+                    </button>
+                  )}
                   {p.pin && (
                     <button
                       onClick={() => {
@@ -169,6 +184,9 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
                   nowISO={new Date().toISOString()}
                   onPatch={patchProfile}
                 />
+              )}
+              {expanded?.id === p.id && expanded.tab === 'hs' && (
+                <HsGrownUps profile={p} onChange={patchProfile} />
               )}
             </div>
           ))}
