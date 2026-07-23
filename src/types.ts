@@ -46,12 +46,24 @@ export interface MissionItem {
   id: string
   label: string
   done: boolean
-  /** auto items flip when the linked in-app activity completes (M2) */
+  /** auto items flip when the linked in-app activity completes */
   auto?: boolean
 }
 
 export interface MissionDay {
   items: MissionItem[]
+}
+
+export interface MissionTemplateItem {
+  id: string
+  label: string
+  auto?: boolean
+}
+
+/** Per-profile mission schedule. Friday is the light-day variant. */
+export interface MissionTemplate {
+  weekday: MissionTemplateItem[]
+  friday: MissionTemplateItem[]
 }
 
 export interface Streaks {
@@ -76,6 +88,8 @@ export interface Profile {
   theme: ThemeId
   skills: Partial<Record<SkillId, SkillState>>
   missions: Record<ISODate, MissionDay>
+  /** additive (M2): undefined = use the grade default template */
+  template?: MissionTemplate
   streaks: Streaks
   createdAt: string
   // carried forward from v1 — the trainer still uses these

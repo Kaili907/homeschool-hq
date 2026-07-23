@@ -66,8 +66,10 @@ export function readLocalStorageKey(key: string): string | null {
 
 // ---------- per-profile helpers ----------
 
+/** Local calendar date (missions roll over at the family's midnight, not UTC's). */
 export function isoToday(): string {
-  return new Date().toISOString().slice(0, 10)
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
 export function getStat(p: Profile, id: SkillId): SkillState {
@@ -106,19 +108,14 @@ export function recordAnswer(
   }
 }
 
-/** Session finished: bump sessions, best answer-streak, and the daily streak. */
+/**
+ * Session finished: bump sessions and best answer-streak.
+ * Day streaks are owned by mission completion (src/missions.ts), not practice.
+ */
 export function finishSession(p: Profile, bestAnswerStreak: number): Profile {
-  const today = isoToday()
-  let { current, best } = p.streaks
-  if (p.streaks.lastActiveDate !== today) {
-    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10)
-    current = p.streaks.lastActiveDate === yesterday ? current + 1 : 1
-    best = Math.max(best, current)
-  }
   return {
     ...p,
-    lastPracticeDate: today,
-    streaks: { current, best, lastActiveDate: today },
+    lastPracticeDate: isoToday(),
     totals: {
       ...p.totals,
       sessions: p.totals.sessions + 1,

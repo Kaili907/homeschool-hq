@@ -31,3 +31,18 @@ Every schema version bump is documented here. Rules (from the build spec):
 
 Old v1 single-profile export files can still be imported: they restore into
 `p1` only, leaving the other four profiles intact.
+
+## v2 additive: M2 Morning Mission (2026-07-23, no version bump)
+
+Non-breaking additions — existing v2 data loads unchanged:
+
+- `Profile.template?: MissionTemplate` (`{ weekday, friday }` item lists).
+  `undefined` means "use the grade default" from `src/missions.ts`.
+- `Profile.missions` now populated: one `MissionDay` per local calendar date,
+  generated from the template on first view of the day (Friday uses the
+  light-day variant). History is never rewritten by template edits.
+- `Profile.streaks` semantics change: the day streak now increments when a
+  mission day is fully completed (once per day), not on practice completion.
+  Practice completion flips `auto` mission items instead.
+- `isoToday()` switched from UTC to local calendar date so mission days roll
+  over at the family's midnight.

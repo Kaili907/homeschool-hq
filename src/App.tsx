@@ -5,6 +5,7 @@ import { generateFresh } from './generators'
 import {
   downloadJson,
   finishSession,
+  isoToday,
   loadAppState,
   readLocalStorageKey,
   recordAnswer,
@@ -22,7 +23,9 @@ import {
   type PlacementSkillResult,
   type PlanItem,
 } from './engine'
+import { autoCompletePractice, ensureToday, setItemDone } from './missions'
 import { THEMES, ThemeContext, useTheme } from './theme'
+import { MissionCard } from './components/MissionCard'
 import { QuizSession } from './components/QuizSession'
 import { SkillTree } from './components/SkillTree'
 import { Picker } from './components/Picker'
@@ -228,7 +231,8 @@ export default function App() {
             }
             onFinish={(history) => {
               const results = summarizePlacement(history)
-              setProfile(finishSession(applyPlacement(active, results), 0))
+              // a finished placement counts as the day's math session too
+              setProfile(autoCompletePractice(finishSession(applyPlacement(active, results), 0)))
               setScreen({ kind: 'placementResults', results })
             }}
             onQuit={() => setScreen({ kind: 'home' })}
@@ -247,7 +251,11 @@ export default function App() {
               setProfile(recordAnswer(state.profiles[active.id], q.skillId, q.difficulty, correct))
             }
             onFinish={(history) => {
-              setProfile(finishSession(state.profiles[active.id], longestStreak(history)))
+              setProfile(
+                autoCompletePractice(
+                  finishSession(state.profiles[active.id], longestStreak(history)),
+                ),
+              )
               setScreen({ kind: 'practiceResults', history })
             }}
             onQuit={() => setScreen({ kind: 'home' })}
@@ -273,6 +281,8 @@ export default function App() {
         {screen.kind === 'home' && (
           <Home
             profile={active}
+            onEnsureToday={() => setProfile(ensureToday(active))}
+            onToggleItem={(itemId, done) => setProfile(setItemDone(active, itemId, done))}
             onSignOut={signOut}
             onPlacement={() => setScreen({ kind: 'placement', order: placementOrder() })}
             onPractice={() => setScreen({ kind: 'practice', plan: buildPracticePlan(active) })}
@@ -287,17 +297,25 @@ export default function App() {
 
 function Home({
   profile,
+  onEnsureToday,
+  onToggleItem,
   onSignOut,
   onPlacement,
   onPractice,
 }: {
   profile: Profile
+  onEnsureToday: () => void
+  onToggleItem: (itemId: string, done: boolean) => void
   onSignOut: () => void
   onPlacement: () => void
   onPractice: () => void
 }) {
   const t = useTheme()
   const isTrainerReady = profile.grade === '3'
+  const hasToday = !!profile.missions[isoToday()]
+  useEffect(() => {
+    if (!hasToday) onEnsureToday()
+  }, [hasToday, onEnsureToday])
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-6">
       <header className="flex items-start justify-between gap-3">
@@ -329,6 +347,10 @@ function Home({
           </span>
         </div>
       )}
+
+      <div className="mt-6">
+        <MissionCard profile={profile} onToggle={onToggleItem} />
+      </div>
 
       {isTrainerReady ? (
         <>
@@ -365,18 +387,10 @@ function Home({
           <SkillTree profile={profile} />
         </>
       ) : (
-        <div className={`${t.card} mt-8 p-8 text-center`}>
-          <div className={t.bigEmoji ? 'text-5xl' : 'text-3xl'}>
-            {t.id === 'clean' ? '📋' : '🚧'}
-          </div>
-          <h2 className={`mt-3 text-2xl font-extrabold ${t.heading}`}>
-            Your practice space is on its way
-          </h2>
-          <p className={`mx-auto mt-2 max-w-md font-semibold ${t.sub}`}>
-            Grade {profile.grade} lessons and your Morning Mission arrive in the next update. Your
-            profile, PIN and streaks are already saved.
-          </p>
-        </div>
+        <p className={`mt-6 text-center text-sm font-semibold ${t.sub}`}>
+          In-app math practice for grade {profile.grade} arrives in a later update — for now,
+          check things off as you finish them.
+        </p>
       )}
     </div>
   )

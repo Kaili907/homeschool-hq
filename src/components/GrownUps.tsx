@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import type { AppState, Profile } from '../types'
+import type { AppState, MissionTemplate, MissionTemplateItem, Profile } from '../types'
 import {
   downloadJson,
   exportAllBackup,
@@ -8,6 +8,7 @@ import {
   readLocalStorageKey,
 } from '../appState'
 import { emptyProfile, SCHEMA_VERSION } from '../migration'
+import { defaultTemplateFor, isDayComplete, templateFor } from '../missions'
 
 interface GrownUpsProps {
   state: AppState
@@ -18,6 +19,7 @@ interface GrownUpsProps {
 
 export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: GrownUpsProps) {
   const [msg, setMsg] = useState('')
+  const [expanded, setExpanded] = useState<{ id: string; tab: 'template' | 'history' } | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const backupKeys = listV1BackupKeys()
 
@@ -94,6 +96,30 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
                   {p.totals.questionsAnswered} questions all-time
                 </span>
                 <span className="ml-auto flex gap-2">
+                  <button
+                    onClick={() =>
+                      setExpanded(
+                        expanded?.id === p.id && expanded.tab === 'template'
+                          ? null
+                          : { id: p.id, tab: 'template' },
+                      )
+                    }
+                    className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                  >
+                    Mission template
+                  </button>
+                  <button
+                    onClick={() =>
+                      setExpanded(
+                        expanded?.id === p.id && expanded.tab === 'history'
+                          ? null
+                          : { id: p.id, tab: 'history' },
+                      )
+                    }
+                    className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                  >
+                    History
+                  </button>
                   {p.pin && (
                     <button
                       onClick={() => {
@@ -113,6 +139,12 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
                   </button>
                 </span>
               </div>
+              {expanded?.id === p.id && expanded.tab === 'template' && (
+                <TemplateEditor profile={p} onChange={patchProfile} />
+              )}
+              {expanded?.id === p.id && expanded.tab === 'history' && (
+                <MissionHistory profile={p} />
+              )}
             </div>
           ))}
         </div>
@@ -176,6 +208,162 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
           </>
         )}
       </div>
+    </div>
+  )
+}
+
+// ---------- mission template editor ----------
+
+const newItemId = () => `m${Math.random().toString(36).slice(2, 9)}`
+
+function TemplateEditor({
+  profile,
+  onChange,
+}: {
+  profile: Profile
+  onChange: (p: Profile) => void
+}) {
+  const template = templateFor(profile)
+  const set = (t: MissionTemplate) => onChange({ ...profile, template: t })
+
+  const editList = (
+    key: 'weekday' | 'friday',
+    fn: (items: MissionTemplateItem[]) => MissionTemplateItem[],
+  ) => set({ ...template, [key]: fn(template[key]) })
+
+  const renderList = (key: 'weekday' | 'friday', title: string) => (
+    <div className="min-w-0 flex-1">
+      <div className="mb-1 text-xs font-bold uppercase tracking-wide text-slate-500">{title}</div>
+      <div className="space-y-1.5">
+        {template[key].map((item, idx) => (
+          <div key={item.id} className="flex items-center gap-1.5">
+            <button
+              onClick={() =>
+                idx > 0 &&
+                editList(key, (items) => {
+                  const a = [...items]
+                  ;[a[idx - 1], a[idx]] = [a[idx], a[idx - 1]]
+                  return a
+                })
+              }
+              disabled={idx === 0}
+              className="rounded border border-slate-200 bg-white px-1.5 py-1 text-xs text-slate-500 disabled:opacity-30"
+              aria-label="move up"
+            >
+              ▲
+            </button>
+            <input
+              value={item.label}
+              onChange={(e) =>
+                editList(key, (items) =>
+                  items.map((x) => (x.id === item.id ? { ...x, label: e.target.value } : x)),
+                )
+              }
+              className="min-w-0 flex-1 rounded-lg border border-slate-300 px-2 py-1 text-sm text-slate-800"
+            />
+            <label
+              className="flex items-center gap-1 text-xs font-semibold text-slate-500"
+              title="Auto items check themselves when the in-app math session finishes"
+            >
+              <input
+                type="checkbox"
+                checked={!!item.auto}
+                onChange={(e) =>
+                  editList(key, (items) =>
+                    items.map((x) =>
+                      x.id === item.id ? { ...x, auto: e.target.checked || undefined } : x,
+                    ),
+                  )
+                }
+              />
+              auto
+            </label>
+            <button
+              onClick={() => editList(key, (items) => items.filter((x) => x.id !== item.id))}
+              className="rounded border border-slate-200 bg-white px-1.5 py-1 text-xs text-rose-500"
+              aria-label="remove item"
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={() =>
+          editList(key, (items) => [...items, { id: newItemId(), label: 'New item' }])
+        }
+        className="mt-2 rounded-lg border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+      >
+        + Add item
+      </button>
+    </div>
+  )
+
+  return (
+    <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
+      <div className="mb-2 flex items-center justify-between">
+        <span className="text-sm font-bold text-slate-700">
+          Mission template — changes apply from the next new day
+        </span>
+        <button
+          onClick={() => {
+            if (window.confirm('Replace this template with the grade default?'))
+              set(defaultTemplateFor(profile.grade))
+          }}
+          className="rounded-lg border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+        >
+          Reset to default
+        </button>
+      </div>
+      <div className="flex flex-col gap-4 sm:flex-row">
+        {renderList('weekday', 'Monday–Thursday')}
+        {renderList('friday', 'Friday (light day)')}
+      </div>
+    </div>
+  )
+}
+
+// ---------- mission history ----------
+
+function MissionHistory({ profile }: { profile: Profile }) {
+  const dates = Object.keys(profile.missions).sort().reverse().slice(0, 30)
+  if (dates.length === 0) {
+    return (
+      <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-500">
+        No mission days recorded yet.
+      </div>
+    )
+  }
+  return (
+    <div className="mt-3 space-y-2 rounded-lg border border-slate-200 bg-slate-50 p-3">
+      {dates.map((date) => {
+        const day = profile.missions[date]
+        const done = day.items.filter((i) => i.done).length
+        return (
+          <div key={date} className="rounded-lg border border-slate-200 bg-white p-2.5">
+            <div className="flex items-center justify-between text-sm">
+              <span className="font-bold text-slate-700">{date}</span>
+              <span
+                className={`rounded-full px-2 py-0.5 text-xs font-bold ${
+                  isDayComplete(day) ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500'
+                }`}
+              >
+                {done}/{day.items.length} {isDayComplete(day) ? '· complete' : ''}
+              </span>
+            </div>
+            <ul className="mt-1.5 grid grid-cols-1 gap-0.5 sm:grid-cols-2">
+              {day.items.map((i) => (
+                <li key={i.id} className="text-xs text-slate-500">
+                  <span className={i.done ? 'text-emerald-600' : 'text-slate-300'}>
+                    {i.done ? '✓' : '○'}
+                  </span>{' '}
+                  {i.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      })}
     </div>
   )
 }
