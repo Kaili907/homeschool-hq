@@ -12,6 +12,8 @@ import { defaultTemplateFor, isDayComplete, templateFor } from '../missions'
 import { AssessmentAdmin } from './assessment/AssessmentAdmin'
 import { HsGrownUps } from './HsGrownUps'
 import { NeedsDadFlags, TutorControls } from './TutorPanel'
+import { StarsGlobalAdmin, StarsProfileAdmin } from './StarsAdmin'
+import { getStars, starsEnabled } from '../stars/stars'
 
 interface GrownUpsProps {
   state: AppState
@@ -24,7 +26,7 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
   const [msg, setMsg] = useState('')
   const [expanded, setExpanded] = useState<{
     id: string
-    tab: 'template' | 'history' | 'assessments' | 'hs'
+    tab: 'template' | 'history' | 'assessments' | 'hs' | 'stars'
   } | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const backupKeys = listV1BackupKeys()
@@ -132,6 +134,25 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
                   >
                     History
                   </button>
+                  {starsEnabled(p) && (
+                    <button
+                      onClick={() =>
+                        setExpanded(
+                          expanded?.id === p.id && expanded.tab === 'stars'
+                            ? null
+                            : { id: p.id, tab: 'stars' },
+                        )
+                      }
+                      className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700 hover:bg-amber-100"
+                    >
+                      Stars ⭐
+                      {getStars(p).pendingRedemptions.length > 0 && (
+                        <span className="ml-1 rounded-full bg-rose-500 px-1.5 py-0.5 text-[10px] font-bold text-white">
+                          {getStars(p).pendingRedemptions.length}
+                        </span>
+                      )}
+                    </button>
+                  )}
                   {(p.grade === '10' || p.grade === '12') && (
                     <button
                       onClick={() =>
@@ -195,6 +216,9 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
               {expanded?.id === p.id && expanded.tab === 'hs' && (
                 <HsGrownUps profile={p} onChange={(update) => patchProfile(p.id, update)} />
               )}
+              {expanded?.id === p.id && expanded.tab === 'stars' && (
+                <StarsProfileAdmin profile={p} onChange={(update) => patchProfile(p.id, update)} />
+              )}
             </div>
           ))}
         </div>
@@ -206,6 +230,10 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
         {/* tutor voice (MT-1) */}
         <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Tutor &amp; Voice</h2>
         <TutorControls state={state} onStateChange={onStateChange} />
+
+        {/* star economy (MS) */}
+        <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Star economy ⭐</h2>
+        <StarsGlobalAdmin state={state} onStateChange={onStateChange} />
 
         {/* backup */}
         <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Backup</h2>

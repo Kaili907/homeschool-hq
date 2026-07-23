@@ -29,3 +29,31 @@ body {
 .animate-pop { animation: pop-in 0.25s ease-out; }
 .animate-wiggle { animation: wiggle 0.5s ease-in-out infinite; }
 .confetti-piece { animation: confetti-fall linear forwards; }
+
+/* MS star economy: a flying star that lands on the wallet counter (≤1.5s). */
+@keyframes star-fly {
+  0%   { transform: translate(var(--sx, 0), var(--sy, 40px)) scale(1.4); opacity: 0; }
+  15%  { opacity: 1; }
+  70%  { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(0, 0) scale(0.9); opacity: 0; }
+}
+@keyframes wallet-bump {
+  0%, 100% { transform: scale(1); }
+  40%      { transform: scale(1.25); }
+}
+.star-fly { animation: star-fly 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.wallet-bump { animation: wallet-bump 0.5s ease-out; }
+
+/* Affordable prizes glow gently in the shop. */
+@keyframes star-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.45); }
+  50%      { box-shadow: 0 0 16px 4px rgba(251, 191, 36, 0.55); }
+}
+.star-glow { animation: star-glow 1.8s ease-in-out infinite; }
+
+/* School time, not a casino — honor reduced-motion by dropping the motion. */
+@media (prefers-reduced-motion: reduce) {
+  .star-fly { animation: none; opacity: 0; }
+  .wallet-bump { animation: none; }
+  .star-glow { animation: none; }
+}

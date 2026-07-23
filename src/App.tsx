@@ -25,6 +25,17 @@ import {
 } from './engine'
 import { autoCompletePractice, ensureToday, setItemDone } from './missions'
 import { getVoicePrefs, isMuted, logWalkthrough, setMuted } from './tutor/tutorState'
+import {
+  awardMissionEvents,
+  awardPracticeSession,
+  awardTutorRetry,
+  getStars,
+  getStarsConfig,
+  requestRedemption,
+  starsEnabled,
+} from './stars/stars'
+import { StarWallet } from './components/StarWallet'
+import { PrizeShop } from './components/PrizeShop'
 import { THEMES, ThemeContext, useTheme } from './theme'
 import { MissionCard } from './components/MissionCard'
 import { QuizSession } from './components/QuizSession'
@@ -50,6 +61,7 @@ type Screen =
   | { kind: 'parentPinCreate'; firstEntry?: string }
   | { kind: 'grownups' }
   | { kind: 'assessment'; testId: string }
+  | { kind: 'prizeShop' }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
@@ -291,7 +303,13 @@ export default function App() {
               generateFresh(skillId, difficulty, seenRef.current)
             }
             onRetryAnswer={(q, correct) =>
-              patchActive((p) => recordAnswer(p, q.skillId, q.difficulty, correct, 'retry'))
+              patchActive((p) => {
+                const rec = recordAnswer(p, q.skillId, q.difficulty, correct, 'retry')
+                // MS: a walkthrough-assisted retry solved correctly earns (sub-capped +6/day)
+                return correct && starsEnabled(p)
+                  ? awardTutorRetry(rec, getStarsConfig(state).rates)
+                  : rec
+              })
             }
             onWalkthrough={(skillId) =>
               patchActive((p) =>
@@ -299,7 +317,16 @@ export default function App() {
               )
             }
             onFinish={(history) => {
-              patchActive((p) => autoCompletePractice(finishSession(p, longestStreak(history))))
+              const correct = history.filter((r) => r.correct).length
+              patchActive((p) => {
+                // mission auto-completes as part of finishing a real practice session
+                const withMission = autoCompletePractice(finishSession(p, longestStreak(history)))
+                if (!starsEnabled(p)) return withMission
+                const rates = getStarsConfig(state).rates
+                // effort/completion pay (+accuracy bonus), then any mission/weekly bonus
+                const earned = awardPracticeSession(withMission, correct, history.length, rates)
+                return awardMissionEvents(p, earned, rates)
+              })
               setScreen({ kind: 'practiceResults', history })
             }}
             onQuit={() => setScreen({ kind: 'home' })}
@@ -322,15 +349,39 @@ export default function App() {
           />
         )}
 
+        {screen.kind === 'prizeShop' && (
+          <PrizeShop
+            profile={active}
+            config={getStarsConfig(state)}
+            playful={active.theme === 'playful'}
+            onRequest={(prize) => {
+              const res = requestRedemption(active, prize)
+              if (res.ok) patchActive((p) => requestRedemption(p, prize).profile)
+              return { ok: res.ok, error: res.error }
+            }}
+            onHome={() => setScreen({ kind: 'home' })}
+          />
+        )}
+
         {screen.kind === 'home' && (
           <Home
             profile={active}
+            muted={isMuted(state)}
             onEnsureToday={() => patchActive((p) => ensureToday(p))}
-            onToggleItem={(itemId, done) => patchActive((p) => setItemDone(p, itemId, done))}
+            onToggleItem={(itemId, done) =>
+              patchActive((p) => {
+                const after = setItemDone(p, itemId, done)
+                // MS: a manual check that completes the day pays the mission (+weekly) bonus
+                return starsEnabled(p)
+                  ? awardMissionEvents(p, after, getStarsConfig(state).rates)
+                  : after
+              })
+            }
             onProfileChange={patchActive}
             onSignOut={signOut}
             onPlacement={() => setScreen({ kind: 'placement', order: placementOrder(active.grade) })}
             onPractice={() => startPractice(active)}
+            onOpenShop={() => setScreen({ kind: 'prizeShop' })}
             onOpenAssessment={(testId) => setScreen({ kind: 'assessment', testId })}
           />
         )}
@@ -343,21 +394,25 @@ export default function App() {
 
 function Home({
   profile,
+  muted,
   onEnsureToday,
   onToggleItem,
   onProfileChange,
   onSignOut,
   onPlacement,
   onPractice,
+  onOpenShop,
   onOpenAssessment,
 }: {
   profile: Profile
+  muted: boolean
   onEnsureToday: () => void
   onToggleItem: (itemId: string, done: boolean) => void
   onProfileChange: (update: (prev: Profile) => Profile) => void
   onSignOut: () => void
   onPlacement: () => void
   onPractice: () => void
+  onOpenShop: () => void
   onOpenAssessment: (testId: string) => void
 }) {
   const t = useTheme()
@@ -393,10 +448,28 @@ function Home({
               : 'Ready to learn today?'}
           </p>
         </div>
-        <button onClick={onSignOut} className={`${t.secondaryBtn} px-4 py-2 text-sm`}>
-          Sign out
-        </button>
+        <div className="flex items-center gap-3">
+          {starsEnabled(profile) && (
+            <StarWallet stars={getStars(profile)} playful={t.id === 'playful'} muted={muted} />
+          )}
+          <button onClick={onSignOut} className={`${t.secondaryBtn} px-4 py-2 text-sm`}>
+            Sign out
+          </button>
+        </div>
       </header>
+
+      {starsEnabled(profile) && (
+        <button
+          onClick={onOpenShop}
+          className={
+            t.id === 'playful'
+              ? 'mt-4 flex w-full items-center justify-center gap-2 rounded-3xl border-b-8 border-amber-500 bg-gradient-to-r from-amber-300 to-yellow-300 px-6 py-3 text-lg font-extrabold text-amber-900 shadow-lg transition-all hover:scale-[1.01] active:translate-y-1 active:border-b-4'
+              : 'mt-4 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-amber-300 bg-amber-50 px-6 py-3 font-bold text-amber-700 shadow hover:bg-amber-100'
+          }
+        >
+          🎁 Prize Shop
+        </button>
+      )}
 
       {profile.totals.questionsAnswered > 0 && (
         <div className="mt-3 flex flex-wrap gap-2 text-sm font-extrabold">

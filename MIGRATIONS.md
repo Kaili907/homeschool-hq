@@ -46,3 +46,22 @@ Non-breaking additions — existing v2 data loads unchanged:
   Practice completion flips `auto` mission items instead.
 - `isoToday()` switched from UTC to local calendar date so mission days roll
   over at the family's midnight.
+
+## v2 additive: MS Star economy (2026-07-23, no version bump)
+
+Non-breaking additions — existing v2 data loads unchanged (`isAppState` is lenient;
+old states have no `stars` keys and fall back to runtime defaults):
+
+- `Profile.stars?: StarState` — the kid's wallet: `{ balance, lifetimeEarned,
+  ledger, pendingRedemptions }`. `undefined` until her first star is earned.
+  The ledger is APPEND-ONLY; `balance` must always equal the ledger sum. A
+  mismatch is surfaced in the Grown-Ups panel and NEVER silently repaired.
+- `Profile.coolStars?: boolean` — grade-6 "cool" opt-in (default off/undefined).
+  Playful profiles always have stars; teens never do.
+- `AppState.stars?: StarsConfig` — the shared `{ prizes, rates }` (prize list +
+  Dad-editable earning table). `undefined` = defaults from `src/stars/stars.ts`.
+
+No `schemaVersion` bump (follows the M2/M4/MT-1 additive-optional precedent).
+Stars are earned only from practice-session and mission-completion paths — never
+from placement or assessments (those stay consequence-free). Export/import
+round-trips `StarState` because it lives inside the profile/app-state payload.
