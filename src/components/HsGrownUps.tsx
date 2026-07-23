@@ -17,12 +17,22 @@ const btn = 'rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs fon
 const dangerBtn = 'rounded border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-semibold text-rose-600'
 const input = 'rounded-lg border border-slate-300 px-2 py-1 text-sm text-slate-800'
 
-export function HsGrownUps({ profile, onChange }: { profile: Profile; onChange: (p: Profile) => void }) {
+export function HsGrownUps({
+  profile,
+  onChange,
+}: {
+  profile: Profile
+  onChange: (update: (prev: Profile) => Profile) => void
+}) {
   const p = ensureHsDefaults(profile)
   const courses = p.courses ?? []
   const isSenior = p.grade === '12'
 
-  const setCourseList = (next: CourseTrack[]) => onChange(setCourses(p, next))
+  // Every write threads through the functional update and re-seeds the HS
+  // defaults on the latest committed profile, so admin edits compose.
+  const edit = (fn: (prev: Profile) => Profile) =>
+    onChange((prev) => fn(ensureHsDefaults(prev)))
+  const setCourseList = (next: CourseTrack[]) => edit((prev) => setCourses(prev, next))
   const patchCourse = (id: string, fn: (c: CourseTrack) => CourseTrack) =>
     setCourseList(courses.map((c) => (c.id === id ? fn(c) : c)))
 
@@ -33,7 +43,7 @@ export function HsGrownUps({ profile, onChange }: { profile: Profile; onChange: 
         <section>
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-bold text-slate-700">College-app deadlines</span>
-            <button className={btn} onClick={() => onChange(addCollegeTask(p))}>
+            <button className={btn} onClick={() => edit((prev) => addCollegeTask(prev))}>
               + Add task
             </button>
           </div>
@@ -42,14 +52,14 @@ export function HsGrownUps({ profile, onChange }: { profile: Profile; onChange: 
               <div key={task.id} className="flex flex-wrap items-center gap-1.5 rounded-lg border border-slate-200 bg-white p-2">
                 <input
                   value={task.label}
-                  onChange={(e) => onChange(updateCollegeTask(p, task.id, { label: e.target.value }))}
+                  onChange={(e) => edit((prev) => updateCollegeTask(prev, task.id, { label: e.target.value }))}
                   className={`${input} min-w-0 flex-1`}
                   aria-label="task label"
                 />
                 <input
                   type="date"
                   value={task.due}
-                  onChange={(e) => onChange(updateCollegeTask(p, task.id, { due: e.target.value }))}
+                  onChange={(e) => edit((prev) => updateCollegeTask(prev, task.id, { due: e.target.value }))}
                   className={input}
                   aria-label="due date"
                 />
@@ -57,11 +67,11 @@ export function HsGrownUps({ profile, onChange }: { profile: Profile; onChange: 
                   <input
                     type="checkbox"
                     checked={task.done}
-                    onChange={(e) => onChange(updateCollegeTask(p, task.id, { done: e.target.checked }))}
+                    onChange={(e) => edit((prev) => updateCollegeTask(prev, task.id, { done: e.target.checked }))}
                   />
                   done
                 </label>
-                <button className={dangerBtn} onClick={() => onChange(removeCollegeTask(p, task.id))} aria-label="remove task">
+                <button className={dangerBtn} onClick={() => edit((prev) => removeCollegeTask(prev, task.id))} aria-label="remove task">
                   ✕
                 </button>
               </div>

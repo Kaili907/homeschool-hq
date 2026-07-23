@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react'
 import type { AppState, Profile } from '../types'
 import { SKILL_BY_ID } from '../skills'
 import { updateProfile } from '../appState'
@@ -24,11 +25,13 @@ export function TutorControls({
   onStateChange,
 }: {
   state: AppState
-  onStateChange: (s: AppState) => void
+  onStateChange: Dispatch<SetStateAction<AppState>>
 }) {
   const voices = useVoices()
   const muted = isMuted(state)
-  const patch = (p: Profile) => onStateChange(updateProfile(state, p))
+  // Voice-pref writes derive from the latest committed profile so they compose.
+  const patch = (id: string, fn: (prev: Profile) => Profile) =>
+    onStateChange((s) => (s.profiles[id] ? updateProfile(s, fn(s.profiles[id])) : s))
 
   return (
     <div className="space-y-3">
@@ -40,7 +43,7 @@ export function TutorControls({
           </div>
         </div>
         <button
-          onClick={() => onStateChange(setMuted(state, !muted))}
+          onClick={() => onStateChange((s) => setMuted(s, !isMuted(s)))}
           className={`rounded-lg px-4 py-2 text-sm font-semibold ${
             muted
               ? 'border border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100'
@@ -71,7 +74,7 @@ export function TutorControls({
                 Voice
                 <select
                   value={prefs.voiceURI ?? ''}
-                  onChange={(e) => patch(setVoiceURI(p, e.target.value || undefined))}
+                  onChange={(e) => patch(p.id, (prev) => setVoiceURI(prev, e.target.value || undefined))}
                   className="max-w-52 rounded-lg border border-slate-300 px-2 py-1 text-sm text-slate-800"
                   aria-label={`voice for ${p.name}`}
                 >
@@ -91,7 +94,7 @@ export function TutorControls({
                   max={1.5}
                   step={0.05}
                   value={prefs.rate}
-                  onChange={(e) => patch(setRate(p, Number(e.target.value)))}
+                  onChange={(e) => patch(p.id, (prev) => setRate(prev, Number(e.target.value)))}
                   aria-label={`voice rate for ${p.name}`}
                 />
               </label>
@@ -103,7 +106,7 @@ export function TutorControls({
                   <input
                     type="checkbox"
                     checked={prefs.voiceOptIn}
-                    onChange={(e) => patch(setVoiceOptIn(p, e.target.checked))}
+                    onChange={(e) => patch(p.id, (prev) => setVoiceOptIn(prev, e.target.checked))}
                   />
                   voice on
                 </label>
@@ -141,7 +144,7 @@ export function NeedsDadFlags({
   onStateChange,
 }: {
   state: AppState
-  onStateChange: (s: AppState) => void
+  onStateChange: Dispatch<SetStateAction<AppState>>
 }) {
   const rows = Object.values(state.profiles).flatMap((p) =>
     flaggedSkills(p).map((f) => ({ profile: p, ...f })),
@@ -174,7 +177,11 @@ export function NeedsDadFlags({
           </div>
           <button
             onClick={() =>
-              onStateChange(updateProfile(state, clearTutorFlag(profile, skillId)))
+              onStateChange((s) =>
+                s.profiles[profile.id]
+                  ? updateProfile(s, clearTutorFlag(s.profiles[profile.id], skillId))
+                  : s,
+              )
             }
             className="rounded-lg border border-emerald-300 bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-800 hover:bg-emerald-200"
           >

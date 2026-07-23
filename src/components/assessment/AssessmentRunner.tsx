@@ -17,13 +17,13 @@ interface AssessmentRunnerProps {
   profile: Profile
   testId: string
   nowISO: () => string
-  onPatch: (p: Profile) => void
+  onPatch: (update: (prev: Profile) => Profile) => void
   onHome: () => void
 }
 
 /**
  * Orchestrates one assessment: start-code gate → player (or timed essay) → done.
- * All persistence flows through onPatch(profile) so the attempt survives reloads.
+ * All persistence flows through onPatch so the attempt survives reloads.
  */
 export function AssessmentRunner({ profile, testId, nowISO, onPatch, onHome }: AssessmentRunnerProps) {
   const test = TEST_BY_ID[testId]
@@ -36,8 +36,12 @@ export function AssessmentRunner({ profile, testId, nowISO, onPatch, onHome }: A
     return <AssessmentDone onHome={onHome} />
   }
 
-  const patchState = (next: ReturnType<typeof getState>) =>
-    onPatch({ ...profile, assessments: next })
+  // Derive the next assessment state from the LATEST committed profile, so a
+  // per-answer save and the finish that follows it compose instead of both
+  // starting from the same stale snapshot and the second clobbering the first.
+  type AState = ReturnType<typeof getState>
+  const patchState = (fn: (prev: AState) => AState) =>
+    onPatch((prev) => ({ ...prev, assessments: fn(getState(prev.assessments)) }))
 
   const isEssay = allItems(test).every((i) => i.kind === 'longtext')
   const essayItem = allItems(test)[0]
@@ -50,8 +54,7 @@ export function AssessmentRunner({ profile, testId, nowISO, onPatch, onHome }: A
         resuming={resuming}
         onCancel={onHome}
         onStart={() => {
-          const started = startAttempt(state, testId, profile.id, nowISO())
-          patchState(started.state)
+          patchState((s) => startAttempt(s, testId, profile.id, nowISO()).state)
           setPhase('run')
         }}
       />
@@ -77,12 +80,16 @@ export function AssessmentRunner({ profile, testId, nowISO, onPatch, onHome }: A
         prompt={essayItem.prompt}
         initialValue={initial}
         onSave={(value, addMs) =>
-          patchState(recordAnswer(getState(profile.assessments), testId, essayItem.id, value, false, addMs))
+          patchState((s) => recordAnswer(s, testId, essayItem.id, value, false, addMs))
         }
         onFinish={(value, addMs) => {
-          let next = recordAnswer(getState(profile.assessments), testId, essayItem.id, value, false, addMs)
-          next = finishAttempt(next, test, nowISO())
-          patchState(next)
+          patchState((s) =>
+            finishAttempt(
+              recordAnswer(s, testId, essayItem.id, value, false, addMs),
+              test,
+              nowISO(),
+            ),
+          )
           setPhase('done')
         }}
         onExit={onHome}
@@ -95,15 +102,19 @@ export function AssessmentRunner({ profile, testId, nowISO, onPatch, onHome }: A
       test={test}
       attempt={attempt}
       onRecord={(itemId, value, skipped, addMs) =>
-        patchState(recordAnswer(getState(profile.assessments), testId, itemId, value, skipped, addMs))
+        patchState((s) => recordAnswer(s, testId, itemId, value, skipped, addMs))
       }
       onFinish={(lastId, value, skipped, addMs) => {
-        // record the last item AND finish in ONE state update, so the final
-        // patch is not clobbered by a stale-base finish (both would derive from
-        // the same pre-record profile otherwise).
-        let next = recordAnswer(getState(profile.assessments), testId, lastId, value, skipped, addMs)
-        next = finishAttempt(next, test, nowISO())
-        patchState(next)
+        // record the last item AND finish in ONE functional update, deriving from
+        // the latest committed state, so the final patch is never clobbered by a
+        // stale-base finish (both would otherwise start from the same profile).
+        patchState((s) =>
+          finishAttempt(
+            recordAnswer(s, testId, lastId, value, skipped, addMs),
+            test,
+            nowISO(),
+          ),
+        )
         setPhase('done')
       }}
       onExit={onHome}

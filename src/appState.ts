@@ -136,6 +136,25 @@ export function updateProfile(state: AppState, profile: Profile): AppState {
   return { ...state, profiles: { ...state.profiles, [profile.id]: profile } }
 }
 
+/**
+ * Apply a functional update to one profile against the LATEST app state.
+ * ALWAYS call this inside a functional state update, e.g.
+ *   setState((s) => patchProfile(s, id, (prev) => recordAnswer(prev, ...)))
+ * so the reducer derives its base from the freshest committed profile. Two
+ * writes in the same tick — or a session-finish racing the final answer — then
+ * compose instead of both starting from the same stale render snapshot and the
+ * second clobbering the first. Unknown ids are a no-op (returns state as-is).
+ */
+export function patchProfile(
+  state: AppState,
+  id: string,
+  update: (prev: Profile) => Profile,
+): AppState {
+  const prev = state.profiles[id]
+  if (!prev) return state
+  return updateProfile(state, update(prev))
+}
+
 // ---------- backup (all profiles) ----------
 
 export function downloadJson(filename: string, text: string): void {
