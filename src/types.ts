@@ -142,6 +142,41 @@ export interface Profile {
   courses?: CourseTrack[]
   /** senior's Dad-editable college-application task list */
   collegeTasks?: CollegeTask[]
+
+  // ---------- MT-1 tutor (additive, all OPTIONAL, runtime defaults; no schemaVersion bump) ----------
+  /** per-profile voice picker + rate; undefined = grade default (see tutor/tutorState). */
+  tutor?: TutorPrefs
+  /** skills flagged "Needs Dad" by the escalation rule; presence gates the skill from practice. */
+  tutorFlags?: Partial<Record<SkillId, NeedsDadFlag>>
+  /** rolling walkthrough events, used for the session/weekly escalation counts. Pruned by age. */
+  walkthroughLog?: WalkthroughEvent[]
+}
+
+/** MT-1 per-profile voice settings. All optional so an old profile just uses defaults. */
+export interface TutorPrefs {
+  /** SpeechSynthesisVoice.voiceURI the family chose for this girl. */
+  voiceURI?: string
+  /** playback rate; littles default slower. */
+  rate?: number
+  /** teens are text-first: voice only plays if they opt in. */
+  voiceOptIn?: boolean
+}
+
+/** One "Needs Dad" flag: the skill is gated from practice until Dad clears it. */
+export interface NeedsDadFlag {
+  since: ISODate
+  /** why it tripped, for the parent dashboard. */
+  reason: string
+  /** counts at the moment it tripped (display only). */
+  sessionCount: number
+  weekCount: number
+}
+
+export interface WalkthroughEvent {
+  skillId: SkillId
+  /** epoch ms; used for "3+ this session" (>= session start) and "5+ this week". */
+  ts: number
+  day: ISODate
 }
 
 export interface AppState {
@@ -151,6 +186,8 @@ export interface AppState {
   activeProfileId: string | null
   /** gates the Grown-Ups panel. '' = not set yet. */
   parentPin: string
+  /** MT-1: family-wide tutor voice mute (additive, optional; undefined = not muted). */
+  tutorMuted?: boolean
 }
 
 // ---------- schema v1 (legacy, for migration only) ----------

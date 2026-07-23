@@ -1,6 +1,7 @@
 import { skillsForGrade, type SkillId } from './skills'
 import type { AnswerRecord, Difficulty, Grade, Profile, SkillStatus } from './types'
 import { getStat, isoToday } from './appState'
+import { isSkillGated } from './tutor/tutorState'
 
 export const PLACEMENT_TOTAL = 20
 export const PRACTICE_TOTAL = 15
@@ -95,7 +96,11 @@ export function difficultyFor(mastery: number): Difficulty {
 
 /** Weighted plan: weaker skills appear more often. Uses the profile's grade tree. */
 export function buildPracticePlan(p: Profile, count = PRACTICE_TOTAL): PlanItem[] {
-  const weighted = skillsForGrade(p.grade).map((s) => {
+  const tree = skillsForGrade(p.grade)
+  // MT-1 escalation: "Needs Dad" skills are gated from practice until Dad clears
+  // them. Fall back to the full tree only if every skill is gated (never empty).
+  const usable = tree.filter((s) => !isSkillGated(p, s.id))
+  const weighted = (usable.length ? usable : tree).map((s) => {
     const mastery = getStat(p, s.id).mastery
     return { id: s.id, mastery, w: Math.max(10, 115 - mastery) }
   })

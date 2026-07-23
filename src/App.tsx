@@ -24,6 +24,7 @@ import {
   type PlanItem,
 } from './engine'
 import { autoCompletePractice, ensureToday, setItemDone } from './missions'
+import { getVoicePrefs, isMuted, logWalkthrough, setMuted } from './tutor/tutorState'
 import { THEMES, ThemeContext, useTheme } from './theme'
 import { MissionCard } from './components/MissionCard'
 import { QuizSession } from './components/QuizSession'
@@ -56,6 +57,8 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
   const seenRef = useRef(new Set<string>())
+  // MT-1: start of the current practice session, for the "3+ this session" escalation count.
+  const sessionStartRef = useRef(Date.now())
 
   useEffect(() => {
     saveAppState(state)
@@ -68,6 +71,11 @@ export default function App() {
   const signOut = () => {
     setState((s) => ({ ...s, activeProfileId: null }))
     setScreen({ kind: 'picker' })
+  }
+  // Begin a practice run and stamp the session start (MT-1 escalation window).
+  const startPractice = (p: Profile) => {
+    sessionStartRef.current = Date.now()
+    setScreen({ kind: 'practice', plan: buildPracticePlan(p) })
   }
 
   // ---------- profile-free screens ----------
@@ -267,6 +275,29 @@ export default function App() {
             onAnswer={(q, correct) =>
               setProfile(recordAnswer(state.profiles[active.id], q.skillId, q.difficulty, correct))
             }
+            tutorEnabled
+            voice={getVoicePrefs(active)}
+            muted={isMuted(state)}
+            onToggleMute={() => setState((s) => setMuted(s, !isMuted(s)))}
+            makeRetry={(skillId, difficulty) =>
+              generateFresh(skillId, difficulty, seenRef.current)
+            }
+            onRetryAnswer={(q, correct) =>
+              setProfile(
+                recordAnswer(state.profiles[active.id], q.skillId, q.difficulty, correct, 'retry'),
+              )
+            }
+            onWalkthrough={(skillId) =>
+              setProfile(
+                logWalkthrough(
+                  state.profiles[active.id],
+                  skillId,
+                  Date.now(),
+                  sessionStartRef.current,
+                  isoToday(),
+                ),
+              )
+            }
             onFinish={(history) => {
               setProfile(
                 autoCompletePractice(
@@ -283,7 +314,7 @@ export default function App() {
           <PlacementResults
             results={screen.results}
             onHome={() => setScreen({ kind: 'home' })}
-            onPractice={() => setScreen({ kind: 'practice', plan: buildPracticePlan(active) })}
+            onPractice={() => startPractice(active)}
           />
         )}
 
@@ -291,7 +322,7 @@ export default function App() {
           <PracticeResults
             history={screen.history}
             onHome={() => setScreen({ kind: 'home' })}
-            onAgain={() => setScreen({ kind: 'practice', plan: buildPracticePlan(active) })}
+            onAgain={() => startPractice(active)}
           />
         )}
 
@@ -303,7 +334,7 @@ export default function App() {
             onProfileChange={setProfile}
             onSignOut={signOut}
             onPlacement={() => setScreen({ kind: 'placement', order: placementOrder(active.grade) })}
-            onPractice={() => setScreen({ kind: 'practice', plan: buildPracticePlan(active) })}
+            onPractice={() => startPractice(active)}
             onOpenAssessment={(testId) => setScreen({ kind: 'assessment', testId })}
           />
         )}
