@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { AnswerRecord, Question } from '../types'
 import { VisualView } from './Viz'
 import { Confetti } from './Confetti'
+import { useTheme } from '../theme'
 
 interface QuizSessionProps {
   title: string
@@ -25,6 +26,7 @@ export function QuizSession({
   onFinish,
   onQuit,
 }: QuizSessionProps) {
+  const t = useTheme()
   const [index, setIndex] = useState(0)
   const [history, setHistory] = useState<AnswerRecord[]>([])
   const [question, setQuestion] = useState<Question>(() => getQuestion(0, []))
@@ -40,6 +42,19 @@ export function QuizSession({
     }
   }, [])
 
+  function feedbackFor(correct: boolean): string {
+    const answer = question.choices[question.answerIndex]
+    if (t.cheers === 'full') {
+      return correct
+        ? CHEERS[Math.floor(Math.random() * CHEERS.length)]
+        : `${OOPS[Math.floor(Math.random() * OOPS.length)]}  The answer is ${answer}.`
+    }
+    if (t.cheers === 'brief') {
+      return correct ? 'Nice ✓' : `Not quite — answer: ${answer}`
+    }
+    return correct ? '✓' : `✗  ${answer}`
+  }
+
   function handleChoice(i: number) {
     if (selected !== null) return
     const correct = i === question.answerIndex
@@ -47,12 +62,8 @@ export function QuizSession({
     onAnswer?.(question, correct)
     const newStreak = correct ? streak + 1 : 0
     setStreak(newStreak)
-    setFeedback(
-      correct
-        ? CHEERS[Math.floor(Math.random() * CHEERS.length)]
-        : `${OOPS[Math.floor(Math.random() * OOPS.length)]}  The answer is ${question.choices[question.answerIndex]}.`,
-    )
-    if (correct && newStreak >= 3 && (newStreak === 3 || newStreak % 5 === 0)) {
+    setFeedback(feedbackFor(correct))
+    if (t.confetti && correct && newStreak >= 3 && (newStreak === 3 || newStreak % 5 === 0)) {
       setBurst((b) => b + 1)
     }
     const rec: AnswerRecord = { question, chosenIndex: i, correct }
@@ -77,42 +88,50 @@ export function QuizSession({
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-2xl flex-col px-4 py-4">
-      <Confetti burst={burst} />
+      {t.confetti && <Confetti burst={burst} />}
 
       {/* header */}
       <div className="flex items-center gap-3">
         <button
           onClick={() => {
-            if (window.confirm('Stop and go back home? Your progress in this round will not be saved.')) onQuit()
+            if (window.confirm('Stop and go back? Your progress in this round will not be saved.')) onQuit()
           }}
-          className="rounded-2xl bg-white/80 px-4 py-2 text-xl font-bold text-violet-700 shadow hover:bg-white"
+          className={`${t.secondaryBtn} px-4 py-2 text-xl`}
           aria-label="quit"
         >
           ✕
         </button>
         <div className="flex-1">
-          <div className="text-lg font-extrabold text-violet-900">
-            {emoji} {title}
+          <div className={`text-lg font-extrabold ${t.heading}`}>
+            {t.bigEmoji ? `${emoji} ${title}` : title}
           </div>
-          <div className="mt-1 h-4 w-full overflow-hidden rounded-full bg-white/70 shadow-inner">
+          <div className={`mt-1 h-4 w-full overflow-hidden rounded-full ${t.progressTrack}`}>
             <div
-              className="h-full rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-all duration-500"
+              className={`h-full rounded-full ${t.progressFill} transition-all duration-500`}
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
-        <div className="rounded-2xl bg-white/80 px-3 py-2 text-center shadow">
+        <div className={`${t.statPill} px-3 py-2 text-center`}>
           <div className="text-sm font-bold text-slate-500">
             {index + 1}/{total}
           </div>
-          {streak >= 2 && <div className="animate-wiggle text-lg font-extrabold text-orange-500">🔥{streak}</div>}
+          {streak >= 2 && (
+            <div
+              className={`text-lg font-extrabold text-orange-500 ${t.cheers === 'full' ? 'animate-wiggle' : ''}`}
+            >
+              🔥{streak}
+            </div>
+          )}
         </div>
       </div>
 
       {/* question card */}
-      <div key={index} className="animate-pop mt-6 flex-1">
-        <div className="rounded-3xl bg-white p-6 shadow-xl">
-          <p className="whitespace-pre-line text-center text-2xl font-extrabold leading-snug text-slate-800 sm:text-3xl">
+      <div key={index} className={`mt-6 flex-1 ${t.cheers === 'minimal' ? '' : 'animate-pop'}`}>
+        <div className={`${t.card} p-6`}>
+          <p
+            className={`whitespace-pre-line text-center text-2xl font-extrabold leading-snug sm:text-3xl ${t.heading}`}
+          >
             {question.prompt}
           </p>
           {question.visual && (
@@ -122,21 +141,20 @@ export function QuizSession({
           )}
         </div>
 
-        <div className={`mt-5 grid gap-3 ${question.choices.length <= 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'}`}>
+        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {question.choices.map((choice, i) => {
-            let cls =
-              'rounded-3xl border-b-8 px-4 py-5 text-2xl font-extrabold shadow-lg transition-all active:translate-y-1 active:border-b-4 '
-            if (selected === null) {
-              cls += 'border-violet-300 bg-white text-violet-900 hover:bg-violet-50'
-            } else if (i === question.answerIndex) {
-              cls += 'border-green-600 bg-green-400 text-white'
-            } else if (i === selected) {
-              cls += 'border-rose-600 bg-rose-400 text-white'
-            } else {
-              cls += 'border-slate-200 bg-slate-100 text-slate-400'
-            }
+            let cls: string
+            if (selected === null) cls = t.choiceIdle
+            else if (i === question.answerIndex) cls = t.choiceCorrect
+            else if (i === selected) cls = t.choiceWrong
+            else cls = t.choiceDisabled
             return (
-              <button key={i} className={cls} onClick={() => handleChoice(i)} disabled={selected !== null}>
+              <button
+                key={i}
+                className={`${cls} px-4 py-5 text-2xl font-extrabold transition-all`}
+                onClick={() => handleChoice(i)}
+                disabled={selected !== null}
+              >
                 {choice}
               </button>
             )
@@ -146,8 +164,10 @@ export function QuizSession({
         <div className="mt-4 min-h-12 text-center">
           {feedback && (
             <div
-              className={`animate-pop inline-block rounded-2xl px-6 py-3 text-xl font-extrabold shadow ${
-                selected === question.answerIndex ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-800'
+              className={`${t.cheers === 'minimal' ? '' : 'animate-pop'} inline-block rounded-2xl px-6 py-3 text-xl font-extrabold ${
+                selected === question.answerIndex
+                  ? 'bg-green-100 text-green-700'
+                  : 'bg-amber-100 text-amber-800'
               }`}
             >
               {feedback}

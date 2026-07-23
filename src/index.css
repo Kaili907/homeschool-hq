@@ -4,13 +4,10 @@
   --font-kid: "Comic Sans MS", "Comic Neue", "Segoe UI", system-ui, sans-serif;
 }
 
-html {
-  font-family: var(--font-kid);
-}
-
+/* Theme wrappers set font + background per profile (see src/theme.ts). */
 body {
   min-height: 100vh;
-  background: linear-gradient(160deg, #ede9fe 0%, #e0f2fe 45%, #fef9c3 100%);
+  background: #f8fafc;
 }
 
 @keyframes confetti-fall {

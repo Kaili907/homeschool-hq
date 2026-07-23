@@ -1,0 +1,180 @@
+import type { AppState, Profile, SkillState, SkillStatus } from './types'
+import type { SkillId } from './skills'
+import { defaultAppState, isAppState, migrateV1ToV2 } from './migration'
+
+const V2_KEY = 'homeschool-hq:app:v2'
+const V1_KEY = 'homeschool-hq:profile:v1'
+const BACKUP_PREFIX = 'homeschool-hq:backup:v1:'
+
+export interface LoadResult {
+  state: AppState
+  migrated: boolean
+  /** localStorage key holding the pre-migration v1 snapshot */
+  backupKey?: string
+}
+
+/**
+ * Load app state. If only v1 data exists, snapshot it to a timestamped
+ * backup key FIRST, then migrate. The original v1 key is never deleted.
+ */
+export function loadAppState(): LoadResult {
+  try {
+    const raw2 = localStorage.getItem(V2_KEY)
+    if (raw2) {
+      const parsed = JSON.parse(raw2) as unknown
+      if (isAppState(parsed)) return { state: parsed, migrated: false }
+    }
+  } catch {
+    // fall through
+  }
+  try {
+    const raw1 = localStorage.getItem(V1_KEY)
+    if (raw1) {
+      const stamp = new Date().toISOString().replace(/[:.]/g, '-')
+      const backupKey = `${BACKUP_PREFIX}${stamp}`
+      localStorage.setItem(backupKey, raw1) // backup BEFORE any conversion
+      const migrated = migrateV1ToV2(JSON.parse(raw1))
+      if (migrated) {
+        localStorage.setItem(V2_KEY, JSON.stringify(migrated))
+        return { state: migrated, migrated: true, backupKey }
+      }
+    }
+  } catch {
+    // fall through
+  }
+  const fresh = defaultAppState()
+  localStorage.setItem(V2_KEY, JSON.stringify(fresh))
+  return { state: fresh, migrated: false }
+}
+
+export function saveAppState(state: AppState): void {
+  localStorage.setItem(V2_KEY, JSON.stringify(state))
+}
+
+export function listV1BackupKeys(): string[] {
+  const keys: string[] = []
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i)
+    if (k && k.startsWith(BACKUP_PREFIX)) keys.push(k)
+  }
+  return keys.sort()
+}
+
+export function readLocalStorageKey(key: string): string | null {
+  return localStorage.getItem(key)
+}
+
+// ---------- per-profile helpers ----------
+
+export function isoToday(): string {
+  return new Date().toISOString().slice(0, 10)
+}
+
+export function getStat(p: Profile, id: SkillId): SkillState {
+  return p.skills[id] ?? { attempts: 0, correct: 0, mastery: 0 }
+}
+
+export function statusOf(stat: SkillState | undefined): SkillStatus {
+  if (!stat || stat.attempts === 0) return 'not-started'
+  return stat.mastery >= 75 ? 'mastered' : 'developing'
+}
+
+/** Update mastery after one answered question. Returns a new profile object. */
+export function recordAnswer(
+  p: Profile,
+  skillId: SkillId,
+  difficulty: number,
+  correct: boolean,
+): Profile {
+  const prev = getStat(p, skillId)
+  const stat: SkillState = {
+    attempts: prev.attempts + 1,
+    correct: prev.correct + (correct ? 1 : 0),
+    mastery: correct
+      ? Math.min(100, prev.mastery + 4 + difficulty * 2)
+      : Math.max(5, prev.mastery - 7),
+    lastSeen: isoToday(),
+  }
+  return {
+    ...p,
+    skills: { ...p.skills, [skillId]: stat },
+    totals: {
+      ...p.totals,
+      questionsAnswered: p.totals.questionsAnswered + 1,
+      correct: p.totals.correct + (correct ? 1 : 0),
+    },
+  }
+}
+
+/** Session finished: bump sessions, best answer-streak, and the daily streak. */
+export function finishSession(p: Profile, bestAnswerStreak: number): Profile {
+  const today = isoToday()
+  let { current, best } = p.streaks
+  if (p.streaks.lastActiveDate !== today) {
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10)
+    current = p.streaks.lastActiveDate === yesterday ? current + 1 : 1
+    best = Math.max(best, current)
+  }
+  return {
+    ...p,
+    lastPracticeDate: today,
+    streaks: { current, best, lastActiveDate: today },
+    totals: {
+      ...p.totals,
+      sessions: p.totals.sessions + 1,
+      bestStreak: Math.max(p.totals.bestStreak, bestAnswerStreak),
+    },
+  }
+}
+
+export function updateProfile(state: AppState, profile: Profile): AppState {
+  return { ...state, profiles: { ...state.profiles, [profile.id]: profile } }
+}
+
+// ---------- backup (all profiles) ----------
+
+export function downloadJson(filename: string, text: string): void {
+  const blob = new Blob([text], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+export function exportAllBackup(state: AppState): void {
+  downloadJson(
+    `homeschool-hq-all-profiles-${isoToday()}.json`,
+    JSON.stringify(state, null, 2),
+  )
+}
+
+export type ImportResult =
+  | { ok: true; state: AppState; note: string }
+  | { ok: false; error: string }
+
+/**
+ * Import a backup file. v2 files replace the whole app state; v1 single-profile
+ * files replace only the 3rd grader (p1), keeping the other four intact.
+ */
+export function importBackup(current: AppState, text: string): ImportResult {
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(text)
+  } catch {
+    return { ok: false, error: 'That file is not valid JSON.' }
+  }
+  if (isAppState(parsed)) {
+    return { ok: true, state: parsed, note: 'Full backup restored (all profiles).' }
+  }
+  const asV1 = migrateV1ToV2(parsed)
+  if (asV1) {
+    return {
+      ok: true,
+      state: { ...current, profiles: { ...current.profiles, p1: asV1.profiles.p1 } },
+      note: 'Old single-profile backup restored into the 3rd grader profile.',
+    }
+  }
+  return { ok: false, error: 'That file is not a Homeschool HQ backup.' }
+}

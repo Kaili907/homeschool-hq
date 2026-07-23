@@ -1,6 +1,6 @@
 import { SKILLS, type SkillId } from './skills'
 import type { AnswerRecord, Difficulty, Profile, SkillStatus } from './types'
-import { getStat } from './storage'
+import { getStat, isoToday } from './appState'
 
 export const PLACEMENT_TOTAL = 20
 export const PRACTICE_TOTAL = 15
@@ -69,16 +69,17 @@ export function summarizePlacement(history: AnswerRecord[]): PlacementSkillResul
 }
 
 export function applyPlacement(p: Profile, results: PlacementSkillResult[]): Profile {
-  const skillStats = { ...p.skillStats }
+  const skills = { ...p.skills }
   for (const r of results) {
     if (r.asked === 0) continue
-    skillStats[r.skillId] = {
+    skills[r.skillId] = {
       attempts: r.asked,
       correct: r.correct,
       mastery: r.seedMastery,
+      lastSeen: isoToday(),
     }
   }
-  return { ...p, placementDone: true, skillStats }
+  return { ...p, placementDone: true, skills }
 }
 
 // ---------- daily practice ----------
