@@ -1,56 +1,20 @@
 import type { Difficulty, Question } from './types'
 import type { SkillId } from './skills'
+import {
+  finishChoices,
+  fmtMoney,
+  fmtTime,
+  fromPool,
+  numNear,
+  pick,
+  ri,
+  shuffle,
+  type Gen,
+} from './genUtils'
+import { GENERATORS4 } from './generators4'
+import { GENERATORS6 } from './generators6'
 
-// ---------- random helpers ----------
-
-const ri = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min
-const pick = <T,>(arr: readonly T[]): T => arr[Math.floor(Math.random() * arr.length)]
-
-function shuffle<T>(arr: readonly T[]): T[] {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
-
-/** Build a shuffled 4-choice set from a correct answer and a distractor generator. */
-function finishChoices(
-  correct: string,
-  distractor: () => string,
-  count = 4,
-): Pick<Question, 'choices' | 'answerIndex'> {
-  const set = new Set([correct])
-  let guard = 0
-  while (set.size < count && guard < 400) {
-    const d = distractor()
-    if (d.trim() !== '') set.add(d)
-    guard++
-  }
-  // Practically unreachable fallback so we never hang with < count choices.
-  let filler = 1
-  while (set.size < count) set.add(`${correct}?${filler++}`)
-  const choices = shuffle([...set])
-  return { choices, answerIndex: choices.indexOf(correct) }
-}
-
-/** Numeric distractor near the answer, never equal to it (offset >= 1), floored at `min`. */
-const numNear = (answer: number, spread: number, min = 0, suffix = '') => () => {
-  const off = (Math.random() < 0.5 ? 1 : -1) * ri(1, Math.max(1, spread))
-  const v = Math.max(min, answer + off)
-  return v === answer ? `${answer + Math.max(1, spread)}${suffix}` : `${v}${suffix}`
-}
-
-/** Distractor from a fixed candidate pool. */
-const fromPool = (pool: string[]) => () => pool.length ? pick(pool) : ''
-
-const fmtMoney = (c: number) => (c < 100 ? `${c}¢` : `$${(c / 100).toFixed(2)}`)
-const fmtTime = (h: number, m: number) => `${h}:${String(m).padStart(2, '0')}`
-
-// ---------- generators ----------
-
-type Gen = (d: Difficulty) => Question
+// ---------- grade 3 generators ----------
 
 const mult: Gen = (d) => {
   if (d === 3 && Math.random() < 0.4) {
@@ -139,6 +103,9 @@ const place: Gen = (d) => {
     Math.round(n / other) * other,
     ans + to,
     ans - to,
+    ans + 2 * to,
+    ans - 2 * to,
+    ans + 3 * to,
   ]
     .filter((v) => v !== ans && v >= 0)
     .map((v) => v.toLocaleString())
@@ -526,6 +493,7 @@ const word2: Gen = (d) => {
 }
 
 const GENERATORS: Record<SkillId, Gen> = {
+  // grade 3
   mult,
   div,
   place,
@@ -537,6 +505,9 @@ const GENERATORS: Record<SkillId, Gen> = {
   measure,
   areaPerim,
   word2,
+  // grades 4 and 6
+  ...GENERATORS4,
+  ...GENERATORS6,
 }
 
 export function generateQuestion(skillId: SkillId, difficulty: Difficulty): Question {

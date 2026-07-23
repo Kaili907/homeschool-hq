@@ -1,10 +1,11 @@
-import { SKILLS } from '../skills'
+import { skillsForGrade } from '../skills'
 import type { Profile } from '../types'
 import { getStat, statusOf } from '../appState'
 import { useTheme } from '../theme'
 
 export function SkillTree({ profile }: { profile: Profile }) {
   const t = useTheme()
+  const skills = skillsForGrade(profile.grade)
   const style = {
     mastered: { chip: t.chipMastered, label: t.cheers === 'full' ? 'Mastered ⭐' : 'Mastered', bar: t.barMastered },
     developing: { chip: t.chipDeveloping, label: t.cheers === 'full' ? 'Growing 🌱' : 'In progress', bar: t.barDeveloping },
@@ -12,7 +13,7 @@ export function SkillTree({ profile }: { profile: Profile }) {
   } as const
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {SKILLS.map((s) => {
+      {skills.map((s) => {
         const stat = getStat(profile, s.id)
         const status = statusOf(profile.skills[s.id])
         const ui = style[status]
