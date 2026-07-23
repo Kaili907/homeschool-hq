@@ -533,8 +533,11 @@ const stats6: Gen = (d) => {
       }
     }
     const repeated = ri(2, 12)
-    const others = [...new Set([ri(1, 15), ri(1, 15), ri(1, 15)])].filter((v) => v !== repeated)
-    const nums = shuffle([repeated, repeated, repeated, ...others.slice(0, 2)])
+    // two decoys guaranteed distinct from `repeated` and from each other,
+    // so the number set always has 5 members and 4 usable distractors
+    const decoyPool = [1, 3, 5, 7, 9, 11, 13, 15].filter((v) => v !== repeated)
+    const [dA, dB] = shuffle(decoyPool)
+    const nums = shuffle([repeated, repeated, repeated, dA, dB])
     return {
       skillId: 'stats6',
       difficulty: d,
@@ -542,7 +545,7 @@ const stats6: Gen = (d) => {
       ...finishChoices(
         String(repeated),
         fromPool(
-          [...new Set([...nums, repeated + 1, repeated + 2].map(String))].filter(
+          [...new Set([dA, dB, repeated + 1, repeated + 2].map(String))].filter(
             (s) => s !== String(repeated),
           ),
         ),
