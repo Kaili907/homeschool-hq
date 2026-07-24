@@ -19,6 +19,7 @@ import { StarsGlobalAdmin, StarsProfileAdmin } from './StarsAdmin'
 import { getStars } from '../stars/stars'
 import { ReadingGrownUps } from './reading/ReadingGrownUps'
 import { MindsetProfilePanel, MindsetStartDate } from './mindset/MindsetGrownUps'
+import { clearJournal } from '../mindset/journalStore'
 
 interface GrownUpsProps {
   state: AppState
@@ -54,6 +55,7 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
       const fresh = emptyProfile(prev.id, prev.name, prev.grade)
       return { ...fresh, pin: prev.pin, theme: prev.theme, createdAt: prev.createdAt }
     })
+    clearJournal(p.id) // her private mindset entries live outside AppState — wipe them too
     setMsg(`${p.name}'s progress was reset.`)
   }
 

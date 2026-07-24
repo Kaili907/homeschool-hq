@@ -1,16 +1,17 @@
-import type { AppState, MindsetState, MindsetWeekState, MissionItem, Profile } from '../types'
+import type { MindsetWeekState, MissionItem, Profile } from '../types'
 import { MINDSET_TOTAL_WEEKS, MINDSET_WEEKS, mindsetWeek, type MindsetWeek } from './content'
 
 /**
- * MM — pure mindset logic. Imports ONLY types + content (never appState/missions),
- * so it stays side-effect-free and unit-testable, and so appState can import the
- * export sanitizer from here without a cycle.
+ * MM — pure mindset logic. Imports ONLY types + content (never appState/missions/
+ * journalStore), so it stays side-effect-free and unit-testable.
  *
- * Two load-bearing rules live here:
+ * Two load-bearing rules:
  *  1. Weekly unlock — one idea per week; earlier weeks revisitable, future weeks locked.
- *  2. PRIVACY — journal/reflection text is private to the profile. `sanitizeStateForExport`
- *     strips it from the standard export-all, and `mindsetCompletionSummary` (the only
- *     thing the Grown-Ups panel reads) exposes completion booleans, never text.
+ *  2. PRIVACY (structural) — reflection TEXT never lives in Profile/AppState; it is kept
+ *     in a separate localStorage slot (see journalStore.ts). Profile.mindset holds only
+ *     completion signals (viewed / reflected / completedAt), which sync and appear in the
+ *     panel. `mindsetCompletionSummary` (the only thing the Grown-Ups panel reads) exposes
+ *     completion booleans, never text — and there is no text here to expose.
  */
 
 // ---------- band (which variant this girl sees) ----------
@@ -131,30 +132,15 @@ export function markViewed(p: Profile, week: number, todayISO: string): Profile 
 }
 
 /**
- * Autosave a journal draft as she types — persists the text WITHOUT completing.
- * "Done" (submitReflection) is the deliberate act that marks it reflected.
+ * Mark a reflection submitted — the completion SIGNAL only. The reflection TEXT itself
+ * is written separately to journalStore (never to the profile), so nothing here can
+ * carry text into AppState. The caller decides WHEN to call this: for littles, only once
+ * an emoji/word is chosen; for 6th+/teens, on "Done" (empty text is fine — thinking counts).
+ * Idempotent; stamps completedAt once viewed && reflected.
  */
-export function saveJournalDraft(p: Profile, week: number, text: string): Profile {
+export function markReflected(p: Profile, week: number, todayISO: string): Profile {
   const ws = getWeekState(p, week)
-  return withWeek(p, week, { ...ws, reflection: text })
-}
-
-/**
- * Submit the reflection. For littles a non-empty value (emoji or one word) is required;
- * for 6th+/teens journaling, tapping Done is enough even with empty text — we never force
- * disclosure to a text box. Returns the profile unchanged if a littles value is empty.
- */
-export function submitReflection(
-  p: Profile,
-  week: number,
-  band: MindsetBand,
-  value: string,
-  todayISO: string,
-): Profile {
-  const text = value ?? ''
-  if (band === 'littles' && !text.trim()) return p // must tap an emoji / type a word
-  const ws = getWeekState(p, week)
-  return withWeek(p, week, recompute({ ...ws, reflection: text, reflected: true }, todayISO))
+  return withWeek(p, week, recompute({ ...ws, reflected: true }, todayISO))
 }
 
 // ---------- mission item seam (Session C owns missions.ts; this is the ready hook) ----------
@@ -181,7 +167,7 @@ export function mindsetMissionItem(
   }
 }
 
-// ---------- PRIVACY: completion-only panel view + export sanitizer ----------
+// ---------- PRIVACY: completion-only panel view ----------
 
 export interface MindsetCompletionRow {
   week: number
@@ -190,60 +176,11 @@ export interface MindsetCompletionRow {
 }
 
 /**
- * The ONLY mindset data the Grown-Ups panel may read: completion status per week.
- * By construction it carries no reflection text, no excerpts, and no word counts.
+ * The ONLY mindset data the Grown-Ups panel reads: completion status per week. It
+ * carries no reflection text, no excerpts, and no word counts — and cannot, because
+ * the text is not in AppState at all (see journalStore.ts). Her own "export MY journal"
+ * lives in journalStore and reads the local text store from inside her signed-in view.
  */
 export function mindsetCompletionSummary(p: Profile): MindsetCompletionRow[] {
   return MINDSET_WEEKS.map((w) => ({ week: w.week, title: w.title, completed: isWeekComplete(p, w.week) }))
-}
-
-/** Strip a single profile's journal/reflection text, keeping only completion signals. */
-function sanitizeProfileMindset(m: MindsetState | undefined): MindsetState | undefined {
-  if (!m) return m
-  const weeks: Record<number, MindsetWeekState> = {}
-  for (const [k, ws] of Object.entries(m.weeks)) {
-    // drop `reflection` entirely; keep viewed/reflected/completedAt
-    const { reflection: _omit, ...rest } = ws
-    void _omit
-    weeks[Number(k)] = rest
-  }
-  return { weeks }
-}
-
-/**
- * Produce an export-safe copy of the whole app state: every profile's private mindset
- * reflection text is removed. The standard export-all serializes THIS, never the raw
- * state — so no journal text can ride out in a Dad backup.
- */
-export function sanitizeStateForExport(state: AppState): AppState {
-  return {
-    ...state,
-    profiles: Object.fromEntries(
-      Object.entries(state.profiles).map(([id, p]) => [
-        id,
-        p.mindset ? { ...p, mindset: sanitizeProfileMindset(p.mindset) } : p,
-      ]),
-    ),
-  }
-}
-
-// ---------- the girl's own "export MY journal" (positive control — includes text) ----------
-
-/**
- * Serialize THIS girl's journal, text included. Called only from inside her own
- * signed-in mindset view (never from the Grown-Ups panel or the standard export).
- */
-export function serializeMyJournal(p: Profile): string {
-  const entries = MINDSET_WEEKS.map((w) => {
-    const ws = getWeekState(p, w.week)
-    const prompt = mindsetBand(p) === 'littles' ? w.reflectLittles.prompt : w.reflect[0]
-    return {
-      week: w.week,
-      title: w.title,
-      prompt,
-      reflection: ws.reflection ?? '',
-      completed: !!ws.completedAt,
-    }
-  }).filter((e) => e.reflection.trim() !== '' || e.completed)
-  return JSON.stringify({ profile: p.name, kind: 'mindset-journal', entries }, null, 2)
 }

@@ -267,23 +267,22 @@ export interface Profile {
 }
 
 /**
- * MM — one week's mindset progress. `reflection` is the girl's PRIVATE text
- * (littles: an emoji or one word; 6th+/teens: journal text, possibly empty when she
- * chose to "just think it"). This field is stripped from the standard export-all and
- * never reaches the Grown-Ups panel — only `completedAt`/`viewed`/`reflected` do.
+ * MM — one week's mindset progress: COMPLETION SIGNALS ONLY. The reflection TEXT
+ * (journal entries AND the littles' emoji/one-word answers) is deliberately NOT here —
+ * it lives in a separate localStorage slot (journalStore.ts) that is never part of
+ * AppState, so it cannot reach the panel, the export, or the sync payload. These fields
+ * sync normally and back Dad's panel + the parent hub.
  */
 export interface MindsetWeekState {
   /** she read the lesson to the end. */
   viewed?: boolean
-  /** her private reflection text. NEVER exported to Dad or shown in the panel. */
-  reflection?: string
   /** a reflection was submitted (emoji counts; a journal "Done" counts even if empty). */
   reflected?: boolean
-  /** set once viewed && reflected — the completion signal the panel/export may read. */
+  /** set once viewed && reflected — the completion signal the panel reads and syncs. */
   completedAt?: ISODate
 }
 
-/** MM — per-profile mindset state, keyed by week number (1-based). */
+/** MM — per-profile mindset state (completion only), keyed by week number (1-based). */
 export interface MindsetState {
   weeks: Record<number, MindsetWeekState>
 }

@@ -63,8 +63,11 @@ export function MindsetProfilePanel({ profile }: { profile: Profile }) {
           {done}/{rows.length} weeks
         </span>
       </div>
-      <p className="mb-2 text-xs text-slate-500">
+      <p className="mb-1 text-xs text-slate-500">
         Her journal is private. You see that she finished — never what she wrote.
+      </p>
+      <p className="mb-2 text-xs text-slate-500">
+        Journals stay on the device they were written on — she can export her own copy.
       </p>
       <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2">
         {rows.map((r) => (

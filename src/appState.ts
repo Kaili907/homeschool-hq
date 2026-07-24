@@ -1,7 +1,6 @@
 import type { AppState, Profile, SkillState, SkillStatus } from './types'
 import type { SkillId } from './skills'
 import { defaultAppState, isAppState, migrateV1ToV2 } from './migration'
-import { sanitizeStateForExport } from './mindset/mindset'
 
 const V2_KEY = 'homeschool-hq:app:v2'
 const V1_KEY = 'homeschool-hq:profile:v1'
@@ -169,13 +168,13 @@ export function downloadJson(filename: string, text: string): void {
 }
 
 /**
- * The exact JSON the standard export-all writes. MM privacy (load-bearing): every
- * profile's private mindset reflection text is stripped here — Dad's backup carries
- * completion status, never what she wrote. This is the ONLY serializer the export
- * button uses; keep it that way.
+ * The exact JSON the standard export-all writes. MM privacy: no sanitizer is needed
+ * here because reflection TEXT never lives in AppState — it is kept in journalStore's
+ * own localStorage slot (see mindset/journalStore.ts). This serializes only AppState,
+ * which carries mindset COMPLETION signals but never a girl's words.
  */
 export function serializeAllBackup(state: AppState): string {
-  return JSON.stringify(sanitizeStateForExport(state), null, 2)
+  return JSON.stringify(state, null, 2)
 }
 
 export function exportAllBackup(state: AppState): void {

@@ -11,14 +11,13 @@ import {
   getUnlockedLesson,
   getWeekState,
   isWeekComplete,
+  markReflected,
   markViewed,
   mindsetBand,
   openableWeeks,
-  saveJournalDraft,
-  serializeMyJournal,
-  submitReflection,
   type MindsetBand,
 } from '../../mindset/mindset'
+import { getJournalText, serializeMyJournal, setJournalText } from '../../mindset/journalStore'
 
 interface Props {
   profile: Profile
@@ -64,14 +63,15 @@ export function MindsetLesson({ profile, startDate, muted, onPatch, onExit }: Pr
   const lesson = getUnlockedLesson(startDate, today, week) ?? (latest ? mindsetWeek(latest) : undefined)
   const ws = lesson ? getWeekState(profile, lesson.week) : {}
   const [reflecting, setReflecting] = useState(!!ws.viewed)
-  const [draft, setDraft] = useState(ws.reflection ?? '')
+  // Reflection text comes from the LOCAL journal store, never from the profile/AppState.
+  const [draft, setDraft] = useState(lesson ? getJournalText(profile.id, lesson.week) : '')
   const [speaking, setSpeaking] = useState(false)
 
   // Reset the per-week UI when she switches weeks (revisit).
   useEffect(() => {
     const s = lesson ? getWeekState(profile, lesson.week) : {}
     setReflecting(!!s.viewed)
-    setDraft(s.reflection ?? '')
+    setDraft(lesson ? getJournalText(profile.id, lesson.week) : '')
     stop()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [week])
@@ -202,13 +202,22 @@ export function MindsetLesson({ profile, startDate, muted, onPatch, onExit }: Pr
             complete={complete}
             draft={draft}
             setDraft={setDraft}
-            onEmoji={(e) => onPatch((p) => submitReflection(p, lesson.week, band, e, today))}
-            onWord={(w) => onPatch((p) => submitReflection(p, lesson.week, band, w, today))}
+            onEmoji={(e) => {
+              setJournalText(profile.id, lesson.week, e) // text → local store only
+              onPatch((p) => markReflected(p, lesson.week, today)) // completion signal → profile
+            }}
+            onWord={(w) => {
+              setJournalText(profile.id, lesson.week, w)
+              onPatch((p) => markReflected(p, lesson.week, today))
+            }}
             onDraftChange={(text) => {
               setDraft(text)
-              onPatch((p) => saveJournalDraft(p, lesson.week, text))
+              setJournalText(profile.id, lesson.week, text) // autosave to the local store
             }}
-            onDone={() => onPatch((p) => submitReflection(p, lesson.week, band, draft, today))}
+            onDone={() => {
+              setJournalText(profile.id, lesson.week, draft)
+              onPatch((p) => markReflected(p, lesson.week, today))
+            }}
           />
         )}
       </div>
