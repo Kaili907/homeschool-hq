@@ -27,10 +27,12 @@ export const TUTOR_MAX_TOKENS = 300 // forces brevity
 export const ANTHROPIC_VERSION = '2023-06-01'
 
 // '' → call Anthropic directly (acceptable on the family machine; key stays local).
-// After a public deploy, point this at the serverless proxy base so the key never
-// ships to the client — only this one value changes (same pattern as
-// ELEVENLABS_ENDPOINT_BASE). The proxy itself is a deploy-cycle concern, not here.
-export const ANTHROPIC_ENDPOINT_BASE = ''
+// D1 deploy: with the build-time flag VITE_USE_PROXY=true, this points at the
+// serverless proxy (netlify/functions/anthropic via the /api/anthropic redirect),
+// which injects the key server-side — the key never ships to the client. Empty
+// (local dev / no flag) keeps the direct-with-panel-key path. Only this one value
+// changes; the fetch layer below reads it and drops the client key in proxy mode.
+export const ANTHROPIC_ENDPOINT_BASE = import.meta.env.VITE_USE_PROXY === 'true' ? '/api/anthropic' : ''
 
 // ---------- local-storage backed key store (NEVER in AppState → never exported) ----------
 
@@ -127,20 +129,28 @@ export async function askTutor(
   deps: TutorApiDeps,
   req: { system: string; messages: AnthropicMessage[] },
 ): Promise<TutorApiResult> {
+  const base = deps.endpointBase ?? ANTHROPIC_ENDPOINT_BASE
+  const proxyMode = base !== ''
   const key = deps.getKey()
-  if (!key) return { ok: false, reason: 'no-key' }
+  // Direct mode needs the family-machine key; proxy mode holds the key server-side.
+  if (!proxyMode && !key) return { ok: false, reason: 'no-key' }
   if (!deps.isOnline()) return { ok: false, reason: 'offline' }
-  const origin = (deps.endpointBase ?? ANTHROPIC_ENDPOINT_BASE) || 'https://api.anthropic.com'
-  try {
-    const res = await deps.fetchImpl(`${origin}/v1/messages`, {
-      method: 'POST',
-      headers: {
-        'x-api-key': key,
+  const origin = base || 'https://api.anthropic.com'
+  // Proxy mode: the function injects the key + version and handles CORS, so the
+  // client sends neither its key nor the direct-browser-access header.
+  const headers: Record<string, string> = proxyMode
+    ? { 'content-type': 'application/json' }
+    : {
+        'x-api-key': key as string,
         'anthropic-version': ANTHROPIC_VERSION,
         'content-type': 'application/json',
         // Family-machine pattern only — do NOT ship to a public deploy (use the proxy).
         'anthropic-dangerous-direct-browser-access': 'true',
-      },
+      }
+  try {
+    const res = await deps.fetchImpl(`${origin}/v1/messages`, {
+      method: 'POST',
+      headers,
       body: JSON.stringify({
         model: deps.modelId ?? modelIdFor(DEFAULT_TUTOR_MODEL),
         max_tokens: TUTOR_MAX_TOKENS,
