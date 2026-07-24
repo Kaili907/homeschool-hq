@@ -328,6 +328,10 @@ export interface Profile {
   // ---------- MM mindset module (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
   /** per-week mindset progress; undefined until her first lesson view. PRIVATE to this profile. */
   mindset?: MindsetState
+
+  // ---------- MJ HS voice assistant (additive, OPTIONAL; teens only; no schemaVersion bump) ----------
+  /** per-girl assistant transcripts + call log + config; undefined until her first use. Pruned 60 days. */
+  assistant?: AssistantState
 }
 
 /**
@@ -387,7 +391,7 @@ export type VoiceProviderId = 'elevenlabs' | 'browser'
  * MT-V per-subject voice slots. `default` backs every unset slot (fall-through);
  * `japanese` exists now but is unused until the hiragana trainer ships.
  */
-export type VoiceSlot = 'mathTutor' | 'mindset' | 'japanese' | 'default'
+export type VoiceSlot = 'mathTutor' | 'mindset' | 'japanese' | 'assistant' | 'default'
 
 /** One mapped voice: which provider + its ref (ElevenLabs voice id, or a browser voiceURI) + a friendly label. */
 export interface VoiceRef {
@@ -459,6 +463,53 @@ export interface ReadingState {
   /** Dad's manual calibration checks (ground truth), oldest first. */
   calibrations: ReadingCalibration[]
   lastReadDate?: ISODate
+}
+
+// ---------- MJ HS voice assistant ("Jarvis mode") — teens only; additive, all OPTIONAL; no schemaVersion bump ----------
+
+/** One confirmed, executed assistant action — logged into the transcript. */
+export interface AssistantActionRecord {
+  kind: 'check_mission' | 'mark_college_task' | 'start_session'
+  /** human-readable label shown in the transcript, e.g. "Checked off: Read 20 minutes". */
+  label: string
+  /** the catalog key that was executed (mission item id / task id / session key). */
+  targetKey: string
+  ts: number
+}
+
+/** One message in an assistant conversation. */
+export interface AssistantMessage {
+  role: 'girl' | 'assistant'
+  text: string
+  ts: number
+  /** 'api' = a real Anthropic call; 'scripted' = a local cap/safety line (never model-generated). */
+  source?: 'api' | 'scripted'
+  /** present when this assistant turn executed a confirmed action. */
+  action?: AssistantActionRecord
+  /** true when this turn tripped the concerning-content safeguard → shown to Dad as a flag. */
+  flagged?: boolean
+}
+
+/** One assistant conversation, logged for Dad. */
+export interface AssistantSession {
+  id: string
+  day: ISODate
+  startedTs: number
+  messages: AssistantMessage[]
+}
+
+/** Per-girl HS-assistant state. Present only on teen profiles that have used it. */
+export interface AssistantState {
+  /** epoch-ms of each real Anthropic call — backs the daily cap + month meter. Pruned after 60 days. */
+  calls: number[]
+  /** conversation transcripts, pruned to 60 days. */
+  sessions: AssistantSession[]
+  /** Dad-editable daily call cap; undefined = default (see assistantState.DEFAULT_ASSISTANT_CAP = 40). */
+  dailyCap?: number
+  /** per-girl assistant name; undefined = "Jarvis". */
+  name?: string
+  /** short persona line (affects tone only — can NEVER soften the must-nots). */
+  persona?: string
 }
 
 /** MT-1 per-profile voice settings. All optional so an old profile just uses defaults. */

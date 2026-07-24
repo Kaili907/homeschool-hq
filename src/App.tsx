@@ -514,6 +514,7 @@ function Home({
         onProfileChange={onProfileChange}
         onSignOut={onSignOut}
         onToggleItem={onToggleItem}
+        muted={muted}
         assessmentCards={assessmentCards}
         onOpenAssessment={onOpenAssessment}
         onOpenMindset={onOpenMindset}
