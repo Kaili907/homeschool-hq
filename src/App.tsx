@@ -47,6 +47,9 @@ import { GrownUps } from './components/GrownUps'
 import { Confetti } from './components/Confetti'
 import { AssessmentRunner } from './components/assessment/AssessmentRunner'
 import { assignedOpenTests } from './components/assessment/homeCards'
+import { TypingTrainer } from './components/typing/TypingTrainer'
+import { recordDrill } from './typing/typingState'
+import type { DrillResult } from './typing/engine'
 
 type Screen =
   | { kind: 'picker' }
@@ -62,6 +65,7 @@ type Screen =
   | { kind: 'grownups' }
   | { kind: 'assessment'; testId: string }
   | { kind: 'prizeShop' }
+  | { kind: 'typing' }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
@@ -383,6 +387,19 @@ export default function App() {
             onPractice={() => startPractice(active)}
             onOpenShop={() => setScreen({ kind: 'prizeShop' })}
             onOpenAssessment={(testId) => setScreen({ kind: 'assessment', testId })}
+            onOpenTyping={() => setScreen({ kind: 'typing' })}
+          />
+        )}
+
+        {/* SE-A typing trainer "MK" — grades 3/4/6 only (teens never reach here) */}
+        {screen.kind === 'typing' && (
+          <TypingTrainer
+            profile={active}
+            muted={isMuted(state)}
+            onDrillComplete={(result: DrillResult) =>
+              patchActive((prev) => recordDrill(prev, result))
+            }
+            onExit={() => setScreen({ kind: 'home' })}
           />
         )}
       </div>
@@ -403,6 +420,7 @@ function Home({
   onPractice,
   onOpenShop,
   onOpenAssessment,
+  onOpenTyping,
 }: {
   profile: Profile
   muted: boolean
@@ -414,6 +432,7 @@ function Home({
   onPractice: () => void
   onOpenShop: () => void
   onOpenAssessment: (testId: string) => void
+  onOpenTyping: () => void
 }) {
   const t = useTheme()
   const assessmentCards = assignedOpenTests(profile)
@@ -513,6 +532,28 @@ function Home({
       <div className="mt-6">
         <MissionCard profile={profile} onToggle={onToggleItem} />
       </div>
+
+      {/* SE-A typing trainer entry — one card, opens the 5-minute drill ladder */}
+      <button
+        onClick={onOpenTyping}
+        className={
+          t.id === 'playful'
+            ? 'mt-6 flex w-full items-center gap-4 rounded-3xl border-b-8 border-sky-700 bg-gradient-to-br from-sky-500 to-indigo-600 p-5 text-left shadow-xl transition-all hover:scale-[1.01] active:translate-y-1 active:border-b-4'
+            : `${t.card} mt-6 flex w-full items-center gap-4 p-5 text-left transition-all hover:border-cyan-400`
+        }
+      >
+        <span className="text-4xl">⌨️</span>
+        <span className="flex-1">
+          <span
+            className={`block text-2xl font-extrabold ${t.id === 'playful' ? 'text-white' : t.heading}`}
+          >
+            Typing — 5 min
+          </span>
+          <span className={`block font-bold ${t.id === 'playful' ? 'text-sky-100' : t.sub}`}>
+            Home-row drills that grow into words and sentences
+          </span>
+        </span>
+      </button>
 
       {isTrainerReady ? (
         <>

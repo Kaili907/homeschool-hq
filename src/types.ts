@@ -244,6 +244,10 @@ export interface Profile {
   stars?: StarState
   /** grade-6 "cool" opt-in: shows subtle star UI. Undefined/false = no stars. */
   coolStars?: boolean
+
+  // ---------- SE-A typing trainer "MK" (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
+  /** per-profile typing-ladder progress; undefined = fresh (see typing/engine defaultTypingState). */
+  typing?: TypingState
 }
 
 /**
@@ -266,6 +270,28 @@ export interface VoiceRef {
   ref: string
   /** Dad-facing label shown in the grid (e.g. "Rachel — warm"). */
   label: string
+}
+
+/** SE-A: best result a girl has reached on one typing lesson. */
+export interface TypingLessonState {
+  /** best accuracy % ever hit on this lesson (0–100). */
+  bestAccuracy: number
+  /** best words-per-minute ever hit on this lesson. */
+  bestWpm: number
+  /** true once she has cleared the 90%-accuracy mastery gate at least once. */
+  passed: boolean
+  lastSeen?: ISODate
+}
+
+/** SE-A: per-profile typing-trainer state. All fields default gracefully. */
+export interface TypingState {
+  /** highest unlocked lesson index (0-based); lessons 0..unlockedIndex are playable. */
+  unlockedIndex: number
+  /** best stats keyed by lesson id. */
+  lessons: Record<string, TypingLessonState>
+  /** total 5-minute drills finished (display only). */
+  drillsCompleted: number
+  lastPracticedDate?: ISODate
 }
 
 /** MT-1 per-profile voice settings. All optional so an old profile just uses defaults. */
