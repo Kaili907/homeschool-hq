@@ -13,7 +13,7 @@ import { AssessmentAdmin } from './assessment/AssessmentAdmin'
 import { HsGrownUps } from './HsGrownUps'
 import { NeedsDadFlags, TutorControls } from './TutorPanel'
 import { StarsGlobalAdmin, StarsProfileAdmin } from './StarsAdmin'
-import { getStars, starsEnabled } from '../stars/stars'
+import { getStars } from '../stars/stars'
 
 interface GrownUpsProps {
   state: AppState
@@ -134,7 +134,8 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
                   >
                     History
                   </button>
-                  {starsEnabled(p) && (
+                  {/* playful always; grade-6 cool always (so Dad can reach the opt-in toggle); never teens */}
+                  {(p.theme === 'playful' || p.theme === 'cool') && (
                     <button
                       onClick={() =>
                         setExpanded(
