@@ -85,3 +85,27 @@ audio-capture/persistence API. Passage content lives in
 `src/curriculum/reading/` (original authored text, no imported/copyrighted
 material) and is parsed by `src/reading/passages.ts`. The mission auto-check hook
 (read-to-self item) is DEFERRED — `src/missions.ts` is owned by another cycle.
+
+## v2 additive: MJ HS voice assistant (2026-07-24, no version bump)
+
+Non-breaking additions — existing v2 data loads unchanged (`isAppState` is lenient;
+old profiles have no `assistant` key and fall back to `defaultAssistantState()`):
+
+- `Profile.assistant?: AssistantState` — per-teen HS-assistant state:
+  `{ calls[], sessions[], dailyCap?, name?, persona? }`. `undefined` until her
+  first use. `calls` is the assistant's OWN call log (separate from the tutor's),
+  backing a separate daily cap (default 40) + month meter. `sessions` are
+  conversation transcripts; both `calls` and `sessions` auto-prune after 60 days.
+  Config (`name` default "Jarvis", `persona` tone-only) is Dad-set in Grown-Ups.
+- `VoiceSlot` gains `'assistant'` — the MT-V slot the assistant voice resolves
+  through (slot → default → legacy → browser). Purely additive to the enum.
+- `AssistantMessage.flagged?` marks a turn that tripped the concerning-content
+  safeguard (scripted care line, no API call), surfaced to Dad in the transcript.
+
+No `schemaVersion` bump (follows the M2/M4/MT-1/MS/SE-A/MR additive-optional
+precedent). SAFETY: the assistant NEVER produces submittable work or assessment
+answers (hardcoded system-prompt must-nots), NEVER sees another profile / journal
+text / keys / assessment item content (context is single-profile, status-only),
+and every data-changing action requires an explicit Confirm tap. Reuses MT-2's
+Anthropic key/model path (shared key), so keyless/offline disables the orb only.
+Teens (grades 10/12) only; littles' screens show no assistant.

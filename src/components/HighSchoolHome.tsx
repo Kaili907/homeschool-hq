@@ -20,6 +20,8 @@ import {
   updateCollegeTask,
 } from '../hs/hsState'
 import { ServiceHoursCard } from './service/ServiceHoursCard'
+import { AssistantOrb } from './assistant/AssistantOrb'
+import { parseSessionTarget } from '../assistant/actions'
 
 const PRACTICE_TOTAL = 8
 const ALGEBRA_TOTAL = 5
@@ -40,6 +42,8 @@ interface Props {
   onProfileChange: (update: (prev: Profile) => Profile) => void
   onSignOut: () => void
   onToggleItem: (itemId: string, done: boolean) => void
+  /** MJ: family voice mute — the assistant respects it (text still shows). */
+  muted: boolean
   // MA×M4 integration: assessments are HS content, so the teen home surfaces
   // the same assigned-assessment cards MA renders on the kids' home.
   assessmentCards: HomeAssessmentCard[]
@@ -73,6 +77,7 @@ export function HighSchoolHome({
   onProfileChange,
   onSignOut,
   onToggleItem,
+  muted,
   assessmentCards,
   onOpenAssessment,
   onOpenMindset,
@@ -206,6 +211,24 @@ export function HighSchoolHome({
           Sign out
         </button>
       </header>
+
+      {/* MJ: the school-day assistant sits at the very top of the teen home */}
+      <AssistantOrb
+        profile={profile}
+        muted={muted}
+        onProfileChange={onProfileChange}
+        onCheckMission={(itemId) => onToggleItem(itemId, true)}
+        onMarkCollegeTask={(taskId) =>
+          onProfileChange((prev) => updateCollegeTask(ensureHsDefaults(prev), taskId, { done: true }))
+        }
+        onStartSession={(target) => {
+          const s = parseSessionTarget(target)
+          if (!s) return
+          if (s.kind === 'unit') startPractice(s.unitId)
+          else if (s.kind === 'algebra') startAlgebra()
+          else if (s.kind === 'timed') startTimed(s.source)
+        }}
+      />
 
       {profile.totals.questionsAnswered > 0 && (
         <div className="mt-3 flex flex-wrap gap-2 text-sm font-semibold">

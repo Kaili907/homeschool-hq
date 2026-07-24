@@ -56,6 +56,7 @@ export function setVoiceURI(p: Profile, voiceURI: string | undefined): Profile {
 export const VOICE_SLOTS: { slot: VoiceSlot; label: string; hint: string }[] = [
   { slot: 'mathTutor', label: 'Math tutor', hint: 'walkthroughs & daily practice' },
   { slot: 'mindset', label: 'Mindset', hint: 'read-aloud lessons (arrives with MM)' },
+  { slot: 'assistant', label: 'HS assistant', hint: 'the teen home assistant (MJ)' },
   { slot: 'japanese', label: 'Japanese', hint: 'hiragana trainer (coming soon)' },
   { slot: 'default', label: 'Default', hint: 'backs every unset slot' },
 ]
@@ -108,7 +109,7 @@ export function prewarmTargets(state: AppState): { voiceRef: string; rate: numbe
   const out: { voiceRef: string; rate: number; label: string }[] = []
   for (const p of Object.values(state.profiles)) {
     const rate = getVoicePrefs(p).rate
-    for (const slot of ['mathTutor', 'default'] as VoiceSlot[]) {
+    for (const slot of ['mathTutor', 'assistant', 'default'] as VoiceSlot[]) {
       const ref = resolveSlotRef(p, slot)
       if (!ref || ref.provider !== 'elevenlabs') continue
       const encoded = encodeVoiceRef(ref)
