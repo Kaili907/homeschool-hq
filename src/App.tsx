@@ -51,6 +51,7 @@ import { assignedOpenTests } from './components/assessment/homeCards'
 import { TypingTrainer } from './components/typing/TypingTrainer'
 import { recordDrill } from './typing/typingState'
 import type { DrillResult } from './typing/engine'
+import ReadingView from './components/reading/ReadingView'
 
 type Screen =
   | { kind: 'picker' }
@@ -67,6 +68,7 @@ type Screen =
   | { kind: 'assessment'; testId: string }
   | { kind: 'prizeShop' }
   | { kind: 'typing' }
+  | { kind: 'reading' }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
@@ -396,6 +398,17 @@ export default function App() {
             onOpenShop={() => setScreen({ kind: 'prizeShop' })}
             onOpenAssessment={(testId) => setScreen({ kind: 'assessment', testId })}
             onOpenTyping={() => setScreen({ kind: 'typing' })}
+            onOpenReading={() => setScreen({ kind: 'reading' })}
+          />
+        )}
+
+        {/* MR reading fluency — grades 3/4/6 only (teens never reach here) */}
+        {screen.kind === 'reading' && (
+          <ReadingView
+            profile={active}
+            muted={isMuted(state)}
+            onProfileChange={patchActive}
+            onExit={() => setScreen({ kind: 'home' })}
           />
         )}
 
@@ -429,6 +442,7 @@ function Home({
   onOpenShop,
   onOpenAssessment,
   onOpenTyping,
+  onOpenReading,
 }: {
   profile: Profile
   muted: boolean
@@ -441,6 +455,7 @@ function Home({
   onOpenShop: () => void
   onOpenAssessment: (testId: string) => void
   onOpenTyping: () => void
+  onOpenReading: () => void
 }) {
   const t = useTheme()
   const assessmentCards = assignedOpenTests(profile)
@@ -540,6 +555,28 @@ function Home({
       <div className="mt-6">
         <MissionCard profile={profile} onToggle={onToggleItem} />
       </div>
+
+      {/* MR reading fluency entry — opens today's read-aloud passage */}
+      <button
+        onClick={onOpenReading}
+        className={
+          t.id === 'playful'
+            ? 'mt-6 flex w-full items-center gap-4 rounded-3xl border-b-8 border-rose-700 bg-gradient-to-br from-rose-500 to-orange-500 p-5 text-left shadow-xl transition-all hover:scale-[1.01] active:translate-y-1 active:border-b-4'
+            : `${t.card} mt-6 flex w-full items-center gap-4 p-5 text-left transition-all hover:border-cyan-400`
+        }
+      >
+        <span className="text-4xl">📖</span>
+        <span className="flex-1">
+          <span
+            className={`block text-2xl font-extrabold ${t.id === 'playful' ? 'text-white' : t.heading}`}
+          >
+            Reading
+          </span>
+          <span className={`block font-bold ${t.id === 'playful' ? 'text-rose-100' : t.sub}`}>
+            Read today&apos;s passage aloud — tap any word to hear it
+          </span>
+        </span>
+      </button>
 
       {/* SE-A typing trainer entry — one card, opens the 5-minute drill ladder */}
       <button

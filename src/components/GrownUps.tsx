@@ -17,6 +17,7 @@ import { SyncControls } from './sync/SyncControls'
 import type { SyncApi } from '../sync/useSync'
 import { StarsGlobalAdmin, StarsProfileAdmin } from './StarsAdmin'
 import { getStars } from '../stars/stars'
+import { ReadingGrownUps } from './reading/ReadingGrownUps'
 
 interface GrownUpsProps {
   state: AppState
@@ -32,7 +33,7 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
   const [msg, setMsg] = useState('')
   const [expanded, setExpanded] = useState<{
     id: string
-    tab: 'template' | 'history' | 'assessments' | 'hs' | 'stars'
+    tab: 'template' | 'history' | 'assessments' | 'hs' | 'stars' | 'reading'
   } | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const backupKeys = listV1BackupKeys()
@@ -160,6 +161,20 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
                       )}
                     </button>
                   )}
+                  {(p.grade === '3' || p.grade === '4' || p.grade === '6') && (
+                    <button
+                      onClick={() =>
+                        setExpanded(
+                          expanded?.id === p.id && expanded.tab === 'reading'
+                            ? null
+                            : { id: p.id, tab: 'reading' },
+                        )
+                      }
+                      className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100"
+                    >
+                      Reading 📖
+                    </button>
+                  )}
                   {(p.grade === '10' || p.grade === '12') && (
                     <button
                       onClick={() =>
@@ -225,6 +240,9 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
               )}
               {expanded?.id === p.id && expanded.tab === 'stars' && (
                 <StarsProfileAdmin profile={p} onChange={(update) => patchProfile(p.id, update)} />
+              )}
+              {expanded?.id === p.id && expanded.tab === 'reading' && (
+                <ReadingGrownUps profile={p} onChange={(update) => patchProfile(p.id, update)} />
               )}
             </div>
           ))}

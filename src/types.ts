@@ -249,6 +249,10 @@ export interface Profile {
   /** per-profile typing-ladder progress; undefined = fresh (see typing/engine defaultTypingState). */
   typing?: TypingState
 
+  // ---------- MR reading fluency (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
+  /** per-profile read-aloud fluency log + calibration; undefined = fresh (see reading/fluency defaultReadingState). */
+  reading?: ReadingState
+
   // ---------- MT-2/3 conversational tutor (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
   /** per-question tutor chat transcripts; undefined until her first chat. Auto-pruned after 60 days. */
   tutorChats?: TutorChat[]
@@ -325,6 +329,47 @@ export interface TypingState {
   /** total 5-minute drills finished (display only). */
   drillsCompleted: number
   lastPracticedDate?: ISODate
+}
+
+// ---------- MR reading fluency (additive, all OPTIONAL; no schemaVersion bump) ----------
+
+/** How a reading's WCPM number was produced. */
+export type ReadingMode =
+  | 'estimated' // browser SpeechRecognition + sequence alignment (the everyday proxy)
+  | 'assessed' // Azure Pronunciation Assessment (v2 seam; not wired this cycle)
+  | 'manual' // offline: Dad counted words-correct by hand (ground-truth-ish)
+
+/** One logged read-aloud session. `wcpm` is always an ESTIMATE unless mode==='manual'. */
+export interface ReadingSessionLog {
+  date: ISODate
+  passageId: string
+  mode: ReadingMode
+  /** words-correct-per-minute; label as "estimated" everywhere unless mode==='manual'. */
+  wcpm: number
+  /** passage words flagged for gentle practice ("words we practiced", never "wrong"). */
+  wordsPracticed: string[]
+  /** active reading time in seconds. */
+  durationSec: number
+}
+
+/** Dad's periodic manual 1-minute check — the ground-truth series the trend carries alongside estimates. */
+export interface ReadingCalibration {
+  date: ISODate
+  /** the passage used, if a bank passage; optional for an ad-hoc book check. */
+  passageId?: string
+  /** Dad-counted words-correct in one minute. */
+  wcpm: number
+}
+
+/** Per-profile reading-fluency state. All fields default gracefully (old profiles have none). */
+export interface ReadingState {
+  /** append-only session log, oldest first. */
+  sessions: ReadingSessionLog[]
+  /** passage ids already served, oldest first — drives the no-repeat spacing window. */
+  seenPassageIds: string[]
+  /** Dad's manual calibration checks (ground truth), oldest first. */
+  calibrations: ReadingCalibration[]
+  lastReadDate?: ISODate
 }
 
 /** MT-1 per-profile voice settings. All optional so an old profile just uses defaults. */

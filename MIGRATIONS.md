@@ -65,3 +65,23 @@ No `schemaVersion` bump (follows the M2/M4/MT-1 additive-optional precedent).
 Stars are earned only from practice-session and mission-completion paths — never
 from placement or assessments (those stay consequence-free). Export/import
 round-trips `StarState` because it lives inside the profile/app-state payload.
+
+## v2 additive: MR reading fluency (2026-07-24, no version bump)
+
+Non-breaking addition — existing v2 data loads unchanged (`isAppState` is lenient;
+old profiles have no `reading` key and fall back to `defaultReadingState()`):
+
+- `Profile.reading?: ReadingState` — per-girl read-aloud fluency log:
+  `{ sessions, seenPassageIds, calibrations, lastReadDate? }`. `undefined` until
+  her first reading session. `sessions` is APPEND-ONLY; each logs
+  `{ date, passageId, mode: estimated|assessed|manual, wcpm, wordsPracticed[],
+  durationSec }`. WCPM is an ESTIMATE (browser recognition + alignment) unless
+  `mode==='manual'` (Dad-counted). `calibrations` holds Dad's ground-truth checks.
+
+No `schemaVersion` bump (follows the M2/M4/MT-1/MS/SE-A additive-optional
+precedent). NO AUDIO IS EVER STORED — only transcript alignment results; the
+`src/reading/noaudio.test.ts` source scan asserts reading paths touch no
+audio-capture/persistence API. Passage content lives in
+`src/curriculum/reading/` (original authored text, no imported/copyrighted
+material) and is parsed by `src/reading/passages.ts`. The mission auto-check hook
+(read-to-self item) is DEFERRED — `src/missions.ts` is owned by another cycle.
