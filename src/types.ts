@@ -260,6 +260,31 @@ export interface Profile {
   tutorCalls?: number[]
   /** Dad-editable daily tutor-call cap; undefined = default (see tutorEngine.DEFAULT_DAILY_CAP). */
   tutorDailyCap?: number
+
+  // ---------- MM mindset module (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
+  /** per-week mindset progress; undefined until her first lesson view. PRIVATE to this profile. */
+  mindset?: MindsetState
+}
+
+/**
+ * MM — one week's mindset progress: COMPLETION SIGNALS ONLY. The reflection TEXT
+ * (journal entries AND the littles' emoji/one-word answers) is deliberately NOT here —
+ * it lives in a separate localStorage slot (journalStore.ts) that is never part of
+ * AppState, so it cannot reach the panel, the export, or the sync payload. These fields
+ * sync normally and back Dad's panel + the parent hub.
+ */
+export interface MindsetWeekState {
+  /** she read the lesson to the end. */
+  viewed?: boolean
+  /** a reflection was submitted (emoji counts; a journal "Done" counts even if empty). */
+  reflected?: boolean
+  /** set once viewed && reflected — the completion signal the panel reads and syncs. */
+  completedAt?: ISODate
+}
+
+/** MM — per-profile mindset state (completion only), keyed by week number (1-based). */
+export interface MindsetState {
+  weeks: Record<number, MindsetWeekState>
 }
 
 /** MT-2 one message in a tutor conversation. */
@@ -416,6 +441,8 @@ export interface AppState {
   tutorMuted?: boolean
   /** MS: shared prize list + earning table (additive, optional; undefined = defaults). */
   stars?: StarsConfig
+  /** MM: Dad-set school-year start date; weeks unlock on the Fridays that follow. undefined = not set (all mindset weeks locked). */
+  mindsetStartDate?: ISODate
 }
 
 // ---------- schema v1 (legacy, for migration only) ----------

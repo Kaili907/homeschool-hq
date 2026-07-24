@@ -167,11 +167,18 @@ export function downloadJson(filename: string, text: string): void {
   URL.revokeObjectURL(url)
 }
 
+/**
+ * The exact JSON the standard export-all writes. MM privacy: no sanitizer is needed
+ * here because reflection TEXT never lives in AppState — it is kept in journalStore's
+ * own localStorage slot (see mindset/journalStore.ts). This serializes only AppState,
+ * which carries mindset COMPLETION signals but never a girl's words.
+ */
+export function serializeAllBackup(state: AppState): string {
+  return JSON.stringify(state, null, 2)
+}
+
 export function exportAllBackup(state: AppState): void {
-  downloadJson(
-    `homeschool-hq-all-profiles-${isoToday()}.json`,
-    JSON.stringify(state, null, 2),
-  )
+  downloadJson(`homeschool-hq-all-profiles-${isoToday()}.json`, serializeAllBackup(state))
 }
 
 export type ImportResult =

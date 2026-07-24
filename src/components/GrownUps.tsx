@@ -18,6 +18,8 @@ import type { SyncApi } from '../sync/useSync'
 import { StarsGlobalAdmin, StarsProfileAdmin } from './StarsAdmin'
 import { getStars } from '../stars/stars'
 import { ReadingGrownUps } from './reading/ReadingGrownUps'
+import { MindsetProfilePanel, MindsetStartDate } from './mindset/MindsetGrownUps'
+import { clearJournal } from '../mindset/journalStore'
 
 interface GrownUpsProps {
   state: AppState
@@ -33,7 +35,7 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
   const [msg, setMsg] = useState('')
   const [expanded, setExpanded] = useState<{
     id: string
-    tab: 'template' | 'history' | 'assessments' | 'hs' | 'stars' | 'reading'
+    tab: 'template' | 'history' | 'assessments' | 'hs' | 'stars' | 'reading' | 'mindset'
   } | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const backupKeys = listV1BackupKeys()
@@ -53,6 +55,7 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
       const fresh = emptyProfile(prev.id, prev.name, prev.grade)
       return { ...fresh, pin: prev.pin, theme: prev.theme, createdAt: prev.createdAt }
     })
+    clearJournal(p.id) // her private mindset entries live outside AppState — wipe them too
     setMsg(`${p.name}'s progress was reset.`)
   }
 
@@ -140,6 +143,18 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
                     className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
                   >
                     History
+                  </button>
+                  <button
+                    onClick={() =>
+                      setExpanded(
+                        expanded?.id === p.id && expanded.tab === 'mindset'
+                          ? null
+                          : { id: p.id, tab: 'mindset' },
+                      )
+                    }
+                    className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                  >
+                    Mindset 🧠
                   </button>
                   {/* playful always; grade-6 cool always (so Dad can reach the opt-in toggle); never teens */}
                   {(p.theme === 'playful' || p.theme === 'cool') && (
@@ -244,6 +259,9 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
               {expanded?.id === p.id && expanded.tab === 'reading' && (
                 <ReadingGrownUps profile={p} onChange={(update) => patchProfile(p.id, update)} />
               )}
+              {expanded?.id === p.id && expanded.tab === 'mindset' && (
+                <MindsetProfilePanel profile={p} />
+              )}
             </div>
           ))}
         </div>
@@ -263,6 +281,10 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
         {/* star economy (MS) */}
         <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Star economy ⭐</h2>
         <StarsGlobalAdmin state={state} onStateChange={onStateChange} />
+
+        {/* mindset (MM) — start date drives the weekly unlock; per-profile completion is above */}
+        <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Mindset 🧠</h2>
+        <MindsetStartDate state={state} onStateChange={onStateChange} />
 
         {/* cloud sync (M6) — sign in, status, migration. The JSON backup below stays
             the forever escape hatch, and everything works with no sync configured. */}
