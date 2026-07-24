@@ -320,6 +320,8 @@ export default function App() {
                 logWalkthrough(p, skillId, Date.now(), sessionStartRef.current, isoToday()),
               )
             }
+            profile={active}
+            onTutorProfileChange={patchActive}
             onFinish={(history) => {
               const correct = history.filter((r) => r.correct).length
               patchActive((p) => {

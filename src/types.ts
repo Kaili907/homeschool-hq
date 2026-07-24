@@ -248,6 +248,39 @@ export interface Profile {
   // ---------- SE-A typing trainer "MK" (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
   /** per-profile typing-ladder progress; undefined = fresh (see typing/engine defaultTypingState). */
   typing?: TypingState
+
+  // ---------- MT-2/3 conversational tutor (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
+  /** per-question tutor chat transcripts; undefined until her first chat. Auto-pruned after 60 days. */
+  tutorChats?: TutorChat[]
+  /** epoch-ms of each real Anthropic tutor call — backs the daily/monthly cap + usage meter. Pruned with chats. */
+  tutorCalls?: number[]
+  /** Dad-editable daily tutor-call cap; undefined = default (see tutorEngine.DEFAULT_DAILY_CAP). */
+  tutorDailyCap?: number
+}
+
+/** MT-2 one message in a tutor conversation. */
+export interface TutorMessage {
+  role: 'kid' | 'tutor'
+  text: string
+  ts: number
+  /** how a tutor line was produced: 'api' = a real Anthropic call; 'scripted' = a local safety/cap line. */
+  source?: 'api' | 'scripted'
+}
+
+/** MT-2 one question-scoped tutor conversation, logged for Dad. */
+export interface TutorChat {
+  id: string
+  skillId: SkillId
+  grade: Grade
+  day: ISODate
+  startedTs: number
+  /** the exact problem, correct answer, and her answer the chat is locked to. */
+  problem: string
+  correctAnswer: string
+  herAnswer: string
+  messages: TutorMessage[]
+  /** how it ended: 'flagged' = concerning/6-exchange → Needs-Dad; 'closed' = she left. */
+  outcome?: 'flagged' | 'closed'
 }
 
 /**

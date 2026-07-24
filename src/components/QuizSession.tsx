@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import type { AnswerRecord, Difficulty, Question } from '../types'
+import type { AnswerRecord, Difficulty, Profile, Question } from '../types'
 import type { SkillId } from '../skills'
 import { VisualView } from './Viz'
 import { Confetti } from './Confetti'
 import { Walkthrough } from './Walkthrough'
+import { TutorChat, type TutorQuestionContext } from './tutor/TutorChat'
+import type { TutorApiDeps } from '../tutor/tutorApi'
 import { explain } from '../explain'
 import { useTheme } from '../theme'
 import type { ResolvedVoicePrefs } from '../tutor/tutorState'
@@ -29,15 +31,33 @@ interface QuizSessionProps {
   onRetryAnswer?: (q: Question, correct: boolean) => void
   /** a wrong-answer walkthrough was viewed (drives the Needs-Dad escalation). */
   onWalkthrough?: (skillId: SkillId) => void
+
+  // ---------- MT-2/3 conversational tutor (optional; needs the live profile + a
+  // functional writer so chats/calls/flags persist). Absent => no chat surface. ----------
+  profile?: Profile
+  onTutorProfileChange?: (update: (prev: Profile) => Profile) => void
+  /** test seam forwarded to the chat panel; defaults to the real Anthropic deps. */
+  tutorApiDeps?: TutorApiDeps
 }
 
 const CHEERS = ['Great job! 🎉', 'You got it! ⭐', 'Awesome! 🌟', 'Way to go! 🙌', 'Super! 🦄', 'Nailed it! 🎯']
 const OOPS = ['Almost! 💪', 'Nice try! 🌱', 'Keep going! 🚀', "You'll get the next one! 🍀"]
 
 type Walk = { question: Question; mode: 'retry' | 'review'; chosenIndex?: number }
-type Retry = { question: Question; selected: number | null }
+/** MT-2 chat context: the original question + her answer the chat is locked to. */
+type ChatCtx = { question: Question; herAnswer: string }
+type Retry = { question: Question; selected: number | null; ctx: ChatCtx }
 /** MT-1V beat 2: a fresh worked example auto-played end-to-end. */
 type Example = { question: Question }
+
+/** The problem line the tutor sees (prompt without the trailing instruction line). */
+const problemLine = (q: Question): string => q.prompt.replace(/\n[\s\S]*$/, '').trim()
+const toTutorCtx = (c: ChatCtx): TutorQuestionContext => ({
+  skillId: c.question.skillId,
+  problem: problemLine(c.question),
+  correctAnswer: c.question.choices[c.question.answerIndex],
+  herAnswer: c.herAnswer,
+})
 
 export function QuizSession({
   title,
@@ -54,6 +74,9 @@ export function QuizSession({
   makeRetry,
   onRetryAnswer,
   onWalkthrough,
+  profile,
+  onTutorProfileChange,
+  tutorApiDeps,
 }: QuizSessionProps) {
   const t = useTheme()
   const [index, setIndex] = useState(0)
@@ -66,8 +89,15 @@ export function QuizSession({
   const [walk, setWalk] = useState<Walk | null>(null)
   const [retry, setRetry] = useState<Retry | null>(null)
   const [example, setExample] = useState<Example | null>(null)
+  // MT-2: the chat is offered after beat 3 (retry) and after review; opening it
+  // stores the question it's scoped to. reviewDone is the post-review "ask?" bar.
+  const [chat, setChat] = useState<ChatCtx | null>(null)
+  const [reviewDone, setReviewDone] = useState<ChatCtx | null>(null)
   const timerRef = useRef<number | null>(null)
   const nextHistoryRef = useRef<AnswerRecord[]>([])
+  // Origin question the chat is scoped to; captured at walkthrough open so it
+  // survives beat 2 (which clears `walk`).
+  const chatCtxRef = useRef<ChatCtx | null>(null)
 
   useEffect(() => {
     return () => {
@@ -103,6 +133,8 @@ export function QuizSession({
     setWalk(null)
     setRetry(null)
     setExample(null)
+    setChat(null)
+    setReviewDone(null)
   }
 
   function handleChoice(i: number) {
@@ -128,8 +160,19 @@ export function QuizSession({
 
   function openWalkthrough(mode: 'retry' | 'review') {
     // Escalation is logged once here (beat 1). Beat 2 ("Watch another") is part of
-    // the SAME walkthrough and must not log again.
+    // the SAME walkthrough and must not log again. (A tutor chat does NOT log here.)
     if (mode === 'retry') onWalkthrough?.(question.skillId)
+    // Stash the chat context now so it survives beat 2 (which clears `walk`). In
+    // review she was correct, so her answer is the correct choice.
+    chatCtxRef.current = {
+      question,
+      herAnswer:
+        mode === 'review'
+          ? question.choices[question.answerIndex]
+          : selected != null
+            ? question.choices[selected]
+            : 'skipped it',
+    }
     setWalk({ question, mode, chosenIndex: selected ?? undefined })
   }
 
@@ -142,8 +185,17 @@ export function QuizSession({
 
   function finishWalkthrough(mode: 'retry' | 'review') {
     setExample(null)
+    const ctx = chatCtxRef.current
     if (mode === 'retry' && makeRetry) {
-      setRetry({ question: makeRetry(question.skillId, question.difficulty), selected: null })
+      setRetry({
+        question: makeRetry(question.skillId, question.difficulty),
+        selected: null,
+        ctx: ctx ?? { question, herAnswer: 'skipped it' },
+      })
+      setWalk(null)
+    } else if (mode === 'review' && canChat && ctx) {
+      // after review: offer the chat before moving on (else straight to next).
+      setReviewDone(ctx)
       setWalk(null)
     } else {
       goNext()
@@ -162,6 +214,8 @@ export function QuizSession({
   const wasCorrect = answered && selected === question.answerIndex
   const voicePrefs: ResolvedVoicePrefs = voice ?? { rate: 1, enabled: false, voiceOptIn: false }
   const showMute = !!tutorEnabled && !!onToggleMute && voicePrefs.enabled
+  // MT-2: the chat needs the live profile + a functional writer to persist.
+  const canChat = !!tutorEnabled && !!profile && !!onTutorProfileChange
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-2xl flex-col px-4 py-4">
@@ -214,7 +268,18 @@ export function QuizSession({
       </div>
 
       {/* body */}
-      {example ? (
+      {chat && canChat ? (
+        // MT-2: question-scoped conversational tutor. Closing moves to the next question.
+        <TutorChat
+          profile={profile!}
+          question={toTutorCtx(chat)}
+          muted={!!muted}
+          onProfileChange={onTutorProfileChange!}
+          onClose={goNext}
+          apiDeps={tutorApiDeps}
+          voice={voicePrefs}
+        />
+      ) : example ? (
         // Beat 2: a fresh same-skill/difficulty problem, auto-played end-to-end.
         <Walkthrough
           question={example.question}
@@ -238,7 +303,14 @@ export function QuizSession({
           onWatchAnother={walk.mode === 'retry' && makeRetry ? watchAnother : undefined}
         />
       ) : retry ? (
-        <RetryCard retry={retry} onPick={handleRetryChoice} onContinue={goNext} />
+        <RetryCard
+          retry={retry}
+          onPick={handleRetryChoice}
+          onContinue={goNext}
+          onAskTutor={canChat ? () => setChat(retry.ctx) : undefined}
+        />
+      ) : reviewDone ? (
+        <ReviewDoneBar onAsk={() => setChat(reviewDone)} onNext={goNext} />
       ) : (
         <div key={index} className={`mt-6 flex-1 ${t.cheers === 'minimal' ? '' : 'animate-pop'}`}>
           <div className={`${t.card} p-6`}>
@@ -340,10 +412,13 @@ function RetryCard({
   retry,
   onPick,
   onContinue,
+  onAskTutor,
 }: {
   retry: Retry
   onPick: (i: number) => void
   onContinue: () => void
+  /** MT-2: after beat 3, offer the conversational tutor scoped to the original question. */
+  onAskTutor?: () => void
 }) {
   const t = useTheme()
   const { question, selected } = retry
@@ -398,11 +473,40 @@ function RetryCard({
             >
               {correct ? 'You did it yourself! 🌟' : `The answer is ${question.choices[question.answerIndex]}.`}
             </div>
-            <button onClick={onContinue} className={`${t.primaryBtn} px-6 py-3 text-lg`}>
-              Keep going ▶
-            </button>
+            <div className="flex flex-wrap justify-center gap-3">
+              {onAskTutor && (
+                <button onClick={onAskTutor} className={`${t.secondaryBtn} px-5 py-3 text-base`}>
+                  Still stuck? Ask the tutor 💬
+                </button>
+              )}
+              <button onClick={onContinue} className={`${t.primaryBtn} px-6 py-3 text-lg`}>
+                Keep going ▶
+              </button>
+            </div>
           </div>
         )}
+      </div>
+    </div>
+  )
+}
+
+// ---------- post-review "ask the tutor?" bar (MT-2) ----------
+
+function ReviewDoneBar({ onAsk, onNext }: { onAsk: () => void; onNext: () => void }) {
+  const t = useTheme()
+  return (
+    <div className="mt-6 flex-1">
+      <div className={`${t.card} p-6 text-center`}>
+        <div className={`text-lg font-extrabold ${t.heading}`}>Nice — you reviewed it! 🌟</div>
+        <div className={`mt-1 font-bold ${t.sub}`}>Want to talk it through with the tutor?</div>
+        <div className="mt-4 flex flex-wrap justify-center gap-3">
+          <button onClick={onAsk} className={`${t.secondaryBtn} px-5 py-3 text-base`}>
+            Ask the tutor 💬
+          </button>
+          <button onClick={onNext} className={`${t.primaryBtn} px-6 py-3 text-lg`}>
+            Next ▶
+          </button>
+        </div>
       </div>
     </div>
   )
