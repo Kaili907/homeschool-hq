@@ -29,12 +29,15 @@ export function HsGrownUps({
   const isSenior = p.grade === '12'
 
   // Every write threads through the functional update and re-seeds the HS
-  // defaults on the latest committed profile, so admin edits compose.
+  // defaults on the latest committed profile, so admin edits compose. The
+  // course-list transform is applied to prev's OWN courses (not the render
+  // snapshot), so setCourses never replays a stale array over a concurrent edit.
   const edit = (fn: (prev: Profile) => Profile) =>
     onChange((prev) => fn(ensureHsDefaults(prev)))
-  const setCourseList = (next: CourseTrack[]) => edit((prev) => setCourses(prev, next))
+  const setCourseList = (fn: (cur: CourseTrack[]) => CourseTrack[]) =>
+    edit((prev) => setCourses(prev, fn(prev.courses ?? [])))
   const patchCourse = (id: string, fn: (c: CourseTrack) => CourseTrack) =>
-    setCourseList(courses.map((c) => (c.id === id ? fn(c) : c)))
+    setCourseList((cur) => cur.map((c) => (c.id === id ? fn(c) : c)))
 
   return (
     <div className="mt-3 space-y-4 rounded-lg border border-slate-200 bg-slate-50 p-3">
@@ -89,7 +92,7 @@ export function HsGrownUps({
           <span className="text-sm font-bold text-slate-700">Course progress</span>
           <button
             className={btn}
-            onClick={() => setCourseList([...courses, { id: nid(), name: 'New course', units: [{ id: nid(), label: 'Unit 1', done: false }] }])}
+            onClick={() => setCourseList((cur) => [...cur, { id: nid(), name: 'New course', units: [{ id: nid(), label: 'Unit 1', done: false }] }])}
           >
             + Add course
           </button>
@@ -110,7 +113,7 @@ export function HsGrownUps({
                 >
                   + Unit
                 </button>
-                <button className={dangerBtn} onClick={() => setCourseList(courses.filter((x) => x.id !== c.id))} aria-label="remove course">
+                <button className={dangerBtn} onClick={() => setCourseList((cur) => cur.filter((x) => x.id !== c.id))} aria-label="remove course">
                   ✕
                 </button>
               </div>

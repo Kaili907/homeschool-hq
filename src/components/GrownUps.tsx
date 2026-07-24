@@ -281,13 +281,21 @@ function TemplateEditor({
   profile: Profile
   onChange: (update: (prev: Profile) => Profile) => void
 }) {
-  const template = templateFor(profile)
+  const template = templateFor(profile) // render/read view only
+  // Whole-template replace (reset button) — prev-independent by design.
   const set = (t: MissionTemplate) => onChange((prev) => ({ ...prev, template: t }))
 
+  // Per-list edit derives the base template from prev, not the render snapshot,
+  // so two list edits in one tick compose instead of the second replaying a
+  // stale template over the first.
   const editList = (
     key: 'weekday' | 'friday',
     fn: (items: MissionTemplateItem[]) => MissionTemplateItem[],
-  ) => set({ ...template, [key]: fn(template[key]) })
+  ) =>
+    onChange((prev) => {
+      const cur = templateFor(prev)
+      return { ...prev, template: { ...cur, [key]: fn(cur[key]) } }
+    })
 
   const renderList = (key: 'weekday' | 'friday', title: string) => (
     <div className="min-w-0 flex-1">

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { AppState } from './types'
+import type { AppState, CourseTrack, Profile } from './types'
 import type { SkillId } from './skills'
 import {
   finishSession,
@@ -9,25 +9,32 @@ import {
   updateProfile,
 } from './appState'
 import { autoCompletePractice, ensureToday, setItemDone } from './missions'
+import { ensureHsDefaults, setCourses } from './hs/hsState'
 import { emptyProfile } from './migration'
 
 // ---------------------------------------------------------------------------
 // Regression harness for the stale-snapshot write bug class.
 //
 // These tests model React's two setState batching modes and contrast them so the
-// three historical bug shapes are reproducible AND their functional-update fix is
+// four historical bug shapes are reproducible AND their functional-update fix is
 // proven — all against the REAL reducers (recordAnswer / finishSession /
-// ensureToday) and the REAL primitive (appState.patchProfile).
+// ensureToday / setCourses) and the REAL primitive (appState.patchProfile).
 //
-//   • VALUE form  — setState(nextValue): every write in a tick is computed from
-//     the SAME committed snapshot, then enqueued; on flush the LAST value wins.
-//     This is exactly the trap the shipped code hit (MA record+finish compose,
-//     M4 finish-via-ref, M4 derive-at-render): the second write clobbers the
-//     first because both started from the same stale base.
+//   • VALUE / snapshot form — the payload is computed from the SAME committed
+//     render snapshot, then written; on flush the LAST write wins. This is the
+//     trap the shipped code hit — as a whole-value setState (record+finish),
+//     and as an updater whose FIELD payload was still snapshot-derived and
+//     replaced a field wholesale (the derive-at-render shape). Either way the
+//     second write clobbers the first.
 //
-//   • UPDATER form — setState(prev => next): the queued functions apply in order
-//     to the EVOLVING state, so each write sees the previous write's result.
-//     Writes compose; nothing is clobbered. This is the H1 conversion.
+//   • UPDATER form — the payload derives from the updater's `prev`, so queued
+//     writes apply to the EVOLVING state and compose; nothing is clobbered.
+//     This is the H1 conversion.
+//
+// NB: this suite proves the composition CONTRACT with the real reducers; it is
+// not a component-render harness, so it exercises the reducer layer, not the
+// wiring inside App/GrownUps/HighSchoolHome (those are covered by typecheck +
+// the existing feature suites).
 // ---------------------------------------------------------------------------
 
 type Write = AppState | ((s: AppState) => AppState)
@@ -151,9 +158,65 @@ describe('shape 3: record + finish same tick', () => {
     const out = store.flush().profiles.p1
     expect(out.totals.questionsAnswered).toBe(1) // answer kept
     expect(out.totals.sessions).toBe(1) // session bumped
-    // any auto mission item for the day is now checked off
+    // the grade-3 weekday template carries an auto math item; it must now be
+    // checked off (asserted unconditionally so a seeding regression fails here).
     const autoItems = out.missions[DAY].items.filter((i) => i.auto)
-    if (autoItems.length > 0) expect(autoItems.every((i) => i.done)).toBe(true)
+    expect(autoItems.length).toBeGreaterThan(0)
+    expect(autoItems.every((i) => i.done)).toBe(true)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Shape 4 — derive-at-render / wholesale field replace.
+// The subtle variant: the OUTER call is a functional updater, but the field
+// payload is still built from a render snapshot and replaces the field
+// wholesale (setCourses replaces prev.courses entirely). Two such edits in one
+// tick clobber unless the transform is applied to prev's OWN field. This is the
+// shape that was still live in HsGrownUps course edits / GrownUps TemplateEditor
+// before the fix.
+// ---------------------------------------------------------------------------
+describe('shape 4: derive-at-render wholesale replace', () => {
+  const twoCourses = (): CourseTrack[] => [
+    { id: 'c1', name: 'Alg', units: [{ id: 'u1', label: 'U1', done: false }] },
+    { id: 'c2', name: 'Geo', units: [{ id: 'u2', label: 'U2', done: false }] },
+  ]
+  const seed = (): AppState => {
+    const base = ensureHsDefaults(emptyProfile('p1', 'Teen', '10'))
+    const p: Profile = { ...base, courses: twoCourses() }
+    return { schemaVersion: 2, profiles: { p1: p }, activeProfileId: 'p1', parentPin: '' }
+  }
+  const mark = (courses: CourseTrack[], courseId: string): CourseTrack[] =>
+    courses.map((c) =>
+      c.id === courseId
+        ? { ...c, units: c.units.map((u) => ({ ...u, done: true })) }
+        : c,
+    )
+  const doneOf = (p: Profile, courseId: string) =>
+    (p.courses ?? []).find((c) => c.id === courseId)!.units.every((u) => u.done)
+
+  it('SNAPSHOT payload lets the second course edit clobber the first', () => {
+    const store = makeStore(seed())
+    const snap = store.snapshot().profiles.p1.courses ?? [] // captured at render
+    // both updaters ignore prev's courses and replay the transformed SNAPSHOT
+    store.setState((s) => patchProfile(s, 'p1', (prev) => setCourses(prev, mark(snap, 'c1'))))
+    store.setState((s) => patchProfile(s, 'p1', (prev) => setCourses(prev, mark(snap, 'c2'))))
+    const out = store.flush().profiles.p1
+    expect(doneOf(out, 'c2')).toBe(true)
+    expect(doneOf(out, 'c1')).toBe(false) // first edit reverted by the stale array
+  })
+
+  it('PREV-derived payload composes both course edits', () => {
+    const store = makeStore(seed())
+    // transform applied to prev's OWN courses — the H1 setCourseList shape
+    store.setState((s) =>
+      patchProfile(s, 'p1', (prev) => setCourses(prev, mark(prev.courses ?? [], 'c1'))),
+    )
+    store.setState((s) =>
+      patchProfile(s, 'p1', (prev) => setCourses(prev, mark(prev.courses ?? [], 'c2'))),
+    )
+    const out = store.flush().profiles.p1
+    expect(doneOf(out, 'c1')).toBe(true)
+    expect(doneOf(out, 'c2')).toBe(true)
   })
 })
 
