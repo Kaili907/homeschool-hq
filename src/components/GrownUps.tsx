@@ -17,6 +17,7 @@ import { getStars } from '../stars/stars'
 
 interface GrownUpsProps {
   state: AppState
+  /** App's React setState — accepts a value or a functional update (prev => next). */
   onStateChange: Dispatch<SetStateAction<AppState>>
   onClose: () => void
   onChangeParentPin: () => void
