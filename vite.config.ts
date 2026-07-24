@@ -6,6 +6,5 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   // fs.strict off: the dev server is launched via an 8.3 short path (spaces in the
   // real path), which Vite's default allow-list check doesn't recognize as the root.
-  // port 5175: this is the ms-star-economy worktree dev server (Session 2).
-  server: { port: 5175, strictPort: true, fs: { strict: false } },
+  server: { port: 5173, strictPort: true, fs: { strict: false } },
 })
