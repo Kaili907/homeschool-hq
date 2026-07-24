@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useTheme } from '../../theme'
 import { isoToday } from '../../appState'
 import { getReadingState, recordReadingSession, selectPassage } from '../../reading/fluency'
+import { autoCompleteReading } from '../../missions'
 import type { Passage, ReadingGrade } from '../../reading/passages'
 import type { Profile, ReadingSessionLog } from '../../types'
 import ReadingSession from './ReadingSession'
@@ -82,7 +83,10 @@ export default function ReadingView({
       muted={muted}
       fluencyCheck={fluencyCheck}
       onComplete={(log) => {
-        onProfileChange((prev) => recordReadingSession(prev, log))
+        // SE-B: fold the session into profile.reading, then auto-check the
+        // "📖 Reading" mission item for today (autoCompleteKind bumps the streak;
+        // App's attendance effect logs the day if this completes it).
+        onProfileChange((prev) => autoCompleteReading(recordReadingSession(prev, log)))
         setDone({ log, passage })
       }}
       onExit={onExit}

@@ -23,7 +23,8 @@ import {
   type PlacementSkillResult,
   type PlanItem,
 } from './engine'
-import { autoCompletePractice, ensureToday, setItemDone } from './missions'
+import { autoCompletePractice, autoCompleteTyping, ensureToday, isDayComplete, setItemDone } from './missions'
+import { recordAttendance } from './attendance/attendance'
 import { getVoicePrefs, isMuted, logWalkthrough, setMuted } from './tutor/tutorState'
 import {
   awardMissionEvents,
@@ -89,6 +90,19 @@ export default function App() {
   // M6: local-first cloud sync. Inert with no Supabase config; never blocks the UI.
   // Local writes above already persisted; this pushes async + pulls on open/reconnect.
   const sync = useSync(state, setState)
+
+  // SE-B attendance: when the signed-in girl's mission day is complete, append one
+  // attendance day (invisible to her, append-only). recordAttendance is idempotent
+  // — the date guard makes a re-fire a no-op — so this safely covers every path a
+  // day can complete (manual check, math practice, typing drill).
+  const attendanceId = state.activeProfileId
+  const attendanceTodayComplete = attendanceId
+    ? isDayComplete(state.profiles[attendanceId]?.missions[isoToday()])
+    : false
+  useEffect(() => {
+    if (!attendanceId || !attendanceTodayComplete) return
+    setState((s) => patchProfile(s, attendanceId, (p) => recordAttendance(p, true, isoToday())))
+  }, [attendanceId, attendanceTodayComplete])
 
   const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
   const tokens = THEMES[active?.theme ?? 'playful']
@@ -434,7 +448,15 @@ export default function App() {
             profile={active}
             muted={isMuted(state)}
             onDrillComplete={(result: DrillResult) =>
-              patchActive((prev) => recordDrill(prev, result))
+              patchActive((prev) => {
+                // record the drill, then flip the typing auto-item for today...
+                const withDrill = recordDrill(prev, result)
+                const after = autoCompleteTyping(withDrill)
+                // ...and pay the mission/weekly bonus if that completes the day (stars profiles only)
+                return starsEnabled(prev)
+                  ? awardMissionEvents(prev, after, getStarsConfig(state).rates)
+                  : after
+              })
             }
             onExit={() => setScreen({ kind: 'home' })}
           />

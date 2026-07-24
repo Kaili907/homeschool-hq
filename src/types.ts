@@ -47,12 +47,27 @@ export interface SkillState {
   lastSeen?: ISODate
 }
 
+/** ISO weekday number, Monday…Friday (school days). */
+export type Weekday = 1 | 2 | 3 | 4 | 5
+
+/**
+ * SE-B: which in-app activity flips an `auto` mission item.
+ *  - 'math'    — the daily math practice/placement session (legacy default; an
+ *                `auto` item with no autoKind is treated as 'math' for back-compat).
+ *  - 'typing'  — a finished 5-minute typing drill (SE-A trainer).
+ *  - 'reading'  — a finished MR reading-fluency session (ReadingView.onComplete).
+ *  - 'mindset'  — a reflected MM weekly lesson (MindsetLesson markReflected).
+ */
+export type AutoKind = 'math' | 'typing' | 'reading' | 'mindset'
+
 export interface MissionItem {
   id: string
   label: string
   done: boolean
   /** auto items flip when the linked in-app activity completes */
   auto?: boolean
+  /** which activity auto-checks this item; undefined + auto === 'math' (legacy). */
+  autoKind?: AutoKind
 }
 
 export interface MissionDay {
@@ -63,12 +78,55 @@ export interface MissionTemplateItem {
   id: string
   label: string
   auto?: boolean
+  /** which activity auto-checks this item; undefined + auto === 'math' (legacy). */
+  autoKind?: AutoKind
+  // ---- SE-B cadence (all optional; absent = appears every school day) ----
+  /** restrict this item to these weekdays of its base list (e.g. Handwriting [2,4] = Tue/Thu). */
+  days?: Weekday[]
+  /** show once per week, anchored mid-week (Current events 1×/wk). */
+  weeklyOnce?: boolean
+  /** only present in the fall term (Aug–Dec) — carries the senior SAT-prep block. */
+  season?: 'fall'
 }
 
 /** Per-profile mission schedule. Friday is the light-day variant. */
 export interface MissionTemplate {
   weekday: MissionTemplateItem[]
   friday: MissionTemplateItem[]
+}
+
+// ---------- SE-B attendance (additive, OPTIONAL; invisible to the kids) ----------
+
+/** One recorded school day: the date it happened + the hours credited at that time. */
+export interface AttendanceDay {
+  date: ISODate
+  /** hours credited for the day, snapshotted when the day was logged (append-only). */
+  hours: number
+}
+
+/**
+ * Per-profile attendance. Auto-recorded when a mission day completes; the log is
+ * append-only (a school day that happened is never un-happened). MP absorbs this later.
+ */
+export interface AttendanceState {
+  /** Dad's per-girl hours/day override; undefined = estimate from her template block count. */
+  hoursPerDay?: number
+  /** append-only, at most one row per calendar date. */
+  log: AttendanceDay[]
+}
+
+// ---------- SE-B service hours (teens; additive, OPTIONAL) ----------
+
+/** One logged community-service entry. Locked once Dad approves it. */
+export interface ServiceEntry {
+  id: string
+  date: ISODate
+  org: string
+  hours: number
+  note: string
+  /** Dad-approved → the entry is locked (read-only to the teen) and counts as official. */
+  approved: boolean
+  createdAt: string
 }
 
 export interface Streaks {
@@ -252,6 +310,12 @@ export interface Profile {
   // ---------- MR reading fluency (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
   /** per-profile read-aloud fluency log + calibration; undefined = fresh (see reading/fluency defaultReadingState). */
   reading?: ReadingState
+
+  // ---------- SE-B attendance + service hours (additive, OPTIONAL; no schemaVersion bump) ----------
+  /** auto-recorded school days; undefined until her first mission day completes. */
+  attendance?: AttendanceState
+  /** teens' community-service log; undefined until her first entry. */
+  serviceLog?: ServiceEntry[]
 
   // ---------- MT-2/3 conversational tutor (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
   /** per-question tutor chat transcripts; undefined until her first chat. Auto-pruned after 60 days. */

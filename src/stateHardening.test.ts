@@ -158,11 +158,14 @@ describe('shape 3: record + finish same tick', () => {
     const out = store.flush().profiles.p1
     expect(out.totals.questionsAnswered).toBe(1) // answer kept
     expect(out.totals.sessions).toBe(1) // session bumped
-    // the grade-3 weekday template carries an auto math item; it must now be
-    // checked off (asserted unconditionally so a seeding regression fails here).
-    const autoItems = out.missions[DAY].items.filter((i) => i.auto)
-    expect(autoItems.length).toBeGreaterThan(0)
-    expect(autoItems.every((i) => i.done)).toBe(true)
+    // the grade-3 weekday template carries a math auto item; a finished practice
+    // must check it off. (SE-B: math practice flips only MATH autos — the typing
+    // auto item is left for its own drill, so assert against the math kind.)
+    const mathAutos = out.missions[DAY].items.filter((i) => i.auto && (i.autoKind ?? 'math') === 'math')
+    expect(mathAutos.length).toBeGreaterThan(0)
+    expect(mathAutos.every((i) => i.done)).toBe(true)
+    // the typing auto item exists but is NOT flipped by a math session
+    expect(out.missions[DAY].items.find((i) => i.autoKind === 'typing')?.done).toBe(false)
   })
 })
 

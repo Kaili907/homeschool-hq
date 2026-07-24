@@ -5,6 +5,7 @@ import { useTheme } from '../../theme'
 import { cancelSpeech, encodeVoiceRef, speak } from '../../tutor/voice'
 import { defaultRate, resolveSlotRef } from '../../tutor/tutorState'
 import { mindsetWeek } from '../../mindset/content'
+import { autoCompleteMindset } from '../../missions'
 import {
   bandReadAloud,
   bandUsesJournal,
@@ -204,11 +205,11 @@ export function MindsetLesson({ profile, startDate, muted, onPatch, onExit }: Pr
             setDraft={setDraft}
             onEmoji={(e) => {
               setJournalText(profile.id, lesson.week, e) // text → local store only
-              onPatch((p) => markReflected(p, lesson.week, today)) // completion signal → profile
+              onPatch((p) => autoCompleteMindset(markReflected(p, lesson.week, today))) // completion signal → profile
             }}
             onWord={(w) => {
               setJournalText(profile.id, lesson.week, w)
-              onPatch((p) => markReflected(p, lesson.week, today))
+              onPatch((p) => autoCompleteMindset(markReflected(p, lesson.week, today)))
             }}
             onDraftChange={(text) => {
               setDraft(text)
@@ -216,7 +217,7 @@ export function MindsetLesson({ profile, startDate, muted, onPatch, onExit }: Pr
             }}
             onDone={() => {
               setJournalText(profile.id, lesson.week, draft)
-              onPatch((p) => markReflected(p, lesson.week, today))
+              onPatch((p) => autoCompleteMindset(markReflected(p, lesson.week, today)))
             }}
           />
         )}

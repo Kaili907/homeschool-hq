@@ -19,6 +19,7 @@ import {
   toggleCourseUnit,
   updateCollegeTask,
 } from '../hs/hsState'
+import { ServiceHoursCard } from './service/ServiceHoursCard'
 
 const PRACTICE_TOTAL = 8
 const ALGEBRA_TOTAL = 5
@@ -252,6 +253,11 @@ export function HighSchoolHome({
 
       {/* MM mindset — weekly lesson + habit card (teens: core + extension + journal) */}
       <MindsetCard profile={profile} startDate={mindsetStartDate} onOpen={onOpenMindset} />
+
+      {/* SE-B service-hours log (teens) */}
+      <div className="mt-6">
+        <ServiceHoursCard profile={profile} onProfileChange={onProfileChange} />
+      </div>
 
       {/* Geometry practice sets */}
       <h2 className={`mt-8 mb-3 text-xl font-bold ${t.heading}`}>Geometry practice</h2>

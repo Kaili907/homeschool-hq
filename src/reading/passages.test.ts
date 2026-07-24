@@ -3,25 +3,25 @@ import { PASSAGES, parsePassageBank, passagesForGrade, passageById } from './pas
 
 /**
  * Acceptance: the passage parser ingests the bank format; the delivered Q1 bank
- * has the promised shape (24 passages, 8 per grade) and every declared word count
- * matches the actual body — "ids / grade / word counts verbatim, count-verify 24."
+ * has the promised shape (48 passages, 16 per grade after the SE-B addendum added
+ * a second set of 8/grade) and every declared word count matches the actual body.
  */
 
 describe('Q1 passage bank', () => {
-  it('parses exactly 24 passages', () => {
-    expect(PASSAGES.length).toBe(24)
+  it('parses exactly 48 passages', () => {
+    expect(PASSAGES.length).toBe(48)
   })
 
-  it('has 8 passages per grade (3, 4, 6)', () => {
-    expect(passagesForGrade('3').length).toBe(8)
-    expect(passagesForGrade('4').length).toBe(8)
-    expect(passagesForGrade('6').length).toBe(8)
+  it('has 16 passages per grade (3, 4, 6)', () => {
+    expect(passagesForGrade('3').length).toBe(16)
+    expect(passagesForGrade('4').length).toBe(16)
+    expect(passagesForGrade('6').length).toBe(16)
   })
 
   it('uses sequential zero-padded ids per grade', () => {
     for (const g of ['3', '4', '6'] as const) {
       const ids = passagesForGrade(g).map((p) => p.id)
-      const expected = Array.from({ length: 8 }, (_, k) => `g${g}-${String(k + 1).padStart(2, '0')}`)
+      const expected = Array.from({ length: 16 }, (_, k) => `g${g}-${String(k + 1).padStart(2, '0')}`)
       expect(ids).toEqual(expected)
     }
   })

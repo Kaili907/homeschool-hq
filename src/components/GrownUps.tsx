@@ -8,7 +8,7 @@ import {
   readLocalStorageKey,
 } from '../appState'
 import { emptyProfile, SCHEMA_VERSION } from '../migration'
-import { defaultTemplateFor, isDayComplete, templateFor } from '../missions'
+import { applyDefaultsToProfile, defaultTemplateFor, isDayComplete, templateFor } from '../missions'
 import { AssessmentAdmin } from './assessment/AssessmentAdmin'
 import { HsGrownUps } from './HsGrownUps'
 import { NeedsDadFlags, TutorControls } from './TutorPanel'
@@ -20,6 +20,8 @@ import { getStars } from '../stars/stars'
 import { ReadingGrownUps } from './reading/ReadingGrownUps'
 import { MindsetProfilePanel, MindsetStartDate } from './mindset/MindsetGrownUps'
 import { clearJournal } from '../mindset/journalStore'
+import { AttendancePanel } from './attendance/AttendancePanel'
+import { ServiceHoursAdmin } from './service/ServiceHoursAdmin'
 
 interface GrownUpsProps {
   state: AppState
@@ -35,7 +37,7 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
   const [msg, setMsg] = useState('')
   const [expanded, setExpanded] = useState<{
     id: string
-    tab: 'template' | 'history' | 'assessments' | 'hs' | 'stars' | 'reading' | 'mindset'
+    tab: 'template' | 'history' | 'attendance' | 'service' | 'assessments' | 'hs' | 'stars' | 'reading' | 'mindset'
   } | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const backupKeys = listV1BackupKeys()
@@ -156,6 +158,32 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
                   >
                     Mindset 🧠
                   </button>
+                  <button
+                    onClick={() =>
+                      setExpanded(
+                        expanded?.id === p.id && expanded.tab === 'attendance'
+                          ? null
+                          : { id: p.id, tab: 'attendance' },
+                      )
+                    }
+                    className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                  >
+                    Attendance
+                  </button>
+                  {(p.grade === '10' || p.grade === '12') && (
+                    <button
+                      onClick={() =>
+                        setExpanded(
+                          expanded?.id === p.id && expanded.tab === 'service'
+                            ? null
+                            : { id: p.id, tab: 'service' },
+                        )
+                      }
+                      className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                    >
+                      Service 🤝
+                    </button>
+                  )}
                   {/* playful always; grade-6 cool always (so Dad can reach the opt-in toggle); never teens */}
                   {(p.theme === 'playful' || p.theme === 'cool') && (
                     <button
@@ -242,6 +270,12 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
               )}
               {expanded?.id === p.id && expanded.tab === 'history' && (
                 <MissionHistory profile={p} />
+              )}
+              {expanded?.id === p.id && expanded.tab === 'attendance' && (
+                <AttendancePanel profile={p} onChange={(update) => patchProfile(p.id, update)} />
+              )}
+              {expanded?.id === p.id && expanded.tab === 'service' && (
+                <ServiceHoursAdmin profile={p} onChange={(update) => patchProfile(p.id, update)} />
               )}
               {expanded?.id === p.id && expanded.tab === 'assessments' && (
                 <AssessmentAdmin
@@ -366,8 +400,20 @@ function TemplateEditor({
   onChange: (update: (prev: Profile) => Profile) => void
 }) {
   const template = templateFor(profile) // render/read view only
+  const [note, setNote] = useState('')
   // Whole-template replace (reset button) — prev-independent by design.
   const set = (t: MissionTemplate) => onChange((prev) => ({ ...prev, template: t }))
+
+  // Merge in any new grade-default items she's missing, keeping Dad's edits.
+  const applyDefaults = () => {
+    const preview = applyDefaultsToProfile(profile)
+    onChange((prev) => applyDefaultsToProfile(prev).profile)
+    setNote(
+      preview.added.length
+        ? `Added ${preview.added.length} new default item${preview.added.length === 1 ? '' : 's'}: ${preview.added.join(', ')}.`
+        : 'Already has every default item — nothing added.',
+    )
+  }
 
   // Per-list edit derives the base template from prev, not the render snapshot,
   // so two list edits in one tick compose instead of the second replaying a
@@ -455,16 +501,26 @@ function TemplateEditor({
         <span className="text-sm font-bold text-slate-700">
           Mission template — changes apply from the next new day
         </span>
-        <button
-          onClick={() => {
-            if (window.confirm('Replace this template with the grade default?'))
-              set(defaultTemplateFor(profile.grade))
-          }}
-          className="rounded-lg border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-50"
-        >
-          Reset to default
-        </button>
+        <span className="flex gap-2">
+          <button
+            onClick={applyDefaults}
+            className="rounded-lg border border-sky-300 bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700 hover:bg-sky-100"
+            title="Add any new default items she's missing, without touching your edits"
+          >
+            Apply new defaults
+          </button>
+          <button
+            onClick={() => {
+              if (window.confirm('Replace this template with the grade default? Your edits will be lost.'))
+                set(defaultTemplateFor(profile.grade))
+            }}
+            className="rounded-lg border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+          >
+            Reset to default
+          </button>
+        </span>
       </div>
+      {note && <div className="mb-2 rounded-lg bg-sky-50 p-2 text-xs font-semibold text-sky-800">{note}</div>}
       <div className="flex flex-col gap-4 sm:flex-row">
         {renderList('weekday', 'Monday–Thursday')}
         {renderList('friday', 'Friday (light day)')}
