@@ -52,6 +52,8 @@ import { TypingTrainer } from './components/typing/TypingTrainer'
 import { recordDrill } from './typing/typingState'
 import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
+import { MindsetLesson } from './components/mindset/MindsetLesson'
+import { MindsetCard } from './components/mindset/MindsetCard'
 
 type Screen =
   | { kind: 'picker' }
@@ -69,6 +71,7 @@ type Screen =
   | { kind: 'prizeShop' }
   | { kind: 'typing' }
   | { kind: 'reading' }
+  | { kind: 'mindset' }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
@@ -399,6 +402,8 @@ export default function App() {
             onOpenAssessment={(testId) => setScreen({ kind: 'assessment', testId })}
             onOpenTyping={() => setScreen({ kind: 'typing' })}
             onOpenReading={() => setScreen({ kind: 'reading' })}
+            onOpenMindset={() => setScreen({ kind: 'mindset' })}
+            mindsetStartDate={state.mindsetStartDate}
           />
         )}
 
@@ -408,6 +413,17 @@ export default function App() {
             profile={active}
             muted={isMuted(state)}
             onProfileChange={patchActive}
+            onExit={() => setScreen({ kind: 'home' })}
+          />
+        )}
+
+        {/* MM mindset — the quiet corner; all grades, calm and minimal */}
+        {screen.kind === 'mindset' && (
+          <MindsetLesson
+            profile={active}
+            startDate={state.mindsetStartDate}
+            muted={isMuted(state)}
+            onPatch={patchActive}
             onExit={() => setScreen({ kind: 'home' })}
           />
         )}
@@ -443,6 +459,8 @@ function Home({
   onOpenAssessment,
   onOpenTyping,
   onOpenReading,
+  onOpenMindset,
+  mindsetStartDate,
 }: {
   profile: Profile
   muted: boolean
@@ -456,6 +474,8 @@ function Home({
   onOpenAssessment: (testId: string) => void
   onOpenTyping: () => void
   onOpenReading: () => void
+  onOpenMindset: () => void
+  mindsetStartDate: string | undefined
 }) {
   const t = useTheme()
   const assessmentCards = assignedOpenTests(profile)
@@ -474,6 +494,8 @@ function Home({
         onToggleItem={onToggleItem}
         assessmentCards={assessmentCards}
         onOpenAssessment={onOpenAssessment}
+        onOpenMindset={onOpenMindset}
+        mindsetStartDate={mindsetStartDate}
       />
     )
   }
@@ -577,6 +599,9 @@ function Home({
           </span>
         </span>
       </button>
+
+      {/* MM mindset — weekly lesson + habit card (quiet corner; renders only once unlocked) */}
+      <MindsetCard profile={profile} startDate={mindsetStartDate} onOpen={onOpenMindset} />
 
       {/* SE-A typing trainer entry — one card, opens the 5-minute drill ladder */}
       <button

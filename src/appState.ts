@@ -1,6 +1,7 @@
 import type { AppState, Profile, SkillState, SkillStatus } from './types'
 import type { SkillId } from './skills'
 import { defaultAppState, isAppState, migrateV1ToV2 } from './migration'
+import { sanitizeStateForExport } from './mindset/mindset'
 
 const V2_KEY = 'homeschool-hq:app:v2'
 const V1_KEY = 'homeschool-hq:profile:v1'
@@ -167,11 +168,18 @@ export function downloadJson(filename: string, text: string): void {
   URL.revokeObjectURL(url)
 }
 
+/**
+ * The exact JSON the standard export-all writes. MM privacy (load-bearing): every
+ * profile's private mindset reflection text is stripped here — Dad's backup carries
+ * completion status, never what she wrote. This is the ONLY serializer the export
+ * button uses; keep it that way.
+ */
+export function serializeAllBackup(state: AppState): string {
+  return JSON.stringify(sanitizeStateForExport(state), null, 2)
+}
+
 export function exportAllBackup(state: AppState): void {
-  downloadJson(
-    `homeschool-hq-all-profiles-${isoToday()}.json`,
-    JSON.stringify(state, null, 2),
-  )
+  downloadJson(`homeschool-hq-all-profiles-${isoToday()}.json`, serializeAllBackup(state))
 }
 
 export type ImportResult =

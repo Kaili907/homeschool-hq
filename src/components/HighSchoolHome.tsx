@@ -3,6 +3,7 @@ import type { CourseTrack, Difficulty, Profile } from '../types'
 import { finishSession, isoToday } from '../appState'
 import { useTheme } from '../theme'
 import { MissionCard } from './MissionCard'
+import { MindsetCard } from './mindset/MindsetCard'
 import { HsQuizRunner, type HsQuizRecord } from './HsQuizRunner'
 import { ALGEBRA_TOPIC_IDS, GEOMETRY_UNITS, GEOMETRY_UNIT_IDS } from '../hs/hsCatalog'
 import { geometryFresh } from '../hs/geometryGen'
@@ -42,6 +43,8 @@ interface Props {
   // the same assigned-assessment cards MA renders on the kids' home.
   assessmentCards: HomeAssessmentCard[]
   onOpenAssessment: (testId: string) => void
+  onOpenMindset: () => void
+  mindsetStartDate: string | undefined
 }
 
 const rnd = <T,>(arr: readonly T[]): T => arr[Math.floor(Math.random() * arr.length)]
@@ -71,6 +74,8 @@ export function HighSchoolHome({
   onToggleItem,
   assessmentCards,
   onOpenAssessment,
+  onOpenMindset,
+  mindsetStartDate,
 }: Props) {
   const t = useTheme()
   const [screen, setScreen] = useState<HsScreen>({ kind: 'home' })
@@ -244,6 +249,9 @@ export function HighSchoolHome({
       <div className="mt-6">
         <MissionCard profile={profile} onToggle={onToggleItem} />
       </div>
+
+      {/* MM mindset — weekly lesson + habit card (teens: core + extension + journal) */}
+      <MindsetCard profile={profile} startDate={mindsetStartDate} onOpen={onOpenMindset} />
 
       {/* Geometry practice sets */}
       <h2 className={`mt-8 mb-3 text-xl font-bold ${t.heading}`}>Geometry practice</h2>
