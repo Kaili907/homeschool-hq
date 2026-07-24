@@ -246,14 +246,42 @@ export interface Profile {
   coolStars?: boolean
 }
 
+/**
+ * MT-V voice providers. `browser` = system speechSynthesis (always available, the
+ * fallback). `elevenlabs` = premium REST voices. Azure may join later for the
+ * `japanese` slot (see Voice-Addendum v2.5); the enum is intentionally open to grow.
+ */
+export type VoiceProviderId = 'elevenlabs' | 'browser'
+
+/**
+ * MT-V per-subject voice slots. `default` backs every unset slot (fall-through);
+ * `japanese` exists now but is unused until the hiragana trainer ships.
+ */
+export type VoiceSlot = 'mathTutor' | 'mindset' | 'japanese' | 'default'
+
+/** One mapped voice: which provider + its ref (ElevenLabs voice id, or a browser voiceURI) + a friendly label. */
+export interface VoiceRef {
+  provider: VoiceProviderId
+  /** ElevenLabs voice id when provider==='elevenlabs'; SpeechSynthesisVoice.voiceURI when 'browser'. */
+  ref: string
+  /** Dad-facing label shown in the grid (e.g. "Rachel — warm"). */
+  label: string
+}
+
 /** MT-1 per-profile voice settings. All optional so an old profile just uses defaults. */
 export interface TutorPrefs {
-  /** SpeechSynthesisVoice.voiceURI the family chose for this girl. */
+  /** SpeechSynthesisVoice.voiceURI the family chose for this girl (MT-1 single voice). */
   voiceURI?: string
   /** playback rate; littles default slower. */
   rate?: number
   /** teens are text-first: voice only plays if they opt in. */
   voiceOptIn?: boolean
+  /**
+   * MT-V per-subject voice map (additive; no schema bump). Unset slots fall
+   * through to `default`, then to the legacy `voiceURI` (browser), then the
+   * browser default. An MT-1 single voice migrates into the `default` slot.
+   */
+  voiceMap?: Partial<Record<VoiceSlot, VoiceRef>>
 }
 
 /** One "Needs Dad" flag: the skill is gated from practice until Dad clears it. */

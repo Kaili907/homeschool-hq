@@ -1,5 +1,6 @@
-import type { AppState, Grade, NeedsDadFlag, Profile, WalkthroughEvent } from '../types'
+import type { AppState, Grade, NeedsDadFlag, Profile, VoiceRef, VoiceSlot, WalkthroughEvent } from '../types'
 import type { SkillId } from '../skills'
+import { encodeVoiceRef } from './voice'
 
 /**
  * MT-1 tutor state: pure helpers over the additive optional Profile/AppState
@@ -35,7 +36,10 @@ export function getVoicePrefs(p: Profile): ResolvedVoicePrefs {
   const t = p.tutor ?? {}
   const voiceOptIn = t.voiceOptIn ?? false
   return {
-    voiceURI: t.voiceURI,
+    // MT-V: the math tutor speaks the walkthrough, so resolve that slot (→ default →
+    // legacy voiceURI) and encode the provider into voiceURI. Walkthrough/QuizSession
+    // forward this untouched; the speak-layer adapter decodes it (`el:` = ElevenLabs).
+    voiceURI: encodeVoiceRef(resolveSlotRef(p, 'mathTutor')),
     rate: t.rate ?? defaultRate(p.grade),
     voiceOptIn,
     enabled: isTeen(p.grade) ? voiceOptIn : true,
@@ -44,6 +48,78 @@ export function getVoicePrefs(p: Profile): ResolvedVoicePrefs {
 
 export function setVoiceURI(p: Profile, voiceURI: string | undefined): Profile {
   return { ...p, tutor: { ...p.tutor, voiceURI } }
+}
+
+// ---------- MT-V per-girl, per-subject voice map ----------
+
+/** Slot metadata for the Grown-Ups grid (order + labels). */
+export const VOICE_SLOTS: { slot: VoiceSlot; label: string; hint: string }[] = [
+  { slot: 'mathTutor', label: 'Math tutor', hint: 'walkthroughs & daily practice' },
+  { slot: 'mindset', label: 'Mindset', hint: 'read-aloud lessons (arrives with MM)' },
+  { slot: 'japanese', label: 'Japanese', hint: 'hiragana trainer (coming soon)' },
+  { slot: 'default', label: 'Default', hint: 'backs every unset slot' },
+]
+
+/** The voice mapped DIRECTLY to a slot (no fall-through) — for editing UI. */
+export function getSlotRef(p: Profile, slot: VoiceSlot): VoiceRef | undefined {
+  return p.tutor?.voiceMap?.[slot]
+}
+
+/**
+ * The voice a slot RESOLVES to, applying fall-through:
+ * slot → `default` slot → legacy MT-1 single voice (browser) → undefined (browser default).
+ */
+export function resolveSlotRef(p: Profile, slot: VoiceSlot): VoiceRef | undefined {
+  const map = p.tutor?.voiceMap
+  const direct = map?.[slot]
+  if (direct) return direct
+  if (slot !== 'default' && map?.default) return map.default
+  const legacy = p.tutor?.voiceURI
+  if (legacy) return { provider: 'browser', ref: legacy, label: 'System voice' }
+  return undefined
+}
+
+/** Set (or clear, when `ref` is undefined) one slot. Additive — no schema bump. */
+export function setSlotRef(p: Profile, slot: VoiceSlot, ref: VoiceRef | undefined): Profile {
+  const map: Partial<Record<VoiceSlot, VoiceRef>> = { ...(p.tutor?.voiceMap ?? {}) }
+  if (ref && ref.ref.trim()) map[slot] = ref
+  else delete map[slot]
+  const nextMap = Object.keys(map).length ? map : undefined
+  return { ...p, tutor: { ...p.tutor, voiceMap: nextMap } }
+}
+
+/**
+ * Migrate an MT-1 single voice into the `default` slot (once). No-op if there is
+ * no legacy voice or a `default` slot already exists. Keeps `voiceURI` in place so
+ * resolution stays correct even before this runs.
+ */
+export function migrateLegacyVoiceToDefault(p: Profile): Profile {
+  const t = p.tutor
+  if (!t?.voiceURI || t.voiceMap?.default) return p
+  return setSlotRef(p, 'default', { provider: 'browser', ref: t.voiceURI, label: 'System voice' })
+}
+
+/**
+ * Distinct ElevenLabs (encoded voiceRef, rate) pairs currently mapped to a spoken
+ * slot across the family — the set "Download voices for offline" pre-warms.
+ */
+export function prewarmTargets(state: AppState): { voiceRef: string; rate: number; label: string }[] {
+  const seen = new Set<string>()
+  const out: { voiceRef: string; rate: number; label: string }[] = []
+  for (const p of Object.values(state.profiles)) {
+    const rate = getVoicePrefs(p).rate
+    for (const slot of ['mathTutor', 'default'] as VoiceSlot[]) {
+      const ref = resolveSlotRef(p, slot)
+      if (!ref || ref.provider !== 'elevenlabs') continue
+      const encoded = encodeVoiceRef(ref)
+      if (!encoded) continue
+      const dkey = `${encoded}|${rate}`
+      if (seen.has(dkey)) continue
+      seen.add(dkey)
+      out.push({ voiceRef: encoded, rate, label: ref.label })
+    }
+  }
+  return out
 }
 
 export function setRate(p: Profile, rate: number): Profile {
