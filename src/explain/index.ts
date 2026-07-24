@@ -4,8 +4,10 @@ import { answerOf, cleanPrompt, type Explainer, type Explanation } from './types
 import { EXPLAINERS3 } from './explainers'
 import { EXPLAINERS4 } from './explainers4'
 import { EXPLAINERS6 } from './explainers6'
+import { diagnose } from './diagnose'
 
-export type { Explanation, ExplainStep, Explainer } from './types'
+export type { Explanation, ExplainStep, Explainer, VizStep } from './types'
+export { diagnose } from './diagnose'
 
 /** Every grade 3/4/6 skill maps to a scripted walkthrough. */
 export const EXPLAINERS: Partial<Record<SkillId, Explainer>> = {
@@ -34,10 +36,18 @@ function fallback(q: Question): Explanation {
   }
 }
 
-/** Build the walkthrough for a concrete question, with its real numbers filled in. */
-export function explain(q: Question): Explanation {
+/**
+ * Build the walkthrough for a concrete question, with its real numbers filled in.
+ * When `chosenIndex` is a wrong answer that matches a known error pattern (MT-1V),
+ * a kind, specific diagnosis line is prepended as the opening step — otherwise the
+ * explainer's own concept-first opener stands.
+ */
+export function explain(q: Question, chosenIndex?: number): Explanation {
   const fn = EXPLAINERS[q.skillId]
-  const out = fn ? fn(q) : fallback(q)
-  // never hand back an empty step list
-  return out.steps.length ? out : fallback(q)
+  const base = fn ? fn(q) : fallback(q)
+  const out = base.steps.length ? base : fallback(q)
+  if (chosenIndex === undefined) return out
+  const line = diagnose(q, chosenIndex)
+  if (!line) return out
+  return { steps: [{ say: line }, ...out.steps] }
 }
