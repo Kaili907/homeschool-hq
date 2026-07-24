@@ -56,6 +56,7 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { ensureGrade5Profiles, ensureGrade5Template } from './grade5Profile'
 
 type Screen =
   | { kind: 'picker' }
@@ -78,7 +79,7 @@ type Screen =
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
-  const [state, setState] = useState<AppState>(loaded.state)
+  const [state, setState] = useState<AppState>(() => ensureGrade5Profiles(loaded.state))
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
   const seenRef = useRef(new Set<string>())
@@ -411,7 +412,7 @@ export default function App() {
           <Home
             profile={active}
             muted={isMuted(state)}
-            onEnsureToday={() => patchActive((p) => ensureToday(p))}
+            onEnsureToday={() => patchActive((p) => ensureToday(ensureGrade5Template(p)))}
             onToggleItem={(itemId, done) =>
               patchActive((p) => {
                 const after = setItemDone(p, itemId, done)
@@ -514,7 +515,11 @@ function Home({
 }) {
   const t = useTheme()
   const assessmentCards = assignedOpenTests(profile)
-  const isTrainerReady = profile.grade === '3' || profile.grade === '4' || profile.grade === '6'
+  const isTrainerReady =
+    profile.grade === '3' ||
+    profile.grade === '4' ||
+    profile.grade === '5' ||
+    profile.grade === '6'
   const hasToday = !!profile.missions[isoToday()]
   useEffect(() => {
     if (!hasToday) onEnsureToday()

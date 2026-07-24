@@ -1,4 +1,5 @@
 import type { Grade } from './types'
+import { SKILLS5 } from './skills5'
 
 export type SkillId =
   // grade 3
@@ -25,6 +26,18 @@ export type SkillId =
   | 'convert4'
   | 'angles4'
   | 'word4'
+  // grade 5
+  | 'mult5'
+  | 'div5'
+  | 'fracAdd5'
+  | 'fracSub5'
+  | 'fracMult5'
+  | 'fracDiv5'
+  | 'decOps5'
+  | 'placePow5'
+  | 'volume5'
+  | 'coord5'
+  | 'orderOps5'
   // grade 6
   | 'ratio6'
   | 'percent6'
@@ -96,6 +109,8 @@ export function skillsForGrade(grade: Grade): SkillMeta[] {
       return SKILLS3
     case '4':
       return SKILLS4
+    case '5':
+      return SKILLS5
     case '6':
       return SKILLS6
     default:
@@ -103,7 +118,7 @@ export function skillsForGrade(grade: Grade): SkillMeta[] {
   }
 }
 
-const ALL_SKILLS = [...SKILLS3, ...SKILLS4, ...SKILLS6]
+const ALL_SKILLS = [...SKILLS3, ...SKILLS4, ...SKILLS5, ...SKILLS6]
 
 export const SKILL_BY_ID: Record<SkillId, SkillMeta> = Object.fromEntries(
   ALL_SKILLS.map((s) => [s.id, s]),

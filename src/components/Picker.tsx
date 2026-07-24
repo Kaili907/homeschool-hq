@@ -3,6 +3,7 @@ import type { AppState, Grade, Profile } from '../types'
 const GRADE_EMOJI: Record<Grade, string> = {
   '3': '🦄',
   '4': '🦊',
+  '5': '🚀',
   '6': '🎨',
   '10': '📘',
   '12': '🎓',
@@ -11,6 +12,7 @@ const GRADE_EMOJI: Record<Grade, string> = {
 const GRADE_LABEL: Record<Grade, string> = {
   '3': '3rd grade',
   '4': '4th grade',
+  '5': '5th grade',
   '6': '6th grade',
   '10': '10th grade',
   '12': '12th grade',

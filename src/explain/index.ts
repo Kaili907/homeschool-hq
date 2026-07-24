@@ -3,20 +3,22 @@ import type { SkillId } from '../skills'
 import { answerOf, cleanPrompt, type Explainer, type Explanation } from './types'
 import { EXPLAINERS3 } from './explainers'
 import { EXPLAINERS4 } from './explainers4'
+import { EXPLAINERS5 } from './explainers5'
 import { EXPLAINERS6 } from './explainers6'
 import { diagnose } from './diagnose'
 
 export type { Explanation, ExplainStep, Explainer, VizStep } from './types'
 export { diagnose } from './diagnose'
 
-/** Every grade 3/4/6 skill maps to a scripted walkthrough. */
+/** Every grade 3/4/5/6 skill maps to a scripted walkthrough. */
 export const EXPLAINERS: Partial<Record<SkillId, Explainer>> = {
   ...EXPLAINERS3,
   ...EXPLAINERS4,
+  ...EXPLAINERS5,
   ...EXPLAINERS6,
 }
 
-/** Skill ids that ship a walkthrough (the g3/4/6 coverage set). */
+/** Skill ids that ship a walkthrough (the g3/4/5/6 coverage set). */
 export const EXPLAINABLE_SKILL_IDS = Object.keys(EXPLAINERS) as SkillId[]
 
 export const hasExplainer = (skillId: SkillId): boolean => skillId in EXPLAINERS

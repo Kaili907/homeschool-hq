@@ -12,6 +12,7 @@ import {
   type Gen,
 } from './genUtils'
 import { GENERATORS4 } from './generators4'
+import { GENERATORS5 } from './generators5'
 import { GENERATORS6 } from './generators6'
 
 // ---------- grade 3 generators ----------
@@ -505,12 +506,13 @@ const GENERATORS: Record<SkillId, Gen> = {
   measure,
   areaPerim,
   word2,
-  // grades 4 and 6
+  // grades 4, 5 and 6
   ...GENERATORS4,
+  ...GENERATORS5,
   ...GENERATORS6,
 }
 
-/** Every skill id with a registered question generator (the g3/4/6 trainer set). */
+/** Every skill id with a registered question generator (the g3/4/5/6 trainer set). */
 export const GENERATOR_SKILL_IDS = Object.keys(GENERATORS) as SkillId[]
 
 export function generateQuestion(skillId: SkillId, difficulty: Difficulty): Question {

@@ -9,8 +9,8 @@ const RUNS_PER_CELL = 60
 const PLACEHOLDER = /\$\{|[{}`]|undefined|NaN/
 
 describe('MT-1 explain() coverage', () => {
-  it('covers exactly the registered g3/4/6 generators (33 skills)', () => {
-    expect(GENERATOR_SKILL_IDS).toHaveLength(33)
+  it('covers exactly the registered g3/4/5/6 generators (44 skills)', () => {
+    expect(GENERATOR_SKILL_IDS).toHaveLength(44)
     // every registered generator has an explainer…
     for (const id of GENERATOR_SKILL_IDS) {
       expect(hasExplainer(id)).toBe(true)

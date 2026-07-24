@@ -36,7 +36,7 @@ export type SkillStatus = 'mastered' | 'developing' | 'not-started'
 
 export type ISODate = string // YYYY-MM-DD
 
-export type Grade = '3' | '4' | '6' | '10' | '12'
+export type Grade = '3' | '4' | '5' | '6' | '10' | '12'
 export type ThemeId = 'playful' | 'cool' | 'clean'
 
 export interface SkillState {
