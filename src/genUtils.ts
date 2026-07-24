@@ -2,18 +2,30 @@ import type { Difficulty, Question } from './types'
 
 export type Gen = (d: Difficulty) => Question
 
+// ---------- injectable RNG (default Math.random; tests override for determinism) ----------
+
+// All randomness in the generators flows through these helpers, so a test can make
+// generation deterministic via setRng() without touching Math.random globally. The
+// unseeded fuzz suites never call setRng, so their coverage is unchanged.
+let _rng: () => number = Math.random
+
+/** Override the module RNG. Pass a fn for deterministic generation; null restores Math.random. */
+export function setRng(fn: (() => number) | null): void {
+  _rng = fn ?? Math.random
+}
+
 // ---------- random ----------
 
 export const ri = (min: number, max: number) =>
-  Math.floor(Math.random() * (max - min + 1)) + min
+  Math.floor(_rng() * (max - min + 1)) + min
 
 export const pick = <T,>(arr: readonly T[]): T =>
-  arr[Math.floor(Math.random() * arr.length)]
+  arr[Math.floor(_rng() * arr.length)]
 
 export function shuffle<T>(arr: readonly T[]): T[] {
   const a = [...arr]
   for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
+    const j = Math.floor(_rng() * (i + 1))
     ;[a[i], a[j]] = [a[j], a[i]]
   }
   return a
@@ -34,16 +46,66 @@ export function finishChoices(
     if (d.trim() !== '') set.add(d)
     guard++
   }
-  // Practically unreachable fallback so we never hang with < count choices.
-  let filler = 1
-  while (set.size < count) set.add(`${correct}?${filler++}`)
+  // Fallback when the distractor generator can't supply enough distinct options
+  // (a collapsed pool — e.g. a degenerate coordinate midpoint). Pad with genuinely
+  // distinct, VALID-FORM distractors derived by perturbing the answer — NEVER a
+  // malformed "correct?N" tag, never the correct answer, never a duplicate.
+  let mag = 1
+  while (set.size < count && mag <= 5000) {
+    const variants = perturbVariants(correct, mag)
+    if (variants.length === 0) {
+      // No numeric component to perturb. Unreachable for real generators (their
+      // text answers always ship a full distractor pool), but stay safe: add a
+      // distinct plain number rather than ever emitting a malformed choice.
+      set.add(String(1000 + mag))
+    } else {
+      for (const cand of variants) {
+        if (cand !== correct && !set.has(cand)) {
+          set.add(cand)
+          if (set.size >= count) break
+        }
+      }
+    }
+    mag++
+  }
   const choices = shuffle([...set])
   return { choices, answerIndex: choices.indexOf(correct) }
 }
 
+/**
+ * Valid-form perturbations of an answer, for fallback distractors: shift the
+ * numeric component(s) by ±mag while preserving the answer's shape — a coordinate
+ * pair `(x, y)`, a fraction `n/d`, or any number with surrounding text ("90°",
+ * "$1.50", "x = 5"). Returns [] only when there is no number to perturb.
+ */
+function perturbVariants(correct: string, mag: number): string[] {
+  const coord = /^\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\)$/.exec(correct)
+  if (coord) {
+    const x = Number(coord[1])
+    const y = Number(coord[2])
+    return [`(${x + mag}, ${y})`, `(${x - mag}, ${y})`, `(${x}, ${y + mag})`, `(${x}, ${y - mag})`]
+  }
+  const frac = /^(-?\d+)\/(\d+)$/.exec(correct)
+  if (frac) {
+    const n = Number(frac[1])
+    const d = frac[2]
+    return [`${n + mag}/${d}`, `${n - mag}/${d}`]
+  }
+  const num = /-?\d+(?:\.\d+)?/.exec(correct)
+  if (num) {
+    const s = num[0]
+    const val = Number(s)
+    const dec = s.includes('.') ? s.length - s.indexOf('.') - 1 : 0
+    const mk = (nv: number) =>
+      correct.slice(0, num.index) + (dec ? nv.toFixed(dec) : String(nv)) + correct.slice(num.index + s.length)
+    return [mk(val + mag), mk(val - mag)]
+  }
+  return []
+}
+
 /** Numeric distractor near the answer, never equal to it, floored at `min`. */
 export const numNear = (answer: number, spread: number, min = 0, suffix = '') => () => {
-  const off = (Math.random() < 0.5 ? 1 : -1) * ri(1, Math.max(1, spread))
+  const off = (_rng() < 0.5 ? 1 : -1) * ri(1, Math.max(1, spread))
   const v = Math.max(min, answer + off)
   return v === answer ? `${answer + Math.max(1, spread)}${suffix}` : `${v}${suffix}`
 }
