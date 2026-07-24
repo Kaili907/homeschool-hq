@@ -34,8 +34,10 @@ interface QuizSessionProps {
 const CHEERS = ['Great job! 🎉', 'You got it! ⭐', 'Awesome! 🌟', 'Way to go! 🙌', 'Super! 🦄', 'Nailed it! 🎯']
 const OOPS = ['Almost! 💪', 'Nice try! 🌱', 'Keep going! 🚀', "You'll get the next one! 🍀"]
 
-type Walk = { question: Question; mode: 'retry' | 'review' }
+type Walk = { question: Question; mode: 'retry' | 'review'; chosenIndex?: number }
 type Retry = { question: Question; selected: number | null }
+/** MT-1V beat 2: a fresh worked example auto-played end-to-end. */
+type Example = { question: Question }
 
 export function QuizSession({
   title,
@@ -63,6 +65,7 @@ export function QuizSession({
   const [feedback, setFeedback] = useState('')
   const [walk, setWalk] = useState<Walk | null>(null)
   const [retry, setRetry] = useState<Retry | null>(null)
+  const [example, setExample] = useState<Example | null>(null)
   const timerRef = useRef<number | null>(null)
   const nextHistoryRef = useRef<AnswerRecord[]>([])
 
@@ -99,6 +102,7 @@ export function QuizSession({
     setFeedback('')
     setWalk(null)
     setRetry(null)
+    setExample(null)
   }
 
   function handleChoice(i: number) {
@@ -123,11 +127,21 @@ export function QuizSession({
   }
 
   function openWalkthrough(mode: 'retry' | 'review') {
+    // Escalation is logged once here (beat 1). Beat 2 ("Watch another") is part of
+    // the SAME walkthrough and must not log again.
     if (mode === 'retry') onWalkthrough?.(question.skillId)
-    setWalk({ question, mode })
+    setWalk({ question, mode, chosenIndex: selected ?? undefined })
+  }
+
+  // Beat 2 → beat 3: auto-play a fresh worked example, then offer her turn.
+  function watchAnother() {
+    if (!makeRetry) return
+    setExample({ question: makeRetry(question.skillId, question.difficulty) })
+    setWalk(null)
   }
 
   function finishWalkthrough(mode: 'retry' | 'review') {
+    setExample(null)
     if (mode === 'retry' && makeRetry) {
       setRetry({ question: makeRetry(question.skillId, question.difficulty), selected: null })
       setWalk(null)
@@ -200,15 +214,28 @@ export function QuizSession({
       </div>
 
       {/* body */}
-      {walk ? (
+      {example ? (
+        // Beat 2: a fresh same-skill/difficulty problem, auto-played end-to-end.
+        <Walkthrough
+          question={example.question}
+          explanation={explain(example.question)}
+          mode="retry"
+          autoplay
+          voice={voicePrefs}
+          muted={!!muted}
+          onToggleMute={() => onToggleMute?.()}
+          onDone={() => finishWalkthrough('retry')}
+        />
+      ) : walk ? (
         <Walkthrough
           question={walk.question}
-          explanation={explain(walk.question)}
+          explanation={explain(walk.question, walk.chosenIndex)}
           mode={walk.mode}
           voice={voicePrefs}
           muted={!!muted}
           onToggleMute={() => onToggleMute?.()}
           onDone={() => finishWalkthrough(walk.mode)}
+          onWatchAnother={walk.mode === 'retry' && makeRetry ? watchAnother : undefined}
         />
       ) : retry ? (
         <RetryCard retry={retry} onPick={handleRetryChoice} onContinue={goNext} />
