@@ -12,6 +12,7 @@ import { defaultTemplateFor, isDayComplete, templateFor } from '../missions'
 import { AssessmentAdmin } from './assessment/AssessmentAdmin'
 import { HsGrownUps } from './HsGrownUps'
 import { NeedsDadFlags, TutorControls } from './TutorPanel'
+import { TutorAiControls } from './tutor/TutorAiControls'
 import { StarsGlobalAdmin, StarsProfileAdmin } from './StarsAdmin'
 import { getStars } from '../stars/stars'
 
@@ -232,6 +233,10 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
         {/* tutor voice (MT-1) */}
         <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Tutor &amp; Voice</h2>
         <TutorControls state={state} onStateChange={onStateChange} />
+
+        {/* AI tutor — key, per-profile cap, chat transcripts (MT-2/3) */}
+        <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">AI Tutor 💬</h2>
+        <TutorAiControls state={state} onStateChange={onStateChange} />
 
         {/* star economy (MS) */}
         <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Star economy ⭐</h2>
