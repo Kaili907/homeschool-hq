@@ -8,8 +8,21 @@
 
 // ---------- API constants ----------
 
-// Fast + cheapest, per spec §MT-2. Kept in ONE place.
-export const TUTOR_MODEL_ID = 'claude-haiku-4-5'
+// The tutor model — ONE constant per option (same pattern as ELEVENLABS_MODEL_ID).
+// Default is SONNET: the child-safety constraints (never give the answer, ≤3
+// sentences, grade-level vocabulary, escalate rather than absorb) are the core
+// deliverable, and constraint adherence under a persistent kid outranks per-call
+// cost at our volume (≤6 exchanges/question, 20 calls/girl/day). Dad can switch to
+// Haiku from the Grown-Ups tutor section after reading real transcripts.
+export const TUTOR_MODEL_SONNET = 'claude-sonnet-4-6' // stronger constraint-following (default)
+export const TUTOR_MODEL_HAIKU = 'claude-haiku-4-5' //   faster + cheaper (Dad opt-in)
+
+export type TutorModelChoice = 'sonnet' | 'haiku'
+export const DEFAULT_TUTOR_MODEL: TutorModelChoice = 'sonnet'
+export function modelIdFor(choice: TutorModelChoice): string {
+  return choice === 'haiku' ? TUTOR_MODEL_HAIKU : TUTOR_MODEL_SONNET
+}
+
 export const TUTOR_MAX_TOKENS = 300 // forces brevity
 export const ANTHROPIC_VERSION = '2023-06-01'
 
@@ -22,6 +35,7 @@ export const ANTHROPIC_ENDPOINT_BASE = ''
 // ---------- local-storage backed key store (NEVER in AppState → never exported) ----------
 
 const KEY_LS = 'homeschool-hq:tutor:key'
+const MODEL_LS = 'homeschool-hq:tutor:model'
 
 function ls(): Storage | null {
   try {
@@ -56,6 +70,15 @@ export function maskTutorKey(k: string | null): string {
   if (!k) return ''
   if (k.length <= 6) return '••••'
   return `${k.slice(0, 6)}••••••${k.slice(-4)}`
+}
+
+/** The chosen tutor model, stored alongside the key (outside AppState). Defaults to Sonnet. */
+export function getTutorModel(): TutorModelChoice {
+  return ls()?.getItem(MODEL_LS) === 'haiku' ? 'haiku' : DEFAULT_TUTOR_MODEL
+}
+
+export function setTutorModel(choice: TutorModelChoice): void {
+  ls()?.setItem(MODEL_LS, choice)
 }
 
 // ---------- injectable fetch (JSON shape; tests inject a fake) ----------
@@ -119,7 +142,7 @@ export async function askTutor(
         'anthropic-dangerous-direct-browser-access': 'true',
       },
       body: JSON.stringify({
-        model: deps.modelId ?? TUTOR_MODEL_ID,
+        model: deps.modelId ?? modelIdFor(DEFAULT_TUTOR_MODEL),
         max_tokens: TUTOR_MAX_TOKENS,
         system: req.system,
         messages: req.messages.map((m) => ({ role: m.role, content: m.content })),
@@ -144,5 +167,6 @@ export function defaultTutorApiDeps(): TutorApiDeps {
     getKey: getTutorKey,
     fetchImpl: (url, init) => fetch(url, init as RequestInit),
     isOnline,
+    modelId: modelIdFor(getTutorModel()), // Dad's Sonnet/Haiku choice
   }
 }

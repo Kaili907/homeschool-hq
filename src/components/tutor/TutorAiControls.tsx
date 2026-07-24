@@ -1,7 +1,15 @@
 import { useState, type Dispatch, type SetStateAction } from 'react'
 import type { AppState, Profile } from '../../types'
 import { isoToday, updateProfile } from '../../appState'
-import { clearTutorKey, getTutorKey, maskTutorKey, setTutorKey } from '../../tutor/tutorApi'
+import {
+  clearTutorKey,
+  getTutorKey,
+  getTutorModel,
+  maskTutorKey,
+  setTutorKey,
+  setTutorModel,
+  type TutorModelChoice,
+} from '../../tutor/tutorApi'
 import { DEFAULT_DAILY_CAP } from '../../tutor/tutorEngine'
 import { dailyCap, setDailyCap } from '../../tutor/tutorChat'
 import { TutorChatsView } from './TutorChatsView'
@@ -24,6 +32,12 @@ export function TutorAiControls({
   const [draft, setDraft] = useState('')
   const [saved, setSaved] = useState<string | null>(getTutorKey())
   const [open, setOpen] = useState<string | null>(null)
+  const [model, setModel] = useState<TutorModelChoice>(getTutorModel())
+
+  const chooseModel = (m: TutorModelChoice) => {
+    setTutorModel(m)
+    setModel(m)
+  }
 
   const save = () => {
     setTutorKey(draft)
@@ -73,6 +87,30 @@ export function TutorAiControls({
           <span className="text-xs font-semibold text-slate-500">
             {saved ? `Key set · ${maskTutorKey(saved)}` : 'No key — tutor napping'}
           </span>
+        </div>
+
+        {/* model choice — the child-safety constraints are the deliverable, so
+            Sonnet is the default; Dad can trade cost vs. quality after transcripts. */}
+        <div className="mt-3 flex flex-wrap items-center gap-3 border-t border-slate-100 pt-3">
+          <span className="text-sm font-semibold text-slate-700">Tutor model</span>
+          <label className="flex items-center gap-1.5 text-sm text-slate-700">
+            <input
+              type="radio"
+              name="tutor-model"
+              checked={model === 'sonnet'}
+              onChange={() => chooseModel('sonnet')}
+            />
+            Sonnet — best at following the safety rules <span className="text-slate-400">(recommended)</span>
+          </label>
+          <label className="flex items-center gap-1.5 text-sm text-slate-700">
+            <input
+              type="radio"
+              name="tutor-model"
+              checked={model === 'haiku'}
+              onChange={() => chooseModel('haiku')}
+            />
+            Haiku — faster &amp; cheaper
+          </label>
         </div>
       </div>
 
