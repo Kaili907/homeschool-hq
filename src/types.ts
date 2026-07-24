@@ -307,6 +307,10 @@ export interface Profile {
   /** per-profile typing-ladder progress; undefined = fresh (see typing/engine defaultTypingState). */
   typing?: TypingState
 
+  // ---------- MU elementary music (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
+  /** note-reading mastery + listening log; undefined = fresh (see music/engine defaultMusicProgress). */
+  music?: MusicProgress
+
   // ---------- MR reading fluency (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
   /** per-profile read-aloud fluency log + calibration; undefined = fresh (see reading/fluency defaultReadingState). */
   reading?: ReadingState
@@ -475,6 +479,37 @@ export interface TypingState {
   /** total 5-minute drills finished (display only). */
   drillsCompleted: number
   lastPracticedDate?: ISODate
+}
+
+/** MU: durable mastery for one generated staff note. */
+export interface MusicNoteState {
+  attempts: number
+  correct: number
+  /** Consecutive correct answers; three masters a note. */
+  streak: number
+  /** Latches once earned so review misses never erase progress. */
+  mastered: boolean
+  lastSeen?: ISODate
+}
+
+/** MU: the non-graded response saved for one listening-log piece. */
+export interface MusicListeningEntry {
+  listened: boolean
+  notice: string
+  listenedAt?: ISODate
+}
+
+/** MU: optional per-profile music progress. */
+export interface MusicProgress {
+  noteReading: {
+    /** Highest unlocked note in the treble-note bank, zero-based. */
+    unlockedIndex: number
+    notes: Record<string, MusicNoteState>
+    questionsAnswered: number
+  }
+  listening: Record<string, MusicListeningEntry>
+  /** Powers the documented (currently unwired) daily mission seam. */
+  lastActivityDate?: ISODate
 }
 
 // ---------- MR reading fluency (additive, all OPTIONAL; no schemaVersion bump) ----------

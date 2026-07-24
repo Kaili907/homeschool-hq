@@ -56,6 +56,7 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { MusicModule } from './components/music/MusicModule'
 
 type Screen =
   | { kind: 'picker' }
@@ -75,6 +76,7 @@ type Screen =
   | { kind: 'typing' }
   | { kind: 'reading' }
   | { kind: 'mindset' }
+  | { kind: 'music' }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
@@ -430,6 +432,7 @@ export default function App() {
             onOpenTyping={() => setScreen({ kind: 'typing' })}
             onOpenReading={() => setScreen({ kind: 'reading' })}
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
+            onOpenMusic={() => setScreen({ kind: 'music' })}
             mindsetStartDate={state.mindsetStartDate}
           />
         )}
@@ -474,6 +477,16 @@ export default function App() {
             onExit={() => setScreen({ kind: 'home' })}
           />
         )}
+
+        {/* MU elementary music — grades 3/4/6 only (opened from their Home card) */}
+        {screen.kind === 'music' && (
+          <MusicModule
+            profile={active}
+            muted={isMuted(state)}
+            onProfileChange={patchActive}
+            onExit={() => setScreen({ kind: 'home' })}
+          />
+        )}
       </div>
     </ThemeContext.Provider>
   )
@@ -495,6 +508,7 @@ function Home({
   onOpenTyping,
   onOpenReading,
   onOpenMindset,
+  onOpenMusic,
   mindsetStartDate,
 }: {
   profile: Profile
@@ -510,11 +524,14 @@ function Home({
   onOpenTyping: () => void
   onOpenReading: () => void
   onOpenMindset: () => void
+  onOpenMusic: () => void
   mindsetStartDate: string | undefined
 }) {
   const t = useTheme()
   const assessmentCards = assignedOpenTests(profile)
   const isTrainerReady = profile.grade === '3' || profile.grade === '4' || profile.grade === '6'
+  const isMusicReady =
+    profile.grade === '3' || profile.grade === '4' || profile.grade === '6'
   const hasToday = !!profile.missions[isoToday()]
   useEffect(() => {
     if (!hasToday) onEnsureToday()
@@ -638,6 +655,30 @@ function Home({
 
       {/* MM mindset — weekly lesson + habit card (quiet corner; renders only once unlocked) */}
       <MindsetCard profile={profile} startDate={mindsetStartDate} onOpen={onOpenMindset} />
+
+      {/* MU elementary music — generated notation plus a content-driven listening log */}
+      {isMusicReady && (
+        <button
+          onClick={onOpenMusic}
+          className={
+            t.id === 'playful'
+              ? 'mt-6 flex w-full items-center gap-4 rounded-3xl border-b-8 border-violet-700 bg-gradient-to-br from-violet-500 to-fuchsia-600 p-5 text-left shadow-xl transition-all hover:scale-[1.01] active:translate-y-1 active:border-b-4'
+              : `${t.card} mt-6 flex w-full items-center gap-4 p-5 text-left transition-all hover:border-cyan-400`
+          }
+        >
+          <span className="text-4xl" aria-hidden="true">🎵</span>
+          <span className="flex-1">
+            <span
+              className={`block text-2xl font-extrabold ${t.id === 'playful' ? 'text-white' : t.heading}`}
+            >
+              Music
+            </span>
+            <span className={`block font-bold ${t.id === 'playful' ? 'text-violet-100' : t.sub}`}>
+              Read treble notes and keep a listening log
+            </span>
+          </span>
+        </button>
+      )}
 
       {/* SE-A typing trainer entry — one card, opens the 5-minute drill ladder */}
       <button
