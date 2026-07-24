@@ -45,6 +45,7 @@ import { SkillTree } from './components/SkillTree'
 import { Picker } from './components/Picker'
 import { PinPad } from './components/PinPad'
 import { GrownUps } from './components/GrownUps'
+import { ParentHub } from './components/hub/ParentHub'
 import { useSync } from './sync/useSync'
 import { Confetti } from './components/Confetti'
 import { AssessmentRunner } from './components/assessment/AssessmentRunner'
@@ -68,6 +69,7 @@ type Screen =
   | { kind: 'parentPin' }
   | { kind: 'parentPinCreate'; firstEntry?: string }
   | { kind: 'grownups' }
+  | { kind: 'parentHub' }
   | { kind: 'assessment'; testId: string }
   | { kind: 'prizeShop' }
   | { kind: 'typing' }
@@ -213,7 +215,7 @@ export default function App() {
               subtitle="Enter the parent PIN"
               onComplete={(pin) => {
                 if (pin === state.parentPin) {
-                  setScreen({ kind: 'grownups' })
+                  setScreen({ kind: 'parentHub' })
                   return null
                 }
                 return 'Wrong PIN.'
@@ -235,7 +237,7 @@ export default function App() {
                 }
                 if (pin === screen.firstEntry) {
                   setState((s) => ({ ...s, parentPin: pin }))
-                  setScreen({ kind: 'grownups' })
+                  setScreen({ kind: 'parentHub' })
                   return null
                 }
                 setScreen({ kind: 'parentPinCreate' })
@@ -249,13 +251,24 @@ export default function App() {
     )
   }
 
+  if (screen.kind === 'parentHub') {
+    return (
+      <ParentHub
+        state={state}
+        onStateChange={setState}
+        onClose={() => setScreen({ kind: 'picker' })}
+        onOpenClassic={() => setScreen({ kind: 'grownups' })}
+      />
+    )
+  }
+
   if (screen.kind === 'grownups') {
     return (
       <GrownUps
         state={state}
         onStateChange={setState}
         sync={sync}
-        onClose={() => setScreen({ kind: 'picker' })}
+        onClose={() => setScreen({ kind: 'parentHub' })}
         onChangeParentPin={() => setScreen({ kind: 'parentPinCreate' })}
       />
     )

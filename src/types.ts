@@ -332,6 +332,59 @@ export interface Profile {
   // ---------- MJ HS voice assistant (additive, OPTIONAL; teens only; no schemaVersion bump) ----------
   /** per-girl assistant transcripts + call log + config; undefined until her first use. Pruned 60 days. */
   assistant?: AssistantState
+
+  // ---------- MP parent hub (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
+  /** per-subject weekPointer + nudge log; undefined = every subject rides the calendar-derived week. */
+  pacing?: Pacing
+  /** Dad's manual mastery snapshots for paper subjects (entered after grade cards). undefined = none. */
+  masterySnapshots?: MasterySnapshot[]
+}
+
+// ---------- MP parent hub (additive; no schemaVersion bump) ----------
+
+/**
+ * MP — the family's school-year pacing config (global, on AppState). Calendar weeks map
+ * to scope weeks by counting NON-off weeks since startDate; marking a week off shifts
+ * every later expectation. Off-weeks affect expectations only — never student data.
+ */
+export interface SchoolYear {
+  /** any date in scope-week 1; the engine anchors to that date's Monday. */
+  startDate: ISODate
+  /** total scope weeks in the year (36). */
+  totalWeeks: number
+  /** scope-week numbers a quarter break falls AFTER (e.g. [9, 18, 27]). */
+  quarterBreaks: number[]
+  /** Mondays (ISO) of travel/vacation weeks — they consume no scope week. */
+  offWeeks: ISODate[]
+}
+
+/** MP — one logged manual pointer nudge (kept for the year-end record). */
+export interface PointerNudge {
+  /** ISO timestamp of the nudge. */
+  at: string
+  subjectId: string
+  from: number
+  to: number
+  reason: string
+}
+
+/** MP — per-girl per-subject weekPointer + the append-only nudge log. */
+export interface Pacing {
+  /** subjectId → weekPointer. Absent subject = ride the calendar-derived week. */
+  pointers: Record<string, number>
+  /** every manual nudge (date + old→new + reason). */
+  nudges: PointerNudge[]
+}
+
+/** MP — Dad's manual mastery snapshot for a paper subject (whole-picture entry). */
+export interface MasterySnapshot {
+  /** ISO timestamp. */
+  at: string
+  /** free-text subject label (paper subjects the app doesn't score). */
+  subject: string
+  /** 0–100 level Dad types after a grade card. */
+  level: number
+  note?: string
 }
 
 /**
@@ -558,6 +611,8 @@ export interface AppState {
   stars?: StarsConfig
   /** MM: Dad-set school-year start date; weeks unlock on the Fridays that follow. undefined = not set (all mindset weeks locked). */
   mindsetStartDate?: ISODate
+  /** MP: the parent-hub school-year pacing config (start date, off-weeks, quarter breaks). undefined = not configured yet. */
+  schoolYear?: SchoolYear
 }
 
 // ---------- schema v1 (legacy, for migration only) ----------
