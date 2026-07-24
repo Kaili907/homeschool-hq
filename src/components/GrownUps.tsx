@@ -13,6 +13,8 @@ import { AssessmentAdmin } from './assessment/AssessmentAdmin'
 import { HsGrownUps } from './HsGrownUps'
 import { NeedsDadFlags, TutorControls } from './TutorPanel'
 import { TutorAiControls } from './tutor/TutorAiControls'
+import { SyncControls } from './sync/SyncControls'
+import type { SyncApi } from '../sync/useSync'
 import { StarsGlobalAdmin, StarsProfileAdmin } from './StarsAdmin'
 import { getStars } from '../stars/stars'
 
@@ -20,11 +22,13 @@ interface GrownUpsProps {
   state: AppState
   /** App's React setState — accepts a value or a functional update (prev => next). */
   onStateChange: Dispatch<SetStateAction<AppState>>
+  /** M6 cloud-sync API (identity, status, sync now, migration). */
+  sync: SyncApi
   onClose: () => void
   onChangeParentPin: () => void
 }
 
-export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: GrownUpsProps) {
+export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPin }: GrownUpsProps) {
   const [msg, setMsg] = useState('')
   const [expanded, setExpanded] = useState<{
     id: string
@@ -241,6 +245,11 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
         {/* star economy (MS) */}
         <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Star economy ⭐</h2>
         <StarsGlobalAdmin state={state} onStateChange={onStateChange} />
+
+        {/* cloud sync (M6) — sign in, status, migration. The JSON backup below stays
+            the forever escape hatch, and everything works with no sync configured. */}
+        <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Cloud sync ☁️</h2>
+        <SyncControls sync={sync} />
 
         {/* backup */}
         <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Backup</h2>

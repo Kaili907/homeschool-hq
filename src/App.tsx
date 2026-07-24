@@ -44,6 +44,7 @@ import { SkillTree } from './components/SkillTree'
 import { Picker } from './components/Picker'
 import { PinPad } from './components/PinPad'
 import { GrownUps } from './components/GrownUps'
+import { useSync } from './sync/useSync'
 import { Confetti } from './components/Confetti'
 import { AssessmentRunner } from './components/assessment/AssessmentRunner'
 import { assignedOpenTests } from './components/assessment/homeCards'
@@ -79,6 +80,10 @@ export default function App() {
   useEffect(() => {
     saveAppState(state)
   }, [state])
+
+  // M6: local-first cloud sync. Inert with no Supabase config; never blocks the UI.
+  // Local writes above already persisted; this pushes async + pulls on open/reconnect.
+  const sync = useSync(state, setState)
 
   const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
   const tokens = THEMES[active?.theme ?? 'playful']
@@ -230,6 +235,7 @@ export default function App() {
       <GrownUps
         state={state}
         onStateChange={setState}
+        sync={sync}
         onClose={() => setScreen({ kind: 'picker' })}
         onChangeParentPin={() => setScreen({ kind: 'parentPinCreate' })}
       />

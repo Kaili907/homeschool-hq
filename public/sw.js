@@ -28,8 +28,9 @@ self.addEventListener('fetch', (event) => {
   const req = event.request
   if (req.method !== 'GET') return // never touch API POSTs
   const url = new URL(req.url)
-  if (url.origin !== self.location.origin) return // leave cross-origin (proxy/APIs) alone
+  if (url.origin !== self.location.origin) return // leave cross-origin (Supabase, proxy/APIs) alone
   if (url.pathname.startsWith('/api/')) return // never cache the key-injecting proxy calls
+  if (url.pathname.startsWith('/rest/') || url.pathname.startsWith('/auth/')) return // never cache sync calls
 
   // App navigations: network-first so a fresh deploy loads when online, cached
   // shell when offline.
