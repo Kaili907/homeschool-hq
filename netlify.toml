@@ -1,0 +1,34 @@
+# Netlify config for Homeschool HQ (D1 deploy).
+# Chosen over Vercel because the whole deploy is expressible in this one file:
+# static Vite SPA + two key-injecting function proxies + SPA fallback, all as
+# plain redirects, on a generous free tier that suits a private family app.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  # Route the tutor + voice calls through the serverless proxies in the DEPLOYED
+  # build, so the API keys stay server-side. Local `npm run build` (without this)
+  # keeps the direct-with-panel-key path. The two SECRET keys
+  # (ANTHROPIC_API_KEY / ELEVENLABS_API_KEY) are set in the Netlify UI, never here.
+  VITE_USE_PROXY = "true"
+  NODE_VERSION = "20"
+
+# ---- API proxies (MUST precede the SPA fallback) ----
+[[redirects]]
+  from = "/api/anthropic/*"
+  to = "/.netlify/functions/anthropic/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/tts/*"
+  to = "/.netlify/functions/tts/:splat"
+  status = 200
+
+# ---- SPA fallback: every other path serves the cached app shell ----
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

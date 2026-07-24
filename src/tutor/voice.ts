@@ -249,11 +249,11 @@ export function createVoiceAdapter(deps: VoiceAdapterDeps): VoiceAdapter {
 // ElevenLabs revs models often — keep the id in ONE place. Turbo = low-latency.
 export const ELEVENLABS_MODEL_ID = 'eleven_turbo_v2_5'
 
-// '' → call ElevenLabs directly (acceptable on the family machine, key stays local).
-// After a public deploy, point this at the serverless proxy base (e.g. '/api/tts')
-// so the key never ships to the client — that proxy is built in the deploy cycle,
-// not here. Only this one value changes; the rest of the fetch layer is unaffected.
-export const ELEVENLABS_ENDPOINT_BASE = ''
+// D1 deploy: with VITE_USE_PROXY=true this points at the serverless proxy
+// (netlify/functions/tts via the /api/tts redirect), which injects the key
+// server-side — the key never ships to the client. Empty (local dev / no flag)
+// keeps the direct-with-panel-key path. Only this one value changes.
+export const ELEVENLABS_ENDPOINT_BASE = import.meta.env.VITE_USE_PROXY === 'true' ? '/api/tts' : ''
 
 /** Minimal fetch shape so tests can inject a fake without the whole DOM Response type. */
 export type FetchLike = (
@@ -271,18 +271,24 @@ export function createElevenLabsSynth(deps: {
 }): ElevenLabsSynth {
   const base = deps.endpointBase ?? ELEVENLABS_ENDPOINT_BASE
   const modelId = deps.modelId ?? ELEVENLABS_MODEL_ID
+  const proxyMode = base !== ''
   const origin = base || 'https://api.elevenlabs.io'
   return {
     available() {
-      return !!deps.getKey() && deps.isOnline() && !deps.usage.overCap()
+      // Proxy mode holds the key server-side, so no local key is required.
+      return (proxyMode || !!deps.getKey()) && deps.isOnline() && !deps.usage.overCap()
     },
     async synthesize({ text, voiceId }) {
       const key = deps.getKey()
-      if (!key) throw new Error('elevenlabs: no key')
+      if (!proxyMode && !key) throw new Error('elevenlabs: no key')
       const url = `${origin}/v1/text-to-speech/${encodeURIComponent(voiceId)}?output_format=mp3_44100_128`
+      // Proxy mode: the function injects xi-api-key server-side.
+      const headers: Record<string, string> = proxyMode
+        ? { 'content-type': 'application/json', accept: 'audio/mpeg' }
+        : { 'xi-api-key': key as string, 'content-type': 'application/json', accept: 'audio/mpeg' }
       const res = await deps.fetchImpl(url, {
         method: 'POST',
-        headers: { 'xi-api-key': key, 'content-type': 'application/json', accept: 'audio/mpeg' },
+        headers,
         body: JSON.stringify({ text, model_id: modelId }),
       })
       if (!res.ok) throw new Error(`elevenlabs: http ${res.status}`)
