@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, type Dispatch, type SetStateAction } from 'react'
 import type { AppState, MissionTemplate, MissionTemplateItem, Profile } from '../types'
 import {
   downloadJson,
@@ -15,7 +15,7 @@ import { NeedsDadFlags, TutorControls } from './TutorPanel'
 
 interface GrownUpsProps {
   state: AppState
-  onStateChange: (s: AppState) => void
+  onStateChange: Dispatch<SetStateAction<AppState>>
   onClose: () => void
   onChangeParentPin: () => void
 }
@@ -29,15 +29,21 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
   const fileRef = useRef<HTMLInputElement>(null)
   const backupKeys = listV1BackupKeys()
 
-  function patchProfile(p: Profile) {
-    onStateChange({ ...state, profiles: { ...state.profiles, [p.id]: p } })
-  }
+  // Functional per-profile writer: every edit derives its base from the latest
+  // committed profile, so admin edits never clobber a concurrent write. Child
+  // panels receive `(update) => patchProfile(p.id, update)`.
+  const patchProfile = (id: string, update: (prev: Profile) => Profile) =>
+    onStateChange((s) =>
+      s.profiles[id] ? { ...s, profiles: { ...s.profiles, [id]: update(s.profiles[id]) } } : s,
+    )
 
   function resetProgress(p: Profile) {
     if (!window.confirm(`Erase ALL progress for ${p.name}? This cannot be undone.`)) return
     if (!window.confirm(`Really sure? ${p.name}'s mastery, streaks and missions will be wiped.`)) return
-    const fresh = emptyProfile(p.id, p.name, p.grade)
-    patchProfile({ ...fresh, pin: p.pin, theme: p.theme, createdAt: p.createdAt })
+    patchProfile(p.id, (prev) => {
+      const fresh = emptyProfile(prev.id, prev.name, prev.grade)
+      return { ...fresh, pin: prev.pin, theme: prev.theme, createdAt: prev.createdAt }
+    })
     setMsg(`${p.name}'s progress was reset.`)
   }
 
@@ -90,7 +96,7 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
               <div className="flex flex-wrap items-center gap-3">
                 <input
                   value={p.name}
-                  onChange={(e) => patchProfile({ ...p, name: e.target.value })}
+                  onChange={(e) => patchProfile(p.id, (prev) => ({ ...prev, name: e.target.value }))}
                   className="w-40 rounded-lg border border-slate-300 px-3 py-1.5 font-semibold text-slate-800"
                   aria-label={`name for ${p.id}`}
                 />
@@ -158,7 +164,7 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
                     <button
                       onClick={() => {
                         if (window.confirm(`Clear ${p.name}'s PIN? She'll choose a new one at next sign-in.`))
-                          patchProfile({ ...p, pin: '' })
+                          patchProfile(p.id, (prev) => ({ ...prev, pin: '' }))
                       }}
                       className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
                     >
@@ -174,7 +180,7 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
                 </span>
               </div>
               {expanded?.id === p.id && expanded.tab === 'template' && (
-                <TemplateEditor profile={p} onChange={patchProfile} />
+                <TemplateEditor profile={p} onChange={(update) => patchProfile(p.id, update)} />
               )}
               {expanded?.id === p.id && expanded.tab === 'history' && (
                 <MissionHistory profile={p} />
@@ -183,11 +189,11 @@ export function GrownUps({ state, onStateChange, onClose, onChangeParentPin }: G
                 <AssessmentAdmin
                   profile={p}
                   nowISO={new Date().toISOString()}
-                  onPatch={patchProfile}
+                  onPatch={(update) => patchProfile(p.id, update)}
                 />
               )}
               {expanded?.id === p.id && expanded.tab === 'hs' && (
-                <HsGrownUps profile={p} onChange={patchProfile} />
+                <HsGrownUps profile={p} onChange={(update) => patchProfile(p.id, update)} />
               )}
             </div>
           ))}
@@ -273,15 +279,23 @@ function TemplateEditor({
   onChange,
 }: {
   profile: Profile
-  onChange: (p: Profile) => void
+  onChange: (update: (prev: Profile) => Profile) => void
 }) {
-  const template = templateFor(profile)
-  const set = (t: MissionTemplate) => onChange({ ...profile, template: t })
+  const template = templateFor(profile) // render/read view only
+  // Whole-template replace (reset button) — prev-independent by design.
+  const set = (t: MissionTemplate) => onChange((prev) => ({ ...prev, template: t }))
 
+  // Per-list edit derives the base template from prev, not the render snapshot,
+  // so two list edits in one tick compose instead of the second replaying a
+  // stale template over the first.
   const editList = (
     key: 'weekday' | 'friday',
     fn: (items: MissionTemplateItem[]) => MissionTemplateItem[],
-  ) => set({ ...template, [key]: fn(template[key]) })
+  ) =>
+    onChange((prev) => {
+      const cur = templateFor(prev)
+      return { ...prev, template: { ...cur, [key]: fn(cur[key]) } }
+    })
 
   const renderList = (key: 'weekday' | 'friday', title: string) => (
     <div className="min-w-0 flex-1">

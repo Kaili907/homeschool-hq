@@ -35,7 +35,7 @@ type HsScreen =
 
 interface Props {
   profile: Profile
-  onProfileChange: (p: Profile) => void
+  onProfileChange: (update: (prev: Profile) => Profile) => void
   onSignOut: () => void
   onToggleItem: (itemId: string, done: boolean) => void
   // MA×M4 integration: assessments are HS content, so the teen home surfaces
@@ -81,13 +81,9 @@ export function HighSchoolHome({
   // via an effect: App's own ensureToday effect writes the profile on mount from a
   // stale snapshot, so a seeding effect would race and lose. Deriving is race-free —
   // the first real HS edit (a tick, a quiz answer) persists the seeded shape.
+  // NB: this is the RENDER/READ view; every WRITE seeds prev inside its updater
+  // (below) so the persisted shape matches regardless of write ordering.
   const profile = useMemo(() => ensureHsDefaults(rawProfile), [rawProfile])
-
-  // Latest committed profile, read by the quiz writers. setProfile takes full
-  // snapshots, so a stale closure (e.g. finishSession firing after the final
-  // answer) would clobber the just-recorded question — the ref avoids that.
-  const profileRef = useRef(profile)
-  profileRef.current = profile
 
   const isSenior = profile.grade === '12'
 
@@ -105,11 +101,15 @@ export function HighSchoolHome({
     setScreen({ kind: 'timed', source })
   }
 
+  // Writers derive their base from the freshest committed profile via the
+  // functional update, so a finishSession firing right after the final answer
+  // composes onto it instead of clobbering the just-recorded question. Each
+  // seeds prev with ensureHsDefaults so the additive HS shape always persists.
   const recordAnswer = (unit: string, correct: boolean) =>
-    onProfileChange(recordHsAnswer(profileRef.current, unit, correct))
+    onProfileChange((prev) => recordHsAnswer(ensureHsDefaults(prev), unit, correct))
 
   const finishRound = (title: string, total: number, recs: HsQuizRecord[]) => {
-    onProfileChange(finishSession(profileRef.current, longestStreak(recs)))
+    onProfileChange((prev) => finishSession(ensureHsDefaults(prev), longestStreak(recs)))
     setScreen({
       kind: 'results',
       title,
@@ -342,7 +342,7 @@ function ResultsView({
 
 // ---------- senior college-application deadlines ----------
 
-function CollegeDeadlines({ profile, onProfileChange }: { profile: Profile; onProfileChange: (p: Profile) => void }) {
+function CollegeDeadlines({ profile, onProfileChange }: { profile: Profile; onProfileChange: (update: (prev: Profile) => Profile) => void }) {
   const t = useTheme()
   const today = isoToday()
   const sorted = useMemo(() => sortedCollegeTasks(profile.collegeTasks ?? [], today), [profile.collegeTasks, today])
@@ -378,7 +378,7 @@ function CollegeDeadlines({ profile, onProfileChange }: { profile: Profile; onPr
               <input
                 type="checkbox"
                 checked={task.done}
-                onChange={(e) => onProfileChange(updateCollegeTask(profile, task.id, { done: e.target.checked }))}
+                onChange={(e) => onProfileChange((prev) => updateCollegeTask(ensureHsDefaults(prev), task.id, { done: e.target.checked }))}
                 className="h-4 w-4 shrink-0"
                 aria-label={`mark ${task.label} done`}
               />
@@ -399,7 +399,7 @@ function CollegeDeadlines({ profile, onProfileChange }: { profile: Profile; onPr
 
 // ---------- course progress tracker ----------
 
-function CourseTracker({ profile, onProfileChange }: { profile: Profile; onProfileChange: (p: Profile) => void }) {
+function CourseTracker({ profile, onProfileChange }: { profile: Profile; onProfileChange: (update: (prev: Profile) => Profile) => void }) {
   const t = useTheme()
   const [open, setOpen] = useState<string | null>(null)
   const courses = profile.courses ?? []
@@ -433,7 +433,7 @@ function CourseTracker({ profile, onProfileChange }: { profile: Profile; onProfi
                       <input
                         type="checkbox"
                         checked={u.done}
-                        onChange={(e) => onProfileChange(toggleCourseUnit(profile, c.id, u.id, e.target.checked))}
+                        onChange={(e) => onProfileChange((prev) => toggleCourseUnit(ensureHsDefaults(prev), c.id, u.id, e.target.checked))}
                         className="h-4 w-4 shrink-0"
                       />
                       <span className={u.done ? 'text-slate-400 line-through' : 'text-slate-700'}>{u.label}</span>

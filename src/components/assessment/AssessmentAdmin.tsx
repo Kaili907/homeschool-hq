@@ -15,7 +15,7 @@ import { AssessmentResults } from './AssessmentResults'
 interface AssessmentAdminProps {
   profile: Profile
   nowISO: string
-  onPatch: (p: Profile) => void
+  onPatch: (update: (prev: Profile) => Profile) => void
 }
 
 const STATUS_UI: Record<string, { label: string; cls: string }> = {
@@ -36,7 +36,9 @@ export function AssessmentAdmin({ profile, nowISO, onPatch }: AssessmentAdminPro
   }
 
   const state = getState(profile.assessments)
-  const patch = (next: typeof state) => onPatch({ ...profile, assessments: next })
+  // Recompute against the latest committed assessment state inside the update.
+  const patch = (fn: (prev: typeof state) => typeof state) =>
+    onPatch((prev) => ({ ...prev, assessments: fn(getState(prev.assessments)) }))
 
   return (
     <div className="mt-3 space-y-2">
@@ -65,7 +67,7 @@ export function AssessmentAdmin({ profile, nowISO, onPatch }: AssessmentAdminPro
                     <button
                       onClick={() => {
                         const code = (codeDraft[test.id] ?? '').trim()
-                        if (code) patch(assignTest(state, test.id, code, nowISO))
+                        if (code) patch((s) => assignTest(s, test.id, code, nowISO))
                       }}
                       className="rounded border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-50"
                     >
@@ -74,7 +76,7 @@ export function AssessmentAdmin({ profile, nowISO, onPatch }: AssessmentAdminPro
                   </span>
                 ) : (
                   <button
-                    onClick={() => patch(unassignTest(state, test.id))}
+                    onClick={() => patch((s) => unassignTest(s, test.id))}
                     className="rounded border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-50"
                   >
                     Unassign
@@ -90,7 +92,7 @@ export function AssessmentAdmin({ profile, nowISO, onPatch }: AssessmentAdminPro
                 )}
                 {status === 'completed-locked' && (
                   <button
-                    onClick={() => patch(unlockRetake(state, test.id))}
+                    onClick={() => patch((s) => unlockRetake(s, test.id))}
                     className="rounded border border-amber-300 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-800 hover:bg-amber-100"
                   >
                     Unlock retake

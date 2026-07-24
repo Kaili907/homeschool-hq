@@ -7,10 +7,10 @@ import {
   finishSession,
   isoToday,
   loadAppState,
+  patchProfile,
   readLocalStorageKey,
   recordAnswer,
   saveAppState,
-  updateProfile,
 } from './appState'
 import {
   PLACEMENT_TOTAL,
@@ -67,7 +67,15 @@ export default function App() {
   const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
   const tokens = THEMES[active?.theme ?? 'playful']
 
-  const setProfile = (p: Profile) => setState((s) => updateProfile(s, p))
+  // Every profile write is a functional update so the reducer's base is the
+  // latest committed profile (see appState.patchProfile): two writes in one tick
+  // — or a session-finish racing the last answer — compose instead of clobbering.
+  // patchActive targets the signed-in profile; patchById targets a specific one
+  // (e.g. during PIN setup, before that profile becomes active).
+  const patchById = (id: string, update: (prev: Profile) => Profile) =>
+    setState((s) => patchProfile(s, id, update))
+  const patchActive = (update: (prev: Profile) => Profile) =>
+    setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
   const signOut = () => {
     setState((s) => ({ ...s, activeProfileId: null }))
     setScreen({ kind: 'picker' })
@@ -138,7 +146,7 @@ export default function App() {
                   return null
                 }
                 if (pin === screen.firstEntry) {
-                  setProfile({ ...profile, pin })
+                  patchById(profile.id, (prev) => ({ ...prev, pin }))
                   setState((s) => ({ ...s, activeProfileId: profile.id }))
                   setScreen({ kind: 'home' })
                   return null
@@ -237,7 +245,7 @@ export default function App() {
         profile={active}
         testId={screen.testId}
         nowISO={() => new Date().toISOString()}
-        onPatch={setProfile}
+        onPatch={patchActive}
         onHome={() => setScreen({ kind: 'home' })}
       />
     )
@@ -257,7 +265,7 @@ export default function App() {
             onFinish={(history) => {
               const results = summarizePlacement(history, active.grade)
               // a finished placement counts as the day's math session too
-              setProfile(autoCompletePractice(finishSession(applyPlacement(active, results), 0)))
+              patchActive((p) => autoCompletePractice(finishSession(applyPlacement(p, results), 0)))
               setScreen({ kind: 'placementResults', results })
             }}
             onQuit={() => setScreen({ kind: 'home' })}
@@ -273,7 +281,7 @@ export default function App() {
               generateFresh(screen.plan[index].skill, screen.plan[index].difficulty, seenRef.current)
             }
             onAnswer={(q, correct) =>
-              setProfile(recordAnswer(state.profiles[active.id], q.skillId, q.difficulty, correct))
+              patchActive((p) => recordAnswer(p, q.skillId, q.difficulty, correct))
             }
             tutorEnabled
             voice={getVoicePrefs(active)}
@@ -283,27 +291,15 @@ export default function App() {
               generateFresh(skillId, difficulty, seenRef.current)
             }
             onRetryAnswer={(q, correct) =>
-              setProfile(
-                recordAnswer(state.profiles[active.id], q.skillId, q.difficulty, correct, 'retry'),
-              )
+              patchActive((p) => recordAnswer(p, q.skillId, q.difficulty, correct, 'retry'))
             }
             onWalkthrough={(skillId) =>
-              setProfile(
-                logWalkthrough(
-                  state.profiles[active.id],
-                  skillId,
-                  Date.now(),
-                  sessionStartRef.current,
-                  isoToday(),
-                ),
+              patchActive((p) =>
+                logWalkthrough(p, skillId, Date.now(), sessionStartRef.current, isoToday()),
               )
             }
             onFinish={(history) => {
-              setProfile(
-                autoCompletePractice(
-                  finishSession(state.profiles[active.id], longestStreak(history)),
-                ),
-              )
+              patchActive((p) => autoCompletePractice(finishSession(p, longestStreak(history))))
               setScreen({ kind: 'practiceResults', history })
             }}
             onQuit={() => setScreen({ kind: 'home' })}
@@ -329,9 +325,9 @@ export default function App() {
         {screen.kind === 'home' && (
           <Home
             profile={active}
-            onEnsureToday={() => setProfile(ensureToday(active))}
-            onToggleItem={(itemId, done) => setProfile(setItemDone(active, itemId, done))}
-            onProfileChange={setProfile}
+            onEnsureToday={() => patchActive((p) => ensureToday(p))}
+            onToggleItem={(itemId, done) => patchActive((p) => setItemDone(p, itemId, done))}
+            onProfileChange={patchActive}
             onSignOut={signOut}
             onPlacement={() => setScreen({ kind: 'placement', order: placementOrder(active.grade) })}
             onPractice={() => startPractice(active)}
@@ -358,7 +354,7 @@ function Home({
   profile: Profile
   onEnsureToday: () => void
   onToggleItem: (itemId: string, done: boolean) => void
-  onProfileChange: (p: Profile) => void
+  onProfileChange: (update: (prev: Profile) => Profile) => void
   onSignOut: () => void
   onPlacement: () => void
   onPractice: () => void

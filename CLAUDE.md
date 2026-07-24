@@ -54,6 +54,13 @@ app, no production deploys, no database, usually one session at a time.
    plausible-sounding false report costs the family's trust in the whole
    system. When Dad catches an inconsistency, the answer is the honest state
    of things, full stop.
+6. **All state writes are functional updates.** Every write to profile or app
+   state MUST derive its base from the updater's `prev`, never from a render or
+   ref snapshot — `setState(s => patchProfile(s, id, prev => next))`, never
+   `setProfile(reducer(snapshot, ...))`. Cross-component write callbacks pass an
+   updater (`(prev) => next`), not a pre-computed value. This is what lets two
+   writes in one tick — or a finish racing the final answer — compose instead of
+   clobbering. See `appState.patchProfile` and `src/stateHardening.test.ts`.
 
 ## Standing project rules (from the specs — enforced here too)
 - The app never stores official grades. The Excel gradebook is the permanent
@@ -71,6 +78,12 @@ Default is ONE session at a time. If two run: disjoint milestones only, each
 declares its branch in its first commit message, any session finding an
 in-progress branch overlapping its scope hard-stops, and merges queue
 serially through Dad.
+
+### Subagent directive (within one session)
+Use parallel subagents only for file-disjoint authoring or verification. Schema
+edits, shared-file edits, integration across the write contract, the final gates
+(typecheck/vitest/build), and the report ALL stay in the main thread. The report
+states what was delegated to subagents and what stayed in the main thread.
 
 ## Failure culture
 A stopped line is a success. Freeze → establish disk truth read-only →
