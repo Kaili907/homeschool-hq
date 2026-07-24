@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   applyDefaultsToProfile,
   autoCompleteKind,
+  autoCompleteMindset,
   autoCompletePractice,
   autoCompleteReading,
   autoCompleteTyping,
@@ -28,7 +29,7 @@ const FALL_MON = '2026-09-07' // a Monday in fall term
 
 const kid = (grade: Profile['grade'] = '3'): Profile => emptyProfile('p1', 'Test Kid', grade)
 
-/** Complete a whole day: manual items + math + typing autos. */
+/** Complete a whole day: every manual item + all four auto kinds present. */
 function completeDay(p: Profile, day: string): Profile {
   let out = ensureToday(p, day)
   for (const item of out.missions[day].items) {
@@ -36,6 +37,8 @@ function completeDay(p: Profile, day: string): Profile {
   }
   out = autoCompletePractice(out, day)
   out = autoCompleteTyping(out, day)
+  out = autoCompleteReading(out, day)
+  out = autoCompleteMindset(out, day)
   return out
 }
 
@@ -58,12 +61,13 @@ describe('mission days', () => {
   it('builds the grade-3 weekday day with Typing first and math auto carried', () => {
     const p = ensureToday(kid('3'), MON)
     const day = p.missions[MON]
-    // Monday: handwriting (Tue/Thu) is hidden
+    // Monday: handwriting (Tue/Thu) and the weekly mindset item (Wed) are hidden
     expect(day.items.map((i) => i.id)).toEqual([
       'typing',
       'math-lesson',
       'math-practice',
       'read-aloud',
+      'reading-session',
       'read-self',
       'writing',
       'science-ss',
@@ -79,6 +83,7 @@ describe('mission days', () => {
     expect(p.missions[FRI].items.map((i) => i.id)).toEqual([
       'typing',
       'math-practice',
+      'reading-session',
       'read-self',
       'fun-project',
     ])
@@ -86,8 +91,8 @@ describe('mission days', () => {
 
   it('falls back to weekday items when the friday list is empty', () => {
     const t: MissionTemplate = { ...defaultTemplateFor('3'), friday: [] }
-    // built on a Friday → handwriting still hidden → 7 of the 8 weekday blocks
-    expect(buildMissionDay(t, FRI).items).toHaveLength(7)
+    // built on a Friday → handwriting (Tue/Thu) + mindset (Wed) hidden → 8 of 10 weekday blocks
+    expect(buildMissionDay(t, FRI).items).toHaveLength(8)
   })
 
   it('does not regenerate an existing day', () => {
@@ -125,6 +130,32 @@ describe('cadence', () => {
     const soph = ensureToday(kid('10'), WED).missions[WED].items.map((i) => i.id)
     expect(soph).toContain('current-events')
     expect(soph).not.toContain('sat-prep')
+  })
+
+  it('reading is a daily auto item (3/4/6); mindset is a weekly auto item (all grades)', () => {
+    // reading-session appears every school day for the littles, incl. Friday
+    for (const g of ['3', '4', '6'] as const) {
+      expect(ensureToday(kid(g), MON).missions[MON].items.some((i) => i.id === 'reading-session' && i.autoKind === 'reading')).toBe(true)
+      expect(ensureToday(kid(g), FRI).missions[FRI].items.some((i) => i.id === 'reading-session')).toBe(true)
+    }
+    // teens never get the reading item
+    expect(ensureToday(kid('10'), MON).missions[MON].items.some((i) => i.id === 'reading-session')).toBe(false)
+    // mindset-lesson is weekly (anchor Wed) and applies to every grade
+    for (const g of ['3', '6', '12'] as const) {
+      expect(ensureToday(kid(g), WED).missions[WED].items.some((i) => i.id === 'mindset-lesson' && i.autoKind === 'mindset')).toBe(true)
+      expect(ensureToday(kid(g), MON).missions[MON].items.some((i) => i.id === 'mindset-lesson')).toBe(false)
+    }
+  })
+
+  it('a reflected mindset lesson and a finished reading session flip their own items only', () => {
+    // Wednesday grade-6 carries both a reading (daily) and a mindset (weekly) auto item
+    const built = ensureToday(kid('6'), WED)
+    const afterReading = autoCompleteReading(built, WED)
+    expect(afterReading.missions[WED].items.find((i) => i.id === 'reading-session')?.done).toBe(true)
+    expect(afterReading.missions[WED].items.find((i) => i.id === 'mindset-lesson')?.done).toBe(false)
+    const afterMindset = autoCompleteMindset(built, WED)
+    expect(afterMindset.missions[WED].items.find((i) => i.id === 'mindset-lesson')?.done).toBe(true)
+    expect(afterMindset.missions[WED].items.find((i) => i.id === 'reading-session')?.done).toBe(false)
   })
 
   it('itemOccursOn honours combined day + season filters', () => {
@@ -178,14 +209,15 @@ describe('auto-check by kind', () => {
 })
 
 describe('mission streaks', () => {
-  it('a day is complete only once math AND typing are both done', () => {
+  it('a day is complete only once every auto activity is done', () => {
     let p = kid('3')
-    // manual + math, but typing still open → not complete, no streak
+    // manual + math + typing, but the reading auto item is still open → not complete
     let out = ensureToday(p, MON)
     for (const item of out.missions[MON].items) if (!item.auto) out = setItemDone(out, item.id, true, MON)
     out = autoCompletePractice(out, MON)
-    expect(isDayComplete(out.missions[MON])).toBe(false)
-    p = autoCompleteTyping(out, MON)
+    out = autoCompleteTyping(out, MON)
+    expect(isDayComplete(out.missions[MON])).toBe(false) // reading still open
+    p = autoCompleteReading(out, MON)
     expect(isDayComplete(p.missions[MON])).toBe(true)
     expect(p.streaks).toEqual({ current: 1, best: 1, lastActiveDate: MON })
   })

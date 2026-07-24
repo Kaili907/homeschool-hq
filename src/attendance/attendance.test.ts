@@ -15,12 +15,15 @@ import {
 
 const kid = (grade: Profile['grade'] = '3'): Profile => emptyProfile('p1', 'Test Kid', grade)
 
+// Full-day estimates are derived from the (evolving) grade template block count,
+// so tests reference these rather than hardcoding hours that drift as items are added.
+const EST3 = estimateHoursFromTemplate(kid('3'))
+
 describe('hours estimation', () => {
   it('estimates a full day from the weekday template block count (0.5h/block)', () => {
-    // grade 3 weekday default = 8 blocks → 4.0h
-    expect(estimateHoursFromTemplate(kid('3'))).toBe(4)
-    // grade 6 default = 9 blocks → 4.5h
-    expect(estimateHoursFromTemplate(kid('6'))).toBe(4.5)
+    // 0.5h per weekday block, rounded to the nearest 0.25
+    expect(estimateHoursFromTemplate(kid('3'))).toBe(5) // grade-3 default = 10 blocks
+    expect(estimateHoursFromTemplate(kid('6'))).toBe(5.5) // grade-6 default = 11 blocks
   })
 
   it('effective hours prefers Dad’s override, falls back to the estimate', () => {
@@ -45,7 +48,7 @@ describe('attendance recording (append-only, idempotent)', () => {
     const p = kid('3')
     expect(getAttendance(recordAttendance(p, false, '2026-09-08')).log).toHaveLength(0)
     const rec = recordAttendance(p, true, '2026-09-08')
-    expect(getAttendance(rec).log).toEqual([{ date: '2026-09-08', hours: 4 }])
+    expect(getAttendance(rec).log).toEqual([{ date: '2026-09-08', hours: EST3 }])
   })
 
   it('is idempotent — the same date is never logged twice', () => {
@@ -56,11 +59,11 @@ describe('attendance recording (append-only, idempotent)', () => {
   })
 
   it('snapshots hours at record time — a later override does not rewrite history', () => {
-    let p = recordAttendance(kid('3'), true, '2026-09-08') // logged at 4h estimate
+    let p = recordAttendance(kid('3'), true, '2026-09-08') // logged at the estimate
     p = setHoursPerDay(p, 6) // Dad changes the default afterwards
     p = recordAttendance(p, true, '2026-09-09') // new day at the new rate
     expect(getAttendance(p).log).toEqual([
-      { date: '2026-09-08', hours: 4 },
+      { date: '2026-09-08', hours: EST3 },
       { date: '2026-09-09', hours: 6 },
     ])
   })
@@ -84,17 +87,17 @@ describe('aggregation', () => {
 
   it('month totals count days and sum hours', () => {
     const s = getAttendance(seed())
-    expect(monthTotals(s, '2026-09')).toEqual({ days: 2, hours: 8 })
-    expect(monthTotals(s, '2026-10')).toEqual({ days: 1, hours: 4 })
+    expect(monthTotals(s, '2026-09')).toEqual({ days: 2, hours: 2 * EST3 })
+    expect(monthTotals(s, '2026-10')).toEqual({ days: 1, hours: EST3 })
     expect(monthTotals(s, '2026-11')).toEqual({ days: 0, hours: 0 })
   })
 
   it('YTD rolls over Aug 1 — a January date still counts the prior-August start', () => {
     const s = getAttendance(seed())
     // asOf in Jan 2027 → school year started 2026-08-01, so all four days count
-    expect(yearToDateTotals(s, '2027-01-10')).toEqual({ days: 4, hours: 16 })
+    expect(yearToDateTotals(s, '2027-01-10')).toEqual({ days: 4, hours: 4 * EST3 })
     // asOf in Oct 2026 → only the three Fall days so far
-    expect(yearToDateTotals(s, '2026-10-31')).toEqual({ days: 3, hours: 12 })
+    expect(yearToDateTotals(s, '2026-10-31')).toEqual({ days: 3, hours: 3 * EST3 })
   })
 
   it('lists logged months most-recent first', () => {
@@ -107,6 +110,6 @@ describe('CSV export', () => {
     let p = kid('3')
     p = recordAttendance(p, true, '2026-09-15')
     p = recordAttendance(p, true, '2026-09-01')
-    expect(attendanceCsv(getAttendance(p))).toBe('date,hours\n2026-09-01,4\n2026-09-15,4')
+    expect(attendanceCsv(getAttendance(p))).toBe(`date,hours\n2026-09-01,${EST3}\n2026-09-15,${EST3}`)
   })
 })

@@ -54,6 +54,25 @@ const SAT_PREP_ITEM: MissionTemplateItem = {
   season: 'fall',
 }
 
+/** MR reading-fluency session (grades 3/4/6). Auto-checks when an in-app reading
+ *  session completes (wired in ReadingView → autoCompleteReading). Daily. */
+const READING_ITEM: MissionTemplateItem = {
+  id: 'reading-session',
+  label: '📖 Reading',
+  auto: true,
+  autoKind: 'reading',
+}
+
+/** MM weekly mindset lesson (all grades). Auto-checks when the week's lesson is
+ *  reflected (wired in MindsetLesson → autoCompleteMindset). Once per week. */
+const MINDSET_ITEM: MissionTemplateItem = {
+  id: 'mindset-lesson',
+  label: '🧠 Mindset lesson (1×/week)',
+  auto: true,
+  autoKind: 'mindset',
+  weeklyOnce: true,
+}
+
 // ---------- default templates (Dad edits these in the Grown-Ups panel) ----------
 
 export function defaultTemplateFor(grade: Grade): MissionTemplate {
@@ -65,14 +84,17 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           { id: 'math-lesson', label: 'Math lesson with Dad' },
           { id: 'math-practice', label: 'Math practice (15 questions)', auto: true },
           { id: 'read-aloud', label: 'Read aloud 15 minutes' },
+          READING_ITEM,
           { id: 'read-self', label: 'Read to self 15 minutes' },
           { id: 'writing', label: 'Writing or Spelling' },
           HANDWRITING_ITEM,
           { id: 'science-ss', label: 'Science or Social Studies' },
+          MINDSET_ITEM,
         ],
         friday: [
           TYPING_ITEM,
           { id: 'math-practice', label: 'Math practice (15 questions)', auto: true },
+          READING_ITEM,
           { id: 'read-self', label: 'Read to self 15 minutes' },
           { id: 'fun-project', label: 'Fun Friday project' },
         ],
@@ -84,14 +106,17 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           { id: 'math-lesson', label: 'Math lesson with Dad' },
           { id: 'math-practice', label: 'Math practice (15 questions)', auto: true },
           { id: 'read-aloud', label: 'Read aloud 15 minutes' },
+          READING_ITEM,
           { id: 'read-self', label: 'Read to self 15 minutes' },
           { id: 'writing', label: 'Writing or Spelling' },
           HANDWRITING_ITEM,
           { id: 'science-ss', label: 'Science or Social Studies' },
+          MINDSET_ITEM,
         ],
         friday: [
           TYPING_ITEM,
           { id: 'math-practice', label: 'Math practice (15 questions)', auto: true },
+          READING_ITEM,
           { id: 'read-self', label: 'Read to self 15 minutes' },
           { id: 'fun-project', label: 'Fun Friday project' },
         ],
@@ -103,16 +128,19 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           { id: 'math-practice', label: 'Math practice (15 questions)', auto: true },
           { id: 'math-check', label: 'Check answers with Dad' },
           { id: 'reading', label: 'Reading 20 minutes' },
+          READING_ITEM,
           { id: 'writing', label: 'Writing' },
           JAPANESE_ITEM,
           CURRENT_EVENTS_ITEM,
           { id: 'science-ss', label: 'Science or Social Studies' },
           { id: 'planner', label: 'Plan tomorrow in your planner' },
+          MINDSET_ITEM,
         ],
         friday: [
           TYPING_ITEM,
           { id: 'math-practice', label: 'Math practice (15 questions)', auto: true },
           { id: 'reading', label: 'Reading 20 minutes' },
+          READING_ITEM,
           { id: 'project', label: 'Friday project time' },
         ],
       }
@@ -125,6 +153,7 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           { id: 'social-studies', label: 'Social Studies' },
           CURRENT_EVENTS_ITEM,
           { id: 'elective', label: 'Elective' },
+          MINDSET_ITEM,
         ],
         friday: [
           { id: 'geometry', label: 'Geometry review 30 minutes' },
@@ -143,6 +172,7 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           SAT_PREP_ITEM,
           CURRENT_EVENTS_ITEM,
           { id: 'college-app', label: 'College-app task of the day' },
+          MINDSET_ITEM,
         ],
         friday: [
           { id: 'math-block', label: 'Math block 60 minutes' },
@@ -299,18 +329,19 @@ export const autoCompletePractice = (p: Profile, today: string = isoToday()): Pr
 export const autoCompleteTyping = (p: Profile, today: string = isoToday()): Profile =>
   autoCompleteKind(p, 'typing', today)
 
-// ---------- LEAVE HOOKS (item 4): reading + mindset auto-items ----------
-// Documented but UNWIRED. The MR (reading) and MM (mindset) modules cannot touch
-// this file, so SE-B provides their plumbing: give a template item
-// `{ auto: true, autoKind: 'reading' | 'mindset' }` and call the matching helper
-// below when that module's daily activity finishes. App.tsx does NOT call these
-// yet — the SE-B merge card wires them once those modules are on master.
+// ---------- MR/MM auto-check hooks (item 4 — WIRED at the SE-B merge) ----------
+// The MR (reading) and MM (mindset) modules can't touch this file, so SE-B owns
+// their plumbing. These are now connected: autoCompleteReading fires from
+// ReadingView.onComplete (a finished fluency session), autoCompleteMindset from
+// MindsetLesson's markReflected sites (the week's lesson reflected — NOT mere
+// viewing). Their template items (READING_ITEM / MINDSET_ITEM) ship in the grade
+// defaults above.
 
-/** MR leave hook: a finished reading activity flips the reading auto item. */
+/** A finished MR reading-fluency session flips the '📖 Reading' auto item. */
 export const autoCompleteReading = (p: Profile, today: string = isoToday()): Profile =>
   autoCompleteKind(p, 'reading', today)
 
-/** MM leave hook: a finished mindset activity flips the mindset auto item. */
+/** A reflected MM mindset lesson flips the '🧠 Mindset lesson' auto item. */
 export const autoCompleteMindset = (p: Profile, today: string = isoToday()): Profile =>
   autoCompleteKind(p, 'mindset', today)
 

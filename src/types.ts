@@ -55,9 +55,8 @@ export type Weekday = 1 | 2 | 3 | 4 | 5
  *  - 'math'    — the daily math practice/placement session (legacy default; an
  *                `auto` item with no autoKind is treated as 'math' for back-compat).
  *  - 'typing'  — a finished 5-minute typing drill (SE-A trainer).
- *  - 'reading' / 'mindset' — LEAVE HOOKS for the MR/MM modules; the plumbing
- *    (autoCompleteReading / autoCompleteMindset in missions.ts) exists but is not
- *    wired from App until those modules land on master (see missions.ts item 4).
+ *  - 'reading'  — a finished MR reading-fluency session (ReadingView.onComplete).
+ *  - 'mindset'  — a reflected MM weekly lesson (MindsetLesson markReflected).
  */
 export type AutoKind = 'math' | 'typing' | 'reading' | 'mindset'
 
