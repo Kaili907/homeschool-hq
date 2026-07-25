@@ -109,3 +109,18 @@ text / keys / assessment item content (context is single-profile, status-only),
 and every data-changing action requires an explicit Confirm tap. Reuses MT-2's
 Anthropic key/model path (shared key), so keyless/offline disables the orb only.
 Teens (grades 10/12) only; littles' screens show no assistant.
+
+## Supabase additive: Academy student identity Phase 0 (2026-07-24, unused)
+
+Database-only foundation in
+`supabase/migrations/20260724230000_academy_student_identity_foundation.sql`.
+It adds new `academy_*` identity, guardian-access, subject-enrollment, lifecycle,
+audit, private credential-verifier, and private future-session tables. It does
+not alter `public.profiles`, import local profiles, or change application
+`schemaVersion` 2.
+
+The migration is not run by the application and must not be applied to
+production in this phase. Validate only in an ephemeral/local Supabase project
+with `supabase/tests/academy_student_identity_rls_probes.sql`. Architecture,
+future profile mapping, rollout, and rollback are documented in
+`docs/academy-student-identity-phase-0.md`.
