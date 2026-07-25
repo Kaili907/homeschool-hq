@@ -23,6 +23,7 @@ import {
 } from './provenance'
 import { signOutRemote } from './supabase'
 import { emptyHouseholdMeta } from './types'
+import { finalizationGuardForTestSetup } from './finalizationGuard.test-helper'
 
 class MemStorage implements Storage {
   protected values = new Map<string, string>()
@@ -64,6 +65,7 @@ describe('crash-safe household ownership recovery', () => {
       'a@example.com',
       emptyHouseholdMeta('household-a'),
       await datasetFingerprint(original),
+      finalizationGuardForTestSetup('household-a'),
     )
   })
 
@@ -77,6 +79,7 @@ describe('crash-safe household ownership recovery', () => {
       'b@example.com',
       emptyHouseholdMeta('household-b'),
       replacement,
+      finalizationGuardForTestSetup('household-b'),
       100,
     )
   }
@@ -99,6 +102,7 @@ describe('crash-safe household ownership recovery', () => {
         'b@example.com',
         emptyHouseholdMeta('household-b'),
         replacement,
+        finalizationGuardForTestSetup('household-b'),
         100,
         expected,
       ),
@@ -119,7 +123,11 @@ describe('crash-safe household ownership recovery', () => {
 
   it('finishes a crash after AppState write using the new fingerprint', async () => {
     const transition = await prepare()
-    await persistOwnershipTransitionDataset(transition, replacement)
+    await persistOwnershipTransitionDataset(
+      transition,
+      replacement,
+      finalizationGuardForTestSetup('household-b'),
+    )
     expect(await recoverOwnershipTransitions()).toContainEqual({
       kind: 'finished-new',
       householdId: 'household-b',
@@ -154,6 +162,7 @@ describe('crash-safe household ownership recovery', () => {
       'a@example.com',
       a,
       await datasetFingerprint(original),
+      finalizationGuardForTestSetup('household-a'),
     )
     invalidateAllLocalOwnership('Imported data requires review.')
     expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)

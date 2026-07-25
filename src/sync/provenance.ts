@@ -10,8 +10,21 @@ export const DATASET_PROVENANCE_STORAGE_KEY =
 
 const MAX_CANONICAL_DEPTH = 128
 const MAX_CANONICAL_NODES = 500_000
+const MAX_SYNC_ARRAY_ITEMS = 50_000
+const MAX_SYNC_RECORD_ENTRIES = 50_000
+const MAX_SYNC_STRING_LENGTH = 1_000_000
 const GRADES = new Set(['3', '4', '6', '10', '12'])
 const THEMES = new Set(['playful', 'cool', 'clean'])
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
+const STAR_SOURCES = new Set([
+  'practice-session',
+  'accuracy-bonus',
+  'tutor-retry',
+  'mission-complete',
+  'weekly-streak',
+  'manual-grant',
+  'redeem',
+])
 
 export interface ImportTransitionRecord {
   operationId: string
@@ -47,31 +60,516 @@ function finiteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value)
 }
 
-function validateSkillRecord(value: unknown): boolean {
+function text(value: unknown, max = MAX_SYNC_STRING_LENGTH): value is string {
+  return typeof value === 'string' && value.length <= max
+}
+
+function identifier(value: unknown): value is string {
+  return text(value, 512) && value.length > 0
+}
+
+function isoDate(value: unknown, allowEmpty = false): value is string {
+  return (
+    text(value, 32) &&
+    ((allowEmpty && value === '') ||
+      (ISO_DATE.test(value) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`))))
+  )
+}
+
+function timestamp(value: unknown): value is string {
+  return (
+    text(value, 64) &&
+    value.length > 0 &&
+    !Number.isNaN(Date.parse(value))
+  )
+}
+
+function optional(
+  value: unknown,
+  validate: (candidate: unknown) => boolean,
+): boolean {
+  return value === undefined || validate(value)
+}
+
+function boundedArray(
+  value: unknown,
+  validate: (candidate: unknown) => boolean,
+  max = MAX_SYNC_ARRAY_ITEMS,
+): boolean {
+  return (
+    Array.isArray(value) &&
+    value.length <= max &&
+    value.every((candidate) => validate(candidate))
+  )
+}
+
+function boundedRecord(
+  value: unknown,
+  validate: (candidate: unknown, key: string) => boolean,
+): boolean {
   if (!plainRecord(value)) return false
-  return Object.values(value).every(
+  const entries = Object.entries(value)
+  return (
+    entries.length <= MAX_SYNC_RECORD_ENTRIES &&
+    entries.every(([key, candidate]) => validate(candidate, key))
+  )
+}
+
+function validateSkillRecord(value: unknown): boolean {
+  return boundedRecord(
+    value,
     (skill) =>
       plainRecord(skill) &&
       finiteNumber(skill.attempts) &&
       finiteNumber(skill.correct) &&
       finiteNumber(skill.mastery) &&
-      (skill.lastSeen === undefined || typeof skill.lastSeen === 'string'),
+      optional(skill.lastSeen, isoDate),
   )
 }
 
 function validateMissionRecord(value: unknown): boolean {
-  if (!plainRecord(value)) return false
-  return Object.values(value).every(
-    (day) =>
+  return boundedRecord(
+    value,
+    (day, date) =>
+      isoDate(date) &&
       plainRecord(day) &&
-      Array.isArray(day.items) &&
-      day.items.every(
+      boundedArray(
+        day.items,
         (item) =>
           plainRecord(item) &&
-          typeof item.id === 'string' &&
-          typeof item.label === 'string' &&
-          typeof item.done === 'boolean',
+          identifier(item.id) &&
+          text(item.label) &&
+          typeof item.done === 'boolean' &&
+          optional(item.auto, (candidate) => typeof candidate === 'boolean') &&
+          optional(
+            item.autoKind,
+            (candidate) =>
+              candidate === 'math' ||
+              candidate === 'typing' ||
+              candidate === 'reading' ||
+              candidate === 'mindset',
+          ),
       ),
+  )
+}
+
+function validateMissionTemplateItem(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    identifier(value.id) &&
+    text(value.label) &&
+    optional(value.auto, (candidate) => typeof candidate === 'boolean') &&
+    optional(
+      value.autoKind,
+      (candidate) =>
+        candidate === 'math' ||
+        candidate === 'typing' ||
+        candidate === 'reading' ||
+        candidate === 'mindset',
+    ) &&
+    optional(value.days, (candidate) =>
+      boundedArray(
+        candidate,
+        (day) =>
+          finiteNumber(day) &&
+          Number.isInteger(day) &&
+          day >= 1 &&
+          day <= 5,
+        5,
+      ),
+    ) &&
+    optional(value.weeklyOnce, (candidate) => typeof candidate === 'boolean') &&
+    optional(value.season, (candidate) => candidate === 'fall')
+  )
+}
+
+function validateMissionTemplate(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    boundedArray(value.weekday, validateMissionTemplateItem) &&
+    boundedArray(value.friday, validateMissionTemplateItem)
+  )
+}
+
+function validateAssessments(value: unknown): boolean {
+  if (!plainRecord(value)) return false
+  const assigned = boundedArray(
+    value.assigned,
+    (assignment) =>
+      plainRecord(assignment) &&
+      identifier(assignment.testId) &&
+      text(assignment.startCode, 512) &&
+      timestamp(assignment.assignedAt),
+  )
+  const attempts = boundedArray(
+    value.attempts,
+    (attempt) =>
+      plainRecord(attempt) &&
+      identifier(attempt.testId) &&
+      identifier(attempt.profileId) &&
+      timestamp(attempt.startedAt) &&
+      optional(attempt.finishedAt, timestamp) &&
+      boundedRecord(
+        attempt.answers,
+        (answer) =>
+          plainRecord(answer) &&
+          text(answer.value) &&
+          typeof answer.skipped === 'boolean' &&
+          finiteNumber(answer.msOnItem),
+      ) &&
+      optional(
+        attempt.autoScore,
+        (score) =>
+          plainRecord(score) &&
+          boundedRecord(
+            score.bySection,
+            (section) =>
+              plainRecord(section) &&
+              finiteNumber(section.correct) &&
+              finiteNumber(section.of),
+          ) &&
+          finiteNumber(score.gradedItems) &&
+          finiteNumber(score.skips),
+      ),
+  )
+  return (
+    assigned &&
+    attempts &&
+    optional(value.retakeUnlocked, (candidate) =>
+      boundedArray(candidate, identifier),
+    )
+  )
+}
+
+function validateCourses(value: unknown): boolean {
+  return boundedArray(
+    value,
+    (course) =>
+      plainRecord(course) &&
+      identifier(course.id) &&
+      text(course.name) &&
+      boundedArray(
+        course.units,
+        (unit) =>
+          plainRecord(unit) &&
+          identifier(unit.id) &&
+          text(unit.label) &&
+          typeof unit.done === 'boolean',
+      ),
+  )
+}
+
+function validateStars(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    finiteNumber(value.balance) &&
+    finiteNumber(value.lifetimeEarned) &&
+    boundedArray(
+      value.ledger,
+      (entry) =>
+        plainRecord(entry) &&
+        identifier(entry.id) &&
+        timestamp(entry.at) &&
+        isoDate(entry.day) &&
+        finiteNumber(entry.amount) &&
+        text(entry.reason) &&
+        typeof entry.source === 'string' &&
+        STAR_SOURCES.has(entry.source),
+    ) &&
+    boundedArray(
+      value.pendingRedemptions,
+      (entry) =>
+        plainRecord(entry) &&
+        identifier(entry.id) &&
+        identifier(entry.prizeId) &&
+        text(entry.name) &&
+        text(entry.emoji, 64) &&
+        finiteNumber(entry.cost) &&
+        timestamp(entry.requestedAt),
+    )
+  )
+}
+
+function validateTutorPrefs(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    optional(value.voiceURI, text) &&
+    optional(value.rate, finiteNumber) &&
+    optional(value.voiceOptIn, (candidate) => typeof candidate === 'boolean') &&
+    optional(value.voiceMap, (candidate) =>
+      boundedRecord(
+        candidate,
+        (voice) =>
+          plainRecord(voice) &&
+          (voice.provider === 'elevenlabs' || voice.provider === 'browser') &&
+          text(voice.ref) &&
+          text(voice.label),
+      ),
+    )
+  )
+}
+
+function validateTyping(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    finiteNumber(value.unlockedIndex) &&
+    finiteNumber(value.drillsCompleted) &&
+    optional(value.lastPracticedDate, isoDate) &&
+    boundedRecord(
+      value.lessons,
+      (lesson) =>
+        plainRecord(lesson) &&
+        finiteNumber(lesson.bestAccuracy) &&
+        finiteNumber(lesson.bestWpm) &&
+        typeof lesson.passed === 'boolean' &&
+        optional(lesson.lastSeen, isoDate),
+    )
+  )
+}
+
+function validateReading(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    boundedArray(
+      value.sessions,
+      (session) =>
+        plainRecord(session) &&
+        isoDate(session.date) &&
+        identifier(session.passageId) &&
+        (session.mode === 'estimated' ||
+          session.mode === 'assessed' ||
+          session.mode === 'manual') &&
+        finiteNumber(session.wcpm) &&
+        boundedArray(session.wordsPracticed, text) &&
+        finiteNumber(session.durationSec),
+    ) &&
+    boundedArray(value.seenPassageIds, identifier) &&
+    boundedArray(
+      value.calibrations,
+      (calibration) =>
+        plainRecord(calibration) &&
+        isoDate(calibration.date) &&
+        optional(calibration.passageId, identifier) &&
+        finiteNumber(calibration.wcpm),
+    ) &&
+    optional(value.lastReadDate, isoDate)
+  )
+}
+
+function validateAttendance(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    optional(value.hoursPerDay, finiteNumber) &&
+    boundedArray(
+      value.log,
+      (day) =>
+        plainRecord(day) &&
+        isoDate(day.date) &&
+        finiteNumber(day.hours),
+    )
+  )
+}
+
+function validateTutorChats(value: unknown): boolean {
+  return boundedArray(
+    value,
+    (chat) =>
+      plainRecord(chat) &&
+      identifier(chat.id) &&
+      identifier(chat.skillId) &&
+      GRADES.has(String(chat.grade)) &&
+      isoDate(chat.day) &&
+      finiteNumber(chat.startedTs) &&
+      text(chat.problem) &&
+      text(chat.correctAnswer) &&
+      text(chat.herAnswer) &&
+      boundedArray(
+        chat.messages,
+        (message) =>
+          plainRecord(message) &&
+          (message.role === 'kid' || message.role === 'tutor') &&
+          text(message.text) &&
+          finiteNumber(message.ts) &&
+          optional(
+            message.source,
+            (source) => source === 'api' || source === 'scripted',
+          ),
+      ) &&
+      optional(
+        chat.outcome,
+        (outcome) => outcome === 'flagged' || outcome === 'closed',
+      ),
+  )
+}
+
+function validateMindset(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    boundedRecord(
+      value.weeks,
+      (week, key) =>
+        /^\d+$/.test(key) &&
+        Number(key) >= 1 &&
+        plainRecord(week) &&
+        optional(week.viewed, (candidate) => typeof candidate === 'boolean') &&
+        optional(
+          week.reflected,
+          (candidate) => typeof candidate === 'boolean',
+        ) &&
+        optional(week.completedAt, isoDate),
+    )
+  )
+}
+
+function validateAssistant(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    boundedArray(value.calls, finiteNumber) &&
+    boundedArray(
+      value.sessions,
+      (session) =>
+        plainRecord(session) &&
+        identifier(session.id) &&
+        isoDate(session.day) &&
+        finiteNumber(session.startedTs) &&
+        boundedArray(
+          session.messages,
+          (message) =>
+            plainRecord(message) &&
+            (message.role === 'girl' || message.role === 'assistant') &&
+            text(message.text) &&
+            finiteNumber(message.ts) &&
+            optional(
+              message.source,
+              (source) => source === 'api' || source === 'scripted',
+            ) &&
+            optional(
+              message.flagged,
+              (candidate) => typeof candidate === 'boolean',
+            ) &&
+            optional(
+              message.action,
+              (action) =>
+                plainRecord(action) &&
+                (action.kind === 'check_mission' ||
+                  action.kind === 'mark_college_task' ||
+                  action.kind === 'start_session') &&
+                text(action.label) &&
+                identifier(action.targetKey) &&
+                finiteNumber(action.ts),
+            ),
+        ),
+    ) &&
+    optional(value.dailyCap, finiteNumber) &&
+    optional(value.name, text) &&
+    optional(value.persona, text)
+  )
+}
+
+function validatePacing(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    boundedRecord(value.pointers, finiteNumber) &&
+    boundedArray(
+      value.nudges,
+      (nudge) =>
+        plainRecord(nudge) &&
+        timestamp(nudge.at) &&
+        identifier(nudge.subjectId) &&
+        finiteNumber(nudge.from) &&
+        finiteNumber(nudge.to) &&
+        text(nudge.reason),
+    )
+  )
+}
+
+function validateProfileOptionals(value: Record<string, unknown>): boolean {
+  return (
+    optional(value.template, validateMissionTemplate) &&
+    optional(value.lastPracticeDate, isoDate) &&
+    optional(value.assessments, validateAssessments) &&
+    optional(value.hsStats, (candidate) =>
+      boundedRecord(
+        candidate,
+        (stat) =>
+          plainRecord(stat) &&
+          finiteNumber(stat.attempts) &&
+          finiteNumber(stat.correct) &&
+          optional(stat.lastSeen, isoDate),
+      ),
+    ) &&
+    optional(value.courses, validateCourses) &&
+    optional(value.collegeTasks, (candidate) =>
+      boundedArray(
+        candidate,
+        (task) =>
+          plainRecord(task) &&
+          identifier(task.id) &&
+          text(task.label) &&
+          isoDate(task.due, true) &&
+          typeof task.done === 'boolean',
+      ),
+    ) &&
+    optional(value.tutor, validateTutorPrefs) &&
+    optional(value.tutorFlags, (candidate) =>
+      boundedRecord(
+        candidate,
+        (flag) =>
+          plainRecord(flag) &&
+          isoDate(flag.since) &&
+          text(flag.reason) &&
+          finiteNumber(flag.sessionCount) &&
+          finiteNumber(flag.weekCount),
+      ),
+    ) &&
+    optional(value.walkthroughLog, (candidate) =>
+      boundedArray(
+        candidate,
+        (event) =>
+          plainRecord(event) &&
+          identifier(event.skillId) &&
+          finiteNumber(event.ts) &&
+          isoDate(event.day),
+      ),
+    ) &&
+    optional(value.stars, validateStars) &&
+    optional(value.coolStars, (candidate) => typeof candidate === 'boolean') &&
+    optional(value.typing, validateTyping) &&
+    optional(value.reading, validateReading) &&
+    optional(value.attendance, validateAttendance) &&
+    optional(value.serviceLog, (candidate) =>
+      boundedArray(
+        candidate,
+        (entry) =>
+          plainRecord(entry) &&
+          identifier(entry.id) &&
+          isoDate(entry.date) &&
+          text(entry.org) &&
+          finiteNumber(entry.hours) &&
+          text(entry.note) &&
+          typeof entry.approved === 'boolean' &&
+          timestamp(entry.createdAt),
+      ),
+    ) &&
+    optional(value.tutorChats, validateTutorChats) &&
+    optional(value.tutorCalls, (candidate) =>
+      boundedArray(candidate, finiteNumber),
+    ) &&
+    optional(value.tutorDailyCap, finiteNumber) &&
+    optional(value.mindset, validateMindset) &&
+    optional(value.assistant, validateAssistant) &&
+    optional(value.pacing, validatePacing) &&
+    optional(value.masterySnapshots, (candidate) =>
+      boundedArray(
+        candidate,
+        (snapshot) =>
+          plainRecord(snapshot) &&
+          timestamp(snapshot.at) &&
+          text(snapshot.subject) &&
+          finiteNumber(snapshot.level) &&
+          optional(snapshot.note, text),
+      ),
+    )
   )
 }
 
@@ -80,23 +578,61 @@ function validateProfile(key: string, value: unknown): value is Profile {
   return (
     value.id === key &&
     key.length > 0 &&
-    typeof value.name === 'string' &&
+    text(value.name) &&
     GRADES.has(String(value.grade)) &&
-    typeof value.pin === 'string' &&
+    text(value.pin, 64) &&
     THEMES.has(String(value.theme)) &&
     validateSkillRecord(value.skills) &&
     validateMissionRecord(value.missions) &&
     plainRecord(value.streaks) &&
     finiteNumber(value.streaks.current) &&
     finiteNumber(value.streaks.best) &&
-    typeof value.streaks.lastActiveDate === 'string' &&
-    typeof value.createdAt === 'string' &&
+    isoDate(value.streaks.lastActiveDate, true) &&
+    timestamp(value.createdAt) &&
     typeof value.placementDone === 'boolean' &&
     plainRecord(value.totals) &&
     finiteNumber(value.totals.questionsAnswered) &&
     finiteNumber(value.totals.correct) &&
     finiteNumber(value.totals.bestStreak) &&
-    finiteNumber(value.totals.sessions)
+    finiteNumber(value.totals.sessions) &&
+    validateProfileOptionals(value)
+  )
+}
+
+function validateGlobalStars(value: unknown): boolean {
+  if (!plainRecord(value) || !plainRecord(value.rates)) return false
+  const rates = value.rates
+  return (
+    boundedArray(
+      value.prizes,
+      (prize) =>
+        plainRecord(prize) &&
+        identifier(prize.id) &&
+        text(prize.name) &&
+        text(prize.emoji, 64) &&
+        finiteNumber(prize.cost) &&
+        typeof prize.active === 'boolean',
+    ) &&
+    [
+      'practiceSession',
+      'accuracyBonus',
+      'tutorRetry',
+      'tutorRetryDailyMax',
+      'missionComplete',
+      'weeklyStreak',
+      'weeklyStreakThreshold',
+      'dailyCap',
+    ].every((key) => finiteNumber(rates[key]))
+  )
+}
+
+function validateSchoolYear(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    isoDate(value.startDate) &&
+    finiteNumber(value.totalWeeks) &&
+    boundedArray(value.quarterBreaks, finiteNumber) &&
+    boundedArray(value.offWeeks, isoDate)
   )
 }
 
@@ -120,7 +656,11 @@ export function validateAppStateForSync(value: unknown): AppStateValidation {
     !Object.entries(value.profiles).every(([key, profile]) =>
       validateProfile(key, profile),
     ) ||
-    typeof value.parentPin !== 'string' ||
+    !text(value.parentPin, 64) ||
+    !optional(value.tutorMuted, (candidate) => typeof candidate === 'boolean') ||
+    !optional(value.stars, validateGlobalStars) ||
+    !optional(value.mindsetStartDate, isoDate) ||
+    !optional(value.schoolYear, validateSchoolYear) ||
     !(
       value.activeProfileId === null ||
       (typeof value.activeProfileId === 'string' &&

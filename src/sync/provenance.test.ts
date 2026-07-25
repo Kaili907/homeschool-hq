@@ -265,4 +265,101 @@ describe('persisted Academy dataset provenance', () => {
     cyclic.cycle = cyclic
     await expect(datasetFingerprint(cyclic)).rejects.toThrow('cyclic')
   })
+
+  it.each<
+    [string, (state: AppState) => void]
+  >([
+    [
+      'course progress',
+      (state) => {
+        ;(state.profiles.p1 as unknown as Record<string, unknown>).courses = {}
+      },
+    ],
+    [
+      'profile stars',
+      (state) => {
+        ;(state.profiles.p1 as unknown as Record<string, unknown>).stars = {
+          balance: 'ten',
+          lifetimeEarned: 10,
+          ledger: [],
+          pendingRedemptions: [],
+        }
+      },
+    ],
+    [
+      'reading records',
+      (state) => {
+        ;(state.profiles.p1 as unknown as Record<string, unknown>).reading = {
+          sessions: [{ passageId: 'p1' }],
+          seenPassageIds: [],
+          calibrations: [],
+        }
+      },
+    ],
+    [
+      'assistant state',
+      (state) => {
+        ;(state.profiles.p1 as unknown as Record<string, unknown>).assistant = {
+          calls: ['not-a-number'],
+          sessions: [],
+        }
+      },
+    ],
+    [
+      'tutor calls',
+      (state) => {
+        ;(state.profiles.p1 as unknown as Record<string, unknown>).tutorCalls = [
+          'not-a-number',
+        ]
+      },
+    ],
+    [
+      'attendance',
+      (state) => {
+        ;(state.profiles.p1 as unknown as Record<string, unknown>).attendance = {
+          log: [{ date: 'not-a-date', hours: 5 }],
+        }
+      },
+    ],
+    [
+      'assessments',
+      (state) => {
+        ;(state.profiles.p1 as unknown as Record<string, unknown>).assessments =
+          { assigned: {}, attempts: [] }
+      },
+    ],
+    [
+      'mindset progress',
+      (state) => {
+        ;(state.profiles.p1 as unknown as Record<string, unknown>).mindset = {
+          weeks: [],
+        }
+      },
+    ],
+    [
+      'family stars',
+      (state) => {
+        ;(state as unknown as Record<string, unknown>).stars = {
+          prizes: {},
+          rates: {},
+        }
+      },
+    ],
+    [
+      'school-year configuration',
+      (state) => {
+        ;(state as unknown as Record<string, unknown>).schoolYear = {
+          startDate: '2026-08-01',
+          totalWeeks: 36,
+          quarterBreaks: [],
+          offWeeks: {},
+        }
+      },
+    ],
+  ])('rejects malformed optional %s', async (_label, mutate) => {
+    const state = defaultAppState()
+    mutate(state)
+    expect(validateAppStateForSync(state)).toMatchObject({ ok: false })
+    await expect(datasetFingerprint(state)).rejects.toThrow()
+  })
 })

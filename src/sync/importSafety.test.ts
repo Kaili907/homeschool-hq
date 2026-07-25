@@ -18,6 +18,7 @@ import {
   verifyOwnedDatasetProvenance,
 } from './provenance'
 import { emptyHouseholdMeta } from './types'
+import { finalizationGuardForTestSetup } from './finalizationGuard.test-helper'
 
 class MemStorage implements Storage {
   protected values = new Map<string, string>()
@@ -65,6 +66,7 @@ describe('durable binding-aware backup import', () => {
       'b@example.com',
       emptyHouseholdMeta('household-b'),
       await datasetFingerprint(current),
+      finalizationGuardForTestSetup('household-b'),
     )
     return current
   }

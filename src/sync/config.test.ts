@@ -28,6 +28,7 @@ import {
   datasetFingerprint,
   ensureDatasetProvenance,
 } from './provenance'
+import { finalizationGuardForTestSetup } from './finalizationGuard.test-helper'
 
 class MemStorage {
   private values = new Map<string, string>()
@@ -107,6 +108,7 @@ describe('household-scoped persistence', () => {
         reconciliation: 'ready',
       },
       fingerprint,
+      finalizationGuardForTestSetup('household-a'),
     )
     const unboundB = loadHouseholdMeta('household-b', 'b@example.com')
     saveHouseholdMeta(unboundB)
@@ -123,12 +125,14 @@ describe('household-scoped persistence', () => {
       'a@example.com',
       emptyHouseholdMeta('household-a'),
       fingerprint,
+      finalizationGuardForTestSetup('household-a'),
     )
     await claimLocalData(
       'household-b',
       'b@example.com',
       emptyHouseholdMeta('household-b'),
       fingerprint,
+      finalizationGuardForTestSetup('household-b'),
     )
 
     expect(loadHouseholdMeta('household-a').binding).toBe('bound')
@@ -146,6 +150,7 @@ describe('household-scoped persistence', () => {
         profiles: { p1: { updatedAt: 1, dirty: true } },
       },
       fingerprint,
+      finalizationGuardForTestSetup('household-a'),
     )
     const signOut = vi.fn(async () => ({ error: null }))
     await signOutRemote({ auth: { signOut } } as never)

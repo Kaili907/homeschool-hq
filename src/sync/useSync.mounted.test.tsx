@@ -8,6 +8,7 @@ import {
 } from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
+  APP_STATE_IMPORT_EVENT,
   importBackup,
   saveAppState,
   waitForAppStatePersistence,
@@ -21,8 +22,13 @@ import {
   legacySyncKeysForTests,
   loadHouseholdMeta,
   saveHouseholdMeta,
+  transitionPrefixForTests,
 } from './config'
-import { leaseStorageKeyForTests } from './coordination'
+import {
+  leaseStorageKeyForTests,
+  setFinalizationStageHookForTests,
+} from './coordination'
+import { finalizationGuardForTestSetup } from './finalizationGuard.test-helper'
 import {
   DATASET_PROVENANCE_STORAGE_KEY,
   datasetFingerprint,
@@ -237,6 +243,22 @@ function deferred<T>(): Deferred<T> {
   return { promise, resolve }
 }
 
+function pauseFinalizerAt(stage: string) {
+  const entered = deferred<void>()
+  const release = deferred<void>()
+  let paused = false
+  setFinalizationStageHookForTests(async (currentStage) => {
+    if (paused || currentStage !== stage) return
+    paused = true
+    entered.resolve(undefined)
+    await release.promise
+  })
+  return {
+    entered: entered.promise,
+    release: () => release.resolve(undefined),
+  }
+}
+
 function rowFor(state: AppState, id = 'p1'): RemoteProfileRow {
   return {
     profile_id: id,
@@ -268,6 +290,7 @@ describe('mounted useSync lifecycle and import safety', () => {
   let root: import('react-dom/client').Root | null
 
   beforeEach(() => {
+    setFinalizationStageHookForTests(null)
     vi.stubEnv('VITE_SUPABASE_URL', 'https://example.supabase.co')
     vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'anon-public-key')
     ;(globalThis as unknown as { localStorage: Storage }).localStorage =
@@ -308,6 +331,7 @@ describe('mounted useSync lifecycle and import safety', () => {
   })
 
   afterEach(async () => {
+    setFinalizationStageHookForTests(null)
     if (root) {
       await act(async () => root?.unmount())
     }
@@ -335,6 +359,7 @@ describe('mounted useSync lifecycle and import safety', () => {
           reconciliation: 'ready',
         },
         await datasetFingerprint(state),
+        finalizationGuardForTestSetup(householdId),
       )
       saveHouseholdMeta(meta)
     }
@@ -390,6 +415,24 @@ describe('mounted useSync lifecycle and import safety', () => {
     await prepareState(null, state)
     await mount(state)
     await waitFor(() => latestApi?.status.decision?.cloud === 'empty')
+  }
+
+  async function openCloudDataDecision(
+    state: AppState,
+    cloudState: AppState,
+    householdId = 'household-a',
+  ) {
+    transport.sessionUser = {
+      id: householdId,
+      email: `${householdId}@example.com`,
+    }
+    transport.pull.mockResolvedValue({
+      ok: true,
+      rows: [rowFor(cloudState)],
+    })
+    await prepareState(null, state)
+    await mount(state)
+    await waitFor(() => latestApi?.status.decision?.cloud === 'data')
   }
 
   it('keeps an exact duplicate import durably unbound across remount', async () => {
@@ -494,6 +537,36 @@ describe('mounted useSync lifecycle and import safety', () => {
     expect(localStorage.getItem(legacySyncKeysForTests.session)).toBeNull()
     expect(localStorage.getItem(legacySyncKeysForTests.meta)).toBeNull()
     expect(localStorage.getItem(officialKey)).toBe('official-session')
+  })
+
+  it('keeps malformed optional Academy state local and blocks cloud mutation', async () => {
+    const malformed = defaultAppState()
+    ;(malformed.profiles.p1 as unknown as Record<string, unknown>).reading = {
+      sessions: [{ wcpm: 'not-a-number' }],
+      seenPassageIds: [],
+      calibrations: [],
+    }
+    localStorage.setItem('homeschool-hq:app:v2', JSON.stringify(malformed))
+    saveHouseholdMeta({
+      ...loadHouseholdMeta('household-a', 'household-a@example.com'),
+      binding: 'bound',
+      ownsLocalData: true,
+      datasetFingerprint: 'untrusted-fingerprint',
+      importEpoch: 'untrusted-import-epoch',
+    })
+    transport.sessionUser = {
+      id: 'household-a',
+      email: 'household-a@example.com',
+    }
+
+    await mount(malformed)
+    await act(async () => latestApi!.syncNow())
+
+    expect(transport.push).not.toHaveBeenCalled()
+    expect(loadHouseholdMeta('household-a').binding).toBe('unbound')
+    expect(loadHouseholdMeta('household-a').pauseReason).toContain(
+      'Local Academy data no longer matches',
+    )
   })
 
   it('denies local finalization when import occurs during a pending write', async () => {
@@ -667,5 +740,183 @@ describe('mounted useSync lifecycle and import safety', () => {
     pending.resolve({ ok: true })
     await expect(upload).rejects.toThrow()
     expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+  })
+
+  it('blocks ownership when sign-out occurs inside claim finalization', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const pause = pauseFinalizerAt(
+      'Ownership claim prepared for durable commit',
+    )
+    const upload = latestApi!.uploadLocal()
+    const observed = upload.catch((cause) => cause)
+    await pause.entered
+
+    await act(async () => latestApi!.signOut())
+    pause.release()
+
+    await expect(observed).resolves.toBeInstanceOf(Error)
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+    expect(latestApi?.status.lastSyncAt).toBeNull()
+  })
+
+  it('blocks Household A finalization after switching to Household B', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const pause = pauseFinalizerAt(
+      'Ownership claim prepared for durable commit',
+    )
+    const upload = latestApi!.uploadLocal()
+    const observed = upload.catch((cause) => cause)
+    await pause.entered
+
+    await act(async () => {
+      emitAuth('SIGNED_IN', {
+        id: 'household-b',
+        email: 'household-b@example.com',
+      })
+    })
+    pause.release()
+
+    await expect(observed).resolves.toBeInstanceOf(Error)
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+    expect(loadHouseholdMeta('household-b').ownsLocalData).toBe(false)
+  })
+
+  it('does not persist or publish replacement after unmount during finalization', async () => {
+    const state = defaultAppState()
+    const cloud = structuredClone(state)
+    cloud.profiles.p1.name = 'Cloud student'
+    await openCloudDataDecision(state, cloud)
+    const pause = pauseFinalizerAt(
+      'Ownership transition rechecked replacement data',
+    )
+    const replacement = latestApi!.useCloud()
+    const observed = replacement.catch((cause) => cause)
+    await pause.entered
+
+    await act(async () => root!.unmount())
+    root = null
+    pause.release()
+
+    await expect(observed).resolves.toBeInstanceOf(Error)
+    expect(
+      JSON.parse(localStorage.getItem('homeschool-hq:app:v2')!).profiles.p1
+        .name,
+    ).toBe(state.profiles.p1.name)
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+  })
+
+  it('blocks ownership when the lease is lost inside claim finalization', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const pause = pauseFinalizerAt(
+      'Ownership claim prepared for durable commit',
+    )
+    const upload = latestApi!.uploadLocal()
+    const observed = upload.catch((cause) => cause)
+    await pause.entered
+
+    localStorage.removeItem(leaseStorageKeyForTests('household-a'))
+    pause.release()
+
+    await expect(observed).resolves.toBeInstanceOf(Error)
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+    expect(loadHouseholdMeta('household-a').profiles).toEqual({})
+  })
+
+  it('blocks ownership when import epoch changes inside claim finalization', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const pause = pauseFinalizerAt(
+      'Ownership claim prepared for durable commit',
+    )
+    const upload = latestApi!.uploadLocal()
+    const observed = upload.catch((cause) => cause)
+    await pause.entered
+
+    const result = importBackup(state, JSON.stringify(state))
+    if (!result.ok) throw new Error(result.error)
+    await act(async () => updateHostState!(result.state))
+    pause.release()
+
+    await expect(observed).resolves.toBeInstanceOf(Error)
+    expect(loadHouseholdMeta('household-a').binding).toBe('unbound')
+    expect(transport.push).toHaveBeenCalledOnce()
+  })
+
+  it('blocks ownership when the operation is aborted inside finalization', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const pause = pauseFinalizerAt(
+      'Ownership claim prepared for durable commit',
+    )
+    const upload = latestApi!.uploadLocal()
+    const observed = upload.catch((cause) => cause)
+    await pause.entered
+
+    windowTarget.dispatchEvent(new Event(APP_STATE_IMPORT_EVENT))
+    pause.release()
+
+    await expect(observed).resolves.toBeInstanceOf(Error)
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+  })
+
+  it('blocks an old finalizer after a newer operation becomes current', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const pause = pauseFinalizerAt(
+      'Ownership claim prepared for durable commit',
+    )
+    const upload = latestApi!.uploadLocal()
+    const observed = upload.catch((cause) => cause)
+    await pause.entered
+
+    await act(async () => latestApi!.signOut())
+    const newerPull = deferred<CloudPullResult>()
+    transport.pull.mockImplementationOnce(() => newerPull.promise)
+    await act(async () => {
+      emitAuth('SIGNED_IN', {
+        id: 'household-a',
+        email: 'household-a@example.com',
+      })
+    })
+    await waitFor(() => transport.pull.mock.calls.length >= 4)
+    pause.release()
+
+    await expect(observed).resolves.toBeInstanceOf(Error)
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+    newerPull.resolve({ ok: true, rows: [] })
+    await settle()
+  })
+
+  it('does not clear or finalize a superseded ownership transition', async () => {
+    const state = defaultAppState()
+    const cloud = structuredClone(state)
+    cloud.profiles.p1.name = 'Cloud student'
+    await openCloudDataDecision(state, cloud)
+    const pause = pauseFinalizerAt(
+      'Ownership claim prepared for durable commit',
+    )
+    const replacement = latestApi!.useCloud()
+    const observed = replacement.catch((cause) => cause)
+    await pause.entered
+
+    const transitionKey = `${transitionPrefixForTests}household-a`
+    const transition = JSON.parse(localStorage.getItem(transitionKey)!)
+    localStorage.setItem(
+      transitionKey,
+      JSON.stringify({
+        ...transition,
+        operationId: 'replacement-transition-operation',
+      }),
+    )
+    pause.release()
+
+    await expect(observed).resolves.toBeInstanceOf(Error)
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+    expect(JSON.parse(localStorage.getItem(transitionKey)!).operationId).toBe(
+      'replacement-transition-operation',
+    )
   })
 })

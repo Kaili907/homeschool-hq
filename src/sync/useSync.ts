@@ -36,7 +36,10 @@ import {
   mutationLeaseIsOwned,
   releaseMutationLease,
   renewMutationLease,
+  startMutationLeaseHeartbeat,
   tryAcquireMutationLease,
+  updateMutationLeaseFingerprint,
+  type FinalizationGuard,
   type MutationLease,
 } from './coordination'
 import {
@@ -189,6 +192,11 @@ export function useSync(
     if (mountedRef.current) setMeta(next)
   }, [])
 
+  const publishCurrentMeta = useCallback((next: HouseholdSyncMeta) => {
+    metaRef.current = next
+    if (mountedRef.current) setMeta(next)
+  }, [])
+
   const beginOperation = useCallback(
     (prefix: string): ActiveOperation => {
       if (operationRef.current) {
@@ -311,13 +319,17 @@ export function useSync(
       expectedUser: SignedInUser,
       operation: ActiveOperation,
       allowUnbound: boolean,
-      commit?: (validatedFingerprint: string) => void | Promise<void>,
+      commit?: (
+        validatedFingerprint: string,
+        finalization: FinalizationGuard,
+      ) => void | Promise<void>,
     ): Promise<CloudPushResult> => {
       const initial = await strictProvenanceCheck(
         expectedUser.id,
         expectedUser,
         allowUnbound,
       )
+      stateFingerprintRef.current = initial.fingerprint
       const expectedCloudRevision = remoteRowsSignature(expectedCloudRows)
       let verifiedContext: VerifiedAuthContext | null = null
 
@@ -336,8 +348,45 @@ export function useSync(
             error: 'Another tab currently owns the household sync lease.',
           }
         }
+        let heartbeatLost = false
+        let expectedMeta = JSON.stringify(initial.meta)
+        const householdBindingValid = () =>
+          JSON.stringify(
+            loadHouseholdMeta(expectedUser.id, expectedUser.email),
+          ) === expectedMeta
+        const heartbeatCanRun = () =>
+          mountedRef.current &&
+          operationRef.current?.id === operation.id &&
+          userRef.current?.id === expectedUser.id &&
+          !operation.controller.signal.aborted &&
+          !externalBlockedRef.current
+        const renewHeartbeat = () => {
+          if (!lease) return false
+          const provenance = readDatasetProvenance()
+          if (
+            !provenance ||
+            provenance.importTransition ||
+            provenance.importEpoch !== lease.importEpoch ||
+            provenance.fingerprint !== lease.datasetFingerprint
+          ) {
+            return false
+          }
+          const renewed = renewMutationLease(lease)
+          if (!renewed) return false
+          lease = renewed
+          return true
+        }
+        const stopHeartbeat = startMutationLeaseHeartbeat(
+          heartbeatCanRun,
+          renewHeartbeat,
+          () => {
+            heartbeatLost = true
+            operation.controller.abort()
+          },
+        )
         try {
           return await executeGuardedMutation({
+            operationId: operation.id,
             householdId: expectedUser.id,
             datasetFingerprint: initial.fingerprint,
             importEpoch: initial.importEpoch,
@@ -367,27 +416,55 @@ export function useSync(
                 expectedUser.id,
               )),
             currentDatasetContext: async () => {
+              const persisted = await readPersistedDataset()
+              let memoryFingerprint: string | null = null
               try {
-                const current = await strictProvenanceCheck(
-                  expectedUser.id,
-                  expectedUser,
-                  allowUnbound,
-                )
-                return {
-                  fingerprint: current.fingerprint,
-                  importEpoch: current.importEpoch,
-                }
+                memoryFingerprint = await datasetFingerprint(stateRef.current)
               } catch {
-                return null
+                // Invalid memory state fails the comparison below.
+              }
+              const provenance = readDatasetProvenance()
+              return {
+                persistedFingerprint: persisted.ok
+                  ? persisted.fingerprint
+                  : null,
+                memoryFingerprint,
+                provenanceFingerprint: provenance?.fingerprint ?? null,
+                importEpoch: provenance?.importEpoch ?? null,
+                importTransitionPending: !!provenance?.importTransition,
+                householdBindingValid: householdBindingValid(),
               }
             },
-            leaseValid: () => !!lease && mutationLeaseIsOwned(lease),
+            currentSynchronousDatasetContext: () => {
+              const provenance = readDatasetProvenance()
+              return {
+                memoryFingerprint: stateFingerprintRef.current,
+                provenanceFingerprint: provenance?.fingerprint ?? null,
+                importEpoch: provenance?.importEpoch ?? null,
+                importTransitionPending: !!provenance?.importTransition,
+                householdBindingValid: householdBindingValid(),
+              }
+            },
+            leaseValid: () =>
+              !heartbeatLost && !!lease && mutationLeaseIsOwned(lease),
             refreshLease: () => {
               if (!lease) return false
               const renewed = renewMutationLease(lease)
               if (!renewed) return false
               lease = renewed
               return true
+            },
+            updateLeaseDatasetFingerprint: (fingerprint) => {
+              if (!lease) return false
+              const updated = updateMutationLeaseFingerprint(lease, fingerprint)
+              if (!updated) return false
+              lease = updated
+              return true
+            },
+            adoptCurrentHouseholdBinding: () => {
+              expectedMeta = JSON.stringify(
+                loadHouseholdMeta(expectedUser.id, expectedUser.email),
+              )
             },
             withDatasetLock: async (callback) => {
               if (typeof navigator === 'undefined') return callback()
@@ -428,9 +505,11 @@ export function useSync(
                 operation.controller.signal,
               )
             },
-            finalize: async () => commit?.(initial.fingerprint),
+            finalize: async (finalization) =>
+              commit?.(initial.fingerprint, finalization),
           })
         } finally {
+          stopHeartbeat()
           if (lease) releaseMutationLease(lease)
         }
       })
@@ -552,36 +631,38 @@ export function useSync(
           return
         }
         const nextState = appStateWithProfiles(stateRef.current, cycle.profiles)
-        let claimed: HouseholdSyncMeta | null = null
+        const nextFingerprint = await datasetFingerprint(nextState)
+        let published = false
         const finalized = await guardedCloudPush(
           [],
           cycle.rows,
           verifiedUser,
           operation,
           false,
-          async (validatedFingerprint) => {
-            claimed = await replaceDatasetAndClaim(
+          async (validatedFingerprint, finalization) => {
+            await replaceDatasetAndClaim(
               verifiedUser.id,
               verifiedUser.email,
               cycle.meta,
               nextState,
+              finalization,
+              (claimed) => {
+                setProfilesFromPersistedSync(nextState, nextFingerprint)
+                publishCurrentMeta(claimed)
+                if (mountedRef.current) setDecision(null)
+                published = true
+              },
               validatedFingerprint,
             )
           },
         )
-        if (!finalized.ok || !claimed) {
+        if (!finalized.ok || !published) {
           throw new Error(
             finalized.ok
               ? 'Automatic sync did not finalize household ownership.'
               : finalized.error,
           )
         }
-        setProfilesFromPersistedSync(
-          nextState,
-          await datasetFingerprint(nextState),
-        )
-        persistCurrentMeta(claimed)
-        setDecision(null)
       } catch (cause) {
         safeSetError(
           cause instanceof Error ? cause.message : 'Automatic sync failed.',
@@ -595,6 +676,7 @@ export function useSync(
       finishOperation,
       guardedCloudPush,
       persistCurrentMeta,
+      publishCurrentMeta,
       safeSetError,
       setProfilesFromPersistedSync,
       strictProvenanceCheck,
@@ -966,31 +1048,35 @@ export function useSync(
         householdMeta,
         now,
       )
-      let claimed: HouseholdSyncMeta | null = null
+      let published = false
       const result = await guardedCloudPush(
         prepared.rows,
         confirmedRows,
         verifiedUser,
         operation,
         true,
-        async (validatedFingerprint) => {
-          claimed = await claimLocalData(
+        async (validatedFingerprint, finalization) => {
+          await claimLocalData(
             verifiedUser.id,
             verifiedUser.email,
             prepared.meta,
             validatedFingerprint,
+            finalization,
+            (claimed) => {
+              publishCurrentMeta(claimed)
+              if (mountedRef.current) setDecision(null)
+              published = true
+            },
           )
         },
       )
-      if (!result.ok || !claimed) {
+      if (!result.ok || !published) {
         throw new Error(
           result.ok
             ? 'The upload did not finalize household ownership.'
-            : result.error,
+          : result.error,
         )
       }
-      persistCurrentMeta(claimed)
-      if (mountedRef.current) setDecision(null)
     } catch (cause) {
       const message = cause instanceof Error ? cause.message : 'Upload failed.'
       safeSetError(message)
@@ -1003,7 +1089,7 @@ export function useSync(
     decision,
     finishOperation,
     guardedCloudPush,
-    persistCurrentMeta,
+    publishCurrentMeta,
     safeSetError,
     verifyDecisionCloud,
   ])
@@ -1036,36 +1122,38 @@ export function useSync(
         Date.now(),
       )
       // Recheck identity/cloud adjacent to the local ownership transaction.
-      let claimed: HouseholdSyncMeta | null = null
+      const nextFingerprint = await datasetFingerprint(nextState)
+      let published = false
       const guarded = await guardedCloudPush(
         [],
         verifiedRows,
         verifiedUser,
         operation,
         true,
-        async (validatedFingerprint) => {
-          claimed = await replaceDatasetAndClaim(
+        async (validatedFingerprint, finalization) => {
+          await replaceDatasetAndClaim(
             verifiedUser.id,
             verifiedUser.email,
             next,
             nextState,
+            finalization,
+            (claimed) => {
+              setProfilesFromPersistedSync(nextState, nextFingerprint)
+              publishCurrentMeta(claimed)
+              if (mountedRef.current) setDecision(null)
+              published = true
+            },
             validatedFingerprint,
           )
         },
       )
-      if (!guarded.ok || !claimed) {
+      if (!guarded.ok || !published) {
         throw new Error(
           guarded.ok
             ? 'Cloud replacement did not finalize household ownership.'
-            : guarded.error,
+          : guarded.error,
         )
       }
-      setProfilesFromPersistedSync(
-        nextState,
-        await datasetFingerprint(nextState),
-      )
-      persistCurrentMeta(claimed)
-      if (mountedRef.current) setDecision(null)
     } catch (cause) {
       const message =
         cause instanceof Error ? cause.message : 'Cloud data was not applied.'
@@ -1079,7 +1167,7 @@ export function useSync(
     decision,
     finishOperation,
     guardedCloudPush,
-    persistCurrentMeta,
+    publishCurrentMeta,
     safeSetError,
     setProfilesFromPersistedSync,
     strictProvenanceCheck,
@@ -1130,36 +1218,38 @@ export function useSync(
           stateRef.current,
           selected.profiles,
         )
-        let claimed: HouseholdSyncMeta | null = null
+        const nextFingerprint = await datasetFingerprint(nextState)
+        let published = false
         const push = await guardedCloudPush(
           selected.toPush,
           verifiedRows,
           verifiedUser,
           operation,
           true,
-          async (validatedFingerprint) => {
-            claimed = await replaceDatasetAndClaim(
+          async (validatedFingerprint, finalization) => {
+            await replaceDatasetAndClaim(
               verifiedUser.id,
               verifiedUser.email,
               next,
               nextState,
+              finalization,
+              (claimed) => {
+                setProfilesFromPersistedSync(nextState, nextFingerprint)
+                publishCurrentMeta(claimed)
+                if (mountedRef.current) setDecision(null)
+                published = true
+              },
               validatedFingerprint,
             )
           },
         )
-        if (!push.ok || !claimed) {
+        if (!push.ok || !published) {
           throw new Error(
             push.ok
               ? 'The reviewed merge did not finalize household ownership.'
               : push.error,
           )
         }
-        setProfilesFromPersistedSync(
-          nextState,
-          await datasetFingerprint(nextState),
-        )
-        persistCurrentMeta(claimed)
-        if (mountedRef.current) setDecision(null)
       } catch (cause) {
         const message = cause instanceof Error ? cause.message : 'Merge failed.'
         safeSetError(message)
@@ -1173,7 +1263,7 @@ export function useSync(
       decision,
       finishOperation,
       guardedCloudPush,
-      persistCurrentMeta,
+      publishCurrentMeta,
       safeSetError,
       setProfilesFromPersistedSync,
       strictProvenanceCheck,

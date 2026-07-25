@@ -1,5 +1,9 @@
 import type { AppState } from '../types'
-import { createOperationId } from './coordination'
+import {
+  createOperationId,
+  type FinalizationDatasetExpectation,
+  type FinalizationGuard,
+} from './coordination'
 import {
   beginDurableImportTransition,
   datasetFingerprint,
@@ -159,38 +163,61 @@ export function localDataOwner(
   )
 }
 
-/**
- * Assign current local data to one household and remove ownership from other
- * household-scoped records. Records remain, which protects account switching.
- */
-export async function claimLocalData(
+export type OwnershipCommitted = (meta: HouseholdSyncMeta) => void
+
+interface PreparedOwnershipClaim {
+  claimed: HouseholdSyncMeta
+  targetBefore: HouseholdSyncMeta
+  otherOwnersBefore: HouseholdSyncMeta[]
+}
+
+function ownershipStillCompatible(
+  meta: HouseholdSyncMeta,
+  expectedFingerprint: string,
+  expectedImportEpoch: string,
+): boolean {
+  return (
+    !meta.ownsLocalData ||
+    (meta.binding === 'bound' &&
+      meta.datasetFingerprint === expectedFingerprint &&
+      meta.importEpoch === expectedImportEpoch)
+  )
+}
+
+async function prepareOwnershipClaim(
   householdId: string,
   email: string,
   next: HouseholdSyncMeta,
   expectedFingerprint: string,
-): Promise<HouseholdSyncMeta> {
+  guard: FinalizationGuard,
+  expectedTransitionOperationId?: string,
+): Promise<PreparedOwnershipClaim> {
+  await guard.assertCurrent('Ownership claim started')
   const persisted = await readPersistedDataset()
+  await guard.assertCurrent('Ownership claim verified persisted Academy data')
   const provenance = readDatasetProvenance()
+  const targetBefore = loadHouseholdMeta(householdId, email)
+  const currentTransition = expectedTransitionOperationId
+    ? loadOwnershipTransition(householdId)
+    : null
   if (
     !persisted.ok ||
     persisted.fingerprint !== expectedFingerprint ||
     !provenance ||
     provenance.importTransition ||
-    provenance.fingerprint !== expectedFingerprint
+    provenance.fingerprint !== expectedFingerprint ||
+    provenance.importEpoch !== guard.importEpoch ||
+    !ownershipStillCompatible(
+      targetBefore,
+      expectedFingerprint,
+      provenance.importEpoch,
+    ) ||
+    (expectedTransitionOperationId &&
+      currentTransition?.operationId !== expectedTransitionOperationId)
   ) {
     throw new Error(
-      'Household ownership was not saved because persisted Academy data did not match.',
+      'Household ownership was not saved because persisted Academy data or its operation context did not match.',
     )
-  }
-  for (const meta of listHouseholdMetas()) {
-    if (meta.householdId !== householdId && meta.ownsLocalData) {
-      saveHouseholdMeta({
-        ...meta,
-        ownsLocalData: false,
-        pauseReason:
-          'A different household was explicitly assigned this dataset.',
-      })
-    }
   }
   const claimed: HouseholdSyncMeta = {
     ...next,
@@ -202,10 +229,114 @@ export async function claimLocalData(
     importEpoch: provenance.importEpoch,
     pauseReason: undefined,
   }
-  if (!saveHouseholdMetaVerified(claimed)) {
-    throw new Error('Household ownership metadata could not be saved safely.')
+  await guard.assertCurrent('Ownership claim prepared for durable commit')
+  return {
+    claimed,
+    targetBefore,
+    otherOwnersBefore: listHouseholdMetas().filter(
+      (meta) => meta.householdId !== householdId && meta.ownsLocalData,
+    ),
   }
-  return claimed
+}
+
+function restorePreparedOwnership(prepared: PreparedOwnershipClaim): void {
+  saveHouseholdMeta(prepared.targetBefore)
+  for (const meta of prepared.otherOwnersBefore) saveHouseholdMeta(meta)
+}
+
+function commitPreparedOwnership(
+  prepared: PreparedOwnershipClaim,
+  guard: FinalizationGuard,
+  onCommitted?: OwnershipCommitted,
+  expectedTransitionOperationId?: string,
+): HouseholdSyncMeta {
+  guard.assertCurrentNow('Immediately before ownership metadata commit')
+  const provenance = readDatasetProvenance()
+  const targetCurrent = loadHouseholdMeta(
+    prepared.claimed.householdId,
+    prepared.claimed.email,
+  )
+  const currentTransition = expectedTransitionOperationId
+    ? loadOwnershipTransition(prepared.claimed.householdId)
+    : null
+  if (
+    !provenance ||
+    provenance.importTransition ||
+    provenance.fingerprint !== prepared.claimed.datasetFingerprint ||
+    provenance.importEpoch !== prepared.claimed.importEpoch ||
+    !ownershipStillCompatible(
+      targetCurrent,
+      prepared.claimed.datasetFingerprint!,
+      prepared.claimed.importEpoch!,
+    ) ||
+    (expectedTransitionOperationId &&
+      currentTransition?.operationId !== expectedTransitionOperationId)
+  ) {
+    throw new Error(
+      'Household ownership changed immediately before its durable write.',
+    )
+  }
+
+  try {
+    for (const previous of prepared.otherOwnersBefore) {
+      guard.assertCurrentNow(
+        'Immediately before invalidating previous household ownership',
+      )
+      const current = loadHouseholdMeta(previous.householdId, previous.email)
+      if (
+        current.ownsLocalData &&
+        current.datasetFingerprint === previous.datasetFingerprint &&
+        current.importEpoch === previous.importEpoch
+      ) {
+        if (
+          !saveHouseholdMetaVerified({
+            ...current,
+            ownsLocalData: false,
+            pauseReason:
+              'A different household was explicitly assigned this dataset.',
+          })
+        ) {
+          throw new Error(
+            'Previous household ownership could not be invalidated safely.',
+          )
+        }
+      }
+    }
+    guard.assertCurrentNow('Immediately before bound ownership write')
+    if (!saveHouseholdMetaVerified(prepared.claimed)) {
+      throw new Error('Household ownership metadata could not be saved safely.')
+    }
+    guard.adoptCurrentHouseholdBinding()
+    guard.assertCurrentNow('Immediately after bound ownership write')
+    onCommitted?.(prepared.claimed)
+    guard.assertCurrentNow('Immediately after ownership publication')
+    return prepared.claimed
+  } catch (cause) {
+    restorePreparedOwnership(prepared)
+    throw cause
+  }
+}
+
+/**
+ * Assign current local data to one household and remove ownership from other
+ * household-scoped records. Records remain, which protects account switching.
+ */
+export async function claimLocalData(
+  householdId: string,
+  email: string,
+  next: HouseholdSyncMeta,
+  expectedFingerprint: string,
+  guard: FinalizationGuard,
+  onCommitted?: OwnershipCommitted,
+): Promise<HouseholdSyncMeta> {
+  const prepared = await prepareOwnershipClaim(
+    householdId,
+    email,
+    next,
+    expectedFingerprint,
+    guard,
+  )
+  return commitPreparedOwnership(prepared, guard, onCommitted)
 }
 
 function clearPending(meta: HouseholdSyncMeta): HouseholdSyncMeta {
@@ -294,13 +425,16 @@ export function loadOwnershipTransition(
   }
 }
 
-function removeTransition(transition: OwnershipTransition): void {
+function removeTransition(transition: OwnershipTransition): boolean {
   try {
     const key = transitionKey(transition.targetHouseholdId)
     const stored = loadOwnershipTransition(transition.targetHouseholdId)
-    if (stored?.operationId === transition.operationId) ls()?.removeItem(key)
+    if (stored?.operationId !== transition.operationId) return false
+    ls()?.removeItem(key)
+    return loadOwnershipTransition(transition.targetHouseholdId) === null
   } catch {
     // A leftover completed transition is safe and will be recovered next boot.
+    return false
   }
 }
 
@@ -309,12 +443,16 @@ export async function prepareOwnershipTransition(
   email: string,
   nextMeta: HouseholdSyncMeta,
   replacement: AppState,
+  guard: FinalizationGuard,
   now = Date.now(),
   expectedPreviousFingerprint?: string,
 ): Promise<OwnershipTransition> {
+  await guard.assertCurrent('Ownership replacement started')
   const current = await readPersistedDataset()
+  await guard.assertCurrent('Ownership replacement read persisted Academy data')
   if (!current.ok) throw new Error(current.error)
   const provenance = await ensureDatasetProvenance()
+  await guard.assertCurrent('Ownership replacement read dataset provenance')
   if (provenance.importTransition) {
     throw new Error('An Academy import is still being finalized.')
   }
@@ -326,12 +464,14 @@ export async function prepareOwnershipTransition(
       'Persisted Academy data changed immediately before ownership replacement.',
     )
   }
+  const expectedFingerprint = await datasetFingerprint(replacement)
+  await guard.assertCurrent('Ownership replacement fingerprinted new data')
   const transition: OwnershipTransition = {
     version: 1,
     operationId: createOperationId('ownership'),
     targetHouseholdId: householdId,
     targetEmail: email,
-    expectedFingerprint: await datasetFingerprint(replacement),
+    expectedFingerprint,
     expectedImportEpoch: provenance.importEpoch,
     previousFingerprint: current.fingerprint,
     previousOwnerHouseholdId: localDataOwner()?.householdId ?? null,
@@ -339,6 +479,7 @@ export async function prepareOwnershipTransition(
     createdAt: now,
     nextMeta,
   }
+  guard.assertCurrentNow('Immediately before pending ownership transition write')
   if (!saveTransition(transition)) {
     throw new Error('The pending household transition could not be saved.')
   }
@@ -348,16 +489,19 @@ export async function prepareOwnershipTransition(
 export async function persistOwnershipTransitionDataset(
   transition: OwnershipTransition,
   replacement: AppState,
+  guard: FinalizationGuard,
 ): Promise<OwnershipTransition> {
+  await guard.assertCurrent('Ownership transition persistence started')
   const current = loadOwnershipTransition(transition.targetHouseholdId)
   if (current?.operationId !== transition.operationId) {
     throw new Error('The household transition is no longer current.')
   }
-  if (
-    (await datasetFingerprint(replacement)) !== transition.expectedFingerprint
-  ) {
+  const replacementFingerprint = await datasetFingerprint(replacement)
+  await guard.assertCurrent('Ownership transition rechecked replacement data')
+  if (replacementFingerprint !== transition.expectedFingerprint) {
     throw new Error('The replacement dataset changed during household binding.')
   }
+  guard.assertCurrentNow('Immediately before replacement AppState write')
   const persisted = await persistDatasetVerified(replacement)
   if (
     !persisted.ok ||
@@ -369,6 +513,15 @@ export async function persistOwnershipTransitionDataset(
         : persisted.error,
     )
   }
+  const splitExpectation: FinalizationDatasetExpectation = {
+    persistedFingerprint: transition.expectedFingerprint,
+    memoryFingerprint: transition.previousFingerprint,
+    provenanceFingerprint: transition.previousFingerprint,
+  }
+  await guard.assertCurrent(
+    'Ownership transition verified replacement AppState write',
+    splitExpectation,
+  )
   const provenance = readDatasetProvenance()
   if (
     !provenance ||
@@ -377,11 +530,28 @@ export async function persistOwnershipTransitionDataset(
   ) {
     throw new Error('The dataset import generation changed during binding.')
   }
+  guard.assertCurrentNow(
+    'Immediately before replacement provenance write',
+    splitExpectation,
+  )
   recordPersistedDatasetFingerprint(transition.expectedFingerprint)
+  const writtenExpectation: FinalizationDatasetExpectation = {
+    ...splitExpectation,
+    provenanceFingerprint: transition.expectedFingerprint,
+  }
+  guard.updateExpectedDataset(writtenExpectation)
+  await guard.assertCurrent(
+    'Ownership transition verified replacement provenance',
+    writtenExpectation,
+  )
   const written: OwnershipTransition = {
     ...transition,
     phase: 'app-state-written',
   }
+  guard.assertCurrentNow(
+    'Immediately before written ownership transition update',
+    writtenExpectation,
+  )
   if (!saveTransition(written)) {
     throw new Error('The written household transition could not be verified.')
   }
@@ -390,9 +560,13 @@ export async function persistOwnershipTransitionDataset(
 
 export async function finalizeOwnershipTransition(
   transition: OwnershipTransition,
+  guard: FinalizationGuard,
+  onCommitted?: OwnershipCommitted,
 ): Promise<HouseholdSyncMeta> {
+  await guard.assertCurrent('Ownership transition finalization started')
   const current = loadOwnershipTransition(transition.targetHouseholdId)
   const persisted = await readPersistedDataset()
+  await guard.assertCurrent('Ownership transition finalization re-read data')
   const provenance = readDatasetProvenance()
   if (
     current?.operationId !== transition.operationId ||
@@ -405,14 +579,33 @@ export async function finalizeOwnershipTransition(
   ) {
     throw new Error('Household binding finalization failed provenance checks.')
   }
-  const claimed = await claimLocalData(
+  const prepared = await prepareOwnershipClaim(
     transition.targetHouseholdId,
     transition.targetEmail,
     transition.nextMeta,
     transition.expectedFingerprint,
+    guard,
+    transition.operationId,
   )
-  removeTransition(transition)
-  return claimed
+  return commitPreparedOwnership(
+    prepared,
+    guard,
+    (claimed) => {
+      const latest = loadOwnershipTransition(transition.targetHouseholdId)
+      if (latest?.operationId !== transition.operationId) {
+        throw new Error(
+          'The ownership transition changed before it could be cleared.',
+        )
+      }
+      onCommitted?.(claimed)
+      guard.assertCurrentNow('Immediately before ownership transition cleanup')
+      if (!removeTransition(transition)) {
+        throw new Error('The completed ownership transition was not cleared.')
+      }
+      guard.assertCurrentNow('Immediately after ownership transition cleanup')
+    },
+    transition.operationId,
+  )
 }
 
 export async function replaceDatasetAndClaim(
@@ -420,18 +613,40 @@ export async function replaceDatasetAndClaim(
   email: string,
   nextMeta: HouseholdSyncMeta,
   replacement: AppState,
+  guard: FinalizationGuard,
+  onCommitted?: OwnershipCommitted,
   expectedPreviousFingerprint?: string,
 ): Promise<HouseholdSyncMeta> {
-  const prepared = await prepareOwnershipTransition(
-    householdId,
-    email,
-    nextMeta,
-    replacement,
-    Date.now(),
-    expectedPreviousFingerprint,
-  )
-  const written = await persistOwnershipTransitionDataset(prepared, replacement)
-  return finalizeOwnershipTransition(written)
+  let transition: OwnershipTransition | null = null
+  try {
+    transition = await prepareOwnershipTransition(
+      householdId,
+      email,
+      nextMeta,
+      replacement,
+      guard,
+      Date.now(),
+      expectedPreviousFingerprint,
+    )
+    const written = await persistOwnershipTransitionDataset(
+      transition,
+      replacement,
+      guard,
+    )
+    return await finalizeOwnershipTransition(written, guard, onCommitted)
+  } catch (cause) {
+    if (
+      transition &&
+      loadOwnershipTransition(householdId)?.operationId ===
+        transition.operationId
+    ) {
+      saveTransition({ ...transition, phase: 'review' })
+      invalidateAllLocalOwnership(
+        'An interrupted Academy replacement remains unbound for parent review.',
+      )
+    }
+    throw cause
+  }
 }
 
 export type TransitionRecovery =
@@ -439,6 +654,87 @@ export type TransitionRecovery =
   | { kind: 'restored-old'; householdId: string }
   | { kind: 'finished-new'; householdId: string }
   | { kind: 'review'; householdId: string; reason: string }
+
+function recoveryFinalizationGuard(
+  transition: OwnershipTransition,
+): FinalizationGuard {
+  let expectation: FinalizationDatasetExpectation = {
+    persistedFingerprint: transition.expectedFingerprint,
+    memoryFingerprint: transition.expectedFingerprint,
+    provenanceFingerprint: transition.expectedFingerprint,
+  }
+  let ownershipAdopted = false
+  const transitionContextIsCurrent = (): boolean => {
+    const current = loadOwnershipTransition(transition.targetHouseholdId)
+    if (current?.operationId === transition.operationId) return true
+    if (!ownershipAdopted || current) return false
+    const meta = loadHouseholdMeta(
+      transition.targetHouseholdId,
+      transition.targetEmail,
+    )
+    return (
+      meta.binding === 'bound' &&
+      meta.ownsLocalData &&
+      meta.datasetFingerprint === transition.expectedFingerprint &&
+      meta.importEpoch === transition.expectedImportEpoch
+    )
+  }
+  const assertRecoveryCurrent = async (stage: string): Promise<void> => {
+    const persisted = await readPersistedDataset()
+    const provenance = readDatasetProvenance()
+    if (
+      !transitionContextIsCurrent() ||
+      !persisted.ok ||
+      persisted.fingerprint !== expectation.persistedFingerprint ||
+      !provenance ||
+      provenance.importTransition ||
+      provenance.fingerprint !== expectation.provenanceFingerprint ||
+      provenance.importEpoch !== transition.expectedImportEpoch
+    ) {
+      throw new Error(`${stage}: interrupted ownership recovery is stale.`)
+    }
+  }
+  const assertRecoveryCurrentNow = (stage: string): void => {
+    const provenance = readDatasetProvenance()
+    if (
+      !transitionContextIsCurrent() ||
+      !provenance ||
+      provenance.importTransition ||
+      provenance.fingerprint !== expectation.provenanceFingerprint ||
+      provenance.importEpoch !== transition.expectedImportEpoch
+    ) {
+      throw new Error(`${stage}: interrupted ownership recovery is stale.`)
+    }
+  }
+  return {
+    operationId: transition.operationId,
+    householdId: transition.targetHouseholdId,
+    importEpoch: transition.expectedImportEpoch,
+    cloudRevision: transition.nextMeta.cloudRevision ?? '',
+    assertCurrent: async (stage, expected = expectation) => {
+      expectation = expected
+      await assertRecoveryCurrent(stage)
+    },
+    assertCurrentNow: (stage, expected = expectation) => {
+      expectation = expected
+      assertRecoveryCurrentNow(stage)
+    },
+    updateExpectedDataset: (expected) => {
+      expectation = expected
+    },
+    adoptCurrentHouseholdBinding: () => {
+      ownershipAdopted = true
+    },
+    isCurrent: async () => {
+      try {
+        await assertRecoveryCurrent('Ownership recovery check')
+        return true
+      } catch {
+        return false
+      }
+    },
+  }
+}
 
 export async function recoverOwnershipTransitions(): Promise<
   TransitionRecovery[]
@@ -465,19 +761,21 @@ export async function recoverOwnershipTransitions(): Promise<
       persisted.ok &&
       persisted.fingerprint === transition.previousFingerprint
     ) {
-      removeTransition(transition)
-      recoveries.push({ kind: 'restored-old', householdId })
-      continue
+      if (removeTransition(transition)) {
+        recoveries.push({ kind: 'restored-old', householdId })
+        continue
+      }
     }
     if (
       persisted.ok &&
       persisted.fingerprint === transition.expectedFingerprint
     ) {
       try {
-        await finalizeOwnershipTransition({
-          ...transition,
-          phase: 'app-state-written',
-        })
+        const written = { ...transition, phase: 'app-state-written' as const }
+        await finalizeOwnershipTransition(
+          written,
+          recoveryFinalizationGuard(written),
+        )
         recoveries.push({ kind: 'finished-new', householdId })
         continue
       } catch {

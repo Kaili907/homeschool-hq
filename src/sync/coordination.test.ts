@@ -4,6 +4,8 @@ import {
   executeGuardedMutation,
   guardedCloudRevision,
   mutationLeaseIsOwned,
+  renewMutationLease,
+  startMutationLeaseHeartbeat,
   tryAcquireMutationLease,
 } from './coordination'
 import type { RemoteProfileRow } from './types'
@@ -71,6 +73,83 @@ describe('cross-tab mutation leases', () => {
     expect(mutationLeaseIsOwned(first!, 151, storage)).toBe(false)
     expect(mutationLeaseIsOwned(reclaimed!, 151, storage)).toBe(true)
   })
+
+  it('renews only while the owning lifecycle remains current', async () => {
+    vi.useFakeTimers()
+    try {
+      let current = true
+      const renew = vi.fn(() => true)
+      const lost = vi.fn()
+      const stop = startMutationLeaseHeartbeat(
+        () => current,
+        renew,
+        lost,
+        10,
+      )
+      await vi.advanceTimersByTimeAsync(20)
+      expect(renew).toHaveBeenCalledTimes(2)
+
+      current = false
+      await vi.advanceTimersByTimeAsync(10)
+      expect(lost).toHaveBeenCalledOnce()
+      expect(renew).toHaveBeenCalledTimes(2)
+      stop()
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('keeps an owner-checked lease valid beyond its original lifetime', async () => {
+    vi.useFakeTimers()
+    try {
+      const storage = new MemStorage()
+      let lease = tryAcquireMutationLease(
+        {
+          householdId: 'household-a',
+          operationId: 'operation-a',
+          tabId: 'tab-a',
+          datasetFingerprint: 'fingerprint-a',
+          importEpoch: 'epoch-a',
+          cloudRevision: 'revision-a',
+        },
+        Date.now(),
+        storage,
+        30,
+      )
+      expect(lease).not.toBeNull()
+      const stop = startMutationLeaseHeartbeat(
+        () => true,
+        () => {
+          lease = renewMutationLease(lease!, Date.now(), storage, 30)
+          return lease !== null
+        },
+        () => undefined,
+        10,
+      )
+
+      await vi.advanceTimersByTimeAsync(70)
+      expect(mutationLeaseIsOwned(lease!, Date.now(), storage)).toBe(true)
+      stop()
+      await vi.advanceTimersByTimeAsync(31)
+      expect(mutationLeaseIsOwned(lease!, Date.now(), storage)).toBe(false)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('stops immediately when owner-checked renewal loses the lease', async () => {
+    vi.useFakeTimers()
+    try {
+      const renew = vi.fn(() => false)
+      const lost = vi.fn()
+      startMutationLeaseHeartbeat(() => true, renew, lost, 10)
+      await vi.advanceTimersByTimeAsync(30)
+      expect(renew).toHaveBeenCalledOnce()
+      expect(lost).toHaveBeenCalledOnce()
+    } finally {
+      vi.useRealTimers()
+    }
+  })
 })
 
 describe('final cloud mutation guard', () => {
@@ -91,6 +170,7 @@ describe('final cloud mutation guard', () => {
     const pull = vi.fn(async () => ({ ok: true as const, rows }))
     const run = () =>
       executeGuardedMutation({
+        operationId: 'operation-a',
         householdId: 'household-a',
         datasetFingerprint: 'fingerprint-a',
         importEpoch: 'epoch-a',
@@ -100,12 +180,25 @@ describe('final cloud mutation guard', () => {
         authenticatedHouseholdId: () => user,
         verifyAuthenticatedHousehold: async () => verifiedSession,
         verifyPostResponseAuth: async () => postResponseAuth,
-        currentDatasetContext: async () =>
-          fingerprint && importEpoch
-            ? { fingerprint, importEpoch }
-            : null,
+        currentDatasetContext: async () => ({
+          persistedFingerprint: fingerprint,
+          memoryFingerprint: fingerprint,
+          provenanceFingerprint: fingerprint,
+          importEpoch,
+          importTransitionPending: false,
+          householdBindingValid: true,
+        }),
+        currentSynchronousDatasetContext: () => ({
+          memoryFingerprint: fingerprint,
+          provenanceFingerprint: fingerprint,
+          importEpoch,
+          importTransitionPending: false,
+          householdBindingValid: true,
+        }),
         leaseValid: () => lease,
         refreshLease: () => lease,
+        updateLeaseDatasetFingerprint: () => lease,
+        adoptCurrentHouseholdBinding: () => undefined,
         withDatasetLock: async (callback) => callback(),
         pull,
         push,

@@ -7,6 +7,7 @@ import type {
 
 export const LEASE_PREFIX = 'homeschool-hq:sync:lease:'
 export const DEFAULT_LEASE_MS = 30_000
+export const DEFAULT_LEASE_HEARTBEAT_MS = 10_000
 
 export interface MutationLease {
   version: 1
@@ -126,6 +127,44 @@ export function renewMutationLease(
   return mutationLeaseIsOwned(renewed, now, storage) ? renewed : null
 }
 
+export function updateMutationLeaseFingerprint(
+  lease: MutationLease,
+  datasetFingerprint: string,
+  now = Date.now(),
+  storage: Storage | null = browserStorage(),
+): MutationLease | null {
+  if (!storage || !mutationLeaseIsOwned(lease, now, storage)) return null
+  const updated = { ...lease, datasetFingerprint }
+  try {
+    storage.setItem(leaseKey(lease.householdId), JSON.stringify(updated))
+  } catch {
+    return null
+  }
+  return mutationLeaseIsOwned(updated, now, storage) ? updated : null
+}
+
+export function startMutationLeaseHeartbeat(
+  remainsCurrent: () => boolean,
+  renew: () => boolean,
+  onLost: () => void,
+  intervalMs = DEFAULT_LEASE_HEARTBEAT_MS,
+): () => void {
+  let active = true
+  const timer = globalThis.setInterval(() => {
+    if (!active) return
+    if (!remainsCurrent() || !renew()) {
+      active = false
+      globalThis.clearInterval(timer)
+      onLost()
+    }
+  }, intervalMs)
+  return () => {
+    if (!active) return
+    active = false
+    globalThis.clearInterval(timer)
+  }
+}
+
 export function releaseMutationLease(
   lease: MutationLease,
   storage: Storage | null = browserStorage(),
@@ -148,7 +187,63 @@ export function leaseStorageKeyForTests(householdId: string): string {
   return leaseKey(householdId)
 }
 
+export interface FinalizationDatasetExpectation {
+  persistedFingerprint: string
+  memoryFingerprint: string
+  provenanceFingerprint: string
+}
+
+export interface FinalizationDatasetContext {
+  persistedFingerprint: string | null
+  memoryFingerprint: string | null
+  provenanceFingerprint: string | null
+  importEpoch: string | null
+  importTransitionPending: boolean
+  householdBindingValid: boolean
+}
+
+export interface FinalizationGuard {
+  readonly operationId: string
+  readonly householdId: string
+  readonly importEpoch: string
+  readonly cloudRevision: string
+  assertCurrent(
+    stage: string,
+    expectation?: FinalizationDatasetExpectation,
+  ): Promise<void>
+  assertCurrentNow(
+    stage: string,
+    expectation?: FinalizationDatasetExpectation,
+  ): void
+  updateExpectedDataset(expectation: FinalizationDatasetExpectation): void
+  adoptCurrentHouseholdBinding(): void
+  isCurrent(): Promise<boolean>
+}
+
+type FinalizationStageHook = (stage: string) => void | Promise<void>
+let finalizationStageHookForTests: FinalizationStageHook | null = null
+
+/**
+ * A delay-only test seam. It cannot approve or bypass validation and is inert
+ * in production builds.
+ */
+export function setFinalizationStageHookForTests(
+  hook: FinalizationStageHook | null,
+): void {
+  if (import.meta.env.MODE !== 'test') {
+    throw new Error('Finalization stage hooks are test-only.')
+  }
+  finalizationStageHookForTests = hook
+}
+
+async function pauseAtFinalizationStage(stage: string): Promise<void> {
+  if (import.meta.env.MODE === 'test') {
+    await finalizationStageHookForTests?.(stage)
+  }
+}
+
 export interface GuardedMutation {
+  operationId: string
   householdId: string
   datasetFingerprint: string
   importEpoch: string
@@ -158,16 +253,19 @@ export interface GuardedMutation {
   authenticatedHouseholdId: () => string | null
   verifyAuthenticatedHousehold: () => Promise<boolean>
   verifyPostResponseAuth: () => Promise<boolean>
-  currentDatasetContext: () => Promise<{
-    fingerprint: string
-    importEpoch: string
-  } | null>
+  currentDatasetContext: () => Promise<FinalizationDatasetContext>
+  currentSynchronousDatasetContext: () => Omit<
+    FinalizationDatasetContext,
+    'persistedFingerprint'
+  >
   leaseValid: () => boolean
   refreshLease: () => boolean
+  updateLeaseDatasetFingerprint: (fingerprint: string) => boolean
+  adoptCurrentHouseholdBinding: () => void
   withDatasetLock: <T>(callback: () => Promise<T>) => Promise<T>
   pull: () => Promise<CloudPullResult>
   push: () => Promise<CloudPushResult>
-  finalize: () => void | Promise<void>
+  finalize: (finalization: FinalizationGuard) => void | Promise<void>
 }
 
 /**
@@ -177,23 +275,99 @@ export interface GuardedMutation {
 export async function executeGuardedMutation(
   guard: GuardedMutation,
 ): Promise<CloudPushResult> {
-  const invalidReason = async (): Promise<string | null> => {
-    const context = await guard.currentDatasetContext()
+  let expectedDataset: FinalizationDatasetExpectation = {
+    persistedFingerprint: guard.datasetFingerprint,
+    memoryFingerprint: guard.datasetFingerprint,
+    provenanceFingerprint: guard.datasetFingerprint,
+  }
+
+  const lifecycleInvalidReason = (): string | null => {
     if (guard.signal.aborted) return 'The sync operation was cancelled.'
     if (!guard.lifecycleValid()) return 'The sync operation is no longer current.'
     if (guard.authenticatedHouseholdId() !== guard.householdId) {
       return 'The authenticated household changed.'
     }
-    if (
-      context?.fingerprint !== guard.datasetFingerprint ||
-      context.importEpoch !== guard.importEpoch
-    ) {
-      return 'Academy data or its import generation changed.'
-    }
     if (!guard.leaseValid()) return 'The household sync lease changed or expired.'
     return null
   }
-  const stillValid = async (): Promise<boolean> => !(await invalidReason())
+
+  const contextInvalidReason = (
+    context: FinalizationDatasetContext,
+    expectation: FinalizationDatasetExpectation,
+  ): string | null => {
+    if (
+      context.persistedFingerprint !== expectation.persistedFingerprint ||
+      context.memoryFingerprint !== expectation.memoryFingerprint ||
+      context.provenanceFingerprint !== expectation.provenanceFingerprint ||
+      context.importEpoch !== guard.importEpoch ||
+      context.importTransitionPending ||
+      !context.householdBindingValid
+    ) {
+      return 'Academy data, ownership, or its import generation changed.'
+    }
+    return null
+  }
+
+  const invalidReason = async (
+    expectation = expectedDataset,
+  ): Promise<string | null> => {
+    const lifecycleReason = lifecycleInvalidReason()
+    if (lifecycleReason) return lifecycleReason
+    const context = await guard.currentDatasetContext()
+    return lifecycleInvalidReason() ?? contextInvalidReason(context, expectation)
+  }
+  const stillValid = async (
+    expectation = expectedDataset,
+  ): Promise<boolean> => !(await invalidReason(expectation))
+
+  const finalization: FinalizationGuard = {
+    operationId: guard.operationId,
+    householdId: guard.householdId,
+    importEpoch: guard.importEpoch,
+    cloudRevision: guard.cloudRevision,
+    assertCurrent: async (stage, expectation = expectedDataset) => {
+      await pauseAtFinalizationStage(stage)
+      const before = await invalidReason(expectation)
+      if (before) throw new Error(`${stage}: ${before}`)
+      if (!(await guard.verifyPostResponseAuth())) {
+        throw new Error(`${stage}: The pinned household session is no longer valid.`)
+      }
+      const after = await invalidReason(expectation)
+      if (after) throw new Error(`${stage}: ${after}`)
+    },
+    assertCurrentNow: (stage, expectation = expectedDataset) => {
+      const lifecycleReason = lifecycleInvalidReason()
+      if (lifecycleReason) throw new Error(`${stage}: ${lifecycleReason}`)
+      const context = guard.currentSynchronousDatasetContext()
+      if (
+        context.memoryFingerprint !== expectation.memoryFingerprint ||
+        context.provenanceFingerprint !== expectation.provenanceFingerprint ||
+        context.importEpoch !== guard.importEpoch ||
+        context.importTransitionPending ||
+        !context.householdBindingValid
+      ) {
+        throw new Error(
+          `${stage}: Academy data, ownership, or its import generation changed.`,
+        )
+      }
+    },
+    updateExpectedDataset: (expectation) => {
+      if (
+        expectation.persistedFingerprint !==
+          expectedDataset.persistedFingerprint &&
+        !guard.updateLeaseDatasetFingerprint(expectation.persistedFingerprint)
+      ) {
+        throw new Error(
+          'The household sync lease could not adopt the finalized dataset.',
+        )
+      }
+      expectedDataset = expectation
+    },
+    adoptCurrentHouseholdBinding: guard.adoptCurrentHouseholdBinding,
+    isCurrent: async () =>
+      !(await invalidReason(expectedDataset)) &&
+      (await guard.verifyPostResponseAuth()),
+  }
 
   const initialInvalid = await invalidReason()
   if (initialInvalid || !(await guard.verifyAuthenticatedHousehold())) {
@@ -247,7 +421,8 @@ export async function executeGuardedMutation(
       }
     }
     try {
-      await guard.finalize()
+      await finalization.assertCurrent('Before local finalization')
+      await guard.finalize(finalization)
       return pushed
     } catch (cause) {
       return {
