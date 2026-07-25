@@ -13,6 +13,7 @@ import {
   sanitizeReply,
 } from '../../tutor/tutorEngine'
 import {
+  ANTHROPIC_ENDPOINT_BASE,
   askTutor,
   defaultTutorApiDeps,
   hasTutorKey,
@@ -164,7 +165,20 @@ export function TutorChat({
       correctAnswer: question.correctAnswer,
       herAnswer: question.herAnswer,
     })
-    const result = await askTutor(deps, { system, messages: toApiMessages(chatRef.current) })
+    const result = await askTutor(deps, {
+      system,
+      messages: toApiMessages(chatRef.current),
+      gateway: {
+        mode: 'tutor',
+        context: {
+          grade,
+          problem: question.problem,
+          correctAnswer: question.correctAnswer,
+          studentAnswer: question.herAnswer,
+          graded: false,
+        },
+      },
+    })
     setBusy(false)
 
     if (!result.ok) {
@@ -179,7 +193,7 @@ export function TutorChat({
   }
 
   const disabled = busy || ended !== null
-  const keyless = useMemo(() => !hasTutorKey(), [])
+  const keyless = useMemo(() => ANTHROPIC_ENDPOINT_BASE === '' && !hasTutorKey(), [])
 
   return (
     <div className={`${t.card} mt-6 flex flex-col p-5`}>

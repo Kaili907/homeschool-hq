@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { VoiceProviderId, VoiceRef } from '../types'
+import { getGatewayAccessToken } from './gatewayAuth'
 
 /**
  * MT-V voice: a ranked provider adapter — **cache → ElevenLabs → browser TTS**.
@@ -263,6 +264,7 @@ export type FetchLike = (
 
 export function createElevenLabsSynth(deps: {
   getKey: () => string | null
+  getAccessToken?: () => Promise<string | null>
   fetchImpl: FetchLike
   isOnline: () => boolean
   usage: UsageMeter
@@ -281,15 +283,32 @@ export function createElevenLabsSynth(deps: {
     async synthesize({ text, voiceId }) {
       const key = deps.getKey()
       if (!proxyMode && !key) throw new Error('elevenlabs: no key')
-      const url = `${origin}/v1/text-to-speech/${encodeURIComponent(voiceId)}?output_format=mp3_44100_128`
-      // Proxy mode: the function injects xi-api-key server-side.
-      const headers: Record<string, string> = proxyMode
-        ? { 'content-type': 'application/json', accept: 'audio/mpeg' }
-        : { 'xi-api-key': key as string, 'content-type': 'application/json', accept: 'audio/mpeg' }
+      let url: string
+      let headers: Record<string, string>
+      let body: string
+      if (proxyMode) {
+        const accessToken = await (deps.getAccessToken ?? getGatewayAccessToken)()
+        if (!accessToken) throw new Error('elevenlabs: unauthenticated')
+        url = `${origin}/synthesize`
+        headers = {
+          Authorization: `Bearer ${accessToken}`,
+          'content-type': 'application/json',
+          accept: 'audio/mpeg',
+        }
+        body = JSON.stringify({ text, voiceId })
+      } else {
+        url = `${origin}/v1/text-to-speech/${encodeURIComponent(voiceId)}?output_format=mp3_44100_128`
+        headers = {
+          'xi-api-key': key as string,
+          'content-type': 'application/json',
+          accept: 'audio/mpeg',
+        }
+        body = JSON.stringify({ text, model_id: modelId })
+      }
       const res = await deps.fetchImpl(url, {
         method: 'POST',
         headers,
-        body: JSON.stringify({ text, model_id: modelId }),
+        body,
       })
       if (!res.ok) throw new Error(`elevenlabs: http ${res.status}`)
       const buf = await res.arrayBuffer()
@@ -696,6 +715,7 @@ export function getVoiceAdapter(): VoiceAdapter {
     usage,
     elevenLabs: createElevenLabsSynth({
       getKey: getStoredKey,
+      getAccessToken: getGatewayAccessToken,
       fetchImpl: (url, init) => fetch(url, init as RequestInit),
       isOnline,
       usage,
