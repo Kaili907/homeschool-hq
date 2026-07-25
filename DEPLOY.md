@@ -158,6 +158,16 @@ works exactly as before and the JSON backup/export stays your escape hatch.
    are revalidated after the response. Browsers without Web Locks remain fully usable
    offline but cannot perform cloud mutations.
 
+   Local ownership/replacement finalization remains operation-bound through every
+   asynchronous persistence and hashing checkpoint. The final verified ownership write,
+   transition clear, and React publication run without another `await` between them, so a
+   sign-out, account switch, import, unmount, abort, or lost lease cannot commit a stale
+   result. The household lease uses an owner-checked heartbeat while both Web Locks and
+   the original operation remain valid; lifecycle or provenance loss stops renewal and
+   aborts the request. Optional synchronized Academy containers are structurally bounded
+   and validated before provenance is trusted, so malformed local data remains local and
+   pauses cloud sync for parent review.
+
 Security notes: the anon key + Supabase URL are the only sync values in the client
 bundle (both are public by design; RLS protects the data). No service key is used.
 The official Supabase browser client persists and refreshes the signed-in session
