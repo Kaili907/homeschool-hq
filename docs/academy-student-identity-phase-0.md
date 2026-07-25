@@ -9,230 +9,376 @@ any student-facing behavior. It does not import or upload a local profile.
 
 Implemented:
 
-- Durable students, households, guardian memberships, per-student guardian
-  access, per-subject enrollments, lifecycle state, and append-only audit events.
-- Relationship-aware, default-deny RLS for authenticated guardians.
-- Private hashed-verifier and opaque-session-digest storage.
-- A monotonically increasing student `session_version` for future global
-  student-session revocation.
-- Local-only SQL probes covering authorization and history preservation.
+- Durable students, active/archived households, guardian memberships,
+  per-student guardian access, per-subject enrollments, lifecycle state, and
+  append-only identity audit events.
+- Relationship-aware, default-deny RLS that requires an active household,
+  active guardian membership, active student access, and the required
+  per-student permission.
+- Private, structurally validated Argon2id/scrypt verifier storage.
+- Private SHA-256 student-session token-digest storage with an allowlisted
+  capability vocabulary and issuance/revocation lineage.
+- Monotonically increasing student `session_version` invalidation.
+- Status-based history preservation and hard-delete prevention.
+- Local-only real-role SQL probes. They must be run twice around a migration
+  rerun in an isolated Supabase-compatible database.
 
 Deferred:
 
-- Guardian/student administration UI and server endpoints.
-- Credential setup/reset/verification and retry throttling.
+- Guardian/student administration UI and trusted provisioning endpoints.
+- PIN verification, live retry throttling, and recovery UX.
 - Student-session minting, refresh, device management, and logout.
 - Importing current `Profile` objects or normalizing learning records.
+- True cross-household student transfer.
 - Teacher, staff, class, assignment, attempt, and activity-time authorization.
 
-## Identity and guardian model
+## Identity, guardian, and household model
 
 `academy_students.id` is the durable student identity. It is independent of the
 student's display name, grade, PIN, local browser profile, and guardian's
-Supabase Auth user ID. A student does not require an email address or an
-`auth.users` row.
+Supabase Auth user ID. A student does not require email or an `auth.users` row.
 
 Normal Supabase Auth remains the guardian identity provider. The database stores
-only foreign keys to `auth.users`; it does not copy passwords, emails, tokens,
-or other Auth data.
+only foreign keys to `auth.users`; it does not duplicate passwords, emails, or
+Auth tokens.
 
-The relationship chain is:
+The authorization chain is:
 
 ```text
-auth.users
-  -> academy_household_memberships (guardian, active/revoked)
-    -> academy_guardian_student_access (student-specific permission, active/revoked)
+academy_households (must be active)
+  -> academy_household_memberships (guardian, must be active)
+    -> academy_guardian_student_access (must be active, per-student permission)
       -> academy_students
 ```
 
-A guardian can hold memberships in multiple households and can receive a
-different permission level for each student:
+A guardian can have memberships in multiple households, multiple guardians can
+belong to one household, and each guardian can receive a different permission
+for each student:
 
 - `viewer`
 - `learning_manager`
 - `identity_manager`
 
 The levels are deliberately read-only in Phase 0. `viewer` can read the student
-and subject enrollments; `learning_manager` and above can also read that
-student's audit events. Trusted server code will later translate the levels
-into narrowly scoped mutation capabilities. No staff role or staff policy
-exists, so future staff access cannot be inherited accidentally.
+and subject enrollments. `learning_manager` and `identity_manager` can also read
+that student's audit events. Future trusted endpoints must separately enforce
+which mutations each level permits. No staff policy exists.
 
-Revoking either the household membership or the student access relationship
-immediately makes the RLS helper return false. Rows are status-revoked rather
-than deleted. Deleting a Supabase Auth user sets historical actor/user foreign
-keys to null without deleting the student or academic references.
+The lifecycle controls are intentionally distinct:
+
+- **Household archival** blocks every normal guardian read and makes all student
+  session grants non-current. It preserves every row and increments each
+  household student's `session_version`. Restoring the household does not
+  restore the invalidated session versions.
+- **Membership revocation** removes one guardian's access to every student in
+  that household. Student records and other guardians are unchanged.
+- **Student-access revocation** removes one guardian/student relationship
+  without changing the household membership.
+- **Student deactivation or archival** preserves authorized guardian access to
+  historical records but invalidates student sessions.
+- **Student transfer** means external exit from this Phase-0 tenant. It revokes
+  student-specific guardian relationships, invalidates sessions, records an
+  audit event, and preserves the original household and all historical rows.
+
+## Transfer rule
+
+`academy_students.household_id` is immutable.
+
+Phase-0 `transferred` means:
+
+> The student is no longer active in the current Academy household because
+> responsibility moved outside this Phase-0 tenant model.
+
+A transfer never rewrites `household_id`, creates cross-household access, or
+copies history. A future true cross-household transfer requires a separately
+reviewed workflow with authorization and consent from both sides, durable
+export/import lineage, validation, and rollback.
 
 ## Subject placement and reusable curriculum
 
 `academy_subject_enrollments` separates instructional placement from the
-student's optional `current_grade_level`. Each enrollment records:
+student's optional global grade. Each enrollment records school year, subject,
+instructional level, reusable course/version identifiers, lifecycle status,
+start/end dates, placement source, and an optional reviewed adult override.
 
-- school year;
-- subject;
-- instructional level;
-- reusable course identifier and curriculum version;
-- enrollment status;
-- start/end dates;
-- placement source;
-- parent/staff override actor and reason.
+The current-enrollment idempotency key is:
 
-There is no uniqueness constraint on course or curriculum identifiers. Two
-students can enroll in the same course/version with distinct enrollment IDs,
-and one student can have different levels for math, reading, and other
-subjects. Curriculum content remains reusable and is not copied into enrollment
-rows.
+```text
+student_id
++ school_year_key
++ subject_key
++ coalesce(course_id, '')
++ coalesce(curriculum_version, '')
+```
 
-Assignments, attempts, scores, mastery evidence, reading records, time records,
-Jarvis conversations, and activity history remain separate per-student future
-records. Phase 0 intentionally does not create those later-phase tables or move
-the existing JSON data.
+At most one row with that key may be `planned`, `active`, or `paused`.
+`completed`, `withdrawn`, and `archived` rows do not block a legitimate
+historical retake or reenrollment. Different students can reference the same
+course/version, and one student can have different subjects or course versions.
+Curriculum content is never duplicated into enrollment rows.
 
-## Lifecycle and history
+Assignments, attempts, scores, mastery, reading records, time records, Jarvis
+conversations, and activity history remain future per-student records.
 
-Student lifecycle states are:
+## Credential storage and lifecycle
 
-`invited`, `active`, `paused`, `transferred`, `graduated`, `archived`, and
-`deactivated`.
+Credential rows live only in
+`academy_private.student_access_credentials`. Normal clients have no schema
+usage, table privileges, policy, or function capable of returning verifiers.
+Hard deletion is blocked.
 
-RLS authorization depends on active guardian relationships, not on the student's
-lifecycle state. Therefore an authorized guardian can still read a deactivated
-student and associated historical enrollments. Foreign keys use `restrict`
-rather than cascading deletes. Lifecycle, guardian-access, and material
-enrollment changes create audit events without recording credential material.
+Two format-version-1 encodings are accepted structurally:
 
-Deactivation is a status transition, not deletion.
+```text
+$argon2id$v=19$m=<memory>,t=<iterations>,p=<parallelism>$<base64-salt>$<base64-hash>
+$scrypt$v=1$ln=<log2-N>,r=<block-size>,p=<parallelism>$<base64-salt>$<base64-hash>
+```
 
-## RLS and server authorization
+The checks require the exact algorithm/version prefix, numeric cost fields,
+nonempty encoded salt and hash, no whitespace or suffix, and a bounded total
+length. The scrypt representation is the Academy scrypt-v1 envelope: a future
+server must use a reviewed scrypt implementation and serialize its salt, cost
+parameters, and derived key exactly in this representation.
 
-All new tables have RLS enabled. Public tables revoke Supabase's default client
-grants and return read-only rows to `authenticated` only when one of three
-security-definer boolean helpers confirms the current guardian relationship.
-The helpers use `auth.uid()`, fully qualified table names, an empty trusted
-search path, active membership, active student access, and permission rank.
+Database checks validate structure only. They cannot prove that a value was
+actually produced by Argon2id or scrypt. Only a trusted server may create or
+verify a credential, using a unique salt, reviewed cost policy, constant-time
+comparison, throttling, and an approved password-hashing implementation.
+Student PINs are never verified in SQL. A four-digit PIN remains low entropy
+and requires online rate limits; its encoded verifier must never be exported.
 
-There are no client insert, update, or delete grants or policies. Consequently a
-browser cannot:
+Credential history includes:
 
-- create a household or student;
-- assign itself a membership or guardian relationship;
-- alter permissions or lifecycle;
-- create an enrollment;
-- append an audit event;
-- write or read credential/session secrets.
+- monotonic per-student/kind credential version;
+- same-student/same-kind replacement lineage;
+- creation actor, reason, time, activation time, and correlation ID;
+- failed-attempt count and last-failure time;
+- lock start and end;
+- reset-required time and reason;
+- replacement actor, time, and reason;
+- revocation actor, time, and reason.
 
-Provisioning and mutations require the trusted `service_role` path in a future
-server endpoint. The service role must never enter a browser bundle.
+Only one `active`, `locked`, or `reset_required` credential can exist for a
+student and kind. Replaced/revoked rows remain as security history. Lock,
+reset, replacement, and revocation states have mutually consistent metadata.
+Replacement must reference an older, already-replaced credential for the same
+student and kind.
 
-`academy_private.student_access_credentials` and
-`academy_private.student_session_grants` are outside the exposed `public`
-schema, have forced RLS with no client policies, and explicitly revoke
-`anon`/`authenticated` privileges. The credential table accepts only encoded
-Argon2id/scrypt verifiers; the session table accepts only a high-entropy opaque
-token digest. Neither plaintext PINs nor bearer tokens belong in the database.
+Moving a credential to `locked`, `reset_required`, `replaced`, or `revoked`
+increments the student's `session_version`. This prevents an unlock or reset
+from reviving an older student session.
 
-## Future student-session flow
+## Future student-session storage
 
-The next reviewed account session should implement this flow on a trusted
-server:
+`academy_private.student_session_grants` stores no bearer token. The future
+trusted server generates a high-entropy raw token, computes SHA-256, and stores
+exactly 64 lowercase hexadecimal digest characters. A raw token, uppercase
+digest, non-hex text, or any other length is rejected.
 
-1. An authenticated guardian with `identity_manager` access activates a student.
-2. The guardian sets or resets a student access method over TLS.
-3. The server rate-limits attempts and creates an Argon2id or scrypt verifier
-   using a unique salt and appropriate current parameters.
-4. At student sign-in, the server verifies the access method and checks student,
-   credential, membership, and lifecycle state.
-5. The server issues a short-lived, high-entropy student bearer token and stores
-   only its digest in `student_session_grants`, scoped to `student_id`,
-   `household_id`, capability set, expiry, and the current `session_version`.
-6. Every student API call resolves the token on the trusted server and checks
-   expiry, revocation, and current `session_version` before accessing exactly one
-   student's rows.
-7. Logout revokes one grant; a credential reset or guardian emergency action
-   increments `academy_students.session_version` to revoke all older grants.
+Capability schema version 1 allows only:
 
-The guardian's Supabase access/refresh token remains in the guardian context and
-is never embedded in, exchanged for, or exposed to the student session. A local
-four-digit PIN remains a convenience input, never a Supabase/RLS authorization
-boundary.
+- `student:profile:read`
+- `student:assignments:read`
+- `student:attempts:create`
+- `student:progress:read`
 
-No minting endpoint is implemented in Phase 0 because the repository has no
-trusted authenticated student-session service yet. Browser-only token minting
-would be insecure.
+The set must be nonempty and contain no duplicates. Wildcards, arbitrary
+strings, guardian permissions, identity-management permissions, household
+management, staff, credential management, and administrative capabilities are
+not representable. A future capability change requires a separately reviewed
+schema version and migration.
 
-## Current `Profile` migration plan
+Each grant records:
 
-No automatic import occurs in Phase 0. A later operator-confirmed migration
-must use a preview, backup, dry run, validation report, and explicit commit.
+- student and household;
+- unique SHA-256 token digest;
+- capability schema/version and capabilities;
+- credential ID and credential version;
+- student `session_version`;
+- issuance flow, actor, reason, and time;
+- optional guardian membership/access used for guardian activation;
+- audit correlation ID;
+- optional SHA-256 device digest;
+- expiry;
+- revocation actor, reason, and time.
 
-1. **Bind the destination household.** Create one new household and active
-   guardian membership through the trusted server. Do not assume the existing
-   `public.profiles.household_id` (currently the guardian Auth UID) is the new
-   household ID.
-2. **Create a stable mapping manifest.** Map
-   `(existing Auth UID, Profile.id)` to `academy_students.id`, and copy
-   `Profile.id` into nullable `legacy_profile_id`. The unique
-   `(household_id, legacy_profile_id)` constraint prevents double import.
-3. **Ignore names for identity.** Duplicate display names are valid; matching
-   and idempotency use IDs, never names.
-4. **Map grade conservatively.** Copy the current scalar grade only to
-   `current_grade_level`. Create separately reviewed subject enrollments for
-   instructional levels; do not infer every subject from the scalar.
-5. **Replace PINs.** Never copy `Profile.pin`. Require the guardian to set a new
-   access method so only a server-generated salted verifier is stored. The old
-   plaintext local PIN remains in the untouched legacy profile until a later
-   reviewed UI cutover and cleanup.
-6. **Preserve the JSON source.** Leave skills, missions, attempts, totals,
-   learning-history JSON, reading records, Jarvis/Tutor transcripts, and
-   activity data in the existing `public.profiles.data` and local backup.
-   Later normalized-record migrations reference the mapped student ID and use
-   deterministic source IDs to prevent duplicates.
-7. **Keep sync ownership explicit.** Record the source Auth UID, profile ID,
-   source row timestamp, destination household/student IDs, and a digest of the
-   source JSON in the migration manifest. Do not let automatic whole-profile
-   sync create students.
-8. **Review inactive profiles.** Map archived/inactive profiles to the closest
-   lifecycle state only after guardian review. Never infer deletion.
-9. **Validate before activation.** Compare profile counts, stable IDs, JSON
-   digests, reading-session counts, assessment-attempt counts, transcript
-   counts, and per-domain totals. Investigate every mismatch.
-10. **Cut over later and reversibly.** Run a dual-read/validation phase behind a
-    reviewed established feature-flag system (none exists today), then change
-    one identity surface at a time. Keep the original local state and cloud
-    profile rows available until acceptance.
+`academy_private.is_student_session_grant_current(id)` is the database-side
+validation contract for the future trusted server. It returns true only when:
+
+- the household is active;
+- the student is active;
+- the grant is unrevoked and unexpired;
+- the grant version equals the student's current `session_version`;
+- the referenced credential/version is still active;
+- a guardian-activation issuance still has an active membership and active
+  identity-manager relationship.
+
+The raw bearer token is resolved to its digest by the trusted server before
+this contract is evaluated. Neither this helper nor the grant table is exposed
+to normal clients. `academy_private` must remain absent from Supabase's exposed
+API schemas even though privileges and forced RLS provide additional defense.
+
+The guardian's Supabase access/refresh token remains in the guardian context
+and is never copied into or exchanged for a student session. A student session
+can never acquire guardian capabilities.
+
+## Session invalidation
+
+The database increments `academy_students.session_version` for:
+
+- household archival;
+- student transfer, archival, or deactivation;
+- credential lock, reset-required, replacement, or revocation;
+- explicit emergency reset through
+  `academy_private.reset_student_sessions(...)`.
+
+Guardian-activation grants are also rejected immediately when their original
+membership or identity-manager relationship is revoked. Harmless display-name,
+grade, and placement edits do not increment the session version. Restoring a
+household, student, or credential never decrements the version and therefore
+cannot silently revive an old grant.
+
+## Audit model
+
+`academy_audit_events` is append-only. Direct update/delete is blocked both by
+grants and a database trigger. Ordinary clients cannot insert. The trusted
+service receives no direct table insert and cannot call the internal generic
+audit appender. Provisioning/status triggers and the narrowly scoped emergency
+session-reset function append allowlisted events as part of the same
+transaction. Any future expiry-observation or retention operation needs its own
+separately reviewed narrow function.
+
+The event vocabulary covers:
+
+- household creation/status;
+- membership invitation/activation/revocation;
+- student creation/lifecycle/external exit/session-version changes;
+- guardian access grant/status/permission;
+- subject enrollment creation/status/placement;
+- credential creation/failure/lock/unlock/reset/replacement/revocation;
+- student-session issuance/revocation and future observed-expiry events.
+
+Events have dedicated household, optional student, actor, target, action,
+reason, correlation, and timestamp columns. `details` must be a small JSON
+object containing only allowlisted scalar keys and no sensitive key names. It
+is limited to 4096 encoded bytes. Audit reasons and metadata must never include
+credential verifiers, raw PINs, raw reset tokens, bearer tokens, token or device
+digests, full Jarvis/Tutor transcripts, or unnecessary student content.
+
+Hard deletes are blocked for households, memberships, students, guardian
+access, subject enrollments, credentials, session grants, and audit events.
+Future retention or accidental-record deletion requires a separately reviewed
+function with narrow preconditions; Phase 0 provides no convenience delete.
+
+## RLS and trusted provisioning
+
+All public Phase-0 tables have RLS enabled. Public client grants are SELECT
+only. The three security-definer guardian helpers use `auth.uid()`, qualified
+objects, `search_path = pg_catalog`, active household status, active membership,
+active student access, and permission rank.
+
+Private tables use forced RLS, have no client policies, and grant neither schema
+usage nor object privileges to `anon` or `authenticated`. The migration uses
+explicit object-level grants/revokes only; it never applies `ALL TABLES`,
+`ALL FUNCTIONS`, or a schema-wide revocation that could alter an unrelated
+private object's ACL.
+
+Normal clients cannot bootstrap the model. The first household, guardian
+membership, student, guardian/student access row, and initial enrollment require
+a future trusted provisioning endpoint or an operator-reviewed administrative
+migration. Existing local-profile owners cannot self-bootstrap through the
+browser. This is intentional while Phase 0 remains unmounted.
+
+## Current `Profile` migration runbook
+
+No import occurs in Phase 0. A later migration needs an operator-approved
+preview, backup, dry run, validation report, and explicit commit.
+
+1. **Provision the destination.** Create the household and guardian relationship
+   through the reviewed trusted bootstrap path. The existing
+   `public.profiles.household_id` is a guardian Auth UID, not the new household
+   identity.
+2. **Create an import ledger.** Every source record receives:
+   `migration_batch_id`, source Auth UID/type/record ID, source timestamp,
+   source digest, target type/ID, `started|completed|failed` status, retry count,
+   last error, started/completed timestamps, and operator identity.
+3. **Use stable student mapping.** Map `(source Auth UID, Profile.id)` to the new
+   student UUID and preserve `Profile.id` in `legacy_profile_id`. Names are
+   display data and never identity.
+4. **Prevent duplicate imports.** Use a unique source-system/source-record key,
+   deterministic child-record IDs, and compare the source digest before every
+   retry. A completed ledger row is never imported again.
+5. **Bound transactions.** Provision one student identity and its ledger record
+   atomically. Normalize each later domain in a separate idempotent transaction
+   so a reading failure cannot roll back or duplicate an assessment import.
+6. **Recover partial failures.** Mark the domain ledger row failed with a safe
+   error, roll back that domain transaction, and retry only after verifying the
+   source digest is unchanged. Never delete a successfully imported domain to
+   make a retry easier.
+7. **Map grade conservatively.** Copy the scalar grade only to
+   `current_grade_level`; separately review subject-level enrollments.
+8. **Replace PINs.** Never copy `Profile.pin`. Require new credential enrollment
+   so only a trusted-server-generated verifier enters the private table.
+9. **Preserve source data.** Leave learning JSON, reading, assessments,
+   Jarvis/Tutor history, and activity data in the original local/cloud profile
+   until each normalized domain is independently validated.
+10. **Keep sync ownership explicit.** Whole-profile sync must never create
+    students or mutate normalized identity rows.
+11. **Never dual-write.** During preview and validation, legacy profiles remain
+    the only live write target. Normalized data is read-only validation output.
+    Cutover to a normalized writer occurs once, after acceptance; the legacy
+    writer is disabled before the new writer is enabled.
+12. **Review inactive profiles.** Map archived/inactive profiles only after
+    guardian review. Never infer deletion or transfer from inactivity.
+13. **Validate.** Compare source/target student counts, stable IDs, ledger
+    completion counts, JSON digests, reading-session counts, assessment counts,
+    transcript counts, and per-domain totals. Investigate every mismatch.
+14. **Roll back safely.** Before cutover, disable the importer and leave the
+    unused normalized rows for investigation. After cutover, disable new
+    callers and restore the accepted legacy application writer only if its
+    source has remained authoritative. Never delete normalized history.
+
+## Cutover prerequisites
+
+Production remains prohibited until all of these exist:
+
+- independently approved schema/RLS/security review;
+- trusted bootstrap, credential, and session endpoints;
+- reviewed Supabase exposed-schema configuration;
+- production backup and operator-approved import batch;
+- isolated migration run 1, complete real-role probes, migration run 2, and
+  complete probe rerun with zero failures;
+- production-safe read-only smoke probes that contain no fixture writes;
+- import-ledger implementation and recovery rehearsal;
+- dual-read validation with accepted counts/digests;
+- explicit operator authorization for production migration and later cutover.
 
 ## Rollout and rollback
 
-1. Phase 0: apply only in an ephemeral/local Supabase project and run the probe
-   script. Keep the application unmounted.
-2. Phase 1: add trusted guardian provisioning and credential-management APIs
-   with authorization, throttling, audit, and adversarial tests.
-3. Phase 2: add student-session verification/minting and student-scoped data
-   APIs. Keep the existing picker/PIN flow as the live path.
-4. Phase 3: preview and validate an operator-approved profile mapping without
-   moving learning data.
-5. Later phases: normalize learning records, dual-read, then review the UI
-   cutover separately.
+1. Phase 0: validate only in an isolated database and keep the app unmounted.
+2. Phase 1: add trusted provisioning and credential-management APIs with rate
+   limits, audit attribution, and adversarial tests.
+3. Phase 2: add student token minting/validation APIs while the existing local
+   picker/PIN flow remains live.
+4. Phase 3: preview and validate an operator-approved import ledger without
+   moving live learning writers.
+5. Later: normalize one domain at a time, dual-read, then separately review
+   writer and UI cutover.
 
-Because Phase 0 is unused, application rollback is simply to leave the new
-schema unmounted. A database rollback in a non-production environment may drop
-only the new `academy_*` objects after confirming they contain no imported
-data. After real data exists, rollback means disabling new callers and
-preserving the additive tables; it must never delete student history.
+Application rollback in Phase 0 is to leave the schema unmounted. In a
+non-production empty database, an operator may remove new objects only after
+verifying no imported data exists. Once identity/history exists, rollback means
+disabling callers and preserving rows.
 
-## Unresolved decisions
+## Remaining Phase-1 decisions
 
-- Trusted runtime and token transport (Netlify function, Supabase Edge Function,
-  or another server).
-- Opaque token capability representation and refresh policy.
-- PIN retry/lockout parameters and guardian recovery UX.
-- Household transfer and co-guardian invitation workflow.
-- Student/session retention and deletion policy.
-- Whether future staff access uses separate memberships or a separate staff
-  authorization model.
-- Exact instructional-level and course identifier taxonomy.
-- Professional privacy/policy review for minor accounts, transcripts, and
-  retention.
+- Trusted runtime and token transport.
+- Current Argon2id/scrypt cost policy and online PIN retry limits.
+- Student-session lifetime, refresh, device display, and retention policy.
+- True cross-household transfer protocol.
+- Future staff authorization model.
+- Exact instructional-level/course identifier taxonomy.
+- Professional privacy and retention review for minor accounts.
 
-None of these decisions is needed to keep the Phase-0 schema additive,
-default-deny, and unused.
+These are intentionally deferred implementation decisions. They do not weaken
+the Phase-0 default-deny or unused boundary.

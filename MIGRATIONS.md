@@ -119,8 +119,27 @@ audit, private credential-verifier, and private future-session tables. It does
 not alter `public.profiles`, import local profiles, or change application
 `schemaVersion` 2.
 
+The hardened Phase-0 contract requires active-household authorization,
+immutable student household IDs, history-preserving status/revocation
+transitions, strict Argon2id/scrypt verifier envelopes, lowercase hexadecimal
+SHA-256 session digests, capability schema version 1, session-version
+invalidation, append-only allowlisted audit events, explicit object grants, and
+real-role denial probes. Current subject enrollments are idempotent per student,
+school year, subject, course, and curriculum version; completed/withdrawn/
+archived history permits a reviewed reenrollment.
+
 The migration is not run by the application and must not be applied to
 production in this phase. Validate only in an ephemeral/local Supabase project
-with `supabase/tests/academy_student_identity_rls_probes.sql`. Architecture,
-future profile mapping, rollout, and rollback are documented in
+by running the migration, the complete
+`supabase/tests/academy_student_identity_rls_probes.sql`, the migration again,
+and the complete probes again. Both probe runs must have zero failures, and the
+unrelated-private-object ACL sentinel must remain unchanged.
+
+Future profile migration requires a durable import ledger with source IDs and
+digests, target IDs, batch/status/retry/error metadata, bounded idempotent
+transactions, partial-failure recovery, count/digest validation, and explicit
+rollback/cutover gates. Legacy and normalized identity records must never be
+dual-written. Trusted provisioning is required; no current profile is imported
+or uploaded by Phase 0. Full architecture, verifier/session formats, import
+runbook, rollout, and rollback are documented in
 `docs/academy-student-identity-phase-0.md`.
