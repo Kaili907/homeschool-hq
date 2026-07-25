@@ -23,7 +23,11 @@ import {
   userFromSession,
 } from './supabase'
 import { emptyHouseholdMeta, type RemoteProfileRow } from './types'
-import { APP_STATE_STORAGE_KEY, datasetFingerprint } from './provenance'
+import {
+  APP_STATE_STORAGE_KEY,
+  datasetFingerprint,
+  ensureDatasetProvenance,
+} from './provenance'
 
 class MemStorage {
   private values = new Map<string, string>()
@@ -57,12 +61,13 @@ describe('keyless local mode', () => {
 
 describe('household-scoped persistence', () => {
   let fingerprint: string
-  beforeEach(() => {
+  beforeEach(async () => {
     ;(globalThis as unknown as { localStorage: Storage }).localStorage =
       new MemStorage() as unknown as Storage
     const state = defaultAppState()
     localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(state))
-    fingerprint = datasetFingerprint(state)
+    await ensureDatasetProvenance()
+    fingerprint = await datasetFingerprint(state)
   })
   afterEach(() => {
     delete (globalThis as unknown as { localStorage?: Storage }).localStorage
@@ -93,8 +98,8 @@ describe('household-scoped persistence', () => {
     )
   })
 
-  it('preserves Household A binding while Household B remains unbound', () => {
-    const boundA = claimLocalData(
+  it('preserves Household A binding while Household B remains unbound', async () => {
+    const boundA = await claimLocalData(
       'household-a',
       'a@example.com',
       {
@@ -112,14 +117,14 @@ describe('household-scoped persistence', () => {
     expect(loadHouseholdMeta('household-b').profiles).toEqual({})
   })
 
-  it('moving to a confirmed household retains old binding metadata', () => {
-    claimLocalData(
+  it('moving to a confirmed household retains old binding metadata', async () => {
+    await claimLocalData(
       'household-a',
       'a@example.com',
       emptyHouseholdMeta('household-a'),
       fingerprint,
     )
-    claimLocalData(
+    await claimLocalData(
       'household-b',
       'b@example.com',
       emptyHouseholdMeta('household-b'),
@@ -133,7 +138,7 @@ describe('household-scoped persistence', () => {
   })
 
   it('sign-out clears only the supported local auth session and preserves local binding data', async () => {
-    claimLocalData(
+    await claimLocalData(
       'household-a',
       'a@example.com',
       {
@@ -219,14 +224,15 @@ describe('official Supabase auth and transport', () => {
     const getSession = vi.fn(async () => ({
       data: {
         session: {
-          access_token: 'verified-token-a',
+          access_token: 'header.payload.signature',
         },
       },
       error: null,
     }))
     const getUser = vi.fn(async (token: string) => ({
       data: { user: { id: 'household-a', email: 'a@example.com' } },
-      error: token === 'verified-token-a' ? null : new Error('wrong token'),
+      error:
+        token === 'header.payload.signature' ? null : new Error('wrong token'),
     }))
     await expect(
       getVerifiedAuthContext({
@@ -234,9 +240,11 @@ describe('official Supabase auth and transport', () => {
       } as never),
     ).resolves.toEqual({
       user: { id: 'household-a', email: 'a@example.com' },
-      accessToken: 'verified-token-a',
+      accessToken: 'header.payload.signature',
+      verifiedAt: expect.any(Number),
+      kind: 'supabase-access-token',
     })
-    expect(getUser).toHaveBeenCalledWith('verified-token-a')
+    expect(getUser).toHaveBeenCalledWith('header.payload.signature')
   })
 
   it('distinguishes a failed pull from a successful empty cloud', async () => {

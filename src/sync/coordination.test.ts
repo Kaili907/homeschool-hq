@@ -43,6 +43,7 @@ describe('cross-tab mutation leases', () => {
       householdId: 'household-a',
       operationId: 'operation-a',
       datasetFingerprint: 'fingerprint-a',
+      importEpoch: 'epoch-a',
       cloudRevision: 'revision-a',
     }
     const first = tryAcquireMutationLease(
@@ -79,42 +80,63 @@ describe('final cloud mutation guard', () => {
   function setup() {
     let user: string | null = 'household-a'
     let fingerprint: string | null = 'fingerprint-a'
+    let importEpoch: string | null = 'epoch-a'
     let lease = true
     let verifiedSession = true
+    let lifecycle = true
+    let postResponseAuth = true
     const controller = new AbortController()
     const push = vi.fn(async () => ({ ok: true as const }))
+    const finalize = vi.fn(async () => undefined)
     const pull = vi.fn(async () => ({ ok: true as const, rows }))
     const run = () =>
       executeGuardedMutation({
         householdId: 'household-a',
         datasetFingerprint: 'fingerprint-a',
+        importEpoch: 'epoch-a',
         cloudRevision: revision,
         signal: controller.signal,
+        lifecycleValid: () => lifecycle,
         authenticatedHouseholdId: () => user,
         verifyAuthenticatedHousehold: async () => verifiedSession,
-        currentDatasetFingerprint: () => fingerprint,
+        verifyPostResponseAuth: async () => postResponseAuth,
+        currentDatasetContext: async () =>
+          fingerprint && importEpoch
+            ? { fingerprint, importEpoch }
+            : null,
         leaseValid: () => lease,
         refreshLease: () => lease,
         withDatasetLock: async (callback) => callback(),
         pull,
         push,
+        finalize,
       })
     return {
       run,
       push,
       pull,
       controller,
+      finalize,
       setUser: (value: string | null) => {
         user = value
       },
       setFingerprint: (value: string | null) => {
         fingerprint = value
       },
+      setImportEpoch: (value: string | null) => {
+        importEpoch = value
+      },
       setLease: (value: boolean) => {
         lease = value
       },
       setVerifiedSession: (value: boolean) => {
         verifiedSession = value
+      },
+      setPostResponseAuth: (value: boolean) => {
+        postResponseAuth = value
+      },
+      setLifecycle: (value: boolean) => {
+        lifecycle = value
       },
     }
   }
@@ -123,6 +145,7 @@ describe('final cloud mutation guard', () => {
     const test = setup()
     await expect(test.run()).resolves.toEqual({ ok: true })
     expect(test.push).toHaveBeenCalledOnce()
+    expect(test.finalize).toHaveBeenCalledOnce()
   })
 
   it('blocks sign-out or account switch while the pull is in flight', async () => {
@@ -163,6 +186,47 @@ describe('final cloud mutation guard', () => {
     })
     await expect(test.run()).resolves.toMatchObject({ ok: false })
     expect(test.push).not.toHaveBeenCalled()
+  })
+
+  it('discards success without local finalization after lifecycle invalidation', async () => {
+    const test = setup()
+    test.push.mockImplementationOnce(async () => {
+      test.setLifecycle(false)
+      return { ok: true as const }
+    })
+    await expect(test.run()).resolves.toMatchObject({
+      ok: false,
+      error: expect.stringContaining('local result was discarded'),
+    })
+    expect(test.finalize).not.toHaveBeenCalled()
+  })
+
+  it('discards success after import epoch or lease changes', async () => {
+    const changedEpoch = setup()
+    changedEpoch.push.mockImplementationOnce(async () => {
+      changedEpoch.setImportEpoch('epoch-imported')
+      return { ok: true as const }
+    })
+    await expect(changedEpoch.run()).resolves.toMatchObject({ ok: false })
+    expect(changedEpoch.finalize).not.toHaveBeenCalled()
+
+    const lostLease = setup()
+    lostLease.push.mockImplementationOnce(async () => {
+      lostLease.setLease(false)
+      return { ok: true as const }
+    })
+    await expect(lostLease.run()).resolves.toMatchObject({ ok: false })
+    expect(lostLease.finalize).not.toHaveBeenCalled()
+  })
+
+  it('re-verifies the exact auth context after a successful response', async () => {
+    const test = setup()
+    test.push.mockImplementationOnce(async () => {
+      test.setPostResponseAuth(false)
+      return { ok: true as const }
+    })
+    await expect(test.run()).resolves.toMatchObject({ ok: false })
+    expect(test.finalize).not.toHaveBeenCalled()
   })
 
   it('blocks a stale cloud revision', async () => {

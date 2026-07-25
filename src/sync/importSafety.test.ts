@@ -3,14 +3,21 @@ import {
   APP_STATE_IMPORT_EVENT,
   importBackup,
   isImportedAppState,
+  saveAppState,
 } from '../appState'
 import { defaultAppState } from '../migration'
-import { emptyHouseholdMeta } from './types'
+import {
+  claimLocalData,
+  loadHouseholdMeta,
+} from './config'
 import {
   APP_STATE_STORAGE_KEY,
   datasetFingerprint,
+  ensureDatasetProvenance,
+  readDatasetProvenance,
   verifyOwnedDatasetProvenance,
 } from './provenance'
+import { emptyHouseholdMeta } from './types'
 
 class MemStorage implements Storage {
   protected values = new Map<string, string>()
@@ -34,7 +41,7 @@ class MemStorage implements Storage {
   }
 }
 
-describe('binding-aware backup import', () => {
+describe('durable binding-aware backup import', () => {
   let eventTarget: EventTarget
 
   beforeEach(() => {
@@ -49,9 +56,21 @@ describe('binding-aware backup import', () => {
     delete (globalThis as unknown as { window?: EventTarget }).window
   })
 
-  it('backs up current data and signals sync before applying imported state', () => {
+  async function bindCurrent() {
     const current = defaultAppState()
-    current.profiles.p1.name = 'Household B'
+    localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(current))
+    await ensureDatasetProvenance()
+    await claimLocalData(
+      'household-b',
+      'b@example.com',
+      emptyHouseholdMeta('household-b'),
+      await datasetFingerprint(current),
+    )
+    return current
+  }
+
+  it('backs up and durably invalidates sync before exposing imported state', async () => {
+    const current = await bindCurrent()
     const imported = structuredClone(current)
     imported.profiles.p1.name = 'Household A backup'
     const listener = vi.fn()
@@ -63,33 +82,68 @@ describe('binding-aware backup import', () => {
     const replacement = result.state
     expect(listener).toHaveBeenCalledOnce()
     expect(isImportedAppState(replacement)).toBe(true)
+    expect(loadHouseholdMeta('household-b').ownsLocalData).toBe(false)
+    expect(readDatasetProvenance()?.importTransition).not.toBeNull()
     expect(
       [...Array(localStorage.length).keys()]
         .map((index) => localStorage.key(index))
         .some((key) => key?.startsWith('homeschool-hq:backup:import:')),
     ).toBe(true)
-    expect(result.note).toContain('remain unbound')
+
+    await saveAppState(replacement)
+    expect(readDatasetProvenance()?.importTransition).toBeNull()
+    expect(loadHouseholdMeta('household-b').binding).toBe('unbound')
   })
 
-  it('cannot satisfy the currently bound household provenance', () => {
-    const current = defaultAppState()
-    current.profiles.p1.name = 'Household B'
-    localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(current))
-    const meta = {
-      ...emptyHouseholdMeta('household-b'),
-      binding: 'bound' as const,
-      ownsLocalData: true,
-      datasetFingerprint: datasetFingerprint(current),
+  it('invalidates an exact-value import and remains unbound after persistence/reload', async () => {
+    const current = await bindCurrent()
+    const before = readDatasetProvenance()!
+    const result = importBackup(current, JSON.stringify(current))
+    if (!result.ok) throw new Error(result.error)
+    const replacement = result.state
+    const during = readDatasetProvenance()!
+
+    expect(during.importEpoch).not.toBe(before.importEpoch)
+    expect(loadHouseholdMeta('household-b').ownsLocalData).toBe(false)
+    await saveAppState(replacement)
+
+    expect(readDatasetProvenance()?.importEpoch).toBe(during.importEpoch)
+    expect(readDatasetProvenance()?.importTransition).toBeNull()
+    expect(loadHouseholdMeta('household-b').binding).toBe('unbound')
+  })
+
+  it('invalidates activeProfileId-only imports despite an equal dataset fingerprint', async () => {
+    const current = await bindCurrent()
+    const imported = { ...current, activeProfileId: 'p2' }
+    expect(await datasetFingerprint(imported)).toBe(
+      await datasetFingerprint(current),
+    )
+    const beforeEpoch = readDatasetProvenance()!.importEpoch
+    const result = importBackup(current, JSON.stringify(imported))
+    if (!result.ok) throw new Error(result.error)
+    const replacement = result.state
+
+    expect(readDatasetProvenance()!.importEpoch).not.toBe(beforeEpoch)
+    expect(loadHouseholdMeta('household-b').ownsLocalData).toBe(false)
+    await saveAppState(replacement)
+    expect(loadHouseholdMeta('household-b').binding).toBe('unbound')
+  })
+
+  it('cannot satisfy the previously bound household provenance', async () => {
+    const current = await bindCurrent()
+    const oldMeta = {
+      ...loadHouseholdMeta('household-b'),
     }
     const imported = structuredClone(current)
     imported.profiles.p1.name = 'Household A backup'
     const result = importBackup(current, JSON.stringify(imported))
     if (!result.ok) throw new Error(result.error)
-    localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(result.state))
+    const replacement = result.state
+    await saveAppState(replacement)
 
-    expect(
-      verifyOwnedDatasetProvenance(meta, result.state, localStorage),
-    ).toMatchObject({ ok: false })
+    await expect(
+      verifyOwnedDatasetProvenance(oldMeta, replacement, localStorage),
+    ).resolves.toMatchObject({ ok: false })
   })
 
   it('prevents destructive import when the safety backup cannot be written', () => {
@@ -108,5 +162,21 @@ describe('binding-aware backup import', () => {
       error:
         'A local safety backup could not be created, so no data was imported.',
     })
+  })
+
+  it('rejects malformed v2 backup data before ownership invalidation', async () => {
+    const current = await bindCurrent()
+    const malformed = structuredClone(current) as unknown as {
+      profiles: Record<string, Record<string, unknown>>
+    }
+    delete malformed.profiles.p1.totals
+    const beforeEpoch = readDatasetProvenance()!.importEpoch
+
+    expect(importBackup(current, JSON.stringify(malformed))).toEqual({
+      ok: false,
+      error: 'That file is not a Homeschool HQ backup.',
+    })
+    expect(readDatasetProvenance()!.importEpoch).toBe(beforeEpoch)
+    expect(loadHouseholdMeta('household-b').binding).toBe('bound')
   })
 })
