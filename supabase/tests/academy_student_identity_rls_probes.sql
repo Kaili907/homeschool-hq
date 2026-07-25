@@ -5,15 +5,18 @@
 -- Required sequence:
 --   1. Create the standard Supabase roles/auth schema in an isolated database.
 --   2. Apply supabase/schema.sql.
---   3. Apply the Phase-0 migration (migration run 1).
---   4. Run this file (probe run 1).
---   5. Apply the Phase-0 migration again (migration run 2).
---   6. Run this file again (probe run 2).
+--   3. Run only the committed sentinel-preflight section below.
+--   4. Apply the Phase-0 migration (migration run 1).
+--   5. Run the role-probe section below (probe run 1).
+--   6. Apply the Phase-0 migration again (migration run 2).
+--   7. Run the role-probe section again (probe run 2).
 --
--- The unrelated private sentinel is intentionally created outside the rolled
--- back fixture transaction. Probe 32 becomes meaningful on the second run: a
--- schema-wide GRANT would add service_role privileges and fail that probe.
+-- Running this entire file as one batch is also transactionally safe: the
+-- sentinel is committed before the rollback-only synthetic fixture starts.
 
+-- ACADEMY SENTINEL PREFLIGHT BEGIN
+begin;
+create schema if not exists academy_private;
 do $$
 begin
   if not exists (
@@ -26,6 +29,10 @@ $$;
 
 do $$
 begin
+  -- Phase 0 intentionally needs service_role schema USAGE. Establish that
+  -- expected schema privilege before recording the unrelated-object baseline.
+  grant usage on schema academy_private to service_role;
+
   if to_regclass('academy_private.academy_probe_unrelated_grant_sentinel') is null then
     create table academy_private.academy_probe_unrelated_grant_sentinel (
       id integer primary key
@@ -35,9 +42,71 @@ begin
       on table academy_private.academy_probe_unrelated_grant_sentinel
       to academy_probe_unrelated;
   end if;
+
+  if to_regprocedure(
+    'academy_private.academy_probe_unrelated_acl_function()'
+  ) is null then
+    execute $function$
+      create function academy_private.academy_probe_unrelated_acl_function()
+      returns integer
+      language sql
+      immutable
+      set search_path = pg_catalog
+      as 'select 1'
+    $function$;
+    revoke all
+      on function academy_private.academy_probe_unrelated_acl_function()
+      from public, anon, authenticated, service_role;
+    grant execute
+      on function academy_private.academy_probe_unrelated_acl_function()
+      to academy_probe_unrelated;
+  end if;
+
+  if to_regclass('academy_private.academy_probe_acl_baseline') is null then
+    create table academy_private.academy_probe_acl_baseline (
+      singleton boolean primary key default true check (singleton),
+      created_at timestamptz not null default clock_timestamp(),
+      sentinel_owner name not null,
+      function_owner name not null,
+      schema_acl text not null,
+      table_acl text not null,
+      function_acl text not null
+    );
+    revoke all
+      on table academy_private.academy_probe_acl_baseline
+      from public, anon, authenticated, service_role, academy_probe_unrelated;
+  end if;
 end;
 $$;
 
+insert into academy_private.academy_probe_acl_baseline (
+  singleton,
+  sentinel_owner,
+  function_owner,
+  schema_acl,
+  table_acl,
+  function_acl
+)
+select
+  true,
+  pg_catalog.pg_get_userbyid(sentinel.relowner),
+  pg_catalog.pg_get_userbyid(function_row.proowner),
+  coalesce(namespace.nspacl::text, ''),
+  coalesce(sentinel.relacl::text, ''),
+  coalesce(function_row.proacl::text, '')
+from pg_catalog.pg_namespace as namespace
+join pg_catalog.pg_class as sentinel
+  on sentinel.relnamespace = namespace.oid
+join pg_catalog.pg_proc as function_row
+  on function_row.pronamespace = namespace.oid
+ and function_row.proname = 'academy_probe_unrelated_acl_function'
+where namespace.nspname = 'academy_private'
+  and sentinel.relname = 'academy_probe_unrelated_grant_sentinel'
+on conflict (singleton) do nothing;
+commit;
+-- ACADEMY SENTINEL PREFLIGHT END
+
+-- ACADEMY ROLE PROBES BEGIN
 begin;
 
 create temporary table academy_probe_results (
@@ -844,6 +913,168 @@ select pg_temp.academy_expect_denied(
   array['23514']
 );
 
+select pg_temp.academy_expect_denied(
+  1961,
+  '19g',
+  'Raw PIN values are rejected under an otherwise allowed audit key',
+  current_user,
+  $sql$
+    select academy_private.append_audit_event(
+      '00000000-0000-0000-0000-000000000011', null, null,
+      'trusted_server', 'household',
+      '00000000-0000-0000-0000-000000000011',
+      'household.created', 'Synthetic audit-value probe',
+      '00000000-0000-0000-0000-00000000c005',
+      '{"status":"1234"}'::jsonb
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  1962,
+  '19h',
+  'Argon2id verifier values are rejected under an allowed audit key',
+  current_user,
+  $sql$
+    select academy_private.append_audit_event(
+      '00000000-0000-0000-0000-000000000011', null, null,
+      'trusted_server', 'household',
+      '00000000-0000-0000-0000-000000000011',
+      'household.created', 'Synthetic audit-value probe',
+      '00000000-0000-0000-0000-00000000c006',
+      '{"status":"$argon2id$v=19$m=65536,t=3,p=1$salt$hash"}'::jsonb
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  1963,
+  '19i',
+  'Scrypt verifier values are rejected under an allowed audit key',
+  current_user,
+  $sql$
+    select academy_private.append_audit_event(
+      '00000000-0000-0000-0000-000000000011', null, null,
+      'trusted_server', 'household',
+      '00000000-0000-0000-0000-000000000011',
+      'household.created', 'Synthetic audit-value probe',
+      '00000000-0000-0000-0000-00000000c007',
+      '{"status":" $ScRyPt$ v=1 secret "}'::jsonb
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  1964,
+  '19j',
+  'Raw bearer-token values are rejected under an allowed audit key',
+  current_user,
+  $sql$
+    select academy_private.append_audit_event(
+      '00000000-0000-0000-0000-000000000011', null, null,
+      'trusted_server', 'household',
+      '00000000-0000-0000-0000-000000000011',
+      'household.created', 'Synthetic audit-value probe',
+      '00000000-0000-0000-0000-00000000c008',
+      '{"status":"aca_stu_v1_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}'::jsonb
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  1965,
+  '19k',
+  'SHA-256 token-digest values are rejected under an allowed audit key',
+  current_user,
+  $sql$
+    select academy_private.append_audit_event(
+      '00000000-0000-0000-0000-000000000011', null, null,
+      'trusted_server', 'household',
+      '00000000-0000-0000-0000-000000000011',
+      'household.created', 'Synthetic audit-value probe',
+      '00000000-0000-0000-0000-00000000c009',
+      jsonb_build_object('status', repeat('a', 64))
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  1966,
+  '19l',
+  'Transcript-like or student-content audit values are rejected',
+  current_user,
+  $sql$
+    select academy_private.append_audit_event(
+      '00000000-0000-0000-0000-000000000011', null, null,
+      'trusted_server', 'household',
+      '00000000-0000-0000-0000-000000000011',
+      'household.created', 'Synthetic audit-value probe',
+      '00000000-0000-0000-0000-00000000c010',
+      jsonb_build_object('status', repeat('student answer ', 40))
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  1967,
+  '19m',
+  'Credential, token, and verifier patterns are rejected in audit reasons',
+  current_user,
+  $sql$
+    select academy_private.append_audit_event(
+      '00000000-0000-0000-0000-000000000011', null, null,
+      'trusted_server', 'household',
+      '00000000-0000-0000-0000-000000000011',
+      'household.created', '  ToKeN : aca_stu_v1_secretvalue  ',
+      '00000000-0000-0000-0000-00000000c011',
+      '{"status":"active"}'::jsonb
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  1968,
+  '19n',
+  'Nested caller-provided audit values are rejected',
+  current_user,
+  $sql$
+    select academy_private.append_audit_event(
+      '00000000-0000-0000-0000-000000000011', null, null,
+      'trusted_server', 'household',
+      '00000000-0000-0000-0000-000000000011',
+      'household.created', 'Synthetic nested audit probe',
+      '00000000-0000-0000-0000-00000000c012',
+      '{"status":{"value":"active","pin":"1234"}}'::jsonb
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  1969,
+  '19o',
+  'Case-varied SHA-256-looking values are rejected in audit metadata',
+  current_user,
+  $sql$
+    select academy_private.append_audit_event(
+      '00000000-0000-0000-0000-000000000011', null, null,
+      'trusted_server', 'subject_enrollment',
+      '00000000-0000-0000-0000-000000001101',
+      'subject_enrollment.created', 'Synthetic audit-value probe',
+      '00000000-0000-0000-0000-00000000c013',
+      jsonb_build_object(
+        'subject_key', 'math',
+        'school_year_key', '2026-2027',
+        'instructional_level', 'grade-4',
+        'course_id', repeat('A', 64),
+        'curriculum_version', null,
+        'status', 'active',
+        'placement_source', 'parent'
+      )
+    )
+  $sql$,
+  array['23514']
+);
+
 -- Valid credential fixtures use synthetic but structurally valid encodings.
 insert into academy_private.student_access_credentials (
   id,
@@ -853,7 +1084,6 @@ insert into academy_private.student_access_credentials (
   credential_version,
   verifier_scheme,
   verifier_digest,
-  verifier_parameters,
   status,
   created_actor_kind,
   created_by,
@@ -868,8 +1098,7 @@ values
     'pin',
     1,
     'argon2id',
-    '$argon2id$v=19$m=65536,t=3,p=1$c3ludGhldGljLXNhbHQxMjM0NTY$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ',
-    '{"memory_kib":65536,"iterations":3,"parallelism":1}'::jsonb,
+    '$argon2id$v=19$m=65536,t=3,p=1$c3Nzc3Nzc3Nzc3Nzc3Nzcw$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
     'active',
     'guardian',
     '00000000-0000-0000-0000-0000000000a1',
@@ -883,8 +1112,7 @@ values
     'pin',
     1,
     'scrypt',
-    '$scrypt$v=1$ln=15,r=8,p=1$c3ludGhldGljLXNhbHQ$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI',
-    '{"ln":15,"r":8,"p":1}'::jsonb,
+    '$scrypt$v=1$ln=15,r=8,p=1$dHR0dHR0dHR0dHR0dHR0dA$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI',
     'active',
     'guardian',
     '00000000-0000-0000-0000-0000000000a1',
@@ -898,8 +1126,7 @@ values
     'pin',
     1,
     'argon2id',
-    '$argon2id$v=19$m=65536,t=3,p=1$c3ludGhldGljLXNhbHRCMjM0NTY$Y2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2M',
-    '{"memory_kib":65536,"iterations":3,"parallelism":1}'::jsonb,
+    '$argon2id$v=19$m=65536,t=3,p=1$dXV1dXV1dXV1dXV1dXV1dQ$Y2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2M',
     'active',
     'guardian',
     '00000000-0000-0000-0000-0000000000b1',
@@ -920,6 +1147,96 @@ select pg_temp.academy_record(
     )
   ),
   null
+);
+
+select pg_temp.academy_record(
+  2001,
+  '20x',
+  'Credential auxiliary JSON is absent from the Phase-0 schema',
+  not exists (
+    select 1
+    from information_schema.columns
+    where table_schema = 'academy_private'
+      and table_name = 'student_access_credentials'
+      and column_name = 'verifier_parameters'
+  ),
+  null
+);
+select pg_temp.academy_expect_denied(
+  2002,
+  '20x1',
+  'Credential inserts cannot carry raw-PIN auxiliary JSON',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, verifier_parameters, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 20, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$c3Nzc3Nzc3Nzc3Nzc3Nzcw$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      '{"raw_pin":"1234"}'::jsonb, 'trusted_server',
+      'Auxiliary column absence probe'
+    )
+  $sql$,
+  array['42703']
+);
+select pg_temp.academy_expect_denied(
+  2003,
+  '20x2',
+  'Credential inserts cannot carry reset-token or password JSON',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, verifier_parameters, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 20, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$c3Nzc3Nzc3Nzc3Nzc3Nzcw$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      '{"reset_token":"secret","password":"secret"}'::jsonb,
+      'trusted_server', 'Auxiliary column absence probe'
+    )
+  $sql$,
+  array['42703']
+);
+select pg_temp.academy_expect_denied(
+  2004,
+  '20x3',
+  'Credential inserts cannot duplicate verifier, salt, or hash JSON',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, verifier_parameters, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 20, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$c3Nzc3Nzc3Nzc3Nzc3Nzcw$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      '{"verifier":"secret","salt":"secret","hash":"secret"}'::jsonb,
+      'trusted_server', 'Auxiliary column absence probe'
+    )
+  $sql$,
+  array['42703']
+);
+select pg_temp.academy_expect_denied(
+  2005,
+  '20x4',
+  'Credential inserts cannot carry unknown, nested, array, or mismatched parameters',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, verifier_parameters, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 20, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$c3Nzc3Nzc3Nzc3Nzc3Nzcw$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      '{"unknown":{"m":1},"array":[1],"memory_cost":1}'::jsonb,
+      'trusted_server', 'Auxiliary column absence probe'
+    )
+  $sql$,
+  array['42703']
 );
 
 -- Negative verifier probes execute real service-role inserts. Each insert is
@@ -1083,6 +1400,171 @@ select pg_temp.academy_expect_denied(
   array['23514']
 );
 
+select pg_temp.academy_expect_denied(
+  2081,
+  '20i',
+  'Verifier rejects impossible unpadded-Base64 modulo length',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 21, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$AAAAAAAAAAAAAAAAA$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      'trusted_server', 'Invalid canonical encoding probe'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  2082,
+  '20j',
+  'Verifier rejects internal Base64 padding',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 21, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$c3Nzc3Nz=c3Nzc3Nzc3Nzcw$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      'trusted_server', 'Invalid canonical encoding probe'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  2083,
+  '20k',
+  'Verifier rejects padded Base64 in the canonical unpadded format',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 21, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$c3Nzc3Nzc3Nzc3Nzc3Nzcw==$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      'trusted_server', 'Invalid canonical encoding probe'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  2084,
+  '20l',
+  'Verifier rejects non-Base64 characters',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 21, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$c3Nzc3Nzc3Nzc3Nzc3Nzc-$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      'trusted_server', 'Invalid canonical encoding probe'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  2085,
+  '20m',
+  'Verifier rejects an excessively short decoded salt',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 21, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$YWJjZA$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      'trusted_server', 'Invalid canonical encoding probe'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  2086,
+  '20n',
+  'Verifier rejects an excessively short decoded hash',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 21, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$c3Nzc3Nzc3Nzc3Nzc3Nzcw$YWFhYWFhYQ',
+      'trusted_server', 'Invalid canonical encoding probe'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  2087,
+  '20o',
+  'Verifier rejects an excessively long decoded salt',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 21, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$' || repeat('A', 87)
+        || '$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      'trusted_server', 'Invalid canonical encoding probe'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  2088,
+  '20p',
+  'Verifier rejects an excessively long decoded hash',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 21, 'scrypt',
+      '$scrypt$v=1$ln=15,r=8,p=1$dHR0dHR0dHR0dHR0dHR0dA$'
+        || repeat('A', 87),
+      'trusted_server', 'Invalid canonical encoding probe'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  2089,
+  '20q',
+  'Credential lifecycle reason columns reject a standalone four-digit PIN',
+  'service_role',
+  $sql$
+    insert into academy_private.student_access_credentials (
+      household_id, student_id, credential_version, verifier_scheme,
+      verifier_digest, created_actor_kind, creation_reason
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201', 21, 'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$c3Nzc3Nzc3Nzc3Nzc3Nzcw$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE',
+      'trusted_server', '1234'
+    )
+  $sql$,
+  array['23514']
+);
+
 -- Valid current session fixtures use exact lowercase SHA-256 hex digests.
 insert into academy_private.student_session_grants (
   id,
@@ -1105,7 +1587,7 @@ select
   '00000000-0000-0000-0000-000000008101',
   student.household_id,
   student.id,
-  'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+  '7622985c70518971754832bfecbce888cd460c0189152e431e6045957e10fb1c',
   array['student:profile:read', 'student:progress:read'],
   '00000000-0000-0000-0000-000000009101',
   1,
@@ -1160,6 +1642,93 @@ select pg_temp.academy_record(
   'Valid lowercase SHA-256 digest and constrained capabilities are accepted',
   academy_private.is_student_session_grant_current(
     '00000000-0000-0000-0000-000000008101'
+  ),
+  null
+);
+select pg_temp.academy_record(
+  2101,
+  '21x',
+  'Canonical raw token format is disjoint from the stored digest format',
+  academy_private.is_valid_raw_student_session_token(
+    'aca_stu_v1_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+  )
+    and 'aca_stu_v1_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+      !~ '^[0-9a-f]{64}$'
+    and not academy_private.is_valid_raw_student_session_token(
+      'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    )
+    and exists (
+      select 1
+      from academy_private.student_session_grants
+      where id = '00000000-0000-0000-0000-000000008101'
+        and token_digest =
+          '7622985c70518971754832bfecbce888cd460c0189152e431e6045957e10fb1c'
+    ),
+  'External runner independently verifies SHA-256(raw token) equals the stored fixture digest'
+);
+select pg_temp.academy_expect_denied(
+  2102,
+  '21y',
+  'Canonical raw session token cannot be stored as a digest',
+  'service_role',
+  $sql$
+    insert into academy_private.student_session_grants (
+      household_id, student_id, token_digest, capabilities, credential_id,
+      credential_version, session_version, issuance_flow, issued_actor_kind,
+      issuance_reason, correlation_id, expires_at
+    ) values (
+      '00000000-0000-0000-0000-000000000022',
+      '00000000-0000-0000-0000-000000000201',
+      'aca_stu_v1_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+      array['student:profile:read'],
+      '00000000-0000-0000-0000-000000009201', 1, 1,
+      'student_credential', 'trusted_server', 'Invalid raw-token storage probe',
+      '00000000-0000-0000-0000-00000000f000', now() + interval '1 hour'
+    )
+  $sql$,
+  array['23514']
+);
+
+insert into academy_private.student_session_grants (
+  id,
+  household_id,
+  student_id,
+  token_digest,
+  capabilities,
+  credential_id,
+  credential_version,
+  session_version,
+  issuance_flow,
+  issued_actor_kind,
+  issuance_reason,
+  correlation_id,
+  issued_at,
+  expires_at
+)
+select
+  '00000000-0000-0000-0000-000000008204',
+  student.household_id,
+  student.id,
+  '1111111111111111111111111111111111111111111111111111111111111111',
+  array['student:profile:read'],
+  '00000000-0000-0000-0000-000000009201',
+  1,
+  student.session_version,
+  'student_credential',
+  'trusted_server',
+  'Synthetic future-issuance probe',
+  '00000000-0000-0000-0000-00000000e204',
+  now() + interval '1 hour',
+  now() + interval '2 hours'
+from public.academy_students as student
+where student.id = '00000000-0000-0000-0000-000000000201';
+
+select pg_temp.academy_record(
+  2103,
+  '21z',
+  'Future-issued session grant is not current before issuance',
+  not academy_private.is_student_session_grant_current(
+    '00000000-0000-0000-0000-000000008204'
   ),
   null
 );
@@ -1646,7 +2215,6 @@ begin
     credential_version,
     verifier_scheme,
     verifier_digest,
-    verifier_parameters,
     status,
     replaces_credential_id,
     created_actor_kind,
@@ -1661,8 +2229,7 @@ begin
     'pin',
     2,
     'argon2id',
-    '$argon2id$v=19$m=65536,t=3,p=1$bmV3LXN5bnRoZXRpYy1zYWx0$ZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGQ',
-    '{"memory_kib":65536,"iterations":3,"parallelism":1}'::jsonb,
+    '$argon2id$v=19$m=65536,t=3,p=1$bm5ubm5ubm5ubm5ubm5ubg$ZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGQ',
     'active',
     '00000000-0000-0000-0000-000000009101',
     'guardian',
@@ -1932,9 +2499,9 @@ select pg_temp.academy_record(
 select pg_temp.academy_record(
   312,
   '31c',
-  'All eight Phase-0 tables exist after migration application',
+  'All nine Phase-0 tables, including the security marker, exist',
   (
-    select count(*) = 8
+    select count(*) = 9
     from information_schema.tables
     where (table_schema, table_name) in (
       ('public', 'academy_households'),
@@ -1944,7 +2511,8 @@ select pg_temp.academy_record(
       ('public', 'academy_subject_enrollments'),
       ('public', 'academy_audit_events'),
       ('academy_private', 'student_access_credentials'),
-      ('academy_private', 'student_session_grants')
+      ('academy_private', 'student_session_grants'),
+      ('academy_private', 'identity_foundation_metadata')
     )
   ),
   null
@@ -1953,7 +2521,7 @@ select pg_temp.academy_record(
 select pg_temp.academy_record(
   320,
   '32',
-  'Migration preserves an unrelated private object and its grants',
+  'ACL sentinel exists and retains its deliberately assigned privileges',
   to_regclass('academy_private.academy_probe_unrelated_grant_sentinel') is not null
     and has_table_privilege(
       'academy_probe_unrelated',
@@ -1979,6 +2547,168 @@ select pg_temp.academy_record(
       'service_role',
       'academy_private.academy_probe_unrelated_grant_sentinel',
       'delete'
+    ),
+  null
+);
+select pg_temp.academy_record(
+  321,
+  '32a',
+  'ACL sentinel owner and unrelated function owner are unchanged',
+  (
+    select baseline.sentinel_owner = pg_catalog.pg_get_userbyid(sentinel.relowner)
+      and baseline.function_owner =
+        pg_catalog.pg_get_userbyid(function_row.proowner)
+    from academy_private.academy_probe_acl_baseline as baseline
+    join pg_catalog.pg_namespace as namespace
+      on namespace.nspname = 'academy_private'
+    join pg_catalog.pg_class as sentinel
+      on sentinel.relnamespace = namespace.oid
+     and sentinel.relname = 'academy_probe_unrelated_grant_sentinel'
+    join pg_catalog.pg_proc as function_row
+      on function_row.pronamespace = namespace.oid
+     and function_row.proname = 'academy_probe_unrelated_acl_function'
+    where baseline.singleton
+  ),
+  null
+);
+select pg_temp.academy_record(
+  322,
+  '32b',
+  'ACL sentinel schema, table, and function ACLs are byte-for-byte unchanged',
+  (
+    select baseline.schema_acl = coalesce(namespace.nspacl::text, '')
+      and baseline.table_acl = coalesce(sentinel.relacl::text, '')
+      and baseline.function_acl = coalesce(function_row.proacl::text, '')
+    from academy_private.academy_probe_acl_baseline as baseline
+    join pg_catalog.pg_namespace as namespace
+      on namespace.nspname = 'academy_private'
+    join pg_catalog.pg_class as sentinel
+      on sentinel.relnamespace = namespace.oid
+     and sentinel.relname = 'academy_probe_unrelated_grant_sentinel'
+    join pg_catalog.pg_proc as function_row
+      on function_row.pronamespace = namespace.oid
+     and function_row.proname = 'academy_probe_unrelated_acl_function'
+    where baseline.singleton
+  ),
+  null
+);
+select pg_temp.academy_record(
+  323,
+  '32c',
+  'ACL sentinel predates Migration Run 2 and was not recreated afterward',
+  (
+    select marker.verification_count = 1
+      or (
+        marker.verification_count >= 2
+        and baseline.created_at < marker.last_verified_at
+      )
+    from academy_private.academy_probe_acl_baseline as baseline
+    cross join academy_private.identity_foundation_metadata as marker
+    where baseline.singleton and marker.singleton
+  ),
+  null
+);
+select pg_temp.academy_record(
+  324,
+  '32d',
+  'Migration marker manifest still matches every security-critical object',
+  (
+    select marker.security_manifest =
+      academy_private.identity_foundation_manifest()
+    from academy_private.identity_foundation_metadata as marker
+    where marker.singleton
+  ),
+  null
+);
+select pg_temp.academy_record(
+  325,
+  '32e',
+  'Security-definer functions are owned by postgres with safe search paths',
+  not exists (
+    select 1
+    from pg_catalog.pg_proc as procedure
+    join pg_catalog.pg_namespace as namespace
+      on namespace.oid = procedure.pronamespace
+    join pg_catalog.pg_roles as owner_role
+      on owner_role.oid = procedure.proowner
+    where namespace.nspname in ('public', 'academy_private')
+      and procedure.prosecdef
+      and (
+        owner_role.rolname <> 'postgres'
+        or not (
+          coalesce(procedure.proconfig, array[]::text[])
+          @> array['search_path=pg_catalog']::text[]
+        )
+      )
+      and (
+        procedure.proname like 'academy_%'
+        or namespace.nspname = 'academy_private'
+      )
+  ),
+  null
+);
+
+-- Guardian removal is revocation, not deletion of an Auth identity that is
+-- still needed for historical attribution.
+update public.academy_guardian_student_access
+set
+  status = 'revoked',
+  revoked_at = now(),
+  revoked_by = '00000000-0000-0000-0000-0000000000a1',
+  revocation_reason = 'Supported guardian account-removal revocation probe'
+where membership_id = '00000000-0000-0000-0000-0000000000a2'
+  and status = 'active';
+
+update public.academy_household_memberships
+set
+  status = 'revoked',
+  revoked_at = now(),
+  revoked_by = '00000000-0000-0000-0000-0000000000a1',
+  revocation_reason = 'Supported guardian account-removal revocation probe'
+where id = '00000000-0000-0000-0000-0000000000a2';
+
+select pg_temp.academy_record(
+  326,
+  'guardian-delete-1',
+  'Supported guardian removal revokes membership and student access',
+  (
+    select membership.status = 'revoked'
+      and not exists (
+        select 1
+        from public.academy_guardian_student_access as access_row
+        where access_row.membership_id = membership.id
+          and access_row.status = 'active'
+      )
+    from public.academy_household_memberships as membership
+    where membership.id = '00000000-0000-0000-0000-0000000000a2'
+  ),
+  null
+);
+select pg_temp.academy_expect_denied(
+  327,
+  'guardian-delete-2',
+  'Direct Auth-user deletion is rejected while historical attribution exists',
+  current_user,
+  $sql$
+    delete from auth.users
+    where id = '00000000-0000-0000-0000-0000000000a1'
+  $sql$,
+  array['23503', '23514', '42501']
+);
+select pg_temp.academy_record(
+  328,
+  'guardian-delete-3',
+  'Historical guardian audit attribution remains interpretable after revocation',
+  exists (
+    select 1
+    from public.academy_audit_events
+    where actor_user_id = '00000000-0000-0000-0000-0000000000a1'
+      and actor_kind = 'guardian'
+  )
+    and exists (
+      select 1
+      from auth.users
+      where id = '00000000-0000-0000-0000-0000000000a1'
     ),
   null
 );
@@ -2026,3 +2756,4 @@ select
 from pg_temp.academy_probe_results;
 
 rollback;
+-- ACADEMY ROLE PROBES END
