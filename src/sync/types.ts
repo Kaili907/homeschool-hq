@@ -38,10 +38,15 @@ export interface HouseholdSyncMeta {
   binding: BindingState
   /** True only when the current local AppState has been explicitly assigned here. */
   ownsLocalData: boolean
+  /** Fingerprint of the exact persisted AppState this household owns. */
+  datasetFingerprint: string | null
+  /** Aggregate revision from the most recently verified cloud inspection. */
+  cloudRevision: string | null
   profiles: Record<string, ProfileSyncMeta>
   lastSyncAt?: number
   reconciliation: ReconciliationState
   conflictProfileIds: string[]
+  pauseReason?: string
 }
 
 export const emptyHouseholdMeta = (
@@ -52,10 +57,30 @@ export const emptyHouseholdMeta = (
   ...(email ? { email } : {}),
   binding: 'unbound',
   ownsLocalData: false,
+  datasetFingerprint: null,
+  cloudRevision: null,
   profiles: {},
   reconciliation: 'unbound',
   conflictProfileIds: [],
 })
+
+export type OwnershipTransitionPhase =
+  | 'prepared'
+  | 'app-state-written'
+  | 'review'
+
+export interface OwnershipTransition {
+  version: 1
+  operationId: string
+  targetHouseholdId: string
+  targetEmail: string
+  expectedFingerprint: string
+  previousFingerprint: string
+  previousOwnerHouseholdId: string | null
+  phase: OwnershipTransitionPhase
+  createdAt: number
+  nextMeta: HouseholdSyncMeta
+}
 
 export type ReconciliationCategory =
   | 'local-only'
@@ -102,6 +127,8 @@ export interface SyncStatus {
   binding: BindingState | 'signed-out'
   lastSyncAt: number | null
   pendingCount: number
+  provenance: 'verified' | 'unbound' | 'paused'
+  pauseReason: string | null
   busy: boolean
   error: string | null
   decision: SyncDecision | null

@@ -15,7 +15,10 @@ import type {
 
 export interface SyncTransport {
   pull: () => Promise<CloudPullResult>
-  push: (rows: RemoteProfileRow[]) => Promise<CloudPushResult>
+  push: (
+    rows: RemoteProfileRow[],
+    expectedCloudRows: RemoteProfileRow[],
+  ) => Promise<CloudPushResult>
 }
 
 export type HouseholdInspection =
@@ -92,7 +95,7 @@ export async function executeAutomaticCycle(
   }
 
   if (plan.toPush.length > 0) {
-    const pushed = await transport.push(plan.toPush)
+    const pushed = await transport.push(plan.toPush, pulled.rows)
     if (!pushed.ok) {
       return {
         kind: 'push-error',
@@ -105,35 +108,34 @@ export async function executeAutomaticCycle(
       }
     }
   }
+  const rowsAfter = [
+    ...pulled.rows.filter(
+      (row) =>
+        !plan.toPush.some((pushed) => pushed.profile_id === row.profile_id),
+    ),
+    ...plan.toPush,
+  ]
   return {
     kind: 'success',
-    rows: pulled.rows,
+    rows: rowsAfter,
     profiles: plan.profiles,
     meta: plan.nextMeta,
   }
 }
 
-/** Explicitly confirmed empty-cloud upload. Calling this function is the confirmation boundary. */
-export async function executeConfirmedLocalUpload(
+/** Prepare an explicitly confirmed upload; dispatch remains behind the lease guard. */
+export function prepareConfirmedLocalUpload(
   local: Record<string, Profile>,
   meta: HouseholdSyncMeta,
   now: number,
-  push: SyncTransport['push'],
-): Promise<
-  | { ok: false; error: string }
-  | { ok: true; rows: RemoteProfileRow[]; meta: HouseholdSyncMeta }
-> {
+): { rows: RemoteProfileRow[]; meta: HouseholdSyncMeta } {
   const rows = Object.values(local).map((profile) => ({
     profile_id: profile.id,
     data: profile,
     updated_at: new Date(now).toISOString(),
   }))
-  const result = await push(rows)
-  return result.ok
-    ? {
-        ok: true,
-        rows,
-        meta: metaAfterSuccessfulSync(meta, local, rows, now),
-      }
-    : result
+  return {
+    rows,
+    meta: metaAfterSuccessfulSync(meta, local, rows, now),
+  }
 }

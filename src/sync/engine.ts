@@ -254,9 +254,11 @@ export function metaAfterSuccessfulSync(
   return {
     ...meta,
     profiles: profileMeta,
+    cloudRevision: remoteRowsSignature(remote),
     lastSyncAt: now,
     reconciliation: 'ready',
     conflictProfileIds: [],
+    pauseReason: undefined,
   }
 }
 

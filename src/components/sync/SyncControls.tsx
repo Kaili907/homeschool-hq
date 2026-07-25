@@ -237,6 +237,22 @@ function SignedIn({ sync }: { sync: SyncApi }) {
               : 'not yet bound'}
           </strong>
         </span>
+        <span>
+          Data provenance:{' '}
+          <strong
+            className={
+              status.provenance === 'verified'
+                ? 'text-emerald-700'
+                : 'text-amber-700'
+            }
+          >
+            {status.provenance === 'verified'
+              ? 'matches persisted Academy data'
+              : status.provenance === 'paused'
+                ? 'review required'
+                : 'not assigned'}
+          </strong>
+        </span>
         <span>Last successful sync: {fmt(status.lastSyncAt)}</span>
         {status.pendingCount > 0 && (
           <span className="rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-700">
@@ -261,6 +277,12 @@ function SignedIn({ sync }: { sync: SyncApi }) {
             Retry cloud check
           </button>
         </div>
+      )}
+
+      {status.pauseReason && (
+        <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+          {status.pauseReason}
+        </p>
       )}
 
       {status.decision ? (

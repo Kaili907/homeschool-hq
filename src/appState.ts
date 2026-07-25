@@ -1,10 +1,16 @@
 import type { AppState, Profile, SkillState, SkillStatus } from './types'
 import type { SkillId } from './skills'
 import { defaultAppState, isAppState, migrateV1ToV2 } from './migration'
+import {
+  APP_STATE_STORAGE_KEY,
+  DATASET_WRITE_LOCK_NAME,
+} from './sync/provenance'
 
-const V2_KEY = 'homeschool-hq:app:v2'
 const V1_KEY = 'homeschool-hq:profile:v1'
 const BACKUP_PREFIX = 'homeschool-hq:backup:v1:'
+const IMPORT_BACKUP_PREFIX = 'homeschool-hq:backup:import:'
+export const APP_STATE_IMPORT_EVENT = 'academy:app-state-import'
+const importedStates = new WeakSet<object>()
 
 export interface LoadResult {
   state: AppState
@@ -19,7 +25,7 @@ export interface LoadResult {
  */
 export function loadAppState(): LoadResult {
   try {
-    const raw2 = localStorage.getItem(V2_KEY)
+    const raw2 = localStorage.getItem(APP_STATE_STORAGE_KEY)
     if (raw2) {
       const parsed = JSON.parse(raw2) as unknown
       if (isAppState(parsed)) return { state: parsed, migrated: false }
@@ -35,7 +41,7 @@ export function loadAppState(): LoadResult {
       localStorage.setItem(backupKey, raw1) // backup BEFORE any conversion
       const migrated = migrateV1ToV2(JSON.parse(raw1))
       if (migrated) {
-        localStorage.setItem(V2_KEY, JSON.stringify(migrated))
+        localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(migrated))
         return { state: migrated, migrated: true, backupKey }
       }
     }
@@ -43,12 +49,43 @@ export function loadAppState(): LoadResult {
     // fall through
   }
   const fresh = defaultAppState()
-  localStorage.setItem(V2_KEY, JSON.stringify(fresh))
+  localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(fresh))
   return { state: fresh, migrated: false }
 }
 
-export function saveAppState(state: AppState): void {
-  localStorage.setItem(V2_KEY, JSON.stringify(state))
+interface DatasetLockManager {
+  request<T>(
+    name: string,
+    options: { mode: 'exclusive' },
+    callback: () => T | Promise<T>,
+  ): Promise<T>
+}
+
+let latestAppStatePersistence: Promise<void> = Promise.resolve()
+
+export async function saveAppState(state: AppState): Promise<void> {
+  latestAppStatePersistence = (async () => {
+    const persist = () =>
+      localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(state))
+    const locks =
+      typeof navigator === 'undefined'
+        ? undefined
+        : (navigator as Navigator & { locks?: DatasetLockManager }).locks
+    if (!locks) {
+      persist()
+      return
+    }
+    await locks.request(DATASET_WRITE_LOCK_NAME, { mode: 'exclusive' }, persist)
+  })()
+  return latestAppStatePersistence
+}
+
+export function waitForAppStatePersistence(): Promise<void> {
+  return latestAppStatePersistence
+}
+
+export function isImportedAppState(state: AppState): boolean {
+  return importedStates.has(state)
 }
 
 export function listV1BackupKeys(): string[] {
@@ -178,12 +215,45 @@ export function serializeAllBackup(state: AppState): string {
 }
 
 export function exportAllBackup(state: AppState): void {
-  downloadJson(`homeschool-hq-all-profiles-${isoToday()}.json`, serializeAllBackup(state))
+  downloadJson(
+    `homeschool-hq-all-profiles-${isoToday()}.json`,
+    serializeAllBackup(state),
+  )
 }
 
 export type ImportResult =
   | { ok: true; state: AppState; note: string }
   | { ok: false; error: string }
+
+function backupBeforeImport(current: AppState): boolean {
+  if (typeof localStorage === 'undefined') return true
+  try {
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-')
+    localStorage.setItem(
+      `${IMPORT_BACKUP_PREFIX}${stamp}`,
+      JSON.stringify(current),
+    )
+    return true
+  } catch {
+    return false
+  }
+}
+
+function successfulImport(state: AppState, note: string): ImportResult {
+  let announced = false
+  return {
+    ok: true,
+    get state() {
+      importedStates.add(state)
+      if (!announced && typeof window !== 'undefined') {
+        announced = true
+        window.dispatchEvent(new CustomEvent(APP_STATE_IMPORT_EVENT))
+      }
+      return state
+    },
+    note: `${note} Imported Academy data will remain unbound until a parent reviews cloud sync.`,
+  }
+}
 
 /**
  * Import a backup file. v2 files replace the whole app state; v1 single-profile
@@ -197,15 +267,31 @@ export function importBackup(current: AppState, text: string): ImportResult {
     return { ok: false, error: 'That file is not valid JSON.' }
   }
   if (isAppState(parsed)) {
-    return { ok: true, state: parsed, note: 'Full backup restored (all profiles).' }
+    if (!backupBeforeImport(current)) {
+      return {
+        ok: false,
+        error:
+          'A local safety backup could not be created, so no data was imported.',
+      }
+    }
+    return successfulImport(parsed, 'Full backup restored (all profiles).')
   }
   const asV1 = migrateV1ToV2(parsed)
   if (asV1) {
-    return {
-      ok: true,
-      state: { ...current, profiles: { ...current.profiles, p1: asV1.profiles.p1 } },
-      note: 'Old single-profile backup restored into the 3rd grader profile.',
+    if (!backupBeforeImport(current)) {
+      return {
+        ok: false,
+        error:
+          'A local safety backup could not be created, so no data was imported.',
+      }
     }
+    return successfulImport(
+      {
+        ...current,
+        profiles: { ...current.profiles, p1: asV1.profiles.p1 },
+      },
+      'Old single-profile backup restored into the 3rd grader profile.',
+    )
   }
   return { ok: false, error: 'That file is not a Homeschool HQ backup.' }
 }

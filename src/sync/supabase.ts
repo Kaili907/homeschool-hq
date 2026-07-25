@@ -4,7 +4,12 @@ import {
   type Session,
   type SupabaseClient,
 } from '@supabase/supabase-js'
-import { supabaseAnonKey, supabaseConfigured, supabaseUrl } from './config'
+import {
+  cleanupLegacySyncStorage,
+  supabaseAnonKey,
+  supabaseConfigured,
+  supabaseUrl,
+} from './config'
 import type {
   CloudPullResult,
   CloudPushResult,
@@ -75,6 +80,47 @@ export async function getCurrentSession(
   return error ? null : data.session
 }
 
+/** Server-verified user identity for the final cloud mutation boundary. */
+export async function getVerifiedCurrentUser(
+  client = getSupabaseClient(),
+): Promise<SignedInUser | null> {
+  if (!client) return null
+  const { data, error } = await client.auth.getUser()
+  if (error || !data.user?.id) return null
+  return {
+    id: data.user.id,
+    email: data.user.email ?? data.user.id,
+  }
+}
+
+export interface VerifiedAuthContext {
+  user: SignedInUser
+  accessToken: string
+}
+
+/**
+ * Capture one server-verified auth context. Mutations use this fixed token so a
+ * different session appearing in another tab cannot retarget an in-flight write.
+ */
+export async function getVerifiedAuthContext(
+  client = getSupabaseClient(),
+): Promise<VerifiedAuthContext | null> {
+  if (!client) return null
+  const { data: sessionData, error: sessionError } =
+    await client.auth.getSession()
+  const accessToken = sessionData.session?.access_token
+  if (sessionError || !accessToken) return null
+  const { data, error } = await client.auth.getUser(accessToken)
+  if (error || !data.user?.id) return null
+  return {
+    user: {
+      id: data.user.id,
+      email: data.user.email ?? data.user.id,
+    },
+    accessToken,
+  }
+}
+
 export function onAuthSessionChange(
   callback: (event: AuthChangeEvent, session: Session | null) => void,
   client = getSupabaseClient(),
@@ -130,18 +176,24 @@ export async function pullProfiles(
 
 export async function pushProfiles(
   rows: RemoteProfileRow[],
-  client = getSupabaseClient(),
+  verifiedAccessToken: string,
   signal?: AbortSignal,
 ): Promise<CloudPushResult> {
   if (rows.length === 0) return { ok: true }
-  if (!client) return { ok: false, error: 'Cloud sync is not configured.' }
+  if (!supabaseConfigured())
+    return { ok: false, error: 'Cloud sync is not configured.' }
+  if (!verifiedAccessToken) {
+    return {
+      ok: false,
+      error: 'A server-verified auth token is required for cloud writes.',
+    }
+  }
   try {
-    const payload = rows.map((row) => ({
-      profile_id: row.profile_id,
-      data: row.data,
-      updated_at: row.updated_at,
-    }))
-    let query = client.from('profiles').upsert(payload, {
+    const payload = profileRowsForUpsert(rows)
+    const writeClient = createClient(supabaseUrl(), supabaseAnonKey(), {
+      accessToken: async () => verifiedAccessToken,
+    })
+    let query = writeClient.from('profiles').upsert(payload, {
       onConflict: 'household_id,profile_id',
       defaultToNull: false,
     })
@@ -156,12 +208,23 @@ export async function pushProfiles(
   }
 }
 
+export function profileRowsForUpsert(rows: RemoteProfileRow[]) {
+  return rows.map((row) => ({
+    profile_id: row.profile_id,
+    data: row.data,
+    updated_at: row.updated_at,
+  }))
+}
+
 /** Local sign-out removes this browser session without revoking other devices. */
 export async function signOutRemote(
   client = getSupabaseClient(),
 ): Promise<void> {
-  if (!client) return
-  await client.auth.signOut({ scope: 'local' })
+  try {
+    if (client) await client.auth.signOut({ scope: 'local' })
+  } finally {
+    cleanupLegacySyncStorage()
+  }
 }
 
 export function resetSupabaseClientForTests(): void {
