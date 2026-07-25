@@ -15,6 +15,7 @@ export interface MutationLease {
   tabId: string
   operationId: string
   datasetFingerprint: string
+  importEpoch: string
   cloudRevision: string
   expiresAt: number
 }
@@ -55,6 +56,7 @@ export function readMutationLease(
       typeof parsed.tabId !== 'string' ||
       typeof parsed.operationId !== 'string' ||
       typeof parsed.datasetFingerprint !== 'string' ||
+      typeof parsed.importEpoch !== 'string' ||
       typeof parsed.cloudRevision !== 'string' ||
       typeof parsed.expiresAt !== 'number'
     ) {
@@ -102,6 +104,7 @@ export function mutationLeaseIsOwned(
     current.tabId === lease.tabId &&
     current.operationId === lease.operationId &&
     current.datasetFingerprint === lease.datasetFingerprint &&
+    current.importEpoch === lease.importEpoch &&
     current.cloudRevision === lease.cloudRevision &&
     current.expiresAt > now
   )
@@ -148,16 +151,23 @@ export function leaseStorageKeyForTests(householdId: string): string {
 export interface GuardedMutation {
   householdId: string
   datasetFingerprint: string
+  importEpoch: string
   cloudRevision: string
   signal: AbortSignal
+  lifecycleValid: () => boolean
   authenticatedHouseholdId: () => string | null
   verifyAuthenticatedHousehold: () => Promise<boolean>
-  currentDatasetFingerprint: () => string | null
+  verifyPostResponseAuth: () => Promise<boolean>
+  currentDatasetContext: () => Promise<{
+    fingerprint: string
+    importEpoch: string
+  } | null>
   leaseValid: () => boolean
   refreshLease: () => boolean
   withDatasetLock: <T>(callback: () => Promise<T>) => Promise<T>
   pull: () => Promise<CloudPullResult>
   push: () => Promise<CloudPushResult>
+  finalize: () => void | Promise<void>
 }
 
 /**
@@ -167,14 +177,30 @@ export interface GuardedMutation {
 export async function executeGuardedMutation(
   guard: GuardedMutation,
 ): Promise<CloudPushResult> {
-  const stillValid = (): boolean =>
-    !guard.signal.aborted &&
-    guard.authenticatedHouseholdId() === guard.householdId &&
-    guard.currentDatasetFingerprint() === guard.datasetFingerprint &&
-    guard.leaseValid()
+  const invalidReason = async (): Promise<string | null> => {
+    const context = await guard.currentDatasetContext()
+    if (guard.signal.aborted) return 'The sync operation was cancelled.'
+    if (!guard.lifecycleValid()) return 'The sync operation is no longer current.'
+    if (guard.authenticatedHouseholdId() !== guard.householdId) {
+      return 'The authenticated household changed.'
+    }
+    if (
+      context?.fingerprint !== guard.datasetFingerprint ||
+      context.importEpoch !== guard.importEpoch
+    ) {
+      return 'Academy data or its import generation changed.'
+    }
+    if (!guard.leaseValid()) return 'The household sync lease changed or expired.'
+    return null
+  }
+  const stillValid = async (): Promise<boolean> => !(await invalidReason())
 
-  if (!stillValid() || !(await guard.verifyAuthenticatedHousehold())) {
-    return { ok: false, error: 'Identity, provenance, or sync lease changed.' }
+  const initialInvalid = await invalidReason()
+  if (initialInvalid || !(await guard.verifyAuthenticatedHousehold())) {
+    return {
+      ok: false,
+      error: initialInvalid ?? 'The verified household session changed.',
+    }
   }
   const cloud = await guard.pull()
   if (!cloud.ok) {
@@ -190,17 +216,48 @@ export async function executeGuardedMutation(
         'Cloud data changed before the write. Review the refreshed cloud state.',
     }
   }
-  if (!(await guard.verifyAuthenticatedHousehold())) {
+  if (
+    !(await stillValid()) ||
+    !(await guard.verifyAuthenticatedHousehold())
+  ) {
     return { ok: false, error: 'The verified household session changed.' }
   }
   return guard.withDatasetLock(async () => {
-    if (!stillValid() || !guard.refreshLease() || !stillValid()) {
+    if (
+      !(await stillValid()) ||
+      !guard.refreshLease() ||
+      !(await stillValid())
+    ) {
       return {
         ok: false,
         error: 'Identity, provenance, or sync lease changed before writing.',
       }
     }
-    return guard.push()
+    const pushed = await guard.push()
+    if (!pushed.ok) return pushed
+    if (
+      !(await stillValid()) ||
+      !(await guard.verifyPostResponseAuth()) ||
+      !(await stillValid())
+    ) {
+      return {
+        ok: false,
+        error:
+          'The cloud request completed, but its local result was discarded because the session, data, import generation, operation, or lease changed.',
+      }
+    }
+    try {
+      await guard.finalize()
+      return pushed
+    } catch (cause) {
+      return {
+        ok: false,
+        error:
+          cause instanceof Error
+            ? cause.message
+            : 'The local sync finalization failed safely.',
+      }
+    }
   })
 }
 

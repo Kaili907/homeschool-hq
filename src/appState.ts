@@ -4,7 +4,16 @@ import { defaultAppState, isAppState, migrateV1ToV2 } from './migration'
 import {
   APP_STATE_STORAGE_KEY,
   DATASET_WRITE_LOCK_NAME,
+  ensureDatasetProvenance,
+  persistDatasetVerified,
+  readDatasetProvenance,
+  recordPersistedDatasetFingerprint,
+  validateAppStateForSync,
 } from './sync/provenance'
+import {
+  beginConfirmedImportInvalidation,
+  finishConfirmedImportPersistence,
+} from './sync/config'
 
 const V1_KEY = 'homeschool-hq:profile:v1'
 const BACKUP_PREFIX = 'homeschool-hq:backup:v1:'
@@ -65,16 +74,31 @@ let latestAppStatePersistence: Promise<void> = Promise.resolve()
 
 export async function saveAppState(state: AppState): Promise<void> {
   latestAppStatePersistence = (async () => {
-    const persist = () =>
-      localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(state))
+    const persist = async () => {
+      const persisted = await persistDatasetVerified(state)
+      if (!persisted.ok) {
+        // Local-first storage still gets its ordinary JSON write attempt inside
+        // persistDatasetVerified. Provenance remains mismatched, which blocks
+        // cloud mutation without making the offline UI unusable.
+        return
+      }
+      try {
+        const current = readDatasetProvenance()
+        if (current?.importTransition) {
+          await finishConfirmedImportPersistence(state)
+          return
+        }
+        await ensureDatasetProvenance()
+        recordPersistedDatasetFingerprint(persisted.fingerprint)
+      } catch {
+        // Fail closed: stale/missing provenance prevents cloud mutation.
+      }
+    }
     const locks =
       typeof navigator === 'undefined'
         ? undefined
         : (navigator as Navigator & { locks?: DatasetLockManager }).locks
-    if (!locks) {
-      persist()
-      return
-    }
+    if (!locks) return persist()
     await locks.request(DATASET_WRITE_LOCK_NAME, { mode: 'exclusive' }, persist)
   })()
   return latestAppStatePersistence
@@ -244,10 +268,21 @@ function successfulImport(state: AppState, note: string): ImportResult {
   return {
     ok: true,
     get state() {
-      importedStates.add(state)
-      if (!announced && typeof window !== 'undefined') {
+      if (!announced) {
         announced = true
-        window.dispatchEvent(new CustomEvent(APP_STATE_IMPORT_EVENT))
+        if (typeof localStorage !== 'undefined') {
+          beginConfirmedImportInvalidation(
+            'Imported Academy data is unbound and requires parent review.',
+          )
+        }
+        importedStates.add(state)
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(
+            new CustomEvent(APP_STATE_IMPORT_EVENT, {
+              detail: readDatasetProvenance(),
+            }),
+          )
+        }
       }
       return state
     },
@@ -266,7 +301,8 @@ export function importBackup(current: AppState, text: string): ImportResult {
   } catch {
     return { ok: false, error: 'That file is not valid JSON.' }
   }
-  if (isAppState(parsed)) {
+  const validatedV2 = validateAppStateForSync(parsed)
+  if (validatedV2.ok) {
     if (!backupBeforeImport(current)) {
       return {
         ok: false,
@@ -274,7 +310,10 @@ export function importBackup(current: AppState, text: string): ImportResult {
           'A local safety backup could not be created, so no data was imported.',
       }
     }
-    return successfulImport(parsed, 'Full backup restored (all profiles).')
+    return successfulImport(
+      validatedV2.state,
+      'Full backup restored (all profiles).',
+    )
   }
   const asV1 = migrateV1ToV2(parsed)
   if (asV1) {

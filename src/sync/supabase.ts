@@ -96,6 +96,34 @@ export async function getVerifiedCurrentUser(
 export interface VerifiedAuthContext {
   user: SignedInUser
   accessToken: string
+  readonly verifiedAt: number
+  readonly kind: 'supabase-access-token'
+}
+
+function accessTokenShapeIsValid(token: string): boolean {
+  const parts = token.split('.')
+  return (
+    parts.length === 3 &&
+    parts.every((part) => part.length > 0) &&
+    !/\s/.test(token)
+  )
+}
+
+function isVerifiedAuthContext(value: unknown): value is VerifiedAuthContext {
+  if (!value || typeof value !== 'object') return false
+  const context = value as Partial<VerifiedAuthContext>
+  return (
+    context.kind === 'supabase-access-token' &&
+    typeof context.verifiedAt === 'number' &&
+    Number.isFinite(context.verifiedAt) &&
+    typeof context.user?.id === 'string' &&
+    typeof context.accessToken === 'string' &&
+    accessTokenShapeIsValid(context.accessToken)
+  )
+}
+
+function redactAccessToken(message: string, accessToken: string): string {
+  return accessToken ? message.split(accessToken).join('[redacted]') : message
 }
 
 /**
@@ -109,7 +137,8 @@ export async function getVerifiedAuthContext(
   const { data: sessionData, error: sessionError } =
     await client.auth.getSession()
   const accessToken = sessionData.session?.access_token
-  if (sessionError || !accessToken) return null
+  if (sessionError || !accessToken || !accessTokenShapeIsValid(accessToken))
+    return null
   const { data, error } = await client.auth.getUser(accessToken)
   if (error || !data.user?.id) return null
   return {
@@ -118,6 +147,32 @@ export async function getVerifiedAuthContext(
       email: data.user.email ?? data.user.id,
     },
     accessToken,
+    verifiedAt: Date.now(),
+    kind: 'supabase-access-token',
+  }
+}
+
+/**
+ * Re-verifies the exact pinned access token; it never falls back to the
+ * currently stored session and never accepts a refresh-token string.
+ */
+export async function verifyPinnedAuthContext(
+  context: unknown,
+  expectedHouseholdId: string,
+  client = getSupabaseClient(),
+): Promise<boolean> {
+  if (
+    !client ||
+    !isVerifiedAuthContext(context) ||
+    context.user.id !== expectedHouseholdId
+  ) {
+    return false
+  }
+  try {
+    const { data, error } = await client.auth.getUser(context.accessToken)
+    return !error && data.user?.id === expectedHouseholdId
+  } catch {
+    return false
   }
 }
 
@@ -176,30 +231,58 @@ export async function pullProfiles(
 
 export async function pushProfiles(
   rows: RemoteProfileRow[],
-  verifiedAccessToken: string,
+  verifiedContext: unknown,
+  expectedHouseholdId: string,
+  dispatchStillAuthorized: () => boolean,
   signal?: AbortSignal,
+  verificationClient = getSupabaseClient(),
+  createWriteClient: (
+    accessToken: string,
+  ) => SupabaseClient = (accessToken) =>
+    createClient(supabaseUrl(), supabaseAnonKey(), {
+      accessToken: async () => accessToken,
+    }),
 ): Promise<CloudPushResult> {
   if (rows.length === 0) return { ok: true }
   if (!supabaseConfigured())
     return { ok: false, error: 'Cloud sync is not configured.' }
-  if (!verifiedAccessToken) {
+  if (
+    !isVerifiedAuthContext(verifiedContext) ||
+    verifiedContext.user.id !== expectedHouseholdId ||
+    !dispatchStillAuthorized() ||
+    !(await verifyPinnedAuthContext(
+      verifiedContext,
+      expectedHouseholdId,
+      verificationClient,
+    ))
+  ) {
     return {
       ok: false,
-      error: 'A server-verified auth token is required for cloud writes.',
+      error:
+        'An exact server-verified household access token is required for cloud writes.',
+    }
+  }
+  if (!dispatchStillAuthorized() || signal?.aborted) {
+    return {
+      ok: false,
+      error: 'The household session changed before cloud write dispatch.',
     }
   }
   try {
     const payload = profileRowsForUpsert(rows)
-    const writeClient = createClient(supabaseUrl(), supabaseAnonKey(), {
-      accessToken: async () => verifiedAccessToken,
-    })
+    const writeClient = createWriteClient(verifiedContext.accessToken)
     let query = writeClient.from('profiles').upsert(payload, {
       onConflict: 'household_id,profile_id',
       defaultToNull: false,
     })
     if (signal) query = query.abortSignal(signal)
     const { error } = await query
-    return error ? { ok: false, error: error.message } : { ok: true }
+    return error
+      ? {
+          ok: false,
+          error: redactAccessToken(error.message, verifiedContext.accessToken),
+        }
+      : { ok: true }
   } catch {
     return {
       ok: false,

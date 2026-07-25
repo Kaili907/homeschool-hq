@@ -149,8 +149,14 @@ works exactly as before and the JSON backup/export stays your escape hatch.
    Supabase user, the cloud revision, and a cross-tab mutation lease immediately before
    dispatch. If another tab, an interrupted replacement, or an imported backup changes
    the dataset, automatic sync pauses without deleting local data and asks Dad to review
-   the household again. Imports create a local safety backup and always invalidate the
-   previous ownership claim.
+   the household again. Imports create a local safety backup, advance a durable import
+   generation, and always invalidate the previous ownership claim even when the restored
+   file is byte-for-byte equivalent. Dataset fingerprints use the browser's Web Crypto
+   SHA-256 implementation over validated canonical JSON. A cloud response is committed
+   locally only after the mounted operation, pinned access token, household identity,
+   dataset fingerprint, import generation, cloud baseline, Web Locks, and mutation lease
+   are revalidated after the response. Browsers without Web Locks remain fully usable
+   offline but cannot perform cloud mutations.
 
 Security notes: the anon key + Supabase URL are the only sync values in the client
 bundle (both are public by design; RLS protects the data). No service key is used.

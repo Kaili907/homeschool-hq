@@ -18,10 +18,13 @@ import {
   claimLocalData,
   cleanupLegacySyncStorage,
   invalidateAllLocalOwnership,
+  isLegacySyncStorageKey,
   loadHouseholdMeta,
   localDataOwner,
   pauseHouseholdForMismatch,
   recoverOwnershipTransitions,
+  recoverDurableImportTransition,
+  removeRecreatedLegacySyncKey,
   replaceDatasetAndClaim,
   saveHouseholdMeta,
   supabaseConfigured,
@@ -47,8 +50,11 @@ import {
 } from './engine'
 import {
   APP_STATE_STORAGE_KEY,
+  DATASET_PROVENANCE_STORAGE_KEY,
   DATASET_WRITE_LOCK_NAME,
   datasetFingerprint,
+  ensureDatasetProvenance,
+  readDatasetProvenance,
   readPersistedDataset,
   verifyOwnedDatasetProvenance,
 } from './provenance'
@@ -61,6 +67,8 @@ import {
   signInWithPassword,
   signOutRemote,
   userFromSession,
+  verifyPinnedAuthContext,
+  type VerifiedAuthContext,
 } from './supabase'
 import type {
   CloudPushResult,
@@ -98,6 +106,7 @@ interface ActiveOperation {
 interface ProvenanceCheck {
   meta: HouseholdSyncMeta
   fingerprint: string
+  importEpoch: string
 }
 
 interface LockManagerLike {
@@ -155,7 +164,7 @@ export function useSync(
   const profilesRef = useRef(state.profiles)
   const snapshotRef = useRef(state.profiles)
   const stateRef = useRef(state)
-  const stateFingerprintRef = useRef(datasetFingerprint(state))
+  const stateFingerprintRef = useRef<string | null>(null)
   const syncNowRef = useRef<() => Promise<void>>(async () => undefined)
   const pushTimer = useRef<number | null>(null)
   const operationRef = useRef<ActiveOperation | null>(null)
@@ -198,8 +207,10 @@ export function useSync(
 
   const finishOperation = useCallback(
     (operation: ActiveOperation) => {
-      if (operationRef.current?.id === operation.id) operationRef.current = null
-      safeSetBusy(false)
+      if (operationRef.current?.id === operation.id) {
+        operationRef.current = null
+        safeSetBusy(false)
+      }
     },
     [safeSetBusy],
   )
@@ -211,8 +222,7 @@ export function useSync(
   }, [safeSetBusy])
 
   const setProfilesFromPersistedSync = useCallback(
-    (nextState: AppState) => {
-      const fingerprint = datasetFingerprint(nextState)
+    (nextState: AppState, fingerprint: string) => {
       snapshotRef.current = nextState.profiles
       profilesRef.current = nextState.profiles
       stateRef.current = nextState
@@ -223,11 +233,11 @@ export function useSync(
   )
 
   const strictProvenanceCheck = useCallback(
-    (
+    async (
       householdId: string,
       expectedUser: SignedInUser,
       allowUnbound: boolean,
-    ): ProvenanceCheck => {
+    ): Promise<ProvenanceCheck> => {
       if (
         userRef.current?.id !== householdId ||
         expectedUser.id !== householdId
@@ -236,24 +246,36 @@ export function useSync(
           'Sync stopped because the authenticated household changed.',
         )
       }
-      const persisted = readPersistedDataset()
+      const persisted = await readPersistedDataset()
       if (!persisted.ok) throw new Error(persisted.error)
-      const memoryFingerprint = datasetFingerprint(stateRef.current)
+      const memoryFingerprint = await datasetFingerprint(stateRef.current)
       if (memoryFingerprint !== persisted.fingerprint) {
         throw new Error(
           'This tab does not match the currently persisted Academy data.',
         )
       }
       const current = loadHouseholdMeta(householdId, expectedUser.email)
+      const datasetProvenance = readDatasetProvenance()
+      if (
+        !datasetProvenance ||
+        datasetProvenance.importTransition ||
+        datasetProvenance.fingerprint !== persisted.fingerprint
+      ) {
+        throw new Error(provenanceMismatchMessage)
+      }
       if (!allowUnbound) {
-        const provenance = verifyOwnedDatasetProvenance(
+        const provenance = await verifyOwnedDatasetProvenance(
           current,
           stateRef.current,
         )
         if (externalBlockedRef.current || !provenance.ok)
           throw new Error(provenanceMismatchMessage)
       }
-      return { meta: current, fingerprint: persisted.fingerprint }
+      return {
+        meta: current,
+        fingerprint: persisted.fingerprint,
+        importEpoch: datasetProvenance.importEpoch,
+      }
     },
     [],
   )
@@ -291,13 +313,13 @@ export function useSync(
       allowUnbound: boolean,
       commit?: (validatedFingerprint: string) => void | Promise<void>,
     ): Promise<CloudPushResult> => {
-      const initial = strictProvenanceCheck(
+      const initial = await strictProvenanceCheck(
         expectedUser.id,
         expectedUser,
         allowUnbound,
       )
       const expectedCloudRevision = remoteRowsSignature(expectedCloudRows)
-      let verifiedAccessToken: string | null = null
+      let verifiedContext: VerifiedAuthContext | null = null
 
       return runUnderWebLock(expectedUser.id, async () => {
         let lease: MutationLease | null = tryAcquireMutationLease({
@@ -305,6 +327,7 @@ export function useSync(
           tabId: tabIdRef.current,
           operationId: operation.id,
           datasetFingerprint: initial.fingerprint,
+          importEpoch: initial.importEpoch,
           cloudRevision: expectedCloudRevision,
         })
         if (!lease) {
@@ -314,17 +337,22 @@ export function useSync(
           }
         }
         try {
-          return executeGuardedMutation({
+          return await executeGuardedMutation({
             householdId: expectedUser.id,
             datasetFingerprint: initial.fingerprint,
+            importEpoch: initial.importEpoch,
             cloudRevision: expectedCloudRevision,
             signal: operation.controller.signal,
+            lifecycleValid: () =>
+              mountedRef.current &&
+              operationRef.current?.id === operation.id &&
+              !externalBlockedRef.current,
             authenticatedHouseholdId: () => userRef.current?.id ?? null,
             verifyAuthenticatedHousehold: async () => {
               const verified = await getVerifiedAuthContext()
-              verifiedAccessToken =
+              verifiedContext =
                 verified?.user.id === expectedUser.id
-                  ? verified.accessToken
+                  ? verified
                   : null
               return (
                 !operation.controller.signal.aborted &&
@@ -332,13 +360,23 @@ export function useSync(
                 verified?.user.id === expectedUser.id
               )
             },
-            currentDatasetFingerprint: () => {
+            verifyPostResponseAuth: async () =>
+              !!verifiedContext &&
+              (await verifyPinnedAuthContext(
+                verifiedContext,
+                expectedUser.id,
+              )),
+            currentDatasetContext: async () => {
               try {
-                return strictProvenanceCheck(
+                const current = await strictProvenanceCheck(
                   expectedUser.id,
                   expectedUser,
                   allowUnbound,
-                ).fingerprint
+                )
+                return {
+                  fingerprint: current.fingerprint,
+                  importEpoch: current.importEpoch,
+                }
               } catch {
                 return null
               }
@@ -369,34 +407,28 @@ export function useSync(
             },
             pull: () => pullProfiles(undefined, operation.controller.signal),
             push: async () => {
-              const pushed =
-                rows.length === 0
-                  ? { ok: true as const }
-                  : !verifiedAccessToken
-                    ? {
-                        ok: false as const,
-                        error:
-                          'A server-verified auth token was unavailable for the write.',
-                      }
-                    : await pushProfiles(
-                        rows,
-                        verifiedAccessToken,
-                        operation.controller.signal,
-                      )
-              if (!pushed.ok) return pushed
-              try {
-                await commit?.(initial.fingerprint)
-                return pushed
-              } catch (cause) {
+              if (rows.length === 0) return { ok: true as const }
+              if (!verifiedContext) {
                 return {
-                  ok: false,
+                  ok: false as const,
                   error:
-                    cause instanceof Error
-                      ? cause.message
-                      : 'The local ownership transaction failed.',
+                    'A server-verified auth context was unavailable for the write.',
                 }
               }
+              return pushProfiles(
+                rows,
+                verifiedContext,
+                expectedUser.id,
+                () =>
+                  mountedRef.current &&
+                  operationRef.current?.id === operation.id &&
+                  userRef.current?.id === expectedUser.id &&
+                  !operation.controller.signal.aborted &&
+                  !externalBlockedRef.current,
+                operation.controller.signal,
+              )
             },
+            finalize: async () => commit?.(initial.fingerprint),
           })
         } finally {
           if (lease) releaseMutationLease(lease)
@@ -454,7 +486,11 @@ export function useSync(
       if (!verifiedUser || verifiedUser.id !== householdMeta.householdId) return
       let operation: ActiveOperation
       try {
-        strictProvenanceCheck(householdMeta.householdId, verifiedUser, false)
+        await strictProvenanceCheck(
+          householdMeta.householdId,
+          verifiedUser,
+          false,
+        )
         operation = beginOperation('automatic')
       } catch (cause) {
         const reason =
@@ -523,8 +559,8 @@ export function useSync(
           verifiedUser,
           operation,
           false,
-          (validatedFingerprint) => {
-            claimed = replaceDatasetAndClaim(
+          async (validatedFingerprint) => {
+            claimed = await replaceDatasetAndClaim(
               verifiedUser.id,
               verifiedUser.email,
               cycle.meta,
@@ -540,7 +576,10 @@ export function useSync(
               : finalized.error,
           )
         }
-        setProfilesFromPersistedSync(nextState)
+        setProfilesFromPersistedSync(
+          nextState,
+          await datasetFingerprint(nextState),
+        )
         persistCurrentMeta(claimed)
         setDecision(null)
       } catch (cause) {
@@ -579,11 +618,30 @@ export function useSync(
   useEffect(() => {
     mountedRef.current = true
     cleanupLegacySyncStorage()
-    const recoveries = recoverOwnershipTransitions()
-    const review = recoveries.find((item) => item.kind === 'review')
-    if (review?.kind === 'review') setError(review.reason)
-    setBootstrapped(true)
+    let live = true
+    void (async () => {
+      try {
+        await ensureDatasetProvenance()
+        await recoverDurableImportTransition()
+        const recoveries = await recoverOwnershipTransitions()
+        const review = recoveries.find((item) => item.kind === 'review')
+        if (live && mountedRef.current && review?.kind === 'review') {
+          setError(review.reason)
+        }
+      } catch (cause) {
+        if (live && mountedRef.current) {
+          setError(
+            cause instanceof Error
+              ? cause.message
+              : 'Academy provenance could not be initialized.',
+          )
+        }
+      } finally {
+        if (live && mountedRef.current) setBootstrapped(true)
+      }
+    })()
     return () => {
+      live = false
       mountedRef.current = false
       abortOperation()
     }
@@ -621,29 +679,44 @@ export function useSync(
       setDecision(null)
       return
     }
-    let householdMeta = loadHouseholdMeta(user.id, user.email)
-    if (householdMeta.binding === 'bound' && householdMeta.ownsLocalData) {
-      const persisted = readPersistedDataset()
-      const memoryFingerprint = datasetFingerprint(stateRef.current)
-      if (
-        !persisted.ok ||
-        persisted.fingerprint !== memoryFingerprint ||
-        householdMeta.datasetFingerprint !== persisted.fingerprint
-      ) {
-        householdMeta = pauseHouseholdForMismatch(
-          user.id,
-          user.email,
-          provenanceMismatchMessage,
+    let live = true
+    void (async () => {
+      let householdMeta = loadHouseholdMeta(user.id, user.email)
+      if (householdMeta.binding === 'bound' && householdMeta.ownsLocalData) {
+        const provenance = await verifyOwnedDatasetProvenance(
+          householdMeta,
+          stateRef.current,
         )
-        externalBlockedRef.current = true
+        if (!provenance.ok) {
+          householdMeta = pauseHouseholdForMismatch(
+            user.id,
+            user.email,
+            provenanceMismatchMessage,
+          )
+          externalBlockedRef.current = true
+        }
       }
-    }
-    persistCurrentMeta(householdMeta)
-    if (!online || operationRef.current) return
-    if (householdMeta.binding === 'bound' && householdMeta.ownsLocalData) {
-      void runBoundSync(householdMeta)
-    } else {
-      void prepareUnbound(user, householdMeta)
+      if (!live || !mountedRef.current || userRef.current?.id !== user.id) return
+      persistCurrentMeta(householdMeta)
+      if (!online || operationRef.current) return
+      if (householdMeta.binding === 'bound' && householdMeta.ownsLocalData) {
+        void runBoundSync(householdMeta)
+      } else {
+        void prepareUnbound(user, householdMeta)
+      }
+    })().catch(() => {
+      if (!live || !mountedRef.current) return
+      const paused = pauseHouseholdForMismatch(
+        user.id,
+        user.email,
+        provenanceMismatchMessage,
+      )
+      externalBlockedRef.current = true
+      persistCurrentMeta(paused)
+      safeSetError(provenanceMismatchMessage)
+    })
+    return () => {
+      live = false
     }
   }, [
     bootstrapped,
@@ -651,6 +724,7 @@ export function useSync(
     persistCurrentMeta,
     prepareUnbound,
     runBoundSync,
+    safeSetError,
     user?.id,
   ])
 
@@ -658,65 +732,79 @@ export function useSync(
   // advance the owned fingerprint; imports always invalidate ownership.
   useEffect(() => {
     const previousFingerprint = stateFingerprintRef.current
-    const nextFingerprint = datasetFingerprint(state)
     const changed = changedProfiles(snapshotRef.current, state.profiles)
     snapshotRef.current = state.profiles
-    stateFingerprintRef.current = nextFingerprint
-    if (!bootstrapped || previousFingerprint === nextFingerprint) return
     const imported = isImportedAppState(state)
     let cancelled = false
-    void waitForAppStatePersistence()
-      .then(() => {
-        if (cancelled || !mountedRef.current) return
-        const persisted = readPersistedDataset()
-        const current = metaRef.current
-        if (
-          imported ||
-          !persisted.ok ||
-          persisted.fingerprint !== nextFingerprint
-        ) {
-          abortOperation()
-          invalidateAllLocalOwnership(
-            imported ? importedMessage : provenanceMismatchMessage,
-          )
-          externalBlockedRef.current = true
-          if (current && mountedRef.current) {
-            const paused = loadHouseholdMeta(current.householdId, current.email)
-            metaRef.current = paused
-            setMeta(paused)
-          }
-          setDecision(null)
-          safeSetError(imported ? importedMessage : provenanceMismatchMessage)
-          return
-        }
-        if (
-          !current ||
-          current.binding !== 'bound' ||
-          !current.ownsLocalData ||
-          current.datasetFingerprint !== previousFingerprint ||
-          externalBlockedRef.current
-        ) {
-          return
-        }
-        const advanced = markDirty(
-          { ...current, datasetFingerprint: nextFingerprint },
-          changed,
-          Date.now(),
+    void (async () => {
+      const nextFingerprint = await datasetFingerprint(state)
+      if (cancelled || !mountedRef.current) return
+      stateFingerprintRef.current = nextFingerprint
+      if (!bootstrapped) return
+      await waitForAppStatePersistence()
+      if (cancelled || !mountedRef.current) return
+      const persisted = await readPersistedDataset()
+      const datasetProvenance = readDatasetProvenance()
+      const current = metaRef.current
+      const ownershipBaseline =
+        previousFingerprint ?? current?.datasetFingerprint ?? null
+      if (
+        imported ||
+        !persisted.ok ||
+        persisted.fingerprint !== nextFingerprint ||
+        !datasetProvenance ||
+        datasetProvenance.importTransition ||
+        datasetProvenance.fingerprint !== nextFingerprint
+      ) {
+        abortOperation()
+        invalidateAllLocalOwnership(
+          imported ? importedMessage : provenanceMismatchMessage,
         )
-        persistCurrentMeta(advanced)
-        if (
-          changed.length > 0 &&
-          online &&
-          userRef.current?.id === advanced.householdId &&
-          advanced.reconciliation !== 'review'
-        ) {
-          if (pushTimer.current !== null) window.clearTimeout(pushTimer.current)
-          pushTimer.current = window.setTimeout(
-            () => void syncNowRef.current(),
-            1500,
-          )
+        externalBlockedRef.current = true
+        if (current && mountedRef.current) {
+          const paused = loadHouseholdMeta(current.householdId, current.email)
+          metaRef.current = paused
+          setMeta(paused)
         }
-      })
+        setDecision(null)
+        safeSetError(imported ? importedMessage : provenanceMismatchMessage)
+        return
+      }
+      if (
+        ownershipBaseline === null ||
+        ownershipBaseline === nextFingerprint ||
+        !current ||
+        current.binding !== 'bound' ||
+        !current.ownsLocalData ||
+        current.datasetFingerprint !== ownershipBaseline ||
+        current.importEpoch !== datasetProvenance.importEpoch ||
+        externalBlockedRef.current
+      ) {
+        return
+      }
+      const advanced = markDirty(
+        {
+          ...current,
+          datasetFingerprint: nextFingerprint,
+          importEpoch: datasetProvenance.importEpoch,
+        },
+        changed,
+        Date.now(),
+      )
+      persistCurrentMeta(advanced)
+      if (
+        changed.length > 0 &&
+        online &&
+        userRef.current?.id === advanced.householdId &&
+        advanced.reconciliation !== 'review'
+      ) {
+        if (pushTimer.current !== null) window.clearTimeout(pushTimer.current)
+        pushTimer.current = window.setTimeout(
+          () => void syncNowRef.current(),
+          1500,
+        )
+      }
+    })()
       .catch(() => {
         if (cancelled || !mountedRef.current) return
         abortOperation()
@@ -743,11 +831,17 @@ export function useSync(
     const importApplying = () => {
       abortOperation()
       externalBlockedRef.current = true
+      safeSetError(importedMessage)
     }
     const storageChanged = (event: StorageEvent) => {
       const key = event.key
+      if (isLegacySyncStorageKey(key)) {
+        removeRecreatedLegacySyncKey(key)
+        return
+      }
       if (
         key !== APP_STATE_STORAGE_KEY &&
+        key !== DATASET_PROVENANCE_STORAGE_KEY &&
         !key?.startsWith('homeschool-hq:sync:household:') &&
         !key?.startsWith('homeschool-hq:sync:transition:') &&
         !isLeaseStorageKey(key)
@@ -879,8 +973,8 @@ export function useSync(
         verifiedUser,
         operation,
         true,
-        (validatedFingerprint) => {
-          claimed = claimLocalData(
+        async (validatedFingerprint) => {
+          claimed = await claimLocalData(
             verifiedUser.id,
             verifiedUser.email,
             prepared.meta,
@@ -923,7 +1017,7 @@ export function useSync(
     safeSetError(null)
     externalBlockedRef.current = false
     try {
-      strictProvenanceCheck(verifiedUser.id, verifiedUser, true)
+      await strictProvenanceCheck(verifiedUser.id, verifiedUser, true)
       const verifiedRows = await verifyDecisionCloud(verifiedUser, operation)
       if (verifiedRows.length === 0) {
         throw new Error('The household cloud is empty.')
@@ -949,8 +1043,8 @@ export function useSync(
         verifiedUser,
         operation,
         true,
-        (validatedFingerprint) => {
-          claimed = replaceDatasetAndClaim(
+        async (validatedFingerprint) => {
+          claimed = await replaceDatasetAndClaim(
             verifiedUser.id,
             verifiedUser.email,
             next,
@@ -966,7 +1060,10 @@ export function useSync(
             : guarded.error,
         )
       }
-      setProfilesFromPersistedSync(nextState)
+      setProfilesFromPersistedSync(
+        nextState,
+        await datasetFingerprint(nextState),
+      )
       persistCurrentMeta(claimed)
       if (mountedRef.current) setDecision(null)
     } catch (cause) {
@@ -999,7 +1096,7 @@ export function useSync(
       safeSetError(null)
       externalBlockedRef.current = false
       try {
-        strictProvenanceCheck(verifiedUser.id, verifiedUser, true)
+        await strictProvenanceCheck(verifiedUser.id, verifiedUser, true)
         const verifiedRows = await verifyDecisionCloud(verifiedUser, operation)
         const now = Date.now()
         const selected = applyReviewedSelection(
@@ -1040,8 +1137,8 @@ export function useSync(
           verifiedUser,
           operation,
           true,
-          (validatedFingerprint) => {
-            claimed = replaceDatasetAndClaim(
+          async (validatedFingerprint) => {
+            claimed = await replaceDatasetAndClaim(
               verifiedUser.id,
               verifiedUser.email,
               next,
@@ -1057,7 +1154,10 @@ export function useSync(
               : push.error,
           )
         }
-        setProfilesFromPersistedSync(nextState)
+        setProfilesFromPersistedSync(
+          nextState,
+          await datasetFingerprint(nextState),
+        )
         persistCurrentMeta(claimed)
         if (mountedRef.current) setDecision(null)
       } catch (cause) {

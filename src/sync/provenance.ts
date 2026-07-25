@@ -1,111 +1,251 @@
-import { isAppState } from '../migration'
-import type { AppState } from '../types'
+import { SCHEMA_VERSION } from '../migration'
+import type { AppState, Profile } from '../types'
 import type { HouseholdSyncMeta } from './types'
 
 export const APP_STATE_STORAGE_KEY = 'homeschool-hq:app:v2'
 export const DATASET_WRITE_LOCK_NAME = 'academy-sync-persisted-dataset'
-export const DATASET_FINGERPRINT_VERSION = 'sha256-v1'
+export const DATASET_FINGERPRINT_VERSION = 'sha256-v2'
+export const DATASET_PROVENANCE_STORAGE_KEY =
+  'homeschool-hq:sync:dataset-provenance:v1'
+
+const MAX_CANONICAL_DEPTH = 128
+const MAX_CANONICAL_NODES = 500_000
+const GRADES = new Set(['3', '4', '6', '10', '12'])
+const THEMES = new Set(['playful', 'cool', 'clean'])
+
+export interface ImportTransitionRecord {
+  operationId: string
+  previousFingerprint: string | null
+  phase: 'invalidated' | 'state-written' | 'review'
+  reason: string
+  startedAt: number
+}
+
+export interface DatasetProvenanceRecord {
+  version: 1
+  importEpoch: string
+  fingerprint: string | null
+  importTransition: ImportTransitionRecord | null
+  updatedAt: number
+}
 
 export type PersistedDataset =
   | { ok: true; state: AppState; fingerprint: string }
   | { ok: false; error: string }
 
-function canonicalize(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(canonicalize)
-  if (!value || typeof value !== 'object') return value
-  return Object.fromEntries(
-    Object.entries(value)
-      .filter(([, child]) => child !== undefined)
-      .sort(([left], [right]) => left.localeCompare(right))
-      .map(([key, child]) => [key, canonicalize(child)]),
+export type AppStateValidation =
+  | { ok: true; state: AppState }
+  | { ok: false; error: string }
+
+function plainRecord(value: unknown): value is Record<string, unknown> {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+  const prototype = Object.getPrototypeOf(value)
+  return prototype === Object.prototype || prototype === null
+}
+
+function finiteNumber(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value)
+}
+
+function validateSkillRecord(value: unknown): boolean {
+  if (!plainRecord(value)) return false
+  return Object.values(value).every(
+    (skill) =>
+      plainRecord(skill) &&
+      finiteNumber(skill.attempts) &&
+      finiteNumber(skill.correct) &&
+      finiteNumber(skill.mastery) &&
+      (skill.lastSeen === undefined || typeof skill.lastSeen === 'string'),
+  )
+}
+
+function validateMissionRecord(value: unknown): boolean {
+  if (!plainRecord(value)) return false
+  return Object.values(value).every(
+    (day) =>
+      plainRecord(day) &&
+      Array.isArray(day.items) &&
+      day.items.every(
+        (item) =>
+          plainRecord(item) &&
+          typeof item.id === 'string' &&
+          typeof item.label === 'string' &&
+          typeof item.done === 'boolean',
+      ),
+  )
+}
+
+function validateProfile(key: string, value: unknown): value is Profile {
+  if (!plainRecord(value)) return false
+  return (
+    value.id === key &&
+    key.length > 0 &&
+    typeof value.name === 'string' &&
+    GRADES.has(String(value.grade)) &&
+    typeof value.pin === 'string' &&
+    THEMES.has(String(value.theme)) &&
+    validateSkillRecord(value.skills) &&
+    validateMissionRecord(value.missions) &&
+    plainRecord(value.streaks) &&
+    finiteNumber(value.streaks.current) &&
+    finiteNumber(value.streaks.best) &&
+    typeof value.streaks.lastActiveDate === 'string' &&
+    typeof value.createdAt === 'string' &&
+    typeof value.placementDone === 'boolean' &&
+    plainRecord(value.totals) &&
+    finiteNumber(value.totals.questionsAnswered) &&
+    finiteNumber(value.totals.correct) &&
+    finiteNumber(value.totals.bestStreak) &&
+    finiteNumber(value.totals.sessions)
   )
 }
 
 /**
- * `activeProfileId` is a transient UI session selection, not Academy learning
- * data. Everything else in AppState participates in ownership provenance.
+ * Bounded validation for the synchronization provenance boundary. Optional
+ * additive fields are accepted only if the complete value is JSON-compatible;
+ * the required profile containers used by sync receive explicit validation.
  */
-function durableDataset(state: AppState): unknown {
-  const { activeProfileId: _activeProfileId, ...durable } = state
-  return canonicalize(durable)
+export function validateAppStateForSync(value: unknown): AppStateValidation {
+  if (!plainRecord(value)) {
+    return { ok: false, error: 'Stored Academy data is not an object.' }
+  }
+  if (value.schemaVersion !== SCHEMA_VERSION) {
+    return {
+      ok: false,
+      error: 'Stored Academy data uses an unsupported schema version.',
+    }
+  }
+  if (
+    !plainRecord(value.profiles) ||
+    !Object.entries(value.profiles).every(([key, profile]) =>
+      validateProfile(key, profile),
+    ) ||
+    typeof value.parentPin !== 'string' ||
+    !(
+      value.activeProfileId === null ||
+      (typeof value.activeProfileId === 'string' &&
+        Object.hasOwn(value.profiles, value.activeProfileId))
+    )
+  ) {
+    return {
+      ok: false,
+      error: 'Stored Academy profile data is malformed.',
+    }
+  }
+  try {
+    canonicalSerialize(value)
+  } catch (cause) {
+    return {
+      ok: false,
+      error:
+        cause instanceof Error
+          ? `Stored Academy data is not safe to synchronize: ${cause.message}`
+          : 'Stored Academy data is not safe to synchronize.',
+    }
+  }
+  return { ok: true, state: value as unknown as AppState }
 }
 
-const rotateRight = (value: number, amount: number): number =>
-  (value >>> amount) | (value << (32 - amount))
+/**
+ * Canonical JSON used only for provenance. Object keys use deterministic
+ * UTF-16 code-unit ordering (`Array#sort` with no locale comparator); arrays
+ * retain order. Undefined object properties are deliberately omitted to match
+ * persisted JSON. Undefined array elements and every other non-JSON value are
+ * rejected instead of silently collapsing to null.
+ */
+export function canonicalSerialize(value: unknown): string {
+  const active = new Set<object>()
+  let nodes = 0
 
-/** Small dependency-free SHA-256 implementation for synchronous browser guards. */
-function sha256(text: string): string {
-  const bytes = new TextEncoder().encode(text)
-  const bitLength = bytes.length * 8
-  const paddedLength = Math.ceil((bytes.length + 9) / 64) * 64
-  const padded = new Uint8Array(paddedLength)
-  padded.set(bytes)
-  padded[bytes.length] = 0x80
-  const view = new DataView(padded.buffer)
-  view.setUint32(paddedLength - 8, Math.floor(bitLength / 0x1_0000_0000))
-  view.setUint32(paddedLength - 4, bitLength >>> 0)
-
-  const constants = [
-    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1,
-    0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
-    0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786,
-    0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
-    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147,
-    0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13,
-    0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85, 0xa2bfe8a1, 0xa81a664b,
-    0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
-    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a,
-    0x5b9cca4f, 0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
-    0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
-  ]
-  const hash = [
-    0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c,
-    0x1f83d9ab, 0x5be0cd19,
-  ]
-  const words = new Uint32Array(64)
-
-  for (let offset = 0; offset < paddedLength; offset += 64) {
-    for (let i = 0; i < 16; i++) words[i] = view.getUint32(offset + i * 4)
-    for (let i = 16; i < 64; i++) {
-      const a = words[i - 15]
-      const b = words[i - 2]
-      const s0 = rotateRight(a, 7) ^ rotateRight(a, 18) ^ (a >>> 3)
-      const s1 = rotateRight(b, 17) ^ rotateRight(b, 19) ^ (b >>> 10)
-      words[i] = (words[i - 16] + s0 + words[i - 7] + s1) >>> 0
+  const visit = (child: unknown, depth: number, inArray: boolean): string => {
+    nodes += 1
+    if (nodes > MAX_CANONICAL_NODES || depth > MAX_CANONICAL_DEPTH) {
+      throw new Error('Academy data exceeds safe validation limits.')
     }
-
-    let [a, b, c, d, e, f, g, h] = hash
-    for (let i = 0; i < 64; i++) {
-      const sum1 = rotateRight(e, 6) ^ rotateRight(e, 11) ^ rotateRight(e, 25)
-      const choice = (e & f) ^ (~e & g)
-      const t1 = (h + sum1 + choice + constants[i] + words[i]) >>> 0
-      const sum0 = rotateRight(a, 2) ^ rotateRight(a, 13) ^ rotateRight(a, 22)
-      const majority = (a & b) ^ (a & c) ^ (b & c)
-      const t2 = (sum0 + majority) >>> 0
-      h = g
-      g = f
-      f = e
-      e = (d + t1) >>> 0
-      d = c
-      c = b
-      b = a
-      a = (t1 + t2) >>> 0
+    if (child === null) return 'null'
+    if (typeof child === 'string' || typeof child === 'boolean') {
+      return JSON.stringify(child)
     }
-    hash[0] = (hash[0] + a) >>> 0
-    hash[1] = (hash[1] + b) >>> 0
-    hash[2] = (hash[2] + c) >>> 0
-    hash[3] = (hash[3] + d) >>> 0
-    hash[4] = (hash[4] + e) >>> 0
-    hash[5] = (hash[5] + f) >>> 0
-    hash[6] = (hash[6] + g) >>> 0
-    hash[7] = (hash[7] + h) >>> 0
+    if (typeof child === 'number') {
+      if (!Number.isFinite(child)) {
+        throw new Error('Academy data contains a non-finite number.')
+      }
+      return JSON.stringify(child)
+    }
+    if (child === undefined) {
+      if (!inArray) return ''
+      throw new Error('Academy data contains an undefined array element.')
+    }
+    if (
+      typeof child === 'function' ||
+      typeof child === 'symbol' ||
+      typeof child === 'bigint'
+    ) {
+      throw new Error('Academy data contains an unsupported value.')
+    }
+    if (!child || typeof child !== 'object') {
+      throw new Error('Academy data contains an unsupported value.')
+    }
+    if (active.has(child)) {
+      throw new Error('Academy data contains a cyclic structure.')
+    }
+    active.add(child)
+    try {
+      if (Array.isArray(child)) {
+        return `[${child.map((item) => visit(item, depth + 1, true)).join(',')}]`
+      }
+      if (!plainRecord(child)) {
+        throw new Error('Academy data contains a non-plain object.')
+      }
+      if (Object.getOwnPropertySymbols(child).length > 0) {
+        throw new Error('Academy data contains a symbol property.')
+      }
+      const descriptors = Object.getOwnPropertyDescriptors(child)
+      const keys = Object.keys(descriptors).sort()
+      const entries: string[] = []
+      for (const key of keys) {
+        const descriptor = descriptors[key]
+        if (!descriptor.enumerable) continue
+        if (!('value' in descriptor)) {
+          throw new Error('Academy data contains an accessor property.')
+        }
+        if (descriptor.value === undefined) continue
+        entries.push(
+          `${JSON.stringify(key)}:${visit(descriptor.value, depth + 1, false)}`,
+        )
+      }
+      return `{${entries.join(',')}}`
+    } finally {
+      active.delete(child)
+    }
   }
 
-  return hash.map((word) => word.toString(16).padStart(8, '0')).join('')
+  return visit(value, 0, false)
 }
 
-export function datasetFingerprint(state: AppState): string {
-  return `${DATASET_FINGERPRINT_VERSION}:${sha256(JSON.stringify(durableDataset(state)))}`
+/** `activeProfileId` is transient UI selection, not Academy learning data. */
+function durableDataset(state: AppState): unknown {
+  const { activeProfileId: _activeProfileId, ...durable } = state
+  return durable
+}
+
+/** Platform Web Crypto SHA-256 over UTF-8, returned as lowercase hexadecimal. */
+export async function sha256Hex(text: string): Promise<string> {
+  const subtle = globalThis.crypto?.subtle
+  if (!subtle) {
+    throw new Error('Web Crypto SHA-256 is unavailable.')
+  }
+  const digest = await subtle.digest('SHA-256', new TextEncoder().encode(text))
+  return Array.from(new Uint8Array(digest), (byte) =>
+    byte.toString(16).padStart(2, '0'),
+  ).join('')
+}
+
+export async function datasetFingerprint(state: AppState): Promise<string> {
+  const validation = validateAppStateForSync(state)
+  if (!validation.ok) throw new Error(validation.error)
+  const canonical = canonicalSerialize(durableDataset(validation.state))
+  return `${DATASET_FINGERPRINT_VERSION}:${await sha256Hex(canonical)}`
 }
 
 function browserStorage(): Storage | null {
@@ -116,38 +256,50 @@ function browserStorage(): Storage | null {
   }
 }
 
-export function readPersistedDataset(
+export async function readPersistedDataset(
   storage: Storage | null = browserStorage(),
-): PersistedDataset {
-  if (!storage)
+): Promise<PersistedDataset> {
+  if (!storage) {
     return { ok: false, error: 'Local Academy storage is unavailable.' }
+  }
   try {
     const raw = storage.getItem(APP_STATE_STORAGE_KEY)
     if (!raw) return { ok: false, error: 'Stored Academy data is missing.' }
-    const state = JSON.parse(raw) as unknown
-    if (!isAppState(state)) {
-      return { ok: false, error: 'Stored Academy data is invalid.' }
+    const validation = validateAppStateForSync(JSON.parse(raw) as unknown)
+    if (!validation.ok) return validation
+    return {
+      ok: true,
+      state: validation.state,
+      fingerprint: await datasetFingerprint(validation.state),
     }
-    return { ok: true, state, fingerprint: datasetFingerprint(state) }
-  } catch {
-    return { ok: false, error: 'Stored Academy data could not be read.' }
+  } catch (cause) {
+    return {
+      ok: false,
+      error:
+        cause instanceof Error && cause.message.includes('Web Crypto')
+          ? cause.message
+          : 'Stored Academy data is unreadable or malformed.',
+    }
   }
 }
 
-export function persistDatasetVerified(
+export async function persistDatasetVerified(
   state: AppState,
   storage: Storage | null = browserStorage(),
-): PersistedDataset {
-  if (!storage)
+): Promise<PersistedDataset> {
+  if (!storage) {
     return { ok: false, error: 'Local Academy storage is unavailable.' }
+  }
+  const validation = validateAppStateForSync(state)
+  if (!validation.ok) return validation
   try {
     storage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(state))
   } catch {
     return { ok: false, error: 'Local Academy data could not be saved.' }
   }
-  const persisted = readPersistedDataset(storage)
+  const persisted = await readPersistedDataset(storage)
   if (!persisted.ok) return persisted
-  const expected = datasetFingerprint(state)
+  const expected = await datasetFingerprint(state)
   return persisted.fingerprint === expected
     ? persisted
     : {
@@ -156,43 +308,255 @@ export function persistDatasetVerified(
       }
 }
 
-export function datasetsEquivalent(left: AppState, right: AppState): boolean {
-  return datasetFingerprint(left) === datasetFingerprint(right)
+export async function datasetsEquivalent(
+  left: AppState,
+  right: AppState,
+): Promise<boolean> {
+  return (await datasetFingerprint(left)) === (await datasetFingerprint(right))
+}
+
+function validProvenanceRecord(
+  value: unknown,
+): value is DatasetProvenanceRecord {
+  if (!plainRecord(value)) return false
+  const transition = value.importTransition
+  return (
+    value.version === 1 &&
+    typeof value.importEpoch === 'string' &&
+    value.importEpoch.length > 0 &&
+    (value.fingerprint === null || typeof value.fingerprint === 'string') &&
+    finiteNumber(value.updatedAt) &&
+    (transition === null ||
+      (plainRecord(transition) &&
+        typeof transition.operationId === 'string' &&
+        (transition.previousFingerprint === null ||
+          typeof transition.previousFingerprint === 'string') &&
+        (transition.phase === 'invalidated' ||
+          transition.phase === 'state-written' ||
+          transition.phase === 'review') &&
+        typeof transition.reason === 'string' &&
+        finiteNumber(transition.startedAt)))
+  )
+}
+
+export function readDatasetProvenance(
+  storage: Storage | null = browserStorage(),
+): DatasetProvenanceRecord | null {
+  if (!storage) return null
+  try {
+    const parsed = JSON.parse(
+      storage.getItem(DATASET_PROVENANCE_STORAGE_KEY) ?? 'null',
+    ) as unknown
+    return validProvenanceRecord(parsed) ? parsed : null
+  } catch {
+    return null
+  }
+}
+
+export function writeDatasetProvenance(
+  record: DatasetProvenanceRecord,
+  storage: Storage | null = browserStorage(),
+): boolean {
+  if (!storage) return false
+  try {
+    storage.setItem(DATASET_PROVENANCE_STORAGE_KEY, JSON.stringify(record))
+    const verified = readDatasetProvenance(storage)
+    return (
+      verified?.importEpoch === record.importEpoch &&
+      verified.importTransition?.operationId ===
+        record.importTransition?.operationId &&
+      verified.fingerprint === record.fingerprint
+    )
+  } catch {
+    return false
+  }
+}
+
+function uniqueId(prefix: string): string {
+  const value =
+    typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`
+  return `${prefix}-${value}`
+}
+
+export async function ensureDatasetProvenance(
+  storage: Storage | null = browserStorage(),
+): Promise<DatasetProvenanceRecord> {
+  const current = readDatasetProvenance(storage)
+  if (current) return current
+  const persisted = await readPersistedDataset(storage)
+  if (!persisted.ok) throw new Error(persisted.error)
+  const created: DatasetProvenanceRecord = {
+    version: 1,
+    importEpoch: uniqueId('dataset'),
+    fingerprint: persisted.fingerprint,
+    importTransition: null,
+    updatedAt: Date.now(),
+  }
+  if (!writeDatasetProvenance(created, storage)) {
+    throw new Error('Academy dataset provenance could not be initialized.')
+  }
+  return created
+}
+
+/**
+ * Synchronous import fence. It is persisted before React receives an imported
+ * value, so every tab fails closed even when the imported fingerprint is equal.
+ */
+export function beginDurableImportTransition(
+  reason: string,
+  storage: Storage | null = browserStorage(),
+): DatasetProvenanceRecord {
+  if (!storage) throw new Error('Local Academy storage is unavailable.')
+  const current = readDatasetProvenance(storage)
+  const operationId = uniqueId('import')
+  const next: DatasetProvenanceRecord = {
+    version: 1,
+    importEpoch: uniqueId('epoch'),
+    fingerprint: current?.fingerprint ?? null,
+    importTransition: {
+      operationId,
+      previousFingerprint: current?.fingerprint ?? null,
+      phase: 'invalidated',
+      reason,
+      startedAt: Date.now(),
+    },
+    updatedAt: Date.now(),
+  }
+  if (!writeDatasetProvenance(next, storage)) {
+    throw new Error('Imported-data ownership could not be invalidated safely.')
+  }
+  return next
+}
+
+export function markImportDatasetWritten(
+  operationId: string,
+  fingerprint: string,
+  storage: Storage | null = browserStorage(),
+): DatasetProvenanceRecord {
+  const current = readDatasetProvenance(storage)
+  if (current?.importTransition?.operationId !== operationId) {
+    throw new Error('The Academy import transition is no longer current.')
+  }
+  const next: DatasetProvenanceRecord = {
+    ...current,
+    fingerprint,
+    importTransition: { ...current.importTransition, phase: 'state-written' },
+    updatedAt: Date.now(),
+  }
+  if (!writeDatasetProvenance(next, storage)) {
+    throw new Error('Imported Academy data could not be verified safely.')
+  }
+  return next
+}
+
+export function finishDurableImportTransition(
+  operationId: string,
+  fingerprint: string,
+  storage: Storage | null = browserStorage(),
+): DatasetProvenanceRecord {
+  const current = readDatasetProvenance(storage)
+  if (
+    current?.importTransition?.operationId !== operationId ||
+    current.fingerprint !== fingerprint ||
+    current.importTransition.phase !== 'state-written'
+  ) {
+    throw new Error('The Academy import transition cannot be finalized safely.')
+  }
+  const finished: DatasetProvenanceRecord = {
+    ...current,
+    fingerprint,
+    importTransition: null,
+    updatedAt: Date.now(),
+  }
+  if (!writeDatasetProvenance(finished, storage)) {
+    throw new Error('Imported Academy provenance could not be finalized.')
+  }
+  return finished
+}
+
+export function recordPersistedDatasetFingerprint(
+  fingerprint: string,
+  storage: Storage | null = browserStorage(),
+): DatasetProvenanceRecord {
+  const current = readDatasetProvenance(storage)
+  if (!current) {
+    throw new Error('Academy dataset provenance is not initialized.')
+  }
+  if (current.importTransition) {
+    throw new Error('An Academy import transition is still in progress.')
+  }
+  const next = { ...current, fingerprint, updatedAt: Date.now() }
+  if (!writeDatasetProvenance(next, storage)) {
+    throw new Error('Academy dataset provenance could not be updated.')
+  }
+  return next
 }
 
 export type OwnershipProvenanceCheck =
-  | { ok: true; fingerprint: string }
+  | { ok: true; fingerprint: string; importEpoch: string }
   | { ok: false; error: string }
 
-export function verifyOwnedDatasetProvenance(
+export async function verifyOwnedDatasetProvenance(
   meta: HouseholdSyncMeta,
   inMemoryState: AppState,
   storage?: Storage | null,
-): OwnershipProvenanceCheck {
+): Promise<OwnershipProvenanceCheck> {
   if (
     meta.binding !== 'bound' ||
     !meta.ownsLocalData ||
-    !meta.datasetFingerprint
+    !meta.datasetFingerprint ||
+    !meta.importEpoch
   ) {
     return {
       ok: false,
       error: 'The household does not own this local dataset.',
     }
   }
-  const persisted = readPersistedDataset(storage)
+  const datasetProvenance = readDatasetProvenance(storage)
+  if (
+    !datasetProvenance ||
+    datasetProvenance.importTransition ||
+    datasetProvenance.importEpoch !== meta.importEpoch
+  ) {
+    return {
+      ok: false,
+      error: 'The local dataset import generation is unbound or changing.',
+    }
+  }
+  const persisted = await readPersistedDataset(storage)
   if (!persisted.ok) return persisted
-  const memoryFingerprint = datasetFingerprint(inMemoryState)
+  let memoryFingerprint: string
+  try {
+    memoryFingerprint = await datasetFingerprint(inMemoryState)
+  } catch (cause) {
+    return {
+      ok: false,
+      error:
+        cause instanceof Error
+          ? cause.message
+          : 'In-memory Academy data is invalid.',
+    }
+  }
   if (memoryFingerprint !== persisted.fingerprint) {
     return {
       ok: false,
       error: 'In-memory Academy data differs from persisted Academy data.',
     }
   }
-  if (meta.datasetFingerprint !== persisted.fingerprint) {
+  if (
+    meta.datasetFingerprint !== persisted.fingerprint ||
+    datasetProvenance.fingerprint !== persisted.fingerprint
+  ) {
     return {
       ok: false,
       error: 'Persisted Academy data differs from household ownership.',
     }
   }
-  return { ok: true, fingerprint: persisted.fingerprint }
+  return {
+    ok: true,
+    fingerprint: persisted.fingerprint,
+    importEpoch: datasetProvenance.importEpoch,
+  }
 }

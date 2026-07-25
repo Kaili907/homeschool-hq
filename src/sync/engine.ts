@@ -18,7 +18,7 @@ export function profileHash(profile: Profile): string {
     return Object.fromEntries(
       Object.entries(value)
         .filter(([, child]) => child !== undefined)
-        .sort(([left], [right]) => left.localeCompare(right))
+        .sort(([left], [right]) => (left < right ? -1 : left > right ? 1 : 0))
         .map(([key, child]) => [key, canonicalize(child)]),
     )
   }
@@ -33,7 +33,9 @@ export function profileHash(profile: Profile): string {
 
 export function remoteRowsSignature(rows: RemoteProfileRow[]): string {
   return [...rows]
-    .sort((a, b) => a.profile_id.localeCompare(b.profile_id))
+    .sort((a, b) =>
+      a.profile_id < b.profile_id ? -1 : a.profile_id > b.profile_id ? 1 : 0,
+    )
     .map(
       (row) => `${row.profile_id}:${row.updated_at}:${profileHash(row.data)}`,
     )

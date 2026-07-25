@@ -40,6 +40,8 @@ export interface HouseholdSyncMeta {
   ownsLocalData: boolean
   /** Fingerprint of the exact persisted AppState this household owns. */
   datasetFingerprint: string | null
+  /** Durable import generation explicitly approved with this binding. */
+  importEpoch: string | null
   /** Aggregate revision from the most recently verified cloud inspection. */
   cloudRevision: string | null
   profiles: Record<string, ProfileSyncMeta>
@@ -58,6 +60,7 @@ export const emptyHouseholdMeta = (
   binding: 'unbound',
   ownsLocalData: false,
   datasetFingerprint: null,
+  importEpoch: null,
   cloudRevision: null,
   profiles: {},
   reconciliation: 'unbound',
@@ -75,6 +78,7 @@ export interface OwnershipTransition {
   targetHouseholdId: string
   targetEmail: string
   expectedFingerprint: string
+  expectedImportEpoch: string
   previousFingerprint: string
   previousOwnerHouseholdId: string | null
   phase: OwnershipTransitionPhase
