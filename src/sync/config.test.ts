@@ -14,13 +14,16 @@ import {
 } from './config'
 import {
   createSupabaseBrowserClient,
+  getVerifiedAuthContext,
+  getVerifiedCurrentUser,
   onAuthSessionChange,
+  profileRowsForUpsert,
   pullProfiles,
-  pushProfiles,
   signOutRemote,
   userFromSession,
 } from './supabase'
 import { emptyHouseholdMeta, type RemoteProfileRow } from './types'
+import { APP_STATE_STORAGE_KEY, datasetFingerprint } from './provenance'
 
 class MemStorage {
   private values = new Map<string, string>()
@@ -53,9 +56,13 @@ describe('keyless local mode', () => {
 })
 
 describe('household-scoped persistence', () => {
+  let fingerprint: string
   beforeEach(() => {
     ;(globalThis as unknown as { localStorage: Storage }).localStorage =
       new MemStorage() as unknown as Storage
+    const state = defaultAppState()
+    localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(state))
+    fingerprint = datasetFingerprint(state)
   })
   afterEach(() => {
     delete (globalThis as unknown as { localStorage?: Storage }).localStorage
@@ -87,10 +94,15 @@ describe('household-scoped persistence', () => {
   })
 
   it('preserves Household A binding while Household B remains unbound', () => {
-    const boundA = claimLocalData('household-a', 'a@example.com', {
-      ...emptyHouseholdMeta('household-a'),
-      reconciliation: 'ready',
-    })
+    const boundA = claimLocalData(
+      'household-a',
+      'a@example.com',
+      {
+        ...emptyHouseholdMeta('household-a'),
+        reconciliation: 'ready',
+      },
+      fingerprint,
+    )
     const unboundB = loadHouseholdMeta('household-b', 'b@example.com')
     saveHouseholdMeta(unboundB)
 
@@ -105,11 +117,13 @@ describe('household-scoped persistence', () => {
       'household-a',
       'a@example.com',
       emptyHouseholdMeta('household-a'),
+      fingerprint,
     )
     claimLocalData(
       'household-b',
       'b@example.com',
       emptyHouseholdMeta('household-b'),
+      fingerprint,
     )
 
     expect(loadHouseholdMeta('household-a').binding).toBe('bound')
@@ -119,10 +133,15 @@ describe('household-scoped persistence', () => {
   })
 
   it('sign-out clears only the supported local auth session and preserves local binding data', async () => {
-    claimLocalData('household-a', 'a@example.com', {
-      ...emptyHouseholdMeta('household-a'),
-      profiles: { p1: { updatedAt: 1, dirty: true } },
-    })
+    claimLocalData(
+      'household-a',
+      'a@example.com',
+      {
+        ...emptyHouseholdMeta('household-a'),
+        profiles: { p1: { updatedAt: 1, dirty: true } },
+      },
+      fingerprint,
+    )
     const signOut = vi.fn(async () => ({ error: null }))
     await signOutRemote({ auth: { signOut } } as never)
     expect(signOut).toHaveBeenCalledWith({ scope: 'local' })
@@ -182,6 +201,44 @@ describe('official Supabase auth and transport', () => {
     expect(unsubscribe).toHaveBeenCalledOnce()
   })
 
+  it('uses the server-verified Supabase user at the mutation boundary', async () => {
+    const getUser = vi.fn(async () => ({
+      data: { user: { id: 'household-a', email: 'a@example.com' } },
+      error: null,
+    }))
+    await expect(
+      getVerifiedCurrentUser({ auth: { getUser } } as never),
+    ).resolves.toEqual({
+      id: 'household-a',
+      email: 'a@example.com',
+    })
+    expect(getUser).toHaveBeenCalledOnce()
+  })
+
+  it('captures the same server-verified token and identity for a scoped write', async () => {
+    const getSession = vi.fn(async () => ({
+      data: {
+        session: {
+          access_token: 'verified-token-a',
+        },
+      },
+      error: null,
+    }))
+    const getUser = vi.fn(async (token: string) => ({
+      data: { user: { id: 'household-a', email: 'a@example.com' } },
+      error: token === 'verified-token-a' ? null : new Error('wrong token'),
+    }))
+    await expect(
+      getVerifiedAuthContext({
+        auth: { getSession, getUser },
+      } as never),
+    ).resolves.toEqual({
+      user: { id: 'household-a', email: 'a@example.com' },
+      accessToken: 'verified-token-a',
+    })
+    expect(getUser).toHaveBeenCalledWith('verified-token-a')
+  })
+
   it('distinguishes a failed pull from a successful empty cloud', async () => {
     const failedClient = {
       from: () => ({
@@ -216,9 +273,7 @@ describe('official Supabase auth and transport', () => {
     })
   })
 
-  it('upserts no household id, service-role key, or provider secret', async () => {
-    const upsert = vi.fn(async () => ({ error: null }))
-    const client = { from: () => ({ upsert }) }
+  it('builds writes with no household id, service-role key, or provider secret', () => {
     const rows: RemoteProfileRow[] = [
       {
         profile_id: 'p1',
@@ -226,18 +281,11 @@ describe('official Supabase auth and transport', () => {
         updated_at: '2026-07-24T10:00:00.000Z',
       },
     ]
-    expect(await pushProfiles(rows, client as never)).toEqual({ ok: true })
-    expect(upsert).toHaveBeenCalledWith(
-      [
-        expect.not.objectContaining({
-          household_id: expect.anything(),
-          service_role: expect.anything(),
-        }),
-      ],
-      {
-        onConflict: 'household_id,profile_id',
-        defaultToNull: false,
-      },
-    )
+    expect(profileRowsForUpsert(rows)).toEqual([
+      expect.not.objectContaining({
+        household_id: expect.anything(),
+        service_role: expect.anything(),
+      }),
+    ])
   })
 })

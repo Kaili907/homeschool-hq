@@ -28,8 +28,8 @@ const decision = (
     : {}),
 })
 
-const api = (status: Partial<SyncStatus>): SyncApi => ({
-  status: {
+const api = (status: Partial<SyncStatus>): SyncApi => {
+  const merged: SyncStatus = {
     configured: true,
     online: true,
     user: { id: 'household-b', email: 'b@example.com' },
@@ -40,15 +40,20 @@ const api = (status: Partial<SyncStatus>): SyncApi => ({
     error: null,
     decision: null,
     ...status,
-  },
-  signIn: vi.fn(async () => ({ ok: true })),
-  signOut: vi.fn(async () => undefined),
-  syncNow: vi.fn(async () => undefined),
-  uploadLocal: vi.fn(async () => undefined),
-  useCloud: vi.fn(async () => undefined),
-  applyReviewedMerge: vi.fn(async () => undefined),
-  cancelDecision: vi.fn(),
-})
+    provenance: status.provenance ?? 'unbound',
+    pauseReason: status.pauseReason ?? null,
+  }
+  return {
+    status: merged,
+    signIn: vi.fn(async () => ({ ok: true })),
+    signOut: vi.fn(async () => undefined),
+    syncNow: vi.fn(async () => undefined),
+    uploadLocal: vi.fn(async () => undefined),
+    useCloud: vi.fn(async () => undefined),
+    applyReviewedMerge: vi.fn(async () => undefined),
+    cancelDecision: vi.fn(),
+  }
+}
 
 describe('safe sync controls', () => {
   it('offers upload only after a successful empty-cloud decision', () => {
@@ -87,5 +92,22 @@ describe('safe sync controls', () => {
     )
     expect(html).toContain('Retry cloud check')
     expect(html).not.toContain('Upload this device&#x27;s Academy data')
+  })
+
+  it('explains paused provenance after another tab or import changes data', () => {
+    const html = renderToStaticMarkup(
+      <SyncControls
+        sync={api({
+          provenance: 'paused',
+          pauseReason:
+            'Imported Academy data is unbound and requires parent review.',
+        })}
+      />,
+    )
+    expect(html).toContain('Data provenance:')
+    expect(html).toContain('review required')
+    expect(html).toContain(
+      'Imported Academy data is unbound and requires parent review.',
+    )
   })
 })

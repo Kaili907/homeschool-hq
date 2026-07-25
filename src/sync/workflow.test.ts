@@ -5,8 +5,8 @@ import { metaAfterSuccessfulSync } from './engine'
 import { emptyHouseholdMeta, type RemoteProfileRow } from './types'
 import {
   executeAutomaticCycle,
-  executeConfirmedLocalUpload,
   inspectUnboundHousehold,
+  prepareConfirmedLocalUpload,
   type SyncTransport,
 } from './workflow'
 
@@ -51,17 +51,16 @@ describe('first authenticated sync safety', () => {
     expect(sync.push).not.toHaveBeenCalled()
   })
 
-  it('explicit upload starts only at the confirmation boundary', async () => {
+  it('explicit confirmation prepares rows without bypassing the guarded transport', () => {
     const sync = transport({ ok: true, rows: [] })
     expect(sync.push).not.toHaveBeenCalled()
-    const result = await executeConfirmedLocalUpload(
+    const result = prepareConfirmedLocalUpload(
       localProfiles(),
       emptyHouseholdMeta('household-a'),
       NOW,
-      sync.push,
     )
-    expect(result.ok).toBe(true)
-    expect(sync.push).toHaveBeenCalledOnce()
+    expect(result.rows).toHaveLength(5)
+    expect(sync.push).not.toHaveBeenCalled()
   })
 
   it('cancelled migration stays local-only and performs no cloud write', async () => {
