@@ -121,19 +121,46 @@ not alter `public.profiles`, import local profiles, or change application
 
 The hardened Phase-0 contract requires active-household authorization,
 immutable student household IDs, history-preserving status/revocation
-transitions, strict Argon2id/scrypt verifier envelopes, lowercase hexadecimal
-SHA-256 session digests, capability schema version 1, session-version
-invalidation, append-only allowlisted audit events, explicit object grants, and
-real-role denial probes. Current subject enrollments are idempotent per student,
-school year, subject, course, and curriculum version; completed/withdrawn/
-archived history permits a reviewed reenrollment.
+transitions, canonical unpadded-Base64 Argon2id/scrypt verifier envelopes with
+no auxiliary credential JSON, lowercase hexadecimal SHA-256 session digests,
+the disjoint raw-token format
+`aca_stu_v1_<43-unpadded-base64url-characters>`, capability schema version 1,
+issuance-time/expiry/revocation checks, session-version invalidation,
+event-specific audit builders with sensitive value/reason rejection, explicit
+object grants, and real-role denial probes. Guardian removal means relationship
+revocation while the referenced Auth identity is retained; direct Auth deletion
+is deferred. Current subject enrollments are idempotent per student, school
+year, subject, course, and curriculum version; completed/withdrawn/archived
+history permits a reviewed reenrollment.
 
 The migration is not run by the application and must not be applied to
-production in this phase. Validate only in an ephemeral/local Supabase project
-by running the migration, the complete
-`supabase/tests/academy_student_identity_rls_probes.sql`, the migration again,
-and the complete probes again. Both probe runs must have zero failures, and the
-unrelated-private-object ACL sentinel must remain unchanged.
+production in this phase. It must run as the Supabase migration owner
+`postgres`; security-definer owner, `search_path`, body, and execute ACL are
+part of the approved catalog definition. Version-2 metadata stores a full
+security manifest after successful creation. A rerun verifies that manifest
+before replacing any function, policy, or trigger and aborts on any incompatible
+table/column/default/constraint/index/RLS/policy/function/trigger/ACL definition.
+An unmarked first-run name collision also aborts.
+
+Validate only in an ephemeral/local Supabase-compatible project in this exact
+order:
+
+1. Prepare roles/Auth shims and apply `supabase/schema.sql`.
+2. Execute and commit the `ACADEMY SENTINEL PREFLIGHT` section of
+   `supabase/tests/academy_student_identity_rls_probes.sql`.
+3. Run the migration (Run 1).
+4. Run the rollback-only `ACADEMY ROLE PROBES` section (Probe Run 1).
+5. Run the migration again (Run 2).
+6. Prove the sentinel predates Run 2 and that its schema/table/function ACLs and
+   owners are unchanged.
+7. Run the role probes again (Probe Run 2).
+8. Confirm stable complete manifests/object counts, zero probe failures, zero
+   residual fixture rows, and expected rejection of every incompatible-object
+   fixture.
+
+Explicit transaction boundaries also make the complete probe file safe as one
+`psql`, SQL Editor, or multi-statement batch; do not rely on an external harness
+silently splitting it.
 
 Future profile migration requires a durable import ledger with source IDs and
 digests, target IDs, batch/status/retry/error metadata, bounded idempotent
@@ -143,3 +170,11 @@ dual-written. Trusted provisioning is required; no current profile is imported
 or uploaded by Phase 0. Full architecture, verifier/session formats, import
 runbook, rollout, and rollback are documented in
 `docs/academy-student-identity-phase-0.md`.
+
+PGlite validation does not reproduce PostgREST exposed-schema configuration,
+hosted role administration, live extension state, or hosted owner/service-role
+bypass behavior. A later separately authorized production session must verify
+the exact project, migration history, owner/ACL report, exposed schemas, and
+object-name conflicts before applying the independently approved SQL and exact
+probes. No dual write or application activation is permitted merely because the
+database migration succeeds.

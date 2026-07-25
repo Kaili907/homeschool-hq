@@ -80,6 +80,40 @@ The lifecycle controls are intentionally distinct:
   student-specific guardian relationships, invalidates sessions, records an
   audit event, and preserves the original household and all historical rows.
 
+Guardian removal in Phase 0 means revoking the guardian's household membership
+and every guardian/student access row while retaining the Supabase Auth user
+whenever history references that identity. Direct Auth-user deletion is not a
+supported removal path. Several Auth references use `ON DELETE SET NULL` for
+optional actor snapshots, but active membership constraints require a user ID,
+and guardian-attributed audit history requires a nonnull actor. Therefore an
+account-deletion workflow must first revoke relationships and sessions and will
+still be refused while protected guardian attribution remains.
+
+Hard deletion of a guardian Auth user is deferred to a separately reviewed
+privacy workflow. That workflow needs an immutable non-Auth actor identifier or
+actor snapshot, explicit historical semantics, session invalidation, constraint
+verification, and its own audit event. It must not weaken or erase academic or
+identity history merely to make Auth deletion convenient.
+
+Every Phase-0 `auth.users` foreign key currently uses `ON DELETE SET NULL`, with
+these additional semantics:
+
+| Reference | Historical meaning and deletion rule |
+| --- | --- |
+| household/student `created_by` | Optional provenance; null is structurally valid only for history, not authorization. |
+| membership `user_id` | Guardian identity; null is invalid for an active membership, so revoke before any future deletion attempt. |
+| membership/access `revoked_by` and access `granted_by` | Optional actor provenance; relationship status controls authorization and must be revoked first. |
+| enrollment `override_by` | Required whenever an override reason exists, so reviewed placement provenance can block deletion. |
+| audit `actor_user_id` | Required when `actor_kind = guardian`; protected historical attribution intentionally blocks direct Auth deletion. |
+| credential creation/replacement/revocation actors | Guardian actor kinds require the corresponding Auth reference; credential rows are retained history. |
+| session issuance/revocation actors | Guardian issuance/revocation requires the corresponding Auth reference; grants are retained history. |
+
+`SET NULL` therefore does not promise that every Auth deletion will succeed:
+row-level consistency checks may reject it. The trusted future deletion workflow
+must revoke active rows first, invalidate student sessions, evaluate every
+remaining historical reference, and stop unless the separately approved actor
+snapshot model preserves interpretation.
+
 ## Transfer rule
 
 `academy_students.household_id` is immutable.
@@ -134,11 +168,21 @@ $argon2id$v=19$m=<memory>,t=<iterations>,p=<parallelism>$<base64-salt>$<base64-h
 $scrypt$v=1$ln=<log2-N>,r=<block-size>,p=<parallelism>$<base64-salt>$<base64-hash>
 ```
 
-The checks require the exact algorithm/version prefix, numeric cost fields,
-nonempty encoded salt and hash, no whitespace or suffix, and a bounded total
-length. The scrypt representation is the Academy scrypt-v1 envelope: a future
-server must use a reviewed scrypt implementation and serialize its salt, cost
-parameters, and derived key exactly in this representation.
+Salt and hash fields use one canonical representation: standard unpadded Base64
+with alphabet `A-Z`, `a-z`, `0-9`, `+`, `/`; no `=` padding; and a character
+length whose remainder modulo four is `0`, `2`, or `3` (never `1`). The
+database decodes each field and requires a 16-64-byte salt and a 32-64-byte
+hash. Internal/excess padding, whitespace, non-Base64 characters, trailing
+data, and shorter or longer decoded values fail. The checks also require the
+exact algorithm/version prefix, numeric bounded cost fields, and a bounded
+total envelope length.
+
+The scrypt representation is the Academy scrypt-v1 envelope: a future server
+must use a reviewed scrypt implementation and serialize its salt, cost
+parameters, and derived key exactly in this representation. There is no
+`verifier_parameters` or other auxiliary JSON column. All nonsecret algorithm
+parameters are parsed from the approved envelope, eliminating a spare field
+that could contain a raw PIN, reset token, salt/hash duplicate, or secret note.
 
 Database checks validate structure only. They cannot prove that a value was
 actually produced by Argon2id or scrypt. Only a trusted server may create or
@@ -170,10 +214,22 @@ from reviving an older student session.
 
 ## Future student-session storage
 
-`academy_private.student_session_grants` stores no bearer token. The future
-trusted server generates a high-entropy raw token, computes SHA-256, and stores
-exactly 64 lowercase hexadecimal digest characters. A raw token, uppercase
-digest, non-hex text, or any other length is rejected.
+`academy_private.student_session_grants` stores no bearer token. The canonical
+raw token contract is:
+
+```text
+aca_stu_v1_<43 unpadded base64url characters>
+```
+
+The 43-character suffix encodes 32 bytes (256 bits) generated by a
+cryptographically secure random source and permits only `A-Z`, `a-z`, `0-9`,
+`_`, and `-`; padding is forbidden. The fixed versioned nonhex prefix makes the
+raw format disjoint from its stored digest. The trusted server returns the raw
+token once, never logs or audits it, computes SHA-256 over the exact ASCII token,
+and stores only the resulting 64 lowercase hexadecimal digest characters. A raw
+token, uppercase digest, non-hex text, or any other digest length is rejected.
+The trusted server must generate this format; the database cannot establish
+entropy for an attacker-selected string.
 
 Capability schema version 1 allows only:
 
@@ -207,11 +263,17 @@ validation contract for the future trusted server. It returns true only when:
 
 - the household is active;
 - the student is active;
+- `issued_at <= now()` (a future-dated grant is not current before issuance);
 - the grant is unrevoked and unexpired;
 - the grant version equals the student's current `session_version`;
 - the referenced credential/version is still active;
 - a guardian-activation issuance still has an active membership and active
   identity-manager relationship.
+
+Phase 0 intentionally sets no database maximum future-issuance tolerance:
+future-dated rows remain non-current until `issued_at`. The trusted server
+contract must use database time or a separately reviewed small clock-skew
+tolerance and must never mint intentionally future-effective sessions.
 
 The raw bearer token is resolved to its digest by the trusted server before
 this contract is evaluated. Neither this helper nor the grant table is exposed
@@ -259,11 +321,21 @@ The event vocabulary covers:
 - student-session issuance/revocation and future observed-expiry events.
 
 Events have dedicated household, optional student, actor, target, action,
-reason, correlation, and timestamp columns. `details` must be a small JSON
-object containing only allowlisted scalar keys and no sensitive key names. It
-is limited to 4096 encoded bytes. Audit reasons and metadata must never include
-credential verifiers, raw PINs, raw reset tokens, bearer tokens, token or device
-digests, full Jarvis/Tutor transcripts, or unnecessary student content.
+reason, correlation, and timestamp columns. `details` is not generic
+caller-defined audit JSON: each event type has an exact key set, scalar types,
+and constrained vocabulary. Trigger builders derive those values from trusted
+row fields. Extra keys, nested values, invalid vocabulary, control characters,
+and values longer than their event-specific limits fail. The complete object is
+also limited to 4096 encoded bytes.
+
+Reasons are optional bounded administrative notes (240 encoded bytes maximum),
+must contain no control characters, and reject verifier, raw-token,
+token-digest, and secret-assignment patterns case-insensitively. Metadata values
+receive the same pattern checks in addition to their event-specific validation.
+Credential verifiers, raw PINs, raw reset tokens, bearer tokens, token or device
+digests, full Jarvis/Tutor transcripts, assessment responses, and unnecessary
+student content must never appear even under an otherwise allowed key and even
+when the writer is the trusted service.
 
 Hard deletes are blocked for households, memberships, students, guardian
 access, subject enrollments, credentials, session grants, and audit events.
@@ -282,6 +354,99 @@ usage nor object privileges to `anon` or `authenticated`. The migration uses
 explicit object-level grants/revokes only; it never applies `ALL TABLES`,
 `ALL FUNCTIONS`, or a schema-wide revocation that could alter an unrelated
 private object's ACL.
+
+The required migration and security-definer owner is the repository's Supabase
+migration role, `postgres`. It must not be `anon`, `authenticated`,
+`service_role`, or a normal application user. Every helper uses
+`search_path = pg_catalog`; only the three guardian authorization helpers have
+authenticated execute permission, and the private server helpers have only the
+explicit service execute grants needed by their contracts. Changing a function
+owner or execute ACL requires an audited migration and independent review.
+PGlite's `postgres` superuser simulation proves only the isolated catalog
+contract, not hosted-role administration.
+
+Production preflight and post-apply verification must run this owner query and
+compare every row with the approved migration:
+
+```sql
+select
+  namespace.nspname as function_schema,
+  procedure.proname as function_name,
+  pg_get_function_identity_arguments(procedure.oid) as arguments,
+  pg_get_userbyid(procedure.proowner) as function_owner,
+  procedure.prosecdef as security_definer,
+  procedure.proconfig as configured_settings,
+  procedure.proacl as execute_acl
+from pg_catalog.pg_proc as procedure
+join pg_catalog.pg_namespace as namespace
+  on namespace.oid = procedure.pronamespace
+where (
+  namespace.nspname = 'public'
+  and procedure.proname in (
+    'academy_is_active_household_guardian',
+    'academy_is_current_guardian_membership',
+    'academy_has_student_permission'
+  )
+) or (
+  namespace.nspname = 'academy_private'
+  and procedure.proname in (
+    'append_audit_event',
+    'prepare_student_update',
+    'audit_household',
+    'audit_membership',
+    'audit_student',
+    'audit_guardian_access',
+    'audit_subject_enrollment',
+    'validate_credential_lineage',
+    'prepare_credential_update',
+    'audit_credential',
+    'prepare_student_session_update',
+    'audit_student_session',
+    'is_student_session_grant_current',
+    'reset_student_sessions'
+  )
+)
+order by 1, 2, 3;
+```
+
+## Migration marker, rerun safety, and ACL sentinel
+
+`academy_private.identity_foundation_metadata` records foundation version 2,
+the migration name, expected owner, verification count, and a canonical
+security manifest only after successful creation. The manifest captures all
+Phase-0 table owners/RLS/ACLs, columns (types, nullability, defaults, generated
+behavior), constraints and foreign-key actions, indexes/predicates, policies,
+functions (body, signature, return type, language, volatility, owner,
+security-definer mode, `search_path`, execute ACL), and triggers. On rerun the
+migration verifies the existing manifest before any `CREATE OR REPLACE`, policy
+replacement, or trigger replacement. Any mismatch aborts the transaction
+instead of silently repairing an unknown object. A first run also refuses any
+unmarked collision with a Phase-0 relation, index, or function name.
+
+The isolated validation order is exact:
+
+1. Create the Supabase-compatible roles/Auth shim and apply `supabase/schema.sql`.
+2. Execute and commit only the `ACADEMY SENTINEL PREFLIGHT` section of
+   `academy_student_identity_rls_probes.sql`. It creates an unrelated private
+   table and function, assigns deliberate ACLs, and stores their owner and ACL
+   baseline outside the rollback fixture.
+3. Run Migration 1.
+4. Run only the `ACADEMY ROLE PROBES` section (Probe Run 1); its fixtures roll
+   back.
+5. Run Migration 2.
+6. Confirm the sentinel creation timestamp predates Migration 2 and its schema,
+   table, function ACLs, and owners exactly match the committed baseline.
+7. Run the role-probe section again (Probe Run 2).
+8. Compare complete security manifests and object definitions, then confirm
+   zero residual identity fixture rows.
+
+Running the entire probe file through `psql`, Supabase SQL Editor, or a
+multi-statement client is also safe: explicit `BEGIN`/`COMMIT` commits the
+sentinel before the separate `BEGIN`/`ROLLBACK` role fixture. The harness must
+not depend on client-specific batch splitting. Dedicated fresh databases must
+also prove that wrong nullability/default/FK/check definitions, RLS state,
+function owner/security/search path, policy, trigger, and private ACL cause an
+expected migration failure.
 
 Normal clients cannot bootstrap the model. The first household, guardian
 membership, student, guardian/student access row, and initial enrollment require
@@ -352,6 +517,15 @@ Production remains prohibited until all of these exist:
 - import-ledger implementation and recovery rehearsal;
 - dual-read validation with accepted counts/digests;
 - explicit operator authorization for production migration and later cutover.
+
+The later hosted-Supabase application session must verify the exact project and
+authenticated database identity; inspect the live migration history, exposed
+API schema list, owner/ACL query above, and all object names; apply the exact
+independently approved migration; run the exact approved probes; and stop on
+any failure. PGlite cannot reproduce PostgREST exposure, hosted role
+administration, SQL Editor batching, project extension state, or hosted owner/
+`service_role` bypass behavior. Those are production preflight requirements,
+not reasons to activate or dual-write this unused foundation.
 
 ## Rollout and rollback
 
