@@ -125,15 +125,19 @@ works exactly as before and the JSON backup/export stays your escape hatch.
    These are build-time vars (they start with `VITE_`), so **redeploy** after adding
    them. Do **not** add the service_role key — it must never reach the client.
 5. **First run**: on each device, **Grown-Ups → Cloud sync ☁️** → sign in with Dad's
-   email/password. The first device: use **"Push this device's data to the cloud →"**
-   (it shows a summary first). Other devices: sign in, then **"← Pull cloud data to
-   this device"** (this **merges** — it never erases local data). After that, sync is
-   automatic (local-first: writes save instantly and push in the background; offline
-   edits queue and flush on reconnect).
+   email/password. Signing in first performs a read-only cloud check; it never uploads
+   or replaces Academy data. The panel then offers only choices that fit the verified
+   state: upload this device when the household cloud is successfully empty, use the
+   household cloud after a local safety backup, or review profile differences. A true
+   two-sided conflict requires Dad to choose the device or cloud copy for that profile.
+   Cancel keeps the app in local-only mode. After Dad explicitly binds the device to
+   that household, one-sided changes sync automatically; offline edits remain queued
+   for that household only.
 
 Security notes: the anon key + Supabase URL are the only sync values in the client
-bundle (both are public by design; RLS protects the data). No service key, and the
-sync session token lives only in the browser's localStorage on that device.
+bundle (both are public by design; RLS protects the data). No service key is used.
+The official Supabase browser client persists and refreshes the signed-in session
+on that device; Academy sync metadata is separately namespaced by verified household.
 
 ## Rolling back
 Netlify → **Deploys** → pick a previous green deploy → **Publish deploy**. Or in

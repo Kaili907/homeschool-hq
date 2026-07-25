@@ -1,161 +1,243 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { defaultAppState } from '../migration'
 import {
-  getStoredSession,
-  loadMeta,
-  saveMeta,
-  setStoredSession,
+  backupLocalForHousehold,
+  claimLocalData,
+  householdMetaPrefixForTests,
+  listHouseholdMetas,
+  loadHouseholdMeta,
+  localDataOwner,
+  saveHouseholdMeta,
   supabaseAnonKey,
   supabaseConfigured,
   supabaseUrl,
-  type StoredSession,
 } from './config'
-import { markDirty } from './engine'
-import { emptyMeta } from './types'
 import {
-  ensureFresh,
+  createSupabaseBrowserClient,
+  onAuthSessionChange,
   pullProfiles,
   pushProfiles,
-  signInWithPassword,
-  type FetchLike,
+  signOutRemote,
+  userFromSession,
 } from './supabase'
+import { emptyHouseholdMeta, type RemoteProfileRow } from './types'
 
-// ---------------------------------------------------------------------------
-// Keyless local mode: with no Supabase env, sync is inert and the app is today's.
-// ---------------------------------------------------------------------------
-describe('M6 keyless local mode', () => {
-  it('is not configured when the env vars are absent (test env)', () => {
+class MemStorage {
+  private values = new Map<string, string>()
+  get length() {
+    return this.values.size
+  }
+  clear() {
+    this.values.clear()
+  }
+  getItem(key: string) {
+    return this.values.get(key) ?? null
+  }
+  setItem(key: string, value: string) {
+    this.values.set(key, String(value))
+  }
+  removeItem(key: string) {
+    this.values.delete(key)
+  }
+  key(index: number) {
+    return Array.from(this.values.keys())[index] ?? null
+  }
+}
+
+describe('keyless local mode', () => {
+  it('is inert when Supabase environment variables are absent', () => {
     expect(supabaseUrl()).toBe('')
     expect(supabaseAnonKey()).toBe('')
     expect(supabaseConfigured()).toBe(false)
   })
 })
 
-// ---------------------------------------------------------------------------
-// session + meta persistence (localStorage shim, outside AppState).
-// ---------------------------------------------------------------------------
-class MemStorage {
-  private m = new Map<string, string>()
-  get length() { return this.m.size }
-  clear() { this.m.clear() }
-  getItem(k: string) { return this.m.has(k) ? this.m.get(k)! : null }
-  setItem(k: string, v: string) { this.m.set(k, String(v)) }
-  removeItem(k: string) { this.m.delete(k) }
-  key(i: number) { return Array.from(this.m.keys())[i] ?? null }
-}
-
-describe('M6 session + meta persistence', () => {
+describe('household-scoped persistence', () => {
   beforeEach(() => {
-    ;(globalThis as unknown as { localStorage: Storage }).localStorage = new MemStorage() as unknown as Storage
+    ;(globalThis as unknown as { localStorage: Storage }).localStorage =
+      new MemStorage() as unknown as Storage
   })
   afterEach(() => {
     delete (globalThis as unknown as { localStorage?: Storage }).localStorage
   })
 
-  it('round-trips a session and clears it on sign-out', () => {
-    const s: StoredSession = {
-      access_token: 'at', refresh_token: 'rt', expires_at: Date.now() + 3_600_000,
-      user: { id: 'u1', email: 'dad@example.com' },
-    }
-    setStoredSession(s)
-    expect(getStoredSession()?.user.email).toBe('dad@example.com')
-    setStoredSession(null)
-    expect(getStoredSession()).toBe(null)
-  })
-
-  it('round-trips sync meta', () => {
-    const m = markDirty(emptyMeta(), ['p1'], 1000)
-    saveMeta(m)
-    expect(loadMeta().profiles.p1.dirty).toBe(true)
-  })
-
-  it('the sync session is NOT part of AppState (own localStorage slot)', () => {
-    setStoredSession({ access_token: 'SECRET-TOKEN', refresh_token: 'r', expires_at: 0, user: { id: 'u', email: 'e' } })
-    // an AppState export would be JSON.stringify(state); the token lives elsewhere.
-    const fakeAppStateExport = JSON.stringify({ schemaVersion: 2, profiles: {}, activeProfileId: null, parentPin: '' })
-    expect(fakeAppStateExport).not.toContain('SECRET-TOKEN')
-  })
-})
-
-// ---------------------------------------------------------------------------
-// Transport: correct auth + data requests; anon key + bearer only, no service key.
-// ---------------------------------------------------------------------------
-const DEPS = (fetchImpl: FetchLike, now = () => 1_000_000) => ({
-  fetchImpl,
-  url: 'https://proj.supabase.co',
-  anonKey: 'ANON_PUBLIC_KEY',
-  now,
-})
-const session = (over: Partial<StoredSession> = {}): StoredSession => ({
-  access_token: 'AT', refresh_token: 'RT', expires_at: 9_999_999_999_999,
-  user: { id: 'u1', email: 'dad@example.com' }, ...over,
-})
-
-describe('M6 Supabase transport', () => {
-  it('sign-in posts to the token endpoint with the anon key and parses the session', async () => {
-    const spy = vi.fn(async () => ({
-      ok: true, status: 200,
-      json: async () => ({ access_token: 'AT', refresh_token: 'RT', expires_in: 3600, user: { id: 'u1', email: 'dad@example.com' } }),
-      text: async () => '',
-    }))
-    const res = await signInWithPassword('dad@example.com', 'pw', DEPS(spy as unknown as FetchLike))
-    expect(res.ok).toBe(true)
-    if (!res.ok) return
-    expect(res.session.user.id).toBe('u1')
-    const [url, init] = (spy as unknown as { mock: { calls: [string, { headers: Record<string, string>; body: string }][] } }).mock.calls[0]
-    expect(url).toContain('/auth/v1/token?grant_type=password')
-    expect(init.headers.apikey).toBe('ANON_PUBLIC_KEY')
-    expect(JSON.parse(init.body).email).toBe('dad@example.com')
-  })
-
-  it('sign-in surfaces a friendly error on bad credentials', async () => {
-    const fetchImpl: FetchLike = async () => ({
-      ok: false, status: 400, json: async () => ({ error_description: 'Invalid login credentials' }), text: async () => '',
+  it('uses a separate metadata key for every verified household', () => {
+    saveHouseholdMeta({
+      ...emptyHouseholdMeta('household-a', 'a@example.com'),
+      profiles: { p1: { updatedAt: 1, dirty: true } },
     })
-    const res = await signInWithPassword('x', 'y', DEPS(fetchImpl))
-    expect(res).toEqual({ ok: false, error: 'Invalid login credentials' })
-  })
+    saveHouseholdMeta({
+      ...emptyHouseholdMeta('household-b', 'b@example.com'),
+      profiles: { p2: { updatedAt: 2, dirty: true } },
+    })
 
-  it('pull sends apikey + bearer and maps rows', async () => {
-    const spy = vi.fn(async () => ({
-      ok: true, status: 200,
-      json: async () => [{ profile_id: 'p1', data: { id: 'p1', name: 'Ada' }, updated_at: '2026-07-24T10:00:00Z' }],
-      text: async () => '',
-    }))
-    const rows = await pullProfiles(session(), DEPS(spy as unknown as FetchLike))
-    expect(rows).toHaveLength(1)
-    expect(rows[0].profile_id).toBe('p1')
-    const [url, init] = (spy as unknown as { mock: { calls: [string, { headers: Record<string, string> }][] } }).mock.calls[0]
-    expect(url).toContain('/rest/v1/profiles?select=')
-    expect(init.headers.apikey).toBe('ANON_PUBLIC_KEY')
-    expect(init.headers.Authorization).toBe('Bearer AT')
-  })
-
-  it('push upserts with merge-duplicates and never sends a service key or household_id', async () => {
-    const spy = vi.fn(async () => ({ ok: true, status: 201, json: async () => ({}), text: async () => '' }))
-    const ok = await pushProfiles(
-      session(),
-      [{ profile_id: 'p1', data: { id: 'p1', name: 'Ada' } as never, updated_at: '2026-07-24T10:00:00Z' }],
-      DEPS(spy as unknown as FetchLike),
+    expect(loadHouseholdMeta('household-a').profiles).toHaveProperty('p1')
+    expect(loadHouseholdMeta('household-a').profiles).not.toHaveProperty('p2')
+    expect(loadHouseholdMeta('household-b').profiles).toHaveProperty('p2')
+    expect(
+      Array.from({ length: localStorage.length }, (_, i) =>
+        localStorage.key(i),
+      ),
+    ).toEqual(
+      expect.arrayContaining([
+        `${householdMetaPrefixForTests}household-a`,
+        `${householdMetaPrefixForTests}household-b`,
+      ]),
     )
-    expect(ok).toBe(true)
-    const [url, init] = (spy as unknown as { mock: { calls: [string, { headers: Record<string, string>; body: string }][] } }).mock.calls[0]
-    expect(url).toContain('on_conflict=household_id,profile_id')
-    expect(init.headers.Prefer).toContain('resolution=merge-duplicates')
-    expect(init.headers.Authorization).toBe('Bearer AT')
-    const body = JSON.parse(init.body)
-    expect(body[0].household_id).toBeUndefined() // filled server-side by auth.uid()
-    expect(init.headers['service_role']).toBeUndefined()
   })
 
-  it('ensureFresh refreshes an about-to-expire token', async () => {
-    const now = () => 1_000_000
-    const stale = session({ expires_at: 1_000_000 + 30_000 }) // within the 60s window
-    const spy = vi.fn(async () => ({
-      ok: true, status: 200,
-      json: async () => ({ access_token: 'NEW', refresh_token: 'RT2', expires_in: 3600, user: { id: 'u1', email: 'dad@example.com' } }),
-      text: async () => '',
-    }))
-    const fresh = await ensureFresh(stale, DEPS(spy as unknown as FetchLike, now))
-    expect(fresh?.access_token).toBe('NEW')
+  it('preserves Household A binding while Household B remains unbound', () => {
+    const boundA = claimLocalData('household-a', 'a@example.com', {
+      ...emptyHouseholdMeta('household-a'),
+      reconciliation: 'ready',
+    })
+    const unboundB = loadHouseholdMeta('household-b', 'b@example.com')
+    saveHouseholdMeta(unboundB)
+
+    expect(boundA.ownsLocalData).toBe(true)
+    expect(localDataOwner('household-b')?.householdId).toBe('household-a')
+    expect(loadHouseholdMeta('household-b').binding).toBe('unbound')
+    expect(loadHouseholdMeta('household-b').profiles).toEqual({})
+  })
+
+  it('moving to a confirmed household retains old binding metadata', () => {
+    claimLocalData(
+      'household-a',
+      'a@example.com',
+      emptyHouseholdMeta('household-a'),
+    )
+    claimLocalData(
+      'household-b',
+      'b@example.com',
+      emptyHouseholdMeta('household-b'),
+    )
+
+    expect(loadHouseholdMeta('household-a').binding).toBe('bound')
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+    expect(loadHouseholdMeta('household-b').ownsLocalData).toBe(true)
+    expect(listHouseholdMetas()).toHaveLength(2)
+  })
+
+  it('sign-out clears only the supported local auth session and preserves local binding data', async () => {
+    claimLocalData('household-a', 'a@example.com', {
+      ...emptyHouseholdMeta('household-a'),
+      profiles: { p1: { updatedAt: 1, dirty: true } },
+    })
+    const signOut = vi.fn(async () => ({ error: null }))
+    await signOutRemote({ auth: { signOut } } as never)
+    expect(signOut).toHaveBeenCalledWith({ scope: 'local' })
+    expect(localDataOwner()?.householdId).toBe('household-a')
+    expect(loadHouseholdMeta('household-a').profiles.p1.dirty).toBe(true)
+  })
+
+  it('creates a household-scoped safety backup before replacement', () => {
+    const state = defaultAppState()
+    state.profiles.p1.name = 'Local child'
+    const key = backupLocalForHousehold('household-a', state)
+    expect(key).toContain('homeschool-hq:backup:sync:household-a:')
+    expect(JSON.parse(localStorage.getItem(key!)!).profiles.p1.name).toBe(
+      'Local child',
+    )
+  })
+})
+
+describe('official Supabase auth and transport', () => {
+  it('enables supported persisted sessions and automatic token refresh', () => {
+    const client = createSupabaseBrowserClient(
+      'https://example.supabase.co',
+      'anon-key',
+    )
+    const auth = client.auth as unknown as {
+      persistSession: boolean
+      autoRefreshToken: boolean
+      storageKey: string
+    }
+    expect(auth.persistSession).toBe(true)
+    expect(auth.autoRefreshToken).toBe(true)
+    expect(auth.storageKey).toContain('auth-token')
+  })
+
+  it('keeps the verified household identity on TOKEN_REFRESHED', () => {
+    let callback: ((event: string, session: unknown) => void) | undefined
+    const unsubscribe = vi.fn()
+    const fakeClient = {
+      auth: {
+        onAuthStateChange: (
+          next: (event: string, session: unknown) => void,
+        ) => {
+          callback = next
+          return { data: { subscription: { unsubscribe } } }
+        },
+      },
+    }
+    let observed = null as ReturnType<typeof userFromSession>
+    const stop = onAuthSessionChange((_event, session) => {
+      observed = userFromSession(session)
+    }, fakeClient as never)
+    callback?.('TOKEN_REFRESHED', {
+      user: { id: 'household-a', email: 'a@example.com' },
+    })
+    expect(observed).toEqual({ id: 'household-a', email: 'a@example.com' })
+    stop()
+    expect(unsubscribe).toHaveBeenCalledOnce()
+  })
+
+  it('distinguishes a failed pull from a successful empty cloud', async () => {
+    const failedClient = {
+      from: () => ({
+        select: async () => ({ data: null, error: { message: 'offline' } }),
+      }),
+    }
+    const emptyClient = {
+      from: () => ({ select: async () => ({ data: [], error: null }) }),
+    }
+    expect(await pullProfiles(failedClient as never)).toEqual({
+      ok: false,
+      error: 'offline',
+    })
+    expect(await pullProfiles(emptyClient as never)).toEqual({
+      ok: true,
+      rows: [],
+    })
+  })
+
+  it('treats malformed cloud rows as a pull failure, not an empty household', async () => {
+    const malformedClient = {
+      from: () => ({
+        select: async () => ({
+          data: [{ profile_id: 'p1', data: {}, updated_at: 'not-a-date' }],
+          error: null,
+        }),
+      }),
+    }
+    expect(await pullProfiles(malformedClient as never)).toEqual({
+      ok: false,
+      error: 'The cloud returned an invalid profile row.',
+    })
+  })
+
+  it('upserts no household id, service-role key, or provider secret', async () => {
+    const upsert = vi.fn(async () => ({ error: null }))
+    const client = { from: () => ({ upsert }) }
+    const rows: RemoteProfileRow[] = [
+      {
+        profile_id: 'p1',
+        data: defaultAppState().profiles.p1,
+        updated_at: '2026-07-24T10:00:00.000Z',
+      },
+    ]
+    expect(await pushProfiles(rows, client as never)).toEqual({ ok: true })
+    expect(upsert).toHaveBeenCalledWith(
+      [
+        expect.not.objectContaining({
+          household_id: expect.anything(),
+          service_role: expect.anything(),
+        }),
+      ],
+      {
+        onConflict: 'household_id,profile_id',
+        defaultToNull: false,
+      },
+    )
   })
 })
