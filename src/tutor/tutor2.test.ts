@@ -67,6 +67,31 @@ describe('MT-2 never states the answer', () => {
     expect(r.text).toBe('What happens if you count by 2s?')
   })
 
+  it('redacts a reply that is exactly a bare single-digit answer', () => {
+    const result = sanitizeReply('4', '4')
+    expect(result.redacted).toBe(true)
+    expect(result.text).toBe(SAFE_REDACTION)
+  })
+
+  it.each(['4.', '4?!', '“4.”', '**4**', '*4*', '_4_', '`4`', '“**4**.”', '\n4.\n'])(
+    'redacts a presentation-wrapped single-digit answer: %s',
+    (reply) => {
+      expect(sanitizeReply(reply, '4')).toEqual({
+        text: SAFE_REDACTION,
+        redacted: true,
+      })
+    },
+  )
+
+  it('does not confuse nearby numeric hints with an answer-only reply', () => {
+    expect(sanitizeReply('Try 4 counters.', '4').redacted).toBe(false)
+    expect(sanitizeReply('14', '4').redacted).toBe(false)
+    expect(sanitizeReply('4.', '-4').redacted).toBe(false)
+    expect(sanitizeReply('-4.', '-4').redacted).toBe(true)
+    expect(sanitizeReply('4.5.', '4.5').redacted).toBe(true)
+    expect(sanitizeReply('2/5.', '2/5').redacted).toBe(true)
+  })
+
   it('models the chat path: every model reply is sanitized before it is shown', () => {
     // whatever the model returns, the panel runs sanitizeReply on it — so a leak never reaches her.
     const modelSaid = 'You add them: the answer is 493.'

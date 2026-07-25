@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import type { Profile } from '../types'
+import type { AssistantMessage, Profile } from '../types'
 import type { FetchLike, TutorApiDeps } from '../tutor/tutorApi'
 import { assembleAssistantRequest, runAssistantTurn } from './engine'
 import { setAssistantDailyCap, recordAssistantCall } from './assistantState'
@@ -34,6 +34,37 @@ function teen(): Profile {
 }
 
 const TODAY = '2026-07-24'
+
+it('drops leading assistant turns after bounding long Jarvis history', () => {
+  const history: AssistantMessage[] = Array.from({ length: 11 }, (_, index) => ({
+    role: index % 2 === 0 ? 'girl' : 'assistant',
+    text: `turn ${index}`,
+    ts: index,
+    source: index % 2 === 0 ? undefined : 'scripted',
+  }))
+  const request = assembleAssistantRequest(teen(), TODAY, history, 'What is next?')
+  expect(request.messages[0].role).toBe('user')
+  expect(request.messages.at(-1)).toEqual({
+    role: 'user',
+    content: 'What is next?',
+  })
+})
+
+it('bounds customized Jarvis collections and labels to the gateway contract', () => {
+  const profile = teen()
+  profile.missions[TODAY].items = Array.from({ length: 30 }, (_, index) => ({
+    id: `item-${index}`,
+    label: `Mission ${index} ${'x'.repeat(200)}`,
+    done: false,
+  }))
+  const request = assembleAssistantRequest(profile, TODAY, [], 'What is next?')
+  expect(request.gateway.mode).toBe('jarvis')
+  if (request.gateway.mode !== 'jarvis') return
+  expect(request.gateway.context.student.mission).toHaveLength(24)
+  expect(request.gateway.context.student.mission.every((item) => item.label.length <= 160)).toBe(true)
+  expect(request.gateway.context.actions.length).toBeLessThanOrEqual(50)
+  expect(request.gateway.context.actions.every((action) => action.label.length <= 180)).toBe(true)
+})
 
 /** A spy Anthropic transport: records the outgoing request and returns a canned reply. */
 function spyDeps(cannedText: string): { deps: TutorApiDeps; sent: { system: string; messages: unknown[] }[] } {
@@ -136,5 +167,53 @@ describe('cap enforcement + keyless degradation', () => {
     const deps: TutorApiDeps = { getKey: () => null, fetchImpl: async () => ({ ok: true, status: 200, json: async () => ({}) }), isOnline: () => true }
     const res = await runAssistantTurn(deps, { profile: teen(), today: TODAY, history: [], userText: 'hi' })
     expect(res.kind).toBe('offline')
+  })
+})
+
+describe('secured Jarvis gateway client contract', () => {
+  it('sends bearer auth with bounded status-only context and no client system prompt', async () => {
+    const sent: { url: string; init: NonNullable<Parameters<FetchLike>[1]> }[] = []
+    const fetchImpl: FetchLike = async (url, init) => {
+      sent.push({ url, init: init ?? {} })
+      return {
+        ok: true,
+        status: 200,
+        json: async () => ({ text: 'Start with your math block.' }),
+      }
+    }
+    const deps: TutorApiDeps = {
+      getKey: () => null,
+      getAccessToken: async () => 'SUPABASE_ACCESS_TOKEN',
+      fetchImpl,
+      isOnline: () => true,
+      endpointBase: '/api/anthropic',
+    }
+
+    const result = await runAssistantTurn(deps, {
+      profile: teen(),
+      today: TODAY,
+      history: [],
+      userText: 'What should I do first?',
+    })
+    expect(result.kind).toBe('reply')
+
+    const { url, init } = sent[0]
+    expect(url).toBe('/api/anthropic/v1/messages')
+    expect(init?.headers?.Authorization).toBe('Bearer SUPABASE_ACCESS_TOKEN')
+    const body = JSON.parse(init?.body ?? '{}')
+    expect(body.mode).toBe('jarvis')
+    expect(body.system).toBeUndefined()
+    expect(body.model).toBeUndefined()
+    expect(body.max_tokens).toBeUndefined()
+    expect(body.context.assistant).toEqual({
+      name: 'Jarvis',
+      tonePreference: '',
+    })
+    expect(body.context.student.name).toBeUndefined()
+    expect(body.context.student.profileId).toBeUndefined()
+    expect(body.context.student.assessments).toEqual([{ title: expect.any(String), status: 'in progress' }])
+    expect(JSON.stringify(body)).not.toContain('CODE')
+    expect(JSON.stringify(body)).not.toContain('startCode')
+    expect(body.context.actions.every((action: Record<string, unknown>) => !('target' in action))).toBe(true)
   })
 })

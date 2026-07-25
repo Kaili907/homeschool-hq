@@ -21,22 +21,95 @@ const meter = (): UsageMeter => ({
   overCap: () => false,
 })
 
-describe('D1 Anthropic proxy mode', () => {
+describe('secured Anthropic proxy client', () => {
   const okJson = (text: string): JsonFetch =>
-    vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ content: [{ type: 'text', text }] }) }))
+    vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ text }) }))
 
-  it('with no local key, routes to the proxy and sends NO key / dangerous header', async () => {
+  it('sends bearer auth and the exact Tutor schema without provider-native controls', async () => {
     const spy = okJson('a hint')
-    const res = await askTutor(
-      { getKey: () => null, fetchImpl: spy, isOnline: () => true, endpointBase: '/api/anthropic' },
-      { system: 's', messages: [{ role: 'user', content: 'help' }] },
+    const result = await askTutor(
+      {
+        getKey: () => null,
+        getAccessToken: async () => 'SUPABASE_ACCESS_TOKEN',
+        fetchImpl: spy,
+        isOnline: () => true,
+        endpointBase: '/api/anthropic',
+      },
+      {
+        system: 'client system must never reach the gateway',
+        messages: [{ role: 'user', content: 'help' }],
+        gateway: {
+          mode: 'tutor',
+          context: {
+            grade: '3',
+            problem: '2 + 2 = ?',
+            correctAnswer: '4',
+            studentAnswer: '5',
+            graded: false,
+          },
+        },
+      },
     )
-    expect(res).toEqual({ ok: true, text: 'a hint' }) // NOT no-key — the proxy holds the key
-    const [url, init] = (spy as unknown as { mock: { calls: [string, { headers: Record<string, string> }][] } }).mock.calls[0]
+    expect(result).toEqual({ ok: true, text: 'a hint' })
+
+    const [url, init] = (
+      spy as unknown as {
+        mock: {
+          calls: [string, { headers: Record<string, string>; body: string }][]
+        }
+      }
+    ).mock.calls[0]
     expect(url).toBe('/api/anthropic/v1/messages')
-    expect(init.headers['x-api-key']).toBeUndefined()
-    expect(init.headers['anthropic-dangerous-direct-browser-access']).toBeUndefined()
-    expect(init.headers['content-type']).toBe('application/json')
+    expect(init.headers).toEqual({
+      Authorization: 'Bearer SUPABASE_ACCESS_TOKEN',
+      'content-type': 'application/json',
+    })
+    const body = JSON.parse(init.body)
+    expect(body).toEqual({
+      mode: 'tutor',
+      modelTier: 'sonnet',
+      context: {
+        grade: '3',
+        problem: '2 + 2 = ?',
+        correctAnswer: '4',
+        studentAnswer: '5',
+        graded: false,
+      },
+      messages: [{ role: 'user', content: 'help' }],
+    })
+    expect(body.system).toBeUndefined()
+    expect(body.model).toBeUndefined()
+    expect(body.max_tokens).toBeUndefined()
+    expect(body.tools).toBeUndefined()
+  })
+
+  it('fails closed without a Supabase token and never calls the gateway', async () => {
+    const spy = okJson('unused')
+    const result = await askTutor(
+      {
+        getKey: () => null,
+        getAccessToken: async () => null,
+        fetchImpl: spy,
+        isOnline: () => true,
+        endpointBase: '/api/anthropic',
+      },
+      {
+        system: 'unused',
+        messages: [{ role: 'user', content: 'help' }],
+        gateway: {
+          mode: 'tutor',
+          context: {
+            grade: '3',
+            problem: 'p',
+            correctAnswer: '1',
+            studentAnswer: '2',
+            graded: false,
+          },
+        },
+      },
+    )
+    expect(result).toEqual({ ok: false, reason: 'unauthenticated' })
+    expect(spy).not.toHaveBeenCalled()
   })
 
   it('direct mode still requires the family key (regression)', async () => {
@@ -48,14 +121,15 @@ describe('D1 Anthropic proxy mode', () => {
   })
 })
 
-describe('D1 ElevenLabs proxy mode', () => {
+describe('secured TTS proxy client', () => {
   const okBin = (): BinFetch =>
     vi.fn(async () => ({ ok: true, status: 200, arrayBuffer: async () => new ArrayBuffer(8) }))
 
-  it('is available without a local key and routes to the proxy without xi-api-key', async () => {
+  it('uses one fixed operation with bearer auth and no provider settings', async () => {
     const spy = okBin()
     const synth = createElevenLabsSynth({
       getKey: () => null,
+      getAccessToken: async () => 'SUPABASE_ACCESS_TOKEN',
       fetchImpl: spy,
       isOnline: () => true,
       usage: meter(),
@@ -63,9 +137,37 @@ describe('D1 ElevenLabs proxy mode', () => {
     })
     expect(synth.available()).toBe(true) // proxy holds the key
     await synth.synthesize({ text: 'hello', voiceId: 'abc' })
-    const [url, init] = (spy as unknown as { mock: { calls: [string, { headers: Record<string, string> }][] } }).mock.calls[0]
-    expect(url).toContain('/api/tts/v1/text-to-speech/abc')
-    expect(init.headers['xi-api-key']).toBeUndefined()
+
+    const [url, init] = (
+      spy as unknown as {
+        mock: {
+          calls: [string, { headers: Record<string, string>; body: string }][]
+        }
+      }
+    ).mock.calls[0]
+    expect(url).toBe('/api/tts/synthesize')
+    expect(init.headers).toEqual({
+      Authorization: 'Bearer SUPABASE_ACCESS_TOKEN',
+      'content-type': 'application/json',
+      accept: 'audio/mpeg',
+    })
+    expect(JSON.parse(init.body)).toEqual({ text: 'hello', voiceId: 'abc' })
+    expect(init.body).not.toContain('model_id')
+    expect(init.body).not.toContain('output_format')
+  })
+
+  it('fails closed without a Supabase token and never calls the gateway', async () => {
+    const spy = okBin()
+    const synth = createElevenLabsSynth({
+      getKey: () => null,
+      getAccessToken: async () => null,
+      fetchImpl: spy,
+      isOnline: () => true,
+      usage: meter(),
+      endpointBase: '/api/tts',
+    })
+    await expect(synth.synthesize({ text: 'hello', voiceId: 'abc' })).rejects.toThrow('unauthenticated')
+    expect(spy).not.toHaveBeenCalled()
   })
 
   it('direct mode still needs the local key', () => {
