@@ -13,6 +13,467 @@ begin;
 
 create schema if not exists academy_private;
 
+-- Supabase migrations for this repository run as postgres. Security-definer
+-- ownership is part of the approved definition and is verified on every rerun.
+do $$
+declare
+  marker_version integer;
+  marker_name text;
+  marker_owner name;
+  stored_manifest jsonb;
+  current_manifest jsonb;
+  manifest_owner name;
+  manifest_security_definer boolean;
+  manifest_config text[];
+  private_schema_owner name;
+  collision_count integer;
+begin
+  if current_user <> 'postgres' then
+    raise exception
+      'Academy identity migration must run as postgres; current owner is %',
+      current_user;
+  end if;
+
+  select role.rolname
+  into private_schema_owner
+  from pg_catalog.pg_namespace as namespace
+  join pg_catalog.pg_roles as role on role.oid = namespace.nspowner
+  where namespace.nspname = 'academy_private';
+
+  if private_schema_owner <> 'postgres' then
+    raise exception
+      'academy_private must be owned by postgres; current owner is %',
+      private_schema_owner;
+  end if;
+
+  if to_regclass('academy_private.identity_foundation_metadata') is not null then
+    if to_regprocedure(
+      'academy_private.identity_foundation_manifest()'
+    ) is null then
+      raise exception
+        'Academy identity marker exists but its manifest function is missing';
+    end if;
+
+    select
+      role.rolname,
+      procedure.prosecdef,
+      procedure.proconfig
+    into
+      manifest_owner,
+      manifest_security_definer,
+      manifest_config
+    from pg_catalog.pg_proc as procedure
+    join pg_catalog.pg_namespace as namespace
+      on namespace.oid = procedure.pronamespace
+    join pg_catalog.pg_roles as role
+      on role.oid = procedure.proowner
+    where namespace.nspname = 'academy_private'
+      and procedure.proname = 'identity_foundation_manifest'
+      and pg_catalog.pg_get_function_identity_arguments(procedure.oid) = '';
+
+    if manifest_owner <> 'postgres'
+       or manifest_security_definer
+       or not (
+         coalesce(manifest_config, array[]::text[])
+         @> array['search_path=pg_catalog']::text[]
+       ) then
+      raise exception
+        'Academy identity manifest function has an unsafe owner, security mode, or search_path';
+    end if;
+
+    execute $sql$
+      select
+        foundation_version,
+        migration_name,
+        expected_owner,
+        security_manifest
+      from academy_private.identity_foundation_metadata
+      where singleton
+    $sql$
+    into marker_version, marker_name, marker_owner, stored_manifest;
+
+    if marker_version <> 2
+       or marker_name <>
+         '20260724230000_academy_student_identity_foundation'
+       or marker_owner <> 'postgres'
+       or stored_manifest is null then
+      raise exception 'Academy identity migration marker is missing or incompatible';
+    end if;
+
+    execute
+      'select academy_private.identity_foundation_manifest()'
+      into current_manifest;
+    if current_manifest is distinct from stored_manifest then
+      raise exception
+        'Academy identity security manifest mismatch; refusing to repair an unknown object';
+    end if;
+  else
+    select (
+      select count(*)
+      from pg_catalog.pg_class as relation
+      join pg_catalog.pg_namespace as namespace
+        on namespace.oid = relation.relnamespace
+      where (
+        namespace.nspname = 'public'
+        and relation.relname in (
+          'academy_households',
+          'academy_household_memberships',
+          'academy_students',
+          'academy_guardian_student_access',
+          'academy_subject_enrollments',
+          'academy_audit_events'
+        )
+      ) or (
+        namespace.nspname = 'academy_private'
+        and relation.relname in (
+          'student_access_credentials',
+          'student_session_grants'
+        )
+      ) or (
+        namespace.nspname in ('public', 'academy_private')
+        and relation.relkind in ('i', 'I')
+        and relation.relname in (
+          'academy_student_credentials_one_current_kind_idx',
+          'academy_household_memberships_user_idx',
+          'academy_guardian_student_access_membership_idx',
+          'academy_subject_enrollments_one_current_idx',
+          'academy_subject_enrollments_student_idx',
+          'academy_subject_enrollments_course_idx',
+          'academy_audit_events_student_time_idx',
+          'academy_student_session_grants_student_idx',
+          'academy_student_session_grants_credential_idx'
+        )
+      )
+    ) + (
+      select count(*)
+      from pg_catalog.pg_proc as procedure
+      join pg_catalog.pg_namespace as namespace
+        on namespace.oid = procedure.pronamespace
+      where (
+        namespace.nspname = 'public'
+        and procedure.proname in (
+          'academy_is_active_household_guardian',
+          'academy_is_current_guardian_membership',
+          'academy_has_student_permission'
+        )
+      ) or (
+        namespace.nspname = 'academy_private'
+        and procedure.proname in (
+          'is_canonical_unpadded_base64',
+          'is_valid_student_verifier',
+          'is_valid_raw_student_session_token',
+          'security_text_is_safe',
+          'student_capabilities_are_valid',
+          'audit_details_are_safe',
+          'identity_foundation_manifest',
+          'touch_updated_at',
+          'prevent_historical_delete',
+          'prevent_audit_mutation',
+          'current_correlation_id',
+          'append_audit_event',
+          'prepare_student_update',
+          'audit_household',
+          'audit_membership',
+          'audit_student',
+          'audit_guardian_access',
+          'audit_subject_enrollment',
+          'validate_credential_lineage',
+          'prepare_credential_update',
+          'audit_credential',
+          'prepare_student_session_update',
+          'audit_student_session',
+          'is_student_session_grant_current',
+          'reset_student_sessions'
+        )
+      )
+    )
+    into collision_count;
+
+    if collision_count > 0 then
+      raise exception
+        'Unmarked Academy identity object collision; refusing first-run creation';
+    end if;
+  end if;
+end;
+$$;
+
+create or replace function academy_private.identity_foundation_manifest()
+returns jsonb
+language sql
+stable
+set search_path = pg_catalog
+as $$
+  with phase_relations as (
+    select relation.oid, namespace.nspname, relation.relname
+    from pg_catalog.pg_class as relation
+    join pg_catalog.pg_namespace as namespace
+      on namespace.oid = relation.relnamespace
+    where (
+      namespace.nspname = 'public'
+      and relation.relname in (
+        'academy_households',
+        'academy_household_memberships',
+        'academy_students',
+        'academy_guardian_student_access',
+        'academy_subject_enrollments',
+        'academy_audit_events'
+      )
+    ) or (
+      namespace.nspname = 'academy_private'
+      and relation.relname in (
+        'student_access_credentials',
+        'student_session_grants',
+        'identity_foundation_metadata'
+      )
+    )
+  ),
+  phase_functions as (
+    select procedure.oid, namespace.nspname, procedure.proname
+    from pg_catalog.pg_proc as procedure
+    join pg_catalog.pg_namespace as namespace
+      on namespace.oid = procedure.pronamespace
+    where (
+      namespace.nspname = 'public'
+      and procedure.proname in (
+        'academy_is_active_household_guardian',
+        'academy_is_current_guardian_membership',
+        'academy_has_student_permission'
+      )
+    ) or (
+      namespace.nspname = 'academy_private'
+      and procedure.proname in (
+        'is_canonical_unpadded_base64',
+        'is_valid_student_verifier',
+        'is_valid_raw_student_session_token',
+        'security_text_is_safe',
+        'student_capabilities_are_valid',
+        'audit_details_are_safe',
+        'identity_foundation_manifest',
+        'touch_updated_at',
+        'prevent_historical_delete',
+        'prevent_audit_mutation',
+        'current_correlation_id',
+        'append_audit_event',
+        'prepare_student_update',
+        'audit_household',
+        'audit_membership',
+        'audit_student',
+        'audit_guardian_access',
+        'audit_subject_enrollment',
+        'validate_credential_lineage',
+        'prepare_credential_update',
+        'audit_credential',
+        'prepare_student_session_update',
+        'audit_student_session',
+        'is_student_session_grant_current',
+        'reset_student_sessions'
+      )
+    )
+  )
+  select jsonb_build_object(
+    'schema', (
+      select jsonb_build_object(
+        'owner', owner_role.rolname,
+        'anon_usage', has_schema_privilege('anon', namespace.oid, 'usage'),
+        'authenticated_usage',
+          has_schema_privilege('authenticated', namespace.oid, 'usage'),
+        'service_usage',
+          has_schema_privilege('service_role', namespace.oid, 'usage')
+      )
+      from pg_catalog.pg_namespace as namespace
+      join pg_catalog.pg_roles as owner_role
+        on owner_role.oid = namespace.nspowner
+      where namespace.nspname = 'academy_private'
+    ),
+    'relations', coalesce((
+      select jsonb_agg(
+        jsonb_build_object(
+          'name', format('%I.%I', phase_relations.nspname, phase_relations.relname),
+          'owner', owner_role.rolname,
+          'kind', relation.relkind,
+          'rls', relation.relrowsecurity,
+          'force_rls', relation.relforcerowsecurity,
+          'acl', coalesce((
+            select jsonb_agg(
+              jsonb_build_object(
+                'grantor', grantor_role.rolname,
+                'grantee', coalesce(grantee_role.rolname, 'PUBLIC'),
+                'privilege', privilege.privilege_type,
+                'grantable', privilege.is_grantable
+              )
+              order by
+                grantor_role.rolname,
+                coalesce(grantee_role.rolname, 'PUBLIC'),
+                privilege.privilege_type,
+                privilege.is_grantable
+            )
+            from aclexplode(
+              coalesce(relation.relacl, acldefault('r', relation.relowner))
+            ) as privilege
+            join pg_catalog.pg_roles as grantor_role
+              on grantor_role.oid = privilege.grantor
+            left join pg_catalog.pg_roles as grantee_role
+              on grantee_role.oid = nullif(privilege.grantee, 0)
+          ), '[]'::jsonb)
+        )
+        order by phase_relations.nspname, phase_relations.relname
+      )
+      from phase_relations
+      join pg_catalog.pg_class as relation on relation.oid = phase_relations.oid
+      join pg_catalog.pg_roles as owner_role on owner_role.oid = relation.relowner
+    ), '[]'::jsonb),
+    'columns', coalesce((
+      select jsonb_agg(
+        jsonb_build_object(
+          'table', format('%I.%I', phase_relations.nspname, phase_relations.relname),
+          'name', attribute.attname,
+          'type', pg_catalog.format_type(attribute.atttypid, attribute.atttypmod),
+          'not_null', attribute.attnotnull,
+          'identity', attribute.attidentity,
+          'generated', attribute.attgenerated,
+          'default', pg_catalog.pg_get_expr(default_value.adbin, default_value.adrelid)
+        )
+        order by phase_relations.nspname, phase_relations.relname, attribute.attnum
+      )
+      from phase_relations
+      join pg_catalog.pg_attribute as attribute
+        on attribute.attrelid = phase_relations.oid
+      left join pg_catalog.pg_attrdef as default_value
+        on default_value.adrelid = attribute.attrelid
+       and default_value.adnum = attribute.attnum
+      where attribute.attnum > 0 and not attribute.attisdropped
+    ), '[]'::jsonb),
+    'constraints', coalesce((
+      select jsonb_agg(
+        jsonb_build_object(
+          'table', format('%I.%I', phase_relations.nspname, phase_relations.relname),
+          'name', constraint_row.conname,
+          'type', constraint_row.contype,
+          'deferrable', constraint_row.condeferrable,
+          'deferred', constraint_row.condeferred,
+          'validated', constraint_row.convalidated,
+          'definition', pg_catalog.pg_get_constraintdef(constraint_row.oid, true)
+        )
+        order by
+          phase_relations.nspname,
+          phase_relations.relname,
+          constraint_row.conname
+      )
+      from phase_relations
+      join pg_catalog.pg_constraint as constraint_row
+        on constraint_row.conrelid = phase_relations.oid
+    ), '[]'::jsonb),
+    'indexes', coalesce((
+      select jsonb_agg(
+        jsonb_build_object(
+          'table', format('%I.%I', phase_relations.nspname, phase_relations.relname),
+          'name', index_relation.relname,
+          'definition', pg_catalog.pg_get_indexdef(index_row.indexrelid)
+        )
+        order by
+          phase_relations.nspname,
+          phase_relations.relname,
+          index_relation.relname
+      )
+      from phase_relations
+      join pg_catalog.pg_index as index_row
+        on index_row.indrelid = phase_relations.oid
+      join pg_catalog.pg_class as index_relation
+        on index_relation.oid = index_row.indexrelid
+    ), '[]'::jsonb),
+    'policies', coalesce((
+      select jsonb_agg(
+        jsonb_build_object(
+          'table', format('%I.%I', phase_relations.nspname, phase_relations.relname),
+          'name', policy.polname,
+          'command', policy.polcmd,
+          'permissive', policy.polpermissive,
+          'roles', (
+            select jsonb_agg(role_name order by role_name)
+            from (
+              select coalesce(role.rolname, 'PUBLIC') as role_name
+              from unnest(policy.polroles) as role_oid
+              left join pg_catalog.pg_roles as role on role.oid = role_oid
+            ) as policy_roles
+          ),
+          'using', pg_catalog.pg_get_expr(policy.polqual, policy.polrelid),
+          'check', pg_catalog.pg_get_expr(policy.polwithcheck, policy.polrelid)
+        )
+        order by phase_relations.nspname, phase_relations.relname, policy.polname
+      )
+      from phase_relations
+      join pg_catalog.pg_policy as policy on policy.polrelid = phase_relations.oid
+    ), '[]'::jsonb),
+    'functions', coalesce((
+      select jsonb_agg(
+        jsonb_build_object(
+          'name', format(
+            '%I.%I(%s)',
+            phase_functions.nspname,
+            phase_functions.proname,
+            pg_catalog.pg_get_function_identity_arguments(procedure.oid)
+          ),
+          'owner', owner_role.rolname,
+          'language', language.lanname,
+          'return_type', pg_catalog.pg_get_function_result(procedure.oid),
+          'volatility', procedure.provolatile,
+          'security_definer', procedure.prosecdef,
+          'config', coalesce(to_jsonb(procedure.proconfig), '[]'::jsonb),
+          'definition', pg_catalog.pg_get_functiondef(procedure.oid),
+          'acl', coalesce((
+            select jsonb_agg(
+              jsonb_build_object(
+                'grantor', grantor_role.rolname,
+                'grantee', coalesce(grantee_role.rolname, 'PUBLIC'),
+                'privilege', privilege.privilege_type,
+                'grantable', privilege.is_grantable
+              )
+              order by
+                grantor_role.rolname,
+                coalesce(grantee_role.rolname, 'PUBLIC'),
+                privilege.privilege_type,
+                privilege.is_grantable
+            )
+            from aclexplode(
+              coalesce(procedure.proacl, acldefault('f', procedure.proowner))
+            ) as privilege
+            join pg_catalog.pg_roles as grantor_role
+              on grantor_role.oid = privilege.grantor
+            left join pg_catalog.pg_roles as grantee_role
+              on grantee_role.oid = nullif(privilege.grantee, 0)
+          ), '[]'::jsonb)
+        )
+        order by
+          phase_functions.nspname,
+          phase_functions.proname,
+          pg_catalog.pg_get_function_identity_arguments(procedure.oid)
+      )
+      from phase_functions
+      join pg_catalog.pg_proc as procedure on procedure.oid = phase_functions.oid
+      join pg_catalog.pg_roles as owner_role on owner_role.oid = procedure.proowner
+      join pg_catalog.pg_language as language on language.oid = procedure.prolang
+    ), '[]'::jsonb),
+    'triggers', coalesce((
+      select jsonb_agg(
+        jsonb_build_object(
+          'table', format('%I.%I', phase_relations.nspname, phase_relations.relname),
+          'name', trigger_row.tgname,
+          'enabled', trigger_row.tgenabled,
+          'definition', pg_catalog.pg_get_triggerdef(trigger_row.oid, true)
+        )
+        order by
+          phase_relations.nspname,
+          phase_relations.relname,
+          trigger_row.tgname
+      )
+      from phase_relations
+      join pg_catalog.pg_trigger as trigger_row
+        on trigger_row.tgrelid = phase_relations.oid
+      where not trigger_row.tgisinternal
+    ), '[]'::jsonb)
+  );
+$$;
+
 -- Do not silently remove API-schema access that might belong to an unrelated
 -- pre-existing object. A conflicting exposed schema is an explicit deployment
 -- error that an operator must resolve before applying this migration.
@@ -26,30 +487,119 @@ begin
 end;
 $$;
 
+create or replace function academy_private.is_canonical_unpadded_base64(
+  encoded_value text,
+  minimum_decoded_bytes integer,
+  maximum_decoded_bytes integer
+)
+returns boolean
+language plpgsql
+immutable
+set search_path = pg_catalog
+as $$
+declare
+  decoded_value bytea;
+  padded_value text;
+begin
+  if encoded_value is null
+     or encoded_value !~ '^[A-Za-z0-9+/]+$'
+     or length(encoded_value) % 4 = 1
+     or minimum_decoded_bytes < 1
+     or maximum_decoded_bytes < minimum_decoded_bytes then
+    return false;
+  end if;
+
+  padded_value := encoded_value
+    || case length(encoded_value) % 4
+         when 2 then '=='
+         when 3 then '='
+         else ''
+       end;
+  decoded_value := decode(padded_value, 'base64');
+
+  return octet_length(decoded_value)
+    between minimum_decoded_bytes and maximum_decoded_bytes;
+exception
+  when others then
+    return false;
+end;
+$$;
+
 create or replace function academy_private.is_valid_student_verifier(
   verifier_scheme text,
   verifier_digest text
+)
+returns boolean
+language plpgsql
+immutable
+set search_path = pg_catalog
+as $$
+declare
+  verifier_parts text[];
+begin
+  if verifier_digest is null
+     or length(verifier_digest) not between 80 and 512
+     or verifier_digest ~ '[[:space:]]' then
+    return false;
+  end if;
+
+  if verifier_scheme = 'argon2id' then
+    verifier_parts := regexp_match(
+      verifier_digest,
+      '^\$argon2id\$v=19\$m=([1-9][0-9]{3,8}),t=([1-9][0-9]{0,2}),p=([1-9][0-9]{0,2})\$([A-Za-z0-9+/]+)\$([A-Za-z0-9+/]+)$'
+    );
+  elsif verifier_scheme = 'scrypt' then
+    verifier_parts := regexp_match(
+      verifier_digest,
+      '^\$scrypt\$v=1\$ln=(1[4-9]|2[0-2]),r=([1-9][0-9]{0,3}),p=([1-9][0-9]{0,2})\$([A-Za-z0-9+/]+)\$([A-Za-z0-9+/]+)$'
+    );
+  else
+    return false;
+  end if;
+
+  return verifier_parts is not null
+    and academy_private.is_canonical_unpadded_base64(
+      verifier_parts[4],
+      16,
+      64
+    )
+    and academy_private.is_canonical_unpadded_base64(
+      verifier_parts[5],
+      32,
+      64
+    );
+end;
+$$;
+
+create or replace function academy_private.is_valid_raw_student_session_token(
+  raw_token text
 )
 returns boolean
 language sql
 immutable
 set search_path = pg_catalog
 as $$
-  select verifier_digest is not null
-    and length(verifier_digest) between 50 and 512
-    and verifier_digest !~ '[[:space:]]'
-    and (
-      (
-        verifier_scheme = 'argon2id'
-        and verifier_digest ~
-          '^\$argon2id\$v=19\$m=[1-9][0-9]{3,8},t=[1-9][0-9]{0,2},p=[1-9][0-9]{0,2}\$[A-Za-z0-9+/]{8,128}={0,2}\$[A-Za-z0-9+/]{16,255}={0,2}$'
-      )
-      or (
-        verifier_scheme = 'scrypt'
-        and verifier_digest ~
-          '^\$scrypt\$v=1\$ln=(1[4-9]|2[0-2]),r=[1-9][0-9]{0,3},p=[1-9][0-9]{0,2}\$[A-Za-z0-9+/]{8,128}={0,2}\$[A-Za-z0-9+/]{16,255}={0,2}$'
-      )
-    );
+  select raw_token is not null
+    and raw_token ~ '^aca_stu_v1_[A-Za-z0-9_-]{43}$';
+$$;
+
+create or replace function academy_private.security_text_is_safe(
+  candidate text,
+  maximum_bytes integer default 240
+)
+returns boolean
+language sql
+immutable
+set search_path = pg_catalog
+as $$
+  select candidate is not null
+    and length(btrim(candidate)) between 1 and maximum_bytes
+    and octet_length(candidate) <= maximum_bytes
+    and candidate !~ '[[:cntrl:]]'
+    and candidate !~* '\$(argon2id|scrypt)\$'
+    and candidate !~* 'aca[[:space:]_-]*stu[[:space:]_-]*v1[[:space:]_-]*[A-Za-z0-9_-]{20,}'
+    and candidate !~* '(^|[^0-9a-f])[0-9a-f]{64}([^0-9a-f]|$)'
+    and candidate !~* '(^|[^[:alnum:]_])(raw[[:space:]_-]*)?(pin|password|reset[[:space:]_-]*token|bearer([[:space:]_-]*token)?|token([[:space:]_-]*digest)?|verifier)([^[:alnum:]_]|$)[[:space:]]*[:=]';
 $$;
 
 create or replace function academy_private.student_capabilities_are_valid(
@@ -76,55 +626,161 @@ as $$
 $$;
 
 create or replace function academy_private.audit_details_are_safe(
+  event_name text,
   detail_values jsonb
 )
 returns boolean
-language sql
+language plpgsql
 immutable
 set search_path = pg_catalog
 as $$
-  select detail_values is not null
-    and jsonb_typeof(detail_values) = 'object'
-    and octet_length(detail_values::text) <= 4096
-    and detail_values::text !~*
-      '"(credential|credential_verifier|verifier|verifier_digest|raw_pin|pin|reset_token|bearer|bearer_token|token|token_digest|device_digest|jarvis|jarvis_transcript|transcript|student_content)"[[:space:]]*:'
-    and not exists (
-      select 1
-      from jsonb_each(detail_values) as item(detail_key, detail_value)
-      where item.detail_key not in (
-        'from',
-        'to',
-        'status',
-        'status_from',
-        'status_to',
-        'permission_level',
-        'permission_from',
-        'permission_to',
-        'membership_id',
+declare
+  allowed_keys text[];
+  item record;
+  scalar_text text;
+begin
+  if detail_values is null
+     or jsonb_typeof(detail_values) <> 'object'
+     or octet_length(detail_values::text) > 4096 then
+    return false;
+  end if;
+
+  allowed_keys := case event_name
+    when 'household.created' then array['status']
+    when 'household.status_changed' then array['from', 'to']
+    when 'membership.invited' then array['status']
+    when 'membership.activated' then array['status']
+    when 'membership.revoked' then array['status']
+    when 'student.created' then array['status']
+    when 'student.lifecycle_changed' then array['from', 'to']
+    when 'student.external_exit' then array['from', 'to']
+    when 'student.session_version_changed' then array['version_from', 'version_to']
+    when 'student.session_version_reset' then array['version']
+    when 'guardian_access.granted' then array['membership_id', 'permission_level']
+    when 'guardian_access.changed' then
+      array['membership_id', 'status_from', 'status_to', 'permission_from', 'permission_to']
+    when 'subject_enrollment.created' then
+      array[
         'subject_key',
         'school_year_key',
         'instructional_level',
         'course_id',
         'curriculum_version',
+        'status',
+        'placement_source'
+      ]
+    when 'subject_enrollment.changed' then
+      array[
+        'subject_key',
+        'status_from',
+        'status_to',
         'level_from',
         'level_to',
-        'placement_source',
-        'override_reason',
-        'failed_attempts',
-        'version',
-        'version_from',
-        'version_to',
-        'issuance_flow',
-        'expires_at',
-        'capability_schema_version'
-      )
-      or jsonb_typeof(item.detail_value) not in (
-        'string',
-        'number',
-        'boolean',
-        'null'
-      )
-    );
+        'placement_source'
+      ]
+    when 'credential.created' then array['version', 'status', 'failed_attempts']
+    when 'credential.failed_attempt' then array['version', 'status', 'failed_attempts']
+    when 'credential.locked' then array['version', 'status', 'failed_attempts']
+    when 'credential.unlocked' then array['version', 'status', 'failed_attempts']
+    when 'credential.reset_required' then array['version', 'status', 'failed_attempts']
+    when 'credential.replaced' then array['version', 'status', 'failed_attempts']
+    when 'credential.revoked' then array['version', 'status', 'failed_attempts']
+    when 'student_session.issued' then
+      array['issuance_flow', 'expires_at', 'version', 'capability_schema_version']
+    when 'student_session.revoked' then array['version']
+    when 'student_session.expired' then array['version']
+    else null
+  end;
+
+  if allowed_keys is null
+     or exists (
+       select 1
+       from jsonb_object_keys(detail_values) as detail_key
+       where detail_key <> all(allowed_keys)
+     )
+     or exists (
+       select 1
+       from unnest(allowed_keys) as required_key
+       where not detail_values ? required_key
+     ) then
+    return false;
+  end if;
+
+  for item in
+    select detail_key, detail_value
+    from jsonb_each(detail_values) as valueset(detail_key, detail_value)
+  loop
+    if jsonb_typeof(item.detail_value) not in ('string', 'number', 'null') then
+      return false;
+    end if;
+
+    if jsonb_typeof(item.detail_value) = 'string' then
+      scalar_text := item.detail_value #>> '{}';
+      if not academy_private.security_text_is_safe(scalar_text, 240) then
+        return false;
+      end if;
+    else
+      scalar_text := null;
+    end if;
+
+    if item.detail_key in ('status', 'status_from', 'status_to')
+       and scalar_text not in (
+         'active', 'archived', 'invited', 'revoked', 'paused', 'transferred',
+         'graduated', 'deactivated', 'planned', 'completed', 'withdrawn',
+         'locked', 'reset_required', 'replaced'
+       ) then
+      return false;
+    elsif item.detail_key in ('from', 'to')
+       and scalar_text not in (
+         'active', 'archived', 'invited', 'paused', 'transferred',
+         'graduated', 'deactivated'
+       ) then
+      return false;
+    elsif item.detail_key in ('permission_level', 'permission_from', 'permission_to')
+       and scalar_text not in ('viewer', 'learning_manager', 'identity_manager') then
+      return false;
+    elsif item.detail_key = 'placement_source'
+       and scalar_text not in ('placement', 'parent', 'staff', 'import') then
+      return false;
+    elsif item.detail_key = 'issuance_flow'
+       and scalar_text not in ('student_credential', 'guardian_activation', 'trusted_recovery') then
+      return false;
+    elsif item.detail_key = 'membership_id'
+       and scalar_text !~ '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$' then
+      return false;
+    elsif item.detail_key in (
+      'subject_key',
+      'instructional_level',
+      'level_from',
+      'level_to'
+    )
+      and scalar_text is not null
+      and scalar_text !~ '^[A-Za-z0-9][A-Za-z0-9._:/ -]{0,79}$' then
+      return false;
+    elsif item.detail_key = 'school_year_key'
+      and scalar_text !~ '^[A-Za-z0-9][A-Za-z0-9._:/ -]{0,39}$' then
+      return false;
+    elsif item.detail_key in ('course_id', 'curriculum_version')
+      and scalar_text is not null
+      and scalar_text !~ '^[A-Za-z0-9][A-Za-z0-9._:/ -]{0,119}$' then
+      return false;
+    elsif item.detail_key in (
+      'failed_attempts',
+      'version',
+      'version_from',
+      'version_to',
+      'capability_schema_version'
+    )
+      and jsonb_typeof(item.detail_value) <> 'number' then
+      return false;
+    elsif item.detail_key = 'expires_at'
+      and scalar_text !~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:.+-]+$' then
+      return false;
+    end if;
+  end loop;
+
+  return true;
+end;
 $$;
 
 create table if not exists public.academy_households (
@@ -140,7 +796,7 @@ create table if not exists public.academy_households (
     status = 'active'
     or (
       status_reason is not null
-      and length(btrim(status_reason)) between 1 and 1000
+      and academy_private.security_text_is_safe(status_reason)
     )
   )
 );
@@ -180,7 +836,7 @@ create table if not exists public.academy_household_memberships (
       and revoked_at is not null
       and revoked_at >= invited_at
       and revocation_reason is not null
-      and length(btrim(revocation_reason)) between 1 and 1000
+      and academy_private.security_text_is_safe(revocation_reason)
     )
   ),
   constraint academy_household_memberships_id_household_key
@@ -221,7 +877,7 @@ create table if not exists public.academy_students (
     lifecycle_status not in ('transferred', 'archived', 'deactivated')
     or (
       lifecycle_reason is not null
-      and length(btrim(lifecycle_reason)) between 1 and 1000
+      and academy_private.security_text_is_safe(lifecycle_reason)
     )
   )
 );
@@ -265,7 +921,7 @@ create table if not exists public.academy_guardian_student_access (
       and revoked_at is not null
       and revoked_at >= granted_at
       and revocation_reason is not null
-      and length(btrim(revocation_reason)) between 1 and 1000
+      and academy_private.security_text_is_safe(revocation_reason)
     )
   )
 );
@@ -317,7 +973,7 @@ create table if not exists public.academy_subject_enrollments (
     or (
       override_by is not null
       and override_reason is not null
-      and length(btrim(override_reason)) between 1 and 1000
+      and academy_private.security_text_is_safe(override_reason)
     )
   )
 );
@@ -372,11 +1028,14 @@ create table if not exists public.academy_audit_events (
         'student_session.expired'
       )
     ),
-  reason text check (reason is null or length(btrim(reason)) between 1 and 1000),
+  reason text check (
+    reason is null
+    or academy_private.security_text_is_safe(reason)
+  ),
   correlation_id uuid,
   occurred_at timestamptz not null default now(),
   details jsonb not null default '{}'::jsonb
-    check (academy_private.audit_details_are_safe(details)),
+    check (academy_private.audit_details_are_safe(event_type, details)),
   constraint academy_audit_events_student_household_fk
     foreign key (student_id, household_id)
     references public.academy_students (id, household_id)
@@ -398,11 +1057,6 @@ create table if not exists academy_private.student_access_credentials (
   verifier_format_version smallint not null default 1
     check (verifier_format_version = 1),
   verifier_digest text not null,
-  verifier_parameters jsonb not null default '{}'::jsonb
-    check (
-      jsonb_typeof(verifier_parameters) = 'object'
-      and octet_length(verifier_parameters::text) <= 2048
-    ),
   status text not null default 'active'
     check (status in ('active', 'locked', 'reset_required', 'revoked', 'replaced')),
   replaces_credential_id uuid,
@@ -410,7 +1064,10 @@ create table if not exists academy_private.student_access_credentials (
     check (created_actor_kind in ('guardian', 'trusted_server', 'system')),
   created_by uuid references auth.users (id) on delete set null,
   creation_reason text not null
-    check (length(btrim(creation_reason)) between 1 and 1000),
+    check (
+      academy_private.security_text_is_safe(creation_reason)
+      and btrim(creation_reason) !~ '^[0-9]{4}$'
+    ),
   created_at timestamptz not null default now(),
   activated_at timestamptz not null default now(),
   failed_attempts integer not null default 0 check (failed_attempts >= 0),
@@ -504,7 +1161,8 @@ create table if not exists academy_private.student_access_credentials (
       and locked_until is null
       and reset_required_at is not null
       and reset_reason is not null
-      and length(btrim(reset_reason)) between 1 and 1000
+      and academy_private.security_text_is_safe(reset_reason)
+      and btrim(reset_reason) !~ '^[0-9]{4}$'
       and replaced_actor_kind is null
       and replaced_by is null
       and replacement_reason is null
@@ -518,7 +1176,8 @@ create table if not exists academy_private.student_access_credentials (
       and revoked_at >= activated_at
       and revoked_actor_kind is not null
       and revocation_reason is not null
-      and length(btrim(revocation_reason)) between 1 and 1000
+      and academy_private.security_text_is_safe(revocation_reason)
+      and btrim(revocation_reason) !~ '^[0-9]{4}$'
       and replaced_at is null
       and replaced_actor_kind is null
       and replaced_by is null
@@ -534,7 +1193,8 @@ create table if not exists academy_private.student_access_credentials (
       and replaced_at >= activated_at
       and replaced_actor_kind is not null
       and replacement_reason is not null
-      and length(btrim(replacement_reason)) between 1 and 1000
+      and academy_private.security_text_is_safe(replacement_reason)
+      and btrim(replacement_reason) !~ '^[0-9]{4}$'
       and revoked_at is null
       and revoked_actor_kind is null
       and revoked_by is null
@@ -586,7 +1246,7 @@ create table if not exists academy_private.student_session_grants (
   issuing_membership_id uuid,
   issuing_access_id uuid,
   issuance_reason text not null
-    check (length(btrim(issuance_reason)) between 1 and 1000),
+    check (academy_private.security_text_is_safe(issuance_reason)),
   correlation_id uuid not null,
   device_digest text
     check (device_digest is null or device_digest ~ '^[0-9a-f]{64}$'),
@@ -664,63 +1324,26 @@ create table if not exists academy_private.student_session_grants (
       and revoked_at >= issued_at
       and revoked_actor_kind is not null
       and revocation_reason is not null
-      and length(btrim(revocation_reason)) between 1 and 1000
+      and academy_private.security_text_is_safe(revocation_reason)
       and (revoked_actor_kind <> 'guardian' or revoked_by is not null)
     )
   )
 );
 
--- Fail clearly if an object with one of these names existed with an incompatible
--- essential column type. Extra future additive columns remain valid.
-do $$
-declare
-  expected record;
-begin
-  for expected in
-    select *
-    from (
-      values
-        ('public', 'academy_households', 'id', 'uuid'::regtype),
-        ('public', 'academy_households', 'status', 'text'::regtype),
-        ('public', 'academy_household_memberships', 'id', 'uuid'::regtype),
-        ('public', 'academy_household_memberships', 'household_id', 'uuid'::regtype),
-        ('public', 'academy_students', 'id', 'uuid'::regtype),
-        ('public', 'academy_students', 'household_id', 'uuid'::regtype),
-        ('public', 'academy_students', 'session_version', 'bigint'::regtype),
-        ('public', 'academy_guardian_student_access', 'student_id', 'uuid'::regtype),
-        ('public', 'academy_subject_enrollments', 'subject_key', 'text'::regtype),
-        ('public', 'academy_audit_events', 'event_type', 'text'::regtype),
-        ('academy_private', 'student_access_credentials', 'credential_version', 'integer'::regtype),
-        ('academy_private', 'student_access_credentials', 'verifier_digest', 'text'::regtype),
-        ('academy_private', 'student_session_grants', 'token_digest', 'text'::regtype),
-        ('academy_private', 'student_session_grants', 'capabilities', 'text[]'::regtype)
-    ) as required(schema_name, table_name, column_name, column_type)
-  loop
-    if not exists (
-      select 1
-      from pg_catalog.pg_namespace as namespace
-      join pg_catalog.pg_class as relation
-        on relation.relnamespace = namespace.oid
-      join pg_catalog.pg_attribute as attribute
-        on attribute.attrelid = relation.oid
-      where namespace.nspname = expected.schema_name
-        and relation.relname = expected.table_name
-        and relation.relkind in ('r', 'p')
-        and attribute.attname = expected.column_name
-        and attribute.atttypid = expected.column_type
-        and attribute.attnum > 0
-        and not attribute.attisdropped
-    ) then
-      raise exception
-        'incompatible pre-existing object: %.% requires column % of type %',
-        expected.schema_name,
-        expected.table_name,
-        expected.column_name,
-        expected.column_type;
-    end if;
-  end loop;
-end;
-$$;
+create table if not exists academy_private.identity_foundation_metadata (
+  singleton boolean primary key default true check (singleton),
+  foundation_version integer not null check (foundation_version = 2),
+  migration_name text not null
+    check (
+      migration_name =
+        '20260724230000_academy_student_identity_foundation'
+    ),
+  expected_owner name not null check (expected_owner = 'postgres'),
+  security_manifest jsonb not null,
+  applied_at timestamptz not null default now(),
+  verification_count bigint not null default 1 check (verification_count > 0),
+  last_verified_at timestamptz not null default now()
+);
 
 create unique index if not exists academy_student_credentials_one_current_kind_idx
   on academy_private.student_access_credentials (student_id, credential_kind)
@@ -865,6 +1488,8 @@ alter table academy_private.student_access_credentials enable row level security
 alter table academy_private.student_access_credentials force row level security;
 alter table academy_private.student_session_grants enable row level security;
 alter table academy_private.student_session_grants force row level security;
+alter table academy_private.identity_foundation_metadata enable row level security;
+alter table academy_private.identity_foundation_metadata force row level security;
 
 drop policy if exists academy_households_guardian_select
   on public.academy_households;
@@ -940,6 +1565,8 @@ revoke all on table academy_private.student_access_credentials
   from public, anon, authenticated;
 revoke all on table academy_private.student_session_grants
   from public, anon, authenticated;
+revoke all on table academy_private.identity_foundation_metadata
+  from public, anon, authenticated, service_role;
 
 grant usage on schema academy_private to service_role;
 grant select, insert, update
@@ -1377,8 +2004,7 @@ begin
         'status_to', new.enrollment_status,
         'level_from', old.instructional_level,
         'level_to', new.instructional_level,
-        'placement_source', new.placement_source,
-        'override_reason', new.override_reason
+        'placement_source', new.placement_source
       )
     );
   end if;
@@ -1435,7 +2061,6 @@ begin
     new.verifier_scheme,
     new.verifier_format_version,
     new.verifier_digest,
-    new.verifier_parameters,
     new.replaces_credential_id,
     new.created_actor_kind,
     new.created_by,
@@ -1452,7 +2077,6 @@ begin
     old.verifier_scheme,
     old.verifier_format_version,
     old.verifier_digest,
-    old.verifier_parameters,
     old.replaces_credential_id,
     old.created_actor_kind,
     old.created_by,
@@ -1707,6 +2331,7 @@ as $$
     where grant_row.id = target_grant_id
       and household.status = 'active'
       and student.lifecycle_status = 'active'
+      and grant_row.issued_at <= now()
       and grant_row.revoked_at is null
       and grant_row.expires_at > now()
       and grant_row.session_version = student.session_version
@@ -1948,12 +2573,21 @@ grant execute on function public.academy_is_current_guardian_membership(uuid)
 grant execute on function public.academy_has_student_permission(uuid, text)
   to authenticated;
 
+revoke all on function academy_private.is_canonical_unpadded_base64(
+  text, integer, integer
+) from public, anon, authenticated;
 revoke all on function academy_private.is_valid_student_verifier(text, text)
+  from public, anon, authenticated;
+revoke all on function academy_private.is_valid_raw_student_session_token(text)
+  from public, anon, authenticated;
+revoke all on function academy_private.security_text_is_safe(text, integer)
   from public, anon, authenticated;
 revoke all on function academy_private.student_capabilities_are_valid(text[])
   from public, anon, authenticated;
-revoke all on function academy_private.audit_details_are_safe(jsonb)
+revoke all on function academy_private.audit_details_are_safe(text, jsonb)
   from public, anon, authenticated;
+revoke all on function academy_private.identity_foundation_manifest()
+  from public, anon, authenticated, service_role;
 revoke all on function academy_private.touch_updated_at()
   from public, anon, authenticated, service_role;
 revoke all on function academy_private.prevent_historical_delete()
@@ -1992,7 +2626,14 @@ revoke all on function academy_private.is_student_session_grant_current(uuid)
 revoke all on function academy_private.reset_student_sessions(uuid, text, uuid)
   from public, anon, authenticated;
 
+grant execute on function academy_private.is_canonical_unpadded_base64(
+  text, integer, integer
+) to service_role;
 grant execute on function academy_private.is_valid_student_verifier(text, text)
+  to service_role;
+grant execute on function academy_private.is_valid_raw_student_session_token(text)
+  to service_role;
+grant execute on function academy_private.security_text_is_safe(text, integer)
   to service_role;
 grant execute on function academy_private.student_capabilities_are_valid(text[])
   to service_role;
@@ -2000,5 +2641,47 @@ grant execute on function academy_private.is_student_session_grant_current(uuid)
   to service_role;
 grant execute on function academy_private.reset_student_sessions(uuid, text, uuid)
   to service_role;
+
+do $$
+declare
+  current_manifest jsonb;
+  stored_manifest jsonb;
+begin
+  current_manifest := academy_private.identity_foundation_manifest();
+
+  select security_manifest
+  into stored_manifest
+  from academy_private.identity_foundation_metadata
+  where singleton
+  for update;
+
+  if found then
+    if current_manifest is distinct from stored_manifest then
+      raise exception
+        'Academy identity security manifest changed during rerun; transaction aborted';
+    end if;
+
+    update academy_private.identity_foundation_metadata
+    set verification_count = verification_count + 1,
+        last_verified_at = now()
+    where singleton;
+  else
+    insert into academy_private.identity_foundation_metadata (
+      singleton,
+      foundation_version,
+      migration_name,
+      expected_owner,
+      security_manifest
+    )
+    values (
+      true,
+      2,
+      '20260724230000_academy_student_identity_foundation',
+      'postgres',
+      current_manifest
+    );
+  end if;
+end;
+$$;
 
 commit;
