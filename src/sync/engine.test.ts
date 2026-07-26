@@ -36,6 +36,7 @@ const boundMeta = (
     local,
     remote,
     T1,
+    '4',
   ),
   binding: 'bound',
   ownsLocalData: true,
@@ -136,7 +137,7 @@ describe('safe reconciliation', () => {
     const base = profile()
     const meta = boundMeta({ p1: base }, [row(base)])
     const localChanged = { p1: { ...base, name: 'Local Ada' } }
-    const plan = automaticSyncPlan(localChanged, [row(base)], meta, T2)
+    const plan = automaticSyncPlan(localChanged, [row(base)], meta, T2, '4')
     expect(plan.ok).toBe(true)
     if (!plan.ok) return
     expect(plan.toPush).toHaveLength(1)
@@ -151,6 +152,7 @@ describe('safe reconciliation', () => {
       [row({ ...base, name: 'Cloud Ada' }, T2)],
       meta,
       T2,
+      '4',
     )
     expect(plan.ok).toBe(false)
     if (plan.ok) return

@@ -20,6 +20,7 @@ import {
   claimLocalData,
   householdMetaPrefixForTests,
   legacySyncKeysForTests,
+  listOwnershipTransitions,
   loadHouseholdMeta,
   saveHouseholdMeta,
   transitionPrefixForTests,
@@ -46,6 +47,7 @@ const transport = vi.hoisted(() => {
   return {
     sessionUser: null as null | { id: string; email: string },
     authListeners: new Set<AuthListener>(),
+    authContextOverride: null as null | (() => Promise<unknown>),
     pull: vi.fn<() => Promise<CloudPullResult>>(),
     push: vi.fn<() => Promise<CloudPushResult>>(),
   }
@@ -69,16 +71,30 @@ vi.mock('./supabase', async (importOriginal) => {
         return () => transport.authListeners.delete(listener)
       },
     ),
-    getVerifiedAuthContext: vi.fn(async () =>
-      transport.sessionUser
+    getVerifiedAuthContext: vi.fn(async (_client?: unknown, signal?: AbortSignal) => {
+      if (transport.authContextOverride) {
+        const pending = transport.authContextOverride()
+        if (!signal) return pending
+        if (signal.aborted) return null
+        return new Promise((resolve) => {
+          const aborted = () => resolve(null)
+          signal.addEventListener('abort', aborted, { once: true })
+          void pending.then((value) => {
+            signal.removeEventListener('abort', aborted)
+            resolve(signal.aborted ? null : value)
+          })
+        })
+      }
+      return transport.sessionUser
         ? {
             user: transport.sessionUser,
             accessToken: 'header.payload.signature',
             verifiedAt: Date.now(),
             kind: 'supabase-access-token' as const,
           }
-        : null,
-    ),
+        : null
+    }),
+    getVerifiedCurrentUser: vi.fn(async () => transport.sessionUser),
     verifyPinnedAuthContext: vi.fn(
       async (context: { user?: { id?: string } }, expected: string) =>
         transport.sessionUser?.id === expected &&
@@ -288,6 +304,7 @@ describe('mounted useSync lifecycle and import safety', () => {
   let latestApi: ReturnType<typeof import('./useSync')['useSync']> | null
   let updateHostState: Dispatch<SetStateAction<AppState>> | null
   let root: import('react-dom/client').Root | null
+  let renderedState: AppState | null
 
   beforeEach(() => {
     setFinalizationStageHookForTests(null)
@@ -320,13 +337,15 @@ describe('mounted useSync lifecycle and import safety', () => {
     vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true)
     transport.sessionUser = null
     transport.authListeners.clear()
+    transport.authContextOverride = null
     transport.pull.mockReset()
-    transport.pull.mockResolvedValue({ ok: true, rows: [] })
+    transport.pull.mockResolvedValue({ ok: true, rows: [], revision: '0' })
     transport.push.mockReset()
-    transport.push.mockResolvedValue({ ok: true })
+    transport.push.mockResolvedValue({ ok: true, revision: '1' })
     latestApi = null
     updateHostState = null
     root = null
+    renderedState = null
     online = true
   })
 
@@ -372,6 +391,7 @@ describe('mounted useSync lifecycle and import safety', () => {
 
     function Host() {
       const [state, setState] = useState(initialState)
+      renderedState = state
       useEffect(() => {
         void saveAppState(state)
       }, [state])
@@ -429,11 +449,137 @@ describe('mounted useSync lifecycle and import safety', () => {
     transport.pull.mockResolvedValue({
       ok: true,
       rows: [rowFor(cloudState)],
+      revision: '1',
     })
     await prepareState(null, state)
     await mount(state)
     await waitFor(() => latestApi?.status.decision?.cloud === 'data')
   }
+
+  async function expectFinalizedReplacement(
+    householdId: string,
+    expectedState: AppState,
+  ) {
+    const persisted = JSON.parse(
+      localStorage.getItem('homeschool-hq:app:v2')!,
+    ) as AppState
+    const fingerprint = await datasetFingerprint(expectedState)
+    expect(await datasetFingerprint(persisted)).toBe(fingerprint)
+    expect(await datasetFingerprint(renderedState!)).toBe(fingerprint)
+    expect(readDatasetProvenance()).toMatchObject({
+      fingerprint,
+      importTransition: null,
+    })
+    expect(loadHouseholdMeta(householdId)).toMatchObject({
+      binding: 'bound',
+      ownsLocalData: true,
+      datasetFingerprint: fingerprint,
+      reconciliation: 'ready',
+    })
+    expect(listOwnershipTransitions()).toEqual([])
+    expect(latestApi?.status.decision).toBeNull()
+    expect(latestApi?.status.error).toBeNull()
+  }
+
+  it('successfully finalizes an ordinary use-cloud replacement', async () => {
+    const local = defaultAppState()
+    const cloud = structuredClone(local)
+    cloud.profiles.p1.name = 'Cloud student'
+    await openCloudDataDecision(local, cloud)
+
+    await act(async () => latestApi!.useCloud())
+
+    await expectFinalizedReplacement('household-a', {
+      ...local,
+      profiles: { p1: cloud.profiles.p1 },
+      activeProfileId: 'p1',
+    })
+  })
+
+  it('successfully finalizes a parent-reviewed merge', async () => {
+    const local = defaultAppState()
+    local.profiles.p1.name = 'Local student'
+    const cloud = defaultAppState()
+    cloud.profiles.p1.name = 'Cloud student'
+    transport.push.mockResolvedValue({ ok: true, revision: '2' })
+    await openCloudDataDecision(local, cloud)
+
+    await act(async () =>
+      latestApi!.applyReviewedMerge({ p1: 'cloud' }),
+    )
+
+    const expected = structuredClone(local)
+    expected.profiles.p1 = cloud.profiles.p1
+    await expectFinalizedReplacement('household-a', expected)
+    expect(loadHouseholdMeta('household-a').cloudRevision).toBe('2')
+  })
+
+  it('successfully finalizes an automatic cloud-only replacement', async () => {
+    const local = defaultAppState()
+    local.profiles = {}
+    local.activeProfileId = null
+    const cloud = defaultAppState()
+    cloud.profiles = { p1: cloud.profiles.p1 }
+    cloud.activeProfileId = 'p1'
+    transport.sessionUser = {
+      id: 'household-a',
+      email: 'household-a@example.com',
+    }
+    transport.pull.mockResolvedValue({
+      ok: true,
+      rows: [rowFor(cloud)],
+      revision: '1',
+    })
+    await prepareState('household-a', local)
+    await mount(local)
+    await waitFor(
+      () =>
+        loadHouseholdMeta('household-a').ownsLocalData &&
+        renderedState?.profiles.p1 !== undefined,
+    )
+
+    await expectFinalizedReplacement('household-a', {
+      ...local,
+      profiles: { p1: cloud.profiles.p1 },
+      activeProfileId: null,
+    })
+    expect(transport.push).not.toHaveBeenCalled()
+  })
+
+  it('keeps local data unbound and refreshes review after another device wins CAS', async () => {
+    const local = defaultAppState()
+    await openEmptyCloudDecision(local)
+    const newerCloud = structuredClone(local)
+    newerCloud.profiles.p1.name = 'Other device student'
+    transport.pull
+      .mockResolvedValueOnce({ ok: true, rows: [], revision: '0' })
+      .mockResolvedValueOnce({ ok: true, rows: [], revision: '0' })
+      .mockResolvedValueOnce({
+        ok: true,
+        rows: [rowFor(newerCloud)],
+        revision: '1',
+      })
+    transport.push.mockResolvedValueOnce({
+      ok: false,
+      conflict: true,
+      revision: '1',
+      error: 'Another device updated this household first.',
+    })
+
+    await expect(
+      act(async () => latestApi!.uploadLocal()),
+    ).rejects.toThrow('Another device')
+    await waitFor(() => latestApi?.status.decision?.reason === 'conflict')
+
+    expect(loadHouseholdMeta('household-a')).toMatchObject({
+      binding: 'unbound',
+      ownsLocalData: false,
+      reconciliation: 'review',
+      cloudRevision: '1',
+    })
+    expect(latestApi?.status.decision?.reason).toBe('conflict')
+    expect(renderedState?.profiles.p1.name).toBe(local.profiles.p1.name)
+  })
 
   it('keeps an exact duplicate import durably unbound across remount', async () => {
     online = false
@@ -586,7 +732,7 @@ describe('mounted useSync lifecycle and import safety', () => {
     const result = importBackup(state, JSON.stringify(state))
     if (!result.ok) throw new Error(result.error)
     await act(async () => updateHostState!(result.state))
-    pending.resolve({ ok: true })
+    pending.resolve({ ok: true, revision: '1' })
     await expect(uploadObserved).resolves.toBeInstanceOf(Error)
     await settle()
 
@@ -606,7 +752,7 @@ describe('mounted useSync lifecycle and import safety', () => {
       await latestApi!.signOut()
     })
     await settle()
-    pendingSignOut.resolve({ ok: true })
+    pendingSignOut.resolve({ ok: true, revision: '1' })
     await expect(signOutObserved).resolves.toBeInstanceOf(Error)
     expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
 
@@ -629,9 +775,50 @@ describe('mounted useSync lifecycle and import safety', () => {
         email: 'household-b@example.com',
       })
     })
-    pendingSwitch.resolve({ ok: true })
+    pendingSwitch.resolve({ ok: true, revision: '1' })
     await expect(switchObserved).resolves.toBeInstanceOf(Error)
     expect(loadHouseholdMeta('household-b').ownsLocalData).toBe(false)
+  })
+
+  it('denies finalization when the canonical session switches before the auth callback', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const pending = deferred<CloudPushResult>()
+    transport.push.mockImplementationOnce(() => pending.promise)
+    const upload = latestApi!.uploadLocal()
+    const observed = upload.catch((cause) => cause)
+    await waitFor(() => transport.push.mock.calls.length === 1)
+
+    // No auth listener is emitted: canonical verification must stand on its own.
+    transport.sessionUser = {
+      id: 'household-b',
+      email: 'household-b@example.com',
+    }
+    pending.resolve({ ok: true, revision: '1' })
+
+    await expect(observed).resolves.toBeInstanceOf(Error)
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+    expect(loadHouseholdMeta('household-b').ownsLocalData).toBe(false)
+  })
+
+  it('allows a same-household token refresh during an active mutation without duplicating inspection', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const pullsBefore = transport.pull.mock.calls.length
+    const pending = deferred<CloudPushResult>()
+    transport.push.mockImplementationOnce(() => pending.promise)
+    const upload = latestApi!.uploadLocal()
+    await waitFor(() => transport.push.mock.calls.length === 1)
+
+    emitAuth('TOKEN_REFRESHED', {
+      id: 'household-a',
+      email: 'refreshed@example.com',
+    })
+    pending.resolve({ ok: true, revision: '1' })
+
+    await expect(upload).resolves.toBeUndefined()
+    expect(transport.pull).toHaveBeenCalledTimes(pullsBefore + 2)
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(true)
   })
 
   it('does not commit after unmount during pull or push', async () => {
@@ -646,7 +833,7 @@ describe('mounted useSync lifecycle and import safety', () => {
     await mount(state)
     await act(async () => root!.unmount())
     root = null
-    pullPending.resolve({ ok: true, rows: [] })
+    pullPending.resolve({ ok: true, rows: [], revision: '0' })
     await settle()
     expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
 
@@ -657,7 +844,7 @@ describe('mounted useSync lifecycle and import safety', () => {
     await waitFor(() => transport.push.mock.calls.length === 1)
     await act(async () => root!.unmount())
     root = null
-    pushPending.resolve({ ok: true })
+    pushPending.resolve({ ok: true, revision: '1' })
     await expect(upload).rejects.toThrow()
     expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
   })
@@ -683,9 +870,36 @@ describe('mounted useSync lifecycle and import safety', () => {
     await waitFor(() => transport.push.mock.calls.length === 1)
     const second = latestApi!.uploadLocal()
     await expect(second).rejects.toThrow('already in progress')
-    pending.resolve({ ok: true })
+    pending.resolve({ ok: true, revision: '1' })
     await expect(first).resolves.toBeUndefined()
     expect(transport.push).toHaveBeenCalledOnce()
+  })
+
+  it('aborts a hung authorization wait and ignores its late completion', async () => {
+    const state = defaultAppState()
+    await openEmptyCloudDecision(state)
+    const authStarted = deferred<void>()
+    const lateAuth = deferred<unknown>()
+    transport.authContextOverride = () => {
+      authStarted.resolve(undefined)
+      return lateAuth.promise
+    }
+    const upload = latestApi!.uploadLocal()
+    const observed = upload.catch((cause) => cause)
+    await authStarted.promise
+
+    await act(async () => latestApi!.signOut())
+    await expect(observed).resolves.toBeInstanceOf(Error)
+    lateAuth.resolve({
+      user: { id: 'household-a', email: 'household-a@example.com' },
+      accessToken: 'header.payload.signature',
+      verifiedAt: Date.now(),
+      kind: 'supabase-access-token',
+    })
+    await settle()
+
+    expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
+    expect(localStorage.getItem(leaseStorageKeyForTests('household-a'))).toBeNull()
   })
 
   it('blocks mutation after another-tab binding change', async () => {
@@ -721,7 +935,7 @@ describe('mounted useSync lifecycle and import safety', () => {
       if (pulls === 3) {
         beginConfirmedImportInvalidation('Another tab imported data.')
       }
-      return { ok: true, rows: [] }
+      return { ok: true, rows: [], revision: '0' }
     })
     await openEmptyCloudDecision(state)
     await expect(latestApi!.uploadLocal()).rejects.toThrow()
@@ -737,7 +951,7 @@ describe('mounted useSync lifecycle and import safety', () => {
     const upload = latestApi!.uploadLocal()
     await waitFor(() => transport.push.mock.calls.length === 1)
     localStorage.removeItem(leaseStorageKeyForTests('household-a'))
-    pending.resolve({ ok: true })
+    pending.resolve({ ok: true, revision: '1' })
     await expect(upload).rejects.toThrow()
     expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
   })
@@ -886,7 +1100,7 @@ describe('mounted useSync lifecycle and import safety', () => {
 
     await expect(observed).resolves.toBeInstanceOf(Error)
     expect(loadHouseholdMeta('household-a').ownsLocalData).toBe(false)
-    newerPull.resolve({ ok: true, rows: [] })
+    newerPull.resolve({ ok: true, rows: [], revision: '0' })
     await settle()
   })
 
@@ -902,7 +1116,12 @@ describe('mounted useSync lifecycle and import safety', () => {
     const observed = replacement.catch((cause) => cause)
     await pause.entered
 
-    const transitionKey = `${transitionPrefixForTests}household-a`
+    const transitionKey = Array.from(
+      { length: localStorage.length },
+      (_, index) => localStorage.key(index),
+    ).find((key) =>
+      key?.startsWith(`${transitionPrefixForTests}household-a:`),
+    )!
     const transition = JSON.parse(localStorage.getItem(transitionKey)!)
     localStorage.setItem(
       transitionKey,

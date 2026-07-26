@@ -25,9 +25,8 @@ describe('sync operation lifecycle guards', () => {
 
   it('keys initial reconciliation to user id so token refresh does not duplicate it', () => {
     expect(source).toContain('user?.id,')
-    expect(source).toContain(
-      'if (userRef.current?.id && userRef.current.id !== next?.id)',
-    )
+    expect(source).toContain('const householdChanged =')
+    expect(source).toContain('if (householdChanged) setRecoveryReady(false)')
   })
 
   it('observes import, AppState, binding, transition, and lease changes', () => {

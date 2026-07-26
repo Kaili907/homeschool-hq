@@ -13,6 +13,7 @@ import {
   readPersistedDataset,
   sha256Hex,
   validateAppStateForSync,
+  validateRemoteProfileRows,
   verifyOwnedDatasetProvenance,
 } from './provenance'
 import { emptyHouseholdMeta } from './types'
@@ -361,5 +362,108 @@ describe('persisted Academy dataset provenance', () => {
     mutate(state)
     expect(validateAppStateForSync(state)).toMatchObject({ ok: false })
     await expect(datasetFingerprint(state)).rejects.toThrow()
+  })
+})
+
+describe('bounded remote profile validation', () => {
+  function remoteRow() {
+    return {
+      profile_id: 'p1',
+      data: defaultAppState().profiles.p1,
+      updated_at: '2026-07-26T12:00:00.000Z',
+    }
+  }
+
+  it('accepts a valid row before hashing or preview construction', () => {
+    expect(validateRemoteProfileRows([remoteRow()])).toMatchObject({
+      ok: true,
+    })
+  })
+
+  it.each([
+    ['reserved or unapproved profile id', () => ({ ...remoteRow(), profile_id: '__proto__' })],
+    ['nonfinite number', () => {
+      const row = remoteRow()
+      row.data.totals.sessions = Number.POSITIVE_INFINITY
+      return row
+    }],
+    ['malformed calendar date', () => {
+      const row = remoteRow()
+      row.data.missions['2026-02-30'] = { items: [] }
+      return row
+    }],
+    ['unsupported record', () => {
+      const row = remoteRow() as ReturnType<typeof remoteRow> & {
+        unsupported?: unknown
+      }
+      row.unsupported = new Date()
+      return row
+    }],
+  ])('rejects %s', (_label, makeRow) => {
+    expect(validateRemoteProfileRows([makeRow()])).toMatchObject({ ok: false })
+  })
+
+  it('rejects deeply nested and oversized additive data', () => {
+    const deep = remoteRow() as ReturnType<typeof remoteRow> & {
+      data: Record<string, unknown>
+    }
+    let cursor: Record<string, unknown> = deep.data
+    for (let depth = 0; depth < 140; depth += 1) {
+      const next: Record<string, unknown> = {}
+      cursor.additive = next
+      cursor = next
+    }
+    expect(validateRemoteProfileRows([deep])).toMatchObject({ ok: false })
+
+    const oversized = remoteRow() as ReturnType<typeof remoteRow> & {
+      data: Record<string, unknown>
+    }
+    oversized.data.additive = 'x'.repeat(1_000_001)
+    expect(validateRemoteProfileRows([oversized])).toMatchObject({ ok: false })
+  })
+
+  it('rejects sparse and excessive arrays and excessive object keys', () => {
+    const sparse = remoteRow() as ReturnType<typeof remoteRow> & {
+      data: Record<string, unknown>
+    }
+    sparse.data.additive = new Array(2)
+    expect(validateRemoteProfileRows([sparse])).toMatchObject({ ok: false })
+
+    const excessiveArray = remoteRow() as ReturnType<typeof remoteRow> & {
+      data: Record<string, unknown>
+    }
+    excessiveArray.data.additive = Array.from({ length: 50_001 }, () => 0)
+    expect(validateRemoteProfileRows([excessiveArray])).toMatchObject({
+      ok: false,
+    })
+
+    const excessiveRecord = remoteRow() as ReturnType<typeof remoteRow> & {
+      data: Record<string, unknown>
+    }
+    excessiveRecord.data.additive = Object.fromEntries(
+      Array.from({ length: 50_001 }, (_, index) => [`k${index}`, index]),
+    )
+    expect(validateRemoteProfileRows([excessiveRecord])).toMatchObject({
+      ok: false,
+    })
+  })
+
+  it('rejects accessors and reserved nested keys without invoking them', () => {
+    const accessor = remoteRow() as ReturnType<typeof remoteRow> & {
+      data: Record<string, unknown>
+    }
+    const getter = vi.fn(() => 'secret')
+    Object.defineProperty(accessor.data, 'unsafe', {
+      enumerable: true,
+      get: getter,
+    })
+    expect(validateRemoteProfileRows([accessor])).toMatchObject({ ok: false })
+    expect(getter).not.toHaveBeenCalled()
+
+    const reserved = remoteRow() as ReturnType<typeof remoteRow> & {
+      data: Record<string, unknown>
+    }
+    reserved.data.additive = JSON.parse('{"constructor":{"polluted":true}}')
+    expect(validateRemoteProfileRows([reserved])).toMatchObject({ ok: false })
   })
 })

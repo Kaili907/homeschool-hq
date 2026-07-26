@@ -17,7 +17,7 @@ import {
   getVerifiedAuthContext,
   getVerifiedCurrentUser,
   onAuthSessionChange,
-  profileRowsForUpsert,
+  profileRowsForMutation,
   pullProfiles,
   signOutRemote,
   userFromSession,
@@ -254,12 +254,13 @@ describe('official Supabase auth and transport', () => {
 
   it('distinguishes a failed pull from a successful empty cloud', async () => {
     const failedClient = {
-      from: () => ({
-        select: async () => ({ data: null, error: { message: 'offline' } }),
-      }),
+      rpc: async () => ({ data: null, error: { message: 'offline' } }),
     }
     const emptyClient = {
-      from: () => ({ select: async () => ({ data: [], error: null }) }),
+      rpc: async () => ({
+        data: { revision: '0', rows: [] },
+        error: null,
+      }),
     }
     expect(await pullProfiles(failedClient as never)).toEqual({
       ok: false,
@@ -268,16 +269,18 @@ describe('official Supabase auth and transport', () => {
     expect(await pullProfiles(emptyClient as never)).toEqual({
       ok: true,
       rows: [],
+      revision: '0',
     })
   })
 
   it('treats malformed cloud rows as a pull failure, not an empty household', async () => {
     const malformedClient = {
-      from: () => ({
-        select: async () => ({
-          data: [{ profile_id: 'p1', data: {}, updated_at: 'not-a-date' }],
-          error: null,
-        }),
+      rpc: async () => ({
+        data: {
+          revision: '1',
+          rows: [{ profile_id: 'p1', data: {}, updated_at: 'not-a-date' }],
+        },
+        error: null,
       }),
     }
     expect(await pullProfiles(malformedClient as never)).toEqual({
@@ -294,7 +297,7 @@ describe('official Supabase auth and transport', () => {
         updated_at: '2026-07-24T10:00:00.000Z',
       },
     ]
-    expect(profileRowsForUpsert(rows)).toEqual([
+    expect(profileRowsForMutation(rows)).toEqual([
       expect.not.objectContaining({
         household_id: expect.anything(),
         service_role: expect.anything(),

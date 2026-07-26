@@ -2,12 +2,12 @@ import { describe, expect, it, vi } from 'vitest'
 import { emptyProfile } from '../migration'
 import {
   executeGuardedMutation,
-  guardedCloudRevision,
   mutationLeaseIsOwned,
   renewMutationLease,
   startMutationLeaseHeartbeat,
   tryAcquireMutationLease,
 } from './coordination'
+import { remoteRowsSignature } from './engine'
 import type { RemoteProfileRow } from './types'
 
 class MemStorage implements Storage {
@@ -154,7 +154,8 @@ describe('cross-tab mutation leases', () => {
 
 describe('final cloud mutation guard', () => {
   const rows = [row()]
-  const revision = guardedCloudRevision(rows)
+  const revision = '7'
+  const cloudSignature = remoteRowsSignature(rows)
 
   function setup() {
     let user: string | null = 'household-a'
@@ -165,9 +166,13 @@ describe('final cloud mutation guard', () => {
     let lifecycle = true
     let postResponseAuth = true
     const controller = new AbortController()
-    const push = vi.fn(async () => ({ ok: true as const }))
+    const push = vi.fn(async () => ({ ok: true as const, revision: '8' }))
     const finalize = vi.fn(async () => undefined)
-    const pull = vi.fn(async () => ({ ok: true as const, rows }))
+    const pull = vi.fn(async () => ({
+      ok: true as const,
+      rows,
+      revision,
+    }))
     const run = () =>
       executeGuardedMutation({
         operationId: 'operation-a',
@@ -175,6 +180,7 @@ describe('final cloud mutation guard', () => {
         datasetFingerprint: 'fingerprint-a',
         importEpoch: 'epoch-a',
         cloudRevision: revision,
+        cloudSignature,
         signal: controller.signal,
         lifecycleValid: () => lifecycle,
         authenticatedHouseholdId: () => user,
@@ -236,7 +242,7 @@ describe('final cloud mutation guard', () => {
 
   it('dispatches only after identity, provenance, lease, and revision pass', async () => {
     const test = setup()
-    await expect(test.run()).resolves.toEqual({ ok: true })
+    await expect(test.run()).resolves.toEqual({ ok: true, revision: '8' })
     expect(test.push).toHaveBeenCalledOnce()
     expect(test.finalize).toHaveBeenCalledOnce()
   })
@@ -245,7 +251,7 @@ describe('final cloud mutation guard', () => {
     const test = setup()
     test.pull.mockImplementationOnce(async () => {
       test.setUser(null)
-      return { ok: true as const, rows }
+      return { ok: true as const, rows, revision }
     })
     await expect(test.run()).resolves.toMatchObject({ ok: false })
     expect(test.push).not.toHaveBeenCalled()
@@ -255,7 +261,7 @@ describe('final cloud mutation guard', () => {
     const test = setup()
     test.pull.mockImplementationOnce(async () => {
       test.setVerifiedSession(false)
-      return { ok: true as const, rows }
+      return { ok: true as const, rows, revision }
     })
     await expect(test.run()).resolves.toMatchObject({ ok: false })
     expect(test.push).not.toHaveBeenCalled()
@@ -265,7 +271,7 @@ describe('final cloud mutation guard', () => {
     const test = setup()
     test.pull.mockImplementationOnce(async () => {
       test.setFingerprint('fingerprint-from-another-tab')
-      return { ok: true as const, rows }
+      return { ok: true as const, rows, revision }
     })
     await expect(test.run()).resolves.toMatchObject({ ok: false })
     expect(test.push).not.toHaveBeenCalled()
@@ -275,7 +281,7 @@ describe('final cloud mutation guard', () => {
     const test = setup()
     test.pull.mockImplementationOnce(async () => {
       test.setLease(false)
-      return { ok: true as const, rows }
+      return { ok: true as const, rows, revision }
     })
     await expect(test.run()).resolves.toMatchObject({ ok: false })
     expect(test.push).not.toHaveBeenCalled()
@@ -285,7 +291,7 @@ describe('final cloud mutation guard', () => {
     const test = setup()
     test.push.mockImplementationOnce(async () => {
       test.setLifecycle(false)
-      return { ok: true as const }
+      return { ok: true as const, revision: '8' }
     })
     await expect(test.run()).resolves.toMatchObject({
       ok: false,
@@ -298,7 +304,7 @@ describe('final cloud mutation guard', () => {
     const changedEpoch = setup()
     changedEpoch.push.mockImplementationOnce(async () => {
       changedEpoch.setImportEpoch('epoch-imported')
-      return { ok: true as const }
+      return { ok: true as const, revision: '8' }
     })
     await expect(changedEpoch.run()).resolves.toMatchObject({ ok: false })
     expect(changedEpoch.finalize).not.toHaveBeenCalled()
@@ -306,7 +312,7 @@ describe('final cloud mutation guard', () => {
     const lostLease = setup()
     lostLease.push.mockImplementationOnce(async () => {
       lostLease.setLease(false)
-      return { ok: true as const }
+      return { ok: true as const, revision: '8' }
     })
     await expect(lostLease.run()).resolves.toMatchObject({ ok: false })
     expect(lostLease.finalize).not.toHaveBeenCalled()
@@ -316,7 +322,7 @@ describe('final cloud mutation guard', () => {
     const test = setup()
     test.push.mockImplementationOnce(async () => {
       test.setPostResponseAuth(false)
-      return { ok: true as const }
+      return { ok: true as const, revision: '8' }
     })
     await expect(test.run()).resolves.toMatchObject({ ok: false })
     expect(test.finalize).not.toHaveBeenCalled()
@@ -327,6 +333,7 @@ describe('final cloud mutation guard', () => {
     test.pull.mockResolvedValueOnce({
       ok: true as const,
       rows: [row('Changed in cloud')],
+      revision,
     })
     await expect(test.run()).resolves.toMatchObject({
       ok: false,
