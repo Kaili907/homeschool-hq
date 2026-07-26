@@ -164,7 +164,11 @@ works exactly as before and the JSON backup/export stays your escape hatch.
    SHA-256 implementation over validated canonical JSON. A cloud response is committed
    locally only after the mounted operation, pinned access token, household identity,
    dataset fingerprint, import generation, cloud baseline, Web Locks, and mutation lease
-   are revalidated after the response. Browsers without Web Locks remain fully usable
+   are revalidated after the response. For writes, Supabase first completes its internal
+   token/header preparation. Its operation-scoped custom fetch then re-verifies the
+   pinned identity and canonical current session, synchronously runs the complete
+   lifecycle/provenance/lease/revision guard, and invokes native fetch in that same call
+   stack. A denied guard never calls native fetch. Browsers without Web Locks remain fully usable
    offline but cannot perform cloud mutations.
 
    Local ownership/replacement finalization remains operation-bound through every
@@ -174,8 +178,13 @@ works exactly as before and the JSON backup/export stays your escape hatch.
    for a server-verified canonical session, requires exactly one matching transition,
    and never lets storage enumeration order choose an owner. The final verified
    ownership write, transition advancement, React publication, and cleanup are guarded
-   as one no-await local sequence; any failure leaves the new data preserved but
-   unbound/reviewable. The household lease uses an owner-checked heartbeat while both Web Locks and
+   as one no-await local sequence. A failure before coherent commit preserves the data
+   unbound and review-required. A cleanup failure after coherent commit may retain the
+   verified replacement, provenance, bound ownership, server revision, React
+   publication, and a `committed` recovery marker while still returning an operation
+   error. A later matching, server-verified household session may remove only that
+   marker after revalidation; it never auto-adopts `review`. The household lease uses
+   an owner-checked heartbeat while both Web Locks and
    the original operation remain valid; lifecycle or provenance loss stops renewal and
    aborts the request. Optional synchronized Academy containers are structurally bounded
    and validated before provenance is trusted. Malformed imported or persisted data is
@@ -187,12 +196,36 @@ works exactly as before and the JSON backup/export stays your escape hatch.
 Security notes: the anon key + Supabase URL are the only sync values in the client
 bundle (both are public by design; RLS protects the data). No service key is used.
 One canonical Supabase browser client owns and refreshes the persisted session. A
-second, sessionless pinned-token transport client is created only for one write; it has
+second, operation-scoped sessionless pinned-token transport client is created only for
+one write; it has
 session persistence, URL detection, and automatic refresh disabled and cannot become an
-auth-state owner. Canonical identity is reverified before dispatch and after response.
+auth-state owner. Its custom fetch owns only that operation's guard; no mutable global
+authorization closure is shared. Canonical identity is reverified at the true fetch
+boundary and after response.
 Academy sync metadata, pending ownership transitions, and mutation
 leases are separately namespaced by verified household. Obsolete pre-SDK custom token
 and global metadata keys are removed and are never migrated into a household binding.
+
+The PostgreSQL mutation is a transactional **partial upsert** of the supplied profile
+rows. Existing household profiles omitted from a request are retained; there is no
+profile deletion path. Existing valid pre-CAS profile rows intentionally begin as one
+lazy revision-zero snapshot. The first successful CAS mutation consumes revision zero.
+Both applied and conflict results create immutable household-scoped mutation receipts.
+An identical replay returns the original result; changing the expected revision or
+payload under the same mutation ID is rejected. Resolving a conflict requires a new
+mutation ID.
+
+The RPC enforces the current Academy profile contract in PostgreSQL before a receipt,
+profile write, or revision change. It checks required and optional containers,
+JavaScript-finite numerics, strict timestamps, recursive reserved keys, profile IDs,
+and the same depth/node/entry/string/key/payload limits used by the browser boundary.
+Shared fixtures run through both validators. PGlite covers fast migration and contract
+tests; a development-only embedded PostgreSQL server proves independent backend PIDs,
+row-lock contention, first-writer contention, and identical concurrent retry behavior.
+Neither local gate proves hosted Supabase JWT/PostgREST/owner behavior. This branch
+remains not merge-ready until the exact Manuel Academy project is authoritatively
+identified, the migration is applied there, and the hosted role plus two-client probes
+pass.
 
 ## Rolling back
 
