@@ -120,9 +120,14 @@ works exactly as before and the JSON backup/export stays your escape hatch.
 1. **Create a Supabase project** (supabase.com → New project, free tier). Note the
    project's **URL** and **anon public key** (Project Settings → API). The anon key
    is safe in the browser; **never** use or paste the _service_role_ key anywhere.
-2. **Create the table**: Supabase → **SQL Editor → New query**, paste the contents of
-   `supabase/schema.sql` from this repo, and **Run**. (One `profiles` table with
-   row-level security so each household only sees its own rows.)
+2. **Apply the tracked database migrations through the approved Supabase migration
+   workflow.** The baseline `supabase/schema.sql` creates the RLS-protected profiles
+   table; `supabase/migrations/20260726120000_academy_household_revision_cas.sql`
+   adds the required transactional household revision boundary. Do not paste SQL into
+   an unverified project and do not guess which project belongs to Manuel Academy.
+   This feature branch is not merge-ready until the exact hosted project is
+   authoritatively identified, the migration is applied there, and the two-client CAS
+   probes pass against that project.
 3. **Create Dad's login**: Supabase → **Authentication → Users → Add user** with your
    email + a password (or enable email sign-up). The girls do **not** get accounts —
    after Dad signs in on a device, the existing PIN picker still chooses who's active.
@@ -146,8 +151,12 @@ works exactly as before and the JSON backup/export stays your escape hatch.
    that household, one-sided changes sync automatically; offline edits remain queued
    for that household only. The binding includes a fingerprint of the exact persisted
    Academy dataset. Every cloud write rechecks that fingerprint, the authenticated
-   Supabase user, the cloud revision, and a cross-tab mutation lease immediately before
-   dispatch. If another tab, an interrupted replacement, or an imported backup changes
+   Supabase user, the server revision, and a cross-tab mutation lease immediately before
+   dispatch. The browser Web Lock and localStorage lease serialize tabs in one browser;
+   they do not provide cross-device atomicity. The database RPC atomically compares and
+   advances the per-household server revision, so only one device can consume a
+   revision. A loser retains local data and returns to reviewed conflict handling rather
+   than overwriting the winner. If another tab, an interrupted replacement, or an imported backup changes
    the dataset, automatic sync pauses without deleting local data and asks Dad to review
    the household again. Imports create a local safety backup, advance a durable import
    generation, and always invalidate the previous ownership claim even when the restored
@@ -159,19 +168,29 @@ works exactly as before and the JSON backup/export stays your escape hatch.
    offline but cannot perform cloud mutations.
 
    Local ownership/replacement finalization remains operation-bound through every
-   asynchronous persistence and hashing checkpoint. The final verified ownership write,
-   transition clear, and React publication run without another `await` between them, so a
-   sign-out, account switch, import, unmount, abort, or lost lease cannot commit a stale
-   result. The household lease uses an owner-checked heartbeat while both Web Locks and
+   asynchronous persistence and hashing checkpoint. The monotonic replacement states
+   are `prepared → dataset-written → ownership-written → committed → removed`;
+   `review` is a terminal fail-closed state that is never auto-adopted. Recovery waits
+   for a server-verified canonical session, requires exactly one matching transition,
+   and never lets storage enumeration order choose an owner. The final verified
+   ownership write, transition advancement, React publication, and cleanup are guarded
+   as one no-await local sequence; any failure leaves the new data preserved but
+   unbound/reviewable. The household lease uses an owner-checked heartbeat while both Web Locks and
    the original operation remain valid; lifecycle or provenance loss stops renewal and
    aborts the request. Optional synchronized Academy containers are structurally bounded
-   and validated before provenance is trusted, so malformed local data remains local and
-   pauses cloud sync for parent review.
+   and validated before provenance is trusted. Malformed imported or persisted data is
+   preserved under a quarantine key, is not published into React, and pauses cloud sync
+   for explicit recovery/review. Future Grade 5 or other additive state containers must
+   extend the bounded allowlist in `src/sync/provenance.ts` and add compatibility,
+   malformed-input, and payload-limit tests before becoming syncable.
 
 Security notes: the anon key + Supabase URL are the only sync values in the client
 bundle (both are public by design; RLS protects the data). No service key is used.
-The official Supabase browser client persists and refreshes the signed-in session
-on that device; Academy sync metadata, pending ownership transitions, and mutation
+One canonical Supabase browser client owns and refreshes the persisted session. A
+second, sessionless pinned-token transport client is created only for one write; it has
+session persistence, URL detection, and automatic refresh disabled and cannot become an
+auth-state owner. Canonical identity is reverified before dispatch and after response.
+Academy sync metadata, pending ownership transitions, and mutation
 leases are separately namespaced by verified household. Obsolete pre-SDK custom token
 and global metadata keys are removed and are never migrated into a household binding.
 

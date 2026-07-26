@@ -10,6 +10,32 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: Academy household revision CAS (2026-07-26)
+
+Tracked migration:
+`supabase/migrations/20260726120000_academy_household_revision_cas.sql`.
+
+- Adds one server-managed monotonic revision row per authenticated household.
+- Adds per-household mutation receipts so retrying the same mutation ID returns
+  the original result without applying profiles or incrementing twice.
+- Replaces authenticated direct profile writes with a `SECURITY DEFINER` RPC
+  that derives household identity from `auth.uid()`, locks the revision row,
+  validates the expected revision, writes the complete profile set in one
+  transaction, and advances the revision only on success.
+- Uses a fixed `pg_catalog, pg_temp` search path, schema-qualified application
+  objects, `postgres` ownership, no anonymous/PUBLIC execute grant, and the
+  narrow authenticated execute grant.
+- A stale expected revision returns a typed conflict and writes no profiles.
+
+Local PGlite/PostgreSQL-protocol probes cover first run, migration rerun,
+two-client same-revision contention, empty-cloud creation, rollback, identity
+isolation, anonymous/missing auth, grants, and idempotent retry. PGlite's socket
+multiplexer is not equivalent to two independently hosted PostgreSQL backends.
+The exact Manuel Academy Supabase project is not yet verified, so the migration
+has not been applied to any hosted project. Hosted migration and real
+two-client contention validation are release gates; do not guess a project or
+paste the SQL manually.
+
 ## v1 → v2 (M1 multi-profile, 2026-07-23)
 
 **Before:** single profile under key `homeschool-hq:profile:v1`
