@@ -41,7 +41,8 @@ export function supabaseConfigured(): boolean {
 
 const META_PREFIX = 'homeschool-hq:sync:household:'
 const SYNC_BACKUP_PREFIX = 'homeschool-hq:backup:sync:'
-const TRANSITION_PREFIX = 'homeschool-hq:sync:transition:'
+const TRANSITION_PREFIX = 'homeschool-hq:sync:transition:v2:'
+const LEGACY_TRANSITION_PREFIX = 'homeschool-hq:sync:transition:'
 const LEGACY_SESSION_KEY = 'homeschool-hq:sync:session'
 const LEGACY_META_KEY = 'homeschool-hq:sync:meta'
 
@@ -57,22 +58,102 @@ function metaKey(householdId: string): string {
   return `${META_PREFIX}${encodeURIComponent(householdId)}`
 }
 
-function transitionKey(householdId: string): string {
-  return `${TRANSITION_PREFIX}${encodeURIComponent(householdId)}`
+function transitionKey(householdId: string, transitionId: string): string {
+  return `${TRANSITION_PREFIX}${encodeURIComponent(householdId)}:${encodeURIComponent(transitionId)}`
 }
 
 function isHouseholdMeta(
   value: unknown,
   householdId: string,
 ): value is HouseholdSyncMeta {
-  if (!value || typeof value !== 'object') return false
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
   const meta = value as Partial<HouseholdSyncMeta>
+  const prototype = Object.getPrototypeOf(value)
+  if (prototype !== Object.prototype && prototype !== null) return false
+  const allowedMetaKeys = new Set([
+    'householdId',
+    'email',
+    'binding',
+    'ownsLocalData',
+    'datasetFingerprint',
+    'importEpoch',
+    'cloudRevision',
+    'profiles',
+    'lastSyncAt',
+    'reconciliation',
+    'conflictProfileIds',
+    'pauseReason',
+  ])
+  if (Object.keys(value).some((key) => !allowedMetaKeys.has(key))) return false
+  const profiles =
+    meta.profiles && typeof meta.profiles === 'object' && !Array.isArray(meta.profiles)
+      ? Object.entries(meta.profiles)
+      : []
   return (
     meta.householdId === householdId &&
+    householdId.length > 0 &&
+    householdId.length <= 200 &&
+    (meta.email === undefined ||
+      (typeof meta.email === 'string' && meta.email.length <= 512)) &&
     (meta.binding === 'bound' || meta.binding === 'unbound') &&
     typeof meta.ownsLocalData === 'boolean' &&
-    !!meta.profiles &&
-    typeof meta.profiles === 'object'
+    (meta.datasetFingerprint === null ||
+      (typeof meta.datasetFingerprint === 'string' &&
+        meta.datasetFingerprint.length <= 256)) &&
+    (meta.importEpoch === null ||
+      (typeof meta.importEpoch === 'string' &&
+        meta.importEpoch.length <= 256)) &&
+    (meta.cloudRevision === null ||
+      (typeof meta.cloudRevision === 'string' &&
+        /^(0|[1-9]\d*)$/.test(meta.cloudRevision))) &&
+    profiles.length <= 5 &&
+    profiles.every(
+      ([id, profile]) =>
+        /^p[1-5]$/.test(id) &&
+        !!profile &&
+        typeof profile === 'object' &&
+        !Array.isArray(profile) &&
+        Object.keys(profile).every((key) =>
+          [
+            'updatedAt',
+            'dirty',
+            'lastLocalHash',
+            'lastCloudHash',
+            'cloudUpdatedAt',
+          ].includes(key),
+        ) &&
+        typeof profile.updatedAt === 'number' &&
+        Number.isFinite(profile.updatedAt) &&
+        typeof profile.dirty === 'boolean' &&
+        (profile.lastLocalHash === undefined ||
+          (typeof profile.lastLocalHash === 'string' &&
+            profile.lastLocalHash.length <= 256)) &&
+        (profile.lastCloudHash === undefined ||
+          (typeof profile.lastCloudHash === 'string' &&
+            profile.lastCloudHash.length <= 256)) &&
+        (profile.cloudUpdatedAt === undefined ||
+          (typeof profile.cloudUpdatedAt === 'number' &&
+            Number.isFinite(profile.cloudUpdatedAt))),
+    ) &&
+    (meta.lastSyncAt === undefined ||
+      (typeof meta.lastSyncAt === 'number' &&
+        Number.isFinite(meta.lastSyncAt))) &&
+    (meta.reconciliation === 'unbound' ||
+      meta.reconciliation === 'ready' ||
+      meta.reconciliation === 'review') &&
+    Array.isArray(meta.conflictProfileIds) &&
+    meta.conflictProfileIds.length <= 5 &&
+    meta.conflictProfileIds.every(
+      (id) => typeof id === 'string' && /^p[1-5]$/.test(id),
+    ) &&
+    new Set(meta.conflictProfileIds).size === meta.conflictProfileIds.length &&
+    (meta.pauseReason === undefined ||
+      (typeof meta.pauseReason === 'string' &&
+        meta.pauseReason.length <= 2_000)) &&
+    (!meta.ownsLocalData ||
+      (meta.binding === 'bound' &&
+        typeof meta.datasetFingerprint === 'string' &&
+        typeof meta.importEpoch === 'string'))
   )
 }
 
@@ -121,8 +202,11 @@ export function saveHouseholdMetaVerified(meta: HouseholdSyncMeta): boolean {
     const key = metaKey(meta.householdId)
     store.setItem(key, JSON.stringify(meta))
     const stored = store.getItem(key)
+    if (stored === null) return false
+    const parsed = JSON.parse(stored) as unknown
     return (
-      stored !== null && JSON.parse(stored).householdId === meta.householdId
+      isHouseholdMeta(parsed, meta.householdId) &&
+      JSON.stringify(parsed) === JSON.stringify(meta)
     )
   } catch {
     return false
@@ -167,7 +251,6 @@ export type OwnershipCommitted = (meta: HouseholdSyncMeta) => void
 
 interface PreparedOwnershipClaim {
   claimed: HouseholdSyncMeta
-  targetBefore: HouseholdSyncMeta
   otherOwnersBefore: HouseholdSyncMeta[]
 }
 
@@ -175,12 +258,19 @@ function ownershipStillCompatible(
   meta: HouseholdSyncMeta,
   expectedFingerprint: string,
   expectedImportEpoch: string,
+  transition?: OwnershipTransition,
 ): boolean {
   return (
     !meta.ownsLocalData ||
     (meta.binding === 'bound' &&
       meta.datasetFingerprint === expectedFingerprint &&
-      meta.importEpoch === expectedImportEpoch)
+      meta.importEpoch === expectedImportEpoch) ||
+    (!!transition &&
+      meta.binding === 'bound' &&
+      meta.ownsLocalData &&
+      meta.householdId === transition.targetHouseholdId &&
+      meta.datasetFingerprint === transition.previousFingerprint &&
+      meta.importEpoch === transition.expectedImportEpoch)
   )
 }
 
@@ -190,15 +280,15 @@ async function prepareOwnershipClaim(
   next: HouseholdSyncMeta,
   expectedFingerprint: string,
   guard: FinalizationGuard,
-  expectedTransitionOperationId?: string,
+  expectedTransition?: OwnershipTransition,
 ): Promise<PreparedOwnershipClaim> {
   await guard.assertCurrent('Ownership claim started')
   const persisted = await readPersistedDataset()
   await guard.assertCurrent('Ownership claim verified persisted Academy data')
   const provenance = readDatasetProvenance()
   const targetBefore = loadHouseholdMeta(householdId, email)
-  const currentTransition = expectedTransitionOperationId
-    ? loadOwnershipTransition(householdId)
+  const currentTransition = expectedTransition
+    ? loadOwnershipTransition(householdId, expectedTransition.transitionId)
     : null
   if (
     !persisted.ok ||
@@ -211,9 +301,11 @@ async function prepareOwnershipClaim(
       targetBefore,
       expectedFingerprint,
       provenance.importEpoch,
+      expectedTransition,
     ) ||
-    (expectedTransitionOperationId &&
-      currentTransition?.operationId !== expectedTransitionOperationId)
+    (expectedTransition &&
+      (currentTransition?.operationId !== expectedTransition.operationId ||
+        currentTransition.phase !== expectedTransition.phase))
   ) {
     throw new Error(
       'Household ownership was not saved because persisted Academy data or its operation context did not match.',
@@ -232,23 +324,16 @@ async function prepareOwnershipClaim(
   await guard.assertCurrent('Ownership claim prepared for durable commit')
   return {
     claimed,
-    targetBefore,
     otherOwnersBefore: listHouseholdMetas().filter(
       (meta) => meta.householdId !== householdId && meta.ownsLocalData,
     ),
   }
 }
 
-function restorePreparedOwnership(prepared: PreparedOwnershipClaim): void {
-  saveHouseholdMeta(prepared.targetBefore)
-  for (const meta of prepared.otherOwnersBefore) saveHouseholdMeta(meta)
-}
-
 function commitPreparedOwnership(
   prepared: PreparedOwnershipClaim,
   guard: FinalizationGuard,
-  onCommitted?: OwnershipCommitted,
-  expectedTransitionOperationId?: string,
+  expectedTransition?: OwnershipTransition,
 ): HouseholdSyncMeta {
   guard.assertCurrentNow('Immediately before ownership metadata commit')
   const provenance = readDatasetProvenance()
@@ -256,8 +341,11 @@ function commitPreparedOwnership(
     prepared.claimed.householdId,
     prepared.claimed.email,
   )
-  const currentTransition = expectedTransitionOperationId
-    ? loadOwnershipTransition(prepared.claimed.householdId)
+  const currentTransition = expectedTransition
+    ? loadOwnershipTransition(
+        prepared.claimed.householdId,
+        expectedTransition.transitionId,
+      )
     : null
   if (
     !provenance ||
@@ -268,9 +356,11 @@ function commitPreparedOwnership(
       targetCurrent,
       prepared.claimed.datasetFingerprint!,
       prepared.claimed.importEpoch!,
+      expectedTransition,
     ) ||
-    (expectedTransitionOperationId &&
-      currentTransition?.operationId !== expectedTransitionOperationId)
+    (expectedTransition &&
+      (currentTransition?.operationId !== expectedTransition.operationId ||
+        currentTransition.phase !== expectedTransition.phase))
   ) {
     throw new Error(
       'Household ownership changed immediately before its durable write.',
@@ -308,11 +398,11 @@ function commitPreparedOwnership(
     }
     guard.adoptCurrentHouseholdBinding()
     guard.assertCurrentNow('Immediately after bound ownership write')
-    onCommitted?.(prepared.claimed)
-    guard.assertCurrentNow('Immediately after ownership publication')
     return prepared.claimed
   } catch (cause) {
-    restorePreparedOwnership(prepared)
+    invalidateAllLocalOwnership(
+      'Academy ownership finalization failed and requires parent review.',
+    )
     throw cause
   }
 }
@@ -336,7 +426,18 @@ export async function claimLocalData(
     expectedFingerprint,
     guard,
   )
-  return commitPreparedOwnership(prepared, guard, onCommitted)
+  const claimed = commitPreparedOwnership(prepared, guard)
+  try {
+    guard.assertCurrentNow('Immediately before ownership publication')
+    onCommitted?.(claimed)
+    guard.assertCurrentNow('Immediately after ownership publication')
+    return claimed
+  } catch (cause) {
+    invalidateAllLocalOwnership(
+      'Academy ownership publication failed and requires parent review.',
+    )
+    throw cause
+  }
 }
 
 function clearPending(meta: HouseholdSyncMeta): HouseholdSyncMeta {
@@ -390,52 +491,185 @@ function saveTransition(transition: OwnershipTransition): boolean {
   try {
     const store = ls()
     if (!store) return false
-    const key = transitionKey(transition.targetHouseholdId)
+    const key = transitionKey(
+      transition.targetHouseholdId,
+      transition.transitionId,
+    )
+    const existing = loadOwnershipTransition(
+      transition.targetHouseholdId,
+      transition.transitionId,
+    )
+    const successors: Record<OwnershipTransition['phase'], string[]> = {
+      prepared: ['prepared', 'dataset-written', 'review'],
+      'dataset-written': ['dataset-written', 'ownership-written', 'review'],
+      'ownership-written': ['ownership-written', 'committed', 'review'],
+      committed: ['committed'],
+      review: ['review'],
+    }
+    if (
+      (!existing && transition.phase !== 'prepared') ||
+      (existing &&
+        (existing.operationId !== transition.operationId ||
+          !successors[existing.phase].includes(transition.phase)))
+    ) {
+      return false
+    }
     store.setItem(key, JSON.stringify(transition))
+    const verified = parseOwnershipTransition(
+      store.getItem(key),
+      transition.targetHouseholdId,
+      transition.transitionId,
+    )
     return (
-      (JSON.parse(store.getItem(key) ?? 'null') as OwnershipTransition | null)
-        ?.operationId === transition.operationId
+      verified?.operationId === transition.operationId &&
+      verified.phase === transition.phase
     )
   } catch {
     return false
   }
 }
 
-export function loadOwnershipTransition(
+function validTransitionToken(value: unknown): value is string {
+  return (
+    typeof value === 'string' &&
+    value.length >= 1 &&
+    value.length <= 200 &&
+    /^[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(value)
+  )
+}
+
+function parseOwnershipTransition(
+  raw: string | null,
   householdId: string,
+  transitionId: string,
 ): OwnershipTransition | null {
+  if (!raw) return null
   try {
-    const raw = ls()?.getItem(transitionKey(householdId))
-    if (!raw) return null
-    const transition = JSON.parse(raw) as Partial<OwnershipTransition>
-    return transition.version === 1 &&
-      transition.targetHouseholdId === householdId &&
-      typeof transition.operationId === 'string' &&
-      typeof transition.expectedFingerprint === 'string' &&
-      typeof transition.expectedImportEpoch === 'string' &&
-      typeof transition.previousFingerprint === 'string' &&
-      (transition.phase === 'prepared' ||
-        transition.phase === 'app-state-written' ||
-        transition.phase === 'review') &&
-      !!transition.nextMeta
-      ? (transition as OwnershipTransition)
-      : null
+    const value = JSON.parse(raw) as unknown
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return null
+    const transition = value as Partial<OwnershipTransition>
+    if (
+      transition.version !== 2 ||
+      transition.targetHouseholdId !== householdId ||
+      transition.transitionId !== transitionId ||
+      !validTransitionToken(transition.transitionId) ||
+      !validTransitionToken(transition.operationId) ||
+      typeof transition.targetEmail !== 'string' ||
+      transition.targetEmail.length > 512 ||
+      typeof transition.expectedFingerprint !== 'string' ||
+      typeof transition.expectedImportEpoch !== 'string' ||
+      typeof transition.expectedCloudRevision !== 'string' ||
+      !/^(0|[1-9]\d*)$/.test(transition.expectedCloudRevision) ||
+      typeof transition.previousFingerprint !== 'string' ||
+      !(
+        transition.previousOwnerHouseholdId === null ||
+        typeof transition.previousOwnerHouseholdId === 'string'
+      ) ||
+      !(
+        transition.phase === 'prepared' ||
+        transition.phase === 'dataset-written' ||
+        transition.phase === 'ownership-written' ||
+        transition.phase === 'committed' ||
+        transition.phase === 'review'
+      ) ||
+      typeof transition.createdAt !== 'number' ||
+      !Number.isFinite(transition.createdAt) ||
+      typeof transition.updatedAt !== 'number' ||
+      !Number.isFinite(transition.updatedAt) ||
+      transition.updatedAt < transition.createdAt ||
+      !isHouseholdMeta(transition.nextMeta, householdId) ||
+      transition.nextMeta.cloudRevision !== transition.expectedCloudRevision ||
+      (transition.failureReason !== undefined &&
+        typeof transition.failureReason !== 'string')
+    ) {
+      return null
+    }
+    return transition as OwnershipTransition
   } catch {
     return null
   }
 }
 
+export function listOwnershipTransitions(): OwnershipTransition[] {
+  const store = ls()
+  if (!store) return []
+  const transitions: OwnershipTransition[] = []
+  for (let index = 0; index < store.length; index++) {
+    const key = store.key(index)
+    if (!key?.startsWith(TRANSITION_PREFIX)) continue
+    const suffix = key.slice(TRANSITION_PREFIX.length)
+    const separator = suffix.indexOf(':')
+    if (separator < 1) continue
+    try {
+      const householdId = decodeURIComponent(suffix.slice(0, separator))
+      const transitionId = decodeURIComponent(suffix.slice(separator + 1))
+      const transition = parseOwnershipTransition(
+        store.getItem(key),
+        householdId,
+        transitionId,
+      )
+      if (transition) transitions.push(transition)
+    } catch {
+      // Malformed keys are retained but can never become trusted ownership.
+    }
+  }
+  return transitions
+}
+
+export function loadOwnershipTransition(
+  householdId: string,
+  transitionId?: string,
+): OwnershipTransition | null {
+  const matches = listOwnershipTransitions().filter(
+    (transition) =>
+      transition.targetHouseholdId === householdId &&
+      (!transitionId || transition.transitionId === transitionId),
+  )
+  return matches.length === 1 ? matches[0] : null
+}
+
 function removeTransition(transition: OwnershipTransition): boolean {
   try {
-    const key = transitionKey(transition.targetHouseholdId)
-    const stored = loadOwnershipTransition(transition.targetHouseholdId)
+    const key = transitionKey(
+      transition.targetHouseholdId,
+      transition.transitionId,
+    )
+    const stored = loadOwnershipTransition(
+      transition.targetHouseholdId,
+      transition.transitionId,
+    )
     if (stored?.operationId !== transition.operationId) return false
     ls()?.removeItem(key)
-    return loadOwnershipTransition(transition.targetHouseholdId) === null
+    return (
+      loadOwnershipTransition(
+        transition.targetHouseholdId,
+        transition.transitionId,
+      ) === null
+    )
   } catch {
     // A leftover completed transition is safe and will be recovered next boot.
     return false
   }
+}
+
+function hasUnparseableTransitionStorage(): boolean {
+  const store = ls()
+  if (!store) return false
+  const validKeys = new Set(
+    listOwnershipTransitions().map((transition) =>
+      transitionKey(transition.targetHouseholdId, transition.transitionId),
+    ),
+  )
+  for (let index = 0; index < store.length; index++) {
+    const key = store.key(index)
+    if (
+      key?.startsWith(LEGACY_TRANSITION_PREFIX) &&
+      !validKeys.has(key)
+    ) {
+      return true
+    }
+  }
+  return false
 }
 
 export async function prepareOwnershipTransition(
@@ -466,17 +700,24 @@ export async function prepareOwnershipTransition(
   }
   const expectedFingerprint = await datasetFingerprint(replacement)
   await guard.assertCurrent('Ownership replacement fingerprinted new data')
+  if (!nextMeta.cloudRevision) {
+    throw new Error('A verified server revision is required for replacement.')
+  }
+  const transitionId = createOperationId('transition')
   const transition: OwnershipTransition = {
-    version: 1,
-    operationId: createOperationId('ownership'),
+    version: 2,
+    transitionId,
+    operationId: guard.operationId,
     targetHouseholdId: householdId,
     targetEmail: email,
     expectedFingerprint,
     expectedImportEpoch: provenance.importEpoch,
+    expectedCloudRevision: nextMeta.cloudRevision,
     previousFingerprint: current.fingerprint,
     previousOwnerHouseholdId: localDataOwner()?.householdId ?? null,
     phase: 'prepared',
     createdAt: now,
+    updatedAt: now,
     nextMeta,
   }
   guard.assertCurrentNow('Immediately before pending ownership transition write')
@@ -492,7 +733,10 @@ export async function persistOwnershipTransitionDataset(
   guard: FinalizationGuard,
 ): Promise<OwnershipTransition> {
   await guard.assertCurrent('Ownership transition persistence started')
-  const current = loadOwnershipTransition(transition.targetHouseholdId)
+  const current = loadOwnershipTransition(
+    transition.targetHouseholdId,
+    transition.transitionId,
+  )
   if (current?.operationId !== transition.operationId) {
     throw new Error('The household transition is no longer current.')
   }
@@ -546,7 +790,8 @@ export async function persistOwnershipTransitionDataset(
   )
   const written: OwnershipTransition = {
     ...transition,
-    phase: 'app-state-written',
+    phase: 'dataset-written',
+    updatedAt: Date.now(),
   }
   guard.assertCurrentNow(
     'Immediately before written ownership transition update',
@@ -564,12 +809,16 @@ export async function finalizeOwnershipTransition(
   onCommitted?: OwnershipCommitted,
 ): Promise<HouseholdSyncMeta> {
   await guard.assertCurrent('Ownership transition finalization started')
-  const current = loadOwnershipTransition(transition.targetHouseholdId)
+  const current = loadOwnershipTransition(
+    transition.targetHouseholdId,
+    transition.transitionId,
+  )
   const persisted = await readPersistedDataset()
   await guard.assertCurrent('Ownership transition finalization re-read data')
   const provenance = readDatasetProvenance()
   if (
     current?.operationId !== transition.operationId ||
+    current.phase !== 'dataset-written' ||
     !persisted.ok ||
     persisted.fingerprint !== transition.expectedFingerprint ||
     !provenance ||
@@ -585,27 +834,38 @@ export async function finalizeOwnershipTransition(
     transition.nextMeta,
     transition.expectedFingerprint,
     guard,
-    transition.operationId,
+    transition,
   )
-  return commitPreparedOwnership(
-    prepared,
-    guard,
-    (claimed) => {
-      const latest = loadOwnershipTransition(transition.targetHouseholdId)
-      if (latest?.operationId !== transition.operationId) {
-        throw new Error(
-          'The ownership transition changed before it could be cleared.',
-        )
-      }
-      onCommitted?.(claimed)
-      guard.assertCurrentNow('Immediately before ownership transition cleanup')
-      if (!removeTransition(transition)) {
-        throw new Error('The completed ownership transition was not cleared.')
-      }
-      guard.assertCurrentNow('Immediately after ownership transition cleanup')
-    },
-    transition.operationId,
+  const claimed = commitPreparedOwnership(prepared, guard, transition)
+  const ownershipWritten: OwnershipTransition = {
+    ...transition,
+    phase: 'ownership-written',
+    updatedAt: Date.now(),
+  }
+  guard.assertCurrentNow(
+    'Immediately before ownership-written transition advancement',
   )
+  if (!saveTransition(ownershipWritten)) {
+    throw new Error('The ownership-written transition could not be verified.')
+  }
+  guard.publishExpectedDataset(transition.expectedFingerprint, () => {
+    onCommitted?.(claimed)
+  })
+  const committed: OwnershipTransition = {
+    ...ownershipWritten,
+    phase: 'committed',
+    updatedAt: Date.now(),
+  }
+  guard.assertCurrentNow('Immediately before committed transition advancement')
+  if (!saveTransition(committed)) {
+    throw new Error('The committed ownership transition could not be verified.')
+  }
+  guard.assertCurrentNow('Immediately before ownership transition cleanup')
+  if (!removeTransition(committed)) {
+    throw new Error('The completed ownership transition was not cleared.')
+  }
+  guard.assertCurrentNow('Immediately after ownership transition cleanup')
+  return claimed
 }
 
 export async function replaceDatasetAndClaim(
@@ -637,13 +897,31 @@ export async function replaceDatasetAndClaim(
   } catch (cause) {
     if (
       transition &&
-      loadOwnershipTransition(householdId)?.operationId ===
-        transition.operationId
+      loadOwnershipTransition(householdId, transition.transitionId)
+        ?.operationId === transition.operationId
     ) {
-      saveTransition({ ...transition, phase: 'review' })
-      invalidateAllLocalOwnership(
-        'An interrupted Academy replacement remains unbound for parent review.',
+      const current = loadOwnershipTransition(
+        householdId,
+        transition.transitionId,
       )
+      if (current?.phase === 'committed') {
+        // All durable data, ownership, and publication steps succeeded. A
+        // cleanup failure leaves the committed marker as the recovery record;
+        // do not overwrite coherent new ownership with stale/unbound metadata.
+      } else if (current) {
+        saveTransition({
+          ...current,
+          phase: 'review',
+          updatedAt: Date.now(),
+          failureReason:
+            cause instanceof Error
+              ? cause.message
+              : 'Academy replacement finalization failed.',
+        })
+        invalidateAllLocalOwnership(
+          'An interrupted Academy replacement remains unbound for parent review.',
+        )
+      }
     }
     throw cause
   }
@@ -655,8 +933,21 @@ export type TransitionRecovery =
   | { kind: 'finished-new'; householdId: string }
   | { kind: 'review'; householdId: string; reason: string }
 
+export interface TransitionRecoveryOptions {
+  authenticatedUser: SignedInUser | null
+  inMemoryState: AppState
+  verifyCurrentHousehold: () => Promise<boolean>
+  lifecycleValid: () => boolean
+  publish: (
+    state: AppState,
+    fingerprint: string,
+    meta: HouseholdSyncMeta,
+  ) => void
+}
+
 function recoveryFinalizationGuard(
   transition: OwnershipTransition,
+  options: TransitionRecoveryOptions,
 ): FinalizationGuard {
   let expectation: FinalizationDatasetExpectation = {
     persistedFingerprint: transition.expectedFingerprint,
@@ -664,10 +955,23 @@ function recoveryFinalizationGuard(
     provenanceFingerprint: transition.expectedFingerprint,
   }
   let ownershipAdopted = false
+  let completed = false
   const transitionContextIsCurrent = (): boolean => {
-    const current = loadOwnershipTransition(transition.targetHouseholdId)
-    if (current?.operationId === transition.operationId) return true
-    if (!ownershipAdopted || current) return false
+    if (!options.lifecycleValid()) return false
+    const current = loadOwnershipTransition(
+      transition.targetHouseholdId,
+      transition.transitionId,
+    )
+    if (
+      current?.operationId === transition.operationId &&
+      current.expectedFingerprint === transition.expectedFingerprint &&
+      current.expectedImportEpoch === transition.expectedImportEpoch &&
+      current.expectedCloudRevision === transition.expectedCloudRevision &&
+      current.phase !== 'review'
+    ) {
+      return true
+    }
+    if ((!ownershipAdopted && !completed) || current) return false
     const meta = loadHouseholdMeta(
       transition.targetHouseholdId,
       transition.targetEmail,
@@ -711,8 +1015,13 @@ function recoveryFinalizationGuard(
     householdId: transition.targetHouseholdId,
     importEpoch: transition.expectedImportEpoch,
     cloudRevision: transition.nextMeta.cloudRevision ?? '',
+    resultingCloudRevision: transition.expectedCloudRevision,
     assertCurrent: async (stage, expected = expectation) => {
       expectation = expected
+      await assertRecoveryCurrent(stage)
+      if (!(await options.verifyCurrentHousehold())) {
+        throw new Error(`${stage}: authenticated recovery household changed.`)
+      }
       await assertRecoveryCurrent(stage)
     },
     assertCurrentNow: (stage, expected = expectation) => {
@@ -721,6 +1030,15 @@ function recoveryFinalizationGuard(
     },
     updateExpectedDataset: (expected) => {
       expectation = expected
+    },
+    publishExpectedDataset: (expectedMemoryFingerprint, publish) => {
+      assertRecoveryCurrentNow('Immediately before recovery publication')
+      publish()
+      expectation = {
+        ...expectation,
+        memoryFingerprint: expectedMemoryFingerprint,
+      }
+      assertRecoveryCurrentNow('Immediately after recovery publication')
     },
     adoptCurrentHouseholdBinding: () => {
       ownershipAdopted = true
@@ -736,59 +1054,183 @@ function recoveryFinalizationGuard(
   }
 }
 
-export async function recoverOwnershipTransitions(): Promise<
-  TransitionRecovery[]
-> {
+function reviewTransition(
+  transition: OwnershipTransition,
+  reason: string,
+): void {
+  if (transition.phase === 'review' || transition.phase === 'committed') return
+  saveTransition({
+    ...transition,
+    phase: 'review',
+    updatedAt: Date.now(),
+    failureReason: reason,
+  })
+}
+
+export async function recoverOwnershipTransitions(
+  options: TransitionRecoveryOptions,
+): Promise<TransitionRecovery[]> {
   const store = ls()
   if (!store) return [{ kind: 'none' }]
-  const householdIds: string[] = []
-  for (let i = 0; i < store.length; i++) {
-    const key = store.key(i)
-    if (!key?.startsWith(TRANSITION_PREFIX)) continue
-    try {
-      householdIds.push(decodeURIComponent(key.slice(TRANSITION_PREFIX.length)))
-    } catch {
-      // Ignore malformed keys that cannot create a trusted binding.
-    }
+  const transitions = listOwnershipTransitions()
+  if (transitions.length === 0 && !hasUnparseableTransitionStorage()) {
+    return [{ kind: 'none' }]
   }
-  if (householdIds.length === 0) return [{ kind: 'none' }]
-  const persisted = await readPersistedDataset(store)
-  const recoveries: TransitionRecovery[] = []
-  for (const householdId of householdIds) {
-    const transition = loadOwnershipTransition(householdId)
-    if (!transition) continue
-    if (
-      persisted.ok &&
-      persisted.fingerprint === transition.previousFingerprint
-    ) {
-      if (removeTransition(transition)) {
-        recoveries.push({ kind: 'restored-old', householdId })
-        continue
-      }
-    }
-    if (
-      persisted.ok &&
-      persisted.fingerprint === transition.expectedFingerprint
-    ) {
-      try {
-        const written = { ...transition, phase: 'app-state-written' as const }
-        await finalizeOwnershipTransition(
-          written,
-          recoveryFinalizationGuard(written),
-        )
-        recoveries.push({ kind: 'finished-new', householdId })
-        continue
-      } catch {
-        // Fall through to the fail-closed review state.
-      }
-    }
-    const reason =
-      'Academy data changed during an interrupted household transition. Cloud writes are paused for parent review.'
+  const ambiguousReason =
+    'Academy ownership recovery is ambiguous or malformed. Local data remains unbound for parent review.'
+  if (hasUnparseableTransitionStorage() || transitions.length !== 1) {
+    invalidateAllLocalOwnership(ambiguousReason)
+    return transitions.length > 0
+      ? transitions.map((transition) => ({
+          kind: 'review' as const,
+          householdId: transition.targetHouseholdId,
+          reason: ambiguousReason,
+        }))
+      : [{ kind: 'review', householdId: 'unknown', reason: ambiguousReason }]
+  }
+  const transition = transitions[0]
+  const authenticatedUser = options.authenticatedUser
+  if (
+    !authenticatedUser ||
+    authenticatedUser.id !== transition.targetHouseholdId ||
+    !options.lifecycleValid() ||
+    !(await options.verifyCurrentHousehold()) ||
+    !options.lifecycleValid()
+  ) {
+    const reason = authenticatedUser
+      ? 'The signed-in household does not match the pending Academy recovery.'
+      : 'Sign in to the matching household before reviewing Academy recovery.'
     invalidateAllLocalOwnership(reason)
-    saveTransition({ ...transition, phase: 'review' })
-    recoveries.push({ kind: 'review', householdId, reason })
+    return [
+      {
+        kind: 'review',
+        householdId: transition.targetHouseholdId,
+        reason,
+      },
+    ]
   }
-  return recoveries
+  if (transition.phase === 'review') {
+    const reason =
+      transition.failureReason ??
+      'This Academy transition requires an explicit parent decision.'
+    invalidateAllLocalOwnership(reason)
+    return [
+      {
+        kind: 'review',
+        householdId: transition.targetHouseholdId,
+        reason,
+      },
+    ]
+  }
+  const persisted = await readPersistedDataset(store)
+  const provenance = readDatasetProvenance(store)
+  if (!persisted.ok || !provenance || provenance.importTransition) {
+    const reason =
+      'Persisted Academy recovery data or provenance is invalid. Local data remains unbound.'
+    reviewTransition(transition, reason)
+    invalidateAllLocalOwnership(reason)
+    return [
+      { kind: 'review', householdId: transition.targetHouseholdId, reason },
+    ]
+  }
+  if (
+    transition.phase === 'prepared' &&
+    persisted.fingerprint === transition.previousFingerprint
+  ) {
+    const reason =
+      'An Academy replacement stopped before the new dataset was durable. Local data is preserved but ownership requires parent review.'
+    reviewTransition(transition, reason)
+    invalidateAllLocalOwnership(reason)
+    return [
+      { kind: 'review', householdId: transition.targetHouseholdId, reason },
+    ]
+  }
+  if (
+    persisted.fingerprint !== transition.expectedFingerprint ||
+    provenance.fingerprint !== transition.expectedFingerprint ||
+    provenance.importEpoch !== transition.expectedImportEpoch
+  ) {
+    const reason =
+      'Academy data changed during interrupted recovery. Local data remains unbound for review.'
+    reviewTransition(transition, reason)
+    invalidateAllLocalOwnership(reason)
+    return [
+      { kind: 'review', householdId: transition.targetHouseholdId, reason },
+    ]
+  }
+  try {
+    const memoryFingerprint = await datasetFingerprint(options.inMemoryState)
+    if (memoryFingerprint !== transition.expectedFingerprint) {
+      throw new Error('Mounted Academy data does not match recovery data.')
+    }
+    const guard = recoveryFinalizationGuard(transition, options)
+    if (transition.phase === 'dataset-written') {
+      await finalizeOwnershipTransition(transition, guard, (meta) => {
+        options.publish(
+          persisted.state,
+          transition.expectedFingerprint,
+          meta,
+        )
+      })
+    } else {
+      const meta = loadHouseholdMeta(
+        transition.targetHouseholdId,
+        transition.targetEmail,
+      )
+      if (
+        meta.binding !== 'bound' ||
+        !meta.ownsLocalData ||
+        meta.datasetFingerprint !== transition.expectedFingerprint ||
+        meta.importEpoch !== transition.expectedImportEpoch ||
+        meta.cloudRevision !== transition.expectedCloudRevision
+      ) {
+        throw new Error('Recovery ownership metadata is not coherent.')
+      }
+      guard.adoptCurrentHouseholdBinding()
+      guard.publishExpectedDataset(transition.expectedFingerprint, () => {
+        options.publish(
+          persisted.state,
+          transition.expectedFingerprint,
+          meta,
+        )
+      })
+      const committed =
+        transition.phase === 'committed'
+          ? transition
+          : {
+              ...transition,
+              phase: 'committed' as const,
+              updatedAt: Date.now(),
+            }
+      if (
+        transition.phase !== 'committed' &&
+        !saveTransition(committed)
+      ) {
+        throw new Error('Recovery commit marker could not be verified.')
+      }
+      if (!removeTransition(committed)) {
+        throw new Error('Recovery marker could not be cleared.')
+      }
+    }
+    return [
+      { kind: 'finished-new', householdId: transition.targetHouseholdId },
+    ]
+  } catch (cause) {
+    const reason =
+      cause instanceof Error
+        ? cause.message
+        : 'Academy recovery failed and requires parent review.'
+    const current =
+      loadOwnershipTransition(
+        transition.targetHouseholdId,
+        transition.transitionId,
+      ) ?? transition
+    reviewTransition(current, reason)
+    invalidateAllLocalOwnership(reason)
+    return [
+      { kind: 'review', householdId: transition.targetHouseholdId, reason },
+    ]
+  }
 }
 
 export function cleanupLegacySyncStorage(): void {

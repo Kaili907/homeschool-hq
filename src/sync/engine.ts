@@ -6,12 +6,19 @@ import type {
   ReconciliationPreview,
   RemoteProfileRow,
 } from './types'
+import {
+  validateProfileForSync,
+  validateRemoteProfileRows,
+} from './provenance'
 
 const iso = (ms: number) => new Date(ms).toISOString()
 const msOf = (value: string) => Date.parse(value)
 
 /** Small deterministic content fingerprint. It is change detection, not security. */
 export function profileHash(profile: Profile): string {
+  if (!validateProfileForSync(profile.id, profile)) {
+    throw new Error('Cannot hash malformed Academy profile data.')
+  }
   const canonicalize = (value: unknown): unknown => {
     if (Array.isArray(value)) return value.map(canonicalize)
     if (!value || typeof value !== 'object') return value
@@ -32,6 +39,8 @@ export function profileHash(profile: Profile): string {
 }
 
 export function remoteRowsSignature(rows: RemoteProfileRow[]): string {
+  const validation = validateRemoteProfileRows(rows)
+  if (!validation.ok) throw new Error(validation.error)
   return [...rows]
     .sort((a, b) =>
       a.profile_id < b.profile_id ? -1 : a.profile_id > b.profile_id ? 1 : 0,
@@ -198,7 +207,7 @@ export function applyReviewedSelection(
   now: number,
 ): MergeSelectionResult {
   const remoteById = new Map(remote.map((row) => [row.profile_id, row]))
-  const profiles: Record<string, Profile> = {}
+  const profiles: Record<string, Profile> = Object.create(null)
   const toPush: RemoteProfileRow[] = []
 
   for (const item of preview.profiles) {
@@ -225,7 +234,10 @@ export function applyReviewedSelection(
         toPush.push({
           profile_id: item.id,
           data: loc,
-          updated_at: iso(Math.max(now, item.localUpdatedAt ?? 0)),
+          // The local metadata timestamp is stable across a lost-response
+          // retry, allowing the server mutation receipt to recognize the exact
+          // logical payload instead of creating a second mutation identity.
+          updated_at: iso(item.localUpdatedAt ?? now),
         })
       }
     }
@@ -239,6 +251,7 @@ export function metaAfterSuccessfulSync(
   profiles: Record<string, Profile>,
   remote: RemoteProfileRow[],
   now: number,
+  serverRevision: string,
 ): HouseholdSyncMeta {
   const remoteById = new Map(remote.map((row) => [row.profile_id, row]))
   const profileMeta: Record<string, ProfileSyncMeta> = {}
@@ -256,7 +269,7 @@ export function metaAfterSuccessfulSync(
   return {
     ...meta,
     profiles: profileMeta,
-    cloudRevision: remoteRowsSignature(remote),
+    cloudRevision: serverRevision,
     lastSyncAt: now,
     reconciliation: 'ready',
     conflictProfileIds: [],
@@ -273,6 +286,7 @@ export function automaticSyncPlan(
   remote: RemoteProfileRow[],
   meta: HouseholdSyncMeta,
   now: number,
+  serverRevision: string,
 ):
   | { ok: false; preview: ReconciliationPreview }
   | {
@@ -302,6 +316,7 @@ export function automaticSyncPlan(
       selected.profiles,
       remoteAfter,
       now,
+      serverRevision,
     ),
   }
 }

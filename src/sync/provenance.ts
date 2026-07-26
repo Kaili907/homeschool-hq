@@ -1,6 +1,6 @@
 import { SCHEMA_VERSION } from '../migration'
 import type { AppState, Profile } from '../types'
-import type { HouseholdSyncMeta } from './types'
+import type { HouseholdSyncMeta, RemoteProfileRow } from './types'
 
 export const APP_STATE_STORAGE_KEY = 'homeschool-hq:app:v2'
 export const DATASET_WRITE_LOCK_NAME = 'academy-sync-persisted-dataset'
@@ -13,6 +13,11 @@ const MAX_CANONICAL_NODES = 500_000
 const MAX_SYNC_ARRAY_ITEMS = 50_000
 const MAX_SYNC_RECORD_ENTRIES = 50_000
 const MAX_SYNC_STRING_LENGTH = 1_000_000
+const MAX_SYNC_KEY_LENGTH = 256
+const MAX_SYNC_PAYLOAD_BYTES = 10_000_000
+const MAX_SYNC_PROFILES = 5
+const PROFILE_ID = /^p[1-5]$/
+const RESERVED_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
 const GRADES = new Set(['3', '4', '6', '10', '12'])
 const THEMES = new Set(['playful', 'cool', 'clean'])
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
@@ -51,9 +56,13 @@ export type AppStateValidation =
   | { ok: false; error: string }
 
 function plainRecord(value: unknown): value is Record<string, unknown> {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
-  const prototype = Object.getPrototypeOf(value)
-  return prototype === Object.prototype || prototype === null
+  try {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+    const prototype = Object.getPrototypeOf(value)
+    return prototype === Object.prototype || prototype === null
+  } catch {
+    return false
+  }
 }
 
 function finiteNumber(value: unknown): value is number {
@@ -69,19 +78,26 @@ function identifier(value: unknown): value is string {
 }
 
 function isoDate(value: unknown, allowEmpty = false): value is string {
+  if (!text(value, 32)) return false
+  if (allowEmpty && value === '') return true
+  if (!ISO_DATE.test(value)) return false
+  const parsed = new Date(`${value}T00:00:00.000Z`)
   return (
-    text(value, 32) &&
-    ((allowEmpty && value === '') ||
-      (ISO_DATE.test(value) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`))))
+    !Number.isNaN(parsed.valueOf()) &&
+    parsed.toISOString().slice(0, 10) === value
   )
 }
 
 function timestamp(value: unknown): value is string {
-  return (
-    text(value, 64) &&
-    value.length > 0 &&
-    !Number.isNaN(Date.parse(value))
-  )
+  if (
+    !text(value, 64) ||
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/.test(
+      value,
+    )
+  ) {
+    return false
+  }
+  return !Number.isNaN(Date.parse(value))
 }
 
 function optional(
@@ -99,6 +115,7 @@ function boundedArray(
   return (
     Array.isArray(value) &&
     value.length <= max &&
+    Object.keys(value).length === value.length &&
     value.every((candidate) => validate(candidate))
   )
 }
@@ -111,7 +128,12 @@ function boundedRecord(
   const entries = Object.entries(value)
   return (
     entries.length <= MAX_SYNC_RECORD_ENTRIES &&
-    entries.every(([key, candidate]) => validate(candidate, key))
+    entries.every(
+      ([key, candidate]) =>
+        key.length <= MAX_SYNC_KEY_LENGTH &&
+        !RESERVED_KEYS.has(key) &&
+        validate(candidate, key),
+    )
   )
 }
 
@@ -573,9 +595,13 @@ function validateProfileOptionals(value: Record<string, unknown>): boolean {
   )
 }
 
-function validateProfile(key: string, value: unknown): value is Profile {
+export function validateProfileForSync(
+  key: string,
+  value: unknown,
+): value is Profile {
   if (!plainRecord(value)) return false
   return (
+    PROFILE_ID.test(key) &&
     value.id === key &&
     key.length > 0 &&
     text(value.name) &&
@@ -642,38 +668,50 @@ function validateSchoolYear(value: unknown): boolean {
  * the required profile containers used by sync receive explicit validation.
  */
 export function validateAppStateForSync(value: unknown): AppStateValidation {
-  if (!plainRecord(value)) {
-    return { ok: false, error: 'Stored Academy data is not an object.' }
-  }
-  if (value.schemaVersion !== SCHEMA_VERSION) {
-    return {
-      ok: false,
-      error: 'Stored Academy data uses an unsupported schema version.',
-    }
-  }
-  if (
-    !plainRecord(value.profiles) ||
-    !Object.entries(value.profiles).every(([key, profile]) =>
-      validateProfile(key, profile),
-    ) ||
-    !text(value.parentPin, 64) ||
-    !optional(value.tutorMuted, (candidate) => typeof candidate === 'boolean') ||
-    !optional(value.stars, validateGlobalStars) ||
-    !optional(value.mindsetStartDate, isoDate) ||
-    !optional(value.schoolYear, validateSchoolYear) ||
-    !(
-      value.activeProfileId === null ||
-      (typeof value.activeProfileId === 'string' &&
-        Object.hasOwn(value.profiles, value.activeProfileId))
-    )
-  ) {
-    return {
-      ok: false,
-      error: 'Stored Academy profile data is malformed.',
-    }
-  }
   try {
-    canonicalSerialize(value)
+    if (!plainRecord(value)) {
+      return { ok: false, error: 'Stored Academy data is not an object.' }
+    }
+    const canonical = canonicalSerialize(value)
+    if (new TextEncoder().encode(canonical).byteLength > MAX_SYNC_PAYLOAD_BYTES) {
+      return {
+        ok: false,
+        error: 'Stored Academy data exceeds the safe payload-size limit.',
+      }
+    }
+    if (value.schemaVersion !== SCHEMA_VERSION) {
+      return {
+        ok: false,
+        error: 'Stored Academy data uses an unsupported schema version.',
+      }
+    }
+    const profiles = value.profiles
+    if (
+      !plainRecord(profiles) ||
+      !boundedRecord(profiles, (profile, key) =>
+        validateProfileForSync(key, profile),
+      ) ||
+      Object.keys(profiles).length > MAX_SYNC_PROFILES ||
+      !text(value.parentPin, 64) ||
+      !optional(
+        value.tutorMuted,
+        (candidate) => typeof candidate === 'boolean',
+      ) ||
+      !optional(value.stars, validateGlobalStars) ||
+      !optional(value.mindsetStartDate, isoDate) ||
+      !optional(value.schoolYear, validateSchoolYear) ||
+      !(
+        value.activeProfileId === null ||
+        (typeof value.activeProfileId === 'string' &&
+          Object.hasOwn(profiles, value.activeProfileId))
+      )
+    ) {
+      return {
+        ok: false,
+        error: 'Stored Academy profile data is malformed.',
+      }
+    }
+    return { ok: true, state: value as unknown as AppState }
   } catch (cause) {
     return {
       ok: false,
@@ -683,7 +721,52 @@ export function validateAppStateForSync(value: unknown): AppStateValidation {
           : 'Stored Academy data is not safe to synchronize.',
     }
   }
-  return { ok: true, state: value as unknown as AppState }
+}
+
+export type RemoteRowsValidation =
+  | { ok: true; rows: RemoteProfileRow[] }
+  | { ok: false; error: string }
+
+/** Validate and bound every cloud row before hashing or reconciliation. */
+export function validateRemoteProfileRows(value: unknown): RemoteRowsValidation {
+  try {
+    const canonical = canonicalSerialize(value)
+    if (new TextEncoder().encode(canonical).byteLength > MAX_SYNC_PAYLOAD_BYTES) {
+      return { ok: false, error: 'The cloud profile payload is too large.' }
+    }
+    if (
+      !Array.isArray(value) ||
+      value.length > MAX_SYNC_PROFILES ||
+      Object.keys(value).length !== value.length
+    ) {
+      return { ok: false, error: 'The cloud returned an invalid profile list.' }
+    }
+    const ids = new Set<string>()
+    for (const candidate of value) {
+      if (!plainRecord(candidate)) {
+        return { ok: false, error: 'The cloud returned an invalid profile row.' }
+      }
+      const id = candidate.profile_id
+      if (
+        typeof id !== 'string' ||
+        !PROFILE_ID.test(id) ||
+        ids.has(id) ||
+        !validateProfileForSync(id, candidate.data) ||
+        typeof candidate.updated_at !== 'string' ||
+        candidate.updated_at.length > 64 ||
+        Number.isNaN(Date.parse(candidate.updated_at))
+      ) {
+        return { ok: false, error: 'The cloud returned an invalid profile row.' }
+      }
+      ids.add(id)
+    }
+    return { ok: true, rows: value as RemoteProfileRow[] }
+  } catch {
+    return {
+      ok: false,
+      error: 'The cloud returned malformed or unsafe profile data.',
+    }
+  }
 }
 
 /**
@@ -703,7 +786,13 @@ export function canonicalSerialize(value: unknown): string {
       throw new Error('Academy data exceeds safe validation limits.')
     }
     if (child === null) return 'null'
-    if (typeof child === 'string' || typeof child === 'boolean') {
+    if (typeof child === 'string') {
+      if (child.length > MAX_SYNC_STRING_LENGTH) {
+        throw new Error('Academy data contains an oversized string.')
+      }
+      return JSON.stringify(child)
+    }
+    if (typeof child === 'boolean') {
       return JSON.stringify(child)
     }
     if (typeof child === 'number') {
@@ -732,6 +821,12 @@ export function canonicalSerialize(value: unknown): string {
     active.add(child)
     try {
       if (Array.isArray(child)) {
+        if (
+          child.length > MAX_SYNC_ARRAY_ITEMS ||
+          Object.keys(child).length !== child.length
+        ) {
+          throw new Error('Academy data contains an oversized or sparse array.')
+        }
         return `[${child.map((item) => visit(item, depth + 1, true)).join(',')}]`
       }
       if (!plainRecord(child)) {
@@ -742,8 +837,14 @@ export function canonicalSerialize(value: unknown): string {
       }
       const descriptors = Object.getOwnPropertyDescriptors(child)
       const keys = Object.keys(descriptors).sort()
+      if (keys.length > MAX_SYNC_RECORD_ENTRIES) {
+        throw new Error('Academy data contains an oversized record.')
+      }
       const entries: string[] = []
       for (const key of keys) {
+        if (key.length > MAX_SYNC_KEY_LENGTH || RESERVED_KEYS.has(key)) {
+          throw new Error('Academy data contains an unsafe object key.')
+        }
         const descriptor = descriptors[key]
         if (!descriptor.enumerable) continue
         if (!('value' in descriptor)) {
@@ -769,6 +870,13 @@ function durableDataset(state: AppState): unknown {
   return durable
 }
 
+/** Synchronous canonical snapshot used only by the no-await dispatch guard. */
+export function canonicalDatasetSnapshot(state: AppState): string {
+  const validation = validateAppStateForSync(state)
+  if (!validation.ok) throw new Error(validation.error)
+  return canonicalSerialize(durableDataset(validation.state))
+}
+
 /** Platform Web Crypto SHA-256 over UTF-8, returned as lowercase hexadecimal. */
 export async function sha256Hex(text: string): Promise<string> {
   const subtle = globalThis.crypto?.subtle
@@ -784,7 +892,7 @@ export async function sha256Hex(text: string): Promise<string> {
 export async function datasetFingerprint(state: AppState): Promise<string> {
   const validation = validateAppStateForSync(state)
   if (!validation.ok) throw new Error(validation.error)
-  const canonical = canonicalSerialize(durableDataset(validation.state))
+  const canonical = canonicalDatasetSnapshot(validation.state)
   return `${DATASET_FINGERPRINT_VERSION}:${await sha256Hex(canonical)}`
 }
 

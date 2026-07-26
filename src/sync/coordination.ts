@@ -207,6 +207,7 @@ export interface FinalizationGuard {
   readonly householdId: string
   readonly importEpoch: string
   readonly cloudRevision: string
+  readonly resultingCloudRevision: string
   assertCurrent(
     stage: string,
     expectation?: FinalizationDatasetExpectation,
@@ -216,6 +217,10 @@ export interface FinalizationGuard {
     expectation?: FinalizationDatasetExpectation,
   ): void
   updateExpectedDataset(expectation: FinalizationDatasetExpectation): void
+  publishExpectedDataset(
+    expectedMemoryFingerprint: string,
+    publish: () => void,
+  ): void
   adoptCurrentHouseholdBinding(): void
   isCurrent(): Promise<boolean>
 }
@@ -248,6 +253,7 @@ export interface GuardedMutation {
   datasetFingerprint: string
   importEpoch: string
   cloudRevision: string
+  cloudSignature: string
   signal: AbortSignal
   lifecycleValid: () => boolean
   authenticatedHouseholdId: () => string | null
@@ -280,6 +286,7 @@ export async function executeGuardedMutation(
     memoryFingerprint: guard.datasetFingerprint,
     provenanceFingerprint: guard.datasetFingerprint,
   }
+  let resultingCloudRevision = guard.cloudRevision
 
   const lifecycleInvalidReason = (): string | null => {
     if (guard.signal.aborted) return 'The sync operation was cancelled.'
@@ -325,6 +332,9 @@ export async function executeGuardedMutation(
     householdId: guard.householdId,
     importEpoch: guard.importEpoch,
     cloudRevision: guard.cloudRevision,
+    get resultingCloudRevision() {
+      return resultingCloudRevision
+    },
     assertCurrent: async (stage, expectation = expectedDataset) => {
       await pauseAtFinalizationStage(stage)
       const before = await invalidReason(expectation)
@@ -363,6 +373,19 @@ export async function executeGuardedMutation(
       }
       expectedDataset = expectation
     },
+    publishExpectedDataset: (expectedMemoryFingerprint, publish) => {
+      finalization.assertCurrentNow(
+        'Immediately before replacement publication',
+      )
+      publish()
+      expectedDataset = {
+        ...expectedDataset,
+        memoryFingerprint: expectedMemoryFingerprint,
+      }
+      finalization.assertCurrentNow(
+        'Immediately after replacement publication',
+      )
+    },
     adoptCurrentHouseholdBinding: guard.adoptCurrentHouseholdBinding,
     isCurrent: async () =>
       !(await invalidReason(expectedDataset)) &&
@@ -383,7 +406,10 @@ export async function executeGuardedMutation(
       error: `Cloud data could not be rechecked: ${cloud.error}`,
     }
   }
-  if (remoteRowsSignature(cloud.rows) !== guard.cloudRevision) {
+  if (
+    cloud.revision !== guard.cloudRevision ||
+    remoteRowsSignature(cloud.rows) !== guard.cloudSignature
+  ) {
     return {
       ok: false,
       error:
@@ -409,6 +435,7 @@ export async function executeGuardedMutation(
     }
     const pushed = await guard.push()
     if (!pushed.ok) return pushed
+    resultingCloudRevision = pushed.revision
     if (
       !(await stillValid()) ||
       !(await guard.verifyPostResponseAuth()) ||
@@ -434,8 +461,4 @@ export async function executeGuardedMutation(
       }
     }
   })
-}
-
-export function guardedCloudRevision(rows: RemoteProfileRow[]): string {
-  return remoteRowsSignature(rows)
 }

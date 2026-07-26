@@ -10,12 +10,15 @@ import {
   supabaseConfigured,
   supabaseUrl,
 } from './config'
+import { validateRemoteProfileRows } from './provenance'
 import type {
   CloudPullResult,
   CloudPushResult,
   RemoteProfileRow,
   SignedInUser,
 } from './types'
+
+export const AUTH_VERIFICATION_TIMEOUT_MS = 8_000
 
 /**
  * Official Supabase browser client. Its supported auth layer owns session
@@ -83,14 +86,47 @@ export async function getCurrentSession(
 /** Server-verified user identity for the final cloud mutation boundary. */
 export async function getVerifiedCurrentUser(
   client = getSupabaseClient(),
+  signal?: AbortSignal,
+  timeoutMs = AUTH_VERIFICATION_TIMEOUT_MS,
 ): Promise<SignedInUser | null> {
   if (!client) return null
-  const { data, error } = await client.auth.getUser()
+  const result = await boundedAuthorization(
+    client.auth.getUser(),
+    signal,
+    timeoutMs,
+  )
+  if (!result || signal?.aborted) return null
+  const { data, error } = result
   if (error || !data.user?.id) return null
   return {
     id: data.user.id,
     email: data.user.email ?? data.user.id,
   }
+}
+
+async function boundedAuthorization<T>(
+  operation: Promise<T>,
+  signal?: AbortSignal,
+  timeoutMs = AUTH_VERIFICATION_TIMEOUT_MS,
+): Promise<T | null> {
+  if (signal?.aborted) return null
+  return new Promise<T | null>((resolve) => {
+    let settled = false
+    const finish = (value: T | null) => {
+      if (settled) return
+      settled = true
+      globalThis.clearTimeout(timer)
+      signal?.removeEventListener('abort', aborted)
+      resolve(value)
+    }
+    const aborted = () => finish(null)
+    const timer = globalThis.setTimeout(() => finish(null), timeoutMs)
+    signal?.addEventListener('abort', aborted, { once: true })
+    void operation.then(
+      (value) => finish(value),
+      () => finish(null),
+    )
+  })
 }
 
 export interface VerifiedAuthContext {
@@ -132,14 +168,27 @@ function redactAccessToken(message: string, accessToken: string): string {
  */
 export async function getVerifiedAuthContext(
   client = getSupabaseClient(),
+  signal?: AbortSignal,
+  timeoutMs = AUTH_VERIFICATION_TIMEOUT_MS,
 ): Promise<VerifiedAuthContext | null> {
   if (!client) return null
-  const { data: sessionData, error: sessionError } =
-    await client.auth.getSession()
+  const sessionResult = await boundedAuthorization(
+    client.auth.getSession(),
+    signal,
+    timeoutMs,
+  )
+  if (!sessionResult || signal?.aborted) return null
+  const { data: sessionData, error: sessionError } = sessionResult
   const accessToken = sessionData.session?.access_token
   if (sessionError || !accessToken || !accessTokenShapeIsValid(accessToken))
     return null
-  const { data, error } = await client.auth.getUser(accessToken)
+  const userResult = await boundedAuthorization(
+    client.auth.getUser(accessToken),
+    signal,
+    timeoutMs,
+  )
+  if (!userResult || signal?.aborted) return null
+  const { data, error } = userResult
   if (error || !data.user?.id) return null
   return {
     user: {
@@ -153,13 +202,16 @@ export async function getVerifiedAuthContext(
 }
 
 /**
- * Re-verifies the exact pinned access token; it never falls back to the
- * currently stored session and never accepts a refresh-token string.
+ * Re-verifies both the exact pinned token and the canonical current session.
+ * A same-household refresh may change token text, but sign-out/account switch
+ * is denied even while the older pinned access token remains server-valid.
  */
 export async function verifyPinnedAuthContext(
   context: unknown,
   expectedHouseholdId: string,
   client = getSupabaseClient(),
+  signal?: AbortSignal,
+  timeoutMs = AUTH_VERIFICATION_TIMEOUT_MS,
 ): Promise<boolean> {
   if (
     !client ||
@@ -169,8 +221,26 @@ export async function verifyPinnedAuthContext(
     return false
   }
   try {
-    const { data, error } = await client.auth.getUser(context.accessToken)
-    return !error && data.user?.id === expectedHouseholdId
+    const verification = await boundedAuthorization(
+      Promise.all([
+        client.auth.getUser(context.accessToken),
+        client.auth.getSession(),
+        client.auth.getUser(),
+      ]),
+      signal,
+      timeoutMs,
+    )
+    if (!verification || signal?.aborted) return false
+    const [pinned, session, canonical] = verification
+    return (
+      !pinned.error &&
+      pinned.data.user?.id === expectedHouseholdId &&
+      !session.error &&
+      !!session.data.session?.access_token &&
+      session.data.session.user.id === expectedHouseholdId &&
+      !canonical.error &&
+      canonical.data.user?.id === expectedHouseholdId
+    )
   } catch {
     return false
   }
@@ -185,18 +255,32 @@ export function onAuthSessionChange(
   return () => data.subscription.unsubscribe()
 }
 
-function isRemoteProfileRow(value: unknown): value is RemoteProfileRow {
-  if (!value || typeof value !== 'object') return false
-  const row = value as Partial<RemoteProfileRow>
-  return (
-    typeof row.profile_id === 'string' &&
-    !!row.data &&
-    typeof row.data === 'object' &&
-    row.data.id === row.profile_id &&
-    typeof row.data.name === 'string' &&
-    typeof row.updated_at === 'string' &&
-    Number.isFinite(Date.parse(row.updated_at))
-  )
+function parseServerRevision(value: unknown): string | null {
+  if (
+    (typeof value === 'string' && /^(0|[1-9]\d*)$/.test(value)) ||
+    (typeof value === 'number' &&
+      Number.isSafeInteger(value) &&
+      value >= 0)
+  ) {
+    return String(value)
+  }
+  return null
+}
+
+function parseSnapshot(value: unknown): CloudPullResult {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return { ok: false, error: 'The cloud returned an invalid sync snapshot.' }
+  }
+  const snapshot = value as Record<string, unknown>
+  const revision = parseServerRevision(snapshot.revision)
+  const rows = validateRemoteProfileRows(snapshot.rows)
+  if (!revision || !rows.ok) {
+    return {
+      ok: false,
+      error: rows.ok ? 'The cloud returned an invalid revision.' : rows.error,
+    }
+  }
+  return { ok: true, rows: rows.rows, revision }
 }
 
 /** Pull failures remain failures; an empty array is returned only on a successful query. */
@@ -206,21 +290,11 @@ export async function pullProfiles(
 ): Promise<CloudPullResult> {
   if (!client) return { ok: false, error: 'Cloud sync is not configured.' }
   try {
-    let query = client.from('profiles').select('profile_id,data,updated_at')
+    let query = client.rpc('academy_sync_snapshot')
     if (signal) query = query.abortSignal(signal)
     const { data, error } = await query
     if (error) return { ok: false, error: error.message }
-    if (!Array.isArray(data)) {
-      return {
-        ok: false,
-        error: 'The cloud returned an invalid profile response.',
-      }
-    }
-    const rows = data.filter(isRemoteProfileRow)
-    if (rows.length !== data.length) {
-      return { ok: false, error: 'The cloud returned an invalid profile row.' }
-    }
-    return { ok: true, rows }
+    return parseSnapshot(data)
   } catch {
     return {
       ok: false,
@@ -231,6 +305,8 @@ export async function pullProfiles(
 
 export async function pushProfiles(
   rows: RemoteProfileRow[],
+  expectedRevision: string,
+  mutationId: string,
   verifiedContext: unknown,
   expectedHouseholdId: string,
   dispatchStillAuthorized: () => boolean,
@@ -241,9 +317,14 @@ export async function pushProfiles(
   ) => SupabaseClient = (accessToken) =>
     createClient(supabaseUrl(), supabaseAnonKey(), {
       accessToken: async () => accessToken,
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      },
     }),
 ): Promise<CloudPushResult> {
-  if (rows.length === 0) return { ok: true }
+  if (rows.length === 0) return { ok: true, revision: expectedRevision }
   if (!supabaseConfigured())
     return { ok: false, error: 'Cloud sync is not configured.' }
   if (
@@ -254,6 +335,7 @@ export async function pushProfiles(
       verifiedContext,
       expectedHouseholdId,
       verificationClient,
+      signal,
     ))
   ) {
     return {
@@ -269,20 +351,56 @@ export async function pushProfiles(
     }
   }
   try {
-    const payload = profileRowsForUpsert(rows)
+    const validation = validateRemoteProfileRows(rows)
+    if (!validation.ok) return { ok: false, error: validation.error }
+    const payload = profileRowsForMutation(validation.rows)
     const writeClient = createWriteClient(verifiedContext.accessToken)
-    let query = writeClient.from('profiles').upsert(payload, {
-      onConflict: 'household_id,profile_id',
-      defaultToNull: false,
+    let query = writeClient.rpc('academy_apply_profile_mutation', {
+      p_expected_revision: expectedRevision,
+      p_mutation_id: mutationId,
+      p_profiles: payload,
     })
     if (signal) query = query.abortSignal(signal)
-    const { error } = await query
-    return error
-      ? {
-          ok: false,
-          error: redactAccessToken(error.message, verifiedContext.accessToken),
-        }
-      : { ok: true }
+    // Creating a PostgREST builder is inert. This is the final synchronous
+    // authorization check immediately before awaiting it starts the request.
+    if (!dispatchStillAuthorized() || signal?.aborted) {
+      return {
+        ok: false,
+        error: 'The household authorization changed at mutation dispatch.',
+      }
+    }
+    const { data, error } = await query
+    if (error) {
+      return {
+        ok: false,
+        error: redactAccessToken(error.message, verifiedContext.accessToken),
+      }
+    }
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      return { ok: false, error: 'The cloud returned an invalid CAS result.' }
+    }
+    const result = data as Record<string, unknown>
+    const revision = parseServerRevision(result.revision)
+    if (!revision) {
+      return { ok: false, error: 'The cloud returned an invalid CAS revision.' }
+    }
+    if (result.status === 'conflict') {
+      return {
+        ok: false,
+        conflict: true,
+        revision,
+        error:
+          'Another device updated this household first. Review the refreshed cloud data.',
+      }
+    }
+    if (result.status === 'applied' || result.status === 'replayed') {
+      return {
+        ok: true,
+        revision,
+        ...(result.status === 'replayed' ? { replayed: true } : {}),
+      }
+    }
+    return { ok: false, error: 'The cloud returned an unknown CAS result.' }
   } catch {
     return {
       ok: false,
@@ -291,7 +409,7 @@ export async function pushProfiles(
   }
 }
 
-export function profileRowsForUpsert(rows: RemoteProfileRow[]) {
+export function profileRowsForMutation(rows: RemoteProfileRow[]) {
   return rows.map((row) => ({
     profile_id: row.profile_id,
     data: row.data,

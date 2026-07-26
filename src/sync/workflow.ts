@@ -18,6 +18,7 @@ export interface SyncTransport {
   push: (
     rows: RemoteProfileRow[],
     expectedCloudRows: RemoteProfileRow[],
+    expectedRevision: string,
   ) => Promise<CloudPushResult>
 }
 
@@ -26,6 +27,7 @@ export type HouseholdInspection =
   | {
       kind: 'preview'
       rows: RemoteProfileRow[]
+      revision: string
       preview: ReconciliationPreview
     }
 
@@ -40,6 +42,7 @@ export async function inspectUnboundHousehold(
     ? {
         kind: 'preview',
         rows: result.rows,
+        revision: result.revision,
         preview: buildReconciliationPreview(local, result.rows, meta),
       }
     : { kind: 'pull-error', error: result.error }
@@ -51,13 +54,21 @@ export type AutomaticCycle =
   | {
       kind: 'review'
       rows: RemoteProfileRow[]
+      revision: string
       preview: ReconciliationPreview
       meta: HouseholdSyncMeta
     }
-  | { kind: 'push-error'; error: string; meta: HouseholdSyncMeta }
+  | {
+      kind: 'push-error'
+      error: string
+      meta: HouseholdSyncMeta
+      conflict?: true
+      revision?: string
+    }
   | {
       kind: 'success'
       rows: RemoteProfileRow[]
+      revision: string
       profiles: Record<string, Profile>
       meta: HouseholdSyncMeta
     }
@@ -77,7 +88,13 @@ export async function executeAutomaticCycle(
   const pulled = await transport.pull()
   if (!pulled.ok) return { kind: 'pull-error', error: pulled.error }
 
-  const plan = automaticSyncPlan(local, pulled.rows, meta, now)
+  const plan = automaticSyncPlan(
+    local,
+    pulled.rows,
+    meta,
+    now,
+    pulled.revision,
+  )
   if (!plan.ok) {
     const conflictProfileIds = plan.preview.profiles
       .filter((profile) => profile.category === 'both-changed')
@@ -85,6 +102,7 @@ export async function executeAutomaticCycle(
     return {
       kind: 'review',
       rows: pulled.rows,
+      revision: pulled.revision,
       preview: plan.preview,
       meta: {
         ...meta,
@@ -95,18 +113,33 @@ export async function executeAutomaticCycle(
   }
 
   if (plan.toPush.length > 0) {
-    const pushed = await transport.push(plan.toPush, pulled.rows)
+    const pushed = await transport.push(
+      plan.toPush,
+      pulled.rows,
+      pulled.revision,
+    )
     if (!pushed.ok) {
+      const pending = markDirty(
+        meta,
+        plan.toPush.map((row) => row.profile_id),
+        now,
+      )
       return {
         kind: 'push-error',
         error: pushed.error,
-        meta: markDirty(
-          meta,
-          plan.toPush.map((row) => row.profile_id),
-          now,
-        ),
+        ...(pushed.conflict ? { conflict: true as const } : {}),
+        ...(pushed.revision ? { revision: pushed.revision } : {}),
+        meta: pushed.conflict
+          ? {
+              ...pending,
+              reconciliation: 'review',
+              pauseReason:
+                'Another device updated this household. Review the refreshed cloud state before retrying.',
+            }
+          : pending,
       }
     }
+    pulled.revision = pushed.revision
   }
   const rowsAfter = [
     ...pulled.rows.filter(
@@ -118,8 +151,9 @@ export async function executeAutomaticCycle(
   return {
     kind: 'success',
     rows: rowsAfter,
+    revision: pulled.revision,
     profiles: plan.profiles,
-    meta: plan.nextMeta,
+    meta: { ...plan.nextMeta, cloudRevision: pulled.revision },
   }
 }
 
@@ -128,6 +162,7 @@ export function prepareConfirmedLocalUpload(
   local: Record<string, Profile>,
   meta: HouseholdSyncMeta,
   now: number,
+  expectedRevision: string,
 ): { rows: RemoteProfileRow[]; meta: HouseholdSyncMeta } {
   const rows = Object.values(local).map((profile) => ({
     profile_id: profile.id,
@@ -136,6 +171,6 @@ export function prepareConfirmedLocalUpload(
   }))
   return {
     rows,
-    meta: metaAfterSuccessfulSync(meta, local, rows, now),
+    meta: metaAfterSuccessfulSync(meta, local, rows, now, expectedRevision),
   }
 }

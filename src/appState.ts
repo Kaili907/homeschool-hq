@@ -1,6 +1,6 @@
 import type { AppState, Profile, SkillState, SkillStatus } from './types'
 import type { SkillId } from './skills'
-import { defaultAppState, isAppState, migrateV1ToV2 } from './migration'
+import { defaultAppState, migrateV1ToV2 } from './migration'
 import {
   APP_STATE_STORAGE_KEY,
   DATASET_WRITE_LOCK_NAME,
@@ -18,6 +18,7 @@ import {
 const V1_KEY = 'homeschool-hq:profile:v1'
 const BACKUP_PREFIX = 'homeschool-hq:backup:v1:'
 const IMPORT_BACKUP_PREFIX = 'homeschool-hq:backup:import:'
+const QUARANTINE_PREFIX = 'homeschool-hq:quarantine:app:'
 export const APP_STATE_IMPORT_EVENT = 'academy:app-state-import'
 const importedStates = new WeakSet<object>()
 
@@ -26,6 +27,20 @@ export interface LoadResult {
   migrated: boolean
   /** localStorage key holding the pre-migration v1 snapshot */
   backupKey?: string
+  /** Preserved malformed source that was not published into the application. */
+  quarantineKey?: string
+  recoveryError?: string
+}
+
+function quarantineRawState(raw: string, source: 'v1' | 'v2'): string | null {
+  try {
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-')
+    const key = `${QUARANTINE_PREFIX}${source}:${stamp}`
+    localStorage.setItem(key, raw)
+    return key
+  } catch {
+    return null
+  }
 }
 
 /**
@@ -33,14 +48,26 @@ export interface LoadResult {
  * backup key FIRST, then migrate. The original v1 key is never deleted.
  */
 export function loadAppState(): LoadResult {
-  try {
-    const raw2 = localStorage.getItem(APP_STATE_STORAGE_KEY)
-    if (raw2) {
+  const raw2 = localStorage.getItem(APP_STATE_STORAGE_KEY)
+  if (raw2) {
+    try {
       const parsed = JSON.parse(raw2) as unknown
-      if (isAppState(parsed)) return { state: parsed, migrated: false }
+      const validation = validateAppStateForSync(parsed)
+      if (validation.ok) return { state: validation.state, migrated: false }
+    } catch {
+      // The exact malformed JSON is quarantined below before a safe default is
+      // published; it is never silently discarded.
     }
-  } catch {
-    // fall through
+    const quarantineKey = quarantineRawState(raw2, 'v2')
+    const fresh = defaultAppState()
+    localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(fresh))
+    return {
+      state: fresh,
+      migrated: false,
+      ...(quarantineKey ? { quarantineKey } : {}),
+      recoveryError:
+        'Stored Academy data was preserved for recovery but was not loaded because it is malformed.',
+    }
   }
   try {
     const raw1 = localStorage.getItem(V1_KEY)
@@ -50,8 +77,25 @@ export function loadAppState(): LoadResult {
       localStorage.setItem(backupKey, raw1) // backup BEFORE any conversion
       const migrated = migrateV1ToV2(JSON.parse(raw1))
       if (migrated) {
-        localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(migrated))
-        return { state: migrated, migrated: true, backupKey }
+        const validation = validateAppStateForSync(migrated)
+        if (validation.ok) {
+          localStorage.setItem(
+            APP_STATE_STORAGE_KEY,
+            JSON.stringify(validation.state),
+          )
+          return { state: validation.state, migrated: true, backupKey }
+        }
+      }
+      const quarantineKey = quarantineRawState(raw1, 'v1')
+      const fresh = defaultAppState()
+      localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(fresh))
+      return {
+        state: fresh,
+        migrated: false,
+        backupKey,
+        ...(quarantineKey ? { quarantineKey } : {}),
+        recoveryError:
+          'Legacy Academy data was preserved for recovery but could not be migrated safely.',
       }
     }
   } catch {
@@ -317,6 +361,18 @@ export function importBackup(current: AppState, text: string): ImportResult {
   }
   const asV1 = migrateV1ToV2(parsed)
   if (asV1) {
+    const merged = {
+      ...current,
+      profiles: { ...current.profiles, p1: asV1.profiles.p1 },
+    }
+    const validation = validateAppStateForSync(merged)
+    if (!validation.ok) {
+      return {
+        ok: false,
+        error:
+          'That legacy backup contains malformed Academy data and was not imported.',
+      }
+    }
     if (!backupBeforeImport(current)) {
       return {
         ok: false,
@@ -325,10 +381,7 @@ export function importBackup(current: AppState, text: string): ImportResult {
       }
     }
     return successfulImport(
-      {
-        ...current,
-        profiles: { ...current.profiles, p1: asV1.profiles.p1 },
-      },
+      validation.state,
       'Old single-profile backup restored into the 3rd grader profile.',
     )
   }

@@ -42,7 +42,7 @@ export interface HouseholdSyncMeta {
   datasetFingerprint: string | null
   /** Durable import generation explicitly approved with this binding. */
   importEpoch: string | null
-  /** Aggregate revision from the most recently verified cloud inspection. */
+  /** Server-managed household revision from the last verified cloud snapshot. */
   cloudRevision: string | null
   profiles: Record<string, ProfileSyncMeta>
   lastSyncAt?: number
@@ -67,22 +67,33 @@ export const emptyHouseholdMeta = (
   conflictProfileIds: [],
 })
 
+/**
+ * Monotonic durable replacement state machine:
+ * prepared -> dataset-written -> ownership-written -> committed -> removed.
+ * Any phase may fail closed to review, which is never auto-finalized.
+ */
 export type OwnershipTransitionPhase =
   | 'prepared'
-  | 'app-state-written'
+  | 'dataset-written'
+  | 'ownership-written'
+  | 'committed'
   | 'review'
 
 export interface OwnershipTransition {
-  version: 1
+  version: 2
+  transitionId: string
   operationId: string
   targetHouseholdId: string
   targetEmail: string
   expectedFingerprint: string
   expectedImportEpoch: string
+  expectedCloudRevision: string
   previousFingerprint: string
   previousOwnerHouseholdId: string | null
   phase: OwnershipTransitionPhase
   createdAt: number
+  updatedAt: number
+  failureReason?: string
   nextMeta: HouseholdSyncMeta
 }
 
@@ -109,10 +120,17 @@ export interface ReconciliationPreview {
 }
 
 export type CloudPullResult =
-  | { ok: true; rows: RemoteProfileRow[] }
+  | { ok: true; rows: RemoteProfileRow[]; revision: string }
   | { ok: false; error: string }
 
-export type CloudPushResult = { ok: true } | { ok: false; error: string }
+export type CloudPushResult =
+  | { ok: true; revision: string; replayed?: boolean }
+  | {
+      ok: false
+      error: string
+      conflict?: true
+      revision?: string
+    }
 
 export type SyncDecisionReason = 'first-sync' | 'account-switch' | 'conflict'
 

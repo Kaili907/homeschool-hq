@@ -19,6 +19,7 @@ import {
   cleanupLegacySyncStorage,
   invalidateAllLocalOwnership,
   isLegacySyncStorageKey,
+  listOwnershipTransitions,
   loadHouseholdMeta,
   localDataOwner,
   pauseHouseholdForMismatch,
@@ -53,17 +54,19 @@ import {
 } from './engine'
 import {
   APP_STATE_STORAGE_KEY,
+  canonicalDatasetSnapshot,
   DATASET_PROVENANCE_STORAGE_KEY,
   DATASET_WRITE_LOCK_NAME,
   datasetFingerprint,
   ensureDatasetProvenance,
   readDatasetProvenance,
   readPersistedDataset,
+  sha256Hex,
   verifyOwnedDatasetProvenance,
 } from './provenance'
 import {
-  getCurrentSession,
   getVerifiedAuthContext,
+  getVerifiedCurrentUser,
   onAuthSessionChange,
   pullProfiles,
   pushProfiles,
@@ -142,7 +145,9 @@ function appStateWithProfiles(
 }
 
 function profilesFromRows(rows: RemoteProfileRow[]): Record<string, Profile> {
-  return Object.fromEntries(rows.map((row) => [row.profile_id, row.data]))
+  const profiles: Record<string, Profile> = Object.create(null)
+  for (const row of rows) profiles[row.profile_id] = row.data
+  return profiles
 }
 
 export function useSync(
@@ -154,6 +159,7 @@ export function useSync(
     typeof navigator === 'undefined' ? true : navigator.onLine,
   )
   const [bootstrapped, setBootstrapped] = useState(false)
+  const [recoveryReady, setRecoveryReady] = useState(false)
   const [user, setUser] = useState<SignedInUser | null>(null)
   const [meta, setMeta] = useState<HouseholdSyncMeta | null>(null)
   const [busy, setBusy] = useState(false)
@@ -164,6 +170,7 @@ export function useSync(
   const userRef = useRef<SignedInUser | null>(null)
   const metaRef = useRef<HouseholdSyncMeta | null>(null)
   const remoteRowsRef = useRef<RemoteProfileRow[]>([])
+  const remoteRevisionRef = useRef<string>('0')
   const profilesRef = useRef(state.profiles)
   const snapshotRef = useRef(state.profiles)
   const stateRef = useRef(state)
@@ -316,6 +323,7 @@ export function useSync(
     async (
       rows: RemoteProfileRow[],
       expectedCloudRows: RemoteProfileRow[],
+      expectedServerRevision: string,
       expectedUser: SignedInUser,
       operation: ActiveOperation,
       allowUnbound: boolean,
@@ -330,8 +338,32 @@ export function useSync(
         allowUnbound,
       )
       stateFingerprintRef.current = initial.fingerprint
-      const expectedCloudRevision = remoteRowsSignature(expectedCloudRows)
-      let verifiedContext: VerifiedAuthContext | null = null
+      const expectedCloudSignature = remoteRowsSignature(expectedCloudRows)
+      const expectedMemoryCanonical = canonicalDatasetSnapshot(stateRef.current)
+      const mutationId =
+        rows.length === 0
+          ? operation.id
+          : `academy-${expectedServerRevision}-${await sha256Hex(
+              remoteRowsSignature(rows),
+            )}`
+      const persistedRaw =
+        typeof localStorage === 'undefined'
+          ? null
+          : localStorage.getItem(APP_STATE_STORAGE_KEY)
+      let verifiedContext = await getVerifiedAuthContext(
+        undefined,
+        operation.controller.signal,
+      )
+      if (
+        !verifiedContext ||
+        verifiedContext.user.id !== expectedUser.id ||
+        operation.controller.signal.aborted
+      ) {
+        return {
+          ok: false,
+          error: 'The verified household session was unavailable or timed out.',
+        }
+      }
 
       return runUnderWebLock(expectedUser.id, async () => {
         let lease: MutationLease | null = tryAcquireMutationLease({
@@ -340,7 +372,7 @@ export function useSync(
           operationId: operation.id,
           datasetFingerprint: initial.fingerprint,
           importEpoch: initial.importEpoch,
-          cloudRevision: expectedCloudRevision,
+          cloudRevision: expectedServerRevision,
         })
         if (!lease) {
           return {
@@ -354,6 +386,36 @@ export function useSync(
           JSON.stringify(
             loadHouseholdMeta(expectedUser.id, expectedUser.email),
           ) === expectedMeta
+        const finalDispatchAuthorized = () => {
+          const provenance = readDatasetProvenance()
+          const currentRaw =
+            typeof localStorage === 'undefined'
+              ? null
+              : localStorage.getItem(APP_STATE_STORAGE_KEY)
+          return (
+            mountedRef.current &&
+            operationRef.current?.id === operation.id &&
+            !operation.controller.signal.aborted &&
+            userRef.current?.id === expectedUser.id &&
+            !externalBlockedRef.current &&
+            !heartbeatLost &&
+            !!lease &&
+            lease.householdId === expectedUser.id &&
+            lease.operationId === operation.id &&
+            lease.cloudRevision === expectedServerRevision &&
+            mutationLeaseIsOwned(lease) &&
+            currentRaw === persistedRaw &&
+            canonicalDatasetSnapshot(stateRef.current) ===
+              expectedMemoryCanonical &&
+            stateFingerprintRef.current === initial.fingerprint &&
+            provenance?.fingerprint === initial.fingerprint &&
+            provenance.importEpoch === initial.importEpoch &&
+            !provenance.importTransition &&
+            householdBindingValid() &&
+            remoteRevisionRef.current === expectedServerRevision &&
+            listOwnershipTransitions().length === 0
+          )
+        }
         const heartbeatCanRun = () =>
           mountedRef.current &&
           operationRef.current?.id === operation.id &&
@@ -390,7 +452,8 @@ export function useSync(
             householdId: expectedUser.id,
             datasetFingerprint: initial.fingerprint,
             importEpoch: initial.importEpoch,
-            cloudRevision: expectedCloudRevision,
+            cloudRevision: expectedServerRevision,
+            cloudSignature: expectedCloudSignature,
             signal: operation.controller.signal,
             lifecycleValid: () =>
               mountedRef.current &&
@@ -398,7 +461,10 @@ export function useSync(
               !externalBlockedRef.current,
             authenticatedHouseholdId: () => userRef.current?.id ?? null,
             verifyAuthenticatedHousehold: async () => {
-              const verified = await getVerifiedAuthContext()
+              const verified = await getVerifiedAuthContext(
+                undefined,
+                operation.controller.signal,
+              )
               verifiedContext =
                 verified?.user.id === expectedUser.id
                   ? verified
@@ -414,6 +480,8 @@ export function useSync(
               (await verifyPinnedAuthContext(
                 verifiedContext,
                 expectedUser.id,
+                undefined,
+                operation.controller.signal,
               )),
             currentDatasetContext: async () => {
               const persisted = await readPersistedDataset()
@@ -484,7 +552,12 @@ export function useSync(
             },
             pull: () => pullProfiles(undefined, operation.controller.signal),
             push: async () => {
-              if (rows.length === 0) return { ok: true as const }
+              if (rows.length === 0) {
+                return {
+                  ok: true as const,
+                  revision: expectedServerRevision,
+                }
+              }
               if (!verifiedContext) {
                 return {
                   ok: false as const,
@@ -494,14 +567,11 @@ export function useSync(
               }
               return pushProfiles(
                 rows,
+                expectedServerRevision,
+                mutationId,
                 verifiedContext,
                 expectedUser.id,
-                () =>
-                  mountedRef.current &&
-                  operationRef.current?.id === operation.id &&
-                  userRef.current?.id === expectedUser.id &&
-                  !operation.controller.signal.aborted &&
-                  !externalBlockedRef.current,
+                finalDispatchAuthorized,
                 operation.controller.signal,
               )
             },
@@ -545,6 +615,7 @@ export function useSync(
           return
         }
         remoteRowsRef.current = inspection.rows
+        remoteRevisionRef.current = inspection.revision
         const previous = localDataOwner(verifiedUser.id)
         setDecision({
           reason: previous ? 'account-switch' : 'first-sync',
@@ -591,14 +662,18 @@ export function useSync(
           Date.now(),
           {
             pull: () => pullProfiles(undefined, operation.controller.signal),
-            push: (rows, expectedCloudRows) =>
-              guardedCloudPush(
+            push: (rows, expectedCloudRows, expectedRevision) => {
+              remoteRowsRef.current = expectedCloudRows
+              remoteRevisionRef.current = expectedRevision
+              return guardedCloudPush(
                 rows,
                 expectedCloudRows,
+                expectedRevision,
                 verifiedUser,
                 operation,
                 false,
-              ),
+              )
+            },
           },
         )
         if (
@@ -615,12 +690,39 @@ export function useSync(
         if (cycle.kind === 'unbound') return
         if (cycle.kind === 'push-error') {
           persistCurrentMeta(cycle.meta)
+          if (cycle.conflict) {
+            const refreshed = await pullProfiles(
+              undefined,
+              operation.controller.signal,
+            )
+            if (
+              refreshed.ok &&
+              mountedRef.current &&
+              !operation.controller.signal.aborted &&
+              userRef.current?.id === verifiedUser.id
+            ) {
+              remoteRowsRef.current = refreshed.rows
+              remoteRevisionRef.current = refreshed.revision
+              setDecision({
+                reason: 'conflict',
+                cloud: refreshed.rows.length === 0 ? 'empty' : 'data',
+                preview: buildReconciliationPreview(
+                  profilesRef.current,
+                  refreshed.rows,
+                  cycle.meta,
+                ),
+              })
+            }
+          }
           safeSetError(
-            `Cloud data was read, but local changes were not uploaded: ${cycle.error}`,
+            cycle.conflict
+              ? cycle.error
+              : `Cloud data was read, but local changes were not uploaded: ${cycle.error}`,
           )
           return
         }
         remoteRowsRef.current = cycle.rows
+        remoteRevisionRef.current = cycle.revision
         if (cycle.kind === 'review') {
           persistCurrentMeta(cycle.meta)
           setDecision({
@@ -636,6 +738,7 @@ export function useSync(
         const finalized = await guardedCloudPush(
           [],
           cycle.rows,
+          cycle.revision,
           verifiedUser,
           operation,
           false,
@@ -643,7 +746,10 @@ export function useSync(
             await replaceDatasetAndClaim(
               verifiedUser.id,
               verifiedUser.email,
-              cycle.meta,
+              {
+                ...cycle.meta,
+                cloudRevision: finalization.resultingCloudRevision,
+              },
               nextState,
               finalization,
               (claimed) => {
@@ -696,7 +802,8 @@ export function useSync(
   }, [configured, persistCurrentMeta, prepareUnbound, runBoundSync])
   syncNowRef.current = syncNow
 
-  // Upgrade cleanup and interrupted transition recovery happen before auth.
+  // Upgrade cleanup and durable import recovery happen before auth. Household
+  // ownership recovery is deliberately deferred until canonical auth is known.
   useEffect(() => {
     mountedRef.current = true
     cleanupLegacySyncStorage()
@@ -705,11 +812,6 @@ export function useSync(
       try {
         await ensureDatasetProvenance()
         await recoverDurableImportTransition()
-        const recoveries = await recoverOwnershipTransitions()
-        const review = recoveries.find((item) => item.kind === 'review')
-        if (live && mountedRef.current && review?.kind === 'review') {
-          setError(review.reason)
-        }
       } catch (cause) {
         if (live && mountedRef.current) {
           setError(
@@ -733,28 +835,113 @@ export function useSync(
   useEffect(() => {
     if (!configured || !bootstrapped) return
     let live = true
-    void getCurrentSession().then((session) => {
+    const controller = new AbortController()
+    void getVerifiedAuthContext(undefined, controller.signal).then((context) => {
       if (!live || !mountedRef.current) return
-      const restored = userFromSession(session)
+      const restored = context?.user ?? null
       userRef.current = restored
       setUser(restored)
     })
     const unsubscribe = onAuthSessionChange((_event, session) => {
       const next = userFromSession(session)
-      if (userRef.current?.id && userRef.current.id !== next?.id)
+      const householdChanged =
+        (userRef.current?.id ?? null) !== (next?.id ?? null)
+      if (userRef.current?.id && householdChanged)
         abortOperation()
+      if (householdChanged) setRecoveryReady(false)
       userRef.current = next
       if (mountedRef.current) setUser(next)
     })
     return () => {
       live = false
+      controller.abort()
       unsubscribe()
     }
   }, [abortOperation, bootstrapped, configured])
 
-  // A verified identity auto-resumes only with matching durable provenance.
+  // A transition may recover only after the canonical current session has been
+  // independently verified. Auth callbacks alone are never recovery authority.
   useEffect(() => {
     if (!bootstrapped) return
+    let live = true
+    const controller = new AbortController()
+    setRecoveryReady(false)
+    void (async () => {
+      const canonical = configured
+        ? await getVerifiedCurrentUser(undefined, controller.signal)
+        : null
+      if (!live || !mountedRef.current || controller.signal.aborted) return
+      if ((canonical?.id ?? null) !== (userRef.current?.id ?? null)) {
+        abortOperation()
+        userRef.current = canonical
+        setUser(canonical)
+        return
+      }
+      const expectedId = canonical?.id ?? null
+      const recoveries = await recoverOwnershipTransitions({
+        authenticatedUser: canonical,
+        inMemoryState: stateRef.current,
+        verifyCurrentHousehold: async () => {
+          const current = await getVerifiedCurrentUser(
+            undefined,
+            controller.signal,
+          )
+          return (
+            !controller.signal.aborted &&
+            (current?.id ?? null) === expectedId &&
+            (userRef.current?.id ?? null) === expectedId
+          )
+        },
+        lifecycleValid: () =>
+          live &&
+          mountedRef.current &&
+          !controller.signal.aborted &&
+          (userRef.current?.id ?? null) === expectedId,
+        publish: (recoveredState, fingerprint, recoveredMeta) => {
+          if (
+            !live ||
+            !mountedRef.current ||
+            controller.signal.aborted ||
+            userRef.current?.id !== recoveredMeta.householdId
+          ) {
+            throw new Error('Ownership recovery was invalidated before publication.')
+          }
+          setProfilesFromPersistedSync(recoveredState, fingerprint)
+          publishCurrentMeta(recoveredMeta)
+        },
+      })
+      if (!live || !mountedRef.current || controller.signal.aborted) return
+      const review = recoveries.find((item) => item.kind === 'review')
+      if (review?.kind === 'review') safeSetError(review.reason)
+      setRecoveryReady(true)
+    })().catch((cause) => {
+      if (!live || !mountedRef.current || controller.signal.aborted) return
+      externalBlockedRef.current = true
+      safeSetError(
+        cause instanceof Error
+          ? cause.message
+          : 'Academy ownership recovery requires parent review.',
+      )
+      setRecoveryReady(true)
+    })
+    return () => {
+      live = false
+      controller.abort()
+    }
+  }, [
+    abortOperation,
+    bootstrapped,
+    configured,
+    publishCurrentMeta,
+    safeSetError,
+    setProfilesFromPersistedSync,
+    user?.id,
+  ])
+
+  // A verified identity auto-resumes only after authenticated transition
+  // recovery and with matching durable provenance.
+  useEffect(() => {
+    if (!bootstrapped || !recoveryReady) return
     if (!user) {
       metaRef.current = null
       setMeta(null)
@@ -779,6 +966,36 @@ export function useSync(
         }
       }
       if (!live || !mountedRef.current || userRef.current?.id !== user.id) return
+      // Import/storage events can invalidate ownership while the asynchronous
+      // verification above is pending. Re-read the durable record and verify it
+      // again before publishing any binding into mounted state.
+      const durableMeta = loadHouseholdMeta(user.id, user.email)
+      if (JSON.stringify(durableMeta) !== JSON.stringify(householdMeta)) {
+        householdMeta = durableMeta
+      }
+      if (householdMeta.binding === 'bound' && householdMeta.ownsLocalData) {
+        const finalProvenance = await verifyOwnedDatasetProvenance(
+          householdMeta,
+          stateRef.current,
+        )
+        if (
+          !live ||
+          !mountedRef.current ||
+          userRef.current?.id !== user.id
+        ) {
+          return
+        }
+        if (!finalProvenance.ok || externalBlockedRef.current) {
+          householdMeta = pauseHouseholdForMismatch(
+            user.id,
+            user.email,
+            externalBlockedRef.current
+              ? anotherTabMessage
+              : provenanceMismatchMessage,
+          )
+          externalBlockedRef.current = true
+        }
+      }
       persistCurrentMeta(householdMeta)
       if (!online || operationRef.current) return
       if (householdMeta.binding === 'bound' && householdMeta.ownsLocalData) {
@@ -802,6 +1019,7 @@ export function useSync(
     }
   }, [
     bootstrapped,
+    recoveryReady,
     online,
     persistCurrentMeta,
     prepareUnbound,
@@ -978,7 +1196,7 @@ export function useSync(
     async (
       verifiedUser: SignedInUser,
       operation: ActiveOperation,
-    ): Promise<RemoteProfileRow[]> => {
+    ): Promise<{ rows: RemoteProfileRow[]; revision: string }> => {
       if (!decision) throw new Error('There is no sync decision to confirm.')
       const pull = await pullProfiles(undefined, operation.controller.signal)
       if (
@@ -993,10 +1211,12 @@ export function useSync(
         throw new Error(`Cloud data could not be rechecked: ${pull.error}`)
       }
       if (
+        pull.revision !== remoteRevisionRef.current ||
         remoteRowsSignature(pull.rows) !==
-        remoteRowsSignature(remoteRowsRef.current)
+          remoteRowsSignature(remoteRowsRef.current)
       ) {
         remoteRowsRef.current = pull.rows
+        remoteRevisionRef.current = pull.revision
         const householdMeta = loadHouseholdMeta(
           verifiedUser.id,
           verifiedUser.email,
@@ -1016,9 +1236,50 @@ export function useSync(
           'Cloud data changed while you were reviewing it. Review the refreshed preview.',
         )
       }
-      return pull.rows
+      return { rows: pull.rows, revision: pull.revision }
     },
     [decision],
+  )
+
+  const refreshDecisionAfterConflict = useCallback(
+    async (
+      verifiedUser: SignedInUser,
+      operation: ActiveOperation,
+      householdMeta: HouseholdSyncMeta,
+    ) => {
+      const refreshed = await pullProfiles(
+        undefined,
+        operation.controller.signal,
+      )
+      if (
+        !refreshed.ok ||
+        operation.controller.signal.aborted ||
+        !mountedRef.current ||
+        userRef.current?.id !== verifiedUser.id
+      ) {
+        return
+      }
+      remoteRowsRef.current = refreshed.rows
+      remoteRevisionRef.current = refreshed.revision
+      const reviewMeta: HouseholdSyncMeta = {
+        ...householdMeta,
+        cloudRevision: refreshed.revision,
+        reconciliation: 'review',
+        pauseReason:
+          'Another device updated this household. Review the refreshed cloud data before retrying.',
+      }
+      persistCurrentMeta(reviewMeta)
+      setDecision({
+        reason: 'conflict',
+        cloud: refreshed.rows.length === 0 ? 'empty' : 'data',
+        preview: buildReconciliationPreview(
+          profilesRef.current,
+          refreshed.rows,
+          reviewMeta,
+        ),
+      })
+    },
+    [persistCurrentMeta],
   )
 
   const uploadLocal = useCallback(async () => {
@@ -1032,8 +1293,8 @@ export function useSync(
     safeSetError(null)
     externalBlockedRef.current = false
     try {
-      const confirmedRows = await verifyDecisionCloud(verifiedUser, operation)
-      if (confirmedRows.length !== 0) {
+      const confirmed = await verifyDecisionCloud(verifiedUser, operation)
+      if (confirmed.rows.length !== 0) {
         throw new Error(
           'The household cloud is no longer empty. Review the refreshed preview.',
         )
@@ -1047,11 +1308,13 @@ export function useSync(
         profilesRef.current,
         householdMeta,
         now,
+        confirmed.revision,
       )
       let published = false
       const result = await guardedCloudPush(
         prepared.rows,
-        confirmedRows,
+        confirmed.rows,
+        confirmed.revision,
         verifiedUser,
         operation,
         true,
@@ -1059,7 +1322,10 @@ export function useSync(
           await claimLocalData(
             verifiedUser.id,
             verifiedUser.email,
-            prepared.meta,
+            {
+              ...prepared.meta,
+              cloudRevision: finalization.resultingCloudRevision,
+            },
             validatedFingerprint,
             finalization,
             (claimed) => {
@@ -1071,6 +1337,13 @@ export function useSync(
         },
       )
       if (!result.ok || !published) {
+        if (!result.ok && result.conflict) {
+          await refreshDecisionAfterConflict(
+            verifiedUser,
+            operation,
+            householdMeta,
+          )
+        }
         throw new Error(
           result.ok
             ? 'The upload did not finalize household ownership.'
@@ -1090,6 +1363,7 @@ export function useSync(
     finishOperation,
     guardedCloudPush,
     publishCurrentMeta,
+    refreshDecisionAfterConflict,
     safeSetError,
     verifyDecisionCloud,
   ])
@@ -1104,7 +1378,8 @@ export function useSync(
     externalBlockedRef.current = false
     try {
       await strictProvenanceCheck(verifiedUser.id, verifiedUser, true)
-      const verifiedRows = await verifyDecisionCloud(verifiedUser, operation)
+      const verified = await verifyDecisionCloud(verifiedUser, operation)
+      const verifiedRows = verified.rows
       if (verifiedRows.length === 0) {
         throw new Error('The household cloud is empty.')
       }
@@ -1120,6 +1395,7 @@ export function useSync(
         profiles,
         verifiedRows,
         Date.now(),
+        verified.revision,
       )
       // Recheck identity/cloud adjacent to the local ownership transaction.
       const nextFingerprint = await datasetFingerprint(nextState)
@@ -1127,6 +1403,7 @@ export function useSync(
       const guarded = await guardedCloudPush(
         [],
         verifiedRows,
+        verified.revision,
         verifiedUser,
         operation,
         true,
@@ -1134,7 +1411,10 @@ export function useSync(
           await replaceDatasetAndClaim(
             verifiedUser.id,
             verifiedUser.email,
-            next,
+            {
+              ...next,
+              cloudRevision: finalization.resultingCloudRevision,
+            },
             nextState,
             finalization,
             (claimed) => {
@@ -1185,7 +1465,8 @@ export function useSync(
       externalBlockedRef.current = false
       try {
         await strictProvenanceCheck(verifiedUser.id, verifiedUser, true)
-        const verifiedRows = await verifyDecisionCloud(verifiedUser, operation)
+        const verified = await verifyDecisionCloud(verifiedUser, operation)
+        const verifiedRows = verified.rows
         const now = Date.now()
         const selected = applyReviewedSelection(
           profilesRef.current,
@@ -1213,6 +1494,7 @@ export function useSync(
           selected.profiles,
           remoteAfter,
           now,
+          verified.revision,
         )
         const nextState = appStateWithProfiles(
           stateRef.current,
@@ -1223,6 +1505,7 @@ export function useSync(
         const push = await guardedCloudPush(
           selected.toPush,
           verifiedRows,
+          verified.revision,
           verifiedUser,
           operation,
           true,
@@ -1230,7 +1513,10 @@ export function useSync(
             await replaceDatasetAndClaim(
               verifiedUser.id,
               verifiedUser.email,
-              next,
+              {
+                ...next,
+                cloudRevision: finalization.resultingCloudRevision,
+              },
               nextState,
               finalization,
               (claimed) => {
@@ -1244,6 +1530,13 @@ export function useSync(
           },
         )
         if (!push.ok || !published) {
+          if (!push.ok && push.conflict) {
+            await refreshDecisionAfterConflict(
+              verifiedUser,
+              operation,
+              loadHouseholdMeta(verifiedUser.id, verifiedUser.email),
+            )
+          }
           throw new Error(
             push.ok
               ? 'The reviewed merge did not finalize household ownership.'
@@ -1264,6 +1557,7 @@ export function useSync(
       finishOperation,
       guardedCloudPush,
       publishCurrentMeta,
+      refreshDecisionAfterConflict,
       safeSetError,
       setProfilesFromPersistedSync,
       strictProvenanceCheck,
