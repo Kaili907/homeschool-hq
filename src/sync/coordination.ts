@@ -10,11 +10,12 @@ export const DEFAULT_LEASE_MS = 30_000
 export const DEFAULT_LEASE_HEARTBEAT_MS = 10_000
 
 export interface MutationLease {
-  version: 1
+  version: 2
   householdId: string
   token: string
   tabId: string
   operationId: string
+  mutationId: string
   datasetFingerprint: string
   importEpoch: string
   cloudRevision: string
@@ -51,11 +52,12 @@ export function readMutationLease(
     ) as Partial<MutationLease> | null
     if (
       !parsed ||
-      parsed.version !== 1 ||
+      parsed.version !== 2 ||
       parsed.householdId !== householdId ||
       typeof parsed.token !== 'string' ||
       typeof parsed.tabId !== 'string' ||
       typeof parsed.operationId !== 'string' ||
+      typeof parsed.mutationId !== 'string' ||
       typeof parsed.datasetFingerprint !== 'string' ||
       typeof parsed.importEpoch !== 'string' ||
       typeof parsed.cloudRevision !== 'string' ||
@@ -79,7 +81,7 @@ export function tryAcquireMutationLease(
   const current = readMutationLease(request.householdId, storage)
   if (current && current.expiresAt > now) return null
   const lease: MutationLease = {
-    version: 1,
+    version: 2,
     ...request,
     token: createOperationId('lease'),
     expiresAt: now + leaseMs,
@@ -104,6 +106,7 @@ export function mutationLeaseIsOwned(
     current.token === lease.token &&
     current.tabId === lease.tabId &&
     current.operationId === lease.operationId &&
+    current.mutationId === lease.mutationId &&
     current.datasetFingerprint === lease.datasetFingerprint &&
     current.importEpoch === lease.importEpoch &&
     current.cloudRevision === lease.cloudRevision &&

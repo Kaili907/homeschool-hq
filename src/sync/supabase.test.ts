@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { createClient } from '@supabase/supabase-js'
 import { defaultAppState } from '../migration'
 import {
   getVerifiedAuthContext,
@@ -323,7 +324,10 @@ describe('fixed-token low-level cloud writes', () => {
       ),
     ).resolves.toEqual({ ok: true, revision: '1' })
     expect(getUser).toHaveBeenCalledWith(ACCESS_TOKEN)
-    expect(writer.factory).toHaveBeenCalledWith(ACCESS_TOKEN)
+    expect(writer.factory).toHaveBeenCalledWith(
+      ACCESS_TOKEN,
+      expect.any(Function),
+    )
     expect(writer.rpc).toHaveBeenCalledOnce()
     expect(writer.rpc).toHaveBeenCalledWith(
       'academy_apply_profile_mutation',
@@ -448,6 +452,221 @@ describe('fixed-token low-level cloud writes', () => {
     expect(JSON.stringify(writeError)).not.toContain(ACCESS_TOKEN)
     expect(JSON.stringify(writeError)).toContain('[redacted]')
   })
+})
+
+describe('real Supabase SDK mutation fetch boundary', () => {
+  beforeEach(() => {
+    vi.stubEnv('VITE_SUPABASE_URL', 'https://example.supabase.co')
+    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'anon-public-key')
+  })
+
+  afterEach(() => {
+    vi.unstubAllEnvs()
+    vi.restoreAllMocks()
+  })
+
+  function actualSdkFactory(tokenGate?: ReturnType<typeof deferred<void>>) {
+    return vi.fn((accessToken: string, guardedFetch: typeof fetch) =>
+      createClient('https://example.supabase.co', 'anon-public-key', {
+        accessToken: async () => {
+          if (tokenGate) await tokenGate.promise
+          return accessToken
+        },
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+          detectSessionInUrl: false,
+        },
+        global: { fetch: guardedFetch },
+      }),
+    )
+  }
+
+  function appliedResponse() {
+    return new Response(JSON.stringify({ status: 'applied', revision: '1' }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
+  it('reaches the native fetch exactly once for a valid operation', async () => {
+    const context = await verifiedContext()
+    const nativeFetch = vi.fn(async () => appliedResponse())
+    const factory = actualSdkFactory()
+
+    await expect(
+      pushProfiles(
+        rows(),
+        '0',
+        'real-sdk-valid',
+        context,
+        'household-a',
+        () => true,
+        undefined,
+        canonicalVerificationClient() as never,
+        factory,
+        nativeFetch,
+      ),
+    ).resolves.toEqual({ ok: true, revision: '1' })
+    expect(nativeFetch).toHaveBeenCalledOnce()
+  })
+
+  it.each([
+    'lease expiry',
+    'lease ownership change',
+    'heartbeat loss',
+    'persisted data change',
+    'memory fingerprint change',
+    'provenance change',
+    'import epoch change',
+    'transition replacement',
+    'household binding change',
+    'component unmount',
+    'operation supersession',
+    'canonical household change',
+    'canonical session removal',
+  ])(
+    'denies native fetch when %s occurs during SDK token preparation',
+    async () => {
+      const context = await verifiedContext()
+      const tokenGate = deferred<void>()
+      let authorized = true
+      const nativeFetch = vi.fn(async () => appliedResponse())
+      const factory = actualSdkFactory(tokenGate)
+      const pending = pushProfiles(
+        rows(),
+        '0',
+        'real-sdk-denied',
+        context,
+        'household-a',
+        () => authorized,
+        undefined,
+        canonicalVerificationClient() as never,
+        factory,
+        nativeFetch,
+      )
+      await vi.waitFor(() => expect(factory).toHaveBeenCalledOnce())
+      authorized = false
+      tokenGate.resolve(undefined)
+
+      await expect(pending).resolves.toEqual({
+        ok: false,
+        error: 'The household authorization changed at mutation dispatch.',
+      })
+      expect(nativeFetch).not.toHaveBeenCalled()
+    },
+  )
+
+  it('combines operation abort with the SDK request signal and denies dispatch', async () => {
+    const context = await verifiedContext()
+    const tokenGate = deferred<void>()
+    const controller = new AbortController()
+    const nativeFetch = vi.fn(async () => appliedResponse())
+    const factory = actualSdkFactory(tokenGate)
+    const pending = pushProfiles(
+      rows(),
+      '0',
+      'real-sdk-abort',
+      context,
+      'household-a',
+      () => true,
+      controller.signal,
+      canonicalVerificationClient() as never,
+      factory,
+      nativeFetch,
+    )
+    await vi.waitFor(() => expect(factory).toHaveBeenCalledOnce())
+    controller.abort()
+    tokenGate.resolve(undefined)
+
+    await expect(pending).resolves.toMatchObject({ ok: false })
+    expect(nativeFetch).not.toHaveBeenCalled()
+  })
+
+  it('allows a same-household refresh while the operation remains authorized', async () => {
+    const context = await verifiedContext()
+    const tokenGate = deferred<void>()
+    const nativeFetch = vi.fn(async () => appliedResponse())
+    const factory = actualSdkFactory(tokenGate)
+    const pending = pushProfiles(
+      rows(),
+      '0',
+      'real-sdk-refresh',
+      context,
+      'household-a',
+      () => true,
+      undefined,
+      canonicalVerificationClient('household-a') as never,
+      factory,
+      nativeFetch,
+    )
+    await vi.waitFor(() => expect(factory).toHaveBeenCalledOnce())
+    tokenGate.resolve(undefined)
+
+    await expect(pending).resolves.toEqual({ ok: true, revision: '1' })
+    expect(nativeFetch).toHaveBeenCalledOnce()
+  })
+
+  it.each([
+    ['another household', 'household-b'],
+    ['no canonical session', null],
+  ])(
+    'denies the real fetch when canonical auth becomes %s during SDK preparation',
+    async (_label, nextHousehold) => {
+      const context = await verifiedContext()
+      const tokenGate = deferred<void>()
+      let currentHousehold: string | null = 'household-a'
+      const verificationClient = {
+        auth: {
+          getSession: vi.fn(async () => ({
+            data: {
+              session: currentHousehold
+                ? {
+                    access_token: 'refreshed.header.signature',
+                    user: { id: currentHousehold },
+                  }
+                : null,
+            },
+            error: null,
+          })),
+          getUser: vi.fn(async (token?: string) => ({
+            data: {
+              user:
+                token === ACCESS_TOKEN
+                  ? { id: 'household-a' }
+                  : currentHousehold
+                    ? { id: currentHousehold }
+                    : null,
+            },
+            error: null,
+          })),
+        },
+      }
+      const nativeFetch = vi.fn(async () => appliedResponse())
+      const factory = actualSdkFactory(tokenGate)
+      const pending = pushProfiles(
+        rows(),
+        '0',
+        'real-sdk-canonical-change',
+        context,
+        'household-a',
+        () => true,
+        undefined,
+        verificationClient as never,
+        factory,
+        nativeFetch,
+      )
+      await vi.waitFor(() => expect(factory).toHaveBeenCalledOnce())
+      currentHousehold = nextHousehold
+      tokenGate.resolve(undefined)
+
+      await expect(pending).resolves.toEqual({
+        ok: false,
+        error: 'The household authorization changed at mutation dispatch.',
+      })
+      expect(nativeFetch).not.toHaveBeenCalled()
+    },
+  )
 })
 
 describe('bounded canonical and pinned authorization', () => {

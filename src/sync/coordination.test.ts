@@ -44,6 +44,7 @@ describe('cross-tab mutation leases', () => {
     const input = {
       householdId: 'household-a',
       operationId: 'operation-a',
+      mutationId: 'mutation-a',
       datasetFingerprint: 'fingerprint-a',
       importEpoch: 'epoch-a',
       cloudRevision: 'revision-a',
@@ -107,6 +108,7 @@ describe('cross-tab mutation leases', () => {
         {
           householdId: 'household-a',
           operationId: 'operation-a',
+          mutationId: 'mutation-a',
           tabId: 'tab-a',
           datasetFingerprint: 'fingerprint-a',
           importEpoch: 'epoch-a',

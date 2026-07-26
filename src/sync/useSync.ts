@@ -370,6 +370,7 @@ export function useSync(
           householdId: expectedUser.id,
           tabId: tabIdRef.current,
           operationId: operation.id,
+          mutationId,
           datasetFingerprint: initial.fingerprint,
           importEpoch: initial.importEpoch,
           cloudRevision: expectedServerRevision,
@@ -402,6 +403,7 @@ export function useSync(
             !!lease &&
             lease.householdId === expectedUser.id &&
             lease.operationId === operation.id &&
+            lease.mutationId === mutationId &&
             lease.cloudRevision === expectedServerRevision &&
             mutationLeaseIsOwned(lease) &&
             currentRaw === persistedRaw &&

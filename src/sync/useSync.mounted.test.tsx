@@ -48,6 +48,7 @@ const transport = vi.hoisted(() => {
     sessionUser: null as null | { id: string; email: string },
     authListeners: new Set<AuthListener>(),
     authContextOverride: null as null | (() => Promise<unknown>),
+    mutationIds: [] as string[],
     pull: vi.fn<() => Promise<CloudPullResult>>(),
     push: vi.fn<() => Promise<CloudPushResult>>(),
   }
@@ -101,7 +102,16 @@ vi.mock('./supabase', async (importOriginal) => {
         context?.user?.id === expected,
     ),
     pullProfiles: vi.fn(async () => transport.pull()),
-    pushProfiles: vi.fn(async () => transport.push()),
+    pushProfiles: vi.fn(
+      async (
+        _rows: RemoteProfileRow[],
+        _revision: string,
+        mutationId: string,
+      ) => {
+        transport.mutationIds.push(mutationId)
+        return transport.push()
+      },
+    ),
     signOutRemote: vi.fn(async () => {
       transport.sessionUser = null
       for (const listener of transport.authListeners) {
@@ -338,6 +348,7 @@ describe('mounted useSync lifecycle and import safety', () => {
     transport.sessionUser = null
     transport.authListeners.clear()
     transport.authContextOverride = null
+    transport.mutationIds = []
     transport.pull.mockReset()
     transport.pull.mockResolvedValue({ ok: true, rows: [], revision: '0' })
     transport.push.mockReset()
@@ -579,6 +590,29 @@ describe('mounted useSync lifecycle and import safety', () => {
     })
     expect(latestApi?.status.decision?.reason).toBe('conflict')
     expect(renderedState?.profiles.p1.name).toBe(local.profiles.p1.name)
+
+    transport.pull
+      .mockResolvedValueOnce({
+        ok: true,
+        rows: [rowFor(newerCloud)],
+        revision: '1',
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        rows: [rowFor(newerCloud)],
+        revision: '1',
+      })
+    transport.push.mockResolvedValueOnce({ ok: true, revision: '2' })
+    await act(async () => latestApi!.applyReviewedMerge({ p1: 'local' }))
+    expect(transport.mutationIds).toHaveLength(2)
+    expect(transport.mutationIds[0]).not.toBe(transport.mutationIds[1])
+    expect(transport.mutationIds[0]).toContain('academy-0-')
+    expect(transport.mutationIds[1]).toContain('academy-1-')
+    expect(loadHouseholdMeta('household-a')).toMatchObject({
+      binding: 'bound',
+      ownsLocalData: true,
+      cloudRevision: '2',
+    })
   })
 
   it('keeps an exact duplicate import durably unbound across remount', async () => {

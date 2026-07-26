@@ -136,6 +136,81 @@ export interface VerifiedAuthContext {
   readonly kind: 'supabase-access-token'
 }
 
+export class MutationDispatchAuthorizationError extends Error {
+  readonly code = 'ACADEMY_SYNC_DISPATCH_DENIED'
+
+  constructor() {
+    super('The household authorization changed at mutation dispatch.')
+    this.name = 'MutationDispatchAuthorizationError'
+  }
+}
+
+type FetchLike = typeof globalThis.fetch
+
+export type PinnedWriteClientFactory = (
+  accessToken: string,
+  guardedFetch: FetchLike,
+) => SupabaseClient
+
+function combinedAbortSignal(
+  operationSignal: AbortSignal | undefined,
+  sdkSignal: AbortSignal | null | undefined,
+): AbortSignal | undefined {
+  if (!operationSignal) return sdkSignal ?? undefined
+  if (!sdkSignal || sdkSignal === operationSignal) return operationSignal
+  if (typeof AbortSignal.any === 'function') {
+    return AbortSignal.any([operationSignal, sdkSignal])
+  }
+  const controller = new AbortController()
+  const abort = () => controller.abort()
+  if (operationSignal.aborted || sdkSignal.aborted) {
+    controller.abort()
+  } else {
+    operationSignal.addEventListener('abort', abort, { once: true })
+    sdkSignal.addEventListener('abort', abort, { once: true })
+  }
+  return controller.signal
+}
+
+/**
+ * The SDK performs asynchronous token/header preparation before invoking this
+ * operation-scoped wrapper. Authorization is therefore checked here, at the
+ * true fetch boundary, and native fetch is invoked in the same synchronous
+ * stack frame when the check succeeds.
+ */
+export function guardedMutationFetch(
+  dispatchStillAuthorized: () => boolean,
+  operationSignal: AbortSignal | undefined,
+  nativeFetch: FetchLike,
+  authorizeAtBoundary?: () => Promise<boolean>,
+): FetchLike {
+  return (input, init) => {
+    const dispatch = () => {
+      const requestSignal =
+        typeof Request !== 'undefined' && input instanceof Request
+          ? input.signal
+          : undefined
+      const signal = combinedAbortSignal(
+        operationSignal,
+        init?.signal ?? requestSignal,
+      )
+      if (
+        operationSignal?.aborted ||
+        signal?.aborted ||
+        !dispatchStillAuthorized()
+      ) {
+        return Promise.reject(new MutationDispatchAuthorizationError())
+      }
+      return nativeFetch(input, { ...init, ...(signal ? { signal } : {}) })
+    }
+    if (!authorizeAtBoundary) return dispatch()
+    return authorizeAtBoundary().then((authorized) => {
+      if (!authorized) throw new MutationDispatchAuthorizationError()
+      return dispatch()
+    })
+  }
+}
+
 function accessTokenShapeIsValid(token: string): boolean {
   const parts = token.split('.')
   return (
@@ -312,9 +387,7 @@ export async function pushProfiles(
   dispatchStillAuthorized: () => boolean,
   signal?: AbortSignal,
   verificationClient = getSupabaseClient(),
-  createWriteClient: (
-    accessToken: string,
-  ) => SupabaseClient = (accessToken) =>
+  createWriteClient: PinnedWriteClientFactory = (accessToken, guardedFetch) =>
     createClient(supabaseUrl(), supabaseAnonKey(), {
       accessToken: async () => accessToken,
       auth: {
@@ -322,7 +395,9 @@ export async function pushProfiles(
         autoRefreshToken: false,
         detectSessionInUrl: false,
       },
+      global: { fetch: guardedFetch },
     }),
+  nativeFetch: FetchLike = globalThis.fetch,
 ): Promise<CloudPushResult> {
   if (rows.length === 0) return { ok: true, revision: expectedRevision }
   if (!supabaseConfigured())
@@ -354,15 +429,31 @@ export async function pushProfiles(
     const validation = validateRemoteProfileRows(rows)
     if (!validation.ok) return { ok: false, error: validation.error }
     const payload = profileRowsForMutation(validation.rows)
-    const writeClient = createWriteClient(verifiedContext.accessToken)
+    const fetchAtAuthorizedBoundary = guardedMutationFetch(
+      dispatchStillAuthorized,
+      signal,
+      nativeFetch,
+      () =>
+        verifyPinnedAuthContext(
+          verifiedContext,
+          expectedHouseholdId,
+          verificationClient,
+          signal,
+        ),
+    )
+    const writeClient = createWriteClient(
+      verifiedContext.accessToken,
+      fetchAtAuthorizedBoundary,
+    )
     let query = writeClient.rpc('academy_apply_profile_mutation', {
       p_expected_revision: expectedRevision,
       p_mutation_id: mutationId,
       p_profiles: payload,
     })
     if (signal) query = query.abortSignal(signal)
-    // Creating a PostgREST builder is inert. This is the final synchronous
-    // authorization check immediately before awaiting it starts the request.
+    // This early check avoids starting SDK preparation for an already-invalid
+    // operation. The authoritative check is repeated by guarded fetch after
+    // every SDK-internal await and immediately before native fetch.
     if (!dispatchStillAuthorized() || signal?.aborted) {
       return {
         ok: false,
@@ -371,6 +462,15 @@ export async function pushProfiles(
     }
     const { data, error } = await query
     if (error) {
+      if (
+        error.message.includes('MutationDispatchAuthorizationError') ||
+        error.message.includes('ACADEMY_SYNC_DISPATCH_DENIED')
+      ) {
+        return {
+          ok: false,
+          error: 'The household authorization changed at mutation dispatch.',
+        }
+      }
       return {
         ok: false,
         error: redactAccessToken(error.message, verifiedContext.accessToken),
@@ -401,7 +501,10 @@ export async function pushProfiles(
       }
     }
     return { ok: false, error: 'The cloud returned an unknown CAS result.' }
-  } catch {
+  } catch (cause) {
+    if (cause instanceof MutationDispatchAuthorizationError) {
+      return { ok: false, error: cause.message }
+    }
     return {
       ok: false,
       error: 'Network error while writing cloud data. Retry when online.',
