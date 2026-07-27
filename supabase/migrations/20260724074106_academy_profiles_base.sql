@@ -16,12 +16,16 @@ declare
   authenticated_oid oid;
   anon_oid oid;
   service_role_oid oid;
+  postgres_oid oid;
   household_attnum smallint;
   profile_attnum smallint;
   matching_count integer;
   total_count integer;
   authenticated_privileges text[];
   authenticated_has_grant_option boolean;
+  actual_schema_privileges jsonb;
+  expected_schema_privileges jsonb;
+  unexpected_schema_grant_options jsonb;
 begin
   perform pg_catalog.set_config('search_path', 'pg_catalog', true);
 
@@ -43,11 +47,16 @@ begin
   from pg_catalog.pg_roles as role
   where role.rolname = 'service_role';
 
+  select role.oid into postgres_oid
+  from pg_catalog.pg_roles as role
+  where role.rolname = 'postgres';
+
   if authenticated_oid is null
      or anon_oid is null
-     or service_role_oid is null then
+     or service_role_oid is null
+     or postgres_oid is null then
     raise exception
-      'Academy profiles base migration requires anon, authenticated, and service_role';
+      'Academy profiles base migration requires postgres, anon, authenticated, and service_role';
   end if;
 
   if to_regclass('auth.users') is null then
@@ -58,38 +67,202 @@ begin
     raise exception 'Academy profiles base migration requires auth.uid()';
   end if;
 
-  if not pg_catalog.has_schema_privilege(
-    'authenticated',
-    'public',
-    'USAGE'
-  ) or not pg_catalog.has_schema_privilege(
-    'authenticated',
+  -- Schemas expose only CREATE and USAGE. Compare the complete effective
+  -- privilege set for every application/platform role rather than checking
+  -- only that one required grant is present. has_schema_privilege accounts
+  -- for direct grants, role inheritance, ownership/superuser rights, and
+  -- privileges inherited through PUBLIC. PUBLIC itself is read directly from
+  -- the ACL because it is not a pg_roles row.
+  with schema_targets(schema_name, schema_oid) as (
+    values
+      ('auth'::text, to_regnamespace('auth')),
+      ('public'::text, to_regnamespace('public'))
+  ),
+  role_targets(role_name, role_oid) as (
+    values
+      ('anon'::text, anon_oid),
+      ('authenticated'::text, authenticated_oid),
+      ('postgres'::text, postgres_oid),
+      ('service_role'::text, service_role_oid)
+  ),
+  privilege_types(privilege_name) as (
+    values ('CREATE'::text), ('USAGE'::text)
+  ),
+  effective_role_privileges as (
+    select
+      schema_targets.schema_name,
+      role_targets.role_name,
+      coalesce(
+        pg_catalog.jsonb_agg(
+          privilege_types.privilege_name
+          order by privilege_types.privilege_name
+        ) filter (
+          where pg_catalog.has_schema_privilege(
+            role_targets.role_oid,
+            schema_targets.schema_oid,
+            privilege_types.privilege_name
+          )
+        ),
+        '[]'::jsonb
+      ) as privileges
+    from schema_targets
+    cross join role_targets
+    cross join privilege_types
+    group by schema_targets.schema_name, role_targets.role_name
+  ),
+  public_privileges as (
+    select
+      schema_targets.schema_name,
+      'PUBLIC'::text as role_name,
+      coalesce(
+        pg_catalog.jsonb_agg(
+          distinct acl.privilege_type
+          order by acl.privilege_type
+        ) filter (where acl.grantee = 0),
+        '[]'::jsonb
+      ) as privileges
+    from schema_targets
+    join pg_catalog.pg_namespace as namespace
+      on namespace.oid = schema_targets.schema_oid
+    left join lateral pg_catalog.aclexplode(
+      coalesce(
+        namespace.nspacl,
+        pg_catalog.acldefault('n', namespace.nspowner)
+      )
+    ) as acl on true
+    group by schema_targets.schema_name
+  ),
+  all_privileges as (
+    select * from effective_role_privileges
+    union all
+    select * from public_privileges
+  ),
+  privileges_by_schema as (
+    select
+      all_privileges.schema_name,
+      pg_catalog.jsonb_object_agg(
+        all_privileges.role_name,
+        all_privileges.privileges
+        order by all_privileges.role_name
+      ) as roles
+    from all_privileges
+    group by all_privileges.schema_name
+  )
+  select pg_catalog.jsonb_object_agg(
+    privileges_by_schema.schema_name,
+    privileges_by_schema.roles
+    order by privileges_by_schema.schema_name
+  )
+  into actual_schema_privileges
+  from privileges_by_schema;
+
+  -- A grant option is broader authority even when the privilege type remains
+  -- USAGE. Reject grantable schema privileges available to application roles,
+  -- whether direct or reached through an inherited role. postgres retains its
+  -- normal owner/superuser authority.
+  with schema_targets(schema_name, schema_oid) as (
+    values
+      ('auth'::text, to_regnamespace('auth')),
+      ('public'::text, to_regnamespace('public'))
+  ),
+  role_targets(role_name, role_oid) as (
+    values
+      ('anon'::text, anon_oid),
+      ('authenticated'::text, authenticated_oid),
+      ('service_role'::text, service_role_oid)
+  )
+  select coalesce(
+    pg_catalog.jsonb_agg(
+      pg_catalog.jsonb_build_object(
+        'schema', schema_targets.schema_name,
+        'role', role_targets.role_name,
+        'privilege', acl.privilege_type
+      )
+      order by
+        schema_targets.schema_name,
+        role_targets.role_name,
+        acl.privilege_type
+    ),
+    '[]'::jsonb
+  )
+  into unexpected_schema_grant_options
+  from schema_targets
+  join pg_catalog.pg_namespace as namespace
+    on namespace.oid = schema_targets.schema_oid
+  cross join role_targets
+  cross join lateral pg_catalog.aclexplode(
+    coalesce(
+      namespace.nspacl,
+      pg_catalog.acldefault('n', namespace.nspowner)
+    )
+  ) as acl
+  where acl.is_grantable
+    and case
+      when acl.grantee = 0 then true
+      else pg_catalog.pg_has_role(
+        role_targets.role_oid,
+        acl.grantee,
+        'USAGE'
+      )
+    end;
+
+  expected_schema_privileges := jsonb_build_object(
     'auth',
-    'USAGE'
-  ) or not pg_catalog.has_function_privilege(
-    'authenticated',
-    'auth.uid()',
-    'EXECUTE'
-  ) then
+    jsonb_build_object(
+      'PUBLIC', '[]'::jsonb,
+      'anon', '["USAGE"]'::jsonb,
+      'authenticated', '["USAGE"]'::jsonb,
+      'postgres', '["CREATE", "USAGE"]'::jsonb,
+      'service_role', '["USAGE"]'::jsonb
+    ),
+    'public',
+    jsonb_build_object(
+      'PUBLIC', '["USAGE"]'::jsonb,
+      'anon', '["USAGE"]'::jsonb,
+      'authenticated', '["USAGE"]'::jsonb,
+      'postgres', '["CREATE", "USAGE"]'::jsonb,
+      'service_role', '["USAGE"]'::jsonb
+    )
+  );
+
+  if actual_schema_privileges is distinct from expected_schema_privileges then
     raise exception
-      'Academy profiles base migration requires authenticated schema/function privileges';
+      'Academy profiles base schema ACL drift: expected %, found %',
+      expected_schema_privileges,
+      actual_schema_privileges;
   end if;
 
-  if not pg_catalog.has_schema_privilege(
-    'anon',
-    'public',
-    'USAGE'
-  ) or not pg_catalog.has_schema_privilege(
-    'anon',
-    'auth',
-    'USAGE'
-  ) or not pg_catalog.has_function_privilege(
+  if unexpected_schema_grant_options <> '[]'::jsonb then
+    raise exception
+      'Academy profiles base schema ACL drift: unexpected grant options %',
+      unexpected_schema_grant_options;
+  end if;
+
+  if not pg_catalog.has_function_privilege(
+    'authenticated',
+    'auth.uid()',
+    'EXECUTE'
+  ) then
+    raise exception
+      'Academy profiles base migration requires authenticated auth.uid() EXECUTE';
+  end if;
+
+  if not pg_catalog.has_function_privilege(
     'anon',
     'auth.uid()',
     'EXECUTE'
   ) then
     raise exception
-      'Academy profiles base migration requires standard anon schema/function privileges';
+      'Academy profiles base migration requires anon auth.uid() EXECUTE';
+  end if;
+
+  if not pg_catalog.has_function_privilege(
+    'service_role',
+    'auth.uid()',
+    'EXECUTE'
+  ) then
+    raise exception
+      'Academy profiles base migration requires service_role auth.uid() EXECUTE';
   end if;
 
   profiles_oid := to_regclass('public.profiles');
