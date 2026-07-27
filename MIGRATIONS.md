@@ -74,6 +74,16 @@ Permanent local validation:
 npm run test:academy-profiles-base
 ```
 
+The permanent suite accepts each target role with no direct `public`-schema
+`USAGE` because the required `PUBLIC` grant supplies it effectively. It also
+covers inherited helper-role `USAGE` for every `anon`/`authenticated`/
+`service_role` and `public`/`auth` pairing without ACL normalization. Missing
+`auth`-schema `USAGE` is rejected independently for all three target roles.
+Policy validation includes an otherwise exact policy changed from permissive to
+restrictive. The combined-chain gate checks authenticated `SELECT`, `INSERT`,
+`UPDATE`, and `DELETE` as four independent privileges before later CAS
+revocation.
+
 The complete intended fresh-project chain is:
 
 1. `20260724074106_academy_profiles_base.sql`

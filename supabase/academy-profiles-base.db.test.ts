@@ -165,6 +165,50 @@ async function schemaPrivilegeSnapshot(database: PGlite) {
   >
 }
 
+async function schemaAclSnapshot(database: PGlite) {
+  const result = await database.query<{ snapshot: string }>(`
+    select coalesce(
+      jsonb_agg(
+        jsonb_build_object(
+          'schema', namespace.nspname,
+          'grantee',
+            case
+              when acl.grantee = 0 then 'PUBLIC'
+              else pg_get_userbyid(acl.grantee)
+            end,
+          'grantor', pg_get_userbyid(acl.grantor),
+          'privilege', acl.privilege_type,
+          'grantable', acl.is_grantable
+        )
+        order by
+          namespace.nspname,
+          case
+            when acl.grantee = 0 then 'PUBLIC'
+            else pg_get_userbyid(acl.grantee)
+          end,
+          acl.privilege_type,
+          pg_get_userbyid(acl.grantor)
+      ),
+      '[]'::jsonb
+    )::text as snapshot
+    from pg_namespace as namespace
+    cross join lateral aclexplode(
+      coalesce(
+        namespace.nspacl,
+        acldefault('n', namespace.nspowner)
+      )
+    ) as acl
+    where namespace.nspname in ('auth', 'public')
+  `)
+  return JSON.parse(result.rows[0].snapshot) as Array<{
+    schema: string
+    grantee: string
+    grantor: string
+    privilege: string
+    grantable: boolean
+  }>
+}
+
 const expectedSchemaPrivileges = {
   auth: {
     PUBLIC: [],
@@ -182,12 +226,59 @@ const expectedSchemaPrivileges = {
   },
 }
 
+const schemaPrivilegeRoles = [
+  'anon',
+  'authenticated',
+  'service_role',
+] as const
+
+const membershipUsageCases = [
+  { role: 'anon', schema: 'public' },
+  { role: 'anon', schema: 'auth' },
+  { role: 'authenticated', schema: 'public' },
+  { role: 'authenticated', schema: 'auth' },
+  { role: 'service_role', schema: 'public' },
+  { role: 'service_role', schema: 'auth' },
+] as const
+
 async function migrationSql() {
   return readFile(migrationPath, 'utf8')
 }
 
 async function applyMigration(database: PGlite) {
   await database.exec(await migrationSql())
+}
+
+async function authenticatedCrudPrivileges(database: PGlite) {
+  const result = await database.query<{
+    select_allowed: boolean
+    insert_allowed: boolean
+    update_allowed: boolean
+    delete_allowed: boolean
+  }>(`
+    select
+      has_table_privilege(
+        'authenticated',
+        'public.profiles',
+        'SELECT'
+      ) as select_allowed,
+      has_table_privilege(
+        'authenticated',
+        'public.profiles',
+        'INSERT'
+      ) as insert_allowed,
+      has_table_privilege(
+        'authenticated',
+        'public.profiles',
+        'UPDATE'
+      ) as update_allowed,
+      has_table_privilege(
+        'authenticated',
+        'public.profiles',
+        'DELETE'
+      ) as delete_allowed
+  `)
+  return result.rows[0]
 }
 
 async function catalogSnapshot(database: PGlite) {
@@ -654,16 +745,194 @@ describe('Academy profiles base migration', () => {
     30_000,
   )
 
+  it.each(schemaPrivilegeRoles)(
+    'accepts public-schema USAGE inherited only through PUBLIC for %s without ACL repair',
+    async (role) => {
+      const database = await createDatabase()
+      await database.exec(`revoke usage on schema public from ${role}`)
+      const beforeAcl = await schemaAclSnapshot(database)
+
+      expect(beforeAcl).not.toContainEqual(
+        expect.objectContaining({
+          schema: 'public',
+          grantee: role,
+          privilege: 'USAGE',
+        }),
+      )
+      expect(beforeAcl).toContainEqual(
+        expect.objectContaining({
+          schema: 'public',
+          grantee: 'PUBLIC',
+          privilege: 'USAGE',
+          grantable: false,
+        }),
+      )
+      expect(await schemaPrivilegeSnapshot(database)).toEqual(
+        expectedSchemaPrivileges,
+      )
+
+      await applyMigration(database)
+
+      expect(await schemaPrivilegeSnapshot(database)).toEqual(
+        expectedSchemaPrivileges,
+      )
+      expect(await schemaAclSnapshot(database)).toEqual(beforeAcl)
+      expect(
+        (
+          await database.query<{ present: boolean }>(
+            `select to_regclass('public.profiles') is not null as present`,
+          )
+        ).rows,
+      ).toEqual([{ present: true }])
+    },
+    30_000,
+  )
+
+  it.each(membershipUsageCases)(
+    'accepts $role $schema-schema USAGE without a direct grant when inherited through role membership',
+    async ({ role, schema }) => {
+      const database = await createDatabase()
+      const parentRole = `academy_${role}_${schema}_usage_parent`
+      await database.exec(`
+        revoke usage on schema ${schema} from ${role};
+        create role ${parentRole} nologin;
+        grant usage on schema ${schema} to ${parentRole};
+        grant ${parentRole} to ${role};
+      `)
+      const beforeAcl = await schemaAclSnapshot(database)
+
+      expect(beforeAcl).not.toContainEqual(
+        expect.objectContaining({
+          schema,
+          grantee: role,
+          privilege: 'USAGE',
+        }),
+      )
+      expect(beforeAcl).toContainEqual(
+        expect.objectContaining({
+          schema,
+          grantee: parentRole,
+          privilege: 'USAGE',
+          grantable: false,
+        }),
+      )
+      expect(
+        (
+          await database.query<{
+            inherited: boolean
+            effective: boolean
+          }>(`
+            select
+              pg_has_role(
+                '${role}',
+                '${parentRole}',
+                'USAGE'
+              ) as inherited,
+              has_schema_privilege(
+                '${role}',
+                '${schema}',
+                'USAGE'
+              ) as effective
+          `)
+        ).rows,
+      ).toEqual([{ inherited: true, effective: true }])
+      expect(await schemaPrivilegeSnapshot(database)).toEqual(
+        expectedSchemaPrivileges,
+      )
+
+      await applyMigration(database)
+
+      expect(await schemaPrivilegeSnapshot(database)).toEqual(
+        expectedSchemaPrivileges,
+      )
+      expect(await schemaAclSnapshot(database)).toEqual(beforeAcl)
+    },
+    30_000,
+  )
+
+  it.each(schemaPrivilegeRoles)(
+    'rejects missing auth-schema USAGE for %s without repairing it or creating profiles',
+    async (role) => {
+      const database = await createDatabase()
+      await database.exec(`
+        create schema academy_missing_usage_sentinel
+          authorization postgres;
+        create table academy_missing_usage_sentinel.state (
+          id integer primary key,
+          value text not null
+        );
+        insert into academy_missing_usage_sentinel.state
+          values (7, 'preserved');
+        revoke all on schema academy_missing_usage_sentinel from public;
+        revoke usage on schema auth from ${role};
+      `)
+      const beforeAcl = await schemaAclSnapshot(database)
+      const sentinelSnapshotQuery = `
+        select jsonb_build_object(
+          'schema_oid', namespace.oid::text,
+          'schema_owner', pg_get_userbyid(namespace.nspowner),
+          'schema_acl', namespace.nspacl,
+          'table_oid', relation.oid::text,
+          'table_owner', pg_get_userbyid(relation.relowner),
+          'table_acl', relation.relacl,
+          'rows', (
+            select jsonb_agg(
+              jsonb_build_object('id', state.id, 'value', state.value)
+              order by state.id
+            )
+            from academy_missing_usage_sentinel.state as state
+          )
+        )::text as snapshot
+        from pg_namespace as namespace
+        join pg_class as relation
+          on relation.relnamespace = namespace.oid
+        where namespace.nspname = 'academy_missing_usage_sentinel'
+          and relation.relname = 'state'
+      `
+      const beforeSentinel = await database.query<{ snapshot: string }>(
+        sentinelSnapshotQuery,
+      )
+
+      let rejection: unknown
+      try {
+        await applyMigration(database)
+      } catch (cause) {
+        rejection = cause
+      }
+      await database.exec('rollback')
+
+      expect(rejection).toBeInstanceOf(Error)
+      expect((rejection as Error).message).toMatch(/schema ACL drift/)
+      expect(await schemaAclSnapshot(database)).toEqual(beforeAcl)
+      expect(
+        (
+          await database.query<{
+            usage: boolean
+            profiles_absent: boolean
+          }>(`
+            select
+              has_schema_privilege(
+                '${role}',
+                'auth',
+                'USAGE'
+              ) as usage,
+              to_regclass('public.profiles') is null as profiles_absent
+          `)
+        ).rows,
+      ).toEqual([{ usage: false, profiles_absent: true }])
+      const afterSentinel = await database.query<{ snapshot: string }>(
+        sentinelSnapshotQuery,
+      )
+      expect(afterSentinel.rows).toEqual(beforeSentinel.rows)
+    },
+    30_000,
+  )
+
   const incompatibleDefinitions: Array<{
     name: string
     mutate: string
     error: RegExp
   }> = [
-    {
-      name: 'missing required anon USAGE on auth',
-      mutate: 'revoke usage on schema auth from anon',
-      error: /schema ACL drift/,
-    },
     {
       name: 'missing required PUBLIC USAGE on public',
       mutate: 'revoke usage on schema public from public',
@@ -861,6 +1130,18 @@ describe('Academy profiles base migration', () => {
       error: /policy names, roles, commands, or expressions/,
     },
     {
+      name: 'restrictive policy mode',
+      mutate: `
+        drop policy profiles_select_own on public.profiles;
+        create policy profiles_select_own on public.profiles
+          as restrictive
+          for select
+          to public
+          using (household_id = auth.uid());
+      `,
+      error: /policy names, roles, commands, or expressions/,
+    },
+    {
       name: 'wrong policy WITH CHECK expression',
       mutate: `
         drop policy profiles_insert_own on public.profiles;
@@ -949,6 +1230,81 @@ describe('Academy profiles base migration', () => {
   )
 
   it(
+    'rejects restrictive policy drift without replacing the table or policy',
+    async () => {
+      const database = await createDatabase()
+      await applyMigration(database)
+      const tableOid = await database.query<{ oid: string }>(
+        `select 'public.profiles'::regclass::oid::text as oid`,
+      )
+      await database.exec(`
+        drop policy profiles_select_own on public.profiles;
+        create policy profiles_select_own on public.profiles
+          as restrictive
+          for select
+          to public
+          using (household_id = auth.uid());
+      `)
+      const policySnapshotQuery = `
+        select jsonb_agg(
+          jsonb_build_object(
+            'oid', policy.oid::text,
+            'name', policy.polname,
+            'permissive', policy.polpermissive,
+            'command', policy.polcmd,
+            'roles', policy.polroles,
+            'using', pg_get_expr(
+              policy.polqual,
+              policy.polrelid,
+              false
+            ),
+            'check', pg_get_expr(
+              policy.polwithcheck,
+              policy.polrelid,
+              false
+            )
+          )
+          order by policy.polname
+        )::text as snapshot
+        from pg_policy as policy
+        where policy.polrelid = 'public.profiles'::regclass
+      `
+      const beforeCatalog = await catalogSnapshot(database)
+      const beforePolicies = await database.query<{ snapshot: string }>(
+        policySnapshotQuery,
+      )
+      expect(
+        beforeCatalog.policies.find(
+          (policy) => policy.name === 'profiles_select_own',
+        ),
+      ).toMatchObject({ permissive: false })
+
+      let rejection: unknown
+      try {
+        await applyMigration(database)
+      } catch (cause) {
+        rejection = cause
+      }
+      await database.exec('rollback')
+
+      expect(rejection).toBeInstanceOf(Error)
+      expect((rejection as Error).message).toMatch(
+        /policy names, roles, commands, or expressions/,
+      )
+      const afterTableOid = await database.query<{ oid: string }>(
+        `select 'public.profiles'::regclass::oid::text as oid`,
+      )
+      expect(afterTableOid.rows).toEqual(tableOid.rows)
+      expect(await catalogSnapshot(database)).toEqual(beforeCatalog)
+      const afterPolicies = await database.query<{ snapshot: string }>(
+        policySnapshotQuery,
+      )
+      expect(afterPolicies.rows).toEqual(beforePolicies.rows)
+    },
+    30_000,
+  )
+
+  it(
     'rejects excess effective schema privileges before touching profiles or repairing the grant',
     async () => {
       const database = await createDatabase()
@@ -1005,30 +1361,20 @@ describe('Academy profiles base migration', () => {
       )
 
       await applyMigration(database)
-      expect(
-        (
-          await database.query<{ allowed: boolean }>(
-            `select has_table_privilege(
-               'authenticated',
-               'public.profiles',
-               'SELECT, INSERT, UPDATE, DELETE'
-             ) as allowed`,
-          )
-        ).rows[0].allowed,
-      ).toBe(true)
+      expect(await authenticatedCrudPrivileges(database)).toEqual({
+        select_allowed: true,
+        insert_allowed: true,
+        update_allowed: true,
+        delete_allowed: true,
+      })
 
       await database.exec(identityMigration)
-      expect(
-        (
-          await database.query<{ allowed: boolean }>(
-            `select has_table_privilege(
-               'authenticated',
-               'public.profiles',
-               'SELECT, INSERT, UPDATE, DELETE'
-             ) as allowed`,
-          )
-        ).rows[0].allowed,
-      ).toBe(true)
+      expect(await authenticatedCrudPrivileges(database)).toEqual({
+        select_allowed: true,
+        insert_allowed: true,
+        update_allowed: true,
+        delete_allowed: true,
+      })
 
       await database.exec(casMigration)
 

@@ -130,12 +130,16 @@ It covers:
 - authenticated household isolation and anonymous denial;
 - exact rerun stability and unrelated ACL sentinel preservation;
 - exact legacy-snapshot verification with byte-equivalent JSON/timestamp rows;
-- exact effective schema ACL acceptance and rejection of missing `USAGE`,
-  direct `CREATE`, role-inherited `CREATE`, `PUBLIC`-inherited `CREATE`, and
-  direct/inherited schema grant options;
+- exact effective schema ACL acceptance when a target has no direct
+  `public`-schema `USAGE` and inherits it through the required `PUBLIC` grant;
+- inherited helper-role `USAGE` arrangements for every target-role/schema
+  pairing, with no direct target grant or ACL normalization;
+- rejection of missing `auth`-schema `USAGE` for `anon`, `authenticated`, and
+  `service_role`, plus direct `CREATE`, role-inherited `CREATE`,
+  `PUBLIC`-inherited `CREATE`, and direct/inherited schema grant options;
 - rejection of wrong/missing/extra/reordered columns, PK/index, FK target/delete
-  action, owner, table ACL, user trigger, disabled/forced RLS, and all policy
-  command/role/`USING`/`WITH CHECK`/cardinality drift;
+  action, owner, table ACL, user trigger, disabled/forced RLS, and policy
+  permissiveness/command/role/`USING`/`WITH CHECK`/cardinality drift;
 - proof that rejected schema drift leaves both `public.profiles` and the
   unexpected external grant untouched.
 
@@ -151,9 +155,10 @@ The test asserts the identity blob
 `c9aa82ddc7e9bd179107b50dfe6d87d9fbfa650f` before loading them. It fails if
 either reviewed commit is absent or its path resolves to different content.
 The chain verifies correct owners, ACLs, RLS, private-schema isolation,
-security-definer search paths, pre-CAS authenticated CRUD, post-CAS
-direct-write revocation, zero synthetic fixtures, and only the expected
-identity metadata marker.
+security-definer search paths, each pre-CAS authenticated `SELECT`, `INSERT`,
+`UPDATE`, and `DELETE` privilege independently, post-CAS direct-write
+revocation, zero synthetic fixtures, and only the expected identity metadata
+marker.
 
 Supabase CLI 2.109.1 was separately tested against an isolated PostgreSQL
 process. A forced final-statement failure rolled back all earlier statements
