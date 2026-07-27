@@ -109,9 +109,16 @@ works exactly as before and the JSON backup/export stays your escape hatch.
 1. **Create a Supabase project** (supabase.com → New project, free tier). Note the
    project's **URL** and **anon public key** (Project Settings → API). The anon key
    is safe in the browser; **never** use or paste the *service_role* key anywhere.
-2. **Create the table**: Supabase → **SQL Editor → New query**, paste the contents of
-   `supabase/schema.sql` from this repo, and **Run**. (One `profiles` table with
-   row-level security so each household only sees its own rows.)
+2. **Create the table through the reviewed migration workflow**: apply
+   `supabase/migrations/20260724074106_academy_profiles_base.sql` with the
+   approved Supabase migration runner. It creates one `profiles` table with
+   row-level security so each household only sees its own rows.
+   The migration first validates the exact effective `public`/`auth` schema
+   privileges, including inherited and `PUBLIC` grants. Missing privileges or
+   unexpected browser-role `CREATE` access aborts without repairing the
+   platform ACL.
+   `supabase/schema.sql` is a legacy/reference snapshot, not an independent
+   deployment source.
 3. **Create Dad's login**: Supabase → **Authentication → Users → Add user** with your
    email + a password (or enable email sign-up). The girls do **not** get accounts —
    after Dad signs in on a device, the existing PIN picker still chooses who's active.
