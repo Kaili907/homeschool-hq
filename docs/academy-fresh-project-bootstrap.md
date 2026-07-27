@@ -61,18 +61,38 @@ The table grants exactly `SELECT`, `INSERT`, `UPDATE`, and `DELETE` to
 `authenticated`, without grant option. It grants no table privilege to
 `PUBLIC`, `anon`, or `service_role`. The owner retains normal owner privileges.
 
-The migration does not alter schema-wide ACLs. It verifies these standard
-Supabase prerequisites and fails if they are absent:
+The migration validates but never alters schema-wide ACLs. The complete
+effective schema-privilege contract is:
 
-- roles `anon`, `authenticated`, and `service_role`;
-- `auth.users`;
-- `auth.uid()`;
-- `authenticated` and `anon` usage on `public` and `auth`;
-- `authenticated` and `anon` execute privilege on `auth.uid()`.
+| Schema | `PUBLIC` | `anon` | `authenticated` | `service_role` | `postgres` |
+| --- | --- | --- | --- | --- | --- |
+| `public` | `USAGE` | `USAGE` | `USAGE` | `USAGE` | `CREATE`, `USAGE` |
+| `auth` | none | `USAGE` | `USAGE` | `USAGE` | `CREATE`, `USAGE` |
+
+`CREATE` and `USAGE` are PostgreSQL's complete schema privilege universe.
+Each role entry is its effective set, not just its direct ACL entry:
+PostgreSQL's catalog privilege resolver includes direct grants, inherited role
+membership, ownership/superuser rights, and grants inherited through `PUBLIC`.
+The `PUBLIC` row itself is derived from the expanded schema ACL. This detects a
+direct or indirect unexpected `CREATE` grant to a browser role even when no
+such grant appears under that role's own ACL entry.
+
+Both missing and excess privileges abort before any `public.profiles` lookup or
+DDL. `PUBLIC`, `anon`, `authenticated`, and `service_role` have no schema grant
+options; grantable authority reached through an inherited role also aborts.
+`postgres` retains normal owner/superuser authority. The migration does not
+normalize, grant, or revoke schema privileges and does not reject unrelated ACL
+entries needed by other platform-owner roles. `anon`, `authenticated`, and
+`service_role` must additionally retain `EXECUTE` on `auth.uid()`.
+
+Other prerequisites are roles `postgres`, `anon`, `authenticated`, and
+`service_role`, plus `auth.users` and `auth.uid()`.
 
 ## Collision, rerun, and preservation behavior
 
-When `public.profiles` is absent, the migration refuses a conflicting
+Before inspecting `public.profiles`, the migration rejects any schema privilege
+matrix mismatch without repairing it. When `public.profiles` is absent, it
+refuses a conflicting
 `public.profiles` composite type or `public.profiles_pkey` relation and then
 creates the approved definition.
 
@@ -110,18 +130,30 @@ It covers:
 - authenticated household isolation and anonymous denial;
 - exact rerun stability and unrelated ACL sentinel preservation;
 - exact legacy-snapshot verification with byte-equivalent JSON/timestamp rows;
-- rejection of wrong type, nullability, default, PK, FK delete action, RLS,
-  policy expression, missing/extra policy, owner, ACL, and index.
+- exact effective schema ACL acceptance and rejection of missing `USAGE`,
+  direct `CREATE`, role-inherited `CREATE`, `PUBLIC`-inherited `CREATE`, and
+  direct/inherited schema grant options;
+- rejection of wrong/missing/extra/reordered columns, PK/index, FK target/delete
+  action, owner, table ACL, user trigger, disabled/forced RLS, and all policy
+  command/role/`USING`/`WITH CHECK`/cardinality drift;
+- proof that rejected schema drift leaves both `public.profiles` and the
+  unexpected external grant untouched.
 
-A disposable test also applied exact migration blobs in timestamp order:
+The same permanent test applies exact reviewed migration blobs in timestamp
+order:
 
 1. base from this branch;
 2. identity from `6138112bda3e395b02ae8d67a1da756f73cd28ed`;
 3. safe-sync from `e5131729f7866553f6bedfd2ca0ec84f0b343126`.
 
-The chain succeeded with correct owners, ACLs, RLS, private-schema isolation,
-security-definer search paths, post-CAS direct-write revocation, and zero
-synthetic fixtures.
+The test asserts the identity blob
+`df4cc097ba72561d4182a138760e82c2730a5fac` and safe-sync blob
+`c9aa82ddc7e9bd179107b50dfe6d87d9fbfa650f` before loading them. It fails if
+either reviewed commit is absent or its path resolves to different content.
+The chain verifies correct owners, ACLs, RLS, private-schema isolation,
+security-definer search paths, pre-CAS authenticated CRUD, post-CAS
+direct-write revocation, zero synthetic fixtures, and only the expected
+identity metadata marker.
 
 Supabase CLI 2.109.1 was separately tested against an isolated PostgreSQL
 process. A forced final-statement failure rolled back all earlier statements

@@ -113,6 +113,10 @@ works exactly as before and the JSON backup/export stays your escape hatch.
    `supabase/migrations/20260724074106_academy_profiles_base.sql` with the
    approved Supabase migration runner. It creates one `profiles` table with
    row-level security so each household only sees its own rows.
+   The migration first validates the exact effective `public`/`auth` schema
+   privileges, including inherited and `PUBLIC` grants. Missing privileges or
+   unexpected browser-role `CREATE` access aborts without repairing the
+   platform ACL.
    `supabase/schema.sql` is a legacy/reference snapshot, not an independent
    deployment source.
 3. **Create Dad's login**: Supabase → **Authentication → Users → Add user** with your

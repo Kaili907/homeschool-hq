@@ -36,7 +36,27 @@ The migration creates only `public.profiles`:
 
 No extension is created or required by this migration. It requires the normal
 Supabase `auth.users`, `auth.uid()`, `anon`, `authenticated`, and `service_role`
-foundation and existing schema/function usage privileges.
+foundation and the exact effective schema privileges below:
+
+| Schema | `PUBLIC` | `anon` | `authenticated` | `service_role` | `postgres` |
+| --- | --- | --- | --- | --- | --- |
+| `public` | `USAGE` | `USAGE` | `USAGE` | `USAGE` | `CREATE`, `USAGE` |
+| `auth` | none | `USAGE` | `USAGE` | `USAGE` | `CREATE`, `USAGE` |
+
+PostgreSQL schemas expose only `CREATE` and `USAGE`, so this matrix enumerates
+the complete privilege set. Role entries are effective privileges: direct
+grants, inherited role membership, ownership/superuser rights, and
+`PUBLIC`-inherited grants all count. Missing privileges and extras both abort
+before any `public.profiles` DDL. In particular, `anon` and `authenticated`
+must not have schema `CREATE`. `PUBLIC`, `anon`, `authenticated`, and
+`service_role` also receive no schema grant options; grantable authority reached
+through an inherited role is rejected. `postgres` retains its normal
+owner/superuser authority. The migration validates but never repairs, grants,
+or revokes platform schema ACLs. Unrelated platform-owner ACL entries remain
+outside this application-role matrix and are not modified.
+
+`anon`, `authenticated`, and `service_role` must also retain `EXECUTE` on the
+approved `auth.uid()` helper.
 
 An absent table is created. An exact existing definition is verified without
 DDL so rows, timestamps, relation identity, policy/index/constraint cardinality,
@@ -61,8 +81,11 @@ The complete intended fresh-project chain is:
 3. `20260726120000_academy_household_revision_cas.sql`
 
 The latter two remain on their separately reviewed feature branches. They are
-not copied into this branch. The safe-sync migration remains ineligible for
-hosted use until its Session 2C-R3 and Session 2D-R3 gates pass.
+not copied into this branch. The permanent database suite resolves the exact
+reviewed Git blobs from commits `6138112bda3e395b02ae8d67a1da756f73cd28ed`
+and `e5131729f7866553f6bedfd2ca0ec84f0b343126`, verifies their blob identities,
+and applies the complete chain in timestamp order. A missing or stale reviewed
+blob fails the test instead of silently substituting another migration.
 
 An isolated Supabase CLI 2.109.1 rollback probe proved that `migration up
 --db-url` executes one migration file atomically: a forced late failure removed
