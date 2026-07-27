@@ -366,6 +366,7 @@ describe('mounted useSync lifecycle and import safety', () => {
       await act(async () => root?.unmount())
     }
     await waitForAppStatePersistence()
+    expect(transport.authListeners.size).toBe(0)
     vi.unstubAllEnvs()
     vi.unstubAllGlobals()
   })
@@ -428,8 +429,9 @@ describe('mounted useSync lifecycle and import safety', () => {
     })
   }
 
-  async function waitFor(check: () => boolean) {
-    for (let attempt = 0; attempt < 30; attempt += 1) {
+  async function waitFor(check: () => boolean, timeoutMs = 5_000) {
+    const deadline = Date.now() + timeoutMs
+    while (Date.now() < deadline) {
       if (check()) return
       await settle()
     }

@@ -38,6 +38,7 @@ describe('Academy household server revision CAS migration', () => {
   let server: PGLiteSocketServer
   let clientA: pg.Client
   let clientB: pg.Client
+  let connection: pg.ClientConfig
 
   async function configureClient(client: pg.Client, householdId: string) {
     await client.query(
@@ -80,6 +81,39 @@ describe('Academy household server revision CAS migration', () => {
     return result.rows[0].result
   }
 
+  async function withIsolatedClient<T>(
+    householdId: string,
+    callback: (client: pg.Client) => Promise<T>,
+  ): Promise<T> {
+    const client = new pg.Client({
+      ...connection,
+      // Reject a single stuck socket query before the surrounding bounded
+      // structural-limit test can time out.
+      query_timeout: 20_000,
+    })
+    let operationError: unknown
+    try {
+      await client.connect()
+      await configureClient(client, householdId)
+      return await callback(client)
+    } catch (cause) {
+      operationError = cause
+      throw cause
+    } finally {
+      try {
+        await client.end()
+      } catch (cleanupError) {
+        if (operationError) {
+          throw new AggregateError(
+            [operationError, cleanupError],
+            'Academy PGlite operation and isolated-client cleanup both failed.',
+          )
+        }
+        throw cleanupError
+      }
+    }
+  }
+
   beforeAll(async () => {
     expect(testDirectory).toContain('supabase')
     database = await PGlite.create()
@@ -115,7 +149,7 @@ describe('Academy household server revision CAS migration', () => {
     })
     await server.start()
     const port = Number(server.getServerConn().split(':').at(-1))
-    const connection = {
+    connection = {
       host: '127.0.0.1',
       port,
       database: 'postgres',
@@ -130,10 +164,25 @@ describe('Academy household server revision CAS migration', () => {
   }, 60_000)
 
   afterAll(async () => {
-    await Promise.allSettled([clientA?.end(), clientB?.end()])
-    await server?.stop()
-    await database?.close()
-  })
+    const errors: unknown[] = []
+    const clients = await Promise.allSettled([clientA?.end(), clientB?.end()])
+    for (const result of clients) {
+      if (result.status === 'rejected') errors.push(result.reason)
+    }
+    try {
+      await server?.stop()
+    } catch (cause) {
+      errors.push(cause)
+    }
+    try {
+      await database?.close()
+    } catch (cause) {
+      errors.push(cause)
+    }
+    if (errors.length > 0) {
+      throw new AggregateError(errors, 'Academy PGlite cleanup failed.')
+    }
+  }, 30_000)
 
   it('allows exactly one of two clients to consume the same empty-cloud revision', async () => {
     const [first, second] = await Promise.all([
@@ -374,75 +423,80 @@ describe('Academy household server revision CAS migration', () => {
   })
 
   it('enforces depth, entry, key, string, and total-payload limits before receipts', async () => {
-    await configureClient(clientA, HOUSEHOLD_C)
-    const before = await snapshot(clientA)
-    const deep = profileRow('p4', 'Deep') as ReturnType<typeof profileRow> & {
-      data: Record<string, unknown>
-    }
-    let nested: Record<string, unknown> = {}
-    deep.data.additive = nested
-    for (let index = 0; index < 129; index += 1) {
-      nested.next = {}
-      nested = nested.next as Record<string, unknown>
-    }
-    const excessiveArray = profileRow('p4', 'Array') as ReturnType<
-      typeof profileRow
-    > & { data: Record<string, unknown> }
-    excessiveArray.data.additive = Array.from({ length: 50_001 }, () => 0)
-    const oversizedKey = profileRow('p4', 'Key') as ReturnType<
-      typeof profileRow
-    > & { data: Record<string, unknown> }
-    oversizedKey.data['k'.repeat(257)] = true
-    const oversizedString = profileRow('p4', 'String') as ReturnType<
-      typeof profileRow
-    > & { data: Record<string, unknown> }
-    oversizedString.data.additive = 'x'.repeat(1_000_001)
-    const excessiveObject = profileRow('p4', 'Object') as ReturnType<
-      typeof profileRow
-    > & { data: Record<string, unknown> }
-    excessiveObject.data.additive = Object.fromEntries(
-      Array.from({ length: 50_001 }, (_, index) => [`key-${index}`, index]),
-    )
-    const excessiveNodes = profileRow('p4', 'Nodes') as ReturnType<
-      typeof profileRow
-    > & { data: Record<string, unknown> }
-    excessiveNodes.data.additive = Array.from({ length: 10_001 }, () =>
-      Array.from({ length: 50 }, () => 0),
-    )
-    for (const [id, row] of [
-      ['deep-profile', deep],
-      ['excessive-array', excessiveArray],
-      ['excessive-object', excessiveObject],
-      ['excessive-nodes', excessiveNodes],
-      ['oversized-key', oversizedKey],
-      ['oversized-string', oversizedString],
-    ] as const) {
+    await withIsolatedClient(HOUSEHOLD_C, async (limitClient) => {
+      const before = await snapshot(limitClient)
+      const deep = profileRow('p4', 'Deep') as ReturnType<typeof profileRow> & {
+        data: Record<string, unknown>
+      }
+      let nested: Record<string, unknown> = {}
+      deep.data.additive = nested
+      for (let index = 0; index < 129; index += 1) {
+        nested.next = {}
+        nested = nested.next as Record<string, unknown>
+      }
+      const excessiveArray = profileRow('p4', 'Array') as ReturnType<
+        typeof profileRow
+      > & { data: Record<string, unknown> }
+      excessiveArray.data.additive = Array.from({ length: 50_001 }, () => 0)
+      const oversizedKey = profileRow('p4', 'Key') as ReturnType<
+        typeof profileRow
+      > & { data: Record<string, unknown> }
+      oversizedKey.data['k'.repeat(257)] = true
+      const oversizedString = profileRow('p4', 'String') as ReturnType<
+        typeof profileRow
+      > & { data: Record<string, unknown> }
+      oversizedString.data.additive = 'x'.repeat(1_000_001)
+      const excessiveObject = profileRow('p4', 'Object') as ReturnType<
+        typeof profileRow
+      > & { data: Record<string, unknown> }
+      excessiveObject.data.additive = Object.fromEntries(
+        Array.from({ length: 50_001 }, (_, index) => [`key-${index}`, index]),
+      )
+      const excessiveNodes = profileRow('p4', 'Nodes') as ReturnType<
+        typeof profileRow
+      > & { data: Record<string, unknown> }
+      excessiveNodes.data.additive = Array.from({ length: 10_001 }, () =>
+        Array.from({ length: 50 }, () => 0),
+      )
+      for (const [id, row] of [
+        ['deep-profile', deep],
+        ['excessive-array', excessiveArray],
+        ['excessive-object', excessiveObject],
+        ['excessive-nodes', excessiveNodes],
+        ['oversized-key', oversizedKey],
+        ['oversized-string', oversizedString],
+      ] as const) {
+        await expect(
+          mutate(limitClient, Number(before.revision), id, [row]),
+        ).rejects.toThrow()
+        expect(await snapshot(limitClient)).toEqual(before)
+      }
+      const overPayload = profileRow('p4', 'Payload') as ReturnType<
+        typeof profileRow
+      > & { data: Record<string, unknown> }
+      overPayload.data.additive = 'x'.repeat(10_000_001)
       await expect(
-        mutate(clientA, Number(before.revision), id, [row]),
+        mutate(limitClient, Number(before.revision), 'over-payload', [
+          overPayload,
+        ]),
       ).rejects.toThrow()
-      expect(await snapshot(clientA)).toEqual(before)
-    }
-    const overPayload = profileRow('p4', 'Payload') as ReturnType<
-      typeof profileRow
-    > & { data: Record<string, unknown> }
-    overPayload.data.additive = 'x'.repeat(10_000_001)
-    await expect(
-      mutate(clientA, Number(before.revision), 'over-payload', [overPayload]),
-    ).rejects.toThrow()
-    await clientA.query('reset role')
-    const receipts = await clientA.query<{ count: string }>(
-      `select count(*)::text as count
-         from public.academy_household_sync_mutations
-        where household_id = $1::uuid
-          and mutation_id in (
-            'deep-profile', 'excessive-array', 'oversized-key',
-            'excessive-object', 'excessive-nodes', 'oversized-string',
-            'over-payload'
-          )`,
-      [HOUSEHOLD_C],
-    )
-    expect(receipts.rows[0].count).toBe('0')
-  })
+      await limitClient.query('reset role')
+      const receipts = await limitClient.query<{ count: string }>(
+        `select count(*)::text as count
+           from public.academy_household_sync_mutations
+          where household_id = $1::uuid
+            and mutation_id in (
+              'deep-profile', 'excessive-array', 'oversized-key',
+              'excessive-object', 'excessive-nodes', 'oversized-string',
+              'over-payload'
+            )`,
+        [HOUSEHOLD_C],
+      )
+      expect(receipts.rows[0].count).toBe('0')
+    })
+    // Recursive node and 10 MB payload probes are intentionally expensive in
+    // PGlite. Keep only this isolated proof above Vitest's five-second default.
+  }, 30_000)
 
   it('rolls back the entire multi-profile mutation when any row fails', async () => {
     await configureClient(clientA, HOUSEHOLD_A)

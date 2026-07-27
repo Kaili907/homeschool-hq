@@ -1,4 +1,5 @@
-import { mkdtemp, readFile, rm } from 'node:fs/promises'
+import type { ChildProcess } from 'node:child_process'
+import { access, mkdtemp, readFile, rm } from 'node:fs/promises'
 import { createServer } from 'node:net'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
@@ -14,6 +15,60 @@ const migrationPath = new URL(
   './migrations/20260726120000_academy_household_revision_cas.sql',
   import.meta.url,
 )
+const WINDOWS_CLEANUP_TIMEOUT_MS = 10_000
+const WINDOWS_CLEANUP_RETRY_MS = 100
+
+function delay(ms: number) {
+  return new Promise<void>((resolve) => setTimeout(resolve, ms))
+}
+
+async function waitForProcessExit(process: ChildProcess) {
+  if (process.exitCode !== null || process.signalCode !== null) return
+  await new Promise<void>((resolve, reject) => {
+    const exited = () => {
+      clearTimeout(timeout)
+      resolve()
+    }
+    const timeout = setTimeout(() => {
+      process.removeListener('exit', exited)
+      reject(new Error('Academy PostgreSQL process did not exit in time.'))
+    }, WINDOWS_CLEANUP_TIMEOUT_MS)
+    process.once('exit', exited)
+    if (process.exitCode !== null || process.signalCode !== null) {
+      process.removeListener('exit', exited)
+      clearTimeout(timeout)
+      resolve()
+    }
+  })
+  if (process.exitCode === null && process.signalCode === null) {
+    throw new Error('Academy PostgreSQL process still appears to be running.')
+  }
+}
+
+async function removeDatabaseDirectory(databaseDir: string) {
+  const deadline = Date.now() + WINDOWS_CLEANUP_TIMEOUT_MS
+  while (true) {
+    try {
+      await rm(databaseDir, { recursive: true, force: true })
+      try {
+        await access(databaseDir)
+      } catch (cause) {
+        if ((cause as NodeJS.ErrnoException).code === 'ENOENT') return
+        throw cause
+      }
+      throw new Error('Academy PostgreSQL directory still exists after removal.')
+    } catch (cause) {
+      const code = (cause as NodeJS.ErrnoException).code
+      if (
+        !['EBUSY', 'EPERM', 'ENOTEMPTY'].includes(code ?? '') ||
+        Date.now() >= deadline
+      ) {
+        throw cause
+      }
+      await delay(WINDOWS_CLEANUP_RETRY_MS)
+    }
+  }
+}
 
 async function availablePort(): Promise<number> {
   return new Promise((resolve, reject) => {
@@ -48,20 +103,41 @@ describe('Academy CAS on independent PostgreSQL backends', () => {
   let controller: pg.Client
   let clientA: pg.Client
   let clientB: pg.Client
-  let stopped = false
+  let serverProcess: ChildProcess | undefined
+  let cleanupPromise: Promise<void> | null = null
 
   async function cleanupServer() {
-    if (stopped) return
-    stopped = true
-    await Promise.allSettled([
-      controller?.end(),
-      clientA?.end(),
-      clientB?.end(),
-    ])
-    if (server) await server.stop()
-    if (databaseDir) {
-      await rm(databaseDir, { recursive: true, force: true })
-    }
+    if (cleanupPromise) return cleanupPromise
+    cleanupPromise = (async () => {
+      const errors: unknown[] = []
+      const clients = await Promise.allSettled([
+        controller?.end(),
+        clientA?.end(),
+        clientB?.end(),
+      ])
+      for (const result of clients) {
+        if (result.status === 'rejected') errors.push(result.reason)
+      }
+      try {
+        if (server) await server.stop()
+      } catch (cause) {
+        errors.push(cause)
+      }
+      try {
+        if (serverProcess) await waitForProcessExit(serverProcess)
+      } catch (cause) {
+        errors.push(cause)
+      }
+      try {
+        if (databaseDir) await removeDatabaseDirectory(databaseDir)
+      } catch (cause) {
+        errors.push(cause)
+      }
+      if (errors.length > 0) {
+        throw new AggregateError(errors, 'Academy PostgreSQL cleanup failed.')
+      }
+    })()
+    return cleanupPromise
   }
 
   async function configure(client: pg.Client, householdId: string) {
@@ -132,14 +208,31 @@ describe('Academy CAS on independent PostgreSQL backends', () => {
         port: await availablePort(),
         user: 'postgres',
         password: 'academy-test-only',
-        persistent: false,
+        // The harness owns bounded, verified directory removal after the
+        // library has stopped its tracked child process.
+        persistent: true,
         initdbFlags: ['--encoding=UTF8', '--locale=C'],
-        postgresFlags: ['-c', 'listen_addresses=127.0.0.1'],
+        postgresFlags: [
+          '-c',
+          'listen_addresses=127.0.0.1',
+          // PostgreSQL 18 defaults to a separate Windows io_worker process
+          // that embedded-postgres can orphan after taskkill reports the
+          // tracked postmaster exited. Synchronous I/O keeps every test
+          // backend in the tracked server tree without changing CAS locking.
+          '-c',
+          'io_method=sync',
+        ],
         onLog: () => undefined,
         onError: () => undefined,
       })
       await server.initialise()
       await server.start()
+      serverProcess = (
+        server as unknown as { process?: ChildProcess }
+      ).process
+      if (!serverProcess?.pid) {
+        throw new Error('Academy PostgreSQL child process was not tracked.')
+      }
       controller = server.getPgClient()
       clientA = server.getPgClient()
       clientB = server.getPgClient()
@@ -171,7 +264,14 @@ describe('Academy CAS on independent PostgreSQL backends', () => {
         configure(clientB, HOUSEHOLD_A),
       ])
     } catch (cause) {
-      await cleanupServer()
+      try {
+        await cleanupServer()
+      } catch (cleanupCause) {
+        throw new AggregateError(
+          [cause, cleanupCause],
+          'Academy PostgreSQL setup and cleanup both failed.',
+        )
+      }
       throw cause
     }
   }, 120_000)
