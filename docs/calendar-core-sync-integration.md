@@ -13,9 +13,12 @@ Planner data has two distinct ownership scopes:
 - Per-profile execution data: `PlannerProgress` belongs to one household, one
   profile, one local calendar date, and one deterministic block instance.
 
-Mission completion is not planner-owned. The mission adapter reads the existing
-mission record as its completion authority and delegates eligible manual mission
-completion to the established mission reducer. Curriculum planner completion is
+Mission completion is not planner-owned. `Profile.missions` is the only persisted
+mission-completion authority. Planner mission progress may retain elapsed time,
+pause state, safe resume metadata, and an immutable occurrence snapshot, but it
+must not persist a second authoritative `completed` value. Eligible current-day
+manual completion delegates to the same mission command that owns the mission
+item, streak, reward, and attendance effects. Curriculum planner completion is
 schedule completion only; it does not write mastery, assessment, grade, pacing,
 or attendance data.
 
@@ -50,8 +53,9 @@ authorization on their own.
 
 Parent-only configuration and decisions:
 
-- Template title, instructions, category, recurrence, assignments, start time,
-  expected duration, fixed/flexible behavior, location, parent notes, active state
+- Template title, student instructions, category, recurrence, assignments, start
+  time, expected duration, fixed/flexible behavior, location, parent notes, active
+  state
 - Date additions, removals, changes, moves, skips, and excuses
 - Parent-help requirement
 - Parent verification, verification identity, and completion-note moderation
@@ -69,6 +73,29 @@ Students may update only their own execution state:
 Students may not change assignments, recurrence, fixed event times, expected
 duration, parent notes, another profile's progress, parent verification, or an
 auto-only mission's completion.
+
+Student projections must remove parent notes structurally before data reaches a
+student component or client response. Hiding an already-delivered parent field in
+CSS or conditional markup is not an authorization boundary.
+
+## Legal status transitions
+
+The current projection must enforce a server-side-equivalent transition policy:
+
+- `not-started` may start, complete when eligible, skip, excuse, or move.
+- `in-progress` may pause, complete, skip, excuse, or move.
+- `paused` may resume, complete, skip, excuse, or move.
+- `skipped` remains incomplete and may start, complete, excuse, or move.
+- `completed`, `excused`, and `moved` are terminal until an explicit authorized
+  parent `reopen` operation.
+- Repeating start/resume while active, pause while paused, or an already-applied
+  terminal operation is idempotent and must preserve elapsed time and timestamps.
+
+Every command reselects the current template/source/occurrence and validates the
+profile, assignment, deterministic instance ID, source availability, date,
+actor, and current status. Client-rendered block objects are untrusted snapshots.
+Future cloud RPCs must apply those checks inside the same transaction that writes
+the transition.
 
 ## Conflict and offline considerations
 
@@ -92,6 +119,13 @@ leave two rows active.
 Date interpretation must use the household's configured time zone. Block
 instances use the household calendar date, not a UTC date derived at sync time.
 
+Preferred schedule time and effective occurrence placement are distinct. Fixed
+events reserve their full intervals. Flexible work is placed into a complete
+available interval without silently splitting or overlapping fixed work. A
+paused, active, or historical occurrence retains its captured effective
+placement. Work that cannot fit inside the local calendar day is represented as
+ordered overflow; it is never clamped to a fabricated `23:59` start.
+
 ## Append-only history
 
 The following history should never be overwritten in place:
@@ -103,10 +137,26 @@ The following history should never be overwritten in place:
 - Assignment changes that affect already-instantiated dates
 - Template activation/deactivation and material schedule edits
 - Conflict-resolution decisions
+- Immutable occurrence snapshots needed to display the original title, student
+  instructions, source, preferred/effective placement, and duration
 
 A compact current-state projection may be rebuilt from those events for fast
 reads. Deleting a recurring template must not delete historical block instances
-or progress events.
+or progress events. Deactivation affects future uninstantiated dates only.
+Historical snapshots may retain parent notes for authenticated parent reads, but
+student projections must omit them.
+
+## Planner-version compatibility
+
+Planner persistence has its own version inside schema-version-2 AppState. Missing
+planner data creates the current defaults, and known planner-v1 data migrates to
+the current planner version. Safe unknown JSON fields on a supported version
+should round-trip without driving behavior.
+
+An unsupported newer planner payload is opaque and read-only. The client keeps
+that raw payload in AppState and backup exports, displays an update-required
+message, and rejects planner commands. It must not normalize the payload into an
+older version or allow the ordinary save effect to strip unknown data.
 
 ## Candidate future tables
 
@@ -145,14 +195,25 @@ new authoritative columns.
 
 An eligible manual mission completion should continue through the mission system's
 future RPC/reducer boundary in the same transaction or orchestrated server action.
-Auto-only mission items must reject planner completion requests.
+It is current-household-date only until mission streaks support chronological
+recomputation. Auto-only mission items and missing mission sources must reject
+planner completion requests.
 
 ## Resume contract boundary
 
-`ResumePointer` accepts a route or activity ID, lesson ID, step ID, question/item
-ID, and adapter-owned JSON data. An adapter may populate only locations the linked
-module can reliably restore. Current legacy math, typing, reading, mindset,
-curriculum, and Romeo Online surfaces do not all expose exact lesson-step restore
-contracts. Until each module implements one, the planner preserves paused status
-and elapsed time, then reopens the safest available activity entry point. It must
-not claim exact deep resume.
+`ResumePointer` accepts an adapter, bound block/activity ID, optional route,
+lesson/step/question/item identifiers, and adapter-owned JSON data. Route strings
+and adapter data are untrusted serialized input. Resolution uses a closed
+destination allowlist in this order:
+
+1. A valid pointer bound to the current profile/block/source
+2. Current linked-activity metadata
+3. A dependable subject/course/activity or explicit curriculum-instructions entry
+4. A typed unavailable result
+
+Current legacy math, typing, reading, mindset, curriculum, and Romeo Online
+surfaces do not all expose exact lesson-step restore contracts. The planner
+preserves paused state and elapsed time, then opens the safest supported
+activity-, subject-, course-, or instructions-level entry. It must not claim
+exact deep resume. An unavailable result cannot look like an active Start control
+and cannot transition progress.
