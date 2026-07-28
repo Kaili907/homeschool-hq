@@ -17,6 +17,8 @@ import {
 } from '../../assistant/assistantState'
 import { runAssistantTurn } from '../../assistant/engine'
 import { actionLogLabel, type AssistantAction } from '../../assistant/actions'
+import type { ExternalLessonContext } from '../../assistant/externalLessonContext'
+import { RomeoLessonContextPanel } from './RomeoLessonContextPanel'
 
 /**
  * MJ HS-assistant — the teen-home orb.
@@ -60,6 +62,7 @@ export function AssistantOrb({
   const [sending, setSending] = useState(false)
   const [session, setSession] = useState<AssistantSession>(() => newAssistantSession(rid(), Date.now(), today))
   const [pending, setPending] = useState<AssistantAction | null>(null)
+  const [lessonContext, setLessonContext] = useState<ExternalLessonContext | undefined>()
 
   const voice = getVoicePrefs(profile)
   const canSpeak = !muted && voice.enabled
@@ -108,6 +111,7 @@ export function AssistantOrb({
         today,
         history: session.messages,
         userText,
+        lessonContext,
       })
       const ts = Date.now()
       if (res.kind === 'flagged') {
@@ -222,6 +226,8 @@ export function AssistantOrb({
           </button>
         </div>
       )}
+
+      <RomeoLessonContextPanel disabled={sending} onContextChange={setLessonContext} />
 
       {/* input row: type or tap-and-hold to talk */}
       <div className="mt-3 flex items-center gap-2">
