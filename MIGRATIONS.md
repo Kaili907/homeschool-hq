@@ -90,12 +90,13 @@ The complete intended fresh-project chain is:
 2. `20260724230000_academy_student_identity_foundation.sql`
 3. `20260726120000_academy_household_revision_cas.sql`
 
-The latter two remain on their separately reviewed feature branches. They are
-not copied into this branch. The permanent database suite resolves the exact
-reviewed Git blobs from commits `6138112bda3e395b02ae8d67a1da756f73cd28ed`
-and `e5131729f7866553f6bedfd2ca0ec84f0b343126`, verifies their blob identities,
-and applies the complete chain in timestamp order. A missing or stale reviewed
-blob fails the test instead of silently substituting another migration.
+This integration branch contains the exact independently reviewed migrations
+from commits `c84f377d4b73bb1876479bb21a043bf1b21ec328`,
+`6138112bda3e395b02ae8d67a1da756f73cd28ed`, and
+`e5131729f7866553f6bedfd2ca0ec84f0b343126`. Permanent tests verify the three
+approved blob identities and apply the complete chain in timestamp order. A
+missing or stale reviewed blob fails instead of silently substituting another
+migration.
 
 An isolated Supabase CLI 2.109.1 rollback probe proved that `migration up
 --db-url` executes one migration file atomically: a forced late failure removed
@@ -104,6 +105,51 @@ forced failure after the exact safe-sync migration and confirmed that no CAS
 table or function remained, while the earlier committed base migration and
 ledger record stayed intact. No repository `supabase/config.toml` was required
 for this explicit local `--db-url` path.
+
+## Supabase: Academy household revision CAS (2026-07-26)
+
+Tracked migration:
+`supabase/migrations/20260726120000_academy_household_revision_cas.sql`.
+It remains unreleased and unapplied to any hosted project, so the Session 2C-R2
+contract and receipt corrections are folded into this single final migration
+definition rather than leaving a knowingly vulnerable intermediate migration.
+
+- Adds one server-managed monotonic revision row per authenticated household.
+- Adds per-household terminal mutation receipts for both applied and conflict
+  results. An identical retry returns the original result without applying
+  profiles or incrementing twice. Reusing an ID with a different expected
+  revision or JSONB payload is rejected, and conflict resolution uses a new ID.
+- Replaces authenticated direct profile writes with a `SECURITY DEFINER` RPC
+  that derives household identity from `auth.uid()`, locks the revision row,
+  validates the expected revision, transactionally upserts only the supplied
+  profile rows, and advances the revision only on success. Omitted existing
+  profiles are retained; this migration adds no deletion mechanism.
+- Uses a fixed `pg_catalog, pg_temp` search path, schema-qualified application
+  objects, `postgres` ownership, no anonymous/PUBLIC execute grant, and the
+  narrow authenticated execute grant.
+- A stale expected revision returns a typed conflict, writes no profiles, and
+  durably records that first result under the household-scoped mutation ID.
+- The server validates required Academy profile fields, supported optional
+  containers, strict timestamps, JavaScript-finite numbers, recursive reserved
+  keys, fixed profile IDs, and bounded JSON structure before a receipt, profile
+  write, or revision advance. Shared fixture data is checked by both the
+  TypeScript and PostgreSQL validators.
+- Existing valid profile rows are preserved and intentionally form a lazy
+  revision-zero snapshot. No state row is backfilled. The first successful CAS
+  mutation creates/locks the state row and consumes revision zero.
+
+Local PGlite/PostgreSQL-protocol probes cover first run, rerun, shared contract
+fixtures, existing-data preservation, lazy revision zero, partial-upsert
+semantics, rollback, identity isolation, anonymous/missing auth, grants, and
+immutable applied/conflict receipts. PGlite's socket multiplexer is not treated
+as independent-backend evidence. The dedicated
+`npm run test:academy-cas-postgres` gate starts a development-only embedded
+PostgreSQL server, asserts different `pg_backend_pid()` values, and proves
+deterministic state-row contention for empty and nonzero revisions plus
+concurrent identical retries. The exact Manuel Academy Supabase project is not
+yet verified, so the migration has not been applied to any hosted project.
+Hosted migration, role/JWT/PostgREST checks, and hosted two-client contention
+remain release gates; do not guess a project or paste the SQL manually.
 
 ## v1 → v2 (M1 multi-profile, 2026-07-23)
 
@@ -148,7 +194,7 @@ Non-breaking additions — existing v2 data loads unchanged (`isAppState` is len
 old states have no `stars` keys and fall back to runtime defaults):
 
 - `Profile.stars?: StarState` — the kid's wallet: `{ balance, lifetimeEarned,
-  ledger, pendingRedemptions }`. `undefined` until her first star is earned.
+ledger, pendingRedemptions }`. `undefined` until her first star is earned.
   The ledger is APPEND-ONLY; `balance` must always equal the ledger sum. A
   mismatch is surfaced in the Grown-Ups panel and NEVER silently repaired.
 - `Profile.coolStars?: boolean` — grade-6 "cool" opt-in (default off/undefined).
@@ -170,7 +216,7 @@ old profiles have no `reading` key and fall back to `defaultReadingState()`):
   `{ sessions, seenPassageIds, calibrations, lastReadDate? }`. `undefined` until
   her first reading session. `sessions` is APPEND-ONLY; each logs
   `{ date, passageId, mode: estimated|assessed|manual, wcpm, wordsPracticed[],
-  durationSec }`. WCPM is an ESTIMATE (browser recognition + alignment) unless
+durationSec }`. WCPM is an ESTIMATE (browser recognition + alignment) unless
   `mode==='manual'` (Dad-counted). `calibrations` holds Dad's ground-truth checks.
 
 No `schemaVersion` bump (follows the M2/M4/MT-1/MS/SE-A additive-optional

@@ -2,8 +2,13 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import type { AppState, Profile } from '../types'
 import { emptyProfile, defaultAppState, isAppState } from '../migration'
 import { serializeAllBackup } from '../appState'
-import { markDirty, pendingRows, reconcile } from '../sync/engine'
-import { emptyMeta } from '../sync/types'
+import {
+  applyReviewedSelection,
+  buildReconciliationPreview,
+  markDirty,
+  pendingRows,
+} from '../sync/engine'
+import { emptyHouseholdMeta } from '../sync/types'
 import { MINDSET_TOTAL_WEEKS, MINDSET_WEEKS } from './content'
 import {
   bandReadAloud,
@@ -244,23 +249,21 @@ describe('PRIVACY — reflection text is never in AppState (panel / export / syn
 
   it('the sync push payload contains zero reflection text but keeps completion', () => {
     const state = stateWithJournal()
-    // dirty-queue push (pushDirty path)
-    const dirtyRows = pendingRows(state.profiles, markDirty(emptyMeta(), ['p3'], 1000))
-    // reconcile push (runSync path) — local-only profile converges to the cloud
-    const converge = reconcile(state.profiles, markDirty(emptyMeta(), ['p3'], 1000), [], 2000)
+    // Household-scoped dirty-queue payload.
+    const dirtyRows = pendingRows(
+      state.profiles,
+      markDirty(emptyHouseholdMeta('household-a'), ['p3'], 1000),
+    )
     const dirtyJson = JSON.stringify(dirtyRows)
-    const pushJson = JSON.stringify(converge.toPush)
     expect(dirtyRows).toHaveLength(1)
     expect(dirtyJson).not.toContain(SECRET)
     expect(dirtyJson).toContain('completedAt') // completion syncs
-    expect(pushJson).not.toContain(SECRET)
-    expect(pushJson).toContain('completedAt')
   })
 
-  it('a multi-device merge cannot clobber local journal text', () => {
+  it('an explicitly reviewed cloud choice cannot clobber local journal text', () => {
     const state = stateWithJournal() // local p3: week-1 complete + local text = SECRET
-    const localMeta = markDirty(emptyMeta(), ['p3'], 1000)
-    // A STRICTLY-NEWER remote row from another device — completion only, never any text.
+    const localMeta = markDirty(emptyHouseholdMeta('household-a'), ['p3'], 1000)
+    // A remote row from another device carries completion only, never any text.
     const remoteProfile: Profile = {
       ...state.profiles.p3,
       mindset: {
@@ -271,10 +274,17 @@ describe('PRIVACY — reflection text is never in AppState (panel / export / syn
       },
     }
     const remoteRow = { profile_id: 'p3', data: remoteProfile, updated_at: new Date(5000).toISOString() }
-    const res = reconcile(state.profiles, localMeta, [remoteRow], 6000)
-    // remote won the field-group merge (its extra week-2 completion is adopted)…
+    const preview = buildReconciliationPreview(state.profiles, [remoteRow], localMeta)
+    const res = applyReviewedSelection(
+      state.profiles,
+      [remoteRow],
+      preview,
+      { p3: 'cloud' },
+      6000,
+    )
+    // Dad explicitly selected the cloud profile, so its week-2 completion is adopted…
     expect(res.profiles.p3.mindset!.weeks[2].completedAt).toBe('2026-07-31')
-    // …yet her local journal text is untouched — the merge only ever touches profiles.
+    // …yet her local journal text is untouched — reconciliation only touches profiles.
     expect(getJournalText('p3', 1)).toBe(SECRET)
     // and nothing in the merged/pushed profile carries her text.
     expect(JSON.stringify(res.profiles.p3)).not.toContain(SECRET)
