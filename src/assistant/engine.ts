@@ -5,6 +5,7 @@ import { assistantName, assistantPersona, atDailyCap } from './assistantState'
 import { buildAssistantContext, renderAssistantContext } from './context'
 import { buildActionCatalog, parseAction, renderActionCatalog, type AssistantAction } from './actions'
 import { buildAssistantSystemPrompt } from './prompt'
+import { renderExternalLessonContext, type ExternalLessonContext } from './externalLessonContext'
 
 /**
  * MJ HS-assistant — one conversation turn.
@@ -40,6 +41,7 @@ export function assembleAssistantRequest(
   today: ISODate,
   history: AssistantMessage[],
   userText: string,
+  lessonContext?: ExternalLessonContext,
 ): { system: string; messages: AnthropicMessage[]; catalog: AssistantAction[] } {
   const ctx = buildAssistantContext(profile, today)
   const catalog = buildActionCatalog(profile, today)
@@ -49,6 +51,7 @@ export function assembleAssistantRequest(
     grade: profile.grade,
     contextBlock: renderAssistantContext(ctx),
     actionCatalogText: renderActionCatalog(catalog),
+    lessonContextBlock: lessonContext ? renderExternalLessonContext(lessonContext) : undefined,
   })
   const prior: AnthropicMessage[] = history
     .slice(-HISTORY_WINDOW)
@@ -63,7 +66,13 @@ export function assembleAssistantRequest(
  */
 export async function runAssistantTurn(
   deps: TutorApiDeps,
-  args: { profile: Profile; today: ISODate; history: AssistantMessage[]; userText: string },
+  args: {
+    profile: Profile
+    today: ISODate
+    history: AssistantMessage[]
+    userText: string
+    lessonContext?: ExternalLessonContext
+  },
 ): Promise<AssistantTurnResult> {
   // 1. concerning content → scripted care line, no API, parent flag raised by caller.
   if (isConcerning(args.userText)) {
@@ -79,6 +88,7 @@ export async function runAssistantTurn(
     args.today,
     args.history,
     args.userText,
+    args.lessonContext,
   )
   const res = await askTutor(deps, { system, messages })
   if (!res.ok) return { kind: 'offline', text: NAPPING }
