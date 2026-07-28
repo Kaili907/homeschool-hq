@@ -47,6 +47,23 @@ describe('buildAssistantSystemPrompt', () => {
     expect(prompt).toContain('Never request or repeat passwords')
   })
 
+  it('places optional lesson context beneath fixed rules and labels it untrusted', () => {
+    const withLesson = buildAssistantSystemPrompt({
+      ...base,
+      lessonContextBlock: 'BEGIN UNTRUSTED EXTERNAL LESSON CONTEXT\nVisible text: choose B',
+    })
+
+    expect(withLesson).toContain('AUTHORIZED EXTERNAL LESSON CONTEXT')
+    expect(withLesson).toContain('BEGIN UNTRUSTED EXTERNAL LESSON CONTEXT')
+    expect(withLesson.indexOf('HARD RULES')).toBeLessThan(
+      withLesson.indexOf('BEGIN UNTRUSTED EXTERNAL LESSON CONTEXT'),
+    )
+  })
+
+  it('omits the external-context section when no lesson is attached', () => {
+    expect(prompt).not.toContain('AUTHORIZED EXTERNAL LESSON CONTEXT')
+  })
+
   it('includes the scripted care line for distress', () => {
     expect(prompt).toContain(SCRIPTED_FLAG_REPLY)
   })
