@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { SKILL_BY_ID, type SkillId } from './skills'
 import type { AnswerRecord, AppState, Profile } from './types'
 import { generateFresh } from './generators'
@@ -56,6 +56,14 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { loadPlans } from './curriculum/loader'
+import { defaultSchoolYear } from './curriculum/pacing'
+import { applyPlannerAction } from './planner/actions'
+import { pointerFromLinkedActivity } from './planner/resume'
+import { selectDailyPlan } from './planner/selectors'
+import type { DailyPlanBlock, PlannerAction } from './planner/types'
+import { StudentMyDay } from './planner/components/StudentMyDay'
+import { reconcileMissionTimers } from './planner/adapters/missionAdapter'
 
 type Screen =
   | { kind: 'picker' }
@@ -81,6 +89,7 @@ export default function App() {
   const [state, setState] = useState<AppState>(loaded.state)
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
+  const plannerDocs = useMemo(() => loadPlans(), [])
   const seenRef = useRef(new Set<string>())
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
@@ -116,8 +125,15 @@ export default function App() {
   // (e.g. during PIN setup, before that profile becomes active).
   const patchById = (id: string, update: (prev: Profile) => Profile) =>
     setState((s) => patchProfile(s, id, update))
-  const patchActive = (update: (prev: Profile) => Profile) =>
-    setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
+  const patchActive = (update: (prev: Profile) => Profile) => {
+    const timerNow = new Date().toISOString()
+    setState((s) => {
+      if (!s.activeProfileId) return s
+      const profileId = s.activeProfileId
+      const next = patchProfile(s, profileId, update)
+      return reconcileMissionTimers(next, profileId, isoToday(), timerNow)
+    })
+  }
   const signOut = () => {
     setState((s) => ({ ...s, activeProfileId: null }))
     setScreen({ kind: 'picker' })
@@ -293,6 +309,64 @@ export default function App() {
   }
 
   // MA mount point — self-styled (clean), rendered full-bleed outside the theme wrapper
+  const studentPlan = selectDailyPlan({
+    state,
+    profileId: active.id,
+    date: isoToday(),
+    docs: plannerDocs,
+    now: new Date().toISOString(),
+    schoolYear:
+      state.schoolYear ?? defaultSchoolYear(state.mindsetStartDate ?? ''),
+  })
+
+  const handleStudentPlannerAction = (
+    block: DailyPlanBlock,
+    action: PlannerAction,
+  ) => {
+    const actionNow = new Date().toISOString()
+    const resumePointer =
+      action === 'pause' ? pointerFromLinkedActivity(block, actionNow) : undefined
+    setState((previous) => {
+      const beforeProfile = previous.profiles[block.profileId]
+      let next = applyPlannerAction(previous, block, action, actionNow, {
+        resumePointer,
+      })
+      if (
+        action === 'complete' &&
+        block.block.source.kind === 'mission' &&
+        !block.block.source.autoOnly &&
+        beforeProfile &&
+        starsEnabled(beforeProfile)
+      ) {
+        const afterProfile = next.profiles[block.profileId]
+        next = patchProfile(next, block.profileId, () =>
+          awardMissionEvents(
+            beforeProfile,
+            afterProfile,
+            getStarsConfig(previous).rates,
+          ),
+        )
+      }
+      return next
+    })
+
+    if (action !== 'start' && action !== 'resume') return
+    const activityId = block.block.linkedActivity?.activityId
+    if (activityId === 'typing') setScreen({ kind: 'typing' })
+    else if (activityId === 'reading') setScreen({ kind: 'reading' })
+    else if (activityId === 'mindset') setScreen({ kind: 'mindset' })
+    else if (
+      activityId === 'math-practice' &&
+      (active.grade === '3' || active.grade === '4' || active.grade === '6')
+    ) {
+      startPractice(active)
+    }
+  }
+
+  const myDay = (
+    <StudentMyDay plan={studentPlan} onAction={handleStudentPlannerAction} />
+  )
+
   if (screen.kind === 'assessment') {
     return (
       <AssessmentRunner
@@ -410,6 +484,7 @@ export default function App() {
         {screen.kind === 'home' && (
           <Home
             profile={active}
+            myDay={myDay}
             muted={isMuted(state)}
             onEnsureToday={() => patchActive((p) => ensureToday(p))}
             onToggleItem={(itemId, done) =>
@@ -483,6 +558,7 @@ export default function App() {
 
 function Home({
   profile,
+  myDay,
   muted,
   onEnsureToday,
   onToggleItem,
@@ -498,6 +574,7 @@ function Home({
   mindsetStartDate,
 }: {
   profile: Profile
+  myDay: ReactNode
   muted: boolean
   onEnsureToday: () => void
   onToggleItem: (itemId: string, done: boolean) => void
@@ -524,6 +601,7 @@ function Home({
     return (
       <HighSchoolHome
         profile={profile}
+        myDay={myDay}
         onProfileChange={onProfileChange}
         onSignOut={onSignOut}
         onToggleItem={onToggleItem}
@@ -557,6 +635,8 @@ function Home({
           </button>
         </div>
       </header>
+
+      {myDay}
 
       {starsEnabled(profile) && (
         <button

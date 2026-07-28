@@ -1,6 +1,7 @@
 import type { AppState, Profile, SkillState, SkillStatus } from './types'
 import type { SkillId } from './skills'
 import { defaultAppState, isAppState, migrateV1ToV2 } from './migration'
+import { withPlannerDefaults } from './planner/defaults'
 
 const V2_KEY = 'homeschool-hq:app:v2'
 const V1_KEY = 'homeschool-hq:profile:v1'
@@ -13,6 +14,11 @@ export interface LoadResult {
   backupKey?: string
 }
 
+/** Pure runtime hydration used by local load, backup restore, and compatibility tests. */
+export function hydrateAppState(state: AppState): AppState {
+  return withPlannerDefaults(state)
+}
+
 /**
  * Load app state. If only v1 data exists, snapshot it to a timestamped
  * backup key FIRST, then migrate. The original v1 key is never deleted.
@@ -22,7 +28,7 @@ export function loadAppState(): LoadResult {
     const raw2 = localStorage.getItem(V2_KEY)
     if (raw2) {
       const parsed = JSON.parse(raw2) as unknown
-      if (isAppState(parsed)) return { state: parsed, migrated: false }
+      if (isAppState(parsed)) return { state: hydrateAppState(parsed), migrated: false }
     }
   } catch {
     // fall through
@@ -35,14 +41,15 @@ export function loadAppState(): LoadResult {
       localStorage.setItem(backupKey, raw1) // backup BEFORE any conversion
       const migrated = migrateV1ToV2(JSON.parse(raw1))
       if (migrated) {
-        localStorage.setItem(V2_KEY, JSON.stringify(migrated))
-        return { state: migrated, migrated: true, backupKey }
+        const hydrated = hydrateAppState(migrated)
+        localStorage.setItem(V2_KEY, JSON.stringify(hydrated))
+        return { state: hydrated, migrated: true, backupKey }
       }
     }
   } catch {
     // fall through
   }
-  const fresh = defaultAppState()
+  const fresh = hydrateAppState(defaultAppState())
   localStorage.setItem(V2_KEY, JSON.stringify(fresh))
   return { state: fresh, migrated: false }
 }
@@ -197,7 +204,11 @@ export function importBackup(current: AppState, text: string): ImportResult {
     return { ok: false, error: 'That file is not valid JSON.' }
   }
   if (isAppState(parsed)) {
-    return { ok: true, state: parsed, note: 'Full backup restored (all profiles).' }
+    return {
+      ok: true,
+      state: hydrateAppState(parsed),
+      note: 'Full backup restored (all profiles).',
+    }
   }
   const asV1 = migrateV1ToV2(parsed)
   if (asV1) {

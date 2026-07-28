@@ -1,5 +1,6 @@
 import type { SkillId } from './skills'
 import type { AssessmentState } from './assessment/types'
+import type { PlannerState } from './planner/types'
 
 // ---------- questions (unchanged from v1) ----------
 
@@ -613,6 +614,11 @@ export interface AppState {
   mindsetStartDate?: ISODate
   /** MP: the parent-hub school-year pacing config (start date, off-weeks, quarter breaks). undefined = not configured yet. */
   schoolYear?: SchoolYear
+  /**
+   * Calendar Core: family schedule templates + per-profile/date/instance progress.
+   * Optional for schema-v2 compatibility; appState hydration supplies runtime defaults.
+   */
+  planner?: PlannerState
 }
 
 // ---------- schema v1 (legacy, for migration only) ----------

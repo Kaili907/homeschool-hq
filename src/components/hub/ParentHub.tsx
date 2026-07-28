@@ -7,8 +7,9 @@ import { TodayView } from './TodayView'
 import { CalendarView } from './CalendarView'
 import { PlansView } from './PlansView'
 import { StatusView } from './StatusView'
+import { DailyPlanView } from '../../planner/components/DailyPlanView'
 
-export type HubTab = 'today' | 'calendar' | 'plans' | 'status'
+export type HubTab = 'today' | 'daily-plan' | 'calendar' | 'plans' | 'status'
 
 interface Props {
   state: AppState
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const TABS: { id: HubTab; label: string; emoji: string }[] = [
+  { id: 'daily-plan', label: 'Daily Plan', emoji: '🗓️' },
   { id: 'today', label: 'Today', emoji: '🌅' },
   { id: 'calendar', label: 'Calendar', emoji: '🗓️' },
   { id: 'plans', label: 'Plans', emoji: '📚' },
@@ -67,7 +69,7 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic }: Prop
         </div>
 
         {/* tab bar */}
-        <div className="mt-4 flex gap-1 rounded-xl bg-slate-200/70 p-1 print:hidden">
+        <div className="mt-4 grid grid-cols-2 gap-1 rounded-xl bg-slate-200/70 p-1 sm:grid-cols-5 print:hidden">
           {TABS.map((tb) => (
             <button
               key={tb.id}
@@ -90,6 +92,16 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic }: Prop
 
         <div className="mt-4">
           {tab === 'today' && <TodayView profiles={profiles} docs={docs} sy={sy} today={today} state={state} />}
+          {tab === 'daily-plan' && (
+            <DailyPlanView
+              state={state}
+              onStateChange={onStateChange}
+              profiles={profiles}
+              docs={docs}
+              schoolYear={sy}
+              today={today}
+            />
+          )}
           {tab === 'calendar' && (
             <CalendarView profiles={profiles} docs={docs} sy={sy} today={today} onChange={setSchoolYear} />
           )}

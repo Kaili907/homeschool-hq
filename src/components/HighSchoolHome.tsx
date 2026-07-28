@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState, type ReactNode } from 'react'
 import type { CourseTrack, Difficulty, Profile } from '../types'
 import { finishSession, isoToday } from '../appState'
 import { useTheme } from '../theme'
@@ -50,6 +50,8 @@ interface Props {
   onOpenAssessment: (testId: string) => void
   onOpenMindset: () => void
   mindsetStartDate: string | undefined
+  /** Calendar Core student sequence; editing controls remain parent-only. */
+  myDay?: ReactNode
 }
 
 const rnd = <T,>(arr: readonly T[]): T => arr[Math.floor(Math.random() * arr.length)]
@@ -82,6 +84,7 @@ export function HighSchoolHome({
   onOpenAssessment,
   onOpenMindset,
   mindsetStartDate,
+  myDay,
 }: Props) {
   const t = useTheme()
   const [screen, setScreen] = useState<HsScreen>({ kind: 'home' })
@@ -211,6 +214,8 @@ export function HighSchoolHome({
           Sign out
         </button>
       </header>
+
+      {myDay}
 
       {/* MJ: the school-day assistant sits at the very top of the teen home */}
       <AssistantOrb
