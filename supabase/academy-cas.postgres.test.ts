@@ -244,6 +244,7 @@ describe('Academy CAS on independent PostgreSQL backends', () => {
       await controller.query(`
       create role anon;
       create role authenticated;
+      create role service_role nologin bypassrls;
       create schema auth;
       create table auth.users (id uuid primary key);
       create or replace function auth.uid()

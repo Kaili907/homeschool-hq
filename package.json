@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:academy-profiles-base": "vitest run supabase/academy-profiles-base.db.test.ts",
+    "test:academy-foundation-integration": "vitest run supabase/academy-foundation-integration.db.test.ts",
     "test:sync-db": "vitest run supabase/academy-cas.db.test.ts",
     "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts"
   },

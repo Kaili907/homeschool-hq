@@ -120,6 +120,7 @@ describe('Academy household server revision CAS migration', () => {
     await database.exec(`
       create role anon;
       create role authenticated;
+      create role service_role nologin bypassrls;
       create schema auth;
       create table auth.users (id uuid primary key);
       create or replace function auth.uid()
@@ -716,6 +717,7 @@ describe('Academy CAS migration over preexisting household profiles', () => {
       await database.exec(`
         create role anon;
         create role authenticated;
+        create role service_role nologin bypassrls;
         create schema auth;
         create table auth.users (id uuid primary key);
         create or replace function auth.uid()
@@ -852,6 +854,7 @@ describe('Academy CAS migration over preexisting household profiles', () => {
       await database.exec(`
         create role anon;
         create role authenticated;
+        create role service_role nologin bypassrls;
         create schema auth;
         create table auth.users (id uuid primary key);
         create or replace function auth.uid()
