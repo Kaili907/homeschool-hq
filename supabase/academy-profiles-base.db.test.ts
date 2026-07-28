@@ -10,10 +10,10 @@ const migrationPath = new URL(
   import.meta.url,
 )
 const schemaSnapshotPath = new URL('./schema.sql', import.meta.url)
-const IDENTITY_COMMIT = '6138112bda3e395b02ae8d67a1da756f73cd28ed'
+const IDENTITY_COMMIT = 'ba8b634764de48d698cd984e99a067a37802c983'
 const IDENTITY_PATH =
   'supabase/migrations/20260724230000_academy_student_identity_foundation.sql'
-const IDENTITY_BLOB = 'df4cc097ba72561d4182a138760e82c2730a5fac'
+const IDENTITY_BLOB = 'aa9074a45a1725301e6b606e84d332248e48539f'
 const CAS_COMMIT = 'e5131729f7866553f6bedfd2ca0ec84f0b343126'
 const CAS_PATH =
   'supabase/migrations/20260726120000_academy_household_revision_cas.sql'
