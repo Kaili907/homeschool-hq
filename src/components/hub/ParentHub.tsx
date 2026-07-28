@@ -1,13 +1,26 @@
-import { useMemo, useState, type Dispatch, type SetStateAction } from 'react'
+import {
+  lazy,
+  Suspense,
+  useMemo,
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from 'react'
 import type { AppState, Profile } from '../../types'
-import { isoToday } from '../../appState'
 import { defaultSchoolYear } from '../../curriculum/pacing'
 import { loadPlans } from '../../curriculum/loader'
+import type { PlannerDestination } from '../../planner/types'
+import { useLocalCalendarDate } from '../../planner/useLocalDate'
 import { TodayView } from './TodayView'
 import { CalendarView } from './CalendarView'
 import { PlansView } from './PlansView'
 import { StatusView } from './StatusView'
-import { DailyPlanView } from '../../planner/components/DailyPlanView'
+
+const DailyPlanView = lazy(() =>
+  import('../../planner/components/DailyPlanView').then((module) => ({
+    default: module.DailyPlanView,
+  })),
+)
 
 export type HubTab = 'today' | 'daily-plan' | 'calendar' | 'plans' | 'status'
 
@@ -17,6 +30,10 @@ interface Props {
   onClose: () => void
   /** open the classic admin Grown-Ups panel (templates, stars, sync, backup). */
   onOpenClassic: () => void
+  onOpenPlannerDestination: (
+    profileId: string,
+    destination: PlannerDestination,
+  ) => boolean
 }
 
 const TABS: { id: HubTab; label: string; emoji: string }[] = [
@@ -32,9 +49,15 @@ const TABS: { id: HubTab; label: string; emoji: string }[] = [
  * plans; never grades. The classic admin panel stays reachable for config that isn't
  * a view (mission templates, stars, tutor, cloud sync, backup).
  */
-export function ParentHub({ state, onStateChange, onClose, onOpenClassic }: Props) {
+export function ParentHub({
+  state,
+  onStateChange,
+  onClose,
+  onOpenClassic,
+  onOpenPlannerDestination,
+}: Props) {
   const [tab, setTab] = useState<HubTab>('today')
-  const today = isoToday()
+  const today = useLocalCalendarDate()
   const docs = useMemo(() => loadPlans(), [])
   const profiles = useMemo(() => Object.values(state.profiles), [state.profiles])
 
@@ -93,14 +116,26 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic }: Prop
         <div className="mt-4">
           {tab === 'today' && <TodayView profiles={profiles} docs={docs} sy={sy} today={today} state={state} />}
           {tab === 'daily-plan' && (
-            <DailyPlanView
-              state={state}
-              onStateChange={onStateChange}
-              profiles={profiles}
-              docs={docs}
-              schoolYear={sy}
-              today={today}
-            />
+            <Suspense
+              fallback={
+                <div
+                  className="rounded-xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-600"
+                  role="status"
+                >
+                  Loading Daily Plan…
+                </div>
+              }
+            >
+              <DailyPlanView
+                state={state}
+                onStateChange={onStateChange}
+                profiles={profiles}
+                docs={docs}
+                schoolYear={sy}
+                today={today}
+                onOpenDestination={onOpenPlannerDestination}
+              />
+            </Suspense>
           )}
           {tab === 'calendar' && (
             <CalendarView profiles={profiles} docs={docs} sy={sy} today={today} onChange={setSchoolYear} />

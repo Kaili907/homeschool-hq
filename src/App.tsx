@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { flushSync } from 'react-dom'
 import { SKILL_BY_ID, type SkillId } from './skills'
 import type { AnswerRecord, AppState, Profile } from './types'
 import { generateFresh } from './generators'
@@ -23,11 +24,10 @@ import {
   type PlacementSkillResult,
   type PlanItem,
 } from './engine'
-import { autoCompletePractice, autoCompleteTyping, ensureToday, isDayComplete, setItemDone } from './missions'
-import { recordAttendance } from './attendance/attendance'
+import { autoCompletePractice, autoCompleteTyping, ensureToday, setItemDone } from './missions'
+import { finalizeMissionMutation } from './missionCompletion'
 import { getVoicePrefs, isMuted, logWalkthrough, setMuted } from './tutor/tutorState'
 import {
-  awardMissionEvents,
   awardPracticeSession,
   awardTutorRetry,
   getStars,
@@ -58,18 +58,23 @@ import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
 import { loadPlans } from './curriculum/loader'
 import { defaultSchoolYear } from './curriculum/pacing'
-import { applyPlannerAction } from './planner/actions'
-import { pointerFromLinkedActivity } from './planner/resume'
-import { selectDailyPlan } from './planner/selectors'
-import type { DailyPlanBlock, PlannerAction } from './planner/types'
+import { applyPlannerCommand } from './planner/actions'
+import { selectDailyPlan, toStudentDailyPlan } from './planner/selectors'
+import type {
+  PlannerAction,
+  PlannerCommandOutcome,
+  PlannerDestination,
+  StudentDailyPlanBlock,
+} from './planner/types'
 import { StudentMyDay } from './planner/components/StudentMyDay'
 import { reconcileMissionTimers } from './planner/adapters/missionAdapter'
+import { useLocalCalendarDate } from './planner/useLocalDate'
 
 type Screen =
   | { kind: 'picker' }
   | { kind: 'kidPin'; profileId: string }
   | { kind: 'kidPinCreate'; profileId: string; firstEntry?: string }
-  | { kind: 'home' }
+  | { kind: 'home'; openCourseId?: string }
   | { kind: 'placement'; order: SkillId[] }
   | { kind: 'placementResults'; results: PlacementSkillResult[] }
   | { kind: 'practice'; plan: PlanItem[] }
@@ -83,12 +88,14 @@ type Screen =
   | { kind: 'typing' }
   | { kind: 'reading' }
   | { kind: 'mindset' }
+  | { kind: 'curriculumInstructions'; instanceId: string }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
   const [state, setState] = useState<AppState>(loaded.state)
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
+  const localToday = useLocalCalendarDate()
   const plannerDocs = useMemo(() => loadPlans(), [])
   const seenRef = useRef(new Set<string>())
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
@@ -101,19 +108,6 @@ export default function App() {
   // M6: local-first cloud sync. Inert with no Supabase config; never blocks the UI.
   // Local writes above already persisted; this pushes async + pulls on open/reconnect.
   const sync = useSync(state, setState)
-
-  // SE-B attendance: when the signed-in girl's mission day is complete, append one
-  // attendance day (invisible to her, append-only). recordAttendance is idempotent
-  // — the date guard makes a re-fire a no-op — so this safely covers every path a
-  // day can complete (manual check, math practice, typing drill).
-  const attendanceId = state.activeProfileId
-  const attendanceTodayComplete = attendanceId
-    ? isDayComplete(state.profiles[attendanceId]?.missions[isoToday()])
-    : false
-  useEffect(() => {
-    if (!attendanceId || !attendanceTodayComplete) return
-    setState((s) => patchProfile(s, attendanceId, (p) => recordAttendance(p, true, isoToday())))
-  }, [attendanceId, attendanceTodayComplete])
 
   const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
   const tokens = THEMES[active?.theme ?? 'playful']
@@ -130,8 +124,18 @@ export default function App() {
     setState((s) => {
       if (!s.activeProfileId) return s
       const profileId = s.activeProfileId
-      const next = patchProfile(s, profileId, update)
-      return reconcileMissionTimers(next, profileId, isoToday(), timerNow)
+      const before = s.profiles[profileId]
+      if (!before) return s
+      const date = isoToday()
+      const updated = update(before)
+      const finalized = finalizeMissionMutation(
+        before,
+        updated,
+        getStarsConfig(s).rates,
+        date,
+      )
+      const next = patchProfile(s, profileId, () => finalized)
+      return reconcileMissionTimers(next, profileId, date, timerNow)
     })
   }
   const signOut = () => {
@@ -142,6 +146,35 @@ export default function App() {
   const startPractice = (p: Profile) => {
     sessionStartRef.current = Date.now()
     setScreen({ kind: 'practice', plan: buildPracticePlan(p) })
+  }
+
+  const openPlannerDestinationForProfile = (
+    profileId: string,
+    destination: PlannerDestination,
+  ): boolean => {
+    if (destination.kind === 'unavailable') return false
+    const profile = state.profiles[profileId]
+    if (!profile) return false
+    if (destination.kind === 'manual-activity') return true
+
+    setState((current) =>
+      current.profiles[profileId]
+        ? { ...current, activeProfileId: profileId }
+        : current,
+    )
+    if (destination.kind === 'typing') setScreen({ kind: 'typing' })
+    else if (destination.kind === 'reading') setScreen({ kind: 'reading' })
+    else if (destination.kind === 'mindset') setScreen({ kind: 'mindset' })
+    else if (destination.kind === 'math-practice') startPractice(profile)
+    else if (destination.kind === 'high-school-course') {
+      setScreen({ kind: 'home', openCourseId: destination.courseId })
+    } else if (destination.kind === 'curriculum-instructions') {
+      setScreen({
+        kind: 'curriculumInstructions',
+        instanceId: destination.instanceId,
+      })
+    }
+    return true
   }
 
   // ---------- profile-free screens ----------
@@ -274,6 +307,7 @@ export default function App() {
         onStateChange={setState}
         onClose={() => setScreen({ kind: 'picker' })}
         onOpenClassic={() => setScreen({ kind: 'grownups' })}
+        onOpenPlannerDestination={openPlannerDestinationForProfile}
       />
     )
   }
@@ -309,58 +343,67 @@ export default function App() {
   }
 
   // MA mount point — self-styled (clean), rendered full-bleed outside the theme wrapper
-  const studentPlan = selectDailyPlan({
-    state,
-    profileId: active.id,
-    date: isoToday(),
-    docs: plannerDocs,
-    now: new Date().toISOString(),
-    schoolYear:
-      state.schoolYear ?? defaultSchoolYear(state.mindsetStartDate ?? ''),
-  })
+  const studentToday = localToday
+  const plannerSchoolYear =
+    state.schoolYear ?? defaultSchoolYear(state.mindsetStartDate ?? '')
+  const studentPlan = toStudentDailyPlan(
+    selectDailyPlan({
+      state,
+      profileId: active.id,
+      date: studentToday,
+      currentLocalDate: studentToday,
+      docs: plannerDocs,
+      now: new Date().toISOString(),
+      schoolYear: plannerSchoolYear,
+    }),
+  )
 
   const handleStudentPlannerAction = (
-    block: DailyPlanBlock,
+    block: StudentDailyPlanBlock,
     action: PlannerAction,
-  ) => {
+  ): PlannerCommandOutcome => {
     const actionNow = new Date().toISOString()
-    const resumePointer =
-      action === 'pause' ? pointerFromLinkedActivity(block, actionNow) : undefined
-    setState((previous) => {
-      const beforeProfile = previous.profiles[block.profileId]
-      let next = applyPlannerAction(previous, block, action, actionNow, {
-        resumePointer,
-      })
-      if (
-        action === 'complete' &&
-        block.block.source.kind === 'mission' &&
-        !block.block.source.autoOnly &&
-        beforeProfile &&
-        starsEnabled(beforeProfile)
-      ) {
-        const afterProfile = next.profiles[block.profileId]
-        next = patchProfile(next, block.profileId, () =>
-          awardMissionEvents(
-            beforeProfile,
-            afterProfile,
-            getStarsConfig(previous).rates,
-          ),
+    const actionDate = isoToday()
+    let result: ReturnType<typeof applyPlannerCommand> | undefined
+    flushSync(() => {
+      setState((previous) => {
+        result = applyPlannerCommand(
+          previous,
+          {
+            actor: { kind: 'student', profileId: active.id },
+            action,
+            target: {
+              profileId: block.profileId,
+              date: block.date,
+              blockId: block.block.id,
+              blockInstanceId: block.instanceId,
+            },
+          },
+          {
+            now: actionNow,
+            currentLocalDate: actionDate,
+            docs: plannerDocs,
+            schoolYear: plannerSchoolYear,
+          },
         )
-      }
-      return next
+        return result.state
+      })
     })
-
-    if (action !== 'start' && action !== 'resume') return
-    const activityId = block.block.linkedActivity?.activityId
-    if (activityId === 'typing') setScreen({ kind: 'typing' })
-    else if (activityId === 'reading') setScreen({ kind: 'reading' })
-    else if (activityId === 'mindset') setScreen({ kind: 'mindset' })
-    else if (
-      activityId === 'math-practice' &&
-      (active.grade === '3' || active.grade === '4' || active.grade === '6')
-    ) {
-      startPractice(active)
+    const outcome: PlannerCommandOutcome = result?.outcome ?? {
+      kind: 'rejected',
+      reason: 'block-not-actionable',
     }
+    if (
+      (outcome.kind === 'applied' || outcome.kind === 'idempotent') &&
+      (action === 'start' || action === 'resume') &&
+      result?.navigation
+    ) {
+      openPlannerDestinationForProfile(
+        active.id,
+        result.navigation.destination,
+      )
+    }
+    return outcome
   }
 
   const myDay = (
@@ -441,9 +484,9 @@ export default function App() {
                 const withMission = autoCompletePractice(finishSession(p, longestStreak(history)))
                 if (!starsEnabled(p)) return withMission
                 const rates = getStarsConfig(state).rates
-                // effort/completion pay (+accuracy bonus), then any mission/weekly bonus
-                const earned = awardPracticeSession(withMission, correct, history.length, rates)
-                return awardMissionEvents(p, earned, rates)
+                // Effort/completion pay (+accuracy bonus). The shared mission
+                // finalizer applies any mission/weekly event exactly once.
+                return awardPracticeSession(withMission, correct, history.length, rates)
               })
               setScreen({ kind: 'practiceResults', history })
             }}
@@ -481,6 +524,15 @@ export default function App() {
           />
         )}
 
+        {screen.kind === 'curriculumInstructions' && (
+          <CurriculumInstructions
+            block={studentPlan.blocks.find(
+              (row) => row.instanceId === screen.instanceId,
+            )}
+            onHome={() => setScreen({ kind: 'home' })}
+          />
+        )}
+
         {screen.kind === 'home' && (
           <Home
             profile={active}
@@ -488,13 +540,7 @@ export default function App() {
             muted={isMuted(state)}
             onEnsureToday={() => patchActive((p) => ensureToday(p))}
             onToggleItem={(itemId, done) =>
-              patchActive((p) => {
-                const after = setItemDone(p, itemId, done)
-                // MS: a manual check that completes the day pays the mission (+weekly) bonus
-                return starsEnabled(p)
-                  ? awardMissionEvents(p, after, getStarsConfig(state).rates)
-                  : after
-              })
+              patchActive((p) => setItemDone(p, itemId, done))
             }
             onProfileChange={patchActive}
             onSignOut={signOut}
@@ -506,6 +552,7 @@ export default function App() {
             onOpenReading={() => setScreen({ kind: 'reading' })}
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
             mindsetStartDate={state.mindsetStartDate}
+            openCourseId={screen.openCourseId}
           />
         )}
 
@@ -539,11 +586,7 @@ export default function App() {
               patchActive((prev) => {
                 // record the drill, then flip the typing auto-item for today...
                 const withDrill = recordDrill(prev, result)
-                const after = autoCompleteTyping(withDrill)
-                // ...and pay the mission/weekly bonus if that completes the day (stars profiles only)
-                return starsEnabled(prev)
-                  ? awardMissionEvents(prev, after, getStarsConfig(state).rates)
-                  : after
+                return autoCompleteTyping(withDrill)
               })
             }
             onExit={() => setScreen({ kind: 'home' })}
@@ -551,6 +594,70 @@ export default function App() {
         )}
       </div>
     </ThemeContext.Provider>
+  )
+}
+
+function CurriculumInstructions({
+  block,
+  onHome,
+}: {
+  block?: StudentDailyPlanBlock
+  onHome: () => void
+}) {
+  const source = block?.block.source
+  return (
+    <main className="mx-auto w-full max-w-3xl px-4 py-6">
+      <button
+        type="button"
+        onClick={onHome}
+        className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-700"
+      >
+        ← Back to My Day
+      </button>
+      <section className="mt-4 min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        {!block || source?.kind !== 'curriculum' ? (
+          <>
+            <h1 className="text-2xl font-extrabold text-slate-900">
+              Curriculum activity unavailable
+            </h1>
+            <p className="mt-2 text-slate-600">
+              This activity no longer has a dependable source to open.
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-sm font-bold uppercase tracking-wide text-blue-600">
+              Manuel Academy · {source.subjectLabel}
+            </p>
+            <h1 className="mt-1 break-words text-2xl font-extrabold text-slate-900">
+              {block.block.title}
+            </h1>
+            {block.block.studentInstructions && (
+              <p className="mt-3 break-words text-slate-700">
+                {block.block.studentInstructions}
+              </p>
+            )}
+            <ol className="mt-4 space-y-3">
+              {source.items.map((item) => (
+                <li
+                  key={item.id}
+                  className="min-w-0 rounded-xl bg-slate-50 p-3 text-slate-800"
+                >
+                  <span className="break-words">
+                    {item.dadTaught ? 'Parent-led: ' : ''}
+                    {item.text}
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-4 text-xs font-semibold text-slate-500">
+              This opens the safest available subject instructions. Exact
+              lesson-step resume is not available for this activity yet.
+            </p>
+          </>
+        )}
+      </section>
+    </main>
   )
 }
 
@@ -572,6 +679,7 @@ function Home({
   onOpenReading,
   onOpenMindset,
   mindsetStartDate,
+  openCourseId,
 }: {
   profile: Profile
   myDay: ReactNode
@@ -588,6 +696,7 @@ function Home({
   onOpenReading: () => void
   onOpenMindset: () => void
   mindsetStartDate: string | undefined
+  openCourseId?: string
 }) {
   const t = useTheme()
   const assessmentCards = assignedOpenTests(profile)
@@ -610,6 +719,7 @@ function Home({
         onOpenAssessment={onOpenAssessment}
         onOpenMindset={onOpenMindset}
         mindsetStartDate={mindsetStartDate}
+        openCourseId={openCourseId}
       />
     )
   }

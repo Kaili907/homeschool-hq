@@ -1,8 +1,8 @@
 import type { AppState, MissionDay, Profile } from '../../types'
-import { buildMissionDay, setItemDone, templateFor, weekdayOf } from '../../missions'
+import { buildMissionDay, templateFor, weekdayOf } from '../../missions'
 import {
-  completePlannerProgress,
   patchPlannerState,
+  settleMissionPlannerTiming,
   type PlannerProgressTarget,
 } from '../progress'
 import { plannerBlockInstanceId } from '../resume'
@@ -73,7 +73,7 @@ export function missionBlocksForDay(
     blocks.push({
       id,
       title: item.label,
-      description: item.auto
+      studentInstructions: item.auto
         ? 'Completion is controlled by the linked mission activity.'
         : 'Existing daily mission item.',
       category: 'existing-mission',
@@ -105,21 +105,11 @@ export function isAutoOnlyMissionBlock(block: PlannerBlock | DailyPlanBlock): bo
   return source.kind === 'mission' && source.autoOnly
 }
 
-/** Existing MissionDay remains the only completion authority. */
-export function completeManualMissionFromPlanner(
-  profile: Profile,
-  block: PlannerBlock | DailyPlanBlock,
-  date: string,
-): Profile {
-  const source = 'block' in block ? block.block.source : block.source
-  if (source.kind !== 'mission' || source.autoOnly) return profile
-  return setItemDone(profile, source.missionItemId, true, date)
-}
-
 /**
  * Mission completion still comes exclusively from Profile.missions. This merely
- * closes a planner timer that was already running so active time cannot keep
- * growing after the source activity completes.
+ * settles a planner timer that was already running so active time cannot keep
+ * growing after the source activity completes. The persisted timing row remains
+ * paused/non-authoritative; it never receives completed status or completedAt.
  */
 export function reconcileMissionTimers(
   state: AppState,
@@ -138,13 +128,27 @@ export function reconcileMissionTimers(
       const instanceId = plannerBlockInstanceId(profileId, date, blockId)
       const row = planner.progress[instanceId]
       if (!row || (row.status !== 'in-progress' && row.status !== 'paused')) continue
+      if (row.status === 'paused') {
+        if (row.completionAuthority === 'mission') continue
+        planner = {
+          ...planner,
+          progress: {
+            ...planner.progress,
+            [instanceId]: {
+              ...row,
+              completionAuthority: 'mission',
+            },
+          },
+        }
+        continue
+      }
       const target: PlannerProgressTarget = {
         profileId,
         date,
         blockInstanceId: instanceId,
         blockId,
       }
-      planner = completePlannerProgress(planner, target, now)
+      planner = settleMissionPlannerTiming(planner, target, now)
     }
     return planner
   })

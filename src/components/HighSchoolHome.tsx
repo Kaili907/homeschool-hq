@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type { CourseTrack, Difficulty, Profile } from '../types'
 import { finishSession, isoToday } from '../appState'
 import { useTheme } from '../theme'
@@ -52,6 +52,8 @@ interface Props {
   mindsetStartDate: string | undefined
   /** Calendar Core student sequence; editing controls remain parent-only. */
   myDay?: ReactNode
+  /** Adapter-resolved course owned by this profile to expand and focus. */
+  openCourseId?: string
 }
 
 const rnd = <T,>(arr: readonly T[]): T => arr[Math.floor(Math.random() * arr.length)]
@@ -85,6 +87,7 @@ export function HighSchoolHome({
   onOpenMindset,
   mindsetStartDate,
   myDay,
+  openCourseId,
 }: Props) {
   const t = useTheme()
   const [screen, setScreen] = useState<HsScreen>({ kind: 'home' })
@@ -339,7 +342,11 @@ export function HighSchoolHome({
 
       {/* Course progress tracker */}
       <h2 className={`mt-8 mb-3 text-xl font-bold ${t.heading}`}>Course progress</h2>
-      <CourseTracker profile={profile} onProfileChange={onProfileChange} />
+      <CourseTracker
+        profile={profile}
+        onProfileChange={onProfileChange}
+        openCourseId={openCourseId}
+      />
     </div>
   )
 }
@@ -441,10 +448,40 @@ function CollegeDeadlines({ profile, onProfileChange }: { profile: Profile; onPr
 
 // ---------- course progress tracker ----------
 
-function CourseTracker({ profile, onProfileChange }: { profile: Profile; onProfileChange: (update: (prev: Profile) => Profile) => void }) {
+function CourseTracker({
+  profile,
+  onProfileChange,
+  openCourseId,
+}: {
+  profile: Profile
+  onProfileChange: (update: (prev: Profile) => Profile) => void
+  openCourseId?: string
+}) {
   const t = useTheme()
-  const [open, setOpen] = useState<string | null>(null)
   const courses = profile.courses ?? []
+  const initialOpen =
+    openCourseId && courses.some((course) => course.id === openCourseId)
+      ? openCourseId
+      : null
+  const [open, setOpen] = useState<string | null>(initialOpen)
+
+  useEffect(() => {
+    if (
+      !openCourseId ||
+      !courses.some((course) => course.id === openCourseId)
+    ) {
+      return
+    }
+    setOpen(openCourseId)
+    const frame = globalThis.requestAnimationFrame?.(() => {
+      const element = document.getElementById(`hs-course-${openCourseId}`)
+      element?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+      element?.focus({ preventScroll: true })
+    })
+    return () => {
+      if (frame !== undefined) globalThis.cancelAnimationFrame?.(frame)
+    }
+  }, [courses, openCourseId])
 
   if (courses.length === 0) {
     return <p className={`text-sm ${t.sub}`}>Dad can set up courses in the Grown-Ups panel.</p>
@@ -456,8 +493,19 @@ function CourseTracker({ profile, onProfileChange }: { profile: Profile; onProfi
         const { done, total, pct } = courseProgress(c)
         const expanded = open === c.id
         return (
-          <div key={c.id} className={`${t.card} p-4`}>
-            <button className="flex w-full items-center gap-3 text-left" onClick={() => setOpen(expanded ? null : c.id)}>
+          <div
+            key={c.id}
+            id={`hs-course-${c.id}`}
+            tabIndex={-1}
+            className={`${t.card} min-w-0 p-4 focus:outline-none focus:ring-2 focus:ring-blue-400`}
+          >
+            <button
+              type="button"
+              className="flex w-full min-w-0 items-center gap-3 text-left"
+              aria-expanded={expanded}
+              aria-controls={`hs-course-units-${c.id}`}
+              onClick={() => setOpen(expanded ? null : c.id)}
+            >
               <span className={`font-semibold ${t.heading}`}>{c.name}</span>
               <div className={`ml-auto flex-1 max-w-[45%] h-2.5 overflow-hidden rounded-full ${t.progressTrack}`}>
                 <div className={`h-full rounded-full ${t.progressFill}`} style={{ width: `${pct}%` }} />
@@ -468,7 +516,10 @@ function CourseTracker({ profile, onProfileChange }: { profile: Profile; onProfi
               <span className="shrink-0 text-slate-400">{expanded ? '▴' : '▾'}</span>
             </button>
             {expanded && (
-              <ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
+              <ul
+                id={`hs-course-units-${c.id}`}
+                className="mt-3 grid gap-1.5 sm:grid-cols-2"
+              >
                 {c.units.map((u) => (
                   <li key={u.id}>
                     <label className="flex items-center gap-2 rounded-lg border border-slate-200 p-2 text-sm">

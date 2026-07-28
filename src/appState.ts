@@ -1,7 +1,8 @@
 import type { AppState, Profile, SkillState, SkillStatus } from './types'
 import type { SkillId } from './skills'
 import { defaultAppState, isAppState, migrateV1ToV2 } from './migration'
-import { withPlannerDefaults } from './planner/defaults'
+import { readPlannerState, withPlannerDefaults } from './planner/defaults'
+import type { PlannerProgress } from './planner/types'
 
 const V2_KEY = 'homeschool-hq:app:v2'
 const V1_KEY = 'homeschool-hq:profile:v1'
@@ -14,9 +15,119 @@ export interface LoadResult {
   backupKey?: string
 }
 
+const parsedTimestamp = (value: string | undefined): number | undefined => {
+  if (!value) return undefined
+  const parsed = Date.parse(value)
+  return Number.isFinite(parsed) ? parsed : undefined
+}
+
+const missionItemIdForProgress = (
+  progress: PlannerProgress,
+): string | undefined => {
+  const occurrenceSource = progress.occurrence?.source
+  if (occurrenceSource?.kind === 'mission') {
+    return occurrenceSource.missionItemId
+  }
+  return progress.blockId.startsWith('mission:')
+    ? progress.blockId.slice('mission:'.length)
+    : undefined
+}
+
+const missionOwnedProgress = (progress: PlannerProgress): boolean =>
+  progress.completionAuthority === 'mission' ||
+  progress.occurrence?.source.kind === 'mission' ||
+  progress.blockId.startsWith('mission:')
+
+/**
+ * A hydrated save can contain an old live planner timer after its authoritative
+ * mission source completed or disappeared. MissionDay has no completion
+ * timestamp, so hydration must never charge elapsed time through load-time
+ * "now". It closes that segment at the latest timestamp already carried by the
+ * row, or at activeSince when updatedAt cannot safely bound the segment.
+ */
+const conservativeMissionTimerCutoff = (
+  progress: PlannerProgress,
+): string => {
+  const activeAt = parsedTimestamp(progress.activeSince)
+  const updatedAt = parsedTimestamp(progress.updatedAt)
+  return activeAt !== undefined &&
+    updatedAt !== undefined &&
+    updatedAt >= activeAt
+    ? progress.updatedAt
+    : (progress.activeSince ?? progress.updatedAt)
+}
+
+const secondsBetween = (start: string | undefined, end: string): number => {
+  const from = parsedTimestamp(start)
+  const to = parsedTimestamp(end)
+  if (from === undefined || to === undefined || to <= from) return 0
+  return Math.floor((to - from) / 1000)
+}
+
+/**
+ * Reconcile only non-authoritative mission timing during hydration.
+ *
+ * Unsupported future planner payloads remain opaque. Supported rows retain
+ * useful elapsed/resume/occurrence data, while a live segment whose source is
+ * already done or missing is closed at a finite persisted timestamp.
+ */
+export function reconcileHydratedMissionTiming(state: AppState): AppState {
+  const plannerRead = readPlannerState(state.planner)
+  if (plannerRead.kind !== 'supported') return state
+
+  let changed = false
+  const progress = { ...plannerRead.state.progress }
+
+  for (const [key, row] of Object.entries(progress)) {
+    if (!missionOwnedProgress(row)) continue
+
+    const itemId = missionItemIdForProgress(row)
+    const sourceItems =
+      state.profiles[row.profileId]?.missions?.[row.date]?.items
+    const sourceItem =
+      itemId && Array.isArray(sourceItems)
+        ? sourceItems.find((item) => item.id === itemId)
+        : undefined
+
+    if (
+      row.status === 'in-progress' &&
+      (sourceItem === undefined || sourceItem.done)
+    ) {
+      const cutoff = conservativeMissionTimerCutoff(row)
+      progress[key] = {
+        ...row,
+        status: 'paused',
+        completionAuthority: 'mission',
+        activeElapsedSeconds:
+          row.activeElapsedSeconds + secondsBetween(row.activeSince, cutoff),
+        activeSince: undefined,
+        lastPausedAt: cutoff,
+        updatedAt: cutoff,
+      }
+      changed = true
+      continue
+    }
+
+    if (
+      (row.status === 'paused' || row.status === 'in-progress') &&
+      row.completionAuthority !== 'mission'
+    ) {
+      progress[key] = { ...row, completionAuthority: 'mission' }
+      changed = true
+    }
+  }
+
+  return changed
+    ? {
+        ...state,
+        planner: { ...plannerRead.state, progress },
+      }
+    : state
+}
+
 /** Pure runtime hydration used by local load, backup restore, and compatibility tests. */
 export function hydrateAppState(state: AppState): AppState {
-  return withPlannerDefaults(state)
+  return reconcileHydratedMissionTiming(withPlannerDefaults(state))
 }
 
 /**
@@ -74,8 +185,7 @@ export function readLocalStorageKey(key: string): string | null {
 // ---------- per-profile helpers ----------
 
 /** Local calendar date (missions roll over at the family's midnight, not UTC's). */
-export function isoToday(): string {
-  const d = new Date()
+export function isoToday(d: Date = new Date()): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 

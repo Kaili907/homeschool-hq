@@ -1,6 +1,6 @@
 import type { SkillId } from './skills'
 import type { AssessmentState } from './assessment/types'
-import type { PlannerState } from './planner/types'
+import type { PlannerPersistedState } from './planner/types'
 
 // ---------- questions (unchanged from v1) ----------
 
@@ -618,7 +618,7 @@ export interface AppState {
    * Calendar Core: family schedule templates + per-profile/date/instance progress.
    * Optional for schema-v2 compatibility; appState hydration supplies runtime defaults.
    */
-  planner?: PlannerState
+  planner?: PlannerPersistedState
 }
 
 // ---------- schema v1 (legacy, for migration only) ----------

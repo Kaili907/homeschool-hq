@@ -235,10 +235,15 @@ function weeklyBonusAwardedThisWeek(s: StarState, today: ISODate): boolean {
   return s.ledger.some((e) => e.source === 'weekly-streak' && sameWeek(e.day, today))
 }
 
+function missionBonusAwardedForDay(s: StarState, today: ISODate): boolean {
+  return s.ledger.some((e) => e.source === 'mission-complete' && e.day === today)
+}
+
 /**
  * Given a profile before and after a mission mutation, pay the mission-complete
  * bonus (and the weekly-streak bonus) IFF today's mission just transitioned to
- * fully-complete. Idempotent: re-checking/unchecking a done day pays nothing.
+ * fully-complete. The ledger source/date guard keeps an uncheck/re-check or two
+ * racing completion commands from paying the same mission event twice.
  */
 export function awardMissionEvents(
   before: Profile,
@@ -250,9 +255,19 @@ export function awardMissionEvents(
   const nowComplete = isDayComplete(after.missions[today])
   if (wasComplete || !nowComplete) return after
 
-  let p = withStars(after, (s) =>
-    applyAutoEarn(s, 'mission-complete', rates.missionComplete, "Finished today's mission", today, rates),
-  )
+  let p = after
+  if (!missionBonusAwardedForDay(getStars(after), today)) {
+    p = withStars(after, (s) =>
+      applyAutoEarn(
+        s,
+        'mission-complete',
+        rates.missionComplete,
+        "Finished today's mission",
+        today,
+        rates,
+      ),
+    )
+  }
   if (
     completeDaysInWeek(p, today) >= rates.weeklyStreakThreshold &&
     !weeklyBonusAwardedThisWeek(getStars(p), today)

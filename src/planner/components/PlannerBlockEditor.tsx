@@ -1,16 +1,25 @@
-import { useState, type FormEvent } from 'react'
+import { useRef, useState, type FormEvent } from 'react'
 import type { Profile } from '../../types'
 import {
   ACTIVITY_CATEGORY_LABELS,
+  MANUAL_ACTIVITY_CATEGORIES,
   SCHOOL_WEEKDAYS,
+  type ManualPlannerActivityCategory,
   type ManualPlannerBlockInput,
 } from '../defaults'
-import type { PlannerActivityCategory, PlannerBlock, PlannerWeekday } from '../types'
+import type {
+  PlannerBlock,
+  PlannerBlockChanges,
+  PlannerWeekday,
+} from '../types'
 
 interface Props {
   profiles: Profile[]
   block?: PlannerBlock
-  onSave: (input: ManualPlannerBlockInput) => void
+  onSave: (
+    input: ManualPlannerBlockInput,
+    changes: PlannerBlockChanges,
+  ) => void
   onCancel: () => void
   onDeactivate?: () => void
   onRemove?: () => void
@@ -38,8 +47,17 @@ export function PlannerBlockEditor({
   onRemove,
 }: Props) {
   const [title, setTitle] = useState(block?.title ?? '')
-  const [description, setDescription] = useState(block?.description ?? '')
-  const [category, setCategory] = useState<PlannerActivityCategory>(block?.category ?? 'custom')
+  const [studentInstructions, setStudentInstructions] = useState(
+    block?.studentInstructions ?? '',
+  )
+  const [parentNotes, setParentNotes] = useState(block?.parentNotes ?? '')
+  const initialCategory = MANUAL_ACTIVITY_CATEGORIES.includes(
+    (block?.category ?? 'custom') as ManualPlannerActivityCategory,
+  )
+    ? ((block?.category ?? 'custom') as ManualPlannerActivityCategory)
+    : 'custom'
+  const [category, setCategory] =
+    useState<ManualPlannerActivityCategory>(initialCategory)
   const [assignToAll, setAssignToAll] = useState(block?.assignToAll ?? true)
   const [assigned, setAssigned] = useState<string[]>(
     block?.assignedProfileIds ?? profiles.map((profile) => profile.id),
@@ -54,20 +72,27 @@ export function PlannerBlockEditor({
     block?.requiresParentHelp ?? false,
   )
   const [location, setLocation] = useState(block?.location ?? '')
-  const [notes, setNotes] = useState(block?.notes ?? '')
   const [error, setError] = useState('')
+  const dirty = useRef(new Set<keyof PlannerBlockChanges>())
+  const markDirty = (...fields: (keyof PlannerBlockChanges)[]) => {
+    for (const field of fields) dirty.current.add(field)
+  }
 
-  const toggleAssignment = (profileId: string) =>
+  const toggleAssignment = (profileId: string) => {
+    markDirty('assignedProfileIds')
     setAssigned((current) =>
       current.includes(profileId)
         ? current.filter((id) => id !== profileId)
         : [...current, profileId],
     )
+  }
 
-  const toggleDay = (day: PlannerWeekday) =>
+  const toggleDay = (day: PlannerWeekday) => {
+    markDirty('weekdays')
     setDays((current) =>
       current.includes(day) ? current.filter((item) => item !== day) : [...current, day],
     )
+  }
 
   const submit = (event: FormEvent) => {
     event.preventDefault()
@@ -87,9 +112,10 @@ export function PlannerBlockEditor({
       setError('Expected duration must be at least one minute.')
       return
     }
-    onSave({
+    const input: ManualPlannerBlockInput = {
       title,
-      description,
+      studentInstructions,
+      parentNotes,
       category,
       assignedProfileIds: assignToAll ? profiles.map((profile) => profile.id) : assigned,
       assignToAll,
@@ -99,8 +125,35 @@ export function PlannerBlockEditor({
       scheduleBehavior,
       requiresParentHelp,
       location,
-      notes,
-    })
+    }
+    const submittedChanges: PlannerBlockChanges = {}
+    if (dirty.current.has('title')) submittedChanges.title = title
+    if (dirty.current.has('studentInstructions')) {
+      submittedChanges.studentInstructions = studentInstructions
+    }
+    if (dirty.current.has('parentNotes')) {
+      submittedChanges.parentNotes = parentNotes
+    }
+    if (dirty.current.has('category')) submittedChanges.category = category
+    if (dirty.current.has('assignedProfileIds')) {
+      submittedChanges.assignedProfileIds = input.assignedProfileIds
+    }
+    if (dirty.current.has('assignToAll')) {
+      submittedChanges.assignToAll = assignToAll
+    }
+    if (dirty.current.has('weekdays')) submittedChanges.weekdays = input.weekdays
+    if (dirty.current.has('startTime')) submittedChanges.startTime = startTime
+    if (dirty.current.has('expectedMinutes')) {
+      submittedChanges.expectedMinutes = expectedMinutes
+    }
+    if (dirty.current.has('scheduleBehavior')) {
+      submittedChanges.scheduleBehavior = scheduleBehavior
+    }
+    if (dirty.current.has('requiresParentHelp')) {
+      submittedChanges.requiresParentHelp = requiresParentHelp
+    }
+    if (dirty.current.has('location')) submittedChanges.location = location
+    onSave(input, submittedChanges)
   }
 
   return (
@@ -124,7 +177,10 @@ export function PlannerBlockEditor({
           <input
             className={FIELD}
             value={title}
-            onChange={(event) => setTitle(event.target.value)}
+            onChange={(event) => {
+              markDirty('title')
+              setTitle(event.target.value)
+            }}
             required
           />
         </label>
@@ -133,23 +189,36 @@ export function PlannerBlockEditor({
           <select
             className={FIELD}
             value={category}
-            onChange={(event) => setCategory(event.target.value as PlannerActivityCategory)}
+            onChange={(event) => {
+              markDirty('category')
+              setCategory(event.target.value as ManualPlannerActivityCategory)
+            }}
           >
-            {Object.entries(ACTIVITY_CATEGORY_LABELS).map(([value, label]) => (
+            {MANUAL_ACTIVITY_CATEGORIES.map((value) => (
               <option key={value} value={value}>
-                {label}
+                {ACTIVITY_CATEGORY_LABELS[value]}
               </option>
             ))}
           </select>
         </label>
         <label className="min-w-0 text-sm font-bold text-slate-700 sm:col-span-2">
-          Description or instructions
+          Student instructions
           <textarea
             className={FIELD}
             rows={2}
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
+            value={studentInstructions}
+            onChange={(event) => {
+              markDirty('studentInstructions')
+              setStudentInstructions(event.target.value)
+            }}
+            aria-describedby="student-instructions-help"
           />
+          <span
+            id="student-instructions-help"
+            className="mt-1 block text-xs font-normal text-slate-500"
+          >
+            Assigned students can read this text in My Day.
+          </span>
         </label>
         <label className="min-w-0 text-sm font-bold text-slate-700">
           Start time
@@ -157,7 +226,10 @@ export function PlannerBlockEditor({
             className={FIELD}
             type="time"
             value={startTime}
-            onChange={(event) => setStartTime(event.target.value)}
+            onChange={(event) => {
+              markDirty('startTime')
+              setStartTime(event.target.value)
+            }}
             required
           />
         </label>
@@ -169,7 +241,10 @@ export function PlannerBlockEditor({
             min={1}
             max={720}
             value={expectedMinutes}
-            onChange={(event) => setExpectedMinutes(Number(event.target.value))}
+            onChange={(event) => {
+              markDirty('expectedMinutes')
+              setExpectedMinutes(Number(event.target.value))
+            }}
             required
           />
         </label>
@@ -178,9 +253,10 @@ export function PlannerBlockEditor({
           <select
             className={FIELD}
             value={scheduleBehavior}
-            onChange={(event) =>
+            onChange={(event) => {
+              markDirty('scheduleBehavior')
               setScheduleBehavior(event.target.value as 'flexible' | 'fixed')
-            }
+            }}
           >
             <option value="flexible">Flexible — shifts later when needed</option>
             <option value="fixed">Fixed — keeps this start time</option>
@@ -191,7 +267,10 @@ export function PlannerBlockEditor({
           <input
             className={FIELD}
             value={location}
-            onChange={(event) => setLocation(event.target.value)}
+            onChange={(event) => {
+              markDirty('location')
+              setLocation(event.target.value)
+            }}
           />
         </label>
       </div>
@@ -202,7 +281,10 @@ export function PlannerBlockEditor({
           <input
             type="checkbox"
             checked={assignToAll}
-            onChange={(event) => setAssignToAll(event.target.checked)}
+            onChange={(event) => {
+              markDirty('assignToAll', 'assignedProfileIds')
+              setAssignToAll(event.target.checked)
+            }}
           />
           All students, including profiles added later
         </label>
@@ -249,18 +331,31 @@ export function PlannerBlockEditor({
         <input
           type="checkbox"
           checked={requiresParentHelp}
-          onChange={(event) => setRequiresParentHelp(event.target.checked)}
+          onChange={(event) => {
+            markDirty('requiresParentHelp')
+            setRequiresParentHelp(event.target.checked)
+          }}
         />
         Requires parent help
       </label>
       <label className="mt-3 block min-w-0 text-sm font-bold text-slate-700">
-        Parent notes
+        Parent-private notes
         <textarea
           className={FIELD}
           rows={2}
-          value={notes}
-          onChange={(event) => setNotes(event.target.value)}
+          value={parentNotes}
+          onChange={(event) => {
+            markDirty('parentNotes')
+            setParentNotes(event.target.value)
+          }}
+          aria-describedby="parent-notes-help"
         />
+        <span
+          id="parent-notes-help"
+          className="mt-1 block text-xs font-normal text-slate-500"
+        >
+          Only an authenticated parent can view these notes.
+        </span>
       </label>
 
       {error && (
