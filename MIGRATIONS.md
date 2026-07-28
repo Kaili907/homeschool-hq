@@ -194,7 +194,7 @@ Non-breaking additions — existing v2 data loads unchanged (`isAppState` is len
 old states have no `stars` keys and fall back to runtime defaults):
 
 - `Profile.stars?: StarState` — the kid's wallet: `{ balance, lifetimeEarned,
-ledger, pendingRedemptions }`. `undefined` until her first star is earned.
+  ledger, pendingRedemptions }`. `undefined` until her first star is earned.
   The ledger is APPEND-ONLY; `balance` must always equal the ledger sum. A
   mismatch is surfaced in the Grown-Ups panel and NEVER silently repaired.
 - `Profile.coolStars?: boolean` — grade-6 "cool" opt-in (default off/undefined).
@@ -216,7 +216,7 @@ old profiles have no `reading` key and fall back to `defaultReadingState()`):
   `{ sessions, seenPassageIds, calibrations, lastReadDate? }`. `undefined` until
   her first reading session. `sessions` is APPEND-ONLY; each logs
   `{ date, passageId, mode: estimated|assessed|manual, wcpm, wordsPracticed[],
-durationSec }`. WCPM is an ESTIMATE (browser recognition + alignment) unless
+  durationSec }`. WCPM is an ESTIMATE (browser recognition + alignment) unless
   `mode==='manual'` (Dad-counted). `calibrations` holds Dad's ground-truth checks.
 
 No `schemaVersion` bump (follows the M2/M4/MT-1/MS/SE-A additive-optional
