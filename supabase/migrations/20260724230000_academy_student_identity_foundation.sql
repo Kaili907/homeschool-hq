@@ -163,6 +163,7 @@ begin
           'is_valid_student_verifier',
           'is_valid_raw_student_session_token',
           'security_text_is_safe',
+          'audit_reason_is_safe',
           'student_capabilities_are_valid',
           'audit_details_are_safe',
           'identity_foundation_manifest',
@@ -246,6 +247,7 @@ as $$
         'is_valid_student_verifier',
         'is_valid_raw_student_session_token',
         'security_text_is_safe',
+        'audit_reason_is_safe',
         'student_capabilities_are_valid',
         'audit_details_are_safe',
         'identity_foundation_manifest',
@@ -499,6 +501,7 @@ set search_path = pg_catalog
 as $$
 declare
   decoded_value bytea;
+  canonical_value text;
   padded_value text;
 begin
   if encoded_value is null
@@ -515,10 +518,22 @@ begin
          when 3 then '='
          else ''
        end;
-  decoded_value := decode(padded_value, 'base64');
+  decoded_value := pg_catalog.decode(padded_value, 'base64');
+  -- PostgreSQL may line-wrap its Base64 encoder output. Remove only those
+  -- encoder-inserted line separators, then remove canonical trailing padding;
+  -- the caller's submitted text is never normalized before exact comparison.
+  canonical_value := pg_catalog.rtrim(
+    pg_catalog.translate(
+      pg_catalog.encode(decoded_value, 'base64'),
+      E'\r\n',
+      ''
+    ),
+    '='
+  );
 
   return octet_length(decoded_value)
-    between minimum_decoded_bytes and maximum_decoded_bytes;
+    between minimum_decoded_bytes and maximum_decoded_bytes
+    and canonical_value = encoded_value;
 exception
   when others then
     return false;
@@ -599,7 +614,22 @@ as $$
     and candidate !~* '\$(argon2id|scrypt)\$'
     and candidate !~* 'aca[[:space:]_-]*stu[[:space:]_-]*v1[[:space:]_-]*[A-Za-z0-9_-]{20,}'
     and candidate !~* '(^|[^0-9a-f])[0-9a-f]{64}([^0-9a-f]|$)'
+    and candidate !~ '^[[:space:]]*[0-9][[:space:]]*[0-9][[:space:]]*[0-9][[:space:]]*[0-9][[:space:]]*$'
     and candidate !~* '(^|[^[:alnum:]_])(raw[[:space:]_-]*)?(pin|password|reset[[:space:]_-]*token|bearer([[:space:]_-]*token)?|token([[:space:]_-]*digest)?|verifier)([^[:alnum:]_]|$)[[:space:]]*[:=]';
+$$;
+
+create or replace function academy_private.audit_reason_is_safe(
+  candidate text,
+  maximum_bytes integer default 240
+)
+returns boolean
+language sql
+immutable
+set search_path = pg_catalog
+as $$
+  select academy_private.security_text_is_safe(candidate, maximum_bytes)
+    and candidate !~
+      '(^|[^0-9])([[:space:]]*[0-9]){4}($|[^0-9])';
 $$;
 
 create or replace function academy_private.student_capabilities_are_valid(
@@ -796,7 +826,7 @@ create table if not exists public.academy_households (
     status = 'active'
     or (
       status_reason is not null
-      and academy_private.security_text_is_safe(status_reason)
+      and academy_private.audit_reason_is_safe(status_reason)
     )
   )
 );
@@ -836,7 +866,7 @@ create table if not exists public.academy_household_memberships (
       and revoked_at is not null
       and revoked_at >= invited_at
       and revocation_reason is not null
-      and academy_private.security_text_is_safe(revocation_reason)
+      and academy_private.audit_reason_is_safe(revocation_reason)
     )
   ),
   constraint academy_household_memberships_id_household_key
@@ -877,7 +907,7 @@ create table if not exists public.academy_students (
     lifecycle_status not in ('transferred', 'archived', 'deactivated')
     or (
       lifecycle_reason is not null
-      and academy_private.security_text_is_safe(lifecycle_reason)
+      and academy_private.audit_reason_is_safe(lifecycle_reason)
     )
   )
 );
@@ -921,7 +951,7 @@ create table if not exists public.academy_guardian_student_access (
       and revoked_at is not null
       and revoked_at >= granted_at
       and revocation_reason is not null
-      and academy_private.security_text_is_safe(revocation_reason)
+      and academy_private.audit_reason_is_safe(revocation_reason)
     )
   )
 );
@@ -973,7 +1003,7 @@ create table if not exists public.academy_subject_enrollments (
     or (
       override_by is not null
       and override_reason is not null
-      and academy_private.security_text_is_safe(override_reason)
+      and academy_private.audit_reason_is_safe(override_reason)
     )
   )
 );
@@ -1030,7 +1060,7 @@ create table if not exists public.academy_audit_events (
     ),
   reason text check (
     reason is null
-    or academy_private.security_text_is_safe(reason)
+    or academy_private.audit_reason_is_safe(reason)
   ),
   correlation_id uuid,
   occurred_at timestamptz not null default now(),
@@ -1065,8 +1095,7 @@ create table if not exists academy_private.student_access_credentials (
   created_by uuid references auth.users (id) on delete set null,
   creation_reason text not null
     check (
-      academy_private.security_text_is_safe(creation_reason)
-      and btrim(creation_reason) !~ '^[0-9]{4}$'
+      academy_private.audit_reason_is_safe(creation_reason)
     ),
   created_at timestamptz not null default now(),
   activated_at timestamptz not null default now(),
@@ -1161,8 +1190,7 @@ create table if not exists academy_private.student_access_credentials (
       and locked_until is null
       and reset_required_at is not null
       and reset_reason is not null
-      and academy_private.security_text_is_safe(reset_reason)
-      and btrim(reset_reason) !~ '^[0-9]{4}$'
+      and academy_private.audit_reason_is_safe(reset_reason)
       and replaced_actor_kind is null
       and replaced_by is null
       and replacement_reason is null
@@ -1176,8 +1204,7 @@ create table if not exists academy_private.student_access_credentials (
       and revoked_at >= activated_at
       and revoked_actor_kind is not null
       and revocation_reason is not null
-      and academy_private.security_text_is_safe(revocation_reason)
-      and btrim(revocation_reason) !~ '^[0-9]{4}$'
+      and academy_private.audit_reason_is_safe(revocation_reason)
       and replaced_at is null
       and replaced_actor_kind is null
       and replaced_by is null
@@ -1193,8 +1220,7 @@ create table if not exists academy_private.student_access_credentials (
       and replaced_at >= activated_at
       and replaced_actor_kind is not null
       and replacement_reason is not null
-      and academy_private.security_text_is_safe(replacement_reason)
-      and btrim(replacement_reason) !~ '^[0-9]{4}$'
+      and academy_private.audit_reason_is_safe(replacement_reason)
       and revoked_at is null
       and revoked_actor_kind is null
       and revoked_by is null
@@ -1246,7 +1272,7 @@ create table if not exists academy_private.student_session_grants (
   issuing_membership_id uuid,
   issuing_access_id uuid,
   issuance_reason text not null
-    check (academy_private.security_text_is_safe(issuance_reason)),
+    check (academy_private.audit_reason_is_safe(issuance_reason)),
   correlation_id uuid not null,
   device_digest text
     check (device_digest is null or device_digest ~ '^[0-9a-f]{64}$'),
@@ -1324,7 +1350,7 @@ create table if not exists academy_private.student_session_grants (
       and revoked_at >= issued_at
       and revoked_actor_kind is not null
       and revocation_reason is not null
-      and academy_private.security_text_is_safe(revocation_reason)
+      and academy_private.audit_reason_is_safe(revocation_reason)
       and (revoked_actor_kind <> 'guardian' or revoked_by is not null)
     )
   )
@@ -2582,6 +2608,8 @@ revoke all on function academy_private.is_valid_raw_student_session_token(text)
   from public, anon, authenticated;
 revoke all on function academy_private.security_text_is_safe(text, integer)
   from public, anon, authenticated;
+revoke all on function academy_private.audit_reason_is_safe(text, integer)
+  from public, anon, authenticated;
 revoke all on function academy_private.student_capabilities_are_valid(text[])
   from public, anon, authenticated;
 revoke all on function academy_private.audit_details_are_safe(text, jsonb)
@@ -2634,6 +2662,8 @@ grant execute on function academy_private.is_valid_student_verifier(text, text)
 grant execute on function academy_private.is_valid_raw_student_session_token(text)
   to service_role;
 grant execute on function academy_private.security_text_is_safe(text, integer)
+  to service_role;
+grant execute on function academy_private.audit_reason_is_safe(text, integer)
   to service_role;
 grant execute on function academy_private.student_capabilities_are_valid(text[])
   to service_role;
