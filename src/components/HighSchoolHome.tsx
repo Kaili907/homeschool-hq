@@ -49,6 +49,7 @@ interface Props {
   assessmentCards: HomeAssessmentCard[]
   onOpenAssessment: (testId: string) => void
   onOpenMindset: () => void
+  onOpenMastery: () => void
   mindsetStartDate: string | undefined
 }
 
@@ -81,6 +82,7 @@ export function HighSchoolHome({
   assessmentCards,
   onOpenAssessment,
   onOpenMindset,
+  onOpenMastery,
   mindsetStartDate,
 }: Props) {
   const t = useTheme()
@@ -263,6 +265,21 @@ export function HighSchoolHome({
           ))}
         </div>
       )}
+
+      <button
+        onClick={onOpenMastery}
+        className="mt-6 flex w-full items-center gap-4 rounded-xl border border-cyan-300 bg-cyan-50 p-5 text-left shadow-sm transition-colors hover:border-cyan-500"
+      >
+        <span className="text-4xl" aria-hidden="true">🧭</span>
+        <span className="flex-1">
+          <span className="block text-xl font-bold text-slate-900">
+            Mastery map
+          </span>
+          <span className="block text-sm font-semibold text-slate-600">
+            Review prerequisite paths and evidence-led learning states
+          </span>
+        </span>
+      </button>
 
       {isSenior && (
         <div className="mt-6">

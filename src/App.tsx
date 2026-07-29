@@ -56,6 +56,8 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { MasteryMapRoute } from './integrations/mastery/MasteryMapRoute'
+import type { MasteryHostPrincipal } from './integrations/mastery/access'
 
 type Screen =
   | { kind: 'picker' }
@@ -75,6 +77,7 @@ type Screen =
   | { kind: 'typing' }
   | { kind: 'reading' }
   | { kind: 'mindset' }
+  | { kind: 'mastery' }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
@@ -82,6 +85,7 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
   const seenRef = useRef(new Set<string>())
+  const masteryPrincipalRef = useRef<MasteryHostPrincipal>(null)
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
 
@@ -119,6 +123,7 @@ export default function App() {
   const patchActive = (update: (prev: Profile) => Profile) =>
     setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
   const signOut = () => {
+    masteryPrincipalRef.current = null
     setState((s) => ({ ...s, activeProfileId: null }))
     setScreen({ kind: 'picker' })
   }
@@ -168,6 +173,10 @@ export default function App() {
               subtitle="Enter your secret PIN"
               onComplete={(pin) => {
                 if (pin === profile.pin) {
+                  masteryPrincipalRef.current = {
+                    kind: 'learner',
+                    learnerId: profile.id,
+                  }
                   setState((s) => ({ ...s, activeProfileId: profile.id }))
                   setScreen({ kind: 'home' })
                   return null
@@ -189,6 +198,10 @@ export default function App() {
                 }
                 if (pin === screen.firstEntry) {
                   patchById(profile.id, (prev) => ({ ...prev, pin }))
+                  masteryPrincipalRef.current = {
+                    kind: 'learner',
+                    learnerId: profile.id,
+                  }
                   setState((s) => ({ ...s, activeProfileId: profile.id }))
                   setScreen({ kind: 'home' })
                   return null
@@ -301,6 +314,18 @@ export default function App() {
         nowISO={() => new Date().toISOString()}
         onPatch={patchActive}
         onHome={() => setScreen({ kind: 'home' })}
+      />
+    )
+  }
+
+  if (screen.kind === 'mastery') {
+    return (
+      <MasteryMapRoute
+        learner={{ id: active.id, name: active.name, grade: active.grade }}
+        activeProfileId={state.activeProfileId}
+        principal={masteryPrincipalRef.current}
+        onBackHome={() => setScreen({ kind: 'home' })}
+        onFailClosed={signOut}
       />
     )
   }
@@ -430,6 +455,7 @@ export default function App() {
             onOpenTyping={() => setScreen({ kind: 'typing' })}
             onOpenReading={() => setScreen({ kind: 'reading' })}
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
+            onOpenMastery={() => setScreen({ kind: 'mastery' })}
             mindsetStartDate={state.mindsetStartDate}
           />
         )}
@@ -495,6 +521,7 @@ function Home({
   onOpenTyping,
   onOpenReading,
   onOpenMindset,
+  onOpenMastery,
   mindsetStartDate,
 }: {
   profile: Profile
@@ -510,6 +537,7 @@ function Home({
   onOpenTyping: () => void
   onOpenReading: () => void
   onOpenMindset: () => void
+  onOpenMastery: () => void
   mindsetStartDate: string | undefined
 }) {
   const t = useTheme()
@@ -531,6 +559,7 @@ function Home({
         assessmentCards={assessmentCards}
         onOpenAssessment={onOpenAssessment}
         onOpenMindset={onOpenMindset}
+        onOpenMastery={onOpenMastery}
         mindsetStartDate={mindsetStartDate}
       />
     )
@@ -609,6 +638,21 @@ function Home({
           ))}
         </div>
       )}
+
+      <button
+        onClick={onOpenMastery}
+        className={`${t.card} mt-6 flex w-full items-center gap-4 p-5 text-left transition-all hover:border-cyan-400`}
+      >
+        <span className="text-4xl" aria-hidden="true">🧭</span>
+        <span className="flex-1">
+          <span className={`block text-2xl font-extrabold ${t.heading}`}>
+            Mastery map
+          </span>
+          <span className={`block font-bold ${t.sub}`}>
+            See prerequisite paths and evidence-led learning states
+          </span>
+        </span>
+      </button>
 
       <div className="mt-6">
         <MissionCard profile={profile} onToggle={onToggleItem} />
