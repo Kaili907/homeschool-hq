@@ -212,7 +212,7 @@ begin
       'PUBLIC', '[]'::jsonb,
       'anon', '["USAGE"]'::jsonb,
       'authenticated', '["USAGE"]'::jsonb,
-      'postgres', '["CREATE", "USAGE"]'::jsonb,
+      'postgres', '["USAGE"]'::jsonb,
       'service_role', '["USAGE"]'::jsonb
     ),
     'public',
