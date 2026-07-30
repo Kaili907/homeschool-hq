@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "missingVisualText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1600
+    },
+    "missingAudioText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1600
+    },
+    "visualAlternativeCommandsAllowed": {
+      "const": true,
+      "type": "boolean"
+    },
+    "captionsAlwaysVisible": {
+      "const": true,
+      "type": "boolean"
+    },
+    "transcriptAlwaysAvailable": {
+      "const": true,
+      "type": "boolean"
+    },
+    "lessonMayContinueWithoutMedia": {
+      "const": true,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "missingVisualText",
+    "missingAudioText",
+    "visualAlternativeCommandsAllowed",
+    "captionsAlwaysVisible",
+    "transcriptAlwaysAvailable",
+    "lessonMayContinueWithoutMedia"
+  ],
+  "additionalProperties": false,
+  "$id": "MediaFallback"
+}

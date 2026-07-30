@@ -1,0 +1,546 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30000
+        },
+        "ariaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "const": "clear-board",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "durationMs",
+        "ariaLabel",
+        "kind"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30000
+        },
+        "ariaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "const": "set-title",
+          "type": "string"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "id",
+        "durationMs",
+        "ariaLabel",
+        "kind",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30000
+        },
+        "ariaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "const": "add-text",
+          "type": "string"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "region": {
+          "anyOf": [
+            {
+              "const": "top",
+              "type": "string"
+            },
+            {
+              "const": "center",
+              "type": "string"
+            },
+            {
+              "const": "bottom",
+              "type": "string"
+            },
+            {
+              "const": "side",
+              "type": "string"
+            }
+          ]
+        },
+        "emphasis": {
+          "anyOf": [
+            {
+              "const": "normal",
+              "type": "string"
+            },
+            {
+              "const": "strong",
+              "type": "string"
+            },
+            {
+              "const": "muted",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "durationMs",
+        "ariaLabel",
+        "kind",
+        "text",
+        "region",
+        "emphasis"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30000
+        },
+        "ariaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "const": "draw-fraction",
+          "type": "string"
+        },
+        "numerator": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "denominator": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "representation": {
+          "anyOf": [
+            {
+              "const": "bar",
+              "type": "string"
+            },
+            {
+              "const": "circle",
+              "type": "string"
+            },
+            {
+              "const": "set",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "durationMs",
+        "ariaLabel",
+        "kind",
+        "numerator",
+        "denominator",
+        "label",
+        "representation"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30000
+        },
+        "ariaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "const": "draw-number-line",
+          "type": "string"
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "step": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "highlightedValues": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 30
+        }
+      },
+      "required": [
+        "id",
+        "durationMs",
+        "ariaLabel",
+        "kind",
+        "min",
+        "max",
+        "step",
+        "highlightedValues"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30000
+        },
+        "ariaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "const": "show-sentence-parts",
+          "type": "string"
+        },
+        "sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "subject": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "predicate": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "dependentMarker": {
+          "type": "string",
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "id",
+        "durationMs",
+        "ariaLabel",
+        "kind",
+        "sentence",
+        "subject",
+        "predicate"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30000
+        },
+        "ariaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "const": "highlight",
+          "type": "string"
+        },
+        "targetCommandId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "token": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      },
+      "required": [
+        "id",
+        "durationMs",
+        "ariaLabel",
+        "kind",
+        "targetCommandId",
+        "token",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30000
+        },
+        "ariaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "const": "reveal-step",
+          "type": "string"
+        },
+        "stepNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800
+        }
+      },
+      "required": [
+        "id",
+        "durationMs",
+        "ariaLabel",
+        "kind",
+        "stepNumber",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30000
+        },
+        "ariaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "const": "compare",
+          "type": "string"
+        },
+        "leftLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "rightLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "relationship": {
+          "anyOf": [
+            {
+              "const": "equal",
+              "type": "string"
+            },
+            {
+              "const": "not-equal",
+              "type": "string"
+            },
+            {
+              "const": "part-whole",
+              "type": "string"
+            },
+            {
+              "const": "complete-incomplete",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "durationMs",
+        "ariaLabel",
+        "kind",
+        "leftLabel",
+        "rightLabel",
+        "relationship"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30000
+        },
+        "ariaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "const": "aria-announce",
+          "type": "string"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800
+        },
+        "priority": {
+          "anyOf": [
+            {
+              "const": "polite",
+              "type": "string"
+            },
+            {
+              "const": "assertive",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "durationMs",
+        "ariaLabel",
+        "kind",
+        "text",
+        "priority"
+      ],
+      "additionalProperties": false
+    }
+  ],
+  "$id": "VisualBoardCommand"
+}

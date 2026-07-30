@@ -1,0 +1,371 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Lowercase ASCII stable content identifier."
+    },
+    "createdAt": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$"
+    },
+    "skillId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Lowercase ASCII stable content identifier."
+    },
+    "learnerDisplayLabel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "anyOf": [
+              {
+                "const": "diagnostic",
+                "type": "string"
+              },
+              {
+                "const": "guided-practice",
+                "type": "string"
+              },
+              {
+                "const": "independent-attempt",
+                "type": "string"
+              },
+              {
+                "const": "reassessment",
+                "type": "string"
+              }
+            ]
+          },
+          "itemCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "meanScore": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        },
+        "required": [
+          "source",
+          "itemCount",
+          "meanScore",
+          "note"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 20
+    },
+    "confidence": {
+      "type": "object",
+      "properties": {
+        "skillId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "value": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "uncertainty": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "lowerBound": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "upperBound": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "evidenceCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "effectiveEvidence": {
+          "type": "number",
+          "minimum": 0
+        },
+        "distinctContextCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "band": {
+          "anyOf": [
+            {
+              "const": "very-low",
+              "type": "string"
+            },
+            {
+              "const": "low",
+              "type": "string"
+            },
+            {
+              "const": "developing",
+              "type": "string"
+            },
+            {
+              "const": "strong",
+              "type": "string"
+            },
+            {
+              "const": "insufficient-evidence",
+              "type": "string"
+            }
+          ]
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "placementDecisionAllowed": {
+          "const": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "skillId",
+        "value",
+        "uncertainty",
+        "lowerBound",
+        "upperBound",
+        "evidenceCount",
+        "effectiveEvidence",
+        "distinctContextCount",
+        "band",
+        "explanation",
+        "placementDecisionAllowed"
+      ],
+      "additionalProperties": false,
+      "$id": "ConfidenceEstimate"
+    },
+    "misconceptionClassification": {
+      "type": "object",
+      "properties": {
+        "skillId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "hypotheses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "misconceptionId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "probability": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "uncertainty": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "evidenceCount": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "supportingTags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 50
+              },
+              "contradictingTags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 50
+              },
+              "status": {
+                "anyOf": [
+                  {
+                    "const": "possible",
+                    "type": "string"
+                  },
+                  {
+                    "const": "probable",
+                    "type": "string"
+                  },
+                  {
+                    "const": "unlikely",
+                    "type": "string"
+                  },
+                  {
+                    "const": "insufficient-evidence",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "misconceptionId",
+              "probability",
+              "uncertainty",
+              "evidenceCount",
+              "supportingTags",
+              "contradictingTags",
+              "status"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "selectedMisconceptionId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 120,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "description": "Lowercase ASCII stable content identifier."
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "uncertaintyStatement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "doNotDiagnose": {
+          "const": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "skillId",
+        "hypotheses",
+        "selectedMisconceptionId",
+        "uncertaintyStatement",
+        "doNotDiagnose"
+      ],
+      "additionalProperties": false,
+      "$id": "MisconceptionClassification"
+    },
+    "strengths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 600
+      },
+      "maxItems": 20
+    },
+    "needsSupport": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 600
+      },
+      "maxItems": 20
+    },
+    "suggestedNextSteps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 600
+      },
+      "maxItems": 20
+    },
+    "disputedGrading": {
+      "type": "boolean"
+    },
+    "persistentDifficulty": {
+      "type": "boolean"
+    },
+    "escalationRecommended": {
+      "type": "boolean"
+    },
+    "uncertaintyStatement": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "diagnosticClaimMade": {
+      "const": false,
+      "type": "boolean"
+    },
+    "highStakesPlacementDecisionMade": {
+      "const": false,
+      "type": "boolean"
+    },
+    "identifyingInformationRequested": {
+      "const": false,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "createdAt",
+    "skillId",
+    "learnerDisplayLabel",
+    "evidence",
+    "confidence",
+    "misconceptionClassification",
+    "strengths",
+    "needsSupport",
+    "suggestedNextSteps",
+    "disputedGrading",
+    "persistentDifficulty",
+    "escalationRecommended",
+    "uncertaintyStatement",
+    "diagnosticClaimMade",
+    "highStakesPlacementDecisionMade",
+    "identifyingInformationRequested"
+  ],
+  "additionalProperties": false,
+  "$id": "ParentTeacherReview"
+}

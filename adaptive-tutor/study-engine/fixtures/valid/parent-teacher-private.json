@@ -1,0 +1,24 @@
+{
+  "kind": "parent-teacher-private",
+  "schemaVersion": 1,
+  "id": "private:p1",
+  "revision": 1,
+  "createdAt": "2026-07-27T12:00:00.000Z",
+  "updatedAt": "2026-07-27T12:30:00.000Z",
+  "studentId": "p1",
+  "notes": [
+    {
+      "id": "private-note:01",
+      "author": {
+        "role": "parent",
+        "actorId": "adult:parent-01"
+      },
+      "createdAt": "2026-07-27T12:00:00.000Z",
+      "updatedAt": "2026-07-27T12:30:00.000Z",
+      "visibility": "authorized-adults-only",
+      "category": "instructional",
+      "body": "SYNTHETIC-PRIVATE-NOTE-7QX9: review the visual-model accommodation next month."
+    }
+  ]
+}
+

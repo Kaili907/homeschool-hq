@@ -1,0 +1,630 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:manuel-academy:study-engine:learning-evidence:1",
+  "title": "Learning Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Structured learning observations. Accuracy alone never establishes an engagement concern or a prerequisite gap.",
+  "required": [
+    "kind",
+    "schemaVersion",
+    "id",
+    "revision",
+    "createdAt",
+    "updatedAt",
+    "studentId",
+    "sessionId",
+    "subjectId",
+    "skillIds",
+    "capturedAt"
+  ],
+  "properties": {
+    "kind": {
+      "const": "learning-evidence"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "manual",
+            "adaptive-engine",
+            "migration",
+            "import"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 50,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "extensions": {
+          "type": "object",
+          "maxProperties": 500,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9-]*:[A-Za-z0-9._/-]+$"
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "studentId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "subjectId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "skillIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 2000,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+      }
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "accuracy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "correctCount",
+        "attemptedCount",
+        "accuracyPercent",
+        "scoringMethod"
+      ],
+      "properties": {
+        "correctCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "attemptedCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "accuracyPercent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "scoringMethod": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "completedCount",
+        "assignedCount",
+        "completionPercent"
+      ],
+      "properties": {
+        "completedCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "assignedCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "completionPercent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "independence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supportLevel",
+        "source"
+      ],
+      "properties": {
+        "supportLevel": {
+          "enum": [
+            "independent",
+            "minimal-support",
+            "guided",
+            "full-support"
+          ]
+        },
+        "source": {
+          "enum": [
+            "student-report",
+            "teacher-observation",
+            "parent-observation",
+            "system-measure"
+          ]
+        }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rating",
+        "source",
+        "observedAt"
+      ],
+      "properties": {
+        "rating": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "source": {
+          "enum": [
+            "student-report",
+            "teacher-observation",
+            "parent-observation",
+            "system-measure"
+          ]
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "effort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rating",
+        "source",
+        "observedAt"
+      ],
+      "properties": {
+        "rating": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "source": {
+          "enum": [
+            "student-report",
+            "teacher-observation",
+            "parent-observation",
+            "system-measure"
+          ]
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "frustration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rating",
+        "source",
+        "observedAt"
+      ],
+      "properties": {
+        "rating": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "source": {
+          "enum": [
+            "student-report",
+            "teacher-observation",
+            "parent-observation",
+            "system-measure"
+          ]
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "hintUse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "offeredCount",
+        "requestedCount",
+        "acceptedCount",
+        "kinds"
+      ],
+      "properties": {
+        "offeredCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "requestedCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "acceptedCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kinds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "prompt",
+              "visual",
+              "worked-step",
+              "definition",
+              "example"
+            ]
+          }
+        }
+      }
+    },
+    "tutorIntervention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "kinds"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kinds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "clarification",
+              "prompt",
+              "worked-example",
+              "reteaching",
+              "redirection",
+              "adult-escalation"
+            ]
+          }
+        }
+      }
+    },
+    "redirectionCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "responseLatency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sampleCount",
+        "medianMs",
+        "p90Ms",
+        "minimumMs",
+        "maximumMs"
+      ],
+      "properties": {
+        "sampleCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "medianMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "p90Ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minimumMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maximumMs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "randomResponseIndicators": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "strength",
+          "supportingEvidenceIds",
+          "doesNotEstablishInattention"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "unusually-fast-series",
+              "repeating-choice-pattern",
+              "observer-concern"
+            ]
+          },
+          "strength": {
+            "enum": [
+              "weak",
+              "moderate",
+              "strong"
+            ]
+          },
+          "supportingEvidenceIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "maxItems": 2000,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          },
+          "doesNotEstablishInattention": {
+            "const": true
+          }
+        }
+      }
+    },
+    "nextDayRecall": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attemptedOn",
+        "intervalDays",
+        "correctCount",
+        "attemptedCount",
+        "hintCount"
+      ],
+      "properties": {
+        "attemptedOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "intervalDays": {
+          "const": 1
+        },
+        "correctCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "attemptedCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "hintCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "basisEvidenceIds",
+        "measuredAcrossDays"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "not-assessed",
+            "declining",
+            "stable",
+            "improving",
+            "retained"
+          ]
+        },
+        "basisEvidenceIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        },
+        "measuredAcrossDays": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "masteryOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "basisEvidenceIds"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "not-assessed",
+            "not-yet-demonstrated",
+            "progressing",
+            "demonstrated",
+            "retained",
+            "insufficient-evidence"
+          ]
+        },
+        "criterionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "algorithmVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "basisEvidenceIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        }
+      }
+    },
+    "prerequisiteGapOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "prerequisiteSkillIds",
+        "basisEvidenceIds",
+        "nextAction"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "none-observed",
+            "suspected",
+            "confirmed",
+            "insufficient-evidence"
+          ]
+        },
+        "prerequisiteSkillIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        },
+        "basisEvidenceIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        },
+        "nextAction": {
+          "enum": [
+            "none",
+            "collect-more-evidence",
+            "remediate",
+            "adult-review"
+          ]
+        }
+      }
+    },
+    "engagementSupport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "supportingSignals",
+        "wording"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "no-concern",
+            "support-may-help",
+            "insufficient-evidence"
+          ]
+        },
+        "supportingSignals": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "accuracy",
+              "response-latency",
+              "random-response-indicator",
+              "redirection",
+              "student-report",
+              "adult-observation",
+              "technical-context"
+            ]
+          }
+        },
+        "wording": {
+          "const": "contextual-and-revisable"
+        }
+      }
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "at least one observation field is present",
+    "counts and computed percentages agree",
+    "latency summaries are ordered",
+    "confirmed prerequisite gaps require multiple evidence references",
+    "support-may-help requires a signal independent of accuracy"
+  ]
+}

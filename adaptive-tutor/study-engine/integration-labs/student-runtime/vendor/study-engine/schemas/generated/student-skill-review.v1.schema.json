@@ -1,0 +1,654 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:manuel-academy:study-engine:student-skill-review:1",
+  "title": "Student Skill Review",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "A per-skill retrieval and review schedule. Canonical intervals are planning defaults, not universal claims.",
+  "required": [
+    "kind",
+    "schemaVersion",
+    "id",
+    "revision",
+    "createdAt",
+    "updatedAt",
+    "studentId",
+    "subjectId",
+    "skillId",
+    "timeZone",
+    "retrievalAttempts",
+    "currentInterval",
+    "nextReviewDate",
+    "intervalAdjustments"
+  ],
+  "properties": {
+    "kind": {
+      "const": "student-skill-review"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "manual",
+            "adaptive-engine",
+            "migration",
+            "import"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 50,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "extensions": {
+          "type": "object",
+          "maxProperties": 500,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9-]*:[A-Za-z0-9._/-]+$"
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "studentId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "subjectId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "skillId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "timeZone": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "retrievalAttempts": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "attemptedAt",
+          "reviewDate",
+          "correctCount",
+          "attemptedCount",
+          "hintCount",
+          "independence",
+          "evidenceId"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "attemptedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reviewDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "correctCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "attemptedCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "hintCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "independence": {
+            "enum": [
+              "independent",
+              "minimal-support",
+              "guided",
+              "full-support"
+            ]
+          },
+          "evidenceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        }
+      }
+    },
+    "currentInterval": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "days"
+          ],
+          "properties": {
+            "id": {
+              "const": "same-day"
+            },
+            "days": {
+              "const": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "days"
+          ],
+          "properties": {
+            "id": {
+              "const": "one-day"
+            },
+            "days": {
+              "const": 1
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "days"
+          ],
+          "properties": {
+            "id": {
+              "const": "three-day"
+            },
+            "days": {
+              "const": 3
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "days"
+          ],
+          "properties": {
+            "id": {
+              "const": "seven-day"
+            },
+            "days": {
+              "const": 7
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "days"
+          ],
+          "properties": {
+            "id": {
+              "const": "fourteen-day"
+            },
+            "days": {
+              "const": 14
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "days"
+          ],
+          "properties": {
+            "id": {
+              "const": "thirty-day"
+            },
+            "days": {
+              "const": 30
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "days"
+          ],
+          "properties": {
+            "id": {
+              "const": "custom"
+            },
+            "days": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3650
+            }
+          }
+        }
+      ]
+    },
+    "nextReviewDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "intervalAdjustments": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "adjustedAt",
+          "action",
+          "from",
+          "to",
+          "basisEvidenceIds"
+        ],
+        "properties": {
+          "adjustedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "action": {
+            "enum": [
+              "interval-expansion",
+              "interval-contraction",
+              "interval-maintained"
+            ]
+          },
+          "from": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "same-day"
+                  },
+                  "days": {
+                    "const": 0
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "one-day"
+                  },
+                  "days": {
+                    "const": 1
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "three-day"
+                  },
+                  "days": {
+                    "const": 3
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "seven-day"
+                  },
+                  "days": {
+                    "const": 7
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "fourteen-day"
+                  },
+                  "days": {
+                    "const": 14
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "thirty-day"
+                  },
+                  "days": {
+                    "const": 30
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "custom"
+                  },
+                  "days": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3650
+                  }
+                }
+              }
+            ]
+          },
+          "to": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "same-day"
+                  },
+                  "days": {
+                    "const": 0
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "one-day"
+                  },
+                  "days": {
+                    "const": 1
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "three-day"
+                  },
+                  "days": {
+                    "const": 3
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "seven-day"
+                  },
+                  "days": {
+                    "const": 7
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "fourteen-day"
+                  },
+                  "days": {
+                    "const": 14
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "thirty-day"
+                  },
+                  "days": {
+                    "const": 30
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "days"
+                ],
+                "properties": {
+                  "id": {
+                    "const": "custom"
+                  },
+                  "days": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3650
+                  }
+                }
+              }
+            ]
+          },
+          "basisEvidenceIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "maxItems": 2000,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          }
+        }
+      }
+    },
+    "reteachingTrigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "reason",
+        "basisEvidenceIds"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "not-triggered",
+            "triggered"
+          ]
+        },
+        "reason": {
+          "enum": [
+            "repeated-retrieval-difficulty",
+            "retention-decline",
+            "adult-request"
+          ]
+        },
+        "basisEvidenceIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        }
+      }
+    },
+    "prerequisiteRemediationTrigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "reason",
+        "prerequisiteSkillIds",
+        "basisEvidenceIds"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "not-triggered",
+            "triggered"
+          ]
+        },
+        "reason": {
+          "enum": [
+            "confirmed-prerequisite-gap",
+            "adult-request"
+          ]
+        },
+        "prerequisiteSkillIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        },
+        "basisEvidenceIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        }
+      }
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "canonical interval IDs match their exact day counts",
+    "retrieval attempts and interval adjustments are chronological",
+    "nextReviewDate equals the latest local review date plus current interval",
+    "expansion increases days and contraction decreases days",
+    "triggered actions require supporting evidence"
+  ]
+}

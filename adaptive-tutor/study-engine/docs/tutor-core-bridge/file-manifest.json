@@ -1,0 +1,193 @@
+{
+  "contract": "study-core-bridge.file-manifest.v1",
+  "contractVersion": 1,
+  "manifestExcludesItself": true,
+  "ownedRoots": [
+    "adaptive-tutor/study-engine/bridges/tutor-core",
+    "adaptive-tutor/study-engine/tests/tutor-core-bridge",
+    "adaptive-tutor/study-engine/docs/tutor-core-bridge"
+  ],
+  "fileCount": 36,
+  "files": [
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/adapter-manifest.json",
+      "bytes": 3311,
+      "sha256": "0A1B8B50BF0537870E25F94333E9C10DBE2FD77B542256872FEF7D7C35BB3EEA"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/package.json",
+      "bytes": 332,
+      "sha256": "FD25DA8C53A9A15B9DFBCF11F9F30D376C5102FD866B87E598658FEF04449FCC"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/scripts/build-package.py",
+      "bytes": 10827,
+      "sha256": "1C56BBA8884F672D19527F23732D0264872F404D728CFF465CED73920D41303E"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/scripts/verify-sources.mjs",
+      "bytes": 6716,
+      "sha256": "35294BEF7FF88CAA676D4895FFFF6A32A23B47AEB1E2E63A99A6CD128FF7361A"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/checkpoint.ts",
+      "bytes": 13938,
+      "sha256": "FDDAF143BFB07098CE55DCDCFE23AA025CA7BF56E1B921B9A09D5CD1B2B7387A"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/contracts.ts",
+      "bytes": 15949,
+      "sha256": "9249A7209693E3B9EE7649B409FA1B7B5394E415DF0D522A30BC0D73208CFDD7"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/core-adapter.ts",
+      "bytes": 21054,
+      "sha256": "CFCE8D0CEADECF5806AE5B254187B7C1FDCCFF48DA011CC73267398C7B6E655A"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/evidence.ts",
+      "bytes": 16317,
+      "sha256": "0827DE4913EFD7CDCF08E34F51A5ADAC1AA0245DCB03753844080683C0397172"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/hooks.ts",
+      "bytes": 9517,
+      "sha256": "5962E45C5973A41D2233EB9801AB585E8A22F9AFF169DDDE03232FE4DFE49D9A"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/index.ts",
+      "bytes": 396,
+      "sha256": "3B1E9A29572E02911ED71854D210FC328DB05EACA8072CC6C51C342A7DC01696"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/mappings.ts",
+      "bytes": 9241,
+      "sha256": "69985E4F6FF3128A372D7549EFB838F043F67678974572D820CBF65B66D9EDE8"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/media.ts",
+      "bytes": 10964,
+      "sha256": "4C114F18074CDAB9FE7C4FBAE57C90DB96D51E8EF0072B7213C54220D02BA334"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/orchestrator.ts",
+      "bytes": 11074,
+      "sha256": "6C61B8509028996EAEAE02A8C9692211FB4FBFC8A266D5D10943501B9793E832"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/privacy.ts",
+      "bytes": 4637,
+      "sha256": "BF55CA6D0508D50DD39AA1A8DE66DBF4FAFF7A0B938833E633236A0C8F884222"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/safety-gateway.ts",
+      "bytes": 27157,
+      "sha256": "4386F09E1B699F1B010C5316D736967651DFC1FEA7E87AD6A42A3B320841FEB1"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/schema-compatibility.ts",
+      "bytes": 5192,
+      "sha256": "8328AE0BEEB3849FD413E788158E8EE7449A3012DC55BA1F88FA8C5F42327F7B"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/src/validation.ts",
+      "bytes": 27025,
+      "sha256": "BE494A8BBBD9CB313B6BC5D1FFFBCECE04F9318083D870747A41ABE0307E96CD"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/traces/sample-traces.json",
+      "bytes": 11564,
+      "sha256": "33290996582440175719BA285D668DE4851688E02283F69B57FE47F1BE3DDE4D"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/bridges/tutor-core/tsconfig.json",
+      "bytes": 531,
+      "sha256": "9A2392AB192C348617D564930811FDC4BFC298191B405A15BEB8984473A3488C"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/tests/tutor-core-bridge/bridge.test.mjs",
+      "bytes": 29143,
+      "sha256": "77ED37B9CE6C40025252F3F0184D9687AD3E6D8D598BDBD98CDC2E8C97BA4BA3"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/tests/tutor-core-bridge/event-integrity-r2.test.mjs",
+      "bytes": 13557,
+      "sha256": "67312DD86F7DF5DFEC839FF8B7C8AA21A7A2C0F573B7B0F2B7939E27F1BF3F8C"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/tests/tutor-core-bridge/portability-r2.test.mjs",
+      "bytes": 8759,
+      "sha256": "18025D1C2DCAA8F45E76DD9F858C2C585AE4895B6A0B39D1D8658DD0B4ECE70C"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/tests/tutor-core-bridge/safety-gateway-r2.test.mjs",
+      "bytes": 11351,
+      "sha256": "FC53BCE64A34EC0D4009BC72C815F227D5F3935A30156E8EB189A7EEB09C7FFA"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/authority-boundary-matrix.md",
+      "bytes": 2116,
+      "sha256": "4D387880BE40AF38A3FEB2AEA1943FEFD77B8D8A66FC08CCAC59B4AF9DE9B86C"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/checkpoint-and-hooks.md",
+      "bytes": 2377,
+      "sha256": "663925CF30490324FF2ECD66E49692355D626AEC932C2FAA8082A3BDC9291213"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/compatibility-matrix.md",
+      "bytes": 4958,
+      "sha256": "11186A2C1EEE073622830AB5FBD45411B92184E5CE212BA0F28A84BF647AF7FE"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/idempotency-and-orchestration.md",
+      "bytes": 3629,
+      "sha256": "E1FA49C35FA6F9484DB7394C6869BE726EAF4A00B6E9D4FEC3598E4B39DF3E79"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/known-limitations-and-core-requests.md",
+      "bytes": 2652,
+      "sha256": "47E75FEF5710F00314CD411D81DD20944B11616383FB71F655ADFFB055F767B7"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/portability.md",
+      "bytes": 2318,
+      "sha256": "179D7C99792DDD0D0E194999B5D80FC250F3C83B57346D3515569ADF005322E6"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/privacy-report.md",
+      "bytes": 2486,
+      "sha256": "FF159F5B71B1D6D5F359A862F2FEE12920794B5CD97E1A92A128965C48D6C2EE"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/provisional-directive-resolution.md",
+      "bytes": 1668,
+      "sha256": "466714949EEF9282DFA5F9D4FE6BBB0707AC21F54794BB6F0A95338C9678D7B4"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/README.md",
+      "bytes": 3393,
+      "sha256": "20FE13D1091C43DE221D77FC3B3AC1760EA9879ED8E601B63EFE6EE5E4CBE5F1"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/safety-report.md",
+      "bytes": 6560,
+      "sha256": "09BDE236100F6B923EBD2E18A6DF18A55E79AD37E9A459109071EC79624A5A56"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/sample-traces.md",
+      "bytes": 1653,
+      "sha256": "1E6B7B330E5CBE1B0915FF5E57772386E2FB3806D79D756180833D1EEFD5412E"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/source-artifacts.md",
+      "bytes": 1269,
+      "sha256": "D073EE17007051F8A29D033A608EEF03BA2920F2F037C1ADF2A03E6C4644CADF"
+    },
+    {
+      "path": "adaptive-tutor/study-engine/docs/tutor-core-bridge/validation-report.md",
+      "bytes": 5728,
+      "sha256": "247FB3C9DCC11D9FB348FF6E0AC70E15DEED2995689126063C945E7CC869FFF8"
+    }
+  ]
+}

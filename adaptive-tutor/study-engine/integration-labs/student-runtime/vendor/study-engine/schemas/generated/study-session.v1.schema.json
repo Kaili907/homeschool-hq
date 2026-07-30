@@ -1,0 +1,622 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:manuel-academy:study-engine:study-session:1",
+  "title": "Study Session",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "A discriminated study-session state with append-only events, neutral interruption states, resume points, and terminal results.",
+  "required": [
+    "kind",
+    "schemaVersion",
+    "id",
+    "revision",
+    "createdAt",
+    "updatedAt",
+    "status",
+    "studentId",
+    "studyPlanId",
+    "plannedSegmentIds",
+    "eventLog"
+  ],
+  "properties": {
+    "kind": {
+      "const": "study-session"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "manual",
+            "adaptive-engine",
+            "migration",
+            "import"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 50,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "extensions": {
+          "type": "object",
+          "maxProperties": 500,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9-]*:[A-Za-z0-9._/-]+$"
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "active",
+        "paused",
+        "approved-break",
+        "student-requested-break",
+        "technical-interruption",
+        "completed",
+        "abandoned"
+      ]
+    },
+    "studentId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "studyPlanId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "plannedSegmentIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 2000,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+      }
+    },
+    "eventLog": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "sessionId",
+          "sequence",
+          "occurredAt",
+          "type",
+          "actor"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "sessionId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "sequence": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "enum": [
+              "session-planned",
+              "session-started",
+              "segment-started",
+              "active-response-recorded",
+              "segment-completed",
+              "pause-started",
+              "break-requested",
+              "break-approved",
+              "break-started",
+              "break-ended",
+              "technical-interruption-started",
+              "technical-interruption-ended",
+              "session-resumed",
+              "redirection-recorded",
+              "tutor-intervention-recorded",
+              "session-completed",
+              "session-abandoned"
+            ]
+          },
+          "actor": {
+            "enum": [
+              "student",
+              "parent",
+              "teacher",
+              "tutor",
+              "system"
+            ]
+          },
+          "segmentId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "detailCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "evidenceRef": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        }
+      }
+    },
+    "scheduledStartAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "currentSegmentId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "elapsedActiveSeconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "pausedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "pauseCategory": {
+      "enum": [
+        "student-request",
+        "adult-directed",
+        "scheduled",
+        "accessibility-need"
+      ]
+    },
+    "resumePoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "segmentId",
+        "elapsedActiveSecondsInSegment"
+      ],
+      "properties": {
+        "segmentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "elapsedActiveSecondsInSegment": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "responseDraftRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      }
+    },
+    "break": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interruptionId",
+        "requestedAt",
+        "approvedAt",
+        "approvedBy",
+        "reasonCategory",
+        "plannedDurationMinutes"
+      ],
+      "properties": {
+        "interruptionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "requestedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "approvedBy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role"
+          ],
+          "properties": {
+            "role": {
+              "enum": [
+                "parent",
+                "teacher",
+                "tutor",
+                "system"
+              ]
+            },
+            "actorId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          }
+        },
+        "reasonCategory": {
+          "enum": [
+            "student-request",
+            "accessibility-need",
+            "scheduled-break",
+            "wellbeing",
+            "adult-directed"
+          ]
+        },
+        "plannedDurationMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      }
+    },
+    "breakRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interruptionId",
+        "requestedAt",
+        "requestState"
+      ],
+      "properties": {
+        "interruptionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "requestedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "requestState": {
+          "enum": [
+            "pending",
+            "approved"
+          ]
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "plannedDurationMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      }
+    },
+    "interruption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interruptionId",
+        "startedAt",
+        "category",
+        "recoverable"
+      ],
+      "properties": {
+        "interruptionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "category": {
+          "enum": [
+            "network-unavailable",
+            "device-power",
+            "application-restart",
+            "audio-unavailable",
+            "input-unavailable",
+            "unknown-technical"
+          ]
+        },
+        "recoverable": {
+          "type": "boolean"
+        },
+        "detailCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "abandonedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reasonCategory": {
+      "enum": [
+        "student-choice",
+        "adult-directed",
+        "schedule-change",
+        "wellbeing",
+        "technical-unrecoverable",
+        "other"
+      ]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "sessionId",
+        "outcome",
+        "completedSegmentIds",
+        "remainingSegmentIds",
+        "activeDurationSeconds",
+        "breakDurationSeconds",
+        "pausedDurationSeconds",
+        "evidenceIds",
+        "recommendedNextAction",
+        "recordedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "sessionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "outcome": {
+          "enum": [
+            "completed",
+            "partially-completed",
+            "abandoned"
+          ]
+        },
+        "completedSegmentIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        },
+        "remainingSegmentIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        },
+        "activeDurationSeconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "breakDurationSeconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pausedDurationSeconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidenceIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        },
+        "recommendedNextAction": {
+          "enum": [
+            "continue-plan",
+            "review",
+            "reteach",
+            "prerequisite-remediation",
+            "adult-review",
+            "none"
+          ]
+        },
+        "recordedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "only fields for the selected status are allowed",
+    "event IDs and sequence numbers are unique and chronological",
+    "event session IDs equal the enclosing session ID",
+    "all segment references belong to plannedSegmentIds",
+    "pause, break, and interruption states require a resume point",
+    "terminal states require a matching result and cannot resume"
+  ],
+  "oneOf": [
+    {
+      "properties": {
+        "status": {
+          "const": "planned"
+        }
+      },
+      "required": [
+        "scheduledStartAt"
+      ]
+    },
+    {
+      "properties": {
+        "status": {
+          "const": "active"
+        }
+      },
+      "required": [
+        "startedAt",
+        "currentSegmentId",
+        "elapsedActiveSeconds"
+      ]
+    },
+    {
+      "properties": {
+        "status": {
+          "const": "paused"
+        }
+      },
+      "required": [
+        "startedAt",
+        "pausedAt",
+        "pauseCategory",
+        "resumePoint"
+      ]
+    },
+    {
+      "properties": {
+        "status": {
+          "const": "approved-break"
+        }
+      },
+      "required": [
+        "startedAt",
+        "break",
+        "resumePoint"
+      ]
+    },
+    {
+      "properties": {
+        "status": {
+          "const": "student-requested-break"
+        }
+      },
+      "required": [
+        "startedAt",
+        "breakRequest",
+        "resumePoint"
+      ]
+    },
+    {
+      "properties": {
+        "status": {
+          "const": "technical-interruption"
+        }
+      },
+      "required": [
+        "startedAt",
+        "interruption",
+        "resumePoint"
+      ]
+    },
+    {
+      "properties": {
+        "status": {
+          "const": "completed"
+        }
+      },
+      "required": [
+        "startedAt",
+        "completedAt",
+        "result"
+      ]
+    },
+    {
+      "properties": {
+        "status": {
+          "const": "abandoned"
+        }
+      },
+      "required": [
+        "startedAt",
+        "abandonedAt",
+        "reasonCategory",
+        "result"
+      ]
+    }
+  ]
+}

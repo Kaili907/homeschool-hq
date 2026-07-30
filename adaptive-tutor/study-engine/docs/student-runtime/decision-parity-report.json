@@ -1,0 +1,87 @@
+{
+  "reportVersion": 1,
+  "sourcePackage": {
+    "filename": "SESSION-5-R2-PORTABLE-RECONCILIATION-PACKAGE.zip",
+    "sha256": "39D161F422B36319D9732567867440A5839C06A67895CA02046600C13AC8CB41",
+    "status": "verified-exact"
+  },
+  "supersededProvenance": {
+    "filename": "CARD-5-STUDY-RECON-AUDIT.zip",
+    "version": "0.5.0-blocked.1",
+    "sha256": "2231E758AA9DD309565E374BE1D1B78A2835C8A3F5A221562BE04DB78900E2E7",
+    "accepted": false
+  },
+  "overallStatus": "documented-parity",
+  "decisions": [
+    {
+      "id": "DEC-004",
+      "topic": "canonical-task-identity",
+      "requirement": "SegmentId is the canonical task identity; no parallel TaskId",
+      "status": "parity",
+      "evidence": ["canonical-adapter-manifest.json", "event-dictionary.md"]
+    },
+    {
+      "id": "DEC-012",
+      "topic": "preference-and-duration-precedence",
+      "requirement": "safety > required accommodation > parent hard maximum > manual override > engine > grade default; empty legal range requires manual review",
+      "status": "parity",
+      "evidence": ["canonical-adapter-manifest.json", "provisional-adapter-retirement-report.md"]
+    },
+    {
+      "id": "S5R2-IDS",
+      "topic": "canonical-identifiers",
+      "requirement": "preserve opaque Session 1 identifiers byte-for-byte; map Tutor slugs separately",
+      "status": "parity-required",
+      "evidence": ["canonical-adapter-manifest.json"]
+    },
+    {
+      "id": "S5R2-EVENTS",
+      "topic": "event-vocabulary",
+      "requirement": "only the 17 canonical hyphenated Study session events; opaque unique IDs; monotonic sequence",
+      "status": "parity",
+      "evidence": ["event-dictionary.md"]
+    },
+    {
+      "id": "S5R2-RESUME",
+      "topic": "exact-resume",
+      "requirement": "canonical ResumePoint plus versioned recovery sidecar; stale and cross-session rejection",
+      "status": "parity",
+      "evidence": ["checkpoint-contract.md", "state-diagram.md"]
+    },
+    {
+      "id": "S5R2-PRIVACY",
+      "topic": "privacy-projection",
+      "requirement": "exclude PII, raw answers, transcripts, diagnoses, credentials, and adult-private notes",
+      "status": "parity",
+      "evidence": ["checkpoint-contract.md", "event-dictionary.md"]
+    },
+    {
+      "id": "S5R2-PARENT",
+      "topic": "parent-control-precedence",
+      "requirement": "required accommodations and safety cannot be weakened; parent rejection is revision-durable",
+      "status": "parity-required",
+      "evidence": ["canonical-adapter-manifest.json"]
+    },
+    {
+      "id": "S5R2-ADULT-REVIEW",
+      "topic": "adult-review-boundary",
+      "requirement": "adult-review hooks are proposals only and private note bodies never cross the Study projection",
+      "status": "parity",
+      "evidence": ["event-dictionary.md", "canonical-adapter-manifest.json"]
+    },
+    {
+      "id": "S5R2-VERSION",
+      "topic": "unsupported-version-handling",
+      "requirement": "lossless quarantine without canonical mutation",
+      "status": "parity",
+      "evidence": ["event-dictionary.md", "canonical-adapter-manifest.json"]
+    },
+    {
+      "id": "S5R2-OUTBOX",
+      "topic": "outbox-and-idempotency",
+      "requirement": "ledger acceptance precedes projection/outbox; identical duplicates ignored; collisions quarantined; duplicate proposals suppressed",
+      "status": "parity",
+      "evidence": ["event-dictionary.md", "canonical-adapter-manifest.json"]
+    }
+  ]
+}

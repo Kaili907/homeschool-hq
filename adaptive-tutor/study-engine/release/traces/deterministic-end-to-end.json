@@ -1,0 +1,476 @@
+{
+  "contract": "manuel-academy.adaptive-study-engine.demonstrations.v1",
+  "releaseVersion": "1.0.0-rc.1",
+  "generatedFromDeterministicInputs": true,
+  "demonstrations": [
+    {
+      "id": "grade-5-mathematics",
+      "title": "Grade 5 mathematics",
+      "status": "pass",
+      "steps": [
+        "calendar-block",
+        "session-goal",
+        "warm-up-retrieval",
+        "visual-explanation",
+        "guided-example",
+        "independent-attempt",
+        "approved-water-break",
+        "exact-resume",
+        "reflection",
+        "exit-ticket",
+        "study-engine-recommendation",
+        "review-recommendation",
+        "learner-local-calendar-placement",
+        "minimized-parent-evidence"
+      ],
+      "assertions": {
+        "bridgeVersion": "1.0.1",
+        "ledgerAccepted": true,
+        "coreSubmitInvocations": 1,
+        "rawAnswerPersisted": false,
+        "transcriptPersisted": false,
+        "reviewOutboxProposed": true
+      },
+      "persistedEvidence": {
+        "eventId": "event:session9:math:001",
+        "evidenceId": "event:session9:math:001",
+        "recommendationId": "recommendation:event:session9:math:001",
+        "action": "continue-plan",
+        "rawAnswerIncluded": false,
+        "transcriptIncluded": false
+      }
+    },
+    {
+      "id": "grade-5-reading",
+      "title": "Grade 5 reading",
+      "status": "pass",
+      "steps": [
+        "prior-knowledge-retrieval",
+        "teaching-support",
+        "guided-response",
+        "independent-response",
+        "low-confidence-check",
+        "supportive-jarvis-response",
+        "save-and-exit",
+        "refresh",
+        "integrity-checked-exact-resume",
+        "exit-ticket",
+        "review-queue"
+      ],
+      "assertions": {
+        "ledgerAccepted": true,
+        "coreSubmitInvocations": 1,
+        "rawAnswerPersisted": false,
+        "transcriptPersisted": false,
+        "supportiveLanguage": true
+      },
+      "persistedEvidence": {
+        "eventId": "event:session9:reading:001",
+        "evidenceId": "event:session9:reading:001",
+        "directive": "continue",
+        "rawAnswerIncluded": false,
+        "transcriptIncluded": false
+      }
+    },
+    {
+      "id": "urgent-child-safety",
+      "title": "Urgent child-safety disclosure",
+      "status": "pass",
+      "steps": [
+        "transient-disclosure",
+        "layered-safety-classifier",
+        "urgent-result",
+        "tutor-core-stopped",
+        "no-raw-text-persisted",
+        "adult-review-proposed-not-delivered",
+        "supportive-learner-message"
+      ],
+      "assertions": {
+        "tutorCoreInvocations": 0,
+        "academicFlowStopped": true,
+        "rawTextStored": false,
+        "diagnosisMade": false,
+        "deliveryStatus": "proposed-not-delivered"
+      },
+      "persistedEvidence": {
+        "hookId": "adult-review-event:session9:safety:urgent",
+        "urgency": "urgent",
+        "summaryCodes": [
+          "urgent-learner-safety-support-needed"
+        ],
+        "rawTextIncluded": false,
+        "matchedTextIncluded": false
+      }
+    },
+    {
+      "id": "uncertain-safety",
+      "title": "Uncertain safety disclosure",
+      "status": "pass",
+      "steps": [
+        "transient-uncertain-disclosure",
+        "tutor-core-stopped",
+        "manual-adult-review-proposed",
+        "no-diagnosis",
+        "no-normal-academic-processing"
+      ],
+      "assertions": {
+        "tutorCoreInvocations": 0,
+        "academicFlowStopped": true,
+        "diagnosisMade": false,
+        "urgency": "uncertain"
+      },
+      "persistedEvidence": {
+        "hookId": "adult-review-event:session9:safety:uncertain",
+        "deliveryStatus": "proposed-not-delivered",
+        "rawTextIncluded": false
+      }
+    },
+    {
+      "id": "partial-lesson-continuation",
+      "title": "Three of six segments completed with an exact continuation",
+      "status": "pass",
+      "steps": [
+        "three-of-six-segments-complete",
+        "sixteen-minute-remainder",
+        "exact-resume-point",
+        "one-continuation-block",
+        "no-duplicate-calendar-entry"
+      ],
+      "assertions": {
+        "completedSegments": 3,
+        "totalSegments": 6,
+        "remainingMinutes": 16,
+        "continuationCount": 1
+      },
+      "persistedEvidence": {
+        "scenarioId": "partial-resume",
+        "metrics": [
+          {
+            "label": "Required work",
+            "value": "50%"
+          },
+          {
+            "label": "Remaining",
+            "value": "16 min"
+          },
+          {
+            "label": "Actual work",
+            "value": "10 min"
+          },
+          {
+            "label": "Continuation",
+            "value": "idempotent"
+          }
+        ],
+        "traceIds": [
+          {
+            "label": "Original block",
+            "id": "block:fractions-lesson-006"
+          },
+          {
+            "label": "External lesson",
+            "id": "lesson:fractions-006"
+          },
+          {
+            "label": "Continuation",
+            "id": "block:fractions-lesson-006:continuation-01"
+          }
+        ],
+        "rawAnswerIncluded": false,
+        "transcriptIncluded": false,
+        "credentialsIncluded": false
+      }
+    },
+    {
+      "id": "retrieval-failure",
+      "title": "Reteaching first, then a bounded same-day retry",
+      "status": "pass",
+      "steps": [
+        "retrieval-failure",
+        "tutor-authorized-reteaching",
+        "same-day-retry-intent",
+        "bounded-review-queue",
+        "learner-local-calendar-placement",
+        "required-instruction-reserve"
+      ],
+      "assertions": {
+        "requiredInstructionReserveMinutes": 60,
+        "dailyReviewCapMinutes": 18,
+        "rawAnswersExcluded": true
+      },
+      "persistedEvidence": {
+        "scenarioId": "retrieval-failure",
+        "metrics": [
+          {
+            "label": "Required instruction",
+            "value": "60 min"
+          },
+          {
+            "label": "Review budget",
+            "value": "18 min"
+          },
+          {
+            "label": "Reviews held",
+            "value": "2"
+          },
+          {
+            "label": "Retry window",
+            "value": "10:30"
+          }
+        ],
+        "traceIds": [
+          {
+            "label": "Canonical review",
+            "id": "review:fractions-equivalence"
+          },
+          {
+            "label": "Queue entry",
+            "id": "queue:review-fractions:attempt-02"
+          },
+          {
+            "label": "Engine recommendation",
+            "id": "engine-rec:fractions:0002"
+          },
+          {
+            "label": "Retry authorization",
+            "id": "authorization:parent-fractions-retry"
+          }
+        ],
+        "rawAnswerIncluded": false,
+        "transcriptIncluded": false,
+        "credentialsIncluded": false
+      }
+    },
+    {
+      "id": "successful-review",
+      "title": "Successful retrieval expands the interval",
+      "status": "pass",
+      "steps": [
+        "review-attempt",
+        "canonical-result",
+        "ledger-acceptance",
+        "idempotent-outbox",
+        "interval-expansion",
+        "minimized-parent-evidence"
+      ],
+      "assertions": {
+        "correct": 4,
+        "attempted": 4,
+        "duplicateOutbox": false,
+        "rawAnswersExcluded": true
+      },
+      "persistedEvidence": {
+        "scenarioId": "successful-review",
+        "metrics": [
+          {
+            "label": "Attempt",
+            "value": "4 / 4"
+          },
+          {
+            "label": "Independence",
+            "value": "95%"
+          },
+          {
+            "label": "Next interval",
+            "value": "4 days"
+          },
+          {
+            "label": "Next review",
+            "value": "2026-08-01"
+          }
+        ],
+        "traceIds": [
+          {
+            "label": "Session result",
+            "id": "result:review-fractions:attempt-03"
+          },
+          {
+            "label": "Evidence",
+            "id": "evidence:review-fractions:attempt-03"
+          },
+          {
+            "label": "Next queue entry",
+            "id": "queue:review-fractions:attempt-04"
+          },
+          {
+            "label": "Result-return outbox",
+            "id": "outbox:return-review-fractions:attempt-03"
+          }
+        ],
+        "rawAnswerIncluded": false,
+        "transcriptIncluded": false,
+        "credentialsIncluded": false
+      }
+    },
+    {
+      "id": "parent-rejects-duration-increase",
+      "title": "Parent rejects an increase; history remains visible",
+      "status": "pass",
+      "steps": [
+        "engine-increase-recommendation",
+        "authorized-parent-rejection",
+        "bounded-final-duration",
+        "decision-provenance-retained",
+        "neutral-learner-language"
+      ],
+      "assertions": {
+        "recommendationRetained": true,
+        "finalDurationMinutes": 20,
+        "blameLanguageShown": false
+      },
+      "persistedEvidence": {
+        "scenarioId": "parent-rejects",
+        "metrics": [
+          {
+            "label": "Recommendation",
+            "value": "35 min"
+          },
+          {
+            "label": "Parent maximum",
+            "value": "20 min"
+          },
+          {
+            "label": "Decision",
+            "value": "Rejected"
+          },
+          {
+            "label": "History",
+            "value": "2"
+          }
+        ],
+        "traceIds": [
+          {
+            "label": "Recommendation",
+            "id": "recommendation:consider-increase"
+          },
+          {
+            "label": "Decision",
+            "id": "event:reject-increase"
+          },
+          {
+            "label": "Precedence",
+            "id": "card5.resolve-duration-policy.v1"
+          }
+        ],
+        "rawAnswerIncluded": false,
+        "transcriptIncluded": false,
+        "credentialsIncluded": false
+      }
+    },
+    {
+      "id": "accommodation",
+      "title": "Required accommodation wins with functional language",
+      "status": "pass",
+      "steps": [
+        "required-shorter-maximum",
+        "hidden-timer",
+        "more-frequent-breaks",
+        "binding-accommodation-provenance",
+        "no-diagnosis-language"
+      ],
+      "assertions": {
+        "finalDurationMinutes": 12,
+        "breakDurationMinutes": 8,
+        "timerHidden": true,
+        "diagnosisLanguage": false
+      },
+      "persistedEvidence": {
+        "scenarioId": "accommodation",
+        "metrics": [
+          {
+            "label": "Work maximum",
+            "value": "12 min"
+          },
+          {
+            "label": "Break",
+            "value": "8 min"
+          },
+          {
+            "label": "Timer",
+            "value": "Hidden"
+          },
+          {
+            "label": "Controls replayed",
+            "value": "10"
+          }
+        ],
+        "traceIds": [
+          {
+            "label": "Control set",
+            "id": "controls:runtime-lab"
+          },
+          {
+            "label": "Policy",
+            "id": "card5.resolve-duration-policy.v1"
+          },
+          {
+            "label": "Private record",
+            "id": "private:runtime-lab"
+          }
+        ],
+        "rawAnswerIncluded": false,
+        "transcriptIncluded": false,
+        "credentialsIncluded": false
+      }
+    },
+    {
+      "id": "romeo-virtual-academy",
+      "title": "Credential-free Romeo assignment metadata",
+      "status": "pass",
+      "steps": [
+        "manual-or-approved-import-metadata",
+        "linked-manuel-academy-tutoring",
+        "resume-note",
+        "completion-update",
+        "no-credentials",
+        "no-login",
+        "no-scraping",
+        "no-automatic-production-sync"
+      ],
+      "assertions": {
+        "credentials": 0,
+        "login": false,
+        "scraping": false,
+        "automaticProductionSync": false
+      },
+      "persistedEvidence": {
+        "scenarioId": "romeo",
+        "metrics": [
+          {
+            "label": "Source mode",
+            "value": "Manual"
+          },
+          {
+            "label": "Progress",
+            "value": "3 / 5 → 5 / 5"
+          },
+          {
+            "label": "Estimate",
+            "value": "35 min"
+          },
+          {
+            "label": "Credentials",
+            "value": "0"
+          }
+        ],
+        "traceIds": [
+          {
+            "label": "External assignment",
+            "id": "rva:algebra-204"
+          },
+          {
+            "label": "Calendar block",
+            "id": "block:romeo:algebra-204"
+          },
+          {
+            "label": "Tutoring skill",
+            "id": "skill:solve-two-step-equations"
+          }
+        ],
+        "rawAnswerIncluded": false,
+        "transcriptIncluded": false,
+        "credentialsIncluded": false
+      }
+    }
+  ]
+}
