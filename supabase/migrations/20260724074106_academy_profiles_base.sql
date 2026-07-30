@@ -225,7 +225,14 @@ begin
     )
   );
 
-  if actual_schema_privileges is distinct from expected_schema_privileges then
+  -- Hosted auth exposes only USAGE to postgres; postgres-owned local harnesses
+  -- also expose owner-derived CREATE. These are the only two allowed variants.
+  if actual_schema_privileges is distinct from expected_schema_privileges
+     and actual_schema_privileges is distinct from pg_catalog.jsonb_set(
+       expected_schema_privileges,
+       '{auth,postgres}',
+       '["CREATE", "USAGE"]'::jsonb
+     ) then
     raise exception
       'Academy profiles base schema ACL drift: expected %, found %',
       expected_schema_privileges,

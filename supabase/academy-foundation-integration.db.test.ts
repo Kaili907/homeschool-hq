@@ -7,7 +7,7 @@ const migrations = [
   {
     timestamp: '20260724074106',
     path: 'supabase/migrations/20260724074106_academy_profiles_base.sql',
-    blob: '57f0c1ce0e43a7e5af80c135c0f2a9170145d430',
+    blob: '0d0c03a6d6d8b78221dffc90994cc242ee94a778',
   },
   {
     timestamp: '20260724230000',
