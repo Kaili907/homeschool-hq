@@ -1,30 +1,34 @@
-import { getStoredSession } from '../sync/config'
+import { getCurrentSession } from '../sync/supabase'
 
 /**
  * Return a current Supabase access token for same-origin AI gateways.
  *
- * The token remains in the existing dedicated sync-session store and is never
- * copied into AppState, transcripts, gateway bodies, or provider requests.
- * Token refresh remains owned by the signed-in sync session. Rotating a refresh
- * token here would leave that hook's in-memory session stale, so this file-disjoint
- * gateway adapter fails closed once the stored access token expires.
+ * The token remains in the official Supabase client's session store and is
+ * never copied into AppState, transcripts, gateway bodies, or provider
+ * requests. Token refresh remains owned by that client; this adapter fails
+ * closed when no current, unexpired access token is available.
  */
 export async function getGatewayAccessToken(): Promise<string | null> {
   return getGatewayAccessTokenWith()
 }
 
 export interface GatewayAuthDeps {
-  getSession?: typeof getStoredSession
+  getSession?: typeof getCurrentSession
   now?: () => number
 }
 
 /** Dependency-injected seam used by network-free tests. */
 export async function getGatewayAccessTokenWith(deps: GatewayAuthDeps = {}): Promise<string | null> {
-  const read = deps.getSession ?? getStoredSession
+  const read = deps.getSession ?? getCurrentSession
   const now = deps.now ?? (() => Date.now())
-  const stored = read()
+  const stored = await read()
   if (!stored) return null
-  if (!stored.access_token || !Number.isFinite(stored.expires_at) || stored.expires_at <= now()) {
+  if (
+    !stored.access_token ||
+    typeof stored.expires_at !== 'number' ||
+    !Number.isFinite(stored.expires_at) ||
+    stored.expires_at * 1000 <= now()
+  ) {
     return null
   }
   return stored.access_token
