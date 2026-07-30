@@ -1,0 +1,763 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:manuel-academy:study-engine:lesson-study-plan:1",
+  "title": "Lesson Study Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "A versioned lesson plan with contextual timing guidance, active responses, mastery checks, and stable segment sequencing.",
+  "required": [
+    "kind",
+    "schemaVersion",
+    "id",
+    "revision",
+    "createdAt",
+    "updatedAt",
+    "studentId",
+    "lessonId",
+    "subjectId",
+    "gradeBand",
+    "gradeBandStartingRanges",
+    "subjectTimingProfiles",
+    "taskTimingProfiles",
+    "prerequisiteRefs",
+    "segments",
+    "segmentSequence"
+  ],
+  "properties": {
+    "kind": {
+      "const": "lesson-study-plan"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "manual",
+            "adaptive-engine",
+            "migration",
+            "import"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 50,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "extensions": {
+          "type": "object",
+          "maxProperties": 500,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9-]*:[A-Za-z0-9._/-]+$"
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "studentId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "lessonId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "subjectId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "gradeBand": {
+      "enum": [
+        "elementary-3-5",
+        "middle-6-8",
+        "high-9-12"
+      ]
+    },
+    "gradeBandStartingRanges": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "gradeBand",
+          "basis",
+          "effectiveWorkBlockRange",
+          "reviewAfterEligibleSessions"
+        ],
+        "properties": {
+          "gradeBand": {
+            "enum": [
+              "elementary-3-5",
+              "middle-6-8",
+              "high-9-12"
+            ]
+          },
+          "basis": {
+            "const": "grade-band-starting-range"
+          },
+          "effectiveWorkBlockRange": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "minimumMinutes",
+              "targetMinutes",
+              "maximumMinutes"
+            ],
+            "properties": {
+              "minimumMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              },
+              "targetMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              },
+              "maximumMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              }
+            },
+            "description": "A contextual, revisable effective work-block range. Runtime validation enforces minimum <= target <= maximum.",
+            "x-manuel-runtime-refinement": [
+              "minimumMinutes <= targetMinutes <= maximumMinutes"
+            ]
+          },
+          "reviewAfterEligibleSessions": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "subjectTimingProfiles": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "subjectId",
+          "effectiveWorkBlockRange"
+        ],
+        "properties": {
+          "subjectId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "effectiveWorkBlockRange": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "minimumMinutes",
+              "targetMinutes",
+              "maximumMinutes"
+            ],
+            "properties": {
+              "minimumMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              },
+              "targetMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              },
+              "maximumMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              }
+            },
+            "description": "A contextual, revisable effective work-block range. Runtime validation enforces minimum <= target <= maximum.",
+            "x-manuel-runtime-refinement": [
+              "minimumMinutes <= targetMinutes <= maximumMinutes"
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "taskTimingProfiles": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "taskType",
+          "effectiveWorkBlockRange"
+        ],
+        "properties": {
+          "taskType": {
+            "enum": [
+              "direct-instruction",
+              "worked-example",
+              "guided-practice",
+              "independent-practice",
+              "retrieval-practice",
+              "reading",
+              "writing",
+              "discussion",
+              "problem-solving",
+              "project-work",
+              "mastery-check",
+              "prerequisite-remediation",
+              "reflection",
+              "custom"
+            ]
+          },
+          "customTaskTypeId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "effectiveWorkBlockRange": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "minimumMinutes",
+              "targetMinutes",
+              "maximumMinutes"
+            ],
+            "properties": {
+              "minimumMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              },
+              "targetMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              },
+              "maximumMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              }
+            },
+            "description": "A contextual, revisable effective work-block range. Runtime validation enforces minimum <= target <= maximum.",
+            "x-manuel-runtime-refinement": [
+              "minimumMinutes <= targetMinutes <= maximumMinutes"
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "prerequisiteRefs": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "skillId",
+          "relationship",
+          "minimumOutcome",
+          "onGap"
+        ],
+        "properties": {
+          "skillId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "relationship": {
+            "enum": [
+              "required",
+              "supporting"
+            ]
+          },
+          "minimumOutcome": {
+            "enum": [
+              "introduced",
+              "progressing",
+              "demonstrated",
+              "retained"
+            ]
+          },
+          "onGap": {
+            "enum": [
+              "remediate-before-segment",
+              "embed-review",
+              "request-adult-review"
+            ]
+          }
+        }
+      }
+    },
+    "segments": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "sequence",
+          "title",
+          "taskType",
+          "learningObjectiveIds",
+          "timing",
+          "cognitiveLoad",
+          "activeResponse",
+          "breakEligibility",
+          "masteryCheck",
+          "prerequisiteRefs",
+          "dependsOnSegmentIds"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "sequence": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "taskType": {
+            "enum": [
+              "direct-instruction",
+              "worked-example",
+              "guided-practice",
+              "independent-practice",
+              "retrieval-practice",
+              "reading",
+              "writing",
+              "discussion",
+              "problem-solving",
+              "project-work",
+              "mastery-check",
+              "prerequisite-remediation",
+              "reflection",
+              "custom"
+            ]
+          },
+          "customTaskTypeId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "learningObjectiveIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 0,
+            "maxItems": 2000,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          },
+          "timing": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "minimumMinutes",
+              "plannedMinutes",
+              "maximumMinutes"
+            ],
+            "properties": {
+              "minimumMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              },
+              "plannedMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              },
+              "maximumMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              }
+            }
+          },
+          "cognitiveLoad": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "overallLevel",
+              "novelty",
+              "workingMemoryDemand",
+              "interactionDemand",
+              "supportLevel",
+              "supportStrategies"
+            ],
+            "properties": {
+              "overallLevel": {
+                "enum": [
+                  "low",
+                  "moderate",
+                  "high",
+                  "very-high"
+                ]
+              },
+              "novelty": {
+                "enum": [
+                  "low",
+                  "moderate",
+                  "high",
+                  "very-high"
+                ]
+              },
+              "workingMemoryDemand": {
+                "enum": [
+                  "low",
+                  "moderate",
+                  "high",
+                  "very-high"
+                ]
+              },
+              "interactionDemand": {
+                "enum": [
+                  "low",
+                  "moderate",
+                  "high",
+                  "very-high"
+                ]
+              },
+              "supportLevel": {
+                "enum": [
+                  "low",
+                  "moderate",
+                  "high",
+                  "very-high"
+                ]
+              },
+              "supportStrategies": {
+                "type": "array",
+                "minItems": 0,
+                "maxItems": 2000,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                }
+              }
+            }
+          },
+          "activeResponse": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "required",
+              "modes",
+              "minimumResponseCount"
+            ],
+            "properties": {
+              "required": {
+                "type": "boolean"
+              },
+              "modes": {
+                "type": "array",
+                "minItems": 0,
+                "maxItems": 2000,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "spoken-answer",
+                    "typed-answer",
+                    "selected-answer",
+                    "written-work",
+                    "drawn-model",
+                    "worked-step",
+                    "teach-back",
+                    "physical-response"
+                  ]
+                }
+              },
+              "minimumResponseCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 500
+              },
+              "maximumPassiveMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              }
+            }
+          },
+          "breakEligibility": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "eligible",
+              "studentMayRequest",
+              "approvalRequired"
+            ],
+            "properties": {
+              "eligible": {
+                "type": "boolean"
+              },
+              "studentMayRequest": {
+                "type": "boolean"
+              },
+              "approvalRequired": {
+                "type": "boolean"
+              },
+              "availableAfterActiveMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 240
+              },
+              "recommendedBreakMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 120
+              }
+            }
+          },
+          "masteryCheck": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "required",
+              "skillIds",
+              "learningObjectiveIds",
+              "minimumItemCount"
+            ],
+            "properties": {
+              "required": {
+                "type": "boolean"
+              },
+              "skillIds": {
+                "type": "array",
+                "uniqueItems": true,
+                "minItems": 0,
+                "maxItems": 2000,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+                }
+              },
+              "learningObjectiveIds": {
+                "type": "array",
+                "uniqueItems": true,
+                "minItems": 0,
+                "maxItems": 2000,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+                }
+              },
+              "minimumItemCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "criterion": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "minimumAccuracyPercent",
+                  "minimumIndependentResponses"
+                ],
+                "properties": {
+                  "minimumAccuracyPercent": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "minimumIndependentResponses": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "maximumHintCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                }
+              }
+            }
+          },
+          "prerequisiteRefs": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "skillId",
+                "relationship",
+                "minimumOutcome",
+                "onGap"
+              ],
+              "properties": {
+                "skillId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+                },
+                "relationship": {
+                  "enum": [
+                    "required",
+                    "supporting"
+                  ]
+                },
+                "minimumOutcome": {
+                  "enum": [
+                    "introduced",
+                    "progressing",
+                    "demonstrated",
+                    "retained"
+                  ]
+                },
+                "onGap": {
+                  "enum": [
+                    "remediate-before-segment",
+                    "embed-review",
+                    "request-adult-review"
+                  ]
+                }
+              }
+            }
+          },
+          "dependsOnSegmentIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 0,
+            "maxItems": 2000,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          }
+        }
+      }
+    },
+    "segmentSequence": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 2000,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+      }
+    },
+    "focusProfileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "revision"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "controlsRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "revision"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "segment IDs and sequence numbers are unique",
+    "segmentSequence contains every segment exactly once in sequence order",
+    "dependencies refer only to earlier segments",
+    "custom task identifiers match the custom discriminant",
+    "all timing ranges are ordered"
+  ]
+}
