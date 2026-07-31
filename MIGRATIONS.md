@@ -194,7 +194,7 @@ Non-breaking additions — existing v2 data loads unchanged (`isAppState` is len
 old states have no `stars` keys and fall back to runtime defaults):
 
 - `Profile.stars?: StarState` — the kid's wallet: `{ balance, lifetimeEarned,
-ledger, pendingRedemptions }`. `undefined` until her first star is earned.
+  ledger, pendingRedemptions }`. `undefined` until her first star is earned.
   The ledger is APPEND-ONLY; `balance` must always equal the ledger sum. A
   mismatch is surfaced in the Grown-Ups panel and NEVER silently repaired.
 - `Profile.coolStars?: boolean` — grade-6 "cool" opt-in (default off/undefined).
@@ -216,7 +216,7 @@ old profiles have no `reading` key and fall back to `defaultReadingState()`):
   `{ sessions, seenPassageIds, calibrations, lastReadDate? }`. `undefined` until
   her first reading session. `sessions` is APPEND-ONLY; each logs
   `{ date, passageId, mode: estimated|assessed|manual, wcpm, wordsPracticed[],
-durationSec }`. WCPM is an ESTIMATE (browser recognition + alignment) unless
+  durationSec }`. WCPM is an ESTIMATE (browser recognition + alignment) unless
   `mode==='manual'` (Dad-counted). `calibrations` holds Dad's ground-truth checks.
 
 No `schemaVersion` bump (follows the M2/M4/MT-1/MS/SE-A additive-optional
@@ -263,12 +263,14 @@ not alter `public.profiles`, import local profiles, or change application
 The hardened Phase-0 contract requires active-household authorization,
 immutable student household IDs, history-preserving status/revocation
 transitions, canonical unpadded-Base64 Argon2id/scrypt verifier envelopes with
-no auxiliary credential JSON, lowercase hexadecimal SHA-256 session digests,
+decode/re-encode equality so unused-pad-bit aliases are rejected, no auxiliary
+credential JSON, lowercase hexadecimal SHA-256 session digests,
 the disjoint raw-token format
 `aca_stu_v1_<43-unpadded-base64url-characters>`, capability schema version 1,
 issuance-time/expiry/revocation checks, session-version invalidation,
-event-specific audit builders with sensitive value/reason rejection, explicit
-object grants, and real-role denial probes. Guardian removal means relationship
+event-specific audit builders with sensitive value/reason and four-digit
+raw-PIN rejection, explicit object grants, and real-role denial probes. Guardian
+removal means relationship
 revocation while the referenced Auth identity is retained; direct Auth deletion
 is deferred. Current subject enrollments are idempotent per student, school
 year, subject, course, and curriculum version; completed/withdrawn/archived
@@ -302,6 +304,11 @@ order:
 Explicit transaction boundaries also make the complete probe file safe as one
 `psql`, SQL Editor, or multi-statement batch; do not rely on an external harness
 silently splitting it.
+
+`supabase/academy-student-identity.db.test.ts` runs the tracked two-pass
+migration/probe sequence and incompatible-object fixtures as part of the normal
+`npm test` gate; the identity SQL security contract is not a separately
+remembered manual test.
 
 Future profile migration requires a durable import ledger with source IDs and
 digests, target IDs, batch/status/retry/error metadata, bounded idempotent

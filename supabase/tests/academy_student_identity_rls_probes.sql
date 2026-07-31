@@ -1075,6 +1075,584 @@ select pg_temp.academy_expect_denied(
   array['23514']
 );
 
+create temporary table academy_audit_pin_baseline as
+select
+  (select count(*) from public.academy_subject_enrollments) as enrollment_count,
+  (select count(*) from public.academy_audit_events) as audit_count,
+  (select count(*) from academy_private.student_access_credentials) as credential_count,
+  (select count(*) from academy_private.student_session_grants) as session_count,
+  (
+    select lifecycle_status
+    from public.academy_students
+    where id = '00000000-0000-0000-0000-000000000101'
+  ) as student_status,
+  (
+    select session_version
+    from public.academy_students
+    where id = '00000000-0000-0000-0000-000000000101'
+  ) as student_session_version,
+  (
+    select status
+    from public.academy_households
+    where id = '00000000-0000-0000-0000-000000000033'
+  ) as household_status;
+
+select pg_temp.academy_expect_denied(
+  19701,
+  'audit-pin-subject-plain',
+  'Enrollment audit rejects a raw four-digit PIN in subject_key',
+  'service_role',
+  $sql$
+    insert into public.academy_subject_enrollments (
+      id, household_id, student_id, school_year_key, subject_key,
+      instructional_level, course_id, curriculum_version,
+      enrollment_status, placement_source
+    ) values (
+      '00000000-0000-0000-0000-000000019101',
+      '00000000-0000-0000-0000-000000000011',
+      '00000000-0000-0000-0000-000000000101',
+      '2026-2027', '1234', 'grade-4', 'pin-audit-plain', 'v1',
+      'active', 'parent'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19702,
+  'audit-pin-subject-spaced',
+  'Enrollment audit rejects a space-separated PIN in subject_key',
+  'service_role',
+  $sql$
+    insert into public.academy_subject_enrollments (
+      id, household_id, student_id, school_year_key, subject_key,
+      instructional_level, course_id, curriculum_version,
+      enrollment_status, placement_source
+    ) values (
+      '00000000-0000-0000-0000-000000019102',
+      '00000000-0000-0000-0000-000000000011',
+      '00000000-0000-0000-0000-000000000101',
+      '2026-2027', '1 2 3 4', 'grade-4', 'pin-audit-spaced', 'v1',
+      'active', 'parent'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19703,
+  'audit-pin-subject-trimmed',
+  'Enrollment audit rejects a PIN with leading and trailing spaces',
+  'service_role',
+  $sql$
+    insert into public.academy_subject_enrollments (
+      id, household_id, student_id, school_year_key, subject_key,
+      instructional_level, course_id, curriculum_version,
+      enrollment_status, placement_source
+    ) values (
+      '00000000-0000-0000-0000-000000019103',
+      '00000000-0000-0000-0000-000000000011',
+      '00000000-0000-0000-0000-000000000101',
+      '2026-2027', '  1234  ', 'grade-4', 'pin-audit-trimmed', 'v1',
+      'active', 'parent'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19704,
+  'audit-pin-subject-tabs',
+  'Enrollment audit rejects a tab-separated PIN in subject_key',
+  'service_role',
+  $sql$
+    insert into public.academy_subject_enrollments (
+      id, household_id, student_id, school_year_key, subject_key,
+      instructional_level, course_id, curriculum_version,
+      enrollment_status, placement_source
+    ) values (
+      '00000000-0000-0000-0000-000000019104',
+      '00000000-0000-0000-0000-000000000011',
+      '00000000-0000-0000-0000-000000000101',
+      '2026-2027', E'1\t2\t3\t4', 'grade-4', 'pin-audit-tabs', 'v1',
+      'active', 'parent'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19705,
+  'audit-pin-subject-newlines',
+  'Enrollment audit rejects a newline-separated PIN in subject_key',
+  'service_role',
+  $sql$
+    insert into public.academy_subject_enrollments (
+      id, household_id, student_id, school_year_key, subject_key,
+      instructional_level, course_id, curriculum_version,
+      enrollment_status, placement_source
+    ) values (
+      '00000000-0000-0000-0000-000000019105',
+      '00000000-0000-0000-0000-000000000011',
+      '00000000-0000-0000-0000-000000000101',
+      '2026-2027', E'1\n2\n3\n4', 'grade-4', 'pin-audit-newlines', 'v1',
+      'active', 'parent'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19706,
+  'audit-pin-level',
+  'Enrollment audit rejects a raw PIN in instructional_level',
+  'service_role',
+  $sql$
+    insert into public.academy_subject_enrollments (
+      id, household_id, student_id, school_year_key, subject_key,
+      instructional_level, course_id, curriculum_version,
+      enrollment_status, placement_source
+    ) values (
+      '00000000-0000-0000-0000-000000019106',
+      '00000000-0000-0000-0000-000000000011',
+      '00000000-0000-0000-0000-000000000101',
+      '2026-2027', 'science', '1234', 'pin-audit-level', 'v1',
+      'active', 'parent'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19707,
+  'audit-pin-course',
+  'Enrollment audit rejects a mixed-whitespace PIN in course_id',
+  'service_role',
+  $sql$
+    insert into public.academy_subject_enrollments (
+      id, household_id, student_id, school_year_key, subject_key,
+      instructional_level, course_id, curriculum_version,
+      enrollment_status, placement_source
+    ) values (
+      '00000000-0000-0000-0000-000000019107',
+      '00000000-0000-0000-0000-000000000011',
+      '00000000-0000-0000-0000-000000000101',
+      '2026-2027', 'history', 'grade-4', E'1 \t2 3\t4', 'v1',
+      'active', 'parent'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19708,
+  'audit-pin-curriculum',
+  'Enrollment audit rejects a raw PIN in curriculum_version',
+  'service_role',
+  $sql$
+    insert into public.academy_subject_enrollments (
+      id, household_id, student_id, school_year_key, subject_key,
+      instructional_level, course_id, curriculum_version,
+      enrollment_status, placement_source
+    ) values (
+      '00000000-0000-0000-0000-000000019108',
+      '00000000-0000-0000-0000-000000000011',
+      '00000000-0000-0000-0000-000000000101',
+      '2026-2027', 'geography', 'grade-4', 'geo-grade-4', '1234',
+      'active', 'parent'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19709,
+  'audit-pin-status',
+  'Enrollment operation rejects PIN material in a status field',
+  'service_role',
+  $sql$
+    insert into public.academy_subject_enrollments (
+      id, household_id, student_id, school_year_key, subject_key,
+      instructional_level, course_id, curriculum_version,
+      enrollment_status, placement_source
+    ) values (
+      '00000000-0000-0000-0000-000000019109',
+      '00000000-0000-0000-0000-000000000011',
+      '00000000-0000-0000-0000-000000000101',
+      '2026-2027', 'civics', 'grade-4', 'civics-grade-4', 'v1',
+      '1234', 'parent'
+    )
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19710,
+  'audit-pin-reason-plain',
+  'Household status audit rejects a raw PIN reason',
+  'service_role',
+  $sql$
+    update public.academy_households
+    set status = 'archived', status_reason = '1234'
+    where id = '00000000-0000-0000-0000-000000000033'
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19711,
+  'audit-pin-reason-spaced',
+  'Household status audit rejects a space-separated PIN reason',
+  'service_role',
+  $sql$
+    update public.academy_households
+    set status = 'archived', status_reason = '1 2 3 4'
+    where id = '00000000-0000-0000-0000-000000000033'
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19712,
+  'audit-pin-reason-tabs',
+  'Household status audit rejects a tab-separated PIN reason',
+  'service_role',
+  $sql$
+    update public.academy_households
+    set status = 'archived', status_reason = E'1\t2\t3\t4'
+    where id = '00000000-0000-0000-0000-000000000033'
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19713,
+  'audit-pin-reason-newlines',
+  'Household status audit rejects a newline-separated PIN reason',
+  'service_role',
+  $sql$
+    update public.academy_households
+    set status = 'archived', status_reason = E'1\n2\n3\n4'
+    where id = '00000000-0000-0000-0000-000000000033'
+  $sql$,
+  array['23514']
+);
+select pg_temp.academy_expect_denied(
+  19714,
+  'audit-pin-reason-embedded',
+  'Household status audit rejects an embedded four-digit PIN reason',
+  'service_role',
+  $sql$
+    update public.academy_households
+    set status = 'archived', status_reason = 'Credential reset for 1234'
+    where id = '00000000-0000-0000-0000-000000000033'
+  $sql$,
+  array['23514']
+);
+
+select pg_temp.academy_record(
+  19715,
+  'audit-pin-positive',
+  'Approved identifiers, reason text, status, and nonsecret audit values remain valid',
+  academy_private.security_text_is_safe('mathematics', 240)
+    and academy_private.audit_reason_is_safe(
+      'Reviewed placement correction',
+      240
+    )
+    and academy_private.audit_details_are_safe(
+      'subject_enrollment.created',
+      jsonb_build_object(
+        'subject_key', 'mathematics',
+        'school_year_key', '2026-2027',
+        'instructional_level', 'grade-4',
+        'course_id', 'math-grade-4',
+        'curriculum_version', '2026.1',
+        'status', 'active',
+        'placement_source', 'parent'
+      )
+    ),
+  null
+);
+select pg_temp.academy_record(
+  19716,
+  'audit-pin-atomicity',
+  'Rejected PIN-bearing audit operations leave identity and security state unchanged',
+  (
+    select
+      baseline.enrollment_count =
+        (select count(*) from public.academy_subject_enrollments)
+      and baseline.audit_count =
+        (select count(*) from public.academy_audit_events)
+      and baseline.credential_count =
+        (select count(*) from academy_private.student_access_credentials)
+      and baseline.session_count =
+        (select count(*) from academy_private.student_session_grants)
+      and baseline.student_status = (
+        select lifecycle_status
+        from public.academy_students
+        where id = '00000000-0000-0000-0000-000000000101'
+      )
+      and baseline.student_session_version = (
+        select session_version
+        from public.academy_students
+        where id = '00000000-0000-0000-0000-000000000101'
+      )
+      and baseline.household_status = (
+        select status
+        from public.academy_households
+        where id = '00000000-0000-0000-0000-000000000033'
+      )
+      and not exists (
+        select 1
+        from public.academy_subject_enrollments
+        where id between
+          '00000000-0000-0000-0000-000000019101'::uuid
+          and '00000000-0000-0000-0000-000000019109'::uuid
+      )
+    from pg_temp.academy_audit_pin_baseline as baseline
+  ),
+  null
+);
+
+create temporary table academy_audit_event_contract (
+  contract_order integer primary key,
+  event_type text not null,
+  target_kind text not null,
+  details jsonb not null
+) on commit drop;
+
+insert into pg_temp.academy_audit_event_contract (
+  contract_order,
+  event_type,
+  target_kind,
+  details
+)
+values
+  (1, 'household.created', 'household', '{"status":"active"}'),
+  (
+    2,
+    'household.status_changed',
+    'household',
+    '{"from":"active","to":"archived"}'
+  ),
+  (3, 'membership.invited', 'membership', '{"status":"invited"}'),
+  (4, 'membership.activated', 'membership', '{"status":"active"}'),
+  (5, 'membership.revoked', 'membership', '{"status":"revoked"}'),
+  (6, 'student.created', 'student', '{"status":"active"}'),
+  (
+    7,
+    'student.lifecycle_changed',
+    'student',
+    '{"from":"active","to":"paused"}'
+  ),
+  (
+    8,
+    'student.external_exit',
+    'student',
+    '{"from":"active","to":"transferred"}'
+  ),
+  (
+    9,
+    'student.session_version_changed',
+    'student',
+    '{"version_from":1,"version_to":2}'
+  ),
+  (
+    10,
+    'student.session_version_reset',
+    'student',
+    '{"version":2}'
+  ),
+  (
+    11,
+    'guardian_access.granted',
+    'guardian_access',
+    '{
+      "membership_id":"00000000-0000-0000-0000-0000000000a2",
+      "permission_level":"viewer"
+    }'
+  ),
+  (
+    12,
+    'guardian_access.changed',
+    'guardian_access',
+    '{
+      "membership_id":"00000000-0000-0000-0000-0000000000a2",
+      "status_from":"active",
+      "status_to":"revoked",
+      "permission_from":"viewer",
+      "permission_to":"learning_manager"
+    }'
+  ),
+  (
+    13,
+    'subject_enrollment.created',
+    'subject_enrollment',
+    '{
+      "subject_key":"mathematics",
+      "school_year_key":"2026-2027",
+      "instructional_level":"grade-4",
+      "course_id":"math-grade-4",
+      "curriculum_version":"2026.1",
+      "status":"active",
+      "placement_source":"parent"
+    }'
+  ),
+  (
+    14,
+    'subject_enrollment.changed',
+    'subject_enrollment',
+    '{
+      "subject_key":"mathematics",
+      "status_from":"active",
+      "status_to":"paused",
+      "level_from":"grade-4",
+      "level_to":"grade-5",
+      "placement_source":"parent"
+    }'
+  ),
+  (
+    15,
+    'credential.created',
+    'credential',
+    '{"version":1,"status":"active","failed_attempts":0}'
+  ),
+  (
+    16,
+    'credential.failed_attempt',
+    'credential',
+    '{"version":1,"status":"active","failed_attempts":1}'
+  ),
+  (
+    17,
+    'credential.locked',
+    'credential',
+    '{"version":1,"status":"locked","failed_attempts":3}'
+  ),
+  (
+    18,
+    'credential.unlocked',
+    'credential',
+    '{"version":1,"status":"active","failed_attempts":0}'
+  ),
+  (
+    19,
+    'credential.reset_required',
+    'credential',
+    '{"version":1,"status":"reset_required","failed_attempts":3}'
+  ),
+  (
+    20,
+    'credential.replaced',
+    'credential',
+    '{"version":1,"status":"replaced","failed_attempts":0}'
+  ),
+  (
+    21,
+    'credential.revoked',
+    'credential',
+    '{"version":1,"status":"revoked","failed_attempts":0}'
+  ),
+  (
+    22,
+    'student_session.issued',
+    'student_session',
+    '{
+      "issuance_flow":"student_credential",
+      "expires_at":"2026-08-01T12:00:00+00:00",
+      "version":1,
+      "capability_schema_version":1
+    }'
+  ),
+  (
+    23,
+    'student_session.revoked',
+    'student_session',
+    '{"version":1}'
+  ),
+  (
+    24,
+    'student_session.expired',
+    'student_session',
+    '{"version":1}'
+  );
+
+do $academy_audit_event_pin_contract$
+declare
+  contract record;
+  positive_error text;
+  negative_state text;
+  negative_error text;
+begin
+  for contract in
+    select *
+    from pg_temp.academy_audit_event_contract
+    order by contract_order
+  loop
+    positive_error := null;
+    begin
+      perform academy_private.append_audit_event(
+        '00000000-0000-0000-0000-000000000011',
+        case
+          when contract.target_kind in (
+            'student',
+            'guardian_access',
+            'subject_enrollment',
+            'credential',
+            'student_session'
+          ) then '00000000-0000-0000-0000-000000000101'::uuid
+          else null
+        end,
+        null,
+        'trusted_server',
+        contract.target_kind,
+        '00000000-0000-0000-0000-000000000101',
+        contract.event_type,
+        'Approved audit contract probe',
+        '00000000-0000-0000-0000-00000000a111',
+        contract.details
+      );
+    exception when others then
+      get stacked diagnostics positive_error = message_text;
+    end;
+
+    perform pg_temp.academy_record(
+      19800 + contract.contract_order * 2,
+      'audit-event-positive-' || contract.contract_order::text,
+      contract.event_type || ' accepts only its approved nonsecret audit shape',
+      positive_error is null,
+      positive_error
+    );
+
+    negative_state := null;
+    negative_error := null;
+    begin
+      perform academy_private.append_audit_event(
+        '00000000-0000-0000-0000-000000000011',
+        case
+          when contract.target_kind in (
+            'student',
+            'guardian_access',
+            'subject_enrollment',
+            'credential',
+            'student_session'
+          ) then '00000000-0000-0000-0000-000000000101'::uuid
+          else null
+        end,
+        null,
+        'trusted_server',
+        contract.target_kind,
+        '00000000-0000-0000-0000-000000000101',
+        contract.event_type,
+        '1 2 3 4',
+        '00000000-0000-0000-0000-00000000a112',
+        contract.details
+      );
+    exception when others then
+      get stacked diagnostics
+        negative_state = returned_sqlstate,
+        negative_error = message_text;
+    end;
+
+    perform pg_temp.academy_record(
+      19801 + contract.contract_order * 2,
+      'audit-event-pin-denied-' || contract.contract_order::text,
+      contract.event_type || ' rejects PIN material in its reason',
+      positive_error is null and negative_state = '23514',
+      format('[%s] %s', negative_state, negative_error)
+    );
+  end loop;
+end;
+$academy_audit_event_pin_contract$;
+
 -- Valid credential fixtures use synthetic but structurally valid encodings.
 insert into academy_private.student_access_credentials (
   id,
@@ -1545,6 +2123,128 @@ select pg_temp.academy_expect_denied(
     )
   $sql$,
   array['23514']
+);
+
+select pg_temp.academy_record(
+  20881,
+  '20p-canonical-salt',
+  'Canonical salt passes while a pad-bit mutation decodes identically and fails',
+  pg_catalog.decode('dHR0dHR0dHR0dHR0dHR0dA==', 'base64')
+    = pg_catalog.decode('dHR0dHR0dHR0dHR0dHR0dB==', 'base64')
+    and academy_private.is_canonical_unpadded_base64(
+      'dHR0dHR0dHR0dHR0dHR0dA',
+      16,
+      64
+    )
+    and not academy_private.is_canonical_unpadded_base64(
+      'dHR0dHR0dHR0dHR0dHR0dB',
+      16,
+      64
+    ),
+  null
+);
+select pg_temp.academy_record(
+  20882,
+  '20p-canonical-hash',
+  'Canonical hash passes while a pad-bit mutation decodes identically and fails',
+  pg_catalog.decode(
+    'YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI=',
+    'base64'
+  ) = pg_catalog.decode(
+    'YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJ=',
+    'base64'
+  )
+    and academy_private.is_canonical_unpadded_base64(
+      'YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI',
+      32,
+      64
+    )
+    and not academy_private.is_canonical_unpadded_base64(
+      'YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJ',
+      32,
+      64
+    ),
+  null
+);
+select pg_temp.academy_record(
+  20883,
+  '20p-argon2id-canonical',
+  'Full Argon2id verifier accepts only canonical unpadded components',
+  academy_private.is_valid_student_verifier(
+    'argon2id',
+    '$argon2id$v=19$m=65536,t=3,p=1$dHR0dHR0dHR0dHR0dHR0dA$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI'
+  )
+    and not academy_private.is_valid_student_verifier(
+      'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$dHR0dHR0dHR0dHR0dHR0dB$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI'
+    )
+    and not academy_private.is_valid_student_verifier(
+      'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$dHR0dHR0dHR0dHR0dHR0dA$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJ'
+    ),
+  null
+);
+select pg_temp.academy_record(
+  20884,
+  '20p-scrypt-canonical',
+  'Full scrypt verifier accepts only canonical unpadded components',
+  academy_private.is_valid_student_verifier(
+    'scrypt',
+    '$scrypt$v=1$ln=15,r=8,p=1$dHR0dHR0dHR0dHR0dHR0dA$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI'
+  )
+    and not academy_private.is_valid_student_verifier(
+      'scrypt',
+      '$scrypt$v=1$ln=15,r=8,p=1$dHR0dHR0dHR0dHR0dHR0dB$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI'
+    )
+    and not academy_private.is_valid_student_verifier(
+      'scrypt',
+      '$scrypt$v=1$ln=15,r=8,p=1$dHR0dHR0dHR0dHR0dHR0dA$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJ'
+    ),
+  null
+);
+select pg_temp.academy_record(
+  20885,
+  '20p-argon2id-invalid-encodings',
+  'Argon2id rejects padding, whitespace, invalid alphabet, and wrong lengths',
+  not academy_private.is_valid_student_verifier(
+    'argon2id',
+    '$argon2id$v=19$m=65536,t=3,p=1$dHR0dHR0dHR0dHR0dHR0dA==$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI'
+  )
+    and not academy_private.is_valid_student_verifier(
+      'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$dHR0 dHR0dHR0dHR0dHR0dA$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI'
+    )
+    and not academy_private.is_valid_student_verifier(
+      'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$dHR0dHR0dHR0dHR0dHR0d-$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI'
+    )
+    and not academy_private.is_valid_student_verifier(
+      'argon2id',
+      '$argon2id$v=19$m=65536,t=3,p=1$YWJjZA$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI'
+    ),
+  null
+);
+select pg_temp.academy_record(
+  20886,
+  '20p-scrypt-invalid-encodings',
+  'Scrypt rejects padding, whitespace, invalid alphabet, and wrong lengths',
+  not academy_private.is_valid_student_verifier(
+    'scrypt',
+    '$scrypt$v=1$ln=15,r=8,p=1$dHR0dHR0dHR0dHR0dHR0dA==$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI'
+  )
+    and not academy_private.is_valid_student_verifier(
+      'scrypt',
+      '$scrypt$v=1$ln=15,r=8,p=1$dHR0dHR0dHR0dHR0dHR0dA$YmJi YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmI'
+    )
+    and not academy_private.is_valid_student_verifier(
+      'scrypt',
+      '$scrypt$v=1$ln=15,r=8,p=1$dHR0dHR0dHR0dHR0dHR0dA$YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYm-'
+    )
+    and not academy_private.is_valid_student_verifier(
+      'scrypt',
+      '$scrypt$v=1$ln=15,r=8,p=1$dHR0dHR0dHR0dHR0dHR0dA$YWJjZA'
+    ),
+  null
 );
 select pg_temp.academy_expect_denied(
   2089,
