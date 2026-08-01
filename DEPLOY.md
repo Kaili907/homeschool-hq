@@ -226,3 +226,18 @@ pass.
 ## Rolling back
 Netlify → **Deploys** → pick a previous green deploy → **Publish deploy**. Or in
 git, deploy an older tag by pushing it as `main`.
+
+## Study Engine database deployment hold
+
+Session 13 does not authorize deployment or hosted database access. Do not run
+`supabase link`, `supabase db push`, `supabase migration up`, or hosted `psql`
+for the Study Engine migrations from this worktree.
+
+A later database change window must first complete
+`docs/study-engine-persistence/hosted-preflight.md`, verify the exact Manuel
+Academy project and backup, reconcile historical checksums and live object
+definitions, apply storage then authorization as `postgres`, and run hosted
+guardian/student/service-role probes while every Study consumer remains off.
+Activation requires a separate decision after those probes pass. Database
+rollback is backup/restore or a reviewed additive compensating migration—not a
+Netlify rollback and not an ad hoc table drop.
