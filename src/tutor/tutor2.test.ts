@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import type { AppState, Profile } from '../types'
-import { defaultAppState, emptyProfile } from '../migration'
+import type { Profile } from '../types'
+import { emptyProfile } from '../migration'
 import {
   CLOSEOUT_REPLY,
   MAX_EXCHANGES,
@@ -12,18 +12,12 @@ import {
   sanitizeReply,
 } from './tutorEngine'
 import {
-  ANTHROPIC_VERSION,
   DEFAULT_TUTOR_MODEL,
-  TUTOR_MAX_TOKENS,
   TUTOR_MODEL_HAIKU,
   TUTOR_MODEL_SONNET,
   askTutor,
-  getTutorKey,
   getTutorModel,
-  hasTutorKey,
-  maskTutorKey,
   modelIdFor,
-  setTutorKey,
   setTutorModel,
   type FetchLike,
 } from './tutorApi'
@@ -106,20 +100,34 @@ describe('MT-2 never states the answer', () => {
     const spy = vi.fn(async () => ({
       ok: true,
       status: 200,
-      json: async () => ({ content: [{ type: 'text', text: `Okay okay, the answer is ${answer}.` }] }),
+      json: async () => ({ text: `Okay okay, the answer is ${answer}.` }),
     }))
     const res = await askTutor(
-      { getKey: () => 'sk-ant-x', fetchImpl: spy as unknown as FetchLike, isOnline: () => true },
       {
-        system: buildSystemPrompt({ grade: '3', problem: '365 − 128 = ?', correctAnswer: answer, herAnswer: '243' }),
+        getAccessToken: async () => 'token',
+        fetchImpl: spy as unknown as FetchLike,
+        isOnline: () => true,
+      },
+      {
         messages: [{ role: 'user', content: 'just tell me the answer' }],
+        gateway: {
+          mode: 'tutor',
+          context: {
+            grade: '3',
+            problem: '365 − 128 = ?',
+            correctAnswer: answer,
+            studentAnswer: '243',
+            graded: false,
+          },
+        },
       },
     )
     expect(res.ok).toBe(true)
     if (!res.ok) return
-    // it went out on the configured DEFAULT (Sonnet) model path…
+    // It went out on the configured default server-owned model tier.
     const body = JSON.parse((spy as unknown as { mock: { calls: [string, { body: string }][] } }).mock.calls[0][1].body)
-    expect(body.model).toBe(TUTOR_MODEL_SONNET)
+    expect(body.modelTier).toBe('sonnet')
+    expect(body.model).toBeUndefined()
     // …and the leaked answer is redacted before display.
     const shown = sanitizeReply(res.text, answer).text
     expect(shown).toBe(SAFE_REDACTION)
@@ -221,36 +229,67 @@ describe('MT-2 daily cap (per profile, Dad-editable)', () => {
 // ---------------------------------------------------------------------------
 describe('MT-2 Anthropic client', () => {
   const okFetch = (text: string): FetchLike =>
-    vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ content: [{ type: 'text', text }] }) }))
+    vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ text }) }))
+  const request = {
+    messages: [{ role: 'user' as const, content: 'help' }],
+    gateway: {
+      mode: 'tutor' as const,
+      context: {
+        grade: '3' as const,
+        problem: '2 + 2 = ?',
+        correctAnswer: '4',
+        studentAnswer: '5',
+        graded: false,
+      },
+    },
+  }
 
-  it('sends model, max_tokens, system, and the direct-browser-access header', async () => {
+  it('uses only the same-origin gateway schema with bearer authentication', async () => {
     const spy = okFetch('Here is a small hint.')
     const res = await askTutor(
-      { getKey: () => 'sk-ant-xyz', fetchImpl: spy, isOnline: () => true },
-      { system: 'SYS', messages: [{ role: 'user', content: 'help' }] },
+      { getAccessToken: async () => 'access-token', fetchImpl: spy, isOnline: () => true },
+      request,
     )
     expect(res).toEqual({ ok: true, text: 'Here is a small hint.' })
     const [url, init] = (spy as unknown as { mock: { calls: [string, any][] } }).mock.calls[0]
-    expect(url).toContain('/v1/messages')
-    expect(init.headers['anthropic-dangerous-direct-browser-access']).toBe('true')
-    expect(init.headers['anthropic-version']).toBe(ANTHROPIC_VERSION)
-    expect(init.headers['x-api-key']).toBe('sk-ant-xyz')
+    expect(url).toBe('/api/anthropic/v1/messages')
+    expect(init.headers).toEqual({
+      Authorization: 'Bearer access-token',
+      'content-type': 'application/json',
+    })
     const body = JSON.parse(init.body)
-    expect(body.model).toBe(TUTOR_MODEL_SONNET) // Sonnet is the default model path
-    expect(body.max_tokens).toBe(TUTOR_MAX_TOKENS)
-    expect(body.system).toBe('SYS')
+    expect(body.modelTier).toBe('sonnet')
+    expect(body.context).toEqual(request.gateway.context)
+    expect(body.model).toBeUndefined()
+    expect(body.system).toBeUndefined()
   })
 
-  it('degrades: no key / offline / http error never throw, and no-key never calls fetch', async () => {
+  it('degrades without a session, offline, and on typed gateway errors without throwing', async () => {
     const spy = okFetch('unused')
-    expect(await askTutor({ getKey: () => null, fetchImpl: spy, isOnline: () => true }, { system: 's', messages: [] }))
-      .toEqual({ ok: false, reason: 'no-key' })
+    expect(
+      await askTutor(
+        { getAccessToken: async () => null, fetchImpl: spy, isOnline: () => true },
+        request,
+      ),
+    ).toEqual({ ok: false, reason: 'unauthenticated' })
     expect((spy as unknown as { mock: { calls: unknown[] } }).mock.calls.length).toBe(0)
-    expect(await askTutor({ getKey: () => 'k', fetchImpl: spy, isOnline: () => false }, { system: 's', messages: [] }))
-      .toEqual({ ok: false, reason: 'offline' })
-    const errFetch: FetchLike = async () => ({ ok: false, status: 500, json: async () => ({}) })
-    expect(await askTutor({ getKey: () => 'k', fetchImpl: errFetch, isOnline: () => true }, { system: 's', messages: [] }))
-      .toEqual({ ok: false, reason: 'error' })
+    expect(
+      await askTutor(
+        { getAccessToken: async () => 'token', fetchImpl: spy, isOnline: () => false },
+        request,
+      ),
+    ).toEqual({ ok: false, reason: 'offline' })
+    const limitedFetch: FetchLike = async () => ({
+      ok: false,
+      status: 429,
+      json: async () => ({ error: { code: 'usage_limit' } }),
+    })
+    expect(
+      await askTutor(
+        { getAccessToken: async () => 'token', fetchImpl: limitedFetch, isOnline: () => true },
+        request,
+      ),
+    ).toEqual({ ok: false, reason: 'usage_limit' })
   })
 
   it('NAPPING_REPLY is the spec degradation line', () => {
@@ -258,9 +297,6 @@ describe('MT-2 Anthropic client', () => {
   })
 })
 
-// ---------------------------------------------------------------------------
-// KEY STORAGE — outside AppState → never in a backup export; keyless app works.
-// ---------------------------------------------------------------------------
 class MemStorage {
   private m = new Map<string, string>()
   get length() { return this.m.size }
@@ -270,45 +306,6 @@ class MemStorage {
   removeItem(k: string) { this.m.delete(k) }
   key(i: number) { return Array.from(this.m.keys())[i] ?? null }
 }
-
-describe('MT-2 API key lives outside AppState → excluded from exports', () => {
-  beforeEach(() => {
-    ;(globalThis as unknown as { localStorage: Storage }).localStorage = new MemStorage() as unknown as Storage
-  })
-  afterEach(() => {
-    delete (globalThis as unknown as { localStorage?: Storage }).localStorage
-  })
-
-  it('a saved key is retrievable and masked, but never appears in the serialized state', () => {
-    const SECRET = 'sk-ant-SUPER-SECRET-abc123'
-    setTutorKey(SECRET)
-    expect(hasTutorKey()).toBe(true)
-    expect(getTutorKey()).toBe(SECRET)
-    expect(maskTutorKey(SECRET)).not.toContain('SECRET')
-
-    // Build the object exportAllBackup serializes (the AppState), with a real chat on a profile.
-    let state: AppState = defaultAppState()
-    const chat = saveChat(
-      state.profiles.p1,
-      {
-        id: 'c1', skillId: 'addsub', grade: '3', day: DAY, startedTs: NOON,
-        problem: '365 − 128 = ?', correctAnswer: '237', herAnswer: '243',
-        messages: [{ role: 'kid', text: 'i am stuck', ts: NOON }],
-      },
-      NOON,
-    )
-    state = { ...state, profiles: { ...state.profiles, p1: chat } }
-    const exported = JSON.stringify(state)
-    expect(exported).toContain('365 − 128 = ?') // the transcript IS exported
-    expect(exported).not.toContain(SECRET) // the key is NOT
-  })
-
-  it('keyless: the key store returns null and nothing throws (app fully functional)', () => {
-    expect(getTutorKey()).toBe(null)
-    expect(hasTutorKey()).toBe(false)
-    expect(maskTutorKey(null)).toBe('')
-  })
-})
 
 // ---------------------------------------------------------------------------
 // MODEL CHOICE — Sonnet default, Dad-switchable, one id constant per option.
@@ -329,20 +326,38 @@ describe('MT-2 tutor model choice', () => {
     expect(modelIdFor('haiku')).toBe(TUTOR_MODEL_HAIKU)
   })
 
-  it("persists Dad's switch to Haiku, and askTutor sends that id", async () => {
+  it("persists Dad's switch to Haiku, and askTutor sends only that tier", async () => {
     setTutorModel('haiku')
     expect(getTutorModel()).toBe('haiku')
     const spy = vi.fn(async () => ({
       ok: true,
       status: 200,
-      json: async () => ({ content: [{ type: 'text', text: 'hint' }] }),
+      json: async () => ({ text: 'hint' }),
     }))
     await askTutor(
-      { getKey: () => 'k', fetchImpl: spy as unknown as FetchLike, isOnline: () => true, modelId: modelIdFor(getTutorModel()) },
-      { system: 's', messages: [] },
+      {
+        getAccessToken: async () => 'token',
+        fetchImpl: spy as unknown as FetchLike,
+        isOnline: () => true,
+        modelId: modelIdFor(getTutorModel()),
+      },
+      {
+        messages: [{ role: 'user', content: 'help' }],
+        gateway: {
+          mode: 'tutor',
+          context: {
+            grade: '3',
+            problem: '2 + 2 = ?',
+            correctAnswer: '4',
+            studentAnswer: '5',
+            graded: false,
+          },
+        },
+      },
     )
     const body = JSON.parse((spy as unknown as { mock: { calls: [string, { body: string }][] } }).mock.calls[0][1].body)
-    expect(body.model).toBe(TUTOR_MODEL_HAIKU)
+    expect(body.modelTier).toBe('haiku')
+    expect(body.model).toBeUndefined()
   })
 })
 

@@ -1,27 +1,37 @@
 import { describe, expect, it, vi } from 'vitest'
 import { askTutor, type FetchLike as JsonFetch } from './tutor/tutorApi'
 import {
+  VoiceGatewayError,
   createElevenLabsSynth,
   createMemoryCache,
   type FetchLike as BinFetch,
   type UsageMeter,
 } from './tutor/voice'
 
-// ---------------------------------------------------------------------------
-// D1 deploy: proxy mode drops the client key + browser headers; the serverless
-// function injects the key server-side. Direct mode is unchanged.
-// ---------------------------------------------------------------------------
-
 const meter = (): UsageMeter => ({
   chars: () => 0,
-  cap: () => 90000,
+  cap: () => 90_000,
   month: () => '2026-07',
   add: () => {},
   setCap: () => {},
   overCap: () => false,
 })
 
-describe('secured Anthropic proxy client', () => {
+const tutorRequest = {
+  messages: [{ role: 'user' as const, content: 'help' }],
+  gateway: {
+    mode: 'tutor' as const,
+    context: {
+      grade: '3' as const,
+      problem: '2 + 2 = ?',
+      correctAnswer: '4',
+      studentAnswer: '5',
+      graded: false,
+    },
+  },
+}
+
+describe('secured Anthropic gateway client', () => {
   const okJson = (text: string): JsonFetch =>
     vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ text }) }))
 
@@ -29,34 +39,17 @@ describe('secured Anthropic proxy client', () => {
     const spy = okJson('a hint')
     const result = await askTutor(
       {
-        getKey: () => null,
         getAccessToken: async () => 'SUPABASE_ACCESS_TOKEN',
         fetchImpl: spy,
         isOnline: () => true,
-        endpointBase: '/api/anthropic',
       },
-      {
-        system: 'client system must never reach the gateway',
-        messages: [{ role: 'user', content: 'help' }],
-        gateway: {
-          mode: 'tutor',
-          context: {
-            grade: '3',
-            problem: '2 + 2 = ?',
-            correctAnswer: '4',
-            studentAnswer: '5',
-            graded: false,
-          },
-        },
-      },
+      tutorRequest,
     )
     expect(result).toEqual({ ok: true, text: 'a hint' })
 
     const [url, init] = (
       spy as unknown as {
-        mock: {
-          calls: [string, { headers: Record<string, string>; body: string }][]
-        }
+        mock: { calls: [string, { headers: Record<string, string>; body: string }][] }
       }
     ).mock.calls[0]
     expect(url).toBe('/api/anthropic/v1/messages')
@@ -64,85 +57,60 @@ describe('secured Anthropic proxy client', () => {
       Authorization: 'Bearer SUPABASE_ACCESS_TOKEN',
       'content-type': 'application/json',
     })
-    const body = JSON.parse(init.body)
-    expect(body).toEqual({
+    expect(JSON.parse(init.body)).toEqual({
       mode: 'tutor',
       modelTier: 'sonnet',
-      context: {
-        grade: '3',
-        problem: '2 + 2 = ?',
-        correctAnswer: '4',
-        studentAnswer: '5',
-        graded: false,
-      },
-      messages: [{ role: 'user', content: 'help' }],
+      context: tutorRequest.gateway.context,
+      messages: tutorRequest.messages,
     })
-    expect(body.system).toBeUndefined()
-    expect(body.model).toBeUndefined()
-    expect(body.max_tokens).toBeUndefined()
-    expect(body.tools).toBeUndefined()
   })
 
   it('fails closed without a Supabase token and never calls the gateway', async () => {
     const spy = okJson('unused')
     const result = await askTutor(
-      {
-        getKey: () => null,
-        getAccessToken: async () => null,
-        fetchImpl: spy,
-        isOnline: () => true,
-        endpointBase: '/api/anthropic',
-      },
-      {
-        system: 'unused',
-        messages: [{ role: 'user', content: 'help' }],
-        gateway: {
-          mode: 'tutor',
-          context: {
-            grade: '3',
-            problem: 'p',
-            correctAnswer: '1',
-            studentAnswer: '2',
-            graded: false,
-          },
-        },
-      },
+      { getAccessToken: async () => null, fetchImpl: spy, isOnline: () => true },
+      tutorRequest,
     )
     expect(result).toEqual({ ok: false, reason: 'unauthenticated' })
     expect(spy).not.toHaveBeenCalled()
   })
 
-  it('direct mode still requires the family key (regression)', async () => {
-    const res = await askTutor(
-      { getKey: () => null, fetchImpl: okJson('x'), isOnline: () => true, endpointBase: '' },
-      { system: 's', messages: [] },
-    )
-    expect(res).toEqual({ ok: false, reason: 'no-key' })
-  })
+  it.each(['unauthenticated', 'not_entitled', 'usage_limit', 'gateway_disabled'] as const)(
+    'surfaces the stable %s gateway error category',
+    async (code) => {
+      const fetchImpl: JsonFetch = async () => ({
+        ok: false,
+        status: code === 'usage_limit' ? 429 : 403,
+        json: async () => ({ error: { code } }),
+      })
+      await expect(
+        askTutor(
+          { getAccessToken: async () => 'token', fetchImpl, isOnline: () => true },
+          tutorRequest,
+        ),
+      ).resolves.toEqual({ ok: false, reason: code })
+    },
+  )
 })
 
-describe('secured TTS proxy client', () => {
+describe('secured TTS gateway client', () => {
   const okBin = (): BinFetch =>
     vi.fn(async () => ({ ok: true, status: 200, arrayBuffer: async () => new ArrayBuffer(8) }))
 
   it('uses one fixed operation with bearer auth and no provider settings', async () => {
     const spy = okBin()
     const synth = createElevenLabsSynth({
-      getKey: () => null,
       getAccessToken: async () => 'SUPABASE_ACCESS_TOKEN',
       fetchImpl: spy,
       isOnline: () => true,
       usage: meter(),
-      endpointBase: '/api/tts',
     })
-    expect(synth.available()).toBe(true) // proxy holds the key
+    expect(synth.available()).toBe(true)
     await synth.synthesize({ text: 'hello', voiceId: 'abc' })
 
     const [url, init] = (
       spy as unknown as {
-        mock: {
-          calls: [string, { headers: Record<string, string>; body: string }][]
-        }
+        mock: { calls: [string, { headers: Record<string, string>; body: string }][] }
       }
     ).mock.calls[0]
     expect(url).toBe('/api/tts/synthesize')
@@ -152,38 +120,45 @@ describe('secured TTS proxy client', () => {
       accept: 'audio/mpeg',
     })
     expect(JSON.parse(init.body)).toEqual({ text: 'hello', voiceId: 'abc' })
-    expect(init.body).not.toContain('model_id')
-    expect(init.body).not.toContain('output_format')
   })
 
   it('fails closed without a Supabase token and never calls the gateway', async () => {
     const spy = okBin()
     const synth = createElevenLabsSynth({
-      getKey: () => null,
       getAccessToken: async () => null,
       fetchImpl: spy,
       isOnline: () => true,
       usage: meter(),
-      endpointBase: '/api/tts',
     })
-    await expect(synth.synthesize({ text: 'hello', voiceId: 'abc' })).rejects.toThrow('unauthenticated')
+    await expect(synth.synthesize({ text: 'hello', voiceId: 'abc' })).rejects.toMatchObject({
+      code: 'unauthenticated',
+    })
     expect(spy).not.toHaveBeenCalled()
   })
 
-  it('direct mode still needs the local key', () => {
-    const synth = createElevenLabsSynth({
-      getKey: () => null,
-      fetchImpl: okBin(),
-      isOnline: () => true,
-      usage: meter(),
-      endpointBase: '',
-    })
-    expect(synth.available()).toBe(false)
-  })
+  it.each(['not_entitled', 'usage_limit', 'gateway_disabled'] as const)(
+    'surfaces the stable %s gateway error category',
+    async (code) => {
+      const synth = createElevenLabsSynth({
+        getAccessToken: async () => 'token',
+        fetchImpl: async () => ({
+          ok: false,
+          status: 403,
+          arrayBuffer: async () => new ArrayBuffer(0),
+          json: async () => ({ error: { code } }),
+        }),
+        isOnline: () => true,
+        usage: meter(),
+      })
+      await expect(synth.synthesize({ text: 'hello', voiceId: 'abc' })).rejects.toEqual(
+        new VoiceGatewayError(code),
+      )
+    },
+  )
 
-  it('the memory cache still works (unaffected by proxy mode)', async () => {
-    const c = createMemoryCache()
-    await c.put('k', new Blob(['x']))
-    expect(await c.get('k')).toBeDefined()
+  it('keeps the memory audio cache available behind the gateway', async () => {
+    const cache = createMemoryCache()
+    await cache.put('k', new Blob(['x']))
+    expect(await cache.get('k')).toBeDefined()
   })
 })

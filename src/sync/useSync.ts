@@ -12,6 +12,7 @@ import {
   waitForAppStatePersistence,
 } from '../appState'
 import type { AppState, Profile } from '../types'
+import { purgeVoiceCache } from '../tutor/voice'
 import {
   asSignedInUser,
   backupLocalForHousehold,
@@ -846,10 +847,13 @@ export function useSync(
     })
     const unsubscribe = onAuthSessionChange((_event, session) => {
       const next = userFromSession(session)
+      const previousUserId = userRef.current?.id ?? null
       const householdChanged =
-        (userRef.current?.id ?? null) !== (next?.id ?? null)
-      if (userRef.current?.id && householdChanged)
+        previousUserId !== (next?.id ?? null)
+      if (previousUserId && householdChanged) {
         abortOperation()
+        void purgeVoiceCache()
+      }
       if (householdChanged) setRecoveryReady(false)
       userRef.current = next
       if (mountedRef.current) setUser(next)
@@ -1191,6 +1195,7 @@ export function useSync(
       setDecision(null)
       setError(null)
     }
+    await purgeVoiceCache()
     await signOutRemote()
   }, [abortOperation])
 

@@ -89,6 +89,7 @@ The complete intended fresh-project chain is:
 1. `20260724074106_academy_profiles_base.sql`
 2. `20260724230000_academy_student_identity_foundation.sql`
 3. `20260726120000_academy_household_revision_cas.sql`
+4. `20260731120000_academy_gateway_usage.sql`
 
 This integration branch contains the exact independently reviewed migrations
 from commits `c84f377d4b73bb1876479bb21a043bf1b21ec328`,
@@ -150,6 +151,30 @@ concurrent identical retries. The exact Manuel Academy Supabase project is not
 yet verified, so the migration has not been applied to any hosted project.
 Hosted migration, role/JWT/PostgREST checks, and hosted two-client contention
 remain release gates; do not guess a project or paste the SQL manually.
+
+## Supabase: Academy gateway usage ledger (2026-07-31)
+
+Tracked migration:
+`supabase/migrations/20260731120000_academy_gateway_usage.sql`.
+
+The migration adds the server-only daily request ledger used by the Academy AI
+and TTS gateways:
+
+- `academy_gateway_usage` is keyed by authenticated user, UTC database day,
+  and the fixed `anthropic`/`tts` endpoint set;
+- RLS is enabled and forced, with all table and function access revoked from
+  `PUBLIC`, `anon`, and `authenticated`;
+- `service_role` alone receives the table privileges and RPC execution needed
+  by the serverless gateways;
+- `academy_consume_gateway_usage` is a `SECURITY DEFINER` function with a fixed
+  `pg_catalog` search path and one atomic `INSERT ... ON CONFLICT DO UPDATE`;
+- the request that reaches the configured cap succeeds, while later requests
+  return `false` without incrementing the stored count.
+
+Permanent local validation is in
+`supabase/academy-gateway-usage.db.test.ts`. It covers at-cap acceptance,
+over-cap rejection without mutation, UTC day rollover, and denial of direct
+client-role table and RPC access.
 
 ## v1 → v2 (M1 multi-profile, 2026-07-23)
 

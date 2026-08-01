@@ -1,16 +1,34 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   ANTHROPIC_MESSAGE_CHARS,
   ANTHROPIC_MESSAGE_LIMIT,
   ANTHROPIC_REQUEST_LIMIT_BYTES,
   SAFE_TUTOR_RESPONSE,
 } from '../../netlify/functions/_shared/anthropic-policy.js'
-import { createAnthropicHandler } from '../../netlify/functions/anthropic.js'
+import { GatewayError } from '../../netlify/functions/_shared/http.js'
+import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netlify/functions/anthropic.js'
 
 const ENV = Object.freeze({
   SUPABASE_URL: 'https://academy.supabase.co',
   SUPABASE_ANON_KEY: 'public-anon-key',
   ANTHROPIC_API_KEY: 'anthropic-provider-secret',
+  ACADEMY_AI_ENABLED: 'true',
+})
+
+function testAccess() {
+  return {
+    requireEntitlement: vi.fn(async () => undefined),
+    consumeUsage: vi.fn(async () => undefined),
+  }
+}
+
+function createAnthropicHandler(overrides = {}) {
+  return createBaseAnthropicHandler({ gatewayAccess: testAccess(), ...overrides })
+}
+
+afterEach(() => {
+  vi.useRealTimers()
+  vi.restoreAllMocks()
 })
 
 const tutorRequest = () => ({
@@ -65,6 +83,15 @@ function event(body = tutorRequest(), overrides = {}) {
 
 function responseJson(result) {
   return JSON.parse(result.body)
+}
+
+function installFakeAbortTimeout() {
+  vi.useFakeTimers()
+  vi.spyOn(AbortSignal, 'timeout').mockImplementation((milliseconds) => {
+    const controller = new AbortController()
+    setTimeout(() => controller.abort(new DOMException('timed out', 'TimeoutError')), milliseconds)
+    return controller.signal
+  })
 }
 
 function fetchRouter({
@@ -404,5 +431,150 @@ describe('authenticated Anthropic gateway', () => {
     })(event())
     expect(result.statusCode).toBe(429)
     expect(responseJson(result)).toEqual({ error: { code: 'usage_limit' } })
+  })
+
+  it.each(['1', 'true', 'TRUE', 'on', 'enabled', 'ENABLED'])(
+    'enables only an explicit allow value: %s',
+    async (value) => {
+      const result = await createAnthropicHandler({
+        fetchImpl: fetchRouter(),
+        env: { ...ENV, ACADEMY_AI_ENABLED: value },
+      })(event())
+      expect(result.statusCode).toBe(200)
+    },
+  )
+
+  it.each([undefined, '', '0', 'false', 'off', 'disabled', 'yes', ' true '])(
+    'fails closed for an unset or non-allow flag: %s',
+    async (value) => {
+      const env = { ...ENV }
+      if (value === undefined) delete env.ACADEMY_AI_ENABLED
+      else env.ACADEMY_AI_ENABLED = value
+      const fetchImpl = fetchRouter()
+      const result = await createAnthropicHandler({ fetchImpl, env })(event())
+      expect(result.statusCode).toBe(503)
+      expect(responseJson(result)).toEqual({ error: { code: 'gateway_disabled' } })
+      expect(fetchImpl).toHaveBeenCalledTimes(1)
+    },
+  )
+
+  it('rejects a valid token without an active household membership', async () => {
+    const access = testAccess()
+    access.requireEntitlement.mockRejectedValue(new GatewayError(403, 'not_entitled'))
+    const fetchImpl = fetchRouter()
+    const result = await createAnthropicHandler({ fetchImpl, env: ENV, gatewayAccess: access })(event())
+    expect(result.statusCode).toBe(403)
+    expect(responseJson(result)).toEqual({ error: { code: 'not_entitled' } })
+    expect(access.consumeUsage).not.toHaveBeenCalled()
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('accepts an active membership and reserves the configured per-user usage', async () => {
+    const access = testAccess()
+    const result = await createAnthropicHandler({
+      fetchImpl: fetchRouter(),
+      env: { ...ENV, ACADEMY_AI_DAILY_LIMIT: '73' },
+      gatewayAccess: access,
+    })(event())
+    expect(result.statusCode).toBe(200)
+    expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
+    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 73)
+  })
+
+  it('returns usage_limit before the provider call when the ledger is at cap', async () => {
+    const access = testAccess()
+    access.consumeUsage.mockRejectedValue(new GatewayError(429, 'usage_limit'))
+    const fetchImpl = fetchRouter()
+    const result = await createAnthropicHandler({ fetchImpl, env: ENV, gatewayAccess: access })(event())
+    expect(result.statusCode).toBe(429)
+    expect(responseJson(result)).toEqual({ error: { code: 'usage_limit' } })
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('times out Supabase auth verification after five seconds with fake timers', async () => {
+    installFakeAbortTimeout()
+    const fetchImpl = vi.fn((_url, init) =>
+      new Promise((_resolve, reject) => {
+        init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true })
+      }),
+    )
+    const pending = createAnthropicHandler({ fetchImpl, env: ENV })(event())
+    await vi.advanceTimersByTimeAsync(5_000)
+    const result = await pending
+    expect(result.statusCode).toBe(504)
+    expect(responseJson(result)).toEqual({ error: { code: 'upstream_timeout' } })
+  })
+
+  it('keeps the five-second Supabase timeout active while reading the auth body', async () => {
+    installFakeAbortTimeout()
+    const fetchImpl = vi.fn(async (_url, init) => ({
+      ok: true,
+      status: 200,
+      json: () =>
+        new Promise((_resolve, reject) => {
+          init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true })
+        }),
+    }))
+    const pending = createAnthropicHandler({ fetchImpl, env: ENV })(event())
+    await vi.advanceTimersByTimeAsync(5_000)
+    const result = await pending
+    expect(result.statusCode).toBe(504)
+    expect(responseJson(result)).toEqual({ error: { code: 'upstream_timeout' } })
+  })
+
+  it('times out Anthropic after thirty seconds with fake timers', async () => {
+    installFakeAbortTimeout()
+    const fetchImpl = vi.fn(async (url, init) => {
+      if (url === 'https://academy.supabase.co/auth/v1/user') {
+        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+      }
+      return new Promise((_resolve, reject) => {
+        init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true })
+      })
+    })
+    const pending = createAnthropicHandler({ fetchImpl, env: ENV })(event())
+    await vi.advanceTimersByTimeAsync(30_000)
+    const result = await pending
+    expect(result.statusCode).toBe(504)
+    expect(responseJson(result)).toEqual({ error: { code: 'upstream_timeout' } })
+  })
+
+  it('rejects declared and streamed Anthropic responses above 256 KiB', async () => {
+    const declaredFetch = fetchRouter()
+    declaredFetch.mockImplementation(async (url) => {
+      if (url === 'https://academy.supabase.co/auth/v1/user') {
+        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+      }
+      return new Response('{}', {
+        status: 200,
+        headers: { 'content-type': 'application/json', 'content-length': String(256 * 1024 + 1) },
+      })
+    })
+    const declared = await createAnthropicHandler({ fetchImpl: declaredFetch, env: ENV })(event())
+    expect(responseJson(declared)).toEqual({ error: { code: 'upstream_too_large' } })
+
+    declaredFetch.mockImplementation(async (url) => {
+      if (url === 'https://academy.supabase.co/auth/v1/user') {
+        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+      }
+      return new Response('{}', {
+        status: 200,
+        headers: { 'content-type': 'application/json', 'content-length': '9'.repeat(400) },
+      })
+    })
+    const enormousDeclared = await createAnthropicHandler({ fetchImpl: declaredFetch, env: ENV })(event())
+    expect(responseJson(enormousDeclared)).toEqual({ error: { code: 'upstream_too_large' } })
+
+    const streamedFetch = vi.fn(async (url) => {
+      if (url === 'https://academy.supabase.co/auth/v1/user') {
+        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+      }
+      return new Response(new Uint8Array(256 * 1024 + 1), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })
+    })
+    const streamed = await createAnthropicHandler({ fetchImpl: streamedFetch, env: ENV })(event())
+    expect(responseJson(streamed)).toEqual({ error: { code: 'upstream_too_large' } })
   })
 })

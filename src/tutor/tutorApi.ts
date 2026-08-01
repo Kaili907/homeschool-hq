@@ -1,24 +1,10 @@
-/**
- * MT-2 Anthropic client + key store — built to the SAME contract as the MT-V
- * ElevenLabs layer (src/tutor/voice.ts): the key lives in a dedicated localStorage
- * slot OUTSIDE AppState, so `exportAllBackup(state)` can never serialize it. The
- * fetch layer is dependency-injected (FetchLike) so tests run without a real key,
- * and the endpoint base is one swappable value for the future deploy proxy.
- */
+/** Same-origin client for the policy-owned Academy AI gateway. */
 
 import type { Grade } from '../types'
 import { getGatewayAccessToken } from './gatewayAuth'
 
-// ---------- API constants ----------
-
-// The tutor model — ONE constant per option (same pattern as ELEVENLABS_MODEL_ID).
-// Default is SONNET: the child-safety constraints (never give the answer, ≤3
-// sentences, grade-level vocabulary, escalate rather than absorb) are the core
-// deliverable, and constraint adherence under a persistent kid outranks per-call
-// cost at our volume (≤6 exchanges/question, 20 calls/girl/day). Dad can switch to
-// Haiku from the Grown-Ups tutor section after reading real transcripts.
-export const TUTOR_MODEL_SONNET = 'claude-sonnet-4-6' // stronger constraint-following (default)
-export const TUTOR_MODEL_HAIKU = 'claude-haiku-4-5' //   faster + cheaper (Dad opt-in)
+export const TUTOR_MODEL_SONNET = 'claude-sonnet-4-6'
+export const TUTOR_MODEL_HAIKU = 'claude-haiku-4-5'
 
 export type TutorModelChoice = 'sonnet' | 'haiku'
 export const DEFAULT_TUTOR_MODEL: TutorModelChoice = 'sonnet'
@@ -26,20 +12,10 @@ export function modelIdFor(choice: TutorModelChoice): string {
   return choice === 'haiku' ? TUTOR_MODEL_HAIKU : TUTOR_MODEL_SONNET
 }
 
-export const TUTOR_MAX_TOKENS = 300 // forces brevity
-export const ANTHROPIC_VERSION = '2023-06-01'
+/** Production always uses the same-origin gateway; there is no browser-provider path. */
+export const ANTHROPIC_ENDPOINT_BASE = '/api/anthropic'
 
-// '' → call Anthropic directly (acceptable on the family machine; key stays local).
-// D1 deploy: with the build-time flag VITE_USE_PROXY=true, this points at the
-// serverless proxy (netlify/functions/anthropic via the /api/anthropic redirect),
-// which injects the key server-side — the key never ships to the client. Empty
-// (local dev / no flag) keeps the direct-with-panel-key path. Only this one value
-// changes; the fetch layer below reads it and drops the client key in proxy mode.
-export const ANTHROPIC_ENDPOINT_BASE = import.meta.env.VITE_USE_PROXY === 'true' ? '/api/anthropic' : ''
-
-// ---------- local-storage backed key store (NEVER in AppState → never exported) ----------
-
-const KEY_LS = 'homeschool-hq:tutor:key'
+// The selected tier is a non-secret preference. The gateway owns provider credentials.
 const MODEL_LS = 'homeschool-hq:tutor:model'
 
 function ls(): Storage | null {
@@ -50,34 +26,6 @@ function ls(): Storage | null {
   }
 }
 
-export function getTutorKey(): string | null {
-  return ls()?.getItem(KEY_LS) ?? null
-}
-
-export function setTutorKey(k: string): void {
-  const s = ls()
-  if (!s) return
-  const t = k.trim()
-  if (t) s.setItem(KEY_LS, t)
-  else s.removeItem(KEY_LS)
-}
-
-export function clearTutorKey(): void {
-  ls()?.removeItem(KEY_LS)
-}
-
-export function hasTutorKey(): boolean {
-  return !!getTutorKey()
-}
-
-/** Masked display for the Grown-Ups field — the raw key is never rendered. */
-export function maskTutorKey(k: string | null): string {
-  if (!k) return ''
-  if (k.length <= 6) return '••••'
-  return `${k.slice(0, 6)}••••••${k.slice(-4)}`
-}
-
-/** The chosen tutor model, stored alongside the key (outside AppState). Defaults to Sonnet. */
 export function getTutorModel(): TutorModelChoice {
   return ls()?.getItem(MODEL_LS) === 'haiku' ? 'haiku' : DEFAULT_TUTOR_MODEL
 }
@@ -85,8 +33,6 @@ export function getTutorModel(): TutorModelChoice {
 export function setTutorModel(choice: TutorModelChoice): void {
   ls()?.setItem(MODEL_LS, choice)
 }
-
-// ---------- injectable fetch (JSON shape; tests inject a fake) ----------
 
 export type FetchLike = (
   url: string,
@@ -131,42 +77,30 @@ export type AcademyGatewayRequest =
       }
     }
 
+export type TutorApiFailureReason =
+  | 'unauthenticated'
+  | 'not_entitled'
+  | 'usage_limit'
+  | 'gateway_disabled'
+  | 'offline'
+  | 'error'
+
 export type TutorApiResult =
   | { ok: true; text: string }
-  | { ok: false; reason: 'no-key' | 'unauthenticated' | 'offline' | 'error' }
+  | { ok: false; reason: TutorApiFailureReason }
 
 export interface TutorApiDeps {
-  getKey: () => string | null
   getAccessToken?: () => Promise<string | null>
   fetchImpl: FetchLike
   isOnline: () => boolean
+  /** Test seam only; production uses ANTHROPIC_ENDPOINT_BASE. */
   endpointBase?: string
   modelId?: string
 }
 
 export interface TutorApiRequest {
-  /**
-   * Used only by direct local-family mode. Proxy mode never serializes this
-   * value; the gateway owns its system policy.
-   */
-  system: string
   messages: AnthropicMessage[]
-  /** Required in proxy mode; rebuilt into the gateway's exact allowlisted shape. */
-  gateway?: AcademyGatewayRequest
-}
-
-/** Extract the first text block from an Anthropic Messages response. */
-function firstText(data: unknown): string {
-  const content = (data as { content?: unknown })?.content
-  if (Array.isArray(content)) {
-    for (const block of content) {
-      if (block && typeof block === 'object' && (block as { type?: string }).type === 'text') {
-        const t = (block as { text?: unknown }).text
-        if (typeof t === 'string') return t
-      }
-    }
-  }
-  return ''
+  gateway: AcademyGatewayRequest
 }
 
 function gatewayText(data: unknown): string {
@@ -174,89 +108,63 @@ function gatewayText(data: unknown): string {
   return typeof text === 'string' ? text : ''
 }
 
-/**
- * One tutor turn. Returns a discriminated result so the UI can degrade gracefully:
- * no key / offline / any error → a caller-chosen napping line, never a thrown error.
- */
+function gatewayFailure(data: unknown): TutorApiResult {
+  const code = (data as { error?: { code?: unknown } })?.error?.code
+  if (
+    code === 'unauthenticated' ||
+    code === 'not_entitled' ||
+    code === 'usage_limit' ||
+    code === 'gateway_disabled'
+  ) {
+    return { ok: false, reason: code }
+  }
+  return { ok: false, reason: 'error' }
+}
+
+/** One gateway turn. Failures are typed so child-facing surfaces can degrade safely. */
 export async function askTutor(
   deps: TutorApiDeps,
   req: TutorApiRequest,
 ): Promise<TutorApiResult> {
-  const base = deps.endpointBase ?? ANTHROPIC_ENDPOINT_BASE
-  const proxyMode = base !== ''
-  const key = deps.getKey()
-  // Direct mode needs the family-machine key; proxy mode holds the key server-side.
-  if (!proxyMode && !key) return { ok: false, reason: 'no-key' }
+  const base = deps.endpointBase?.trim() || ANTHROPIC_ENDPOINT_BASE
   if (!deps.isOnline()) return { ok: false, reason: 'offline' }
-  const origin = base || 'https://api.anthropic.com'
-  if (proxyMode) {
-    if (!req.gateway) return { ok: false, reason: 'error' }
-    try {
-      const accessToken = await (deps.getAccessToken ?? getGatewayAccessToken)()
-      if (!accessToken) return { ok: false, reason: 'unauthenticated' }
-      const modelTier: TutorModelChoice = deps.modelId === TUTOR_MODEL_HAIKU ? 'haiku' : 'sonnet'
-      const response = await deps.fetchImpl(`${origin}/v1/messages`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          mode: req.gateway.mode,
-          modelTier,
-          context: req.gateway.context,
-          messages: req.messages.map((message) => ({
-            role: message.role,
-            content: message.content,
-          })),
-        }),
-      })
-      if (!response.ok) return { ok: false, reason: 'error' }
-      const text = gatewayText(await response.json()).trim()
-      return text ? { ok: true, text } : { ok: false, reason: 'error' }
-    } catch {
-      return { ok: false, reason: 'error' }
-    }
-  }
-  // Direct local-family mode retains the original own-key provider request.
-  const headers: Record<string, string> = {
-    'x-api-key': key as string,
-    'anthropic-version': ANTHROPIC_VERSION,
-    'content-type': 'application/json',
-    // Family-machine pattern only — do NOT ship to a public deploy (use the proxy).
-    'anthropic-dangerous-direct-browser-access': 'true',
-  }
+
   try {
-    const res = await deps.fetchImpl(`${origin}/v1/messages`, {
+    const accessToken = await (deps.getAccessToken ?? getGatewayAccessToken)()
+    if (!accessToken) return { ok: false, reason: 'unauthenticated' }
+    const modelTier: TutorModelChoice = deps.modelId === TUTOR_MODEL_HAIKU ? 'haiku' : 'sonnet'
+    const response = await deps.fetchImpl(`${base}/v1/messages`, {
       method: 'POST',
-      headers,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'content-type': 'application/json',
+      },
       body: JSON.stringify({
-        model: deps.modelId ?? modelIdFor(DEFAULT_TUTOR_MODEL),
-        max_tokens: TUTOR_MAX_TOKENS,
-        system: req.system,
-        messages: req.messages.map((m) => ({ role: m.role, content: m.content })),
+        mode: req.gateway.mode,
+        modelTier,
+        context: req.gateway.context,
+        messages: req.messages.map((message) => ({
+          role: message.role,
+          content: message.content,
+        })),
       }),
     })
-    if (!res.ok) return { ok: false, reason: 'error' }
-    const text = firstText(await res.json()).trim()
-    if (!text) return { ok: false, reason: 'error' }
-    return { ok: true, text }
+    const data = await response.json()
+    if (!response.ok) return gatewayFailure(data)
+    const text = gatewayText(data).trim()
+    return text ? { ok: true, text } : { ok: false, reason: 'error' }
   } catch {
     return { ok: false, reason: 'error' }
   }
 }
 
-// ---------- app-wide default deps (browser) ----------
-
 const isOnline = () => (typeof navigator === 'undefined' ? true : navigator.onLine)
 
-/** The default deps used by the real chat panel; tests build their own. */
 export function defaultTutorApiDeps(): TutorApiDeps {
   return {
-    getKey: getTutorKey,
     getAccessToken: getGatewayAccessToken,
     fetchImpl: (url, init) => fetch(url, init as RequestInit),
     isOnline,
-    modelId: modelIdFor(getTutorModel()), // Dad's Sonnet/Haiku choice
+    modelId: modelIdFor(getTutorModel()),
   }
 }

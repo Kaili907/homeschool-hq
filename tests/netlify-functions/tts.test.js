@@ -1,12 +1,30 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { TTS_REQUEST_LIMIT_BYTES, TTS_TEXT_LIMIT } from '../../netlify/functions/_shared/tts-policy.js'
-import { createTtsHandler } from '../../netlify/functions/tts.js'
+import { GatewayError } from '../../netlify/functions/_shared/http.js'
+import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
 
 const ENV = Object.freeze({
   SUPABASE_URL: 'https://academy.supabase.co',
   SUPABASE_ANON_KEY: 'public-anon-key',
   ELEVENLABS_API_KEY: 'elevenlabs-provider-secret',
   ELEVENLABS_ALLOWED_VOICE_IDS: 'voice-1,voice_2',
+  ACADEMY_TTS_ENABLED: 'enabled',
+})
+
+function testAccess() {
+  return {
+    requireEntitlement: vi.fn(async () => undefined),
+    consumeUsage: vi.fn(async () => undefined),
+  }
+}
+
+function createTtsHandler(overrides = {}) {
+  return createBaseTtsHandler({ gatewayAccess: testAccess(), ...overrides })
+}
+
+afterEach(() => {
+  vi.useRealTimers()
+  vi.restoreAllMocks()
 })
 
 function event(body = { text: 'Let us work through one small step.', voiceId: 'voice-1' }, overrides = {}) {
@@ -24,6 +42,15 @@ function event(body = { text: 'Let us work through one small step.', voiceId: 'v
 
 function responseJson(result) {
   return JSON.parse(result.body)
+}
+
+function installFakeAbortTimeout() {
+  vi.useFakeTimers()
+  vi.spyOn(AbortSignal, 'timeout').mockImplementation((milliseconds) => {
+    const controller = new AbortController()
+    setTimeout(() => controller.abort(new DOMException('timed out', 'TimeoutError')), milliseconds)
+    return controller.signal
+  })
 }
 
 function fetchRouter({
@@ -221,5 +248,120 @@ describe('authenticated TTS gateway', () => {
     })(event())
     expect(throttled.statusCode).toBe(429)
     expect(responseJson(throttled)).toEqual({ error: { code: 'usage_limit' } })
+  })
+
+  it.each(['1', 'true', 'TRUE', 'on', 'enabled', 'ENABLED'])(
+    'enables only an explicit allow value: %s',
+    async (value) => {
+      const result = await createTtsHandler({
+        fetchImpl: fetchRouter(),
+        env: { ...ENV, ACADEMY_TTS_ENABLED: value },
+      })(event())
+      expect(result.statusCode).toBe(200)
+    },
+  )
+
+  it.each([undefined, '', '0', 'false', 'off', 'disabled', 'yes', ' true '])(
+    'fails closed for an unset or non-allow flag: %s',
+    async (value) => {
+      const env = { ...ENV }
+      if (value === undefined) delete env.ACADEMY_TTS_ENABLED
+      else env.ACADEMY_TTS_ENABLED = value
+      const fetchImpl = fetchRouter()
+      const result = await createTtsHandler({ fetchImpl, env })(event())
+      expect(result.statusCode).toBe(503)
+      expect(responseJson(result)).toEqual({ error: { code: 'gateway_disabled' } })
+      expect(fetchImpl).toHaveBeenCalledTimes(1)
+    },
+  )
+
+  it('rejects a valid token without an active household membership', async () => {
+    const access = testAccess()
+    access.requireEntitlement.mockRejectedValue(new GatewayError(403, 'not_entitled'))
+    const fetchImpl = fetchRouter()
+    const result = await createTtsHandler({ fetchImpl, env: ENV, gatewayAccess: access })(event())
+    expect(result.statusCode).toBe(403)
+    expect(responseJson(result)).toEqual({ error: { code: 'not_entitled' } })
+    expect(access.consumeUsage).not.toHaveBeenCalled()
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('accepts an active membership and reserves the configured per-user usage', async () => {
+    const access = testAccess()
+    const result = await createTtsHandler({
+      fetchImpl: fetchRouter(),
+      env: { ...ENV, ACADEMY_TTS_DAILY_LIMIT: '125' },
+      gatewayAccess: access,
+    })(event())
+    expect(result.statusCode).toBe(200)
+    expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
+    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 125)
+  })
+
+  it('returns usage_limit before the provider call when the ledger is at cap', async () => {
+    const access = testAccess()
+    access.consumeUsage.mockRejectedValue(new GatewayError(429, 'usage_limit'))
+    const fetchImpl = fetchRouter()
+    const result = await createTtsHandler({ fetchImpl, env: ENV, gatewayAccess: access })(event())
+    expect(result.statusCode).toBe(429)
+    expect(responseJson(result)).toEqual({ error: { code: 'usage_limit' } })
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('times out Supabase auth verification after five seconds with fake timers', async () => {
+    installFakeAbortTimeout()
+    const fetchImpl = vi.fn((_url, init) =>
+      new Promise((_resolve, reject) => {
+        init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true })
+      }),
+    )
+    const pending = createTtsHandler({ fetchImpl, env: ENV })(event())
+    await vi.advanceTimersByTimeAsync(5_000)
+    const result = await pending
+    expect(result.statusCode).toBe(504)
+    expect(responseJson(result)).toEqual({ error: { code: 'upstream_timeout' } })
+  })
+
+  it('times out TTS after thirty seconds with fake timers', async () => {
+    installFakeAbortTimeout()
+    const fetchImpl = vi.fn(async (url, init) => {
+      if (url === 'https://academy.supabase.co/auth/v1/user') {
+        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+      }
+      return new Promise((_resolve, reject) => {
+        init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true })
+      })
+    })
+    const pending = createTtsHandler({ fetchImpl, env: ENV })(event())
+    await vi.advanceTimersByTimeAsync(30_000)
+    const result = await pending
+    expect(result.statusCode).toBe(504)
+    expect(responseJson(result)).toEqual({ error: { code: 'upstream_timeout' } })
+  })
+
+  it('rejects declared and streamed TTS responses above 4 MiB', async () => {
+    const declaredFetch = vi.fn(async (url) => {
+      if (url === 'https://academy.supabase.co/auth/v1/user') {
+        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+      }
+      return new Response(new Uint8Array([1]), {
+        status: 200,
+        headers: { 'content-type': 'audio/mpeg', 'content-length': String(4 * 1024 * 1024 + 1) },
+      })
+    })
+    const declared = await createTtsHandler({ fetchImpl: declaredFetch, env: ENV })(event())
+    expect(responseJson(declared)).toEqual({ error: { code: 'upstream_too_large' } })
+
+    const streamedFetch = vi.fn(async (url) => {
+      if (url === 'https://academy.supabase.co/auth/v1/user') {
+        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+      }
+      return new Response(new Uint8Array(4 * 1024 * 1024 + 1), {
+        status: 200,
+        headers: { 'content-type': 'audio/mpeg' },
+      })
+    })
+    const streamed = await createTtsHandler({ fetchImpl: streamedFetch, env: ENV })(event())
+    expect(responseJson(streamed)).toEqual({ error: { code: 'upstream_too_large' } })
   })
 })
