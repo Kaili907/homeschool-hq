@@ -26,6 +26,11 @@ function copy(value) {
   return structuredClone(value)
 }
 
+function proposalSemantics(value) {
+  const { occurredAt: _occurredAt, ...semantics } = value
+  return JSON.stringify(semantics)
+}
+
 function exactKeys(value, allowed) {
   return value && typeof value === 'object' && !Array.isArray(value) &&
     Object.keys(value).length === allowed.size && Object.keys(value).every((key) => allowed.has(key))
@@ -118,7 +123,12 @@ export function createInMemoryAdultReviewStore(options = {}) {
     async createProposal({ proposal }) {
       const sanitized = sanitizeProposal(proposal)
       const duplicateId = proposalByKey.get(sanitized.idempotencyKey)
-      if (duplicateId) return { created: false, duplicateProposalId: duplicateId }
+      if (duplicateId) {
+        const existing = proposals.get(duplicateId)?.proposal
+        return proposalSemantics(existing) === proposalSemantics(sanitized)
+          ? { created: false, duplicateProposalId: duplicateId }
+          : { created: false, duplicateProposalId: duplicateId, conflict: true }
+      }
       if (proposals.has(sanitized.proposalId)) throw new Error('proposal_identifier_collision')
       proposals.set(sanitized.proposalId, {
         proposal: copy(sanitized),
@@ -244,7 +254,11 @@ export function createInMemoryAdultReviewStore(options = {}) {
       for (const key of ['deliveryIdempotencyKey', 'recipientRef', 'routeRef', 'channel']) {
         if (record[key] !== sanitized[key]) throw new Error('immutable_delivery_binding_mismatch')
       }
-      if (!attempts.has(sanitized.attemptId)) {
+      const existingAttempt = attempts.get(sanitized.attemptId)
+      if (existingAttempt && JSON.stringify(existingAttempt) !== JSON.stringify(sanitized)) {
+        throw new Error('delivery_attempt_identifier_collision')
+      }
+      if (!existingAttempt) {
         record.attemptCount += 1
         attempts.set(sanitized.attemptId, copy(sanitized))
       }
@@ -261,7 +275,10 @@ export function createInMemoryAdultReviewStore(options = {}) {
       }
       const receiptKey = `${sanitized.providerVersion}:${sanitized.providerReceiptRef}`
       const existing = receipts.get(receiptKey)
-      if (existing && existing.deliveryIdempotencyKey !== sanitized.deliveryIdempotencyKey) throw new Error('receipt_reuse')
+      if (existing && (
+        existing.deliveryIdempotencyKey !== sanitized.deliveryIdempotencyKey ||
+        existing.attemptId !== sanitized.attemptId
+      )) throw new Error('receipt_reuse')
       if (!existing) receipts.set(receiptKey, copy(sanitized))
       record.receiptRef = receiptKey
     },
@@ -276,10 +293,11 @@ export function createInMemoryAdultReviewStore(options = {}) {
       record.leaseExpiresAt = null
       record.version += 1
     },
-    async recordDelivered({ outboxId, leaseToken, deliveredAt }) {
+    async recordDelivered({ outboxId, leaseToken, attemptId, deliveredAt }) {
       const record = outbox.get(outboxId)
       requireOutboxLease(record, leaseToken)
-      if (!record.receiptRef || !receipts.has(record.receiptRef)) throw new Error('verified_receipt_required')
+      const receipt = record.receiptRef ? receipts.get(record.receiptRef) : null
+      if (!receipt || receipt.attemptId !== attemptId) throw new Error('verified_attempt_bound_receipt_required')
       record.state = 'delivered'
       record.deliveredAt = deliveredAt
       record.retryAt = null

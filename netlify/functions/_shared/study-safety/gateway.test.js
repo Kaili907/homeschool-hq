@@ -92,6 +92,14 @@ function readyHarness(options = {}) {
     isReady: () => true,
     reserve: async () => ({ allowed: true }),
   }
+  const deliveryProvider = {
+    channel: 'in-app', isDurable: true, isReady: () => true,
+    supportsDurableIdempotency: true, deliver: async () => ({ state: 'indeterminate' }),
+  }
+  const receiptValidator = {
+    channel: 'in-app', isDurable: true, isReady: () => true,
+    verifyReceipt: async () => ({ verified: false }),
+  }
   const handler = createStudySafetyHandler({
     env: options.env ?? ENV,
     classifier,
@@ -100,6 +108,8 @@ function readyHarness(options = {}) {
     outbox: store,
     recipientResolver,
     rateLimiter,
+    deliveryProviders: [deliveryProvider],
+    receiptValidators: [receiptValidator],
     authVerifier,
     monitoring,
     now: () => Date.parse('2026-08-01T12:00:00.000Z'),
@@ -166,6 +176,22 @@ describe('Study safety gateway security and privacy', () => {
     expect(reserve.mock.calls[0][0].actorRef).toMatch(/^actor:[a-f0-9]{64}$/)
     expect(JSON.stringify(reserve.mock.calls)).not.toContain(IDS.actor)
     expect(spy).not.toHaveBeenCalled()
+  })
+
+  it('enforces a second durable reservation scoped to server-derived household, learner, and route refs', async () => {
+    const reserve = vi.fn(async () => ({ allowed: true }))
+    const { handler } = readyHarness({
+      rateLimiter: { isDurable: true, isReady: () => true, reserve },
+    })
+    expect((await handler(event())).statusCode).toBe(200)
+    expect(reserve).toHaveBeenCalledTimes(2)
+    const scoped = reserve.mock.calls[1][0]
+    expect(scoped).toMatchObject({ scope: 'study-safety-classify-subject-route' })
+    expect(scoped.householdRef).toMatch(/^household:[a-f0-9]{64}$/)
+    expect(scoped.learnerRef).toMatch(/^learner:[a-f0-9]{64}$/)
+    expect(scoped.routeRef).toMatch(/^route:[a-f0-9]{64}$/)
+    expect(JSON.stringify(scoped)).not.toContain(IDS.household)
+    expect(JSON.stringify(scoped)).not.toContain(IDS.student)
   })
 
   it('enforces request byte limits without provider use', async () => {

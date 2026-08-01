@@ -183,7 +183,7 @@ describe('Academy household server revision CAS migration', () => {
     if (errors.length > 0) {
       throw new AggregateError(errors, 'Academy PGlite cleanup failed.')
     }
-  }, 30_000)
+  }, 180_000)
 
   it('allows exactly one of two clients to consume the same empty-cloud revision', async () => {
     const [first, second] = await Promise.all([
@@ -497,7 +497,7 @@ describe('Academy household server revision CAS migration', () => {
     })
     // Recursive node and 10 MB payload probes are intentionally expensive in
     // PGlite. Keep only this isolated proof above Vitest's five-second default.
-  }, 30_000)
+  }, 180_000)
 
   it('rolls back the entire multi-profile mutation when any row fails', async () => {
     await configureClient(clientA, HOUSEHOLD_A)

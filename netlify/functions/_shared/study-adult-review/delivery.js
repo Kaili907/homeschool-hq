@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
 const ATTEMPT_KEYS = new Set([
-  'idempotencyKey', 'recipientRef', 'routeRef', 'templateCode',
+  'idempotencyKey', 'attemptId', 'recipientRef', 'routeRef', 'templateCode',
 ])
 
 function digest(value) {
@@ -16,6 +16,7 @@ function validateAttempt(input) {
   }
   if (
     !/^study-safety-delivery:[a-f0-9]{64}$/.test(input.idempotencyKey) ||
+    !/^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/.test(input.attemptId) ||
     !/^recipient:[A-Za-z0-9._/-]{1,96}$/.test(input.recipientRef) ||
     !/^(?:email|in-app|sms)-route:[A-Za-z0-9._/-]{1,96}$/.test(input.routeRef) ||
     input.templateCode !== 'study-safety-adult-review-v1'
@@ -36,13 +37,19 @@ export function createTestDeliveryProvider(channel, options = {}) {
   return Object.freeze({
     channel,
     providerVersion,
+    isDurable: false,
     isTestProvider: true,
     supportsDurableIdempotency: true,
     isReady: () => true,
     async deliver(untrusted) {
       calls += 1
       const input = validateAttempt(untrusted)
-      const payloadDigest = digest(input)
+      const payloadDigest = digest({
+        idempotencyKey: input.idempotencyKey,
+        recipientRef: input.recipientRef,
+        routeRef: input.routeRef,
+        templateCode: input.templateCode,
+      })
       const prior = deliveries.get(input.idempotencyKey)
       if (prior) {
         if (prior.payloadDigest !== payloadDigest) throw new Error('delivery_idempotency_conflict')
@@ -62,9 +69,10 @@ export function createTestDeliveryProvider(channel, options = {}) {
         return { state: 'indeterminate', failureCode: 'provider-indeterminate' }
       }
       const receiptRef = `${providerVersion}:receipt:${digest(input).slice(0, 32)}`
-      deliveries.set(input.idempotencyKey, { payloadDigest, receiptRef })
+      deliveries.set(input.idempotencyKey, { payloadDigest, receiptRef, attemptId: input.attemptId })
       receiptRegistry.set(receiptRef, {
         idempotencyKey: input.idempotencyKey,
+        attemptId: input.attemptId,
         recipientRef: input.recipientRef,
         routeRef: input.routeRef,
       })
@@ -80,7 +88,11 @@ export function createTestDeliveryProvider(channel, options = {}) {
         evidence.recipientRef !== recipientRef ||
         evidence.routeRef !== routeRef
       ) return { verified: false }
-      return { verified: true, evidenceRef: `test-evidence:${digest(evidence).slice(0, 32)}` }
+      return {
+        verified: true,
+        attemptId: evidence.attemptId,
+        evidenceRef: `test-evidence:${digest(evidence).slice(0, 32)}`,
+      }
     },
     stats: () => ({ calls, uniqueDeliveries }),
   })

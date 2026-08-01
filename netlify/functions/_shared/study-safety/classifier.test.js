@@ -165,4 +165,20 @@ describe('secured provider adapter', () => {
     now += 31_000
     expect(classifier.circuitState()).not.toBe('open')
   })
+
+  it('treats provider timeout as indeterminate and does not retry without proof', async () => {
+    const fetchImpl = vi.fn(async (_url, init) => new Promise((_resolve, reject) => {
+      init.signal.addEventListener('abort', () => reject(new DOMException('timeout', 'AbortError')), { once: true })
+    }))
+    const classifier = createAnthropicSafetyClassifier({
+      env: { ANTHROPIC_API_KEY: 'test-provider-key' },
+      fetchImpl,
+      timeoutMs: 1,
+      maxAttempts: 2,
+      delay: async () => {},
+    })
+    const result = await classifier.classify(request)
+    expect(result.reasonCodes).toEqual(['safety-invalid-provider-timeout-v1'])
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
 })

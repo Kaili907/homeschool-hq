@@ -95,4 +95,34 @@ describe('narrow Study safety browser adapter', () => {
     })
     expect(arbitraryMessage.classification).toBe('invalid')
   })
+
+  it('honors host lifecycle cancellation before and during the request', async () => {
+    const alreadyCancelled = new AbortController()
+    alreadyCancelled.abort('learner-switch')
+    const neverCalled = vi.fn()
+    const first = await classifyStudySafety(request, {
+      signal: alreadyCancelled.signal,
+      getAccessToken: async () => 'test.access.token',
+      fetchImpl: neverCalled,
+    })
+    expect(first).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
+    expect(neverCalled).not.toHaveBeenCalled()
+
+    const active = new AbortController()
+    let notifyStarted!: () => void
+    const started = new Promise<void>((resolve) => { notifyStarted = resolve })
+    const fetchImpl = vi.fn(async (_url: string, init: RequestInit) => new Promise<never>((_resolve, reject) => {
+      notifyStarted()
+      init.signal?.addEventListener('abort', () => reject(new DOMException('cancelled', 'AbortError')), { once: true })
+    }))
+    const pending = classifyStudySafety(request, {
+      signal: active.signal,
+      getAccessToken: async () => 'test.access.token',
+      fetchImpl,
+    })
+    await started
+    active.abort('logout')
+    expect(await pending).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
 })

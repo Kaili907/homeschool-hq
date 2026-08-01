@@ -46,6 +46,7 @@ export function createAdultReviewProposalService({ persistence, now = Date.now }
       })
       try {
         const result = await persistence.createProposal({ proposal })
+        if (result.conflict === true) return { state: 'not-confirmed' }
         return result.created
           ? { state: 'recorded-not-delivered', proposalId: proposal.proposalId }
           : { state: 'duplicate-not-delivered', proposalId: result.duplicateProposalId }

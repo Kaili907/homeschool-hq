@@ -22,6 +22,9 @@ export function createAdultReviewOutboxWorker(options) {
   const store = options.store
   const recipientResolver = options.recipientResolver
   const providers = new Map(options.providers.map((provider) => [provider.channel, provider]))
+  const receiptValidators = new Map(
+    (options.receiptValidators ?? options.providers).map((validator) => [validator.channel, validator]),
+  )
   const now = options.now ?? Date.now
   const idFactory = options.idFactory ?? randomUUID
   const maxAttempts = options.maxAttempts ?? 4
@@ -89,7 +92,7 @@ export function createAdultReviewOutboxWorker(options) {
     const results = []
     for (const claim of claims) {
       const job = claim.record
-      const proposal = await store.getProposal(job.proposalId)
+      const proposal = claim.proposal ?? await store.getProposal?.(job.proposalId)
       if (!proposal) {
         await store.recordPermanentFailure({ outboxId: job.outboxId, leaseToken: claim.leaseToken, failedAt: stamp, failureCode: 'proposal-not-found' })
         results.push({ outboxId: job.outboxId, state: 'permanent-failure' })
@@ -119,11 +122,15 @@ export function createAdultReviewOutboxWorker(options) {
         continue
       }
       const provider = providers.get(job.channel)
+      const receiptValidator = receiptValidators.get(job.channel)
       if (
         !provider ||
         !provider.isReady?.() ||
         (!allowProductionProviders && provider.isTestProvider !== true) ||
-        provider.supportsDurableIdempotency !== true
+        provider.supportsDurableIdempotency !== true ||
+        !receiptValidator ||
+        !receiptValidator.isReady?.() ||
+        (!allowProductionProviders && receiptValidator.isTestProvider !== true)
       ) {
         await store.recordIndeterminate({ outboxId: job.outboxId, leaseToken: claim.leaseToken, failedAt: stamp, failureCode: 'delivery-provider-not-ready' })
         results.push({ outboxId: job.outboxId, state: 'indeterminate' })
@@ -153,27 +160,30 @@ export function createAdultReviewOutboxWorker(options) {
       try {
         delivered = await provider.deliver({
           idempotencyKey: job.deliveryIdempotencyKey,
+          attemptId,
           recipientRef: job.recipientRef,
           routeRef: job.routeRef,
           templateCode: job.templateCode,
         })
       } catch {
-        await store.recordTemporaryFailure({
+        // The provider may have accepted the request before the response was
+        // lost. Without verified receipt evidence, retrying could duplicate a
+        // real adult notification.
+        await store.recordIndeterminate({
           outboxId: job.outboxId,
           leaseToken: claim.leaseToken,
+          attemptId,
           failedAt: stamp,
-          retryAt: retryAt(nowMs, attemptCount, baseRetryMs, maxRetryMs),
           failureCode: 'delivery-response-lost',
         })
-        if (attemptCount >= 2) await record('study_safety.delivery_repeated_failure', 'warning', 'delivery-repeated-failure', { attemptCount })
-        results.push({ outboxId: job.outboxId, state: 'retry-scheduled' })
+        results.push({ outboxId: job.outboxId, state: 'indeterminate' })
         continue
       }
 
-      if (delivered?.state === 'delivered' && delivered.verified === true) {
+      if (delivered?.state === 'delivered' && typeof delivered.providerReceiptRef === 'string') {
         let evidence
         try {
-          evidence = await provider.verifyReceipt({
+          evidence = await receiptValidator.verifyReceipt({
             deliveryIdempotencyKey: job.deliveryIdempotencyKey,
             recipientRef: job.recipientRef,
             routeRef: job.routeRef,
@@ -182,22 +192,33 @@ export function createAdultReviewOutboxWorker(options) {
         } catch {
           evidence = { verified: false }
         }
-        if (evidence?.verified === true) {
-          await store.recordDeliveryReceipt({
-            ...attempt,
-            deliveredAt: stamp,
-            providerReceiptRef: evidenceRef('receipt', delivered.providerReceiptRef),
-            receiptEvidenceRef: evidenceRef('receipt-evidence', evidence.evidenceRef),
-          })
-          await store.recordDelivered({ outboxId: job.outboxId, leaseToken: claim.leaseToken, deliveredAt: stamp })
-          results.push({ outboxId: job.outboxId, state: 'delivered' })
-          continue
+        if (evidence?.verified === true && evidence.attemptId === attemptId) {
+          try {
+            await store.recordDeliveryReceipt({
+              ...attempt,
+              deliveredAt: stamp,
+              providerReceiptRef: evidenceRef('receipt', delivered.providerReceiptRef),
+              receiptEvidenceRef: evidenceRef('receipt-evidence', evidence.evidenceRef),
+            })
+            await store.recordDelivered({
+              outboxId: job.outboxId,
+              leaseToken: claim.leaseToken,
+              attemptId,
+              deliveredAt: stamp,
+            })
+            results.push({ outboxId: job.outboxId, state: 'delivered' })
+            continue
+          } catch {
+            // Malformed, replayed, or cross-attempt receipt evidence is never
+            // promoted to delivered.
+          }
         }
       }
       if (delivered?.state === 'temporary-failure') {
         await store.recordTemporaryFailure({
           outboxId: job.outboxId,
           leaseToken: claim.leaseToken,
+          attemptId,
           failedAt: stamp,
           retryAt: retryAt(nowMs, attemptCount, baseRetryMs, maxRetryMs),
           failureCode: 'delivery-temporary-failure',
@@ -205,16 +226,44 @@ export function createAdultReviewOutboxWorker(options) {
         if (attemptCount >= 2) await record('study_safety.delivery_repeated_failure', 'warning', 'delivery-repeated-failure', { attemptCount })
         results.push({ outboxId: job.outboxId, state: 'retry-scheduled' })
       } else if (delivered?.state === 'permanent-failure') {
-        await store.recordPermanentFailure({ outboxId: job.outboxId, leaseToken: claim.leaseToken, failedAt: stamp, failureCode: 'delivery-permanent-failure' })
+        await store.recordPermanentFailure({ outboxId: job.outboxId, leaseToken: claim.leaseToken, attemptId, failedAt: stamp, failureCode: 'delivery-permanent-failure' })
         if (attemptCount >= 2) await record('study_safety.delivery_repeated_failure', 'warning', 'delivery-repeated-failure', { attemptCount })
         results.push({ outboxId: job.outboxId, state: 'permanent-failure' })
       } else {
-        await store.recordIndeterminate({ outboxId: job.outboxId, leaseToken: claim.leaseToken, failedAt: stamp, failureCode: 'delivery-evidence-indeterminate' })
+        await store.recordIndeterminate({ outboxId: job.outboxId, leaseToken: claim.leaseToken, attemptId, failedAt: stamp, failureCode: 'delivery-evidence-indeterminate' })
         results.push({ outboxId: job.outboxId, state: 'indeterminate' })
       }
     }
     return results
   }
 
-  return Object.freeze({ resolvePending, deliver })
+  const configuredProviders = [...providers.values()]
+  const configuredValidators = [...receiptValidators.values()]
+  const isReady = () => Boolean(
+    store?.isReady?.() &&
+    recipientResolver?.isReady?.() &&
+    configuredProviders.length > 0 &&
+    configuredProviders.every((provider) => provider.isReady?.() && provider.supportsDurableIdempotency === true) &&
+    configuredValidators.length > 0 &&
+    configuredValidators.every((validator) => validator.isReady?.() && typeof validator.verifyReceipt === 'function') &&
+    monitoring?.isReady?.(),
+  )
+  const isDurable = Boolean(
+    allowProductionProviders &&
+    store?.isDurable === true &&
+    recipientResolver?.isDurable === true &&
+    monitoring?.isDurable === true &&
+    configuredProviders.length > 0 &&
+    configuredProviders.every((provider) => provider.isDurable === true && provider.isTestProvider !== true) &&
+    configuredValidators.length > 0 &&
+    configuredValidators.every((validator) => validator.isDurable === true && validator.isTestProvider !== true),
+  )
+
+  async function process(limit = 10) {
+    const resolution = await resolvePending(limit)
+    const deliveries = await deliver(limit)
+    return { resolution, deliveries }
+  }
+
+  return Object.freeze({ resolvePending, deliver, process, isReady, isDurable })
 }

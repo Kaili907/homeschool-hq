@@ -2,6 +2,7 @@ import { useState, type Dispatch, type SetStateAction } from 'react'
 import type { AppState, Profile } from '../../types'
 import { isoToday, updateProfile } from '../../appState'
 import {
+  BROWSER_TUTOR_KEYS_ALLOWED,
   clearTutorKey,
   getTutorKey,
   getTutorModel,
@@ -54,7 +55,7 @@ export function TutorAiControls({
   return (
     <div className="space-y-3">
       {/* API key */}
-      <div className={box}>
+      {BROWSER_TUTOR_KEYS_ALLOWED ? <div className={box}>
         <div className="font-bold text-slate-800">Anthropic API key</div>
         <div className="mt-0.5 text-xs text-slate-500">
           Stored on this device only, never in a backup export, never sent anywhere except Anthropic.
@@ -65,7 +66,7 @@ export function TutorAiControls({
             type="password"
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
-            placeholder={saved ? 'Enter a new key to replace' : 'sk-ant-…'}
+            placeholder={saved ? 'Enter a new key to replace' : 'Enter Anthropic API key'}
             aria-label="Anthropic API key"
             className="w-64 rounded-lg border border-slate-300 px-3 py-1.5 font-mono text-sm text-slate-800"
           />
@@ -112,7 +113,14 @@ export function TutorAiControls({
             Haiku — faster &amp; cheaper
           </label>
         </div>
-      </div>
+      </div> : (
+        <div className={box}>
+          <div className="font-bold text-slate-800">AI Tutor gateway</div>
+          <p className="mt-1 text-xs text-slate-500">
+            Production tutoring uses the authenticated Manuel Academy gateway. Browser provider keys are disabled.
+          </p>
+        </div>
+      )}
 
       {/* per-profile cap + transcripts */}
       {Object.values(state.profiles).map((p) => {

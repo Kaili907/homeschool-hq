@@ -7,6 +7,7 @@ const files = [
   './migrations/20260724230000_academy_student_identity_foundation.sql',
   './migrations/20260801010000_academy_study_engine_storage.sql',
   './migrations/20260801011000_academy_study_engine_authorization.sql',
+  './migrations/20260801012000_academy_study_engine_production_reconciliation.sql',
   './tests/study_engine_fixtures.sql',
   './tests/study_engine_rls_probes.sql',
 ] as const
@@ -180,7 +181,7 @@ describe.sequential('Study Engine persistence and RLS', () => {
     `)
     expect(catalog.rows[0]).toEqual({
       public_count: 9,
-      forced_count: 16,
+      forced_count: 25,
       policy_count: 36,
       private_browser_grants: 0,
     })
@@ -414,97 +415,20 @@ describe.sequential('Study Engine persistence and RLS', () => {
     )).rejects.toThrow(/STUDY_EXPLICIT_OFFSET_MISMATCH/)
   })
 
-  it('keeps proposals and outbox delivery server-only with bound recipients', async () => {
-    const proposal = {
-      id: 'proposal-a',
-      source_session_id: 'session-a',
-      source_event_id: 'event-a',
-      safety_category: 'wellbeing',
-      structured_reason_code: 'adult-review-needed',
-      urgency: 'routine',
-      idempotency_key: 'proposal-key-a',
+  it('retires the legacy unbound delivery RPCs from every application role', async () => {
+    for (const [role, claims] of [
+      ['authenticated', guardianClaims(GUARDIAN_A)],
+      ['service_role', JSON.stringify({ role: 'service_role' })],
+    ] as const) {
+      await expect(asRole(
+        role,
+        role === 'authenticated' ? GUARDIAN_A : null,
+        claims,
+        () => rpc(`select public.academy_study_transition_outbox(
+          '{}'::jsonb
+        ) as result`),
+      )).rejects.toThrow(/permission denied/)
     }
-    await expect(asRole(
-      'authenticated', GUARDIAN_A, guardianClaims(GUARDIAN_A),
-      () => rpc(`select public.academy_study_create_adult_review_proposal(
-        $1::jsonb
-      ) as result`, [JSON.stringify(proposal)]),
-    )).rejects.toThrow(/permission denied/)
-
-    expect(await asRole(
-      'service_role', null, JSON.stringify({ role: 'service_role' }),
-      () => rpc(`select public.academy_study_create_adult_review_proposal(
-        $1::jsonb
-      ) as result`, [JSON.stringify(proposal)]),
-    )).toEqual({ status: 'proposed-not-delivered', proposalId: 'proposal-a' })
-
-    const invalidRecipient = {
-      proposal_id: 'proposal-a',
-      recipient_access_id: '00000000-0000-0000-0000-0000000001b1',
-      recipient_membership_id: '00000000-0000-0000-0000-0000000000b2',
-      idempotency_key: 'outbox-key-cross-household',
-    }
-    await expect(asRole(
-      'service_role', null, JSON.stringify({ role: 'service_role' }),
-      () => rpc(`select public.academy_study_enqueue_outbox(
-        $1::jsonb
-      ) as result`, [JSON.stringify(invalidRecipient)]),
-    )).rejects.toThrow(/STUDY_OUTBOX_RECIPIENT_NOT_AVAILABLE/)
-
-    const enqueued = await asRole(
-      'service_role', null, JSON.stringify({ role: 'service_role' }),
-      () => rpc<{ status: string, outboxId: string }>(
-        `select public.academy_study_enqueue_outbox($1::jsonb) as result`,
-        [JSON.stringify({
-          proposal_id: 'proposal-a',
-          recipient_access_id: '00000000-0000-0000-0000-0000000001a1',
-          recipient_membership_id: '00000000-0000-0000-0000-0000000000a2',
-          idempotency_key: 'outbox-key-a',
-        })],
-      ),
-    )
-    expect(enqueued.status).toBe('enqueued')
-    await expect(asRole(
-      'authenticated', GUARDIAN_A, guardianClaims(GUARDIAN_A),
-      () => database.exec(`select * from academy_private.study_outbox`),
-    )).rejects.toThrow()
-
-    const transition = (value: Record<string, unknown>) => asRole(
-      'service_role', null, JSON.stringify({ role: 'service_role' }),
-      () => rpc(`select public.academy_study_transition_outbox(
-        $1::jsonb
-      ) as result`, [JSON.stringify(value)]),
-    )
-    await expect(transition({
-      outbox_id: enqueued.outboxId,
-      expected_state: 'pending',
-      state: 'delivered',
-      attempt_count: 1,
-      retry_at: null,
-      last_error_code: null,
-      delivered_at: '2026-08-01T14:10:00Z',
-      receipt_reference: 'receipt-a',
-    })).rejects.toThrow(/STUDY_OUTBOX_TRANSITION_INVALID/)
-    expect(await transition({
-      outbox_id: enqueued.outboxId,
-      expected_state: 'pending',
-      state: 'leased',
-      attempt_count: 1,
-      retry_at: null,
-      last_error_code: null,
-      delivered_at: null,
-      receipt_reference: null,
-    })).toEqual({ status: 'stored' })
-    expect(await transition({
-      outbox_id: enqueued.outboxId,
-      expected_state: 'leased',
-      state: 'delivered',
-      attempt_count: 1,
-      retry_at: null,
-      last_error_code: null,
-      delivered_at: '2026-08-01T14:10:00Z',
-      receipt_reference: 'receipt-a',
-    })).toEqual({ status: 'stored' })
   })
 
   it('permits scoped crypto erasure only after retention expiry', async () => {

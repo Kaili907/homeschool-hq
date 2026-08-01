@@ -1,8 +1,10 @@
 import { renderToStaticMarkup } from 'react-dom/server'
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { StudyDashboard } from './StudyDashboard'
 import { StudySettings } from './StudySettings'
 import { StudySessionRoute } from './StudySessionRoute'
+import { studyAccessibilityProjection } from './StudySessionContainer'
 import { createLocalDevelopmentStudyPorts } from '../../study/localDevelopmentPorts'
 import { syntheticGrade5StudyContext } from '../../study/demonstrations'
 
@@ -35,6 +37,30 @@ describe('Study host accessibility presentation', () => {
     )
     expect(html).toContain('Loading Study Session')
     expect(html).toContain('Cancel')
+    expect(html).toContain('tabindex="-1"')
+    expect(html).toContain('type="button"')
     expect(html).not.toMatch(/rawAnswer|transcriptText|providerApiKey/i)
+  })
+
+  it('keeps captions visible while projecting reduced motion and no-audio mode', () => {
+    expect(studyAccessibilityProjection({
+      ...context.accessibility,
+      reducedMotion: true,
+      noAudio: true,
+      captions: false,
+    })).toEqual({
+      motionMode: 'none',
+      voiceMode: 'no-audio',
+      captionsAlwaysVisible: true,
+    })
+  })
+
+  it('honors OS reduced motion and constrains interactive controls on narrow screens', () => {
+    const studyHostCss = readFileSync(new URL('./study-host.css', import.meta.url), 'utf8')
+    expect(studyHostCss).toContain('@media (prefers-reduced-motion: reduce)')
+    expect(studyHostCss).toContain('animation-duration: 0.001ms !important')
+    expect(studyHostCss).toContain('min-height: 44px')
+    expect(studyHostCss).toContain('max-inline-size: 100%')
+    expect(studyHostCss).toContain('touch-action: manipulation')
   })
 })

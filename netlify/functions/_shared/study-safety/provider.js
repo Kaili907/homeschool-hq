@@ -156,7 +156,9 @@ export function createAnthropicSafetyClassifier(options = {}) {
           }
           else await record('study_safety.classifier_unavailable', 'critical', 'provider-network-failure')
           clearTimeout(timer)
-          if (attempt < maxAttempts) {
+          // A timeout has an unknown upstream outcome. Do not retry it without
+          // provider-specific proof that doing so is safe.
+          if (!timedOut && attempt < maxAttempts) {
             await delay(100 * attempt)
             continue
           }

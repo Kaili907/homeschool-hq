@@ -71,6 +71,8 @@ describe('browser/server and authorization boundaries', () => {
       proposalPersistence: { ...fake, createProposal: async () => ({ created: true }) },
       outbox: { ...fake, claim: async () => [], recordRecipientResolutionAndEnqueue: async () => [] },
       recipientResolver: { ...fake, resolve: async () => ({}), reauthorizeForDelivery: async () => ({}) },
+      deliveryProviders: [{ ...fake, channel: 'email', supportsDurableIdempotency: true, deliver: async () => ({}) }],
+      receiptValidators: [{ ...fake, channel: 'email', verifyReceipt: async () => ({ verified: false }) }],
     }, ENV)
     expect(readiness.status).toBe('not-ready')
     expect(readiness.missing).toContain('learner-session-authorization')

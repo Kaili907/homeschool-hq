@@ -2,8 +2,17 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { JarvisCore } from '../../../adaptive-tutor/study-engine/ui/JarvisCore.tsx'
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../study/ports'
 import { AcceptedRc1HostRuntime } from '../../study/runtimeFacade'
-import type { HostStudyLaunchContext, StudyCalendarEntry, StudyCheckpoint } from '../../study/types'
+import { runCurrentStudyWork, StudyLifecycleBoundary } from '../../study/production/lifecycleBoundary'
+import type { HostStudyLaunchContext, StudyAccessibilitySettings, StudyCalendarEntry, StudyCheckpoint } from '../../study/types'
 import './study-host.css'
+
+export function studyAccessibilityProjection(settings: StudyAccessibilitySettings) {
+  return Object.freeze({
+    motionMode: settings.reducedMotion ? 'none' as const : 'minimal' as const,
+    voiceMode: settings.noAudio ? 'no-audio' as const : 'unavailable' as const,
+    captionsAlwaysVisible: true as const,
+  })
+}
 
 export function StudySessionContainer({ context: baseContext, initialEntry, ports, onBack }: {
   context: HostStudyLaunchContext
@@ -28,32 +37,35 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   const [error, setError] = useState<string | null>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const bindingRef = useRef(`${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`)
+  const lifecycle = useMemo(() => new StudyLifecycleBoundary(), [])
   const runtime = useMemo(() => new AcceptedRc1HostRuntime(ports), [ports])
   const sessionRef = `${initialEntry.blockRef}:session`
   const scope = { householdRef: context.householdRef, learnerRef: context.learnerRef, sessionRef }
   const learnerScope = { householdRef: context.householdRef, learnerRef: context.learnerRef }
   const currentSegment = entry.segments.find((segment) => !entry.completedSegmentRefs.includes(segment.segmentRef))
+  const accessibilityProjection = studyAccessibilityProjection(context.accessibility)
   const isCurrentBinding = () => bindingRef.current === `${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`
 
   useEffect(() => {
-    let current = true
+    const token = lifecycle.token()
     const prepare = async () => {
       try {
+        token.assertCurrent()
         assertCompleteStudyPortBundle(ports)
         runtime.launch(context, initialEntry, sessionRef)
         let next = initialEntry
         const now = new Date().toISOString()
-        if (next.state === 'scheduled') next = await ports.calendar.start(learnerScope, next.blockRef, now)
-        if (next.state === 'paused') next = await ports.calendar.resume(learnerScope, next.blockRef, now)
+        if (next.state === 'scheduled') next = await runCurrentStudyWork(token, () => ports.calendar.start(learnerScope, next.blockRef, now))
+        if (next.state === 'paused') next = await runCurrentStudyWork(token, () => ports.calendar.resume(learnerScope, next.blockRef, now))
         const segment = next.segments.find((candidate) => !next.completedSegmentRefs.includes(candidate.segmentRef))
         if (!segment) throw new Error('This Study block is already complete.')
-        await ports.eventLedger.append(scope, {
+        await runCurrentStudyWork(token, () => ports.eventLedger.append(scope, {
           eventRef: `launch:${sessionRef}`,
           occurredAt: now,
           type: 'session-launched',
           payload: { lessonRef: next.lessonRef, segmentRef: segment.segmentRef },
-        })
-        await ports.persistence.saveSession({
+        }))
+        await runCurrentStudyWork(token, () => ports.persistence.saveSession({
           scope,
           lessonRef: next.lessonRef,
           segmentRef: segment.segmentRef,
@@ -62,32 +74,33 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           lastAcceptedEventRef: null,
           rawAnswerIncluded: false,
           transcriptIncluded: false,
-        })
-        if (current) setEntry(next)
+        }))
+        token.assertCurrent()
+        setEntry(next)
       } catch {
-        if (current) setError('This Study Session could not start safely. Check the learner, runtime version, and required ports.')
+        if (token.isCurrent()) setError('This Study Session could not start safely. Check the learner, runtime version, and required ports.')
       } finally {
-        if (current) setLoading(false)
+        if (token.isCurrent()) setLoading(false)
       }
     }
     prepare()
     return () => {
-      current = false
+      lifecycle.cancel('navigation-away')
       bindingRef.current = 'closed'
-      setApprovedTranscript([])
     }
-  }, [context.learnerRef, initialEntry.blockRef, ports, runtime])
+  }, [context.learnerRef, initialEntry.blockRef, lifecycle, ports, runtime])
 
-  useEffect(() => { if (!loading) headingRef.current?.focus() }, [loading, currentSegment?.segmentRef])
+  useEffect(() => { headingRef.current?.focus() }, [loading, error, entry.state, currentSegment?.segmentRef])
 
   const saveBreak = async () => {
     if (!currentSegment || stopped) return
+    const token = lifecycle.token()
     setBusy(true)
     setAnswer('')
     try {
       const at = new Date().toISOString()
-      const paused = await (ports as StudyPortBundle).calendar.pause(learnerScope, entry.blockRef, at, 'planned_break')
-      const previous = await (ports as StudyPortBundle).checkpoint.loadLatest(scope)
+      const paused = await runCurrentStudyWork(token, () => (ports as StudyPortBundle).calendar.pause(learnerScope, entry.blockRef, at, 'planned_break'))
+      const previous = await runCurrentStudyWork(token, () => (ports as StudyPortBundle).checkpoint.loadLatest(scope))
       const checkpoint: StudyCheckpoint = {
         checkpointRef: `${sessionRef}:checkpoint`,
         householdRef: context.householdRef,
@@ -103,8 +116,8 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
         rawAnswerIncluded: false,
         transcriptIncluded: false,
       }
-      await (ports as StudyPortBundle).checkpoint.save(checkpoint)
-      await (ports as StudyPortBundle).persistence.saveSession({
+      await runCurrentStudyWork(token, () => (ports as StudyPortBundle).checkpoint.save(checkpoint))
+      await runCurrentStudyWork(token, () => (ports as StudyPortBundle).persistence.saveSession({
         scope,
         lessonRef: entry.lessonRef,
         segmentRef: checkpoint.segmentRef,
@@ -113,25 +126,30 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
         lastAcceptedEventRef: null,
         rawAnswerIncluded: false,
         transcriptIncluded: false,
-      })
+      }))
+      token.assertCurrent()
       setEntry(paused)
       setJarvisText(`Water break saved. You’ll return to step ${checkpoint.segmentRef}.`)
     } catch {
-      setError('The break could not be saved safely. Your answer was not persisted.')
-    } finally { setBusy(false) }
+      if (token.isCurrent()) setError('The break could not be saved safely. Your answer was not persisted.')
+    } finally { if (token.isCurrent()) setBusy(false) }
   }
 
   const resume = async () => {
+    const token = lifecycle.token()
     setBusy(true)
     try {
-      const resumed = await (ports as StudyPortBundle).calendar.resume(learnerScope, entry.blockRef, new Date().toISOString())
+      const resumed = await runCurrentStudyWork(token, () => (ports as StudyPortBundle).calendar.resume(learnerScope, entry.blockRef, new Date().toISOString()))
       setEntry(resumed)
       setJarvisText('Welcome back. Your exact Study step is ready.')
-    } catch { setError('The exact resume point could not be restored safely.') } finally { setBusy(false) }
+    } catch {
+      if (token.isCurrent()) setError('The exact resume point could not be restored safely.')
+    } finally { if (token.isCurrent()) setBusy(false) }
   }
 
   const completeStep = async () => {
     if (!currentSegment || !answer.trim() || busy || stopped) return
+    const token = lifecycle.token()
     setBusy(true)
     const transient = answer
     setAnswer('')
@@ -139,7 +157,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
       const at = new Date().toISOString()
       let acceptedEventRef: string | null = null
       if (entry.masteryAuthority === 'tutor-core') {
-        const result = await runtime.submit({
+        const result = await runCurrentStudyWork(token, () => runtime.submit({
           context,
           entry,
           scope,
@@ -148,17 +166,20 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           transientLearnerText: transient,
           expectedAnswer: 'ready',
           occurredAt: at,
-          isCurrentBinding,
-        })
+          isCurrentBinding: () => token.isCurrent() && isCurrentBinding(),
+        }))
         if (result.status === 'stopped') {
-          setStopped(true)
-          setJarvisText('This Study Session is paused. A trusted adult review has been proposed but has not been delivered.')
-          await (ports as StudyPortBundle).eventLedger.append(scope, {
+          await runCurrentStudyWork(token, () => (ports as StudyPortBundle).eventLedger.append(scope, {
             eventRef: `stop:${sessionRef}:${Date.now()}`,
             occurredAt: at,
             type: 'safety-stop',
             payload: { reasonCode: result.reasonCode, deliveryStatus: result.deliveryStatus },
-          })
+          }))
+          token.assertCurrent()
+          setStopped(true)
+          setJarvisText('This Study Session is paused. A trusted adult review has been proposed but has not been delivered.')
+          setBusy(false)
+          lifecycle.cancel('safety-stop')
           return
         }
         if (result.status === 'quarantined') throw new Error('quarantined')
@@ -168,23 +189,22 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
       } else {
         setJarvisText('Activity completion recorded. No mastery decision was made.')
       }
-      const next = await (ports as StudyPortBundle).calendar.completeCurrentSegment(
+      const next = await runCurrentStudyWork(token, () => (ports as StudyPortBundle).calendar.completeCurrentSegment(
         learnerScope,
         entry.blockRef,
         currentSegment.segmentRef,
         new Date().toISOString(),
-      )
-      setEntry(next)
+      ))
       const status = next.state === 'completed' ? 'completed' : 'active'
       if (status === 'completed') {
-        await (ports as StudyPortBundle).eventLedger.append(scope, {
+        await runCurrentStudyWork(token, () => (ports as StudyPortBundle).eventLedger.append(scope, {
           eventRef: `completion:${sessionRef}:${entry.lessonRef}`,
           occurredAt: new Date().toISOString(),
           type: 'session-completed',
           payload: { blockRef: entry.blockRef, lessonRef: entry.lessonRef },
-        })
+        }))
       }
-      await (ports as StudyPortBundle).persistence.saveSession({
+      await runCurrentStudyWork(token, () => (ports as StudyPortBundle).persistence.saveSession({
         scope,
         lessonRef: entry.lessonRef,
         segmentRef: currentSegment.segmentRef,
@@ -193,14 +213,16 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
         lastAcceptedEventRef: acceptedEventRef,
         rawAnswerIncluded: false,
         transcriptIncluded: false,
-      })
+      }))
+      token.assertCurrent()
+      setEntry(next)
     } catch {
-      setError('The Tutor result could not be accepted. No completion was recorded.')
-    } finally { setBusy(false) }
+      if (token.isCurrent()) setError('The Tutor result could not be accepted. No completion was recorded.')
+    } finally { if (token.isCurrent()) setBusy(false) }
   }
 
-  if (loading) return <main className="study-runtime-host min-h-screen bg-slate-50 p-6" aria-busy="true"><h1 tabIndex={-1}>Preparing your Study Session</h1><p role="status">Checking the runtime and learner binding…</p><button className="mt-4 rounded-lg border px-4 py-2" onClick={onBack}>Cancel</button></main>
-  if (error) return <main className="study-runtime-host min-h-screen bg-slate-50 p-6"><h1 tabIndex={-1}>Study Session unavailable</h1><p role="alert">{error}</p><button className="mt-4 rounded-lg border px-4 py-2" onClick={onBack}>Back to Study plan</button></main>
+  if (loading) return <main className="study-runtime-host min-h-screen bg-slate-50 p-6" aria-busy="true"><h1 ref={headingRef} tabIndex={-1}>Preparing your Study Session</h1><p role="status">Checking the runtime and learner binding…</p><button type="button" className="mt-4 rounded-lg border px-4 py-2" onClick={onBack}>Cancel</button></main>
+  if (error) return <main className="study-runtime-host min-h-screen bg-slate-50 p-6"><h1 ref={headingRef} tabIndex={-1}>Study Session unavailable</h1><p role="alert">{error}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2" onClick={onBack}>Back to Study plan</button></main>
 
   return (
     <div className="study-runtime-host min-h-screen bg-slate-50 text-slate-900" data-large-text={context.accessibility.largeText} data-high-contrast={context.accessibility.highContrast} data-reduced-motion={context.accessibility.reducedMotion}>
@@ -208,7 +230,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
       <main className="mx-auto max-w-5xl px-4 py-5">
         <header className="flex flex-wrap items-center justify-between gap-3">
           <div><p className="text-sm font-semibold text-cyan-700">{entry.subject}</p><h1 className="text-2xl font-bold">{entry.title}</h1></div>
-          <button className="rounded-lg border border-slate-300 bg-white px-4 py-2" onClick={onBack}>Save and exit</button>
+          <button type="button" className="rounded-lg border border-slate-300 bg-white px-4 py-2" onClick={onBack}>Save and exit</button>
         </header>
         <nav className="mt-5 rounded-xl bg-white p-4" aria-label="Study segment progress">
           <ol className="flex flex-wrap gap-2">{entry.segments.map((segment) => {
@@ -221,12 +243,12 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
 
         {entry.state === 'paused' ? (
           <section className="mt-5 rounded-2xl border border-cyan-200 bg-cyan-50 p-6">
-            <h2 tabIndex={-1} className="text-2xl font-bold">Water break</h2>
+            <h2 ref={headingRef} tabIndex={-1} className="text-2xl font-bold">Water break</h2>
             <p className="mt-2">Your exact place is saved at {entry.resumePoint?.segmentRef}. Take the time you need.</p>
-            <button className="mt-4 rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white" disabled={busy || stopped} onClick={resume}>Return to exact step</button>
+            <button type="button" className="mt-4 rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white" disabled={busy || stopped} onClick={resume}>Return to exact step</button>
           </section>
         ) : entry.state === 'completed' ? (
-          <section className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-6"><h2 tabIndex={-1} className="text-2xl font-bold">Study block complete</h2><p>No host mastery decision was invented. Tutor Core remains the instructional authority.</p><button className="mt-4 rounded-lg border bg-white px-4 py-2" onClick={onBack}>Back to plan</button></section>
+          <section className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-6"><h2 ref={headingRef} tabIndex={-1} className="text-2xl font-bold">Study block complete</h2><p>No host mastery decision was invented. Tutor Core remains the instructional authority.</p><button type="button" className="mt-4 rounded-lg border bg-white px-4 py-2" onClick={onBack}>Back to plan</button></section>
         ) : currentSegment ? (
           <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_20rem]">
             <section id="current-study-task" className="rounded-2xl border border-slate-200 bg-white p-6">
@@ -237,16 +259,17 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
               <textarea id="study-response" className="mt-2 min-h-28 w-full rounded-lg border border-slate-400 p-3 text-base" value={answer} disabled={busy || stopped} onChange={(event) => setAnswer(event.target.value)} aria-describedby="study-response-help" />
               <p id="study-response-help" className="mt-1 text-sm text-slate-600">This response is transient. It is sent through the safety/Tutor bridge and is not stored in Study evidence.</p>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-                <button className="rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white disabled:opacity-50" disabled={!answer.trim() || busy || stopped} onClick={completeStep}>Send through Tutor boundary</button>
-                <button className="rounded-lg border border-cyan-700 bg-white px-5 py-3 font-bold text-cyan-800 disabled:opacity-50" disabled={busy || stopped} onClick={saveBreak}>Take a water break</button>
+                <button type="button" className="rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white disabled:opacity-50" disabled={!answer.trim() || busy || stopped} onClick={completeStep}>Send through Tutor boundary</button>
+                <button type="button" className="rounded-lg border border-cyan-700 bg-white px-5 py-3 font-bold text-cyan-800 disabled:opacity-50" disabled={busy || stopped} onClick={saveBreak}>Take a water break</button>
               </div>
             </section>
             <JarvisCore
               activity={busy ? 'thinking' : stopped ? 'paused' : 'idle'}
               statusText={stopped ? 'Study paused safely' : busy ? 'Checking safely' : 'Ready'}
               currentUtterance={jarvisText}
-              motionMode={context.accessibility.reducedMotion ? 'none' : 'minimal'}
-              voiceMode={context.accessibility.noAudio ? 'no-audio' : 'unavailable'}
+              captionLabel="Jarvis captions (always visible)"
+              motionMode={accessibilityProjection.motionMode}
+              voiceMode={accessibilityProjection.voiceMode}
               transcript={context.accessibility.transientTranscript ? <ol>{approvedTranscript.map((line, index) => <li key={`${index}-${line}`}>{line}</li>)}</ol> : undefined}
               transcriptOpen={transcriptOpen}
               onTranscriptOpenChange={context.accessibility.transientTranscript ? setTranscriptOpen : undefined}

@@ -1,6 +1,7 @@
 /** Authenticated, fail-closed Study safety classification gateway. */
 
 import { createAdultReviewProposalService } from './_shared/study-adult-review/proposal.js'
+import { createSupabaseStudySafetyPorts } from './_shared/study-adult-review/supabase-ports.js'
 import { createSupabaseLearnerAuthorizationPort } from './_shared/study-safety/authorization.js'
 import {
   STUDY_SAFETY_REQUEST_LIMIT_BYTES,
@@ -10,7 +11,7 @@ import { learnerWireResult } from './_shared/study-safety/learner-safe.js'
 import { createMonitoringEvent, NOOP_MONITORING_PORT } from './_shared/study-safety/monitoring.js'
 import { createAnthropicSafetyClassifier } from './_shared/study-safety/provider.js'
 import { evaluateStudySafetyReadiness, readinessWireResult } from './_shared/study-safety/readiness.js'
-import { rateLimitActorRef } from './_shared/study-safety/rate-limit.js'
+import { rateLimitActorRef, rateLimitSubjectRefs } from './_shared/study-safety/rate-limit.js'
 import { classifyTransientSafety } from './_shared/study-safety/service.js'
 import {
   errorResponse,
@@ -27,23 +28,43 @@ const READINESS_PATH = '/api/study/safety/readiness'
 export function createStudySafetyHandler(overrides = {}) {
   const env = overrides.env ?? process.env
   const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
-  const monitoring = overrides.monitoring ?? NOOP_MONITORING_PORT
-  const classifier = overrides.classifier ?? createAnthropicSafetyClassifier({ env, fetchImpl, monitoring })
+  const productionPorts = overrides.productionPorts ?? createSupabaseStudySafetyPorts({ env, fetchImpl })
+  const effectiveMonitoring = overrides.monitoring ?? productionPorts.monitoring ?? NOOP_MONITORING_PORT
+  const classifier = overrides.classifier ?? createAnthropicSafetyClassifier({ env, fetchImpl, monitoring: effectiveMonitoring })
   const learnerAuthorization = overrides.learnerAuthorization ?? createSupabaseLearnerAuthorizationPort({ env, fetchImpl })
-  const proposalPersistence = overrides.proposalPersistence
-  const outbox = overrides.outbox
-  const recipientResolver = overrides.recipientResolver
-  const rateLimiter = overrides.rateLimiter
+  const proposalPersistence = overrides.proposalPersistence ?? productionPorts.proposalPersistence
+  const outbox = overrides.outbox ?? productionPorts.outbox
+  const recipientResolver = overrides.recipientResolver ?? productionPorts.recipientResolver
+  const rateLimiter = overrides.rateLimiter ?? productionPorts.rateLimiter
+  const deliveryProviders = overrides.deliveryProviders
+  const receiptValidators = overrides.receiptValidators
   const authVerifier = overrides.authVerifier ?? verifySupabaseBearer
   const now = overrides.now ?? Date.now
+  const usesProductionPorts = [
+    overrides.proposalPersistence,
+    overrides.outbox,
+    overrides.recipientResolver,
+    overrides.rateLimiter,
+    overrides.monitoring,
+  ].some((port) => port === undefined)
   const proposalService = proposalPersistence
     ? createAdultReviewProposalService({ persistence: proposalPersistence, now })
     : null
-  const dependencies = { classifier, learnerAuthorization, proposalPersistence, outbox, recipientResolver, rateLimiter, monitoring }
+  const dependencies = {
+    classifier,
+    learnerAuthorization,
+    proposalPersistence,
+    outbox,
+    recipientResolver,
+    rateLimiter,
+    monitoring: effectiveMonitoring,
+    deliveryProviders,
+    receiptValidators,
+  }
 
   async function record(name, severity, code, fields = {}) {
     try {
-      await monitoring.record(createMonitoringEvent(name, severity, code, fields, { now }))
+      await effectiveMonitoring.record(createMonitoringEvent(name, severity, code, fields, { now }))
     } catch {
       // Monitoring failure never permits academic continuation or leaks input.
     }
@@ -51,6 +72,7 @@ export function createStudySafetyHandler(overrides = {}) {
 
   return async (event) => {
     if (event?.httpMethod === 'GET' && event?.path === READINESS_PATH && !hasQuery(event)) {
+      if (usesProductionPorts) await productionPorts.refreshReadiness()
       const readiness = evaluateStudySafetyReadiness(dependencies, env)
       return jsonResponse(readiness.status === 'not-ready' ? 503 : 200, readinessWireResult(readiness))
     }
@@ -64,6 +86,7 @@ export function createStudySafetyHandler(overrides = {}) {
         await record('study_safety.request_unauthorized', 'warning', 'request-unauthorized')
         return auth.response
       }
+      if (usesProductionPorts) await productionPorts.refreshReadiness()
       const readiness = evaluateStudySafetyReadiness(dependencies, env)
       if (readiness.status !== 'ready') return errorResponse(503, 'service_not_ready')
 
@@ -101,6 +124,30 @@ export function createStudySafetyHandler(overrides = {}) {
         return authorization?.status === 'unavailable'
           ? errorResponse(503, 'authorization_unavailable')
           : errorResponse(403, 'learner_not_authorized')
+      }
+
+      try {
+        const subjectRefs = rateLimitSubjectRefs({
+          householdId: authorization.context.householdId,
+          studentId: authorization.context.studentId,
+          route: 'study-safety-classify',
+        }, env)
+        if (!subjectRefs) return errorResponse(503, 'service_not_ready')
+        const subjectReservation = await rateLimiter.reserve({
+          actorRef: rateLimitActorRef(auth.user.id, env),
+          ...subjectRefs,
+          scope: 'study-safety-classify-subject-route',
+          now: now(),
+        })
+        if (!subjectReservation?.allowed) {
+          await record('study_safety.request_rate_limited', 'warning', 'request-rate-limited')
+          const retryAfter = Number.isInteger(subjectReservation?.retryAfterSeconds)
+            ? String(Math.max(1, Math.min(3600, subjectReservation.retryAfterSeconds)))
+            : '60'
+          return errorResponse(429, 'rate_limited', { 'retry-after': retryAfter })
+        }
+      } catch {
+        return errorResponse(503, 'service_not_ready')
       }
 
       const decision = await classifyTransientSafety(request.transientText, classifier)

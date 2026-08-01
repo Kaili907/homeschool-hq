@@ -69,6 +69,23 @@ describe('minimized adult-review proposal and recipient boundary', () => {
     expect(JSON.stringify(snapshot)).not.toContain('transcript')
   })
 
+  it('fails closed on a reused request id with conflicting classification semantics', async () => {
+    const { store, service } = await proposedStore()
+    const conflict = await service.propose({
+      decision: {
+        ...DECISION,
+        outcome: 'uncertain',
+        reasonCodes: ['safety-uncertain-self-harm-v1', 'safety-provider-uncertain-v1'],
+      },
+      context: CONTEXT,
+      requestId: IDS.request,
+      sessionId: IDS.session,
+    })
+    expect(conflict).toEqual({ state: 'not-confirmed' })
+    expect(store.snapshot().proposals).toHaveLength(1)
+    expect(store.snapshot().proposals[0].proposal.classification).toBe('urgent')
+  })
+
   it('rejects raw disclosure and unknown fields at the persistence boundary', async () => {
     const store = createInMemoryAdultReviewStore()
     await expect(store.createProposal({
@@ -136,7 +153,7 @@ describe('per-route outbox delivery and evidence', () => {
     expect(JSON.stringify(snapshot)).not.toContain('@')
   })
 
-  it('survives the provider-accepted/response-lost crash window without double delivery', async () => {
+  it('marks a provider-accepted/response-lost result indeterminate and never retries blindly', async () => {
     let now = Date.parse(NOW_ISO)
     const { store, proposalId } = await proposedStore()
     const resolver = createTestRecipientResolver({
@@ -148,11 +165,11 @@ describe('per-route outbox delivery and evidence', () => {
       store, recipientResolver: resolver, providers: [email], now: () => now, baseRetryMs: 100, maxRetryMs: 100,
     })
     await worker.resolvePending()
-    expect((await worker.deliver())[0].state).toBe('retry-scheduled')
+    expect((await worker.deliver())[0].state).toBe('indeterminate')
     now += 101
-    expect((await worker.deliver())[0].state).toBe('delivered')
-    expect(email.stats()).toEqual({ calls: 2, uniqueDeliveries: 1 })
-    expect(store.snapshot().outbox[0].state).toBe('delivered')
+    expect(await worker.deliver()).toEqual([])
+    expect(email.stats()).toEqual({ calls: 1, uniqueDeliveries: 1 })
+    expect(store.snapshot().outbox[0].state).toBe('indeterminate')
   })
 
   it('clamps temporary retries and stops after the server-owned maximum attempts', async () => {
@@ -209,6 +226,46 @@ describe('per-route outbox delivery and evidence', () => {
     expect(snapshot.outbox[0].state).toBe('indeterminate')
     expect(snapshot.receipts).toHaveLength(0)
     expect(snapshot.outbox[0]).not.toHaveProperty('deliveredAt')
+  })
+
+  it('rejects one provider receipt reused across two immutable attempts', async () => {
+    const { store, proposalId } = await proposedStore()
+    const resolver = createTestRecipientResolver({
+      proposalRef: proposalId,
+      recipients: recipients([
+        { channel: 'email', routeRef: 'email-route:guardian-one' },
+        { channel: 'email', routeRef: 'email-route:guardian-two' },
+      ]),
+    })
+    const attemptByRoute = new Map()
+    const provider = {
+      channel: 'email',
+      providerVersion: 'test-email-replay-v1',
+      isDurable: false,
+      isTestProvider: true,
+      supportsDurableIdempotency: true,
+      isReady: () => true,
+      async deliver(input) {
+        attemptByRoute.set(input.routeRef, input.attemptId)
+        return { state: 'delivered', providerReceiptRef: 'same-provider-receipt' }
+      },
+    }
+    const validator = {
+      channel: 'email', isDurable: false, isTestProvider: true, isReady: () => true,
+      async verifyReceipt(input) {
+        return { verified: true, attemptId: attemptByRoute.get(input.routeRef), evidenceRef: 'verified-replay-evidence' }
+      },
+    }
+    const worker = createAdultReviewOutboxWorker({
+      store,
+      recipientResolver: resolver,
+      providers: [provider],
+      receiptValidators: [validator],
+      now: () => Date.parse(NOW_ISO),
+    })
+    await worker.resolvePending()
+    expect((await worker.deliver()).map((entry) => entry.state)).toEqual(['delivered', 'indeterminate'])
+    expect(store.snapshot().receipts).toHaveLength(1)
   })
 
   it('emits sanitized backlog, recipient, and repeated-delivery evidence', async () => {

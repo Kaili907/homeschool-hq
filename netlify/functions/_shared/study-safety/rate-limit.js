@@ -1,3 +1,5 @@
+import { createHmac } from 'node:crypto'
+
 /** Contract for an atomic cross-instance limiter supplied by production infrastructure. */
 export function validRateLimitPort(port, requireDurable = true) {
   return Boolean(
@@ -38,4 +40,17 @@ export function rateLimitActorRef(userId, env = process.env) {
   if (!key) return null
   return `actor:${createHmac('sha256', key).update(userId, 'utf8').digest('hex')}`
 }
-import { createHmac } from 'node:crypto'
+
+/** Opaque correlation refs for the post-authorization learner/route reservation. */
+export function rateLimitSubjectRefs({ householdId, studentId, route }, env = process.env) {
+  const key = typeof env.STUDY_SAFETY_RATE_LIMIT_HMAC_KEY === 'string'
+    ? env.STUDY_SAFETY_RATE_LIMIT_HMAC_KEY.trim()
+    : ''
+  if (!key) return null
+  const ref = (kind, value) => `${kind}:${createHmac('sha256', key).update(`${kind}\u001f${value}`, 'utf8').digest('hex')}`
+  return Object.freeze({
+    householdRef: ref('household', householdId),
+    learnerRef: ref('learner', studentId),
+    routeRef: ref('route', route),
+  })
+}

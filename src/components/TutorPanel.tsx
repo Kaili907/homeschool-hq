@@ -3,6 +3,7 @@ import type { AppState, Profile, VoiceProviderId, VoiceSlot } from '../types'
 import { SKILL_BY_ID } from '../skills'
 import { updateProfile } from '../appState'
 import {
+  BROWSER_VOICE_KEYS_ALLOWED,
   CACHE_MAX_BYTES,
   DEFAULT_MONTHLY_CAP,
   encodeVoiceRef,
@@ -427,7 +428,7 @@ function PremiumVoicePanel({ state }: { state: AppState }) {
       <div className="font-bold text-slate-800">Premium voice (ElevenLabs)</div>
 
       {/* API key */}
-      <div className="space-y-1">
+      {BROWSER_VOICE_KEYS_ALLOWED ? <div className="space-y-1">
         <div className="text-xs font-semibold text-slate-500">
           API key — stored only on this device, never in exports or backups.
         </div>
@@ -453,7 +454,11 @@ function PremiumVoicePanel({ state }: { state: AppState }) {
           )}
           {testMsg && <span className="text-xs font-semibold text-slate-600">{testMsg}</span>}
         </div>
-      </div>
+      </div> : (
+        <p className="text-xs font-semibold text-slate-500">
+          Production premium voice uses the authenticated Manuel Academy gateway. Browser provider keys are disabled.
+        </p>
+      )}
 
       {/* usage + cap */}
       <div className="space-y-1">

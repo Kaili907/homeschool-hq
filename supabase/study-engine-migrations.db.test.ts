@@ -17,6 +17,7 @@ const historicalMigrations = {
 const studyMigrations = [
   '20260801010000_academy_study_engine_storage.sql',
   '20260801011000_academy_study_engine_authorization.sql',
+  '20260801012000_academy_study_engine_production_reconciliation.sql',
 ] as const
 
 const bootstrap = `

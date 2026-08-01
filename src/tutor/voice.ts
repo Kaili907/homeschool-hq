@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { VoiceProviderId, VoiceRef } from '../types'
 import { getGatewayAccessToken } from './gatewayAuth'
+import { PROVIDER_BUILD_POLICY } from './providerBoundary'
 
 /**
  * MT-V voice: a ranked provider adapter — **cache → ElevenLabs → browser TTS**.
@@ -254,7 +255,10 @@ export const ELEVENLABS_MODEL_ID = 'eleven_turbo_v2_5'
 // (netlify/functions/tts via the /api/tts redirect), which injects the key
 // server-side — the key never ships to the client. Empty (local dev / no flag)
 // keeps the direct-with-panel-key path. Only this one value changes.
-export const ELEVENLABS_ENDPOINT_BASE = import.meta.env.VITE_USE_PROXY === 'true' ? '/api/tts' : ''
+export const ELEVENLABS_ENDPOINT_BASE = import.meta.env.PROD || PROVIDER_BUILD_POLICY.gatewayRequired
+  ? '/api/tts'
+  : ''
+export const BROWSER_VOICE_KEYS_ALLOWED = !import.meta.env.PROD && PROVIDER_BUILD_POLICY.browserProviderKeysAllowed
 
 /** Minimal fetch shape so tests can inject a fake without the whole DOM Response type. */
 export type FetchLike = (
@@ -274,13 +278,16 @@ export function createElevenLabsSynth(deps: {
   const base = deps.endpointBase ?? ELEVENLABS_ENDPOINT_BASE
   const modelId = deps.modelId ?? ELEVENLABS_MODEL_ID
   const proxyMode = base !== ''
-  const origin = base || 'https://api.elevenlabs.io'
   return {
     available() {
+      if (!proxyMode && (import.meta.env.PROD || !PROVIDER_BUILD_POLICY.directProviderRequestsAllowed)) return false
       // Proxy mode holds the key server-side, so no local key is required.
       return (proxyMode || !!deps.getKey()) && deps.isOnline() && !deps.usage.overCap()
     },
     async synthesize({ text, voiceId }) {
+      if (!proxyMode && (import.meta.env.PROD || !PROVIDER_BUILD_POLICY.directProviderRequestsAllowed)) {
+        throw new Error('elevenlabs: direct provider disabled')
+      }
       const key = deps.getKey()
       if (!proxyMode && !key) throw new Error('elevenlabs: no key')
       let url: string
@@ -289,7 +296,7 @@ export function createElevenLabsSynth(deps: {
       if (proxyMode) {
         const accessToken = await (deps.getAccessToken ?? getGatewayAccessToken)()
         if (!accessToken) throw new Error('elevenlabs: unauthenticated')
-        url = `${origin}/synthesize`
+        url = `${base}/synthesize`
         headers = {
           Authorization: `Bearer ${accessToken}`,
           'content-type': 'application/json',
@@ -297,7 +304,8 @@ export function createElevenLabsSynth(deps: {
         }
         body = JSON.stringify({ text, voiceId })
       } else {
-        url = `${origin}/v1/text-to-speech/${encodeURIComponent(voiceId)}?output_format=mp3_44100_128`
+        if (import.meta.env.PROD) throw new Error('elevenlabs: direct provider disabled')
+        url = `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}?output_format=mp3_44100_128`
         headers = {
           'xi-api-key': key as string,
           'content-type': 'application/json',
@@ -618,7 +626,7 @@ export function staticVoiceLines(): string[] {
 
 // ---------- local-storage backed key store (NEVER in AppState → never exported) ----------
 
-const KEY_LS = 'homeschool-hq:voice:key'
+const KEY_LS = import.meta.env.PROD ? '' : 'homeschool-hq:voice:key'
 const USAGE_LS = 'homeschool-hq:voice:usage'
 
 function ls(): Storage | null {
@@ -630,10 +638,12 @@ function ls(): Storage | null {
 }
 
 export function getStoredKey(): string | null {
+  if (import.meta.env.PROD || !BROWSER_VOICE_KEYS_ALLOWED) return null
   return ls()?.getItem(KEY_LS) ?? null
 }
 
 export function setStoredKey(k: string): void {
+  if (import.meta.env.PROD || !BROWSER_VOICE_KEYS_ALLOWED) return
   const s = ls()
   if (!s) return
   const t = k.trim()
@@ -642,6 +652,7 @@ export function setStoredKey(k: string): void {
 }
 
 export function clearStoredKey(): void {
+  if (import.meta.env.PROD || !BROWSER_VOICE_KEYS_ALLOWED) return
   ls()?.removeItem(KEY_LS)
 }
 

@@ -11,6 +11,12 @@ function readyPort(port, method, requireDurable = true) {
   )
 }
 
+function readyProductionCollection(ports, method) {
+  return Array.isArray(ports) && ports.length > 0 && ports.every((port) =>
+    readyPort(port, method) && port.isTestProvider !== true,
+  )
+}
+
 export function evaluateStudySafetyReadiness(dependencies, env = process.env) {
   const missing = []
   if (!supabaseAuthConfigured(env)) missing.push('authentication')
@@ -32,6 +38,13 @@ export function evaluateStudySafetyReadiness(dependencies, env = process.env) {
     !readyPort(dependencies.recipientResolver, 'resolve') ||
     typeof dependencies.recipientResolver?.reauthorizeForDelivery !== 'function'
   ) missing.push('authorized-recipient-resolver')
+  if (
+    !readyProductionCollection(dependencies.deliveryProviders, 'deliver') ||
+    dependencies.deliveryProviders.some((provider) => provider.supportsDurableIdempotency !== true)
+  ) missing.push('delivery-provider')
+  if (!readyProductionCollection(dependencies.receiptValidators, 'verifyReceipt')) {
+    missing.push('receipt-validator')
+  }
   const circuitState = dependencies.classifier?.circuitState?.()
   return Object.freeze({
     status: missing.length > 0 ? 'not-ready' : circuitState && circuitState !== 'closed' ? 'degraded' : 'ready',

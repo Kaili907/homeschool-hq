@@ -31,6 +31,8 @@ export interface AdultReviewOutboxRecordV1 {
   readonly recipientRef: string
   readonly routeRef: string
   readonly channel: 'email' | 'in-app' | 'sms'
+  readonly templateCode: 'study-safety-adult-review-v1'
+  readonly enqueuedAt: string
   readonly state: 'pending' | 'claimed' | 'retry-scheduled' | 'delivered' | 'permanent-failure' | 'indeterminate'
   readonly attemptCount: number
   readonly retryAt: string | null
@@ -39,14 +41,21 @@ export interface AdultReviewOutboxRecordV1 {
 
 export interface ClaimedAdultReviewOutboxWorkV1 {
   readonly record: AdultReviewOutboxRecordV1
+  readonly proposal: AdultReviewProposalV1
   readonly leaseToken: string
   readonly leaseExpiresAt: string
 }
 
 export interface AdultReviewPersistencePort {
+  readonly isDurable: boolean
+  isReady(): boolean
   createProposal(input: {
     proposal: AdultReviewProposalV1
-  }): Promise<{ created: true } | { created: false; duplicateProposalId: string }>
+  }): Promise<
+    | { created: true }
+    | { created: false; duplicateProposalId: string; conflict?: false }
+    | { created: false; duplicateProposalId: string; conflict: true }
+  >
   claimUnresolvedProposals(input: { now: string; limit: number; leaseMs: number }): Promise<readonly {
     proposal: AdultReviewProposalV1
     leaseToken: string
@@ -63,8 +72,15 @@ export interface AdultReviewPersistencePort {
       channel: 'email' | 'in-app' | 'sms'
       deliveryIdempotencyKey: string
     }[]
+    enqueuedAt: string
   }): Promise<readonly AdultReviewOutboxRecordV1[]>
-  claimOutboxWork(input: { now: string; limit: number; leaseMs: number }): Promise<readonly ClaimedAdultReviewOutboxWorkV1[]>
+  recordRecipientResolutionFailure(input: {
+    proposalId: string
+    proposalLeaseToken: string
+    state: 'unavailable' | 'indeterminate'
+    reasonCode: string
+  }): Promise<void>
+  claim(input: { now: string; limit: number; leaseMs: number }): Promise<readonly ClaimedAdultReviewOutboxWorkV1[]>
   recordAttempt(input: {
     outboxId: string
     leaseToken: string
@@ -86,18 +102,29 @@ export interface AdultReviewPersistencePort {
     routeRef: string
     channel: 'email' | 'in-app' | 'sms'
     providerVersion: string
+    authorizationEvidenceRef: string
+    attemptedAt: string
     deliveredAt: string
     providerReceiptRef: string
+    receiptEvidenceRef: string
+  }): Promise<void>
+  recordDelivered(input: {
+    outboxId: string
+    leaseToken: string
+    attemptId: string
+    deliveredAt: string
   }): Promise<void>
   recordPermanentFailure(input: {
     outboxId: string
     leaseToken: string
+    attemptId?: string
     failedAt: string
     failureCode: string
   }): Promise<void>
   recordTemporaryFailure(input: {
     outboxId: string
     leaseToken: string
+    attemptId: string
     failedAt: string
     retryAt: string
     failureCode: string
@@ -105,10 +132,11 @@ export interface AdultReviewPersistencePort {
   recordIndeterminate(input: {
     outboxId: string
     leaseToken: string
+    attemptId?: string
     failedAt: string
     failureCode: string
   }): Promise<void>
-  recordMonitoringAlert(event: StudySafetyMonitoringEventV1): Promise<void>
+  recordMonitoringAlert?(event: StudySafetyMonitoringEventV1): Promise<void>
 }
 
 export interface AuthorizedAdultRecipientRefV1 {
@@ -124,6 +152,8 @@ export interface AuthorizedAdultRecipientRefV1 {
 }
 
 export interface AuthorizedAdultRecipientResolverPort {
+  readonly isDurable: boolean
+  isReady(): boolean
   resolve(input: {
     proposalRef: string
   }): Promise<
@@ -141,13 +171,18 @@ export interface AuthorizedAdultRecipientResolverPort {
     routeRef: string
     now: string
   }): Promise<
-    | { state: 'authorized'; authorizationEvidenceRef: string }
+    | {
+        state: 'authorized'
+        authorizationEvidenceRef: string
+        channel: 'email' | 'in-app' | 'sms'
+      }
     | { state: 'revoked' | 'unavailable' | 'indeterminate'; reasonCode: string }
   >
 }
 
 export interface AdultReviewDeliveryAttemptV1 {
   readonly idempotencyKey: string
+  readonly attemptId: string
   readonly recipientRef: string
   readonly routeRef: string
   readonly templateCode: 'study-safety-adult-review-v1'
@@ -163,13 +198,43 @@ export type AdultReviewDeliveryResultV1 =
 export interface AdultReviewDeliveryProviderPort {
   readonly channel: 'email' | 'in-app' | 'sms'
   readonly providerVersion: string
+  readonly isDurable: boolean
+  readonly isTestProvider?: boolean
   /** Production implementations must honor unchanged idempotency keys durably. */
   readonly supportsDurableIdempotency: boolean
+  isReady(): boolean
   deliver(input: AdultReviewDeliveryAttemptV1): Promise<AdultReviewDeliveryResultV1>
+}
+
+export interface AdultReviewReceiptValidatorPort {
+  readonly channel: 'email' | 'in-app' | 'sms'
+  readonly isDurable: boolean
+  readonly isTestProvider?: boolean
+  isReady(): boolean
   verifyReceipt(input: {
     deliveryIdempotencyKey: string
     recipientRef: string
     routeRef: string
     providerReceiptRef: string
-  }): Promise<{ verified: true; evidenceRef: string } | { verified: false }>
+  }): Promise<
+    | { verified: true; attemptId: string; evidenceRef: string }
+    | { verified: false }
+  >
+}
+
+export interface AdultReviewOutboxWorkerPort {
+  readonly isDurable: boolean
+  isReady(): boolean
+  resolvePending(limit?: number): Promise<{ proposalsClaimed: number; jobsEnqueued: number }>
+  deliver(limit?: number): Promise<readonly {
+    outboxId: string
+    state: 'delivered' | 'retry-scheduled' | 'permanent-failure' | 'indeterminate'
+  }[]>
+  process(limit?: number): Promise<{
+    resolution: { proposalsClaimed: number; jobsEnqueued: number }
+    deliveries: readonly {
+      outboxId: string
+      state: 'delivered' | 'retry-scheduled' | 'permanent-failure' | 'indeterminate'
+    }[]
+  }>
 }

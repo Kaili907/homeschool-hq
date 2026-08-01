@@ -52,6 +52,12 @@ export interface UrgentSafetyClassifierRequestV1 {
 /** Provider-neutral asynchronous host implementation of the frozen bridge port. */
 export interface ServerUrgentSafetyClassifierPort {
   readonly classifierVersion: string
+  readonly configurationIdentity: {
+    readonly model: string
+    readonly configVersion: string
+  }
+  isConfigured(): boolean
+  circuitState(): 'closed' | 'closed-recovering' | 'open'
   classify(
     request: UrgentSafetyClassifierRequestV1,
   ): Promise<{
@@ -61,6 +67,26 @@ export interface ServerUrgentSafetyClassifierPort {
     readonly categories: readonly SafetyCategory[]
     readonly reasonCodes: readonly SafetyReasonCode[]
   }>
+}
+
+export type StudyProductionReadinessState = 'ready' | 'not-ready' | 'degraded'
+
+export interface StudySafetyRateLimitReservationV1 {
+  readonly actorRef: string
+  readonly householdRef?: string
+  readonly learnerRef?: string
+  readonly routeRef?: string
+  readonly scope: 'study-safety-classify' | 'study-safety-classify-subject-route'
+  readonly now: number
+}
+
+export interface StudySafetyRateLimitPort {
+  readonly isDurable: boolean
+  isReady(): boolean
+  reserve(input: StudySafetyRateLimitReservationV1): Promise<
+    | { readonly allowed: true }
+    | { readonly allowed: false; readonly retryAfterSeconds: number }
+  >
 }
 
 export type StudySafetyMonitoringEventName =
@@ -88,4 +114,10 @@ export interface StudySafetyMonitoringEventV1 {
   readonly studentRef?: string
   readonly proposalRef?: string
   readonly attemptCount?: number
+}
+
+export interface StudySafetyMonitoringPort {
+  readonly isDurable: boolean
+  isReady(): boolean
+  record(event: StudySafetyMonitoringEventV1): Promise<void>
 }

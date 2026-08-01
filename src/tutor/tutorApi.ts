@@ -8,6 +8,7 @@
 
 import type { Grade } from '../types'
 import { getGatewayAccessToken } from './gatewayAuth'
+import { PROVIDER_BUILD_POLICY } from './providerBoundary'
 
 // ---------- API constants ----------
 
@@ -35,11 +36,14 @@ export const ANTHROPIC_VERSION = '2023-06-01'
 // which injects the key server-side — the key never ships to the client. Empty
 // (local dev / no flag) keeps the direct-with-panel-key path. Only this one value
 // changes; the fetch layer below reads it and drops the client key in proxy mode.
-export const ANTHROPIC_ENDPOINT_BASE = import.meta.env.VITE_USE_PROXY === 'true' ? '/api/anthropic' : ''
+export const ANTHROPIC_ENDPOINT_BASE = import.meta.env.PROD || PROVIDER_BUILD_POLICY.gatewayRequired
+  ? '/api/anthropic'
+  : ''
+export const BROWSER_TUTOR_KEYS_ALLOWED = !import.meta.env.PROD && PROVIDER_BUILD_POLICY.browserProviderKeysAllowed
 
 // ---------- local-storage backed key store (NEVER in AppState → never exported) ----------
 
-const KEY_LS = 'homeschool-hq:tutor:key'
+const KEY_LS = import.meta.env.PROD ? '' : 'homeschool-hq:tutor:key'
 const MODEL_LS = 'homeschool-hq:tutor:model'
 
 function ls(): Storage | null {
@@ -51,10 +55,12 @@ function ls(): Storage | null {
 }
 
 export function getTutorKey(): string | null {
+  if (import.meta.env.PROD || !BROWSER_TUTOR_KEYS_ALLOWED) return null
   return ls()?.getItem(KEY_LS) ?? null
 }
 
 export function setTutorKey(k: string): void {
+  if (import.meta.env.PROD || !BROWSER_TUTOR_KEYS_ALLOWED) return
   const s = ls()
   if (!s) return
   const t = k.trim()
@@ -63,6 +69,7 @@ export function setTutorKey(k: string): void {
 }
 
 export function clearTutorKey(): void {
+  if (import.meta.env.PROD || !BROWSER_TUTOR_KEYS_ALLOWED) return
   ls()?.removeItem(KEY_LS)
 }
 
@@ -184,18 +191,20 @@ export async function askTutor(
 ): Promise<TutorApiResult> {
   const base = deps.endpointBase ?? ANTHROPIC_ENDPOINT_BASE
   const proxyMode = base !== ''
+  if (!proxyMode && (import.meta.env.PROD || !PROVIDER_BUILD_POLICY.directProviderRequestsAllowed)) {
+    return { ok: false, reason: 'error' }
+  }
   const key = deps.getKey()
   // Direct mode needs the family-machine key; proxy mode holds the key server-side.
   if (!proxyMode && !key) return { ok: false, reason: 'no-key' }
   if (!deps.isOnline()) return { ok: false, reason: 'offline' }
-  const origin = base || 'https://api.anthropic.com'
   if (proxyMode) {
     if (!req.gateway) return { ok: false, reason: 'error' }
     try {
       const accessToken = await (deps.getAccessToken ?? getGatewayAccessToken)()
       if (!accessToken) return { ok: false, reason: 'unauthenticated' }
       const modelTier: TutorModelChoice = deps.modelId === TUTOR_MODEL_HAIKU ? 'haiku' : 'sonnet'
-      const response = await deps.fetchImpl(`${origin}/v1/messages`, {
+      const response = await deps.fetchImpl(`${base}/v1/messages`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -218,6 +227,7 @@ export async function askTutor(
       return { ok: false, reason: 'error' }
     }
   }
+  if (import.meta.env.PROD) return { ok: false, reason: 'error' }
   // Direct local-family mode retains the original own-key provider request.
   const headers: Record<string, string> = {
     'x-api-key': key as string,
@@ -227,7 +237,7 @@ export async function askTutor(
     'anthropic-dangerous-direct-browser-access': 'true',
   }
   try {
-    const res = await deps.fetchImpl(`${origin}/v1/messages`, {
+    const res = await deps.fetchImpl('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers,
       body: JSON.stringify({

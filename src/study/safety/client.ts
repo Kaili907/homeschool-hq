@@ -18,6 +18,8 @@ export interface StudySafetyClientDeps {
   readonly getAccessToken?: () => Promise<string | null>
   readonly fetchImpl?: FetchLike
   readonly timeoutMs?: number
+  /** Host lifecycle cancellation (logout, learner switch, navigation, etc.). */
+  readonly signal?: AbortSignal
 }
 
 const VALID_CLASSIFICATIONS = new Set(['urgent', 'uncertain', 'clear', 'invalid'])
@@ -68,6 +70,7 @@ export async function classifyStudySafety(
 ): Promise<StudySafetyClassificationResponseV1> {
   const getAccessToken = deps.getAccessToken ?? getGatewayAccessToken
   const fetchImpl = deps.fetchImpl ?? ((url, init) => fetch(url, init))
+  if (deps.signal?.aborted) return failClosed('client-cancelled')
   let accessToken: string | null
   try {
     accessToken = await getAccessToken()
@@ -75,8 +78,11 @@ export async function classifyStudySafety(
     return failClosed('client-auth-unavailable')
   }
   if (!accessToken) return failClosed('client-unauthenticated')
+  if (deps.signal?.aborted) return failClosed('client-cancelled')
 
   const controller = new AbortController()
+  const cancelFromHost = () => controller.abort(deps.signal?.reason)
+  deps.signal?.addEventListener('abort', cancelFromHost, { once: true })
   const timer = globalThis.setTimeout(
     () => controller.abort(),
     deps.timeoutMs ?? STUDY_SAFETY_CLIENT_TIMEOUT_MS,
@@ -101,5 +107,6 @@ export async function classifyStudySafety(
     return failClosed('client-network-error')
   } finally {
     globalThis.clearTimeout(timer)
+    deps.signal?.removeEventListener('abort', cancelFromHost)
   }
 }

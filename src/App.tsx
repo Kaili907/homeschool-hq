@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { SKILL_BY_ID, type SkillId } from './skills'
 import type { AnswerRecord, AppState, Profile } from './types'
 import { generateFresh } from './generators'
@@ -56,18 +56,28 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
-import { isStudyEngineEnabledFromHost } from './study/featureFlag'
+import { isStudyEngineEnabledFromHost, isStudyEnginePreviewEnabledFromHost } from './study/featureFlag'
 import {
   buildHostStudyContext,
   deriveStudyHouseholdRef,
   deriveStudyLearnerRef,
   localDevelopmentHouseholdTimeZone,
 } from './study/hostContext'
-import { createLocalDevelopmentStudyPorts } from './study/localDevelopmentPorts'
 import type { StudyAdultAuthorization } from './study/types'
-import { StudyDashboard } from './components/study/StudyDashboard'
-import { StudySessionRoute } from './components/study/StudySessionRoute'
-import { StudySettings } from './components/study/StudySettings'
+import type { StudyPortBundle } from './study/ports'
+
+const loadPreviewPorts = import.meta.env.DEV
+  ? () => import('./study/localDevelopmentPorts').then(({ createLocalDevelopmentStudyPorts }) => createLocalDevelopmentStudyPorts())
+  : null
+const StudyDashboard = import.meta.env.DEV
+  ? lazy(() => import('./components/study/StudyDashboard').then((module) => ({ default: module.StudyDashboard })))
+  : null
+const StudySessionRoute = import.meta.env.DEV
+  ? lazy(() => import('./components/study/StudySessionRoute').then((module) => ({ default: module.StudySessionRoute })))
+  : null
+const StudySettings = import.meta.env.DEV
+  ? lazy(() => import('./components/study/StudySettings').then((module) => ({ default: module.StudySettings })))
+  : null
 
 type Screen =
   | { kind: 'picker' }
@@ -94,10 +104,8 @@ type Screen =
 export default function App() {
   const loaded = useMemo(loadAppState, [])
   const studyEnabled = useMemo(isStudyEngineEnabledFromHost, [])
-  const studyRuntime = useMemo(
-    () => (studyEnabled ? createLocalDevelopmentStudyPorts() : null),
-    [studyEnabled],
-  )
+  const studyPreviewEnabled = useMemo(isStudyEnginePreviewEnabledFromHost, [])
+  const [studyRuntime, setStudyRuntime] = useState<{ readonly ports: StudyPortBundle } | null>(null)
   const [state, setState] = useState<AppState>(loaded.state)
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
@@ -105,6 +113,20 @@ export default function App() {
   const seenRef = useRef(new Set<string>())
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
+
+  useEffect(() => {
+    let current = true
+    if (!studyPreviewEnabled || !loadPreviewPorts) {
+      setStudyRuntime(null)
+      return () => { current = false }
+    }
+    void loadPreviewPorts().then((runtime) => {
+      if (current) setStudyRuntime(runtime)
+    }).catch(() => {
+      if (current) setStudyRuntime(null)
+    })
+    return () => { current = false }
+  }, [studyPreviewEnabled])
 
   useEffect(() => {
     saveAppState(state)
@@ -129,20 +151,26 @@ export default function App() {
 
   const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
   const studyContextResult = buildHostStudyContext({
-    enabled: studyEnabled,
+    enabled: studyPreviewEnabled,
     syncStatus: sync.status,
     profile: active,
     subject: 'math',
     lessonRef: active ? `grade-${active.grade}:daily-study` : 'unselected:daily-study',
     skillRefs: active ? [`grade-${active.grade}:current-study-skill`] : [],
-    householdTimeZone: studyEnabled ? localDevelopmentHouseholdTimeZone() : null,
+    householdTimeZone: studyPreviewEnabled ? localDevelopmentHouseholdTimeZone() : null,
     timerHidden: false,
   })
+  const studyPreviewReady = Boolean(
+    studyEnabled &&
+    studyPreviewEnabled &&
+    studyRuntime &&
+    studyContextResult.status === 'ready',
+  )
   const tokens = THEMES[active?.theme ?? 'playful']
 
   const establishParentStudyAuthorization = () => {
     const user = sync.status.user
-    if (!studyEnabled || !user || sync.status.binding !== 'bound' || sync.status.provenance !== 'verified') {
+    if (!studyPreviewEnabled || !user || sync.status.binding !== 'bound' || sync.status.provenance !== 'verified') {
       setParentStudyAuthorization(null)
       return
     }
@@ -165,6 +193,7 @@ export default function App() {
   const patchActive = (update: (prev: Profile) => Profile) =>
     setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
   const signOut = () => {
+    setParentStudyAuthorization(null)
     setState((s) => ({ ...s, activeProfileId: null }))
     setScreen({ kind: 'picker' })
   }
@@ -301,7 +330,7 @@ export default function App() {
 
   if (screen.kind === 'parentHub') {
     const parentStudyReady =
-      studyEnabled &&
+      studyPreviewReady &&
       studyRuntime &&
       parentStudyAuthorization &&
       sync.status.user &&
@@ -315,7 +344,7 @@ export default function App() {
           setScreen({ kind: 'picker' })
         }}
         onOpenClassic={() => setScreen({ kind: 'grownups' })}
-        studyEnabled={studyEnabled}
+        studyEnabled={studyPreviewReady}
         study={
           parentStudyReady
             ? {
@@ -330,7 +359,9 @@ export default function App() {
               }
             : undefined
         }
-        studyUnavailableReason="Sign in, verify the household binding, and re-enter the parent PIN to use Study controls."
+        studyUnavailableReason={studyEnabled && !studyPreviewEnabled
+          ? 'Study production dependencies are not ready. The feature flag alone does not enable Study.'
+          : 'Sign in, verify the household binding, and re-enter the parent PIN to use the explicit local Study preview.'}
       />
     )
   }
@@ -371,11 +402,20 @@ export default function App() {
     screen.kind === 'studySettings' ||
     screen.kind === 'studySession'
   ) {
-    if (!studyEnabled || !studyRuntime || studyContextResult.status !== 'ready') {
+    if (
+      !studyPreviewReady ||
+      !studyRuntime ||
+      studyContextResult.status !== 'ready' ||
+      !StudyDashboard ||
+      !StudySessionRoute ||
+      !StudySettings
+    ) {
       return (
         <StudyUnavailable
           reason={
-            studyContextResult.status === 'unavailable'
+            studyEnabled && !studyPreviewEnabled
+              ? 'Study production composition is not ready. No preview, in-memory, or local classifier fallback was selected.'
+              : studyContextResult.status === 'unavailable'
               ? studyContextResult.reason
               : 'The Study integration is unavailable.'
           }
@@ -385,38 +425,44 @@ export default function App() {
     }
     if (screen.kind === 'studySettings') {
       return (
-        <StudySettings
-          context={studyContextResult.context}
-          ports={studyRuntime.ports}
-          onBack={() => setScreen({ kind: 'studyDashboard' })}
-        />
+        <Suspense fallback={<StudyLoading />}>
+          <StudySettings
+            context={studyContextResult.context}
+            ports={studyRuntime.ports}
+            onBack={() => setScreen({ kind: 'studyDashboard' })}
+          />
+        </Suspense>
       )
     }
     if (screen.kind === 'studySession') {
       return (
-        <StudySessionRoute
-          context={studyContextResult.context}
-          ports={studyRuntime.ports}
-          blockRef={screen.blockRef}
-          learnerRef={screen.learnerRef}
-          onBack={() => setScreen({ kind: 'studyDashboard' })}
-        />
+        <Suspense fallback={<StudyLoading />}>
+          <StudySessionRoute
+            context={studyContextResult.context}
+            ports={studyRuntime.ports}
+            blockRef={screen.blockRef}
+            learnerRef={screen.learnerRef}
+            onBack={() => setScreen({ kind: 'studyDashboard' })}
+          />
+        </Suspense>
       )
     }
     return (
-      <StudyDashboard
-        context={studyContextResult.context}
-        ports={studyRuntime.ports}
-        onLaunch={(entry) =>
-          setScreen({
-            kind: 'studySession',
-            blockRef: entry.blockRef,
-            learnerRef: studyContextResult.context.learnerRef,
-          })
-        }
-        onSettings={() => setScreen({ kind: 'studySettings' })}
-        onBack={() => setScreen({ kind: 'home' })}
-      />
+      <Suspense fallback={<StudyLoading />}>
+        <StudyDashboard
+          context={studyContextResult.context}
+          ports={studyRuntime.ports}
+          onLaunch={(entry) =>
+            setScreen({
+              kind: 'studySession',
+              blockRef: entry.blockRef,
+              learnerRef: studyContextResult.context.learnerRef,
+            })
+          }
+          onSettings={() => setScreen({ kind: 'studySettings' })}
+          onBack={() => setScreen({ kind: 'home' })}
+        />
+      </Suspense>
     )
   }
 
@@ -557,7 +603,7 @@ export default function App() {
             onOpenTyping={() => setScreen({ kind: 'typing' })}
             onOpenReading={() => setScreen({ kind: 'reading' })}
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
-            onOpenStudy={studyEnabled ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
+            onOpenStudy={studyPreviewReady ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
             mindsetStartDate={state.mindsetStartDate}
           />
         )}
@@ -616,6 +662,14 @@ function StudyUnavailable({ reason, onBack }: { reason: string; onBack: () => vo
         <p className="mt-2 text-sm">No Study persistence or safety request was made.</p>
         <button className="mt-4 rounded-lg border border-amber-500 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
       </div>
+    </main>
+  )
+}
+
+function StudyLoading() {
+  return (
+    <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900" aria-busy="true">
+      <p role="status">Loading the explicit local Study previewâ€¦</p>
     </main>
   )
 }
