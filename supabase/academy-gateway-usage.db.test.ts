@@ -34,6 +34,14 @@ async function consume(database: PGlite, endpoint: 'anthropic' | 'tts', limit: n
   return result.rows[0].accepted
 }
 
+async function consumeWithDefaultDay(database: PGlite, endpoint: 'anthropic' | 'tts', limit: number) {
+  const result = await database.query<{ accepted: boolean }>(
+    `select public.academy_consume_gateway_usage($1, $2, $3) as accepted`,
+    [USER_ID, endpoint, limit],
+  )
+  return result.rows[0].accepted
+}
+
 beforeEach(async () => {
   await createDatabase()
 })
@@ -43,6 +51,30 @@ afterEach(async () => {
 })
 
 describe('Academy gateway usage ledger', () => {
+  it('uses the UTC date when p_day is omitted under a non-UTC session timezone', async () => {
+    const database = databases[0]
+    const clock = await database.query<{ utc_hour: number }>(`
+      select extract(hour from now() at time zone 'utc')::integer as utc_hour
+    `)
+    const sessionTimeZone = clock.rows[0].utc_hour < 10 ? 'Pacific/Honolulu' : 'Pacific/Kiritimati'
+    await database.query(`select set_config('TimeZone', $1, false)`, [sessionTimeZone])
+
+    const expected = await database.query<{ session_day: string; utc_day: string }>(`
+      select
+        current_date::text as session_day,
+        (now() at time zone 'utc')::date::text as utc_day
+    `)
+    expect(expected.rows[0].session_day).not.toBe(expected.rows[0].utc_day)
+
+    expect(await consumeWithDefaultDay(database, 'anthropic', 1)).toBe(true)
+    const usage = await database.query<{ day: string }>(`
+      select day::text as day
+      from public.academy_gateway_usage
+      where user_id = '${USER_ID}' and endpoint = 'anthropic'
+    `)
+    expect(usage.rows).toEqual([{ day: expected.rows[0].utc_day }])
+  })
+
   it('allows the request that reaches the cap', async () => {
     const database = databases[0]
     expect(await consume(database, 'anthropic', 2, DAY_ONE)).toBe(true)

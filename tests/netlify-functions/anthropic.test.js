@@ -15,9 +15,23 @@ const ENV = Object.freeze({
   ACADEMY_AI_ENABLED: 'true',
 })
 
-function testAccess() {
+function testAccess({
+  memberships = [
+    {
+      id: 'active-membership',
+      user_id: 'household-user',
+      status: 'active',
+      revoked_at: null,
+    },
+  ],
+} = {}) {
   return {
-    requireEntitlement: vi.fn(async () => undefined),
+    requireEntitlement: vi.fn(async (userId) => {
+      const membership = memberships.find(
+        (row) => row.user_id === userId && row.status === 'active' && row.revoked_at === null,
+      )
+      if (!membership) throw new GatewayError(403, 'not_entitled')
+    }),
     consumeUsage: vi.fn(async () => undefined),
   }
 }
@@ -459,14 +473,34 @@ describe('authenticated Anthropic gateway', () => {
   )
 
   it('rejects a valid token without an active household membership', async () => {
-    const access = testAccess()
-    access.requireEntitlement.mockRejectedValue(new GatewayError(403, 'not_entitled'))
+    const access = testAccess({ memberships: [] })
     const fetchImpl = fetchRouter()
     const result = await createAnthropicHandler({ fetchImpl, env: ENV, gatewayAccess: access })(event())
     expect(result.statusCode).toBe(403)
     expect(responseJson(result)).toEqual({ error: { code: 'not_entitled' } })
     expect(access.consumeUsage).not.toHaveBeenCalled()
     expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('rejects a valid token backed by a revoked membership before calling Anthropic', async () => {
+    const access = testAccess({
+      memberships: [
+        {
+          id: 'revoked-membership',
+          user_id: 'household-user',
+          status: 'revoked',
+          revoked_at: '2026-07-31T18:00:00.000Z',
+        },
+      ],
+    })
+    const fetchImpl = fetchRouter()
+    const result = await createAnthropicHandler({ fetchImpl, env: ENV, gatewayAccess: access })(event())
+    expect(result.statusCode).toBe(403)
+    expect(responseJson(result)).toEqual({ error: { code: 'not_entitled' } })
+    expect(access.consumeUsage).not.toHaveBeenCalled()
+    expect(
+      fetchImpl.mock.calls.filter(([url]) => url === 'https://api.anthropic.com/v1/messages'),
+    ).toHaveLength(0)
   })
 
   it('accepts an active membership and reserves the configured per-user usage', async () => {

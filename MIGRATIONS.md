@@ -161,7 +161,8 @@ The migration adds the server-only daily request ledger used by the Academy AI
 and TTS gateways:
 
 - `academy_gateway_usage` is keyed by authenticated user, UTC database day,
-  and the fixed `anthropic`/`tts` endpoint set;
+  and the fixed `anthropic`/`tts` endpoint set; an omitted RPC day is derived
+  explicitly from UTC and cannot follow the session timezone;
 - RLS is enabled and forced, with all table and function access revoked from
   `PUBLIC`, `anon`, and `authenticated`;
 - `service_role` alone receives the table privileges and RPC execution needed
@@ -172,9 +173,10 @@ and TTS gateways:
   return `false` without incrementing the stored count.
 
 Permanent local validation is in
-`supabase/academy-gateway-usage.db.test.ts`. It covers at-cap acceptance,
-over-cap rejection without mutation, UTC day rollover, and denial of direct
-client-role table and RPC access.
+`supabase/academy-gateway-usage.db.test.ts`. It covers omitted-day UTC pinning
+under a deliberately non-UTC session timezone, at-cap acceptance, over-cap
+rejection without mutation, UTC day rollover, and denial of direct client-role
+table and RPC access.
 
 ## v1 → v2 (M1 multi-profile, 2026-07-23)
 

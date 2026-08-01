@@ -18,7 +18,7 @@ create or replace function public.academy_consume_gateway_usage(
   p_user_id uuid,
   p_endpoint text,
   p_limit integer,
-  p_day date default current_date
+  p_day date default (now() at time zone 'utc')::date
 )
 returns boolean
 language plpgsql
