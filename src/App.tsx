@@ -56,6 +56,12 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { AdaptiveEnglishView } from './components/adaptiveEnglish/AdaptiveEnglishView'
+import {
+  createEnglishWorkspace,
+  type EnglishAdultReview,
+  type EnglishWorkspaceState,
+} from './adaptiveEnglish/hostAdapter'
 
 type Screen =
   | { kind: 'picker' }
@@ -74,6 +80,7 @@ type Screen =
   | { kind: 'prizeShop' }
   | { kind: 'typing' }
   | { kind: 'reading' }
+  | { kind: 'adaptiveEnglish' }
   | { kind: 'mindset' }
 
 export default function App() {
@@ -81,6 +88,8 @@ export default function App() {
   const [state, setState] = useState<AppState>(loaded.state)
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
+  const [englishWorkspaces, setEnglishWorkspaces] = useState<Record<string, EnglishWorkspaceState>>({})
+  const [englishReviews, setEnglishReviews] = useState<Record<string, EnglishAdultReview>>({})
   const seenRef = useRef(new Set<string>())
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
@@ -258,6 +267,7 @@ export default function App() {
         onStateChange={setState}
         onClose={() => setScreen({ kind: 'picker' })}
         onOpenClassic={() => setScreen({ kind: 'grownups' })}
+        englishReviews={Object.values(englishReviews)}
       />
     )
   }
@@ -300,6 +310,32 @@ export default function App() {
         testId={screen.testId}
         nowISO={() => new Date().toISOString()}
         onPatch={patchActive}
+        onHome={() => setScreen({ kind: 'home' })}
+      />
+    )
+  }
+
+  // ENG-1: local-only host adapter around the frozen English and Tutor Core packages.
+  // Workspace and adult-review state deliberately stay outside AppState, sync, and storage.
+  if (screen.kind === 'adaptiveEnglish') {
+    const workspace = englishWorkspaces[active.id] ?? createEnglishWorkspace()
+    return (
+      <AdaptiveEnglishView
+        profileId={active.id}
+        profileName={active.name}
+        workspace={workspace}
+        onWorkspaceChange={(update) =>
+          setEnglishWorkspaces((previous) => ({
+            ...previous,
+            [active.id]: update(previous[active.id] ?? createEnglishWorkspace()),
+          }))
+        }
+        onSaveAdultReview={(review) =>
+          setEnglishReviews((previous) => ({
+            ...previous,
+            [`${review.profileId}:${review.lessonId}`]: review,
+          }))
+        }
         onHome={() => setScreen({ kind: 'home' })}
       />
     )
@@ -429,6 +465,7 @@ export default function App() {
             onOpenAssessment={(testId) => setScreen({ kind: 'assessment', testId })}
             onOpenTyping={() => setScreen({ kind: 'typing' })}
             onOpenReading={() => setScreen({ kind: 'reading' })}
+            onOpenEnglish={() => setScreen({ kind: 'adaptiveEnglish' })}
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
             mindsetStartDate={state.mindsetStartDate}
           />
@@ -494,6 +531,7 @@ function Home({
   onOpenAssessment,
   onOpenTyping,
   onOpenReading,
+  onOpenEnglish,
   onOpenMindset,
   mindsetStartDate,
 }: {
@@ -509,6 +547,7 @@ function Home({
   onOpenAssessment: (testId: string) => void
   onOpenTyping: () => void
   onOpenReading: () => void
+  onOpenEnglish: () => void
   onOpenMindset: () => void
   mindsetStartDate: string | undefined
 }) {
@@ -531,6 +570,7 @@ function Home({
         assessmentCards={assessmentCards}
         onOpenAssessment={onOpenAssessment}
         onOpenMindset={onOpenMindset}
+        onOpenEnglish={onOpenEnglish}
         mindsetStartDate={mindsetStartDate}
       />
     )
@@ -613,6 +653,28 @@ function Home({
       <div className="mt-6">
         <MissionCard profile={profile} onToggle={onToggleItem} />
       </div>
+
+      {/* ENG-1: host launch point for the frozen four-module Adaptive English package. */}
+      <button
+        onClick={onOpenEnglish}
+        className={
+          t.id === 'playful'
+            ? 'mt-6 flex min-h-20 w-full items-center gap-4 rounded-3xl border-b-8 border-indigo-800 bg-gradient-to-br from-indigo-600 to-violet-600 p-5 text-left shadow-xl transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 active:translate-y-1 active:border-b-4'
+            : `${t.card} mt-6 flex min-h-20 w-full items-center gap-4 p-5 text-left transition-all hover:border-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`
+        }
+      >
+        <span className="text-4xl" aria-hidden="true">Aa</span>
+        <span className="flex-1">
+          <span
+            className={`block text-2xl font-extrabold ${t.id === 'playful' ? 'text-white' : t.heading}`}
+          >
+            Adaptive English
+          </span>
+          <span className={`block font-bold ${t.id === 'playful' ? 'text-indigo-100' : t.sub}`}>
+            Four reading and writing lessons with choices for how ideas are explained
+          </span>
+        </span>
+      </button>
 
       {/* MR reading fluency entry — opens today's read-aloud passage */}
       <button

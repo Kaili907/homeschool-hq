@@ -48,6 +48,7 @@ interface Props {
   // the same assigned-assessment cards MA renders on the kids' home.
   assessmentCards: HomeAssessmentCard[]
   onOpenAssessment: (testId: string) => void
+  onOpenEnglish: () => void
   onOpenMindset: () => void
   mindsetStartDate: string | undefined
 }
@@ -80,6 +81,7 @@ export function HighSchoolHome({
   muted,
   assessmentCards,
   onOpenAssessment,
+  onOpenEnglish,
   onOpenMindset,
   mindsetStartDate,
 }: Props) {
@@ -273,6 +275,21 @@ export function HighSchoolHome({
       <div className="mt-6">
         <MissionCard profile={profile} onToggle={onToggleItem} />
       </div>
+
+      {/* ENG-1: English remains a separate, local-only Tutor Core experience. */}
+      <button
+        type="button"
+        onClick={onOpenEnglish}
+        className={`${t.card} mt-6 flex min-h-20 w-full items-center gap-4 p-5 text-left transition-all hover:border-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+      >
+        <span className="text-4xl" aria-hidden="true">Aa</span>
+        <span className="flex-1">
+          <span className={`block text-xl font-bold ${t.heading}`}>Adaptive English</span>
+          <span className={`block text-sm font-medium ${t.sub}`}>
+            Four reading and writing interventions · session-local evidence only
+          </span>
+        </span>
+      </button>
 
       {/* MM mindset — weekly lesson + habit card (teens: core + extension + journal) */}
       <MindsetCard profile={profile} startDate={mindsetStartDate} onOpen={onOpenMindset} />

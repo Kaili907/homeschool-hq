@@ -7,8 +7,10 @@ import { TodayView } from './TodayView'
 import { CalendarView } from './CalendarView'
 import { PlansView } from './PlansView'
 import { StatusView } from './StatusView'
+import { EnglishReviewPanel } from '../adaptiveEnglish/EnglishReviewPanel'
+import type { EnglishAdultReview } from '../../adaptiveEnglish/hostAdapter'
 
-export type HubTab = 'today' | 'calendar' | 'plans' | 'status'
+export type HubTab = 'today' | 'calendar' | 'plans' | 'status' | 'english'
 
 interface Props {
   state: AppState
@@ -16,6 +18,8 @@ interface Props {
   onClose: () => void
   /** open the classic admin Grown-Ups panel (templates, stars, sync, backup). */
   onOpenClassic: () => void
+  /** Session-local Adaptive English evidence; never persisted to profile/sync storage. */
+  englishReviews?: EnglishAdultReview[]
 }
 
 const TABS: { id: HubTab; label: string; emoji: string }[] = [
@@ -23,6 +27,7 @@ const TABS: { id: HubTab; label: string; emoji: string }[] = [
   { id: 'calendar', label: 'Calendar', emoji: '🗓️' },
   { id: 'plans', label: 'Plans', emoji: '📚' },
   { id: 'status', label: 'Status', emoji: '📊' },
+  { id: 'english', label: 'English', emoji: 'Aa' },
 ]
 
 /**
@@ -30,7 +35,7 @@ const TABS: { id: HubTab; label: string; emoji: string }[] = [
  * plans; never grades. The classic admin panel stays reachable for config that isn't
  * a view (mission templates, stars, tutor, cloud sync, backup).
  */
-export function ParentHub({ state, onStateChange, onClose, onOpenClassic }: Props) {
+export function ParentHub({ state, onStateChange, onClose, onOpenClassic, englishReviews = [] }: Props) {
   const [tab, setTab] = useState<HubTab>('today')
   const today = isoToday()
   const docs = useMemo(() => loadPlans(), [])
@@ -98,6 +103,9 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic }: Prop
           )}
           {tab === 'status' && (
             <StatusView profiles={profiles} today={today} onPatchProfile={patchProfile} />
+          )}
+          {tab === 'english' && (
+            <EnglishReviewPanel profiles={profiles} reviews={englishReviews} />
           )}
         </div>
       </div>
