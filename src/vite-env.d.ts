@@ -1,6 +1,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
+  /** Session 12: opt-in host gate. Exact 'true' only; absent is disabled. */
+  readonly VITE_STUDY_ENGINE_ENABLED?: string
   /** D1 deploy: 'true' routes the tutor + voice calls through the serverless proxy. */
   readonly VITE_USE_PROXY?: string
   /** M6 sync: Supabase project URL. Absent → keyless local mode (no sync). */

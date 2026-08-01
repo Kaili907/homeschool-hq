@@ -7,8 +7,18 @@ import { TodayView } from './TodayView'
 import { CalendarView } from './CalendarView'
 import { PlansView } from './PlansView'
 import { StatusView } from './StatusView'
+import { StudyParentPanel, type StudyParentLearnerOption } from './StudyParentPanel'
+import type { StudyPortBundle } from '../../study/ports'
+import type { StudyAdultAuthorization } from '../../study/types'
 
-export type HubTab = 'today' | 'calendar' | 'plans' | 'status'
+export type HubTab = 'today' | 'calendar' | 'plans' | 'status' | 'study'
+
+export interface ParentHubStudyIntegration {
+  readonly householdRef: string
+  readonly learners: readonly StudyParentLearnerOption[]
+  readonly ports: StudyPortBundle
+  readonly authorization: StudyAdultAuthorization
+}
 
 interface Props {
   state: AppState
@@ -16,6 +26,9 @@ interface Props {
   onClose: () => void
   /** open the classic admin Grown-Ups panel (templates, stars, sync, backup). */
   onOpenClassic: () => void
+  studyEnabled?: boolean
+  study?: ParentHubStudyIntegration
+  studyUnavailableReason?: string
 }
 
 const TABS: { id: HubTab; label: string; emoji: string }[] = [
@@ -30,11 +43,12 @@ const TABS: { id: HubTab; label: string; emoji: string }[] = [
  * plans; never grades. The classic admin panel stays reachable for config that isn't
  * a view (mission templates, stars, tutor, cloud sync, backup).
  */
-export function ParentHub({ state, onStateChange, onClose, onOpenClassic }: Props) {
+export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyEnabled = false, study, studyUnavailableReason }: Props) {
   const [tab, setTab] = useState<HubTab>('today')
   const today = isoToday()
   const docs = useMemo(() => loadPlans(), [])
   const profiles = useMemo(() => Object.values(state.profiles), [state.profiles])
+  const tabs = studyEnabled ? [...TABS, { id: 'study' as const, label: 'Study', emoji: '🧭' }] : TABS
 
   // The hub defaults its start date from MM's mindset start date, so Dad needn't re-enter it.
   const sy = state.schoolYear ?? defaultSchoolYear(state.mindsetStartDate ?? '')
@@ -68,10 +82,11 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic }: Prop
 
         {/* tab bar */}
         <div className="mt-4 flex gap-1 rounded-xl bg-slate-200/70 p-1 print:hidden">
-          {TABS.map((tb) => (
+          {tabs.map((tb) => (
             <button
               key={tb.id}
               onClick={() => setTab(tb.id)}
+              aria-pressed={tab === tb.id}
               className={`flex-1 rounded-lg px-3 py-2 text-sm font-bold transition-colors ${
                 tab === tb.id ? 'bg-white text-slate-900 shadow' : 'text-slate-500 hover:text-slate-700'
               }`}
@@ -98,6 +113,20 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic }: Prop
           )}
           {tab === 'status' && (
             <StatusView profiles={profiles} today={today} onPatchProfile={patchProfile} />
+          )}
+          {tab === 'study' && study && (
+            <StudyParentPanel
+              householdRef={study.householdRef}
+              learners={study.learners}
+              ports={study.ports}
+              authorization={study.authorization}
+            />
+          )}
+          {tab === 'study' && !study && (
+            <section className="rounded-xl border border-amber-200 bg-amber-50 p-5" role="status">
+              <h2 className="font-bold text-amber-950">Study controls unavailable</h2>
+              <p className="mt-1 text-amber-900">{studyUnavailableReason ?? 'Verify the authenticated household and parent authorization first.'}</p>
+            </section>
           )}
         </div>
       </div>

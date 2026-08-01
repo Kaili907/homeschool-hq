@@ -1,0 +1,259 @@
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { JarvisCore } from '../../../adaptive-tutor/study-engine/ui/JarvisCore.tsx'
+import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../study/ports'
+import { AcceptedRc1HostRuntime } from '../../study/runtimeFacade'
+import type { HostStudyLaunchContext, StudyCalendarEntry, StudyCheckpoint } from '../../study/types'
+import './study-host.css'
+
+export function StudySessionContainer({ context: baseContext, initialEntry, ports, onBack }: {
+  context: HostStudyLaunchContext
+  initialEntry: StudyCalendarEntry
+  ports: Partial<StudyPortBundle>
+  onBack: () => void
+}) {
+  const context: HostStudyLaunchContext = {
+    ...baseContext,
+    subject: initialEntry.subject,
+    lessonRef: initialEntry.lessonRef,
+    skillRefs: initialEntry.skillRefs,
+  }
+  const [entry, setEntry] = useState(initialEntry)
+  const [answer, setAnswer] = useState('')
+  const [jarvisText, setJarvisText] = useState('I’m ready when you are. Complete the current Manuel Academy activity, then confirm below.')
+  const [approvedTranscript, setApprovedTranscript] = useState<readonly string[]>([])
+  const [transcriptOpen, setTranscriptOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [busy, setBusy] = useState(false)
+  const [stopped, setStopped] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const bindingRef = useRef(`${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`)
+  const runtime = useMemo(() => new AcceptedRc1HostRuntime(ports), [ports])
+  const sessionRef = `${initialEntry.blockRef}:session`
+  const scope = { householdRef: context.householdRef, learnerRef: context.learnerRef, sessionRef }
+  const learnerScope = { householdRef: context.householdRef, learnerRef: context.learnerRef }
+  const currentSegment = entry.segments.find((segment) => !entry.completedSegmentRefs.includes(segment.segmentRef))
+  const isCurrentBinding = () => bindingRef.current === `${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`
+
+  useEffect(() => {
+    let current = true
+    const prepare = async () => {
+      try {
+        assertCompleteStudyPortBundle(ports)
+        runtime.launch(context, initialEntry, sessionRef)
+        let next = initialEntry
+        const now = new Date().toISOString()
+        if (next.state === 'scheduled') next = await ports.calendar.start(learnerScope, next.blockRef, now)
+        if (next.state === 'paused') next = await ports.calendar.resume(learnerScope, next.blockRef, now)
+        const segment = next.segments.find((candidate) => !next.completedSegmentRefs.includes(candidate.segmentRef))
+        if (!segment) throw new Error('This Study block is already complete.')
+        await ports.eventLedger.append(scope, {
+          eventRef: `launch:${sessionRef}`,
+          occurredAt: now,
+          type: 'session-launched',
+          payload: { lessonRef: next.lessonRef, segmentRef: segment.segmentRef },
+        })
+        await ports.persistence.saveSession({
+          scope,
+          lessonRef: next.lessonRef,
+          segmentRef: segment.segmentRef,
+          status: 'active',
+          updatedAt: now,
+          lastAcceptedEventRef: null,
+          rawAnswerIncluded: false,
+          transcriptIncluded: false,
+        })
+        if (current) setEntry(next)
+      } catch {
+        if (current) setError('This Study Session could not start safely. Check the learner, runtime version, and required ports.')
+      } finally {
+        if (current) setLoading(false)
+      }
+    }
+    prepare()
+    return () => {
+      current = false
+      bindingRef.current = 'closed'
+      setApprovedTranscript([])
+    }
+  }, [context.learnerRef, initialEntry.blockRef, ports, runtime])
+
+  useEffect(() => { if (!loading) headingRef.current?.focus() }, [loading, currentSegment?.segmentRef])
+
+  const saveBreak = async () => {
+    if (!currentSegment || stopped) return
+    setBusy(true)
+    setAnswer('')
+    try {
+      const at = new Date().toISOString()
+      const paused = await (ports as StudyPortBundle).calendar.pause(learnerScope, entry.blockRef, at, 'planned_break')
+      const previous = await (ports as StudyPortBundle).checkpoint.loadLatest(scope)
+      const checkpoint: StudyCheckpoint = {
+        checkpointRef: `${sessionRef}:checkpoint`,
+        householdRef: context.householdRef,
+        learnerRef: context.learnerRef,
+        sessionRef,
+        lessonRef: entry.lessonRef,
+        segmentRef: paused.resumePoint?.segmentRef ?? currentSegment.segmentRef,
+        revision: (previous?.revision ?? 0) + 1,
+        capturedAt: at,
+        completedSegmentRefs: paused.resumePoint?.completedSegmentRefs ?? paused.completedSegmentRefs,
+        elapsedActiveSecondsInSegment: paused.resumePoint?.elapsedActiveSecondsInSegment ?? 0,
+        responseDraftRef: null,
+        rawAnswerIncluded: false,
+        transcriptIncluded: false,
+      }
+      await (ports as StudyPortBundle).checkpoint.save(checkpoint)
+      await (ports as StudyPortBundle).persistence.saveSession({
+        scope,
+        lessonRef: entry.lessonRef,
+        segmentRef: checkpoint.segmentRef,
+        status: 'paused',
+        updatedAt: at,
+        lastAcceptedEventRef: null,
+        rawAnswerIncluded: false,
+        transcriptIncluded: false,
+      })
+      setEntry(paused)
+      setJarvisText(`Water break saved. You’ll return to step ${checkpoint.segmentRef}.`)
+    } catch {
+      setError('The break could not be saved safely. Your answer was not persisted.')
+    } finally { setBusy(false) }
+  }
+
+  const resume = async () => {
+    setBusy(true)
+    try {
+      const resumed = await (ports as StudyPortBundle).calendar.resume(learnerScope, entry.blockRef, new Date().toISOString())
+      setEntry(resumed)
+      setJarvisText('Welcome back. Your exact Study step is ready.')
+    } catch { setError('The exact resume point could not be restored safely.') } finally { setBusy(false) }
+  }
+
+  const completeStep = async () => {
+    if (!currentSegment || !answer.trim() || busy || stopped) return
+    setBusy(true)
+    const transient = answer
+    setAnswer('')
+    try {
+      const at = new Date().toISOString()
+      let acceptedEventRef: string | null = null
+      if (entry.masteryAuthority === 'tutor-core') {
+        const result = await runtime.submit({
+          context,
+          entry,
+          scope,
+          requestRef: `request:${sessionRef}:${currentSegment.segmentRef}:${Date.now()}`,
+          segmentRef: currentSegment.segmentRef,
+          transientLearnerText: transient,
+          expectedAnswer: 'ready',
+          occurredAt: at,
+          isCurrentBinding,
+        })
+        if (result.status === 'stopped') {
+          setStopped(true)
+          setJarvisText('This Study Session is paused. A trusted adult review has been proposed but has not been delivered.')
+          await (ports as StudyPortBundle).eventLedger.append(scope, {
+            eventRef: `stop:${sessionRef}:${Date.now()}`,
+            occurredAt: at,
+            type: 'safety-stop',
+            payload: { reasonCode: result.reasonCode, deliveryStatus: result.deliveryStatus },
+          })
+          return
+        }
+        if (result.status === 'quarantined') throw new Error('quarantined')
+        acceptedEventRef = result.eventRef
+        setJarvisText(result.presentation.visibleText)
+        setApprovedTranscript((items) => [...items, result.presentation.visibleText])
+      } else {
+        setJarvisText('Activity completion recorded. No mastery decision was made.')
+      }
+      const next = await (ports as StudyPortBundle).calendar.completeCurrentSegment(
+        learnerScope,
+        entry.blockRef,
+        currentSegment.segmentRef,
+        new Date().toISOString(),
+      )
+      setEntry(next)
+      const status = next.state === 'completed' ? 'completed' : 'active'
+      if (status === 'completed') {
+        await (ports as StudyPortBundle).eventLedger.append(scope, {
+          eventRef: `completion:${sessionRef}:${entry.lessonRef}`,
+          occurredAt: new Date().toISOString(),
+          type: 'session-completed',
+          payload: { blockRef: entry.blockRef, lessonRef: entry.lessonRef },
+        })
+      }
+      await (ports as StudyPortBundle).persistence.saveSession({
+        scope,
+        lessonRef: entry.lessonRef,
+        segmentRef: currentSegment.segmentRef,
+        status,
+        updatedAt: new Date().toISOString(),
+        lastAcceptedEventRef: acceptedEventRef,
+        rawAnswerIncluded: false,
+        transcriptIncluded: false,
+      })
+    } catch {
+      setError('The Tutor result could not be accepted. No completion was recorded.')
+    } finally { setBusy(false) }
+  }
+
+  if (loading) return <main className="study-runtime-host min-h-screen bg-slate-50 p-6" aria-busy="true"><h1 tabIndex={-1}>Preparing your Study Session</h1><p role="status">Checking the runtime and learner binding…</p><button className="mt-4 rounded-lg border px-4 py-2" onClick={onBack}>Cancel</button></main>
+  if (error) return <main className="study-runtime-host min-h-screen bg-slate-50 p-6"><h1 tabIndex={-1}>Study Session unavailable</h1><p role="alert">{error}</p><button className="mt-4 rounded-lg border px-4 py-2" onClick={onBack}>Back to Study plan</button></main>
+
+  return (
+    <div className="study-runtime-host min-h-screen bg-slate-50 text-slate-900" data-large-text={context.accessibility.largeText} data-high-contrast={context.accessibility.highContrast} data-reduced-motion={context.accessibility.reducedMotion}>
+      <a href="#current-study-task" className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:bg-white focus:p-3">Skip to current activity</a>
+      <main className="mx-auto max-w-5xl px-4 py-5">
+        <header className="flex flex-wrap items-center justify-between gap-3">
+          <div><p className="text-sm font-semibold text-cyan-700">{entry.subject}</p><h1 className="text-2xl font-bold">{entry.title}</h1></div>
+          <button className="rounded-lg border border-slate-300 bg-white px-4 py-2" onClick={onBack}>Save and exit</button>
+        </header>
+        <nav className="mt-5 rounded-xl bg-white p-4" aria-label="Study segment progress">
+          <ol className="flex flex-wrap gap-2">{entry.segments.map((segment) => {
+            const complete = entry.completedSegmentRefs.includes(segment.segmentRef)
+            const current = currentSegment?.segmentRef === segment.segmentRef
+            return <li key={segment.segmentRef} aria-current={current ? 'step' : undefined} className={`rounded-full px-3 py-2 text-sm font-semibold ${current ? 'bg-cyan-700 text-white' : complete ? 'bg-emerald-100 text-emerald-900' : 'bg-slate-100'}`}>{segment.title}: {complete ? 'completed' : current ? 'current' : 'not started'}</li>
+          })}</ol>
+        </nav>
+        {context.timerPreference.visibility === 'hidden' ? <p className="mt-3 font-semibold" role="status">Timer hidden. Milestones will still be shown.</p> : <p className="mt-3 text-sm text-slate-600">Work-block limit: {context.parentLimits.maximumWorkMinutes} minutes · break: {context.parentLimits.breakMinutes} minutes</p>}
+
+        {entry.state === 'paused' ? (
+          <section className="mt-5 rounded-2xl border border-cyan-200 bg-cyan-50 p-6">
+            <h2 tabIndex={-1} className="text-2xl font-bold">Water break</h2>
+            <p className="mt-2">Your exact place is saved at {entry.resumePoint?.segmentRef}. Take the time you need.</p>
+            <button className="mt-4 rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white" disabled={busy || stopped} onClick={resume}>Return to exact step</button>
+          </section>
+        ) : entry.state === 'completed' ? (
+          <section className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-6"><h2 tabIndex={-1} className="text-2xl font-bold">Study block complete</h2><p>No host mastery decision was invented. Tutor Core remains the instructional authority.</p><button className="mt-4 rounded-lg border bg-white px-4 py-2" onClick={onBack}>Back to plan</button></section>
+        ) : currentSegment ? (
+          <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_20rem]">
+            <section id="current-study-task" className="rounded-2xl border border-slate-200 bg-white p-6">
+              <h2 ref={headingRef} tabIndex={-1} className="text-2xl font-bold">{currentSegment.title}</h2>
+              <p className="mt-3">Complete this step in the existing Manuel Academy lesson. When you finish, type <strong>ready</strong>. The host will not treat this confirmation as mastery.</p>
+              <div className="mt-4 rounded-lg border border-dashed border-slate-300 bg-slate-50 p-4"><p className="font-semibold">Media fallback</p><p className="text-sm">No lesson media is required here. Continue with the existing text activity.</p></div>
+              <label className="mt-5 block font-bold" htmlFor="study-response">Current response</label>
+              <textarea id="study-response" className="mt-2 min-h-28 w-full rounded-lg border border-slate-400 p-3 text-base" value={answer} disabled={busy || stopped} onChange={(event) => setAnswer(event.target.value)} aria-describedby="study-response-help" />
+              <p id="study-response-help" className="mt-1 text-sm text-slate-600">This response is transient. It is sent through the safety/Tutor bridge and is not stored in Study evidence.</p>
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                <button className="rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white disabled:opacity-50" disabled={!answer.trim() || busy || stopped} onClick={completeStep}>Send through Tutor boundary</button>
+                <button className="rounded-lg border border-cyan-700 bg-white px-5 py-3 font-bold text-cyan-800 disabled:opacity-50" disabled={busy || stopped} onClick={saveBreak}>Take a water break</button>
+              </div>
+            </section>
+            <JarvisCore
+              activity={busy ? 'thinking' : stopped ? 'paused' : 'idle'}
+              statusText={stopped ? 'Study paused safely' : busy ? 'Checking safely' : 'Ready'}
+              currentUtterance={jarvisText}
+              motionMode={context.accessibility.reducedMotion ? 'none' : 'minimal'}
+              voiceMode={context.accessibility.noAudio ? 'no-audio' : 'unavailable'}
+              transcript={context.accessibility.transientTranscript ? <ol>{approvedTranscript.map((line, index) => <li key={`${index}-${line}`}>{line}</li>)}</ol> : undefined}
+              transcriptOpen={transcriptOpen}
+              onTranscriptOpenChange={context.accessibility.transientTranscript ? setTranscriptOpen : undefined}
+            />
+          </div>
+        ) : null}
+      </main>
+    </div>
+  )
+}

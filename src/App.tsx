@@ -56,6 +56,18 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { isStudyEngineEnabledFromHost } from './study/featureFlag'
+import {
+  buildHostStudyContext,
+  deriveStudyHouseholdRef,
+  deriveStudyLearnerRef,
+  localDevelopmentHouseholdTimeZone,
+} from './study/hostContext'
+import { createLocalDevelopmentStudyPorts } from './study/localDevelopmentPorts'
+import type { StudyAdultAuthorization } from './study/types'
+import { StudyDashboard } from './components/study/StudyDashboard'
+import { StudySessionRoute } from './components/study/StudySessionRoute'
+import { StudySettings } from './components/study/StudySettings'
 
 type Screen =
   | { kind: 'picker' }
@@ -75,12 +87,21 @@ type Screen =
   | { kind: 'typing' }
   | { kind: 'reading' }
   | { kind: 'mindset' }
+  | { kind: 'studyDashboard' }
+  | { kind: 'studySettings' }
+  | { kind: 'studySession'; blockRef: string; learnerRef: string }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
+  const studyEnabled = useMemo(isStudyEngineEnabledFromHost, [])
+  const studyRuntime = useMemo(
+    () => (studyEnabled ? createLocalDevelopmentStudyPorts() : null),
+    [studyEnabled],
+  )
   const [state, setState] = useState<AppState>(loaded.state)
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
+  const [parentStudyAuthorization, setParentStudyAuthorization] = useState<StudyAdultAuthorization | null>(null)
   const seenRef = useRef(new Set<string>())
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
@@ -107,7 +128,32 @@ export default function App() {
   }, [attendanceId, attendanceTodayComplete])
 
   const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
+  const studyContextResult = buildHostStudyContext({
+    enabled: studyEnabled,
+    syncStatus: sync.status,
+    profile: active,
+    subject: 'math',
+    lessonRef: active ? `grade-${active.grade}:daily-study` : 'unselected:daily-study',
+    skillRefs: active ? [`grade-${active.grade}:current-study-skill`] : [],
+    householdTimeZone: studyEnabled ? localDevelopmentHouseholdTimeZone() : null,
+    timerHidden: false,
+  })
   const tokens = THEMES[active?.theme ?? 'playful']
+
+  const establishParentStudyAuthorization = () => {
+    const user = sync.status.user
+    if (!studyEnabled || !user || sync.status.binding !== 'bound' || sync.status.provenance !== 'verified') {
+      setParentStudyAuthorization(null)
+      return
+    }
+    const householdRef = deriveStudyHouseholdRef(user.id)
+    setParentStudyAuthorization({
+      householdRef,
+      actorRef: `adult:${householdRef.slice('household:'.length)}`,
+      role: 'parent',
+      adultAuthorized: true,
+    })
+  }
 
   // Every profile write is a functional update so the reducer's base is the
   // latest committed profile (see appState.patchProfile): two writes in one tick
@@ -215,6 +261,7 @@ export default function App() {
               subtitle="Enter the parent PIN"
               onComplete={(pin) => {
                 if (pin === state.parentPin) {
+                  establishParentStudyAuthorization()
                   setScreen({ kind: 'parentHub' })
                   return null
                 }
@@ -237,6 +284,7 @@ export default function App() {
                 }
                 if (pin === screen.firstEntry) {
                   setState((s) => ({ ...s, parentPin: pin }))
+                  establishParentStudyAuthorization()
                   setScreen({ kind: 'parentHub' })
                   return null
                 }
@@ -252,12 +300,37 @@ export default function App() {
   }
 
   if (screen.kind === 'parentHub') {
+    const parentStudyReady =
+      studyEnabled &&
+      studyRuntime &&
+      parentStudyAuthorization &&
+      sync.status.user &&
+      parentStudyAuthorization.householdRef === deriveStudyHouseholdRef(sync.status.user.id)
     return (
       <ParentHub
         state={state}
         onStateChange={setState}
-        onClose={() => setScreen({ kind: 'picker' })}
+        onClose={() => {
+          setParentStudyAuthorization(null)
+          setScreen({ kind: 'picker' })
+        }}
         onOpenClassic={() => setScreen({ kind: 'grownups' })}
+        studyEnabled={studyEnabled}
+        study={
+          parentStudyReady
+            ? {
+                householdRef: parentStudyAuthorization.householdRef,
+                learners: Object.values(state.profiles).map((profile) => ({
+                  hostProfileRef: profile.id,
+                  learnerRef: deriveStudyLearnerRef(sync.status.user!.id, profile.id),
+                  displayName: profile.name,
+                })),
+                ports: studyRuntime.ports,
+                authorization: parentStudyAuthorization,
+              }
+            : undefined
+        }
+        studyUnavailableReason="Sign in, verify the household binding, and re-enter the parent PIN to use Study controls."
       />
     )
   }
@@ -293,6 +366,60 @@ export default function App() {
   }
 
   // MA mount point — self-styled (clean), rendered full-bleed outside the theme wrapper
+  if (
+    screen.kind === 'studyDashboard' ||
+    screen.kind === 'studySettings' ||
+    screen.kind === 'studySession'
+  ) {
+    if (!studyEnabled || !studyRuntime || studyContextResult.status !== 'ready') {
+      return (
+        <StudyUnavailable
+          reason={
+            studyContextResult.status === 'unavailable'
+              ? studyContextResult.reason
+              : 'The Study integration is unavailable.'
+          }
+          onBack={() => setScreen({ kind: 'home' })}
+        />
+      )
+    }
+    if (screen.kind === 'studySettings') {
+      return (
+        <StudySettings
+          context={studyContextResult.context}
+          ports={studyRuntime.ports}
+          onBack={() => setScreen({ kind: 'studyDashboard' })}
+        />
+      )
+    }
+    if (screen.kind === 'studySession') {
+      return (
+        <StudySessionRoute
+          context={studyContextResult.context}
+          ports={studyRuntime.ports}
+          blockRef={screen.blockRef}
+          learnerRef={screen.learnerRef}
+          onBack={() => setScreen({ kind: 'studyDashboard' })}
+        />
+      )
+    }
+    return (
+      <StudyDashboard
+        context={studyContextResult.context}
+        ports={studyRuntime.ports}
+        onLaunch={(entry) =>
+          setScreen({
+            kind: 'studySession',
+            blockRef: entry.blockRef,
+            learnerRef: studyContextResult.context.learnerRef,
+          })
+        }
+        onSettings={() => setScreen({ kind: 'studySettings' })}
+        onBack={() => setScreen({ kind: 'home' })}
+      />
+    )
+  }
+
   if (screen.kind === 'assessment') {
     return (
       <AssessmentRunner
@@ -430,6 +557,7 @@ export default function App() {
             onOpenTyping={() => setScreen({ kind: 'typing' })}
             onOpenReading={() => setScreen({ kind: 'reading' })}
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
+            onOpenStudy={studyEnabled ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
             mindsetStartDate={state.mindsetStartDate}
           />
         )}
@@ -479,6 +607,19 @@ export default function App() {
   )
 }
 
+function StudyUnavailable({ reason, onBack }: { reason: string; onBack: () => void }) {
+  return (
+    <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900">
+      <div className="mx-auto max-w-xl rounded-2xl border border-amber-200 bg-amber-50 p-6">
+        <h1 className="text-2xl font-bold" tabIndex={-1}>Study is not available yet</h1>
+        <p className="mt-2">{reason}</p>
+        <p className="mt-2 text-sm">No Study persistence or safety request was made.</p>
+        <button className="mt-4 rounded-lg border border-amber-500 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
+      </div>
+    </main>
+  )
+}
+
 // ---------- home ----------
 
 function Home({
@@ -495,6 +636,7 @@ function Home({
   onOpenTyping,
   onOpenReading,
   onOpenMindset,
+  onOpenStudy,
   mindsetStartDate,
 }: {
   profile: Profile
@@ -510,6 +652,7 @@ function Home({
   onOpenTyping: () => void
   onOpenReading: () => void
   onOpenMindset: () => void
+  onOpenStudy?: () => void
   mindsetStartDate: string | undefined
 }) {
   const t = useTheme()
@@ -531,6 +674,7 @@ function Home({
         assessmentCards={assessmentCards}
         onOpenAssessment={onOpenAssessment}
         onOpenMindset={onOpenMindset}
+        onOpenStudy={onOpenStudy}
         mindsetStartDate={mindsetStartDate}
       />
     )
@@ -613,6 +757,20 @@ function Home({
       <div className="mt-6">
         <MissionCard profile={profile} onToggle={onToggleItem} />
       </div>
+
+      {onOpenStudy && (
+        <button
+          onClick={onOpenStudy}
+          className={
+            t.id === 'playful'
+              ? 'mt-6 flex min-h-11 w-full items-center gap-4 rounded-3xl border-b-8 border-cyan-800 bg-gradient-to-br from-cyan-500 to-blue-600 p-5 text-left text-white shadow-xl'
+              : `${t.card} mt-6 flex min-h-11 w-full items-center gap-4 p-5 text-left hover:border-cyan-400`
+          }
+        >
+          <span className="text-4xl" aria-hidden="true">🧭</span>
+          <span><span className="block text-2xl font-extrabold">Today’s Study plan</span><span className="block font-bold opacity-90">Launch the gated Adaptive Study Engine preview</span></span>
+        </button>
+      )}
 
       {/* MR reading fluency entry — opens today's read-aloud passage */}
       <button
