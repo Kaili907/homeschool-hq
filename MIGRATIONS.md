@@ -326,3 +326,35 @@ the exact project, migration history, owner/ACL report, exposed schemas, and
 object-name conflicts before applying the independently approved SQL and exact
 probes. No dual write or application activation is permitted merely because the
 database migration succeeds.
+
+## Supabase additive: Study Engine persistence and RLS (2026-08-01, local only)
+
+Session 13 adds, in this exact order:
+
+1. `supabase/migrations/20260801010000_academy_study_engine_storage.sql`
+2. `supabase/migrations/20260801011000_academy_study_engine_authorization.sql`
+
+The storage migration requires the exact Academy identity foundation version-2
+marker/manifest and private-schema ACL. Authorization requires the storage
+marker at version 1. Each migration is transactional, owner-gated to `postgres`,
+rejects unmarked relation/function collisions before `CREATE OR REPLACE`, and
+leaves storage-only state fail-closed. Browser table writes are denied; mutation
+authority is limited to audited security-definer functions with pinned search
+paths and narrow execute ACLs.
+
+`npm run test:migrations` pins the SHA-256 bytes of all three historical
+migrations, checks timestamp order, and applies the Study chain to a fresh local
+database. Never replay a modified historical migration or edit a hosted
+migration ledger to conceal drift. A later authorized hosted session must
+compare the migration ledger to archived artifact checksums and compare live
+owners, ACLs, columns/defaults, constraints, indexes, RLS/forced-RLS, policies,
+functions, and triggers to a clean catalog snapshot before application.
+
+There is no automatic destructive down migration. A failure inside either file
+rolls back that file. After a committed storage migration, keep consumers off
+and use a new reviewed forward correction if authorization fails. A completed
+production rollback requires consumer shutdown, verified backup/restore or a
+separately approved compensating migration, and preservation of ciphertext,
+outbox, and audit records. Full details are in
+`docs/study-engine-persistence/migration-and-rollback.md` and
+`docs/study-engine-persistence/hosted-preflight.md`.

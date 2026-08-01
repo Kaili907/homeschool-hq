@@ -8,7 +8,7 @@
     "build": "vite build && node scripts/stamp-sw.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --exclude adaptive-tutor/** --exclude supabase/** --maxWorkers 1 && vitest run supabase/academy-profiles-base.db.test.ts && vitest run supabase/academy-student-identity.db.test.ts && vitest run supabase/academy-foundation-integration.db.test.ts && vitest run supabase/academy-cas.db.test.ts --testTimeout 120000 && vitest run supabase/academy-cas.postgres.test.ts",
+    "test": "vitest run --exclude adaptive-tutor/** --exclude supabase/** --maxWorkers 1 && vitest run supabase/academy-profiles-base.db.test.ts && vitest run supabase/academy-student-identity.db.test.ts && vitest run supabase/academy-foundation-integration.db.test.ts && vitest run supabase/academy-cas.db.test.ts --testTimeout 120000 && vitest run supabase/academy-cas.postgres.test.ts && npm run test:study-db && npm run test:migrations",
     "test:host": "vitest run --exclude adaptive-tutor/** --exclude supabase/** --maxWorkers 1",
     "test:academy-db": "vitest run supabase/academy-profiles-base.db.test.ts && vitest run supabase/academy-student-identity.db.test.ts && vitest run supabase/academy-foundation-integration.db.test.ts && vitest run supabase/academy-cas.db.test.ts --testTimeout 120000 && vitest run supabase/academy-cas.postgres.test.ts",
     "test:academy-db:base": "vitest run supabase/academy-profiles-base.db.test.ts",
@@ -17,7 +17,9 @@
     "test:academy-profiles-base": "vitest run supabase/academy-profiles-base.db.test.ts",
     "test:academy-foundation-integration": "vitest run supabase/academy-foundation-integration.db.test.ts",
     "test:sync-db": "vitest run supabase/academy-cas.db.test.ts --testTimeout 120000",
-    "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts"
+    "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts",
+    "test:study-db": "vitest run supabase/study-engine.db.test.ts --configLoader runner --testTimeout 120000",
+    "test:migrations": "vitest run supabase/study-engine-migrations.db.test.ts --configLoader runner --testTimeout 120000"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.8",
