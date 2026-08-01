@@ -14,6 +14,11 @@ function authConfig(env) {
   }
 }
 
+/** Sanitized readiness predicate; it never returns or logs configuration values. */
+export function supabaseAuthConfigured(env) {
+  return authConfig(env) !== null
+}
+
 function bearerToken(event) {
   const headerEntries =
     event?.headers && typeof event.headers === 'object'
@@ -47,7 +52,7 @@ function bearerToken(event) {
  * user id is the same value used by the current profiles RLS policy as the
  * household boundary. No client-provided user or household identifier is read.
  */
-export async function verifySupabaseBearer(event, { fetchImpl, env }) {
+export async function verifySupabaseBearer(event, { fetchImpl, env, timeoutMs }) {
   const token = bearerToken(event)
   if (!token) return { ok: false, response: errorResponse(401, 'unauthenticated') }
 
@@ -55,10 +60,13 @@ export async function verifySupabaseBearer(event, { fetchImpl, env }) {
   if (!config) return { ok: false, response: errorResponse(503, 'service_unavailable') }
 
   let response
+  const controller = timeoutMs === undefined ? null : new AbortController()
+  const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null
   try {
     response = await fetchImpl(`${config.url}/auth/v1/user`, {
       method: 'GET',
       redirect: 'error',
+      ...(controller ? { signal: controller.signal } : {}),
       headers: {
         apikey: config.anonKey,
         Authorization: `Bearer ${token}`,
@@ -67,6 +75,8 @@ export async function verifySupabaseBearer(event, { fetchImpl, env }) {
     })
   } catch {
     return { ok: false, response: errorResponse(503, 'auth_unavailable') }
+  } finally {
+    if (timer !== null) clearTimeout(timer)
   }
 
   if ([400, 401, 403].includes(response.status)) {
@@ -87,5 +97,7 @@ export async function verifySupabaseBearer(event, { fetchImpl, env }) {
   return {
     ok: true,
     user: { id: user.id },
+    // Internal-only credential for same-session RLS authorization calls.
+    accessToken: token,
   }
 }
