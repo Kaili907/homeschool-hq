@@ -1,0 +1,68 @@
+{
+  "id": "english-sentence-completeness-narration",
+  "locale": "en-US",
+  "text": "Show me: first locate who or what the words are about. In ‘The curious fox waited,’ the subject is ‘the curious fox.’ Talk me through it: find the subject, find what that subject does or is, ask whether the thought stands alone, and only then choose the end mark. Let’s do one together. Which predicate completes the subject ‘The small robot’? Different example: ‘When the rain stopped’ has a subject and verb, but when leaves us waiting. Add your own independent thought, then choose punctuation.",
+  "audioUri": null,
+  "captions": [
+    {
+      "id": "english-sentence-completeness-narration-caption-1",
+      "startMs": 0,
+      "endMs": 6435,
+      "text": "Show me: first locate who or what the words are about. In ‘The curious fox waited,’ the subject is ‘the curious fox.’",
+      "speaker": "jarvis"
+    },
+    {
+      "id": "english-sentence-completeness-narration-caption-2",
+      "startMs": 6435,
+      "endMs": 14410,
+      "text": "Talk me through it: find the subject, find what that subject does or is, ask whether the thought stands alone, and only then choose the end mark.",
+      "speaker": "jarvis"
+    },
+    {
+      "id": "english-sentence-completeness-narration-caption-3",
+      "startMs": 14410,
+      "endMs": 18755,
+      "text": "Let’s do one together. Which predicate completes the subject ‘The small robot’?",
+      "speaker": "jarvis"
+    },
+    {
+      "id": "english-sentence-completeness-narration-caption-4",
+      "startMs": 18755,
+      "endMs": 27170,
+      "text": "Different example: ‘When the rain stopped’ has a subject and verb, but when leaves us waiting. Add your own independent thought, then choose punctuation.",
+      "speaker": "jarvis"
+    }
+  ],
+  "transcript": [
+    {
+      "id": "english-sentence-completeness-narration-transcript-1",
+      "speaker": "jarvis",
+      "text": "Show me: first locate who or what the words are about. In ‘The curious fox waited,’ the subject is ‘the curious fox.’",
+      "visibleToLearner": true,
+      "containsIdentifyingInformation": false
+    },
+    {
+      "id": "english-sentence-completeness-narration-transcript-2",
+      "speaker": "jarvis",
+      "text": "Talk me through it: find the subject, find what that subject does or is, ask whether the thought stands alone, and only then choose the end mark.",
+      "visibleToLearner": true,
+      "containsIdentifyingInformation": false
+    },
+    {
+      "id": "english-sentence-completeness-narration-transcript-3",
+      "speaker": "jarvis",
+      "text": "Let’s do one together. Which predicate completes the subject ‘The small robot’?",
+      "visibleToLearner": true,
+      "containsIdentifyingInformation": false
+    },
+    {
+      "id": "english-sentence-completeness-narration-transcript-4",
+      "speaker": "jarvis",
+      "text": "Different example: ‘When the rain stopped’ has a subject and verb, but when leaves us waiting. Add your own independent thought, then choose punctuation.",
+      "visibleToLearner": true,
+      "containsIdentifyingInformation": false
+    }
+  ],
+  "voiceRequired": false,
+  "mediaRequired": false
+}

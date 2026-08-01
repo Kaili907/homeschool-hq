@@ -1,0 +1,4536 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Lowercase ASCII stable content identifier."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "const": "math",
+          "type": "string"
+        },
+        {
+          "const": "english",
+          "type": "string"
+        },
+        {
+          "const": "science",
+          "type": "string"
+        },
+        {
+          "const": "social-studies",
+          "type": "string"
+        },
+        {
+          "const": "general",
+          "type": "string"
+        }
+      ]
+    },
+    "gradeBand": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      },
+      "required": [
+        "min",
+        "max",
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 20,
+      "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+    },
+    "targetSkillId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Lowercase ASCII stable content identifier."
+    },
+    "skillGraph": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1200
+              },
+              "subject": {
+                "anyOf": [
+                  {
+                    "const": "math",
+                    "type": "string"
+                  },
+                  {
+                    "const": "english",
+                    "type": "string"
+                  },
+                  {
+                    "const": "science",
+                    "type": "string"
+                  },
+                  {
+                    "const": "social-studies",
+                    "type": "string"
+                  },
+                  {
+                    "const": "general",
+                    "type": "string"
+                  }
+                ]
+              },
+              "gradeBand": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "observableEvidence": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                },
+                "minItems": 1,
+                "maxItems": 20
+              }
+            },
+            "required": [
+              "id",
+              "title",
+              "description",
+              "subject",
+              "gradeBand",
+              "observableEvidence"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prerequisiteSkillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "dependentSkillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "strength": {
+                "anyOf": [
+                  {
+                    "const": "required",
+                    "type": "string"
+                  },
+                  {
+                    "const": "recommended",
+                    "type": "string"
+                  },
+                  {
+                    "const": "supporting",
+                    "type": "string"
+                  }
+                ]
+              },
+              "rationale": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 600
+              }
+            },
+            "required": [
+              "prerequisiteSkillId",
+              "dependentSkillId",
+              "strength",
+              "rationale"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 5000
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "nodes",
+        "edges"
+      ],
+      "additionalProperties": false,
+      "$id": "PrerequisiteSkillGraph"
+    },
+    "diagnosticItems": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "skillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "purpose": {
+                "anyOf": [
+                  {
+                    "const": "diagnostic",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-practice",
+                    "type": "string"
+                  },
+                  {
+                    "const": "independent-mastery",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reassessment",
+                    "type": "string"
+                  }
+                ]
+              },
+              "subject": {
+                "anyOf": [
+                  {
+                    "const": "math",
+                    "type": "string"
+                  },
+                  {
+                    "const": "english",
+                    "type": "string"
+                  },
+                  {
+                    "const": "science",
+                    "type": "string"
+                  },
+                  {
+                    "const": "social-studies",
+                    "type": "string"
+                  },
+                  {
+                    "const": "general",
+                    "type": "string"
+                  }
+                ]
+              },
+              "gradeBand": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "locale": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 20,
+                "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2500
+              },
+              "directions": {
+                "type": "string",
+                "maxLength": 1200
+              },
+              "maxAttempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "estimatedSeconds": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 1800
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 30
+              },
+              "noCameraRequired": {
+                "const": true,
+                "type": "boolean"
+              },
+              "identifyingInformationRequested": {
+                "const": false,
+                "type": "boolean"
+              },
+              "kind": {
+                "const": "multiple-choice",
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "accessibleLabel": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 2,
+                "maxItems": 8
+              },
+              "correctOptionIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "minItems": 1,
+                "maxItems": 8
+              },
+              "allowMultiple": {
+                "type": "boolean"
+              },
+              "shuffle": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "skillId",
+              "purpose",
+              "subject",
+              "gradeBand",
+              "locale",
+              "prompt",
+              "maxAttempts",
+              "estimatedSeconds",
+              "tags",
+              "noCameraRequired",
+              "identifyingInformationRequested",
+              "kind",
+              "options",
+              "correctOptionIds",
+              "allowMultiple",
+              "shuffle"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "skillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "purpose": {
+                "anyOf": [
+                  {
+                    "const": "diagnostic",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-practice",
+                    "type": "string"
+                  },
+                  {
+                    "const": "independent-mastery",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reassessment",
+                    "type": "string"
+                  }
+                ]
+              },
+              "subject": {
+                "anyOf": [
+                  {
+                    "const": "math",
+                    "type": "string"
+                  },
+                  {
+                    "const": "english",
+                    "type": "string"
+                  },
+                  {
+                    "const": "science",
+                    "type": "string"
+                  },
+                  {
+                    "const": "social-studies",
+                    "type": "string"
+                  },
+                  {
+                    "const": "general",
+                    "type": "string"
+                  }
+                ]
+              },
+              "gradeBand": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "locale": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 20,
+                "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2500
+              },
+              "directions": {
+                "type": "string",
+                "maxLength": 1200
+              },
+              "maxAttempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "estimatedSeconds": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 1800
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 30
+              },
+              "noCameraRequired": {
+                "const": true,
+                "type": "boolean"
+              },
+              "identifyingInformationRequested": {
+                "const": false,
+                "type": "boolean"
+              },
+              "kind": {
+                "const": "short-answer",
+                "type": "string"
+              },
+              "acceptedAnswers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "minItems": 1,
+                "maxItems": 30
+              },
+              "caseSensitive": {
+                "type": "boolean"
+              },
+              "trimWhitespace": {
+                "type": "boolean"
+              },
+              "normalization": {
+                "anyOf": [
+                  {
+                    "const": "none",
+                    "type": "string"
+                  },
+                  {
+                    "const": "basic-text",
+                    "type": "string"
+                  },
+                  {
+                    "const": "numeric",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "skillId",
+              "purpose",
+              "subject",
+              "gradeBand",
+              "locale",
+              "prompt",
+              "maxAttempts",
+              "estimatedSeconds",
+              "tags",
+              "noCameraRequired",
+              "identifyingInformationRequested",
+              "kind",
+              "acceptedAnswers",
+              "caseSensitive",
+              "trimWhitespace",
+              "normalization"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "skillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "purpose": {
+                "anyOf": [
+                  {
+                    "const": "diagnostic",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-practice",
+                    "type": "string"
+                  },
+                  {
+                    "const": "independent-mastery",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reassessment",
+                    "type": "string"
+                  }
+                ]
+              },
+              "subject": {
+                "anyOf": [
+                  {
+                    "const": "math",
+                    "type": "string"
+                  },
+                  {
+                    "const": "english",
+                    "type": "string"
+                  },
+                  {
+                    "const": "science",
+                    "type": "string"
+                  },
+                  {
+                    "const": "social-studies",
+                    "type": "string"
+                  },
+                  {
+                    "const": "general",
+                    "type": "string"
+                  }
+                ]
+              },
+              "gradeBand": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "locale": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 20,
+                "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2500
+              },
+              "directions": {
+                "type": "string",
+                "maxLength": 1200
+              },
+              "maxAttempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "estimatedSeconds": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 1800
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 30
+              },
+              "noCameraRequired": {
+                "const": true,
+                "type": "boolean"
+              },
+              "identifyingInformationRequested": {
+                "const": false,
+                "type": "boolean"
+              },
+              "kind": {
+                "const": "sequencing",
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "accessibleLabel": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 2,
+                "maxItems": 10
+              },
+              "correctOrder": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "minItems": 2,
+                "maxItems": 10
+              }
+            },
+            "required": [
+              "id",
+              "skillId",
+              "purpose",
+              "subject",
+              "gradeBand",
+              "locale",
+              "prompt",
+              "maxAttempts",
+              "estimatedSeconds",
+              "tags",
+              "noCameraRequired",
+              "identifyingInformationRequested",
+              "kind",
+              "options",
+              "correctOrder"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "$id": "AssessmentItem"
+      },
+      "minItems": 1,
+      "maxItems": 20
+    },
+    "misconceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Lowercase ASCII stable content identifier."
+          },
+          "skillId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Lowercase ASCII stable content identifier."
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "learnerSafeDescription": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 800
+          },
+          "distinguishingEvidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tag": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "direction": {
+                  "anyOf": [
+                    {
+                      "const": "supports",
+                      "type": "string"
+                    },
+                    {
+                      "const": "contradicts",
+                      "type": "string"
+                    },
+                    {
+                      "const": "neutral",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "weight": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "explanation": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 600
+                }
+              },
+              "required": [
+                "tag",
+                "direction",
+                "weight",
+                "explanation"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 50
+          },
+          "alternateExplanations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 600
+            },
+            "maxItems": 20
+          },
+          "minimumEvidenceCount": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "escalationAfterRepeatedCycles": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          }
+        },
+        "required": [
+          "id",
+          "skillId",
+          "label",
+          "learnerSafeDescription",
+          "distinguishingEvidence",
+          "alternateExplanations",
+          "minimumEvidenceCount",
+          "escalationAfterRepeatedCycles"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 30
+    },
+    "teachingSequences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "misconceptionId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              {
+                "const": "default",
+                "type": "string"
+              }
+            ]
+          },
+          "turns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "phase": {
+                  "anyOf": [
+                    {
+                      "const": "assessment",
+                      "type": "string"
+                    },
+                    {
+                      "const": "identify-missing-concept",
+                      "type": "string"
+                    },
+                    {
+                      "const": "teach-visually",
+                      "type": "string"
+                    },
+                    {
+                      "const": "guided-practice",
+                      "type": "string"
+                    },
+                    {
+                      "const": "independent-attempt",
+                      "type": "string"
+                    },
+                    {
+                      "const": "reassess",
+                      "type": "string"
+                    },
+                    {
+                      "const": "advance",
+                      "type": "string"
+                    },
+                    {
+                      "const": "reteach",
+                      "type": "string"
+                    },
+                    {
+                      "const": "escalated",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "skillId": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "learnerMessage": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 3000
+                },
+                "spokenTurn": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 2500
+                    },
+                    "locale": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 20,
+                      "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+                    },
+                    "pace": {
+                      "anyOf": [
+                        {
+                          "const": "slow",
+                          "type": "string"
+                        },
+                        {
+                          "const": "normal",
+                          "type": "string"
+                        },
+                        {
+                          "const": "brisk",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "emphasisTokens": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                      },
+                      "maxItems": 20
+                    },
+                    "canInterrupt": {
+                      "type": "boolean"
+                    },
+                    "requireLearnerResponse": {
+                      "type": "boolean"
+                    },
+                    "fallbackText": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 2500
+                    },
+                    "captionsRequired": {
+                      "const": true,
+                      "type": "boolean"
+                    },
+                    "transcriptRequired": {
+                      "const": true,
+                      "type": "boolean"
+                    },
+                    "claimsHumanIdentity": {
+                      "const": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text",
+                    "locale",
+                    "pace",
+                    "emphasisTokens",
+                    "canInterrupt",
+                    "requireLearnerResponse",
+                    "fallbackText",
+                    "captionsRequired",
+                    "transcriptRequired",
+                    "claimsHumanIdentity"
+                  ],
+                  "additionalProperties": false,
+                  "$id": "SpokenTurn"
+                },
+                "boardCommands": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "durationMs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 30000
+                          },
+                          "ariaLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "kind": {
+                            "const": "clear-board",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "durationMs",
+                          "ariaLabel",
+                          "kind"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "durationMs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 30000
+                          },
+                          "ariaLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "kind": {
+                            "const": "set-title",
+                            "type": "string"
+                          },
+                          "text": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 200
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "durationMs",
+                          "ariaLabel",
+                          "kind",
+                          "text"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "durationMs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 30000
+                          },
+                          "ariaLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "kind": {
+                            "const": "add-text",
+                            "type": "string"
+                          },
+                          "text": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 1200
+                          },
+                          "region": {
+                            "anyOf": [
+                              {
+                                "const": "top",
+                                "type": "string"
+                              },
+                              {
+                                "const": "center",
+                                "type": "string"
+                              },
+                              {
+                                "const": "bottom",
+                                "type": "string"
+                              },
+                              {
+                                "const": "side",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "emphasis": {
+                            "anyOf": [
+                              {
+                                "const": "normal",
+                                "type": "string"
+                              },
+                              {
+                                "const": "strong",
+                                "type": "string"
+                              },
+                              {
+                                "const": "muted",
+                                "type": "string"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "durationMs",
+                          "ariaLabel",
+                          "kind",
+                          "text",
+                          "region",
+                          "emphasis"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "durationMs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 30000
+                          },
+                          "ariaLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "kind": {
+                            "const": "draw-fraction",
+                            "type": "string"
+                          },
+                          "numerator": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100
+                          },
+                          "denominator": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 100
+                          },
+                          "label": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 100
+                          },
+                          "representation": {
+                            "anyOf": [
+                              {
+                                "const": "bar",
+                                "type": "string"
+                              },
+                              {
+                                "const": "circle",
+                                "type": "string"
+                              },
+                              {
+                                "const": "set",
+                                "type": "string"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "durationMs",
+                          "ariaLabel",
+                          "kind",
+                          "numerator",
+                          "denominator",
+                          "label",
+                          "representation"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "durationMs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 30000
+                          },
+                          "ariaLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "kind": {
+                            "const": "draw-number-line",
+                            "type": "string"
+                          },
+                          "min": {
+                            "type": "number"
+                          },
+                          "max": {
+                            "type": "number"
+                          },
+                          "step": {
+                            "type": "number",
+                            "exclusiveMinimum": 0
+                          },
+                          "highlightedValues": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            },
+                            "maxItems": 30
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "durationMs",
+                          "ariaLabel",
+                          "kind",
+                          "min",
+                          "max",
+                          "step",
+                          "highlightedValues"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "durationMs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 30000
+                          },
+                          "ariaLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "kind": {
+                            "const": "show-sentence-parts",
+                            "type": "string"
+                          },
+                          "sentence": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "subject": {
+                            "type": "string",
+                            "maxLength": 300
+                          },
+                          "predicate": {
+                            "type": "string",
+                            "maxLength": 300
+                          },
+                          "dependentMarker": {
+                            "type": "string",
+                            "maxLength": 100
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "durationMs",
+                          "ariaLabel",
+                          "kind",
+                          "sentence",
+                          "subject",
+                          "predicate"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "durationMs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 30000
+                          },
+                          "ariaLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "kind": {
+                            "const": "highlight",
+                            "type": "string"
+                          },
+                          "targetCommandId": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "token": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 200
+                          },
+                          "reason": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "durationMs",
+                          "ariaLabel",
+                          "kind",
+                          "targetCommandId",
+                          "token",
+                          "reason"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "durationMs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 30000
+                          },
+                          "ariaLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "kind": {
+                            "const": "reveal-step",
+                            "type": "string"
+                          },
+                          "stepNumber": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 50
+                          },
+                          "text": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 800
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "durationMs",
+                          "ariaLabel",
+                          "kind",
+                          "stepNumber",
+                          "text"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "durationMs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 30000
+                          },
+                          "ariaLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "kind": {
+                            "const": "compare",
+                            "type": "string"
+                          },
+                          "leftLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 300
+                          },
+                          "rightLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 300
+                          },
+                          "relationship": {
+                            "anyOf": [
+                              {
+                                "const": "equal",
+                                "type": "string"
+                              },
+                              {
+                                "const": "not-equal",
+                                "type": "string"
+                              },
+                              {
+                                "const": "part-whole",
+                                "type": "string"
+                              },
+                              {
+                                "const": "complete-incomplete",
+                                "type": "string"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "durationMs",
+                          "ariaLabel",
+                          "kind",
+                          "leftLabel",
+                          "rightLabel",
+                          "relationship"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 3,
+                            "maxLength": 120,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                            "description": "Lowercase ASCII stable content identifier."
+                          },
+                          "durationMs": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 30000
+                          },
+                          "ariaLabel": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 500
+                          },
+                          "kind": {
+                            "const": "aria-announce",
+                            "type": "string"
+                          },
+                          "text": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 800
+                          },
+                          "priority": {
+                            "anyOf": [
+                              {
+                                "const": "polite",
+                                "type": "string"
+                              },
+                              {
+                                "const": "assertive",
+                                "type": "string"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "durationMs",
+                          "ariaLabel",
+                          "kind",
+                          "text",
+                          "priority"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ],
+                    "$id": "VisualBoardCommand"
+                  },
+                  "maxItems": 80
+                },
+                "assessmentItem": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "minLength": 3,
+                              "maxLength": 120,
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                              "description": "Lowercase ASCII stable content identifier."
+                            },
+                            "skillId": {
+                              "type": "string",
+                              "minLength": 3,
+                              "maxLength": 120,
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                              "description": "Lowercase ASCII stable content identifier."
+                            },
+                            "purpose": {
+                              "anyOf": [
+                                {
+                                  "const": "diagnostic",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "guided-practice",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "independent-mastery",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "reassessment",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "subject": {
+                              "anyOf": [
+                                {
+                                  "const": "math",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "english",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "science",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "social-studies",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "general",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "gradeBand": {
+                              "type": "object",
+                              "properties": {
+                                "min": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 12
+                                },
+                                "max": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 12
+                                },
+                                "label": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 40
+                                }
+                              },
+                              "required": [
+                                "min",
+                                "max",
+                                "label"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "locale": {
+                              "type": "string",
+                              "minLength": 2,
+                              "maxLength": 20,
+                              "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 2500
+                            },
+                            "directions": {
+                              "type": "string",
+                              "maxLength": 1200
+                            },
+                            "maxAttempts": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 10
+                            },
+                            "estimatedSeconds": {
+                              "type": "integer",
+                              "minimum": 5,
+                              "maximum": 1800
+                            },
+                            "tags": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 3,
+                                "maxLength": 120,
+                                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                                "description": "Lowercase ASCII stable content identifier."
+                              },
+                              "maxItems": 30
+                            },
+                            "noCameraRequired": {
+                              "const": true,
+                              "type": "boolean"
+                            },
+                            "identifyingInformationRequested": {
+                              "const": false,
+                              "type": "boolean"
+                            },
+                            "kind": {
+                              "const": "multiple-choice",
+                              "type": "string"
+                            },
+                            "options": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "minLength": 3,
+                                    "maxLength": 120,
+                                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                                    "description": "Lowercase ASCII stable content identifier."
+                                  },
+                                  "text": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 500
+                                  },
+                                  "accessibleLabel": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 500
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "text"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "minItems": 2,
+                              "maxItems": 8
+                            },
+                            "correctOptionIds": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 3,
+                                "maxLength": 120,
+                                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                                "description": "Lowercase ASCII stable content identifier."
+                              },
+                              "minItems": 1,
+                              "maxItems": 8
+                            },
+                            "allowMultiple": {
+                              "type": "boolean"
+                            },
+                            "shuffle": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "skillId",
+                            "purpose",
+                            "subject",
+                            "gradeBand",
+                            "locale",
+                            "prompt",
+                            "maxAttempts",
+                            "estimatedSeconds",
+                            "tags",
+                            "noCameraRequired",
+                            "identifyingInformationRequested",
+                            "kind",
+                            "options",
+                            "correctOptionIds",
+                            "allowMultiple",
+                            "shuffle"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "minLength": 3,
+                              "maxLength": 120,
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                              "description": "Lowercase ASCII stable content identifier."
+                            },
+                            "skillId": {
+                              "type": "string",
+                              "minLength": 3,
+                              "maxLength": 120,
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                              "description": "Lowercase ASCII stable content identifier."
+                            },
+                            "purpose": {
+                              "anyOf": [
+                                {
+                                  "const": "diagnostic",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "guided-practice",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "independent-mastery",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "reassessment",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "subject": {
+                              "anyOf": [
+                                {
+                                  "const": "math",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "english",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "science",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "social-studies",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "general",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "gradeBand": {
+                              "type": "object",
+                              "properties": {
+                                "min": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 12
+                                },
+                                "max": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 12
+                                },
+                                "label": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 40
+                                }
+                              },
+                              "required": [
+                                "min",
+                                "max",
+                                "label"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "locale": {
+                              "type": "string",
+                              "minLength": 2,
+                              "maxLength": 20,
+                              "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 2500
+                            },
+                            "directions": {
+                              "type": "string",
+                              "maxLength": 1200
+                            },
+                            "maxAttempts": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 10
+                            },
+                            "estimatedSeconds": {
+                              "type": "integer",
+                              "minimum": 5,
+                              "maximum": 1800
+                            },
+                            "tags": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 3,
+                                "maxLength": 120,
+                                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                                "description": "Lowercase ASCII stable content identifier."
+                              },
+                              "maxItems": 30
+                            },
+                            "noCameraRequired": {
+                              "const": true,
+                              "type": "boolean"
+                            },
+                            "identifyingInformationRequested": {
+                              "const": false,
+                              "type": "boolean"
+                            },
+                            "kind": {
+                              "const": "short-answer",
+                              "type": "string"
+                            },
+                            "acceptedAnswers": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 300
+                              },
+                              "minItems": 1,
+                              "maxItems": 30
+                            },
+                            "caseSensitive": {
+                              "type": "boolean"
+                            },
+                            "trimWhitespace": {
+                              "type": "boolean"
+                            },
+                            "normalization": {
+                              "anyOf": [
+                                {
+                                  "const": "none",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "basic-text",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "numeric",
+                                  "type": "string"
+                                }
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "skillId",
+                            "purpose",
+                            "subject",
+                            "gradeBand",
+                            "locale",
+                            "prompt",
+                            "maxAttempts",
+                            "estimatedSeconds",
+                            "tags",
+                            "noCameraRequired",
+                            "identifyingInformationRequested",
+                            "kind",
+                            "acceptedAnswers",
+                            "caseSensitive",
+                            "trimWhitespace",
+                            "normalization"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "minLength": 3,
+                              "maxLength": 120,
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                              "description": "Lowercase ASCII stable content identifier."
+                            },
+                            "skillId": {
+                              "type": "string",
+                              "minLength": 3,
+                              "maxLength": 120,
+                              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                              "description": "Lowercase ASCII stable content identifier."
+                            },
+                            "purpose": {
+                              "anyOf": [
+                                {
+                                  "const": "diagnostic",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "guided-practice",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "independent-mastery",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "reassessment",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "subject": {
+                              "anyOf": [
+                                {
+                                  "const": "math",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "english",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "science",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "social-studies",
+                                  "type": "string"
+                                },
+                                {
+                                  "const": "general",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "gradeBand": {
+                              "type": "object",
+                              "properties": {
+                                "min": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 12
+                                },
+                                "max": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 12
+                                },
+                                "label": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 40
+                                }
+                              },
+                              "required": [
+                                "min",
+                                "max",
+                                "label"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "locale": {
+                              "type": "string",
+                              "minLength": 2,
+                              "maxLength": 20,
+                              "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+                            },
+                            "prompt": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 2500
+                            },
+                            "directions": {
+                              "type": "string",
+                              "maxLength": 1200
+                            },
+                            "maxAttempts": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 10
+                            },
+                            "estimatedSeconds": {
+                              "type": "integer",
+                              "minimum": 5,
+                              "maximum": 1800
+                            },
+                            "tags": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 3,
+                                "maxLength": 120,
+                                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                                "description": "Lowercase ASCII stable content identifier."
+                              },
+                              "maxItems": 30
+                            },
+                            "noCameraRequired": {
+                              "const": true,
+                              "type": "boolean"
+                            },
+                            "identifyingInformationRequested": {
+                              "const": false,
+                              "type": "boolean"
+                            },
+                            "kind": {
+                              "const": "sequencing",
+                              "type": "string"
+                            },
+                            "options": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "minLength": 3,
+                                    "maxLength": 120,
+                                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                                    "description": "Lowercase ASCII stable content identifier."
+                                  },
+                                  "text": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 500
+                                  },
+                                  "accessibleLabel": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 500
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "text"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "minItems": 2,
+                              "maxItems": 10
+                            },
+                            "correctOrder": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "minLength": 3,
+                                "maxLength": 120,
+                                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                                "description": "Lowercase ASCII stable content identifier."
+                              },
+                              "minItems": 2,
+                              "maxItems": 10
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "skillId",
+                            "purpose",
+                            "subject",
+                            "gradeBand",
+                            "locale",
+                            "prompt",
+                            "maxAttempts",
+                            "estimatedSeconds",
+                            "tags",
+                            "noCameraRequired",
+                            "identifyingInformationRequested",
+                            "kind",
+                            "options",
+                            "correctOrder"
+                          ],
+                          "additionalProperties": false
+                        }
+                      ],
+                      "$id": "AssessmentItem"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "expectedInput": {
+                  "anyOf": [
+                    {
+                      "const": "none",
+                      "type": "string"
+                    },
+                    {
+                      "const": "continue",
+                      "type": "string"
+                    },
+                    {
+                      "const": "answer",
+                      "type": "string"
+                    },
+                    {
+                      "const": "adult-review",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "oneUsefulStepOnly": {
+                  "const": true,
+                  "type": "boolean"
+                },
+                "givesFinalGradedAnswer": {
+                  "const": false,
+                  "type": "boolean"
+                },
+                "asksLearnerToParticipate": {
+                  "type": "boolean"
+                },
+                "uncertaintyStatement": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1000
+                },
+                "confidence": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "skillId": {
+                          "type": "string",
+                          "minLength": 3,
+                          "maxLength": 120,
+                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                          "description": "Lowercase ASCII stable content identifier."
+                        },
+                        "value": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "uncertainty": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "lowerBound": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "upperBound": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "evidenceCount": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "effectiveEvidence": {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "distinctContextCount": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "band": {
+                          "anyOf": [
+                            {
+                              "const": "very-low",
+                              "type": "string"
+                            },
+                            {
+                              "const": "low",
+                              "type": "string"
+                            },
+                            {
+                              "const": "developing",
+                              "type": "string"
+                            },
+                            {
+                              "const": "strong",
+                              "type": "string"
+                            },
+                            {
+                              "const": "insufficient-evidence",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "explanation": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1200
+                        },
+                        "placementDecisionAllowed": {
+                          "const": false,
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "skillId",
+                        "value",
+                        "uncertainty",
+                        "lowerBound",
+                        "upperBound",
+                        "evidenceCount",
+                        "effectiveEvidence",
+                        "distinctContextCount",
+                        "band",
+                        "explanation",
+                        "placementDecisionAllowed"
+                      ],
+                      "additionalProperties": false,
+                      "$id": "ConfidenceEstimate"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "alternateExplanationAvailable": {
+                  "type": "boolean"
+                },
+                "escalationReason": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1000
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "jarvisClaimsHumanIdentity": {
+                  "const": false,
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id",
+                "phase",
+                "skillId",
+                "learnerMessage",
+                "spokenTurn",
+                "boardCommands",
+                "assessmentItem",
+                "expectedInput",
+                "oneUsefulStepOnly",
+                "givesFinalGradedAnswer",
+                "asksLearnerToParticipate",
+                "uncertaintyStatement",
+                "confidence",
+                "alternateExplanationAvailable",
+                "escalationReason",
+                "jarvisClaimsHumanIdentity"
+              ],
+              "additionalProperties": false,
+              "$id": "TutorResponse"
+            },
+            "minItems": 1,
+            "maxItems": 20
+          }
+        },
+        "required": [
+          "misconceptionId",
+          "turns"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 31
+    },
+    "guidedPractice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "skillId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "skillId": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "purpose": {
+                    "anyOf": [
+                      {
+                        "const": "diagnostic",
+                        "type": "string"
+                      },
+                      {
+                        "const": "guided-practice",
+                        "type": "string"
+                      },
+                      {
+                        "const": "independent-mastery",
+                        "type": "string"
+                      },
+                      {
+                        "const": "reassessment",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "subject": {
+                    "anyOf": [
+                      {
+                        "const": "math",
+                        "type": "string"
+                      },
+                      {
+                        "const": "english",
+                        "type": "string"
+                      },
+                      {
+                        "const": "science",
+                        "type": "string"
+                      },
+                      {
+                        "const": "social-studies",
+                        "type": "string"
+                      },
+                      {
+                        "const": "general",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "gradeBand": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "max": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40
+                      }
+                    },
+                    "required": [
+                      "min",
+                      "max",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "locale": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 20,
+                    "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2500
+                  },
+                  "directions": {
+                    "type": "string",
+                    "maxLength": 1200
+                  },
+                  "maxAttempts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10
+                  },
+                  "estimatedSeconds": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 1800
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "maxItems": 30
+                  },
+                  "noCameraRequired": {
+                    "const": true,
+                    "type": "boolean"
+                  },
+                  "identifyingInformationRequested": {
+                    "const": false,
+                    "type": "boolean"
+                  },
+                  "kind": {
+                    "const": "multiple-choice",
+                    "type": "string"
+                  },
+                  "options": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 3,
+                          "maxLength": 120,
+                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                          "description": "Lowercase ASCII stable content identifier."
+                        },
+                        "text": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500
+                        },
+                        "accessibleLabel": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "text"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 2,
+                    "maxItems": 8
+                  },
+                  "correctOptionIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "minItems": 1,
+                    "maxItems": 8
+                  },
+                  "allowMultiple": {
+                    "type": "boolean"
+                  },
+                  "shuffle": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "id",
+                  "skillId",
+                  "purpose",
+                  "subject",
+                  "gradeBand",
+                  "locale",
+                  "prompt",
+                  "maxAttempts",
+                  "estimatedSeconds",
+                  "tags",
+                  "noCameraRequired",
+                  "identifyingInformationRequested",
+                  "kind",
+                  "options",
+                  "correctOptionIds",
+                  "allowMultiple",
+                  "shuffle"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "skillId": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "purpose": {
+                    "anyOf": [
+                      {
+                        "const": "diagnostic",
+                        "type": "string"
+                      },
+                      {
+                        "const": "guided-practice",
+                        "type": "string"
+                      },
+                      {
+                        "const": "independent-mastery",
+                        "type": "string"
+                      },
+                      {
+                        "const": "reassessment",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "subject": {
+                    "anyOf": [
+                      {
+                        "const": "math",
+                        "type": "string"
+                      },
+                      {
+                        "const": "english",
+                        "type": "string"
+                      },
+                      {
+                        "const": "science",
+                        "type": "string"
+                      },
+                      {
+                        "const": "social-studies",
+                        "type": "string"
+                      },
+                      {
+                        "const": "general",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "gradeBand": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "max": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40
+                      }
+                    },
+                    "required": [
+                      "min",
+                      "max",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "locale": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 20,
+                    "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2500
+                  },
+                  "directions": {
+                    "type": "string",
+                    "maxLength": 1200
+                  },
+                  "maxAttempts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10
+                  },
+                  "estimatedSeconds": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 1800
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "maxItems": 30
+                  },
+                  "noCameraRequired": {
+                    "const": true,
+                    "type": "boolean"
+                  },
+                  "identifyingInformationRequested": {
+                    "const": false,
+                    "type": "boolean"
+                  },
+                  "kind": {
+                    "const": "short-answer",
+                    "type": "string"
+                  },
+                  "acceptedAnswers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 300
+                    },
+                    "minItems": 1,
+                    "maxItems": 30
+                  },
+                  "caseSensitive": {
+                    "type": "boolean"
+                  },
+                  "trimWhitespace": {
+                    "type": "boolean"
+                  },
+                  "normalization": {
+                    "anyOf": [
+                      {
+                        "const": "none",
+                        "type": "string"
+                      },
+                      {
+                        "const": "basic-text",
+                        "type": "string"
+                      },
+                      {
+                        "const": "numeric",
+                        "type": "string"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "skillId",
+                  "purpose",
+                  "subject",
+                  "gradeBand",
+                  "locale",
+                  "prompt",
+                  "maxAttempts",
+                  "estimatedSeconds",
+                  "tags",
+                  "noCameraRequired",
+                  "identifyingInformationRequested",
+                  "kind",
+                  "acceptedAnswers",
+                  "caseSensitive",
+                  "trimWhitespace",
+                  "normalization"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "skillId": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "purpose": {
+                    "anyOf": [
+                      {
+                        "const": "diagnostic",
+                        "type": "string"
+                      },
+                      {
+                        "const": "guided-practice",
+                        "type": "string"
+                      },
+                      {
+                        "const": "independent-mastery",
+                        "type": "string"
+                      },
+                      {
+                        "const": "reassessment",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "subject": {
+                    "anyOf": [
+                      {
+                        "const": "math",
+                        "type": "string"
+                      },
+                      {
+                        "const": "english",
+                        "type": "string"
+                      },
+                      {
+                        "const": "science",
+                        "type": "string"
+                      },
+                      {
+                        "const": "social-studies",
+                        "type": "string"
+                      },
+                      {
+                        "const": "general",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "gradeBand": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "max": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40
+                      }
+                    },
+                    "required": [
+                      "min",
+                      "max",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "locale": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 20,
+                    "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2500
+                  },
+                  "directions": {
+                    "type": "string",
+                    "maxLength": 1200
+                  },
+                  "maxAttempts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10
+                  },
+                  "estimatedSeconds": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 1800
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "maxItems": 30
+                  },
+                  "noCameraRequired": {
+                    "const": true,
+                    "type": "boolean"
+                  },
+                  "identifyingInformationRequested": {
+                    "const": false,
+                    "type": "boolean"
+                  },
+                  "kind": {
+                    "const": "sequencing",
+                    "type": "string"
+                  },
+                  "options": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 3,
+                          "maxLength": 120,
+                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                          "description": "Lowercase ASCII stable content identifier."
+                        },
+                        "text": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500
+                        },
+                        "accessibleLabel": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "text"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 2,
+                    "maxItems": 10
+                  },
+                  "correctOrder": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "minItems": 2,
+                    "maxItems": 10
+                  }
+                },
+                "required": [
+                  "id",
+                  "skillId",
+                  "purpose",
+                  "subject",
+                  "gradeBand",
+                  "locale",
+                  "prompt",
+                  "maxAttempts",
+                  "estimatedSeconds",
+                  "tags",
+                  "noCameraRequired",
+                  "identifyingInformationRequested",
+                  "kind",
+                  "options",
+                  "correctOrder"
+                ],
+                "additionalProperties": false
+              }
+            ],
+            "$id": "AssessmentItem"
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "hintLadder": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1200
+              },
+              "revealsAnswer": {
+                "type": "boolean"
+              },
+              "visualSupportCommandIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 20
+              }
+            },
+            "required": [
+              "level",
+              "prompt",
+              "revealsAnswer",
+              "visualSupportCommandIds"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "maxSupportedAttemptsPerItem": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "askLearnerToExplain": {
+          "type": "boolean"
+        },
+        "alternateExplanationAllowed": {
+          "const": true,
+          "type": "boolean"
+        },
+        "feedbackPolicy": {
+          "anyOf": [
+            {
+              "const": "immediate",
+              "type": "string"
+            },
+            {
+              "const": "after-second-attempt",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "skillId",
+        "items",
+        "hintLadder",
+        "maxSupportedAttemptsPerItem",
+        "askLearnerToExplain",
+        "alternateExplanationAllowed",
+        "feedbackPolicy"
+      ],
+      "additionalProperties": false,
+      "$id": "GuidedPractice"
+    },
+    "independentMastery": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "skillId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "skillId": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "purpose": {
+                    "anyOf": [
+                      {
+                        "const": "diagnostic",
+                        "type": "string"
+                      },
+                      {
+                        "const": "guided-practice",
+                        "type": "string"
+                      },
+                      {
+                        "const": "independent-mastery",
+                        "type": "string"
+                      },
+                      {
+                        "const": "reassessment",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "subject": {
+                    "anyOf": [
+                      {
+                        "const": "math",
+                        "type": "string"
+                      },
+                      {
+                        "const": "english",
+                        "type": "string"
+                      },
+                      {
+                        "const": "science",
+                        "type": "string"
+                      },
+                      {
+                        "const": "social-studies",
+                        "type": "string"
+                      },
+                      {
+                        "const": "general",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "gradeBand": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "max": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40
+                      }
+                    },
+                    "required": [
+                      "min",
+                      "max",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "locale": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 20,
+                    "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2500
+                  },
+                  "directions": {
+                    "type": "string",
+                    "maxLength": 1200
+                  },
+                  "maxAttempts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10
+                  },
+                  "estimatedSeconds": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 1800
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "maxItems": 30
+                  },
+                  "noCameraRequired": {
+                    "const": true,
+                    "type": "boolean"
+                  },
+                  "identifyingInformationRequested": {
+                    "const": false,
+                    "type": "boolean"
+                  },
+                  "kind": {
+                    "const": "multiple-choice",
+                    "type": "string"
+                  },
+                  "options": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 3,
+                          "maxLength": 120,
+                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                          "description": "Lowercase ASCII stable content identifier."
+                        },
+                        "text": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500
+                        },
+                        "accessibleLabel": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "text"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 2,
+                    "maxItems": 8
+                  },
+                  "correctOptionIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "minItems": 1,
+                    "maxItems": 8
+                  },
+                  "allowMultiple": {
+                    "type": "boolean"
+                  },
+                  "shuffle": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "id",
+                  "skillId",
+                  "purpose",
+                  "subject",
+                  "gradeBand",
+                  "locale",
+                  "prompt",
+                  "maxAttempts",
+                  "estimatedSeconds",
+                  "tags",
+                  "noCameraRequired",
+                  "identifyingInformationRequested",
+                  "kind",
+                  "options",
+                  "correctOptionIds",
+                  "allowMultiple",
+                  "shuffle"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "skillId": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "purpose": {
+                    "anyOf": [
+                      {
+                        "const": "diagnostic",
+                        "type": "string"
+                      },
+                      {
+                        "const": "guided-practice",
+                        "type": "string"
+                      },
+                      {
+                        "const": "independent-mastery",
+                        "type": "string"
+                      },
+                      {
+                        "const": "reassessment",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "subject": {
+                    "anyOf": [
+                      {
+                        "const": "math",
+                        "type": "string"
+                      },
+                      {
+                        "const": "english",
+                        "type": "string"
+                      },
+                      {
+                        "const": "science",
+                        "type": "string"
+                      },
+                      {
+                        "const": "social-studies",
+                        "type": "string"
+                      },
+                      {
+                        "const": "general",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "gradeBand": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "max": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40
+                      }
+                    },
+                    "required": [
+                      "min",
+                      "max",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "locale": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 20,
+                    "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2500
+                  },
+                  "directions": {
+                    "type": "string",
+                    "maxLength": 1200
+                  },
+                  "maxAttempts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10
+                  },
+                  "estimatedSeconds": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 1800
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "maxItems": 30
+                  },
+                  "noCameraRequired": {
+                    "const": true,
+                    "type": "boolean"
+                  },
+                  "identifyingInformationRequested": {
+                    "const": false,
+                    "type": "boolean"
+                  },
+                  "kind": {
+                    "const": "short-answer",
+                    "type": "string"
+                  },
+                  "acceptedAnswers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 300
+                    },
+                    "minItems": 1,
+                    "maxItems": 30
+                  },
+                  "caseSensitive": {
+                    "type": "boolean"
+                  },
+                  "trimWhitespace": {
+                    "type": "boolean"
+                  },
+                  "normalization": {
+                    "anyOf": [
+                      {
+                        "const": "none",
+                        "type": "string"
+                      },
+                      {
+                        "const": "basic-text",
+                        "type": "string"
+                      },
+                      {
+                        "const": "numeric",
+                        "type": "string"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "skillId",
+                  "purpose",
+                  "subject",
+                  "gradeBand",
+                  "locale",
+                  "prompt",
+                  "maxAttempts",
+                  "estimatedSeconds",
+                  "tags",
+                  "noCameraRequired",
+                  "identifyingInformationRequested",
+                  "kind",
+                  "acceptedAnswers",
+                  "caseSensitive",
+                  "trimWhitespace",
+                  "normalization"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "skillId": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 120,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Lowercase ASCII stable content identifier."
+                  },
+                  "purpose": {
+                    "anyOf": [
+                      {
+                        "const": "diagnostic",
+                        "type": "string"
+                      },
+                      {
+                        "const": "guided-practice",
+                        "type": "string"
+                      },
+                      {
+                        "const": "independent-mastery",
+                        "type": "string"
+                      },
+                      {
+                        "const": "reassessment",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "subject": {
+                    "anyOf": [
+                      {
+                        "const": "math",
+                        "type": "string"
+                      },
+                      {
+                        "const": "english",
+                        "type": "string"
+                      },
+                      {
+                        "const": "science",
+                        "type": "string"
+                      },
+                      {
+                        "const": "social-studies",
+                        "type": "string"
+                      },
+                      {
+                        "const": "general",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "gradeBand": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "max": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 12
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40
+                      }
+                    },
+                    "required": [
+                      "min",
+                      "max",
+                      "label"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "locale": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 20,
+                    "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 2500
+                  },
+                  "directions": {
+                    "type": "string",
+                    "maxLength": 1200
+                  },
+                  "maxAttempts": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10
+                  },
+                  "estimatedSeconds": {
+                    "type": "integer",
+                    "minimum": 5,
+                    "maximum": 1800
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "maxItems": 30
+                  },
+                  "noCameraRequired": {
+                    "const": true,
+                    "type": "boolean"
+                  },
+                  "identifyingInformationRequested": {
+                    "const": false,
+                    "type": "boolean"
+                  },
+                  "kind": {
+                    "const": "sequencing",
+                    "type": "string"
+                  },
+                  "options": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "minLength": 3,
+                          "maxLength": 120,
+                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                          "description": "Lowercase ASCII stable content identifier."
+                        },
+                        "text": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500
+                        },
+                        "accessibleLabel": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 500
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "text"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 2,
+                    "maxItems": 10
+                  },
+                  "correctOrder": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "minItems": 2,
+                    "maxItems": 10
+                  }
+                },
+                "required": [
+                  "id",
+                  "skillId",
+                  "purpose",
+                  "subject",
+                  "gradeBand",
+                  "locale",
+                  "prompt",
+                  "maxAttempts",
+                  "estimatedSeconds",
+                  "tags",
+                  "noCameraRequired",
+                  "identifyingInformationRequested",
+                  "kind",
+                  "options",
+                  "correctOrder"
+                ],
+                "additionalProperties": false
+              }
+            ],
+            "$id": "AssessmentItem"
+          },
+          "minItems": 3,
+          "maxItems": 50
+        },
+        "minimumEvidenceCount": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 50
+        },
+        "minimumDistinctContexts": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 20
+        },
+        "minimumMeanScore": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 1
+        },
+        "maximumUncertainty": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.8
+        },
+        "reassessmentRequired": {
+          "const": true,
+          "type": "boolean"
+        },
+        "singleAnswerCanEstablishMastery": {
+          "const": false,
+          "type": "boolean"
+        },
+        "supportsTeacherOverride": {
+          "const": true,
+          "type": "boolean"
+        },
+        "placementDecisionAllowed": {
+          "const": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "skillId",
+        "items",
+        "minimumEvidenceCount",
+        "minimumDistinctContexts",
+        "minimumMeanScore",
+        "maximumUncertainty",
+        "reassessmentRequired",
+        "singleAnswerCanEstablishMastery",
+        "supportsTeacherOverride",
+        "placementDecisionAllowed"
+      ],
+      "additionalProperties": false,
+      "$id": "IndependentMastery"
+    },
+    "reassessmentItems": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "skillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "purpose": {
+                "anyOf": [
+                  {
+                    "const": "diagnostic",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-practice",
+                    "type": "string"
+                  },
+                  {
+                    "const": "independent-mastery",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reassessment",
+                    "type": "string"
+                  }
+                ]
+              },
+              "subject": {
+                "anyOf": [
+                  {
+                    "const": "math",
+                    "type": "string"
+                  },
+                  {
+                    "const": "english",
+                    "type": "string"
+                  },
+                  {
+                    "const": "science",
+                    "type": "string"
+                  },
+                  {
+                    "const": "social-studies",
+                    "type": "string"
+                  },
+                  {
+                    "const": "general",
+                    "type": "string"
+                  }
+                ]
+              },
+              "gradeBand": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "locale": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 20,
+                "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2500
+              },
+              "directions": {
+                "type": "string",
+                "maxLength": 1200
+              },
+              "maxAttempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "estimatedSeconds": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 1800
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 30
+              },
+              "noCameraRequired": {
+                "const": true,
+                "type": "boolean"
+              },
+              "identifyingInformationRequested": {
+                "const": false,
+                "type": "boolean"
+              },
+              "kind": {
+                "const": "multiple-choice",
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "accessibleLabel": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 2,
+                "maxItems": 8
+              },
+              "correctOptionIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "minItems": 1,
+                "maxItems": 8
+              },
+              "allowMultiple": {
+                "type": "boolean"
+              },
+              "shuffle": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "skillId",
+              "purpose",
+              "subject",
+              "gradeBand",
+              "locale",
+              "prompt",
+              "maxAttempts",
+              "estimatedSeconds",
+              "tags",
+              "noCameraRequired",
+              "identifyingInformationRequested",
+              "kind",
+              "options",
+              "correctOptionIds",
+              "allowMultiple",
+              "shuffle"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "skillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "purpose": {
+                "anyOf": [
+                  {
+                    "const": "diagnostic",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-practice",
+                    "type": "string"
+                  },
+                  {
+                    "const": "independent-mastery",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reassessment",
+                    "type": "string"
+                  }
+                ]
+              },
+              "subject": {
+                "anyOf": [
+                  {
+                    "const": "math",
+                    "type": "string"
+                  },
+                  {
+                    "const": "english",
+                    "type": "string"
+                  },
+                  {
+                    "const": "science",
+                    "type": "string"
+                  },
+                  {
+                    "const": "social-studies",
+                    "type": "string"
+                  },
+                  {
+                    "const": "general",
+                    "type": "string"
+                  }
+                ]
+              },
+              "gradeBand": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "locale": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 20,
+                "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2500
+              },
+              "directions": {
+                "type": "string",
+                "maxLength": 1200
+              },
+              "maxAttempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "estimatedSeconds": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 1800
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 30
+              },
+              "noCameraRequired": {
+                "const": true,
+                "type": "boolean"
+              },
+              "identifyingInformationRequested": {
+                "const": false,
+                "type": "boolean"
+              },
+              "kind": {
+                "const": "short-answer",
+                "type": "string"
+              },
+              "acceptedAnswers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "minItems": 1,
+                "maxItems": 30
+              },
+              "caseSensitive": {
+                "type": "boolean"
+              },
+              "trimWhitespace": {
+                "type": "boolean"
+              },
+              "normalization": {
+                "anyOf": [
+                  {
+                    "const": "none",
+                    "type": "string"
+                  },
+                  {
+                    "const": "basic-text",
+                    "type": "string"
+                  },
+                  {
+                    "const": "numeric",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "skillId",
+              "purpose",
+              "subject",
+              "gradeBand",
+              "locale",
+              "prompt",
+              "maxAttempts",
+              "estimatedSeconds",
+              "tags",
+              "noCameraRequired",
+              "identifyingInformationRequested",
+              "kind",
+              "acceptedAnswers",
+              "caseSensitive",
+              "trimWhitespace",
+              "normalization"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "skillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "purpose": {
+                "anyOf": [
+                  {
+                    "const": "diagnostic",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-practice",
+                    "type": "string"
+                  },
+                  {
+                    "const": "independent-mastery",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reassessment",
+                    "type": "string"
+                  }
+                ]
+              },
+              "subject": {
+                "anyOf": [
+                  {
+                    "const": "math",
+                    "type": "string"
+                  },
+                  {
+                    "const": "english",
+                    "type": "string"
+                  },
+                  {
+                    "const": "science",
+                    "type": "string"
+                  },
+                  {
+                    "const": "social-studies",
+                    "type": "string"
+                  },
+                  {
+                    "const": "general",
+                    "type": "string"
+                  }
+                ]
+              },
+              "gradeBand": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "locale": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 20,
+                "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2500
+              },
+              "directions": {
+                "type": "string",
+                "maxLength": 1200
+              },
+              "maxAttempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "estimatedSeconds": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 1800
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 30
+              },
+              "noCameraRequired": {
+                "const": true,
+                "type": "boolean"
+              },
+              "identifyingInformationRequested": {
+                "const": false,
+                "type": "boolean"
+              },
+              "kind": {
+                "const": "sequencing",
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "accessibleLabel": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 2,
+                "maxItems": 10
+              },
+              "correctOrder": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "minItems": 2,
+                "maxItems": 10
+              }
+            },
+            "required": [
+              "id",
+              "skillId",
+              "purpose",
+              "subject",
+              "gradeBand",
+              "locale",
+              "prompt",
+              "maxAttempts",
+              "estimatedSeconds",
+              "tags",
+              "noCameraRequired",
+              "identifyingInformationRequested",
+              "kind",
+              "options",
+              "correctOrder"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "$id": "AssessmentItem"
+      },
+      "minItems": 1,
+      "maxItems": 20
+    },
+    "mediaFallback": {
+      "type": "object",
+      "properties": {
+        "missingVisualText": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "missingAudioText": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "visualAlternativeCommandsAllowed": {
+          "const": true,
+          "type": "boolean"
+        },
+        "captionsAlwaysVisible": {
+          "const": true,
+          "type": "boolean"
+        },
+        "transcriptAlwaysAvailable": {
+          "const": true,
+          "type": "boolean"
+        },
+        "lessonMayContinueWithoutMedia": {
+          "const": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "missingVisualText",
+        "missingAudioText",
+        "visualAlternativeCommandsAllowed",
+        "captionsAlwaysVisible",
+        "transcriptAlwaysAvailable",
+        "lessonMayContinueWithoutMedia"
+      ],
+      "additionalProperties": false,
+      "$id": "MediaFallback"
+    },
+    "persistentDifficultyCycleLimit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    }
+  },
+  "required": [
+    "id",
+    "version",
+    "title",
+    "subject",
+    "gradeBand",
+    "locale",
+    "targetSkillId",
+    "skillGraph",
+    "diagnosticItems",
+    "misconceptions",
+    "teachingSequences",
+    "guidedPractice",
+    "independentMastery",
+    "reassessmentItems",
+    "mediaFallback",
+    "persistentDifficultyCycleLimit"
+  ],
+  "additionalProperties": false,
+  "$id": "TutorProgram"
+}

@@ -1,0 +1,233 @@
+{
+  "package": "@manuel-academy/adaptive-english-tutor",
+  "version": "0.2.0",
+  "excludes": [
+    "node_modules",
+    "releases",
+    "temporary build directories",
+    "this manifest",
+    "generated inventory"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1537,
+      "sha256": "e1794700bebc8c28a2149dad8b99edaa01ced88e9e7cf26cc7d299e78a25b1f8"
+    },
+    {
+      "path": "assets/captions/english-decoding-multisyllable-words.vtt",
+      "bytes": 913,
+      "sha256": "2e52df4617b8a9299bac740c0980857ca2e339a2883e29288db8f46ba68c3646"
+    },
+    {
+      "path": "assets/captions/english-main-idea-supporting-details.vtt",
+      "bytes": 1046,
+      "sha256": "417075411ef0c22b8a3bf348ef3d55a7474bd08857b2a0c8116e3dd5bf74b8d5"
+    },
+    {
+      "path": "assets/captions/english-organize-revise-clear-paragraph.vtt",
+      "bytes": 999,
+      "sha256": "9a785c40277df0fbd40879cc54d75429dc969697644721fff81585eb0bee7d48"
+    },
+    {
+      "path": "assets/captions/english-sentence-completeness.vtt",
+      "bytes": 847,
+      "sha256": "aa726a2b505953882657dee5a3a25890dd1d70afcaf1cfcb031178a796d6a9fd"
+    },
+    {
+      "path": "assets/narration/english-decoding-multisyllable-words.json",
+      "bytes": 3401,
+      "sha256": "a1bb470e1b5dc50095b15d26a2f76edc27e7d9980b4cdf5eed43aeed55086d57"
+    },
+    {
+      "path": "assets/narration/english-main-idea-supporting-details.json",
+      "bytes": 3800,
+      "sha256": "3dc6a72ed2442705db06bd7e8e88fb54d0e946c45897795e312821d1bf7438ae"
+    },
+    {
+      "path": "assets/narration/english-organize-revise-clear-paragraph.json",
+      "bytes": 3650,
+      "sha256": "631f5ead1f9c2fb41b34095c5cef70cb8bfcb5dc4b1471220c04bea0d3a3b08e"
+    },
+    {
+      "path": "assets/narration/english-sentence-completeness.json",
+      "bytes": 3224,
+      "sha256": "1e5dd8762bfae4c91ba715c8b95bcb086f40ce4df2e3b711cefab516ded72954"
+    },
+    {
+      "path": "demo/app.js",
+      "bytes": 6481,
+      "sha256": "c04927454898520e5405dfc2c26eafa8012c3032f86bdf83c10a32e7725e3201"
+    },
+    {
+      "path": "demo/index.html",
+      "bytes": 3583,
+      "sha256": "753fdd0da0bf8010f814d5742df42994a8cf7970fc0f44d4680b209f29c47c52"
+    },
+    {
+      "path": "demo/manifest.generated.json",
+      "bytes": 234,
+      "sha256": "af6866d9fba2110b91230f41969b786dafa1433448db343e1b405759212a9c86"
+    },
+    {
+      "path": "demo/programs.generated.js",
+      "bytes": 130509,
+      "sha256": "07dbb908e5eac0db7dc105475ef70b2e47cc10535f9213e0f150aa4e55b06fff"
+    },
+    {
+      "path": "demo/styles.css",
+      "bytes": 3772,
+      "sha256": "4d98607406b0eb80c25bbdd4f64e716fae728c3b851f6bef81d1a8ec8a7d269a"
+    },
+    {
+      "path": "docs/CORE-V0.2-MAPPING.md",
+      "bytes": 1326,
+      "sha256": "ee2ad647d0e1969aacff62d9bd65d6080ca7b6b0fcdc6f6cdb6eefeaf4613e2d"
+    },
+    {
+      "path": "docs/DIRECTOR-HANDOFF.md",
+      "bytes": 1812,
+      "sha256": "32fb12f4aa0407fcd0a4482e17321302fdb0ff3c51426b5283e2b86d3def0a63"
+    },
+    {
+      "path": "docs/LIMITATIONS.md",
+      "bytes": 878,
+      "sha256": "18e16f3cc3854729b2a801711acf9fac1023cf5762a2d012da23d38a47160369"
+    },
+    {
+      "path": "docs/TEST-RESULTS.md",
+      "bytes": 2517,
+      "sha256": "2ce66d29305dae114854b3583f7b3dc5a546d46443a025d8aa9c90bfbd053f44"
+    },
+    {
+      "path": "docs/VALIDATION-REPORT.generated.md",
+      "bytes": 38109,
+      "sha256": "07db9bb8dbc5cf94a54e9195c5bd249b7f3979827089eb9856e8152bafa6a6f3"
+    },
+    {
+      "path": "package.json",
+      "bytes": 740,
+      "sha256": "3b056f57555ad34623f4a02520573949f3b61b71cee31dba877b12024ed2116d"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 1177,
+      "sha256": "ac36adab0cea7fa78f969ec02a0139282a4f1ba22d4650eec7ec5ad1e68aa39f"
+    },
+    {
+      "path": "scripts/build-demo.mjs",
+      "bytes": 2797,
+      "sha256": "41c207db6234b2c625003d28942f77816f7aa6faa6c9425ab22d0f0bbca6b21e"
+    },
+    {
+      "path": "scripts/package-release.ps1",
+      "bytes": 16116,
+      "sha256": "47eaf1f51917415ecbfc2af3872b1000bdf0f79feed8867108894b071ff9aa71"
+    },
+    {
+      "path": "scripts/run-tests.mjs",
+      "bytes": 1268,
+      "sha256": "bc1f21a5c5f87fa69991ebc309080ca0c3caab91cd5a29a8563b275e83bf0b64"
+    },
+    {
+      "path": "scripts/validate-package.mjs",
+      "bytes": 7323,
+      "sha256": "c3f2ee67dbf0b783689a7e64a822321a2f455f3df5721e8d4f6c753fa3f5b7c8"
+    },
+    {
+      "path": "src/adapters/english-core-v02-extension.ts",
+      "bytes": 3516,
+      "sha256": "3dd6380aa95dacde2e039dcb57d938e6c05d9e7f424ebc28913f43ee085607a1"
+    },
+    {
+      "path": "src/helpers.ts",
+      "bytes": 4629,
+      "sha256": "f134bcf704c22d2b21ae4e19aef585d4db2c9d6c09ba73b8d74333aa59eceb51"
+    },
+    {
+      "path": "src/index.ts",
+      "bytes": 1225,
+      "sha256": "ee016b97db36044397333f046f910801ce97f86394128fcacfb8f8e75a691633"
+    },
+    {
+      "path": "src/integration-matrix.ts",
+      "bytes": 4922,
+      "sha256": "f67e4ae1c20c1675d73defa374699db62baf0f0aa3b6a2ade828d31e37de9290"
+    },
+    {
+      "path": "src/module-builder.ts",
+      "bytes": 8444,
+      "sha256": "9303c7b252fdbd9979b3cb0b9a2a56f83a6a1638c311cfe27c8ed319364c57df"
+    },
+    {
+      "path": "src/modules/clear-paragraph-revision.ts",
+      "bytes": 16458,
+      "sha256": "6250a4d9dd9e86a5403273072ba10b9c62333d690f8342f08d6ca8076bf48ec0"
+    },
+    {
+      "path": "src/modules/decoding-multisyllable-words.ts",
+      "bytes": 15696,
+      "sha256": "6df604c5877f3ea8358295ad5742528cef54fb16956f4ec47278d6424449e4a4"
+    },
+    {
+      "path": "src/modules/main-idea-supporting-details.ts",
+      "bytes": 16355,
+      "sha256": "c11b7b0aabff736754a83760906b239ef060c4f54abfccab4596cb3b307a8fa7"
+    },
+    {
+      "path": "src/modules/sentence-completeness.ts",
+      "bytes": 14821,
+      "sha256": "2dd7e34b6b1f3175c52c626bd740c994ecd01e5c8b24a3e635c8b70cf9d6efb8"
+    },
+    {
+      "path": "src/policies.ts",
+      "bytes": 918,
+      "sha256": "e80aa7e79f3427db505fdeec6e8785883aa154f2eda9ea586d0f5da05b4c7bce"
+    },
+    {
+      "path": "src/types.ts",
+      "bytes": 1844,
+      "sha256": "5c3a29a7685a6b0f21bc8872295741f91b5d593171cb51459dc4d9c87a1476bd"
+    },
+    {
+      "path": "src/validation.ts",
+      "bytes": 2615,
+      "sha256": "c37a308deeda1b0dda31d3be8342464a02264998d7936c0389296179a40a58e1"
+    },
+    {
+      "path": "tests/browser-demo.test.ts",
+      "bytes": 1840,
+      "sha256": "ae4cb5f6d0e42284cc07dae7216730e5cae303244b0d423daf43b2d8e782f3c1"
+    },
+    {
+      "path": "tests/contracts.test.ts",
+      "bytes": 2625,
+      "sha256": "6ce2cb6c99737e31f5379849863194a27d27dc3add025255a08a81ab488ee6dc"
+    },
+    {
+      "path": "tests/curriculum-content.test.ts",
+      "bytes": 4823,
+      "sha256": "775fbd9c73c62ad9751911a7afea2b7c8a7ad53e0ee5791ab9bcd30218d05420"
+    },
+    {
+      "path": "tests/engine-flow.test.ts",
+      "bytes": 3383,
+      "sha256": "799df76d982a80a6aa69ca7f807ee4261ca7f9f133cbb4fd3cdaa3e94a724d7c"
+    },
+    {
+      "path": "tsconfig.build.json",
+      "bytes": 246,
+      "sha256": "e3387787a2fb62568b55c36bda1aac0b9e6b49dedf81fa4b49bfc5a2387a1c96"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 117,
+      "sha256": "1942708cedaac89d4a84927c7ec02fc1f3cbcf7728a9686b13f3c3c7bea30148"
+    },
+    {
+      "path": "tsconfig.test.json",
+      "bytes": 230,
+      "sha256": "ece2e7135452a6c63618099af283771f1c6e435c6c615c1554663c52687e5b6e"
+    }
+  ]
+}

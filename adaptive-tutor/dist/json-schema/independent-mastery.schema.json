@@ -1,0 +1,676 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Lowercase ASCII stable content identifier."
+    },
+    "skillId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Lowercase ASCII stable content identifier."
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "skillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "purpose": {
+                "anyOf": [
+                  {
+                    "const": "diagnostic",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-practice",
+                    "type": "string"
+                  },
+                  {
+                    "const": "independent-mastery",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reassessment",
+                    "type": "string"
+                  }
+                ]
+              },
+              "subject": {
+                "anyOf": [
+                  {
+                    "const": "math",
+                    "type": "string"
+                  },
+                  {
+                    "const": "english",
+                    "type": "string"
+                  },
+                  {
+                    "const": "science",
+                    "type": "string"
+                  },
+                  {
+                    "const": "social-studies",
+                    "type": "string"
+                  },
+                  {
+                    "const": "general",
+                    "type": "string"
+                  }
+                ]
+              },
+              "gradeBand": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "locale": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 20,
+                "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2500
+              },
+              "directions": {
+                "type": "string",
+                "maxLength": 1200
+              },
+              "maxAttempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "estimatedSeconds": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 1800
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 30
+              },
+              "noCameraRequired": {
+                "const": true,
+                "type": "boolean"
+              },
+              "identifyingInformationRequested": {
+                "const": false,
+                "type": "boolean"
+              },
+              "kind": {
+                "const": "multiple-choice",
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "accessibleLabel": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 2,
+                "maxItems": 8
+              },
+              "correctOptionIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "minItems": 1,
+                "maxItems": 8
+              },
+              "allowMultiple": {
+                "type": "boolean"
+              },
+              "shuffle": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "skillId",
+              "purpose",
+              "subject",
+              "gradeBand",
+              "locale",
+              "prompt",
+              "maxAttempts",
+              "estimatedSeconds",
+              "tags",
+              "noCameraRequired",
+              "identifyingInformationRequested",
+              "kind",
+              "options",
+              "correctOptionIds",
+              "allowMultiple",
+              "shuffle"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "skillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "purpose": {
+                "anyOf": [
+                  {
+                    "const": "diagnostic",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-practice",
+                    "type": "string"
+                  },
+                  {
+                    "const": "independent-mastery",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reassessment",
+                    "type": "string"
+                  }
+                ]
+              },
+              "subject": {
+                "anyOf": [
+                  {
+                    "const": "math",
+                    "type": "string"
+                  },
+                  {
+                    "const": "english",
+                    "type": "string"
+                  },
+                  {
+                    "const": "science",
+                    "type": "string"
+                  },
+                  {
+                    "const": "social-studies",
+                    "type": "string"
+                  },
+                  {
+                    "const": "general",
+                    "type": "string"
+                  }
+                ]
+              },
+              "gradeBand": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "locale": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 20,
+                "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2500
+              },
+              "directions": {
+                "type": "string",
+                "maxLength": 1200
+              },
+              "maxAttempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "estimatedSeconds": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 1800
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 30
+              },
+              "noCameraRequired": {
+                "const": true,
+                "type": "boolean"
+              },
+              "identifyingInformationRequested": {
+                "const": false,
+                "type": "boolean"
+              },
+              "kind": {
+                "const": "short-answer",
+                "type": "string"
+              },
+              "acceptedAnswers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "minItems": 1,
+                "maxItems": 30
+              },
+              "caseSensitive": {
+                "type": "boolean"
+              },
+              "trimWhitespace": {
+                "type": "boolean"
+              },
+              "normalization": {
+                "anyOf": [
+                  {
+                    "const": "none",
+                    "type": "string"
+                  },
+                  {
+                    "const": "basic-text",
+                    "type": "string"
+                  },
+                  {
+                    "const": "numeric",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "skillId",
+              "purpose",
+              "subject",
+              "gradeBand",
+              "locale",
+              "prompt",
+              "maxAttempts",
+              "estimatedSeconds",
+              "tags",
+              "noCameraRequired",
+              "identifyingInformationRequested",
+              "kind",
+              "acceptedAnswers",
+              "caseSensitive",
+              "trimWhitespace",
+              "normalization"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "skillId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "description": "Lowercase ASCII stable content identifier."
+              },
+              "purpose": {
+                "anyOf": [
+                  {
+                    "const": "diagnostic",
+                    "type": "string"
+                  },
+                  {
+                    "const": "guided-practice",
+                    "type": "string"
+                  },
+                  {
+                    "const": "independent-mastery",
+                    "type": "string"
+                  },
+                  {
+                    "const": "reassessment",
+                    "type": "string"
+                  }
+                ]
+              },
+              "subject": {
+                "anyOf": [
+                  {
+                    "const": "math",
+                    "type": "string"
+                  },
+                  {
+                    "const": "english",
+                    "type": "string"
+                  },
+                  {
+                    "const": "science",
+                    "type": "string"
+                  },
+                  {
+                    "const": "social-studies",
+                    "type": "string"
+                  },
+                  {
+                    "const": "general",
+                    "type": "string"
+                  }
+                ]
+              },
+              "gradeBand": {
+                "type": "object",
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 12
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "min",
+                  "max",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "locale": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 20,
+                "pattern": "^[a-z]{2,3}(?:-[A-Z]{2})?$"
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2500
+              },
+              "directions": {
+                "type": "string",
+                "maxLength": 1200
+              },
+              "maxAttempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "estimatedSeconds": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 1800
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "maxItems": 30
+              },
+              "noCameraRequired": {
+                "const": true,
+                "type": "boolean"
+              },
+              "identifyingInformationRequested": {
+                "const": false,
+                "type": "boolean"
+              },
+              "kind": {
+                "const": "sequencing",
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                      "description": "Lowercase ASCII stable content identifier."
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    "accessibleLabel": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 2,
+                "maxItems": 10
+              },
+              "correctOrder": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 120,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "description": "Lowercase ASCII stable content identifier."
+                },
+                "minItems": 2,
+                "maxItems": 10
+              }
+            },
+            "required": [
+              "id",
+              "skillId",
+              "purpose",
+              "subject",
+              "gradeBand",
+              "locale",
+              "prompt",
+              "maxAttempts",
+              "estimatedSeconds",
+              "tags",
+              "noCameraRequired",
+              "identifyingInformationRequested",
+              "kind",
+              "options",
+              "correctOrder"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "$id": "AssessmentItem"
+      },
+      "minItems": 3,
+      "maxItems": 50
+    },
+    "minimumEvidenceCount": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 50
+    },
+    "minimumDistinctContexts": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 20
+    },
+    "minimumMeanScore": {
+      "type": "number",
+      "minimum": 0.5,
+      "maximum": 1
+    },
+    "maximumUncertainty": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 0.8
+    },
+    "reassessmentRequired": {
+      "const": true,
+      "type": "boolean"
+    },
+    "singleAnswerCanEstablishMastery": {
+      "const": false,
+      "type": "boolean"
+    },
+    "supportsTeacherOverride": {
+      "const": true,
+      "type": "boolean"
+    },
+    "placementDecisionAllowed": {
+      "const": false,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "skillId",
+    "items",
+    "minimumEvidenceCount",
+    "minimumDistinctContexts",
+    "minimumMeanScore",
+    "maximumUncertainty",
+    "reassessmentRequired",
+    "singleAnswerCanEstablishMastery",
+    "supportsTeacherOverride",
+    "placementDecisionAllowed"
+  ],
+  "additionalProperties": false,
+  "$id": "IndependentMastery"
+}

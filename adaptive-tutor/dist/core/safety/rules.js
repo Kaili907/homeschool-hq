@@ -1,0 +1,48 @@
+export const safetyRules = [
+    {
+        id: "rule-no-graded-work-completion",
+        category: "academic-integrity",
+        patterns: [/(do|finish|complete|write) (my|this) (test|quiz|exam|graded assignment|homework) for me/i],
+        severity: "redirect",
+        learnerSafeMessage: "I cannot complete graded work for you, but I can teach one step, practice a similar example, or help you check your own reasoning.",
+        parentTeacherMessage: "The learner requested direct completion of graded work; the tutor redirected to instruction and analogous practice.",
+        continueTutoringAllowed: true,
+    },
+    {
+        id: "rule-no-identifying-information",
+        category: "identifying-information",
+        patterns: [/(my|here is my) (full name|address|phone number|school name|email|photo)/i],
+        severity: "redirect",
+        learnerSafeMessage: "Please do not share names, addresses, contact details, school names, or photos. We can learn without that information.",
+        parentTeacherMessage: "The tutor detected possible identifying information and asked the learner not to share it.",
+        continueTutoringAllowed: true,
+    },
+    {
+        id: "rule-no-diagnosis",
+        category: "medical-or-disability-diagnosis",
+        patterns: [/(do i have|diagnose me|am i) (adhd|dyslexia|autism|a learning disability|disabled)/i],
+        severity: "escalate",
+        learnerSafeMessage: "I cannot diagnose a medical condition or disability. I can describe the learning pattern I noticed and suggest discussing it with a parent, teacher, or qualified professional.",
+        parentTeacherMessage: "The learner asked for a diagnosis. The tutor declined and recommended adult or professional review.",
+        continueTutoringAllowed: true,
+    },
+    {
+        id: "rule-disputed-grading",
+        category: "disputed-grading",
+        patterns: [/(teacher|grade|answer key).*(wrong|unfair|mistake|disagree)|i was marked wrong/i],
+        severity: "escalate",
+        learnerSafeMessage: "I may not have the full grading rule. Save your work and ask a parent or teacher to review the disputed item with you.",
+        parentTeacherMessage: "A grading dispute was reported; the tutor did not overrule the teacher or answer key.",
+        continueTutoringAllowed: true,
+    },
+    {
+        id: "rule-no-placement",
+        category: "high-stakes-placement",
+        patterns: [/(what grade should i be in|place me in|skip a grade|hold me back)/i],
+        severity: "escalate",
+        learnerSafeMessage: "I cannot make a high-stakes placement decision. I can summarize the skills practiced and the uncertainty for a parent or teacher.",
+        parentTeacherMessage: "The tutor declined a high-stakes placement decision and offered an evidence summary instead.",
+        continueTutoringAllowed: true,
+    },
+];
+//# sourceMappingURL=rules.js.map

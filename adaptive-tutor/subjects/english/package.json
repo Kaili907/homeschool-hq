@@ -1,0 +1,22 @@
+{
+  "name": "@manuel-academy/adaptive-english-tutor",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Adaptive English subject package aligned to Manuel Academy Adaptive Tutor Core v0.2.",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build": "node scripts/build-demo.mjs",
+    "test": "node scripts/run-tests.mjs",
+    "validate": "node scripts/validate-package.mjs",
+    "check": "npm run typecheck && npm run build && npm run test && npm run validate"
+  },
+  "peerDependencies": {
+    "@manuel-academy/adaptive-tutor-core": "0.2.0"
+  },
+  "devDependencies": {
+    "@manuel-academy/adaptive-tutor-core": "file:../..",
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
+  }
+}
