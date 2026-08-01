@@ -110,123 +110,350 @@ function phaseLabel(response: ValidatedTutorResponse): string {
   }
 }
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value)
+const HOST_FALLBACK_TEXT_MAXIMUM = 1200
+const HOST_COMMAND_MAXIMUM = 80
+const DEFAULT_VISUAL_LABEL = 'A visual teaching step is available.'
+const DEFAULT_VISUAL_FALLBACK = 'Use the displayed instructions.'
+const STABLE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+
+function cleanReadableText(value: string): string {
+  return value
+    .replace(/\r\n?/g, '\n')
+    .replace(/\t/g, ' ')
+    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, ' ')
+    .trim()
 }
 
-function boundedText(value: unknown, fallback: string, maximum = 1200): string {
-  return typeof value === 'string' && value.length > 0
-    ? value.replace(/[\u0000-\u001f\u007f]/g, ' ').slice(0, maximum)
-    : fallback
+function truncateReadableText(value: string, maximum: number): string {
+  if (value.length <= maximum) return value
+  let prefix = value.slice(0, Math.max(0, maximum - 1))
+  const finalCodeUnit = prefix.charCodeAt(prefix.length - 1)
+  if (finalCodeUnit >= 0xd800 && finalCodeUnit <= 0xdbff) prefix = prefix.slice(0, -1)
+  return `${prefix}…`
 }
 
-function labelFor(command: Record<string, unknown>): string {
-  return boundedText(command.ariaLabel, 'A visual teaching step is available.', 500)
+/** Every subject-provided fallback crosses this single 1,200-code-unit boundary. */
+function boundedFallbackText(value: unknown, fallback: string): string {
+  const primary = typeof value === 'string' ? cleanReadableText(value) : ''
+  const secondary = cleanReadableText(fallback)
+  return truncateReadableText(primary || secondary || DEFAULT_VISUAL_FALLBACK, HOST_FALLBACK_TEXT_MAXIMUM)
 }
 
-type CommandRenderer = (command: Record<string, unknown>) => HostVisualStep | undefined
+function fallbackField(
+  fallback: RendererMediaFallback,
+  field: 'missingVisualText' | 'missingAudioText',
+  defaultText: string,
+): string {
+  try {
+    const descriptor = Object.getOwnPropertyDescriptor(fallback, field)
+    return boundedFallbackText(
+      descriptor && Object.hasOwn(descriptor, 'value') ? descriptor.value : undefined,
+      defaultText,
+    )
+  } catch {
+    return boundedFallbackText(undefined, defaultText)
+  }
+}
 
-const commandRenderers: Readonly<Record<string, CommandRenderer>> = Object.freeze({
-  'set-title': (command) => typeof command.text === 'string'
-    ? { kind: 'title', label: labelFor(command), text: boundedText(command.text, 'Tutor board') }
-    : undefined,
-  'add-text': (command) => typeof command.text === 'string'
-    ? { kind: 'text', label: labelFor(command), text: boundedText(command.text, labelFor(command)) }
-    : undefined,
-  'draw-fraction': (command) =>
-    typeof command.numerator === 'number' &&
-    typeof command.denominator === 'number' &&
-    Number.isInteger(command.numerator) &&
-    Number.isInteger(command.denominator) &&
-    command.numerator >= 0 &&
-    command.numerator <= 100 &&
-    command.denominator > 0 &&
-    command.denominator <= 100 &&
-    typeof command.label === 'string'
-      ? {
-          kind: 'fraction',
-          label: labelFor(command),
-          numerator: command.numerator,
-          denominator: command.denominator,
-          displayLabel: boundedText(command.label, `${command.numerator}/${command.denominator}`, 100),
-        }
-      : undefined,
-  'draw-number-line': (command) =>
-    typeof command.min === 'number' &&
-    typeof command.max === 'number' &&
-    typeof command.step === 'number' &&
-    Number.isFinite(command.min) &&
-    Number.isFinite(command.max) &&
-    Number.isFinite(command.step) &&
-    command.max > command.min &&
-    command.step > 0 &&
-    Array.isArray(command.highlightedValues) &&
-    command.highlightedValues.length <= 30 &&
-    command.highlightedValues.every((value) =>
-      typeof value === 'number' && Number.isFinite(value))
-      ? {
-          kind: 'number-line',
-          label: labelFor(command),
-          min: command.min,
-          max: command.max,
-          step: command.step,
-          highlightedValues: Object.freeze([...command.highlightedValues]),
-        }
-      : undefined,
-  'show-sentence-parts': (command) =>
-    typeof command.sentence === 'string' &&
-    typeof command.subject === 'string' &&
-    typeof command.predicate === 'string'
-      ? {
-          kind: 'sentence-parts',
-          label: labelFor(command),
-          sentence: boundedText(command.sentence, labelFor(command), 500),
-          subject: boundedText(command.subject, 'Subject', 300),
-          predicate: boundedText(command.predicate, 'Predicate', 300),
-          ...(typeof command.dependentMarker === 'string'
-            ? { dependentMarker: boundedText(command.dependentMarker, 'Marker', 100) }
-            : {}),
-        }
-      : undefined,
-  highlight: (command) => typeof command.token === 'string' && typeof command.reason === 'string'
-    ? {
-        kind: 'highlight',
-        label: labelFor(command),
-        token: boundedText(command.token, 'Highlighted part', 200),
-        reason: boundedText(command.reason, labelFor(command), 500),
-      }
-    : undefined,
-  'reveal-step': (command) =>
-    typeof command.stepNumber === 'number' &&
-    Number.isInteger(command.stepNumber) &&
-    typeof command.text === 'string'
-      ? {
-          kind: 'reveal-step',
-          label: labelFor(command),
-          stepNumber: command.stepNumber,
-          text: boundedText(command.text, labelFor(command), 800),
-        }
-      : undefined,
-  compare: (command) =>
-    typeof command.leftLabel === 'string' &&
-    typeof command.rightLabel === 'string' &&
-    typeof command.relationship === 'string'
-      ? {
-          kind: 'compare',
-          label: labelFor(command),
-          leftLabel: boundedText(command.leftLabel, 'First representation', 300),
-          rightLabel: boundedText(command.rightLabel, 'Second representation', 300),
-          relationship: boundedText(command.relationship, 'comparison', 40),
-        }
-      : undefined,
-})
+function displayText(value: string, maximum: number): string {
+  return truncateReadableText(cleanReadableText(value), maximum)
+}
 
-function fallbackStep(command: Record<string, unknown>, fallbackText: string): HostVisualStep {
-  const label = labelFor(command)
+function isLengthBoundedString(
+  value: unknown,
+  minimum: number,
+  maximum: number,
+): value is string {
+  return typeof value === 'string' && value.length >= minimum && value.length <= maximum
+}
+
+function isReadableString(
+  value: unknown,
+  minimum: number,
+  maximum: number,
+): value is string {
+  return isLengthBoundedString(value, minimum, maximum) &&
+    (minimum === 0 || cleanReadableText(value).length > 0)
+}
+
+function isStableId(value: unknown): value is string {
+  return isLengthBoundedString(value, 3, 120) && STABLE_ID.test(value)
+}
+
+function snapshotOwnDataRecord(value: unknown): Record<string, unknown> | undefined {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) return undefined
+  const snapshot: Record<string, unknown> = Object.create(null) as Record<string, unknown>
+  for (const key of Reflect.ownKeys(value)) {
+    if (typeof key !== 'string') return undefined
+    const descriptor = Object.getOwnPropertyDescriptor(value, key)
+    if (!descriptor || !Object.hasOwn(descriptor, 'value')) return undefined
+    snapshot[key] = descriptor.value
+  }
+  return snapshot
+}
+
+function hasExactKeys(
+  command: Record<string, unknown>,
+  required: readonly string[],
+  optional: readonly string[] = [],
+): boolean {
+  const keys = Object.keys(command)
+  const allowed = new Set([...required, ...optional])
+  return required.every((key) => Object.hasOwn(command, key)) &&
+    keys.every((key) => allowed.has(key)) &&
+    keys.length >= required.length &&
+    keys.length <= required.length + optional.length
+}
+
+const BASE_KEYS = ['kind', 'id', 'durationMs', 'ariaLabel'] as const
+
+function hasValidBase(
+  command: Record<string, unknown>,
+  kind: string,
+  requiredFields: readonly string[],
+  optionalFields: readonly string[] = [],
+): boolean {
+  return hasExactKeys(command, [...BASE_KEYS, ...requiredFields], optionalFields) &&
+    command.kind === kind &&
+    isStableId(command.id) &&
+    typeof command.durationMs === 'number' &&
+    Number.isFinite(command.durationMs) &&
+    Number.isInteger(command.durationMs) &&
+    command.durationMs >= 0 &&
+    command.durationMs <= 30_000 &&
+    isReadableString(command.ariaLabel, 1, 500)
+}
+
+function snapshotFiniteNumberArray(value: unknown): readonly number[] | undefined {
+  if (!Array.isArray(value)) return undefined
+  const lengthDescriptor = Object.getOwnPropertyDescriptor(value, 'length')
+  if (
+    !lengthDescriptor ||
+    !Object.hasOwn(lengthDescriptor, 'value') ||
+    typeof lengthDescriptor.value !== 'number' ||
+    !Number.isInteger(lengthDescriptor.value) ||
+    lengthDescriptor.value < 0 ||
+    lengthDescriptor.value > 30
+  ) return undefined
+  const result: number[] = []
+  for (let index = 0; index < lengthDescriptor.value; index += 1) {
+    const descriptor = Object.getOwnPropertyDescriptor(value, String(index))
+    if (
+      !descriptor ||
+      !Object.hasOwn(descriptor, 'value') ||
+      typeof descriptor.value !== 'number' ||
+      !Number.isFinite(descriptor.value)
+    ) return undefined
+    result.push(descriptor.value)
+  }
+  const allowedKeys = new Set(['length', ...result.map((_, index) => String(index))])
+  if (Reflect.ownKeys(value).some((key) => typeof key !== 'string' || !allowedKeys.has(key))) {
+    return undefined
+  }
+  return Object.freeze(result)
+}
+
+type ContainedCommand =
+  | { readonly kind: 'clear-board' }
+  | { readonly kind: 'visual'; readonly step: HostVisualStep }
+  | { readonly kind: 'announcement'; readonly text: string; readonly assertive: boolean }
+
+interface CommandContainmentResult {
+  readonly command?: ContainedCommand
+  readonly fallbackLabel?: string
+}
+
+function containCommandUnsafe(candidate: unknown): CommandContainmentResult {
+  const command = snapshotOwnDataRecord(candidate)
+  if (!command) return {}
+  const fallbackLabel = isReadableString(command.ariaLabel, 1, 500)
+    ? displayText(command.ariaLabel, 500)
+    : undefined
+  if (typeof command.kind !== 'string') return { fallbackLabel }
+  const label = fallbackLabel ?? DEFAULT_VISUAL_LABEL
+
+  switch (command.kind) {
+    case 'clear-board':
+      return hasValidBase(command, command.kind, [])
+        ? { command: { kind: 'clear-board' }, fallbackLabel }
+        : { fallbackLabel }
+    case 'set-title':
+      return hasValidBase(command, command.kind, ['text']) &&
+        isReadableString(command.text, 1, 200)
+        ? { command: { kind: 'visual', step: {
+            kind: 'title', label, text: displayText(command.text, 200),
+          } }, fallbackLabel }
+        : { fallbackLabel }
+    case 'add-text':
+      return hasValidBase(command, command.kind, ['text', 'region', 'emphasis']) &&
+        isReadableString(command.text, 1, 1200) &&
+        ['top', 'center', 'bottom', 'side'].includes(command.region as string) &&
+        ['normal', 'strong', 'muted'].includes(command.emphasis as string)
+        ? { command: { kind: 'visual', step: {
+            kind: 'text', label, text: displayText(command.text, 1200),
+          } }, fallbackLabel }
+        : { fallbackLabel }
+    case 'draw-fraction':
+      return hasValidBase(
+        command,
+        command.kind,
+        ['numerator', 'denominator', 'label', 'representation'],
+      ) &&
+        typeof command.numerator === 'number' &&
+        Number.isInteger(command.numerator) &&
+        command.numerator >= 0 && command.numerator <= 100 &&
+        typeof command.denominator === 'number' &&
+        Number.isInteger(command.denominator) &&
+        command.denominator >= 1 && command.denominator <= 100 &&
+        isReadableString(command.label, 1, 100) &&
+        ['bar', 'circle', 'set'].includes(command.representation as string)
+        ? { command: { kind: 'visual', step: {
+            kind: 'fraction',
+            label,
+            numerator: command.numerator,
+            denominator: command.denominator,
+            displayLabel: displayText(command.label, 100),
+          } }, fallbackLabel }
+        : { fallbackLabel }
+    case 'draw-number-line': {
+      const highlightedValues = snapshotFiniteNumberArray(command.highlightedValues)
+      return hasValidBase(
+        command,
+        command.kind,
+        ['min', 'max', 'step', 'highlightedValues'],
+      ) &&
+        typeof command.min === 'number' && Number.isFinite(command.min) &&
+        typeof command.max === 'number' && Number.isFinite(command.max) &&
+        typeof command.step === 'number' && Number.isFinite(command.step) && command.step > 0 &&
+        command.max > command.min &&
+        highlightedValues !== undefined
+        ? { command: { kind: 'visual', step: {
+            kind: 'number-line',
+            label,
+            min: command.min,
+            max: command.max,
+            step: command.step,
+            highlightedValues,
+          } }, fallbackLabel }
+        : { fallbackLabel }
+    }
+    case 'show-sentence-parts':
+      return hasValidBase(
+        command,
+        command.kind,
+        ['sentence', 'subject', 'predicate'],
+        ['dependentMarker'],
+      ) &&
+        isReadableString(command.sentence, 1, 500) &&
+        isLengthBoundedString(command.subject, 0, 300) &&
+        isLengthBoundedString(command.predicate, 0, 300) &&
+        (!Object.hasOwn(command, 'dependentMarker') ||
+          isLengthBoundedString(command.dependentMarker, 0, 100))
+        ? { command: { kind: 'visual', step: {
+            kind: 'sentence-parts',
+            label,
+            sentence: displayText(command.sentence, 500),
+            subject: displayText(command.subject, 300),
+            predicate: displayText(command.predicate, 300),
+            ...(typeof command.dependentMarker === 'string'
+              ? { dependentMarker: displayText(command.dependentMarker, 100) }
+              : {}),
+          } }, fallbackLabel }
+        : { fallbackLabel }
+    case 'highlight':
+      return hasValidBase(command, command.kind, ['targetCommandId', 'token', 'reason']) &&
+        isStableId(command.targetCommandId) &&
+        isReadableString(command.token, 1, 200) &&
+        isReadableString(command.reason, 1, 500)
+        ? { command: { kind: 'visual', step: {
+            kind: 'highlight',
+            label,
+            token: displayText(command.token, 200),
+            reason: displayText(command.reason, 500),
+          } }, fallbackLabel }
+        : { fallbackLabel }
+    case 'reveal-step':
+      return hasValidBase(command, command.kind, ['stepNumber', 'text']) &&
+        typeof command.stepNumber === 'number' &&
+        Number.isInteger(command.stepNumber) &&
+        command.stepNumber >= 1 && command.stepNumber <= 50 &&
+        isReadableString(command.text, 1, 800)
+        ? { command: { kind: 'visual', step: {
+            kind: 'reveal-step',
+            label,
+            stepNumber: command.stepNumber,
+            text: displayText(command.text, 800),
+          } }, fallbackLabel }
+        : { fallbackLabel }
+    case 'compare':
+      return hasValidBase(command, command.kind, ['leftLabel', 'rightLabel', 'relationship']) &&
+        isReadableString(command.leftLabel, 1, 300) &&
+        isReadableString(command.rightLabel, 1, 300) &&
+        ['equal', 'not-equal', 'part-whole', 'complete-incomplete']
+          .includes(command.relationship as string)
+        ? { command: { kind: 'visual', step: {
+            kind: 'compare',
+            label,
+            leftLabel: displayText(command.leftLabel, 300),
+            rightLabel: displayText(command.rightLabel, 300),
+            relationship: command.relationship as string,
+          } }, fallbackLabel }
+        : { fallbackLabel }
+    case 'aria-announce':
+      return hasValidBase(command, command.kind, ['text', 'priority']) &&
+        isReadableString(command.text, 1, 800) &&
+        (command.priority === 'polite' || command.priority === 'assertive')
+        ? { command: {
+            kind: 'announcement',
+            text: displayText(command.text, 800),
+            assertive: command.priority === 'assertive',
+          }, fallbackLabel }
+        : { fallbackLabel }
+    default:
+      return { fallbackLabel }
+  }
+}
+
+function containCommand(candidate: unknown): CommandContainmentResult {
+  try {
+    return containCommandUnsafe(candidate)
+  } catch {
+    return {}
+  }
+}
+
+function snapshotCommandArray(commands: readonly unknown[]): readonly unknown[] | undefined {
+  try {
+    if (!Array.isArray(commands)) return undefined
+    const lengthDescriptor = Object.getOwnPropertyDescriptor(commands, 'length')
+    if (
+      !lengthDescriptor ||
+      !Object.hasOwn(lengthDescriptor, 'value') ||
+      typeof lengthDescriptor.value !== 'number' ||
+      !Number.isInteger(lengthDescriptor.value) ||
+      lengthDescriptor.value < 0
+    ) return undefined
+    const candidates: unknown[] = []
+    const length = Math.min(lengthDescriptor.value, HOST_COMMAND_MAXIMUM)
+    for (let index = 0; index < length; index += 1) {
+      const descriptor = Object.getOwnPropertyDescriptor(commands, String(index))
+      if (!descriptor || !Object.hasOwn(descriptor, 'value')) return undefined
+      candidates.push(descriptor.value)
+    }
+    return candidates
+  } catch {
+    return undefined
+  }
+}
+
+function fallbackStep(fallbackText: unknown, label?: string): HostVisualStep {
+  const safeLabel = label || 'Visual unavailable'
   return {
     kind: 'text-fallback',
-    label,
-    text: label === 'A visual teaching step is available.' ? fallbackText : label,
+    label: safeLabel,
+    text: boundedFallbackText(label, typeof fallbackText === 'string'
+      ? fallbackText
+      : DEFAULT_VISUAL_FALLBACK),
   }
 }
 
@@ -235,47 +462,41 @@ export function buildHostVisualPresentation(
   capabilities: TutorMediaCapabilities,
   fallback: RendererMediaFallback,
 ): HostVisualPresentation {
-  if (!capabilities.visualsAvailable) {
-    return Object.freeze({
-      steps: Object.freeze([{
-        kind: 'text-fallback' as const,
-        label: 'Visual unavailable',
-        text: boundedText(fallback.missingVisualText, 'Use the displayed instructions.'),
-      }]),
-      announcements: Object.freeze([]),
-    })
-  }
-
   const steps: HostVisualStep[] = []
   const announcements: { text: string; assertive: boolean }[] = []
-  for (const candidate of commands.slice(0, 80)) {
-    if (!isRecord(candidate)) {
-      steps.push({
-        kind: 'text-fallback',
-        label: 'Visual unavailable',
-        text: boundedText(fallback.missingVisualText, 'Use the displayed instructions.'),
-      })
+  const candidates = snapshotCommandArray(commands)
+  const missingVisualText = fallbackField(
+    fallback,
+    'missingVisualText',
+    DEFAULT_VISUAL_FALLBACK,
+  )
+
+  for (const candidate of candidates ?? []) {
+    const contained = containCommand(candidate)
+    if (!contained.command) {
+      if (capabilities.visualsAvailable) {
+        steps.push(fallbackStep(missingVisualText, contained.fallbackLabel))
+      }
       continue
     }
-    if (candidate.kind === 'clear-board') continue
-    if (candidate.kind === 'aria-announce') {
+    if (contained.command.kind === 'announcement') {
       announcements.push({
-        text: boundedText(candidate.text, labelFor(candidate), 800),
-        assertive: candidate.priority === 'assertive',
+        text: contained.command.text,
+        assertive: contained.command.assertive,
       })
       continue
     }
-    const renderer = typeof candidate.kind === 'string' && Object.hasOwn(commandRenderers, candidate.kind)
-      ? commandRenderers[candidate.kind]
-      : undefined
-    steps.push(renderer?.(candidate) ?? fallbackStep(candidate, fallback.missingVisualText))
+    if (contained.command.kind === 'clear-board') {
+      // The host board is a stateless one-step projection, so a valid clear is an intentional no-op.
+      continue
+    }
+    if (capabilities.visualsAvailable) {
+      steps.push(contained.command.step)
+    }
   }
-  if (steps.length === 0) {
-    steps.push({
-      kind: 'text-fallback',
-      label: 'Displayed instruction',
-      text: boundedText(fallback.missingVisualText, 'Use the displayed instructions.'),
-    })
+
+  if (!capabilities.visualsAvailable || steps.length === 0) {
+    steps.push(fallbackStep(missingVisualText))
   }
   return Object.freeze({
     steps: Object.freeze(steps),
@@ -395,7 +616,9 @@ export function AdaptiveTutorResponseView({
       <aside aria-label="Spoken turn transcript">
         <p>{response.spokenTurn.text}</p>
         {!capabilities.voiceAvailable && (
-          <p role="status">{boundedText(mediaFallback.missingAudioText, response.spokenTurn.fallbackText)}</p>
+          <p role="status">{
+            fallbackField(mediaFallback, 'missingAudioText', response.spokenTurn.fallbackText)
+          }</p>
         )}
       </aside>
       <p role="status" aria-live="polite">{response.uncertaintyStatement}</p>

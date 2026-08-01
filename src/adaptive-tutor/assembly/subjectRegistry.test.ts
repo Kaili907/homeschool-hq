@@ -65,6 +65,111 @@ describe('Adaptive Tutor subject registry', () => {
     })
   })
 
+  it('requires top-level and nested descriptor fields to be own data properties', () => {
+    const descriptor = makeDescriptor()
+    const inheritedDescriptor = Object.create(descriptor)
+    const inheritedProgram = Object.create(descriptor.programs[0])
+    const inheritedGradeBand = Object.create(descriptor.programs[0].gradeBand)
+    const inheritedProvenance = Object.create(descriptor.provenance)
+    const inheritedAvailability = Object.create(descriptor.availability)
+    const unavailable = makeDescriptor(undefined, {
+      availability: {
+        status: 'unavailable',
+        failure: { code: 'ARTIFACT_MISSING', safeMessage: 'This subject is unavailable.' },
+      },
+    })
+    if (unavailable.availability.status !== 'unavailable') {
+      throw new Error('test fixture is invalid')
+    }
+    const inheritedFailure = Object.create(unavailable.availability.failure)
+
+    const candidates = [
+      inheritedDescriptor,
+      { ...descriptor, programs: [inheritedProgram] },
+      {
+        ...descriptor,
+        programs: [{ ...descriptor.programs[0], gradeBand: inheritedGradeBand }],
+      },
+      { ...descriptor, provenance: inheritedProvenance },
+      { ...descriptor, availability: inheritedAvailability },
+      {
+        ...unavailable,
+        availability: { status: 'unavailable', failure: inheritedFailure },
+      },
+    ]
+
+    for (const candidate of candidates) {
+      expect(createSubjectRegistry([candidate])).toMatchObject({
+        ok: false,
+        failure: { stage: 'registry', code: 'MALFORMED_DESCRIPTOR' },
+      })
+    }
+  })
+
+  it('rejects accessors without invoking their getters', () => {
+    const topLevelGetter = vi.fn(() => { throw new Error('HOSTILE_TOP_LEVEL_GETTER') })
+    const topLevel = { ...makeDescriptor() }
+    Object.defineProperty(topLevel, 'subjectId', {
+      enumerable: true,
+      get: topLevelGetter,
+    })
+
+    const nestedGetter = vi.fn(() => { throw new Error('HOSTILE_NESTED_GETTER') })
+    const provenance = { ...makeDescriptor().provenance }
+    Object.defineProperty(provenance, 'kind', {
+      enumerable: true,
+      get: nestedGetter,
+    })
+
+    for (const candidate of [topLevel, { ...makeDescriptor(), provenance }]) {
+      expect(() => createSubjectRegistry([candidate])).not.toThrow()
+      expect(createSubjectRegistry([candidate])).toMatchObject({
+        ok: false,
+        failure: {
+          stage: 'registry',
+          code: 'MALFORMED_DESCRIPTOR',
+        },
+      })
+    }
+    expect(topLevelGetter).not.toHaveBeenCalled()
+    expect(nestedGetter).not.toHaveBeenCalled()
+  })
+
+  it('contains hostile descriptor and nested Proxy traps as structured failures', () => {
+    const descriptor = makeDescriptor()
+    const ownKeysProxy = new Proxy(descriptor, {
+      ownKeys: () => { throw new Error('HOSTILE_OWN_KEYS') },
+    })
+    const descriptorProxy = new Proxy(descriptor, {
+      getOwnPropertyDescriptor: () => { throw new Error('HOSTILE_DESCRIPTOR') },
+    })
+    const getProxy = new Proxy(descriptor, {
+      get: (target, property, receiver) => {
+        if (property === 'compatibleCoreContractVersion') throw new Error('HOSTILE_GET')
+        return Reflect.get(target, property, receiver)
+      },
+    })
+    const nestedProxy = new Proxy(descriptor.provenance, {
+      ownKeys: () => { throw new Error('HOSTILE_NESTED_PROXY') },
+    })
+    const revoked = Proxy.revocable(descriptor, {})
+    revoked.revoke()
+
+    for (const candidate of [
+      ownKeysProxy,
+      descriptorProxy,
+      getProxy,
+      { ...descriptor, provenance: nestedProxy },
+      revoked.proxy,
+    ]) {
+      expect(() => createSubjectRegistry([candidate])).not.toThrow()
+      expect(createSubjectRegistry([candidate])).toMatchObject({
+        ok: false,
+        failure: { stage: 'registry', code: 'MALFORMED_DESCRIPTOR' },
+      })
+    }
+  })
+
   it('fails closed for unavailable, unknown-subject, and unknown-program resolution', () => {
     const loader = vi.fn(() => makeDescriptor())
     const unavailable = createSubjectRegistry([makeDescriptor(loader, {

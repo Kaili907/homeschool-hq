@@ -12,13 +12,23 @@ import type {
   CoreV02RuntimeAdapter,
   SubjectRegistrationInput,
 } from './types'
-import { loadValidatedProgram } from './validatedProgramLoader'
+import {
+  loadValidatedProgram,
+  type ValidatedProgramHandle,
+} from './validatedProgramLoader'
 
 const EXPECTED_CORE_SHA = '38205667d56cb4fcc5a8360f1f94098b5fa1d35ae71d22334aa1bc8d43ecc276'
 const EXPECTED_MATH_SHA = 'ee9d15cdf1184380add17ebdd8f93f01fde3f0915f491d0a4df96798b4f52351'
+const exactContext = process.env.TUTOR_EXACT_ARTIFACT_CONTEXT === 'zip-derived-v1'
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
+
+function requiredEnvironment(name: string): string {
+  const value = process.env[name]
+  if (!value) throw new Error(`The exact-artifact harness did not supply ${name}.`)
+  return value
 }
 
 async function sha256(path: string): Promise<string> {
@@ -95,37 +105,67 @@ function runtimeAdapterFrom(moduleValue: unknown): CoreV02RuntimeAdapter {
   }
 }
 
-function collectBoardCommands(program: unknown): unknown[] {
-  if (!isRecord(program) || !Array.isArray(program.teachingSequences)) return []
-  const commands: unknown[] = []
-  for (const sequence of program.teachingSequences) {
-    if (!isRecord(sequence) || !Array.isArray(sequence.turns)) continue
-    for (const turn of sequence.turns) {
-      if (isRecord(turn) && Array.isArray(turn.boardCommands)) {
-        commands.push(...turn.boardCommands)
-      }
-    }
-  }
-  return commands
+function arrayAt(record: Record<string, unknown>, key: string): readonly unknown[] {
+  return Array.isArray(record[key]) ? record[key] : []
 }
 
-describe('exact frozen artifact compatibility probe', () => {
-  it('loads all four Math R1 programs through the host seam without installation', async () => {
-    const coreZip = process.env.TUTOR_CORE_V02_ZIP
-    const mathZip = process.env.TUTOR_MATH_R1_ZIP
-    const coreRoot = process.env.TUTOR_CORE_V02_ROOT
-    const mathRoot = process.env.TUTOR_MATH_R1_ROOT
-    if (!coreZip || !mathZip || !coreRoot || !mathRoot) {
-      // The full session gate always supplies these. Ordinary repository runs
-      // remain hermetic and do not search a developer machine for artifacts.
-      expect([coreZip, mathZip, coreRoot, mathRoot].every((value) => value === undefined)).toBe(true)
-      return
-    }
+function nestedArrayLength(record: Record<string, unknown>, parent: string, child: string): number {
+  const value = record[parent]
+  return isRecord(value) ? arrayAt(value, child).length : 0
+}
+
+function sourceAssessmentCount(sequence: unknown): number {
+  if (!isRecord(sequence)) return 0
+  return nestedArrayLength(sequence, 'diagnostic', 'items') +
+    nestedArrayLength(sequence, 'guidedPractice', 'items') +
+    nestedArrayLength(sequence, 'independentMasteryCheck', 'items')
+}
+
+function emittedAssessmentCount(program: unknown): number {
+  if (!isRecord(program)) return 0
+  return arrayAt(program, 'diagnosticItems').length +
+    nestedArrayLength(program, 'guidedPractice', 'items') +
+    nestedArrayLength(program, 'independentMastery', 'items') +
+    arrayAt(program, 'reassessmentItems').length
+}
+
+describe.skipIf(!exactContext)('exact frozen artifact compatibility probe', () => {
+  it('derives and verifies all Core/Math evidence from the two exact ZIPs', async () => {
+    const coreZip = requiredEnvironment('TUTOR_CORE_V02_ZIP')
+    const mathZip = requiredEnvironment('TUTOR_MATH_R1_ZIP')
+    const coreRoot = requiredEnvironment('TUTOR_CORE_V02_ROOT')
+    const mathRoot = requiredEnvironment('TUTOR_MATH_R1_ROOT')
+    const coreFingerprint = requiredEnvironment('TUTOR_CORE_TREE_FINGERPRINT')
+    const mathFingerprint = requiredEnvironment('TUTOR_MATH_TREE_FINGERPRINT')
+    const verifierResultPath = requiredEnvironment('TUTOR_MATH_VERIFIER_RESULT')
+    expect(coreFingerprint).toMatch(/^[a-f0-9]{64}$/)
+    expect(mathFingerprint).toMatch(/^[a-f0-9]{64}$/)
 
     const beforeCoreHash = await sha256(coreZip)
     const beforeMathHash = await sha256(mathZip)
     expect(beforeCoreHash).toBe(EXPECTED_CORE_SHA)
     expect(beforeMathHash).toBe(EXPECTED_MATH_SHA)
+
+    const verifierResult: unknown = JSON.parse(await readFile(verifierResultPath, 'utf8'))
+    expect(verifierResult).toMatchObject({
+      status: 'PASS',
+      coreVersion: '0.2.0',
+      programsValidated: 4,
+      sourceAssessmentItemsAdapted: 72,
+      emittedAssessmentContractsValidated: 96,
+      sourceVisualCommandsAdapted: 20,
+      invalidFixturesRejected: 5,
+      grade5DirectlySupported: true,
+      subjectTraceScenarios: 3,
+    })
+    if (!isRecord(verifierResult)) throw new Error('Frozen verifier result is invalid.')
+    expect(verifierResult.coreAdvancePhases).toSatisfy(
+      (phases: unknown) => Array.isArray(phases) && phases.at(-1) === 'advance',
+    )
+    expect(verifierResult.corePersistentPhases).toSatisfy(
+      (phases: unknown) => Array.isArray(phases) &&
+        phases.includes('reteach') && phases.at(-1) === 'escalated',
+    )
 
     const coreModule: unknown = await import(
       /* @vite-ignore */ pathToFileURL(join(coreRoot, 'dist/core/index.js')).href
@@ -137,13 +177,17 @@ describe('exact frozen artifact compatibility probe', () => {
       throw new Error('Frozen Math public entry point is invalid.')
     }
     const adaptProgram = mathModule.adaptSequenceToTutorProgramV02
+    const visualInventory = mathModule.visualInventoryV02
     const manifest = mathModule.mathSubjectManifest
-    if (typeof adaptProgram !== 'function' || !Array.isArray(manifest.lessons)) {
-      throw new Error('Frozen Math loader exports are unavailable.')
-    }
+    if (
+      typeof adaptProgram !== 'function' ||
+      typeof visualInventory !== 'function' ||
+      !Array.isArray(manifest.lessons)
+    ) throw new Error('Frozen Math loader exports are unavailable.')
 
     const lessons = manifest.lessons
     expect(lessons).toHaveLength(4)
+    expect(lessons.reduce((sum, lesson) => sum + sourceAssessmentCount(lesson), 0)).toBe(72)
     const programs = lessons.map((lesson) => {
       if (!isRecord(lesson) || typeof lesson.sequenceId !== 'string' || typeof lesson.title !== 'string') {
         throw new Error('Frozen Math program descriptor is invalid.')
@@ -186,31 +230,71 @@ describe('exact frozen artifact compatibility probe', () => {
     }
     const registry = createSubjectRegistry([descriptor])
     expect(registry.ok).toBe(true)
-    if (!registry.ok) return
+    if (!registry.ok) throw new Error('Exact Math registry probe failed.')
+
     const core = runtimeAdapterFrom(coreModule)
+    const validatedIds = new Set<string>()
     const enginePrograms: unknown[] = []
+    let constructionBeforeAllProgramsValidated = false
     const probedCore: CoreV02RuntimeAdapter = {
       ...core,
+      validateProgram: (candidate) => {
+        const result = core.validateProgram(candidate)
+        if (result.ok && isRecord(candidate) && typeof candidate.id === 'string') {
+          validatedIds.add(candidate.id)
+        }
+        return result
+      },
       createEngine: (program) => {
+        if (validatedIds.size !== 4) constructionBeforeAllProgramsValidated = true
         enginePrograms.push(program)
         return core.createEngine(program)
       },
     }
 
+    const loadedPrograms: ValidatedProgramHandle[] = []
     for (const program of programs) {
       const loaded = await loadValidatedProgram(registry.value, probedCore, {
         subjectId: descriptor.subjectId,
         programId: program.programId,
       })
       expect(loaded.ok).toBe(true)
-      if (!loaded.ok) continue
+      if (!loaded.ok) throw new Error('Exact Math program did not validate.')
       expect(loaded.value.gradeBand).toEqual({ min: 4, max: 6, label: 'Grades 4–6' })
-      expect(loaded.value.gradeBand.min).toBeLessThanOrEqual(5)
-      expect(loaded.value.gradeBand.max).toBeGreaterThanOrEqual(5)
-      const commands = collectBoardCommands(loaded.value.program)
-      expect(commands.length).toBeGreaterThan(0)
+      expect(Object.hasOwn(loaded.value.gradeBand, 'coreGrade')).toBe(false)
+      loadedPrograms.push(loaded.value)
+    }
+    expect(validatedIds.size).toBe(4)
+    expect(loader).toHaveBeenCalledTimes(4)
+    expect(loadedPrograms.reduce(
+      (sum, handle) => sum + emittedAssessmentCount(handle.program),
+      0,
+    )).toBe(96)
+
+    for (const loaded of loadedPrograms) {
+      const runtime = assembleAdaptiveTutorRuntime(probedCore, loaded)
+      expect(runtime.ok).toBe(true)
+      if (!runtime.ok) throw new Error('Exact Math engine construction failed.')
+      expect(runtime.value.start()).toMatchObject({ ok: true })
+      runtime.value.dispose()
+    }
+    expect(constructionBeforeAllProgramsValidated).toBe(false)
+    expect(enginePrograms).toHaveLength(4)
+    expect(new Set(enginePrograms).size).toBe(4)
+
+    const visualItems = lessons.flatMap((lesson) => {
+      const result: unknown = Reflect.apply(visualInventory, undefined, [lesson])
+      if (!Array.isArray(result)) throw new Error('Frozen Math visual inventory is invalid.')
+      return result
+    })
+    expect(visualItems).toHaveLength(20)
+    let accessiblyHandled = 0
+    for (const visual of visualItems) {
+      if (!isRecord(visual) || !Array.isArray(visual.commands) || visual.commands.length === 0) {
+        throw new Error('Frozen Math visual item is invalid.')
+      }
       const projection = buildHostVisualPresentation(
-        commands,
+        visual.commands,
         { visualsAvailable: true, voiceAvailable: false },
         {
           missingVisualText: 'Use the displayed Math explanation.',
@@ -219,17 +303,11 @@ describe('exact frozen artifact compatibility probe', () => {
         },
       )
       expect(projection.steps.length).toBeGreaterThan(0)
-      const runtime = assembleAdaptiveTutorRuntime(probedCore, loaded.value)
-      expect(runtime.ok).toBe(true)
-      if (runtime.ok) {
-        expect(runtime.value.start()).toMatchObject({ ok: true })
-        runtime.value.dispose()
-      }
+      expect(projection.steps.every((step) => step.label.length > 0 && step.label.length <= 500)).toBe(true)
+      accessiblyHandled += 1
     }
+    expect(accessiblyHandled).toBe(20)
 
-    expect(loader).toHaveBeenCalledTimes(4)
-    expect(enginePrograms).toHaveLength(4)
-    expect(new Set(enginePrograms).size).toBe(4)
     expect(await sha256(coreZip)).toBe(beforeCoreHash)
     expect(await sha256(mathZip)).toBe(beforeMathHash)
   }, 30_000)

@@ -50,6 +50,16 @@ function hasOnlyKeys(value: Record<string, unknown>, keys: readonly string[]): b
   return Object.keys(value).every((key) => allowed.has(key))
 }
 
+function hasOwnDataProperties(
+  value: Record<string, unknown>,
+  keys: readonly string[],
+): boolean {
+  return keys.every((key) => {
+    const descriptor = Object.getOwnPropertyDescriptor(value, key)
+    return descriptor !== undefined && Object.hasOwn(descriptor, 'value')
+  })
+}
+
 function isSafeText(value: unknown, maximum: number): value is string {
   return (
     typeof value === 'string' &&
@@ -68,7 +78,11 @@ function malformed(safeMessage: string): AssemblyFailure {
 }
 
 function parseGradeBand(value: unknown): CoreGradeBand | undefined {
-  if (!isRecord(value) || !hasOnlyKeys(value, ['min', 'max', 'label'])) return undefined
+  if (
+    !isRecord(value) ||
+    !hasOwnDataProperties(value, ['min', 'max', 'label']) ||
+    !hasOnlyKeys(value, ['min', 'max', 'label'])
+  ) return undefined
   const { min, max, label } = value
   if (
     typeof min !== 'number' ||
@@ -86,6 +100,13 @@ function parseGradeBand(value: unknown): CoreGradeBand | undefined {
 function parseProgram(value: unknown): TutorProgramDescriptor | undefined {
   if (
     !isRecord(value) ||
+    !hasOwnDataProperties(value, [
+      'programId',
+      'displayName',
+      'programVersion',
+      'coreSubject',
+      'gradeBand',
+    ]) ||
     !hasOnlyKeys(value, [
       'programId',
       'displayName',
@@ -117,9 +138,14 @@ function parseProgram(value: unknown): TutorProgramDescriptor | undefined {
 }
 
 function parseProvenance(value: unknown): SubjectArtifactProvenance | undefined {
-  if (!isRecord(value) || typeof value.kind !== 'string') return undefined
+  if (
+    !isRecord(value) ||
+    !hasOwnDataProperties(value, ['kind']) ||
+    typeof value.kind !== 'string'
+  ) return undefined
   if (value.kind === 'frozen-artifact') {
     if (
+      !hasOwnDataProperties(value, ['kind', 'artifactName', 'sha256']) ||
       !hasOnlyKeys(value, ['kind', 'artifactName', 'sha256']) ||
       !isSafeText(value.artifactName, 240) ||
       value.artifactName.includes('/') ||
@@ -135,6 +161,7 @@ function parseProvenance(value: unknown): SubjectArtifactProvenance | undefined 
   }
   if (value.kind === 'build') {
     if (
+      !hasOwnDataProperties(value, ['kind', 'repositoryId', 'revision', 'buildId']) ||
       !hasOnlyKeys(value, ['kind', 'repositoryId', 'revision', 'buildId']) ||
       !isSafeText(value.repositoryId, 160) ||
       !isSafeText(value.revision, 120) ||
@@ -151,14 +178,20 @@ function parseProvenance(value: unknown): SubjectArtifactProvenance | undefined 
 }
 
 function parseAvailability(value: unknown): SubjectAvailability | undefined {
-  if (!isRecord(value) || typeof value.status !== 'string') return undefined
+  if (
+    !isRecord(value) ||
+    !hasOwnDataProperties(value, ['status']) ||
+    typeof value.status !== 'string'
+  ) return undefined
   if (value.status === 'available' && hasOnlyKeys(value, ['status'])) {
     return Object.freeze({ status: 'available' })
   }
   if (
     value.status === 'unavailable' &&
+    hasOwnDataProperties(value, ['status', 'failure']) &&
     hasOnlyKeys(value, ['status', 'failure']) &&
     isRecord(value.failure) &&
+    hasOwnDataProperties(value.failure, ['code', 'safeMessage']) &&
     hasOnlyKeys(value.failure, ['code', 'safeMessage']) &&
     typeof value.failure.code === 'string' &&
     SAFE_CODE.test(value.failure.code) &&
@@ -190,13 +223,26 @@ function parseUniqueList<T extends string>(
   return Object.freeze(parsed)
 }
 
-export function validateSubjectRegistration(
+function validateSubjectRegistrationUnsafe(
   candidate: unknown,
 ):
   | { readonly ok: true; readonly value: ValidatedRegistration }
   | { readonly ok: false; readonly failure: AssemblyFailure } {
   if (
     !isRecord(candidate) ||
+    !hasOwnDataProperties(candidate, [
+      'subjectId',
+      'displayName',
+      'packageVersion',
+      'compatibleCoreContractVersion',
+      'provenance',
+      'programs',
+      'requiredCapabilities',
+      'optionalMediaCapabilities',
+      'loaderEntryPoint',
+      'loader',
+      'availability',
+    ]) ||
     !hasOnlyKeys(candidate, [
       'subjectId',
       'displayName',
@@ -302,5 +348,21 @@ export function validateSubjectRegistration(
       summary,
       loader: candidate.loader as SubjectRegistrationInput['loader'],
     }),
+  }
+}
+
+/** Registry inspection is fail-closed for accessors, revoked Proxies, and Proxy traps. */
+export function validateSubjectRegistration(
+  candidate: unknown,
+):
+  | { readonly ok: true; readonly value: ValidatedRegistration }
+  | { readonly ok: false; readonly failure: AssemblyFailure } {
+  try {
+    return validateSubjectRegistrationUnsafe(candidate)
+  } catch {
+    return {
+      ok: false,
+      failure: malformed('The subject descriptor shape is invalid.'),
+    }
   }
 }
