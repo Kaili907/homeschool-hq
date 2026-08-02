@@ -37,6 +37,31 @@
   to = "/.netlify/functions/study-adult-review"
   status = 200
 
+[[redirects]]
+  from = "/api/study/production/readiness"
+  to = "/.netlify/functions/study-production-readiness"
+  status = 200
+
+[[redirects]]
+  from = "/api/study/session/issue"
+  to = "/.netlify/functions/study-session-issue"
+  status = 200
+
+[[redirects]]
+  from = "/api/study/session/verify"
+  to = "/.netlify/functions/study-session-verify"
+  status = 200
+
+[[redirects]]
+  from = "/api/study/session/revoke"
+  to = "/.netlify/functions/study-session-verify"
+  status = 200
+
+[[redirects]]
+  from = "/api/study/session/readiness"
+  to = "/.netlify/functions/study-session-verify"
+  status = 200
+
 # ---- SPA fallback: every other path serves the cached app shell ----
 [[redirects]]
   from = "/*"

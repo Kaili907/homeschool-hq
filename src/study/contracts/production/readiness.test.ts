@@ -11,6 +11,7 @@ import {
 
 const registrations = (): ProductionDependencyRegistration[] => REQUIRED_PRODUCTION_DEPENDENCIES.map((key) => ({
   schemaVersion: 1,
+  contractVersion: 'study-production.v1',
   key,
   implementation: 'production',
   trustBoundary: PRODUCTION_DEPENDENCY_SPECIFICATIONS[key].trustBoundary,
@@ -58,6 +59,26 @@ describe('canonical production readiness', () => {
       ...degraded.find(({ key }) => key === degradedKey)!, status: 'degraded',
     }
     expect(evaluateProductionReadiness(degraded)).toMatchObject({ status: 'degraded', permitsAcademicStudy: false })
+  })
+
+  it('rejects incompatible contracts and invalid runtime health states', () => {
+    const incompatible = registrations()
+    incompatible[0] = {
+      ...incompatible[0],
+      contractVersion: 'study-production.v0' as 'study-production.v1',
+    }
+    expect(evaluateProductionReadiness(incompatible)).toMatchObject({
+      status: 'not-ready', permitsAcademicStudy: false,
+    })
+
+    const invalidHealth = registrations()
+    invalidHealth[0] = {
+      ...invalidHealth[0],
+      status: 'unexpected' as 'ready',
+    }
+    expect(evaluateProductionReadiness(invalidHealth)).toMatchObject({
+      status: 'not-ready', permitsAcademicStudy: false,
+    })
   })
 
   it('keeps direct student not-ready without an issuer and staff disabled without an approved model', () => {

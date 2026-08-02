@@ -1,19 +1,28 @@
 import { describe, expect, it } from 'vitest'
 import { StudyLifecycleBoundary, composeAbortSignals, runCurrentStudyWork } from './lifecycleBoundary'
 
+const binding = {
+  authenticatedSessionRef: 'session:synthetic-safe',
+  householdRef: 'household:synthetic-safe',
+  learnerRef: 'learner:synthetic-safe',
+  launchGrantRef: 'grant:synthetic-safe',
+  featureEnabled: true,
+  authorizationRevision: 1,
+} as const
+
 describe('Study identity lifecycle cancellation', () => {
   it.each([
     'logout', 'learner-switch', 'household-switch', 'session-expired', 'membership-revoked',
     'relationship-revoked', 'feature-disabled', 'safety-stop', 'navigation-away',
     'stale-checkpoint', 'authorization-loss',
   ] as const)('invalidates outstanding work on %s', (reason) => {
-    const boundary = new StudyLifecycleBoundary()
+    const boundary = new StudyLifecycleBoundary(binding)
     const stale = boundary.token()
     boundary.cancel(reason)
     expect(stale.signal.aborted).toBe(true)
     expect(stale.isCurrent()).toBe(false)
     expect(() => stale.assertCurrent()).toThrow()
-    expect(boundary.token().isCurrent()).toBe(true)
+    expect(boundary.token().isCurrent()).toBe(false)
     expect(boundary.lastReason).toBe(reason)
   })
 
@@ -29,7 +38,7 @@ describe('Study identity lifecycle cancellation', () => {
   it.each(['logout', 'learner-switch', 'navigation-away'] as const)(
     'quarantines a result that resolves after %s',
     async (reason) => {
-      const boundary = new StudyLifecycleBoundary()
+      const boundary = new StudyLifecycleBoundary(binding)
       const token = boundary.token()
       const applied: string[] = []
       let resolveWork!: (value: string) => void
@@ -50,7 +59,7 @@ describe('Study identity lifecycle cancellation', () => {
   )
 
   it('does not start work when the lifecycle is already cancelled', async () => {
-    const boundary = new StudyLifecycleBoundary()
+      const boundary = new StudyLifecycleBoundary(binding)
     const token = boundary.token()
     boundary.cancel('feature-disabled')
     let invoked = false

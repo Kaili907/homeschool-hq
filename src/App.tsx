@@ -65,6 +65,9 @@ import {
 } from './study/hostContext'
 import type { StudyAdultAuthorization } from './study/types'
 import type { StudyPortBundle } from './study/ports'
+import { createStudyProductionReadinessClient } from './study/client/studyProductionReadinessClient'
+import { createStudyProductionComposition } from './study/production/productionComposition'
+import { StudyLifecycleBoundary } from './study/lifecycle'
 
 const loadPreviewPorts = import.meta.env.DEV
   ? () => import('./study/localDevelopmentPorts').then(({ createLocalDevelopmentStudyPorts }) => createLocalDevelopmentStudyPorts())
@@ -106,6 +109,14 @@ export default function App() {
   const studyEnabled = useMemo(isStudyEngineEnabledFromHost, [])
   const studyPreviewEnabled = useMemo(isStudyEnginePreviewEnabledFromHost, [])
   const [studyRuntime, setStudyRuntime] = useState<{ readonly ports: StudyPortBundle } | null>(null)
+  const [studyProductionStatus, setStudyProductionStatus] = useState<
+    'disabled' | 'unauthenticated' | 'checking' | 'not-ready' | 'degraded' | 'ready'
+  >(studyEnabled && !studyPreviewEnabled ? 'unauthenticated' : 'disabled')
+  const studyProductionLifecycleRef = useRef<StudyLifecycleBoundary | null>(null)
+  const studyReadinessClientRef = useRef<ReturnType<typeof createStudyProductionReadinessClient> | null>(null)
+  if (!studyProductionLifecycleRef.current) {
+    studyProductionLifecycleRef.current = new StudyLifecycleBoundary()
+  }
   const [state, setState] = useState<AppState>(loaded.state)
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
@@ -135,6 +146,45 @@ export default function App() {
   // M6: local-first cloud sync. Inert with no Supabase config; never blocks the UI.
   // Local writes above already persisted; this pushes async + pulls on open/reconnect.
   const sync = useSync(state, setState)
+
+  useEffect(() => {
+    const productionSelected = studyEnabled && !studyPreviewEnabled
+    const lifecycle = studyProductionLifecycleRef.current!
+    if (!productionSelected) {
+      lifecycle.cancel('feature-disabled')
+      studyReadinessClientRef.current?.invalidate()
+      setStudyProductionStatus('disabled')
+      return
+    }
+    if (!sync.status.user || sync.status.binding !== 'bound' || sync.status.provenance !== 'verified') {
+      lifecycle.cancel('authorization-loss')
+      studyReadinessClientRef.current?.invalidate()
+      setStudyProductionStatus('unauthenticated')
+      return
+    }
+
+    const controller = new AbortController()
+    const readiness = studyReadinessClientRef.current ?? createStudyProductionReadinessClient()
+    studyReadinessClientRef.current = readiness
+    setStudyProductionStatus('checking')
+    void readiness.revalidate(controller.signal).then((result) => {
+      if (controller.signal.aborted) return
+      setStudyProductionStatus(result.status)
+      if (result.status !== 'ready') lifecycle.cancel('authorization-loss')
+    }).catch(() => {
+      if (!controller.signal.aborted) {
+        lifecycle.cancel('authorization-loss')
+        setStudyProductionStatus('not-ready')
+      }
+    })
+    return () => controller.abort('navigation-away')
+  }, [
+    studyEnabled,
+    studyPreviewEnabled,
+    sync.status.binding,
+    sync.status.provenance,
+    sync.status.user?.id,
+  ])
 
   // SE-B attendance: when the signed-in girl's mission day is complete, append one
   // attendance day (invisible to her, append-only). recordAttendance is idempotent
@@ -166,6 +216,35 @@ export default function App() {
     studyRuntime &&
     studyContextResult.status === 'ready',
   )
+  const studyProductionSelected = studyEnabled && !studyPreviewEnabled
+  // Invoke the sole production composition root without manufacturing missing
+  // authority, registry, or runtime capabilities. Readiness is queried first;
+  // the remaining Session 17/runtime gaps stay fail-closed.
+  const studyProductionComposition = useMemo(() => createStudyProductionComposition({
+    featureFlagValue: studyProductionSelected ? 'true' : 'false',
+    authenticatedHostSession: Boolean(
+      sync.status.user &&
+      sync.status.binding === 'bound' &&
+      sync.status.provenance === 'verified',
+    ),
+    selectedLearnerAuthorized: false,
+    authority: null,
+    registry: null,
+    academicRuntime: null,
+    lifecycle: studyProductionLifecycleRef.current ?? undefined,
+  }), [
+    studyProductionSelected,
+    sync.status.binding,
+    sync.status.provenance,
+    sync.status.user,
+  ])
+  const studyProductionUnavailableReason = studyProductionStatus === 'checking'
+    ? 'Study is being checked. Please try again in a moment.'
+    : studyProductionStatus === 'unauthenticated'
+      ? 'Sign in and select an available learner before opening Study.'
+      : studyProductionStatus === 'degraded'
+        ? 'Study is taking a safe pause right now. Please try again later.'
+        : 'Study is not available yet. Please try again later.'
   const tokens = THEMES[active?.theme ?? 'playful']
 
   const establishParentStudyAuthorization = () => {
@@ -193,6 +272,8 @@ export default function App() {
   const patchActive = (update: (prev: Profile) => Profile) =>
     setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
   const signOut = () => {
+    studyProductionLifecycleRef.current?.cancel('logout')
+    studyReadinessClientRef.current?.invalidate()
     setParentStudyAuthorization(null)
     setState((s) => ({ ...s, activeProfileId: null }))
     setScreen({ kind: 'picker' })
@@ -344,7 +425,7 @@ export default function App() {
           setScreen({ kind: 'picker' })
         }}
         onOpenClassic={() => setScreen({ kind: 'grownups' })}
-        studyEnabled={studyPreviewReady}
+        studyEnabled={studyPreviewReady || studyProductionSelected}
         study={
           parentStudyReady
             ? {
@@ -359,8 +440,8 @@ export default function App() {
               }
             : undefined
         }
-        studyUnavailableReason={studyEnabled && !studyPreviewEnabled
-          ? 'Study production dependencies are not ready. The feature flag alone does not enable Study.'
+        studyUnavailableReason={studyProductionSelected
+          ? studyProductionUnavailableReason
           : 'Sign in, verify the household binding, and re-enter the parent PIN to use the explicit local Study preview.'}
       />
     )
@@ -413,8 +494,8 @@ export default function App() {
       return (
         <StudyUnavailable
           reason={
-            studyEnabled && !studyPreviewEnabled
-              ? 'Study production composition is not ready. No preview, in-memory, or local classifier fallback was selected.'
+            studyProductionSelected || !studyProductionComposition.available
+              ? studyProductionUnavailableReason
               : studyContextResult.status === 'unavailable'
               ? studyContextResult.reason
               : 'The Study integration is unavailable.'
@@ -603,7 +684,8 @@ export default function App() {
             onOpenTyping={() => setScreen({ kind: 'typing' })}
             onOpenReading={() => setScreen({ kind: 'reading' })}
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
-            onOpenStudy={studyPreviewReady ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
+            onOpenStudy={studyPreviewReady || studyProductionSelected ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
+            studyMode={studyPreviewReady ? 'preview' : studyProductionSelected ? 'unavailable' : undefined}
             mindsetStartDate={state.mindsetStartDate}
           />
         )}
@@ -654,13 +736,15 @@ export default function App() {
 }
 
 function StudyUnavailable({ reason, onBack }: { reason: string; onBack: () => void }) {
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  useEffect(() => { headingRef.current?.focus() }, [])
   return (
     <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900">
       <div className="mx-auto max-w-xl rounded-2xl border border-amber-200 bg-amber-50 p-6">
-        <h1 className="text-2xl font-bold" tabIndex={-1}>Study is not available yet</h1>
+        <h1 ref={headingRef} className="text-2xl font-bold" tabIndex={-1}>Study is not available yet</h1>
         <p className="mt-2">{reason}</p>
         <p className="mt-2 text-sm">No Study persistence or safety request was made.</p>
-        <button className="mt-4 rounded-lg border border-amber-500 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
+        <button className="mt-4 min-h-11 rounded-lg border border-amber-500 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
       </div>
     </main>
   )
@@ -691,6 +775,7 @@ function Home({
   onOpenReading,
   onOpenMindset,
   onOpenStudy,
+  studyMode,
   mindsetStartDate,
 }: {
   profile: Profile
@@ -707,6 +792,7 @@ function Home({
   onOpenReading: () => void
   onOpenMindset: () => void
   onOpenStudy?: () => void
+  studyMode?: 'preview' | 'unavailable'
   mindsetStartDate: string | undefined
 }) {
   const t = useTheme()
@@ -729,6 +815,7 @@ function Home({
         onOpenAssessment={onOpenAssessment}
         onOpenMindset={onOpenMindset}
         onOpenStudy={onOpenStudy}
+        studyMode={studyMode}
         mindsetStartDate={mindsetStartDate}
       />
     )
@@ -822,7 +909,7 @@ function Home({
           }
         >
           <span className="text-4xl" aria-hidden="true">🧭</span>
-          <span><span className="block text-2xl font-extrabold">Today’s Study plan</span><span className="block font-bold opacity-90">Launch the gated Adaptive Study Engine preview</span></span>
+          <span><span className="block text-2xl font-extrabold">Today’s Study plan</span><span className="block font-bold opacity-90">{studyMode === 'preview' ? 'Launch the explicit local Study preview' : 'Check whether Study is available'}</span></span>
         </button>
       )}
 
