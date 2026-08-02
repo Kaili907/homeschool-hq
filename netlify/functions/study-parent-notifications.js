@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import {
   assertExactObject,
   boundedString,
+  envFlagEnabled,
   errorResponse,
   hasQuery,
   jsonResponse,
@@ -33,6 +34,7 @@ export function createStudyParentNotificationsHandler(overrides = {}) {
     && rateLimiter?.isReady?.() === true
 
   return async (event) => {
+    if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
     if (!['GET', 'POST'].includes(event?.httpMethod)) {

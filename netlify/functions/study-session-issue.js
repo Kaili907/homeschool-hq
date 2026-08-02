@@ -3,6 +3,7 @@
 import {
   assertExactObject,
   boundedString,
+  envFlagEnabled,
   errorResponse,
   hasQuery,
   jsonResponse,
@@ -29,6 +30,7 @@ export function createStudySessionIssueHandler(overrides = {}) {
   const issuer = overrides.issuer ?? createGuardianStudySessionIssuer({ env, fetchImpl })
 
   return async (event) => {
+    if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
     if (event?.httpMethod !== 'POST') return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
     if (!ISSUE_PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')

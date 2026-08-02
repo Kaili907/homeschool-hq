@@ -2,6 +2,7 @@
 
 import {
   assertExactObject,
+  envFlagEnabled,
   errorResponse,
   hasQuery,
   jsonResponse,
@@ -29,6 +30,7 @@ export function createStudySessionVerifyHandler(overrides = {}) {
   const verifier = overrides.verifier ?? createTrustedStudySessionVerifier({ env, fetchImpl })
 
   return async (event) => {
+    if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
     try {
       if (event?.httpMethod === 'GET' && event?.path === READINESS_PATH && !hasQuery(event)) {
         if (verifier?.isDurable !== true || verifier?.isReady?.() !== true) {

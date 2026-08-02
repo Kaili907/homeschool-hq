@@ -1,6 +1,7 @@
 import {
   assertExactObject,
   boundedInteger,
+  envFlagEnabled,
   errorResponse,
   getHeader,
   hasQuery,
@@ -15,6 +16,7 @@ const PATHS = new Set([
 ])
 
 export function createStudyAdultReviewWorkerHandler(overrides = {}) {
+  const env = overrides.env ?? process.env
   const worker = overrides.worker
   const authorization = overrides.workerAuthorization
   const ready = () => worker?.ready && typeof worker.run === 'function'
@@ -23,6 +25,7 @@ export function createStudyAdultReviewWorkerHandler(overrides = {}) {
     && typeof authorization.credentialForEvent === 'function'
 
   return async (event) => {
+    if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
     if (event?.httpMethod !== 'POST') return errorResponse(405, 'method_not_allowed', { allow: 'POST' })

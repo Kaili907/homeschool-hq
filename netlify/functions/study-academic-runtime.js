@@ -1,5 +1,6 @@
 import {
   assertExactObject,
+  envFlagEnabled,
   errorResponse,
   hasQuery,
   jsonResponse,
@@ -18,8 +19,10 @@ const PATHS = new Set([
 ])
 
 export function createStudyAcademicRuntimeHandler(overrides = {}) {
+  const env = overrides.env ?? process.env
   const gateway = overrides.gateway ?? createVerifiedAcademicRuntimeGateway(overrides)
   return async (event) => {
+    if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (event?.httpMethod !== 'POST') return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')

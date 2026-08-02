@@ -1,6 +1,6 @@
 /** Authenticated adult-review worker boundary. No production worker is wired in Session 14. */
 
-import { assertExactObject, errorResponse, hasQuery, jsonResponse, readJsonBody, responseForError } from './_shared/http.js'
+import { assertExactObject, envFlagEnabled, errorResponse, hasQuery, jsonResponse, readJsonBody, responseForError } from './_shared/http.js'
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
 import { supabaseAuthConfigured } from './_shared/supabase-auth.js'
 
@@ -24,6 +24,7 @@ export function createStudyAdultReviewHandler(overrides = {}) {
   )
 
   return async (event) => {
+    if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
     if (event?.httpMethod === 'GET' && event?.path === READINESS_PATH && !hasQuery(event)) {
       const isReady = ready()
       return jsonResponse(isReady ? 200 : 503, { status: isReady ? 'ready' : 'not-ready' })

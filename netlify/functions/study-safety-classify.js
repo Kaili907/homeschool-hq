@@ -14,6 +14,7 @@ import { evaluateStudySafetyReadiness, readinessWireResult } from './_shared/stu
 import { rateLimitActorRef, rateLimitSubjectRefs } from './_shared/study-safety/rate-limit.js'
 import { classifyTransientSafety } from './_shared/study-safety/service.js'
 import {
+  envFlagEnabled,
   errorResponse,
   hasQuery,
   jsonResponse,
@@ -71,6 +72,7 @@ export function createStudySafetyHandler(overrides = {}) {
   }
 
   return async (event) => {
+    if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
     if (event?.httpMethod === 'GET' && event?.path === READINESS_PATH && !hasQuery(event)) {
       if (usesProductionPorts) await productionPorts.refreshReadiness()
       const readiness = evaluateStudySafetyReadiness(dependencies, env)

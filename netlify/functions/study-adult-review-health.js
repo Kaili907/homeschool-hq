@@ -1,4 +1,4 @@
-import { errorResponse, hasQuery, jsonResponse } from './_shared/http.js'
+import { envFlagEnabled, errorResponse, hasQuery, jsonResponse } from './_shared/http.js'
 
 const PATHS = new Set([
   '/api/study/adult-review/health',
@@ -6,8 +6,10 @@ const PATHS = new Set([
 ])
 
 export function createStudyAdultReviewHealthHandler(overrides = {}) {
+  const env = overrides.env ?? process.env
   const readiness = overrides.readiness
   return async (event) => {
+    if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (event?.httpMethod !== 'GET') return errorResponse(405, 'method_not_allowed', { allow: 'GET' })
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
