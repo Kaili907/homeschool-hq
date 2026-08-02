@@ -12,6 +12,8 @@
     "test:host": "vitest run --exclude adaptive-tutor/** --exclude supabase/** --maxWorkers 1",
     "test:ai-gateways": "vitest run tests/netlify-functions/anthropic.test.js tests/netlify-functions/tts.test.js --maxWorkers 1",
     "test:study-safety": "vitest run --config netlify/functions/_shared/study-safety/vitest.config.mjs --maxWorkers 1",
+    "test:study-adult-review": "vitest run src/study/adult-review netlify/functions/_shared/study-delivery netlify/functions/_shared/study-monitoring netlify/functions/_shared/study-rate-limit netlify/functions/_shared/study-adult-review-operations --config netlify/functions/_shared/study-adult-review-operations/vitest.config.mjs --maxWorkers 1",
+    "test:study-adult-review-db": "vitest run supabase/study-engine-adult-review.db.test.ts --configLoader runner --testTimeout 120000 --maxWorkers 1",
     "test:academy-db": "vitest run supabase/academy-profiles-base.db.test.ts && vitest run supabase/academy-student-identity.db.test.ts && vitest run supabase/academy-foundation-integration.db.test.ts && vitest run supabase/academy-cas.db.test.ts --testTimeout 120000 && vitest run supabase/academy-cas.postgres.test.ts",
     "test:academy-db:base": "vitest run supabase/academy-profiles-base.db.test.ts",
     "test:academy-db:identity": "vitest run supabase/academy-student-identity.db.test.ts",
