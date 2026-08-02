@@ -8,7 +8,14 @@ import type {
 import { placementForInstant } from './calendarAdapter'
 
 export class StudyParentController {
-  constructor(private readonly ports: StudyPortBundle) {}
+  readonly #now: () => Date
+
+  constructor(
+    private readonly ports: StudyPortBundle,
+    options: { readonly now?: () => Date } = {},
+  ) {
+    this.#now = options.now ?? (() => new Date())
+  }
 
   async execute(
     scope: StudyLearnerScope,
@@ -42,7 +49,7 @@ export class StudyParentController {
       const placement = placementForInstant(new Date(command.replacementStart), block.householdTimeZone)
       const suffix = command.replacementStart.replace(/[^0-9]/g, '').slice(0, 12)
       const continuationAt = new Date(
-        Math.max(Date.now(), Date.parse(block.resumePoint?.capturedAt ?? '') + 1),
+        Math.max(this.#now().getTime(), Date.parse(block.resumePoint?.capturedAt ?? '') + 1),
       ).toISOString()
       await this.ports.calendar.createContinuation(
         scope,

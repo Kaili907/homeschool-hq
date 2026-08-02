@@ -12,6 +12,7 @@ import {
   isVerifiedGrant,
   readStudySessionBearer,
   validCapability,
+  verifiedGrantEnvelope,
 } from './_shared/study-identity/contracts.js'
 import { createTrustedStudySessionVerifier } from './_shared/study-identity/supabase.js'
 
@@ -79,7 +80,7 @@ export function createStudySessionVerifyHandler(overrides = {}) {
       })
       if (result?.status === 'denied') return errorResponse(401, 'student_session_invalid')
       if (!isVerifiedGrant(result)) return errorResponse(503, 'service_not_ready')
-      return jsonResponse(200, result)
+      return jsonResponse(200, verifiedGrantEnvelope(result))
     } catch (error) {
       return responseForError(error)
     }

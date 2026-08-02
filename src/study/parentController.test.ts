@@ -18,8 +18,12 @@ describe('all ten parent controls through the host adapter', () => {
   })
 
   it('applies the complete parent control set without leaking private text', async () => {
-    const { ports, services } = createLocalDevelopmentStudyPorts()
-    const controller = new StudyParentController(ports)
+    const { ports, services } = createLocalDevelopmentStudyPorts({
+      now: () => new Date(SYNTHETIC_NOW),
+    })
+    const controller = new StudyParentController(ports, {
+      now: () => new Date(at(10)),
+    })
     const { entry, scope } = await createSyntheticMathBlock(ports, { suffix: 'parent-controls' })
     const auth = { householdRef: scope.householdRef, actorRef: 'adult:synthetic', role: 'parent' as const, adultAuthorized: true }
     const review = (id: string): StudyReviewRecommendation => ({
@@ -57,7 +61,7 @@ describe('all ten parent controls through the host adapter', () => {
     await controller.execute(scope, auth, {
       type: 'reschedule-incomplete-work',
       blockRef: entry.blockRef,
-      replacementStart: '2026-08-02T13:00:00.000Z',
+      replacementStart: at(86_400),
     })
 
     const { entry: interruptionEntry } = await createSyntheticMathBlock(ports, { suffix: 'interruption' })

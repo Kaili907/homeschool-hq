@@ -1,22 +1,36 @@
+import {
+  assertServerReceiptRuntime,
+  validateVerifiedAdultReviewReceipt,
+} from './receipt-contract.js'
+import { validateVerifiedWorkerContext } from '../study-worker/context.js'
+
 const PROVIDER_NAME = 'academy-in-app'
 const PROVIDER_CONFIG_VERSION = 'in-app-config-v1'
 const PROVIDER_VERSION = `${PROVIDER_NAME}:${PROVIDER_CONFIG_VERSION}`
 const TEMPLATE_CODE = 'study-safety-adult-review-v1'
 const LEARNER_SAFE_TITLE = 'Study check-in needs your review'
 
-const DELIVERY_KEYS = new Set([
-  'idempotencyKey', 'jobId', 'attemptId', 'recipientRef', 'routeRef', 'templateCode',
+const DELIVERY_INPUT_KEYS = new Set([
+  'idempotencyKey', 'jobId', 'attemptId', 'proposalId', 'householdId', 'studentId',
+  'recipientRef', 'routeRef', 'templateCode',
 ])
-const INSERT_KEYS = new Set(['state', 'providerReceiptRef', 'jobId', 'attemptId', 'notification'])
+const DELIVERY_REQUEST_KEYS = new Set([
+  'delivery', 'recipient', 'workerContext', 'trigger', 'onAttemptSubmitted',
+])
+const FORBIDDEN_DELIVERY_KEYS = new Set([
+  'rawText', 'transcript', 'disclosure', 'email', 'phone', 'destination', 'messageBody',
+])
+const INSERT_KEYS = new Set([
+  'state', 'providerReceiptRef', 'jobId', 'attemptId', 'proposalId', 'householdId',
+  'studentId', 'deliveryIdempotencyKey', 'recipientRef', 'routeRef', 'providerName',
+  'providerConfigVersion', 'notification',
+])
 const REVOKED_KEYS = new Set(['state', 'reasonCode'])
 const NOTIFICATION_KEYS = new Set(['title', 'reasonCategory', 'urgency', 'actionRef'])
 const VERIFY_REQUEST_KEYS = new Set([
-  'deliveryIdempotencyKey', 'recipientRef', 'routeRef', 'providerReceiptRef',
-])
-const VERIFIED_RECEIPT_KEYS = new Set([
-  'verified', 'providerReceiptRef', 'jobId', 'attemptId', 'deliveryIdempotencyKey',
-  'recipientRef', 'routeRef', 'providerName', 'providerConfigVersion', 'deliveredAt',
-  'evidenceRef', 'notification',
+  'providerReceiptRef', 'providerName', 'route', 'routeRef', 'jobId', 'attemptId',
+  'proposalId', 'householdId', 'studentId', 'recipientRef', 'deliveryIdempotencyKey',
+  'providerConfigVersion', 'workerContext',
 ])
 const UNVERIFIED_RECEIPT_KEYS = new Set(['verified'])
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
@@ -46,24 +60,54 @@ function validRef(value) {
   return typeof value === 'string' && REF.test(value)
 }
 
-function validTimestamp(value) {
-  return typeof value === 'string' &&
-    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value) &&
-    Number.isFinite(Date.parse(value))
-}
-
 function validateDelivery(value) {
   if (
-    !exactObject(value, DELIVERY_KEYS) ||
+    !exactObject(value, DELIVERY_INPUT_KEYS) ||
     !IDEMPOTENCY_KEY.test(value.idempotencyKey) ||
     !validRef(value.jobId) ||
     !validRef(value.attemptId) ||
+    !validRef(value.proposalId) ||
+    !validRef(value.householdId) ||
+    !validRef(value.studentId) ||
     !RECIPIENT_REF.test(value.recipientRef) ||
     !ROUTE_REF.test(value.routeRef) ||
     value.templateCode !== TEMPLATE_CODE
   ) throw new TypeError('invalid_in_app_delivery')
 
   return Object.freeze({ ...value })
+}
+
+function validateDeliveryRequest(value) {
+  if (
+    !exactObject(value, DELIVERY_REQUEST_KEYS) ||
+    !value.delivery ||
+    !value.recipient ||
+    !RECIPIENT_REF.test(value.recipient.recipientRef) ||
+    !['scheduled', 'manual'].includes(value.trigger) ||
+    typeof value.onAttemptSubmitted !== 'function' ||
+    Object.keys(value.delivery).some((key) => FORBIDDEN_DELIVERY_KEYS.has(key))
+  ) throw new TypeError('invalid_in_app_delivery_request')
+  const workerContext = validateVerifiedWorkerContext(value.workerContext)
+  const delivery = validateDelivery({
+    idempotencyKey: value.delivery.idempotencyKey ?? value.delivery.deliveryIdempotencyKey,
+    jobId: value.delivery.jobId ?? value.delivery.deliveryId,
+    attemptId: value.delivery.attemptId,
+    proposalId: value.delivery.proposalId,
+    householdId: value.delivery.householdId,
+    studentId: value.delivery.studentId,
+    recipientRef: value.recipient.recipientRef,
+    routeRef: value.delivery.routeRef,
+    templateCode: value.delivery.templateCode,
+  })
+  if (value.delivery.recipientRef !== undefined && value.delivery.recipientRef !== delivery.recipientRef) {
+    throw new TypeError('invalid_in_app_delivery_request')
+  }
+  return Object.freeze({
+    delivery,
+    workerContext,
+    trigger: value.trigger,
+    onAttemptSubmitted: value.onAttemptSubmitted,
+  })
 }
 
 function validateNotification(value) {
@@ -91,7 +135,15 @@ function validateInsertResult(value, input) {
     !RECEIPT_REF.test(value.providerReceiptRef) ||
     value.jobId !== input.jobId ||
     !validRef(value.attemptId) ||
-    (value.state === 'delivered' && value.attemptId !== input.attemptId)
+    value.proposalId !== input.proposalId ||
+    value.householdId !== input.householdId ||
+    value.studentId !== input.studentId ||
+    value.deliveryIdempotencyKey !== input.idempotencyKey ||
+    value.recipientRef !== input.recipientRef ||
+    value.routeRef !== input.routeRef ||
+    value.providerName !== PROVIDER_NAME ||
+    value.providerConfigVersion !== PROVIDER_CONFIG_VERSION ||
+    value.attemptId !== input.attemptId
   ) throw new Error('in_app_persistence_contract')
 
   return Object.freeze({
@@ -103,39 +155,38 @@ function validateInsertResult(value, input) {
 function validateVerifyRequest(value) {
   if (
     !exactObject(value, VERIFY_REQUEST_KEYS) ||
+    value.providerName !== PROVIDER_NAME ||
+    value.route !== 'in-app' ||
+    value.providerConfigVersion !== PROVIDER_CONFIG_VERSION ||
+    !validRef(value.jobId) ||
+    !validRef(value.attemptId) ||
+    !validRef(value.proposalId) ||
+    !validRef(value.householdId) ||
+    !validRef(value.studentId) ||
     !IDEMPOTENCY_KEY.test(value.deliveryIdempotencyKey) ||
     !RECIPIENT_REF.test(value.recipientRef) ||
     !ROUTE_REF.test(value.routeRef) ||
     !RECEIPT_REF.test(value.providerReceiptRef)
   ) throw new TypeError('invalid_in_app_receipt_request')
 
-  return Object.freeze({ ...value })
+  const workerContext = validateVerifiedWorkerContext(value.workerContext)
+  const { workerContext: _ignored, ...binding } = value
+  return Object.freeze({ binding: Object.freeze(binding), workerContext })
 }
 
-function validateReceipt(value, binding) {
+function validateReceipt(value, binding, environment) {
   if (exactObject(value, UNVERIFIED_RECEIPT_KEYS) && value.verified === false) {
     return Object.freeze({ verified: false })
   }
-
-  if (
-    !exactObject(value, VERIFIED_RECEIPT_KEYS) ||
-    value.verified !== true ||
-    value.providerReceiptRef !== binding.providerReceiptRef ||
-    value.deliveryIdempotencyKey !== binding.deliveryIdempotencyKey ||
-    value.recipientRef !== binding.recipientRef ||
-    value.routeRef !== binding.routeRef ||
-    value.providerName !== PROVIDER_NAME ||
-    value.providerConfigVersion !== PROVIDER_CONFIG_VERSION ||
-    !validRef(value.jobId) ||
-    !validRef(value.attemptId) ||
-    !validTimestamp(value.deliveredAt) ||
-    !EVIDENCE_REF.test(value.evidenceRef)
-  ) throw new Error('in_app_persistence_contract')
-
-  return Object.freeze({
-    ...value,
-    notification: validateNotification(value.notification),
-  })
+  if (!EVIDENCE_REF.test(value?.evidenceRef) || !RECEIPT_REF.test(value?.providerReceiptRef)) {
+    throw new Error('in_app_persistence_contract')
+  }
+  try {
+    return validateVerifiedAdultReviewReceipt(value, binding, { environment })
+  } catch (error) {
+    if (String(error?.message).startsWith('receipt_binding_mismatch:')) throw error
+    throw new Error('in_app_persistence_contract')
+  }
 }
 
 function requireReady(persistence) {
@@ -152,7 +203,11 @@ function requireReady(persistence) {
  * metadata, inserts it with a unique idempotency key, and records its audit
  * evidence. It must not accept a destination, contact value, or message body.
  */
-export function createDurableInAppProvider({ persistence } = {}) {
+export function createDurableInAppProvider({
+  persistence,
+  adultReviewInAppDeliveryPolicy = 'not-approved',
+  environment = process.env.NODE_ENV,
+} = {}) {
   if (
     !persistence ||
     typeof persistence.insertNotification !== 'function' ||
@@ -160,24 +215,42 @@ export function createDurableInAppProvider({ persistence } = {}) {
   ) throw new TypeError('durable_in_app_persistence_required')
 
   const isDurable = persistence.isDurable === true
+  const policyApproved = adultReviewInAppDeliveryPolicy === 'approved'
+
+  function requirePolicy() {
+    if (!policyApproved) throw new Error('adult_review_in_app_delivery_policy_not_approved')
+  }
 
   async function verifyReceipt(untrusted) {
+    assertServerReceiptRuntime()
+    requirePolicy()
     requireReady(persistence)
-    const binding = validateVerifyRequest(untrusted)
-    const result = await persistence.verifyNotificationReceipt(binding)
-    return validateReceipt(result, binding)
+    const request = validateVerifyRequest(untrusted)
+    const result = await persistence.verifyNotificationReceipt({
+      ...request.binding,
+      workerContext: request.workerContext,
+    })
+    return validateReceipt(result, request.binding, environment)
   }
 
   async function deliver(untrusted) {
+    assertServerReceiptRuntime()
+    requirePolicy()
     requireReady(persistence)
-    const input = validateDelivery(untrusted)
+    const request = validateDeliveryRequest(untrusted)
+    const input = request.delivery
+    await request.onAttemptSubmitted({ attemptId: input.attemptId })
     const insert = validateInsertResult(await persistence.insertNotification(Object.freeze({
       schemaVersion: 1,
+      workerContext: request.workerContext,
       providerName: PROVIDER_NAME,
       providerConfigVersion: PROVIDER_CONFIG_VERSION,
       deliveryIdempotencyKey: input.idempotencyKey,
       jobId: input.jobId,
       attemptId: input.attemptId,
+      proposalId: input.proposalId,
+      householdId: input.householdId,
+      studentId: input.studentId,
       recipientRef: input.recipientRef,
       routeRef: input.routeRef,
       templateCode: input.templateCode,
@@ -186,27 +259,37 @@ export function createDurableInAppProvider({ persistence } = {}) {
     if (insert.state === 'revoked') return insert
 
     const receipt = await verifyReceipt({
-      deliveryIdempotencyKey: input.idempotencyKey,
-      recipientRef: input.recipientRef,
-      routeRef: input.routeRef,
       providerReceiptRef: insert.providerReceiptRef,
+      providerName: PROVIDER_NAME,
+      route: 'in-app',
+      routeRef: input.routeRef,
+      jobId: input.jobId,
+      attemptId: input.attemptId,
+      proposalId: input.proposalId,
+      householdId: input.householdId,
+      studentId: input.studentId,
+      recipientRef: input.recipientRef,
+      deliveryIdempotencyKey: input.idempotencyKey,
+      providerConfigVersion: PROVIDER_CONFIG_VERSION,
+      workerContext: request.workerContext,
     })
     if (
       receipt.verified !== true ||
       receipt.jobId !== insert.jobId ||
-      receipt.attemptId !== insert.attemptId ||
-      JSON.stringify(receipt.notification) !== JSON.stringify(insert.notification)
+      receipt.attemptId !== insert.attemptId
     ) throw new Error('in_app_receipt_not_verified')
 
     return Object.freeze({
       state: insert.state,
+      submitted: true,
       verified: true,
       providerReceiptRef: receipt.providerReceiptRef,
       jobId: receipt.jobId,
       attemptId: receipt.attemptId,
       deliveredAt: receipt.deliveredAt,
       evidenceRef: receipt.evidenceRef,
-      notification: receipt.notification,
+      notification: insert.notification,
+      receipt,
     })
   }
 
@@ -218,7 +301,8 @@ export function createDurableInAppProvider({ persistence } = {}) {
     isDurable,
     isTestProvider: false,
     supportsDurableIdempotency: true,
-    isReady: () => isDurable && persistence.isReady?.() === true,
+    adultReviewInAppDeliveryPolicy: policyApproved ? 'approved' : 'not-approved',
+    isReady: () => policyApproved && isDurable && persistence.isReady?.() === true,
     deliver,
     verifyReceipt,
   })

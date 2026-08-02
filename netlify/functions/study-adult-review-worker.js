@@ -20,7 +20,7 @@ export function createStudyAdultReviewWorkerHandler(overrides = {}) {
   const ready = () => worker?.ready && typeof worker.run === 'function'
     && authorization?.isDurable === true
     && authorization?.isReady?.() === true
-    && typeof authorization.authorize === 'function'
+    && typeof authorization.credentialForEvent === 'function'
 
   return async (event) => {
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
@@ -38,8 +38,14 @@ export function createStudyAdultReviewWorkerHandler(overrides = {}) {
         if (body.limit !== undefined) limit = boundedInteger(body.limit, 1, 50)
       }
       const trigger = scheduled ? 'scheduled' : 'manual'
-      const context = await authorization.authorize({ event, trigger })
-      if (!context?.authorized || typeof context.workerIdentity !== 'string') {
+      const credentialContext = await authorization.credentialForEvent({ event, trigger })
+      if (
+        !credentialContext?.authorized ||
+        typeof credentialContext.workerCredential !== 'string' ||
+        credentialContext.workerCredential.length < 32 ||
+        credentialContext.workerCredential.length > 512 ||
+        Object.hasOwn(credentialContext, 'workerIdentity')
+      ) {
         if (typeof authorization.recordDenied === 'function') {
           await authorization.recordDenied({
             eventName: 'study.adult_review.unauthorized_worker',
@@ -49,9 +55,8 @@ export function createStudyAdultReviewWorkerHandler(overrides = {}) {
         return errorResponse(403, 'worker_not_authorized')
       }
       const result = await worker.run({
-        authenticated: true,
         trigger,
-        workerIdentity: context.workerIdentity,
+        workerCredential: credentialContext.workerCredential,
         limit,
       }, { limit })
       return jsonResponse(200, {

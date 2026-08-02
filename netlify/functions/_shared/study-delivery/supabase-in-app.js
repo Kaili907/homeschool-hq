@@ -1,12 +1,10 @@
 import { createSupabaseServiceRpc } from '../study-adult-review/supabase-ports.js'
+import { workerContextForRpc } from '../study-worker/context.js'
 
 export function createSupabaseInAppPersistence(options = {}) {
   const rpc = options.rpc ?? createSupabaseServiceRpc(options)
-  const workerIdentity = options.workerIdentity
   const leaseContext = options.leaseContext
-  const configured = () => typeof workerIdentity === 'string'
-    && workerIdentity.length > 0
-    && rpc?.isConfigured?.() === true
+  const configured = () => rpc?.isConfigured?.() === true
     && typeof leaseContext?.forAttempt === 'function'
 
   return Object.freeze({
@@ -14,18 +12,23 @@ export function createSupabaseInAppPersistence(options = {}) {
     isReady: configured,
     async insertNotification(input) {
       if (!configured()) throw new Error('in_app_persistence_not_ready')
+      const workerContext = workerContextForRpc(input.workerContext)
       const lease = await leaseContext.forAttempt({
         jobId: input.jobId,
         attemptId: input.attemptId,
+        workerContext,
       })
       if (!lease || typeof lease.leaseToken !== 'string'
-        || !Number.isSafeInteger(lease.expectedRevision)) {
+        || !Number.isSafeInteger(lease.expectedRevision)
+        || lease.active !== true
+        || lease.currentAttempt !== true) {
         throw new Error('in_app_lease_context_invalid')
       }
       return rpc.call('academy_study_deliver_in_app_notification_v2', {
-        p_worker_id: workerIdentity,
+        p_worker_id: workerContext.workerIdentity,
         p_delivery: {
           schemaVersion: 2,
+          workerContext,
           jobId: input.jobId,
           leaseToken: lease.leaseToken,
           expectedRevision: lease.expectedRevision,
@@ -33,17 +36,25 @@ export function createSupabaseInAppPersistence(options = {}) {
           deliveryIdempotencyKey: input.deliveryIdempotencyKey,
           recipientRef: input.recipientRef,
           routeRef: input.routeRef,
+          proposalId: input.proposalId,
+          householdId: input.householdId,
+          studentId: input.studentId,
           providerName: input.providerName,
           providerConfigVersion: input.providerConfigVersion,
         },
-      })
+      }, { requireWorkerCredential: true, workerContext })
     },
     async verifyNotificationReceipt(binding) {
       if (!configured()) throw new Error('in_app_persistence_not_ready')
+      const workerContext = workerContextForRpc(binding.workerContext)
+      const { workerContext: _ignored, ...receiptBinding } = binding
       return rpc.call('academy_study_verify_in_app_notification_v2', {
-        p_worker_id: workerIdentity,
-        p_binding: binding,
-      })
+        p_worker_id: workerContext.workerIdentity,
+        p_binding: {
+          ...receiptBinding,
+          workerContext,
+        },
+      }, { requireWorkerCredential: true, workerContext })
     },
   })
 }

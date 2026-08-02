@@ -155,9 +155,15 @@ export class LocalDevelopmentStudyServices {
   readonly mode = 'local-development' as const
   readonly classifierVersion = 'session12-local-forced-outcome-v1'
   readonly #forcedSafetyOutcome: StudySafetyResult['outcome']
+  readonly #now: () => Date
 
-  constructor(options: { readonly forcedSafetyOutcome?: StudySafetyResult['outcome'] } = {}) {
+  constructor(options: {
+    readonly forcedSafetyOutcome?: StudySafetyResult['outcome']
+    /** Testable clock; local preview defaults to the real wall clock. */
+    readonly now?: () => Date
+  } = {}) {
     this.#forcedSafetyOutcome = options.forcedSafetyOutcome ?? 'clear'
+    this.#now = options.now ?? (() => new Date())
   }
 
   #bindLearner(scope: StudyLearnerScope): void {
@@ -317,7 +323,7 @@ export class LocalDevelopmentStudyServices {
         ...(segment.customTaskTypeId ? { customTaskTypeId: segment.customTaskTypeId } : {}),
         required: segment.required,
       })),
-      createdAt: new Date().toISOString(),
+      createdAt: this.#now().toISOString(),
       timerVisibility: draft.timerVisibility,
     })
     this.#calendar.set(block.internalBlockId, block)
@@ -427,7 +433,14 @@ export class LocalDevelopmentStudyServices {
           .map((block) => toCalendarEntry(block, this.#planByBlock))
           .find((entry) => entry.blockRef === command.blockRef)
       : undefined
-    assertAcceptedParentControl({ scope, authorization, command, settings: current, ...(calendarEntry ? { calendarEntry } : {}) })
+    assertAcceptedParentControl({
+      scope,
+      authorization,
+      command,
+      settings: current,
+      now: this.#now(),
+      ...(calendarEntry ? { calendarEntry } : {}),
+    })
     let next: StudyParentSettings = current
     if (command.type === 'set-maximum-duration') {
       if (!Number.isInteger(command.minutes) || command.minutes < 1 || command.minutes > 240) throw new Error('Maximum duration must be 1–240 minutes.')
@@ -574,7 +587,10 @@ export class LocalDevelopmentStudyServices {
 }
 
 export function createLocalDevelopmentStudyPorts(
-  options: { readonly forcedSafetyOutcome?: StudySafetyResult['outcome'] } = {},
+  options: {
+    readonly forcedSafetyOutcome?: StudySafetyResult['outcome']
+    readonly now?: () => Date
+  } = {},
 ): { readonly ports: StudyPortBundle; readonly services: LocalDevelopmentStudyServices } {
   const services = new LocalDevelopmentStudyServices(options)
   const ports: StudyPortBundle = {

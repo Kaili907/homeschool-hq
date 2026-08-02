@@ -111,26 +111,44 @@ describe('minimized adult-review proposal and recipient boundary', () => {
   })
 
   it('accepts only exact opaque recipient/permission/route evidence', () => {
-    const valid = {
-      state: 'resolved',
-      resolutionRef: 'resolution:test-v1',
-      policyVersion: 'policy:adult-notification-v1',
-      recipients: recipients(),
+    const recipient = {
+      schemaVersion: 2,
+      recipientRef: `recipient:${'a'.repeat(64)}`,
+      permissionRef: `permission:${'b'.repeat(64)}`,
+      permissionRevision: 3,
+      recipientVersion: 2,
+      effectiveAt: NOW_ISO,
+      route: 'in-app',
+      routeRef: `route:${'c'.repeat(64)}`,
+      routeRevision: 2,
     }
-    expect(validRecipientResolution(valid)).toBe(true)
-    expect(validRecipientResolution({ ...valid, rawText: 'sentinel' })).toBe(false)
+    const binding = {
+      householdRef: `household:${'d'.repeat(64)}`,
+      learnerRef: `learner:${'e'.repeat(64)}`,
+      proposalRef: `proposal:${'f'.repeat(64)}`,
+      proposalRevision: 4,
+    }
+    const valid = {
+      ...binding,
+      state: 'resolved',
+      resolutionRef: `resolution:${'0'.repeat(64)}`,
+      policyVersion: 'adult-notification-policy-v2',
+      recipients: [recipient],
+    }
+    expect(validRecipientResolution(valid, binding)).toBe(true)
+    expect(validRecipientResolution({ ...valid, rawText: 'sentinel' }, binding)).toBe(false)
     expect(validRecipientResolution({
       ...valid,
-      recipients: [{ ...recipients()[0], email: 'spoof@example.test' }],
-    })).toBe(false)
+      recipients: [{ ...recipient, email: 'spoof@example.test' }],
+    }, binding)).toBe(false)
     expect(validRecipientResolution({
       ...valid,
-      recipients: [{ ...recipients()[0], routes: [{ channel: 'email', routeRef: 'email-route:x', destination: 'spoof@example.test' }] }],
-    })).toBe(false)
+      recipients: [{ ...recipient, destination: 'spoof@example.test' }],
+    }, binding)).toBe(false)
     expect(validRecipientResolution({
       ...valid,
-      recipients: [{ ...recipients()[0], recipientRef: '5555550100' }],
-    })).toBe(false)
+      recipients: [{ ...recipient, recipientRef: '5555550100' }],
+    }, binding)).toBe(false)
   })
 })
 

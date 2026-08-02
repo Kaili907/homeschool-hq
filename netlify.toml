@@ -82,6 +82,11 @@
   to = "/.netlify/functions/study-session-verify"
   status = 200
 
+[[redirects]]
+  from = "/api/study/academic-runtime"
+  to = "/.netlify/functions/study-academic-runtime"
+  status = 200
+
 # Local candidate only. The default handler refuses work until durable worker
 # authorization and all readiness dependencies are explicitly composed.
 [functions."study-adult-review-worker"]

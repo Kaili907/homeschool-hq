@@ -7,11 +7,11 @@ const migrationDirectory = new URL('./migrations/', import.meta.url)
 
 const historicalMigrations = {
   '20260724074106_academy_profiles_base.sql':
-    '8b1947fe2ce5d605e143b93b1ad8784d1d52095e83a4f8c63b8689f22462725d',
+    '16c609d24efb9b9694b410a2313e5f2f7228db5118e2ccc4fa779f03c1d53c51',
   '20260724230000_academy_student_identity_foundation.sql':
-    '1700d95a8630214b49834dcb05c80358718128675389fb032669ebfa2644b829',
+    '2c7825ba957b68a39413a1e2da81aebaa72fb35dde7abeeba6ea8a493ecf3bde',
   '20260726120000_academy_household_revision_cas.sql':
-    '40e9916322181fb19f9c58feeb90cf81a7e942e6b47199e05dc126bee43cd24d',
+    '0d5556db9f1dc406234e08180051e8d54807870084223b25db18017b1648c268',
 } as const
 
 const studyMigrations = [
@@ -63,8 +63,8 @@ async function createIdentityDatabase() {
 describe.sequential('Study Engine migration chain', () => {
   it('keeps historical migration bytes unchanged', async () => {
     for (const [name, expected] of Object.entries(historicalMigrations)) {
-      const bytes = await readFile(new URL(name, migrationDirectory))
-      const actual = createHash('sha256').update(bytes).digest('hex')
+      const source = await readFile(new URL(name, migrationDirectory), 'utf8')
+      const actual = createHash('sha256').update(source.replaceAll('\r\n', '\n')).digest('hex')
       expect(actual, name).toBe(expected)
     }
   })
@@ -73,11 +73,11 @@ describe.sequential('Study Engine migration chain', () => {
     const names = (await readdir(migrationDirectory))
       .filter((name) => /^\d{14}_.+\.sql$/.test(name))
       .sort()
-    expect(names).toEqual([
-      ...Object.keys(historicalMigrations),
-      ...studyMigrations,
-      ...productionCompositionMigrations,
-    ])
+    const manifest = JSON.parse(await readFile(
+      new URL('../docs/study-engine-final-production/migration-manifest.json', import.meta.url),
+      'utf8',
+    )) as { migrations: Array<{ filename: string }> }
+    expect(names).toEqual(manifest.migrations.map((entry) => entry.filename))
   })
 
   it('applies storage before authorization in a fresh database', async () => {

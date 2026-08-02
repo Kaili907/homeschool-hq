@@ -22,12 +22,14 @@ export function assertAcceptedParentControl(input: {
   readonly command: StudyParentPublicCommand
   readonly settings: StudyParentSettings
   readonly calendarEntry?: StudyCalendarEntry
+  readonly now?: Date
 }): void {
   if (input.command.type === 'accept-recommendation' || input.command.type === 'reject-recommendation') return
+  const currentTime = input.now ?? new Date()
   const now = new Date(
     input.command.type === 'mark-interruption'
-      ? Math.max(Date.now(), Date.parse(input.command.occurredAt))
-      : Date.now(),
+      ? Math.max(currentTime.getTime(), Date.parse(input.command.occurredAt))
+      : currentTime.getTime(),
   ).toISOString()
   const state = createParentRuntimeState({
     controlSetId: `controls:${input.scope.learnerRef}`,
@@ -49,7 +51,8 @@ export function assertAcceptedParentControl(input: {
     knownIncompleteBlockIds: input.calendarEntry ? [input.calendarEntry.blockRef] : [],
   })
   const actor = { actorId: input.authorization.actorRef, role: input.authorization.role }
-  const base = { eventId: `event:${input.command.type}:${Date.now()}`, at: now, actor, expectedRevision: state.revision }
+  const eventTime = currentTime.getTime()
+  const base = { eventId: `event:${input.command.type}:${eventTime}`, at: now, actor, expectedRevision: state.revision }
   let action: ParentControlAction
   const command = input.command
   if (command.type === 'set-maximum-duration') {
@@ -75,7 +78,7 @@ export function assertAcceptedParentControl(input: {
     action = {
       ...base,
       type: 'reschedule-incomplete-work',
-      rescheduleId: `reschedule:${Date.now()}`,
+      rescheduleId: `reschedule:${eventTime}`,
       blockId: command.blockRef,
       originalStartAt: input.calendarEntry?.scheduledStart ?? now,
       replacementStartAt: command.replacementStart,
@@ -85,7 +88,7 @@ export function assertAcceptedParentControl(input: {
     action = {
       ...base,
       type: 'mark-interruption',
-      interruptionId: `interruption:${Date.now()}`,
+      interruptionId: `interruption:${eventTime}`,
       kind: command.kind,
       blockId: command.blockRef,
       occurredAt: command.occurredAt,

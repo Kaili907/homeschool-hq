@@ -1,6 +1,6 @@
 import {
   digestStudySessionReference,
-  isIssuedGrant,
+  isIssuedGrantEnvelope,
   isVerifiedGrant,
   STUDY_IDENTITY_SCHEMA_VERSION,
 } from './contracts.js'
@@ -86,7 +86,7 @@ export function createGuardianStudySessionIssuer(options = {}) {
       } catch {
         return { status: 'unavailable' }
       }
-      return isIssuedGrant(grant) ? grant : { status: 'unavailable' }
+      return isIssuedGrantEnvelope(grant) ? grant : { status: 'unavailable' }
     },
   })
 }

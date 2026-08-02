@@ -1,7 +1,45 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createSupabaseStudySafetyPorts } from './supabase-ports.js'
+import { createSupabaseServiceRpc, createSupabaseStudySafetyPorts } from './supabase-ports.js'
 
 describe('durable Supabase safety/adult-review ports', () => {
+  it('adds worker authority only for explicitly credential-bound calls', async () => {
+    const fetchImpl = vi.fn(async () => ({ ok: true, json: async () => ({ recorded: true }) }))
+    const workerCredential = 'synthetic-worker-credential-0123456789abcdef'
+    const rpc = createSupabaseServiceRpc({
+      env: {
+        SUPABASE_URL: 'https://synthetic.invalid',
+        SUPABASE_SERVICE_ROLE_KEY: 'synthetic-service-role',
+        ACADEMY_STUDY_ADULT_REVIEW_WORKER_ID: 'worker:adult-review',
+        ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL: workerCredential,
+        ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL_VERSION: 'credential-v2',
+        ACADEMY_STUDY_ADULT_REVIEW_WORKER_CONFIGURATION_VERSION: 'configuration-v3',
+      },
+      fetchImpl,
+    })
+
+    await rpc.call('ordinary_rpc')
+    expect(fetchImpl.mock.calls[0][1].headers).not.toHaveProperty('x-academy-study-worker-credential')
+
+    await rpc.call('worker_rpc', {}, {
+      requireWorkerCredential: true,
+      workerContext: {
+        workerIdentity: 'worker:adult-review',
+        credentialVersion: 'credential-v2',
+      },
+    })
+    expect(fetchImpl.mock.calls[1][1].headers).toMatchObject({
+      'x-academy-study-worker-credential': workerCredential,
+      'x-academy-study-worker-credential-version': 'credential-v2',
+      'x-academy-study-worker-configuration-version': 'configuration-v3',
+    })
+
+    await expect(rpc.call('worker_rpc', {}, {
+      requireWorkerCredential: true,
+      workerContext: { workerIdentity: 'worker:forged', credentialVersion: 'credential-v2' },
+    })).rejects.toThrow('worker_credential_not_configured')
+    expect(fetchImpl).toHaveBeenCalledTimes(2)
+  })
+
   it('stays not-ready until the installed reconciliation schema proves readiness', async () => {
     const call = vi.fn(async (name) => {
       if (name === 'academy_study_safety_durable_readiness_v1') return { status: 'ready', schemaVersion: 1 }

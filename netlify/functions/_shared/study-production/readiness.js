@@ -54,6 +54,15 @@ const SESSION_17_DEPENDENCIES = Object.freeze([
   'receipt-validator',
 ])
 
+export const ADULT_REVIEW_IN_APP_DELIVERY_POLICIES = Object.freeze([
+  'approved',
+  'not-approved',
+])
+
+export function adultReviewInAppDeliveryPolicy(value) {
+  return ADULT_REVIEW_IN_APP_DELIVERY_POLICIES.includes(value) ? value : 'not-approved'
+}
+
 function validState(value) {
   return STUDY_PRODUCTION_READINESS_STATES.includes(value)
 }
@@ -80,6 +89,18 @@ async function durableState(ports) {
     return ready === true ? 'ready' : 'not-ready'
   } catch {
     return 'not-ready'
+  }
+}
+
+async function productionPolicyState(ports) {
+  try {
+    const result = await ports?.readAdultReviewReadiness?.()
+    return Object.freeze({
+      state: validState(result?.state) ? result.state : 'not-ready',
+      policy: adultReviewInAppDeliveryPolicy(result?.adultReviewInAppDeliveryPolicy),
+    })
+  } catch {
+    return Object.freeze({ state: 'not-ready', policy: 'not-approved' })
   }
 }
 
@@ -119,19 +140,66 @@ export function createStudyProductionReadinessService(options = {}) {
 
   async function refresh() {
     const checkedAtMs = now()
-    const [identity, academic, safetyDurable, delivery, receipt] = await Promise.all([
+    const [
+      identity,
+      academic,
+      safetyDurable,
+      policyEvidence,
+      recipient,
+      limiter,
+      monitoring,
+      workerCredential,
+      workerScheduler,
+      lease,
+      attemptStore,
+      operationalReadiness,
+      deliveryProbe,
+      receiptProbe,
+    ] = await Promise.all([
       identityState(identityVerifier),
       optionalOperationalState(options.academicReadiness),
       durableState(durablePorts),
+      productionPolicyState(durablePorts),
+      optionalOperationalState(session17.authorizedRecipientResolver),
+      optionalOperationalState(session17.rateLimiter),
+      optionalOperationalState(session17.monitoringSink),
+      optionalOperationalState(session17.workerCredentialVerifier),
+      optionalOperationalState(session17.workerScheduler),
+      optionalOperationalState(session17.leaseOperations),
+      optionalOperationalState(session17.attemptStore),
+      optionalOperationalState(session17.operationalReadiness),
       optionalOperationalState(session17.deliveryProvider),
       optionalOperationalState(session17.receiptValidator),
     ])
+    const inAppDeliveryPolicy = policyEvidence.policy
+    const policyApproved = inAppDeliveryPolicy === 'approved' && policyEvidence.state === 'ready'
+    const criticalAdultReviewStates = [
+      recipient,
+      limiter,
+      monitoring,
+      workerCredential,
+      workerScheduler,
+      lease,
+      attemptStore,
+      operationalReadiness,
+      deliveryProbe,
+      receiptProbe,
+    ]
+    const adultReviewStatus = !policyApproved || criticalAdultReviewStates.includes('not-ready')
+      ? 'not-ready'
+      : criticalAdultReviewStates.includes('degraded') ? 'degraded' : 'ready'
+    const delivery = adultReviewStatus === 'ready' ? deliveryProbe : adultReviewStatus
+    const receipt = adultReviewStatus === 'ready' ? receiptProbe : adultReviewStatus
     const statusByDependency = new Map()
     for (const key of IDENTITY_DEPENDENCIES) statusByDependency.set(key, identity)
     // The safety reconciliation probe does not prove the Session 13 academic
     // RPC set. Those adapters require their own injected live probe.
     for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) statusByDependency.set(key, academic)
     for (const key of SAFETY_DURABLE_DEPENDENCIES) statusByDependency.set(key, safetyDurable)
+    statusByDependency.set('outbox-store', adultReviewStatus)
+    statusByDependency.set('rate-limiter', limiter === 'ready' ? adultReviewStatus : limiter)
+    statusByDependency.set('authorized-recipient-resolver', recipient === 'ready' ? adultReviewStatus : recipient)
+    statusByDependency.set('monitoring-sink', monitoring === 'ready' ? adultReviewStatus : monitoring)
     statusByDependency.set('production-classifier', classifierState(classifier))
     statusByDependency.set('delivery-provider', delivery)
     statusByDependency.set('receipt-validator', receipt)
@@ -146,6 +214,7 @@ export function createStudyProductionReadinessService(options = {}) {
       expiresAtMs: checkedAtMs + ttlMs,
       // Server-internal diagnostics. readinessWireResult deliberately drops it.
       registrations,
+      adultReviewInAppDeliveryPolicy: inAppDeliveryPolicy,
     })
     cached = snapshot
     return snapshot

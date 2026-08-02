@@ -11,8 +11,8 @@ import {
 } from './_shared/http.js'
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
 import {
-  isIssuedGrant,
-  validOpaqueId,
+  isIssuedGrantEnvelope,
+  validProductionSelectorValue,
   validUuid,
 } from './_shared/study-identity/contracts.js'
 import { createGuardianStudySessionIssuer } from './_shared/study-identity/supabase.js'
@@ -50,7 +50,7 @@ export function createStudySessionIssueHandler(overrides = {}) {
         body.schemaVersion !== 1 ||
         !(
           (selector.kind === 'academy-student-id' && validUuid(selectorValue)) ||
-          (selector.kind === 'legacy-profile-id' && validOpaqueId(selectorValue))
+          (selector.kind === 'legacy-profile-id' && validProductionSelectorValue(selectorValue))
         )
       ) return errorResponse(400, 'invalid_request')
 
@@ -59,7 +59,7 @@ export function createStudySessionIssueHandler(overrides = {}) {
         selectedStudentRef: { kind: selector.kind, value: selectorValue },
       })
       if (result?.status === 'denied') return errorResponse(403, 'learner_unavailable')
-      if (!isIssuedGrant(result)) return errorResponse(503, 'service_not_ready')
+      if (!isIssuedGrantEnvelope(result)) return errorResponse(503, 'service_not_ready')
 
       // The raw opaque reference is returned once. The client contract keeps it
       // in memory and never copies it into localStorage or sessionStorage.

@@ -65,8 +65,13 @@ import {
 } from './study/hostContext'
 import type { StudyAdultAuthorization } from './study/types'
 import type { StudyPortBundle } from './study/ports'
+import { getGatewayAccessToken } from './tutor/gatewayAuth'
+import { createStudyIdentityClient } from './study/client/studyIdentityClient'
 import { createStudyProductionReadinessClient } from './study/client/studyProductionReadinessClient'
-import { createStudyProductionComposition } from './study/production/productionComposition'
+import {
+  createVerifiedStudyRuntimeAdapter,
+  type VerifiedStudyRuntimeAdapter,
+} from './study/production/verifiedRuntimeAdapter'
 import { StudyLifecycleBoundary } from './study/lifecycle'
 
 const loadPreviewPorts = import.meta.env.DEV
@@ -114,8 +119,20 @@ export default function App() {
   >(studyEnabled && !studyPreviewEnabled ? 'unauthenticated' : 'disabled')
   const studyProductionLifecycleRef = useRef<StudyLifecycleBoundary | null>(null)
   const studyReadinessClientRef = useRef<ReturnType<typeof createStudyProductionReadinessClient> | null>(null)
+  const studyIdentityClientRef = useRef<ReturnType<typeof createStudyIdentityClient> | null>(null)
+  const studyVerifiedRuntimeRef = useRef<VerifiedStudyRuntimeAdapter | null>(null)
+  const studySelectedProfileRef = useRef<string | null>(null)
   if (!studyProductionLifecycleRef.current) {
     studyProductionLifecycleRef.current = new StudyLifecycleBoundary()
+  }
+  if (!studyIdentityClientRef.current) {
+    studyIdentityClientRef.current = createStudyIdentityClient()
+  }
+  if (!studyVerifiedRuntimeRef.current) {
+    studyVerifiedRuntimeRef.current = createVerifiedStudyRuntimeAdapter({
+      identityClient: studyIdentityClientRef.current,
+      lifecycle: studyProductionLifecycleRef.current,
+    })
   }
   const [state, setState] = useState<AppState>(loaded.state)
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
@@ -146,45 +163,109 @@ export default function App() {
   // M6: local-first cloud sync. Inert with no Supabase config; never blocks the UI.
   // Local writes above already persisted; this pushes async + pulls on open/reconnect.
   const sync = useSync(state, setState)
+  const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
 
   useEffect(() => {
     const productionSelected = studyEnabled && !studyPreviewEnabled
     const lifecycle = studyProductionLifecycleRef.current!
+    const runtime = studyVerifiedRuntimeRef.current!
     if (!productionSelected) {
       lifecycle.cancel('feature-disabled')
+      void runtime.cancel('feature-disabled')
       studyReadinessClientRef.current?.invalidate()
+      studySelectedProfileRef.current = null
       setStudyProductionStatus('disabled')
       return
     }
     if (!sync.status.user || sync.status.binding !== 'bound' || sync.status.provenance !== 'verified') {
       lifecycle.cancel('authorization-loss')
+      void runtime.cancel('authorization-loss')
       studyReadinessClientRef.current?.invalidate()
+      studySelectedProfileRef.current = null
       setStudyProductionStatus('unauthenticated')
       return
     }
+    if (!active) {
+      lifecycle.cancel('learner-switch')
+      void runtime.cancel('learner-switch')
+      studySelectedProfileRef.current = null
+      setStudyProductionStatus('unauthenticated')
+      return
+    }
+    const verifiedHostUserId = sync.status.user.id
+    const verifiedActiveProfileId = active.id
 
     const controller = new AbortController()
     const readiness = studyReadinessClientRef.current ?? createStudyProductionReadinessClient()
     studyReadinessClientRef.current = readiness
-    setStudyProductionStatus('checking')
-    void readiness.revalidate(controller.signal).then((result) => {
+    let refreshTimer: ReturnType<typeof setTimeout> | null = null
+    const scheduleReadinessCheck = (expiresAt: string) => {
+      if (refreshTimer) clearTimeout(refreshTimer)
+      const refreshIn = Math.max(250, Date.parse(expiresAt) - Date.now() - 500)
+      refreshTimer = setTimeout(() => { void reconcile() }, refreshIn)
+    }
+
+    async function reconcile() {
       if (controller.signal.aborted) return
-      setStudyProductionStatus(result.status)
-      if (result.status !== 'ready') lifecycle.cancel('authorization-loss')
-    }).catch(() => {
-      if (!controller.signal.aborted) {
-        lifecycle.cancel('authorization-loss')
-        setStudyProductionStatus('not-ready')
+      setStudyProductionStatus('checking')
+      try {
+        const previousProfile = studySelectedProfileRef.current
+        if (previousProfile && previousProfile !== verifiedActiveProfileId) {
+          await runtime.cancel('learner-switch')
+        }
+        studySelectedProfileRef.current = verifiedActiveProfileId
+        const result = await readiness.revalidate(controller.signal)
+        if (controller.signal.aborted) return
+        if (result.status !== 'ready') {
+          await runtime.applyReadiness(result)
+          if (!controller.signal.aborted) setStudyProductionStatus(result.status)
+          if (!controller.signal.aborted) scheduleReadinessCheck(result.expiresAt)
+          return
+        }
+        const accessToken = await getGatewayAccessToken()
+        if (!accessToken || controller.signal.aborted) {
+          await runtime.cancel('authorization-loss')
+          if (!controller.signal.aborted) setStudyProductionStatus('unauthenticated')
+          return
+        }
+        const launched = await runtime.launch({
+          featureEnabled: true,
+          authenticatedHostSession: true,
+          hostSessionKey: verifiedHostUserId,
+          accessToken,
+          selectedStudentRef: { kind: 'legacy-profile-id', value: verifiedActiveProfileId },
+          readiness: result,
+          signal: controller.signal,
+        })
+        if (controller.signal.aborted || launched.status !== 'ready') return
+        setStudyProductionStatus('ready')
+        // Refresh before the sanitized readiness lease expires. A failed or
+        // degraded refresh revokes the opaque session and cancels this epoch.
+        scheduleReadinessCheck(result.expiresAt)
+      } catch {
+        if (!controller.signal.aborted) {
+          await runtime.cancel('authorization-loss')
+          setStudyProductionStatus('not-ready')
+        }
       }
-    })
-    return () => controller.abort('navigation-away')
+    }
+    void reconcile()
+    return () => {
+      controller.abort('navigation-away')
+      if (refreshTimer) clearTimeout(refreshTimer)
+    }
   }, [
+    active?.id,
     studyEnabled,
     studyPreviewEnabled,
     sync.status.binding,
     sync.status.provenance,
     sync.status.user?.id,
   ])
+
+  useEffect(() => () => {
+    void studyVerifiedRuntimeRef.current?.cancel('navigation-away')
+  }, [])
 
   // SE-B attendance: when the signed-in girl's mission day is complete, append one
   // attendance day (invisible to her, append-only). recordAttendance is idempotent
@@ -199,7 +280,6 @@ export default function App() {
     setState((s) => patchProfile(s, attendanceId, (p) => recordAttendance(p, true, isoToday())))
   }, [attendanceId, attendanceTodayComplete])
 
-  const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
   const studyContextResult = buildHostStudyContext({
     enabled: studyPreviewEnabled,
     syncStatus: sync.status,
@@ -217,27 +297,6 @@ export default function App() {
     studyContextResult.status === 'ready',
   )
   const studyProductionSelected = studyEnabled && !studyPreviewEnabled
-  // Invoke the sole production composition root without manufacturing missing
-  // authority, registry, or runtime capabilities. Readiness is queried first;
-  // the remaining Session 17/runtime gaps stay fail-closed.
-  const studyProductionComposition = useMemo(() => createStudyProductionComposition({
-    featureFlagValue: studyProductionSelected ? 'true' : 'false',
-    authenticatedHostSession: Boolean(
-      sync.status.user &&
-      sync.status.binding === 'bound' &&
-      sync.status.provenance === 'verified',
-    ),
-    selectedLearnerAuthorized: false,
-    authority: null,
-    registry: null,
-    academicRuntime: null,
-    lifecycle: studyProductionLifecycleRef.current ?? undefined,
-  }), [
-    studyProductionSelected,
-    sync.status.binding,
-    sync.status.provenance,
-    sync.status.user,
-  ])
   const studyProductionUnavailableReason = studyProductionStatus === 'checking'
     ? 'Study is being checked. Please try again in a moment.'
     : studyProductionStatus === 'unauthenticated'
@@ -273,7 +332,9 @@ export default function App() {
     setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
   const signOut = () => {
     studyProductionLifecycleRef.current?.cancel('logout')
+    void studyVerifiedRuntimeRef.current?.cancel('logout')
     studyReadinessClientRef.current?.invalidate()
+    studySelectedProfileRef.current = null
     setParentStudyAuthorization(null)
     setState((s) => ({ ...s, activeProfileId: null }))
     setScreen({ kind: 'picker' })
@@ -483,6 +544,26 @@ export default function App() {
     screen.kind === 'studySettings' ||
     screen.kind === 'studySession'
   ) {
+    if (studyProductionSelected) {
+      const verifiedRuntime = studyVerifiedRuntimeRef.current
+      if (studyProductionStatus !== 'ready' || !verifiedRuntime?.isReady()) {
+        return (
+          <StudyUnavailable
+            reason={studyProductionUnavailableReason}
+            onBack={() => setScreen({ kind: 'home' })}
+          />
+        )
+      }
+      return (
+        <VerifiedProductionStudyHost
+          runtime={verifiedRuntime}
+          onBack={() => {
+            void verifiedRuntime.cancel('navigation-away')
+            setScreen({ kind: 'home' })
+          }}
+        />
+      )
+    }
     if (
       !studyPreviewReady ||
       !studyRuntime ||
@@ -494,7 +575,7 @@ export default function App() {
       return (
         <StudyUnavailable
           reason={
-            studyProductionSelected || !studyProductionComposition.available
+            studyProductionSelected
               ? studyProductionUnavailableReason
               : studyContextResult.status === 'unavailable'
               ? studyContextResult.reason
@@ -745,6 +826,51 @@ function StudyUnavailable({ reason, onBack }: { reason: string; onBack: () => vo
         <p className="mt-2">{reason}</p>
         <p className="mt-2 text-sm">No Study persistence or safety request was made.</p>
         <button className="mt-4 min-h-11 rounded-lg border border-amber-500 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
+      </div>
+    </main>
+  )
+}
+
+function VerifiedProductionStudyHost({
+  runtime,
+  onBack,
+}: {
+  runtime: VerifiedStudyRuntimeAdapter
+  onBack: () => void
+}) {
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const operationRef = useRef(`production-dashboard:${Date.now()}:${Math.random().toString(36).slice(2)}`)
+  const [status, setStatus] = useState<'loading' | 'ready' | 'unavailable'>('loading')
+
+  useEffect(() => {
+    const controller = new AbortController()
+    void runtime.execute({
+      operation: 'dashboard:read',
+      request: Object.freeze({}),
+      operationRef: operationRef.current,
+      signal: controller.signal,
+    }).then(() => {
+      if (!controller.signal.aborted) setStatus('ready')
+    }).catch(() => {
+      if (!controller.signal.aborted) setStatus('unavailable')
+    })
+    return () => controller.abort('navigation-away')
+  }, [runtime])
+
+  useEffect(() => { headingRef.current?.focus() }, [status])
+
+  return (
+    <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900" aria-busy={status === 'loading'}>
+      <div className="mx-auto max-w-xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h1 ref={headingRef} className="text-2xl font-bold" tabIndex={-1}>Verified Study workspace</h1>
+        {status === 'loading' && <p className="mt-2" role="status">Checking your current Study planÃ¢â‚¬Â¦</p>}
+        {status === 'ready' && (
+          <p className="mt-2" role="status">Your Study workspace is ready for this learner.</p>
+        )}
+        {status === 'unavailable' && (
+          <p className="mt-2" role="alert">Study took a safe pause. No late result was applied.</p>
+        )}
+        <button className="mt-4 min-h-11 rounded-lg border border-slate-400 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
       </div>
     </main>
   )

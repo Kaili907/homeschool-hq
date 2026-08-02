@@ -30,6 +30,17 @@ export interface StudyIdentityClient {
     readonly requiredCapability: StudyStudentCapability
     readonly signal?: AbortSignal
   }): Promise<VerifiedStudySession>
+  executeAcademicOperation(input: {
+    readonly operation:
+      | 'dashboard:read'
+      | 'calendar:read'
+      | 'session:begin'
+      | 'session:transition'
+      | 'checkpoint:read'
+      | 'checkpoint:compare-and-swap'
+    readonly request: Readonly<Record<string, unknown>>
+    readonly signal?: AbortSignal
+  }): Promise<unknown>
   revoke(signal?: AbortSignal): Promise<void>
   clear(): void
   hasSession(): boolean
@@ -127,6 +138,47 @@ export function createStudyIdentityClient(
         signal?.aborted
       ) throw new StudyIdentityClientError('student-session-invalid')
       return verified
+    },
+
+    async executeAcademicOperation({ operation, request, signal }) {
+      const current = sessionReference
+      const requestGeneration = generation
+      if (!current) throw new StudyIdentityClientError('student-session-invalid')
+      let response: Response
+      try {
+        response = await fetchImpl('/api/study/academic-runtime', {
+          method: 'POST',
+          signal,
+          headers: {
+            Authorization: `Bearer ${current}`,
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({ schemaVersion: 1, operation, request }),
+        })
+      } catch {
+        throw new StudyIdentityClientError('service-not-ready')
+      }
+      if (!response.ok) {
+        if (response.status === 401 && requestGeneration === generation && sessionReference === current) {
+          generation += 1
+          sessionReference = null
+          throw new StudyIdentityClientError('student-session-invalid')
+        }
+        throw mappedError(response.status)
+      }
+      const result = await json(response)
+      if (
+        !result || typeof result !== 'object' || Array.isArray(result) ||
+        Object.keys(result).length !== 4 ||
+        (result as Record<string, unknown>).schemaVersion !== 1 ||
+        (result as Record<string, unknown>).status !== 'ok' ||
+        (result as Record<string, unknown>).operation !== operation ||
+        !Object.hasOwn(result, 'body')
+      ) throw new StudyIdentityClientError('service-not-ready')
+      if (requestGeneration !== generation || sessionReference !== current || signal?.aborted) {
+        throw new StudyIdentityClientError('student-session-invalid')
+      }
+      return (result as Record<string, unknown>).body
     },
 
     async revoke(signal) {

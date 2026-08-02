@@ -14,6 +14,10 @@ function readyDependencies(overrides = {}) {
     },
     durablePorts: {
       refreshReadiness: vi.fn(async () => true),
+      readAdultReviewReadiness: vi.fn(async () => ({
+        state: 'ready',
+        adultReviewInAppDeliveryPolicy: 'approved',
+      })),
     },
     academicReadiness: vi.fn(async () => 'ready'),
     classifier: {
@@ -21,6 +25,14 @@ function readyDependencies(overrides = {}) {
       circuitState: () => 'closed',
     },
     session17: {
+      authorizedRecipientResolver: vi.fn(async () => 'ready'),
+      rateLimiter: vi.fn(async () => 'ready'),
+      monitoringSink: vi.fn(async () => 'ready'),
+      workerCredentialVerifier: vi.fn(async () => 'ready'),
+      workerScheduler: vi.fn(async () => 'ready'),
+      leaseOperations: vi.fn(async () => 'ready'),
+      attemptStore: vi.fn(async () => 'ready'),
+      operationalReadiness: vi.fn(async () => 'ready'),
       deliveryProvider: vi.fn(async () => 'ready'),
       receiptValidator: vi.fn(async () => 'ready'),
     },
@@ -60,12 +72,14 @@ describe('Study production readiness assembly', () => {
     expect(cached).toBe(first)
     expect(dependencies.identityVerifier.readiness).toHaveBeenCalledTimes(1)
     expect(dependencies.durablePorts.refreshReadiness).toHaveBeenCalledTimes(1)
+    expect(dependencies.durablePorts.readAdultReviewReadiness).toHaveBeenCalledTimes(1)
 
     currentTime = 12_001
     const refreshed = await service.check()
     expect(refreshed).not.toBe(first)
     expect(dependencies.identityVerifier.readiness).toHaveBeenCalledTimes(2)
     expect(dependencies.durablePorts.refreshReadiness).toHaveBeenCalledTimes(2)
+    expect(dependencies.durablePorts.readAdultReviewReadiness).toHaveBeenCalledTimes(2)
   })
 
   it('allows ready only with every real dependency and degrades on live classifier health', async () => {
@@ -79,6 +93,38 @@ describe('Study production readiness assembly', () => {
     expect(degraded.registrations).toContainEqual({
       dependency: 'production-classifier',
       status: 'degraded',
+    })
+  })
+
+  it('requires explicit server-side approval for durable in-app delivery', async () => {
+    const missing = await createStudyProductionReadinessService(readyDependencies({
+      durablePorts: { refreshReadiness: vi.fn(async () => true) },
+    })).check()
+    expect(missing.status).toBe('not-ready')
+    expect(missing.adultReviewInAppDeliveryPolicy).toBe('not-approved')
+
+    const deniedDependencies = readyDependencies()
+    deniedDependencies.durablePorts.readAdultReviewReadiness = vi.fn(async () => ({
+      state: 'not-ready',
+      adultReviewInAppDeliveryPolicy: 'not-approved',
+    }))
+    const denied = await createStudyProductionReadinessService(deniedDependencies).check()
+    expect(denied.status).toBe('not-ready')
+    expect(denied.registrations).toContainEqual({
+      dependency: 'delivery-provider',
+      status: 'not-ready',
+    })
+  })
+
+  it('blocks readiness when any internal Session 17 operation is absent', async () => {
+    const session17 = readyDependencies().session17
+    const snapshot = await createStudyProductionReadinessService(readyDependencies({
+      session17: { ...session17, workerCredentialVerifier: undefined },
+    })).check()
+    expect(snapshot.status).toBe('not-ready')
+    expect(snapshot.registrations).toContainEqual({
+      dependency: 'outbox-store',
+      status: 'not-ready',
     })
   })
 

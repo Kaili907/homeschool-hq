@@ -30,6 +30,30 @@ function array(value) {
   return value
 }
 
+const WORKER_REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$/
+
+function workerCredentialHeaders(env, workerContext) {
+  const workerIdentity = (env?.ACADEMY_STUDY_ADULT_REVIEW_WORKER_ID || '').trim()
+  const workerCredential = (env?.ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL || '').trim()
+  const credentialVersion = (env?.ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL_VERSION || '').trim()
+  const configurationVersion = (env?.ACADEMY_STUDY_ADULT_REVIEW_WORKER_CONFIGURATION_VERSION || '').trim()
+  if (
+    !workerContext ||
+    workerContext.workerIdentity !== workerIdentity ||
+    workerContext.credentialVersion !== credentialVersion ||
+    !WORKER_REF.test(workerIdentity) ||
+    !WORKER_REF.test(credentialVersion) ||
+    !WORKER_REF.test(configurationVersion) ||
+    workerCredential.length < 32 ||
+    workerCredential.length > 512
+  ) throw new Error('worker_credential_not_configured')
+  return Object.freeze({
+    'x-academy-study-worker-credential': workerCredential,
+    'x-academy-study-worker-credential-version': credentialVersion,
+    'x-academy-study-worker-configuration-version': configurationVersion,
+  })
+}
+
 const PROPOSAL_KEYS = [
   'schemaVersion', 'proposalId', 'householdId', 'studentId', 'sessionId', 'category', 'classification',
   'urgency', 'reasonCodes', 'classifierVersion', 'occurredAt', 'idempotencyKey', 'deliveryState',
@@ -44,8 +68,11 @@ export function createSupabaseServiceRpc(options = {}) {
 
   return Object.freeze({
     isConfigured: () => config !== null && typeof fetchImpl === 'function',
-    async call(name, parameters = {}) {
+    async call(name, parameters = {}, callOptions = {}) {
       if (!config || typeof fetchImpl !== 'function') throw new Error('durable_port_not_configured')
+      const authorityHeaders = callOptions.requireWorkerCredential === true
+        ? workerCredentialHeaders(env, callOptions.workerContext)
+        : {}
       const controller = new AbortController()
       const timer = setTimeout(() => controller.abort(), timeoutMs)
       let response
@@ -59,6 +86,7 @@ export function createSupabaseServiceRpc(options = {}) {
             Authorization: `Bearer ${config.serviceKey}`,
             'content-type': 'application/json',
             accept: 'application/json',
+            ...authorityHeaders,
           },
           body: JSON.stringify(parameters),
         })
@@ -94,6 +122,19 @@ export function createSupabaseStudySafetyPorts(options = {}) {
       schemaReady = false
     }
     return schemaReady
+  }
+
+  async function readAdultReviewReadiness() {
+    const result = await rpc.call('academy_study_adult_review_readiness_v2')
+    if (
+      !result || typeof result !== 'object' || Array.isArray(result) ||
+      !['ready', 'not-ready', 'degraded'].includes(result.state) ||
+      !['approved', 'not-approved'].includes(result.adultReviewInAppDeliveryPolicy)
+    ) throw new Error('durable_port_contract')
+    return Object.freeze({
+      state: result.state,
+      adultReviewInAppDeliveryPolicy: result.adultReviewInAppDeliveryPolicy,
+    })
   }
 
   const store = Object.freeze({
@@ -218,6 +259,7 @@ export function createSupabaseStudySafetyPorts(options = {}) {
 
   return Object.freeze({
     refreshReadiness,
+    readAdultReviewReadiness,
     proposalPersistence: store,
     outbox: store,
     recipientResolver,

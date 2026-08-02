@@ -9,6 +9,7 @@ begin
     'study_adult_review_receipt_events',
     'study_parent_notifications',
     'study_adult_review_worker_registry',
+    'study_safety_rate_limit_scopes',
     'study_adult_review_route_capabilities',
     'study_adult_review_audit_events'
   ]
@@ -69,6 +70,49 @@ begin
        'execute'
      ) then
     raise exception 'Session 17 guardian projection ACL probe failed';
+  end if;
+
+  if exists (
+    select 1
+    from unnest(array[
+      'public.academy_study_claim_adult_review_proposals_v1(timestamptz, integer, integer)',
+      'public.academy_study_resolve_adult_recipients_v1(text)',
+      'public.academy_study_reauthorize_adult_route_v1(jsonb)',
+      'public.academy_study_record_recipient_resolution_v1(jsonb)',
+      'public.academy_study_claim_delivery_jobs_v1(timestamptz, integer, integer)',
+      'public.academy_study_record_delivery_attempt_v1(jsonb)',
+      'public.academy_study_record_delivery_receipt_v1(jsonb)',
+      'public.academy_study_record_delivery_outcome_v1(jsonb)'
+    ]) as rpc(signature)
+    where has_function_privilege('service_role', rpc.signature, 'execute')
+  ) then
+    raise exception 'Session 17 superseded v1 writable RPC remains executable';
+  end if;
+
+  if (
+    select count(*)
+    from academy_private.study_safety_rate_limit_scopes
+    where enabled and scope in (
+      'study-safety-classify', 'study-safety-classify-subject-route',
+      'classification', 'proposal-creation', 'recipient-resolution',
+      'worker-claim', 'delivery-attempt', 'parent-notification-read'
+    )
+  ) <> 8 then
+    raise exception 'Session 17 canonical rate-limit scope registry incomplete';
+  end if;
+
+  if exists (
+    select 1
+    from pg_catalog.pg_proc as procedure
+    join pg_catalog.pg_namespace as namespace
+      on namespace.oid = procedure.pronamespace
+    where namespace.nspname in ('public', 'academy_private')
+      and procedure.prokind = 'f'
+      and pg_catalog.pg_get_functiondef(procedure.oid) ~
+        '(clock_timestamp\\(\\)|transaction_timestamp\\(\\)|now\\(\\))'
+      and procedure.provolatile = 'i'
+  ) then
+    raise exception 'Session 17 time-dependent function declared immutable';
   end if;
 end;
 $$;

@@ -94,7 +94,9 @@ describe('local-only Study ports fail closed', () => {
   })
 
   it('provides exact resume and idempotent partial continuation', async () => {
-    const { ports } = createLocalDevelopmentStudyPorts()
+    const { ports } = createLocalDevelopmentStudyPorts({
+      now: () => new Date(SYNTHETIC_NOW),
+    })
     const { entry, scope } = await createSyntheticMathBlock(ports, { suffix: 'continuation' })
     await ports.calendar.start(scope, entry.blockRef, at(1))
     await ports.calendar.completeCurrentSegment(scope, entry.blockRef, entry.segments[0]!.segmentRef, at(2))
@@ -106,7 +108,7 @@ describe('local-only Study ports fail closed', () => {
       `${entry.blockRef}:continuation:one`,
       'continuation:one',
       '2026-08-02T09:00',
-      '2026-08-02T13:00:00.000Z',
+      at(86_400),
       '2026-08-02',
       at(4),
     )
@@ -116,12 +118,22 @@ describe('local-only Study ports fail closed', () => {
       `${entry.blockRef}:continuation:one`,
       'continuation:one',
       '2026-08-02T09:00',
-      '2026-08-02T13:00:00.000Z',
+      at(86_400),
       '2026-08-02',
       at(5),
     )
     expect(first.created).toBe(true)
     expect(replay.created).toBe(false)
     expect(replay.entry.blockRef).toBe(first.entry.blockRef)
+  })
+
+  it('uses the injected fixture clock independently of wall-clock date and timezone', async () => {
+    const { ports } = createLocalDevelopmentStudyPorts({
+      now: () => new Date(SYNTHETIC_NOW),
+    })
+    const { entry, scope } = await createSyntheticMathBlock(ports, { suffix: 'timezone-independent' })
+    await expect(ports.calendar.start(scope, entry.blockRef, at(1))).resolves.toMatchObject({
+      state: 'active',
+    })
   })
 })

@@ -1,11 +1,93 @@
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
 const CHANNELS = new Set(['email', 'in-app', 'sms'])
+const OPAQUE_REF = Object.freeze({
+  householdRef: /^household:[0-9a-f]{64}$/,
+  learnerRef: /^learner:[0-9a-f]{64}$/,
+  recipientRef: /^recipient:[0-9a-f]{64}$/,
+  permissionRef: /^permission:[0-9a-f]{64}$/,
+  routeRef: /^route:[0-9a-f]{64}$/,
+})
+const TEST_RESOLUTIONS = new WeakSet()
 
 function validRef(value) {
   return typeof value === 'string' && REF.test(value)
 }
 
-export function validRecipientResolution(value) {
+function exactKeys(value, expected) {
+  const keys = Object.keys(value)
+  return keys.length === expected.length && keys.every((key) => expected.includes(key))
+}
+
+function positiveRevision(value) {
+  return Number.isSafeInteger(value) && value > 0
+}
+
+function validStableRecipientReference(value) {
+  return Boolean(
+    value && typeof value === 'object' && !Array.isArray(value) &&
+    exactKeys(value, [
+      'schemaVersion', 'recipientRef', 'permissionRef', 'permissionRevision',
+      'recipientVersion', 'effectiveAt', 'route', 'routeRef', 'routeRevision',
+    ]) &&
+    value.schemaVersion === 2 &&
+    value.recipientVersion === 2 &&
+    OPAQUE_REF.recipientRef.test(value.recipientRef) &&
+    OPAQUE_REF.permissionRef.test(value.permissionRef) &&
+    positiveRevision(value.permissionRevision) &&
+    typeof value.effectiveAt === 'string' && Number.isFinite(Date.parse(value.effectiveAt)) &&
+    CHANNELS.has(value.route) &&
+    OPAQUE_REF.routeRef.test(value.routeRef) &&
+    positiveRevision(value.routeRevision),
+  )
+}
+
+function validExpectedBinding(expected) {
+  return Boolean(
+    expected && typeof expected === 'object' && !Array.isArray(expected) &&
+    exactKeys(expected, ['householdRef', 'learnerRef', 'proposalRef', 'proposalRevision']) &&
+    OPAQUE_REF.householdRef.test(expected.householdRef) &&
+    OPAQUE_REF.learnerRef.test(expected.learnerRef) &&
+    validRef(expected.proposalRef) &&
+    positiveRevision(expected.proposalRevision),
+  )
+}
+
+function validLiveResolution(value, expected) {
+  if (
+    !value || value.state !== 'resolved' ||
+    !exactKeys(value, [
+      'householdRef', 'learnerRef', 'proposalRef', 'proposalRevision', 'state',
+      'resolutionRef', 'policyVersion', 'recipients',
+    ]) ||
+    !OPAQUE_REF.householdRef.test(value.householdRef) ||
+    !OPAQUE_REF.learnerRef.test(value.learnerRef) ||
+    !validRef(value.proposalRef) ||
+    !positiveRevision(value.proposalRevision) ||
+    !/^resolution:[0-9a-f]{64}$/.test(value.resolutionRef) ||
+    !validRef(value.policyVersion) ||
+    !Array.isArray(value.recipients) ||
+    value.recipients.length < 1 || value.recipients.length > 32
+  ) return false
+  if (expected !== undefined) {
+    if (!validExpectedBinding(expected)) return false
+    if (
+      value.householdRef !== expected.householdRef ||
+      value.learnerRef !== expected.learnerRef ||
+      value.proposalRef !== expected.proposalRef ||
+      value.proposalRevision !== expected.proposalRevision
+    ) return false
+  }
+  const routeTuples = new Set()
+  for (const recipient of value.recipients) {
+    if (!validStableRecipientReference(recipient)) return false
+    const tuple = `${value.proposalRef}\u001f${recipient.recipientRef}\u001f${recipient.routeRef}`
+    if (routeTuples.has(tuple)) return false
+    routeTuples.add(tuple)
+  }
+  return true
+}
+
+function validTestRecipientResolution(value) {
   if (
     !value || value.state !== 'resolved' ||
     !/^resolution:[A-Za-z0-9._/-]{1,96}$/.test(value.resolutionRef) ||
@@ -49,6 +131,18 @@ export function validRecipientResolution(value) {
   return true
 }
 
+/**
+ * Validates the exact server-derived v2 envelope. Supplying `expected` binds
+ * the response to the server-owned proposal claim and rejects stale/replayed
+ * responses. The legacy grouped shape is accepted only for objects minted by
+ * createTestRecipientResolver and cannot cross a JSON/RPC boundary.
+ */
+export function validRecipientResolution(value, expected) {
+  return TEST_RESOLUTIONS.has(value)
+    ? expected === undefined && validTestRecipientResolution(value)
+    : validLiveResolution(value, expected)
+}
+
 /** Test-only resolver containing opaque refs and explicit permission evidence. */
 export function createTestRecipientResolver({ proposalRef: boundProposalRef, recipients, revokedRouteRefs = new Set() }) {
   if (!validRef(boundProposalRef)) throw new TypeError('invalid_test_proposal_ref')
@@ -65,14 +159,17 @@ export function createTestRecipientResolver({ proposalRef: boundProposalRef, rec
       routes: recipient.routes.map((route) => ({ channel: route.channel, routeRef: route.routeRef })),
     })),
   }
-  if (!validRecipientResolution(resolution)) throw new TypeError('invalid_test_recipients')
+  if (!validTestRecipientResolution(resolution)) throw new TypeError('invalid_test_recipients')
   return Object.freeze({
     isDurable: false,
     isReady: () => true,
     async resolve({ proposalRef }) {
-      return proposalRef === boundProposalRef
-        ? structuredClone(resolution)
-        : { state: 'indeterminate', reasonCode: 'invalid-proposal-ref' }
+      if (proposalRef !== boundProposalRef) {
+        return { state: 'indeterminate', reasonCode: 'invalid-proposal-ref' }
+      }
+      const testResolution = structuredClone(resolution)
+      TEST_RESOLUTIONS.add(testResolution)
+      return testResolution
     },
     async reauthorizeForDelivery(input) {
       const { recipientRef, routeRef } = input

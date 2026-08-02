@@ -11,6 +11,7 @@ export const STUDY_SESSION_CAPABILITIES = Object.freeze([
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 const OPAQUE_ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
+const NON_PRODUCTION_ID = /(?:^|[._:/-])(sentinel|demo|preview|fixture|synthetic|test|local-release-candidate)(?:$|[._:/-])/i
 const CAPABILITIES = new Set(STUDY_SESSION_CAPABILITIES)
 const MAX_AUTHORIZATION_LENGTH = 128
 const ISSUED_KEYS = new Set([
@@ -23,6 +24,9 @@ const VERIFIED_KEYS = new Set([
   'learnerSessionId', 'sessionEpoch', 'sessionVersion',
   'authorizationRevision', 'issuedAt', 'expiresAt', 'contractVersion',
   'issuerVersion', 'scope',
+])
+const ISSUED_ENVELOPE_KEYS = new Set([
+  'schemaVersion', 'status', 'sessionReference', 'expiresAt',
 ])
 
 function hasExactKeys(value, expected) {
@@ -37,6 +41,10 @@ export function validUuid(value) {
 
 export function validOpaqueId(value) {
   return typeof value === 'string' && OPAQUE_ID.test(value)
+}
+
+export function validProductionSelectorValue(value) {
+  return validOpaqueId(value) && !NON_PRODUCTION_ID.test(value)
 }
 
 export function validCapability(value) {
@@ -113,4 +121,33 @@ export function isVerifiedGrant(value) {
     value.scope.length > 0 &&
     new Set(value.scope).size === value.scope.length &&
     value.scope.every(validCapability)
+}
+
+export function isIssuedGrantEnvelope(value) {
+  return hasExactKeys(value, ISSUED_ENVELOPE_KEYS) &&
+    value?.schemaVersion === STUDY_IDENTITY_SCHEMA_VERSION &&
+    value?.status === 'issued' &&
+    STUDY_SESSION_REFERENCE.test(value?.sessionReference ?? '') &&
+    Number.isFinite(Date.parse(value?.expiresAt))
+}
+
+/** Browser projection: no household, learner, grant, scope, revision, or epoch authority. */
+export function issuedGrantEnvelope(value) {
+  if (!isIssuedGrant(value)) return null
+  return Object.freeze({
+    schemaVersion: STUDY_IDENTITY_SCHEMA_VERSION,
+    status: 'issued',
+    sessionReference: value.sessionReference,
+    expiresAt: value.expiresAt,
+  })
+}
+
+/** Browser verification proves only that the opaque closure may continue. */
+export function verifiedGrantEnvelope(value) {
+  if (!isVerifiedGrant(value)) return null
+  return Object.freeze({
+    schemaVersion: STUDY_IDENTITY_SCHEMA_VERSION,
+    status: 'verified',
+    expiresAt: value.expiresAt,
+  })
 }

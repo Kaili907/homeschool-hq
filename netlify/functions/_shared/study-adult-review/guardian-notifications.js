@@ -10,6 +10,51 @@ function config(env) {
   }
 }
 
+function exactObject(value, keys) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error('guardian_notification_port_contract')
+  }
+  const actual = Object.keys(value)
+  if (actual.length !== keys.length || actual.some((key) => !keys.includes(key))) {
+    throw new Error('guardian_notification_port_contract')
+  }
+  return value
+}
+
+function validTimestamp(value) {
+  return typeof value === 'string' && Number.isFinite(Date.parse(value))
+}
+
+function validateListResult(value) {
+  const result = exactObject(value, ['notifications'])
+  if (!Array.isArray(result.notifications) || result.notifications.length > 100) {
+    throw new Error('guardian_notification_port_contract')
+  }
+  for (const entry of result.notifications) {
+    exactObject(entry, [
+      'notificationId', 'title', 'reasonCategory', 'urgency',
+      'createdAt', 'deliveredAt', 'read', 'actionRef',
+    ])
+    if (
+      !/^notification:[0-9a-f]{64}$/.test(entry.notificationId) ||
+      entry.title !== 'Study check-in needs your review' ||
+      !['immediate-safety', 'possible-safety', 'review-required'].includes(entry.reasonCategory) ||
+      !['urgent', 'uncertain', 'review-required'].includes(entry.urgency) ||
+      !validTimestamp(entry.createdAt) || !validTimestamp(entry.deliveredAt) ||
+      typeof entry.read !== 'boolean' ||
+      typeof entry.actionRef !== 'string' ||
+      !/^adult-review:[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/.test(entry.actionRef)
+    ) throw new Error('guardian_notification_port_contract')
+  }
+  return result
+}
+
+function validateReadResult(value) {
+  const result = exactObject(value, ['read'])
+  if (result.read !== true) throw new Error('guardian_notification_port_contract')
+  return result
+}
+
 export function createGuardianNotificationPort(options = {}) {
   const env = options.env ?? process.env
   const fetchImpl = options.fetchImpl ?? globalThis.fetch
@@ -36,11 +81,7 @@ export function createGuardianNotificationPort(options = {}) {
         body: JSON.stringify(parameters),
       })
       if (!response.ok) throw new Error('guardian_notification_not_available')
-      const value = await response.json()
-      if (!value || typeof value !== 'object' || Array.isArray(value)) {
-        throw new Error('guardian_notification_port_contract')
-      }
-      return value
+      return await response.json()
     } catch (error) {
       if (error instanceof Error && error.message === 'guardian_notification_not_available') throw error
       throw new Error('guardian_notification_port_unavailable')
@@ -52,12 +93,22 @@ export function createGuardianNotificationPort(options = {}) {
   return Object.freeze({
     isDurable: true,
     isReady: () => configured !== null && typeof fetchImpl === 'function',
-    list: ({ accessToken, limit = 50 }) => call(
-      'academy_study_list_parent_notifications_v1', { p_limit: limit }, accessToken,
-    ),
-    markRead: ({ accessToken, notificationRef }) => call(
-      'academy_study_mark_parent_notification_read_v1',
-      { p_notification_ref: notificationRef }, accessToken,
-    ),
+    async list({ accessToken, limit = 50 }) {
+      if (!Number.isSafeInteger(limit) || limit < 1 || limit > 100) {
+        throw new TypeError('invalid_guardian_notification_limit')
+      }
+      return validateListResult(await call(
+        'academy_study_list_parent_notifications_v1', { p_limit: limit }, accessToken,
+      ))
+    },
+    async markRead({ accessToken, notificationRef }) {
+      if (typeof notificationRef !== 'string' || !/^notification:[0-9a-f]{64}$/.test(notificationRef)) {
+        throw new TypeError('invalid_guardian_notification_ref')
+      }
+      return validateReadResult(await call(
+        'academy_study_mark_parent_notification_read_v1',
+        { p_notification_ref: notificationRef }, accessToken,
+      ))
+    },
   })
 }

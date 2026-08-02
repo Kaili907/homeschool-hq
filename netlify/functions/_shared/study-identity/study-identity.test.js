@@ -43,6 +43,12 @@ const VERIFIED = Object.freeze({
   householdId: HOUSEHOLD_ID,
   sessionVersion: 1,
 })
+const ISSUED_ENVELOPE = Object.freeze({
+  schemaVersion: 1,
+  status: 'issued',
+  sessionReference: SESSION_REFERENCE,
+  expiresAt: ISSUED.expiresAt,
+})
 
 function issueEvent(body = {
   schemaVersion: 1,
@@ -68,7 +74,7 @@ function sessionEvent(method = 'POST', overrides = {}) {
 
 describe('verified guardian Study launch gateway', () => {
   it('accepts only a learner selector and passes server-derived auth context to the issuer', async () => {
-    const issue = vi.fn().mockResolvedValue(ISSUED)
+    const issue = vi.fn().mockResolvedValue(ISSUED_ENVELOPE)
     const handler = createStudySessionIssueHandler({
       authVerifier: vi.fn().mockResolvedValue({
         ok: true,
@@ -79,6 +85,13 @@ describe('verified guardian Study launch gateway', () => {
     })
     const response = await handler(issueEvent())
     expect(response.statusCode).toBe(201)
+    expect(JSON.parse(response.body)).toEqual({
+      schemaVersion: 1,
+      status: 'issued',
+      sessionReference: SESSION_REFERENCE,
+      expiresAt: ISSUED.expiresAt,
+    })
+    expect(response.body).not.toMatch(/studentId|householdId|grantId|scope|revision|epoch/i)
     expect(issue).toHaveBeenCalledWith({
       accessToken: 'verified-supabase-bearer',
       selectedStudentRef: { kind: 'academy-student-id', value: STUDENT_ID },
@@ -86,7 +99,7 @@ describe('verified guardian Study launch gateway', () => {
   })
 
   it('accepts a bounded legacy id only as a selector and rejects ambiguous authority fields', async () => {
-    const issue = vi.fn().mockResolvedValue(ISSUED)
+    const issue = vi.fn().mockResolvedValue(ISSUED_ENVELOPE)
     const handler = createStudySessionIssueHandler({
       authVerifier: vi.fn().mockResolvedValue({
         ok: true,
@@ -105,7 +118,10 @@ describe('verified guardian Study launch gateway', () => {
       selectedStudentRef: { kind: 'legacy-profile-id', value: 'learner-p1' },
     })
 
-    for (const value of ['', '../learner', 'learner name', 'x'.repeat(129)]) {
+    for (const value of [
+      '', '../learner', 'learner name', 'x'.repeat(129),
+      'learner:local-release-candidate', 'learner:demo', 'synthetic:student',
+    ]) {
       expect((await handler(issueEvent({
         schemaVersion: 1,
         selectedStudentRef: { kind: 'legacy-profile-id', value },
@@ -163,7 +179,14 @@ describe('trusted learner-session gateway', () => {
         readiness: vi.fn().mockResolvedValue({ status: 'ready' }),
       },
     })
-    expect((await handler(sessionEvent())).statusCode).toBe(200)
+    const verifiedResponse = await handler(sessionEvent())
+    expect(verifiedResponse.statusCode).toBe(200)
+    expect(JSON.parse(verifiedResponse.body)).toEqual({
+      schemaVersion: 1,
+      status: 'verified',
+      expiresAt: VERIFIED.expiresAt,
+    })
+    expect(verifiedResponse.body).not.toMatch(/student|household|grant|scope|revision|epoch/i)
     expect(verify).toHaveBeenCalledWith({
       sessionReference: SESSION_REFERENCE,
       requiredCapability: 'student:attempts:create',
@@ -213,12 +236,12 @@ describe('Study identity Supabase RPC adapters', () => {
   }
 
   it('uses the guardian bearer and sends only the selected student to issuance', async () => {
-    const fetchImpl = vi.fn().mockResolvedValue(new Response(JSON.stringify(ISSUED), { status: 200 }))
+    const fetchImpl = vi.fn().mockResolvedValue(new Response(JSON.stringify(ISSUED_ENVELOPE), { status: 200 }))
     const result = await createGuardianStudySessionIssuer({ env, fetchImpl }).issue({
       accessToken: 'verified-guardian-bearer',
       selectedStudentRef: { kind: 'academy-student-id', value: STUDENT_ID },
     })
-    expect(result).toEqual(ISSUED)
+    expect(result).toEqual(ISSUED_ENVELOPE)
     const [url, init] = fetchImpl.mock.calls[0]
     expect(url).toBe('https://academy.supabase.co/rest/v1/rpc/academy_study_issue_guardian_launch_v1')
     expect(init.headers.apikey).toBe('public-anon-key')

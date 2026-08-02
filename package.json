@@ -8,12 +8,15 @@
     "build": "vite build && node scripts/stamp-sw.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --exclude adaptive-tutor/** --exclude supabase/** --maxWorkers 1 && vitest run supabase/academy-profiles-base.db.test.ts && vitest run supabase/academy-student-identity.db.test.ts && vitest run supabase/academy-foundation-integration.db.test.ts && vitest run supabase/academy-cas.db.test.ts --testTimeout 120000 && vitest run supabase/academy-cas.postgres.test.ts && npm run test:study-db && npm run test:migrations",
+    "test": "vitest run --exclude adaptive-tutor/** --exclude supabase/** --maxWorkers 1 && vitest run supabase/academy-profiles-base.db.test.ts && vitest run supabase/academy-student-identity.db.test.ts && vitest run supabase/academy-foundation-integration.db.test.ts && vitest run supabase/academy-cas.db.test.ts --testTimeout 120000 && vitest run supabase/academy-cas.postgres.test.ts && npm run test:study-db && npm run test:study-adult-review-db && npm run test:study-final-db && npm run test:migrations",
     "test:host": "vitest run --exclude adaptive-tutor/** --exclude supabase/** --maxWorkers 1",
     "test:ai-gateways": "vitest run tests/netlify-functions/anthropic.test.js tests/netlify-functions/tts.test.js --maxWorkers 1",
     "test:study-safety": "vitest run --config netlify/functions/_shared/study-safety/vitest.config.mjs --maxWorkers 1",
     "test:study-adult-review": "vitest run src/study/adult-review netlify/functions/_shared/study-delivery netlify/functions/_shared/study-monitoring netlify/functions/_shared/study-rate-limit netlify/functions/_shared/study-adult-review-operations --config netlify/functions/_shared/study-adult-review-operations/vitest.config.mjs --maxWorkers 1",
     "test:study-adult-review-db": "vitest run supabase/study-engine-adult-review.db.test.ts --configLoader runner --testTimeout 120000 --maxWorkers 1",
+    "test:study-final-db": "vitest run supabase/study-engine-final-production.db.test.ts --configLoader runner --testTimeout 120000 --maxWorkers 1",
+    "test:study-migration-preflight": "vitest run scripts/study-migration-preflight.test.ts --maxWorkers 1",
+    "preflight:study-migrations": "node scripts/study-migration-preflight.mjs --evidence docs/study-engine-final-production/hosted-foundation-baseline-evidence.json --manifest docs/study-engine-final-production/migration-manifest.json",
     "test:academy-db": "vitest run supabase/academy-profiles-base.db.test.ts && vitest run supabase/academy-student-identity.db.test.ts && vitest run supabase/academy-foundation-integration.db.test.ts && vitest run supabase/academy-cas.db.test.ts --testTimeout 120000 && vitest run supabase/academy-cas.postgres.test.ts",
     "test:academy-db:base": "vitest run supabase/academy-profiles-base.db.test.ts",
     "test:academy-db:identity": "vitest run supabase/academy-student-identity.db.test.ts",
@@ -23,7 +26,7 @@
     "test:sync-db": "vitest run supabase/academy-cas.db.test.ts --testTimeout 120000",
     "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts",
     "test:study-db": "vitest run supabase/study-engine.db.test.ts --configLoader runner --testTimeout 120000",
-    "test:migrations": "vitest run supabase/study-engine-migrations.db.test.ts --configLoader runner --testTimeout 120000"
+    "test:migrations": "vitest run supabase/study-engine-migrations.db.test.ts supabase/study-engine-migration-manifest.test.ts --configLoader runner --testTimeout 120000"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.8",
