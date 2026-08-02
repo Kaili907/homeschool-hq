@@ -33,6 +33,26 @@
   status = 200
 
 [[redirects]]
+  from = "/api/study/parent-notifications"
+  to = "/.netlify/functions/study-parent-notifications"
+  status = 200
+
+[[redirects]]
+  from = "/api/study/adult-review/health"
+  to = "/.netlify/functions/study-adult-review-health"
+  status = 200
+
+[[redirects]]
+  from = "/api/study/adult-review/deliver"
+  to = "/.netlify/functions/study-adult-review-deliver"
+  status = 200
+
+[[redirects]]
+  from = "/api/study/adult-review/worker"
+  to = "/.netlify/functions/study-adult-review-worker"
+  status = 200
+
+[[redirects]]
   from = "/api/study/adult-review/*"
   to = "/.netlify/functions/study-adult-review"
   status = 200
@@ -61,6 +81,11 @@
   from = "/api/study/session/readiness"
   to = "/.netlify/functions/study-session-verify"
   status = 200
+
+# Local candidate only. The default handler refuses work until durable worker
+# authorization and all readiness dependencies are explicitly composed.
+[functions."study-adult-review-worker"]
+  schedule = "*/5 * * * *"
 
 # ---- SPA fallback: every other path serves the cached app shell ----
 [[redirects]]
