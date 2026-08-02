@@ -7,7 +7,12 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   test: {
-    include: ['src/**/*.test.{ts,tsx}', 'supabase/**/*.test.ts', 'tests/**/*.test.js'],
+    include: [
+      'src/**/*.test.{ts,tsx}',
+      'study-engine/src/**/*.test.{ts,tsx}',
+      'supabase/**/*.test.ts',
+      'tests/**/*.test.js',
+    ],
     pool: 'threads',
     maxWorkers: 4,
     testTimeout: 120_000,
