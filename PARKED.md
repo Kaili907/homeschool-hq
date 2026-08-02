@@ -1,162 +1,158 @@
-# PARKED.md — Workstream Ledger for Manuel Academy
+# PARKED.md — Workstream Ledger for Manuel Academy (v1.1)
 
-Authoritative reconciliation of every known workstream as of
-August 3, 2026. Compiled from the project-wide status sweep
-(2026-08-02), the dispatch desk record, and Dad-terminal
-verification. Canonical master at time of writing: 704a748
-(docs merge; parents 5be50ff = v2.2 and 7bb6383 = operating rules
-v3).
+Authoritative reconciliation of every known workstream. v1.1,
+August 3, 2026: corrects two dispatcher errors in v1.0 (CL6
+asserted a push that had not occurred; the wip tip sha was wrong),
+incorporates Session A1's custody findings, and adds the
+session-to-branch map following the fourteen-branch laptop push
+(witnessed in Dad's terminal, Aug 3).
+
+Canonical master at time of writing: ab22a0c (PARKED.md v1.0
+merge; ancestors 704a748 docs merge, 5be50ff v2.2).
 
 Rules of this file:
 - No session re-investigates anything listed CLOSED or DEAD.
 - No session resumes anything listed PARKED without a dispatch
-  card from Dad that names the item's ID from this file.
+  card from Dad naming the item's ID from this file.
 - Claims about remote/branch state are verified in Dad's terminal
-  before action, per CLAUDE.md verification hierarchy.
-- Session numbers were REUSED across workstreams ("Session 5",
-  "Session 20" exist twice). Never transfer a session number
-  without its workstream name.
+  before action, per CLAUDE.md verification hierarchy. This rule
+  binds the dispatcher too: v1.0's CL6 error was exactly such an
+  unverified claim.
+- Session numbers were REUSED across workstreams. Never use a
+  bare session number; use the branch names below.
 
 ---
 
-## CLOSED — resolved by the v2.2 line, verified. No action ever.
+## SESSION-TO-BRANCH MAP (Study Engine + Tutor lines)
+All on origin as of Aug 3, 2026.
 
-- CL1. Production custody: master 704a748; published Netlify
-  deploy 6a6f3653 = v2.2 (5be50ff); auto-publish LOCKED.
-- CL2. Safe household sync / CAS: merged via 3K→3M lineage
-  (e513172) into v2.2.
-- CL3. Student identity canonical history: hardened lineage
-  (ba8b634 / 879f75b) shipped in v2.2.
-- CL4. AI/TTS gateway "DO NOT INTEGRATE" verdict: remediated in
-  v2.2 (entitlement, daily usage ledger, timeouts, size bounds,
-  direct-provider paths stripped, fail-closed flags), reviewed
-  independently, conditions verified. Provider spend caps set
-  (Anthropic $15/mo hard, $10 alert; ElevenLabs structurally
-  capped).
-- CL5. Hosted Supabase: schema reset Aug 2 via CLI; four-row
-  migration ledger (profiles base, hardened identity, CAS,
-  gateway usage) is authoritative and its provenance is the v2.2
-  migration chain. The "hosted-only gateway migration" mystery
-  from Study Session 21 is this ledger. The Study migration was
-  NEVER applied — correct and intentional.
-- CL6. RC1 remote custody: the Study Engine RC1 source is
-  integrate/study-engine-final-assembly (ea8e976) on origin.
-- CL7. LADDER: was a Claude-side card proposal (grade-progression
-  skill strands), never dispatched anywhere. Not lost work;
-  future work. The label maps to no artifact by design.
+| Workstream session | Branch | Tip |
+|---|---|---|
+| Study S11 host prep | integrate/study-engine-host-prep | 74e2c21 |
+| Study S13 storage/authz migrations | integrate/study-engine-persistence-rls | 261b879 |
+| Study S14 safety/adult-review | integrate/study-engine-safety-adult-review | 09cc103 |
+| Study S15 production reconciliation | integrate/study-engine-production-reconciliation | e788d4a |
+| Study S16 production composition | integrate/study-engine-production-composition | 71d5e97 |
+| Study S17 adult-review operations | integrate/study-engine-adult-review-operations | 4f45444 |
+| Study S19 final production candidate | integrate/study-engine-final-production-candidate | b492924 |
+| Study runtime closure (S20-adjacent) | integrate/study-engine-production-runtime-closure | b492924 (same tip as S19) |
+| Study host runtime | integrate/study-engine-host-runtime | c004515 |
+| RC1 frozen assembly (S9) | integrate/study-engine-final-assembly | ea8e976 |
+| Tutor assembly foundation | feat/adaptive-tutor-assembly-foundation | f43b652 |
+| Tutor assembly R1 fix | fix/adaptive-tutor-assembly-foundation-r1 | d4ccb91 |
+| Adaptive English integration | integrate/adaptive-english-v0.2.0 | b10d7ac |
+| Tutor math host (STUB — see D5) | integrate/tutor-math-r1-host | a5d2068 |
 
-## DEAD — declared by Dad, August 3, 2026. Preserved as forensics
-only. Never integrate, never resume, never re-litigate.
+Notes:
+- No branch named "study-engine-host-mount" exists. MOUNT-1 work
+  is presumed inside host-runtime or the S19 candidate; the A1
+  re-run must determine which.
+- runtime-closure and final-production-candidate share tip
+  b492924; treat as one line until proven otherwise.
 
-- D1. Root pnpm workspace conversion (pnpm-lock.yaml,
-  pnpm-workspace.yaml). Unauthorized, no provenance. npm +
-  package-lock.json remains the baseline. Forensic copy lives in
-  wip/laptop-local-preserve.
-- D2. The label "CARD 19 — FINAL LOCAL RECONCILIATION". No
-  recoverable prompt, identity, or artifact. Not the same thing
-  as Study Engine Session 19 (which is real; see A below).
-- D3. Superseded package variants: Study Runtime R1, Study
-  Calendar R2, pre-R1 aligned Tutor Math zip, pre-correction
-  English zip, earlier bridge/reconciliation revisions. Retained
-  in archives/ as receipts; never source.
-- D4. The claim "RFL M1/M2 media 100% complete, QA passed".
-  Withdrawn as unsupported. The 12-lesson curriculum WRITING is
-  complete; media completeness is whatever the file inventory
-  proves (see F).
+## CLOSED — verified. No action ever.
+- CL1. Production custody: published Netlify deploy 6a6f3653 =
+  v2.2 (5be50ff); auto-publish LOCKED. Master advances by docs
+  merges only since.
+- CL2. Safe household sync / CAS: merged into v2.2.
+- CL3. Student identity canonical history: hardened lineage in
+  v2.2.
+- CL4. AI/TTS gateway remediation: shipped in v2.2, reviewed,
+  conditions verified; provider spend caps set.
+- CL5. Hosted Supabase: four-row ledger authoritative (v2.2
+  chain, applied via CLI Aug 2). Study migration NEVER applied —
+  intentional.
+- CL6 (corrected): RC1 source integrate/study-engine-final-
+  assembly (ea8e976) is on origin AS OF AUG 3 — pushed and
+  ls-remote-witnessed in Dad's terminal. v1.0 asserted this
+  before it was true; the assertion was false when written.
+- CL7. LADDER: Claude-side proposal, never dispatched. Future
+  work, not lost work.
+- CL8 (new). The full Study Engine / Tutor branch estate is on
+  origin (fourteen-branch push, Aug 3, terminal-witnessed).
 
-## PARKED — preserved, mapped, resumable by card only.
-Queue order reflects dependencies. Nothing here is on the
-critical path for the school year.
+## DEAD — declared by Dad. Forensics only.
+- D1. Root pnpm workspace conversion. Unauthorized; npm baseline
+  stands.
+- D2. The label "CARD 19". Distinct from Study S19, which is real
+  (see map).
+- D3. Superseded package variants (Runtime R1, Calendar R2,
+  pre-R1 Math, pre-correction English, early bridge revisions).
+- D4. The claim "RFL M1/M2 media 100% complete". Withdrawn;
+  inventory decides.
+- D5 (new). integrate/tutor-math-r1-host at a5d2068: zero unique
+  commits, a v2.1-era stub. Dead as a branch; tutor-math host
+  integration resumes under D-line cards from the frozen R1
+  package, not from this ref.
+
+## PARKED — resumable by card only. Queue order = dependencies.
 
 ### A. Study Engine production line  [first in queue]
-Source of truth: sweep items O2/O3, O6–O12; sessions 15–21 +
-MOUNT-1/2 (workstream: Study Engine production).
-State: RC1 frozen on remote (CL6). Sessions 15/16/17 exist as
-sibling branches/local work with required compose order 15→16→17.
-Session 19 "final production candidate" reported committed
-locally; the laptop wip trove (src/study/, adult-review worker,
-in wip/laptop-local-preserve at bab318e) is its probable but
-UNVERIFIED disk form. MOUNT-2 found a blocking lifecycle defect
+State (post-A1): the laptop wip trove (wip/laptop-local-preserve,
+fb275f2 content commit, 7df73c9 archive tip) is NOT the S19
+candidate — it is a 6-file adult-review-v2 fragment with broken
+imports (missing ./types, ./stateMachine). The true candidate is
+the S19 branch (b492924, on origin). MOUNT-2's blocking defect
 (fresh navigation/refresh at /study-engine returns profile picker
-before route evaluation). Session 20 (Study workstream) auth e2e
-never ran from correct source. Hosted preflight resolved by CL5
-except the Study migration decision itself.
-Resume path (each step = one card):
-  A1. VERIFY: match wip trove against Session 19 claims →
-      MATCHED (continue) or UNMATCHED (evidence only, restart
-      from last verified point).
-  A2. FIX: MOUNT-2 refresh defect + lifecycle regression tests.
-  A3. COMPOSE: 15→16→17 in order, one reconciled branch.
-  A4. RUN: Session 20 auth e2e from the verified candidate.
-  A5. AUTHORIZE: Study migration card (Dad), CLI apply, ledger.
-  A6. BLOCKING GATE before any student use: production safety
-      classifier injected AND startup mode assertion (production
-      build refuses mode != "production"); classifierVersion
-      logged at boot.
+before route evaluation) remains unfixed; the route code was
+absent from the wip fragment and must be located in the S19/
+host-runtime trees.
+Resume path (one card each):
+  A1-R. RE-VERIFY custody against real refs: does b492924
+        contain the 15-16-17 composition over RC1? Where does
+        the /study-engine route live? Is the wip fragment
+        subsumed (then mark it superseded) or does it hold
+        unique content?
+  A2.   FIX MOUNT-2 defect + lifecycle regression tests.
+  A3.   COMPOSE 15-16-17 if A1-R finds the candidate incomplete;
+        skip if already composed.
+  A4.   RUN authenticated e2e from the verified candidate.
+  A5.   AUTHORIZE Study migration (Dad card), CLI apply, ledger.
+  A6.   BLOCKING GATE before any student use: production safety
+        classifier injected AND startup assertion (production
+        build refuses mode != "production"); classifierVersion
+        logged at boot.
 
 ### B. Wave 1 quartet
-Frozen packages in archives/ + PC trove (mu-music branch commit
-1b80cce). Integrations never started or blocked.
-  B1. Mastery Map — blocked on the specified 5C correction
-      (custody, single mastery authority, learner/provenance
-      validation, remove unauthorized Study dependency,
-      reproducible browser evidence).
-  B2. AI Safety Center — packaging custody first (seven
-      directory-entry violations: waive formally or repackage +
-      re-verify), then integration decision.
-  B3. Schedule Recovery — frozen, no first integration decision.
-  B4. External Course Capture — frozen; identity/calendar/
-      timezone/persistence seams unresolved.
+B1 Mastery Map (needs 5C correction). B2 AI Safety Center
+(packaging custody first). B3 Schedule Recovery (no first
+integration decision). B4 External Course Capture (seams
+unresolved). Frozen packages in archives/ + mu-music trove.
 
-### C. Enrichment branches — four merge-or-dead decisions
-  C1. a5-grade5-math — blocked: host grade model excludes
-      Grade 5; identity support must land first.
-  C2. ra-azure-reading — diff isolation + own gates needed;
-      historical package/Netlify overlap.
-  C3. mkjp-hiragana — needs clean authoritative branch; separate
-      from the Japanese curriculum FILE wiring (which is its own
-      small task: Week-N headings + move into
-      src/curriculum/plans/).
-  C4. mu-music — branch preserved incl. later edits (1b80cce);
-      mission seam unwired; final-edit intent unrecovered.
+### C. Enrichment branches — merge-or-dead decisions
+C1 a5-grade5-math (blocked on host Grade 5 identity).
+C2 ra-azure-reading. C3 mkjp-hiragana (separate from the small
+Japanese curriculum FILE wiring task). C4 mu-music (1b80cce).
 
 ### D. Adaptive Tutor host assembly
-Core v0.2, Math R1, corrected English frozen and canonical
-(archives/). Host custody, registry, renderer/accessibility,
-Grade 5 identity, and conclusive database/sync gates unresolved.
-English: 46 untracked files in a worktree need matching to the
-frozen package before any branch is trusted.
+Core v0.2, Math R1, corrected English frozen (archives/). Host
+custody + conclusive database gates unresolved. Branches now on
+origin: assembly foundation (f43b652), R1 fix (d4ccb91), English
+integration (b10d7ac). English's 46 untracked worktree files
+still need matching to the frozen package.
 
 ### E. Romeo Virtual Academy companion
-Branch feature/romeo-virtual-academy-companion (3 Netlify
-previews, Jul 28) unreviewed; host audits show no host
-implementation; RC1 intentionally omits Romeo delivery.
-Decision needed: verify-and-finish or archive. SEPARATE
-non-code question for Dad: who operates Romeo Virtual Academy,
-and does enrollment affect homeschool/credit status.
+Branch unreviewed; host audits show no host implementation.
+Verify-or-archive decision pending. Non-code question for Dad:
+who operates Romeo Virtual Academy; enrollment/credit effects.
 
 ### F. Ready for Life media completion
-Curriculum writing complete (D4 note). Media zips preserved in
-archives/. Required before any host talk: reconcile expected
-manifest vs actual approved binaries; finish or formally reduce
-scope. Host implementation remains gated (was: on foundation —
-now satisfied — but stays parked behind A–E by queue order and
-behind assessment week by priority).
+Writing complete; media inventory vs manifest reconciliation
+required before any host talk. Parked behind A-E and behind
+assessment week.
 
-### G. Roadmap items never started (no artifacts exist)
+### G. Never started (no artifacts)
 Weekly intelligence report; voice/oral-response analysis;
-portfolio/attendance/transcript records; accommodations &
-motivation system; Romeo deferred captures/imports; LADDER
-(CL7); VOICE-PICKER (card exists, gated on: docs landed [done],
-assessment week underway, Dad's voice audition + allowlist).
+portfolio/attendance/transcripts; accommodations & motivation;
+Romeo deferred imports; LADDER; VOICE-PICKER (card exists; gates:
+docs landed [done], assessment week underway, voice audition +
+allowlist).
 
 ---
 
 ## THE CRITICAL PATH (not parked, not code)
-1. Placement assessments — five students. Everything above is
-   enhancement; this is the school.
+1. Placement assessments — five students.
 2. Year scopes for four students — gated on 1.
-3. Household onboarding to hosted sync (deliberate, post-v2.2,
-   after 1).
+3. Household onboarding to hosted sync — after 1.
 
-Last updated: August 3, 2026 by Dad + dispatch desk.
+Last updated: August 3, 2026 (v1.1) by Dad + dispatch desk.
