@@ -1,0 +1,804 @@
+{
+  "schemaId": "manuel-academy.study-canonical-decisions",
+  "schemaVersion": 1,
+  "decisionSetId": "study-recon-2026-07-28",
+  "status": "blocked",
+  "authorityOrder": [
+    "Session 1 initial canonical Study Engine v1 boundary",
+    "Tutor Core v0.2 for instructional and tutoring authority",
+    "Session 2 for pacing algorithms after adapters",
+    "Session 3 for Student UX and accessibility",
+    "Session 4 for calendar, review queue, parent insights, and Romeo adapter"
+  ],
+  "decisions": [
+    {
+      "decisionId": "DEC-001",
+      "topic": "Package IDs and versions",
+      "status": "approved-with-blocker",
+      "classification": "BLOCKER",
+      "decision": {
+        "logicalPackages": [
+          {
+            "packageId": "manuel-academy.study-contracts",
+            "packageVersion": "1.0.0",
+            "wireSchemaVersion": 1,
+            "sourceSession": 1,
+            "stability": "canonical"
+          },
+          {
+            "packageId": "manuel-academy.study-engine.algorithms",
+            "packageVersion": "1.0.0-wave1",
+            "sourceSession": 2,
+            "stability": "authoritative-algorithms-provisional-boundary"
+          },
+          {
+            "packageId": "manuel-academy.study-ux",
+            "packageVersion": "0.1.0-prototype",
+            "sourceSession": 3,
+            "stability": "authoritative-ux-prototype-boundary"
+          },
+          {
+            "packageId": "manuel-academy.study-integrations",
+            "packageVersion": "1.0.0-wave1",
+            "sourceSession": 4,
+            "stability": "authoritative-domain-provisional-boundary"
+          },
+          {
+            "packageId": "manuel-academy.study-reconciliation",
+            "packageVersion": "0.5.0-blocked.1",
+            "wireSchemaVersion": 1,
+            "sourceSession": 5,
+            "stability": "audit-only"
+          }
+        ],
+        "tutorCoreRule": "Use the package ID and exact version from the actual v0.2 manifest; never synthesize either value. The package record stays unapproved until the artifact is accessible and hash-verified."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/common.ts",
+        "adaptive-tutor/study-engine/prototype/package.json",
+        "artifact-verification.v1.json#tutorCore"
+      ]
+    },
+    {
+      "decisionId": "DEC-002",
+      "topic": "Stable opaque identifiers",
+      "status": "approved",
+      "classification": "SAFE ADAPTER",
+      "decision": {
+        "canonicalBoundary": "Session 1 branded string IDs",
+        "rules": [
+          "Caller-generated and immutable",
+          "Preserve bytes exactly",
+          "Maximum 128 characters at the canonical boundary",
+          "Never derive from names, email, grade, dates, array positions, or titles",
+          "Never normalize case, separators, or legacy values",
+          "Cross-kind use is rejected at compile time and by aggregate validation"
+        ],
+        "idempotencyScope": "StudySessionEvent.id is unique within sessionId; same ID and same canonical payload is a no-op, same ID with a different payload is a conflict and quarantine.",
+        "externalReferences": "When a provisional consumer cannot accept a valid canonical ID, use a reversible lookup table rather than lossy rewriting."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/common.ts:13",
+        "adaptive-tutor/study-engine/schemas/validation.ts:222",
+        "adaptive-tutor/study-engine/contracts/legacy-adapters.ts:20"
+      ]
+    },
+    {
+      "decisionId": "DEC-003",
+      "topic": "Grade bands and grade metadata",
+      "status": "approved",
+      "classification": "SAFE ADAPTER",
+      "decision": {
+        "canonicalGradeBands": [
+          "elementary-3-5",
+          "middle-6-8",
+          "high-9-12"
+        ],
+        "exactGradeRule": "Exact grade is optional planning metadata, never identity, birthdate, age, mastery, or placement.",
+        "v1Representation": {
+          "field": "metadata.extensions.manuel:grade-level",
+          "shape": {
+            "scheme": "us-k12",
+            "grade": "integer 3 through 12",
+            "source": "parent|school-record|migration"
+          }
+        },
+        "validationRule": "The extension requires its own registered namespace validator before final assembly.",
+        "legacyRule": "Map only the closed legacy values 3, 4, 6, 10, and 12 with gradeBandFromLegacyGrade; do not infer other grades."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/common.ts:70",
+        "adaptive-tutor/study-engine/contracts/legacy-adapters.ts:9"
+      ]
+    },
+    {
+      "decisionId": "DEC-004",
+      "topic": "Canonical subject, skill, and task IDs",
+      "status": "approved",
+      "classification": "SAFE ADAPTER",
+      "decision": {
+        "subject": "SubjectId",
+        "skill": "SkillId",
+        "taskInstance": "SegmentId",
+        "taskClassification": "StudyTaskType",
+        "customTaskClassification": "customTaskTypeId",
+        "noParallelTaskId": "Do not add a second TaskId for a planned task instance. SegmentId is the stable task-instance identity; taskType is classification only."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/common.ts:18",
+        "adaptive-tutor/study-engine/contracts/study-plan.ts:19",
+        "adaptive-tutor/study-engine/contracts/study-plan.ts:116"
+      ]
+    },
+    {
+      "decisionId": "DEC-005",
+      "topic": "Session states and event vocabulary",
+      "status": "approved-with-required-change",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "canonicalStates": [
+          "planned",
+          "active",
+          "paused",
+          "approved-break",
+          "student-requested-break",
+          "technical-interruption",
+          "completed",
+          "abandoned"
+        ],
+        "canonicalEvents": [
+          "session-planned",
+          "session-started",
+          "segment-started",
+          "active-response-recorded",
+          "segment-completed",
+          "pause-started",
+          "break-requested",
+          "break-approved",
+          "break-started",
+          "break-ended",
+          "technical-interruption-started",
+          "technical-interruption-ended",
+          "session-resumed",
+          "redirection-recorded",
+          "tutor-intervention-recorded",
+          "session-completed",
+          "session-abandoned"
+        ],
+        "persistenceRule": "Only Session 1 StudySessionEvent values are persisted in StudySession.eventLog.",
+        "adapterRule": "Session 2 orchestrator events and Session 3 UX events are commands/intents; Session 4 events are projection audit events. None is dual-persisted as a parallel learning event.",
+        "requiredChange": "Add and test one exhaustive canonical transition reducer; current aggregate validation does not prove every intermediate transition."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/study-session.ts:16",
+        "adaptive-tutor/study-engine/schemas/study-session.schema.ts:516"
+      ]
+    },
+    {
+      "decisionId": "DEC-006",
+      "topic": "Event versioning and idempotency",
+      "status": "approved",
+      "classification": "SAFE ADAPTER",
+      "decision": {
+        "eventVersion": "Embedded events inherit StudySession.schemaVersion 1; do not add a duplicate domain field.",
+        "commandEnvelopeVersion": "manuel-academy.study-command.v1",
+        "idempotencyKey": "Use caller-stable command idempotency keys. For a one-event append, StudySessionEvent.id is the default key scoped by sessionId.",
+        "retryRule": "Same key plus byte-equivalent canonical command returns the prior result; same key plus different content is an idempotency conflict and is quarantined.",
+        "sequenceRule": "Event sequence is contiguous and monotonic. Multi-event commands allocate their range atomically under expected aggregate revision.",
+        "projectionRule": "Calendar dedupeKey and review occurrence identity are logical projection keys, not replacements for event idempotency."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/study-session.ts:38",
+        "adaptive-tutor/study-engine/schemas/study-session.schema.ts:516",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:156"
+      ]
+    },
+    {
+      "decisionId": "DEC-007",
+      "topic": "Segment IDs and resume-point structure",
+      "status": "approved-with-required-change",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "canonicalResumePoint": {
+          "segmentId": "SegmentId",
+          "elapsedActiveSecondsInSegment": "non-negative integer",
+          "responseDraftRef": "optional opaque reference"
+        },
+        "cursorSidecar": {
+          "schemaId": "manuel-academy.study-resume-cursor",
+          "schemaVersion": 1,
+          "requiredFields": [
+            "sessionId",
+            "studyPlanId",
+            "studyPlanRevision",
+            "segmentId",
+            "substepId",
+            "lastAppliedEventSequence",
+            "checkpointRevision",
+            "savedAt",
+            "resumeToken"
+          ],
+          "optionalFields": [
+            "focusTarget",
+            "timerPresentation",
+            "timerRunningIntent",
+            "responseDraftRef"
+          ]
+        },
+        "draftRule": "responseDraftRef points to a separately authorized local draft vault. Raw draft content never enters the cursor, event log, evidence, manifest, or projections.",
+        "restoreRule": "Reject or quarantine stale/forged cursors when session, plan, segment, event sequence, revision, or opaque integrity token does not match."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/study-session.ts:13",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:83"
+      ]
+    },
+    {
+      "decisionId": "DEC-008",
+      "topic": "Timer modes and break types",
+      "status": "approved-with-required-change",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "timerAxes": {
+          "visibility": [
+            "visible",
+            "minimal",
+            "hidden"
+          ],
+          "metric": [
+            "count-down",
+            "count-up",
+            "milestone"
+          ]
+        },
+        "default": {
+          "visibility": "visible",
+          "metric": "count-down"
+        },
+        "breakTypes": [
+          "planned",
+          "student-requested",
+          "movement",
+          "water",
+          "screen-rest",
+          "quiet-reset",
+          "parent-configured"
+        ],
+        "breakReasonCategories": [
+          "student-request",
+          "accessibility-need",
+          "scheduled-break",
+          "wellbeing",
+          "adult-directed"
+        ],
+        "separationRule": "breakType is the pacing activity; reasonCategory is origin/authority. Keep both and never treat them as duplicate enums.",
+        "neutralityRule": "Approved breaks never count as failure."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/focus-profile.ts:13",
+        "adaptive-tutor/study-engine/contracts/study-session.ts:72",
+        "adaptive-tutor/study-engine/engine/breaks/types.ts:8",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:10"
+      ]
+    },
+    {
+      "decisionId": "DEC-009",
+      "topic": "Learning-evidence fields",
+      "status": "approved",
+      "classification": "SAFE ADAPTER",
+      "decision": {
+        "canonicalAggregate": "LearningEvidence v1",
+        "allowedContent": [
+          "counts and percentages",
+          "bounded ratings with source",
+          "support level",
+          "hint and intervention counts/kinds",
+          "bounded response-latency aggregates",
+          "contextual random-response indicators",
+          "recall and retention summaries",
+          "opaque evidence, session, subject, and skill references"
+        ],
+        "excludedContent": [
+          "raw answer",
+          "prompt body",
+          "transcript text",
+          "audio",
+          "name",
+          "email",
+          "diagnosis",
+          "permanent trait",
+          "app or website names"
+        ],
+        "mappingRule": "Session 2 aggregate signals may populate only matching evidence measures. They cannot populate mastery, misconception, prerequisite, or instructional authority."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/learning-evidence.ts",
+        "adaptive-tutor/study-engine/engine/evidence/types.ts"
+      ]
+    },
+    {
+      "decisionId": "DEC-010",
+      "topic": "Mastery and prerequisite outcomes",
+      "status": "blocked",
+      "classification": "BLOCKER",
+      "decision": {
+        "authority": "Tutor Core v0.2 only",
+        "studyEngineRole": "Store a validated projection with opaque source outcome reference, algorithm/version provenance, and basis EvidenceIds; do not calculate or rename Tutor Core meaning.",
+        "provisionalValues": "Session 1 status values are storage projection candidates, not proof of compatibility.",
+        "blockedMapping": "Exact enum, uncertainty, misconception, prerequisite, retention, and adult-review mapping requires the actual Tutor Core package."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/learning-evidence.ts:76",
+        "adaptive-tutor/study-engine/engine/adapters/provisional-contracts.ts:22",
+        "artifact-verification.v1.json#tutorCore"
+      ]
+    },
+    {
+      "decisionId": "DEC-011",
+      "topic": "Recommendation states",
+      "status": "approved-with-required-change",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "engineDispositions": [
+          "increase",
+          "maintain",
+          "decrease",
+          "insufficient_data",
+          "manual_review"
+        ],
+        "actionableLifecycle": [
+          "proposed",
+          "accepted",
+          "rejected",
+          "superseded",
+          "expired"
+        ],
+        "rule": "Only increase|maintain|decrease may create an actionable RecommendationId. insufficient_data and manual_review are terminal non-actionable dispositions.",
+        "decisionScope": "Acceptance or rejection applies to one RecommendationId. It is never converted into an unbounded standing allowIncrease flag."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/engine/focus/types.ts:9",
+        "adaptive-tutor/study-engine/contracts/parent-teacher-controls.ts:32"
+      ]
+    },
+    {
+      "decisionId": "DEC-012",
+      "topic": "Parent and teacher controls and override precedence",
+      "status": "approved-with-clarification",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "proposedOrderVerdict": "REPLACE SIMPLE FIRST-WINS CHAIN WITH CONSTRAINT REDUCTION",
+        "gatesBeforeResolution": [
+          "supported schema and command version",
+          "payload integrity and idempotency",
+          "actor authorization",
+          "active recommendation decision state"
+        ],
+        "constraintOrder": [
+          "safety constraints and vetoes",
+          "required accommodation obligations and bounds",
+          "most restrictive active authorized adult hard maximum",
+          "current unexpired authorized parent or teacher explicit override",
+          "accepted evidence-sufficient engine recommendation",
+          "established focus target",
+          "grade-band default"
+        ],
+        "algorithm": [
+          "Compute lowerBound as the maximum of all applicable hard minimums.",
+          "Compute upperBound as the minimum of safety, required accommodation, and parent hard maxima.",
+          "If lowerBound is greater than upperBound, emit manual_review and no automatic target.",
+          "Choose the first candidate target from active explicit override, engine recommendation, established target, or grade default.",
+          "Clamp the candidate to the feasible interval and record every applied constraint and winning provenance.",
+          "Manual override may hold or reduce but never exceed a higher hard bound.",
+          "Required breaks and presentation accommodations are obligations, not numeric candidates.",
+          "A rejection suppresses only the referenced RecommendationId.",
+          "Conflicting concurrent adult overrides never use implicit last-write-wins; reject the stale revision or route to manual_review."
+        ]
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/parent-teacher-controls.ts",
+        "adaptive-tutor/study-engine/engine/focus/types.ts",
+        "adaptive-tutor/study-engine/reconciliation/probes/policy.mjs"
+      ]
+    },
+    {
+      "decisionId": "DEC-013",
+      "topic": "Accessibility and accommodation fields",
+      "status": "approved-with-blocker",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "authorizationSource": "ParentTeacherControls accommodations keyed by AccommodationId",
+        "projectionTargets": [
+          "StudentFocusProfile",
+          "Study-UX preferences",
+          "Tutor Core media/input configuration"
+        ],
+        "canonicalStructuredFields": [
+          "required",
+          "category",
+          "enabled",
+          "textScalePercent",
+          "motionPreference full|minimal|none",
+          "highContrast",
+          "lowDistractionPresentation",
+          "timerVisibility visible|minimal|hidden",
+          "audioOutput allowed|muted|required-off",
+          "narration off|available|preferred",
+          "captionsRequired",
+          "transcriptAvailable",
+          "readAloud",
+          "speechInput",
+          "inputModes",
+          "maximumWorkDurationMinutes",
+          "requiredBreakAfterMinutes",
+          "breakDurationRange",
+          "approvedBy",
+          "reviewAt"
+        ],
+        "rule": "Never parse free-form functionalDescription into machine constraints. Projections share one AccommodationId and are not independently editable.",
+        "coreGate": "Actual Tutor Core media, board, spoken-turn, caption, and transcript fields must be mapped before approval."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/focus-profile.ts:60",
+        "adaptive-tutor/study-engine/contracts/parent-teacher-controls.ts:41",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:113"
+      ]
+    },
+    {
+      "decisionId": "DEC-014",
+      "topic": "Review intervals and retry windows",
+      "status": "approved-with-required-change",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "canonicalIntervals": [
+          {
+            "id": "same-day",
+            "days": 0
+          },
+          {
+            "id": "one-day",
+            "days": 1
+          },
+          {
+            "id": "three-day",
+            "days": 3
+          },
+          {
+            "id": "seven-day",
+            "days": 7
+          },
+          {
+            "id": "fourteen-day",
+            "days": 14
+          },
+          {
+            "id": "thirty-day",
+            "days": 30
+          },
+          {
+            "id": "custom",
+            "days": "positive reviewed value"
+          }
+        ],
+        "retryWindowShape": [
+          "notBeforeLocalDate",
+          "retryNotBefore nullable offset timestamp",
+          "dueByLocalDate",
+          "attemptOrdinal",
+          "dailyAttemptLimit",
+          "householdTimeZone",
+          "requiredSupportBoundaryRef"
+        ],
+        "sameDayRule": "same-day means the same learner-local calendar date, never an immediate retry. A retrieval failure requires authorized support or reteaching plus a completed break/session boundary before another attempt.",
+        "automaticPlacementRule": "A date-only recommendation does not invent a time of day. An authorized scheduler or adult supplies a slot within the reviewed retry window and daily limits.",
+        "blocker": "No verified package defines a safe same-day not-before instant; automatic same-day retry timing remains manual_review until Tutor Core/policy review."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/review-scheduling.ts:11",
+        "adaptive-tutor/study-engine/engine/review/types.ts:3"
+      ]
+    },
+    {
+      "decisionId": "DEC-015",
+      "topic": "Household IANA timezone and learner-local dates",
+      "status": "approved-with-required-change",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "sourceOfTruth": "One authorized HouseholdCalendarContext supplies an IANA timeZone.",
+        "localDateRule": "Derive learner-local dates from an offset-qualified instant plus the authorized zone, then persist both localDate and zoneIdUsed.",
+        "historyRule": "A later household-zone change does not recompute historical local dates.",
+        "travelRule": "Travel or temporary-zone behavior requires an explicit effective-dated override.",
+        "forbidden": [
+          "browser time-zone guessing",
+          "server time-zone guessing",
+          "UTC-midnight conversion of date-only values",
+          "offset-only zones"
+        ]
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/review-scheduling.ts:57",
+        "adaptive-tutor/study-engine/engine/review/calendar-date.ts",
+        "adaptive-tutor/study-engine/integrations/calendar/calendar.ts:170"
+      ]
+    },
+    {
+      "decisionId": "DEC-016",
+      "topic": "Calendar block mapping",
+      "status": "approved",
+      "classification": "SAFE ADAPTER",
+      "decision": {
+        "identity": "Calendar blocks keep canonical SegmentId values; entryId and dedupeKey are projection identities only.",
+        "mappingTable": "enum-event-mappings.v1.json#studyTaskToCalendarBlock",
+        "customRule": "StudyTaskType custom requires an explicit reviewed calendar block type. Never guess from title.",
+        "dateRule": "Date-only review or due dates require separately supplied scheduledStart with explicit offset and intendedLocalDate validation.",
+        "completionRule": "Canonical segment completion drives calendar projection; calendar completion never declares learning mastery."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/integrations/calendar/types.ts:9",
+        "adaptive-tutor/study-engine/integrations/calendar/calendar.ts:297"
+      ]
+    },
+    {
+      "decisionId": "DEC-017",
+      "topic": "Review queue event flow",
+      "status": "approved-with-required-change",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "flow": [
+          "Tutor Core-authorized review purpose",
+          "Session 2 local-date recommendation",
+          "CAS update StudentSkillReview",
+          "create one stable review occurrence",
+          "project pending ReviewItem",
+          "build capacity-limited daily queue",
+          "authorized calendar placement",
+          "review StudySession",
+          "LearningEvidence and RetrievalAttempt commit",
+          "Tutor Core-authorized outcome",
+          "next Session 2 recommendation",
+          "mark occurrence and calendar work complete"
+        ],
+        "sourceOfTruth": "Canonical session/evidence/review aggregates",
+        "consistency": "Use an idempotent outbox/saga; projection failure never rolls back or duplicates canonical learning evidence.",
+        "requiredChange": "Session 4 needs a completeReview/result API with ReviewId, occurrence ID, SessionId, EvidenceId, RetrievalAttemptId, and idempotency key."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/review-scheduling.ts",
+        "adaptive-tutor/study-engine/integrations/review/types.ts"
+      ]
+    },
+    {
+      "decisionId": "DEC-018",
+      "topic": "Romeo external-assignment mapping",
+      "status": "approved-with-required-change",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "stableIdentity": [
+          "provider=romeo_virtual_academy",
+          "externalAssignmentRef"
+        ],
+        "calendarMapping": {
+          "source": "romeo_virtual_academy",
+          "sourceItemRef": "externalAssignmentRef",
+          "title": "externalAssignmentTitle",
+          "subject": "externalCourse",
+          "blockType": "romeo_virtual_academy_activity",
+          "estimatedMinutes": "estimatedDurationMinutes"
+        },
+        "progressRule": "Keep parent and student entered progress separate; external completed state wins only when explicitly supplied.",
+        "supportRule": "Promote linked support to VersionedReference<StudyPlanId> unless the actual Tutor Core package exposes a more specific support reference. Derive available/requested/completed from plan/session lifecycle; do not persist a drifting duplicate state.",
+        "dueDateRule": "Keep dueDate as a calendar date in parent projections. Do not synthesize dueAt midnight.",
+        "credentialRule": "No login, username, password, token, cookie, API key, or credential-bearing URL is accepted."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/integrations/romeo/types.ts",
+        "adaptive-tutor/study-engine/integrations/romeo/adapter.ts"
+      ]
+    },
+    {
+      "decisionId": "DEC-019",
+      "topic": "Adult-private note projection",
+      "status": "approved-with-required-change",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "storage": "ParentTeacherPrivateRecord in a separately authorized adult-private repository",
+        "publicControlRecord": "ParentTeacherControls.privateRecordRef only",
+        "publicEventFields": [
+          "noteRef",
+          "category",
+          "authorRef",
+          "createdAt"
+        ],
+        "excludedFromPublicEvent": [
+          "body"
+        ],
+        "studentProjection": "No body, excerpt, category, or existence flag unless an explicit adult-authorized product requirement is later approved."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/parent-teacher-private.ts",
+        "adaptive-tutor/study-engine/contracts/parent-teacher-controls.ts:98",
+        "adaptive-tutor/study-engine/parent/contracts.ts:223"
+      ]
+    },
+    {
+      "decisionId": "DEC-020",
+      "topic": "PII, raw-answer, and transcript exclusions",
+      "status": "approved",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "studyBoundaryExcludes": [
+          "student name",
+          "email",
+          "birthdate",
+          "external username",
+          "raw answer",
+          "prompt text",
+          "transcript body",
+          "spoken audio",
+          "private note body",
+          "credentials",
+          "app and website names"
+        ],
+        "allowedReferences": [
+          "opaque studentId",
+          "opaque responseDraftRef",
+          "opaque Tutor Core outcome/evidence/transcript references when authorized",
+          "bounded aggregate measures",
+          "bounded namespaced detail codes"
+        ],
+        "uiRule": "Entered work needed for exact resume may remain in a separate device-local vault; it is never copied into Study Engine events, evidence, logs, or reconciliation artifacts.",
+        "tutorRule": "Tutor Core remains the only authority for its transcript and adult-review evidence retention; the Study Engine receives references or minimized projections only."
+        ,
+        "metadataRule": "Student-safe tags and namespaced extension values are allowlisted by schema and data class. A valid namespace is not permission to carry arbitrary strings or sensitive content."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/study-session.ts:40",
+        "adaptive-tutor/study-engine/contracts/learning-evidence.ts",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:86"
+      ]
+    },
+    {
+      "decisionId": "DEC-021",
+      "topic": "Validation result and schema registry",
+      "status": "approved",
+      "classification": "SAFE ADAPTER",
+      "decision": {
+        "canonicalResult": "Session 1 ValidationResult<T>",
+        "canonicalIssueFields": [
+          "code",
+          "path",
+          "message"
+        ],
+        "canonicalRegistry": [
+          "lesson-study-plan",
+          "student-focus-profile",
+          "study-session",
+          "learning-evidence",
+          "student-skill-review",
+          "parent-teacher-controls",
+          "parent-teacher-private"
+        ],
+        "boundaryRule": "Every ingress is unknown until version inspection and registry validation succeeds.",
+        "extensionRule": "Each promoted integration, command, recommendation, resume cursor, and review occurrence receives one registered schema; unregistered kinds are quarantined."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/schemas/validation.ts:17",
+        "adaptive-tutor/study-engine/schemas/registry.ts:9"
+      ]
+    },
+    {
+      "decisionId": "DEC-022",
+      "topic": "Persistence seam and append-only events",
+      "status": "approved",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "repository": "Versioned Study Engine sidecar; no insertion into Tutor Core or production profile state",
+        "writes": "Compare-and-swap by aggregate revision",
+        "events": "Append-only with per-session contiguous sequence and idempotency index",
+        "projections": "Calendar, queue, parent, and Romeo are rebuildable sidecars driven through idempotent outbox records",
+        "atomicity": "Canonical aggregate plus outbox commit atomically; external projection completion may retry independently.",
+        "deletion": "Retention/deletion policy is explicit and category-specific; event rewriting is forbidden."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/docs/contracts/core-change-requests.md:75",
+        "adaptive-tutor/study-engine/docs/contracts/core-change-requests.md:127"
+      ]
+    },
+    {
+      "decisionId": "DEC-023",
+      "topic": "Functional sidecar hooks",
+      "status": "approved",
+      "classification": "SAFE ADAPTER",
+      "decision": {
+        "interface": "updateStudySidecar(key, expectedRevision, update(previous))",
+        "rule": "The updater receives the latest committed value; callers never submit a precomputed replacement based on render-time state.",
+        "conflict": "Revision mismatch returns a typed conflict and does not retry with a stale precomputed object.",
+        "projectionHook": "enqueueProjection(previousOutbox, command) is part of the same functional update."
+      },
+      "sources": [
+        "CLAUDE.md:57",
+        "adaptive-tutor/study-engine/docs/contracts/core-change-requests.md:145"
+      ]
+    },
+    {
+      "decisionId": "DEC-024",
+      "topic": "Unsupported-version quarantine",
+      "status": "approved",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": {
+        "dispositions": [
+          "missing-version",
+          "invalid-version",
+          "unsupported-older-version",
+          "unsupported-future-version",
+          "unknown-kind",
+          "invalid-current-payload",
+          "idempotency-conflict",
+          "stale-resume-token"
+        ],
+        "rule": "No fallback-to-empty, best-effort coercion, or future-version acceptance.",
+        "quarantineMetadata": [
+          "quarantineId",
+          "schemaIdOrKind",
+          "observedVersion",
+          "disposition",
+          "receivedAt",
+          "payloadSha256"
+        ],
+        "loggingRule": "Operational logs contain quarantine metadata and fixed diagnostics only, never the quarantined raw payload."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/contracts/versioning.ts",
+        "adaptive-tutor/study-engine/schemas/migrations.ts"
+      ]
+    },
+    {
+      "decisionId": "DEC-025",
+      "topic": "Node and browser dependency reconciliation",
+      "status": "approved-for-plan",
+      "classification": "SAFE ADAPTER",
+      "decision": {
+        "validatedEnvironment": {
+          "node": "24.14.1",
+          "npm": "11.11.0",
+          "typescript": "5.8.3",
+          "vite": "6.4.3",
+          "vitest": "4.1.10",
+          "react": "19.2.8",
+          "reactDom": "19.2.8",
+          "playwright": "1.62.0",
+          "jsdom": "26.1.0"
+        },
+        "assemblyRule": "One authorized workspace lockfile and one TypeScript project graph; no package-manager or source rewrite in this audit.",
+        "runtimeLayers": {
+          "contractsAlgorithms": "No React, DOM, jsdom, Playwright, or network runtime dependency",
+          "browserUx": "React and React DOM only at runtime",
+          "tests": "Vitest, Testing Library, jsdom, Axe, and Playwright remain test-only"
+        },
+        "moduleRule": "Compile through the workspace bundler/project graph. Retire mixed .ts/.js source-import conventions during authorized assembly with parity tests.",
+        "typeRule": "Align @types/node with the selected assembly runtime before final assembly; current prototype pins major 22 while validation ran on Node 24."
+      },
+      "sources": [
+        "package.json",
+        "adaptive-tutor/study-engine/prototype/package.json",
+        "adaptive-tutor/study-engine/contracts/tsconfig.json",
+        "adaptive-tutor/study-engine/engine/tsconfig.json"
+      ]
+    },
+    {
+      "decisionId": "DEC-026",
+      "topic": "Core-change request deduplication",
+      "status": "approved",
+      "classification": "DOCUMENTATION ONLY",
+      "decision": {
+        "canonicalRequestFile": "core-change-requests.v1.json",
+        "dedupeKey": "requested capability plus authoritative owner, not source-session request number",
+        "rule": "One consolidated request may cite many Wave 1 requests; no duplicate request remains open under a different label."
+      },
+      "sources": [
+        "adaptive-tutor/study-engine/docs/contracts/core-change-requests.md",
+        "adaptive-tutor/study-engine/docs/integrations/core-change-requests.md"
+      ]
+    }
+  ]
+}

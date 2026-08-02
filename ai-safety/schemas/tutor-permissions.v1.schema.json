@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/ai-safety/tutor-permissions.v1.schema.json",
+  "title": "Manuel Academy Tutor Permissions",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "schemaVersion",
+    "createdAt",
+    "permissionsId",
+    "studentId",
+    "enabled",
+    "allowedSubjectIds",
+    "allowedSessionWindows",
+    "dailySessionLimit",
+    "maximumSessionMinutes",
+    "capabilities",
+    "parentReviewMode",
+    "studentPrivacyNotice",
+    "voiceDataMode",
+    "updatedBy",
+    "updatedAt"
+  ],
+  "properties": {
+    "kind": { "const": "tutor-permissions" },
+    "schemaVersion": { "const": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "permissionsId": { "$ref": "#/$defs/opaqueId" },
+    "studentId": { "$ref": "#/$defs/opaqueId" },
+    "enabled": { "type": "boolean" },
+    "allowedSubjectIds": {
+      "type": "array",
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/opaqueId" }
+    },
+    "allowedSessionWindows": {
+      "type": "array",
+      "maxItems": 50,
+      "items": { "$ref": "#/$defs/window" }
+    },
+    "dailySessionLimit": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "maximumSessionMinutes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 240
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "textTutoring",
+        "voiceInput",
+        "readAloud",
+        "externalLinks",
+        "fileUpload"
+      ],
+      "properties": {
+        "textTutoring": { "type": "boolean" },
+        "voiceInput": { "type": "boolean" },
+        "readAloud": { "type": "boolean" },
+        "externalLinks": { "type": "boolean" },
+        "fileUpload": { "type": "boolean" }
+      }
+    },
+    "parentReviewMode": {
+      "const": "always-available-to-authorized-parent"
+    },
+    "studentPrivacyNotice": {
+      "const": "parent-review-with-safety-exceptions"
+    },
+    "voiceDataMode": { "const": "transcript-only-no-raw-audio" },
+    "updatedBy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "actorId"],
+      "properties": {
+        "role": { "const": "parent" },
+        "actorId": { "$ref": "#/$defs/opaqueId" }
+      }
+    },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "opaqueId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$"
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "windowId",
+        "days",
+        "startLocalTime",
+        "endLocalTime",
+        "timeZone"
+      ],
+      "properties": {
+        "windowId": { "$ref": "#/$defs/opaqueId" },
+        "days": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday",
+              "sunday"
+            ]
+          }
+        },
+        "startLocalTime": {
+          "type": "string",
+          "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$"
+        },
+        "endLocalTime": {
+          "type": "string",
+          "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$"
+        },
+        "timeZone": { "type": "string", "minLength": 1, "maxLength": 100 }
+      }
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "allowedSubjectIds cannot contain wildcard values",
+    "updatedAt >= createdAt"
+  ]
+}

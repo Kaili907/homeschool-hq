@@ -1,0 +1,27 @@
+{
+  "name": "@manuel-academy/calendar-parent-runtime-lab",
+  "version": "0.8.0",
+  "private": true,
+  "type": "module",
+  "description": "Credential-free Wave 2 integration lab for canonical review, calendar, parent, and Romeo runtime behavior.",
+  "scripts": {
+    "build": "vite build --config vite.config.ts",
+    "dev": "vite --config vite.config.ts",
+    "preview": "vite preview --config vite.config.ts",
+    "test": "vitest run ../../tests/calendar-parent-runtime --config vitest.config.ts --configLoader runner",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "audit:node": "node scripts/node-audit.mjs",
+    "traces": "node scripts/generate-traces.mjs",
+    "screenshots": "node scripts/capture-screenshots.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "playwright-core": "1.62.0",
+    "typescript": "5.8.3",
+    "vite": "6.4.3",
+    "vitest": "4.1.10"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

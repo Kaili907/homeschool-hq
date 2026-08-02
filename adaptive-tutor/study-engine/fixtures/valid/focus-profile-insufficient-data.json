@@ -1,0 +1,37 @@
+{
+  "kind": "student-focus-profile",
+  "schemaVersion": 1,
+  "id": "focus:p1:new",
+  "revision": 1,
+  "createdAt": "2026-07-27T13:00:00.000Z",
+  "updatedAt": "2026-07-27T13:00:00.000Z",
+  "studentId": "p1",
+  "gradeBand": "elementary-3-5",
+  "estimate": {
+    "status": "insufficient-data",
+    "eligibleObservationCount": 0,
+    "minimumObservationCount": 3,
+    "gradeBandStartingRange": {
+      "minimumMinutes": 8,
+      "targetMinutes": 10,
+      "maximumMinutes": 12
+    },
+    "reason": "new-profile"
+  },
+  "breakDurationMinutes": 5,
+  "timerPresentationPreference": "milestones-only",
+  "taskSpecificProfiles": [],
+  "subjectSpecificProfiles": [],
+  "accessibility": {
+    "textScalePercent": 100,
+    "reducedMotion": false,
+    "highContrast": false,
+    "narration": "available",
+    "captions": true,
+    "inputModes": ["keyboard", "touch", "paper"],
+    "lowDistractionPresentation": false
+  },
+  "accommodations": [],
+  "adjustmentHistory": []
+}
+

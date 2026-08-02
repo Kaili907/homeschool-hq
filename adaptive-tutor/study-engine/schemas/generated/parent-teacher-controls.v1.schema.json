@@ -1,0 +1,509 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:manuel-academy:study-engine:parent-teacher-controls:1",
+  "title": "Parent and Teacher Controls",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Adult-defined operational guardrails and audit records. Maximum work duration is not a child trait.",
+  "required": [
+    "kind",
+    "schemaVersion",
+    "id",
+    "revision",
+    "createdAt",
+    "updatedAt",
+    "studentId",
+    "maximumWorkDurationMinutes",
+    "breakDuration",
+    "timerVisibility",
+    "manualOverrides",
+    "recommendationDecisions",
+    "accommodations",
+    "rescheduling",
+    "reviewRequests",
+    "approvedInterruptionCategories"
+  ],
+  "properties": {
+    "kind": {
+      "const": "parent-teacher-controls"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "manual",
+            "adaptive-engine",
+            "migration",
+            "import"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 50,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "extensions": {
+          "type": "object",
+          "maxProperties": 500,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9-]*:[A-Za-z0-9._/-]+$"
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "studentId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "maximumWorkDurationMinutes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 240
+    },
+    "breakDuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumMinutes",
+        "defaultMinutes",
+        "maximumMinutes"
+      ],
+      "properties": {
+        "minimumMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        },
+        "defaultMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        },
+        "maximumMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        }
+      }
+    },
+    "timerVisibility": {
+      "enum": [
+        "hidden",
+        "count-up",
+        "count-down",
+        "progress-bar",
+        "milestones-only"
+      ]
+    },
+    "manualOverrides": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "target",
+          "setBy",
+          "reason",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "target": {
+            "enum": [
+              "work-duration",
+              "break-duration",
+              "timer-visibility",
+              "schedule",
+              "accommodation"
+            ]
+          },
+          "setBy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "role",
+              "actorId"
+            ],
+            "properties": {
+              "role": {
+                "enum": [
+                  "parent",
+                  "teacher"
+                ]
+              },
+              "actorId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+              }
+            }
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "maximumWorkDurationMinutes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 240
+          },
+          "breakDurationMinutes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 120
+          },
+          "timerPresentation": {
+            "enum": [
+              "hidden",
+              "count-up",
+              "count-down",
+              "progress-bar",
+              "milestones-only"
+            ]
+          },
+          "referenceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          }
+        }
+      }
+    },
+    "recommendationDecisions": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "recommendationId",
+          "decision",
+          "decidedBy",
+          "decidedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "recommendationId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "decision": {
+            "enum": [
+              "accepted",
+              "rejected"
+            ]
+          },
+          "decidedBy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "role",
+              "actorId"
+            ],
+            "properties": {
+              "role": {
+                "enum": [
+                  "parent",
+                  "teacher"
+                ]
+              },
+              "actorId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+              }
+            }
+          },
+          "decidedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "accommodations": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "enabled",
+          "functionalDescription",
+          "source"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "functionalDescription": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "source": {
+            "enum": [
+              "parent",
+              "teacher",
+              "school-plan"
+            ]
+          },
+          "reviewAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "rescheduling": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "studyPlanId",
+          "originalStartAt",
+          "replacementStartAt",
+          "changedBy",
+          "reason",
+          "changedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "studyPlanId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "originalStartAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "replacementStartAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "changedBy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "role",
+              "actorId"
+            ],
+            "properties": {
+              "role": {
+                "enum": [
+                  "parent",
+                  "teacher"
+                ]
+              },
+              "actorId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+              }
+            }
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "changedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "reviewRequests": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "requestedAt",
+          "requestedBy",
+          "category",
+          "status",
+          "basisEvidenceIds"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "requestedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "requestedBy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "role"
+            ],
+            "properties": {
+              "role": {
+                "enum": [
+                  "student",
+                  "parent",
+                  "teacher",
+                  "tutor",
+                  "system"
+                ]
+              },
+              "actorId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+              }
+            }
+          },
+          "category": {
+            "enum": [
+              "reteaching",
+              "prerequisite-review",
+              "accommodation-review",
+              "schedule-review",
+              "student-support"
+            ]
+          },
+          "status": {
+            "enum": [
+              "open",
+              "acknowledged",
+              "resolved"
+            ]
+          },
+          "basisEvidenceIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 0,
+            "maxItems": 2000,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          }
+        }
+      }
+    },
+    "approvedInterruptionCategories": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "accessibility-need",
+          "technology-issue",
+          "scheduled-appointment",
+          "family-need",
+          "teacher-directed",
+          "parent-directed",
+          "wellbeing",
+          "emergency"
+        ]
+      }
+    },
+    "privateRecordRef": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "break minimum <= default <= maximum",
+    "override fields match the selected target and remain inside control caps",
+    "adult actor and chronology requirements are enforced",
+    "audit identifiers are unique",
+    "private note bodies are not accepted by this schema"
+  ]
+}

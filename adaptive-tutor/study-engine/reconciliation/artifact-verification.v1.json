@@ -1,0 +1,163 @@
+{
+  "schemaId": "manuel-academy.study-artifact-verification",
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-28T13:50:47.873Z",
+  "overallStatus": "blocked",
+  "hashAlgorithm": "SHA-256",
+  "wave1Artifacts": [
+    {
+      "artifactId": "manuel-academy.study-contracts",
+      "displayName": "CARD-1-STUDY-CONTRACTS.zip",
+      "path": "adaptive-tutor/study-engine/docs/contracts/artifacts/CARD-1-STUDY-CONTRACTS.zip",
+      "bytes": 110827,
+      "expectedSha256": "79BA0F39688DB42197947915AA421BCA540AD060C072E898E86619F0A66B6F41",
+      "actualSha256": "79BA0F39688DB42197947915AA421BCA540AD060C072E898E86619F0A66B6F41",
+      "hashMatch": true,
+      "archiveEntryCount": 73,
+      "fileEntryCount": 70,
+      "directoryEntryCount": 3,
+      "uncompressedBytes": 414392,
+      "maximumCompressionRatio": 9.31,
+      "treeParity": {
+        "matchedFiles": 70,
+        "missingFiles": 0,
+        "differentFiles": 0
+      },
+      "archiveSafety": {
+        "streamReadable": true,
+        "absolutePaths": 0,
+        "traversalPaths": 0,
+        "duplicatePaths": 0,
+        "caseInsensitiveDuplicatePaths": 0,
+        "normalizedDuplicatePaths": 0,
+        "symlinks": 0,
+        "reservedNameHazards": 0,
+        "pathSeparator": "backslash"
+      },
+      "result": "PASS"
+    },
+    {
+      "artifactId": "manuel-academy.study-engine.algorithms",
+      "displayName": "Study-Engine ZIP",
+      "path": "adaptive-tutor/study-engine/docs/engine/manuel-academy-session-2-study-engine.zip",
+      "bytes": 110524,
+      "expectedSha256": "979EEAC55DCDE6F47F684B0D6A9C7793FCB53E76F693D07E11A83B3FD9FFB770",
+      "actualSha256": "979EEAC55DCDE6F47F684B0D6A9C7793FCB53E76F693D07E11A83B3FD9FFB770",
+      "hashMatch": true,
+      "archiveEntryCount": 62,
+      "fileEntryCount": 58,
+      "directoryEntryCount": 4,
+      "uncompressedBytes": 337530,
+      "maximumCompressionRatio": 5.07,
+      "treeParity": {
+        "matchedFiles": 58,
+        "missingFiles": 0,
+        "differentFiles": 0
+      },
+      "archiveSafety": {
+        "streamReadable": true,
+        "absolutePaths": 0,
+        "traversalPaths": 0,
+        "duplicatePaths": 0,
+        "caseInsensitiveDuplicatePaths": 0,
+        "normalizedDuplicatePaths": 0,
+        "symlinks": 0,
+        "reservedNameHazards": 0,
+        "pathSeparator": "backslash"
+      },
+      "result": "PASS"
+    },
+    {
+      "artifactId": "manuel-academy.study-ux",
+      "displayName": "Study-UX ZIP",
+      "path": "adaptive-tutor/study-engine/docs/ui/manuel-academy-study-ux-session-3.zip",
+      "bytes": 5735334,
+      "expectedSha256": "9E3735FD09C2D19A991C3EB9FAE936204824F0A30C1EDDDAF1AC8A050314CD11",
+      "actualSha256": "9E3735FD09C2D19A991C3EB9FAE936204824F0A30C1EDDDAF1AC8A050314CD11",
+      "hashMatch": true,
+      "archiveEntryCount": 79,
+      "fileEntryCount": 64,
+      "directoryEntryCount": 15,
+      "uncompressedBytes": 6633137,
+      "maximumCompressionRatio": 5.31,
+      "treeParity": {
+        "matchedFiles": 64,
+        "missingFiles": 0,
+        "differentFiles": 0
+      },
+      "archiveSafety": {
+        "streamReadable": true,
+        "absolutePaths": 0,
+        "traversalPaths": 0,
+        "duplicatePaths": 0,
+        "caseInsensitiveDuplicatePaths": 0,
+        "normalizedDuplicatePaths": 0,
+        "symlinks": 0,
+        "reservedNameHazards": 0,
+        "pathSeparator": "slash"
+      },
+      "result": "PASS"
+    },
+    {
+      "artifactId": "manuel-academy.study-integrations",
+      "displayName": "Study-Integrations ZIP",
+      "path": "adaptive-tutor/study-engine/docs/integrations/artifacts/manuel-academy-session-4-study-integrations.zip",
+      "bytes": 86028,
+      "expectedSha256": "F4AB726446DA4129E3548919D91E56B85C93FF31BE63DEA692B0BA7926C39C1B",
+      "actualSha256": "F4AB726446DA4129E3548919D91E56B85C93FF31BE63DEA692B0BA7926C39C1B",
+      "hashMatch": true,
+      "archiveEntryCount": 38,
+      "fileEntryCount": 38,
+      "directoryEntryCount": 0,
+      "uncompressedBytes": 264516,
+      "maximumCompressionRatio": 5.44,
+      "treeParity": {
+        "matchedFiles": 38,
+        "missingFiles": 0,
+        "differentFiles": 0
+      },
+      "archiveSafety": {
+        "streamReadable": true,
+        "absolutePaths": 0,
+        "traversalPaths": 0,
+        "duplicatePaths": 0,
+        "caseInsensitiveDuplicatePaths": 0,
+        "normalizedDuplicatePaths": 0,
+        "symlinks": 0,
+        "reservedNameHazards": 0,
+        "pathSeparator": "slash"
+      },
+      "result": "PASS"
+    }
+  ],
+  "crossArchiveSafety": {
+    "uniqueFilePaths": 230,
+    "crossArchiveFileOverlaps": 0
+  },
+  "tutorCore": {
+    "artifactId": "manuel-academy-adaptive-tutor-core",
+    "requiredVersion": "0.2",
+    "status": "NOT_ACCESSIBLE",
+    "classification": "BLOCKER",
+    "searchedLocations": [
+      "workspace",
+      "adaptive-tutor/core",
+      ".codex-remote-attachments",
+      "incoming",
+      "Downloads",
+      "Documents",
+      "Desktop",
+      "OneDrive",
+      "Dropbox",
+      "local Git refs and worktrees",
+      "Wave 1 ZIP contents"
+    ],
+    "substitutionsRejected": [
+      "src/tutor legacy application source",
+      "Wave 1 compatibility notes",
+      "Wave 1 handoff summaries"
+    ],
+    "analysisRule": "Do not approve Tutor-Core mappings until the actual package bytes are available and inventoried."
+  }
+}
+

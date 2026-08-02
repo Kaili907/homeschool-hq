@@ -1,0 +1,226 @@
+{
+  "artifact": "manuel-academy.calendar-parent-runtime.parent-precedence-traces",
+  "version": 1,
+  "generatedOn": "2026-07-29",
+  "card5Decision": "DEC-012",
+  "policyId": "card5.resolve-duration-policy.v1",
+  "scenarios": [
+    {
+      "scenario": "parent-rejects",
+      "title": "Parent rejects an increase; history remains visible",
+      "summary": "The recommendation is retained as history, while the parent hard maximum remains effective.",
+      "metrics": [
+        {
+          "label": "Recommendation",
+          "value": "35 min",
+          "detail": "Retained in history"
+        },
+        {
+          "label": "Parent maximum",
+          "value": "20 min",
+          "detail": "Effective setting"
+        },
+        {
+          "label": "Decision",
+          "value": "Rejected",
+          "detail": "Can be revisited"
+        },
+        {
+          "label": "History",
+          "value": "2",
+          "detail": "Recommendations preserved"
+        }
+      ],
+      "flow": [
+        {
+          "label": "Engine",
+          "value": "Consider 35 minutes"
+        },
+        {
+          "label": "Parent",
+          "value": "Reject recommendation"
+        },
+        {
+          "label": "Effective",
+          "value": "20-minute hard maximum"
+        },
+        {
+          "label": "History",
+          "value": "Recommendation retained"
+        }
+      ],
+      "evidence": [
+        {
+          "marker": "H",
+          "title": "Recommendation retained",
+          "detail": "Consider a slightly longer work section next week."
+        },
+        {
+          "marker": "P",
+          "title": "Parent decision effective",
+          "detail": "Parent chose not to apply this recommendation. It remains available in history."
+        }
+      ],
+      "controls": [
+        {
+          "label": "Increase recommendation",
+          "detail": "Rejected without changing or deleting its history.",
+          "status": "history"
+        },
+        {
+          "label": "Parent hard maximum",
+          "detail": "20 minutes won over the inactive recommendation.",
+          "status": "effective"
+        }
+      ],
+      "traces": [
+        {
+          "label": "Recommendation",
+          "title": "History ID",
+          "id": "recommendation:consider-increase"
+        },
+        {
+          "label": "Decision",
+          "title": "Neutral parent event",
+          "id": "event:reject-increase"
+        },
+        {
+          "label": "Precedence",
+          "title": "Winner and reason recorded",
+          "id": "card5.resolve-duration-policy.v1"
+        }
+      ]
+    },
+    {
+      "scenario": "accommodation",
+      "title": "Required accommodation wins with functional language",
+      "summary": "Shorter sections, a more frequent break, and hidden timers are applied without diagnosis language.",
+      "metrics": [
+        {
+          "label": "Work maximum",
+          "value": "12 min",
+          "detail": "Accepted engine recommendation within required bounds"
+        },
+        {
+          "label": "Break",
+          "value": "8 min",
+          "detail": "Required accommodation"
+        },
+        {
+          "label": "Timer",
+          "value": "Hidden",
+          "detail": "Required accommodation"
+        },
+        {
+          "label": "Controls replayed",
+          "value": "10",
+          "detail": "All ten parent controls"
+        }
+      ],
+      "flow": [
+        {
+          "label": "Safety",
+          "value": "No configured work cap"
+        },
+        {
+          "label": "Accommodation",
+          "value": "12 min · 8 min break"
+        },
+        {
+          "label": "Parent maximum",
+          "value": "24 min superseded"
+        },
+        {
+          "label": "Effective",
+          "value": "Accommodation wins"
+        }
+      ],
+      "evidence": [
+        {
+          "marker": "A",
+          "title": "Functional accommodation",
+          "detail": "Use twelve-minute sections with a movement break between sections."
+        },
+        {
+          "marker": "W",
+          "title": "Winner recorded",
+          "detail": "Accepted engine recommendation supplied 20 minutes; the effective duration is 12 minutes within 0–12. It was clamped by Required accommodation maximum (accommodation:short-sections)."
+        },
+        {
+          "marker": "N",
+          "title": "Private note isolated",
+          "detail": "The public state records only that a private-note command was routed."
+        }
+      ],
+      "controls": [
+        {
+          "label": "Accept recommendation",
+          "detail": "Parent applied a study-setting recommendation.",
+          "status": "effective"
+        },
+        {
+          "label": "Reject recommendation",
+          "detail": "Parent kept the current setting; the recommendation remains in history.",
+          "status": "history"
+        },
+        {
+          "label": "Set maximum work duration",
+          "detail": "Parent set a hard maximum: Keep work blocks within the family schedule.",
+          "status": "effective"
+        },
+        {
+          "label": "Set break duration",
+          "detail": "Parent set break duration: Allow time to move and get water.",
+          "status": "effective"
+        },
+        {
+          "label": "Hide timers",
+          "detail": "Parent hid timers: Show progress milestones without a countdown.",
+          "status": "effective"
+        },
+        {
+          "label": "Add accommodation",
+          "detail": "Parent added a functional accommodation without diagnosis language.",
+          "status": "effective"
+        },
+        {
+          "label": "Reschedule incomplete work",
+          "detail": "Parent rescheduled incomplete work.",
+          "status": "effective"
+        },
+        {
+          "label": "Mark interruption",
+          "detail": "Parent marked the technical interruption.",
+          "status": "effective"
+        },
+        {
+          "label": "Add private note",
+          "detail": "Adult-private note was routed to the separately authorized record.",
+          "status": "effective"
+        },
+        {
+          "label": "Request teacher or tutor review",
+          "detail": "Parent requested tutor review.",
+          "status": "effective"
+        }
+      ],
+      "traces": [
+        {
+          "label": "Control set",
+          "title": "Canonical sidecar identity",
+          "id": "controls:runtime-lab"
+        },
+        {
+          "label": "Policy",
+          "title": "Card 5 constraint policy",
+          "id": "card5.resolve-duration-policy.v1"
+        },
+        {
+          "label": "Private record",
+          "title": "Separate authorized projection",
+          "id": "private:runtime-lab"
+        }
+      ]
+    }
+  ]
+}

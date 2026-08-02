@@ -1,0 +1,462 @@
+{
+  "schemaId": "manuel-academy.study-reconciliation.enum-event-mappings",
+  "schemaVersion": 1,
+  "status": "approved-with-blockers",
+  "canonicalAuthority": "Session 1 contracts",
+  "rules": {
+    "persistedSessionVocabulary": "Only Session 1 StudySessionState and StudySessionEventType values may be persisted in the Study Engine event ledger.",
+    "adapterVocabulary": "Session 2 orchestrator events and Session 3 UI intents are boundary inputs only. Session 4 audit events are projection-local and must link to the originating command or event.",
+    "eventVersion": "Embedded StudySessionEvent records inherit StudySession.schemaVersion=1. A standalone append command uses commandVersion=manuel-academy.study-command.v1.",
+    "idempotency": "StudySessionEvent.id is unique within sessionId. Same ID plus identical bytes is a no-op; same ID plus different bytes is a quarantined conflict. Commands additionally carry a stable commandId/idempotencyKey and expected aggregate revision."
+  },
+  "gradeBands": [
+    {
+      "source": "session-2-provisional",
+      "from": "elementary",
+      "to": "elementary-3-5"
+    },
+    {
+      "source": "session-2-provisional",
+      "from": "middle",
+      "to": "middle-6-8"
+    },
+    {
+      "source": "session-2-provisional",
+      "from": "high",
+      "to": "high-9-12"
+    },
+    {
+      "source": "session-2-focus",
+      "from": "elementary",
+      "to": "elementary-3-5"
+    },
+    {
+      "source": "session-2-focus",
+      "from": "middle_school",
+      "to": "middle-6-8"
+    },
+    {
+      "source": "session-2-focus",
+      "from": "high_school",
+      "to": "high-9-12"
+    }
+  ],
+  "studyUxSegments": [
+    {
+      "from": "warm-up",
+      "toTaskType": "retrieval-practice",
+      "idRule": "Replace fixture slug with the matching canonical LessonSegment.id."
+    },
+    {
+      "from": "visual-lesson",
+      "toTaskType": "direct-instruction",
+      "idRule": "Replace fixture slug with the matching canonical LessonSegment.id."
+    },
+    {
+      "from": "guided-practice",
+      "toTaskType": "guided-practice",
+      "idRule": "Replace fixture slug with the matching canonical LessonSegment.id."
+    },
+    {
+      "from": "independent-attempt",
+      "toTaskType": "independent-practice",
+      "idRule": "Replace fixture slug with the matching canonical LessonSegment.id."
+    },
+    {
+      "from": "self-check",
+      "toTaskType": "reflection",
+      "idRule": "Replace fixture slug with the matching canonical LessonSegment.id."
+    },
+    {
+      "from": "exit-ticket",
+      "toTaskType": "mastery-check",
+      "idRule": "Replace fixture slug with the matching canonical LessonSegment.id."
+    }
+  ],
+  "sessionStates": {
+    "canonical": [
+      "planned",
+      "active",
+      "paused",
+      "approved-break",
+      "student-requested-break",
+      "technical-interruption",
+      "completed",
+      "abandoned"
+    ],
+    "nonCanonicalCoordinates": [
+      {
+        "source": "session-2-orchestrator-phase",
+        "handling": "Keep as an engine runtime coordinate; never persist as StudySession.state."
+      },
+      {
+        "source": "session-3-screen",
+        "handling": "Keep in the versioned UX resume sidecar; never persist as StudySession.state."
+      },
+      {
+        "source": "session-4-calendar-execution-state",
+        "handling": "Keep as a calendar projection."
+      }
+    ]
+  },
+  "sessionEvents": [
+    {
+      "source": "session-2",
+      "from": "session_started",
+      "to": [
+        "session-started"
+      ],
+      "condition": "Canonical plan and session already validated."
+    },
+    {
+      "source": "session-2",
+      "from": "check_in_completed",
+      "to": [
+        "active-response-recorded",
+        "segment-completed"
+      ],
+      "condition": "Only when check-in is a planned segment; otherwise it is UX-local. Copy no check-in text."
+    },
+    {
+      "source": "session-2",
+      "from": "prior_retrieval_completed",
+      "to": [
+        "active-response-recorded",
+        "segment-completed"
+      ],
+      "condition": "The active canonical segment is retrieval-practice."
+    },
+    {
+      "source": "session-2",
+      "from": "visual_teaching_completed",
+      "to": [
+        "segment-completed"
+      ],
+      "condition": "The active canonical segment is direct-instruction or worked-example."
+    },
+    {
+      "source": "session-2",
+      "from": "guided_practice_completed",
+      "to": [
+        "active-response-recorded",
+        "segment-completed"
+      ],
+      "condition": "A low-detail evidenceRef may be attached; no raw response."
+    },
+    {
+      "source": "session-2",
+      "from": "independent_attempt_completed",
+      "to": [
+        "active-response-recorded",
+        "segment-completed"
+      ],
+      "condition": "Completion means durably submitted, not correct or mastered."
+    },
+    {
+      "source": "session-2",
+      "from": "confidence_check_completed",
+      "to": [
+        "active-response-recorded",
+        "segment-completed"
+      ],
+      "condition": "Only for a planned reflection segment. Tutor Core separately owns routing."
+    },
+    {
+      "source": "session-2",
+      "from": "core_instruction_completed",
+      "to": [
+        "tutor-intervention-recorded"
+      ],
+      "condition": "Add segment lifecycle events only when the intervention corresponds to a canonical planned segment."
+    },
+    {
+      "source": "session-2",
+      "from": "review_scheduled",
+      "to": [],
+      "sidecar": "Update StudentSkillReview, then project a review-queue item. This is not a session event."
+    },
+    {
+      "source": "session-2-pacing",
+      "from": "break",
+      "to": [
+        "break-requested",
+        "break-approved",
+        "break-started"
+      ],
+      "condition": "Approval and start may be separate commands; never synthesize them if policy has not approved the break."
+    },
+    {
+      "source": "session-2-pacing",
+      "from": "continue",
+      "to": [
+        "segment-started"
+      ],
+      "condition": "Use session-resumed instead when continuing from a paused/break/interruption state."
+    },
+    {
+      "source": "session-2-pacing",
+      "from": "finish",
+      "to": [
+        "session-completed"
+      ],
+      "condition": "Only after the canonical completion rule."
+    },
+    {
+      "source": "session-3",
+      "from": "break_returned|break_resume_confirmed",
+      "to": [
+        "break-ended",
+        "session-resumed"
+      ],
+      "condition": "The second event confirms the learner resumed."
+    },
+    {
+      "source": "session-3",
+      "from": "technical_interruption",
+      "to": [
+        "technical-interruption-started"
+      ],
+      "condition": "Append technical-interruption-ended only after confirmed recovery."
+    },
+    {
+      "source": "session-3",
+      "from": "intentional_save_exit",
+      "to": [
+        "pause-started"
+      ],
+      "condition": "Persist a canonical ResumePoint and device-local checkpoint reference."
+    },
+    {
+      "source": "session-4-calendar",
+      "from": "created|rescheduled|parent_edited|continuation_created",
+      "to": [],
+      "sidecar": "Calendar audit only; link source commandId or StudySessionEvent.id."
+    }
+  ],
+  "timerModes": {
+    "canonicalModel": {
+      "visibility": [
+        "shown",
+        "minimal",
+        "hidden"
+      ],
+      "metric": [
+        "count-up",
+        "count-down",
+        "progress-bar",
+        "milestones-only"
+      ]
+    },
+    "adapters": [
+      {
+        "source": "session-1",
+        "from": "hidden",
+        "to": {
+          "visibility": "hidden",
+          "metric": null
+        }
+      },
+      {
+        "source": "session-1",
+        "from": "count-up",
+        "to": {
+          "visibility": "shown",
+          "metric": "count-up"
+        }
+      },
+      {
+        "source": "session-1",
+        "from": "count-down",
+        "to": {
+          "visibility": "shown",
+          "metric": "count-down"
+        }
+      },
+      {
+        "source": "session-1",
+        "from": "progress-bar",
+        "to": {
+          "visibility": "minimal",
+          "metric": "progress-bar"
+        }
+      },
+      {
+        "source": "session-1",
+        "from": "milestones-only",
+        "to": {
+          "visibility": "minimal",
+          "metric": "milestones-only"
+        }
+      },
+      {
+        "source": "session-3",
+        "from": "visible",
+        "to": {
+          "visibility": "shown",
+          "metric": "count-down"
+        }
+      },
+      {
+        "source": "session-3",
+        "from": "minimal",
+        "to": {
+          "visibility": "minimal",
+          "metric": "progress-bar"
+        }
+      },
+      {
+        "source": "session-3",
+        "from": "hidden",
+        "to": {
+          "visibility": "hidden",
+          "metric": null
+        }
+      },
+      {
+        "source": "session-4",
+        "from": "shown",
+        "to": {
+          "visibility": "shown",
+          "metric": "retain-effective-preference"
+        }
+      },
+      {
+        "source": "session-4",
+        "from": "hidden",
+        "to": {
+          "visibility": "hidden",
+          "metric": null
+        }
+      }
+    ]
+  },
+  "breaks": {
+    "activityTypes": [
+      "planned",
+      "student-requested",
+      "movement",
+      "water",
+      "screen-rest",
+      "quiet-reset",
+      "parent-configured"
+    ],
+    "reasonCategories": [
+      "pacing",
+      "student-request",
+      "wellbeing",
+      "accessibility-need",
+      "technical-recovery",
+      "parent-teacher-direction"
+    ],
+    "rule": "Activity type and reason category are orthogonal. Do not collapse water/movement/screen-rest into a reason."
+  },
+  "reviewIntervals": [
+    {
+      "days": 0,
+      "intervalId": "same-day"
+    },
+    {
+      "days": 1,
+      "intervalId": "one-day"
+    },
+    {
+      "days": 3,
+      "intervalId": "three-day"
+    },
+    {
+      "days": 7,
+      "intervalId": "seven-day"
+    },
+    {
+      "days": 14,
+      "intervalId": "fourteen-day"
+    },
+    {
+      "days": 30,
+      "intervalId": "thirty-day"
+    },
+    {
+      "days": "other-positive-integer",
+      "intervalId": "custom"
+    }
+  ],
+  "calendarBlockTypes": [
+    {
+      "taskTypes": [
+        "direct-instruction",
+        "worked-example"
+      ],
+      "blockType": "new_instruction"
+    },
+    {
+      "taskTypes": [
+        "guided-practice"
+      ],
+      "blockType": "guided_practice"
+    },
+    {
+      "taskTypes": [
+        "independent-practice"
+      ],
+      "blockType": "independent_practice"
+    },
+    {
+      "taskTypes": [
+        "retrieval-practice",
+        "prerequisite-remediation"
+      ],
+      "blockType": "review"
+    },
+    {
+      "taskTypes": [
+        "reading"
+      ],
+      "blockType": "reading"
+    },
+    {
+      "taskTypes": [
+        "writing"
+      ],
+      "blockType": "writing"
+    },
+    {
+      "taskTypes": [
+        "project-work"
+      ],
+      "blockType": "project_work"
+    },
+    {
+      "taskTypes": [
+        "mastery-check"
+      ],
+      "blockType": "assessment"
+    },
+    {
+      "taskTypes": [
+        "problem-solving",
+        "discussion",
+        "reflection",
+        "custom"
+      ],
+      "blockType": null,
+      "rule": "Require a plan-provided block type; do not guess."
+    }
+  ],
+  "recommendations": {
+    "engineDispositions": [
+      "increase",
+      "maintain",
+      "decrease",
+      "insufficient-data",
+      "manual-review"
+    ],
+    "decisionStates": [
+      "proposed",
+      "accepted",
+      "rejected",
+      "superseded",
+      "expired"
+    ],
+    "rule": "Disposition and decision lifecycle are separate. Rejection applies only to the referenced RecommendationId."
+  }
+}

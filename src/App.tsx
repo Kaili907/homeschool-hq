@@ -487,6 +487,7 @@ export default function App() {
             onExit={() => setScreen({ kind: 'home' })}
           />
         )}
+
       </div>
     </ThemeContext.Provider>
   )

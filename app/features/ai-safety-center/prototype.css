@@ -1,0 +1,98 @@
+.masc-prototype {
+  min-height: 100vh;
+  background: #f3f6fa;
+}
+
+.masc-prototype-bar,
+.masc-prototype-bar * {
+  box-sizing: border-box;
+}
+
+.masc-prototype-bar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  min-height: 4rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  border-bottom: 1px solid #c7d1df;
+  padding: 0.6rem 1rem;
+  color: #17243b;
+  background: #ffffff;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.masc-prototype-bar > div:first-child {
+  display: grid;
+}
+
+.masc-prototype-bar > div:first-child span,
+.masc-prototype-bar > p {
+  color: #556176;
+  font-size: 0.75rem;
+}
+
+.masc-prototype-options,
+.masc-prototype-options fieldset,
+.masc-prototype-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.masc-prototype-options fieldset {
+  min-height: 2.75rem;
+  margin: 0;
+  border: 1px solid #b8c5d6;
+  border-radius: 0.6rem;
+  padding: 0.35rem 0.65rem;
+}
+
+.masc-prototype-options legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.masc-prototype-options input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: #2d62c9;
+}
+
+.masc-prototype-options label {
+  min-height: 2.5rem;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.masc-prototype-bar > p {
+  max-width: 22rem;
+  margin: 0;
+}
+
+@media (max-width: 55rem) {
+  .masc-prototype-bar {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .masc-prototype-options {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .masc-prototype-bar *,
+  .masc-prototype-bar *::before,
+  .masc-prototype-bar *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

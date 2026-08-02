@@ -1,0 +1,35 @@
+{
+  "manifestVersion": "student-runtime.source-package.v1",
+  "archiveRoot": "adaptive-tutor/study-engine",
+  "ownedRoots": [
+    "integration-labs/student-runtime",
+    "tests/student-runtime",
+    "docs/student-runtime"
+  ],
+  "verifiedReadOnlyDependenciesIncluded": [
+    "contracts",
+    "schemas",
+    "engine",
+    "prompts",
+    "ui",
+    "prototype/src",
+    "reconciliation"
+  ],
+  "verifiedPackageSha256": {
+    "card1": "79BA0F39688DB42197947915AA421BCA540AD060C072E898E86619F0A66B6F41",
+    "session2": "979EEAC55DCDE6F47F684B0D6A9C7793FCB53E76F693D07E11A83B3FD9FFB770",
+    "session3": "9E3735FD09C2D19A991C3EB9FAE936204824F0A30C1EDDDAF1AC8A050314CD11",
+    "card5": "2231E758AA9DD309565E374BE1D1B78A2835C8A3F5A221562BE04DB78900E2E7"
+  },
+  "excludedGeneratedOrSupersededPaths": [
+    "integration-labs/student-runtime/node_modules",
+    "docs/student-runtime/test-artifacts",
+    "docs/student-runtime/MANUEL-ACADEMY-SESSION-7-STUDY-STUDENT-RUNTIME.zip",
+    "docs/student-runtime/MANUEL-ACADEMY-SESSION-7-STUDY-STUDENT-RUNTIME.zip.sha256.txt",
+    "docs/student-runtime/screenshots/05-mobile-reading-large-text-fixed.png"
+  ],
+  "installDirectory": "adaptive-tutor/study-engine/integration-labs/student-runtime",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "scope": "local-browser-integration-lab-only"
+}

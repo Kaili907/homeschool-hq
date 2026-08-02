@@ -1,0 +1,52 @@
+{
+  "artifact": "manuel-academy.calendar-parent-runtime.screenshots",
+  "capturedOn": "2026-07-29",
+  "browser": "system Google Chrome via playwright-core",
+  "baseUrl": "http://127.0.0.1:4189",
+  "artifacts": [
+    {
+      "file": "01-retrieval-failure-desktop.png",
+      "scenario": "retrieval-failure",
+      "viewport": {
+        "width": 1440,
+        "height": 1050
+      },
+      "title": "Retrieval failure · Calendar + Parent Runtime Lab",
+      "sha256": "17BF43182B19C58D9C61FB881647C4111188086829312F409D853DF28689DF19",
+      "result": "PASS"
+    },
+    {
+      "file": "02-partial-resume-desktop.png",
+      "scenario": "partial-resume",
+      "viewport": {
+        "width": 1440,
+        "height": 1050
+      },
+      "title": "Partial + resume · Calendar + Parent Runtime Lab",
+      "sha256": "9634E92900CB15BB587C7F3C569C115F8D94CCC8F50321F0CF8FBBAE0DBE8D31",
+      "result": "PASS"
+    },
+    {
+      "file": "03-parent-controls-mobile.png",
+      "scenario": "accommodation",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "title": "Accommodation · Calendar + Parent Runtime Lab",
+      "sha256": "BFFCE8CD5B290A7D4D8887AC58ABECDA54C94F992DDDB4C7D60A65DD6DFDB2EF",
+      "result": "PASS"
+    },
+    {
+      "file": "04-romeo-adapter-desktop.png",
+      "scenario": "romeo",
+      "viewport": {
+        "width": 1440,
+        "height": 1050
+      },
+      "title": "Romeo adapter · Calendar + Parent Runtime Lab",
+      "sha256": "45E3E828088E89B842E0DCC25376E1264C6669FE05402695D15E1A2D82A02C75",
+      "result": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "manifestVersion": "student-runtime.canonical-adapter-manifest.v2",
+  "session": "SESSION 7 - STUDY-STUDENT-RUNTIME",
+  "runtimeVersion": "0.7.1",
+  "canonicalSchemaVersion": 1,
+  "verifiedInputs": [
+    {
+      "package": "CARD-1-STUDY-CONTRACTS.zip",
+      "sha256": "79BA0F39688DB42197947915AA421BCA540AD060C072E898E86619F0A66B6F41",
+      "status": "verified-exact",
+      "workspaceParity": "70/70 files byte-identical"
+    },
+    {
+      "package": "Study-Engine ZIP",
+      "sha256": "979EEAC55DCDE6F47F684B0D6A9C7793FCB53E76F693D07E11A83B3FD9FFB770",
+      "status": "verified-exact",
+      "workspaceParity": "58/58 files byte-identical"
+    },
+    {
+      "package": "Study-UX ZIP",
+      "sha256": "9E3735FD09C2D19A991C3EB9FAE936204824F0A30C1EDDDAF1AC8A050314CD11",
+      "status": "verified-exact",
+      "workspaceParity": "64/64 files byte-identical"
+    },
+    {
+      "package": "CARD-5-STUDY-RECON-AUDIT.zip",
+      "sha256": "2231E758AA9DD309565E374BE1D1B78A2835C8A3F5A221562BE04DB78900E2E7",
+      "status": "verified-exact",
+      "workspaceParity": "36/36 files byte-identical",
+      "decisionUsed": "DEC-012"
+    }
+  ],
+  "availability": {
+    "tutorCoreV0_2": "not-present",
+    "verifiedSession6Bridge": "not-present",
+    "card5PrecedencePackage": "verified-and-used",
+    "missingPackagesReconstructed": false
+  },
+  "adapters": [
+    {
+      "id": "student-runtime.catalog.v1",
+      "source": "integration-labs/student-runtime/src/catalog.ts",
+      "input": "verified Study-UX content plus canonical mock preferences",
+      "output": [
+        "LessonStudyPlan",
+        "ParentTeacherControls",
+        "StudentFocusProfile"
+      ],
+      "authority": "canonical-contract-projection"
+    },
+    {
+      "id": "student-runtime.canonical-state.v1",
+      "source": "integration-labs/student-runtime/src/state/canonicalSession.ts",
+      "input": "validated canonical commands",
+      "output": "StudySession revisions and StudySessionEvent log",
+      "authority": "sole-session-progress-authority"
+    },
+    {
+      "id": "student-runtime.study-ux-adapter.v2",
+      "source": [
+        "integration-labs/student-runtime/src/state/runtimeMachine.ts",
+        "integration-labs/student-runtime/src/adapters/uiActionVocabulary.v2.ts"
+      ],
+      "input": "verified Study-UX component actions",
+      "output": "canonical commands plus local presentation state",
+      "authority": "command-adapter-only",
+      "parity": "learner-action vocabulary tested against verified Study-UX"
+    },
+    {
+      "id": "student-runtime.engine-projection.v2",
+      "source": "integration-labs/student-runtime/src/adapters/engineProjection.v1.ts",
+      "note": "The compatibility filename is retained; the exported wire identifier is v2.",
+      "input": "validated canonical aggregates and bounded local ratings",
+      "output": [
+        "FocusRecommendationResult",
+        "BreakRecommendation",
+        "EvidenceAssessment",
+        "LearningEvidence",
+        "StudentSkillReview",
+        "ResolvedDurationPolicy"
+      ],
+      "authority": "deterministic-Session-2-and-verified-Card-5-projection"
+    },
+    {
+      "id": "student-runtime.session6-bridge.v2",
+      "source": "integration-labs/student-runtime/src/bridges/session6Bridge.v2.ts",
+      "compatibilityShim": "integration-labs/student-runtime/src/bridges/session6Bridge.v1.ts",
+      "input": "local response, canonical SegmentId task identity, stable references, and submission revision",
+      "output": "bound continue-or-reteach demonstration receipt",
+      "authority": "temporary-local-only",
+      "masteryAuthority": "withheld-pending-verified-tutor-core",
+      "misconceptionAuthority": "withheld-pending-verified-tutor-core"
+    },
+    {
+      "id": "student-runtime.resume-envelope.v2",
+      "source": "integration-labs/student-runtime/src/persistence/resumeStore.ts",
+      "input": "student-runtime.workspace.v2",
+      "output": "canonical JSON envelope with SHA-256 integrity and monotonic revision",
+      "authority": "device-local-resume-only",
+      "unsupportedVersions": "quarantine"
+    }
+  ],
+  "stableIdentifiers": {
+    "learnerReference": "StudentId",
+    "lesson": "LessonId",
+    "plan": "StudyPlanId",
+    "subject": "SubjectId",
+    "skill": "SkillId",
+    "segmentAndTask": "SegmentId (DEC-004; no parallel TaskId)",
+    "session": "SessionId",
+    "event": "SessionEventId",
+    "evidence": "EvidenceId",
+    "review": "ReviewId",
+    "interruption": "InterruptionId"
+  },
+  "eventVocabulary": {
+    "version": "Card 1 SessionEventType schema v1",
+    "progressAuthority": "canonical segment-completed events",
+    "duplicatePolicy": "same command ID and payload is a no-op; same ID with changed payload is an idempotency conflict"
+  },
+  "durationPolicy": {
+    "version": "card5.resolve-duration-policy.v1",
+    "decision": "DEC-012",
+    "provisional": false,
+    "order": [
+      "version-integrity-authorization-gates",
+      "safety-and-required-accommodation-constraints",
+      "authorized-adult-hard-maximum",
+      "feasible-interval-or-manual-review",
+      "authorized-manual-target",
+      "accepted-evidence-sufficient-engine-recommendation",
+      "established-target",
+      "grade-band-default",
+      "clamp-with-provenance"
+    ]
+  },
+  "privacyBoundary": {
+    "piiAllowed": false,
+    "rawAnswerAllowed": false,
+    "transcriptAllowedInCanonicalOutput": false,
+    "deviceLocalDraftsAllowed": true
+  },
+  "authorityBoundaries": {
+    "mastery": "Tutor Core only; unavailable in this lab",
+    "misconception": "Tutor Core only; unavailable in this lab",
+    "pacing": "Session 2 only when comparable evidence is sufficient",
+    "review": "learner-local recommendation with empty retrieval attempts until verified Tutor Core evidence exists"
+  }
+}

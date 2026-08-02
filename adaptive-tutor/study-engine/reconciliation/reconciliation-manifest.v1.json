@@ -1,0 +1,156 @@
+{
+  "schemaId": "manuel-academy.study-reconciliation.manifest",
+  "schemaVersion": 1,
+  "manifestId": "CARD-5-STUDY-RECON-AUDIT",
+  "packageId": "manuel-academy.study-reconciliation",
+  "packageVersion": "0.5.0-blocked.1",
+  "createdAt": "2026-07-28T00:00:00-04:00",
+  "status": "BLOCKED",
+  "purpose": "Wave 2 contract reconciliation and integration plan only",
+  "finalAssemblyAuthorized": false,
+  "productionIntegrationAuthorized": false,
+  "ownership": {
+    "writeRoots": [
+      "adaptive-tutor/study-engine/reconciliation/**",
+      "adaptive-tutor/study-engine/docs/reconciliation/**",
+      "adaptive-tutor/study-engine/tests/reconciliation/**"
+    ],
+    "wave1SourcesModified": false,
+    "tutorCoreModified": false,
+    "productionSystemsModified": false
+  },
+  "authorities": [
+    {
+      "rank": 1,
+      "authority": "Session 1 contracts",
+      "scope": "initial canonical Study Engine v1 wire and persistence boundary"
+    },
+    {
+      "rank": 2,
+      "authority": "Actual Tutor Core v0.2",
+      "scope": "instructional mastery, misconceptions, prerequisites, uncertainty, tutoring safety, board commands, spoken turns, captions, transcripts, and adult-review evidence",
+      "status": "UNAVAILABLE — NO MAPPING APPROVED"
+    },
+    {
+      "rank": 3,
+      "authority": "Session 2",
+      "scope": "pacing algorithms after provisional adapter mapping"
+    },
+    {
+      "rank": 4,
+      "authority": "Session 3",
+      "scope": "student Study-UX and accessibility"
+    },
+    {
+      "rank": 5,
+      "authority": "Session 4",
+      "scope": "calendar placement, review queue, parent insights, and credential-free Romeo adapter"
+    }
+  ],
+  "verifiedArtifactsRef": "artifact-verification.v1.json",
+  "specialistReviews": [
+    {
+      "role": "Package Integrity Agent",
+      "status": "complete",
+      "result": "Four Wave 1 hashes and tree parity passed; Tutor Core missing."
+    },
+    {
+      "role": "Contract Diff Agent",
+      "status": "complete",
+      "result": "Field-level conflicts and adapter decisions reconciled."
+    },
+    {
+      "role": "Tutor-Core Compatibility Agent",
+      "status": "complete",
+      "result": "Compatibility remains blocked; twenty actual-package probes enumerated."
+    },
+    {
+      "role": "Runtime Flow Agent",
+      "status": "complete",
+      "result": "Fourteen canonical traces and event/projection boundaries reconciled."
+    },
+    {
+      "role": "Privacy and Safety Agent",
+      "status": "complete",
+      "result": "Precedence, private-data, free-text, quarantine, and credential risks reconciled."
+    }
+  ],
+  "machineRecords": [
+    "artifact-verification.v1.json",
+    "canonical-decisions.v1.json",
+    "issues.v1.json",
+    "field-diff-matrix.v1.json",
+    "enum-event-mappings.v1.json",
+    "tutor-core-compatibility.v1.json",
+    "core-change-requests.v1.json",
+    "flow-traces.v1.json",
+    "schema-registry-plan.v1.json",
+    "validation-result.v1.json"
+  ],
+  "executableProbes": [
+    "probes/policy.mjs",
+    "probes/quarantine.mjs",
+    "probes/validate-reconciliation.mjs",
+    "probes/run-probes.mjs"
+  ],
+  "automatedTestRoot": "../tests/reconciliation",
+  "requiredReports": [
+    "../docs/reconciliation/artifact-and-hash-verification-report.md",
+    "../docs/reconciliation/ownership-boundary-report.md",
+    "../docs/reconciliation/canonical-decision-record.md",
+    "../docs/reconciliation/field-level-diff-matrix.md",
+    "../docs/reconciliation/enum-event-mapping-tables.md",
+    "../docs/reconciliation/tutor-core-compatibility-matrix.md",
+    "../docs/reconciliation/provisional-adapter-retirement-plan.md",
+    "../docs/reconciliation/consolidated-core-change-requests.md",
+    "../docs/reconciliation/merge-order-plan.md",
+    "../docs/reconciliation/blocking-and-non-blocking-issues.md",
+    "../docs/reconciliation/validation-report.md",
+    "../docs/reconciliation/SESSION-5-HANDOFF.md"
+  ],
+  "blockingIssueIds": [
+    "CORE-001",
+    "EVIDENCE-001",
+    "SKILL-001",
+    "ACCOMMODATION-001",
+    "CAP-001",
+    "PRIVATE-AUDIENCE-001",
+    "PARENT-ACCEPT-001"
+  ],
+  "validation": {
+    "status": "PASS_WITH_BLOCKER",
+    "reconciliationProbeCount": 7,
+    "reconciliationTestCount": 19,
+    "wave1Typechecks": {
+      "contracts": "PASS",
+      "engine": "PASS",
+      "studyUx": "PASS"
+    },
+    "wave1Tests": {
+      "contracts": {
+        "files": 7,
+        "tests": 116,
+        "status": "PASS"
+      },
+      "engine": {
+        "files": 21,
+        "tests": 325,
+        "status": "PASS"
+      },
+      "studyUx": {
+        "files": 8,
+        "tests": 25,
+        "status": "PASS"
+      },
+      "integrations": {
+        "files": 10,
+        "tests": 55,
+        "status": "PASS"
+      }
+    },
+    "tutorCoreProbeCount": 20,
+    "tutorCoreProbesRun": 0,
+    "reason": "Actual Tutor Core v0.2 artifact is unavailable."
+  },
+  "nextAuthorizedAction": "Attach the actual Tutor Core v0.2 package, verify its hash and manifest, run TC-P00 through TC-P19, then update this audit. Do not begin final assembly."
+}

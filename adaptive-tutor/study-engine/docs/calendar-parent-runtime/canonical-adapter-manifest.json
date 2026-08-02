@@ -1,0 +1,147 @@
+{
+  "artifact": "manuel-academy.study-calendar-runtime.adapter-manifest",
+  "version": "0.8.0",
+  "generatedOn": "2026-07-29",
+  "mode": "local-in-memory-integration-lab",
+  "productionApproved": false,
+  "boundaries": {
+    "writes": [
+      "adaptive-tutor/study-engine/integration-labs/calendar-parent-runtime/**",
+      "adaptive-tutor/study-engine/tests/calendar-parent-runtime/**",
+      "adaptive-tutor/study-engine/docs/calendar-parent-runtime/**"
+    ],
+    "explicitlyExcluded": [
+      "Student Study-UX",
+      "production calendar",
+      "production parent dashboard",
+      "Tutor Core",
+      "Supabase",
+      "database",
+      "authentication",
+      "identity",
+      "storage",
+      "deployment",
+      "GitHub"
+    ]
+  },
+  "verifiedInputs": [
+    {
+      "label": "CARD-1-STUDY-CONTRACTS.zip",
+      "sha256": "79BA0F39688DB42197947915AA421BCA540AD060C072E898E86619F0A66B6F41",
+      "role": "canonical contract and runtime schema authority"
+    },
+    {
+      "label": "Study-Engine ZIP",
+      "sha256": "979EEAC55DCDE6F47F684B0D6A9C7793FCB53E76F693D07E11A83B3FD9FFB770",
+      "role": "review recommendation and evidence-policy producer"
+    },
+    {
+      "label": "Study-Integrations ZIP",
+      "sha256": "F4AB726446DA4129E3548919D91E56B85C93FF31BE63DEA692B0BA7926C39C1B",
+      "role": "verified Session 4 calendar, parent, and Romeo integration substrate"
+    },
+    {
+      "label": "CARD-5-STUDY-RECON-AUDIT.zip",
+      "sha256": "2231E758AA9DD309565E374BE1D1B78A2835C8A3F5A221562BE04DB78900E2E7",
+      "role": "verified reconciliation decisions and executable duration-policy reference; PASS_WITH_BLOCKER and not production/final-assembly authorization"
+    }
+  ],
+  "adapters": [
+    {
+      "id": "engine-review-to-canonical-review",
+      "source": "engine/review ReviewRecommendation",
+      "target": "contracts/review-scheduling StudentSkillReview",
+      "policy": "preserve canonical review ID, learner IANA timezone, local calendar due date, interval adjustment evidence, and reteaching/remediation triggers",
+      "status": "canonical-wrapper"
+    },
+    {
+      "id": "canonical-review-to-local-queue",
+      "source": "contracts/review-scheduling StudentSkillReview",
+      "target": "calendar-parent-runtime ReviewQueueEntry",
+      "policy": "caller-supplied stable queue ID, source recommendation ID, canonical review ID, and revision remain independent; semantic replay is idempotent and conflicting identity fails closed",
+      "status": "canonical-wrapper"
+    },
+    {
+      "id": "local-queue-to-calendar",
+      "source": "calendar-parent-runtime ReviewQueueEntry",
+      "target": "calendar-parent-runtime CalendarBlock",
+      "policy": "authorized learner-local placement only; required-instruction capacity reservation; daily item/minute caps; stable idempotent source identity",
+      "status": "canonical-wrapper"
+    },
+    {
+      "id": "calendar-result-to-canonical-session-result",
+      "source": "calendar-parent-runtime attempt and segment events",
+      "target": "contracts/study-session SessionResult",
+      "policy": "completed and remaining canonical segment IDs, separate active/break/paused duration, exact next action",
+      "status": "canonical-wrapper"
+    },
+    {
+      "id": "canonical-result-to-engine-evidence",
+      "source": "contracts StudySession result and LearningEvidence references",
+      "target": "engine/review RetrievalEvidence plus review-result-return-command.v1",
+      "policy": "only aggregate accuracy, independence, confidence, prerequisite flag, and reteaching outcome cross the seam through an idempotent memory-only outbox command with stable canonical IDs",
+      "status": "canonical-wrapper"
+    },
+    {
+      "id": "canonical-controls-to-effective-settings",
+      "source": "contracts/parent-teacher-controls ParentTeacherControls",
+      "target": "calendar-parent-runtime EffectiveParentSettings",
+      "policy": "Card 5 DEC-012 constraint reduction: version/integrity/authorization gate; intersect safety, required accommodation, and adult hard bounds; select manual/accepted-engine/established/default candidate; clamp with complete provenance; infeasible intersections route to manual review",
+      "status": "card-5-reconciled-adapter"
+    },
+    {
+      "id": "canonical-private-record-to-authorized-adult-view",
+      "source": "contracts/parent-teacher-private ParentTeacherPrivateRecord",
+      "target": "calendar-parent-runtime AuthorizedAdultPrivateProjection",
+      "policy": "Card 5 DEC-019: body stays in a separate repository; parent-only is never widened; adult operational events contain only noteRef/category/authorRef/createdAt; student projection reveals no existence signal",
+      "status": "card-5-reconciled-adapter"
+    },
+    {
+      "id": "romeo-metadata-to-external-study-task",
+      "source": "manual, approved-import, or browser-assisted-reference metadata",
+      "target": "calendar-parent-runtime RomeoAssignment and CalendarBlock",
+      "policy": "Card 5 DEC-018: schemaVersion 1; stable external ID; opaque hostLaunchRef; adapter-private HTTPS reference; VersionedReference<StudyPlanId> support link; separate progress domains; no synthesized due time; recursive credential-material rejection",
+      "status": "card-5-reconciled-credential-free-adapter"
+    }
+  ],
+  "card5Reconciliation": {
+    "available": true,
+    "checkedOn": "2026-07-29",
+    "package": "adaptive-tutor/study-engine/docs/reconciliation/artifacts/CARD-5-STUDY-RECON-AUDIT.zip",
+    "sha256": "2231E758AA9DD309565E374BE1D1B78A2835C8A3F5A221562BE04DB78900E2E7",
+    "packageStatus": "PASS_WITH_BLOCKER",
+    "productionIntegrationAuthorized": false,
+    "finalAssemblyAuthorized": false,
+    "decisionIds": [
+      "DEC-009",
+      "DEC-012",
+      "DEC-014",
+      "DEC-017",
+      "DEC-018",
+      "DEC-019"
+    ],
+    "policyVersion": 1,
+    "referenceImplementation": "adaptive-tutor/study-engine/reconciliation/probes/policy.mjs",
+    "resolutionOrder": [
+      "supported-version-integrity-authorization-gates",
+      "safety-veto-and-constraints",
+      "required-accommodation-obligations-and-bounds",
+      "most-restrictive-active-adult-hard-maximum",
+      "feasible-interval-or-manual-review",
+      "active-valid-manual-target-hold-or-reduce",
+      "accepted-evidence-sufficient-engine-recommendation",
+      "established-target",
+      "grade-band-default",
+      "clamp-with-constraint-and-candidate-provenance"
+    ],
+    "integrationRecord": "CARD-5-REPLACEMENT.md"
+  },
+  "romeoGuarantees": {
+    "credentialsRequested": false,
+    "credentialsStored": false,
+    "automaticLogin": false,
+    "scraping": false,
+    "productionSync": false,
+    "networkRequests": false
+  }
+}

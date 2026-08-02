@@ -1,0 +1,409 @@
+{
+  "schemaId": "manuel-academy.study-reconciliation-issues",
+  "schemaVersion": 1,
+  "allowedClassifications": [
+    "BLOCKER",
+    "REQUIRED BEFORE FINAL ASSEMBLY",
+    "SAFE ADAPTER",
+    "DOCUMENTATION ONLY",
+    "DEFERRED PRODUCTION CONCERN"
+  ],
+  "issues": [
+    {
+      "issueId": "CORE-001",
+      "title": "Actual Tutor Core v0.2 package is not accessible",
+      "classification": "BLOCKER",
+      "status": "open",
+      "decisionImpact": [
+        "Tutor Core package ID and exact version manifest",
+        "mastery and misconception enum mapping",
+        "prerequisite and uncertainty mapping",
+        "tutoring-safety and visual-board command mapping",
+        "spoken-turn, caption, transcript, and adult-review evidence mapping"
+      ],
+      "requiredResolution": "Mount or attach the actual package, verify its artifact hash, then run the Tutor-Core compatibility probes. Do not use a summary as a substitute.",
+      "evidence": [
+        "artifact-verification.v1.json#tutorCore"
+      ]
+    },
+    {
+      "issueId": "PRIVATE-001",
+      "title": "Session 4 duplicates adult-private note bodies in controls and actionLog",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Store the body only in ParentTeacherPrivateRecord; public control state and its append-only log retain noteRef, category, actor, and timestamp only.",
+      "evidence": [
+        "adaptive-tutor/study-engine/parent/contracts.ts:207",
+        "adaptive-tutor/study-engine/parent/contracts.ts:223",
+        "adaptive-tutor/study-engine/parent/controls.ts:296",
+        "adaptive-tutor/study-engine/contracts/parent-teacher-private.ts:20",
+        "adaptive-tutor/study-engine/contracts/parent-teacher-controls.ts:98"
+      ]
+    },
+    {
+      "issueId": "UX-VERSION-001",
+      "title": "Unsupported or corrupt Study-UX workspace silently resets",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Quarantine the raw workspace with a fixed reason code and show recoverable UI; never replace it with an empty workspace before explicit migration or adult reset.",
+      "evidence": [
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:698",
+        "adaptive-tutor/study-engine/schemas/migrations.ts:19"
+      ]
+    },
+    {
+      "issueId": "EVENT-001",
+      "title": "Packages expose parallel event vocabularies",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Persist only Session 1 hyphenated StudySessionEvent values. Treat Session 2 snake_case events, Session 3 UI events, and Session 4 audit events as adapter inputs or projections.",
+      "evidence": [
+        "adaptive-tutor/study-engine/contracts/study-session.ts:16",
+        "adaptive-tutor/study-engine/engine/orchestrator/types.ts:34",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:35",
+        "adaptive-tutor/study-engine/integrations/calendar/types.ts:66"
+      ]
+    },
+    {
+      "issueId": "RESUME-001",
+      "title": "Canonical ResumePoint is not sufficient for exact sub-step refresh recovery",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Keep ResumePoint canonical and add a versioned, integrity-checked cursor sidecar behind responseDraftRef. Raw draft text stays in a separate authorized device-local vault.",
+      "evidence": [
+        "adaptive-tutor/study-engine/contracts/study-session.ts:13",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:86",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:698"
+      ]
+    },
+    {
+      "issueId": "SEGMENT-001",
+      "title": "Study-UX segment identifiers are not bound to canonical LessonSegment IDs",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Build each UX lesson from a validated LessonStudyPlan and use its SegmentId values. Do not persist prototype labels as a second segment identity.",
+      "evidence": [
+        "adaptive-tutor/study-engine/prototype/src/content.ts:1",
+        "adaptive-tutor/study-engine/contracts/study-plan.ts:116"
+      ]
+    },
+    {
+      "issueId": "TIMER-001",
+      "title": "Session 1 timer enum conflates visibility and metric presentation",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Use Student-UX visibility visible|minimal|hidden as one axis and count-up|count-down|milestone as a separate metric axis; retire the conflated enum through a versioned adapter.",
+      "evidence": [
+        "adaptive-tutor/study-engine/contracts/focus-profile.ts:13",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:10"
+      ]
+    },
+    {
+      "issueId": "ACCESS-001",
+      "title": "Accessibility and accommodation shapes cannot losslessly represent Study-UX preferences",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Promote structured motion, audio, read-aloud, speech-input, transcript, keyboard, and required accommodation effects. Preserve Session 3 learner UX and actual Tutor Core media capabilities.",
+      "evidence": [
+        "adaptive-tutor/study-engine/contracts/focus-profile.ts:60",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:113"
+      ]
+    },
+    {
+      "issueId": "EVIDENCE-001",
+      "title": "Core-authored retrieval and reteaching outcomes have no verified bridge",
+      "classification": "BLOCKER",
+      "status": "open",
+      "requiredResolution": "Map actual Tutor Core v0.2 outputs to LearningEvidence, RetrievalEvidence, and StudentSkillReview without deriving authority from accuracy or Study Engine heuristics.",
+      "evidence": [
+        "adaptive-tutor/study-engine/contracts/learning-evidence.ts:76",
+        "adaptive-tutor/study-engine/engine/review/types.ts:21"
+      ]
+    },
+    {
+      "issueId": "REVIEW-001",
+      "title": "Review queue has no result-return transition",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Add a versioned review-attempt result command carrying ReviewId, RetrievalAttemptId, SessionId, EvidenceId, and idempotency key; transition pending to completed only once.",
+      "evidence": [
+        "adaptive-tutor/study-engine/integrations/review/types.ts:42",
+        "adaptive-tutor/study-engine/contracts/review-scheduling.ts:24"
+      ]
+    },
+    {
+      "issueId": "RECOMMENDATION-001",
+      "title": "Recommendation lifecycle is not represented end to end",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Use proposed|accepted|rejected|superseded|expired for actionable recommendations. insufficient_data and manual_review are dispositions, not accept/reject proposals.",
+      "evidence": [
+        "adaptive-tutor/study-engine/engine/focus/types.ts:9",
+        "adaptive-tutor/study-engine/contracts/parent-teacher-controls.ts:32"
+      ]
+    },
+    {
+      "issueId": "PRECEDENCE-001",
+      "title": "A simple first-wins precedence chain cannot represent conflicting hard constraints",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Use the approved constraint-reduction policy in canonical-decisions.v1.json. Infeasible safety/accommodation/parent intersections route to manual_review.",
+      "evidence": [
+        "adaptive-tutor/study-engine/reconciliation/probes/policy.mjs"
+      ]
+    },
+    {
+      "issueId": "PRIVACY-EXT-001",
+      "title": "Namespaced metadata extension values can carry prohibited sensitive content",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Apply per-namespace schemas and deny sensitive keys/values at student-safe boundaries; never treat generic JsonValue validation as privacy validation.",
+      "evidence": [
+        "adaptive-tutor/study-engine/schemas/validation.ts:425"
+      ]
+    },
+    {
+      "issueId": "PRIVACY-UI-001",
+      "title": "Prototype localStorage combines raw drafts and transcripts with canonical-looking state",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Split canonical low-detail state from a separately authorized local draft/transcript vault with explicit retention. Never emit raw content to Study Engine events or evidence.",
+      "evidence": [
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:86",
+        "adaptive-tutor/study-engine/prototype/src/sessionStore.ts:765"
+      ]
+    },
+    {
+      "issueId": "COACH-001",
+      "title": "Session 2 can echo free-text into learner-facing coach messages",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Retire direct rendering at integration. Session 2 emits reason-coded intents; Tutor Core v0.2 renders and safety-checks final spoken/captioned text.",
+      "evidence": [
+        "adaptive-tutor/study-engine/prompts/jarvis.ts:22",
+        "adaptive-tutor/study-engine/prompts/jarvis.ts:91"
+      ]
+    },
+    {
+      "issueId": "ROMEO-001",
+      "title": "Romeo supportRef is untyped and credential detection is key-name based",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Resolve supportRef to a typed VersionedReference<StudyPlanId> or actual Tutor Core support reference after package inspection; scan or reject free-text/URL surfaces under an approved intake policy.",
+      "evidence": [
+        "adaptive-tutor/study-engine/integrations/romeo/types.ts:25",
+        "adaptive-tutor/study-engine/integrations/romeo/adapter.ts:18"
+      ]
+    },
+    {
+      "issueId": "TIMEZONE-001",
+      "title": "Household time zone is repeated but has no shared source-of-truth context",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Supply one authorized household IANA zone, store the zone used with each learner-local date, and never recompute historical dates after a zone change.",
+      "evidence": [
+        "adaptive-tutor/study-engine/contracts/review-scheduling.ts:57",
+        "adaptive-tutor/study-engine/integrations/calendar/types.ts:151"
+      ]
+    },
+    {
+      "issueId": "SKILL-001",
+      "title": "Study-UX fixtures do not carry canonical SkillId values",
+      "classification": "BLOCKER",
+      "status": "open",
+      "decisionImpact": [
+        "mastery projection",
+        "prerequisite projection",
+        "review scheduling",
+        "Tutor Core item-to-skill binding"
+      ],
+      "requiredResolution": "Bind each production UX task to a verified canonical LessonSegment and Tutor Core SkillId. Do not derive a skill ID from display text or fixture position.",
+      "evidence": [
+        "adaptive-tutor/study-engine/prototype/src/content.ts",
+        "adaptive-tutor/study-engine/contracts/study-plan.ts"
+      ]
+    },
+    {
+      "issueId": "ACCOMMODATION-001",
+      "title": "Required accommodations have no typed requiredness or operational effects",
+      "classification": "BLOCKER",
+      "status": "open",
+      "decisionImpact": [
+        "precedence evaluation",
+        "break policy",
+        "timer and presentation policy",
+        "automatic recommendation application"
+      ],
+      "requiredResolution": "Add catalog-backed requiredness and typed constraint/effect fields. Compose required constraints; route infeasible intersections to manual-review.",
+      "evidence": [
+        "adaptive-tutor/study-engine/contracts/focus-profile.ts:76",
+        "adaptive-tutor/study-engine/contracts/parent-teacher-controls.ts:46",
+        "adaptive-tutor/study-engine/engine/focus/types.ts:116"
+      ]
+    },
+    {
+      "issueId": "CAP-001",
+      "title": "Session 2 hold override can preserve a duration above an adult hard cap",
+      "classification": "BLOCKER",
+      "status": "open",
+      "requiredResolution": "Apply safety, accommodation, and adult hard clamps before any hold or manual target. The fixture current=30, hardMax=20, mode=hold must resolve to at most 20, never maintain 30.",
+      "evidence": [
+        "adaptive-tutor/study-engine/engine/focus/recommend-focus-duration.ts:488",
+        "adaptive-tutor/study-engine/engine/focus/recommend-focus-duration.ts:537"
+      ]
+    },
+    {
+      "issueId": "PRIVATE-AUDIENCE-001",
+      "title": "Session 4 parent-only note visibility cannot map to authorized-adults-only without widening access",
+      "classification": "BLOCKER",
+      "status": "open",
+      "requiredResolution": "Preserve parent-only material in a narrower adult-private sidecar until the canonical private contract carries an explicit audience scope.",
+      "evidence": [
+        "adaptive-tutor/study-engine/contracts/parent-teacher-private.ts",
+        "adaptive-tutor/study-engine/parent/contracts.ts"
+      ]
+    },
+    {
+      "issueId": "PARENT-EVENT-001",
+      "title": "Parent-control events lack event identity, actor, version, and retry semantics",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Introduce a versioned command envelope, stable command/event identity, actor reference, expected revision, and replay conflict rule before projecting controls.",
+      "evidence": [
+        "adaptive-tutor/study-engine/parent/controls.ts:133",
+        "adaptive-tutor/study-engine/parent/controls.ts:151"
+      ]
+    },
+    {
+      "issueId": "PARENT-ACCEPT-001",
+      "title": "Session 4 recommendation acceptance directly rewrites hard guardrails",
+      "classification": "BLOCKER",
+      "status": "open",
+      "requiredResolution": "Acceptance records a RecommendationDecision only. Any hard-limit change requires a separate explicit control command validated against safety and accommodation constraints.",
+      "evidence": [
+        "adaptive-tutor/study-engine/parent/controls.ts:159"
+      ]
+    },
+    {
+      "issueId": "ROMEO-DATE-001",
+      "title": "Romeo dueDate is projected as an offset timestamp",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Keep Romeo dueDate as ISODate. Add a scheduled offset instant only when one is independently authorized; never invent local midnight.",
+      "evidence": [
+        "adaptive-tutor/study-engine/integrations/romeo/types.ts:25",
+        "adaptive-tutor/study-engine/parent/contracts.ts:73"
+      ]
+    },
+    {
+      "issueId": "REGISTRY-AUDIENCE-001",
+      "title": "Schema registry exposes student-safe and adult-private kinds without an audience capability",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Annotate registered kinds with data class and require an adult-private capability before parsing, projecting, or exporting parent-teacher-private records.",
+      "evidence": [
+        "adaptive-tutor/study-engine/schemas/registry.ts:9"
+      ]
+    },
+    {
+      "issueId": "STATE-ALLOWLIST-001",
+      "title": "Session 2 transitions preserve unknown state keys",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Validate or project through an explicit allowlist. Reject or quarantine polluted state carrying rawAnswer, transcript, privateNote, or any unknown field.",
+      "evidence": [
+        "adaptive-tutor/study-engine/engine/orchestrator/orchestrator.ts:419"
+      ]
+    },
+    {
+      "issueId": "RETRY-001",
+      "title": "Same-day retrieval retry has no not-before safety rule",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "status": "open",
+      "requiredResolution": "Require support or reteaching plus a session or break boundary and define an authorized retryNotBefore policy. Until then same-day failures route to manual-review and no clock time is invented.",
+      "evidence": [
+        "adaptive-tutor/study-engine/engine/review/review-scheduler.ts:309",
+        "adaptive-tutor/study-engine/docs/engine/retrieval-spacing-agent-notes.md"
+      ]
+    },
+    {
+      "issueId": "ID-001",
+      "title": "Opaque identifier validators use incompatible alphabets and length limits",
+      "classification": "SAFE ADAPTER",
+      "status": "open",
+      "requiredResolution": "Validate at the Session 1 maximum 128-byte opaque boundary and preserve bytes. Provisional consumers must widen validators or use a reversible external-reference table; never normalize.",
+      "evidence": [
+        "adaptive-tutor/study-engine/schemas/validation.ts:222",
+        "adaptive-tutor/study-engine/engine/adapters/provisional-contracts.ts:56",
+        "adaptive-tutor/study-engine/integrations/review/review-queue.ts:20"
+      ]
+    },
+    {
+      "issueId": "GRADE-001",
+      "title": "Three grade-band vocabularies differ",
+      "classification": "SAFE ADAPTER",
+      "status": "open",
+      "requiredResolution": "Persist Session 1 elementary-3-5|middle-6-8|high-9-12. Map Session 2 values only at its input boundary and keep human UX labels display-only.",
+      "evidence": [
+        "adaptive-tutor/study-engine/contracts/common.ts:70",
+        "adaptive-tutor/study-engine/engine/focus/types.ts:20",
+        "adaptive-tutor/study-engine/prototype/src/content.ts:247"
+      ]
+    },
+    {
+      "issueId": "ZIP-PORTABILITY-001",
+      "title": "Contracts and Engine ZIP entries use backslash separators",
+      "classification": "SAFE ADAPTER",
+      "status": "open",
+      "requiredResolution": "Normalize separators to slash only in archive readers. Do not rewrite either hash-verified Wave 1 ZIP.",
+      "evidence": [
+        "artifact-verification.v1.json#wave1Artifacts"
+      ]
+    },
+    {
+      "issueId": "NODE-001",
+      "title": "Wave 1 packages use separate manifests, import suffix styles, and test environments",
+      "classification": "SAFE ADAPTER",
+      "status": "open",
+      "requiredResolution": "Keep algorithms/contracts runtime-dependency-free, use one final-assembly workspace lockfile, and keep React, jsdom, Axe, and Playwright in the browser/test package only.",
+      "evidence": [
+        "package.json",
+        "adaptive-tutor/study-engine/prototype/package.json",
+        "adaptive-tutor/study-engine/contracts/tsconfig.json",
+        "adaptive-tutor/study-engine/engine/tsconfig.json"
+      ]
+    },
+    {
+      "issueId": "DOC-001",
+      "title": "Logical package IDs are not declared in Wave 1 manifests",
+      "classification": "DOCUMENTATION ONLY",
+      "status": "open",
+      "requiredResolution": "Use the logical IDs approved in canonical-decisions.v1.json; add publishable package manifests only during an authorized assembly session.",
+      "evidence": [
+        "adaptive-tutor/study-engine/docs/contracts/README.md",
+        "adaptive-tutor/study-engine/prototype/package.json"
+      ]
+    },
+    {
+      "issueId": "PROD-001",
+      "title": "Production persistence, authentication, authorization, retention, and deployment remain out of scope",
+      "classification": "DEFERRED PRODUCTION CONCERN",
+      "status": "open",
+      "requiredResolution": "Obtain production-owner privacy/security review in a later authorized wave. This audit makes no production write.",
+      "evidence": [
+        "adaptive-tutor/study-engine/docs/contracts/integration-notes.md",
+        "adaptive-tutor/study-engine/docs/integrations/core-change-requests.md"
+      ]
+    },
+    {
+      "issueId": "ROMEO-PROD-001",
+      "title": "Romeo intake origin, host allowlist, retention, and deletion policy are not production-approved",
+      "classification": "DEFERRED PRODUCTION CONCERN",
+      "status": "open",
+      "requiredResolution": "Approve a credential-free metadata intake and governance policy before any external assignment persistence or fetching.",
+      "evidence": [
+        "adaptive-tutor/study-engine/docs/integrations/core-change-requests.md:106"
+      ]
+    }
+  ]
+}

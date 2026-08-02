@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/ai-safety/conversation-session.v1.schema.json",
+  "title": "Manuel Academy AI Safety Conversation Session",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "schemaVersion",
+    "createdAt",
+    "sessionId",
+    "studentId",
+    "subject",
+    "ageBand",
+    "channel",
+    "startedAt",
+    "status",
+    "timeZone",
+    "policyVersion",
+    "transcriptMode",
+    "rawMicrophoneRecordingStored",
+    "parentReviewScope",
+    "safetyExceptionApplies"
+  ],
+  "properties": {
+    "kind": { "const": "conversation-session" },
+    "schemaVersion": { "const": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "sessionId": { "$ref": "#/$defs/opaqueId" },
+    "studentId": { "$ref": "#/$defs/opaqueId" },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subjectId", "displayName"],
+      "properties": {
+        "subjectId": { "$ref": "#/$defs/opaqueId" },
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 100 }
+      }
+    },
+    "ageBand": { "enum": ["under-8", "8-12", "13-17"] },
+    "channel": { "enum": ["text", "voice"] },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "endedAt": { "type": "string", "format": "date-time" },
+    "status": {
+      "enum": [
+        "active",
+        "completed",
+        "paused-for-safety",
+        "student-blocked",
+        "technical-stop"
+      ]
+    },
+    "timeZone": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "policyVersion": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "transcriptMode": { "enum": ["text-only", "not-retained"] },
+    "rawMicrophoneRecordingStored": { "const": false },
+    "parentReviewScope": { "const": "authorized-parent-and-student" },
+    "safetyExceptionApplies": { "const": true }
+  },
+  "$defs": {
+    "opaqueId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$"
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "endedAt >= startedAt",
+    "status=active means endedAt is absent",
+    "status!=active means endedAt is present"
+  ]
+}

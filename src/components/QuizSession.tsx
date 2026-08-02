@@ -105,6 +105,7 @@ export function QuizSession({
     }
   }, [])
 
+
   function feedbackFor(correct: boolean): string {
     const answer = question.choices[question.answerIndex]
     if (t.cheers === 'full') {

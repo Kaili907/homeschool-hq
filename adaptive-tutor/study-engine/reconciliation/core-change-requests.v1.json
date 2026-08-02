@@ -1,0 +1,212 @@
+{
+  "schemaId": "manuel-academy.study-reconciliation.core-change-requests",
+  "schemaVersion": 1,
+  "status": "plan-only",
+  "rule": "These requests deduplicate Wave 1 proposals. They authorize no production change and no final assembly.",
+  "requests": [
+    {
+      "requestId": "CCR-001",
+      "title": "Shared identifier, time, version, validation, and schema governance",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "deduplicates": [
+        "Session-1 CR-01",
+        "Session-1 CR-02",
+        "Session-1 CR-03",
+        "Session-4 CR-INT-001",
+        "Session-4 CR-INT-006"
+      ],
+      "decision": "Adopt Session 1 schemaVersion=1, ValidationResult, registry, byte-preserving ID boundary, and unsupported-version quarantine. Add one authorized household IANA time-zone source and audience/data-class metadata for registry entries.",
+      "acceptanceCriteria": [
+        "All boundary inputs are unknown until migrated and validated.",
+        "Canonical IDs are preserved byte-for-byte.",
+        "Learner-local dates are derived with the snapshotted authorized IANA zone.",
+        "Adult-private schemas require an explicit capability.",
+        "Unsupported versions are preserved unchanged in quarantine."
+      ],
+      "ownersRequired": [
+        "Study Contracts",
+        "Tutor Core",
+        "Calendar host",
+        "Privacy"
+      ]
+    },
+    {
+      "requestId": "CCR-002",
+      "title": "Versioned sidecar persistence, CAS, append-only ledgers, and outbox",
+      "classification": "DEFERRED PRODUCTION CONCERN",
+      "deduplicates": [
+        "Session-1 CR-04",
+        "Session-1 CR-07",
+        "Session-1 CR-08",
+        "Session-4 CR-INT-002"
+      ],
+      "decision": "Provide a host-owned sidecar keyed by stable identifiers, optimistic aggregate revision, append-only APIs, functional/CAS updates, and an outbox for cross-projection effects. Calendar writes remain separately authorized.",
+      "acceptanceCriteria": [
+        "Same command replay is a no-op.",
+        "Same idempotency key with different payload is quarantined.",
+        "Concurrent stale revision writes fail without partial projection.",
+        "Session event prefixes cannot be rewritten.",
+        "Review-result saga can resume without duplicates."
+      ],
+      "ownersRequired": [
+        "Production persistence",
+        "Calendar host",
+        "Privacy and retention"
+      ]
+    },
+    {
+      "requestId": "CCR-003",
+      "title": "Adult-private repository, audience scope, and safe projections",
+      "classification": "BLOCKER",
+      "deduplicates": [
+        "Session-1 CR-05",
+        "Session-4 CR-INT-004",
+        "Session-4 CR-INT-007"
+      ],
+      "decision": "Store private note bodies only in the adult-private repository with explicit audience scope. Ordinary controls, action logs, dashboards, diagnostics, and analytics carry only references, categories, counts, and timestamps.",
+      "acceptanceCriteria": [
+        "No note body occurs in ParentControlState or actionLog.",
+        "Parent-only visibility is never widened to authorized-adults-only.",
+        "Private repository authorization is distinct from the student-safe registry.",
+        "Deletion and retention can operate without rewriting public ledgers."
+      ],
+      "ownersRequired": [
+        "Tutor Core adult-review evidence",
+        "Parent dashboard",
+        "Privacy and authorization"
+      ]
+    },
+    {
+      "requestId": "CCR-004",
+      "title": "Verified Tutor Core directive, evidence, safety, media, and review bridge",
+      "classification": "BLOCKER",
+      "deduplicates": [
+        "Session-2 adapter retirement items 4, 5, and 8",
+        "Session-4 CR-INT-003"
+      ],
+      "decision": "Bind only to symbols inspected in the actual Tutor Core v0.2 package. The bridge must cover mastery, misconception, prerequisite, uncertainty, reteaching, safety, visual-board commands, spoken turns, captions, transcripts, adult-review evidence, review priority, and review-result return.",
+      "acceptanceCriteria": [
+        "Actual Tutor Core archive/package hash and manifest are recorded.",
+        "Every mapped enum value is exhaustive and loss-aware.",
+        "Unknown Tutor Core versions and enum values quarantine.",
+        "Tutor Core learner-facing rendering replaces Session 2 free-text coach rendering.",
+        "Study Engine receives references/structured outcomes, not raw transcripts or answers."
+      ],
+      "ownersRequired": [
+        "Tutor Core"
+      ]
+    },
+    {
+      "requestId": "CCR-005",
+      "title": "Typed accommodation and precedence policy",
+      "classification": "BLOCKER",
+      "deduplicates": [
+        "Session-1 accommodation projection proposal",
+        "Session-2 focus and break policy gaps",
+        "Session-4 parent accommodation event"
+      ],
+      "decision": "Make controls the authorization source and focus profile the read-only applied projection. Represent requiredness and operational effects as catalog-backed typed constraints. Resolve policy by constraint intersection and clamp before manual/engine/default candidates.",
+      "acceptanceCriteria": [
+        "Safety constraints cannot be overridden.",
+        "Required accommodations compose across dimensions.",
+        "Hard maximum is applied before hold/manual target.",
+        "Infeasible intersections produce manual-review and no automatic target.",
+        "Learner-facing accommodation text comes from an approved Tutor Core/UX catalog."
+      ],
+      "ownersRequired": [
+        "Study Contracts",
+        "Tutor Core safety",
+        "Parent controls",
+        "Study UX accessibility"
+      ]
+    },
+    {
+      "requestId": "CCR-006",
+      "title": "Exact-resume checkpoint and event replay contract",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "deduplicates": [
+        "Session-1 ResumePoint",
+        "Session-3 refresh recovery",
+        "Session-2 orchestrator cursor"
+      ],
+      "decision": "Keep one canonical ResumePoint and add a versioned, device/runtime UX checkpoint behind opaque references. Tutor Core item/substep symbols remain gated by the actual v0.2 package.",
+      "acceptanceCriteria": [
+        "Checkpoint validates plan, session, segment, aggregate revision, token, and version.",
+        "Raw drafts remain in a device-local vault referenced by responseDraftRef.",
+        "Refresh restores exact UI/runtime cursor without replaying completion events.",
+        "Unsupported/corrupt checkpoints quarantine with an adult-safe recovery/export path."
+      ],
+      "ownersRequired": [
+        "Study UX",
+        "Tutor Core",
+        "Study runtime"
+      ]
+    },
+    {
+      "requestId": "CCR-007",
+      "title": "Review occurrence, retry-not-before, and result-return seam",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "deduplicates": [
+        "Session-2 review scheduler",
+        "Session-4 review queue",
+        "Session-4 calendar placement"
+      ],
+      "decision": "Keep StudentSkillReview canonical and treat queue/calendar rows as idempotent occurrences. Add a versioned completion/result command and outbox flow. Same-day failure requires support plus a boundary and an authorized retryNotBefore policy.",
+      "acceptanceCriteria": [
+        "Review occurrence has stable ID and canonical ReviewId.",
+        "Priority/kind come from Tutor Core or a verified catalog.",
+        "Queue completion follows evidence/result append.",
+        "Same-day never means immediate and no clock time is invented.",
+        "Result replay never duplicates RetrievalAttempt or next-review revision."
+      ],
+      "ownersRequired": [
+        "Tutor Core",
+        "Study Engine algorithms",
+        "Review queue",
+        "Calendar host"
+      ]
+    },
+    {
+      "requestId": "CCR-008",
+      "title": "Credential-free Romeo metadata intake",
+      "classification": "DEFERRED PRODUCTION CONCERN",
+      "deduplicates": [
+        "Session-4 CR-INT-005"
+      ],
+      "decision": "Accept only versioned, credential-free assignment metadata. Replace arbitrary URLs with an opaque host-resolved launchRef; remove resumeNote from the shared payload. Type tutoring support as StudyPlanId and keep dueDate as a date.",
+      "acceptanceCriteria": [
+        "No token, cookie, userinfo, arbitrary URI, secret-bearing query/path/fragment, or free-form resume note crosses.",
+        "Unknown versions quarantine.",
+        "A due date is never converted to midnight.",
+        "Romeo progress and Manuel tutoring progress remain separate."
+      ],
+      "ownersRequired": [
+        "Romeo intake owner",
+        "Security",
+        "Calendar host"
+      ]
+    },
+    {
+      "requestId": "CCR-009",
+      "title": "Minimized integration telemetry and learner-safe catalog text",
+      "classification": "DEFERRED PRODUCTION CONCERN",
+      "deduplicates": [
+        "Session-4 CR-INT-008",
+        "Retention portion of Session-4 CR-INT-007",
+        "Session-2 learner-facing coach rendering"
+      ],
+      "decision": "Telemetry uses identifiers, bounded codes, counts, timestamps, versions, and dispositions only. Learner/parent-facing text is generated from verified Tutor Core or approved catalog content.",
+      "acceptanceCriteria": [
+        "No raw payload, answer, transcript, note body, credential, or unrestricted string is logged.",
+        "Review titles and parent evidence descriptions are catalog-derived.",
+        "Diagnostics use fixed reason codes and opaque quarantine references.",
+        "No hidden behavior score is created."
+      ],
+      "ownersRequired": [
+        "Privacy",
+        "Tutor Core",
+        "Observability"
+      ]
+    }
+  ]
+}

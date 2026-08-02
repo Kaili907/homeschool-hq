@@ -1,0 +1,171 @@
+{
+  "kind": "lesson-study-plan",
+  "schemaVersion": 1,
+  "id": "plan:math-fractions-01",
+  "revision": 1,
+  "createdAt": "2026-07-27T13:00:00.000Z",
+  "updatedAt": "2026-07-27T13:00:00.000Z",
+  "metadata": {
+    "source": "manual",
+    "tags": ["synthetic", "contract-example"],
+    "extensions": {
+      "manuel:trace-id": "fixture-plan-01"
+    }
+  },
+  "studentId": "p1",
+  "lessonId": "lesson:fractions-01",
+  "subjectId": "math",
+  "gradeBand": "elementary-3-5",
+  "gradeBandStartingRanges": [
+    {
+      "gradeBand": "elementary-3-5",
+      "basis": "grade-band-starting-range",
+      "effectiveWorkBlockRange": {
+        "minimumMinutes": 8,
+        "targetMinutes": 10,
+        "maximumMinutes": 12
+      },
+      "reviewAfterEligibleSessions": 3
+    }
+  ],
+  "subjectTimingProfiles": [
+    {
+      "subjectId": "math",
+      "effectiveWorkBlockRange": {
+        "minimumMinutes": 8,
+        "targetMinutes": 12,
+        "maximumMinutes": 15
+      },
+      "rationale": "Synthetic starting guidance for worked math practice."
+    }
+  ],
+  "taskTimingProfiles": [
+    {
+      "taskType": "guided-practice",
+      "effectiveWorkBlockRange": {
+        "minimumMinutes": 5,
+        "targetMinutes": 8,
+        "maximumMinutes": 10
+      }
+    },
+    {
+      "taskType": "mastery-check",
+      "effectiveWorkBlockRange": {
+        "minimumMinutes": 3,
+        "targetMinutes": 5,
+        "maximumMinutes": 8
+      }
+    }
+  ],
+  "prerequisiteRefs": [
+    {
+      "skillId": "fracUnit",
+      "relationship": "required",
+      "minimumOutcome": "progressing",
+      "onGap": "remediate-before-segment"
+    }
+  ],
+  "segments": [
+    {
+      "id": "segment:guided-model",
+      "sequence": 1,
+      "title": "Build and explain a fraction model",
+      "taskType": "guided-practice",
+      "learningObjectiveIds": ["objective:equivalent-fractions"],
+      "timing": {
+        "minimumMinutes": 5,
+        "plannedMinutes": 8,
+        "maximumMinutes": 10
+      },
+      "cognitiveLoad": {
+        "overallLevel": "moderate",
+        "novelty": "moderate",
+        "workingMemoryDemand": "moderate",
+        "interactionDemand": "low",
+        "supportLevel": "high",
+        "supportStrategies": ["visual model", "one step at a time"]
+      },
+      "activeResponse": {
+        "required": true,
+        "modes": ["spoken-answer", "drawn-model"],
+        "minimumResponseCount": 3,
+        "maximumPassiveMinutes": 2
+      },
+      "breakEligibility": {
+        "eligible": false,
+        "studentMayRequest": true,
+        "approvalRequired": false
+      },
+      "masteryCheck": {
+        "required": false,
+        "skillIds": [],
+        "learningObjectiveIds": [],
+        "minimumItemCount": 0
+      },
+      "prerequisiteRefs": [
+        {
+          "skillId": "fracUnit",
+          "relationship": "required",
+          "minimumOutcome": "progressing",
+          "onGap": "remediate-before-segment"
+        }
+      ],
+      "dependsOnSegmentIds": []
+    },
+    {
+      "id": "segment:mastery-check",
+      "sequence": 2,
+      "title": "Independent retrieval check",
+      "taskType": "mastery-check",
+      "learningObjectiveIds": ["objective:equivalent-fractions"],
+      "timing": {
+        "minimumMinutes": 3,
+        "plannedMinutes": 5,
+        "maximumMinutes": 8
+      },
+      "cognitiveLoad": {
+        "overallLevel": "moderate",
+        "novelty": "low",
+        "workingMemoryDemand": "moderate",
+        "interactionDemand": "low",
+        "supportLevel": "low",
+        "supportStrategies": ["scratch paper available"]
+      },
+      "activeResponse": {
+        "required": true,
+        "modes": ["selected-answer", "worked-step"],
+        "minimumResponseCount": 3
+      },
+      "breakEligibility": {
+        "eligible": true,
+        "studentMayRequest": true,
+        "approvalRequired": false,
+        "availableAfterActiveMinutes": 3,
+        "recommendedBreakMinutes": 5
+      },
+      "masteryCheck": {
+        "required": true,
+        "skillIds": ["fracUnit"],
+        "learningObjectiveIds": ["objective:equivalent-fractions"],
+        "minimumItemCount": 3,
+        "criterion": {
+          "minimumAccuracyPercent": 80,
+          "minimumIndependentResponses": 2,
+          "maximumHintCount": 1
+        }
+      },
+      "prerequisiteRefs": [],
+      "dependsOnSegmentIds": ["segment:guided-model"]
+    }
+  ],
+  "segmentSequence": ["segment:guided-model", "segment:mastery-check"],
+  "focusProfileRef": {
+    "id": "focus:p1",
+    "revision": 1
+  },
+  "controlsRef": {
+    "id": "controls:p1",
+    "revision": 1
+  }
+}
+

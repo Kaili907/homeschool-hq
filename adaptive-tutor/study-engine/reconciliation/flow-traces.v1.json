@@ -1,0 +1,913 @@
+{
+  "schemaId": "manuel-academy.study-reconciliation.flow-traces",
+  "schemaVersion": 1,
+  "traceSetId": "study-recon-wave2-2026-07-28",
+  "status": "approved-with-blockers",
+  "fixture": {
+    "householdTimeZone": "America/New_York",
+    "learnerLocalDate": "2026-02-03",
+    "clockRule": "All instants are offset-bearing. learnerLocalDate is derived in the snapshotted household IANA zone.",
+    "studentId": "student:fixture-01",
+    "subjectId": "subject:math",
+    "skillId": "skill:fraction-equivalence",
+    "studyPlanId": "plan:math-fractions-01",
+    "sessionId": "session:math-fractions-01",
+    "eventRule": "Event IDs are stable within session; event sequence is contiguous. Same command/event replay is a no-op; a payload mismatch is quarantined.",
+    "privacyRule": "No raw answer, transcript, private note, email, credential, or unrestricted learner text appears in a canonical event or projection."
+  },
+  "traces": [
+    {
+      "traceId": "TRACE-01",
+      "title": "New math lesson",
+      "classification": "SAFE ADAPTER",
+      "preconditions": [
+        "LessonStudyPlan schemaVersion 1 validates.",
+        "Every segment is identified by its canonical LessonSegment.id.",
+        "Calendar command is authorized and idempotent."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "study-session-command-handler",
+          "operation": "plan-and-start",
+          "command": {
+            "commandVersion": "manuel-academy.study-command.v1",
+            "commandId": "cmd:trace-01:start",
+            "idempotencyKey": "trace-01:start",
+            "expectedRevision": 0
+          },
+          "events": [
+            {
+              "id": "event:trace-01:001",
+              "sequence": 1,
+              "type": "session-planned",
+              "actor": "system",
+              "segmentId": null,
+              "detailCode": "plan.validated"
+            },
+            {
+              "id": "event:trace-01:002",
+              "sequence": 2,
+              "type": "session-started",
+              "actor": "student",
+              "segmentId": null,
+              "detailCode": "start.student"
+            },
+            {
+              "id": "event:trace-01:003",
+              "sequence": 3,
+              "type": "segment-started",
+              "actor": "system",
+              "segmentId": "segment:retrieval-01",
+              "detailCode": "segment.retrieval-practice"
+            }
+          ],
+          "transition": {
+            "from": "planned",
+            "to": "active",
+            "revision": 1
+          }
+        },
+        {
+          "order": 2,
+          "component": "calendar-sidecar",
+          "operation": "upsert-manuel-lesson-block",
+          "sideEffect": {
+            "dedupeKey": "study-plan:plan:math-fractions-01:2026-02-03",
+            "source": "manuel_academy",
+            "sourceItemRef": "plan:math-fractions-01",
+            "blockType": "new_instruction",
+            "timeZone": "America/New_York",
+            "intendedLocalDate": "2026-02-03"
+          }
+        }
+      ],
+      "assertions": [
+        "No Session 2 phase or Session 3 screen value is persisted as StudySession.state.",
+        "A replay of cmd:trace-01:start appends no event and creates no duplicate calendar block."
+      ]
+    },
+    {
+      "traceId": "TRACE-02",
+      "title": "Student-requested water break",
+      "classification": "SAFE ADAPTER",
+      "preconditions": [
+        "Session is active at segment:guided-01.",
+        "ResumePoint is durably recorded before the break starts."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "study-session-command-handler",
+          "operation": "request-and-approve-break",
+          "command": {
+            "commandVersion": "manuel-academy.study-command.v1",
+            "commandId": "cmd:trace-02:break",
+            "idempotencyKey": "trace-02:break",
+            "expectedRevision": 4
+          },
+          "events": [
+            {
+              "id": "event:trace-02:005",
+              "sequence": 5,
+              "type": "break-requested",
+              "actor": "student",
+              "segmentId": "segment:guided-01",
+              "detailCode": "break.student-request.water"
+            },
+            {
+              "id": "event:trace-02:006",
+              "sequence": 6,
+              "type": "break-approved",
+              "actor": "system",
+              "segmentId": "segment:guided-01",
+              "detailCode": "break.policy-approved"
+            },
+            {
+              "id": "event:trace-02:007",
+              "sequence": 7,
+              "type": "break-started",
+              "actor": "student",
+              "segmentId": "segment:guided-01",
+              "detailCode": "break.water"
+            }
+          ],
+          "transition": {
+            "from": "active",
+            "through": [
+              "student-requested-break"
+            ],
+            "to": "approved-break",
+            "revision": 5
+          },
+          "sideEffect": {
+            "resumePoint": {
+              "segmentId": "segment:guided-01",
+              "elapsedActiveSecondsInSegment": 244,
+              "responseDraftRef": "draft:trace-02:guided"
+            },
+            "breakActivityType": "water",
+            "reasonCategory": "student-request",
+            "timerAction": "pause-active-time"
+          }
+        },
+        {
+          "order": 2,
+          "component": "study-session-command-handler",
+          "operation": "resume-after-break",
+          "command": {
+            "commandVersion": "manuel-academy.study-command.v1",
+            "commandId": "cmd:trace-02:resume",
+            "idempotencyKey": "trace-02:resume",
+            "expectedRevision": 5
+          },
+          "events": [
+            {
+              "id": "event:trace-02:008",
+              "sequence": 8,
+              "type": "break-ended",
+              "actor": "student",
+              "segmentId": "segment:guided-01",
+              "detailCode": "break.return-confirmed"
+            },
+            {
+              "id": "event:trace-02:009",
+              "sequence": 9,
+              "type": "session-resumed",
+              "actor": "student",
+              "segmentId": "segment:guided-01",
+              "detailCode": "resume.after-break"
+            }
+          ],
+          "transition": {
+            "from": "approved-break",
+            "to": "active",
+            "revision": 6
+          }
+        }
+      ],
+      "assertions": [
+        "Break time is excluded from active learning duration.",
+        "The break is not recorded as a technical failure or negative evidence."
+      ]
+    },
+    {
+      "traceId": "TRACE-03",
+      "title": "Exact resume after refresh",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "preconditions": [
+        "Session is active.",
+        "Canonical ResumePoint and a versioned device-local UX checkpoint have been durably committed.",
+        "Raw draft bytes exist only in the device-local draft vault."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "study-ux",
+          "operation": "detect-unclean-refresh",
+          "command": {
+            "commandVersion": "manuel-academy.study-command.v1",
+            "commandId": "cmd:trace-03:interrupt",
+            "idempotencyKey": "trace-03:interrupt",
+            "expectedRevision": 8
+          },
+          "events": [
+            {
+              "id": "event:trace-03:010",
+              "sequence": 10,
+              "type": "technical-interruption-started",
+              "actor": "system",
+              "segmentId": "segment:independent-01",
+              "detailCode": "technical.application-restart"
+            }
+          ],
+          "transition": {
+            "from": "active",
+            "to": "technical-interruption",
+            "revision": 9
+          }
+        },
+        {
+          "order": 2,
+          "component": "resume-adapter",
+          "operation": "validate-and-restore",
+          "sideEffect": {
+            "resumePoint": {
+              "segmentId": "segment:independent-01",
+              "elapsedActiveSecondsInSegment": 391,
+              "responseDraftRef": "draft:trace-03:independent"
+            },
+            "checkpointRef": "ux-checkpoint:trace-03:009",
+            "validation": [
+              "sessionId-match",
+              "studyPlanId-match",
+              "segmentId-match",
+              "aggregate-revision-match",
+              "checkpoint-version-supported",
+              "draft-token-valid"
+            ],
+            "timerAction": "remain-paused-until-confirmed"
+          }
+        },
+        {
+          "order": 3,
+          "component": "study-session-command-handler",
+          "operation": "confirm-recovery",
+          "command": {
+            "commandVersion": "manuel-academy.study-command.v1",
+            "commandId": "cmd:trace-03:resume",
+            "idempotencyKey": "trace-03:resume",
+            "expectedRevision": 9
+          },
+          "events": [
+            {
+              "id": "event:trace-03:011",
+              "sequence": 11,
+              "type": "technical-interruption-ended",
+              "actor": "system",
+              "segmentId": "segment:independent-01",
+              "detailCode": "technical.restore-validated"
+            },
+            {
+              "id": "event:trace-03:012",
+              "sequence": 12,
+              "type": "session-resumed",
+              "actor": "student",
+              "segmentId": "segment:independent-01",
+              "detailCode": "resume.refresh-confirmed"
+            }
+          ],
+          "transition": {
+            "from": "technical-interruption",
+            "to": "active",
+            "revision": 10
+          }
+        }
+      ],
+      "assertions": [
+        "No segment-completed or response event is replayed.",
+        "The canonical record contains only responseDraftRef, never draft content.",
+        "Unsupported checkpoint versions are quarantined rather than reset."
+      ]
+    },
+    {
+      "traceId": "TRACE-04",
+      "title": "Technical interruption",
+      "classification": "SAFE ADAPTER",
+      "preconditions": [
+        "Session is active at segment:visual-01."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "study-session-command-handler",
+          "operation": "start-technical-interruption",
+          "command": {
+            "commandVersion": "manuel-academy.study-command.v1",
+            "commandId": "cmd:trace-04:start",
+            "idempotencyKey": "trace-04:start",
+            "expectedRevision": 3
+          },
+          "events": [
+            {
+              "id": "event:trace-04:004",
+              "sequence": 4,
+              "type": "technical-interruption-started",
+              "actor": "system",
+              "segmentId": "segment:visual-01",
+              "detailCode": "technical.network-loss"
+            }
+          ],
+          "transition": {
+            "from": "active",
+            "to": "technical-interruption",
+            "revision": 4
+          },
+          "sideEffect": {
+            "focusDisruption": "technical_issue",
+            "durationTreatment": "exclude",
+            "calendarExecution": "paused-technical"
+          }
+        },
+        {
+          "order": 2,
+          "component": "study-session-command-handler",
+          "operation": "end-technical-interruption",
+          "command": {
+            "commandVersion": "manuel-academy.study-command.v1",
+            "commandId": "cmd:trace-04:end",
+            "idempotencyKey": "trace-04:end",
+            "expectedRevision": 4
+          },
+          "events": [
+            {
+              "id": "event:trace-04:005",
+              "sequence": 5,
+              "type": "technical-interruption-ended",
+              "actor": "system",
+              "segmentId": "segment:visual-01",
+              "detailCode": "technical.network-restored"
+            },
+            {
+              "id": "event:trace-04:006",
+              "sequence": 6,
+              "type": "session-resumed",
+              "actor": "student",
+              "segmentId": "segment:visual-01",
+              "detailCode": "resume.technical-recovery"
+            }
+          ],
+          "transition": {
+            "from": "technical-interruption",
+            "to": "active",
+            "revision": 5
+          }
+        }
+      ],
+      "assertions": [
+        "Technical interruption is never mapped to a break.",
+        "No negative mastery or behavior evidence is inferred."
+      ]
+    },
+    {
+      "traceId": "TRACE-05",
+      "title": "Exit ticket",
+      "classification": "BLOCKER",
+      "blockedBy": [
+        "CORE-001",
+        "EVIDENCE-001"
+      ],
+      "preconditions": [
+        "The canonical plan contains segment:exit-01 with taskType mastery-check.",
+        "The raw response is accepted into the Tutor Core/device-local response boundary."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "study-session-command-handler",
+          "operation": "record-exit-ticket-submission",
+          "command": {
+            "commandVersion": "manuel-academy.study-command.v1",
+            "commandId": "cmd:trace-05:submit",
+            "idempotencyKey": "trace-05:submit",
+            "expectedRevision": 12
+          },
+          "events": [
+            {
+              "id": "event:trace-05:013",
+              "sequence": 13,
+              "type": "segment-started",
+              "actor": "system",
+              "segmentId": "segment:exit-01",
+              "detailCode": "segment.mastery-check"
+            },
+            {
+              "id": "event:trace-05:014",
+              "sequence": 14,
+              "type": "active-response-recorded",
+              "actor": "student",
+              "segmentId": "segment:exit-01",
+              "detailCode": "response.durably-referenced",
+              "evidenceRef": "evidence:trace-05:exit"
+            },
+            {
+              "id": "event:trace-05:015",
+              "sequence": 15,
+              "type": "segment-completed",
+              "actor": "student",
+              "segmentId": "segment:exit-01",
+              "detailCode": "segment.submission-complete",
+              "evidenceRef": "evidence:trace-05:exit"
+            }
+          ],
+          "transition": {
+            "from": "active",
+            "to": "active",
+            "revision": 13
+          }
+        },
+        {
+          "order": 2,
+          "component": "tutor-core-bridge",
+          "operation": "evaluate-authoritatively",
+          "status": "blocked-until-actual-v0.2-package-is-inspected",
+          "sideEffect": {
+            "inputRef": "evidence:trace-05:exit",
+            "outputRef": "tutor-core-outcome:trace-05:exit",
+            "mapping": null
+          }
+        }
+      ],
+      "assertions": [
+        "segment-completed means submission completion, never correctness or mastery.",
+        "A later Core outcome may recommend reteach/review without undoing segment completion.",
+        "Raw answer content never enters StudySessionEvent."
+      ]
+    },
+    {
+      "traceId": "TRACE-06",
+      "title": "Retrieval failure",
+      "classification": "BLOCKER",
+      "blockedBy": [
+        "CORE-001",
+        "EVIDENCE-001",
+        "RETRY-001"
+      ],
+      "preconditions": [
+        "The canonical segment is retrieval-practice.",
+        "Failure, misconception, prerequisite, and uncertainty outcomes must originate in verified Tutor Core v0.2."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "study-session-command-handler",
+          "operation": "record-retrieval-submission",
+          "events": [
+            {
+              "id": "event:trace-06:004",
+              "sequence": 4,
+              "type": "active-response-recorded",
+              "actor": "student",
+              "segmentId": "segment:retrieval-01",
+              "detailCode": "response.durably-referenced",
+              "evidenceRef": "evidence:trace-06:retrieval"
+            },
+            {
+              "id": "event:trace-06:005",
+              "sequence": 5,
+              "type": "segment-completed",
+              "actor": "student",
+              "segmentId": "segment:retrieval-01",
+              "detailCode": "segment.submission-complete",
+              "evidenceRef": "evidence:trace-06:retrieval"
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "component": "tutor-core-bridge",
+          "operation": "map-retrieval-outcome",
+          "status": "blocked-until-actual-v0.2-package-is-inspected",
+          "sideEffect": {
+            "learningEvidenceRef": "evidence:trace-06:retrieval",
+            "retrievalAttemptRef": "retrieval-attempt:trace-06:001",
+            "masteryOutcome": null,
+            "prerequisiteOutcome": null,
+            "misconceptionOutcome": null,
+            "uncertaintyOutcome": null
+          }
+        }
+      ],
+      "assertions": [
+        "No boolean successful/correct value is converted to mastery.",
+        "No immediate inline retry is scheduled."
+      ]
+    },
+    {
+      "traceId": "TRACE-07",
+      "title": "Reteaching",
+      "classification": "BLOCKER",
+      "blockedBy": [
+        "CORE-001",
+        "EVIDENCE-001"
+      ],
+      "preconditions": [
+        "A verified Tutor Core directive authorizes reteaching.",
+        "A substantive reteach is represented by an existing or revised canonical plan segment."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "tutor-core-bridge",
+          "operation": "receive-reteach-directive",
+          "status": "blocked-until-actual-v0.2-package-is-inspected",
+          "sideEffect": {
+            "directiveRef": "tutor-core-directive:trace-07:001",
+            "verifiedDirectiveType": null
+          }
+        },
+        {
+          "order": 2,
+          "component": "study-session-command-handler",
+          "operation": "record-authorized-intervention",
+          "events": [
+            {
+              "id": "event:trace-07:006",
+              "sequence": 6,
+              "type": "tutor-intervention-recorded",
+              "actor": "system",
+              "segmentId": "segment:reteach-01",
+              "detailCode": "intervention.reteaching",
+              "evidenceRef": "evidence:trace-07:basis"
+            },
+            {
+              "id": "event:trace-07:007",
+              "sequence": 7,
+              "type": "segment-started",
+              "actor": "system",
+              "segmentId": "segment:reteach-01",
+              "detailCode": "segment.prerequisite-remediation"
+            }
+          ]
+        }
+      ],
+      "assertions": [
+        "The engine does not fabricate an unplanned segment.",
+        "Reteach routing does not itself assert a mastery or prerequisite outcome."
+      ]
+    },
+    {
+      "traceId": "TRACE-08",
+      "title": "Same-day review recommendation",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "blockedBy": [
+        "CORE-001",
+        "RETRY-001"
+      ],
+      "preconditions": [
+        "Tutor Core supplies an authoritative review basis and priority.",
+        "Session 2 pacing algorithm returns intervalDays=0.",
+        "Required support/reteaching and a session or break boundary occur before retry."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "study-engine-review-scheduler",
+          "operation": "schedule-next-review",
+          "sideEffect": {
+            "reviewId": "review:trace-08:001",
+            "skillId": "skill:fraction-equivalence",
+            "interval": {
+              "id": "same-day",
+              "days": 0
+            },
+            "learnerLocalDate": "2026-02-03",
+            "timeZone": "America/New_York",
+            "retryNotBefore": null,
+            "status": "manual-review-until-retry-policy-is-defined"
+          }
+        },
+        {
+          "order": 2,
+          "component": "study-review-sidecar",
+          "operation": "append-student-skill-review-revision",
+          "command": {
+            "commandVersion": "manuel-academy.review-command.v1",
+            "commandId": "cmd:trace-08:schedule",
+            "idempotencyKey": "review:trace-08:001:rev:1",
+            "expectedRevision": 0
+          }
+        }
+      ],
+      "assertions": [
+        "Same-day means the same learner-local date, not immediate.",
+        "No midnight instant or retry minute is invented."
+      ]
+    },
+    {
+      "traceId": "TRACE-09",
+      "title": "Review-queue creation",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "blockedBy": [
+        "CORE-001"
+      ],
+      "preconditions": [
+        "A canonical StudentSkillReview revision exists.",
+        "Tutor Core supplies review kind/priority or a verified catalog mapping."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "review-queue-projector",
+          "operation": "project-review-occurrence",
+          "command": {
+            "commandVersion": "manuel-academy.integration-command.v1",
+            "commandId": "cmd:trace-09:project",
+            "idempotencyKey": "review:trace-08:001:queue:rev:1",
+            "expectedRevision": 0
+          },
+          "sideEffect": {
+            "queueItemId": "review-item:trace-09:001",
+            "reviewId": "review:trace-08:001",
+            "state": "pending",
+            "skillRef": "skill:fraction-equivalence",
+            "titleSource": "trusted-catalog",
+            "prioritySource": "tutor-core",
+            "dailyCapacityPolicy": "session-4"
+          }
+        }
+      ],
+      "assertions": [
+        "Queue creation appends no StudySession event.",
+        "Caller-provided free-text title is ignored or rejected.",
+        "Replay produces the same queue item."
+      ]
+    },
+    {
+      "traceId": "TRACE-10",
+      "title": "Calendar placement",
+      "classification": "SAFE ADAPTER",
+      "preconditions": [
+        "Review-queue item is pending.",
+        "Authorized household schedule supplies an offset-bearing instant."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "calendar-adapter",
+          "operation": "upsert-review-block",
+          "command": {
+            "commandVersion": "manuel-academy.integration-command.v1",
+            "commandId": "cmd:trace-10:place",
+            "idempotencyKey": "review:trace-08:001:calendar:2026-02-03",
+            "expectedRevision": 0
+          },
+          "sideEffect": {
+            "calendarBlockId": "calendar-block:trace-10:001",
+            "learnerRef": "student:fixture-01",
+            "dedupeKey": "review:trace-08:001:2026-02-03",
+            "source": "manuel_academy",
+            "sourceItemRef": "review:trace-08:001",
+            "blockType": "review",
+            "startsAt": "2026-02-03T15:30:00-05:00",
+            "timeZone": "America/New_York",
+            "intendedLocalDate": "2026-02-03"
+          }
+        }
+      ],
+      "assertions": [
+        "Uniqueness is scoped to learnerRef plus dedupeKey.",
+        "The adapter never derives an instant from a bare due date.",
+        "Calendar audit links cmd:trace-10:place and remains outside the session ledger."
+      ]
+    },
+    {
+      "traceId": "TRACE-11",
+      "title": "Review result returned to engine",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "blockedBy": [
+        "CORE-001",
+        "REVIEW-001"
+      ],
+      "preconditions": [
+        "A review StudySession completes with a durable evidenceRef.",
+        "Tutor Core authoritatively evaluates the result."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "study-session-command-handler",
+          "operation": "complete-review-submission",
+          "events": [
+            {
+              "id": "event:trace-11:004",
+              "sequence": 4,
+              "type": "active-response-recorded",
+              "actor": "student",
+              "segmentId": "segment:review-01",
+              "detailCode": "response.durably-referenced",
+              "evidenceRef": "evidence:trace-11:review"
+            },
+            {
+              "id": "event:trace-11:005",
+              "sequence": 5,
+              "type": "segment-completed",
+              "actor": "student",
+              "segmentId": "segment:review-01",
+              "detailCode": "segment.submission-complete",
+              "evidenceRef": "evidence:trace-11:review"
+            },
+            {
+              "id": "event:trace-11:006",
+              "sequence": 6,
+              "type": "session-completed",
+              "actor": "student",
+              "segmentId": null,
+              "detailCode": "session.review-complete"
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "component": "tutor-core-bridge",
+          "operation": "return-authoritative-review-result",
+          "status": "blocked-until-actual-v0.2-package-is-inspected",
+          "sideEffect": {
+            "resultRef": "tutor-core-outcome:trace-11:review",
+            "masteryOutcome": null,
+            "prerequisiteOutcome": null
+          }
+        },
+        {
+          "order": 3,
+          "component": "review-result-saga",
+          "operation": "append-result-and-project",
+          "status": "missing-session-4-result-command",
+          "sideEffect": {
+            "appendRetrievalAttempt": true,
+            "runSession2Scheduler": true,
+            "markQueueOccurrenceComplete": true,
+            "markCalendarExecutionComplete": true,
+            "outboxId": "outbox:trace-11:001"
+          }
+        }
+      ],
+      "assertions": [
+        "The queue is marked complete only after canonical evidence/result append succeeds.",
+        "A retry safely resumes the saga without duplicating evidence or a next-review revision."
+      ]
+    },
+    {
+      "traceId": "TRACE-12",
+      "title": "Parent rejects duration increase",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "preconditions": [
+        "Recommendation recommendation:duration:001 is proposed.",
+        "The current effective duration is 20 minutes."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "parent-controls-command-handler",
+          "operation": "reject-recommendation",
+          "command": {
+            "commandVersion": "manuel-academy.parent-control-command.v1",
+            "commandId": "cmd:trace-12:reject",
+            "idempotencyKey": "recommendation:duration:001:reject",
+            "expectedRevision": 7
+          },
+          "sideEffect": {
+            "recommendationId": "recommendation:duration:001",
+            "decision": "rejected",
+            "effectiveDurationMinutesBefore": 20,
+            "effectiveDurationMinutesAfter": 20,
+            "hardMaximumChanged": false
+          }
+        }
+      ],
+      "assertions": [
+        "Rejection applies only to recommendation:duration:001.",
+        "Rejection does not create a permanent global hold or decrease.",
+        "Acceptance/rejection never directly rewrites a hard maximum."
+      ]
+    },
+    {
+      "traceId": "TRACE-13",
+      "title": "Parent adds accommodation",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "blockedBy": [
+        "ACCESS-001",
+        "PRECEDENCE-001"
+      ],
+      "preconditions": [
+        "The accommodation is selected from an authorized typed catalog.",
+        "Free-form learner-facing copy is not accepted into canonical controls."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "parent-controls-command-handler",
+          "operation": "add-accommodation",
+          "command": {
+            "commandVersion": "manuel-academy.parent-control-command.v1",
+            "commandId": "cmd:trace-13:add",
+            "idempotencyKey": "accommodation:movement-break-01:add",
+            "expectedRevision": 8
+          },
+          "sideEffect": {
+            "accommodationId": "accommodation:movement-break-01",
+            "source": "parent",
+            "enabled": true,
+            "requiredness": "required",
+            "effect": {
+              "kind": "minimum-break-frequency",
+              "minutesOfActiveWork": 15,
+              "breakActivityType": "movement"
+            },
+            "learnerCopySource": "tutor-core-or-approved-ux-catalog"
+          }
+        },
+        {
+          "order": 2,
+          "component": "focus-profile-projector",
+          "operation": "project-effective-accommodation",
+          "sideEffect": {
+            "sameAccommodationId": true,
+            "writeAuthority": "parent-teacher-controls",
+            "projectionOnly": true,
+            "policyAction": "recompute-safe-intersection"
+          }
+        }
+      ],
+      "assertions": [
+        "The control is replay-safe.",
+        "An infeasible constraint intersection produces manual-review and no automatic target.",
+        "The focus-profile projection cannot be written independently."
+      ]
+    },
+    {
+      "traceId": "TRACE-14",
+      "title": "Romeo assignment linked to tutoring support",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "blockedBy": [
+        "ROMEO-001"
+      ],
+      "preconditions": [
+        "Input is credential-free normalized metadata; no Romeo login, fetch, scrape, or token.",
+        "The actual support plan exists."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "component": "romeo-metadata-adapter",
+          "operation": "normalize-external-assignment",
+          "command": {
+            "commandVersion": "manuel-academy.integration-command.v1",
+            "commandId": "cmd:trace-14:normalize",
+            "idempotencyKey": "romeo:assignment:fixture-77",
+            "expectedRevision": 0
+          },
+          "sideEffect": {
+            "provider": "romeo_virtual_academy",
+            "externalAssignmentRef": "romeo:assignment:fixture-77",
+            "externalCourse": "Mathematics",
+            "dueDate": "2026-02-05",
+            "launchRef": "host-launch-ref:romeo:fixture-77",
+            "arbitraryUrl": null,
+            "resumeNote": null,
+            "credentialMaterial": null
+          }
+        },
+        {
+          "order": 2,
+          "component": "romeo-support-linker",
+          "operation": "link-study-plan",
+          "sideEffect": {
+            "externalAssignmentRef": "romeo:assignment:fixture-77",
+            "supportStudyPlanId": "plan:math-fractions-01",
+            "externalProgressAuthority": "romeo",
+            "tutoringProgressAuthority": "manuel-academy",
+            "sessionEvent": null
+          }
+        },
+        {
+          "order": 3,
+          "component": "calendar-adapter",
+          "operation": "project-external-assignment",
+          "sideEffect": {
+            "source": "romeo_virtual_academy",
+            "sourceItemRef": "romeo:assignment:fixture-77",
+            "blockType": "romeo_virtual_academy_activity",
+            "dueDate": "2026-02-05",
+            "scheduledInstant": null
+          }
+        }
+      ],
+      "assertions": [
+        "A bare dueDate is never converted to local midnight.",
+        "Linking creates no fabricated StudySession event or mastery evidence.",
+        "supportStudyPlanId is typed and byte-preserving."
+      ]
+    }
+  ]
+}

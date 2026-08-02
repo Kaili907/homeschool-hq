@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/ai-safety/data-request.v1.schema.json",
+  "title": "Manuel Academy AI Safety Export or Deletion Request",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "schemaVersion",
+        "createdAt",
+        "requestId",
+        "studentId",
+        "requestedBy",
+        "requestedAt",
+        "scope",
+        "format",
+        "status"
+      ],
+      "properties": {
+        "kind": { "const": "data-export-request" },
+        "schemaVersion": { "const": 1 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "requestId": { "$ref": "#/$defs/opaqueId" },
+        "studentId": { "$ref": "#/$defs/opaqueId" },
+        "requestedBy": { "$ref": "#/$defs/requester" },
+        "requestedAt": { "type": "string", "format": "date-time" },
+        "scope": {
+          "enum": [
+            "instructional-history",
+            "safety-events",
+            "all-safety-center-data"
+          ]
+        },
+        "format": { "const": "json" },
+        "status": { "enum": ["requested", "ready", "completed", "denied"] },
+        "completedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "schemaVersion",
+        "createdAt",
+        "requestId",
+        "studentId",
+        "requestedBy",
+        "requestedAt",
+        "scope",
+        "status"
+      ],
+      "properties": {
+        "kind": { "const": "data-deletion-request" },
+        "schemaVersion": { "const": 1 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "requestId": { "$ref": "#/$defs/opaqueId" },
+        "studentId": { "$ref": "#/$defs/opaqueId" },
+        "requestedBy": { "$ref": "#/$defs/requester" },
+        "requestedAt": { "type": "string", "format": "date-time" },
+        "scope": {
+          "enum": [
+            "instructional-history",
+            "safety-events",
+            "all-eligible-data"
+          ]
+        },
+        "status": {
+          "enum": [
+            "requested",
+            "awaiting-parent-confirmation",
+            "approved",
+            "completed",
+            "partially-completed",
+            "denied"
+          ]
+        },
+        "approvedBy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["role", "actorId"],
+          "properties": {
+            "role": { "const": "parent" },
+            "actorId": { "$ref": "#/$defs/opaqueId" }
+          }
+        },
+        "approvedAt": { "type": "string", "format": "date-time" },
+        "completedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  ],
+  "$defs": {
+    "opaqueId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$"
+    },
+    "requester": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "actorId"],
+      "properties": {
+        "role": { "enum": ["student", "parent"] },
+        "actorId": { "$ref": "#/$defs/opaqueId" }
+      }
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "approved/completed deletion requests require approvedBy and approvedAt"
+  ]
+}

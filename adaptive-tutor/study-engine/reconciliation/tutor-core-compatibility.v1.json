@@ -1,0 +1,250 @@
+{
+  "schemaId": "manuel-academy.study-reconciliation.tutor-core-compatibility",
+  "schemaVersion": 1,
+  "status": "blocked",
+  "artifact": {
+    "expected": "Manuel Academy Adaptive Tutor Core v0.2",
+    "accessible": false,
+    "verifiedHash": null,
+    "manifestPackageId": null,
+    "manifestVersion": null,
+    "exports": null,
+    "dependencies": null,
+    "rule": "No Tutor Core symbol, enum, payload, dependency, or compatibility claim may be reconstructed from a handoff summary."
+  },
+  "searchResultRef": "artifact-verification.v1.json#tutorCore",
+  "wave1Runtime": {
+    "observedNode": "24.14.1",
+    "observedNpm": "11.11.0",
+    "installedReact": "19.2.8",
+    "installedTypeScript": "5.8.3",
+    "installedVite": "6.4.3",
+    "installedVitest": "4.1.10",
+    "prototypePlaywright": "1.62.0",
+    "compatibilityDecision": "Use a versioned dependency-neutral plain-JSON sidecar. Direct imports remain unapproved until the actual Core manifest and exports are inspected."
+  },
+  "matrix": [
+    {
+      "boundary": "package-identity-version-exports-hash",
+      "wave1Side": "No Tutor Core manifest occurs in the four verified ZIPs.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "BLOCKER",
+      "decision": "Populate only from the actual artifact."
+    },
+    {
+      "boundary": "stable-ids-and-session-correlation",
+      "wave1Side": "Session 1 opaque branded IDs are byte-preserving.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "BLOCKER",
+      "decision": "Probe preservation, wrong-session rejection, and timestamp semantics."
+    },
+    {
+      "boundary": "mastery",
+      "wave1Side": "Session 1 categorical MasteryOutcome; Session 2 also has provisional numeric/boolean representations.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "BLOCKER",
+      "decision": "Never infer categorical mastery from score/correct/successful."
+    },
+    {
+      "boundary": "misconceptions",
+      "wave1Side": "Session 2 provisional adapter drops misconceptionDetails.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": "Preserve an opaque Core outcome reference and only an approved low-detail projection; no raw narrative."
+    },
+    {
+      "boundary": "prerequisites",
+      "wave1Side": "Session 1 structured status/skill/basis/next-action; Session 2 provisional boolean.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "BLOCKER",
+      "decision": "Do not collapse to or expand from a boolean."
+    },
+    {
+      "boundary": "uncertainty",
+      "wave1Side": "Session 1 insufficient-evidence states and Session 2 inconclusive/null are not proven equivalent.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "BLOCKER",
+      "decision": "Map only exhaustively after actual enum inspection."
+    },
+    {
+      "boundary": "instruction-and-reteaching-directives",
+      "wave1Side": "Session 2 guesses correct|reteach and provisional reteaching outcomes.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": "Retire guessed canonicalization and avoid conflating a directive with an orchestrator phase."
+    },
+    {
+      "boundary": "tutoring-safety",
+      "wave1Side": "Session 1 exposes bounded intervention evidence but no safety-command protocol.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "BLOCKER",
+      "decision": "Core refusal/escalation/adult-review directives must veto pacing and UI."
+    },
+    {
+      "boundary": "visual-board-commands",
+      "wave1Side": "Session 3 prototype board is hard-coded from SegmentDefinition.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": "Add a validated command interpreter, unknown-command quarantine, and text-equivalent fallback."
+    },
+    {
+      "boundary": "spoken-turns-and-captions",
+      "wave1Side": "Session 3 renders a current utterance/caption UI.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": "Bind Core turns/captions to plain DTOs and require audio-unavailable fallback."
+    },
+    {
+      "boundary": "transcripts",
+      "wave1Side": "Session 3 accepts transcript ReactNode/text while Session 1 forbids raw transcript material in events.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": "Study Engine stores reference-only projections; never ReactNode or transcript bodies."
+    },
+    {
+      "boundary": "adult-review-evidence",
+      "wave1Side": "Session 1 has category/status/basis references.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "BLOCKER",
+      "decision": "Verify exact Core evidence basis and audience before mapping."
+    },
+    {
+      "boundary": "review-kind-and-priority",
+      "wave1Side": "Session 4 assumes Core supplies purpose/priority but defines provisional enums.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": "No integration inference; use verified Core enum or approved catalog."
+    },
+    {
+      "boundary": "romeo-support-reference",
+      "wave1Side": "Session 4 supportRef is untyped.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": "Use StudyPlanId unless the actual Core exposes a more specific stable reference."
+    },
+    {
+      "boundary": "unsupported-version-quarantine",
+      "wave1Side": "Session 1 has canonical quarantine semantics.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "decision": "Core payloads must pass the same version gate; never reset/coerce."
+    },
+    {
+      "boundary": "node-browser-dependencies",
+      "wave1Side": "Session 2 is ES2022/no-DOM and Session 3 is React/browser ESM.",
+      "coreStatus": "UNVERIFIED",
+      "classification": "SAFE ADAPTER",
+      "decision": "Keep the sidecar JSON-only until isolated Node and browser probes pass."
+    }
+  ],
+  "unsupportedAssumptions": [
+    "Treating provisional.tutor-core.instruction-outcome.v1 as a Core contract.",
+    "Treating correct|reteach, successful|not_successful|inconclusive, numeric mastery, prerequisite booleans, or Session 4 review priorities as Core enums.",
+    "Mapping a Core outcome to confidence_check_completed.",
+    "Dropping misconception meaning without an opaque source outcome reference.",
+    "Passing raw answers, spoken turns, captions, transcripts, or adult-private bodies into Study Engine events or evidence.",
+    "Directly importing Core into both Node-only and browser bundles before exports and peer dependencies are known."
+  ],
+  "probes": [
+    {
+      "probeId": "TC-P00",
+      "name": "archive-safety-and-sha256",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P01",
+      "name": "manifest-id-version-exports-engines-dependencies",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P02",
+      "name": "isolated-node-esm-import-no-side-effects",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P03",
+      "name": "vite-browser-build-and-duplicate-react",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P04",
+      "name": "version-acceptance-and-quarantine",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P05",
+      "name": "opaque-id-session-and-timestamp-integrity",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P06",
+      "name": "exhaustive-mastery-mapping",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P07",
+      "name": "misconception-reference-and-minimization",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P08",
+      "name": "prerequisite-and-uncertainty-without-boolean-collapse",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P09",
+      "name": "correction-and-reteaching-directives",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P10",
+      "name": "safety-refusal-escalation-adult-review-precedence",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P11",
+      "name": "visual-board-command-validation-and-accessibility",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P12",
+      "name": "spoken-turn-caption-equivalence-and-audio-fallback",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P13",
+      "name": "transcript-reference-only-and-exclusion-fuzzing",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P14",
+      "name": "adult-review-evidence-basis-reference",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P15",
+      "name": "review-kind-priority-projection",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P16",
+      "name": "duplicate-replay-out-of-order-conflict",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P17",
+      "name": "refresh-resume-without-duplicate-core-invocation",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P18",
+      "name": "romeo-support-reference-resolution",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    },
+    {
+      "probeId": "TC-P19",
+      "name": "typescript-node-and-browser-compile",
+      "status": "NOT RUN — BLOCKED BY MISSING ARTIFACT"
+    }
+  ]
+}

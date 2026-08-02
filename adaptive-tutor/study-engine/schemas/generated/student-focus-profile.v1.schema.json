@@ -1,0 +1,725 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:manuel-academy:study-engine:student-focus-profile:1",
+  "title": "Student Focus Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Contextual and revisable effective work-block guidance. It never defines a permanent child trait.",
+  "required": [
+    "kind",
+    "schemaVersion",
+    "id",
+    "revision",
+    "createdAt",
+    "updatedAt",
+    "studentId",
+    "gradeBand",
+    "estimate",
+    "breakDurationMinutes",
+    "timerPresentationPreference",
+    "taskSpecificProfiles",
+    "subjectSpecificProfiles",
+    "accessibility",
+    "accommodations",
+    "adjustmentHistory"
+  ],
+  "properties": {
+    "kind": {
+      "const": "student-focus-profile"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "manual",
+            "adaptive-engine",
+            "migration",
+            "import"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 50,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "extensions": {
+          "type": "object",
+          "maxProperties": 500,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9-]*:[A-Za-z0-9._/-]+$"
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "studentId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "gradeBand": {
+      "enum": [
+        "elementary-3-5",
+        "middle-6-8",
+        "high-9-12"
+      ]
+    },
+    "estimate": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "eligibleObservationCount",
+            "minimumObservationCount",
+            "gradeBandStartingRange",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "const": "insufficient-data"
+            },
+            "eligibleObservationCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minimumObservationCount": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "gradeBandStartingRange": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "minimumMinutes",
+                "targetMinutes",
+                "maximumMinutes"
+              ],
+              "properties": {
+                "minimumMinutes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 240
+                },
+                "targetMinutes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 240
+                },
+                "maximumMinutes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 240
+                }
+              },
+              "description": "A contextual, revisable effective work-block range. Runtime validation enforces minimum <= target <= maximum.",
+              "x-manuel-runtime-refinement": [
+                "minimumMinutes <= targetMinutes <= maximumMinutes"
+              ]
+            },
+            "reason": {
+              "enum": [
+                "new-profile",
+                "too-few-sessions",
+                "inconsistent-contexts",
+                "data-withheld"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "eligibleObservationCount",
+            "assessedAt",
+            "confidence",
+            "baselineWorkDurationMinutes",
+            "currentTargetWorkDurationMinutes",
+            "comfortableMaximumWorkDurationMinutes",
+            "effectiveWorkBlockRange",
+            "evidenceIds"
+          ],
+          "properties": {
+            "status": {
+              "const": "established"
+            },
+            "eligibleObservationCount": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "assessedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "confidence": {
+              "enum": [
+                "low",
+                "moderate",
+                "high"
+              ]
+            },
+            "baselineWorkDurationMinutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 240
+            },
+            "currentTargetWorkDurationMinutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 240
+            },
+            "comfortableMaximumWorkDurationMinutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 240
+            },
+            "effectiveWorkBlockRange": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "minimumMinutes",
+                "targetMinutes",
+                "maximumMinutes"
+              ],
+              "properties": {
+                "minimumMinutes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 240
+                },
+                "targetMinutes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 240
+                },
+                "maximumMinutes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 240
+                }
+              },
+              "description": "A contextual, revisable effective work-block range. Runtime validation enforces minimum <= target <= maximum.",
+              "x-manuel-runtime-refinement": [
+                "minimumMinutes <= targetMinutes <= maximumMinutes"
+              ]
+            },
+            "evidenceIds": {
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "maxItems": 2000,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "breakDurationMinutes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 120
+    },
+    "timerPresentationPreference": {
+      "enum": [
+        "hidden",
+        "count-up",
+        "count-down",
+        "progress-bar",
+        "milestones-only"
+      ]
+    },
+    "taskSpecificProfiles": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "effectiveWorkBlockRange",
+              "breakDurationMinutes",
+              "evidenceIds"
+            ],
+            "properties": {
+              "effectiveWorkBlockRange": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "minimumMinutes",
+                  "targetMinutes",
+                  "maximumMinutes"
+                ],
+                "properties": {
+                  "minimumMinutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 240
+                  },
+                  "targetMinutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 240
+                  },
+                  "maximumMinutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 240
+                  }
+                },
+                "description": "A contextual, revisable effective work-block range. Runtime validation enforces minimum <= target <= maximum.",
+                "x-manuel-runtime-refinement": [
+                  "minimumMinutes <= targetMinutes <= maximumMinutes"
+                ]
+              },
+              "breakDurationMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 120
+              },
+              "evidenceIds": {
+                "type": "array",
+                "uniqueItems": true,
+                "minItems": 0,
+                "maxItems": 2000,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "taskType"
+            ],
+            "properties": {
+              "taskType": {
+                "enum": [
+                  "direct-instruction",
+                  "worked-example",
+                  "guided-practice",
+                  "independent-practice",
+                  "retrieval-practice",
+                  "reading",
+                  "writing",
+                  "discussion",
+                  "problem-solving",
+                  "project-work",
+                  "mastery-check",
+                  "prerequisite-remediation",
+                  "reflection",
+                  "custom"
+                ]
+              },
+              "customTaskTypeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+              }
+            }
+          }
+        ],
+        "unevaluatedProperties": false
+      }
+    },
+    "subjectSpecificProfiles": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "effectiveWorkBlockRange",
+              "breakDurationMinutes",
+              "evidenceIds"
+            ],
+            "properties": {
+              "effectiveWorkBlockRange": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "minimumMinutes",
+                  "targetMinutes",
+                  "maximumMinutes"
+                ],
+                "properties": {
+                  "minimumMinutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 240
+                  },
+                  "targetMinutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 240
+                  },
+                  "maximumMinutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 240
+                  }
+                },
+                "description": "A contextual, revisable effective work-block range. Runtime validation enforces minimum <= target <= maximum.",
+                "x-manuel-runtime-refinement": [
+                  "minimumMinutes <= targetMinutes <= maximumMinutes"
+                ]
+              },
+              "breakDurationMinutes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 120
+              },
+              "evidenceIds": {
+                "type": "array",
+                "uniqueItems": true,
+                "minItems": 0,
+                "maxItems": 2000,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "subjectId"
+            ],
+            "properties": {
+              "subjectId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+              }
+            }
+          }
+        ],
+        "unevaluatedProperties": false
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "textScalePercent",
+        "reducedMotion",
+        "highContrast",
+        "narration",
+        "captions",
+        "inputModes",
+        "lowDistractionPresentation"
+      ],
+      "properties": {
+        "textScalePercent": {
+          "type": "integer",
+          "minimum": 75,
+          "maximum": 300
+        },
+        "reducedMotion": {
+          "type": "boolean"
+        },
+        "highContrast": {
+          "type": "boolean"
+        },
+        "narration": {
+          "enum": [
+            "off",
+            "available",
+            "preferred"
+          ]
+        },
+        "captions": {
+          "type": "boolean"
+        },
+        "inputModes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2000,
+          "items": {
+            "type": "string",
+            "enum": [
+              "keyboard",
+              "touch",
+              "speech",
+              "paper",
+              "switch"
+            ]
+          }
+        },
+        "lowDistractionPresentation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "accommodations": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "category",
+          "enabled",
+          "functionalDescription",
+          "approvedBy"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "category": {
+            "enum": [
+              "presentation",
+              "response",
+              "setting",
+              "timing",
+              "assistive-technology",
+              "other"
+            ]
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "functionalDescription": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "approvedBy": {
+            "enum": [
+              "parent",
+              "teacher",
+              "school-plan"
+            ]
+          },
+          "reviewAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "adjustmentHistory": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "changedAt",
+          "changedBy",
+          "nextTargetMinutes",
+          "reason",
+          "evidenceIds"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+          },
+          "changedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "changedBy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "role"
+            ],
+            "properties": {
+              "role": {
+                "enum": [
+                  "student",
+                  "parent",
+                  "teacher",
+                  "tutor",
+                  "system"
+                ]
+              },
+              "actorId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+              }
+            }
+          },
+          "previousTargetMinutes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 240
+          },
+          "nextTargetMinutes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 240
+          },
+          "reason": {
+            "enum": [
+              "new-evidence",
+              "student-feedback",
+              "accommodation",
+              "parent-override",
+              "teacher-override",
+              "context-change"
+            ]
+          },
+          "evidenceIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 0,
+            "maxItems": 2000,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          }
+        }
+      }
+    },
+    "parentOverride": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "active",
+        "setBy",
+        "reason",
+        "createdAt",
+        "reviewAt"
+      ],
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "maximumWorkDurationMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 240
+        },
+        "targetWorkDurationMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 240
+        },
+        "breakDurationMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        },
+        "setBy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role"
+          ],
+          "properties": {
+            "role": {
+              "enum": [
+                "parent",
+                "teacher"
+              ]
+            },
+            "actorId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reviewAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "contextSkillIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 0,
+      "maxItems": 2000,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+      }
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "insufficient-data cannot contain personalized duration estimates",
+    "established durations and effective work-block range are ordered",
+    "active parent maximum caps the current target",
+    "override and adjustment chronology is valid",
+    "task, subject, accommodation, and adjustment identifiers are unique"
+  ]
+}

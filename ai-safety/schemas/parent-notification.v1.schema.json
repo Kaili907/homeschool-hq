@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/ai-safety/parent-notification.v1.schema.json",
+  "title": "Manuel Academy AI Safety Parent Notification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "schemaVersion",
+    "createdAt",
+    "notificationId",
+    "eventId",
+    "studentId",
+    "recipientActorId",
+    "channel",
+    "urgency",
+    "title",
+    "summary",
+    "includedData",
+    "includesRawTranscript",
+    "status"
+  ],
+  "properties": {
+    "kind": { "const": "parent-notification" },
+    "schemaVersion": { "const": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "notificationId": { "$ref": "#/$defs/opaqueId" },
+    "eventId": { "$ref": "#/$defs/opaqueId" },
+    "studentId": { "$ref": "#/$defs/opaqueId" },
+    "recipientActorId": { "$ref": "#/$defs/opaqueId" },
+    "channel": { "const": "in-app" },
+    "urgency": { "enum": ["when-convenient", "prompt", "urgent"] },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "summary": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "includedData": {
+      "type": "array",
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "session-metadata",
+          "safe-event-summary",
+          "timeline-reference"
+        ]
+      }
+    },
+    "includesRawTranscript": { "const": false },
+    "status": { "enum": ["pending", "shown", "acknowledged"] },
+    "shownAt": { "type": "string", "format": "date-time" },
+    "acknowledgedAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "opaqueId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$"
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "status=acknowledged requires acknowledgedAt"
+  ]
+}

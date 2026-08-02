@@ -1,0 +1,83 @@
+{
+  "schemaId": "manuel-academy.study-reconciliation.schema-registry-plan",
+  "schemaVersion": 1,
+  "status": "plan-only",
+  "rule": "This record does not edit the Session 1 registry. It records the approved validation and audience change for a future authorized assembly.",
+  "validationPipeline": [
+    "accept boundary input as unknown",
+    "identify kind and observed schema version without coercion",
+    "migrate only through an explicit registered migration",
+    "select exact kind/version registry entry",
+    "enforce audience capability before parsing adult-private data",
+    "run strict schema validation and return Session 1 ValidationResult",
+    "quarantine unsupported, unknown, invalid, or conflicting payloads unchanged"
+  ],
+  "canonicalStudyEngineKinds": [
+    {
+      "kind": "lesson-study-plan",
+      "version": 1,
+      "dataClass": "student-safe",
+      "authority": "Session 1"
+    },
+    {
+      "kind": "student-focus-profile",
+      "version": 1,
+      "dataClass": "student-safe",
+      "authority": "Session 1"
+    },
+    {
+      "kind": "study-session",
+      "version": 1,
+      "dataClass": "student-safe",
+      "authority": "Session 1"
+    },
+    {
+      "kind": "learning-evidence",
+      "version": 1,
+      "dataClass": "student-safe-minimized",
+      "authority": "Session 1"
+    },
+    {
+      "kind": "student-skill-review",
+      "version": 1,
+      "dataClass": "student-safe-minimized",
+      "authority": "Session 1"
+    },
+    {
+      "kind": "parent-teacher-controls",
+      "version": 1,
+      "dataClass": "authorized-control",
+      "authority": "Session 1"
+    },
+    {
+      "kind": "parent-teacher-private",
+      "version": 1,
+      "dataClass": "adult-private",
+      "requiredCapability": "study:adult-private",
+      "authority": "Session 1"
+    }
+  ],
+  "reconciliationArtifactKinds": [
+    "manuel-academy.study-reconciliation.manifest",
+    "manuel-academy.study-reconciliation.artifact-verification",
+    "manuel-academy.study-reconciliation.canonical-decisions",
+    "manuel-academy.study-reconciliation.issues",
+    "manuel-academy.study-reconciliation.field-diff-matrix",
+    "manuel-academy.study-reconciliation.enum-event-mappings",
+    "manuel-academy.study-reconciliation.tutor-core-compatibility",
+    "manuel-academy.study-reconciliation.core-change-requests",
+    "manuel-academy.study-reconciliation.flow-traces",
+    "manuel-academy.study-reconciliation.validation-result"
+  ],
+  "unknownKeyRule": "Reject unknown keys at canonical roots and records except explicitly registered namespaced metadata keys whose value schemas and data classes are separately allowlisted.",
+  "quarantineDispositions": [
+    "missing-version",
+    "invalid-version",
+    "unsupported-older-version",
+    "unsupported-future-version",
+    "unknown-kind",
+    "invalid-current-payload",
+    "idempotency-conflict",
+    "stale-resume-token"
+  ]
+}

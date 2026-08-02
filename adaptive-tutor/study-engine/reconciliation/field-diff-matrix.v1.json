@@ -1,0 +1,307 @@
+{
+  "schemaId": "manuel-academy.study-reconciliation.field-diff-matrix",
+  "schemaVersion": 1,
+  "status": "approved-with-blockers",
+  "columns": [
+    "area",
+    "session1",
+    "session2",
+    "session3",
+    "session4",
+    "tutorCoreV02",
+    "decision",
+    "classification"
+  ],
+  "rows": [
+    {
+      "area": "package-id-version",
+      "session1": "schemaVersion=1; no package manifest",
+      "session2": "provisional adapter version strings; no package manifest",
+      "session3": "manuel-academy-study-ux-prototype@0.1.0",
+      "session4": "provisional integration version strings; no package manifest",
+      "tutorCoreV02": "UNVERIFIED — actual manifest unavailable",
+      "decision": "DEC-001",
+      "classification": "BLOCKER"
+    },
+    {
+      "area": "opaque-identifiers",
+      "session1": "Branded IDs; 1-128 chars; slash allowed; preserve bytes",
+      "session2": "narrower provisional limits",
+      "session3": "fixture slugs and runtime IDs",
+      "session4": "calendar/review validators use narrower alphabets",
+      "tutorCoreV02": "UNVERIFIED",
+      "decision": "DEC-002",
+      "classification": "SAFE ADAPTER"
+    },
+    {
+      "area": "grade-band",
+      "session1": "elementary-3-5|middle-6-8|high-9-12",
+      "session2": "elementary|middle|high and elementary|middle_school|high_school",
+      "session3": "display range may cross bands",
+      "session4": "no alternate authoritative learner band",
+      "tutorCoreV02": "UNVERIFIED",
+      "decision": "DEC-003",
+      "classification": "SAFE ADAPTER"
+    },
+    {
+      "area": "exact-grade-metadata",
+      "session1": "namespaced extension escape hatch",
+      "session2": "grade-band only",
+      "session3": "display grade ranges",
+      "session4": "display/projection fields",
+      "tutorCoreV02": "UNVERIFIED",
+      "decision": "DEC-003",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "subject-id",
+      "session1": "LessonStudyPlan.subjectId canonical",
+      "session2": "subjectKey/subject provisional",
+      "session3": "math/reading fixtures without catalog proof",
+      "session4": "CalendarBlock.subject and externalCourse are display text",
+      "tutorCoreV02": "UNVERIFIED",
+      "decision": "DEC-004",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "skill-id",
+      "session1": "SkillId canonical",
+      "session2": "skill fields/provisional adapter",
+      "session3": "no canonical skill IDs in fixtures",
+      "session4": "review skillRef",
+      "tutorCoreV02": "UNVERIFIED item/skill relationship",
+      "decision": "DEC-004",
+      "classification": "BLOCKER"
+    },
+    {
+      "area": "task-and-segment-id",
+      "session1": "LessonSegment.id is task instance; StudyTaskType is category",
+      "session2": "orchestrator phases",
+      "session3": "six fixed fixture slugs",
+      "session4": "calendar segment projection",
+      "tutorCoreV02": "UNVERIFIED item/substep IDs",
+      "decision": "DEC-004",
+      "classification": "SAFE ADAPTER"
+    },
+    {
+      "area": "session-state",
+      "session1": "eight canonical states",
+      "session2": "engine phases",
+      "session3": "screens and break return state",
+      "session4": "calendar execution projection",
+      "tutorCoreV02": "UNVERIFIED",
+      "decision": "DEC-005",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "event-vocabulary",
+      "session1": "kebab-case StudySessionEventType",
+      "session2": "snake_case orchestrator events",
+      "session3": "UI intents/local events",
+      "session4": "calendar/parent audit events",
+      "tutorCoreV02": "UNVERIFIED directives/outcomes",
+      "decision": "DEC-005",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "event-version-idempotency",
+      "session1": "aggregate schemaVersion; event ID/sequence",
+      "session2": "no canonical command envelope",
+      "session3": "local event-ID dedupe",
+      "session4": "calendar dedupe; parent events lack IDs",
+      "tutorCoreV02": "UNVERIFIED delivery semantics",
+      "decision": "DEC-006",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "resume-point",
+      "session1": "segmentId, elapsed active seconds, responseDraftRef",
+      "session2": "runtime phase/cursor",
+      "session3": "workspace screen, timers, draft/transcript in localStorage",
+      "session4": "calendar continuation projection",
+      "tutorCoreV02": "UNVERIFIED item/substep refs",
+      "decision": "DEC-007",
+      "classification": "BLOCKER"
+    },
+    {
+      "area": "timer",
+      "session1": "hidden|count-up|count-down|progress-bar|milestones-only",
+      "session2": "timing algorithm inputs",
+      "session3": "visible|minimal|hidden",
+      "session4": "shown|hidden",
+      "tutorCoreV02": "UNVERIFIED presentation commands",
+      "decision": "DEC-008",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "break",
+      "session1": "reason categories/state/event lifecycle",
+      "session2": "planned/student_requested/movement/water/screen_rest/quiet_reset/parent_configured",
+      "session3": "learner activities and resume UI",
+      "session4": "calendar pause/continuation",
+      "tutorCoreV02": "UNVERIFIED safety interaction",
+      "decision": "DEC-008",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "learning-evidence",
+      "session1": "canonical low-detail counts/categories/references",
+      "session2": "proportions/numeric confidence/independence",
+      "session3": "raw answers/reflection/transcript",
+      "session4": "parent-visible evidence descriptions",
+      "tutorCoreV02": "UNVERIFIED authoritative evidence/outcomes",
+      "decision": "DEC-009",
+      "classification": "SAFE ADAPTER"
+    },
+    {
+      "area": "mastery-misconception-prerequisite-uncertainty",
+      "session1": "categorical mastery and structured prerequisite projection",
+      "session2": "numeric/boolean/guessed directives; misconception detail dropped",
+      "session3": "UI must not infer",
+      "session4": "review kind/priority assumes Core authority",
+      "tutorCoreV02": "UNVERIFIED",
+      "decision": "DEC-010",
+      "classification": "BLOCKER"
+    },
+    {
+      "area": "recommendation",
+      "session1": "RecommendationDecision/AdultReviewRequest",
+      "session2": "increase|maintain|decrease|insufficient_data|manual_review",
+      "session3": "display/acceptance UX",
+      "session4": "accept/reject can mutate settings",
+      "tutorCoreV02": "UNVERIFIED review evidence basis",
+      "decision": "DEC-011",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "control-precedence",
+      "session1": "hard controls and accommodations",
+      "session2": "focus algorithm applies hold before cap correction in one path",
+      "session3": "preferences must receive effective projection",
+      "session4": "parent events and manual settings",
+      "tutorCoreV02": "UNVERIFIED safety vetoes",
+      "decision": "DEC-012",
+      "classification": "BLOCKER"
+    },
+    {
+      "area": "accessibility-accommodation",
+      "session1": "accessibility settings plus two accommodation shapes",
+      "session2": "focus/break inputs omit typed accommodation constraints",
+      "session3": "captions/audio/motion/text scale; gaps for high contrast/input modes",
+      "session4": "free-form action/studentMessage",
+      "tutorCoreV02": "UNVERIFIED media/input/caption fields",
+      "decision": "DEC-013",
+      "classification": "BLOCKER"
+    },
+    {
+      "area": "review-interval-retry-window",
+      "session1": "0/1/3/7/14/30/custom wire representation",
+      "session2": "authoritative pacing scheduler",
+      "session3": "review UX only",
+      "session4": "same-day/future/overdue derived queue views",
+      "tutorCoreV02": "UNVERIFIED review basis/priority",
+      "decision": "DEC-014",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "household-time-zone-local-date",
+      "session1": "IANA zone/local-date contracts",
+      "session2": "scheduler timeZone context",
+      "session3": "browser zone must not become authority",
+      "session4": "parent zoneId/calendar timeZone",
+      "tutorCoreV02": "UNVERIFIED",
+      "decision": "DEC-015",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "calendar-block",
+      "session1": "plans/reviews are source aggregates",
+      "session2": "algorithms provide planned timing, not placement",
+      "session3": "display only",
+      "session4": "authoritative placement adapter",
+      "tutorCoreV02": "UNVERIFIED review purpose",
+      "decision": "DEC-016",
+      "classification": "SAFE ADAPTER"
+    },
+    {
+      "area": "review-queue-flow",
+      "session1": "StudentSkillReview canonical",
+      "session2": "scheduleNextReview authoritative",
+      "session3": "review session UI",
+      "session4": "queue creation/defer but no result-return command",
+      "tutorCoreV02": "UNVERIFIED outcome/priority",
+      "decision": "DEC-017",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "romeo-assignment",
+      "session1": "no external-assignment root",
+      "session2": "support plan can use StudyPlanId",
+      "session3": "learner display",
+      "session4": "credential-free adapter, untyped supportRef, arbitrary URL/resumeNote risk",
+      "tutorCoreV02": "UNVERIFIED more-specific support ref",
+      "decision": "DEC-018",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "adult-private-note",
+      "session1": "separate ParentTeacherPrivateRecord; controls hold privateRecordRef",
+      "session2": "no note ownership",
+      "session3": "must never receive body",
+      "session4": "duplicates body in state and actionLog; parent_only mismatch",
+      "tutorCoreV02": "UNVERIFIED adult-review evidence boundary",
+      "decision": "DEC-019",
+      "classification": "BLOCKER"
+    },
+    {
+      "area": "pii-answer-transcript-exclusion",
+      "session1": "low-detail event/evidence intent but arbitrary extensions remain",
+      "session2": "free-text coach context and unknown-state-key retention",
+      "session3": "raw answer/transcript combined in workspace localStorage",
+      "session4": "free-text evidence/title/support and key-name credential scan",
+      "tutorCoreV02": "UNVERIFIED transcript retention/API",
+      "decision": "DEC-020",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "validation-registry",
+      "session1": "canonical registry, ValidationResult, strict schemas",
+      "session2": "one-error provisional adapter results",
+      "session3": "shallow hydrate and reset",
+      "session4": "exception-based provisional validators",
+      "tutorCoreV02": "UNVERIFIED versions",
+      "decision": "DEC-021",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "persistence-append-only-functional-sidecar",
+      "session1": "sidecar proposal and append-only roots",
+      "session2": "pure algorithms need host persistence",
+      "session3": "localStorage prototype",
+      "session4": "calendar dedupe but parent whole-state reducer",
+      "tutorCoreV02": "UNVERIFIED invocation/result replay",
+      "decision": "DEC-022/DEC-023",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY"
+    },
+    {
+      "area": "unsupported-version-quarantine",
+      "session1": "preserve bytes and typed disposition",
+      "session2": "provisional adapter gate incomplete",
+      "session3": "silent empty reset",
+      "session4": "parent/Romeo may restamp current",
+      "tutorCoreV02": "UNVERIFIED",
+      "decision": "DEC-024",
+      "classification": "BLOCKER"
+    },
+    {
+      "area": "node-browser-dependencies",
+      "session1": "ES2022 dependency-free contracts",
+      "session2": "ES2022/no-DOM algorithms",
+      "session3": "React/Vite/jsdom/Playwright browser package",
+      "session4": "dependency-light adapters plus Node audit tests",
+      "tutorCoreV02": "UNVERIFIED manifest and exports",
+      "decision": "DEC-025",
+      "classification": "SAFE ADAPTER"
+    }
+  ]
+}

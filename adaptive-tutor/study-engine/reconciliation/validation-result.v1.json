@@ -1,0 +1,94 @@
+{
+  "schemaId": "manuel-academy.study-reconciliation.validation-result",
+  "schemaVersion": 1,
+  "validatedAt": "2026-07-28T00:00:00-04:00",
+  "status": "PASS_WITH_BLOCKER",
+  "assemblyAuthorized": false,
+  "results": [
+    {
+      "checkId": "VAL-ARTIFACT-HASHES",
+      "scope": "four Wave 1 ZIPs",
+      "status": "PASS",
+      "passed": 4,
+      "failed": 0
+    },
+    {
+      "checkId": "VAL-ARTIFACT-TREE-PARITY",
+      "scope": "230 archived file entries",
+      "status": "PASS",
+      "passed": 230,
+      "failed": 0
+    },
+    {
+      "checkId": "VAL-RECON-PROBES",
+      "scope": "policy, quarantine, append, package validation",
+      "status": "PASS",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "checkId": "VAL-RECON-TESTS",
+      "scope": "Node built-in tests",
+      "status": "PASS",
+      "passed": 19,
+      "failed": 0,
+      "runnerNote": "Used --test-isolation=none because the managed Windows sandbox denied child-process spawning."
+    },
+    {
+      "checkId": "VAL-S1-TYPECHECK",
+      "scope": "Session 1 contracts",
+      "status": "PASS"
+    },
+    {
+      "checkId": "VAL-S1-TESTS",
+      "scope": "Session 1 schemas",
+      "status": "PASS",
+      "files": 7,
+      "passed": 116,
+      "failed": 0
+    },
+    {
+      "checkId": "VAL-S2-TYPECHECK",
+      "scope": "Session 2 engine",
+      "status": "PASS"
+    },
+    {
+      "checkId": "VAL-S2-TESTS",
+      "scope": "Session 2 engine",
+      "status": "PASS",
+      "files": 21,
+      "passed": 325,
+      "failed": 0
+    },
+    {
+      "checkId": "VAL-S3-TYPECHECK",
+      "scope": "Session 3 Study UX",
+      "status": "PASS"
+    },
+    {
+      "checkId": "VAL-S3-TESTS",
+      "scope": "Session 3 Study UX",
+      "status": "PASS",
+      "files": 8,
+      "passed": 25,
+      "failed": 0
+    },
+    {
+      "checkId": "VAL-S4-TESTS",
+      "scope": "Session 4 integrations",
+      "status": "PASS",
+      "files": 10,
+      "passed": 55,
+      "failed": 0
+    },
+    {
+      "checkId": "VAL-TUTOR-CORE",
+      "scope": "TC-P00 through TC-P19",
+      "status": "BLOCKED",
+      "passed": 0,
+      "failed": 0,
+      "notRun": 20,
+      "reason": "Actual Manuel Academy Adaptive Tutor Core v0.2 package is unavailable."
+    }
+  ]
+}

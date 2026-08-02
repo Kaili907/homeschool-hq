@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/ai-safety/safety-event.v1.schema.json",
+  "title": "Manuel Academy AI Safety Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "schemaVersion",
+    "createdAt",
+    "eventId",
+    "sessionId",
+    "studentId",
+    "subjectId",
+    "occurredAt",
+    "classification",
+    "severity",
+    "escalation",
+    "summary",
+    "evidenceRefs",
+    "detector",
+    "parentVisible",
+    "rawMicrophoneRecordingStored"
+  ],
+  "properties": {
+    "kind": {
+      "enum": [
+        "answer-withheld-event",
+        "emergency-language-event",
+        "student-report-event",
+        "student-block-event",
+        "policy-violation-event"
+      ]
+    },
+    "schemaVersion": { "const": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "eventId": { "$ref": "#/$defs/opaqueId" },
+    "sessionId": { "$ref": "#/$defs/opaqueId" },
+    "studentId": { "$ref": "#/$defs/opaqueId" },
+    "subjectId": { "$ref": "#/$defs/opaqueId" },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "classification": {
+      "enum": [
+        "answer-integrity",
+        "academic-integrity",
+        "age-inappropriate-content",
+        "dangerous-activity",
+        "harassment-or-hate",
+        "medical-boundary",
+        "legal-boundary",
+        "potential-self-harm",
+        "potential-immediate-danger",
+        "potential-abuse-or-unsafe-situation",
+        "privacy-or-personal-data",
+        "prompt-injection",
+        "restricted-subject",
+        "sexual-content",
+        "violent-content",
+        "student-report",
+        "student-block",
+        "model-policy-failure",
+        "access-control"
+      ]
+    },
+    "severity": { "enum": ["info", "low", "moderate", "high", "critical"] },
+    "escalation": {
+      "enum": [
+        "none",
+        "record-for-parent",
+        "parent-review",
+        "urgent-parent-attention",
+        "human-safety-review"
+      ]
+    },
+    "summary": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "evidenceRefs": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/opaqueId" }
+    },
+    "detector": {
+      "enum": [
+        "local-policy",
+        "model-output-check",
+        "student",
+        "parent",
+        "reviewer"
+      ]
+    },
+    "parentVisible": { "const": true },
+    "rawMicrophoneRecordingStored": { "const": false },
+    "withheldReason": { "$ref": "#/$defs/withheldReason" },
+    "studentExplanation": { "type": "string", "minLength": 1, "maxLength": 1000 },
+    "canContinueLearning": { "type": "boolean" },
+    "sessionAction": { "const": "pause-and-seek-trusted-adult" },
+    "responseProtocol": {
+      "const": "trusted-adult-now-and-authorized-human-review"
+    },
+    "hotlineInformationProvided": { "const": false },
+    "emergencyServicesContacted": { "const": false },
+    "reportId": { "$ref": "#/$defs/opaqueId" },
+    "reportCategory": {
+      "enum": [
+        "unhelpful",
+        "incorrect",
+        "scary-or-upsetting",
+        "inappropriate",
+        "privacy-concern",
+        "other"
+      ]
+    },
+    "targetEntryId": { "$ref": "#/$defs/opaqueId" },
+    "studentComment": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "blockId": { "$ref": "#/$defs/opaqueId" },
+    "blockScope": { "enum": ["session", "subject", "all-tutor"] },
+    "policyCode": {
+      "enum": [
+        "unsafe-model-output",
+        "answer-disclosure",
+        "restricted-content",
+        "privacy-boundary",
+        "authorization-denied"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "kind": { "const": "answer-withheld-event" } } },
+      "then": {
+        "required": [
+          "withheldReason",
+          "studentExplanation",
+          "canContinueLearning"
+        ]
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "emergency-language-event" } } },
+      "then": {
+        "required": [
+          "sessionAction",
+          "responseProtocol",
+          "hotlineInformationProvided",
+          "emergencyServicesContacted"
+        ],
+        "properties": {
+          "classification": {
+            "enum": [
+              "potential-self-harm",
+              "potential-immediate-danger",
+              "potential-abuse-or-unsafe-situation"
+            ]
+          },
+          "severity": { "const": "critical" },
+          "escalation": { "const": "human-safety-review" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "student-report-event" } } },
+      "then": {
+        "required": ["reportId", "reportCategory"],
+        "properties": { "classification": { "const": "student-report" } }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "student-block-event" } } },
+      "then": {
+        "required": ["blockId", "blockScope"],
+        "properties": { "classification": { "const": "student-block" } }
+      }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "policy-violation-event" } } },
+      "then": { "required": ["policyCode"] }
+    }
+  ],
+  "$defs": {
+    "opaqueId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$"
+    },
+    "withheldReason": {
+      "enum": [
+        "direct-answer-request",
+        "answer-leak-detected",
+        "restricted-subject",
+        "outside-allowed-time",
+        "daily-session-limit",
+        "session-time-limit",
+        "permission-disabled",
+        "voice-input-disabled",
+        "safety-concern",
+        "privacy-request",
+        "harmful-instructions",
+        "age-inappropriate",
+        "prompt-injection",
+        "student-blocked",
+        "human-review-required",
+        "history-unavailable"
+      ]
+    }
+  },
+  "x-manuel-runtime-refinement": [
+    "variant-specific properties are rejected by the runtime validator"
+  ]
+}

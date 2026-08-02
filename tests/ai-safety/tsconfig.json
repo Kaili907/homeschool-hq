@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["vite/client"]
+  },
+  "include": [
+    "../../ai-safety/core/node-shim.d.ts",
+    "./**/*.ts",
+    "./**/*.tsx"
+  ]
+}
