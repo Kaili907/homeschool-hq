@@ -1,151 +1,536 @@
-import type { RemoteProfileRow } from './types'
-import type { StoredSession } from './config'
-import { supabaseAnonKey, supabaseUrl } from './config'
+import {
+  createClient,
+  type AuthChangeEvent,
+  type Session,
+  type SupabaseClient,
+} from '@supabase/supabase-js'
+import {
+  cleanupLegacySyncStorage,
+  supabaseAnonKey,
+  supabaseConfigured,
+  supabaseUrl,
+} from './config'
+import { validateRemoteProfileRows } from './provenance'
+import type {
+  CloudPullResult,
+  CloudPushResult,
+  RemoteProfileRow,
+  SignedInUser,
+} from './types'
+
+export const AUTH_VERIFICATION_TIMEOUT_MS = 8_000
 
 /**
- * M6 Supabase transport — a thin, dependency-free REST client over GoTrue (auth)
- * and PostgREST (data). Only the ANON key + the signed-in user's bearer token are
- * ever sent; the service key is never referenced. `fetchImpl` is injectable so the
- * whole thing is testable without a network or a real project.
+ * Official Supabase browser client. Its supported auth layer owns session
+ * persistence, refresh-token rotation, and TOKEN_REFRESHED storage updates.
  */
+let singleton: SupabaseClient | null | undefined
 
-export type FetchLike = (
-  url: string,
-  init?: { method?: string; headers?: Record<string, string>; body?: string },
-) => Promise<{ ok: boolean; status: number; json(): Promise<unknown>; text(): Promise<string> }>
-
-export interface TransportDeps {
-  fetchImpl?: FetchLike
-  url?: string
-  anonKey?: string
-  now?: () => number
-}
-
-const resolve = (d: TransportDeps = {}) => ({
-  fetchImpl: (d.fetchImpl ?? ((u, i) => fetch(u, i as RequestInit))) as FetchLike,
-  url: d.url ?? supabaseUrl(),
-  anonKey: d.anonKey ?? supabaseAnonKey(),
-  now: d.now ?? (() => Date.now()),
-})
-
-const asRecord = (v: unknown): Record<string, unknown> => (v && typeof v === 'object' ? (v as Record<string, unknown>) : {})
-
-function toSession(data: unknown, nowMs: number): StoredSession | null {
-  const d = asRecord(data)
-  const user = asRecord(d.user)
-  if (typeof d.access_token !== 'string' || typeof user.id !== 'string') return null
-  const expiresAt =
-    typeof d.expires_at === 'number'
-      ? d.expires_at * 1000
-      : nowMs + (typeof d.expires_in === 'number' ? d.expires_in : 3600) * 1000
-  return {
-    access_token: d.access_token,
-    refresh_token: typeof d.refresh_token === 'string' ? d.refresh_token : '',
-    expires_at: expiresAt,
-    user: { id: user.id, email: typeof user.email === 'string' ? user.email : '' },
-  }
-}
-
-export type SignInResult = { ok: true; session: StoredSession } | { ok: false; error: string }
-
-/** Email/password sign-in for the household owner (Dad). */
-export async function signInWithPassword(email: string, password: string, deps?: TransportDeps): Promise<SignInResult> {
-  const { fetchImpl, url, anonKey, now } = resolve(deps)
-  try {
-    const res = await fetchImpl(`${url}/auth/v1/token?grant_type=password`, {
-      method: 'POST',
-      headers: { apikey: anonKey, 'content-type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    })
-    if (!res.ok) {
-      const body = asRecord(await res.json().catch(() => ({})))
-      return { ok: false, error: typeof body.error_description === 'string' ? body.error_description : `sign-in failed (${res.status})` }
-    }
-    const session = toSession(await res.json(), now())
-    return session ? { ok: true, session } : { ok: false, error: 'unexpected sign-in response' }
-  } catch {
-    return { ok: false, error: 'network error — check your connection' }
-  }
-}
-
-/** Exchange a refresh token for a fresh session, or null on failure. */
-export async function refreshSession(refreshToken: string, deps?: TransportDeps): Promise<StoredSession | null> {
-  const { fetchImpl, url, anonKey, now } = resolve(deps)
-  if (!refreshToken) return null
-  try {
-    const res = await fetchImpl(`${url}/auth/v1/token?grant_type=refresh_token`, {
-      method: 'POST',
-      headers: { apikey: anonKey, 'content-type': 'application/json' },
-      body: JSON.stringify({ refresh_token: refreshToken }),
-    })
-    if (!res.ok) return null
-    return toSession(await res.json(), now())
-  } catch {
-    return null
-  }
-}
-
-/** Return a valid session, refreshing if the access token is within 60s of expiry. */
-export async function ensureFresh(session: StoredSession, deps?: TransportDeps): Promise<StoredSession | null> {
-  const { now } = resolve(deps)
-  if (session.expires_at - now() > 60_000) return session
-  return refreshSession(session.refresh_token, deps)
-}
-
-const dataHeaders = (session: StoredSession, anonKey: string): Record<string, string> => ({
-  apikey: anonKey,
-  Authorization: `Bearer ${session.access_token}`,
-  'content-type': 'application/json',
-})
-
-/** Pull all of this household's profile rows (RLS scopes them to the owner). */
-export async function pullProfiles(session: StoredSession, deps?: TransportDeps): Promise<RemoteProfileRow[]> {
-  const { fetchImpl, url, anonKey } = resolve(deps)
-  const fresh = await ensureFresh(session, deps)
-  if (!fresh) return []
-  const res = await fetchImpl(`${url}/rest/v1/profiles?select=profile_id,data,updated_at`, {
-    method: 'GET',
-    headers: dataHeaders(fresh, anonKey),
+export function createSupabaseBrowserClient(
+  url = supabaseUrl(),
+  anonKey = supabaseAnonKey(),
+): SupabaseClient {
+  return createClient(url, anonKey, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+      flowType: 'pkce',
+    },
   })
-  if (!res.ok) return []
-  const rows = await res.json()
-  if (!Array.isArray(rows)) return []
-  return rows
-    .map((r) => asRecord(r))
-    .filter((r) => typeof r.profile_id === 'string' && r.data && typeof r.updated_at === 'string')
-    .map((r) => ({ profile_id: r.profile_id as string, data: r.data as RemoteProfileRow['data'], updated_at: r.updated_at as string }))
+}
+
+export function getSupabaseClient(): SupabaseClient | null {
+  if (!supabaseConfigured()) return null
+  if (singleton === undefined) singleton = createSupabaseBrowserClient()
+  return singleton
+}
+
+export function userFromSession(session: Session | null): SignedInUser | null {
+  if (!session?.user.id) return null
+  return { id: session.user.id, email: session.user.email ?? session.user.id }
+}
+
+export type SignInResult =
+  | { ok: true; user: SignedInUser }
+  | { ok: false; error: string }
+
+export async function signInWithPassword(
+  email: string,
+  password: string,
+  client = getSupabaseClient(),
+): Promise<SignInResult> {
+  if (!client) return { ok: false, error: 'Cloud sync is not configured.' }
+  const { data, error } = await client.auth.signInWithPassword({
+    email,
+    password,
+  })
+  if (error) return { ok: false, error: error.message }
+  const user = userFromSession(data.session)
+  return user
+    ? { ok: true, user }
+    : {
+        ok: false,
+        error: 'Supabase did not return a verified household session.',
+      }
+}
+
+export async function getCurrentSession(
+  client = getSupabaseClient(),
+): Promise<Session | null> {
+  if (!client) return null
+  const { data, error } = await client.auth.getSession()
+  return error ? null : data.session
+}
+
+/** Server-verified user identity for the final cloud mutation boundary. */
+export async function getVerifiedCurrentUser(
+  client = getSupabaseClient(),
+  signal?: AbortSignal,
+  timeoutMs = AUTH_VERIFICATION_TIMEOUT_MS,
+): Promise<SignedInUser | null> {
+  if (!client) return null
+  const result = await boundedAuthorization(
+    client.auth.getUser(),
+    signal,
+    timeoutMs,
+  )
+  if (!result || signal?.aborted) return null
+  const { data, error } = result
+  if (error || !data.user?.id) return null
+  return {
+    id: data.user.id,
+    email: data.user.email ?? data.user.id,
+  }
+}
+
+async function boundedAuthorization<T>(
+  operation: Promise<T>,
+  signal?: AbortSignal,
+  timeoutMs = AUTH_VERIFICATION_TIMEOUT_MS,
+): Promise<T | null> {
+  if (signal?.aborted) return null
+  return new Promise<T | null>((resolve) => {
+    let settled = false
+    const finish = (value: T | null) => {
+      if (settled) return
+      settled = true
+      globalThis.clearTimeout(timer)
+      signal?.removeEventListener('abort', aborted)
+      resolve(value)
+    }
+    const aborted = () => finish(null)
+    const timer = globalThis.setTimeout(() => finish(null), timeoutMs)
+    signal?.addEventListener('abort', aborted, { once: true })
+    void operation.then(
+      (value) => finish(value),
+      () => finish(null),
+    )
+  })
+}
+
+export interface VerifiedAuthContext {
+  user: SignedInUser
+  accessToken: string
+  readonly verifiedAt: number
+  readonly kind: 'supabase-access-token'
+}
+
+export class MutationDispatchAuthorizationError extends Error {
+  readonly code = 'ACADEMY_SYNC_DISPATCH_DENIED'
+
+  constructor() {
+    super('The household authorization changed at mutation dispatch.')
+    this.name = 'MutationDispatchAuthorizationError'
+  }
+}
+
+type FetchLike = typeof globalThis.fetch
+
+export type PinnedWriteClientFactory = (
+  accessToken: string,
+  guardedFetch: FetchLike,
+) => SupabaseClient
+
+function combinedAbortSignal(
+  operationSignal: AbortSignal | undefined,
+  sdkSignal: AbortSignal | null | undefined,
+): AbortSignal | undefined {
+  if (!operationSignal) return sdkSignal ?? undefined
+  if (!sdkSignal || sdkSignal === operationSignal) return operationSignal
+  if (typeof AbortSignal.any === 'function') {
+    return AbortSignal.any([operationSignal, sdkSignal])
+  }
+  const controller = new AbortController()
+  const abort = () => controller.abort()
+  if (operationSignal.aborted || sdkSignal.aborted) {
+    controller.abort()
+  } else {
+    operationSignal.addEventListener('abort', abort, { once: true })
+    sdkSignal.addEventListener('abort', abort, { once: true })
+  }
+  return controller.signal
 }
 
 /**
- * Upsert profile rows. household_id is filled server-side by the column default
- * `auth.uid()` and enforced by RLS, so the client never sends it. Returns success.
+ * The SDK performs asynchronous token/header preparation before invoking this
+ * operation-scoped wrapper. Authorization is therefore checked here, at the
+ * true fetch boundary, and native fetch is invoked in the same synchronous
+ * stack frame when the check succeeds.
  */
-export async function pushProfiles(session: StoredSession, rows: RemoteProfileRow[], deps?: TransportDeps): Promise<boolean> {
-  if (rows.length === 0) return true
-  const { fetchImpl, url, anonKey } = resolve(deps)
-  const fresh = await ensureFresh(session, deps)
-  if (!fresh) return false
-  try {
-    const res = await fetchImpl(`${url}/rest/v1/profiles?on_conflict=household_id,profile_id`, {
-      method: 'POST',
-      headers: { ...dataHeaders(fresh, anonKey), Prefer: 'resolution=merge-duplicates,return=minimal' },
-      body: JSON.stringify(rows.map((r) => ({ profile_id: r.profile_id, data: r.data, updated_at: r.updated_at }))),
+export function guardedMutationFetch(
+  dispatchStillAuthorized: () => boolean,
+  operationSignal: AbortSignal | undefined,
+  nativeFetch: FetchLike,
+  authorizeAtBoundary?: () => Promise<boolean>,
+): FetchLike {
+  return (input, init) => {
+    const dispatch = () => {
+      const requestSignal =
+        typeof Request !== 'undefined' && input instanceof Request
+          ? input.signal
+          : undefined
+      const signal = combinedAbortSignal(
+        operationSignal,
+        init?.signal ?? requestSignal,
+      )
+      if (
+        operationSignal?.aborted ||
+        signal?.aborted ||
+        !dispatchStillAuthorized()
+      ) {
+        return Promise.reject(new MutationDispatchAuthorizationError())
+      }
+      return nativeFetch(input, { ...init, ...(signal ? { signal } : {}) })
+    }
+    if (!authorizeAtBoundary) return dispatch()
+    return authorizeAtBoundary().then((authorized) => {
+      if (!authorized) throw new MutationDispatchAuthorizationError()
+      return dispatch()
     })
-    return res.ok
+  }
+}
+
+function accessTokenShapeIsValid(token: string): boolean {
+  const parts = token.split('.')
+  return (
+    parts.length === 3 &&
+    parts.every((part) => part.length > 0) &&
+    !/\s/.test(token)
+  )
+}
+
+function isVerifiedAuthContext(value: unknown): value is VerifiedAuthContext {
+  if (!value || typeof value !== 'object') return false
+  const context = value as Partial<VerifiedAuthContext>
+  return (
+    context.kind === 'supabase-access-token' &&
+    typeof context.verifiedAt === 'number' &&
+    Number.isFinite(context.verifiedAt) &&
+    typeof context.user?.id === 'string' &&
+    typeof context.accessToken === 'string' &&
+    accessTokenShapeIsValid(context.accessToken)
+  )
+}
+
+function redactAccessToken(message: string, accessToken: string): string {
+  return accessToken ? message.split(accessToken).join('[redacted]') : message
+}
+
+/**
+ * Capture one server-verified auth context. Mutations use this fixed token so a
+ * different session appearing in another tab cannot retarget an in-flight write.
+ */
+export async function getVerifiedAuthContext(
+  client = getSupabaseClient(),
+  signal?: AbortSignal,
+  timeoutMs = AUTH_VERIFICATION_TIMEOUT_MS,
+): Promise<VerifiedAuthContext | null> {
+  if (!client) return null
+  const sessionResult = await boundedAuthorization(
+    client.auth.getSession(),
+    signal,
+    timeoutMs,
+  )
+  if (!sessionResult || signal?.aborted) return null
+  const { data: sessionData, error: sessionError } = sessionResult
+  const accessToken = sessionData.session?.access_token
+  if (sessionError || !accessToken || !accessTokenShapeIsValid(accessToken))
+    return null
+  const userResult = await boundedAuthorization(
+    client.auth.getUser(accessToken),
+    signal,
+    timeoutMs,
+  )
+  if (!userResult || signal?.aborted) return null
+  const { data, error } = userResult
+  if (error || !data.user?.id) return null
+  return {
+    user: {
+      id: data.user.id,
+      email: data.user.email ?? data.user.id,
+    },
+    accessToken,
+    verifiedAt: Date.now(),
+    kind: 'supabase-access-token',
+  }
+}
+
+/**
+ * Re-verifies both the exact pinned token and the canonical current session.
+ * A same-household refresh may change token text, but sign-out/account switch
+ * is denied even while the older pinned access token remains server-valid.
+ */
+export async function verifyPinnedAuthContext(
+  context: unknown,
+  expectedHouseholdId: string,
+  client = getSupabaseClient(),
+  signal?: AbortSignal,
+  timeoutMs = AUTH_VERIFICATION_TIMEOUT_MS,
+): Promise<boolean> {
+  if (
+    !client ||
+    !isVerifiedAuthContext(context) ||
+    context.user.id !== expectedHouseholdId
+  ) {
+    return false
+  }
+  try {
+    const verification = await boundedAuthorization(
+      Promise.all([
+        client.auth.getUser(context.accessToken),
+        client.auth.getSession(),
+        client.auth.getUser(),
+      ]),
+      signal,
+      timeoutMs,
+    )
+    if (!verification || signal?.aborted) return false
+    const [pinned, session, canonical] = verification
+    return (
+      !pinned.error &&
+      pinned.data.user?.id === expectedHouseholdId &&
+      !session.error &&
+      !!session.data.session?.access_token &&
+      session.data.session.user.id === expectedHouseholdId &&
+      !canonical.error &&
+      canonical.data.user?.id === expectedHouseholdId
+    )
   } catch {
     return false
   }
 }
 
-/** Best-effort remote sign-out (revokes the refresh token). */
-export async function signOutRemote(session: StoredSession, deps?: TransportDeps): Promise<void> {
-  const { fetchImpl, url, anonKey } = resolve(deps)
-  try {
-    await fetchImpl(`${url}/auth/v1/logout`, {
-      method: 'POST',
-      headers: { apikey: anonKey, Authorization: `Bearer ${session.access_token}` },
-    })
-  } catch {
-    /* ignore — local sign-out still proceeds */
+export function onAuthSessionChange(
+  callback: (event: AuthChangeEvent, session: Session | null) => void,
+  client = getSupabaseClient(),
+): () => void {
+  if (!client) return () => undefined
+  const { data } = client.auth.onAuthStateChange(callback)
+  return () => data.subscription.unsubscribe()
+}
+
+function parseServerRevision(value: unknown): string | null {
+  if (
+    (typeof value === 'string' && /^(0|[1-9]\d*)$/.test(value)) ||
+    (typeof value === 'number' &&
+      Number.isSafeInteger(value) &&
+      value >= 0)
+  ) {
+    return String(value)
   }
+  return null
+}
+
+function parseSnapshot(value: unknown): CloudPullResult {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return { ok: false, error: 'The cloud returned an invalid sync snapshot.' }
+  }
+  const snapshot = value as Record<string, unknown>
+  const revision = parseServerRevision(snapshot.revision)
+  const rows = validateRemoteProfileRows(snapshot.rows)
+  if (!revision || !rows.ok) {
+    return {
+      ok: false,
+      error: rows.ok ? 'The cloud returned an invalid revision.' : rows.error,
+    }
+  }
+  return { ok: true, rows: rows.rows, revision }
+}
+
+/** Pull failures remain failures; an empty array is returned only on a successful query. */
+export async function pullProfiles(
+  client = getSupabaseClient(),
+  signal?: AbortSignal,
+): Promise<CloudPullResult> {
+  if (!client) return { ok: false, error: 'Cloud sync is not configured.' }
+  try {
+    let query = client.rpc('academy_sync_snapshot')
+    if (signal) query = query.abortSignal(signal)
+    const { data, error } = await query
+    if (error) return { ok: false, error: error.message }
+    return parseSnapshot(data)
+  } catch {
+    return {
+      ok: false,
+      error: 'Network error while reading cloud data. Retry when online.',
+    }
+  }
+}
+
+export async function pushProfiles(
+  rows: RemoteProfileRow[],
+  expectedRevision: string,
+  mutationId: string,
+  verifiedContext: unknown,
+  expectedHouseholdId: string,
+  dispatchStillAuthorized: () => boolean,
+  signal?: AbortSignal,
+  verificationClient = getSupabaseClient(),
+  createWriteClient: PinnedWriteClientFactory = (accessToken, guardedFetch) =>
+    createClient(supabaseUrl(), supabaseAnonKey(), {
+      accessToken: async () => accessToken,
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      },
+      global: { fetch: guardedFetch },
+    }),
+  nativeFetch: FetchLike = globalThis.fetch,
+): Promise<CloudPushResult> {
+  if (rows.length === 0) return { ok: true, revision: expectedRevision }
+  if (!supabaseConfigured())
+    return { ok: false, error: 'Cloud sync is not configured.' }
+  if (
+    !isVerifiedAuthContext(verifiedContext) ||
+    verifiedContext.user.id !== expectedHouseholdId ||
+    !dispatchStillAuthorized() ||
+    !(await verifyPinnedAuthContext(
+      verifiedContext,
+      expectedHouseholdId,
+      verificationClient,
+      signal,
+    ))
+  ) {
+    return {
+      ok: false,
+      error:
+        'An exact server-verified household access token is required for cloud writes.',
+    }
+  }
+  if (!dispatchStillAuthorized() || signal?.aborted) {
+    return {
+      ok: false,
+      error: 'The household session changed before cloud write dispatch.',
+    }
+  }
+  try {
+    const validation = validateRemoteProfileRows(rows)
+    if (!validation.ok) return { ok: false, error: validation.error }
+    const payload = profileRowsForMutation(validation.rows)
+    const fetchAtAuthorizedBoundary = guardedMutationFetch(
+      dispatchStillAuthorized,
+      signal,
+      nativeFetch,
+      () =>
+        verifyPinnedAuthContext(
+          verifiedContext,
+          expectedHouseholdId,
+          verificationClient,
+          signal,
+        ),
+    )
+    const writeClient = createWriteClient(
+      verifiedContext.accessToken,
+      fetchAtAuthorizedBoundary,
+    )
+    let query = writeClient.rpc('academy_apply_profile_mutation', {
+      p_expected_revision: expectedRevision,
+      p_mutation_id: mutationId,
+      p_profiles: payload,
+    })
+    if (signal) query = query.abortSignal(signal)
+    // This early check avoids starting SDK preparation for an already-invalid
+    // operation. The authoritative check is repeated by guarded fetch after
+    // every SDK-internal await and immediately before native fetch.
+    if (!dispatchStillAuthorized() || signal?.aborted) {
+      return {
+        ok: false,
+        error: 'The household authorization changed at mutation dispatch.',
+      }
+    }
+    const { data, error } = await query
+    if (error) {
+      if (
+        error.message.includes('MutationDispatchAuthorizationError') ||
+        error.message.includes('ACADEMY_SYNC_DISPATCH_DENIED')
+      ) {
+        return {
+          ok: false,
+          error: 'The household authorization changed at mutation dispatch.',
+        }
+      }
+      return {
+        ok: false,
+        error: redactAccessToken(error.message, verifiedContext.accessToken),
+      }
+    }
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      return { ok: false, error: 'The cloud returned an invalid CAS result.' }
+    }
+    const result = data as Record<string, unknown>
+    const revision = parseServerRevision(result.revision)
+    if (!revision) {
+      return { ok: false, error: 'The cloud returned an invalid CAS revision.' }
+    }
+    if (result.status === 'conflict') {
+      return {
+        ok: false,
+        conflict: true,
+        revision,
+        error:
+          'Another device updated this household first. Review the refreshed cloud data.',
+      }
+    }
+    if (result.status === 'applied' || result.status === 'replayed') {
+      return {
+        ok: true,
+        revision,
+        ...(result.status === 'replayed' ? { replayed: true } : {}),
+      }
+    }
+    return { ok: false, error: 'The cloud returned an unknown CAS result.' }
+  } catch (cause) {
+    if (cause instanceof MutationDispatchAuthorizationError) {
+      return { ok: false, error: cause.message }
+    }
+    return {
+      ok: false,
+      error: 'Network error while writing cloud data. Retry when online.',
+    }
+  }
+}
+
+export function profileRowsForMutation(rows: RemoteProfileRow[]) {
+  return rows.map((row) => ({
+    profile_id: row.profile_id,
+    data: row.data,
+    updated_at: row.updated_at,
+  }))
+}
+
+/** Local sign-out removes this browser session without revoking other devices. */
+export async function signOutRemote(
+  client = getSupabaseClient(),
+): Promise<void> {
+  try {
+    if (client) await client.auth.signOut({ scope: 'local' })
+  } finally {
+    cleanupLegacySyncStorage()
+  }
+}
+
+export function resetSupabaseClientForTests(): void {
+  singleton = undefined
 }

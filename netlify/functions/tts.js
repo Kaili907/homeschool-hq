@@ -1,65 +1,110 @@
-/** Netlify function: server-side proxy for the ElevenLabs text-to-speech API (returns binary mp3). */
+/** Authenticated, single-operation Netlify gateway for ElevenLabs TTS. */
 
-// SECURITY: the real API key lives ONLY in the host environment variable
-// ELEVENLABS_API_KEY. It is never hard-coded, never bundled into the client,
-// and never logged or echoed back in any response.
-export const handler = async (event) => {
-  // Only POST is proxied.
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
+import {
+  GatewayError,
+  envFlagEnabled,
+  errorResponse,
+  hasQuery,
+  isTimeoutError,
+  readBoundedResponseBytes,
+  readJsonBody,
+  responseForError,
+} from './_shared/http.js'
+import { verifySupabaseBearer } from './_shared/supabase-auth.js'
+import { createGatewayAccess, dailyLimit } from './_shared/gateway-access.js'
+import {
+  ELEVENLABS_MODEL_ID,
+  TTS_REQUEST_LIMIT_BYTES,
+  elevenLabsUrl,
+  validateTtsRequest,
+} from './_shared/tts-policy.js'
 
-  // Read the key from the host env only.
-  const key = process.env.ELEVENLABS_API_KEY;
-  if (!key) {
-    // Do NOT echo the key or any env contents.
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'server missing ELEVENLABS_API_KEY' }),
-    };
-  }
+const ALLOWED_PATHS = new Set(['/api/tts/synthesize', '/.netlify/functions/tts'])
+// Leaves room for base64 expansion beneath Netlify's buffered response ceiling.
+const MAX_AUDIO_BYTES = 4 * 1024 * 1024
+const TTS_TIMEOUT_MS = 30_000
+const DEFAULT_TTS_DAILY_LIMIT = 100
 
-  try {
-    // Reconstruct the ElevenLabs path from the original request path.
-    // Rewrites are status-200, so event.path is the ORIGINAL path
-    // (e.g. /api/tts/v1/text-to-speech/{voiceId}). Strip the proxy prefix
-    // to yield e.g. /v1/text-to-speech/{voiceId}. Also tolerate the raw
-    // function path used when calling the function directly.
-    let path = event.path || '';
-    if (path.startsWith('/api/tts')) {
-      path = path.slice('/api/tts'.length);
-    } else if (path.startsWith('/.netlify/functions/tts')) {
-      path = path.slice('/.netlify/functions/tts'.length);
+export function createTtsHandler(overrides = {}) {
+  return async (event) => {
+    if (event?.httpMethod !== 'POST') {
+      return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
     }
+    if (!ALLOWED_PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
+    if (hasQuery(event)) return errorResponse(400, 'invalid_request')
 
-    // Preserve the query string (e.g. ?output_format=mp3_44100_128).
-    const query = event.rawQuery ? `?${event.rawQuery}` : '';
-    const url = 'https://api.elevenlabs.io' + path + query;
+    const env = overrides.env ?? process.env
+    const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
 
-    const upstream = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'xi-api-key': key,
-        'content-type': 'application/json',
-        accept: 'audio/mpeg',
-      },
-      body: event.body,
-    });
+    try {
+      const auth = await verifySupabaseBearer(event, { fetchImpl, env })
+      if (!auth.ok) return auth.response
 
-    if (!upstream.ok) {
-      return { statusCode: upstream.status, body: 'tts upstream error' };
+      if (!envFlagEnabled(env, 'ACADEMY_TTS_ENABLED')) {
+        return errorResponse(503, 'gateway_disabled')
+      }
+
+      const access = overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl })
+      await access.requireEntitlement(auth.user.id)
+
+      const request = validateTtsRequest(readJsonBody(event, TTS_REQUEST_LIMIT_BYTES), env)
+      const apiKey = typeof env.ELEVENLABS_API_KEY === 'string' ? env.ELEVENLABS_API_KEY.trim() : ''
+      if (!apiKey) return errorResponse(503, 'service_unavailable')
+
+      await access.consumeUsage(
+        auth.user.id,
+        'tts',
+        dailyLimit(env, 'ACADEMY_TTS_DAILY_LIMIT', DEFAULT_TTS_DAILY_LIMIT),
+      )
+
+      let upstream
+      let bytes
+      const signal = AbortSignal.timeout(TTS_TIMEOUT_MS)
+      try {
+        upstream = await fetchImpl(elevenLabsUrl(request.voiceId), {
+          method: 'POST',
+          redirect: 'error',
+          signal,
+          headers: {
+            'xi-api-key': apiKey,
+            'content-type': 'application/json',
+            accept: 'audio/mpeg',
+          },
+          body: JSON.stringify({
+            text: request.text,
+            model_id: ELEVENLABS_MODEL_ID,
+          }),
+        })
+        if (upstream.status === 429) return errorResponse(429, 'usage_limit')
+        if (!upstream.ok) return errorResponse(502, 'provider_failure')
+        const contentType = upstream.headers?.get?.('content-type') ?? ''
+        if (!/^audio\/mpeg(?:\s*;|$)/i.test(contentType)) {
+          return errorResponse(502, 'provider_failure')
+        }
+        bytes = await readBoundedResponseBytes(upstream, MAX_AUDIO_BYTES)
+      } catch (error) {
+        if (isTimeoutError(error, signal)) return errorResponse(504, 'upstream_timeout')
+        if (error instanceof GatewayError) throw error
+        return errorResponse(502, 'provider_failure')
+      }
+      if (bytes.byteLength === 0) {
+        return errorResponse(502, 'provider_failure')
+      }
+
+      return {
+        statusCode: 200,
+        headers: {
+          'content-type': 'audio/mpeg',
+          'cache-control': 'private, no-store, max-age=0',
+          'x-content-type-options': 'nosniff',
+        },
+        body: Buffer.from(bytes).toString('base64'),
+        isBase64Encoded: true,
+      }
+    } catch (error) {
+      return responseForError(error)
     }
-
-    // Return the mp3 as base64 so Netlify serves it as binary.
-    const buf = Buffer.from(await upstream.arrayBuffer());
-    return {
-      statusCode: 200,
-      headers: { 'content-type': 'audio/mpeg' },
-      body: buf.toString('base64'),
-      isBase64Encoded: true,
-    };
-  } catch {
-    // Never throw; surface a generic upstream error without leaking details.
-    return { statusCode: 502, body: JSON.stringify({ error: 'upstream error' }) };
   }
-};
+}
+
+export const handler = createTtsHandler()

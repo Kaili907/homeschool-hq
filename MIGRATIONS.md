@@ -10,6 +10,174 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: Academy profiles base (2026-07-24)
+
+Deployment source of truth:
+`supabase/migrations/20260724074106_academy_profiles_base.sql`.
+
+The timestamp is the UTC creation time of the original reviewed M6
+`supabase/schema.sql` contract. It sorts before both the student-identity
+foundation (`20260724230000`) and household CAS (`20260726120000`) migrations.
+
+The migration creates only `public.profiles`:
+
+- `household_id uuid not null default auth.uid()`, referencing
+  `auth.users(id)` with `ON DELETE CASCADE`;
+- `profile_id text not null`;
+- `data jsonb not null`;
+- `updated_at timestamptz not null default now()`;
+- primary key and only index: `(household_id, profile_id)`;
+- owner `postgres`, RLS enabled but not forced, and no user triggers;
+- four permissive `PUBLIC` policies whose `USING`/`WITH CHECK` expressions are
+  exactly `household_id = auth.uid()`;
+- no table privileges for `PUBLIC`, `anon`, or `service_role`;
+- direct `SELECT`, `INSERT`, `UPDATE`, and `DELETE` for `authenticated` until
+  the later CAS migration revokes direct writes.
+
+No extension is created or required by this migration. It requires the normal
+Supabase `auth.users`, `auth.uid()`, `anon`, `authenticated`, and `service_role`
+foundation and the exact effective schema privileges below:
+
+| Schema | `PUBLIC` | `anon` | `authenticated` | `service_role` | `postgres` |
+| --- | --- | --- | --- | --- | --- |
+| `public` | `USAGE` | `USAGE` | `USAGE` | `USAGE` | `CREATE`, `USAGE` |
+| `auth` | none | `USAGE` | `USAGE` | `USAGE` | `CREATE`, `USAGE` |
+
+PostgreSQL schemas expose only `CREATE` and `USAGE`, so this matrix enumerates
+the complete privilege set. Role entries are effective privileges: direct
+grants, inherited role membership, ownership/superuser rights, and
+`PUBLIC`-inherited grants all count. Missing privileges and extras both abort
+before any `public.profiles` DDL. In particular, `anon` and `authenticated`
+must not have schema `CREATE`. `PUBLIC`, `anon`, `authenticated`, and
+`service_role` also receive no schema grant options; grantable authority reached
+through an inherited role is rejected. `postgres` retains its normal
+owner/superuser authority. The migration validates but never repairs, grants,
+or revokes platform schema ACLs. Unrelated platform-owner ACL entries remain
+outside this application-role matrix and are not modified.
+
+`anon`, `authenticated`, and `service_role` must also retain `EXECUTE` on the
+approved `auth.uid()` helper.
+
+An absent table is created. An exact existing definition is verified without
+DDL so rows, timestamps, relation identity, policy/index/constraint cardinality,
+and unrelated ACLs remain stable. Any incompatible table kind, owner, column,
+default, PK/FK, delete action, index, RLS state, policy, ACL, or user trigger
+aborts the transaction instead of being silently repaired.
+
+`supabase/schema.sql` remains only a legacy/local reference snapshot for
+downstream test setup. It must stay semantically identical to the migration.
+Deployment instructions must point to the timestamped migration.
+
+Permanent local validation:
+
+```text
+npm run test:academy-profiles-base
+```
+
+The permanent suite accepts each target role with no direct `public`-schema
+`USAGE` because the required `PUBLIC` grant supplies it effectively. It also
+covers inherited helper-role `USAGE` for every `anon`/`authenticated`/
+`service_role` and `public`/`auth` pairing without ACL normalization. Missing
+`auth`-schema `USAGE` is rejected independently for all three target roles.
+Policy validation includes an otherwise exact policy changed from permissive to
+restrictive. The combined-chain gate checks authenticated `SELECT`, `INSERT`,
+`UPDATE`, and `DELETE` as four independent privileges before later CAS
+revocation.
+
+The complete intended fresh-project chain is:
+
+1. `20260724074106_academy_profiles_base.sql`
+2. `20260724230000_academy_student_identity_foundation.sql`
+3. `20260726120000_academy_household_revision_cas.sql`
+4. `20260731120000_academy_gateway_usage.sql`
+
+This integration branch contains the exact independently reviewed migrations
+from commits `c84f377d4b73bb1876479bb21a043bf1b21ec328`,
+`6138112bda3e395b02ae8d67a1da756f73cd28ed`, and
+`e5131729f7866553f6bedfd2ca0ec84f0b343126`. Permanent tests verify the three
+approved blob identities and apply the complete chain in timestamp order. A
+missing or stale reviewed blob fails instead of silently substituting another
+migration.
+
+An isolated Supabase CLI 2.109.1 rollback probe proved that `migration up
+--db-url` executes one migration file atomically: a forced late failure removed
+all earlier objects and the failing ledger entry. The same probe appended a
+forced failure after the exact safe-sync migration and confirmed that no CAS
+table or function remained, while the earlier committed base migration and
+ledger record stayed intact. No repository `supabase/config.toml` was required
+for this explicit local `--db-url` path.
+
+## Supabase: Academy household revision CAS (2026-07-26)
+
+Tracked migration:
+`supabase/migrations/20260726120000_academy_household_revision_cas.sql`.
+It remains unreleased and unapplied to any hosted project, so the Session 2C-R2
+contract and receipt corrections are folded into this single final migration
+definition rather than leaving a knowingly vulnerable intermediate migration.
+
+- Adds one server-managed monotonic revision row per authenticated household.
+- Adds per-household terminal mutation receipts for both applied and conflict
+  results. An identical retry returns the original result without applying
+  profiles or incrementing twice. Reusing an ID with a different expected
+  revision or JSONB payload is rejected, and conflict resolution uses a new ID.
+- Replaces authenticated direct profile writes with a `SECURITY DEFINER` RPC
+  that derives household identity from `auth.uid()`, locks the revision row,
+  validates the expected revision, transactionally upserts only the supplied
+  profile rows, and advances the revision only on success. Omitted existing
+  profiles are retained; this migration adds no deletion mechanism.
+- Uses a fixed `pg_catalog, pg_temp` search path, schema-qualified application
+  objects, `postgres` ownership, no anonymous/PUBLIC execute grant, and the
+  narrow authenticated execute grant.
+- A stale expected revision returns a typed conflict, writes no profiles, and
+  durably records that first result under the household-scoped mutation ID.
+- The server validates required Academy profile fields, supported optional
+  containers, strict timestamps, JavaScript-finite numbers, recursive reserved
+  keys, fixed profile IDs, and bounded JSON structure before a receipt, profile
+  write, or revision advance. Shared fixture data is checked by both the
+  TypeScript and PostgreSQL validators.
+- Existing valid profile rows are preserved and intentionally form a lazy
+  revision-zero snapshot. No state row is backfilled. The first successful CAS
+  mutation creates/locks the state row and consumes revision zero.
+
+Local PGlite/PostgreSQL-protocol probes cover first run, rerun, shared contract
+fixtures, existing-data preservation, lazy revision zero, partial-upsert
+semantics, rollback, identity isolation, anonymous/missing auth, grants, and
+immutable applied/conflict receipts. PGlite's socket multiplexer is not treated
+as independent-backend evidence. The dedicated
+`npm run test:academy-cas-postgres` gate starts a development-only embedded
+PostgreSQL server, asserts different `pg_backend_pid()` values, and proves
+deterministic state-row contention for empty and nonzero revisions plus
+concurrent identical retries. The exact Manuel Academy Supabase project is not
+yet verified, so the migration has not been applied to any hosted project.
+Hosted migration, role/JWT/PostgREST checks, and hosted two-client contention
+remain release gates; do not guess a project or paste the SQL manually.
+
+## Supabase: Academy gateway usage ledger (2026-07-31)
+
+Tracked migration:
+`supabase/migrations/20260731120000_academy_gateway_usage.sql`.
+
+The migration adds the server-only daily request ledger used by the Academy AI
+and TTS gateways:
+
+- `academy_gateway_usage` is keyed by authenticated user, UTC database day,
+  and the fixed `anthropic`/`tts` endpoint set; an omitted RPC day is derived
+  explicitly from UTC and cannot follow the session timezone;
+- RLS is enabled and forced, with all table and function access revoked from
+  `PUBLIC`, `anon`, and `authenticated`;
+- `service_role` alone receives the table privileges and RPC execution needed
+  by the serverless gateways;
+- `academy_consume_gateway_usage` is a `SECURITY DEFINER` function with a fixed
+  `pg_catalog` search path and one atomic `INSERT ... ON CONFLICT DO UPDATE`;
+- the request that reaches the configured cap succeeds, while later requests
+  return `false` without incrementing the stored count.
+
+Permanent local validation is in
+`supabase/academy-gateway-usage.db.test.ts`. It covers omitted-day UTC pinning
+under a deliberately non-UTC session timezone, at-cap acceptance, over-cap
+rejection without mutation, UTC day rollover, and denial of direct client-role
+table and RPC access.
+
 ## v1 → v2 (M1 multi-profile, 2026-07-23)
 
 **Before:** single profile under key `homeschool-hq:profile:v1`
@@ -109,3 +277,79 @@ text / keys / assessment item content (context is single-profile, status-only),
 and every data-changing action requires an explicit Confirm tap. Reuses MT-2's
 Anthropic key/model path (shared key), so keyless/offline disables the orb only.
 Teens (grades 10/12) only; littles' screens show no assistant.
+
+## Supabase additive: Academy student identity Phase 0 (2026-07-24, unused)
+
+Database-only foundation in
+`supabase/migrations/20260724230000_academy_student_identity_foundation.sql`.
+It adds new `academy_*` identity, guardian-access, subject-enrollment, lifecycle,
+audit, private credential-verifier, and private future-session tables. It does
+not alter `public.profiles`, import local profiles, or change application
+`schemaVersion` 2.
+
+The hardened Phase-0 contract requires active-household authorization,
+immutable student household IDs, history-preserving status/revocation
+transitions, canonical unpadded-Base64 Argon2id/scrypt verifier envelopes with
+decode/re-encode equality so unused-pad-bit aliases are rejected, no auxiliary
+credential JSON, lowercase hexadecimal SHA-256 session digests,
+the disjoint raw-token format
+`aca_stu_v1_<43-unpadded-base64url-characters>`, capability schema version 1,
+issuance-time/expiry/revocation checks, session-version invalidation,
+event-specific audit builders with sensitive value/reason and four-digit
+raw-PIN rejection, explicit object grants, and real-role denial probes. Guardian
+removal means relationship
+revocation while the referenced Auth identity is retained; direct Auth deletion
+is deferred. Current subject enrollments are idempotent per student, school
+year, subject, course, and curriculum version; completed/withdrawn/archived
+history permits a reviewed reenrollment.
+
+The migration is not run by the application and must not be applied to
+production in this phase. It must run as the Supabase migration owner
+`postgres`; security-definer owner, `search_path`, body, and execute ACL are
+part of the approved catalog definition. Version-2 metadata stores a full
+security manifest after successful creation. A rerun verifies that manifest
+before replacing any function, policy, or trigger and aborts on any incompatible
+table/column/default/constraint/index/RLS/policy/function/trigger/ACL definition.
+An unmarked first-run name collision also aborts.
+
+Validate only in an ephemeral/local Supabase-compatible project in this exact
+order:
+
+1. Prepare roles/Auth shims and apply `supabase/schema.sql`.
+2. Execute and commit the `ACADEMY SENTINEL PREFLIGHT` section of
+   `supabase/tests/academy_student_identity_rls_probes.sql`.
+3. Run the migration (Run 1).
+4. Run the rollback-only `ACADEMY ROLE PROBES` section (Probe Run 1).
+5. Run the migration again (Run 2).
+6. Prove the sentinel predates Run 2 and that its schema/table/function ACLs and
+   owners are unchanged.
+7. Run the role probes again (Probe Run 2).
+8. Confirm stable complete manifests/object counts, zero probe failures, zero
+   residual fixture rows, and expected rejection of every incompatible-object
+   fixture.
+
+Explicit transaction boundaries also make the complete probe file safe as one
+`psql`, SQL Editor, or multi-statement batch; do not rely on an external harness
+silently splitting it.
+
+`supabase/academy-student-identity.db.test.ts` runs the tracked two-pass
+migration/probe sequence and incompatible-object fixtures as part of the normal
+`npm test` gate; the identity SQL security contract is not a separately
+remembered manual test.
+
+Future profile migration requires a durable import ledger with source IDs and
+digests, target IDs, batch/status/retry/error metadata, bounded idempotent
+transactions, partial-failure recovery, count/digest validation, and explicit
+rollback/cutover gates. Legacy and normalized identity records must never be
+dual-written. Trusted provisioning is required; no current profile is imported
+or uploaded by Phase 0. Full architecture, verifier/session formats, import
+runbook, rollout, and rollback are documented in
+`docs/academy-student-identity-phase-0.md`.
+
+PGlite validation does not reproduce PostgREST exposed-schema configuration,
+hosted role administration, live extension state, or hosted owner/service-role
+bypass behavior. A later separately authorized production session must verify
+the exact project, migration history, owner/ACL report, exposed schemas, and
+object-name conflicts before applying the independently approved SQL and exact
+probes. No dual write or application activation is permitted merely because the
+database migration succeeds.

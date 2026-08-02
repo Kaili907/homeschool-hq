@@ -6,12 +6,8 @@ import {
   CACHE_MAX_BYTES,
   DEFAULT_MONTHLY_CAP,
   encodeVoiceRef,
-  getStoredKey,
   getVoiceAdapter,
   getVoiceCache,
-  hasStoredKey,
-  maskKey,
-  setStoredKey,
   setVoiceMonthlyCap,
   speak,
   staticVoiceLines,
@@ -328,8 +324,6 @@ function fmtMB(bytes: number): string {
 }
 
 function PremiumVoicePanel({ state }: { state: AppState }) {
-  const [keyInput, setKeyInput] = useState('')
-  const [keySaved, setKeySaved] = useState(hasStoredKey())
   const [testMsg, setTestMsg] = useState('')
   const [usage, setUsage] = useState(() => voiceUsageSnapshot())
   const [capInput, setCapInput] = useState(String(usage.cap))
@@ -348,18 +342,7 @@ function PremiumVoicePanel({ state }: { state: AppState }) {
 
   const targets = prewarmTargets(state)
 
-  const saveKey = () => {
-    setStoredKey(keyInput)
-    setKeySaved(hasStoredKey())
-    setKeyInput('')
-    setTestMsg('')
-  }
-  const clearKey = () => {
-    setStoredKey('')
-    setKeySaved(false)
-    setTestMsg('')
-  }
-  const testKey = async () => {
+  const testVoice = async () => {
     setTestMsg('Testing…')
     const target = targets[0]
     if (!target) {
@@ -374,7 +357,7 @@ function PremiumVoicePanel({ state }: { state: AppState }) {
     setTestMsg(
       used === 'elevenlabs' || used === 'cache'
         ? '✓ Premium voice played.'
-        : '⚠ Fell back to browser — check the key and your connection.',
+        : '⚠ Fell back to browser — check your sign-in, entitlement, and connection.',
     )
   }
 
@@ -415,7 +398,7 @@ function PremiumVoicePanel({ state }: { state: AppState }) {
     setBusy(false)
     setPrewarmMsg(
       skipped > 0
-        ? `Cached ${done} lines. ${skipped} skipped (no key/offline or over the monthly cap).`
+        ? `Cached ${done} lines. ${skipped} skipped (signed out, offline, or over a usage cap).`
         : `Cached ${done} lines — static tutor lines now play offline in premium voice.`,
     )
   }
@@ -426,33 +409,14 @@ function PremiumVoicePanel({ state }: { state: AppState }) {
     <div className={`${box} space-y-4`}>
       <div className="font-bold text-slate-800">Premium voice (ElevenLabs)</div>
 
-      {/* API key */}
-      <div className="space-y-1">
-        <div className="text-xs font-semibold text-slate-500">
-          API key — stored only on this device, never in exports or backups.
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <input
-            type="password"
-            value={keyInput}
-            onChange={(e) => setKeyInput(e.target.value)}
-            placeholder={keySaved ? `Saved (${maskKey(getStoredKey())})` : 'Paste ElevenLabs API key'}
-            className={`${inp} w-64`}
-            aria-label="ElevenLabs API key"
-          />
-          <button onClick={saveKey} disabled={!keyInput.trim()} className={`${btn} disabled:opacity-40`}>
-            Save key
-          </button>
-          <button onClick={testKey} disabled={!keySaved} className={`${btn} disabled:opacity-40`}>
-            ▶ Test key
-          </button>
-          {keySaved && (
-            <button onClick={clearKey} className={btn}>
-              Remove key
-            </button>
-          )}
-          {testMsg && <span className="text-xs font-semibold text-slate-600">{testMsg}</span>}
-        </div>
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-xs font-semibold text-slate-500">
+          Premium synthesis uses the secured Academy gateway; no provider key is stored in this browser.
+        </span>
+        <button onClick={testVoice} disabled={targets.length === 0} className={`${btn} disabled:opacity-40`}>
+          ▶ Test premium voice
+        </button>
+        {testMsg && <span className="text-xs font-semibold text-slate-600">{testMsg}</span>}
       </div>
 
       {/* usage + cap */}

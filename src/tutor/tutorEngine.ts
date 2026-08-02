@@ -86,6 +86,31 @@ export function isConcerning(text: string): boolean {
 
 const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
+function presentationValue(value: string): string {
+  let normalized = value.trim()
+  const wrappers = [
+    ['**', '**'],
+    ['__', '__'],
+    ['*', '*'],
+    ['_', '_'],
+    ['`', '`'],
+    ['"', '"'],
+    ["'", "'"],
+    ['“', '”'],
+    ['‘', '’'],
+  ]
+  for (let pass = 0; pass < 5; pass += 1) {
+    let next = normalized.replace(/[.!?…。！？]+$/u, '').trim()
+    const wrapper = wrappers.find(
+      ([open, close]) => next.length > open.length + close.length && next.startsWith(open) && next.endsWith(close),
+    )
+    if (wrapper) next = next.slice(wrapper[0].length, -wrapper[1].length).trim()
+    if (next === normalized) break
+    normalized = next
+  }
+  return normalized.toLowerCase()
+}
+
 /**
  * Redacts any model reply that leaks the correct answer. Returns the safe text and
  * whether a redaction happened. Multi-character / non-numeric answers are redacted
@@ -97,8 +122,9 @@ export function sanitizeReply(reply: string, correctAnswer: string): { text: str
   if (!ans) return { text: reply, redacted: false }
   const esc = escapeRe(ans)
   const occurrence = new RegExp(`(^|[^\\w/$.])${esc}([^\\w/]|$)`, 'i')
-  let leaked = occurrence.test(reply)
-  if (leaked && /^\d$/.test(ans)) {
+  const answerOnly = presentationValue(reply) === presentationValue(ans)
+  let leaked = answerOnly || occurrence.test(reply)
+  if (leaked && !answerOnly && /^\d$/.test(ans)) {
     leaked = new RegExp(`\\b(is|are|equals?|answer|=)\\b[^.!?]*?(^|[^\\w])${esc}([^\\w]|$)`, 'i').test(reply)
   }
   return leaked ? { text: SAFE_REDACTION, redacted: true } : { text: reply, redacted: false }

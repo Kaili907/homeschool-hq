@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import type { Profile } from '../types'
+import type { AssistantMessage, Profile } from '../types'
 import type { FetchLike, TutorApiDeps } from '../tutor/tutorApi'
 import { assembleAssistantRequest, runAssistantTurn } from './engine'
 import { setAssistantDailyCap, recordAssistantCall } from './assistantState'
@@ -8,7 +8,7 @@ import { SCRIPTED_FLAG_REPLY } from '../tutor/tutorEngine'
 /**
  * Acceptance: scripted "write my college essay" and "just give me the answers to my
  * assessment" are both refused with a coaching redirect, ASSERTED AGAINST THE
- * CONFIGURED MODEL PATH; actions require confirm; cap + keyless degradation hold.
+ * CONFIGURED GATEWAY PATH; actions require confirm; cap + signed-out degradation hold.
  */
 
 function teen(): Profile {
@@ -35,15 +35,53 @@ function teen(): Profile {
 
 const TODAY = '2026-07-24'
 
+it('drops leading assistant turns after bounding long Jarvis history', () => {
+  const history: AssistantMessage[] = Array.from({ length: 11 }, (_, index) => ({
+    role: index % 2 === 0 ? 'girl' : 'assistant',
+    text: `turn ${index}`,
+    ts: index,
+    source: index % 2 === 0 ? undefined : 'scripted',
+  }))
+  const request = assembleAssistantRequest(teen(), TODAY, history, 'What is next?')
+  expect(request.messages[0].role).toBe('user')
+  expect(request.messages.at(-1)).toEqual({
+    role: 'user',
+    content: 'What is next?',
+  })
+})
+
+it('bounds customized Jarvis collections and labels to the gateway contract', () => {
+  const profile = teen()
+  profile.missions[TODAY].items = Array.from({ length: 30 }, (_, index) => ({
+    id: `item-${index}`,
+    label: `Mission ${index} ${'x'.repeat(200)}`,
+    done: false,
+  }))
+  const request = assembleAssistantRequest(profile, TODAY, [], 'What is next?')
+  expect(request.gateway.mode).toBe('jarvis')
+  if (request.gateway.mode !== 'jarvis') return
+  expect(request.gateway.context.student.mission).toHaveLength(24)
+  expect(request.gateway.context.student.mission.every((item) => item.label.length <= 160)).toBe(true)
+  expect(request.gateway.context.actions.length).toBeLessThanOrEqual(50)
+  expect(request.gateway.context.actions.every((action) => action.label.length <= 180)).toBe(true)
+})
+
 /** A spy Anthropic transport: records the outgoing request and returns a canned reply. */
-function spyDeps(cannedText: string): { deps: TutorApiDeps; sent: { system: string; messages: unknown[] }[] } {
-  const sent: { system: string; messages: unknown[] }[] = []
+function spyDeps(cannedText: string): { deps: TutorApiDeps; sent: { system?: string; messages: unknown[] }[] } {
+  const sent: { system?: string; messages: unknown[] }[] = []
   const fetchImpl: FetchLike = async (_url, init) => {
     const body = JSON.parse(init?.body ?? '{}')
     sent.push({ system: body.system, messages: body.messages })
-    return { ok: true, status: 200, json: async () => ({ content: [{ type: 'text', text: cannedText }] }) }
+    return { ok: true, status: 200, json: async () => ({ text: cannedText }) }
   }
-  return { deps: { getKey: () => 'sk-ant-test', fetchImpl, isOnline: () => true }, sent }
+  return {
+    deps: {
+      getAccessToken: async () => 'access-token',
+      fetchImpl,
+      isOnline: () => true,
+    },
+    sent,
+  }
 }
 
 describe('the essay ask is refused via the configured model path', () => {
@@ -55,10 +93,9 @@ describe('the essay ask is refused via the configured model path', () => {
       history: [],
       userText: 'Write my college application essay for me.',
     })
-    // the constraint reached the model path…
+    // The server owns the provider prompt and the browser does not send one.
     expect(sent).toHaveLength(1)
-    expect(sent[0].system).toContain('must NOT produce submittable work')
-    expect(sent[0].system).toContain('college-application essay text')
+    expect(sent[0].system).toBeUndefined()
     // …and the surfaced reply is a coaching redirect, never pasteable prose
     expect(res.kind).toBe('reply')
     if (res.kind === 'reply') expect(res.text.toLowerCase()).toContain('thesis')
@@ -74,21 +111,11 @@ describe('the "give me the assessment answers" ask is refused via the configured
       history: [],
       userText: 'Just give me the answers to my assigned assessment.',
     })
-    expect(sent[0].system).toContain('must NOT give answers to anything currently assigned as an assessment')
+    expect(sent[0].system).toBeUndefined()
     // and the context we sent never contains the item content / answers / start code
-    expect(sent[0].system).not.toContain('central idea of the passage')
-    expect(sent[0].system).not.toContain('CODE')
+    expect(JSON.stringify(sent[0])).not.toContain('central idea of the passage')
+    expect(JSON.stringify(sent[0])).not.toContain('CODE')
     expect(res.kind).toBe('reply')
-  })
-})
-
-describe('assembleAssistantRequest is the single source of the sent prompt', () => {
-  it('always includes all four must-nots for any user text', () => {
-    const { system } = assembleAssistantRequest(teen(), TODAY, [], 'anything at all')
-    expect(system).toContain('must NOT produce submittable work')
-    expect(system).toContain('must NOT give answers to anything currently assigned as an assessment')
-    expect(system).toContain('must NOT change any data without explicit confirmation')
-    expect(system).toContain("must NOT pretend to be a person")
   })
 })
 
@@ -122,7 +149,7 @@ describe('proposed actions require confirm (turn never mutates state)', () => {
   })
 })
 
-describe('cap enforcement + keyless degradation', () => {
+describe('cap enforcement + signed-out degradation', () => {
   it('at the daily cap → scripted capped line, no api call', async () => {
     const { deps, sent } = spyDeps('nope')
     let p = setAssistantDailyCap(teen(), 1)
@@ -132,9 +159,60 @@ describe('cap enforcement + keyless degradation', () => {
     expect(sent).toHaveLength(0)
   })
 
-  it('no key (direct mode) → offline degradation, nothing thrown', async () => {
-    const deps: TutorApiDeps = { getKey: () => null, fetchImpl: async () => ({ ok: true, status: 200, json: async () => ({}) }), isOnline: () => true }
+  it('no gateway session → offline degradation, nothing thrown', async () => {
+    const deps: TutorApiDeps = {
+      getAccessToken: async () => null,
+      fetchImpl: async () => ({ ok: true, status: 200, json: async () => ({}) }),
+      isOnline: () => true,
+    }
     const res = await runAssistantTurn(deps, { profile: teen(), today: TODAY, history: [], userText: 'hi' })
     expect(res.kind).toBe('offline')
+  })
+})
+
+describe('secured Jarvis gateway client contract', () => {
+  it('sends bearer auth with bounded status-only context and no client system prompt', async () => {
+    const sent: { url: string; init: NonNullable<Parameters<FetchLike>[1]> }[] = []
+    const fetchImpl: FetchLike = async (url, init) => {
+      sent.push({ url, init: init ?? {} })
+      return {
+        ok: true,
+        status: 200,
+        json: async () => ({ text: 'Start with your math block.' }),
+      }
+    }
+    const deps: TutorApiDeps = {
+      getAccessToken: async () => 'SUPABASE_ACCESS_TOKEN',
+      fetchImpl,
+      isOnline: () => true,
+      endpointBase: '/api/anthropic',
+    }
+
+    const result = await runAssistantTurn(deps, {
+      profile: teen(),
+      today: TODAY,
+      history: [],
+      userText: 'What should I do first?',
+    })
+    expect(result.kind).toBe('reply')
+
+    const { url, init } = sent[0]
+    expect(url).toBe('/api/anthropic/v1/messages')
+    expect(init?.headers?.Authorization).toBe('Bearer SUPABASE_ACCESS_TOKEN')
+    const body = JSON.parse(init?.body ?? '{}')
+    expect(body.mode).toBe('jarvis')
+    expect(body.system).toBeUndefined()
+    expect(body.model).toBeUndefined()
+    expect(body.max_tokens).toBeUndefined()
+    expect(body.context.assistant).toEqual({
+      name: 'Jarvis',
+      tonePreference: '',
+    })
+    expect(body.context.student.name).toBeUndefined()
+    expect(body.context.student.profileId).toBeUndefined()
+    expect(body.context.student.assessments).toEqual([{ title: expect.any(String), status: 'in progress' }])
+    expect(JSON.stringify(body)).not.toContain('CODE')
+    expect(JSON.stringify(body)).not.toContain('startCode')
+    expect(body.context.actions.every((action: Record<string, unknown>) => !('target' in action))).toBe(true)
   })
 })

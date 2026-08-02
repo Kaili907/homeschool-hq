@@ -14,7 +14,7 @@
   # keeps the direct-with-panel-key path. The two SECRET keys
   # (ANTHROPIC_API_KEY / ELEVENLABS_API_KEY) are set in the Netlify UI, never here.
   VITE_USE_PROXY = "true"
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
 
 # ---- API proxies (MUST precede the SPA fallback) ----
 [[redirects]]

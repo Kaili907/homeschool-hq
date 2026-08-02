@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import type { Profile, TutorChat as TutorChatT, TutorMessage } from '../../types'
 import type { SkillId } from '../../skills'
 import { useTheme } from '../../theme'
@@ -8,16 +8,15 @@ import {
   CLOSEOUT_REPLY,
   NAPPING_REPLY,
   SCRIPTED_FLAG_REPLY,
-  buildSystemPrompt,
   isConcerning,
   sanitizeReply,
 } from '../../tutor/tutorEngine'
 import {
   askTutor,
   defaultTutorApiDeps,
-  hasTutorKey,
   type AnthropicMessage,
   type TutorApiDeps,
+  type TutorApiFailureReason,
 } from '../../tutor/tutorApi'
 import {
   appendMessage,
@@ -36,6 +35,14 @@ export interface TutorQuestionContext {
   problem: string
   correctAnswer: string
   herAnswer: string
+}
+
+function failureReply(reason: TutorApiFailureReason): string {
+  if (reason === 'unauthenticated') return 'The tutor needs a grown-up to sign in.'
+  if (reason === 'not_entitled') return "The tutor isn't available for this account. Ask Dad for help."
+  if (reason === 'usage_limit') return "That's all the online tutor help for today. Ask Dad if you need more."
+  if (reason === 'gateway_disabled') return 'The tutor is taking a break right now. Ask Dad for help.'
+  return NAPPING_REPLY
 }
 
 interface TutorChatProps {
@@ -158,18 +165,24 @@ export function TutorChat({
     // 4. real turn.
     commit({ role: 'kid', text, ts: now() })
     setBusy(true)
-    const system = buildSystemPrompt({
-      grade,
-      problem: question.problem,
-      correctAnswer: question.correctAnswer,
-      herAnswer: question.herAnswer,
+    const result = await askTutor(deps, {
+      messages: toApiMessages(chatRef.current),
+      gateway: {
+        mode: 'tutor',
+        context: {
+          grade,
+          problem: question.problem,
+          correctAnswer: question.correctAnswer,
+          studentAnswer: question.herAnswer,
+          graded: false,
+        },
+      },
     })
-    const result = await askTutor(deps, { system, messages: toApiMessages(chatRef.current) })
     setBusy(false)
 
     if (!result.ok) {
-      // no key / offline / api error → napping, degrade gracefully (no call recorded).
-      commit({ role: 'tutor', text: NAPPING_REPLY, ts: now(), source: 'scripted' })
+      // Gateway policy / offline / API error → napping, with no call recorded.
+      commit({ role: 'tutor', text: failureReply(result.reason), ts: now(), source: 'scripted' })
       return
     }
     // answer-leak redaction runs on EVERY model reply.
@@ -179,7 +192,6 @@ export function TutorChat({
   }
 
   const disabled = busy || ended !== null
-  const keyless = useMemo(() => !hasTutorKey(), [])
 
   return (
     <div className={`${t.card} mt-6 flex flex-col p-5`}>
@@ -252,11 +264,6 @@ export function TutorChat({
           >
             Send ▶
           </button>
-        </div>
-      )}
-      {keyless && ended === null && (
-        <div className={`mt-2 text-center text-xs font-semibold ${t.sub}`}>
-          The tutor needs Dad to add a key in the Grown-Ups panel.
         </div>
       )}
     </div>

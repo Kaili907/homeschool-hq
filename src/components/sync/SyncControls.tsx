@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { SyncApi } from '../../sync/useSync'
-import type { SyncSummary } from '../../sync/types'
-
-// M6 Grown-Ups cloud-sync panel. Dad-facing only — slate/white palette, never a
-// kid theme; kid screens never render this. Purely presentational: it reads
-// `sync.status` and calls the injected async actions, keeping every confirm /
-// preview / busy / error flag in local state. Nothing here touches AppState.
+import type {
+  ConflictChoice,
+  ReconciliationCategory,
+  ReconciliationPreview,
+  SyncDecision,
+} from '../../sync/types'
 
 const card = 'rounded-xl border border-slate-200 bg-white p-4'
 const btn =
@@ -18,36 +18,84 @@ const input =
 const fmt = (ms: number | null): string =>
   ms == null ? 'never' : new Date(ms).toLocaleString()
 
-/** Shared confirm panel body for both migration directions. */
-function MigrationPreview({ summary }: { summary: SyncSummary }) {
+const categoryLabel: Record<ReconciliationCategory, string> = {
+  'local-only': 'Only on this device',
+  'cloud-only': 'Only in this household cloud',
+  'local-changed': 'Changed on this device',
+  'cloud-changed': 'Changed in the cloud',
+  'both-changed': 'Changed in both places — choose a copy',
+  unchanged: 'Same in both places',
+}
+
+function Preview({
+  preview,
+  choices,
+  onChoice,
+}: {
+  preview: ReconciliationPreview
+  choices: Record<string, ConflictChoice>
+  onChoice: (id: string, choice: ConflictChoice) => void
+}) {
   return (
-    <div className="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3">
-      <p className="text-sm font-semibold text-slate-700">
-        {summary.count} {summary.count === 1 ? 'profile' : 'profiles'}
-      </p>
-      <ul className="mt-1.5 space-y-1">
-        {summary.perGirl.map((g) => (
-          <li
-            key={g.id}
-            className="flex items-baseline justify-between gap-3 text-sm text-slate-600"
-          >
-            <span className="font-medium text-slate-700">{g.name}</span>
-            <span className="text-xs text-slate-500">
-              {g.updatedAt == null ? '—' : new Date(g.updatedAt).toLocaleString()}
-            </span>
+    <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
+      <ul className="space-y-2">
+        {preview.profiles.map((profile) => (
+          <li key={profile.id} className="rounded-lg bg-white px-3 py-2">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <span className="text-sm font-semibold text-slate-800">
+                {profile.name}
+              </span>
+              <span
+                className={`text-xs font-semibold ${
+                  profile.category === 'both-changed'
+                    ? 'text-rose-700'
+                    : profile.category === 'unchanged'
+                      ? 'text-emerald-700'
+                      : 'text-amber-700'
+                }`}
+              >
+                {categoryLabel[profile.category]}
+              </span>
+            </div>
+            {profile.category === 'both-changed' && (
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  className={choices[profile.id] === 'local' ? primaryBtn : btn}
+                  onClick={() => onChoice(profile.id, 'local')}
+                >
+                  Keep device copy
+                </button>
+                <button
+                  type="button"
+                  className={choices[profile.id] === 'cloud' ? primaryBtn : btn}
+                  onClick={() => onChoice(profile.id, 'cloud')}
+                >
+                  Use cloud copy
+                </button>
+              </div>
+            )}
           </li>
         ))}
       </ul>
+      {preview.potentiallyDestructive.length > 0 && (
+        <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-2.5">
+          <p className="text-xs font-bold text-amber-800">
+            Review before applying
+          </p>
+          <ul className="mt-1 list-disc space-y-1 pl-4 text-xs text-amber-800">
+            {preview.potentiallyDestructive.map((warning) => (
+              <li key={warning}>{warning}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
 
-type Pending = { dir: 'push' | 'pull'; summary: SyncSummary } | null
-
 export function SyncControls({ sync }: { sync: SyncApi }) {
   const { status } = sync
-
-  // ---- 1. Not configured -------------------------------------------------
   if (!status.configured) {
     return (
       <div className={card}>
@@ -55,39 +103,29 @@ export function SyncControls({ sync }: { sync: SyncApi }) {
           Cloud sync isn&apos;t set up on this device.
         </p>
         <p className="mt-1 text-sm text-slate-500">
-          Everything works fully on this device without it, and your JSON
-          backup / export still works exactly the same.
+          Everything remains available locally, including JSON backup and
+          restore.
         </p>
       </div>
     )
   }
-
-  // ---- 2. Configured but signed out --------------------------------------
-  if (!status.user) {
-    return <SignedOut sync={sync} />
-  }
-
-  // ---- 3. Signed in ------------------------------------------------------
-  return <SignedIn sync={sync} />
+  return status.user ? <SignedIn sync={sync} /> : <SignedOut sync={sync} />
 }
 
-// ------------------------------------------------------------------------
-// Signed-out: owner sign-in form
-// ------------------------------------------------------------------------
 function SignedOut({ sync }: { sync: SyncApi }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const onSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
     setBusy(true)
     setError(null)
     try {
-      const res = await sync.signIn(email, password)
-      if (!res.ok) {
-        setError(res.error ?? 'Sign in failed.')
+      const result = await sync.signIn(email, password)
+      if (!result.ok) {
+        setError(result.error ?? 'Sign in failed.')
         return
       }
       setEmail('')
@@ -101,7 +139,8 @@ function SignedOut({ sync }: { sync: SyncApi }) {
     <div className={card}>
       <h3 className="text-base font-bold text-slate-800">Cloud sync</h3>
       <p className="mt-1 text-sm text-slate-500">
-        Sign in as the household owner to sync this device.
+        Sign in as the household owner. Signing in never uploads or replaces
+        Academy data.
       </p>
       <form className="mt-3 space-y-3" onSubmit={onSubmit}>
         <div>
@@ -116,8 +155,9 @@ function SignedOut({ sync }: { sync: SyncApi }) {
             type="email"
             autoComplete="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
             className={input}
+            required
           />
         </div>
         <div>
@@ -132,15 +172,12 @@ function SignedOut({ sync }: { sync: SyncApi }) {
             type="password"
             autoComplete="current-password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
             className={input}
+            required
           />
         </div>
-        {error && (
-          <p className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-600">
-            {error}
-          </p>
-        )}
+        {error && <ErrorBox message={error} />}
         <button type="submit" className={primaryBtn} disabled={busy}>
           {busy ? 'Signing in…' : 'Sign in'}
         </button>
@@ -149,152 +186,265 @@ function SignedOut({ sync }: { sync: SyncApi }) {
   )
 }
 
-// ------------------------------------------------------------------------
-// Signed-in: status, sync-now, and the two confirm-before-apply migrations
-// ------------------------------------------------------------------------
 function SignedIn({ sync }: { sync: SyncApi }) {
   const { status } = sync
-  const user = status.user! // narrowed by the caller
+  const user = status.user!
+  const [actionBusy, setActionBusy] = useState(false)
+  const [actionError, setActionError] = useState<string | null>(null)
 
-  const [pending, setPending] = useState<Pending>(null)
-  // busy is used for every awaited action so the triggering button re-enables.
-  const [busy, setBusy] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  const run = async (fn: () => Promise<void>) => {
-    setBusy(true)
-    setError(null)
+  const run = async (action: () => Promise<void>) => {
+    setActionBusy(true)
+    setActionError(null)
     try {
-      await fn()
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Something went wrong.')
+      await action()
+    } catch (cause) {
+      setActionError(
+        cause instanceof Error
+          ? cause.message
+          : 'The action could not be completed.',
+      )
     } finally {
-      setBusy(false)
+      setActionBusy(false)
     }
   }
 
-  const openPush = () => {
-    setError(null)
-    // synchronous preview — no loading state needed.
-    setPending({ dir: 'push', summary: sync.previewPushLocal() })
-  }
-
-  const openPull = () =>
-    run(async () => {
-      const summary = await sync.previewPullCloud()
-      setPending({ dir: 'pull', summary })
-    })
-
-  const confirmMigration = () =>
-    run(async () => {
-      if (!pending) return
-      if (pending.dir === 'push') await sync.pushAllLocal()
-      else await sync.pullCloud()
-      setPending(null)
-    })
-
   return (
     <div className={`${card} space-y-4`}>
-      {/* identity */}
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm text-slate-700">
-          Signed in as{' '}
-          <span className="font-semibold text-slate-800">{user.email}</span>
+          Household:{' '}
+          <span className="font-semibold text-slate-900">{user.email}</span>
         </p>
         <button
           className={btn}
           onClick={() => run(() => sync.signOut())}
-          disabled={busy}
+          disabled={actionBusy || status.busy}
         >
           Sign out
         </button>
       </div>
 
-      {/* status line */}
       <div className="flex flex-wrap items-center gap-2 text-sm text-slate-500">
-        <span>Last sync: {fmt(status.lastSyncAt)}</span>
+        <span>
+          Device binding:{' '}
+          <strong
+            className={
+              status.binding === 'bound' ? 'text-emerald-700' : 'text-amber-700'
+            }
+          >
+            {status.binding === 'bound'
+              ? 'verified for this household'
+              : 'not yet bound'}
+          </strong>
+        </span>
+        <span>
+          Data provenance:{' '}
+          <strong
+            className={
+              status.provenance === 'verified'
+                ? 'text-emerald-700'
+                : 'text-amber-700'
+            }
+          >
+            {status.provenance === 'verified'
+              ? 'matches persisted Academy data'
+              : status.provenance === 'paused'
+                ? 'review required'
+                : 'not assigned'}
+          </strong>
+        </span>
+        <span>Last successful sync: {fmt(status.lastSyncAt)}</span>
         {status.pendingCount > 0 && (
           <span className="rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-700">
-            {status.pendingCount} waiting to sync
+            {status.pendingCount} waiting for this household
           </span>
         )}
         {!status.online && (
           <span className="rounded-full border border-slate-300 bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
-            working offline — changes will sync when you reconnect
+            Offline — local Academy use remains available
           </span>
         )}
       </div>
 
-      <div>
-        <button
-          className={primaryBtn}
-          onClick={() => run(() => sync.syncNow())}
-          disabled={status.busy || busy}
-        >
-          {status.busy ? 'Syncing…' : 'Sync now'}
-        </button>
-      </div>
+      {(status.error || actionError) && (
+        <div>
+          <ErrorBox message={actionError ?? status.error!} />
+          <button
+            className={`${btn} mt-2`}
+            onClick={() => run(() => sync.syncNow())}
+            disabled={actionBusy || status.busy || !status.online}
+          >
+            Retry cloud check
+          </button>
+        </div>
+      )}
 
-      {error && (
-        <p className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-600">
-          {error}
+      {status.pauseReason && (
+        <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+          {status.pauseReason}
         </p>
       )}
 
-      {/* migration */}
-      <section className="border-t border-slate-200 pt-3">
-        <h3 className="text-sm font-bold text-slate-700">Move data between devices</h3>
-
-        {pending == null ? (
-          <div className="mt-2 space-y-3">
-            <div className="flex flex-wrap gap-2">
-              <button className={btn} onClick={openPush} disabled={busy}>
-                Push this device&apos;s data to the cloud →
-              </button>
-              <button className={btn} onClick={openPull} disabled={busy}>
-                {busy ? 'Loading…' : '← Pull cloud data to this device'}
-              </button>
-            </div>
-            <p className="text-xs text-slate-500">
-              Pulling MERGES — it never erases anything already on this device.
+      {status.decision ? (
+        <DecisionPanel
+          decision={status.decision}
+          sync={sync}
+          disabled={actionBusy || status.busy}
+          run={run}
+        />
+      ) : (
+        <div className="space-y-2">
+          {status.binding === 'unbound' && (
+            <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+              Cloud sync is paused. Local Academy data remains on this device
+              and has not been assigned to this household.
             </p>
-          </div>
-        ) : (
-          <div className="mt-2">
-            <p className="text-sm font-semibold text-slate-700">
-              {pending.dir === 'push'
-                ? 'About to push these profiles from this device to the cloud:'
-                : 'About to pull these profiles from the cloud into this device:'}
-            </p>
-            <MigrationPreview summary={pending.summary} />
-            {pending.dir === 'pull' && (
-              <p className="mt-2 text-xs text-slate-500">
-                Pulling MERGES — it never erases anything already on this device.
-              </p>
-            )}
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button
-                className={primaryBtn}
-                onClick={confirmMigration}
-                disabled={busy}
-              >
-                {busy
-                  ? 'Applying…'
-                  : pending.dir === 'push'
-                    ? 'Confirm push'
-                    : 'Confirm pull'}
-              </button>
-              <button
-                className={btn}
-                onClick={() => setPending(null)}
-                disabled={busy}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
-      </section>
+          )}
+          <button
+            className={status.binding === 'bound' ? primaryBtn : btn}
+            onClick={() => run(() => sync.syncNow())}
+            disabled={actionBusy || status.busy || !status.online}
+          >
+            {status.busy
+              ? 'Checking cloud…'
+              : status.binding === 'bound'
+                ? 'Sync now'
+                : 'Check household cloud data'}
+          </button>
+        </div>
+      )}
     </div>
+  )
+}
+
+function DecisionPanel({
+  decision,
+  sync,
+  disabled,
+  run,
+}: {
+  decision: SyncDecision
+  sync: SyncApi
+  disabled: boolean
+  run: (action: () => Promise<void>) => Promise<void>
+}) {
+  const [choices, setChoices] = useState<Record<string, ConflictChoice>>({})
+  useEffect(() => setChoices({}), [decision])
+
+  const conflicts = decision.preview.profiles.filter(
+    (profile) => profile.category === 'both-changed',
+  )
+  const unresolved = conflicts.some((profile) => !choices[profile.id])
+
+  return (
+    <section className="rounded-xl border border-amber-300 bg-amber-50 p-3">
+      {decision.reason === 'account-switch' ? (
+        <>
+          <h3 className="text-sm font-bold text-rose-800">
+            Different household detected
+          </h3>
+          <p className="mt-1 text-sm text-rose-800">
+            This device&apos;s local Academy data was last verified for{' '}
+            <strong>
+              {decision.previousHousehold?.email ?? 'another household'}
+            </strong>
+            . It will not be uploaded to the current household unless you
+            explicitly review and assign it.
+          </p>
+        </>
+      ) : decision.reason === 'conflict' ? (
+        <>
+          <h3 className="text-sm font-bold text-rose-800">
+            Sync needs parent review
+          </h3>
+          <p className="mt-1 text-sm text-slate-700">
+            Academy data changed on this device and in the cloud. Automatic sync
+            is paused.
+          </p>
+        </>
+      ) : (
+        <>
+          <h3 className="text-sm font-bold text-slate-800">
+            Choose how to bind this device
+          </h3>
+          <p className="mt-1 text-sm text-slate-700">
+            The cloud check succeeded. Nothing has been uploaded or replaced.
+          </p>
+        </>
+      )}
+
+      <Preview
+        preview={decision.preview}
+        choices={choices}
+        onChoice={(id, choice) =>
+          setChoices((current) => ({ ...current, [id]: choice }))
+        }
+      />
+
+      {decision.cloud === 'empty' ? (
+        <div className="mt-3">
+          <p className="text-sm text-slate-700">
+            This household cloud is successfully empty. Upload only if these
+            local profiles belong to <strong>this</strong> household.
+          </p>
+          <button
+            className={`${primaryBtn} mt-2`}
+            onClick={() => run(() => sync.uploadLocal())}
+            disabled={disabled}
+          >
+            Upload this device&apos;s Academy data
+          </button>
+        </div>
+      ) : (
+        <div className="mt-3 space-y-3">
+          <div>
+            <p className="text-sm text-slate-700">
+              Use the household cloud copy on this device. A local safety backup
+              is created first.
+            </p>
+            <button
+              className={`${btn} mt-2`}
+              onClick={() => run(() => sync.useCloud())}
+              disabled={disabled}
+            >
+              Use cloud data on this device
+            </button>
+          </div>
+          <div className="border-t border-amber-200 pt-3">
+            <p className="text-sm font-semibold text-slate-800">
+              Review and merge differences
+            </p>
+            <p className="mt-1 text-xs text-slate-600">
+              One-sided profiles use the only available copy. Every two-sided
+              conflict requires you to choose one whole profile; the app does
+              not claim a shallow merge is safe.
+            </p>
+            <button
+              className={`${primaryBtn} mt-2`}
+              onClick={() => run(() => sync.applyReviewedMerge(choices))}
+              disabled={disabled || unresolved}
+            >
+              Apply reviewed merge
+            </button>
+          </div>
+        </div>
+      )}
+
+      <button
+        className={`${btn} mt-3`}
+        onClick={() => sync.cancelDecision()}
+        disabled={disabled}
+      >
+        Cancel and continue without syncing
+      </button>
+    </section>
+  )
+}
+
+function ErrorBox({ message }: { message: string }) {
+  return (
+    <p className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
+      {message}
+    </p>
   )
 }
