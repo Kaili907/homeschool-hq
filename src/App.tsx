@@ -26,6 +26,7 @@ import {
 import { autoCompletePractice, autoCompleteTyping, ensureToday, isDayComplete, setItemDone } from './missions'
 import { recordAttendance } from './attendance/attendance'
 import { getVoicePrefs, isMuted, logWalkthrough, setMuted } from './tutor/tutorState'
+import { purgeVoiceCache } from './tutor/voice'
 import {
   awardMissionEvents,
   awardPracticeSession,
@@ -119,6 +120,7 @@ export default function App() {
   const patchActive = (update: (prev: Profile) => Profile) =>
     setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
   const signOut = () => {
+    void purgeVoiceCache()
     setState((s) => ({ ...s, activeProfileId: null }))
     setScreen({ kind: 'picker' })
   }

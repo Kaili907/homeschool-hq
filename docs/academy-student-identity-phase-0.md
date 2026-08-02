@@ -172,8 +172,12 @@ Salt and hash fields use one canonical representation: standard unpadded Base64
 with alphabet `A-Z`, `a-z`, `0-9`, `+`, `/`; no `=` padding; and a character
 length whose remainder modulo four is `0`, `2`, or `3` (never `1`). The
 database decodes each field and requires a 16-64-byte salt and a 32-64-byte
-hash. Internal/excess padding, whitespace, non-Base64 characters, trailing
-data, and shorter or longer decoded values fail. The checks also require the
+hash. It then re-encodes the decoded bytes with PostgreSQL, removes only the
+encoder's line separators and canonical trailing `=` padding, and requires
+byte-for-byte equality with the submitted text. This rejects alternate
+spellings whose unused pad bits decode to the same bytes. Internal/excess
+padding, whitespace, non-Base64 characters, trailing data, noncanonical pad
+bits, and shorter or longer decoded values fail. The checks also require the
 exact algorithm/version prefix, numeric bounded cost fields, and a bounded
 total envelope length.
 
@@ -330,8 +334,12 @@ also limited to 4096 encoded bytes.
 
 Reasons are optional bounded administrative notes (240 encoded bytes maximum),
 must contain no control characters, and reject verifier, raw-token,
-token-digest, and secret-assignment patterns case-insensitively. Metadata values
-receive the same pattern checks in addition to their event-specific validation.
+token-digest, secret-assignment, and four-digit PIN patterns
+case-insensitively. PIN detection also rejects digits separated by spaces,
+tabs, newlines, or mixed whitespace, including PIN material embedded in a
+longer reason. Metadata values receive the same pattern checks plus rejection
+of a standalone or whitespace-reformatted four-digit value in addition to
+their event-specific validation.
 Credential verifiers, raw PINs, raw reset tokens, bearer tokens, token or device
 digests, full Jarvis/Tutor transcripts, assessment responses, and unnecessary
 student content must never appear even under an otherwise allowed key and even
@@ -439,6 +447,13 @@ The isolated validation order is exact:
 7. Run the role-probe section again (Probe Run 2).
 8. Compare complete security manifests and object definitions, then confirm
    zero residual identity fixture rows.
+
+The tracked role-probe SQL is also invoked by
+`supabase/academy-student-identity.db.test.ts`, so the ordinary `npm test` gate
+fails on any probe failure. Its permanent cases include canonical-versus-pad-
+bit-mutated Argon2id and scrypt values, all event-specific audit shapes, raw
+PIN variants in identifiers and reasons, atomic rollback of rejected audit
+operations, manifest stability, and incompatible-object rejection.
 
 Running the entire probe file through `psql`, Supabase SQL Editor, or a
 multi-statement client is also safe: explicit `BEGIN`/`COMMIT` commits the

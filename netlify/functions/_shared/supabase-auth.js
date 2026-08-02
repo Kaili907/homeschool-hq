@@ -1,6 +1,7 @@
-import { errorResponse } from './http.js'
+import { errorResponse, isTimeoutError } from './http.js'
 
 const MAX_BEARER_LENGTH = 4096
+export const SUPABASE_AUTH_TIMEOUT_MS = 5_000
 
 function authConfig(env) {
   const rawUrl = (env?.SUPABASE_URL || env?.VITE_SUPABASE_URL || '').trim()
@@ -55,17 +56,22 @@ export async function verifySupabaseBearer(event, { fetchImpl, env }) {
   if (!config) return { ok: false, response: errorResponse(503, 'service_unavailable') }
 
   let response
+  const signal = AbortSignal.timeout(SUPABASE_AUTH_TIMEOUT_MS)
   try {
     response = await fetchImpl(`${config.url}/auth/v1/user`, {
       method: 'GET',
       redirect: 'error',
+      signal,
       headers: {
         apikey: config.anonKey,
         Authorization: `Bearer ${token}`,
         accept: 'application/json',
       },
     })
-  } catch {
+  } catch (error) {
+    if (isTimeoutError(error, signal)) {
+      return { ok: false, response: errorResponse(504, 'upstream_timeout') }
+    }
     return { ok: false, response: errorResponse(503, 'auth_unavailable') }
   }
 
@@ -77,8 +83,14 @@ export async function verifySupabaseBearer(event, { fetchImpl, env }) {
   let user
   try {
     user = await response.json()
-  } catch {
+  } catch (error) {
+    if (isTimeoutError(error, signal)) {
+      return { ok: false, response: errorResponse(504, 'upstream_timeout') }
+    }
     return { ok: false, response: errorResponse(503, 'auth_unavailable') }
+  }
+  if (signal.aborted) {
+    return { ok: false, response: errorResponse(504, 'upstream_timeout') }
   }
   if (!user || typeof user !== 'object' || typeof user.id !== 'string' || user.id.trim() === '') {
     return { ok: false, response: errorResponse(401, 'unauthenticated') }

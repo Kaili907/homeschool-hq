@@ -127,6 +127,58 @@ export function hasQuery(event) {
 
 export function envFlagEnabled(env, name) {
   const value = env?.[name]
-  if (typeof value !== 'string') return true
-  return !['0', 'false', 'off', 'disabled'].includes(value.trim().toLowerCase())
+  if (typeof value !== 'string') return false
+  return ['1', 'true', 'on', 'enabled'].includes(value.toLowerCase())
+}
+
+export function isTimeoutError(error, signal) {
+  return signal?.aborted === true || error?.name === 'TimeoutError'
+}
+
+/**
+ * Read an upstream response without ever buffering more than `maxBytes`.
+ * Content-Length is rejected before the body is touched when the provider sends it;
+ * chunked responses are capped while streaming.
+ */
+export async function readBoundedResponseBytes(response, maxBytes) {
+  const rawLength = response?.headers?.get?.('content-length')
+  if (typeof rawLength === 'string' && rawLength.trim() !== '') {
+    const normalized = rawLength.trim()
+    if (!/^\d+$/.test(normalized)) reject(502, 'provider_failure')
+    const declaredLength = BigInt(normalized)
+    if (declaredLength > BigInt(maxBytes)) reject(502, 'upstream_too_large')
+  }
+
+  const reader = response?.body?.getReader?.()
+  if (!reader) reject(502, 'provider_failure')
+
+  const chunks = []
+  let total = 0
+  try {
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      if (!(value instanceof Uint8Array)) reject(502, 'provider_failure')
+      total += value.byteLength
+      if (total > maxBytes) {
+        try {
+          await reader.cancel()
+        } catch {
+          // The size decision is already final; cancellation is best-effort.
+        }
+        reject(502, 'upstream_too_large')
+      }
+      chunks.push(value)
+    }
+  } finally {
+    reader.releaseLock?.()
+  }
+
+  const bytes = new Uint8Array(total)
+  let offset = 0
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset)
+    offset += chunk.byteLength
+  }
+  return bytes
 }

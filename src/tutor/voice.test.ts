@@ -1,21 +1,21 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
+  CACHE_MAX_AGE_MS,
   __resetVoiceRuntime,
+  browserPlayAudio,
   createElevenLabsSynth,
   createMemoryCache,
   createUsageMeter,
   createVoiceAdapter,
   encodeVoiceRef,
-  getStoredKey,
-  hasStoredKey,
+  getVoiceCache,
   parseVoiceRef,
-  setStoredKey,
+  purgeVoiceCache,
   type BrowserTts,
   type FetchLike,
 } from './voice'
 import { getVoicePrefs, migrateLegacyVoiceToDefault, resolveSlotRef, setSlotRef } from './tutorState'
-import { defaultAppState, emptyProfile } from '../migration'
-import type { AppState } from '../types'
+import { emptyProfile } from '../migration'
 
 // A fixed-month usage meter over an in-memory string cell (no localStorage needed).
 function makeUsage(cap = 1_000_000, startChars = 0) {
@@ -33,7 +33,6 @@ function makeUsage(cap = 1_000_000, startChars = 0) {
 // with knobs to simulate the key, connectivity and network failures.
 function harness(opts: { cap?: number; startChars?: number } = {}) {
   const state = {
-    key: 'sk-test' as string | null,
     online: true,
     failNetwork: false,
     fetchCalls: 0,
@@ -45,7 +44,7 @@ function harness(opts: { cap?: number; startChars?: number } = {}) {
     return { ok: true, status: 200, arrayBuffer: async () => new Uint8Array([1, 2, 3, 4]).buffer }
   }
   const elevenLabs = createElevenLabsSynth({
-    getKey: () => state.key,
+    getAccessToken: async () => 'access-token',
     fetchImpl,
     isOnline: () => state.online,
     usage,
@@ -215,63 +214,61 @@ describe('MT-V voice-map resolution + fall-through', () => {
   }
 })
 
-// A minimal localStorage shim so the key store (which lives OUTSIDE AppState) works in node.
-class MemStorage {
-  private m = new Map<string, string>()
-  get length() {
-    return this.m.size
-  }
-  clear() {
-    this.m.clear()
-  }
-  getItem(k: string) {
-    return this.m.has(k) ? this.m.get(k)! : null
-  }
-  setItem(k: string, v: string) {
-    this.m.set(k, String(v))
-  }
-  removeItem(k: string) {
-    this.m.delete(k)
-  }
-  key(i: number) {
-    return Array.from(this.m.keys())[i] ?? null
-  }
-}
-
-describe('MT-V key is stored outside AppState → excluded from exports', () => {
-  beforeEach(() => {
-    ;(globalThis as unknown as { localStorage: Storage }).localStorage = new MemStorage() as unknown as Storage
-    __resetVoiceRuntime()
-  })
+describe('MT-V cache lifecycle hardening', () => {
   afterEach(() => {
-    delete (globalThis as unknown as { localStorage?: Storage }).localStorage
     __resetVoiceRuntime()
   })
 
-  it('a saved key never appears in the serialized backup, while voiceMap refs do', () => {
-    const SECRET = 'sk-elevenlabs-SUPER-SECRET-123'
-    setStoredKey(SECRET)
-    expect(hasStoredKey()).toBe(true)
-    expect(getStoredKey()).toBe(SECRET)
+  it('expires each entry after 30 days since its last use', async () => {
+    let now = Date.parse('2026-07-01T00:00:00Z')
+    const cache = createMemoryCache(undefined, () => now)
+    await cache.put('old', new Blob(['old']))
+    now += CACHE_MAX_AGE_MS - 1
+    expect(await cache.get('old')).toBeDefined()
+    now += CACHE_MAX_AGE_MS
+    await cache.sweepExpired()
+    expect(await cache.get('old')).toBeUndefined()
+    expect(await cache.sizeBytes()).toBe(0)
+  })
 
-    // Build the exact object exportAllBackup serializes: the AppState. Put a premium
-    // voice on a profile so we can prove the map IS exported but the key is NOT.
-    let state: AppState = defaultAppState()
-    state = {
-      ...state,
-      profiles: {
-        ...state.profiles,
-        p3: setSlotRef(state.profiles.p3, 'mathTutor', {
-          provider: 'elevenlabs',
-          ref: 'voice-abc',
-          label: 'Rachel',
-        }),
-      },
+  it('purges the shared audio cache on sign-out', async () => {
+    const cache = getVoiceCache()
+    await cache.put('household-line', new Blob(['private audio']))
+    expect(await cache.sizeBytes()).toBeGreaterThan(0)
+    await purgeVoiceCache()
+    expect(await cache.sizeBytes()).toBe(0)
+  })
+})
+
+describe('MT-V object URL lifecycle', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    vi.restoreAllMocks()
+    __resetVoiceRuntime()
+  })
+
+  it('revokes synthesized audio object URLs when playback ends', async () => {
+    let audio: FakeAudio | undefined
+    class FakeAudio {
+      src = ''
+      onended: (() => void) | null = null
+      constructor() { audio = this }
+      pause() {}
+      play() { return Promise.resolve() }
+      removeAttribute(name: string) {
+        if (name === 'src') this.src = ''
+      }
     }
+    const revokeObjectURL = vi.fn()
+    vi.stubGlobal('Audio', FakeAudio)
+    vi.stubGlobal('URL', {
+      createObjectURL: vi.fn(() => 'blob:academy-audio'),
+      revokeObjectURL,
+    })
 
-    const exported = JSON.stringify(state, null, 2) // == exportAllBackup's payload
-    expect(exported).not.toContain(SECRET)
-    expect(exported).not.toContain('sk-elevenlabs')
-    expect(exported).toContain('voice-abc') // the (non-secret) voice id is exported
+    await browserPlayAudio(new Blob(['audio']))
+    audio?.onended?.()
+    expect(revokeObjectURL).toHaveBeenCalledWith('blob:academy-audio')
+    expect(audio?.src).toBe('')
   })
 })

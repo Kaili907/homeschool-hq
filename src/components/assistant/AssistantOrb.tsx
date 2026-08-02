@@ -4,7 +4,7 @@ import { isoToday } from '../../appState'
 import { PushToTalkMic } from '../tutor/PushToTalkMic'
 import { speak, cancelSpeech, encodeVoiceRef } from '../../tutor/voice'
 import { getVoicePrefs, resolveSlotRef } from '../../tutor/tutorState'
-import { ANTHROPIC_ENDPOINT_BASE, defaultTutorApiDeps, hasTutorKey } from '../../tutor/tutorApi'
+import { defaultTutorApiDeps } from '../../tutor/tutorApi'
 import type { AssistantMessage, AssistantSession, Profile } from '../../types'
 import {
   appendAssistantMessage,
@@ -25,7 +25,7 @@ import { actionLogLabel, type AssistantAction } from '../../assistant/actions'
  * the box for her to review before Send — no auto-send, no wake word), or type.
  * Replies come back in text and, if she has voice on, spoken through the MT-V
  * `assistant` slot. Proposed actions appear as a Confirm chip — nothing executes
- * until she taps it. No key / offline → the orb is disabled ("Assistant is offline").
+ * until she taps it. Offline → the orb is disabled ("Assistant is offline").
  */
 
 const rid = () => Math.random().toString(36).slice(2, 9)
@@ -51,9 +51,8 @@ export function AssistantOrb({
   const name = assistantName(profile)
   const today = isoToday()
 
-  const proxyMode = ANTHROPIC_ENDPOINT_BASE !== ''
   const [online, setOnline] = useState(typeof navigator === 'undefined' ? true : navigator.onLine)
-  const available = (proxyMode || hasTutorKey()) && online
+  const available = online
 
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
@@ -146,7 +145,7 @@ export function AssistantOrb({
   const monthCount = callsInMonth(profile, today)
   const cap = assistantDailyCap(profile)
 
-  // ---------- disabled (keyless / offline) ----------
+  // ---------- disabled (offline) ----------
   if (!available) {
     return (
       <div className={`${t.card} mt-2 flex items-center gap-3 p-4 opacity-80`}>
@@ -156,7 +155,7 @@ export function AssistantOrb({
         <div>
           <div className={`font-bold ${t.heading}`}>{name} is offline</div>
           <div className={`text-xs ${t.sub}`}>
-            {online ? 'Add an Anthropic key in Grown-Ups to enable the assistant.' : 'No connection right now.'}
+            No connection right now.
           </div>
         </div>
       </div>

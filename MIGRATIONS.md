@@ -89,6 +89,7 @@ The complete intended fresh-project chain is:
 1. `20260724074106_academy_profiles_base.sql`
 2. `20260724230000_academy_student_identity_foundation.sql`
 3. `20260726120000_academy_household_revision_cas.sql`
+4. `20260731120000_academy_gateway_usage.sql`
 
 This integration branch contains the exact independently reviewed migrations
 from commits `c84f377d4b73bb1876479bb21a043bf1b21ec328`,
@@ -151,6 +152,32 @@ yet verified, so the migration has not been applied to any hosted project.
 Hosted migration, role/JWT/PostgREST checks, and hosted two-client contention
 remain release gates; do not guess a project or paste the SQL manually.
 
+## Supabase: Academy gateway usage ledger (2026-07-31)
+
+Tracked migration:
+`supabase/migrations/20260731120000_academy_gateway_usage.sql`.
+
+The migration adds the server-only daily request ledger used by the Academy AI
+and TTS gateways:
+
+- `academy_gateway_usage` is keyed by authenticated user, UTC database day,
+  and the fixed `anthropic`/`tts` endpoint set; an omitted RPC day is derived
+  explicitly from UTC and cannot follow the session timezone;
+- RLS is enabled and forced, with all table and function access revoked from
+  `PUBLIC`, `anon`, and `authenticated`;
+- `service_role` alone receives the table privileges and RPC execution needed
+  by the serverless gateways;
+- `academy_consume_gateway_usage` is a `SECURITY DEFINER` function with a fixed
+  `pg_catalog` search path and one atomic `INSERT ... ON CONFLICT DO UPDATE`;
+- the request that reaches the configured cap succeeds, while later requests
+  return `false` without incrementing the stored count.
+
+Permanent local validation is in
+`supabase/academy-gateway-usage.db.test.ts`. It covers omitted-day UTC pinning
+under a deliberately non-UTC session timezone, at-cap acceptance, over-cap
+rejection without mutation, UTC day rollover, and denial of direct client-role
+table and RPC access.
+
 ## v1 → v2 (M1 multi-profile, 2026-07-23)
 
 **Before:** single profile under key `homeschool-hq:profile:v1`
@@ -194,7 +221,7 @@ Non-breaking additions — existing v2 data loads unchanged (`isAppState` is len
 old states have no `stars` keys and fall back to runtime defaults):
 
 - `Profile.stars?: StarState` — the kid's wallet: `{ balance, lifetimeEarned,
-ledger, pendingRedemptions }`. `undefined` until her first star is earned.
+  ledger, pendingRedemptions }`. `undefined` until her first star is earned.
   The ledger is APPEND-ONLY; `balance` must always equal the ledger sum. A
   mismatch is surfaced in the Grown-Ups panel and NEVER silently repaired.
 - `Profile.coolStars?: boolean` — grade-6 "cool" opt-in (default off/undefined).
@@ -216,7 +243,7 @@ old profiles have no `reading` key and fall back to `defaultReadingState()`):
   `{ sessions, seenPassageIds, calibrations, lastReadDate? }`. `undefined` until
   her first reading session. `sessions` is APPEND-ONLY; each logs
   `{ date, passageId, mode: estimated|assessed|manual, wcpm, wordsPracticed[],
-durationSec }`. WCPM is an ESTIMATE (browser recognition + alignment) unless
+  durationSec }`. WCPM is an ESTIMATE (browser recognition + alignment) unless
   `mode==='manual'` (Dad-counted). `calibrations` holds Dad's ground-truth checks.
 
 No `schemaVersion` bump (follows the M2/M4/MT-1/MS/SE-A additive-optional
@@ -263,12 +290,14 @@ not alter `public.profiles`, import local profiles, or change application
 The hardened Phase-0 contract requires active-household authorization,
 immutable student household IDs, history-preserving status/revocation
 transitions, canonical unpadded-Base64 Argon2id/scrypt verifier envelopes with
-no auxiliary credential JSON, lowercase hexadecimal SHA-256 session digests,
+decode/re-encode equality so unused-pad-bit aliases are rejected, no auxiliary
+credential JSON, lowercase hexadecimal SHA-256 session digests,
 the disjoint raw-token format
 `aca_stu_v1_<43-unpadded-base64url-characters>`, capability schema version 1,
 issuance-time/expiry/revocation checks, session-version invalidation,
-event-specific audit builders with sensitive value/reason rejection, explicit
-object grants, and real-role denial probes. Guardian removal means relationship
+event-specific audit builders with sensitive value/reason and four-digit
+raw-PIN rejection, explicit object grants, and real-role denial probes. Guardian
+removal means relationship
 revocation while the referenced Auth identity is retained; direct Auth deletion
 is deferred. Current subject enrollments are idempotent per student, school
 year, subject, course, and curriculum version; completed/withdrawn/archived
@@ -302,6 +331,11 @@ order:
 Explicit transaction boundaries also make the complete probe file safe as one
 `psql`, SQL Editor, or multi-statement batch; do not rely on an external harness
 silently splitting it.
+
+`supabase/academy-student-identity.db.test.ts` runs the tracked two-pass
+migration/probe sequence and incompatible-object fixtures as part of the normal
+`npm test` gate; the identity SQL security contract is not a separately
+remembered manual test.
 
 Future profile migration requires a durable import ledger with source IDs and
 digests, target IDs, batch/status/retry/error metadata, bounded idempotent

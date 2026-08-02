@@ -103,6 +103,7 @@ export interface AudioCache {
   get(key: string): Promise<Blob | undefined>
   put(key: string, blob: Blob): Promise<void>
   sizeBytes(): Promise<number>
+  sweepExpired(): Promise<void>
   clear(): Promise<void>
 }
 
@@ -245,72 +246,79 @@ export function createVoiceAdapter(deps: VoiceAdapterDeps): VoiceAdapter {
   return { speak, cancel, prewarmLine }
 }
 
-// ---------- ElevenLabs REST provider ----------
+// ---------- same-origin premium voice gateway ----------
 
-// ElevenLabs revs models often — keep the id in ONE place. Turbo = low-latency.
-export const ELEVENLABS_MODEL_ID = 'eleven_turbo_v2_5'
-
-// D1 deploy: with VITE_USE_PROXY=true this points at the serverless proxy
-// (netlify/functions/tts via the /api/tts redirect), which injects the key
-// server-side — the key never ships to the client. Empty (local dev / no flag)
-// keeps the direct-with-panel-key path. Only this one value changes.
-export const ELEVENLABS_ENDPOINT_BASE = import.meta.env.VITE_USE_PROXY === 'true' ? '/api/tts' : ''
+// Provider model selection and credentials are owned by the server gateway.
+export const ELEVENLABS_ENDPOINT_BASE = '/api/tts'
 
 /** Minimal fetch shape so tests can inject a fake without the whole DOM Response type. */
 export type FetchLike = (
   url: string,
   init?: { method?: string; headers?: Record<string, string>; body?: string },
-) => Promise<{ ok: boolean; status: number; arrayBuffer(): Promise<ArrayBuffer> }>
+) => Promise<{
+  ok: boolean
+  status: number
+  arrayBuffer(): Promise<ArrayBuffer>
+  json?: () => Promise<unknown>
+}>
+
+export type VoiceGatewayErrorCode =
+  | 'unauthenticated'
+  | 'not_entitled'
+  | 'usage_limit'
+  | 'gateway_disabled'
+  | 'error'
+
+export class VoiceGatewayError extends Error {
+  constructor(readonly code: VoiceGatewayErrorCode) {
+    super(code)
+    this.name = 'VoiceGatewayError'
+  }
+}
+
+async function voiceGatewayError(response: { json?: () => Promise<unknown> }): Promise<VoiceGatewayError> {
+  try {
+    const data = await response.json?.()
+    const code = (data as { error?: { code?: unknown } })?.error?.code
+    if (
+      code === 'unauthenticated' ||
+      code === 'not_entitled' ||
+      code === 'usage_limit' ||
+      code === 'gateway_disabled'
+    ) {
+      return new VoiceGatewayError(code)
+    }
+  } catch {
+    // Fall through to the stable generic client error.
+  }
+  return new VoiceGatewayError('error')
+}
 
 export function createElevenLabsSynth(deps: {
-  getKey: () => string | null
   getAccessToken?: () => Promise<string | null>
   fetchImpl: FetchLike
   isOnline: () => boolean
   usage: UsageMeter
   endpointBase?: string
-  modelId?: string
 }): ElevenLabsSynth {
-  const base = deps.endpointBase ?? ELEVENLABS_ENDPOINT_BASE
-  const modelId = deps.modelId ?? ELEVENLABS_MODEL_ID
-  const proxyMode = base !== ''
-  const origin = base || 'https://api.elevenlabs.io'
+  const base = deps.endpointBase?.trim() || ELEVENLABS_ENDPOINT_BASE
   return {
     available() {
-      // Proxy mode holds the key server-side, so no local key is required.
-      return (proxyMode || !!deps.getKey()) && deps.isOnline() && !deps.usage.overCap()
+      return deps.isOnline() && !deps.usage.overCap()
     },
     async synthesize({ text, voiceId }) {
-      const key = deps.getKey()
-      if (!proxyMode && !key) throw new Error('elevenlabs: no key')
-      let url: string
-      let headers: Record<string, string>
-      let body: string
-      if (proxyMode) {
-        const accessToken = await (deps.getAccessToken ?? getGatewayAccessToken)()
-        if (!accessToken) throw new Error('elevenlabs: unauthenticated')
-        url = `${origin}/synthesize`
-        headers = {
+      const accessToken = await (deps.getAccessToken ?? getGatewayAccessToken)()
+      if (!accessToken) throw new VoiceGatewayError('unauthenticated')
+      const res = await deps.fetchImpl(`${base}/synthesize`, {
+        method: 'POST',
+        headers: {
           Authorization: `Bearer ${accessToken}`,
           'content-type': 'application/json',
           accept: 'audio/mpeg',
-        }
-        body = JSON.stringify({ text, voiceId })
-      } else {
-        url = `${origin}/v1/text-to-speech/${encodeURIComponent(voiceId)}?output_format=mp3_44100_128`
-        headers = {
-          'xi-api-key': key as string,
-          'content-type': 'application/json',
-          accept: 'audio/mpeg',
-        }
-        body = JSON.stringify({ text, model_id: modelId })
-      }
-      const res = await deps.fetchImpl(url, {
-        method: 'POST',
-        headers,
-        body,
+        },
+        body: JSON.stringify({ text, voiceId }),
       })
-      if (!res.ok) throw new Error(`elevenlabs: http ${res.status}`)
+      if (!res.ok) throw await voiceGatewayError(res)
       const buf = await res.arrayBuffer()
       return new Blob([buf], { type: 'audio/mpeg' })
     },
@@ -364,12 +372,23 @@ function browserStopAudio(): void {
   }
 }
 
-async function browserPlayAudio(blob: Blob): Promise<void> {
+export async function browserPlayAudio(blob: Blob): Promise<void> {
   if (typeof Audio === 'undefined') return
   browserStopAudio()
   if (!sharedAudio) sharedAudio = new Audio()
-  sharedUrl = URL.createObjectURL(blob)
-  sharedAudio.src = sharedUrl
+  const objectUrl = URL.createObjectURL(blob)
+  sharedUrl = objectUrl
+  sharedAudio.src = objectUrl
+  sharedAudio.onended = () => {
+    if (sharedUrl !== objectUrl) return
+    try {
+      URL.revokeObjectURL(objectUrl)
+    } catch {
+      /* ignore */
+    }
+    sharedUrl = null
+    if (sharedAudio?.src === objectUrl) sharedAudio.removeAttribute('src')
+  }
   try {
     await sharedAudio.play()
   } catch {
@@ -380,15 +399,28 @@ async function browserPlayAudio(blob: Blob): Promise<void> {
 // ---------- IndexedDB / in-memory mp3 cache (200 MB LRU) ----------
 
 export const CACHE_MAX_BYTES = 200 * 1024 * 1024
+export const CACHE_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000
 const DB_NAME = 'homeschool-hq-voice'
 const DB_STORE = 'mp3'
 
 /** In-memory LRU cache — the node/test + no-IndexedDB fallback. */
-export function createMemoryCache(maxBytes: number = CACHE_MAX_BYTES): AudioCache {
-  const map = new Map<string, { blob: Blob; size: number; seq: number }>()
+export function createMemoryCache(
+  maxBytes: number = CACHE_MAX_BYTES,
+  now: () => number = () => Date.now(),
+): AudioCache {
+  const map = new Map<string, { blob: Blob; size: number; seq: number; lastUsed: number }>()
   let seq = 0
   let total = 0
+  const removeExpired = () => {
+    const cutoff = now() - CACHE_MAX_AGE_MS
+    for (const [key, entry] of map) {
+      if (entry.lastUsed > cutoff) continue
+      total -= entry.size
+      map.delete(key)
+    }
+  }
   const evict = () => {
+    removeExpired()
     while (total > maxBytes && map.size > 0) {
       let oldestKey: string | null = null
       let oldest = Infinity
@@ -405,21 +437,27 @@ export function createMemoryCache(maxBytes: number = CACHE_MAX_BYTES): AudioCach
   }
   return {
     async get(key) {
+      removeExpired()
       const e = map.get(key)
       if (!e) return undefined
       e.seq = ++seq // touch → most-recently-used
+      e.lastUsed = now()
       return e.blob
     },
     async put(key, blob) {
       const size = blob.size || 0
       const prev = map.get(key)
       if (prev) total -= prev.size
-      map.set(key, { blob, size, seq: ++seq })
+      map.set(key, { blob, size, seq: ++seq, lastUsed: now() })
       total += size
       evict()
     },
     async sizeBytes() {
+      removeExpired()
       return total
+    },
+    async sweepExpired() {
+      removeExpired()
     },
     async clear() {
       map.clear()
@@ -468,7 +506,17 @@ export function createIndexedDbCache(maxBytes: number = CACHE_MAX_BYTES): AudioC
     return rows.reduce((n, r) => n + (r.size || 0), 0)
   }
 
+  async function removeExpired(): Promise<void> {
+    const cutoff = Date.now() - CACHE_MAX_AGE_MS
+    const rows = (await tx<CacheRow[]>('readonly', (s) => s.getAll() as IDBRequest<CacheRow[]>)) ?? []
+    for (const row of rows) {
+      if (row.lastUsed > cutoff) continue
+      await tx('readwrite', (s) => s.delete(row.key))
+    }
+  }
+
   async function evict(): Promise<void> {
+    await removeExpired()
     let rows = (await tx<CacheRow[]>('readonly', (s) => s.getAll() as IDBRequest<CacheRow[]>)) ?? []
     let sum = rows.reduce((n, r) => n + (r.size || 0), 0)
     if (sum <= maxBytes) return
@@ -485,6 +533,10 @@ export function createIndexedDbCache(maxBytes: number = CACHE_MAX_BYTES): AudioC
       try {
         const row = await tx<CacheRow | undefined>('readonly', (s) => s.get(key) as IDBRequest<CacheRow | undefined>)
         if (!row) return undefined
+        if (row.lastUsed <= Date.now() - CACHE_MAX_AGE_MS) {
+          await tx('readwrite', (s) => s.delete(row.key))
+          return undefined
+        }
         row.lastUsed = Date.now()
         await tx('readwrite', (s) => s.put(row))
         return row.blob
@@ -503,9 +555,17 @@ export function createIndexedDbCache(maxBytes: number = CACHE_MAX_BYTES): AudioC
     },
     async sizeBytes() {
       try {
+        await removeExpired()
         return await totalBytes()
       } catch {
         return 0
+      }
+    },
+    async sweepExpired() {
+      try {
+        await removeExpired()
+      } catch {
+        /* ignore */
       }
     },
     async clear() {
@@ -616,9 +676,8 @@ export function staticVoiceLines(): string[] {
   return [...STATIC_VOICE_LINES]
 }
 
-// ---------- local-storage backed key store (NEVER in AppState → never exported) ----------
+// ---------- local monthly usage preference ----------
 
-const KEY_LS = 'homeschool-hq:voice:key'
 const USAGE_LS = 'homeschool-hq:voice:usage'
 
 function ls(): Storage | null {
@@ -627,33 +686,6 @@ function ls(): Storage | null {
   } catch {
     return null
   }
-}
-
-export function getStoredKey(): string | null {
-  return ls()?.getItem(KEY_LS) ?? null
-}
-
-export function setStoredKey(k: string): void {
-  const s = ls()
-  if (!s) return
-  const t = k.trim()
-  if (t) s.setItem(KEY_LS, t)
-  else s.removeItem(KEY_LS)
-}
-
-export function clearStoredKey(): void {
-  ls()?.removeItem(KEY_LS)
-}
-
-export function hasStoredKey(): boolean {
-  return !!getStoredKey()
-}
-
-/** Masked display for the Grown-Ups field — the raw key is never rendered. */
-export function maskKey(k: string | null): string {
-  if (!k) return ''
-  if (k.length <= 6) return '••••'
-  return `${k.slice(0, 3)}••••••${k.slice(-2)}`
 }
 
 // ---------- app-wide default instances (browser) ----------
@@ -702,8 +734,17 @@ function devLog(provider: UsedProvider, req: SpeakRequest): void {
 let _cache: AudioCache | null = null
 /** The one cache the default adapter uses — also read/cleared by the Grown-Ups panel. */
 export function getVoiceCache(): AudioCache {
-  if (!_cache) _cache = createBrowserCache()
+  if (!_cache) {
+    _cache = createBrowserCache()
+    void _cache.sweepExpired()
+  }
   return _cache
+}
+
+/** Purge household audio on sign-out so cached speech never crosses sessions. */
+export async function purgeVoiceCache(): Promise<void> {
+  browserStopAudio()
+  await getVoiceCache().clear()
 }
 
 let _adapter: VoiceAdapter | null = null
@@ -714,7 +755,6 @@ export function getVoiceAdapter(): VoiceAdapter {
     cache: getVoiceCache(),
     usage,
     elevenLabs: createElevenLabsSynth({
-      getKey: getStoredKey,
       getAccessToken: getGatewayAccessToken,
       fetchImpl: (url, init) => fetch(url, init as RequestInit),
       isOnline,
