@@ -49,6 +49,8 @@ interface Props {
   assessmentCards: HomeAssessmentCard[]
   onOpenAssessment: (testId: string) => void
   onOpenMindset: () => void
+  onOpenStudy?: () => void
+  studyMode?: 'preview' | 'unavailable'
   mindsetStartDate: string | undefined
 }
 
@@ -81,6 +83,8 @@ export function HighSchoolHome({
   assessmentCards,
   onOpenAssessment,
   onOpenMindset,
+  onOpenStudy,
+  studyMode,
   mindsetStartDate,
 }: Props) {
   const t = useTheme()
@@ -229,6 +233,16 @@ export function HighSchoolHome({
           else if (s.kind === 'timed') startTimed(s.source)
         }}
       />
+
+      {onOpenStudy && (
+        <button
+          onClick={onOpenStudy}
+          className="mt-5 flex min-h-11 w-full items-center gap-3 rounded-2xl border border-cyan-300 bg-cyan-50 p-4 text-left font-bold text-cyan-950 shadow-sm hover:bg-cyan-100"
+        >
+          <span aria-hidden="true" className="text-2xl">🧭</span>
+          <span><span className="block text-lg">Today’s Study plan</span><span className="block text-sm font-medium text-cyan-800">{studyMode === 'preview' ? 'Launch the explicit local Study preview' : 'Check whether Study is available'}</span></span>
+        </button>
+      )}
 
       {profile.totals.questionsAnswered > 0 && (
         <div className="mt-3 flex flex-wrap gap-2 text-sm font-semibold">
