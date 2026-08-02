@@ -1,0 +1,48 @@
+{
+  "manifestVersion": "student-runtime.source-package.v2",
+  "runtimeVersion": "0.7.2",
+  "targetArchive": "SESSION-7-R2-STUDY-STUDENT-RUNTIME-FINAL.zip",
+  "releaseEvidence": {
+    "nodeVersion": "22.22.3",
+    "unitTests": 77,
+    "browserTests": 14,
+    "transformedModules": 145,
+    "mathTraceSha256": "140D2C34DBA75EA4ACF32EF47D5782AA23391D00B0FE41795F6B18B13C6EC709",
+    "readingTraceSha256": "246D94C497B24D3A656872E28F83D881555F8DA1B3AC737460A95111534D009A"
+  },
+  "archiveRoot": "adaptive-tutor/study-engine",
+  "ownedRoots": [
+    "integration-labs/student-runtime",
+    "tests/student-runtime",
+    "docs/student-runtime"
+  ],
+  "verifiedReadOnlyDependenciesIncluded": [
+    "contracts",
+    "schemas",
+    "engine",
+    "prompts",
+    "ui",
+    "prototype/src",
+    "reconciliation"
+  ],
+  "verifiedPackageSha256": {
+    "verifiedCurrentSession7": "9448B7F91519FDF7213A8939ED5458B9749E58DBF8054F64A56E3F548482097D",
+    "card1": "79BA0F39688DB42197947915AA421BCA540AD060C072E898E86619F0A66B6F41",
+    "session2": "979EEAC55DCDE6F47F684B0D6A9C7793FCB53E76F693D07E11A83B3FD9FFB770",
+    "session3": "9E3735FD09C2D19A991C3EB9FAE936204824F0A30C1EDDDAF1AC8A050314CD11",
+    "session5R2": "39D161F422B36319D9732567867440A5839C06A67895CA02046600C13AC8CB41",
+    "session6R2Bridge": "0847B14EC8FEFA79E85210ED1565CE8302DC3F81331BC04FCBD895F05B7AD571",
+    "tutorCoreV0_2": "38205667D56CB4FCC5A8360F1F94098B5FA1D35AE71D22334AA1BC8D43ECC276"
+  },
+  "excludedGeneratedOrSupersededPaths": [
+    "integration-labs/student-runtime/node_modules",
+    "docs/student-runtime/test-artifacts",
+    "docs/student-runtime/SESSION-7-R2-STUDY-STUDENT-RUNTIME-FINAL.zip",
+    "docs/student-runtime/SESSION-7-R2-STUDY-STUDENT-RUNTIME-FINAL.zip.sha256.txt",
+    "docs/student-runtime/screenshots/05-mobile-reading-large-text-fixed.png"
+  ],
+  "installDirectory": "adaptive-tutor/study-engine/integration-labs/student-runtime",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "scope": "local-browser-integration-lab-only"
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "projectRef": "ymtvzmqhfvwjtxjdmybs",
+  "hashNormalization": "UTF-8 bytes with CRLF normalized to LF",
+  "migrations": [
+    {
+      "version": "20260724074106",
+      "filename": "20260724074106_academy_profiles_base.sql",
+      "sha256": "16c609d24efb9b9694b410a2313e5f2f7228db5118e2ccc4fa779f03c1d53c51",
+      "dependency": null,
+      "classification": "historical-baseline",
+      "applicationStatus": "hosted-equivalent-baseline-pending-authorization",
+      "requiredMarkerTransition": "academy-foundation-profiles-base",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260724230000",
+      "filename": "20260724230000_academy_student_identity_foundation.sql",
+      "sha256": "2c7825ba957b68a39413a1e2da81aebaa72fb35dde7abeeba6ea8a493ecf3bde",
+      "dependency": "20260724074106_academy_profiles_base.sql",
+      "classification": "historical-baseline",
+      "applicationStatus": "hosted-equivalent-baseline-pending-authorization",
+      "requiredMarkerTransition": "academy-foundation-identity-v1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260726120000",
+      "filename": "20260726120000_academy_household_revision_cas.sql",
+      "sha256": "0d5556db9f1dc406234e08180051e8d54807870084223b25db18017b1648c268",
+      "dependency": "20260724230000_academy_student_identity_foundation.sql",
+      "classification": "historical-baseline",
+      "applicationStatus": "hosted-equivalent-baseline-pending-authorization",
+      "requiredMarkerTransition": "academy-household-revision-cas-v1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260801010000",
+      "filename": "20260801010000_academy_study_engine_storage.sql",
+      "sha256": "7ebb25b0517f3b79b36e0399757715826a634fbdf731a9716fdeeb4dad9da0fa",
+      "dependency": "20260726120000_academy_household_revision_cas.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "storage_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260801011000",
+      "filename": "20260801011000_academy_study_engine_authorization.sql",
+      "sha256": "3e4fe306b9edfb17cf3fbf0f62b4c5565fdccc9abde1726d7205c60d822acfad",
+      "dependency": "20260801010000_academy_study_engine_storage.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "authorization_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260801012000",
+      "filename": "20260801012000_academy_study_engine_production_reconciliation.sql",
+      "sha256": "8675afe9f5c802689234fc769e09a4f42bf7a19eba6c88bfeadb816a048910d3",
+      "dependency": "20260801011000_academy_study_engine_authorization.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "production_reconciliation_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260801160000",
+      "filename": "20260801160000_academy_study_verified_identity.sql",
+      "sha256": "4501be3757cb0baf53edc200e7673744b12626eeb84dd56d6fc2899e3d25338e",
+      "dependency": "20260801012000_academy_study_engine_production_reconciliation.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "verified_identity_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260801170000",
+      "filename": "20260801170000_academy_study_adult_review_operations.sql",
+      "sha256": "562b67462148d9e94933b0fd9007fad37a3b0a08cb8432383c0b228088c0d8eb",
+      "dependency": "20260801160000_academy_study_verified_identity.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "adult_review_operations_version:0->2",
+      "supersessionStatus": "supersedes-before-first-application",
+      "supersedesSha256": "46c68426d21a79b90a3011d5fbfcca19044393887636dd845ca362f6e4e69443"
+    },
+    {
+      "version": "20260801190000",
+      "filename": "20260801190000_academy_study_final_production_reconciliation.sql",
+      "sha256": "d4ccea295aac2bda67dbfd310650e1c625de867485ecc47f5e993f74c8006d00",
+      "dependency": "20260801170000_academy_study_adult_review_operations.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "final_production_version:0->1",
+      "supersessionStatus": "current"
+    }
+  ]
+}

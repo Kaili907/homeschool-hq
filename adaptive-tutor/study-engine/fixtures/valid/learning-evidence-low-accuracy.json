@@ -1,0 +1,92 @@
+{
+  "kind": "learning-evidence",
+  "schemaVersion": 1,
+  "id": "evidence:low-accuracy-safe",
+  "revision": 1,
+  "createdAt": "2026-07-27T14:30:00.000Z",
+  "updatedAt": "2026-07-27T14:30:00.000Z",
+  "studentId": "p1",
+  "sessionId": "session:completed-01",
+  "subjectId": "math",
+  "skillIds": ["fracUnit"],
+  "capturedAt": "2026-07-27T14:30:00.000Z",
+  "accuracy": {
+    "correctCount": 1,
+    "attemptedCount": 5,
+    "accuracyPercent": 20,
+    "scoringMethod": "exact-answer-v1"
+  },
+  "completion": {
+    "completedCount": 5,
+    "assignedCount": 5,
+    "completionPercent": 100
+  },
+  "independence": {
+    "supportLevel": "independent",
+    "source": "system-measure"
+  },
+  "confidence": {
+    "rating": 3,
+    "source": "student-report",
+    "observedAt": "2026-07-27T14:29:00.000Z"
+  },
+  "effort": {
+    "rating": 5,
+    "source": "student-report",
+    "observedAt": "2026-07-27T14:29:00.000Z"
+  },
+  "frustration": {
+    "rating": 2,
+    "source": "student-report",
+    "observedAt": "2026-07-27T14:29:00.000Z"
+  },
+  "hintUse": {
+    "offeredCount": 1,
+    "requestedCount": 1,
+    "acceptedCount": 1,
+    "kinds": ["visual"]
+  },
+  "tutorIntervention": {
+    "count": 0,
+    "kinds": []
+  },
+  "redirectionCount": 0,
+  "responseLatency": {
+    "sampleCount": 5,
+    "medianMs": 12000,
+    "p90Ms": 18000,
+    "minimumMs": 8000,
+    "maximumMs": 22000
+  },
+  "randomResponseIndicators": [],
+  "nextDayRecall": {
+    "attemptedOn": "2026-07-28",
+    "intervalDays": 1,
+    "correctCount": 2,
+    "attemptedCount": 3,
+    "hintCount": 1
+  },
+  "retention": {
+    "status": "stable",
+    "basisEvidenceIds": ["evidence:prior-01", "evidence:prior-02"],
+    "measuredAcrossDays": 3
+  },
+  "masteryOutcome": {
+    "status": "progressing",
+    "criterionId": "criterion:fracUnit-v1",
+    "algorithmVersion": "manual-review-v1",
+    "basisEvidenceIds": ["evidence:low-accuracy-safe"]
+  },
+  "prerequisiteGapOutcome": {
+    "status": "insufficient-evidence",
+    "prerequisiteSkillIds": [],
+    "basisEvidenceIds": [],
+    "nextAction": "collect-more-evidence"
+  },
+  "engagementSupport": {
+    "status": "no-concern",
+    "supportingSignals": ["student-report"],
+    "wording": "contextual-and-revisable"
+  }
+}
+

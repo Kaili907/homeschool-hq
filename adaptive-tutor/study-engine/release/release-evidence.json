@@ -1,0 +1,75 @@
+{
+  "archiveSha256Location": "external: study-engine/release/final-archive.sha256",
+  "browserTotals": {
+    "axeViolations": 0,
+    "finalAssembly": 10,
+    "session3": 10,
+    "session7": 14
+  },
+  "bundleDigest": "4CB8634B1ED8D21218A214CD0A3C3AF63ADC1ACA6CD3C94398EC284537D99358",
+  "bundleFiles": [
+    "assets/index-8_AzFi0q.css",
+    "assets/index-lC4tPHvL.js",
+    "assets/index-lC4tPHvL.js.map",
+    "index.html"
+  ],
+  "components": {
+    "calendarParentRuntime": "0.8.1",
+    "studentRuntime": "0.7.2",
+    "tutorCore": "0.2.0-frozen",
+    "tutorCoreBridge": "1.0.1",
+    "tutorCoreBridgeContract": 1
+  },
+  "contract": "manuel-academy.adaptive-study-engine.release-evidence.v1",
+  "fileCount": 1099,
+  "finalZipFilename": "MANUEL-ACADEMY-ADAPTIVE-STUDY-ENGINE-V1-RC1.zip",
+  "knownLimitations": [
+    "In-memory release-candidate ports are not production persistence.",
+    "Production safety requires an injected reviewed classifier in addition to the Session 9 composition layer.",
+    "Authentication, authorization, RLS, migrations, deployment, and external delivery are not included."
+  ],
+  "manifestDigest": "6A16545BF2E9D718F9075EA5CD3ABA817583A558CC8109BF4B6562DA0F9EC0B1",
+  "manifestEntries": 1097,
+  "moduleTotals": {
+    "finalAssembly": 80,
+    "session3": 41,
+    "session7": 145,
+    "session8": 26,
+    "totalTransformed": 292
+  },
+  "release": {
+    "classification": "PASS WITH DOCUMENTED NON-PRODUCTION LIMITATIONS",
+    "name": "Manuel Academy Adaptive Study Engine",
+    "version": "1.0.0-rc.1"
+  },
+  "runtime": {
+    "nodeEngine": ">=22 <23",
+    "nodeVersion": "v22.22.3",
+    "packageManager": "npm@11.16.0"
+  },
+  "sourceArtifactChecksums": {
+    "calendarParentRuntimeR3": "604A924B13580AAC00ED5578C0B22F3EC9B8CF9CA5F20DC04DB4DB040E6B62E1",
+    "reconciliationR2": "39D161F422B36319D9732567867440A5839C06A67895CA02046600C13AC8CB41",
+    "studentRuntimeR2": "C78F612507BEDD1185D2B5B70D66A8E934CF29488813A9386C5E8D65BB590B8C",
+    "studyContracts": "79BA0F39688DB42197947915AA421BCA540AD060C072E898E86619F0A66B6F41",
+    "studyEngine": "979EEAC55DCDE6F47F684B0D6A9C7793FCB53E76F693D07E11A83B3FD9FFB770",
+    "studyIntegrations": "F4AB726446DA4129E3548919D91E56B85C93FF31BE63DEA692B0BA7926C39C1B",
+    "studyUx": "9E3735FD09C2D19A991C3EB9FAE936204824F0A30C1EDDDAF1AC8A050314CD11",
+    "tutorCore": "38205667D56CB4FCC5A8360F1F94098B5FA1D35AE71D22334AA1BC8D43ECC276",
+    "tutorCoreBridgeR2": "0847B14EC8FEFA79E85210ED1565CE8302DC3F81331BC04FCBD895F05B7AD571"
+  },
+  "sourceTreeDigest": "FF7ACAA13592E83BA31C588E18908940991313D1FEF990964BE7893B507BD85F",
+  "sourceTreeFiles": 1088,
+  "testTotals": {
+    "browserPassed": 34,
+    "failed": 0,
+    "nonBrowserPassed": 704,
+    "totalPassingChecks": 757,
+    "tutorCoreValidationChecksPassed": 19
+  },
+  "traceHashes": {
+    "canonicalSha256": "18B2854FDA2EB34314BD63C1B98388D40A51BD082F0099AE7C7432DAE5A5E12D",
+    "demonstrations": 10,
+    "fileSha256": "441F29DDA03B534B28BB109D2F857A722E9AEFEECF29F65BBD6DC70DD871D8EB"
+  }
+}

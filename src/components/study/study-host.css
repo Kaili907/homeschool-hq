@@ -1,0 +1,64 @@
+.study-runtime-host {
+  color-scheme: light;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.study-runtime-host[data-large-text='true'] {
+  font-size: 1.18rem;
+}
+
+.study-runtime-host[data-high-contrast='true'] {
+  filter: contrast(1.12);
+}
+
+.study-runtime-host :focus-visible {
+  outline: 3px solid #0e7490;
+  outline-offset: 3px;
+}
+
+.study-runtime-host button,
+.study-runtime-host input,
+.study-runtime-host textarea,
+.study-runtime-host select {
+  min-height: 44px;
+  max-inline-size: 100%;
+}
+
+.study-runtime-host button {
+  touch-action: manipulation;
+}
+
+.study-runtime-host textarea,
+.study-runtime-host select {
+  inline-size: 100%;
+}
+
+.study-runtime-host[data-reduced-motion='true'] *,
+.study-runtime-host[data-reduced-motion='true'] *::before,
+.study-runtime-host[data-reduced-motion='true'] *::after {
+  scroll-behavior: auto !important;
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .study-runtime-host *,
+  .study-runtime-host *::before,
+  .study-runtime-host *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .study-runtime-host button,
+  .study-runtime-host input,
+  .study-runtime-host textarea,
+  .study-runtime-host section {
+    border: 1px solid CanvasText;
+  }
+}

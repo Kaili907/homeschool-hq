@@ -1,0 +1,514 @@
+{
+  "traceVersion": "student-runtime.deterministic-trace.r2",
+  "scenario": "grade-5-math-water-break-exact-resume",
+  "versions": {
+    "workspace": "student-runtime.workspace.v2",
+    "tutorBoundary": "1.0.1",
+    "bridgeContractVersion": 1
+  },
+  "canonicalEvents": [
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:1:session-planned:session",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 1,
+      "occurredAt": "2026-07-28T14:00:00.000Z",
+      "type": "session-planned",
+      "actor": "system",
+      "detailCode": "local-integration-lab"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:2:session-started:session",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 2,
+      "occurredAt": "2026-07-28T14:00:00.000Z",
+      "type": "session-started",
+      "actor": "student",
+      "detailCode": "learner-started"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:3:segment-started:seg_01K1R7M3V9Q5T2X8N4C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 3,
+      "occurredAt": "2026-07-28T14:00:00.000Z",
+      "type": "segment-started",
+      "actor": "system",
+      "segmentId": "seg_01K1R7M3V9Q5T2X8N4C6H0PWAB"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:4:active-response-recorded:seg_01K1R7M3V9Q5T2X8N4C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 4,
+      "occurredAt": "2026-07-28T14:00:01.000Z",
+      "type": "active-response-recorded",
+      "actor": "student",
+      "segmentId": "seg_01K1R7M3V9Q5T2X8N4C6H0PWAB",
+      "detailCode": "response-captured-local-no-raw",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:5:segment-completed:seg_01K1R7M3V9Q5T2X8N4C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 5,
+      "occurredAt": "2026-07-28T14:00:01.000Z",
+      "type": "segment-completed",
+      "actor": "system",
+      "segmentId": "seg_01K1R7M3V9Q5T2X8N4C6H0PWAB",
+      "detailCode": "idempotent-segment-completion",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:6:segment-started:seg_01K1S2V8Q4M7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 6,
+      "occurredAt": "2026-07-28T14:00:01.000Z",
+      "type": "segment-started",
+      "actor": "system",
+      "segmentId": "seg_01K1S2V8Q4M7T9X5N3C6H0PWAB"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:7:active-response-recorded:seg_01K1S2V8Q4M7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 7,
+      "occurredAt": "2026-07-28T14:00:12.000Z",
+      "type": "active-response-recorded",
+      "actor": "student",
+      "segmentId": "seg_01K1S2V8Q4M7T9X5N3C6H0PWAB",
+      "detailCode": "response-captured-local-no-raw",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:8:segment-completed:seg_01K1S2V8Q4M7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 8,
+      "occurredAt": "2026-07-28T14:00:12.000Z",
+      "type": "segment-completed",
+      "actor": "system",
+      "segmentId": "seg_01K1S2V8Q4M7T9X5N3C6H0PWAB",
+      "detailCode": "idempotent-segment-completion",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:9:segment-started:seg_01K1T4M9V2Q7R5X8N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 9,
+      "occurredAt": "2026-07-28T14:00:12.000Z",
+      "type": "segment-started",
+      "actor": "system",
+      "segmentId": "seg_01K1T4M9V2Q7R5X8N3C6H0PWAB"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:10:active-response-recorded:seg_01K1T4M9V2Q7R5X8N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 10,
+      "occurredAt": "2026-07-28T14:00:22.000Z",
+      "type": "active-response-recorded",
+      "actor": "student",
+      "segmentId": "seg_01K1T4M9V2Q7R5X8N3C6H0PWAB",
+      "detailCode": "response-captured-local-no-raw",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:11:segment-completed:seg_01K1T4M9V2Q7R5X8N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 11,
+      "occurredAt": "2026-07-28T14:00:22.000Z",
+      "type": "segment-completed",
+      "actor": "system",
+      "segmentId": "seg_01K1T4M9V2Q7R5X8N3C6H0PWAB",
+      "detailCode": "idempotent-segment-completion",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:12:segment-started:seg_01K1V6Q2M8T4R9X5N3C7H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 12,
+      "occurredAt": "2026-07-28T14:00:22.000Z",
+      "type": "segment-started",
+      "actor": "system",
+      "segmentId": "seg_01K1V6Q2M8T4R9X5N3C7H0PWAB"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:13:active-response-recorded:seg_01K1V6Q2M8T4R9X5N3C7H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 13,
+      "occurredAt": "2026-07-28T14:00:32.000Z",
+      "type": "active-response-recorded",
+      "actor": "student",
+      "segmentId": "seg_01K1V6Q2M8T4R9X5N3C7H0PWAB",
+      "detailCode": "response-captured-local-no-raw",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:14:segment-completed:seg_01K1V6Q2M8T4R9X5N3C7H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 14,
+      "occurredAt": "2026-07-28T14:00:32.000Z",
+      "type": "segment-completed",
+      "actor": "system",
+      "segmentId": "seg_01K1V6Q2M8T4R9X5N3C7H0PWAB",
+      "detailCode": "idempotent-segment-completion",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:15:segment-started:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 15,
+      "occurredAt": "2026-07-28T14:00:32.000Z",
+      "type": "segment-started",
+      "actor": "system",
+      "segmentId": "seg_01K1W8M4V2Q7T9X5N3C6H0PWAB"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:16:break-requested:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 16,
+      "occurredAt": "2026-07-28T14:00:41.000Z",
+      "type": "break-requested",
+      "actor": "student",
+      "segmentId": "seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "detailCode": "learner-requested-break"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:17:break-approved:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 17,
+      "occurredAt": "2026-07-28T14:00:41.000Z",
+      "type": "break-approved",
+      "actor": "system",
+      "segmentId": "seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "detailCode": "approved-break-not-failure"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:18:break-started:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 18,
+      "occurredAt": "2026-07-28T14:00:41.000Z",
+      "type": "break-started",
+      "actor": "student",
+      "segmentId": "seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "detailCode": "instructional-time-paused"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:19:break-ended:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 19,
+      "occurredAt": "2026-07-28T14:00:42.000Z",
+      "type": "break-ended",
+      "actor": "student",
+      "segmentId": "seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "detailCode": "learner-ready"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:20:session-resumed:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 20,
+      "occurredAt": "2026-07-28T14:00:42.000Z",
+      "type": "session-resumed",
+      "actor": "student",
+      "segmentId": "seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "detailCode": "exact-resume-point-restored"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:21:active-response-recorded:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 21,
+      "occurredAt": "2026-07-28T14:00:44.000Z",
+      "type": "active-response-recorded",
+      "actor": "student",
+      "segmentId": "seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "detailCode": "response-captured-local-no-raw",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:22:segment-completed:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 22,
+      "occurredAt": "2026-07-28T14:00:44.000Z",
+      "type": "segment-completed",
+      "actor": "system",
+      "segmentId": "seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "detailCode": "idempotent-segment-completion",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:23:segment-started:seg_01K1X3V9Q5M2T7R8N4C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 23,
+      "occurredAt": "2026-07-28T14:00:44.000Z",
+      "type": "segment-started",
+      "actor": "system",
+      "segmentId": "seg_01K1X3V9Q5M2T7R8N4C6H0PWAB"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:24:active-response-recorded:seg_01K1X3V9Q5M2T7R8N4C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 24,
+      "occurredAt": "2026-07-28T14:00:54.000Z",
+      "type": "active-response-recorded",
+      "actor": "student",
+      "segmentId": "seg_01K1X3V9Q5M2T7R8N4C6H0PWAB",
+      "detailCode": "response-captured-local-no-raw",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:25:segment-completed:seg_01K1X3V9Q5M2T7R8N4C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 25,
+      "occurredAt": "2026-07-28T14:00:54.000Z",
+      "type": "segment-completed",
+      "actor": "system",
+      "segmentId": "seg_01K1X3V9Q5M2T7R8N4C6H0PWAB",
+      "detailCode": "idempotent-segment-completion",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:26:segment-started:seg_01K1Y5M2V8Q4T9R3N7C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 26,
+      "occurredAt": "2026-07-28T14:00:54.000Z",
+      "type": "segment-started",
+      "actor": "system",
+      "segmentId": "seg_01K1Y5M2V8Q4T9R3N7C6H0PWAB"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:27:active-response-recorded:seg_01K1Y5M2V8Q4T9R3N7C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 27,
+      "occurredAt": "2026-07-28T14:01:02.000Z",
+      "type": "active-response-recorded",
+      "actor": "student",
+      "segmentId": "seg_01K1Y5M2V8Q4T9R3N7C6H0PWAB",
+      "detailCode": "response-captured-local-no-raw",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    },
+    {
+      "id": "event:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:28:segment-completed:seg_01K1Y5M2V8Q4T9R3N7C6H0PWAB",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "sequence": 28,
+      "occurredAt": "2026-07-28T14:01:02.000Z",
+      "type": "segment-completed",
+      "actor": "system",
+      "segmentId": "seg_01K1Y5M2V8Q4T9R3N7C6H0PWAB",
+      "detailCode": "idempotent-segment-completion",
+      "evidenceRef": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1"
+    }
+  ],
+  "tutorBoundaryReceipts": [
+    {
+      "bridgeVersion": "1.0.1",
+      "bridgeContractVersion": 1,
+      "requestId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1S2V8Q4M7T9X5N3C6H0PWAB:1",
+      "eventId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1S2V8Q4M7T9X5N3C6H0PWAB:1",
+      "eventLedgerIdempotencyKey": "study-core-bridge:event:v1:d228f726eafaa9e18d02abe2f8b49c64430a9a194918154d1fa793e9d58817de",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "taskRef": "seg_01K1S2V8Q4M7T9X5N3C6H0PWAB",
+      "responseRef": "draft:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1S2V8Q4M7T9X5N3C6H0PWAB",
+      "submissionRevision": 3,
+      "directive": "continue",
+      "reasonCode": "tutor-core-continue",
+      "occurredAt": "2026-07-28T14:00:11.000Z",
+      "ledgerAccepted": true,
+      "outboxProposalCount": 3,
+      "processingOrder": [
+        "event-ledger-accepted",
+        "minimized-study-projection"
+      ]
+    },
+    {
+      "bridgeVersion": "1.0.1",
+      "bridgeContractVersion": 1,
+      "requestId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1T4M9V2Q7R5X8N3C6H0PWAB:1",
+      "eventId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1T4M9V2Q7R5X8N3C6H0PWAB:1",
+      "eventLedgerIdempotencyKey": "study-core-bridge:event:v1:47f5ee9ba8ec108aa9fb1250dba679114768935539240b5f1feb8d294228649f",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "taskRef": "seg_01K1T4M9V2Q7R5X8N3C6H0PWAB",
+      "responseRef": "draft:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1T4M9V2Q7R5X8N3C6H0PWAB",
+      "submissionRevision": 6,
+      "directive": "continue",
+      "reasonCode": "tutor-core-continue",
+      "occurredAt": "2026-07-28T14:00:21.000Z",
+      "ledgerAccepted": true,
+      "outboxProposalCount": 3,
+      "processingOrder": [
+        "event-ledger-accepted",
+        "minimized-study-projection"
+      ]
+    },
+    {
+      "bridgeVersion": "1.0.1",
+      "bridgeContractVersion": 1,
+      "requestId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1V6Q2M8T4R9X5N3C7H0PWAB:1",
+      "eventId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1V6Q2M8T4R9X5N3C7H0PWAB:1",
+      "eventLedgerIdempotencyKey": "study-core-bridge:event:v1:7d9883c9e574b88684f4b0005b53c90ef1da4be5b3ea3428507d1503ef536814",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "taskRef": "seg_01K1V6Q2M8T4R9X5N3C7H0PWAB",
+      "responseRef": "draft:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1V6Q2M8T4R9X5N3C7H0PWAB",
+      "submissionRevision": 9,
+      "directive": "continue",
+      "reasonCode": "tutor-core-continue",
+      "occurredAt": "2026-07-28T14:00:31.000Z",
+      "ledgerAccepted": true,
+      "outboxProposalCount": 3,
+      "processingOrder": [
+        "event-ledger-accepted",
+        "minimized-study-projection"
+      ]
+    },
+    {
+      "bridgeVersion": "1.0.1",
+      "bridgeContractVersion": 1,
+      "requestId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB:1",
+      "eventId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB:1",
+      "eventLedgerIdempotencyKey": "study-core-bridge:event:v1:25996ce3dbfa21191beefbb8f4bb9be4aab54f7a42aae458c1aa80893fccc9a3",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "taskRef": "seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "responseRef": "draft:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1W8M4V2Q7T9X5N3C6H0PWAB",
+      "submissionRevision": 14,
+      "directive": "continue",
+      "reasonCode": "tutor-core-continue",
+      "occurredAt": "2026-07-28T14:00:43.000Z",
+      "ledgerAccepted": true,
+      "outboxProposalCount": 3,
+      "processingOrder": [
+        "event-ledger-accepted",
+        "minimized-study-projection"
+      ]
+    },
+    {
+      "bridgeVersion": "1.0.1",
+      "bridgeContractVersion": 1,
+      "requestId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1X3V9Q5M2T7R8N4C6H0PWAB:1",
+      "eventId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1X3V9Q5M2T7R8N4C6H0PWAB:1",
+      "eventLedgerIdempotencyKey": "study-core-bridge:event:v1:1bdc8b199fc7db860ab2acec5b13220f612c9a2c40d092a70ae41a6a80c5dae3",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "taskRef": "seg_01K1X3V9Q5M2T7R8N4C6H0PWAB",
+      "responseRef": "draft:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1X3V9Q5M2T7R8N4C6H0PWAB",
+      "submissionRevision": 19,
+      "directive": "continue",
+      "reasonCode": "tutor-core-continue",
+      "occurredAt": "2026-07-28T14:00:53.000Z",
+      "ledgerAccepted": true,
+      "outboxProposalCount": 3,
+      "processingOrder": [
+        "event-ledger-accepted",
+        "minimized-study-projection"
+      ]
+    },
+    {
+      "bridgeVersion": "1.0.1",
+      "bridgeContractVersion": 1,
+      "requestId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1Y5M2V8Q4T9R3N7C6H0PWAB:1",
+      "eventId": "bridge:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1Y5M2V8Q4T9R3N7C6H0PWAB:1",
+      "eventLedgerIdempotencyKey": "study-core-bridge:event:v1:2880c460a6c36f9d90e2184c659fb509077a43f145ec1e6fd089bd165c82878f",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "taskRef": "seg_01K1Y5M2V8Q4T9R3N7C6H0PWAB",
+      "responseRef": "draft:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:seg_01K1Y5M2V8Q4T9R3N7C6H0PWAB",
+      "submissionRevision": 22,
+      "directive": "continue",
+      "reasonCode": "tutor-core-continue",
+      "occurredAt": "2026-07-28T14:01:01.000Z",
+      "ledgerAccepted": true,
+      "outboxProposalCount": 3,
+      "processingOrder": [
+        "event-ledger-accepted",
+        "minimized-study-projection"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "learning-evidence",
+      "schemaVersion": 1,
+      "id": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1",
+      "revision": 1,
+      "createdAt": "2026-07-28T14:01:02.000Z",
+      "updatedAt": "2026-07-28T14:01:02.000Z",
+      "metadata": {
+        "source": "adaptive-engine",
+        "tags": [
+          "student-runtime",
+          "aggregate-only"
+        ],
+        "extensions": {
+          "manuel:projection-version": "student-runtime.engine-projection.v2",
+          "manuel:raw-answer-omitted": true,
+          "manuel:pii-omitted": true,
+          "manuel:tutor-core-authority": "withheld-pending-tutor-core"
+        }
+      },
+      "studentId": "lrn_01K1A4G7M2P9R6V3X8C5T0NQHD",
+      "sessionId": "ses_01K2M4Q9V2T7R5X8N3C6H0PWAB",
+      "subjectId": "sub_01K1G5Q9M3V7T2R8X4N6C0HPWA",
+      "skillIds": [
+        "skl_01K1K4Q9M2V7T5R8X3N6C0HPWA"
+      ],
+      "capturedAt": "2026-07-28T14:01:02.000Z",
+      "completion": {
+        "completedCount": 7,
+        "assignedCount": 7,
+        "completionPercent": 100
+      },
+      "confidence": {
+        "rating": 5,
+        "source": "student-report",
+        "observedAt": "2026-07-28T14:01:02.000Z"
+      },
+      "effort": {
+        "rating": 4,
+        "source": "student-report",
+        "observedAt": "2026-07-28T14:01:02.000Z"
+      },
+      "frustration": {
+        "rating": 1,
+        "source": "student-report",
+        "observedAt": "2026-07-28T14:01:02.000Z"
+      },
+      "engagementSupport": {
+        "status": "insufficient-evidence",
+        "supportingSignals": [],
+        "wording": "contextual-and-revisable"
+      }
+    }
+  ],
+  "review": [
+    {
+      "kind": "student-skill-review",
+      "schemaVersion": 1,
+      "id": "review:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:math:v1",
+      "revision": 1,
+      "createdAt": "2026-07-28T14:01:02.000Z",
+      "updatedAt": "2026-07-28T14:01:02.000Z",
+      "metadata": {
+        "source": "adaptive-engine",
+        "tags": [
+          "student-runtime",
+          "learner-local-date"
+        ],
+        "extensions": {
+          "manuel:projection-version": "student-runtime.engine-projection.v2",
+          "manuel:raw-answer-omitted": true,
+          "manuel:pii-omitted": true,
+          "manuel:tutor-core-authority": "withheld-pending-tutor-core",
+          "manuel:aggregate-evidence-ref": "evidence:ses_01K2M4Q9V2T7R5X8N3C6H0PWAB:summary:v1",
+          "manuel:learner-local-reviewed-on": "2026-07-28"
+        }
+      },
+      "studentId": "lrn_01K1A4G7M2P9R6V3X8C5T0NQHD",
+      "subjectId": "sub_01K1G5Q9M3V7T2R8X4N6C0HPWA",
+      "skillId": "skl_01K1K4Q9M2V7T5R8X3N6C0HPWA",
+      "timeZone": "America/New_York",
+      "retrievalAttempts": [],
+      "currentInterval": {
+        "id": "same-day",
+        "days": 0
+      },
+      "nextReviewDate": "2026-07-28",
+      "intervalAdjustments": []
+    }
+  ],
+  "assertions": {
+    "ledgerAcceptedBeforeProjection": true,
+    "rawAnswersIncluded": false,
+    "transcriptsIncluded": false
+  }
+}

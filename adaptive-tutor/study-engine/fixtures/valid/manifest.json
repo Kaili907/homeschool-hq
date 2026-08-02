@@ -1,0 +1,63 @@
+[
+  {
+    "schemaId": "lesson-study-plan",
+    "file": "study-plan.json"
+  },
+  {
+    "schemaId": "student-focus-profile",
+    "file": "focus-profile-insufficient-data.json"
+  },
+  {
+    "schemaId": "student-focus-profile",
+    "file": "focus-profile-established.json"
+  },
+  {
+    "schemaId": "study-session",
+    "file": "session-planned.json"
+  },
+  {
+    "schemaId": "study-session",
+    "file": "session-active.json"
+  },
+  {
+    "schemaId": "study-session",
+    "file": "session-paused.json"
+  },
+  {
+    "schemaId": "study-session",
+    "file": "session-approved-break.json"
+  },
+  {
+    "schemaId": "study-session",
+    "file": "session-student-requested-break.json"
+  },
+  {
+    "schemaId": "study-session",
+    "file": "session-technical-interruption.json"
+  },
+  {
+    "schemaId": "study-session",
+    "file": "session-completed.json"
+  },
+  {
+    "schemaId": "study-session",
+    "file": "session-abandoned.json"
+  },
+  {
+    "schemaId": "learning-evidence",
+    "file": "learning-evidence-low-accuracy.json"
+  },
+  {
+    "schemaId": "student-skill-review",
+    "file": "review-schedule.json"
+  },
+  {
+    "schemaId": "parent-teacher-controls",
+    "file": "parent-teacher-controls.json"
+  },
+  {
+    "schemaId": "parent-teacher-private",
+    "file": "parent-teacher-private.json"
+  }
+]
+

@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@runtime/*": ["src/*"],
+      "@study-contracts": ["vendor/study-engine/contracts/index.ts"],
+      "@study-schemas": ["vendor/study-engine/schemas/index.ts"],
+      "@study-engine": ["vendor/study-engine/engine/index.ts"],
+      "@study-prompts": ["vendor/study-engine/prompts/index.ts"],
+      "@study-ui/*": ["vendor/study-engine/ui/*"],
+      "@study-content": ["vendor/study-engine/prototype/src/content.ts"],
+      "react": ["node_modules/@types/react/index.d.ts"],
+      "react/jsx-runtime": ["node_modules/@types/react/jsx-runtime.d.ts"],
+      "react/jsx-dev-runtime": ["node_modules/@types/react/jsx-dev-runtime.d.ts"],
+      "react-dom": ["node_modules/@types/react-dom/index.d.ts"],
+      "react-dom/*": ["node_modules/@types/react-dom/*"],
+      "vitest": ["node_modules/vitest/dist/index.d.ts"]
+    },
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true,
+    "types": ["vitest/globals", "node"]
+  },
+  "include": [
+    "src",
+    "vite.config.ts",
+    "playwright.config.ts",
+    "../../tests/student-runtime"
+  ]
+}
