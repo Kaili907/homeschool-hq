@@ -57,6 +57,8 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { StudyEngineApp } from '../study-engine/src/index'
+import { isStudyEnginePath } from './studyEngineRoute'
 
 type Screen =
   | { kind: 'picker' }
@@ -82,6 +84,7 @@ export default function App() {
   const [state, setState] = useState<AppState>(loaded.state)
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
+  const [pathname, setPathname] = useState(() => window.location.pathname)
   const seenRef = useRef(new Set<string>())
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
@@ -89,6 +92,12 @@ export default function App() {
   useEffect(() => {
     saveAppState(state)
   }, [state])
+
+  useEffect(() => {
+    const handlePopState = () => setPathname(window.location.pathname)
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   // M6: local-first cloud sync. Inert with no Supabase config; never blocks the UI.
   // Local writes above already persisted; this pushes async + pulls on open/reconnect.
@@ -290,6 +299,19 @@ export default function App() {
         onGrownUps={() =>
           setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
         }
+      />
+    )
+  }
+
+  if (isStudyEnginePath(pathname)) {
+    return (
+      <StudyEngineApp
+        learner={{ id: active.id, displayName: active.name }}
+        onExit={() => {
+          window.history.pushState({}, '', '/')
+          setPathname(window.location.pathname)
+          setScreen({ kind: 'home' })
+        }}
       />
     )
   }
