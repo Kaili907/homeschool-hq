@@ -1,5 +1,9 @@
 import type { StudyProductionErrorCode } from './errors'
-import { STUDY_PORT_REGISTRY_SCHEMA_VERSION, STUDY_READINESS_SCHEMA_VERSION } from './versions'
+import {
+  STUDY_PORT_REGISTRY_SCHEMA_VERSION,
+  STUDY_PRODUCTION_CONTRACT_VERSION,
+  STUDY_READINESS_SCHEMA_VERSION,
+} from './versions'
 
 export type StudyProductionReadinessState = 'ready' | 'not-ready' | 'degraded'
 
@@ -29,6 +33,7 @@ export type ProductionDurability = 'durable' | 'stateless'
 
 export interface ProductionDependencyRegistration {
   readonly schemaVersion: typeof STUDY_PORT_REGISTRY_SCHEMA_VERSION
+  readonly contractVersion: typeof STUDY_PRODUCTION_CONTRACT_VERSION
   readonly key: ProductionDependencyKey
   readonly implementation: 'production'
   readonly trustBoundary: ProductionTrustBoundary
@@ -37,29 +42,45 @@ export interface ProductionDependencyRegistration {
   readonly version: string
 }
 interface DependencySpecification {
+  readonly contractVersion: typeof STUDY_PRODUCTION_CONTRACT_VERSION
   readonly trustBoundary: ProductionTrustBoundary
   readonly durability: ProductionDurability
   readonly safetyCritical: boolean
+  readonly requiredMethods: readonly string[]
 }
 export const PRODUCTION_DEPENDENCY_SPECIFICATIONS: Readonly<Record<ProductionDependencyKey, DependencySpecification>> = Object.freeze({
-  'session-verifying-authorizer': { trustBoundary: 'trusted-server', durability: 'stateless', safetyCritical: true },
-  'household-learner-resolver': { trustBoundary: 'trusted-server', durability: 'durable', safetyCritical: true },
-  'study-session-adapter': { trustBoundary: 'authenticated-rpc', durability: 'durable', safetyCritical: true },
-  'checkpoint-adapter': { trustBoundary: 'authenticated-rpc', durability: 'durable', safetyCritical: true },
-  'review-queue': { trustBoundary: 'authenticated-rpc', durability: 'durable', safetyCritical: true },
-  'calendar-adapter': { trustBoundary: 'authenticated-rpc', durability: 'durable', safetyCritical: true },
-  'parent-settings-adapter': { trustBoundary: 'authenticated-rpc', durability: 'durable', safetyCritical: true },
-  'adult-private-adapter': { trustBoundary: 'authenticated-rpc', durability: 'durable', safetyCritical: true },
-  'event-ledger': { trustBoundary: 'authenticated-rpc', durability: 'durable', safetyCritical: true },
-  'adult-review-proposal-store': { trustBoundary: 'trusted-server', durability: 'durable', safetyCritical: true },
-  'outbox-store': { trustBoundary: 'trusted-server', durability: 'durable', safetyCritical: true },
-  'rate-limiter': { trustBoundary: 'trusted-server', durability: 'durable', safetyCritical: true },
-  'authorized-recipient-resolver': { trustBoundary: 'trusted-server', durability: 'durable', safetyCritical: true },
-  'production-classifier': { trustBoundary: 'trusted-server', durability: 'stateless', safetyCritical: true },
-  'monitoring-sink': { trustBoundary: 'trusted-server', durability: 'durable', safetyCritical: true },
-  'delivery-provider': { trustBoundary: 'trusted-server', durability: 'durable', safetyCritical: true },
-  'receipt-validator': { trustBoundary: 'trusted-server', durability: 'durable', safetyCritical: true },
+  'session-verifying-authorizer': dependency('trusted-server', 'stateless', ['verify']),
+  'household-learner-resolver': dependency('trusted-server', 'durable', ['resolveGuardian', 'resolveStudentSession', 'resolveStaff']),
+  'study-session-adapter': dependency('authenticated-rpc', 'durable', ['createSession', 'transitionSession']),
+  'checkpoint-adapter': dependency('authenticated-rpc', 'durable', ['readCheckpoint', 'compareAndSwapCheckpoint']),
+  'review-queue': dependency('authenticated-rpc', 'durable', ['upsertReview']),
+  'calendar-adapter': dependency('authenticated-rpc', 'durable', ['upsertCalendarBlock']),
+  'parent-settings-adapter': dependency('authenticated-rpc', 'durable', ['upsertParentSettings', 'effectiveSettings']),
+  'adult-private-adapter': dependency('authenticated-rpc', 'durable', ['storeProtectedWork', 'readProtectedWork', 'appendAdultNote', 'listAdultNoteMetadata', 'readAdultNote']),
+  'event-ledger': dependency('authenticated-rpc', 'durable', ['appendAcceptedEvent']),
+  'adult-review-proposal-store': dependency('trusted-server', 'durable', ['createAdultReviewProposal']),
+  'outbox-store': dependency('trusted-server', 'durable', ['enqueue', 'transition', 'status']),
+  'rate-limiter': dependency('trusted-server', 'durable', ['reserve']),
+  'authorized-recipient-resolver': dependency('trusted-server', 'durable', ['resolve', 'reauthorize']),
+  'production-classifier': dependency('trusted-server', 'stateless', ['classify']),
+  'monitoring-sink': dependency('trusted-server', 'durable', ['record']),
+  'delivery-provider': dependency('trusted-server', 'durable', ['deliver']),
+  'receipt-validator': dependency('trusted-server', 'durable', ['verifyReceipt']),
 })
+
+function dependency(
+  trustBoundary: ProductionTrustBoundary,
+  durability: ProductionDurability,
+  requiredMethods: readonly string[],
+): DependencySpecification {
+  return Object.freeze({
+    contractVersion: STUDY_PRODUCTION_CONTRACT_VERSION,
+    trustBoundary,
+    durability,
+    safetyCritical: true,
+    requiredMethods: Object.freeze([...requiredMethods]),
+  })
+}
 
 export interface StudentSessionIssuerReadiness {
   readonly status: StudyProductionReadinessState
@@ -104,9 +125,11 @@ function registrationIssue(
   const expected = PRODUCTION_DEPENDENCY_SPECIFICATIONS[registration.key]
   if (
     registration.schemaVersion !== STUDY_PORT_REGISTRY_SCHEMA_VERSION ||
+    registration.contractVersion !== expected?.contractVersion ||
     registration.implementation !== 'production' ||
-    registration.trustBoundary !== expected.trustBoundary ||
-    registration.durability !== expected.durability ||
+    registration.trustBoundary !== expected?.trustBoundary ||
+    registration.durability !== expected?.durability ||
+    !['ready', 'not-ready', 'degraded'].includes(registration.status) ||
     !validVersion(registration.version)
   ) return 'production-dependency-invalid'
   if (registration.status === 'not-ready') return 'production-dependency-not-ready'

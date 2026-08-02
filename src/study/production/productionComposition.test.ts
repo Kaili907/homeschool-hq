@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import {
   authorizeGuardianStudy,
   type StudyProductionAuthority,
@@ -7,23 +7,31 @@ import {
   brandProductionPort,
   createProductionPortRegistry,
   type BrandedProductionPort,
+  type ProductionDependencyPortMap,
   type ProductionPortImplementation,
 } from '../contracts/production/ports'
 import {
   PRODUCTION_DEPENDENCY_SPECIFICATIONS,
   type ProductionDependencyKey,
 } from '../contracts/production/readiness'
-import { createStudyProductionComposition } from './productionComposition'
+import {
+  brandVerifiedLearnerAcademicRuntime,
+  createStudyProductionComposition,
+} from './productionComposition'
 
 function completeRegistry() {
   const handles = (Object.keys(PRODUCTION_DEPENDENCY_SPECIFICATIONS) as ProductionDependencyKey[]).map((key) => {
     const spec = PRODUCTION_DEPENDENCY_SPECIFICATIONS[key]
-    const port: ProductionPortImplementation = {
+    const port: ProductionPortImplementation<typeof key> = {
       deployment: 'production',
+      contractVersion: 'study-production.v1',
       implementationId: `durable-production-${key}-v1`,
       trustBoundary: spec.trustBoundary,
       durable: spec.durability === 'durable',
-      isReady: () => 'ready',
+      port: Object.fromEntries(
+        spec.requiredMethods.map((method) => [method, () => undefined]),
+      ) as unknown as ProductionDependencyPortMap[typeof key],
+      readiness: () => 'ready',
     }
     return brandProductionPort(key, port) as BrandedProductionPort
   })
@@ -68,12 +76,13 @@ function guardianAuthority(expiresAt = '2099-08-01T00:00:00.000Z'): StudyProduct
 }
 
 const authority = guardianAuthority()
-const academicRuntime = {
+const academicRuntime = brandVerifiedLearnerAcademicRuntime({
   deployment: 'production' as const,
   runtimeVersion: 'verified-learner-runtime-v1',
   acceptsVerifiedStudentIdentity: true as const,
   containsSyntheticLearnerSentinel: false as const,
-}
+  execute: async () => Object.freeze({ status: 'accepted' }),
+})
 
 describe('Study production composition root', () => {
   it('fails closed without a complete durable registry', () => {
@@ -120,6 +129,70 @@ describe('Study production composition root', () => {
       registry,
       academicRuntime,
     }).available).toBe(true)
+  })
+
+  it.each([
+    {
+      name: 'feature disabled',
+      featureFlagValue: 'false',
+      authenticatedHostSession: true,
+      selectedLearnerAuthorized: true,
+      blocker: 'feature-disabled',
+    },
+    {
+      name: 'unauthenticated',
+      featureFlagValue: 'true',
+      authenticatedHostSession: false,
+      selectedLearnerAuthorized: true,
+      blocker: 'authentication',
+    },
+    {
+      name: 'learner unauthorized',
+      featureFlagValue: 'true',
+      authenticatedHostSession: true,
+      selectedLearnerAuthorized: false,
+      blocker: 'learner-authorization',
+    },
+  ])('does not inspect dependency health when $name', (gate) => {
+    const readiness = vi.fn(() => 'ready' as const)
+    const handles = (Object.keys(PRODUCTION_DEPENDENCY_SPECIFICATIONS) as ProductionDependencyKey[]).map((key) => {
+      const spec = PRODUCTION_DEPENDENCY_SPECIFICATIONS[key]
+      return brandProductionPort(key, {
+        deployment: 'production',
+        contractVersion: 'study-production.v1',
+        implementationId: `durable-production-${key}-v1`,
+        trustBoundary: spec.trustBoundary,
+        durable: spec.durability === 'durable',
+        port: Object.fromEntries(
+          spec.requiredMethods.map((method) => [method, () => undefined]),
+        ) as unknown as ProductionDependencyPortMap[typeof key],
+        readiness,
+      } as ProductionPortImplementation)
+    })
+    // Branding validates health once; reset before exercising the composition gates.
+    readiness.mockClear()
+    const result = createStudyProductionComposition({
+      ...gate,
+      authority,
+      registry: createProductionPortRegistry(handles),
+      academicRuntime,
+    })
+    expect(result).toMatchObject({ available: false, blocker: gate.blocker })
+    expect(result.clientReadiness).toEqual({ schemaVersion: 1, status: 'not-ready' })
+    expect(readiness).not.toHaveBeenCalled()
+  })
+
+  it('exposes only minimized readiness to the browser-facing projection', () => {
+    const result = createStudyProductionComposition({
+      featureFlagValue: 'true',
+      authenticatedHostSession: true,
+      selectedLearnerAuthorized: true,
+      authority,
+      registry: completeRegistry(),
+      academicRuntime,
+    })
+    expect(result.clientReadiness).toEqual({ schemaVersion: 1, status: 'ready' })
+    expect(JSON.stringify(result.clientReadiness)).not.toMatch(/dependency|implementation|recipient|secret/i)
   })
 
   it('rejects UUID-shaped browser authority claims and expired authority', () => {

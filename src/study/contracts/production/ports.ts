@@ -1,5 +1,24 @@
 import { StudyProductionError } from './errors'
 import type {
+  StudyAdultPrivatePort,
+  StudyCalendarPort,
+  StudyCheckpointPort,
+  StudyEventLedgerPort,
+  StudyOutboxPort,
+  StudyParentSettingsPort,
+  StudyPersistencePort,
+  StudyReviewQueuePort,
+} from '../persistence'
+import type {
+  ServerUrgentSafetyClassifierPort,
+  StudySafetyMonitoringPort,
+  StudySafetyRateLimitPort,
+} from '../safety'
+import type {
+  AdultReviewDeliveryProviderPort,
+  AdultReviewReceiptValidatorPort,
+} from '../adult-review'
+import type {
   AuthorizationDecision,
   AuthorizedAdultNotificationRoute,
   GuardianStudyAuthority,
@@ -19,9 +38,15 @@ import {
   type ProductionTrustBoundary,
   type StudyProductionReadinessState,
 } from './readiness'
-import { STUDY_PORT_REGISTRY_SCHEMA_VERSION } from './versions'
+import {
+  STUDY_PORT_REGISTRY_SCHEMA_VERSION,
+  STUDY_PRODUCTION_CONTRACT_VERSION,
+} from './versions'
 
 const PRODUCTION_PORT: unique symbol = Symbol('study-production-port')
+const PRODUCTION_REGISTRY: unique symbol = Symbol('study-production-registry')
+const BRANDED_PRODUCTION_PORTS = new WeakSet<object>()
+const BRANDED_PRODUCTION_REGISTRIES = new WeakSet<object>()
 
 export interface VerifiedServerPrincipal {
   readonly verifiedBy: 'trusted-server'
@@ -128,26 +153,53 @@ export interface AdultNotificationAuthorizationPort {
   }): Promise<AuthorizationDecision<AuthorizedAdultNotificationRoute>>
 }
 
+export interface ProductionDependencyPortMap {
+  readonly 'session-verifying-authorizer': StudySessionVerifyingAuthorizerPort
+  readonly 'household-learner-resolver': HouseholdLearnerAuthorityResolverPort
+  readonly 'study-session-adapter': StudyPersistencePort
+  readonly 'checkpoint-adapter': StudyCheckpointPort
+  readonly 'review-queue': StudyReviewQueuePort
+  readonly 'calendar-adapter': StudyCalendarPort
+  readonly 'parent-settings-adapter': StudyParentSettingsPort
+  readonly 'adult-private-adapter': StudyAdultPrivatePort
+  readonly 'event-ledger': StudyEventLedgerPort
+  readonly 'adult-review-proposal-store': Pick<StudyOutboxPort, 'createAdultReviewProposal'>
+  readonly 'outbox-store': Pick<StudyOutboxPort, 'enqueue' | 'transition' | 'status'>
+  readonly 'rate-limiter': StudySafetyRateLimitPort
+  readonly 'authorized-recipient-resolver': AdultNotificationAuthorizationPort
+  readonly 'production-classifier': ServerUrgentSafetyClassifierPort
+  readonly 'monitoring-sink': StudySafetyMonitoringPort
+  readonly 'delivery-provider': AdultReviewDeliveryProviderPort
+  readonly 'receipt-validator': AdultReviewReceiptValidatorPort
+}
+
 export interface ProductionPortRuntimeMetadata {
   readonly deployment: 'production'
+  readonly contractVersion: typeof STUDY_PRODUCTION_CONTRACT_VERSION
   readonly implementationId: string
   readonly trustBoundary: ProductionTrustBoundary
   readonly durable: boolean
   readonly testOnly?: boolean
   readonly previewOnly?: boolean
-  readonly isReady: () => StudyProductionReadinessState
+  readonly inMemory?: boolean
 }
 
-export type ProductionPortImplementation = object & ProductionPortRuntimeMetadata
+export interface ProductionPortImplementation<
+  Key extends ProductionDependencyKey = ProductionDependencyKey,
+> extends ProductionPortRuntimeMetadata {
+  readonly port: ProductionDependencyPortMap[Key]
+  /** A live health probe. Static configuration alone must not return ready. */
+  readonly readiness: () => StudyProductionReadinessState
+}
 
 export interface BrandedProductionPort<
   Key extends ProductionDependencyKey = ProductionDependencyKey,
-  Port extends ProductionPortImplementation = ProductionPortImplementation,
 > {
   readonly [PRODUCTION_PORT]: Key
   readonly key: Key
-  readonly port: Port
-  readiness(): ProductionDependencyRegistration
+  readonly port: Readonly<ProductionDependencyPortMap[Key]>
+  /** Server-internal registration. Use readinessWireResult at a browser boundary. */
+  internalRegistration(): ProductionDependencyRegistration
 }
 
 const NON_PRODUCTION_IMPLEMENTATION = /(?:^|[\s:._/-])(local|memory|in-memory|test|fixture|preview|synthetic|noop|mock)(?:$|[\s:._/-])/i
@@ -159,48 +211,70 @@ const NON_PRODUCTION_IMPLEMENTATION = /(?:^|[\s:._/-])(local|memory|in-memory|te
  */
 export function brandProductionPort<
   Key extends ProductionDependencyKey,
-  Port extends ProductionPortImplementation,
->(key: Key, port: Port): BrandedProductionPort<Key, Port> {
+>(key: Key, implementation: ProductionPortImplementation<Key>): BrandedProductionPort<Key> {
   const expected = PRODUCTION_DEPENDENCY_SPECIFICATIONS[key]
-  const state = port?.isReady?.()
+  const state = implementation?.readiness?.()
+  const port = implementation?.port
   if (
-    port?.deployment !== 'production' ||
-    port.trustBoundary !== expected.trustBoundary ||
-    port.durable !== (expected.durability === 'durable') ||
-    port.testOnly === true ||
-    port.previewOnly === true ||
-    typeof port.implementationId !== 'string' ||
-    port.implementationId.trim() === '' ||
-    NON_PRODUCTION_IMPLEMENTATION.test(port.implementationId) ||
+    !expected ||
+    implementation?.deployment !== 'production' ||
+    implementation.contractVersion !== expected.contractVersion ||
+    implementation.trustBoundary !== expected.trustBoundary ||
+    implementation.durable !== (expected.durability === 'durable') ||
+    implementation.testOnly === true ||
+    implementation.previewOnly === true ||
+    implementation.inMemory === true ||
+    typeof implementation.implementationId !== 'string' ||
+    implementation.implementationId.trim() === '' ||
+    NON_PRODUCTION_IMPLEMENTATION.test(implementation.implementationId) ||
+    !port ||
+    typeof port !== 'object' ||
+    !expected.requiredMethods.every((method) => typeof (port as unknown as Record<string, unknown>)[method] === 'function') ||
     !['ready', 'not-ready', 'degraded'].includes(state)
   ) throw new StudyProductionError('production-dependency-invalid')
 
-  const handle: BrandedProductionPort<Key, Port> = {
+  Object.freeze(port)
+  const readiness = implementation.readiness
+  const handle: BrandedProductionPort<Key> = {
     [PRODUCTION_PORT]: key,
     key,
     port,
-    readiness: () => Object.freeze({
-      schemaVersion: STUDY_PORT_REGISTRY_SCHEMA_VERSION,
-      key,
-      implementation: 'production',
-      trustBoundary: port.trustBoundary,
-      durability: port.durable ? 'durable' : 'stateless',
-      status: port.isReady(),
-      version: port.implementationId,
-    }),
+    internalRegistration: () => {
+      const status = readiness()
+      if (!['ready', 'not-ready', 'degraded'].includes(status)) {
+        throw new StudyProductionError('production-dependency-invalid')
+      }
+      return Object.freeze({
+        schemaVersion: STUDY_PORT_REGISTRY_SCHEMA_VERSION,
+        contractVersion: STUDY_PRODUCTION_CONTRACT_VERSION,
+        key,
+        implementation: 'production',
+        trustBoundary: implementation.trustBoundary,
+        durability: implementation.durable ? 'durable' : 'stateless',
+        status,
+        version: implementation.implementationId,
+      })
+    },
   }
-  return Object.freeze(handle)
+  Object.freeze(handle)
+  BRANDED_PRODUCTION_PORTS.add(handle)
+  return handle
 }
 
 export function isBrandedProductionPort(value: unknown): value is BrandedProductionPort {
   if (!value || typeof value !== 'object') return false
   const candidate = value as Partial<BrandedProductionPort>
-  return typeof candidate.key === 'string' && candidate[PRODUCTION_PORT] === candidate.key && typeof candidate.readiness === 'function'
+  return BRANDED_PRODUCTION_PORTS.has(value) &&
+    typeof candidate.key === 'string' &&
+    candidate[PRODUCTION_PORT] === candidate.key &&
+    typeof candidate.internalRegistration === 'function' &&
+    Object.isFrozen(candidate) &&
+    Object.isFrozen(candidate.port)
 }
 
 export type StudyProductionPortRegistry = Readonly<{
   [Key in ProductionDependencyKey]: BrandedProductionPort<Key>
-}>
+}> & { readonly [PRODUCTION_REGISTRY]: typeof STUDY_PORT_REGISTRY_SCHEMA_VERSION }
 
 export function createProductionPortRegistry(
   ports: readonly BrandedProductionPort[],
@@ -214,14 +288,41 @@ export function createProductionPortRegistry(
   for (const key of Object.keys(PRODUCTION_DEPENDENCY_SPECIFICATIONS) as ProductionDependencyKey[]) {
     if (!registry.has(key)) throw new StudyProductionError('production-dependency-missing')
   }
-  return Object.freeze(Object.fromEntries(registry) as unknown as StudyProductionPortRegistry)
+  const result = Object.fromEntries(registry) as unknown as StudyProductionPortRegistry
+  Object.defineProperty(result, PRODUCTION_REGISTRY, {
+    configurable: false,
+    enumerable: false,
+    writable: false,
+    value: STUDY_PORT_REGISTRY_SCHEMA_VERSION,
+  })
+  Object.freeze(result)
+  BRANDED_PRODUCTION_REGISTRIES.add(result)
+  return result
+}
+
+export function isStudyProductionPortRegistry(
+  value: unknown,
+): value is StudyProductionPortRegistry {
+  if (!value || typeof value !== 'object') return false
+  const candidate = value as Partial<StudyProductionPortRegistry>
+  if (
+    !BRANDED_PRODUCTION_REGISTRIES.has(value) ||
+    candidate[PRODUCTION_REGISTRY] !== STUDY_PORT_REGISTRY_SCHEMA_VERSION ||
+    !Object.isFrozen(candidate) ||
+    Object.keys(candidate).length !== Object.keys(PRODUCTION_DEPENDENCY_SPECIFICATIONS).length
+  ) return false
+  return (Object.keys(PRODUCTION_DEPENDENCY_SPECIFICATIONS) as ProductionDependencyKey[])
+    .every((key) => isBrandedProductionPort(candidate[key]) && candidate[key]?.key === key)
 }
 
 export function productionPortReadiness(
   registry: StudyProductionPortRegistry,
 ): readonly ProductionDependencyRegistration[] {
+  if (!isStudyProductionPortRegistry(registry)) {
+    throw new StudyProductionError('production-dependency-invalid')
+  }
   return Object.freeze(
     (Object.keys(PRODUCTION_DEPENDENCY_SPECIFICATIONS) as ProductionDependencyKey[])
-      .map((key) => registry[key].readiness()),
+      .map((key) => registry[key].internalRegistration()),
   )
 }

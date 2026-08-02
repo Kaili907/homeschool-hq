@@ -50,6 +50,7 @@ interface Props {
   onOpenAssessment: (testId: string) => void
   onOpenMindset: () => void
   onOpenStudy?: () => void
+  studyMode?: 'preview' | 'unavailable'
   mindsetStartDate: string | undefined
 }
 
@@ -83,6 +84,7 @@ export function HighSchoolHome({
   onOpenAssessment,
   onOpenMindset,
   onOpenStudy,
+  studyMode,
   mindsetStartDate,
 }: Props) {
   const t = useTheme()
@@ -238,7 +240,7 @@ export function HighSchoolHome({
           className="mt-5 flex min-h-11 w-full items-center gap-3 rounded-2xl border border-cyan-300 bg-cyan-50 p-4 text-left font-bold text-cyan-950 shadow-sm hover:bg-cyan-100"
         >
           <span aria-hidden="true" className="text-2xl">🧭</span>
-          <span><span className="block text-lg">Today’s Study plan</span><span className="block text-sm font-medium text-cyan-800">Launch the gated Adaptive Study Engine preview</span></span>
+          <span><span className="block text-lg">Today’s Study plan</span><span className="block text-sm font-medium text-cyan-800">{studyMode === 'preview' ? 'Launch the explicit local Study preview' : 'Check whether Study is available'}</span></span>
         </button>
       )}
 

@@ -95,6 +95,14 @@ export type StudyProductionAuthority =
   | StudentSessionStudyAuthority
   | StaffStudyAuthority
 
+const SERVER_AUTHORITY_INSTANCES = new WeakSet<object>()
+
+function brandServerAuthority<T extends StudyProductionAuthority>(authority: T): T {
+  Object.freeze(authority)
+  SERVER_AUTHORITY_INSTANCES.add(authority)
+  return authority
+}
+
 export interface AuthorizedAdultNotificationRoute {
   readonly recipientRef: StableRecipientRef
   readonly routeRef: StableRouteRef
@@ -279,7 +287,7 @@ export function authorizeGuardianStudy(
   if (windowError) return { status: 'denied', code: windowError }
   return {
     status: 'authorized',
-    authority: Object.freeze({
+    authority: brandServerAuthority({
       schemaVersion: STUDY_AUTHORIZATION_SCHEMA_VERSION,
       authoritySource: 'verified-server',
       actorKind: 'guardian',
@@ -325,7 +333,7 @@ export function authorizeStudentSessionStudy(
   }
   return {
     status: 'authorized',
-    authority: Object.freeze({
+    authority: brandServerAuthority({
       schemaVersion: STUDY_AUTHORIZATION_SCHEMA_VERSION,
       authoritySource: 'verified-server',
       actorKind: 'student-session',
@@ -369,7 +377,7 @@ export function authorizeStaffStudy(
   if (windowError) return { status: 'denied', code: windowError }
   return {
     status: 'authorized',
-    authority: Object.freeze({
+    authority: brandServerAuthority({
       schemaVersion: STUDY_AUTHORIZATION_SCHEMA_VERSION,
       authoritySource: 'verified-server',
       actorKind: 'staff',
@@ -477,7 +485,12 @@ export function isCurrentStudyProductionAuthority(
   value: unknown,
   now = new Date(),
 ): value is StudyProductionAuthority {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+  if (
+    !value ||
+    typeof value !== 'object' ||
+    Array.isArray(value) ||
+    !SERVER_AUTHORITY_INSTANCES.has(value)
+  ) return false
   const authority = value as Partial<StudyProductionAuthority>
   if (
     authority.schemaVersion !== STUDY_AUTHORIZATION_SCHEMA_VERSION ||

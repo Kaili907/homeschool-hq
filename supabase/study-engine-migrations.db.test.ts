@@ -20,6 +20,10 @@ const studyMigrations = [
   '20260801012000_academy_study_engine_production_reconciliation.sql',
 ] as const
 
+const productionCompositionMigrations = [
+  '20260801160000_academy_study_verified_identity.sql',
+] as const
+
 const bootstrap = `
   create role anon nologin;
   create role authenticated nologin;
@@ -72,6 +76,7 @@ describe.sequential('Study Engine migration chain', () => {
     expect(names).toEqual([
       ...Object.keys(historicalMigrations),
       ...studyMigrations,
+      ...productionCompositionMigrations,
     ])
   })
 
