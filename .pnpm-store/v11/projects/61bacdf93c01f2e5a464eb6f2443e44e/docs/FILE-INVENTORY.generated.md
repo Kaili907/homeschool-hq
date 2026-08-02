@@ -1,0 +1,52 @@
+# Adaptive English File Inventory
+
+Generated from the final package tree. Excludes dependency and release directories. The inventory itself is listed explicitly.
+
+- File count: 46
+
+- `README.md`
+- `assets/captions/english-decoding-multisyllable-words.vtt`
+- `assets/captions/english-main-idea-supporting-details.vtt`
+- `assets/captions/english-organize-revise-clear-paragraph.vtt`
+- `assets/captions/english-sentence-completeness.vtt`
+- `assets/narration/english-decoding-multisyllable-words.json`
+- `assets/narration/english-main-idea-supporting-details.json`
+- `assets/narration/english-organize-revise-clear-paragraph.json`
+- `assets/narration/english-sentence-completeness.json`
+- `demo/app.js`
+- `demo/index.html`
+- `demo/manifest.generated.json`
+- `demo/programs.generated.js`
+- `demo/styles.css`
+- `docs/CORE-V0.2-MAPPING.md`
+- `docs/DIRECTOR-HANDOFF.md`
+- `docs/FILE-INVENTORY.generated.md`
+- `docs/LIMITATIONS.md`
+- `docs/TEST-RESULTS.md`
+- `docs/VALIDATION-REPORT.generated.md`
+- `package-manifest.generated.json`
+- `package.json`
+- `pnpm-lock.yaml`
+- `scripts/build-demo.mjs`
+- `scripts/package-release.ps1`
+- `scripts/run-tests.mjs`
+- `scripts/validate-package.mjs`
+- `src/adapters/english-core-v02-extension.ts`
+- `src/helpers.ts`
+- `src/index.ts`
+- `src/integration-matrix.ts`
+- `src/module-builder.ts`
+- `src/modules/clear-paragraph-revision.ts`
+- `src/modules/decoding-multisyllable-words.ts`
+- `src/modules/main-idea-supporting-details.ts`
+- `src/modules/sentence-completeness.ts`
+- `src/policies.ts`
+- `src/types.ts`
+- `src/validation.ts`
+- `tests/browser-demo.test.ts`
+- `tests/contracts.test.ts`
+- `tests/curriculum-content.test.ts`
+- `tests/engine-flow.test.ts`
+- `tsconfig.build.json`
+- `tsconfig.json`
+- `tsconfig.test.json`

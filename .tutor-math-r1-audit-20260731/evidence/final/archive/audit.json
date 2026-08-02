@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "artifact": "manuel-academy-adaptive-tutor-math-v1-core-v0.2-aligned-r1.zip",
+  "sha256": "ee9d15cdf1184380add17ebdd8f93f01fde3f0915f491d0a4df96798b4f52351",
+  "archiveFiles": 92,
+  "checksumRecords": 91,
+  "singleRoot": "manuel-academy-adaptive-tutor-math-v1-core-v0.2-aligned-r1",
+  "crcAndDecompression": "PASS",
+  "delta": {
+    "added": [
+      "standalone-demo/model.js",
+      "tests/standalone-demo-regression.test.mjs"
+    ],
+    "modified": [
+      "README.md",
+      "SHA256SUMS.txt",
+      "director-handoff.md",
+      "docs/core-v0.2-alignment-report.md",
+      "manifest.json",
+      "package.json",
+      "standalone-demo/README.md",
+      "standalone-demo/demo.css",
+      "standalone-demo/demo.js",
+      "standalone-demo/index.html",
+      "test-results.txt",
+      "validation-report.md",
+      "validation-results.json"
+    ],
+    "deleted": []
+  },
+  "errors": []
+}

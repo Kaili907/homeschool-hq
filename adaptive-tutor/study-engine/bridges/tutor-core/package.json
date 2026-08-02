@@ -1,0 +1,20 @@
+{
+  "name": "@manuel-academy/study-core-bridge",
+  "version": "1.0.1",
+  "bridgeContractVersion": 1,
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    }
+  },
+  "files": [
+    "src",
+    "tsconfig.json"
+  ],
+  "engines": {
+    "node": ">=22"
+  }
+}

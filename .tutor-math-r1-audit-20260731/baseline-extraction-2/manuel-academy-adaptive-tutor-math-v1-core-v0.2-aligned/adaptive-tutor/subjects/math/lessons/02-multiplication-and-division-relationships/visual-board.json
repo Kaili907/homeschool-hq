@@ -1,0 +1,90 @@
+{
+  "representations": [
+    "array",
+    "equal-groups",
+    "area-model",
+    "number-line",
+    "step-diagram"
+  ],
+  "boards": [
+    {
+      "id": "md-board-01",
+      "kind": "array",
+      "action": "show",
+      "payload": {
+        "rows": 4,
+        "columns": 6,
+        "rowLabel": "groups",
+        "columnLabel": "items per group"
+      },
+      "altText": "Array with four rows and six objects in each row.",
+      "narrationCue": "md-n02"
+    },
+    {
+      "id": "md-board-02",
+      "kind": "equal-groups",
+      "action": "group",
+      "payload": {
+        "total": 24,
+        "groupSize": 6,
+        "groups": 4
+      },
+      "altText": "Twenty-four objects circled into four equal groups of six.",
+      "narrationCue": "md-n04"
+    },
+    {
+      "id": "md-board-03",
+      "kind": "area-model",
+      "action": "partition",
+      "payload": {
+        "factors": [
+          23,
+          6
+        ],
+        "split": [
+          20,
+          3
+        ],
+        "partialProducts": [
+          120,
+          18
+        ]
+      },
+      "altText": "Area model for twenty-three times six split into twenty times six and three times six.",
+      "narrationCue": "md-n06"
+    },
+    {
+      "id": "md-board-04",
+      "kind": "number-line",
+      "action": "jump",
+      "payload": {
+        "start": 0,
+        "end": 56,
+        "jumpSize": 7,
+        "jumps": 8
+      },
+      "altText": "Number line with eight jumps of seven reaching fifty-six.",
+      "narrationCue": "md-n05"
+    },
+    {
+      "id": "md-board-05",
+      "kind": "step-diagram",
+      "action": "connect",
+      "payload": {
+        "nodes": [
+          "7 × 8 = 56",
+          "56 ÷ 7 = 8",
+          "56 ÷ 8 = 7"
+        ],
+        "label": "inverse fact family"
+      },
+      "altText": "Step diagram connecting one multiplication fact to two related division facts.",
+      "narrationCue": "md-n03"
+    }
+  ],
+  "accessibility": [
+    "Objects are countable with row and column labels.",
+    "Text equations accompany every model.",
+    "No learner image or camera is used."
+  ]
+}

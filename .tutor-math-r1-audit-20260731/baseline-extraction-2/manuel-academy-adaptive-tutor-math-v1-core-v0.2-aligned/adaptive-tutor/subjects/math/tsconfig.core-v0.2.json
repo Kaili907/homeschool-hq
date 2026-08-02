@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": [
+    "core-v0.2-adapter.ts",
+    "runtime-v0.2.ts",
+    "types.ts"
+  ]
+}

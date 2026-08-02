@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manuel Academy Adaptive English Tutor v0.2</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <p class="eyebrow">MANUEL ACADEMY · CORE v0.2 CONTRACT DEMO</p>
+        <h1>Adaptive English Tutor</h1>
+        <p class="lede">Choose a reading or writing intervention. Every displayed turn, item, board command, caption, and fallback comes from the validated package.</p>
+      </header>
+
+      <nav class="intervention-tabs" aria-label="Demonstration intervention">
+        <button type="button" data-intervention="reading" aria-pressed="true">Reading intervention</button>
+        <button type="button" data-intervention="writing" aria-pressed="false">Writing intervention</button>
+      </nav>
+
+      <section class="status" aria-live="polite">
+        <span id="contract-status">Loading validated contract data…</span>
+        <span class="classification" id="classification">PASS_DIRECT_CORE_V0_2</span>
+      </section>
+
+      <section class="workspace">
+        <article class="tutor-panel">
+          <div class="tutor-heading">
+            <div>
+              <p class="eyebrow" id="lesson-kind">READING</p>
+              <h2 id="lesson-title">Lesson</h2>
+            </div>
+            <button type="button" id="speak-button" class="quiet">Speak visible explanation</button>
+          </div>
+          <div class="mode-row" id="mode-row" aria-label="Tutoring mode"></div>
+          <p class="tutor-message" id="tutor-message"></p>
+          <p class="uncertainty" id="uncertainty"></p>
+          <div class="captions" aria-live="polite">
+            <span>CAPTIONS</span>
+            <p id="caption-text"></p>
+          </div>
+        </article>
+
+        <article class="board-panel" aria-labelledby="board-title">
+          <p class="eyebrow">VISUAL TEACHING BOARD</p>
+          <h2 id="board-title">One useful step</h2>
+          <div id="board-content" class="board-content"></div>
+          <p id="board-fallback" class="fallback"></p>
+        </article>
+      </section>
+
+      <section class="practice-panel" aria-labelledby="practice-heading">
+        <div>
+          <p class="eyebrow">CORE ASSESSMENT ITEM</p>
+          <h2 id="practice-heading">Try a diagnostic probe</h2>
+        </div>
+        <p id="item-prompt"></p>
+        <form id="item-options"></form>
+        <button type="button" id="check-answer">Check my choice</button>
+        <p id="answer-feedback" class="feedback" aria-live="polite"></p>
+      </section>
+
+      <section class="revision-panel" id="revision-panel" hidden aria-labelledby="revision-heading">
+        <p class="eyebrow">LEARNER-OWNED FINAL REVISION</p>
+        <h2 id="revision-heading">You make the final change</h2>
+        <p id="authorship-prompt"></p>
+        <textarea id="revision-text" rows="4" placeholder="Type your own revision here. No camera, photo, name, or account is needed."></textarea>
+        <button type="button" id="save-revision">Keep my revision in this demo</button>
+        <p id="revision-feedback" class="feedback" aria-live="polite"></p>
+      </section>
+
+      <details class="transcript-panel" open>
+        <summary>Visible transcript and no-audio fallback</summary>
+        <ol id="transcript"></ol>
+        <p id="audio-fallback"></p>
+      </details>
+    </main>
+    <script src="programs.generated.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

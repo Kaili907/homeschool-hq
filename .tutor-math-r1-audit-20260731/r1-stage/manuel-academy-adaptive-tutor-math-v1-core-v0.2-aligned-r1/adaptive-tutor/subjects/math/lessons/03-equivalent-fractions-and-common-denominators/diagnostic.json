@@ -1,0 +1,239 @@
+{
+  "items": [
+    {
+      "id": "math-fr-d01",
+      "type": "multiple-choice",
+      "prompt": "Which fraction is equivalent to 2/3?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "4/5"
+        },
+        {
+          "id": "B",
+          "text": "4/6"
+        },
+        {
+          "id": "C",
+          "text": "6/8"
+        },
+        {
+          "id": "D",
+          "text": "8/9"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "Multiply numerator and denominator by 2: 2/3 = 4/6.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-fr-one-sided-scale"
+        ],
+        "C": [
+          "math-mis-fr-one-sided-scale"
+        ],
+        "D": [
+          "math-mis-fr-one-sided-scale"
+        ]
+      },
+      "representation": "fraction-bars",
+      "difficultyBand": "entry",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-fr-d02",
+      "type": "multiple-choice",
+      "prompt": "Which statement is true?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "1/8 > 1/4"
+        },
+        {
+          "id": "B",
+          "text": "1/8 < 1/4"
+        },
+        {
+          "id": "C",
+          "text": "1/8 = 1/4"
+        },
+        {
+          "id": "D",
+          "text": "They cannot be compared"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "With the same-size whole, eighths are smaller than fourths.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-fr-whole-number-rules"
+        ],
+        "C": [
+          "math-mis-fr-whole-number-rules"
+        ],
+        "D": [
+          "math-mis-fr-unequal-wholes"
+        ]
+      },
+      "representation": "fraction-bars",
+      "difficultyBand": "entry",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-fr-d03",
+      "type": "multiple-choice",
+      "prompt": "What is a useful least common denominator for 2/5 and 1/3?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "8"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "15"
+        },
+        {
+          "id": "D",
+          "text": "30"
+        }
+      ],
+      "correctChoiceId": "C",
+      "reasoning": "15 is the least positive number divisible by both 5 and 3.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-fr-add-denominators"
+        ],
+        "B": [
+          "math-mis-fr-common-product-only"
+        ],
+        "D": [
+          "math-mis-fr-common-product-only"
+        ]
+      },
+      "representation": "multiples-list",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-fr-d04",
+      "type": "multiple-choice",
+      "prompt": "What is 3/8 + 1/4?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "4/12"
+        },
+        {
+          "id": "B",
+          "text": "4/8"
+        },
+        {
+          "id": "C",
+          "text": "5/8"
+        },
+        {
+          "id": "D",
+          "text": "3/32"
+        }
+      ],
+      "correctChoiceId": "C",
+      "reasoning": "Rename 1/4 as 2/8, then 3/8 + 2/8 = 5/8.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-fr-add-denominators"
+        ],
+        "B": [
+          "math-mis-fr-one-sided-scale"
+        ],
+        "D": [
+          "math-mis-fr-add-denominators"
+        ]
+      },
+      "representation": "fraction-bars",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-fr-d05",
+      "type": "multiple-choice",
+      "prompt": "Which is greater: 5/6 or 7/9?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "5/6"
+        },
+        {
+          "id": "B",
+          "text": "7/9"
+        },
+        {
+          "id": "C",
+          "text": "They are equal"
+        },
+        {
+          "id": "D",
+          "text": "Not enough information"
+        }
+      ],
+      "correctChoiceId": "A",
+      "reasoning": "Use eighteenths: 5/6 = 15/18 and 7/9 = 14/18.",
+      "misconceptionSignals": {
+        "B": [
+          "math-mis-fr-whole-number-rules"
+        ],
+        "C": [
+          "math-mis-fr-one-sided-scale"
+        ],
+        "D": [
+          "math-mis-fr-unequal-wholes"
+        ]
+      },
+      "representation": "number-line",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-fr-d06",
+      "type": "open-response",
+      "prompt": "Explain why multiplying 3/5 by 2/2 does not change its value.",
+      "acceptableEvidence": [
+        "States 2/2 equals 1.",
+        "Multiplying by 1 keeps the value.",
+        "Connects 3/5 to 6/10 with equal bars or the same number-line point."
+      ],
+      "reasoning": "The numerator and denominator scale together by the same factor, which multiplies the fraction by 1.",
+      "misconceptionSignals": {
+        "only numerator changes": [
+          "math-mis-fr-one-sided-scale"
+        ],
+        "says value doubles": [
+          "math-mis-fr-one-sided-scale"
+        ]
+      },
+      "representation": "fraction-bars",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    }
+  ],
+  "routingRules": [
+    {
+      "when": "unit-fraction size is insecure",
+      "route": "prerequisite-remediation-fr-parts"
+    },
+    {
+      "when": "scaling is one-sided",
+      "route": "reteach-fr-equivalence"
+    },
+    {
+      "when": "denominators are added",
+      "route": "reteach-fr-common-units"
+    },
+    {
+      "when": "comparison uses different wholes",
+      "route": "reteach-fr-same-whole"
+    }
+  ]
+}

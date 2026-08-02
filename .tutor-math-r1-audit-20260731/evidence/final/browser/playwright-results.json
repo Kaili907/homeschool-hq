@@ -1,0 +1,529 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\aemanuel\\homeschool-hq\\.tutor-math-r1-audit-20260731\\tools\\node-v22.23.2-win-x64\\node.exe",
+      "C:\\Users\\aemanuel\\homeschool-hq\\adaptive-tutor\\study-engine\\integration-labs\\student-runtime\\node_modules\\playwright\\cli.js",
+      "test",
+      "--config=C:\\Users\\aemanuel\\homeschool-hq\\.tutor-math-r1-audit-20260731\\harness\\playwright.config.mjs",
+      "--project=bundled-chromium",
+      "--project=edge",
+      "--project=chrome"
+    ],
+    "configFile": "C:\\Users\\aemanuel\\homeschool-hq\\.tutor-math-r1-audit-20260731\\harness\\playwright.config.mjs",
+    "rootDir": "C:/Users/aemanuel/homeschool-hq/.tutor-math-r1-audit-20260731/harness",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/aemanuel/homeschool-hq/.tutor-math-r1-audit-20260731/evidence/final/browser/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "bundled-chromium",
+        "name": "bundled-chromium",
+        "testDir": "C:/Users/aemanuel/homeschool-hq/.tutor-math-r1-audit-20260731/harness",
+        "testIgnore": [],
+        "testMatch": [
+          "tutor-math-r1.spec.mjs"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/aemanuel/homeschool-hq/.tutor-math-r1-audit-20260731/evidence/final/browser/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "edge",
+        "name": "edge",
+        "testDir": "C:/Users/aemanuel/homeschool-hq/.tutor-math-r1-audit-20260731/harness",
+        "testIgnore": [],
+        "testMatch": [
+          "tutor-math-r1.spec.mjs"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/aemanuel/homeschool-hq/.tutor-math-r1-audit-20260731/evidence/final/browser/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chrome",
+        "name": "chrome",
+        "testDir": "C:/Users/aemanuel/homeschool-hq/.tutor-math-r1-audit-20260731/harness",
+        "testIgnore": [],
+        "testMatch": [
+          "tutor-math-r1.spec.mjs"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\aemanuel\\homeschool-hq\\.tutor-math-r1-audit-20260731\\evidence\\final\\browser\\playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "tutor-math-r1.spec.mjs",
+      "file": "tutor-math-r1.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "keyboard-only supported flow reaches every adaptive stage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bundled-chromium",
+              "projectName": "bundled-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2298,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:18:42.289Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-a4870f60b6f852c0dc9d",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 112,
+          "column": 1
+        },
+        {
+          "title": "difficulty route clears reasoning and cannot resubmit a stale value",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bundled-chromium",
+              "projectName": "bundled-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 865,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:18:45.386Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-b0e7ba9041a00dd69de3",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "correct-but-uncertain response preserves uncertainty and routes to clarification",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bundled-chromium",
+              "projectName": "bundled-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 665,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:18:46.273Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-e5fdd67aeb8a7af74e59",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 193,
+          "column": 1
+        },
+        {
+          "title": "fallbacks, reduced motion, resources, layout, and safety remain usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bundled-chromium",
+              "projectName": "bundled-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 339,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:18:46.961Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-ef70324be63cf07bc641",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 210,
+          "column": 1
+        },
+        {
+          "title": "keyboard-only supported flow reaches every adaptive stage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3310,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:18:48.446Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-e2ff96a7d5c90dd5cd39",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 112,
+          "column": 1
+        },
+        {
+          "title": "difficulty route clears reasoning and cannot resubmit a stale value",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1051,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:18:52.910Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-a593d9a858bb8b5fbab5",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "correct-but-uncertain response preserves uncertainty and routes to clarification",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1504,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:18:53.986Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-2a009b8c005ae1254cc6",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 193,
+          "column": 1
+        },
+        {
+          "title": "fallbacks, reduced motion, resources, layout, and safety remain usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "edge",
+              "projectName": "edge",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 680,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:18:55.524Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-e4a2a3e72a9a36e3e7d5",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 210,
+          "column": 1
+        },
+        {
+          "title": "keyboard-only supported flow reaches every adaptive stage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6013,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:18:58.564Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-8dc9428a849273e4cd99",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 112,
+          "column": 1
+        },
+        {
+          "title": "difficulty route clears reasoning and cannot resubmit a stale value",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:19:07.162Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-c05f1ec0d0a0bfa38498",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "correct-but-uncertain response preserves uncertainty and routes to clarification",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1931,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:19:09.711Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-a1d3097d26d3cc08fa81",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 193,
+          "column": 1
+        },
+        {
+          "title": "fallbacks, reduced motion, resources, layout, and safety remain usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chrome",
+              "projectName": "chrome",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1049,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-01T04:19:11.706Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0346bc838182f8bd65da-00f4237754344282468e",
+          "file": "tutor-math-r1.spec.mjs",
+          "line": 210,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-08-01T04:18:41.249Z",
+    "duration": 32479.648999999998,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

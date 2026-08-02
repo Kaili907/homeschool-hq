@@ -1,0 +1,113 @@
+{
+  "startedAt": "2026-08-01T04:07:15.762Z",
+  "completedAt": "2026-08-01T04:07:19.131Z",
+  "browser": "Microsoft Edge",
+  "browserVersion": "150.0.4078.105",
+  "automation": "Playwright 1.62.0",
+  "headless": true,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "baseURL": "http://127.0.0.1:4173/",
+  "states": {
+    "afterKeyboardAnswer": {
+      "active": {
+        "tag": "BODY",
+        "id": null,
+        "connected": true,
+        "visible": true
+      },
+      "phase": null,
+      "prompt": "To begin 5,002 − 187, where does the first available unit for regrouping come from?",
+      "feedback": "That choice suggests the zero columns may be hiding the source of the trade. Explain what you were thinking so we can test that idea.",
+      "reasoningValue": ""
+    },
+    "afterContinue": {
+      "active": {
+        "tag": "BUTTON",
+        "id": "continue",
+        "connected": true,
+        "visible": false
+      },
+      "phase": null,
+      "prompt": "Point to the first column left of the ones that actually contains a unit.",
+      "feedback": "Zeros hold places, but they do not supply a unit. Trace left until a place contains one.",
+      "reasoningValue": "I started at the ones place."
+    },
+    "reasoningLeak": {
+      "active": {
+        "tag": "BODY",
+        "id": null,
+        "connected": true,
+        "visible": true
+      },
+      "phase": null,
+      "prompt": "Point to the first column left of the ones that actually contains a unit.",
+      "feedback": "You selected a possible source. Explain how the unit reaches the ones place.",
+      "reasoningValue": "I started at the ones place."
+    },
+    "firstDifferentExample": {
+      "active": {
+        "tag": "BUTTON",
+        "id": "continue",
+        "connected": true,
+        "visible": false
+      },
+      "phase": null,
+      "prompt": "The thousands place has a unit. What is the first equal trade?",
+      "feedback": "Good evidence on this item. It is not mastery yet; now transfer the reasoning to the first trade.",
+      "reasoningValue": "The first nonzero place is thousands."
+    },
+    "secondReasoningLeak": {
+      "active": {
+        "tag": "BODY",
+        "id": null,
+        "connected": true,
+        "visible": true
+      },
+      "phase": null,
+      "prompt": "The thousands place has a unit. What is the first equal trade?",
+      "feedback": "You selected a possible source. Explain how the unit reaches the ones place.",
+      "reasoningValue": "The first nonzero place is thousands."
+    },
+    "repeatedDifferentExample": {
+      "active": {
+        "tag": "BUTTON",
+        "id": "continue",
+        "connected": true,
+        "visible": false
+      },
+      "phase": null,
+      "prompt": "The thousands place has a unit. What is the first equal trade?",
+      "feedback": "Good evidence on this item. It is not mastery yet; now transfer the reasoning to the first trade.",
+      "reasoningValue": "One thousand is ten hundreds."
+    },
+    "uncertaintyConverted": {
+      "active": {
+        "tag": "BUTTON",
+        "id": "continue",
+        "connected": true,
+        "visible": false
+      },
+      "phase": null,
+      "prompt": "The thousands place has a unit. What is the first equal trade?",
+      "feedback": "Good evidence on this item. It is not mastery yet; now transfer the reasoning to the first trade.",
+      "reasoningValue": "I am not sure; I guessed."
+    }
+  },
+  "assertions": {
+    "keyboardAnswerLostFocus": true,
+    "continueLostFocus": true,
+    "reasoningLeaked": true,
+    "repeatedState": true,
+    "uncertaintyBecamePositiveEvidence": true
+  },
+  "consoleEntries": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "pageErrors": []
+}

@@ -1,0 +1,90 @@
+{
+  "representations": [
+    "word-problem-organizer",
+    "step-diagram",
+    "array",
+    "number-line"
+  ],
+  "boards": [
+    {
+      "id": "wp-board-01",
+      "kind": "word-problem-organizer",
+      "action": "fill",
+      "payload": {
+        "fields": [
+          "What is asked?",
+          "Known quantities and units",
+          "Useful or extra?",
+          "Hidden first question",
+          "Operation plan",
+          "Check"
+        ]
+      },
+      "altText": "Organizer with boxes for the question, quantities, relevance, hidden question, plan, and check.",
+      "narrationCue": "wp-n03"
+    },
+    {
+      "id": "wp-board-02",
+      "kind": "step-diagram",
+      "action": "connect",
+      "payload": {
+        "steps": [
+          "8 boxes × 6 notebooks",
+          "48 notebooks − 19 sold",
+          "notebooks remaining"
+        ],
+        "arrows": [
+          "creates starting total",
+          "answers final question"
+        ]
+      },
+      "altText": "Two-step diagram multiplying to find a total, then subtracting sold notebooks.",
+      "narrationCue": "wp-n05"
+    },
+    {
+      "id": "wp-board-03",
+      "kind": "array",
+      "action": "show",
+      "payload": {
+        "rows": 7,
+        "columns": 24,
+        "label": "books before checkout"
+      },
+      "altText": "Array representing seven shelves with twenty-four books on each shelf.",
+      "narrationCue": "wp-n04"
+    },
+    {
+      "id": "wp-board-04",
+      "kind": "step-diagram",
+      "action": "annotate-units",
+      "payload": {
+        "expression": "24 students × $12/student + $85 bus fee",
+        "units": [
+          "students",
+          "dollars per student",
+          "dollars"
+        ]
+      },
+      "altText": "Unit-labeled expression showing student units cancel to dollars before adding a dollar fee.",
+      "narrationCue": "wp-n06"
+    },
+    {
+      "id": "wp-board-05",
+      "kind": "number-line",
+      "action": "estimate",
+      "payload": {
+        "start": 400,
+        "subtractApprox": 370,
+        "endApprox": 30,
+        "unit": "dollars"
+      },
+      "altText": "Number line estimating four hundred dollars minus about three hundred seventy dollars to about thirty dollars.",
+      "narrationCue": "wp-n08"
+    }
+  ],
+  "accessibility": [
+    "Organizer fields use plain language and can be read aloud.",
+    "Units appear in text, not only color.",
+    "Problems remain solvable with pencil and paper only."
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "items": [
+    {
+      "id": "math-fr-m01",
+      "type": "multiple-choice",
+      "prompt": "Which fraction is equivalent to 7/10?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "14/20"
+        },
+        {
+          "id": "B",
+          "text": "14/10"
+        },
+        {
+          "id": "C",
+          "text": "7/20"
+        },
+        {
+          "id": "D",
+          "text": "21/40"
+        }
+      ],
+      "correctChoiceId": "A",
+      "reasoning": "Multiply numerator and denominator by 2.",
+      "misconceptionSignals": {
+        "B": [
+          "math-mis-fr-one-sided-scale"
+        ],
+        "C": [
+          "math-mis-fr-one-sided-scale"
+        ],
+        "D": [
+          "math-mis-fr-one-sided-scale"
+        ]
+      },
+      "representation": "symbolic",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-fr-m02",
+      "type": "multiple-choice",
+      "prompt": "What is 3/5 + 1/2?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "4/7"
+        },
+        {
+          "id": "B",
+          "text": "11/10"
+        },
+        {
+          "id": "C",
+          "text": "8/10"
+        },
+        {
+          "id": "D",
+          "text": "9/10"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "3/5 = 6/10 and 1/2 = 5/10, so the sum is 11/10.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-fr-add-denominators"
+        ],
+        "C": [
+          "math-mis-fr-one-sided-scale"
+        ],
+        "D": [
+          "math-mis-fr-one-sided-scale"
+        ]
+      },
+      "representation": "symbolic",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-fr-m03",
+      "type": "multiple-choice",
+      "prompt": "What is 7/8 − 1/6?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "6/2"
+        },
+        {
+          "id": "B",
+          "text": "17/24"
+        },
+        {
+          "id": "C",
+          "text": "6/14"
+        },
+        {
+          "id": "D",
+          "text": "20/48"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "7/8 = 21/24 and 1/6 = 4/24; the difference is 17/24.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-fr-add-denominators"
+        ],
+        "C": [
+          "math-mis-fr-add-denominators"
+        ],
+        "D": [
+          "math-mis-fr-common-product-only"
+        ]
+      },
+      "representation": "fraction-bars",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-fr-m04",
+      "type": "open-response",
+      "prompt": "Compare 4/5 and 7/9 using a common denominator or another valid strategy.",
+      "acceptableEvidence": [
+        "Concludes 4/5 > 7/9.",
+        "Uses forty-fifths: 36/45 > 35/45, or valid cross-products/number line.",
+        "Explains the comparison."
+      ],
+      "reasoning": "4/5 is greater because 36/45 is greater than 35/45.",
+      "misconceptionSignals": {
+        "uses denominator size only": [
+          "math-mis-fr-whole-number-rules"
+        ]
+      },
+      "representation": "number-line",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-fr-m05",
+      "type": "open-response",
+      "prompt": "Create two different fractions equivalent to 5/6 and explain the scaling factor for each.",
+      "acceptableEvidence": [
+        "Examples: 10/12 by ×2/2; 15/18 by ×3/3.",
+        "Scales numerator and denominator equally.",
+        "Explains value stays equal."
+      ],
+      "reasoning": "Any same-factor scaling of numerator and denominator produces an equivalent fraction.",
+      "misconceptionSignals": {
+        "one-sided scaling": [
+          "math-mis-fr-one-sided-scale"
+        ]
+      },
+      "representation": "fraction-bars",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-fr-m06",
+      "type": "open-response",
+      "prompt": "Solve 2/3 + 3/10, simplify if needed, and explain why your denominator is valid.",
+      "acceptableEvidence": [
+        "Uses denominator 30 or another valid common denominator.",
+        "Gets 20/30 + 9/30 = 29/30.",
+        "Explains the denominator is a multiple of both 3 and 10."
+      ],
+      "reasoning": "The least common denominator is 30, and the sum is 29/30.",
+      "misconceptionSignals": {
+        "adds denominators": [
+          "math-mis-fr-add-denominators"
+        ],
+        "unnecessary denominator only": [
+          "math-mis-fr-common-product-only"
+        ]
+      },
+      "representation": "mixed",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    }
+  ],
+  "masteryRule": "Across at least two sessions, show secure evidence on at least 5 of 6 items, including equivalence, unlike-denominator operation, comparison, and an explanation with a model. One correct fraction answer is not mastery.",
+  "retryRule": "Use new denominators and switch representation after reteaching."
+}

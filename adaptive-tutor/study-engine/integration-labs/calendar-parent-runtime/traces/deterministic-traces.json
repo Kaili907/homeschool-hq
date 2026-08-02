@@ -1,0 +1,93 @@
+{
+  "artifact": "manuel-academy.calendar-parent-runtime.deterministic-traces",
+  "version": 1,
+  "generatedOn": "2026-07-29",
+  "scenarios": [
+    {
+      "scenario": "retrieval-failure",
+      "metrics": [
+        "Required instruction:60 min",
+        "Review budget:18 min",
+        "Reviews held:2",
+        "Retry window:10:30"
+      ],
+      "ids": [
+        "review:fractions-equivalence",
+        "queue:review-fractions:attempt-02",
+        "engine-rec:fractions:0002",
+        "authorization:parent-fractions-retry"
+      ]
+    },
+    {
+      "scenario": "successful-review",
+      "metrics": [
+        "Attempt:4 / 4",
+        "Independence:95%",
+        "Next interval:4 days",
+        "Next review:2026-08-01"
+      ],
+      "ids": [
+        "result:review-fractions:attempt-03",
+        "evidence:review-fractions:attempt-03",
+        "queue:review-fractions:attempt-04",
+        "outbox:return-review-fractions:attempt-03"
+      ]
+    },
+    {
+      "scenario": "partial-resume",
+      "metrics": [
+        "Required work:50%",
+        "Remaining:16 min",
+        "Actual work:10 min",
+        "Continuation:idempotent"
+      ],
+      "ids": [
+        "block:fractions-lesson-006",
+        "lesson:fractions-006",
+        "block:fractions-lesson-006:continuation-01"
+      ]
+    },
+    {
+      "scenario": "parent-rejects",
+      "metrics": [
+        "Recommendation:35 min",
+        "Parent maximum:20 min",
+        "Decision:Rejected",
+        "History:2"
+      ],
+      "ids": [
+        "recommendation:consider-increase",
+        "event:reject-increase",
+        "card5.resolve-duration-policy.v1"
+      ]
+    },
+    {
+      "scenario": "accommodation",
+      "metrics": [
+        "Work maximum:12 min",
+        "Break:8 min",
+        "Timer:Hidden",
+        "Controls replayed:10"
+      ],
+      "ids": [
+        "controls:runtime-lab",
+        "card5.resolve-duration-policy.v1",
+        "private:runtime-lab"
+      ]
+    },
+    {
+      "scenario": "romeo",
+      "metrics": [
+        "Source mode:Manual",
+        "Progress:3 / 5 → 5 / 5",
+        "Estimate:35 min",
+        "Credentials:0"
+      ],
+      "ids": [
+        "rva:algebra-204",
+        "block:romeo:algebra-204",
+        "skill:solve-two-step-equations"
+      ]
+    }
+  ]
+}

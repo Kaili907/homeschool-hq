@@ -1,0 +1,116 @@
+{
+  "representations": [
+    "fraction-bar",
+    "number-line",
+    "area-model",
+    "multiples-list",
+    "step-diagram"
+  ],
+  "boards": [
+    {
+      "id": "fr-board-01",
+      "kind": "fraction-bar",
+      "action": "overlay",
+      "payload": {
+        "first": {
+          "numerator": 2,
+          "denominator": 3
+        },
+        "second": {
+          "numerator": 4,
+          "denominator": 6
+        }
+      },
+      "altText": "Equal-length fraction bars showing two thirds and four sixths cover the same amount.",
+      "narrationCue": "fr-n03"
+    },
+    {
+      "id": "fr-board-02",
+      "kind": "number-line",
+      "action": "mark",
+      "payload": {
+        "min": 0,
+        "max": 1,
+        "marks": [
+          "3/4",
+          "6/8"
+        ],
+        "samePoint": true
+      },
+      "altText": "Number line from zero to one with three fourths and six eighths at the same point.",
+      "narrationCue": "fr-n04"
+    },
+    {
+      "id": "fr-board-03",
+      "kind": "fraction-bar",
+      "action": "rename",
+      "payload": {
+        "fractions": [
+          "2/3",
+          "1/4"
+        ],
+        "commonDenominator": 12,
+        "renamed": [
+          "8/12",
+          "3/12"
+        ]
+      },
+      "altText": "Fraction bars rename two thirds and one fourth into twelfths.",
+      "narrationCue": "fr-n06"
+    },
+    {
+      "id": "fr-board-04",
+      "kind": "step-diagram",
+      "action": "list-multiples",
+      "payload": {
+        "denominators": [
+          6,
+          4
+        ],
+        "multiples": {
+          "6": [
+            6,
+            12,
+            18,
+            24
+          ],
+          "4": [
+            4,
+            8,
+            12,
+            16,
+            20,
+            24
+          ]
+        },
+        "leastCommon": 12
+      },
+      "altText": "Lists multiples of six and four and highlights twelve as the first shared multiple.",
+      "narrationCue": "fr-n05"
+    },
+    {
+      "id": "fr-board-05",
+      "kind": "area-model",
+      "action": "compare",
+      "payload": {
+        "wholeSize": "same",
+        "fractions": [
+          "5/6",
+          "7/9"
+        ],
+        "commonGrid": [
+          18,
+          15,
+          14
+        ]
+      },
+      "altText": "Equal-size area models compare fifteen eighteenths with fourteen eighteenths.",
+      "narrationCue": "fr-n08"
+    }
+  ],
+  "accessibility": [
+    "Every model specifies an equal-size whole.",
+    "Patterns or labels supplement shading.",
+    "All visual reasoning is duplicated in words and equations."
+  ]
+}

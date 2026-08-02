@@ -1,0 +1,239 @@
+{
+  "items": [
+    {
+      "id": "math-md-d01",
+      "type": "multiple-choice",
+      "prompt": "Which picture represents 4 groups of 6?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "An array with 4 rows of 6"
+        },
+        {
+          "id": "B",
+          "text": "An array with 6 rows of 4"
+        },
+        {
+          "id": "C",
+          "text": "A line of 10 objects"
+        },
+        {
+          "id": "D",
+          "text": "24 objects with no grouping"
+        }
+      ],
+      "correctChoiceId": "A",
+      "reasoning": "Four groups with six in each group can be shown as four rows of six.",
+      "misconceptionSignals": {
+        "B": [
+          "math-mis-md-groups-size-swap"
+        ],
+        "C": [
+          "math-mis-md-repeated-add-only"
+        ],
+        "D": [
+          "math-mis-md-groups-size-swap"
+        ]
+      },
+      "representation": "array",
+      "difficultyBand": "entry",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-d02",
+      "type": "multiple-choice",
+      "prompt": "Use 7 × 8 = 56. Which division equation is in the same fact family?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "56 ÷ 7 = 8"
+        },
+        {
+          "id": "B",
+          "text": "56 ÷ 8 = 7"
+        },
+        {
+          "id": "C",
+          "text": "Both A and B"
+        },
+        {
+          "id": "D",
+          "text": "56 − 8 = 48"
+        }
+      ],
+      "correctChoiceId": "C",
+      "reasoning": "Multiplication and division use the same three numbers in inverse equations.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-md-inverse-gap"
+        ],
+        "B": [
+          "math-mis-md-inverse-gap"
+        ],
+        "D": [
+          "math-mis-md-division-subtraction"
+        ]
+      },
+      "representation": "fact-family",
+      "difficultyBand": "entry",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-d03",
+      "type": "multiple-choice",
+      "prompt": "What does 24 ÷ 6 ask in a “groups of 6” interpretation?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Subtract 6 once from 24"
+        },
+        {
+          "id": "B",
+          "text": "Find how many groups of 6 fit in 24"
+        },
+        {
+          "id": "C",
+          "text": "Add 24 and 6"
+        },
+        {
+          "id": "D",
+          "text": "Find 24 groups of 6"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "Division can ask how many equal groups of the divisor fit in the dividend.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-md-division-subtraction"
+        ],
+        "C": [
+          "math-mis-md-inverse-gap"
+        ],
+        "D": [
+          "math-mis-md-groups-size-swap"
+        ]
+      },
+      "representation": "equal-groups",
+      "difficultyBand": "entry",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-d04",
+      "type": "multiple-choice",
+      "prompt": "Which partial products correctly decompose 23 × 6?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "20 × 6 and 3 × 6"
+        },
+        {
+          "id": "B",
+          "text": "2 × 6 and 3 × 6"
+        },
+        {
+          "id": "C",
+          "text": "23 × 3 and 23 × 3 only"
+        },
+        {
+          "id": "D",
+          "text": "20 × 3 and 6 × 3"
+        }
+      ],
+      "correctChoiceId": "A",
+      "reasoning": "Split 23 into 20 + 3, multiply each part by 6, then combine.",
+      "misconceptionSignals": {
+        "B": [
+          "math-mis-md-partial-product"
+        ],
+        "C": [
+          "math-mis-md-repeated-add-only"
+        ],
+        "D": [
+          "math-mis-md-partial-product"
+        ]
+      },
+      "representation": "area-model",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-d05",
+      "type": "multiple-choice",
+      "prompt": "A teacher has 156 markers and puts 12 in each bin. Which equation can check the number of full bins?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "12 + ? = 156"
+        },
+        {
+          "id": "B",
+          "text": "12 × ? = 156"
+        },
+        {
+          "id": "C",
+          "text": "156 × 12 = ?"
+        },
+        {
+          "id": "D",
+          "text": "156 − 12 = ?"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "The unknown number of bins times 12 markers per bin must equal 156.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-md-inverse-gap"
+        ],
+        "C": [
+          "math-mis-md-groups-size-swap"
+        ],
+        "D": [
+          "math-mis-md-division-subtraction"
+        ]
+      },
+      "representation": "equation",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-d06",
+      "type": "open-response",
+      "prompt": "Thirty students ride in vans that hold 8 students each. Explain what the remainder means and how many vans are needed.",
+      "acceptableEvidence": [
+        "Computes 30 ÷ 8 = 3 remainder 6.",
+        "Explains 3 vans are full and 6 students still need a van.",
+        "Concludes 4 vans are needed."
+      ],
+      "reasoning": "The remainder represents students who still need transportation, so the context requires one additional van.",
+      "misconceptionSignals": {
+        "drops remainder": [
+          "math-mis-md-remainder-rule"
+        ],
+        "reports 3 R6 vans": [
+          "math-mis-md-remainder-rule"
+        ]
+      },
+      "representation": "equal-groups",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    }
+  ],
+  "routingRules": [
+    {
+      "when": "basic equal-group meaning is insecure",
+      "route": "prerequisite-remediation-md-groups"
+    },
+    {
+      "when": "inverse evidence is weak",
+      "route": "reteach-md-fact-family"
+    },
+    {
+      "when": "partial product omitted",
+      "route": "reteach-md-area-model"
+    },
+    {
+      "when": "remainder is handled mechanically",
+      "route": "reteach-md-remainder-context"
+    }
+  ]
+}

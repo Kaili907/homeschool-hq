@@ -1,0 +1,86 @@
+[
+  {
+    "id": "math-mis-wp-keyword-only",
+    "label": "Chooses operations from one keyword",
+    "likelyEvidence": [
+      "Sees “left” and always subtracts, even when the structure differs.",
+      "Sees “each” and multiplies without identifying known and unknown quantities."
+    ],
+    "distinguishingEvidence": [
+      "Remove the keyword and ask for a diagram.",
+      "Use two stories with the same keyword but different structures."
+    ],
+    "firstResponse": "A keyword can be a clue, but the quantities and their relationships decide the operation.",
+    "route": "reteach-wp-relationships"
+  },
+  {
+    "id": "math-mis-wp-use-all-numbers",
+    "label": "Uses every number whether relevant or not",
+    "likelyEvidence": [
+      "Includes a date, room number, or unused count in a calculation.",
+      "Cannot explain what a number measures."
+    ],
+    "distinguishingEvidence": [
+      "Ask for units beside every number.",
+      "Ask which quantities connect to the question."
+    ],
+    "firstResponse": "Not every number must be used. Let’s label what each number measures and connect only the needed quantities.",
+    "route": "reteach-wp-relevant-data"
+  },
+  {
+    "id": "math-mis-wp-one-step-stop",
+    "label": "Stops after an intermediate result",
+    "likelyEvidence": [
+      "Finds total made but not how many remain.",
+      "Answers the first hidden question rather than the stated question."
+    ],
+    "distinguishingEvidence": [
+      "Ask “What does this number answer?”",
+      "Underline the final question and compare units."
+    ],
+    "firstResponse": "That number answers an important first step. Now let’s return to the question and see what is still missing.",
+    "route": "reteach-wp-answer-target"
+  },
+  {
+    "id": "math-mis-wp-wrong-order",
+    "label": "Uses correct operations in the wrong order",
+    "likelyEvidence": [
+      "Subtracts before finding the total produced.",
+      "Treats a fee as part of a per-person amount."
+    ],
+    "distinguishingEvidence": [
+      "Build a step diagram with arrows.",
+      "Ask which quantity must exist before the next calculation can happen."
+    ],
+    "firstResponse": "You selected useful operations. Let’s put them in dependency order so each step creates what the next step needs.",
+    "route": "reteach-wp-step-order"
+  },
+  {
+    "id": "math-mis-wp-unit-mismatch",
+    "label": "Combines quantities with incompatible units",
+    "likelyEvidence": [
+      "Adds students to dollars or boxes to individual items.",
+      "Writes a numeric answer without the requested unit."
+    ],
+    "distinguishingEvidence": [
+      "Label every quantity and operation with units.",
+      "Ask what one product or quotient represents."
+    ],
+    "firstResponse": "The numbers need matching meanings before they can be combined. Let’s attach a unit to every quantity.",
+    "route": "reteach-wp-units"
+  },
+  {
+    "id": "math-mis-wp-no-check",
+    "label": "Accepts a computation without checking reasonableness or the question",
+    "likelyEvidence": [
+      "Reports more items remaining than were made.",
+      "Does not notice negative or impossible context results."
+    ],
+    "distinguishingEvidence": [
+      "Estimate before exact calculation.",
+      "Substitute the result back into the story."
+    ],
+    "firstResponse": "The calculation is not the last step. Let’s check the size, unit, and whether it answers the actual question.",
+    "route": "reteach-wp-check"
+  }
+]

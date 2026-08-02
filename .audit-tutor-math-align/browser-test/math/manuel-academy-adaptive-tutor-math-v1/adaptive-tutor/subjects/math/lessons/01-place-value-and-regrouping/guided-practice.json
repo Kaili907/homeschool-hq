@@ -1,0 +1,196 @@
+{
+  "items": [
+    {
+      "id": "math-pv-g01",
+      "type": "multiple-choice",
+      "prompt": "What is the value of the 5 in 651,204?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "500"
+        },
+        {
+          "id": "C",
+          "text": "50,000"
+        },
+        {
+          "id": "D",
+          "text": "500,000"
+        }
+      ],
+      "correctChoiceId": "C",
+      "reasoning": "The 5 is in the ten-thousands place.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-pv-digit-vs-value"
+        ],
+        "B": [
+          "math-mis-pv-digit-vs-value"
+        ],
+        "D": [
+          "math-mis-pv-left-align"
+        ]
+      },
+      "representation": "place-value-chart",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-g02",
+      "type": "multiple-choice",
+      "prompt": "Which number is greater?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "608,041"
+        },
+        {
+          "id": "B",
+          "text": "680,014"
+        },
+        {
+          "id": "C",
+          "text": "They are equal"
+        },
+        {
+          "id": "D",
+          "text": "Not enough information"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "At the ten-thousands place, 8 is greater than 0.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-pv-zero-skip"
+        ],
+        "C": [
+          "math-mis-pv-zero-skip"
+        ]
+      },
+      "representation": "place-value-chart",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-g03",
+      "type": "multiple-choice",
+      "prompt": "What is 27,685 + 14,739?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "41,314"
+        },
+        {
+          "id": "B",
+          "text": "42,424"
+        },
+        {
+          "id": "C",
+          "text": "42,324"
+        },
+        {
+          "id": "D",
+          "text": "41,424"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "Regroup ones, tens, hundreds, and thousands while keeping place alignment.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-pv-regroup-changes-number"
+        ],
+        "C": [
+          "math-mis-pv-left-align"
+        ],
+        "D": [
+          "math-mis-pv-regroup-changes-number"
+        ]
+      },
+      "representation": "column-arithmetic",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-g04",
+      "type": "multiple-choice",
+      "prompt": "What is 70,003 − 28,746?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "41,257"
+        },
+        {
+          "id": "B",
+          "text": "42,743"
+        },
+        {
+          "id": "C",
+          "text": "58,657"
+        },
+        {
+          "id": "D",
+          "text": "41,343"
+        }
+      ],
+      "correctChoiceId": "A",
+      "reasoning": "Regroup across the zeros, then subtract in order by place.",
+      "misconceptionSignals": {
+        "B": [
+          "math-mis-pv-big-minus-small"
+        ],
+        "C": [
+          "math-mis-pv-borrow-zero"
+        ],
+        "D": [
+          "math-mis-pv-borrow-zero"
+        ]
+      },
+      "representation": "column-arithmetic",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-g05",
+      "type": "open-response",
+      "prompt": "Use a place-value chart or words to explain the first regrouping in 36,482 + 7,659.",
+      "acceptableEvidence": [
+        "Identifies 2 + 9 = 11 ones.",
+        "Trades 10 ones for 1 ten and leaves 1 one.",
+        "Carries/adds 1 ten to the tens column."
+      ],
+      "reasoning": "The ones total 11, so regroup as 1 ten and 1 one.",
+      "misconceptionSignals": {
+        "does not remove 10 ones": [
+          "math-mis-pv-regroup-changes-number"
+        ]
+      },
+      "representation": "place-value-chart",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-g06",
+      "type": "open-response",
+      "prompt": "Estimate 90,004 − 27,568, then explain whether an exact answer near 62,000 would be reasonable.",
+      "acceptableEvidence": [
+        "Rounds to compatible values such as 90,000 − 28,000.",
+        "Concludes about 62,000 is reasonable.",
+        "Uses the estimate to check size, not replace the exact calculation."
+      ],
+      "reasoning": "90,000 − 28,000 is about 62,000, so an exact answer near that amount is reasonable.",
+      "misconceptionSignals": {
+        "estimate far from exact": [
+          "math-mis-pv-digit-vs-value"
+        ]
+      },
+      "representation": "number-line",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    }
+  ],
+  "scaffolding": "Begin with model choice, fade to symbolic work, and ask for reasoning on at least two items."
+}

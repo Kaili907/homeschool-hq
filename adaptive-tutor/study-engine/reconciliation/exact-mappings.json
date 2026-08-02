@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "canonicalAuthority": "CARD-1-STUDY-CONTRACTS.zip",
+  "fieldMappings": [
+    {
+      "source": "S2.ProvisionalSessionContext.sessionRef",
+      "target": "S1.StudySession.id",
+      "conversion": "identity",
+      "disposition": "safe-adapter"
+    },
+    {
+      "source": "S2.ProvisionalSessionContext.gradeBand",
+      "target": "S1.LessonStudyPlan.gradeBand",
+      "conversion": "elementary=>elementary-3-5;middle=>middle-6-8;high=>high-9-12",
+      "disposition": "safe-adapter"
+    },
+    {
+      "source": "S2.ProvisionalSessionContext.subjectKey",
+      "target": "S1.LessonStudyPlan.subjectId",
+      "conversion": "governed opaque-ID registry; never normalize",
+      "disposition": "required-registry"
+    },
+    {
+      "source": "S2.ProvisionalSessionContext.taskTypeKey",
+      "target": "S1.LessonSegment.taskType/customTaskTypeId",
+      "conversion": "closed canonical type or custom+ID",
+      "disposition": "safe-adapter"
+    },
+    {
+      "source": "S2.ProvisionalSessionContext.timeZone",
+      "target": "S1.StudentSkillReview.timeZone",
+      "conversion": "IANA value preserved",
+      "disposition": "safe-adapter"
+    },
+    {
+      "source": "S2.StudySessionState.phase/cycleNumber/history",
+      "target": "Study checkpoint sidecar",
+      "conversion": "versioned sidecar only; never canonical state",
+      "disposition": "retire-as-canonical"
+    },
+    {
+      "source": "S3.StudySession.currentSegment",
+      "target": "S1.ResumePoint.segmentId",
+      "conversion": "resolve prototype segment key through LessonStudyPlan.segmentSequence",
+      "disposition": "required-mapping"
+    },
+    {
+      "source": "S3.TimerState.remainingSeconds",
+      "target": "S1.ResumePoint.elapsedActiveSecondsInSegment",
+      "conversion": "none; lesson countdown is not per-segment active time",
+      "disposition": "blocked-add-segment-counter"
+    },
+    {
+      "source": "S3.StudySession.answers[currentSegment]",
+      "target": "S1.ResumePoint.responseDraftRef",
+      "conversion": "allocate protected opaque draft reference; never copy raw value",
+      "disposition": "required-sidecar"
+    },
+    {
+      "source": "S3.answers/checkIn/reflection/transcript",
+      "target": "S1 Study events/evidence/recommendations",
+      "conversion": "excluded",
+      "disposition": "privacy-boundary"
+    },
+    {
+      "source": "TutorCore.ConfidenceObservation",
+      "target": "S1.LearningEvidence",
+      "conversion": "approved aggregate score/independence/evidence refs only",
+      "disposition": "required-tutor-projection"
+    },
+    {
+      "source": "TutorCore.ConfidenceEstimate",
+      "target": "S1.LearningEvidence.confidence",
+      "conversion": "none; instructional statistical confidence differs from sourced 1..5 rating",
+      "disposition": "keep-distinct"
+    },
+    {
+      "source": "TutorCore.TutorEngineSnapshot.transcript/LearnerInput.raw",
+      "target": "S1 Study boundary",
+      "conversion": "excluded",
+      "disposition": "privacy-blocker"
+    },
+    {
+      "source": "S4.ParentControlState.privateNotes/actionLog.body",
+      "target": "S1.ParentTeacherPrivateRecord.notes",
+      "conversion": "authorized author/category/IDs required; controls retain privateRecordRef only",
+      "disposition": "required-private-adapter"
+    },
+    {
+      "source": "S4.ReviewItem.reviewRef/skillRef/scheduledDate",
+      "target": "S1.StudentSkillReview.id/skillId/nextReviewDate",
+      "conversion": "opaque identity/date preservation",
+      "disposition": "safe-adapter"
+    },
+    {
+      "source": "S4.CalendarBlock",
+      "target": "Calendar sidecar",
+      "conversion": "preserve S1 plan/review refs, IANA zone, local date, revision and dedupe",
+      "disposition": "sidecar-authority"
+    },
+    {
+      "source": "S4.RomeoVirtualAcademyAssignment",
+      "target": "Credential-free external-assignment sidecar",
+      "conversion": "namespaced external ref; completion remains Romeo-owned",
+      "disposition": "sidecar-authority"
+    }
+  ],
+  "enumMappings": {
+    "gradeBand": {
+      "S2.elementary": "S1.elementary-3-5",
+      "S2.middle": "S1.middle-6-8",
+      "S2.high": "S1.high-9-12",
+      "S2.middle_school": "S1.middle-6-8",
+      "S2.high_school": "S1.high-9-12"
+    },
+    "timer": {
+      "S3.visible": "S1.count-down",
+      "S3.minimal": "S1.progress-bar",
+      "S3.hidden": "S1.hidden",
+      "S4.true": "S1.hidden",
+      "S4.false": "no-lossless-target"
+    },
+    "break": {
+      "S2.planned": "S1.scheduled-break",
+      "S2.student_requested": "S1.student-request",
+      "S2.movement": "S1.student-request+detailCode",
+      "S2.water": "S1.student-request+detailCode",
+      "S2.screen_rest": "S1.student-request+detailCode",
+      "S2.quiet_reset": "S1.student-request+detailCode",
+      "S2.parent_configured": "S1.adult-directed+detailCode"
+    },
+    "reviewKindToNextAction": {
+      "S4.review": "S1.review",
+      "S4.reteaching": "S1.reteach",
+      "S4.prerequisite_remediation": "S1.prerequisite-remediation"
+    },
+    "reviewInterval": {
+      "S2.0": "S1.same-day",
+      "S2.1": "S1.one-day",
+      "S2.3": "S1.three-day",
+      "S2.7": "S1.seven-day",
+      "S2.14": "S1.fourteen-day",
+      "S2.30": "S1.thirty-day",
+      "S2.other": "S1.custom"
+    },
+    "notMapped": {
+      "S2.correct|reteach": "not a Tutor Core wire enum; retire",
+      "TutorCore.TutorPhase": "instructional phase only; never S1 session/mastery enum",
+      "S4.RomeoCompletionState": "external sidecar only"
+    }
+  },
+  "eventMappings": [
+    {
+      "source": "S2.check_in_completed",
+      "targets": [],
+      "rule": "drop raw check-in; no canonical learning event"
+    },
+    {
+      "source": "S2.prior_retrieval_completed|visual_teaching_completed|guided_practice_completed|independent_attempt_completed",
+      "targets": [
+        "S1.active-response-recorded",
+        "S1.segment-completed"
+      ],
+      "rule": "emit only when canonical segment/evidence data exists"
+    },
+    {
+      "source": "S2.confidence_check_completed",
+      "targets": [],
+      "rule": "blocked until Tutor-owned decision projection exists"
+    },
+    {
+      "source": "S2.review_scheduled",
+      "targets": [
+        "S1.StudentSkillReview update"
+      ],
+      "rule": "not a StudySessionEvent"
+    },
+    {
+      "source": "S2.pacing_disposition_recorded:break",
+      "targets": [
+        "S1.break-requested",
+        "S1.break-approved",
+        "S1.break-started"
+      ],
+      "rule": "approval fields required before later events"
+    },
+    {
+      "source": "S2.pacing_disposition_recorded:continue",
+      "targets": [],
+      "rule": "start/resume next authorized segment; no synthetic event"
+    },
+    {
+      "source": "S2.pacing_disposition_recorded:finish",
+      "targets": [
+        "S1.session-completed"
+      ],
+      "rule": "complete SessionResult required"
+    },
+    {
+      "source": "S2.break_resume_confirmed",
+      "targets": [
+        "S1.break-ended",
+        "S1.session-resumed"
+      ],
+      "rule": "resume point and interruption correlation required"
+    },
+    {
+      "source": "S3.ui/segment-completed|segment_completed",
+      "targets": [
+        "S1.segment-completed"
+      ],
+      "rule": "completionKey becomes sidecar idempotency metadata"
+    },
+    {
+      "source": "S3.technical_interruption",
+      "targets": [
+        "S1.technical-interruption-started",
+        "S1.technical-interruption-ended",
+        "S1.session-resumed"
+      ],
+      "rule": "category application-restart; end/resume emitted only after recovery"
+    },
+    {
+      "source": "S3.intentional_save_exit|ui/work-saved",
+      "targets": [],
+      "rule": "checkpoint persistence only"
+    }
+  ],
+  "versionMappings": [
+    {
+      "source": "S1 numeric schemaVersion 1",
+      "target": "canonical",
+      "unsupported": "inspect then lossless read-only quarantine"
+    },
+    {
+      "source": "S2 provisional.study-engine.session-context.v1",
+      "target": "S1 aggregate inputs",
+      "disposition": "retire"
+    },
+    {
+      "source": "S2 provisional.tutor-core.instruction-outcome.v1",
+      "target": "new Tutor-owned decision projection",
+      "disposition": "retire-blocked"
+    },
+    {
+      "source": "S2 provisional-study-session.v1",
+      "target": "S1 StudySession + Study checkpoint",
+      "disposition": "retire"
+    },
+    {
+      "source": "S3 study-ux.workspace.v1",
+      "target": "prototype local cache behind canonical checkpoint",
+      "disposition": "retire-production-authority"
+    },
+    {
+      "source": "S4 provisional-*.v1",
+      "target": "S1 aggregates or approved sidecars",
+      "disposition": "retire-wire-authority"
+    },
+    {
+      "source": "Tutor Core semver",
+      "target": "nested instructional contentVersion",
+      "disposition": "preserve-frozen"
+    }
+  ],
+  "retirementOrder": [
+    "introduce canonical boundary and quarantine",
+    "introduce governed ID registry",
+    "introduce Tutor decision projection",
+    "introduce versioned Study checkpoint/draft sidecar",
+    "map Session 2 algorithms",
+    "map Session 3 intents and presentation",
+    "map Session 4 review/calendar/parent/Romeo sidecars",
+    "migrate callers and fixtures",
+    "forbid provisional imports at production boundaries",
+    "remove provisional wire authorities during later authorized merge"
+  ]
+}

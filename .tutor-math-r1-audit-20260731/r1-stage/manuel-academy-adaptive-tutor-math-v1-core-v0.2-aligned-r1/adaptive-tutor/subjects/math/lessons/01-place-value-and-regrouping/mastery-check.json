@@ -1,0 +1,182 @@
+{
+  "items": [
+    {
+      "id": "math-pv-m01",
+      "type": "multiple-choice",
+      "prompt": "What is the value of the 8 in 583,417?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "8,000"
+        },
+        {
+          "id": "B",
+          "text": "80,000"
+        },
+        {
+          "id": "C",
+          "text": "800,000"
+        },
+        {
+          "id": "D",
+          "text": "800"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "The 8 is in the ten-thousands place.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-pv-digit-vs-value"
+        ],
+        "C": [
+          "math-mis-pv-left-align"
+        ],
+        "D": [
+          "math-mis-pv-digit-vs-value"
+        ]
+      },
+      "representation": "symbolic",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-m02",
+      "type": "multiple-choice",
+      "prompt": "What is 48,796 + 36,587?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "84,273"
+        },
+        {
+          "id": "B",
+          "text": "85,383"
+        },
+        {
+          "id": "C",
+          "text": "85,283"
+        },
+        {
+          "id": "D",
+          "text": "84,383"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "Add by place and regroup each total of ten or more.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-pv-regroup-changes-number"
+        ],
+        "C": [
+          "math-mis-pv-left-align"
+        ],
+        "D": [
+          "math-mis-pv-regroup-changes-number"
+        ]
+      },
+      "representation": "column-arithmetic",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-m03",
+      "type": "multiple-choice",
+      "prompt": "What is 80,010 − 46,875?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "33,135"
+        },
+        {
+          "id": "B",
+          "text": "34,245"
+        },
+        {
+          "id": "C",
+          "text": "44,865"
+        },
+        {
+          "id": "D",
+          "text": "33,245"
+        }
+      ],
+      "correctChoiceId": "A",
+      "reasoning": "Regroup across zeros while preserving subtraction order.",
+      "misconceptionSignals": {
+        "B": [
+          "math-mis-pv-borrow-zero"
+        ],
+        "C": [
+          "math-mis-pv-big-minus-small"
+        ],
+        "D": [
+          "math-mis-pv-borrow-zero"
+        ]
+      },
+      "representation": "column-arithmetic",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-m04",
+      "type": "open-response",
+      "prompt": "Explain how you know 509,030 is greater than 590,003 or correct the statement if it is false.",
+      "acceptableEvidence": [
+        "Corrects the statement: 509,030 is less than 590,003.",
+        "Compares the ten-thousands place after matching hundred-thousands.",
+        "Explains 0 ten-thousands is less than 9 ten-thousands."
+      ],
+      "reasoning": "The statement is false. 509,030 < 590,003 because 0 ten-thousands is less than 9 ten-thousands.",
+      "misconceptionSignals": {
+        "ignores zeros": [
+          "math-mis-pv-zero-skip"
+        ]
+      },
+      "representation": "place-value-chart",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-m05",
+      "type": "open-response",
+      "prompt": "Show one regrouping trade that keeps the value of 3,214 unchanged.",
+      "acceptableEvidence": [
+        "Examples: 1 ten becomes 10 ones; 2 hundreds becomes 1 hundred and 10 tens; 3 thousands becomes 2 thousands and 10 hundreds.",
+        "States the total stays 3,214."
+      ],
+      "reasoning": "Any equivalent base-ten trade is valid when one unit in a place becomes ten units in the next smaller place.",
+      "misconceptionSignals": {
+        "changes total": [
+          "math-mis-pv-regroup-changes-number"
+        ]
+      },
+      "representation": "base-ten-blocks",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-m06",
+      "type": "open-response",
+      "prompt": "Estimate and then solve 62,405 − 18,967. Explain how the estimate checks your exact result.",
+      "acceptableEvidence": [
+        "Estimate near 43,000 or 44,000.",
+        "Exact difference 43,438.",
+        "Explains the exact answer is close to the estimate."
+      ],
+      "reasoning": "62,405 − 18,967 = 43,438; an estimate such as 62,000 − 19,000 = 43,000 confirms the size.",
+      "misconceptionSignals": {
+        "exact without check": [
+          "math-mis-pv-left-align"
+        ],
+        "subtraction reversal": [
+          "math-mis-pv-big-minus-small"
+        ]
+      },
+      "representation": "mixed",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    }
+  ],
+  "masteryRule": "Across at least two sessions, earn secure evidence on at least 5 of 6 items, including both computation items and two explanations, with no persistent misconception pattern. One correct response never establishes mastery.",
+  "retryRule": "After reteaching, use parallel items rather than repeating the same numbers immediately."
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@manuel-academy/adaptive-tutor-core",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-first adaptive visual tutor core, contracts, examples, and browser prototype.",
+  "scripts": {
+    "dev": "node scripts/dev-server.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node scripts/run-tests.mjs",
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/run-validation.mjs",
+    "check": "npm run typecheck && npm run test && npm run build && npm run smoke && npm run validate",
+    "smoke": "node scripts/smoke-prototype.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
+  }
+}

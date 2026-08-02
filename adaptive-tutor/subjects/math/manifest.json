@@ -1,0 +1,78 @@
+{
+  "subjectId": "math",
+  "version": "1.0.0",
+  "title": "Adaptive Math Intervention Content",
+  "gradeBand": {
+    "minimum": 4,
+    "maximum": 6,
+    "primary": [
+      4,
+      5,
+      6
+    ],
+    "extension": [
+      6
+    ],
+    "prerequisiteSupport": [
+      3
+    ]
+  },
+  "sequenceIds": [
+    "math-seq-pv-regroup-v1",
+    "math-seq-mult-div-rel-v1",
+    "math-seq-equivalent-fractions-v1",
+    "math-seq-multistep-word-problems-v1"
+  ],
+  "lessonIds": [
+    "math-lesson-01-place-value-regrouping",
+    "math-lesson-02-multiplication-division-relationships",
+    "math-lesson-03-equivalent-fractions-common-denominators",
+    "math-lesson-04-multistep-word-problem-reasoning"
+  ],
+  "orderedLessons": [
+    {
+      "order": "01",
+      "sequenceId": "math-seq-pv-regroup-v1",
+      "lessonId": "math-lesson-01-place-value-regrouping",
+      "title": "Place Value and Regrouping",
+      "path": "lessons/01-place-value-and-regrouping"
+    },
+    {
+      "order": "02",
+      "sequenceId": "math-seq-mult-div-rel-v1",
+      "lessonId": "math-lesson-02-multiplication-division-relationships",
+      "title": "Multiplication and Division Relationships",
+      "path": "lessons/02-multiplication-and-division-relationships"
+    },
+    {
+      "order": "03",
+      "sequenceId": "math-seq-equivalent-fractions-v1",
+      "lessonId": "math-lesson-03-equivalent-fractions-common-denominators",
+      "title": "Equivalent Fractions and Common Denominators",
+      "path": "lessons/03-equivalent-fractions-and-common-denominators"
+    },
+    {
+      "order": "04",
+      "sequenceId": "math-seq-multistep-word-problems-v1",
+      "lessonId": "math-lesson-04-multistep-word-problem-reasoning",
+      "title": "Multistep Word-Problem Reasoning",
+      "path": "lessons/04-multistep-word-problem-reasoning"
+    }
+  ],
+  "contentBoundary": "adaptive-tutor/subjects/math/**",
+  "coreModified": false,
+  "externalSystemsModified": false,
+  "coreV02Alignment": {
+    "release": "1.0.2",
+    "derivedFromSha256": "a2b8df07e1f15655c909fddfd204b3c095aeb6d8796d106b6aed1da41f5c7b2f",
+    "alignedCandidateSha256": "665be680aaf4492a556399feaf81177f3740714604332fc2fa8939cdbe181777",
+    "frozenCoreSha256": "38205667d56cb4fcc5a8360f1f94098b5fa1d35ae71d22334aa1bc8d43ecc276",
+    "derivedArtifact": "manuel-academy-adaptive-tutor-math-v1-core-v0.2-aligned-r1.zip",
+    "standaloneDemoCorrection": "TUTOR-MATH-R1",
+    "adapter": "core-v0.2-adapter.ts",
+    "runtime": "runtime-v0.2.ts",
+    "externalValidator": "scripts/verify-core-v0.2.mjs",
+    "directGrade5Support": true,
+    "sourceSequencesChanged": false
+  }
+}

@@ -1,0 +1,176 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: #f4f4f5;
+  color: #18181b;
+}
+
+.shell {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 32px 18px 56px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+h1 {
+  line-height: 1.1;
+}
+
+.card,
+.notes {
+  margin-top: 22px;
+  padding: 22px;
+  border: 1px solid #d4d4d8;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.progress {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.visual {
+  overflow-x: auto;
+  margin: 18px 0;
+  padding: 14px;
+  border: 1px dashed #71717a;
+  border-radius: 12px;
+}
+
+.place-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(90px, 1fr));
+  gap: 6px;
+  min-width: 430px;
+}
+
+.place-grid div {
+  padding: 10px;
+  border: 1px solid #71717a;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.place-grid strong {
+  display: block;
+  font-size: 1.45rem;
+}
+
+.teaching-steps {
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.teaching-steps li + li {
+  margin-top: 0.45rem;
+}
+
+.choices {
+  display: grid;
+  gap: 10px;
+}
+
+.choices button,
+.primary,
+.reason {
+  width: 100%;
+  border: 1px solid #52525b;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.choices button,
+.primary {
+  padding: 12px 14px;
+  cursor: pointer;
+}
+
+.choices button {
+  background: white;
+  color: #18181b;
+  text-align: left;
+}
+
+.choices button:hover {
+  background: #f4f4f5;
+}
+
+.primary {
+  display: block;
+  margin-top: 12px;
+  background: #18181b;
+  color: white;
+  text-align: center;
+}
+
+.reason-label {
+  display: block;
+  margin-top: 14px;
+  font-weight: 700;
+}
+
+.reason {
+  display: block;
+  margin-top: 6px;
+  padding: 10px;
+  background: white;
+  color: #18181b;
+}
+
+.reason[aria-invalid="true"] {
+  border-color: #b91c1c;
+}
+
+.feedback {
+  min-height: 2.5em;
+  font-weight: 650;
+}
+
+.fallback-note {
+  margin: 14px 0 0;
+  color: #3f3f46;
+  font-size: 0.9rem;
+}
+
+button:focus-visible,
+textarea:focus-visible,
+#prompt:focus,
+#feedback:focus {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 3px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (forced-colors: active) {
+  button:focus-visible,
+  textarea:focus-visible,
+  #prompt:focus,
+  #feedback:focus {
+    outline: 3px solid Highlight;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

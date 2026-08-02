@@ -1,0 +1,18 @@
+{
+  "mutationsExpectedToFail": [
+    "grade-band-above-core-maximum",
+    "assessment-camera-required",
+    "unsupported-visual-kind",
+    "spoken-turn-claims-human-identity",
+    "media-fallback-blocks-lesson"
+  ],
+  "insufficientMasteryEvidence": [
+    {
+      "sessionId": "only-session",
+      "contextId": "only-context",
+      "source": "independent-attempt",
+      "score": 1,
+      "uncertainty": 0.1
+    }
+  ]
+}

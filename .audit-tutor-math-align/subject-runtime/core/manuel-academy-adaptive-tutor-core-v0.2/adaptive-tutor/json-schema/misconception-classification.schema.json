@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "skillId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Lowercase ASCII stable content identifier."
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "misconceptionId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Lowercase ASCII stable content identifier."
+          },
+          "probability": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "uncertainty": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidenceCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "supportingTags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 120,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "description": "Lowercase ASCII stable content identifier."
+            },
+            "maxItems": 50
+          },
+          "contradictingTags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 120,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "description": "Lowercase ASCII stable content identifier."
+            },
+            "maxItems": 50
+          },
+          "status": {
+            "anyOf": [
+              {
+                "const": "possible",
+                "type": "string"
+              },
+              {
+                "const": "probable",
+                "type": "string"
+              },
+              {
+                "const": "unlikely",
+                "type": "string"
+              },
+              {
+                "const": "insufficient-evidence",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "misconceptionId",
+          "probability",
+          "uncertainty",
+          "evidenceCount",
+          "supportingTags",
+          "contradictingTags",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 20
+    },
+    "selectedMisconceptionId": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Lowercase ASCII stable content identifier."
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "uncertaintyStatement": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "doNotDiagnose": {
+      "const": true,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "skillId",
+    "hypotheses",
+    "selectedMisconceptionId",
+    "uncertaintyStatement",
+    "doNotDiagnose"
+  ],
+  "additionalProperties": false,
+  "$id": "MisconceptionClassification"
+}

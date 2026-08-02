@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Lowercase ASCII stable content identifier."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Lowercase ASCII stable content identifier."
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1200
+          },
+          "subject": {
+            "anyOf": [
+              {
+                "const": "math",
+                "type": "string"
+              },
+              {
+                "const": "english",
+                "type": "string"
+              },
+              {
+                "const": "science",
+                "type": "string"
+              },
+              {
+                "const": "social-studies",
+                "type": "string"
+              },
+              {
+                "const": "general",
+                "type": "string"
+              }
+            ]
+          },
+          "gradeBand": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 12
+              },
+              "max": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 12
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              }
+            },
+            "required": [
+              "min",
+              "max",
+              "label"
+            ],
+            "additionalProperties": false
+          },
+          "observableEvidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "minItems": 1,
+            "maxItems": 20
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "subject",
+          "gradeBand",
+          "observableEvidence"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 1000
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "prerequisiteSkillId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Lowercase ASCII stable content identifier."
+          },
+          "dependentSkillId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Lowercase ASCII stable content identifier."
+          },
+          "strength": {
+            "anyOf": [
+              {
+                "const": "required",
+                "type": "string"
+              },
+              {
+                "const": "recommended",
+                "type": "string"
+              },
+              {
+                "const": "supporting",
+                "type": "string"
+              }
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600
+          }
+        },
+        "required": [
+          "prerequisiteSkillId",
+          "dependentSkillId",
+          "strength",
+          "rationale"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 5000
+    }
+  },
+  "required": [
+    "id",
+    "version",
+    "nodes",
+    "edges"
+  ],
+  "additionalProperties": false,
+  "$id": "PrerequisiteSkillGraph"
+}

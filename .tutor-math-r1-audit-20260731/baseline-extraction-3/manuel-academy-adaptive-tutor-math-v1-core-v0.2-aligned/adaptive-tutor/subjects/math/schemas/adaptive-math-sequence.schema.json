@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "manuel-academy://adaptive-tutor/subjects/math/sequence.schema.json",
+  "title": "Adaptive Math Sequence",
+  "type": "object",
+  "required": [
+    "sequenceId",
+    "lessonId",
+    "version",
+    "order",
+    "title",
+    "gradeBand",
+    "skillIds",
+    "prerequisites",
+    "objectives",
+    "diagnostic",
+    "misconceptions",
+    "visualExplanationPlan",
+    "spokenExplanation",
+    "modes",
+    "guidedPractice",
+    "independentMasteryCheck",
+    "reteachingBranches",
+    "prerequisiteRemediationBranches",
+    "parentTeacherReview",
+    "noMediaFallback",
+    "policy"
+  ],
+  "properties": {
+    "sequenceId": {
+      "type": "string",
+      "pattern": "^math-seq-[a-z0-9-]+-v[0-9]+$"
+    },
+    "lessonId": {
+      "type": "string",
+      "pattern": "^math-lesson-[0-9]{2}-[a-z0-9-]+$"
+    },
+    "version": {
+      "type": "string"
+    },
+    "order": {
+      "type": "string",
+      "pattern": "^[0-9]{2}$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "gradeBand": {
+      "type": "object",
+      "required": [
+        "minimum",
+        "maximum",
+        "primary",
+        "extension",
+        "prerequisiteSupport"
+      ]
+    },
+    "skillIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^math-skill-[a-z0-9-]+-v[0-9]+$"
+      }
+    },
+    "modes": {
+      "type": "object",
+      "required": [
+        "showMe",
+        "talkMeThroughIt",
+        "letsDoOneTogether",
+        "differentExample"
+      ]
+    },
+    "noMediaFallback": {
+      "type": "object",
+      "required": [
+        "instructions",
+        "fullyFunctionalWithoutMedia"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

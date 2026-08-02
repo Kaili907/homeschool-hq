@@ -1,0 +1,242 @@
+{
+  "items": [
+    {
+      "id": "math-wp-d01",
+      "type": "multiple-choice",
+      "prompt": "A school store opens 8 boxes with 6 notebooks in each box. It sells 19 notebooks. Which plan finds how many remain?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "8 + 6 − 19"
+        },
+        {
+          "id": "B",
+          "text": "8 × 6 − 19"
+        },
+        {
+          "id": "C",
+          "text": "19 − 8 × 6"
+        },
+        {
+          "id": "D",
+          "text": "8 × (6 − 19)"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "First find total notebooks with 8 × 6, then subtract the 19 sold.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-wp-keyword-only"
+        ],
+        "C": [
+          "math-mis-wp-wrong-order"
+        ],
+        "D": [
+          "math-mis-wp-wrong-order"
+        ]
+      },
+      "representation": "step-diagram",
+      "difficultyBand": "entry",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-wp-d02",
+      "type": "multiple-choice",
+      "prompt": "A class has 24 students. Tickets cost $12 per student, and the bus fee is $85. Which expression gives the total trip cost?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "24 + 12 + 85"
+        },
+        {
+          "id": "B",
+          "text": "24 × 12 + 85"
+        },
+        {
+          "id": "C",
+          "text": "24 × (12 + 85)"
+        },
+        {
+          "id": "D",
+          "text": "85 − 24 × 12"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "Multiply students by cost per student, then add the one-time bus fee.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-wp-unit-mismatch"
+        ],
+        "C": [
+          "math-mis-wp-wrong-order"
+        ],
+        "D": [
+          "math-mis-wp-wrong-order"
+        ]
+      },
+      "representation": "word-problem-organizer",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-wp-d03",
+      "type": "multiple-choice",
+      "prompt": "A problem says a library has 7 shelves with 24 books each, 38 books are checked out, and the library opened in 1998. Which number is not needed to find books currently on shelves?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "24"
+        },
+        {
+          "id": "C",
+          "text": "38"
+        },
+        {
+          "id": "D",
+          "text": "1998"
+        }
+      ],
+      "correctChoiceId": "D",
+      "reasoning": "The opening year does not connect to the quantity of books currently on shelves.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-wp-use-all-numbers"
+        ],
+        "B": [
+          "math-mis-wp-use-all-numbers"
+        ],
+        "C": [
+          "math-mis-wp-use-all-numbers"
+        ]
+      },
+      "representation": "word-problem-organizer",
+      "difficultyBand": "entry",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-wp-d04",
+      "type": "multiple-choice",
+      "prompt": "After calculating 9 boxes × 12 shirts = 108 shirts, what should you ask next if 47 shirts were sold?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Is 108 even?"
+        },
+        {
+          "id": "B",
+          "text": "How many shirts remain after 47 are sold?"
+        },
+        {
+          "id": "C",
+          "text": "What is 9 + 12?"
+        },
+        {
+          "id": "D",
+          "text": "Can I stop because I used multiplication?"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "108 is an intermediate total; the final question requires subtracting the amount sold.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-wp-no-check"
+        ],
+        "C": [
+          "math-mis-wp-keyword-only"
+        ],
+        "D": [
+          "math-mis-wp-one-step-stop"
+        ]
+      },
+      "representation": "step-diagram",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-wp-d05",
+      "type": "multiple-choice",
+      "prompt": "Thirty-five tickets cost $8 each, plus a $45 room fee. A group pays $350. Which order is correct for finding change?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "350 − 45, then × 8"
+        },
+        {
+          "id": "B",
+          "text": "35 × 8, then + 45, then subtract from 350"
+        },
+        {
+          "id": "C",
+          "text": "35 + 8 + 45, then subtract from 350"
+        },
+        {
+          "id": "D",
+          "text": "350 ÷ 35, then + 45"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "Find ticket cost, add the fee, then subtract total cost from amount paid.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-wp-wrong-order"
+        ],
+        "C": [
+          "math-mis-wp-unit-mismatch"
+        ],
+        "D": [
+          "math-mis-wp-keyword-only"
+        ]
+      },
+      "representation": "step-diagram",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-wp-d06",
+      "type": "open-response",
+      "prompt": "A garden has 6 rows of 14 plants. Twenty-nine plants are given away. Explain how you would solve and check how many remain without calculating the final answer yet.",
+      "acceptableEvidence": [
+        "Plan: multiply 6 × 14 to find the starting total, then subtract 29.",
+        "Names plants as the unit.",
+        "Check: result must be less than starting total and nonnegative; estimate can be used."
+      ],
+      "reasoning": "A correct plan identifies the dependent intermediate total and a reasonableness check without requiring the final answer immediately.",
+      "misconceptionSignals": {
+        "stops after product": [
+          "math-mis-wp-one-step-stop"
+        ],
+        "subtracts first": [
+          "math-mis-wp-wrong-order"
+        ],
+        "no units": [
+          "math-mis-wp-unit-mismatch"
+        ]
+      },
+      "representation": "word-problem-organizer",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    }
+  ],
+  "routingRules": [
+    {
+      "when": "one-step operation meanings are insecure",
+      "route": "prerequisite-remediation-wp-one-step"
+    },
+    {
+      "when": "all numbers are used automatically",
+      "route": "reteach-wp-relevant-data"
+    },
+    {
+      "when": "intermediate result is reported as final",
+      "route": "reteach-wp-answer-target"
+    },
+    {
+      "when": "operations are correct but ordered incorrectly",
+      "route": "reteach-wp-step-order"
+    }
+  ]
+}

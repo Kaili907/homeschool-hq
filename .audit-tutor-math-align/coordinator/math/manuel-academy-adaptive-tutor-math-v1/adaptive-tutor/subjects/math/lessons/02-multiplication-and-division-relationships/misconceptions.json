@@ -1,0 +1,86 @@
+[
+  {
+    "id": "math-mis-md-repeated-add-only",
+    "label": "Sees multiplication only as repeated addition and cannot use structure",
+    "likelyEvidence": [
+      "Counts every object one by one in a large array.",
+      "Cannot decompose 23 × 6 into 20 × 6 and 3 × 6."
+    ],
+    "distinguishingEvidence": [
+      "Ask for two ways to split an array.",
+      "Ask which partial product matches each rectangle."
+    ],
+    "firstResponse": "Repeated addition is one meaning. Let’s also use the array’s structure so we do not have to count one object at a time.",
+    "route": "reteach-md-array-decompose"
+  },
+  {
+    "id": "math-mis-md-groups-size-swap",
+    "label": "Confuses number of groups with size of each group",
+    "likelyEvidence": [
+      "Uses the wrong unit in a word problem.",
+      "Draws 6 groups of 4 when asked for 4 groups of 6 and cannot explain the difference."
+    ],
+    "distinguishingEvidence": [
+      "Ask the learner to label groups and items per group.",
+      "Compare 4 × 6 and 6 × 4 in context."
+    ],
+    "firstResponse": "The product may stay the same, but the story roles are different. Let’s label groups and items in each group.",
+    "route": "reteach-md-equal-groups"
+  },
+  {
+    "id": "math-mis-md-division-subtraction",
+    "label": "Treats division as subtracting the divisor once",
+    "likelyEvidence": [
+      "Answers 24 ÷ 6 as 18.",
+      "Stops after one subtraction."
+    ],
+    "distinguishingEvidence": [
+      "Ask how many groups of 6 fit into 24.",
+      "Use repeated subtraction until zero and count jumps."
+    ],
+    "firstResponse": "Division asks how many equal groups or how many in each group, not what remains after one subtraction.",
+    "route": "reteach-md-division-meaning"
+  },
+  {
+    "id": "math-mis-md-inverse-gap",
+    "label": "Does not connect multiplication and division as inverse relationships",
+    "likelyEvidence": [
+      "Knows 7 × 8 but cannot use it for 56 ÷ 7.",
+      "Writes an unrelated fact family."
+    ],
+    "distinguishingEvidence": [
+      "Cover one factor in an array equation.",
+      "Ask which multiplication fact checks a division result."
+    ],
+    "firstResponse": "The same three numbers can tell a multiplication and division family. Let’s use the known product to find the missing factor.",
+    "route": "reteach-md-fact-family"
+  },
+  {
+    "id": "math-mis-md-partial-product",
+    "label": "Omits or misplaces a partial product",
+    "likelyEvidence": [
+      "Computes 23 × 6 as 18 or 120.",
+      "Adds 20 + 18 instead of 120 + 18."
+    ],
+    "distinguishingEvidence": [
+      "Label each area-model region.",
+      "Ask what 20 groups of 6 means."
+    ],
+    "firstResponse": "You solved one part. Let’s match every part of 23 to a partial product before combining.",
+    "route": "reteach-md-area-model"
+  },
+  {
+    "id": "math-mis-md-remainder-rule",
+    "label": "Uses one fixed rule for every remainder",
+    "likelyEvidence": [
+      "Always drops the remainder or always rounds up.",
+      "Gives a fractional bus or person when the context needs whole groups."
+    ],
+    "distinguishingEvidence": [
+      "Compare “full teams,” “left over,” and “containers needed” contexts.",
+      "Ask what the remainder represents in the story."
+    ],
+    "firstResponse": "The calculation gives a remainder, but the story decides what that remainder means.",
+    "route": "reteach-md-remainder-context"
+  }
+]

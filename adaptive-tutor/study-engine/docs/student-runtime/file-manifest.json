@@ -1,0 +1,2179 @@
+﻿{
+    "manifestVersion":  "session-7-r2.file-manifest.v1",
+    "generatedAt":  "2026-07-30",
+    "archiveRoot":  "adaptive-tutor/study-engine",
+    "excludedSelf":  "docs/student-runtime/file-manifest.json",
+    "fileCount":  434,
+    "files":  [
+                  {
+                      "path":  "docs/student-runtime/accessibility-adversarial-test-agent-report.md",
+                      "size":  8185,
+                      "sha256":  "3CA0F258EC037F9BE128F768237C6C7E3884E753EDDAC2E0285CD80709085D28"
+                  },
+                  {
+                      "path":  "docs/student-runtime/accessibility-report.md",
+                      "size":  3115,
+                      "sha256":  "63D9BE32D4DA0D1E95059238683A7996D22115F4D26369F87FC41AD8270DDF3E"
+                  },
+                  {
+                      "path":  "docs/student-runtime/agents/accessibility-adversarial.md",
+                      "size":  6900,
+                      "sha256":  "737E0C97D93751B3D7471FB77287C8AF10CB033ED4008228A878DFB403C526F5"
+                  },
+                  {
+                      "path":  "docs/student-runtime/agents/canonical-contract-integration.md",
+                      "size":  13263,
+                      "sha256":  "58D7A955C908E7161A267085927021BC78E9DF42172B7B752EA3C59D4B6FFF7C"
+                  },
+                  {
+                      "path":  "docs/student-runtime/agents/engine-adapter-retirement.md",
+                      "size":  7059,
+                      "sha256":  "8D6ACD6BAF90E95E3DC26930291525F388216457474CEDD3CB04B1333F532612"
+                  },
+                  {
+                      "path":  "docs/student-runtime/agents/persistence-duplicate-event.md",
+                      "size":  6012,
+                      "sha256":  "671A3FC82E362E0BE7858729C630DA6A5B8E32B8D677B57E5FC0E927A797F8F3"
+                  },
+                  {
+                      "path":  "docs/student-runtime/agents/student-ux-integration.md",
+                      "size":  5946,
+                      "sha256":  "B60AC2F62849F7BB8BC9E9BADC63B1A1E8902560862F1368AC12415A5F57CA71"
+                  },
+                  {
+                      "path":  "docs/student-runtime/artifact-verification-report.md",
+                      "size":  3471,
+                      "sha256":  "9C47D1B004D530DF39C4FC1D5EFAE5B4E7F54445D80BC71DEE09F5DEC212DF23"
+                  },
+                  {
+                      "path":  "docs/student-runtime/canonical-adapter-manifest.json",
+                      "size":  7775,
+                      "sha256":  "B23A5EF5ADAD50751FBC6813CD88D568D73FC9E88CFD5B8A3816A5D596773590"
+                  },
+                  {
+                      "path":  "docs/student-runtime/canonical-integration-findings.md",
+                      "size":  34644,
+                      "sha256":  "32E023E15EF2FF32B992DCA60D78AD5765A291076A5CD955FF7A0CAF7F7CCE9F"
+                  },
+                  {
+                      "path":  "docs/student-runtime/checkpoint-contract.md",
+                      "size":  1109,
+                      "sha256":  "80416A22155529858C0EC4E80174B1F38C4C02A6AAE0CC2F32245AE8BCD77229"
+                  },
+                  {
+                      "path":  "docs/student-runtime/decision-parity-report.json",
+                      "size":  3440,
+                      "sha256":  "EEB651AEA28247B2DE648DAA8E90A06A19129B434BD6EBB4FF68DD38684A6E8A"
+                  },
+                  {
+                      "path":  "docs/student-runtime/event-dictionary.md",
+                      "size":  4607,
+                      "sha256":  "3A7262D1A71F58163EC4D6B04056A93F467510D5689B446243588630C4922C1A"
+                  },
+                  {
+                      "path":  "docs/student-runtime/integration-instructions.md",
+                      "size":  4039,
+                      "sha256":  "63EAADEDC68AAA1F1CC8E6AC654996EBF43074D5540AD76C30AF247A77837537"
+                  },
+                  {
+                      "path":  "docs/student-runtime/playwright-report/index.html",
+                      "size":  571723,
+                      "sha256":  "A83EA17E053AF9E4BF2D6B1A5B3A162331E345616DF92D45E9AA49FC15CE1E75"
+                  },
+                  {
+                      "path":  "docs/student-runtime/privacy-report.md",
+                      "size":  2542,
+                      "sha256":  "94B7FBF41131E0448591ACC8DEC9FFC2929CF96BBB9DE29454B358D439AEAE15"
+                  },
+                  {
+                      "path":  "docs/student-runtime/provisional-adapter-retirement-report.md",
+                      "size":  4660,
+                      "sha256":  "07D641184B80C8C678AC4226F6B78F0C001E52D6475917B9EA12D4CA6B6BE4E9"
+                  },
+                  {
+                      "path":  "docs/student-runtime/README.md",
+                      "size":  3812,
+                      "sha256":  "628F83967DE4A63A533302EA86FFFC708D2451414FF7E4FC6EC7F58A04862FFD"
+                  },
+                  {
+                      "path":  "docs/student-runtime/safety-report.md",
+                      "size":  2620,
+                      "sha256":  "B3313200D4694CD134E90D7212FE36F751272F838F104069B97D852F9ED6F953"
+                  },
+                  {
+                      "path":  "docs/student-runtime/sample-traces.md",
+                      "size":  1683,
+                      "sha256":  "F124686D17B5E7E666E0ED5377413601028E86E6508A003B060E13BB8BAC0168"
+                  },
+                  {
+                      "path":  "docs/student-runtime/sample-traces/math-water-break.trace.json",
+                      "size":  20626,
+                      "sha256":  "140D2C34DBA75EA4ACF32EF47D5782AA23391D00B0FE41795F6B18B13C6EC709"
+                  },
+                  {
+                      "path":  "docs/student-runtime/sample-traces/reading-save-resume.trace.json",
+                      "size":  18695,
+                      "sha256":  "246D94C497B24D3A656872E28F83D881555F8DA1B3AC737460A95111534D009A"
+                  },
+                  {
+                      "path":  "docs/student-runtime/screenshots.md",
+                      "size":  1122,
+                      "sha256":  "FBE227262BCC7B90C87574E4447FEFECDC33F8E9A9483F13C09001F986BFDB3E"
+                  },
+                  {
+                      "path":  "docs/student-runtime/screenshots/01-math-approved-water-break.png",
+                      "size":  258659,
+                      "sha256":  "76F75FA77880300529B70999BF40458E40520AAC4D9ADA3D4664B9001ECED93E"
+                  },
+                  {
+                      "path":  "docs/student-runtime/screenshots/02-math-review-recommendation.png",
+                      "size":  492282,
+                      "sha256":  "9094A24BA45BDDE98584EC4998FB3E34ACCF6BBFC55DEB13E476CCC8EE39B1CD"
+                  },
+                  {
+                      "path":  "docs/student-runtime/screenshots/03-reading-refresh-exact-resume.png",
+                      "size":  565483,
+                      "sha256":  "57592D31AAEED21F451DD64F6DD627E6DECABC2C55234B9DF6D27E56E4C73243"
+                  },
+                  {
+                      "path":  "docs/student-runtime/screenshots/04-adversarial-seven-passes.png",
+                      "size":  650965,
+                      "sha256":  "8F9ED08B6FA389A3741752C19106E2ECF66D24A1C5AA1640ADC7CF28BB2BDEA9"
+                  },
+                  {
+                      "path":  "docs/student-runtime/screenshots/05-mobile-reading-large-text-v2.png",
+                      "size":  1806316,
+                      "sha256":  "21D1E03851503DF95C47119A8D4D7713177E1BE9B19C3C04C77B5C6DCA43C8D5"
+                  },
+                  {
+                      "path":  "docs/student-runtime/SESSION-7-HANDOFF.md",
+                      "size":  9283,
+                      "sha256":  "F698CC4CCB17232225691067E4E8011F015DA887E436855D835C6E82524A2D34"
+                  },
+                  {
+                      "path":  "docs/student-runtime/source-package-manifest.json",
+                      "size":  2030,
+                      "sha256":  "78A1310AFB518CBD0C95C99F5B159C8F4215579F9CD61DF4618FF0AA1EE075A8"
+                  },
+                  {
+                      "path":  "docs/student-runtime/state-diagram.md",
+                      "size":  3169,
+                      "sha256":  "0D3DB0A66866CE8D924D63A7F16677E3A1733EF6D5C2451C3E48AB95E321C29D"
+                  },
+                  {
+                      "path":  "docs/student-runtime/student-ux-integration-findings.md",
+                      "size":  39036,
+                      "sha256":  "8D582D1DCE5268135A30CA85D29BD03664A84241E7D28963A9E9D9B2B56980A1"
+                  },
+                  {
+                      "path":  "docs/student-runtime/timezone-strategy.md",
+                      "size":  951,
+                      "sha256":  "5AF70C36FD0830E88A3F419CA27618238D9AAA4CFAFCEC2E85C7895B4531C9E4"
+                  },
+                  {
+                      "path":  "docs/student-runtime/validation-report.md",
+                      "size":  7559,
+                      "sha256":  "64A656F15659533465E72F7A4BC481C767278519EBD38A507222117E0B4B419B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/dist/assets/index-D-bnLi5o.css",
+                      "size":  62368,
+                      "sha256":  "F8A870CC477C9F62545ECC5FACBBE840D9A3416036ED8562AD956F7DD0CF19BE"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/dist/assets/index-ysfcJSd-.js",
+                      "size":  572006,
+                      "sha256":  "25A23F02495AF4E8C14F83CA857ABA609066107D5A7C7CE77CB457BB397437D2"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/dist/assets/index-ysfcJSd-.js.map",
+                      "size":  2164115,
+                      "sha256":  "047BB16EB25CEA8D8B89099263491A57E2337C2F9542B8D1299ECA5F74026F26"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/dist/index.html",
+                      "size":  674,
+                      "sha256":  "FBD7184E1B29290475AA4465B71749DF50088F2D8A1FD602FC83186D4E36FEA6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/index.html",
+                      "size":  576,
+                      "sha256":  "F5E3BDCE946BD7280B602B04B00BE0CBD7EC839EDA80A6EBDDF19AAC95CA3E3F"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/package.json",
+                      "size":  1108,
+                      "sha256":  "F5B64C22582716A846B24537916A9AF51C4B6E82426C06173415EF1904436AED"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/package-lock.json",
+                      "size":  95504,
+                      "sha256":  "BF21A03BB45A78D87AA545DA7DDF658C382C3CC465A24EDB0B751981A06C1803"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/playwright.config.ts",
+                      "size":  1045,
+                      "sha256":  "6C6D2689B723EE3C182742D219B47B603A7818A967DAEDA3D305A830CB4609AC"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/playwright.global-setup.ts",
+                      "size":  1580,
+                      "sha256":  "32F61C13B961F9714E0467540162CDE82D3675EFE4C42A0B75A05BACD080B7D5"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/release-evidence.json",
+                      "size":  225,
+                      "sha256":  "59FA80043377209B5E0ED51AED8F2E6EBEEDB5FF2AE9E20B430B97B55CE09198"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/scripts/audit-release-evidence.mjs",
+                      "size":  6857,
+                      "sha256":  "B9DA21D9FCC33EDAB83B6F2B913B62EE0C0C5ACE932D9498D7A2E3B4328BF7B3"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/scripts/generate-traces.mjs",
+                      "size":  790,
+                      "sha256":  "C1715E3B2BAA1390BB8E29FCA56A5EE63E873AA3F08CE3DCD53570367F3FBA73"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/adapters/engineProjection.v1.ts",
+                      "size":  22857,
+                      "sha256":  "09520AC5A9BD649FE95C52B8521EBB37D9A2BF589DCF7FDA0C2112020FBA9840"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/adapters/uiActionVocabulary.v2.ts",
+                      "size":  905,
+                      "sha256":  "4F0E0D4F7A8CA56EB082660095AC7ED350ED25250B1D82C831F664DCE78A70C0"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/adversarial/probes.ts",
+                      "size":  10034,
+                      "sha256":  "B2B6680F8FE0543446C02440997C3E3CF95F454607F299AED08C60FC0E2E2BA0"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/App.tsx",
+                      "size":  52252,
+                      "sha256":  "CCB42AACB2F6EE5506136945D2E464A7344347C509C5B6EB2B693CD2AF843BF1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/bridges/acceptedStudyCoreBridge.ts",
+                      "size":  8119,
+                      "sha256":  "D1D7823CAC9D863AF564AF6850592A5C5E2A5E397D4480A36BECB83A87F1B048"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/catalog.ts",
+                      "size":  17713,
+                      "sha256":  "C1D42F6E00466B172777F502908F015281C537AB3942D807488C13B9141387D4"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/main.tsx",
+                      "size":  290,
+                      "sha256":  "716D6FCBD24376914B13512D9B01786BCEBEC5AE10E1AC3D2A8F85362FE64774"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/persistence/resumeStore.ts",
+                      "size":  30518,
+                      "sha256":  "9F1B97D4645DF3E63B1B26E959E4ECA8499764FEF79C623CE7790A35818D74DA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/runtimeTypes.ts",
+                      "size":  8772,
+                      "sha256":  "6BCE3A9A671A8D4CC6984EC8E9600A993E68863C9D8A9A5C91609D8132660CC5"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/state/canonicalSession.ts",
+                      "size":  13861,
+                      "sha256":  "F30AA1C7D6A04B1415EEE1CDCC6BB29A0149B86492BC6855A1C3E6B5C6793422"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/state/runtimeMachine.ts",
+                      "size":  52632,
+                      "sha256":  "BFA55D12C057F0ACCD1585F4DD75EC3F57E1CDB5357F93F6B164D32A469CDCD2"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/src/styles.css",
+                      "size":  17962,
+                      "sha256":  "3E92522B12D683E8901231B1203B9AB47D7202C99AC030CD3841BCC9708BB99A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/tsconfig.json",
+                      "size":  1539,
+                      "sha256":  "7E788458919FCBFEA6C48BF31625D0E0A2BDFD4BB0BD71923CF808BE717B778D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/.gitignore",
+                      "size":  48,
+                      "sha256":  "FF655E7B9D4973797D86CC01FCEF3394832AA78AAF743B74316E804C2A09BCE2"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/assessment.ts",
+                      "size":  3279,
+                      "sha256":  "8B1143661943D5704D307E7D3484DE3C381F591EC1445151564DE227940CB9F7"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/common.ts",
+                      "size":  2438,
+                      "sha256":  "AF20BA7F93630805EBF951917A182EC6AC5C850669CBFA4AC64A15B2A5090F90"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/confidence.ts",
+                      "size":  1593,
+                      "sha256":  "AA69319D7955CB6C163ACCE712DF53D298A055210D589A4A894ECB7DDD66663A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/index.ts",
+                      "size":  418,
+                      "sha256":  "E33BBBCC94DDB800FF1E899FAFB610C9D36D07E5ABAD11E68EDAD65D7EA29B12"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/media.ts",
+                      "size":  2146,
+                      "sha256":  "03D573DC61C7284B1DABD03E55EC8A028D42866D555F6FA7E04117EE635E4F41"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/misconception.ts",
+                      "size":  2505,
+                      "sha256":  "F22F418B5C8DF7642C30B1C31F909DD3D24CA2C4C882EB8B7E58F0802DE2BF84"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/practice.ts",
+                      "size":  2066,
+                      "sha256":  "344F2A40271B96648BF5670A0B62F829288C15C0E20D53381EB35AAA1FC76E70"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/program.ts",
+                      "size":  1926,
+                      "sha256":  "E7402CE47798ACECBF0AAD28CE68D09115A61EC5881BCE2CEC4B41CE8EFA4E39"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/review.ts",
+                      "size":  1896,
+                      "sha256":  "5452238C697328DD3B4A3160C88046F15990A7CB5D89CC20D6BACB6E8108296E"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/safety.ts",
+                      "size":  1643,
+                      "sha256":  "2261E7549729160AC097A0A3171057CEFE5545329D11B568FBC64D5632E88F37"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/skill-graph.ts",
+                      "size":  1514,
+                      "sha256":  "DFB0130F50214CDEFFB0452DD71B4293695C054A6F67F4602241BF7CA4A469D9"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/spoken-turn.ts",
+                      "size":  887,
+                      "sha256":  "3A30A2F78CAD68E61EC8D42EB6CC6E83ACB36A53B692BC0AE350CDC7C23DBA70"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/tutor-response.ts",
+                      "size":  1893,
+                      "sha256":  "09DFFCDBBD1895AA51E318E707993168AAAF07CD40A9A4E56D539206BF31938F"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/contracts/visual-board.ts",
+                      "size":  4310,
+                      "sha256":  "9229833BBF53CB56AE4632F7EA695BC28F0A867081D372CD5C3155B44B3EE21D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/docs/engine-lifecycle.md",
+                      "size":  888,
+                      "sha256":  "D862A450310D55F123CCC41CC1B1116EA28C8C4089A91B80C852ACAF32D06D90"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/engine/adaptive-tutor-engine.ts",
+                      "size":  23363,
+                      "sha256":  "7B664EE1BE7417BECEFA443C93C678D33F4E619849D08982A928867A13A10FC5"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/engine/assessment-evaluator.ts",
+                      "size":  2010,
+                      "sha256":  "6AA974B6C5FB283EFFB3E48A81CF8BD08E7C281E97D5399F1A29E355F8E6C327"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/engine/confidence-model.ts",
+                      "size":  2602,
+                      "sha256":  "A09F47C9DE7D4DE1CD5D9CC799D7F79088A78E2CD7617222FBAD03752FBC0F09"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/engine/index.ts",
+                      "size":  207,
+                      "sha256":  "9C5C91F090B1F17C325DB45394A9DA02C1E260BDF606D660074D8F474D2B89BE"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/engine/misconception-classifier.ts",
+                      "size":  2475,
+                      "sha256":  "97D70688D9CBB3D9603E75DB61EB7C2255557FF891A1352F01E709F5425A8144"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/engine/skill-graph.ts",
+                      "size":  2552,
+                      "sha256":  "E692C691A27090592FCC8C68E5D4DB3375AE67F3D397B9039D82E85995F9B939"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/index.ts",
+                      "size":  303,
+                      "sha256":  "FD16D7E2ED5BFE2007BE7CED509A36710C623EA14E65D8948FE7796A08C4F975"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/media/fallbacks.ts",
+                      "size":  869,
+                      "sha256":  "91B2AD3715817056FBEC0CD9EA368391EDA5DE146FEC0B9D74B1FE2D12F15B19"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/prompts/templates.ts",
+                      "size":  2721,
+                      "sha256":  "28869F844A15599CA4408056F705A77AFE13A9F3B2D72C60FC4645590746CB96"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/review/create-review.ts",
+                      "size":  2529,
+                      "sha256":  "DC2CD1505D4ADC31234937E9FC052080BF6537C8234EFA62F791401C1B9FF8ED"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/safety/guard.ts",
+                      "size":  1650,
+                      "sha256":  "50DD0DCD25654795752C2EFEF3EA600F34D7AF9B9A0A8954614317D4A9099DF4"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/safety/rules.ts",
+                      "size":  3251,
+                      "sha256":  "C136EF18C57CCE1AFABFE51828CF827E5E5D1C5A32F4C7B0A92C6DCC4BC9680D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/schema/typebox.ts",
+                      "size":  4191,
+                      "sha256":  "E37B5F016A3CB327B1C9B3250C857DA4A27A07EDE98401B13365B900319C2D83"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/schema/value.ts",
+                      "size":  4818,
+                      "sha256":  "0D04662CED7907C30B1BEDD77C4DB2E411897F8574D287CD07CE28F6283F6BF0"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/core/utils/validation.ts",
+                      "size":  1029,
+                      "sha256":  "76D378E06D09F30E153D1EA4D1AD322B4DDA21EA616E8094CC1992231E9E3C9A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/DELIVERY-SUMMARY.md",
+                      "size":  1288,
+                      "sha256":  "0EA1D1C2D03BCA7F426855E8B250FE2AEE502BA5AA9BE28816DB90A47AFE1E45"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/assessment.d.ts",
+                      "size":  5546,
+                      "sha256":  "509DE7AEEED5BE5CD86E15FD4EC38DD8C4BC55E247763ADC3D69835E6C773E3B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/assessment.d.ts.map",
+                      "size":  1009,
+                      "sha256":  "2E795F7A4069C5BFCE1ED40C9B80B8B7A05BA449A1E2AA2DAD4E6A286C3867E6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/assessment.js",
+                      "size":  2832,
+                      "sha256":  "3CCB0F8E0E8D8EA81A145E74FB5DBBE5B36E6A49EE5703C3D4EACA016A0B0A1D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/assessment.js.map",
+                      "size":  3095,
+                      "sha256":  "E2C6B8CF872DFF9E3C4B73613C237AC7DEA7108B82C39F207502B01D1F8BDCFA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/common.d.ts",
+                      "size":  1804,
+                      "sha256":  "7E2CDB94E11D7E7A8185605CBFD286E7FB80369226FD47A27231EA2D1483A731"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/common.d.ts.map",
+                      "size":  878,
+                      "sha256":  "BBA5CA644E934AD3E78DF93701FF4A2716AECE835AE7767BA9A85A3589EAFED9"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/common.js",
+                      "size":  2039,
+                      "sha256":  "E59C44799633C694706B39EB7E8755AF6B655368FF7413EEB669BB0ABC6B2F81"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/common.js.map",
+                      "size":  2429,
+                      "sha256":  "0B0828F8DCB78F1C17E35053E389AC5C91708C90F95674E746615925BD83F7F1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/confidence.d.ts",
+                      "size":  1056,
+                      "sha256":  "78194984FE1618222D8F971A938F20DC3AE572E50B95C77B13A872140BB3B8AE"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/confidence.d.ts.map",
+                      "size":  383,
+                      "sha256":  "692F5BF2BEC9F384F89DE40FA4EF8A79F0F1B9C821EEDFFBEE3E9F03C180A8AF"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/confidence.js",
+                      "size":  1453,
+                      "sha256":  "4C94D65054C4D144E72BC54ABE0E29538F5D9C03041BDE7430694C330597B5BD"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/confidence.js.map",
+                      "size":  1798,
+                      "sha256":  "4117FD21C8E879AD90FB02ED15412AC6EB18CEA00284F87A0F2782A991894A4F"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/index.d.ts",
+                      "size":  453,
+                      "sha256":  "F1EE246CD70E9A181B263CE3722A8D9E1975988B1655848569065610C0688583"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/index.d.ts.map",
+                      "size":  406,
+                      "sha256":  "746015E23C6C38B88FD255E8E0DF51F8C1D6A88C7C7E1AA0ABCF6322160A5891"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/index.js",
+                      "size":  451,
+                      "sha256":  "B1FDFC9CC63C09F0A27C2DF754DEEEF3404C7C2122D2827189E89F56467D8F1D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/index.js.map",
+                      "size":  404,
+                      "sha256":  "201B4910CEC54FAC2F75612CB09B3D8C07677CA607F3073E2790F680951670C8"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/media.d.ts",
+                      "size":  1717,
+                      "sha256":  "F6471340108D1908295EB744863B67DD423D2F8AC58F68631B88CB2179FDEFED"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/media.d.ts.map",
+                      "size":  567,
+                      "sha256":  "83C32C7F426EEED947DC7591247CF0475B71886B39C54E5911491E48EAE0C7DF"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/media.js",
+                      "size":  1871,
+                      "sha256":  "6523DF79F2F2664CD6D6BFFE2F3C2FF4EA7BF7BCBB475D1607DF785AEEA825DB"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/media.js.map",
+                      "size":  2322,
+                      "sha256":  "C242743104115454D10741D1739355E9C3F9DE670417491031C9707EFF95D081"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/misconception.d.ts",
+                      "size":  2002,
+                      "sha256":  "E8A089CD26EABDD753C2D9AC22C6E08BB7F1A99A528BBB4CC1E089D42EF629BD"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/misconception.d.ts.map",
+                      "size":  591,
+                      "sha256":  "C7F2C950A734455CE0A7CB5D71AC1FB9570B254EFDF4F4A0C6A4AE26F65F16BA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/misconception.js",
+                      "size":  2182,
+                      "sha256":  "17B71AC0D71D2ED5BEBE431550EA498B2287DD30C14FAFAE46C250E7A1C79203"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/misconception.js.map",
+                      "size":  2547,
+                      "sha256":  "348F1609E508FAECA2B47CA5BD86BF622E418356EE0C9F02DC8C7E4C9D89F6EA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/practice.d.ts",
+                      "size":  6395,
+                      "sha256":  "7E00CB1B6F8F93929DEC3DDED0263822CA3EADB1A696432545171EFC398B9DC9"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/practice.d.ts.map",
+                      "size":  640,
+                      "sha256":  "EB43B8DC306D01524D38DC7F872DDE11E32FC38B5A1A5EE86339ABFD86988A95"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/practice.js",
+                      "size":  1834,
+                      "sha256":  "0C93A9DB6CF045DED5F8DC74D1760FAD4208F895590D9DCDCC71886637C6E9AC"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/practice.js.map",
+                      "size":  2098,
+                      "sha256":  "07FB8D698381B2FBF03C66128490432CB7274BC815DB48FA36CF7AD57F1168B1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/program.d.ts",
+                      "size":  28534,
+                      "sha256":  "C003E411BC19ED2C30F9C012C58D9175C060E8C5FB3FABD56338C8F936BC0483"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/program.d.ts.map",
+                      "size":  1203,
+                      "sha256":  "CE7874D0481D5D1A85017C6C543A706B7A6AA80308A6C2A5FA81DEAEDB787A34"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/program.js",
+                      "size":  1796,
+                      "sha256":  "957C55C7A891F1087BCF0F1EE4140E6F77323AAFEE6BD1E81A6691A414B24964"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/program.js.map",
+                      "size":  1742,
+                      "sha256":  "681216C070676C5FED5D209996A74477CA747B9CF59B4EC59480961E3C4A6543"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/review.d.ts",
+                      "size":  2100,
+                      "sha256":  "BEA398099D5473532FB62CC669CA9369A56DAA4C4F212638D8A686AB55E928DF"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/review.d.ts.map",
+                      "size":  348,
+                      "sha256":  "7A505BFC454E4C09843268D8398AED40D421A4B50F5C6C707A8E04BF046405DB"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/review.js",
+                      "size":  1829,
+                      "sha256":  "73B89CC40AFF4E0937BAD691BAAD4DCE040CAE97B01BF84EEE8DCAF4788A64E8"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/review.js.map",
+                      "size":  2010,
+                      "sha256":  "2F3D5DB3CE8A7B1D210B9DB264344CFA6F97DFD74F0829256947E02BA498E800"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/safety.d.ts",
+                      "size":  1582,
+                      "sha256":  "FA94EF2914389881715CAEE1F8C35C6F12B5477858F6DB86126195ADFB123F2B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/safety.d.ts.map",
+                      "size":  373,
+                      "sha256":  "2364CB7803BF7DE21CF4B09E9D0373552BAFCCA5E0E364CE798F9C921656C81D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/safety.js",
+                      "size":  1540,
+                      "sha256":  "C08F9992FA291B7153FEA13A4043473CE82C315346440DA77FCDC31640F329A3"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/safety.js.map",
+                      "size":  1641,
+                      "sha256":  "1982EDF7E0D9F143F0B5A3031C0E2F286BB0FB26D2E2B9136E0F160CBCAB6E6D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/skill-graph.d.ts",
+                      "size":  1550,
+                      "sha256":  "6AD25ACE8CAD1316B5AE6F9103E44B0BEA3FEA19406A82D0A6C046B17679A532"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/skill-graph.d.ts.map",
+                      "size":  486,
+                      "sha256":  "21E42B75BCEE221C38222989EAC632B2F1B7ABCB58864FD8F445FE945AE13D8E"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/skill-graph.js",
+                      "size":  1311,
+                      "sha256":  "BFDB1A7B2230DC746015DDDFBFF7149AEB3389B986DE3946959B8016ECF2FBA4"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/skill-graph.js.map",
+                      "size":  1504,
+                      "sha256":  "A917C418BB6323F9AF06703CE064B2D5A1DCF139E0F971CDCF94E3640B8E7B42"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/spoken-turn.d.ts",
+                      "size":  543,
+                      "sha256":  "A92C0A7CEEB2F2BAB8CCD5A4EE86A729B6F27646A33EF4AA7C93C83F0656A814"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/spoken-turn.d.ts.map",
+                      "size":  282,
+                      "sha256":  "07EFC5EE618BAB94001AE6E882673553A57875BE3A10B35499068E9A9ECC9EF1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/spoken-turn.js",
+                      "size":  851,
+                      "sha256":  "30D452C80CFECE2C79E76D6840A743C15AA55F2DA8B8DC0A35E2E7A8F154F045"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/spoken-turn.js.map",
+                      "size":  1071,
+                      "sha256":  "BF896B4FBF07BC367D5CD9C3A69B544720375FB8DDA81055577E8032104654E7"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/tutor-response.d.ts",
+                      "size":  6636,
+                      "sha256":  "6A0E9C0940E259EF3338686AB4B71C870EC5831D01142A504124BD96C34E6CB1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/tutor-response.d.ts.map",
+                      "size":  579,
+                      "sha256":  "A1E50A48BC09F075412B6529BC4C4FFA5EF1FB35435C5E7099745DF005648ADD"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/tutor-response.js",
+                      "size":  1815,
+                      "sha256":  "C815853F204918F4D9EE3D9EB269A2F66D5265FF4A544B84CA6F27687015E367"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/tutor-response.js.map",
+                      "size":  1985,
+                      "sha256":  "A0BE4FFA5C398B7EFE636CDD290230D12DC6BCE7DDD3532DA7118D62B9C25F00"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/visual-board.d.ts",
+                      "size":  2099,
+                      "sha256":  "7E9B638215E99DA377B3D93CA7F8FAC8A178AE02F71AB3D79230D0A887059C87"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/visual-board.d.ts.map",
+                      "size":  361,
+                      "sha256":  "24BC07EFC8447AA0A91C15DB1E443AB7BA426114C2BF381ECE14174146E68793"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/visual-board.js",
+                      "size":  4295,
+                      "sha256":  "F05A90D0E3A2DE6FD193033EF272370F7EED5CF50F5A0F8562E93E98725B8108"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/contracts/visual-board.js.map",
+                      "size":  4933,
+                      "sha256":  "C53B86B0E753470CA3508CEE512D59D95CA7FA35B477237C93CF61AB10ABA85C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/adaptive-tutor-engine.d.ts",
+                      "size":  2116,
+                      "sha256":  "35FBE8B31BE15305C08C7D96861290D306C57CE0D6F4578C8438D3EA9A7FBBD4"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/adaptive-tutor-engine.d.ts.map",
+                      "size":  1880,
+                      "sha256":  "013167962AFE5654BB05624EEF476FA615D20B7B256BD57D9C6096616C1ED55B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/adaptive-tutor-engine.js",
+                      "size":  22992,
+                      "sha256":  "5F588009CBF5CE12AA0207D562BF7B457855806D7844077901AD98EB332630A4"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/adaptive-tutor-engine.js.map",
+                      "size":  17992,
+                      "sha256":  "EAA2F018E522F95AD9ECD37B9E5361D3156A47CC1EC32C1211AED450199BC594"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/assessment-evaluator.d.ts",
+                      "size":  182,
+                      "sha256":  "01CB64340AF7EA0F62E4FDC9AA145D4122F2028FE9902C5B479EAA44B21E2A0D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/assessment-evaluator.d.ts.map",
+                      "size":  239,
+                      "sha256":  "D4E83A8411399BB6B22C2E96836B5922FBA07FAE94EB6C26D6375E691F154879"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/assessment-evaluator.js",
+                      "size":  2008,
+                      "sha256":  "39F4F1D475AEEFDC02DDABE694B49E89E7BF28737CAF7C0A637BBC95A7151421"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/assessment-evaluator.js.map",
+                      "size":  2365,
+                      "sha256":  "DE2027DC0FAA0869A37C7B36DD3D32BBB01E152B9A29B47CC5AA375E68CA38C2"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/confidence-model.d.ts",
+                      "size":  275,
+                      "sha256":  "271041B45C17FFA181D9A3D0FE9E395CB73EDC953DF725CD4C26594F332DD495"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/confidence-model.d.ts.map",
+                      "size":  304,
+                      "sha256":  "F9FC74626482DCDB44ECBAE47F03245A4151B09FF67F196774ED812F7215696D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/confidence-model.js",
+                      "size":  2651,
+                      "sha256":  "60A30FBA5EDD81CF6FF101B2AD4E26445C1B890064E9A6666D32395DEA79B63C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/confidence-model.js.map",
+                      "size":  2449,
+                      "sha256":  "24401BBBD38D33D93037A4CC386CD9D0EDFB107F3E04CB534D087D6881168DE9"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/index.d.ts",
+                      "size":  242,
+                      "sha256":  "5102B872E5B2AF66B0434D9DC574C6FE80B98A3B5A5135C511987632FCD55F41"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/index.d.ts.map",
+                      "size":  231,
+                      "sha256":  "1BBB7B7506764E1D8146510EF65E016308938CC375E741FEEA7E7A34C585B8DE"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/index.js",
+                      "size":  240,
+                      "sha256":  "E6E692FFA49086FD6DD84F1CD2C2CE57953E415A7C62E971B72A9A9C206086A4"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/index.js.map",
+                      "size":  229,
+                      "sha256":  "F83DB9EE28C70EDC68296479BE4C34904770AC9443E0C071EBB01EF4AB9F3A38"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/misconception-classifier.d.ts",
+                      "size":  419,
+                      "sha256":  "4CF39D1F956736CE1774FD978C6ABB6A49FD2A186F78053342D40092D4A7021B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/misconception-classifier.d.ts.map",
+                      "size":  414,
+                      "sha256":  "CC10DD3CBFC6AB2B9C0ED44921A6A599BB3A6C024FFCD878D507ACD50A4A8EC2"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/misconception-classifier.js",
+                      "size":  2294,
+                      "sha256":  "56E375A1B3A44ED66235030B52C6AD56C06577D75D8546F7D50B5425DD274A6B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/misconception-classifier.js.map",
+                      "size":  2071,
+                      "sha256":  "5BD682A908C27A113F6B70D1ED0B10ED1A75A82268658646490C9FBBB74B88A5"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/skill-graph.d.ts",
+                      "size":  491,
+                      "sha256":  "7D4C090C7901C7B8AC5AEA426ACB0825F86BD0A919DDA619253F66988B916095"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/skill-graph.d.ts.map",
+                      "size":  488,
+                      "sha256":  "60BA14537850E26F251D92F6DC3CF875E531FFED2C02EA02E35E7F57C71F0D84"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/skill-graph.js",
+                      "size":  2406,
+                      "sha256":  "3AAEBC031B35E4D603304F13029A68F192318EAD17122724748E6C2E4987A75C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/engine/skill-graph.js.map",
+                      "size":  2814,
+                      "sha256":  "6A6270C5BF1957C251F64F6AE75946E390461501A91BE303F5CD039EF8D15FC1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/index.d.ts",
+                      "size":  338,
+                      "sha256":  "5B5E508A102F6330DABEDD299DB74F1935D4FF58F2AB0779097CC608788F39B8"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/index.d.ts.map",
+                      "size":  290,
+                      "sha256":  "C3508E629F00D97C95221E77D339BF85E8FFEACE7B8CDEFF34EC6891CB96E0D1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/index.js",
+                      "size":  336,
+                      "sha256":  "557B3869EB69C495831E1AB08369A882F7CBC33A847879AC3D37D5479FFF9E37"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/index.js.map",
+                      "size":  288,
+                      "sha256":  "72B6982AB0B7AE77F60CB656E461FCE83E5E74E839CB105B230C6B42252B6993"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/media/fallbacks.d.ts",
+                      "size":  391,
+                      "sha256":  "74E88F7FFCA03FEDDD953691EE0BBBB05106283F19C1B4141E0E29EC0373849C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/media/fallbacks.d.ts.map",
+                      "size":  403,
+                      "sha256":  "AE7D1EB7E6F31AAB34B9223F4ED44962A0AE2BF90AFE6EB40957D025113BB78A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/media/fallbacks.js",
+                      "size":  664,
+                      "sha256":  "C255E9898249BA95D76FD02B09E485E34BD24512F9225DA456DF29E5A7C20993"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/media/fallbacks.js.map",
+                      "size":  484,
+                      "sha256":  "D0CE86F16290FCCE4311CCE7BF440ABBEF99878E939825B87336B7CFE2D635A2"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/prompts/templates.d.ts",
+                      "size":  256,
+                      "sha256":  "08BEE892AD96E1BB1F6700376D0141CA3088191FA6919943CA036D05284F7EE6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/prompts/templates.d.ts.map",
+                      "size":  334,
+                      "sha256":  "C4717D6BA32CD05B1A4ED94ADB1CEBFEC395BD37A07A7C8B9F84CB719BE199C0"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/prompts/templates.js",
+                      "size":  2659,
+                      "sha256":  "CEF8FC28D457656B9A39645BCD9016ADEF330DFF3456DD5DA893BC67A7156D8E"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/prompts/templates.js.map",
+                      "size":  850,
+                      "sha256":  "00CDCBE00E3DF20B9BBF5626F72E7F614F2B05FBBED677645853A0AF1892D9BE"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/review/create-review.d.ts",
+                      "size":  608,
+                      "sha256":  "9F5D61D81FF934384690D21A787949CDA837A5B567E5CD2CAE4CF53BE41481F4"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/review/create-review.d.ts.map",
+                      "size":  582,
+                      "sha256":  "79B44D270B870F04BFBAD50D957C5C22C3DBBB56A6B3F47AC9DE6497EAD1843D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/review/create-review.js",
+                      "size":  2200,
+                      "sha256":  "CC2C08107D02AEFB996B4DAAB282590B8A85D731774BA0831792467113B59BC7"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/review/create-review.js.map",
+                      "size":  1774,
+                      "sha256":  "B7CA89458CDCCB614B80FB2A659AE0D3181164FC1F183F00FF2951BF9B9DA644"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/safety/guard.d.ts",
+                      "size":  167,
+                      "sha256":  "F4F8791EE608759593093E925FEB105FF03A0FF1014EDD15B6738757755DF756"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/safety/guard.d.ts.map",
+                      "size":  220,
+                      "sha256":  "9E704976046E43E00B383FFCA2BF0A8268FDCDC55386D5717E2364D7363CAD24"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/safety/guard.js",
+                      "size":  1646,
+                      "sha256":  "E65BA67B16A93410DDA92FC19686D94206BE49D3868D206385C3F1E09A5CEE28"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/safety/guard.js.map",
+                      "size":  1433,
+                      "sha256":  "906793746F5DB93C6BDC60E12EFE1E7A26D019E14ED9D33C6AC6F4648FED915B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/safety/rules.d.ts",
+                      "size":  608,
+                      "sha256":  "FFE917378D51CC2A7A5FAE34BF466FBD7A340D3F63305A205ED3A94357FB5CB2"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/safety/rules.d.ts.map",
+                      "size":  520,
+                      "sha256":  "D0E37AA6D3143FABD20BFF6675B4C9602A0C6A3C6D71F8A115E9589C818169DA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/safety/rules.js",
+                      "size":  2880,
+                      "sha256":  "2B3AE182BC9DFAD161E0AE4445AF734C05410D9B2F78367C1496DF1D923449FD"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/safety/rules.js.map",
+                      "size":  1073,
+                      "sha256":  "32E19BF5DEF7636F2B111FC9177A597162C5282E3F0C0C6DCF7DE96EA199A2F1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/schema/typebox.d.ts",
+                      "size":  2038,
+                      "sha256":  "E0FF7B4EB673971FC95B1D3D1166EB0923F938B48C7B76476815FCFD8681EEDA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/schema/typebox.d.ts.map",
+                      "size":  2447,
+                      "sha256":  "08F8BE760604C515FD020551699E3515422769D25BD83A7DA685AC004E70F28A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/schema/typebox.js",
+                      "size":  2477,
+                      "sha256":  "E6D5254CD1CEE6CFBD803902F248D3391A9FAFDCC7A585E012F0D8DF5F606373"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/schema/typebox.js.map",
+                      "size":  2816,
+                      "sha256":  "370888E135CAC08F7F44D0BEB78B6FA179C80B8EDCFBDBC7ED5C9358503477C9"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/schema/value.d.ts",
+                      "size":  324,
+                      "sha256":  "0D237E1D523414926781000710D84F82CBD0CDB754C0335BE29443293F1C27BC"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/schema/value.d.ts.map",
+                      "size":  376,
+                      "sha256":  "0E03447EB4D2BD0BACD7DC47AB03DEC7B124843A9D9809426B699BF41CA7D7F9"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/schema/value.js",
+                      "size":  4977,
+                      "sha256":  "A1A6AE514DC2D1A4A15BE0010EF40E95DFE3AAF4E215669FD7B152A590D66873"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/schema/value.js.map",
+                      "size":  5745,
+                      "sha256":  "E230CBF80C1FD2D2F8212AC0A6011D6A6AED475D29C501B52411BD7A1B66F95A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/utils/validation.d.ts",
+                      "size":  500,
+                      "sha256":  "F25DEC5812D9EE2BA4ADAC4FCD5E52F6E8E6473C984E005465D25A7497083128"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/utils/validation.d.ts.map",
+                      "size":  647,
+                      "sha256":  "CCEFE666A642A4DC8D0D7877010714C05414AE0CD5E955C358A4AC7ABCD30DD9"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/utils/validation.js",
+                      "size":  784,
+                      "sha256":  "17FC58407D38A8E622F94C1165693F05311019DB455C31D62CE25F1195972C5A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/core/utils/validation.js.map",
+                      "size":  1067,
+                      "sha256":  "5D9F24E3D40D0AC84836382BA108D262A9151B39E00E6718F0D2EC34DC9BA0A4"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/builders.d.ts",
+                      "size":  1264,
+                      "sha256":  "D65895BAA3D5BA594E745170743186F1CD9233049812C4EB96D81309E810C3D6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/builders.d.ts.map",
+                      "size":  1240,
+                      "sha256":  "AE924083C80923AC8A07E2340104CD2A6A6D60B6551CAB2442E4E28C18F76A75"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/builders.js",
+                      "size":  2818,
+                      "sha256":  "17FE585832B8BE39ED9B99E58E55FD2BF43221409F71F5106C25321BEF97F613"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/builders.js.map",
+                      "size":  2452,
+                      "sha256":  "10826CAA6DEF4C653F5932B9A6CD5DDA613047C48E51D40013DBBDE89F239453"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/english-interaction.d.ts",
+                      "size":  248,
+                      "sha256":  "5CC5CF730F30CD4D59973F72EEB4EFD4F3CF54174670712B2219DDBD7F184845"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/english-interaction.d.ts.map",
+                      "size":  295,
+                      "sha256":  "887DF3F1D8E1B64A063FF928EF83C15AC61F900E5B062BC3BD3CFF8C95B2CBD2"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/english-interaction.js",
+                      "size":  15176,
+                      "sha256":  "EEA81462B3BAE949B76DEFFE13E053455CA6A27E0108F5AACC72BEF4078A1B4E"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/english-interaction.js.map",
+                      "size":  8487,
+                      "sha256":  "5C9076A305EF01D151E3159066E2703D2EF5041172C2F4AB996FB3F938BAC88D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/index.d.ts",
+                      "size":  116,
+                      "sha256":  "18EE591E51AA0B606981460948B2DF3C07380458E2EFD303AF251787F875D22C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/index.d.ts.map",
+                      "size":  156,
+                      "sha256":  "C66E122FAE2AB20C9FD2048C38340FD0B2B8C8155468C5D3E854D66A1DBBAA76"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/index.js",
+                      "size":  114,
+                      "sha256":  "613520D9E8A8A6E55938970CF15576764DC1E7E5C7B603B2C6FBC7C2B2EF69DC"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/index.js.map",
+                      "size":  154,
+                      "sha256":  "66BE7C97FDFFF2749881F734C7E8333A98BD186C74F4922FDBEA86D083DDFF8D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/math-interaction.d.ts",
+                      "size":  239,
+                      "sha256":  "74145642D2274FEB1E4DC9D7D4C5E06D031F4218C1D79E079D7D2BFFC2DE5081"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/math-interaction.d.ts.map",
+                      "size":  289,
+                      "sha256":  "000CA40CFAA886843D784C80C3F6FA61FFC3A47EE383386C1CBA03015C735731"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/math-interaction.js",
+                      "size":  14520,
+                      "sha256":  "2F362C10084B69F5CC028079DFDD100C6681528F0E646663D8477CAD1D373CC7"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/math-interaction.js.map",
+                      "size":  8902,
+                      "sha256":  "3AB7CCF41369B8E4D4B0814EC33B4E7DC908FC01B79DD28AEEEB88CFBFD671FA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/narration.fixture.d.ts",
+                      "size":  158,
+                      "sha256":  "A6076C294BF87E58A265E14606AD3661E027DD0205176C348E68014FA3DBDDE4"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/narration.fixture.d.ts.map",
+                      "size":  222,
+                      "sha256":  "E34169ED06E15CD9E1FFFBDA14A5A049BFA0E3060224D14B7B510A3A51B01976"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/narration.fixture.js",
+                      "size":  885,
+                      "sha256":  "F2DA50CB8347733DF7424052F61361ED0B19D5FEA20A7F4D6816EA85AAB1B45D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/examples/narration.fixture.js.map",
+                      "size":  585,
+                      "sha256":  "CB6B0FA19D4A2EA0E9387C67856368FD51B42ACA501C4318A1B024FACA8851F5"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/index.html",
+                      "size":  434,
+                      "sha256":  "1EF631E7174A9D23E25676E34DD0F4C67E3824BF37277EB12C5A12533C77916D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/assessment-item.schema.json",
+                      "size":  14886,
+                      "sha256":  "8A07A68F88F7C802C5FB804ED79A457166BDB2F449F402218301748DF4B7B141"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/confidence-estimate.schema.json",
+                      "size":  1838,
+                      "sha256":  "23CBC19D59E974FD1AA7ACE8AD8634AC76BE8AA0C4406CF2059BC3D9198A5B4F"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/guided-practice.schema.json",
+                      "size":  20806,
+                      "sha256":  "1F95E8F83F091C2FAA96268D6E1B432426AEF3C3A67D0A33C23E20A31593C18A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/independent-mastery.schema.json",
+                      "size":  20151,
+                      "sha256":  "26EBD0EF7AF1A1388675C1A97C3A8101ECDE708FD1EB33E206B586B91D549BAC"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/media-fallback.schema.json",
+                      "size":  935,
+                      "sha256":  "C1D127D89F0EDDA69760857C2A83FA823349735248F14CFB103F2529A5C73F52"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/misconception-classification.schema.json",
+                      "size":  3263,
+                      "sha256":  "71D1FD7DEF32E796576C9014A2F8045B2E993C91C68FCF52BBFC90438D85C019"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/narration-caption-transcript.schema.json",
+                      "size":  3686,
+                      "sha256":  "7254B3ECDB230E09ABECFE0C654D7D342F834D190EBF8335A4BF327A0135439D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/parent-teacher-review.schema.json",
+                      "size":  9375,
+                      "sha256":  "5D984B12367B2DF940AC3983263C1112D2C86F2B89CA332B1CF96DE4F2DFF9D9"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/prerequisite-skill-graph.schema.json",
+                      "size":  4286,
+                      "sha256":  "904942D167D2C43D6FD89C8B98DEE5540F3BE0F5F34DCCB9D4FC06E3278AA11A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/safety-decision.schema.json",
+                      "size":  3598,
+                      "sha256":  "C092018BE4642EAA3ACC4805CF64A07E3B05D21ACF3981A83289A1B27733CF45"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/spoken-turn.schema.json",
+                      "size":  1734,
+                      "sha256":  "A998F8E0F3B6C596908B0610F8248335311E5762FC510B9C7C363D78287E4E12"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/tutor-program.schema.json",
+                      "size":  156466,
+                      "sha256":  "49BFDC23C419ACC1EE57018C9B1E7B479548D2B7DB8908E235A3F5448DC9C0D6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/tutor-response.schema.json",
+                      "size":  42905,
+                      "sha256":  "E4DB88E8056C1A3178ABE2E06CE74015DB77FAF5E02A3FF4ACE2DBDAC409DD86"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/json-schema/visual-board-command.schema.json",
+                      "size":  12312,
+                      "sha256":  "3849539D60D33EC8917336F9E17BE6FA6A01D238F5F4351A047238E28ABC99AF"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/prototype/main.d.ts",
+                      "size":  45,
+                      "sha256":  "A9190FB43ABC43193E152369C49F856EC6BA0E4F55D8ED9AE205CCABA9D505EF"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/prototype/main.d.ts.map",
+                      "size":  111,
+                      "sha256":  "054066DB2B6932885E3CA0A7125B8C930F366C6ACE37BACE4ADED0363AAEA618"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/prototype/main.js",
+                      "size":  14691,
+                      "sha256":  "686F428F9B7614F75A61ADD60C73473F0ABC480EF1FEFB138B45D51222F4E07F"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/prototype/main.js.map",
+                      "size":  10854,
+                      "sha256":  "AB0C629762396D9DD39AF8EA371DC0DAE39F35A65915DB78021E487EEF8D1C86"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/prototype/styles.css",
+                      "size":  10569,
+                      "sha256":  "2247FDDAC407A22539E8A844EC658C199F9C6504E0EF5618EB115ABB83BC6882"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/scripts/export-json-schemas.d.ts",
+                      "size":  60,
+                      "sha256":  "E9007D20B39A59D3499BCD90281E118D5D9716F10C910AA4B485F9E6F9D152A3"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/scripts/export-json-schemas.d.ts.map",
+                      "size":  139,
+                      "sha256":  "B9A5969B21ECF6B96364099030B4225149DE37DCF234CC753B7918E8949679BE"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/scripts/export-json-schemas.js",
+                      "size":  1874,
+                      "sha256":  "FA785078886A3372E2C33F6ABDB9740CC87C7F05B4D2D3FBBF7A0D7BCD2B8274"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/scripts/export-json-schemas.js.map",
+                      "size":  1303,
+                      "sha256":  "4F6907CF93EDA910BB0D421A4F9FDDCFE549395E225A39CEECAE8DEAE2663A42"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/scripts/validate-package.d.ts",
+                      "size":  57,
+                      "sha256":  "811B9F7867BD5F802D255A90786415D0B9B6D78835F789307A36263CC854AF65"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/scripts/validate-package.d.ts.map",
+                      "size":  133,
+                      "sha256":  "B9B157C425BE5F152FC78AE11E6D6954E14B72D80AFD42EFE2B6C5C57FE8B8C0"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/scripts/validate-package.js",
+                      "size":  5100,
+                      "sha256":  "1E0C7ACC61A14AF78B7974F5BE73CDD2EC72C7A35467A7C9EF8A5A5716ACA112"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/dist/scripts/validate-package.js.map",
+                      "size":  4809,
+                      "sha256":  "5D182F2609088BC7E14B38EAA75ABCDDFD7EDB062FEFDDC637D9DB39E9BF7BC3"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/docs/contracts-reference.md",
+                      "size":  2316,
+                      "sha256":  "32C16AA2E67AE957BF02063D48DC545503320E7A9BA5584DBCCC2849DF2BE344"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/docs/director-handoff.md",
+                      "size":  2016,
+                      "sha256":  "BA2387DDE86CB0D857CB731E4A8330CCDB0C7B6345DC284F42AC4E1804C58DB0"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/docs/file-inventory.md",
+                      "size":  13779,
+                      "sha256":  "7A13947061805A344ACB9819BEF32595CCCD4004733628D7FA361BBD46A89976"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/docs/final-check.log",
+                      "size":  6641,
+                      "sha256":  "462A12171C5D9C9AB1A7DECBADCBB0DDF7E8EAEB55EE2F3121605E2022E915A1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/docs/integration-guide.md",
+                      "size":  2506,
+                      "sha256":  "4584CBF0B7A00FF8E59CFFCE52CF046FCBAB4B94281A0A553BC08A59E4B272D6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/docs/known-limitations.md",
+                      "size":  2010,
+                      "sha256":  "425917A2614AA9FC18D61EF1903D9B4BF7594BFB3328F46C4D851D41A6D80704"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/docs/safety-and-escalation.md",
+                      "size":  1687,
+                      "sha256":  "10D3F2460D86EF6D38F0765568E5B0D63B3D8435DFE5C0A58B1460EEFDFBFC46"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/docs/source-inspection-notes.md",
+                      "size":  1406,
+                      "sha256":  "7CD0F21E1BA027F47974D2455ADAB0D797235E0D529259FC3BC4A951ED9B1798"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/docs/test-results.md",
+                      "size":  1731,
+                      "sha256":  "58052C729908E46678E567BD2E3D95F54A19E416B39FE299F10012CA5C091F50"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/docs/validation-report.generated.md",
+                      "size":  1943,
+                      "sha256":  "919821840649D66BF16EAD8B7A6BC05B9B3C349BC5261E07CD3DDEEF40B1DC24"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/examples/builders.ts",
+                      "size":  3481,
+                      "sha256":  "FB24D6E71001CAC8987ADD156781BE9956CBD4637F11E5CE86645ED813015B03"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/examples/english-interaction.ts",
+                      "size":  13630,
+                      "sha256":  "B870E4034F0CD3F7FC3628D5C04074A7AFC0380B47BA39474D5C3A0A5CDF2950"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/examples/index.ts",
+                      "size":  81,
+                      "sha256":  "4C828C07CCC33963D29766AF5A8303B4D40BB2CECF2BB570960DD1312E060D13"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/examples/math-interaction.ts",
+                      "size":  12861,
+                      "sha256":  "660DC7CEDBFFFAB556F411865EDEAE00E4ADF5342ED3713D83914A8500B3C3EC"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/examples/narration.fixture.ts",
+                      "size":  817,
+                      "sha256":  "DC8A6C5C75620F56A08466334C261F8C11814A9F3C8AD0D698DD67255BDD4C63"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/index.html",
+                      "size":  434,
+                      "sha256":  "1EF631E7174A9D23E25676E34DD0F4C67E3824BF37277EB12C5A12533C77916D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/assessment-item.schema.json",
+                      "size":  14886,
+                      "sha256":  "8A07A68F88F7C802C5FB804ED79A457166BDB2F449F402218301748DF4B7B141"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/confidence-estimate.schema.json",
+                      "size":  1838,
+                      "sha256":  "23CBC19D59E974FD1AA7ACE8AD8634AC76BE8AA0C4406CF2059BC3D9198A5B4F"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/guided-practice.schema.json",
+                      "size":  20806,
+                      "sha256":  "1F95E8F83F091C2FAA96268D6E1B432426AEF3C3A67D0A33C23E20A31593C18A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/independent-mastery.schema.json",
+                      "size":  20151,
+                      "sha256":  "26EBD0EF7AF1A1388675C1A97C3A8101ECDE708FD1EB33E206B586B91D549BAC"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/media-fallback.schema.json",
+                      "size":  935,
+                      "sha256":  "C1D127D89F0EDDA69760857C2A83FA823349735248F14CFB103F2529A5C73F52"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/misconception-classification.schema.json",
+                      "size":  3263,
+                      "sha256":  "71D1FD7DEF32E796576C9014A2F8045B2E993C91C68FCF52BBFC90438D85C019"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/narration-caption-transcript.schema.json",
+                      "size":  3686,
+                      "sha256":  "7254B3ECDB230E09ABECFE0C654D7D342F834D190EBF8335A4BF327A0135439D"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/parent-teacher-review.schema.json",
+                      "size":  9375,
+                      "sha256":  "5D984B12367B2DF940AC3983263C1112D2C86F2B89CA332B1CF96DE4F2DFF9D9"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/prerequisite-skill-graph.schema.json",
+                      "size":  4286,
+                      "sha256":  "904942D167D2C43D6FD89C8B98DEE5540F3BE0F5F34DCCB9D4FC06E3278AA11A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/safety-decision.schema.json",
+                      "size":  3598,
+                      "sha256":  "C092018BE4642EAA3ACC4805CF64A07E3B05D21ACF3981A83289A1B27733CF45"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/spoken-turn.schema.json",
+                      "size":  1734,
+                      "sha256":  "A998F8E0F3B6C596908B0610F8248335311E5762FC510B9C7C363D78287E4E12"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/tutor-program.schema.json",
+                      "size":  156466,
+                      "sha256":  "49BFDC23C419ACC1EE57018C9B1E7B479548D2B7DB8908E235A3F5448DC9C0D6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/tutor-response.schema.json",
+                      "size":  42905,
+                      "sha256":  "E4DB88E8056C1A3178ABE2E06CE74015DB77FAF5E02A3FF4ACE2DBDAC409DD86"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/json-schema/visual-board-command.schema.json",
+                      "size":  12312,
+                      "sha256":  "3849539D60D33EC8917336F9E17BE6FA6A01D238F5F4351A047238E28ABC99AF"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/MANIFEST.json",
+                      "size":  41765,
+                      "sha256":  "46FF33CC3E9B0E9815938D806AA82A5A06B1D1F4E415C13CD03332F511EF0CD8"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/package.json",
+                      "size":  700,
+                      "sha256":  "0D2FAF196DA700D4B5BA6629FEDAE94B70172CF05AFEC072A1B65A6668A07460"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/prototype/main.ts",
+                      "size":  14848,
+                      "sha256":  "2DA2A38BB3855802F451D2BD78FBE972E777CC79636CFB3A0F78FB86D8CF27FC"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/prototype/styles.css",
+                      "size":  10569,
+                      "sha256":  "2247FDDAC407A22539E8A844EC658C199F9C6504E0EF5618EB115ABB83BC6882"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/README.md",
+                      "size":  2650,
+                      "sha256":  "38508D687F75D20ECCA84C54A62ABDB2FC843BFD2B943B11EB815787C0273351"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/scripts/build.mjs",
+                      "size":  902,
+                      "sha256":  "F5E702C1EDBED4BFE57E82D84C6FF5819261B211971F295BAB1AE9FBD547DBB6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/scripts/dev-server.mjs",
+                      "size":  1461,
+                      "sha256":  "3B244FDBF056B10688C7892E63A8ADBC029A3DAB980C6E4263651870C2869FB0"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/scripts/export-json-schemas.ts",
+                      "size":  1827,
+                      "sha256":  "A1B317A88396E1C616706B3CD790A7FB0FF4A1098D04DE663426E9C9A8887938"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/scripts/run-tests.mjs",
+                      "size":  483,
+                      "sha256":  "7E3B27F796911372D60B6770AA988C61EB46ED04CBE4657617B913559694DC21"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/scripts/run-validation.mjs",
+                      "size":  456,
+                      "sha256":  "DA321F4B4FAF72714047618BA406F9C8D835C22ACB5A8FADF9890247A17BD118"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/scripts/smoke-prototype.mjs",
+                      "size":  2931,
+                      "sha256":  "D0E012D7E554893677243573A95A261AEB9ABE46CB38DDC47BFF7320EB9EAEB1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/scripts/validate-package.ts",
+                      "size":  5175,
+                      "sha256":  "388F617E566CB29F86EA3E121A268BFF14C861E0D53D0A76DE980B39734FFF61"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tests/additional-boundaries.test.ts",
+                      "size":  2319,
+                      "sha256":  "31D6DF7F4EC9AEAE0136A5B3F6B37A0DFF3CFB2B9351163F6962728BAC2DE6BE"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tests/assessment-evaluator.test.ts",
+                      "size":  606,
+                      "sha256":  "DD25517F44AFCAA634A310F299C330BAFFDF8CDD2C8AA6193291AEE02A1158EA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tests/confidence-model.test.ts",
+                      "size":  1148,
+                      "sha256":  "5461FF05EC590CCA09799FE6FD8588ED4DCE07195F19A2CED27A61EA46EA406A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tests/contracts.test.ts",
+                      "size":  1123,
+                      "sha256":  "12AB4B2565A44335036EB3C82880D57104FBFC68627F8D70BDDA98FFC5CF48F6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tests/engine-cycle.test.ts",
+                      "size":  2916,
+                      "sha256":  "7697BC31917B1D854149181BCEAA44B342F5D8F622DDE8B82F79797D2EA87E13"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tests/media-fallback.test.ts",
+                      "size":  745,
+                      "sha256":  "FAC9574AFFC8A1EBB0E2F84409A405D2937A9C5D1BF92F0832D66E24A698D259"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tests/misconception-classifier.test.ts",
+                      "size":  632,
+                      "sha256":  "5FCA175AF2BE69B320DF9086214EA2D48D42BA12644DCB27819C8F5AA8DDA4BC"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tests/safety.test.ts",
+                      "size":  895,
+                      "sha256":  "FAEDBAE6F03D698089C28209A1CE90A4F2433EA5665D42C577E3437F546B461F"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tests/skill-graph.test.ts",
+                      "size":  807,
+                      "sha256":  "702ACD746DC41677B034EC9B86774071DD867159C5C2AAAB5EA0F1113CDB7542"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tsconfig.build.json",
+                      "size":  292,
+                      "sha256":  "0A9A9341853497F47AD20AB1619FA4ED1EE01E32B187F8D2D0418E368EA83518"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tsconfig.json",
+                      "size":  672,
+                      "sha256":  "838C8473919DC964F2BE2980F7E97B5C2E79F8E3EF3B40ED0B9039D227DC2CB5"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/adaptive-tutor-core/tsconfig.test.json",
+                      "size":  225,
+                      "sha256":  "7DF14DA112C544C3D2003380B79C3D49A4BFF048C392C90576F1B8B022916AD3"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/reconciliation/policy.mjs",
+                      "size":  4263,
+                      "sha256":  "AD2F453D319075BB203E53E6523F06716045330B24181BC963080D998E438097"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/package.json",
+                      "size":  332,
+                      "sha256":  "FD25DA8C53A9A15B9DFBCF11F9F30D376C5102FD866B87E598658FEF04449FCC"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/checkpoint.ts",
+                      "size":  13938,
+                      "sha256":  "FDDAF143BFB07098CE55DCDCFE23AA025CA7BF56E1B921B9A09D5CD1B2B7387A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/contracts.ts",
+                      "size":  15949,
+                      "sha256":  "9249A7209693E3B9EE7649B409FA1B7B5394E415DF0D522A30BC0D73208CFDD7"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/core-adapter.ts",
+                      "size":  21054,
+                      "sha256":  "CFCE8D0CEADECF5806AE5B254187B7C1FDCCFF48DA011CC73267398C7B6E655A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/evidence.ts",
+                      "size":  16317,
+                      "sha256":  "0827DE4913EFD7CDCF08E34F51A5ADAC1AA0245DCB03753844080683C0397172"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/hooks.ts",
+                      "size":  9517,
+                      "sha256":  "5962E45C5973A41D2233EB9801AB585E8A22F9AFF169DDDE03232FE4DFE49D9A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/index.ts",
+                      "size":  396,
+                      "sha256":  "3B1E9A29572E02911ED71854D210FC328DB05EACA8072CC6C51C342A7DC01696"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/mappings.ts",
+                      "size":  9241,
+                      "sha256":  "69985E4F6FF3128A372D7549EFB838F043F67678974572D820CBF65B66D9EDE8"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/media.ts",
+                      "size":  10964,
+                      "sha256":  "4C114F18074CDAB9FE7C4FBAE57C90DB96D51E8EF0072B7213C54220D02BA334"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/orchestrator.ts",
+                      "size":  11074,
+                      "sha256":  "6C61B8509028996EAEAE02A8C9692211FB4FBFC8A266D5D10943501B9793E832"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/privacy.ts",
+                      "size":  4637,
+                      "sha256":  "BF55CA6D0508D50DD39AA1A8DE66DBF4FAFF7A0B938833E633236A0C8F884222"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/safety-gateway.ts",
+                      "size":  27157,
+                      "sha256":  "4386F09E1B699F1B010C5316D736967651DFC1FEA7E87AD6A42A3B320841FEB1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/schema-compatibility.ts",
+                      "size":  5192,
+                      "sha256":  "8328AE0BEEB3849FD413E788158E8EE7449A3012DC55BA1F88FA8C5F42327F7B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/src/validation.ts",
+                      "size":  27025,
+                      "sha256":  "BE494A8BBBD9CB313B6BC5D1FFFBCECE04F9318083D870747A41ABE0307E96CD"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-core-bridge/tsconfig.json",
+                      "size":  531,
+                      "sha256":  "9A2392AB192C348617D564930811FDC4BFC298191B405A15BEB8984473A3488C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/common.ts",
+                      "size":  3555,
+                      "sha256":  "4B34C7B1DC4331DA809B4A7C97675E4EF4EBD54B27C305B73555A32BE90B7FA3"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/focus-profile.ts",
+                      "size":  4246,
+                      "sha256":  "72AEA264D7060EBE402954C7C288C3222601F8C771A8CFC5F07154713882B01E"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/index.ts",
+                      "size":  366,
+                      "sha256":  "E39279A7C91811DD58FA6B07A8913CA3CC57AD68AFB284207FDD3F0185DA07F6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/learning-evidence.ts",
+                      "size":  4507,
+                      "sha256":  "B59260A647EF0BFBE8D521736FADC855C3E80A29DACCD64702300E432CF3D928"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/legacy-adapters.ts",
+                      "size":  1016,
+                      "sha256":  "B4DDC470A02047B431BE18211A8085B8F43A8B271F842A397D4F03E8A6AC7415"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/node-shim.d.ts",
+                      "size":  984,
+                      "sha256":  "7B07347650F1014367261A4C613015C83E0F2F94414C368BBF9BD088F102F9FF"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/parent-teacher-controls.ts",
+                      "size":  3275,
+                      "sha256":  "7BC72E7F27FFFCE8EF7155E5F111CAF6F4D7FD01B3DE8D7F722FAF4B7573FDD0"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/parent-teacher-private.ts",
+                      "size":  888,
+                      "sha256":  "74DC85136494F4D1CFFD19816149DD43272E7686A15140D0F61C90752108E3A4"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/review-scheduling.ts",
+                      "size":  2235,
+                      "sha256":  "C691B87B677EF1B187D25F0DCA125FEF2FD3BB4E6C1E1883CBF1D66E1ACD50BE"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/study-plan.ts",
+                      "size":  4520,
+                      "sha256":  "E1A244B40886F3505EF458361B08CF46221C8D379B3CA13A210F09ECDDD16644"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/study-session.ts",
+                      "size":  5339,
+                      "sha256":  "6ACC9859B0C9762422083A0DD9A80F276C24D6B390C2FC6AF04EDC3F9884EB7B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/tsconfig.json",
+                      "size":  443,
+                      "sha256":  "70CBCBDA52DA2EAD7BDF0BFD8A8A2B0DD8B9300B5D170EE18BB24B9651E2D196"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/type-contracts.type-test.ts",
+                      "size":  902,
+                      "sha256":  "334CCEC125458D59BD36C0F9A4E1D8D2058713493F707E268E76B1AF05C7EAEA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/contracts/versioning.ts",
+                      "size":  1455,
+                      "sha256":  "9C9D0337AA2E214B24A5E6753E6428E824FCF451A6C09639549BE01F351F8F33"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/adapters/index.ts",
+                      "size":  363,
+                      "sha256":  "2000AD71C9EF011A87C45230E64A136B9ACC519B978650ABAE269365835D1C62"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/adapters/provisional-contracts.ts",
+                      "size":  7046,
+                      "sha256":  "53507A00CD2AD8D53A6CD8F76708F9D483632ABEEB43C11E93F2B4FDC8F987F5"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/breaks/break-recommender.ts",
+                      "size":  16484,
+                      "sha256":  "8A17E12E013A4DCE61A3EE4F38E401A5094C5FD15E52A269DD72768DB5BB1FE5"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/breaks/index.ts",
+                      "size":  336,
+                      "sha256":  "A5B039FEF4DB0F9C5D52C75E024FC7CD6183DF7FF335871FABD8E0AFFBF2513C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/breaks/types.ts",
+                      "size":  4628,
+                      "sha256":  "F78A39B256CECD8F0402F1880343E2BC3D25990010BAFB73D020FAF4C4A32183"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/evidence/evidence-classifier.ts",
+                      "size":  10135,
+                      "sha256":  "60FE4F03EC591AC894CBED79E31317BB18A8632A728435D909FDFB06E92C66DD"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/evidence/index.ts",
+                      "size":  295,
+                      "sha256":  "DDE6D7F59FCCF40D7382A10C4BEB730B2EF9A64CB76BD0FD94A431498D77AFB7"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/evidence/types.ts",
+                      "size":  3129,
+                      "sha256":  "16017D5F88D96FD43FC04548C4C8FFDB7EB00A71EFA3C8B2B7CDFC10BABB91DA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/focus/index.ts",
+                      "size":  534,
+                      "sha256":  "97C0C010BC6FAC9C656BB95D4C1BAA582CD5916BB2557A2B86642E488CB2E5B8"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/focus/recommend-focus-duration.ts",
+                      "size":  18376,
+                      "sha256":  "1F19BBD8B4F4D8527BDFC101EAABA49AEBE5FCA78870B6B795E740E5CA766CE6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/focus/types.ts",
+                      "size":  5122,
+                      "sha256":  "47A04071DAA0392A43345A016E96F72ADFE9878111BCFB17297AF096BCC03ADD"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/index.ts",
+                      "size":  295,
+                      "sha256":  "5B050E2F645C6DBB86C52D278D22CB4E8890F9EAC6481035FE21A96235CDAD6E"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/interleaving/index.ts",
+                      "size":  426,
+                      "sha256":  "22C1E337D9FDB8472A75FE0F3C0A401672B20FE44A5DDEF107FC0AAE80B0EA1A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/interleaving/interleaving-scheduler.ts",
+                      "size":  20505,
+                      "sha256":  "0C281D09657DB8C7356B5B937C0C2BFD98410909FCAE00B643E313DC02E63214"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/interleaving/types.ts",
+                      "size":  3498,
+                      "sha256":  "3139CDF54E942A8AE3DB7210FF4FDB1CF6AFD7DA27AF52A4848DBC59A4635A11"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/orchestrator/index.ts",
+                      "size":  417,
+                      "sha256":  "51628AE102591827E2D5216E5A945A7556176BF64CF9CE75C679E462DDFAFA97"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/orchestrator/orchestrator.ts",
+                      "size":  12557,
+                      "sha256":  "3167F13B3B101E0DAD71227118D16C888F399E10030CF26F76D0DBF6AC55292A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/orchestrator/types.ts",
+                      "size":  3242,
+                      "sha256":  "7976A2DDC9A207C0FF9D1A0194101A6BA87890332B45CFC90EAAEA939BFF861A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/review/calendar-date.ts",
+                      "size":  4847,
+                      "sha256":  "05EF2E842F3715A5FDB191AF9EEE7836DAE7D9F1208382128C4A14B765262895"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/review/index.ts",
+                      "size":  627,
+                      "sha256":  "D40BA2D1B79CCF4342275260B0A24D8CB4669F5660AE93600CB5C38A371C5104"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/review/review-scheduler.ts",
+                      "size":  16720,
+                      "sha256":  "1E93F25B56C5BB1FD75EEC52EA8344E153A887BC4A28DF05DE18A2CC3105535F"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/review/types.ts",
+                      "size":  3627,
+                      "sha256":  "6C8F64D11AE95E3873B3933912C259610C84F23BAE9EB04BB9EEB236DB000C75"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/safety/index.ts",
+                      "size":  169,
+                      "sha256":  "784614A6BA9F649CE44A33720FED3A5CF486AFF5FF1AE768F3855D64653D7C03"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/safety/language.ts",
+                      "size":  3155,
+                      "sha256":  "97FDD9B3887A2273EE558EC9945FB626213083F1D8DC11FB9DA25F6FE1C404BD"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/engine/tsconfig.json",
+                      "size":  346,
+                      "sha256":  "108C827530389191E98FBA05FCA19A3567915954F78E36DC3474983E9D2DD910"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/prompts/index.ts",
+                      "size":  233,
+                      "sha256":  "D3E0C79B1FF2AE51E85BF68B65FEDC328C51DB37DEE50FE9E6406C994B96E67C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/prompts/jarvis.ts",
+                      "size":  8054,
+                      "sha256":  "4EFF2C6F83D244181EDA4442673B8F7941A360B15851BA94C15EEA68FAF01BEF"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/prompts/README.md",
+                      "size":  706,
+                      "sha256":  "261641A4DCD658538B770F901F1F38B62B3D2B31B6E8B2B3241B5819F927CB2A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/prototype/src/content.ts",
+                      "size":  15266,
+                      "sha256":  "96EB42203E92784FE8B2A3A0B5AC08B02C8DEA9E5F48987D692102E9F668756C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/prototype/src/sessionStore.ts",
+                      "size":  23536,
+                      "sha256":  "462F47BE495F5324698B352FAE342444E890314924B31A542FFBC9A2B3D718FB"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/prototype/src/styles.css",
+                      "size":  45530,
+                      "sha256":  "FF55FF7DD96ECA6B051A9D4773E9264FFEAA4B8B10750CD00F3E72A7F1473423"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/fixtures.test.ts",
+                      "size":  2203,
+                      "sha256":  "88A996B55A159CFBA868267CF40825220346111F33949E635B4B58284B5B623B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/focus-profile.schema.ts",
+                      "size":  28257,
+                      "sha256":  "742AC6D0AF8AF1DCE01652127BF8C4D50DA36B29F28CA11E496124986EB83AB8"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/generated/learning-evidence.v1.schema.json",
+                      "size":  14373,
+                      "sha256":  "F46CF610C62A8E19367C179CF769AD8C7FCE0CEEB4F0A97C01073B9D187A1B37"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/generated/lesson-study-plan.v1.schema.json",
+                      "size":  20799,
+                      "sha256":  "984499C68D7F203F955091271FDCE9D92EBB67D20986CD21CEF4DACBA62623F6"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/generated/parent-teacher-controls.v1.schema.json",
+                      "size":  12563,
+                      "sha256":  "8214A0266C19A7A5BB5228F2134C715426BE388D5878A2BB86A8CBAE326E920C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/generated/parent-teacher-private.v1.schema.json",
+                      "size":  3821,
+                      "sha256":  "B1802F7114CE25C0CB9190EB801DF93F7C99FB484BC4E7F74EC85F7698A2DDA8"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/generated/student-focus-profile.v1.schema.json",
+                      "size":  19630,
+                      "sha256":  "CFE833D7915B876E5FE8F26C854BCCEA1FE9DC979FC01D5E777C07A32C4D16D1"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/generated/student-skill-review.v1.schema.json",
+                      "size":  16037,
+                      "sha256":  "3446F803C8C9704A0AF8010F41BA75BB3DD8FED1CBD1EE0A7FEF16691A34D237"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/generated/study-session.v1.schema.json",
+                      "size":  14472,
+                      "sha256":  "D0037BADA8BA4F576B893CC356549EE39475659D1918F533C6160BAA6150DDDA"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/generate-json-schemas.ts",
+                      "size":  1313,
+                      "sha256":  "48AAA90017222724079F821B9A58BB969C7901AB56158B6D0D95373655F8586B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/identifier-stability.test.ts",
+                      "size":  2745,
+                      "sha256":  "A47D0DDD5F998CDB740C50E435AECD2DED0EA2994F31A631CD9FCBB77B0ECD9E"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/index.ts",
+                      "size":  413,
+                      "sha256":  "BFF14E54F4B875F2B0046C41B4765FC622143DAB469D35864F27D7E57763EBAD"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/json-schema.ts",
+                      "size":  3880,
+                      "sha256":  "959127ECB3455D4FE83BD3DD7D16AFB8D62A49E332919AC9EC608674BE67EF94"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/learning-evidence.schema.ts",
+                      "size":  26442,
+                      "sha256":  "4ED6E60701AEECA487A31420F4124F3ABA87D748320E701D395B235F16A1EAEB"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/migrations.ts",
+                      "size":  1810,
+                      "sha256":  "647447108D1FA5526E593B5DB44D68769A981379D6DC31E00CAAB88E854A1874"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/package-contracts.ps1",
+                      "size":  2060,
+                      "sha256":  "8AFF60EF736FCDFACA62929608EB3624B9CEB2DDB1B82ED596EE0089D4079B45"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/parent-teacher-controls.schema.ts",
+                      "size":  19511,
+                      "sha256":  "FBE6F05CA1DA459D926798BC9BAA83B7C50CC7B269C8FF381BAF1B9429A75ED7"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/parent-teacher-private.schema.ts",
+                      "size":  4823,
+                      "sha256":  "8F3A40BB8A9E2AFE7F95A3B5DA7D3412BF92DB898FF55B437C21CD03E8CC5DAF"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/registry.ts",
+                      "size":  1867,
+                      "sha256":  "857EE67CB48CD4346D799ACF4277F90C94A5DB97406A3F4CF07108724AF4B380"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/review-scheduling.schema.ts",
+                      "size":  17436,
+                      "sha256":  "C484752AF43CD457819BD317615638693F54DA1339EBA9DC14C20A469B52EEFD"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/safety-privacy.test.ts",
+                      "size":  4290,
+                      "sha256":  "8E5970B2817FDACC8CF09F320319E689A19592029157146C32BB1B7968711122"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/schema-roundtrip.test.ts",
+                      "size":  1812,
+                      "sha256":  "D32B69E0C1077975B302271E0652D6586670119BEEE9A9C9CEED1C0E6D2640F0"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/session-state.test.ts",
+                      "size":  2418,
+                      "sha256":  "DBBA307317863930FA8FDB913497BA310C5011B3AFD229DF83ABA260711F0919"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/study-plan.schema.ts",
+                      "size":  29765,
+                      "sha256":  "18F9770C3739923592ED33A5A0BA9843BF3054C7B65296143C7F5B784C8D4B83"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/study-session.schema.ts",
+                      "size":  29771,
+                      "sha256":  "ACE24C9BAB6321BB2D621A10B7B83552192A677C5A478C569F8724EDF91E289A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/test-helpers.ts",
+                      "size":  3191,
+                      "sha256":  "4448AD8C811E6D4E7CCD062DE4B541C02EC810E2DD437BD26CD33E0A2650B62B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/validation.ts",
+                      "size":  20665,
+                      "sha256":  "7F20275EE4FB11071FCBCBEC190C000A7E2A49C3161155DD9EDF49F310D53E39"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/validation-boundary.test.ts",
+                      "size":  2619,
+                      "sha256":  "2CCBB4C5B3C3DDE75C3FE743B215D41BF60ADABFEE0C9E074D8DADE51F0C73B3"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/schemas/versioning.test.ts",
+                      "size":  1906,
+                      "sha256":  "950737467D0E768CC89495558A73D5C5681C172EE2ADB42E5EAAC9C5518CF754"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/BreakScreen.tsx",
+                      "size":  3346,
+                      "sha256":  "8A6DE0553F6F87DA0AB8CDC9BBB4371914155E097A970F722E706BF907756C9C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/ComfortPanel.tsx",
+                      "size":  4611,
+                      "sha256":  "D26380A82642537E1CB5A16E1A70C7BF4821A0DA1990C284B9B323E1E6E14912"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/integrationAdapter.ts",
+                      "size":  4708,
+                      "sha256":  "CAFB7DD201212D2247ED314E12CF59A85DBCB03E19BE55632A349F21508D4F86"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/jarvis-core.css",
+                      "size":  13980,
+                      "sha256":  "B335DF067B1B2CCBFA24A838C3390BFBB0C7052F739748EA6765AB6FA572F94A"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/JarvisCore.tsx",
+                      "size":  6341,
+                      "sha256":  "519BE4EF73474639DF1636B4DF92A9062550DF48F363207D32BC842F6B001F13"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/LearnerActions.tsx",
+                      "size":  1486,
+                      "sha256":  "5C5778F89448DF004C721A88A151737D837AB38DE49C6EC05BFE13468DA14F6B"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/ReflectionCheck.tsx",
+                      "size":  2395,
+                      "sha256":  "E811721C71F86CFCE692FA45E6F69339184582B6486D56DAA359584237075692"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/ResumeLessonCard.tsx",
+                      "size":  1466,
+                      "sha256":  "2BE8CF8116FC537CC6E7EABD2D627538E1E314D8113F6E9C54D92D581FE32960"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/SegmentProgress.tsx",
+                      "size":  1909,
+                      "sha256":  "4CD1A6FA438137592135985DE0695253A755F0CC88D16EB26D04B9F784C5216C"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/SessionTimer.tsx",
+                      "size":  2830,
+                      "sha256":  "ADF8436722CED767001DB886A6168457AA274B553ABEC0FEC08F71F5D3242109"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vendor/study-engine/ui/TeachingBoard.tsx",
+                      "size":  5779,
+                      "sha256":  "0F962CEFDB46E7CF0FADA95C2D9A39D7CA860FB9505998878CD8B4A88AD86D6E"
+                  },
+                  {
+                      "path":  "integration-labs/student-runtime/vite.config.ts",
+                      "size":  1973,
+                      "sha256":  "CA7186CF278D9293CD54D07A9A869251D41CBF43B33CBA5337054AD475825FFD"
+                  },
+                  {
+                      "path":  "tests/student-runtime/e2e/accessibility.spec.ts",
+                      "size":  14496,
+                      "sha256":  "24EB1413F1D305AB34FEDBCD6830C99B53540B0DC25B3A7453BA986F0B9E3146"
+                  },
+                  {
+                      "path":  "tests/student-runtime/e2e/adversarial-resilience.spec.ts",
+                      "size":  8828,
+                      "sha256":  "FD233AADBA79ACDB078FF8056F86CDAED56723B9492844D1BB74BDD6398512C5"
+                  },
+                  {
+                      "path":  "tests/student-runtime/e2e/flow-demonstrations.spec.ts",
+                      "size":  6780,
+                      "sha256":  "8B60213B8E10C40DBB7E934EB5516C36AF5590090FA3ED35AD18AF857CC975AE"
+                  },
+                  {
+                      "path":  "tests/student-runtime/e2e/mobile.runtime.spec.ts",
+                      "size":  7675,
+                      "sha256":  "4C15BED685E15664AEEEC4F0737A76AC4A7289FD2AB36F6E4CDF09ECA6407496"
+                  },
+                  {
+                      "path":  "tests/student-runtime/e2e/student-ux-integration-agent.spec.ts",
+                      "size":  5106,
+                      "sha256":  "8D8B5B822DFB63E2EA89112599B8A815F089ABF19F15018104D470BF55513E34"
+                  },
+                  {
+                      "path":  "tests/student-runtime/package.json",
+                      "size":  98,
+                      "sha256":  "1D055491B66B0626901E49F3D6FC3408A2B8C2FEEAFDECCF069081CDDF6322FE"
+                  },
+                  {
+                      "path":  "tests/student-runtime/tsconfig.json",
+                      "size":  211,
+                      "sha256":  "450833EC84671B050C3C6DBE1D62E1B8D2949065D2A9E49E6EB6705F5DFCD497"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/acceptedStudyCoreBridge.test.ts",
+                      "size":  1351,
+                      "sha256":  "A209A5E50AA32EE7F68FAD8E5D646141CC249534847821FFD520406323739248"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/accessibilityAdversarial.agent.test.ts",
+                      "size":  7224,
+                      "sha256":  "20614E6B925DAC79F2D8C6CF7AD3C677B625A8FF870A87D5B702C034EB9783E8"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/canonical-contract-agent.test.ts",
+                      "size":  1091,
+                      "sha256":  "76E41AF2D8691BE42E3DB0F8DFD9C10C44AAFFA7952BAD58325524DD16F8945F"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/canonicalFlow.test.ts",
+                      "size":  10722,
+                      "sha256":  "733C8F019F974EBE026F9BE19DA9BD79D5A23B32427FD1C059844C5FDBDAB322"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/deterministicTrace.test.ts",
+                      "size":  2712,
+                      "sha256":  "C0797196709AA2F8A1572FD39D7286BF036B4DF29EC22230983CB88F4D60D452"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/engineAdapterRetirement.agent.test.ts",
+                      "size":  7745,
+                      "sha256":  "9E7E94B6A8463111A97A747CE678F05F35EE57BA2252EFAD0D6C37FDBBE7D433"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/persistenceDuplicateEvent.agent.test.ts",
+                      "size":  4280,
+                      "sha256":  "10AB8D8787EE621D88BC7B919CB29CF46D862A49926EE3060A83346D0C8D367D"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/policyAndAdversarial.test.ts",
+                      "size":  8107,
+                      "sha256":  "B9E9AD6FB7C7715EF9BCBC6024608A1FE00C827B96E4D7C6A939C613FF3DC385"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/releaseEvidenceConsistency.agent.test.ts",
+                      "size":  2233,
+                      "sha256":  "873565B252F401BB1B4AE9D5E251A2080EA3D0366D10DDEE62B5C3A8D381D0B7"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/resumeStore.test.ts",
+                      "size":  15917,
+                      "sha256":  "43A4E24E236E9DD0B81D92DA96207AE04DC700726F816474AF50E082FC135521"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/runtimeHarness.ts",
+                      "size":  2493,
+                      "sha256":  "75204262C4197170BE3C85A985BF4D83E98D87ECB0BEA4046AE021D805E1E6C9"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/runtimeMachine.test.ts",
+                      "size":  1030,
+                      "sha256":  "FF83CF283E3759BC3C5B5344FC48ED7347EC70E56753B66E0CE520BD7AB1B077"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/safetyPrivacyBridge.agent.test.ts",
+                      "size":  5988,
+                      "sha256":  "EF31B6491DB9C0E28C9E5C6080E01D21F2AD36D9F609F7326DC0331F6001DB89"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/timezone.test.ts",
+                      "size":  1404,
+                      "sha256":  "BAE80A8146B685620B3A0B0B22A0D73979D41E77E31D16D2BF9641220BC6C335"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/traceGeneration.agent.test.ts",
+                      "size":  4002,
+                      "sha256":  "2E5151E5AE555D26CE9EB104988D484FE43B801D1B25713FB8A2A44C0D0078E9"
+                  },
+                  {
+                      "path":  "tests/student-runtime/unit/uiActionVocabulary.test.ts",
+                      "size":  899,
+                      "sha256":  "A186CCE7F74055B7317879962FEC54DD47CBCFC9BE95A84D6DA0B9186FA8C97B"
+                  }
+              ]
+}

@@ -1,0 +1,199 @@
+{
+  "items": [
+    {
+      "id": "math-md-g01",
+      "type": "multiple-choice",
+      "prompt": "Which equation represents 9 equal groups of 7?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "9 + 7"
+        },
+        {
+          "id": "B",
+          "text": "9 × 7"
+        },
+        {
+          "id": "C",
+          "text": "63 ÷ 9"
+        },
+        {
+          "id": "D",
+          "text": "Both B and C describe the same relationship"
+        }
+      ],
+      "correctChoiceId": "D",
+      "reasoning": "9 × 7 = 63 and 63 ÷ 9 = 7 are related equations.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-md-repeated-add-only"
+        ],
+        "B": [
+          "math-mis-md-inverse-gap"
+        ],
+        "C": [
+          "math-mis-md-inverse-gap"
+        ]
+      },
+      "representation": "equal-groups",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-g02",
+      "type": "multiple-choice",
+      "prompt": "What is 18 × 7 using (10 × 7) + (8 × 7)?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "126"
+        },
+        {
+          "id": "B",
+          "text": "96"
+        },
+        {
+          "id": "C",
+          "text": "78"
+        },
+        {
+          "id": "D",
+          "text": "136"
+        }
+      ],
+      "correctChoiceId": "A",
+      "reasoning": "The partial products are 10 × 7 = 70 and 8 × 7 = 56; combining them gives 126.",
+      "misconceptionSignals": {
+        "B": [
+          "math-mis-md-partial-product"
+        ],
+        "C": [
+          "math-mis-md-repeated-add-only"
+        ],
+        "D": [
+          "math-mis-md-partial-product"
+        ]
+      },
+      "representation": "area-model",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-g03",
+      "type": "multiple-choice",
+      "prompt": "What is 144 ÷ 12?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "10"
+        },
+        {
+          "id": "B",
+          "text": "11"
+        },
+        {
+          "id": "C",
+          "text": "12"
+        },
+        {
+          "id": "D",
+          "text": "13"
+        }
+      ],
+      "correctChoiceId": "C",
+      "reasoning": "Because 12 × 12 = 144.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-md-inverse-gap"
+        ],
+        "B": [
+          "math-mis-md-inverse-gap"
+        ],
+        "D": [
+          "math-mis-md-inverse-gap"
+        ]
+      },
+      "representation": "fact-family",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-g04",
+      "type": "open-response",
+      "prompt": "Draw or describe an array for 16 × 5 and split it into two easier rectangles.",
+      "acceptableEvidence": [
+        "Examples: 10 × 5 and 6 × 5; 8 × 5 and 8 × 5.",
+        "Partial products total 80.",
+        "Connects both rectangles to the full array."
+      ],
+      "reasoning": "A valid decomposition preserves all 16 groups and combines partial products to 80.",
+      "misconceptionSignals": {
+        "omits region": [
+          "math-mis-md-partial-product"
+        ]
+      },
+      "representation": "area-model",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-g05",
+      "type": "multiple-choice",
+      "prompt": "Fifty-two stickers are shared equally among 6 students. Which statement best describes the result?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Each gets 8 and 4 are left"
+        },
+        {
+          "id": "B",
+          "text": "Each gets 9 with none left"
+        },
+        {
+          "id": "C",
+          "text": "Each gets 8 and throw away 4"
+        },
+        {
+          "id": "D",
+          "text": "Each gets 46"
+        }
+      ],
+      "correctChoiceId": "A",
+      "reasoning": "6 × 8 = 48, leaving 4 stickers. The context may decide what to do with leftovers.",
+      "misconceptionSignals": {
+        "B": [
+          "math-mis-md-inverse-gap"
+        ],
+        "C": [
+          "math-mis-md-remainder-rule"
+        ],
+        "D": [
+          "math-mis-md-division-subtraction"
+        ]
+      },
+      "representation": "equal-groups",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-g06",
+      "type": "open-response",
+      "prompt": "Explain how 13 × 9 can help solve 117 ÷ 9.",
+      "acceptableEvidence": [
+        "States 13 × 9 = 117.",
+        "Uses inverse relationship to conclude the missing factor is 13.",
+        "May write the fact family."
+      ],
+      "reasoning": "Multiplication checks division: if 13 groups of 9 make 117, then 117 divided into groups of 9 makes 13 groups.",
+      "misconceptionSignals": {
+        "no inverse link": [
+          "math-mis-md-inverse-gap"
+        ]
+      },
+      "representation": "fact-family",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    }
+  ],
+  "scaffolding": "Move from arrays to equations to context; require a multiplication check for at least one division item."
+}

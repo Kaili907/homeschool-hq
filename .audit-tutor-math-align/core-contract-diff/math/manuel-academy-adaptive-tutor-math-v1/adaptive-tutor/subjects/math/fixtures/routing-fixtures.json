@@ -1,0 +1,194 @@
+[
+  {
+    "fixtureId": "fixture-math-mis-pv-digit-vs-value",
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "observedEvidence": "Chooses 7 or 7,000 for the 7 in 472,615.",
+    "expectedMisconceptionId": "math-mis-pv-digit-vs-value",
+    "expectedRoute": "reteach-pv-place-value-chart",
+    "tutorFirstResponse": "You found the digit. Now let’s connect its position to how much it is worth."
+  },
+  {
+    "fixtureId": "fixture-math-mis-pv-zero-skip",
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "observedEvidence": "Reads 402,306 as 42,36 or decomposes it without the thousands/hundreds positions.",
+    "expectedMisconceptionId": "math-mis-pv-zero-skip",
+    "expectedRoute": "reteach-pv-zero-placeholders",
+    "tutorFirstResponse": "A zero can hold a place even when it adds no amount. Let’s keep every column visible."
+  },
+  {
+    "fixtureId": "fixture-math-mis-pv-regroup-changes-number",
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "observedEvidence": "Says 14 ones and 1 ten 4 ones are different amounts.",
+    "expectedMisconceptionId": "math-mis-pv-regroup-changes-number",
+    "expectedRoute": "reteach-pv-trade-equivalence",
+    "tutorFirstResponse": "Regrouping changes the form, not the amount. Let’s make a fair trade of ten for one unit in the next place."
+  },
+  {
+    "fixtureId": "fixture-math-mis-pv-borrow-zero",
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "observedEvidence": "Cannot regroup in 5,002 − 187.",
+    "expectedMisconceptionId": "math-mis-pv-borrow-zero",
+    "expectedRoute": "reteach-pv-across-zeros",
+    "tutorFirstResponse": "The next column is zero, so we need to trace the trade to the first place that has a unit available."
+  },
+  {
+    "fixtureId": "fixture-math-mis-pv-big-minus-small",
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "observedEvidence": "Computes 42 − 18 as 36.",
+    "expectedMisconceptionId": "math-mis-pv-big-minus-small",
+    "expectedRoute": "reteach-pv-subtraction-order",
+    "tutorFirstResponse": "You compared the two digits, but subtraction keeps the order of the whole numbers. Let’s regroup the top number instead."
+  },
+  {
+    "fixtureId": "fixture-math-mis-pv-left-align",
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "observedEvidence": "Writes 4,083 over 2759 so 4 aligns with 2.",
+    "expectedMisconceptionId": "math-mis-pv-left-align",
+    "expectedRoute": "reteach-pv-alignment",
+    "tutorFirstResponse": "The digits need to line up by place, not by the left edge. Let’s anchor the ones column first."
+  },
+  {
+    "fixtureId": "fixture-math-mis-md-repeated-add-only",
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "observedEvidence": "Counts every object one by one in a large array.",
+    "expectedMisconceptionId": "math-mis-md-repeated-add-only",
+    "expectedRoute": "reteach-md-array-decompose",
+    "tutorFirstResponse": "Repeated addition is one meaning. Let’s also use the array’s structure so we do not have to count one object at a time."
+  },
+  {
+    "fixtureId": "fixture-math-mis-md-groups-size-swap",
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "observedEvidence": "Uses the wrong unit in a word problem.",
+    "expectedMisconceptionId": "math-mis-md-groups-size-swap",
+    "expectedRoute": "reteach-md-equal-groups",
+    "tutorFirstResponse": "The product may stay the same, but the story roles are different. Let’s label groups and items in each group."
+  },
+  {
+    "fixtureId": "fixture-math-mis-md-division-subtraction",
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "observedEvidence": "Answers 24 ÷ 6 as 18.",
+    "expectedMisconceptionId": "math-mis-md-division-subtraction",
+    "expectedRoute": "reteach-md-division-meaning",
+    "tutorFirstResponse": "Division asks how many equal groups or how many in each group, not what remains after one subtraction."
+  },
+  {
+    "fixtureId": "fixture-math-mis-md-inverse-gap",
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "observedEvidence": "Knows 7 × 8 but cannot use it for 56 ÷ 7.",
+    "expectedMisconceptionId": "math-mis-md-inverse-gap",
+    "expectedRoute": "reteach-md-fact-family",
+    "tutorFirstResponse": "The same three numbers can tell a multiplication and division family. Let’s use the known product to find the missing factor."
+  },
+  {
+    "fixtureId": "fixture-math-mis-md-partial-product",
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "observedEvidence": "Computes 23 × 6 as 18 or 120.",
+    "expectedMisconceptionId": "math-mis-md-partial-product",
+    "expectedRoute": "reteach-md-area-model",
+    "tutorFirstResponse": "You solved one part. Let’s match every part of 23 to a partial product before combining."
+  },
+  {
+    "fixtureId": "fixture-math-mis-md-remainder-rule",
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "observedEvidence": "Always drops the remainder or always rounds up.",
+    "expectedMisconceptionId": "math-mis-md-remainder-rule",
+    "expectedRoute": "reteach-md-remainder-context",
+    "tutorFirstResponse": "The calculation gives a remainder, but the story decides what that remainder means."
+  },
+  {
+    "fixtureId": "fixture-math-mis-fr-whole-number-rules",
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "observedEvidence": "Says 1/8 is greater than 1/4 because 8 is greater than 4.",
+    "expectedMisconceptionId": "math-mis-fr-whole-number-rules",
+    "expectedRoute": "reteach-fr-unit-size",
+    "tutorFirstResponse": "The denominator tells how many equal parts make the whole. More equal parts means each part is smaller."
+  },
+  {
+    "fixtureId": "fixture-math-mis-fr-one-sided-scale",
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "observedEvidence": "Changes 2/3 to 4/3 or 2/6.",
+    "expectedMisconceptionId": "math-mis-fr-one-sided-scale",
+    "expectedRoute": "reteach-fr-equivalence",
+    "tutorFirstResponse": "For an equivalent fraction, the numerator and denominator must be scaled by the same nonzero factor."
+  },
+  {
+    "fixtureId": "fixture-math-mis-fr-add-denominators",
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "observedEvidence": "Computes 2/5 + 1/3 as 3/8.",
+    "expectedMisconceptionId": "math-mis-fr-add-denominators",
+    "expectedRoute": "reteach-fr-common-units",
+    "tutorFirstResponse": "We can combine only pieces with the same name. Let’s rename both fractions with a common denominator first."
+  },
+  {
+    "fixtureId": "fixture-math-mis-fr-common-product-only",
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "observedEvidence": "Uses 48 for 3/8 and 1/4 and cannot see 8.",
+    "expectedMisconceptionId": "math-mis-fr-common-product-only",
+    "expectedRoute": "reteach-fr-common-denominator",
+    "tutorFirstResponse": "The product can work, but a smaller shared multiple may make the work easier."
+  },
+  {
+    "fixtureId": "fixture-math-mis-fr-unequal-wholes",
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "observedEvidence": "Calls a larger physical 1/4 greater than a smaller physical 1/2 without checking the whole.",
+    "expectedMisconceptionId": "math-mis-fr-unequal-wholes",
+    "expectedRoute": "reteach-fr-same-whole",
+    "tutorFirstResponse": "Fraction comparisons need the same-size whole. Let’s make the wholes equal before comparing the parts."
+  },
+  {
+    "fixtureId": "fixture-math-mis-fr-simplify-subtract",
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "observedEvidence": "Changes 6/8 to 4/6.",
+    "expectedMisconceptionId": "math-mis-fr-simplify-subtract",
+    "expectedRoute": "reteach-fr-simplify",
+    "tutorFirstResponse": "Simplifying divides both numbers by the same common factor; subtracting does not preserve the ratio."
+  },
+  {
+    "fixtureId": "fixture-math-mis-wp-keyword-only",
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "observedEvidence": "Sees “left” and always subtracts, even when the structure differs.",
+    "expectedMisconceptionId": "math-mis-wp-keyword-only",
+    "expectedRoute": "reteach-wp-relationships",
+    "tutorFirstResponse": "A keyword can be a clue, but the quantities and their relationships decide the operation."
+  },
+  {
+    "fixtureId": "fixture-math-mis-wp-use-all-numbers",
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "observedEvidence": "Includes a date, room number, or unused count in a calculation.",
+    "expectedMisconceptionId": "math-mis-wp-use-all-numbers",
+    "expectedRoute": "reteach-wp-relevant-data",
+    "tutorFirstResponse": "Not every number must be used. Let’s label what each number measures and connect only the needed quantities."
+  },
+  {
+    "fixtureId": "fixture-math-mis-wp-one-step-stop",
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "observedEvidence": "Finds total made but not how many remain.",
+    "expectedMisconceptionId": "math-mis-wp-one-step-stop",
+    "expectedRoute": "reteach-wp-answer-target",
+    "tutorFirstResponse": "That number answers an important first step. Now let’s return to the question and see what is still missing."
+  },
+  {
+    "fixtureId": "fixture-math-mis-wp-wrong-order",
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "observedEvidence": "Subtracts before finding the total produced.",
+    "expectedMisconceptionId": "math-mis-wp-wrong-order",
+    "expectedRoute": "reteach-wp-step-order",
+    "tutorFirstResponse": "You selected useful operations. Let’s put them in dependency order so each step creates what the next step needs."
+  },
+  {
+    "fixtureId": "fixture-math-mis-wp-unit-mismatch",
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "observedEvidence": "Adds students to dollars or boxes to individual items.",
+    "expectedMisconceptionId": "math-mis-wp-unit-mismatch",
+    "expectedRoute": "reteach-wp-units",
+    "tutorFirstResponse": "The numbers need matching meanings before they can be combined. Let’s attach a unit to every quantity."
+  },
+  {
+    "fixtureId": "fixture-math-mis-wp-no-check",
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "observedEvidence": "Reports more items remaining than were made.",
+    "expectedMisconceptionId": "math-mis-wp-no-check",
+    "expectedRoute": "reteach-wp-check",
+    "tutorFirstResponse": "The calculation is not the last step. Let’s check the size, unit, and whether it answers the actual question."
+  }
+]

@@ -1,0 +1,184 @@
+{
+  "items": [
+    {
+      "id": "math-md-m01",
+      "type": "multiple-choice",
+      "prompt": "What is 26 × 8 using an area model?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "160"
+        },
+        {
+          "id": "B",
+          "text": "188"
+        },
+        {
+          "id": "C",
+          "text": "208"
+        },
+        {
+          "id": "D",
+          "text": "216"
+        }
+      ],
+      "correctChoiceId": "C",
+      "reasoning": "20 × 8 = 160 and 6 × 8 = 48; 160 + 48 = 208.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-md-partial-product"
+        ],
+        "B": [
+          "math-mis-md-partial-product"
+        ],
+        "D": [
+          "math-mis-md-repeated-add-only"
+        ]
+      },
+      "representation": "area-model",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-m02",
+      "type": "multiple-choice",
+      "prompt": "What is 216 ÷ 18?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "10"
+        },
+        {
+          "id": "B",
+          "text": "11"
+        },
+        {
+          "id": "C",
+          "text": "12"
+        },
+        {
+          "id": "D",
+          "text": "14"
+        }
+      ],
+      "correctChoiceId": "C",
+      "reasoning": "Because 18 × 12 = 216, division by 18 returns the missing factor 12.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-md-inverse-gap"
+        ],
+        "B": [
+          "math-mis-md-inverse-gap"
+        ],
+        "D": [
+          "math-mis-md-inverse-gap"
+        ]
+      },
+      "representation": "fact-family",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-m03",
+      "type": "open-response",
+      "prompt": "Write all four equations in the fact family for 9, 14, and 126.",
+      "acceptableEvidence": [
+        "9 × 14 = 126",
+        "14 × 9 = 126",
+        "126 ÷ 9 = 14",
+        "126 ÷ 14 = 9"
+      ],
+      "reasoning": "The two multiplication and two division equations use the same three numbers.",
+      "misconceptionSignals": {
+        "missing inverse": [
+          "math-mis-md-inverse-gap"
+        ]
+      },
+      "representation": "equation",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-m04",
+      "type": "multiple-choice",
+      "prompt": "A bakery packs 95 rolls in trays that hold 12. How many trays are needed to hold every roll?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "7 remainder 11"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        },
+        {
+          "id": "D",
+          "text": "9"
+        }
+      ],
+      "correctChoiceId": "C",
+      "reasoning": "Seven trays hold 84 rolls and 11 remain, so an eighth tray is needed.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-md-remainder-rule"
+        ],
+        "B": [
+          "math-mis-md-remainder-rule"
+        ],
+        "D": [
+          "math-mis-md-groups-size-swap"
+        ]
+      },
+      "representation": "word-context",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-m05",
+      "type": "open-response",
+      "prompt": "Compare 5 groups of 12 and 12 groups of 5. What stays the same, and what changes in a story?",
+      "acceptableEvidence": [
+        "Both products are 60.",
+        "Number of groups and size of each group switch roles.",
+        "Units/context may make the two stories different."
+      ],
+      "reasoning": "The commutative property preserves the product, but the contextual meaning of each factor can differ.",
+      "misconceptionSignals": {
+        "says identical stories": [
+          "math-mis-md-groups-size-swap"
+        ]
+      },
+      "representation": "array",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-md-m06",
+      "type": "open-response",
+      "prompt": "Solve 17 × 6 with a decomposition, then use your result to write a related division equation.",
+      "acceptableEvidence": [
+        "Decomposes 17 as 10 + 7 or another valid split.",
+        "Gets 102.",
+        "Writes 102 ÷ 6 = 17 or 102 ÷ 17 = 6."
+      ],
+      "reasoning": "Partial products combine to 102, and division reverses the multiplication relationship.",
+      "misconceptionSignals": {
+        "omits partial": [
+          "math-mis-md-partial-product"
+        ],
+        "no inverse": [
+          "math-mis-md-inverse-gap"
+        ]
+      },
+      "representation": "mixed",
+      "difficultyBand": "independent",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    }
+  ],
+  "masteryRule": "Across at least two sessions, show secure evidence on at least 5 of 6 items, including one area model, one inverse explanation, and one remainder interpretation. One correct fact is not mastery.",
+  "retryRule": "Change numbers and context while preserving the same relationship."
+}

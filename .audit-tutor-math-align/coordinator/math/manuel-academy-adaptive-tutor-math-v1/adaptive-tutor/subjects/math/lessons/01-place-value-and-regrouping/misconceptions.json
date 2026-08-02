@@ -1,0 +1,86 @@
+[
+  {
+    "id": "math-mis-pv-digit-vs-value",
+    "label": "Names the digit instead of its value",
+    "likelyEvidence": [
+      "Chooses 7 or 7,000 for the 7 in 472,615.",
+      "Says the place name but does not multiply by its unit value."
+    ],
+    "distinguishingEvidence": [
+      "Ask for the same digit in two positions, such as 7 in 70,507.",
+      "Ask the learner to build the number with a place-value chart."
+    ],
+    "firstResponse": "You found the digit. Now let’s connect its position to how much it is worth.",
+    "route": "reteach-pv-place-value-chart"
+  },
+  {
+    "id": "math-mis-pv-zero-skip",
+    "label": "Treats zero placeholders as removable",
+    "likelyEvidence": [
+      "Reads 402,306 as 42,36 or decomposes it without the thousands/hundreds positions.",
+      "Aligns numbers by visible digits rather than by place."
+    ],
+    "distinguishingEvidence": [
+      "Compare 4,023 and 423 on a chart.",
+      "Ask which position the zero is holding."
+    ],
+    "firstResponse": "A zero can hold a place even when it adds no amount. Let’s keep every column visible.",
+    "route": "reteach-pv-zero-placeholders"
+  },
+  {
+    "id": "math-mis-pv-regroup-changes-number",
+    "label": "Believes regrouping changes the total",
+    "likelyEvidence": [
+      "Says 14 ones and 1 ten 4 ones are different amounts.",
+      "Adds a carried ten without removing ten ones."
+    ],
+    "distinguishingEvidence": [
+      "Trade 10 ones for 1 ten and recount.",
+      "Write 14 = 10 + 4 beside the model."
+    ],
+    "firstResponse": "Regrouping changes the form, not the amount. Let’s make a fair trade of ten for one unit in the next place.",
+    "route": "reteach-pv-trade-equivalence"
+  },
+  {
+    "id": "math-mis-pv-borrow-zero",
+    "label": "Stops when the next place is zero",
+    "likelyEvidence": [
+      "Cannot regroup in 5,002 − 187.",
+      "Changes a zero directly to 10 without showing where the unit came from."
+    ],
+    "distinguishingEvidence": [
+      "Use 1 thousand → 10 hundreds → 9 hundreds and 10 tens → 9 tens and 12 ones.",
+      "Ask the learner to point to the source of every regrouped unit."
+    ],
+    "firstResponse": "The next column is zero, so we need to trace the trade to the first place that has a unit available.",
+    "route": "reteach-pv-across-zeros"
+  },
+  {
+    "id": "math-mis-pv-big-minus-small",
+    "label": "Subtracts the smaller digit from the larger digit in each column",
+    "likelyEvidence": [
+      "Computes 42 − 18 as 36.",
+      "Ignores which digit belongs to the whole minuend or subtrahend."
+    ],
+    "distinguishingEvidence": [
+      "Ask whether 42 − 18 should be more or less than 30.",
+      "Model the ones column with regrouping."
+    ],
+    "firstResponse": "You compared the two digits, but subtraction keeps the order of the whole numbers. Let’s regroup the top number instead.",
+    "route": "reteach-pv-subtraction-order"
+  },
+  {
+    "id": "math-mis-pv-left-align",
+    "label": "Aligns multi-digit numbers from the left edge",
+    "likelyEvidence": [
+      "Writes 4,083 over 2759 so 4 aligns with 2.",
+      "Produces place-value errors even with accurate facts."
+    ],
+    "distinguishingEvidence": [
+      "Ask the learner to label the ones column first.",
+      "Compare left-aligned and right-aligned layouts."
+    ],
+    "firstResponse": "The digits need to line up by place, not by the left edge. Let’s anchor the ones column first.",
+    "route": "reteach-pv-alignment"
+  }
+]

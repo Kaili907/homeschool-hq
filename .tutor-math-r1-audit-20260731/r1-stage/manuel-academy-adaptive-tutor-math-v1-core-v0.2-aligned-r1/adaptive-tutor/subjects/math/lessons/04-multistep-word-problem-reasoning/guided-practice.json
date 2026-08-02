@@ -1,0 +1,184 @@
+{
+  "items": [
+    {
+      "id": "math-wp-g01",
+      "type": "multiple-choice",
+      "prompt": "A club fills 12 bags with 15 pencils each and gives away 68 pencils. Which two operations are needed?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Addition then division"
+        },
+        {
+          "id": "B",
+          "text": "Multiplication then subtraction"
+        },
+        {
+          "id": "C",
+          "text": "Subtraction then multiplication"
+        },
+        {
+          "id": "D",
+          "text": "Division then addition"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "Find total pencils, then remove the amount given away.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-wp-keyword-only"
+        ],
+        "C": [
+          "math-mis-wp-wrong-order"
+        ],
+        "D": [
+          "math-mis-wp-keyword-only"
+        ]
+      },
+      "representation": "step-diagram",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-wp-g02",
+      "type": "open-response",
+      "prompt": "For the pencil problem, write the hidden first question and the final question.",
+      "acceptableEvidence": [
+        "Hidden: How many pencils are in 12 bags?",
+        "Final: How many pencils remain after 68 are given away?"
+      ],
+      "reasoning": "Naming intermediate and final questions prevents stopping early.",
+      "misconceptionSignals": {
+        "only hidden question": [
+          "math-mis-wp-one-step-stop"
+        ]
+      },
+      "representation": "word-problem-organizer",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-wp-g03",
+      "type": "multiple-choice",
+      "prompt": "A family buys 4 museum tickets at $18 each and pays a $6 parking fee. What is the total cost?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "$72"
+        },
+        {
+          "id": "B",
+          "text": "$78"
+        },
+        {
+          "id": "C",
+          "text": "$96"
+        },
+        {
+          "id": "D",
+          "text": "$102"
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "4 × $18 = $72, then $72 + $6 = $78.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-wp-one-step-stop"
+        ],
+        "C": [
+          "math-mis-wp-wrong-order"
+        ],
+        "D": [
+          "math-mis-wp-unit-mismatch"
+        ]
+      },
+      "representation": "step-diagram",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-wp-g04",
+      "type": "multiple-choice",
+      "prompt": "A tank holds 250 liters. It contains 138 liters, then 47 more liters are added. How many more liters are needed to fill it?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "65 liters"
+        },
+        {
+          "id": "B",
+          "text": "159 liters"
+        },
+        {
+          "id": "C",
+          "text": "185 liters"
+        },
+        {
+          "id": "D",
+          "text": "203 liters"
+        }
+      ],
+      "correctChoiceId": "A",
+      "reasoning": "First find 138 + 47 = 185 liters, then 250 − 185 = 65 liters.",
+      "misconceptionSignals": {
+        "B": [
+          "math-mis-wp-one-step-stop"
+        ],
+        "C": [
+          "math-mis-wp-one-step-stop"
+        ],
+        "D": [
+          "math-mis-wp-wrong-order"
+        ]
+      },
+      "representation": "word-problem-organizer",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-wp-g05",
+      "type": "open-response",
+      "prompt": "A story includes 5 tables, 8 chairs per table, 3 windows, and 7 extra chairs. Identify the data needed to find the total number of chairs.",
+      "acceptableEvidence": [
+        "Uses 5 tables, 8 chairs per table, and 7 extra chairs.",
+        "Excludes 3 windows.",
+        "Plans 5 × 8 + 7."
+      ],
+      "reasoning": "The window count is unrelated to the requested chair total.",
+      "misconceptionSignals": {
+        "uses windows": [
+          "math-mis-wp-use-all-numbers"
+        ]
+      },
+      "representation": "word-problem-organizer",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-wp-g06",
+      "type": "open-response",
+      "prompt": "Solve and check: A camp orders 9 cases of 24 water bottles and uses 157 bottles. How many remain?",
+      "acceptableEvidence": [
+        "9 × 24 = 216.",
+        "216 − 157 = 59 bottles.",
+        "Checks 59 + 157 = 216 or uses an estimate."
+      ],
+      "reasoning": "The inverse check confirms the remaining and used amounts return to the starting total.",
+      "misconceptionSignals": {
+        "stops at 216": [
+          "math-mis-wp-one-step-stop"
+        ],
+        "no unit": [
+          "math-mis-wp-unit-mismatch"
+        ],
+        "no check": [
+          "math-mis-wp-no-check"
+        ]
+      },
+      "representation": "step-diagram",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    }
+  ],
+  "scaffolding": "Require a plan and unit labels before computation; gradually remove organizer prompts."
+}

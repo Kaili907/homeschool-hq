@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "allowed": {
+      "type": "boolean"
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Lowercase ASCII stable content identifier."
+          },
+          "category": {
+            "anyOf": [
+              {
+                "const": "academic-integrity",
+                "type": "string"
+              },
+              {
+                "const": "identifying-information",
+                "type": "string"
+              },
+              {
+                "const": "medical-or-disability-diagnosis",
+                "type": "string"
+              },
+              {
+                "const": "disputed-grading",
+                "type": "string"
+              },
+              {
+                "const": "persistent-difficulty",
+                "type": "string"
+              },
+              {
+                "const": "high-stakes-placement",
+                "type": "string"
+              },
+              {
+                "const": "self-harm-or-immediate-danger",
+                "type": "string"
+              },
+              {
+                "const": "abuse-or-neglect-disclosure",
+                "type": "string"
+              },
+              {
+                "const": "unsupported-subject-risk",
+                "type": "string"
+              }
+            ]
+          },
+          "severity": {
+            "anyOf": [
+              {
+                "const": "inform",
+                "type": "string"
+              },
+              {
+                "const": "redirect",
+                "type": "string"
+              },
+              {
+                "const": "escalate",
+                "type": "string"
+              },
+              {
+                "const": "urgent-escalation",
+                "type": "string"
+              }
+            ]
+          },
+          "matchedText": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "learnerSafeMessage": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1200
+          },
+          "parentTeacherMessage": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1600
+          },
+          "continueTutoringAllowed": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "category",
+          "severity",
+          "matchedText",
+          "learnerSafeMessage",
+          "parentTeacherMessage",
+          "continueTutoringAllowed"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 20
+    },
+    "redactedInput": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "responseRuleIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 120,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "description": "Lowercase ASCII stable content identifier."
+      },
+      "maxItems": 50
+    },
+    "mustEscalateToAdult": {
+      "type": "boolean"
+    },
+    "mustStopAcademicFlow": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "allowed",
+    "triggers",
+    "redactedInput",
+    "responseRuleIds",
+    "mustEscalateToAdult",
+    "mustStopAcademicFlow"
+  ],
+  "additionalProperties": false,
+  "$id": "SafetyDecision"
+}

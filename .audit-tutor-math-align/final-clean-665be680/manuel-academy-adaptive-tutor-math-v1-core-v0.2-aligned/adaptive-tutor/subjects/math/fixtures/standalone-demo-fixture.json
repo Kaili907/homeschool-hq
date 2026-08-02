@@ -1,0 +1,25 @@
+{
+  "fixtureId": "math-demo-pv-zero-regroup",
+  "sequenceId": "math-seq-pv-regroup-v1",
+  "startingMode": "diagnostic",
+  "prompt": "To begin 5,002 − 187, where does the first available unit for regrouping come from?",
+  "choiceEvidence": {
+    "ones": {
+      "misconception": "math-mis-pv-borrow-zero",
+      "route": "reteach-pv-across-zeros"
+    },
+    "tens": {
+      "misconception": "math-mis-pv-borrow-zero",
+      "route": "reteach-pv-across-zeros"
+    },
+    "hundreds": {
+      "misconception": "math-mis-pv-borrow-zero",
+      "route": "reteach-pv-across-zeros"
+    },
+    "thousands": {
+      "evidence": "secure-on-this-item",
+      "next": "ask-reasoning"
+    }
+  },
+  "masteryNote": "This single item never establishes mastery."
+}

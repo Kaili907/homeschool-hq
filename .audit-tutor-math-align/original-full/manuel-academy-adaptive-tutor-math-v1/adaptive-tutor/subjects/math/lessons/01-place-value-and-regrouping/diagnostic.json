@@ -1,0 +1,239 @@
+{
+  "items": [
+    {
+      "id": "math-pv-d01",
+      "type": "multiple-choice",
+      "prompt": "What is the value of the 7 in 472,615?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "7,000"
+        },
+        {
+          "id": "C",
+          "text": "70,000"
+        },
+        {
+          "id": "D",
+          "text": "700,000"
+        }
+      ],
+      "correctChoiceId": "C",
+      "reasoning": "The 7 is in the ten-thousands place, so its value is 7 × 10,000 = 70,000.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-pv-digit-vs-value"
+        ],
+        "B": [
+          "math-mis-pv-digit-vs-value"
+        ],
+        "D": [
+          "math-mis-pv-left-align"
+        ]
+      },
+      "representation": "place-value-chart",
+      "difficultyBand": "entry",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-d02",
+      "type": "multiple-choice",
+      "prompt": "Which comparison is true?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "305,090 > 350,009"
+        },
+        {
+          "id": "B",
+          "text": "305,090 < 350,009"
+        },
+        {
+          "id": "C",
+          "text": "305,090 = 350,009"
+        },
+        {
+          "id": "D",
+          "text": "The numbers cannot be compared because they contain zeros."
+        }
+      ],
+      "correctChoiceId": "B",
+      "reasoning": "Both have 3 hundred-thousands. At the ten-thousands place, 0 is less than 5, so 305,090 is less.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-pv-zero-skip"
+        ],
+        "C": [
+          "math-mis-pv-zero-skip"
+        ],
+        "D": [
+          "math-mis-pv-zero-skip"
+        ]
+      },
+      "representation": "place-value-chart",
+      "difficultyBand": "entry",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-d03",
+      "type": "multiple-choice",
+      "prompt": "Which expanded form equals 402,306?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "400,000 + 2,000 + 300 + 6"
+        },
+        {
+          "id": "B",
+          "text": "40,000 + 2,000 + 30 + 6"
+        },
+        {
+          "id": "C",
+          "text": "400,000 + 20,000 + 300 + 6"
+        },
+        {
+          "id": "D",
+          "text": "4,000 + 200 + 300 + 6"
+        }
+      ],
+      "correctChoiceId": "A",
+      "reasoning": "The digits show 4 hundred-thousands, 2 thousands, 3 hundreds, and 6 ones. The zero places contribute no amount but still hold position.",
+      "misconceptionSignals": {
+        "B": [
+          "math-mis-pv-zero-skip"
+        ],
+        "C": [
+          "math-mis-pv-digit-vs-value"
+        ],
+        "D": [
+          "math-mis-pv-digit-vs-value"
+        ]
+      },
+      "representation": "expanded-form",
+      "difficultyBand": "entry",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-d04",
+      "type": "multiple-choice",
+      "prompt": "In 4,083 + 2,759, which place must be regrouped first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Thousands"
+        },
+        {
+          "id": "B",
+          "text": "Hundreds"
+        },
+        {
+          "id": "C",
+          "text": "Tens"
+        },
+        {
+          "id": "D",
+          "text": "Ones"
+        }
+      ],
+      "correctChoiceId": "D",
+      "reasoning": "Start at the ones: 3 + 9 = 12, so 10 ones regroup as 1 ten.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-pv-left-align"
+        ],
+        "B": [
+          "math-mis-pv-left-align"
+        ],
+        "C": [
+          "math-mis-pv-left-align"
+        ]
+      },
+      "representation": "column-arithmetic",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-d05",
+      "type": "multiple-choice",
+      "prompt": "To begin 5,002 − 187, where does the first available unit for regrouping come from?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The ones place"
+        },
+        {
+          "id": "B",
+          "text": "The tens place"
+        },
+        {
+          "id": "C",
+          "text": "The hundreds place"
+        },
+        {
+          "id": "D",
+          "text": "The thousands place"
+        }
+      ],
+      "correctChoiceId": "D",
+      "reasoning": "The tens and hundreds places contain zero. One thousand must be regrouped through hundreds and tens so the ones can become 12.",
+      "misconceptionSignals": {
+        "A": [
+          "math-mis-pv-borrow-zero"
+        ],
+        "B": [
+          "math-mis-pv-borrow-zero"
+        ],
+        "C": [
+          "math-mis-pv-borrow-zero"
+        ]
+      },
+      "representation": "base-ten-blocks",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    },
+    {
+      "id": "math-pv-d06",
+      "type": "open-response",
+      "prompt": "Explain why 14 ones and 1 ten 4 ones represent the same amount.",
+      "acceptableEvidence": [
+        "States that 10 ones equal 1 ten.",
+        "Explains that the trade changes the representation but not the total.",
+        "May use 14 = 10 + 4."
+      ],
+      "reasoning": "Ten ones can be exchanged for one ten, leaving four ones. Both forms total 14.",
+      "misconceptionSignals": {
+        "mentions different totals": [
+          "math-mis-pv-regroup-changes-number"
+        ],
+        "cannot name the trade": [
+          "math-mis-pv-regroup-changes-number"
+        ]
+      },
+      "representation": "base-ten-blocks",
+      "difficultyBand": "target",
+      "answerRevealPolicy": "after-attempt-and-reasoning"
+    }
+  ],
+  "routingRules": [
+    {
+      "when": "two or more prerequisite-band misses",
+      "route": "prerequisite-remediation-pv-base-ten"
+    },
+    {
+      "when": "one misconception has two or more evidence signals",
+      "route": "matching reteaching branch"
+    },
+    {
+      "when": "mixed or uncertain evidence",
+      "route": "show-me then one distinguishing probe"
+    },
+    {
+      "when": "five or more items show secure reasoning",
+      "route": "guided-practice with reduced scaffolds"
+    }
+  ]
+}

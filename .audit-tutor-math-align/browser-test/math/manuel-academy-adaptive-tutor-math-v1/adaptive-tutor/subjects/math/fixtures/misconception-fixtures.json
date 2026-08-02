@@ -1,0 +1,362 @@
+[
+  {
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "id": "math-mis-pv-digit-vs-value",
+    "label": "Names the digit instead of its value",
+    "likelyEvidence": [
+      "Chooses 7 or 7,000 for the 7 in 472,615.",
+      "Says the place name but does not multiply by its unit value."
+    ],
+    "distinguishingEvidence": [
+      "Ask for the same digit in two positions, such as 7 in 70,507.",
+      "Ask the learner to build the number with a place-value chart."
+    ],
+    "firstResponse": "You found the digit. Now let’s connect its position to how much it is worth.",
+    "route": "reteach-pv-place-value-chart"
+  },
+  {
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "id": "math-mis-pv-zero-skip",
+    "label": "Treats zero placeholders as removable",
+    "likelyEvidence": [
+      "Reads 402,306 as 42,36 or decomposes it without the thousands/hundreds positions.",
+      "Aligns numbers by visible digits rather than by place."
+    ],
+    "distinguishingEvidence": [
+      "Compare 4,023 and 423 on a chart.",
+      "Ask which position the zero is holding."
+    ],
+    "firstResponse": "A zero can hold a place even when it adds no amount. Let’s keep every column visible.",
+    "route": "reteach-pv-zero-placeholders"
+  },
+  {
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "id": "math-mis-pv-regroup-changes-number",
+    "label": "Believes regrouping changes the total",
+    "likelyEvidence": [
+      "Says 14 ones and 1 ten 4 ones are different amounts.",
+      "Adds a carried ten without removing ten ones."
+    ],
+    "distinguishingEvidence": [
+      "Trade 10 ones for 1 ten and recount.",
+      "Write 14 = 10 + 4 beside the model."
+    ],
+    "firstResponse": "Regrouping changes the form, not the amount. Let’s make a fair trade of ten for one unit in the next place.",
+    "route": "reteach-pv-trade-equivalence"
+  },
+  {
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "id": "math-mis-pv-borrow-zero",
+    "label": "Stops when the next place is zero",
+    "likelyEvidence": [
+      "Cannot regroup in 5,002 − 187.",
+      "Changes a zero directly to 10 without showing where the unit came from."
+    ],
+    "distinguishingEvidence": [
+      "Use 1 thousand → 10 hundreds → 9 hundreds and 10 tens → 9 tens and 12 ones.",
+      "Ask the learner to point to the source of every regrouped unit."
+    ],
+    "firstResponse": "The next column is zero, so we need to trace the trade to the first place that has a unit available.",
+    "route": "reteach-pv-across-zeros"
+  },
+  {
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "id": "math-mis-pv-big-minus-small",
+    "label": "Subtracts the smaller digit from the larger digit in each column",
+    "likelyEvidence": [
+      "Computes 42 − 18 as 36.",
+      "Ignores which digit belongs to the whole minuend or subtrahend."
+    ],
+    "distinguishingEvidence": [
+      "Ask whether 42 − 18 should be more or less than 30.",
+      "Model the ones column with regrouping."
+    ],
+    "firstResponse": "You compared the two digits, but subtraction keeps the order of the whole numbers. Let’s regroup the top number instead.",
+    "route": "reteach-pv-subtraction-order"
+  },
+  {
+    "sequenceId": "math-seq-pv-regroup-v1",
+    "id": "math-mis-pv-left-align",
+    "label": "Aligns multi-digit numbers from the left edge",
+    "likelyEvidence": [
+      "Writes 4,083 over 2759 so 4 aligns with 2.",
+      "Produces place-value errors even with accurate facts."
+    ],
+    "distinguishingEvidence": [
+      "Ask the learner to label the ones column first.",
+      "Compare left-aligned and right-aligned layouts."
+    ],
+    "firstResponse": "The digits need to line up by place, not by the left edge. Let’s anchor the ones column first.",
+    "route": "reteach-pv-alignment"
+  },
+  {
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "id": "math-mis-md-repeated-add-only",
+    "label": "Sees multiplication only as repeated addition and cannot use structure",
+    "likelyEvidence": [
+      "Counts every object one by one in a large array.",
+      "Cannot decompose 23 × 6 into 20 × 6 and 3 × 6."
+    ],
+    "distinguishingEvidence": [
+      "Ask for two ways to split an array.",
+      "Ask which partial product matches each rectangle."
+    ],
+    "firstResponse": "Repeated addition is one meaning. Let’s also use the array’s structure so we do not have to count one object at a time.",
+    "route": "reteach-md-array-decompose"
+  },
+  {
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "id": "math-mis-md-groups-size-swap",
+    "label": "Confuses number of groups with size of each group",
+    "likelyEvidence": [
+      "Uses the wrong unit in a word problem.",
+      "Draws 6 groups of 4 when asked for 4 groups of 6 and cannot explain the difference."
+    ],
+    "distinguishingEvidence": [
+      "Ask the learner to label groups and items per group.",
+      "Compare 4 × 6 and 6 × 4 in context."
+    ],
+    "firstResponse": "The product may stay the same, but the story roles are different. Let’s label groups and items in each group.",
+    "route": "reteach-md-equal-groups"
+  },
+  {
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "id": "math-mis-md-division-subtraction",
+    "label": "Treats division as subtracting the divisor once",
+    "likelyEvidence": [
+      "Answers 24 ÷ 6 as 18.",
+      "Stops after one subtraction."
+    ],
+    "distinguishingEvidence": [
+      "Ask how many groups of 6 fit into 24.",
+      "Use repeated subtraction until zero and count jumps."
+    ],
+    "firstResponse": "Division asks how many equal groups or how many in each group, not what remains after one subtraction.",
+    "route": "reteach-md-division-meaning"
+  },
+  {
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "id": "math-mis-md-inverse-gap",
+    "label": "Does not connect multiplication and division as inverse relationships",
+    "likelyEvidence": [
+      "Knows 7 × 8 but cannot use it for 56 ÷ 7.",
+      "Writes an unrelated fact family."
+    ],
+    "distinguishingEvidence": [
+      "Cover one factor in an array equation.",
+      "Ask which multiplication fact checks a division result."
+    ],
+    "firstResponse": "The same three numbers can tell a multiplication and division family. Let’s use the known product to find the missing factor.",
+    "route": "reteach-md-fact-family"
+  },
+  {
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "id": "math-mis-md-partial-product",
+    "label": "Omits or misplaces a partial product",
+    "likelyEvidence": [
+      "Computes 23 × 6 as 18 or 120.",
+      "Adds 20 + 18 instead of 120 + 18."
+    ],
+    "distinguishingEvidence": [
+      "Label each area-model region.",
+      "Ask what 20 groups of 6 means."
+    ],
+    "firstResponse": "You solved one part. Let’s match every part of 23 to a partial product before combining.",
+    "route": "reteach-md-area-model"
+  },
+  {
+    "sequenceId": "math-seq-mult-div-rel-v1",
+    "id": "math-mis-md-remainder-rule",
+    "label": "Uses one fixed rule for every remainder",
+    "likelyEvidence": [
+      "Always drops the remainder or always rounds up.",
+      "Gives a fractional bus or person when the context needs whole groups."
+    ],
+    "distinguishingEvidence": [
+      "Compare “full teams,” “left over,” and “containers needed” contexts.",
+      "Ask what the remainder represents in the story."
+    ],
+    "firstResponse": "The calculation gives a remainder, but the story decides what that remainder means.",
+    "route": "reteach-md-remainder-context"
+  },
+  {
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "id": "math-mis-fr-whole-number-rules",
+    "label": "Applies whole-number size rules to denominators",
+    "likelyEvidence": [
+      "Says 1/8 is greater than 1/4 because 8 is greater than 4.",
+      "Chooses the fraction with the larger denominator when numerators match."
+    ],
+    "distinguishingEvidence": [
+      "Compare equal-size fraction bars.",
+      "Place both fractions between 0 and 1 on a number line."
+    ],
+    "firstResponse": "The denominator tells how many equal parts make the whole. More equal parts means each part is smaller.",
+    "route": "reteach-fr-unit-size"
+  },
+  {
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "id": "math-mis-fr-one-sided-scale",
+    "label": "Scales only the numerator or only the denominator",
+    "likelyEvidence": [
+      "Changes 2/3 to 4/3 or 2/6.",
+      "Cannot explain why multiplying by n/n keeps value equal."
+    ],
+    "distinguishingEvidence": [
+      "Overlay fraction bars before and after scaling.",
+      "Ask what form of 1 was multiplied."
+    ],
+    "firstResponse": "For an equivalent fraction, the numerator and denominator must be scaled by the same nonzero factor.",
+    "route": "reteach-fr-equivalence"
+  },
+  {
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "id": "math-mis-fr-add-denominators",
+    "label": "Adds numerators and denominators",
+    "likelyEvidence": [
+      "Computes 2/5 + 1/3 as 3/8.",
+      "Treats unlike-size pieces as directly countable."
+    ],
+    "distinguishingEvidence": [
+      "Ask whether fifths and thirds are the same-size pieces.",
+      "Use fraction bars to rename both fractions in equal-sized parts."
+    ],
+    "firstResponse": "We can combine only pieces with the same name. Let’s rename both fractions with a common denominator first.",
+    "route": "reteach-fr-common-units"
+  },
+  {
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "id": "math-mis-fr-common-product-only",
+    "label": "Believes the product is the only possible common denominator",
+    "likelyEvidence": [
+      "Uses 48 for 3/8 and 1/4 and cannot see 8.",
+      "Finds a correct but unnecessarily large denominator and becomes error-prone."
+    ],
+    "distinguishingEvidence": [
+      "List multiples of both denominators.",
+      "Ask for the least shared multiple and another valid shared multiple."
+    ],
+    "firstResponse": "The product can work, but a smaller shared multiple may make the work easier.",
+    "route": "reteach-fr-common-denominator"
+  },
+  {
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "id": "math-mis-fr-unequal-wholes",
+    "label": "Compares fraction models built from different-size wholes",
+    "likelyEvidence": [
+      "Calls a larger physical 1/4 greater than a smaller physical 1/2 without checking the whole.",
+      "Ignores the equal-whole condition."
+    ],
+    "distinguishingEvidence": [
+      "Make both bars the same total length.",
+      "Ask what the whole is in each model."
+    ],
+    "firstResponse": "Fraction comparisons need the same-size whole. Let’s make the wholes equal before comparing the parts.",
+    "route": "reteach-fr-same-whole"
+  },
+  {
+    "sequenceId": "math-seq-equivalent-fractions-v1",
+    "id": "math-mis-fr-simplify-subtract",
+    "label": "Simplifies by subtracting the same number from numerator and denominator",
+    "likelyEvidence": [
+      "Changes 6/8 to 4/6.",
+      "Cannot identify a common factor."
+    ],
+    "distinguishingEvidence": [
+      "Ask whether the value stays at the same number-line point.",
+      "Use division by a common factor and multiply back to check."
+    ],
+    "firstResponse": "Simplifying divides both numbers by the same common factor; subtracting does not preserve the ratio.",
+    "route": "reteach-fr-simplify"
+  },
+  {
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "id": "math-mis-wp-keyword-only",
+    "label": "Chooses operations from one keyword",
+    "likelyEvidence": [
+      "Sees “left” and always subtracts, even when the structure differs.",
+      "Sees “each” and multiplies without identifying known and unknown quantities."
+    ],
+    "distinguishingEvidence": [
+      "Remove the keyword and ask for a diagram.",
+      "Use two stories with the same keyword but different structures."
+    ],
+    "firstResponse": "A keyword can be a clue, but the quantities and their relationships decide the operation.",
+    "route": "reteach-wp-relationships"
+  },
+  {
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "id": "math-mis-wp-use-all-numbers",
+    "label": "Uses every number whether relevant or not",
+    "likelyEvidence": [
+      "Includes a date, room number, or unused count in a calculation.",
+      "Cannot explain what a number measures."
+    ],
+    "distinguishingEvidence": [
+      "Ask for units beside every number.",
+      "Ask which quantities connect to the question."
+    ],
+    "firstResponse": "Not every number must be used. Let’s label what each number measures and connect only the needed quantities.",
+    "route": "reteach-wp-relevant-data"
+  },
+  {
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "id": "math-mis-wp-one-step-stop",
+    "label": "Stops after an intermediate result",
+    "likelyEvidence": [
+      "Finds total made but not how many remain.",
+      "Answers the first hidden question rather than the stated question."
+    ],
+    "distinguishingEvidence": [
+      "Ask “What does this number answer?”",
+      "Underline the final question and compare units."
+    ],
+    "firstResponse": "That number answers an important first step. Now let’s return to the question and see what is still missing.",
+    "route": "reteach-wp-answer-target"
+  },
+  {
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "id": "math-mis-wp-wrong-order",
+    "label": "Uses correct operations in the wrong order",
+    "likelyEvidence": [
+      "Subtracts before finding the total produced.",
+      "Treats a fee as part of a per-person amount."
+    ],
+    "distinguishingEvidence": [
+      "Build a step diagram with arrows.",
+      "Ask which quantity must exist before the next calculation can happen."
+    ],
+    "firstResponse": "You selected useful operations. Let’s put them in dependency order so each step creates what the next step needs.",
+    "route": "reteach-wp-step-order"
+  },
+  {
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "id": "math-mis-wp-unit-mismatch",
+    "label": "Combines quantities with incompatible units",
+    "likelyEvidence": [
+      "Adds students to dollars or boxes to individual items.",
+      "Writes a numeric answer without the requested unit."
+    ],
+    "distinguishingEvidence": [
+      "Label every quantity and operation with units.",
+      "Ask what one product or quotient represents."
+    ],
+    "firstResponse": "The numbers need matching meanings before they can be combined. Let’s attach a unit to every quantity.",
+    "route": "reteach-wp-units"
+  },
+  {
+    "sequenceId": "math-seq-multistep-word-problems-v1",
+    "id": "math-mis-wp-no-check",
+    "label": "Accepts a computation without checking reasonableness or the question",
+    "likelyEvidence": [
+      "Reports more items remaining than were made.",
+      "Does not notice negative or impossible context results."
+    ],
+    "distinguishingEvidence": [
+      "Estimate before exact calculation.",
+      "Substitute the result back into the story."
+    ],
+    "firstResponse": "The calculation is not the last step. Let’s check the size, unit, and whether it answers the actual question.",
+    "route": "reteach-wp-check"
+  }
+]

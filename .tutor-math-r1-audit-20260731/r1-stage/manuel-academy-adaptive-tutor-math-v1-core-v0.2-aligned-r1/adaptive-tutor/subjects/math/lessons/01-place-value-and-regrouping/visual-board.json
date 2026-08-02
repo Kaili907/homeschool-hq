@@ -1,0 +1,93 @@
+{
+  "representations": [
+    "base-ten-blocks",
+    "place-value-chart",
+    "column-arithmetic",
+    "number-line"
+  ],
+  "boards": [
+    {
+      "id": "pv-board-01",
+      "kind": "place-value-chart",
+      "action": "show",
+      "payload": {
+        "columns": [
+          "hundred-thousands",
+          "ten-thousands",
+          "thousands",
+          "hundreds",
+          "tens",
+          "ones"
+        ],
+        "number": "472615"
+      },
+      "altText": "Place-value chart showing 472,615 with 7 in the ten-thousands column.",
+      "narrationCue": "pv-n02"
+    },
+    {
+      "id": "pv-board-02",
+      "kind": "base-ten-blocks",
+      "action": "trade",
+      "payload": {
+        "from": "ones",
+        "count": 10,
+        "to": "tens",
+        "toCount": 1,
+        "equation": "14 = 10 + 4"
+      },
+      "altText": "Ten one blocks trade for one ten rod while four one blocks remain.",
+      "narrationCue": "pv-n04"
+    },
+    {
+      "id": "pv-board-03",
+      "kind": "column-arithmetic",
+      "action": "highlight",
+      "payload": {
+        "problem": "36,482 + 7,659",
+        "column": "ones",
+        "annotation": "2 + 9 = 11; write 1, regroup 1 ten"
+      },
+      "altText": "Vertical addition aligned by place with the ones column highlighted.",
+      "narrationCue": "pv-n05"
+    },
+    {
+      "id": "pv-board-04",
+      "kind": "place-value-chart",
+      "action": "regroup",
+      "payload": {
+        "number": "5002",
+        "path": [
+          "thousands",
+          "hundreds",
+          "tens",
+          "ones"
+        ],
+        "resultingDigits": [
+          "4",
+          "9",
+          "9",
+          "12"
+        ]
+      },
+      "altText": "Place-value chart tracing one thousand through zero hundreds and zero tens to make twelve ones.",
+      "narrationCue": "pv-n07"
+    },
+    {
+      "id": "pv-board-05",
+      "kind": "number-line",
+      "action": "compare",
+      "payload": {
+        "estimateFrom": 62000,
+        "subtract": 19000,
+        "estimateTo": 43000
+      },
+      "altText": "Number line showing an estimate from 62,000 back 19,000 to about 43,000.",
+      "narrationCue": "pv-n09"
+    }
+  ],
+  "accessibility": [
+    "Every visual command includes text alternative.",
+    "Color is never the only indicator.",
+    "No visual is required; all moves are also stated in words."
+  ]
+}
