@@ -12,5 +12,5 @@
     "strict": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "vite.config.ts"]
+  "include": ["src", "study-engine/src", "vite.config.ts"]
 }
