@@ -34,10 +34,20 @@
       "supersessionStatus": "current"
     },
     {
+      "version": "20260731120000",
+      "filename": "20260731120000_academy_gateway_usage.sql",
+      "sha256": "9eb92005e9c98e94f3fa365351ab527d01cee47da2d0ceac3db0a4e60d82c86f",
+      "dependency": "20260726120000_academy_household_revision_cas.sql",
+      "classification": "historical-baseline",
+      "applicationStatus": "hosted-equivalent-baseline-pending-authorization",
+      "requiredMarkerTransition": "academy-gateway-usage-v1",
+      "supersessionStatus": "current"
+    },
+    {
       "version": "20260801010000",
       "filename": "20260801010000_academy_study_engine_storage.sql",
       "sha256": "7ebb25b0517f3b79b36e0399757715826a634fbdf731a9716fdeeb4dad9da0fa",
-      "dependency": "20260726120000_academy_household_revision_cas.sql",
+      "dependency": "20260731120000_academy_gateway_usage.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "storage_version:0->1",

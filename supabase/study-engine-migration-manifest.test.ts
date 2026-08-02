@@ -70,11 +70,13 @@ describe('Study migration manifest consistency', () => {
 
   it('classifies historical SQL as baseline-only and records the before-first-use supersession', async () => {
     const manifest = await loadManifest()
-    expect(manifest.migrations.slice(0, 3).every((entry) =>
+    // The v2.2 hosted chain is four migrations (profiles base, student
+    // identity, household CAS, gateway usage) per the hosted ledger.
+    expect(manifest.migrations.slice(0, 4).every((entry) =>
       entry.classification === 'historical-baseline' &&
       entry.applicationStatus === 'hosted-equivalent-baseline-pending-authorization',
     )).toBe(true)
-    expect(manifest.migrations.slice(3).every((entry) =>
+    expect(manifest.migrations.slice(4).every((entry) =>
       entry.classification === 'executable' && entry.applicationStatus === 'not-applied-hosted',
     )).toBe(true)
     const corrected = manifest.migrations.find((entry) => entry.version === '20260801170000')
