@@ -1,0 +1,104 @@
+{
+  "kind": "student-focus-profile",
+  "schemaVersion": 1,
+  "id": "focus:p1",
+  "revision": 2,
+  "createdAt": "2026-07-20T13:00:00.000Z",
+  "updatedAt": "2026-07-27T13:00:00.000Z",
+  "metadata": {
+    "source": "adaptive-engine",
+    "extensions": {
+      "manuel:estimator-version": "1.0.0"
+    }
+  },
+  "studentId": "p1",
+  "gradeBand": "elementary-3-5",
+  "estimate": {
+    "status": "established",
+    "eligibleObservationCount": 5,
+    "assessedAt": "2026-07-27T12:00:00.000Z",
+    "confidence": "moderate",
+    "baselineWorkDurationMinutes": 10,
+    "currentTargetWorkDurationMinutes": 12,
+    "comfortableMaximumWorkDurationMinutes": 15,
+    "effectiveWorkBlockRange": {
+      "minimumMinutes": 8,
+      "targetMinutes": 12,
+      "maximumMinutes": 15
+    },
+    "evidenceIds": ["evidence:session-01", "evidence:session-02"]
+  },
+  "breakDurationMinutes": 5,
+  "timerPresentationPreference": "progress-bar",
+  "taskSpecificProfiles": [
+    {
+      "taskType": "writing",
+      "effectiveWorkBlockRange": {
+        "minimumMinutes": 8,
+        "targetMinutes": 10,
+        "maximumMinutes": 12
+      },
+      "breakDurationMinutes": 5,
+      "evidenceIds": ["evidence:writing-01"]
+    }
+  ],
+  "subjectSpecificProfiles": [
+    {
+      "subjectId": "math",
+      "effectiveWorkBlockRange": {
+        "minimumMinutes": 10,
+        "targetMinutes": 12,
+        "maximumMinutes": 15
+      },
+      "breakDurationMinutes": 5,
+      "evidenceIds": ["evidence:session-01"]
+    }
+  ],
+  "accessibility": {
+    "textScalePercent": 110,
+    "reducedMotion": true,
+    "highContrast": false,
+    "narration": "preferred",
+    "captions": true,
+    "inputModes": ["keyboard", "touch", "paper"],
+    "lowDistractionPresentation": true
+  },
+  "accommodations": [
+    {
+      "id": "accommodation:low-distraction",
+      "category": "setting",
+      "enabled": true,
+      "functionalDescription": "Use a low-distraction presentation with one task visible at a time.",
+      "approvedBy": "parent",
+      "reviewAt": "2026-08-27T13:00:00.000Z"
+    }
+  ],
+  "adjustmentHistory": [
+    {
+      "id": "adjustment:focus-01",
+      "changedAt": "2026-07-27T12:30:00.000Z",
+      "changedBy": {
+        "role": "system"
+      },
+      "previousTargetMinutes": 10,
+      "nextTargetMinutes": 12,
+      "reason": "new-evidence",
+      "evidenceIds": ["evidence:session-01", "evidence:session-02"]
+    }
+  ],
+  "parentOverride": {
+    "active": true,
+    "maximumWorkDurationMinutes": 14,
+    "targetWorkDurationMinutes": 12,
+    "breakDurationMinutes": 5,
+    "setBy": {
+      "role": "parent",
+      "actorId": "adult:parent-01"
+    },
+    "reason": "Keep work blocks within the current family schedule.",
+    "createdAt": "2026-07-27T12:45:00.000Z",
+    "reviewAt": "2026-08-10T12:45:00.000Z"
+  },
+  "contextSkillIds": ["fracUnit"]
+}
+

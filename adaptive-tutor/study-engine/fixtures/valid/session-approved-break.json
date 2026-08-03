@@ -1,0 +1,65 @@
+{
+  "kind": "study-session",
+  "schemaVersion": 1,
+  "id": "session:approved-break-01",
+  "revision": 4,
+  "createdAt": "2026-07-27T13:00:00.000Z",
+  "updatedAt": "2026-07-27T14:06:00.000Z",
+  "status": "approved-break",
+  "studentId": "p1",
+  "studyPlanId": "plan:math-fractions-01",
+  "plannedSegmentIds": ["segment:guided-model", "segment:mastery-check"],
+  "eventLog": [
+    {
+      "id": "event:approved-planned",
+      "sessionId": "session:approved-break-01",
+      "sequence": 1,
+      "occurredAt": "2026-07-27T13:00:00.000Z",
+      "type": "session-planned",
+      "actor": "system"
+    },
+    {
+      "id": "event:approved-started",
+      "sessionId": "session:approved-break-01",
+      "sequence": 2,
+      "occurredAt": "2026-07-27T14:00:00.000Z",
+      "type": "session-started",
+      "actor": "student"
+    },
+    {
+      "id": "event:break-approved",
+      "sessionId": "session:approved-break-01",
+      "sequence": 3,
+      "occurredAt": "2026-07-27T14:05:30.000Z",
+      "type": "break-approved",
+      "actor": "tutor",
+      "segmentId": "segment:guided-model"
+    },
+    {
+      "id": "event:break-started",
+      "sessionId": "session:approved-break-01",
+      "sequence": 4,
+      "occurredAt": "2026-07-27T14:06:00.000Z",
+      "type": "break-started",
+      "actor": "student",
+      "segmentId": "segment:guided-model"
+    }
+  ],
+  "startedAt": "2026-07-27T14:00:00.000Z",
+  "break": {
+    "interruptionId": "interruption:break-01",
+    "requestedAt": "2026-07-27T14:05:00.000Z",
+    "approvedAt": "2026-07-27T14:05:30.000Z",
+    "approvedBy": {
+      "role": "tutor",
+      "actorId": "tutor:study-engine"
+    },
+    "reasonCategory": "student-request",
+    "plannedDurationMinutes": 5
+  },
+  "resumePoint": {
+    "segmentId": "segment:guided-model",
+    "elapsedActiveSecondsInSegment": 300
+  }
+}
+

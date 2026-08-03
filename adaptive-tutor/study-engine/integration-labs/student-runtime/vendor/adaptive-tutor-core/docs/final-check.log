@@ -1,0 +1,202 @@
+
+> @manuel-academy/adaptive-tutor-core@0.2.0 check
+> npm run typecheck && npm run test && npm run build && npm run smoke && npm run validate
+
+
+> @manuel-academy/adaptive-tutor-core@0.2.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @manuel-academy/adaptive-tutor-core@0.2.0 test
+> node scripts/run-tests.mjs
+
+TAP version 13
+# Subtest: independent mastery contract rejects fewer than three items
+ok 1 - independent mastery contract rejects fewer than three items
+  ---
+  duration_ms: 1.740315
+  type: 'test'
+  ...
+# Subtest: visual board contract rejects arbitrary executable commands
+ok 2 - visual board contract rejects arbitrary executable commands
+  ---
+  duration_ms: 0.315169
+  type: 'test'
+  ...
+# Subtest: alternate explanation remains a valid tutor response
+ok 3 - alternate explanation remains a valid tutor response
+  ---
+  duration_ms: 5.37979
+  type: 'test'
+  ...
+# Subtest: adult review remains valid before any evidence and forbids placement claims
+ok 4 - adult review remains valid before any evidence and forbids placement claims
+  ---
+  duration_ms: 2.031178
+  type: 'test'
+  ...
+# Subtest: prompt templates contain the required instructional safety boundaries
+ok 5 - prompt templates contain the required instructional safety boundaries
+  ---
+  duration_ms: 0.198346
+  type: 'test'
+  ...
+# Subtest: assessment evaluator scores exact multiple-choice sets
+ok 6 - assessment evaluator scores exact multiple-choice sets
+  ---
+  duration_ms: 0.572393
+  type: 'test'
+  ...
+# Subtest: one answer never becomes sufficient evidence
+ok 7 - one answer never becomes sufficient evidence
+  ---
+  duration_ms: 0.945209
+  type: 'test'
+  ...
+# Subtest: repeated varied evidence narrows uncertainty
+ok 8 - repeated varied evidence narrows uncertainty
+  ---
+  duration_ms: 0.337083
+  type: 'test'
+  ...
+# Subtest: runtime contracts validate both demonstration programs
+ok 9 - runtime contracts validate both demonstration programs
+  ---
+  duration_ms: 3.506587
+  type: 'test'
+  ...
+# Subtest: narration, caption, and transcript remain valid without audio
+ok 10 - narration, caption, and transcript remain valid without audio
+  ---
+  duration_ms: 0.178776
+  type: 'test'
+  ...
+# Subtest: tutor response rejects a human identity claim
+ok 11 - tutor response rejects a human identity claim
+  ---
+  duration_ms: 0.377112
+  type: 'test'
+  ...
+# Subtest: engine runs assessment through advance with multiple independent evidence points
+ok 12 - engine runs assessment through advance with multiple independent evidence points
+  ---
+  duration_ms: 7.188516
+  type: 'test'
+  ...
+# Subtest: engine reteaches without shame when evidence is weak
+ok 13 - engine reteaches without shame when evidence is weak
+  ---
+  duration_ms: 1.947132
+  type: 'test'
+  ...
+# Subtest: media fallback allows lessons to continue
+ok 14 - media fallback allows lessons to continue
+  ---
+  duration_ms: 0.718621
+  type: 'test'
+  ...
+# Subtest: voice fallback preserves visible text
+ok 15 - voice fallback preserves visible text
+  ---
+  duration_ms: 0.442549
+  type: 'test'
+  ...
+# Subtest: misconception classification selects a supported hypothesis with uncertainty
+ok 16 - misconception classification selects a supported hypothesis with uncertainty
+  ---
+  duration_ms: 0.989405
+  type: 'test'
+  ...
+# Subtest: safety redirects graded-work completion requests
+ok 17 - safety redirects graded-work completion requests
+  ---
+  duration_ms: 1.720114
+  type: 'test'
+  ...
+# Subtest: safety redacts common contact information
+ok 18 - safety redacts common contact information
+  ---
+  duration_ms: 0.734054
+  type: 'test'
+  ...
+# Subtest: safety declines diagnosis requests
+ok 19 - safety declines diagnosis requests
+  ---
+  duration_ms: 0.159668
+  type: 'test'
+  ...
+# Subtest: prerequisite graph accepts acyclic demonstration graph
+ok 20 - prerequisite graph accepts acyclic demonstration graph
+  ---
+  duration_ms: 0.680424
+  type: 'test'
+  ...
+# Subtest: prerequisite graph rejects cycles
+ok 21 - prerequisite graph rejects cycles
+  ---
+  duration_ms: 0.27493
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 205.14634
+
+> @manuel-academy/adaptive-tutor-core@0.2.0 build
+> node scripts/build.mjs
+
+Exported 14 JSON Schema files to /mnt/data/manuel-academy-adaptive-tutor-core-v0.2/adaptive-tutor/json-schema
+Built static browser prototype and TypeScript declarations in dist/.
+
+> @manuel-academy/adaptive-tutor-core@0.2.0 smoke
+> node scripts/smoke-prototype.mjs
+
+Static prototype smoke test: PASS
+Loaded index (434 chars), JavaScript (14683 chars), and CSS (10569 chars).
+
+> @manuel-academy/adaptive-tutor-core@0.2.0 validate
+> node scripts/run-validation.mjs
+
+# Adaptive Tutor Core v0.2 — Generated Validation Report
+
+**Overall result:** PASS
+
+- Checks: 19
+- Passed: 19
+- Failed: 0
+- Generated: 2026-07-28T02:01:38.087Z
+
+| Check | Result | Details |
+|---|---|---|
+| math-program-runtime-schema | PASS | Valid |
+| english-program-runtime-schema | PASS | Valid |
+| narration-caption-transcript-runtime-schema | PASS | Valid |
+| first-response-contract | PASS | assessment |
+| diagnostic-transition | PASS | assessment |
+| identify-transition | PASS | identify-missing-concept |
+| parent-teacher-review-contract | PASS | Empty-evidence review remains explicit about uncertainty. |
+| platform-boundary | PASS | No GitHub, Supabase, Netlify, database, authentication, or progress-sync files. |
+| no-final-subject-packages | PASS | Only demonstration fixtures exist under examples/. |
+| required-file:core/contracts/index.ts | PASS | core/contracts/index.ts |
+| required-file:core/engine/adaptive-tutor-engine.ts | PASS | core/engine/adaptive-tutor-engine.ts |
+| required-file:core/prompts/templates.ts | PASS | core/prompts/templates.ts |
+| required-file:core/safety/rules.ts | PASS | core/safety/rules.ts |
+| required-file:prototype/main.ts | PASS | prototype/main.ts |
+| required-file:examples/math-interaction.ts | PASS | examples/math-interaction.ts |
+| required-file:examples/english-interaction.ts | PASS | examples/english-interaction.ts |
+| required-file:docs/integration-guide.md | PASS | docs/integration-guide.md |
+| required-file:docs/director-handoff.md | PASS | docs/director-handoff.md |
+| package-version | PASS | 0.2.0 |
+
+## Boundary Confirmation
+
+- No GitHub repository was modified.
+- No Supabase, Netlify, Lovable, database, storage, identity, authentication, or progress-synchronization integration was created.
+- Math and English materials are demonstration fixtures only, not final subject packages.
+- The prototype is local-first and remains usable without audio or external media.
+

@@ -1,0 +1,24 @@
+{
+  "kind": "study-session",
+  "schemaVersion": 1,
+  "id": "session:planned-01",
+  "revision": 1,
+  "createdAt": "2026-07-27T13:00:00.000Z",
+  "updatedAt": "2026-07-27T13:00:00.000Z",
+  "status": "planned",
+  "studentId": "p1",
+  "studyPlanId": "plan:math-fractions-01",
+  "plannedSegmentIds": ["segment:guided-model", "segment:mastery-check"],
+  "eventLog": [
+    {
+      "id": "event:planned-01",
+      "sessionId": "session:planned-01",
+      "sequence": 1,
+      "occurredAt": "2026-07-27T13:00:00.000Z",
+      "type": "session-planned",
+      "actor": "system"
+    }
+  ],
+  "scheduledStartAt": "2026-07-28T13:00:00.000Z"
+}
+

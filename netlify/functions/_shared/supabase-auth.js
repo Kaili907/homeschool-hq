@@ -43,12 +43,21 @@ function bearerToken(event) {
   return match[1]
 }
 
+/** Sanitized readiness predicate; it never returns or logs configuration values. */
+export function supabaseAuthConfigured(env) {
+  return authConfig(env) !== null
+}
+
 /**
  * Validate a Supabase access token with the project's Auth server. The returned
  * user id is the same value used by the current profiles RLS policy as the
  * household boundary. No client-provided user or household identifier is read.
+ *
+ * The auth call always runs under a hard timeout. Callers may override the
+ * duration via timeoutMs; anything absent or invalid falls back to
+ * SUPABASE_AUTH_TIMEOUT_MS. There is no way to opt out of the timeout.
  */
-export async function verifySupabaseBearer(event, { fetchImpl, env }) {
+export async function verifySupabaseBearer(event, { fetchImpl, env, timeoutMs }) {
   const token = bearerToken(event)
   if (!token) return { ok: false, response: errorResponse(401, 'unauthenticated') }
 
@@ -56,7 +65,9 @@ export async function verifySupabaseBearer(event, { fetchImpl, env }) {
   if (!config) return { ok: false, response: errorResponse(503, 'service_unavailable') }
 
   let response
-  const signal = AbortSignal.timeout(SUPABASE_AUTH_TIMEOUT_MS)
+  const effectiveTimeoutMs =
+    Number.isInteger(timeoutMs) && timeoutMs > 0 ? timeoutMs : SUPABASE_AUTH_TIMEOUT_MS
+  const signal = AbortSignal.timeout(effectiveTimeoutMs)
   try {
     response = await fetchImpl(`${config.url}/auth/v1/user`, {
       method: 'GET',
@@ -99,5 +110,7 @@ export async function verifySupabaseBearer(event, { fetchImpl, env }) {
   return {
     ok: true,
     user: { id: user.id },
+    // Internal-only credential for same-session RLS authorization calls.
+    accessToken: token,
   }
 }

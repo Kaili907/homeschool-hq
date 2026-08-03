@@ -1,0 +1,326 @@
+[
+  {
+    "id": "plan-duplicate-sequence",
+    "schemaId": "lesson-study-plan",
+    "baseFile": "study-plan.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/segments/1/sequence",
+        "value": 1
+      }
+    ],
+    "expectedCode": "duplicate",
+    "expectedPath": "$.segments[1].sequence"
+  },
+  {
+    "id": "plan-forward-dependency",
+    "schemaId": "lesson-study-plan",
+    "baseFile": "study-plan.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/segments/0/dependsOnSegmentIds",
+        "value": ["segment:mastery-check"]
+      }
+    ],
+    "expectedCode": "sequence",
+    "expectedPath": "$.segments[0].dependsOnSegmentIds[0]"
+  },
+  {
+    "id": "plan-forbidden-permanent-span-field",
+    "schemaId": "lesson-study-plan",
+    "baseFile": "study-plan.json",
+    "operations": [
+      {
+        "op": "add",
+        "path": "/fixedAttentionSpanMinutes",
+        "value": 10
+      }
+    ],
+    "expectedCode": "unknown-key",
+    "expectedPath": "$.fixedAttentionSpanMinutes"
+  },
+  {
+    "id": "focus-insufficient-data-fabricated-target",
+    "schemaId": "student-focus-profile",
+    "baseFile": "focus-profile-insufficient-data.json",
+    "operations": [
+      {
+        "op": "add",
+        "path": "/estimate/currentTargetWorkDurationMinutes",
+        "value": 12
+      }
+    ],
+    "expectedCode": "safety",
+    "expectedPath": "$.estimate.currentTargetWorkDurationMinutes"
+  },
+  {
+    "id": "focus-parent-cap-below-current-target",
+    "schemaId": "student-focus-profile",
+    "baseFile": "focus-profile-established.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/parentOverride/maximumWorkDurationMinutes",
+        "value": 10
+      }
+    ],
+    "expectedCode": "invariant",
+    "expectedPath": "$.estimate.currentTargetWorkDurationMinutes"
+  },
+  {
+    "id": "session-future-version",
+    "schemaId": "study-session",
+    "baseFile": "session-planned.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/schemaVersion",
+        "value": 2
+      }
+    ],
+    "expectedCode": "literal",
+    "expectedPath": "$.schemaVersion"
+  },
+  {
+    "id": "terminal-session-has-resume-point",
+    "schemaId": "study-session",
+    "baseFile": "session-completed.json",
+    "operations": [
+      {
+        "op": "add",
+        "path": "/resumePoint",
+        "value": {
+          "segmentId": "segment:mastery-check",
+          "elapsedActiveSecondsInSegment": 0
+        }
+      }
+    ],
+    "expectedCode": "unknown-key",
+    "expectedPath": "$.resumePoint"
+  },
+  {
+    "id": "technical-resume-segment-not-planned",
+    "schemaId": "study-session",
+    "baseFile": "session-technical-interruption.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/resumePoint/segmentId",
+        "value": "segment:unknown"
+      }
+    ],
+    "expectedCode": "reference",
+    "expectedPath": "$.resumePoint.segmentId"
+  },
+  {
+    "id": "session-event-cross-session-reference",
+    "schemaId": "study-session",
+    "baseFile": "session-active.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/eventLog/1/sessionId",
+        "value": "session:other"
+      }
+    ],
+    "expectedCode": "reference",
+    "expectedPath": "$.eventLog[1].sessionId"
+  },
+  {
+    "id": "session-event-sequence-gap",
+    "schemaId": "study-session",
+    "baseFile": "session-active.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/eventLog/1/sequence",
+        "value": 9
+      }
+    ],
+    "expectedCode": "sequence",
+    "expectedPath": "$.eventLog[1].sequence"
+  },
+  {
+    "id": "learning-evidence-accuracy-only-support-concern",
+    "schemaId": "learning-evidence",
+    "baseFile": "learning-evidence-low-accuracy.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/engagementSupport/status",
+        "value": "support-may-help"
+      },
+      {
+        "op": "replace",
+        "path": "/engagementSupport/supportingSignals",
+        "value": ["accuracy"]
+      }
+    ],
+    "expectedCode": "safety",
+    "expectedPath": "$.engagementSupport.supportingSignals"
+  },
+  {
+    "id": "learning-evidence-private-note-leak",
+    "schemaId": "learning-evidence",
+    "baseFile": "learning-evidence-low-accuracy.json",
+    "operations": [
+      {
+        "op": "add",
+        "path": "/privateNote",
+        "value": "SYNTHETIC-PRIVATE-NOTE-7QX9"
+      }
+    ],
+    "expectedCode": "unknown-key",
+    "expectedPath": "$.privateNote"
+  },
+  {
+    "id": "random-response-indicator-claims-inattention",
+    "schemaId": "learning-evidence",
+    "baseFile": "learning-evidence-low-accuracy.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/randomResponseIndicators",
+        "value": [
+          {
+            "kind": "unusually-fast-series",
+            "strength": "weak",
+            "supportingEvidenceIds": ["evidence:latency-01"],
+            "doesNotEstablishInattention": false
+          }
+        ]
+      }
+    ],
+    "expectedCode": "safety",
+    "expectedPath": "$.randomResponseIndicators[0].doesNotEstablishInattention"
+  },
+  {
+    "id": "review-canonical-interval-mismatch",
+    "schemaId": "student-skill-review",
+    "baseFile": "review-schedule.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/currentInterval/days",
+        "value": 7
+      }
+    ],
+    "expectedCode": "invariant",
+    "expectedPath": "$.currentInterval"
+  },
+  {
+    "id": "review-contraction-expands",
+    "schemaId": "student-skill-review",
+    "baseFile": "review-schedule.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/intervalAdjustments/0/action",
+        "value": "interval-contraction"
+      }
+    ],
+    "expectedCode": "invariant",
+    "expectedPath": "$.intervalAdjustments[0].to"
+  },
+  {
+    "id": "review-trigger-without-evidence",
+    "schemaId": "student-skill-review",
+    "baseFile": "review-schedule.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/reteachingTrigger/status",
+        "value": "triggered"
+      }
+    ],
+    "expectedCode": "invariant",
+    "expectedPath": "$.reteachingTrigger.basisEvidenceIds"
+  },
+  {
+    "id": "controls-break-range-inverted",
+    "schemaId": "parent-teacher-controls",
+    "baseFile": "parent-teacher-controls.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/breakDuration/minimumMinutes",
+        "value": 9
+      }
+    ],
+    "expectedCode": "invariant",
+    "expectedPath": "$.breakDuration"
+  },
+  {
+    "id": "controls-override-exceeds-maximum",
+    "schemaId": "parent-teacher-controls",
+    "baseFile": "parent-teacher-controls.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/manualOverrides/0/maximumWorkDurationMinutes",
+        "value": 30
+      }
+    ],
+    "expectedCode": "invariant",
+    "expectedPath": "$.manualOverrides[0].maximumWorkDurationMinutes"
+  },
+  {
+    "id": "controls-private-note-body-leak",
+    "schemaId": "parent-teacher-controls",
+    "baseFile": "parent-teacher-controls.json",
+    "operations": [
+      {
+        "op": "add",
+        "path": "/privateNotes",
+        "value": ["SYNTHETIC-PRIVATE-NOTE-7QX9"]
+      }
+    ],
+    "expectedCode": "unknown-key",
+    "expectedPath": "$.privateNotes"
+  },
+  {
+    "id": "private-note-student-visible",
+    "schemaId": "parent-teacher-private",
+    "baseFile": "parent-teacher-private.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/notes/0/visibility",
+        "value": "student-visible"
+      }
+    ],
+    "expectedCode": "literal",
+    "expectedPath": "$.notes[0].visibility"
+  },
+  {
+    "id": "private-note-student-author",
+    "schemaId": "parent-teacher-private",
+    "baseFile": "parent-teacher-private.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/notes/0/author/role",
+        "value": "student"
+      }
+    ],
+    "expectedCode": "literal",
+    "expectedPath": "$.notes[0].author.role"
+  },
+  {
+    "id": "session-result-cross-session-reference",
+    "schemaId": "study-session",
+    "baseFile": "session-completed.json",
+    "operations": [
+      {
+        "op": "replace",
+        "path": "/result/sessionId",
+        "value": "session:other"
+      }
+    ],
+    "expectedCode": "reference",
+    "expectedPath": "$.result.sessionId"
+  }
+]
+

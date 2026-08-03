@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "projectRef": "ymtvzmqhfvwjtxjdmybs",
+  "organization": "Manuel Academy",
+  "project": "Manuel Academy",
+  "region": "us-east-2",
+  "databaseVersion": "PostgreSQL 17.6.1.147",
+  "historicalVersions": [
+    "20260724074106",
+    "20260724230000",
+    "20260726120000"
+  ],
+  "localHistoricalRawSha256": {
+    "20260724074106_academy_profiles_base.sql": "8b1947fe2ce5d605e143b93b1ad8784d1d52095e83a4f8c63b8689f22462725d",
+    "20260724230000_academy_student_identity_foundation.sql": "1700d95a8630214b49834dcb05c80358718128675389fb032669ebfa2644b829",
+    "20260726120000_academy_household_revision_cas.sql": "40e9916322181fb19f9c58feeb90cf81a7e942e6b47199e05dc126bee43cd24d"
+  },
+  "canonicalChecksumsRecordedIn": "migration-manifest.json",
+  "historicalSqlReplayProhibited": true,
+  "priorHostedEvidence": {
+    "foundationMarkerMatched": true,
+    "functionDefinitionsMatched": true,
+    "triggersMatched": true,
+    "rlsMatched": true,
+    "migrationLedgerPresent": false,
+    "studyObjectsPresent": false
+  },
+  "exactProjectVerified": true,
+  "foundationObjectEquivalenceReconfirmed": false,
+  "historicalBaselineAuthorization": false,
+  "migrationHistoryResolved": false,
+  "hostedDriftAbsent": true,
+  "finalMetadataRepreflightPassed": false,
+  "hostedMutationAuthorized": false,
+  "approvedExecutableChecksums": [],
+  "authorizationState": "blocked"
+}

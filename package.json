@@ -12,7 +12,17 @@
     "test:academy-profiles-base": "vitest run supabase/academy-profiles-base.db.test.ts",
     "test:academy-foundation-integration": "vitest run supabase/academy-foundation-integration.db.test.ts",
     "test:sync-db": "vitest run supabase/academy-cas.db.test.ts",
-    "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts"
+    "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts",
+    "test:engine": "vitest run --config adaptive-tutor/study-engine/tests/final-assembly/component-vitest.config.mjs",
+    "test:tutor": "npm --prefix adaptive-tutor run test",
+    "test:calendar": "npm --prefix adaptive-tutor/study-engine/integration-labs/calendar-parent-runtime run test",
+    "test:student": "npm --prefix adaptive-tutor/study-engine/integration-labs/student-runtime run test",
+    "test:student-browser": "npm --prefix adaptive-tutor/study-engine/integration-labs/student-runtime run test:browser",
+    "test:ui": "npm --prefix adaptive-tutor/study-engine/prototype run test",
+    "test:ui-browser": "npm --prefix adaptive-tutor/study-engine/prototype run test:ui",
+    "test:assembly": "npm --prefix adaptive-tutor/study-engine/runtime run test",
+    "test:assembly-browser": "npm --prefix adaptive-tutor/study-engine/runtime run test:browser",
+    "test:secondary": "npm run test:engine && npm run test:tutor && npm run test:calendar && npm run test:student && npm run test:ui && npm run test:assembly && npm run test:student-browser && npm run test:ui-browser && npm run test:assembly-browser"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.8",

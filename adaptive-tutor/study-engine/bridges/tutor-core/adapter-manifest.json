@@ -1,0 +1,112 @@
+{
+  "name": "@manuel-academy/study-core-bridge",
+  "version": "1.0.1",
+  "bridgeContractVersion": 1,
+  "authority": {
+    "tutorCore": {
+      "package": "@manuel-academy/adaptive-tutor-core",
+      "supportedVersions": [
+        "0.2.0"
+      ],
+      "archiveSha256": "38205667D56CB4FCC5A8360F1F94098B5FA1D35AE71D22334AA1BC8D43ECC276",
+      "owns": [
+        "assessment",
+        "mastery",
+        "misconceptions",
+        "prerequisites",
+        "confidence",
+        "instruction",
+        "instructional-safety",
+        "visual-board",
+        "spoken-turns",
+        "narration",
+        "captions",
+        "transcripts",
+        "media-fallbacks",
+        "adult-instructional-review"
+      ]
+    },
+    "studyEngine": {
+      "schemaVersion": 1,
+      "owns": [
+        "work-block-planning",
+        "timer-presentation",
+        "break-planning",
+        "pause-resume",
+        "session-evidence",
+        "focus-duration-recommendations",
+        "review-scheduling-recommendations",
+        "calendar-ready-pacing",
+        "parent-timing-controls",
+        "study-checkpoints"
+      ]
+    }
+  },
+  "contracts": {
+    "input": "study-core-bridge.tutor-event.v1",
+    "projection": "study-core-bridge.study-projection.v1",
+    "checkpoint": "study-core-bridge.recovery-checkpoint.v1",
+    "outbox": "study-core-bridge.outbox-event.v1",
+    "quarantine": "study-core-bridge.quarantine.v1"
+  },
+  "supportedTutorEventKinds": [
+    "assessment-result",
+    "confidence-estimate",
+    "misconception-result",
+    "prerequisite-result",
+    "tutor-response",
+    "parent-teacher-review",
+    "safety-decision",
+    "study-completion"
+  ],
+  "urgentGateway": {
+    "runsBeforeTutorCore": true,
+    "classificationBoundaryVersion": 1,
+    "classifications": [
+      "urgent",
+      "uncertain",
+      "clear",
+      "invalid"
+    ],
+    "productionClassifierPortRequired": true,
+    "localDeterministicFallback": "demo-only",
+    "eventBoundPermitRequiredByAuthorityAdapter": true,
+    "permitsAreSingleUse": true,
+    "declaredCategoriesWithoutCoreRuntimeRules": [
+      "self-harm-or-immediate-danger",
+      "abuse-or-neglect-disclosure",
+      "unsupported-subject-risk"
+    ],
+    "bridgeStopsInstructionFor": [
+      "self-harm-or-immediate-danger",
+      "abuse-or-neglect-disclosure"
+    ]
+  },
+  "privacy": {
+    "rawAnswersAllowed": false,
+    "rawResponsesAllowed": false,
+    "rawTranscriptsAllowed": false,
+    "adultPrivateNotesAllowed": false,
+    "directIdentifiersAllowed": false,
+    "credentialsAllowed": false,
+    "diagnosisLanguageAllowed": false,
+    "unknownFields": "quarantine"
+  },
+  "projectionBoundary": {
+    "canonicalStudySchemaRegistryRequired": true,
+    "verifiedTutorWrapperRegistry": "module-private-weak-set",
+    "verifiedWrapperDeepFrozen": true,
+    "coreMediaProjection": "transient-only",
+    "prerequisiteEvidence": "insufficient-evidence-until-core-result-envelope",
+    "protectedTutorRecoveryState": "opaque-sidecar-reference-only",
+    "supportedEndToEndEntryPoint": "orchestrateStudyCoreBridge",
+    "eventLedgerBeforeProjection": true,
+    "duplicateOutboxProposalsAllowed": false
+  },
+  "portability": {
+    "bridgeLocalEsmBoundary": true,
+    "rootPackageRequired": false,
+    "packagedNodeModulesAllowed": false,
+    "minimumNodeMajor": 22
+  }
+}

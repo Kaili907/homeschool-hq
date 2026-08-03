@@ -1,0 +1,87 @@
+{
+  "kind": "parent-teacher-controls",
+  "schemaVersion": 1,
+  "id": "controls:p1",
+  "revision": 1,
+  "createdAt": "2026-07-27T12:00:00.000Z",
+  "updatedAt": "2026-07-27T12:30:00.000Z",
+  "studentId": "p1",
+  "maximumWorkDurationMinutes": 20,
+  "breakDuration": {
+    "minimumMinutes": 3,
+    "defaultMinutes": 5,
+    "maximumMinutes": 10
+  },
+  "timerVisibility": "progress-bar",
+  "manualOverrides": [
+    {
+      "id": "override:work-01",
+      "target": "work-duration",
+      "setBy": {
+        "role": "parent",
+        "actorId": "adult:parent-01"
+      },
+      "reason": "Temporary schedule guardrail.",
+      "createdAt": "2026-07-27T12:00:00.000Z",
+      "expiresAt": "2026-08-03T12:00:00.000Z",
+      "maximumWorkDurationMinutes": 16
+    }
+  ],
+  "recommendationDecisions": [
+    {
+      "id": "decision:recommendation-01",
+      "recommendationId": "recommendation:focus-01",
+      "decision": "accepted",
+      "decidedBy": {
+        "role": "parent",
+        "actorId": "adult:parent-01"
+      },
+      "decidedAt": "2026-07-27T12:05:00.000Z"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "accommodation:visual-model",
+      "enabled": true,
+      "functionalDescription": "Offer a visual model before symbolic practice.",
+      "source": "teacher",
+      "reviewAt": "2026-09-01T12:00:00.000Z"
+    }
+  ],
+  "rescheduling": [
+    {
+      "id": "reschedule:session-01",
+      "studyPlanId": "plan:math-fractions-01",
+      "originalStartAt": "2026-07-28T13:00:00.000Z",
+      "replacementStartAt": "2026-07-28T14:00:00.000Z",
+      "changedBy": {
+        "role": "teacher",
+        "actorId": "adult:teacher-01"
+      },
+      "reason": "Teacher-directed calendar adjustment.",
+      "changedAt": "2026-07-27T12:10:00.000Z"
+    }
+  ],
+  "reviewRequests": [
+    {
+      "id": "review-request:fracUnit-01",
+      "requestedAt": "2026-07-27T12:20:00.000Z",
+      "requestedBy": {
+        "role": "tutor",
+        "actorId": "tutor:study-engine"
+      },
+      "category": "reteaching",
+      "status": "open",
+      "basisEvidenceIds": ["evidence:retrieval-01"]
+    }
+  ],
+  "approvedInterruptionCategories": [
+    "accessibility-need",
+    "technology-issue",
+    "family-need",
+    "wellbeing",
+    "emergency"
+  ],
+  "privateRecordRef": "private:p1"
+}
+

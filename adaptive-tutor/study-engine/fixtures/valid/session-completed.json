@@ -1,0 +1,73 @@
+{
+  "kind": "study-session",
+  "schemaVersion": 1,
+  "id": "session:completed-01",
+  "revision": 5,
+  "createdAt": "2026-07-27T13:00:00.000Z",
+  "updatedAt": "2026-07-27T14:15:00.000Z",
+  "status": "completed",
+  "studentId": "p1",
+  "studyPlanId": "plan:math-fractions-01",
+  "plannedSegmentIds": ["segment:guided-model", "segment:mastery-check"],
+  "eventLog": [
+    {
+      "id": "event:completed-planned",
+      "sessionId": "session:completed-01",
+      "sequence": 1,
+      "occurredAt": "2026-07-27T13:00:00.000Z",
+      "type": "session-planned",
+      "actor": "system"
+    },
+    {
+      "id": "event:completed-started",
+      "sessionId": "session:completed-01",
+      "sequence": 2,
+      "occurredAt": "2026-07-27T14:00:00.000Z",
+      "type": "session-started",
+      "actor": "student"
+    },
+    {
+      "id": "event:completed-segment-1",
+      "sessionId": "session:completed-01",
+      "sequence": 3,
+      "occurredAt": "2026-07-27T14:08:00.000Z",
+      "type": "segment-completed",
+      "actor": "student",
+      "segmentId": "segment:guided-model"
+    },
+    {
+      "id": "event:completed-segment-2",
+      "sessionId": "session:completed-01",
+      "sequence": 4,
+      "occurredAt": "2026-07-27T14:14:00.000Z",
+      "type": "segment-completed",
+      "actor": "student",
+      "segmentId": "segment:mastery-check",
+      "evidenceRef": "evidence:low-accuracy-safe"
+    },
+    {
+      "id": "event:completed-end",
+      "sessionId": "session:completed-01",
+      "sequence": 5,
+      "occurredAt": "2026-07-27T14:15:00.000Z",
+      "type": "session-completed",
+      "actor": "system"
+    }
+  ],
+  "startedAt": "2026-07-27T14:00:00.000Z",
+  "completedAt": "2026-07-27T14:15:00.000Z",
+  "result": {
+    "id": "result:completed-01",
+    "sessionId": "session:completed-01",
+    "outcome": "completed",
+    "completedSegmentIds": ["segment:guided-model", "segment:mastery-check"],
+    "remainingSegmentIds": [],
+    "activeDurationSeconds": 840,
+    "breakDurationSeconds": 0,
+    "pausedDurationSeconds": 60,
+    "evidenceIds": ["evidence:low-accuracy-safe"],
+    "recommendedNextAction": "review",
+    "recordedAt": "2026-07-27T14:15:00.000Z"
+  }
+}
+

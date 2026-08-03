@@ -1,0 +1,53 @@
+{
+  "kind": "study-session",
+  "schemaVersion": 1,
+  "id": "session:technical-01",
+  "revision": 3,
+  "createdAt": "2026-07-27T13:00:00.000Z",
+  "updatedAt": "2026-07-27T14:03:00.000Z",
+  "status": "technical-interruption",
+  "studentId": "p1",
+  "studyPlanId": "plan:math-fractions-01",
+  "plannedSegmentIds": ["segment:guided-model", "segment:mastery-check"],
+  "eventLog": [
+    {
+      "id": "event:technical-planned",
+      "sessionId": "session:technical-01",
+      "sequence": 1,
+      "occurredAt": "2026-07-27T13:00:00.000Z",
+      "type": "session-planned",
+      "actor": "system"
+    },
+    {
+      "id": "event:technical-started",
+      "sessionId": "session:technical-01",
+      "sequence": 2,
+      "occurredAt": "2026-07-27T14:00:00.000Z",
+      "type": "session-started",
+      "actor": "student"
+    },
+    {
+      "id": "event:technical-interrupted",
+      "sessionId": "session:technical-01",
+      "sequence": 3,
+      "occurredAt": "2026-07-27T14:03:00.000Z",
+      "type": "technical-interruption-started",
+      "actor": "system",
+      "segmentId": "segment:guided-model",
+      "detailCode": "network-offline"
+    }
+  ],
+  "startedAt": "2026-07-27T14:00:00.000Z",
+  "interruption": {
+    "interruptionId": "interruption:technical-01",
+    "startedAt": "2026-07-27T14:03:00.000Z",
+    "category": "network-unavailable",
+    "recoverable": true,
+    "detailCode": "network-offline"
+  },
+  "resumePoint": {
+    "segmentId": "segment:guided-model",
+    "elapsedActiveSecondsInSegment": 180
+  }
+}
+

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { SKILL_BY_ID, type SkillId } from './skills'
 import type { AnswerRecord, AppState, Profile } from './types'
 import { generateFresh } from './generators'
@@ -57,6 +57,36 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { isStudyEngineEnabledFromHost, isStudyEnginePreviewEnabledFromHost } from './study/featureFlag'
+import {
+  buildHostStudyContext,
+  deriveStudyHouseholdRef,
+  deriveStudyLearnerRef,
+  localDevelopmentHouseholdTimeZone,
+} from './study/hostContext'
+import type { StudyAdultAuthorization } from './study/types'
+import type { StudyPortBundle } from './study/ports'
+import { getGatewayAccessToken } from './tutor/gatewayAuth'
+import { createStudyIdentityClient } from './study/client/studyIdentityClient'
+import { createStudyProductionReadinessClient } from './study/client/studyProductionReadinessClient'
+import {
+  createVerifiedStudyRuntimeAdapter,
+  type VerifiedStudyRuntimeAdapter,
+} from './study/production/verifiedRuntimeAdapter'
+import { StudyLifecycleBoundary } from './study/lifecycle'
+
+const loadPreviewPorts = import.meta.env.DEV
+  ? () => import('./study/localDevelopmentPorts').then(({ createLocalDevelopmentStudyPorts }) => createLocalDevelopmentStudyPorts())
+  : null
+const StudyDashboard = import.meta.env.DEV
+  ? lazy(() => import('./components/study/StudyDashboard').then((module) => ({ default: module.StudyDashboard })))
+  : null
+const StudySessionRoute = import.meta.env.DEV
+  ? lazy(() => import('./components/study/StudySessionRoute').then((module) => ({ default: module.StudySessionRoute })))
+  : null
+const StudySettings = import.meta.env.DEV
+  ? lazy(() => import('./components/study/StudySettings').then((module) => ({ default: module.StudySettings })))
+  : null
 
 type Screen =
   | { kind: 'picker' }
@@ -76,15 +106,56 @@ type Screen =
   | { kind: 'typing' }
   | { kind: 'reading' }
   | { kind: 'mindset' }
+  | { kind: 'studyDashboard' }
+  | { kind: 'studySettings' }
+  | { kind: 'studySession'; blockRef: string; learnerRef: string }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
+  const studyEnabled = useMemo(isStudyEngineEnabledFromHost, [])
+  const studyPreviewEnabled = useMemo(isStudyEnginePreviewEnabledFromHost, [])
+  const [studyRuntime, setStudyRuntime] = useState<{ readonly ports: StudyPortBundle } | null>(null)
+  const [studyProductionStatus, setStudyProductionStatus] = useState<
+    'disabled' | 'unauthenticated' | 'checking' | 'not-ready' | 'degraded' | 'ready'
+  >(studyEnabled && !studyPreviewEnabled ? 'unauthenticated' : 'disabled')
+  const studyProductionLifecycleRef = useRef<StudyLifecycleBoundary | null>(null)
+  const studyReadinessClientRef = useRef<ReturnType<typeof createStudyProductionReadinessClient> | null>(null)
+  const studyIdentityClientRef = useRef<ReturnType<typeof createStudyIdentityClient> | null>(null)
+  const studyVerifiedRuntimeRef = useRef<VerifiedStudyRuntimeAdapter | null>(null)
+  const studySelectedProfileRef = useRef<string | null>(null)
+  if (!studyProductionLifecycleRef.current) {
+    studyProductionLifecycleRef.current = new StudyLifecycleBoundary()
+  }
+  if (!studyIdentityClientRef.current) {
+    studyIdentityClientRef.current = createStudyIdentityClient()
+  }
+  if (!studyVerifiedRuntimeRef.current) {
+    studyVerifiedRuntimeRef.current = createVerifiedStudyRuntimeAdapter({
+      identityClient: studyIdentityClientRef.current,
+      lifecycle: studyProductionLifecycleRef.current,
+    })
+  }
   const [state, setState] = useState<AppState>(loaded.state)
   const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
+  const [parentStudyAuthorization, setParentStudyAuthorization] = useState<StudyAdultAuthorization | null>(null)
   const seenRef = useRef(new Set<string>())
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
+
+  useEffect(() => {
+    let current = true
+    if (!studyPreviewEnabled || !loadPreviewPorts) {
+      setStudyRuntime(null)
+      return () => { current = false }
+    }
+    void loadPreviewPorts().then((runtime) => {
+      if (current) setStudyRuntime(runtime)
+    }).catch(() => {
+      if (current) setStudyRuntime(null)
+    })
+    return () => { current = false }
+  }, [studyPreviewEnabled])
 
   useEffect(() => {
     saveAppState(state)
@@ -93,6 +164,109 @@ export default function App() {
   // M6: local-first cloud sync. Inert with no Supabase config; never blocks the UI.
   // Local writes above already persisted; this pushes async + pulls on open/reconnect.
   const sync = useSync(state, setState)
+  const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
+
+  useEffect(() => {
+    const productionSelected = studyEnabled && !studyPreviewEnabled
+    const lifecycle = studyProductionLifecycleRef.current!
+    const runtime = studyVerifiedRuntimeRef.current!
+    if (!productionSelected) {
+      lifecycle.cancel('feature-disabled')
+      void runtime.cancel('feature-disabled')
+      studyReadinessClientRef.current?.invalidate()
+      studySelectedProfileRef.current = null
+      setStudyProductionStatus('disabled')
+      return
+    }
+    if (!sync.status.user || sync.status.binding !== 'bound' || sync.status.provenance !== 'verified') {
+      lifecycle.cancel('authorization-loss')
+      void runtime.cancel('authorization-loss')
+      studyReadinessClientRef.current?.invalidate()
+      studySelectedProfileRef.current = null
+      setStudyProductionStatus('unauthenticated')
+      return
+    }
+    if (!active) {
+      lifecycle.cancel('learner-switch')
+      void runtime.cancel('learner-switch')
+      studySelectedProfileRef.current = null
+      setStudyProductionStatus('unauthenticated')
+      return
+    }
+    const verifiedHostUserId = sync.status.user.id
+    const verifiedActiveProfileId = active.id
+
+    const controller = new AbortController()
+    const readiness = studyReadinessClientRef.current ?? createStudyProductionReadinessClient()
+    studyReadinessClientRef.current = readiness
+    let refreshTimer: ReturnType<typeof setTimeout> | null = null
+    const scheduleReadinessCheck = (expiresAt: string) => {
+      if (refreshTimer) clearTimeout(refreshTimer)
+      const refreshIn = Math.max(250, Date.parse(expiresAt) - Date.now() - 500)
+      refreshTimer = setTimeout(() => { void reconcile() }, refreshIn)
+    }
+
+    async function reconcile() {
+      if (controller.signal.aborted) return
+      setStudyProductionStatus('checking')
+      try {
+        const previousProfile = studySelectedProfileRef.current
+        if (previousProfile && previousProfile !== verifiedActiveProfileId) {
+          await runtime.cancel('learner-switch')
+        }
+        studySelectedProfileRef.current = verifiedActiveProfileId
+        const result = await readiness.revalidate(controller.signal)
+        if (controller.signal.aborted) return
+        if (result.status !== 'ready') {
+          await runtime.applyReadiness(result)
+          if (!controller.signal.aborted) setStudyProductionStatus(result.status)
+          if (!controller.signal.aborted) scheduleReadinessCheck(result.expiresAt)
+          return
+        }
+        const accessToken = await getGatewayAccessToken()
+        if (!accessToken || controller.signal.aborted) {
+          await runtime.cancel('authorization-loss')
+          if (!controller.signal.aborted) setStudyProductionStatus('unauthenticated')
+          return
+        }
+        const launched = await runtime.launch({
+          featureEnabled: true,
+          authenticatedHostSession: true,
+          hostSessionKey: verifiedHostUserId,
+          accessToken,
+          selectedStudentRef: { kind: 'legacy-profile-id', value: verifiedActiveProfileId },
+          readiness: result,
+          signal: controller.signal,
+        })
+        if (controller.signal.aborted || launched.status !== 'ready') return
+        setStudyProductionStatus('ready')
+        // Refresh before the sanitized readiness lease expires. A failed or
+        // degraded refresh revokes the opaque session and cancels this epoch.
+        scheduleReadinessCheck(result.expiresAt)
+      } catch {
+        if (!controller.signal.aborted) {
+          await runtime.cancel('authorization-loss')
+          setStudyProductionStatus('not-ready')
+        }
+      }
+    }
+    void reconcile()
+    return () => {
+      controller.abort('navigation-away')
+      if (refreshTimer) clearTimeout(refreshTimer)
+    }
+  }, [
+    active?.id,
+    studyEnabled,
+    studyPreviewEnabled,
+    sync.status.binding,
+    sync.status.provenance,
+    sync.status.user?.id,
+  ])
+
+  useEffect(() => () => {
+    void studyVerifiedRuntimeRef.current?.cancel('navigation-away')
+  }, [])
 
   // SE-B attendance: when the signed-in girl's mission day is complete, append one
   // attendance day (invisible to her, append-only). recordAttendance is idempotent
@@ -107,8 +281,46 @@ export default function App() {
     setState((s) => patchProfile(s, attendanceId, (p) => recordAttendance(p, true, isoToday())))
   }, [attendanceId, attendanceTodayComplete])
 
-  const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
+  const studyContextResult = buildHostStudyContext({
+    enabled: studyPreviewEnabled,
+    syncStatus: sync.status,
+    profile: active,
+    subject: 'math',
+    lessonRef: active ? `grade-${active.grade}:daily-study` : 'unselected:daily-study',
+    skillRefs: active ? [`grade-${active.grade}:current-study-skill`] : [],
+    householdTimeZone: studyPreviewEnabled ? localDevelopmentHouseholdTimeZone() : null,
+    timerHidden: false,
+  })
+  const studyPreviewReady = Boolean(
+    studyEnabled &&
+    studyPreviewEnabled &&
+    studyRuntime &&
+    studyContextResult.status === 'ready',
+  )
+  const studyProductionSelected = studyEnabled && !studyPreviewEnabled
+  const studyProductionUnavailableReason = studyProductionStatus === 'checking'
+    ? 'Study is being checked. Please try again in a moment.'
+    : studyProductionStatus === 'unauthenticated'
+      ? 'Sign in and select an available learner before opening Study.'
+      : studyProductionStatus === 'degraded'
+        ? 'Study is taking a safe pause right now. Please try again later.'
+        : 'Study is not available yet. Please try again later.'
   const tokens = THEMES[active?.theme ?? 'playful']
+
+  const establishParentStudyAuthorization = () => {
+    const user = sync.status.user
+    if (!studyPreviewEnabled || !user || sync.status.binding !== 'bound' || sync.status.provenance !== 'verified') {
+      setParentStudyAuthorization(null)
+      return
+    }
+    const householdRef = deriveStudyHouseholdRef(user.id)
+    setParentStudyAuthorization({
+      householdRef,
+      actorRef: `adult:${householdRef.slice('household:'.length)}`,
+      role: 'parent',
+      adultAuthorized: true,
+    })
+  }
 
   // Every profile write is a functional update so the reducer's base is the
   // latest committed profile (see appState.patchProfile): two writes in one tick
@@ -121,6 +333,11 @@ export default function App() {
     setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
   const signOut = () => {
     void purgeVoiceCache()
+    studyProductionLifecycleRef.current?.cancel('logout')
+    void studyVerifiedRuntimeRef.current?.cancel('logout')
+    studyReadinessClientRef.current?.invalidate()
+    studySelectedProfileRef.current = null
+    setParentStudyAuthorization(null)
     setState((s) => ({ ...s, activeProfileId: null }))
     setScreen({ kind: 'picker' })
   }
@@ -217,6 +434,7 @@ export default function App() {
               subtitle="Enter the parent PIN"
               onComplete={(pin) => {
                 if (pin === state.parentPin) {
+                  establishParentStudyAuthorization()
                   setScreen({ kind: 'parentHub' })
                   return null
                 }
@@ -239,6 +457,7 @@ export default function App() {
                 }
                 if (pin === screen.firstEntry) {
                   setState((s) => ({ ...s, parentPin: pin }))
+                  establishParentStudyAuthorization()
                   setScreen({ kind: 'parentHub' })
                   return null
                 }
@@ -254,12 +473,39 @@ export default function App() {
   }
 
   if (screen.kind === 'parentHub') {
+    const parentStudyReady =
+      studyPreviewReady &&
+      studyRuntime &&
+      parentStudyAuthorization &&
+      sync.status.user &&
+      parentStudyAuthorization.householdRef === deriveStudyHouseholdRef(sync.status.user.id)
     return (
       <ParentHub
         state={state}
         onStateChange={setState}
-        onClose={() => setScreen({ kind: 'picker' })}
+        onClose={() => {
+          setParentStudyAuthorization(null)
+          setScreen({ kind: 'picker' })
+        }}
         onOpenClassic={() => setScreen({ kind: 'grownups' })}
+        studyEnabled={studyPreviewReady || studyProductionSelected}
+        study={
+          parentStudyReady
+            ? {
+                householdRef: parentStudyAuthorization.householdRef,
+                learners: Object.values(state.profiles).map((profile) => ({
+                  hostProfileRef: profile.id,
+                  learnerRef: deriveStudyLearnerRef(sync.status.user!.id, profile.id),
+                  displayName: profile.name,
+                })),
+                ports: studyRuntime.ports,
+                authorization: parentStudyAuthorization,
+              }
+            : undefined
+        }
+        studyUnavailableReason={studyProductionSelected
+          ? studyProductionUnavailableReason
+          : 'Sign in, verify the household binding, and re-enter the parent PIN to use the explicit local Study preview.'}
       />
     )
   }
@@ -295,6 +541,95 @@ export default function App() {
   }
 
   // MA mount point — self-styled (clean), rendered full-bleed outside the theme wrapper
+  if (
+    screen.kind === 'studyDashboard' ||
+    screen.kind === 'studySettings' ||
+    screen.kind === 'studySession'
+  ) {
+    if (studyProductionSelected) {
+      const verifiedRuntime = studyVerifiedRuntimeRef.current
+      if (studyProductionStatus !== 'ready' || !verifiedRuntime?.isReady()) {
+        return (
+          <StudyUnavailable
+            reason={studyProductionUnavailableReason}
+            onBack={() => setScreen({ kind: 'home' })}
+          />
+        )
+      }
+      return (
+        <VerifiedProductionStudyHost
+          runtime={verifiedRuntime}
+          onBack={() => {
+            void verifiedRuntime.cancel('navigation-away')
+            setScreen({ kind: 'home' })
+          }}
+        />
+      )
+    }
+    if (
+      !studyPreviewReady ||
+      !studyRuntime ||
+      studyContextResult.status !== 'ready' ||
+      !StudyDashboard ||
+      !StudySessionRoute ||
+      !StudySettings
+    ) {
+      return (
+        <StudyUnavailable
+          reason={
+            studyProductionSelected
+              ? studyProductionUnavailableReason
+              : studyContextResult.status === 'unavailable'
+              ? studyContextResult.reason
+              : 'The Study integration is unavailable.'
+          }
+          onBack={() => setScreen({ kind: 'home' })}
+        />
+      )
+    }
+    if (screen.kind === 'studySettings') {
+      return (
+        <Suspense fallback={<StudyLoading />}>
+          <StudySettings
+            context={studyContextResult.context}
+            ports={studyRuntime.ports}
+            onBack={() => setScreen({ kind: 'studyDashboard' })}
+          />
+        </Suspense>
+      )
+    }
+    if (screen.kind === 'studySession') {
+      return (
+        <Suspense fallback={<StudyLoading />}>
+          <StudySessionRoute
+            context={studyContextResult.context}
+            ports={studyRuntime.ports}
+            blockRef={screen.blockRef}
+            learnerRef={screen.learnerRef}
+            onBack={() => setScreen({ kind: 'studyDashboard' })}
+          />
+        </Suspense>
+      )
+    }
+    return (
+      <Suspense fallback={<StudyLoading />}>
+        <StudyDashboard
+          context={studyContextResult.context}
+          ports={studyRuntime.ports}
+          onLaunch={(entry) =>
+            setScreen({
+              kind: 'studySession',
+              blockRef: entry.blockRef,
+              learnerRef: studyContextResult.context.learnerRef,
+            })
+          }
+          onSettings={() => setScreen({ kind: 'studySettings' })}
+          onBack={() => setScreen({ kind: 'home' })}
+        />
+      </Suspense>
+    )
+  }
+
   if (screen.kind === 'assessment') {
     return (
       <AssessmentRunner
@@ -432,6 +767,8 @@ export default function App() {
             onOpenTyping={() => setScreen({ kind: 'typing' })}
             onOpenReading={() => setScreen({ kind: 'reading' })}
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
+            onOpenStudy={studyPreviewReady || studyProductionSelected ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
+            studyMode={studyPreviewReady ? 'preview' : studyProductionSelected ? 'unavailable' : undefined}
             mindsetStartDate={state.mindsetStartDate}
           />
         )}
@@ -481,6 +818,74 @@ export default function App() {
   )
 }
 
+function StudyUnavailable({ reason, onBack }: { reason: string; onBack: () => void }) {
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  useEffect(() => { headingRef.current?.focus() }, [])
+  return (
+    <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900">
+      <div className="mx-auto max-w-xl rounded-2xl border border-amber-200 bg-amber-50 p-6">
+        <h1 ref={headingRef} className="text-2xl font-bold" tabIndex={-1}>Study is not available yet</h1>
+        <p className="mt-2">{reason}</p>
+        <p className="mt-2 text-sm">No Study persistence or safety request was made.</p>
+        <button className="mt-4 min-h-11 rounded-lg border border-amber-500 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
+      </div>
+    </main>
+  )
+}
+
+function VerifiedProductionStudyHost({
+  runtime,
+  onBack,
+}: {
+  runtime: VerifiedStudyRuntimeAdapter
+  onBack: () => void
+}) {
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const operationRef = useRef(`production-dashboard:${Date.now()}:${Math.random().toString(36).slice(2)}`)
+  const [status, setStatus] = useState<'loading' | 'ready' | 'unavailable'>('loading')
+
+  useEffect(() => {
+    const controller = new AbortController()
+    void runtime.execute({
+      operation: 'dashboard:read',
+      request: Object.freeze({}),
+      operationRef: operationRef.current,
+      signal: controller.signal,
+    }).then(() => {
+      if (!controller.signal.aborted) setStatus('ready')
+    }).catch(() => {
+      if (!controller.signal.aborted) setStatus('unavailable')
+    })
+    return () => controller.abort('navigation-away')
+  }, [runtime])
+
+  useEffect(() => { headingRef.current?.focus() }, [status])
+
+  return (
+    <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900" aria-busy={status === 'loading'}>
+      <div className="mx-auto max-w-xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h1 ref={headingRef} className="text-2xl font-bold" tabIndex={-1}>Verified Study workspace</h1>
+        {status === 'loading' && <p className="mt-2" role="status">Checking your current Study planÃ¢â‚¬Â¦</p>}
+        {status === 'ready' && (
+          <p className="mt-2" role="status">Your Study workspace is ready for this learner.</p>
+        )}
+        {status === 'unavailable' && (
+          <p className="mt-2" role="alert">Study took a safe pause. No late result was applied.</p>
+        )}
+        <button className="mt-4 min-h-11 rounded-lg border border-slate-400 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
+      </div>
+    </main>
+  )
+}
+
+function StudyLoading() {
+  return (
+    <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900" aria-busy="true">
+      <p role="status">Loading the explicit local Study previewâ€¦</p>
+    </main>
+  )
+}
+
 // ---------- home ----------
 
 function Home({
@@ -497,6 +902,8 @@ function Home({
   onOpenTyping,
   onOpenReading,
   onOpenMindset,
+  onOpenStudy,
+  studyMode,
   mindsetStartDate,
 }: {
   profile: Profile
@@ -512,6 +919,8 @@ function Home({
   onOpenTyping: () => void
   onOpenReading: () => void
   onOpenMindset: () => void
+  onOpenStudy?: () => void
+  studyMode?: 'preview' | 'unavailable'
   mindsetStartDate: string | undefined
 }) {
   const t = useTheme()
@@ -533,6 +942,8 @@ function Home({
         assessmentCards={assessmentCards}
         onOpenAssessment={onOpenAssessment}
         onOpenMindset={onOpenMindset}
+        onOpenStudy={onOpenStudy}
+        studyMode={studyMode}
         mindsetStartDate={mindsetStartDate}
       />
     )
@@ -615,6 +1026,20 @@ function Home({
       <div className="mt-6">
         <MissionCard profile={profile} onToggle={onToggleItem} />
       </div>
+
+      {onOpenStudy && (
+        <button
+          onClick={onOpenStudy}
+          className={
+            t.id === 'playful'
+              ? 'mt-6 flex min-h-11 w-full items-center gap-4 rounded-3xl border-b-8 border-cyan-800 bg-gradient-to-br from-cyan-500 to-blue-600 p-5 text-left text-white shadow-xl'
+              : `${t.card} mt-6 flex min-h-11 w-full items-center gap-4 p-5 text-left hover:border-cyan-400`
+          }
+        >
+          <span className="text-4xl" aria-hidden="true">🧭</span>
+          <span><span className="block text-2xl font-extrabold">Today’s Study plan</span><span className="block font-bold opacity-90">{studyMode === 'preview' ? 'Launch the explicit local Study preview' : 'Check whether Study is available'}</span></span>
+        </button>
+      )}
 
       {/* MR reading fluency entry — opens today's read-aloud passage */}
       <button

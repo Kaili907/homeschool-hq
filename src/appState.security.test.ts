@@ -134,3 +134,10 @@ describe('bounded AppState loading and migration', () => {
     expect(validateAppStateForSync(loaded.state)).toMatchObject({ ok: true })
   })
 })
+
+describe('Study Engine state isolation', () => {
+  it('keeps provisional Study evidence and adult-private fields out of AppState', () => {
+    const serialized = JSON.stringify(defaultAppState())
+    expect(serialized).not.toMatch(/studyCheckpoint|studyEvidence|adultPrivate|rawAnswer|transcript/i)
+  })
+})

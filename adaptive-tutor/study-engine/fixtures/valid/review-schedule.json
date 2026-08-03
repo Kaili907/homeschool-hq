@@ -1,0 +1,56 @@
+{
+  "kind": "student-skill-review",
+  "schemaVersion": 1,
+  "id": "review:p1:fracUnit",
+  "revision": 1,
+  "createdAt": "2026-07-27T14:00:00.000Z",
+  "updatedAt": "2026-07-27T14:10:00.000Z",
+  "studentId": "p1",
+  "subjectId": "math",
+  "skillId": "fracUnit",
+  "timeZone": "America/New_York",
+  "retrievalAttempts": [
+    {
+      "id": "retrieval:fracUnit-01",
+      "attemptedAt": "2026-07-27T14:00:00.000Z",
+      "reviewDate": "2026-07-27",
+      "correctCount": 3,
+      "attemptedCount": 4,
+      "hintCount": 1,
+      "independence": "minimal-support",
+      "evidenceId": "evidence:retrieval-01"
+    }
+  ],
+  "currentInterval": {
+    "id": "one-day",
+    "days": 1
+  },
+  "nextReviewDate": "2026-07-28",
+  "intervalAdjustments": [
+    {
+      "adjustedAt": "2026-07-27T14:05:00.000Z",
+      "action": "interval-expansion",
+      "from": {
+        "id": "same-day",
+        "days": 0
+      },
+      "to": {
+        "id": "one-day",
+        "days": 1
+      },
+      "basisEvidenceIds": ["evidence:retrieval-01"]
+    }
+  ],
+  "reteachingTrigger": {
+    "status": "not-triggered",
+    "reason": "adult-request",
+    "basisEvidenceIds": []
+  },
+  "prerequisiteRemediationTrigger": {
+    "status": "not-triggered",
+    "reason": "adult-request",
+    "prerequisiteSkillIds": [],
+    "basisEvidenceIds": []
+  }
+}
+

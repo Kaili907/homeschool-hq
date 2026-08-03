@@ -1,0 +1,293 @@
+{
+  "manifestVersion": "1.1.0",
+  "package": {
+    "id": "study-recon-audit",
+    "name": "@manuel-academy/study-recon-audit",
+    "version": "0.2.0-r1",
+    "status": "reconciled_with_evidence_supported_blockers",
+    "productionMerge": false,
+    "finalAssembly": false
+  },
+  "authority": {
+    "studyContracts": "session-1-study-contracts",
+    "instruction": "tutor-core-v0.2",
+    "pacing": "session-2-study-engine-after-canonical-mapping",
+    "studentUx": "session-3-study-ux",
+    "schedulingAndParent": "session-4-study-integrations"
+  },
+  "artifacts": [
+    {
+      "id": "session-1-study-contracts",
+      "filename": "CARD-1-STUDY-CONTRACTS.zip",
+      "expectedSha256": "79BA0F39688DB42197947915AA421BCA540AD060C072E898E86619F0A66B6F41",
+      "calculatedSha256": "79BA0F39688DB42197947915AA421BCA540AD060C072E898E86619F0A66B6F41",
+      "sizeBytes": 110827,
+      "availability": "available",
+      "result": "pass",
+      "frozen": true,
+      "rawEntries": 73,
+      "files": 70,
+      "directories": 3,
+      "backslashEntries": 73
+    },
+    {
+      "id": "session-2-study-engine",
+      "filename": "manuel-academy-session-2-study-engine.zip",
+      "expectedSha256": "979EEAC55DCDE6F47F684B0D6A9C7793FCB53E76F693D07E11A83B3FD9FFB770",
+      "calculatedSha256": "979EEAC55DCDE6F47F684B0D6A9C7793FCB53E76F693D07E11A83B3FD9FFB770",
+      "sizeBytes": 110524,
+      "availability": "available",
+      "result": "pass",
+      "frozen": true,
+      "rawEntries": 62,
+      "files": 58,
+      "directories": 4,
+      "backslashEntries": 62
+    },
+    {
+      "id": "session-3-study-ux",
+      "filename": "manuel-academy-study-ux-session-3.zip",
+      "expectedSha256": "9E3735FD09C2D19A991C3EB9FAE936204824F0A30C1EDDDAF1AC8A050314CD11",
+      "calculatedSha256": "9E3735FD09C2D19A991C3EB9FAE936204824F0A30C1EDDDAF1AC8A050314CD11",
+      "sizeBytes": 5735334,
+      "availability": "available",
+      "result": "pass",
+      "frozen": true,
+      "rawEntries": 79,
+      "files": 64,
+      "directories": 15,
+      "backslashEntries": 0
+    },
+    {
+      "id": "session-4-study-integrations",
+      "filename": "manuel-academy-session-4-study-integrations.zip",
+      "expectedSha256": "F4AB726446DA4129E3548919D91E56B85C93FF31BE63DEA692B0BA7926C39C1B",
+      "calculatedSha256": "F4AB726446DA4129E3548919D91E56B85C93FF31BE63DEA692B0BA7926C39C1B",
+      "sizeBytes": 86028,
+      "availability": "available",
+      "result": "pass",
+      "frozen": true,
+      "rawEntries": 38,
+      "files": 38,
+      "directories": 0,
+      "backslashEntries": 0
+    },
+    {
+      "id": "tutor-core-v0.2",
+      "filename": "manuel-academy-adaptive-tutor-core-v0.2 .zip",
+      "expectedSha256": "38205667D56CB4FCC5A8360F1F94098B5FA1D35AE71D22334AA1BC8D43ECC276",
+      "calculatedSha256": "38205667D56CB4FCC5A8360F1F94098B5FA1D35AE71D22334AA1BC8D43ECC276",
+      "sizeBytes": 296306,
+      "availability": "available",
+      "result": "pass",
+      "frozen": true,
+      "rawEntries": 282,
+      "files": 250,
+      "directories": 32,
+      "manifestFiles": 248,
+      "manifestHashesPassed": 248,
+      "backslashEntries": 0
+    }
+  ],
+  "integrity": {
+    "allChecksumsPass": true,
+    "allArtifactsInspected": true,
+    "duplicatePaths": 0,
+    "caseCollidingPaths": 0,
+    "traversalPaths": 0,
+    "absolutePaths": 0,
+    "symlinks": 0,
+    "crossPackageFileCollisions": 0,
+    "crossPackageDirectoryCollisionKeys": 4
+  },
+  "canonical": {
+    "schemaVersion": 1,
+    "headerFields": [
+      "kind",
+      "schemaVersion",
+      "id",
+      "revision",
+      "createdAt",
+      "updatedAt"
+    ],
+    "gradeBandMappings": {
+      "elementary": "elementary-3-5",
+      "middle": "middle-6-8",
+      "high": "high-9-12",
+      "middle_school": "middle-6-8",
+      "high_school": "high-9-12"
+    },
+    "sessionStates": [
+      "planned",
+      "active",
+      "paused",
+      "approved-break",
+      "student-requested-break",
+      "technical-interruption",
+      "completed",
+      "abandoned"
+    ],
+    "eventTypes": [
+      "session-planned",
+      "session-started",
+      "segment-started",
+      "active-response-recorded",
+      "segment-completed",
+      "pause-started",
+      "break-requested",
+      "break-approved",
+      "break-started",
+      "break-ended",
+      "technical-interruption-started",
+      "technical-interruption-ended",
+      "session-resumed",
+      "redirection-recorded",
+      "tutor-intervention-recorded",
+      "session-completed",
+      "session-abandoned"
+    ],
+    "resumePointFields": [
+      "segmentId",
+      "elapsedActiveSecondsInSegment",
+      "responseDraftRef?"
+    ],
+    "timerMappings": {
+      "session-3.visible": "count-down",
+      "session-3.minimal": "progress-bar",
+      "session-3.hidden": "hidden",
+      "session-4.true": "hidden",
+      "session-4.false": "requires_explicit_fallback_policy"
+    },
+    "breakTypeMappings": {
+      "planned": "scheduled-break",
+      "student_requested": "student-request",
+      "movement": "student-request",
+      "water": "student-request",
+      "screen_rest": "student-request",
+      "quiet_reset": "student-request",
+      "parent_configured": "adult-directed"
+    },
+    "recommendationStates": [
+      "increase",
+      "maintain",
+      "decrease",
+      "insufficient_data",
+      "manual_review"
+    ],
+    "reviewIntervalDays": {
+      "0": "same-day",
+      "1": "one-day",
+      "3": "three-day",
+      "7": "seven-day",
+      "14": "fourteen-day",
+      "30": "thirty-day",
+      "other": "custom"
+    },
+    "parentPrecedence": [
+      "safety-limit",
+      "required-accommodation",
+      "parent-hard-maximum",
+      "parent-explicit-manual-override",
+      "engine-recommendation",
+      "grade-band-default"
+    ]
+  },
+  "versionMappings": [
+    {
+      "source": "Session 1 schemaVersion:1",
+      "disposition": "canonical"
+    },
+    {
+      "source": "provisional.study-engine.session-context.v1",
+      "disposition": "retire_to_canonical_input_adapter"
+    },
+    {
+      "source": "provisional.tutor-core.instruction-outcome.v1",
+      "disposition": "retire_requires_tutor_decision_projection"
+    },
+    {
+      "source": "provisional-study-session.v1",
+      "disposition": "retire_as_state_authority_keep_checkpoint_fields_only"
+    },
+    {
+      "source": "study-ux.workspace.v1",
+      "disposition": "prototype_only_keep_behind_checkpoint_sidecar"
+    },
+    {
+      "source": "Session 4 provisional-*.v1",
+      "disposition": "retire_as_wire_authority_keep_pure_transforms"
+    },
+    {
+      "source": "Tutor Core semver",
+      "disposition": "preserve_as_nested_instructional_content_provenance"
+    }
+  ],
+  "requiredPersistenceRules": {
+    "appendOnlyEvents": true,
+    "eventIdUniquePerStream": true,
+    "optimisticConcurrency": true,
+    "rawLearnerResponsesPersisted": false,
+    "rawTranscriptsPersisted": false,
+    "adultPrivateProjectionToLearner": false,
+    "unsupportedVersionsQuarantined": true,
+    "checkpointOwner": "versioned-study-checkpoint-or-persistence-sidecar",
+    "sidecarHooks": [
+      "review-queue-proposed",
+      "calendar-block-proposed",
+      "parent-decision-recorded",
+      "external-assignment-linked"
+    ]
+  },
+  "classifications": [
+    {
+      "id": "R1-B01",
+      "classification": "BLOCKER",
+      "summary": "Session 2 provisional Tutor directive consumes a wire contract that frozen Tutor Core does not export."
+    },
+    {
+      "id": "R1-B02",
+      "classification": "BLOCKER",
+      "summary": "Exact production refresh recovery needs a canonical segment-time/draft checkpoint and safe instructional cursor; Session 3 local storage is not contract-complete."
+    },
+    {
+      "id": "R1-B03",
+      "classification": "BLOCKER",
+      "summary": "Tutor Core urgent self-harm and abuse categories are not implemented by runtime safety rules; an approved external safety gateway is required."
+    },
+    {
+      "id": "R1-B04",
+      "classification": "BLOCKER",
+      "summary": "Raw learner answers/transcripts and incomplete PII redaction make direct Session 3/Tutor snapshot persistence unsafe."
+    },
+    {
+      "id": "R1-B05",
+      "classification": "BLOCKER",
+      "summary": "The full Tutor-to-Study evidence/result adapter and queue/calendar/parent enforcement persistence hooks are not implemented."
+    },
+    {
+      "id": "R1-R01",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "summary": "Move Session 4 private note bodies to Session 1 authorized private records and retain only privateRecordRef in controls."
+    },
+    {
+      "id": "R1-R02",
+      "classification": "REQUIRED BEFORE FINAL ASSEMBLY",
+      "summary": "Route every inbound version through Session 1 inspect/migrate/quarantine without destructive fallback."
+    },
+    {
+      "id": "R1-A01",
+      "classification": "SAFE ADAPTER",
+      "summary": "Deterministic mappings for grade bands, presentation timers, break reasons, review intervals and Session 4 projections."
+    },
+    {
+      "id": "R1-D01",
+      "classification": "DOCUMENTATION ONLY",
+      "summary": "Frozen Tutor Core remains persistence-agnostic; refresh persistence belongs to the Study checkpoint/sidecar."
+    },
+    {
+      "id": "R1-P01",
+      "classification": "DEFERRED PRODUCTION CONCERN",
+      "summary": "Authorization, encryption, retention/deletion, deployment and production external side effects remain out of scope."
+    }
+  ]
+}

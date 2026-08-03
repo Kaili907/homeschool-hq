@@ -724,7 +724,8 @@ function devLog(provider: UsedProvider, req: SpeakRequest): void {
   try {
     const meta = import.meta as unknown as { env?: { DEV?: boolean } }
     if (meta.env?.DEV && typeof console !== 'undefined') {
-      console.debug(`[voice] ${provider} · "${req.text.slice(0, 24)}"`)
+      const characterCount = req.text.length
+      console.debug(`[voice] provider=${provider} characters=${characterCount}`)
     }
   } catch {
     /* ignore */

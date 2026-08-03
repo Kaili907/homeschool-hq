@@ -1,0 +1,47 @@
+{
+  "artifact": "manuel-academy.session-8-r3.release-evidence",
+  "version": "0.8.1",
+  "nodeVersion": "v22.23.1",
+  "nodeEngine": ">=22",
+  "sourceTreeDigestAlgorithm": "SHA-256 over normalized-path:raw-file-SHA256 lines joined with LF",
+  "sourceTreeOrdering": "ascending Unicode code-point order",
+  "sourceTreePathNormalization": "forward slash",
+  "sourceTreeFiles": 27,
+  "sourceTreeDigest": "0E51E597958D1089CBD0A07CB31C6FC7DDC4F1182131E6D0976BBD397864FB92",
+  "bundleDigestAlgorithm": "SHA-256 over normalized-path:raw-file-SHA256 lines joined with LF",
+  "bundleOrdering": "ascending Unicode code-point order",
+  "bundlePathNormalization": "forward slash",
+  "bundleFiles": [
+    "assets/index-C4dNgVJX.js",
+    "assets/index-C4dNgVJX.js.map",
+    "assets/index-DAyrtZlt.css",
+    "index.html"
+  ],
+  "bundleDigest": "40A87D103A57392816D8C5D5496E8DCC53B7FCA03770B1ED771D3897BF21D53B",
+  "packagedDistDigest": "40A87D103A57392816D8C5D5496E8DCC53B7FCA03770B1ED771D3897BF21D53B",
+  "cleanExtractionBundleDigest": "40A87D103A57392816D8C5D5496E8DCC53B7FCA03770B1ED771D3897BF21D53B",
+  "transformedModules": 26,
+  "testFiles": 6,
+  "testCount": 86,
+  "testsFailed": 0,
+  "typecheck": "PASS",
+  "build": "PASS",
+  "nodeAudit": "PASS",
+  "dependencyAudit": "PASS (0 vulnerabilities)",
+  "screenshots": {
+    "result": "PASS",
+    "desktop": 3,
+    "mobile": 1,
+    "mobileViewport": "390x844"
+  },
+  "traceDigests": {
+    "deterministic-traces.json": "2E0FDC6FD89C790722CAB1A778C4C9F497B2F1AEBFFBDCDCE73949486AE06615",
+    "parent-precedence-traces.json": "0D8D6B3C3DE0E1830FB60AC050B5EDD2CD6074DA8C9D257C307FA02BDFF90ED9"
+  },
+  "zipFilename": "SESSION-8-R3-FINAL-STUDY-CALENDAR-RUNTIME.zip",
+  "zipSha256Policy": "Reported externally after sealing to avoid self-referential archive content.",
+  "rejectedHistoricalBundleDigests": [
+    "241D900BBD9697650CC2A72D04ACE0ACF1152C676938D005416C83D9133E8A02",
+    "FF7CBCAB1DC49B0D9C94BE4CE1B27D1FEFA369F28B164ECDBAA94B03B3D51F29"
+  ]
+}

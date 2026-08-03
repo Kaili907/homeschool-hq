@@ -1,0 +1,420 @@
+{
+  "contract": "study-core-bridge.sample-traces.v1",
+  "contractVersion": 1,
+  "bridgeVersion": "1.0.1",
+  "generatedDeterministically": true,
+  "containsRawAnswers": false,
+  "containsRawTranscripts": false,
+  "containsDirectIdentifiers": false,
+  "traces": [
+    {
+      "id": "trace-01-math-misconception",
+      "title": "Math misconception",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "tutor-core",
+          "event": "assessment",
+          "reasonCode": "diagnostic-evidence-recorded"
+        },
+        {
+          "order": 2,
+          "boundary": "tutor-core",
+          "event": "teach-visually",
+          "reasonCode": "possible-fraction-model-confusion"
+        },
+        {
+          "order": 3,
+          "boundary": "tutor-core",
+          "event": "guided-practice",
+          "reasonCode": "guided-evidence-lower-weight"
+        },
+        {
+          "order": 4,
+          "boundary": "tutor-core",
+          "event": "independent-attempt",
+          "reasonCode": "independent-evidence-recorded"
+        },
+        {
+          "order": 5,
+          "boundary": "study-core-bridge",
+          "event": "minimized-study-evidence",
+          "reasonCode": "raw-content-excluded"
+        }
+      ],
+      "assertions": [
+        "misconception-authority-is-tutor-core",
+        "guided-and-independent-evidence-remain-distinct",
+        "raw-answer-excluded",
+        "one-answer-does-not-establish-mastery"
+      ]
+    },
+    {
+      "id": "trace-02-reading-prerequisite",
+      "title": "Reading prerequisite gap request safely withheld",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "tutor-core",
+          "event": "prerequisite-graph-validated",
+          "reasonCode": "prerequisite-result-envelope-unavailable"
+        },
+        {
+          "order": 2,
+          "boundary": "study-core-bridge",
+          "event": "prerequisite-result-withheld",
+          "reasonCode": "insufficient-evidence"
+        },
+        {
+          "order": 3,
+          "boundary": "study-engine",
+          "event": "review-recommendation",
+          "reasonCode": "collect-more-evidence"
+        }
+      ],
+      "assertions": [
+        "bridge-does-not-invent-prerequisite-gap",
+        "remediation-withheld-without-core-result",
+        "study-owns-scheduling",
+        "tutor-core-owns-prerequisite-reasoning"
+      ]
+    },
+    {
+      "id": "trace-03-guided-correct-independent-failed",
+      "title": "Correct guided response followed by failed independent response",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "tutor-core",
+          "event": "guided-practice",
+          "reasonCode": "correct-with-support"
+        },
+        {
+          "order": 2,
+          "boundary": "tutor-core",
+          "event": "independent-attempt",
+          "reasonCode": "independent-not-yet-demonstrated"
+        },
+        {
+          "order": 3,
+          "boundary": "study-core-bridge",
+          "event": "minimized-study-evidence",
+          "reasonCode": "guided-evidence-not-promoted-to-mastery"
+        }
+      ],
+      "assertions": [
+        "independent-evidence-outranks-guided-evidence",
+        "no-mastery-claim"
+      ]
+    },
+    {
+      "id": "trace-04-low-confidence-correct",
+      "title": "Low confidence with correct work",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "tutor-core",
+          "event": "assessment-result",
+          "reasonCode": "correct-response"
+        },
+        {
+          "order": 2,
+          "boundary": "tutor-core",
+          "event": "confidence-estimate",
+          "reasonCode": "low-confidence"
+        },
+        {
+          "order": 3,
+          "boundary": "study-engine",
+          "event": "review-recommendation",
+          "reasonCode": "tutor-core-low-or-insufficient-confidence"
+        }
+      ],
+      "assertions": [
+        "correct-answer-does-not-overwrite-confidence",
+        "review-is-not-mastery-failure"
+      ]
+    },
+    {
+      "id": "trace-05-urgent-safety",
+      "title": "Urgent safety escalation through the pre-Core gateway",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "pre-core-gateway",
+          "event": "urgent-category-detected",
+          "reasonCode": "self-harm-or-immediate-danger"
+        },
+        {
+          "order": 2,
+          "boundary": "pre-core-gateway",
+          "event": "instruction-stopped",
+          "reasonCode": "trusted-adult-required"
+        },
+        {
+          "order": 3,
+          "boundary": "adult-hook",
+          "event": "review-proposed",
+          "reasonCode": "student-support"
+        }
+      ],
+      "assertions": [
+        "tutor-core-submit-call-count-zero",
+        "raw-disclosure-not-stored",
+        "adult-contact-not-claimed",
+        "learner-not-blamed"
+      ]
+    },
+    {
+      "id": "trace-06-missing-voice",
+      "title": "Missing voice",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "media-bridge",
+          "event": "voice-unavailable",
+          "reasonCode": "voice-missing-api"
+        },
+        {
+          "order": 2,
+          "boundary": "learner-presentation",
+          "event": "visible-caption-fallback",
+          "reasonCode": "lesson-may-continue"
+        }
+      ],
+      "assertions": [
+        "captions-visible",
+        "fallback-text-readable",
+        "transcript-not-persisted"
+      ]
+    },
+    {
+      "id": "trace-07-missing-media",
+      "title": "Missing media",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "media-bridge",
+          "event": "visual-unavailable",
+          "reasonCode": "missing-visual-media"
+        },
+        {
+          "order": 2,
+          "boundary": "learner-presentation",
+          "event": "accessible-readable-step",
+          "reasonCode": "lesson-may-continue"
+        }
+      ],
+      "assertions": [
+        "text-alternative-present",
+        "lesson-progress-not-blocked"
+      ]
+    },
+    {
+      "id": "trace-08-unknown-visual",
+      "title": "Unknown visual-board command",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "media-bridge",
+          "event": "command-not-recognized",
+          "reasonCode": "unknown-visual-command"
+        },
+        {
+          "order": 2,
+          "boundary": "learner-presentation",
+          "event": "add-text-fallback",
+          "reasonCode": "accessible-readable-step"
+        }
+      ],
+      "assertions": [
+        "unknown-command-not-executed",
+        "readable-fallback-present"
+      ]
+    },
+    {
+      "id": "trace-09-unsupported-version",
+      "title": "Unsupported package version",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "bridge-version-gate",
+          "event": "event-rejected",
+          "reasonCode": "unsupported-package-version"
+        },
+        {
+          "order": 2,
+          "boundary": "quarantine",
+          "event": "metadata-only-record",
+          "reasonCode": "payload-not-stored"
+        }
+      ],
+      "assertions": [
+        "no-version-coercion",
+        "no-study-evidence-created"
+      ]
+    },
+    {
+      "id": "trace-10-approved-break",
+      "title": "Approved break during Tutor interaction",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "study-engine",
+          "event": "break-approved",
+          "reasonCode": "student-request"
+        },
+        {
+          "order": 2,
+          "boundary": "study-core-bridge",
+          "event": "completion-review-input",
+          "reasonCode": "approved-break-preserved"
+        }
+      ],
+      "assertions": [
+        "break-not-failure",
+        "break-does-not-reduce-mastery",
+        "pacing-separate-from-mastery"
+      ]
+    },
+    {
+      "id": "trace-11-review-back-to-study",
+      "title": "Tutor review result returned to Study scheduling",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "tutor-core",
+          "event": "parent-teacher-review",
+          "reasonCode": "minimized-phase-summaries"
+        },
+        {
+          "order": 2,
+          "boundary": "study-core-bridge",
+          "event": "review-recommendation",
+          "reasonCode": "tutor-core-review-after-advance"
+        },
+        {
+          "order": 3,
+          "boundary": "study-engine",
+          "event": "learner-local-review-date",
+          "reasonCode": "household-iana-time-zone"
+        }
+      ],
+      "assertions": [
+        "study-owns-review-date",
+        "tutor-core-owns-instructional-result"
+      ]
+    },
+    {
+      "id": "trace-12-private-note-excluded",
+      "title": "Adult-private note excluded from learner projection",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "privacy-filter",
+          "event": "adult-private-field-seen",
+          "reasonCode": "adult-private-note-removed"
+        },
+        {
+          "order": 2,
+          "boundary": "learner-projection",
+          "event": "safe-projection-created",
+          "reasonCode": "private-note-body-not-included"
+        }
+      ],
+      "assertions": [
+        "no-private-note-body",
+        "no-adult-author-details"
+      ]
+    },
+    {
+      "id": "trace-13-raw-answer-removed",
+      "title": "Raw answer removed from Study event",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "privacy-filter",
+          "event": "raw-answer-seen",
+          "reasonCode": "raw-answer-removed"
+        },
+        {
+          "order": 2,
+          "boundary": "study-projection",
+          "event": "aggregate-counts-only",
+          "reasonCode": "raw-content-excluded"
+        }
+      ],
+      "assertions": [
+        "raw-answer-not-serialized",
+        "bounded-counts-preserved"
+      ]
+    },
+    {
+      "id": "trace-14-email-removed",
+      "title": "Email address removed",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "privacy-filter",
+          "event": "direct-contact-detail-seen",
+          "reasonCode": "email-removed"
+        },
+        {
+          "order": 2,
+          "boundary": "study-projection",
+          "event": "safe-projection-created",
+          "reasonCode": "direct-identifiers-not-included"
+        }
+      ],
+      "assertions": [
+        "email-not-serialized",
+        "fixed-error-does-not-echo-source"
+      ]
+    },
+    {
+      "id": "trace-15-stale-checkpoint",
+      "title": "Stale recovery checkpoint rejected",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "checkpoint-sidecar",
+          "event": "revision-compared",
+          "reasonCode": "stale-checkpoint"
+        },
+        {
+          "order": 2,
+          "boundary": "quarantine",
+          "event": "resume-stopped",
+          "reasonCode": "payload-not-stored"
+        }
+      ],
+      "assertions": [
+        "stale-checkpoint-not-applied",
+        "raw-draft-not-in-checkpoint"
+      ]
+    },
+    {
+      "id": "trace-16-duplicate-event",
+      "title": "Duplicate event ignored safely",
+      "steps": [
+        {
+          "order": 1,
+          "boundary": "accepted-event-ledger",
+          "event": "event-accepted",
+          "reasonCode": "idempotency-key-recorded"
+        },
+        {
+          "order": 2,
+          "boundary": "accepted-event-ledger",
+          "event": "identical-event-replayed",
+          "reasonCode": "duplicate-event"
+        }
+      ],
+      "assertions": [
+        "duplicate-is-no-op",
+        "conflicting-content-is-quarantined",
+        "no-second-study-event-created"
+      ]
+    }
+  ]
+}
