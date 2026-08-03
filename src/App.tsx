@@ -58,6 +58,7 @@ import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
 import { isStudyEngineEnabledFromHost, isStudyEnginePreviewEnabledFromHost } from './study/featureFlag'
+import { isStudyEnginePath } from './studyEngineRoute'
 import {
   buildHostStudyContext,
   deriveStudyHouseholdRef,
@@ -136,7 +137,15 @@ export default function App() {
     })
   }
   const [state, setState] = useState<AppState>(loaded.state)
-  const [screen, setScreen] = useState<Screen>({ kind: 'picker' })
+  // MOUNT-2: the study route is evaluated before the picker default, so a fresh
+  // navigation or refresh at /study-engine with a valid persisted profile lands
+  // on the study surface. No active profile or flag-off falls through to the
+  // picker/normal app (the loader guarantees a non-null activeProfileId exists).
+  const [screen, setScreen] = useState<Screen>(() =>
+    studyEnabled && loaded.state.activeProfileId && isStudyEnginePath(window.location.pathname)
+      ? { kind: 'studyDashboard' }
+      : { kind: 'picker' },
+  )
   const [showMigration, setShowMigration] = useState(loaded.migrated)
   const [parentStudyAuthorization, setParentStudyAuthorization] = useState<StudyAdultAuthorization | null>(null)
   const seenRef = useRef(new Set<string>())
