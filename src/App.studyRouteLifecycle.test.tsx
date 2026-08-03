@@ -248,6 +248,8 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await reachStudySurface()
     expect(harness.picker).toBeNull()
     expect(harness.launches[0]).toEqual({ student: 'p1', host: 'household-a' })
+    // A4-X: entry never writes the URL — deep-link pathname is left untouched.
+    expect(pathname).toBe('/study-engine')
   })
 
   it('reaches the study surface again after a refresh-equivalent remount mid-session', async () => {
@@ -262,6 +264,8 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await waitFor(() => hasText(container, 'Verified Study workspace'))
     expect(harness.picker).toBeNull()
     expect(harness.launches[1]).toEqual({ student: 'p1', host: 'household-a' })
+    // A4-X: mid-session the pathname stays /study-engine, so refresh re-enters.
+    expect(pathname).toBe('/study-engine')
   })
 
   it('cancels the study runtime and lands the next learner on home after a profile switch', async () => {
@@ -311,6 +315,63 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     expect(hasText(container, 'Study is not available')).toBe(false)
     expect(hasText(container, 'Today’s Study plan')).toBe(false)
     expect(harness.launches).toEqual([])
+  })
+
+  // A4-X exit-time URL normalization (adopted ruling on the A2/A4 residual):
+  // leaving Study rewrites a lingering /study-engine pathname to / via
+  // replaceState, so a refresh-equivalent remount lands the normal start
+  // screen instead of re-entering Study.
+
+  it('normalizes the pathname on Back home so a refresh-equivalent remount does not re-enter Study', async () => {
+    await mountApp(seeded('p1'))
+    await reachStudySurface()
+    await press(findButton('Back home'))
+    await waitFor(() => hasText(container, 'Hi, Sam!'))
+    expect(pathname).toBe('/')
+    await act(async () => root?.unmount())
+    root = null
+    container = documentTarget.createElement('div')
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    await mountApp(persisted)
+    // The runtime prelaunch tied to the active profile may still fire in the
+    // background (existing MOUNT-2 behavior); what must not happen is the
+    // Study surface rendering instead of the normal start screen.
+    expect(harness.picker).not.toBeNull()
+    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+  })
+
+  it('normalizes the pathname on sign-out when /study-engine lingers at sign-out time', async () => {
+    await mountApp(seeded('p1'))
+    await reachStudySurface()
+    await press(findButton('Back home'))
+    await waitFor(() => hasText(container, 'Hi, Sam!'))
+    // Simulate the URL lingering at sign-out time (e.g. restored by browser
+    // Back after exit — the accepted residual) so signOut's coverage is real.
+    pathname = '/study-engine'
+    await press(findButton('Sign out'))
+    expect(harness.picker).not.toBeNull()
+    expect(pathname).toBe('/')
+  })
+
+  it('does not enter Study on remount for a second learner after a prior learner exits (A4-F2)', async () => {
+    await mountApp(seeded('p1'))
+    await reachStudySurface()
+    await press(findButton('Back home'))
+    await waitFor(() => hasText(container, 'Hi, Sam!'))
+    await press(findButton('Sign out'))
+    expect(harness.picker).not.toBeNull()
+    await act(async () => harness.picker?.onPick('p2'))
+    await act(async () => { harness.pin?.onComplete('2222') })
+    await waitFor(() => hasText(container, 'Hi, Riley!'))
+    await act(async () => root?.unmount())
+    root = null
+    container = documentTarget.createElement('div')
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.activeProfileId).toBe('p2')
+    await mountApp(persisted)
+    expect(harness.picker).not.toBeNull()
+    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(pathname).toBe('/')
   })
 
   it('leaves the root pathname on the picker despite a persisted active profile', async () => {

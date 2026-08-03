@@ -58,7 +58,7 @@ import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
 import { isStudyEngineEnabledFromHost, isStudyEnginePreviewEnabledFromHost } from './study/featureFlag'
-import { isStudyEnginePath } from './studyEngineRoute'
+import { isStudyEnginePath, leaveStudyEnginePath } from './studyEngineRoute'
 import {
   buildHostStudyContext,
   deriveStudyHouseholdRef,
@@ -341,6 +341,7 @@ export default function App() {
   const patchActive = (update: (prev: Profile) => Profile) =>
     setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
   const signOut = () => {
+    leaveStudyEnginePath()
     void purgeVoiceCache()
     studyProductionLifecycleRef.current?.cancel('logout')
     void studyVerifiedRuntimeRef.current?.cancel('logout')
@@ -561,7 +562,10 @@ export default function App() {
         return (
           <StudyUnavailable
             reason={studyProductionUnavailableReason}
-            onBack={() => setScreen({ kind: 'home' })}
+            onBack={() => {
+              leaveStudyEnginePath()
+              setScreen({ kind: 'home' })
+            }}
           />
         )
       }
@@ -570,6 +574,7 @@ export default function App() {
           runtime={verifiedRuntime}
           onBack={() => {
             void verifiedRuntime.cancel('navigation-away')
+            leaveStudyEnginePath()
             setScreen({ kind: 'home' })
           }}
         />
@@ -592,7 +597,10 @@ export default function App() {
               ? studyContextResult.reason
               : 'The Study integration is unavailable.'
           }
-          onBack={() => setScreen({ kind: 'home' })}
+          onBack={() => {
+            leaveStudyEnginePath()
+            setScreen({ kind: 'home' })
+          }}
         />
       )
     }
@@ -633,7 +641,10 @@ export default function App() {
             })
           }
           onSettings={() => setScreen({ kind: 'studySettings' })}
-          onBack={() => setScreen({ kind: 'home' })}
+          onBack={() => {
+            leaveStudyEnginePath()
+            setScreen({ kind: 'home' })
+          }}
         />
       </Suspense>
     )
