@@ -1,14 +1,23 @@
-# PARKED.md — Workstream Ledger for Manuel Academy (v1.1)
+# PARKED.md — Workstream Ledger for Manuel Academy (v1.2)
 
-Authoritative reconciliation of every known workstream. v1.1,
-August 3, 2026: corrects two dispatcher errors in v1.0 (CL6
+Authoritative reconciliation of every known workstream. v1.2,
+August 3, 2026: updates canonical master (recompose + JP-1
+merged); corrects the mount-branch note (branches now on origin);
+reclassifies C2/C3 as stubs; records A-line progress (A1-R, A2,
+A3, A3-R, A3-C complete; A2 fix reviewed, merge pending); adds
+machine-hygiene rules, the A2 exit-URL residual, and a
+known-flaky test note.
+
+v1.1 (superseded) corrected two dispatcher errors in v1.0 (CL6
 asserted a push that had not occurred; the wip tip sha was wrong),
-incorporates Session A1's custody findings, and adds the
-session-to-branch map following the fourteen-branch laptop push
-(witnessed in Dad's terminal, Aug 3).
+incorporated Session A1's custody findings, and added the
+session-to-branch map following the fourteen-branch laptop push.
 
-Canonical master at time of writing: ab22a0c (PARKED.md v1.0
-merge; ancestors 704a748 docs merge, 5be50ff v2.2).
+Canonical master at time of writing: 88dbc39 (recompose merge;
+ancestors 5115a00 JP-1, 48db9d4 A3-C tip via recompose line,
+ab22a0c PARKED v1.0 merge, 704a748 docs merge, 5be50ff v2.2).
+Published production remains v2.2 (5be50ff); Netlify auto-publish
+LOCKED.
 
 Rules of this file:
 - No session re-investigates anything listed CLOSED or DEAD.
@@ -20,6 +29,26 @@ Rules of this file:
   unverified claim.
 - Session numbers were REUSED across workstreams. Never use a
   bare session number; use the branch names below.
+
+---
+
+## MACHINE HYGIENE (run BEFORE any heavy test suite)
+- Orphaned process sweep: check for node_repl.exe and claude.exe
+  processes with dead parents. Swarms of these starve
+  embedded-Postgres test spawns and cause FALSE failures
+  (observed Aug 3: ~130 orphans caused failures across 3 fresh
+  worktrees; taskkill sweep resolved it).
+- Stale worktrees: run `git worktree list` before creating or
+  reusing a worktree path. Remove stale entries with
+  `git worktree remove`. Do not assume presence or absence —
+  check.
+
+## KNOWN-FLAKY TESTS (watch; not yet actionable)
+- src/sync/useSync.mounted.test.tsx — failed once in a full-suite
+  run during A2-R (error-message mismatch: expected "unbound",
+  got household-binding message), then passed in isolation
+  (29/29) and on full rerun (1221/1221). One occurrence; log
+  future occurrences here.
 
 ---
 
@@ -44,16 +73,21 @@ All on origin as of Aug 3, 2026.
 | Tutor math host (STUB — see D5) | integrate/tutor-math-r1-host | a5d2068 |
 
 Notes:
-- No branch named "study-engine-host-mount" exists. MOUNT-1 work
-  is presumed inside host-runtime or the S19 candidate; the A1
-  re-run must determine which.
+- (Corrected in v1.2) The mount branches were recovered and
+  pushed to origin during the Aug 2-3 estate recovery; they
+  exist on the remote. v1.1's "no such branch" note is obsolete.
+  MOUNT-1 guard design lives in the recovered branches 87a8076 /
+  1f12491 / 11a63e2 (per A2's source analysis); their tests
+  assert picker-first behavior, which A2 defines as the defect —
+  do not adopt them for MOUNT-2 work.
 - runtime-closure and final-production-candidate share tip
   b492924; treat as one line until proven otherwise.
 
 ## CLOSED — verified. No action ever.
-- CL1. Production custody: published Netlify deploy 6a6f3653 =
-  v2.2 (5be50ff); auto-publish LOCKED. Master advances by docs
-  merges only since.
+- CL1. Production custody: published Netlify deploy 6a6f6353 =
+  v2.2 (5be50ff); auto-publish LOCKED. (Master has since
+  advanced by docs merges AND the recompose/JP-1 merges — see
+  header. Published production unchanged.)
 - CL2. Safe household sync / CAS: merged into v2.2.
 - CL3. Student identity canonical history: hardened lineage in
   v2.2.
@@ -62,14 +96,25 @@ Notes:
 - CL5. Hosted Supabase: four-row ledger authoritative (v2.2
   chain, applied via CLI Aug 2). Study migration NEVER applied —
   intentional.
-- CL6 (corrected): RC1 source integrate/study-engine-final-
-  assembly (ea8e976) is on origin AS OF AUG 3 — pushed and
+- CL6 (corrected in v1.1): RC1 source integrate/study-engine-
+  final-assembly (ea8e976) is on origin AS OF AUG 3 — pushed and
   ls-remote-witnessed in Dad's terminal. v1.0 asserted this
   before it was true; the assertion was false when written.
 - CL7. LADDER: Claude-side proposal, never dispatched. Future
   work, not lost work.
-- CL8 (new). The full Study Engine / Tutor branch estate is on
-  origin (fourteen-branch push, Aug 3, terminal-witnessed).
+- CL8. The full Study Engine / Tutor branch estate is on origin
+  (fourteen-branch push, Aug 3, terminal-witnessed).
+- CL9 (new). Study/Tutor recompose line MERGED to master: A3
+  (ruled graft, integrate/study-recompose-v1) + A3-R independent
+  review (SAFE WITH CONDITIONS, ~700 additional tests) + A3-C
+  condition closure (docs/TESTING.md, per-suite npm scripts,
+  48db9d4) — merged as 88dbc39 after the orphaned-process
+  machine issue was resolved. One documented dispatcher
+  exception used once for academy-cas.postgres.test.ts during
+  the merge run; test passed clean on later runs and in A2-R.
+- CL10 (new). JP-1: Japanese Year 1 curriculum wired into Plans
+  view (8 sparse quarter-anchored weeks, source verbatim).
+  Merged 5115a00.
 
 ## DEAD — declared by Dad. Forensics only.
 - D1. Root pnpm workspace conversion. Unauthorized; npm baseline
@@ -80,7 +125,7 @@ Notes:
   pre-R1 Math, pre-correction English, early bridge revisions).
 - D4. The claim "RFL M1/M2 media 100% complete". Withdrawn;
   inventory decides.
-- D5 (new). integrate/tutor-math-r1-host at a5d2068: zero unique
+- D5. integrate/tutor-math-r1-host at a5d2068: zero unique
   commits, a v2.1-era stub. Dead as a branch; tutor-math host
   integration resumes under D-line cards from the frozen R1
   package, not from this ref.
@@ -88,25 +133,33 @@ Notes:
 ## PARKED — resumable by card only. Queue order = dependencies.
 
 ### A. Study Engine production line  [first in queue]
-State (post-A1): the laptop wip trove (wip/laptop-local-preserve,
-fb275f2 content commit, 7df73c9 archive tip) is NOT the S19
-candidate — it is a 6-file adult-review-v2 fragment with broken
-imports (missing ./types, ./stateMachine). The true candidate is
-the S19 branch (b492924, on origin). MOUNT-2's blocking defect
-(fresh navigation/refresh at /study-engine returns profile picker
-before route evaluation) remains unfixed; the route code was
-absent from the wip fragment and must be located in the S19/
-host-runtime trees.
+State (post-A3/A2, v1.2): the recompose line is MERGED to master
+(CL9). A1-R custody verdict: CONTESTED at the ~15-file security
+seam (v2.2 wins by ruling), CHEAP elsewhere (~1,360 of 1,405
+files additive). The laptop wip trove (wip/laptop-local-preserve,
+fb275f2 content commit, 7df73c9 archive tip) is a 6-file
+adult-review-v2 fragment with broken imports — superseded by the
+merged recompose.
+MOUNT-2 is FIXED on branch fix/study-engine-route-lifecycle
+(8695632, one commit over 88dbc39): route evaluated inside the
+initial-screen decision ahead of the picker default; 8 regression
+tests; independently reviewed (A2-R, SAFE WITH CONDITIONS — both
+conditions closed by this v1.2 entry and merge sequencing).
+MERGE PENDING dispatcher execution.
+A2 RESIDUAL (flag for A4): after deep-linking into Study and
+selecting "Back home", the screen returns home but
+window.location.pathname remains /study-engine; a later refresh
+re-enters Study for a signed-in learner. Coherent consequence of
+entry-only route evaluation; exit-time URL rewriting deliberately
+not adopted (A2 ruling). The lifecycle tests do NOT assert
+exit-time pathname. A4 decides whether to adopt exit-time URL
+normalization.
 Resume path (one card each):
-  A1-R. RE-VERIFY custody against real refs: does b492924
-        contain the 15-16-17 composition over RC1? Where does
-        the /study-engine route live? Is the wip fragment
-        subsumed (then mark it superseded) or does it hold
-        unique content?
-  A2.   FIX MOUNT-2 defect + lifecycle regression tests.
-  A3.   COMPOSE 15-16-17 if A1-R finds the candidate incomplete;
-        skip if already composed.
-  A4.   RUN authenticated e2e from the verified candidate.
+  A1-R. DONE (custody verdict above).
+  A2.   DONE (fix built + reviewed; merge pending).
+  A3.   DONE (recompose merged, CL9).
+  A4.   RUN authenticated e2e from merged master; rule on the
+        exit-URL residual.
   A5.   AUTHORIZE Study migration (Dad card), CLI apply, ledger.
   A6.   BLOCKING GATE before any student use: production safety
         classifier injected AND startup assertion (production
@@ -121,15 +174,21 @@ unresolved). Frozen packages in archives/ + mu-music trove.
 
 ### C. Enrichment branches — merge-or-dead decisions
 C1 a5-grade5-math (blocked on host Grade 5 identity).
-C2 ra-azure-reading. C3 mkjp-hiragana (separate from the small
-Japanese curriculum FILE wiring task). C4 mu-music (1b80cce).
+C2 ra-azure-reading — STUB (v1.2): zero unique commits over
+base; no recoverable work. Merge-or-dead decision is now a
+dead-or-rebuild decision.
+C3 mkjp-hiragana — STUB (v1.2): zero unique commits over base;
+no recoverable work. Separate from the completed Japanese
+curriculum FILE wiring (CL10). Dead-or-rebuild decision.
+C4 mu-music (1b80cce).
 
 ### D. Adaptive Tutor host assembly
 Core v0.2, Math R1, corrected English frozen (archives/). Host
-custody + conclusive database gates unresolved. Branches now on
+custody + conclusive database gates unresolved. Branches on
 origin: assembly foundation (f43b652), R1 fix (d4ccb91), English
 integration (b10d7ac). English's 46 untracked worktree files
-still need matching to the frozen package.
+still need matching to the frozen package. Math registration may
+be unblocked post-recompose — verify before building.
 
 ### E. Romeo Virtual Academy companion
 Branch unreviewed; host audits show no host implementation.
@@ -144,15 +203,18 @@ assessment week.
 ### G. Never started (no artifacts)
 Weekly intelligence report; voice/oral-response analysis;
 portfolio/attendance/transcripts; accommodations & motivation;
-Romeo deferred imports; LADDER; VOICE-PICKER (card exists; gates:
-docs landed [done], assessment week underway, voice audition +
-allowlist).
+Romeo deferred imports; LADDER; VOICE-PICKER (card exists;
+gates: docs landed [done], assessment week underway [NOT done],
+voice audition + allowlist [in progress — 8 Academy-collection
+candidate IDs collected Aug 3; Dad's ear-audition and final
+ELEVENLABS_ALLOWED_VOICE_IDS pending]).
 
 ---
 
 ## THE CRITICAL PATH (not parked, not code)
-1. Placement assessments — five students.
+1. Placement assessments — five students. NEVER administered;
+   app has been capable since v2.2. Blocked by nothing.
 2. Year scopes for four students — gated on 1.
 3. Household onboarding to hosted sync — after 1.
 
-Last updated: August 3, 2026 (v1.1) by Dad + dispatch desk.
+Last updated: August 3, 2026 (v1.2) by Dad + dispatch desk.
