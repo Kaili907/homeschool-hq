@@ -1,23 +1,17 @@
-# PARKED.md — Workstream Ledger for Manuel Academy (v1.2)
+# PARKED.md — Workstream Ledger for Manuel Academy (v1.3)
 
-Authoritative reconciliation of every known workstream. v1.2,
-August 3, 2026: updates canonical master (recompose + JP-1
-merged); corrects the mount-branch note (branches now on origin);
-reclassifies C2/C3 as stubs; records A-line progress (A1-R, A2,
-A3, A3-R, A3-C complete; A2 fix reviewed, merge pending); adds
-machine-hygiene rules, the A2 exit-URL residual, and a
-known-flaky test note.
+Authoritative reconciliation of every known workstream. v1.3,
+August 3, 2026: records A4 (PASS WITH FINDINGS), the A4-X fix +
+A4-X-R review + merge; closes the A2 exit-URL residual and A4-F2;
+records the surviving back-button residual; inserts A4-B after
+A5; fixes v1.2's stale "merge pending" line; adds the git-remote
+fetch-authorization clarification for review cards.
 
-v1.1 (superseded) corrected two dispatcher errors in v1.0 (CL6
-asserted a push that had not occurred; the wip tip sha was wrong),
-incorporated Session A1's custody findings, and added the
-session-to-branch map following the fourteen-branch laptop push.
-
-Canonical master at time of writing: 88dbc39 (recompose merge;
-ancestors 5115a00 JP-1, 48db9d4 A3-C tip via recompose line,
-ab22a0c PARKED v1.0 merge, 704a748 docs merge, 5be50ff v2.2).
-Published production remains v2.2 (5be50ff); Netlify auto-publish
-LOCKED.
+Canonical master at time of writing: d28e94a (A4-X exit-URL
+normalization, fast-forwarded; ancestors 6c9d024 A2 merge,
+6222ba4 PARKED v1.2, 88dbc39 recompose, 5115a00 JP-1, ab22a0c
+PARKED v1.0, 704a748 docs, 5be50ff v2.2). Published production
+remains v2.2 (5be50ff); Netlify auto-publish LOCKED.
 
 Rules of this file:
 - No session re-investigates anything listed CLOSED or DEAD.
@@ -25,10 +19,14 @@ Rules of this file:
   card from Dad naming the item's ID from this file.
 - Claims about remote/branch state are verified in Dad's terminal
   before action, per CLAUDE.md verification hierarchy. This rule
-  binds the dispatcher too: v1.0's CL6 error was exactly such an
-  unverified claim.
+  binds the dispatcher too.
 - Session numbers were REUSED across workstreams. Never use a
   bare session number; use the branch names below.
+- Card-template clarification (v1.3): "no hosted contact" in
+  cards prohibits the hosted Supabase project and Netlify. It
+  does NOT prohibit the git remote (origin/GitHub). Read
+  operations against origin (fetch, ls-remote) are authorized
+  for all sessions; writes to origin follow each card's terms.
 
 ---
 
@@ -42,13 +40,17 @@ Rules of this file:
   reusing a worktree path. Remove stale entries with
   `git worktree remove`. Do not assume presence or absence —
   check.
+- Environment note (v1.3): embedded-Postgres tests FAIL by
+  construction in root-user Linux containers (initdb privilege
+  drop cannot enter root-owned temp dirs). Confirmed
+  environmental during A4-X; the same test passes on the PC.
+  Gates for merge decisions run on the PC.
 
 ## KNOWN-FLAKY TESTS (watch; not yet actionable)
 - src/sync/useSync.mounted.test.tsx — failed once in a full-suite
-  run during A2-R (error-message mismatch: expected "unbound",
-  got household-binding message), then passed in isolation
-  (29/29) and on full rerun (1221/1221). One occurrence; log
-  future occurrences here.
+  run during A2-R (error-message mismatch), passed in isolation
+  and on all subsequent full runs (A4, A4-X-R). One occurrence;
+  log future occurrences here.
 
 ---
 
@@ -71,23 +73,22 @@ All on origin as of Aug 3, 2026.
 | Tutor assembly R1 fix | fix/adaptive-tutor-assembly-foundation-r1 | d4ccb91 |
 | Adaptive English integration | integrate/adaptive-english-v0.2.0 | b10d7ac |
 | Tutor math host (STUB — see D5) | integrate/tutor-math-r1-host | a5d2068 |
+| A4-X exit-URL fix (MERGED, d28e94a) | claude/study-engine-exit-url-whwy3g | d28e94a |
 
 Notes:
-- (Corrected in v1.2) The mount branches were recovered and
-  pushed to origin during the Aug 2-3 estate recovery; they
-  exist on the remote. v1.1's "no such branch" note is obsolete.
-  MOUNT-1 guard design lives in the recovered branches 87a8076 /
-  1f12491 / 11a63e2 (per A2's source analysis); their tests
-  assert picker-first behavior, which A2 defines as the defect —
-  do not adopt them for MOUNT-2 work.
+- Mount branches recovered and pushed to origin during the
+  Aug 2-3 estate recovery. MOUNT-1 guard design lives in
+  87a8076 / 1f12491 / 11a63e2; their tests assert picker-first
+  behavior, which A2 defined as the defect — do not adopt them.
 - runtime-closure and final-production-candidate share tip
   b492924; treat as one line until proven otherwise.
+- claude/study-engine-exit-url-whwy3g is merged into master and
+  may be deleted from origin at Dad's convenience.
 
 ## CLOSED — verified. No action ever.
-- CL1. Production custody: published Netlify deploy 6a6f6353 =
-  v2.2 (5be50ff); auto-publish LOCKED. (Master has since
-  advanced by docs merges AND the recompose/JP-1 merges — see
-  header. Published production unchanged.)
+- CL1. Production custody: published Netlify deploy = v2.2
+  (5be50ff); auto-publish LOCKED. Master has advanced past it
+  (see header); published production unchanged.
 - CL2. Safe household sync / CAS: merged into v2.2.
 - CL3. Student identity canonical history: hardened lineage in
   v2.2.
@@ -95,72 +96,79 @@ Notes:
   conditions verified; provider spend caps set.
 - CL5. Hosted Supabase: four-row ledger authoritative (v2.2
   chain, applied via CLI Aug 2). Study migration NEVER applied —
-  intentional.
-- CL6 (corrected in v1.1): RC1 source integrate/study-engine-
-  final-assembly (ea8e976) is on origin AS OF AUG 3 — pushed and
-  ls-remote-witnessed in Dad's terminal. v1.0 asserted this
-  before it was true; the assertion was false when written.
-- CL7. LADDER: Claude-side proposal, never dispatched. Future
-  work, not lost work.
-- CL8. The full Study Engine / Tutor branch estate is on origin
+  intentional; that is A5.
+- CL6. RC1 source integrate/study-engine-final-assembly
+  (ea8e976) is on origin, ls-remote-witnessed.
+- CL7. LADDER: Claude-side proposal, never dispatched.
+- CL8. Full Study Engine / Tutor branch estate on origin
   (fourteen-branch push, Aug 3, terminal-witnessed).
-- CL9 (new). Study/Tutor recompose line MERGED to master: A3
-  (ruled graft, integrate/study-recompose-v1) + A3-R independent
-  review (SAFE WITH CONDITIONS, ~700 additional tests) + A3-C
-  condition closure (docs/TESTING.md, per-suite npm scripts,
-  48db9d4) — merged as 88dbc39 after the orphaned-process
-  machine issue was resolved. One documented dispatcher
-  exception used once for academy-cas.postgres.test.ts during
-  the merge run; test passed clean on later runs and in A2-R.
-- CL10 (new). JP-1: Japanese Year 1 curriculum wired into Plans
-  view (8 sparse quarter-anchored weeks, source verbatim).
+- CL9. Study/Tutor recompose line MERGED to master (A3 + A3-R +
+  A3-C), merged as 88dbc39.
+- CL10. JP-1: Japanese Year 1 curriculum wired into Plans view.
   Merged 5115a00.
+- CL11 (new). MOUNT-2 fixed and MERGED: A2 fix (8695632) +
+  A2-R review, merged as 6c9d024. Route evaluated ahead of the
+  picker default; 8 regression tests.
+- CL12 (new). A4 e2e route-lifecycle pass on merged master:
+  PASS WITH FINDINGS, real-browser verification of all MOUNT-2
+  scenarios at the mount boundary, zero hosted contact.
+  Findings F1 (runtime depth hosted-auth-gated by construction
+  → A4-B) and F2 (cross-learner stale-URL re-entry) recorded;
+  F2 closed by CL13.
+- CL13 (new). Exit-URL residual + A4-F2 CLOSED: A4-X fix
+  (leaveStudyEnginePath via replaceState at all five Study exit
+  sites incl. signOut; 3 new lifecycle tests, red-first) +
+  A4-X-R independent review (SAFE, unconditional; gates green
+  on PC incl. academy-cas.postgres 4/4, retroactively confirming
+  the builder's Linux-container initdb failure as environmental
+  — no gate exception exists). Fast-forwarded to master as
+  d28e94a.
 
 ## DEAD — declared by Dad. Forensics only.
 - D1. Root pnpm workspace conversion. Unauthorized; npm baseline
   stands.
-- D2. The label "CARD 19". Distinct from Study S19, which is real
-  (see map).
+- D2. The label "CARD 19". Distinct from Study S19 (see map).
 - D3. Superseded package variants (Runtime R1, Calendar R2,
   pre-R1 Math, pre-correction English, early bridge revisions).
 - D4. The claim "RFL M1/M2 media 100% complete". Withdrawn;
   inventory decides.
 - D5. integrate/tutor-math-r1-host at a5d2068: zero unique
-  commits, a v2.1-era stub. Dead as a branch; tutor-math host
-  integration resumes under D-line cards from the frozen R1
-  package, not from this ref.
+  commits, v2.1-era stub. Tutor-math host integration resumes
+  from the frozen R1 package, not this ref.
+
+## ACCEPTED RESIDUALS (documented, ruled, not defects)
+- R1 (v1.3). Back-button-then-refresh: browser Back after a
+  replaceState Study exit can restore /study-engine from an
+  earlier history entry; a refresh then re-enters Study for a
+  valid active learner. No popstate handler exists by design.
+  Dispatcher-accepted (A4-X ruling): current-entry exit
+  normalization is fixed; historical-entry restoration stands.
+  Entry-time URL consumption was considered and rejected — it
+  would reverse verified mid-Study-refresh behavior.
 
 ## PARKED — resumable by card only. Queue order = dependencies.
 
 ### A. Study Engine production line  [first in queue]
-State (post-A3/A2, v1.2): the recompose line is MERGED to master
-(CL9). A1-R custody verdict: CONTESTED at the ~15-file security
-seam (v2.2 wins by ruling), CHEAP elsewhere (~1,360 of 1,405
-files additive). The laptop wip trove (wip/laptop-local-preserve,
-fb275f2 content commit, 7df73c9 archive tip) is a 6-file
-adult-review-v2 fragment with broken imports — superseded by the
-merged recompose.
-MOUNT-2 is FIXED on branch fix/study-engine-route-lifecycle
-(8695632, one commit over 88dbc39): route evaluated inside the
-initial-screen decision ahead of the picker default; 8 regression
-tests; independently reviewed (A2-R, SAFE WITH CONDITIONS — both
-conditions closed by this v1.2 entry and merge sequencing).
-MERGE PENDING dispatcher execution.
-A2 RESIDUAL (flag for A4): after deep-linking into Study and
-selecting "Back home", the screen returns home but
-window.location.pathname remains /study-engine; a later refresh
-re-enters Study for a signed-in learner. Coherent consequence of
-entry-only route evaluation; exit-time URL rewriting deliberately
-not adopted (A2 ruling). The lifecycle tests do NOT assert
-exit-time pathname. A4 decides whether to adopt exit-time URL
-normalization.
+State (v1.3): MOUNT-2 fixed and merged (CL11). Route lifecycle
+e2e-verified (CL12). Exit-URL residual and A4-F2 closed (CL13).
+The only surviving edge is accepted residual R1.
 Resume path (one card each):
-  A1-R. DONE (custody verdict above).
-  A2.   DONE (fix built + reviewed; merge pending).
-  A3.   DONE (recompose merged, CL9).
-  A4.   RUN authenticated e2e from merged master; rule on the
-        exit-URL residual.
-  A5.   AUTHORIZE Study migration (Dad card), CLI apply, ledger.
+  A1-R. DONE (custody verdict: CONTESTED at ~15-file security
+        seam, v2.2 wins by ruling; CHEAP elsewhere).
+  A2.   DONE (CL11).
+  A3.   DONE (CL9).
+  A4.   DONE (CL12; route lifecycle only — runtime depth is
+        A4-B by construction).
+  A4-X. DONE (CL13).
+  A5.   AUTHORIZE Study migration (Dad card), CLI apply against
+        hosted Supabase, ledger update. First hosted-touching
+        step of the A-line. Requires this v1.3 as the ledger of
+        record before dispatch.
+  A4-B. RUN runtime-depth e2e post-A5: verified workspace,
+        launch scoping per profile, runtime cancellation —
+        everything F1 identified as hosted-auth-gated. Currently
+        covered only by the merged unit tests (mocked study
+        layer).
   A6.   BLOCKING GATE before any student use: production safety
         classifier injected AND startup assertion (production
         build refuses mode != "production"); classifierVersion
@@ -174,12 +182,11 @@ unresolved). Frozen packages in archives/ + mu-music trove.
 
 ### C. Enrichment branches — merge-or-dead decisions
 C1 a5-grade5-math (blocked on host Grade 5 identity).
-C2 ra-azure-reading — STUB (v1.2): zero unique commits over
-base; no recoverable work. Merge-or-dead decision is now a
-dead-or-rebuild decision.
-C3 mkjp-hiragana — STUB (v1.2): zero unique commits over base;
-no recoverable work. Separate from the completed Japanese
-curriculum FILE wiring (CL10). Dead-or-rebuild decision.
+C2 ra-azure-reading — STUB: zero unique commits; dead-or-rebuild
+decision.
+C3 mkjp-hiragana — STUB: zero unique commits; dead-or-rebuild
+decision. Separate from the completed Japanese curriculum FILE
+wiring (CL10).
 C4 mu-music (1b80cce).
 
 ### D. Adaptive Tutor host assembly
@@ -187,13 +194,16 @@ Core v0.2, Math R1, corrected English frozen (archives/). Host
 custody + conclusive database gates unresolved. Branches on
 origin: assembly foundation (f43b652), R1 fix (d4ccb91), English
 integration (b10d7ac). English's 46 untracked worktree files
-still need matching to the frozen package. Math registration may
-be unblocked post-recompose — verify before building.
+still need matching to the frozen package (investigation card
+D-ENG-1 drafted). Math registration may be unblocked
+post-recompose — investigation card D-MATH-1 drafted; verify
+before building.
 
 ### E. Romeo Virtual Academy companion
 Branch unreviewed; host audits show no host implementation.
-Verify-or-archive decision pending. Non-code question for Dad:
-who operates Romeo Virtual Academy; enrollment/credit effects.
+Verify-or-archive investigation card E-ROMEO-1 drafted. Non-code
+question for Dad: who operates Romeo Virtual Academy;
+enrollment/credit effects.
 
 ### F. Ready for Life media completion
 Writing complete; media inventory vs manifest reconciliation
@@ -217,4 +227,4 @@ ELEVENLABS_ALLOWED_VOICE_IDS pending]).
 2. Year scopes for four students — gated on 1.
 3. Household onboarding to hosted sync — after 1.
 
-Last updated: August 3, 2026 (v1.2) by Dad + dispatch desk.
+Last updated: August 3, 2026 (v1.3) by Dad + dispatch desk.
