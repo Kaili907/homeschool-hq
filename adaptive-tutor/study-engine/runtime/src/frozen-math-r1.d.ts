@@ -12,6 +12,8 @@ declare module "@frozen/tutor-math-r1" {
     readonly sequenceId: string;
     readonly lessonId: string;
     readonly title: string;
+    readonly skillIds: readonly string[];
+    readonly legacySkillMappings: readonly string[];
   }
   export const mathSubjectManifest: {
     readonly subjectId: "math";

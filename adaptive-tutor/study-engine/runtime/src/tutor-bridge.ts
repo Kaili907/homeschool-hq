@@ -184,7 +184,11 @@ export async function runSafeTutorBridge(
   dependencies: SafeTutorBridgeDependencies,
 ): Promise<SafeTutorBridgeResult> {
   const registration = resolveTutorSubjectRegistration(request.subject);
-  const baseProgram = selectTutorProgram(registration, request.skillId);
+  const baseProgram = selectTutorProgram(
+    registration,
+    request.skillId,
+    request.lessonId,
+  );
   const hooks = registration.hooks;
   const program = adaptProgramToExpectedAnswer(
     baseProgram,

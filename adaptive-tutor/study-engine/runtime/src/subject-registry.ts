@@ -16,10 +16,22 @@ import {
 
 export type TutorBridgeSubject = "math" | "english";
 
+export interface TutorProgramRegistration {
+  readonly program: TutorProgram;
+  /**
+   * Ids the frozen content declares for this program: sequenceId, lessonId,
+   * the sequence's skillIds, and its legacy host skill mappings. Study-
+   * namespace ids (e.g. "skill:equivalent-fractions") are intentionally not
+   * mapped here — naming that mapping is a curriculum decision, not a
+   * registration one — and resolve to the subject's default program.
+   */
+  readonly routingIds: ReadonlySet<string>;
+}
+
 export interface TutorSubjectRegistration {
   readonly subject: TutorBridgeSubject;
-  /** Ordered tutor programs registered for the subject; index 0 is the default. */
-  readonly programs: readonly TutorProgram[];
+  /** Ordered program registrations; index 0 is the subject default. */
+  readonly programs: readonly TutorProgramRegistration[];
   readonly hooks: Partial<TutorRuntimeHooks>;
 }
 
@@ -42,7 +54,15 @@ function mathRegistration(): TutorSubjectRegistration {
           .join("; ")}`,
       );
     }
-    return result.value;
+    return {
+      program: result.value,
+      routingIds: new Set([
+        sequence.sequenceId,
+        sequence.lessonId,
+        ...sequence.skillIds,
+        ...sequence.legacySkillMappings,
+      ]),
+    };
   });
   if (programs.length === 0) {
     throw new Error("Frozen Math R1 manifest registered no lessons.");
@@ -54,7 +74,12 @@ function mathRegistration(): TutorSubjectRegistration {
 function englishRegistration(): TutorSubjectRegistration {
   return {
     subject: "english",
-    programs: [englishTutorProgram],
+    programs: [
+      {
+        program: englishTutorProgram,
+        routingIds: new Set([englishTutorProgram.targetSkillId]),
+      },
+    ],
     hooks: englishRuntimeHooks,
   };
 }
@@ -78,22 +103,22 @@ export function resolveTutorSubjectRegistration(
 }
 
 /**
- * Returns the registered program whose targetSkillId exactly matches the
- * requested skill id, else the subject's default program (index 0). Study
- * ids are opaque to the tutor layer, so no transformation is attempted.
+ * Returns the first registered program whose frozen-declared routing ids
+ * contain any of the requested ids, else the subject's default program.
+ * Matching is exact; no id transformation is attempted.
  */
 export function selectTutorProgram(
   registration: TutorSubjectRegistration,
-  skillId: string,
+  ...requestIds: readonly string[]
 ): TutorProgram {
-  const matched = registration.programs.find(
-    (program) => program.targetSkillId === skillId,
+  const matched = registration.programs.find((entry) =>
+    requestIds.some((id) => entry.routingIds.has(id)),
   );
-  const program = matched ?? registration.programs[0];
-  if (!program) {
+  const entry = matched ?? registration.programs[0];
+  if (!entry) {
     throw new Error(
       `Subject "${registration.subject}" has no registered tutor program.`,
     );
   }
-  return program;
+  return entry.program;
 }

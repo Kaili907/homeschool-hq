@@ -12,7 +12,7 @@ import { bridgeRequest, localDemoSafety } from "./helpers.ts";
 
 describe("tutor bridge program adaptation", () => {
   it("preserves the full diagnostic item set while adapting the first item", () => {
-    const program = resolveTutorSubjectRegistration("math").programs[0];
+    const program = resolveTutorSubjectRegistration("math").programs[0]?.program;
     expect(program).toBeDefined();
     if (!program) return;
     const adapted = adaptProgramToExpectedAnswer(program, "42");
@@ -41,7 +41,8 @@ describe("tutor bridge program adaptation", () => {
 
   it("keeps adapted programs valid against the frozen TutorProgramSchema", () => {
     for (const subject of ["math", "english"] as const) {
-      const program = resolveTutorSubjectRegistration(subject).programs[0];
+      const program =
+        resolveTutorSubjectRegistration(subject).programs[0]?.program;
       if (!program) throw new Error(`No default program for ${subject}.`);
       const adapted = adaptProgramToExpectedAnswer(program, "3/4");
       expect(validateWithSchema(TutorProgramSchema, adapted).ok).toBe(true);
