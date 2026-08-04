@@ -30,6 +30,12 @@ Rules of this file:
   does NOT prohibit the git remote (origin/GitHub). Read
   operations against origin (fetch, ls-remote) are authorized
   for all sessions; writes to origin follow each card's terms.
+- Card validity (v1.4): cards issued in superseded dispatch
+  threads are VOID; only cards issued by the live desk thread
+  execute. (A stale A2-R card from a closed thread was run
+  Aug 4 — harmless because read-only, and its findings
+  retroactively re-confirm CL11 unconditionally — but the class
+  of error includes cards with hosted contact.)
 
 ---
 
@@ -56,7 +62,9 @@ Rules of this file:
 - src/sync/useSync.mounted.test.tsx — failed once in a full-suite
   run during A2-R (error-message mismatch), passed in isolation
   and on all subsequent full runs (A4, A4-X-R). One occurrence;
-  log future occurrences here.
+  log future occurrences here. Occurrence #2 (Aug 4): full-suite
+  run at b10d7ac (D-ENG-2), same error-message-mismatch mode;
+  passed 29/29 in isolation immediately after.
 
 ## HOSTED VERIFICATION — standing knowledge (v1.4)
 - Dashboard representation finding: "View migration SQL"
@@ -88,6 +96,14 @@ Rules of this file:
   - 20260801160000 = 59187949a5044a2fedbbc6e1020523de
   - 20260801170000 = 6d6e3c9ca4ab64c71c4c031b6a07c70a
   - 20260801190000 = b00965f64b371e63923a2f377e32ba99
+- Log retention (v1.4): hosted org is on the Supabase FREE
+  plan — 1-day log retention; log_connections /
+  log_disconnections are OFF (no connection evidence exists
+  server-side). Standing rule: hosted-event forensics dispatch
+  within 24 hours or not at all.
+- Windows verification caveat (v1.4): autocrlf inflates
+  checked-out LF files; verify manifest hashes against git
+  blobs (git cat-file blob) or CRLF-normalize first.
 
 ---
 
@@ -131,17 +147,33 @@ Notes:
   v2.2.
 - CL4. AI/TTS gateway remediation: shipped in v2.2, reviewed,
   conditions verified; provider spend caps set.
-- CL5 (CORRECTED v1.4). Hosted Supabase. The prior claim
-  "Study migration NEVER applied — intentional" is FALSE as to
-  fact: the ten-migration chain is applied on hosted (CLI
-  evidence Aug 3, content verification Aug 4 — see CL14).
-  Authorship and apply-time remain OPEN — ledger "Inserted at"
-  is version-derived (no apply-time evidence exists); the
-  unsaved-editor breadcrumb
-  (academy_study_final_production_readiness_v1) suggests
-  readiness checks ran ~Aug 1, likely the Codex line; question
-  formally owed to the ChatGPT desk. Do not record authorship
-  until answered.
+- CL5 (RESOLVED v1.4). Hosted Supabase — full history, evidenced:
+  (i) The Aug 2 reset (laptop main checkout, Dad's hands,
+  dispatched by the v2.2 desk thread) ended at a clean 4-row
+  ledger, local AND remote — the original "clean 4-row reset"
+  claim was TRUE as written (transcript recovered from the
+  dispatch thread; laptop PSReadLine lines 67–88 are the
+  complete operation; link stamp 2026-08-02 11:12:52 ET).
+  (ii) "Study migration NEVER applied — intentional" was TRUE
+  when written and was overtaken Aug 3: Postgres logs witness a
+  single 19-second DDL burst, 2026-08-03 23:19:10–29 UTC
+  (7:19 PM ET) — 561 statements, CLI ledger preamble first,
+  Study chain in order, 160000's readiness function at
+  23:19:22, PostgREST schema reload +0.2 s — a supabase db
+  push applying the six Study migrations. Timing (25 min after
+  the 22:54 UTC hq-master link, from the PC's only linked
+  workspace, mid-A5-sitting) and the transcript constraint
+  ("Remote database is up to date" can only print after
+  23:19:29) identify the burst as the dispatched A5 Phase 1
+  operation itself; the pasted "up to date" was a subsequent
+  invocation in the same sitting. No unattributed actor exists.
+  The Codex-line suspicion is WITHDRAWN (their desk's "cannot
+  verify" was accurate); the unsaved-editor breadcrumb is
+  non-evidentiary (typed text, never proven executed).
+  Credential census (two machines, full worktree sweep):
+  exactly two link events ever — laptop 2026-08-02 11:12 ET,
+  PC 2026-08-03 18:54 ET, both Dad's. Only Dad has ever
+  touched hosted.
 - CL6. RC1 source integrate/study-engine-final-assembly
   (ea8e976) is on origin, ls-remote-witnessed.
 - CL7. LADDER: Claude-side proposal, never dispatched.
@@ -169,10 +201,12 @@ Notes:
   — no gate exception exists). Fast-forwarded to master as
   d28e94a.
 - CL14 (new). A5 CLOSED — Study line. Ruling: hosted state
-  EQUIVALENT-TO-AUDITED; all ten migrations were already
-  applied on hosted before the Aug 3 db push (which no-op'd:
-  "Remote database is up to date"). Evidence chain,
-  terminal-witnessed in the Aug 4 dispatch thread: master
+  EQUIVALENT-TO-AUDITED; the ten-migration chain was fully
+  applied on hosted as of the Aug 3 A5 sitting — the four v2.2
+  files on Aug 2, the six Study files at 23:19 UTC Aug 3 by the
+  A5 push itself (see CL5); the witnessed "Remote database is
+  up to date" transcript was a post-apply invocation. Evidence
+  chain, terminal-witnessed in the Aug 4 dispatch thread: master
   6e78632; migrations dir clean; local 160000 raw-byte SHA-256
   f803fbd3aa2c93ac94775c37f262e476d142d2974d5a3c5162050133dc6f9414
   matching the A5-PRE pre-flight record; scope-limited
@@ -235,9 +269,9 @@ Sequencing snapshot (v1.4): Study line A5 ✅ → A4-B next
 (carries the readiness-RPC execution under authorization) → A6
 remains the BLOCKING gate before any student use of the Study
 Engine. Parallel-eligible post-v1.4: D-MATH-2, CURR-1-R,
-SCHED-1, A4-B, D-ENG-2. Critical path unchanged: five placement
-assessments never administered; four daughters' year scopes
-gated on them.
+SCHED-1, A4-B (D-ENG-2 RUN Aug 4 → D-ENG-3 queued). Critical
+path unchanged: five placement assessments never administered;
+four daughters' year scopes gated on them.
 
 ### A. Study Engine production line  [first in queue]
 State (v1.4): MOUNT-2 fixed and merged (CL11). Route lifecycle
@@ -297,9 +331,30 @@ R1 fix (d4ccb91), English integration (b10d7ac).
   files committed as 99b903c on integrate/adaptive-english-v0.2.0
   (tip b10d7ac). The prior "still untracked" premise was
   stale — corrected.
-- D-ENG-2 (verify 8 host-integration files + O17/C31 gates):
-  approved in principle, undispatched, now sequence-eligible
-  post-A5.
+- D-ENG-2 (v1.4): RUN Aug 4, report ACCEPTED. Package
+  integrity VERIFIED — 44/44 manifest hashes exact at git-blob
+  level; 46-file inventory reconciles; freeze hash 2dfb3185…
+  is the release-ZIP sidecar (ZIP not on disk; chain rests on
+  D-ENG-1's custody record; converges with the frozen-artifact
+  custody card). The 8 host-integration files confirmed (tip
+  b10d7ac touches exactly 8), clean-boundaried: zero
+  network/persistence hits; privacy canary test present;
+  English state deliberately outside AppState/sync/storage.
+  Gate IDs O17/C31 SOURCED: Aug 2 AMPARO-sweep open-item IDs
+  cited by D-ENG-1 (host architecture + database gates),
+  resident in the sweep record, not the repo; D-ENG-2's runs
+  address their substance (English check 11/11; validation
+  report 317/317 PASS; typecheck clean; full suite 872/873,
+  sole failure = KNOWN-FLAKY occurrence #2). Seam overlap with
+  D-MATH-2: NONE — tutor-bridge.ts absent from the branch
+  tree; validate-package.ts byte-identical to master; merge
+  order vs D-MATH-2 is FREE. Merge-readiness: merge-base is
+  a5d2068 (the v2.1 tag); NOT raw-merge-ready (4 shallow
+  conflicts: run-tests.mjs add/add — master's A3-C portable
+  runner wins; App.tsx; ParentHub.tsx; vite.config.ts
+  near-duplicate). RULED SHAPE: D-ENG-3 — re-apply the 8-file
+  seam onto current master (E-Romeo pattern); queued,
+  undispatched.
 - D-MATH-1 (v1.4): verdict PARTIALLY-BLOCKED recorded.
   Canonical frozen Math R1 hash
   ee9d15cdf1184380add17ebdd8f93f01fde3f0915f491d0a4df96798b4f52351,
@@ -321,9 +376,11 @@ only copy of complete client-side Phase 1 (contract module,
 panel, prompt rules, tests, docs incl. the ChatGPT Project
 instructions); base v2.0-mp. NEVER MERGE — resume shape is
 re-apply onto master (~39 lines across 3 seam-colliding files).
-OPEN ACTION: GitHub PR #1 points at this branch; Dad closes it
-in the browser (unconfirmed as of v1.4). Non-code Romeo
-questions (operator, enrollment/credit effects) remain Dad's.
+PR #1 CLOSED-VERIFIED (Dad, browser, Aug 4): closed with
+unmerged commits, branch intact; the closing comment on the PR
+records the never-merge / re-apply-onto-master ruling. Non-code
+Romeo questions (operator, enrollment/credit effects) remain
+Dad's.
 
 ### F. Ready for Life media completion
 Writing complete; media inventory vs manifest reconciliation
@@ -366,10 +423,34 @@ Frozen-artifact blocker (three ZIPs absent from repo:
 grade5-math, adaptive-english-mvp-v0.2.0, ready-for-life-v1)
 converges with D-MATH-1's custody gap — one custody card can
 serve both. Roster note: grades 5/7/8 serve no enrolled student
-in 2026-27. Dispatching-desk attribution OPEN (handoff said
-ChatGPT-side; report shape indicates Claude session; Dad to
-confirm). CURR-2: next-planned, undispatched,
+in 2026-27. Attribution RESOLVED (Aug 4): card authored by the
+ChatGPT/Codex desk (SESSION-CURR-1-CODEX-IMPORT-CARD.md),
+executed by a Claude Code cloud session (claude/-prefixed
+session branch, session git proxy) — cross-line dispatch routed
+through Dad. CURR-2: next-planned, undispatched,
 builder-never-reviews.
+- CURR-1-R (v1.4): RUN Aug 4, verdict UNSAFE — merge DENIED at
+  b0a7d7e. PC gates all green (typecheck; full vitest 101
+  files / 1273 tests; academy-cas.postgres 4/4 — first real
+  run, curing the container's honest NOT-PASSED; flags-off and
+  flags-on builds). Seam audit passes on all six files;
+  MOUNT-2/A4-X preserved; flag discipline exact-'true'; student
+  fetch discipline clean. Findings: F1 HIGH — protected-unit
+  chunks are public static assets; anonymous GET returns
+  answer/scoring guidance (builder-disclosed limitation,
+  review-confirmed; flags-off builds still emit the full public
+  curriculum tree, so any post-merge deploy publishes answer
+  keys on the public site). F2 HIGH — raw byte custody fails on
+  Windows (4/181 raw; ALL 181 match LF-normalized → content
+  intact; missing curriculum-content/** -text attr; committed
+  custody test is nominal, no hashing). F3 MEDIUM — sync
+  validator accepts out-of-domain academy state (percent>100,
+  negative counters, cross-grade mismatch). F4 MEDIUM — UI
+  revisit path never records the promised revisit trail
+  (duplicate-credit protection holds). CURR-1-F approved in
+  principle (four conditions per the review); CURR-1-R2
+  required after fix. PRIORITY LOW — serves no 2026-27 student;
+  parked pending dispatcher scheduling.
 
 ### I. SCHED — schedule template line
 SCHED-1 (v1.4, new, approved in principle). Reusable schedule
