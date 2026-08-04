@@ -4,6 +4,7 @@ import { addDaysISO, mondayOf } from '../../curriculum/pacing'
 import {
   FLEX_ROTATION,
   MAX_EXTENSION_LABEL,
+  MAX_SCHEDULE_EXTENSIONS,
   SCHEDULE_DAYS,
   addExtension,
   blocksForProfileDay,
@@ -51,7 +52,8 @@ export function ScheduleView({ profiles, today, config, onConfigChange, onPatchP
   if (!girl) return null
   const flexActivity = flexActivityForWeek(flexWeekIndex(monday))
   const extensions = girl.scheduleExtensions ?? []
-  const canAdd = canAddExtension(label, days, start, end)
+  const atCap = extensions.length >= MAX_SCHEDULE_EXTENSIONS
+  const canAdd = canAddExtension(label, days, start, end, extensions.length)
 
   const toggleDay = (day: ScheduleDay) =>
     setDays((prev) => (prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]))
@@ -251,6 +253,12 @@ export function ScheduleView({ profiles, today, config, onConfigChange, onPatchP
             Add block
           </button>
         </div>
+        {atCap && (
+          <p className="mt-2 text-xs font-semibold text-rose-600">
+            Block limit reached ({MAX_SCHEDULE_EXTENSIONS} per girl) — remove a block
+            before adding another.
+          </p>
+        )}
       </div>
     </div>
   )

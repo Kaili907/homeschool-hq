@@ -1,4 +1,5 @@
 import type { CoreDayConfig, Profile, ScheduleDay, ScheduleExtension } from '../types'
+import { MAX_SYNC_ARRAY_ITEMS } from '../sync/provenance'
 
 /**
  * SCHED-1 — the "Core Day v1" template. PURE: no React, no storage.
@@ -130,17 +131,28 @@ const TIME_HHMM = /^(?:[01]\d|2[0-3]):[0-5]\d$/
 export const MAX_EXTENSION_LABEL = 120
 
 /**
+ * The sync layer rejects any array past MAX_SYNC_ARRAY_ITEMS ("oversized or
+ * sparse array"), so a girl's extension list must never grow beyond it — even
+ * when the at-cap list arrived via import/pull rather than this UI.
+ */
+export const MAX_SCHEDULE_EXTENSIONS = MAX_SYNC_ARRAY_ITEMS
+
+/**
  * The Add-block form gate. Everything the sync validator would reject must be
  * rejected HERE: a stored invalid extension fails validateAppStateForSync, which
  * silently halts ALL household persistence (saveAppState swallows the failure).
+ * `existingCount` is the girl's current extension count; at the sync-layer cap
+ * no further block may be added.
  */
 export function canAddExtension(
   label: string,
   days: readonly ScheduleDay[],
   start: string,
   end: string,
+  existingCount: number,
 ): boolean {
   return (
+    existingCount < MAX_SCHEDULE_EXTENSIONS &&
     label.trim().length > 0 &&
     label.length <= MAX_EXTENSION_LABEL &&
     days.length > 0 &&
@@ -153,13 +165,19 @@ export function canAddExtension(
 const newExtensionId = () =>
   `sx-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`
 
-/** Add one extension block to a girl. Returns a new profile object. */
+/**
+ * Add one extension block to a girl. Returns a new profile object, or the
+ * profile unchanged when the list is already at the sync-layer cap (growing it
+ * would make the whole state fail sync validation).
+ */
 export function addExtension(
   p: Profile,
   ext: Omit<ScheduleExtension, 'id'>,
 ): Profile {
+  const existing = p.scheduleExtensions ?? []
+  if (existing.length >= MAX_SCHEDULE_EXTENSIONS) return p
   const entry: ScheduleExtension = { id: newExtensionId(), ...ext }
-  return { ...p, scheduleExtensions: [...(p.scheduleExtensions ?? []), entry] }
+  return { ...p, scheduleExtensions: [...existing, entry] }
 }
 
 /** Remove an extension block by id. Unknown ids are a no-op. */

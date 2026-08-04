@@ -69,6 +69,21 @@ export function academyProfileContractFixtures(): AcademyProfileContractFixture[
     ],
   })
 
+  const boundaryExtension = clone(profile)
+  Object.assign(boundaryExtension, {
+    // SCHED-1: extremes of the UI contract — 120-char label, all five days,
+    // widest strict HH:MM range. Must stay valid on both the TS and db side.
+    scheduleExtensions: [
+      {
+        id: 'sx-boundary',
+        label: 'x'.repeat(120),
+        days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+        start: '00:00',
+        end: '23:59',
+      },
+    ],
+  })
+
   return [
     {
       name: 'complete default profile',
@@ -80,6 +95,12 @@ export function academyProfileContractFixtures(): AcademyProfileContractFixture[
       name: 'complete profile with every optional container',
       profileId: 'p1',
       data: allOptionals,
+      valid: true,
+    },
+    {
+      name: 'profile with a boundary-valid schedule extension',
+      profileId: 'p1',
+      data: boundaryExtension,
       valid: true,
     },
     { name: 'only id', profileId: 'p1', data: { id: 'p1' }, valid: false },
@@ -196,7 +217,8 @@ export function academyProfileContractFixtures(): AcademyProfileContractFixture[
     // SCHED-1: no invalid scheduleExtensions fixture here — this file also drives the
     // db-side contract (academy_sync_profile_is_valid), which tolerates unknown additive
     // fields and cannot learn the new one without a migration. TS-side rejection
-    // coverage lives in src/sync/provenance.coreDay.test.ts.
+    // coverage lives in src/sync/provenance.coreDay.test.ts and
+    // src/sync/provenance.scheduleParity.test.ts.
     invalid('invalid nested date', (candidate) => {
       candidate.serviceLog = [
         {

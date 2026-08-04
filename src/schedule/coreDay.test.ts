@@ -129,26 +129,26 @@ describe('Friday flex block', () => {
 
 describe('canAddExtension form gate', () => {
   it('accepts a well-formed block', () => {
-    expect(canAddExtension('Algebra practice', ['Mon', 'Wed'], '13:00', '13:30')).toBe(true)
+    expect(canAddExtension('Algebra practice', ['Mon', 'Wed'], '13:00', '13:30', 0)).toBe(true)
   })
 
   it('rejects everything the sync validator would reject', () => {
     // a stored invalid extension silently halts ALL household persistence,
     // so the form gate must be at least as strict as timeOfDay/text.
-    expect(canAddExtension('Block', ['Mon'], '', '13:30')).toBe(false)
-    expect(canAddExtension('Block', ['Mon'], '13:00', '')).toBe(false)
-    expect(canAddExtension('Block', ['Mon'], '9:00', '13:30')).toBe(false)
-    expect(canAddExtension('Block', ['Mon'], '1pm', '13:30')).toBe(false)
-    expect(canAddExtension('Block', ['Mon'], '25:00', '26:00')).toBe(false)
-    expect(canAddExtension('x'.repeat(MAX_EXTENSION_LABEL + 1), ['Mon'], '13:00', '13:30')).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '', '13:30', 0)).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '13:00', '', 0)).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '9:00', '13:30', 0)).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '1pm', '13:30', 0)).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '25:00', '26:00', 0)).toBe(false)
+    expect(canAddExtension('x'.repeat(MAX_EXTENSION_LABEL + 1), ['Mon'], '13:00', '13:30', 0)).toBe(false)
   })
 
   it('rejects empty labels, empty days, and non-positive ranges', () => {
-    expect(canAddExtension('', ['Mon'], '13:00', '13:30')).toBe(false)
-    expect(canAddExtension('   ', ['Mon'], '13:00', '13:30')).toBe(false)
-    expect(canAddExtension('Block', [], '13:00', '13:30')).toBe(false)
-    expect(canAddExtension('Block', ['Mon'], '13:30', '13:30')).toBe(false)
-    expect(canAddExtension('Block', ['Mon'], '14:00', '13:30')).toBe(false)
+    expect(canAddExtension('', ['Mon'], '13:00', '13:30', 0)).toBe(false)
+    expect(canAddExtension('   ', ['Mon'], '13:00', '13:30', 0)).toBe(false)
+    expect(canAddExtension('Block', [], '13:00', '13:30', 0)).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '13:30', '13:30', 0)).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '14:00', '13:30', 0)).toBe(false)
   })
 })
 
