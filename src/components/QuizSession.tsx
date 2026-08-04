@@ -15,6 +15,8 @@ interface QuizSessionProps {
   emoji: string
   total: number
   getQuestion: (index: number, history: AnswerRecord[]) => Question
+  /** Optional module hook when a question becomes active (for example, pronunciation). */
+  onQuestion?: (q: Question) => void
   onAnswer?: (q: Question, correct: boolean) => void
   onFinish: (history: AnswerRecord[]) => void
   onQuit: () => void
@@ -64,6 +66,7 @@ export function QuizSession({
   emoji,
   total,
   getQuestion,
+  onQuestion,
   onAnswer,
   onFinish,
   onQuit,
@@ -94,6 +97,7 @@ export function QuizSession({
   const [chat, setChat] = useState<ChatCtx | null>(null)
   const [reviewDone, setReviewDone] = useState<ChatCtx | null>(null)
   const timerRef = useRef<number | null>(null)
+  const onQuestionRef = useRef(onQuestion)
   const nextHistoryRef = useRef<AnswerRecord[]>([])
   // Origin question the chat is scoped to; captured at walkthrough open so it
   // survives beat 2 (which clears `walk`).
@@ -104,6 +108,14 @@ export function QuizSession({
       if (timerRef.current !== null) window.clearTimeout(timerRef.current)
     }
   }, [])
+
+  useEffect(() => {
+    onQuestionRef.current = onQuestion
+  }, [onQuestion])
+
+  useEffect(() => {
+    onQuestionRef.current?.(question)
+  }, [question])
 
   function feedbackFor(correct: boolean): string {
     const answer = question.choices[question.answerIndex]

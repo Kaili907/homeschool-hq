@@ -57,7 +57,7 @@ export const VOICE_SLOTS: { slot: VoiceSlot; label: string; hint: string }[] = [
   { slot: 'mathTutor', label: 'Math tutor', hint: 'walkthroughs & daily practice' },
   { slot: 'mindset', label: 'Mindset', hint: 'read-aloud lessons (arrives with MM)' },
   { slot: 'assistant', label: 'HS assistant', hint: 'the teen home assistant (MJ)' },
-  { slot: 'japanese', label: 'Japanese', hint: 'hiragana trainer (coming soon)' },
+  { slot: 'japanese', label: 'Japanese', hint: 'hiragana trainer pronunciation' },
   { slot: 'default', label: 'Default', hint: 'backs every unset slot' },
 ]
 

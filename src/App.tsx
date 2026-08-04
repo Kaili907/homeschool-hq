@@ -56,6 +56,7 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { HiraganaTrainer } from './components/japanese/HiraganaTrainer'
 
 type Screen =
   | { kind: 'picker' }
@@ -73,6 +74,7 @@ type Screen =
   | { kind: 'assessment'; testId: string }
   | { kind: 'prizeShop' }
   | { kind: 'typing' }
+  | { kind: 'japanese' }
   | { kind: 'reading' }
   | { kind: 'mindset' }
 
@@ -428,6 +430,7 @@ export default function App() {
             onOpenShop={() => setScreen({ kind: 'prizeShop' })}
             onOpenAssessment={(testId) => setScreen({ kind: 'assessment', testId })}
             onOpenTyping={() => setScreen({ kind: 'typing' })}
+            onOpenJapanese={() => setScreen({ kind: 'japanese' })}
             onOpenReading={() => setScreen({ kind: 'reading' })}
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
             mindsetStartDate={state.mindsetStartDate}
@@ -474,6 +477,16 @@ export default function App() {
             onExit={() => setScreen({ kind: 'home' })}
           />
         )}
+
+        {/* MK-JP hiragana trainer — Home-only hook; mission auto-wiring is a separate task. */}
+        {screen.kind === 'japanese' && (
+          <HiraganaTrainer
+            profile={active}
+            muted={isMuted(state)}
+            onProfileChange={patchActive}
+            onExit={() => setScreen({ kind: 'home' })}
+          />
+        )}
       </div>
     </ThemeContext.Provider>
   )
@@ -493,6 +506,7 @@ function Home({
   onOpenShop,
   onOpenAssessment,
   onOpenTyping,
+  onOpenJapanese,
   onOpenReading,
   onOpenMindset,
   mindsetStartDate,
@@ -508,6 +522,7 @@ function Home({
   onOpenShop: () => void
   onOpenAssessment: (testId: string) => void
   onOpenTyping: () => void
+  onOpenJapanese: () => void
   onOpenReading: () => void
   onOpenMindset: () => void
   mindsetStartDate: string | undefined
@@ -657,6 +672,28 @@ function Home({
           </span>
           <span className={`block font-bold ${t.id === 'playful' ? 'text-sky-100' : t.sub}`}>
             Home-row drills that grow into words and sentences
+          </span>
+        </span>
+      </button>
+
+      {/* MK-JP hiragana entry — no mission auto-item here by design. */}
+      <button
+        onClick={onOpenJapanese}
+        className={
+          t.id === 'playful'
+            ? 'mt-6 flex w-full items-center gap-4 rounded-3xl border-b-8 border-fuchsia-700 bg-gradient-to-br from-pink-400 to-fuchsia-600 p-5 text-left shadow-xl transition-all hover:scale-[1.01] active:translate-y-1 active:border-b-4'
+            : `${t.card} mt-6 flex w-full items-center gap-4 p-5 text-left transition-all hover:border-cyan-400`
+        }
+      >
+        <span className="text-4xl">あ</span>
+        <span className="flex-1">
+          <span
+            className={`block text-2xl font-extrabold ${t.id === 'playful' ? 'text-white' : t.heading}`}
+          >
+            Hiragana
+          </span>
+          <span className={`block font-bold ${t.id === 'playful' ? 'text-pink-100' : t.sub}`}>
+            Learn characters, hear sounds, and flip vocab cards
           </span>
         </span>
       </button>

@@ -307,6 +307,10 @@ export interface Profile {
   /** per-profile typing-ladder progress; undefined = fresh (see typing/engine defaultTypingState). */
   typing?: TypingState
 
+  // ---------- MK-JP hiragana trainer (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
+  /** per-character hiragana mastery; undefined = fresh (see japanese/engine defaultJapaneseState). */
+  japanese?: JapaneseState
+
   // ---------- MR reading fluency (additive, OPTIONAL, runtime defaults; no schemaVersion bump) ----------
   /** per-profile read-aloud fluency log + calibration; undefined = fresh (see reading/fluency defaultReadingState). */
   reading?: ReadingState
@@ -442,7 +446,7 @@ export type VoiceProviderId = 'elevenlabs' | 'browser'
 
 /**
  * MT-V per-subject voice slots. `default` backs every unset slot (fall-through);
- * `japanese` exists now but is unused until the hiragana trainer ships.
+ * `japanese` is used by the hiragana trainer's pronunciation mode.
  */
 export type VoiceSlot = 'mathTutor' | 'mindset' | 'japanese' | 'assistant' | 'default'
 
@@ -474,6 +478,28 @@ export interface TypingState {
   lessons: Record<string, TypingLessonState>
   /** total 5-minute drills finished (display only). */
   drillsCompleted: number
+  lastPracticedDate?: ISODate
+}
+
+/** MK-JP: one hiragana character's durable mastery record. */
+export interface JapaneseCharacterState {
+  attempts: number
+  correct: number
+  /** Consecutive correct answers; three masters a character. */
+  streak: number
+  /** Latches once earned so a later review miss never removes progress. */
+  mastered: boolean
+  lastSeen?: ISODate
+}
+
+/** MK-JP: per-profile hiragana ladder state. All fields default gracefully. */
+export interface JapaneseState {
+  /** Highest unlocked learning group (vowels, k-row, ... dakuten), zero-based. */
+  unlockedGroupIndex: number
+  /** Mastery keyed by stable character id. */
+  characters: Record<string, JapaneseCharacterState>
+  /** Number of completed ten-question quiz rounds. */
+  sessionsCompleted: number
   lastPracticedDate?: ISODate
 }
 
