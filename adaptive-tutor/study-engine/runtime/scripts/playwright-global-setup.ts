@@ -5,7 +5,7 @@ export default async function startReleaseSurface() {
   const root = fileURLToPath(new URL("..", import.meta.url));
   const server = await createServer({
     appType: "spa",
-    configFile: false,
+    configFile: fileURLToPath(new URL("../vite.config.ts", import.meta.url)),
     root,
     server: {
       host: "127.0.0.1",
