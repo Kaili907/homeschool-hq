@@ -137,6 +137,7 @@ export default function App() {
     })
   }
   const [state, setState] = useState<AppState>(loaded.state)
+  const [persistenceFailure, setPersistenceFailure] = useState<string | null>(null)
   // MOUNT-2: the study route is evaluated before the picker default, so a fresh
   // navigation or refresh at /study-engine with a valid persisted profile lands
   // on the study surface. No active profile or flag-off falls through to the
@@ -167,7 +168,11 @@ export default function App() {
   }, [studyPreviewEnabled])
 
   useEffect(() => {
-    saveAppState(state)
+    let current = true
+    void saveAppState(state).then((result) => {
+      if (current) setPersistenceFailure(result.ok ? null : result.error)
+    })
+    return () => { current = false }
   }, [state])
 
   // M6: local-first cloud sync. Inert with no Supabase config; never blocks the UI.
@@ -516,6 +521,8 @@ export default function App() {
         studyUnavailableReason={studyProductionSelected
           ? studyProductionUnavailableReason
           : 'Sign in, verify the household binding, and re-enter the parent PIN to use the explicit local Study preview.'}
+        persistenceFailure={persistenceFailure}
+        onDismissPersistenceFailure={() => setPersistenceFailure(null)}
       />
     )
   }

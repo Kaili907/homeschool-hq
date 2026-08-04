@@ -140,7 +140,7 @@ export const MAX_SCHEDULE_EXTENSIONS = MAX_SYNC_ARRAY_ITEMS
 /**
  * The Add-block form gate. Everything the sync validator would reject must be
  * rejected HERE: a stored invalid extension fails validateAppStateForSync, which
- * silently halts ALL household persistence (saveAppState swallows the failure).
+ * prevents persistence and raises the Parent Hub save-failure warning.
  * `existingCount` is the girl's current extension count; at the sync-layer cap
  * no further block may be added.
  */

@@ -116,36 +116,40 @@ interface DatasetLockManager {
 
 let latestAppStatePersistence: Promise<void> = Promise.resolve()
 
-export async function saveAppState(state: AppState): Promise<void> {
-  latestAppStatePersistence = (async () => {
-    const persist = async () => {
+export type AppStatePersistenceResult =
+  | { ok: true }
+  | { ok: false; error: string }
+
+export async function saveAppState(state: AppState): Promise<AppStatePersistenceResult> {
+  const persistence = (async (): Promise<AppStatePersistenceResult> => {
+    const persist = async (): Promise<AppStatePersistenceResult> => {
       const persisted = await persistDatasetVerified(state)
       if (!persisted.ok) {
-        // Local-first storage still gets its ordinary JSON write attempt inside
-        // persistDatasetVerified. Provenance remains mismatched, which blocks
-        // cloud mutation without making the offline UI unusable.
-        return
+        console.error('Academy changes were not saved.', persisted.error)
+        return persisted
       }
       try {
         const current = readDatasetProvenance()
         if (current?.importTransition) {
           await finishConfirmedImportPersistence(state)
-          return
+          return { ok: true }
         }
         await ensureDatasetProvenance()
         recordPersistedDatasetFingerprint(persisted.fingerprint)
       } catch {
         // Fail closed: stale/missing provenance prevents cloud mutation.
       }
+      return { ok: true }
     }
     const locks =
       typeof navigator === 'undefined'
         ? undefined
         : (navigator as Navigator & { locks?: DatasetLockManager }).locks
     if (!locks) return persist()
-    await locks.request(DATASET_WRITE_LOCK_NAME, { mode: 'exclusive' }, persist)
+    return locks.request(DATASET_WRITE_LOCK_NAME, { mode: 'exclusive' }, persist)
   })()
-  return latestAppStatePersistence
+  latestAppStatePersistence = persistence.then(() => undefined)
+  return persistence
 }
 
 export function waitForAppStatePersistence(): Promise<void> {
