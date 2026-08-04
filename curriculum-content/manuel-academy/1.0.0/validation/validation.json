@@ -1,0 +1,103 @@
+{
+  "package_id": "manuel-academy-grades-5-7-8-curriculum-v1",
+  "version": "1.0.0",
+  "validated_on": "2026-08-03",
+  "overall": "PASS",
+  "counts": {
+    "checks": 18,
+    "passed": 18,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "check": "three-grades",
+      "result": "PASS",
+      "details": "[5, 7, 8]"
+    },
+    {
+      "check": "ten-courses-per-grade",
+      "result": "PASS",
+      "details": "{5: 10, 7: 10, 8: 10}"
+    },
+    {
+      "check": "course-count",
+      "result": "PASS",
+      "details": "30"
+    },
+    {
+      "check": "lesson-count",
+      "result": "PASS",
+      "details": "2736"
+    },
+    {
+      "check": "grade-lesson-counts",
+      "result": "PASS",
+      "details": "{5: 900, 7: 900, 8: 936}"
+    },
+    {
+      "check": "unique-course-ids",
+      "result": "PASS",
+      "details": "30 unique"
+    },
+    {
+      "check": "unique-lesson-ids",
+      "result": "PASS",
+      "details": "2736 unique"
+    },
+    {
+      "check": "schedule-covers-every-lesson-once",
+      "result": "PASS",
+      "details": "scheduled=2736, lessons=2736"
+    },
+    {
+      "check": "lesson-required-fields",
+      "result": "PASS",
+      "details": "all lessons include standards, 3+ objectives, and 5+ segments"
+    },
+    {
+      "check": "optional-media-and-fallback",
+      "result": "PASS",
+      "details": "all lessons"
+    },
+    {
+      "check": "accessibility-depth",
+      "result": "PASS",
+      "details": "all lessons"
+    },
+    {
+      "check": "safety-depth",
+      "result": "PASS",
+      "details": "all lessons"
+    },
+    {
+      "check": "multi-occasion-mastery",
+      "result": "PASS",
+      "details": "all lessons"
+    },
+    {
+      "check": "original-text-count",
+      "result": "PASS",
+      "details": "18"
+    },
+    {
+      "check": "frozen-baselines-recorded",
+      "result": "PASS",
+      "details": "3 exact references"
+    },
+    {
+      "check": "grade8-finance-pf1-pf7",
+      "result": "PASS",
+      "details": "PF1 PF2 PF3 PF4 PF4.1 PF5 PF6 PF7 PF1–PF7 synthesis"
+    },
+    {
+      "check": "grade8-finance-72-sessions",
+      "result": "PASS",
+      "details": "72"
+    },
+    {
+      "check": "no-required-photo-or-voice",
+      "result": "PASS",
+      "details": "all lesson media optional and no-voice path present"
+    }
+  ]
+}

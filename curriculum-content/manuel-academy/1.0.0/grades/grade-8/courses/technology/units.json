@@ -1,0 +1,192 @@
+[
+  {
+    "unit_id": "ma-g8-technology-u01",
+    "course_id": "ma-g8-technology",
+    "grade": 8,
+    "subject": "technology",
+    "unit_number": 1,
+    "title": "Digital Identity, Information, and AI Literacy",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Impacts of Computing",
+      "Networks and Internet"
+    ],
+    "essential_question": "How can understanding digital identity, information, and ai literacy help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "privacy and data trails",
+      "platform incentives",
+      "algorithmic recommendations",
+      "misinformation and synthetic media",
+      "AI prompting and verification",
+      "copyright and attribution"
+    ],
+    "performance_task": "Create an evidence-based guide to responsible research and AI-assisted work with transparent verification.",
+    "lesson_ids": [
+      "ma-g8-technology-u01-l01",
+      "ma-g8-technology-u01-l02",
+      "ma-g8-technology-u01-l03",
+      "ma-g8-technology-u01-l04",
+      "ma-g8-technology-u01-l05",
+      "ma-g8-technology-u01-l06"
+    ],
+    "assessment_id": "ma-g8-technology-u01-assessment"
+  },
+  {
+    "unit_id": "ma-g8-technology-u02",
+    "course_id": "ma-g8-technology",
+    "grade": 8,
+    "subject": "technology",
+    "unit_number": 2,
+    "title": "Programming and Software Design",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "essential_question": "How can understanding programming and software design help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "requirements and decomposition",
+      "data and variables",
+      "selection and iteration",
+      "functions or procedures",
+      "testing debugging and versioning",
+      "documentation"
+    ],
+    "performance_task": "Build a small application, simulation, or game that solves a defined user need.",
+    "lesson_ids": [
+      "ma-g8-technology-u02-l01",
+      "ma-g8-technology-u02-l02",
+      "ma-g8-technology-u02-l03",
+      "ma-g8-technology-u02-l04",
+      "ma-g8-technology-u02-l05",
+      "ma-g8-technology-u02-l06"
+    ],
+    "assessment_id": "ma-g8-technology-u02-assessment"
+  },
+  {
+    "unit_id": "ma-g8-technology-u03",
+    "course_id": "ma-g8-technology",
+    "grade": 8,
+    "subject": "technology",
+    "unit_number": 3,
+    "title": "Web, App, and Accessible Interface Design",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Computing Systems",
+      "Impacts of Computing"
+    ],
+    "essential_question": "How can understanding web, app, and accessible interface design help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "semantic structure",
+      "layout and responsive design",
+      "forms and validation without private data",
+      "accessibility standards",
+      "user testing",
+      "iteration"
+    ],
+    "performance_task": "Create an accessible multi-screen prototype or small site and document user-test changes.",
+    "lesson_ids": [
+      "ma-g8-technology-u03-l01",
+      "ma-g8-technology-u03-l02",
+      "ma-g8-technology-u03-l03",
+      "ma-g8-technology-u03-l04",
+      "ma-g8-technology-u03-l05",
+      "ma-g8-technology-u03-l06"
+    ],
+    "assessment_id": "ma-g8-technology-u03-assessment"
+  },
+  {
+    "unit_id": "ma-g8-technology-u04",
+    "course_id": "ma-g8-technology",
+    "grade": 8,
+    "subject": "technology",
+    "unit_number": 4,
+    "title": "Data Science and Computational Models",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Data and Analysis"
+    ],
+    "essential_question": "How can understanding data science and computational models help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "ethical data collection",
+      "cleaning and transformation",
+      "formulas and code",
+      "visualization",
+      "correlation and model limitations",
+      "data storytelling"
+    ],
+    "performance_task": "Analyze an approved dataset and publish a reproducible report with uncertainty and limits.",
+    "lesson_ids": [
+      "ma-g8-technology-u04-l01",
+      "ma-g8-technology-u04-l02",
+      "ma-g8-technology-u04-l03",
+      "ma-g8-technology-u04-l04",
+      "ma-g8-technology-u04-l05",
+      "ma-g8-technology-u04-l06"
+    ],
+    "assessment_id": "ma-g8-technology-u04-assessment"
+  },
+  {
+    "unit_id": "ma-g8-technology-u05",
+    "course_id": "ma-g8-technology",
+    "grade": 8,
+    "subject": "technology",
+    "unit_number": 5,
+    "title": "Networks and Cybersecurity",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Networks and Internet",
+      "Cybersecurity"
+    ],
+    "essential_question": "How can understanding networks and cybersecurity help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "internet routing concepts",
+      "encryption and certificates",
+      "authentication and authorization",
+      "common attacks and social engineering",
+      "secure development habits",
+      "incident response and ethics"
+    ],
+    "performance_task": "Complete a sandboxed or paper cybersecurity design review; never probe real systems without explicit authorization.",
+    "lesson_ids": [
+      "ma-g8-technology-u05-l01",
+      "ma-g8-technology-u05-l02",
+      "ma-g8-technology-u05-l03",
+      "ma-g8-technology-u05-l04",
+      "ma-g8-technology-u05-l05",
+      "ma-g8-technology-u05-l06"
+    ],
+    "assessment_id": "ma-g8-technology-u05-assessment"
+  },
+  {
+    "unit_id": "ma-g8-technology-u06",
+    "course_id": "ma-g8-technology",
+    "grade": 8,
+    "subject": "technology",
+    "unit_number": 6,
+    "title": "Technology Capstone and Impact Review",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming",
+      "Impacts of Computing"
+    ],
+    "essential_question": "How can understanding technology capstone and impact review help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "problem framing",
+      "stakeholders and unintended effects",
+      "prototype development",
+      "testing and accessibility",
+      "privacy and security review",
+      "presentation and maintenance plan"
+    ],
+    "performance_task": "Deliver a software, data, automation, or design capstone with a full impact, privacy, accessibility, and security review.",
+    "lesson_ids": [
+      "ma-g8-technology-u06-l01",
+      "ma-g8-technology-u06-l02",
+      "ma-g8-technology-u06-l03",
+      "ma-g8-technology-u06-l04",
+      "ma-g8-technology-u06-l05",
+      "ma-g8-technology-u06-l06"
+    ],
+    "assessment_id": "ma-g8-technology-u06-assessment"
+  }
+]
