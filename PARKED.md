@@ -466,6 +466,26 @@ per-girl weekly calendar view); the student-facing daily view
 is GATED BEHIND A6. Note: academy_study_calendar_blocks already
 exists on hosted (round-2 RLS map). No tutor-seam contact;
 parallel-eligible with D-MATH-2. Card drafts after v1.4 lands.
+- SCHED-1-R (v1.4): RUN Aug 4 (Codex), verdict SAFE WITH
+  CONDITIONS — both conditions dispositioned. Gates: full root
+  suite 99 files / 1258 tests green incl. postgres surfaces;
+  nine-suite secondary tier green (engine 380, tutor 21,
+  calendar 86, student 77, ui 25, assembly 44, + 34 browser
+  tests); build clean; bundle provider scan 0. Red-proof: fix
+  tests fail 5/33 at 3ef761c, pass 33/33 at tip; both
+  array-coercion holes confirmed closed. Persistence-safety
+  sweep: no reachable UI path can persist a validator-rejected
+  value — no SYNC-1 condition attaches to this branch.
+  Template fidelity witnessed incl. epoch-anchored,
+  timezone-independent Friday rotation. C2 (Friday policy):
+  SATISFIED — dispatcher ruled KEEP Aug 4; as-built confirmed
+  (daily anchors persist; flex fills the subject slots). C1
+  (CURR-1 overlap): merge-tree shows real content conflicts in
+  THREE files (ParentHub.tsx, provenance.ts, types.ts —
+  supersedes the earlier two-file estimate); semantically
+  additive; condition TRANSFERS to the CURR line — CURR-1
+  revival requires manual three-file integration + combined
+  re-gate. SCHED-1: REVIEW-CLEARED, MERGE-ELIGIBLE.
 
 ---
 
