@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
 const packageRoot = new URL("../../../subjects/math/", import.meta.url);
@@ -36,5 +36,34 @@ describe("frozen Math R1 package integrity", () => {
         `${entry.path}: ${entry.hash}`,
       );
     }
+  });
+
+  it("contains no files beyond the frozen manifest", async () => {
+    const manifest = await readFile(
+      fileURLToPath(new URL("SHA256SUMS.txt", packageRoot)),
+      "utf8",
+    );
+    const listed = new Set(
+      manifest
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0)
+        .map((line) => line.replace(/^[0-9a-f]{64}\s+\.\//, "")),
+    );
+    listed.add("SHA256SUMS.txt");
+    const rootPath = fileURLToPath(packageRoot)
+      .replaceAll("\\", "/")
+      .replace(/\/$/, "");
+    const onDisk = (
+      await readdir(rootPath, { recursive: true, withFileTypes: true })
+    )
+      .filter((entry) => entry.isFile())
+      .map((entry) =>
+        `${entry.parentPath}/${entry.name}`
+          .replaceAll("\\", "/")
+          .slice(rootPath.length + 1),
+      );
+    expect(onDisk.filter((file) => !listed.has(file))).toEqual([]);
+    expect(onDisk).toHaveLength(listed.size);
   });
 });
