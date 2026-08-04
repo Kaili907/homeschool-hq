@@ -12,7 +12,8 @@
   # Route the tutor + voice calls through the serverless proxies in the DEPLOYED
   # build, so the API keys stay server-side. Local `npm run build` (without this)
   # keeps the direct-with-panel-key path. The two SECRET keys
-  # (ANTHROPIC_API_KEY / ELEVENLABS_API_KEY) are set in the Netlify UI, never here.
+  # (ANTHROPIC_API_KEY / ELEVENLABS_API_KEY / AZURE_SPEECH_KEY and
+  # AZURE_SPEECH_REGION) are set in the Netlify UI, never here.
   VITE_USE_PROXY = "true"
   NODE_VERSION = "20"
 
@@ -25,6 +26,11 @@
 [[redirects]]
   from = "/api/tts/*"
   to = "/.netlify/functions/tts/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/azure-speech/*"
+  to = "/.netlify/functions/azure-speech/:splat"
   status = 200
 
 # ---- SPA fallback: every other path serves the cached app shell ----

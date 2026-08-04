@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  /** D1 deploy: 'true' routes the tutor + voice calls through the serverless proxy. */
+  /** D1 deploy: routes tutor, voice, and Azure token calls through serverless proxies. */
   readonly VITE_USE_PROXY?: string
   /** M6 sync: Supabase project URL. Absent → keyless local mode (no sync). */
   readonly VITE_SUPABASE_URL?: string

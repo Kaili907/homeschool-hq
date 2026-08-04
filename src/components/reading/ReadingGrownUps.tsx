@@ -16,8 +16,8 @@ import type { Profile } from '../../types'
 /**
  * MR reading fluency — the Grown-Ups (Dad) reading view.
  *
- * Trends are the product: an ESTIMATED WCPM series (everyday proxy) plotted with
- * Dad's manual calibration points (ground truth) against the grade benchmark band,
+ * Trends are the product: browser-estimated and Azure-assessed WCPM plotted with
+ * Dad's manual calibration points against the grade benchmark band,
  * a practice-word frequency list (a recurring word = a phonics signal for the grade
  * cards), and the biweekly "run a manual 1-minute check" reminder + entry.
  */
@@ -58,7 +58,7 @@ export function ReadingGrownUps({
           benchmark {bench.entering}–{bench.yearEnd} WCPM (grade {grade})
         </span>
         <span className="ml-auto text-[11px] italic text-slate-400">
-          WCPM is estimated from speech recognition — trends over time, not single readings.
+          Browser readings are estimated; Azure readings are assessed from word scores.
         </span>
       </div>
 
@@ -201,7 +201,8 @@ function TrendChart({
         <line x1={PAD} y1={H - PAD} x2={W - PAD} y2={H - PAD} stroke="#e2e8f0" />
       </svg>
       <div className="mt-1 flex gap-4 px-2 text-[11px] font-semibold text-slate-500">
-        <span className="text-amber-600">● estimated</span>
+        <span className="text-amber-600">● browser estimated</span>
+        <span className="text-sky-600">● Azure assessed / counted</span>
         <span className="text-teal-700">◆ Dad calibration</span>
         <span className="text-emerald-600">▬ benchmark band</span>
       </div>

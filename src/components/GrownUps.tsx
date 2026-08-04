@@ -19,6 +19,7 @@ import type { SyncApi } from '../sync/useSync'
 import { StarsGlobalAdmin, StarsProfileAdmin } from './StarsAdmin'
 import { getStars } from '../stars/stars'
 import { ReadingGrownUps } from './reading/ReadingGrownUps'
+import { AzureReadingControls } from './reading/AzureReadingControls'
 import { MindsetProfilePanel, MindsetStartDate } from './mindset/MindsetGrownUps'
 import { clearJournal } from '../mindset/journalStore'
 import { AttendancePanel } from './attendance/AttendancePanel'
@@ -312,6 +313,9 @@ export function GrownUps({ state, onStateChange, sync, onClose, onChangeParentPi
         {/* AI tutor — key, per-profile cap, chat transcripts (MT-2/3) */}
         <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">AI Tutor 💬</h2>
         <TutorAiControls state={state} onStateChange={onStateChange} />
+
+        <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">Reading assessment</h2>
+        <AzureReadingControls />
 
         {/* MJ HS assistant — per-teen name/persona/cap + transcripts (shares the tutor key) */}
         <h2 className="mt-6 mb-2 text-lg font-bold text-slate-800">HS Assistant 🤖</h2>

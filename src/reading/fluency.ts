@@ -1,4 +1,12 @@
-import type { ISODate, Profile, ReadingCalibration, ReadingMode, ReadingSessionLog, ReadingState } from '../types'
+import type {
+  ISODate,
+  Profile,
+  ReadingCalibration,
+  ReadingMode,
+  ReadingSessionLog,
+  ReadingState,
+  ReadingWordScore,
+} from '../types'
 import { passagesForGrade, type Passage, type ReadingGrade } from './passages'
 import type { AlignmentResult } from './align'
 
@@ -6,9 +14,9 @@ import type { AlignmentResult } from './align'
  * MR reading fluency — pure logic over the additive optional `Profile.reading`
  * field (see types.ts). No schemaVersion bump; every read defaults gracefully.
  *
- * Everything WCPM here is an ESTIMATE (browser recognition + alignment) unless
- * the mode is 'manual' (Dad counted by hand). The UI labels it "estimated"
- * wherever a number renders; trends are the product, single readings are noise.
+ * Browser alignment produces an estimate, Azure produces an assessed score, and
+ * manual mode is Dad's hand count. The UI labels each path explicitly; trends are
+ * the product, single readings are noise.
  */
 
 // ---------- state accessors ----------
@@ -26,7 +34,7 @@ const SEEN_CAP = 100
 
 // ---------- WCPM ----------
 
-/** words-correct-per-minute, rounded, guarding zero/negative time. Always an estimate. */
+/** words-correct-per-minute, rounded, guarding zero/negative time. */
 export function estimateWcpm(correct: number, durationSec: number): number {
   if (durationSec <= 0 || correct <= 0) return 0
   return Math.round(correct / (durationSec / 60))
@@ -45,6 +53,41 @@ export function sessionFromAlignment(
     mode: 'estimated',
     wcpm: estimateWcpm(align.correct, durationSec),
     wordsPracticed: align.practiceWords,
+    durationSec,
+  }
+}
+
+/** Azure classifies word accuracy below 60 as a mispronunciation. */
+export const AZURE_WORD_ACCURACY_THRESHOLD = 60
+
+/** Build an assessed session using Azure's word-level accuracy results. */
+export function sessionFromAssessment(
+  date: ISODate,
+  passageId: string,
+  wordScores: ReadingWordScore[],
+  durationSec: number,
+): ReadingSessionLog {
+  const correct = wordScores.filter(
+    (score) =>
+      score.accuracyScore >= AZURE_WORD_ACCURACY_THRESHOLD &&
+      !['Omission', 'Insertion', 'Mispronunciation'].includes(score.errorType),
+  ).length
+  const practiced = wordScores
+    .filter(
+      (score) =>
+        score.accuracyScore < AZURE_WORD_ACCURACY_THRESHOLD ||
+        ['Omission', 'Mispronunciation'].includes(score.errorType),
+    )
+    .map((score) => score.word.toLowerCase())
+    .filter((word, index, all) => word !== '' && all.indexOf(word) === index)
+
+  return {
+    date,
+    passageId,
+    mode: 'assessed',
+    wcpm: estimateWcpm(correct, durationSec),
+    wordsPracticed: practiced,
+    wordScores: wordScores.map((score) => ({ ...score })),
     durationSec,
   }
 }
@@ -147,11 +190,17 @@ export interface TrendPoint {
   date: ISODate
   wcpm: number
   mode: ReadingMode
-  /** false only for manual/assessed ground-truth points. */
+  /** false for manual and Azure-assessed points. */
   estimated: boolean
 }
 
-/** Session WCPM series (estimates + manual), oldest first. */
+export function readingModeLabel(mode: ReadingMode): 'estimated' | 'assessed' | 'counted' {
+  if (mode === 'assessed') return 'assessed'
+  if (mode === 'manual') return 'counted'
+  return 'estimated'
+}
+
+/** Session WCPM series (estimated, assessed, and manual), oldest first. */
 export function wcpmTrend(state: ReadingState): TrendPoint[] {
   return state.sessions.map((s) => ({
     date: s.date,

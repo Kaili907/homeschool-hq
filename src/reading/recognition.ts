@@ -1,11 +1,10 @@
 /**
  * MR reading fluency — the RecognitionProvider seam.
  *
- * v1 wires ONLY the browser SpeechRecognition engine (continuous, so a whole
- * passage read streams in). The `azure` provider is a declared seam for the
- * future Azure Pronunciation Assessment engine (Voice-Addendum pattern, like
- * MT-V): the type exists and `createRecognition('azure')` resolves cleanly, but
- * until Dad creates the free Azure resource it silently falls back to browser.
+ * Browser SpeechRecognition streams transcript text for estimated scoring.
+ * Azure Speech Pronunciation Assessment is the optional upgrade: when configured
+ * and online it returns transcript text plus word-level accuracy scores; otherwise
+ * selection silently resolves to the browser engine.
  *
  * PRIVACY — LOAD-BEARING: this module transcribes speech to TEXT and nothing
  * else. It NEVER records, buffers, or persists audio — no MediaRecorder, no
@@ -13,13 +12,24 @@
  * leave here. (The `reading` no-audio test asserts this by scanning the source.)
  */
 
+import { azureSpeechConfigured, createAzureRecognition } from './azure'
+
 export type RecognitionProviderId = 'browser' | 'azure'
 
 export interface RecognitionHandlers {
   /** the growing transcript (final + interim) so the UI can show a live indicator. */
   onTranscript: (fullText: string, isFinal: boolean) => void
+  onAssessment?: (assessment: PronunciationAssessment) => void
   onError?: () => void
   onEnd?: () => void
+}
+
+export interface PronunciationAssessment {
+  words: {
+    word: string
+    accuracyScore: number
+    errorType: string
+  }[]
 }
 
 export interface ReadingRecognition {
@@ -28,7 +38,7 @@ export interface ReadingRecognition {
   /** begin continuous recognition; safe to call once per session. */
   start(handlers: RecognitionHandlers): void
   /** stop recognition; `onEnd` fires. Idempotent. */
-  stop(): void
+  stop(): void | Promise<void>
 }
 
 // ---------- minimal SpeechRecognition typings (not in lib.dom by default) ----------
@@ -161,12 +171,48 @@ export function createNullRecognition(provider: RecognitionProviderId = 'browser
 }
 
 /**
- * Resolve a recognizer for the requested provider. `azure` is not wired this cycle
- * and silently falls back to the browser engine (the seam is real; the wiring is a
- * follow-up micro-cycle once the free Azure resource exists).
+ * Resolve the requested provider. Azure wins only when configured and online;
+ * otherwise callers receive the browser recognizer with no child-facing error.
  */
-export function createRecognition(provider: RecognitionProviderId = 'browser'): ReadingRecognition {
-  // azure → browser fallback (seam present, engine deferred).
-  if (browserRecognitionSupported()) return createBrowserRecognition()
-  return createNullRecognition(provider)
+export function createRecognition(
+  provider: RecognitionProviderId = 'browser',
+  options: { referenceText?: string } = {},
+  deps: {
+    isOnline?: () => boolean
+    azureConfigured?: () => boolean
+    createAzure?: (fallback: ReadingRecognition) => ReadingRecognition
+    createBrowser?: () => ReadingRecognition
+  } = {},
+): ReadingRecognition {
+  const browser = (deps.createBrowser ?? createBrowserRecognition)()
+  const online = (deps.isOnline ?? (() => typeof navigator === 'undefined' || navigator.onLine))()
+
+  if (
+    provider === 'azure' &&
+    online &&
+    (deps.azureConfigured ?? azureSpeechConfigured)() &&
+    options.referenceText
+  ) {
+    return deps.createAzure
+      ? deps.createAzure(browser)
+      : createAzureRecognition({ referenceText: options.referenceText }, browser)
+  }
+
+  return browser.supported() ? browser : createNullRecognition('browser')
+}
+
+/** Whether either the preferred Azure tier or the browser tier can listen. */
+export function recognitionSupported(
+  provider: RecognitionProviderId = 'azure',
+  deps: {
+    isOnline?: () => boolean
+    azureConfigured?: () => boolean
+    browserSupported?: () => boolean
+  } = {},
+): boolean {
+  const online = (deps.isOnline ?? (() => typeof navigator === 'undefined' || navigator.onLine))()
+  if (provider === 'azure' && online && (deps.azureConfigured ?? azureSpeechConfigured)()) {
+    return true
+  }
+  return (deps.browserSupported ?? browserRecognitionSupported)()
 }

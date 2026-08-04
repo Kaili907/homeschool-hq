@@ -1,7 +1,12 @@
 import { useTheme } from '../../theme'
 import { Confetti } from '../Confetti'
 import { syllableHyphenate } from '../../reading/syllable'
-import { conqueredWords, getReadingState, readingStreak } from '../../reading/fluency'
+import {
+  conqueredWords,
+  getReadingState,
+  readingModeLabel,
+  readingStreak,
+} from '../../reading/fluency'
 import type { Passage } from '../../reading/passages'
 import type { Profile, ReadingSessionLog } from '../../types'
 
@@ -33,6 +38,7 @@ export default function ReadingSummary({
   const conquered = conqueredWords(state)
   const minutes = Math.max(1, Math.round(log.durationSec / 60))
   const estimated = log.mode === 'estimated'
+  const modeLabel = readingModeLabel(log.mode)
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 py-8 text-center">
@@ -52,7 +58,7 @@ export default function ReadingSummary({
           <span className={`${t.statPill} px-4 py-1 text-emerald-600`}>
             {estimated ? '≈ ' : ''}
             {log.wcpm} words/min{' '}
-            <span className="font-semibold opacity-70">{estimated ? '(estimated)' : '(counted)'}</span>
+            <span className="font-semibold opacity-70">({modeLabel})</span>
           </span>
         </div>
 

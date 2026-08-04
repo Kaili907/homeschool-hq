@@ -482,10 +482,17 @@ export interface TypingState {
 /** How a reading's WCPM number was produced. */
 export type ReadingMode =
   | 'estimated' // browser SpeechRecognition + sequence alignment (the everyday proxy)
-  | 'assessed' // Azure Pronunciation Assessment (v2 seam; not wired this cycle)
+  | 'assessed' // Azure Pronunciation Assessment word-level scores
   | 'manual' // offline: Dad counted words-correct by hand (ground-truth-ish)
 
-/** One logged read-aloud session. `wcpm` is always an ESTIMATE unless mode==='manual'. */
+export interface ReadingWordScore {
+  word: string
+  /** Azure Pronunciation Assessment accuracy, 0–100. */
+  accuracyScore: number
+  errorType: string
+}
+
+/** One logged read-aloud session. No microphone data is ever part of this shape. */
 export interface ReadingSessionLog {
   date: ISODate
   passageId: string
@@ -494,6 +501,8 @@ export interface ReadingSessionLog {
   wcpm: number
   /** passage words flagged for gentle practice ("words we practiced", never "wrong"). */
   wordsPracticed: string[]
+  /** Azure-derived numeric results only; absent for browser/manual sessions. */
+  wordScores?: ReadingWordScore[]
   /** active reading time in seconds. */
   durationSec: number
 }

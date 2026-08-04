@@ -4,12 +4,17 @@ import { isoToday } from '../../appState'
 import { speak, cancelSpeech } from '../../tutor/voice'
 import { getVoicePrefs } from '../../tutor/tutorState'
 import {
-  browserRecognitionSupported,
   createRecognition,
+  recognitionSupported,
+  type PronunciationAssessment,
   type ReadingRecognition,
 } from '../../reading/recognition'
 import { alignReading } from '../../reading/align'
-import { manualSession, sessionFromAlignment } from '../../reading/fluency'
+import {
+  manualSession,
+  sessionFromAlignment,
+  sessionFromAssessment,
+} from '../../reading/fluency'
 import { syllableHyphenate, syllableSpeech } from '../../reading/syllable'
 import type { Passage } from '../../reading/passages'
 import type { Profile, ReadingSessionLog } from '../../types'
@@ -68,7 +73,7 @@ export default function ReadingSession({
   const voice = getVoicePrefs(profile)
   const canSpeak = !muted && voice.enabled
 
-  const recognitionAvailable = browserRecognitionSupported()
+  const recognitionAvailable = recognitionSupported('azure')
   // Dad can force the offline (timer + manual) flow even when recognition works.
   const [manualForced, setManualForced] = useState(false)
   const [online, setOnline] = useState(typeof navigator === 'undefined' ? true : navigator.onLine)
@@ -82,6 +87,7 @@ export default function ReadingSession({
 
   const recRef = useRef<ReadingRecognition | null>(null)
   const transcriptRef = useRef('')
+  const assessmentRef = useRef<PronunciationAssessment | null>(null)
   const startTsRef = useRef<number | null>(null)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const finishedRef = useRef(false)
@@ -122,17 +128,21 @@ export default function ReadingSession({
   function start() {
     finishedRef.current = false
     transcriptRef.current = ''
+    assessmentRef.current = null
     setInterim('')
     setPhase('reading')
     beginTimer()
     if (usingRecognition) {
-      const rec = createRecognition('browser')
+      const rec = createRecognition('azure', { referenceText: passage.text })
       recRef.current = rec
       rec.start({
         onTranscript: (full, isFinal) => {
           transcriptRef.current = full
           setLive(true)
           setInterim(isFinal ? '' : full.slice(-60))
+        },
+        onAssessment: (assessment) => {
+          assessmentRef.current = assessment
         },
         onError: () => {
           // never surface a recognition hiccup to the child; the timer keeps running.
@@ -149,18 +159,30 @@ export default function ReadingSession({
     return fluencyCheck ? Math.min(raw, FLUENCY_SECONDS) : Math.max(1, Math.round(raw))
   }
 
-  function stop() {
+  async function stop() {
     if (finishedRef.current) return
     finishedRef.current = true
     if (timerRef.current) clearInterval(timerRef.current)
     setLive(false)
     const dur = durationSec()
 
-    if (usingRecognition) {
-      recRef.current?.stop()
+    if (recRef.current) {
+      await recRef.current.stop()
       recRef.current = null
-      const align = alignReading(passage.text, transcriptRef.current)
-      onComplete(sessionFromAlignment(isoToday(), passage.id, align, Math.round(dur)))
+      const assessment = assessmentRef.current
+      if (assessment?.words.length) {
+        onComplete(
+          sessionFromAssessment(
+            isoToday(),
+            passage.id,
+            assessment.words,
+            Math.round(dur),
+          ),
+        )
+      } else {
+        const align = alignReading(passage.text, transcriptRef.current)
+        onComplete(sessionFromAlignment(isoToday(), passage.id, align, Math.round(dur)))
+      }
     } else {
       // offline: collect Dad's hand count next.
       setPhase('manual')
