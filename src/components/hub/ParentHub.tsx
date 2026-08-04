@@ -31,6 +31,8 @@ interface Props {
   studyEnabled?: boolean
   study?: ParentHubStudyIntegration
   studyUnavailableReason?: string
+  persistenceFailure?: string | null
+  onDismissPersistenceFailure?: () => void
 }
 
 const TABS: { id: HubTab; label: string; emoji: string }[] = [
@@ -46,7 +48,7 @@ const TABS: { id: HubTab; label: string; emoji: string }[] = [
  * plans; never grades. The classic admin panel stays reachable for config that isn't
  * a view (mission templates, stars, tutor, cloud sync, backup).
  */
-export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyEnabled = false, study, studyUnavailableReason }: Props) {
+export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyEnabled = false, study, studyUnavailableReason, persistenceFailure, onDismissPersistenceFailure }: Props) {
   const [tab, setTab] = useState<HubTab>('today')
   const today = isoToday()
   const docs = useMemo(() => loadPlans(), [])
@@ -82,6 +84,25 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
             </button>
           </div>
         </div>
+
+        {persistenceFailure && (
+          <div className="mt-4 flex items-start justify-between gap-4 rounded-xl border border-red-300 bg-red-50 p-4 text-red-950 print:hidden" role="alert">
+            <div>
+              <h2 className="font-bold">Changes aren't being saved</h2>
+              <p className="mt-1 text-sm">The last saved Academy data is still intact.</p>
+              <p className="mt-2 text-sm"><span className="font-semibold">Reason:</span> {persistenceFailure}</p>
+            </div>
+            {onDismissPersistenceFailure && (
+              <button
+                type="button"
+                onClick={onDismissPersistenceFailure}
+                className="shrink-0 rounded-lg border border-red-300 bg-white px-3 py-2 text-sm font-semibold text-red-900 hover:bg-red-100"
+              >
+                Dismiss
+              </button>
+            )}
+          </div>
+        )}
 
         {/* tab bar */}
         <div className="mt-4 flex gap-1 rounded-xl bg-slate-200/70 p-1 print:hidden">
