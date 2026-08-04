@@ -15,6 +15,7 @@ import {
   mathTutorProgram,
 } from "../examples/index.js";
 import { narrationFixture } from "../examples/narration.fixture.js";
+import { findUnauthorizedSubjectPackageFiles } from "./subject-package-guard.js";
 
 interface CheckResult {
   name: string;
@@ -74,8 +75,8 @@ const forbiddenPatterns = [
 const forbiddenMatches = relativeFiles.filter((file) => forbiddenPatterns.some((pattern) => pattern.test(file)));
 add("platform-boundary", forbiddenMatches.length === 0, forbiddenMatches.length === 0 ? "No GitHub, Supabase, Netlify, database, authentication, or progress-sync files." : forbiddenMatches.join(", "));
 
-const finalSubjectPackageMatches = relativeFiles.filter((file) => /subjects\/(math|english)/.test(file));
-add("no-final-subject-packages", finalSubjectPackageMatches.length === 0, finalSubjectPackageMatches.length === 0 ? "Only demonstration fixtures exist under examples/." : finalSubjectPackageMatches.join(", "));
+const unauthorizedSubjectPackageMatches = findUnauthorizedSubjectPackageFiles(relativeFiles);
+add("no-unauthorized-subject-packages", unauthorizedSubjectPackageMatches.length === 0, unauthorizedSubjectPackageMatches.length === 0 ? "Only demonstration fixtures under examples/ and the authorized subjects/math package exist." : unauthorizedSubjectPackageMatches.join(", "));
 
 const requiredFiles = [
   "core/contracts/index.ts",
@@ -97,7 +98,7 @@ add("package-version", packageJson.version === "0.2.0", packageJson.version ?? "
 
 const passed = checks.filter((check) => check.passed).length;
 const failed = checks.length - passed;
-const report = `# Adaptive Tutor Core v0.2 — Generated Validation Report\n\n**Overall result:** ${failed === 0 ? "PASS" : "FAIL"}\n\n- Checks: ${checks.length}\n- Passed: ${passed}\n- Failed: ${failed}\n- Generated: ${new Date().toISOString()}\n\n| Check | Result | Details |\n|---|---|---|\n${checks.map((check) => `| ${check.name} | ${check.passed ? "PASS" : "FAIL"} | ${check.detail.replaceAll("|", "\\|")} |`).join("\n")}\n\n## Boundary Confirmation\n\n- No GitHub repository was modified.\n- No Supabase, Netlify, Lovable, database, storage, identity, authentication, or progress-synchronization integration was created.\n- Math and English materials are demonstration fixtures only, not final subject packages.\n- The prototype is local-first and remains usable without audio or external media.\n`;
+const report = `# Adaptive Tutor Core v0.2 — Generated Validation Report\n\n**Overall result:** ${failed === 0 ? "PASS" : "FAIL"}\n\n- Checks: ${checks.length}\n- Passed: ${passed}\n- Failed: ${failed}\n- Generated: ${new Date().toISOString()}\n\n| Check | Result | Details |\n|---|---|---|\n${checks.map((check) => `| ${check.name} | ${check.passed ? "PASS" : "FAIL"} | ${check.detail.replaceAll("|", "\\|")} |`).join("\n")}\n\n## Boundary Confirmation\n\n- No GitHub repository was modified.\n- No Supabase, Netlify, Lovable, database, storage, identity, authentication, or progress-synchronization integration was created.\n- English materials are demonstration fixtures only; the Math R1 package under subjects/math is the sole authorized final subject package.\n- The prototype is local-first and remains usable without audio or external media.\n`;
 await writeFile(resolve("docs/validation-report.generated.md"), report, "utf8");
 console.log(report);
 if (failed > 0) process.exitCode = 1;
