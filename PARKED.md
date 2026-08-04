@@ -2,8 +2,9 @@
 
 Authoritative reconciliation of every known workstream. v1.4,
 August 4, 2026: closes A5 (hosted state EQUIVALENT-TO-AUDITED)
-with riders; corrects CL5 as to fact; records the dashboard
-representation finding and reference hashes as standing
+with riders; resolves CL5 (both original claims true;
+apply-time evidenced); records the dashboard representation
+finding and reference hashes as standing
 knowledge; closes D-ENG-1; records the D-MATH-1 verdict and
 lifts the D-MATH-2 hold; reclassifies E-Romeo VERIFY-WORTHY;
 records CURR-1 (delivered, not merged); adds SCHED-1 (approved
@@ -265,13 +266,15 @@ Notes:
 
 ## PARKED — resumable by card only. Queue order = dependencies.
 
-Sequencing snapshot (v1.4): Study line A5 ✅ → A4-B next
-(carries the readiness-RPC execution under authorization) → A6
-remains the BLOCKING gate before any student use of the Study
-Engine. Parallel-eligible post-v1.4: D-MATH-2, CURR-1-R,
-SCHED-1, A4-B (D-ENG-2 RUN Aug 4 → D-ENG-3 queued). Critical
-path unchanged: five placement assessments never administered;
-four daughters' year scopes gated on them.
+Sequencing snapshot (v1.4 final): Study line A5 ✅ → A4-B next
+(readiness-RPC under authorization) → A6 BLOCKING before any
+student use. Ledger branch merges first (docs-only). D-MATH-2
+REVIEW-CLEARED, MERGE-ELIGIBLE. SCHED-1 review complete ×2;
+merge HELD pending SCHED-1-F + narrow re-review. CURR-1
+UNSAFE, parked (CURR-1-F/R2 + three-file composition per
+SCHED-1-R2/S3). D-ENG-3 queued. Critical path unchanged: five
+placement assessments never administered; four daughters' year
+scopes gated on them.
 
 ### A. Study Engine production line  [first in queue]
 State (v1.4): MOUNT-2 fixed and merged (CL11). Route lifecycle
@@ -286,9 +289,9 @@ Resume path (one card each):
   A4.   DONE (CL12; route lifecycle only — runtime depth is
         A4-B by construction).
   A4-X. DONE (CL13).
-  A5.   DONE (CL14; hosted state EQUIVALENT-TO-AUDITED — the
-        ten-migration chain was already applied; the Aug 3 db
-        push no-op'd; no new hosted write occurred).
+  A5.   DONE (CL14; hosted state EQUIVALENT-TO-AUDITED — four
+        v2.2 files applied Aug 2, six Study files applied
+        23:19 UTC Aug 3 by the A5 push itself; see CL5).
   A4-B. RUN runtime-depth e2e post-A5 [NEXT]: verified
         workspace, launch scoping per profile, runtime
         cancellation — everything F1 identified as
@@ -364,8 +367,45 @@ R1 fix (d4ccb91), English integration (b10d7ac).
   tutor-bridge.ts:150; validate-package.ts:77-78 guard rejects
   subjects/math — amendment AUTHORIZED by dispatcher ruling;
   bridge single-item flattening.
-- D-MATH-2: scoped, approved in principle — HELD status LIFTED
-  (A5 closed); dispatch-eligible.
+- D-MATH-2 (v1.4): RUN Aug 4, DELIVERED-AND-WITNESSED. Branch
+  integrate/adaptive-math-r1-v1, tip 0415259 (witnessed), 7
+  commits; footprint 106 files / +22027 / −27 (92 = frozen
+  mount; 14-file working set). Custody: canonical R1 zip
+  hashed ee9d15cd… from Dad's terminal via git cat-file —
+  location refinement: the zip lives at the wip-tree ROOT
+  (manuel-academy-adaptive-tutor-math-v1-core-v0.2-aligned-r1.zip),
+  not archives/. Interior 91/91. Boundary findstr empty.
+  Residual rulings: skill:* study-id mapping DEFERRED →
+  D-MATH-3 (curriculum authority; interim default-to-
+  sequence-01 unreachable by students); one-shot bridge /
+  unwalked diagnostic tail ACCEPTED (session-continuity =
+  future architecture); math hooks absent — authored
+  misconception responses unreachable until a hooks contract
+  is authorized; lab bridge untouched by design; untracked
+  package-lock.json in hq-math-r1 slated for hand-delete.
+- D-MATH-2-R (v1.4): RUN Aug 4 (Codex), verdict SAFE WITH
+  CONDITIONS — all three dispositioned, none code-blocking.
+  Gates: typecheck clean; full vitest 95 files / 1226 green;
+  build clean. Custody re-proven: 91/91 blob-verified, zero
+  unlisted/missing, manifest pin a9c44585… recomputed exact;
+  no post-mount subject touches. Validator diff witnessed —
+  regex blanket-reject → guard module, nothing weakened;
+  compiled validator 18/19, sole failure = pre-existing
+  /auth/i platform-boundary (both authority-*.md witnessed on
+  master 6e78632). Narrow proofs 18/18. English phase shift
+  reproduced (identify-missing-concept → assessment); both
+  map to continue-core-cycle — no present regression.
+  Bundle: 0/9 R1 sentinels; provider security 20/20.
+  Conditions: (1) Windows validator entrypoint = pre-existing
+  build.mjs spawnSync open item; npx.cmd tsc workaround
+  documented here. (2) English-disposition regression pin
+  RULED IN — required assertion attached to the next
+  tutor-line code session (D-MATH-3 / hooks), not a merge
+  gate. (3) Exposure record CORRECTED: production build
+  PRUNES the study route/bridge entirely (stronger than the
+  builder's claim); dev-preview gated by exact study flags +
+  verified household binding, not server default-DENY.
+  D-MATH-2: REVIEW-CLEARED, MERGE-ELIGIBLE.
 - D5 stub (a5d2068) confirmed = the v2.1 tag; stays dead (see
   DEAD D5).
 
@@ -465,8 +505,11 @@ post-assessment). v1 scope is Parent Hub only (template +
 per-girl weekly calendar view); the student-facing daily view
 is GATED BEHIND A6. Note: academy_study_calendar_blocks already
 exists on hosted (round-2 RLS map). No tutor-seam contact;
-parallel-eligible with D-MATH-2. Card drafts after v1.4 lands.
-- SCHED-1-R (v1.4): RUN Aug 4 (Codex), verdict SAFE WITH
+parallel-eligible with D-MATH-2. SCHED-1 RAN Aug 4 (branch
+feature/sched-core-day-v1, tip 2e7a7f4). Friday ruling: KEEP —
+daily anchors persist Friday; flex fills the subject slots;
+as-built confirmed.
+- SCHED-1-R (v1.4): RUN Aug 4 (review session), verdict SAFE WITH
   CONDITIONS — both conditions dispositioned. Gates: full root
   suite 99 files / 1258 tests green incl. postgres surfaces;
   nine-suite secondary tier green (engine 380, tutor 21,
@@ -485,7 +528,37 @@ parallel-eligible with D-MATH-2. Card drafts after v1.4 lands.
   supersedes the earlier two-file estimate); semantically
   additive; condition TRANSFERS to the CURR line — CURR-1
   revival requires manual three-file integration + combined
-  re-gate. SCHED-1: REVIEW-CLEARED, MERGE-ELIGIBLE.
+  re-gate. SCHED-1: review complete; merge HELD pending
+  SCHED-1-F (see SCHED-1-R2).
+- SCHED-1-R2 (v1.4): a second, concurrent review of the same
+  tip (2e7a7f4) ran Aug 4 (Codex; separate worktrees
+  hq-sched1-review-codex / -redproof-codex after finding the
+  first review's worktree in use). Verdict SAFE WITH
+  CONDITIONS. Corroborates all first-review results (gates,
+  red-proof 5-fail→33-pass incl. array-coercion holes,
+  template fidelity + timezone-independent flex, walkthrough,
+  three-file CURR overlap) and adds two new evidenced
+  findings: S1 — Add is uncapped; one Add on an
+  imported/pulled collection already at the sync layer's
+  array max (probe: 50,000→50,001, "oversized or sparse
+  array") produces validator-rejected state and, via the
+  SYNC-1 swallow, halts household persistence — automatic
+  condition per the review card's own rule. S2 —
+  validateScheduleExtensions is looser than the UI contract
+  (accepts empty days, 121-char labels, backward/equal
+  ranges): junk-admission from non-validating clients, not a
+  halt path; both reviews saw the same facts, classified
+  differently. DISPOSITION: SCHED-1-F required before merge —
+  cap Add at the sync boundary (reference the constant, incl.
+  imported-at-max start state); align the validator to UI
+  parity (label 1–120 trimmed, ≥1 valid SCHEDULE_DAYS member,
+  strict HH:MM, start<end); tests both directions with
+  red-proof. Narrow fresh review after, then merge. Friday
+  condition already SATISFIED by the KEEP ruling.
+  Duplicate-review precedent refined: duplicate verdicts do
+  not govern; duplicate findings are evidence, dispositioned
+  on merits. One card = one session (the duplicate cost
+  worktree contention + compute).
 
 ---
 
