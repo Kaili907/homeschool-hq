@@ -8,10 +8,12 @@ import { CalendarView } from './CalendarView'
 import { PlansView } from './PlansView'
 import { StatusView } from './StatusView'
 import { StudyParentPanel, type StudyParentLearnerOption } from './StudyParentPanel'
+import { AcademyParentPanel } from './AcademyParentPanel'
+import { enabledAcademyGradeFromHost } from '../../academy/featureFlag'
 import type { StudyPortBundle } from '../../study/ports'
 import type { StudyAdultAuthorization } from '../../study/types'
 
-export type HubTab = 'today' | 'calendar' | 'plans' | 'status' | 'study'
+export type HubTab = 'today' | 'calendar' | 'plans' | 'status' | 'study' | 'academy'
 
 export interface ParentHubStudyIntegration {
   readonly householdRef: string
@@ -48,7 +50,13 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
   const today = isoToday()
   const docs = useMemo(() => loadPlans(), [])
   const profiles = useMemo(() => Object.values(state.profiles), [state.profiles])
-  const tabs = studyEnabled ? [...TABS, { id: 'study' as const, label: 'Study', emoji: '🧭' }] : TABS
+  // CURR-1: the Academy tab shows only when a profile's grade flag is enabled.
+  const academyEnabled = profiles.some((p) => enabledAcademyGradeFromHost(p.grade))
+  const tabs = [
+    ...TABS,
+    ...(academyEnabled ? [{ id: 'academy' as const, label: 'Academy', emoji: '🏫' }] : []),
+    ...(studyEnabled ? [{ id: 'study' as const, label: 'Study', emoji: '🧭' }] : []),
+  ]
 
   // The hub defaults its start date from MM's mindset start date, so Dad needn't re-enter it.
   const sy = state.schoolYear ?? defaultSchoolYear(state.mindsetStartDate ?? '')
@@ -113,6 +121,9 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
           )}
           {tab === 'status' && (
             <StatusView profiles={profiles} today={today} onPatchProfile={patchProfile} />
+          )}
+          {tab === 'academy' && (
+            <AcademyParentPanel profiles={profiles} sy={sy} onPatchProfile={patchProfile} />
           )}
           {tab === 'study' && study && (
             <StudyParentPanel

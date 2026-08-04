@@ -144,6 +144,25 @@ export function defaultTemplateFor(grade: Grade): MissionTemplate {
           { id: 'project', label: 'Friday project time' },
         ],
       }
+    // CURR-1: Grades 5/7/8 run on the Manuel Academy curriculum — the daily work
+    // comes from the academy schedule, so the mission list stays light: the
+    // academy block plus the shared habits every grade keeps.
+    case '5':
+    case '7':
+    case '8':
+      return {
+        weekday: [
+          { id: 'academy-lessons', label: "Today's Academy lessons" },
+          { id: 'reading', label: 'Reading 20 minutes' },
+          { id: 'planner', label: 'Plan tomorrow in your planner' },
+          MINDSET_ITEM,
+        ],
+        friday: [
+          { id: 'academy-lessons', label: "Today's Academy lessons" },
+          { id: 'reading', label: 'Reading 20 minutes' },
+          { id: 'project', label: 'Friday project time' },
+        ],
+      }
     case '10':
       return {
         weekday: [
