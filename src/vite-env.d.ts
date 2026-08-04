@@ -13,6 +13,10 @@ interface ImportMetaEnv {
   readonly VITE_SUPABASE_URL?: string
   /** M6 sync: Supabase ANON key (public by design). The service key must NEVER be here. */
   readonly VITE_SUPABASE_ANON_KEY?: string
+  /** CURR-1: per-grade Manuel Academy curriculum gates. Exact 'true' only; absent is disabled. */
+  readonly VITE_ACADEMY_GRADE_5_ENABLED?: string
+  readonly VITE_ACADEMY_GRADE_7_ENABLED?: string
+  readonly VITE_ACADEMY_GRADE_8_ENABLED?: string
 }
 
 interface ImportMeta {
