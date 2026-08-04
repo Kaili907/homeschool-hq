@@ -5,13 +5,15 @@ import { defaultSchoolYear } from '../../curriculum/pacing'
 import { loadPlans } from '../../curriculum/loader'
 import { TodayView } from './TodayView'
 import { CalendarView } from './CalendarView'
+import { ScheduleView } from './ScheduleView'
+import { DEFAULT_CORE_DAY } from '../../schedule/coreDay'
 import { PlansView } from './PlansView'
 import { StatusView } from './StatusView'
 import { StudyParentPanel, type StudyParentLearnerOption } from './StudyParentPanel'
 import type { StudyPortBundle } from '../../study/ports'
 import type { StudyAdultAuthorization } from '../../study/types'
 
-export type HubTab = 'today' | 'calendar' | 'plans' | 'status' | 'study'
+export type HubTab = 'today' | 'calendar' | 'plans' | 'status' | 'study' | 'schedule'
 
 export interface ParentHubStudyIntegration {
   readonly householdRef: string
@@ -34,6 +36,7 @@ interface Props {
 const TABS: { id: HubTab; label: string; emoji: string }[] = [
   { id: 'today', label: 'Today', emoji: '🌅' },
   { id: 'calendar', label: 'Calendar', emoji: '🗓️' },
+  { id: 'schedule', label: 'Schedule', emoji: '📆' },
   { id: 'plans', label: 'Plans', emoji: '📚' },
   { id: 'status', label: 'Status', emoji: '📊' },
 ]
@@ -107,6 +110,15 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
           {tab === 'today' && <TodayView profiles={profiles} docs={docs} sy={sy} today={today} state={state} />}
           {tab === 'calendar' && (
             <CalendarView profiles={profiles} docs={docs} sy={sy} today={today} onChange={setSchoolYear} />
+          )}
+          {tab === 'schedule' && (
+            <ScheduleView
+              profiles={profiles}
+              today={today}
+              config={state.coreDay ?? DEFAULT_CORE_DAY}
+              onConfigChange={(next) => onStateChange((s) => ({ ...s, coreDay: next }))}
+              onPatchProfile={patchProfile}
+            />
           )}
           {tab === 'plans' && (
             <PlansView profiles={profiles} docs={docs} sy={sy} today={today} onPatchProfile={patchProfile} />

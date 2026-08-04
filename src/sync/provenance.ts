@@ -10,7 +10,8 @@ export const DATASET_PROVENANCE_STORAGE_KEY =
 
 const MAX_CANONICAL_DEPTH = 128
 const MAX_CANONICAL_NODES = 500_000
-const MAX_SYNC_ARRAY_ITEMS = 50_000
+/** Exported so the schedule Add gate (src/schedule/coreDay.ts) mirrors the real cap. */
+export const MAX_SYNC_ARRAY_ITEMS = 50_000
 const MAX_SYNC_RECORD_ENTRIES = 50_000
 const MAX_SYNC_STRING_LENGTH = 1_000_000
 const MAX_SYNC_KEY_LENGTH = 256
@@ -21,6 +22,11 @@ const RESERVED_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
 const GRADES = new Set(['3', '4', '6', '10', '12'])
 const THEMES = new Set(['playful', 'cool', 'clean'])
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
+const SCHEDULE_DAYS = new Set(['Mon', 'Tue', 'Wed', 'Thu', 'Fri'])
+const CORE_DAY_WRITING = new Set(['writing-mw', 'writing-tth'])
+const TIME_HHMM = /^(?:[01]\d|2[0-3]):[0-5]\d$/
+// mirrors MAX_EXTENSION_LABEL (src/schedule/coreDay.ts), the Add-form label cap
+const MAX_SCHEDULE_EXTENSION_LABEL = 120
 const STAR_SOURCES = new Set([
   'practice-session',
   'accuracy-bonus',
@@ -488,6 +494,42 @@ function validateAssistant(value: unknown): boolean {
   )
 }
 
+function timeOfDay(value: unknown): value is string {
+  return text(value, 5) && TIME_HHMM.test(value)
+}
+
+/**
+ * Exact parity with the Add-form gate (canAddExtension, src/schedule/coreDay.ts):
+ * label 1–120 after trim, at least one valid school day, strict HH:MM on both
+ * ends, start < end. Anything the gate rejects must be rejected here too —
+ * looser acceptance stores state that silently halts household persistence.
+ */
+function validateScheduleExtensions(value: unknown): boolean {
+  return boundedArray(value, (block) => {
+    if (!plainRecord(block)) return false
+    const { label, days, start, end } = block
+    return (
+      identifier(block.id) &&
+      text(label, MAX_SCHEDULE_EXTENSION_LABEL) &&
+      label.trim().length > 0 &&
+      Array.isArray(days) &&
+      days.length > 0 &&
+      boundedArray(days, (day) => typeof day === 'string' && SCHEDULE_DAYS.has(day)) &&
+      timeOfDay(start) &&
+      timeOfDay(end) &&
+      start < end
+    )
+  })
+}
+
+function validateCoreDay(value: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    typeof value.writingDays === 'string' &&
+    CORE_DAY_WRITING.has(value.writingDays)
+  )
+}
+
 function validatePacing(value: unknown): boolean {
   return (
     plainRecord(value) &&
@@ -591,7 +633,8 @@ function validateProfileOptionals(value: Record<string, unknown>): boolean {
           finiteNumber(snapshot.level) &&
           optional(snapshot.note, text),
       ),
-    )
+    ) &&
+    optional(value.scheduleExtensions, validateScheduleExtensions)
   )
 }
 
@@ -700,6 +743,7 @@ export function validateAppStateForSync(value: unknown): AppStateValidation {
       !optional(value.stars, validateGlobalStars) ||
       !optional(value.mindsetStartDate, isoDate) ||
       !optional(value.schoolYear, validateSchoolYear) ||
+      !optional(value.coreDay, validateCoreDay) ||
       !(
         value.activeProfileId === null ||
         (typeof value.activeProfileId === 'string' &&
