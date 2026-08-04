@@ -125,6 +125,31 @@ export function blocksForProfileDay(
   )
 }
 
+// mirrors the sync validator's TIME_HHMM (src/sync/provenance.ts)
+const TIME_HHMM = /^(?:[01]\d|2[0-3]):[0-5]\d$/
+export const MAX_EXTENSION_LABEL = 120
+
+/**
+ * The Add-block form gate. Everything the sync validator would reject must be
+ * rejected HERE: a stored invalid extension fails validateAppStateForSync, which
+ * silently halts ALL household persistence (saveAppState swallows the failure).
+ */
+export function canAddExtension(
+  label: string,
+  days: readonly ScheduleDay[],
+  start: string,
+  end: string,
+): boolean {
+  return (
+    label.trim().length > 0 &&
+    label.length <= MAX_EXTENSION_LABEL &&
+    days.length > 0 &&
+    TIME_HHMM.test(start) &&
+    TIME_HHMM.test(end) &&
+    start < end
+  )
+}
+
 const newExtensionId = () =>
   `sx-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`
 

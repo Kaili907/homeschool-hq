@@ -49,6 +49,10 @@ describe('SCHED-1 sync-validator acceptance', () => {
     })
     expect(validateAppStateForSync(withCoreDay('writing-mw'))).toMatchObject({ ok: false })
     expect(validateAppStateForSync(withCoreDay({}))).toMatchObject({ ok: false })
+    // String(['writing-mw']) === 'writing-mw' — coercion must not let arrays through
+    expect(
+      validateAppStateForSync(withCoreDay({ writingDays: ['writing-mw'] })),
+    ).toMatchObject({ ok: false })
   })
 
   it('accepts a profile with well-formed extension blocks', () => {
@@ -72,6 +76,9 @@ describe('SCHED-1 sync-validator acceptance', () => {
     expect(
       validateAppStateForSync(withExtensions([{ ...VALID_EXTENSION, start: '25:00' }])),
     ).toMatchObject({ ok: false })
+    expect(
+      validateAppStateForSync(withExtensions([{ ...VALID_EXTENSION, start: '' }])),
+    ).toMatchObject({ ok: false })
   })
 
   it('rejects extension blocks outside the Mon–Fri school week', () => {
@@ -80,6 +87,10 @@ describe('SCHED-1 sync-validator acceptance', () => {
     ).toMatchObject({ ok: false })
     expect(
       validateAppStateForSync(withExtensions([{ ...VALID_EXTENSION, days: 'Mon' }])),
+    ).toMatchObject({ ok: false })
+    // String(['Mon']) === 'Mon' — coercion must not let nested arrays through
+    expect(
+      validateAppStateForSync(withExtensions([{ ...VALID_EXTENSION, days: [['Mon']] }])),
     ).toMatchObject({ ok: false })
   })
 

@@ -3,9 +3,11 @@ import type { CoreDayConfig, Profile, ScheduleDay } from '../../types'
 import { addDaysISO, mondayOf } from '../../curriculum/pacing'
 import {
   FLEX_ROTATION,
+  MAX_EXTENSION_LABEL,
   SCHEDULE_DAYS,
   addExtension,
   blocksForProfileDay,
+  canAddExtension,
   flexActivityForWeek,
   flexWeekIndex,
   removeExtension,
@@ -49,7 +51,7 @@ export function ScheduleView({ profiles, today, config, onConfigChange, onPatchP
   if (!girl) return null
   const flexActivity = flexActivityForWeek(flexWeekIndex(monday))
   const extensions = girl.scheduleExtensions ?? []
-  const canAdd = label.trim().length > 0 && days.length > 0 && start < end
+  const canAdd = canAddExtension(label, days, start, end)
 
   const toggleDay = (day: ScheduleDay) =>
     setDays((prev) => (prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]))
@@ -200,6 +202,7 @@ export function ScheduleView({ profiles, today, config, onConfigChange, onPatchP
               value={label}
               onChange={(e) => setLabel(e.target.value)}
               placeholder="e.g. Algebra practice"
+              maxLength={MAX_EXTENSION_LABEL}
               className="rounded-lg border border-slate-300 px-2 py-1.5 text-sm font-semibold text-slate-800"
             />
           </label>

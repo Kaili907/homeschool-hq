@@ -502,14 +502,21 @@ function validateScheduleExtensions(value: unknown): boolean {
       plainRecord(block) &&
       identifier(block.id) &&
       text(block.label) &&
-      boundedArray(block.days, (day) => SCHEDULE_DAYS.has(String(day))) &&
+      boundedArray(
+        block.days,
+        (day) => typeof day === 'string' && SCHEDULE_DAYS.has(day),
+      ) &&
       timeOfDay(block.start) &&
       timeOfDay(block.end),
   )
 }
 
 function validateCoreDay(value: unknown): boolean {
-  return plainRecord(value) && CORE_DAY_WRITING.has(String(value.writingDays))
+  return (
+    plainRecord(value) &&
+    typeof value.writingDays === 'string' &&
+    CORE_DAY_WRITING.has(value.writingDays)
+  )
 }
 
 function validatePacing(value: unknown): boolean {

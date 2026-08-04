@@ -4,9 +4,11 @@ import type { CoreDayConfig, Profile, ScheduleDay } from '../types'
 import {
   DEFAULT_CORE_DAY,
   FLEX_ROTATION,
+  MAX_EXTENSION_LABEL,
   SCHEDULE_DAYS,
   addExtension,
   blocksForProfileDay,
+  canAddExtension,
   coreDayBlocks,
   flexActivityForWeek,
   flexWeekIndex,
@@ -105,17 +107,48 @@ describe('Friday flex block', () => {
     expect(flex).toMatchObject({ start: '10:15', end: '11:15', label: 'Flex: Nature walk' })
   })
 
-  it('rotates through all five activities and wraps', () => {
-    expect(FLEX_ROTATION).toHaveLength(5)
+  it('rotates through exactly the five card-named activities and wraps', () => {
+    expect([...FLEX_ROTATION]).toEqual([
+      'Library',
+      'Art',
+      'Nature walk',
+      'Field trip',
+      'Catch-up',
+    ])
     expect([0, 1, 2, 3, 4].map(flexActivityForWeek)).toEqual([...FLEX_ROTATION])
-    expect(flexActivityForWeek(5)).toBe(FLEX_ROTATION[0])
-    expect(flexActivityForWeek(-1)).toBe(FLEX_ROTATION[4])
+    expect(flexActivityForWeek(5)).toBe('Library')
+    expect(flexActivityForWeek(-1)).toBe('Catch-up')
   })
 
   it('keeps one activity for a whole week and advances the next', () => {
     // 2026-08-03 is a Monday.
     expect(flexWeekIndex('2026-08-03')).toBe(flexWeekIndex('2026-08-07'))
     expect(flexWeekIndex('2026-08-10')).toBe(flexWeekIndex('2026-08-03') + 1)
+  })
+})
+
+describe('canAddExtension form gate', () => {
+  it('accepts a well-formed block', () => {
+    expect(canAddExtension('Algebra practice', ['Mon', 'Wed'], '13:00', '13:30')).toBe(true)
+  })
+
+  it('rejects everything the sync validator would reject', () => {
+    // a stored invalid extension silently halts ALL household persistence,
+    // so the form gate must be at least as strict as timeOfDay/text.
+    expect(canAddExtension('Block', ['Mon'], '', '13:30')).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '13:00', '')).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '9:00', '13:30')).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '1pm', '13:30')).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '25:00', '26:00')).toBe(false)
+    expect(canAddExtension('x'.repeat(MAX_EXTENSION_LABEL + 1), ['Mon'], '13:00', '13:30')).toBe(false)
+  })
+
+  it('rejects empty labels, empty days, and non-positive ranges', () => {
+    expect(canAddExtension('', ['Mon'], '13:00', '13:30')).toBe(false)
+    expect(canAddExtension('   ', ['Mon'], '13:00', '13:30')).toBe(false)
+    expect(canAddExtension('Block', [], '13:00', '13:30')).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '13:30', '13:30')).toBe(false)
+    expect(canAddExtension('Block', ['Mon'], '14:00', '13:30')).toBe(false)
   })
 })
 
