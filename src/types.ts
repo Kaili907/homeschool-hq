@@ -338,6 +338,10 @@ export interface Profile {
   pacing?: Pacing
   /** Dad's manual mastery snapshots for paper subjects (entered after grade cards). undefined = none. */
   masterySnapshots?: MasterySnapshot[]
+
+  // ---------- SCHED-1 Core Day (additive, OPTIONAL; no schemaVersion bump) ----------
+  /** per-girl schedule blocks added beyond the shared Core Day; undefined = none yet. */
+  scheduleExtensions?: ScheduleExtension[]
 }
 
 // ---------- MP parent hub (additive; no schemaVersion bump) ----------
@@ -385,6 +389,33 @@ export interface MasterySnapshot {
   /** 0–100 level Dad types after a grade card. */
   level: number
   note?: string
+}
+
+// ---------- SCHED-1 Core Day v1 (additive; no schemaVersion bump) ----------
+
+/** SCHED-1 — school days the Core Day template covers. */
+export type ScheduleDay = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri'
+
+/**
+ * SCHED-1 — the family-wide Core Day config. The template CONTENT is canonical in
+ * code (src/schedule/coreDay.ts); only the Writing/Spelling day assignment is
+ * editable. 'writing-mw' = Writing Mon/Wed + Spelling Tue/Thu (the default).
+ */
+export interface CoreDayConfig {
+  writingDays: 'writing-mw' | 'writing-tth'
+}
+
+/** SCHED-1 — one Dad-added per-girl block beyond the shared Core Day. */
+export interface ScheduleExtension {
+  id: string
+  /** e.g. 'Algebra practice' */
+  label: string
+  /** which school days the block runs. */
+  days: ScheduleDay[]
+  /** 24h 'HH:MM' */
+  start: string
+  /** 24h 'HH:MM' */
+  end: string
 }
 
 /**
@@ -613,6 +644,8 @@ export interface AppState {
   mindsetStartDate?: ISODate
   /** MP: the parent-hub school-year pacing config (start date, off-weeks, quarter breaks). undefined = not configured yet. */
   schoolYear?: SchoolYear
+  /** SCHED-1: Core Day Writing/Spelling day assignment; undefined = default (Writing M/W, Spelling T/Th). */
+  coreDay?: CoreDayConfig
 }
 
 // ---------- schema v1 (legacy, for migration only) ----------

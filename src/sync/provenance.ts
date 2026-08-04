@@ -21,6 +21,9 @@ const RESERVED_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
 const GRADES = new Set(['3', '4', '6', '10', '12'])
 const THEMES = new Set(['playful', 'cool', 'clean'])
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
+const SCHEDULE_DAYS = new Set(['Mon', 'Tue', 'Wed', 'Thu', 'Fri'])
+const CORE_DAY_WRITING = new Set(['writing-mw', 'writing-tth'])
+const TIME_HHMM = /^(?:[01]\d|2[0-3]):[0-5]\d$/
 const STAR_SOURCES = new Set([
   'practice-session',
   'accuracy-bonus',
@@ -488,6 +491,27 @@ function validateAssistant(value: unknown): boolean {
   )
 }
 
+function timeOfDay(value: unknown): value is string {
+  return text(value, 5) && TIME_HHMM.test(value)
+}
+
+function validateScheduleExtensions(value: unknown): boolean {
+  return boundedArray(
+    value,
+    (block) =>
+      plainRecord(block) &&
+      identifier(block.id) &&
+      text(block.label) &&
+      boundedArray(block.days, (day) => SCHEDULE_DAYS.has(String(day))) &&
+      timeOfDay(block.start) &&
+      timeOfDay(block.end),
+  )
+}
+
+function validateCoreDay(value: unknown): boolean {
+  return plainRecord(value) && CORE_DAY_WRITING.has(String(value.writingDays))
+}
+
 function validatePacing(value: unknown): boolean {
   return (
     plainRecord(value) &&
@@ -591,7 +615,8 @@ function validateProfileOptionals(value: Record<string, unknown>): boolean {
           finiteNumber(snapshot.level) &&
           optional(snapshot.note, text),
       ),
-    )
+    ) &&
+    optional(value.scheduleExtensions, validateScheduleExtensions)
   )
 }
 
@@ -700,6 +725,7 @@ export function validateAppStateForSync(value: unknown): AppStateValidation {
       !optional(value.stars, validateGlobalStars) ||
       !optional(value.mindsetStartDate, isoDate) ||
       !optional(value.schoolYear, validateSchoolYear) ||
+      !optional(value.coreDay, validateCoreDay) ||
       !(
         value.activeProfileId === null ||
         (typeof value.activeProfileId === 'string' &&

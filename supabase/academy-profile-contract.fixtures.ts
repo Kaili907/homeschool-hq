@@ -58,6 +58,15 @@ export function academyProfileContractFixtures(): AcademyProfileContractFixture[
     assistant: { calls: [], sessions: [] },
     pacing: { pointers: {}, nudges: [] },
     masterySnapshots: [],
+    scheduleExtensions: [
+      {
+        id: 'sx-1',
+        label: 'Algebra practice',
+        days: ['Mon', 'Wed'],
+        start: '13:00',
+        end: '13:30',
+      },
+    ],
   })
 
   return [
@@ -184,6 +193,10 @@ export function academyProfileContractFixtures(): AcademyProfileContractFixture[
     invalid('invalid mastery snapshot timestamp', (candidate) => {
       candidate.masterySnapshots = [{ at: 'bad', subject: 'Math', level: 80 }]
     }),
+    // SCHED-1: no invalid scheduleExtensions fixture here — this file also drives the
+    // db-side contract (academy_sync_profile_is_valid), which tolerates unknown additive
+    // fields and cannot learn the new one without a migration. TS-side rejection
+    // coverage lives in src/sync/provenance.coreDay.test.ts.
     invalid('invalid nested date', (candidate) => {
       candidate.serviceLog = [
         {
