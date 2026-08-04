@@ -1,0 +1,24 @@
+TUTOR-MATH-R1 pre-seal verification snapshot
+Run date: 2026-08-01
+Runtime: Node 22.23.2; npm 10.9.8; TypeScript 5.9.3
+
+Strict subject TypeScript: PASS
+Strict Core v0.2 alignment TypeScript: PASS
+Original behavioral tests: 9/9 PASS
+Standalone demo regression tests: 10/10 PASS
+Aggregate subject tests: 19/19 PASS
+Core v0.2 alignment tests: 8/8 PASS
+Content validation: 214/214 PASS
+Frozen Core verification: PASS
+  Tutor programs: 4/4
+  Source assessment items: 72/72
+  Emitted assessment contracts: 96/96
+  Visual commands: 20/20
+  Invalid fixtures rejected: 5/5
+Working-tree Playwright acceptance: 4/4 PASS
+  Browser: bundled Chromium 151.0.7922.34
+  Automation: Playwright 1.62.0
+  Mode/viewport: headless, 1280x900
+
+Final clean-extraction results and the sealed outer ZIP SHA-256 are recorded in
+external freeze evidence so the tested archive is not modified after sealing.

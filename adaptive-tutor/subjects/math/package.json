@@ -1,0 +1,19 @@
+{
+  "name": "@manuel-academy/adaptive-tutor-math-content",
+  "version": "1.0.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck:core-v0.2": "tsc -p tsconfig.core-v0.2.json --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "test:core-v0.2": "node --test tests/core-v0.2-alignment.mjs",
+    "validate": "node scripts/validate.mjs",
+    "validate:core-v0.2": "node scripts/verify-core-v0.2.mjs",
+    "manifest": "node scripts/generate-sha256s.mjs",
+    "check": "npm run typecheck && npm run typecheck:core-v0.2 && npm test && npm run test:core-v0.2 && npm run validate"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

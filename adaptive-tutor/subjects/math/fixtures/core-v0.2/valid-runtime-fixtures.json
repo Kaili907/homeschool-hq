@@ -1,0 +1,44 @@
+{
+  "grade": 5,
+  "capabilities": {
+    "visualAvailable": false,
+    "voiceAvailable": false
+  },
+  "crossSessionEvidence": [
+    {
+      "sessionId": "session-one",
+      "contextId": "context-one",
+      "source": "independent-attempt",
+      "score": 1,
+      "uncertainty": 0.25
+    },
+    {
+      "sessionId": "session-one",
+      "contextId": "context-two",
+      "source": "independent-attempt",
+      "score": 1,
+      "uncertainty": 0.2
+    },
+    {
+      "sessionId": "session-one",
+      "contextId": "context-three",
+      "source": "independent-attempt",
+      "score": 1,
+      "uncertainty": 0.2
+    },
+    {
+      "sessionId": "session-two",
+      "contextId": "context-four",
+      "source": "reassessment",
+      "score": 1,
+      "uncertainty": 0.2
+    },
+    {
+      "sessionId": "session-two",
+      "contextId": "context-five",
+      "source": "reassessment",
+      "score": 1,
+      "uncertainty": 0.15
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manuel Academy Adaptive Math Demo</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">Manuel Academy · content-only demonstration</p>
+      <h1>Adaptive Math: Regrouping Across Zeros</h1>
+      <p>This ungraded demo asks one question at a time, delays feedback until reasoning is submitted, and never treats one correct response as mastery.</p>
+    </header>
+    <section id="demoCard" class="card" data-phase="assessment">
+      <div class="progress"><span id="stepLabel">Assessment</span><span id="evidenceCount">Evidence: 0</span></div>
+      <div id="visual" class="visual hidden"></div>
+      <h2 id="prompt" tabindex="-1"></h2>
+      <div id="choices" class="choices" role="group" aria-labelledby="prompt"></div>
+      <label id="reasonLabel" class="reason-label hidden" for="reason">Explain your reasoning</label>
+      <textarea id="reason" class="reason hidden" rows="3" placeholder="Tell how you know." aria-describedby="feedback" aria-invalid="false"></textarea>
+      <button id="continue" type="button" class="primary hidden">Continue</button>
+      <p id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></p>
+      <p class="fallback-note">All instructions are displayed as text. No voice, image download, or other media is required.</p>
+    </section>
+    <section class="notes">
+      <h2>Demonstrated contract</h2>
+      <ul>
+        <li>One question or useful step at a time</li>
+        <li>No answer feedback before an attempt and reasoning</li>
+        <li>Uncertainty remains separate from correctness</li>
+        <li>Text explanation remains usable without media or voice</li>
+        <li>No diagnosis, placement decision, homework completion, camera, child image, account, or saved progress</li>
+      </ul>
+    </section>
+  </main>
+  <script src="model.js"></script>
+  <script src="demo.js"></script>
+</body>
+</html>
