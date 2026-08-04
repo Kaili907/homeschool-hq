@@ -1,0 +1,192 @@
+[
+  {
+    "unit_id": "ma-g7-technology-u01",
+    "course_id": "ma-g7-technology",
+    "grade": 7,
+    "subject": "technology",
+    "unit_number": 1,
+    "title": "Digital Citizenship, Research, and Media Literacy",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Impacts of Computing",
+      "Networks and Internet"
+    ],
+    "essential_question": "How can understanding digital citizenship, research, and media literacy help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "privacy and permissions",
+      "search strategies",
+      "source credibility",
+      "misinformation and manipulation",
+      "copyright and Creative Commons",
+      "AI output verification"
+    ],
+    "performance_task": "Produce a source-verified digital explainer with an evidence and media-rights log.",
+    "lesson_ids": [
+      "ma-g7-technology-u01-l01",
+      "ma-g7-technology-u01-l02",
+      "ma-g7-technology-u01-l03",
+      "ma-g7-technology-u01-l04",
+      "ma-g7-technology-u01-l05",
+      "ma-g7-technology-u01-l06"
+    ],
+    "assessment_id": "ma-g7-technology-u01-assessment"
+  },
+  {
+    "unit_id": "ma-g7-technology-u02",
+    "course_id": "ma-g7-technology",
+    "grade": 7,
+    "subject": "technology",
+    "unit_number": 2,
+    "title": "Algorithms and Programming Structures",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Algorithms and Programming"
+    ],
+    "essential_question": "How can understanding algorithms and programming structures help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "decomposition",
+      "pseudocode",
+      "variables and data types",
+      "conditionals",
+      "loops",
+      "functions and debugging"
+    ],
+    "performance_task": "Build a small interactive program and document tests, bugs, and revisions.",
+    "lesson_ids": [
+      "ma-g7-technology-u02-l01",
+      "ma-g7-technology-u02-l02",
+      "ma-g7-technology-u02-l03",
+      "ma-g7-technology-u02-l04",
+      "ma-g7-technology-u02-l05",
+      "ma-g7-technology-u02-l06"
+    ],
+    "assessment_id": "ma-g7-technology-u02-assessment"
+  },
+  {
+    "unit_id": "ma-g7-technology-u03",
+    "course_id": "ma-g7-technology",
+    "grade": 7,
+    "subject": "technology",
+    "unit_number": 3,
+    "title": "Web and Interface Design",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Computing Systems",
+      "Impacts of Computing"
+    ],
+    "essential_question": "How can understanding web and interface design help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "HTML or block-based page structure",
+      "visual hierarchy",
+      "navigation",
+      "forms without personal data",
+      "responsive design concepts",
+      "accessibility testing"
+    ],
+    "performance_task": "Create a small accessible site or prototype for a curriculum or community purpose.",
+    "lesson_ids": [
+      "ma-g7-technology-u03-l01",
+      "ma-g7-technology-u03-l02",
+      "ma-g7-technology-u03-l03",
+      "ma-g7-technology-u03-l04",
+      "ma-g7-technology-u03-l05",
+      "ma-g7-technology-u03-l06"
+    ],
+    "assessment_id": "ma-g7-technology-u03-assessment"
+  },
+  {
+    "unit_id": "ma-g7-technology-u04",
+    "course_id": "ma-g7-technology",
+    "grade": 7,
+    "subject": "technology",
+    "unit_number": 4,
+    "title": "Data and Visualization",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Data and Analysis"
+    ],
+    "essential_question": "How can understanding data and visualization help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "data collection ethics",
+      "spreadsheets and formulas",
+      "cleaning data",
+      "charts",
+      "patterns and outliers",
+      "communicating uncertainty"
+    ],
+    "performance_task": "Analyze an approved dataset and publish an honest visualization with limits.",
+    "lesson_ids": [
+      "ma-g7-technology-u04-l01",
+      "ma-g7-technology-u04-l02",
+      "ma-g7-technology-u04-l03",
+      "ma-g7-technology-u04-l04",
+      "ma-g7-technology-u04-l05",
+      "ma-g7-technology-u04-l06"
+    ],
+    "assessment_id": "ma-g7-technology-u04-assessment"
+  },
+  {
+    "unit_id": "ma-g7-technology-u05",
+    "course_id": "ma-g7-technology",
+    "grade": 7,
+    "subject": "technology",
+    "unit_number": 5,
+    "title": "Networks, Cybersecurity, and Digital Safety",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Networks and Internet",
+      "Cybersecurity"
+    ],
+    "essential_question": "How can understanding networks, cybersecurity, and digital safety help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "network basics",
+      "encryption concept",
+      "authentication",
+      "phishing and social engineering",
+      "updates and backups",
+      "incident reporting"
+    ],
+    "performance_task": "Complete a fictional security audit and create a response plan without testing real systems.",
+    "lesson_ids": [
+      "ma-g7-technology-u05-l01",
+      "ma-g7-technology-u05-l02",
+      "ma-g7-technology-u05-l03",
+      "ma-g7-technology-u05-l04",
+      "ma-g7-technology-u05-l05",
+      "ma-g7-technology-u05-l06"
+    ],
+    "assessment_id": "ma-g7-technology-u05-assessment"
+  },
+  {
+    "unit_id": "ma-g7-technology-u06",
+    "course_id": "ma-g7-technology",
+    "grade": 7,
+    "subject": "technology",
+    "unit_number": 6,
+    "title": "Human-Centered and AI-Aware Design",
+    "days": 6,
+    "standards": [
+      "Michigan Computer Science: Impacts of Computing",
+      "Algorithms and Programming"
+    ],
+    "essential_question": "How can understanding human-centered and ai-aware design help us explain, decide, create, or solve something that matters?",
+    "topics": [
+      "user research without private data",
+      "requirements",
+      "prototype testing",
+      "bias and accessibility",
+      "AI capabilities and limits",
+      "iteration and documentation"
+    ],
+    "performance_task": "Design and test a tool or workflow that uses no AI or uses AI transparently with human verification.",
+    "lesson_ids": [
+      "ma-g7-technology-u06-l01",
+      "ma-g7-technology-u06-l02",
+      "ma-g7-technology-u06-l03",
+      "ma-g7-technology-u06-l04",
+      "ma-g7-technology-u06-l05",
+      "ma-g7-technology-u06-l06"
+    ],
+    "assessment_id": "ma-g7-technology-u06-assessment"
+  }
+]
