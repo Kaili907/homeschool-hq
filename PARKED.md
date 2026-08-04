@@ -1,20 +1,23 @@
-# PARKED.md — Workstream Ledger for Manuel Academy (v1.5)
+# PARKED.md — Workstream Ledger for Manuel Academy (v1.6)
 
-Authoritative reconciliation of every known workstream. v1.5,
-August 4, 2026 (evening): records three Aug 4 merges; closes
-SCHED-1 after its final fix and narrow re-review; promotes
-SYNC-1; records the stale-card sweep and machine-hygiene
-findings; and updates the sequencing snapshot and PMG-1 slot.
+Authoritative reconciliation of every known workstream. v1.6,
+August 4, 2026 (late evening): records the first production
+publish since v2.2; closes WT-INSPECT and WT-INSPECT-2; corrects
+the earlier estate-GC and enrichment-stub records; preserves
+two sole-copy student-serving WIP lines; voids stale A2 merge
+authorization; records the post-Study validator drift; records
+the SYNC-1 merge at b954833 with condition C1 open and a hard
+deploy gate; and resolves Khayyam custody with its originating
+session ID still open.
 
-Canonical master at time of writing:
-d9e5daf7ca6a6c0137febf31d8258591d3610067 (SCHED-1 merge;
-ancestors 8294d30 D-MATH-2, 86b159a PARKED v1.4, 6e78632
-PARKED v1.3, d28e94a A4-X exit-URL normalization, 6c9d024 A2
-merge, 6222ba4 PARKED v1.2, 88dbc39 recompose, 5115a00 JP-1,
-ab22a0c PARKED v1.0, 704a748 docs, 5be50ff v2.2). Published
-production remains v2.2 (5be50ff); Netlify auto-publish LOCKED.
-PMG-1's production-risk gate is SATISFIED; deploy decision is
-AVAILABLE, dispatcher-authorized only.
+Canonical master at time of writing: b954833 (SYNC-1 merge;
+pushed and terminal-witnessed on origin; C1 remains open;
+production-publish parent line e66f436). Published production
+remains e66f436 via Netlify deploy
+6a7271618d91438523f4dd82, published 7:10 PM ET,
+August 4, 2026. The published deploy is LOCKED; Netlify
+auto-publishing is OFF. This is the first production publish
+since v2.2 (5be50ff).
 
 Rules of this file:
 - No session re-investigates anything listed CLOSED or DEAD.
@@ -36,6 +39,15 @@ Rules of this file:
   Aug 4 — harmless because read-only, and its findings
   retroactively re-confirm CL11 unconditionally — but the class
   of error includes cards with hosted contact.)
+- Worktree single-use (reaffirmed v1.6): one dispatched session
+  uses one dedicated worktree. A completed builder, reviewer,
+  red-proof, or inspection tree is not silently repurposed for
+  a later packet.
+- Inspection substitutions (v1.6): several packets addressed
+  to Stephen were executed by Chrome sessions as authorized
+  delegations. Those substitutions are logged as substitutions;
+  the packet evidence stands, but the named addressee is not
+  rewritten as the executor.
 
 ---
 
@@ -73,8 +85,16 @@ Rules of this file:
 - Laptop hygiene: 91 orphaned node_repl.exe observed idle —
   routed to WORKTREE-GC laptop leg (taskkill only when no
   sessions live).
-- PC estate: 38 worktrees enumerated, ~20 dead one-shots —
-  WORKTREE-GC scope.
+- CORRECTION (v1.6): the v1.5-era assertion that estate GC was
+  complete was FALSE. Twenty-one worktrees still existed. The
+  inventory statement was not a completed GC, and future
+  ledgers must not promote an inventory or partial deletion
+  pass into a completion claim.
+- Estate GC is genuinely COMPLETE only after WT-INSPECT and
+  WT-INSPECT-2 (CL19–CL20). Eighteen discard-safe trees were
+  removed across those two packets; six intentionally retained
+  trees remain. Terminal-witnessed retained set:
+  homeschool-hq 8695632 [fix/study-engine-route-lifecycle] · .claude/worktrees/infallible-khayyam-848a80 e66f436 [claude/infallible-khayyam-848a80] · .worktrees/mkjp-hiragana 605b324 [mkjp-hiragana] · .worktrees/ra-azure-reading 5256ffc [ra-azure-reading] · hq-master b954833 [master] · hq-sync1 ef2401b [fix/sync-surface-save-validation].
 - The executed stale A2-R card originated from an open
   superseded thread, not disk — tab census is the closing
   control.
@@ -125,6 +145,11 @@ Rules of this file:
 - Windows verification caveat (v1.4): autocrlf inflates
   checked-out LF files; verify manifest hashes against git
   blobs (git cat-file blob) or CRLF-normalize first.
+- Netlify dashboard precondition correction (v1.6): manual CLI
+  deploys can appear with “No deploy message” and no commit
+  hash. A dashboard inspection packet must key its precondition
+  and identity check on the deploy ID, not on a commit-label
+  field that the deploy mode does not populate.
 
 ---
 
@@ -160,9 +185,13 @@ Notes:
   may be deleted from origin at Dad's convenience.
 
 ## CLOSED — verified. No action ever.
-- CL1. Production custody: published Netlify deploy = v2.2
-  (5be50ff); auto-publish LOCKED. Master has advanced past it
-  (see header); published production unchanged.
+- CL1. Production custody: published Netlify deploy =
+  6a7271618d91438523f4dd82 from master e66f436, published
+  7:10 PM ET Aug 4; deploy LOCKED and auto-publishing OFF.
+  This supersedes the prior production custody record for v2.2
+  (5be50ff). Master has since advanced to b954833 through the
+  SYNC-1 merge; production remains unchanged. SYNC-1-C1 is a
+  HARD DEPLOY GATE before the next production publish.
 - CL2. Safe household sync / CAS: merged into v2.2.
 - CL3. Student identity canonical history: hardened lineage in
   v2.2.
@@ -271,6 +300,86 @@ Notes:
   v2.2 (5be50ff); Netlify locked. PMG-1's production-risk gate
   is SATISFIED; deploy decision AVAILABLE, dispatcher-authorized
   only.
+- CL18 (v1.6). NETLIFY DEPLOY CAMPAIGN CLOSED — first
+  production publish since v2.2. Master e66f436 was published
+  as deploy 6a7271618d91438523f4dd82 at 7:10 PM ET. Pre-prod
+  gates: bundle grep BENIGN; Chrome dashboard clean; draft
+  deploy inspection clean. The sole study-engine bundle hit was
+  the route-janitor constant `Bw="/study-engine"` in
+  DtPwk3Pi.js. The flags compiled to `void 0`, but dead-code
+  elimination did not physically strip the route because the
+  gate is evaluated at runtime, not statically. This CORRECTS
+  the prior desk prediction that the route would be physically
+  absent; the custody/security result remains benign.
+  The approximately 6:49 PM hq-master hash drift was ruled
+  CLEAN / mundane-unexplained. The production build reproduced
+  the pre-drift asset pair C1EaxREJ.css + DtPwk3Pi.js,
+  retroactively confirming that the drift did not alter the
+  deploy artifact. DtPwk3Pi.js custody was established by
+  hashed asset name in Dad’s terminal and corroborated by the
+  CDN’s single-asset-diff result. Two accidental “No” answers
+  at the unlock prompt were benign and caused no state change.
+  The executed custody sequence was unlock → publish →
+  identity verification → re-lock; final state is deploy
+  LOCKED with auto-publishing OFF.
+  The named A4-B residual has since been mapped: the ten
+  `study-*` functions use layered denial through the
+  ACADEMY_STUDY_ENABLED master gate, fail-closed unwired
+  handlers, and Supabase bearer enforcement. No path leaks a
+  secret. Denial is not absolute at the stronger
+  “before any secret-backed call” boundary: safety-classify
+  performs a monitoring write before its 401, and
+  runtime/verify can issue service-role RPCs on bogus
+  references. Four functions are unsafe to probe even
+  negatively. A4-B is scoped and ready but remains held.
+- CL19 (v1.6). WT-INSPECT CLOSED. Both original STOP trees,
+  hq-dmath2-review and hq-sched1-redproof-codex, were inspected,
+  ruled DISCARD-SAFE, and removed. The inspection also surfaced
+  D-VAL-1: adaptive-tutor’s `validate-package.ts`
+  platform-boundary check now FAILS against the post-Study-
+  merge tree because it names the two authorized Study
+  `authority-*.md` documents. Discarding the inspection tree
+  erased the only transcript of that drift; the fact and ruling
+  requirement are preserved under D-VAL-1.
+- CL20 (v1.6). WT-INSPECT-2 CLOSED. Sixteen surplus trees were
+  inspected, each ruled DISCARD-SAFE, and removed. Estate GC is
+  now genuinely COMPLETE; six intentionally retained trees
+  remain. Terminal-witnessed retained set:
+  homeschool-hq 8695632 [fix/study-engine-route-lifecycle] · .claude/worktrees/infallible-khayyam-848a80 e66f436 [claude/infallible-khayyam-848a80] · .worktrees/mkjp-hiragana 605b324 [mkjp-hiragana] · .worktrees/ra-azure-reading 5256ffc [ra-azure-reading] · hq-master b954833 [master] · hq-sync1 ef2401b [fix/sync-surface-save-validation].
+  This completion claim does not inherit or excuse the false
+  v1.5-era completion claim corrected under ESTATE SWEEP.
+- CL21 (v1.6). KHAYYAM custody RESOLVED.
+  claude/infallible-khayyam-848a80 is a local Claude Code
+  worktree under `.claude/worktrees/`, sits at the witnessed
+  e66f436 master tip from its originating sitting, and is
+  benign. The originating session ID is not established; that
+  one-word open item remains OI4.
+- CL22 (v1.6). SYNC-1 MERGED AND PUSHED — CONDITION OPEN.
+  Builder tip ef2401b was reviewed by SYNC-1-R; verdict
+  SAFE WITH CONDITIONS (C1). R1–R7 are evidence-backed,
+  red-proof was independently replicated on the baseline, and
+  all rulings are clean EXCEPT C1.
+  C1: the Parent Hub failure banner asserts “last saved Academy
+  data is still intact” — under the headline “changes aren’t
+  being saved” — unconditionally. That assertion is false for
+  the rare post-write verification-failure modes in
+  persistDatasetVerified: readback-malformed,
+  Web-Crypto-unavailable, and fingerprint-mismatch. This is an
+  adult-only surface with no data-loss finding; baseline
+  behavior performs no rollback. What the SYNC-1 diff added is
+  the unconditional claim.
+  SYNC-1 merged to master as b954833 with C1 still open; the
+  merge commit and updated master were terminal-witnessed and
+  pushed to origin.
+  PROCESS FAILURE, recorded: the desk issued merge
+  authorization against an incompletely witnessed verdict that
+  read as SAFE. The full SYNC-1-R report on upload showed C1;
+  the record is corrected retroactively.
+  C1 is carded as SYNC-1-C1 with a HARD DEPLOY GATE: the next
+  production deploy MUST include the C1 fix OR consciously
+  accept C1 as a named residual, as CL18’s deploy accepted the
+  `study-*` posture. The pipeline is NOT fully closed;
+  SYNC-1-C1 is outstanding.
 
 ## DEAD — declared by Dad. Forensics only.
 - D1. Root pnpm workspace conversion. Unauthorized; npm baseline
@@ -302,26 +411,34 @@ Notes:
 
 ## PARKED — resumable by card only. Queue order = dependencies.
 
-Sequencing snapshot (v1.5): three merges landed Aug 4 (86b159a
-ledger → 8294d30 math → d9e5daf sched). PMG-1 completed on
-d9e5daf: root gates pass; secondary tier exposed PMG-F1, a real
-assembly-browser harness defect. Production-risk gate SATISFIED;
-deploy decision AVAILABLE, dispatcher-authorized only. Harness
-line: PMG-F1 fix + narrow review. Code line: SYNC-1 → A4-B
-(readiness-RPC under authorization) → A6 BLOCKING before any
-student use. Housekeeping: WORKTREE-GC after PMG-1, solo. Parked:
-CURR-1-F/R2 (+three-file composition), D-ENG-3, D-MATH-3
-(+English-disposition pin). Critical path unchanged: five
-placement assessments never administered; four daughters' year
-scopes gated on them.
+Sequencing snapshot (v1.6): canonical master b954833; published
+production remains the locked e66f436 deploy
+6a7271618d91438523f4dd82 with auto-publishing OFF.
+WT-INSPECT and WT-INSPECT-2 are closed and estate GC is
+genuinely complete. Code line: SYNC-1 (merged at b954833,
+SAFE-WITH-CONDITIONS, C1 open; SYNC-1-C1 carded with deploy
+gate — pipeline NOT fully closed) → A4-B (scoped and ready,
+still held) → A6. Parked additionally: SYNC-1-C1, A2-AUTH
+disposition, D-VAL-1 ruling, CURR-1-F/R2 (+three-file
+composition), D-ENG-3, and D-MATH-3 (+English-disposition pin).
+Critical path unchanged: five placement assessments never
+administered; four daughters’ year scopes gated on them.
 
-SYNC-1 (v1.5): PROMOTED to next code card. Scope: surface
-saveAppState validation failures (log + visible Parent Hub
-signal; no silent halt). Motivation: root cause converting
-S1-class rejections into silent household-persistence bricks;
-absorbs the disclosed residual classes (gate day-membership gap,
-MAX_CANONICAL_NODES analogue, free-text looseness) as
-visible-error paths rather than individual patches.
+SYNC-1 (v1.6): MERGED AND PUSHED — CONDITION OPEN. Builder tip
+ef2401b was reviewed by SYNC-1-R as SAFE WITH CONDITIONS (C1).
+R1–R7 are evidence-backed, red-proof was independently
+replicated on the baseline, and all rulings are clean except
+C1. Master advanced to b954833, terminal-witnessed and pushed,
+with C1 still open. Pipeline NOT fully closed; see CL22 and
+SYNC-1-C1.
+
+- SYNC-1-C1 (v1.6): CARDED, OPEN — HARD DEPLOY GATE. Correct
+  the Parent Hub’s unconditional claims that “changes aren’t
+  being saved” and the “last saved Academy data is still
+  intact” assertion for rare post-write verification failures
+  in persistDatasetVerified, or obtain a conscious dispatcher
+  ruling accepting C1 as a named residual. No next production
+  deploy may proceed without one of those two dispositions.
 
 - PMG-1 (v1.5 addendum): COMPLETE with one finding. Root gates
   on merged master d9e5daf: PASS — typecheck; full root vitest
@@ -351,10 +468,23 @@ visible-error paths rather than individual patches.
   AVAILABLE, dispatcher-authorized only.
 
 ### A. Study Engine production line  [after SYNC-1]
-State (v1.4): MOUNT-2 fixed and merged (CL11). Route lifecycle
+State (v1.6): MOUNT-2 fixed and merged (CL11). Route lifecycle
 e2e-verified (CL12). Exit-URL residual and A4-F2 closed (CL13).
 A5 closed (CL14): hosted state EQUIVALENT-TO-AUDITED. The only
 surviving edge is accepted residual R1 (plus A5 residual R2).
+SYNC-1 is merged at b954833, SAFE-WITH-CONDITIONS, with C1 open
+and SYNC-1-C1 carded as a HARD DEPLOY GATE; its pipeline is NOT
+fully closed (CL22). Published production remains the locked
+e66f436 deploy 6a7271618d91438523f4dd82 (CL18).
+The A4-B deny-posture recon is complete: the ten live
+`study-*` functions have layered denial through the
+ACADEMY_STUDY_ENABLED master gate, fail-closed unwired
+handlers, and Supabase bearer enforcement. No path leaks a
+secret. This is not absolute denial before every secret-backed
+call: safety-classify performs a monitoring write before 401,
+and runtime/verify can issue service-role RPCs on bogus
+references. Four functions are unsafe to probe even
+negatively. A4-B execution is scoped and ready, still held.
 Resume path (one card each):
   A1-R. DONE (custody verdict: CONTESTED at ~15-file security
         seam, v2.2 wins by ruling; CHEAP elsewhere).
@@ -366,12 +496,20 @@ Resume path (one card each):
   A5.   DONE (CL14; hosted state EQUIVALENT-TO-AUDITED — four
         v2.2 files applied Aug 2, six Study files applied
         23:19 UTC Aug 3 by the A5 push itself; see CL5).
-  A4-B. RUN runtime-depth e2e post-A5 [NEXT]: verified
-        workspace, launch scoping per profile, runtime
-        cancellation — everything F1 identified as
-        hosted-auth-gated. Currently covered only by the merged
-        unit tests (mocked study layer). Carries the CL14(a)
-        rider: first invocation of
+  A4-B. SCOPED AND READY, STILL HELD. Deny-posture mapping is
+        complete: ACADEMY_STUDY_ENABLED master gate +
+        fail-closed unwired handlers + Supabase bearer. No
+        secret leakage exists on any path. The stronger
+        “before any secret-backed call” claim does not hold:
+        safety-classify performs a monitoring write before 401;
+        runtime/verify can issue service-role RPCs on bogus
+        references; four functions are unsafe to probe even
+        negatively. Execution scope: verified workspace,
+        launch scoping per profile, runtime cancellation, and
+        only the explicitly safe negative probes — everything
+        F1 identified as hosted-auth-gated. Currently covered
+        only by the merged unit tests (mocked study layer).
+        Carries the CL14(a) rider: first invocation of
         public.academy_study_verified_identity_readiness_v1 is
         hosted contact and runs only under dispatcher
         authorization.
@@ -379,6 +517,16 @@ Resume path (one card each):
         classifier injected AND startup assertion (production
         build refuses mode != "production"); classifierVersion
         logged at boot.
+
+- A2-AUTH (v1.6): VOID. The issuing desk voided the
+  earlier-handoff merge authorization for
+  fix/study-engine-route-lifecycle at 8695632. Master moved five
+  merges past that authorization’s review baseline, so the old
+  authorization cannot execute. The main checkout is
+  intentionally parked on the pushed branch; this is not an
+  instruction to move it. Disposition remains OPEN:
+  re-review against current master versus wait. The
+  preservation-branch set is unchanged.
 
 ### B. Wave 1 quartet
 B1 Mastery Map (needs 5C correction). B2 AI Safety Center
@@ -388,12 +536,37 @@ unresolved). Frozen packages in archives/ + mu-music trove.
 
 ### C. Enrichment branches — merge-or-dead decisions
 C1 a5-grade5-math (blocked on host Grade 5 identity).
-C2 ra-azure-reading — STUB: zero unique commits; dead-or-rebuild
-decision.
-C3 mkjp-hiragana — STUB: zero unique commits; dead-or-rebuild
-decision. Separate from the completed Japanese curriculum FILE
-wiring (CL10).
+C2 ra-azure-reading — UNREVIEWED WIP, PRESERVED; NEVER MERGE
+WITHOUT REVIEW. The v1.5 “STUB: zero unique commits”
+classification was true only of committed ancestry and was
+materially misleading: the worktree held substantial authored,
+uncommitted, sole-copy work. It is a working Azure Speech
+reading integration, including a token-issuing Netlify
+function and the previously described “reserved” Azure
+Japanese-voice option; the integration was already
+substantially built. Preserved to origin as unreviewed WIP at
+5256ffc, 949 insertions. Review and hosted-security disposition
+are required before any merge word.
+C3 mkjp-hiragana — UNREVIEWED WIP, PRESERVED; NEVER MERGE
+WITHOUT REVIEW. The v1.5 “STUB: zero unique commits”
+classification was true only of committed ancestry and was
+materially misleading: the worktree held substantial authored,
+uncommitted, sole-copy work. It is a working Hiragana trainer,
+feeds Japanese Year 1, and serves the sixth grader. Preserved
+to origin as unreviewed WIP at 605b324, 736 insertions.
+Separate from the completed Japanese curriculum file wiring
+(CL10); review is required before any merge word.
 C4 mu-music (1b80cce).
+
+Classification lesson (v1.6, significant): a session-summary
+“stub” classification nearly rendered student-serving,
+sole-copy authored work invisible. Commit-count truth was not
+worktree-content truth. This is the strongest evidence yet for
+the evidence-card standard over session summaries: inspect and
+record branch ancestry, tracked delta, uncommitted delta,
+student-serving purpose, custody, and preservation state before
+classifying any workstream as stub, empty, discard-safe, or
+dead.
 
 ### D. Adaptive Tutor host assembly
 Core v0.2, Math R1, corrected English frozen. (v1.4 location
@@ -475,13 +648,27 @@ R1 fix (d4ccb91), English integration (b10d7ac).
   documented here. (2) English-disposition regression pin
   RULED IN — required assertion attached to the next
   tutor-line code session (D-MATH-3 / hooks), not a merge
-  gate. (3) Exposure record CORRECTED: production build
-  PRUNES the study route/bridge entirely (stronger than the
-  builder's claim); dev-preview gated by exact study flags +
-  verified household binding, not server default-DENY.
+  gate. (3) Exposure record CORRECTED AGAIN v1.6: the
+  production bundle does not physically prune every
+  study-route artifact. Deploy custody found the benign
+  route-janitor constant `Bw="/study-engine"` in DtPwk3Pi.js;
+  flags compiled to `void 0`, but runtime gating prevented
+  static DCE. The prior “physically absent” prediction was
+  wrong. Provider and Math sentinel scans remain clean;
+  runtime deny verification transfers to A4-B.
   D-MATH-2: REVIEW-CLEARED, MERGE-ELIGIBLE.
 - D5 stub (a5d2068) confirmed = the v2.1 tag; stays dead (see
   DEAD D5).
+- D-VAL-1 (v1.6): PARKED pending dispatcher ruling.
+  adaptive-tutor’s `validate-package.ts` platform-boundary
+  check now FAILS against the post-Study-merge tree, naming the
+  two authorized Study `authority-*.md` documents. The check
+  and the now-authorized repository layout have drifted apart.
+  Required ruling: re-scope the platform-boundary check so the
+  authorized Study docs are in-bounds, or relocate the docs to
+  a path the existing boundary permits. WT-INSPECT’s discarded
+  tree held the only failure transcript, so the eventual card
+  must reproduce the failure before changing either side.
 
 ### E. Romeo Virtual Academy companion
 Reclassified VERIFY-WORTHY (v1.4):
@@ -664,7 +851,7 @@ as-built confirmed.
 
 ---
 
-## OPEN ITEMS (v1.4 presence check — absent from v1.3, added)
+## OPEN ITEMS (v1.6)
 - OI1. Generative image/video API policy: lesson specs
   referencing openai-images.json / kling-3-omni.json —
   prohibited pending explicit dispatcher ruling; video dirs
@@ -672,6 +859,10 @@ as-built confirmed.
 - OI2. Wave 1 Sessions 2/3 packaging spot-check: possible
   latent pre-correction package-artifact.ps1 defect.
 - OI3. MCR-002 vs Session 4 transfer-credit tension.
+- OI4. Khayyam originating session ID: UNCONFIRMED.
+- OI5. SYNC-1-C1: OPEN — HARD DEPLOY GATE. The next production
+  deploy must include the C1 fix or consciously accept C1 as a
+  named residual; see CL22 and the PARKED SYNC-1-C1 entry.
 
 ---
 
@@ -681,4 +872,4 @@ as-built confirmed.
 2. Year scopes for four students — gated on 1.
 3. Household onboarding to hosted sync — after 1.
 
-Last updated: August 4, 2026 (evening, v1.5) by Dad + dispatch desk.
+Last updated: August 4, 2026 (late evening, v1.6 final draft) by Dad + dispatch desk.
