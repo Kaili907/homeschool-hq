@@ -1,21 +1,20 @@
-# PARKED.md — Workstream Ledger for Manuel Academy (v1.4)
+# PARKED.md — Workstream Ledger for Manuel Academy (v1.5)
 
-Authoritative reconciliation of every known workstream. v1.4,
-August 4, 2026: closes A5 (hosted state EQUIVALENT-TO-AUDITED)
-with riders; resolves CL5 (both original claims true;
-apply-time evidenced); records the dashboard representation
-finding and reference hashes as standing
-knowledge; closes D-ENG-1; records the D-MATH-1 verdict and
-lifts the D-MATH-2 hold; reclassifies E-Romeo VERIFY-WORTHY;
-records CURR-1 (delivered, not merged); adds SCHED-1 (approved
-in principle); updates VOICE-PICKER; adds the sequencing
-snapshot and three presence-check open items.
+Authoritative reconciliation of every known workstream. v1.5,
+August 4, 2026 (evening): records three Aug 4 merges; closes
+SCHED-1 after its final fix and narrow re-review; promotes
+SYNC-1; records the stale-card sweep and machine-hygiene
+findings; and updates the sequencing snapshot and PMG-1 slot.
 
-Canonical master at time of writing: 6e78632 (PARKED v1.3;
-ancestors d28e94a A4-X exit-URL normalization, 6c9d024 A2
+Canonical master at time of writing:
+d9e5daf7ca6a6c0137febf31d8258591d3610067 (SCHED-1 merge;
+ancestors 8294d30 D-MATH-2, 86b159a PARKED v1.4, 6e78632
+PARKED v1.3, d28e94a A4-X exit-URL normalization, 6c9d024 A2
 merge, 6222ba4 PARKED v1.2, 88dbc39 recompose, 5115a00 JP-1,
 ab22a0c PARKED v1.0, 704a748 docs, 5be50ff v2.2). Published
 production remains v2.2 (5be50ff); Netlify auto-publish LOCKED.
+PMG-1's production-risk gate is SATISFIED; deploy decision is
+AVAILABLE, dispatcher-authorized only.
 
 Rules of this file:
 - No session re-investigates anything listed CLOSED or DEAD.
@@ -58,6 +57,27 @@ Rules of this file:
 - Dashboard hygiene (v1.4): the Supabase SQL editor persists
   unsaved tab text across sessions — select-all/delete the
   editor before running any dashboard query.
+- .gitignore rider (v1.5, queued for next code card): add
+  `supabase/.temp/` so link stamps stop appearing in status;
+  until then, `?? supabase/.temp/` is EXPECTED in hq-master
+  status output and is not a stop condition.
+
+## ESTATE SWEEP — standing knowledge (v1.5)
+- Stale-card machine inventory COMPLETE Aug 4: PC swept ×2,
+  laptop (AMPARO) ×1. Ordnance found and slated for deletion:
+  PC Downloads ×3 (CLAUDE (1).md, CODEX.md, Session-A1-R card),
+  laptop Downloads ×4 (two Jul-27 handoffs, Aug-2 status sweep,
+  provisioning report). Zero card-shaped files at any checkout
+  top level. Remaining legs: browser tab census + dispatcher
+  attestation (phone/devices/paper).
+- Laptop hygiene: 91 orphaned node_repl.exe observed idle —
+  routed to WORKTREE-GC laptop leg (taskkill only when no
+  sessions live).
+- PC estate: 38 worktrees enumerated, ~20 dead one-shots —
+  WORKTREE-GC scope.
+- The executed stale A2-R card originated from an open
+  superseded thread, not disk — tab census is the closing
+  control.
 
 ## KNOWN-FLAKY TESTS (watch; not yet actionable)
 - src/sync/useSync.mounted.test.tsx — failed once in a full-suite
@@ -235,6 +255,22 @@ Notes:
       convention, not substance.
   (c) Accepted residuals recorded as R2 (see ACCEPTED
       RESIDUALS).
+- CL15 (v1.5). PARKED v1.4 merged to master by fast-forward as
+  86b159a. Docs-only dispatcher exception invoked; four-command
+  witness complete.
+- CL16 (v1.5). D-MATH-2 merged to master with `--no-ff` as
+  8294d30; merge message references D-MATH-2-R. Merge footprint:
+  106 files, +22027/−27; conflict-free.
+- CL17 (v1.5). SCHED-1 merged to master with `--no-ff` as
+  d9e5daf; merge message references SCHED-1-R/R2/FR. Merge union:
+  13 files, +1256/−3; conflict-free. The desk authorization
+  predicted 10 files — desk arithmetic error, corrected
+  in-record; every merged file maps to a witnessed commit
+  footprint. Master at time of writing:
+  d9e5daf7ca6a6c0137febf31d8258591d3610067. Production remains
+  v2.2 (5be50ff); Netlify locked. PMG-1's production-risk gate
+  is SATISFIED; deploy decision AVAILABLE, dispatcher-authorized
+  only.
 
 ## DEAD — declared by Dad. Forensics only.
 - D1. Root pnpm workspace conversion. Unauthorized; npm baseline
@@ -266,17 +302,55 @@ Notes:
 
 ## PARKED — resumable by card only. Queue order = dependencies.
 
-Sequencing snapshot (v1.4 final): Study line A5 ✅ → A4-B next
+Sequencing snapshot (v1.5): three merges landed Aug 4 (86b159a
+ledger → 8294d30 math → d9e5daf sched). PMG-1 completed on
+d9e5daf: root gates pass; secondary tier exposed PMG-F1, a real
+assembly-browser harness defect. Production-risk gate SATISFIED;
+deploy decision AVAILABLE, dispatcher-authorized only. Harness
+line: PMG-F1 fix + narrow review. Code line: SYNC-1 → A4-B
 (readiness-RPC under authorization) → A6 BLOCKING before any
-student use. Ledger branch merges first (docs-only). D-MATH-2
-REVIEW-CLEARED, MERGE-ELIGIBLE. SCHED-1 review complete ×2;
-merge HELD pending SCHED-1-F + narrow re-review. CURR-1
-UNSAFE, parked (CURR-1-F/R2 + three-file composition per
-SCHED-1-R2/S3). D-ENG-3 queued. Critical path unchanged: five
+student use. Housekeeping: WORKTREE-GC after PMG-1, solo. Parked:
+CURR-1-F/R2 (+three-file composition), D-ENG-3, D-MATH-3
+(+English-disposition pin). Critical path unchanged: five
 placement assessments never administered; four daughters' year
 scopes gated on them.
 
-### A. Study Engine production line  [first in queue]
+SYNC-1 (v1.5): PROMOTED to next code card. Scope: surface
+saveAppState validation failures (log + visible Parent Hub
+signal; no silent halt). Motivation: root cause converting
+S1-class rejections into silent household-persistence bricks;
+absorbs the disclosed residual classes (gate day-membership gap,
+MAX_CANONICAL_NODES analogue, free-text looseness) as
+visible-error paths rather than individual patches.
+
+- PMG-1 (v1.5 addendum): COMPLETE with one finding. Root gates
+  on merged master d9e5daf: PASS — typecheck; full root vitest
+  102 files / 1281 tests green incl. postgres (first combined
+  run of math + sched: clean). Secondary tier: initial failure
+  of 4 engine files traced to fresh-worktree prerequisite gap
+  (four per-package node_modules absent; TESTING.md's npm ci
+  --prefix installs cure it; suite half-ran because the root
+  install supplied Vitest). Post-install: 8 of 9 suites green
+  (engine 31 files / 380 tests, matching the same-day
+  SCHED-1-R control). NINTH suite (test:assembly-browser)
+  FAILS 8/10 — REAL harness defect: playwright-global-setup.ts
+  starts Vite with configFile:false, so the
+  @frozen/tutor-math-r1 alias D-MATH-2 declared in the runtime
+  vite.config.ts never loads; subject-registry.ts fails to
+  resolve in the browser server. First genuine post-merge
+  finding — PMG-1 doing its job. NOT an application defect:
+  production build flags-off PASS; bundle greps 0 forbidden
+  providers and 0/9 Math R1 sentinels; known-flaky did not
+  fire. Gate-scope rule adopted: any branch touching
+  adaptive-tutor/study-engine gates on the secondary tier
+  (neither D-MATH-2's build nor review card required it, so
+  assembly-browser never ran against the math registry before
+  PMG-1). Disposition: PMG-F1 fix card issued (harness-only;
+  frozen mount untouchable) + narrow review to follow. Deploy
+  gate ruled SATISFIED as to production risk — deploy
+  AVAILABLE, dispatcher-authorized only.
+
+### A. Study Engine production line  [after SYNC-1]
 State (v1.4): MOUNT-2 fixed and merged (CL11). Route lifecycle
 e2e-verified (CL12). Exit-URL residual and A4-F2 closed (CL13).
 A5 closed (CL14): hosted state EQUIVALENT-TO-AUDITED. The only
@@ -518,7 +592,8 @@ as-built confirmed.
   tests fail 5/33 at 3ef761c, pass 33/33 at tip; both
   array-coercion holes confirmed closed. Persistence-safety
   sweep: no reachable UI path can persist a validator-rejected
-  value — no SYNC-1 condition attaches to this branch.
+  value; no silent-halt condition attached to this branch at
+  that review point.
   Template fidelity witnessed incl. epoch-anchored,
   timezone-independent Friday rotation. C2 (Friday policy):
   SATISFIED — dispatcher ruled KEEP Aug 4; as-built confirmed
@@ -541,9 +616,9 @@ as-built confirmed.
   findings: S1 — Add is uncapped; one Add on an
   imported/pulled collection already at the sync layer's
   array max (probe: 50,000→50,001, "oversized or sparse
-  array") produces validator-rejected state and, via the
-  SYNC-1 swallow, halts household persistence — automatic
-  condition per the review card's own rule. S2 —
+  array") produces validator-rejected state and, via silent
+  saveAppState validation failure, halts household persistence —
+  automatic condition per the review card's own rule. S2 —
   validateScheduleExtensions is looser than the UI contract
   (accepts empty days, 121-char labels, backward/equal
   ranges): junk-admission from non-validating clients, not a
@@ -559,6 +634,33 @@ as-built confirmed.
   not govern; duplicate findings are evidence, dispositioned
   on merits. One card = one session (the duplicate cost
   worktree contention + compute).
+- SCHED-1-F (v1.5): RUN Aug 4, DELIVERED-AND-WITNESSED, then
+  MERGED within d9e5daf. Tip d201d19 (witnessed; 1 commit, 8
+  files +341/−29, confinement verified — nothing under
+  adaptive-tutor/ or netlify/). S1: cap imported from the sync
+  layer's MAX_SYNC_ARRAY_ITEMS (50,000) as
+  MAX_SCHEDULE_EXTENSIONS — never hardcoded; addExtension
+  no-ops at cap (covers imported-at-max); UI disables Add with
+  a visible reason. S2: validateScheduleExtensions at exact UI
+  parity (label 1–120 trimmed, ≥1 valid SCHEDULE_DAYS member,
+  strict HH:MM, start<end). Red-proof: 9 fail / 11 pass at
+  2e7a7f4 → 20/20 at tip. Full root suite 102 files / 1279
+  green. One valid boundary fixture added (db-contract
+  constraint respected). Disclosed analogous looseness (gate
+  day-membership gap — UI-unreachable; MAX_CANONICAL_NODES
+  analogue; free-text class) ACCEPTED and routed to SYNC-1 by
+  dispatcher ruling.
+- SCHED-1-FR (v1.5): RUN Aug 4, verdict SAFE unconditional.
+  Blob-identity red-proof (tip test blobs over base
+  implementation blobs, SHA-matched); independent 50,000-item
+  import/pull probe — gate false, add no-op, UI reason shown,
+  validator ok, persistence ok; parity matrix 8/8; one-way
+  import coreDay→provenance confirmed, no cycle; both SYNC-1
+  residuals verified as characterized (node-budget analogue
+  quantified: 45,445 five-day blocks < array cap). Typecheck
+  clean; 102/1279 green. Reviewer cleanup of red-proof
+  artifacts was policy-blocked — untracked leftovers in
+  hq-sched1-fr, routed to WORKTREE-GC. SCHED-1: CLOSED.
 
 ---
 
@@ -579,4 +681,4 @@ as-built confirmed.
 2. Year scopes for four students — gated on 1.
 3. Household onboarding to hosted sync — after 1.
 
-Last updated: August 4, 2026 (v1.4) by Dad + dispatch desk.
+Last updated: August 4, 2026 (evening, v1.5) by Dad + dispatch desk.
