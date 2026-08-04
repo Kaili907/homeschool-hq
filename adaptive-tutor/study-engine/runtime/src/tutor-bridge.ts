@@ -16,15 +16,8 @@ import {
   TutorResponseSchema,
   validateSkillGraph,
   validateWithSchema,
+  type TutorProgram,
 } from "../../../core/index.ts";
-import {
-  englishRuntimeHooks,
-  englishTutorProgram,
-} from "../../../examples/english-interaction.ts";
-import {
-  mathRuntimeHooks,
-  mathTutorProgram,
-} from "../../../examples/math-interaction.ts";
 import { inspectContractVersion } from "../../contracts/versioning.ts";
 import {
   learningEvidenceSchema,
@@ -32,6 +25,10 @@ import {
 } from "../../schemas/learning-evidence.schema.ts";
 import type { AcceptedEventLedgerPort } from "./ledger.ts";
 import { toLayeredSafetyConfiguration } from "./safety.ts";
+import {
+  resolveTutorSubjectRegistration,
+  selectTutorProgram,
+} from "./subject-registry.ts";
 
 export interface SafeTutorBridgeRequest {
   readonly requestId: string;
@@ -136,21 +133,16 @@ function bridgeLearningEvidenceValidation(value: unknown) {
 }
 
 /**
- * Session 9's sole public Tutor bridge.
- *
- * Tutor Core construction, start, and submit all occur inside the callback
- * authorized by the accepted bridge. Urgent and uncertain disclosures
- * therefore stop before Tutor Core sees the transient learner text.
+ * Adapts a registered program to the caller's expected answer: the first
+ * diagnostic item becomes a short-answer item accepting the caller-supplied
+ * answer, and the remaining diagnostic items are preserved so the engine can
+ * still walk the full diagnostic set before classifying misconceptions.
  */
-export async function runSafeTutorBridge(
-  request: SafeTutorBridgeRequest,
-  dependencies: SafeTutorBridgeDependencies,
-): Promise<SafeTutorBridgeResult> {
-  const baseProgram =
-    request.subject === "math" ? mathTutorProgram : englishTutorProgram;
-  const hooks =
-    request.subject === "math" ? mathRuntimeHooks : englishRuntimeHooks;
-  const sourceItem = baseProgram.diagnosticItems[0];
+export function adaptProgramToExpectedAnswer(
+  baseProgram: TutorProgram,
+  expectedAnswer: string,
+): TutorProgram {
+  const [sourceItem, ...remainingItems] = baseProgram.diagnosticItems;
   if (!sourceItem) {
     throw new Error("Tutor Core program has no diagnostic item.");
   }
@@ -169,12 +161,35 @@ export async function runSafeTutorBridge(
     identifyingInformationRequested:
       sourceItem.identifyingInformationRequested,
     kind: "short-answer" as const,
-    acceptedAnswers: [request.expectedAnswer],
+    acceptedAnswers: [expectedAnswer],
     caseSensitive: false,
     trimWhitespace: true,
     normalization: "basic-text" as const,
   };
-  const program = { ...baseProgram, diagnosticItems: [adaptedItem] };
+  return {
+    ...baseProgram,
+    diagnosticItems: [adaptedItem, ...remainingItems],
+  };
+}
+
+/**
+ * Session 9's sole public Tutor bridge.
+ *
+ * Tutor Core construction, start, and submit all occur inside the callback
+ * authorized by the accepted bridge. Urgent and uncertain disclosures
+ * therefore stop before Tutor Core sees the transient learner text.
+ */
+export async function runSafeTutorBridge(
+  request: SafeTutorBridgeRequest,
+  dependencies: SafeTutorBridgeDependencies,
+): Promise<SafeTutorBridgeResult> {
+  const registration = resolveTutorSubjectRegistration(request.subject);
+  const baseProgram = selectTutorProgram(registration, request.skillId);
+  const hooks = registration.hooks;
+  const program = adaptProgramToExpectedAnswer(
+    baseProgram,
+    request.expectedAnswer,
+  );
   const skillRegistry = createGovernedIdRegistry([
     { studyId: request.skillId, tutorId: program.targetSkillId },
   ]);

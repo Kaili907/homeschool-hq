@@ -3,6 +3,13 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   root: fileURLToPath(new URL("..", import.meta.url)),
+  resolve: {
+    alias: {
+      "@frozen/tutor-math-r1": fileURLToPath(
+        new URL("../../subjects/math/index.ts", import.meta.url),
+      ),
+    },
+  },
   test: {
     environment: "node",
     globals: true,
