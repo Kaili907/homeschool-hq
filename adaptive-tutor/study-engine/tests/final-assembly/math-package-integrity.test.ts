@@ -4,6 +4,15 @@ import { fileURLToPath } from "node:url";
 
 const packageRoot = new URL("../../../subjects/math/", import.meta.url);
 
+/**
+ * SHA-256 of the frozen package's own SHA256SUMS.txt, recorded outside the
+ * protected tree so an in-place edit plus manifest regeneration cannot pass.
+ * Interior custody chain: canonical archive ee9d15cdf1184380add17ebdd8f93f01
+ * fde3f0915f491d0a4df96798b4f52351 -> its SHA256SUMS.txt -> this constant.
+ */
+const EXPECTED_SUMS_FILE_SHA256 =
+  "a9c44585d36e120dfac6b95aade0cf77763cabeff1026490672244dbc87f27ee";
+
 async function fileSha256(relativePath: string): Promise<string> {
   const bytes = await readFile(
     fileURLToPath(new URL(relativePath, packageRoot)),
@@ -12,6 +21,15 @@ async function fileSha256(relativePath: string): Promise<string> {
 }
 
 describe("frozen Math R1 package integrity", () => {
+  it("anchors the manifest itself to the frozen custody hash", async () => {
+    const bytes = await readFile(
+      fileURLToPath(new URL("SHA256SUMS.txt", packageRoot)),
+    );
+    expect(createHash("sha256").update(bytes).digest("hex")).toBe(
+      EXPECTED_SUMS_FILE_SHA256,
+    );
+  });
+
   it("matches every interior file to the package's SHA256SUMS.txt", async () => {
     const manifest = await readFile(
       fileURLToPath(new URL("SHA256SUMS.txt", packageRoot)),
@@ -31,6 +49,9 @@ describe("frozen Math R1 package integrity", () => {
         return { hash, path: path.replace(/^\.\//, "") };
       });
     expect(entries).toHaveLength(91);
+    expect(new Set(entries.map((entry) => entry.path)).size).toBe(
+      entries.length,
+    );
     for (const entry of entries) {
       expect(`${entry.path}: ${await fileSha256(entry.path)}`).toBe(
         `${entry.path}: ${entry.hash}`,

@@ -36,6 +36,11 @@ const FORBIDDEN_PRODUCTION_BUNDLE_MARKERS = [
   'learner:synthetic-grade5-',
   'LOCAL DEVELOPMENT ONLY',
   'session12-local-forced-outcome-v1',
+
+  // Frozen Math R1 subject package content (D-MATH-2): registered behind the
+  // study runtime's subject registry, never in any production bundle.
+  'Adaptive Math Intervention Content',
+  'math-seq-pv-regroup-v1',
 ] as const
 
 function outputText(result: Rollup.RollupOutput | readonly Rollup.RollupOutput[]): string {
