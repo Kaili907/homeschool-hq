@@ -3,20 +3,16 @@ import type { AcademyAssessmentAttempt, ISODate, Profile, SchoolYear } from '../
 import { isoToday } from '../../appState'
 import { isSchoolYearConfigured, nudgePointer, resolvePointer } from '../../curriculum/pacing'
 import { enabledAcademyGradeFromHost } from '../../academy/featureFlag'
-import { loadCatalog, loadProtectedUnit } from '../../academy/contentClient'
-import {
-  ACADEMY_SUBJECT_LABELS,
-  type AcademyCatalog,
-  type AcademyProtectedUnitChunk,
-} from '../../academy/contentTypes'
+import { loadCatalog } from '../../academy/contentClient'
+import { ACADEMY_SUBJECT_LABELS, type AcademyCatalog } from '../../academy/contentTypes'
 import { courseProgress, masteryOf, recordAssessmentAttempt } from '../../academy/academyState'
 
 /**
- * CURR-1 — the parent-PIN-gated Academy panel. This is the ONLY surface that
- * fetches the protected curriculum chunks (scoring guidance, assessment
- * interpretation); student views never do. Pacing controls ride the existing
- * Pacing authority (pointers/nudges keyed by course id) — nudges shift
- * expectations, never student data and never the source curriculum.
+ * CURR-1 — the parent-PIN-gated Academy panel. It reads only the public-safe
+ * catalog plus persisted progress; protected guidance is never shipped by the
+ * static host. Pacing controls ride the existing Pacing authority
+ * (pointers/nudges keyed by course id) — nudges shift expectations, never
+ * student data and never the source curriculum.
  */
 
 interface Props {
@@ -228,23 +224,9 @@ function UnitScoring({
   onPatch: (update: (prev: Profile) => Profile) => void
 }) {
   const [unitNumber, setUnitNumber] = useState<number | null>(null)
-  const [chunk, setChunk] = useState<AcademyProtectedUnitChunk | null>(null)
   const [percent, setPercent] = useState('')
   const [outcome, setOutcome] = useState<AcademyAssessmentAttempt['outcome']>('secure')
   const [saved, setSaved] = useState(false)
-
-  useEffect(() => {
-    let current = true
-    setChunk(null)
-    setSaved(false)
-    if (unitNumber == null) return
-    loadProtectedUnit(course.courseId, unitNumber)
-      .then((c) => current && setChunk(c))
-      .catch(() => current && setChunk(null))
-    return () => {
-      current = false
-    }
-  }, [course.courseId, unitNumber])
 
   const unit = course.units.find((u) => u.unitNumber === unitNumber)
   const assessmentId = unit ? `${course.courseId}-u${String(unit.unitNumber).padStart(2, '0')}-assessment` : null
@@ -256,7 +238,10 @@ function UnitScoring({
         Unit detail{' '}
         <select
           value={unitNumber ?? ''}
-          onChange={(e) => setUnitNumber(e.target.value ? Number(e.target.value) : null)}
+          onChange={(e) => {
+            setUnitNumber(e.target.value ? Number(e.target.value) : null)
+            setSaved(false)
+          }}
           className="ml-2 rounded-lg border border-slate-300 bg-white px-2 py-1 font-semibold"
         >
           <option value="">choose a unit…</option>
@@ -268,16 +253,15 @@ function UnitScoring({
         </select>
       </label>
 
-      {unit && chunk && (
+      {unit && (
         <div className="mt-3 space-y-3">
           <details className="rounded-lg border border-slate-200 p-3">
             <summary className="cursor-pointer text-sm font-bold text-slate-700">
-              Scoring guidance &amp; mastery evidence ({unit.lessonIds.length} lessons)
+              Mastery evidence ({unit.lessonIds.length} lessons)
             </summary>
             <ul className="mt-2 space-y-2">
               {unit.lessonIds.map((lessonId) => {
                 const state = learner.academy?.lessons[lessonId]
-                const guidance = chunk.lessons[lessonId]?.answer_or_scoring_guidance
                 return (
                   <li key={lessonId} className="rounded-lg bg-slate-50 p-2 text-sm">
                     <span className="font-bold text-slate-800">{lessonId}</span>{' '}
@@ -286,7 +270,6 @@ function UnitScoring({
                         ? `${state.status} · mastery ${masteryOf(state)} · ${state.occasions.length} occasion${state.occasions.length === 1 ? '' : 's'}`
                         : 'not started'}
                     </span>
-                    {guidance && <p className="mt-1 font-semibold text-slate-600">{guidance}</p>}
                   </li>
                 )
               })}
@@ -296,15 +279,6 @@ function UnitScoring({
           {unit.hasAssessment && assessmentId && (
             <div className="rounded-lg border border-indigo-200 bg-indigo-50 p-3">
               <h4 className="text-sm font-bold text-indigo-900">Unit assessment scoring</h4>
-              {chunk.assessmentMasteryInterpretation && (
-                <ul className="mt-1 text-sm font-semibold text-indigo-800">
-                  {Object.entries(chunk.assessmentMasteryInterpretation).map(([k, v]) => (
-                    <li key={k}>
-                      <span className="font-bold">{k}:</span> {v}
-                    </li>
-                  ))}
-                </ul>
-              )}
               {attempts.length > 0 && (
                 <p className="mt-2 text-sm font-semibold text-indigo-900">
                   Attempts:{' '}

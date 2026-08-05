@@ -36,7 +36,10 @@ const academy: AcademyState = {
 
 function stateWith(mutate: (s: AppState) => void): unknown {
   const s = defaultAppState()
-  s.profiles.p2 = { ...emptyProfile('p2', 'Fifth Grader', '5'), academy }
+  s.profiles.p2 = {
+    ...emptyProfile('p2', 'Fifth Grader', '5'),
+    academy: JSON.parse(JSON.stringify(academy)) as AcademyState,
+  }
   mutate(s)
   return JSON.parse(JSON.stringify(s))
 }
@@ -99,6 +102,44 @@ describe('CURR-1 sync validation for academy grades + state', () => {
         ;(s.profiles.p2 as unknown as Record<string, unknown>).academy = cloned
       })
       expect(validateAppStateForSync(candidate).ok).toBe(false)
+    }
+  })
+
+  it('accepts composed Academy and SCHED-1 state on the same profile', () => {
+    const candidate = stateWith((s) => {
+      s.profiles.p2.scheduleExtensions = [
+        {
+          id: 'academy-extra-1',
+          label: 'Academy lab',
+          days: ['Fri'],
+          start: '13:00',
+          end: '13:30',
+        },
+      ]
+    })
+    expect(validateAppStateForSync(candidate).ok).toBe(true)
+  })
+
+  it('rejects out-of-domain academy percentages, counters, and cross-grade state', () => {
+    const cases: ((s: AppState) => void)[] = [
+      (s) => {
+        s.profiles.p2.academy!.assessments['ma-g5-mathematics-u01-assessment'][0].percent = 101
+      },
+      (s) => {
+        s.profiles.p2.academy!.assessments['ma-g5-mathematics-u01-assessment'][0].percent = -1
+      },
+      (s) => {
+        s.profiles.p2.academy!.lessons['ma-g5-mathematics-u01-l01'].segmentIndex = -1
+      },
+      (s) => {
+        s.profiles.p2.academy!.lessons['ma-g5-mathematics-u01-l01'].revisits = -1
+      },
+      (s) => {
+        s.profiles.p2.grade = '7'
+      },
+    ]
+    for (const mutate of cases) {
+      expect(validateAppStateForSync(stateWith(mutate)).ok).toBe(false)
     }
   })
 

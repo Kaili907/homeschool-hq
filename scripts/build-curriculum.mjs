@@ -6,13 +6,11 @@
 // every build) as small per-unit chunks so the app can lazy-load one unit at a
 // time instead of shipping the whole 20MB release on first paint.
 //
-// Student/adult content boundary: student chunks OMIT `answer_or_scoring_guidance`
+// Public content boundary: browser chunks OMIT `answer_or_scoring_guidance`
 // (teacher-only scoring), `adaptive_tutor_routes` (tutor-facing), and assessment
-// `mastery_interpretation` (scoring thresholds). Those land in parallel
-// `protected-unit-*.json` chunks that only the PIN-gated parent surfaces and the
-// tutor adapter fetch. NOTE: this is a projection boundary, not server-side auth —
-// the host is a static SPA with no per-request authorization; the protected path
-// exists so a future server can gate it.
+// `mastery_interpretation` (scoring thresholds). The static host cannot authorize
+// per-request access, so protected fields remain only in the immutable repository
+// source and are never projected into public/ or the production build.
 //
 // The script re-verifies the release invariants (counts, ID uniqueness, schedule
 // coverage) and fails the build loudly on any mismatch.
@@ -109,18 +107,6 @@ for (const c of courses) {
       unit: unitMeta,
       lessons: lessons.map(studentLesson),
       assessment: assessment ? studentAssessment(assessment) : null,
-    })
-    emit(`courses/${c.courseId}/protected-unit-${nn}.json`, {
-      releaseVersion: VERSION,
-      courseId: c.courseId,
-      unitNumber,
-      lessons: Object.fromEntries(
-        lessons.map((l) => [
-          l.lesson_id,
-          Object.fromEntries(PROTECTED_LESSON_FIELDS.map((f) => [f, l[f] ?? null])),
-        ]),
-      ),
-      assessmentMasteryInterpretation: assessment?.mastery_interpretation ?? null,
     })
   }
 }

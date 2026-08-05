@@ -2,7 +2,6 @@ import type { AcademyGrade } from '../types'
 import {
   ACADEMY_RELEASE_VERSION,
   type AcademyCatalog,
-  type AcademyProtectedUnitChunk,
   type AcademyRelease,
   type AcademySchedule,
   type AcademyUnitChunk,
@@ -60,17 +59,6 @@ export function loadUnit(
 ): Promise<AcademyUnitChunk> {
   const nn = String(unitNumber).padStart(2, '0')
   return fetchChunk(`${base(version)}/courses/${courseId}/unit-${nn}.json`)
-}
-
-/** Adult/tutor-only chunk — call ONLY from PIN-gated parent surfaces or the
- * tutor adapter, never from a student view (see scripts/build-curriculum.mjs). */
-export function loadProtectedUnit(
-  courseId: string,
-  unitNumber: number,
-  version = ACADEMY_RELEASE_VERSION,
-): Promise<AcademyProtectedUnitChunk> {
-  const nn = String(unitNumber).padStart(2, '0')
-  return fetchChunk(`${base(version)}/courses/${courseId}/protected-unit-${nn}.json`)
 }
 
 /** Test seam: forget every cached chunk. */

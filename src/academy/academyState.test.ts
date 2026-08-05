@@ -145,6 +145,19 @@ describe('CURR-1 completion, duplicates, reteach', () => {
     expect(p.academy!.lessons[L1].completedAt).toBeDefined()
     expect(p.academy!.lessons[L1].segmentIndex).toBe(0)
   })
+
+  it('the revisit path reopens the check and records a revisit when completed again', () => {
+    let p = startLesson(enrolled(), L1, NOW)
+    p = submitLessonCheck(p, L1, check(true))
+    p = reopenLesson(p, L1, 0)
+    expect(p.academy!.lessons[L1].status).toBe('in-progress')
+    p = submitLessonCheck(p, L1, check(true, 'guided', '2026-08-06'))
+    expect(p.academy!.lessons[L1]).toMatchObject({
+      status: 'complete',
+      completedAt: '2026-08-04T15:00:00.000Z',
+      revisits: 1,
+    })
+  })
 })
 
 describe('CURR-1 mastery rule (multi-occasion, guided vs independent)', () => {

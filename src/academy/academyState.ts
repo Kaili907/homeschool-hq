@@ -130,7 +130,7 @@ export function reopenLesson(p: Profile, lessonId: string, segmentIndex = 0): Pr
   if (!lessonOf(p, lessonId)) return p
   return patchLesson(p, lessonId, (prev) => ({
     ...prev!,
-    status: prev!.completedAt ? prev!.status : 'in-progress',
+    status: 'in-progress',
     segmentIndex,
   }))
 }

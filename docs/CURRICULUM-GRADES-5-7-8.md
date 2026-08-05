@@ -21,13 +21,13 @@ independently re-verified at import time.
 
 ## Student/adult separation
 
-Student chunks omit `answer_or_scoring_guidance`, `adaptive_tutor_routes`, and
-assessment `mastery_interpretation`; those live in parallel
-`protected-unit-NN.json` chunks fetched only by the parent-PIN-gated hub panel
-and the tutor adapter. NOTE: this host is a static SPA with no per-request
-authorization, so the protected path is a projection boundary (student flows
-never fetch it — walkthrough-verified), not server-side enforcement. A future
-server can gate `/curriculum/*/courses/*/protected-*` directly.
+Browser chunks omit `answer_or_scoring_guidance`, `adaptive_tutor_routes`, and
+assessment `mastery_interpretation`. Because this host is a static SPA with no
+per-request authorization, those fields remain only in the immutable repository
+source: the generator emits no protected chunks and the browser has no protected
+content loader. The Parent Hub retains progress, mastery evidence, assessment
+entry, and pacing controls without publishing guidance. Serving protected
+guidance later requires a separately reviewed authenticated surface.
 
 ## Identity, state, persistence
 
@@ -63,8 +63,9 @@ whose grade flag is enabled; exits and sign-out normalize the URL back to `/`
 
 ## Adapters (versioned contracts, not yet mounted)
 
-- `src/academy/adapters/tutorContextAdapter.ts` (v1): lesson + protected tutor
-  routes → Tutor context; pins `revealsAnswers: false` and
+- `src/academy/adapters/tutorContextAdapter.ts` (v1): accepts an explicitly
+  supplied protected input from a future authenticated surface and maps it to
+  Tutor context; pins `revealsAnswers: false` and
   `gradedWorkPolicy: 'never-complete-graded-work'`. Mounting waits on the
   parked tutor host line (PARKED.md §D).
 - `src/academy/adapters/studyContextAdapter.ts` (v1): schedule day →

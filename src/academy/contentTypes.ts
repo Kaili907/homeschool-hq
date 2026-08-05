@@ -16,9 +16,8 @@ export interface AcademyLessonSegment {
   teacher_or_tutor_action: string
 }
 
-/** Student-safe lesson record. NOTE: `answer_or_scoring_guidance` and
- * `adaptive_tutor_routes` are deliberately absent — they live in the protected
- * chunk (fetched only by PIN-gated adult surfaces and the tutor adapter). */
+/** Student-safe lesson record. `answer_or_scoring_guidance` and
+ * `adaptive_tutor_routes` are deliberately absent from every browser chunk. */
 export interface AcademyLesson {
   schema_version: string
   lesson_id: string
@@ -80,7 +79,8 @@ export interface AcademyUnitChunk {
   assessment: AcademyAssessment | null
 }
 
-/** Adult/tutor-only projection of one unit (parent panel + tutor adapter). */
+/** Protected input contract reserved for a future authenticated tutor adapter.
+ * No browser content loader or static-build projection produces this shape. */
 export interface AcademyProtectedUnitChunk {
   releaseVersion: string
   courseId: string

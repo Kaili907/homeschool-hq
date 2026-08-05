@@ -84,6 +84,14 @@ function finiteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value)
 }
 
+function nonNegativeInteger(value: unknown): value is number {
+  return finiteNumber(value) && Number.isInteger(value) && value >= 0
+}
+
+function percentage(value: unknown): value is number {
+  return finiteNumber(value) && value >= 0 && value <= 100
+}
+
 function text(value: unknown, max = MAX_SYNC_STRING_LENGTH): value is string {
   return typeof value === 'string' && value.length <= max
 }
@@ -557,11 +565,12 @@ function validatePacing(value: unknown): boolean {
 }
 
 // CURR-1: Manuel Academy enrollment + progress (see types.AcademyState).
-function validateAcademy(value: unknown): boolean {
+function validateAcademy(value: unknown, profileGrade: unknown): boolean {
   return (
     plainRecord(value) &&
     text(value.releaseVersion, 64) &&
     ACADEMY_GRADES.has(String(value.grade)) &&
+    value.grade === profileGrade &&
     timestamp(value.enrolledAt) &&
     boundedArray(value.courseIds, identifier) &&
     boundedRecord(
@@ -569,11 +578,11 @@ function validateAcademy(value: unknown): boolean {
       (lesson) =>
         plainRecord(lesson) &&
         ACADEMY_LESSON_STATUSES.has(String(lesson.status)) &&
-        finiteNumber(lesson.segmentIndex) &&
+        nonNegativeInteger(lesson.segmentIndex) &&
         text(lesson.releaseVersion, 64) &&
         timestamp(lesson.startedAt) &&
         optional(lesson.completedAt, timestamp) &&
-        optional(lesson.revisits, finiteNumber) &&
+        optional(lesson.revisits, nonNegativeInteger) &&
         boundedArray(
           lesson.occasions,
           (occasion) =>
@@ -590,7 +599,7 @@ function validateAcademy(value: unknown): boolean {
         (attempt) =>
           plainRecord(attempt) &&
           isoDate(attempt.date) &&
-          finiteNumber(attempt.percent) &&
+          percentage(attempt.percent) &&
           ACADEMY_ASSESSMENT_OUTCOMES.has(String(attempt.outcome)),
       ),
     )
@@ -685,7 +694,7 @@ function validateProfileOptionals(value: Record<string, unknown>): boolean {
       ),
     ) &&
     optional(value.scheduleExtensions, validateScheduleExtensions) &&
-    optional(value.academy, validateAcademy)
+    optional(value.academy, (candidate) => validateAcademy(candidate, value.grade))
   )
 }
 
