@@ -11,11 +11,12 @@ import { PlansView } from './PlansView'
 import { StatusView } from './StatusView'
 import { StudyParentPanel, type StudyParentLearnerOption } from './StudyParentPanel'
 import { AcademyParentPanel } from './AcademyParentPanel'
+import { StudyLocalSafetyStopsPanel } from './StudyLocalSafetyStopsPanel'
 import { enabledAcademyGradeFromHost } from '../../academy/featureFlag'
 import type { StudyPortBundle } from '../../study/ports'
 import type { StudyAdultAuthorization } from '../../study/types'
 
-export type HubTab = 'today' | 'calendar' | 'plans' | 'status' | 'study' | 'schedule' | 'academy'
+export type HubTab = 'today' | 'calendar' | 'plans' | 'status' | 'study' | 'safety' | 'schedule' | 'academy'
 
 export interface ParentHubStudyIntegration {
   readonly householdRef: string
@@ -63,6 +64,7 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
     ...(studyEnabled ? [{ id: 'study' as const, label: 'Study', emoji: '🧭' }] : []),
   ]
 
+  tabs.push({ id: 'safety', label: 'Safety', emoji: '🛟' })
   // The hub defaults its start date from MM's mindset start date, so Dad needn't re-enter it.
   const sy = state.schoolYear ?? defaultSchoolYear(state.mindsetStartDate ?? '')
   const setSchoolYear = (next: typeof sy) => onStateChange((s) => ({ ...s, schoolYear: next }))
@@ -180,6 +182,7 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
               <p className="mt-1 text-amber-900">{studyUnavailableReason ?? 'Verify the authenticated household and parent authorization first.'}</p>
             </section>
           )}
+          {tab === 'safety' && <StudyLocalSafetyStopsPanel />}
         </div>
       </div>
     </div>
