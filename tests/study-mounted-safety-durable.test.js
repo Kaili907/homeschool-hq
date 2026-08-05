@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { createStudySafetyHandler } from '../netlify/functions/study-safety-classify.js'
+import { createMountedStudySafetyPort } from '../src/study/safety/mountedPort'
 
 const IDS = Object.freeze({
   actor: '11111111-1111-4111-8111-111111111111',
@@ -9,23 +10,8 @@ const IDS = Object.freeze({
   session: '55555555-5555-4555-8555-555555555555',
 })
 
-function event() {
-  return {
-    httpMethod: 'POST',
-    path: '/api/study/safety/classify',
-    headers: { authorization: 'Bearer test.access.token', 'content-type': 'application/json' },
-    body: JSON.stringify({
-      schemaVersion: 1,
-      requestId: IDS.request,
-      studentRef: { kind: 'academy-student-id', value: IDS.student },
-      sessionId: IDS.session,
-      transientText: 'I am going to hurt myself.',
-    }),
-  }
-}
-
 describe('mounted safety durable capture', () => {
-  it('keeps a minimized flagged proposal across a simulated handler process restart', async () => {
+  it('keeps a mounted, minimized flagged proposal across a simulated browser and handler restart', async () => {
     // The Map stands in only for the external database. Handler instances are
     // discarded and recreated; no browser/local Study service owns this state.
     const durableDatabase = new Map()
@@ -113,20 +99,46 @@ describe('mounted safety durable capture', () => {
       now: () => Date.parse('2026-08-04T12:00:00.000Z'),
     }
 
-    const firstProcess = createStudySafetyHandler(common)
-    const first = await firstProcess(event())
-    expect(first.statusCode).toBe(200)
-    expect(JSON.parse(first.body)).toMatchObject({
-      classification: 'urgent',
-      learner: { adultHelpState: 'proposed-not-delivered' },
-      continueToTutorCore: false,
+    let activeHandler = createStudySafetyHandler(common)
+    const createBrowserPort = () => createMountedStudySafetyPort({
+      getAccessToken: async () => 'test.access.token',
+      fetchImpl: async (_url, init) => {
+        const response = await activeHandler({
+          httpMethod: 'POST',
+          path: '/api/study/safety/classify',
+          headers: Object.fromEntries(new Headers(init.headers).entries()),
+          body: String(init.body),
+        })
+        return {
+          ok: response.statusCode >= 200 && response.statusCode < 300,
+          json: async () => JSON.parse(response.body),
+        }
+      },
+    })
+    const mountedRequest = {
+      scope: {
+        householdRef: IDS.household,
+        learnerRef: IDS.student,
+        sessionRef: IDS.session,
+      },
+      requestRef: IDS.request,
+      studentRef: { kind: 'academy-student-id', value: IDS.student },
+      contentKind: 'tutor-output',
+      transientText: 'I am going to hurt myself.',
+    }
+
+    const first = await createBrowserPort().evaluate(mountedRequest)
+    expect(first).toEqual({
+      outcome: 'urgent',
+      mayContinue: false,
+      adultHelpState: 'proposed-not-delivered',
     })
     expect(durableDatabase.size).toBe(1)
 
     const storedBeforeRestart = structuredClone([...durableDatabase.values()][0])
-    const secondProcess = createStudySafetyHandler(common)
-    const replay = await secondProcess(event())
-    expect(replay.statusCode).toBe(200)
+    activeHandler = createStudySafetyHandler(common)
+    const replay = await createBrowserPort().evaluate(mountedRequest)
+    expect(replay).toEqual(first)
     expect(durableDatabase.size).toBe(1)
     expect([...durableDatabase.values()][0]).toEqual(storedBeforeRestart)
     expect(JSON.stringify(storedBeforeRestart)).not.toContain('I am going to hurt myself')
