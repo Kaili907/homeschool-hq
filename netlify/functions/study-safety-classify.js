@@ -26,6 +26,48 @@ import { verifySupabaseBearer } from './_shared/supabase-auth.js'
 const CLASSIFY_PATHS = new Set(['/api/study/safety/classify', '/.netlify/functions/study-safety-classify'])
 const READINESS_PATH = '/api/study/safety/readiness'
 
+function defaultBootLogger(event) {
+  console.info(JSON.stringify(event))
+}
+
+/**
+ * Production boot boundary. The generic factory below remains injectable for
+ * tests, but the deployed export must never accept a local/demo classifier.
+ */
+export function createProductionStudySafetyHandler(overrides = {}) {
+  const env = overrides.env ?? process.env
+  const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
+  const productionPorts = overrides.productionPorts ?? createSupabaseStudySafetyPorts({ env, fetchImpl })
+  const monitoring = overrides.monitoring ?? productionPorts.monitoring ?? NOOP_MONITORING_PORT
+  const classifier = overrides.classifier ?? createAnthropicSafetyClassifier({
+    env,
+    fetchImpl,
+    monitoring,
+  })
+  if (
+    classifier?.mode !== 'production' ||
+    typeof classifier.classifierVersion !== 'string' ||
+    classifier.classifierVersion.trim() === '' ||
+    typeof classifier.classify !== 'function'
+  ) {
+    throw new Error('STUDY SAFETY STARTUP ABORTED: production handler requires classifier mode "production"')
+  }
+  const logBoot = overrides.logBoot ?? defaultBootLogger
+  logBoot(Object.freeze({
+    event: 'study_safety.classifier_boot',
+    mode: 'production',
+    classifierVersion: classifier.classifierVersion,
+  }))
+  return createStudySafetyHandler({
+    ...overrides,
+    env,
+    fetchImpl,
+    productionPorts,
+    monitoring,
+    classifier,
+  })
+}
+
 export function createStudySafetyHandler(overrides = {}) {
   const env = overrides.env ?? process.env
   const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
@@ -178,4 +220,4 @@ export function createStudySafetyHandler(overrides = {}) {
   }
 }
 
-export const handler = createStudySafetyHandler()
+export const handler = createProductionStudySafetyHandler()
