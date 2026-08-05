@@ -215,7 +215,9 @@ export interface ProfileTotals {
 
 // ---------- M4 high school mode (all additive & optional; no schema bump) ----------
 
-/** Rolling practice tally for one HS unit (geometry unit or algebra topic). */
+/** Rolling practice tally for one practice unit (HS geometry unit or algebra
+ * topic; MOUNT-G5-MATH also tallies Grade 5 curriculum units under `g5-math-uNN`
+ * keys through the same hsStats record and the same recordHsAnswer writer). */
 export interface HsUnitStat {
   attempts: number
   correct: number
