@@ -1,4 +1,4 @@
-import { finishChoices, fromPool, pick, ri } from '../../genUtils'
+import { finishChoices, fromPool, pick, ri, shuffle } from '../../genUtils'
 import type { Difficulty } from '../../types'
 
 /**
@@ -15,10 +15,21 @@ export const UNIT2_ITEM_TYPE_CHECKLIST = [
       'Relate the values of the same digit in adjacent places as 10 times or one tenth, including across ones and tenths.',
   },
   {
-    id: 'powers-of-ten-pattern',
+    id: 'power-of-ten-notation',
+    standard: '5.NBT.2',
+    coverage: 'Interpret and use whole-number exponents to denote powers of ten.',
+  },
+  {
+    id: 'powers-of-ten-calculation',
     standard: '5.NBT.2',
     coverage:
       'Multiply and divide whole numbers and decimals by powers of ten written with whole-number exponents.',
+  },
+  {
+    id: 'powers-of-ten-pattern',
+    standard: '5.NBT.2',
+    coverage:
+      'Explain zero-count and decimal-point-placement patterns when multiplying or dividing by powers of ten.',
   },
   {
     id: 'decimal-number-name',
@@ -74,10 +85,24 @@ export type Unit2ItemModel =
       secondPlace: DecimalPlace
     }
   | {
+      kind: 'power-of-ten-notation'
+      exponent: number
+      value: string
+      direction: 'power-to-value' | 'value-to-exponent' | 'value-to-power'
+    }
+  | {
+      kind: 'powers-of-ten-calculation'
+      operand: string
+      operation: 'multiply' | 'divide'
+      exponent: number
+    }
+  | {
       kind: 'powers-of-ten-pattern'
       operand: string
       operation: 'multiply' | 'divide'
       exponent: number
+      result: string
+      focus: 'zero-count' | 'decimal-placement'
     }
   | {
       kind: 'decimal-number-name'
@@ -114,6 +139,7 @@ export type Unit2ItemModel =
       columns: readonly DecimalPlace[]
       digits: readonly number[]
       displayPlaces: 1 | 2 | 3
+      direction: 'chart-to-numeral' | 'numeral-to-chart'
     }
 
 export interface Unit2GeneratedItem {
@@ -231,19 +257,12 @@ function decimalName(scaled: number, places: 1 | 2 | 3): string {
 
 function expandedForm(scaled: number, places: 1 | 2 | 3): string {
   const terms: string[] = []
-  const columns: readonly [number, number][] = [
-    [100000, 100],
-    [10000, 10],
-    [1000, 1],
-    [100, 0.1],
-    [10, 0.01],
-    [1, 0.001],
-  ]
+  const columns = [100000, 10000, 1000, 100, 10, 1] as const
   const lastColumn = 2 + places
   for (let index = 0; index <= lastColumn; index++) {
-    const [scaledPlace, value] = columns[index]
+    const scaledPlace = columns[index]
     const digit = Math.floor(scaled / scaledPlace) % 10
-    if (digit !== 0) terms.push(String(digit * value))
+    if (digit !== 0) terms.push(formatThousandths(digit * scaledPlace))
   }
   return terms.join(' + ')
 }
@@ -258,6 +277,18 @@ function buildItem(
   choiceCount = 4,
 ): Unit2GeneratedItem {
   const pool = [...new Set(distractors.filter((choice) => choice !== answer))]
+  if (pool.length >= choiceCount - 1) {
+    const choices = shuffle([answer, ...pool.slice(0, choiceCount - 1)])
+    return {
+      itemType,
+      difficulty,
+      prompt,
+      answer,
+      choices,
+      answerIndex: choices.indexOf(answer),
+      model,
+    }
+  }
   return {
     itemType,
     difficulty,
@@ -305,7 +336,71 @@ export function generateAdjacentPlaceRelationshipItem(difficulty: Difficulty): U
   )
 }
 
-export function generatePowerOfTenPatternItem(difficulty: Difficulty): Unit2GeneratedItem {
+export function generatePowerOfTenNotationItem(difficulty: Difficulty): Unit2GeneratedItem {
+  const exponent = ri(1, difficulty === 1 ? 3 : difficulty === 2 ? 5 : 6)
+  const value = String(10 ** exponent)
+  const direction =
+    difficulty === 1
+      ? 'power-to-value'
+      : difficulty === 2
+        ? pick(['power-to-value', 'value-to-exponent'] as const)
+        : pick(['value-to-exponent', 'value-to-power'] as const)
+  const answer =
+    direction === 'power-to-value' ? value : direction === 'value-to-exponent' ? String(exponent) : `10^${exponent}`
+  const prompt =
+    direction === 'power-to-value'
+      ? `Which whole number equals 10^${exponent}?`
+      : direction === 'value-to-exponent'
+        ? `Complete the equation: 10^? = ${value}.`
+        : `Which power of ten equals ${value}?`
+  const distractors =
+    direction === 'power-to-value'
+      ? [
+          String(10 * exponent),
+          String(10 ** Math.max(0, exponent - 1)),
+          String(10 ** (exponent + 1)),
+          String(10 + exponent),
+        ]
+      : direction === 'value-to-exponent'
+        ? [String(exponent - 1), String(exponent + 1), String(10 * exponent), value]
+        : [
+            `10^${exponent - 1}`,
+            `10^${exponent + 1}`,
+            `10 × ${exponent + 1}`,
+            `10 + ${exponent}`,
+          ]
+
+  return buildItem('power-of-ten-notation', difficulty, prompt, answer, distractors, {
+    kind: 'power-of-ten-notation',
+    exponent,
+    value,
+    direction,
+  })
+}
+
+function formatPowerShift(scaled: number, shift: number): string {
+  if (shift >= 0) return formatThousandths(scaled * 10 ** shift)
+  const places = 3 - shift
+  const divisor = 10 ** places
+  const whole = Math.floor(scaled / divisor)
+  const fraction = String(scaled % divisor).padStart(places, '0').replace(/0+$/, '')
+  return fraction === '' ? String(whole) : `${whole}.${fraction}`
+}
+
+function decimalPlacementExplanation(shift: number, result: string): string {
+  if (shift === 0) return `Keep the decimal point where it is; the result is ${result}.`
+  const places = Math.abs(shift)
+  return `Place the decimal point ${places} ${places === 1 ? 'place' : 'places'} to the ${shift > 0 ? 'right' : 'left'}; the result is ${result}.`
+}
+
+interface PowerCalculationData {
+  operation: 'multiply' | 'divide'
+  exponent: number
+  operandScaled: number
+  answerScaled: number
+}
+
+function powerCalculationData(difficulty: Difficulty): PowerCalculationData {
   let operation: 'multiply' | 'divide'
   let exponent: number
   let operandScaled: number
@@ -338,6 +433,12 @@ export function generatePowerOfTenPatternItem(difficulty: Difficulty): Unit2Gene
     }
   }
 
+  return { operation, exponent, operandScaled, answerScaled }
+}
+
+export function generatePowerOfTenCalculationItem(difficulty: Difficulty): Unit2GeneratedItem {
+  const { operation, exponent, operandScaled, answerScaled } = powerCalculationData(difficulty)
+
   const operand = formatThousandths(operandScaled)
   const answer = formatThousandths(answerScaled)
   const symbol = operation === 'multiply' ? '×' : '÷'
@@ -348,12 +449,81 @@ export function generatePowerOfTenPatternItem(difficulty: Difficulty): Unit2Gene
     formatThousandths(answerScaled * 100),
     formatThousandths(Math.max(1, answerScaled + 10 ** Math.max(0, 3 - exponent))),
   ]
-  return buildItem('powers-of-ten-pattern', difficulty, prompt, answer, distractors, {
-    kind: 'powers-of-ten-pattern',
+  return buildItem('powers-of-ten-calculation', difficulty, prompt, answer, distractors, {
+    kind: 'powers-of-ten-calculation',
     operand,
     operation,
     exponent,
   })
+}
+
+export function generatePowerOfTenPatternItem(difficulty: Difficulty): Unit2GeneratedItem {
+  if (difficulty === 1) {
+    const exponent = ri(1, 3)
+    let operandWhole = ri(1, 99)
+    if (operandWhole % 10 === 0) operandWhole += 1
+    const resultWhole = operandWhole * 10 ** exponent
+    const operand = String(operandWhole)
+    const result = String(resultWhole)
+    const zeroWord = exponent === 1 ? 'zero' : 'zeros'
+    const answer = `The product is ${result}; it has ${exponent} new ${zeroWord} after ${operand}.`
+    const distractors = [
+      `The product is ${result}; it has ${exponent + 1} new zeros after ${operand}.`,
+      `The product is ${operandWhole * exponent}; multiply ${operand} by the exponent.`,
+      `The product is ${formatThousandths(operandWhole * 1000 / 10 ** exponent)}; move the decimal point left.`,
+      `The product stays ${operand}; an exponent does not change the value.`,
+    ]
+    return buildItem(
+      'powers-of-ten-pattern',
+      difficulty,
+      `Which explanation correctly describes the zero pattern in ${operand} × 10^${exponent}?`,
+      answer,
+      distractors,
+      {
+        kind: 'powers-of-ten-pattern',
+        operand,
+        operation: 'multiply',
+        exponent,
+        result,
+        focus: 'zero-count',
+      },
+    )
+  }
+
+  const { operation, exponent, operandScaled, answerScaled } = powerCalculationData(difficulty)
+  const operand = formatThousandths(operandScaled)
+  const result = formatThousandths(answerScaled)
+  const symbol = operation === 'multiply' ? '×' : '÷'
+  const correctShift = operation === 'multiply' ? exponent : -exponent
+  const shiftDirection = Math.sign(correctShift)
+  const answer = decimalPlacementExplanation(correctShift, result)
+  const distractors = [
+    decimalPlacementExplanation(-correctShift, formatPowerShift(operandScaled, -correctShift)),
+    decimalPlacementExplanation(
+      correctShift + shiftDirection,
+      formatPowerShift(operandScaled, correctShift + shiftDirection),
+    ),
+    decimalPlacementExplanation(
+      correctShift - shiftDirection,
+      formatPowerShift(operandScaled, correctShift - shiftDirection),
+    ),
+    decimalPlacementExplanation(0, operand),
+  ]
+  return buildItem(
+    'powers-of-ten-pattern',
+    difficulty,
+    `Which explanation correctly describes the decimal-point pattern in ${operand} ${symbol} 10^${exponent}?`,
+    answer,
+    distractors,
+    {
+      kind: 'powers-of-ten-pattern',
+      operand,
+      operation,
+      exponent,
+      result,
+      focus: 'decimal-placement',
+    },
+  )
 }
 
 export function generateDecimalNumberNameItem(difficulty: Difficulty): Unit2GeneratedItem {
@@ -374,13 +544,15 @@ export function generateDecimalNumberNameItem(difficulty: Difficulty): Unit2Gene
       : `Which base-ten numeral matches “${numberName}”?`
 
   const wrongPlaces = ([1, 2, 3] as const).filter((value) => value !== places)
+  const wrongWhole = whole === 999 ? whole - 1 : whole + 1
+  const wrongFractional = fractional === 1 ? 2 : fractional - 1
   const nameDistractors = [
     ...wrongPlaces.map(
       (wrongPlace) =>
         `${wholeNumberWords(whole)} and ${wholeNumberWords(fractional)} ${denominatorName(wrongPlace, fractional)}`,
     ),
-    `${wholeNumberWords(Math.min(999, whole + 1))} and ${wholeNumberWords(fractional)} ${denominatorName(places, fractional)}`,
-    `${wholeNumberWords(whole)} and ${wholeNumberWords(Math.max(1, fractional - 1))} ${denominatorName(places, Math.max(1, fractional - 1))}`,
+    `${wholeNumberWords(wrongWhole)} and ${wholeNumberWords(fractional)} ${denominatorName(places, fractional)}`,
+    `${wholeNumberWords(whole)} and ${wholeNumberWords(wrongFractional)} ${denominatorName(places, wrongFractional)}`,
   ]
   const numeralDistractors = [
     String(whole + fractional / 10 ** Math.min(3, places + 1)),
@@ -416,7 +588,8 @@ export function generateDecimalExpandedFormItem(difficulty: Difficulty): Unit2Ge
     direction === 'numeral-to-expanded'
       ? `Which is the expanded form of ${numeral}?`
       : `Which base-ten numeral equals ${expanded}?`
-  const offsets = [100, 10, 1, 110]
+  const smallestPlace = 10 ** (3 - places)
+  const offsets = [smallestPlace, 2 * smallestPlace, 10 * smallestPlace, 11 * smallestPlace]
   const distractors = offsets.map((offset) =>
     direction === 'numeral-to-expanded'
       ? expandedForm(scaled + offset, places)
@@ -490,7 +663,14 @@ export function generateDecimalRoundingItem(difficulty: Difficulty): Unit2Genera
   const answer = formatThousandths(answerScaled, targetPlaces)
   const floorScaled = Math.floor(scaled / unit) * unit
   const ceilScaled = Math.ceil(scaled / unit) * unit
-  const distractors = [floorScaled, ceilScaled, answerScaled + unit, answerScaled - unit]
+  const distractors = [
+    floorScaled,
+    ceilScaled,
+    answerScaled + unit,
+    answerScaled - unit,
+    answerScaled + 2 * unit,
+    answerScaled + 3 * unit,
+  ]
     .filter((value) => value >= 0)
     .map((value) => formatThousandths(value, targetPlaces))
 
@@ -551,33 +731,44 @@ export function generatePlaceValueChartItem(difficulty: Difficulty): Unit2Genera
   )
   const displayPlaces = difficulty
   const scaled = scaledFromChart(columns, digits)
-  const answer = formatThousandths(scaled, displayPlaces)
-  const swapped = [...digits]
-  const swapIndex = Math.max(0, columns.indexOf('ones'))
-  const nextIndex = Math.min(columns.length - 1, swapIndex + 1)
-  ;[swapped[swapIndex], swapped[nextIndex]] = [swapped[nextIndex], swapped[swapIndex]]
-  const changed = [...digits]
-  changed[changed.length - 1] = (changed[changed.length - 1] % 9) + 1
-  const reversedDecimals = [...digits]
-  const decimalStart = columns.indexOf('tenths')
-  reversedDecimals.splice(
-    decimalStart,
-    reversedDecimals.length - decimalStart,
-    ...reversedDecimals.slice(decimalStart).reverse(),
-  )
-  const distractors = [swapped, changed, reversedDecimals, digits.map((digit) => (digit + 1) % 10)].map(
-    (candidate) => formatThousandths(scaledFromChart(columns, candidate), displayPlaces),
-  )
+  const numeral = formatThousandths(scaled, displayPlaces)
+  const changeDigit = (index: number) => {
+    const changed = [...digits]
+    changed[index] = (changed[index] + 1) % 10
+    return changed
+  }
+  const changeBothEnds = [...digits]
+  changeBothEnds[0] = (changeBothEnds[0] + 1) % 10
+  changeBothEnds[changeBothEnds.length - 1] =
+    (changeBothEnds[changeBothEnds.length - 1] + 1) % 10
+  const candidateDigits = [
+    changeDigit(0),
+    changeDigit(digits.length - 1),
+    changeBothEnds,
+    digits.map((digit) => (digit + 1) % 10),
+  ]
   const header = `| ${columns.map((place) => PLACE_LABEL[place].replace(' place', '')).join(' | ')} |`
   const divider = `| ${columns.map(() => '---').join(' | ')} |`
   const row = `| ${digits.join(' | ')} |`
-  const prompt = `What number does this place-value chart represent?\n${header}\n${divider}\n${row}`
+  const direction =
+    difficulty === 1 || ri(0, 1) === 0 ? 'chart-to-numeral' : 'numeral-to-chart'
+  const answer = direction === 'chart-to-numeral' ? numeral : row
+  const distractors = candidateDigits.map((candidate) =>
+    direction === 'chart-to-numeral'
+      ? formatThousandths(scaledFromChart(columns, candidate), displayPlaces)
+      : `| ${candidate.join(' | ')} |`,
+  )
+  const prompt =
+    direction === 'chart-to-numeral'
+      ? `What number does this place-value chart represent?\n${header}\n${divider}\n${row}`
+      : `Which row correctly places the digits of ${numeral} in this place-value chart?\n${header}\n${divider}`
 
   return buildItem('place-value-chart', difficulty, prompt, answer, distractors, {
     kind: 'place-value-chart',
     columns,
     digits,
     displayPlaces,
+    direction,
   })
 }
 
@@ -585,6 +776,8 @@ export type Unit2Generator = (difficulty: Difficulty) => Unit2GeneratedItem
 
 export const UNIT2_GENERATORS = {
   'adjacent-place-relationship': generateAdjacentPlaceRelationshipItem,
+  'power-of-ten-notation': generatePowerOfTenNotationItem,
+  'powers-of-ten-calculation': generatePowerOfTenCalculationItem,
   'powers-of-ten-pattern': generatePowerOfTenPatternItem,
   'decimal-number-name': generateDecimalNumberNameItem,
   'decimal-expanded-form': generateDecimalExpandedFormItem,
@@ -611,13 +804,29 @@ export const UNIT2_WORKED_EXAMPLES: Record<Unit2ItemType, Unit2WorkedExample> = 
     ],
     answer: 'The 7 in the ones place is 10 times as much.',
   },
-  'powers-of-ten-pattern': {
+  'power-of-ten-notation': {
+    problem: 'Write 100,000 as a power of ten.',
+    steps: [
+      'Count the five zeros after 1.',
+      'A 1 followed by five zeros is 10 multiplied by itself five times.',
+    ],
+    answer: '10^5',
+  },
+  'powers-of-ten-calculation': {
     problem: 'Calculate 0.042 × 10^2.',
     steps: [
       'The exponent 2 means multiply by 10 twice.',
       'Each multiplication by 10 makes every digit worth 10 times as much: 0.042 → 0.42 → 4.2.',
     ],
     answer: '4.2',
+  },
+  'powers-of-ten-pattern': {
+    problem: 'Explain the decimal-point pattern in 4.2 ÷ 10^2.',
+    steps: [
+      'Dividing by 10 makes every digit worth one tenth as much; dividing by 10^2 does that twice.',
+      'In the written number, place the decimal point two places to the left: 4.2 → 0.42 → 0.042.',
+    ],
+    answer: 'Place the decimal point 2 places to the left; the result is 0.042.',
   },
   'decimal-number-name': {
     problem: 'Write 36.407 in words.',
