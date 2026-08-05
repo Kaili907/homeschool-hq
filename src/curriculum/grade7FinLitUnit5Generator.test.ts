@@ -1,0 +1,2 @@
+import { describe, it } from 'vitest'; import { GRADE7_FINLIT_UNIT5_ITEM_TYPES, generateGrade7FinLitUnit5Question } from './grade7FinLitUnit5Generator'; import { runSixHundred } from './grade7FinLitTestCore'
+describe('Grade 7 Financial Literacy Unit 5 rendered-prompt oracle', () => it('verifies 600 unique items per type', () => runSixHundred(GRADE7_FINLIT_UNIT5_ITEM_TYPES, generateGrade7FinLitUnit5Question)))
