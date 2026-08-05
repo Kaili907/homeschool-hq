@@ -57,6 +57,10 @@ export type PersistedDataset =
   | { ok: true; state: AppState; fingerprint: string }
   | { ok: false; error: string }
 
+export type DatasetPersistenceResult =
+  | { ok: true; state: AppState; fingerprint: string }
+  | { ok: false; error: string; wrote: boolean }
+
 export type AppStateValidation =
   | { ok: true; state: AppState }
   | { ok: false; error: string }
@@ -978,25 +982,34 @@ export async function readPersistedDataset(
 export async function persistDatasetVerified(
   state: AppState,
   storage: Storage | null = browserStorage(),
-): Promise<PersistedDataset> {
+): Promise<DatasetPersistenceResult> {
   if (!storage) {
-    return { ok: false, error: 'Local Academy storage is unavailable.' }
+    return {
+      ok: false,
+      error: 'Local Academy storage is unavailable.',
+      wrote: false,
+    }
   }
   const validation = validateAppStateForSync(state)
-  if (!validation.ok) return validation
+  if (!validation.ok) return { ...validation, wrote: false }
   try {
     storage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(state))
   } catch {
-    return { ok: false, error: 'Local Academy data could not be saved.' }
+    return {
+      ok: false,
+      error: 'Local Academy data could not be saved.',
+      wrote: false,
+    }
   }
   const persisted = await readPersistedDataset(storage)
-  if (!persisted.ok) return persisted
+  if (!persisted.ok) return { ...persisted, wrote: true }
   const expected = await datasetFingerprint(state)
   return persisted.fingerprint === expected
     ? persisted
     : {
         ok: false,
         error: 'Saved Academy data did not pass provenance verification.',
+        wrote: true,
       }
 }
 

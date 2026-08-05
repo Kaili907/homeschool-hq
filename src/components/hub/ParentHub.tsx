@@ -1,6 +1,6 @@
 import { useMemo, useState, type Dispatch, type SetStateAction } from 'react'
 import type { AppState, Profile } from '../../types'
-import { isoToday } from '../../appState'
+import { isoToday, type AppStatePersistenceFailure } from '../../appState'
 import { defaultSchoolYear } from '../../curriculum/pacing'
 import { loadPlans } from '../../curriculum/loader'
 import { TodayView } from './TodayView'
@@ -31,7 +31,7 @@ interface Props {
   studyEnabled?: boolean
   study?: ParentHubStudyIntegration
   studyUnavailableReason?: string
-  persistenceFailure?: string | null
+  persistenceFailure?: AppStatePersistenceFailure | null
   onDismissPersistenceFailure?: () => void
 }
 
@@ -88,9 +88,17 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
         {persistenceFailure && (
           <div className="mt-4 flex items-start justify-between gap-4 rounded-xl border border-red-300 bg-red-50 p-4 text-red-950 print:hidden" role="alert">
             <div>
-              <h2 className="font-bold">Changes aren't being saved</h2>
-              <p className="mt-1 text-sm">The last saved Academy data is still intact.</p>
-              <p className="mt-2 text-sm"><span className="font-semibold">Reason:</span> {persistenceFailure}</p>
+              <h2 className="font-bold">
+                {persistenceFailure.wrote
+                  ? "Changes were saved but couldn't be verified"
+                  : "Changes aren't being saved"}
+              </h2>
+              <p className="mt-1 text-sm">
+                {persistenceFailure.wrote
+                  ? 'The stored Academy data may not match what was expected. Cloud sync is paused pending review.'
+                  : 'The last saved Academy data is still intact.'}
+              </p>
+              <p className="mt-2 text-sm"><span className="font-semibold">Reason:</span> {persistenceFailure.error}</p>
             </div>
             {onDismissPersistenceFailure && (
               <button

@@ -67,7 +67,11 @@ describe('saveAppState validation failure signal', () => {
 
     const result = await saveAppState(candidate)
 
-    expect(result).toEqual({ ok: false, error: VALIDATION_ERROR })
+    expect(result).toEqual({
+      ok: false,
+      error: VALIDATION_ERROR,
+      wrote: false,
+    })
     expect(consoleError).toHaveBeenCalledWith(
       'Academy changes were not saved.',
       VALIDATION_ERROR,

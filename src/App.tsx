@@ -11,6 +11,7 @@ import {
   readLocalStorageKey,
   recordAnswer,
   saveAppState,
+  type AppStatePersistenceFailure,
 } from './appState'
 import {
   PLACEMENT_TOTAL,
@@ -137,7 +138,8 @@ export default function App() {
     })
   }
   const [state, setState] = useState<AppState>(loaded.state)
-  const [persistenceFailure, setPersistenceFailure] = useState<string | null>(null)
+  const [persistenceFailure, setPersistenceFailure] =
+    useState<AppStatePersistenceFailure | null>(null)
   // MOUNT-2: the study route is evaluated before the picker default, so a fresh
   // navigation or refresh at /study-engine with a valid persisted profile lands
   // on the study surface. No active profile or flag-off falls through to the
@@ -170,7 +172,7 @@ export default function App() {
   useEffect(() => {
     let current = true
     void saveAppState(state).then((result) => {
-      if (current) setPersistenceFailure(result.ok ? null : result.error)
+      if (current) setPersistenceFailure(result.ok ? null : result)
     })
     return () => { current = false }
   }, [state])
