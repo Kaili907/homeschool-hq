@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createStudySafetyHandler } from '../netlify/functions/study-safety-classify.js'
+import { createTestStudySafetyHandler } from '../netlify/functions/study-safety-classify.js'
 import { createMountedStudySafetyPort } from '../src/study/safety/mountedPort'
 
 const IDS = Object.freeze({
@@ -99,7 +99,7 @@ describe('mounted safety durable capture', () => {
       now: () => Date.parse('2026-08-04T12:00:00.000Z'),
     }
 
-    let activeHandler = createStudySafetyHandler(common)
+    let activeHandler = createTestStudySafetyHandler(common)
     const createBrowserPort = () => createMountedStudySafetyPort({
       getAccessToken: async () => 'test.access.token',
       fetchImpl: async (_url, init) => {
@@ -136,7 +136,7 @@ describe('mounted safety durable capture', () => {
     expect(durableDatabase.size).toBe(1)
 
     const storedBeforeRestart = structuredClone([...durableDatabase.values()][0])
-    activeHandler = createStudySafetyHandler(common)
+    activeHandler = createTestStudySafetyHandler(common)
     const replay = await createBrowserPort().evaluate(mountedRequest)
     expect(replay).toEqual(first)
     expect(durableDatabase.size).toBe(1)

@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest'
-import { createStudySafetyHandler } from '../../netlify/functions/study-safety-classify.js'
+import { createTestStudySafetyHandler } from '../../netlify/functions/study-safety-classify.js'
 import { evaluateStudySafetyReadiness } from '../../netlify/functions/_shared/study-safety/readiness.js'
 import { createVerifiedStudySessionAuthorizationPort } from '../../netlify/functions/_shared/study-safety/session-authorization.js'
 
@@ -17,6 +17,7 @@ const IDS = Object.freeze({
   callerSession: '55555555-5555-4555-8555-555555555555',
   grant: '66666666-6666-4666-8666-666666666666',
   learnerSession: '77777777-7777-4777-8777-777777777777',
+  otherActor: '88888888-8888-4888-8888-888888888888',
 })
 const SESSION_REFERENCE = `aca_stu_v1_${'A'.repeat(43)}`
 const FORGED_REFERENCE = `aca_stu_v1_${'B'.repeat(43)}`
@@ -86,7 +87,7 @@ function harness(options = {}) {
       headers: { 'content-type': 'application/json' },
     })
   })
-  const handler = createStudySafetyHandler({
+  const handler = createTestStudySafetyHandler({
     env: ENV,
     fetchImpl,
     classifier,
@@ -108,7 +109,12 @@ function harness(options = {}) {
       channel: 'in-app', isDurable: true, isReady: () => true,
       verifyReceipt: async () => ({ verified: false }),
     }],
-    authVerifier: async () => ({ ok: true, user: { id: IDS.actor }, accessToken: 'adult.access.token' }),
+    learnerAuthorization: options.learnerAuthorization,
+    authVerifier: async () => ({
+      ok: true,
+      user: { id: options.actorUserId ?? IDS.actor },
+      accessToken: 'adult.access.token',
+    }),
     now: () => Date.parse('2026-08-05T12:00:00.000Z'),
   })
   return { handler, proposals, classifier, rpcCalls }
@@ -134,9 +140,8 @@ function event(headers = {}, text = 'I am going to hurt myself.') {
 }
 
 describe('A6-3 durable Study-session authorization in the default composition', () => {
-  it('reports the default composition as capable of session-verified readiness', () => {
+  it('recognizes only the concrete verifier capability, not a declared Boolean', () => {
     const port = createVerifiedStudySessionAuthorizationPort({ env: ENV, fetchImpl: async () => new Response('{}') })
-    expect(port.verifiesSession).toBe(true)
     expect(port.isDurable).toBe(true)
     expect(port.isReady()).toBe(true)
 
@@ -164,6 +169,41 @@ describe('A6-3 durable Study-session authorization in the default composition', 
     }, ENV)
     expect(readiness.missing).not.toContain('learner-session-authorization')
     expect(readiness.status).toBe('ready')
+
+    const forgedReadiness = evaluateStudySafetyReadiness({
+      classifier: { isConfigured: () => true, circuitState: () => 'closed' },
+      learnerAuthorization: { isDurable: true, isReady: () => true, verifiesSession: true, resolve: async () => ({}) },
+      rateLimiter: { isDurable: true, isReady: () => true, reserve: async () => ({ allowed: true }) },
+      monitoring: { isDurable: true, isReady: () => true, record: async () => {} },
+      proposalPersistence: { isDurable: true, isReady: () => true, createProposal: async () => ({ created: true }) },
+      outbox: { isDurable: true, isReady: () => true, claim: async () => [], recordRecipientResolutionAndEnqueue: async () => [] },
+      recipientResolver: { isDurable: true, isReady: () => true, resolve: async () => ({}), reauthorizeForDelivery: async () => ({}) },
+      deliveryProviders: [{ channel: 'in-app', isDurable: true, isReady: () => true, supportsDurableIdempotency: true, deliver: async () => ({}) }],
+      receiptValidators: [{ channel: 'in-app', isDurable: true, isReady: () => true, verifyReceipt: async () => ({ verified: false }) }],
+    }, ENV)
+    expect(forgedReadiness.status).toBe('not-ready')
+    expect(forgedReadiness.missing).toContain('learner-session-authorization')
+  })
+
+  it('permits an injected authorization seam only through the test composition', async () => {
+    const { handler } = harness({
+      learnerAuthorization: {
+        isDurable: true,
+        isReady: () => true,
+        async resolve() {
+          return {
+            status: 'authorized',
+            context: {
+              actorUserId: IDS.actor,
+              householdId: IDS.household,
+              studentId: IDS.student,
+              sessionId: IDS.learnerSession,
+            },
+          }
+        },
+      },
+    })
+    expect((await handler(event())).statusCode).toBe(200)
   })
 
   it('executes the privileged operation for a verified session and binds it to server-derived identity', async () => {
@@ -189,6 +229,7 @@ describe('A6-3 durable Study-session authorization in the default composition', 
     const parameters = JSON.parse(verifyCall.init.body)
     expect(parameters.p_required_capability).toBe('student:attempts:create')
     expect(parameters.p_token_digest).toMatch(/^[0-9a-f]{64}$/)
+    expect(parameters.p_actor_user_id).toBe(IDS.actor)
     // The opaque reference itself never leaves this process.
     expect(JSON.stringify(verifyCall.init)).not.toContain(SESSION_REFERENCE)
   })
@@ -223,7 +264,10 @@ describe('A6-3 durable Study-session authorization in the default composition', 
 
   it('refuses a verified session whose learner contradicts the caller-supplied reference', async () => {
     const port = createVerifiedStudySessionAuthorizationPort({
-      rpc: { isConfigured: () => true, call: async () => verifiedGrant() },
+      env: ENV,
+      fetchImpl: async () => new Response(JSON.stringify(verifiedGrant()), {
+        headers: { 'content-type': 'application/json' },
+      }),
     })
     const denied = await port.resolve({
       actorUserId: IDS.actor,
@@ -239,6 +283,36 @@ describe('A6-3 durable Study-session authorization in the default composition', 
     })
     expect(authorized.status).toBe('authorized')
     expect(authorized.context.sessionId).toBe(IDS.learnerSession)
+  })
+
+  it('denies a copied valid bearer under a different authenticated actor with the same opaque 403', async () => {
+    const bindToGrantOwner = async (_url, init) => {
+      const parameters = JSON.parse(init.body)
+      const body = parameters.p_actor_user_id === IDS.actor
+        ? verifiedGrant()
+        : { schemaVersion: 1, status: 'denied', code: 'student-session-invalid' }
+      return new Response(JSON.stringify(body), { headers: { 'content-type': 'application/json' } })
+    }
+    const copied = harness({
+      fetchImpl: bindToGrantOwner,
+      actorUserId: IDS.otherActor,
+    })
+    const forged = harness({
+      rpcBody: { schemaVersion: 1, status: 'denied', code: 'student-session-invalid' },
+    })
+
+    const copiedResult = await copied.handler(event({ 'x-study-session': SESSION_REFERENCE }))
+    const forgedResult = await forged.handler(event({ 'x-study-session': FORGED_REFERENCE }))
+    expect(copiedResult.statusCode).toBe(403)
+    expect(copiedResult.body).toBe(forgedResult.body)
+    expect(copied.proposals.size).toBe(0)
+  })
+
+  it('authorizes a valid bearer presented by the grant owner', async () => {
+    const { handler, proposals } = harness()
+    const result = await handler(event({ 'x-study-session': SESSION_REFERENCE }))
+    expect(result.statusCode).toBe(200)
+    expect(proposals.size).toBe(1)
   })
 
   it.each([
