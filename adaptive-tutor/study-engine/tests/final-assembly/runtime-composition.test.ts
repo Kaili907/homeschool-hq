@@ -8,7 +8,7 @@ import {
   runSafeTutorBridge,
   type SafeTutorBridgeResult,
 } from "../../runtime/src/tutor-bridge.ts";
-import { bridgeRequest, localDemoSafety } from "./helpers.ts";
+import { bridgeRequest, clearOutputSafety, localDemoSafety } from "./helpers.ts";
 
 describe("Session 9 public composition", () => {
   test("publishes the umbrella and accepted component versions", () => {
@@ -80,6 +80,7 @@ describe("Session 9 public composition", () => {
     const result = await runSafeTutorBridge(bridgeRequest(), {
       eventLedger: ledger,
       safety: localDemoSafety,
+      outputSafety: clearOutputSafety,
     });
     expect(result.status).toBe("accepted");
     if (result.status !== "accepted") return;
@@ -98,10 +99,12 @@ describe("Session 9 public composition", () => {
     const first = await runSafeTutorBridge(input, {
       eventLedger: ledger,
       safety: localDemoSafety,
+      outputSafety: clearOutputSafety,
     });
     const replay = await runSafeTutorBridge(input, {
       eventLedger: ledger,
       safety: localDemoSafety,
+      outputSafety: clearOutputSafety,
     });
     expect(first.status).toBe("accepted");
     expect(replay.status).toBe("stopped-or-quarantined");
@@ -124,6 +127,7 @@ describe("Session 9 public composition", () => {
     const collision = await runSafeTutorBridge(bridgeRequest(), {
       eventLedger: ledger,
       safety: localDemoSafety,
+      outputSafety: clearOutputSafety,
     });
     expect(collision.status).toBe("stopped-or-quarantined");
     if (collision.status !== "stopped-or-quarantined") return;
@@ -142,6 +146,7 @@ describe("Session 9 public composition", () => {
       {
         eventLedger: new InMemoryAcceptedEventLedger(),
         safety: localDemoSafety,
+        outputSafety: clearOutputSafety,
       },
     );
     expect(result.status).toBe("accepted");

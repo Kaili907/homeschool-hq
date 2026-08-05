@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { JarvisCore } from '../../../adaptive-tutor/study-engine/ui/JarvisCore.tsx'
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../study/ports'
 import { AcceptedRc1HostRuntime } from '../../study/runtimeFacade'
@@ -6,12 +6,48 @@ import { runCurrentStudyWork, StudyLifecycleBoundary } from '../../study/product
 import type { HostStudyLaunchContext, StudyAccessibilitySettings, StudyCalendarEntry, StudyCheckpoint } from '../../study/types'
 import './study-host.css'
 
+export const STUDY_TUTOR_OUTPUT_PENDING_MESSAGE = 'I’m checking the Tutor reply before showing it.'
+
 export function studyAccessibilityProjection(settings: StudyAccessibilitySettings) {
   return Object.freeze({
     motionMode: settings.reducedMotion ? 'none' as const : 'minimal' as const,
     voiceMode: settings.noAudio ? 'no-audio' as const : 'unavailable' as const,
     captionsAlwaysVisible: true as const,
   })
+}
+
+export function StudyTutorSafetySurface({
+  busy,
+  checkingTutorSafety,
+  stopped,
+  visibleText,
+  accessibility,
+  transcript,
+  transcriptOpen,
+  onTranscriptOpenChange,
+}: {
+  busy: boolean
+  checkingTutorSafety: boolean
+  stopped: boolean
+  visibleText: string
+  accessibility: ReturnType<typeof studyAccessibilityProjection>
+  transcript?: ReactNode
+  transcriptOpen: boolean
+  onTranscriptOpenChange?: (open: boolean) => void
+}) {
+  return (
+    <JarvisCore
+      activity={busy ? 'thinking' : stopped ? 'paused' : 'idle'}
+      statusText={stopped ? 'Study paused safely' : checkingTutorSafety ? 'Checking safely' : busy ? 'Saving safely' : 'Ready'}
+      currentUtterance={checkingTutorSafety ? STUDY_TUTOR_OUTPUT_PENDING_MESSAGE : visibleText}
+      captionLabel="Jarvis captions (always visible)"
+      motionMode={accessibility.motionMode}
+      voiceMode={accessibility.voiceMode}
+      transcript={transcript}
+      transcriptOpen={transcriptOpen}
+      onTranscriptOpenChange={onTranscriptOpenChange}
+    />
+  )
 }
 
 export function StudySessionContainer({ context: baseContext, initialEntry, ports, onBack }: {
@@ -33,6 +69,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   const [transcriptOpen, setTranscriptOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [busy, setBusy] = useState(false)
+  const [checkingTutorSafety, setCheckingTutorSafety] = useState(false)
   const [stopped, setStopped] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -151,6 +188,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
     if (!currentSegment || !answer.trim() || busy || stopped) return
     const token = lifecycle.token()
     setBusy(true)
+    setCheckingTutorSafety(entry.masteryAuthority === 'tutor-core')
     const transient = answer
     setAnswer('')
     try {
@@ -177,13 +215,15 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           }))
           token.assertCurrent()
           setStopped(true)
-          setJarvisText('This Study Session is paused. A trusted adult review has been proposed but has not been delivered.')
+          setCheckingTutorSafety(false)
+          setJarvisText(result.studentMessage)
           setBusy(false)
           lifecycle.cancel('safety-stop')
           return
         }
         if (result.status === 'quarantined') throw new Error('quarantined')
         acceptedEventRef = result.eventRef
+        setCheckingTutorSafety(false)
         setJarvisText(result.presentation.visibleText)
         setApprovedTranscript((items) => [...items, result.presentation.visibleText])
       } else {
@@ -218,7 +258,12 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
       setEntry(next)
     } catch {
       if (token.isCurrent()) setError('The Tutor result could not be accepted. No completion was recorded.')
-    } finally { if (token.isCurrent()) setBusy(false) }
+    } finally {
+      if (token.isCurrent()) {
+        setCheckingTutorSafety(false)
+        setBusy(false)
+      }
+    }
   }
 
   if (loading) return <main className="study-runtime-host min-h-screen bg-slate-50 p-6" aria-busy="true"><h1 ref={headingRef} tabIndex={-1}>Preparing your Study Session</h1><p role="status">Checking the runtime and learner binding…</p><button type="button" className="mt-4 rounded-lg border px-4 py-2" onClick={onBack}>Cancel</button></main>
@@ -263,13 +308,12 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
                 <button type="button" className="rounded-lg border border-cyan-700 bg-white px-5 py-3 font-bold text-cyan-800 disabled:opacity-50" disabled={busy || stopped} onClick={saveBreak}>Take a water break</button>
               </div>
             </section>
-            <JarvisCore
-              activity={busy ? 'thinking' : stopped ? 'paused' : 'idle'}
-              statusText={stopped ? 'Study paused safely' : busy ? 'Checking safely' : 'Ready'}
-              currentUtterance={jarvisText}
-              captionLabel="Jarvis captions (always visible)"
-              motionMode={accessibilityProjection.motionMode}
-              voiceMode={accessibilityProjection.voiceMode}
+            <StudyTutorSafetySurface
+              busy={busy}
+              checkingTutorSafety={checkingTutorSafety}
+              stopped={stopped}
+              visibleText={jarvisText}
+              accessibility={accessibilityProjection}
               transcript={context.accessibility.transientTranscript ? <ol>{approvedTranscript.map((line, index) => <li key={`${index}-${line}`}>{line}</li>)}</ol> : undefined}
               transcriptOpen={transcriptOpen}
               onTranscriptOpenChange={context.accessibility.transientTranscript ? setTranscriptOpen : undefined}

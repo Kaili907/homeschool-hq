@@ -210,15 +210,18 @@ export interface StudyOutboxProposal {
 
 export interface StudySafetyRequest {
   readonly scope: StudyScope
-  readonly transientLearnerText: string
+  readonly requestRef: string
+  readonly studentRef:
+    | { readonly kind: 'academy-student-id'; readonly value: string }
+    | { readonly kind: 'legacy-profile-id'; readonly value: string }
+  readonly contentKind: 'learner-input' | 'tutor-output'
+  readonly transientText: string
 }
 
 export interface StudySafetyResult {
-  readonly classificationVersion: 1
-  readonly classifierVersion: string
   readonly outcome: 'clear' | 'urgent' | 'uncertain' | 'invalid'
-  readonly categories: readonly ('self-harm-or-immediate-danger' | 'abuse-or-neglect-disclosure')[]
-  readonly reasonCodes: readonly string[]
+  readonly mayContinue: boolean
+  readonly adultHelpState: 'not-needed' | 'proposed-not-delivered' | 'not-confirmed'
 }
 
 export interface StudyAccommodation {

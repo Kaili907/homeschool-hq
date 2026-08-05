@@ -144,6 +144,13 @@ export async function runDeterministicDemonstrations(): Promise<
   const dependencies = {
     eventLedger: ledger,
     safety: LOCAL_DEMO_SAFETY_CONFIGURATION,
+    outputSafety: {
+      classify: async () => ({
+        classification: "clear" as const,
+        mayContinue: true,
+        adultHelpState: "not-needed" as const,
+      }),
+    },
   } as const;
   const math = await runSafeTutorBridge(request(), dependencies);
   if (math.status !== "accepted") {
