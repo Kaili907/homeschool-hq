@@ -69,8 +69,8 @@ interface EstimateVariationParameters {
 }
 
 interface SampleSizeParameters {
-  smallSize: number
-  largeSize: number
+  aSize: number
+  bSize: number
   populationSize: number
   subject: string
 }
@@ -487,9 +487,12 @@ function randomEstimateVariation(difficulty: Difficulty): EstimateVariationParam
 function randomSampleSize(difficulty: Difficulty): SampleSizeParameters {
   const subject = pick(SUBJECTS)
   const populationSize = difficulty === 1 ? ri(200, 500) : difficulty === 2 ? ri(500, 1500) : ri(1000, 5000)
-  const smallSize = ri(5, 20)
-  const largeSize = smallSize + ri(15, 60)
-  return { smallSize, largeSize, populationSize, subject }
+  const smaller = ri(5, 20)
+  const larger = smaller + ri(15, 60)
+  const aIsLarger = pick([true, false] as const)
+  const aSize = aIsLarger ? larger : smaller
+  const bSize = aIsLarger ? smaller : larger
+  return { aSize, bSize, populationSize, subject }
 }
 
 const GENERALIZATION_METHOD_TEXT: Record<GeneralizationMethodKey, string> = {
@@ -676,10 +679,15 @@ export function generateSampleEstimateVariationRangeQuestion(
 export function generateSampleSizeRepresentativenessQuestion(
   difficulty: Difficulty,
 ): Unit8Question<'sample-size-representativeness', SampleSizeParameters> {
-  const { smallSize, largeSize, populationSize, subject } = randomSampleSize(difficulty)
-  const correctAnswer = `Student B's sample of ${largeSize}, because larger random samples tend to produce more consistent, accurate estimates.`
+  const { aSize, bSize, populationSize, subject } = randomSampleSize(difficulty)
+  const aWins = aSize > bSize
+  const winnerLabel = aWins ? 'A' : 'B'
+  const winnerSize = aWins ? aSize : bSize
+  const loserLabel = aWins ? 'B' : 'A'
+  const loserSize = aWins ? bSize : aSize
+  const correctAnswer = `Student ${winnerLabel}'s sample of ${winnerSize}, because larger random samples tend to produce more consistent, accurate estimates.`
   const distractors = [
-    `Student A's sample of ${smallSize}, because smaller samples are easier to analyze.`,
+    `Student ${loserLabel}'s sample of ${loserSize}, because smaller samples are easier to analyze.`,
     'Both are equally likely to be accurate, because both are random.',
     'Neither sample is reliable unless it includes the entire population.',
   ]
@@ -689,10 +697,10 @@ export function generateSampleSizeRepresentativenessQuestion(
     standard: definition.standard,
     lessonFocus: definition.lessonFocus,
     difficulty,
-    prompt: `A population has ${populationSize} ${subject}. Student A takes a random sample of ${smallSize}. Student B takes a random sample of ${largeSize}. Both use proper random selection. Whose sample is more likely to give an estimate closer to the true population value?`,
+    prompt: `A population has ${populationSize} ${subject}. Student A takes a random sample of ${aSize}. Student B takes a random sample of ${bSize}. Both use proper random selection. Whose sample is more likely to give an estimate closer to the true population value?`,
     correctAnswer,
     distractors,
-    parameters: { smallSize, largeSize, populationSize, subject },
+    parameters: { aSize, bSize, populationSize, subject },
     workedExample: definition.workedExample,
     distractorMode: 'distinct',
   })
