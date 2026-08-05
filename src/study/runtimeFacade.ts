@@ -191,7 +191,7 @@ export class AcceptedRc1HostRuntime {
     if (inputSafety.outcome !== 'clear' || inputSafety.mayContinue !== true) {
       const classification = inputSafety.outcome === 'clear' ? 'invalid' : inputSafety.outcome
       if (safetyPort.mode !== 'production') {
-        recordLocalPreAcceptanceSafetyStop({
+        await recordLocalPreAcceptanceSafetyStop({
           occurredAt: input.occurredAt,
           studentRef: input.scope.learnerRef,
           sessionRef: input.scope.sessionRef,

@@ -59,7 +59,7 @@ export function createMountedStudySafetyPort(
     async evaluate(request: StudySafetyRequest) {
       const result = await classifyStudySafetyWithCaptureStatus(await gatewayRequest(request), deps)
       const response = result.response
-      if (result.failureMode && result.serverCaptureStatus) recordLocalPreAcceptanceSafetyStop({
+      if (result.failureMode && result.serverCaptureStatus) await recordLocalPreAcceptanceSafetyStop({
         occurredAt: new Date().toISOString(),
         studentRef: request.scope.learnerRef,
         failureMode: result.failureMode,

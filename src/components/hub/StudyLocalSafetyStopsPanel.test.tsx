@@ -17,4 +17,11 @@ describe('Parent Hub local safety panel', () => {
     const html = renderToStaticMarkup(<StudyLocalSafetyStopsSurface records={[]} historyState="unavailable" />)
     expect(html).toContain('This device could not record safety events.')
   })
+
+  it('frames device-local capture honestly and restates the student stop instruction', () => {
+    const html = renderToStaticMarkup(<StudyLocalSafetyStopsSurface records={[]} historyState="incomplete" />)
+    expect(html).toContain('Device-local')
+    expect(html).toContain('may be incomplete')
+    expect(html).toContain('get an adult')
+  })
 })

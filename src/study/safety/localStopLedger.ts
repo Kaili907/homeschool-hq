@@ -16,6 +16,7 @@ export interface LocalSafetyStopRecordV1 {
 export type LocalSafetyStopHistoryState = 'available' | 'unavailable' | 'incomplete'
 export interface LocalSafetyStopLedgerView { readonly records: readonly LocalSafetyStopRecordV1[]; readonly historyState: LocalSafetyStopHistoryState }
 type StorageLike = Pick<Storage, 'getItem' | 'setItem'>
+export interface LedgerLockPort { request<T>(name: string, callback: () => Promise<T>): Promise<T> }
 let lastStorageFailure = false
 function browserStorage(): StorageLike | undefined { try { return typeof window === 'undefined' ? undefined : window.localStorage } catch { lastStorageFailure = true; return undefined } }
 function valid(record: unknown): record is LocalSafetyStopRecordV1 {
@@ -39,19 +40,31 @@ function recordId(input: Pick<LocalSafetyStopRecordV1, 'occurredAt' | 'studentRe
   const random = globalThis.crypto?.randomUUID?.() ?? `${Math.random()}-${performance.now()}`
   return `local-safety-stop:${input.occurredAt}:${input.studentRef}:${random}`
 }
-export function recordLocalPreAcceptanceSafetyStop(input: Omit<LocalSafetyStopRecordV1, 'schemaVersion' | 'recordId' | 'captureOrigin'>, storage: StorageLike | undefined = browserStorage()): LocalSafetyStopRecordV1 | null {
+function markIncomplete(storage: StorageLike | undefined): void {
+  lastStorageFailure = true
+  try { storage?.setItem(HEALTH_KEY, 'failed') } catch { /* total storage failure is unavailable on reload */ }
+}
+function availableLocks(): LedgerLockPort | undefined {
+  return (globalThis.navigator as (Navigator & { locks?: LedgerLockPort }) | undefined)?.locks
+}
+export async function recordLocalPreAcceptanceSafetyStop(input: Omit<LocalSafetyStopRecordV1, 'schemaVersion' | 'recordId' | 'captureOrigin'>, storage: StorageLike | undefined = browserStorage(), locks: LedgerLockPort | undefined = availableLocks()): Promise<LocalSafetyStopRecordV1 | null> {
   const record: LocalSafetyStopRecordV1 = Object.freeze({ schemaVersion: 2, recordId: recordId(input), ...input, captureOrigin: 'local-pre-acceptance-stop' })
-  if (!storage) { lastStorageFailure = true; return null }
-  try {
-    // Re-read immediately before each write and verify afterward. This preserves
-    // other-tab entries in the normal RMW race; a lost verification is surfaced.
+  if (!storage) { markIncomplete(undefined); return null }
+  const write = () => {
+    // Fallback retry+verify is deliberately retained for browsers without Web
+    // Locks. A failed verification marks history incomplete rather than hiding it.
     for (let attempt = 0; attempt < 3; attempt += 1) {
       const existing = readLocalSafetyStops(storage)
       storage.setItem(LOCAL_SAFETY_STOP_LEDGER_KEY, JSON.stringify([...existing, record]))
       storage.setItem(HEALTH_KEY, 'ready')
       if (readLocalSafetyStops(storage).some((item) => item.recordId === record.recordId)) return record
     }
-    lastStorageFailure = true
-  } catch { lastStorageFailure = true }
+    markIncomplete(storage)
+    return null
+  }
+  try {
+    if (locks) return await locks.request('homeschool-hq:study-safety-stops', async () => write())
+    return write()
+  } catch { markIncomplete(storage) }
   return null
 }
