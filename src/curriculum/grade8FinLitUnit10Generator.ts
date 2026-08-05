@@ -1,0 +1,10 @@
+import type { Difficulty } from '../types'
+import { makeFinLitQuestion, money, ri, type CurriculumGenerator, type FinLitQuestion } from './grade8FinLitCore'
+export const GRADE8_FINLIT_UNIT10_ITEM_TYPES=['financial-plan-surplus'] as const
+export type Grade8FinLitUnit10ItemType=typeof GRADE8_FINLIT_UNIT10_ITEM_TYPES[number]
+export interface Grade8FinLitUnit10Parameters { incomeCents: bigint; expensesCents: bigint; taxesCents: bigint; savingsCents: bigint }
+export type Grade8FinLitUnit10Question=FinLitQuestion<'financial-plan-surplus',Grade8FinLitUnit10Parameters>
+const definition={standard:'FL.8.B',lessonFocus:'integrating a sample financial plan',workedExample:{prompt:'Income is $500.00; expenses, taxes, and savings are $300.00, $50.00, and $75.00. What remains?',answer:'$75.00',steps:['Add planned uses: $300.00 + $50.00 + $75.00 = $425.00.','Subtract from income: $500.00 - $425.00 = $75.00.']}} as const
+export function generateFinancialPlanSurplusQuestion(difficulty:Difficulty):Grade8FinLitUnit10Question {const incomeCents=BigInt(ri(1_200*difficulty,1_800*difficulty)*100),expensesCents=BigInt(ri(300*difficulty,600*difficulty)*100),taxesCents=BigInt(ri(50*difficulty,180*difficulty)*100),savingsCents=BigInt(ri(50*difficulty,220*difficulty)*100),answer=incomeCents-expensesCents-taxesCents-savingsCents;return makeFinLitQuestion({itemType:'financial-plan-surplus',difficulty,prompt:`A sample plan has income ${money(incomeCents)}, expenses ${money(expensesCents)}, taxes ${money(taxesCents)}, and planned savings ${money(savingsCents)}. What surplus remains?`,correctAnswer:money(answer),distractors:[money(answer+100n),money(answer-100n),money(incomeCents-expensesCents),money(incomeCents-expensesCents-taxesCents)],parameters:{incomeCents,expensesCents,taxesCents,savingsCents},definition})}
+export const GRADE8_FINLIT_UNIT10_GENERATORS={'financial-plan-surplus':generateFinancialPlanSurplusQuestion} satisfies Record<Grade8FinLitUnit10ItemType,CurriculumGenerator<Grade8FinLitUnit10Question>>
+export const generateGrade8FinLitUnit10Question=generateFinancialPlanSurplusQuestion
