@@ -116,9 +116,13 @@ interface DatasetLockManager {
 
 let latestAppStatePersistence: Promise<void> = Promise.resolve()
 
-export type AppStatePersistenceResult =
-  | { ok: true }
-  | { ok: false; error: string }
+export interface AppStatePersistenceFailure {
+  ok: false
+  error: string
+  wrote: boolean
+}
+
+export type AppStatePersistenceResult = { ok: true } | AppStatePersistenceFailure
 
 export async function saveAppState(state: AppState): Promise<AppStatePersistenceResult> {
   const persistence = (async (): Promise<AppStatePersistenceResult> => {
