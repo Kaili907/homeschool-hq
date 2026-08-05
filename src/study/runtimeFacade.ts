@@ -10,6 +10,7 @@ import type { UrgentSafetyClassifierPort } from '../../adaptive-tutor/study-engi
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from './ports'
 import { assertAcceptedStudyRuntime } from './runtimeCompatibility'
 import { learnerSafeResult } from './safety/learnerSafe'
+import { recordLocalPreAcceptanceSafetyStop } from './safety/localStopLedger'
 import type {
   HostStudyLaunchContext,
   StudyCalendarEntry,
@@ -189,6 +190,15 @@ export class AcceptedRc1HostRuntime {
     }
     if (inputSafety.outcome !== 'clear' || inputSafety.mayContinue !== true) {
       const classification = inputSafety.outcome === 'clear' ? 'invalid' : inputSafety.outcome
+      if (safetyPort.mode !== 'production') {
+        recordLocalPreAcceptanceSafetyStop({
+          occurredAt: input.occurredAt,
+          studentRef: input.scope.learnerRef,
+          sessionRef: input.scope.sessionRef,
+          failureMode: 'non-production-safety-port',
+          serverCaptureStatus: 'server-not-contacted',
+        })
+      }
       return stoppedResult(
         classification,
         `mounted-input-safety-${classification}`,
