@@ -66,11 +66,10 @@ export function generateFinancialQuestion<T extends string>(definition: Financia
       const discounted = a - discount
       const discountedTax = roundHalfUp(discounted * tax, 100)
       correct = discounted + discountedTax
-      const taxFirst = a + roundHalfUp(a * tax, 100)
-      const taxThenDiscount = taxFirst - roundHalfUp(taxFirst * rate, 100)
       prompt = `${lead}an item costs ${money(a)}. First take ${rate}% off, then add ${tax}% sales tax to the discounted price. Round each percentage result to the nearest cent, half up. What is the final price? Give your answer as dollars and cents.`
       parameters = { kind: definition.kind, a, b: rate, c: tax }
-      wrong = [discounted, a + roundHalfUp(a * tax, 100), taxThenDiscount]
+      // Misconceptions: omit tax, omit the discount, or add the discount instead of subtracting it.
+      wrong = [discounted, a + roundHalfUp(a * tax, 100), a + discount + discountedTax]
       break
     }
     case 'interest': {
