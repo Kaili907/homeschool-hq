@@ -11,7 +11,8 @@ const gcd=(a:bigint,b:bigint):bigint=>b===0n?a:gcd(b,a%b)
 const rational=(n:bigint,d:bigint):string=>{const g=gcd(n,d);n/=g;d/=g;const w=n/d,r=n%d;return w===0n?`${r}/${d}`:r===0n?`${w}`:`${w} ${r}/${d}`}
 function parseFraction(s:string):[bigint,bigint]{const m=s.match(/^(?:(\d+) )?(\d+)\/(\d+)$/);if(!m)return [BigInt(s),1n];return [BigInt(m[1]??0)*BigInt(m[3])+BigInt(m[2]),BigInt(m[3])]}
 function decimal(s:string):bigint { const [w,f='']=s.split('.');return BigInt(w)*100n+BigInt((f+'00').slice(0,2)) }
-function fmt(n:bigint):string {const w=n/100n,r=n%100n;return `${w}.${r.toString().padStart(2,'0')}`.replace(/(\.\d*?)0+$/,'$1').replace(/\.$/,'')}
+function fmt(n:bigint):string {const w=n/100n,r=n%100n;return `${w}.${r.toString().padStart(2,'0')}`.replace(/\.0+$/,'')}
+function fmt10(n:bigint):string {const w=n/10n,r=n%10n;return `${w}.${r}`.replace(/\.0$/,'')}
 /** Parses only question.prompt; it never reads generated parameters or generator helpers. */
 function oracle6(q:Grade5MathUnit6Question):string {const p=q.prompt
  if(q.itemType==='fraction-as-division'){const m=p.match(/Write (\d+) ÷ (\d+)/)!;return rational(BigInt(m[1]),BigInt(m[2]))}
@@ -22,7 +23,7 @@ function oracle6(q:Grade5MathUnit6Question):string {const p=q.prompt
  const m=p.match(/1\/(\d+) ÷ (\d+)/)!;return rational(1n,BigInt(m[1])*BigInt(m[2]))}
 function oracle7(q:Grade5MathUnit7Question):string {const p=q.prompt
  if(q.itemType==='money-measurement-context'){const m=p.match(/(\d+) tickets cost \$(\d+(?:\.\d+)?) each/)!;return `$${fmt(BigInt(m[1])*decimal(m[2]))}`}
- const m=p.match(/(?:Find|estimate) (\d+(?:\.\d+)?) [+×÷-] (\d+(?:\.\d+)?)/)!;const a=decimal(m[1]),b=decimal(m[2]);if(q.itemType==='decimal-addition')return fmt(a+b);if(q.itemType==='decimal-subtraction')return fmt(a-b);if(q.itemType==='decimal-multiplication')return fmt(a*BigInt(m[2]));if(q.itemType==='decimal-division')return fmt(a/BigInt(m[2]));const r=(n:bigint)=>(n+50n)/100n*100n;return fmt(r(a)+r(b))}
+ const m=p.match(/(?:Find|estimate) (\d+(?:\.\d+)?) [+×÷-] (\d+(?:\.\d+)?)/)!;const a=decimal(m[1]),b=decimal(m[2]),a10=BigInt(m[1].replace('.',''));if(q.itemType==='decimal-addition')return fmt(a+b);if(q.itemType==='decimal-subtraction')return fmt(a-b);if(q.itemType==='decimal-multiplication')return fmt10(a10*BigInt(m[2]));if(q.itemType==='decimal-division')return fmt10(a10/BigInt(m[2]));const r=(n:bigint)=>(n+50n)/100n*100n;return fmt(r(a)+r(b))}
 function oracle8(q:Grade5MathUnit8Question):string {const p=q.prompt
  if(q.itemType==='measurement-conversion'){const m=p.match(/Convert (\d+) feet/)!;return `${BigInt(m[1])*12n} inches`}
  if(q.itemType==='line-plot-fraction-data'){const m=p.match(/has (\d+) marks/)!;return `${rational(BigInt(m[1]),2n)} meters`}
