@@ -337,7 +337,7 @@ export function generateAdjacentPlaceRelationshipItem(difficulty: Difficulty): U
 }
 
 export function generatePowerOfTenNotationItem(difficulty: Difficulty): Unit2GeneratedItem {
-  const exponent = ri(1, difficulty === 1 ? 3 : difficulty === 2 ? 5 : 6)
+  const exponent = difficulty === 3 ? ri(0, 6) : ri(1, difficulty === 1 ? 3 : 5)
   const value = String(10 ** exponent)
   const direction =
     difficulty === 1
@@ -362,11 +362,16 @@ export function generatePowerOfTenNotationItem(difficulty: Difficulty): Unit2Gen
           String(10 + exponent),
         ]
       : direction === 'value-to-exponent'
-        ? [String(exponent - 1), String(exponent + 1), String(10 * exponent), value]
+        ? [
+            String(exponent + 1),
+            String(exponent + 2),
+            String(exponent === 0 ? 10 : exponent - 1),
+            String(10 * (exponent + 1)),
+          ]
         : [
-            `10^${exponent - 1}`,
             `10^${exponent + 1}`,
-            `10 × ${exponent + 1}`,
+            `10^${exponent + 2}`,
+            `10^${exponent === 0 ? 3 : exponent - 1}`,
             `10 + ${exponent}`,
           ]
 

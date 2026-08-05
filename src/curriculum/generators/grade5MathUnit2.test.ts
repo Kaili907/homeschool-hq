@@ -581,7 +581,7 @@ describe('Grade 5 math Unit 2 edge cases', () => {
   })
 
   it('has only one numerically correct notation choice when the exponent is 1', () => {
-    setRng(sequenceRng([0, 0.75]))
+    setRng(sequenceRng([0.15, 0.75]))
     const item = generatePowerOfTenNotationItem(3)
     expect(item.model.kind).toBe('power-of-ten-notation')
     if (item.model.kind !== 'power-of-ten-notation') return
@@ -597,6 +597,18 @@ describe('Grade 5 math Unit 2 edge cases', () => {
       return Number(choice)
     }
     expect(item.choices.filter((choice) => evaluate(choice) === 10)).toEqual([item.answer])
+  })
+
+  it('uses the whole-number exponent 0 to represent a value of 1', () => {
+    setRng(sequenceRng([0, 0.75]))
+    const item = generatePowerOfTenNotationItem(3)
+    expect(item.model.kind).toBe('power-of-ten-notation')
+    if (item.model.kind !== 'power-of-ten-notation') return
+    expect(item.model.exponent).toBe(0)
+    expect(item.model.value).toBe('1')
+    expect(item.model.direction).toBe('value-to-power')
+    expect(item.answer).toBe('10^0')
+    expect(item.answer).toBe(independentlyComputedAnswer(item))
   })
 
   it('generates both zero-count and decimal-placement explanations', () => {
