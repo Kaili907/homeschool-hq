@@ -1,48 +1,11 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { setRng } from '../genUtils'
 import { curriculumAnswer } from './generatorCore'
-import { GRADE8_MATH_UNIT9_ITEM_TYPES, generateGrade8MathUnit9Question, type Grade8MathUnit9Question } from './grade8MathUnit9Generator'
-
-const rng = (seed: number) => { let state = seed >>> 0; return () => ((state = (Math.imul(state, 1664525) + 1013904223) >>> 0) / 0x100000000) }
-afterEach(() => setRng(null))
-
-function answerFromFacts(question: Grade8MathUnit9Question): string {
-  const p = question.parameters
-  switch (question.itemType) {
-    case 'find-hypotenuse': case 'distance-on-grid': case 'coordinate-distance': return String(p.c)
-    case 'find-missing-leg': case 'right-triangle-context': return question.itemType === 'right-triangle-context' ? `${p.b} feet` : String(p.b)
-    case 'classify-by-side-lengths': return p.mode!
-    case 'pythagorean-converse': return p.a * p.a + p.b * p.b === p.c * p.c ? 'yes' : 'no'
-    case 'irrational-distance-estimate': return Math.sqrt(p.a).toFixed(1)
-    case 'choose-pythagorean-triple': return `${p.a}, ${p.b}, ${p.c}`
-    case 'analyze-pythagorean-error': return `The claim is incorrect; ${p.a}² + ${p.b}² = ${p.c}².`
-  }
-}
-
-describe('Grade 8 Math Unit 9 generators', () => {
-  it('has twenty deterministic desk samples with valid, parameter-derived answers', () => {
-    setRng(rng(0x89150001))
-    for (let sample = 0; sample < 20; sample++) {
-      const type = GRADE8_MATH_UNIT9_ITEM_TYPES[sample % GRADE8_MATH_UNIT9_ITEM_TYPES.length]
-      const question = generateGrade8MathUnit9Question(type, ((sample % 3) + 1) as 1 | 2 | 3)
-      expect(curriculumAnswer(question)).toBe(answerFromFacts(question))
-      expect(question.prompt).not.toBe('')
-      expect(new Set(question.choices).size).toBe(4)
-    }
-  })
-
-  for (const itemType of GRADE8_MATH_UNIT9_ITEM_TYPES) {
-    it(`keeps ${itemType} valid across difficulty levels`, () => {
-      for (const difficulty of [1, 2, 3] as const) {
-        setRng(rng(0x89151000 + itemType.length * 17 + difficulty))
-        for (let run = 0; run < 100; run++) {
-          const question = generateGrade8MathUnit9Question(itemType, difficulty)
-          expect(curriculumAnswer(question)).toBe(answerFromFacts(question))
-          expect(question.choices).toContain(curriculumAnswer(question))
-          expect(new Set(question.choices).size).toBe(question.choices.length)
-          expect(question.standard).toMatch(/^8\.G\.[678]$/)
-        }
-      }
-    })
-  }
+import { GRADE8_MATH_UNIT9_ITEM_TYPES, generateGrade8MathUnit9Question } from './grade8MathUnit9Generator'
+const rng=(seed:number)=>{let s=seed>>>0;return()=>((s=(Math.imul(s,1664525)+1013904223)>>>0)/0x100000000)}
+afterEach(()=>setRng(null))
+describe('Grade 8 Math Unit 9: Volume and Bivariate Data',()=>{
+  it('produces twenty deterministic desk samples with four distinct choices',()=>{setRng(rng(0x89150001));for(let n=0;n<20;n++){const q=generateGrade8MathUnit9Question(GRADE8_MATH_UNIT9_ITEM_TYPES[n%10],((n%3)+1) as 1|2|3);expect(q.prompt).not.toBe('');expect(q.choices).toContain(curriculumAnswer(q));expect(new Set(q.choices).size).toBe(4)}})
+  it('keeps volume exact as rational multiples of pi',()=>{setRng(rng(1));for(const t of ['cylinder-volume','cone-volume','sphere-volume'] as const){const q=generateGrade8MathUnit9Question(t,3);expect(curriculumAnswer(q)).toMatch(/^\d+π cubic units$/);expect(q.prompt).toContain('exact')}})
+  for(const type of GRADE8_MATH_UNIT9_ITEM_TYPES)it(`uses the source standard for ${type}`,()=>{setRng(rng(type.length));for(let n=0;n<100;n++){const q=generateGrade8MathUnit9Question(type,((n%3)+1) as 1|2|3);expect(q.standard).toMatch(/^8\.(G\.9|SP\.[1-4])$/);expect(new Set(q.choices).size).toBe(4)}})
 })
