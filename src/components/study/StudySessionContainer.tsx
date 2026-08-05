@@ -3,6 +3,8 @@ import { JarvisCore } from '../../../adaptive-tutor/study-engine/ui/JarvisCore.t
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../study/ports'
 import { AcceptedRc1HostRuntime } from '../../study/runtimeFacade'
 import { runCurrentStudyWork, StudyLifecycleBoundary } from '../../study/production/lifecycleBoundary'
+import { STUDY_LEARNER_STOP_MESSAGE } from '../../study/safety/learnerSafe'
+import { isStudySessionStopped, recordSafetyStop } from '../../study/safety/stopLedger'
 import type { HostStudyLaunchContext, StudyAccessibilitySettings, StudyCalendarEntry, StudyCheckpoint } from '../../study/types'
 import './study-host.css'
 
@@ -62,6 +64,10 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
     lessonRef: initialEntry.lessonRef,
     skillRefs: initialEntry.skillRefs,
   }
+  // Derived from the block, so the same block yields the same session key on
+  // every mount. The durable stop lock is keyed on it.
+  const sessionRef = `${initialEntry.blockRef}:session`
+  const scope = { householdRef: context.householdRef, learnerRef: context.learnerRef, sessionRef }
   const [entry, setEntry] = useState(initialEntry)
   const [answer, setAnswer] = useState('')
   const [jarvisText, setJarvisText] = useState('I’m ready when you are. Complete the current Manuel Academy activity, then confirm below.')
@@ -70,14 +76,15 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   const [loading, setLoading] = useState(true)
   const [busy, setBusy] = useState(false)
   const [checkingTutorSafety, setCheckingTutorSafety] = useState(false)
-  const [stopped, setStopped] = useState(false)
+  // A6-5-C: a stop is durable. A remount — refresh, navigation away and back,
+  // or a new tab — starts stopped again, so a flagged learner cannot continue
+  // by reloading the page.
+  const [stopped, setStopped] = useState(() => isStudySessionStopped(scope))
   const [error, setError] = useState<string | null>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const bindingRef = useRef(`${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`)
   const lifecycle = useMemo(() => new StudyLifecycleBoundary(), [])
   const runtime = useMemo(() => new AcceptedRc1HostRuntime(ports), [ports])
-  const sessionRef = `${initialEntry.blockRef}:session`
-  const scope = { householdRef: context.householdRef, learnerRef: context.learnerRef, sessionRef }
   const learnerScope = { householdRef: context.householdRef, learnerRef: context.learnerRef }
   const currentSegment = entry.segments.find((segment) => !entry.completedSegmentRefs.includes(segment.segmentRef))
   const accessibilityProjection = studyAccessibilityProjection(context.accessibility)
@@ -88,6 +95,9 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
     const prepare = async () => {
       try {
         token.assertCurrent()
+        // A stopped session is never relaunched, so no lesson work, no Tutor
+        // turn and no calendar transition can happen behind the locked surface.
+        if (isStudySessionStopped(scope)) return
         assertCompleteStudyPortBundle(ports)
         runtime.launch(context, initialEntry, sessionRef)
         let next = initialEntry
@@ -207,17 +217,30 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           isCurrentBinding: () => token.isCurrent() && isCurrentBinding(),
         }))
         if (result.status === 'stopped') {
-          await runCurrentStudyWork(token, () => (ports as StudyPortBundle).eventLedger.append(scope, {
-            eventRef: `stop:${sessionRef}:${Date.now()}`,
+          // Durable first, before anything that can fail. The lock and the
+          // adult-visible record must survive a refresh and must exist even
+          // when no server proposal was ever created for this stop.
+          recordSafetyStop({
+            scope,
             occurredAt: at,
-            type: 'safety-stop',
-            payload: { reasonCode: result.reasonCode, deliveryStatus: result.deliveryStatus },
-          }))
-          token.assertCurrent()
+            classification: result.classification,
+            deliveryStatus: result.deliveryStatus,
+          })
           setStopped(true)
           setCheckingTutorSafety(false)
           setJarvisText(result.studentMessage)
           setBusy(false)
+          try {
+            await runCurrentStudyWork(token, () => (ports as StudyPortBundle).eventLedger.append(scope, {
+              eventRef: `stop:${sessionRef}:${Date.now()}`,
+              occurredAt: at,
+              type: 'safety-stop',
+              payload: { reasonCode: result.reasonCode, deliveryStatus: result.deliveryStatus },
+            }))
+          } catch {
+            // The stop is already recorded durably; a failed event append must
+            // not undo it or surface as a recoverable error to the student.
+          }
           lifecycle.cancel('safety-stop')
           return
         }
@@ -266,6 +289,25 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
     }
   }
 
+  // A6-5-C: the locked surface. It carries no response field and no submit or
+  // break control, so a stopped session cannot accept input on this mount or
+  // any later one. Nothing here clears the lock.
+  if (stopped) return (
+    <div className="study-runtime-host min-h-screen bg-slate-50 text-slate-900" data-large-text={context.accessibility.largeText} data-high-contrast={context.accessibility.highContrast} data-reduced-motion={context.accessibility.reducedMotion} data-study-stopped="true">
+      <main className="mx-auto max-w-3xl px-4 py-5">
+        <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold">Study paused</h1>
+        <StudyTutorSafetySurface
+          busy={false}
+          checkingTutorSafety={false}
+          stopped
+          visibleText={STUDY_LEARNER_STOP_MESSAGE}
+          accessibility={accessibilityProjection}
+          transcriptOpen={false}
+        />
+        <button type="button" className="mt-4 rounded-lg border border-slate-300 bg-white px-4 py-2" onClick={onBack}>Back to Study plan</button>
+      </main>
+    </div>
+  )
   if (loading) return <main className="study-runtime-host min-h-screen bg-slate-50 p-6" aria-busy="true"><h1 ref={headingRef} tabIndex={-1}>Preparing your Study Session</h1><p role="status">Checking the runtime and learner binding…</p><button type="button" className="mt-4 rounded-lg border px-4 py-2" onClick={onBack}>Cancel</button></main>
   if (error) return <main className="study-runtime-host min-h-screen bg-slate-50 p-6"><h1 ref={headingRef} tabIndex={-1}>Study Session unavailable</h1><p role="alert">{error}</p><button type="button" className="mt-4 rounded-lg border px-4 py-2" onClick={onBack}>Back to Study plan</button></main>
 

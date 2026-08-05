@@ -5,6 +5,7 @@ import {
   classifyStudySafety,
   type StudySafetyClientDeps,
 } from './client'
+import { noteClientSideSafetyFailure } from './stopLedger'
 
 export type { StudySafetyClientDeps } from './client'
 
@@ -56,7 +57,17 @@ export function createMountedStudySafetyPort(
     mode: 'production' as const,
     classifierVersion: MOUNTED_STUDY_SAFETY_CLASSIFIER_VERSION,
     async evaluate(request: StudySafetyRequest) {
-      const response = await classifyStudySafety(await gatewayRequest(request), deps)
+      // A6-5-C: a fail-closed client answer means the gateway was never
+      // reached, so the stop that follows has no server proposal behind it.
+      let clientFailure: string | null = null
+      const response = await classifyStudySafety(await gatewayRequest(request), {
+        ...deps,
+        onFailClosed: (reasonCode) => {
+          clientFailure = reasonCode
+          deps.onFailClosed?.(reasonCode)
+        },
+      })
+      if (clientFailure !== null) noteClientSideSafetyFailure(request.scope, clientFailure)
       return Object.freeze({
         outcome: response.classification,
         mayContinue: response.classification === 'clear' &&

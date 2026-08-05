@@ -20,6 +20,12 @@ export interface StudySafetyClientDeps {
   readonly timeoutMs?: number
   /** Host lifecycle cancellation (logout, learner switch, navigation, etc.). */
   readonly signal?: AbortSignal
+  /**
+   * A6-5-C: notified when this client fails closed without a server answer.
+   * A stop that follows one of these has no server proposal behind it, so the
+   * adult record has to say so.
+   */
+  readonly onFailClosed?: (reasonCode: string) => void
 }
 
 const VALID_CLASSIFICATIONS = new Set(['urgent', 'uncertain', 'clear', 'invalid'])
@@ -50,7 +56,11 @@ function validResponse(value: unknown): value is StudySafetyClassificationRespon
     : record.continueToTutorCore === false && safe.mayContinue === false
 }
 
-function failClosed(reasonCode: string): StudySafetyClassificationResponseV1 {
+function failClosed(
+  reasonCode: string,
+  onFailClosed?: (reasonCode: string) => void,
+): StudySafetyClassificationResponseV1 {
+  onFailClosed?.(reasonCode)
   return {
     schemaVersion: STUDY_SAFETY_SCHEMA_VERSION,
     classification: 'invalid',
@@ -70,15 +80,15 @@ export async function classifyStudySafety(
 ): Promise<StudySafetyClassificationResponseV1> {
   const getAccessToken = deps.getAccessToken ?? getGatewayAccessToken
   const fetchImpl = deps.fetchImpl ?? ((url, init) => fetch(url, init))
-  if (deps.signal?.aborted) return failClosed('client-cancelled')
+  if (deps.signal?.aborted) return failClosed('client-cancelled', deps.onFailClosed)
   let accessToken: string | null
   try {
     accessToken = await getAccessToken()
   } catch {
-    return failClosed('client-auth-unavailable')
+    return failClosed('client-auth-unavailable', deps.onFailClosed)
   }
-  if (!accessToken) return failClosed('client-unauthenticated')
-  if (deps.signal?.aborted) return failClosed('client-cancelled')
+  if (!accessToken) return failClosed('client-unauthenticated', deps.onFailClosed)
+  if (deps.signal?.aborted) return failClosed('client-cancelled', deps.onFailClosed)
 
   const controller = new AbortController()
   const cancelFromHost = () => controller.abort(deps.signal?.reason)
@@ -100,11 +110,11 @@ export async function classifyStudySafety(
       credentials: 'omit',
       referrerPolicy: 'no-referrer',
     })
-    if (!response.ok) return failClosed('client-gateway-error')
+    if (!response.ok) return failClosed('client-gateway-error', deps.onFailClosed)
     const result = await response.json()
-    return validResponse(result) ? result : failClosed('client-malformed-response')
+    return validResponse(result) ? result : failClosed('client-malformed-response', deps.onFailClosed)
   } catch {
-    return failClosed('client-network-error')
+    return failClosed('client-network-error', deps.onFailClosed)
   } finally {
     globalThis.clearTimeout(timer)
     deps.signal?.removeEventListener('abort', cancelFromHost)

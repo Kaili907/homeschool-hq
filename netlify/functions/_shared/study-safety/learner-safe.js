@@ -1,3 +1,12 @@
+/**
+ * A6-5: one stop message for every non-clear classification. This string must
+ * stay byte-identical to STUDY_LEARNER_STOP_MESSAGE in
+ * src/study/safety/learnerSafe.ts — the browser rejects any learner block that
+ * differs from its own catalog (src/study/safety/client.ts).
+ */
+export const STUDY_LEARNER_STOP_MESSAGE =
+  'The lesson is paused for now. Please go get your dad so he can sit with you. You are not in trouble.'
+
 const RESULTS = Object.freeze({
   clear: Object.freeze({
     messageCode: 'study-safety-clear',
@@ -8,21 +17,21 @@ const RESULTS = Object.freeze({
   }),
   urgent: Object.freeze({
     messageCode: 'lesson-paused-get-trusted-adult',
-    message: 'The lesson is paused. Please get a trusted adult who can help right now. You are not in trouble.',
+    message: STUDY_LEARNER_STOP_MESSAGE,
     mayContinue: false,
     adultHelpState: 'proposed-not-delivered',
     emergencyGuidanceCode: 'seek-local-emergency-help-if-immediate-danger',
   }),
   uncertain: Object.freeze({
     messageCode: 'lesson-paused-adult-check-in',
-    message: 'The lesson is paused. Please ask a trusted adult to check in with you. You are not in trouble.',
+    message: STUDY_LEARNER_STOP_MESSAGE,
     mayContinue: false,
     adultHelpState: 'proposed-not-delivered',
     emergencyGuidanceCode: 'none',
   }),
   invalid: Object.freeze({
     messageCode: 'lesson-paused-input-check',
-    message: 'The lesson is paused. Please ask a trusted adult to help check what happened. You are not in trouble.',
+    message: STUDY_LEARNER_STOP_MESSAGE,
     mayContinue: false,
     adultHelpState: 'not-confirmed',
     emergencyGuidanceCode: 'none',
