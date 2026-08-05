@@ -9,10 +9,10 @@ const sourceRoot = resolve(here, '..', '..')
 describe('production Study import boundary', () => {
   it('does not statically import preview ports or the sentinel runtime from App', () => {
     const app = readFileSync(join(sourceRoot, 'App.tsx'), 'utf8')
-    expect(app).not.toMatch(/from ['"]\.\/study\/localDevelopmentPorts['"]/)
+    expect(app).not.toMatch(/from ['"]\.\/study\/(?:localDevelopmentPorts|mountedPorts)['"]/)
     expect(app).not.toMatch(/from ['"]\.\/components\/study\/StudySessionRoute['"]/)
     expect(app).toContain('import.meta.env.DEV')
-    expect(app).toContain("import('./study/localDevelopmentPorts')")
+    expect(app).toContain("import('./study/mountedPorts')")
   })
 
   it('keeps local, memory, test, preview, synthetic and sentinel identifiers out of the production root', () => {
