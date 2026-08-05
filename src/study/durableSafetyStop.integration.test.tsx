@@ -96,14 +96,17 @@ describe('A6-5-C durable student stop across remounts', () => {
   let ports: StudyPortBundle
   let started: string[]
   let scope: StudyScope
+  let stopKey: { studentRef: string; sessionRef: string }
 
   beforeEach(async () => {
     vi.resetModules()
-    vi.stubGlobal('localStorage', new MemStorage())
+    const store = new MemStorage()
+    vi.stubGlobal('localStorage', store)
     documentTarget = new FakeDocument()
     const windowTarget = Object.assign(new EventTarget(), {
       document: documentTarget, setTimeout, clearTimeout, HTMLElement: FakeElement,
       HTMLIFrameElement: class {}, getSelection: () => null, navigator: { userAgent: 'test' },
+      localStorage: store,
     })
     documentTarget.defaultView = windowTarget as never
     vi.stubGlobal('window', windowTarget)
@@ -133,6 +136,7 @@ describe('A6-5-C durable student stop across remounts', () => {
       learnerRef: context.learnerRef,
       sessionRef: `${entry.blockRef}:session`,
     }
+    stopKey = { studentRef: scope.learnerRef, sessionRef: scope.sessionRef }
   })
 
   afterEach(async () => {
@@ -167,20 +171,19 @@ describe('A6-5-C durable student stop across remounts', () => {
   }
 
   it('does not lock a session that was never stopped', async () => {
-    const { isStudySessionStopped } = await import('./safety/stopLedger')
+    const { isSessionStoppedByLocalLedger } = await import('./safety/localStopLedger')
     const surface = await mount()
-    expect(isStudySessionStopped(scope)).toBe(false)
+    expect(isSessionStoppedByLocalLedger(stopKey)).toBe(false)
     expect(hasText(surface, STOP_MESSAGE)).toBe(false)
     expect(surface.childNodes[0]?.getAttribute('data-study-stopped')).toBe(null)
   })
 
   it('is still stopped after a simulated refresh and cannot accept input', async () => {
-    const { recordSafetyStop } = await import('./safety/stopLedger')
-    recordSafetyStop({
-      scope,
+    const { recordLocalSessionSafetyStop } = await import('./safety/localStopLedger')
+    await recordLocalSessionSafetyStop({
+      ...stopKey,
       occurredAt: '2026-08-05T14:00:00.000Z',
-      classification: 'urgent',
-      deliveryStatus: 'proposed-not-delivered',
+      serverCaptureStatus: 'server-answered-stop',
     })
 
     // A refresh: a brand-new module graph and a brand-new component instance,
@@ -197,12 +200,11 @@ describe('A6-5-C durable student stop across remounts', () => {
   })
 
   it('is still stopped after navigating away and coming back', async () => {
-    const { recordSafetyStop } = await import('./safety/stopLedger')
-    recordSafetyStop({
-      scope,
+    const { recordLocalSessionSafetyStop } = await import('./safety/localStopLedger')
+    await recordLocalSessionSafetyStop({
+      ...stopKey,
       occurredAt: '2026-08-05T14:00:00.000Z',
-      classification: 'uncertain',
-      deliveryStatus: 'proposed-not-delivered',
+      serverCaptureStatus: 'server-answered-stop',
     })
     const first = await mount()
     expect(hasText(first, STOP_MESSAGE)).toBe(true)
@@ -215,12 +217,11 @@ describe('A6-5-C durable student stop across remounts', () => {
   })
 
   it('is still stopped in a new tab, which shares the store but no component state', async () => {
-    const { recordSafetyStop } = await import('./safety/stopLedger')
-    recordSafetyStop({
-      scope,
+    const { recordLocalSessionSafetyStop } = await import('./safety/localStopLedger')
+    await recordLocalSessionSafetyStop({
+      ...stopKey,
       occurredAt: '2026-08-05T14:00:00.000Z',
-      classification: 'invalid',
-      deliveryStatus: 'not-confirmed',
+      serverCaptureStatus: 'server-acceptance-not-confirmed',
     })
     // A second tab: same origin store, its own module graph and its own root.
     vi.resetModules()
@@ -241,29 +242,27 @@ describe('A6-5-C durable student stop across remounts', () => {
   })
 
   it('offers the student no control that clears the lock', async () => {
-    const { recordSafetyStop, isStudySessionStopped } = await import('./safety/stopLedger')
-    recordSafetyStop({
-      scope,
+    const { recordLocalSessionSafetyStop, isSessionStoppedByLocalLedger } = await import('./safety/localStopLedger')
+    await recordLocalSessionSafetyStop({
+      ...stopKey,
       occurredAt: '2026-08-05T14:00:00.000Z',
-      classification: 'urgent',
-      deliveryStatus: 'proposed-not-delivered',
+      serverCaptureStatus: 'server-answered-stop',
     })
     const surface = await mount()
 
     // One control only — "Back to Study plan" — and leaving does not unlock.
     expect(tags(surface, 'BUTTON')).toHaveLength(1)
     await unmountLast()
-    expect(isStudySessionStopped(scope)).toBe(true)
+    expect(isSessionStoppedByLocalLedger(stopKey)).toBe(true)
     expect(hasText(await mount(), STOP_MESSAGE)).toBe(true)
   })
 
   it('locks only the stopped block, so another block still opens', async () => {
-    const { recordSafetyStop } = await import('./safety/stopLedger')
-    recordSafetyStop({
-      scope,
+    const { recordLocalSessionSafetyStop } = await import('./safety/localStopLedger')
+    await recordLocalSessionSafetyStop({
+      ...stopKey,
       occurredAt: '2026-08-05T14:00:00.000Z',
-      classification: 'urgent',
-      deliveryStatus: 'proposed-not-delivered',
+      serverCaptureStatus: 'server-answered-stop',
     })
     const other = (await createSyntheticMathBlock(ports, { suffix: 'durable-stop-other' })).entry
     const { StudySessionContainer } = await import('../components/study/StudySessionContainer')

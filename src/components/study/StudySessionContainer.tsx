@@ -4,7 +4,7 @@ import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../study
 import { AcceptedRc1HostRuntime } from '../../study/runtimeFacade'
 import { runCurrentStudyWork, StudyLifecycleBoundary } from '../../study/production/lifecycleBoundary'
 import { STUDY_LEARNER_STOP_MESSAGE } from '../../study/safety/learnerSafe'
-import { isStudySessionStopped, recordSafetyStop } from '../../study/safety/stopLedger'
+import { isSessionStoppedByLocalLedger, recordLocalSessionSafetyStop } from '../../study/safety/localStopLedger'
 import type { HostStudyLaunchContext, StudyAccessibilitySettings, StudyCalendarEntry, StudyCheckpoint } from '../../study/types'
 import './study-host.css'
 
@@ -68,6 +68,9 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   // every mount. The durable stop lock is keyed on it.
   const sessionRef = `${initialEntry.blockRef}:session`
   const scope = { householdRef: context.householdRef, learnerRef: context.learnerRef, sessionRef }
+  // The ledger records a stop against the learner and the session, which is what
+  // the durable lock matches on.
+  const stopKey = { studentRef: context.learnerRef, sessionRef }
   const [entry, setEntry] = useState(initialEntry)
   const [answer, setAnswer] = useState('')
   const [jarvisText, setJarvisText] = useState('I’m ready when you are. Complete the current Manuel Academy activity, then confirm below.')
@@ -79,7 +82,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   // A6-5-C: a stop is durable. A remount — refresh, navigation away and back,
   // or a new tab — starts stopped again, so a flagged learner cannot continue
   // by reloading the page.
-  const [stopped, setStopped] = useState(() => isStudySessionStopped(scope))
+  const [stopped, setStopped] = useState(() => isSessionStoppedByLocalLedger(stopKey))
   const [error, setError] = useState<string | null>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const bindingRef = useRef(`${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`)
@@ -97,7 +100,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
         token.assertCurrent()
         // A stopped session is never relaunched, so no lesson work, no Tutor
         // turn and no calendar transition can happen behind the locked surface.
-        if (isStudySessionStopped(scope)) return
+        if (isSessionStoppedByLocalLedger(stopKey)) return
         assertCompleteStudyPortBundle(ports)
         runtime.launch(context, initialEntry, sessionRef)
         let next = initialEntry
@@ -220,12 +223,23 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           // Durable first, before anything that can fail. The lock and the
           // adult-visible record must survive a refresh and must exist even
           // when no server proposal was ever created for this stop.
-          recordSafetyStop({
-            scope,
+          //
+          // Only 'proposed-not-delivered' proves the safety service answered:
+          // a fail-closed client result is always classified 'invalid', which can
+          // only ever carry 'not-confirmed'. A non-production port reached no
+          // server at all, so it is recorded as such rather than as an answer.
+          // The classification is deliberately not recorded — the ledger stores
+          // no learner text and nothing about which check fired.
+          await recordLocalSessionSafetyStop({
             occurredAt: at,
-            classification: result.classification,
-            deliveryStatus: result.deliveryStatus,
-          })
+            studentRef: context.learnerRef,
+            sessionRef,
+            serverCaptureStatus: ports.safety?.mode !== 'production'
+              ? 'server-not-contacted'
+              : result.deliveryStatus === 'proposed-not-delivered'
+                ? 'server-answered-stop'
+                : 'server-acceptance-not-confirmed',
+          }).catch(() => null)
           setStopped(true)
           setCheckingTutorSafety(false)
           setJarvisText(result.studentMessage)

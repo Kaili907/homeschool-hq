@@ -2,10 +2,10 @@ import type { StudySafetyClassificationRequestV1 } from '../contracts/safety'
 import type { StudySafetyPort } from '../ports'
 import type { StudySafetyRequest } from '../types'
 import {
-  classifyStudySafety,
+  classifyStudySafetyWithCaptureStatus,
   type StudySafetyClientDeps,
 } from './client'
-import { noteClientSideSafetyFailure } from './stopLedger'
+import { recordLocalPreAcceptanceSafetyStop } from './localStopLedger'
 
 export type { StudySafetyClientDeps } from './client'
 
@@ -57,17 +57,18 @@ export function createMountedStudySafetyPort(
     mode: 'production' as const,
     classifierVersion: MOUNTED_STUDY_SAFETY_CLASSIFIER_VERSION,
     async evaluate(request: StudySafetyRequest) {
-      // A6-5-C: a fail-closed client answer means the gateway was never
-      // reached, so the stop that follows has no server proposal behind it.
-      let clientFailure: string | null = null
-      const response = await classifyStudySafety(await gatewayRequest(request), {
-        ...deps,
-        onFailClosed: (reasonCode) => {
-          clientFailure = reasonCode
-          deps.onFailClosed?.(reasonCode)
-        },
+      const result = await classifyStudySafetyWithCaptureStatus(await gatewayRequest(request), deps)
+      const response = result.response
+      // sessionRef is what the A6-5-C durable stop lock keys on. Without it an
+      // outage record stays visible to the parent but never locks the session,
+      // so a learner stopped by a gateway outage could refresh straight back in.
+      if (result.failureMode && result.serverCaptureStatus) await recordLocalPreAcceptanceSafetyStop({
+        occurredAt: new Date().toISOString(),
+        studentRef: request.scope.learnerRef,
+        sessionRef: request.scope.sessionRef,
+        failureMode: result.failureMode,
+        serverCaptureStatus: result.serverCaptureStatus,
       })
-      if (clientFailure !== null) noteClientSideSafetyFailure(request.scope, clientFailure)
       return Object.freeze({
         outcome: response.classification,
         mayContinue: response.classification === 'clear' &&

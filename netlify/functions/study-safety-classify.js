@@ -2,7 +2,8 @@
 
 import { createAdultReviewProposalService } from './_shared/study-adult-review/proposal.js'
 import { createSupabaseStudySafetyPorts } from './_shared/study-adult-review/supabase-ports.js'
-import { createSupabaseLearnerAuthorizationPort } from './_shared/study-safety/authorization.js'
+import { readStudySessionReferenceHeader } from './_shared/study-identity/contracts.js'
+import { createVerifiedStudySessionAuthorizationPort } from './_shared/study-safety/session-authorization.js'
 import {
   STUDY_SAFETY_REQUEST_LIMIT_BYTES,
   validateStudySafetyRequest,
@@ -74,7 +75,8 @@ export function createStudySafetyHandler(overrides = {}) {
   const productionPorts = overrides.productionPorts ?? createSupabaseStudySafetyPorts({ env, fetchImpl })
   const effectiveMonitoring = overrides.monitoring ?? productionPorts.monitoring ?? NOOP_MONITORING_PORT
   const classifier = overrides.classifier ?? createAnthropicSafetyClassifier({ env, fetchImpl, monitoring: effectiveMonitoring })
-  const learnerAuthorization = overrides.learnerAuthorization ?? createSupabaseLearnerAuthorizationPort({ env, fetchImpl })
+  const learnerAuthorization = overrides.learnerAuthorization ??
+    createVerifiedStudySessionAuthorizationPort({ env, fetchImpl })
   const proposalPersistence = overrides.proposalPersistence ?? productionPorts.proposalPersistence
   const outbox = overrides.outbox ?? productionPorts.outbox
   const recipientResolver = overrides.recipientResolver ?? productionPorts.recipientResolver
@@ -160,6 +162,9 @@ export function createStudySafetyHandler(overrides = {}) {
         accessToken: auth.accessToken,
         studentRef: request.studentRef,
         sessionId: request.sessionId,
+        // A missing or malformed reference resolves to null and is refused by
+        // the authorizer, so no privileged operation runs without a session.
+        sessionReference: readStudySessionReferenceHeader(event),
       })
       if (authorization?.status !== 'authorized') {
         if (authorization?.status === 'denied') {

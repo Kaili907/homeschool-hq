@@ -9,8 +9,10 @@ const sourceRoot = resolve(here, '..', '..')
 // A6-5-C — the safety record is adult-only. It is rendered from the parent-PIN
 // gated Parent Hub and must stay unreachable from any student-facing surface.
 
-const PANEL_MODULE = /StudySafetyEventsPanel/
-const CLIENT_MODULE = /studySafetyEventsClient/
+// The adult-only surface is A6-4's panel, now the single Safety panel. The
+// ledger module itself is deliberately NOT asserted absent: the student path
+// legitimately writes to it — only the parent-facing rendering is boundaried.
+const PANEL_MODULE = /StudyLocalSafetyStopsPanel/
 
 function readAll(directory: string): string {
   return readdirSync(directory, { withFileTypes: true })
@@ -29,7 +31,6 @@ describe('A6-5-C adult-only safety surface boundary', () => {
   it('is not reachable from any student-facing Study component', () => {
     const studentSurfaces = readAll(join(sourceRoot, 'components', 'study'))
     expect(studentSurfaces).not.toMatch(PANEL_MODULE)
-    expect(studentSurfaces).not.toMatch(CLIENT_MODULE)
   })
 
   it('is not reachable from the Study runtime, ports or safety modules the student path uses', () => {
@@ -40,12 +41,10 @@ describe('A6-5-C adult-only safety surface boundary', () => {
       readAll(join(studyRoot, 'production')),
     ].join('\n')
     expect(runtimeText).not.toMatch(PANEL_MODULE)
-    expect(runtimeText).not.toMatch(CLIENT_MODULE)
   })
 
   it('is not statically imported by the app root, which also serves the student picker', () => {
     const app = readFileSync(join(sourceRoot, 'App.tsx'), 'utf8')
     expect(app).not.toMatch(PANEL_MODULE)
-    expect(app).not.toMatch(CLIENT_MODULE)
   })
 })
