@@ -1,5 +1,5 @@
 import type { Difficulty, Visual } from '../types'
-import { finishChoices, fromPool } from '../genUtils'
+import { finishChoices, fromPool, shuffle } from '../genUtils'
 
 /**
  * Authored teaching prose for one procedural item type. The prose is deliberately
@@ -44,6 +44,36 @@ interface MultipleChoiceArgs<TItemType extends string, TParameters> {
   workedExample: CurriculumWorkedExample
   visual?: Visual
   choiceCount?: number
+  /**
+   * `distinct` samples the supplied distractors without replacement and fails
+   * closed when the caller did not provide enough valid options. This is useful
+   * for graded generators that must stay valid even under a constant RNG.
+   */
+  distractorMode?: 'sampled' | 'distinct'
+}
+
+function finishDistinctChoices(
+  correctAnswer: string,
+  distractors: readonly string[],
+  choiceCount: number,
+): { choices: string[]; answerIndex: number } {
+  const validDistractors = [
+    ...new Set(
+      distractors
+        .map((distractor) => distractor.trim())
+        .filter((distractor) => distractor !== '' && distractor !== correctAnswer),
+    ),
+  ]
+  if (validDistractors.length < choiceCount - 1) {
+    throw new Error(
+      `Expected at least ${choiceCount - 1} distinct distractors for ${correctAnswer}; received ${validDistractors.length}`,
+    )
+  }
+  const choices = shuffle([
+    correctAnswer,
+    ...shuffle(validDistractors).slice(0, choiceCount - 1),
+  ])
+  return { choices, answerIndex: choices.indexOf(correctAnswer) }
 }
 
 /**
@@ -53,11 +83,15 @@ interface MultipleChoiceArgs<TItemType extends string, TParameters> {
 export function makeCurriculumQuestion<TItemType extends string, TParameters>(
   args: MultipleChoiceArgs<TItemType, TParameters>,
 ): CurriculumQuestion<TItemType, TParameters> {
-  const { choices, answerIndex } = finishChoices(
-    args.correctAnswer,
-    fromPool([...args.distractors]),
-    args.choiceCount,
-  )
+  const choiceCount = args.choiceCount ?? 4
+  const { choices, answerIndex } =
+    args.distractorMode === 'distinct'
+      ? finishDistinctChoices(args.correctAnswer, args.distractors, choiceCount)
+      : finishChoices(
+          args.correctAnswer,
+          fromPool([...args.distractors]),
+          choiceCount,
+        )
   return {
     itemType: args.itemType,
     standard: args.standard,
