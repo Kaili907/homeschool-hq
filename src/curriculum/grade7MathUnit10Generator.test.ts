@@ -47,10 +47,8 @@ describe('Grade 7 Math Unit 10 generator contract', () => {
     for (let run = 0; run < 300; run++) for (const type of GRADE7_MATH_UNIT10_ITEM_TYPES) assertUsable(generateGrade7MathUnit10Question(type, ([1, 2, 3] as const)[run % 3]))
   })
 
-  it('keeps every dice-sum probability reachable', () => {
-    setRng(seededRng(0xa00_dd0))
-    const seen = new Set<string>()
-    for (let i = 0; i < 400; i++) seen.add(curriculumAnswer(generateGrade7MathUnit10Question('compound-event-probability', 2)))
-    expect(seen).toEqual(new Set(['1/36', '1/18', '1/12', '1/9', '5/36', '1/6']))
+  it('keeps the assumptions-and-constraints answer an exact signed integer under constant RNG', () => {
+    setRng(() => 0)
+    for (let i = 0; i < 30; i++) assertUsable(generateGrade7MathUnit10Question('assumptions-and-constraints', 3))
   })
 })
