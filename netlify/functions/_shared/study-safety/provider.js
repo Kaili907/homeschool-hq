@@ -107,6 +107,7 @@ export function createAnthropicSafetyClassifier(options = {}) {
   }
 
   return Object.freeze({
+    mode: 'production',
     classifierVersion: CLASSIFIER_VERSION,
     configurationIdentity: Object.freeze({ model: MODEL_ID, configVersion: CONFIG_VERSION }),
     isConfigured() {

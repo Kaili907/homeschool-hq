@@ -12,6 +12,7 @@ const IDS = Object.freeze({
   session: '55555555-5555-4555-8555-555555555555',
 })
 const ENV = Object.freeze({
+  ACADEMY_STUDY_ENABLED: 'true',
   SUPABASE_URL: 'https://academy.supabase.co',
   SUPABASE_ANON_KEY: 'public-test-key',
   ANTHROPIC_API_KEY: 'provider-test-key',
@@ -119,7 +120,7 @@ function readyHarness(options = {}) {
 
 describe('Study safety gateway security and privacy', () => {
   it('reports only sanitized readiness and uses 503 while not ready', async () => {
-    const handler = createStudySafetyHandler({ env: {} })
+    const handler = createStudySafetyHandler({ env: { ACADEMY_STUDY_ENABLED: 'true' } })
     const result = await handler({ httpMethod: 'GET', path: '/api/study/safety/readiness', headers: {} })
     expect(result.statusCode).toBe(503)
     expect(responseJson(result)).toEqual({ status: 'not-ready' })
