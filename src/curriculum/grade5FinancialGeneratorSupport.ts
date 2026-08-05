@@ -36,7 +36,7 @@ export function generateFinancialQuestion<T extends string>(definition: Financia
   switch (definition.kind) {
     case 'subtract-two': {
       const total = definition.scenario === 'scarcity' ? a + b : a + b + c
-      const optionB = definition.scenario === 'scarcity' ? b + 100 : c
+      const optionB = definition.scenario === 'scarcity' ? a + 100 : c
       correct = a
       if (definition.scenario === 'priority') prompt = `${lead}a student has ${money(total)} for a planned purchase. A needed item costs ${money(b)} and a wanted item costs ${money(c)}. The student pays for the need before choosing the want. What amount remains after both listed choices? Give your answer as dollars and cents.`
       else if (definition.scenario === 'scarcity') prompt = `${lead}a student has ${money(total)}. Option A costs ${money(b)} and option B costs ${money(optionB)}, so both options cannot be afforded together. If the student chooses option A, what amount remains? Give your answer as dollars and cents.`
