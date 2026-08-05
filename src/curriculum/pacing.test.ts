@@ -236,6 +236,12 @@ grades: 10,12
     expect(planAppliesToGrade(doc, '3')).toBe(false)
     expect(plansForGrade([all, doc], '3').map((d) => d.subjectId)).toEqual(['x'])
   })
+
+  it('accepts grade 5, 7, and 8 in front matter', () => {
+    const doc = parsePlanDoc(`---\nsubject: Middle school lab\nsubjectId: middle-school-lab\ngrades: 5,7,8\n---\n## Week 1 - a\n- b\n`)
+    expect(doc.grades).toEqual(['5', '7', '8'])
+    for (const grade of ['5', '7', '8'] as const) expect(planAppliesToGrade(doc, grade)).toBe(true)
+  })
 })
 
 // ---------- parser round-trip against the SHIPPED docs (count-verified per doc) ----------

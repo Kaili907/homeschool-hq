@@ -9,9 +9,8 @@ import { derivedScopeWeek, isTravelWeek, pointerDrift, resolvePointer, weekdayOf
 
 /**
  * MP — the pure view model the four hub views render from. Combines the pacing engine,
- * the parsed plans, and each girl's expected-subject list. Subjects Dad tracks but that
- * have no plan doc yet render as "awaiting placement results" placeholders — the hub is
- * useful at partial content, since scopes arrive per-girl as assessments complete.
+ * the parsed plans and the subjects that apply to each girl's grade. Plan front matter
+ * is the source of truth, so a new plan file becomes available without a code change.
  */
 
 export interface ExpectedSubject {
@@ -19,25 +18,14 @@ export interface ExpectedSubject {
   label: string
 }
 
-/** What the hub tracks per grade. A subject with no matching plan doc → placeholder. */
-export function expectedSubjects(grade: Grade): ExpectedSubject[] {
-  if (grade === '10' || grade === '12') {
-    return [
-      { id: 'math', label: 'Math' },
-      { id: 'english', label: 'English' },
-      { id: 'personal-finance', label: 'Personal Finance' },
-      { id: 'mindset', label: "Competitor's Mind" },
-      { id: 'ai-literacy', label: 'AI Literacy' },
-    ]
-  }
-  return [
-    { id: 'math', label: 'Math' },
-    { id: 'reading', label: 'Reading & Spelling' },
-    { id: 'writing', label: 'Writing' },
-    { id: 'japanese', label: 'Japanese' },
-    { id: 'mindset', label: "Competitor's Mind" },
-    { id: 'ai-literacy', label: 'AI Literacy' },
-  ]
+/** What the hub tracks per grade, in deterministic loader order. */
+export function expectedSubjects(docs: PlanDoc[], grade: Grade): ExpectedSubject[] {
+  const seen = new Set<string>()
+  return docs.flatMap((doc) => {
+    if (!planAppliesToGrade(doc, grade) || seen.has(doc.subjectId)) return []
+    seen.add(doc.subjectId)
+    return [{ id: doc.subjectId, label: doc.subject }]
+  })
 }
 
 /** The plan doc for a subject id that applies to this grade, or null (missing scope). */
@@ -56,14 +44,14 @@ export interface SubjectPlan {
   missing: boolean
 }
 
-/** Every tracked subject for a girl, with its plan (or placeholder) + resolved pointer. */
+/** Every subject with an applicable plan for a girl, with its resolved pointer. */
 export function subjectPlansFor(
   p: Profile,
   docs: PlanDoc[],
   sy: SchoolYear,
   todayISO: string,
 ): SubjectPlan[] {
-  return expectedSubjects(p.grade).map((subject) => {
+  return expectedSubjects(docs, p.grade).map((subject) => {
     const doc = docForSubject(docs, subject.id, p.grade)
     return {
       subject,

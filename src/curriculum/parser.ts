@@ -1,4 +1,4 @@
-import type { Grade } from '../types'
+import { GRADES, type Grade } from '../types'
 
 /**
  * MP — curriculum parser. Turns a plan markdown doc (the `## Week N` convention with a
@@ -41,15 +41,13 @@ export interface PlanDoc {
   weekCount: number
 }
 
-const VALID_GRADES: Grade[] = ['3', '4', '6', '10', '12']
-
 function parseGrades(raw: string): Grade[] | 'all' {
   const v = raw.trim().toLowerCase()
   if (v === 'all' || v === '') return 'all'
   const gs = raw
     .split(',')
     .map((s) => s.trim())
-    .filter((s): s is Grade => (VALID_GRADES as string[]).includes(s))
+    .filter((s): s is Grade => (GRADES as readonly string[]).includes(s))
   return gs.length ? gs : 'all'
 }
 

@@ -36,7 +36,9 @@ export type SkillStatus = 'mastered' | 'developing' | 'not-started'
 
 export type ISODate = string // YYYY-MM-DD
 
-export type Grade = '3' | '4' | '5' | '6' | '7' | '8' | '10' | '12'
+/** Every grade the household model and plan front matter may address. */
+export const GRADES = ['3', '4', '5', '6', '7', '8', '10', '12'] as const
+export type Grade = (typeof GRADES)[number]
 
 // ---------- CURR-1 Manuel Academy curriculum (additive, all OPTIONAL; no schemaVersion bump) ----------
 
