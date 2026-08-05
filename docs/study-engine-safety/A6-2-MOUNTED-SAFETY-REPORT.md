@@ -1,6 +1,6 @@
 # A6-2 mounted Tutor safety report
 
-Status: Part 1 established on baseline `8d7c0906a303fb6089d1a8e280c70a12a6dc57f8`; implementation and all requested gates are complete. Independent Tier 1 review is the remaining pre-push gate.
+Status: Part 1 established on baseline `8d7c0906a303fb6089d1a8e280c70a12a6dc57f8`; implementation, all requested gates, and full independent Tier 1 review are complete. Feature-branch push is the remaining delivery step.
 
 Branch: `a6-2-mounted-safety`
 
@@ -91,7 +91,7 @@ The following block reserves the final line-for-line stat captured after all rep
  .../tests/final-assembly/safety-privacy.test.ts    |  11 +-
  .../final-assembly/tutor-bridge-adaptation.test.ts |   4 +-
  .../tutor-bridge-engine-input.test.ts              |   3 +-
- .../A6-2-MOUNTED-SAFETY-REPORT.md                  | 249 +++++++++++++++++++++
+ .../A6-2-MOUNTED-SAFETY-REPORT.md                  | 255 +++++++++++++++++++++
  .../functions/_shared/study-safety/gateway.test.js |   3 +-
  .../_shared/study-safety/production-boot.test.js   | 215 ++++++++++++++++++
  netlify/functions/_shared/study-safety/provider.js |   1 +
@@ -109,7 +109,7 @@ The following block reserves the final line-for-line stat captured after all rep
  src/study/safety/mountedPort.ts                    |  69 ++++++
  src/study/types.ts                                 |  13 +-
  tests/study-mounted-safety-durable.test.js         | 151 +++++++++++++
- 25 files changed, 1374 insertions(+), 51 deletions(-)
+ 25 files changed, 1380 insertions(+), 51 deletions(-)
 ```
 
 ## Red proof
@@ -242,7 +242,13 @@ The STOP condition remains not triggered for code implementation because the aut
 
 ## Independent Tier 1 review
 
-Pending against the immutable post-report tip. Push is blocked until an independent reviewer returns a full safety verdict with no unresolved blocking findings.
+Full independent review was performed read-only against immutable tip `cd66574cb9b89d21888cb98384a28e7a001cd40a`. The reviewer inspected the complete diff and independently reproduced all three baseline RED conditions, then reran the focused mounted matrix (`14/14`), TypeScript, Study assembly (`62/62`), and server safety (`129/129`) green. The reviewed worktree remained clean and untouched.
+
+Critical, high, and medium findings: **none**.
+
+Low/nonblocking finding: concatenating every Tutor string can exceed the server's 4,000-character normalization limit (`adaptive-tutor/study-engine/runtime/src/tutor-bridge.ts:113-133`; `netlify/functions/_shared/study-safety/deterministic.js:135-151`). This produces an `invalid` stop with fixed text; it is a liveness concern, not an output-disclosure path. Truncating the classified text would risk omitting later harmful content, so fail-closed behavior is retained.
+
+Independent verdict: **SAFE TO PUSH FOR TIER 1 REVIEW**. The final report-only commit is subject to a same-reviewer exact-tip confirmation before push.
 
 ## Plain-language child-safety answer
 
