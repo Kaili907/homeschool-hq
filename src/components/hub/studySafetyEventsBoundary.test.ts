@@ -26,6 +26,8 @@ describe('A6-5-C adult-only safety surface boundary', () => {
     const hub = readFileSync(join(here, 'ParentHub.tsx'), 'utf8')
     expect(hub).toMatch(PANEL_MODULE)
     expect(hub).toContain("tab === 'safety'")
+    expect(hub.match(/\{ id: 'safety' as const, label: 'Safety'/g)).toHaveLength(1)
+    expect(hub).not.toContain("tabs.push({ id: 'safety'")
   })
 
   it('is not reachable from any student-facing Study component', () => {
