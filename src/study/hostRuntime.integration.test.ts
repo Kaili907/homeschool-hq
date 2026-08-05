@@ -1,10 +1,19 @@
 import { describe, expect, it } from 'vitest'
 import { createLocalDevelopmentStudyPorts } from './localDevelopmentPorts'
+import type { StudySafetyPort } from './ports'
 import { AcceptedRc1HostRuntime } from './runtimeFacade'
 import { syntheticGrade5StudyContext } from './demonstrations'
 import { createSyntheticMathBlock, SYNTHETIC_NOW } from './testing/syntheticStudyFixtures'
 
 describe('accepted RC1 host runtime boundary', () => {
+  const productionSafety = (outcome: 'clear' | 'urgent' = 'clear'): StudySafetyPort => ({
+    mode: 'production',
+    classifierVersion: 'test-mounted-safety-v1',
+    evaluate: async () => outcome === 'clear'
+      ? { outcome: 'clear', mayContinue: true, adultHelpState: 'not-needed' }
+      : { outcome: 'urgent', mayContinue: false, adultHelpState: 'proposed-not-delivered' },
+  })
+
   it('fails before runtime launch when a required persistence or safety port is missing', async () => {
     const context = syntheticGrade5StudyContext('math')
     const { ports } = createLocalDevelopmentStudyPorts()
@@ -22,7 +31,8 @@ describe('accepted RC1 host runtime boundary', () => {
 
   it('routes an urgent safety result to stop before Tutor Core and persists no raw answer', async () => {
     const context = syntheticGrade5StudyContext('math')
-    const { ports, services } = createLocalDevelopmentStudyPorts({ forcedSafetyOutcome: 'urgent' })
+    const { ports: localPorts, services } = createLocalDevelopmentStudyPorts()
+    const ports = { ...localPorts, safety: productionSafety('urgent') }
     const { entry, scope } = await createSyntheticMathBlock(ports, { suffix: 'safety-stop' })
     const runtime = new AcceptedRc1HostRuntime(ports)
     const sessionRef = 'session:synthetic-safety-stop'
@@ -44,11 +54,13 @@ describe('accepted RC1 host runtime boundary', () => {
       expect(result.deliveryStatus).toBe('proposed-not-delivered')
     }
     expect(JSON.stringify(services.inspectPublicStateForTest())).not.toContain(canary)
+    expect(services.inspectPublicStateForTest()).toMatchObject({ outbox: [] })
   })
 
   it('accepts clear input through the bridge but reprojects only a host-bound safe presentation', async () => {
     const context = syntheticGrade5StudyContext('math')
-    const { ports, services } = createLocalDevelopmentStudyPorts()
+    const { ports: localPorts, services } = createLocalDevelopmentStudyPorts()
+    const ports = { ...localPorts, safety: productionSafety() }
     const { entry, scope } = await createSyntheticMathBlock(ports, { suffix: 'accepted' })
     const runtime = new AcceptedRc1HostRuntime(ports)
     const sessionRef = 'session:synthetic-accepted'

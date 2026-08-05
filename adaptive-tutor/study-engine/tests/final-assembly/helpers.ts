@@ -2,6 +2,13 @@ import type { SafeTutorBridgeRequest } from "../../runtime/src/tutor-bridge.ts";
 import { LOCAL_DEMO_SAFETY_CONFIGURATION } from "../../runtime/src/safety.ts";
 
 export const localDemoSafety = LOCAL_DEMO_SAFETY_CONFIGURATION;
+export const clearOutputSafety = Object.freeze({
+  classify: async () => ({
+    classification: "clear" as const,
+    mayContinue: true,
+    adultHelpState: "not-needed" as const,
+  }),
+});
 
 export function bridgeRequest(
   overrides: Partial<SafeTutorBridgeRequest> = {},

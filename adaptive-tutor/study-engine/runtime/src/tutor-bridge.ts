@@ -54,6 +54,29 @@ export interface SafeTutorBridgeRequest {
 export interface SafeTutorBridgeDependencies {
   readonly eventLedger: AcceptedEventLedgerPort;
   readonly safety: UrgentSafetyGatewayConfiguration;
+  readonly outputSafety: TutorOutputSafetyPort;
+}
+
+export interface TutorOutputSafetyRequest {
+  readonly requestId: string;
+  readonly sessionId: string;
+  /** Transient structured Tutor text. It must never be logged or persisted. */
+  readonly transientTutorText: string;
+}
+
+export interface TutorOutputSafetyDecision {
+  readonly classification: "urgent" | "uncertain" | "clear" | "invalid";
+  readonly mayContinue: boolean;
+  readonly adultHelpState:
+    | "not-needed"
+    | "proposed-not-delivered"
+    | "not-confirmed";
+}
+
+export interface TutorOutputSafetyPort {
+  classify(
+    request: TutorOutputSafetyRequest,
+  ): Promise<TutorOutputSafetyDecision>;
 }
 
 export type SafeTutorBridgeResult =
@@ -77,7 +100,63 @@ export type SafeTutorBridgeResult =
         { readonly status: "accepted" }
       >;
       readonly coreSubmitInvocations: 0 | 1;
+    }
+  | {
+      readonly status: "output-blocked";
+      readonly classification: "urgent" | "uncertain" | "invalid";
+      readonly adultHelpState: "proposed-not-delivered" | "not-confirmed";
+      readonly coreSubmitInvocations: 1;
     };
+
+const OUTPUT_BLOCKED = Symbol("tutor-output-blocked");
+
+function collectTransientTutorText(value: unknown): string {
+  const strings: string[] = [];
+  const active = new Set<object>();
+  const visit = (entry: unknown): void => {
+    if (typeof entry === "string") {
+      strings.push(entry);
+      return;
+    }
+    if (!entry || typeof entry !== "object" || active.has(entry)) return;
+    active.add(entry);
+    if (Array.isArray(entry)) {
+      entry.forEach(visit);
+    } else {
+      Object.keys(entry as Record<string, unknown>)
+        .sort()
+        .forEach((key) => visit((entry as Record<string, unknown>)[key]));
+    }
+    active.delete(entry);
+  };
+  visit(value);
+  return strings.join("\n");
+}
+
+function validOutputSafetyDecision(
+  value: unknown,
+): value is TutorOutputSafetyDecision {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const record = value as Record<string, unknown>;
+  if (
+    Object.keys(record).length !== 3 ||
+    !["classification", "mayContinue", "adultHelpState"].every((key) =>
+      Object.hasOwn(record, key)
+    ) ||
+    !["urgent", "uncertain", "clear", "invalid"].includes(
+      String(record.classification),
+    ) ||
+    typeof record.mayContinue !== "boolean"
+  ) return false;
+  if (record.classification === "clear") {
+    return record.mayContinue === true && record.adultHelpState === "not-needed";
+  }
+  if (record.classification === "invalid") {
+    return record.mayContinue === false && record.adultHelpState === "not-confirmed";
+  }
+  return record.mayContinue === false &&
+    record.adultHelpState === "proposed-not-delivered";
+}
 
 function frozenCorePort() {
   return {
@@ -198,6 +277,10 @@ export async function runSafeTutorBridge(
     { studyId: request.skillId, tutorId: program.targetSkillId },
   ]);
   let coreSubmitInvocations = 0;
+  let blockedOutput: Exclude<
+    SafeTutorBridgeResult,
+    { readonly status: "accepted" | "stopped-or-quarantined" }
+  > | null = null;
 
   const result = await orchestrateStudyCoreBridge(
     {
@@ -222,11 +305,45 @@ export async function runSafeTutorBridge(
         learnerLocalDate: request.learnerLocalDate,
         householdTimeZone: request.householdTimeZone,
       },
-      submitToTutorCore: (transientLearnerText) => {
+      submitToTutorCore: async (transientLearnerText) => {
         coreSubmitInvocations += 1;
         const engine = new AdaptiveTutorEngine(program, hooks);
         engine.start();
         const tutorResponse = engine.submit({ raw: transientLearnerText });
+        let decision: TutorOutputSafetyDecision;
+        try {
+          const candidate = await dependencies.outputSafety.classify({
+            requestId: `${request.requestId}:tutor-output`,
+            sessionId: request.sessionId,
+            transientTutorText: collectTransientTutorText(tutorResponse),
+          });
+          decision = validOutputSafetyDecision(candidate)
+            ? candidate
+            : {
+                classification: "invalid",
+                mayContinue: false,
+                adultHelpState: "not-confirmed",
+              };
+        } catch {
+          decision = {
+            classification: "invalid",
+            mayContinue: false,
+            adultHelpState: "not-confirmed",
+          };
+        }
+        if (decision.classification !== "clear" || decision.mayContinue !== true) {
+          blockedOutput = {
+            status: "output-blocked",
+            classification: decision.classification === "clear"
+              ? "invalid"
+              : decision.classification,
+            adultHelpState: decision.adultHelpState === "not-needed"
+              ? "not-confirmed"
+              : decision.adultHelpState,
+            coreSubmitInvocations: 1,
+          };
+          throw OUTPUT_BLOCKED;
+        }
         return {
           tutorResponse,
           tutorProgram: program,
@@ -241,6 +358,8 @@ export async function runSafeTutorBridge(
       eventLedger: dependencies.eventLedger,
     },
   );
+
+  if (blockedOutput) return blockedOutput;
 
   if (result.status !== "accepted") {
     return {

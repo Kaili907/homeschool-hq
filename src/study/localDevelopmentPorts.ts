@@ -560,11 +560,9 @@ export class LocalDevelopmentStudyServices {
   evaluate(_request: StudySafetyRequest): StudySafetyResult {
     const outcome = this.#forcedSafetyOutcome
     return {
-      classificationVersion: 1,
-      classifierVersion: this.classifierVersion,
       outcome,
-      categories: outcome === 'clear' ? [] : ['self-harm-or-immediate-danger'],
-      reasonCodes: [`local-development-forced-${outcome}`],
+      mayContinue: outcome === 'clear',
+      adultHelpState: outcome === 'clear' ? 'not-needed' : 'not-confirmed',
     }
   }
 

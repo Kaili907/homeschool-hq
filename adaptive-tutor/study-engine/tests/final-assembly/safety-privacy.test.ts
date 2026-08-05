@@ -2,7 +2,7 @@ import { adultReviewProposalFromSafety } from "../../runtime/src/adult-review.ts
 import { InMemoryAcceptedEventLedger } from "../../runtime/src/ledger.ts";
 import { runSafeTutorBridge } from "../../runtime/src/tutor-bridge.ts";
 import type { UrgentSafetyGatewayConfiguration } from "../../runtime/src/safety.ts";
-import { bridgeRequest, localDemoSafety } from "./helpers.ts";
+import { bridgeRequest, clearOutputSafety, localDemoSafety } from "./helpers.ts";
 
 describe("pre-Core child-safety and privacy", () => {
   test.each([
@@ -28,6 +28,7 @@ describe("pre-Core child-safety and privacy", () => {
         {
           eventLedger: new InMemoryAcceptedEventLedger(),
           safety: localDemoSafety,
+          outputSafety: clearOutputSafety,
         },
       );
       expect(result.status).toBe("stopped-or-quarantined");
@@ -65,6 +66,7 @@ describe("pre-Core child-safety and privacy", () => {
       {
         eventLedger: new InMemoryAcceptedEventLedger(),
         safety: malformedProductionMode,
+        outputSafety: clearOutputSafety,
       },
     );
     expect(result.status).toBe("stopped-or-quarantined");
@@ -95,7 +97,7 @@ describe("pre-Core child-safety and privacy", () => {
         sessionId: "session:safety:no-downgrade",
         transientLearnerText: "I am going to hurt myself.",
       }),
-      { eventLedger: new InMemoryAcceptedEventLedger(), safety },
+      { eventLedger: new InMemoryAcceptedEventLedger(), safety, outputSafety: clearOutputSafety },
     );
     expect(result.status).toBe("stopped-or-quarantined");
     if (result.status !== "stopped-or-quarantined") return;
@@ -115,6 +117,7 @@ describe("pre-Core child-safety and privacy", () => {
       {
         eventLedger: new InMemoryAcceptedEventLedger(),
         safety: localDemoSafety,
+        outputSafety: clearOutputSafety,
       },
     );
     expect(result.status).toBe("stopped-or-quarantined");
@@ -135,6 +138,7 @@ describe("pre-Core child-safety and privacy", () => {
       {
         eventLedger: new InMemoryAcceptedEventLedger(),
         safety: localDemoSafety,
+        outputSafety: clearOutputSafety,
       },
     );
     expect(result.status).toBe("stopped-or-quarantined");
@@ -157,6 +161,7 @@ describe("pre-Core child-safety and privacy", () => {
       {
         eventLedger: new InMemoryAcceptedEventLedger(),
         safety: localDemoSafety,
+        outputSafety: clearOutputSafety,
       },
     );
     expect(result.status).toBe("accepted");
@@ -179,6 +184,7 @@ describe("pre-Core child-safety and privacy", () => {
       {
         eventLedger: new InMemoryAcceptedEventLedger(),
         safety: localDemoSafety,
+        outputSafety: clearOutputSafety,
       },
     );
     const serialized = JSON.stringify(result);
@@ -193,6 +199,7 @@ describe("pre-Core child-safety and privacy", () => {
       {
         eventLedger: new InMemoryAcceptedEventLedger(),
         safety: localDemoSafety,
+        outputSafety: clearOutputSafety,
       },
     );
     expect(result.status).toBe("accepted");

@@ -85,7 +85,7 @@ import {
 import { StudyLifecycleBoundary } from './study/lifecycle'
 
 const loadPreviewPorts = import.meta.env.DEV
-  ? () => import('./study/localDevelopmentPorts').then(({ createLocalDevelopmentStudyPorts }) => createLocalDevelopmentStudyPorts())
+  ? () => import('./study/mountedPorts').then(({ createMountedStudyPorts }) => createMountedStudyPorts())
   : null
 const StudyDashboard = import.meta.env.DEV
   ? lazy(() => import('./components/study/StudyDashboard').then((module) => ({ default: module.StudyDashboard })))

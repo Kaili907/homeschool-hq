@@ -108,7 +108,10 @@ export interface StudyOutboxPort {
 export interface StudySafetyPort {
   readonly mode: 'local-development' | 'production'
   readonly classifierVersion: string
-  evaluate(request: StudySafetyRequest, operation?: StudyOperationContext): StudySafetyResult
+  evaluate(
+    request: StudySafetyRequest,
+    operation?: StudyOperationContext,
+  ): StudySafetyResult | Promise<StudySafetyResult>
 }
 
 export interface StudyPortBundle {

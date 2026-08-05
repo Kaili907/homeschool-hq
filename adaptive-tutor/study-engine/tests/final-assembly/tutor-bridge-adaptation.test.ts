@@ -8,7 +8,7 @@ import {
   adaptProgramToExpectedAnswer,
   runSafeTutorBridge,
 } from "../../runtime/src/tutor-bridge.ts";
-import { bridgeRequest, localDemoSafety } from "./helpers.ts";
+import { bridgeRequest, clearOutputSafety, localDemoSafety } from "./helpers.ts";
 
 describe("tutor bridge program adaptation", () => {
   it("preserves the full diagnostic item set while adapting the first item", () => {
@@ -53,6 +53,7 @@ describe("tutor bridge program adaptation", () => {
     const result = await runSafeTutorBridge(bridgeRequest(), {
       eventLedger: new InMemoryAcceptedEventLedger(),
       safety: localDemoSafety,
+      outputSafety: clearOutputSafety,
     });
     expect(result.status).toBe("accepted");
     if (result.status !== "accepted") return;
@@ -69,6 +70,7 @@ describe("tutor bridge program adaptation", () => {
       {
         eventLedger: new InMemoryAcceptedEventLedger(),
         safety: localDemoSafety,
+        outputSafety: clearOutputSafety,
       },
     );
     expect(result.status).toBe("accepted");

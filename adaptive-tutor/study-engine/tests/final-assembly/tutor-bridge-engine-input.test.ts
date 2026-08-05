@@ -2,7 +2,7 @@ import type { TutorProgram } from "../../../core/index.ts";
 import { InMemoryAcceptedEventLedger } from "../../runtime/src/ledger.ts";
 import { resolveTutorSubjectRegistration } from "../../runtime/src/subject-registry.ts";
 import { runSafeTutorBridge } from "../../runtime/src/tutor-bridge.ts";
-import { bridgeRequest, localDemoSafety } from "./helpers.ts";
+import { bridgeRequest, clearOutputSafety, localDemoSafety } from "./helpers.ts";
 
 const recordedPrograms = vi.hoisted(() => ({ values: [] as unknown[] }));
 
@@ -31,6 +31,7 @@ describe("tutor bridge engine input", () => {
       {
         eventLedger: new InMemoryAcceptedEventLedger(),
         safety: localDemoSafety,
+        outputSafety: clearOutputSafety,
       },
     );
     expect(result.status).toBe("accepted");

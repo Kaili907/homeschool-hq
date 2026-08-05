@@ -9,9 +9,11 @@ import type { AcceptedEventLedgerPort } from '../../adaptive-tutor/study-engine/
 import type { UrgentSafetyClassifierPort } from '../../adaptive-tutor/study-engine/runtime/src/safety.ts'
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from './ports'
 import { assertAcceptedStudyRuntime } from './runtimeCompatibility'
+import { learnerSafeResult } from './safety/learnerSafe'
 import type {
   HostStudyLaunchContext,
   StudyCalendarEntry,
+  StudySafetyResult,
   StudyScope,
 } from './types'
 
@@ -46,7 +48,9 @@ export type StudyTutorTurnResult =
       readonly status: 'stopped'
       readonly reasonCode: string
       readonly coreSubmitInvocations: 0 | 1
-      readonly deliveryStatus: 'proposed-not-delivered'
+      readonly classification: 'urgent' | 'uncertain' | 'invalid'
+      readonly deliveryStatus: 'proposed-not-delivered' | 'not-confirmed'
+      readonly studentMessage: string
     }
   | { readonly status: 'quarantined'; readonly reasonCode: string }
 
@@ -93,6 +97,46 @@ function taskForBridge(task: StudyCalendarEntry['segments'][number]['taskType'])
   throw new Error('This Study task is completion-only and cannot be cast into a Tutor Core task.')
 }
 
+const PRECHECKED_CLASSIFIER_VERSION = 'mounted-http-prechecked-clear-v1'
+
+function invalidSafetyResult(): StudySafetyResult {
+  return {
+    outcome: 'invalid',
+    mayContinue: false,
+    adultHelpState: 'not-confirmed',
+  }
+}
+
+function validSafetyResult(value: unknown): value is StudySafetyResult {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+  const result = value as Record<string, unknown>
+  if (
+    Object.keys(result).length !== 3 ||
+    !['outcome', 'mayContinue', 'adultHelpState'].every((key) => Object.hasOwn(result, key)) ||
+    !['urgent', 'uncertain', 'clear', 'invalid'].includes(String(result.outcome)) ||
+    typeof result.mayContinue !== 'boolean'
+  ) return false
+  if (result.outcome === 'clear') return result.mayContinue === true && result.adultHelpState === 'not-needed'
+  if (result.outcome === 'invalid') return result.mayContinue === false && result.adultHelpState === 'not-confirmed'
+  return result.mayContinue === false && result.adultHelpState === 'proposed-not-delivered'
+}
+
+function stoppedResult(
+  classification: 'urgent' | 'uncertain' | 'invalid',
+  reasonCode: string,
+  coreSubmitInvocations: 0 | 1,
+  deliveryStatus: 'proposed-not-delivered' | 'not-confirmed',
+): Extract<StudyTutorTurnResult, { readonly status: 'stopped' }> {
+  return {
+    status: 'stopped',
+    reasonCode,
+    coreSubmitInvocations,
+    classification,
+    deliveryStatus,
+    studentMessage: learnerSafeResult(classification).message,
+  }
+}
+
 export class AcceptedRc1HostRuntime {
   readonly #identity = new Rc1LocalLearnerBindingAdapter()
 
@@ -128,11 +172,40 @@ export class AcceptedRc1HostRuntime {
     if (!segment) return { status: 'quarantined', reasonCode: 'unknown-segment' }
 
     const safetyPort = ports.safety
+    let inputSafety = invalidSafetyResult()
+    if (safetyPort.mode === 'production') {
+      try {
+        const candidate = await safetyPort.evaluate({
+          scope: input.scope,
+          requestRef: `${input.requestRef}:learner-input`,
+          studentRef: { kind: 'legacy-profile-id', value: input.context.hostProfileRef },
+          contentKind: 'learner-input',
+          transientText: input.transientLearnerText,
+        })
+        inputSafety = validSafetyResult(candidate) ? candidate : invalidSafetyResult()
+      } catch {
+        inputSafety = invalidSafetyResult()
+      }
+    }
+    if (inputSafety.outcome !== 'clear' || inputSafety.mayContinue !== true) {
+      const classification = inputSafety.outcome === 'clear' ? 'invalid' : inputSafety.outcome
+      return stoppedResult(
+        classification,
+        `mounted-input-safety-${classification}`,
+        0,
+        inputSafety.adultHelpState === 'proposed-not-delivered'
+          ? 'proposed-not-delivered'
+          : 'not-confirmed',
+      )
+    }
     const classifier: UrgentSafetyClassifierPort = {
-      classifierVersion: safetyPort.classifierVersion,
-      classify: (request) => safetyPort.evaluate({
-        scope: input.scope,
-        transientLearnerText: request.normalizedTransientText,
+      classifierVersion: PRECHECKED_CLASSIFIER_VERSION,
+      classify: () => ({
+        classificationVersion: 1,
+        classifierVersion: PRECHECKED_CLASSIFIER_VERSION,
+        outcome: 'clear',
+        categories: [],
+        reasonCodes: [PRECHECKED_CLASSIFIER_VERSION],
       }),
     }
     const eventLedger: AcceptedEventLedgerPort = {
@@ -167,7 +240,26 @@ export class AcceptedRc1HostRuntime {
           taskType: taskForBridge(segment.taskType),
         },
         eventLedger,
-        { safety: { mode: 'production', classifier } },
+        {
+          safety: { mode: 'production', classifier },
+          outputSafety: {
+            classify: async (request) => {
+              const candidate = await safetyPort.evaluate({
+                scope: input.scope,
+                requestRef: request.requestId,
+                studentRef: { kind: 'legacy-profile-id', value: input.context.hostProfileRef },
+                contentKind: 'tutor-output',
+                transientText: request.transientTutorText,
+              })
+              const decision = validSafetyResult(candidate) ? candidate : invalidSafetyResult()
+              return {
+                classification: decision.outcome,
+                mayContinue: decision.mayContinue,
+                adultHelpState: decision.adultHelpState,
+              }
+            },
+          },
+        },
       )
     } catch {
       return { status: 'quarantined', reasonCode: 'runtime-boundary-error' }
@@ -175,19 +267,21 @@ export class AcceptedRc1HostRuntime {
     if (input.isCurrentBinding && !input.isCurrentBinding()) {
       return { status: 'quarantined', reasonCode: 'stale-host-binding' }
     }
+    if (result.status === 'output-blocked') {
+      return stoppedResult(
+        result.classification,
+        `mounted-tutor-output-safety-${result.classification}`,
+        1,
+        result.adultHelpState,
+      )
+    }
     if (result.status !== 'accepted') {
-      await ports.outbox.propose(input.scope, {
-        proposalRef: `safety:${input.requestRef}`,
-        route: 'adult-review',
-        evidenceRefs: [],
-        status: 'proposed-not-delivered',
-      })
-      return {
-        status: 'stopped',
-        reasonCode: `bridge-${result.result.status}`,
-        coreSubmitInvocations: result.coreSubmitInvocations,
-        deliveryStatus: 'proposed-not-delivered',
-      }
+      return stoppedResult(
+        'invalid',
+        `bridge-${result.result.status}`,
+        result.coreSubmitInvocations,
+        'not-confirmed',
+      )
     }
     try {
       this.#identity.verifyAccepted(input.scope, result)
