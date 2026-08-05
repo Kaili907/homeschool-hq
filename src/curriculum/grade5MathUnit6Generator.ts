@@ -21,7 +21,8 @@ export const GRADE5_MATH_UNIT6_ITEM_DEFINITIONS={
 const gcd=(a:bigint,b:bigint):bigint=>b===0n?a:gcd(b,a%b)
 const text=(n:bigint,d:bigint):string=>{const g=gcd(n,d);n/=g;d/=g;const w=n/d;const r=n%d;return w===0n?`${r}/${d}`:r===0n?`${w}`:`${w} ${r}/${d}`}
 const q=(itemType:Grade5MathUnit6ItemType,difficulty:Difficulty,prompt:string,answer:string,parameters:Params)=>makeCurriculumQuestion({itemType, difficulty,prompt,correctAnswer:answer,distractors:itemType==='scaling-magnitude'?['less than','equal to','greater than'].filter(x=>x!==answer):['0','1','2','3','4','5'].filter(x=>x!==answer),choiceCount:itemType==='scaling-magnitude'?3:4,distractorMode:'distinct',parameters,...GRADE5_MATH_UNIT6_ITEM_DEFINITIONS[itemType]})
-const nums=(d:Difficulty)=>[ri(1,d+3),ri(2, d===1?6:12)] as const
+/** Every generated fraction operand is proper, so it cannot reduce to an integer. */
+const nums=(d:Difficulty)=>{const b=ri(3,d===1?6:12);return [ri(1,b-1),b] as const}
 export function generateFractionAsDivisionQuestion(difficulty:Difficulty){const[a,b]=nums(difficulty);return q('fraction-as-division',difficulty,`Write ${a} ÷ ${b} as a fraction in simplest form.`,text(BigInt(a),BigInt(b)),{a,b,c:0,d:0,mode:'division'})}
 export function generateMultiplyFractionByWholeQuestion(difficulty:Difficulty){const[a,b]=nums(difficulty);const c=ri(2,difficulty+4);return q('multiply-fraction-by-whole',difficulty,`Find ${c} × ${a}/${b}. Write the answer in simplest form.`,text(BigInt(a*c),BigInt(b)),{a,b,c,d:0,mode:'whole'})}
 export function generateMultiplyFractionsQuestion(difficulty:Difficulty){const[a,b]=nums(difficulty);const[c,d]=nums(difficulty);return q('multiply-fractions',difficulty,`Find ${a}/${b} × ${c}/${d}. Write the answer in simplest form.`,text(BigInt(a*c),BigInt(b*d)),{a,b,c,d,mode:'fraction'})}

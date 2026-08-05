@@ -26,8 +26,8 @@ function oracle7(q:Grade5MathUnit7Question):string {const p=q.prompt
  const m=p.match(/(?:Find|estimate) (\d+(?:\.\d+)?) [+×÷-] (\d+(?:\.\d+)?)/)!;const a=decimal(m[1]),b=decimal(m[2]),a10=BigInt(m[1].replace('.',''));if(q.itemType==='decimal-addition')return fmt(a+b);if(q.itemType==='decimal-subtraction')return fmt(a-b);if(q.itemType==='decimal-multiplication')return fmt10(a10*BigInt(m[2]));if(q.itemType==='decimal-division')return fmt10(a10/BigInt(m[2]));const r=(n:bigint)=>(n+50n)/100n*100n;return fmt(r(a)+r(b))}
 function oracle8(q:Grade5MathUnit8Question):string {const p=q.prompt
  if(q.itemType==='measurement-conversion'){const m=p.match(/Convert (\d+) feet/)!;return `${BigInt(m[1])*12n} inches`}
- if(q.itemType==='line-plot-fraction-data'){const m=p.match(/has (\d+) marks/)!;return `${rational(BigInt(m[1]),2n)} meters`}
- if(q.itemType==='additive-volume'){const m=p.match(/base of (\d+) by (\d+) units and have heights (\d+) and (\d+)/)!;return `${BigInt(m[1])*BigInt(m[2])*(BigInt(m[3])+BigInt(m[4]))} cubic units`}
+ if(q.itemType==='line-plot-fraction-data'){const m=p.match(/has (\d+) marks at 1\/4 meter, (\d+) marks at 1\/2 meter, and (\d+) marks at 3\/4/)!;return `${rational(BigInt(m[1])+2n*BigInt(m[2])+3n*BigInt(m[3]),4n)} meters`}
+ if(q.itemType==='additive-volume'){const m=p.match(/base of (\d+) by (\d+) units and having heights (\d+) and (\d+)/)!;expect(m[3]).not.toBe(m[4]);return `${BigInt(m[1])*BigInt(m[2])*(BigInt(m[3])+BigInt(m[4]))} cubic units`}
  const m=p.match(/(?:is|length) (\d+) (?:unit cubes long, |, width )(\d+) (?:wide, and |, and height )(\d+)/) ?? p.match(/length (\d+), width (\d+), and height (\d+) units/) ?? p.match(/is (\d+) inches by (\d+) inches by (\d+) inches/)!;const unit=q.itemType==='measurement-design'?'cubic inches':'cubic units';return `${BigInt(m[1])*BigInt(m[2])*BigInt(m[3])} ${unit}`}
 function well(q:{choices:string[];answerIndex:number;prompt:string}){expect(q.choices.length).toBeGreaterThanOrEqual(3);expect(new Set(q.choices).size).toBe(q.choices.length);expect(q.choices[q.answerIndex]).toBeTruthy()}
 describe('Grade 5 Units 6-8 rendered-prompt independent property oracles',()=>{
