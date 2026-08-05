@@ -93,7 +93,7 @@ The following block reserves the final line-for-line stat captured after all rep
  .../tutor-bridge-engine-input.test.ts              |   3 +-
  .../A6-2-MOUNTED-SAFETY-REPORT.md                  | 255 +++++++++++++++++++++
  .../functions/_shared/study-safety/gateway.test.js |   3 +-
- .../_shared/study-safety/production-boot.test.js   | 215 ++++++++++++++++++
+ .../_shared/study-safety/production-boot.test.js   | 215 +++++++++++++++++
  netlify/functions/_shared/study-safety/provider.js |   1 +
  netlify/functions/study-safety-classify.js         |  44 +++-
  src/App.tsx                                        |   2 +-
@@ -108,7 +108,7 @@ The following block reserves the final line-for-line stat captured after all rep
  src/study/safety/mountedPort.test.ts               | 102 +++++++++
  src/study/safety/mountedPort.ts                    |  69 ++++++
  src/study/types.ts                                 |  13 +-
- tests/study-mounted-safety-durable.test.js         | 151 +++++++++++++
+ tests/study-mounted-safety-durable.test.js         | 151 ++++++++++++
  25 files changed, 1380 insertions(+), 51 deletions(-)
 ```
 
