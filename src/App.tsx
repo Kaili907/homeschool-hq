@@ -60,7 +60,7 @@ import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
 import { isStudyEngineEnabledFromHost, isStudyEnginePreviewEnabledFromHost } from './study/featureFlag'
 import { isStudyEnginePath, leaveStudyEnginePath } from './studyEngineRoute'
-import { enabledAcademyGradeFromHost } from './academy/featureFlag'
+import { enabledAcademyEntries, hasEnabledAcademyProgram } from './academy/workingLevel'
 import {
   leaveAcademyPath,
   parseAcademyPath,
@@ -164,12 +164,12 @@ export default function App() {
       return { kind: 'studyDashboard' }
     }
     // CURR-1 (MOUNT-2 pattern): an /academy deep link with a valid persisted
-    // profile whose grade flag is enabled lands on the academy surface; any
-    // other case falls through to the picker/normal app.
+    // profile that reaches an enabled academy level lands on the academy
+    // surface; any other case falls through to the picker/normal app.
     const bootProfile = loaded.state.activeProfileId
       ? loaded.state.profiles[loaded.state.activeProfileId]
       : null
-    if (bootProfile && enabledAcademyGradeFromHost(bootProfile.grade)) {
+    if (bootProfile && hasEnabledAcademyProgram(bootProfile)) {
       const academyRoute = parseAcademyPath(window.location.pathname)
       if (academyRoute) return { kind: 'academy', route: academyRoute }
     }
@@ -322,6 +322,14 @@ export default function App() {
     if (!attendanceId || !attendanceTodayComplete) return
     setState((s) => patchProfile(s, attendanceId, (p) => recordAttendance(p, true, isoToday())))
   }, [attendanceId, attendanceTodayComplete])
+
+  // ACADEMY-LEVEL-DECOUPLE: which subjects this girl reaches, and at which level.
+  // Derived from her WORKING LEVELS (falling back to her nominal grade), then
+  // flag-gated — so her profile grade no longer decides what she receives.
+  const academyEntries = useMemo(
+    () => (active ? enabledAcademyEntries(active) : []),
+    [active],
+  )
 
   const studyContextResult = buildHostStudyContext({
     enabled: studyPreviewEnabled,
@@ -688,9 +696,9 @@ export default function App() {
 
   // CURR-1 academy mount point — self-styled, rendered full-bleed like Study.
   if (screen.kind === 'academy') {
-    const academyGrade = enabledAcademyGradeFromHost(active.grade)
-    if (!academyGrade) {
-      // Flag off or a non-academy grade signed in behind a stale /academy URL.
+    if (academyEntries.length === 0) {
+      // Flag off, or a girl with no enabled working level, signed in behind a
+      // stale /academy URL.
       return (
         <StudyUnavailable
           reason="The Academy curriculum is not enabled for this learner."
@@ -705,7 +713,7 @@ export default function App() {
       <Suspense fallback={<StudyLoading />}>
         <AcademyRouter
           profile={active}
-          grade={academyGrade}
+          entries={academyEntries}
           schoolYear={state.schoolYear}
           route={screen.route}
           onNavigate={(route) => {
@@ -862,7 +870,7 @@ export default function App() {
             onOpenStudy={studyPreviewReady || studyProductionSelected ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
             studyMode={studyPreviewReady ? 'preview' : studyProductionSelected ? 'unavailable' : undefined}
             onOpenAcademy={
-              enabledAcademyGradeFromHost(active.grade)
+              academyEntries.length > 0
                 ? () => {
                     syncAcademyPath({ kind: 'home' })
                     setScreen({ kind: 'academy', route: { kind: 'home' } })

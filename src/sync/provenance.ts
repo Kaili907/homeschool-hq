@@ -21,6 +21,19 @@ const PROFILE_ID = /^p[1-5]$/
 const RESERVED_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
 const GRADES = new Set(['3', '4', '5', '6', '7', '8', '10', '12'])
 const ACADEMY_GRADES = new Set(['5', '7', '8'])
+// mirrors ACADEMY_SUBJECTS (src/types.ts), the working-level record's key domain
+const ACADEMY_SUBJECTS = new Set([
+  'mathematics',
+  'english-language-arts',
+  'science',
+  'social-studies',
+  'health',
+  'physical-education',
+  'ready-for-life',
+  'technology',
+  'arts-and-music',
+  'financial-literacy',
+])
 const ACADEMY_LESSON_STATUSES = new Set(['in-progress', 'complete', 'reteach'])
 const ACADEMY_OCCASION_MODES = new Set(['guided', 'independent'])
 const ACADEMY_OCCASION_KINDS = new Set(['lesson-check', 'reassessment'])
@@ -564,13 +577,45 @@ function validatePacing(value: unknown): boolean {
   )
 }
 
+/**
+ * ACADEMY-LEVEL-DECOUPLE — the academy levels a profile may legitimately hold
+ * enrollment in: its nominal grade, plus any explicitly assigned working level.
+ * This replaces the old `academy.grade === profile.grade` rule, which made a
+ * decoupled enrollment (grade-6 girl doing Grade 5 mathematics) unrepresentable.
+ * The anti-tamper property is unchanged in kind: an imported payload still
+ * cannot enroll a profile in a level nobody assigned it.
+ */
+function allowedAcademyLevels(
+  profileGrade: unknown,
+  workingLevels: unknown,
+): Set<string> {
+  const levels = new Set<string>()
+  if (ACADEMY_GRADES.has(String(profileGrade))) levels.add(String(profileGrade))
+  if (plainRecord(workingLevels)) {
+    for (const level of Object.values(workingLevels)) {
+      if (ACADEMY_GRADES.has(String(level))) levels.add(String(level))
+    }
+  }
+  return levels
+}
+
+/** ACADEMY-LEVEL-DECOUPLE: subject → grade. Unknown subjects and non-grades are
+ * rejected rather than ignored, so a tampered record cannot ride along untyped. */
+function validateWorkingLevels(value: unknown): boolean {
+  return boundedRecord(
+    value,
+    (level, subject) =>
+      ACADEMY_SUBJECTS.has(subject) && typeof level === 'string' && GRADES.has(level),
+  )
+}
+
 // CURR-1: Manuel Academy enrollment + progress (see types.AcademyState).
-function validateAcademy(value: unknown, profileGrade: unknown): boolean {
+function validateAcademy(value: unknown, allowedLevels: Set<string>): boolean {
   return (
     plainRecord(value) &&
     text(value.releaseVersion, 64) &&
     ACADEMY_GRADES.has(String(value.grade)) &&
-    value.grade === profileGrade &&
+    allowedLevels.has(String(value.grade)) &&
     timestamp(value.enrolledAt) &&
     boundedArray(value.courseIds, identifier) &&
     boundedRecord(
@@ -694,7 +739,10 @@ function validateProfileOptionals(value: Record<string, unknown>): boolean {
       ),
     ) &&
     optional(value.scheduleExtensions, validateScheduleExtensions) &&
-    optional(value.academy, (candidate) => validateAcademy(candidate, value.grade))
+    optional(value.workingLevels, validateWorkingLevels) &&
+    optional(value.academy, (candidate) =>
+      validateAcademy(candidate, allowedAcademyLevels(value.grade, value.workingLevels)),
+    )
   )
 }
 

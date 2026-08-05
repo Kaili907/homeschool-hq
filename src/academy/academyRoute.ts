@@ -3,7 +3,7 @@
  * state stays the routing authority (see App.tsx); these paths exist so deep
  * links and refreshes land on the right academy surface (MOUNT-2 pattern: the
  * academy path is evaluated before the picker default when a valid persisted
- * profile exists and the profile's grade flag is enabled).
+ * profile exists and reaches an enabled academy level).
  */
 
 export const ACADEMY_PATH = '/academy'

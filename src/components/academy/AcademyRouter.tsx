@@ -3,7 +3,9 @@ import type { AcademyGrade, Profile, SchoolYear } from '../../types'
 import { isoToday } from '../../appState'
 import { derivedScopeWeek, isSchoolYearConfigured, resolvePointer } from '../../curriculum/pacing'
 import type { AcademyRoute } from '../../academy/academyRoute'
-import { loadCatalog, loadSchedule, loadUnit } from '../../academy/contentClient'
+import { loadUnit } from '../../academy/contentClient'
+import { loadProgram, type AcademyProgram } from '../../academy/program'
+import type { AcademyProgramEntry } from '../../academy/workingLevel'
 import {
   ACADEMY_SUBJECT_LABELS,
   type AcademyCatalog,
@@ -26,16 +28,22 @@ import {
 } from '../../academy/academyState'
 
 /**
- * CURR-1 — the Manuel Academy student surface (Grades 5/7/8), lazy-loaded from
- * App.tsx behind the per-grade feature flags. Self-styled (calm slate look,
- * matching the study surface), text-first, no animation (reduced-motion safe by
- * construction), keyboard-first: every control is a real button/input, headings
- * receive focus on view changes, and content renders without any media.
+ * CURR-1 — the Manuel Academy student surface, lazy-loaded from App.tsx behind
+ * the per-level feature flags. Self-styled (calm slate look, matching the study
+ * surface), text-first, no animation (reduced-motion safe by construction),
+ * keyboard-first: every control is a real button/input, headings receive focus
+ * on view changes, and content renders without any media.
+ *
+ * ACADEMY-LEVEL-DECOUPLE: the surface is driven by the girl's PROGRAM — her
+ * per-subject working levels — not by her profile grade. One profile can hold
+ * courses from several levels at once, so the router composes a merged catalog
+ * (see academy/program.ts) and labels each course with the level it came from.
+ * This surface is read-only with respect to levels: nothing here can change one.
  */
 
 interface AcademyProps {
   profile: Profile
-  grade: AcademyGrade
+  entries: readonly AcademyProgramEntry[]
   schoolYear: SchoolYear | undefined
   route: AcademyRoute
   onNavigate: (route: AcademyRoute) => void
@@ -44,19 +52,22 @@ interface AcademyProps {
 }
 
 export function AcademyRouter(props: AcademyProps) {
-  const { profile, grade, route, onNavigate, onPatch, onExit } = props
-  const [catalog, setCatalog] = useState<AcademyCatalog | null>(null)
-  const [schedule, setSchedule] = useState<AcademySchedule | null>(null)
+  const { profile, entries, route, onNavigate, onPatch, onExit } = props
+  const [program, setProgram] = useState<AcademyProgram | null>(null)
   const [loadError, setLoadError] = useState<string | null>(null)
+  // The entries array is rebuilt on every render; its CONTENT is the real
+  // dependency, so the key drives the effect and the ref carries the values.
+  const entriesKey = entries.map((e) => `${e.subject}@${e.level}`).join(',')
+  const entriesRef = useRef(entries)
+  entriesRef.current = entries
 
   useEffect(() => {
     let current = true
     setLoadError(null)
-    Promise.all([loadCatalog(grade), loadSchedule(grade)])
-      .then(([cat, sched]) => {
-        if (!current) return
-        setCatalog(cat)
-        setSchedule(sched)
+    setProgram(null)
+    loadProgram(entriesRef.current)
+      .then((composed) => {
+        if (current) setProgram(composed)
       })
       .catch(() => {
         if (current) setLoadError('The curriculum content could not be loaded. Check the connection and try again.')
@@ -64,16 +75,23 @@ export function AcademyRouter(props: AcademyProps) {
     return () => {
       current = false
     }
-  }, [grade])
+  }, [entriesKey])
 
-  // First visit enrolls the profile in every course of the grade catalog.
-  // enrollInCatalog preserves existing lesson state, so re-running is safe.
-  const enrolled = !!profile.academy && profile.academy.courseIds.length > 0
+  const catalog = program?.catalog ?? null
+  const schedule = program?.schedule ?? null
+
+  // Enrollment mirrors the program's course list. It re-runs when a parent
+  // changes a working level (the course set changes), and enrollInCatalog
+  // preserves existing lesson state, so no completed work is ever lost.
+  const enrolledIds = profile.academy?.courseIds
+  const desiredKey = catalog?.courses.map((c) => c.courseId).sort().join(',') ?? null
+  const enrolledKey = enrolledIds ? [...enrolledIds].sort().join(',') : null
+  const inSync = catalog !== null && desiredKey === enrolledKey && profile.academy?.grade === catalog.grade
   useEffect(() => {
-    if (!catalog || enrolled) return
+    if (!catalog || inSync || catalog.courses.length === 0) return
     const now = new Date().toISOString()
     onPatch((prev) => enrollInCatalog(prev, catalog, now))
-  }, [catalog, enrolled, onPatch])
+  }, [catalog, inSync, onPatch])
 
   if (loadError) {
     return (
@@ -84,7 +102,17 @@ export function AcademyRouter(props: AcademyProps) {
       </AcademyShell>
     )
   }
-  if (!catalog || !schedule || !profile.academy) {
+  if (program && program.catalog.courses.length === 0) {
+    return (
+      <AcademyShell title="Manuel Academy" onExit={onExit}>
+        <p role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 font-semibold">
+          This curriculum release has no courses for the levels set for you. A grown-up can change
+          your working levels in the Parent Hub.
+        </p>
+      </AcademyShell>
+    )
+  }
+  if (!catalog || !schedule || !program || !profile.academy) {
     return (
       <AcademyShell title="Manuel Academy" onExit={onExit}>
         <p role="status" className="font-semibold text-slate-500">
@@ -94,7 +122,16 @@ export function AcademyRouter(props: AcademyProps) {
     )
   }
 
-  const shared = { profile, catalog, schedule, onNavigate, onPatch, onExit, schoolYear: props.schoolYear }
+  const shared = {
+    profile,
+    catalog,
+    schedule,
+    levelOf: program.levelOf,
+    onNavigate,
+    onPatch,
+    onExit,
+    schoolYear: props.schoolYear,
+  }
   switch (route.kind) {
     case 'home':
       return <AcademyHome {...shared} />
@@ -161,6 +198,8 @@ interface SharedViewProps {
   profile: Profile
   catalog: AcademyCatalog
   schedule: AcademySchedule
+  /** courseId → the academy level it came from (courses may span levels). */
+  levelOf: Record<string, AcademyGrade>
   schoolYear: SchoolYear | undefined
   onNavigate: (route: AcademyRoute) => void
   onPatch: (update: (prev: Profile) => Profile) => void
@@ -170,9 +209,19 @@ interface SharedViewProps {
 const courseLabel = (course: AcademyCatalogCourse) =>
   ACADEMY_SUBJECT_LABELS[course.subject] ?? course.subject
 
+/** Subject plus the level it is served at — the girl always sees which level a
+ * course is, because in a decoupled program they are no longer all the same. */
+const courseLevelLabel = (
+  course: AcademyCatalogCourse,
+  levelOf: Record<string, AcademyGrade>,
+) => {
+  const level = levelOf[course.courseId]
+  return level ? `${courseLabel(course)} · Grade ${level}` : courseLabel(course)
+}
+
 // ---------- home: today's work + course catalog ----------
 
-function AcademyHome({ profile, catalog, schedule, schoolYear, onNavigate, onExit }: SharedViewProps) {
+function AcademyHome({ profile, catalog, schedule, levelOf, schoolYear, onNavigate, onExit }: SharedViewProps) {
   const today = isoToday()
   const configured = isSchoolYearConfigured(schoolYear)
   const scopeWeek = configured ? derivedScopeWeek(schoolYear, today) : 1
@@ -191,7 +240,7 @@ function AcademyHome({ profile, catalog, schedule, schoolYear, onNavigate, onExi
     return null
   }
   return (
-    <AcademyShell title={`Manuel Academy — Grade ${catalog.grade}`} onExit={onExit}>
+    <AcademyShell title="Manuel Academy" onExit={onExit}>
       <section aria-labelledby="academy-today">
         <div className="flex items-center justify-between gap-3">
           <h2 id="academy-today" className="text-xl font-extrabold">
@@ -233,7 +282,7 @@ function AcademyHome({ profile, catalog, schedule, schoolYear, onNavigate, onExi
                     <span className="flex-1">
                       <span className="block font-bold">{title}</span>
                       <span className="block text-sm font-semibold text-slate-500">
-                        {where ? courseLabel(where.course) : lessonId}
+                        {where ? courseLevelLabel(where.course, levelOf) : lessonId}
                         {done ? ' — done' : state ? ' — in progress' : ''}
                       </span>
                     </span>
@@ -262,7 +311,7 @@ function AcademyHome({ profile, catalog, schedule, schoolYear, onNavigate, onExi
                   onClick={() => onNavigate({ kind: 'course', courseId: course.courseId })}
                   className="min-h-11 w-full rounded-xl border border-slate-300 bg-white p-4 text-left hover:border-cyan-500"
                 >
-                  <span className="block font-extrabold">{courseLabel(course)}</span>
+                  <span className="block font-extrabold">{courseLevelLabel(course, levelOf)}</span>
                   <span className="block text-sm font-semibold text-slate-500">
                     {progress?.completed ?? 0} of {course.lessonCount} lessons done
                   </span>
@@ -290,7 +339,7 @@ function AcademyScheduleView({ profile, catalog, schedule, schoolYear, onNavigat
     lessons.filter((l) => profile.academy?.lessons[l.lessonId]?.status === 'complete').length
   return (
     <AcademyShell
-      title={`Year schedule — Grade ${schedule.grade}`}
+      title="Year schedule"
       onExit={() => onNavigate({ kind: 'home' })}
       exitLabel="Back to Academy"
     >
@@ -327,6 +376,7 @@ function AcademyScheduleView({ profile, catalog, schedule, schoolYear, onNavigat
 function AcademyCourseView({
   profile,
   catalog,
+  levelOf,
   schoolYear,
   onNavigate,
   courseId,
@@ -340,7 +390,7 @@ function AcademyCourseView({
     : 1
   return (
     <AcademyShell
-      title={courseLabel(course)}
+      title={courseLevelLabel(course, levelOf)}
       onExit={() => onNavigate({ kind: 'home' })}
       exitLabel="Back to Academy"
     >
@@ -474,6 +524,7 @@ const requiresAdultAcknowledgement = (lesson: AcademyLesson): boolean =>
 function AcademyLessonView({
   profile,
   catalog,
+  levelOf,
   onNavigate,
   onPatch,
   courseId,
@@ -537,7 +588,8 @@ function AcademyLessonView({
       exitLabel="Pause & back"
     >
       <p className="text-sm font-semibold text-slate-500">
-        {course ? courseLabel(course) : courseId} · Unit {unitNumber} · Day {lesson.day_in_unit} ·{' '}
+        {course ? courseLevelLabel(course, levelOf) : courseId} · Unit {unitNumber} · Day{' '}
+        {lesson.day_in_unit} ·{' '}
         {lesson.estimated_minutes} minutes
       </p>
       <p className="mt-2 font-semibold text-slate-600">{lesson.essential_question}</p>

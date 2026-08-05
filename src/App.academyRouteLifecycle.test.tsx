@@ -17,7 +17,7 @@ const harness = vi.hoisted(() => ({
   pin: null as null | { title: string; onComplete: (pin: string) => string | null; onCancel: () => void },
   academy: null as null | {
     profileId: string
-    grade: string
+    entries: { subject: string; level: string }[]
     route: AcademyRoute
     onNavigate: (route: AcademyRoute) => void
     onExit: () => void
@@ -49,14 +49,14 @@ vi.mock('./components/hub/ParentHub', () => ({
 vi.mock('./components/academy/AcademyRouter', () => ({
   AcademyRouter: (props: {
     profile: { id: string }
-    grade: string
+    entries: { subject: string; level: string }[]
     route: AcademyRoute
     onNavigate: (route: AcademyRoute) => void
     onExit: () => void
   }) => {
     harness.academy = {
       profileId: props.profile.id,
-      grade: props.grade,
+      entries: props.entries,
       route: props.route,
       onNavigate: props.onNavigate,
       onExit: props.onExit,
@@ -228,7 +228,10 @@ describe('App academy route lifecycle (CURR-1)', () => {
     expect(harness.picker).toBeNull()
     expect(harness.academy).not.toBeNull()
     expect(harness.academy!.profileId).toBe('p2')
-    expect(harness.academy!.grade).toBe('5')
+    // ACADEMY-LEVEL-DECOUPLE: with no working level assigned, every subject
+    // rides her nominal grade — the pre-decouple behaviour, expressed per subject.
+    expect(harness.academy!.entries.length).toBe(10)
+    expect(harness.academy!.entries.every((e) => e.level === '5')).toBe(true)
     expect(harness.academy!.route).toEqual({
       kind: 'lesson',
       courseId: 'ma-g5-mathematics',

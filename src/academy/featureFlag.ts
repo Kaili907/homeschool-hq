@@ -23,9 +23,3 @@ export function isAcademyGradeEnabledFromHost(grade: AcademyGrade): boolean {
         : import.meta.env.VITE_ACADEMY_GRADE_8_ENABLED
   return isAcademyGradeEnabled(grade, value)
 }
-
-/** The academy surface for a profile grade: enabled academy grade, or null. */
-export function enabledAcademyGradeFromHost(grade: Grade): AcademyGrade | null {
-  const g = academyGradeOf(grade)
-  return g && isAcademyGradeEnabledFromHost(g) ? g : null
-}
