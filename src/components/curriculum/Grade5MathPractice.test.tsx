@@ -120,6 +120,16 @@ describe('Grade5MathPractice surface (MOUNT-G5-MATH)', () => {
     return found
   }
 
+  function elements(
+    matches: (node: FakeElement) => boolean,
+    node: FakeElement = container,
+    found: FakeElement[] = [],
+  ): FakeElement[] {
+    if (matches(node)) found.push(node)
+    for (const child of node.childNodes) elements(matches, child, found)
+    return found
+  }
+
   function findButton(label: string): FakeElement | null {
     return buttons().find((b) => hasText(b, label)) ?? null
   }
@@ -280,6 +290,42 @@ describe('Grade5MathPractice surface (MOUNT-G5-MATH)', () => {
     // and no other unit was touched
     expect(Object.keys(box.profile.hsStats!)).toEqual(['g5-math-u07'])
     expect(hasText(container, 'Round done!')).toBe(true)
+    expect(hasText(container, `${correctCount}/${GRADE5_MATH_PRACTICE_ITEM_COUNT}`)).toBe(true)
+    expect(hasText(container, 'questions correct')).toBe(true)
+  })
+
+  it.each([
+    { unitNumber: 2, itemType: 'decimal-number-line', visual: 'number line' },
+    { unitNumber: 3, itemType: 'area-model-product', visual: 'rectangle' },
+    { unitNumber: 5, itemType: 'compare-to-benchmark', visual: 'fraction bars' },
+    { unitNumber: 5, itemType: 'rewrite-with-common-denominator', visual: 'fraction bars' },
+    { unitNumber: 5, itemType: 'add-unlike-fractions', visual: 'fraction bars' },
+    { unitNumber: 5, itemType: 'subtract-unlike-fractions', visual: 'fraction bars' },
+  ])('renders the $visual for unit $unitNumber $itemType in the practice surface', async ({ unitNumber, itemType, visual }) => {
+    const unit = grade5MathPracticeUnit(unitNumber)!
+    const question = unit.generate(itemType, 1)
+    expect(question.visual).toBeDefined()
+
+    await render(
+      <Grade5MathPracticeRound
+        unit={unit}
+        total={1}
+        getQuestion={() => question}
+        onAnswer={() => {}}
+        onFinish={() => {}}
+        onQuit={() => {}}
+      />,
+    )
+
+    if (visual === 'fraction bars') {
+      expect(
+        elements((node) => node.tagName === 'DIV' && node.getAttribute('class')?.includes('h-14') === true),
+      ).toHaveLength(2)
+    } else {
+      expect(
+        elements((node) => node.tagName === 'SVG' && node.getAttribute('role') === 'img' && node.getAttribute('aria-label')?.startsWith(visual) === true),
+      ).toHaveLength(1)
+    }
   })
 
   it('leaves the surface through the caller’s exit', async () => {

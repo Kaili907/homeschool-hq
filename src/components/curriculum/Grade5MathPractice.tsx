@@ -165,13 +165,14 @@ export function Grade5MathPracticeRound({
     if (selected !== null) return
     const correct = i === question.answerIndex
     setSelected(i)
-    setResults([...results, correct])
     onAnswer(correct)
   }
 
   function next() {
+    const nextResults = [...results, selected === question.answerIndex]
+    setResults(nextResults)
     if (index + 1 >= total) {
-      onFinish(results)
+      onFinish(nextResults)
       return
     }
     setIndex(index + 1)
