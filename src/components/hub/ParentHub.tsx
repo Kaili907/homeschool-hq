@@ -10,12 +10,13 @@ import { DEFAULT_CORE_DAY } from '../../schedule/coreDay'
 import { PlansView } from './PlansView'
 import { StatusView } from './StatusView'
 import { StudyParentPanel, type StudyParentLearnerOption } from './StudyParentPanel'
+import { StudySafetyEventsPanel } from './StudySafetyEventsPanel'
 import { AcademyParentPanel } from './AcademyParentPanel'
 import { enabledAcademyGradeFromHost } from '../../academy/featureFlag'
 import type { StudyPortBundle } from '../../study/ports'
 import type { StudyAdultAuthorization } from '../../study/types'
 
-export type HubTab = 'today' | 'calendar' | 'plans' | 'status' | 'study' | 'schedule' | 'academy'
+export type HubTab = 'today' | 'calendar' | 'plans' | 'status' | 'study' | 'safety' | 'schedule' | 'academy'
 
 export interface ParentHubStudyIntegration {
   readonly householdRef: string
@@ -61,6 +62,9 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
     ...TABS,
     ...(academyEnabled ? [{ id: 'academy' as const, label: 'Academy', emoji: '🏫' }] : []),
     ...(studyEnabled ? [{ id: 'study' as const, label: 'Study', emoji: '🧭' }] : []),
+    // A6-5: the safety record is always reachable for an adult, even when the
+    // Study surface itself is unavailable — a stopped session must stay visible.
+    { id: 'safety' as const, label: 'Safety', emoji: '🛟' },
   ]
 
   // The hub defaults its start date from MM's mindset start date, so Dad needn't re-enter it.
@@ -174,6 +178,7 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
               authorization={study.authorization}
             />
           )}
+          {tab === 'safety' && <StudySafetyEventsPanel />}
           {tab === 'study' && !study && (
             <section className="rounded-xl border border-amber-200 bg-amber-50 p-5" role="status">
               <h2 className="font-bold text-amber-950">Study controls unavailable</h2>

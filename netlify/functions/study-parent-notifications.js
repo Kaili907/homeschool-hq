@@ -10,6 +10,7 @@ import {
   responseForError,
 } from './_shared/http.js'
 import { createGuardianNotificationPort } from './_shared/study-adult-review/guardian-notifications.js'
+import { createSupabaseStudySafetyPorts } from './_shared/study-adult-review/supabase-ports.js'
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
 
 const PATHS = new Set([
@@ -28,6 +29,27 @@ export function createStudyParentNotificationsHandler(overrides = {}) {
   const notifications = overrides.notifications
     ?? createGuardianNotificationPort({ env, fetchImpl })
   const rateLimiter = overrides.rateLimiter
+  const adultReviewReadiness = overrides.adultReviewReadiness
+    ?? createSupabaseStudySafetyPorts({ env, fetchImpl }).readAdultReviewReadiness
+
+  /**
+   * A6-5: the adult surface must be told when in-app delivery is still refused
+   * by the Director-owned database policy. An unreadable policy is reported as
+   * unknown-and-not-approved, never silently as approved.
+   */
+  async function deliveryState() {
+    try {
+      const readiness = await adultReviewReadiness()
+      return {
+        policy: readiness.adultReviewInAppDeliveryPolicy,
+        state: readiness.adultReviewInAppDeliveryPolicy === 'approved' && readiness.state === 'ready'
+          ? 'delivering'
+          : 'pending-approval',
+      }
+    } catch {
+      return { policy: 'unknown', state: 'pending-approval' }
+    }
+  }
   const ready = () => notifications?.isDurable === true
     && notifications?.isReady?.() === true
     && rateLimiter?.isDurable === true
@@ -54,8 +76,19 @@ export function createStudyParentNotificationsHandler(overrides = {}) {
         })
       }
       if (event.httpMethod === 'GET') {
-        const result = await notifications.list({ accessToken: auth.accessToken, limit: 50 })
-        return jsonResponse(200, result)
+        const [result, capture, delivery] = await Promise.all([
+          notifications.list({ accessToken: auth.accessToken, limit: 50 }),
+          typeof notifications.listPendingReviews === 'function'
+            ? notifications.listPendingReviews({ accessToken: auth.accessToken, limit: 50 })
+            : { state: 'unavailable', reasonCode: 'capture-read-path-not-implemented' },
+          deliveryState(),
+        ])
+        return jsonResponse(200, {
+          schemaVersion: 1,
+          notifications: result.notifications,
+          capture,
+          delivery,
+        })
       }
       const body = assertExactObject(readJsonBody(event, 512), [
         'schemaVersion', 'action', 'notificationId',

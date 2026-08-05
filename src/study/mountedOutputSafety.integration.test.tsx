@@ -105,7 +105,7 @@ describe('mounted Tutor output safety gate', () => {
     const result = await submit()
     expect(classifiedText).toContain(UNCLASSIFIED_MODEL_OUTPUT)
     const html = stoppedSurface(result)
-    expect(html).toContain('Please get a trusted adult who can help right now')
+    expect(html).toContain('Please go get your dad so he can sit with you')
     expect(html).not.toContain(UNCLASSIFIED_MODEL_OUTPUT)
   })
 
@@ -125,7 +125,7 @@ describe('mounted Tutor output safety gate', () => {
       deliveryStatus: 'not-confirmed',
       coreSubmitInvocations: 1,
     })
-    expect(html).toContain('Please ask a trusted adult to help check what happened')
+    expect(html).toContain('Please go get your dad so he can sit with you')
     expect(html).not.toContain(UNCLASSIFIED_MODEL_OUTPUT)
   })
 

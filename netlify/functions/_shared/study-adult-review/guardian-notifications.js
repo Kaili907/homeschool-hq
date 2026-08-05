@@ -55,6 +55,33 @@ function validateReadResult(value) {
   return result
 }
 
+/**
+ * A6-5: captured-but-undelivered adult reviews. The hosted read RPC is a
+ * prepared, unexecuted change (see docs/study-engine-safety/A6-5-PREPARED-HOSTED-SQL.sql).
+ * Until the Director runs it, this read is reported as unavailable rather than
+ * as an empty list, so an unreadable store is never shown as "nothing happened".
+ */
+function validatePendingResult(value) {
+  const result = exactObject(value, ['pendingReviews'])
+  if (!Array.isArray(result.pendingReviews) || result.pendingReviews.length > 100) {
+    throw new Error('guardian_notification_port_contract')
+  }
+  for (const entry of result.pendingReviews) {
+    exactObject(entry, [
+      'reviewId', 'learnerRef', 'reasonCategory', 'urgency', 'occurredAt', 'deliveryState',
+    ])
+    if (
+      !/^safety-proposal-[a-f0-9]{32}$/.test(entry.reviewId) ||
+      typeof entry.learnerRef !== 'string' || entry.learnerRef.length > 160 ||
+      !['immediate-safety', 'possible-safety', 'review-required'].includes(entry.reasonCategory) ||
+      !['urgent', 'uncertain', 'review-required'].includes(entry.urgency) ||
+      !validTimestamp(entry.occurredAt) ||
+      !['proposed', 'accepted', 'rejected', 'cancelled', 'expired'].includes(entry.deliveryState)
+    ) throw new Error('guardian_notification_port_contract')
+  }
+  return result
+}
+
 export function createGuardianNotificationPort(options = {}) {
   const env = options.env ?? process.env
   const fetchImpl = options.fetchImpl ?? globalThis.fetch
@@ -100,6 +127,27 @@ export function createGuardianNotificationPort(options = {}) {
       return validateListResult(await call(
         'academy_study_list_parent_notifications_v1', { p_limit: limit }, accessToken,
       ))
+    },
+    async listPendingReviews({ accessToken, limit = 50 }) {
+      if (!Number.isSafeInteger(limit) || limit < 1 || limit > 100) {
+        throw new TypeError('invalid_guardian_notification_limit')
+      }
+      try {
+        const result = validatePendingResult(await call(
+          'academy_study_list_adult_review_proposals_v1', { p_limit: limit }, accessToken,
+        ))
+        return { state: 'available', pendingReviews: result.pendingReviews }
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'unknown'
+        return {
+          state: 'unavailable',
+          reasonCode: message === 'guardian_notification_not_available'
+            ? 'capture-read-path-not-authorized'
+            : message === 'guardian_notification_port_contract'
+              ? 'capture-read-contract-mismatch'
+              : 'capture-read-path-unavailable',
+        }
+      }
     },
     async markRead({ accessToken, notificationRef }) {
       if (typeof notificationRef !== 'string' || !/^notification:[0-9a-f]{64}$/.test(notificationRef)) {
