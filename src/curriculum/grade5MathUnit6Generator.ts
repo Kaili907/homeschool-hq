@@ -65,6 +65,32 @@ export const GRADE5_MATH_UNIT6_ITEM_DEFINITIONS={
    'Check by rebuilding: 2 copies of 1/6 give 2/6 = 1/3, the amount we started with.',
   ]}},
 } as const satisfies Record<Grade5MathUnit6ItemType,Def>
+
+/**
+ * 5.NF.5 is about scaling in both directions, so a scaling-magnitude item can
+ * answer any of the three comparisons. Each one gets its own walkthrough: a
+ * student who missed a greater-than item must not be handed a less-than one.
+ * The `less than` entry is the item type's default worked example above.
+ */
+export const GRADE5_MATH_UNIT6_SCALING_EXAMPLES={
+ 'less than':GRADE5_MATH_UNIT6_ITEM_DEFINITIONS['scaling-magnitude'].workedExample,
+ 'greater than':{
+  prompt:'Compared with 12, 5/4 × 12 is __ 12.',
+  answer:'greater than',
+  steps:[
+   'The factor 5/4 is larger than 1, because 5 fourths is one whole (4/4) plus an extra 1/4.',
+   'Compute to check: 5/4 × 12 = (5 × 12)/4 = 60/4 = 15.',
+   'Because 15 is above 12, the product is greater than 12. Multiplying by a factor over 1 always scales a number up.',
+  ]},
+ 'equal to':{
+  prompt:'Compared with 12, 4/4 × 12 is __ 12.',
+  answer:'equal to',
+  steps:[
+   'The factor 4/4 is exactly 1, because 4 fourths make one whole with nothing left over.',
+   'Compute to check: 4/4 × 12 = (4 × 12)/4 = 48/4 = 12.',
+   'The product is 12, the number we started with. Multiplying by 1 leaves a number unchanged.',
+  ]},
+} as const satisfies Record<string,CurriculumWorkedExample>
 const gcd=(a:bigint,b:bigint):bigint=>b===0n?a:gcd(b,a%b)
 const text=(n:bigint,d:bigint):string=>{const g=gcd(n,d);n/=g;d/=g;const w=n/d;const r=n%d;return w===0n?`${r}/${d}`:r===0n?`${w}`:`${w} ${r}/${d}`}
 /**
@@ -72,7 +98,7 @@ const text=(n:bigint,d:bigint):string=>{const g=gcd(n,d);n/=g;d/=g;const w=n/d;c
  * student cannot spot the answer by its shape or eliminate a fixed 0-5 pool.
  * `distinct` mode drops any candidate that collapses onto the answer or a sibling.
  */
-const q=(itemType:Grade5MathUnit6ItemType,difficulty:Difficulty,prompt:string,answer:string,distractors:readonly string[],parameters:Params)=>makeCurriculumQuestion({itemType,difficulty,prompt,correctAnswer:answer,distractors,choiceCount:itemType==='scaling-magnitude'?3:4,distractorMode:'distinct',parameters,...GRADE5_MATH_UNIT6_ITEM_DEFINITIONS[itemType]})
+const q=(itemType:Grade5MathUnit6ItemType,difficulty:Difficulty,prompt:string,answer:string,distractors:readonly string[],parameters:Params,workedExample?:CurriculumWorkedExample)=>makeCurriculumQuestion({itemType,difficulty,prompt,correctAnswer:answer,distractors,choiceCount:itemType==='scaling-magnitude'?3:4,distractorMode:'distinct',parameters,...GRADE5_MATH_UNIT6_ITEM_DEFINITIONS[itemType],...(workedExample?{workedExample}:{})})
 /** Every generated fraction operand is proper, so it cannot reduce to an integer. */
 const nums=(d:Difficulty)=>{const b=ri(3,d===1?6:12);return [ri(1,b-1),b] as const}
 export function generateFractionAsDivisionQuestion(difficulty:Difficulty){const[a,b]=nums(difficulty);const A=BigInt(a),B=BigInt(b);return q('fraction-as-division',difficulty,`Write ${a} ÷ ${b} as a fraction in simplest form.`,text(A,B),[
@@ -96,10 +122,25 @@ export function generateMultiplyFractionsQuestion(difficulty:Difficulty){const[a
  text(A*C,B+D),      // multiplied the numerators but added the denominators
  `${a*c}/${b*d}`,    // stopped before simplifying
 ],{a,b,c,d,mode:'fraction'})}
-export function generateScalingMagnitudeQuestion(difficulty:Difficulty){const[a,b]=nums(difficulty);const c=ri(2,20);const answer=a<b?'less than':a>b?'greater than':'equal to';return q('scaling-magnitude',difficulty,`Compared with ${c}, ${a}/${b} × ${c} is __ ${c}.`,answer,
+/**
+ * The scaling factor is drawn case-first so all three comparisons stay frequent.
+ * Drawing a numerator freely would leave the factor proper almost every time, and
+ * a student could answer "less than" by rote without meeting the half of 5.NF.5
+ * that says a factor above 1 scales up. The greater-than case stays strictly
+ * between 1 and 2, so it always reads as a genuine improper fraction rather than
+ * a whole number in disguise.
+ */
+const scalingFactor=(d:Difficulty):readonly[number,number]=>{
+ const b=ri(3,d===1?6:12)
+ const shape=ri(0,2)
+ if(shape===0)return [b,b] as const              // b/b, exactly one whole
+ if(shape===1)return [ri(1,b-1),b] as const      // proper, under one whole
+ return [ri(b+1,2*b-1),b] as const               // improper, over one whole but under two
+}
+export function generateScalingMagnitudeQuestion(difficulty:Difficulty){const[a,b]=scalingFactor(difficulty);const c=ri(2,20);const answer=a<b?'less than':a>b?'greater than':'equal to';return q('scaling-magnitude',difficulty,`Compared with ${c}, ${a}/${b} × ${c} is __ ${c}.`,answer,
  // The three comparison words are the question's own answer space, not a numeric pool.
  ['less than','greater than','equal to'].filter(x=>x!==answer),
-{a,b,c,d:0,mode:'scale'})}
+{a,b,c,d:0,mode:'scale'},GRADE5_MATH_UNIT6_SCALING_EXAMPLES[answer])}
 export function generateFractionWordProblemQuestion(difficulty:Difficulty){const[a,b]=nums(difficulty);const c=ri(2,difficulty+4);const A=BigInt(a),B=BigInt(b),C=BigInt(c);return q('fraction-word-problem',difficulty,`${c} identical ribbon pieces are ${a}/${b} meter each. What is their total length in meters?`,text(A*C,B),[
  text(A,B),        // gave the length of a single piece
  text(A+C*B,B),    // added the number of pieces instead of multiplying

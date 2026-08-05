@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from 'vitest'
 import type { Difficulty } from '../types'
 import { setRng } from '../genUtils'
 import { curriculumAnswer, type CurriculumQuestion, type CurriculumWorkedExample } from './generatorCore'
-import { GRADE5_MATH_UNIT6_ITEM_DEFINITIONS, GRADE5_MATH_UNIT6_ITEM_TYPES, generateGrade5MathUnit6Question } from './grade5MathUnit6Generator'
+import { GRADE5_MATH_UNIT6_ITEM_DEFINITIONS, GRADE5_MATH_UNIT6_ITEM_TYPES, GRADE5_MATH_UNIT6_SCALING_EXAMPLES, generateGrade5MathUnit6Question } from './grade5MathUnit6Generator'
 import { GRADE5_MATH_UNIT7_ITEM_DEFINITIONS, GRADE5_MATH_UNIT7_ITEM_TYPES, generateGrade5MathUnit7Question } from './grade5MathUnit7Generator'
 import { GRADE5_MATH_UNIT8_ITEM_DEFINITIONS, GRADE5_MATH_UNIT8_ITEM_TYPES, generateGrade5MathUnit8Question } from './grade5MathUnit8Generator'
 
@@ -126,10 +126,36 @@ describe('Grade 5 Units 6-8 worked examples teach a concrete method', () => {
     })
   }
 
-  it('U6 scaling-magnitude answers in the same shape as the choices it is taught with', () => {
-    const example = GRADE5_MATH_UNIT6_ITEM_DEFINITIONS['scaling-magnitude'].workedExample
-    setRng(seededRng(4_242))
-    expect(generateGrade5MathUnit6Question('scaling-magnitude', 2).choices).toContain(example.answer)
+  it('U6 scaling-magnitude: each comparison case has its own authored walkthrough', () => {
+    const shapes = new Set(sample(UNITS[0], 'scaling-magnitude', 5_151).map((item) => shapeOf(item.prompt)))
+    for (const [comparison, example] of Object.entries(GRADE5_MATH_UNIT6_SCALING_EXAMPLES)) {
+      // The walkthrough must resolve to the case it is filed under and answer in
+      // the same shape as the item's choices — a comparison word, not "less than 12".
+      expect(example.answer, `${comparison} example answers the wrong case`).toBe(comparison)
+      expect(shapes.has(shapeOf(example.prompt)), `${comparison} example prompt shape`).toBe(true)
+      expect(example.steps.length).toBeGreaterThanOrEqual(3)
+      expect(
+        example.steps.filter((step) => CONCRETE_STEP.test(step)).length,
+        `${comparison} example shows no arithmetic: ${example.steps.join(' | ')}`,
+      ).toBeGreaterThanOrEqual(1)
+      for (const phrase of PLACEHOLDER_PHRASES) expect(example.steps.join(' ')).not.toContain(phrase)
+    }
+    expect(Object.keys(GRADE5_MATH_UNIT6_SCALING_EXAMPLES).sort()).toEqual([
+      'equal to',
+      'greater than',
+      'less than',
+    ])
+  })
+
+  it('U6 scaling-magnitude: every item is taught the case the student actually met', () => {
+    for (const item of sample(UNITS[0], 'scaling-magnitude', 5_252)) {
+      const answer = curriculumAnswer(item)
+      expect(item.choices).toContain(item.workedExample.answer)
+      expect(
+        item.workedExample.answer,
+        `"${item.prompt}" answers ${answer} but was taught ${item.workedExample.answer}`,
+      ).toBe(answer)
+    }
   })
 })
 
@@ -144,7 +170,9 @@ describe('Grade 5 Units 6-8 distractors come from the item, not a fixed pool', (
             if (choice !== curriculumAnswer(item)) distractors.add(choice)
 
         if (COMPARISON_ITEM_TYPES.has(type)) {
-          expect([...distractors].sort()).toEqual(['equal to', 'greater than'])
+          // Whichever comparison is correct, the other two are the options — so
+          // across a run every one of the three words appears as a distractor.
+          expect([...distractors].sort()).toEqual(['equal to', 'greater than', 'less than'])
           return
         }
         // The replaced pools held 6-7 fixed strings no matter what the item asked.
@@ -156,6 +184,24 @@ describe('Grade 5 Units 6-8 distractors come from the item, not a fixed pool', (
       })
     }
   }
+
+  it('U6 scaling-magnitude: no single comparison can be answered by rote', () => {
+    const items = sample(UNITS[0], 'scaling-magnitude', 5_353)
+    const counts = new Map<string, number>()
+    for (const item of items) {
+      const answer = curriculumAnswer(item)
+      counts.set(answer, (counts.get(answer) ?? 0) + 1)
+    }
+    const report = [...counts].map(([k, v]) => `${k}=${v}`).join(' ')
+    // All three directions of 5.NF.5 must actually occur. Before this fix the
+    // scale factor was always proper, so "less than" was 360/360 and a student
+    // scored full marks without reading the fraction.
+    for (const comparison of ['less than', 'greater than', 'equal to']) {
+      const share = (counts.get(comparison) ?? 0) / items.length
+      expect(share, `${comparison} share (${report})`).toBeGreaterThanOrEqual(0.2)
+      expect(share, `${comparison} share (${report})`).toBeLessThanOrEqual(0.5)
+    }
+  })
 
   for (const unit of UNITS) {
     for (const [index, type] of unit.types.entries()) {
