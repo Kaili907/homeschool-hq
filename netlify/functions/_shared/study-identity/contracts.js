@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto'
 export const STUDY_IDENTITY_SCHEMA_VERSION = 1
 export const STUDY_SESSION_ISSUER_VERSION = 'academy-student-session-issuer.v1'
 export const STUDY_SESSION_REFERENCE = /^aca_stu_v1_[A-Za-z0-9_-]{43}$/
+export const STUDY_SESSION_HEADER = 'x-study-session'
 export const STUDY_SESSION_CAPABILITIES = Object.freeze([
   'student:assignments:read',
   'student:attempts:create',
@@ -51,26 +52,40 @@ export function validCapability(value) {
   return typeof value === 'string' && CAPABILITIES.has(value)
 }
 
-export function readStudySessionBearer(event) {
+function singleHeaderValue(event, name) {
   const headerEntries = event?.headers && typeof event.headers === 'object'
-    ? Object.entries(event.headers).filter(([key]) => key.toLowerCase() === 'authorization')
+    ? Object.entries(event.headers).filter(([key]) => key.toLowerCase() === name)
     : []
   if (headerEntries.length !== 1 || typeof headerEntries[0][1] !== 'string') return null
 
-  let authorization = headerEntries[0][1]
+  let value = headerEntries[0][1]
   const multiEntries = event?.multiValueHeaders && typeof event.multiValueHeaders === 'object'
-    ? Object.entries(event.multiValueHeaders).filter(([key]) => key.toLowerCase() === 'authorization')
+    ? Object.entries(event.multiValueHeaders).filter(([key]) => key.toLowerCase() === name)
     : []
   if (multiEntries.length > 1) return null
   if (multiEntries.length === 1) {
     const values = multiEntries[0][1]
-    if (!Array.isArray(values) || values.length !== 1 || values[0] !== authorization) return null
-    authorization = values[0]
+    if (!Array.isArray(values) || values.length !== 1 || values[0] !== value) return null
+    value = values[0]
   }
 
-  if (authorization.length > MAX_AUTHORIZATION_LENGTH) return null
+  return value.length > MAX_AUTHORIZATION_LENGTH ? null : value
+}
+
+export function readStudySessionBearer(event) {
+  const authorization = singleHeaderValue(event, 'authorization')
+  if (authorization === null) return null
   const match = /^Bearer ([^\s,]+)$/i.exec(authorization)
   return match && STUDY_SESSION_REFERENCE.test(match[1]) ? match[1] : null
+}
+
+/**
+ * Routes that already carry an adult bearer in `authorization` receive the
+ * learner's opaque Study-session reference in its own header instead.
+ */
+export function readStudySessionReferenceHeader(event) {
+  const value = singleHeaderValue(event, STUDY_SESSION_HEADER)
+  return value !== null && STUDY_SESSION_REFERENCE.test(value) ? value : null
 }
 
 export function digestStudySessionReference(sessionReference) {
