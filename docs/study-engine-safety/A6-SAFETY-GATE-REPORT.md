@@ -1,6 +1,7 @@
 # A6 safety gate report
 
-Status: builder evidence in progress; independent A6-R review is mandatory.
+Status: builder implementation complete; independent A6-R review is mandatory
+before merge or student use.
 
 Branch: `feat/a6-safety-gate`  
 Baseline: `db32eab09beac29b300eedaa5cd0d12c4c9f2dfb` (`origin/master`, witnessed 2026-08-04)  
@@ -14,7 +15,7 @@ Prohibited actions: no merge, deployment, feature-flag change, hosted Supabase/N
 **Finding: it classifies learner input only. It does not classify Tutor Core or
 model output.** The HTTP request accepts one `transientText` field
 (`netlify/functions/_shared/study-safety/contracts.js:68-98`). The handler passes
-that field to `classifyTransientSafety` (`netlify/functions/study-safety-classify.js:115-156`).
+that field to `classifyTransientSafety` (`netlify/functions/study-safety-classify.js:157-198`).
 The provider receives the normalized text plus the deterministic assessment as
 `transientLearnerText` and `deterministicAssessment`
 (`netlify/functions/_shared/study-safety/provider.js:66-80`). There is no model
@@ -98,7 +99,7 @@ normalize + deterministic rules -> Anthropic classifier -> non-downgrade merge
 -> clear response OR stop + minimized adult-review proposal`
 
 The exact handler ordering is
-`netlify/functions/study-safety-classify.js:74-174`; the provider call itself is
+`netlify/functions/study-safety-classify.js:116-216`; the provider call itself is
 `netlify/functions/_shared/study-safety/service.js:18-55`.
 
 The frozen bridge also puts learner-input classification before Tutor Core:
@@ -131,11 +132,11 @@ output because output is outside its contract.
 
 | Condition | Server behavior | Tutor continuation |
 |---|---|---|
-| Anthropic network/API down | Network exceptions and terminal HTTP failures become `invalid`; retryable non-timeout failures receive at most two total attempts (`provider.js:129-178,199-205`). | Fail-closed: only `clear` continues (`learner-safe.js:43-52`). |
+| Anthropic network/API down | Network exceptions and terminal HTTP failures become `invalid`; retryable non-timeout failures receive at most two total attempts (`provider.js:130-179,200-206`). | Fail-closed: only `clear` continues (`learner-safe.js:43-52`). |
 | Timeout | Abort after 3 seconds; no retry; reason `safety-invalid-provider-timeout-v1` (`provider.js:94,131-165`). | Fail-closed. |
-| Rate limit | Anthropic 429 is retryable once, then `invalid` (`provider.js:83-85,170-177`). The gateway's own limiter returns HTTP 429 before text classification (`study-safety-classify.js:95-112,131-150`). | Fail-closed in the browser client because any non-OK response maps to `invalid` (`src/study/safety/client.ts:103-107`). |
-| Malformed provider response/refusal | Non-JSON, wrong content shape, extra keys, invalid category/reason, or refusal text becomes `invalid` (`provider.js:31-64,180-192`). | Fail-closed. |
-| `STUDY_SAFETY_RATE_LIMIT_HMAC_KEY` missing | Readiness adds `rate-limit-correlation-key` (`readiness.js:20-30`); the handler returns `503 service_not_ready` before reading the request body (`study-safety-classify.js:85-115`). Actor/subject derivation also returns null defensively (`rate-limit.js:36-55`). | Fail-closed in the browser client; no classification occurs. |
+| Rate limit | Anthropic 429 is retryable once, then `invalid` (`provider.js:83-85,171-178`). The gateway's own limiter returns HTTP 429 before text classification (`study-safety-classify.js:137-154,173-192`). | Fail-closed in the browser client because any non-OK response maps to `invalid` (`src/study/safety/client.ts:103-107`). |
+| Malformed provider response/refusal | Non-JSON, wrong content shape, extra keys, invalid category/reason, or refusal text becomes `invalid` (`provider.js:31-64,181-193`). | Fail-closed. |
+| `STUDY_SAFETY_RATE_LIMIT_HMAC_KEY` missing | Readiness adds `rate-limit-correlation-key` (`readiness.js:20-30`); the handler returns `503 service_not_ready` before reading the request body (`study-safety-classify.js:127-157`). Actor/subject derivation also returns null defensively (`rate-limit.js:36-55`). | Fail-closed in the browser client; no classification occurs. |
 
 For a ready, fully injected test composition, classifier failure produces a
 minimized `invalid` adult-review proposal and the learner-safe response “The
@@ -161,7 +162,7 @@ learner text is not returned or persisted. The handler attempts to store a
 minimized proposal containing opaque identity, classification/category/reason
 codes, classifier version, and `proposed-not-delivered` state
 (`netlify/functions/_shared/study-adult-review/proposal.js:7-34`; handler
-`:155-174`). Classification deliberately does not enqueue or deliver; the
+`:197-216`). Classification deliberately does not enqueue or deliver; the
 corpus contract says `deliveryAttemptedDuringClassification:false`
 (`corpus.v1.js:10-24`).
 
@@ -185,7 +186,7 @@ chain dead-ends before parent delivery.
 Study-session ownership
 (`netlify/functions/_shared/study-safety/authorization.js:15-24`). Readiness
 requires `verifiesSession === true` (`readiness.js:20-30`). The exported handler
-uses that default port (`study-safety-classify.js:29-35,181`), so it cannot
+ultimately uses that default port (`study-safety-classify.js:71-77,223`), so it cannot
 report ready even with valid Anthropic and Supabase configuration. Its default
 composition also has no delivery-provider or receipt-validator arrays, both of
 which readiness requires (`readiness.js:41-47`).
@@ -202,12 +203,197 @@ the whole service ready.
 
 ## Part 2 — implementation and red proof
 
-Pending after the Part 1 establishment commit.
+### Implementation
+
+The implementation commit is `5b56938` (`feat(study): enforce production
+classifier boot gate`), following the Part 1-only commit `f904f45`.
+
+- The Anthropic classifier now carries the existing port vocabulary's explicit
+  `mode: 'production'` brand
+  (`netlify/functions/_shared/study-safety/provider.js:109-114`).
+- `createProductionStudySafetyHandler` is a boot-only composition around the
+  existing injectable `createStudySafetyHandler`. It composes the same durable
+  production ports/monitoring, creates or accepts the classifier, and injects
+  that exact classifier into the existing handler seam
+  (`netlify/functions/study-safety-classify.js:37-68`). No second classifier
+  architecture was introduced.
+- Boot aborts synchronously with the unmistakable error
+  `STUDY SAFETY STARTUP ABORTED: production handler requires classifier mode
+  "production"` if the mode, version, or classify method is invalid
+  (`study-safety-classify.js:47-54`). This occurs during exported-handler module
+  initialization, not on the first learner request; the deployed export now
+  uses this production wrapper (`:223`).
+- Successful boot emits one minimized structured log event containing only
+  `event`, `mode`, and `classifierVersion` (`:55-60`). The actual default boot
+  identity observed in the test process was
+  `anthropic-safety-v1:claude-haiku-4-5:study-safety-config-v1`.
+- No fail-open runtime branch was found, so the established failure semantics
+  were not rewritten. New tests exercise the production composition with real
+  provider error and abort/timeout behavior. Both prove that Tutor Core is not
+  invoked, the child receives the fixed paused-lesson copy, and one minimized
+  `proposed-not-delivered` adult-review proposal is recorded
+  (`production-boot.test.js:169-214`).
+- The existing focused gateway fixture predated the global
+  `ACADEMY_STUDY_ENABLED` containment gate. Its synthetic ready environment is
+  now explicit (`gateway.test.js:14-20,121-126`). This does **not** change or
+  enable a real feature flag; it only allows the focused unit test to reach the
+  behavior it already claims to test.
+
+The change does not solve the Part 1 authorization/delivery blockers. The
+production export now guarantees a production classifier is composed and
+identifiable at boot, but readiness remains `not-ready` until a separately
+approved session-verifying authorizer, delivery providers, and receipt
+validators are injected. That is intentional: A6 did not invent identity or
+claim adult delivery that does not exist.
+
+### Red proof: baseline to tip
+
+The new test file was run against executable code identical to baseline
+`db32eab` (the only prior committed change was the Part 1 Markdown report).
+
+Command:
+
+```text
+npx.cmd vitest run --config netlify/functions/_shared/study-safety/vitest.config.mjs netlify/functions/_shared/study-safety/production-boot.test.js
+```
+
+Baseline RED (exit 1):
+
+```text
+Test Files  1 failed (1)
+Tests  5 failed (5)
+TypeError: createProductionStudySafetyHandler is not a function
+```
+
+Tip GREEN (exit 0):
+
+```text
+Test Files  1 passed (1)
+Tests  5 passed (5)
+Duration  510ms
+```
+
+The five assertions separately prove: non-production startup refusal,
+production classifier reachability through the handler, one boot-version log,
+API-error fail-closed behavior, and timeout fail-closed behavior. In both
+failure cases `continueToTutorCore` is false, a sentinel Tutor output function
+has zero calls, the learner surface cannot contain `UNCLASSIFIED MODEL OUTPUT`,
+and a minimized invalid proposal exists.
+
+The first post-implementation run of the entire focused configuration exposed
+10 `gateway_disabled` failures in the old gateway fixture because its synthetic
+environment omitted the containment flag. This was not retried as a flake; the
+fixture was corrected as described above. The complete focused rerun was:
+
+```text
+Test Files  9 passed (9)
+Tests  127 passed (127)
+Duration  932ms
+```
 
 ## Gate evidence
 
-Pending.
+### Read-only orphan census
+
+Taken before the heavy suites; no process was killed or modified:
+
+```text
+node.exe=40
+node_repl.exe=9
+claude.exe=31
+```
+
+### TypeScript
+
+```text
+> npx.cmd tsc --noEmit
+TSC_EXIT=0
+```
+
+### Full root suite
+
+```text
+> npm.cmd run test
+> vitest run
+
+Test Files  104 passed (104)
+Tests  1283 passed (1283)
+Duration  95.03s
+```
+
+The known `src/sync/useSync.mounted.test.tsx` flake did not occur; no retry was
+used.
+
+### Sync-contract trio
+
+The trio was run as the TypeScript validator contract, shared TS/Postgres
+fixture parity, and PGlite CAS contract:
+
+```text
+> npx.cmd vitest run src/sync/config.test.ts src/sync/profileContract.fixtures.test.ts supabase/academy-cas.db.test.ts
+
+Test Files  3 passed (3)
+Tests  67 passed (67)
+Duration  10.25s
+```
+
+### Independent embedded PostgreSQL CAS gate
+
+```text
+> npm.cmd run test:academy-cas-postgres
+> vitest run supabase/academy-cas.postgres.test.ts
+
+Test Files  1 passed (1)
+Tests  4 passed (4)
+Duration  6.76s
+```
+
+### Additional production build
+
+```text
+> npm.cmd run build
+> vite build && node scripts/stamp-sw.mjs
+
+210 modules transformed.
+✓ built in 4.21s
+stamp-sw: cache id 1785889325903
+```
+
+Vite reported its existing large-chunk advisory; the command exited 0.
+
+### Diff and forbidden-path confirmation
+
+The final pre-commit working-tree diff against `origin/master` was:
+
+```text
+docs/study-engine-safety/A6-SAFETY-GATE-REPORT.md  | 399 +
+netlify/functions/_shared/study-safety/gateway.test.js | 3 +-
+netlify/functions/_shared/study-safety/production-boot.test.js | 215 +
+netlify/functions/_shared/study-safety/provider.js | 1 +
+netlify/functions/study-safety-classify.js | 44 +-
+5 files changed, 660 insertions(+), 2 deletions(-)
+```
+
+Only the A6 report and Study safety function/test files changed. There is no
+diff under `study-session-*`, identity RPCs, other auth/session code, Supabase
+migrations, application feature-flag code, or deployment configuration. No
+feature flag was enabled. No Supabase/Netlify hosted endpoint was contacted. No
+deployment or merge occurred. The worktree had no pre-existing user changes;
+generated `dist/` output remained ignored and outside the committed diff.
+
+The immutable final delivery tip is reported in the external handoff because a
+commit cannot include its own SHA. A6-R must review that exact pushed tip.
 
 ## Plain-language child-safety answer
 
-Pending final verification.
+**Would I let an eight-year-old use this unsupervised? No.** This build makes a
+real and important plumbing guarantee: the production safety handler cannot
+silently boot with a demo classifier, its classifier version is visible, and
+provider outage/timeout stops rather than releasing unclassified learner input.
+But the actual policy is narrow and has no evidenced independent human
+safeguarding review; it classifies only what the child types, never tutor/model
+output; the mounted production Tutor turn is not connected to this asynchronous
+classifier; the default endpoint still lacks a session-verifying authorizer;
+and a recorded flag does not reach a parent through the currently unwired adult
+delivery exports. Those are specific, material reasons to require adult
+supervision and to keep the feature disabled after A6 itself is reviewed.
