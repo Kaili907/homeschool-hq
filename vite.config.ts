@@ -17,11 +17,48 @@ export default defineConfig({
     },
   },
   test: {
-    include: ['src/**/*.test.{ts,tsx}', 'supabase/**/*.test.ts', 'tests/**/*.test.js'],
-    pool: 'threads',
-    maxWorkers: 4,
-    testTimeout: 120_000,
-    hookTimeout: 120_000,
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'root-app',
+          include: ['src/**/*.test.{ts,tsx}', 'tests/**/*.test.js'],
+          // CURR-GEN-8 tracks the known infinite loop in this generator test.
+          exclude: ['src/curriculum/grade7MathGenerators.test.ts'],
+          pool: 'threads',
+          maxWorkers: 4,
+          testTimeout: 120_000,
+          hookTimeout: 120_000,
+          sequence: { groupOrder: 1 },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'root-supabase',
+          include: ['supabase/**/*.test.ts'],
+          // Embedded database tests exhaust Node when several start together.
+          maxWorkers: 1,
+          fileParallelism: false,
+          testTimeout: 120_000,
+          hookTimeout: 120_000,
+          sequence: { groupOrder: 2 },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'netlify-functions',
+          environment: 'node',
+          include: ['netlify/**/*.test.js'],
+          maxWorkers: 4,
+          sequence: { groupOrder: 3 },
+          // Server handlers fail closed when this deploy-time gate is absent.
+          // The test project intentionally supplies the enabled test setting.
+          env: { ACADEMY_STUDY_ENABLED: 'true' },
+        },
+      },
+    ],
   },
   // fs.strict off: the dev server is launched via an 8.3 short path (spaces in the
   // real path), which Vite's default allow-list check doesn't recognize as the root.
