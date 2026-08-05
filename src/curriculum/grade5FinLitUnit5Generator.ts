@@ -6,7 +6,7 @@ export const GRADE5_FIN_LIT_UNIT5_ITEM_TYPES=['repayment-share','borrowing-inter
 export type Grade5FinLitUnit5ItemType=typeof GRADE5_FIN_LIT_UNIT5_ITEM_TYPES[number]
 export const GRADE5_FIN_LIT_UNIT5_ITEM_DEFINITIONS:Record<Grade5FinLitUnit5ItemType,FinancialDefinition<Grade5FinLitUnit5ItemType>>={
  'repayment-share':{itemType:'repayment-share',standard:'PF4 foundations',lessonFocus:'borrowing and repayment',kind:'divide',workedExample:ex('Divide a fictional repayment into equal amounts.','one payment')},
- 'borrowing-interest-cost':{itemType:'borrowing-interest-cost',standard:'PF4 foundations',lessonFocus:'interest as cost',kind:'interest',workedExample:ex('A $100.00 balance has 5% simple interest.','$5.00')},
+ 'borrowing-interest-cost':{itemType:'borrowing-interest-cost',standard:'PF4 foundations',lessonFocus:'interest as cost',kind:'interest-paid',workedExample:ex('A fictional borrower owes $100.00 at 5% simple interest.','$5.00')},
  'lending-boundary-total':{itemType:'lending-boundary-total',standard:'PF4 foundations',lessonFocus:'responsible lending boundaries',kind:'subtract-two',workedExample:ex('Check a fictional plan by subtracting stated costs.','remainder')},
  'giving-plan-remainder':{itemType:'giving-plan-remainder',standard:'PF4 foundations',lessonFocus:'giving and community support',kind:'subtract-two',workedExample:ex('A fictional giving plan states a total and two amounts.','remainder')},
  'risk-cost-check':{itemType:'risk-cost-check',standard:'PF6 foundations',lessonFocus:'risk and protection',kind:'tax',workedExample:ex('A whole-dollar fictional price has stated tax.','total')},
