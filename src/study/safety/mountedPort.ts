@@ -2,9 +2,10 @@ import type { StudySafetyClassificationRequestV1 } from '../contracts/safety'
 import type { StudySafetyPort } from '../ports'
 import type { StudySafetyRequest } from '../types'
 import {
-  classifyStudySafety,
+  classifyStudySafetyWithCaptureStatus,
   type StudySafetyClientDeps,
 } from './client'
+import { recordLocalPreAcceptanceSafetyStop } from './localStopLedger'
 
 export type { StudySafetyClientDeps } from './client'
 
@@ -56,7 +57,14 @@ export function createMountedStudySafetyPort(
     mode: 'production' as const,
     classifierVersion: MOUNTED_STUDY_SAFETY_CLASSIFIER_VERSION,
     async evaluate(request: StudySafetyRequest) {
-      const response = await classifyStudySafety(await gatewayRequest(request), deps)
+      const result = await classifyStudySafetyWithCaptureStatus(await gatewayRequest(request), deps)
+      const response = result.response
+      if (result.failureMode && result.serverCaptureStatus) await recordLocalPreAcceptanceSafetyStop({
+        occurredAt: new Date().toISOString(),
+        studentRef: request.scope.learnerRef,
+        failureMode: result.failureMode,
+        serverCaptureStatus: result.serverCaptureStatus,
+      })
       return Object.freeze({
         outcome: response.classification,
         mayContinue: response.classification === 'clear' &&

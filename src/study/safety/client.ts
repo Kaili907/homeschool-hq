@@ -5,6 +5,7 @@ import {
   type StudySafetyClassificationResponseV1,
 } from '../contracts/safety'
 import { learnerSafeResult } from './learnerSafe'
+import type { PreAcceptanceSafetyFailureMode } from './localStopLedger'
 
 export const STUDY_SAFETY_ENDPOINT = '/api/study/safety/classify'
 export const STUDY_SAFETY_CLIENT_TIMEOUT_MS = 8_000
@@ -12,7 +13,7 @@ export const STUDY_SAFETY_CLIENT_TIMEOUT_MS = 8_000
 type FetchLike = (
   url: string,
   init: RequestInit,
-) => Promise<{ ok: boolean; json(): Promise<unknown> }>
+) => Promise<{ ok: boolean; status?: number; json(): Promise<unknown> }>
 
 export interface StudySafetyClientDeps {
   readonly getAccessToken?: () => Promise<string | null>
@@ -59,6 +60,12 @@ function failClosed(reasonCode: string): StudySafetyClassificationResponseV1 {
   }
 }
 
+export interface StudySafetyClientResult {
+  readonly response: StudySafetyClassificationResponseV1
+  readonly failureMode?: PreAcceptanceSafetyFailureMode
+  readonly serverCaptureStatus?: 'server-not-contacted' | 'server-acceptance-not-confirmed'
+}
+
 /**
  * Sends one transient request. It never writes the text to browser storage and
  * intentionally performs no automatic retry, so failures cannot duplicate an
@@ -68,17 +75,25 @@ export async function classifyStudySafety(
   request: StudySafetyClassificationRequestV1,
   deps: StudySafetyClientDeps = {},
 ): Promise<StudySafetyClassificationResponseV1> {
+  return (await classifyStudySafetyWithCaptureStatus(request, deps)).response
+}
+
+/** Same fail-closed request with local-only provenance for an unacknowledged stop. */
+export async function classifyStudySafetyWithCaptureStatus(
+  request: StudySafetyClassificationRequestV1,
+  deps: StudySafetyClientDeps = {},
+): Promise<StudySafetyClientResult> {
   const getAccessToken = deps.getAccessToken ?? getGatewayAccessToken
   const fetchImpl = deps.fetchImpl ?? ((url, init) => fetch(url, init))
-  if (deps.signal?.aborted) return failClosed('client-cancelled')
+  if (deps.signal?.aborted) return { response: failClosed('client-cancelled'), failureMode: 'network-failure-mid-request', serverCaptureStatus: 'server-not-contacted' }
   let accessToken: string | null
   try {
     accessToken = await getAccessToken()
   } catch {
-    return failClosed('client-auth-unavailable')
+    return { response: failClosed('client-auth-unavailable'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted' }
   }
-  if (!accessToken) return failClosed('client-unauthenticated')
-  if (deps.signal?.aborted) return failClosed('client-cancelled')
+  if (!accessToken) return { response: failClosed('client-unauthenticated'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted' }
+  if (deps.signal?.aborted) return { response: failClosed('client-cancelled'), failureMode: 'network-failure-mid-request', serverCaptureStatus: 'server-not-contacted' }
 
   const controller = new AbortController()
   const cancelFromHost = () => controller.abort(deps.signal?.reason)
@@ -100,11 +115,12 @@ export async function classifyStudySafety(
       credentials: 'omit',
       referrerPolicy: 'no-referrer',
     })
-    if (!response.ok) return failClosed('client-gateway-error')
+    if (!response.ok) return { response: failClosed('client-gateway-error'), failureMode: response.status === 503 ? 'gateway-503' : 'classifier-unreachable', serverCaptureStatus: 'server-acceptance-not-confirmed' }
     const result = await response.json()
-    return validResponse(result) ? result : failClosed('client-malformed-response')
+    return validResponse(result) ? { response: result } : { response: failClosed('client-malformed-response'), failureMode: 'malformed-server-response', serverCaptureStatus: 'server-acceptance-not-confirmed' }
   } catch {
-    return failClosed('client-network-error')
+    const timedOut = controller.signal.aborted && !deps.signal?.aborted
+    return { response: failClosed('client-network-error'), failureMode: timedOut ? 'request-timeout' : 'network-failure-mid-request', serverCaptureStatus: 'server-acceptance-not-confirmed' }
   } finally {
     globalThis.clearTimeout(timer)
     deps.signal?.removeEventListener('abort', cancelFromHost)
