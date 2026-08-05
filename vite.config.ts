@@ -23,8 +23,6 @@ export default defineConfig({
         test: {
           name: 'root-app',
           include: ['src/**/*.test.{ts,tsx}', 'tests/**/*.test.js'],
-          // CURR-GEN-8 tracks the known infinite loop in this generator test.
-          exclude: ['src/curriculum/grade7MathGenerators.test.ts'],
           pool: 'threads',
           maxWorkers: 4,
           testTimeout: 120_000,
@@ -50,7 +48,7 @@ export default defineConfig({
         test: {
           name: 'netlify-functions',
           environment: 'node',
-          include: ['netlify/**/*.test.js'],
+          include: ['netlify/**/*.test.{js,mjs,ts}'],
           maxWorkers: 4,
           sequence: { groupOrder: 3 },
           // Server handlers fail closed when this deploy-time gate is absent.

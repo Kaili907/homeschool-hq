@@ -1,11 +1,9 @@
 # Netlify routine test gate
 
-Run `npm run test:routine` to execute all `netlify/**/*.test.js` files through
-the `netlify-functions` project. It is a Node Vitest project and provides
-`ACADEMY_STUDY_ENABLED=true`, matching the enabled server test fixture. The
-separate root-app project excludes only
-`src/curriculum/grade7MathGenerators.test.ts`, the separately tracked infinite
-loop.
+Run `npm run test:routine` to execute all `netlify/**/*.test.{js,mjs,ts}`
+files through the `netlify-functions` project. It is a Node Vitest project and
+provides `ACADEMY_STUDY_ENABLED=true`, matching the enabled server test
+fixture.
 
 `root-supabase` remains an independently runnable project because its embedded
 database suites require serial execution and exceed the 124-second routine
