@@ -1,0 +1,70 @@
+{
+  "package_id": "manuel-academy-grades-5-7-8-curriculum-v1",
+  "version": "1.0.0",
+  "authored_on": "2026-08-03",
+  "status": "curriculum-authoring-release-complete",
+  "jurisdictional_alignment": "Michigan-aligned; locally authored; not a claim of state approval or automatic credit",
+  "grades": [
+    5,
+    7,
+    8
+  ],
+  "school_year": {
+    "weeks": 36,
+    "instructional_days": 180
+  },
+  "counts": {
+    "courses": 30,
+    "units": 232,
+    "lessons": 2736,
+    "lessons_by_grade": {
+      "5": 900,
+      "7": 900,
+      "8": 936
+    },
+    "original_practice_texts": 18
+  },
+  "subjects": [
+    "mathematics",
+    "english-language-arts",
+    "science",
+    "social-studies",
+    "health",
+    "physical-education",
+    "ready-for-life",
+    "technology",
+    "arts-and-music",
+    "financial-literacy"
+  ],
+  "frozen_baselines": [
+    {
+      "artifact": "a5-grade5-math-20260216.zip",
+      "sha256": "85969c6bf9c983a70f8e57fd7553f4153cbb8d6c0e177250be5ca5ee8dbe9bc1",
+      "role": "Grade 5 adaptive mathematics intervention overlay; referenced, not copied or modified."
+    },
+    {
+      "artifact": "a5-adaptive-english-mvp-v0.2.0-20260216.zip",
+      "sha256": "474645929e9be3194601c0535d641dab55e8e79b7e10bbf00b3e667908874035",
+      "role": "Adaptive English intervention overlay for the Grade 4–6 band; referenced, not copied or modified."
+    },
+    {
+      "artifact": "a5-ready-for-life-v1.zip",
+      "sha256": "cc27e17d73838207af3fb43a3543bb3f59f990b5b6769fed1411ca2e1e05526c",
+      "role": "Director-frozen 12-lesson Ready for Life baseline; referenced, not copied or modified."
+    }
+  ],
+  "entry_points": {
+    "human": "README.md",
+    "courses": "course-index.json",
+    "units": "unit-index.json",
+    "lessons": "lesson-index.csv",
+    "schema": "schemas/lesson.schema.json",
+    "validation": "validation/validation-report.md",
+    "integration_card": "integration/SESSION-CURR-1-CODEX-IMPORT-CARD.md"
+  },
+  "boundaries": [
+    "No repository, database, hosted service, identity system, production route, or deployment is modified by this artifact.",
+    "Frozen baselines are referenced but not embedded or altered.",
+    "Third-party full-length text licenses and custom media production are outside this authoring release."
+  ]
+}

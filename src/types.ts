@@ -36,7 +36,78 @@ export type SkillStatus = 'mastered' | 'developing' | 'not-started'
 
 export type ISODate = string // YYYY-MM-DD
 
-export type Grade = '3' | '4' | '6' | '10' | '12'
+export type Grade = '3' | '4' | '5' | '6' | '7' | '8' | '10' | '12'
+
+// ---------- CURR-1 Manuel Academy curriculum (additive, all OPTIONAL; no schemaVersion bump) ----------
+
+/** Grades served by the imported Manuel Academy curriculum release. */
+export type AcademyGrade = '5' | '7' | '8'
+
+/** Where an academy lesson stands. 'reteach' = the check was not met; the lesson
+ * re-opens on the reteach path instead of counting as complete. */
+export type AcademyLessonStatus = 'in-progress' | 'complete' | 'reteach'
+
+/**
+ * One evidence occasion toward the release's multi-occasion mastery rule
+ * ("a single answer cannot establish mastery"). Guided and independent evidence
+ * stay distinguishable; mastery is DERIVED (see academy/academyState.masteryOf),
+ * never stored, so the rule can tighten without a data migration.
+ */
+export interface AcademyOccasion {
+  date: ISODate
+  /** guided = with adult/tutor support; independent = on her own. */
+  mode: 'guided' | 'independent'
+  /** did the response meet the lesson's success criteria? */
+  met: boolean
+  /** which flow produced the evidence. */
+  kind: 'lesson-check' | 'reassessment'
+}
+
+/** Per-lesson progress. Append/patch via academy/academyState only — completion is
+ * idempotent (first completedAt wins; later completions count as revisits). */
+export interface AcademyLessonState {
+  status: AcademyLessonStatus
+  /** resume pointer: index of the next lesson_flow segment to do. */
+  segmentIndex: number
+  /** release the attempt started under (stale-attempt protection). */
+  releaseVersion: string
+  startedAt: string
+  /** first completion timestamp; never overwritten. */
+  completedAt?: string
+  /** append-only mastery evidence. */
+  occasions: AcademyOccasion[]
+  /** completions after the first (duplicate-completion protection audit trail). */
+  revisits?: number
+}
+
+/** One scored unit-assessment occasion. Reassessment = a later entry in the same
+ * list; entries are append-only. Scoring happens on the PIN-gated parent side. */
+export interface AcademyAssessmentAttempt {
+  date: ISODate
+  /** adult-entered percent, 0–100. */
+  percent: number
+  outcome: 'secure' | 'developing' | 'not-yet'
+}
+
+/**
+ * Per-profile Manuel Academy enrollment + progress, keyed by stable release IDs.
+ * Source curriculum lives in the versioned content release (public/curriculum/…);
+ * this holds ONLY student state, so future release migrations keep progress.
+ * Pacing overrides stay in the existing Profile.pacing authority (pointers keyed
+ * by academy course_id) — the academy adds no second pacing model.
+ */
+export interface AcademyState {
+  /** curriculum release this enrollment is pinned to. */
+  releaseVersion: string
+  grade: AcademyGrade
+  enrolledAt: string
+  /** enrolled course ids from the release catalog. */
+  courseIds: string[]
+  /** per-lesson progress keyed by stable lesson_id. */
+  lessons: Record<string, AcademyLessonState>
+  /** per-assessment attempt lists keyed by stable assessment_id. */
+  assessments: Record<string, AcademyAssessmentAttempt[]>
+}
 export type ThemeId = 'playful' | 'cool' | 'clean'
 
 export interface SkillState {
@@ -342,6 +413,10 @@ export interface Profile {
   // ---------- SCHED-1 Core Day (additive, OPTIONAL; no schemaVersion bump) ----------
   /** per-girl schedule blocks added beyond the shared Core Day; undefined = none yet. */
   scheduleExtensions?: ScheduleExtension[]
+
+  // ---------- CURR-1 Manuel Academy curriculum (additive, OPTIONAL; no schemaVersion bump) ----------
+  /** Grades 5/7/8 curriculum enrollment + progress; undefined until first enrollment. */
+  academy?: AcademyState
 }
 
 // ---------- MP parent hub (additive; no schemaVersion bump) ----------

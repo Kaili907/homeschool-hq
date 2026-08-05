@@ -60,6 +60,13 @@ import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
 import { isStudyEngineEnabledFromHost, isStudyEnginePreviewEnabledFromHost } from './study/featureFlag'
 import { isStudyEnginePath, leaveStudyEnginePath } from './studyEngineRoute'
+import { enabledAcademyGradeFromHost } from './academy/featureFlag'
+import {
+  leaveAcademyPath,
+  parseAcademyPath,
+  syncAcademyPath,
+  type AcademyRoute,
+} from './academy/academyRoute'
 import {
   buildHostStudyContext,
   deriveStudyHouseholdRef,
@@ -90,6 +97,13 @@ const StudySettings = import.meta.env.DEV
   ? lazy(() => import('./components/study/StudySettings').then((module) => ({ default: module.StudySettings })))
   : null
 
+// CURR-1: the Grade 5/7/8 curriculum surface. Lazy — the chunk (and the
+// curriculum content it fetches) loads only when an enabled academy grade opens
+// it, never on initial application load.
+const AcademyRouter = lazy(() =>
+  import('./components/academy/AcademyRouter').then((module) => ({ default: module.AcademyRouter })),
+)
+
 type Screen =
   | { kind: 'picker' }
   | { kind: 'kidPin'; profileId: string }
@@ -111,6 +125,7 @@ type Screen =
   | { kind: 'studyDashboard' }
   | { kind: 'studySettings' }
   | { kind: 'studySession'; blockRef: string; learnerRef: string }
+  | { kind: 'academy'; route: AcademyRoute }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
@@ -144,11 +159,22 @@ export default function App() {
   // navigation or refresh at /study-engine with a valid persisted profile lands
   // on the study surface. No active profile or flag-off falls through to the
   // picker/normal app (the loader guarantees a non-null activeProfileId exists).
-  const [screen, setScreen] = useState<Screen>(() =>
-    studyEnabled && loaded.state.activeProfileId && isStudyEnginePath(window.location.pathname)
-      ? { kind: 'studyDashboard' }
-      : { kind: 'picker' },
-  )
+  const [screen, setScreen] = useState<Screen>(() => {
+    if (studyEnabled && loaded.state.activeProfileId && isStudyEnginePath(window.location.pathname)) {
+      return { kind: 'studyDashboard' }
+    }
+    // CURR-1 (MOUNT-2 pattern): an /academy deep link with a valid persisted
+    // profile whose grade flag is enabled lands on the academy surface; any
+    // other case falls through to the picker/normal app.
+    const bootProfile = loaded.state.activeProfileId
+      ? loaded.state.profiles[loaded.state.activeProfileId]
+      : null
+    if (bootProfile && enabledAcademyGradeFromHost(bootProfile.grade)) {
+      const academyRoute = parseAcademyPath(window.location.pathname)
+      if (academyRoute) return { kind: 'academy', route: academyRoute }
+    }
+    return { kind: 'picker' }
+  })
   const [showMigration, setShowMigration] = useState(loaded.migrated)
   const [parentStudyAuthorization, setParentStudyAuthorization] = useState<StudyAdultAuthorization | null>(null)
   const seenRef = useRef(new Set<string>())
@@ -349,6 +375,7 @@ export default function App() {
     setState((s) => (s.activeProfileId ? patchProfile(s, s.activeProfileId, update) : s))
   const signOut = () => {
     leaveStudyEnginePath()
+    leaveAcademyPath()
     void purgeVoiceCache()
     studyProductionLifecycleRef.current?.cancel('logout')
     void studyVerifiedRuntimeRef.current?.cancel('logout')
@@ -659,6 +686,42 @@ export default function App() {
     )
   }
 
+  // CURR-1 academy mount point — self-styled, rendered full-bleed like Study.
+  if (screen.kind === 'academy') {
+    const academyGrade = enabledAcademyGradeFromHost(active.grade)
+    if (!academyGrade) {
+      // Flag off or a non-academy grade signed in behind a stale /academy URL.
+      return (
+        <StudyUnavailable
+          reason="The Academy curriculum is not enabled for this learner."
+          onBack={() => {
+            leaveAcademyPath()
+            setScreen({ kind: 'home' })
+          }}
+        />
+      )
+    }
+    return (
+      <Suspense fallback={<StudyLoading />}>
+        <AcademyRouter
+          profile={active}
+          grade={academyGrade}
+          schoolYear={state.schoolYear}
+          route={screen.route}
+          onNavigate={(route) => {
+            syncAcademyPath(route)
+            setScreen({ kind: 'academy', route })
+          }}
+          onPatch={patchActive}
+          onExit={() => {
+            leaveAcademyPath()
+            setScreen({ kind: 'home' })
+          }}
+        />
+      </Suspense>
+    )
+  }
+
   if (screen.kind === 'assessment') {
     return (
       <AssessmentRunner
@@ -798,6 +861,14 @@ export default function App() {
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
             onOpenStudy={studyPreviewReady || studyProductionSelected ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
             studyMode={studyPreviewReady ? 'preview' : studyProductionSelected ? 'unavailable' : undefined}
+            onOpenAcademy={
+              enabledAcademyGradeFromHost(active.grade)
+                ? () => {
+                    syncAcademyPath({ kind: 'home' })
+                    setScreen({ kind: 'academy', route: { kind: 'home' } })
+                  }
+                : undefined
+            }
             mindsetStartDate={state.mindsetStartDate}
           />
         )}
@@ -933,6 +1004,7 @@ function Home({
   onOpenMindset,
   onOpenStudy,
   studyMode,
+  onOpenAcademy,
   mindsetStartDate,
 }: {
   profile: Profile
@@ -950,6 +1022,8 @@ function Home({
   onOpenMindset: () => void
   onOpenStudy?: () => void
   studyMode?: 'preview' | 'unavailable'
+  /** CURR-1: present only when this profile's academy grade flag is enabled. */
+  onOpenAcademy?: () => void
   mindsetStartDate: string | undefined
 }) {
   const t = useTheme()
@@ -1055,6 +1129,28 @@ function Home({
       <div className="mt-6">
         <MissionCard profile={profile} onToggle={onToggleItem} />
       </div>
+
+      {/* CURR-1 Manuel Academy entry — today's lessons, courses, year schedule */}
+      {onOpenAcademy && (
+        <button
+          onClick={onOpenAcademy}
+          className={
+            t.id === 'playful'
+              ? 'mt-6 flex min-h-11 w-full items-center gap-4 rounded-3xl border-b-8 border-indigo-800 bg-gradient-to-br from-indigo-500 to-violet-600 p-5 text-left text-white shadow-xl'
+              : `${t.card} mt-6 flex min-h-11 w-full items-center gap-4 p-5 text-left hover:border-cyan-400`
+          }
+        >
+          <span className="text-4xl" aria-hidden="true">
+            🏫
+          </span>
+          <span>
+            <span className="block text-2xl font-extrabold">Manuel Academy</span>
+            <span className="block font-bold opacity-90">
+              Today&apos;s lessons, your courses, and the year schedule
+            </span>
+          </span>
+        </button>
+      )}
 
       {onOpenStudy && (
         <button

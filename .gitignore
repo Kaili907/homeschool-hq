@@ -1,3 +1,4 @@
+
 node_modules
 dist
 backups/
@@ -6,3 +7,6 @@ backups/
 
 # Local Netlify folder
 .netlify
+
+# CURR-1: generated curriculum chunks (rebuilt from curriculum-content/ by scripts/build-curriculum.mjs)
+public/curriculum/

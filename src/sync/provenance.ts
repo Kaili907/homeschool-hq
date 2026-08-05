@@ -19,7 +19,12 @@ const MAX_SYNC_PAYLOAD_BYTES = 10_000_000
 const MAX_SYNC_PROFILES = 5
 const PROFILE_ID = /^p[1-5]$/
 const RESERVED_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
-const GRADES = new Set(['3', '4', '6', '10', '12'])
+const GRADES = new Set(['3', '4', '5', '6', '7', '8', '10', '12'])
+const ACADEMY_GRADES = new Set(['5', '7', '8'])
+const ACADEMY_LESSON_STATUSES = new Set(['in-progress', 'complete', 'reteach'])
+const ACADEMY_OCCASION_MODES = new Set(['guided', 'independent'])
+const ACADEMY_OCCASION_KINDS = new Set(['lesson-check', 'reassessment'])
+const ACADEMY_ASSESSMENT_OUTCOMES = new Set(['secure', 'developing', 'not-yet'])
 const THEMES = new Set(['playful', 'cool', 'clean'])
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
 const SCHEDULE_DAYS = new Set(['Mon', 'Tue', 'Wed', 'Thu', 'Fri'])
@@ -77,6 +82,14 @@ function plainRecord(value: unknown): value is Record<string, unknown> {
 
 function finiteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value)
+}
+
+function nonNegativeInteger(value: unknown): value is number {
+  return finiteNumber(value) && Number.isInteger(value) && value >= 0
+}
+
+function percentage(value: unknown): value is number {
+  return finiteNumber(value) && value >= 0 && value <= 100
 }
 
 function text(value: unknown, max = MAX_SYNC_STRING_LENGTH): value is string {
@@ -551,6 +564,48 @@ function validatePacing(value: unknown): boolean {
   )
 }
 
+// CURR-1: Manuel Academy enrollment + progress (see types.AcademyState).
+function validateAcademy(value: unknown, profileGrade: unknown): boolean {
+  return (
+    plainRecord(value) &&
+    text(value.releaseVersion, 64) &&
+    ACADEMY_GRADES.has(String(value.grade)) &&
+    value.grade === profileGrade &&
+    timestamp(value.enrolledAt) &&
+    boundedArray(value.courseIds, identifier) &&
+    boundedRecord(
+      value.lessons,
+      (lesson) =>
+        plainRecord(lesson) &&
+        ACADEMY_LESSON_STATUSES.has(String(lesson.status)) &&
+        nonNegativeInteger(lesson.segmentIndex) &&
+        text(lesson.releaseVersion, 64) &&
+        timestamp(lesson.startedAt) &&
+        optional(lesson.completedAt, timestamp) &&
+        optional(lesson.revisits, nonNegativeInteger) &&
+        boundedArray(
+          lesson.occasions,
+          (occasion) =>
+            plainRecord(occasion) &&
+            isoDate(occasion.date) &&
+            ACADEMY_OCCASION_MODES.has(String(occasion.mode)) &&
+            typeof occasion.met === 'boolean' &&
+            ACADEMY_OCCASION_KINDS.has(String(occasion.kind)),
+        ),
+    ) &&
+    boundedRecord(value.assessments, (attempts) =>
+      boundedArray(
+        attempts,
+        (attempt) =>
+          plainRecord(attempt) &&
+          isoDate(attempt.date) &&
+          percentage(attempt.percent) &&
+          ACADEMY_ASSESSMENT_OUTCOMES.has(String(attempt.outcome)),
+      ),
+    )
+  )
+}
+
 function validateProfileOptionals(value: Record<string, unknown>): boolean {
   return (
     optional(value.template, validateMissionTemplate) &&
@@ -638,7 +693,8 @@ function validateProfileOptionals(value: Record<string, unknown>): boolean {
           optional(snapshot.note, text),
       ),
     ) &&
-    optional(value.scheduleExtensions, validateScheduleExtensions)
+    optional(value.scheduleExtensions, validateScheduleExtensions) &&
+    optional(value.academy, (candidate) => validateAcademy(candidate, value.grade))
   )
 }
 

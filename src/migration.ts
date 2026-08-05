@@ -5,7 +5,8 @@ export const SCHEMA_VERSION = 2 as const
 
 export function themeForGrade(grade: Grade): ThemeId {
   if (grade === '3' || grade === '4') return 'playful'
-  if (grade === '6') return 'cool'
+  // CURR-1: the middle grades (5–8) get the same age-appropriate theme as 6.
+  if (grade === '5' || grade === '6' || grade === '7' || grade === '8') return 'cool'
   return 'clean'
 }
 
