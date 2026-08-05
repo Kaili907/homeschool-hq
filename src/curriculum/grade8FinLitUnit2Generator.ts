@@ -1,0 +1,10 @@
+import type { Difficulty } from '../types'
+import { makeFinLitQuestion, money, ri, type CurriculumGenerator, type FinLitQuestion } from './grade8FinLitCore'
+export const GRADE8_FINLIT_UNIT2_ITEM_TYPES = ['account-reconciliation'] as const
+export type Grade8FinLitUnit2ItemType = typeof GRADE8_FINLIT_UNIT2_ITEM_TYPES[number]
+export interface Grade8FinLitUnit2Parameters { openingCents: bigint; depositCents: bigint; withdrawalCents: bigint; feeCents: bigint }
+export type Grade8FinLitUnit2Question = FinLitQuestion<'account-reconciliation', Grade8FinLitUnit2Parameters>
+const definition = { standard: 'FL.8.B', lessonFocus: 'checking an account record', workedExample: { prompt: 'An account begins with $50.00, receives $20.00, has a $12.00 withdrawal, and a $1.00 fee. What is the balance?', answer: '$57.00', steps: ['Add the deposit to the opening balance.', 'Subtract the withdrawal and fee: $50.00 + $20.00 - $12.00 - $1.00 = $57.00.'] } } as const
+export function generateAccountReconciliationQuestion(difficulty: Difficulty): Grade8FinLitUnit2Question { const openingCents=BigInt(ri(50,150)*100),depositCents=BigInt(ri(10,80)*100),withdrawalCents=BigInt(ri(5,40)*100),feeCents=BigInt(ri(1,5)*100),answer=openingCents+depositCents-withdrawalCents-feeCents; return makeFinLitQuestion({itemType:'account-reconciliation',difficulty,prompt:`An account starts at ${money(openingCents)}. It records a deposit of ${money(depositCents)}, a withdrawal of ${money(withdrawalCents)}, and a service fee of ${money(feeCents)}. What is the ending balance?`,correctAnswer:money(answer),distractors:[money(answer+feeCents),money(answer-feeCents),money(openingCents+depositCents-withdrawalCents),money(openingCents-depositCents-withdrawalCents-feeCents)],parameters:{openingCents,depositCents,withdrawalCents,feeCents},definition}) }
+export const GRADE8_FINLIT_UNIT2_GENERATORS={'account-reconciliation':generateAccountReconciliationQuestion} satisfies Record<Grade8FinLitUnit2ItemType,CurriculumGenerator<Grade8FinLitUnit2Question>>
+export const generateGrade8FinLitUnit2Question=generateAccountReconciliationQuestion
