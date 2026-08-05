@@ -15,7 +15,7 @@ export type FinLitStandard =
   | 'FL.8.I'
   | 'FL.8.R'
 
-export interface FinLitDefinition {
+interface Definition {
   standard: FinLitStandard
   lessonFocus: string
   workedExample: CurriculumWorkedExample
@@ -63,6 +63,9 @@ export function amortizedLoanTotalInterestCents(
   const denominator = 120_000n
   while (balance > 0n) {
     const interest = roundHalfUp(balance * annualRateBps, denominator)
+    if (monthlyPaymentCents <= interest) {
+      throw new Error('Monthly payment does not amortize the loan.')
+    }
     interestTotal += interest
     const due = balance + interest
     if (monthlyPaymentCents >= due) return interestTotal
@@ -71,12 +74,6 @@ export function amortizedLoanTotalInterestCents(
   return interestTotal
 }
 
-export const example = (
-  prompt: string,
-  answer: string,
-  ...steps: string[]
-): CurriculumWorkedExample => ({ prompt, answer, steps })
-
 export function makeFinLitQuestion<T extends string, P>(args: {
   itemType: T
   difficulty: Difficulty
@@ -84,7 +81,7 @@ export function makeFinLitQuestion<T extends string, P>(args: {
   correctAnswer: string
   distractors: readonly string[]
   parameters: P
-  definition: FinLitDefinition
+  definition: Definition
 }): FinLitQuestion<T, P> {
   return makeCurriculumQuestion({
     ...args,
@@ -94,9 +91,6 @@ export function makeFinLitQuestion<T extends string, P>(args: {
     distractorMode: 'distinct',
   })
 }
-
-export const randomCents = (difficulty: Difficulty, low: number, high: number) =>
-  BigInt(ri(low, high + (difficulty - 1) * high))
 
 export { pick, ri }
 export type { CurriculumGenerator }
