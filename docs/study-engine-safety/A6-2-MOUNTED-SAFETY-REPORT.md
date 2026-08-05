@@ -100,7 +100,7 @@ The following block reserves the final line-for-line stat captured after all rep
  src/components/study/StudySessionContainer.tsx     |  64 +++++-
  src/study/hostRuntime.integration.test.ts          |  16 +-
  src/study/localDevelopmentPorts.ts                 |   6 +-
- src/study/mountedOutputSafety.integration.test.tsx | 164 ++++++++++++++
+ src/study/mountedOutputSafety.integration.test.tsx | 164 +++++++++++++
  src/study/mountedPorts.ts                          |  27 +++
  src/study/ports.ts                                 |   5 +-
  .../production/productionImportBoundary.test.ts    |   4 +-
