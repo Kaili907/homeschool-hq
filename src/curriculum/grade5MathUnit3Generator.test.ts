@@ -220,12 +220,29 @@ function oracleAnswer(question: Grade5MathUnit3Question): string {
       )
     }
     case 'partial-products': {
+      // Two wordings: "both factors" only when the multiplier really decomposes
+      // into more than one place-value part, otherwise the single-factor wording.
       const match = matchPrompt(
         question.prompt,
-        /^Use partial products to calculate (\d+) × (\d+)\. Decompose both factors by place value, multiply each pair of parts, and add the partial products\. What is the product\?$/,
+        /^Use partial products to calculate (\d+) × (\d+)\. Decompose (?:both factors by place value, multiply each pair of parts|(\d+) by place value, multiply each part by (\d+)), and add the partial products\. What is the product\?$/,
       )
       const firstParts = decimalPlaceParts(integer(match[1]))
       const secondParts = decimalPlaceParts(integer(match[2]))
+      if (match[3] === undefined) {
+        if (secondParts.length < 2)
+          throw new Error(
+            `Prompt says "both factors" but ${match[2]} has one place-value part: ${question.prompt}`,
+          )
+      } else {
+        if (secondParts.length !== 1)
+          throw new Error(
+            `Prompt decomposes only one factor but ${match[2]} has ${secondParts.length} place-value parts: ${question.prompt}`,
+          )
+        if (match[3] !== match[1] || match[4] !== match[2])
+          throw new Error(
+            `Single-factor wording names the wrong numbers: ${question.prompt}`,
+          )
+      }
       return String(
         firstParts
           .flatMap((left) => secondParts.map((right) => left * right))
