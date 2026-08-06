@@ -21,6 +21,19 @@ const PROFILE_ID = /^p[1-5]$/
 const RESERVED_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
 const GRADES = new Set(['3', '4', '5', '6', '7', '8', '10', '12'])
 const ACADEMY_GRADES = new Set(['5', '7', '8'])
+// mirrors ACADEMY_SUBJECTS (src/types.ts), the working-level record's key domain
+const ACADEMY_SUBJECTS = new Set([
+  'mathematics',
+  'english-language-arts',
+  'science',
+  'social-studies',
+  'health',
+  'physical-education',
+  'ready-for-life',
+  'technology',
+  'arts-and-music',
+  'financial-literacy',
+])
 const ACADEMY_LESSON_STATUSES = new Set(['in-progress', 'complete', 'reteach'])
 const ACADEMY_OCCASION_MODES = new Set(['guided', 'independent'])
 const ACADEMY_OCCASION_KINDS = new Set(['lesson-check', 'reassessment'])
@@ -98,6 +111,16 @@ function text(value: unknown, max = MAX_SYNC_STRING_LENGTH): value is string {
 
 function identifier(value: unknown): value is string {
   return text(value, 512) && value.length > 0
+}
+
+/**
+ * Membership test that refuses non-strings. `SET.has(String(value))` coerces
+ * first, so a numeric 5 satisfies a set holding '5' — malformed data for a
+ * string-union field, and not something that should cross the sync boundary.
+ * Check the type, then membership.
+ */
+function memberOf(set: Set<string>, value: unknown): value is string {
+  return typeof value === 'string' && set.has(value)
 }
 
 function isoDate(value: unknown, allowEmpty = false): value is string {
@@ -564,20 +587,97 @@ function validatePacing(value: unknown): boolean {
   )
 }
 
-// CURR-1: Manuel Academy enrollment + progress (see types.AcademyState).
-function validateAcademy(value: unknown, profileGrade: unknown): boolean {
+/**
+ * ACADEMY-LEVEL-DECOUPLE — the authorization a profile actually carries:
+ * subject → the academy level that subject is assigned. A subject with no
+ * explicit working level rides the nominal grade, exactly as the runtime
+ * resolver does (academy/workingLevel.workingLevelFor); a subject that lands on
+ * a non-academy grade authorizes nothing.
+ *
+ * This replaces the old `academy.grade === profile.grade` rule, which made a
+ * decoupled enrollment (grade-6 girl doing Grade 5 mathematics) unrepresentable.
+ * It is deliberately SUBJECT-scoped rather than level-scoped: assigning
+ * mathematics to Grade 5 must not also admit Grade 5 science, which a bare set
+ * of allowed levels would have done.
+ */
+function academyAuthorization(
+  profileGrade: unknown,
+  workingLevels: unknown,
+): Map<string, string> {
+  const nominal = memberOf(ACADEMY_GRADES, profileGrade) ? profileGrade : null
+  const explicit = plainRecord(workingLevels) ? workingLevels : {}
+  const authorized = new Map<string, string>()
+  for (const subject of ACADEMY_SUBJECTS) {
+    const assigned = explicit[subject]
+    const level = assigned === undefined ? nominal : assigned
+    if (memberOf(ACADEMY_GRADES, level)) authorized.set(subject, level)
+  }
+  return authorized
+}
+
+/**
+ * ACADEMY-LEVEL-DECOUPLE: subject → academy level. Levels are restricted to the
+ * ones the release publishes content for (5/7/8) — the same set the parent UI
+ * offers. A nominal-only grade such as '10' is rejected rather than stored as an
+ * inert value nothing can serve.
+ */
+function validateWorkingLevels(value: unknown): boolean {
+  return boundedRecord(
+    value,
+    (level, subject) => ACADEMY_SUBJECTS.has(subject) && memberOf(ACADEMY_GRADES, level),
+  )
+}
+
+/** Course ids encode their level and subject (`ma-g5-mathematics`); mirrors
+ * COURSE_ID in academy/academyRoute.ts. Every id in the shipped release parses. */
+const ACADEMY_COURSE_ID = /^ma-g(5|7|8)-([a-z-]+)$/
+
+/**
+ * A course record is admissible only if the profile is authorized for that
+ * course's SUBJECT at that course's LEVEL. An id whose level/subject cannot be
+ * read cannot be shown to be authorized, so it is refused.
+ *
+ * Scope note: this checks the authorization the course claims, not whether the
+ * course, its lessons, or its assessments exist in the release, nor that a
+ * lesson belongs to an enrolled course. Those gaps predate this branch (the old
+ * grade-equality rule validated no membership either) and are carded separately.
+ */
+function validateAcademyCourseIds(value: unknown, authorized: Map<string, string>): boolean {
+  return boundedArray(value, (candidate) => {
+    if (!identifier(candidate)) return false
+    const parsed = ACADEMY_COURSE_ID.exec(candidate)
+    return parsed !== null && authorized.get(parsed[2]) === parsed[1]
+  })
+}
+
+/**
+ * CURR-1: Manuel Academy enrollment + progress (see types.AcademyState).
+ *
+ * ACADEMY-LEVEL-DECOUPLE-C: the capability check lives on `courseIds`, which is
+ * subject-precise. `grade` is the label the enrollment was opened under; nothing
+ * reads it to SELECT content, so it is checked for shape but not for current
+ * authorization. Gating on it as well would make the field a denormalized
+ * capability that a parent clearing her last working level could leave
+ * permanently invalid, blocking every later save for the whole household.
+ * (It is not inert: AcademyRouter compares it to the composed program's primary
+ * level to decide when to re-sync enrollment — see AcademyRouter.tsx `inSync`.)
+ *
+ * ACADEMY-LEVEL-DECOUPLE-C2: every enumerated field is matched with `memberOf`,
+ * which refuses non-strings. `SET.has(String(x))` accepted numeric 5 for a
+ * string-union field.
+ */
+function validateAcademy(value: unknown, authorized: Map<string, string>): boolean {
   return (
     plainRecord(value) &&
     text(value.releaseVersion, 64) &&
-    ACADEMY_GRADES.has(String(value.grade)) &&
-    value.grade === profileGrade &&
+    memberOf(ACADEMY_GRADES, value.grade) &&
     timestamp(value.enrolledAt) &&
-    boundedArray(value.courseIds, identifier) &&
+    validateAcademyCourseIds(value.courseIds, authorized) &&
     boundedRecord(
       value.lessons,
       (lesson) =>
         plainRecord(lesson) &&
-        ACADEMY_LESSON_STATUSES.has(String(lesson.status)) &&
+        memberOf(ACADEMY_LESSON_STATUSES, lesson.status) &&
         nonNegativeInteger(lesson.segmentIndex) &&
         text(lesson.releaseVersion, 64) &&
         timestamp(lesson.startedAt) &&
@@ -588,9 +688,9 @@ function validateAcademy(value: unknown, profileGrade: unknown): boolean {
           (occasion) =>
             plainRecord(occasion) &&
             isoDate(occasion.date) &&
-            ACADEMY_OCCASION_MODES.has(String(occasion.mode)) &&
+            memberOf(ACADEMY_OCCASION_MODES, occasion.mode) &&
             typeof occasion.met === 'boolean' &&
-            ACADEMY_OCCASION_KINDS.has(String(occasion.kind)),
+            memberOf(ACADEMY_OCCASION_KINDS, occasion.kind),
         ),
     ) &&
     boundedRecord(value.assessments, (attempts) =>
@@ -600,7 +700,7 @@ function validateAcademy(value: unknown, profileGrade: unknown): boolean {
           plainRecord(attempt) &&
           isoDate(attempt.date) &&
           percentage(attempt.percent) &&
-          ACADEMY_ASSESSMENT_OUTCOMES.has(String(attempt.outcome)),
+          memberOf(ACADEMY_ASSESSMENT_OUTCOMES, attempt.outcome),
       ),
     )
   )
@@ -694,7 +794,10 @@ function validateProfileOptionals(value: Record<string, unknown>): boolean {
       ),
     ) &&
     optional(value.scheduleExtensions, validateScheduleExtensions) &&
-    optional(value.academy, (candidate) => validateAcademy(candidate, value.grade))
+    optional(value.workingLevels, validateWorkingLevels) &&
+    optional(value.academy, (candidate) =>
+      validateAcademy(candidate, academyAuthorization(value.grade, value.workingLevels)),
+    )
   )
 }
 

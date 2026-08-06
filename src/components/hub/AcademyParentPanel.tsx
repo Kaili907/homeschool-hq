@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react'
 import type { AcademyAssessmentAttempt, ISODate, Profile, SchoolYear } from '../../types'
 import { isoToday } from '../../appState'
 import { isSchoolYearConfigured, nudgePointer, resolvePointer } from '../../curriculum/pacing'
-import { enabledAcademyGradeFromHost } from '../../academy/featureFlag'
-import { loadCatalog } from '../../academy/contentClient'
+import { enabledAcademyEntries, hasEnabledAcademyProgram } from '../../academy/workingLevel'
+import { loadProgram } from '../../academy/program'
 import { ACADEMY_SUBJECT_LABELS, type AcademyCatalog } from '../../academy/contentTypes'
 import { courseProgress, masteryOf, recordAssessmentAttempt } from '../../academy/academyState'
 
@@ -22,32 +22,31 @@ interface Props {
 }
 
 export function AcademyParentPanel({ profiles, sy, onPatchProfile }: Props) {
-  const learners = useMemo(
-    () => profiles.filter((p) => enabledAcademyGradeFromHost(p.grade)),
-    [profiles],
-  )
+  const learners = useMemo(() => profiles.filter(hasEnabledAcademyProgram), [profiles])
   const [learnerId, setLearnerId] = useState<string | null>(learners[0]?.id ?? null)
   const learner = learners.find((p) => p.id === learnerId) ?? learners[0] ?? null
-  const grade = learner ? enabledAcademyGradeFromHost(learner.grade) : null
+  // ACADEMY-LEVEL-DECOUPLE: progress is reported over her PROGRAM (per-subject
+  // working levels), which may draw courses from more than one level.
+  const entries = useMemo(() => (learner ? enabledAcademyEntries(learner) : []), [learner])
   const [catalog, setCatalog] = useState<AcademyCatalog | null>(null)
 
   useEffect(() => {
     let current = true
     setCatalog(null)
-    if (!grade) return
-    loadCatalog(grade)
-      .then((c) => current && setCatalog(c))
+    if (entries.length === 0) return
+    loadProgram(entries)
+      .then((program) => current && setCatalog(program.catalog))
       .catch(() => current && setCatalog(null))
     return () => {
       current = false
     }
-  }, [grade])
+  }, [entries])
 
-  if (!learner || !grade) {
+  if (!learner) {
     return (
       <p className="rounded-lg border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-500">
-        No learner has an enabled Academy grade. Enable a grade flag (VITE_ACADEMY_GRADE_5/7/8_ENABLED)
-        and assign that grade to a profile.
+        No learner reaches an enabled Academy level yet. Enable a level flag
+        (VITE_ACADEMY_GRADE_5/7/8_ENABLED) and set that level for a subject above.
       </p>
     )
   }
@@ -72,7 +71,7 @@ export function AcademyParentPanel({ profiles, sy, onPatchProfile }: Props) {
       </div>
       {!catalog ? (
         <p role="status" className="text-sm font-semibold text-slate-500">
-          Loading the grade {grade} catalog…
+          Loading her course catalog…
         </p>
       ) : (
         <LearnerAcademyDetail

@@ -11,8 +11,9 @@ import { PlansView } from './PlansView'
 import { StatusView } from './StatusView'
 import { StudyParentPanel, type StudyParentLearnerOption } from './StudyParentPanel'
 import { AcademyParentPanel } from './AcademyParentPanel'
+import { AcademyLevelsPanel } from './AcademyLevelsPanel'
 import { StudyLocalSafetyStopsPanel } from './StudyLocalSafetyStopsPanel'
-import { enabledAcademyGradeFromHost } from '../../academy/featureFlag'
+import { isAnyAcademyLevelEnabled } from '../../academy/workingLevel'
 import type { StudyPortBundle } from '../../study/ports'
 import type { StudyAdultAuthorization } from '../../study/types'
 
@@ -56,8 +57,11 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
   const today = isoToday()
   const docs = useMemo(() => loadPlans(), [])
   const profiles = useMemo(() => Object.values(state.profiles), [state.profiles])
-  // CURR-1: the Academy tab shows only when a profile's grade flag is enabled.
-  const academyEnabled = profiles.some((p) => enabledAcademyGradeFromHost(p.grade))
+  // ACADEMY-LEVEL-DECOUPLE: the Academy tab shows whenever the build has ANY
+  // academy level enabled — not only when a profile already reaches one. The
+  // working-level control lives on this tab, so gating it on "a profile already
+  // qualifies" would make the setting that grants access unreachable.
+  const academyEnabled = isAnyAcademyLevelEnabled()
   const tabs = [
     ...TABS,
     ...(academyEnabled ? [{ id: 'academy' as const, label: 'Academy', emoji: '🏫' }] : []),
@@ -167,7 +171,10 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
             <StatusView profiles={profiles} today={today} onPatchProfile={patchProfile} />
           )}
           {tab === 'academy' && (
-            <AcademyParentPanel profiles={profiles} sy={sy} onPatchProfile={patchProfile} />
+            <div className="space-y-4">
+              <AcademyLevelsPanel profiles={profiles} onPatchProfile={patchProfile} />
+              <AcademyParentPanel profiles={profiles} sy={sy} onPatchProfile={patchProfile} />
+            </div>
           )}
           {tab === 'study' && study && (
             <StudyParentPanel
