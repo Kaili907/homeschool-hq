@@ -70,6 +70,35 @@ items during the build and they were rewritten.
 Open responses are scored for reasoning and structure, never for whether the
 child's opinion is agreeable. The argument rubrics say so explicitly.
 
+## Corrections after independent review (CE3-C)
+
+### `e4e25` — subject–verb agreement, with only one defensible answer
+
+- **Was:** *"Which sentence uses the correct verb?"* — `The team is winning.`
+  (keyed) / `The team are winning.` / `The team be winning.` /
+  `The team am winning.`
+- **Defect:** the first two options are **both** correct standard English. A
+  collective noun takes a singular verb in American usage and a plural verb in
+  British usage, and this bank uses British spelling throughout
+  ("capitalisation", "centimetres", "colour"). A child reading the assessment's
+  own register and answering *"The team are winning"* was marked wrong for their
+  dialect, not for their grammar — and the item sits in the **foundation** tier,
+  where a wrong answer pushes the recommendation toward starting a level below.
+- **Now:** *"Which sentence uses the correct verb?"* —
+  `My brother walks to school every day.` (keyed) /
+  `My brother walk to school every day.` /
+  `My brother are walking to school every day.` /
+  `My brother walking to school every day.`
+- **Why this one is unambiguous:** a singular subject with no collective
+  reading. `walk` is the plural form, `are` cannot follow a singular subject,
+  and `walking` on its own leaves the sentence with no finite verb. All three
+  are wrong in every dialect of English.
+- Tier, domain, standard and mode are unchanged: foundation tier, Grammar and
+  conventions, `3.L.1f`, auto.
+- A permanent test now fails any choice item anywhere in the bank that offers a
+  collective noun with both a singular and a plural form of *to be* — the same
+  defect cannot be reintroduced by hand.
+
 ---
 
 ## Item tables
@@ -188,7 +217,7 @@ _Original passage shown on screen, ~274 words._
 
 | Item | Tier | Domain | Standard / skill | Kind | Wt | Answer authority |
 | --- | --- | --- | --- | --- | --- | --- |
-| `e4e25` | F | Grammar and conventions | 3.L.1f — subject–verb agreement | choice | 1 | `The team is winning.` |
+| `e4e25` | F | Grammar and conventions | 3.L.1f — subject–verb agreement | choice | 1 | `My brother walks to school every day.` |
 | `e4e26` | F | Grammar and conventions | 3.L.2 — capitalisation and punctuation | choice | 1 | `My birthday is on June 4.` |
 | `e4e27` | C | Grammar and conventions | 4.L.1f — correct sentence fragments | choice | 1 | `We ate dinner by candlelight because the power went out.` |
 | `e4e28` | C | Grammar and conventions | 4.L.1g — frequently confused words | choice | 1 | `there` |

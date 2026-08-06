@@ -141,10 +141,17 @@ export const ELE_MATH_G4: FixedTest = {
         },
         {
           id: 'e4m23',
-          kind: 'text',
-          prompt: 'Write 3/10 as a decimal.',
+          kind: 'choice',
+          prompt: 'Which of these is 3/10 written as a decimal?',
+          choices: ['0.3', '0.03', '3.10', '3/10'],
           key: '0.3',
-          keyNote: '0.3.',
+          keyNote:
+            '0.3. CE3-C: this item is multiple choice on purpose. As a typed item the shared ' +
+            'numeric normalizer read "3/10" and "0.3" as the same number, so copying the prompt ' +
+            'earned the mark without converting anything. Choice items are matched as text, so ' +
+            '"3/10" is now a distractor and scores incorrect — it is the one to look at, because ' +
+            'it means the conversion did not happen. "0.03" is a place-value slip and "3.10" ' +
+            'reads the fraction bar as a decimal point.',
         },
         {
           id: 'e4m24',

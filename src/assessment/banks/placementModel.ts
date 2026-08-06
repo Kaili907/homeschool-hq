@@ -84,6 +84,21 @@ export interface PlacementInstrument {
 export const PLACEMENT_THRESHOLDS = {
   /** Above this share of pending weight the instrument cannot support a call. */
   maxPendingShare: 0.25,
+  /**
+   * Above this share of SKIPPED weight the instrument cannot support a call.
+   *
+   * CE3-C. Skipping is invited by every instrument's intro and a skip is honest
+   * information — it counts as "not demonstrated" once the gate is open. But a
+   * paper that is mostly silence is not a measurement of anything, and before
+   * this ceiling existed an all-skipped paper produced a demotion
+   * recommendation. Half is the line: past it, most of the paper was declined
+   * and the remainder is too thin to name a band from.
+   *
+   * PROVISIONAL — this number is a judgement, not a norming result. It awaits
+   * Stephen's approval and can be tightened or loosened without touching any
+   * other rule; nothing else in the model reads it.
+   */
+  maxSkipShare: 0.5,
   /** Foundation below this → the prior year's ground is not there. */
   foundationShaky: 0.6,
   /** Foundation at or above this → prerequisites are secure. */
@@ -124,7 +139,7 @@ export const OUTCOME_LABEL: Record<PlacementOutcome, string> = {
 // ---------- metrics + the rule table ----------
 
 export interface PlacementMetrics {
-  /** null = the tier scored no item definitively (no evidence at all). */
+  /** null = the tier put no weight in its denominator at all. */
   foundationPct: number | null
   currentPct: number | null
   stretchPct: number | null
@@ -132,19 +147,46 @@ export interface PlacementMetrics {
   pendingShare: number
   /** share of total blueprint weight the child chose to skip */
   skipShare: number
+  /**
+   * CE3-C. Weight per tier that was scored DEFINITIVELY — a right answer, a
+   * confidently wrong answer, or a rubric item a human graded. Skips and
+   * pending items are excluded: they are what the child did not show, and a
+   * tier made only of them has produced no evidence to place anyone on.
+   *
+   * This is the field that separates "scored 0%" from "showed us nothing". A
+   * percentage cannot: an all-skipped tier reads 0% too.
+   */
+  definitiveByTier: Record<PlacementTier, number>
+}
+
+/** Definitive weight in one tier, read defensively — an absent or non-finite
+ * entry reads as NO evidence, so a malformed metrics object closes the gate
+ * rather than throwing or accidentally opening it. */
+function definitiveWeightIn(m: PlacementMetrics, tier: PlacementTier): number {
+  const v = m.definitiveByTier?.[tier]
+  return typeof v === 'number' && Number.isFinite(v) && v > 0 ? v : 0
 }
 
 /**
- * The evidence gate. Open = all three tiers produced at least one definitive
- * score AND human-review backlog is under the ceiling. Closed → R0 fires and
- * no placement band is claimed.
+ * The evidence gate. Open only when ALL of these hold:
+ *
+ *   1. every tier put weight in its denominator (no tier is entirely pending);
+ *   2. every tier scored at least some weight DEFINITIVELY — skips alone can
+ *      never open the gate (CE3-C blocker B1);
+ *   3. the human-review backlog is at or under `maxPendingShare`;
+ *   4. the skipped share is at or under `maxSkipShare` (CE3-C).
+ *
+ * Closed → R0 fires and no placement band is claimed. Every condition is a
+ * reason to ask the parent, never a reason to name a level.
  */
 export function evidenceGateOpen(m: PlacementMetrics): boolean {
   return (
     m.foundationPct !== null &&
     m.currentPct !== null &&
     m.stretchPct !== null &&
-    m.pendingShare <= PLACEMENT_THRESHOLDS.maxPendingShare
+    PLACEMENT_TIERS.every((tier) => definitiveWeightIn(m, tier) > 0) &&
+    m.pendingShare <= PLACEMENT_THRESHOLDS.maxPendingShare &&
+    m.skipShare <= PLACEMENT_THRESHOLDS.maxSkipShare
   )
 }
 
@@ -172,7 +214,9 @@ export const PLACEMENT_RULES: readonly PlacementRule[] = [
   {
     id: 'R0',
     outcome: 'insufficient-evidence',
-    when: 'any tier scored no item definitively, OR pendingShare > 0.25',
+    when:
+      'any tier scored no item definitively (skips and pending items do not ' +
+      'count as evidence), OR pendingShare > 0.25, OR skipShare > 0.50',
     matches: (m) => !evidenceGateOpen(m),
   },
   {
@@ -329,19 +373,34 @@ export function academyNoteFor(nominalGrade: string, outcome: PlacementOutcome):
 
 // ---------- the scorer ----------
 
-/** Defensive read of one stored answer. Any malformed shape reads as unanswered. */
-function readAnswer(attempt: Attempt, itemId: string): { value: string; skipped: boolean } {
+/**
+ * CE3-C. One stored answer, read defensively, in three states — the middle one
+ * is new and it is the point of the correction:
+ *
+ *  - 'absent'   no usable record. This is NOT a skip. The child may never have
+ *               reached the item, the attempt may have been abandoned, or the
+ *               payload may belong to a different instrument entirely. Absence
+ *               of evidence is not evidence of failure, so the item is queued
+ *               for a human instead of being counted as not-demonstrated.
+ *  - 'skipped'  the child pressed SKIP, in front of the parent. That is a
+ *               deliberate act and it is honest information.
+ *  - 'answered' a string response the scorer may judge.
+ */
+type AnswerRead =
+  | { state: 'absent' }
+  | { state: 'skipped' }
+  | { state: 'answered'; value: string }
+
+function readAnswer(attempt: Attempt, itemId: string): AnswerRead {
   const answers: unknown = attempt && typeof attempt === 'object' ? attempt.answers : undefined
-  if (!answers || typeof answers !== 'object') return { value: '', skipped: true }
+  if (!answers || typeof answers !== 'object') return { state: 'absent' }
   const raw = (answers as Record<string, unknown>)[itemId]
-  if (!raw || typeof raw !== 'object') return { value: '', skipped: true }
+  if (!raw || typeof raw !== 'object') return { state: 'absent' }
   const r = raw as { value?: unknown; skipped?: unknown }
-  return {
-    // A non-string value (corrupt storage) reads as blank, which routes the item
-    // to human review — it is never scored wrong on the strength of bad data.
-    value: typeof r.value === 'string' ? r.value : '',
-    skipped: r.skipped === true,
-  }
+  if (r.skipped === true) return { state: 'skipped' }
+  // A non-string value (corrupt storage) reads as blank, which routes the item
+  // to human review — it is never scored wrong on the strength of bad data.
+  return { state: 'answered', value: typeof r.value === 'string' ? r.value : '' }
 }
 
 /** Defensive read of one human rubric score. Out-of-range or non-numeric → null (pending). */
@@ -366,6 +425,24 @@ function confidenceOf(
   const reasons: string[] = []
   if (ruleId === 'R0') {
     reasons.push('the evidence gate did not open, so no placement band was claimed')
+    // Name WHICH condition closed it — "insufficient evidence" with no reason
+    // reads as a verdict on the child rather than on the paper.
+    for (const tier of PLACEMENT_TIERS) {
+      if (definitiveWeightIn(m, tier) <= 0) {
+        reasons.push(`nothing in "${TIER_LABEL[tier]}" was answered definitely enough to score`)
+      }
+    }
+    if (m.pendingShare > T.maxPendingShare) {
+      reasons.push(
+        `${Math.round(m.pendingShare * 100)}% of the assessment is still waiting on a human reader`,
+      )
+    }
+    if (m.skipShare > T.maxSkipShare) {
+      reasons.push(
+        `${Math.round(m.skipShare * 100)}% of the assessment was skipped — honest, and more than ` +
+          'this model will place a child from',
+      )
+    }
     return { confidence: 'low', reasons }
   }
   if (m.pendingShare > T.lowConfidencePendingShare) {
@@ -426,7 +503,7 @@ export function computePlacement(
       }
       const w = entry.weight
       totalWeight += w
-      const { value, skipped } = readAnswer(attempt, item.id)
+      const read = readAnswer(attempt, item.id)
 
       if (entry.mode === 'rubric') {
         const max = entry.rubricPoints ?? 0
@@ -434,7 +511,7 @@ export function computePlacement(
         if (score !== null) {
           bump(entry, 'possible', w)
           bump(entry, 'earned', w * (score / max))
-        } else if (skipped) {
+        } else if (read.state === 'skipped') {
           // Declined in front of the parent: evidence of not-demonstrated.
           bump(entry, 'possible', w)
           bump(entry, 'skipped', w)
@@ -447,7 +524,18 @@ export function computePlacement(
         continue
       }
 
-      switch (scoreItem(item, value, skipped)) {
+      if (read.state === 'absent') {
+        // CE3-C. No record for this item — never reached, lost, or from another
+        // instrument. It leaves the denominator and waits for a human; it is
+        // NOT counted as a skip and it can never lower a tier's score.
+        bump(entry, 'pending', w)
+        pendingWeight += w
+        pendingItemIds.push(item.id)
+        continue
+      }
+
+      const value = read.state === 'answered' ? read.value : ''
+      switch (scoreItem(item, value, read.state === 'skipped')) {
         case 'correct':
           bump(entry, 'possible', w)
           bump(entry, 'earned', w)
@@ -484,12 +572,20 @@ export function computePlacement(
   const byTier = (tier: PlacementTier) =>
     tierSummaries.find((t) => t.tier === tier)?.pct ?? null
 
+  // Definitive weight = what landed in the denominator minus what was skipped:
+  // exactly the correct, incorrect and human-graded weight, per the disposal
+  // table in the scoring guide. No separate accumulator, so it cannot drift.
+  const definitiveByTier = Object.fromEntries(
+    tierSummaries.map((t) => [t.tier, t.possible - t.skipped]),
+  ) as Record<PlacementTier, number>
+
   const metrics: PlacementMetrics = {
     foundationPct: byTier('foundation'),
     currentPct: byTier('current'),
     stretchPct: byTier('stretch'),
     pendingShare: totalWeight > 0 ? pendingWeight / totalWeight : 1,
     skipShare: totalWeight > 0 ? skippedWeight / totalWeight : 0,
+    definitiveByTier,
   }
 
   const rule = ruleFor(metrics)

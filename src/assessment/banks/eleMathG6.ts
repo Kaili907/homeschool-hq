@@ -126,10 +126,15 @@ export const ELE_MATH_G6: FixedTest = {
           id: 'e6m19',
           kind: 'text',
           prompt:
-            'Start at the origin. Move 4 units right and 2 units down. Write the ordered pair for ' +
-            'where you land, in the form (1, 6).',
-          key: '(4,-2)',
-          keyNote: '(4, −2). Spaces do not matter.',
+            'Start at the origin. Move 4 units right and 2 units up. Write the ordered pair ' +
+            '(x, y) for where you land, in the form (1, 6).',
+          key: '(4,2)',
+          keyNote:
+            '(4, 2). Spaces do not matter. CE3-C: this item moved UP rather than down. It is ' +
+            'tagged 5.G.A.1 and sits in the foundation tier, which is Grade 5 first-quadrant ' +
+            'plotting; the earlier version landed on (4, −2) in Quadrant IV, which is Grade 6 ' +
+            'signed-coordinate work and does not belong in a prerequisite band. Signed ' +
+            'coordinates are still sampled at Grade 6 level by e6m23 and e6m24.',
         },
         {
           id: 'e6m20',

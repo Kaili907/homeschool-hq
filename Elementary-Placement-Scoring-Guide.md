@@ -33,21 +33,36 @@ weighting, no scaling, and no normalisation curve anywhere in the model.
 
 ## How an item's weight is disposed of
 
-| Scorer verdict | Counts toward `possible` | Counts toward `earned` | Notes |
-| --- | --- | --- | --- |
-| `correct` | yes | yes | |
-| `incorrect` | yes | no | only for confidently-wrong objective answers |
-| `skip` | yes | no | a skip is *not demonstrated*, which is honest information |
-| `unmatched` | **no** | no | scorer not confident → **pending**, waits for a human |
-| `ungraded` | **no** | no | pending |
-| rubric, human score supplied | yes | `weight × score / maxPoints` | |
-| rubric, no score supplied | **no** | no | pending |
-| rubric, skipped by the child | yes | no | declined in front of the parent |
+| Scorer verdict | Counts toward `possible` | Counts toward `earned` | Definitive? | Notes |
+| --- | --- | --- | --- | --- |
+| `correct` | yes | yes | **yes** | |
+| `incorrect` | yes | no | **yes** | only for confidently-wrong objective answers |
+| `skip` | yes | no | no | a skip is *not demonstrated*, which is honest information |
+| `unmatched` | **no** | no | no | scorer not confident → **pending**, waits for a human |
+| `ungraded` | **no** | no | no | pending |
+| **no record for the item** | **no** | no | no | **pending** — see below |
+| rubric, human score supplied | yes | `weight × score / maxPoints` | **yes** | |
+| rubric, no score supplied | **no** | no | no | pending |
+| rubric, skipped by the child | yes | no | no | declined in front of the parent |
 
 Pending weight leaves the denominator entirely. **An answer the machine cannot
 judge is never counted wrong.** This is inherited from the original assessment
 addendum and it is what makes the "insufficient evidence" outcome meaningful
 rather than decorative.
+
+**No record is not a skip (CE3-C).** An item with no stored answer — never
+reached, attempt abandoned, storage lost, or a payload belonging to a different
+instrument — is queued for a human. It used to be read as a skip, which counted
+it in the denominator as *not demonstrated*: absence of evidence treated as
+evidence of failure. It no longer is. A skip is a deliberate act the child took
+in front of the parent; a missing record is nothing at all, and the model now
+says so.
+
+**Definitive** is the new column and the one the evidence gate reads. It means
+the child's work on that item was actually judged — right, wrong, or graded by a
+human. Skips and pending items are not definitive: they are what the child did
+not show. A percentage cannot carry this distinction, because an all-skipped
+tier reads 0% exactly like a tier the child attempted and got wrong.
 
 ## Thresholds
 
@@ -57,6 +72,7 @@ Every number the placement decision depends on, all declared in
 | Constant | Value | Used for |
 | --- | --- | --- |
 | `maxPendingShare` | 0.25 | above this share of pending weight, no band is claimed |
+| `maxSkipShare` | 0.50 | above this share of skipped weight, no band is claimed — **new in CE3-C, provisional, see below** |
 | `foundationShaky` | 0.60 | prerequisite floor |
 | `foundationSecure` | 0.85 | prerequisites count as held |
 | `currentSecure` | 0.85 | this year's skills count as already held |
@@ -67,13 +83,67 @@ Every number the placement decision depends on, all declared in
 | `domainSecure` | 0.80 | domain reads as secure |
 | `domainDeveloping` | 0.50 | domain reads as developing |
 
+### `maxSkipShare` is provisional and needs Stephen's approval
+
+`maxSkipShare = 0.50` is a judgement, not a norming result. Nothing was measured
+to arrive at it and no other rule reads it, so it can be tightened or loosened
+on its own without disturbing anything else.
+
+The reasoning behind 0.50: every instrument's intro invites the child to skip,
+and a skip is genuinely informative — the model still counts it as *not
+demonstrated* once the gate is open. But past half the paper, most of what the
+model has is silence, and naming a starting level from the remainder is
+over-reading. Half is the natural line and it sits well clear of the 0.20 skip
+share that already drops confidence to low.
+
+Stephen may reasonably want it stricter (a child who declined a third of the
+paper is arguably not placeable either) or looser (a child working well below
+the nominal grade may honestly skip most of the current and stretch items, and
+that pattern is itself the signal). Either change is a one-line edit to
+`PLACEMENT_THRESHOLDS`; the boundary tests read the constant rather than a
+literal, so they follow it.
+
+## The evidence gate (CE3-C)
+
+Before any band is considered, the gate must open. It opens only when **all** of
+these hold:
+
+1. every tier put weight in its denominator — no tier is entirely pending;
+2. **every tier scored at least some weight definitively** — skips alone can
+   never open the gate;
+3. `pendingShare ≤ 0.25`;
+4. `skipShare ≤ 0.50`.
+
+Condition 2 is the correction. Before it, a paper in which the child skipped
+every single item produced foundation = 0%, current = 0%, stretch = 0% with no
+pending weight — a fully open gate and a clean R1 match — so the instrument
+recommended **beginning a level below the nominal grade** on the strength of a
+child having declined every question. The same output appeared for an attempt
+with no stored answers at all, and for a payload belonging to a different
+instrument, because both read as "everything skipped". Three different flavours
+of zero information, one demotion recommendation.
+
+All three now return **insufficient evidence — parent review required**, and the
+summary names which condition closed the gate rather than leaving the parent to
+guess.
+
+What has *not* changed:
+
+- A skip is still honest and still counts as *not demonstrated* once the gate is
+  open. A child who answers most of the paper and skips a few hard items is
+  placed on the evidence they gave, exactly as before.
+- Skips are never converted into guessed correctness, and never will be.
+- Partial evidence still places. Under both ceilings, with definitive work in
+  every tier, a band is produced — the gate is a floor on *information*, not a
+  requirement that the paper be complete.
+
 ## The placement-rule table
 
 Percentages are per tier: `earned ÷ possible` within that tier.
 
 | Rule | Predicate | Outcome |
 | --- | --- | --- |
-| **R0** | any tier scored no item definitively, **OR** pendingShare > 0.25 | insufficient evidence — parent review required |
+| **R0** | any tier scored no item **definitively** (skips and pending items do not count), **OR** pendingShare > 0.25, **OR** skipShare > 0.50 | insufficient evidence — parent review required |
 | **R1** | gate open **AND** foundation < 0.60 | begin one level below for this subject |
 | **R2** | gate open **AND** 0.60 ≤ foundation < 0.85 | begin at nominal grade **with prerequisite intervention** |
 | **R3** | gate open **AND** foundation ≥ 0.85 **AND** current ≥ 0.85 **AND** stretch ≥ 0.70 | ready for advanced material |
@@ -103,8 +173,31 @@ placement, so any future edit that punched a hole would fail safe.
 
 A test constructs a real attempt on each of the six instruments for each of the
 five outcomes and asserts the outcome is produced. The fixtures answer chosen
-items with their canonical keys and skip the rest, so each tier percentage is
-exactly (correct ÷ items in tier) — no hidden arithmetic in the fixture either.
+items with their canonical keys and answer the rest **wrong**, so each tier
+percentage is exactly (correct ÷ items in tier) — no hidden arithmetic in the
+fixture either. Wrong answers are verified through the real scorer rather than
+assumed; where it cannot be confidently wrong about an item (a rubric item, or a
+text key it will not parse as a number) the fixture skips that item instead.
+
+These fixtures used to reach every band by skipping the whole paper. They no
+longer can, and that is the point: the child in the R1 fixture now attempts the
+prerequisite items and gets them wrong, which is the only evidence that should
+ever support "begin a level below".
+
+### Boundary tests read the constants, not literals
+
+The skip and pending ceilings are each pinned twice — once directly against the
+rule table, and once through a real attempt built so the withheld share lands on
+the ceiling *exactly*:
+
+- `ele-math-g6` carries 34 items, so 17 skips is exactly `maxSkipShare`. At 17 a
+  band is still produced; at 18 the outcome is R0.
+- `ele-ela-g4` carries 32 items, so 8 unreadable answers is exactly
+  `maxPendingShare`. At 8 a band is still produced; at 9 the outcome is R0.
+
+Every tier is also probed in isolation on all six instruments: making one tier
+entirely skipped, or entirely pending, closes the gate even when every other
+tier is perfect.
 
 ## Confidence
 
@@ -124,6 +217,12 @@ words in the parent summary:
 
 Otherwise `moderate`. A perfect paper with every rubric graded returns
 `moderate`, and a test asserts exactly that.
+
+When the outcome is R0 the summary now also names **which** gate condition
+closed — the tier with no definitive evidence, the pending backlog, the skip
+share, or several at once. "Insufficient evidence" with no reason attached reads
+as a verdict on the child; with the reason attached it reads as what it is, a
+statement about the paper.
 
 ## Domain bands (the skill-priority list)
 
@@ -392,3 +491,31 @@ following, and none of it is automated:
    `Profile.workingLevels`, and nothing in it should be wired to.
 6. **Re-check after a few weeks of real work.** Evidence from actual lessons is
    worth more than this instrument, and where the two disagree, the lessons win.
+
+---
+
+## CE3-C — what independent review changed
+
+An independent review of the reviewed baseline found the architecture safe and
+four blockers to child use. All four are closed. Nothing else about the
+placement philosophy changed, and no calibration constant the correction was
+told to leave alone was touched.
+
+| # | Blocker | Correction |
+| --- | --- | --- |
+| B1 | Zero information produced a demotion recommendation — an all-skipped paper, a paper with no stored answers, or another instrument's payload all resolved to "begin one level below the nominal grade" | The evidence gate now requires **definitive** evidence in every tier and adds a skip ceiling; all three cases return insufficient evidence, with the closing condition named |
+| B2 | `e4m23` accepted the unconverted fraction — the numeric normalizer reads `3/10` and `0.3` as the same number, so copying the prompt earned the mark | The item is now multiple choice; `3/10` is a distractor and scores incorrect. The normalizer is unchanged and no other item's scoring moved |
+| B3 | `e4e25` had two defensible answers — a collective noun with both a singular and a plural verb, in a bank written in British English | Replaced with an unambiguous singular-subject item whose three distractors are wrong in every dialect. A test blocks the pattern from returning |
+| B4 | `e6m19` was mis-tiered and mis-tagged — a Quadrant IV answer sitting in the foundation tier under a Grade 5 first-quadrant standard | Rewritten to move up rather than down; the answer is `(4, 2)`. Grade 6 signed-coordinate coverage is unaffected |
+
+### What still needs Stephen
+
+- **`maxSkipShare = 0.50` is provisional.** It is a judgement about how much
+  silence a placement may be built on, not a measured value. See the threshold
+  section above for the reasoning and for what tightening or loosening it would
+  mean. Nothing else reads the constant.
+
+Everything else in this document still holds. This is a parent-administered
+placement **recommendation**; insufficient evidence produces no placement band
+at all; skipping is honest and is never by itself a reason to move a child down;
+and Stephen is the only person who applies a working-level change.

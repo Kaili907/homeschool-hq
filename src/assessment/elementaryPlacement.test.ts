@@ -29,7 +29,7 @@ import type {
   PlacementOutcome,
   PlacementTier,
 } from './banks/placementModel'
-import { scoreItem } from './normalizer'
+import { normalizeText, parseRational, scoreItem } from './normalizer'
 import { finishAttempt, getState, recordAnswer, startAttempt } from './attempts'
 import { buildReport } from './report'
 import { emptyAssessmentState } from './types'
@@ -75,11 +75,32 @@ const canonicalAnswer = (item: Item): string =>
   Array.isArray(item.key) ? item.key.join(', ') : (item.key ?? '')
 
 /**
+ * An answer the REAL scorer judges `incorrect` for this item, or null when it
+ * cannot be confidently wrong about it — a rubric item, or a text key the
+ * normalizer will not parse as a number. Verified through `scoreItem` rather
+ * than assumed, so a fixture can never claim a verdict the scorer disagrees
+ * with.
+ */
+function wrongAnswerFor(item: Item): string | null {
+  const candidates =
+    item.kind === 'choice'
+      ? (item.choices ?? []).filter((c) => c !== item.key)
+      : ['-987654', 'not the answer']
+  return candidates.find((c) => scoreItem(item, c, false) === 'incorrect') ?? null
+}
+
+/**
  * Build an attempt in which exactly `correctIds` are answered with the canonical
- * key and every other blueprinted item is SKIPPED. Skips land in the denominator
- * with zero earned and produce no pending weight, so each tier's percentage is
- * exactly (correct in tier) / (items in tier) — no hidden arithmetic in the
- * fixture itself.
+ * key and every other blueprinted item is answered WRONG. Items the scorer
+ * cannot be confidently wrong about are skipped instead.
+ *
+ * A wrong answer and a skip are disposed of identically — both land in the
+ * denominator with nothing earned — so each tier's percentage is still exactly
+ * (correct in tier) / (items in tier), with no hidden arithmetic in the fixture.
+ * What differs is that a wrong answer is DEFINITIVE evidence and a skip is not,
+ * which is the distinction the CE3-C evidence gate turns on. Before CE3-C these
+ * fixtures reached every placement band by skipping the whole paper; that they
+ * no longer can is the blocker, fixed.
  */
 function attemptWith(inst: PlacementInstrument, correctIds: Set<string>): Attempt {
   const answers: Attempt['answers'] = {}
@@ -88,11 +109,41 @@ function attemptWith(inst: PlacementInstrument, correctIds: Set<string>): Attemp
     if (!item) continue
     if (correctIds.has(id) && item.key !== undefined) {
       answers[id] = { value: canonicalAnswer(item), skipped: false, msOnItem: 20000 }
-    } else {
-      answers[id] = { value: '', skipped: true, msOnItem: 3000 }
+      continue
     }
+    const wrong = item.key === undefined ? null : wrongAnswerFor(item)
+    answers[id] =
+      wrong === null
+        ? { value: '', skipped: true, msOnItem: 3000 }
+        : { value: wrong, skipped: false, msOnItem: 20000 }
   }
   return { testId: inst.test.id, profileId: 'p-fixture', startedAt: 'x', answers }
+}
+
+/** Every blueprinted item explicitly declined in front of the parent. */
+function allSkipped(inst: PlacementInstrument): Attempt {
+  const answers: Attempt['answers'] = {}
+  for (const id of Object.keys(inst.blueprint)) {
+    answers[id] = { value: '', skipped: true, msOnItem: 3000 }
+  }
+  return { testId: inst.test.id, profileId: 'p-fixture', startedAt: 'x', answers }
+}
+
+/**
+ * Metrics for a direct rule-table probe. Definitive weight defaults to "present
+ * in every tier" so a probe exercises the band arithmetic rather than the
+ * evidence gate; gate probes override it explicitly.
+ */
+function metricsOf(m: Partial<PlacementMetrics>): PlacementMetrics {
+  return {
+    foundationPct: 1,
+    currentPct: 1,
+    stretchPct: 1,
+    pendingShare: 0,
+    skipShare: 0,
+    definitiveByTier: { foundation: 1, current: 1, stretch: 1 },
+    ...m,
+  }
 }
 
 /** ids of the first `n` AUTO items in a tier (rubric items cannot self-score). */
@@ -424,13 +475,12 @@ describe('CE3 placement-rule table', () => {
       for (const c of steps) {
         for (const s of steps) {
           for (const pendingShare of pendings) {
-            const m: PlacementMetrics = {
+            const m = metricsOf({
               foundationPct: f,
               currentPct: c,
               stretchPct: s,
               pendingShare,
-              skipShare: 0,
-            }
+            })
             const hits = PLACEMENT_RULES.filter((r) => r.matches(m))
             expect(hits.length, `f=${f} c=${c} s=${s} pending=${pendingShare}`).toBe(1)
             checked++
@@ -446,13 +496,7 @@ describe('CE3 placement-rule table', () => {
     for (const f of nulls) {
       for (const c of nulls) {
         for (const s of nulls) {
-          const m: PlacementMetrics = {
-            foundationPct: f,
-            currentPct: c,
-            stretchPct: s,
-            pendingShare: 0,
-            skipShare: 0,
-          }
+          const m = metricsOf({ foundationPct: f, currentPct: c, stretchPct: s })
           const hits = PLACEMENT_RULES.filter((r) => r.matches(m))
           expect(hits.length, `${f}/${c}/${s}`).toBe(1)
           if (f === null || c === null || s === null) {
@@ -466,8 +510,7 @@ describe('CE3 placement-rule table', () => {
 
   it('band edges belong to exactly one side (no overlapping ranges)', () => {
     const at = (f: number, c: number, s: number): PlacementOutcome =>
-      ruleFor({ foundationPct: f, currentPct: c, stretchPct: s, pendingShare: 0, skipShare: 0 })
-        .outcome
+      ruleFor(metricsOf({ foundationPct: f, currentPct: c, stretchPct: s })).outcome
 
     // foundation edge 0.60: below → one level below, exactly at → prerequisites
     expect(at(0.599, 1, 1)).toBe('one-level-below')
@@ -481,13 +524,12 @@ describe('CE3 placement-rule table', () => {
     expect(at(1, 1, 0.699)).toBe('nominal-with-review')
   })
 
-  it('the pending ceiling is the only gate that overrides a band', () => {
-    const strong = { foundationPct: 1, currentPct: 1, stretchPct: 1, skipShare: 0 }
-    expect(ruleFor({ ...strong, pendingShare: PLACEMENT_THRESHOLDS.maxPendingShare }).outcome).toBe(
-      'advanced-ready',
-    )
+  it('the pending ceiling overrides an otherwise perfect band', () => {
     expect(
-      ruleFor({ ...strong, pendingShare: PLACEMENT_THRESHOLDS.maxPendingShare + 0.001 }).outcome,
+      ruleFor(metricsOf({ pendingShare: PLACEMENT_THRESHOLDS.maxPendingShare })).outcome,
+    ).toBe('advanced-ready')
+    expect(
+      ruleFor(metricsOf({ pendingShare: PLACEMENT_THRESHOLDS.maxPendingShare + 0.001 })).outcome,
     ).toBe('insufficient-evidence')
   })
 
@@ -948,10 +990,12 @@ describe('CE3 instruments run through the existing assessment pipeline', () => {
 
   it('a skipped item is recorded as a skip, not as a wrong answer', () => {
     const inst = ELEMENTARY_INSTRUMENT_BY_TEST_ID['ele-math-g3']
-    const result = computePlacement(inst, attemptWith(inst, new Set()))
+    const result = computePlacement(inst, allSkipped(inst))
     expect(result.metrics.pendingShare).toBe(0)
     expect(result.metrics.skipShare).toBe(1)
     for (const tier of result.tiers) expect(tier.pct).toBe(0)
+    // …and a paper made only of skips names no band at all (CE3-C)
+    expect(result.outcome).toBe('insufficient-evidence')
   })
 })
 
@@ -982,5 +1026,510 @@ describe('CE3 leaves the existing high-school assessments unchanged', () => {
     for (const grade of ['3', '4', '6']) {
       expect(testsForGrade(grade).filter((t) => t.id.startsWith('hs-')), grade).toHaveLength(0)
     }
+  })
+})
+
+// ============================================================================
+// CE3-C — corrections to the four child-use blockers found in independent review
+// ============================================================================
+//
+// RED PROOFS. Every assertion below drives the real production scorer, the real
+// registry and the real normalizer — none of them inspects source text or
+// asserts the absence of a symbol. Run against b34292f (the reviewed baseline)
+// they all fail; that failure is the blocker, witnessed.
+
+const MATH_G4 = () => ELEMENTARY_INSTRUMENT_BY_TEST_ID['ele-math-g4']
+const ELA_G4 = () => ELEMENTARY_INSTRUMENT_BY_TEST_ID['ele-ela-g4']
+const MATH_G6 = () => ELEMENTARY_INSTRUMENT_BY_TEST_ID['ele-math-g6']
+
+const attemptOf = (inst: PlacementInstrument, answers: Attempt['answers']): Attempt => ({
+  testId: inst.test.id,
+  profileId: 'p-red',
+  startedAt: '2026-08-06T09:00:00.000Z',
+  answers,
+})
+
+describe('CE3-C RED 1 — an all-skipped paper must not recommend a demotion', () => {
+  it.each(ELEMENTARY_INSTRUMENTS.map((i) => [i.test.id, i] as const))(
+    '%s: every item explicitly skipped → insufficient evidence',
+    (_id, inst) => {
+      const answers: Attempt['answers'] = {}
+      for (const item of allItemsOf(inst)) {
+        answers[item.id] = { value: '', skipped: true, msOnItem: 2000 }
+      }
+      const result = computePlacement(inst, attemptOf(inst, answers))
+      expect(result.outcome, `${inst.test.id} outcome`).toBe('insufficient-evidence')
+      expect(result.ruleId, `${inst.test.id} rule`).toBe('R0')
+    },
+  )
+})
+
+describe('CE3-C RED 2 — a paper with no recorded answers must not recommend a demotion', () => {
+  it.each(ELEMENTARY_INSTRUMENTS.map((i) => [i.test.id, i] as const))(
+    '%s: empty answer map → insufficient evidence',
+    (_id, inst) => {
+      const result = computePlacement(inst, attemptOf(inst, {}))
+      expect(result.outcome, `${inst.test.id} outcome`).toBe('insufficient-evidence')
+      expect(result.ruleId, `${inst.test.id} rule`).toBe('R0')
+    },
+  )
+})
+
+describe('CE3-C RED 3 — another instrument’s responses must not place this child', () => {
+  it('a completed ELA G4 paper scored against the Math G4 instrument yields no band', () => {
+    const source = ELA_G4()
+    const target = MATH_G4()
+    const answers: Attempt['answers'] = {}
+    for (const item of allItemsOf(source)) {
+      if (item.key === undefined) continue
+      answers[item.id] = { value: canonicalAnswer(item), skipped: false, msOnItem: 15000 }
+    }
+    // no item id is shared between the two instruments, so the math scorer sees
+    // a full payload and can judge none of it
+    const shared = allItemsOf(target).filter((i) => i.id in answers)
+    expect(shared, 'the two instruments must not share item ids').toEqual([])
+
+    const result = computePlacement(target, attemptOf(target, answers))
+    expect(result.outcome).toBe('insufficient-evidence')
+    expect(result.ruleId).toBe('R0')
+  })
+})
+
+describe('CE3-C RED 4 — e4m23 must measure fraction-to-decimal conversion', () => {
+  it('the unconverted fraction copied from the prompt does not earn credit', () => {
+    const item = itemById(MATH_G4(), 'e4m23')!
+    expect(scoreItem(item, '3/10', false), 'copying "3/10" must not score correct').not.toBe(
+      'correct',
+    )
+  })
+
+  it('the converted decimal still earns credit', () => {
+    const item = itemById(MATH_G4(), 'e4m23')!
+    expect(scoreItem(item, '0.3', false)).toBe('correct')
+  })
+})
+
+describe('CE3-C RED 5 — no item may key one side of a dialect split', () => {
+  // Two options that differ only by swapping a form of "to be" after a
+  // collective-noun subject are both defensible standard English (US usage
+  // prefers the singular, British usage the plural). Keying one of them scores
+  // a child's dialect, not their grammar.
+  const COLLECTIVE_NOUNS = [
+    'team', 'family', 'class', 'group', 'crowd', 'staff', 'committee',
+    'audience', 'jury', 'band', 'government', 'couple', 'public', 'faculty',
+  ]
+  const BE_FORMS = ['is', 'are', 'was', 'were']
+
+  const words = (s: string) => s.toLowerCase().replace(/[.,!?;:"']/g, '').split(/\s+/).filter(Boolean)
+
+  it('no choice item offers a collective noun with both a singular and a plural verb', () => {
+    for (const inst of ELEMENTARY_INSTRUMENTS) {
+      for (const item of allItemsOf(inst)) {
+        if (item.kind !== 'choice' || !item.choices) continue
+        for (let a = 0; a < item.choices.length; a++) {
+          for (let b = a + 1; b < item.choices.length; b++) {
+            const wa = words(item.choices[a])
+            const wb = words(item.choices[b])
+            if (wa.length !== wb.length) continue
+            const differing = wa.map((w, i) => (w === wb[i] ? -1 : i)).filter((i) => i >= 0)
+            if (differing.length !== 1) continue
+            const [i] = differing
+            const bothBe = BE_FORMS.includes(wa[i]) && BE_FORMS.includes(wb[i])
+            const collective = wa.some((w) => COLLECTIVE_NOUNS.includes(w))
+            expect(
+              bothBe && collective,
+              `${inst.test.id}/${item.id}: "${item.choices[a]}" and "${item.choices[b]}" are ` +
+                'both defensible standard English — the keyed distinction is dialect, not grammar',
+            ).toBe(false)
+          }
+        }
+      }
+    }
+  })
+})
+
+describe('CE3-C RED 6 — a first-quadrant item must key a first-quadrant point', () => {
+  it('every item tagged as first-quadrant work keys two positive coordinates', () => {
+    for (const inst of ELEMENTARY_INSTRUMENTS) {
+      for (const [id, entry] of Object.entries(inst.blueprint)) {
+        if (!/first quadrant/i.test(entry.standard)) continue
+        const item = itemById(inst, id)!
+        const label = `${inst.test.id}/${id} (${entry.tier}, ${entry.standard})`
+        const pair = /^\((-?\d+),(-?\d+)\)$/.exec(normalizeText(canonicalAnswer(item)))
+        expect(pair, `${label} key "${canonicalAnswer(item)}" is not an ordered pair`).not.toBeNull()
+        expect(Number(pair![1]), `${label} x coordinate`).toBeGreaterThan(0)
+        expect(Number(pair![2]), `${label} y coordinate`).toBeGreaterThan(0)
+        expect(item.prompt.toLowerCase(), `${label} prompt leaves the first quadrant`).not.toMatch(
+          /\b(down|left)\b/,
+        )
+      }
+    }
+  })
+
+  it('e6m19 is a foundation-tier Grade 5 item and its prompt, key and tag agree', () => {
+    const inst = MATH_G6()
+    const entry = inst.blueprint.e6m19
+    expect(entry.tier).toBe('foundation')
+    expect(entry.standard).toMatch(/^5\./)
+    expect(entry.domain).toBe('Coordinate plane')
+    const key = normalizeText(canonicalAnswer(itemById(inst, 'e6m19')!))
+    expect(key, 'a foundation Grade 5 first-quadrant key must carry no negative').not.toContain('-')
+  })
+})
+
+// ---------- CE3-C permanent regression tests ----------
+
+/**
+ * An attempt in which the listed ids are withheld — declined, or left blank —
+ * and every OTHER item is answered correctly, with rubric items graded at full
+ * marks. Nothing else is skipped and nothing else is pending, so the withheld
+ * share of the instrument is exactly `ids.size / total`. That exactness is what
+ * lets a threshold be probed at its boundary through the real scorer instead of
+ * through a hand-assembled metrics object.
+ */
+function attemptWithholding(
+  inst: PlacementInstrument,
+  ids: Set<string>,
+  how: 'skip' | 'blank',
+): { attempt: Attempt; rubric: Record<string, number> } {
+  const answers: Attempt['answers'] = {}
+  const rubric: Record<string, number> = {}
+  for (const [id, entry] of Object.entries(inst.blueprint)) {
+    if (ids.has(id)) {
+      answers[id] = { value: '', skipped: how === 'skip', msOnItem: 2000 }
+      continue
+    }
+    answers[id] = {
+      value: entry.mode === 'rubric' ? 'a written response' : canonicalAnswer(itemById(inst, id)!),
+      skipped: false,
+      msOnItem: 20000,
+    }
+    if (entry.mode === 'rubric') rubric[id] = entry.rubricPoints!
+  }
+  return {
+    attempt: { testId: inst.test.id, profileId: 'p-fixture', startedAt: 'x', answers },
+    rubric,
+  }
+}
+
+/** The tier carrying the most items — the only one large enough to absorb a
+ * boundary-sized withholding without emptying itself. */
+function largestTier(inst: PlacementInstrument): PlacementTier {
+  return [...PLACEMENT_TIERS].sort(
+    (a, b) => entriesOfTier(inst, b).length - entriesOfTier(inst, a).length,
+  )[0]
+}
+
+describe('CE3-C evidence gate — skips are honest, but they cannot open the gate', () => {
+  it('a tier made only of skips produces no band, even when every other tier is perfect', () => {
+    for (const inst of ELEMENTARY_INSTRUMENTS) {
+      for (const tier of PLACEMENT_TIERS) {
+        const ids = new Set(entriesOfTier(inst, tier).map(([id]) => id))
+        const { attempt, rubric } = attemptWithholding(inst, ids, 'skip')
+        const result = computePlacement(inst, attempt, rubric)
+        const label = `${inst.test.id} / ${tier} entirely skipped`
+        expect(result.outcome, label).toBe('insufficient-evidence')
+        expect(result.metrics.definitiveByTier[tier], label).toBe(0)
+        // the skipped tier still reads 0% — a skip is not erased, it just
+        // cannot be the thing a placement is built on
+        expect(result.tiers.find((t) => t.tier === tier)!.pct, label).toBe(0)
+      }
+    }
+  })
+
+  it('a tier made only of unjudgeable answers produces no band', () => {
+    for (const inst of ELEMENTARY_INSTRUMENTS) {
+      for (const tier of PLACEMENT_TIERS) {
+        const ids = new Set(entriesOfTier(inst, tier).map(([id]) => id))
+        const { attempt, rubric } = attemptWithholding(inst, ids, 'blank')
+        const result = computePlacement(inst, attempt, rubric)
+        const label = `${inst.test.id} / ${tier} entirely pending`
+        expect(result.outcome, label).toBe('insufficient-evidence')
+        expect(result.tiers.find((t) => t.tier === tier)!.pct, label).toBeNull()
+      }
+    }
+  })
+
+  it('a skip at the exact ceiling still places; one more skip does not', () => {
+    // ele-math-g6 carries 34 items, so half of it is a whole number of items and
+    // the ceiling can be hit exactly rather than approached.
+    const inst = MATH_G6()
+    const total = Object.keys(inst.blueprint).length
+    const atCeiling = total * PLACEMENT_THRESHOLDS.maxSkipShare
+    expect(Number.isInteger(atCeiling), 'fixture needs an exact item count').toBe(true)
+
+    const tier = largestTier(inst)
+    const pool = entriesOfTier(inst, tier).map(([id]) => id)
+    expect(pool.length, 'the largest tier must absorb the withholding').toBeGreaterThan(atCeiling)
+
+    const at = attemptWithholding(inst, new Set(pool.slice(0, atCeiling)), 'skip')
+    const atResult = computePlacement(inst, at.attempt, at.rubric)
+    expect(atResult.metrics.skipShare).toBe(PLACEMENT_THRESHOLDS.maxSkipShare)
+    expect(atResult.outcome, 'exactly at the ceiling is still inside the gate').not.toBe(
+      'insufficient-evidence',
+    )
+
+    const over = attemptWithholding(inst, new Set(pool.slice(0, atCeiling + 1)), 'skip')
+    const overResult = computePlacement(inst, over.attempt, over.rubric)
+    expect(overResult.metrics.skipShare).toBeGreaterThan(PLACEMENT_THRESHOLDS.maxSkipShare)
+    expect(overResult.outcome).toBe('insufficient-evidence')
+    expect(overResult.ruleId).toBe('R0')
+  })
+
+  it('the skip ceiling sits exactly where the rule table says it does', () => {
+    expect(ruleFor(metricsOf({ skipShare: PLACEMENT_THRESHOLDS.maxSkipShare })).id).not.toBe('R0')
+    expect(ruleFor(metricsOf({ skipShare: PLACEMENT_THRESHOLDS.maxSkipShare + 0.001 })).id).toBe(
+      'R0',
+    )
+    // and it is genuinely a separate gate from the pending ceiling
+    expect(PLACEMENT_THRESHOLDS.maxSkipShare).not.toBe(PLACEMENT_THRESHOLDS.maxPendingShare)
+  })
+
+  it('an unreadable paper at the exact pending ceiling still places; one more does not', () => {
+    // ele-ela-g4 carries 32 items, so a quarter of it is a whole number.
+    const inst = ELA_G4()
+    const total = Object.keys(inst.blueprint).length
+    const atCeiling = total * PLACEMENT_THRESHOLDS.maxPendingShare
+    expect(Number.isInteger(atCeiling), 'fixture needs an exact item count').toBe(true)
+
+    const pool = entriesOfTier(inst, largestTier(inst)).map(([id]) => id)
+    expect(pool.length).toBeGreaterThan(atCeiling)
+
+    const at = attemptWithholding(inst, new Set(pool.slice(0, atCeiling)), 'blank')
+    const atResult = computePlacement(inst, at.attempt, at.rubric)
+    expect(atResult.metrics.pendingShare).toBe(PLACEMENT_THRESHOLDS.maxPendingShare)
+    expect(atResult.outcome).not.toBe('insufficient-evidence')
+
+    const over = attemptWithholding(inst, new Set(pool.slice(0, atCeiling + 1)), 'blank')
+    const overResult = computePlacement(inst, over.attempt, over.rubric)
+    expect(overResult.metrics.pendingShare).toBeGreaterThan(PLACEMENT_THRESHOLDS.maxPendingShare)
+    expect(overResult.outcome).toBe('insufficient-evidence')
+  })
+
+  it('a partial paper under both ceilings still produces a real placement band', () => {
+    for (const inst of ELEMENTARY_INSTRUMENTS) {
+      const pool = entriesOfTier(inst, largestTier(inst)).map(([id]) => id)
+      // one skip and one unreadable answer: well under both ceilings, and every
+      // tier keeps definitive evidence
+      const withheld = attemptWithholding(inst, new Set(pool.slice(0, 1)), 'skip')
+      withheld.attempt.answers[pool[1]] = { value: '', skipped: false, msOnItem: 4000 }
+      delete withheld.rubric[pool[1]]
+
+      const result = computePlacement(inst, withheld.attempt, withheld.rubric)
+      expect(result.metrics.skipShare, inst.test.id).toBeLessThan(
+        PLACEMENT_THRESHOLDS.maxSkipShare,
+      )
+      expect(result.metrics.pendingShare, inst.test.id).toBeLessThanOrEqual(
+        PLACEMENT_THRESHOLDS.maxPendingShare,
+      )
+      expect(result.outcome, inst.test.id).not.toBe('insufficient-evidence')
+      expect(result.ruleId, inst.test.id).not.toBe('R0')
+    }
+  })
+
+  it('a closed gate always says which condition closed it', () => {
+    const inst = MATH_G4()
+    const cases: [string, Attempt, RegExp][] = [
+      ['no record at all', attemptOf(inst, {}), /waiting on a human reader/],
+      ['every item declined', allSkipped(inst), /was skipped/],
+    ]
+    for (const [label, attempt, expected] of cases) {
+      const result = computePlacement(inst, attempt)
+      expect(result.outcome, label).toBe('insufficient-evidence')
+      expect(result.confidence, label).toBe('low')
+      expect(result.confidenceReasons.join(' | '), label).toMatch(expected)
+      // the parent reads the reasons, not just the verdict
+      expect(buildPlacementSummary(result), label).toContain('Why confidence is low')
+    }
+  })
+
+  it('an item with no record is queued for a human, never counted as not-demonstrated', () => {
+    const inst = MATH_G4()
+    const { attempt, rubric } = attemptWithholding(inst, new Set(), 'skip')
+    const victim = Object.entries(inst.blueprint).find(([, e]) => e.mode === 'auto')![0]
+    delete attempt.answers[victim]
+
+    const result = computePlacement(inst, attempt, rubric)
+    expect(result.pendingItemIds, 'a missing record must reach the human queue').toContain(victim)
+    expect(result.metrics.skipShare, 'a missing record is not a skip').toBe(0)
+    // absence of evidence never lowers a score: the tier still reads 100%
+    const tier = inst.blueprint[victim].tier
+    expect(result.tiers.find((t) => t.tier === tier)!.pct).toBe(1)
+  })
+})
+
+describe('CE3-C wrong-instrument data can never place a child', () => {
+  it.each([
+    ['ele-ela-g4', 'ele-math-g4'],
+    ['ele-math-g3', 'ele-math-g6'],
+    ['ele-ela-g6', 'ele-ela-g3'],
+  ])('a completed %s paper scored against %s yields no band and no level', (fromId, toId) => {
+    const source = ELEMENTARY_INSTRUMENT_BY_TEST_ID[fromId]
+    const target = ELEMENTARY_INSTRUMENT_BY_TEST_ID[toId]
+    const answers: Attempt['answers'] = {}
+    for (const item of allItemsOf(source)) {
+      answers[item.id] = {
+        value: item.key !== undefined ? canonicalAnswer(item) : 'a written answer',
+        skipped: false,
+        msOnItem: 15000,
+      }
+    }
+    const result = computePlacement(target, attemptOf(target, answers))
+    expect(result.outcome).toBe('insufficient-evidence')
+    expect(targetLevelFor(result.nominalGrade, result.outcome)).toBeNull()
+    expect(result.academyNote).toContain('No level is recommended yet')
+  })
+})
+
+describe('CE3-C e4m23 measures the conversion, not the copy', () => {
+  const item = () => itemById(MATH_G4(), 'e4m23')!
+
+  it('the decimal scores correct and the unconverted fraction does not', () => {
+    expect(scoreItem(item(), '0.3', false)).toBe('correct')
+    expect(scoreItem(item(), '3/10', false)).toBe('incorrect')
+  })
+
+  it('every distractor scores incorrect, and none collides with the key', () => {
+    const it_ = item()
+    for (const choice of it_.choices!) {
+      const verdict = scoreItem(it_, choice, false)
+      expect(verdict, `choice "${choice}"`).toBe(choice === it_.key ? 'correct' : 'incorrect')
+    }
+    const normalised = it_.choices!.map(normalizeText)
+    expect(new Set(normalised).size, 'colliding options').toBe(normalised.length)
+  })
+
+  it('the item still measures Grade 4 fraction-to-decimal work', () => {
+    const entry = MATH_G4().blueprint.e4m23
+    expect(entry.tier).toBe('current')
+    expect(entry.domain).toBe('Fraction equivalence and comparison')
+    expect(entry.standard).toBe('4.NF.C.6 — fractions as decimals')
+    expect(item().prompt).toMatch(/3\/10/)
+  })
+
+  it('the global numeric normalizer is untouched — the fix is item-scoped', () => {
+    // The hazard this item used to have is still present in the shared parser,
+    // exactly as before: 3/10 and 0.3 ARE the same number. Making the item a
+    // choice item is what stops the prompt from being a free answer, without
+    // changing how any other fraction in the bank is judged.
+    expect(parseRational('3/10')).toEqual(parseRational('0.3'))
+
+    const g4 = MATH_G4()
+    // a mixed-number item still accepts its decimal equivalent
+    expect(scoreItem(itemById(g4, 'e4m21')!, '3.5', false)).toBe('correct')
+    // an equivalent unsimplified fraction still scores
+    expect(scoreItem(itemById(g4, 'e4m20')!, '10/16', false)).toBe('correct')
+    // and a rounded decimal still fails the item that asks for a fraction
+    expect(scoreItem(itemById(g4, 'e4m22')!, '3.33', false)).toBe('incorrect')
+  })
+})
+
+describe('CE3-C e4e25 tests grammar, not dialect', () => {
+  const item = () => itemById(ELA_G4(), 'e4e25')!
+
+  it('exactly one option is defensible and the rest score incorrect', () => {
+    const it_ = item()
+    const correct = it_.choices!.filter((c) => scoreItem(it_, c, false) === 'correct')
+    expect(correct).toEqual([it_.key])
+    for (const wrong of it_.choices!.filter((c) => c !== it_.key)) {
+      expect(scoreItem(it_, wrong, false), `"${wrong}"`).toBe('incorrect')
+    }
+  })
+
+  it('no option survives a change of case — the matcher is case-blind', () => {
+    const it_ = item()
+    for (const choice of it_.choices!) {
+      const shouted = choice.toUpperCase()
+      expect(scoreItem(it_, shouted, false), `"${shouted}"`).toBe(
+        choice === it_.key ? 'correct' : 'incorrect',
+      )
+    }
+  })
+
+  it('the prompt carries no collective noun and no regional variant', () => {
+    const it_ = item()
+    const prose = [it_.prompt, ...it_.choices!].join(' ').toLowerCase()
+    for (const collective of ['team', 'family', 'class', 'group', 'staff', 'jury', 'audience']) {
+      expect(prose, `collective noun "${collective}"`).not.toMatch(
+        new RegExp(`\\b${collective}\\b`),
+      )
+    }
+  })
+
+  it('it stays a foundation-tier subject–verb agreement item', () => {
+    const entry = ELA_G4().blueprint.e4e25
+    expect(entry.tier).toBe('foundation')
+    expect(entry.domain).toBe('Grammar and conventions')
+    expect(entry.standard).toBe('3.L.1f — subject–verb agreement')
+    expect(entry.mode).toBe('auto')
+  })
+})
+
+describe('CE3-C e6m19 keys a first-quadrant point', () => {
+  it('the canonical answer scores correct however it is spaced', () => {
+    const item = itemById(MATH_G6(), 'e6m19')!
+    for (const written of ['(4,2)', '(4, 2)', ' ( 4 , 2 ) ']) {
+      expect(scoreItem(item, written, false), `"${written}"`).toBe('correct')
+    }
+  })
+
+  it('the prompt moves up and right, and never off the first quadrant', () => {
+    const prompt = itemById(MATH_G6(), 'e6m19')!.prompt.toLowerCase()
+    expect(prompt).toMatch(/\bright\b/)
+    expect(prompt).toMatch(/\bup\b/)
+    expect(prompt).not.toMatch(/\b(down|left)\b/)
+  })
+
+  it('Grade 6 signed-coordinate work is still sampled elsewhere', () => {
+    const inst = MATH_G6()
+    const signed = Object.entries(inst.blueprint).filter(([id, e]) => {
+      if (e.domain !== 'Coordinate plane' || !/^6\./.test(e.standard)) return false
+      const item = itemById(inst, id)!
+      return /[−-]\d/.test(item.prompt) || /[−-]\d/.test(canonicalAnswer(item))
+    })
+    expect(signed.length, 'signed coordinates must survive the correction').toBeGreaterThanOrEqual(2)
+  })
+})
+
+describe('CE3-C the rest of the bank is unchanged', () => {
+  it('every instrument keeps its item count', () => {
+    const expected: Record<string, number> = {
+      'ele-math-g3': 27,
+      'ele-ela-g3': 31,
+      'ele-math-g4': 33,
+      'ele-ela-g4': 32,
+      'ele-math-g6': 34,
+      'ele-ela-g6': 32,
+    }
+    for (const inst of ELEMENTARY_INSTRUMENTS) {
+      expect(itemCount(inst.test), inst.test.id).toBe(expected[inst.test.id])
+      expect(Object.keys(inst.blueprint).length, inst.test.id).toBe(expected[inst.test.id])
+    }
+  })
+
+  it('the corrected items keep their ids, and no other item id moved', () => {
+    const ids = ELEMENTARY_INSTRUMENTS.flatMap((i) => allItemsOf(i).map((x) => x.id)).sort()
+    expect(ids).toContain('e4m23')
+    expect(ids).toContain('e4e25')
+    expect(ids).toContain('e6m19')
+    expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('no choice item anywhere collides under the REAL normalizer', () => {
+    for (const inst of ELEMENTARY_INSTRUMENTS) {
+      for (const item of allItemsOf(inst)) {
+        if (item.kind !== 'choice' || !item.choices) continue
+        const normalised = item.choices.map(normalizeText)
+        expect(new Set(normalised).size, `${inst.test.id}/${item.id}`).toBe(normalised.length)
+      }
+    }
+  })
+
+  it('the calibration constants this correction was told not to move have not moved', () => {
+    expect(PLACEMENT_THRESHOLDS.foundationShaky).toBe(0.6)
+    expect(PLACEMENT_THRESHOLDS.foundationSecure).toBe(0.85)
+    expect(PLACEMENT_THRESHOLDS.currentSecure).toBe(0.85)
+    expect(PLACEMENT_THRESHOLDS.stretchReady).toBe(0.7)
+    expect(PLACEMENT_THRESHOLDS.maxPendingShare).toBe(0.25)
   })
 })

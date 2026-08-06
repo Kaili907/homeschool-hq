@@ -33,7 +33,10 @@ which mathematics they can currently do.
 - Paper and pencil are expected; each test sets `scratchReminder`.
 - SKIP is a first-class button on every item and the intro tells the child so in
   plain words. A skip is scored as *not demonstrated*, which is the honest
-  reading — but a paper with many skips also lowers reported confidence.
+  reading — but a paper with many skips also lowers reported confidence, and
+  past half the paper it closes the evidence gate entirely so that no placement
+  band is claimed at all. Skips are never by themselves a reason to move a child
+  down; see the evidence-gate section of the scoring guide.
 - One sitting is fine; the runner also resumes an interrupted attempt.
 - Expect roughly 35 minutes (G3), 40 minutes (G4), 45 minutes (G6).
 
@@ -70,6 +73,47 @@ load-bearing for the placement rules.
 scores `correct` when fed back through the real scorer, so the tables below are
 verified against the engine rather than transcribed by hand — they are emitted
 from the source files themselves.
+
+## Corrections after independent review (CE3-C)
+
+Two mathematics items were rewritten after independent review found them
+unusable with a child. Both corrections are content-only; no calibration
+constant and no scoring behaviour outside these two items changed.
+
+### `e4m23` — fraction-to-decimal conversion, now multiple choice
+
+- **Was:** a typed item, *"Write 3/10 as a decimal."*, key `0.3`.
+- **Defect:** the shared numeric normalizer treats `3/10` and `0.3` as the same
+  number — they *are* the same number. A child who copied the fraction straight
+  out of the prompt scored the mark without converting anything, so the item
+  measured nothing.
+- **Now:** multiple choice — *"Which of these is 3/10 written as a decimal?"*
+  with options `0.3` (key), `0.03`, `3.10` and `3/10`. Choice items are matched
+  as text, so the unconverted fraction is a distractor and scores **incorrect**.
+  It is the distractor to look at: choosing it means the conversion did not
+  happen.
+- **Not changed:** the normalizer. `3/10` and `0.3` are still the same number
+  everywhere else in the bank, and every other fraction item still accepts its
+  equivalent forms. The fix is scoped to this one item.
+- **Note:** because this is now a choice item, the child selects rather than
+  types; `0.30` is not an offered option and is not accepted.
+- Tier, domain and standard are unchanged: current tier, Fraction equivalence
+  and comparison, 4.NF.C.6.
+
+### `e6m19` — first-quadrant plotting, now genuinely first-quadrant
+
+- **Was:** *"Move 4 units right and 2 units down"*, key `(4,-2)`.
+- **Defect:** that lands in Quadrant IV, which is Grade 6 signed-coordinate
+  work — but the item sat in the **foundation** tier tagged `5.G.A.1 — plot in
+  the first quadrant`. A child who has not met negative coordinates would fail a
+  prerequisite item on a skill that is not a prerequisite, pulling the
+  foundation score down and biasing the placement toward a demotion.
+- **Now:** *"Move 4 units right and 2 units up"*, key `(4,2)`. Prompt, key, tier
+  and standard all agree, and the prompt states the `(x, y)` form explicitly.
+- **Grade 6 signed-coordinate coverage is unchanged:** `e6m23` (quadrant of
+  `(−4, 3)`) and `e6m24` (distance between `(2, 7)` and `(2, −3)`) still sample
+  it at the current tier, and `e6m10`, `e6m22` and `e6m25` sample signed number
+  work elsewhere. A test asserts this coverage survives.
 
 ---
 
@@ -170,7 +214,7 @@ Tier counts — foundation: 7 (7 auto, 0 rubric) · current: 21 (20 auto, 1 rubr
 | `e4m20` | C | Fraction and decimal operations | 4.NF.B.3a — add like denominators | text | 1 | `5/8` |
 | `e4m21` | C | Fraction and decimal operations | 4.NF.B.3c — add mixed numbers | text | 1 | `3 1/2` |
 | `e4m22` | C | Fraction and decimal operations | 4.NF.B.4b — multiply a fraction by a whole number | text | 1 | `10/3` |
-| `e4m23` | C | Fraction equivalence and comparison | 4.NF.C.6 — fractions as decimals | text | 1 | `0.3` |
+| `e4m23` | C | Fraction equivalence and comparison | 4.NF.C.6 — fractions as decimals | choice | 1 | `0.3` |
 | `e4m24` | S | Fraction and decimal operations | 5.NF.A.1 — add unlike denominators | text | 1 | `3/4` |
 | `e4m25` | S | Fraction and decimal operations | 5.NBT.B.7 — add decimals | numeric | 1 | `0.85` |
 
@@ -225,7 +269,7 @@ Tier counts — foundation: 7 (7 auto, 0 rubric) · current: 22 (21 auto, 1 rubr
 
 | Item | Tier | Domain | Standard / skill | Kind | Wt | Answer authority |
 | --- | --- | --- | --- | --- | --- | --- |
-| `e6m19` | F | Coordinate plane | 5.G.A.1 — plot in the first quadrant | text | 1 | `(4,-2)` |
+| `e6m19` | F | Coordinate plane | 5.G.A.1 — plot in the first quadrant | text | 1 | `(4,2)` |
 | `e6m20` | C | Integers | 6.NS.C.7a — order negative numbers | choice | 1 | `<` |
 | `e6m21` | C | Integers | 6.NS.C.7c — absolute value | numeric | 1 | `12` |
 | `e6m22` | C | Integers | 6.NS.C.7c — magnitude versus order | choice | 1 | `−7` |

@@ -335,13 +335,20 @@ export const ELE_ELA_G4: FixedTest = {
           kind: 'choice',
           prompt: 'Which sentence uses the correct verb?',
           choices: [
-            'The team is winning.',
-            'The team are winning.',
-            'The team be winning.',
-            'The team am winning.',
+            'My brother walks to school every day.',
+            'My brother walk to school every day.',
+            'My brother are walking to school every day.',
+            'My brother walking to school every day.',
           ],
-          key: 'The team is winning.',
-          keyNote: 'The team is winning. — a collective noun takes a singular verb here.',
+          key: 'My brother walks to school every day.',
+          keyNote:
+            'My brother walks to school every day. — one singular subject takes the -s form of ' +
+            'the verb in the present tense. CE3-C: this item replaces a collective-noun item ' +
+            '("The team is/are winning"), where both options are correct standard English — ' +
+            'singular in American usage, plural in British — so the keyed answer scored the ' +
+            'child\'s dialect rather than their grammar. The three distractors here are wrong in ' +
+            'every dialect: "walk" is the plural form, "are" cannot follow a singular subject, ' +
+            'and "walking" alone leaves the sentence without a finite verb.',
         },
         {
           id: 'e4e26',
