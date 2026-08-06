@@ -66,9 +66,10 @@ export function ParentHub({ state, onStateChange, onClose, onOpenClassic, studyE
     ...TABS,
     ...(academyEnabled ? [{ id: 'academy' as const, label: 'Academy', emoji: '🏫' }] : []),
     ...(studyEnabled ? [{ id: 'study' as const, label: 'Study', emoji: '🧭' }] : []),
+    // A6-5-C: the safety record is always reachable for an adult, even when the
+    // Study surface itself is unavailable — a stopped session must stay visible.
+    { id: 'safety' as const, label: 'Safety', emoji: '🛟' },
   ]
-
-  tabs.push({ id: 'safety', label: 'Safety', emoji: '🛟' })
   // The hub defaults its start date from MM's mindset start date, so Dad needn't re-enter it.
   const sy = state.schoolYear ?? defaultSchoolYear(state.mindsetStartDate ?? '')
   const setSchoolYear = (next: typeof sy) => onStateChange((s) => ({ ...s, schoolYear: next }))

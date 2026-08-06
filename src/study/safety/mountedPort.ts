@@ -59,9 +59,13 @@ export function createMountedStudySafetyPort(
     async evaluate(request: StudySafetyRequest) {
       const result = await classifyStudySafetyWithCaptureStatus(await gatewayRequest(request), deps)
       const response = result.response
+      // sessionRef is what the A6-5-C durable stop lock keys on. Without it an
+      // outage record stays visible to the parent but never locks the session,
+      // so a learner stopped by a gateway outage could refresh straight back in.
       if (result.failureMode && result.serverCaptureStatus) await recordLocalPreAcceptanceSafetyStop({
         occurredAt: new Date().toISOString(),
         studentRef: request.scope.learnerRef,
+        sessionRef: request.scope.sessionRef,
         failureMode: result.failureMode,
         serverCaptureStatus: result.serverCaptureStatus,
       })

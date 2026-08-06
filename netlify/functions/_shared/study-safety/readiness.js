@@ -1,5 +1,6 @@
 import { supabaseAuthConfigured } from '../supabase-auth.js'
 import { validRateLimitPort } from './rate-limit.js'
+import { isStudySessionAuthorizationPort } from './session-authorization.js'
 
 function readyPort(port, method, requireDurable = true) {
   return Boolean(
@@ -24,7 +25,10 @@ export function evaluateStudySafetyReadiness(dependencies, env = process.env) {
     missing.push('rate-limit-correlation-key')
   }
   if (!dependencies.classifier?.isConfigured?.()) missing.push('classifier-provider')
-  if (!readyPort(dependencies.learnerAuthorization, 'resolve') || dependencies.learnerAuthorization?.verifiesSession !== true) {
+  if (
+    !readyPort(dependencies.learnerAuthorization, 'resolve') ||
+    !isStudySessionAuthorizationPort(dependencies.learnerAuthorization)
+  ) {
     missing.push('learner-session-authorization')
   }
   if (!validRateLimitPort(dependencies.rateLimiter, true)) missing.push('durable-rate-limit')

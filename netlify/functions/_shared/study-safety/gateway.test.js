@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { createInMemoryAdultReviewStore } from '../study-adult-review/memory-store.js'
 import { createTestRecipientResolver } from '../study-adult-review/recipients.js'
-import { createStudySafetyHandler } from '../../study-safety-classify.js'
+import { createTestStudySafetyHandler } from '../../study-safety-classify.js'
 import { errorResponse } from '../http.js'
 
 const IDS = Object.freeze({
@@ -101,7 +101,7 @@ function readyHarness(options = {}) {
     channel: 'in-app', isDurable: true, isReady: () => true,
     verifyReceipt: async () => ({ verified: false }),
   }
-  const handler = createStudySafetyHandler({
+  const handler = createTestStudySafetyHandler({
     env: options.env ?? ENV,
     classifier,
     learnerAuthorization,
@@ -120,7 +120,7 @@ function readyHarness(options = {}) {
 
 describe('Study safety gateway security and privacy', () => {
   it('reports only sanitized readiness and uses 503 while not ready', async () => {
-    const handler = createStudySafetyHandler({ env: { ACADEMY_STUDY_ENABLED: 'true' } })
+    const handler = createTestStudySafetyHandler({ env: { ACADEMY_STUDY_ENABLED: 'true' } })
     const result = await handler({ httpMethod: 'GET', path: '/api/study/safety/readiness', headers: {} })
     expect(result.statusCode).toBe(503)
     expect(responseJson(result)).toEqual({ status: 'not-ready' })
