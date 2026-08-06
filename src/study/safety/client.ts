@@ -70,18 +70,35 @@ function failClosed(reasonCode: string): StudySafetyClassificationResponseV1 {
 /**
  * Which thing could not be obtained. `session-authorization` means the adult
  * bearer or the learner's Study session was missing, expired, revoked, or
- * refused; `classifier` means everything else that stopped a classification.
- * Both still fail closed — neither may continue tutoring — but only the second
- * is a safety-classifier incident, so an ordinary session expiry is never
- * reported as one.
+ * refused; `rate-limit` means the gateway shed the request; `classifier` means
+ * everything else that stopped a classification. All three fail closed — none
+ * may continue tutoring — but only the third is a safety-classifier incident,
+ * so an ordinary session expiry and a rate limit are never reported as one.
  */
-export type StudySafetyFailureCategory = 'session-authorization' | 'classifier'
+export type StudySafetyFailureCategory = 'session-authorization' | 'rate-limit' | 'classifier'
+
+/**
+ * Which half of the authorization pair was refused, as a non-secret code. The
+ * two need different recovery: a refused adult bearer needs the adult to sign in
+ * again, while a refused Study session needs the learner's session cleared and
+ * re-issued. The host cannot tell them apart from the fail-closed response
+ * alone, and must never have to parse an error string to find out.
+ */
+export type StudySessionAuthorizationFailure = 'adult-authentication-rejected' | 'study-session-rejected'
 
 export interface StudySafetyClientResult {
   readonly response: StudySafetyClassificationResponseV1
+  /**
+   * The local safety ledger's vocabulary, and set only for the failures that
+   * belong in it. A session-authorization or rate-limit result carries none,
+   * so a caller that writes on `failureMode` alone still cannot turn one into a
+   * durable safety-stop record.
+   */
   readonly failureMode?: PreAcceptanceSafetyFailureMode
   readonly serverCaptureStatus?: 'server-not-contacted' | 'server-acceptance-not-confirmed'
   readonly failureCategory?: StudySafetyFailureCategory
+  /** Present only when `failureCategory` is `session-authorization`. */
+  readonly sessionAuthorizationFailure?: StudySessionAuthorizationFailure
 }
 
 /**
@@ -108,9 +125,9 @@ export async function classifyStudySafetyWithCaptureStatus(
   try {
     accessToken = await getAccessToken()
   } catch {
-    return { response: failClosed('client-auth-unavailable'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted', failureCategory: 'session-authorization' }
+    return { response: failClosed('client-auth-unavailable'), serverCaptureStatus: 'server-not-contacted', failureCategory: 'session-authorization', sessionAuthorizationFailure: 'adult-authentication-rejected' }
   }
-  if (!accessToken) return { response: failClosed('client-unauthenticated'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted', failureCategory: 'session-authorization' }
+  if (!accessToken) return { response: failClosed('client-unauthenticated'), serverCaptureStatus: 'server-not-contacted', failureCategory: 'session-authorization', sessionAuthorizationFailure: 'adult-authentication-rejected' }
   // Read once, only to build this request's headers. A missing seam, a cleared
   // transport, and a reference the identity contract refuses all land here, so
   // no unauthorized classification ever reaches the network.
@@ -118,7 +135,7 @@ export async function classifyStudySafetyWithCaptureStatus(
     Authorization: `Bearer ${accessToken}`,
     'content-type': 'application/json',
   })
-  if (!headers) return { response: failClosed('client-study-session-unavailable'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted', failureCategory: 'session-authorization' }
+  if (!headers) return { response: failClosed('client-study-session-unavailable'), serverCaptureStatus: 'server-not-contacted', failureCategory: 'session-authorization', sessionAuthorizationFailure: 'study-session-rejected' }
   if (deps.signal?.aborted) return { response: failClosed('client-cancelled'), failureMode: 'network-failure-mid-request', serverCaptureStatus: 'server-not-contacted', failureCategory: 'classifier' }
 
   const controller = new AbortController()
@@ -143,8 +160,19 @@ export async function classifyStudySafetyWithCaptureStatus(
       // the learner's Study-session reference is missing, expired, revoked, or
       // unauthorized. Neither means the classifier was unreachable, so neither
       // is reported as one — an expired session is an ordinary lifecycle event.
-      if (response.status === 401 || response.status === 403) {
-        return { response: failClosed('client-session-unauthorized'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'session-authorization' }
+      // Only the status decides this; the body is never read or parsed, so a
+      // gateway that answers 403 with an explanatory payload leaks nothing.
+      if (response.status === 401) {
+        return { response: failClosed('client-adult-authentication-rejected'), serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'session-authorization', sessionAuthorizationFailure: 'adult-authentication-rejected' }
+      }
+      if (response.status === 403) {
+        return { response: failClosed('client-study-session-rejected'), serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'session-authorization', sessionAuthorizationFailure: 'study-session-rejected' }
+      }
+      // Shedding load is not a safety outage and not an authorization refusal.
+      // It still fails closed, but the classifier never saw the text, so there
+      // is nothing about this learner to record.
+      if (response.status === 429) {
+        return { response: failClosed('client-rate-limited'), serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'rate-limit' }
       }
       return { response: failClosed('client-gateway-error'), failureMode: response.status === 503 ? 'gateway-503' : 'classifier-unreachable', serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'classifier' }
     }

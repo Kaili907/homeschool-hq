@@ -285,18 +285,23 @@ describe('session authorization failure versus classifier failure', () => {
     sessionAuthorization: installedTransport(),
   })
 
-  it('reports an expired or revoked Study session as a session-authorization failure', async () => {
+  it('tells a refused adult bearer apart from a refused Study session without parsing text', async () => {
     // The gateway answers 403 learner_not_authorized when the session reference
     // is missing, expired, revoked, or unauthorized, and 401 when the adult
-    // bearer is refused. Neither is a safety classification.
-    for (const status of [401, 403]) {
+    // bearer is refused. Neither is a safety classification, and the two need
+    // different recovery, so the status alone must decide which.
+    for (const [status, reason] of [
+      [401, 'adult-authentication-rejected'],
+      [403, 'study-session-rejected'],
+    ] as const) {
       const result = await classifyStudySafetyWithCaptureStatus(
         request,
         deps(vi.fn(async () => ({ ok: false, status, json: async () => ({}) }))),
       )
       expect(result.failureCategory).toBe('session-authorization')
-      expect(result.failureMode).toBe('authentication-failure')
-      expect(result.failureMode).not.toBe('classifier-unreachable')
+      expect(result.sessionAuthorizationFailure).toBe(reason)
+      // No ledger vocabulary at all: this never becomes a durable safety stop.
+      expect(result.failureMode).toBeUndefined()
       // Still fail closed: neither may continue tutoring.
       expect(result.response.classification).toBe('invalid')
       expect(result.response.continueToTutorCore).toBe(false)
@@ -304,19 +309,34 @@ describe('session authorization failure versus classifier failure', () => {
     }
   })
 
+  it('reports a rate limit as its own category, not as a classifier incident', async () => {
+    const result = await classifyStudySafetyWithCaptureStatus(
+      request,
+      deps(vi.fn(async () => ({ ok: false, status: 429, json: async () => ({}) }))),
+    )
+    expect(result.failureCategory).toBe('rate-limit')
+    expect(result.failureMode).toBeUndefined()
+    expect(result.sessionAuthorizationFailure).toBeUndefined()
+    expect(result.response.classification).toBe('invalid')
+    expect(result.response.continueToTutorCore).toBe(false)
+    expect(result.response.learner.mayContinue).toBe(false)
+  })
+
   it('reports missing host auth and a missing Study session as session-authorization failures', async () => {
     const unreached = vi.fn(async () => ({ ok: true, json: async () => clearResponse }))
-    for (const overrides of [
-      { getAccessToken: async () => null },
-      { getAccessToken: async () => { throw new Error('token store unavailable') } },
-      { sessionAuthorization: undefined },
-      { sessionAuthorization: createStudySessionTransport() },
-    ]) {
+    for (const [overrides, reason] of [
+      [{ getAccessToken: async () => null }, 'adult-authentication-rejected'],
+      [{ getAccessToken: async () => { throw new Error('token store unavailable') } }, 'adult-authentication-rejected'],
+      [{ sessionAuthorization: undefined }, 'study-session-rejected'],
+      [{ sessionAuthorization: createStudySessionTransport() }, 'study-session-rejected'],
+    ] as const) {
       const result = await classifyStudySafetyWithCaptureStatus(request, {
         ...deps(unreached),
         ...overrides,
       })
       expect(result.failureCategory).toBe('session-authorization')
+      expect(result.sessionAuthorizationFailure).toBe(reason)
+      expect(result.failureMode).toBeUndefined()
       expect(result.serverCaptureStatus).toBe('server-not-contacted')
       expect(result.response.continueToTutorCore).toBe(false)
     }
@@ -326,8 +346,8 @@ describe('session authorization failure versus classifier failure', () => {
   it('keeps genuine classifier failures categorised as classifier failures', async () => {
     const cases: Array<[unknown, string]> = [
       [vi.fn(async () => ({ ok: false, status: 503, json: async () => ({}) })), 'gateway-503'],
-      [vi.fn(async () => ({ ok: false, status: 429, json: async () => ({}) })), 'classifier-unreachable'],
       [vi.fn(async () => ({ ok: false, status: 500, json: async () => ({}) })), 'classifier-unreachable'],
+      [vi.fn(async () => ({ ok: false, status: 502, json: async () => ({}) })), 'classifier-unreachable'],
       [vi.fn(async () => ({ ok: true, json: async () => ({ nonsense: true }) })), 'malformed-server-response'],
       [vi.fn(async () => { throw new Error('network down') }), 'network-failure-mid-request'],
     ]
@@ -335,7 +355,36 @@ describe('session authorization failure versus classifier failure', () => {
       const result = await classifyStudySafetyWithCaptureStatus(request, deps(fetchImpl))
       expect(result.failureCategory).toBe('classifier')
       expect(result.failureMode).toBe(failureMode)
+      expect(result.sessionAuthorizationFailure).toBeUndefined()
       expect(result.response.continueToTutorCore).toBe(false)
+      expect(result.response.learner.mayContinue).toBe(false)
+    }
+  })
+
+  it('categorises a classifier timeout as a classifier failure', async () => {
+    const result = await classifyStudySafetyWithCaptureStatus(request, {
+      ...deps((_url: string, init: RequestInit) => new Promise((_resolve, reject) => {
+        init.signal?.addEventListener('abort', () => { reject(new Error('aborted')) }, { once: true })
+      })),
+      timeoutMs: 1,
+    })
+    expect(result.failureCategory).toBe('classifier')
+    expect(result.failureMode).toBe('request-timeout')
+    expect(result.response.continueToTutorCore).toBe(false)
+  })
+
+  it('never carries a bearer, a session reference or a server body into the result', async () => {
+    const result = await classifyStudySafetyWithCaptureStatus(request, {
+      ...deps(vi.fn(async () => ({
+        ok: false,
+        status: 403,
+        json: async () => ({ error: 'learner_not_authorized', sessionReference: SESSION_REFERENCE, detail: 'body-secret-sentinel' }),
+      }))),
+      getAccessToken: async () => 'bearer-secret-sentinel',
+    })
+    const exposed = JSON.stringify(result)
+    for (const secret of ['bearer-secret-sentinel', 'body-secret-sentinel', SESSION_REFERENCE, 'aca_stu_v1_', 'learner_not_authorized', 'synthetic learner text']) {
+      expect(exposed).not.toContain(secret)
     }
   })
 
@@ -346,6 +395,7 @@ describe('session authorization failure versus classifier failure', () => {
     )
     expect(result.failureCategory).toBeUndefined()
     expect(result.failureMode).toBeUndefined()
+    expect(result.sessionAuthorizationFailure).toBeUndefined()
     expect(result.response.classification).toBe('clear')
   })
 })
