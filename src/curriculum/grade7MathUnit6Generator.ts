@@ -9,14 +9,44 @@ type Params = { drawing: number; actual: number; scale: number; newScale: number
 type Q<T extends Grade7MathUnit6ItemType> = CurriculumQuestion<T, Params>
 export type Grade7MathUnit6Question = { [T in Grade7MathUnit6ItemType]: Q<T> }[Grade7MathUnit6ItemType]
 type Def = { standard: '7.G.1' | '7.G.2'; lessonFocus: string; workedExample: CurriculumWorkedExample }
-const example = (prompt: string, answer: string): CurriculumWorkedExample => ({ prompt, answer, steps: ['Write the scale as a ratio with matching units.', 'Multiply or divide consistently, then check whether the dimensions are possible.'] })
+const example = (prompt: string, answer: string, steps: readonly string[]): CurriculumWorkedExample => ({ prompt, answer, steps })
+/**
+ * One authored worked example per item type. Each prompt is a concrete instance of
+ * that item type's own generated shape and each answer is the answer to that
+ * prompt, because this prose is the only teaching a student receives after a wrong
+ * answer: an explanation of a different question teaches nothing.
+ */
 export const GRADE7_MATH_UNIT6_ITEM_DEFINITIONS = {
-  'scale-factor': { standard: '7.G.1', lessonFocus: 'scale factors', workedExample: example('A 4 cm drawing represents 20 cm. What is the scale factor from drawing to actual?', '5') },
-  'scale-drawing': { standard: '7.G.1', lessonFocus: 'scale drawings', workedExample: example('At a scale of 1 cm : 3 m, what actual length does 5 cm represent?', '15 m') },
-  'actual-drawing-dimensions': { standard: '7.G.1', lessonFocus: 'actual and drawing dimensions', workedExample: example('A 24 m wall is drawn at 1 cm : 4 m. How long is the drawing?', '6 cm') },
-  'reproduce-at-new-scale': { standard: '7.G.1', lessonFocus: 'reproducing a drawing at a new scale', workedExample: example('A 6 cm segment is enlarged by scale factor 3. What is its new length?', '18 cm') },
-  'construct-triangle': { standard: '7.G.2', lessonFocus: 'constructing triangles', workedExample: example('Can segments 3, 4, and 5 form a triangle?', 'yes') },
-  'unique-triangle-conditions': { standard: '7.G.2', lessonFocus: 'conditions for unique triangles', workedExample: example('Which information guarantees one triangle: three side lengths, or only one side length?', 'three side lengths') },
+  'scale-factor': { standard: '7.G.1', lessonFocus: 'scale factors', workedExample: example('A 4 cm drawing represents 20 cm. What is the scale factor from drawing to actual?', '5', [
+    'A scale factor is the number you multiply a drawing length by to get the matching real length, so it compares two lengths measured in the same unit.',
+    'Both lengths here are already in centimetres, so divide the actual length by the drawing length: 20 ÷ 4 = 5.',
+    'The scale factor is 5, meaning every 1 cm on the drawing stands for 5 cm in real life. Check it by scaling up: 4 × 5 = 20 cm.',
+  ]) },
+  'scale-drawing': { standard: '7.G.1', lessonFocus: 'scale drawings', workedExample: example('A map scale is 2 cm : 5 m. What actual distance does 8 cm represent?', '20 m', [
+    'The scale 2 cm : 5 m says that every 2 cm on the map stands for 5 m on the ground, so first work out how many of those 2 cm blocks the 8 cm holds.',
+    'Divide to count the blocks: 8 ÷ 2 = 4 blocks.',
+    'Each block stands for 5 m, so multiply: 4 × 5 = 20, giving 20 m. The centimetres and the metres never mix; each stays on its own side of the ratio.',
+  ]) },
+  'actual-drawing-dimensions': { standard: '7.G.1', lessonFocus: 'actual and drawing dimensions', workedExample: example('A 24 m path is drawn at 1 cm : 4 m. What is its drawing length?', '6 cm', [
+    'This question runs the scale backwards: the real length is known and the drawing length is missing, so divide instead of multiply.',
+    'The scale 1 cm : 4 m means each single centimetre covers 4 m, so ask how many 4 m pieces fit inside 24 m: 24 ÷ 4 = 6.',
+    'Six pieces need 6 cm of paper, so the drawing length is 6 cm. Check by scaling back up: 6 × 4 = 24 m.',
+  ]) },
+  'reproduce-at-new-scale': { standard: '7.G.1', lessonFocus: 'reproducing a drawing at a new scale', workedExample: example('A 6 cm segment is reproduced using a scale factor of 3. What is its new length?', '18 cm', [
+    'Reproducing a drawing at a scale factor of 3 stretches every length by the same multiplier, so no length is left unchanged.',
+    'Multiply the original length by the scale factor: 6 × 3 = 18, so the new length is 18 cm.',
+    'Lengths scale by the factor itself, but areas scale by the factor squared, because both the width and the height stretch. Had this been an area of 6 cm², the new area would be 6 × 9 = 54 cm², not 18.',
+  ]) },
+  'construct-triangle': { standard: '7.G.2', lessonFocus: 'constructing triangles', workedExample: example('Can segments of lengths 4, 6, and 9 form a triangle?', 'yes', [
+    'Three segments close into a triangle only when the two shorter ones together can reach across the longest one. That is the triangle inequality.',
+    'The longest segment is 9, and the other two add to 4 + 6 = 10.',
+    '10 is greater than 9, so the short sides have length to spare and can meet above the long one: the answer is yes. Had the longest been 10, the two shorter sides would add to exactly 10 and lie flat along it, forming a straight line rather than a triangle.',
+  ]) },
+  'unique-triangle-conditions': { standard: '7.G.2', lessonFocus: 'conditions for unique triangles', workedExample: example('Which condition determines a unique triangle: SSS, AAA, SSA, or one side length?', 'SSS', [
+    'A condition determines a unique triangle when every triangle built from that information comes out the same size and shape, so no second, different triangle can satisfy it.',
+    'SSS gives all three side lengths, and three fixed sides can be assembled in only one way, so SSS determines a unique triangle.',
+    'The others fail. AAA fixes only the angles: a 3, 4, 5 triangle and a 6, 8, 10 triangle have the same three angles, because 3 × 2 = 6, 4 × 2 = 8 and 5 × 2 = 10 simply enlarge it, so AAA allows triangles of every size. SSA can fit two different triangles to the same measurements, and one side length alone fixes almost nothing.',
+  ]) },
 } as const satisfies Record<Grade7MathUnit6ItemType, Def>
 const q = (itemType: Grade7MathUnit6ItemType, difficulty: Difficulty, prompt: string, answer: string, parameters: Params, distractors: string[]) => makeCurriculumQuestion({ itemType, difficulty, prompt, correctAnswer: answer, distractors, distractorMode: 'distinct', parameters, ...GRADE7_MATH_UNIT6_ITEM_DEFINITIONS[itemType] })
 const facts = (difficulty: Difficulty) => { const scale = ri(2, difficulty + 5); const drawing = ri(2, difficulty * 4 + 6); return { drawing, actual: drawing * scale, scale, newScale: ri(2, difficulty + 4) } }

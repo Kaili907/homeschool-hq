@@ -9,14 +9,45 @@ type Params = { a?: number; b?: number; c?: number; solution?: number; values?: 
 type Q<T extends Grade7MathUnit10ItemType> = CurriculumQuestion<T, Params>
 export type Grade7MathUnit10Question = { [T in Grade7MathUnit10ItemType]: Q<T> }[Grade7MathUnit10ItemType]
 type Def = { standard: '7.RP.3' | '7.NS.3' | '7.EE.4' | '7.G.6' | '7.SP.4' | 'MP.4'; lessonFocus: string; workedExample: CurriculumWorkedExample }
-const example = (prompt: string, answer: string): CurriculumWorkedExample => ({ prompt, answer, steps: ['Identify what the problem is asking and which quantities, assumptions, or constraints matter.', 'Build and solve a model, then check the result against the context.'] })
+const example = (prompt: string, answer: string, steps: readonly string[]): CurriculumWorkedExample => ({ prompt, answer, steps })
+/**
+ * One authored worked example per item type. Each prompt is a concrete instance of
+ * that item type's own generated shape and each answer is the answer to that
+ * prompt. This is the capstone unit, so each walkthrough names the modelling move
+ * as well as the arithmetic: what the unknown stands for, which quantity is a
+ * constraint rather than a term, and what the number means back in the context.
+ */
 export const GRADE7_MATH_UNIT10_ITEM_DEFINITIONS = {
-  'problem-formulation': { standard: '7.EE.4', lessonFocus: 'problem formulation', workedExample: example('A rental charges a $10 base fee plus $5 per hour, totaling $35. Which equation models this, and how many hours were rented?', '5x + 10 = 35; x = 5') },
-  'assumptions-and-constraints': { standard: '7.NS.3', lessonFocus: 'assumptions and constraints', workedExample: example('A diver descends 8 m, then descends 4 m more, then ascends 5 m. What is the diver\'s final position?', '-7') },
-  'proportional-and-algebraic-models': { standard: '7.RP.3', lessonFocus: 'proportional and algebraic models', workedExample: example('A model predicts a $80 rate will increase by 25%. What is the new rate?', '$100') },
-  'geometry-and-measurement': { standard: '7.G.6', lessonFocus: 'geometry and measurement', workedExample: example('A storage container is 4 by 3 by 2 feet. What is its volume in cubic feet?', '24') },
-  'data-and-uncertainty': { standard: '7.SP.4', lessonFocus: 'data and uncertainty', workedExample: example('A data set is 10, 15, 20, 25, 30. The mean is 20. What is the mean absolute deviation?', '6') },
-  'argument-and-presentation': { standard: 'MP.4', lessonFocus: 'argument and presentation', workedExample: example('A student claims a 4 by 3 by 2 box has a volume of 9 cubic units. Evaluate the claim.', 'No; the volume is 24 cubic units, not 9.') },
+  'problem-formulation': { standard: '7.EE.4', lessonFocus: 'problem formulation', workedExample: example('A rental company charges a $10 base fee plus $5 per hour. A customer\'s total bill was $45. Which equation models this situation, and how many hours were rented?', '5x + 10 = 45; x = 7', [
+    'Name the unknown first: let x be the number of hours rented, because that is the quantity that changes from customer to customer.',
+    'The $5 hourly charge repeats once per hour, giving 5x, and the $10 base fee is paid a single time, so the model is 5x + 10 = 45.',
+    'Solve by undoing the two steps: 45 - 10 = 35, so 5x = 35, and 35 ÷ 5 = 7. The customer rented 7 hours. Check: 5 × 7 + 10 = 45.',
+  ]) },
+  'assumptions-and-constraints': { standard: '7.NS.3', lessonFocus: 'assumptions and constraints', workedExample: example('A diver starts at the surface (0 m) and descends 8 m, then descends another 6 m, then ascends 5 m. The dive plan assumes a depth limit of 25 m below the surface. What is the diver\'s final position, as a signed number of meters?', '-9', [
+    'Fix a sign convention before computing: the surface is 0, descending is negative and ascending is positive. Without that choice the numbers cannot be added.',
+    'Add the two descents: -8 + -6 = -14, so the diver reaches 14 m below the surface.',
+    'Now apply the ascent: -14 + 5 = -9. The diver ends at -9, which reads as 9 m below the surface. The 25 m depth limit is a constraint to check, not a quantity to add: the deepest point, -14, stays inside it, so the plan holds.',
+  ]) },
+  'proportional-and-algebraic-models': { standard: '7.RP.3', lessonFocus: 'proportional and algebraic models', workedExample: example('A model predicts a $80 rate will increase by 25%. What does the model predict as the new rate?', '$100', [
+    'The model scales the rate proportionally, so the new rate is the old rate plus a fixed fraction of that same old rate.',
+    '25% is 25 hundredths, and 25/100 reduces to 1/4, so the increase is 80 ÷ 4 = 20 dollars.',
+    'Add the increase to the original rate: 80 + 20 = 100, so the model predicts $100. The same answer comes from scaling in one step, since a 25% increase multiplies by 1.25 and 80 × 1.25 = 100.',
+  ]) },
+  'geometry-and-measurement': { standard: '7.G.6', lessonFocus: 'geometry and measurement', workedExample: example('A storage container is designed as a rectangular prism 4 ft long, 3 ft wide, and 2 ft high. What is its volume in cubic feet?', '24', [
+    'Volume counts how many unit cubes fill the container, so all three dimensions multiply together rather than adding.',
+    'Start with a single layer on the floor: 4 × 3 = 12, so one layer holds 12 unit cubes.',
+    'The container is 2 ft high, so it stacks 2 of those layers: 12 × 2 = 24 cubic feet. Surface area answers a different question, adding up the six faces instead of filling the inside.',
+  ]) },
+  'data-and-uncertainty': { standard: '7.SP.4', lessonFocus: 'data and uncertainty', workedExample: example('A data set has the values 30, 35, 40, 45, 50. The mean is 40. What is the mean absolute deviation (MAD), a measure of the data\'s uncertainty or spread?', '6', [
+    'The mean absolute deviation asks how far a typical value sits from the mean, so measure each value\'s distance from 40 and ignore whether it is above or below.',
+    'The five distances are 40 - 30 = 10, then 40 - 35 = 5, then 0 for the value that is the mean, then 45 - 40 = 5, then 50 - 40 = 10.',
+    'Average those distances: 10 + 5 + 0 + 5 + 10 = 30, and 30 ÷ 5 = 6. The MAD is 6, meaning values sit about 6 away from the mean on average. A larger MAD would mean a more spread-out, less predictable data set.',
+  ]) },
+  'argument-and-presentation': { standard: 'MP.4', lessonFocus: 'argument and presentation', workedExample: example('A student claims a box that is 4 by 3 by 2 units has a volume of 9 cubic units. Evaluate the claim.', 'No; the volume is 24 cubic units, not 9.', [
+    'Evaluating a claim means recomputing it yourself, then saying plainly whether it holds and why.',
+    'Volume multiplies the three dimensions: 4 × 3 = 12 for one layer, and 12 × 2 = 24 cubic units in total.',
+    '24 does not match the claimed 9, so the claim is wrong. Tracing the error, 4 + 3 + 2 = 9, so the student added the dimensions where they should have multiplied. A complete response names the correct value and the mistake: No; the volume is 24 cubic units, not 9.',
+  ]) },
 } as const satisfies Record<Grade7MathUnit10ItemType, Def>
 const q = (itemType: Grade7MathUnit10ItemType, difficulty: Difficulty, prompt: string, answer: string, parameters: Params, distractors: string[]) => makeCurriculumQuestion({ itemType, difficulty, prompt, correctAnswer: answer, distractors, distractorMode: 'distinct', parameters, ...GRADE7_MATH_UNIT10_ITEM_DEFINITIONS[itemType] })
 const dollars = (value: number) => `$${value.toFixed(2).replace(/\.00$/, '')}`

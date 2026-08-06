@@ -9,14 +9,44 @@ type Params = { favorable?: number; sampleSize?: number; multiplier?: number }
 type Q<T extends Grade7MathUnit9ItemType> = CurriculumQuestion<T, Params>
 export type Grade7MathUnit9Question = { [T in Grade7MathUnit9ItemType]: Q<T> }[Grade7MathUnit9ItemType]
 type Def = { standard: '7.SP.5' | '7.SP.6' | '7.SP.7' | '7.SP.8'; lessonFocus: string; workedExample: CurriculumWorkedExample }
-const example = (prompt: string, answer: string): CurriculumWorkedExample => ({ prompt, answer, steps: ['Identify the favorable outcomes and the total possible outcomes.', 'Write the probability as a reduced fraction, or use it to predict or evaluate a count.'] })
+const example = (prompt: string, answer: string, steps: readonly string[]): CurriculumWorkedExample => ({ prompt, answer, steps })
+/**
+ * One authored worked example per item type. Each prompt is a concrete instance of
+ * that item type's own generated shape and each answer is the answer to that
+ * prompt. The two item types built on a sample space walk through the table a
+ * student is meant to draw, because the count is what they are being asked to see.
+ */
 export const GRADE7_MATH_UNIT9_ITEM_DEFINITIONS = {
-  'probability-scale': { standard: '7.SP.5', lessonFocus: 'probability scale', workedExample: example('A probability of 1 means an event is...', 'certain') },
-  'experimental-probability': { standard: '7.SP.6', lessonFocus: 'experimental probability', workedExample: example('A coin was flipped 20 times and landed heads 9 times. What is the experimental probability of heads?', '9/20') },
-  'theoretical-probability': { standard: '7.SP.7', lessonFocus: 'theoretical probability', workedExample: example('A bag has 2 red and 3 blue marbles. What is the theoretical probability of drawing red?', '2/5') },
-  'compound-events': { standard: '7.SP.8', lessonFocus: 'compound events', workedExample: example('A fair coin is flipped and a 3-section spinner is spun. What is the probability of heads and landing on section 2?', '1/6') },
-  'sample-spaces': { standard: '7.SP.8', lessonFocus: 'sample spaces', workedExample: example('A meal has 3 main dish options and 2 side options. How many different meals are possible?', '6') },
-  'simulation-and-model-limitations': { standard: '7.SP.7', lessonFocus: 'simulation and model limitations', workedExample: example('A model predicts 25 heads in 100 flips. A simulation of 100 flips gave 29 heads. How does the simulated count compare to the model\'s prediction?', '4 more than predicted') },
+  'probability-scale': { standard: '7.SP.5', lessonFocus: 'probability scale', workedExample: example('An event has a probability of 9/10. How would you describe how likely the event is to happen?', 'likely', [
+    'Probability runs on a scale from 0 to 1: 0 means the event is impossible, 1 means it is certain, and 1/2 means it is equally likely to happen or not happen.',
+    'Compare 9/10 with that halfway mark. Rewriting 1/2 as 5/10 makes them easy to line up, and 9/10 is well above 5/10.',
+    'Out of 10 equally likely tries this event would be expected about 9 times, leaving 10 - 9 = 1 try where it does not happen. It is close to 1 but not equal to 1, so it is likely rather than certain.',
+  ]) },
+  'experimental-probability': { standard: '7.SP.6', lessonFocus: 'experimental probability', workedExample: example('A spinner was spun 20 times and landed on blue 8 times. Based on this experiment, what is the experimental probability of landing on blue?', '2/5', [
+    'Experimental probability comes from what actually happened, so it is the number of successful trials over the total number of trials.',
+    'Blue came up 8 times out of 20 spins, which is the fraction 8/20.',
+    'Reduce it: 8 and 20 share the factor 4, and 8 ÷ 4 = 2 over 20 ÷ 4 = 5, so the experimental probability is 2/5. A different set of 20 spins could give a different fraction, which is why this is only an estimate.',
+  ]) },
+  'theoretical-probability': { standard: '7.SP.7', lessonFocus: 'theoretical probability', workedExample: example('A bag has 3 red, 5 blue, and 7 green marbles. If one marble is drawn at random, what is the theoretical probability of drawing red, P(red)?', '1/5', [
+    'Theoretical probability counts what should happen when every marble is equally likely to be drawn, so it needs the favourable count over the total count.',
+    'Add every marble to find the total, including the greens: 3 + 5 + 7 = 15 marbles in the bag.',
+    '3 of those 15 are red, so P(red) = 3/15. Both numbers divide by 3, and 3 ÷ 3 = 1 over 15 ÷ 3 = 5, so P(red) = 1/5.',
+  ]) },
+  'compound-events': { standard: '7.SP.8', lessonFocus: 'compound events', workedExample: example('A fair coin is flipped and a spinner with 3 equal sections numbered 1 to 3 is spun. What is the probability of getting heads on the coin and landing on 2 on the spinner?', '1/6', [
+    'The coin and the spinner do not affect each other, so list every pairing. A table makes them countable: the rows are heads and tails, and the columns are sections 1, 2 and 3.',
+    'That table is 2 rows by 3 columns, so it holds 2 × 3 = 6 equally likely outcomes: H1, H2, H3, T1, T2, T3.',
+    'Only one of those six cells, H2, is heads and section 2 together, so the probability is 1/6. Multiplying the separate probabilities gives the same result, since 1/2 of 1/3 is 1/6.',
+  ]) },
+  'sample-spaces': { standard: '7.SP.8', lessonFocus: 'sample spaces', workedExample: example('A meal is made by choosing one main dish from 3 options and one side dish from 4 options. How many different meals are possible?', '12', [
+    'Every main dish can be paired with every side dish, so lay the possibilities out as a table with one row per main dish and one column per side dish.',
+    'Each of the 3 main dishes has all 4 side dishes available, so the table is 3 rows of 4 cells: 3 × 4 = 12 cells.',
+    'Each cell is one different meal, so 12 meals are possible. Adding would give 3 + 4 = 7, which only counts the items on the menu instead of the pairings.',
+  ]) },
+  'simulation-and-model-limitations': { standard: '7.SP.7', lessonFocus: 'simulation and model limitations', workedExample: example('A probability model predicts a fair 4-section spinner lands on a chosen section about 40 times in 160 spins. A simulation of 160 spins landed on that section 46 times. How does the simulated count compare to the model\'s prediction?', '6 more than predicted', [
+    'The model treats the 4 sections as equally likely, so each should come up about a quarter of the time: 160 ÷ 4 = 40 spins.',
+    'Compare the simulated count with that prediction by subtracting: 46 - 40 = 6.',
+    'The simulation landed on the section 6 more times than predicted. A gap like this does not mean the model is wrong: a model gives a long-run expectation, and short runs wander around it.',
+  ]) },
 } as const satisfies Record<Grade7MathUnit9ItemType, Def>
 const q = (itemType: Grade7MathUnit9ItemType, difficulty: Difficulty, prompt: string, answer: string, parameters: Params, distractors: string[]) => makeCurriculumQuestion({ itemType, difficulty, prompt, correctAnswer: answer, distractors, distractorMode: 'distinct', parameters, ...GRADE7_MATH_UNIT9_ITEM_DEFINITIONS[itemType] })
 const LIKELIHOOD_SCALE = [
