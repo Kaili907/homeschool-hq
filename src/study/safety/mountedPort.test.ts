@@ -114,6 +114,7 @@ describe('mounted Study HTTP safety port', () => {
       outcome: 'invalid',
       mayContinue: false,
       adultHelpState: 'not-confirmed',
+      interruption: { kind: 'session-authorization', reason: 'adult-authentication-rejected' },
     })
   })
 
@@ -164,6 +165,13 @@ describe('mounted Study safety port — authorization failure boundary', () => {
     transientText: 'learner input sentinel',
   }
   const FAIL_CLOSED = { outcome: 'invalid', mayContinue: false, adultHelpState: 'not-confirmed' }
+  // STUDY-A1-AUTH-C — the same fail-closed decision, plus the typed reason the
+  // runtime needs to keep a lifecycle event from being shown as a safety one.
+  const refused = (reason: string) => ({
+    ...FAIL_CLOSED,
+    interruption: { kind: 'session-authorization', reason },
+  })
+  const SHED = { ...FAIL_CLOSED, interruption: { kind: 'rate-limit' } }
 
   function memoryStorage() {
     const values = new Map<string, string>()
@@ -194,7 +202,7 @@ describe('mounted Study safety port — authorization failure boundary', () => {
     await withStorage(async (storage) => {
       const seen: string[] = []
       const port = statusPort(401, { onSessionAuthorizationFailure: (reason: string) => { seen.push(reason) } })
-      await expect(port.evaluate(evaluation)).resolves.toEqual(FAIL_CLOSED)
+      await expect(port.evaluate(evaluation)).resolves.toEqual(refused('adult-authentication-rejected'))
       expect(readLocalSafetyStops(storage)).toEqual([])
       expect(isSessionStoppedByLocalLedger({ studentRef: scope.learnerRef, sessionRef: scope.sessionRef }, storage)).toBe(false)
       expect(seen).toEqual(['adult-authentication-rejected'])
@@ -205,7 +213,7 @@ describe('mounted Study safety port — authorization failure boundary', () => {
     await withStorage(async (storage) => {
       const seen: string[] = []
       const port = statusPort(403, { onSessionAuthorizationFailure: (reason: string) => { seen.push(reason) } })
-      await expect(port.evaluate(evaluation)).resolves.toEqual(FAIL_CLOSED)
+      await expect(port.evaluate(evaluation)).resolves.toEqual(refused('study-session-rejected'))
       expect(readLocalSafetyStops(storage)).toEqual([])
       expect(isSessionStoppedByLocalLedger({ studentRef: scope.learnerRef, sessionRef: scope.sessionRef }, storage)).toBe(false)
       expect(seen).toEqual(['study-session-rejected'])
@@ -229,7 +237,7 @@ describe('mounted Study safety port — authorization failure boundary', () => {
     await withStorage(async (storage) => {
       const seen: string[] = []
       const port = statusPort(429, { onSessionAuthorizationFailure: (reason: string) => { seen.push(reason) } })
-      await expect(port.evaluate(evaluation)).resolves.toEqual(FAIL_CLOSED)
+      await expect(port.evaluate(evaluation)).resolves.toEqual(SHED)
       expect(readLocalSafetyStops(storage)).toEqual([])
       expect(isSessionStoppedByLocalLedger({ studentRef: scope.learnerRef, sessionRef: scope.sessionRef }, storage)).toBe(false)
       // A rate limit is not an authorization failure either — nothing to clear.
@@ -279,7 +287,7 @@ describe('mounted Study safety port — authorization failure boundary', () => {
       const seen: string[] = []
       const port = statusPort(403, { onSessionAuthorizationFailure: (reason: string) => { seen.push(reason) } })
       for (const requestRef of ['one', 'two', 'three']) {
-        await expect(port.evaluate({ ...evaluation, requestRef })).resolves.toEqual(FAIL_CLOSED)
+        await expect(port.evaluate({ ...evaluation, requestRef })).resolves.toEqual(refused('study-session-rejected'))
       }
       expect(seen).toEqual(['study-session-rejected', 'study-session-rejected', 'study-session-rejected'])
       expect(readLocalSafetyStops(storage)).toEqual([])
@@ -291,7 +299,7 @@ describe('mounted Study safety port — authorization failure boundary', () => {
       const port = statusPort(403, {
         onSessionAuthorizationFailure: () => { throw new Error('composition blew up') },
       })
-      await expect(port.evaluate(evaluation)).resolves.toEqual(FAIL_CLOSED)
+      await expect(port.evaluate(evaluation)).resolves.toEqual(refused('study-session-rejected'))
       expect(readLocalSafetyStops(storage)).toEqual([])
     })
   })
@@ -308,10 +316,12 @@ describe('mounted Study safety port — authorization failure boundary', () => {
           pending.push(Promise.resolve(port.evaluate({ ...evaluation, requestRef: `reentrant:${depth}` })))
         },
       })
-      await expect(port.evaluate(evaluation)).resolves.toEqual(FAIL_CLOSED)
+      await expect(port.evaluate(evaluation)).resolves.toEqual(refused('study-session-rejected'))
       // Drain rather than snapshot: each re-entry queues the next one.
       while (pending.length > 0) {
-        for (const result of await Promise.all(pending.splice(0))) expect(result).toEqual(FAIL_CLOSED)
+        for (const result of await Promise.all(pending.splice(0))) {
+          expect(result).toEqual(refused('study-session-rejected'))
+        }
       }
       expect(depth).toBe(3)
       expect(readLocalSafetyStops(storage)).toEqual([])
@@ -320,8 +330,12 @@ describe('mounted Study safety port — authorization failure boundary', () => {
 
   it('remains fail-closed with no callback wired at all', async () => {
     await withStorage(async (storage) => {
-      for (const status of [401, 403, 429]) {
-        await expect(statusPort(status).evaluate(evaluation)).resolves.toEqual(FAIL_CLOSED)
+      for (const [status, expected] of [
+        [401, refused('adult-authentication-rejected')],
+        [403, refused('study-session-rejected')],
+        [429, SHED],
+      ] as const) {
+        await expect(statusPort(status).evaluate(evaluation)).resolves.toEqual(expected)
       }
       expect(readLocalSafetyStops(storage)).toEqual([])
     })

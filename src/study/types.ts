@@ -218,10 +218,41 @@ export interface StudySafetyRequest {
   readonly transientText: string
 }
 
+/**
+ * Why a Study turn could not be evaluated, when the reason was never the
+ * learner. A refused adult bearer, a refused Study session and a shed request
+ * all fail closed exactly like a safety stop, but none of them is one: the
+ * classifier never judged this child, so nothing about her may be recorded,
+ * locked, or shown to her parent as an incident.
+ *
+ * The whole value is this closed set of codes. There is deliberately no field
+ * for a message, a status, a session reference, a bearer, an identifier, or a
+ * server body, so nothing a caller reads here can leak, and nothing a caller
+ * writes has to be parsed out of a string.
+ */
+export type StudyRuntimeInterruption =
+  | {
+      readonly kind: 'session-authorization'
+      /**
+       * The two halves need different recovery: a refused bearer needs the
+       * adult to sign in again, a refused session needs the learner's Study
+       * session cleared and re-issued.
+       */
+      readonly reason: 'adult-authentication-rejected' | 'study-session-rejected'
+    }
+  | { readonly kind: 'rate-limit' }
+
 export interface StudySafetyResult {
   readonly outcome: 'clear' | 'urgent' | 'uncertain' | 'invalid'
   readonly mayContinue: boolean
   readonly adultHelpState: 'not-needed' | 'proposed-not-delivered' | 'not-confirmed'
+  /**
+   * Set only by the trusted mounted client/port boundary, and only on a
+   * fail-closed `invalid` result. A server response can never carry one: the
+   * safety client validates the wire body against an exact four-key shape and
+   * reduces anything else to a plain classifier failure.
+   */
+  readonly interruption?: StudyRuntimeInterruption
 }
 
 export interface StudyAccommodation {

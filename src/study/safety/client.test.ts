@@ -398,4 +398,47 @@ describe('session authorization failure versus classifier failure', () => {
     expect(result.sessionAuthorizationFailure).toBeUndefined()
     expect(result.response.classification).toBe('clear')
   })
+
+  // STUDY-A1-AUTH-C — the seam is host code and may throw: a transport mid-
+  // rotation, a revoked grant accessor, a composition bug. A throw is still an
+  // unusable Study session, so it must land in the taxonomy rather than escape
+  // it. Escaping loses the category, the callback and the host's chance to
+  // reissue, and drops the failure into a broader runtime quarantine instead.
+  it('treats a throwing Study-session seam as a refused session, not as an escaping error', async () => {
+    const unreached = vi.fn(async () => ({ ok: true, json: async () => clearResponse }))
+    const result = await classifyStudySafetyWithCaptureStatus(request, {
+      ...deps(unreached),
+      sessionAuthorization: {
+        authorizeStudyRequestHeaders: () => { throw new Error('seam-secret-sentinel') },
+      },
+    })
+    expect(result.failureCategory).toBe('session-authorization')
+    expect(result.sessionAuthorizationFailure).toBe('study-session-rejected')
+    // Not a classifier outage: no ledger vocabulary, so nothing durable is written.
+    expect(result.failureMode).toBeUndefined()
+    expect(result.serverCaptureStatus).toBe('server-not-contacted')
+    expect(result.response.classification).toBe('invalid')
+    expect(result.response.continueToTutorCore).toBe(false)
+    expect(result.response.learner.mayContinue).toBe(false)
+    expect(unreached).not.toHaveBeenCalled()
+    expect(JSON.stringify(result)).not.toContain('seam-secret-sentinel')
+  })
+
+  it('does not let a thrown seam value of any shape reach the result', async () => {
+    for (const thrown of [
+      new Error('seam-secret-sentinel'),
+      'seam-secret-sentinel',
+      { detail: 'seam-secret-sentinel' },
+      null,
+    ]) {
+      const result = await classifyStudySafetyWithCaptureStatus(request, {
+        ...deps(vi.fn(async () => ({ ok: true, json: async () => clearResponse }))),
+        sessionAuthorization: {
+          authorizeStudyRequestHeaders: () => { throw thrown },
+        },
+      })
+      expect(result.sessionAuthorizationFailure).toBe('study-session-rejected')
+      expect(JSON.stringify(result)).not.toContain('seam-secret-sentinel')
+    }
+  })
 })

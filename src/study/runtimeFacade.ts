@@ -14,6 +14,7 @@ import { recordLocalPreAcceptanceSafetyStop } from './safety/localStopLedger'
 import type {
   HostStudyLaunchContext,
   StudyCalendarEntry,
+  StudyRuntimeInterruption,
   StudySafetyResult,
   StudyScope,
 } from './types'
@@ -52,6 +53,20 @@ export type StudyTutorTurnResult =
       readonly classification: 'urgent' | 'uncertain' | 'invalid'
       readonly deliveryStatus: 'proposed-not-delivered' | 'not-confirmed'
       readonly studentMessage: string
+    }
+  /**
+   * The turn could not be evaluated, and the reason was not the learner. This
+   * deliberately carries no classification, reason code, delivery status,
+   * student message, identifier or server detail: there is nothing to record
+   * about this child, so there is nothing here for a caller to record.
+   * `coreSubmitInvocations` is kept only so a caller can see whether Tutor Core
+   * ran before the refusal — 0 whenever the learner's own input was refused,
+   * which is every case except a session refused between the two safety checks.
+   */
+  | {
+      readonly status: 'interrupted'
+      readonly interruption: StudyRuntimeInterruption
+      readonly coreSubmitInvocations: 0 | 1
     }
   | { readonly status: 'quarantined'; readonly reasonCode: string }
 
@@ -108,11 +123,41 @@ function invalidSafetyResult(): StudySafetyResult {
   }
 }
 
+const SESSION_AUTHORIZATION_REASONS = new Set(['adult-authentication-rejected', 'study-session-rejected'])
+
+/**
+ * Exact, and closed on both sides: an unrecognised kind, an unrecognised
+ * reason, a missing reason, and any extra field are all rejected. A rejected
+ * interruption is not an error — it simply is not honoured, which leaves the
+ * result on the true safety-stop path. That is the safer direction: the worst
+ * outcome of over-rejecting is a stop a parent has to clear, while the worst
+ * outcome of under-rejecting is a real safety stop silently downgraded.
+ */
+function validInterruption(value: unknown): value is StudyRuntimeInterruption {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+  const candidate = value as Record<string, unknown>
+  const keys = Object.keys(candidate)
+  if (candidate.kind === 'rate-limit') return keys.length === 1
+  return candidate.kind === 'session-authorization' &&
+    keys.length === 2 &&
+    Object.hasOwn(candidate, 'reason') &&
+    SESSION_AUTHORIZATION_REASONS.has(String(candidate.reason))
+}
+
 function validSafetyResult(value: unknown): value is StudySafetyResult {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
   const result = value as Record<string, unknown>
+  // An interruption may accompany a fail-closed `invalid` result and nothing
+  // else, so a port cannot use one to soften a real flag or to buy a learner
+  // past the safety gate.
+  if (Object.hasOwn(result, 'interruption')) {
+    if (
+      Object.keys(result).length !== 4 ||
+      result.outcome !== 'invalid' ||
+      !validInterruption(result.interruption)
+    ) return false
+  } else if (Object.keys(result).length !== 3) return false
   if (
-    Object.keys(result).length !== 3 ||
     !['outcome', 'mayContinue', 'adultHelpState'].every((key) => Object.hasOwn(result, key)) ||
     !['urgent', 'uncertain', 'clear', 'invalid'].includes(String(result.outcome)) ||
     typeof result.mayContinue !== 'boolean'
@@ -189,6 +234,13 @@ export class AcceptedRc1HostRuntime {
       }
     }
     if (inputSafety.outcome !== 'clear' || inputSafety.mayContinue !== true) {
+      // A refused session or a shed request is not a stop. It is returned
+      // before any safety bookkeeping, so nothing durable is written and the
+      // caller has no stop-shaped result it could write one from. Tutor Core
+      // has not been reached at this point.
+      if (inputSafety.interruption) {
+        return { status: 'interrupted', interruption: inputSafety.interruption, coreSubmitInvocations: 0 }
+      }
       const classification = inputSafety.outcome === 'clear' ? 'invalid' : inputSafety.outcome
       if (safetyPort.mode !== 'production') {
         await recordLocalPreAcceptanceSafetyStop({
@@ -232,6 +284,7 @@ export class AcceptedRc1HostRuntime {
         return { status }
       },
     }
+    let outputInterruption: StudyRuntimeInterruption | undefined
     let result: SafeTutorBridgeResult
     try {
       result = await submitStudentTurn(
@@ -262,6 +315,10 @@ export class AcceptedRc1HostRuntime {
                 transientText: request.transientTutorText,
               })
               const decision = validSafetyResult(candidate) ? candidate : invalidSafetyResult()
+              // The bridge's decision shape carries no interruption, so it is
+              // kept here instead. Reassigned on every call, so a later clear
+              // answer cannot inherit an earlier refusal.
+              outputInterruption = decision.interruption
               return {
                 classification: decision.outcome,
                 mayContinue: decision.mayContinue,
@@ -278,6 +335,14 @@ export class AcceptedRc1HostRuntime {
       return { status: 'quarantined', reasonCode: 'stale-host-binding' }
     }
     if (result.status === 'output-blocked') {
+      // The session can be refused between the learner-input check and the
+      // Tutor-output one. Tutor Core has run by then and its text is discarded
+      // either way, but the refusal is still a lifecycle event: dressing it up
+      // as a safety stop would tell this child's parent she wrote something
+      // unsafe when the classifier never judged her at all.
+      if (outputInterruption) {
+        return { status: 'interrupted', interruption: outputInterruption, coreSubmitInvocations: 1 }
+      }
       return stoppedResult(
         result.classification,
         `mounted-tutor-output-safety-${result.classification}`,
