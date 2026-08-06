@@ -96,6 +96,10 @@ function text(value: unknown, max = MAX_SYNC_STRING_LENGTH): value is string {
   return typeof value === 'string' && value.length <= max
 }
 
+function memberOf(set: Set<string>, value: unknown): value is string {
+  return typeof value === 'string' && set.has(value)
+}
+
 function identifier(value: unknown): value is string {
   return text(value, 512) && value.length > 0
 }
@@ -422,7 +426,7 @@ function validateTutorChats(value: unknown): boolean {
       plainRecord(chat) &&
       identifier(chat.id) &&
       identifier(chat.skillId) &&
-      GRADES.has(String(chat.grade)) &&
+      memberOf(GRADES, chat.grade) &&
       isoDate(chat.day) &&
       finiteNumber(chat.startedTs) &&
       text(chat.problem) &&
@@ -708,9 +712,9 @@ export function validateProfileForSync(
     value.id === key &&
     key.length > 0 &&
     text(value.name) &&
-    GRADES.has(String(value.grade)) &&
+    memberOf(GRADES, value.grade) &&
     text(value.pin, 64) &&
-    THEMES.has(String(value.theme)) &&
+    memberOf(THEMES, value.theme) &&
     validateSkillRecord(value.skills) &&
     validateMissionRecord(value.missions) &&
     plainRecord(value.streaks) &&
