@@ -327,6 +327,14 @@ describe('Grade 7 Units 1-6, 9 and 10: every item type owns its worked example',
  * any worked example was rewritten. Each digest covers 180 generated items (60 per
  * difficulty) of one item type, hashing prompt, correct answer and the sorted
  * choice set, so a change to any prompt, correct answer or distractor breaks it.
+ *
+ * `u4:two-step-equation` and `u4:check-and-interpret-solution` were re-baselined
+ * when the Unit 4 distractor defects were repaired: both shipped distractors built
+ * from a raw JavaScript quotient (`-4.333333333333333`), and `two-step-equation`
+ * additionally collapsed its choice pool and threw on some difficulty-2 draws.
+ * Only their distractors moved. Their prompts and correct answers are unchanged,
+ * which `grade7MathUnit4Adversarial.test.ts` proves over 90,000 draws, and the
+ * other 46 digests here are untouched.
  */
 const BASELINE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u1:unit-rate-fraction', '87483669116129bc803bd38fdf74d028d6beb4017bf1be7ab1fe2d2e8c94494f'],
@@ -348,11 +356,11 @@ const BASELINE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u3:interpret-expression', '4913a79dfdd4fa63dee80e292eb2f8b9a4c50bdc96df645a18ed9ac1f5c60bd7'],
   ['u3:context-expression', 'd43748eaa50dafb11438b0d59c122cf7150d58cc3d405868f8fb700d845f7ab6'],
   ['u4:multi-step-numerical-problem', '927ca74d7943c62a1e8625f2a7137a81d1152ea4831ca7d8f359f2a453ce31bf'],
-  ['u4:two-step-equation', '3a54e4891278ccc2684c80e30a33a60a49e5500b543aab35dbc654ea5168a4f0'],
+  ['u4:two-step-equation', '0f2b93f7a016aae7699cf32efa4f0a9cc6c44d20babb3151260c5969925ac2c4'],
   ['u4:two-step-inequality', '2bbcae05a66c8a076394b71c15e9fb0bec231529fb671225b11843dc5d9baaaa'],
   ['u4:solution-set', '15c7509327e9ec3d0b02ee3eee50e4ca24b16bb136c2f56a655e35b0c937270d'],
   ['u4:graph-inequality', 'e08283c1bb3fcb301ad36d6c97494faf5396e3e4d80744d844b57413490751de'],
-  ['u4:check-and-interpret-solution', 'b08c0e32748de5fc1e674647e2eff8a78ee22b3eccac73d79b9eac2344e055fa'],
+  ['u4:check-and-interpret-solution', '827d4ef6598f999f3ee308272269b26928790c268e47f734f41a67152e04ebdd'],
   ['u5:percent-increase-decrease', 'ec8e32291ea12fe62c2bc76c9f89a3832fa7cf6e210318c544cb4bdb78c18a96'],
   ['u5:discount-markup', '2ba2eb841df9995e8dcc8415cb2f4c8431b7390fb5d83d55373ce0c9ba7e1639'],
   ['u5:tax-tip', '7e9770a0d3355725ecefb214ecebf8efcf884fe106cc8c9f2c09e24c39fcf8ec'],
