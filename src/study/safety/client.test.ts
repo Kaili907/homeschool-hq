@@ -1,4 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
+import { createStudySessionTransport } from '../client/studySessionTransport'
+import type { StudySessionGrant } from '../contracts/identity/session'
 import type { StudySafetyClassificationRequestV1 } from '../contracts/safety'
 import { classifyStudySafety, STUDY_SAFETY_ENDPOINT } from './client'
 import { learnerSafeResult } from './learnerSafe'
@@ -9,6 +11,32 @@ const request: StudySafetyClassificationRequestV1 = {
   studentRef: { kind: 'academy-student-id', value: '44444444-4444-4444-8444-444444444444' },
   sessionId: '55555555-5555-4555-8555-555555555555',
   transientText: 'synthetic learner text',
+}
+
+const SESSION_REFERENCE = 'aca_stu_v1_synthetic-study-session-reference-aaaaaaaaa'
+const ROTATED_REFERENCE = 'aca_stu_v1_rotated-study-session-reference-bbbbbbbbbbb'
+
+function grant(sessionReference: string): StudySessionGrant {
+  return {
+    schemaVersion: 1,
+    status: 'issued',
+    sessionReference,
+    expiresAt: '2026-08-06T12:00:00.000Z',
+  } as StudySessionGrant
+}
+
+/** A transport holding a verified reference, as the issue path would leave it. */
+function installedTransport(sessionReference: string = SESSION_REFERENCE) {
+  const transport = createStudySessionTransport()
+  transport.install(grant(sessionReference))
+  return transport
+}
+
+const clearResponse = {
+  schemaVersion: 1,
+  classification: 'clear',
+  learner: learnerSafeResult('clear'),
+  continueToTutorCore: true,
 }
 
 describe('narrow Study safety browser adapter', () => {
@@ -25,6 +53,7 @@ describe('narrow Study safety browser adapter', () => {
     const result = await classifyStudySafety(request, {
       getAccessToken: async () => 'test.access.token',
       fetchImpl,
+      sessionAuthorization: installedTransport(),
     })
     expect(result.classification).toBe('clear')
     expect(fetchImpl).toHaveBeenCalledTimes(1)
@@ -33,19 +62,21 @@ describe('narrow Study safety browser adapter', () => {
     expect(init.credentials).toBe('omit')
     expect(init.referrerPolicy).toBe('no-referrer')
     expect(init.cache).toBe('no-store')
-    expect(init.headers).toEqual({ Authorization: 'Bearer test.access.token', 'content-type': 'application/json' })
+    expect(init.headers).toEqual({ Authorization: 'Bearer test.access.token', 'content-type': 'application/json', 'x-study-session': SESSION_REFERENCE })
     expect(init.body).toBe(JSON.stringify(request))
     expect(init.body).not.toContain('provider')
+    expect(init.body).not.toContain('aca_stu_v1_')
   })
 
   it('fails closed for missing auth, network failure, timeout, and malformed responses', async () => {
-    const missing = await classifyStudySafety(request, { getAccessToken: async () => null })
+    const missing = await classifyStudySafety(request, { getAccessToken: async () => null, sessionAuthorization: installedTransport() })
     expect(missing).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
 
     const networkFetch = vi.fn(async () => { throw new Error('network and provider internals') })
     const network = await classifyStudySafety(request, {
       getAccessToken: async () => 'test.access.token',
       fetchImpl: networkFetch,
+      sessionAuthorization: installedTransport(),
     })
     expect(network).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
     expect(JSON.stringify(network)).not.toContain('provider internals')
@@ -54,6 +85,7 @@ describe('narrow Study safety browser adapter', () => {
     const malformed = await classifyStudySafety(request, {
       getAccessToken: async () => 'test.access.token',
       fetchImpl: async () => ({ ok: true, json: async () => ({ classification: 'clear', recipient: 'hidden' }) }),
+      sessionAuthorization: installedTransport(),
     })
     expect(malformed).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
   })
@@ -77,6 +109,7 @@ describe('narrow Study safety browser adapter', () => {
             ...extra,
           }),
         }),
+        sessionAuthorization: installedTransport(),
       })
       expect(result.classification).toBe('invalid')
     }
@@ -92,8 +125,35 @@ describe('narrow Study safety browser adapter', () => {
           continueToTutorCore: false,
         }),
       }),
+      sessionAuthorization: installedTransport(),
     })
     expect(arbitraryMessage.classification).toBe('invalid')
+  })
+
+  // RED PROOF (STUDY-A1): the server-side safety authorizer reads the learner's
+  // opaque Study-session reference from `x-study-session`, and refuses the
+  // request without it. The seam here is an inline literal on purpose: this test
+  // must fail on the baseline for the behavioral defect, not for a missing module.
+  it('sends the learner Study-session reference in x-study-session on the safety request', async () => {
+    const sessionReference = 'aca_stu_v1_synthetic-study-session-reference-aaaaaaaaa'
+    const fetchImpl = vi.fn(async (_url: string, _init: RequestInit) => ({
+      ok: true,
+      json: async () => ({
+        schemaVersion: 1,
+        classification: 'clear',
+        learner: learnerSafeResult('clear'),
+        continueToTutorCore: true,
+      }),
+    }))
+    await classifyStudySafety(request, {
+      getAccessToken: async () => 'test.access.token',
+      fetchImpl,
+      sessionAuthorization: {
+        authorizeStudyRequestHeaders: (headers) => ({ ...headers, 'x-study-session': sessionReference }),
+      },
+    })
+    const [, init] = fetchImpl.mock.calls[0]!
+    expect((init.headers as Record<string, string>)['x-study-session']).toBe(sessionReference)
   })
 
   it('honors host lifecycle cancellation before and during the request', async () => {
@@ -104,6 +164,7 @@ describe('narrow Study safety browser adapter', () => {
       signal: alreadyCancelled.signal,
       getAccessToken: async () => 'test.access.token',
       fetchImpl: neverCalled,
+      sessionAuthorization: installedTransport(),
     })
     expect(first).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
     expect(neverCalled).not.toHaveBeenCalled()
@@ -119,10 +180,95 @@ describe('narrow Study safety browser adapter', () => {
       signal: active.signal,
       getAccessToken: async () => 'test.access.token',
       fetchImpl,
+      sessionAuthorization: installedTransport(),
     })
     await started
     active.abort('logout')
     expect(await pending).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
     expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('fails closed before any network activity when the reference is missing, malformed, or cleared', async () => {
+    const neverCalled = vi.fn()
+
+    const noSeam = await classifyStudySafety(request, {
+      getAccessToken: async () => 'test.access.token',
+      fetchImpl: neverCalled,
+    })
+    expect(noSeam).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
+
+    const emptyTransport = createStudySessionTransport()
+    const notInstalled = await classifyStudySafety(request, {
+      getAccessToken: async () => 'test.access.token',
+      fetchImpl: neverCalled,
+      sessionAuthorization: emptyTransport,
+    })
+    expect(notInstalled).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
+
+    // A malformed reference is refused at install, so the transport that reaches
+    // the safety client is empty and the request never leaves the browser.
+    const malformedTransport = createStudySessionTransport()
+    expect(() => malformedTransport.install(grant('not-a-study-session'))).toThrow()
+    const malformed = await classifyStudySafety(request, {
+      getAccessToken: async () => 'test.access.token',
+      fetchImpl: neverCalled,
+      sessionAuthorization: malformedTransport,
+    })
+    expect(malformed).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
+
+    const cleared = installedTransport()
+    cleared.clear()
+    const afterClear = await classifyStudySafety(request, {
+      getAccessToken: async () => 'test.access.token',
+      fetchImpl: neverCalled,
+      sessionAuthorization: cleared,
+    })
+    expect(afterClear).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
+
+    expect(neverCalled).not.toHaveBeenCalled()
+    expect(JSON.stringify([noSeam, notInstalled, malformed, afterClear])).not.toContain('aca_stu_v1_')
+  })
+
+  it('stops reusing a cleared reference and sends the rotated one after rotation', async () => {
+    const fetchImpl = vi.fn(async (_url: string, _init: RequestInit) => ({ ok: true, json: async () => clearResponse }))
+    const transport = installedTransport()
+    const deps = { getAccessToken: async () => 'test.access.token', fetchImpl, sessionAuthorization: transport }
+
+    await classifyStudySafety(request, deps)
+    transport.clear()
+    const afterClear = await classifyStudySafety(request, deps)
+    expect(afterClear).toMatchObject({ classification: 'invalid', continueToTutorCore: false })
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+
+    transport.install(grant(ROTATED_REFERENCE))
+    await classifyStudySafety(request, deps)
+    expect(fetchImpl).toHaveBeenCalledTimes(2)
+    const headers = fetchImpl.mock.calls.map(([, init]) => (init.headers as Record<string, string>)['x-study-session'])
+    expect(headers).toEqual([SESSION_REFERENCE, ROTATED_REFERENCE])
+  })
+
+  it('keeps the reference intact and unexposed across duplicate concurrent safety calls', async () => {
+    const seen: Array<Record<string, string>> = []
+    let release!: () => void
+    const gate = new Promise<void>((resolve) => { release = resolve })
+    const fetchImpl = vi.fn(async (_url: string, init: RequestInit) => {
+      const headers = init.headers as Record<string, string>
+      seen.push(headers)
+      // Mutating the headers handed to fetch must not reach the transport.
+      headers['x-study-session'] = 'tampered'
+      await gate
+      return { ok: true, json: async () => clearResponse }
+    })
+    const transport = installedTransport()
+    const deps = { getAccessToken: async () => 'test.access.token', fetchImpl, sessionAuthorization: transport }
+
+    const both = Promise.all([classifyStudySafety(request, deps), classifyStudySafety(request, deps)])
+    await vi.waitFor(() => expect(seen).toHaveLength(2))
+    release()
+    for (const result of await both) expect(result.classification).toBe('clear')
+
+    expect(seen[0]).not.toBe(seen[1])
+    expect(transport.hasSession()).toBe(true)
+    expect(transport.authorizeStudyRequestHeaders({})).toEqual({ 'x-study-session': SESSION_REFERENCE })
   })
 })

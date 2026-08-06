@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
+import type { StudySessionAuthorization } from '../client/studySessionTransport'
 import {
   STUDY_SAFETY_SCHEMA_VERSION,
   type StudySafetyClassificationRequestV1,
@@ -21,6 +22,12 @@ export interface StudySafetyClientDeps {
   readonly timeoutMs?: number
   /** Host lifecycle cancellation (logout, learner switch, navigation, etc.). */
   readonly signal?: AbortSignal
+  /**
+   * Supplies the learner's opaque Study-session reference for `x-study-session`.
+   * The gateway's authorizer refuses classification without it, so an absent or
+   * empty seam fails closed here, before any network activity.
+   */
+  readonly sessionAuthorization?: StudySessionAuthorization
 }
 
 const VALID_CLASSIFICATIONS = new Set(['urgent', 'uncertain', 'clear', 'invalid'])
@@ -93,6 +100,14 @@ export async function classifyStudySafetyWithCaptureStatus(
     return { response: failClosed('client-auth-unavailable'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted' }
   }
   if (!accessToken) return { response: failClosed('client-unauthenticated'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted' }
+  // Read once, only to build this request's headers. A missing seam, a cleared
+  // transport, and a reference the identity contract refuses all land here, so
+  // no unauthorized classification ever reaches the network.
+  const headers = deps.sessionAuthorization?.authorizeStudyRequestHeaders({
+    Authorization: `Bearer ${accessToken}`,
+    'content-type': 'application/json',
+  })
+  if (!headers) return { response: failClosed('client-study-session-unavailable'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted' }
   if (deps.signal?.aborted) return { response: failClosed('client-cancelled'), failureMode: 'network-failure-mid-request', serverCaptureStatus: 'server-not-contacted' }
 
   const controller = new AbortController()
@@ -105,10 +120,7 @@ export async function classifyStudySafetyWithCaptureStatus(
   try {
     const response = await fetchImpl(STUDY_SAFETY_ENDPOINT, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'content-type': 'application/json',
-      },
+      headers,
       body: JSON.stringify(request),
       signal: controller.signal,
       cache: 'no-store',

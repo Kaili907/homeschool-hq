@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { createTestStudySafetyHandler } from '../netlify/functions/study-safety-classify.js'
+import { createStudySessionTransport } from '../src/study/client/studySessionTransport'
 import { createMountedStudySafetyPort } from '../src/study/safety/mountedPort'
 
 const IDS = Object.freeze({
@@ -100,8 +101,18 @@ describe('mounted safety durable capture', () => {
     }
 
     let activeHandler = createTestStudySafetyHandler(common)
+    // The browser carries the learner Study session in its own header; the
+    // gateway's authorizer refuses classification without it.
+    const sessionTransport = createStudySessionTransport()
+    sessionTransport.install({
+      schemaVersion: 1,
+      status: 'issued',
+      sessionReference: 'aca_stu_v1_synthetic-study-session-reference-aaaaaaaaa',
+      expiresAt: '2026-08-06T12:00:00.000Z',
+    })
     const createBrowserPort = () => createMountedStudySafetyPort({
       getAccessToken: async () => 'test.access.token',
+      sessionAuthorization: sessionTransport,
       fetchImpl: async (_url, init) => {
         const response = await activeHandler({
           httpMethod: 'POST',

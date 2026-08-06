@@ -1,4 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
+import { createStudySessionTransport } from '../client/studySessionTransport'
+import type { StudySessionGrant } from '../contracts/identity/session'
 import { learnerSafeResult } from './learnerSafe'
 import { isSessionStoppedByLocalLedger, readLocalSafetyStops } from './localStopLedger'
 import {
@@ -10,6 +12,18 @@ const scope = {
   householdRef: 'household:mounted-test',
   learnerRef: 'learner:mounted-test',
   sessionRef: 'session:mounted-test',
+}
+
+/** The classifier gateway refuses a request without the learner Study session. */
+function installedTransport() {
+  const transport = createStudySessionTransport()
+  transport.install({
+    schemaVersion: 1,
+    status: 'issued',
+    sessionReference: 'aca_stu_v1_synthetic-study-session-reference-aaaaaaaaa',
+    expiresAt: '2026-08-06T12:00:00.000Z',
+  } as StudySessionGrant)
+  return transport
 }
 
 describe('mounted Study HTTP safety port', () => {
@@ -30,6 +44,7 @@ describe('mounted Study HTTP safety port', () => {
     const port = createMountedStudySafetyPort({
       getAccessToken: async () => 'test.access.token',
       fetchImpl,
+      sessionAuthorization: installedTransport(),
     })
     const base = {
       scope,
@@ -79,6 +94,7 @@ describe('mounted Study HTTP safety port', () => {
           continueToTutorCore: false,
         }),
       }),
+      sessionAuthorization: installedTransport(),
     })
     const request = {
       scope,
@@ -93,7 +109,7 @@ describe('mounted Study HTTP safety port', () => {
       adultHelpState: 'proposed-not-delivered',
     })
 
-    const unavailable = createMountedStudySafetyPort({ getAccessToken: async () => null })
+    const unavailable = createMountedStudySafetyPort({ getAccessToken: async () => null, sessionAuthorization: installedTransport() })
     await expect(unavailable.evaluate(request)).resolves.toEqual({
       outcome: 'invalid',
       mayContinue: false,
@@ -112,6 +128,7 @@ describe('mounted Study HTTP safety port', () => {
       const port = createMountedStudySafetyPort({
         getAccessToken: async () => 'test.access.token',
         fetchImpl: async () => ({ ok: false, status: 503, json: async () => ({}) }),
+        sessionAuthorization: installedTransport(),
       })
       await port.evaluate({
         scope,
