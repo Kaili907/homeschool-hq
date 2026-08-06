@@ -20,18 +20,17 @@ describe('expected subjects per grade', () => {
   it('derives subjects from applicable front matter for every supported grade', () => {
     const gradeSpecific = parsePlanDoc(`---\nsubject: Grade Five Studio\nsubjectId: grade-five-studio\ngrades: 5,7,8\n---\n## Week 1 - a\n- lesson a\n`)
 
-    expect(expectedSubjects([...DOCS, gradeSpecific], '5')).toEqual([
-      { id: 'mindset', label: "Competitor's Mind" },
-      { id: 'grade-five-studio', label: 'Grade Five Studio' },
-    ])
+    expect(expectedSubjects([...DOCS, gradeSpecific], '5')).toContainEqual({ id: 'grade-five-studio', label: 'Grade Five Studio' })
     expect(expectedSubjects([...DOCS, gradeSpecific], '7').map((s) => s.id)).toContain('grade-five-studio')
     expect(expectedSubjects([...DOCS, gradeSpecific], '8').map((s) => s.id)).toContain('grade-five-studio')
-    expect(expectedSubjects([...DOCS, gradeSpecific], '10').map((s) => s.id)).toEqual(['mindset', 'personal-finance'])
+    expect(expectedSubjects([...DOCS, gradeSpecific], '10').map((s) => s.id)).toContain('personal-finance')
   })
 
   it('uses the first applicable document for duplicate subject ids', () => {
     const duplicate = parsePlanDoc(`---\nsubject: Alternate Mindset\nsubjectId: mindset\ngrades: all\n---\n## Week 1 - a\n- lesson a\n`)
-    expect(expectedSubjects([...DOCS, duplicate], '5')).toEqual([{ id: 'mindset', label: "Competitor's Mind" }])
+    expect(expectedSubjects([...DOCS, duplicate], '5').filter((subject) => subject.id === 'mindset')).toEqual([
+      { id: 'mindset', label: "Competitor's Mind" },
+    ])
   })
 })
 
@@ -50,17 +49,34 @@ describe('shipped plan rendering', () => {
       })
     }
   })
+
+  it.each(['3', '4'] as const)('keeps core awaiting-scope cards and attaches real plans for grade %s', (grade) => {
+    const plans = Object.fromEntries(subjectPlansFor(kid(grade), loadPlans(), sy(), '2026-09-28').map((plan) => [plan.subject.id, plan]))
+
+    for (const id of ['math', 'reading', 'writing']) expect(plans[id]).toMatchObject({ missing: true, doc: null })
+    expect(plans['japanese-year-1']).toMatchObject({ subject: { label: 'Japanese — Year 1' }, missing: false })
+    expect(plans['mindset']).toMatchObject({ subject: { label: "Competitor's Mind" }, missing: false })
+    expect(plans['ai-literacy']).toMatchObject({ subject: { label: 'AI Literacy' }, missing: false })
+  })
+
+  it.each(['5', '7', '8'] as const)('shows core subjects awaiting scopes for grade %s while shared plans render', (grade) => {
+    const plans = Object.fromEntries(subjectPlansFor(kid(grade), loadPlans(), sy(), '2026-09-28').map((plan) => [plan.subject.id, plan]))
+
+    for (const id of ['math', 'reading', 'writing', 'japanese-year-1']) expect(plans[id]).toMatchObject({ missing: true, doc: null })
+    expect(plans['mindset']).toMatchObject({ missing: false })
+    expect(plans['ai-literacy']).toMatchObject({ missing: false })
+  })
 })
 
 describe('applicable plan subjects', () => {
   it('only applicable plan subjects appear, with their documents attached', () => {
-    // grade 6: mindset has a doc; personal-finance does not apply.
+    // Grade 6 keeps its core math placeholder while mindset has a real plan.
     expect(docForSubject(DOCS, 'mindset', '6')).not.toBeNull()
     expect(docForSubject(DOCS, 'personal-finance', '6')).toBeNull() // wrong grade → missing
 
     const plans = subjectPlansFor(kid('6'), DOCS, sy(), '2026-09-28') // scope week 5
     const byId = Object.fromEntries(plans.map((p) => [p.subject.id, p]))
-    expect(byId['math']).toBeUndefined()
+    expect(byId['math'].missing).toBe(true)
     expect(byId['mindset'].missing).toBe(false)
     expect(byId['mindset'].pointer).toBe(5) // calendar-derived
   })
@@ -83,7 +99,7 @@ describe('today derivation', () => {
     // week 5 has: budgets (untagged), ✋ paystub (untagged), (Mon) vocab intro → all show on Monday
     expect(pf.items.map((i) => i.text)).toEqual(['budgets', 'paystub', 'vocab intro'])
     expect(pf.items.find((i) => i.text === 'paystub')!.dadTaught).toBe(true)
-    expect(today.subjects.find((s) => s.subject.id === 'math')).toBeUndefined()
+    expect(today.subjects.find((s) => s.subject.id === 'math')).toMatchObject({ missing: true, items: [] })
   })
 
   it('a (Mon)-tagged item hides on other weekdays', () => {

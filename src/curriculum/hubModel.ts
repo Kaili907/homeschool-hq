@@ -6,11 +6,13 @@ import {
   type PlanItem,
 } from './parser'
 import { derivedScopeWeek, isTravelWeek, pointerDrift, resolvePointer, weekdayOf } from './pacing'
+import { HUB_SUBJECTS, subjectAppliesToGrade } from './subjectCatalog'
 
 /**
  * MP — the pure view model the four hub views render from. Combines the pacing engine,
- * the parsed plans and the subjects that apply to each girl's grade. Plan front matter
- * is the source of truth, so a new plan file becomes available without a code change.
+ * the parent-facing subject catalog, and parsed plans. A catalog subject without a
+ * matching plan remains visibly awaiting placement; a new plan-only subject is added
+ * from its front matter without a hub-model code change.
  */
 
 export interface ExpectedSubject {
@@ -18,14 +20,20 @@ export interface ExpectedSubject {
   label: string
 }
 
-/** What the hub tracks per grade, in deterministic loader order. */
+/** What the hub tracks per grade: catalog subjects first, then plan-only subjects. */
 export function expectedSubjects(docs: PlanDoc[], grade: Grade): ExpectedSubject[] {
-  const seen = new Set<string>()
-  return docs.flatMap((doc) => {
-    if (!planAppliesToGrade(doc, grade) || seen.has(doc.subjectId)) return []
-    seen.add(doc.subjectId)
-    return [{ id: doc.subjectId, label: doc.subject }]
-  })
+  const expected = HUB_SUBJECTS
+    .filter((subject) => subjectAppliesToGrade(subject, grade))
+    .map(({ id, label }) => ({ id, label }))
+  const seen = new Set(expected.map((subject) => subject.id))
+  return [
+    ...expected,
+    ...docs.flatMap((doc) => {
+      if (!planAppliesToGrade(doc, grade) || seen.has(doc.subjectId)) return []
+      seen.add(doc.subjectId)
+      return [{ id: doc.subjectId, label: doc.subject }]
+    }),
+  ]
 }
 
 /** The plan doc for a subject id that applies to this grade, or null (missing scope). */

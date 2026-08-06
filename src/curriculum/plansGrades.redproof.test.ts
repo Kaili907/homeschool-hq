@@ -18,6 +18,6 @@ describe('PLANS-GRADES', () => {
 
   it('renders a valid front-matter subject without a hard-coded array edit', () => {
     const doc = parsePlanDoc(PLAN)
-    expect(expectedSubjects([doc], '5')).toEqual([{ id: 'grade-five-studio', label: 'Grade Five Studio' }])
+    expect(expectedSubjects([doc], '5')).toContainEqual({ id: 'grade-five-studio', label: 'Grade Five Studio' })
   })
 })
