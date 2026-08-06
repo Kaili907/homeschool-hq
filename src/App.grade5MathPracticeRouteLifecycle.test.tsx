@@ -4,24 +4,15 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { APP_STATE_STORAGE_KEY } from './sync/provenance'
 import { defaultAppState } from './migration'
 import type { AppState } from './types'
-import type { AcademyRoute } from './academy/academyRoute'
 
-// CURR-1 academy route lifecycle. Harness adapted from
-// App.studyRouteLifecycle.test.tsx (MOUNT-2/A4-X patterns): the academy surface
-// itself is mocked so these tests exercise App's flag gating, deep-link boot
-// evaluation, URL normalization, and cross-profile isolation — not the academy
-// internals (covered by academy/*.test.ts and the browser walkthroughs).
+// MOUNT-G5-MATH route lifecycle. Harness adapted from
+// App.academyRouteLifecycle.test.tsx. The practice surface itself is NOT mocked:
+// the flag-off assertions have to be made against the rendered surface, so these
+// tests look for the real picker copy the child would see.
 
 const harness = vi.hoisted(() => ({
   picker: null as null | { onPick: (id: string) => void; onGrownUps: () => void },
   pin: null as null | { title: string; onComplete: (pin: string) => string | null; onCancel: () => void },
-  academy: null as null | {
-    profileId: string
-    entries: { subject: string; level: string }[]
-    route: AcademyRoute
-    onNavigate: (route: AcademyRoute) => void
-    onExit: () => void
-  },
 }))
 
 vi.mock('./sync/useSync', () => ({
@@ -45,24 +36,6 @@ vi.mock('./components/PinPad', () => ({
 }))
 vi.mock('./components/hub/ParentHub', () => ({
   ParentHub: () => <main data-surface="parent-hub">Parent Hub</main>,
-}))
-vi.mock('./components/academy/AcademyRouter', () => ({
-  AcademyRouter: (props: {
-    profile: { id: string }
-    entries: { subject: string; level: string }[]
-    route: AcademyRoute
-    onNavigate: (route: AcademyRoute) => void
-    onExit: () => void
-  }) => {
-    harness.academy = {
-      profileId: props.profile.id,
-      entries: props.entries,
-      route: props.route,
-      onNavigate: props.onNavigate,
-      onExit: props.onExit,
-    }
-    return <main data-surface="academy">Manuel Academy surface ({props.route.kind})</main>
-  },
 }))
 vi.mock('./tutor/voice', async (importOriginal) => ({
   ...(await importOriginal<typeof import('./tutor/voice')>()),
@@ -123,8 +96,8 @@ class FakeDocument extends EventTarget {
   createTextNode(value: string) { const e = this.createElement('#text'); e.nodeType = 3; e.nodeName = '#text'; e.textContent = value; return e }
 }
 
-/** p2 is the family's 4th grader seed; CURR-1's real use case is Dad advancing
- * her grade to '5', which is what this seeding simulates. p1 stays grade 3. */
+/** p2 is the family's 4th grader seed; Dad advancing her to grade '5' is the
+ * real use case this card serves. p1 stays grade 3. */
 function seeded(active: string | null): AppState {
   const state = defaultAppState()
   state.profiles.p1 = { ...state.profiles.p1, name: 'Sam', pin: '1234' }
@@ -133,21 +106,21 @@ function seeded(active: string | null): AppState {
   return state
 }
 
-/** Reads the harness through a call so a mid-test `harness.academy = null`
- * assignment cannot narrow later reads to `never`. */
-function currentAcademy(): typeof harness.academy {
-  return harness.academy
-}
-
 function renderedText(node: FakeElement): string {
   return `${node.textContent} ${node.childNodes.map(renderedText).join(' ')}`
 }
 
+const squash = (value: string) => value.replaceAll(/\s+/g, '')
+
 function hasText(node: FakeElement, needle: string): boolean {
-  return renderedText(node).replaceAll(/\s+/g, '').includes(needle.replaceAll(/\s+/g, ''))
+  return squash(renderedText(node)).includes(squash(needle))
 }
 
-describe('App academy route lifecycle (CURR-1)', () => {
+/** The exact copy a fifth grader sees on the practice surface. */
+const SURFACE_MARKER = 'Pick the unit you want to practice.'
+const HOME_CARD_MARKER = 'Practice a unit — 10 questions, with a worked example when you miss one'
+
+describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
   let root: Root | null
   let container: FakeElement
   let documentTarget: FakeDocument
@@ -156,10 +129,9 @@ describe('App academy route lifecycle (CURR-1)', () => {
   beforeEach(() => {
     harness.picker = null
     harness.pin = null
-    harness.academy = null
     root = null
-    pathname = '/academy'
-    vi.stubEnv('VITE_ACADEMY_GRADE_5_ENABLED', 'true')
+    pathname = '/practice/grade-5-math'
+    vi.stubEnv('VITE_GRADE5_MATH_PRACTICE_ENABLED', 'true')
     vi.stubGlobal('localStorage', new MemStorage())
     documentTarget = new FakeDocument()
     const windowTarget = Object.assign(new EventTarget(), {
@@ -203,6 +175,26 @@ describe('App academy route lifecycle (CURR-1)', () => {
     })
   }
 
+  /** The surface is a lazy chunk; give Suspense a few ticks to resolve it. */
+  async function waitFor(check: () => boolean, timeoutMs = 5_000) {
+    const deadline = Date.now() + timeoutMs
+    while (Date.now() < deadline) {
+      if (check()) return
+      await settle()
+    }
+    throw new Error(
+      `Condition not reached — rendered: "${renderedText(container).replaceAll(/\s+/g, ' ').slice(0, 200)}"`,
+    )
+  }
+
+  const waitForSurface = () => waitFor(() => hasText(container, SURFACE_MARKER))
+
+  /** Settles well past any lazy-chunk resolution, then proves the surface never appeared. */
+  async function expectSurfaceUnreachable() {
+    for (let tick = 0; tick < 5; tick++) await settle()
+    expect(hasText(container, SURFACE_MARKER)).toBe(false)
+  }
+
   function findButton(label: string, node: FakeElement = container): FakeElement | null {
     if (node.tagName === 'BUTTON' && hasText(node, label)) return node
     for (const child of node.childNodes) {
@@ -222,101 +214,133 @@ describe('App academy route lifecycle (CURR-1)', () => {
     await settle()
   }
 
-  it('boots onto the academy surface for a deep link with a persisted grade-5 profile', async () => {
-    pathname = '/academy/course/ma-g5-mathematics/unit/2/lesson/ma-g5-mathematics-u02-l03'
+  async function signIn(profileId: string, pin: string) {
+    await act(async () => harness.picker?.onPick(profileId))
+    await act(async () => { harness.pin?.onComplete(pin) })
+    await settle()
+  }
+
+  // ---------- flag ON ----------
+
+  it('boots onto the practice surface for a deep link with a persisted grade-5 profile', async () => {
     await mountApp(seeded('p2'))
+    await waitForSurface()
     expect(harness.picker).toBeNull()
-    expect(harness.academy).not.toBeNull()
-    expect(harness.academy!.profileId).toBe('p2')
-    // ACADEMY-LEVEL-DECOUPLE: with no working level assigned, every subject
-    // rides her nominal grade — the pre-decouple behaviour, expressed per subject.
-    expect(harness.academy!.entries.length).toBe(10)
-    expect(harness.academy!.entries.every((e) => e.level === '5')).toBe(true)
-    expect(harness.academy!.route).toEqual({
-      kind: 'lesson',
-      courseId: 'ma-g5-mathematics',
-      unitNumber: 2,
-      lessonId: 'ma-g5-mathematics-u02-l03',
-    })
-    // deep-link pathname is left untouched on entry (A4-X: exit normalizes, entry never writes)
-    expect(pathname).toBe('/academy/course/ma-g5-mathematics/unit/2/lesson/ma-g5-mathematics-u02-l03')
+    expect(hasText(container, 'Unit 10')).toBe(true)
+    // entry never writes the URL (A4-X: exit normalizes, entry leaves it alone)
+    expect(pathname).toBe('/practice/grade-5-math')
   })
 
-  it('re-enters the academy after a refresh-equivalent remount mid-lesson', async () => {
-    pathname = '/academy/schedule'
+  it('re-enters the surface after a refresh-equivalent remount', async () => {
     await mountApp(seeded('p2'))
-    expect(harness.academy?.route).toEqual({ kind: 'schedule' })
+    await waitForSurface()
     await act(async () => root?.unmount())
     root = null
-    harness.academy = null
     container = documentTarget.createElement('div')
     const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
     await mountApp(persisted)
-    expect(currentAcademy()?.route).toEqual({ kind: 'schedule' })
-    expect(harness.picker).toBeNull()
+    await waitForSurface()
   })
 
-  it('in-surface navigation keeps the URL in sync for deep-link refreshes', async () => {
-    pathname = '/academy'
-    await mountApp(seeded('p2'))
-    expect(harness.academy?.route).toEqual({ kind: 'home' })
-    await act(async () => {
-      harness.academy!.onNavigate({ kind: 'course', courseId: 'ma-g5-science' })
-    })
-    await settle()
-    expect(pathname).toBe('/academy/course/ma-g5-science')
-    expect(harness.academy?.route).toEqual({ kind: 'course', courseId: 'ma-g5-science' })
+  it('opens from her home card and answers one question with feedback', async () => {
+    pathname = '/'
+    await mountApp(seeded(null))
+    await signIn('p2', '2222')
+    expect(hasText(container, 'Hi, Riley!')).toBe(true)
+    expect(hasText(container, HOME_CARD_MARKER)).toBe(true)
+
+    await press(findButton('Grade 5 Math'))
+    await waitForSurface()
+
+    await press(findButton('Unit 6'))
+    expect(hasText(container, 'Unit 6 — Multiplying Fractions and Scaling')).toBe(true)
+    expect(hasText(container, '1/10')).toBe(true)
+
+    // answer the first choice; either verdict is real feedback for her
+    const answerButtons: FakeElement[] = []
+    const collect = (node: FakeElement) => {
+      if (node.tagName === 'BUTTON' && !hasText(node, '✕')) answerButtons.push(node)
+      node.childNodes.forEach(collect)
+    }
+    collect(container)
+    await press(answerButtons[0])
+    const gotVerdict =
+      hasText(container, 'Nice — that is right! ✓') || hasText(container, 'Not quite. The answer is')
+    expect(gotVerdict).toBe(true)
   })
 
-  it('keeps the picker when the grade flag is disabled', async () => {
-    vi.stubEnv('VITE_ACADEMY_GRADE_5_ENABLED', '')
-    pathname = '/academy'
+  it('exit normalizes the URL so a later refresh does not re-enter', async () => {
     await mountApp(seeded('p2'))
-    expect(harness.academy).toBeNull()
+    await waitForSurface()
+    await press(findButton('Back home'))
+    expect(hasText(container, 'Hi, Riley!')).toBe(true)
+    expect(pathname).toBe('/')
+  })
+
+  it('sign-out normalizes a lingering practice pathname', async () => {
+    await mountApp(seeded('p2'))
+    await waitForSurface()
+    await press(findButton('Back home'))
+    expect(hasText(container, 'Hi, Riley!')).toBe(true)
+    pathname = '/practice/grade-5-math'
+    await press(findButton('Sign out'))
     expect(harness.picker).not.toBeNull()
+    expect(pathname).toBe('/')
   })
 
-  it('a truthy-typo flag value never enables the academy', async () => {
-    vi.stubEnv('VITE_ACADEMY_GRADE_5_ENABLED', 'TRUE')
-    pathname = '/academy'
-    await mountApp(seeded('p2'))
-    expect(harness.academy).toBeNull()
-    expect(harness.picker).not.toBeNull()
-  })
-
-  it('keeps the picker for a non-academy grade behind an /academy deep link (isolation)', async () => {
-    pathname = '/academy'
+  it('never offers the surface to a non-grade-5 profile, flag on', async () => {
     await mountApp(seeded('p1')) // Sam, grade 3
-    expect(harness.academy).toBeNull()
     expect(harness.picker).not.toBeNull()
+    await expectSurfaceUnreachable()
+    await signIn('p1', '1234')
+    expect(hasText(container, 'Hi, Sam!')).toBe(true)
+    await expectSurfaceUnreachable()
+    expect(findButton('Grade 5 Math')).toBeNull()
   })
 
   it('keeps the picker for a signed-out direct link', async () => {
     await mountApp(seeded(null))
-    expect(harness.academy).toBeNull()
     expect(harness.picker).not.toBeNull()
+    await expectSurfaceUnreachable()
   })
 
-  it('exit + sign-out normalize the URL so the next learner cannot re-enter (A4-X)', async () => {
-    pathname = '/academy/course/ma-g5-mathematics'
+  // ---------- flag OFF: the surface must be unreachable by any route ----------
+
+  it('a flag-off direct URL never reaches the surface', async () => {
+    vi.stubEnv('VITE_GRADE5_MATH_PRACTICE_ENABLED', '')
     await mountApp(seeded('p2'))
-    expect(harness.academy).not.toBeNull()
-    await act(async () => harness.academy!.onExit())
-    await settle()
-    expect(pathname).toBe('/')
-    expect(hasText(container, 'Hi, Riley!')).toBe(true)
-    // her home shows the academy entry card
-    expect(findButton('Manuel Academy')).not.toBeNull()
-    await press(findButton('Sign out'))
     expect(harness.picker).not.toBeNull()
-    await act(async () => harness.picker?.onPick('p1'))
-    expect(harness.pin?.title).toBe('Hi, Sam!')
-    await act(async () => { harness.pin?.onComplete('1234') })
-    await settle()
-    // Sam (grade 3) gets her normal home — no academy surface, no academy card
-    expect(hasText(container, 'Hi, Sam!')).toBe(true)
-    expect(harness.academy).not.toBeNull() // stale record from Riley's visit…
-    expect(hasText(container, 'Manuel Academy surface')).toBe(false) // …but not rendered
-    expect(findButton('Manuel Academy')).toBeNull()
+    await expectSurfaceUnreachable()
   })
+
+  it('a flag-off grade-5 profile signing in gets her unchanged home, with no entry point', async () => {
+    vi.stubEnv('VITE_GRADE5_MATH_PRACTICE_ENABLED', '')
+    await mountApp(seeded('p2'))
+    await signIn('p2', '2222')
+    expect(hasText(container, 'Hi, Riley!')).toBe(true)
+    expect(findButton('Grade 5 Math')).toBeNull()
+    expect(hasText(container, HOME_CARD_MARKER)).toBe(false)
+    await expectSurfaceUnreachable()
+    // the pre-existing grade-5 home copy is untouched when the flag is off
+    expect(hasText(container, 'In-app math practice for grade 5 arrives in a later update')).toBe(true)
+  })
+
+  it('an absent flag never reaches the surface', async () => {
+    vi.stubEnv('VITE_GRADE5_MATH_PRACTICE_ENABLED', undefined as unknown as string)
+    await mountApp(seeded('p2'))
+    expect(harness.picker).not.toBeNull()
+    await expectSurfaceUnreachable()
+  })
+
+  it.each(['TRUE', 'True', '1', 'yes', 'on', ' true'])(
+    'a truthy-typo flag value (%s) never reaches the surface',
+    async (value) => {
+      vi.stubEnv('VITE_GRADE5_MATH_PRACTICE_ENABLED', value)
+      await mountApp(seeded('p2'))
+      expect(harness.picker).not.toBeNull()
+      await expectSurfaceUnreachable()
+      await signIn('p2', '2222')
+      expect(findButton('Grade 5 Math')).toBeNull()
+    },
+  )
 })

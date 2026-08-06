@@ -45,6 +45,36 @@ export type Grade = (typeof GRADES)[number]
 /** Grades served by the imported Manuel Academy curriculum release. */
 export type AcademyGrade = '5' | '7' | '8'
 
+/** The ten subjects the curriculum release publishes (see academy/contentTypes). */
+export const ACADEMY_SUBJECTS = [
+  'mathematics',
+  'english-language-arts',
+  'science',
+  'social-studies',
+  'health',
+  'physical-education',
+  'ready-for-life',
+  'technology',
+  'arts-and-music',
+  'financial-literacy',
+] as const
+
+export type AcademySubject = (typeof ACADEMY_SUBJECTS)[number]
+
+/**
+ * ACADEMY-LEVEL-DECOUPLE — a girl's WORKING LEVEL per subject: the level whose
+ * content she actually receives. Separate from Profile.grade, which stays her
+ * NOMINAL grade (what she *is*, for every reporting surface). A subject with no
+ * entry rides the nominal grade, so an untouched profile behaves exactly as
+ * before. Levels are per subject because a sixth grader can genuinely need
+ * Grade 5 mathematics and Grade 7 ELA in the same term.
+ *
+ * An explicit level is an AcademyGrade, not any Grade: only 5/7/8 have
+ * published content, so assigning '10' would be an inert value nothing can
+ * serve. Sync validation enforces the same restriction on untrusted payloads.
+ */
+export type WorkingLevels = Partial<Record<AcademySubject, AcademyGrade>>
+
 /** Where an academy lesson stands. 'reteach' = the check was not met; the lesson
  * re-opens on the reteach path instead of counting as complete. */
 export type AcademyLessonStatus = 'in-progress' | 'complete' | 'reteach'
@@ -217,7 +247,9 @@ export interface ProfileTotals {
 
 // ---------- M4 high school mode (all additive & optional; no schema bump) ----------
 
-/** Rolling practice tally for one HS unit (geometry unit or algebra topic). */
+/** Rolling practice tally for one practice unit (HS geometry unit or algebra
+ * topic; MOUNT-G5-MATH also tallies Grade 5 curriculum units under `g5-math-uNN`
+ * keys through the same hsStats record and the same recordHsAnswer writer). */
 export interface HsUnitStat {
   attempts: number
   correct: number
@@ -419,6 +451,11 @@ export interface Profile {
   // ---------- CURR-1 Manuel Academy curriculum (additive, OPTIONAL; no schemaVersion bump) ----------
   /** Grades 5/7/8 curriculum enrollment + progress; undefined until first enrollment. */
   academy?: AcademyState
+
+  // ---------- ACADEMY-LEVEL-DECOUPLE (additive, OPTIONAL; no schemaVersion bump) ----------
+  /** Per-subject working level. undefined (or an absent subject) = ride `grade`.
+   * Set by a parent only, from the PIN-gated Parent Hub. Never reporting truth. */
+  workingLevels?: WorkingLevels
 }
 
 // ---------- MP parent hub (additive; no schemaVersion bump) ----------

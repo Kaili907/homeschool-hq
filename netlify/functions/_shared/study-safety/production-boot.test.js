@@ -17,15 +17,40 @@ const ENV = Object.freeze({
   ACADEMY_STUDY_ENABLED: 'true',
   SUPABASE_URL: 'https://academy.supabase.co',
   SUPABASE_ANON_KEY: 'public-test-key',
+  SUPABASE_SERVICE_ROLE_KEY: 'service-role-test-key',
   ANTHROPIC_API_KEY: 'provider-test-key',
   STUDY_SAFETY_RATE_LIMIT_HMAC_KEY: 'test-rate-limit-correlation-key',
 })
+const SESSION_REFERENCE = `aca_stu_v1_${'A'.repeat(43)}`
+
+function verifiedGrant() {
+  return {
+    schemaVersion: 1,
+    status: 'verified',
+    grantId: '66666666-6666-4666-8666-666666666666',
+    householdId: IDS.household,
+    studentId: IDS.student,
+    learnerSessionId: '77777777-7777-4777-8777-777777777777',
+    sessionEpoch: '77777777-7777-4777-8777-777777777777',
+    sessionVersion: 1,
+    authorizationRevision: 1,
+    issuedAt: '2026-08-04T11:50:00.000Z',
+    expiresAt: '2026-08-04T12:05:00.000Z',
+    contractVersion: 1,
+    issuerVersion: 'academy-student-session-issuer.v1',
+    scope: ['student:assignments:read', 'student:attempts:create', 'student:progress:read'],
+  }
+}
 
 function event(text = 'ordinary answer') {
   return {
     httpMethod: 'POST',
     path: '/api/study/safety/classify',
-    headers: { authorization: 'Bearer test.access.token', 'content-type': 'application/json' },
+    headers: {
+      authorization: 'Bearer test.access.token',
+      'content-type': 'application/json',
+      'x-study-session': SESSION_REFERENCE,
+    },
     body: JSON.stringify({
       schemaVersion: 1,
       requestId: IDS.request,
@@ -57,21 +82,9 @@ function readyProductionHarness(classifier, logBoot = vi.fn()) {
       user: { id: IDS.actor },
       accessToken: 'test.access.token',
     }),
-    learnerAuthorization: {
-      ...durable,
-      verifiesSession: true,
-      async resolve({ sessionId }) {
-        return {
-          status: 'authorized',
-          context: {
-            actorUserId: IDS.actor,
-            householdId: IDS.household,
-            studentId: IDS.student,
-            sessionId,
-          },
-        }
-      },
-    },
+    fetchImpl: async () => new Response(JSON.stringify(verifiedGrant()), {
+      headers: { 'content-type': 'application/json' },
+    }),
     proposalPersistence: store,
     outbox: store,
     recipientResolver: {
@@ -125,6 +138,13 @@ describe('production Study safety boot gate', () => {
       },
       logBoot: vi.fn(),
     })).toThrow(/STARTUP ABORTED.*mode "production"/i)
+  })
+
+  it('rejects a learner-authorization override outside the test composition', () => {
+    expect(() => createProductionStudySafetyHandler({
+      env: ENV,
+      learnerAuthorization: { isReady: () => true, isDurable: true, resolve: async () => ({}) },
+    })).toThrow(/learner authorization overrides are test-only/i)
   })
 
   it('injects and reaches the classifier through a production-mode handler', async () => {

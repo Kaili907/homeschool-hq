@@ -411,7 +411,12 @@ export function generatePartialProductsQuestion(
     standard: definition.standard,
     lessonFocus: definition.lessonFocus,
     difficulty,
-    prompt: `Use partial products to calculate ${multiplicand} × ${multiplier}. Decompose both factors by place value, multiply each pair of parts, and add the partial products. What is the product?`,
+    // A single-digit multiplier has nothing to decompose, so the instruction names
+    // only the factor the student actually breaks apart.
+    prompt:
+      multiplierParts.length > 1
+        ? `Use partial products to calculate ${multiplicand} × ${multiplier}. Decompose both factors by place value, multiply each pair of parts, and add the partial products. What is the product?`
+        : `Use partial products to calculate ${multiplicand} × ${multiplier}. Decompose ${multiplicand} by place value, multiply each part by ${multiplier}, and add the partial products. What is the product?`,
     correctAnswer,
     distractors: uniqueExcept(correctAnswer, [
       ...numericProductDistractors(multiplicand, multiplier),

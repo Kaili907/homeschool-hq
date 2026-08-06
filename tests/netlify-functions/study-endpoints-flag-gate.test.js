@@ -6,7 +6,7 @@ import { createStudyAdultReviewWorkerHandler } from '../../netlify/functions/stu
 import { createStudyAdultReviewHandler } from '../../netlify/functions/study-adult-review.js'
 import { createStudyParentNotificationsHandler } from '../../netlify/functions/study-parent-notifications.js'
 import { createStudyProductionReadinessHandler } from '../../netlify/functions/study-production-readiness.js'
-import { createStudySafetyHandler } from '../../netlify/functions/study-safety-classify.js'
+import { createTestStudySafetyHandler } from '../../netlify/functions/study-safety-classify.js'
 import { createStudySessionIssueHandler } from '../../netlify/functions/study-session-issue.js'
 import { createStudySessionVerifyHandler } from '../../netlify/functions/study-session-verify.js'
 
@@ -55,7 +55,7 @@ const ENDPOINTS = [
   },
   {
     name: 'study-safety-classify',
-    create: createStudySafetyHandler,
+    create: createTestStudySafetyHandler,
     event: { httpMethod: 'POST', path: '/api/study/safety/classify' },
   },
   {

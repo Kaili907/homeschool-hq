@@ -7,6 +7,7 @@ import {
   studyAccessibilityProjection,
 } from '../components/study/StudySessionContainer'
 import { syntheticGrade5StudyContext } from './demonstrations'
+import { STUDY_LEARNER_STOP_MESSAGE } from './safety/learnerSafe'
 import { createLocalDevelopmentStudyPorts } from './localDevelopmentPorts'
 import type { StudyPortBundle, StudySafetyPort } from './ports'
 import { AcceptedRc1HostRuntime, type StudyTutorTurnResult } from './runtimeFacade'
@@ -105,7 +106,7 @@ describe('mounted Tutor output safety gate', () => {
     const result = await submit()
     expect(classifiedText).toContain(UNCLASSIFIED_MODEL_OUTPUT)
     const html = stoppedSurface(result)
-    expect(html).toContain('Please get a trusted adult who can help right now')
+    expect(html).toContain(STUDY_LEARNER_STOP_MESSAGE)
     expect(html).not.toContain(UNCLASSIFIED_MODEL_OUTPUT)
   })
 
@@ -125,7 +126,7 @@ describe('mounted Tutor output safety gate', () => {
       deliveryStatus: 'not-confirmed',
       coreSubmitInvocations: 1,
     })
-    expect(html).toContain('Please ask a trusted adult to help check what happened')
+    expect(html).toContain(STUDY_LEARNER_STOP_MESSAGE)
     expect(html).not.toContain(UNCLASSIFIED_MODEL_OUTPUT)
   })
 

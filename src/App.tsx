@@ -60,7 +60,12 @@ import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
 import { isStudyEngineEnabledFromHost, isStudyEnginePreviewEnabledFromHost } from './study/featureFlag'
 import { isStudyEnginePath, leaveStudyEnginePath } from './studyEngineRoute'
-import { enabledAcademyGradeFromHost } from './academy/featureFlag'
+import { enabledAcademyEntries, hasEnabledAcademyProgram } from './academy/workingLevel'
+import { grade5MathPracticeAvailableFromHost } from './curriculum/practice/featureFlag'
+import {
+  isGrade5MathPracticePath,
+  leaveGrade5MathPracticePath,
+} from './curriculum/practice/grade5MathPracticeRoute'
 import {
   leaveAcademyPath,
   parseAcademyPath,
@@ -104,6 +109,15 @@ const AcademyRouter = lazy(() =>
   import('./components/academy/AcademyRouter').then((module) => ({ default: module.AcademyRouter })),
 )
 
+// MOUNT-G5-MATH: the Grade 5 math practice surface. Lazy for the same reason as
+// the academy chunk — the ten unit generators load only when an enabled grade-5
+// profile opens the surface, never on initial application load.
+const Grade5MathPractice = lazy(() =>
+  import('./components/curriculum/Grade5MathPractice').then((module) => ({
+    default: module.Grade5MathPractice,
+  })),
+)
+
 type Screen =
   | { kind: 'picker' }
   | { kind: 'kidPin'; profileId: string }
@@ -126,6 +140,7 @@ type Screen =
   | { kind: 'studySettings' }
   | { kind: 'studySession'; blockRef: string; learnerRef: string }
   | { kind: 'academy'; route: AcademyRoute }
+  | { kind: 'g5MathPractice' }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
@@ -164,12 +179,22 @@ export default function App() {
       return { kind: 'studyDashboard' }
     }
     // CURR-1 (MOUNT-2 pattern): an /academy deep link with a valid persisted
-    // profile whose grade flag is enabled lands on the academy surface; any
-    // other case falls through to the picker/normal app.
+    // profile that reaches an enabled academy level lands on the academy
+    // surface; any other case falls through to the picker/normal app.
     const bootProfile = loaded.state.activeProfileId
       ? loaded.state.profiles[loaded.state.activeProfileId]
       : null
-    if (bootProfile && enabledAcademyGradeFromHost(bootProfile.grade)) {
+    // MOUNT-G5-MATH (MOUNT-2 pattern): the Grade 5 math practice deep link is
+    // honoured only for a grade-5 profile with the flag on; every other case —
+    // flag off, wrong grade, no persisted profile — falls through to the picker.
+    if (
+      bootProfile &&
+      grade5MathPracticeAvailableFromHost(bootProfile.grade) &&
+      isGrade5MathPracticePath(window.location.pathname)
+    ) {
+      return { kind: 'g5MathPractice' }
+    }
+    if (bootProfile && hasEnabledAcademyProgram(bootProfile)) {
       const academyRoute = parseAcademyPath(window.location.pathname)
       if (academyRoute) return { kind: 'academy', route: academyRoute }
     }
@@ -323,6 +348,14 @@ export default function App() {
     setState((s) => patchProfile(s, attendanceId, (p) => recordAttendance(p, true, isoToday())))
   }, [attendanceId, attendanceTodayComplete])
 
+  // ACADEMY-LEVEL-DECOUPLE: which subjects this girl reaches, and at which level.
+  // Derived from her WORKING LEVELS (falling back to her nominal grade), then
+  // flag-gated — so her profile grade no longer decides what she receives.
+  const academyEntries = useMemo(
+    () => (active ? enabledAcademyEntries(active) : []),
+    [active],
+  )
+
   const studyContextResult = buildHostStudyContext({
     enabled: studyPreviewEnabled,
     syncStatus: sync.status,
@@ -376,6 +409,7 @@ export default function App() {
   const signOut = () => {
     leaveStudyEnginePath()
     leaveAcademyPath()
+    leaveGrade5MathPracticePath()
     void purgeVoiceCache()
     studyProductionLifecycleRef.current?.cancel('logout')
     void studyVerifiedRuntimeRef.current?.cancel('logout')
@@ -688,9 +722,9 @@ export default function App() {
 
   // CURR-1 academy mount point — self-styled, rendered full-bleed like Study.
   if (screen.kind === 'academy') {
-    const academyGrade = enabledAcademyGradeFromHost(active.grade)
-    if (!academyGrade) {
-      // Flag off or a non-academy grade signed in behind a stale /academy URL.
+    if (academyEntries.length === 0) {
+      // Flag off, or a girl with no enabled working level, signed in behind a
+      // stale /academy URL.
       return (
         <StudyUnavailable
           reason="The Academy curriculum is not enabled for this learner."
@@ -705,7 +739,7 @@ export default function App() {
       <Suspense fallback={<StudyLoading />}>
         <AcademyRouter
           profile={active}
-          grade={academyGrade}
+          entries={academyEntries}
           schoolYear={state.schoolYear}
           route={screen.route}
           onNavigate={(route) => {
@@ -862,15 +896,39 @@ export default function App() {
             onOpenStudy={studyPreviewReady || studyProductionSelected ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
             studyMode={studyPreviewReady ? 'preview' : studyProductionSelected ? 'unavailable' : undefined}
             onOpenAcademy={
-              enabledAcademyGradeFromHost(active.grade)
+              academyEntries.length > 0
                 ? () => {
                     syncAcademyPath({ kind: 'home' })
                     setScreen({ kind: 'academy', route: { kind: 'home' } })
                   }
                 : undefined
             }
+            onOpenG5MathPractice={
+              grade5MathPracticeAvailableFromHost(active.grade)
+                ? () => setScreen({ kind: 'g5MathPractice' })
+                : undefined
+            }
             mindsetStartDate={state.mindsetStartDate}
           />
+        )}
+
+        {/* MOUNT-G5-MATH — Grade 5 curriculum math practice (flag-gated, grade 5 only) */}
+        {screen.kind === 'g5MathPractice' && (
+          <Suspense
+            fallback={
+              <p className={`px-4 py-10 text-center font-bold ${tokens.sub}`} role="status">
+                Loading your math practice…
+              </p>
+            }
+          >
+            <Grade5MathPractice
+              onPatch={patchActive}
+              onExit={() => {
+                leaveGrade5MathPracticePath()
+                setScreen({ kind: 'home' })
+              }}
+            />
+          </Suspense>
         )}
 
         {/* MR reading fluency — grades 3/4/6 only (teens never reach here) */}
@@ -1005,6 +1063,7 @@ function Home({
   onOpenStudy,
   studyMode,
   onOpenAcademy,
+  onOpenG5MathPractice,
   mindsetStartDate,
 }: {
   profile: Profile
@@ -1024,6 +1083,8 @@ function Home({
   studyMode?: 'preview' | 'unavailable'
   /** CURR-1: present only when this profile's academy grade flag is enabled. */
   onOpenAcademy?: () => void
+  /** MOUNT-G5-MATH: present only for a grade-5 profile with the practice flag on. */
+  onOpenG5MathPractice?: () => void
   mindsetStartDate: string | undefined
 }) {
   const t = useTheme()
@@ -1166,6 +1227,24 @@ function Home({
         </button>
       )}
 
+      {/* MOUNT-G5-MATH — Grade 5 curriculum math practice, by unit */}
+      {onOpenG5MathPractice && (
+        <button
+          onClick={onOpenG5MathPractice}
+          className={`${t.card} mt-6 flex min-h-11 w-full items-center gap-4 p-5 text-left transition-all hover:border-cyan-400`}
+        >
+          <span className="text-4xl" aria-hidden="true">
+            ➗
+          </span>
+          <span className="flex-1">
+            <span className={`block text-2xl font-extrabold ${t.heading}`}>Grade 5 Math</span>
+            <span className={`block font-bold ${t.sub}`}>
+              Practice a unit — 10 questions, with a worked example when you miss one
+            </span>
+          </span>
+        </button>
+      )}
+
       {/* MR reading fluency entry — opens today's read-aloud passage */}
       <button
         onClick={onOpenReading}
@@ -1261,7 +1340,7 @@ function Home({
           </h2>
           <SkillTree profile={profile} />
         </>
-      ) : (
+      ) : onOpenG5MathPractice ? null : (
         <p className={`mt-6 text-center text-sm font-semibold ${t.sub}`}>
           In-app math practice for grade {profile.grade} arrives in a later update — for now,
           check things off as you finish them.

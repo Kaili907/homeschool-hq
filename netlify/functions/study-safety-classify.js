@@ -3,7 +3,10 @@
 import { createAdultReviewProposalService } from './_shared/study-adult-review/proposal.js'
 import { createSupabaseStudySafetyPorts } from './_shared/study-adult-review/supabase-ports.js'
 import { readStudySessionReferenceHeader } from './_shared/study-identity/contracts.js'
-import { createVerifiedStudySessionAuthorizationPort } from './_shared/study-safety/session-authorization.js'
+import {
+  createTestStudySessionAuthorizationPort,
+  createVerifiedStudySessionAuthorizationPort,
+} from './_shared/study-safety/session-authorization.js'
 import {
   STUDY_SAFETY_REQUEST_LIMIT_BYTES,
   validateStudySafetyRequest,
@@ -36,6 +39,9 @@ function defaultBootLogger(event) {
  * tests, but the deployed export must never accept a local/demo classifier.
  */
 export function createProductionStudySafetyHandler(overrides = {}) {
+  if (overrides.learnerAuthorization !== undefined) {
+    throw new Error('STUDY SAFETY STARTUP ABORTED: learner authorization overrides are test-only')
+  }
   const env = overrides.env ?? process.env
   const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
   const productionPorts = overrides.productionPorts ?? createSupabaseStudySafetyPorts({ env, fetchImpl })
@@ -69,14 +75,23 @@ export function createProductionStudySafetyHandler(overrides = {}) {
   })
 }
 
-export function createStudySafetyHandler(overrides = {}) {
+/** Test-only composition seam. Production code must use the exported handler. */
+export function createTestStudySafetyHandler(overrides = {}) {
+  const learnerAuthorization = overrides.learnerAuthorization
+    ? createTestStudySessionAuthorizationPort(overrides.learnerAuthorization)
+    : undefined
+  return createStudySafetyHandler({ ...overrides, learnerAuthorization })
+}
+
+function createStudySafetyHandler(overrides = {}) {
   const env = overrides.env ?? process.env
   const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
   const productionPorts = overrides.productionPorts ?? createSupabaseStudySafetyPorts({ env, fetchImpl })
   const effectiveMonitoring = overrides.monitoring ?? productionPorts.monitoring ?? NOOP_MONITORING_PORT
   const classifier = overrides.classifier ?? createAnthropicSafetyClassifier({ env, fetchImpl, monitoring: effectiveMonitoring })
-  const learnerAuthorization = overrides.learnerAuthorization ??
-    createVerifiedStudySessionAuthorizationPort({ env, fetchImpl })
+  const learnerAuthorization = overrides.learnerAuthorization
+    ? overrides.learnerAuthorization
+    : createVerifiedStudySessionAuthorizationPort({ env, fetchImpl })
   const proposalPersistence = overrides.proposalPersistence ?? productionPorts.proposalPersistence
   const outbox = overrides.outbox ?? productionPorts.outbox
   const recipientResolver = overrides.recipientResolver ?? productionPorts.recipientResolver
