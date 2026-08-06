@@ -4,10 +4,23 @@ import type { StudySafetyRequest } from '../types'
 import {
   classifyStudySafetyWithCaptureStatus,
   type StudySafetyClientDeps,
+  type StudySessionAuthorizationFailure,
 } from './client'
 import { recordLocalPreAcceptanceSafetyStop } from './localStopLedger'
 
-export type { StudySafetyClientDeps } from './client'
+export type { StudySafetyClientDeps, StudySessionAuthorizationFailure } from './client'
+
+export interface MountedStudySafetyPortDeps extends StudySafetyClientDeps {
+  /**
+   * Told that this evaluation was refused on authorization, never that anything
+   * unsafe happened. The reason code is the entire payload: no bearer, no
+   * session reference, no learner or household identifier, no server body, no
+   * child or Tutor text. Wiring it is optional and it is fired after the port
+   * has already decided — the port fails closed with or without it, and a
+   * callback that throws changes nothing about that decision.
+   */
+  readonly onSessionAuthorizationFailure?: (reason: StudySessionAuthorizationFailure) => void
+}
 
 export const MOUNTED_STUDY_SAFETY_CLASSIFIER_VERSION = 'study-safety-http-boundary-v1' as const
 
@@ -51,7 +64,7 @@ async function gatewayRequest(request: StudySafetyRequest): Promise<StudySafetyC
  * confirmed durable proposal capture or reduced the result to invalid.
  */
 export function createMountedStudySafetyPort(
-  deps: StudySafetyClientDeps = {},
+  deps: MountedStudySafetyPortDeps = {},
 ): StudySafetyPort {
   return Object.freeze({
     mode: 'production' as const,
@@ -59,16 +72,31 @@ export function createMountedStudySafetyPort(
     async evaluate(request: StudySafetyRequest) {
       const result = await classifyStudySafetyWithCaptureStatus(await gatewayRequest(request), deps)
       const response = result.response
+      // A refused session and a rate limit are lifecycle events, not safety
+      // incidents: the classifier never judged this learner, so a durable record
+      // would tell her parent she was stopped for something she wrote. Excluding
+      // by name rather than admitting only 'classifier' is deliberate — an
+      // unrecognised category keeps writing, because losing a real safety stop
+      // is the far worse direction to fail in.
+      const isSafetyIncident = result.failureCategory !== 'session-authorization' &&
+        result.failureCategory !== 'rate-limit'
       // sessionRef is what the A6-5-C durable stop lock keys on. Without it an
       // outage record stays visible to the parent but never locks the session,
       // so a learner stopped by a gateway outage could refresh straight back in.
-      if (result.failureMode && result.serverCaptureStatus) await recordLocalPreAcceptanceSafetyStop({
+      if (isSafetyIncident && result.failureMode && result.serverCaptureStatus) await recordLocalPreAcceptanceSafetyStop({
         occurredAt: new Date().toISOString(),
         studentRef: request.scope.learnerRef,
         sessionRef: request.scope.sessionRef,
         failureMode: result.failureMode,
         serverCaptureStatus: result.serverCaptureStatus,
       })
+      // Last, and isolated: the decision below is already fixed, so a host
+      // callback that throws or re-enters this port cannot reach it.
+      if (result.failureCategory === 'session-authorization' && result.sessionAuthorizationFailure) {
+        try {
+          deps.onSessionAuthorizationFailure?.(result.sessionAuthorizationFailure)
+        } catch { /* the host's recovery is its own problem; this evaluation still fails closed */ }
+      }
       return Object.freeze({
         outcome: response.classification,
         mayContinue: response.classification === 'clear' &&
