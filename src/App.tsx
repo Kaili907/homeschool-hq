@@ -185,11 +185,12 @@ export default function App() {
       ? loaded.state.profiles[loaded.state.activeProfileId]
       : null
     // MOUNT-G5-MATH (MOUNT-2 pattern): the Grade 5 math practice deep link is
-    // honoured only for a grade-5 profile with the flag on; every other case —
-    // flag off, wrong grade, no persisted profile — falls through to the picker.
+    // honoured only for a profile whose mathematics working level is 5 with the
+    // flag on; every other case — flag off, another working level, no persisted
+    // profile — falls through to the picker.
     if (
       bootProfile &&
-      grade5MathPracticeAvailableFromHost(bootProfile.grade) &&
+      grade5MathPracticeAvailableFromHost(bootProfile) &&
       isGrade5MathPracticePath(window.location.pathname)
     ) {
       return { kind: 'g5MathPractice' }
@@ -904,7 +905,7 @@ export default function App() {
                 : undefined
             }
             onOpenG5MathPractice={
-              grade5MathPracticeAvailableFromHost(active.grade)
+              grade5MathPracticeAvailableFromHost(active)
                 ? () => setScreen({ kind: 'g5MathPractice' })
                 : undefined
             }
