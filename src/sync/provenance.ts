@@ -113,6 +113,16 @@ function identifier(value: unknown): value is string {
   return text(value, 512) && value.length > 0
 }
 
+/**
+ * Membership test that refuses non-strings. `SET.has(String(value))` coerces
+ * first, so a numeric 5 satisfies a set holding '5' — malformed data for a
+ * string-union field, and not something that should cross the sync boundary.
+ * Check the type, then membership.
+ */
+function memberOf(set: Set<string>, value: unknown): value is string {
+  return typeof value === 'string' && set.has(value)
+}
+
 function isoDate(value: unknown, allowEmpty = false): value is string {
   if (!text(value, 32)) return false
   if (allowEmpty && value === '') return true
@@ -594,13 +604,13 @@ function academyAuthorization(
   profileGrade: unknown,
   workingLevels: unknown,
 ): Map<string, string> {
-  const nominal = ACADEMY_GRADES.has(String(profileGrade)) ? String(profileGrade) : null
+  const nominal = memberOf(ACADEMY_GRADES, profileGrade) ? profileGrade : null
   const explicit = plainRecord(workingLevels) ? workingLevels : {}
   const authorized = new Map<string, string>()
   for (const subject of ACADEMY_SUBJECTS) {
     const assigned = explicit[subject]
-    const level = assigned === undefined ? nominal : String(assigned)
-    if (level !== null && ACADEMY_GRADES.has(level)) authorized.set(subject, level)
+    const level = assigned === undefined ? nominal : assigned
+    if (memberOf(ACADEMY_GRADES, level)) authorized.set(subject, level)
   }
   return authorized
 }
@@ -614,8 +624,7 @@ function academyAuthorization(
 function validateWorkingLevels(value: unknown): boolean {
   return boundedRecord(
     value,
-    (level, subject) =>
-      ACADEMY_SUBJECTS.has(subject) && typeof level === 'string' && ACADEMY_GRADES.has(level),
+    (level, subject) => ACADEMY_SUBJECTS.has(subject) && memberOf(ACADEMY_GRADES, level),
   )
 }
 
@@ -645,24 +654,30 @@ function validateAcademyCourseIds(value: unknown, authorized: Map<string, string
  * CURR-1: Manuel Academy enrollment + progress (see types.AcademyState).
  *
  * ACADEMY-LEVEL-DECOUPLE-C: the capability check lives on `courseIds`, which is
- * subject-precise. `grade` is only the label the enrollment was opened under —
- * nothing reads it to route or load content — so it is checked for shape but not
- * for current authorization. Gating on it as well would make the field a
- * denormalized capability that a parent clearing her last working level could
- * leave permanently invalid, blocking every later save for the whole household.
+ * subject-precise. `grade` is the label the enrollment was opened under; nothing
+ * reads it to SELECT content, so it is checked for shape but not for current
+ * authorization. Gating on it as well would make the field a denormalized
+ * capability that a parent clearing her last working level could leave
+ * permanently invalid, blocking every later save for the whole household.
+ * (It is not inert: AcademyRouter compares it to the composed program's primary
+ * level to decide when to re-sync enrollment — see AcademyRouter.tsx `inSync`.)
+ *
+ * ACADEMY-LEVEL-DECOUPLE-C2: every enumerated field is matched with `memberOf`,
+ * which refuses non-strings. `SET.has(String(x))` accepted numeric 5 for a
+ * string-union field.
  */
 function validateAcademy(value: unknown, authorized: Map<string, string>): boolean {
   return (
     plainRecord(value) &&
     text(value.releaseVersion, 64) &&
-    ACADEMY_GRADES.has(String(value.grade)) &&
+    memberOf(ACADEMY_GRADES, value.grade) &&
     timestamp(value.enrolledAt) &&
     validateAcademyCourseIds(value.courseIds, authorized) &&
     boundedRecord(
       value.lessons,
       (lesson) =>
         plainRecord(lesson) &&
-        ACADEMY_LESSON_STATUSES.has(String(lesson.status)) &&
+        memberOf(ACADEMY_LESSON_STATUSES, lesson.status) &&
         nonNegativeInteger(lesson.segmentIndex) &&
         text(lesson.releaseVersion, 64) &&
         timestamp(lesson.startedAt) &&
@@ -673,9 +688,9 @@ function validateAcademy(value: unknown, authorized: Map<string, string>): boole
           (occasion) =>
             plainRecord(occasion) &&
             isoDate(occasion.date) &&
-            ACADEMY_OCCASION_MODES.has(String(occasion.mode)) &&
+            memberOf(ACADEMY_OCCASION_MODES, occasion.mode) &&
             typeof occasion.met === 'boolean' &&
-            ACADEMY_OCCASION_KINDS.has(String(occasion.kind)),
+            memberOf(ACADEMY_OCCASION_KINDS, occasion.kind),
         ),
     ) &&
     boundedRecord(value.assessments, (attempts) =>
@@ -685,7 +700,7 @@ function validateAcademy(value: unknown, authorized: Map<string, string>): boole
           plainRecord(attempt) &&
           isoDate(attempt.date) &&
           percentage(attempt.percent) &&
-          ACADEMY_ASSESSMENT_OUTCOMES.has(String(attempt.outcome)),
+          memberOf(ACADEMY_ASSESSMENT_OUTCOMES, attempt.outcome),
       ),
     )
   )

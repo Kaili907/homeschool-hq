@@ -207,6 +207,103 @@ describe('course records are scoped to the SUBJECT that authorized the level', (
   })
 })
 
+// ---------- ACADEMY-LEVEL-DECOUPLE-C2 ----------
+
+/**
+ * `SET.has(String(x))` coerces before testing membership, so numeric 5 passed a
+ * field typed as the string union '5' | '7' | '8'. It granted no unauthorized
+ * course — authorization lives on courseIds — but malformed data must not cross
+ * the sync boundary at all.
+ */
+describe('enumerated academy fields refuse non-string values', () => {
+  /** A fifth grader enrolled at her own level: valid except for the mutation. */
+  const enrolled = (mutate: (a: Record<string, unknown>) => void): unknown => {
+    const academy = JSON.parse(JSON.stringify(academyAt('5'))) as Record<string, unknown>
+    academy.lessons = {
+      'ma-g5-mathematics-u01-l01': {
+        status: 'complete',
+        segmentIndex: 1,
+        releaseVersion: '1.0.0',
+        startedAt: '2026-08-04T12:00:00.000Z',
+        occasions: [{ date: '2026-08-04', mode: 'independent', met: true, kind: 'lesson-check' }],
+      },
+    }
+    academy.assessments = {
+      'ma-g5-mathematics-u01-assessment': [
+        { date: '2026-08-10', percent: 88, outcome: 'secure' },
+      ],
+    }
+    mutate(academy)
+    return stateWith({
+      ...emptyProfile('p3', 'Fifth Grader', '5'),
+      academy: academy as unknown as AcademyState,
+    })
+  }
+
+  const lesson = (a: Record<string, unknown>) =>
+    (a.lessons as Record<string, Record<string, unknown>>)['ma-g5-mathematics-u01-l01']
+
+  it('the unmutated fixture is valid', () => {
+    expect(validateAppStateForSync(enrolled(() => {})).ok).toBe(true)
+  })
+
+  it.each([5, 7, 8])('rejects the numeric academy grade %s', (grade) => {
+    expect(validateAppStateForSync(enrolled((a) => { a.grade = grade })).ok).toBe(false)
+  })
+
+  it.each([
+    ['boolean', true],
+    ['null', null],
+    ['array', ['5']],
+    ['object', { grade: '5' }],
+  ])('rejects a %s academy grade', (_label, grade) => {
+    expect(validateAppStateForSync(enrolled((a) => { a.grade = grade })).ok).toBe(false)
+  })
+
+  it.each(['5', '7', '8'])('still accepts the string academy grade %s', (grade) => {
+    // All three pass: `grade` is shape-checked only. Authorization lives on
+    // courseIds (still ma-g5-mathematics here), which is the C-round design —
+    // a stale label cannot block a save, and it grants nothing on its own.
+    expect(validateAppStateForSync(enrolled((a) => { a.grade = grade })).ok).toBe(true)
+  })
+
+  it('accepts every string academy grade once the profile is authorized for it', () => {
+    for (const grade of ['5', '7', '8'] as const) {
+      const candidate = stateWith(
+        sixthGrader({
+          workingLevels: { mathematics: grade },
+          academy: academyAt(grade, [`ma-g${grade}-mathematics`]),
+        }),
+      )
+      expect(validateAppStateForSync(candidate).ok).toBe(true)
+    }
+  })
+
+  it('rejects non-string lesson status, occasion mode/kind, and assessment outcome', () => {
+    const cases: ((a: Record<string, unknown>) => void)[] = [
+      (a) => { lesson(a).status = 1 },
+      (a) => { lesson(a).status = null },
+      (a) => { (lesson(a).occasions as Record<string, unknown>[])[0].mode = 1 },
+      (a) => { (lesson(a).occasions as Record<string, unknown>[])[0].kind = ['lesson-check'] },
+      (a) => {
+        ;(a.assessments as Record<string, Record<string, unknown>[]>)[
+          'ma-g5-mathematics-u01-assessment'
+        ][0].outcome = 0
+      },
+    ]
+    for (const mutate of cases) {
+      expect(validateAppStateForSync(enrolled(mutate)).ok).toBe(false)
+    }
+  })
+
+  it.each([5, 7, 8])('rejects the numeric working level %s', (level) => {
+    const candidate = stateWith(
+      sixthGrader({ workingLevels: { mathematics: level } as unknown as Profile['workingLevels'] }),
+    )
+    expect(validateAppStateForSync(candidate).ok).toBe(false)
+  })
+})
+
 // ---------- the state a real parent action leaves behind ----------
 
 /**
