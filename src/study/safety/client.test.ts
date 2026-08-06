@@ -2,7 +2,12 @@ import { describe, expect, it, vi } from 'vitest'
 import { createStudySessionTransport } from '../client/studySessionTransport'
 import type { StudySessionGrant } from '../contracts/identity/session'
 import type { StudySafetyClassificationRequestV1 } from '../contracts/safety'
-import { classifyStudySafety, STUDY_SAFETY_ENDPOINT } from './client'
+import {
+  classifyStudySafety,
+  classifyStudySafetyWithCaptureStatus,
+  STUDY_SAFETY_ENDPOINT,
+  type StudySafetyClientDeps,
+} from './client'
 import { learnerSafeResult } from './learnerSafe'
 
 const request: StudySafetyClassificationRequestV1 = {
@@ -270,5 +275,77 @@ describe('narrow Study safety browser adapter', () => {
     expect(seen[0]).not.toBe(seen[1])
     expect(transport.hasSession()).toBe(true)
     expect(transport.authorizeStudyRequestHeaders({})).toEqual({ 'x-study-session': SESSION_REFERENCE })
+  })
+})
+
+describe('session authorization failure versus classifier failure', () => {
+  const deps = (fetchImpl: unknown): StudySafetyClientDeps => ({
+    getAccessToken: async () => 'test.access.token',
+    fetchImpl: fetchImpl as StudySafetyClientDeps['fetchImpl'],
+    sessionAuthorization: installedTransport(),
+  })
+
+  it('reports an expired or revoked Study session as a session-authorization failure', async () => {
+    // The gateway answers 403 learner_not_authorized when the session reference
+    // is missing, expired, revoked, or unauthorized, and 401 when the adult
+    // bearer is refused. Neither is a safety classification.
+    for (const status of [401, 403]) {
+      const result = await classifyStudySafetyWithCaptureStatus(
+        request,
+        deps(vi.fn(async () => ({ ok: false, status, json: async () => ({}) }))),
+      )
+      expect(result.failureCategory).toBe('session-authorization')
+      expect(result.failureMode).toBe('authentication-failure')
+      expect(result.failureMode).not.toBe('classifier-unreachable')
+      // Still fail closed: neither may continue tutoring.
+      expect(result.response.classification).toBe('invalid')
+      expect(result.response.continueToTutorCore).toBe(false)
+      expect(result.response.learner.mayContinue).toBe(false)
+    }
+  })
+
+  it('reports missing host auth and a missing Study session as session-authorization failures', async () => {
+    const unreached = vi.fn(async () => ({ ok: true, json: async () => clearResponse }))
+    for (const overrides of [
+      { getAccessToken: async () => null },
+      { getAccessToken: async () => { throw new Error('token store unavailable') } },
+      { sessionAuthorization: undefined },
+      { sessionAuthorization: createStudySessionTransport() },
+    ]) {
+      const result = await classifyStudySafetyWithCaptureStatus(request, {
+        ...deps(unreached),
+        ...overrides,
+      })
+      expect(result.failureCategory).toBe('session-authorization')
+      expect(result.serverCaptureStatus).toBe('server-not-contacted')
+      expect(result.response.continueToTutorCore).toBe(false)
+    }
+    expect(unreached).not.toHaveBeenCalled()
+  })
+
+  it('keeps genuine classifier failures categorised as classifier failures', async () => {
+    const cases: Array<[unknown, string]> = [
+      [vi.fn(async () => ({ ok: false, status: 503, json: async () => ({}) })), 'gateway-503'],
+      [vi.fn(async () => ({ ok: false, status: 429, json: async () => ({}) })), 'classifier-unreachable'],
+      [vi.fn(async () => ({ ok: false, status: 500, json: async () => ({}) })), 'classifier-unreachable'],
+      [vi.fn(async () => ({ ok: true, json: async () => ({ nonsense: true }) })), 'malformed-server-response'],
+      [vi.fn(async () => { throw new Error('network down') }), 'network-failure-mid-request'],
+    ]
+    for (const [fetchImpl, failureMode] of cases) {
+      const result = await classifyStudySafetyWithCaptureStatus(request, deps(fetchImpl))
+      expect(result.failureCategory).toBe('classifier')
+      expect(result.failureMode).toBe(failureMode)
+      expect(result.response.continueToTutorCore).toBe(false)
+    }
+  })
+
+  it('leaves a successful classification uncategorised', async () => {
+    const result = await classifyStudySafetyWithCaptureStatus(
+      request,
+      deps(vi.fn(async () => ({ ok: true, json: async () => clearResponse }))),
+    )
+    expect(result.failureCategory).toBeUndefined()
+    expect(result.failureMode).toBeUndefined()
+    expect(result.response.classification).toBe('clear')
   })
 })

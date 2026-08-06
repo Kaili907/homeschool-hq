@@ -114,6 +114,42 @@ describe('ephemeral Study session transport', () => {
     })
   })
 
+  it('strips caller session headers in any case and returns exactly one canonical header', () => {
+    const transport = createStudySessionTransport()
+    transport.install(grant(SESSION_REFERENCE))
+
+    for (const variant of [
+      'X-Study-Session', 'X-STUDY-SESSION', 'x-Study-Session', 'X-study-SESSION', 'x-study-session',
+    ]) {
+      const headers = transport.authorizeStudyRequestHeaders({
+        [variant]: 'forged-by-caller',
+        'content-type': 'application/json',
+        Authorization: 'Bearer host-adult-token',
+      })!
+      // Header names are case-insensitive on the wire, so a surviving variant
+      // would be combined with the canonical one and refused by the gateway.
+      expect(Object.keys(headers).filter((key) => key.toLowerCase() === STUDY_SESSION_HEADER))
+        .toEqual([STUDY_SESSION_HEADER])
+      expect(headers[STUDY_SESSION_HEADER]).toBe(SESSION_REFERENCE)
+      expect(JSON.stringify(headers)).not.toContain('forged-by-caller')
+      // Unrelated headers are untouched.
+      expect(headers['content-type']).toBe('application/json')
+      expect(headers.Authorization).toBe('Bearer host-adult-token')
+    }
+
+    // Several variants at once, and a header key that must not reach a prototype.
+    const headers = transport.authorizeStudyRequestHeaders({
+      'X-Study-Session': 'a', 'x-STUDY-session': 'b', 'X-Study-Session-Id': 'unrelated', __proto__: 'c',
+    })!
+    expect(Object.keys(headers).filter((key) => key.toLowerCase() === STUDY_SESSION_HEADER))
+      .toEqual([STUDY_SESSION_HEADER])
+    expect(headers[STUDY_SESSION_HEADER]).toBe(SESSION_REFERENCE)
+    expect(headers['X-Study-Session-Id']).toBe('unrelated')
+    expect(Object.getPrototypeOf(headers)).toBe(Object.prototype)
+    expect(JSON.stringify(headers)).not.toContain('"a"')
+    expect(JSON.stringify(headers)).not.toContain('"b"')
+  })
+
   it('leaves unrelated Study requests unchanged', async () => {
     const transport = createStudySessionTransport()
     const fetchBefore = globalThis.fetch

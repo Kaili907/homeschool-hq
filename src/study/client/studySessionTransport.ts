@@ -68,7 +68,17 @@ export function createStudySessionTransport(): StudySessionTransport {
       if (current === null) return null
       // A fresh object per call, so concurrent requests never share a header map
       // and a caller-supplied session header can never override the real one.
-      return { ...headers, [STUDY_SESSION_HEADER]: current }
+      // Header names are case-insensitive on the wire, so a caller key such as
+      // `X-Study-Session` would otherwise survive next to the canonical one and
+      // fetch would send both combined, which the gateway refuses. Drop every
+      // case variant first, then add exactly one canonical lowercase header.
+      // `fromEntries` defines rather than assigns, so a `__proto__` header key
+      // stays an ordinary own property instead of reaching the prototype.
+      const authorized = Object.fromEntries(
+        Object.entries(headers).filter(([key]) => key.toLowerCase() !== STUDY_SESSION_HEADER),
+      )
+      authorized[STUDY_SESSION_HEADER] = current
+      return authorized
     },
 
     clear() {

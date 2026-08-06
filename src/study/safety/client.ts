@@ -67,10 +67,21 @@ function failClosed(reasonCode: string): StudySafetyClassificationResponseV1 {
   }
 }
 
+/**
+ * Which thing could not be obtained. `session-authorization` means the adult
+ * bearer or the learner's Study session was missing, expired, revoked, or
+ * refused; `classifier` means everything else that stopped a classification.
+ * Both still fail closed — neither may continue tutoring — but only the second
+ * is a safety-classifier incident, so an ordinary session expiry is never
+ * reported as one.
+ */
+export type StudySafetyFailureCategory = 'session-authorization' | 'classifier'
+
 export interface StudySafetyClientResult {
   readonly response: StudySafetyClassificationResponseV1
   readonly failureMode?: PreAcceptanceSafetyFailureMode
   readonly serverCaptureStatus?: 'server-not-contacted' | 'server-acceptance-not-confirmed'
+  readonly failureCategory?: StudySafetyFailureCategory
 }
 
 /**
@@ -92,14 +103,14 @@ export async function classifyStudySafetyWithCaptureStatus(
 ): Promise<StudySafetyClientResult> {
   const getAccessToken = deps.getAccessToken ?? getGatewayAccessToken
   const fetchImpl = deps.fetchImpl ?? ((url, init) => fetch(url, init))
-  if (deps.signal?.aborted) return { response: failClosed('client-cancelled'), failureMode: 'network-failure-mid-request', serverCaptureStatus: 'server-not-contacted' }
+  if (deps.signal?.aborted) return { response: failClosed('client-cancelled'), failureMode: 'network-failure-mid-request', serverCaptureStatus: 'server-not-contacted', failureCategory: 'classifier' }
   let accessToken: string | null
   try {
     accessToken = await getAccessToken()
   } catch {
-    return { response: failClosed('client-auth-unavailable'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted' }
+    return { response: failClosed('client-auth-unavailable'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted', failureCategory: 'session-authorization' }
   }
-  if (!accessToken) return { response: failClosed('client-unauthenticated'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted' }
+  if (!accessToken) return { response: failClosed('client-unauthenticated'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted', failureCategory: 'session-authorization' }
   // Read once, only to build this request's headers. A missing seam, a cleared
   // transport, and a reference the identity contract refuses all land here, so
   // no unauthorized classification ever reaches the network.
@@ -107,8 +118,8 @@ export async function classifyStudySafetyWithCaptureStatus(
     Authorization: `Bearer ${accessToken}`,
     'content-type': 'application/json',
   })
-  if (!headers) return { response: failClosed('client-study-session-unavailable'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted' }
-  if (deps.signal?.aborted) return { response: failClosed('client-cancelled'), failureMode: 'network-failure-mid-request', serverCaptureStatus: 'server-not-contacted' }
+  if (!headers) return { response: failClosed('client-study-session-unavailable'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-not-contacted', failureCategory: 'session-authorization' }
+  if (deps.signal?.aborted) return { response: failClosed('client-cancelled'), failureMode: 'network-failure-mid-request', serverCaptureStatus: 'server-not-contacted', failureCategory: 'classifier' }
 
   const controller = new AbortController()
   const cancelFromHost = () => controller.abort(deps.signal?.reason)
@@ -127,12 +138,21 @@ export async function classifyStudySafetyWithCaptureStatus(
       credentials: 'omit',
       referrerPolicy: 'no-referrer',
     })
-    if (!response.ok) return { response: failClosed('client-gateway-error'), failureMode: response.status === 503 ? 'gateway-503' : 'classifier-unreachable', serverCaptureStatus: 'server-acceptance-not-confirmed' }
+    if (!response.ok) {
+      // The gateway answers 401 when the adult bearer is refused and 403 when
+      // the learner's Study-session reference is missing, expired, revoked, or
+      // unauthorized. Neither means the classifier was unreachable, so neither
+      // is reported as one — an expired session is an ordinary lifecycle event.
+      if (response.status === 401 || response.status === 403) {
+        return { response: failClosed('client-session-unauthorized'), failureMode: 'authentication-failure', serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'session-authorization' }
+      }
+      return { response: failClosed('client-gateway-error'), failureMode: response.status === 503 ? 'gateway-503' : 'classifier-unreachable', serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'classifier' }
+    }
     const result = await response.json()
-    return validResponse(result) ? { response: result } : { response: failClosed('client-malformed-response'), failureMode: 'malformed-server-response', serverCaptureStatus: 'server-acceptance-not-confirmed' }
+    return validResponse(result) ? { response: result } : { response: failClosed('client-malformed-response'), failureMode: 'malformed-server-response', serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'classifier' }
   } catch {
     const timedOut = controller.signal.aborted && !deps.signal?.aborted
-    return { response: failClosed('client-network-error'), failureMode: timedOut ? 'request-timeout' : 'network-failure-mid-request', serverCaptureStatus: 'server-acceptance-not-confirmed' }
+    return { response: failClosed('client-network-error'), failureMode: timedOut ? 'request-timeout' : 'network-failure-mid-request', serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'classifier' }
   } finally {
     globalThis.clearTimeout(timer)
     deps.signal?.removeEventListener('abort', cancelFromHost)

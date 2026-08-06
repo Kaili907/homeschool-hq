@@ -20,6 +20,34 @@ export class StudyIdentityClientError extends Error {
   }
 }
 
+/**
+ * Why this client dropped its own reference. `session-rejected` is the server
+ * refusing it (expired or revoked), `reissued` is a new launch replacing it.
+ */
+export type StudySessionInvalidationReason =
+  | 'session-rejected'
+  | 'revoked'
+  | 'cleared'
+  | 'reissued'
+
+/**
+ * The whole payload. It deliberately carries no reference, bearer token, learner
+ * text, household or student identifier, so a listener learns only that the
+ * session is gone and why.
+ */
+export interface StudySessionInvalidationNotice {
+  readonly reason: StudySessionInvalidationReason
+}
+
+export interface StudyIdentityClientDeps {
+  /**
+   * Called once per transition from a live reference to none, after this client
+   * has already cleared itself. Listener failures are swallowed: a broken
+   * listener must never turn an invalidation into a thrown request.
+   */
+  readonly onSessionInvalidated?: (notice: StudySessionInvalidationNotice) => void
+}
+
 export interface StudyIdentityClient {
   issueGuardianLaunch(input: {
     readonly accessToken: string
@@ -67,14 +95,26 @@ async function json(response: Response): Promise<unknown> {
  */
 export function createStudyIdentityClient(
   fetchImpl: typeof fetch = globalThis.fetch,
+  deps: StudyIdentityClientDeps = {},
 ): StudyIdentityClient {
   let sessionReference: string | null = null
   let generation = 0
 
+  function notifyInvalidated(reason: StudySessionInvalidationReason): void {
+    try {
+      deps.onSessionInvalidated?.(Object.freeze({ reason }))
+    } catch {
+      // A listener that throws must not change this client's fail-closed
+      // outcome; the reference is already gone by the time we get here.
+    }
+  }
+
   const client: StudyIdentityClient = {
     async issueGuardianLaunch({ accessToken, selectedStudentRef, signal }) {
       const requestGeneration = ++generation
+      const replaced = sessionReference
       sessionReference = null
+      if (replaced !== null) notifyInvalidated('reissued')
       let response: Response
       try {
         response = await fetchImpl('/api/study/session/issue', {
@@ -125,6 +165,7 @@ export function createStudyIdentityClient(
           if (requestGeneration === generation && sessionReference === current) {
             generation += 1
             sessionReference = null
+            notifyInvalidated('session-rejected')
           }
           throw new StudyIdentityClientError('student-session-invalid')
         }
@@ -162,6 +203,7 @@ export function createStudyIdentityClient(
         if (response.status === 401 && requestGeneration === generation && sessionReference === current) {
           generation += 1
           sessionReference = null
+          notifyInvalidated('session-rejected')
           throw new StudyIdentityClientError('student-session-invalid')
         }
         throw mappedError(response.status)
@@ -185,6 +227,7 @@ export function createStudyIdentityClient(
       const current = sessionReference
       generation += 1
       sessionReference = null
+      if (current !== null) notifyInvalidated('revoked')
       if (!current) return
       let response: Response
       try {
@@ -200,8 +243,10 @@ export function createStudyIdentityClient(
     },
 
     clear() {
+      const had = sessionReference !== null
       generation += 1
       sessionReference = null
+      if (had) notifyInvalidated('cleared')
     },
 
     hasSession() {
