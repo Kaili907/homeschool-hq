@@ -51,14 +51,18 @@ function u2Oracle(prompt: string): string {
 }
 const signedTerm = (n: number, variable = 'x') => n === 1 ? variable : n === -1 ? '-'+variable : String(n)+variable
 const signedConstant = (n: number) => n < 0 ? ' - '+String(-n) : ' + '+String(n)
+/** Canonical linear expression: no variable when the coefficient is zero, no tail when the constant is zero. */
+const signedLinear = (coefficient: number, constant: number, variable = 'x') =>
+  coefficient === 0 ? String(constant) : constant === 0 ? signedTerm(coefficient, variable) : signedTerm(coefficient, variable)+signedConstant(constant)
+/** A written coefficient of one is the bare variable, so `x` reads as 1 and `-x` as -1. */
+const writtenCoefficient = (text: string) => text === '' ? 1 : text === '-' ? -1 : Number(text)
 function u3Oracle(prompt: string): string {
-  let m=/^Expand (-?\d+)\(x ([+-]) (\d+)\)/.exec(prompt);if(m){const a=Number(m[1]),b=(m[2]==='-'?-1:1)*Number(m[3]);return signedTerm(a)+'x'+signedConstant(a*b)}
-  const combinePrompt=prompt.replace(/(-?\d*)xx/g,(_,coefficient)=>coefficient===''?'1x':coefficient==='-'?'-1x':coefficient+'x')
-  m=/^Combine like terms: (-?\d+)x ([+-]) (\d+) ([+-]) (\d+)x ([+-]) (\d+)\./.exec(combinePrompt);if(m){const a=Number(m[1]),b=(m[2]==='-'?-1:1)*Number(m[3]),c=(m[4]==='-'?-1:1)*Number(m[5]),d=(m[6]==='-'?-1:1)*Number(m[7]);return signedTerm(a+c)+'x'+signedConstant(b+d)}
+  let m=/^Expand (-?\d+)\(x ([+-]) (\d+)\)/.exec(prompt);if(m){const a=Number(m[1]),b=(m[2]==='-'?-1:1)*Number(m[3]);return signedLinear(a,a*b)}
+  m=/^Combine like terms: (-?\d*)x ([+-]) (\d+) ([+-]) (-?\d*)x ([+-]) (\d+)\./.exec(prompt);if(m){const a=writtenCoefficient(m[1]),b=(m[2]==='-'?-1:1)*Number(m[3]),c=(m[4]==='-'?-1:1)*writtenCoefficient(m[5]),d=(m[6]==='-'?-1:1)*Number(m[7]);return signedLinear(a+c,b+d)}
   m=/^Factor (\d+)x ([+-]) (\d+)/.exec(prompt);if(m)return m[1]+'(x '+m[2]+' '+String(Number(m[3])/Number(m[1]))+')'
   m=/^Evaluate (-?\d+)\(x ([+-]) (\d+)\) when x = (-?\d+)/.exec(prompt);if(m)return String(Number(m[1])*(Number(m[3])*(m[2]==='-'?-1:1)+Number(m[4])))
   m=/^In (-?\d+)n [+-]/.exec(prompt);if(m)return m[1]+' per group'
-  m=/starting adjustment and costs (-?\d+) dollars per ticket/.exec(prompt)!;const adjustment=/has a (-?\d+) dollar/.exec(prompt)!;return signedTerm(Number(m[1]),'t')+signedConstant(Number(adjustment[1]))
+  m=/starting adjustment and costs (-?\d+) dollars per ticket/.exec(prompt)!;const adjustment=/has a (-?\d+) dollar/.exec(prompt)!;return signedLinear(Number(m[1]),Number(adjustment[1]),'t')
 }
 describe('Grade 7 Units 1-3 independent prompt-parsing oracles (600 verified items per type)', () => {
   for (const [name, types, generate, oracle] of [

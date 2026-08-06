@@ -65,18 +65,8 @@ const PLACEHOLDER_STEPS = [
   'Build and solve a model, then check the result against the context.',
 ]
 
-/**
- * Units 1-3 build a coefficient with a `term()` helper that already appends the
- * variable, then append a second `x`, so every `distribute` and
- * `combine-like-terms` prompt and correct answer ships a doubled variable (`5xx`
- * where `5x` is meant). Repairing that would change generated prompts and correct
- * answers, which this card does not own, so shape comparisons normalise it and
- * `documents the pre-existing doubled-variable artifact` pins the defect in place.
- */
-const undouble = (text: string): string => text.replace(/xx/g, 'x')
-
 /** Collapses a string to its shape: "$13.77" -> "$#.#", "closed circle at 4" -> "closed circle at #". */
-const shapeOf = (text: string): string => undouble(text).replace(/\d+/g, '#')
+const shapeOf = (text: string): string => text.replace(/\d+/g, '#')
 
 /**
  * A step that teaches states an operation on real numbers and its result, such as
@@ -92,6 +82,30 @@ const CONCRETE_STEP = /-?\d[\d/.,² ]*\s*[+\-×÷*]\s*-?[\d/.,² ]*\d[^=]*=\s*-?
  */
 const PICTURE_ITEM_TYPES = new Set(['graph-inequality'])
 
+/**
+ * A calculation a worked example states outright: a chain of integers joined by
+ * + - × ÷ with an integer on the right of the `=`. Neither side may sit inside a
+ * larger token, so `3 ÷ 4 = 3/4` and `= 0.25` and `= 25%` and `= 4x + 12` are left
+ * to the units that own them rather than misread as integer claims. The chain is
+ * taken at maximum length, so `4 × 2 + 7 = 15` is read whole rather than as a
+ * false claim about `2 + 7`.
+ */
+const STATED_CALCULATION = /(?<![\w/.])(-?\d+(?: [+\-×÷] -?\d+)+) = (-?\d+)(?![\w/%²:])(?!\.\d)/g
+
+/** Evaluates the integer chains above with normal precedence: × and ÷ bind before + and -. */
+function evaluateChain(chain: string): number {
+  const tokens = chain.split(' ')
+  const values = [Number(tokens[0])]
+  const operators: string[] = []
+  for (let index = 1; index < tokens.length; index += 2) {
+    const value = Number(tokens[index + 1])
+    if (tokens[index] === '×') values[values.length - 1] *= value
+    else if (tokens[index] === '÷') values[values.length - 1] /= value
+    else { operators.push(tokens[index]); values.push(value) }
+  }
+  return values.reduce((total, value, index) => (index === 0 ? value : operators[index - 1] === '-' ? total - value : total + value))
+}
+
 const gcd = (a: number, b: number): number => (b === 0 ? Math.abs(a) : gcd(b, a % b))
 function frac(numerator: number, denominator: number): string {
   if (denominator < 0) { numerator = -numerator; denominator = -denominator }
@@ -102,6 +116,13 @@ function frac(numerator: number, denominator: number): string {
 const money = (cents: number) => `$${Math.trunc(cents / 100)}.${String(cents % 100).padStart(2, '0')}`
 const term = (coefficient: number, variable: string) => (coefficient === 1 ? variable : coefficient === -1 ? `-${variable}` : `${coefficient}${variable}`)
 const tail = (constant: number) => (constant < 0 ? ` - ${-constant}` : ` + ${constant}`)
+/**
+ * Canonical linear expression, derived here from algebra rather than copied from
+ * the generator: a coefficient of zero leaves no variable to write, a coefficient
+ * of one is written as the bare variable, and a constant of zero adds nothing.
+ */
+const linear = (coefficient: number, constant: number, variable: string) =>
+  coefficient === 0 ? String(constant) : constant === 0 ? term(coefficient, variable) : `${term(coefficient, variable)}${tail(constant)}`
 function grab(text: string, expression: RegExp): RegExpExecArray {
   const found = expression.exec(text)
   if (!found) throw new Error(`worked-example prompt did not parse: ${JSON.stringify(text)} against ${expression}`)
@@ -141,12 +162,12 @@ function recomputeFromExamplePrompt(itemType: string, prompt: string): string {
     case 'multi-step-rational': { const m = grab(prompt, /^(-?\d+) \+ \((-?\d+) \* (-?\d+)\) = \?$/); return String(n(m[1]) + n(m[2]) * n(m[3])) }
 
     // Unit 3 - equivalent expressions
-    case 'distribute': { const m = grab(prompt, /^Expand (-?\d+)\(x ([+-]) (\d+)\)\.$/); const a = n(m[1]), b = (m[2] === '-' ? -1 : 1) * n(m[3]); return `${term(a, 'x')}${tail(a * b)}` }
-    case 'combine-like-terms': { const m = grab(prompt, /^Combine like terms: (-?\d*)x ([+-]) (\d+) ([+-]) (\d*)x ([+-]) (\d+)\.$/); const a = coefficient(m[1]), b = (m[2] === '-' ? -1 : 1) * n(m[3]), c = (m[4] === '-' ? -1 : 1) * coefficient(m[5]), d = (m[6] === '-' ? -1 : 1) * n(m[7]); return `${term(a + c, 'x')}${tail(b + d)}` }
+    case 'distribute': { const m = grab(prompt, /^Expand (-?\d+)\(x ([+-]) (\d+)\)\.$/); const a = n(m[1]), b = (m[2] === '-' ? -1 : 1) * n(m[3]); return linear(a, a * b, 'x') }
+    case 'combine-like-terms': { const m = grab(prompt, /^Combine like terms: (-?\d*)x ([+-]) (\d+) ([+-]) (\d*)x ([+-]) (\d+)\.$/); const a = coefficient(m[1]), b = (m[2] === '-' ? -1 : 1) * n(m[3]), c = (m[4] === '-' ? -1 : 1) * coefficient(m[5]), d = (m[6] === '-' ? -1 : 1) * n(m[7]); return linear(a + c, b + d, 'x') }
     case 'factor-expression': { const m = grab(prompt, /^Factor (\d+)x ([+-]) (\d+) using the greatest common factor\.$/); const g = n(m[1]), inside = (m[2] === '-' ? -1 : 1) * n(m[3]) / g; return `${g}(x ${inside < 0 ? '-' : '+'} ${Math.abs(inside)})` }
     case 'equivalent-form': { const m = grab(prompt, /^Evaluate (-?\d+)\(x ([+-]) (\d+)\) when x = (-?\d+)\.$/); return String(n(m[1]) * (n(m[4]) + (m[2] === '-' ? -1 : 1) * n(m[3]))) }
     case 'interpret-expression': { const m = grab(prompt, /^In (-?\d+)n ([+-]) (\d+), what does (-?\d+) represent\?$/); return `${m[4]} per group` }
-    case 'context-expression': { const m = grab(prompt, /^A trip has a (-?\d+) dollar starting adjustment and costs (-?\d+) dollars per ticket t\. Write an expression\.$/); return `${term(n(m[2]), 't')}${tail(n(m[1]))}` }
+    case 'context-expression': { const m = grab(prompt, /^A trip has a (-?\d+) dollar starting adjustment and costs (-?\d+) dollars per ticket t\. Write an expression\.$/); return linear(n(m[2]), n(m[1]), 't') }
 
     // Unit 4 - equations and inequalities
     case 'multi-step-numerical-problem': { const m = grab(prompt, /^A group buys (\d+) passes at \$(\d+) each and pays a \$(\d+) service fee\. What is the total cost\?$/); return `$${n(m[1]) * n(m[2]) + n(m[3])}` }
@@ -234,8 +255,9 @@ function sample(unit: UnitUnderTest, type: string, seed: number, perDifficulty =
   const items: AnyQuestion[] = []
   for (const difficulty of [1, 2, 3] as const)
     for (let run = 0; run < perDifficulty; run++) {
-      // A rare distinct-distractor collapse predates this card; skip those draws
-      // rather than let one throw hide the shape coverage of the other 599.
+      // A rare distinct-distractor collapse predates this suite; skip those draws
+      // rather than let one throw hide the shape coverage of the other 599. Unit 3
+      // no longer reaches it — grade7MathUnit3Adversarial.test.ts fails on any throw.
       try { items.push(unit.generate(type, difficulty)) } catch { /* pre-existing generator edge case */ }
     }
   expect(items.length, `${type} produced too few samples`).toBeGreaterThan(perDifficulty * 2)
@@ -291,6 +313,17 @@ describe('Grade 7 Units 1-6, 9 and 10: every item type owns its worked example',
       }
     })
 
+    it(`U${unit.unit} states no calculation that is arithmetically false`, () => {
+      let checked = 0
+      for (const type of unit.types)
+        for (const step of unit.definitions[type].workedExample.steps)
+          for (const [, chain, stated] of step.matchAll(STATED_CALCULATION)) {
+            checked++
+            expect(evaluateChain(chain), `U${unit.unit} ${type} states "${chain} = ${stated}"`).toBe(Number(stated))
+          }
+      expect(checked, `U${unit.unit} states no checkable calculation at all`).toBeGreaterThanOrEqual(unit.types.length)
+    })
+
     for (const [index, type] of unit.types.entries()) {
       it(`U${unit.unit} ${type}: the worked example is an instance of what this item type actually asks`, () => {
         const items = sample(unit, type, unit.unit * 7919 + index * 131 + 17)
@@ -318,7 +351,62 @@ describe('Grade 7 Units 1-6, 9 and 10: every item type owns its worked example',
     for (const unit of UNITS)
       for (const [index, type] of unit.types.entries())
         for (const item of sample(unit, type, unit.unit * 104_729 + index * 271 + 5, 40))
-          expect(recomputeFromExamplePrompt(type, undouble(item.prompt)), `U${unit.unit} ${item.prompt}`).toBe(undouble(curriculumAnswer(item)))
+          expect(recomputeFromExamplePrompt(type, item.prompt), `U${unit.unit} ${item.prompt}`).toBe(curriculumAnswer(item))
+  })
+})
+
+/**
+ * Drives one exact parameter tuple through Unit 3 rather than hunting for it in
+ * random draws. `make` consumes its RNG in a fixed order — sign then magnitude for
+ * a, b, c and d, then the factoring pair — and every later draw only shuffles, so
+ * a scripted stream that runs out and returns 0 still builds a valid item.
+ */
+const chooseSign = (value: number) => (value < 0 ? 0.25 : 0.75)
+const chooseMagnitude = (value: number, min: number, max: number) => (Math.abs(value) - min + 0.5) / (max - min + 1)
+interface Unit3Draw { a: number; b: number; c: number; d: number; g?: number; inside?: number }
+function unit3WithParameters(type: string, difficulty: Difficulty, draw: Unit3Draw): AnyQuestion {
+  const top = 5 + difficulty
+  const stream = [
+    chooseSign(draw.a), chooseMagnitude(draw.a, 2, top),
+    chooseSign(draw.b), chooseMagnitude(draw.b, 1, top),
+    chooseSign(draw.c), chooseMagnitude(draw.c, 1, top),
+    chooseSign(draw.d), chooseMagnitude(draw.d, 1, top),
+  ]
+  if (draw.g !== undefined) stream.push(chooseMagnitude(draw.g, 2, top), chooseSign(draw.inside!), chooseMagnitude(draw.inside!, 1, top))
+  let index = 0
+  setRng(() => (index < stream.length ? stream[index++] : 0))
+  try { return generateGrade7MathUnit3Question(type as never, difficulty) } finally { setRng(null) }
+}
+
+/** The parameter tuple each Unit 3 worked example is an instance of. */
+const UNIT3_WORKED_DRAWS: ReadonlyArray<readonly [string, Difficulty, Unit3Draw]> = [
+  ['distribute', 1, { a: -5, b: -3, c: 1, d: 1 }],
+  ['combine-like-terms', 1, { a: 5, b: 6, c: -2, d: -2 }],
+  ['factor-expression', 1, { a: 2, b: 1, c: 1, d: 1, g: 4, inside: 3 }],
+  ['equivalent-form', 1, { a: 3, b: 5, c: 2, d: 1 }],
+  ['interpret-expression', 2, { a: 4, b: 7, c: 1, d: 1 }],
+  ['context-expression', 1, { a: 5, b: 6, c: 1, d: 1 }],
+]
+
+describe('Grade 7 Unit 3 renders the algebra its worked examples teach', () => {
+  for (const [type, difficulty, draw] of UNIT3_WORKED_DRAWS)
+    it(`${type}: the worked example is a draw this generator actually produces`, () => {
+      const example = GRADE7_MATH_UNIT3_ITEM_DEFINITIONS[type as never] as { workedExample: CurriculumWorkedExample }
+      const question = unit3WithParameters(type, difficulty, draw)
+      expect(question.prompt).toBe(example.workedExample.prompt)
+      expect(curriculumAnswer(question)).toBe(example.workedExample.answer)
+    })
+
+  it('cancels the x-terms to a bare constant instead of writing a zero coefficient', () => {
+    const question = unit3WithParameters('combine-like-terms', 1, { a: 3, b: -5, c: -3, d: -3 })
+    expect(question.prompt).toBe('Combine like terms: 3x - 5 - 3x - 3.')
+    expect(curriculumAnswer(question)).toBe('-8')
+  })
+
+  it('drops a zero constant instead of writing a zero tail', () => {
+    const question = unit3WithParameters('combine-like-terms', 1, { a: 3, b: 5, c: 1, d: -5 })
+    expect(question.prompt).toBe('Combine like terms: 3x + 5 + x - 5.')
+    expect(curriculumAnswer(question)).toBe('4x')
   })
 })
 
@@ -327,6 +415,11 @@ describe('Grade 7 Units 1-6, 9 and 10: every item type owns its worked example',
  * any worked example was rewritten. Each digest covers 180 generated items (60 per
  * difficulty) of one item type, hashing prompt, correct answer and the sorted
  * choice set, so a change to any prompt, correct answer or distractor breaks it.
+ *
+ * The six `u3:` digests were re-taken when Unit 3's rendering and distractors were
+ * corrected: that unit deliberately stopped emitting `5xx`, `0x - 8` and
+ * wrong-kind distractors, and the choice sets moved with it. The other 42 digests
+ * are the originals and are what proves no other Grade 7 unit moved with it.
  */
 const BASELINE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u1:unit-rate-fraction', '87483669116129bc803bd38fdf74d028d6beb4017bf1be7ab1fe2d2e8c94494f'],
@@ -341,12 +434,12 @@ const BASELINE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u2:divide-signed', '6d88482c578bfff5b8ba86851f2d89fc1bc1d5da4d7e7acc747d44357b1b8192'],
   ['u2:signed-fractions', '3c59c33873e03567a3708d9cc6448e7e1b0730182ad8d124e5445526df2cdc2b'],
   ['u2:multi-step-rational', '5bfbcc5a166c72a0f087638f3843136f9ec71c56cdbf56ec1d4756a43e7a4ebd'],
-  ['u3:distribute', 'be6d4b1667d89acb20481451aa719b09954b3262cd6a09e779935bcfa9f200c5'],
-  ['u3:combine-like-terms', 'eda2b52294f10ee6a4972ecdb8dccd8306c4aafa40aff509126bcce4fa93a08a'],
-  ['u3:factor-expression', 'd88a0b3138b16f379abe00342dd982c7a1d30574fb6913af200d933d5d03f010'],
-  ['u3:equivalent-form', '6b1c4f60ae42b5be84ee30bf2462817ecacdad924d85b18f47dc18747b614dbf'],
-  ['u3:interpret-expression', '4913a79dfdd4fa63dee80e292eb2f8b9a4c50bdc96df645a18ed9ac1f5c60bd7'],
-  ['u3:context-expression', 'd43748eaa50dafb11438b0d59c122cf7150d58cc3d405868f8fb700d845f7ab6'],
+  ['u3:distribute', '48cf0190e46aefacbddbb087327ecf6317eaefda9ce6e02abae67e3ea7f08a96'],
+  ['u3:combine-like-terms', 'c2f1658f75f2eed6376a19fb2f2f4acd7961139d452d62efc00b213b4591e05e'],
+  ['u3:factor-expression', 'a7b43e2a96de8352440e0eee9310f36fc206105f660f1b6e217bab5763bc8764'],
+  ['u3:equivalent-form', '5b91112af7a165ff53e475fa50a7113b6f7c239deb0aae79815ce1841525a477'],
+  ['u3:interpret-expression', '8c06cb000ce4ecb33b35aa4e3ff0d609b7a2bc136d85224c3e1d716e7f68b736'],
+  ['u3:context-expression', '7e3e8ca509ee2acadea1e8db9457deb7392f2e6ae976a21d26d3fedd031730f3'],
   ['u4:multi-step-numerical-problem', '927ca74d7943c62a1e8625f2a7137a81d1152ea4831ca7d8f359f2a453ce31bf'],
   ['u4:two-step-equation', '3a54e4891278ccc2684c80e30a33a60a49e5500b543aab35dbc654ea5168a4f0'],
   ['u4:two-step-inequality', '2bbcae05a66c8a076394b71c15e9fb0bec231529fb671225b11843dc5d9baaaa'],
@@ -379,8 +472,8 @@ const BASELINE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u10:argument-and-presentation', 'f37e338d34c546cf04d801756d447d1afacf7eaf39a22f630b47138c540baa3b'],
 ]
 
-describe('Grade 7 worked-example rewrite leaves the generated questions alone', () => {
-  it('reproduces the baseline prompt, correct answer and distractor fingerprint of all 48 item types', () => {
+describe('Grade 7 generated questions move only where Unit 3 was corrected', () => {
+  it('reproduces the prompt, correct answer and distractor fingerprint of all 48 item types', () => {
     const observed: Array<readonly [string, string]> = []
     for (const unit of UNITS)
       for (const [index, type] of unit.types.entries()) {
@@ -399,17 +492,4 @@ describe('Grade 7 worked-example rewrite leaves the generated questions alone', 
     expect(observed).toEqual(BASELINE_FINGERPRINT)
   })
 
-  /**
-   * Not an endorsement: this pins a defect the card does not own, so the day the
-   * `term()` rendering is repaired this test fails loudly and `undouble` above
-   * can be deleted with it.
-   */
-  it('documents the pre-existing doubled-variable artifact in Unit 3', () => {
-    setRng(seededRng(0x3_0001))
-    const expanded = generateGrade7MathUnit3Question('distribute', 1)
-    expect(curriculumAnswer(expanded), 'U3 distribute still renders 5x as 5xx in its correct answer').toMatch(/\d+xx/)
-    setRng(seededRng(0x3_0002))
-    const combined = generateGrade7MathUnit3Question('combine-like-terms', 1)
-    expect(combined.prompt, 'U3 combine-like-terms still renders 5x as 5xx in its prompt').toMatch(/\d+xx/)
-  })
 })

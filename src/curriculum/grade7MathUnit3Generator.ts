@@ -7,12 +7,7 @@ export type Grade7MathUnit3ItemType=typeof GRADE7_MATH_UNIT3_ITEM_TYPES[number];
 /**
  * One authored worked example per item type. Each prompt is a concrete instance of
  * that item type's own generated shape and each answer is the answer to that
- * prompt. The variable is written the standard way, as `5x`; `term()` below
- * already appends the variable and the callers append a second `x`, so generated
- * `distribute` and `combine-like-terms` strings read `5xx`. Repairing that would
- * change generated prompts and correct answers, which this change does not own, so
- * the teaching prose uses correct notation and the artifact is pinned by
- * `documents the pre-existing doubled-variable artifact` in the unit tests.
+ * prompt, in the same canonical notation the generator below renders.
  */
 const defs:Record<Grade7MathUnit3ItemType,{standard:'7.EE.1'|'7.EE.2';lessonFocus:string;workedExample:CurriculumWorkedExample}>={
  distribute:{standard:'7.EE.1',lessonFocus:'distributive property',workedExample:{
@@ -64,7 +59,60 @@ const defs:Record<Grade7MathUnit3ItemType,{standard:'7.EE.1'|'7.EE.2';lessonFocu
    'Adding the two parts gives 5t + 6. Check with 3 tickets: 5 × 3 + 6 = 21 dollars, which matches 3 tickets at 5 dollars plus the single 6 dollar adjustment.',
   ]}},
 }
-const term=(n:number,v='x')=>n===1?v:n===-1?`-${v}`:`${n}${v}`;const signed=(n:number)=>n<0?` - ${-n}`:` + ${n}`
-const make=(kind:Grade7MathUnit3ItemType,difficulty:Difficulty):Grade7MathUnit3Question=>{const a=pick([-1,1] as const)*ri(2,5+difficulty),b=pick([-1,1] as const)*ri(1,5+difficulty),c=pick([-1,1] as const)*ri(1,5+difficulty),d=pick([-1,1] as const)*ri(1,5+difficulty);let correct:string,prompt:string
-if(kind==='distribute'){correct=`${term(a)}x${signed(a*b)}`;prompt=`Expand ${a}(x ${b<0?'-':'+'} ${Math.abs(b)}).`}else if(kind==='combine-like-terms'){correct=`${term(a+c)}x${signed(b+d)}`;prompt=`Combine like terms: ${term(a)}x${signed(b)} ${c<0?'-':'+'} ${term(Math.abs(c))}x${signed(d)}.`}else if(kind==='factor-expression'){const g=ri(2,5+difficulty),inside=pick([-1,1] as const)*ri(1,5+difficulty);correct=`${g}(x ${inside<0?'-':'+'} ${Math.abs(inside)})`;prompt=`Factor ${g}x${signed(g*inside)} using the greatest common factor.`}else if(kind==='equivalent-form'){correct=String(a*(c+b));prompt=`Evaluate ${a}(x ${b<0?'-':'+'} ${Math.abs(b)}) when x = ${c}.`}else if(kind==='interpret-expression'){correct=`${a} per group`;prompt=`In ${term(a,'n')}${signed(b)}, what does ${a} represent?`}else{correct=`${term(a,'t')}${signed(b)}`;prompt=`A trip has a ${b} dollar starting adjustment and costs ${a} dollars per ticket t. Write an expression.`}const choices=[`${term(a+1)}x${signed(a*b)}`,`${term(a)}x${signed(b)}`,`${term(a+c)}x${signed(b+d)}`,String(a+b+c)];const definition=defs[kind];return makeCurriculumQuestion({itemType:kind,standard:definition.standard,lessonFocus:definition.lessonFocus,difficulty,prompt,correctAnswer:correct,distractors:choices,parameters:{a,b,c,d,kind},workedExample:definition.workedExample,distractorMode:'distinct'})}
+/** Canonical single term: a coefficient of 1 reads `x` and -1 reads `-x`. The variable is appended here and nowhere else. */
+const term=(n:number,v='x')=>n===1?v:n===-1?`-${v}`:`${n}${v}`
+/** Canonical trailing constant, so a negative constant reads ` - 4` rather than ` + -4`. */
+const signed=(n:number)=>n<0?` - ${-n}`:` + ${n}`
+/**
+ * Canonical linear expression. A zero coefficient drops the variable (`0x - 8`
+ * reads `-8`) and a zero constant drops the tail (`3x + 0` reads `3x`). The
+ * rendering is one-to-one on the (coefficient, constant) pair — a bare integer
+ * never contains the variable, a bare term never contains a sign separator, and
+ * both halves parse back uniquely — so two linear expressions collide as strings
+ * only when both numbers agree. Every distinctness argument below relies on that.
+ */
+const linear=(coefficient:number,constant:number,v='x')=>coefficient===0?String(constant):constant===0?term(coefficient,v):`${term(coefficient,v)}${signed(constant)}`
+/** Canonical factored expression `g(x + m)` / `g(x - m)`, one-to-one on (g, m) for m != 0. */
+const factored=(g:number,m:number)=>`${g}(x ${m<0?'-':'+'} ${Math.abs(m)})`
+/**
+ * Builds one item. Each item type gets distractors drawn from its own answer kind
+ * — expressions for the three expression types, a number for the evaluation type,
+ * interpretation statements for the interpretation type — so no choice can be
+ * discarded on its shape alone.
+ *
+ * Every distractor list opens with three entries that are provably distinct from
+ * the correct answer and from each other for every parameter draw, given |a| >= 2
+ * and b, c, d and inside all non-zero, so the `distinct` choice builder always has
+ * the three it requires and can never fail closed. Any further entry is extra
+ * variety and may legitimately collapse into an earlier one.
+ */
+const make=(kind:Grade7MathUnit3ItemType,difficulty:Difficulty):Grade7MathUnit3Question=>{const a=pick([-1,1] as const)*ri(2,5+difficulty),b=pick([-1,1] as const)*ri(1,5+difficulty),c=pick([-1,1] as const)*ri(1,5+difficulty),d=pick([-1,1] as const)*ri(1,5+difficulty);let correct:string,prompt:string,distractors:string[]
+if(kind==='distribute'){correct=linear(a,a*b);prompt=`Expand ${a}(x ${b<0?'-':'+'} ${Math.abs(b)}).`
+ // Multiplied only the x term; flipped the sign of the product; did neither. The
+ // constants b, -ab and -b differ pairwise, and from ab, because a is neither 1 nor -1.
+ distractors=[linear(a,b),linear(a,-a*b),linear(a,-b),linear(a,a+b)]}
+else if(kind==='combine-like-terms'){correct=linear(a+c,b+d);prompt=`Combine like terms: ${term(a)}${signed(b)} ${c<0?'-':'+'} ${term(Math.abs(c))}${signed(d)}.`
+ // Subtracted the coefficients, subtracted the constants, or both. c and d are
+ // non-zero, so a-c never equals a+c and b-d never equals b+d.
+ distractors=[linear(a-c,b+d),linear(a+c,b-d),linear(a-c,b-d)]}
+else if(kind==='factor-expression'){const g=ri(2,5+difficulty),inside=pick([-1,1] as const)*ri(1,5+difficulty);correct=factored(g,inside);prompt=`Factor ${g}x${signed(g*inside)} using the greatest common factor.`
+ // Divided only the x term by the GCF; flipped the sign inside; did both. A fourth,
+ // available when half the GCF is still a usable factor, is the classic
+ // not-fully-factored answer, which no other entry can render.
+ distractors=[factored(g,g*inside),factored(g,-inside),factored(g,-g*inside)]
+ if(g%2===0&&g>=4)distractors.push(`${g/2}(2x ${inside<0?'-':'+'} ${2*Math.abs(inside)})`)}
+else if(kind==='equivalent-form'){correct=String(a*(c+b));prompt=`Evaluate ${a}(x ${b<0?'-':'+'} ${Math.abs(b)}) when x = ${c}.`
+ // Multiplied only x then added b; subtracted inside the parentheses; dropped the
+ // constant inside entirely. Every difference between them, and between each of
+ // them and a(b+c), is a non-zero multiple of ab or of b.
+ distractors=[String(a*c+b),String(a*(c-b)),String(a*c),String(a*b+c)]}
+else if(kind==='interpret-expression'){correct=`${a} per group`;prompt=`In ${term(a,'n')}${signed(b)}, what does ${a} represent?`
+ // Folded the constant into the rate; read the coefficient as the fixed amount;
+ // read it as the variable. b is non-zero, so a + b never equals a.
+ distractors=[`${a+b} per group`,`a fixed starting amount of ${a}`,'the number of groups',`${b} per group`]}
+else{correct=linear(a,b,'t');prompt=`A trip has a ${b} dollar starting adjustment and costs ${a} dollars per ticket t. Write an expression.`
+ // Wrong sign on the fixed amount, on the rate, or on both; then the reversal that
+ // swaps rate and fixed amount. a and b are non-zero, so the first three differ.
+ distractors=[linear(a,-b,'t'),linear(-a,b,'t'),linear(-a,-b,'t'),linear(b,a,'t')]}
+const definition=defs[kind];return makeCurriculumQuestion({itemType:kind,standard:definition.standard,lessonFocus:definition.lessonFocus,difficulty,prompt,correctAnswer:correct,distractors,parameters:{a,b,c,d,kind},workedExample:definition.workedExample,distractorMode:'distinct'})}
 export const GRADE7_MATH_UNIT3_GENERATORS=Object.fromEntries(GRADE7_MATH_UNIT3_ITEM_TYPES.map(k=>[k,(d:Difficulty)=>make(k,d)])) as Record<Grade7MathUnit3ItemType,CurriculumGenerator<Grade7MathUnit3Question>>;export const generateGrade7MathUnit3Question=(itemType:Grade7MathUnit3ItemType,difficulty:Difficulty)=>GRADE7_MATH_UNIT3_GENERATORS[itemType](difficulty);export {defs as GRADE7_MATH_UNIT3_ITEM_DEFINITIONS}
