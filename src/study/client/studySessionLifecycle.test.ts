@@ -1,3 +1,4 @@
+import { inspect } from 'node:util'
 import { describe, expect, it, vi } from 'vitest'
 import type { StudySessionGrant } from '../contracts/identity/session'
 import { classifyStudySafety } from '../safety/client'
@@ -68,6 +69,35 @@ function lifecycleDeps(clock: ReturnType<typeof fakeClock>, extra: StudySessionL
     clearTimer: clock.clearTimer,
     ...extra,
   } satisfies StudySessionLifecycleDeps
+}
+
+/**
+ * Grants whose own enumerable properties throw the instant they are read. The
+ * lifecycle cancels its timer and drops its expiry before installing, so a
+ * refusal it does not fully absorb leaves an unexpirable session behind.
+ */
+function throwingGrants(): Record<string, StudySessionGrant> {
+  return {
+    'sessionReference getter throws': {
+      schemaVersion: 1,
+      status: 'issued',
+      get sessionReference(): string { throw new Error('hostile sessionReference accessor') },
+      expiresAt: EXPIRES_AT,
+    },
+    'expiresAt getter throws': {
+      schemaVersion: 1,
+      status: 'issued',
+      sessionReference: REFERENCE_B,
+      get expiresAt(): string { throw new Error('hostile expiresAt accessor') },
+    },
+    'additional enumerable getter throws': {
+      schemaVersion: 1,
+      status: 'issued',
+      sessionReference: REFERENCE_B,
+      expiresAt: EXPIRES_AT,
+      get extra(): string { throw new Error('hostile extra accessor') },
+    },
+  } as unknown as Record<string, StudySessionGrant>
 }
 
 /** Issues once, then answers everything else with `verifyStatus`. */
@@ -706,6 +736,121 @@ describe('Study session lifecycle — custody of the reference', () => {
     expect(lifecycle.lastClearReason()).toBeNull()
     lifecycle.onIdentitySessionInvalidated({ reason: 'revoked' })
     expect(JSON.stringify(lifecycle.lastClearReason())).not.toContain('aca_stu_v1_')
+  })
+
+  it('keeps nothing authorizing when a grant throws while it is being read', () => {
+    for (const [label, hostile] of Object.entries(throwingGrants())) {
+      const clock = fakeClock()
+      const transport = createStudySessionTransport()
+      const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock, { transport }))
+
+      lifecycle.install(grant(REFERENCE_A))
+      expect(lifecycle.hasSession(), label).toBe(true)
+      expect(clock.liveCount(), label).toBe(1)
+
+      // The lifecycle has already cancelled grant A's timer and dropped its
+      // expiry by the time the read fails, so a session that survived the
+      // refusal would authorize with nothing left to ever expire it.
+      expect(() => lifecycle.install(hostile), label).toThrow()
+      expect(lifecycle.hasSession(), label).toBe(false)
+      expect(transport.hasSession(), label).toBe(false)
+      expect(lifecycle.authorization.authorizeStudyRequestHeaders({}), label).toBeNull()
+      expect(lifecycle.lastClearReason(), label).toBe('install-rejected')
+      expect(clock.liveCount(), label).toBe(0)
+
+      // Lazily too: nothing brings the refused session back, however long we wait.
+      clock.advance(3 * ONE_HOUR)
+      expect(lifecycle.hasSession(), label).toBe(false)
+      expect(lifecycle.authorization.authorizeStudyRequestHeaders({}), label).toBeNull()
+      expect(lifecycle.lastClearReason(), label).toBe('install-rejected')
+      expect(clock.liveCount(), label).toBe(0)
+    }
+  })
+
+  it('stays empty across repeated throwing installs and still accepts a later valid grant', () => {
+    const clock = fakeClock()
+    const transport = createStudySessionTransport()
+    const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock, { transport }))
+    lifecycle.install(grant(REFERENCE_A))
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      for (const hostile of Object.values(throwingGrants())) {
+        expect(() => lifecycle.install(hostile)).toThrow()
+        expect(lifecycle.hasSession()).toBe(false)
+        expect(transport.hasSession()).toBe(false)
+        expect(lifecycle.lastClearReason()).toBe('install-rejected')
+        expect(clock.liveCount()).toBe(0)
+      }
+    }
+
+    lifecycle.install(grant(REFERENCE_B))
+    expect(lifecycle.hasSession()).toBe(true)
+    expect(lifecycle.lastClearReason()).toBeNull()
+    expect(clock.liveCount()).toBe(1)
+    expect(lifecycle.authorization.authorizeStudyRequestHeaders({})).toEqual({
+      [STUDY_SESSION_HEADER]: REFERENCE_B,
+    })
+  })
+
+  it('discloses no previous reference when a throwing grant is refused', () => {
+    for (const [label, hostile] of Object.entries(throwingGrants())) {
+      const clock = fakeClock()
+      const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock))
+      lifecycle.install(grant(REFERENCE_A))
+
+      let thrown: unknown
+      try {
+        lifecycle.install(hostile)
+      } catch (error) {
+        thrown = error
+      }
+      expect(thrown, label).toBeInstanceOf(Error)
+
+      const descriptors = Object.getOwnPropertyDescriptors(lifecycle)
+      for (const surface of [
+        String(thrown),
+        (thrown as Error).stack ?? '',
+        JSON.stringify({ error: String(thrown), stack: (thrown as Error).stack }),
+        inspect(thrown, { depth: null, showHidden: true }),
+        inspect(lifecycle, { depth: null, showHidden: true }),
+        JSON.stringify(lifecycle),
+        JSON.stringify(lifecycle.lastClearReason()),
+        inspect(descriptors, { depth: null, showHidden: true }),
+        Object.values(descriptors).map((descriptor) => String(descriptor.value)).join('|'),
+        Object.values(lifecycle).map(String).join('|'),
+      ]) {
+        expect(surface, label).not.toContain('aca_stu_v1_')
+      }
+    }
+  })
+
+  it('does not stay authorizing when an injected transport throws without clearing', () => {
+    const clock = fakeClock()
+    const inner = createStudySessionTransport()
+    let refuse = false
+    // A transport that refuses the rotation but keeps the previous reference:
+    // the exact fail-open shape the lifecycle must absorb on its own.
+    const transport: StudySessionTransport = {
+      install(grant) {
+        if (refuse) throw new StudySessionTransportError('study-session-reference-invalid')
+        return inner.install(grant)
+      },
+      authorizeStudyRequestHeaders: (headers) => inner.authorizeStudyRequestHeaders(headers),
+      clear: () => inner.clear(),
+      hasSession: () => inner.hasSession(),
+    }
+    const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock, { transport }))
+
+    lifecycle.install(grant(REFERENCE_A))
+    expect(transport.hasSession()).toBe(true)
+    refuse = true
+
+    expect(() => lifecycle.install(grant(REFERENCE_B))).toThrow(StudySessionTransportError)
+    expect(transport.hasSession()).toBe(false)
+    expect(lifecycle.hasSession()).toBe(false)
+    expect(lifecycle.authorization.authorizeStudyRequestHeaders({})).toBeNull()
+    expect(lifecycle.lastClearReason()).toBe('install-rejected')
+    expect(clock.liveCount()).toBe(0)
   })
 
   it('writes nothing to storage, the URL, history, or the console across a full lifecycle', async () => {

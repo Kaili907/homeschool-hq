@@ -63,6 +63,13 @@ export function createStudySessionTransport(): StudySessionTransport {
 
   return Object.freeze({
     install(grant: StudySessionGrant) {
+      // Fail closed before the grant is touched at all. A refused rotation must
+      // not leave the previous reference live, because the caller no longer
+      // knows which session this transport represents — and reading the grant
+      // is itself caller-controlled: an enumerable accessor can throw straight
+      // out of the copy below, so anything cleared after that point would never
+      // be cleared at all.
+      sessionReference = null
       // Copy the own enumerable fields once, before validating. A grant whose
       // `expiresAt` is an accessor would otherwise be free to return one value
       // to the canonical parser and a later, longer-lived one to whoever reads
@@ -71,10 +78,6 @@ export function createStudySessionTransport(): StudySessionTransport {
       // canonical parser and the expiry below see the same frozen-in value.
       const snapshot = grant !== null && typeof grant === 'object' ? { ...grant } : grant
       const parsed = parseStudySessionGrant(snapshot)
-      // Fail closed before validating: a refused rotation must not leave the
-      // previous reference live, because the caller no longer knows which
-      // session this transport represents.
-      sessionReference = null
       if (!parsed) throw new StudySessionTransportError('study-session-reference-invalid')
       // The canonical parser is the only validator, and it already requires a
       // finite instant. Re-checking here keeps a session that nothing could

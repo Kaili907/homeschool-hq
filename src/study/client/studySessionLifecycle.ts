@@ -145,7 +145,12 @@ export function createStudySessionLifecycle(
         // The transport is the only validator, and it fail-closes on refusal.
         installed = transport.install(grant)
       } catch (error) {
-        lastReason = 'install-rejected'
+        // Defense in depth: the transport fail-closes on its own, but this
+        // lifecycle has already cancelled the previous timer and dropped its
+        // expiry, so a transport that refuses without clearing would leave a
+        // session authorizing that nothing here could ever expire. Empty
+        // everything before the refusal leaves this method.
+        clearInternal('install-rejected')
         throw error
       }
       // Expiry comes from the transport's own canonical parse, never from a

@@ -1,3 +1,4 @@
+import { inspect } from 'node:util'
 import { describe, expect, it, vi } from 'vitest'
 import type { StudySessionGrant } from '../contracts/identity/session'
 import { classifyStudySafety } from '../safety/client'
@@ -19,6 +20,35 @@ function grant(sessionReference: string): StudySessionGrant {
     sessionReference,
     expiresAt: '2026-08-06T12:00:00.000Z',
   } as StudySessionGrant
+}
+
+/**
+ * Grants whose own enumerable properties throw the instant they are read. A
+ * network response cannot carry one, but any caller-supplied object can, and
+ * installation reads the grant before it can know which kind it holds.
+ */
+function throwingGrants(): Record<string, StudySessionGrant> {
+  return {
+    'sessionReference getter throws': {
+      schemaVersion: 1,
+      status: 'issued',
+      get sessionReference(): string { throw new Error('hostile sessionReference accessor') },
+      expiresAt: '2026-08-06T12:00:00.000Z',
+    },
+    'expiresAt getter throws': {
+      schemaVersion: 1,
+      status: 'issued',
+      sessionReference: ROTATED_REFERENCE,
+      get expiresAt(): string { throw new Error('hostile expiresAt accessor') },
+    },
+    'additional enumerable getter throws': {
+      schemaVersion: 1,
+      status: 'issued',
+      sessionReference: ROTATED_REFERENCE,
+      expiresAt: '2026-08-06T12:00:00.000Z',
+      get extra(): string { throw new Error('hostile extra accessor') },
+    },
+  } as unknown as Record<string, StudySessionGrant>
 }
 
 const safetyRequest = {
@@ -277,5 +307,90 @@ describe('ephemeral Study session transport', () => {
     } finally {
       vi.unstubAllGlobals()
     }
+  })
+})
+
+describe('ephemeral Study session transport — grants that throw while being read', () => {
+  it('invalidates the installed reference before reading a throwing grant at all', () => {
+    for (const [label, hostile] of Object.entries(throwingGrants())) {
+      const transport = createStudySessionTransport()
+      transport.install(grant(SESSION_REFERENCE))
+      expect(transport.hasSession(), label).toBe(true)
+
+      // Reading the grant is what fails, so the previous reference has to be
+      // gone before the first property is touched. Otherwise a refused
+      // rotation leaves a session live that no caller believes is installed.
+      expect(() => transport.install(hostile), label).toThrow()
+      expect(transport.hasSession(), label).toBe(false)
+      expect(transport.authorizeStudyRequestHeaders({}), label).toBeNull()
+    }
+  })
+
+  it('stays empty across repeated refusals and still accepts a later valid grant', () => {
+    const transport = createStudySessionTransport()
+    transport.install(grant(SESSION_REFERENCE))
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      for (const hostile of Object.values(throwingGrants())) {
+        expect(() => transport.install(hostile)).toThrow()
+        expect(transport.hasSession()).toBe(false)
+        expect(transport.authorizeStudyRequestHeaders({})).toBeNull()
+      }
+    }
+
+    // The refusals are not a wedged state: a genuine grant still installs.
+    expect(transport.install(grant(ROTATED_REFERENCE)))
+      .toEqual({ expiresAtMs: Date.parse('2026-08-06T12:00:00.000Z') })
+    expect(transport.authorizeStudyRequestHeaders({}))
+      .toEqual({ [STUDY_SESSION_HEADER]: ROTATED_REFERENCE })
+  })
+
+  it('discloses no previous reference through the throw or the transport afterwards', () => {
+    for (const [label, hostile] of Object.entries(throwingGrants())) {
+      const transport = createStudySessionTransport()
+      transport.install(grant(SESSION_REFERENCE))
+
+      let thrown: unknown
+      try {
+        transport.install(hostile)
+      } catch (error) {
+        thrown = error
+      }
+      expect(thrown, label).toBeInstanceOf(Error)
+
+      const descriptors = Object.getOwnPropertyDescriptors(transport)
+      for (const surface of [
+        String(thrown),
+        (thrown as Error).stack ?? '',
+        JSON.stringify({ error: String(thrown), stack: (thrown as Error).stack }),
+        inspect(thrown, { depth: null, showHidden: true }),
+        inspect(transport, { depth: null, showHidden: true }),
+        JSON.stringify(transport),
+        // Descriptors and function source: the reference lives in a closure, so
+        // neither the shape of the transport nor the text of its methods can
+        // carry it.
+        inspect(descriptors, { depth: null, showHidden: true }),
+        Object.values(descriptors).map((descriptor) => String(descriptor.value)).join('|'),
+        Object.values(transport).map(String).join('|'),
+      ]) {
+        expect(surface, label).not.toContain('aca_stu_v1_')
+        expect(surface, label).not.toContain('synthetic-study-session-reference')
+      }
+    }
+  })
+
+  it('still installs a genuine network-shaped plain JSON grant', () => {
+    const transport = createStudySessionTransport()
+    // Exactly what the issue route hands back: parsed JSON, plain data, no
+    // accessors anywhere. The fail-closed ordering must not disturb it.
+    const overTheWire = JSON.parse(JSON.stringify(grant(SESSION_REFERENCE))) as StudySessionGrant
+
+    expect(transport.install(overTheWire))
+      .toEqual({ expiresAtMs: Date.parse('2026-08-06T12:00:00.000Z') })
+    expect(transport.hasSession()).toBe(true)
+    expect(transport.authorizeStudyRequestHeaders({ 'content-type': 'application/json' })).toEqual({
+      'content-type': 'application/json',
+      [STUDY_SESSION_HEADER]: SESSION_REFERENCE,
+    })
   })
 })
