@@ -1,5 +1,6 @@
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 import { createServer } from "vite";
 
@@ -12,7 +13,7 @@ await mkdir(outputRoot, { recursive: true });
 
 const server = await createServer({
   appType: "spa",
-  configFile: false,
+  configFile: fileURLToPath(new URL("../vite.config.ts", import.meta.url)),
   root: runtimeRoot,
   server: {
     host: "127.0.0.1",
