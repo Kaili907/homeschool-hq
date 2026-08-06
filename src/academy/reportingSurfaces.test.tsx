@@ -93,7 +93,7 @@ describe('content and gating helpers outside the Academy are untouched', () => {
     const girl = decoupledSixthGrader()
     const plain = emptyProfile('p3', 'Sixth Grader', '6')
 
-    expect(expectedSubjects(girl.grade)).toEqual(expectedSubjects('6'))
+    expect(expectedSubjects(loadPlans(), girl.grade)).toEqual(expectedSubjects(loadPlans(), '6'))
     expect(subjectPlansFor(girl, loadPlans(), sy, today)).toEqual(
       subjectPlansFor(plain, loadPlans(), sy, today),
     )
