@@ -64,8 +64,13 @@ describe('transcription counts match the source files', () => {
     expect(HS_READING_SURVEY.ungraded).toBe(true)
   })
 
-  it('all six tests are registered and target only teens', () => {
-    expect(ALL_TESTS.map((t) => t.id).sort()).toEqual([
+  it('all six high-school tests are registered and target only teens', () => {
+    // CE3 narrowed this from ALL_TESTS to the hs- bank: the registry now also
+    // carries the elementary placement instruments (ele-*), which are asserted
+    // separately in elementaryPlacement.test.ts. The high-school bank itself is
+    // unchanged and is still pinned exactly.
+    const hsTests = ALL_TESTS.filter((t) => t.id.startsWith('hs-'))
+    expect(hsTests.map((t) => t.id).sort()).toEqual([
       'hs-essay',
       'hs-essay-senior-b',
       'hs-grammar',
@@ -73,13 +78,13 @@ describe('transcription counts match the source files', () => {
       'hs-reading',
       'hs-reading-survey',
     ])
-    // no test targets an elementary grade (elementary uses adaptive quests)
-    for (const t of ALL_TESTS) {
+    // no high-school test targets an elementary grade
+    for (const t of hsTests) {
       for (const g of t.forGrades) expect(['10', '12']).toContain(g)
     }
     expect(testsForGrade('10').map((t) => t.id)).not.toContain('hs-essay-senior-b')
     expect(testsForGrade('12').map((t) => t.id)).toContain('hs-essay-senior-b')
-    expect(testsForGrade('3')).toHaveLength(0)
+    expect(testsForGrade('3').filter((t) => t.id.startsWith('hs-'))).toHaveLength(0)
   })
 
   it('every math answer-key value parses or is intentionally human-graded', () => {

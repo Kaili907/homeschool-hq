@@ -4,6 +4,7 @@ import { HS_READING } from './reading'
 import { HS_GRAMMAR } from './grammar'
 import { HS_ESSAY, HS_ESSAY_SENIOR_B } from './essays'
 import { HS_READING_SURVEY } from './survey'
+import { ELEMENTARY_TESTS } from './elementaryPlacement'
 
 export const ALL_TESTS: FixedTest[] = [
   HS_MATH_DIAGNOSTIC,
@@ -12,6 +13,9 @@ export const ALL_TESTS: FixedTest[] = [
   HS_ESSAY,
   HS_ESSAY_SENIOR_B,
   HS_READING_SURVEY,
+  // CE3 — elementary placement (grades 3, 4, 6). Each carries its own forGrades,
+  // so testsForGrade() routes them without any other change.
+  ...ELEMENTARY_TESTS,
 ]
 
 export const TEST_BY_ID: Record<string, FixedTest> = Object.fromEntries(
@@ -38,3 +42,9 @@ export {
   HS_ESSAY_SENIOR_B,
   HS_READING_SURVEY,
 }
+
+export {
+  ELEMENTARY_TESTS,
+  ELEMENTARY_INSTRUMENTS,
+  ELEMENTARY_INSTRUMENT_BY_TEST_ID,
+} from './elementaryPlacement'
