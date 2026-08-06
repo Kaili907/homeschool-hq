@@ -4,6 +4,7 @@ import { classifyStudySafety } from '../safety/client'
 import { learnerSafeResult } from '../safety/learnerSafe'
 import {
   createStudyIdentityClient,
+  type StudyIdentityClient,
   type StudySessionInvalidationNotice,
 } from './studyIdentityClient'
 import {
@@ -14,6 +15,7 @@ import {
   createStudySessionTransport,
   STUDY_SESSION_HEADER,
   StudySessionTransportError,
+  type StudySessionTransport,
 } from './studySessionTransport'
 
 const REFERENCE_A = `aca_stu_v1_${'A'.repeat(43)}`
@@ -318,6 +320,113 @@ describe('Study session lifecycle — expiry and rotation', () => {
     expect(lifecycle.lastClearReason()).toBeNull()
   })
 
+  it('does not let a stale callback orphan the live grant timer', () => {
+    const clock = fakeClock()
+    const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock))
+
+    lifecycle.install(grant(REFERENCE_A))
+    lifecycle.install(grant(REFERENCE_B, '2026-08-06T13:00:00.000Z'))
+    expect(clock.liveCount()).toBe(1)
+
+    // Grant A's callback, already queued when rotation cancelled it, runs while
+    // grant B is live. It must not touch the handle holding B's timer.
+    clock.fireCreated(0)
+    expect(lifecycle.hasSession()).toBe(true)
+
+    // If A had dropped the handle, this cancel would find nothing to cancel and
+    // B's timer would outlive the session it belonged to.
+    lifecycle.clear('logout')
+    expect(clock.liveCount()).toBe(0)
+
+    clock.advance(3 * ONE_HOUR)
+    expect(lifecycle.lastClearReason()).toBe('logout')
+    expect(lifecycle.hasSession()).toBe(false)
+  })
+
+  it('does not reschedule or reclaim the reason from a callback queued before an explicit clear', () => {
+    for (const reason of ['logout', 'learner-changed'] as const) {
+      const clock = fakeClock()
+      const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock))
+
+      lifecycle.install(grant(REFERENCE_A))
+      lifecycle.clear(reason)
+      expect(clock.liveCount()).toBe(0)
+
+      // The platform had already queued this callback when the clear cancelled
+      // the timer. The grant it belongs to is gone, so it does nothing at all.
+      clock.fireCreated(0)
+      expect(clock.createdCount()).toBe(1)
+
+      clock.advance(3 * ONE_HOUR)
+      expect(lifecycle.hasSession()).toBe(false)
+      expect(lifecycle.lastClearReason()).toBe(reason)
+    }
+  })
+
+  it('does not let a callback queued before an invalidation reclaim the reason', () => {
+    const clock = fakeClock()
+    const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock))
+
+    lifecycle.install(grant(REFERENCE_A))
+    lifecycle.onIdentitySessionInvalidated({ reason: 'revoked' })
+    clock.fireCreated(0)
+    clock.advance(3 * ONE_HOUR)
+
+    expect(lifecycle.hasSession()).toBe(false)
+    expect(lifecycle.lastClearReason()).toBe('revoked')
+    expect(clock.createdCount()).toBe(1)
+  })
+
+  it('schedules expiry from the value the canonical parser validated, read exactly once', () => {
+    const clock = fakeClock()
+    const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock))
+
+    let reads = 0
+    const accessorGrant = {
+      schemaVersion: 1,
+      status: 'issued',
+      sessionReference: REFERENCE_A,
+      // Honest to whoever reads first, then claims a far longer life.
+      get expiresAt() {
+        reads += 1
+        return reads <= 1 ? EXPIRES_AT : '2099-01-01T00:00:00.000Z'
+      },
+    } as unknown as StudySessionGrant
+
+    lifecycle.install(accessorGrant)
+    expect(lifecycle.hasSession()).toBe(true)
+    // One canonical read: validation and expiry cannot disagree.
+    expect(reads).toBe(1)
+
+    clock.advance(ONE_HOUR)
+    expect(lifecycle.hasSession()).toBe(false)
+    expect(lifecycle.authorization.authorizeStudyRequestHeaders({})).toBeNull()
+    expect(lifecycle.lastClearReason()).toBe('expired')
+  })
+
+  it('fails closed when the transport reports a non-finite expiry', () => {
+    const clock = fakeClock()
+    const inner = createStudySessionTransport()
+    const transport: StudySessionTransport = {
+      install(grant) {
+        inner.install(grant)
+        return { expiresAtMs: Number.NaN }
+      },
+      authorizeStudyRequestHeaders: (headers) => inner.authorizeStudyRequestHeaders(headers),
+      clear: () => inner.clear(),
+      hasSession: () => inner.hasSession(),
+    }
+    const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock, { transport }))
+
+    // An expiry nothing can ever reach would leave the session live forever.
+    expect(() => lifecycle.install(grant(REFERENCE_A))).toThrow(StudySessionTransportError)
+    expect(lifecycle.hasSession()).toBe(false)
+    expect(transport.hasSession()).toBe(false)
+    expect(lifecycle.authorization.authorizeStudyRequestHeaders({})).toBeNull()
+    expect(lifecycle.lastClearReason()).toBe('install-rejected')
+    expect(clock.liveCount()).toBe(0)
+  })
+
   it('reschedules rather than clearing when its own timer fires early', () => {
     const clock = fakeClock()
     const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock))
@@ -424,6 +533,128 @@ describe('Study session lifecycle — explicit host clears', () => {
     lifecycle.clear('logout')
     expect(lifecycle.hasSession()).toBe(false)
     expect(lifecycle.lastClearReason()).toBe('logout')
+  })
+
+  it('clears local authorization even when the identity adapter throws', () => {
+    for (const reason of ['logout', 'learner-changed'] as const) {
+      const clock = fakeClock()
+      const transport = createStudySessionTransport()
+      let calls = 0
+      const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock, {
+        transport,
+        identity: { clear() { calls += 1; throw new Error('identity adapter exploded') } },
+      }))
+      lifecycle.install(grant(REFERENCE_A))
+      expect(transport.hasSession()).toBe(true)
+
+      // A host that cannot log the learner out is the fail-open case, so the
+      // adapter's failure is absorbed rather than propagated.
+      expect(() => lifecycle.clear(reason)).not.toThrow()
+      expect(calls).toBe(1)
+      expect(transport.hasSession()).toBe(false)
+      expect(lifecycle.hasSession()).toBe(false)
+      expect(lifecycle.authorization.authorizeStudyRequestHeaders({})).toBeNull()
+      expect(lifecycle.lastClearReason()).toBe(reason)
+      expect(clock.liveCount()).toBe(0)
+
+      // The failure never restores what was cleared, however long we wait.
+      clock.advance(3 * ONE_HOUR)
+      expect(transport.hasSession()).toBe(false)
+      expect(lifecycle.lastClearReason()).toBe(reason)
+    }
+  })
+
+  it('keeps the host reason authoritative when the adapter re-enters the lifecycle', () => {
+    const clock = fakeClock()
+    const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock, {
+      // Both re-entry shapes at once: an invalidation notice and a nested
+      // explicit clear, then a throw for good measure.
+      identity: {
+        clear() {
+          lifecycle.onIdentitySessionInvalidated({ reason: 'revoked' })
+          lifecycle.clear('learner-changed')
+          throw new Error('identity adapter exploded')
+        },
+      },
+    }))
+
+    lifecycle.install(grant(REFERENCE_A))
+    expect(() => lifecycle.clear('logout')).not.toThrow()
+    expect(lifecycle.hasSession()).toBe(false)
+    expect(lifecycle.lastClearReason()).toBe('logout')
+    expect(clock.liveCount()).toBe(0)
+  })
+
+  it('is idempotent across duplicate logouts and allows an install right after a learner change', () => {
+    const clock = fakeClock()
+    let calls = 0
+    const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock, {
+      identity: { clear() { calls += 1 } },
+    }))
+
+    lifecycle.install(grant(REFERENCE_A))
+    lifecycle.clear('logout')
+    lifecycle.clear('logout')
+    expect(calls).toBe(2)
+    expect(lifecycle.hasSession()).toBe(false)
+    expect(lifecycle.lastClearReason()).toBe('logout')
+
+    lifecycle.clear('learner-changed')
+    lifecycle.install(grant(REFERENCE_B))
+    expect(lifecycle.hasSession()).toBe(true)
+    expect(lifecycle.lastClearReason()).toBeNull()
+    expect(lifecycle.authorization.authorizeStudyRequestHeaders({})).toEqual({
+      [STUDY_SESSION_HEADER]: REFERENCE_B,
+    })
+    expect(clock.liveCount()).toBe(1)
+  })
+})
+
+describe('Study session lifecycle — single-instance composition', () => {
+  it('clears in both directions through one lifecycle, one transport, one identity client', async () => {
+    const clock = fakeClock()
+    const transport = createStudySessionTransport()
+    let identity!: StudyIdentityClient
+    const lifecycle = createStudySessionLifecycle(lifecycleDeps(clock, {
+      transport,
+      // Late-bound on purpose: the identity client cannot exist yet, because it
+      // needs this very lifecycle as its invalidation listener. There is one
+      // lifecycle instance in this test, so both directions are proven on it.
+      identity: { clear: () => identity.clear() },
+    }))
+    identity = createStudyIdentityClient(
+      identityFetch(REFERENCE_A) as unknown as typeof fetch,
+      { onSessionInvalidated: lifecycle.onIdentitySessionInvalidated },
+    )
+
+    // Direction 1: the host clears the lifecycle, which empties the identity
+    // client and the transport.
+    lifecycle.install(await identity.issueGuardianLaunch({ accessToken: 'g', selectedStudentRef: STUDENT }))
+    expect(identity.hasSession()).toBe(true)
+    expect(transport.hasSession()).toBe(true)
+
+    lifecycle.clear('logout')
+    expect(identity.hasSession()).toBe(false)
+    expect(transport.hasSession()).toBe(false)
+    expect(lifecycle.hasSession()).toBe(false)
+    expect(lifecycle.authorization.authorizeStudyRequestHeaders({})).toBeNull()
+    // The identity clear re-entered this same instance with a `cleared` notice;
+    // the host's reason survives it.
+    expect(lifecycle.lastClearReason()).toBe('logout')
+    expect(clock.liveCount()).toBe(0)
+
+    // Direction 2: the identity client invalidates itself, which empties the
+    // same lifecycle and the same transport.
+    lifecycle.install(await identity.issueGuardianLaunch({ accessToken: 'g', selectedStudentRef: STUDENT }))
+    expect(transport.hasSession()).toBe(true)
+
+    await expect(identity.verify({ requiredCapability: 'student:progress:read' })).rejects.toThrow()
+    expect(identity.hasSession()).toBe(false)
+    expect(transport.hasSession()).toBe(false)
+    expect(lifecycle.hasSession()).toBe(false)
+    expect(lifecycle.authorization.authorizeStudyRequestHeaders({})).toBeNull()
+    expect(lifecycle.lastClearReason()).toBe('session-rejected')
+    expect(clock.liveCount()).toBe(0)
   })
 })
 

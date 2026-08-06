@@ -5,7 +5,9 @@ import type {
 } from './studyIdentityClient'
 import {
   createStudySessionTransport,
+  StudySessionTransportError,
   type StudySessionAuthorization,
+  type StudySessionInstalledSession,
   type StudySessionTransport,
 } from './studySessionTransport'
 
@@ -39,7 +41,8 @@ export interface StudySessionLifecycleDeps {
   readonly transport?: StudySessionTransport
   /**
    * The identity client, narrowed to the one method an explicit host clear needs.
-   * Omitted, `clear` still empties the transport.
+   * Omitted, `clear` still empties the transport. It is invoked only after this
+   * lifecycle has already cleared itself, and a failure from it is swallowed.
    */
   readonly identity?: { clear(): void }
   readonly now?: () => number
@@ -52,7 +55,10 @@ export interface StudySessionLifecycle {
   readonly authorization: StudySessionAuthorization
   /** Installs one issued grant and schedules its expiry, cancelling any prior timer. */
   install(grant: StudySessionGrant): void
-  /** Logout or learner change: empties the transport and the identity client. */
+  /**
+   * Logout or learner change: empties the transport, then the identity client.
+   * Never throws, so an identity adapter that fails cannot block either one.
+   */
   clear(reason: StudySessionExplicitClearReason): void
   /** Wire this into `createStudyIdentityClient`'s `onSessionInvalidated`. */
   onIdentitySessionInvalidated(notice: StudySessionInvalidationNotice): void
@@ -78,6 +84,8 @@ export function createStudySessionLifecycle(
   let timer: unknown = null
   let generation = 0
   let lastReason: StudySessionClearReason | null = null
+  /** Guards against an identity adapter that calls `clear` back into us. */
+  let clearingExplicitly = false
 
   function cancelTimer(): void {
     if (timer === null) return
@@ -87,6 +95,10 @@ export function createStudySessionLifecycle(
 
   function clearInternal(reason: StudySessionClearReason): void {
     cancelTimer()
+    // Retire the generation as well: a callback the platform had already queued
+    // for the grant being cleared is now stale, so it can neither reschedule
+    // the dead session nor take this reason back off the host.
+    generation += 1
     expiresAtMs = null
     transport.clear()
     lastReason = reason
@@ -95,9 +107,12 @@ export function createStudySessionLifecycle(
   function scheduleExpiry(installedGeneration: number, expiry: number): void {
     const remaining = expiry - now()
     timer = setTimer(() => {
-      timer = null
-      // A timer belonging to a replaced grant must never clear the current one.
+      // Check the generation before touching anything shared. A timer belonging
+      // to a replaced or cleared grant must never clear the current one, and
+      // must not drop the live grant's handle either — doing so would orphan a
+      // timer that no later cancel could reach.
       if (installedGeneration !== generation) return
+      timer = null
       if (now() < expiry) {
         scheduleExpiry(installedGeneration, expiry)
         return
@@ -125,14 +140,22 @@ export function createStudySessionLifecycle(
       cancelTimer()
       expiresAtMs = null
       const installedGeneration = ++generation
+      let installed: StudySessionInstalledSession
       try {
         // The transport is the only validator, and it fail-closes on refusal.
-        transport.install(grant)
+        installed = transport.install(grant)
       } catch (error) {
         lastReason = 'install-rejected'
         throw error
       }
-      const expiry = Date.parse(grant.expiresAt)
+      // Expiry comes from the transport's own canonical parse, never from a
+      // second read of the caller's grant, so there is one validated instant
+      // and no competing parser here.
+      const expiry = installed.expiresAtMs
+      if (!Number.isFinite(expiry)) {
+        clearInternal('install-rejected')
+        throw new StudySessionTransportError('study-session-reference-invalid')
+      }
       expiresAtMs = expiry
       lastReason = null
       if (now() >= expiry) {
@@ -143,9 +166,25 @@ export function createStudySessionLifecycle(
     },
 
     clear(reason: StudySessionExplicitClearReason) {
-      // First, so the notice it raises cannot overwrite the host's own reason.
-      deps.identity?.clear()
+      // Fail closed locally first. Everything this lifecycle controls — timer,
+      // expiry, transport — is gone before any injected adapter runs, so an
+      // adapter that throws cannot leave the learner authorized, and nothing
+      // after this point restores what was cleared.
       clearInternal(reason)
+      if (!clearingExplicitly) {
+        clearingExplicitly = true
+        try {
+          deps.identity?.clear()
+        } catch {
+          // A host adapter that throws must not block logout or a learner
+          // switch. The local authorization is already gone either way.
+        } finally {
+          clearingExplicitly = false
+        }
+      }
+      // The adapter may have re-entered this lifecycle through an invalidation
+      // notice; the host's own reason stays authoritative over that.
+      lastReason = reason
     },
 
     onIdentitySessionInvalidated(notice: StudySessionInvalidationNotice) {

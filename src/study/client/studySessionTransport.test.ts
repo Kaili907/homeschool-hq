@@ -43,6 +43,39 @@ describe('ephemeral Study session transport', () => {
     })
   })
 
+  it('returns the validated expiry as non-secret metadata, reading the grant once', () => {
+    const transport = createStudySessionTransport()
+    const installed = transport.install(grant(SESSION_REFERENCE))
+
+    expect(installed).toEqual({ expiresAtMs: Date.parse('2026-08-06T12:00:00.000Z') })
+    expect(Object.keys(installed)).toEqual(['expiresAtMs'])
+    expect(Object.isFrozen(installed)).toBe(true)
+    expect(JSON.stringify(installed)).not.toContain('aca_stu_v1_')
+    expect(JSON.stringify(installed)).not.toContain(SESSION_REFERENCE)
+
+    // A grant whose `expiresAt` is an accessor gets one honest answer and then
+    // claims a far longer life. Because the fields are copied once before the
+    // canonical parser runs, the value that passed validation is the value
+    // returned, and no second read can widen it.
+    let reads = 0
+    const accessorGrant = {
+      schemaVersion: 1,
+      status: 'issued',
+      sessionReference: ROTATED_REFERENCE,
+      get expiresAt() {
+        reads += 1
+        return reads <= 1 ? '2026-08-06T12:00:00.000Z' : '2099-01-01T00:00:00.000Z'
+      },
+    } as unknown as StudySessionGrant
+
+    expect(transport.install(accessorGrant))
+      .toEqual({ expiresAtMs: Date.parse('2026-08-06T12:00:00.000Z') })
+    expect(reads).toBe(1)
+    expect(transport.authorizeStudyRequestHeaders({})).toEqual({
+      [STUDY_SESSION_HEADER]: ROTATED_REFERENCE,
+    })
+  })
+
   it('refuses malformed references without disclosing them and without keeping a previous session', () => {
     const transport = createStudySessionTransport()
     transport.install(grant(SESSION_REFERENCE))
@@ -137,17 +170,37 @@ describe('ephemeral Study session transport', () => {
       expect(headers.Authorization).toBe('Bearer host-adult-token')
     }
 
-    // Several variants at once, and a header key that must not reach a prototype.
-    const headers = transport.authorizeStudyRequestHeaders({
-      'X-Study-Session': 'a', 'x-STUDY-session': 'b', 'X-Study-Session-Id': 'unrelated', __proto__: 'c',
-    })!
+    // Several variants at once, plus a header key that must not reach a
+    // prototype. It has to be built by JSON.parse: in an object literal
+    // `__proto__: 'c'` sets the prototype rather than defining a key, so a
+    // literal cannot express an own `__proto__` property and would leave this
+    // hazard untested. A header map decoded from a response body can.
+    const hostile = JSON.parse(
+      '{"X-Study-Session":"a","x-STUDY-session":"b","X-Study-Session-Id":"unrelated","__proto__":"c"}',
+    ) as Record<string, string>
+    expect(Object.hasOwn(hostile, '__proto__')).toBe(true)
+
+    const headers = transport.authorizeStudyRequestHeaders(hostile)!
     expect(Object.keys(headers).filter((key) => key.toLowerCase() === STUDY_SESSION_HEADER))
       .toEqual([STUDY_SESSION_HEADER])
     expect(headers[STUDY_SESSION_HEADER]).toBe(SESSION_REFERENCE)
     expect(headers['X-Study-Session-Id']).toBe('unrelated')
-    expect(Object.getPrototypeOf(headers)).toBe(Object.prototype)
     expect(JSON.stringify(headers)).not.toContain('"a"')
     expect(JSON.stringify(headers)).not.toContain('"b"')
+
+    // The key was defined, not assigned: this object keeps an ordinary
+    // prototype and carries `__proto__` as plain data.
+    expect(Object.getPrototypeOf(headers)).toBe(Object.prototype)
+    expect(Object.hasOwn(headers, '__proto__')).toBe(true)
+    expect(Object.getOwnPropertyDescriptor(headers, '__proto__')).toMatchObject({
+      value: 'c',
+      enumerable: true,
+      writable: true,
+    })
+    // Nothing leaked onto the shared prototype every other object reads from.
+    expect(Object.getPrototypeOf({})).toBe(Object.prototype)
+    expect(Object.hasOwn(Object.prototype, 'X-Study-Session')).toBe(false)
+    expect((({}) as Record<string, unknown>)['X-Study-Session-Id']).toBeUndefined()
   })
 
   it('leaves unrelated Study requests unchanged', async () => {

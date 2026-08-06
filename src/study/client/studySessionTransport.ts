@@ -32,13 +32,22 @@ export interface StudySessionAuthorization {
   ): Record<string, string> | null
 }
 
+/**
+ * What `install` hands back: non-secret metadata derived from the very value
+ * the canonical parser admitted. It carries no reference and no token, so the
+ * caller can schedule expiry without ever holding the session itself.
+ */
+export interface StudySessionInstalledSession {
+  readonly expiresAtMs: number
+}
+
 export interface StudySessionTransport extends StudySessionAuthorization {
   /**
    * Installs a grant minted by the existing issue path, replacing (rotating)
    * any current reference. Refuses anything the canonical identity contract
    * does not parse.
    */
-  install(grant: StudySessionGrant): void
+  install(grant: StudySessionGrant): StudySessionInstalledSession
   clear(): void
   hasSession(): boolean
 }
@@ -54,13 +63,28 @@ export function createStudySessionTransport(): StudySessionTransport {
 
   return Object.freeze({
     install(grant: StudySessionGrant) {
-      const parsed = parseStudySessionGrant(grant)
+      // Copy the own enumerable fields once, before validating. A grant whose
+      // `expiresAt` is an accessor would otherwise be free to return one value
+      // to the canonical parser and a later, longer-lived one to whoever reads
+      // it again; the parser then admits a grant nobody scheduled correctly.
+      // Spreading calls each getter exactly once and yields plain data, so the
+      // canonical parser and the expiry below see the same frozen-in value.
+      const snapshot = grant !== null && typeof grant === 'object' ? { ...grant } : grant
+      const parsed = parseStudySessionGrant(snapshot)
       // Fail closed before validating: a refused rotation must not leave the
       // previous reference live, because the caller no longer knows which
       // session this transport represents.
       sessionReference = null
       if (!parsed) throw new StudySessionTransportError('study-session-reference-invalid')
+      // The canonical parser is the only validator, and it already requires a
+      // finite instant. Re-checking here keeps a session that nothing could
+      // ever expire from being installed if that ever ceases to hold.
+      const expiresAtMs = Date.parse(parsed.expiresAt)
+      if (!Number.isFinite(expiresAtMs)) {
+        throw new StudySessionTransportError('study-session-reference-invalid')
+      }
       sessionReference = parsed.sessionReference
+      return Object.freeze({ expiresAtMs })
     },
 
     authorizeStudyRequestHeaders(headers: Readonly<Record<string, string>>) {
