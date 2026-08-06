@@ -1,7 +1,5 @@
-import {
-  assertServerReceiptRuntime,
-  validateVerifiedAdultReviewReceipt,
-} from './receipt-contract.js'
+import { assertServerReceiptRuntime } from './receipt-contract.js'
+import { validateInAppNotificationReceipt } from './in-app-receipt-validator.js'
 import { validateVerifiedWorkerContext } from '../study-worker/context.js'
 
 const PROVIDER_NAME = 'academy-in-app'
@@ -18,7 +16,10 @@ const DELIVERY_REQUEST_KEYS = new Set([
   'delivery', 'recipient', 'workerContext', 'trigger', 'onAttemptSubmitted',
 ])
 const FORBIDDEN_DELIVERY_KEYS = new Set([
-  'rawText', 'transcript', 'disclosure', 'email', 'phone', 'destination', 'messageBody',
+  'rawText', 'rawLearnerText', 'learnerText', 'rawTutorText', 'tutorText',
+  'transcript', 'prompt', 'response', 'disclosure', 'disclosureBody',
+  'email', 'emailAddress', 'phone', 'phoneNumber', 'postalAddress', 'address',
+  'destination', 'messageBody', 'body', 'subject',
 ])
 const INSERT_KEYS = new Set([
   'state', 'providerReceiptRef', 'jobId', 'attemptId', 'proposalId', 'householdId',
@@ -85,7 +86,8 @@ function validateDeliveryRequest(value) {
     !RECIPIENT_REF.test(value.recipient.recipientRef) ||
     !['scheduled', 'manual'].includes(value.trigger) ||
     typeof value.onAttemptSubmitted !== 'function' ||
-    Object.keys(value.delivery).some((key) => FORBIDDEN_DELIVERY_KEYS.has(key))
+    Object.keys(value.delivery).some((key) => FORBIDDEN_DELIVERY_KEYS.has(key)) ||
+    Object.keys(value.recipient).some((key) => FORBIDDEN_DELIVERY_KEYS.has(key))
   ) throw new TypeError('invalid_in_app_delivery_request')
   const workerContext = validateVerifiedWorkerContext(value.workerContext)
   const delivery = validateDelivery({
@@ -182,7 +184,7 @@ function validateReceipt(value, binding, environment) {
     throw new Error('in_app_persistence_contract')
   }
   try {
-    return validateVerifiedAdultReviewReceipt(value, binding, { environment })
+    return validateInAppNotificationReceipt(value, binding, { environment })
   } catch (error) {
     if (String(error?.message).startsWith('receipt_binding_mismatch:')) throw error
     throw new Error('in_app_persistence_contract')
