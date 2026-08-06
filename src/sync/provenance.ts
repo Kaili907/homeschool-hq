@@ -578,46 +578,86 @@ function validatePacing(value: unknown): boolean {
 }
 
 /**
- * ACADEMY-LEVEL-DECOUPLE — the academy levels a profile may legitimately hold
- * enrollment in: its nominal grade, plus any explicitly assigned working level.
+ * ACADEMY-LEVEL-DECOUPLE — the authorization a profile actually carries:
+ * subject → the academy level that subject is assigned. A subject with no
+ * explicit working level rides the nominal grade, exactly as the runtime
+ * resolver does (academy/workingLevel.workingLevelFor); a subject that lands on
+ * a non-academy grade authorizes nothing.
+ *
  * This replaces the old `academy.grade === profile.grade` rule, which made a
  * decoupled enrollment (grade-6 girl doing Grade 5 mathematics) unrepresentable.
- * The anti-tamper property is unchanged in kind: an imported payload still
- * cannot enroll a profile in a level nobody assigned it.
+ * It is deliberately SUBJECT-scoped rather than level-scoped: assigning
+ * mathematics to Grade 5 must not also admit Grade 5 science, which a bare set
+ * of allowed levels would have done.
  */
-function allowedAcademyLevels(
+function academyAuthorization(
   profileGrade: unknown,
   workingLevels: unknown,
-): Set<string> {
-  const levels = new Set<string>()
-  if (ACADEMY_GRADES.has(String(profileGrade))) levels.add(String(profileGrade))
-  if (plainRecord(workingLevels)) {
-    for (const level of Object.values(workingLevels)) {
-      if (ACADEMY_GRADES.has(String(level))) levels.add(String(level))
-    }
+): Map<string, string> {
+  const nominal = ACADEMY_GRADES.has(String(profileGrade)) ? String(profileGrade) : null
+  const explicit = plainRecord(workingLevels) ? workingLevels : {}
+  const authorized = new Map<string, string>()
+  for (const subject of ACADEMY_SUBJECTS) {
+    const assigned = explicit[subject]
+    const level = assigned === undefined ? nominal : String(assigned)
+    if (level !== null && ACADEMY_GRADES.has(level)) authorized.set(subject, level)
   }
-  return levels
+  return authorized
 }
 
-/** ACADEMY-LEVEL-DECOUPLE: subject → grade. Unknown subjects and non-grades are
- * rejected rather than ignored, so a tampered record cannot ride along untyped. */
+/**
+ * ACADEMY-LEVEL-DECOUPLE: subject → academy level. Levels are restricted to the
+ * ones the release publishes content for (5/7/8) — the same set the parent UI
+ * offers. A nominal-only grade such as '10' is rejected rather than stored as an
+ * inert value nothing can serve.
+ */
 function validateWorkingLevels(value: unknown): boolean {
   return boundedRecord(
     value,
     (level, subject) =>
-      ACADEMY_SUBJECTS.has(subject) && typeof level === 'string' && GRADES.has(level),
+      ACADEMY_SUBJECTS.has(subject) && typeof level === 'string' && ACADEMY_GRADES.has(level),
   )
 }
 
-// CURR-1: Manuel Academy enrollment + progress (see types.AcademyState).
-function validateAcademy(value: unknown, allowedLevels: Set<string>): boolean {
+/** Course ids encode their level and subject (`ma-g5-mathematics`); mirrors
+ * COURSE_ID in academy/academyRoute.ts. Every id in the shipped release parses. */
+const ACADEMY_COURSE_ID = /^ma-g(5|7|8)-([a-z-]+)$/
+
+/**
+ * A course record is admissible only if the profile is authorized for that
+ * course's SUBJECT at that course's LEVEL. An id whose level/subject cannot be
+ * read cannot be shown to be authorized, so it is refused.
+ *
+ * Scope note: this checks the authorization the course claims, not whether the
+ * course, its lessons, or its assessments exist in the release, nor that a
+ * lesson belongs to an enrolled course. Those gaps predate this branch (the old
+ * grade-equality rule validated no membership either) and are carded separately.
+ */
+function validateAcademyCourseIds(value: unknown, authorized: Map<string, string>): boolean {
+  return boundedArray(value, (candidate) => {
+    if (!identifier(candidate)) return false
+    const parsed = ACADEMY_COURSE_ID.exec(candidate)
+    return parsed !== null && authorized.get(parsed[2]) === parsed[1]
+  })
+}
+
+/**
+ * CURR-1: Manuel Academy enrollment + progress (see types.AcademyState).
+ *
+ * ACADEMY-LEVEL-DECOUPLE-C: the capability check lives on `courseIds`, which is
+ * subject-precise. `grade` is only the label the enrollment was opened under —
+ * nothing reads it to route or load content — so it is checked for shape but not
+ * for current authorization. Gating on it as well would make the field a
+ * denormalized capability that a parent clearing her last working level could
+ * leave permanently invalid, blocking every later save for the whole household.
+ */
+function validateAcademy(value: unknown, authorized: Map<string, string>): boolean {
   return (
     plainRecord(value) &&
     text(value.releaseVersion, 64) &&
     ACADEMY_GRADES.has(String(value.grade)) &&
-    allowedLevels.has(String(value.grade)) &&
     timestamp(value.enrolledAt) &&
-    boundedArray(value.courseIds, identifier) &&
+    validateAcademyCourseIds(value.courseIds, authorized) &&
     boundedRecord(
       value.lessons,
       (lesson) =>
@@ -741,7 +781,7 @@ function validateProfileOptionals(value: Record<string, unknown>): boolean {
     optional(value.scheduleExtensions, validateScheduleExtensions) &&
     optional(value.workingLevels, validateWorkingLevels) &&
     optional(value.academy, (candidate) =>
-      validateAcademy(candidate, allowedAcademyLevels(value.grade, value.workingLevels)),
+      validateAcademy(candidate, academyAuthorization(value.grade, value.workingLevels)),
     )
   )
 }

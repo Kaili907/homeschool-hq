@@ -40,18 +40,56 @@ export function hasExplicitWorkingLevel(p: Profile, subject: AcademySubject): bo
  * Assign (or clear, with `null`) one subject's working level. Returns a new
  * profile; `grade` is never touched. Clearing the last entry drops the whole
  * record so an untouched-again profile is indistinguishable from a fresh one.
+ *
+ * `level` is an AcademyGrade: only 5/7/8 have published content, and sync
+ * validation refuses anything else, so the type refuses it here first.
  */
 export function setWorkingLevel(
   p: Profile,
   subject: AcademySubject,
-  level: Grade | null,
+  level: AcademyGrade | null,
 ): Profile {
-  const next: Record<string, Grade> = { ...(p.workingLevels ?? {}) }
+  const next: Record<string, AcademyGrade> = { ...(p.workingLevels ?? {}) }
   if (level === null) delete next[subject]
   else next[subject] = level
   const rest = { ...p }
   delete rest.workingLevels
-  return Object.keys(next).length === 0 ? rest : { ...rest, workingLevels: next }
+  const moved = Object.keys(next).length === 0 ? rest : { ...rest, workingLevels: next }
+  return reconcileEnrollment(moved)
+}
+
+/** Course ids encode their level and subject; mirrors COURSE_ID in
+ * academyRoute.ts and ACADEMY_COURSE_ID in sync/provenance.ts. */
+const COURSE_ID = /^ma-g(5|7|8)-([a-z-]+)$/
+
+/** The level this subject's content may come from, ignoring feature flags —
+ * the authorization the profile carries, not what the build currently serves. */
+function authorizedLevel(p: Profile, subject: string): AcademyGrade | null {
+  return ACADEMY_SUBJECTS.includes(subject as AcademySubject)
+    ? academyGradeOf(workingLevelFor(p, subject as AcademySubject))
+    : null
+}
+
+/**
+ * Drop enrollment records the profile is no longer authorized for. Changing a
+ * working level otherwise leaves a course from the OLD level in
+ * `academy.courseIds`, which sync validation refuses — and because
+ * `persistDatasetVerified` validates before writing, the parent's change would
+ * silently fail to save and a reload would quarantine the household dataset.
+ *
+ * Lossless: `lessons` and `assessments` are keyed independently and are never
+ * touched, so a girl moved from Grade 5 to Grade 7 mathematics keeps every
+ * completed Grade 5 lesson. Her next Academy visit re-enrolls the new level's
+ * courses (AcademyRouter reconciles against the composed program).
+ */
+export function reconcileEnrollment(p: Profile): Profile {
+  if (!p.academy) return p
+  const kept = p.academy.courseIds.filter((id) => {
+    const parsed = COURSE_ID.exec(id)
+    return parsed !== null && authorizedLevel(p, parsed[2]) === parsed[1]
+  })
+  if (kept.length === p.academy.courseIds.length) return p
+  return { ...p, academy: { ...p.academy, courseIds: kept } }
 }
 
 /**

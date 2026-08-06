@@ -49,7 +49,13 @@ describe('CURR-1 sync validation for academy grades + state', () => {
     for (const grade of ['5', '7', '8'] as const) {
       const candidate = stateWith((s) => {
         s.profiles.p2.grade = grade
-        s.profiles.p2.academy = { ...academy, grade }
+        // ACADEMY-LEVEL-DECOUPLE-C: course records are now scoped to the level
+        // the profile is authorized for, so the course must move with the grade.
+        s.profiles.p2.academy = {
+          ...academy,
+          grade,
+          courseIds: [`ma-g${grade}-mathematics`],
+        }
       })
       expect(validateAppStateForSync(candidate).ok).toBe(true)
     }

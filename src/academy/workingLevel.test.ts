@@ -95,10 +95,14 @@ describe('academy gating keys off working level', () => {
     expect(enabledAcademyEntries(p)).toEqual([])
   })
 
-  it('a working level with no published content (grade 10) reaches nothing', () => {
+  it('a level with no published content reaches nothing even if one is forced in', () => {
     enableAll()
-    const p = setWorkingLevel(at('6'), 'mathematics', '10')
+    // Third layer, and the only one testable at runtime: the type refuses '10'
+    // and sync validation rejects it (provenance.workingLevel.test.ts), so this
+    // asserts the resolver itself still refuses a value that got past both.
+    const p: Profile = { ...at('6'), workingLevels: { mathematics: '10' as never } }
     expect(enabledAcademyEntries(p)).toEqual([])
+    expect(hasEnabledAcademyProgram(p)).toBe(false)
   })
 })
 

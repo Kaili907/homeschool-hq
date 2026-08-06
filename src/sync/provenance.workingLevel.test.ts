@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { validateAppStateForSync } from './provenance'
 import { defaultAppState, emptyProfile } from '../migration'
+import { setWorkingLevel } from '../academy/workingLevel'
 import type { AcademyState, AppState, Profile } from '../types'
 
 /**
@@ -11,11 +12,14 @@ import type { AcademyState, AppState, Profile } from '../types'
  * `academy.grade === profile.grade` rule provided.
  */
 
-const academyAt = (grade: '5' | '7' | '8'): AcademyState => ({
+const academyAt = (
+  grade: '5' | '7' | '8',
+  courseIds: string[] = [`ma-g${grade}-mathematics`],
+): AcademyState => ({
   releaseVersion: '1.0.0',
   grade,
   enrolledAt: '2026-08-04T12:00:00.000Z',
-  courseIds: [`ma-g${grade}-mathematics`],
+  courseIds,
   lessons: {},
   assessments: {},
 })
@@ -39,11 +43,11 @@ describe('working levels round-trip through sync validation', () => {
     expect(validateAppStateForSync(candidate).ok).toBe(true)
   })
 
-  it('accepts mathematics 5 + ELA 7 held at once', () => {
+  it('accepts mathematics 5 + ELA 7 held at once, with a course from each level', () => {
     const candidate = stateWith(
       sixthGrader({
         workingLevels: { mathematics: '5', 'english-language-arts': '7' },
-        academy: academyAt('7'),
+        academy: academyAt('5', ['ma-g5-mathematics', 'ma-g7-english-language-arts']),
       }),
     )
     expect(validateAppStateForSync(candidate).ok).toBe(true)
@@ -95,5 +99,183 @@ describe('the tamper boundary survives the decoupling', () => {
       academy: academyAt('5'),
     })
     expect(validateAppStateForSync(candidate).ok).toBe(true)
+  })
+})
+
+// ---------- ACADEMY-LEVEL-DECOUPLE-C fix 1 ----------
+
+describe('a working level must be a level the release actually publishes', () => {
+  it.each(['3', '4', '6', '10', '12'])(
+    'rejects the nominal-only grade %s as a working level',
+    (level) => {
+      const candidate = stateWith(
+        sixthGrader({ workingLevels: { mathematics: level } as Profile['workingLevels'] }),
+      )
+      expect(validateAppStateForSync(candidate).ok).toBe(false)
+    },
+  )
+
+  it.each(['5', '7', '8'])('accepts the academy level %s', (level) => {
+    const candidate = stateWith(
+      sixthGrader({ workingLevels: { mathematics: level } as Profile['workingLevels'] }),
+    )
+    expect(validateAppStateForSync(candidate).ok).toBe(true)
+  })
+})
+
+// ---------- ACADEMY-LEVEL-DECOUPLE-C fix 2 ----------
+
+describe('course records are scoped to the SUBJECT that authorized the level', () => {
+  /** The regression the review caught: assigning mathematics to Grade 5 must
+   * not admit Grade 5 science, which a bare set of allowed levels permitted. */
+  it('rejects a Grade 5 science course when only mathematics is assigned Grade 5', () => {
+    const candidate = stateWith(
+      sixthGrader({
+        workingLevels: { mathematics: '5' },
+        academy: academyAt('5', ['ma-g5-science']),
+      }),
+    )
+    expect(validateAppStateForSync(candidate).ok).toBe(false)
+  })
+
+  it('rejects a Grade 5 science course smuggled alongside a legitimate one', () => {
+    const candidate = stateWith(
+      sixthGrader({
+        workingLevels: { mathematics: '5' },
+        academy: academyAt('5', ['ma-g5-mathematics', 'ma-g5-science']),
+      }),
+    )
+    expect(validateAppStateForSync(candidate).ok).toBe(false)
+  })
+
+  it('accepts the Grade 5 mathematics course that assignment did authorize', () => {
+    const candidate = stateWith(
+      sixthGrader({
+        workingLevels: { mathematics: '5' },
+        academy: academyAt('5', ['ma-g5-mathematics']),
+      }),
+    )
+    expect(validateAppStateForSync(candidate).ok).toBe(true)
+  })
+
+  it('accepts a Grade 7 ELA course when ELA is assigned Grade 7', () => {
+    const candidate = stateWith(
+      sixthGrader({
+        workingLevels: { 'english-language-arts': '7' },
+        academy: academyAt('7', ['ma-g7-english-language-arts']),
+      }),
+    )
+    expect(validateAppStateForSync(candidate).ok).toBe(true)
+  })
+
+  it('rejects the right subject at the wrong level', () => {
+    const candidate = stateWith(
+      sixthGrader({
+        workingLevels: { mathematics: '5', 'english-language-arts': '7' },
+        academy: academyAt('5', ['ma-g7-mathematics']),
+      }),
+    )
+    expect(validateAppStateForSync(candidate).ok).toBe(false)
+  })
+
+  it('rejects a course id whose level and subject cannot be read', () => {
+    for (const courseId of ['mathematics', 'ma-g5', 'ma-g6-mathematics', 'ma-g5-Mathematics', '']) {
+      const candidate = stateWith(
+        sixthGrader({
+          workingLevels: { mathematics: '5' },
+          academy: academyAt('5', [courseId]),
+        }),
+      )
+      expect(validateAppStateForSync(candidate).ok).toBe(false)
+    }
+  })
+
+  it('an undecoupled Grade 5 profile still holds every Grade 5 subject', () => {
+    const candidate = stateWith({
+      ...emptyProfile('p3', 'Fifth Grader', '5'),
+      academy: academyAt('5', ['ma-g5-mathematics', 'ma-g5-science', 'ma-g5-health']),
+    })
+    expect(validateAppStateForSync(candidate).ok).toBe(true)
+  })
+
+  it('an undecoupled Grade 5 profile still cannot hold another level’s course', () => {
+    const candidate = stateWith({
+      ...emptyProfile('p3', 'Fifth Grader', '5'),
+      academy: academyAt('5', ['ma-g5-mathematics', 'ma-g7-science']),
+    })
+    expect(validateAppStateForSync(candidate).ok).toBe(false)
+  })
+})
+
+// ---------- the state a real parent action leaves behind ----------
+
+/**
+ * Subject-scoped course validation is only safe if the app never PRODUCES a
+ * state it would refuse. persistDatasetVerified validates before writing and
+ * datasetFingerprint throws on an invalid state, so a parent action that left
+ * a stale course record would stop the household saving anything at all.
+ */
+describe('changing a working level leaves a state that still persists', () => {
+  const enrolledAtFive = (): Profile => ({
+    ...setWorkingLevel(emptyProfile('p3', 'Sixth Grader', '6'), 'mathematics', '5'),
+    academy: {
+      releaseVersion: '1.0.0',
+      grade: '5',
+      enrolledAt: '2026-08-04T12:00:00.000Z',
+      courseIds: ['ma-g5-mathematics'],
+      lessons: {
+        'ma-g5-mathematics-u01-l01': {
+          status: 'complete',
+          segmentIndex: 3,
+          releaseVersion: '1.0.0',
+          startedAt: '2026-08-04T12:00:00.000Z',
+          completedAt: '2026-08-04T13:00:00.000Z',
+          occasions: [{ date: '2026-08-04', mode: 'independent', met: true, kind: 'lesson-check' }],
+        },
+      },
+      assessments: {
+        'ma-g5-mathematics-u01-assessment': [
+          { date: '2026-08-10', percent: 88, outcome: 'secure' },
+        ],
+      },
+    },
+  })
+
+  it('the enrolled starting state is valid', () => {
+    expect(validateAppStateForSync(stateWith(enrolledAtFive())).ok).toBe(true)
+  })
+
+  it('moving mathematics 5 → 7 stays valid', () => {
+    const moved = setWorkingLevel(enrolledAtFive(), 'mathematics', '7')
+    expect(validateAppStateForSync(stateWith(moved)).ok).toBe(true)
+  })
+
+  it('clearing the level entirely stays valid', () => {
+    const cleared = setWorkingLevel(enrolledAtFive(), 'mathematics', null)
+    expect(validateAppStateForSync(stateWith(cleared)).ok).toBe(true)
+  })
+
+  it('drops only the now-unauthorized course — never her finished work', () => {
+    const moved = setWorkingLevel(enrolledAtFive(), 'mathematics', '7')
+    expect(moved.academy?.courseIds).toEqual([])
+    expect(Object.keys(moved.academy!.lessons)).toEqual(['ma-g5-mathematics-u01-l01'])
+    expect(moved.academy!.lessons['ma-g5-mathematics-u01-l01'].completedAt).toBe(
+      '2026-08-04T13:00:00.000Z',
+    )
+    expect(moved.academy!.assessments['ma-g5-mathematics-u01-assessment']).toHaveLength(1)
+  })
+
+  it('leaves an unrelated subject’s enrollment alone', () => {
+    const both: Profile = {
+      ...setWorkingLevel(
+        setWorkingLevel(emptyProfile('p3', 'Sixth Grader', '6'), 'mathematics', '5'),
+        'english-language-arts',
+        '7',
+      ),
+      academy: academyAt('5', ['ma-g5-mathematics', 'ma-g7-english-language-arts']),
+    }
+    const moved = setWorkingLevel(both, 'mathematics', '8')
+    expect(moved.academy?.courseIds).toEqual(['ma-g7-english-language-arts'])
+    expect(validateAppStateForSync(stateWith(moved)).ok).toBe(true)
   })
 })

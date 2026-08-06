@@ -2,7 +2,6 @@ import {
   ACADEMY_SUBJECTS,
   type AcademyGrade,
   type AcademySubject,
-  type Grade,
   type Profile,
 } from '../../types'
 import { ACADEMY_SUBJECT_LABELS } from '../../academy/contentTypes'
@@ -105,7 +104,7 @@ function SubjectLevel({
         value={explicit ?? ''}
         onChange={(e) =>
           onPatchProfile(profile.id, (prev) =>
-            setWorkingLevel(prev, subject, (e.target.value || null) as Grade | null),
+            setWorkingLevel(prev, subject, (e.target.value || null) as AcademyGrade | null),
           )
         }
         className="mt-1 block min-h-11 w-full rounded-lg border border-slate-300 bg-white px-2 py-1 font-semibold"

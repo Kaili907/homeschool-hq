@@ -66,8 +66,12 @@ export type AcademySubject = (typeof ACADEMY_SUBJECTS)[number]
  * entry rides the nominal grade, so an untouched profile behaves exactly as
  * before. Levels are per subject because a sixth grader can genuinely need
  * Grade 5 mathematics and Grade 7 ELA in the same term.
+ *
+ * An explicit level is an AcademyGrade, not any Grade: only 5/7/8 have
+ * published content, so assigning '10' would be an inert value nothing can
+ * serve. Sync validation enforces the same restriction on untrusted payloads.
  */
-export type WorkingLevels = Partial<Record<AcademySubject, Grade>>
+export type WorkingLevels = Partial<Record<AcademySubject, AcademyGrade>>
 
 /** Where an academy lesson stands. 'reteach' = the check was not met; the lesson
  * re-opens on the reteach path instead of counting as complete. */
