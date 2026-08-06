@@ -1,9 +1,10 @@
 import type { StudySafetyClassificationRequestV1 } from '../contracts/safety'
 import type { StudySafetyPort } from '../ports'
-import type { StudySafetyRequest } from '../types'
+import type { StudyRuntimeInterruption, StudySafetyRequest } from '../types'
 import {
   classifyStudySafetyWithCaptureStatus,
   type StudySafetyClientDeps,
+  type StudySafetyClientResult,
   type StudySessionAuthorizationFailure,
 } from './client'
 import { recordLocalPreAcceptanceSafetyStop } from './localStopLedger'
@@ -23,6 +24,24 @@ export interface MountedStudySafetyPortDeps extends StudySafetyClientDeps {
 }
 
 export const MOUNTED_STUDY_SAFETY_CLASSIFIER_VERSION = 'study-safety-http-boundary-v1' as const
+
+/**
+ * Restates the client's category as the runtime's interruption vocabulary, so
+ * the distinction the HTTP boundary drew survives all the way to the learner's
+ * surface instead of collapsing into an anonymous fail-closed result. Anything
+ * that is not one of the two named lifecycle categories yields nothing, which
+ * keeps it on the safety-stop path.
+ */
+function sessionInterruption(result: StudySafetyClientResult): StudyRuntimeInterruption | undefined {
+  if (result.failureCategory === 'session-authorization' && result.sessionAuthorizationFailure) {
+    return Object.freeze({
+      kind: 'session-authorization' as const,
+      reason: result.sessionAuthorizationFailure,
+    })
+  }
+  if (result.failureCategory === 'rate-limit') return Object.freeze({ kind: 'rate-limit' as const })
+  return undefined
+}
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
@@ -97,12 +116,21 @@ export function createMountedStudySafetyPort(
           deps.onSessionAuthorizationFailure?.(result.sessionAuthorizationFailure)
         } catch { /* the host's recovery is its own problem; this evaluation still fails closed */ }
       }
+      // The typed interruption originates here and nowhere else. Its content
+      // comes from the HTTP status and the client's own seam checks — never
+      // from the response body, which the client refuses to parse — so a
+      // gateway cannot inject one. It is attached only to a fail-closed
+      // `invalid` result, so it can never accompany permission to continue.
+      const interruption = response.classification === 'invalid'
+        ? sessionInterruption(result)
+        : undefined
       return Object.freeze({
         outcome: response.classification,
         mayContinue: response.classification === 'clear' &&
           response.continueToTutorCore === true &&
           response.learner.mayContinue === true,
         adultHelpState: response.learner.adultHelpState,
+        ...(interruption ? { interruption } : {}),
       })
     },
   })

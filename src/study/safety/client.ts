@@ -131,10 +131,22 @@ export async function classifyStudySafetyWithCaptureStatus(
   // Read once, only to build this request's headers. A missing seam, a cleared
   // transport, and a reference the identity contract refuses all land here, so
   // no unauthorized classification ever reaches the network.
-  const headers = deps.sessionAuthorization?.authorizeStudyRequestHeaders({
-    Authorization: `Bearer ${accessToken}`,
-    'content-type': 'application/json',
-  })
+  //
+  // The seam is host code and can throw — a transport mid-rotation, a revoked
+  // accessor, a composition bug. A throw is still an unusable Study session, so
+  // it is guarded here and kept inside the taxonomy: escaping would lose the
+  // category, skip the host's recovery callback, and drop the failure into a
+  // broader runtime quarantine. The thrown value itself is discarded rather
+  // than reported, because it is host detail this result may not carry.
+  let headers: Record<string, string> | null | undefined
+  try {
+    headers = deps.sessionAuthorization?.authorizeStudyRequestHeaders({
+      Authorization: `Bearer ${accessToken}`,
+      'content-type': 'application/json',
+    })
+  } catch {
+    headers = null
+  }
   if (!headers) return { response: failClosed('client-study-session-unavailable'), serverCaptureStatus: 'server-not-contacted', failureCategory: 'session-authorization', sessionAuthorizationFailure: 'study-session-rejected' }
   if (deps.signal?.aborted) return { response: failClosed('client-cancelled'), failureMode: 'network-failure-mid-request', serverCaptureStatus: 'server-not-contacted', failureCategory: 'classifier' }
 

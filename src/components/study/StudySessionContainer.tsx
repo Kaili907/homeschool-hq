@@ -5,10 +5,21 @@ import { AcceptedRc1HostRuntime } from '../../study/runtimeFacade'
 import { runCurrentStudyWork, StudyLifecycleBoundary } from '../../study/production/lifecycleBoundary'
 import { STUDY_LEARNER_STOP_MESSAGE } from '../../study/safety/learnerSafe'
 import { isSessionStoppedByLocalLedger, recordLocalSessionSafetyStop } from '../../study/safety/localStopLedger'
-import type { HostStudyLaunchContext, StudyAccessibilitySettings, StudyCalendarEntry, StudyCheckpoint } from '../../study/types'
+import type { HostStudyLaunchContext, StudyAccessibilitySettings, StudyCalendarEntry, StudyCheckpoint, StudyRuntimeInterruption } from '../../study/types'
 import './study-host.css'
 
 export const STUDY_TUTOR_OUTPUT_PENDING_MESSAGE = 'I’m checking the Tutor reply before showing it.'
+
+// STUDY-A1-AUTH-C — neither of these is a safety message. Both say what is true
+// and nothing more: the session ended, or the service is busy. Neither claims
+// anything about what the learner wrote, and neither names a status, a service,
+// a session, or an adult account.
+export const STUDY_SESSION_UNAVAILABLE_MESSAGE = 'The Study session ended. Please ask your dad to sign in again. You are not in trouble.'
+export const STUDY_BUSY_RETRY_MESSAGE = 'Study is busy right now. Wait a moment, then try again.'
+
+function interruptionMessage(interruption: StudyRuntimeInterruption): string {
+  return interruption.kind === 'rate-limit' ? STUDY_BUSY_RETRY_MESSAGE : STUDY_SESSION_UNAVAILABLE_MESSAGE
+}
 
 export function studyAccessibilityProjection(settings: StudyAccessibilitySettings) {
   return Object.freeze({
@@ -83,12 +94,21 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   // or a new tab — starts stopped again, so a flagged learner cannot continue
   // by reloading the page.
   const [stopped, setStopped] = useState(() => isSessionStoppedByLocalLedger(stopKey))
+  // STUDY-A1-AUTH-C: deliberately not seeded from any store and never written to
+  // one. An authorization or rate-limit interruption belongs to this mount only,
+  // so a refresh clears it — unlike a safety stop, which must survive one.
+  const [interruption, setInterruption] = useState<StudyRuntimeInterruption | null>(null)
   const [error, setError] = useState<string | null>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const bindingRef = useRef(`${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`)
   const lifecycle = useMemo(() => new StudyLifecycleBoundary(), [])
   const runtime = useMemo(() => new AcceptedRc1HostRuntime(ports), [ports])
   const learnerScope = { householdRef: context.householdRef, learnerRef: context.learnerRef }
+  // A refused session cannot be recovered from inside the learner's surface, so
+  // no further Tutor work is offered until the App composition reissues the
+  // adult bearer or the Study session. A rate limit is only a wait, so the
+  // lesson stays live and the same answer may simply be sent again.
+  const sessionAuthorizationLost = interruption?.kind === 'session-authorization'
   const currentSegment = entry.segments.find((segment) => !entry.completedSegmentRefs.includes(segment.segmentRef))
   const accessibilityProjection = studyAccessibilityProjection(context.accessibility)
   const isCurrentBinding = () => bindingRef.current === `${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`
@@ -143,7 +163,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   useEffect(() => { headingRef.current?.focus() }, [loading, error, entry.state, currentSegment?.segmentRef])
 
   const saveBreak = async () => {
-    if (!currentSegment || stopped) return
+    if (!currentSegment || stopped || sessionAuthorizationLost) return
     const token = lifecycle.token()
     setBusy(true)
     setAnswer('')
@@ -198,9 +218,10 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   }
 
   const completeStep = async () => {
-    if (!currentSegment || !answer.trim() || busy || stopped) return
+    if (!currentSegment || !answer.trim() || busy || stopped || sessionAuthorizationLost) return
     const token = lifecycle.token()
     setBusy(true)
+    setInterruption(null)
     setCheckingTutorSafety(entry.masteryAuthority === 'tutor-core')
     const transient = answer
     setAnswer('')
@@ -219,6 +240,22 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           occurredAt: at,
           isCurrentBinding: () => token.isCurrent() && isCurrentBinding(),
         }))
+        // STUDY-A1-AUTH-C — handled before the safety-stop branch, and sharing
+        // none of it. Nothing durable is written, no safety event is appended,
+        // the lifecycle is not cancelled, and no claim is made about what the
+        // learner wrote: the classifier never judged her.
+        if (result.status === 'interrupted') {
+          setInterruption(result.interruption)
+          setJarvisText(interruptionMessage(result.interruption))
+          // A shed request means only "try again", so the answer she already
+          // typed is put back rather than made her retype it. It stays in this
+          // component's state exactly as before and is never persisted. A
+          // refused session is not retryable here, so its text stays discarded.
+          if (result.interruption.kind === 'rate-limit') setAnswer(transient)
+          setCheckingTutorSafety(false)
+          setBusy(false)
+          return
+        }
         if (result.status === 'stopped') {
           // Durable first, before anything that can fail. The lock and the
           // adult-visible record must survive a refresh and must exist even
@@ -341,12 +378,13 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           })}</ol>
         </nav>
         {context.timerPreference.visibility === 'hidden' ? <p className="mt-3 font-semibold" role="status">Timer hidden. Milestones will still be shown.</p> : <p className="mt-3 text-sm text-slate-600">Work-block limit: {context.parentLimits.maximumWorkMinutes} minutes · break: {context.parentLimits.breakMinutes} minutes</p>}
+        {interruption ? <p className="mt-3 rounded-xl border border-slate-300 bg-white p-4 font-semibold" role="status" data-study-interrupted={interruption.kind}>{interruptionMessage(interruption)}</p> : null}
 
         {entry.state === 'paused' ? (
           <section className="mt-5 rounded-2xl border border-cyan-200 bg-cyan-50 p-6">
             <h2 ref={headingRef} tabIndex={-1} className="text-2xl font-bold">Water break</h2>
             <p className="mt-2">Your exact place is saved at {entry.resumePoint?.segmentRef}. Take the time you need.</p>
-            <button type="button" className="mt-4 rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white" disabled={busy || stopped} onClick={resume}>Return to exact step</button>
+            <button type="button" className="mt-4 rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white" disabled={busy || stopped || sessionAuthorizationLost} onClick={resume}>Return to exact step</button>
           </section>
         ) : entry.state === 'completed' ? (
           <section className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-6"><h2 ref={headingRef} tabIndex={-1} className="text-2xl font-bold">Study block complete</h2><p>No host mastery decision was invented. Tutor Core remains the instructional authority.</p><button type="button" className="mt-4 rounded-lg border bg-white px-4 py-2" onClick={onBack}>Back to plan</button></section>
@@ -357,11 +395,11 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
               <p className="mt-3">Complete this step in the existing Manuel Academy lesson. When you finish, type <strong>ready</strong>. The host will not treat this confirmation as mastery.</p>
               <div className="mt-4 rounded-lg border border-dashed border-slate-300 bg-slate-50 p-4"><p className="font-semibold">Media fallback</p><p className="text-sm">No lesson media is required here. Continue with the existing text activity.</p></div>
               <label className="mt-5 block font-bold" htmlFor="study-response">Current response</label>
-              <textarea id="study-response" className="mt-2 min-h-28 w-full rounded-lg border border-slate-400 p-3 text-base" value={answer} disabled={busy || stopped} onChange={(event) => setAnswer(event.target.value)} aria-describedby="study-response-help" />
+              <textarea id="study-response" className="mt-2 min-h-28 w-full rounded-lg border border-slate-400 p-3 text-base" value={answer} disabled={busy || stopped || sessionAuthorizationLost} onChange={(event) => setAnswer(event.target.value)} aria-describedby="study-response-help" />
               <p id="study-response-help" className="mt-1 text-sm text-slate-600">This response is transient. It is sent through the safety/Tutor bridge and is not stored in Study evidence.</p>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-                <button type="button" className="rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white disabled:opacity-50" disabled={!answer.trim() || busy || stopped} onClick={completeStep}>Send through Tutor boundary</button>
-                <button type="button" className="rounded-lg border border-cyan-700 bg-white px-5 py-3 font-bold text-cyan-800 disabled:opacity-50" disabled={busy || stopped} onClick={saveBreak}>Take a water break</button>
+                <button type="button" className="rounded-lg bg-cyan-700 px-5 py-3 font-bold text-white disabled:opacity-50" disabled={!answer.trim() || busy || stopped || sessionAuthorizationLost} onClick={completeStep}>Send through Tutor boundary</button>
+                <button type="button" className="rounded-lg border border-cyan-700 bg-white px-5 py-3 font-bold text-cyan-800 disabled:opacity-50" disabled={busy || stopped || sessionAuthorizationLost} onClick={saveBreak}>Take a water break</button>
               </div>
             </section>
             <StudyTutorSafetySurface
