@@ -164,7 +164,25 @@ describe('Grade 7 Unit 4 distractor corrections', () => {
  */
 const U4_INVARIANCE_DIGEST = '5c8c7779c8513081a91c99a704907f3b20e5dc82c2c6356ccc78ce601cc04223'
 const U4_WORKED_EXAMPLE_DIGEST = 'e78dcbc227d7d8cd502eb1274c89de4812a8b7be85e017892f1ac64c835260e3'
-const U3_UNTOUCHED_DIGEST = '3119b0afcf4b1419371f777bba3c4ab30cb1d10a7974a354d6cd2ac94b0a5abc'
+/**
+ * Re-anchored at integration, and deliberately not to e1522f3 like the two digests
+ * above. This guard exists to prove the Unit 4 distractor work does not perturb
+ * Unit 3, and it still does. But it is a digest of Unit 3's *output*, and on this
+ * branch Unit 3 is the corrected generator: the Unit 3 card landed at 1cf141f and
+ * intentionally changed that output, so the e1522f3 value it originally pinned
+ * describes a Unit 3 that no longer exists here and would fail for the one reason
+ * this test is not meant to detect.
+ *
+ * The value below is Unit 3 as of 1cf141f, i.e. before this Unit 4 card was applied
+ * on top, so the guard still fails if Unit 4 work moves Unit 3. That the movement
+ * belongs entirely to the Unit 3 card is checkable rather than asserted: Unit 3
+ * generation imports only ../types, ../genUtils and ./generatorCore, and the Unit 4
+ * commit touched none of those three — it touched grade7MathUnit4Generator.ts and
+ * two test files — so Unit 3's output here is byte-identical to its output at
+ * 1cf141f. grade7MathWorkedExamples.test.ts confirms the same thing independently:
+ * its six `u3:` digests are the Unit 3 card's values and they pass unchanged.
+ */
+const U3_UNTOUCHED_DIGEST = '5ba06adc9f119eb655f2e9b23cdd9ad89b022502efd4a0bfca4426cda813cdb2'
 
 /**
  * The eleven draws inside that 90,000-draw sample that threw before this card.
