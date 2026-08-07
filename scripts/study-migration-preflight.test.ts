@@ -565,6 +565,142 @@ describe('frozen floor survives coordinated evidence re-approval', () => {
 })
 
 /**
+ * A filename-keyed lookup is last-write-wins, so a manifest that lists a frozen member
+ * twice — the real entry demoted to executable, an identical historical-baseline twin
+ * placed after it — makes the lookup report the twin's classification while the demoted
+ * entry still mints an executable checksum for an already-hosted migration. The floor is
+ * therefore evaluated over every entry bearing a frozen filename rather than through a
+ * per-filename lookup, so no arrangement of duplicates can silence it.
+ *
+ * The gate is the site that matters. validateMigrationManifest refuses these manifests
+ * several times over through its duplicate and ordering rules, but the floor is enforced
+ * in the gate precisely so that its refusal does not depend on another rule holding.
+ */
+describe('frozen floor is immune to duplicated frozen filenames', () => {
+  /** Replaces one floor member in place with N copies carrying the given classifications. */
+  async function duplicatedFloorMember(filename: string, classifications: Classification[]) {
+    const manifest = await checkedInManifest()
+    const index = manifest.migrations.findIndex((entry) => entry.filename === filename)
+    const original = manifest.migrations[index]
+    manifest.migrations.splice(index, 1, ...classifications.map((classification) => ({
+      ...original,
+      classification,
+      applicationStatus: ALLOWED_APPLICATION_STATUS.get(classification)!,
+    })))
+    return { manifest, sha256: original.sha256 }
+  }
+
+  /** The twin placed at the far end of the manifest rather than beside its original. */
+  async function demotedWithDistantTwin(filename: string, twin: 'first' | 'last') {
+    const manifest = await checkedInManifest()
+    const victim = manifest.migrations.find((entry) => entry.filename === filename)!
+    const duplicate = { ...victim }
+    Object.assign(victim, { classification: 'executable', applicationStatus: 'not-applied-hosted' })
+    if (twin === 'first') manifest.migrations.unshift(duplicate)
+    else manifest.migrations.push(duplicate)
+    return { manifest, sha256: victim.sha256 }
+  }
+
+  const MIXED_ARRANGEMENTS: readonly (readonly Classification[])[] = [
+    [EXECUTABLE, HISTORICAL],
+    [HISTORICAL, EXECUTABLE],
+    [EXECUTABLE, HISTORICAL, HISTORICAL],
+    [HISTORICAL, EXECUTABLE, HISTORICAL],
+    [HISTORICAL, HISTORICAL, EXECUTABLE],
+  ]
+
+  const mixedCases = FROZEN_HISTORICAL_BASELINE_FILENAMES.flatMap((filename) =>
+    MIXED_ARRANGEMENTS.map((classifications) => [filename, classifications.join('+'), classifications] as const))
+
+  it.each(mixedCases)(
+    'refuses %s duplicated as %s in the direct gate',
+    async (_filename, _label, classifications) => {
+      const { manifest, sha256 } = await duplicatedFloorMember(_filename, [...classifications])
+      const result = evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest)
+      // The demotion really did mint executable work out of an already-hosted migration,
+      // and the evidence really does approve it: this is the state the floor exists to stop.
+      expect(result.checksums).toContain(sha256)
+      expect(result.reasons).not.toContain('final-checksum-set-not-approved')
+      // Exactly the floor, and nothing else. The gate never runs the duplicate-filename
+      // rule, so this pins that its refusal is its own and not borrowed from validation.
+      expect(result.reasons).toEqual([FROZEN_HISTORICAL_BASELINE_DEMOTED])
+      expect(result.allowed).toBe(false)
+    },
+  )
+
+  it.each(mixedCases)(
+    'refuses %s duplicated as %s in manifest validation',
+    async (_filename, _label, classifications) => {
+      const { manifest } = await duplicatedFloorMember(_filename, [...classifications])
+      const result = await validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL)
+      expect(result.valid).toBe(false)
+      expect(result.reasons).toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+    },
+  )
+
+  const distantCases = FROZEN_HISTORICAL_BASELINE_FILENAMES.flatMap((filename) =>
+    (['first', 'last'] as const).map((twin) => [filename, twin] as const))
+
+  it.each(distantCases)(
+    'refuses a demoted %s whose historical twin sits %s in the manifest',
+    async (filename, twin) => {
+      const { manifest, sha256 } = await demotedWithDistantTwin(filename, twin)
+      const result = evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest)
+      expect(result.checksums).toContain(sha256)
+      expect(result.reasons).toEqual([FROZEN_HISTORICAL_BASELINE_DEMOTED])
+      expect(result.allowed).toBe(false)
+    },
+  )
+
+  it.each(distantCases)(
+    'reports %s demoted from manifest validation too, twin %s',
+    async (filename, twin) => {
+      const { manifest } = await demotedWithDistantTwin(filename, twin)
+      const result = await validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL)
+      expect(result.valid).toBe(false)
+      expect(result.reasons).toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+    },
+  )
+
+  it('still accepts a legal manifest that repeats no frozen filename', async () => {
+    // The immunity must not come from refusing every manifest that mentions a frozen
+    // filename more than zero times.
+    const manifest = await checkedInManifest()
+    expect(evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest))
+      .toMatchObject({ allowed: true, reasons: [] })
+  })
+
+  /**
+   * Division of labour. Two identical historical duplicates leave the floor's own claim
+   * — every entry bearing this filename is a historical baseline — perfectly true, so the
+   * floor says nothing and the generic duplicate rules own the refusal. This predicate is
+   * not the repository's duplicate validator and must not grow into one.
+   */
+  describe('duplicate policy stays with the duplicate rules', () => {
+    it.each([...FROZEN_HISTORICAL_BASELINE_FILENAMES])(
+      'stays silent on two identical historical copies of %s',
+      async (filename) => {
+        const { manifest } = await duplicatedFloorMember(filename, [HISTORICAL, HISTORICAL])
+        const result = evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest)
+        expect(result.reasons).not.toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+        expect(result.allowed).toBe(true)
+      },
+    )
+
+    it.each([...FROZEN_HISTORICAL_BASELINE_FILENAMES])(
+      'leaves two identical historical copies of %s to the duplicate-filename rule',
+      async (filename) => {
+        const { manifest } = await duplicatedFloorMember(filename, [HISTORICAL, HISTORICAL])
+        const result = await validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL)
+        expect(result.valid).toBe(false)
+        expect(result.reasons).toContain('duplicate-migration-filename')
+        expect(result.reasons).not.toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+      },
+    )
+  })
+})
+
+/**
  * The floor is a floor, not a ceiling. Applying an executable migration promotes it to
  * a historical baseline, which grows the historical set above the audited four; that
  * must stay legal at every size, and must stop only where the manifest would run out

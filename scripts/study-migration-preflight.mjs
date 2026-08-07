@@ -44,13 +44,23 @@ export const FROZEN_HISTORICAL_BASELINE_DEMOTED = 'frozen-historical-baseline-de
  * True when any frozen member is absent from the manifest or no longer carries the
  * historical-baseline classification. Absence covers deletion and rename alike: a
  * renamed member is, to a membership test, simply a member that is not there.
+ *
+ * Every entry bearing a frozen filename is examined, never a filename-keyed lookup of
+ * them. A lookup keyed by filename is last-write-wins, so a manifest listing a frozen
+ * member twice — the real entry demoted to executable, an identical historical-baseline
+ * twin placed after it — would report the twin's classification while the demoted entry
+ * went on minting executable work out of an already-hosted migration. Reading both
+ * directions over all entries makes the rule independent of the order duplicates
+ * happen to appear in, and so independent of the duplicate rules in manifest validation.
  */
 function frozenHistoricalBaselineViolated(entries) {
-  const classificationByFilename = new Map(
-    entries.map((entry) => [entry?.filename, entry?.classification]),
-  )
+  const historical = new Set()
+  const notHistorical = new Set()
+  for (const entry of entries) {
+    ;(entry?.classification === 'historical-baseline' ? historical : notHistorical).add(entry?.filename)
+  }
   return FROZEN_HISTORICAL_BASELINE_FILENAMES.some((filename) =>
-    classificationByFilename.get(filename) !== 'historical-baseline')
+    !historical.has(filename) || notHistorical.has(filename))
 }
 
 function classificationStatusMismatch(entries) {
