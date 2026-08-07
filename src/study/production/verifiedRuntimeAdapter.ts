@@ -6,6 +6,7 @@ import type {
 } from '../client/studyProductionReadinessClient'
 import type {
   StudyLearnerSelector,
+  StudySessionGrant,
   StudyStudentCapability,
 } from '../contracts/identity/session'
 import {
@@ -53,6 +54,17 @@ export interface VerifiedStudyRuntimeAdapterOptions {
   readonly lifecycle: StudyLifecycleBoundary
   readonly now?: () => number
   readonly createLifecycleRef?: () => string
+  /**
+   * STUDY-A1-COMP Phase 5 — called with the canonical grant the identity client
+   * has just issued, immediately, before this launch does anything else with it.
+   * The App installs it into its own Study session lifecycle here.
+   *
+   * A throw refuses the launch: the catch below cancels the epoch, clears the
+   * identity client and re-raises, so a grant that could not be installed leaves
+   * Study unavailable rather than half-established. Nothing is passed back out,
+   * and the grant is not retained here.
+   */
+  readonly onSessionGrantIssued?: (grant: StudySessionGrant) => void
 }
 
 const CAPABILITY_BY_OPERATION: Readonly<Record<VerifiedAcademicOperation, StudyStudentCapability>> = Object.freeze({
@@ -183,6 +195,10 @@ export function createVerifiedStudyRuntimeAdapter(
             selectedStudentRef: input.selectedStudentRef,
             signal: controller.signal,
           })
+      // Immediately, and before the verify round trip: from here on the only
+      // holder of the reference is the host's own transport. A reused session
+      // installs nothing, because nothing new was issued.
+      if (grant) options.onSessionGrantIssued?.(grant)
       const verified = await identity.verify({
         requiredCapability: 'student:progress:read',
         signal: controller.signal,

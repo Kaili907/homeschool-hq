@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { syntheticGrade5StudyContext } from './demonstrations'
 import { createLocalDevelopmentStudyPorts } from './localDevelopmentPorts'
 import type { StudyPortBundle } from './ports'
+import { createHostStudyLifecycleSeam } from './composition/hostStudyLifecycle'
 import { createSyntheticMathBlock } from './testing/syntheticStudyFixtures'
 import type { StudyCalendarEntry, StudyScope } from './types'
 
@@ -151,6 +152,21 @@ describe('A6-5-C durable student stop across remounts', () => {
     }
   }
 
+  /**
+   * STUDY-A1-COMP Phase 8 — the App owns one Study lifecycle and hands it to the
+   * container. A page load builds it again, so each mount below gets its own.
+   */
+  function hostStudyLifecycle() {
+    return createHostStudyLifecycleSeam({}, {
+      authenticatedSessionRef: 'session:a6-5-c-durable-stop',
+      householdRef: context.householdRef,
+      learnerRef: context.learnerRef,
+      launchGrantRef: 'grant:a6-5-c-durable-stop',
+      featureEnabled: true,
+      authorizationRevision: 1,
+    })
+  }
+
   /** One fresh mount of the Study session, as a page load gives it. */
   async function mount(): Promise<FakeElement> {
     const { StudySessionContainer } = await import('../components/study/StudySessionContainer')
@@ -158,7 +174,7 @@ describe('A6-5-C durable student stop across remounts', () => {
     roots.push(root)
     await act(async () => {
       root.render(
-        <StudySessionContainer context={context} initialEntry={entry} ports={ports} onBack={() => {}} />,
+        <StudySessionContainer context={context} initialEntry={entry} ports={ports} studyLifecycle={hostStudyLifecycle()} onBack={() => {}} />,
       )
     })
     await settle()
@@ -232,7 +248,7 @@ describe('A6-5-C durable student stop across remounts', () => {
     roots.push(root)
     await act(async () => {
       root.render(
-        <StudySessionContainer context={context} initialEntry={entry} ports={ports} onBack={() => {}} />,
+        <StudySessionContainer context={context} initialEntry={entry} ports={ports} studyLifecycle={hostStudyLifecycle()} onBack={() => {}} />,
       )
     })
     await settle()
@@ -270,7 +286,7 @@ describe('A6-5-C durable student stop across remounts', () => {
     roots.push(root)
     await act(async () => {
       root.render(
-        <StudySessionContainer context={context} initialEntry={other} ports={ports} onBack={() => {}} />,
+        <StudySessionContainer context={context} initialEntry={other} ports={ports} studyLifecycle={hostStudyLifecycle()} onBack={() => {}} />,
       )
     })
     await settle()

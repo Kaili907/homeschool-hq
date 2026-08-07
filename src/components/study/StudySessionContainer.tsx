@@ -1,10 +1,15 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { JarvisCore } from '../../../adaptive-tutor/study-engine/ui/JarvisCore.tsx'
+import {
+  joinHostStudyLifecycle,
+  type HostStudyLifecycleSeam,
+} from '../../study/composition/hostStudyLifecycle'
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../study/ports'
 import { AcceptedRc1HostRuntime } from '../../study/runtimeFacade'
-import { runCurrentStudyWork, StudyLifecycleBoundary } from '../../study/production/lifecycleBoundary'
+import { runCurrentStudyWork } from '../../study/production/lifecycleBoundary'
 import { STUDY_LEARNER_STOP_MESSAGE } from '../../study/safety/learnerSafe'
 import { isSessionStoppedByLocalLedger, recordLocalSessionSafetyStop } from '../../study/safety/localStopLedger'
+import { createStudyTurnRequestRef } from '../../study/studyRequestRef'
 import type { HostStudyLaunchContext, StudyAccessibilitySettings, StudyCalendarEntry, StudyCheckpoint, StudyRuntimeInterruption } from '../../study/types'
 import './study-host.css'
 
@@ -19,6 +24,24 @@ export const STUDY_BUSY_RETRY_MESSAGE = 'Study is busy right now. Wait a moment,
 
 function interruptionMessage(interruption: StudyRuntimeInterruption): string {
   return interruption.kind === 'rate-limit' ? STUDY_BUSY_RETRY_MESSAGE : STUDY_SESSION_UNAVAILABLE_MESSAGE
+}
+
+/**
+ * STUDY-A1-COMP Phase 8. The calendar runtime measures active work in whole
+ * seconds and refuses an interval that does not resolve to one
+ * (`addActiveTime` in calendar-parent-runtime/calendar-runtime.ts), so a block
+ * started at one millisecond offset and a segment completed at another threw on
+ * the very first completion. Sub-second precision means nothing to a work block,
+ * so every instant this container hands the runtime is truncated to the second
+ * and they all come from here. Chronology is unaffected: the runtime compares
+ * with `<`, so two events landing in the same second are still in order.
+ *
+ * Rounded UP rather than down: a block's own creation instant keeps millisecond
+ * precision, and rounding down would place the first host event before it and
+ * trip the runtime's chronology check instead.
+ */
+function studyInstant(): string {
+  return new Date(Math.ceil(Date.now() / 1_000) * 1_000).toISOString()
 }
 
 export function studyAccessibilityProjection(settings: StudyAccessibilitySettings) {
@@ -63,10 +86,17 @@ export function StudyTutorSafetySurface({
   )
 }
 
-export function StudySessionContainer({ context: baseContext, initialEntry, ports, onBack }: {
+export function StudySessionContainer({ context: baseContext, initialEntry, ports, studyLifecycle, onBack }: {
   context: HostStudyLaunchContext
   initialEntry: StudyCalendarEntry
   ports: Partial<StudyPortBundle>
+  /**
+   * STUDY-A1-COMP Phase 8 — the App's own Study lifecycle, the same object the
+   * route received. This container used to build an unbound
+   * StudyLifecycleBoundary of its own, so every guarded operation below aborted
+   * before it started and the live session path was unreachable.
+   */
+  studyLifecycle: HostStudyLifecycleSeam
   onBack: () => void
 }) {
   const context: HostStudyLaunchContext = {
@@ -101,7 +131,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   const [error, setError] = useState<string | null>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const bindingRef = useRef(`${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`)
-  const lifecycle = useMemo(() => new StudyLifecycleBoundary(), [])
+  const lifecycle = studyLifecycle.boundary
   const runtime = useMemo(() => new AcceptedRc1HostRuntime(ports), [ports])
   const learnerScope = { householdRef: context.householdRef, learnerRef: context.learnerRef }
   // A refused session cannot be recovered from inside the learner's surface, so
@@ -114,7 +144,9 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   const isCurrentBinding = () => bindingRef.current === `${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`
 
   useEffect(() => {
-    const token = lifecycle.token()
+    // Rejoin rather than re-create: a previous unmount cancelled this epoch, and
+    // only the host's binding may start the next one.
+    const token = joinHostStudyLifecycle(studyLifecycle)
     const prepare = async () => {
       try {
         token.assertCurrent()
@@ -124,7 +156,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
         assertCompleteStudyPortBundle(ports)
         runtime.launch(context, initialEntry, sessionRef)
         let next = initialEntry
-        const now = new Date().toISOString()
+        const now = studyInstant()
         if (next.state === 'scheduled') next = await runCurrentStudyWork(token, () => ports.calendar.start(learnerScope, next.blockRef, now))
         if (next.state === 'paused') next = await runCurrentStudyWork(token, () => ports.calendar.resume(learnerScope, next.blockRef, now))
         const segment = next.segments.find((candidate) => !next.completedSegmentRefs.includes(candidate.segmentRef))
@@ -158,7 +190,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
       lifecycle.cancel('navigation-away')
       bindingRef.current = 'closed'
     }
-  }, [context.learnerRef, initialEntry.blockRef, lifecycle, ports, runtime])
+  }, [context.learnerRef, initialEntry.blockRef, lifecycle, ports, runtime, studyLifecycle])
 
   useEffect(() => { headingRef.current?.focus() }, [loading, error, entry.state, currentSegment?.segmentRef])
 
@@ -168,7 +200,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
     setBusy(true)
     setAnswer('')
     try {
-      const at = new Date().toISOString()
+      const at = studyInstant()
       const paused = await runCurrentStudyWork(token, () => (ports as StudyPortBundle).calendar.pause(learnerScope, entry.blockRef, at, 'planned_break'))
       const previous = await runCurrentStudyWork(token, () => (ports as StudyPortBundle).checkpoint.loadLatest(scope))
       const checkpoint: StudyCheckpoint = {
@@ -209,7 +241,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
     const token = lifecycle.token()
     setBusy(true)
     try {
-      const resumed = await runCurrentStudyWork(token, () => (ports as StudyPortBundle).calendar.resume(learnerScope, entry.blockRef, new Date().toISOString()))
+      const resumed = await runCurrentStudyWork(token, () => (ports as StudyPortBundle).calendar.resume(learnerScope, entry.blockRef, studyInstant()))
       setEntry(resumed)
       setJarvisText('Welcome back. Your exact Study step is ready.')
     } catch {
@@ -226,14 +258,21 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
     const transient = answer
     setAnswer('')
     try {
-      const at = new Date().toISOString()
+      const at = studyInstant()
       let acceptedEventRef: string | null = null
       if (entry.masteryAuthority === 'tutor-core') {
         const result = await runCurrentStudyWork(token, () => runtime.submit({
           context,
           entry,
           scope,
-          requestRef: `request:${sessionRef}:${currentSegment.segmentRef}:${Date.now()}`,
+          // STUDY-A1-COMP Phase 9. This used to be built from the session and
+          // the segment, so it grew with them and crossed the Tutor bridge's
+          // 128-character opaque-id bound on ordinary host lesson references —
+          // and a clear turn came back as `bridge-stop-invalid-input`, which the
+          // stopped branch below then wrote to the durable ledger as a safety
+          // incident. The session and the segment still travel to the bridge as
+          // `sessionId` and `segmentId`; only this identifier is now bounded.
+          requestRef: createStudyTurnRequestRef(),
           segmentRef: currentSegment.segmentRef,
           transientLearnerText: transient,
           expectedAnswer: 'ready',
@@ -307,13 +346,13 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
         learnerScope,
         entry.blockRef,
         currentSegment.segmentRef,
-        new Date().toISOString(),
+        studyInstant(),
       ))
       const status = next.state === 'completed' ? 'completed' : 'active'
       if (status === 'completed') {
         await runCurrentStudyWork(token, () => (ports as StudyPortBundle).eventLedger.append(scope, {
           eventRef: `completion:${sessionRef}:${entry.lessonRef}`,
-          occurredAt: new Date().toISOString(),
+          occurredAt: studyInstant(),
           type: 'session-completed',
           payload: { blockRef: entry.blockRef, lessonRef: entry.lessonRef },
         }))
@@ -323,7 +362,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
         lessonRef: entry.lessonRef,
         segmentRef: currentSegment.segmentRef,
         status,
-        updatedAt: new Date().toISOString(),
+        updatedAt: studyInstant(),
         lastAcceptedEventRef: acceptedEventRef,
         rawAnswerIncluded: false,
         transcriptIncluded: false,

@@ -123,25 +123,56 @@ function invalidSafetyResult(): StudySafetyResult {
   }
 }
 
-const SESSION_AUTHORIZATION_REASONS = new Set(['adult-authentication-rejected', 'study-session-rejected'])
+type StudySessionAuthorizationReason =
+  Extract<StudyRuntimeInterruption, { kind: 'session-authorization' }>['reason']
+
+const SESSION_AUTHORIZATION_REASONS: ReadonlySet<string> =
+  new Set<StudySessionAuthorizationReason>(['adult-authentication-rejected', 'study-session-rejected'])
+
+/** Narrows to the reason union, so only a checked primitive can be kept. */
+function isSessionAuthorizationReason(value: unknown): value is StudySessionAuthorizationReason {
+  return typeof value === 'string' && SESSION_AUTHORIZATION_REASONS.has(value)
+}
 
 /**
- * Exact, and closed on both sides: an unrecognised kind, an unrecognised
- * reason, a missing reason, and any extra field are all rejected. A rejected
- * interruption is not an error — it simply is not honoured, which leaves the
- * result on the true safety-stop path. That is the safer direction: the worst
- * outcome of over-rejecting is a stop a parent has to clear, while the worst
- * outcome of under-rejecting is a real safety stop silently downgraded.
+ * Exact, and closed on both sides: an unrecognised kind, an unrecognised reason,
+ * a missing reason, and any extra field are all rejected.
+ *
+ * STUDY-A1-COMP Phase 10 — validates and rebuilds in ONE pass, returning the
+ * frozen copy or null.
+ *
+ * The type check comes first and membership is asked of the primitive itself.
+ * Coercing with String() let an object whose `toString` returned an approved
+ * code through, and the object that was admitted — not the code it printed —
+ * then travelled onward as the reason. Anything it closed over went with it.
+ *
+ * Validating and rebuilding together is what makes that hold. Each field is read
+ * exactly once and the value that is KEPT is the value that was CHECKED, so an
+ * own accessor cannot answer the check with an approved string and then hand
+ * something else to whatever is built afterwards. Only primitives leave here.
+ *
+ * Null means "not an interruption", which is not an error: it simply is not
+ * honoured, leaving the result on the true safety-stop path. That is the safer
+ * direction — the worst outcome of over-rejecting is a stop a parent has to
+ * clear, while the worst outcome of under-rejecting is a real safety stop
+ * silently downgraded.
  */
-function validInterruption(value: unknown): value is StudyRuntimeInterruption {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+function narrowedInterruption(value: unknown): StudyRuntimeInterruption | null {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null
   const candidate = value as Record<string, unknown>
   const keys = Object.keys(candidate)
-  if (candidate.kind === 'rate-limit') return keys.length === 1
-  return candidate.kind === 'session-authorization' &&
-    keys.length === 2 &&
-    Object.hasOwn(candidate, 'reason') &&
-    SESSION_AUTHORIZATION_REASONS.has(String(candidate.reason))
+  const kind = candidate.kind
+  if (kind === 'rate-limit') return keys.length === 1 ? Object.freeze({ kind: 'rate-limit' as const }) : null
+  if (kind !== 'session-authorization' || keys.length !== 2 || !Object.hasOwn(candidate, 'reason')) return null
+  const reason = candidate.reason
+  return isSessionAuthorizationReason(reason)
+    ? Object.freeze({ kind: 'session-authorization' as const, reason })
+    : null
+}
+
+/** Exact, and closed on both sides: see `narrowedInterruption`. */
+function validInterruption(value: unknown): value is StudyRuntimeInterruption {
+  return narrowedInterruption(value) !== null
 }
 
 function validSafetyResult(value: unknown): value is StudySafetyResult {
@@ -238,8 +269,11 @@ export class AcceptedRc1HostRuntime {
       // before any safety bookkeeping, so nothing durable is written and the
       // caller has no stop-shaped result it could write one from. Tutor Core
       // has not been reached at this point.
-      if (inputSafety.interruption) {
-        return { status: 'interrupted', interruption: inputSafety.interruption, coreSubmitInvocations: 0 }
+      // One read of the port's field, narrowed in the same pass. A null falls
+      // through to the genuine safety-stop path below.
+      const interruption = narrowedInterruption(inputSafety.interruption)
+      if (interruption) {
+        return { status: 'interrupted', interruption, coreSubmitInvocations: 0 }
       }
       const classification = inputSafety.outcome === 'clear' ? 'invalid' : inputSafety.outcome
       if (safetyPort.mode !== 'production') {
@@ -340,8 +374,9 @@ export class AcceptedRc1HostRuntime {
       // either way, but the refusal is still a lifecycle event: dressing it up
       // as a safety stop would tell this child's parent she wrote something
       // unsafe when the classifier never judged her at all.
-      if (outputInterruption) {
-        return { status: 'interrupted', interruption: outputInterruption, coreSubmitInvocations: 1 }
+      const interruption = narrowedInterruption(outputInterruption)
+      if (interruption) {
+        return { status: 'interrupted', interruption, coreSubmitInvocations: 1 }
       }
       return stoppedResult(
         result.classification,

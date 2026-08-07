@@ -81,16 +81,36 @@ import {
 import type { StudyAdultAuthorization } from './study/types'
 import type { StudyPortBundle } from './study/ports'
 import { getGatewayAccessToken } from './tutor/gatewayAuth'
-import { createStudyIdentityClient } from './study/client/studyIdentityClient'
 import { createStudyProductionReadinessClient } from './study/client/studyProductionReadinessClient'
+import {
+  createAppStudySessionComposition,
+  type AppStudySessionComposition,
+  type StudySessionInstallFailureCode,
+} from './study/composition/appStudySession'
+import {
+  createHostStudyLifecycleSeam,
+  type HostStudyLifecycleSeam,
+} from './study/composition/hostStudyLifecycle'
+import type { StudySessionAuthorizationFailure } from './study/safety/client'
 import {
   createVerifiedStudyRuntimeAdapter,
   type VerifiedStudyRuntimeAdapter,
 } from './study/production/verifiedRuntimeAdapter'
 import { StudyLifecycleBoundary } from './study/lifecycle'
 
+/**
+ * STUDY-A1-COMP Phase 5 — the only thing an install refusal is allowed to
+ * produce. Never `error.message`, never the grant, never the reference, never a
+ * server body: one of two fixed words, and nothing reaches a surface at all.
+ */
+function reportStudySessionInstallRejected(code: StudySessionInstallFailureCode): void {
+  console.warn('study-session-install-rejected', code)
+}
+
 const loadPreviewPorts = import.meta.env.DEV
-  ? () => import('./study/mountedPorts').then(({ createMountedStudyPorts }) => createMountedStudyPorts())
+  ? (deps: Parameters<
+      typeof import('./study/mountedPorts')['createMountedStudyPorts']
+    >[0]) => import('./study/mountedPorts').then(({ createMountedStudyPorts }) => createMountedStudyPorts(deps))
   : null
 const StudyDashboard = import.meta.env.DEV
   ? lazy(() => import('./components/study/StudyDashboard').then((module) => ({ default: module.StudyDashboard })))
@@ -152,19 +172,34 @@ export default function App() {
   >(studyEnabled && !studyPreviewEnabled ? 'unauthenticated' : 'disabled')
   const studyProductionLifecycleRef = useRef<StudyLifecycleBoundary | null>(null)
   const studyReadinessClientRef = useRef<ReturnType<typeof createStudyProductionReadinessClient> | null>(null)
-  const studyIdentityClientRef = useRef<ReturnType<typeof createStudyIdentityClient> | null>(null)
+  // STUDY-A1-COMP Phase 4 — the single Study session trio for this running app:
+  // one transport, one lifecycle, one identity client, built once and held in a
+  // ref rather than in state. It must never be serialized, so it is deliberately
+  // outside AppState, outside React state, and outside anything persisted.
+  const studySessionRef = useRef<AppStudySessionComposition | null>(null)
   const studyVerifiedRuntimeRef = useRef<VerifiedStudyRuntimeAdapter | null>(null)
   const studySelectedProfileRef = useRef<string | null>(null)
+  // Owner token for the one host Study lifecycle boundary the route and the
+  // container share (Phase 8). An empty object identity, nothing more; the
+  // second ref is only so sign-out can reach the boundary it produced.
+  const studyHostLifecycleOwnerRef = useRef({})
+  const studyHostLifecycleRef = useRef<HostStudyLifecycleSeam | null>(null)
   if (!studyProductionLifecycleRef.current) {
     studyProductionLifecycleRef.current = new StudyLifecycleBoundary()
   }
-  if (!studyIdentityClientRef.current) {
-    studyIdentityClientRef.current = createStudyIdentityClient()
+  if (!studySessionRef.current) {
+    studySessionRef.current = createAppStudySessionComposition({
+      onInstallRejected: reportStudySessionInstallRejected,
+    })
   }
   if (!studyVerifiedRuntimeRef.current) {
     studyVerifiedRuntimeRef.current = createVerifiedStudyRuntimeAdapter({
-      identityClient: studyIdentityClientRef.current,
+      // The composition's client, not a second identity authority.
+      identityClient: studySessionRef.current.identity,
       lifecycle: studyProductionLifecycleRef.current,
+      // Phase 5: the issued grant goes straight into the app-owned lifecycle.
+      // A refusal throws, which cancels the launch and leaves Study unavailable.
+      onSessionGrantIssued: (grant) => { studySessionRef.current!.installIssuedGrant(grant) },
     })
   }
   const [state, setState] = useState<AppState>(loaded.state)
@@ -207,13 +242,48 @@ export default function App() {
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
 
+  /**
+   * STUDY-A1-COMP Phase 7. The whole payload is a reason code. Neither branch is
+   * a learner-safety signal, neither writes anything durable, and neither
+   * retries the refused request — the recovery is an explicit adult or learner
+   * action, so there is no automatic request loop.
+   */
+  const handleStudySessionAuthorizationFailure = (reason: StudySessionAuthorizationFailure) => {
+    // Clearing through the identity client is the genuine contract: it drops its
+    // own reference and notifies, and that notice is what empties the one
+    // lifecycle. Nothing here reaches around it.
+    studySessionRef.current?.identity.clear()
+    studySelectedProfileRef.current = null
+    if (reason === 'adult-authentication-rejected') {
+      // The adult bearer was refused, not the child. Reacquiring it is the
+      // existing host auth path, so drop the local adult authorization and send
+      // Study back to its unauthenticated state.
+      setParentStudyAuthorization(null)
+      setStudyProductionStatus('unauthenticated')
+      return
+    }
+    // study-session-rejected: only the Study session is gone. The learner
+    // returns to the launch surface, where a new session is issued by an
+    // explicit relaunch and never by a retry of the refused request.
+    setScreen((current) =>
+      current.kind === 'studySession' || current.kind === 'studySettings'
+        ? { kind: 'studyDashboard' }
+        : current,
+    )
+  }
+
   useEffect(() => {
     let current = true
     if (!studyPreviewEnabled || !loadPreviewPorts) {
       setStudyRuntime(null)
       return () => { current = false }
     }
-    void loadPreviewPorts().then((runtime) => {
+    // Phase 7: the mounted safety port authorizes each request through the one
+    // app-owned lifecycle, and reports a refusal back to this composition.
+    void loadPreviewPorts({
+      sessionAuthorization: studySessionRef.current!.authorization,
+      onSessionAuthorizationFailure: handleStudySessionAuthorizationFailure,
+    }).then((runtime) => {
       if (current) setStudyRuntime(runtime)
     }).catch(() => {
       if (current) setStudyRuntime(null)
@@ -234,11 +304,34 @@ export default function App() {
   const sync = useSync(state, setState)
   const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
 
+  // STUDY-A1-COMP Phase 6 — the learner change, watched in one place and for
+  // both compositions. Declared BEFORE the Study reconcile effect below, so
+  // React runs it first: child A's Study session is already empty by the time
+  // anything can issue or install one for child B. A transition to "no learner"
+  // is a sign-out, which clears with its own reason rather than this one.
+  const studyActiveLearnerRef = useRef(loaded.state.activeProfileId)
+  useEffect(() => {
+    const previous = studyActiveLearnerRef.current
+    studyActiveLearnerRef.current = state.activeProfileId
+    if (!previous || !state.activeProfileId || previous === state.activeProfileId) return
+    studySessionRef.current?.clear('learner-changed')
+    studyHostLifecycleRef.current?.boundary.cancel('learner-switch')
+  }, [state.activeProfileId])
+
   useEffect(() => {
     const productionSelected = studyEnabled && !studyPreviewEnabled
     const lifecycle = studyProductionLifecycleRef.current!
     const runtime = studyVerifiedRuntimeRef.current!
+    const studySession = studySessionRef.current!
+    // STUDY-A1-COMP Phase 6. Every exit from a live Study session empties the
+    // app-owned lifecycle FIRST and explicitly, before the runtime is cancelled
+    // and before any later grant can be issued. A dropped adult session and a
+    // disabled feature are logout; losing the selected learner is a learner
+    // change. Neither depends on the identity client noticing on its own.
     if (!productionSelected) {
+      // Study being switched off is a session event; the preview composition
+      // simply being the selected one is not, and it installs nothing.
+      if (!studyEnabled) studySession.clear('logout')
       lifecycle.cancel('feature-disabled')
       void runtime.cancel('feature-disabled')
       studyReadinessClientRef.current?.invalidate()
@@ -247,6 +340,7 @@ export default function App() {
       return
     }
     if (!sync.status.user || sync.status.binding !== 'bound' || sync.status.provenance !== 'verified') {
+      studySession.clear('logout')
       lifecycle.cancel('authorization-loss')
       void runtime.cancel('authorization-loss')
       studyReadinessClientRef.current?.invalidate()
@@ -255,6 +349,7 @@ export default function App() {
       return
     }
     if (!active) {
+      studySession.clear('learner-changed')
       lifecycle.cancel('learner-switch')
       void runtime.cancel('learner-switch')
       studySelectedProfileRef.current = null
@@ -280,6 +375,10 @@ export default function App() {
       try {
         const previousProfile = studySelectedProfileRef.current
         if (previousProfile && previousProfile !== verifiedActiveProfileId) {
+          // Phase 6: child A's Study session is gone before child B's launch is
+          // even attempted, so B can never inherit A's header, and there is no
+          // window in which the previous reference would still authorize.
+          studySession.clear('learner-changed')
           await runtime.cancel('learner-switch')
         }
         studySelectedProfileRef.current = verifiedActiveProfileId
@@ -373,6 +472,23 @@ export default function App() {
     studyRuntime &&
     studyContextResult.status === 'ready',
   )
+  // STUDY-A1-COMP Phase 8 — the one Study lifecycle boundary the route and the
+  // container share, derived here from the verified launch context rather than
+  // invented inside either of them. A learner or household change alters the
+  // binding, which re-epochs the same boundary and makes every token the
+  // previous learner's surfaces still hold stale.
+  const studyHostLifecycle: HostStudyLifecycleSeam | null =
+    studyContextResult.status === 'ready'
+      ? createHostStudyLifecycleSeam(studyHostLifecycleOwnerRef.current, {
+          authenticatedSessionRef: `host-study-epoch:${sync.status.user?.id ?? 'unbound'}`,
+          householdRef: studyContextResult.context.householdRef,
+          learnerRef: studyContextResult.context.learnerRef,
+          launchGrantRef: `host-study-launch:${studyContextResult.context.hostProfileRef}`,
+          featureEnabled: true,
+          authorizationRevision: 1,
+        })
+      : null
+  studyHostLifecycleRef.current = studyHostLifecycle
   const studyProductionSelected = studyEnabled && !studyPreviewEnabled
   const studyProductionUnavailableReason = studyProductionStatus === 'checking'
     ? 'Study is being checked. Please try again in a moment.'
@@ -412,6 +528,13 @@ export default function App() {
     leaveAcademyPath()
     leaveGrade5MathPracticePath()
     void purgeVoiceCache()
+    // STUDY-A1-COMP Phase 6 — before sign-out completes, and before anything
+    // asynchronous. The Study session reference is gone from memory by the time
+    // the picker renders; nothing survives a reload, because nothing was stored.
+    studySessionRef.current?.clear('logout')
+    // The route/container epoch goes with it, so any work either surface still
+    // has in flight is stale before the next screen renders.
+    studyHostLifecycleRef.current?.boundary.cancel('logout')
     studyProductionLifecycleRef.current?.cancel('logout')
     void studyVerifiedRuntimeRef.current?.cancel('logout')
     studyReadinessClientRef.current?.invalidate()
@@ -655,6 +778,9 @@ export default function App() {
       !studyPreviewReady ||
       !studyRuntime ||
       studyContextResult.status !== 'ready' ||
+      // Phase 8: without the host lifecycle there is no epoch for the session
+      // surfaces to run in, so Study is unavailable rather than unbound.
+      !studyHostLifecycle ||
       !StudyDashboard ||
       !StudySessionRoute ||
       !StudySettings
@@ -692,6 +818,7 @@ export default function App() {
           <StudySessionRoute
             context={studyContextResult.context}
             ports={studyRuntime.ports}
+            studyLifecycle={studyHostLifecycle}
             blockRef={screen.blockRef}
             learnerRef={screen.learnerRef}
             onBack={() => setScreen({ kind: 'studyDashboard' })}
@@ -913,8 +1040,19 @@ export default function App() {
           />
         )}
 
-        {/* MOUNT-G5-MATH — Grade 5 curriculum math practice (flag-gated, grade 5 only) */}
-        {screen.kind === 'g5MathPractice' && (
+        {/*
+          MOUNT-G5-MATH — Grade 5 curriculum math practice. CE1: gated on the
+          MATHEMATICS working level being 5, with the flag on — not on the
+          nominal grade. Re-checked here, not just at the entry point, so a
+          learner switch or a working-level change while this screen is open
+          cannot leave an ineligible girl on it.
+        */}
+        {screen.kind === 'g5MathPractice' && !grade5MathPracticeAvailableFromHost(active) && (
+          <p className={`px-4 py-10 text-center font-bold ${tokens.sub}`} role="status">
+            Grade 5 Math practice is not available for this learner.
+          </p>
+        )}
+        {screen.kind === 'g5MathPractice' && grade5MathPracticeAvailableFromHost(active) && (
           <Suspense
             fallback={
               <p className={`px-4 py-10 text-center font-bold ${tokens.sub}`} role="status">

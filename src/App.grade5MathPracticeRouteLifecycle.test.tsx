@@ -413,6 +413,38 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await expectSurfaceUnreachable()
   })
 
+  // STUDY-A1-COMP Phase 11 — CE1's App-integration follow-ups. Eligibility is
+  // re-checked while the surface is MOUNTED, not only at the entry point, so a
+  // learner switch cannot leave an ineligible girl on a surface she reached as
+  // somebody else.
+  it('drops an ineligible learner off the mounted practice surface', async () => {
+    await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
+    await waitForSurface()
+    // Nina is on the surface. Sam is a grade-3 girl with no mathematics working
+    // level, so the same mounted screen must not stay open for her.
+    await press(findButton('Back home'))
+    await press(findButton('Sign out'))
+    await signIn('p1', '1234')
+    expect(hasText(container, 'Hi, Sam!')).toBe(true)
+    expect(hasText(container, SURFACE_MARKER)).toBe(false)
+    await expectSurfaceUnreachable()
+  })
+
+  it('lets an eligible learner reach the surface after an ineligible one', async () => {
+    // The reverse direction, so the re-check cannot have become a permanent
+    // refusal once it has fired for an ineligible girl.
+    pathname = '/'
+    await mountApp(seededLeveled(null, '6', { mathematics: '5' }))
+    await signIn('p1', '1234')
+    expect(hasText(container, 'Hi, Sam!')).toBe(true)
+    expect(findButton('Grade 5 Math')).toBeNull()
+    await press(findButton('Sign out'))
+    await signIn('p3', '3333')
+    await press(findButton('Grade 5 Math'))
+    await waitForSurface()
+    expect(hasText(container, SURFACE_MARKER)).toBe(true)
+  })
+
   it('writes a working-level learner’s practice result to her profile only', async () => {
     await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
     await waitForSurface()

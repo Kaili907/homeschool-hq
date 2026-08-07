@@ -2,6 +2,10 @@ import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createStudySessionTransport, type StudySessionAuthorization } from './client/studySessionTransport'
+import {
+  createHostStudyLifecycleSeam,
+  type HostStudyLifecycleSeam,
+} from './composition/hostStudyLifecycle'
 import type { StudySessionGrant } from './contracts/identity/session'
 import { syntheticGrade5StudyContext } from './demonstrations'
 import { createMountedStudyPorts } from './mountedPorts'
@@ -18,37 +22,29 @@ import type { StudyCalendarEntry, StudySafeEvent } from './types'
 // HTTP 429 must all fail closed without ever being recorded, locked, or shown as
 // a learner safety incident. Everything that genuinely is one must be unchanged.
 
-// The one thing the App composition still owes this container is its lifecycle
-// binding (see the card's Phase 7 hand-off). The container builds an unbound
-// StudyLifecycleBoundary, whose tokens are never current, so every guarded
-// operation aborts before it starts and the live session surface never renders.
-// This shim supplies exactly that binding and nothing else — runCurrentStudyWork,
-// the ports, the runtime and the container all stay production code.
+// STUDY-A1-COMP Phase 8 closed the hand-off this file used to shim: the App now
+// owns one Study lifecycle and passes it to the container as a prop, so the
+// binding arrives the way production supplies it rather than through a mocked
+// module. The boundary below is the real one; only its `cancel` is observed, so
+// the assertions about what a refused session must NOT cancel are unchanged.
 const shim = vi.hoisted(() => ({ cancellations: [] as string[] }))
 
-vi.mock('./production/lifecycleBoundary', async () => {
-  const actual = await vi.importActual<typeof import('./production/lifecycleBoundary')>(
-    './production/lifecycleBoundary',
-  )
-  class HostBoundStudyLifecycleBoundary extends actual.StudyLifecycleBoundary {
-    constructor() {
-      super({
-        authenticatedSessionRef: 'session:study-a1-auth-c',
-        householdRef: 'household:synthetic-session12',
-        learnerRef: 'learner:synthetic-grade5-math',
-        launchGrantRef: 'grant:study-a1-auth-c',
-        featureEnabled: true,
-        authorizationRevision: 1,
-      })
-    }
-
-    cancel(reason: StudyCancellationReason): void {
-      shim.cancellations.push(reason)
-      super.cancel(reason)
-    }
-  }
-  return { ...actual, StudyLifecycleBoundary: HostBoundStudyLifecycleBoundary }
-})
+function hostStudyLifecycle(): HostStudyLifecycleSeam {
+  const seam = createHostStudyLifecycleSeam({}, {
+    authenticatedSessionRef: 'session:study-a1-auth-c',
+    householdRef: 'household:synthetic-session12',
+    learnerRef: 'learner:synthetic-grade5-math',
+    launchGrantRef: 'grant:study-a1-auth-c',
+    featureEnabled: true,
+    authorizationRevision: 1,
+  })
+  const cancel = seam.boundary.cancel.bind(seam.boundary)
+  vi.spyOn(seam.boundary, 'cancel').mockImplementation((reason: StudyCancellationReason) => {
+    shim.cancellations.push(reason)
+    cancel(reason)
+  })
+  return seam
+}
 
 class MemStorage implements Storage {
   private values = new Map<string, string>()
@@ -247,9 +243,12 @@ describe('STUDY-A1-AUTH-C authorization and runtime interruption boundary', () =
     const { StudySessionContainer } = await import('../components/study/StudySessionContainer')
     const root = createRoot(container as never)
     roots.push(root)
+    // A page load builds the App's Study composition again, so each mount gets
+    // the host lifecycle a fresh load would hand it.
+    const studyLifecycle = hostStudyLifecycle()
     await act(async () => {
       root.render(
-        <StudySessionContainer context={context} initialEntry={entry} ports={ports} onBack={() => {}} />,
+        <StudySessionContainer context={context} initialEntry={entry} ports={ports} studyLifecycle={studyLifecycle} onBack={() => {}} />,
       )
     })
     await settle()

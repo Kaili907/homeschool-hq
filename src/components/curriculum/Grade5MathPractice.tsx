@@ -16,8 +16,10 @@ import { useTheme } from '../../theme'
 
 /**
  * MOUNT-G5-MATH — the Grade 5 math practice surface. Behind
- * curriculum/practice/featureFlag; App renders it only for a grade-5 profile
- * with the flag on.
+ * curriculum/practice/featureFlag; App renders it only for a profile whose
+ * MATHEMATICS working level is 5, with the flag on. CE1: that is what she
+ * receives, not what her nominal grade says she is — a grade-6 girl at
+ * mathematics level 5 reaches this, and a grade-5 girl at level 7 does not.
  *
  * The unit is chosen explicitly by the student or parent. There is no adaptive
  * sequencing, no mastery inference, and no automatic advancement: those need

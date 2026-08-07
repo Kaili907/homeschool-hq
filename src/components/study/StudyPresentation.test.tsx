@@ -6,11 +6,22 @@ import { StudySettings } from './StudySettings'
 import { StudySessionRoute } from './StudySessionRoute'
 import { studyAccessibilityProjection } from './StudySessionContainer'
 import { createLocalDevelopmentStudyPorts } from '../../study/localDevelopmentPorts'
+import { createHostStudyLifecycleSeam } from '../../study/composition/hostStudyLifecycle'
 import { syntheticGrade5StudyContext } from '../../study/demonstrations'
 
 describe('Study host accessibility presentation', () => {
   const context = syntheticGrade5StudyContext('math')
   const { ports } = createLocalDevelopmentStudyPorts()
+  // STUDY-A1-COMP Phase 8 — the Study lifecycle the App owns and the route now
+  // requires, rather than the unbound one the route used to build for itself.
+  const studyLifecycle = createHostStudyLifecycleSeam({}, {
+    authenticatedSessionRef: 'session:study-presentation',
+    householdRef: context.householdRef,
+    learnerRef: context.learnerRef,
+    launchGrantRef: 'grant:study-presentation',
+    featureEnabled: true,
+    authorizationRevision: 1,
+  })
 
   it('provides a skip target, main landmark, loading status, and 44px host controls', () => {
     const html = renderToStaticMarkup(
@@ -33,7 +44,7 @@ describe('Study host accessibility presentation', () => {
 
   it('fails into a cancellable learner-bound loading state without exposing raw data', () => {
     const html = renderToStaticMarkup(
-      <StudySessionRoute context={context} ports={ports} blockRef="block:synthetic" learnerRef={context.learnerRef} onBack={() => {}} />,
+      <StudySessionRoute context={context} ports={ports} studyLifecycle={studyLifecycle} blockRef="block:synthetic" learnerRef={context.learnerRef} onBack={() => {}} />,
     )
     expect(html).toContain('Loading Study Session')
     expect(html).toContain('Cancel')
