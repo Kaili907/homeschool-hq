@@ -35,12 +35,13 @@ describe('Study lifecycle epoch lease renewal', () => {
     const before = lifecycle.token()
     const bound = lifecycle.binding
 
-    const renewed = lifecycle.renewEpochLease(LEASE_TWO)
+    const renewed = lifecycle.renewEpochLeaseIfCurrent(before, LEASE_TWO)
 
     expect(renewed).not.toBeNull()
     expect(renewed!.epoch).toBe(before.epoch)
-    // Identity, not equality: `currentHostStudyLifecycleSeam` caches on this
-    // exact object, so a copy would remount every mounted Study surface.
+    // Identity, not equality. A copy would be an epoch the mounted surfaces have
+    // to be told about, and a renewal is precisely the thing they must not be
+    // told about — it is the same epoch, saying how long it still has.
     expect(lifecycle.binding).toBe(bound)
     expect(renewed!.binding).toBe(bound)
     expect(renewed!.signal).toBe(before.signal)
@@ -66,7 +67,7 @@ describe('Study lifecycle epoch lease renewal', () => {
     let aborts = 0
     token.signal.addEventListener('abort', () => { aborts += 1 })
 
-    expect(lifecycle.renewEpochLease(LEASE_TWO)).not.toBeNull()
+    expect(lifecycle.renewEpochLeaseIfCurrent(token, LEASE_TWO)).not.toBeNull()
 
     // Past the lease the epoch was BORN with. A surviving old timer cancels here.
     vi.advanceTimersByTime(31_000)
@@ -88,7 +89,7 @@ describe('Study lifecycle epoch lease renewal', () => {
     const pending = new Promise<string>((done) => { resolve = done })
     const guarded = runCurrentStudyWork(token, async () => pending, { operationRef: 'turn:one' })
 
-    expect(lifecycle.renewEpochLease(LEASE_TWO)).not.toBeNull()
+    expect(lifecycle.renewEpochLeaseIfCurrent(token, LEASE_TWO)).not.toBeNull()
     resolve('accepted')
 
     await expect(guarded).resolves.toBe('accepted')
@@ -100,7 +101,7 @@ describe('Study lifecycle epoch lease renewal', () => {
     await expect(runCurrentStudyWork(token, async () => 'first', { operationRef: 'turn:one' }))
       .resolves.toBe('first')
 
-    expect(lifecycle.renewEpochLease(LEASE_TWO)).not.toBeNull()
+    expect(lifecycle.renewEpochLeaseIfCurrent(token, LEASE_TWO)).not.toBeNull()
 
     await expect(runCurrentStudyWork(lifecycle.token(), async () => 'replay', { operationRef: 'turn:one' }))
       .rejects.toMatchObject({ name: 'AbortError', reason: 'duplicate-response' })
@@ -111,7 +112,7 @@ describe('Study lifecycle epoch lease renewal', () => {
     const token = lifecycle.token()
     lifecycle.cancel('navigation-away')
 
-    expect(lifecycle.renewEpochLease(LEASE_TWO)).toBeNull()
+    expect(lifecycle.renewEpochLeaseIfCurrent(token, LEASE_TWO)).toBeNull()
     expect(token.isCurrent()).toBe(false)
     expect(lifecycle.binding).toBeNull()
     expect(lifecycle.lastReason).toBe('navigation-away')
@@ -119,9 +120,10 @@ describe('Study lifecycle epoch lease renewal', () => {
 
   it('refuses an epoch whose own lease has already run out', () => {
     const lifecycle = boundaryAtNow()
+    const token = lifecycle.token()
     vi.setSystemTime(new Date('2026-08-01T16:00:31.000Z'))
 
-    expect(lifecycle.renewEpochLease(LEASE_TWO)).toBeNull()
+    expect(lifecycle.renewEpochLeaseIfCurrent(token, LEASE_TWO)).toBeNull()
     expect(lifecycle.binding).toBeNull()
     expect(lifecycle.lastReason).toBe('grant-expired')
   })
@@ -131,7 +133,7 @@ describe('Study lifecycle epoch lease renewal', () => {
     vi.setSystemTime(new Date(NOW))
     const lifecycle = new StudyLifecycleBoundary()
 
-    expect(lifecycle.renewEpochLease(LEASE_TWO)).toBeNull()
+    expect(lifecycle.renewEpochLeaseIfCurrent(lifecycle.token(), LEASE_TWO)).toBeNull()
     expect(lifecycle.binding).toBeNull()
   })
 
@@ -144,7 +146,7 @@ describe('Study lifecycle epoch lease renewal', () => {
     const lifecycle = boundaryAtNow()
     const token = lifecycle.token()
 
-    expect(lifecycle.renewEpochLease(expiresAt)).toBeNull()
+    expect(lifecycle.renewEpochLeaseIfCurrent(token, expiresAt)).toBeNull()
 
     // Refused, not destroyed: the epoch keeps exactly the lease it was granted
     // and gains nothing, so a bad refresh cannot end a live turn either way.
@@ -158,7 +160,7 @@ describe('Study lifecycle epoch lease renewal', () => {
     const lifecycle = boundaryAtNow()
     const token = lifecycle.token()
 
-    expect(lifecycle.renewEpochLease('2026-08-01T16:00:10.000Z')).not.toBeNull()
+    expect(lifecycle.renewEpochLeaseIfCurrent(token, '2026-08-01T16:00:10.000Z')).not.toBeNull()
 
     vi.advanceTimersByTime(11_000)
     expect(token.isCurrent()).toBe(false)
@@ -168,9 +170,12 @@ describe('Study lifecycle epoch lease renewal', () => {
   it('leaves a renewed epoch reusable by beginEpoch with the binding it was built from', () => {
     const lifecycle = boundaryAtNow()
     const token = lifecycle.token()
-    expect(lifecycle.renewEpochLease(LEASE_TWO)).not.toBeNull()
+    expect(lifecycle.renewEpochLeaseIfCurrent(token, LEASE_TWO)).not.toBeNull()
 
-    // What a remounting surface does through `joinHostStudyLifecycle`.
+    // What the App's own re-render does through `createHostStudyLifecycleSeam`:
+    // it re-asserts its live binding, and a renewal must not have made that
+    // binding look like a different epoch. (A mounted SURFACE cannot do this —
+    // `joinHostStudyLifecycle` attaches and never begins.)
     const rejoined = lifecycle.beginEpoch(BINDING)
 
     expect(rejoined.epoch).toBe(token.epoch)
@@ -184,7 +189,7 @@ describe('Study lifecycle epoch lease renewal', () => {
   it('starts no work on a renewed epoch once the renewed deadline passes', async () => {
     const lifecycle = boundaryAtNow()
     const token = lifecycle.token()
-    expect(lifecycle.renewEpochLease(LEASE_TWO)).not.toBeNull()
+    expect(lifecycle.renewEpochLeaseIfCurrent(token, LEASE_TWO)).not.toBeNull()
     vi.advanceTimersByTime(61_000)
 
     let invoked = false

@@ -1,10 +1,9 @@
 import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import {
   StudyLifecycleBoundary,
-  acquireHostStudyLifecycle,
   type StudyLifecycleBinding,
 } from '../lifecycle'
 import {
@@ -170,38 +169,77 @@ describe('seam stability when the boundary cancels itself', () => {
     expect(first.boundary.token().isCurrent()).toBe(false)
   })
 
-  it('still revives the epoch where it should — on mount, not on render', () => {
+  it('does not revive an epoch the boundary refused on the way in', () => {
     const owner = {}
     const first = render(owner, { featureEnabled: false })
     expect(first.boundary.token().isCurrent()).toBe(false)
+    const refused = first.boundary.token().epoch
 
-    // A surface mounting joins explicitly, which is the only path allowed to
-    // start the next epoch. The seam it holds is unchanged.
-    const revived = render(owner, { featureEnabled: false })
-    expect(revived).toBe(first)
-    joinHostStudyLifecycle(first)
-    // featureEnabled:false is refused on the way in, so joining does not hand a
-    // disabled epoch a live token either.
+    // Neither the App re-deriving its seam nor a surface mounting can turn a
+    // disabled binding into a live epoch, and neither takes a fresh epoch trying.
+    for (let pass = 0; pass < 5; pass += 1) {
+      expect(render(owner, { featureEnabled: false })).toBe(first)
+      expect(joinHostStudyLifecycle(first).isCurrent()).toBe(false)
+    }
     expect(first.boundary.token().isCurrent()).toBe(false)
+    expect(first.boundary.token().epoch).toBe(refused)
   })
 
-  it('revives a live epoch on mount after a cancelled one', () => {
+  // STUDY-A1-LIFECYCLE-AUTHORITY. This was the "revives a live epoch on mount"
+  // test, and the revival has moved: an unmount cancels the epoch, and the next
+  // render re-asserts the App's own live binding rather than leaving the
+  // remounting surface to rebuild an epoch out of the seam it was carrying.
+  it('revives a cancelled epoch from the owner\'s own binding, not from the seam', () => {
     const owner = {}
     const seam = render(owner)
     const token = joinHostStudyLifecycle(seam)
     expect(token.isCurrent()).toBe(true)
 
-    // An unmount cancels the epoch; the seam identity is unchanged, so a re-render
-    // does not restart anything...
+    // The unmount half of a navigate-away-and-back. Until the App renders again
+    // there is nothing to join, and the surface cannot make one.
     seam.boundary.cancel('navigation-away')
-    expect(render(owner)).toBe(seam)
+    expect(seam.boundary.binding).toBeNull()
+    expect(joinHostStudyLifecycle(seam).isCurrent()).toBe(false)
     expect(seam.boundary.binding).toBeNull()
 
-    // ...and the remount rejoins on the host's binding.
+    // The App re-derives its seam for the same launch: same seam object, so no
+    // surface is remounted by it, and the epoch is live again.
+    expect(render(owner)).toBe(seam)
+    expect(seam.boundary.binding).not.toBeNull()
+
     const rejoined = joinHostStudyLifecycle(seam)
     expect(rejoined.isCurrent()).toBe(true)
     expect(rejoined.epoch).toBeGreaterThan(token.epoch)
     expect(token.isCurrent()).toBe(false)
+  })
+
+  it('takes one epoch, not one per render, to discover that the grant ran out', () => {
+    vi.useFakeTimers()
+    try {
+      vi.setSystemTime(new Date('2026-08-01T16:00:00.000Z'))
+      const owner = {}
+      const expiresAt = '2026-08-01T16:00:30.000Z'
+      const seam = render(owner, { expiresAt })
+      expect(joinHostStudyLifecycle(seam).isCurrent()).toBe(true)
+
+      // The grant runs out and the App, which has no idea, renders on.
+      vi.advanceTimersByTime(31_000)
+      expect(seam.boundary.binding).toBeNull()
+      const lapsed = seam.boundary.token().epoch
+
+      for (let pass = 0; pass < 10; pass += 1) {
+        expect(render(owner, { expiresAt })).toBe(seam)
+        expect(joinHostStudyLifecycle(seam).isCurrent()).toBe(false)
+      }
+
+      // Exactly one epoch was spent finding out that this binding is finished,
+      // and Study stayed unavailable — the re-assert is not a way back in.
+      expect(seam.boundary.token().epoch).toBe(lapsed + 1)
+      expect(seam.boundary.token().isCurrent()).toBe(false)
+      expect(seam.boundary.lastReason).toBe('grant-expired')
+    } finally {
+      vi.useRealTimers()
+    }
   })
 })
 
@@ -407,8 +445,8 @@ describe('switching Study off is never answered from the seam cache', () => {
     const owner = {}
     joinHostStudyLifecycle(render(owner))
     const disabled = render(owner, { featureEnabled: false })
-    // Joining is the one path allowed to start an epoch, and it does not hand a
-    // disabled binding a live token either.
+    // A join attaches to a live epoch or fails closed, and there is no live epoch
+    // to attach to while Study is off.
     expect(joinHostStudyLifecycle(disabled).isCurrent()).toBe(false)
     expect(currentHostStudyLifecycleSeam(owner)).toBeNull()
   })
@@ -506,24 +544,24 @@ describe('one authority: this module holds a single lifecycle registry per owner
   })
 })
 
-// STUDY-A1-PROD-SEAM-H2 C3 — CONFIRMED_BUT_OUT_OF_CUSTODY, deferred to
-// STUDY-A1-ORPHAN-AUTHORITY-C.
+// STUDY-A1-LIFECYCLE-AUTHORITY — this replaces the temporary hazard proof the H2
+// branch left here.
 //
-// `acquireHostStudyLifecycle` lives in the lifecycle core, which this card does not
-// own, so it cannot be removed here. It keeps its OWN owner->boundary WeakMap,
-// separate from the one above, so it is a second lifecycle authority that is still
-// exported and still reachable — including through the `../lifecycle` barrel, which
-// is how it is imported here.
+// The lifecycle core used to export `acquireHostStudyLifecycle`, which kept its
+// OWN owner->boundary WeakMap. H2 could not delete it (the core was out of that
+// card's custody), so it characterised it instead: a test that called it and
+// measured a second boundary staying current after a logout had cancelled the
+// App's one. That test was correct while the function existed, and keeping it now
+// would mean importing a symbol whose correct state is "gone".
 //
-// These tests characterise the hazard rather than assert it away. They exist to
-// keep it measured and to fail loudly if anything wires it back into production.
-// When the follow-up card deletes the function, this import stops compiling — that
-// is the intended signal to delete this block along with it.
-describe('the orphaned second lifecycle authority in the lifecycle core', () => {
-  it('has no non-test caller anywhere in src, which is the only reason it is dormant', () => {
+// So the proof moves from "here is what the second registry does" to "there is no
+// second registry". These are permanent: the first fails if anything re-adds a
+// symbol like it, and the second fails if any exported production path hands the
+// same owner two independently-current authorities, whatever it is called.
+describe('the lifecycle core offers no second host-lifecycle registry', () => {
+  /** Every non-test source file under src, so an empty result means "none". */
+  function productionSources(): readonly string[] {
     const srcRoot = fileURLToPath(new URL('../../', import.meta.url))
-    const definition = join('study', 'lifecycle', 'StudyLifecycle.ts')
-
     const files = (function walk(dir: string): string[] {
       return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
         const full = join(dir, entry.name)
@@ -531,37 +569,117 @@ describe('the orphaned second lifecycle authority in the lifecycle core', () => 
         return /\.tsx?$/.test(entry.name) ? [full] : []
       })
     })(srcRoot)
-    // The scan reached a real tree, so an empty result below means "no callers"
+    // The scan reached a real tree, so an empty result below means "no matches"
     // and not "no files looked at".
     expect(files.length).toBeGreaterThan(100)
+    return files.filter((file) => !/\.test\.tsx?$/.test(file))
+  }
 
-    const callers = files
-      .filter((file) => !/\.test\.tsx?$/.test(file) && !file.endsWith(definition))
+  it('has removed the orphan, including every re-export path into it', async () => {
+    const mentions = productionSources()
       .filter((file) => readFileSync(file, 'utf8').includes('acquireHostStudyLifecycle'))
-    expect(callers).toEqual([])
+      // The deletion note in the core names it deliberately, so that a future
+      // reader finds out why it is not there rather than re-adding it.
+      .filter((file) => !file.endsWith(join('study', 'lifecycle', 'StudyLifecycle.ts')))
+    expect(mentions).toEqual([])
+
+    // Not just absent from source: absent from every barrel it used to travel
+    // through, so no direct import can reach it either.
+    for (const path of ['../lifecycle', '../lifecycle/StudyLifecycle', '../production', '../production/lifecycleBoundary']) {
+      const barrel = await import(path)
+      expect(Object.keys(barrel)).not.toContain('acquireHostStudyLifecycle')
+    }
   })
 
-  it('would mint a second, independently-current authority for the same owner', () => {
+  it('leaves exactly one owner-keyed lifecycle registry in production source', () => {
+    // A registry is an owner-keyed WeakMap of boundaries. There is one, and it is
+    // the App's. A second file matching here is a second authority by another
+    // name, which is the shape of the defect and not its spelling.
+    const registries = productionSources().filter((file) => {
+      const source = readFileSync(file, 'utf8')
+      return /new WeakMap<object,\s*StudyLifecycleBoundary>/.test(source)
+    })
+    expect(registries.map((file) => file.split(/[\\/]/).slice(-2).join('/'))).toEqual([
+      'composition/hostStudyLifecycle.ts',
+    ])
+  })
+
+  it('cannot hand the same owner two independently-current authorities', async () => {
     const owner = {}
-    // The production path: the boundary the App hands to the verified runtime and
-    // derives the host seam from.
     const seam = render(owner)
-    const productionToken = joinHostStudyLifecycle(seam)
-    expect(productionToken.isCurrent()).toBe(true)
+    const token = joinHostStudyLifecycle(seam)
+    expect(token.isCurrent()).toBe(true)
 
-    // The orphaned path, called with the SAME owner.
-    const second = acquireHostStudyLifecycle(owner, baseBinding())
-    expect(second).not.toBe(seam.boundary)
-    expect(second).not.toBe(hostStudyLifecycleBoundary(owner))
+    // Every exported function on the production lifecycle surface, offered the
+    // SAME owner. Classified by what it hands back rather than by its name, so a
+    // future export that mints a second registry is caught by its shape.
+    const [lifecycleBarrel, productionBarrel, seamModule] = await Promise.all([
+      import('../lifecycle'),
+      import('../production'),
+      import('./hostStudyLifecycle'),
+    ])
+    const reached = [lifecycleBarrel, productionBarrel, seamModule]
+      .flatMap((barrel) => Object.values(barrel))
+      .filter((value): value is (...args: unknown[]) => unknown => typeof value === 'function')
+      .map((entry) => {
+        let result: unknown
+        try {
+          result = entry(owner, baseBinding())
+        } catch {
+          // Not an owner-taking lifecycle entry point.
+          return null
+        }
+        if (typeof (result as { then?: unknown } | null)?.then === 'function') {
+          // Asynchronous, so it is not one of these three; swallow the rejection
+          // an argument it never expected produced.
+          void (result as Promise<unknown>).catch(() => {})
+          return null
+        }
+        if (result instanceof StudyLifecycleBoundary) return result
+        const nested = (result as { boundary?: unknown } | null)?.boundary
+        return nested instanceof StudyLifecycleBoundary ? nested : null
+      })
+      .filter((boundary): boundary is StudyLifecycleBoundary => boundary !== null)
 
-    // And it is independently current: a logout on the App's one authority leaves
-    // this one authorizing, which is precisely the invariant the card is about.
+    // The sweep really reached the entry points — `hostStudyLifecycleBoundary`,
+    // `createHostStudyLifecycleSeam` and `currentHostStudyLifecycleSeam` — rather
+    // than silently classifying everything as "not one".
+    expect(reached.length).toBeGreaterThanOrEqual(3)
+    for (const boundary of reached) expect(boundary).toBe(seam.boundary)
+
+    // A logout on the App's one authority, and nothing anywhere still authorizes.
     seam.boundary.cancel('logout')
-    expect(productionToken.isCurrent()).toBe(false)
+    expect(token.isCurrent()).toBe(false)
+    for (const boundary of reached) {
+      expect(boundary.binding).toBeNull()
+      expect(boundary.token().isCurrent()).toBe(false)
+    }
     expect(currentHostStudyLifecycleSeam(owner)).toBeNull()
-    expect(second.binding).not.toBeNull()
-    expect(second.token().isCurrent()).toBe(true)
-    expect(second.lastReason).not.toBe('logout')
+  })
+
+  // STUDY-A1-LIFECYCLE-AUTHORITY Phase 11. `createStudyProductionComposition` is
+  // the other production root that can hold a boundary. It has no caller in src
+  // and is not on the App path, but it must not become a second authority for a
+  // session the App already owns — so when it is given one it uses that one, and
+  // never falls back to a boundary of its own.
+  it('makes the other production composition root use the boundary it is given', async () => {
+    const owner = {}
+    const appBoundary = hostStudyLifecycleBoundary(owner)
+    const { createStudyProductionComposition } = await import('../production')
+
+    const composition = createStudyProductionComposition({
+      featureFlagValue: 'false',
+      authenticatedHostSession: false,
+      selectedLearnerAuthorized: false,
+      authority: null,
+      registry: null,
+      academicRuntime: null,
+      lifecycle: appBoundary,
+    })
+
+    expect(composition.lifecycle).toBe(appBoundary)
+    appBoundary.cancel('logout')
+    expect(composition.lifecycle.token().isCurrent()).toBe(false)
   })
 })
 

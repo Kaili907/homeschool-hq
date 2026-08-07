@@ -288,11 +288,19 @@ describe('host Study seam stability through the real session container', () => {
     // Study is switched off for this learner; the App re-derives the seam.
     const disabled = createHostStudyLifecycleSeam(owner, baseBinding({ featureEnabled: false }))
     expect(disabled).not.toBe(enabled)
+    // The cache did not answer, so `beginEpoch` really ran, and it ran its
+    // fail-closed path. Asserted HERE, where the decision is taken: the render
+    // below unmounts the enabled surface, and that unmount is legitimately the
+    // last thing to touch the boundary afterwards.
+    expect(disabled.boundary.lastReason).toBe('feature-disabled')
+    expect(disabled.boundary.binding).toBeNull()
+    expect(token.isCurrent()).toBe(false)
+
     await act(async () => { root.render(session(disabled)) })
     await act(async () => { await Promise.resolve() })
 
-    // The boundary ran its fail-closed path rather than reusing the authorized epoch.
-    expect(disabled.boundary.lastReason).toBe('feature-disabled')
+    // And the mounted surface is fail-closed on the other side of the render:
+    // remounting under the disabled seam did not get it a live token back.
     expect(disabled.boundary.binding).toBeNull()
     expect(token.isCurrent()).toBe(false)
     expect(disabled.boundary.token().isCurrent()).toBe(false)
@@ -309,6 +317,42 @@ describe('host Study seam stability through the real session container', () => {
     }
     expect(disabled.boundary.token().epoch).toBe(settled)
     expect(disabled.boundary.token().isCurrent()).toBe(false)
+  })
+
+  // STUDY-A1-LIFECYCLE-AUTHORITY. `joinHostStudyLifecycle` no longer begins an
+  // epoch, and this is the path that used to depend on it: the container cancels
+  // the epoch when it unmounts, so navigating away and back arrives at a mount
+  // with nothing live to join. The revival moved to the App's own render, which
+  // React runs before any child effect — so the learner still gets her session
+  // back, and the surface never had to invent the authority for it.
+  it('brings the surface back after a navigate-away-and-back', async () => {
+    const owner = {}
+    const seam = createHostStudyLifecycleSeam(owner, baseBinding())
+    const root = await render(session(seam))
+    expect(seam.boundary.token().isCurrent()).toBe(true)
+    expect(tags(container, 'TEXTAREA').length).toBeGreaterThan(0)
+    const mounted = seam.boundary.token().epoch
+
+    // Navigate away: the App renders another screen and the container unmounts,
+    // whose cleanup cancels the epoch.
+    await act(async () => { root.render(null) })
+    await act(async () => { await Promise.resolve() })
+    expect(seam.boundary.binding).toBeNull()
+    expect(seam.boundary.lastReason).toBe('navigation-away')
+
+    // Navigate back. The App derives the seam for the same launch during that
+    // render — the same seam object, so nothing downstream sees a new prop.
+    const back = createHostStudyLifecycleSeam(owner, baseBinding())
+    expect(back).toBe(seam)
+    await act(async () => { root.render(session(back)) })
+    await act(async () => { await Promise.resolve() })
+    await act(async () => { await Promise.resolve() })
+
+    // Live again, on a genuinely new epoch, and the session really prepared.
+    expect(back.boundary.token().isCurrent()).toBe(true)
+    expect(back.boundary.token().epoch).toBeGreaterThan(mounted)
+    expect(tags(container, 'TEXTAREA').length).toBeGreaterThan(0)
+    expect(hasText(container, 'The Tutor result could not be accepted.')).toBe(false)
   })
 
   it('still re-epochs and re-runs the surface when the learner genuinely changes', async () => {

@@ -224,13 +224,17 @@ export function createVerifiedStudyRuntimeAdapter(
       // `reusingSession` already IS the reuse identity this may rely on: the same
       // host session key, the same selected learner, and no new grant — because a
       // grant is issued exactly when it is false, and a host or learner change has
-      // cancelled and revoked above before reaching here. The token adds the last
-      // condition, that the epoch this runtime began is still the live one, so a
-      // cancelled epoch, an expired one, and an epoch some other authority has
-      // since bound are all replaced rather than extended. The refreshed
+      // cancelled and revoked above before reaching here. The refreshed
       // expiration is deliberately no part of that identity.
-      const renewed = reusingSession && epochToken?.isCurrent()
-        ? lifecycle.renewEpochLease(expiresAt)
+      //
+      // STUDY-A1-LIFECYCLE-AUTHORITY — the last condition, that the epoch this
+      // runtime began is still the live one, is now carried by the API rather
+      // than by a check next to the call: the token is the proof, and the
+      // boundary refuses to renew for anything else. A cancelled epoch, an
+      // expired one, and an epoch some other authority has since bound are all
+      // replaced rather than extended.
+      const renewed = reusingSession && epochToken
+        ? lifecycle.renewEpochLeaseIfCurrent(epochToken, expiresAt)
         : null
       if (!renewed) {
         if (!reusingSession) selectionEpoch += 1
