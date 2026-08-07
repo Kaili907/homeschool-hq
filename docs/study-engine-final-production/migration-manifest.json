@@ -113,6 +113,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "security_manifest.in_app_receipt_delivered_at_normalized:absent->true",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260806140000",
+      "filename": "20260806140000_academy_study_c2_operations_contract.sql",
+      "sha256": "7dbbb087c0fee51638da1c47903f0acb0ef1e36d5556be34fa71f8cf89cecc5c",
+      "dependency": "20260806120000_academy_study_in_app_receipt_timestamp.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "c2_operations_contract_version:0->1",
+      "supersessionStatus": "current"
     }
   ]
 }
