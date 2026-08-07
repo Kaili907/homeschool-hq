@@ -37,7 +37,10 @@ const UNVERIFIED_RECEIPT_KEYS = new Set(['verified'])
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
 // The durable estate builds this key as `'delivery:' || study_sha256_json(...)`.
 const IDEMPOTENCY_KEY = /^delivery:[a-f0-9]{64}$/
-const RECIPIENT_REF = /^recipient:[A-Za-z0-9._/-]{1,96}$/
+// `study_adult_notification_permissions.recipient_ref` is constrained to this
+// form by the durable recipient resolution, and only rows matching it are ever
+// resolved into a delivery job.
+const RECIPIENT_REF = /^recipient:[a-f0-9]{64}$/
 // `study_adult_notification_routes.route_ref` is constrained to this form, and
 // only rows matching it are ever resolved into a delivery job.
 const ROUTE_REF = /^route:[a-f0-9]{64}$/
@@ -79,7 +82,7 @@ function validateDelivery(value) {
     !validRef(value.proposalId) ||
     !validRef(value.householdId) ||
     !validRef(value.studentId) ||
-    !RECIPIENT_REF.test(value.recipientRef) ||
+    !matches(RECIPIENT_REF, value.recipientRef) ||
     !matches(ROUTE_REF, value.routeRef) ||
     value.templateCode !== TEMPLATE_CODE
   ) throw new TypeError('invalid_in_app_delivery')
@@ -92,7 +95,7 @@ function validateDeliveryRequest(value) {
     !exactObject(value, DELIVERY_REQUEST_KEYS) ||
     !value.delivery ||
     !value.recipient ||
-    !RECIPIENT_REF.test(value.recipient.recipientRef) ||
+    !matches(RECIPIENT_REF, value.recipient.recipientRef) ||
     !['scheduled', 'manual'].includes(value.trigger) ||
     typeof value.onAttemptSubmitted !== 'function' ||
     Object.keys(value.delivery).some((key) => FORBIDDEN_DELIVERY_KEYS.has(key)) ||
@@ -126,7 +129,7 @@ function validateNotification(value) {
     !exactObject(value, NOTIFICATION_KEYS) ||
     value.title !== LEARNER_SAFE_TITLE ||
     REASON_URGENCY.get(value.reasonCategory) !== value.urgency ||
-    !ACTION_REF.test(value.actionRef)
+    !matches(ACTION_REF, value.actionRef)
   ) throw new Error('in_app_persistence_contract')
 
   return Object.freeze({ ...value })
@@ -143,7 +146,7 @@ function validateInsertResult(value, input) {
   if (
     !exactObject(value, INSERT_KEYS) ||
     !['delivered', 'already-delivered'].includes(value.state) ||
-    !RECEIPT_REF.test(value.providerReceiptRef) ||
+    !matches(RECEIPT_REF, value.providerReceiptRef) ||
     value.jobId !== input.jobId ||
     !validRef(value.attemptId) ||
     value.proposalId !== input.proposalId ||
@@ -175,9 +178,9 @@ function validateVerifyRequest(value) {
     !validRef(value.householdId) ||
     !validRef(value.studentId) ||
     !matches(IDEMPOTENCY_KEY, value.deliveryIdempotencyKey) ||
-    !RECIPIENT_REF.test(value.recipientRef) ||
+    !matches(RECIPIENT_REF, value.recipientRef) ||
     !matches(ROUTE_REF, value.routeRef) ||
-    !RECEIPT_REF.test(value.providerReceiptRef)
+    !matches(RECEIPT_REF, value.providerReceiptRef)
   ) throw new TypeError('invalid_in_app_receipt_request')
 
   const workerContext = validateVerifiedWorkerContext(value.workerContext)
@@ -189,7 +192,7 @@ function validateReceipt(value, binding, environment) {
   if (exactObject(value, UNVERIFIED_RECEIPT_KEYS) && value.verified === false) {
     return Object.freeze({ verified: false })
   }
-  if (!EVIDENCE_REF.test(value?.evidenceRef) || !RECEIPT_REF.test(value?.providerReceiptRef)) {
+  if (!matches(EVIDENCE_REF, value?.evidenceRef) || !matches(RECEIPT_REF, value?.providerReceiptRef)) {
     throw new Error('in_app_persistence_contract')
   }
   try {

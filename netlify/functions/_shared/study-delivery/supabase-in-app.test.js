@@ -18,7 +18,7 @@ const WORKER_CONTEXT = Object.freeze({
   verificationRef: 'verification:synthetic',
 })
 
-const IDEMPOTENCY_KEY = `study-safety-delivery:${'a'.repeat(64)}`
+const IDEMPOTENCY_KEY = `delivery:${'a'.repeat(64)}`
 const LEASE_TOKEN = 'lease:synthetic-secret-token'
 const SERVICE_KEY = 'service-role-key:synthetic-secret'
 

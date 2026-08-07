@@ -11,7 +11,7 @@ const ATTEMPT = Object.freeze({
   proposalId: 'proposal:synthetic-1',
   householdId: 'household:synthetic-1',
   studentId: 'student:synthetic-1',
-  recipientRef: 'recipient:synthetic-guardian-1',
+  recipientRef: `recipient:${'c'.repeat(64)}`,
   routeRef: ROUTE_REF,
   templateCode: 'study-safety-adult-review-v1',
 })
@@ -262,7 +262,7 @@ describe('durable in-app notification provider', () => {
         .rejects.toThrow('invalid_in_app_delivery')
     }
     await expect(configured.deliver(request(ATTEMPT, {
-      recipient: { recipientRef: 'recipient:forged' },
+      recipient: { recipientRef: `recipient:${'d'.repeat(64)}` },
     }))).rejects.toThrow('invalid_in_app_delivery_request')
     await expect(configured.deliver(request({ ...ATTEMPT, templateCode: 'study-external-email-v1' })))
       .rejects.toThrow('invalid_in_app_delivery')
@@ -271,7 +271,7 @@ describe('durable in-app notification provider', () => {
 
   it.each([
     ['unverified', { verified: false }],
-    ['wrong recipient', { recipientRef: 'recipient:another-guardian' }],
+    ['wrong recipient', { recipientRef: `recipient:${'e'.repeat(64)}` }],
     ['wrong attempt', { attemptId: 'attempt:another-attempt' }],
     ['wrong job', { jobId: 'job:another-job' }],
     ['wrong proposal', { proposalId: 'proposal:another-proposal' }],
