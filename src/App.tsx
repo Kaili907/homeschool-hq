@@ -89,6 +89,8 @@ import {
 } from './study/composition/appStudySession'
 import {
   createHostStudyLifecycleSeam,
+  currentHostStudyLifecycleSeam,
+  hostStudyLifecycleBoundary,
   type HostStudyLifecycleSeam,
 } from './study/composition/hostStudyLifecycle'
 import type { StudySessionAuthorizationFailure } from './study/safety/client'
@@ -96,7 +98,6 @@ import {
   createVerifiedStudyRuntimeAdapter,
   type VerifiedStudyRuntimeAdapter,
 } from './study/production/verifiedRuntimeAdapter'
-import { StudyLifecycleBoundary } from './study/lifecycle'
 
 /**
  * STUDY-A1-COMP Phase 5 — the only thing an install refusal is allowed to
@@ -170,7 +171,6 @@ export default function App() {
   const [studyProductionStatus, setStudyProductionStatus] = useState<
     'disabled' | 'unauthenticated' | 'checking' | 'not-ready' | 'degraded' | 'ready'
   >(studyEnabled && !studyPreviewEnabled ? 'unauthenticated' : 'disabled')
-  const studyProductionLifecycleRef = useRef<StudyLifecycleBoundary | null>(null)
   const studyReadinessClientRef = useRef<ReturnType<typeof createStudyProductionReadinessClient> | null>(null)
   // STUDY-A1-COMP Phase 4 — the single Study session trio for this running app:
   // one transport, one lifecycle, one identity client, built once and held in a
@@ -180,13 +180,18 @@ export default function App() {
   const studyVerifiedRuntimeRef = useRef<VerifiedStudyRuntimeAdapter | null>(null)
   const studySelectedProfileRef = useRef<string | null>(null)
   // Owner token for the one host Study lifecycle boundary the route and the
-  // container share (Phase 8). An empty object identity, nothing more; the
-  // second ref is only so sign-out can reach the boundary it produced.
+  // container share (Phase 8). An empty object identity, nothing more.
+  //
+  // STUDY-A1-PROD-SEAM — this owner names the ONE boundary for this running app.
+  // The App previously also held a separate `new StudyLifecycleBoundary()` for
+  // the verified production runtime: two authorities, so a production launch
+  // could never begin the epoch a production host surface would join, and
+  // cancelling either left the other live. The runtime now takes this boundary.
+  //
+  // Every cancellation path reaches it through this owner rather than through a
+  // ref holding the last seam: the boundary exists whether or not an epoch was
+  // ever begun on it, so no cancellation can be skipped for want of a seam.
   const studyHostLifecycleOwnerRef = useRef({})
-  const studyHostLifecycleRef = useRef<HostStudyLifecycleSeam | null>(null)
-  if (!studyProductionLifecycleRef.current) {
-    studyProductionLifecycleRef.current = new StudyLifecycleBoundary()
-  }
   if (!studySessionRef.current) {
     studySessionRef.current = createAppStudySessionComposition({
       onInstallRejected: reportStudySessionInstallRejected,
@@ -196,7 +201,9 @@ export default function App() {
     studyVerifiedRuntimeRef.current = createVerifiedStudyRuntimeAdapter({
       // The composition's client, not a second identity authority.
       identityClient: studySessionRef.current.identity,
-      lifecycle: studyProductionLifecycleRef.current,
+      // The app's one boundary, not a second lifecycle authority: the epoch this
+      // launch begins is the epoch a host surface joins.
+      lifecycle: hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current),
       // Phase 5: the issued grant goes straight into the app-owned lifecycle.
       // A refusal throws, which cancels the launch and leaves Study unavailable.
       onSessionGrantIssued: (grant) => { studySessionRef.current!.installIssuedGrant(grant) },
@@ -249,10 +256,26 @@ export default function App() {
    * action, so there is no automatic request loop.
    */
   const handleStudySessionAuthorizationFailure = (reason: StudySessionAuthorizationFailure) => {
-    // Clearing through the identity client is the genuine contract: it drops its
-    // own reference and notifies, and that notice is what empties the one
-    // lifecycle. Nothing here reaches around it.
-    studySessionRef.current?.identity.clear()
+    // STUDY-A1-PROD-SEAM — recovery in a fixed order, and unconditional at every
+    // step.
+    //
+    // 1. The session authority. This used to be `identity.clear()` alone, which
+    //    reaches the transport only through the invalidation notice the identity
+    //    client emits IF it is still holding a reference — so whether the
+    //    recovery emptied anything depended on state the App does not control.
+    //    The composition's own clear empties the transport first and the identity
+    //    client after, whatever either was holding.
+    // 2. The one lifecycle epoch, taken from the owner rather than from the seam
+    //    ref, which is null until a launch or a ready host context exists.
+    // 3. The verified runtime, last, because its cancel is the only asynchronous
+    //    step and nothing above may wait on it.
+    //
+    // None of the three is a learner-safety signal, none writes anything durable,
+    // and none retries the refused request — recovery is an explicit adult or
+    // learner action, so there is no automatic request loop.
+    studySessionRef.current?.clear('logout')
+    hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current).cancel('authorization-loss')
+    void studyVerifiedRuntimeRef.current?.cancel('authorization-loss')
     studySelectedProfileRef.current = null
     if (reason === 'adult-authentication-rejected') {
       // The adult bearer was refused, not the child. Reacquiring it is the
@@ -315,12 +338,14 @@ export default function App() {
     studyActiveLearnerRef.current = state.activeProfileId
     if (!previous || !state.activeProfileId || previous === state.activeProfileId) return
     studySessionRef.current?.clear('learner-changed')
-    studyHostLifecycleRef.current?.boundary.cancel('learner-switch')
+    // STUDY-A1-PROD-SEAM — the one boundary, not the seam ref, which is null
+    // until a launch or a ready host context has produced one.
+    hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current).cancel('learner-switch')
   }, [state.activeProfileId])
 
   useEffect(() => {
     const productionSelected = studyEnabled && !studyPreviewEnabled
-    const lifecycle = studyProductionLifecycleRef.current!
+    const lifecycle = hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current)
     const runtime = studyVerifiedRuntimeRef.current!
     const studySession = studySessionRef.current!
     // STUDY-A1-COMP Phase 6. Every exit from a live Study session empties the
@@ -329,11 +354,17 @@ export default function App() {
     // disabled feature are logout; losing the selected learner is a learner
     // change. Neither depends on the identity client noticing on its own.
     if (!productionSelected) {
-      // Study being switched off is a session event; the preview composition
-      // simply being the selected one is not, and it installs nothing.
-      if (!studyEnabled) studySession.clear('logout')
-      lifecycle.cancel('feature-disabled')
-      void runtime.cancel('feature-disabled')
+      // STUDY-A1-PROD-SEAM. Study being switched off is a session event, and the
+      // one boundary must be emptied with it. The preview composition simply
+      // being the selected one is not: it installs nothing, the verified runtime
+      // never launched, and the boundary that would be cancelled here is now the
+      // very epoch the preview surfaces are running in — cancelling it every time
+      // this effect re-ran would restart their sessions under them.
+      if (!studyEnabled) {
+        studySession.clear('logout')
+        lifecycle.cancel('feature-disabled')
+        void runtime.cancel('feature-disabled')
+      }
       studyReadinessClientRef.current?.invalidate()
       studySelectedProfileRef.current = null
       setStudyProductionStatus('disabled')
@@ -472,13 +503,25 @@ export default function App() {
     studyRuntime &&
     studyContextResult.status === 'ready',
   )
+  const studyProductionSelected = studyEnabled && !studyPreviewEnabled
   // STUDY-A1-COMP Phase 8 — the one Study lifecycle boundary the route and the
   // container share, derived here from the verified launch context rather than
   // invented inside either of them. A learner or household change alters the
   // binding, which re-epochs the same boundary and makes every token the
   // previous learner's surfaces still hold stale.
-  const studyHostLifecycle: HostStudyLifecycleSeam | null =
-    studyContextResult.status === 'ready'
+  //
+  // STUDY-A1-PROD-SEAM — one boundary, two ways of naming its epoch, and never
+  // both at once (preview and production are mutually exclusive selections):
+  //  - production: the verified runtime launch is the only thing entitled to bind
+  //    this boundary, because only it holds server-verified authority. The host
+  //    joins the epoch that launch began and invents no binding of its own; there
+  //    is simply no epoch, and therefore no seam, until it has launched.
+  //  - preview: the local development context is the authority, so the App does
+  //    derive the binding. Gated on the feature being on as well, so Study OFF
+  //    leaves the boundary unbound rather than bound-then-cancelled.
+  const studyHostLifecycle: HostStudyLifecycleSeam | null = studyProductionSelected
+    ? currentHostStudyLifecycleSeam(studyHostLifecycleOwnerRef.current)
+    : studyEnabled && studyPreviewEnabled && studyContextResult.status === 'ready'
       ? createHostStudyLifecycleSeam(studyHostLifecycleOwnerRef.current, {
           authenticatedSessionRef: `host-study-epoch:${sync.status.user?.id ?? 'unbound'}`,
           householdRef: studyContextResult.context.householdRef,
@@ -488,8 +531,6 @@ export default function App() {
           authorizationRevision: 1,
         })
       : null
-  studyHostLifecycleRef.current = studyHostLifecycle
-  const studyProductionSelected = studyEnabled && !studyPreviewEnabled
   const studyProductionUnavailableReason = studyProductionStatus === 'checking'
     ? 'Study is being checked. Please try again in a moment.'
     : studyProductionStatus === 'unauthenticated'
@@ -533,9 +574,10 @@ export default function App() {
     // the picker renders; nothing survives a reload, because nothing was stored.
     studySessionRef.current?.clear('logout')
     // The route/container epoch goes with it, so any work either surface still
-    // has in flight is stale before the next screen renders.
-    studyHostLifecycleRef.current?.boundary.cancel('logout')
-    studyProductionLifecycleRef.current?.cancel('logout')
+    // has in flight is stale before the next screen renders. Taken from the
+    // owner, not from the seam ref: the one boundary exists whether or not an
+    // epoch was ever begun on it, so this cannot be skipped.
+    hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current).cancel('logout')
     void studyVerifiedRuntimeRef.current?.cancel('logout')
     studyReadinessClientRef.current?.invalidate()
     studySelectedProfileRef.current = null
