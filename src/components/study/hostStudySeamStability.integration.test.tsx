@@ -272,6 +272,45 @@ describe('host Study seam stability through the real session container', () => {
     expect(first.boundary.token().isCurrent()).toBe(false)
   })
 
+  // STUDY-A1-PROD-SEAM-H2 C1, at the real surface. Stability must never become a
+  // way for a switched-off feature to keep authorizing: the seam cache answers
+  // BEFORE `beginEpoch`, so if `epochKey` ever stopped covering `featureEnabled`
+  // this transition would be served from cache and the mounted container would go
+  // on holding a current token with Study off.
+  it('switches the mounted surface to fail-closed when Study is turned off', async () => {
+    const owner = {}
+    const enabled = createHostStudyLifecycleSeam(owner, baseBinding())
+    const root = await render(session(enabled))
+    const token = enabled.boundary.token()
+    expect(token.isCurrent()).toBe(true)
+    const mounted = token.epoch
+
+    // Study is switched off for this learner; the App re-derives the seam.
+    const disabled = createHostStudyLifecycleSeam(owner, baseBinding({ featureEnabled: false }))
+    expect(disabled).not.toBe(enabled)
+    await act(async () => { root.render(session(disabled)) })
+    await act(async () => { await Promise.resolve() })
+
+    // The boundary ran its fail-closed path rather than reusing the authorized epoch.
+    expect(disabled.boundary.lastReason).toBe('feature-disabled')
+    expect(disabled.boundary.binding).toBeNull()
+    expect(token.isCurrent()).toBe(false)
+    expect(disabled.boundary.token().isCurrent()).toBe(false)
+
+    // And exactly one epoch was taken to get there — the disabled seam is then as
+    // stable as any other, so this is fail-closed and not render churn.
+    const settled = disabled.boundary.token().epoch
+    expect(settled).toBeGreaterThan(mounted)
+    for (let pass = 0; pass < 5; pass += 1) {
+      const next = createHostStudyLifecycleSeam(owner, baseBinding({ featureEnabled: false }))
+      expect(next).toBe(disabled)
+      await act(async () => { root.render(session(next)) })
+      await act(async () => { await Promise.resolve() })
+    }
+    expect(disabled.boundary.token().epoch).toBe(settled)
+    expect(disabled.boundary.token().isCurrent()).toBe(false)
+  })
+
   it('still re-epochs and re-runs the surface when the learner genuinely changes', async () => {
     const owner = {}
     const first = createHostStudyLifecycleSeam(owner, baseBinding())
