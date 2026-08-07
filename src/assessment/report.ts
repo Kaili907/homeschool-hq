@@ -1,12 +1,28 @@
-import type { Attempt, FixedTest } from './types'
+import type { Attempt, FixedTest, ResponseDisposition } from './types'
 import { gradeAttempt, computeAutoScore } from './attempts'
 
-const VERDICT_LABEL: Record<string, string> = {
+const DISPOSITION_LABEL: Record<ResponseDisposition, string> = {
   correct: 'AUTO ✓ correct',
   incorrect: 'AUTO ✗ incorrect',
   unmatched: 'NEEDS GRADING (not auto-matched)',
   ungraded: 'NEEDS GRADING',
-  skip: 'SKIPPED',
+  'deliberate-skip': 'SKIPPED',
+  'no-response': 'SEEN — NO RESPONSE',
+  'not-reached': 'NOT REACHED (attempt unfinished)',
+}
+
+/** The answer line. There is no answer to print unless the child produced one. */
+function answerLine(disposition: ResponseDisposition, value: string): string {
+  switch (disposition) {
+    case 'deliberate-skip':
+      return 'A: [SKIPPED]'
+    case 'no-response':
+      return 'A: [no response]'
+    case 'not-reached':
+      return 'A: [not reached]'
+    default:
+      return `A: ${value === '' ? '[blank]' : value}`
+  }
 }
 
 function fmtDuration(ms: number): string {
@@ -39,7 +55,19 @@ export function buildReport(test: FixedTest, attempt: Attempt, studentName: stri
     lines.push(`- ${section}: ${tally.correct}/${tally.of} auto-scored correct`)
   }
   lines.push(`- Items needing human grading: ${score.gradedItems}`)
-  lines.push(`- Skips: ${score.skips}`)
+  lines.push(`- Deliberate skips: ${score.skips}`)
+  if (score.noResponse === undefined) {
+    // Persisted before this tally existed. The number is not zero — it is unknown,
+    // and the old skip count folded these items in, so say so rather than imply a
+    // precision this summary never had.
+    lines.push(`- Seen, no response: not recorded`)
+    lines.push(
+      `- NOTE: this attempt was scored before seen-but-blank items were counted separately. ` +
+        `Its skip count may include items that were seen and left blank; the per-item list below is authoritative.`,
+    )
+  } else {
+    lines.push(`- Seen, no response: ${score.noResponse}`)
+  }
   lines.push('')
 
   for (const section of test.sections) {
@@ -56,13 +84,9 @@ export function buildReport(test: FixedTest, attempt: Attempt, studentName: stri
           : g.msOnItem > 0 && g.msOnItem < 5 * 1000 && !g.skipped
             ? ' ⚠ <5 s'
             : ''
-      lines.push(`### ${g.item.id} — ${VERDICT_LABEL[g.verdict]}${timeFlag}`)
+      lines.push(`### ${g.item.id} — ${DISPOSITION_LABEL[g.disposition]}${timeFlag}`)
       lines.push(`Q: ${g.item.prompt}`)
-      if (g.skipped) {
-        lines.push(`A: [SKIPPED]`)
-      } else {
-        lines.push(`A: ${g.value === '' ? '[blank]' : g.value}`)
-      }
+      lines.push(answerLine(g.disposition, g.value))
       if (g.item.key !== undefined) {
         const keyStr = Array.isArray(g.item.key) ? g.item.key.join(', ') : g.item.key
         lines.push(`Key: ${keyStr}`)

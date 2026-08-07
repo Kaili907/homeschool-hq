@@ -16,6 +16,7 @@ import {
   computeAutoScore,
   finishAttempt,
   getState,
+  gradeAttempt,
   recordAnswer,
   startAttempt,
   startStatus,
@@ -25,6 +26,11 @@ import {
 import { buildReport } from './report'
 import type { Attempt, FixedTest, Item } from './types'
 import { emptyAssessmentState } from './types'
+import { defaultAppState } from '../migration'
+import { validateAppStateForSync } from '../sync/provenance'
+
+const NOW_START = '2026-08-07T09:00:00.000Z'
+const NOW_FINISH = '2026-08-07T09:30:00.000Z'
 
 // ---------- transcription count verification ----------
 
@@ -325,6 +331,211 @@ describe('assignment + start-code + retake lock', () => {
   })
 })
 
+// ---------- honest response dispositions ----------
+
+describe('response disposition tells the truth about what the child did', () => {
+  const test: FixedTest = {
+    id: 'disp',
+    title: 'Dispositions',
+    forGrades: ['3'],
+    sections: [
+      {
+        name: 'Only',
+        items: [
+          { id: 'd1', kind: 'numeric', prompt: 'keyed', key: '7' },
+          { id: 'd2', kind: 'text', prompt: 'human graded', keyNote: 'a human reads this' },
+        ],
+      },
+    ],
+  }
+
+  const attempt = (answers: Attempt['answers'], finishedAt?: string): Attempt => ({
+    testId: 'disp',
+    profileId: 'p',
+    startedAt: NOW_START,
+    finishedAt,
+    answers,
+  })
+
+  const dispositionOf = (a: Attempt, itemId: string) =>
+    gradeAttempt(test, a).find((g) => g.item.id === itemId)!.disposition
+
+  it('a missing record on a FINISHED attempt is no-response, not a deliberate skip', () => {
+    const a = attempt({}, NOW_FINISH)
+    expect(dispositionOf(a, 'd1')).toBe('no-response')
+    expect(gradeAttempt(test, a).every((g) => g.skipped === false)).toBe(true)
+  })
+
+  it('a missing record on an UNFINISHED attempt is not-reached — no evidence either way', () => {
+    expect(dispositionOf(attempt({}), 'd1')).toBe('not-reached')
+  })
+
+  it('a stored blank is no-response, never work awaiting a human', () => {
+    const a = attempt({ d1: { value: '', skipped: false, msOnItem: 900 } }, NOW_FINISH)
+    expect(dispositionOf(a, 'd1')).toBe('no-response')
+
+    // even on a human-graded item there is nothing to read
+    const b = attempt({ d2: { value: '   ', skipped: false, msOnItem: 900 } }, NOW_FINISH)
+    expect(dispositionOf(b, 'd2')).toBe('no-response')
+  })
+
+  it('only skipped === true is a deliberate skip', () => {
+    const a = attempt({ d1: { value: '', skipped: true, msOnItem: 900 } }, NOW_FINISH)
+    expect(dispositionOf(a, 'd1')).toBe('deliberate-skip')
+    expect(gradeAttempt(test, a).find((g) => g.item.id === 'd1')!.skipped).toBe(true)
+  })
+
+  it('a nonblank response still routes to a human when the scorer is not confident', () => {
+    const a = attempt({ d1: { value: 'about seven', skipped: false, msOnItem: 9000 } }, NOW_FINISH)
+    expect(dispositionOf(a, 'd1')).toBe('unmatched')
+
+    const b = attempt({ d2: { value: 'my paragraph', skipped: false, msOnItem: 9000 } }, NOW_FINISH)
+    expect(dispositionOf(b, 'd2')).toBe('ungraded')
+  })
+
+  it('correct and incorrect are unchanged', () => {
+    expect(dispositionOf(attempt({ d1: { value: '7', skipped: false, msOnItem: 1 } }, NOW_FINISH), 'd1')).toBe('correct')
+    expect(dispositionOf(attempt({ d1: { value: '8', skipped: false, msOnItem: 1 } }, NOW_FINISH), 'd1')).toBe('incorrect')
+  })
+
+  it('autoScore counts no-response separately and never inflates skips', () => {
+    const score = computeAutoScore(
+      test,
+      attempt(
+        {
+          d1: { value: '', skipped: false, msOnItem: 900 },
+          d2: { value: '', skipped: true, msOnItem: 900 },
+        },
+        NOW_FINISH,
+      ),
+    )
+    expect(score.skips).toBe(1)
+    expect(score.noResponse).toBe(1)
+    expect(score.gradedItems).toBe(0)
+  })
+
+  it('an item nobody reached is counted in no tally at all', () => {
+    const score = computeAutoScore(test, attempt({}))
+    expect(score.skips).toBe(0)
+    expect(score.gradedItems).toBe(0)
+    expect(score.noResponse).toBe(0)
+    expect(score.bySection['Only']).toEqual({ correct: 0, of: 0 })
+  })
+
+  it('the report labels each disposition distinctly and never invents an answer', () => {
+    const report = buildReport(
+      test,
+      attempt(
+        {
+          d1: { value: '', skipped: false, msOnItem: 900 },
+          d2: { value: '', skipped: true, msOnItem: 900 },
+        },
+        NOW_FINISH,
+      ),
+      'Third Grader',
+    )
+    expect(report).toContain('SEEN — NO RESPONSE')
+    expect(report).toContain('[no response]')
+    expect(report).toContain('[SKIPPED]')
+    expect(report).not.toContain('NEEDS GRADING')
+    expect(report).toContain('- Seen, no response: 1')
+    expect(report).toContain('- Deliberate skips: 1')
+  })
+
+  it('a legacy autoScore without the no-response tally reads "not recorded", never 0', () => {
+    const legacy: Attempt = {
+      ...attempt({ d1: { value: '', skipped: false, msOnItem: 900 } }, NOW_FINISH),
+      // shape persisted before this tally existed
+      autoScore: { bySection: { Only: { correct: 0, of: 0 } }, gradedItems: 1, skips: 1 },
+    }
+    const report = buildReport(test, legacy, 'Third Grader')
+    expect(report).toContain('- Seen, no response: not recorded')
+    expect(report).not.toContain('- Seen, no response: 0')
+    expect(report).toMatch(/NOTE: .*scored before/)
+  })
+
+  it('a fresh autoScore reporting zero no-responses says 0', () => {
+    const fresh: Attempt = {
+      ...attempt({ d1: { value: '7', skipped: false, msOnItem: 900 } }, NOW_FINISH),
+      autoScore: { bySection: { Only: { correct: 1, of: 1 } }, gradedItems: 0, skips: 0, noResponse: 0 },
+    }
+    const report = buildReport(test, fresh, 'Third Grader')
+    expect(report).toContain('- Seen, no response: 0')
+    expect(report).not.toMatch(/NOTE: .*scored before/)
+  })
+})
+
+// ---------- what lets "finished ⇒ every item was reached" hold ----------
+
+describe('every finish path puts each item in front of the child', () => {
+  // AssessmentRunner sends an all-longtext test to EssayEditor instead of the
+  // player, and EssayEditor only ever records allItems(test)[0]. A second prompt
+  // there would finish an attempt holding items nobody was ever shown, and this
+  // card's reading of an absent record ("seen, wrote nothing") would become a
+  // lie. The player's own one-at-a-time invariant is pinned in
+  // TestPlayer.evidence.test.tsx; this is the other half of the claim.
+  it('a test routed to the essay editor has exactly one item', () => {
+    for (const test of ALL_TESTS) {
+      const items = test.sections.flatMap((s) => s.items)
+      const routedToEssayEditor = items.every((i) => i.kind === 'longtext')
+      if (routedToEssayEditor) {
+        expect(items, `${test.id} is essay-routed and must hold one prompt`).toHaveLength(1)
+      }
+    }
+  })
+
+  it('every other test is played one item at a time', () => {
+    const played = ALL_TESTS.filter(
+      (t) => !t.sections.flatMap((s) => s.items).every((i) => i.kind === 'longtext'),
+    )
+    expect(played.length).toBeGreaterThan(0)
+    for (const test of played) expect(itemCount(test)).toBeGreaterThan(0)
+  })
+})
+
+// ---------- sync contract for the optional tally ----------
+
+describe('provenance validates the optional noResponse tally', () => {
+  const withAutoScore = (autoScore: unknown) => {
+    const state = defaultAppState()
+    const profileId = Object.keys(state.profiles)[0]
+    ;(state.profiles[profileId] as unknown as Record<string, unknown>).assessments = {
+      assigned: [],
+      attempts: [
+        {
+          testId: 'hs-grammar',
+          profileId,
+          startedAt: NOW_START,
+          finishedAt: NOW_FINISH,
+          answers: { g1: { value: '', skipped: true, msOnItem: 900 } },
+          autoScore,
+        },
+      ],
+      retakeUnlocked: [],
+    }
+    return validateAppStateForSync(state).ok
+  }
+
+  const BASE = { bySection: { Only: { correct: 1, of: 2 } }, gradedItems: 0, skips: 1 }
+
+  it('accepts an attempt persisted before the tally existed', () => {
+    expect(withAutoScore(BASE)).toBe(true)
+  })
+
+  it('accepts a valid non-negative integer tally', () => {
+    expect(withAutoScore({ ...BASE, noResponse: 0 })).toBe(true)
+    expect(withAutoScore({ ...BASE, noResponse: 3 })).toBe(true)
+  })
+
+  it('rejects a malformed tally rather than letting it through unchecked', () => {
+    expect(withAutoScore({ ...BASE, noResponse: -1 })).toBe(false)
+    expect(withAutoScore({ ...BASE, noResponse: 1.5 })).toBe(false)
+    expect(withAutoScore({ ...BASE, noResponse: '2' })).toBe(false)
+    expect(withAutoScore({ ...BASE, noResponse: null })).toBe(false)
+    expect(withAutoScore({ ...BASE, noResponse: Number.NaN })).toBe(false)
+  })
+})
+
 // ---------- backward-compat: state defaults ----------
 
 describe('assessment state is additive / defaulted', () => {
@@ -332,7 +543,17 @@ describe('assessment state is additive / defaulted', () => {
     expect(getState(undefined)).toEqual({ assigned: [], attempts: [], retakeUnlocked: [] })
     // a profile from before MA (no assessments field) yields empty state
     const legacy = getState(undefined)
-    expect(computeAutoScore(HS_GRAMMAR, { testId: 'hs-grammar', profileId: 'p', startedAt: 'x', answers: {} }).skips).toBe(
+    // An attempt with no answers and no finish is an attempt nobody has taken:
+    // every item is simply unreached, and none of them is evidence of anything.
+    const untaken = computeAutoScore(HS_GRAMMAR, {
+      testId: 'hs-grammar',
+      profileId: 'p',
+      startedAt: NOW_START,
+      answers: {},
+    })
+    expect(untaken.skips).toBe(0)
+    expect(untaken.noResponse).toBe(0)
+    expect(gradeAttempt(HS_GRAMMAR, { testId: 'hs-grammar', profileId: 'p', startedAt: NOW_START, answers: {} })).toHaveLength(
       itemCount(HS_GRAMMAR),
     )
     expect(legacy.attempts).toHaveLength(0)

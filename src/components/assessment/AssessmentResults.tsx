@@ -1,4 +1,4 @@
-import type { Attempt, FixedTest } from '../../assessment/types'
+import type { Attempt, FixedTest, ResponseDisposition } from '../../assessment/types'
 import { gradeAttempt } from '../../assessment/attempts'
 import { buildReport } from '../../assessment/report'
 
@@ -8,12 +8,23 @@ interface AssessmentResultsProps {
   studentName: string
 }
 
-const VERDICT_UI: Record<string, { label: string; cls: string }> = {
+const DISPOSITION_UI: Record<ResponseDisposition, { label: string; cls: string }> = {
   correct: { label: 'auto ✓', cls: 'bg-emerald-100 text-emerald-700' },
   incorrect: { label: 'auto ✗', cls: 'bg-rose-100 text-rose-700' },
   unmatched: { label: 'grade', cls: 'bg-amber-100 text-amber-800' },
   ungraded: { label: 'grade', cls: 'bg-amber-100 text-amber-800' },
-  skip: { label: 'skipped', cls: 'bg-slate-200 text-slate-500' },
+  'deliberate-skip': { label: 'skipped', cls: 'bg-slate-200 text-slate-500' },
+  'no-response': { label: 'no response', cls: 'bg-slate-100 text-slate-500' },
+  'not-reached': { label: 'not reached', cls: 'bg-slate-100 text-slate-400' },
+}
+
+/** What to print where the answer goes. Only a real response prints as one. */
+function AnswerText({ disposition, value }: { disposition: ResponseDisposition; value: string }) {
+  if (disposition === 'deliberate-skip') return <span className="italic text-amber-600">SKIPPED</span>
+  if (disposition === 'no-response') return <span className="italic text-slate-400">no response</span>
+  if (disposition === 'not-reached') return <span className="italic text-slate-400">not reached</span>
+  if (value === '') return <span className="italic text-slate-400">[blank]</span>
+  return <>{value}</>
 }
 
 function downloadText(filename: string, text: string) {
@@ -69,12 +80,23 @@ export function AssessmentResults({ test, attempt, studentName }: AssessmentResu
           <span className="rounded border border-slate-200 bg-white px-2 py-1 text-slate-500">
             {score.skips} skipped
           </span>
+          <span className="rounded border border-slate-200 bg-white px-2 py-1 text-slate-500">
+            {/* absent means this attempt predates the tally — unknown, not zero */}
+            {score.noResponse === undefined ? 'no response: not recorded' : `${score.noResponse} no response`}
+          </span>
+        </div>
+      )}
+
+      {score && score.noResponse === undefined && (
+        <div className="mb-3 rounded border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-500">
+          Scored before seen-but-blank items were counted separately, so the skip count above may
+          include items she saw and left blank. The per-item list below is the reliable record.
         </div>
       )}
 
       <div className="space-y-1.5">
         {grades.map((g) => {
-          const ui = VERDICT_UI[g.verdict]
+          const ui = DISPOSITION_UI[g.disposition]
           const flag = outlierFlag(g.msOnItem, g.skipped)
           return (
             <div key={g.item.id} className="rounded-lg border border-slate-200 bg-white p-2.5 text-sm">
@@ -86,7 +108,7 @@ export function AssessmentResults({ test, attempt, studentName }: AssessmentResu
               </div>
               <div className="mt-1 pl-1 text-slate-600">
                 <span className="font-semibold">Answer:</span>{' '}
-                {g.skipped ? <span className="italic text-amber-600">SKIPPED</span> : g.value === '' ? <span className="italic text-slate-400">[blank]</span> : g.value}
+                <AnswerText disposition={g.disposition} value={g.value} />
               </div>
               {(g.item.key !== undefined || g.item.keyNote) && (
                 <div className="mt-0.5 pl-1 text-xs text-slate-400">

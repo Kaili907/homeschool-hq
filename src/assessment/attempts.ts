@@ -5,6 +5,8 @@ import type {
   AutoScore,
   FixedTest,
   Item,
+  ItemAnswer,
+  ResponseDisposition,
   ScoreVerdict,
 } from './types'
 import { emptyAssessmentState } from './types'
@@ -135,26 +137,47 @@ export interface ItemGrade {
   item: Item
   sectionName: string
   value: string
+  /** true ONLY when the child pressed SKIP. Never inferred from a missing record. */
   skipped: boolean
   msOnItem: number
-  verdict: ScoreVerdict
+  disposition: ResponseDisposition
+}
+
+/**
+ * What one item's stored record supports — and nothing more.
+ *
+ * A missing record is not a decision the child made, so it is never a skip. On a
+ * FINISHED attempt it means the item was seen and left alone: the player advances
+ * one item at a time and only offers Finish on the last one, so reaching the end
+ * means every item was in front of her (see TestPlayer.evidence.test.tsx, which
+ * pins that invariant). On an unfinished attempt there is genuinely no evidence.
+ */
+function dispositionOf(item: Item, ans: ItemAnswer | undefined, finished: boolean): ResponseDisposition {
+  if (!ans) return finished ? 'no-response' : 'not-reached'
+  if (ans.skipped) return 'deliberate-skip'
+  // A stored blank is the same event as an absent record: the item was in front
+  // of her and nothing came back. There is no response to hand a human, so this
+  // must not fall through to the scorer, which answers 'unmatched' for a blank.
+  if (ans.value.trim() === '') return 'no-response'
+  const verdict: ScoreVerdict = scoreItem(item, ans.value, false)
+  // scoreItem only answers 'skip' when told the item was skipped, which it was not.
+  return verdict === 'skip' ? 'deliberate-skip' : verdict
 }
 
 /** Grade every item of an attempt (used by the results screen and autoScore). */
 export function gradeAttempt(test: FixedTest, attempt: Attempt): ItemGrade[] {
+  const finished = !!attempt.finishedAt
   const grades: ItemGrade[] = []
   for (const section of test.sections) {
     for (const item of section.items) {
       const ans = attempt.answers[item.id]
-      const value = ans?.value ?? ''
-      const skipped = ans ? ans.skipped : true // never-reached items count as skips
       grades.push({
         item,
         sectionName: section.name,
-        value,
-        skipped,
+        value: ans?.value ?? '',
+        skipped: ans?.skipped === true,
         msOnItem: ans?.msOnItem ?? 0,
-        verdict: scoreItem(item, value, skipped),
+        disposition: dispositionOf(item, ans, finished),
       })
     }
   }
@@ -165,11 +188,12 @@ export function computeAutoScore(test: FixedTest, attempt: Attempt): AutoScore {
   const bySection: Record<string, { correct: number; of: number }> = {}
   let gradedItems = 0
   let skips = 0
+  let noResponse = 0
   for (const section of test.sections) bySection[section.name] = { correct: 0, of: 0 }
 
   for (const g of gradeAttempt(test, attempt)) {
     const bucket = bySection[g.sectionName]
-    switch (g.verdict) {
+    switch (g.disposition) {
       case 'correct':
         bucket.correct++
         bucket.of++
@@ -181,12 +205,19 @@ export function computeAutoScore(test: FixedTest, attempt: Attempt): AutoScore {
       case 'ungraded':
         gradedItems++
         break
-      case 'skip':
+      case 'deliberate-skip':
         skips++
+        break
+      case 'no-response':
+        noResponse++
+        break
+      case 'not-reached':
+        // Counted nowhere. An unfinished attempt holds no evidence about an item
+        // the child never saw, and putting it in a tally would manufacture some.
         break
     }
   }
-  return { bySection, gradedItems, skips }
+  return { bySection, gradedItems, skips, noResponse }
 }
 
 export function finishAttempt(

@@ -57,7 +57,14 @@ export interface AutoScore {
   bySection: Record<string, { correct: number; of: number }>
   /** items needing human grading (no key, or answered but not confidently matched) */
   gradedItems: number
+  /** DELIBERATE skips only — items the child pressed SKIP on. */
   skips: number
+  /**
+   * Items that were in front of the child and came back with nothing written.
+   * OPTIONAL: attempts persisted before this tally existed simply lack it, and
+   * absent must be read as "not recorded", never as zero.
+   */
+  noResponse?: number
 }
 
 export interface Assignment {
@@ -81,3 +88,21 @@ export const emptyAssessmentState = (): AssessmentState => ({
 })
 
 export type ScoreVerdict = 'correct' | 'incorrect' | 'unmatched' | 'ungraded' | 'skip'
+
+/**
+ * What the stored evidence actually supports about one item. ScoreVerdict is what
+ * the machine scorer can say about a response that EXISTS; this also covers the
+ * cases where there is no response to score, which the scorer cannot distinguish.
+ *
+ *   deliberate-skip  the child pressed SKIP (answer.skipped === true) — and nothing else
+ *   no-response      the item was in front of the child and nothing came back
+ *   not-reached      an unfinished attempt that never got this far: no evidence at all
+ */
+export type ResponseDisposition =
+  | 'correct'
+  | 'incorrect'
+  | 'unmatched'
+  | 'ungraded'
+  | 'deliberate-skip'
+  | 'no-response'
+  | 'not-reached'

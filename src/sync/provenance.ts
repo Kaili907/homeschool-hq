@@ -297,7 +297,10 @@ function validateAssessments(value: unknown): boolean {
               finiteNumber(section.of),
           ) &&
           finiteNumber(score.gradedItems) &&
-          finiteNumber(score.skips),
+          finiteNumber(score.skips) &&
+          // Optional: attempts persisted before this tally existed simply lack it.
+          // Present but malformed is rejected rather than waved through.
+          optional(score.noResponse, nonNegativeInteger),
       ),
   )
   return (

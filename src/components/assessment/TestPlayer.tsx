@@ -57,11 +57,19 @@ export function TestPlayer({ test, attempt, onRecord, onFinish, onExit }: TestPl
   const setValue = (value: string) =>
     setAnswers((a) => ({ ...a, [current.item.id]: { value, skipped: false } }))
 
-  const go = (nextIdx: number) => {
-    // persist current text answer (non-skip) before leaving
+  /**
+   * Write the current item's answer, and only ever that. An item she never
+   * touched stays absent — leaving it must not look like a decision — and an item
+   * she deliberately skipped keeps its skip, so merely clicking into the box and
+   * out again can't erase the one thing she did tell us.
+   */
+  const persistPending = (addMs: number) => {
     const s = answers[current.item.id]
-    if (s && !s.skipped) onRecord(current.item.id, s.value, false, commitTime())
-    else commitTime()
+    if (s && !s.skipped) onRecord(current.item.id, s.value, false, addMs)
+  }
+
+  const go = (nextIdx: number) => {
+    persistPending(commitTime())
     setIdx(Math.max(0, Math.min(flat.length - 1, nextIdx)))
     enteredAt.current = Date.now()
   }
@@ -95,7 +103,7 @@ export function TestPlayer({ test, attempt, onRecord, onFinish, onExit }: TestPl
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-4 px-4 py-5">
         {/* header */}
         <div className="flex items-center justify-between">
-          <button onClick={() => { commitTime(); onExit() }} className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-semibold text-slate-600 hover:bg-slate-50">
+          <button onClick={() => { persistPending(commitTime()); onExit() }} className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-semibold text-slate-600 hover:bg-slate-50">
             Save &amp; exit
           </button>
           <div className="text-sm font-semibold text-slate-500">
@@ -154,7 +162,7 @@ export function TestPlayer({ test, attempt, onRecord, onFinish, onExit }: TestPl
               <input
                 value={state.skipped ? '' : state.value}
                 onChange={(e) => setValue(e.target.value)}
-                onBlur={() => onRecord(current.item.id, answers[current.item.id]?.value ?? '', false, 0)}
+                onBlur={() => persistPending(0)}
                 spellCheck={false}
                 placeholder="Type your answer (fractions like 1 7/12, decimals, 10π, x ≤ −3…)"
                 className="w-full rounded-lg border border-slate-300 px-4 py-3 text-lg text-slate-900 focus:border-slate-500 focus:outline-none"
@@ -163,7 +171,7 @@ export function TestPlayer({ test, attempt, onRecord, onFinish, onExit }: TestPl
               <textarea
                 value={state.skipped ? '' : state.value}
                 onChange={(e) => setValue(e.target.value)}
-                onBlur={() => onRecord(current.item.id, answers[current.item.id]?.value ?? '', false, 0)}
+                onBlur={() => persistPending(0)}
                 spellCheck={false}
                 rows={4}
                 placeholder="Type your answer…"
