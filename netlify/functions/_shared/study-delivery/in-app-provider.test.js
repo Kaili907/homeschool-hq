@@ -1,15 +1,18 @@
 import { describe, expect, it, vi } from 'vitest'
 import { createDurableInAppProvider } from './in-app-provider.js'
 
+const DELIVERY_KEY = `delivery:${'a'.repeat(64)}`
+const ROUTE_REF = `route:${'b'.repeat(64)}`
+
 const ATTEMPT = Object.freeze({
-  idempotencyKey: `study-safety-delivery:${'a'.repeat(64)}`,
+  idempotencyKey: DELIVERY_KEY,
   jobId: 'job:synthetic-1',
   attemptId: 'attempt:synthetic-1',
   proposalId: 'proposal:synthetic-1',
   householdId: 'household:synthetic-1',
   studentId: 'student:synthetic-1',
   recipientRef: 'recipient:synthetic-guardian-1',
-  routeRef: 'in-app-route:synthetic-guardian-1',
+  routeRef: ROUTE_REF,
   templateCode: 'study-safety-adult-review-v1',
 })
 const WORKER_CONTEXT = Object.freeze({
@@ -249,7 +252,12 @@ describe('durable in-app notification provider', () => {
   it('rejects forged recipients and non-in-app routes before persistence', async () => {
     const persistence = durablePersistence()
     const configured = provider(persistence)
-    for (const routeRef of ['email-route:forged', 'sms-route:forged', 'in-app-route:'])  {
+    for (const routeRef of [
+      'email-route:forged',
+      'sms-route:forged',
+      'route:',
+      `in-app-route:${'b'.repeat(64)}`,
+    ])  {
       await expect(configured.deliver(request({ ...ATTEMPT, routeRef })))
         .rejects.toThrow('invalid_in_app_delivery')
     }
@@ -267,7 +275,7 @@ describe('durable in-app notification provider', () => {
     ['wrong attempt', { attemptId: 'attempt:another-attempt' }],
     ['wrong job', { jobId: 'job:another-job' }],
     ['wrong proposal', { proposalId: 'proposal:another-proposal' }],
-    ['wrong route', { routeRef: 'in-app-route:another' }],
+    ['wrong route', { routeRef: `route:${'c'.repeat(64)}` }],
     ['wrong household', { householdId: 'household:another' }],
     ['wrong student', { studentId: 'student:another' }],
     ['wrong provider version', { providerConfigVersion: 'in-app-config-v0' }],

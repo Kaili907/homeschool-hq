@@ -23,7 +23,8 @@ const RECEIPT_KEYS = new Set([
 ])
 
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$/
-const DELIVERY_KEY = /^study-safety-delivery:[a-f0-9]{64}$/
+// The durable estate builds this key as `'delivery:' || study_sha256_json(...)`.
+const DELIVERY_KEY = /^delivery:[a-f0-9]{64}$/
 const RECIPIENT_REF = /^recipient:[A-Za-z0-9._/-]{1,96}$/
 
 function exactObject(value, keys) {
@@ -37,6 +38,12 @@ function exactObject(value, keys) {
 }
 function validRef(value) {
   return typeof value === 'string' && REF.test(value)
+}
+
+// `RegExp#test` coerces its argument, so the string guard is what stops a
+// hostile carrier object from presenting a durable identifier it does not hold.
+function matches(pattern, value) {
+  return typeof value === 'string' && pattern.test(value)
 }
 
 function validTimestamp(value) {
@@ -72,7 +79,7 @@ export function validateVerifiedAdultReviewReceipt(value, binding, options = {})
     !validRef(value.householdId) ||
     !validRef(value.studentId) ||
     !RECIPIENT_REF.test(value.recipientRef) ||
-    !DELIVERY_KEY.test(value.deliveryIdempotencyKey) ||
+    !matches(DELIVERY_KEY, value.deliveryIdempotencyKey) ||
     !validRef(value.providerConfigVersion) ||
     !validTimestamp(value.deliveredAt) ||
     !validRef(value.evidenceRef) ||
