@@ -10,7 +10,8 @@ import { createStudyAdultReviewHealthHandler } from '../../study-adult-review-he
 import { createStudyParentNotificationsHandler } from '../../study-parent-notifications.js'
 
 const NOW = new Date('2026-08-01T12:00:00.000Z')
-const DELIVERY_KEY = `study-safety-delivery:${'a'.repeat(64)}`
+const DELIVERY_KEY = `delivery:${'a'.repeat(64)}`
+const ROUTE_REF = `route:${'b'.repeat(64)}`
 const CLAIM = Object.freeze({
   claimId: 'claim:1',
   deliveryId: 'job:1',
@@ -19,7 +20,7 @@ const CLAIM = Object.freeze({
   householdId: 'household:1',
   studentId: 'student:1',
   recipientRef: 'recipient:1',
-  routeRef: 'in-app-route:1',
+  routeRef: ROUTE_REF,
   idempotencyKey: DELIVERY_KEY,
   templateCode: 'study-safety-adult-review-v1',
   attemptId: 'attempt:1',
@@ -240,7 +241,7 @@ describe('credential-bound adult-review worker', () => {
   it.each([
     ['wrong job', { jobId: 'job:other' }],
     ['wrong attempt', { attemptId: 'attempt:other' }],
-    ['wrong route', { routeRef: 'in-app-route:other' }],
+    ['wrong route', { routeRef: `route:${'c'.repeat(64)}` }],
     ['wrong recipient', { recipientRef: 'recipient:other' }],
     ['wrong household', { householdId: 'household:other' }],
     ['wrong student', { studentId: 'student:other' }],

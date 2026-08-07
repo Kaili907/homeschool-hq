@@ -7,7 +7,8 @@ import {
   validateInAppNotificationReceipt,
 } from './in-app-receipt-validator.js'
 
-const IDEMPOTENCY_KEY = `study-safety-delivery:${'a'.repeat(64)}`
+const IDEMPOTENCY_KEY = `delivery:${'a'.repeat(64)}`
+const ROUTE_REF = `route:${'b'.repeat(64)}`
 
 const DELIVERY_PAYLOAD = Object.freeze({
   schemaVersion: 2,
@@ -17,7 +18,7 @@ const DELIVERY_PAYLOAD = Object.freeze({
   attemptId: 'attempt:synthetic',
   deliveryIdempotencyKey: IDEMPOTENCY_KEY,
   recipientRef: 'recipient:synthetic',
-  routeRef: 'in-app-route:synthetic',
+  routeRef: ROUTE_REF,
   proposalId: 'proposal:synthetic',
   householdId: 'household:synthetic',
   studentId: 'student:synthetic',
@@ -29,7 +30,7 @@ const BINDING = Object.freeze({
   providerReceiptRef: 'in-app-receipt:synthetic-notification-1',
   providerName: 'academy-in-app',
   route: 'in-app',
-  routeRef: 'in-app-route:synthetic',
+  routeRef: ROUTE_REF,
   jobId: 'job:synthetic',
   attemptId: 'attempt:synthetic',
   proposalId: 'proposal:synthetic',
@@ -132,8 +133,8 @@ describe('in-app notification receipt validator', () => {
     ['delivery idempotency key', 'deliveryIdempotencyKey'],
   ])('rejects a receipt bound to the wrong %s', (_label, key) => {
     const value = key === 'deliveryIdempotencyKey'
-      ? `study-safety-delivery:${'b'.repeat(64)}`
-      : `${RECEIPT[key]}-other`
+      ? `delivery:${'c'.repeat(64)}`
+      : key === 'routeRef' ? `route:${'d'.repeat(64)}` : `${RECEIPT[key]}-other`
     expect(() => validateInAppNotificationReceipt({ ...RECEIPT, [key]: value }, BINDING))
       .toThrow(`receipt_binding_mismatch:${key}`)
   })

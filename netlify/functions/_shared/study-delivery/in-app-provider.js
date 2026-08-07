@@ -35,9 +35,12 @@ const VERIFY_REQUEST_KEYS = new Set([
 ])
 const UNVERIFIED_RECEIPT_KEYS = new Set(['verified'])
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
-const IDEMPOTENCY_KEY = /^study-safety-delivery:[a-f0-9]{64}$/
+// The durable estate builds this key as `'delivery:' || study_sha256_json(...)`.
+const IDEMPOTENCY_KEY = /^delivery:[a-f0-9]{64}$/
 const RECIPIENT_REF = /^recipient:[A-Za-z0-9._/-]{1,96}$/
-const ROUTE_REF = /^in-app-route:[A-Za-z0-9._/-]{1,96}$/
+// `study_adult_notification_routes.route_ref` is constrained to this form, and
+// only rows matching it are ever resolved into a delivery job.
+const ROUTE_REF = /^route:[a-f0-9]{64}$/
 const RECEIPT_REF = /^in-app-receipt:[A-Za-z0-9._/-]{1,96}$/
 const EVIDENCE_REF = /^in-app-evidence:[A-Za-z0-9._/-]{1,96}$/
 const ACTION_REF = /^adult-review:[A-Za-z0-9._/-]{1,96}$/
@@ -61,17 +64,23 @@ function validRef(value) {
   return typeof value === 'string' && REF.test(value)
 }
 
+// `RegExp#test` coerces its argument, so the string guard is what stops a
+// hostile carrier object from presenting a durable identifier it does not hold.
+function matches(pattern, value) {
+  return typeof value === 'string' && pattern.test(value)
+}
+
 function validateDelivery(value) {
   if (
     !exactObject(value, DELIVERY_INPUT_KEYS) ||
-    !IDEMPOTENCY_KEY.test(value.idempotencyKey) ||
+    !matches(IDEMPOTENCY_KEY, value.idempotencyKey) ||
     !validRef(value.jobId) ||
     !validRef(value.attemptId) ||
     !validRef(value.proposalId) ||
     !validRef(value.householdId) ||
     !validRef(value.studentId) ||
     !RECIPIENT_REF.test(value.recipientRef) ||
-    !ROUTE_REF.test(value.routeRef) ||
+    !matches(ROUTE_REF, value.routeRef) ||
     value.templateCode !== TEMPLATE_CODE
   ) throw new TypeError('invalid_in_app_delivery')
 
@@ -165,9 +174,9 @@ function validateVerifyRequest(value) {
     !validRef(value.proposalId) ||
     !validRef(value.householdId) ||
     !validRef(value.studentId) ||
-    !IDEMPOTENCY_KEY.test(value.deliveryIdempotencyKey) ||
+    !matches(IDEMPOTENCY_KEY, value.deliveryIdempotencyKey) ||
     !RECIPIENT_REF.test(value.recipientRef) ||
-    !ROUTE_REF.test(value.routeRef) ||
+    !matches(ROUTE_REF, value.routeRef) ||
     !RECEIPT_REF.test(value.providerReceiptRef)
   ) throw new TypeError('invalid_in_app_receipt_request')
 
