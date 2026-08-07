@@ -141,3 +141,48 @@ export function assertCompleteStudyPortBundle(ports: Partial<StudyPortBundle>): 
   const missing = required.filter((key) => !ports[key])
   if (missing.length > 0) throw new Error(`Study integration unavailable: missing ${missing.join(', ')} port.`)
 }
+
+/**
+ * Narrow consumer contracts.
+ *
+ * Each names exactly the port methods one Study surface genuinely calls, so a
+ * host composing that surface need not supply — or fabricate — roles it never
+ * exercises. They are derived from the canonical interfaces above with Pick<>,
+ * so a signature change there reaches every consumer instead of drifting behind
+ * a duplicated copy.
+ *
+ * StudyPortBundle remains the complete nine-role preview/full-host contract:
+ * narrowing what a consumer requires does not narrow what "complete" means, and
+ * assertCompleteStudyPortBundle still demands all nine roles.
+ */
+
+/**
+ * calendar.create is required because the dashboard seeds the local-development
+ * preview day through ensureLocalDevelopmentStudyDay. It is a real call on the
+ * current component, not an aspirational one.
+ */
+export interface StudyDashboardPorts {
+  readonly calendar: Pick<StudyCalendarPort, 'list' | 'create'>
+  readonly reviewQueue: Pick<StudyReviewQueuePort, 'list'>
+}
+
+export interface StudySettingsPorts {
+  readonly persistence: Pick<StudyPersistencePort, 'loadPreferences' | 'savePreferences'>
+}
+
+/**
+ * Shared by StudyParentController and the parent panel that drives it. The
+ * panel's own reads (parentSettings.read, calendar.list, reviewQueue.list) are a
+ * strict subset of the controller's, so a second alias would draw a distinction
+ * the source does not support.
+ *
+ * parentSettings, adultPrivate, and outbox appear whole because the parent
+ * control path calls every method those roles declare.
+ */
+export interface StudyParentControlPorts {
+  readonly calendar: Pick<StudyCalendarPort, 'list' | 'pause' | 'createContinuation'>
+  readonly reviewQueue: Pick<StudyReviewQueuePort, 'list' | 'decide'>
+  readonly parentSettings: StudyParentSettingsPort
+  readonly adultPrivate: StudyAdultPrivatePort
+  readonly outbox: StudyOutboxPort
+}

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import type { StudyPortBundle } from '../../study/ports'
+import type { StudyParentControlPorts } from '../../study/ports'
 import { StudyParentController } from '../../study/parentController'
 import type {
   StudyAdultAuthorization,
@@ -24,7 +24,7 @@ export function StudyParentPanel({
 }: {
   householdRef: string
   learners: readonly StudyParentLearnerOption[]
-  ports: StudyPortBundle
+  ports: StudyParentControlPorts
   authorization: StudyAdultAuthorization
 }) {
   const [learnerRef, setLearnerRef] = useState(learners[0]?.learnerRef ?? '')
