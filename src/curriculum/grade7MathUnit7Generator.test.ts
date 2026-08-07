@@ -100,6 +100,27 @@ function required<T>(match: RegExpExecArray | null, prompt: string): RegExpExecA
   return match
 }
 
+/**
+ * Reads a canonical linear expression back into [coefficient, constant] using
+ * its own regexes: "3x + 5", "3x - 5", "3x", "x", "-x", "5". A zero constant is
+ * written as a bare term, so the constant part is optional.
+ */
+function parseLinearExpression(text: string, prompt: string): [number, number] {
+  const coefficientOf = (raw: string): number => (raw === '' ? 1 : raw === '-' ? -1 : Number(raw))
+  const withConstant = /^(-?\d*)x ([+-]) (\d+)$/.exec(text)
+  if (withConstant) {
+    return [
+      coefficientOf(withConstant[1]),
+      (withConstant[2] === '+' ? 1 : -1) * Number(withConstant[3]),
+    ]
+  }
+  const termOnly = /^(-?\d*)x$/.exec(text)
+  if (termOnly) return [coefficientOf(termOnly[1]), 0]
+  const constantOnly = /^(-?\d+)$/.exec(text)
+  if (constantOnly) return [0, Number(constantOnly[1])]
+  throw new Error(`prompt did not match expected pattern: "${prompt}"`)
+}
+
 function oracleAnswer(question: Grade7MathUnit7Question): string {
   const prompt = question.prompt
   switch (question.itemType) {
@@ -147,28 +168,18 @@ function oracleAnswer(question: Grade7MathUnit7Question): string {
       return `${total - Number(m[2])}°`
     }
     case 'vertical-angles-with-expressions': {
-      const m = required(
-        /measure \((\d+)x ([+-]) (\d+)\)° and \((\d+)x ([+-]) (\d+)\)°/.exec(prompt),
-        prompt,
-      )
-      const a = Number(m[1])
-      const b = (m[2] === '+' ? 1 : -1) * Number(m[3])
-      const c = Number(m[4])
-      const d = (m[5] === '+' ? 1 : -1) * Number(m[6])
+      const m = required(/measure \(([^)]+)\)° and \(([^)]+)\)°/.exec(prompt), prompt)
+      const [a, b] = parseLinearExpression(m[1], prompt)
+      const [c, d] = parseLinearExpression(m[2], prompt)
       const x = (d - b) / (a - c)
       if (!Number.isInteger(x)) throw new Error(`non-integer x for vertical angles: ${x}`)
       const angle = a * x + b
       return `x = ${x}, each angle measures ${angle}°`
     }
     case 'angle-equation-multistep': {
-      const m = required(
-        /measures are \((\d+)x ([+-]) (\d+)\)° and \((\d+)x ([+-]) (\d+)\)°/.exec(prompt),
-        prompt,
-      )
-      const a = Number(m[1])
-      const b = (m[2] === '+' ? 1 : -1) * Number(m[3])
-      const c = Number(m[4])
-      const d = (m[5] === '+' ? 1 : -1) * Number(m[6])
+      const m = required(/measures are \(([^)]+)\)° and \(([^)]+)\)°/.exec(prompt), prompt)
+      const [a, b] = parseLinearExpression(m[1], prompt)
+      const [c, d] = parseLinearExpression(m[2], prompt)
       const x = (180 - b - d) / (a + c)
       if (!Number.isInteger(x)) throw new Error(`non-integer x for supplementary algebra: ${x}`)
       const angle1 = a * x + b
@@ -315,6 +326,53 @@ describe('grade7MathUnit7Generator', () => {
     }
     expect(sawFractionalHeightSA).toBe(true)
     expect(sawFractionalHeightVolume).toBe(true)
+  })
+
+  /**
+   * The second expression in both algebra items carries a derived constant, so a
+   * zero constant is reachable and used to render as "(3x + 0)°".
+   */
+  it('writes a zero constant as a bare term instead of a zero tail', () => {
+    setRng(seededRng(20260806))
+    const ALGEBRA_TYPES = ['vertical-angles-with-expressions', 'angle-equation-multistep'] as const
+    for (const itemType of ALGEBRA_TYPES) {
+      let sawZeroConstant = false
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < 400; i++) {
+          const question = generateGrade7MathUnit7Question(itemType, difficulty)
+          if (question.parameters.d !== 0) continue
+          sawZeroConstant = true
+          expect(question.prompt).toContain(`(${question.parameters.c}x)°`)
+          expect(curriculumAnswer(question)).toBe(oracleAnswer(question))
+        }
+      }
+      expect(sawZeroConstant).toBe(true)
+    }
+  })
+
+  it('never renders noncanonical algebra notation in a prompt or a choice', () => {
+    setRng(seededRng(20260807))
+    const NONCANONICAL = [
+      /\+\s*0(?![\d.])/, // zero tail
+      /(^|[^\d.])0x/, // zero coefficient
+      /(^|[^\d.-])1x/, // unit coefficient
+      /-1x/, // negative unit coefficient
+      /\+\s*-/, // plus-minus
+      /-\s*-/, // double minus
+      /x\s*x/, // doubled variable
+      /\S {2}/, // doubled space
+      /\(\s*\+/, // leading plus
+    ]
+    for (const itemType of GRADE7_MATH_UNIT7_ITEM_TYPES) {
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < 200; i++) {
+          const question = generateGrade7MathUnit7Question(itemType, difficulty)
+          for (const text of [question.prompt, ...question.choices]) {
+            for (const pattern of NONCANONICAL) expect(text).not.toMatch(pattern)
+          }
+        }
+      }
+    }
   })
 
   it('keeps every angles-on-a-line-or-around-a-point known angle and x strictly positive', () => {

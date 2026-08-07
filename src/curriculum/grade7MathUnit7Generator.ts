@@ -392,9 +392,18 @@ function integerChoiceTexts(correct: number, candidates: number[], suffix = '°'
   return result
 }
 
+/**
+ * Canonical text for a linear expression: "3x + 5", "3x - 5", "3x", "x + 5",
+ * "-x", "5". The second expression in both algebra items carries a derived
+ * constant, so a zero constant is reachable and must not render as "3x + 0".
+ * The unit and zero coefficient branches keep the helper canonical if the
+ * coefficient ranges ever widen past the current 2-6.
+ */
 function linearExprText(coeff: number, constant: number): string {
-  const sign = constant < 0 ? '-' : '+'
-  return `${coeff}x ${sign} ${Math.abs(constant)}`
+  const term = coeff === 0 ? '' : coeff === 1 ? 'x' : coeff === -1 ? '-x' : `${coeff}x`
+  if (term === '') return String(constant)
+  if (constant === 0) return term
+  return `${term} ${constant < 0 ? '-' : '+'} ${Math.abs(constant)}`
 }
 
 /** `parts` positive integers summing to `total` (requires total >= parts). */
