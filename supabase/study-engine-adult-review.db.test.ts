@@ -2024,12 +2024,10 @@ describe.sequential('STUDY-C2 v2 operations contract', () => {
 
     // Validate against the real server contract module.
     //
-    // One field still mismatches, and it is NOT the timestamp: SQL emits the
-    // canonical durable key `delivery:<sha256>` while this branch's
-    // receipt-contract.js still carries the legacy `study-safety-delivery:`
-    // prefix. Widening the JS contract is a separate card's scope and is
-    // deliberately not done here, so the assertion below pins that gap
-    // precisely rather than papering over it.
+    // The canonical durable key SQL emits — `delivery:<sha256>` — is exactly
+    // what the current receipt contract requires, so the SQL-produced receipt
+    // validates unmodified. Nothing is translated first: the whole integrated
+    // path, deliveredAt included, is checked by the module the runtime loads.
     const contract = await import(
       '../netlify/functions/_shared/study-delivery/receipt-contract.js'
     )
@@ -2048,24 +2046,28 @@ describe.sequential('STUDY-C2 v2 operations contract', () => {
       providerConfigVersion: 'in-app-config-v1',
     }
     expect(job.idempotencyKey).toMatch(/^delivery:[a-f0-9]{64}$/)
-    expect(() => validateVerifiedAdultReviewReceipt(
-      receipt, bindingForContract, { environment: 'production' },
-    )).toThrow('receipt_schema_mismatch')
-
-    // Translating only that one legacy prefix — changing no other field, and
-    // above all not deliveredAt — makes the whole receipt validate. That is the
-    // proof that the receipt boundary is otherwise contract-clean and that no
-    // raw timestamptz survives it.
-    const legacyKey = job.idempotencyKey.replace(/^delivery:/, 'study-safety-delivery:')
     const validated = validateVerifiedAdultReviewReceipt(
-      { ...receipt, deliveryIdempotencyKey: legacyKey },
-      { ...bindingForContract, deliveryIdempotencyKey: legacyKey },
-      { environment: 'production' },
+      receipt, bindingForContract, { environment: 'production' },
     )
     expect(validated.deliveredAt).toBe(deliveredAt)
     expect(validated.verified).toBe(true)
     expect(validated.receiptSource).toBe('server-verified')
     expect(validated.testReceipt).toBe(false)
+
+    // Negative control on the retired namespace. The legacy
+    // `study-safety-delivery:` prefix is substituted into BOTH the receipt and
+    // the binding, so the two still agree and the delivery-key shape is the
+    // only field that can fail — the rejection is therefore the schema check
+    // itself, not a binding mismatch. Restoring the legacy prefix in the
+    // contract would make this call succeed, so this assertion is what holds
+    // the retirement in place.
+    const legacyKey = job.idempotencyKey.replace(/^delivery:/, 'study-safety-delivery:')
+    expect(legacyKey).toMatch(/^study-safety-delivery:[a-f0-9]{64}$/)
+    expect(() => validateVerifiedAdultReviewReceipt(
+      { ...receipt, deliveryIdempotencyKey: legacyKey },
+      { ...bindingForContract, deliveryIdempotencyKey: legacyKey },
+      { environment: 'production' },
+    )).toThrow('receipt_schema_mismatch')
   })
 
   it('refuses delivery when provider-accepted was pre-recorded by the adapter', async () => {
