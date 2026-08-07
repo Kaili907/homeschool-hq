@@ -173,16 +173,33 @@ const U4_WORKED_EXAMPLE_DIGEST = 'e78dcbc227d7d8cd502eb1274c89de4812a8b7be85e017
  * describes a Unit 3 that no longer exists here and would fail for the one reason
  * this test is not meant to detect.
  *
- * The value below is Unit 3 as of 1cf141f, i.e. before this Unit 4 card was applied
- * on top, so the guard still fails if Unit 4 work moves Unit 3. That the movement
- * belongs entirely to the Unit 3 card is checkable rather than asserted: Unit 3
- * generation imports only ../types, ../genUtils and ./generatorCore, and the Unit 4
- * commit touched none of those three — it touched grade7MathUnit4Generator.ts and
- * two test files — so Unit 3's output here is byte-identical to its output at
- * 1cf141f. grade7MathWorkedExamples.test.ts confirms the same thing independently:
- * its six `u3:` digests are the Unit 3 card's values and they pass unchanged.
+ * Re-anchored a second time for the same reason, at the final Grade 7 integration.
+ * The Unit 3 positive-cost card deliberately changed Unit 3's output again — that
+ * is its whole purpose — so the value this guard pinned before it now describes a
+ * Unit 3 that again no longer exists here.
+ *
+ * The value below is Unit 3 with that card applied and nothing else, so the guard
+ * keeps its meaning: it still fails if Unit 4 work — or Unit 7 or Unit 10 work —
+ * moves Unit 3. Ownership is checkable rather than asserted, and was checked two
+ * independent ways rather than re-baselined from a failing run:
+ *
+ * - By import closure. Unit 3 generation imports only ../types, ../genUtils and
+ *   ./generatorCore; generatorCore imports only ../types and ../genUtils; genUtils
+ *   imports only ./types. Across that closure the single blob that differs between
+ *   the pre-integration base and the Unit 3 card is grade7MathUnit3Generator.ts,
+ *   and every blob in it is byte-identical between that card and this branch tip.
+ *   The Unit 4, Unit 7 and Unit 10 cards touch grade7MathUnit4Generator.ts,
+ *   grade7MathUnit7Generator.ts, grade7MathUnit10Generator.ts and test files, none
+ *   of which the closure contains.
+ * - By execution. Replaying this exact 9,000-draw recipe against the Unit 3 card
+ *   alone and against this branch tip yields the same digest, and replaying it
+ *   against the pre-integration base reproduces the value this constant held
+ *   before, which is what shows the recipe was replayed faithfully.
+ *
+ * grade7MathWorkedExamples.test.ts confirms the same thing from the other side: its
+ * six `u3:` digests are the Unit 3 values, one of them re-taken by that same card.
  */
-const U3_UNTOUCHED_DIGEST = '5ba06adc9f119eb655f2e9b23cdd9ad89b022502efd4a0bfca4426cda813cdb2'
+const U3_UNTOUCHED_DIGEST = '0c948f49355dfb5f0d19b5e8a68eab72d218a3c92eb4fa73ead0c85f0a02be72'
 
 /**
  * The eleven draws inside that 90,000-draw sample that threw before this card.
