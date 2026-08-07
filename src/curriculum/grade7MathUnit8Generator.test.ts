@@ -334,6 +334,111 @@ describe('grade7MathUnit8Generator', () => {
     }
   })
 
+  /**
+   * ==========================================================================
+   * RENDERED-DATA COMPARISON ORACLE
+   * ==========================================================================
+   *
+   * The two `compare-two-samples-*` item types are only worth asking if the
+   * learner has to read the samples. Both helpers below therefore consult ONLY
+   * `question.prompt`: they re-parse the two printed samples with their own
+   * regexes, recompute each sample's centre (or spread) with the BigInt-exact
+   * helpers at the top of this file, and decide the winner without ever
+   * touching `question.parameters` or any generator export. A generator that
+   * decided the answer from a parameter the prompt does not actually render
+   * would be caught here rather than agreed with.
+   */
+  const CENTER_PROMPT =
+    /^Sample A: (.+?)\. Sample B: (.+?)\. Based on the means, which sample tends to have greater values\?$/
+  const VARIABILITY_PROMPT =
+    /^Sample A: (.+?)\. Sample B: (.+?)\. Based on the range of each sample, which sample is more consistent \(less variable\)\?$/
+
+  interface RenderedVerdict {
+    winner: 'A' | 'B'
+    answerText: string
+    tied: boolean
+  }
+
+  function parseRenderedSamples(prompt: string, pattern: RegExp): [number[], number[]] {
+    const m = required(pattern.exec(prompt), prompt)
+    const dataA = parseNumberList(m[1])
+    const dataB = parseNumberList(m[2])
+    for (const value of [...dataA, ...dataB])
+      if (!Number.isInteger(value)) throw new Error(`non-integer datum rendered in prompt: "${prompt}"`)
+    return [dataA, dataB]
+  }
+
+  function renderedCenterVerdict(prompt: string): RenderedVerdict {
+    const [dataA, dataB] = parseRenderedSamples(prompt, CENTER_PROMPT)
+    const meanA = bfMean(dataA)
+    const meanB = bfMean(dataB)
+    const order = bfCompare(meanA, meanB)
+    const winner = order > 0 ? 'A' : 'B'
+    const greater = order > 0 ? meanA : meanB
+    const lesser = order > 0 ? meanB : meanA
+    return {
+      winner,
+      answerText: `Sample ${winner}, with a mean of ${bfMixedText(greater)} compared to ${bfMixedText(lesser)}.`,
+      tied: order === 0,
+    }
+  }
+
+  function renderedVariabilityVerdict(prompt: string): RenderedVerdict {
+    const [dataA, dataB] = parseRenderedSamples(prompt, VARIABILITY_PROMPT)
+    const rangeA = numericRange(dataA)
+    const rangeB = numericRange(dataB)
+    const winner = rangeA < rangeB ? 'A' : 'B'
+    return {
+      winner,
+      answerText: `Sample ${winner}, with a range of ${Math.min(rangeA, rangeB)} compared to ${Math.max(rangeA, rangeB)}.`,
+      tied: rangeA === rangeB,
+    }
+  }
+
+  const BALANCE_RUNS = 2_000
+  /**
+   * A deliberately broad band. The intent is "a learner cannot pass by always
+   * naming the same sample", not an exact 50/50 pin that would flake on an
+   * honest generator. Every draw is won by exactly one of the two samples, so
+   * bounding Sample A's share on both sides bounds Sample B's share too.
+   */
+  const BALANCE_MIN_SHARE = 0.35
+  const BALANCE_MAX_SHARE = 0.65
+
+  function expectBothSamplesWin(
+    itemType: 'compare-two-samples-center' | 'compare-two-samples-variability',
+    verdictOf: (prompt: string) => RenderedVerdict,
+  ): void {
+    for (const difficulty of DIFFICULTIES) {
+      const wins = { A: 0, B: 0 }
+      for (let i = 0; i < BALANCE_RUNS; i++) {
+        const question = generateGrade7MathUnit8Question(itemType, difficulty)
+        const label = `${itemType} d${difficulty}`
+        const verdict = verdictOf(question.prompt)
+        expect(verdict.tied, `${label}: the rendered samples tied, so the item has no answer`).toBe(false)
+        expect(question.answerIndex, `${label}: answer index out of range`).toBeGreaterThanOrEqual(0)
+        expect(question.answerIndex, `${label}: answer index out of range`).toBeLessThan(question.choices.length)
+        expect(new Set(question.choices).size, `${label}: duplicate choices`).toBe(question.choices.length)
+        expect(question.choices[question.answerIndex], `${label}: keyed answer contradicts the rendered data`).toBe(
+          verdict.answerText,
+        )
+        wins[verdict.winner] += 1
+      }
+      const shareA = wins.A / BALANCE_RUNS
+      const report = `${itemType} d${difficulty}: Sample A won ${wins.A} of ${BALANCE_RUNS} draws`
+      expect(shareA, report).toBeGreaterThanOrEqual(BALANCE_MIN_SHARE)
+      expect(shareA, report).toBeLessThanOrEqual(BALANCE_MAX_SHARE)
+    }
+  }
+
+  it('lets either sample hold the greater centre, decided by the rendered data, at every difficulty', () => {
+    expectBothSamplesWin('compare-two-samples-center', renderedCenterVerdict)
+  })
+
+  it('lets either sample be the more consistent one, decided by the rendered data, at every difficulty', () => {
+    expectBothSamplesWin('compare-two-samples-variability', renderedVariabilityVerdict)
+  })
+
   it('always yields an outlier-inflated mean greater than the original mean', () => {
     for (const difficulty of DIFFICULTIES) {
       for (let i = 0; i < 100; i++) {

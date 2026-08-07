@@ -554,11 +554,22 @@ function randomOverlapSet(difficulty: Difficulty): OverlapParameters {
   return { meanA, meanB, mad }
 }
 
+/**
+ * The two samples are built around centers a fixed gap apart, and which of the
+ * two samples receives the greater center is drawn, not fixed. Assigning the
+ * greater center to Sample B every time would make the item answerable without
+ * reading either sample: "Sample B" alone would score 100%. Because the
+ * deviations sum to zero, each sample's mean is exactly its center, so the gap
+ * stays strictly positive and the two means can never tie.
+ */
 function randomTwoSamplesByMean(difficulty: Difficulty): TwoSampleParameters {
   const n = difficulty === 1 ? 4 : difficulty === 2 ? 5 : 6
-  const centerA = difficulty === 1 ? ri(15, 30) : difficulty === 2 ? ri(20, 45) : ri(25, 60)
+  const lesserCenter = difficulty === 1 ? ri(15, 30) : difficulty === 2 ? ri(20, 45) : ri(25, 60)
   const gap = difficulty === 1 ? ri(6, 15) : difficulty === 2 ? ri(8, 20) : ri(10, 30)
-  const centerB = centerA + gap
+  const greaterCenter = lesserCenter + gap
+  const aIsGreater = pick([true, false] as const)
+  const centerA = aIsGreater ? greaterCenter : lesserCenter
+  const centerB = aIsGreater ? lesserCenter : greaterCenter
   const dataA = randomZeroSumDeviations(n, difficulty).map((d) => centerA + d)
   const dataB = randomZeroSumDeviations(n, difficulty).map((d) => centerB + d)
   return { dataA, dataB }

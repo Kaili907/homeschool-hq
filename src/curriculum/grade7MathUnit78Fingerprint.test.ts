@@ -319,6 +319,16 @@ function runAllRows(): RowRun[] {
  * `grade7MathWorkedExamples.test.ts`: that table covers Units 1-6, 9 and 10, and
  * none of the 24 names below appears in it. Together the two tables now pin all
  * 72 Grade 7 Mathematics item types.
+ *
+ * ONE ROW HAS MOVED SINCE THAT CAPTURE. `u8:compare-two-samples-center` was
+ * re-derived after `randomTwoSamplesByMean` stopped handing the greater center
+ * to Sample B every single time - a defect this very freeze card surfaced, under
+ * which the item was answerable without reading either sample. The replacement
+ * digest was derived twice, by two separately written CommonJS harnesses over
+ * two separately compiled source trees, and neither harness was shown a failing
+ * assertion. Both harnesses also re-derived the other 23 rows and reproduced
+ * them byte for byte, which is what establishes that the correction moved that
+ * row and only that row.
  */
 const U78_FREEZE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u7:circumference-from-radius-or-diameter', 'ab7405489cfa2a58751a010dad246dbd242ad74d36f772142834780bf0923742'],
@@ -343,7 +353,7 @@ const U78_FREEZE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u8:mean-vs-median-with-outlier', '15dea600d3aff7ee1e9b392c74e8d0b7fa01eb1f484ef642900472dc0f19e115'],
   ['u8:compute-mean-absolute-deviation', 'ace2a60a8d8edcc6ed6d0c1004b78836c93d11dcd185a3c3718a86eb59e3d5a4'],
   ['u8:visual-overlap-in-mad-units', 'ab578814bf1a061ede69c8c203cb02699b97b54ed63bb01b7d6bf0716c9088c4'],
-  ['u8:compare-two-samples-center', 'e88a5ae86aef10fedc12376eedf1463c0334be92a97ad0402df1e0f83d1283b1'],
+  ['u8:compare-two-samples-center', '9a03c5ce105bba91bc422cb25d2431d04ec544b13038b787aadf8cb0ea4aa718'],
   ['u8:compare-two-samples-variability', 'f9e33765e2bb464856596042da914e8f88c35637d874858d097dfc3b62afa44f'],
 ]
 
