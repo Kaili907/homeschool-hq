@@ -36,6 +36,9 @@ function validateListResult(value) {
       'createdAt', 'deliveredAt', 'read', 'actionRef',
     ])
     if (
+      // `RegExp#test` coerces, so an array carrier in the hosted response would
+      // otherwise pass as a durable notification id.
+      typeof entry.notificationId !== 'string' ||
       !/^notification:[0-9a-f]{64}$/.test(entry.notificationId) ||
       entry.title !== 'Study check-in needs your review' ||
       !['immediate-safety', 'possible-safety', 'review-required'].includes(entry.reasonCategory) ||

@@ -25,7 +25,9 @@ const RECEIPT_KEYS = new Set([
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$/
 // The durable estate builds this key as `'delivery:' || study_sha256_json(...)`.
 const DELIVERY_KEY = /^delivery:[a-f0-9]{64}$/
-const RECIPIENT_REF = /^recipient:[A-Za-z0-9._/-]{1,96}$/
+// Only permissions whose `recipient_ref` matches `^recipient:[0-9a-f]{64}$` are
+// ever disclosed by the durable recipient resolution.
+const RECIPIENT_REF = /^recipient:[a-f0-9]{64}$/
 
 function exactObject(value, keys) {
   return Boolean(
@@ -78,7 +80,7 @@ export function validateVerifiedAdultReviewReceipt(value, binding, options = {})
     !validRef(value.proposalId) ||
     !validRef(value.householdId) ||
     !validRef(value.studentId) ||
-    !RECIPIENT_REF.test(value.recipientRef) ||
+    !matches(RECIPIENT_REF, value.recipientRef) ||
     !matches(DELIVERY_KEY, value.deliveryIdempotencyKey) ||
     !validRef(value.providerConfigVersion) ||
     !validTimestamp(value.deliveredAt) ||
