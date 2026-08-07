@@ -203,6 +203,77 @@ function validSafetyResult(value: unknown): value is StudySafetyResult {
   return result.mayContinue === false && result.adultHelpState === 'proposed-not-delivered'
 }
 
+type BridgeStopOrQuarantine =
+  Extract<SafeTutorBridgeResult, { readonly status: 'stopped-or-quarantined' }>['result']
+
+/**
+ * STUDY-A1-BRIDGE-STATUS-C.
+ *
+ * `stopped-or-quarantined` is one arm of the bridge result holding two different
+ * things, and its name says so. Everything in it used to become a host `stopped`
+ * result, which StudySessionContainer writes to the durable A6-5-C safety
+ * ledger — so a ledger collision, a replayed turn or an over-long legacy
+ * identifier became a learner safety incident that survives a refresh and stands
+ * in her dad's record as one.
+ *
+ * The split is drawn from the bridge's own discriminated union. It cannot be
+ * drawn from the learner message: every non-clear classification deliberately
+ * shows the same wording (A6-5), so the copy carries no provenance at all.
+ *
+ * The pre-Core safety gateway runs first and returns before anything downstream,
+ * so any status other than its own means the gateway already cleared this
+ * learner's text. Those are structural. `stop-invalid-input` is the one status
+ * the gateway and the orchestrator both emit, so it is split by the gateway's
+ * own reason code rather than by which of them produced it.
+ */
+const STRUCTURAL_BRIDGE_STATUSES: ReadonlySet<string> = new Set([
+  // Contract, projection or event-ledger failure, always after the gateway cleared.
+  'quarantined',
+  // The accepted event was already appended; a replay is not a determination.
+  'duplicate-ignored',
+])
+
+/**
+ * The gateway refuses a malformed context *before* it reads the learner's text,
+ * and the orchestrator emits the same reason for its own downstream-context
+ * check after the text was cleared. Either way nothing judged this child.
+ *
+ * The other two reasons stay on the safety side and must: `input-limit` means
+ * the text was refused before it could be normalized or classified, and
+ * `invalid-classifier` means the classifier itself could not answer. The
+ * gateway's reviewed deterministic layer runs on every turn and may escalate
+ * above the host's own classifier, so text it never saw cannot be called clear.
+ */
+const STRUCTURAL_GATEWAY_REASONS: ReadonlySet<string> = new Set([
+  'urgent-gateway-invalid-context',
+])
+
+/**
+ * Both fields are read once, up front, and the value that is CHECKED is the
+ * value the reason code is BUILT from — the same discipline `narrowedInterruption`
+ * keeps. Anything unrecognised, missing or non-primitive falls through to the
+ * learner-safety side, which is the direction a fail-closed host must miss in.
+ */
+function classifiedBridgeFailure(
+  inner: BridgeStopOrQuarantine,
+): { readonly kind: 'structural' | 'learner-safety'; readonly reasonCode: string } {
+  const candidate = inner as { readonly status?: unknown; readonly reasonCode?: unknown }
+  const status = candidate.status
+  const reason = candidate.reasonCode
+  const named = typeof status === 'string' ? status : 'unrecognised'
+  if (STRUCTURAL_BRIDGE_STATUSES.has(named)) {
+    return { kind: 'structural', reasonCode: `bridge-${named}` }
+  }
+  if (
+    named === 'stop-invalid-input' &&
+    typeof reason === 'string' &&
+    STRUCTURAL_GATEWAY_REASONS.has(reason)
+  ) {
+    return { kind: 'structural', reasonCode: `bridge-${reason}` }
+  }
+  return { kind: 'learner-safety', reasonCode: `bridge-${named}` }
+}
+
 function stoppedResult(
   classification: 'urgent' | 'uncertain' | 'invalid',
   reasonCode: string,
@@ -400,12 +471,15 @@ export class AcceptedRc1HostRuntime {
       )
     }
     if (result.status !== 'accepted') {
-      return stoppedResult(
-        'invalid',
-        `bridge-${result.result.status}`,
-        result.coreSubmitInvocations,
-        'not-confirmed',
-      )
+      // A structural refusal is returned in the shape that carries no
+      // classification, no delivery status and no student message, so the caller
+      // has nothing it could write a safety record from — the same reason the
+      // interruption arm above is shaped the way it is.
+      const failure = classifiedBridgeFailure(result.result)
+      if (failure.kind === 'structural') {
+        return { status: 'quarantined', reasonCode: failure.reasonCode }
+      }
+      return stoppedResult('invalid', failure.reasonCode, result.coreSubmitInvocations, 'not-confirmed')
     }
     try {
       this.#identity.verifyAccepted(input.scope, result)

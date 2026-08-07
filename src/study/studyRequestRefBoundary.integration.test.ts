@@ -16,9 +16,18 @@ import type { StudySafetyResult } from './types'
 // reference StudySessionContainer used to mint —
 //   `request:${blockRef}:session:${segmentRef}:${Date.now()}`
 // — grows with the block and the segment, and a *clear* learner turn that
-// overshoots comes back as `bridge-stop-invalid-input`, which the container then
-// writes to the durable A6-5-C ledger as a safety stop. A girl who typed
-// "ready" is locked out across refreshes and her dad is shown a safety incident.
+// overshoots is refused by the bridge's pre-Core gateway before the classifier
+// runs. When this card landed, that refusal came back as `bridge-stop-invalid-input`,
+// which the container wrote to the durable A6-5-C ledger as a safety stop: a girl
+// who typed "ready" was locked out across refreshes and her dad was shown a
+// safety incident.
+//
+// STUDY-A1-BRIDGE-STATUS-C closed the second half of that. The bounded reference
+// this file installs is still what production uses, and an over-long one is still
+// refused; what changed is that the refusal is now classified from the bridge's
+// own provenance as a structural `quarantined` result, so it is a technical
+// failure rather than a statement about the child. See
+// bridgeStatusBoundary.integration.test.ts for that boundary in full.
 
 const CLEAR: StudySafetyResult = { outcome: 'clear', mayContinue: true, adultHelpState: 'not-needed' }
 
@@ -72,7 +81,7 @@ describe('Study turn request reference against the Tutor bridge opaque-id bound'
     expect(Math.max(...lengths)).toBeGreaterThan(128)
   })
 
-  it('turns a clear learner turn into a false durable safety stop when the legacy reference is too long', async () => {
+  it('refuses a clear learner turn on the legacy reference, without calling it a safety stop', async () => {
     const { context, ports, entry, scope } = await realisticBlock(
       'manuel-academy:mathematics:level-5:unit-04:lesson-03',
     )
@@ -95,11 +104,12 @@ describe('Study turn request reference against the Tutor bridge opaque-id bound'
       occurredAt: new Date(SYNTHETIC_NOW.getTime() + 5_000).toISOString(),
     })
 
-    // This is the defect: nothing about this child was unsafe, and the runtime
-    // still produces the stop the container records durably.
-    expect(result.status).toBe('stopped')
-    if (result.status !== 'stopped') throw new Error('unreachable')
-    expect(result.reasonCode).toBe('bridge-stop-invalid-input')
+    // Fail closed — the turn does not reach Tutor Core — but nothing about this
+    // child was unsafe, so the result carries no classification, no delivery
+    // status and no student message for the container to record.
+    expect(result.status).toBe('quarantined')
+    if (result.status !== 'quarantined') throw new Error('unreachable')
+    expect(result.reasonCode).toBe('bridge-urgent-gateway-invalid-context')
   })
 
   it('reaches the Tutor path for the same clear turn once the bounded reference is used', async () => {
