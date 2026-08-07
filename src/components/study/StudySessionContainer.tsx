@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { JarvisCore } from '../../../adaptive-tutor/study-engine/ui/JarvisCore.tsx'
 import {
-  joinHostStudyLifecycle,
+  attachHostStudySurface,
   type HostStudyLifecycleSeam,
 } from '../../study/composition/hostStudyLifecycle'
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../study/ports'
@@ -131,6 +131,15 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   const [error, setError] = useState<string | null>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const bindingRef = useRef(`${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`)
+  /**
+   * STUDY-A1-STRICTMODE-PREVIEW — the session preparation, held per epoch and
+   * session rather than per effect setup. Preparing a session launches the
+   * runtime, starts or resumes the calendar block, appends the `session-launched`
+   * event and writes the session record; React's StrictMode replay runs the mount
+   * effect twice inside one commit, and every one of those is a durable write that
+   * must happen exactly once for a learner sitting down to one block.
+   */
+  const preparationRef = useRef<{ readonly key: string; readonly run: Promise<StudyCalendarEntry | null> } | null>(null)
   const lifecycle = studyLifecycle.boundary
   const runtime = useMemo(() => new AcceptedRc1HostRuntime(ports), [ports])
   const learnerScope = { householdRef: context.householdRef, learnerRef: context.learnerRef }
@@ -144,53 +153,68 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   const isCurrentBinding = () => bindingRef.current === `${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`
 
   useEffect(() => {
-    // Rejoin rather than re-create: a previous unmount cancelled this epoch, and
-    // only the host's binding may start the next one.
-    const token = joinHostStudyLifecycle(studyLifecycle)
-    const prepare = async () => {
-      try {
-        token.assertCurrent()
-        // A stopped session is never relaunched, so no lesson work, no Tutor
-        // turn and no calendar transition can happen behind the locked surface.
-        if (isSessionStoppedByLocalLedger(stopKey)) return
-        assertCompleteStudyPortBundle(ports)
-        runtime.launch(context, initialEntry, sessionRef)
-        let next = initialEntry
-        const now = studyInstant()
-        if (next.state === 'scheduled') next = await runCurrentStudyWork(token, () => ports.calendar.start(learnerScope, next.blockRef, now))
-        if (next.state === 'paused') next = await runCurrentStudyWork(token, () => ports.calendar.resume(learnerScope, next.blockRef, now))
-        const segment = next.segments.find((candidate) => !next.completedSegmentRefs.includes(candidate.segmentRef))
-        if (!segment) throw new Error('This Study block is already complete.')
-        await runCurrentStudyWork(token, () => ports.eventLedger.append(scope, {
-          eventRef: `launch:${sessionRef}`,
-          occurredAt: now,
-          type: 'session-launched',
-          payload: { lessonRef: next.lessonRef, segmentRef: segment.segmentRef },
-        }))
-        await runCurrentStudyWork(token, () => ports.persistence.saveSession({
-          scope,
-          lessonRef: next.lessonRef,
-          segmentRef: segment.segmentRef,
-          status: 'active',
-          updatedAt: now,
-          lastAcceptedEventRef: null,
-          rawAnswerIncluded: false,
-          transcriptIncluded: false,
-        }))
-        token.assertCurrent()
-        setEntry(next)
-      } catch {
-        if (token.isCurrent()) setError('This Study Session could not start safely. Check the learner, runtime version, and required ports.')
-      } finally {
-        if (token.isCurrent()) setLoading(false)
-      }
+    // STUDY-A1-STRICTMODE-PREVIEW — attach to the App's epoch. This never begins
+    // one, and the cleanup below no longer cancels one: React runs
+    // setup → cleanup → setup inside a single StrictMode mount commit with no
+    // render between them, so a cleanup that cancelled the shared epoch destroyed
+    // the authority the second setup then had to attach to. Retiring the epoch on
+    // a real exit is the route's `leaveStudy`, and on logout, learner switch or
+    // authorization loss it is the App's — none of them an effect cleanup.
+    const surface = attachHostStudySurface(studyLifecycle)
+    // Re-armed on every setup because the cleanup closes it. Left un-armed, the
+    // StrictMode probe's cleanup closed this surface permanently and every later
+    // Tutor turn was refused by a binding check that nothing had invalidated.
+    bindingRef.current = `${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`
+    const prepare = async (): Promise<StudyCalendarEntry | null> => {
+      surface.token.assertCurrent()
+      // A stopped session is never relaunched, so no lesson work, no Tutor
+      // turn and no calendar transition can happen behind the locked surface.
+      if (isSessionStoppedByLocalLedger(stopKey)) return null
+      assertCompleteStudyPortBundle(ports)
+      runtime.launch(context, initialEntry, sessionRef)
+      let next = initialEntry
+      const now = studyInstant()
+      if (next.state === 'scheduled') next = await runCurrentStudyWork(surface.token, () => ports.calendar.start(learnerScope, next.blockRef, now))
+      if (next.state === 'paused') next = await runCurrentStudyWork(surface.token, () => ports.calendar.resume(learnerScope, next.blockRef, now))
+      const segment = next.segments.find((candidate) => !next.completedSegmentRefs.includes(candidate.segmentRef))
+      if (!segment) throw new Error('This Study block is already complete.')
+      await runCurrentStudyWork(surface.token, () => ports.eventLedger.append(scope, {
+        eventRef: `launch:${sessionRef}`,
+        occurredAt: now,
+        type: 'session-launched',
+        payload: { lessonRef: next.lessonRef, segmentRef: segment.segmentRef },
+      }))
+      await runCurrentStudyWork(surface.token, () => ports.persistence.saveSession({
+        scope,
+        lessonRef: next.lessonRef,
+        segmentRef: segment.segmentRef,
+        status: 'active',
+        updatedAt: now,
+        lastAcceptedEventRef: null,
+        rawAnswerIncluded: false,
+        transcriptIncluded: false,
+      }))
+      surface.token.assertCurrent()
+      return next
     }
-    prepare()
+    // One preparation per epoch and session, so the replayed setup ADOPTS the
+    // first one instead of launching the session, starting the calendar block and
+    // appending the launch event a second time. Idempotence, not timing: the key
+    // is the identity of the work, so the answer is the same however often React
+    // sets this effect up. Deliberately guarded by the EPOCH and not by this
+    // surface — the preparation belongs to the session, so a probe's detach must
+    // not abandon it with the calendar started and the record unwritten.
+    const key = `${surface.token.epoch}|${sessionRef}`
+    if (preparationRef.current?.key !== key) preparationRef.current = { key, run: prepare() }
+    void preparationRef.current.run.then(
+      (prepared) => { if (surface.isAttached() && prepared) setEntry(prepared) },
+      () => { if (surface.isAttached()) setError('This Study Session could not start safely. Check the learner, runtime version, and required ports.') },
+    ).finally(() => { if (surface.isAttached()) setLoading(false) })
     return () => {
-      lifecycle.cancel('navigation-away')
+      surface.detach()
       bindingRef.current = 'closed'
     }
-  }, [context.learnerRef, initialEntry.blockRef, lifecycle, ports, runtime, studyLifecycle])
+  }, [context.householdRef, context.learnerRef, initialEntry.blockRef, ports, runtime, studyLifecycle])
 
   useEffect(() => { headingRef.current?.focus() }, [loading, error, entry.state, currentSegment?.segmentRef])
 

@@ -7,6 +7,7 @@ import {
   type StudyLifecycleBinding,
 } from '../lifecycle'
 import {
+  attachHostStudySurface,
   createHostStudyLifecycleSeam,
   currentHostStudyLifecycleSeam,
   hostStudyLifecycleBoundary,
@@ -499,6 +500,8 @@ describe('one authority: this module holds a single lifecycle registry per owner
     expect(currentHostStudyLifecycleSeam(owner)!.boundary).toBe(direct)
     expect(joinHostStudyLifecycle(currentHostStudyLifecycleSeam(owner)!).epoch)
       .toBe(direct.token().epoch)
+    expect(attachHostStudySurface(currentHostStudyLifecycleSeam(owner)!).token.epoch)
+      .toBe(direct.token().epoch)
     expect(hostStudyLifecycleBoundary(owner)).toBe(direct)
   })
 
@@ -506,7 +509,9 @@ describe('one authority: this module holds a single lifecycle registry per owner
     const owner = {}
     const seam = render(owner)
     const token = joinHostStudyLifecycle(seam)
+    const surface = attachHostStudySurface(seam)
     expect(token.isCurrent()).toBe(true)
+    expect(surface.isAttached()).toBe(true)
 
     // A logout cancels the one authority. If any exported path reached a second
     // registry, it would answer with a boundary that was still current here.
@@ -517,6 +522,16 @@ describe('one authority: this module holds a single lifecycle registry per owner
     expect(hostStudyLifecycleBoundary(owner).lastReason).toBe('logout')
     expect(hostStudyLifecycleBoundary(owner).token().isCurrent()).toBe(false)
     expect(currentHostStudyLifecycleSeam(owner)).toBeNull()
+    // STUDY-A1-STRICTMODE-PREVIEW — a surface attachment is strictly narrower
+    // than the epoch. Asserted BEFORE the owner's re-render below, which is the
+    // only thing entitled to bring authority back: attaching a surface to the
+    // cancelled seam does not, however many times React replays the mount.
+    expect(surface.isAttached()).toBe(false)
+    expect(attachHostStudySurface(seam).isAttached()).toBe(false)
+    attachHostStudySurface(seam).detach()
+    expect(hostStudyLifecycleBoundary(owner).binding).toBeNull()
+    expect(hostStudyLifecycleBoundary(owner).lastReason).toBe('logout')
+
     expect(render(owner).boundary).toBe(seam.boundary)
     expect(token.isCurrent()).toBe(false)
   })
@@ -526,6 +541,11 @@ describe('one authority: this module holds a single lifecycle registry per owner
     // A new export here is a new way into the module and must be a deliberate
     // decision, not a drive-by: nothing added may mint a parallel registry.
     expect(Object.keys(seamModule).sort()).toEqual([
+      // STUDY-A1-STRICTMODE-PREVIEW. A mounted surface's attachment to the epoch,
+      // added so an effect cleanup has something to retire that is NOT the shared
+      // epoch. It takes a seam rather than an owner, so it reaches no registry;
+      // the assertions below hold it to that.
+      'attachHostStudySurface',
       'createHostStudyLifecycleSeam',
       'currentHostStudyLifecycleSeam',
       'hostStudyLifecycleBoundary',
@@ -536,10 +556,20 @@ describe('one authority: this module holds a single lifecycle registry per owner
     // repetition can never accumulate authorities.
     const owner = {}
     const boundary = seamModule.hostStudyLifecycleBoundary(owner)
+    const epoch = seamModule.createHostStudyLifecycleSeam(owner, baseBinding()).boundary.token().epoch
     for (let pass = 0; pass < 10; pass += 1) {
       expect(seamModule.hostStudyLifecycleBoundary(owner)).toBe(boundary)
       expect(seamModule.createHostStudyLifecycleSeam(owner, baseBinding()).boundary).toBe(boundary)
       expect(seamModule.currentHostStudyLifecycleSeam(owner)!.boundary).toBe(boundary)
+      // Attaching and detaching a surface ten times moves nothing: it never
+      // begins an epoch and never ends one, which is what makes React's
+      // setup/cleanup/setup probe safe to replay.
+      const surface = seamModule.attachHostStudySurface(seamModule.currentHostStudyLifecycleSeam(owner)!)
+      expect(surface.token.epoch).toBe(epoch)
+      surface.detach()
+      expect(boundary.binding).not.toBeNull()
+      expect(boundary.token().epoch).toBe(epoch)
+      expect(boundary.token().isCurrent()).toBe(true)
     }
   })
 })

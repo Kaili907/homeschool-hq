@@ -216,3 +216,56 @@ export function currentHostStudyLifecycleSeam(owner: object): HostStudyLifecycle
 export function joinHostStudyLifecycle(seam: HostStudyLifecycleSeam): StudyLifecycleToken {
   return seam.boundary.joinCurrentEpoch(seam.binding)
 }
+
+/**
+ * STUDY-A1-STRICTMODE-PREVIEW — one mounted surface's attachment to the host
+ * epoch. It is strictly narrower than the epoch: it can go away while the epoch
+ * lives, and it can never outlive the epoch or revive one.
+ *
+ * `main.tsx` wraps the App in `<StrictMode>` and the preview surface is DEV-only,
+ * so every real preview mount is a StrictMode mount — and StrictMode deliberately
+ * runs effect setup → cleanup → setup inside a single commit, with NO render
+ * between them. The route and the container used to cancel the shared epoch from
+ * that cleanup, which destroyed the authority the second setup then had to attach
+ * to; and because a join correctly only attaches, nothing could put it back. The
+ * App's own revival runs during RENDER, and the probe schedules none, so preview
+ * settled on `binding = null`, `lastReason = 'navigation-away'` and a learner
+ * surface stuck on "Rechecking…" forever.
+ *
+ * The fix is not to weaken the join but to stop conflating two lifetimes. An
+ * effect cleanup means "this setup is over", which under StrictMode is a probe and
+ * under a real unmount is an exit; either way it is a statement about the SURFACE.
+ * Retiring the epoch is an authority decision and stays where it already was —
+ * `leaveStudy` in the route for a real exit, and the App's logout, learner-switch
+ * and authorization-loss handlers. Neither is an effect cleanup, so neither is
+ * replayed by the probe.
+ *
+ * `detach` is therefore idempotent and repeatable by construction: aborting a
+ * surface-local controller says nothing about the epoch, so setup → cleanup →
+ * setup leaves the epoch exactly as it found it. No timer, no debounce, no
+ * environment flag.
+ */
+export interface HostStudySurfaceAttachment {
+  /** The epoch's own token, still owned and still minted by the boundary. */
+  readonly token: StudyLifecycleToken
+  /** Aborted when THIS surface detaches. Compose it into surface-scoped work. */
+  readonly signal: AbortSignal
+  /** The epoch is live AND this surface is still the attached one. */
+  isAttached(): boolean
+  /** Retires this surface's work only. It never touches the epoch. */
+  detach(): void
+}
+
+export function attachHostStudySurface(seam: HostStudyLifecycleSeam): HostStudySurfaceAttachment {
+  const token = joinHostStudyLifecycle(seam)
+  const controller = new AbortController()
+  return Object.freeze({
+    token,
+    signal: controller.signal,
+    isAttached: () => token.isCurrent() && !controller.signal.aborted,
+    // A reason from the boundary's own vocabulary, so composed work that aborts
+    // on it raises the same StudyLifecycleAbortError shape as any other. It names
+    // the surface leaving, not the epoch ending — the epoch is untouched here.
+    detach: () => { if (!controller.signal.aborted) controller.abort('navigation-away') },
+  })
+}

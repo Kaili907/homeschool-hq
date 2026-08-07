@@ -320,11 +320,18 @@ describe('host Study seam stability through the real session container', () => {
   })
 
   // STUDY-A1-LIFECYCLE-AUTHORITY. `joinHostStudyLifecycle` no longer begins an
-  // epoch, and this is the path that used to depend on it: the container cancels
-  // the epoch when it unmounts, so navigating away and back arrives at a mount
-  // with nothing live to join. The revival moved to the App's own render, which
-  // React runs before any child effect — so the learner still gets her session
-  // back, and the surface never had to invent the authority for it.
+  // epoch, and this is the path that used to depend on it: navigating away and
+  // back must arrive at a mount with something live to attach to. The revival is
+  // the App's own render, which React runs before any child effect — so the
+  // learner still gets her session back, and the surface never had to invent the
+  // authority for it.
+  //
+  // STUDY-A1-STRICTMODE-PREVIEW. What changed underneath this test is WHO retires
+  // the epoch. It used to be the container's effect cleanup, which is also what
+  // React runs as a development probe — so this test asserted, on the way past,
+  // that a bare unmount cancels the epoch. That assertion was the blocker. The
+  // real exit is the route's `leaveStudy`, driven here as the controlling owner
+  // cancelling, and the recovery it was written to prove is unchanged.
   it('brings the surface back after a navigate-away-and-back', async () => {
     const owner = {}
     const seam = createHostStudyLifecycleSeam(owner, baseBinding())
@@ -333,8 +340,9 @@ describe('host Study seam stability through the real session container', () => {
     expect(tags(container, 'TEXTAREA').length).toBeGreaterThan(0)
     const mounted = seam.boundary.token().epoch
 
-    // Navigate away: the App renders another screen and the container unmounts,
-    // whose cleanup cancels the epoch.
+    // Navigate away: the controlling route retires the epoch on the learner's
+    // exit, and the App then renders another screen so the container unmounts.
+    seam.boundary.cancel('navigation-away')
     await act(async () => { root.render(null) })
     await act(async () => { await Promise.resolve() })
     expect(seam.boundary.binding).toBeNull()
@@ -353,6 +361,28 @@ describe('host Study seam stability through the real session container', () => {
     expect(back.boundary.token().epoch).toBeGreaterThan(mounted)
     expect(tags(container, 'TEXTAREA').length).toBeGreaterThan(0)
     expect(hasText(container, 'The Tutor result could not be accepted.')).toBe(false)
+  })
+
+  // STUDY-A1-STRICTMODE-PREVIEW — the other half of the same correction, stated
+  // as its own property: an unmount ON ITS OWN is a statement about the surface,
+  // never about the App's authority. This is what makes React's
+  // setup → cleanup → setup probe safe, and it is asserted here at the real
+  // container rather than only at the seam module.
+  it('leaves the App\'s epoch alone when the surface merely unmounts', async () => {
+    const owner = {}
+    const seam = createHostStudyLifecycleSeam(owner, baseBinding())
+    const root = await render(session(seam))
+    const token = seam.boundary.token()
+    expect(token.isCurrent()).toBe(true)
+    const mounted = token.epoch
+
+    await act(async () => { root.render(null) })
+    await act(async () => { await Promise.resolve() })
+
+    expect(seam.boundary.binding).not.toBeNull()
+    expect(seam.boundary.lastReason).not.toBe('navigation-away')
+    expect(token.isCurrent()).toBe(true)
+    expect(seam.boundary.token().epoch).toBe(mounted)
   })
 
   it('still re-epochs and re-runs the surface when the learner genuinely changes', async () => {

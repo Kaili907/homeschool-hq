@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  joinHostStudyLifecycle,
+  attachHostStudySurface,
   type HostStudyLifecycleSeam,
 } from '../../study/composition/hostStudyLifecycle'
 import type { StudyPortBundle } from '../../study/ports'
@@ -28,24 +28,39 @@ export function StudySessionRoute({ context, ports, studyLifecycle, blockRef, le
   const [error, setError] = useState('')
   const headingRef = useRef<HTMLHeadingElement>(null)
   const lifecycle = studyLifecycle.boundary
+  /**
+   * STUDY-A1-STRICTMODE-PREVIEW — the real exit, and the ONLY place this surface
+   * retires the App's epoch. A learner leaving Study is an authority decision and
+   * belongs to a user-initiated handler, not to an effect cleanup that React also
+   * runs as a development probe. The container's `onBack` is this same function,
+   * so "Save and exit" from inside the session lands here too.
+   */
   const leaveStudy = () => {
     lifecycle.cancel('navigation-away')
     onBack()
   }
 
   useEffect(() => {
-    // Rejoin rather than re-create: a previous unmount cancelled this epoch, and
-    // only the host's binding may start the next one.
-    const token = joinHostStudyLifecycle(studyLifecycle)
+    // Attach to the epoch the App owns. This never begins one and — unlike the
+    // cleanup below used to — never cancels one, so React's StrictMode
+    // setup → cleanup → setup probe leaves the epoch exactly as it found it.
+    const surface = attachHostStudySurface(studyLifecycle)
     if (learnerRef !== context.learnerRef) {
       setError('The selected learner changed. This Study Session was not opened.')
+      // Still the epoch, and deliberately: a learner mismatch is a real
+      // authorization failure, not a lifecycle probe, and it must fail closed
+      // however many times React replays it.
       lifecycle.cancel('learner-switch')
       return
     }
-    runCurrentStudyWork(token, () => ports.calendar.list({ householdRef: context.householdRef, learnerRef }))
+    runCurrentStudyWork(
+      surface.token,
+      () => ports.calendar.list({ householdRef: context.householdRef, learnerRef }),
+      { signals: [surface.signal] },
+    )
       .then((entries) => entries.find((candidate) => candidate.blockRef === blockRef))
       .then((candidate) => {
-        token.assertCurrent()
+        if (!surface.isAttached()) return
         if (!candidate || candidate.learnerRef !== context.learnerRef) {
           setError('The learner-scoped Study block was not found.')
         } else {
@@ -53,9 +68,9 @@ export function StudySessionRoute({ context, ports, studyLifecycle, blockRef, le
         }
       })
       .catch(() => {
-        if (token.isCurrent()) setError('The learner-scoped Study block could not be loaded safely.')
+        if (surface.isAttached()) setError('The learner-scoped Study block could not be loaded safely.')
       })
-    return () => { lifecycle.cancel('navigation-away') }
+    return () => { surface.detach() }
   }, [blockRef, context.householdRef, context.learnerRef, learnerRef, lifecycle, ports, studyLifecycle])
 
   useEffect(() => { headingRef.current?.focus() }, [error])
