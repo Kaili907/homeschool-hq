@@ -17,7 +17,7 @@ const DELIVERY_PAYLOAD = Object.freeze({
   expectedRevision: 7,
   attemptId: 'attempt:synthetic',
   deliveryIdempotencyKey: IDEMPOTENCY_KEY,
-  recipientRef: 'recipient:synthetic',
+  recipientRef: `recipient:${'c'.repeat(64)}`,
   routeRef: ROUTE_REF,
   proposalId: 'proposal:synthetic',
   householdId: 'household:synthetic',
@@ -36,7 +36,7 @@ const BINDING = Object.freeze({
   proposalId: 'proposal:synthetic',
   householdId: 'household:synthetic',
   studentId: 'student:synthetic',
-  recipientRef: 'recipient:synthetic',
+  recipientRef: `recipient:${'c'.repeat(64)}`,
   deliveryIdempotencyKey: IDEMPOTENCY_KEY,
   providerConfigVersion: 'in-app-config-v1',
 })
@@ -132,9 +132,14 @@ describe('in-app notification receipt validator', () => {
     ['route', 'routeRef'],
     ['delivery idempotency key', 'deliveryIdempotencyKey'],
   ])('rejects a receipt bound to the wrong %s', (_label, key) => {
-    const value = key === 'deliveryIdempotencyKey'
-      ? `delivery:${'c'.repeat(64)}`
-      : key === 'routeRef' ? `route:${'d'.repeat(64)}` : `${RECEIPT[key]}-other`
+    // Durable identifiers must be substituted with another canonical value of
+    // the same shape, so the binding check is what rejects them, not the shape.
+    const substitutions = {
+      deliveryIdempotencyKey: `delivery:${'c'.repeat(64)}`,
+      routeRef: `route:${'d'.repeat(64)}`,
+      recipientRef: `recipient:${'e'.repeat(64)}`,
+    }
+    const value = substitutions[key] ?? `${RECEIPT[key]}-other`
     expect(() => validateInAppNotificationReceipt({ ...RECEIPT, [key]: value }, BINDING))
       .toThrow(`receipt_binding_mismatch:${key}`)
   })
