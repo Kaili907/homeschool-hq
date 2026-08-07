@@ -22,18 +22,49 @@ begin
   if current_user <> 'postgres' then
     raise exception 'Study Engine migrations must run as postgres';
   end if;
+  -- Predecessor state is asserted by containment and by explicit marker
+  -- properties, never by exact equality of migration_names. Exact equality
+  -- pinned this migration to one historical chain snapshot and made natural
+  -- version order fail as soon as an earlier-versioned sibling landed:
+  -- 20260806120000 (in-app receipt timestamp normalization) sorts before this
+  -- migration, so it is applied first and legitimately appends its own name.
+  -- The requirement is that every predecessor this migration depends on is
+  -- present, not that nothing else is.
   select * into marker from academy_private.study_persistence_metadata where singleton;
-  if marker.adult_review_operations_version <> 2
-     or marker.final_production_version <> 1
-     or marker.migration_names <> array[
+  -- Without this, an absent singleton row leaves every comparison below NULL,
+  -- the branch is not taken, and an unknown state would apply fail-open.
+  if not found then
+    raise exception 'STUDY_C2 predecessor marker mismatch';
+  end if;
+  if marker.adult_review_operations_version is distinct from 2
+     or marker.final_production_version is distinct from 1
+     or marker.migration_names is null
+     or not (marker.migration_names @> array[
        '20260801010000_academy_study_engine_storage',
        '20260801011000_academy_study_engine_authorization',
        '20260801012000_academy_study_engine_production_reconciliation',
        '20260801160000_academy_study_verified_identity',
        '20260801170000_academy_study_adult_review_operations',
-       '20260801190000_academy_study_final_production_reconciliation'
-     ]::text[] then
+       '20260801190000_academy_study_final_production_reconciliation',
+       '20260806120000_academy_study_in_app_receipt_timestamp'
+     ]::text[]) then
     raise exception 'STUDY_C2 predecessor marker mismatch';
+  end if;
+
+  -- The receipt boundary must already be normalized. This migration closes the
+  -- operations contract the worker drives; a worker that can claim and deliver
+  -- while verification still returns a raw timestamptz would fail the server
+  -- receipt contract on every delivery. Assert the property, not just the name.
+  if coalesce(marker.security_manifest, '{}'::jsonb)
+       @> jsonb_build_object('in_app_receipt_delivered_at_normalized', true)
+     is not true then
+    raise exception 'STUDY_C2 predecessor marker mismatch';
+  end if;
+
+  if marker.migration_names @> array[
+       '20260806140000_academy_study_c2_operations_contract'
+     ]::text[] then
+    raise exception 'STUDY_C2 operations contract already applied';
   end if;
 
   -- The exact v2 contract this migration replaces must be present, by

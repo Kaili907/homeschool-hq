@@ -1063,8 +1063,13 @@ describe.sequential('Study adult-review operations migration', () => {
 // chain including 20260801190000 and the C2 forward migration.
 // ---------------------------------------------------------------------------
 
+const G1_MIGRATION = './migrations/20260806120000_academy_study_in_app_receipt_timestamp.sql'
 const C2_MIGRATION = './migrations/20260806140000_academy_study_c2_operations_contract.sql'
 
+// Natural migration version order. 20260806120000 (G1 receipt timestamp
+// normalization) sorts before 20260806140000 (C2 operations contract), so a
+// hosted apply runs G1 first. The chain below is that order, not a convenience
+// ordering: C2's predecessor precondition requires G1 to be present.
 const c2Files = [
   './schema.sql',
   './migrations/20260724230000_academy_student_identity_foundation.sql',
@@ -1074,6 +1079,7 @@ const c2Files = [
   './migrations/20260801160000_academy_study_verified_identity.sql',
   './migrations/20260801170000_academy_study_adult_review_operations.sql',
   './migrations/20260801190000_academy_study_final_production_reconciliation.sql',
+  G1_MIGRATION,
   C2_MIGRATION,
   './tests/study_engine_fixtures.sql',
 ] as const
@@ -1798,6 +1804,270 @@ describe.sequential('STUDY-C2 v2 operations contract', () => {
     expect(expiredProof.active).toBe(false)
   })
 
+  // -------------------------------------------------------------------------
+  // M2 evidence semantics. READ THIS BEFORE BUILDING AN ADAPTER ON THIS RPC.
+  //
+  // academy_study_prove_delivery_lease_v2 reports active:true for a *delivered*
+  // job whose retained lease has not yet expired. That is deliberate and it is
+  // the M5 terminal-lease-retention design: the retained lease is evidence of
+  // which worker and which lease produced the receipt, so the proof keeps
+  // answering questions about it until the lease naturally expires.
+  //
+  // active:true is NOT a grant of operational capability. It answers "is this
+  // the lease that produced this receipt, and is it still within its window",
+  // not "may I do work against this job". Every state-changing path in the
+  // contract independently requires job.state = 'leased', which a delivered job
+  // never satisfies again. A future adapter must therefore branch on the job's
+  // own terminal state, never on active:true, before attempting work.
+  //
+  // The field name is worker-facing contract surface and is deliberately left
+  // unchanged. This test is the standing proof that the capability boundary is
+  // enforced in SQL rather than by adapter convention.
+  // -------------------------------------------------------------------------
+  it('treats an active delivered-lease proof as evidence only, never as capability', async () => {
+    const [job] = await c2Provision('lease-evidence-not-capability')
+    const attemptId = 'attempt:c2-lease-evidence'
+    const revision = await c2Attempt(job, attemptId)
+    await c2Event(job, attemptId, 'created')
+    await c2Event(job, attemptId, 'submitted')
+    const delivered = await c2Deliver(job, attemptId, revision)
+    expect(delivered).toMatchObject({ state: 'delivered', jobId: job.jobId })
+
+    const terminalRevision = (await c2.query<{ revision: number }>(`
+      select revision from academy_private.study_adult_review_delivery_jobs
+      where id = '${job.jobId}'
+    `)).rows[0].revision
+
+    // Evidence half: the proof is active because the retained lease has not
+    // expired, and it still names the lease that produced the receipt.
+    const proof = await c2AsWorker(() => c2Rpc<Record<string, unknown>>(
+      `select public.academy_study_prove_delivery_lease_v2(
+        '${C2_WORKER}', '${job.jobId}', '${job.leaseToken}'
+      ) as result`,
+    ))
+    expect(proof).toMatchObject({
+      active: true, jobId: job.jobId, leaseToken: job.leaseToken,
+    })
+    expect((await c2.query<{ state: string }>(`
+      select state from academy_private.study_adult_review_delivery_jobs
+      where id = '${job.jobId}'
+    `)).rows[0].state).toBe('delivered')
+
+    const countRows = async () => {
+      const result = await c2.query<{
+        events: number; attempts: number; receipts: number; notifications: number
+      }>(`
+        select
+          (select count(*) from academy_private.study_adult_review_attempt_events
+            where job_id = '${job.jobId}')::integer as events,
+          (select count(*) from academy_private.study_adult_review_delivery_attempts
+            where job_id = '${job.jobId}')::integer as attempts,
+          (select count(*) from academy_private.study_adult_review_delivery_receipts
+            where job_id = '${job.jobId}')::integer as receipts,
+          (select count(*) from academy_private.study_parent_notifications
+            where job_id = '${job.jobId}')::integer as notifications
+      `)
+      return result.rows[0]
+    }
+    const before = await countRows()
+    // Guard the invariance check below against comparing zeroes: the delivered
+    // job really does carry durable rows that a successful write would change.
+    expect(before.events).toBeGreaterThan(0)
+    expect(before.attempts).toBeGreaterThan(0)
+    expect(before.receipts).toBeGreaterThan(0)
+    expect(before.notifications).toBeGreaterThan(0)
+
+    // Capability half: every operation is refused while the proof is active.
+    // 1. claim
+    const reclaim = await c2AsWorker(() => c2Rpc<{ jobs: ClaimedJob[] }>(
+      `select public.academy_study_claim_delivery_jobs_v2('${C2_WORKER}', 50, 300) as result`,
+    ))
+    expect(reclaim.jobs.map((candidate) => candidate.jobId)).not.toContain(job.jobId)
+
+    // 2. renew
+    await expect(c2AsWorker(() => c2Rpc(
+      `select public.academy_study_renew_delivery_lease_v2(
+        '${C2_WORKER}', '${job.jobId}', '${job.leaseToken}', ${terminalRevision}, 30
+      ) as result`,
+    ))).rejects.toThrow(/STUDY_DELIVERY_LEASE_CONFLICT/)
+
+    // 3. release
+    await expect(c2AsWorker(() => c2Rpc(
+      `select public.academy_study_release_delivery_lease_v2(
+        '${C2_WORKER}', '${job.jobId}', '${job.leaseToken}', ${terminalRevision}
+      ) as result`,
+    ))).rejects.toThrow(/STUDY_DELIVERY_RELEASE_UNSAFE|STUDY_DELIVERY_LEASE_CONFLICT/)
+
+    // 4. create a new attempt
+    await expect(c2AsWorker(() => c2Rpc(
+      `select public.academy_study_create_delivery_attempt_v2('${C2_WORKER}', $1::jsonb) as result`,
+      [JSON.stringify({
+        jobId: job.jobId,
+        leaseToken: job.leaseToken,
+        expectedRevision: terminalRevision,
+        attemptId: 'attempt:c2-lease-evidence-second',
+        providerName: 'academy-in-app',
+        providerConfigVersion: 'in-app-config-v1',
+      })],
+    ))).rejects.toThrow(/STUDY_DELIVERY_ATTEMPT_BINDING_MISMATCH/)
+
+    // 5. record a new attempt event against the delivered attempt
+    await expect(c2AsWorker(() => c2Rpc(
+      `select public.academy_study_record_attempt_event_v2('${C2_WORKER}', $1::jsonb) as result`,
+      [JSON.stringify({
+        attemptId,
+        jobId: job.jobId,
+        state: 'submitted',
+        structuredResult: 'c2-post-terminal-event',
+        timeoutState: 'not-timed-out',
+        retryDecision: 'not-applicable',
+        errorCode: null,
+      })],
+    ))).rejects.toThrow(/STUDY_ATTEMPT_EVENT_BINDING_MISMATCH/)
+
+    // 6. cancel
+    await expect(c2AsWorker(() => c2Rpc(
+      `select public.academy_study_cancel_delivery_job_v2(
+        '${C2_WORKER}', '${job.jobId}', '${job.leaseToken}', ${terminalRevision}, 'invalid_delivery'
+      ) as result`,
+    ))).rejects.toThrow(/STUDY_DELIVERY_CANCEL_CONFLICT/)
+
+    // 7. redeliver non-idempotently. A replay carrying the same idempotency key
+    // but different durable identity is a collision, not a second delivery.
+    await expect(
+      c2Deliver(job, 'attempt:c2-lease-evidence-forged', terminalRevision),
+    ).rejects.toThrow(/STUDY_IN_APP_IDEMPOTENCY_COLLISION/)
+    // A genuinely identical replay is the only accepted repeat: it returns the
+    // settled outcome and must not produce a second receipt or notification.
+    const replay = await c2Deliver(job, attemptId, terminalRevision)
+    expect(replay).toMatchObject({ state: 'already-delivered', jobId: job.jobId })
+
+    // Nothing above wrote anything: the active proof bought no capability.
+    expect(await countRows()).toEqual(before)
+
+    // The evidence window closes on its own; capability never reopens.
+    await c2.exec(`
+      update academy_private.study_adult_review_delivery_jobs
+      set lease_expires_at = clock_timestamp() - interval '1 minute'
+      where id = '${job.jobId}'
+    `)
+    const afterExpiry = await c2AsWorker(() => c2Rpc<{ active: boolean }>(
+      `select public.academy_study_prove_delivery_lease_v2(
+        '${C2_WORKER}', '${job.jobId}', '${job.leaseToken}'
+      ) as result`,
+    ))
+    expect(afterExpiry.active).toBe(false)
+    expect((await c2.query<{ state: string }>(`
+      select state from academy_private.study_adult_review_delivery_jobs
+      where id = '${job.jobId}'
+    `)).rows[0].state).toBe('delivered')
+  })
+
+  // -------------------------------------------------------------------------
+  // End-to-end receipt boundary on the integrated chain.
+  //
+  // G1 (20260806120000) is now genuinely below C2 (20260806140000) in the same
+  // chain, so this is the first place the whole path can be proven at once: a
+  // real C2-driven delivery, then server-side verification, then validation by
+  // the actual server receipt contract module the runtime uses. The G1 suite
+  // proves the normalization itself; this proves it survives integration and
+  // that no raw timestamptz reaches the receipt boundary.
+  // -------------------------------------------------------------------------
+  it('returns a normalized UTC-millisecond deliveredAt that satisfies the server receipt contract', async () => {
+    const [job] = await c2Provision('receipt-timestamp-e2e')
+    const attemptId = 'attempt:c2-receipt-timestamp-e2e'
+    const revision = await c2Attempt(job, attemptId)
+    await c2Event(job, attemptId, 'created')
+    await c2Event(job, attemptId, 'submitted')
+    const delivered = await c2Deliver(job, attemptId, revision)
+    expect(delivered).toMatchObject({ state: 'delivered', jobId: job.jobId })
+    const providerReceiptRef = String(delivered.providerReceiptRef)
+
+    const binding = {
+      providerReceiptRef,
+      providerName: 'academy-in-app',
+      route: 'in-app',
+      routeRef: job.routeRef,
+      jobId: job.jobId,
+      attemptId,
+      proposalId: job.proposalId,
+      householdId: job.householdId,
+      studentId: job.studentId,
+      recipientRef: job.recipientRef,
+      deliveryIdempotencyKey: job.idempotencyKey,
+      providerConfigVersion: 'in-app-config-v1',
+    }
+    const receipt = await c2AsWorker(() => c2Rpc<Record<string, unknown>>(
+      `select public.academy_study_verify_in_app_notification_v2($1::text, $2::jsonb) as result`,
+      [C2_WORKER, JSON.stringify(binding)],
+    ))
+
+    // The exact server receipt contract shape for deliveredAt.
+    expect(receipt.deliveredAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/)
+    const deliveredAt = String(receipt.deliveredAt)
+    expect(deliveredAt.endsWith('Z')).toBe(true)
+    expect(deliveredAt).toHaveLength(24)
+    expect(Number.isFinite(Date.parse(deliveredAt))).toBe(true)
+    // No raw timestamptz residue: no microseconds, no numeric offset, no space.
+    expect(deliveredAt).not.toMatch(/[+-]\d{2}:\d{2}$/)
+    expect(deliveredAt).not.toMatch(/\.\d{4,}/)
+    expect(deliveredAt).not.toContain(' ')
+    // Round-trips to the identical instant, so normalization lost no meaning.
+    expect(new Date(deliveredAt).toISOString()).toBe(deliveredAt)
+
+    // The stored durable value is the same instant the receipt reports.
+    const stored = await c2.query<{ delivered: string }>(`
+      select delivered_at::text as delivered
+      from academy_private.study_parent_notifications where job_id = '${job.jobId}'
+    `)
+    expect(Date.parse(stored.rows[0].delivered)).toBe(Date.parse(deliveredAt))
+
+    // Validate against the real server contract module.
+    //
+    // One field still mismatches, and it is NOT the timestamp: SQL emits the
+    // canonical durable key `delivery:<sha256>` while this branch's
+    // receipt-contract.js still carries the legacy `study-safety-delivery:`
+    // prefix. Widening the JS contract is a separate card's scope and is
+    // deliberately not done here, so the assertion below pins that gap
+    // precisely rather than papering over it.
+    const contract = await import(
+      '../netlify/functions/_shared/study-delivery/receipt-contract.js'
+    )
+    const { validateVerifiedAdultReviewReceipt } = contract
+    const bindingForContract = {
+      providerName: 'academy-in-app',
+      route: 'in-app',
+      routeRef: job.routeRef,
+      jobId: job.jobId,
+      attemptId,
+      proposalId: job.proposalId,
+      householdId: job.householdId,
+      studentId: job.studentId,
+      recipientRef: job.recipientRef,
+      deliveryIdempotencyKey: job.idempotencyKey,
+      providerConfigVersion: 'in-app-config-v1',
+    }
+    expect(job.idempotencyKey).toMatch(/^delivery:[a-f0-9]{64}$/)
+    expect(() => validateVerifiedAdultReviewReceipt(
+      receipt, bindingForContract, { environment: 'production' },
+    )).toThrow('receipt_schema_mismatch')
+
+    // Translating only that one legacy prefix — changing no other field, and
+    // above all not deliveredAt — makes the whole receipt validate. That is the
+    // proof that the receipt boundary is otherwise contract-clean and that no
+    // raw timestamptz survives it.
+    const legacyKey = job.idempotencyKey.replace(/^delivery:/, 'study-safety-delivery:')
+    const validated = validateVerifiedAdultReviewReceipt(
+      { ...receipt, deliveryIdempotencyKey: legacyKey },
+      { ...bindingForContract, deliveryIdempotencyKey: legacyKey },
+      { environment: 'production' },
+    )
+    expect(validated.deliveredAt).toBe(deliveredAt)
+    expect(validated.verified).toBe(true)
+    expect(validated.receiptSource).toBe('server-verified')
+    expect(validated.testReceipt).toBe(false)
+  })
+
   it('refuses delivery when provider-accepted was pre-recorded by the adapter', async () => {
     const [job] = await c2Provision('pre-accepted')
     const attemptId = 'attempt:c2-pre-accepted'
@@ -1932,5 +2202,196 @@ describe.sequential('STUDY-C2 v2 operations contract', () => {
       ) as service
     `)
     expect(internalAcl.rows[0].service).toBe(false)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// STUDY-C2 / G1 migration order.
+//
+// C2 (20260806140000) originally asserted its predecessor state with an exact
+// equality on migration_names. That pinned it to one historical chain snapshot,
+// so the moment an earlier-versioned sibling landed, natural version order
+// broke: G1 (20260806120000) sorts first, applies first, appends its own name,
+// and C2 then aborted with 'STUDY_C2 predecessor marker mismatch'.
+//
+// The correction asserts containment plus explicit marker properties. These
+// tests are the permanent regression for both directions: natural sorted order
+// must apply, and C2 without G1 must still fail closed.
+// ---------------------------------------------------------------------------
+
+const ORDER_BASE_CHAIN = [
+  './schema.sql',
+  './migrations/20260724230000_academy_student_identity_foundation.sql',
+  './migrations/20260801010000_academy_study_engine_storage.sql',
+  './migrations/20260801011000_academy_study_engine_authorization.sql',
+  './migrations/20260801012000_academy_study_engine_production_reconciliation.sql',
+  './migrations/20260801160000_academy_study_verified_identity.sql',
+  './migrations/20260801170000_academy_study_adult_review_operations.sql',
+  './migrations/20260801190000_academy_study_final_production_reconciliation.sql',
+] as const
+
+/**
+ * Applies a chain to a throwaway database and reports the first failure.
+ * Returns null when the whole chain applies.
+ */
+async function applyChain(paths: readonly string[]): Promise<
+  { path: string; message: string } | null
+> {
+  const database = await PGlite.create()
+  try {
+    await database.exec(bootstrap)
+    for (const path of paths) {
+      const source = await readFile(new URL(path, import.meta.url), 'utf8')
+      try {
+        await database.exec(source)
+      } catch (error) {
+        return { path, message: (error as Error).message }
+      }
+    }
+    return null
+  } finally {
+    await database.close()
+  }
+}
+
+describe.sequential('STUDY-C2 and G1 migration order', () => {
+  it('applies in natural sorted version order: G1 (120000) then C2 (140000)', async () => {
+    const sorted = [...ORDER_BASE_CHAIN, G1_MIGRATION, C2_MIGRATION]
+    // The chain under test really is ascending version order, so this proves
+    // the order a hosted apply would choose, not a hand-picked one.
+    const migrations = sorted.filter((path) => path.includes('/migrations/'))
+    expect([...migrations].sort()).toEqual(migrations)
+    expect(migrations.at(-2)).toBe(G1_MIGRATION)
+    expect(migrations.at(-1)).toBe(C2_MIGRATION)
+    expect(await applyChain(sorted)).toBeNull()
+  }, 180_000)
+
+  it('records both markers when the natural order is applied', async () => {
+    const database = await PGlite.create()
+    try {
+      await database.exec(bootstrap)
+      for (const path of [...ORDER_BASE_CHAIN, G1_MIGRATION, C2_MIGRATION]) {
+        await database.exec(await readFile(new URL(path, import.meta.url), 'utf8'))
+      }
+      const marker = await database.query<{
+        names: string[]
+        c2: number
+        manifest: Record<string, unknown>
+      }>(`
+        select migration_names as names,
+               c2_operations_contract_version as c2,
+               security_manifest as manifest
+        from academy_private.study_persistence_metadata where singleton
+      `)
+      const row = marker.rows[0]
+      expect(row.names).toContain('20260806120000_academy_study_in_app_receipt_timestamp')
+      expect(row.names).toContain('20260806140000_academy_study_c2_operations_contract')
+      // G1 first, C2 second — the order the names were appended.
+      expect(row.names.indexOf('20260806120000_academy_study_in_app_receipt_timestamp'))
+        .toBeLessThan(row.names.indexOf('20260806140000_academy_study_c2_operations_contract'))
+      expect(row.c2).toBe(1)
+      expect(row.manifest.in_app_receipt_delivered_at_normalized).toBe(true)
+      expect(row.manifest.c2_operations_contract_version).toBe(1)
+    } finally {
+      await database.close()
+    }
+  }, 180_000)
+
+  it('fails closed when C2 is applied without the G1 receipt timestamp migration', async () => {
+    const failure = await applyChain([...ORDER_BASE_CHAIN, C2_MIGRATION])
+    expect(failure).not.toBeNull()
+    expect(failure!.path).toBe(C2_MIGRATION)
+    expect(failure!.message).toContain('STUDY_C2 predecessor marker mismatch')
+  }, 180_000)
+
+  it('fails closed on every incomplete or unknown predecessor marker state', async () => {
+    // Each case applies the full base chain and G1, corrupts exactly one
+    // property C2 depends on, then applies C2. Every one must be refused. This
+    // is the mutation proof that the relaxed containment check did not become
+    // permissive: containment tolerates *extra* names, never missing ones.
+    const mutations = [
+      {
+        label: 'a required predecessor name is missing',
+        sql: `update academy_private.study_persistence_metadata
+              set migration_names = array_remove(
+                migration_names, '20260801170000_academy_study_adult_review_operations')
+              where singleton`,
+      },
+      {
+        label: 'the G1 receipt timestamp migration name is missing',
+        sql: `update academy_private.study_persistence_metadata
+              set migration_names = array_remove(
+                migration_names, '20260806120000_academy_study_in_app_receipt_timestamp')
+              where singleton`,
+      },
+      {
+        label: 'the normalized-receipt property is absent',
+        sql: `update academy_private.study_persistence_metadata
+              set security_manifest = security_manifest
+                - 'in_app_receipt_delivered_at_normalized'
+              where singleton`,
+      },
+      {
+        label: 'the normalized-receipt property is false',
+        sql: `update academy_private.study_persistence_metadata
+              set security_manifest = security_manifest || jsonb_build_object(
+                'in_app_receipt_delivered_at_normalized', false)
+              where singleton`,
+      },
+      {
+        // The column is constrained to (0, 2), so 0 is the legal wrong value.
+        label: 'adult_review_operations_version is not 2',
+        sql: `update academy_private.study_persistence_metadata
+              set adult_review_operations_version = 0 where singleton`,
+      },
+      {
+        label: 'final_production_version is not 1',
+        sql: `update academy_private.study_persistence_metadata
+              set final_production_version = 0 where singleton`,
+      },
+      {
+        label: 'the singleton marker row is absent entirely',
+        sql: `delete from academy_private.study_persistence_metadata where singleton`,
+      },
+    ]
+
+    for (const mutation of mutations) {
+      const database = await PGlite.create()
+      try {
+        await database.exec(bootstrap)
+        for (const path of [...ORDER_BASE_CHAIN, G1_MIGRATION]) {
+          await database.exec(await readFile(new URL(path, import.meta.url), 'utf8'))
+        }
+        await database.exec(mutation.sql)
+        const c2Source = await readFile(new URL(C2_MIGRATION, import.meta.url), 'utf8')
+        await expect(
+          database.exec(c2Source),
+          mutation.label,
+        ).rejects.toThrow('STUDY_C2 predecessor marker mismatch')
+      } finally {
+        await database.close()
+      }
+    }
+  }, 300_000)
+
+  it('refuses a second application of C2 onto an already-closed contract', async () => {
+    const failure = await applyChain([
+      ...ORDER_BASE_CHAIN, G1_MIGRATION, C2_MIGRATION, C2_MIGRATION,
+    ])
+    expect(failure).not.toBeNull()
+    expect(failure!.path).toBe(C2_MIGRATION)
+    expect(failure!.message).toContain('STUDY_C2 operations contract already applied')
+  }, 180_000)
+
+  it('asserts predecessors by containment, never by exact array equality', async () => {
+    const source = await readFile(new URL(C2_MIGRATION, import.meta.url), 'utf8')
+    // The defect was `marker.migration_names <> array[...]`. Containment (@>)
+    // is what lets a legitimately-ordered sibling land ahead of this migration.
+    expect(source).not.toMatch(/migration_names\s*<>\s*array\[/)
+    expect(source).toMatch(/migration_names\s*@>\s*array\[/)
+    // G1 is a named, required predecessor.
+    expect(source).toContain('20260806120000_academy_study_in_app_receipt_timestamp')
+    // The normalized-receipt property is asserted, not merely the name.
+    expect(source).toContain('in_app_receipt_delivered_at_normalized')
   })
 })
