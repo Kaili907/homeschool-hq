@@ -124,6 +124,13 @@ export class StudyLifecycleBoundary {
   #binding: StudyLifecycleBinding | null = null
   #fingerprint: string | null = null
   #reason: StudyCancellationReason | null = null
+  /**
+   * The epoch's LIVE deadline. It starts as the binding's own `expiresAt` and is
+   * the only part of an epoch `renewEpochLease` may move, so after a renewal the
+   * binding's `expiresAt` is the deadline the epoch was BORN with and this is the
+   * one it will actually be cancelled at.
+   */
+  #expiresAt: string | null = null
   #expirationTimer: ReturnType<typeof setTimeout> | null = null
   readonly #operations = new Set<string>()
 
@@ -147,7 +154,8 @@ export class StudyLifecycleBoundary {
     this.#binding = next
     this.#fingerprint = nextFingerprint
     this.#operations.clear()
-    this.#scheduleExpiration(next)
+    this.#expiresAt = next.expiresAt ?? null
+    this.#scheduleExpiration()
 
     if (!next.featureEnabled) this.cancel('feature-disabled')
     else if (next.expiresAt && Date.parse(next.expiresAt) <= Date.now()) this.cancel('grant-expired')
@@ -201,11 +209,50 @@ export class StudyLifecycleBoundary {
     this.#abort(reason)
     this.#binding = null
     this.#fingerprint = null
+    this.#expiresAt = null
     this.#operations.clear()
   }
 
   cancelIfCurrent(token: StudyLifecycleToken, reason: StudyCancellationReason): void {
     if (token.isCurrent()) this.cancel(reason)
+  }
+
+  /**
+   * STUDY-A1-LEASE-EXTEND — moves the CURRENT epoch's deadline to the one the
+   * authority has just restated, and moves nothing else.
+   *
+   * A readiness refresh for the same host session, the same learner and the same
+   * installed verified session is not a new authority; it is the same authority
+   * saying how long it still has. Running `beginEpoch` for that rotated the
+   * epoch: a new binding object, a new AbortController, every token an in-flight
+   * turn was holding made stale, and — because the mounted Study surfaces are
+   * held by that binding object — an unmount, a `navigation-away` cancel and a
+   * session prepared again from the top, in the middle of a girl's answer.
+   *
+   * So the epoch number, the binding object, the AbortController and the
+   * duplicate-operation ledger are all kept, and only the deadline and its timer
+   * change. Nothing in this signature could carry learner, household, grant or
+   * authorization identity, so a renewal cannot move an epoch onto a different
+   * authority; that still requires `beginEpoch`, which cancels the old one.
+   *
+   * A later deadline and an earlier one are both honoured: the authority's latest
+   * word is the one the timer must follow, and refusing to shorten would leave
+   * the epoch alive past the point the authority allows.
+   *
+   * Null means "not renewed, and nothing changed" — there is no live epoch to
+   * renew, or the deadline offered is not a usable future instant. A refusal
+   * never grants time the epoch was not given and never takes away time it
+   * already holds, so a caller that ignores the null still cannot outlive the
+   * lease it began with; it must call `beginEpoch` if it needs a session anyway.
+   */
+  renewEpochLease(expiresAt: string): StudyLifecycleToken | null {
+    this.#expireIfNeeded()
+    if (!this.#binding || !this.#controller || this.#controller.signal.aborted) return null
+    const deadline = Date.parse(expiresAt)
+    if (!Number.isFinite(deadline) || deadline <= Date.now()) return null
+    this.#expiresAt = expiresAt
+    this.#scheduleExpiration()
+    return this.token()
   }
 
   get lastReason(): StudyCancellationReason | null {
@@ -229,15 +276,15 @@ export class StudyLifecycleBoundary {
   }
 
   #expireIfNeeded(): void {
-    if (this.#binding?.expiresAt && Date.parse(this.#binding.expiresAt) <= Date.now()) {
+    if (this.#binding && this.#expiresAt && Date.parse(this.#expiresAt) <= Date.now()) {
       this.cancel('grant-expired')
     }
   }
 
-  #scheduleExpiration(binding: StudyLifecycleBinding): void {
+  #scheduleExpiration(): void {
     this.#clearExpiration()
-    if (!binding.expiresAt) return
-    const remaining = Date.parse(binding.expiresAt) - Date.now()
+    if (!this.#expiresAt) return
+    const remaining = Date.parse(this.#expiresAt) - Date.now()
     if (remaining <= 0) return
     this.#expirationTimer = setTimeout(() => this.cancel('grant-expired'), Math.min(remaining, 2_147_483_647))
     const timer = this.#expirationTimer as ReturnType<typeof setTimeout> & { unref?: () => void }

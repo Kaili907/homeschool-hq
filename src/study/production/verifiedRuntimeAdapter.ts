@@ -14,6 +14,7 @@ import {
   StudyLifecycleAbortError,
   StudyLifecycleBoundary,
   type StudyCancellationReason,
+  type StudyLifecycleToken,
 } from '../lifecycle'
 
 export type VerifiedAcademicOperation = Parameters<StudyIdentityClient['executeAcademicOperation']>[0]['operation']
@@ -125,6 +126,8 @@ export function createVerifiedStudyRuntimeAdapter(
   let selectionEpoch = 0
   let grantEpoch = 0
   let pending: AbortController | null = null
+  /** The token of the epoch THIS runtime began, and the only one it may renew. */
+  let epochToken: StudyLifecycleToken | null = null
 
   function snapshot(): VerifiedRuntimeSnapshot {
     const ready = Boolean(
@@ -148,6 +151,7 @@ export function createVerifiedStudyRuntimeAdapter(
     activeSelectorKey = null
     activeExpiresAt = null
     hostLifecycleRef = null
+    epochToken = null
     try {
       await identity.revoke()
     } catch {
@@ -214,19 +218,35 @@ export function createVerifiedStudyRuntimeAdapter(
       ])
       if (Date.parse(expiresAt) <= now()) return rejectLaunch('authorization-loss')
 
-      if (!reusingSession) selectionEpoch += 1
-      grantEpoch += 1
-      hostLifecycleRef ??= createLifecycleRef()
-      lifecycle.beginEpoch({
-        // These are local lifecycle labels, not deserialized server IDs.
-        authenticatedSessionRef: hostLifecycleRef,
-        householdRef: 'server-bound-authority',
-        learnerRef: `selected-learner-epoch:${selectionEpoch}`,
-        launchGrantRef: `opaque-grant-epoch:${grantEpoch}`,
-        featureEnabled: true,
-        authorizationRevision: grantEpoch,
-        expiresAt,
-      })
+      // STUDY-A1-LEASE-EXTEND — a refresh that changed no authority extends the
+      // lease instead of rotating identity.
+      //
+      // `reusingSession` already IS the reuse identity this may rely on: the same
+      // host session key, the same selected learner, and no new grant — because a
+      // grant is issued exactly when it is false, and a host or learner change has
+      // cancelled and revoked above before reaching here. The token adds the last
+      // condition, that the epoch this runtime began is still the live one, so a
+      // cancelled epoch, an expired one, and an epoch some other authority has
+      // since bound are all replaced rather than extended. The refreshed
+      // expiration is deliberately no part of that identity.
+      const renewed = reusingSession && epochToken?.isCurrent()
+        ? lifecycle.renewEpochLease(expiresAt)
+        : null
+      if (!renewed) {
+        if (!reusingSession) selectionEpoch += 1
+        grantEpoch += 1
+        hostLifecycleRef ??= createLifecycleRef()
+        epochToken = lifecycle.beginEpoch({
+          // These are local lifecycle labels, not deserialized server IDs.
+          authenticatedSessionRef: hostLifecycleRef,
+          householdRef: 'server-bound-authority',
+          learnerRef: `selected-learner-epoch:${selectionEpoch}`,
+          launchGrantRef: `opaque-grant-epoch:${grantEpoch}`,
+          featureEnabled: true,
+          authorizationRevision: grantEpoch,
+          expiresAt,
+        })
+      }
       hostSessionKey = input.hostSessionKey
       activeSelectorKey = nextSelectorKey
       activeExpiresAt = expiresAt
