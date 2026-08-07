@@ -86,7 +86,19 @@ const factored=(g:number,m:number)=>`${g}(x ${m<0?'-':'+'} ${Math.abs(m)})`
  * the three it requires and can never fail closed. Any further entry is extra
  * variety and may legitimately collapse into an earlier one.
  */
-const make=(kind:Grade7MathUnit3ItemType,difficulty:Difficulty):Grade7MathUnit3Question=>{const a=pick([-1,1] as const)*ri(2,5+difficulty),b=pick([-1,1] as const)*ri(1,5+difficulty),c=pick([-1,1] as const)*ri(1,5+difficulty),d=pick([-1,1] as const)*ri(1,5+difficulty);let correct:string,prompt:string,distractors:string[]
+const make=(kind:Grade7MathUnit3ItemType,difficulty:Difficulty):Grade7MathUnit3Question=>{const drawnA=pick([-1,1] as const)*ri(2,5+difficulty),b=pick([-1,1] as const)*ri(1,5+difficulty),c=pick([-1,1] as const)*ri(1,5+difficulty),d=pick([-1,1] as const)*ri(1,5+difficulty)
+/**
+ * `context-expression` calls its coefficient a cost per ticket, and a cost is
+ * money paid: a negative one would be a discount or refund, so the sentence it
+ * renders would contradict itself. That one item type therefore takes the
+ * magnitude of the shared coefficient draw, leaving the rate in [2, 5+difficulty]
+ * with the same magnitudes and the same difficulty progression. The other five
+ * item types keep the signed draw, so Unit 3 still teaches negative coefficients
+ * everywhere it did before. Narrowing after the draw rather than drawing
+ * differently keeps the RNG stream — and so every other item type's output —
+ * byte-for-byte unchanged.
+ */
+const a=kind==='context-expression'?Math.abs(drawnA):drawnA;let correct:string,prompt:string,distractors:string[]
 if(kind==='distribute'){correct=linear(a,a*b);prompt=`Expand ${a}(x ${b<0?'-':'+'} ${Math.abs(b)}).`
  // Multiplied only the x term; flipped the sign of the product; did neither. The
  // constants b, -ab and -b differ pairwise, and from ab, because a is neither 1 nor -1.
