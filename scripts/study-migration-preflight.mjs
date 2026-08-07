@@ -39,9 +39,20 @@ export async function validateMigrationManifest(manifest, migrationDirectory) {
   if (entries.some((entry, index) =>
     entry?.dependency !== (index === 0 ? null : filenames[index - 1])
   )) reasons.push('migration-dependency-invalid')
+  // The historical/executable boundary is whatever each entry declares, not a fixed
+  // position: applying an executable migration promotes it to a historical baseline,
+  // and forward migrations are appended, so both counts move over time.
+  const classifications = entries.map((entry) => entry?.classification)
+  if (classifications.some((value) => value !== 'historical-baseline' && value !== 'executable')) {
+    reasons.push('migration-classification-invalid')
+  } else {
+    const boundary = classifications.indexOf('executable')
+    if (boundary < 0) reasons.push('migration-executable-set-empty')
+    else if (classifications.slice(boundary).some((value) => value !== 'executable')) {
+      reasons.push('migration-classification-order-invalid')
+    }
+  }
   if (entries.some((entry, index) =>
-    (index < 3 && entry?.classification !== 'historical-baseline') ||
-    (index >= 3 && entry?.classification !== 'executable') ||
     typeof entry?.applicationStatus !== 'string' ||
     typeof entry?.requiredMarkerTransition !== 'string' ||
     entry.requiredMarkerTransition.length === 0 ||
