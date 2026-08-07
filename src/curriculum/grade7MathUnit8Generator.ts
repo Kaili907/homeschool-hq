@@ -204,7 +204,7 @@ export const GRADE7_MATH_UNIT8_ITEM_DEFINITIONS = {
     workedExample: {
       prompt:
         'A population has 500 students. Student A takes a random sample of 10. Student B takes a random sample of 50. Both use proper random selection. Whose sample is more likely to give an estimate closer to the true population value?',
-      answer: "Student B's sample of 50, because larger random samples tend to produce more consistent, accurate estimates.",
+      answer: "Student B's sample, because a larger random sample usually gives a more reliable estimate.",
       steps: [
         'Both samples are random, so neither is biased by the selection method.',
         'A larger random sample generally has less variability between repeated samples.',
@@ -687,21 +687,59 @@ export function generateSampleEstimateVariationRangeQuestion(
   })
 }
 
+/**
+ * The four choices for the sample-size item, as a balanced 2x2.
+ *
+ * A claim names a student and states which direction sample size moves
+ * reliability: "Student B's sample, because a larger random sample usually gives
+ * a more reliable estimate" asserts both that Student B is the one the question
+ * asks for and that larger is better. Crossing the two binary slots - which
+ * student is named, and which direction is claimed - yields exactly four claims,
+ * of which the drawn sample sizes make exactly one true.
+ *
+ * The cross is what closes the choice-only shortcut this item used to have. The
+ * old option set gave the keyed choice a longer explanatory clause than any
+ * distractor and quoted the winner's (larger) sample size in it while the only
+ * other numeric choice quoted the loser's, so THREE independent choice-text-only
+ * rules - longest choice, most words, and largest number quoted - each scored
+ * 100% without reading the prompt. Under the 2x2 the only tokens that vary
+ * between the four choices are the label (`A`/`B`) and the direction
+ * (`more`/`less`), each one character and four characters respectively, so all
+ * four choices are byte-for-byte the same length, the same word count and the
+ * same punctuation.
+ *
+ * No choice quotes a number. Attaching each student's own sample size to the
+ * choices that name them would have reopened the tell rather than balancing it:
+ * the winner is by construction the larger sample, so its decimal rendering is
+ * never shorter than the loser's, which makes the longest choice always name the
+ * winner. Dropping the sizes leaves them where the item wants them read - in the
+ * prompt.
+ *
+ * This leaves a learner who refuses to read the prompt with a 50/50 guess
+ * between the two students, which is the floor for a question whose answer is
+ * one of two students - not a residual cue. Breaking that tie is exactly the
+ * comparison 7.SP.2 asks for.
+ */
+function sampleSizeClaimChoices(winnerLabel: 'A' | 'B'): {
+  correctAnswer: string
+  distractors: string[]
+} {
+  const claim = (label: 'A' | 'B', direction: 'more' | 'less'): string =>
+    `Student ${label}'s sample, because a larger random sample usually gives a ${direction} reliable estimate.`
+  // Index 0 and index 2 claim that larger is better; 1 and 3 claim the reverse.
+  const cells = [claim('A', 'more'), claim('A', 'less'), claim('B', 'more'), claim('B', 'less')]
+  const keyedCell = winnerLabel === 'A' ? 0 : 2
+  return {
+    correctAnswer: cells[keyedCell],
+    distractors: cells.filter((_, index) => index !== keyedCell),
+  }
+}
+
 export function generateSampleSizeRepresentativenessQuestion(
   difficulty: Difficulty,
 ): Unit8Question<'sample-size-representativeness', SampleSizeParameters> {
   const { aSize, bSize, populationSize, subject } = randomSampleSize(difficulty)
-  const aWins = aSize > bSize
-  const winnerLabel = aWins ? 'A' : 'B'
-  const winnerSize = aWins ? aSize : bSize
-  const loserLabel = aWins ? 'B' : 'A'
-  const loserSize = aWins ? bSize : aSize
-  const correctAnswer = `Student ${winnerLabel}'s sample of ${winnerSize}, because larger random samples tend to produce more consistent, accurate estimates.`
-  const distractors = [
-    `Student ${loserLabel}'s sample of ${loserSize}, because smaller samples are easier to analyze.`,
-    'Both are equally likely to be accurate, because both are random.',
-    'Neither sample is reliable unless it includes the entire population.',
-  ]
+  const { correctAnswer, distractors } = sampleSizeClaimChoices(aSize > bSize ? 'A' : 'B')
   const definition = GRADE7_MATH_UNIT8_ITEM_DEFINITIONS['sample-size-representativeness']
   return makeCurriculumQuestion({
     itemType: 'sample-size-representativeness',

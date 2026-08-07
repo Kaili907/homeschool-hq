@@ -320,7 +320,7 @@ function runAllRows(): RowRun[] {
  * none of the 24 names below appears in it. Together the two tables now pin all
  * 72 Grade 7 Mathematics item types.
  *
- * THREE ROW RE-DERIVATIONS HAVE HAPPENED SINCE THAT CAPTURE, in two waves.
+ * FOUR ROW RE-DERIVATIONS HAVE HAPPENED SINCE THAT CAPTURE, in three waves.
  *
  * WAVE 1 moved `u8:compare-two-samples-center`, after `randomTwoSamplesByMean`
  * stopped handing the greater center to Sample B every single time - a defect
@@ -339,6 +339,19 @@ function runAllRows(): RowRun[] {
  * prompt, the parameters, the keyed answer text and the answer index are all
  * byte-identical to wave 1, and only the two comparison types' choice ARRAYS
  * move. That is why wave 2 moves exactly these two rows.
+ *
+ * WAVE 3 moves `u8:sample-size-representativeness`, for the first time, after
+ * that item's four answer choices were rebuilt as a balanced 2x2 of (student
+ * named) x (direction claimed). The old option set gave the keyed choice a
+ * longer explanatory clause than any distractor and quoted the winner's - by
+ * construction larger - sample size in it, so THREE independent choice-text-only
+ * rules, "take the longest choice", "take the choice with the most words" and
+ * "take the choice holding the largest number", each scored 100% without reading
+ * the prompt. Sample construction was NOT touched in this wave either: at
+ * matched seeds across 720,000 draws spanning all twelve Unit 8 item types, the
+ * prompt, the parameters and the answer index are byte-identical for every type
+ * including this one, and only this type's choice array, keyed answer text and
+ * worked-example answer move. That is why wave 3 moves exactly this one row.
  *
  * Every replacement digest was derived twice, by two separately written
  * CommonJS harnesses over two separately compiled source trees, and neither
@@ -363,7 +376,7 @@ const U78_FREEZE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u8:sampling-method-bias-analysis', '802a99c75b55469ce333a4d4b2c6d1b1c44bc6972e25fe165b47ed444be95ee1'],
   ['u8:estimate-population-from-sample-proportion', '193b4ee129b62319e8da4e25eacdd0b08c65af3804724f4ad0e710bfcf0220d0'],
   ['u8:sample-estimate-variation-range', '85c748342b58c3ffb1aff559a38d3913ed24bbcaf9e3c1bbd7461df80d81cdbb'],
-  ['u8:sample-size-representativeness', '71a922185dc1ca60515de4f78e45d9e9592202c312873124b124d6dfca8652da'],
+  ['u8:sample-size-representativeness', 'f194c73f14dd98478d409a5bfcb698e6e76b2b766f599a21df6c41ee755bd4b5'],
   ['u8:generalization-validity-check', '4007569338798d9451736677702aded4128872050f567de070ad33e07505413e'],
   ['u8:compute-mean-median-range', '6309a6a76adfadc102396ee2026ea5ecefc24bea9e2d019cc988710ef3996458'],
   ['u8:mean-vs-median-with-outlier', '15dea600d3aff7ee1e9b392c74e8d0b7fa01eb1f484ef642900472dc0f19e115'],

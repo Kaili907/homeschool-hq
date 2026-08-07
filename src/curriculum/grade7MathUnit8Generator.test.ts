@@ -162,9 +162,9 @@ function oracleAnswer(question: Grade7MathUnit8Question): string {
       )
       const aSize = Number(m[1])
       const bSize = Number(m[2])
-      const winner = bSize > aSize ? 'B' : 'A'
-      const winnerSize = Math.max(aSize, bSize)
-      return `Student ${winner}'s sample of ${winnerSize}, because larger random samples tend to produce more consistent, accurate estimates.`
+      if (aSize === bSize)
+        throw new Error(`both random samples are the same size, so the item has no answer: "${prompt}"`)
+      return `Student ${aSize > bSize ? 'A' : 'B'}'s sample, because a larger random sample usually gives a more reliable estimate.`
     }
     case 'generalization-validity-check': {
       const m = required(
@@ -887,6 +887,591 @@ describe('grade7MathUnit8Generator', () => {
 
       expect(tooStrong, `${comparison.itemType}: a choice-text-only rule beat the two-way prior`).toEqual([])
       expect(resolved, `${comparison.itemType}: a retired cue still resolves`).toEqual([])
+    })
+  })
+
+  /**
+   * ==========================================================================
+   * SAMPLE-SIZE-REPRESENTATIVENESS MUST NOT ANSWER ITSELF
+   * ==========================================================================
+   *
+   * This item used to be answerable from the four choice strings alone, without
+   * reading the prompt, by three independent cues that each scored 100% across
+   * 60,000 seeded items spanning all three difficulties:
+   *
+   *   LONGEST. The keyed choice carried the explanatory clause "because larger
+   *     random samples tend to produce more consistent, accurate estimates",
+   *     longer than any of the three distractors' clauses. "Take the longest
+   *     choice" scored 100%.
+   *
+   *   MOST WORDS. The same clause also gave it strictly the most words, and
+   *     strictly the most punctuation. Both rules scored 100%.
+   *
+   *   LARGEST NUMBER. Two choices quoted a sample size, and the keyed one quoted
+   *     the WINNER's size, which is by construction the larger of the two.
+   *     "Take the choice holding the largest number" scored 100%.
+   *
+   * Everything in this section is computed from `question.choices` alone -
+   * never the parameters, never the answer index, never the worked example -
+   * except `sampleSizeTruth`, which is the semantic oracle and is the only
+   * thing allowed to decide what the true answer is. It reads the rendered
+   * PROMPT and nothing else.
+   */
+
+  const SAMPLE_SIZE_PROMPT =
+    /^A population has (\d+) (.+?)\. Student A takes a random sample of (\d+)\. Student B takes a random sample of (\d+)\. Both use proper random selection\. Whose sample is more likely to give an estimate closer to the true population value\?$/
+
+  /** The one sentence shape all four choices must share, with its two variable slots. */
+  const STUDENT_CLAIM =
+    /^Student ([AB])'s sample, because a larger random sample usually gives a (more|less) reliable estimate\.$/
+
+  interface SampleSizeTruth {
+    winner: 'A' | 'B'
+    populationSize: number
+    aSize: number
+    bSize: number
+  }
+
+  /**
+   * The semantic oracle for this item type, derived independently of the
+   * generator. It re-parses the rendered prompt and applies 7.SP.2: BOTH samples
+   * are drawn "using proper random selection", so neither is biased by its
+   * method and the only thing separating them is size - the larger random sample
+   * is the one whose estimate is more likely to land near the true population
+   * value. It also refuses the two prompt shapes under which the item would have
+   * no single valid conclusion: equal sample sizes, and a sample bigger than the
+   * population it is drawn from.
+   */
+  function sampleSizeTruth(prompt: string): SampleSizeTruth {
+    const m = required(SAMPLE_SIZE_PROMPT.exec(prompt), prompt)
+    const populationSize = Number(m[1])
+    const aSize = Number(m[3])
+    const bSize = Number(m[4])
+    for (const [name, value] of [
+      ['population', populationSize],
+      ["Student A's sample", aSize],
+      ["Student B's sample", bSize],
+    ] as const)
+      if (!Number.isInteger(value) || value <= 0)
+        throw new Error(`${name} is not a positive whole number in "${prompt}"`)
+    if (aSize === bSize)
+      throw new Error(`both samples are size ${aSize}, so the item has no single answer: "${prompt}"`)
+    if (aSize > populationSize || bSize > populationSize)
+      throw new Error(`a sample is larger than the population it is drawn from: "${prompt}"`)
+    return { winner: aSize > bSize ? 'A' : 'B', populationSize, aSize, bSize }
+  }
+
+  /**
+   * A claim is true only when it names the student the rendered sample sizes
+   * actually favour AND states the direction that actually holds. Naming the
+   * right student for the wrong reason is false, and so is the right reason
+   * attached to the wrong student.
+   */
+  function studentClaimIsTrue(choice: string, truth: SampleSizeTruth): boolean {
+    const m = STUDENT_CLAIM.exec(choice)
+    return m !== null && m[1] === truth.winner && m[2] === 'more'
+  }
+
+  const studentOf = (choice: string): 'A' | 'B' | null => {
+    const m = /^Student ([AB])/.exec(choice)
+    return m ? (m[1] as 'A' | 'B') : null
+  }
+
+  const directionOf = (choice: string): 'more' | 'less' | null => {
+    const m = STUDENT_CLAIM.exec(choice)
+    return m ? (m[2] as 'more' | 'less') : null
+  }
+
+  const SAMPLE_SIZE_RUNS = 1_500
+  const SAMPLE_SIZE = 'sample-size-representativeness' as const
+
+  describe('sample-size-representativeness choice construction', () => {
+    it('never draws two samples of the same size, so exactly one student can win', () => {
+      const violations: string[] = []
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < SAMPLE_SIZE_RUNS; i++) {
+          const { parameters } = generateGrade7MathUnit8Question(SAMPLE_SIZE, difficulty)
+          if (parameters.aSize === parameters.bSize)
+            violations.push(`d${difficulty} #${i}: both samples are size ${parameters.aSize}`)
+          if (parameters.aSize > parameters.populationSize || parameters.bSize > parameters.populationSize)
+            violations.push(
+              `d${difficulty} #${i}: sample ${Math.max(parameters.aSize, parameters.bSize)} exceeds population ${parameters.populationSize}`,
+            )
+        }
+      }
+      expect(report(violations), `${violations.length} degenerate sample-size draws`).toEqual([])
+    })
+
+    it('lets either student hold the larger sample, so the conclusion is not fixed', () => {
+      for (const difficulty of DIFFICULTIES) {
+        let winsA = 0
+        for (let i = 0; i < SAMPLE_SIZE_RUNS; i++) {
+          const question = generateGrade7MathUnit8Question(SAMPLE_SIZE, difficulty)
+          if (sampleSizeTruth(question.prompt).winner === 'A') winsA += 1
+        }
+        const shareA = winsA / SAMPLE_SIZE_RUNS
+        const context = `d${difficulty}: Student A held the larger sample in ${winsA} of ${SAMPLE_SIZE_RUNS} draws`
+        expect(shareA, context).toBeGreaterThanOrEqual(BALANCE_MIN_SHARE)
+        expect(shareA, context).toBeLessThanOrEqual(BALANCE_MAX_SHARE)
+      }
+    })
+
+    it('crosses student against direction, so every one of the four cells is filled exactly once', () => {
+      const violations: string[] = []
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < SAMPLE_SIZE_RUNS; i++) {
+          const { choices } = generateGrade7MathUnit8Question(SAMPLE_SIZE, difficulty)
+          const cells = choices.map((choice) => `${studentOf(choice)}/${directionOf(choice)}`).sort()
+          const expected = ['A/less', 'A/more', 'B/less', 'B/more']
+          if (JSON.stringify(cells) !== JSON.stringify(expected))
+            violations.push(`d${difficulty} #${i}: cells were ${JSON.stringify(cells)}`)
+        }
+      }
+      expect(report(violations), `${violations.length} 2x2 cell violations`).toEqual([])
+    })
+
+    /**
+     * The permanent per-item guard the three retired cues need. Length, word
+     * count and punctuation are required to be IDENTICAL across all four
+     * choices - achievable because the only tokens that vary are `A`/`B` and
+     * `more`/`less`, one and four characters respectively - and no choice may
+     * quote a number at all, which is what removes the largest-number cue by
+     * construction rather than by balancing it.
+     */
+    it('gives no choice a distinguishing length, word count, punctuation or number', () => {
+      const violations: string[] = []
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < SAMPLE_SIZE_RUNS; i++) {
+          const { choices } = generateGrade7MathUnit8Question(SAMPLE_SIZE, difficulty)
+          const shapes: Record<string, string[]> = {
+            length: choices.map((choice) => String(choice.length)),
+            words: choices.map((choice) => String(choice.trim().split(/\s+/).length)),
+            punctuation: choices.map((choice) => (choice.match(/[^\w\s]/g) ?? []).join('')),
+          }
+          for (const feature of ['length', 'words', 'punctuation'] as const)
+            if (new Set(shapes[feature]).size !== 1)
+              violations.push(`d${difficulty} #${i}: ${feature} varies across ${JSON.stringify(choices)}`)
+          const quoting = indicesWhere(choices, (choice) => quantitiesIn(choice).length > 0)
+          if (quoting.length !== 0)
+            violations.push(`d${difficulty} #${i}: ${quoting.length} choices quote a number in ${JSON.stringify(choices)}`)
+        }
+      }
+      expect(report(violations), `${violations.length} choice-shape violations`).toEqual([])
+    })
+
+    it('leaves exactly one choice true against the rendered sample sizes, with no equivalent second', () => {
+      const violations: string[] = []
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < SAMPLE_SIZE_RUNS; i++) {
+          const question = generateGrade7MathUnit8Question(SAMPLE_SIZE, difficulty)
+          const truth = sampleSizeTruth(question.prompt)
+          const trueIndices = indicesWhere(question.choices, (choice) => studentClaimIsTrue(choice, truth))
+          const context = `d${difficulty} #${i}: ${JSON.stringify(question.choices)}`
+          if (trueIndices.length !== 1) violations.push(`${context} had ${trueIndices.length} true choices`)
+          else if (trueIndices[0] !== question.answerIndex)
+            violations.push(`${context} keys index ${question.answerIndex} but the sizes favour ${trueIndices[0]}`)
+          if (question.choices.length !== 4) violations.push(`${context} has ${question.choices.length} choices`)
+          if (new Set(question.choices).size !== question.choices.length)
+            violations.push(`${context} contains a duplicate choice`)
+          for (const choice of question.choices)
+            if (!STUDENT_CLAIM.test(choice)) violations.push(`${context} has an off-template choice "${choice}"`)
+          if (curriculumAnswer(question) !== oracleAnswer(question))
+            violations.push(`${context} keys "${curriculumAnswer(question)}" but the oracle says "${oracleAnswer(question)}"`)
+        }
+      }
+      expect(report(violations), `${violations.length} exactly-one-correct violations`).toEqual([])
+    })
+  })
+
+  /**
+   * ==========================================================================
+   * THE CHOICE-TEXT-ONLY BATTERY, ACROSS ALL TWELVE UNIT 8 ITEM TYPES
+   * ==========================================================================
+   *
+   * The two sections above are per-item structural guards, each scoped to the
+   * item type it was written for. This section is the breadth pass: one rule
+   * table, twenty-six rules, applied blind to every one of the twelve types, so
+   * a shortcut introduced into a type nobody is currently looking at is caught
+   * by the same battery that caught the two that were.
+   *
+   * Every rule is a pure function of the shuffled choice STRINGS. No prompt, no
+   * parameters, no answer index, no worked example. A rule returns a choice
+   * index, or null to abstain.
+   *
+   * ----------------------------------------------------------------------------
+   * WHAT COUNTS AS A LEAK, PER TYPE
+   * ----------------------------------------------------------------------------
+   *
+   * A rate is only meaningful against the prior a learner is legitimately
+   * entitled to, and that prior is NOT 25% for every type:
+   *
+   *   FOUR-WAY types offer four distinct conclusions - four different numbers,
+   *     say - so a learner who reads nothing is choosing one of four and the
+   *     blind prior is 25%.
+   *
+   *   TWO-WAY types reach one of two conclusions: Yes or No, Sample A or Sample
+   *     B, Student A or Student B, the population or the sample. Their four
+   *     choices are a 2x2 (or a 2-and-2 split) over that binary, so a learner
+   *     who narrows to the right PAIR still has to break a genuine tie. 50% is
+   *     the floor for those types, not a cue - and a rule scoring 50% on one of
+   *     them has found the item's shape, not its answer. Scoring such a rule
+   *     against 25% and calling the gap a leak would be wrong.
+   *
+   * The ceilings below are therefore per type: each is that type's highest
+   * observed rate over 30,000 seeded items - 10,000 at each difficulty, drawn by
+   * a separately written CommonJS harness over a separately compiled tree - plus
+   * eight points of slack. At the 3,600 unseeded items per type this test draws,
+   * eight points is roughly ten standard deviations, so the ceilings cannot
+   * flake; what they cannot absorb is a rule that starts resolving a type it did
+   * not resolve before. The measured rate is recorded beside every ceiling so a
+   * future failure shows how far the tree moved, not just that it moved.
+   */
+
+  const wordsIn = (choice: string): number => choice.trim().split(/\s+/).length
+  const punctuationIn = (choice: string): string => (choice.match(/[^\w\s]/g) ?? []).join('')
+  const deNumbered = (choice: string): string => choice.replace(QUANTITY_TOKEN, '#')
+
+  /** First index attaining the maximum; ties break by position, so it never abstains. */
+  function highestBy(choices: readonly string[], score: (choice: string) => number): number {
+    let best = -Infinity
+    let index = 0
+    choices.forEach((choice, i) => {
+      const value = score(choice)
+      if (value > best) {
+        best = value
+        index = i
+      }
+    })
+    return index
+  }
+  const lowestBy = (choices: readonly string[], score: (choice: string) => number): number =>
+    highestBy(choices, (choice) => -score(choice))
+
+  /** Abstains unless exactly one choice attains the maximum. */
+  function strictlyHighestBy(choices: readonly string[], score: (choice: string) => number): number | null {
+    const scores = choices.map(score)
+    const best = Math.max(...scores)
+    const winners = scores.map((value, index) => (value === best ? index : -1)).filter((index) => index >= 0)
+    return winners.length === 1 ? winners[0] : null
+  }
+
+  /**
+   * Index of the choice holding the extreme quantity, comparing exactly. Both
+   * helpers abstain when no choice quotes a quantity at all, and `strict`
+   * additionally abstains when two choices tie on the extreme.
+   */
+  function extremeQuantityIndex(
+    choices: readonly string[],
+    firstOnly: boolean,
+    wanted: -1 | 1,
+    strict = false,
+  ): number | null {
+    let best: BigFraction | null = null
+    const holders: number[] = []
+    choices.forEach((choice, index) => {
+      const quantities = firstOnly ? quantitiesIn(choice).slice(0, 1) : quantitiesIn(choice)
+      for (const quantity of quantities) {
+        if (best === null || bfCompare(quantity, best) === wanted) {
+          best = quantity
+          holders.length = 0
+          holders.push(index)
+        } else if (bfCompare(quantity, best) === 0 && holders[holders.length - 1] !== index) {
+          holders.push(index)
+        }
+      }
+    })
+    if (best === null) return null
+    if (strict) return holders.length === 1 ? holders[0] : null
+    return holders[0]
+  }
+
+  /**
+   * The combined heuristic: rank every choice on length, on word count and on
+   * the largest quantity it quotes, sum the three ranks, take the leader. A
+   * choice quoting no quantity ranks last on magnitude. Never abstains.
+   */
+  function combinedShapeRule(choices: readonly string[]): number {
+    const ranksOf = (values: readonly number[]): number[] => {
+      const order = values.map((value, index) => [value, index] as const).sort((a, b) => a[0] - b[0])
+      const ranks = new Array<number>(values.length).fill(0)
+      order.forEach(([, index], position) => {
+        ranks[index] = position
+      })
+      return ranks
+    }
+    const magnitudeOf = (choice: string): number => {
+      const quantities = quantitiesIn(choice)
+      if (!quantities.length) return -Infinity
+      return quantities.reduce(
+        (best, quantity) => Math.max(best, Number(quantity.num) / Number(quantity.den)),
+        -Infinity,
+      )
+    }
+    const byLength = ranksOf(choices.map((choice) => choice.length))
+    const byWords = ranksOf(choices.map(wordsIn))
+    const byMagnitude = ranksOf(choices.map(magnitudeOf))
+    const totals = choices.map((_, index) => byLength[index] + byWords[index] + byMagnitude[index])
+    return totals.indexOf(Math.max(...totals))
+  }
+
+  type BlindRule = readonly [name: string, pick: (choices: readonly string[]) => number | null]
+
+  const BLIND_CHOICE_RULES: readonly BlindRule[] = [
+    // Position.
+    ...[0, 1, 2, 3].map((position) => [`always position ${position}`, () => position] as BlindRule),
+    // Length and word count.
+    ['longest choice', (c) => highestBy(c, (choice) => choice.length)],
+    ['shortest choice', (c) => lowestBy(c, (choice) => choice.length)],
+    ['uniquely longest choice', (c) => strictlyHighestBy(c, (choice) => choice.length)],
+    ['most words', (c) => highestBy(c, wordsIn)],
+    ['fewest words', (c) => lowestBy(c, wordsIn)],
+    ['uniquely most words', (c) => strictlyHighestBy(c, wordsIn)],
+    // Punctuation.
+    ['most punctuation', (c) => highestBy(c, (choice) => punctuationIn(choice).length)],
+    ['uniquely most punctuation', (c) => strictlyHighestBy(c, (choice) => punctuationIn(choice).length)],
+    ['unique punctuation signature', (c) => uniqueBy(c, punctuationIn)],
+    // Odd-one-out structure.
+    ['unique choice length', (c) => uniqueBy(c, (choice) => String(choice.length))],
+    ['unique word count', (c) => uniqueBy(c, (choice) => String(wordsIn(choice)))],
+    ['unique de-numbered template', (c) => uniqueBy(c, deNumbered)],
+    ['unique first word', (c) => uniqueBy(c, (choice) => choice.trim().split(/\s+/)[0])],
+    ['lexicographically first', (c) => c.indexOf([...c].sort()[0])],
+    ['lexicographically last', (c) => c.indexOf([...c].sort()[c.length - 1])],
+    // Statistic presence.
+    ['the only choice quoting no number', (c) => onlyIndex(indicesWhere(c, (choice) => quantitiesIn(choice).length === 0))],
+    ['the only choice quoting a number', (c) => onlyIndex(indicesWhere(c, (choice) => quantitiesIn(choice).length > 0))],
+    ['most numbers quoted', (c) => highestBy(c, (choice) => quantitiesIn(choice).length)],
+    ['unique count of numbers quoted', (c) => uniqueBy(c, (choice) => String(quantitiesIn(choice).length))],
+    // Numeric magnitude, and the ordering a choice states its numbers in.
+    ['choice holding the largest number', (c) => extremeQuantityIndex(c, false, 1)],
+    ['choice holding the smallest number', (c) => extremeQuantityIndex(c, false, -1)],
+    ['uniquely largest number', (c) => extremeQuantityIndex(c, false, 1, true)],
+    ['choice whose first number is largest', (c) => extremeQuantityIndex(c, true, 1)],
+    ['choice whose first number is smallest', (c) => extremeQuantityIndex(c, true, -1)],
+    // The four cues combined.
+    ['combined length + words + magnitude', combinedShapeRule],
+  ]
+
+  /** The conclusion a choice states, read off its text alone. */
+  type ConclusionReader = (choice: string) => string | null
+
+  type ConclusionRule = readonly [
+    name: string,
+    pick: (choices: readonly string[], read: ConclusionReader) => string | null,
+  ]
+
+  const classesIn = (choices: readonly string[], read: ConclusionReader): string[] =>
+    choices.map(read).filter((value): value is string => value !== null)
+
+  function extremeClass(choices: readonly string[], read: ConclusionReader, wanted: 'first' | 'last'): string | null {
+    const classes = [...new Set(classesIn(choices, read))].sort()
+    if (!classes.length) return null
+    return wanted === 'first' ? classes[0] : classes[classes.length - 1]
+  }
+
+  function rankedClasses(choices: readonly string[], read: ConclusionReader): Array<[string, number]> {
+    const counts = new Map<string, number>()
+    for (const value of classesIn(choices, read)) counts.set(value, (counts.get(value) ?? 0) + 1)
+    return [...counts.entries()].sort((a, b) => b[1] - a[1])
+  }
+
+  const CONCLUSION_RULES: readonly ConclusionRule[] = [
+    ['conclusion of the longest choice', (c, read) => read(c[highestBy(c, (choice) => choice.length)])],
+    ['conclusion of the shortest choice', (c, read) => read(c[lowestBy(c, (choice) => choice.length)])],
+    ['conclusion of the most-words choice', (c, read) => read(c[highestBy(c, wordsIn)])],
+    ['conclusion of the most-punctuation choice', (c, read) =>
+      read(c[highestBy(c, (choice) => punctuationIn(choice).length)])],
+    ['conclusion of the largest-number choice', (c, read) => {
+      const index = extremeQuantityIndex(c, false, 1)
+      return index === null ? null : read(c[index])
+    }],
+    ['the majority conclusion class', (c, read) => {
+      const ranked = rankedClasses(c, read)
+      if (!ranked.length) return null
+      if (ranked.length === 1) return ranked[0][0]
+      return ranked[0][1] === ranked[1][1] ? null : ranked[0][0]
+    }],
+    ['the minority conclusion class', (c, read) => {
+      const ranked = rankedClasses(c, read)
+      if (ranked.length < 2) return null
+      const last = ranked[ranked.length - 1]
+      return last[1] === ranked[ranked.length - 2][1] ? null : last[0]
+    }],
+    ['conclusion at position 0', (c, read) => read(c[0])],
+    ['the alphabetically first conclusion class', (c, read) => extremeClass(c, read, 'first')],
+    ['the alphabetically last conclusion class', (c, read) => extremeClass(c, read, 'last')],
+  ]
+
+  const YES_NO: ConclusionReader = (choice) =>
+    /^Yes/.test(choice) ? 'Yes' : /^No/.test(choice) ? 'No' : null
+  const SAMPLE_LABEL: ConclusionReader = (choice) => labelOf(choice)
+
+  interface Unit8ChoiceProfile {
+    itemType: Grade7MathUnit8ItemType
+    /** How many conclusions the item can reach. 4 means every choice is its own conclusion. */
+    conclusionSpace: 2 | 4
+    /** Highest blind-rule rate observed on the corrected tree over 30,000 seeded items. */
+    measuredIndexRate: number
+    indexCeiling: number
+    read?: ConclusionReader
+    measuredConclusionRate?: number
+    conclusionCeiling?: number
+  }
+
+  /**
+   * The per-type table. Order matches GRADE7_MATH_UNIT8_ITEM_TYPES, which the
+   * first test below enforces, so an added, removed or renamed item type fails
+   * here instead of silently going unmeasured.
+   */
+  const UNIT8_CHOICE_PROFILES: readonly Unit8ChoiceProfile[] = [
+    // Two candidate entities - the population or the sample - plus two throwaways.
+    { itemType: 'identify-population-vs-sample', conclusionSpace: 2, measuredIndexRate: 0.4970, indexCeiling: 0.59,
+      read: (choice) => (/^All \d+ /.test(choice) ? 'population' : /^The \d+ randomly selected /.test(choice) ? 'sample' : null),
+      measuredConclusionRate: 0.5030, conclusionCeiling: 0.59 },
+    { itemType: 'sampling-method-bias-analysis', conclusionSpace: 2, measuredIndexRate: 0.5048, indexCeiling: 0.59,
+      read: YES_NO, measuredConclusionRate: 0.5048, conclusionCeiling: 0.59 },
+    { itemType: 'estimate-population-from-sample-proportion', conclusionSpace: 4, measuredIndexRate: 0.2774, indexCeiling: 0.36 },
+    { itemType: 'sample-estimate-variation-range', conclusionSpace: 4, measuredIndexRate: 0.4663, indexCeiling: 0.55 },
+    { itemType: 'sample-size-representativeness', conclusionSpace: 2, measuredIndexRate: 0.5002, indexCeiling: 0.59,
+      read: studentOf, measuredConclusionRate: 0.5002, conclusionCeiling: 0.59 },
+    { itemType: 'generalization-validity-check', conclusionSpace: 2, measuredIndexRate: 0.5070, indexCeiling: 0.59,
+      read: YES_NO, measuredConclusionRate: 0.5070, conclusionCeiling: 0.59 },
+    { itemType: 'compute-mean-median-range', conclusionSpace: 4, measuredIndexRate: 0.4255, indexCeiling: 0.51 },
+    { itemType: 'mean-vs-median-with-outlier', conclusionSpace: 4, measuredIndexRate: 0.2525, indexCeiling: 0.34 },
+    { itemType: 'compute-mean-absolute-deviation', conclusionSpace: 4, measuredIndexRate: 0.3532, indexCeiling: 0.44 },
+    { itemType: 'visual-overlap-in-mad-units', conclusionSpace: 4, measuredIndexRate: 0.4569, indexCeiling: 0.54 },
+    { itemType: 'compare-two-samples-center', conclusionSpace: 2, measuredIndexRate: 0.5017, indexCeiling: 0.59,
+      read: SAMPLE_LABEL, measuredConclusionRate: 0.5017, conclusionCeiling: 0.59 },
+    { itemType: 'compare-two-samples-variability', conclusionSpace: 2, measuredIndexRate: 0.5020, indexCeiling: 0.59,
+      read: SAMPLE_LABEL, measuredConclusionRate: 0.5012, conclusionCeiling: 0.59 },
+  ]
+
+  const BATTERY_RUNS = 1_200
+
+  describe('no choice-text-only rule answers any Unit 8 item type', () => {
+    it('profiles exactly the twelve exported item types, in their declared order', () => {
+      expect(UNIT8_CHOICE_PROFILES.map((profile) => profile.itemType)).toEqual([...GRADE7_MATH_UNIT8_ITEM_TYPES])
+      for (const profile of UNIT8_CHOICE_PROFILES) {
+        const context = `${profile.itemType}: ceiling must sit above the measured rate but below certainty`
+        expect(profile.indexCeiling, context).toBeGreaterThan(profile.measuredIndexRate)
+        expect(profile.indexCeiling, context).toBeLessThan(0.6)
+        expect(Boolean(profile.read), `${profile.itemType}: a two-way type needs a conclusion reader`).toBe(
+          profile.conclusionSpace === 2,
+        )
+      }
+    })
+
+    it.each(UNIT8_CHOICE_PROFILES)(
+      '$itemType: no blind rule beats its ceiling',
+      (profile: Unit8ChoiceProfile) => {
+        const byIndex = BLIND_CHOICE_RULES.map(() => ({ hit: 0, seen: 0 }))
+        const byConclusion = CONCLUSION_RULES.map(() => ({ hit: 0, seen: 0 }))
+        const malformed: string[] = []
+        for (const difficulty of DIFFICULTIES) {
+          for (let i = 0; i < BATTERY_RUNS; i++) {
+            const question = generateGrade7MathUnit8Question(profile.itemType, difficulty)
+            // The adversary is handed the choice strings and nothing else.
+            const choices: readonly string[] = [...question.choices]
+            if (choices.length !== 4) malformed.push(`d${difficulty} #${i}: ${choices.length} choices`)
+            if (new Set(choices).size !== choices.length)
+              malformed.push(`d${difficulty} #${i}: duplicate choice in ${JSON.stringify(choices)}`)
+            if (!(question.answerIndex >= 0 && question.answerIndex < choices.length))
+              malformed.push(`d${difficulty} #${i}: answer index ${question.answerIndex}`)
+            BLIND_CHOICE_RULES.forEach(([, pick], rule) => {
+              byIndex[rule].seen += 1
+              if (pick(choices) === question.answerIndex) byIndex[rule].hit += 1
+            })
+            if (profile.read) {
+              const keyed = profile.read(question.choices[question.answerIndex])
+              expect(keyed, `${profile.itemType}: the keyed choice states no conclusion`).not.toBeNull()
+              CONCLUSION_RULES.forEach(([, pick], rule) => {
+                byConclusion[rule].seen += 1
+                if (pick(choices, profile.read as ConclusionReader) === keyed) byConclusion[rule].hit += 1
+              })
+            }
+          }
+        }
+        expect(report(malformed), `${profile.itemType}: ${malformed.length} malformed choice sets`).toEqual([])
+
+        const tooStrong: string[] = []
+        BLIND_CHOICE_RULES.forEach(([name], rule) => {
+          const { hit, seen } = byIndex[rule]
+          if (hit / seen > profile.indexCeiling)
+            tooStrong.push(
+              `index rule "${name}": ${((hit / seen) * 100).toFixed(2)}% of ${seen} (ceiling ${(profile.indexCeiling * 100).toFixed(0)}%, measured ${(profile.measuredIndexRate * 100).toFixed(2)}%)`,
+            )
+        })
+        if (profile.read)
+          CONCLUSION_RULES.forEach(([name], rule) => {
+            const { hit, seen } = byConclusion[rule]
+            const ceiling = profile.conclusionCeiling as number
+            if (hit / seen > ceiling)
+              tooStrong.push(
+                `conclusion rule "${name}": ${((hit / seen) * 100).toFixed(2)}% of ${seen} (ceiling ${(ceiling * 100).toFixed(0)}%, measured ${((profile.measuredConclusionRate as number) * 100).toFixed(2)}%)`,
+              )
+          })
+        expect(
+          report(tooStrong),
+          `${profile.itemType}: a choice-text-only rule answered the item (${profile.conclusionSpace}-way conclusion space)`,
+        ).toEqual([])
+      },
+    )
+
+    /**
+     * The three cues this card exists to remove, pinned by name on the item type
+     * they used to answer. Each scored 100% before the redesign; each must now
+     * sit at or under the two-way floor, and each strict variant - the one that
+     * abstains unless its winner is unique - must abstain on every single item,
+     * because the structure it keys on no longer exists.
+     */
+    it('leaves the retired sample-size cues dead', () => {
+      const RETIRED = [
+        'longest choice',
+        'most words',
+        'most punctuation',
+        'combined length + words + magnitude',
+        'choice holding the largest number',
+      ] as const
+      const MUST_ABSTAIN = [
+        'uniquely longest choice',
+        'uniquely most words',
+        'uniquely most punctuation',
+        'uniquely largest number',
+        'choice holding the largest number',
+        'choice whose first number is largest',
+        'unique choice length',
+        'unique word count',
+        'unique punctuation signature',
+        'unique de-numbered template',
+      ] as const
+      const tally = new Map<string, { hit: number; abstain: number; seen: number }>()
+      for (const [name] of BLIND_CHOICE_RULES) tally.set(name, { hit: 0, abstain: 0, seen: 0 })
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < BATTERY_RUNS; i++) {
+          const question = generateGrade7MathUnit8Question(SAMPLE_SIZE, difficulty)
+          const choices: readonly string[] = [...question.choices]
+          for (const [name, pick] of BLIND_CHOICE_RULES) {
+            const entry = tally.get(name) as { hit: number; abstain: number; seen: number }
+            const chosen = pick(choices)
+            entry.seen += 1
+            if (chosen === null) entry.abstain += 1
+            else if (chosen === question.answerIndex) entry.hit += 1
+          }
+        }
+      }
+      const alive: string[] = []
+      for (const name of RETIRED) {
+        const entry = tally.get(name) as { hit: number; abstain: number; seen: number }
+        const rate = entry.hit / entry.seen
+        if (rate > 0.55)
+          alive.push(`"${name}" still answers ${(rate * 100).toFixed(2)}% of ${entry.seen} items`)
+      }
+      for (const name of MUST_ABSTAIN) {
+        const entry = tally.get(name) as { hit: number; abstain: number; seen: number }
+        if (entry.abstain !== entry.seen)
+          alive.push(`"${name}" resolved ${entry.seen - entry.abstain} of ${entry.seen} items instead of abstaining`)
+      }
+      expect(alive, 'a retired sample-size cue is still live').toEqual([])
     })
   })
 })
