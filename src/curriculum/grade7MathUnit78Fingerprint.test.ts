@@ -320,15 +320,31 @@ function runAllRows(): RowRun[] {
  * none of the 24 names below appears in it. Together the two tables now pin all
  * 72 Grade 7 Mathematics item types.
  *
- * ONE ROW HAS MOVED SINCE THAT CAPTURE. `u8:compare-two-samples-center` was
- * re-derived after `randomTwoSamplesByMean` stopped handing the greater center
- * to Sample B every single time - a defect this very freeze card surfaced, under
- * which the item was answerable without reading either sample. The replacement
- * digest was derived twice, by two separately written CommonJS harnesses over
- * two separately compiled source trees, and neither harness was shown a failing
- * assertion. Both harnesses also re-derived the other 23 rows and reproduced
- * them byte for byte, which is what establishes that the correction moved that
- * row and only that row.
+ * THREE ROW RE-DERIVATIONS HAVE HAPPENED SINCE THAT CAPTURE, in two waves.
+ *
+ * WAVE 1 moved `u8:compare-two-samples-center`, after `randomTwoSamplesByMean`
+ * stopped handing the greater center to Sample B every single time - a defect
+ * this very freeze card surfaced, under which the item was answerable without
+ * reading either sample.
+ *
+ * WAVE 2 moved `u8:compare-two-samples-center` again and
+ * `u8:compare-two-samples-variability` for the first time, after both items'
+ * four answer choices were rebuilt as a balanced 2x2 of (sample named) x
+ * (statistic attribution). The old option set named the keyed sample in two of
+ * its three numeric choices and quoted the keyed statistic ordering exactly
+ * once, so two independent choice-text-only rules - "take the label that
+ * appears twice" and "take the odd ordering out" - each scored 100% without
+ * reading either sample. Sample construction was NOT touched in this wave: at
+ * matched seeds across 720,000 draws spanning all twelve Unit 8 item types, the
+ * prompt, the parameters, the keyed answer text and the answer index are all
+ * byte-identical to wave 1, and only the two comparison types' choice ARRAYS
+ * move. That is why wave 2 moves exactly these two rows.
+ *
+ * Every replacement digest was derived twice, by two separately written
+ * CommonJS harnesses over two separately compiled source trees, and neither
+ * harness was shown a failing assertion. Both harnesses also re-derived the
+ * other 22 rows and reproduced them byte for byte, which is what establishes
+ * that each correction moved the rows it claims and no others.
  */
 const U78_FREEZE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u7:circumference-from-radius-or-diameter', 'ab7405489cfa2a58751a010dad246dbd242ad74d36f772142834780bf0923742'],
@@ -353,8 +369,8 @@ const U78_FREEZE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u8:mean-vs-median-with-outlier', '15dea600d3aff7ee1e9b392c74e8d0b7fa01eb1f484ef642900472dc0f19e115'],
   ['u8:compute-mean-absolute-deviation', 'ace2a60a8d8edcc6ed6d0c1004b78836c93d11dcd185a3c3718a86eb59e3d5a4'],
   ['u8:visual-overlap-in-mad-units', 'ab578814bf1a061ede69c8c203cb02699b97b54ed63bb01b7d6bf0716c9088c4'],
-  ['u8:compare-two-samples-center', '9a03c5ce105bba91bc422cb25d2431d04ec544b13038b787aadf8cb0ea4aa718'],
-  ['u8:compare-two-samples-variability', 'f9e33765e2bb464856596042da914e8f88c35637d874858d097dfc3b62afa44f'],
+  ['u8:compare-two-samples-center', 'b454519047dd1e8d5d3fdf4e5374ad483e1d7fda1fd734f57c26c36218ab4640'],
+  ['u8:compare-two-samples-variability', '99fca8ac4e53ee9729f140695945b17799ba9c3f662db53786c24892304095bb'],
 ]
 
 describe('Grade 7 Units 7 and 8: item-type inventory', () => {

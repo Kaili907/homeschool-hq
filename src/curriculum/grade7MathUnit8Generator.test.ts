@@ -454,4 +454,439 @@ describe('grade7MathUnit8Generator', () => {
       }
     }
   })
+
+  /**
+   * ==========================================================================
+   * CHOICE-TEXT-ONLY SHORTCUTS MUST NOT ANSWER THE COMPARISON ITEMS
+   * ==========================================================================
+   *
+   * Both `compare-two-samples-*` types used to be answerable from the four
+   * choice strings alone, without reading either sample, by two independent
+   * cues:
+   *
+   *   LEAK A - statistic ordering. Exactly one choice quoted the two statistics
+   *     in the keyed relationship (greater-first for the centre item,
+   *     lesser-first for the variability item). "Take the odd one out" scored
+   *     100%.
+   *
+   *   LEAK B - majority sample label. The keyed sample was named by two of the
+   *     three numeric choices and the other sample by one. "Take the label that
+   *     appears twice" identified the keyed sample 100% of the time.
+   *
+   *   (A third, weaker cue rode along: the "Both samples have the same ..."
+   *   option was the only choice quoting no statistics at all, and was never
+   *   the answer, so it could be struck out on sight.)
+   *
+   * Everything in this section is computed from `question.choices` and nothing
+   * else - never the prompt, the samples, the parameters, the answer index or
+   * the worked example - except where a helper is explicitly named as the
+   * rendered-data oracle, which is the only thing allowed to decide what the
+   * true answer is.
+   */
+
+  /** Every quantity token a choice renders, in rendered order, parsed exactly. */
+  const QUANTITY_TOKEN = /\d+\s+\d+\/\d+|\d+\/\d+|\d+/g
+  const quantitiesIn = (choice: string): BigFraction[] =>
+    (choice.match(QUANTITY_TOKEN) ?? []).map(parseMixedNumber)
+
+  type Ordering = 'greater-first' | 'lesser-first' | 'equal'
+
+  /** The ordering relationship a choice renders between its two statistics. */
+  function orderingOf(choice: string): Ordering | null {
+    const quantities = quantitiesIn(choice)
+    if (quantities.length !== 2) return null
+    const order = bfCompare(quantities[0], quantities[1])
+    return order > 0 ? 'greater-first' : order < 0 ? 'lesser-first' : 'equal'
+  }
+
+  function labelOf(choice: string): 'A' | 'B' | null {
+    const m = /^Sample ([AB]),/.exec(choice)
+    return m ? (m[1] as 'A' | 'B') : null
+  }
+
+  const countWhere = <T,>(items: readonly T[], fn: (item: T) => boolean): number =>
+    items.filter(fn).length
+
+  /**
+   * The rendered-data oracle's verdict, plus the exact per-sample statistic, so
+   * a choice can be judged true or false on the data rather than on its text.
+   */
+  interface ComparisonTruth {
+    winner: 'A' | 'B'
+    valueA: BigFraction
+    valueB: BigFraction
+  }
+
+  const CENTER_TRUTH = (prompt: string): ComparisonTruth => {
+    const [dataA, dataB] = parseRenderedSamples(prompt, CENTER_PROMPT)
+    const valueA = bfMean(dataA)
+    const valueB = bfMean(dataB)
+    return { winner: bfCompare(valueA, valueB) > 0 ? 'A' : 'B', valueA, valueB }
+  }
+
+  const VARIABILITY_TRUTH = (prompt: string): ComparisonTruth => {
+    const [dataA, dataB] = parseRenderedSamples(prompt, VARIABILITY_PROMPT)
+    const valueA = bfInt(numericRange(dataA))
+    const valueB = bfInt(numericRange(dataB))
+    return { winner: bfCompare(valueA, valueB) < 0 ? 'A' : 'B', valueA, valueB }
+  }
+
+  /**
+   * Judges one choice against the rendered data. A choice is true only when it
+   * names the sample the data actually favours AND attributes the correct
+   * statistic to each sample. Values are compared numerically, not as text, so
+   * two differently-spelled renderings of the same quantity would still be
+   * caught as equivalent.
+   */
+  const CLAIM_SHAPE = /^Sample ([AB]), with a (?:mean|range) of (.+?) compared to (.+?)\.$/
+
+  function claimIsTrue(choice: string, truth: ComparisonTruth): boolean {
+    const m = CLAIM_SHAPE.exec(choice)
+    if (!m) return false
+    const label = m[1] as 'A' | 'B'
+    if (label !== truth.winner) return false
+    const claimedOwn = parseMixedNumber(m[2])
+    const claimedOther = parseMixedNumber(m[3])
+    const actualOwn = label === 'A' ? truth.valueA : truth.valueB
+    const actualOther = label === 'A' ? truth.valueB : truth.valueA
+    return bfCompare(claimedOwn, actualOwn) === 0 && bfCompare(claimedOther, actualOther) === 0
+  }
+
+  /**
+   * The choice-text-only adversary. Every rule is a pure function of the
+   * shuffled choice strings and returns a choice index, or null to abstain.
+   * Chance is 1/4 = 25%; the two rules that used to score 100% are first.
+   */
+  const onlyIndex = (indices: readonly number[]): number | null =>
+    indices.length === 1 ? indices[0] : null
+  const indicesWhere = (choices: readonly string[], fn: (choice: string) => boolean): number[] =>
+    choices.map((choice, index) => (fn(choice) ? index : -1)).filter((index) => index >= 0)
+
+  function majorityLabel(choices: readonly string[]): 'A' | 'B' | null {
+    const a = countWhere(choices, (choice) => labelOf(choice) === 'A')
+    const b = countWhere(choices, (choice) => labelOf(choice) === 'B')
+    return a === b ? null : a > b ? 'A' : 'B'
+  }
+
+  function uniqueBy(choices: readonly string[], keyOf: (choice: string) => string): number | null {
+    const keys = choices.map(keyOf)
+    const counts = new Map<string, number>()
+    for (const key of keys) counts.set(key, (counts.get(key) ?? 0) + 1)
+    const singletons = [...counts.entries()].filter(([, n]) => n === 1).map(([key]) => key)
+    return singletons.length === 1 ? keys.indexOf(singletons[0]) : null
+  }
+
+  /**
+   * LEAK A exactly as it scored 100% on the frozen tree: among the choices that
+   * actually quote an ordering, take the one whose ordering no other quoting
+   * choice shares. Choices quoting no statistics at all are skipped rather than
+   * counted as a category of their own - counting them would have made this rule
+   * abstain on the old four-option set, which had two lesser-first choices, one
+   * greater-first choice and one "Both samples have the same ..." choice.
+   */
+  function oddOrderingOut(choices: readonly string[]): number | null {
+    const orderings = choices.map(orderingOf)
+    const counts = new Map<Ordering, number>()
+    for (const ordering of orderings)
+      if (ordering !== null) counts.set(ordering, (counts.get(ordering) ?? 0) + 1)
+    const singletons = [...counts.entries()].filter(([, n]) => n === 1).map(([ordering]) => ordering)
+    return singletons.length === 1 ? orderings.indexOf(singletons[0]) : null
+  }
+
+  type ChoiceOnlyRule = readonly [name: string, pick: (choices: readonly string[]) => number | null]
+
+  const CHOICE_ONLY_RULES: readonly ChoiceOnlyRule[] = [
+    // The cue this section exists to remove. It must now abstain.
+    ['LEAK A: the odd-one-out ordering', oddOrderingOut],
+    // Directional rules that never abstain, so they measure the true ceiling.
+    ['the unique greater-first choice', (choices) =>
+      onlyIndex(indicesWhere(choices, (c) => orderingOf(c) === 'greater-first'))],
+    ['the unique lesser-first choice', (choices) =>
+      onlyIndex(indicesWhere(choices, (c) => orderingOf(c) === 'lesser-first'))],
+    ['earliest greater-first choice', (choices) =>
+      indicesWhere(choices, (c) => orderingOf(c) === 'greater-first')[0] ?? null],
+    ['earliest lesser-first choice', (choices) =>
+      indicesWhere(choices, (c) => orderingOf(c) === 'lesser-first')[0] ?? null],
+    ['latest greater-first choice', (choices) => {
+      const found = indicesWhere(choices, (c) => orderingOf(c) === 'greater-first')
+      return found.length ? found[found.length - 1] : null
+    }],
+    ['majority label, earliest position', (choices) => {
+      const label = majorityLabel(choices)
+      return label === null ? null : indicesWhere(choices, (c) => labelOf(c) === label)[0] ?? null
+    }],
+    ['always Sample A, earliest position', (choices) =>
+      indicesWhere(choices, (c) => labelOf(c) === 'A')[0] ?? null],
+    // Position.
+    ...[0, 1, 2, 3].map(
+      (position) => [`always position ${position}`, () => position] as ChoiceOnlyRule,
+    ),
+    // Lexical shape.
+    ['longest choice', (choices) =>
+      choices.indexOf(choices.reduce((best, c) => (c.length > best.length ? c : best), choices[0]))],
+    ['shortest choice', (choices) =>
+      choices.indexOf(choices.reduce((best, c) => (c.length < best.length ? c : best), choices[0]))],
+    ['unique choice length', (choices) => uniqueBy(choices, (c) => String(c.length))],
+    ['unique word count', (choices) => uniqueBy(choices, (c) => String(c.trim().split(/\s+/).length))],
+    ['unique punctuation signature', (choices) => uniqueBy(choices, (c) => (c.match(/[^\w\s]/g) ?? []).join(''))],
+    ['unique de-numbered template', (choices) => uniqueBy(choices, (c) => c.replace(QUANTITY_TOKEN, '#'))],
+    ['lexicographically first', (choices) => choices.indexOf([...choices].sort()[0])],
+    ['the only choice quoting no statistics', (choices) =>
+      onlyIndex(indicesWhere(choices, (c) => quantitiesIn(c).length === 0))],
+    // Magnitude.
+    ['choice holding the largest quantity', (choices) => {
+      let best: BigFraction | null = null
+      let index = 0
+      choices.forEach((choice, i) => {
+        for (const q of quantitiesIn(choice))
+          if (best === null || bfCompare(q, best) > 0) { best = q; index = i }
+      })
+      return index
+    }],
+    ['choice whose first quantity is largest', (choices) => {
+      let best: BigFraction | null = null
+      let index = 0
+      choices.forEach((choice, i) => {
+        const q = quantitiesIn(choice)
+        if (q.length && (best === null || bfCompare(q[0], best) > 0)) { best = q[0]; index = i }
+      })
+      return index
+    }],
+    ['choice whose first quantity is smallest', (choices) => {
+      let best: BigFraction | null = null
+      let index = 0
+      choices.forEach((choice, i) => {
+        const q = quantitiesIn(choice)
+        if (q.length && (best === null || bfCompare(q[0], best) < 0)) { best = q[0]; index = i }
+      })
+      return index
+    }],
+  ]
+
+  /**
+   * LEAK B was never an index cue - it identified the keyed SAMPLE, which is the
+   * conclusion the item is actually asking for. These rules are therefore scored
+   * against the label the keyed choice names, where chance is 1/2, not 1/4.
+   */
+  type LabelOnlyRule = readonly [name: string, pick: (choices: readonly string[]) => 'A' | 'B' | null]
+
+  const LABEL_ONLY_RULES: readonly LabelOnlyRule[] = [
+    ['LEAK B: the majority sample label', majorityLabel],
+    ['the minority sample label', (choices) => {
+      const majority = majorityLabel(choices)
+      return majority === null ? null : majority === 'A' ? 'B' : 'A'
+    }],
+    ['label of the earliest greater-first choice', (choices) => {
+      const found = indicesWhere(choices, (c) => orderingOf(c) === 'greater-first')[0]
+      return found === undefined ? null : labelOf(choices[found])
+    }],
+    ['label of the earliest lesser-first choice', (choices) => {
+      const found = indicesWhere(choices, (c) => orderingOf(c) === 'lesser-first')[0]
+      return found === undefined ? null : labelOf(choices[found])
+    }],
+    ['label of the choice holding the largest quantity', (choices) => {
+      let best: BigFraction | null = null
+      let index = -1
+      choices.forEach((choice, i) => {
+        for (const quantity of quantitiesIn(choice))
+          if (best === null || bfCompare(quantity, best) > 0) { best = quantity; index = i }
+      })
+      return index < 0 ? null : labelOf(choices[index])
+    }],
+    ['always Sample A', () => 'A'],
+    ['the label at position 0', (choices) => labelOf(choices[0])],
+  ]
+
+  /**
+   * Rules that must ABSTAIN on every single item, because the structure they
+   * key on no longer exists. Named by their entries in the two rule tables.
+   */
+  const MUST_ALWAYS_ABSTAIN = [
+    'LEAK A: the odd-one-out ordering',
+    'LEAK B: the majority sample label',
+    'the minority sample label',
+    'unique choice length',
+    'unique word count',
+    'unique punctuation signature',
+    'unique de-numbered template',
+    'the only choice quoting no statistics',
+  ] as const
+
+  /**
+   * The honest ceiling. The item has exactly two possible conclusions - Sample A
+   * or Sample B - and the keyed one is drawn ~50/50 from the data, so a rule
+   * that narrows the four choices to one A-claim and one B-claim still has to
+   * guess. 50% is therefore the floor for this item shape, not a residual leak:
+   * it is the same 50% a learner faces who reads the choices and then has to
+   * open the samples to break the tie. What must be gone is any rule that beats
+   * it. The band allows for seeded sampling noise around that 50%.
+   */
+  const CHOICE_ONLY_CEILING = 0.55
+  const ADVERSARY_RUNS = 1_500
+
+  interface ComparisonUnderTest {
+    itemType: 'compare-two-samples-center' | 'compare-two-samples-variability'
+    truthOf: (prompt: string) => ComparisonTruth
+    statistic: 'mean' | 'range'
+  }
+
+  const COMPARISONS: readonly ComparisonUnderTest[] = [
+    { itemType: 'compare-two-samples-center', truthOf: CENTER_TRUTH, statistic: 'mean' },
+    { itemType: 'compare-two-samples-variability', truthOf: VARIABILITY_TRUTH, statistic: 'range' },
+  ]
+
+  /** Collected so a failure names the first few offending items instead of one anonymous count. */
+  const report = (violations: readonly string[]): string[] => violations.slice(0, 8)
+
+  describe.each(COMPARISONS)('$itemType choice construction', (comparison: ComparisonUnderTest) => {
+    it('names each sample in exactly two of the four choices, so no label is the majority', () => {
+      const violations: string[] = []
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < ADVERSARY_RUNS; i++) {
+          const question = generateGrade7MathUnit8Question(comparison.itemType, difficulty)
+          const choices = question.choices
+          const a = countWhere(choices, (choice) => labelOf(choice) === 'A')
+          const b = countWhere(choices, (choice) => labelOf(choice) === 'B')
+          if (a !== 2 || b !== 2)
+            violations.push(`d${difficulty} #${i}: A named ${a}x, B named ${b}x in ${JSON.stringify(choices)}`)
+          else if (majorityLabel(choices) !== null)
+            violations.push(`d${difficulty} #${i}: a majority label survives in ${JSON.stringify(choices)}`)
+        }
+      }
+      expect(report(violations), `${comparison.itemType}: ${violations.length} label-balance violations`).toEqual([])
+    })
+
+    it('splits the four choices two-and-two by ordering, so the keyed ordering is never unique', () => {
+      const violations: string[] = []
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < ADVERSARY_RUNS; i++) {
+          const question = generateGrade7MathUnit8Question(comparison.itemType, difficulty)
+          const choices = question.choices
+          const orderings = choices.map(orderingOf)
+          const greaterFirst = countWhere(orderings, (order) => order === 'greater-first')
+          const lesserFirst = countWhere(orderings, (order) => order === 'lesser-first')
+          if (greaterFirst !== 2 || lesserFirst !== 2) {
+            violations.push(
+              `d${difficulty} #${i}: ${greaterFirst} greater-first / ${lesserFirst} lesser-first in ${JSON.stringify(choices)}`,
+            )
+            continue
+          }
+          const keyedOrdering = orderings[question.answerIndex]
+          if (countWhere(orderings, (order) => order === keyedOrdering) !== 2)
+            violations.push(`d${difficulty} #${i}: keyed ordering is unique in ${JSON.stringify(choices)}`)
+        }
+      }
+      expect(report(violations), `${comparison.itemType}: ${violations.length} ordering-balance violations`).toEqual([])
+    })
+
+    it('crosses label against ordering, so every one of the four cells is filled exactly once', () => {
+      const violations: string[] = []
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < ADVERSARY_RUNS; i++) {
+          const question = generateGrade7MathUnit8Question(comparison.itemType, difficulty)
+          const cells = question.choices.map((choice) => `${labelOf(choice)}/${orderingOf(choice)}`).sort()
+          const expected = ['A/greater-first', 'A/lesser-first', 'B/greater-first', 'B/lesser-first']
+          if (JSON.stringify(cells) !== JSON.stringify(expected))
+            violations.push(`d${difficulty} #${i}: cells were ${JSON.stringify(cells)}`)
+        }
+      }
+      expect(report(violations), `${comparison.itemType}: ${violations.length} 2x2 cell violations`).toEqual([])
+    })
+
+    /**
+     * Text shape must not single any choice out. Length, word count and
+     * punctuation are required to be *identical* across all four, which they can
+     * be because the four choices are the same sentence holding the same two
+     * numbers in a different arrangement. The de-numbered template cannot be
+     * identical - it still spells "Sample A" or "Sample B" - so the requirement
+     * there is the weaker but sufficient one: it splits two and two, so no
+     * template is unique to one choice.
+     */
+    it('gives no choice a distinguishing length, word count, punctuation or template', () => {
+      const violations: string[] = []
+      const identical = ['length', 'words', 'punctuation'] as const
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < ADVERSARY_RUNS; i++) {
+          const { choices } = generateGrade7MathUnit8Question(comparison.itemType, difficulty)
+          const shapes: Record<string, string[]> = {
+            length: choices.map((choice) => String(choice.length)),
+            words: choices.map((choice) => String(choice.trim().split(/\s+/).length)),
+            punctuation: choices.map((choice) => (choice.match(/[^\w\s]/g) ?? []).join('')),
+          }
+          for (const feature of identical)
+            if (new Set(shapes[feature]).size !== 1)
+              violations.push(`d${difficulty} #${i}: ${feature} varies across ${JSON.stringify(choices)}`)
+
+          const templates = choices.map((choice) => choice.replace(QUANTITY_TOKEN, '#'))
+          const perTemplate = [...new Set(templates)].map(
+            (template) => countWhere(templates, (candidate) => candidate === template),
+          )
+          if (perTemplate.length !== 2 || perTemplate.some((count) => count !== 2))
+            violations.push(`d${difficulty} #${i}: templates split ${perTemplate} in ${JSON.stringify(choices)}`)
+        }
+      }
+      expect(report(violations), `${comparison.itemType}: ${violations.length} choice-shape violations`).toEqual([])
+    })
+
+    it('leaves exactly one choice true against the rendered data, with no equivalent second', () => {
+      const violations: string[] = []
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < ADVERSARY_RUNS; i++) {
+          const question = generateGrade7MathUnit8Question(comparison.itemType, difficulty)
+          const truth = comparison.truthOf(question.prompt)
+          const trueIndices = indicesWhere(question.choices, (choice) => claimIsTrue(choice, truth))
+          const context = `d${difficulty} #${i}: ${JSON.stringify(question.choices)}`
+          if (trueIndices.length !== 1) violations.push(`${context} had ${trueIndices.length} true choices`)
+          else if (trueIndices[0] !== question.answerIndex)
+            violations.push(`${context} keys index ${question.answerIndex} but the data favours ${trueIndices[0]}`)
+          if (new Set(question.choices).size !== question.choices.length)
+            violations.push(`${context} contains a duplicate choice`)
+          if (question.choices.length !== 4) violations.push(`${context} has ${question.choices.length} choices`)
+          for (const choice of question.choices)
+            if (!CLAIM_SHAPE.test(choice)) violations.push(`${context} has an off-template choice "${choice}"`)
+        }
+      }
+      expect(report(violations), `${comparison.itemType}: ${violations.length} exactly-one-correct violations`).toEqual([])
+    })
+
+    it('leaves no choice-text-only rule ahead of the two-way conclusion prior', () => {
+      const byIndex = CHOICE_ONLY_RULES.map(() => ({ hit: 0, abstain: 0, seen: 0 }))
+      const byLabel = LABEL_ONLY_RULES.map(() => ({ hit: 0, abstain: 0, seen: 0 }))
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < ADVERSARY_RUNS; i++) {
+          const question = generateGrade7MathUnit8Question(comparison.itemType, difficulty)
+          // The adversary is handed the choice strings and nothing else.
+          const choices: readonly string[] = [...question.choices]
+          const keyedLabel = labelOf(question.choices[question.answerIndex])
+          CHOICE_ONLY_RULES.forEach(([, pick], rule) => {
+            const chosen = pick(choices)
+            byIndex[rule].seen += 1
+            if (chosen === null) byIndex[rule].abstain += 1
+            else if (chosen === question.answerIndex) byIndex[rule].hit += 1
+          })
+          LABEL_ONLY_RULES.forEach(([, pick], rule) => {
+            const chosen = pick(choices)
+            byLabel[rule].seen += 1
+            if (chosen === null) byLabel[rule].abstain += 1
+            else if (chosen === keyedLabel) byLabel[rule].hit += 1
+          })
+        }
+      }
+
+      const tooStrong: string[] = []
+      const resolved: string[] = []
+      const score = (name: string, tally: { hit: number; abstain: number; seen: number }): void => {
+        const rate = tally.hit / tally.seen
+        if (rate > CHOICE_ONLY_CEILING)
+          tooStrong.push(`${name}: ${(rate * 100).toFixed(2)}% of ${tally.seen} (ceiling ${CHOICE_ONLY_CEILING * 100}%)`)
+        if ((MUST_ALWAYS_ABSTAIN as readonly string[]).includes(name) && tally.abstain !== tally.seen)
+          resolved.push(`${name}: resolved ${tally.seen - tally.abstain} of ${tally.seen} items instead of abstaining`)
+      }
+      CHOICE_ONLY_RULES.forEach(([name], rule) => score(name, byIndex[rule]))
+      LABEL_ONLY_RULES.forEach(([name], rule) => score(name, byLabel[rule]))
+
+      expect(tooStrong, `${comparison.itemType}: a choice-text-only rule beat the two-way prior`).toEqual([])
+      expect(resolved, `${comparison.itemType}: a retired cue still resolves`).toEqual([])
+    })
+  })
 })

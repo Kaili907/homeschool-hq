@@ -871,6 +871,52 @@ export function generateVisualOverlapInMadUnitsQuestion(
   })
 }
 
+/**
+ * The four choices for a two-sample comparison, as a balanced 2x2.
+ *
+ * A claim names a sample and attributes a statistic to each of the two samples:
+ * "Sample A, with a mean of 30 compared to 20" asserts both that Sample A is the
+ * one the question asks for and that 30 is Sample A's own mean. Crossing the two
+ * binary slots - which sample is named, and which sample the leading statistic is
+ * attributed to - yields exactly four claims, of which the rendered data makes
+ * exactly one true.
+ *
+ * The cross is what closes two choice-only shortcuts that this item used to have.
+ * The old option set named the keyed sample twice and the other sample once, so
+ * "take the label that appears twice" scored 100%; and it quoted the keyed
+ * statistic ordering exactly once, so "take the odd one out" also scored 100%.
+ * Under the 2x2 each label appears twice, each ordering appears twice, and the
+ * two splits cut across each other, so no cell is structurally distinguishable:
+ * all four choices are the same length, the same word count, the same
+ * punctuation, and the same sentence with different numbers in it.
+ *
+ * This leaves a learner who refuses to read the samples with a 50/50 guess
+ * between the two samples, which is the floor for a question whose answer is one
+ * of two samples - not a residual cue. Breaking that tie is exactly the
+ * comparison the standard asks for.
+ */
+function twoSampleClaimChoices(
+  statistic: 'mean' | 'range',
+  textA: string,
+  textB: string,
+  keyedLabel: 'A' | 'B',
+): { correctAnswer: string; distractors: string[] } {
+  const claim = (label: 'A' | 'B', own: string, other: string): string =>
+    `Sample ${label}, with a ${statistic} of ${own} compared to ${other}.`
+  // Index 0 and index 2 attribute each sample its own statistic; 1 and 3 swap them.
+  const cells = [
+    claim('A', textA, textB),
+    claim('A', textB, textA),
+    claim('B', textB, textA),
+    claim('B', textA, textB),
+  ]
+  const keyedCell = keyedLabel === 'A' ? 0 : 2
+  return {
+    correctAnswer: cells[keyedCell],
+    distractors: cells.filter((_, index) => index !== keyedCell),
+  }
+}
+
 export function generateCompareTwoSamplesCenterQuestion(
   difficulty: Difficulty,
 ): Unit8Question<'compare-two-samples-center', TwoSampleParameters> {
@@ -878,16 +924,12 @@ export function generateCompareTwoSamplesCenterQuestion(
   const meanA = mean(dataA)
   const meanB = mean(dataB)
   const aIsGreater = subFraction(meanA, meanB).num > 0
-  const greaterLabel = aIsGreater ? 'A' : 'B'
-  const greaterMean = aIsGreater ? meanA : meanB
-  const lesserMean = aIsGreater ? meanB : meanA
-  const correctAnswer = `Sample ${greaterLabel}, with a mean of ${mixedText(greaterMean)} compared to ${mixedText(lesserMean)}.`
-  const otherLabel = aIsGreater ? 'B' : 'A'
-  const distractors = [
-    `Sample ${otherLabel}, with a mean of ${mixedText(lesserMean)} compared to ${mixedText(greaterMean)}.`,
-    `Sample ${greaterLabel}, with a mean of ${mixedText(lesserMean)} compared to ${mixedText(greaterMean)}.`,
-    `Both samples have the same mean.`,
-  ]
+  const { correctAnswer, distractors } = twoSampleClaimChoices(
+    'mean',
+    mixedText(meanA),
+    mixedText(meanB),
+    aIsGreater ? 'A' : 'B',
+  )
   const definition = GRADE7_MATH_UNIT8_ITEM_DEFINITIONS['compare-two-samples-center']
   return makeCurriculumQuestion({
     itemType: 'compare-two-samples-center',
@@ -910,16 +952,12 @@ export function generateCompareTwoSamplesVariabilityQuestion(
   const rangeA = range(dataA)
   const rangeB = range(dataB)
   const aIsSmaller = rangeA < rangeB
-  const smallerLabel = aIsSmaller ? 'A' : 'B'
-  const smallerRange = aIsSmaller ? rangeA : rangeB
-  const largerRange = aIsSmaller ? rangeB : rangeA
-  const correctAnswer = `Sample ${smallerLabel}, with a range of ${smallerRange} compared to ${largerRange}.`
-  const otherLabel = aIsSmaller ? 'B' : 'A'
-  const distractors = [
-    `Sample ${otherLabel}, with a range of ${largerRange} compared to ${smallerRange}.`,
-    `Sample ${smallerLabel}, with a range of ${largerRange} compared to ${smallerRange}.`,
-    `Both samples have the same range.`,
-  ]
+  const { correctAnswer, distractors } = twoSampleClaimChoices(
+    'range',
+    String(rangeA),
+    String(rangeB),
+    aIsSmaller ? 'A' : 'B',
+  )
   const definition = GRADE7_MATH_UNIT8_ITEM_DEFINITIONS['compare-two-samples-variability']
   return makeCurriculumQuestion({
     itemType: 'compare-two-samples-variability',
