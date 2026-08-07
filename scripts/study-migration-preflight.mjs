@@ -5,6 +5,24 @@ import { resolve } from 'node:path'
 export const EXPECTED_STUDY_PROJECT_REF = 'ymtvzmqhfvwjtxjdmybs'
 export const UNSAFE_SESSION_17_SHA256 = '46c68426d21a79b90a3011d5fbfcca19044393887636dd845ca362f6e4e69443'
 
+/**
+ * Closed classification -> applicationStatus correspondence for the current
+ * pre-application contract. A historical baseline is a hosted object whose local
+ * definition was confirmed equivalent but whose ledger entry still awaits separate
+ * authorization; an executable migration has never run against the hosted project.
+ * No controlling document defines any other status, so any other pairing is a
+ * misclassification rather than a state this estate has reached.
+ */
+export const ALLOWED_APPLICATION_STATUS = new Map([
+  ['historical-baseline', 'hosted-equivalent-baseline-pending-authorization'],
+  ['executable', 'not-applied-hosted'],
+])
+
+function classificationStatusMismatch(entries) {
+  return entries.some((entry) =>
+    ALLOWED_APPLICATION_STATUS.get(entry?.classification) !== entry?.applicationStatus)
+}
+
 function sameStringArray(left, right) {
   return Array.isArray(left) && Array.isArray(right) &&
     left.length === right.length && left.every((value, index) => value === right[index])
@@ -41,17 +59,22 @@ export async function validateMigrationManifest(manifest, migrationDirectory) {
   )) reasons.push('migration-dependency-invalid')
   // The historical/executable boundary is whatever each entry declares, not a fixed
   // position: applying an executable migration promotes it to a historical baseline,
-  // and forward migrations are appended, so both counts move over time.
+  // and forward migrations are appended, so both counts move over time. What does not
+  // move is the shape — this lineage is an append-only chain rooted in migrations that
+  // already exist on the hosted project, so a legal manifest always has a nonempty
+  // historical prefix and a nonempty executable suffix.
   const classifications = entries.map((entry) => entry?.classification)
-  if (classifications.some((value) => value !== 'historical-baseline' && value !== 'executable')) {
+  if (classifications.some((value) => !ALLOWED_APPLICATION_STATUS.has(value))) {
     reasons.push('migration-classification-invalid')
   } else {
     const boundary = classifications.indexOf('executable')
     if (boundary < 0) reasons.push('migration-executable-set-empty')
-    else if (classifications.slice(boundary).some((value) => value !== 'executable')) {
+    else if (boundary === 0) reasons.push('migration-historical-baseline-set-empty')
+    if (boundary >= 0 && classifications.slice(boundary).some((value) => value !== 'executable')) {
       reasons.push('migration-classification-order-invalid')
     }
   }
+  if (classificationStatusMismatch(entries)) reasons.push('migration-classification-status-mismatch')
   if (entries.some((entry, index) =>
     typeof entry?.applicationStatus !== 'string' ||
     typeof entry?.requiredMarkerTransition !== 'string' ||
@@ -100,10 +123,21 @@ export function evaluateMigrationPreflight(evidence, manifest) {
   if (evidence?.hostedDriftAbsent !== true) reasons.push('hosted-drift-present-or-unknown')
   if (evidence?.finalMetadataRepreflightPassed !== true) reasons.push('final-metadata-repreflight-not-passed')
   if (evidence?.hostedMutationAuthorized === true) reasons.push('evidence-must-not-authorize-hosted-mutation')
+  // Re-checked here and not only in validateMigrationManifest: the checksum set below
+  // is derived from `classification` alone, so an executable entry wearing the
+  // historical hosted-equivalence status would otherwise buy itself an approval by
+  // having its checksum re-approved.
+  if (classificationStatusMismatch(Array.isArray(manifest?.migrations) ? manifest.migrations : [])) {
+    reasons.push('migration-classification-status-mismatch')
+  }
   const approved = Array.isArray(evidence?.approvedExecutableChecksums)
     ? evidence.approvedExecutableChecksums.map((value) => typeof value === 'string' ? value.toLowerCase() : '')
     : evidence?.approvedExecutableChecksums
   if (checksums.length === 0 || checksums.includes(UNSAFE_SESSION_17_SHA256)) reasons.push('unsafe-or-empty-executable-checksum-set')
+  // Exact ordered equality is a separate-authorization tripwire, not a proof of
+  // classification: it establishes that the evidence record and the manifest agree,
+  // which catches drift between records authored apart, but one actor holding both
+  // can always make them agree. Do not weaken it, and do not lean on it for more.
   if (!sameStringArray(approved, checksums)) reasons.push('final-checksum-set-not-approved')
   return Object.freeze({ allowed: reasons.length === 0, reasons: Object.freeze(reasons), checksums: Object.freeze(checksums) })
 }

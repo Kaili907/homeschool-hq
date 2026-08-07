@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterAll, describe, expect, it } from 'vitest'
 import {
+  ALLOWED_APPLICATION_STATUS,
   evaluateMigrationPreflight,
   EXPECTED_STUDY_PROJECT_REF,
   UNSAFE_SESSION_17_SHA256,
@@ -133,12 +134,66 @@ describe('manifest-driven historical/executable boundary', () => {
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('migration-classification-order-invalid')
   })
+})
 
-  it('rejects a manifest with no executable migration at all', async () => {
-    const { directory, manifest } = await buildFixture([HISTORICAL, HISTORICAL, HISTORICAL])
+/**
+ * This manifest lineage is an append-only chain rooted in migrations that already
+ * exist on the hosted project, so a legal manifest always has a nonempty
+ * historical prefix and a nonempty executable suffix. Both degenerate shapes are
+ * permanently illegal, not merely unusual.
+ */
+describe('nonempty historical prefix and nonempty executable suffix', () => {
+  it.each([
+    ['an all-historical manifest', [HISTORICAL, HISTORICAL, HISTORICAL], 'migration-executable-set-empty'],
+    ['a manifest with zero executable entries', [HISTORICAL], 'migration-executable-set-empty'],
+    ['an all-executable manifest', [EXECUTABLE, EXECUTABLE, EXECUTABLE], 'migration-historical-baseline-set-empty'],
+    ['a manifest with zero historical baselines', [EXECUTABLE], 'migration-historical-baseline-set-empty'],
+  ])('rejects %s', async (_label, classifications, reason) => {
+    const { directory, manifest } = await buildFixture(classifications as Classification[])
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
-    expect(result.reasons).toContain('migration-executable-set-empty')
+    expect(result.reasons).toContain(reason)
+  })
+})
+
+describe('classification and hosted application status correspondence', () => {
+  it('pins the closed allowed mapping', () => {
+    expect([...ALLOWED_APPLICATION_STATUS]).toEqual([
+      ['historical-baseline', 'hosted-equivalent-baseline-pending-authorization'],
+      ['executable', 'not-applied-hosted'],
+    ])
+  })
+
+  it.each([...ALLOWED_APPLICATION_STATUS])('accepts %s carrying %s', async (classification, status) => {
+    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
+    const index = manifest.migrations.findIndex((entry) => entry.classification === classification)
+    manifest.migrations[index].applicationStatus = status
+    await expect(validateMigrationManifest(manifest, directory))
+      .resolves.toMatchObject({ valid: true, reasons: [] })
+  })
+
+  it('rejects an executable entry carrying the historical hosted-equivalence status', async () => {
+    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
+    manifest.migrations[1].applicationStatus = 'hosted-equivalent-baseline-pending-authorization'
+    const result = await validateMigrationManifest(manifest, directory)
+    expect(result.valid).toBe(false)
+    expect(result.reasons).toContain('migration-classification-status-mismatch')
+  })
+
+  it('rejects a historical baseline masquerading as a pending-apply executable entry', async () => {
+    const { directory, manifest } = await buildFixture([HISTORICAL, HISTORICAL, EXECUTABLE])
+    manifest.migrations[1].applicationStatus = 'not-applied-hosted'
+    const result = await validateMigrationManifest(manifest, directory)
+    expect(result.valid).toBe(false)
+    expect(result.reasons).toContain('migration-classification-status-mismatch')
+  })
+
+  it('rejects an application status outside the closed mapping', async () => {
+    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
+    manifest.migrations[1].applicationStatus = 'applied-hosted'
+    const result = await validateMigrationManifest(manifest, directory)
+    expect(result.valid).toBe(false)
+    expect(result.reasons).toContain('migration-classification-status-mismatch')
   })
 })
 
@@ -279,13 +334,22 @@ describe('manifest against the migration files on disk', () => {
   })
 })
 
+function classified(classification: Classification, sha256: string) {
+  return {
+    classification,
+    applicationStatus: ALLOWED_APPLICATION_STATUS.get(classification),
+    supersessionStatus: 'current',
+    sha256,
+  }
+}
+
 describe('hosted Study migration authorization preflight', () => {
   const manifest = {
     schemaVersion: 1,
     migrations: [
-      { classification: 'historical-baseline', supersessionStatus: 'current', sha256: 'a'.repeat(64) },
-      { classification: 'executable', supersessionStatus: 'current', sha256: 'b'.repeat(64) },
-      { classification: 'executable', supersessionStatus: 'current', sha256: 'c'.repeat(64) },
+      classified(HISTORICAL, 'a'.repeat(64)),
+      classified(EXECUTABLE, 'b'.repeat(64)),
+      classified(EXECUTABLE, 'c'.repeat(64)),
     ],
   }
   const checksums = ['b'.repeat(64), 'c'.repeat(64)]
@@ -338,7 +402,7 @@ describe('hosted Study migration authorization preflight', () => {
   it('refuses an empty executable checksum set', () => {
     const historicalOnly = {
       schemaVersion: 1,
-      migrations: [{ classification: 'historical-baseline', supersessionStatus: 'current', sha256: 'a'.repeat(64) }],
+      migrations: [classified(HISTORICAL, 'a'.repeat(64))],
     }
     const result = evaluateMigrationPreflight(approvedEvidence([]), historicalOnly)
     expect(result.allowed).toBe(false)
@@ -349,12 +413,78 @@ describe('hosted Study migration authorization preflight', () => {
     const unsafe = {
       schemaVersion: 1,
       migrations: [
-        { classification: 'historical-baseline', supersessionStatus: 'current', sha256: 'a'.repeat(64) },
-        { classification: 'executable', supersessionStatus: 'current', sha256: UNSAFE_SESSION_17_SHA256 },
+        classified(HISTORICAL, 'a'.repeat(64)),
+        classified(EXECUTABLE, UNSAFE_SESSION_17_SHA256),
       ],
     }
     const result = evaluateMigrationPreflight(approvedEvidence([UNSAFE_SESSION_17_SHA256]), unsafe)
     expect(result.allowed).toBe(false)
     expect(result.reasons).toContain('unsafe-or-empty-executable-checksum-set')
+  })
+
+  it('refuses an executable entry carrying the baseline status even when the checksums are re-approved', () => {
+    const masquerading = {
+      schemaVersion: 1,
+      migrations: [
+        classified(HISTORICAL, 'a'.repeat(64)),
+        { ...classified(EXECUTABLE, 'b'.repeat(64)), applicationStatus: 'hosted-equivalent-baseline-pending-authorization' },
+      ],
+    }
+    // The rewrite is internally consistent: the evidence approves exactly the
+    // checksum set the rewritten manifest derives, so the checksum tripwire is
+    // silent. Only the classification/status cross-check catches it.
+    const result = evaluateMigrationPreflight(approvedEvidence(['b'.repeat(64)]), masquerading)
+    expect(result.reasons).not.toContain('final-checksum-set-not-approved')
+    expect(result.allowed).toBe(false)
+    expect(result.reasons).toContain('migration-classification-status-mismatch')
+  })
+
+  it('refuses a historical baseline masquerading as a pending-apply entry', () => {
+    const masquerading = {
+      schemaVersion: 1,
+      migrations: [
+        { ...classified(HISTORICAL, 'a'.repeat(64)), applicationStatus: 'not-applied-hosted' },
+        classified(EXECUTABLE, 'b'.repeat(64)),
+      ],
+    }
+    const result = evaluateMigrationPreflight(approvedEvidence(['b'.repeat(64)]), masquerading)
+    expect(result.allowed).toBe(false)
+    expect(result.reasons).toContain('migration-classification-status-mismatch')
+  })
+})
+
+/**
+ * `approvedExecutableChecksums` is a separate-authorization tripwire, not a
+ * cryptographic proof of classification. Exact ordered equality proves only that
+ * the evidence record and the manifest agree; it says nothing about who wrote
+ * either one. One actor holding both can always make them agree. These tests pin
+ * that boundary so the guarantee is never overstated — and are not licence to
+ * weaken the equality, which still catches every case where the two records were
+ * authored apart and drifted.
+ */
+describe('checksum equality as a separate-authorization tripwire', () => {
+  it('stays silent when one actor rewrites the manifest and the evidence together', () => {
+    const rewritten = {
+      schemaVersion: 1,
+      migrations: [
+        classified(HISTORICAL, 'a'.repeat(64)),
+        classified(EXECUTABLE, 'e'.repeat(64)),
+      ],
+    }
+    const result = evaluateMigrationPreflight(approvedEvidence(['e'.repeat(64)]), rewritten)
+    expect(result.reasons).not.toContain('final-checksum-set-not-approved')
+    expect(result.allowed).toBe(true)
+  })
+
+  it('still catches an evidence record that drifted from the manifest it approves', () => {
+    const result = evaluateMigrationPreflight(approvedEvidence(['e'.repeat(64)]), {
+      schemaVersion: 1,
+      migrations: [
+        classified(HISTORICAL, 'a'.repeat(64)),
+        classified(EXECUTABLE, 'f'.repeat(64)),
+      ],
+    })
+    expect(result.allowed).toBe(false)
+    expect(result.reasons).toContain('final-checksum-set-not-approved')
   })
 })

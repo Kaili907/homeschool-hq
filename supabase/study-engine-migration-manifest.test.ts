@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 import { readdir, readFile } from 'node:fs/promises'
 import { describe, expect, it } from 'vitest'
+import { ALLOWED_APPLICATION_STATUS } from '../scripts/study-migration-preflight.mjs'
 
 interface ManifestEntry {
   version: string
@@ -68,17 +69,30 @@ describe('Study migration manifest consistency', () => {
     expect(executable.map((entry) => entry.sha256)).not.toContain(unsafeSession17)
   })
 
-  it('classifies historical SQL as baseline-only and records the before-first-use supersession', async () => {
+  it('splits into a nonempty historical prefix and a nonempty executable suffix', async () => {
     const manifest = await loadManifest()
-    // The v2.2 hosted chain is four migrations (profiles base, student
-    // identity, household CAS, gateway usage) per the hosted ledger.
-    expect(manifest.migrations.slice(0, 4).every((entry) =>
-      entry.classification === 'historical-baseline' &&
-      entry.applicationStatus === 'hosted-equivalent-baseline-pending-authorization',
-    )).toBe(true)
-    expect(manifest.migrations.slice(4).every((entry) =>
-      entry.classification === 'executable' && entry.applicationStatus === 'not-applied-hosted',
-    )).toBe(true)
+    const classifications = manifest.migrations.map((entry) => entry.classification)
+    // Asserted by shape, never by position: applying an executable migration
+    // promotes it to a historical baseline and forward migrations are appended, so
+    // the boundary moves without the manifest becoming any less legal.
+    const boundary = classifications.indexOf('executable')
+    expect(boundary).toBeGreaterThan(0)
+    expect(classifications.slice(0, boundary))
+      .toEqual(Array<string>(boundary).fill('historical-baseline'))
+    expect(classifications.slice(boundary))
+      .toEqual(Array<string>(classifications.length - boundary).fill('executable'))
+  })
+
+  it('gives every entry the hosted application status its classification allows', async () => {
+    const manifest = await loadManifest()
+    for (const entry of manifest.migrations) {
+      expect(ALLOWED_APPLICATION_STATUS.get(entry.classification), entry.filename)
+        .toBe(entry.applicationStatus)
+    }
+  })
+
+  it('records the before-first-use supersession', async () => {
+    const manifest = await loadManifest()
     const corrected = manifest.migrations.find((entry) => entry.version === '20260801170000')
     expect(corrected).toMatchObject({
       supersessionStatus: 'supersedes-before-first-application',
