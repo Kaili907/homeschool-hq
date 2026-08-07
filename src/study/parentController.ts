@@ -1,4 +1,4 @@
-import type { StudyPortBundle } from './ports'
+import type { StudyParentControlPorts } from './ports'
 import type {
   StudyAdultAuthorization,
   StudyLearnerScope,
@@ -11,7 +11,7 @@ export class StudyParentController {
   readonly #now: () => Date
 
   constructor(
-    private readonly ports: StudyPortBundle,
+    private readonly ports: StudyParentControlPorts,
     options: { readonly now?: () => Date } = {},
   ) {
     this.#now = options.now ?? (() => new Date())

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import type { StudyPortBundle } from '../../study/ports'
+import type { StudySettingsPorts } from '../../study/ports'
 import type { HostStudyLaunchContext, StudyLearnerPreferences } from '../../study/types'
 import './study-host.css'
 
 export function StudySettings({ context, ports, onBack }: {
   context: HostStudyLaunchContext
-  ports: StudyPortBundle
+  ports: StudySettingsPorts
   onBack: () => void
 }) {
   const scope = { householdRef: context.householdRef, learnerRef: context.learnerRef }
