@@ -36,6 +36,67 @@ async function loadManifest(): Promise<Manifest> {
   return JSON.parse(await readFile(manifestUrl, 'utf8')) as Manifest
 }
 
+/**
+ * Independent byte custody for every migration on this lineage.
+ *
+ * Deliberately a second literal list, and deliberately NOT derived from the manifest.
+ * The manifest's own checksums are already checked against the files, but that pair
+ * agrees whenever one actor edits both — it is a drift tripwire, not proof that the
+ * bytes never moved. Ten of these migrations are recorded as applied against the hosted
+ * ledger and are permanently non-replayable; if their local bytes drift from what ran,
+ * every equivalence claim in `hosted-applied-evidence.json` quietly stops being about
+ * the files in this repository. This pin is what makes such a drift loud.
+ *
+ * A failure here is never fixed by updating the expected value. It means a migration's
+ * bytes changed, which for the ten hosted-applied members is a defect by construction.
+ */
+const CUSTODY_LF_SHA256: Readonly<Record<string, string>> = {
+  '20260724074106_academy_profiles_base.sql':
+    '16c609d24efb9b9694b410a2313e5f2f7228db5118e2ccc4fa779f03c1d53c51',
+  '20260724230000_academy_student_identity_foundation.sql':
+    '2c7825ba957b68a39413a1e2da81aebaa72fb35dde7abeeba6ea8a493ecf3bde',
+  '20260726120000_academy_household_revision_cas.sql':
+    '0d5556db9f1dc406234e08180051e8d54807870084223b25db18017b1648c268',
+  '20260731120000_academy_gateway_usage.sql':
+    '9eb92005e9c98e94f3fa365351ab527d01cee47da2d0ceac3db0a4e60d82c86f',
+  '20260801010000_academy_study_engine_storage.sql':
+    '7ebb25b0517f3b79b36e0399757715826a634fbdf731a9716fdeeb4dad9da0fa',
+  '20260801011000_academy_study_engine_authorization.sql':
+    '3e4fe306b9edfb17cf3fbf0f62b4c5565fdccc9abde1726d7205c60d822acfad',
+  '20260801012000_academy_study_engine_production_reconciliation.sql':
+    '8675afe9f5c802689234fc769e09a4f42bf7a19eba6c88bfeadb816a048910d3',
+  '20260801160000_academy_study_verified_identity.sql':
+    '4501be3757cb0baf53edc200e7673744b12626eeb84dd56d6fc2899e3d25338e',
+  '20260801170000_academy_study_adult_review_operations.sql':
+    '562b67462148d9e94933b0fd9007fad37a3b0a08cb8432383c0b228088c0d8eb',
+  '20260801190000_academy_study_final_production_reconciliation.sql':
+    'd4ccea295aac2bda67dbfd310650e1c625de867485ecc47f5e993f74c8006d00',
+  '20260806120000_academy_study_in_app_receipt_timestamp.sql':
+    'b690c634b9c629149d570c9ffc5e1664b060be1d9f45f76cb461503de2c6f3b6',
+}
+
+describe('migration byte custody', () => {
+  it('holds all eleven migrations byte-for-byte, independently of the manifest', async () => {
+    const files = (await readdir(migrationDirectory))
+      .filter((name) => /^\d{14}_.+\.sql$/.test(name))
+      .sort()
+    expect(files).toEqual(Object.keys(CUSTODY_LF_SHA256))
+    for (const [filename, expected] of Object.entries(CUSTODY_LF_SHA256)) {
+      const source = await readFile(new URL(filename, migrationDirectory), 'utf8')
+      expect(createHash('sha256').update(source.replaceAll('\r\n', '\n')).digest('hex'), filename)
+        .toBe(expected)
+    }
+  })
+
+  it('agrees with the manifest it is meant to cross-check', async () => {
+    // The two lists must match today. They are kept separate so that a change to one
+    // is visible against the other, not so that they can drift.
+    const manifest = await loadManifest()
+    expect(Object.fromEntries(manifest.migrations.map((entry) => [entry.filename, entry.sha256])))
+      .toEqual(CUSTODY_LF_SHA256)
+  })
+})
+
 describe('Study migration manifest consistency', () => {
   it('covers every SQL migration exactly once in strict filename and dependency order', async () => {
     const manifest = await loadManifest()
@@ -86,27 +147,43 @@ describe('Study migration manifest consistency', () => {
       .toEqual(Array<string>(classifications.length - boundary).fill('executable'))
   })
 
-  it('keeps every audited hosted foundation migration a historical baseline', async () => {
+  it('keeps every migration recorded as applied on hosted a historical baseline', async () => {
     const manifest = await loadManifest()
     // Imported from the validator rather than restated here: a second literal list is a
     // second thing to forget to update, and the whole point of this claim is that these
     // filenames mean the same thing to the checked-in manifest and to the gate that
     // reads it. Membership, never position — the boundary index legitimately moves as
     // executable migrations are applied and promoted.
+    //
+    // The status is pinned to the exact value rather than to set membership. The
+    // validator deliberately allows a historical baseline either hosted provenance, so
+    // set membership alone would let one of these ten regress to the pending-authorization
+    // status without a word. That regression mints no executable work — the floor still
+    // holds the classification — but it would misstate hosted history, which is the one
+    // thing this record exists to state correctly.
     for (const filename of FROZEN_HISTORICAL_BASELINE_FILENAMES) {
       const entry = manifest.migrations.find((candidate) => candidate.filename === filename)
       expect(entry, filename).toMatchObject({
         classification: 'historical-baseline',
-        applicationStatus: ALLOWED_APPLICATION_STATUS.get('historical-baseline'),
+        applicationStatus: 'hosted-applied-ledger-recorded',
       })
     }
+    expect(FROZEN_HISTORICAL_BASELINE_FILENAMES).toHaveLength(10)
   })
 
-  it('gives every entry the hosted application status its classification allows', async () => {
+  it('leaves the one never-applied migration executable and pending', async () => {
+    const manifest = await loadManifest()
+    const executable = manifest.migrations.filter((entry) => entry.classification === 'executable')
+    expect(executable.map((entry) => entry.filename))
+      .toEqual(['20260806120000_academy_study_in_app_receipt_timestamp.sql'])
+    expect(executable[0].applicationStatus).toBe('not-applied-hosted')
+  })
+
+  it('gives every entry a hosted application status its classification allows', async () => {
     const manifest = await loadManifest()
     for (const entry of manifest.migrations) {
-      expect(ALLOWED_APPLICATION_STATUS.get(entry.classification), entry.filename)
-        .toBe(entry.applicationStatus)
+      expect(ALLOWED_APPLICATION_STATUS.get(entry.classification)?.has(entry.applicationStatus), entry.filename)
+        .toBe(true)
     }
   })
 

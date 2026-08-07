@@ -6,6 +6,7 @@ import { afterAll, describe, expect, it } from 'vitest'
 import {
   ALLOWED_APPLICATION_STATUS,
   evaluateMigrationPreflight,
+  executableChecksums,
   EXPECTED_STUDY_PROJECT_REF,
   FROZEN_HISTORICAL_BASELINE_DEMOTED,
   FROZEN_HISTORICAL_BASELINE_FILENAMES,
@@ -46,6 +47,16 @@ afterAll(async () => {
 
 function canonicalSha256(source: string) {
   return createHash('sha256').update(source.replaceAll('\r\n', '\n')).digest('hex')
+}
+
+/**
+ * Any hosted application status the classification declares. A classification now
+ * admits a set rather than a single value, and a fixture that is not about the status
+ * only needs a legal one; derived rather than restated so a vocabulary change cannot
+ * leave the fixtures asserting against a value the validator no longer accepts.
+ */
+function allowedStatus(classification: Classification) {
+  return [...ALLOWED_APPLICATION_STATUS.get(classification)!][0]
 }
 
 /** A fresh in-memory copy of the real manifest, so each test mutates its own. */
@@ -97,7 +108,7 @@ async function buildFixture(
       sha256: canonicalSha256(body),
       dependency,
       classification,
-      applicationStatus: ALLOWED_APPLICATION_STATUS.get(classification)!,
+      applicationStatus: allowedStatus(classification),
       requiredMarkerTransition: marker,
       supersessionStatus: 'current',
     })
@@ -112,7 +123,6 @@ async function buildFixture(
     }
   }
 
-  const aboveFloor = migrations.length
   for (const [index, classification] of classifications.entries()) {
     const slug = `fixture_${String(index).padStart(2, '0')}`
     await append(
@@ -125,7 +135,6 @@ async function buildFixture(
 
   return {
     directory,
-    aboveFloor,
     manifest: { schemaVersion: 1, projectRef: EXPECTED_STUDY_PROJECT_REF, migrations } satisfies Manifest,
   }
 }
@@ -147,6 +156,72 @@ function approvedEvidence(checksums: string[]) {
 const HISTORICAL: Classification = 'historical-baseline'
 const EXECUTABLE: Classification = 'executable'
 const GATEWAY_USAGE = '20260731120000_academy_gateway_usage.sql'
+
+/**
+ * The four foundation migrations the Aug 2 2026 reset left in the hosted ledger, and
+ * the six Study migrations the Aug 3 2026 DDL burst applied to it. Restated literally
+ * and never derived, because this is a claim about hosted history rather than a view
+ * of the manifest: a list computed from the manifest would agree with whatever the
+ * manifest happens to say, which is exactly the agreement these two lists exist to
+ * refuse. See `hosted-applied-evidence.json` for the provenance and its limits.
+ */
+const HOSTED_APPLIED_FOUNDATION_FILENAMES = [
+  '20260724074106_academy_profiles_base.sql',
+  '20260724230000_academy_student_identity_foundation.sql',
+  '20260726120000_academy_household_revision_cas.sql',
+  '20260731120000_academy_gateway_usage.sql',
+]
+
+const HOSTED_APPLIED_STUDY_FILENAMES = [
+  '20260801010000_academy_study_engine_storage.sql',
+  '20260801011000_academy_study_engine_authorization.sql',
+  '20260801012000_academy_study_engine_production_reconciliation.sql',
+  '20260801160000_academy_study_verified_identity.sql',
+  '20260801170000_academy_study_adult_review_operations.sql',
+  '20260801190000_academy_study_final_production_reconciliation.sql',
+]
+
+const HOSTED_APPLIED_FILENAMES = [
+  ...HOSTED_APPLIED_FOUNDATION_FILENAMES,
+  ...HOSTED_APPLIED_STUDY_FILENAMES,
+]
+
+/**
+ * An already-applied migration can never be offered as executable work, and the gate
+ * reads that offer out of `classification` alone. This is the trap the reconciliation
+ * closes: before it, all six Study migrations sat in the executable checksum set, so
+ * an authorized preflight would have replayed DDL that ran against hosted on Aug 3.
+ */
+describe('hosted-applied migrations are never executable work', () => {
+  it.each(HOSTED_APPLIED_STUDY_FILENAMES)(
+    'keeps the already-applied %s out of the executable checksum set',
+    async (filename) => {
+      const manifest = await checkedInManifest()
+      const entry = manifest.migrations.find((candidate) => candidate.filename === filename)
+      expect(entry, filename).toBeDefined()
+      expect(entry!.classification, filename).toBe(HISTORICAL)
+      expect(executableChecksums(manifest), filename).not.toContain(entry!.sha256)
+    },
+  )
+
+  it('leaves exactly one executable migration on this lineage', async () => {
+    const manifest = await checkedInManifest()
+    expect(manifest.migrations.filter((entry) => entry.classification === EXECUTABLE)
+      .map((entry) => entry.filename))
+      .toEqual(['20260806120000_academy_study_in_app_receipt_timestamp.sql'])
+  })
+
+  it('records every hosted-applied migration as ledger-recorded', async () => {
+    const manifest = await checkedInManifest()
+    for (const filename of HOSTED_APPLIED_FILENAMES) {
+      expect(manifest.migrations.find((entry) => entry.filename === filename), filename)
+        .toMatchObject({
+          classification: HISTORICAL,
+          applicationStatus: 'hosted-applied-ledger-recorded',
+        })
+    }
+  })
+})
 
 describe('manifest-driven historical/executable boundary', () => {
   it('accepts the checked-in manifest and its real migration files', async () => {
@@ -212,39 +287,90 @@ describe('nonempty historical prefix and nonempty executable suffix', () => {
   })
 })
 
+/**
+ * A classification admits a SET of hosted application statuses, not one status. A
+ * historical baseline is a hosted object whose local definition was confirmed
+ * equivalent; whether its hosted ledger row is merely awaiting separate authorization
+ * or is already recorded as applied is a second, independent fact about the same
+ * migration, and both are legal states for the same classification. An executable
+ * migration has never run against the hosted project, so it admits exactly one.
+ *
+ * The cross-product is enumerated rather than sampled: every declared classification
+ * against every declared status, each row stating whether the pairing is legal. The
+ * coverage test below fails the moment the vocabulary grows without a row to match,
+ * so a new status cannot be introduced with its illegal pairings left unasserted.
+ */
+const APPLICATION_STATUS_MATRIX: readonly (readonly [Classification, string, boolean])[] = [
+  [HISTORICAL, 'hosted-equivalent-baseline-pending-authorization', true],
+  [HISTORICAL, 'hosted-applied-ledger-recorded', true],
+  [HISTORICAL, 'not-applied-hosted', false],
+  [EXECUTABLE, 'not-applied-hosted', true],
+  [EXECUTABLE, 'hosted-applied-ledger-recorded', false],
+  [EXECUTABLE, 'hosted-equivalent-baseline-pending-authorization', false],
+]
+
 describe('classification and hosted application status correspondence', () => {
-  it('pins the closed allowed mapping', () => {
-    expect([...ALLOWED_APPLICATION_STATUS]).toEqual([
-      ['historical-baseline', 'hosted-equivalent-baseline-pending-authorization'],
-      ['executable', 'not-applied-hosted'],
+  it('pins the closed allowed vocabulary', () => {
+    expect([...ALLOWED_APPLICATION_STATUS].map(([classification, statuses]) =>
+      [classification, [...statuses]])).toEqual([
+      ['historical-baseline', [
+        'hosted-equivalent-baseline-pending-authorization',
+        'hosted-applied-ledger-recorded',
+      ]],
+      ['executable', ['not-applied-hosted']],
     ])
   })
 
-  it.each([...ALLOWED_APPLICATION_STATUS])('accepts %s carrying %s', async (classification, status) => {
-    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
-    const index = manifest.migrations.findIndex((entry) => entry.classification === classification)
-    manifest.migrations[index].applicationStatus = status
-    await expect(validateMigrationManifest(manifest, directory))
-      .resolves.toMatchObject({ valid: true, reasons: [] })
+  it('enumerates every declared classification against every declared status', () => {
+    // A per-pairing test list is always one vocabulary change behind. Deriving the
+    // expected cross-product from the validator's own declaration makes the matrix
+    // above fail first, rather than silently covering a shrinking fraction of it.
+    const statuses = [...new Set([...ALLOWED_APPLICATION_STATUS.values()].flatMap((set) => [...set]))]
+    const expected = [...ALLOWED_APPLICATION_STATUS.keys()]
+      .flatMap((classification) => statuses.map((status) => `${classification}|${status}`))
+    expect(APPLICATION_STATUS_MATRIX.map(([classification, status]) => `${classification}|${status}`).sort())
+      .toEqual(expected.sort())
   })
 
-  it('rejects an executable entry carrying the historical hosted-equivalence status', async () => {
-    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
-    manifest.migrations.at(-1)!.applicationStatus = 'hosted-equivalent-baseline-pending-authorization'
-    const result = await validateMigrationManifest(manifest, directory)
-    expect(result.valid).toBe(false)
-    expect(result.reasons).toContain('migration-classification-status-mismatch')
-  })
+  it.each(APPLICATION_STATUS_MATRIX.filter(([, , legal]) => legal))(
+    'accepts %s carrying %s',
+    async (classification, status) => {
+      const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
+      const index = manifest.migrations.findLastIndex((entry) => entry.classification === classification)
+      manifest.migrations[index].applicationStatus = status
+      await expect(validateMigrationManifest(manifest, directory))
+        .resolves.toMatchObject({ valid: true, reasons: [] })
+    },
+  )
 
-  it('rejects a historical baseline masquerading as a pending-apply executable entry', async () => {
-    const { directory, manifest, aboveFloor } = await buildFixture([HISTORICAL, EXECUTABLE])
-    manifest.migrations[aboveFloor].applicationStatus = 'not-applied-hosted'
-    const result = await validateMigrationManifest(manifest, directory)
-    expect(result.valid).toBe(false)
-    expect(result.reasons).toContain('migration-classification-status-mismatch')
-  })
+  it.each(APPLICATION_STATUS_MATRIX.filter(([, , legal]) => !legal))(
+    'rejects %s carrying %s',
+    async (classification, status) => {
+      const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
+      const index = manifest.migrations.findLastIndex((entry) => entry.classification === classification)
+      manifest.migrations[index].applicationStatus = status
+      const result = await validateMigrationManifest(manifest, directory)
+      expect(result.valid).toBe(false)
+      expect(result.reasons).toContain('migration-classification-status-mismatch')
+    },
+  )
 
-  it('rejects an application status outside the closed mapping', async () => {
+  it.each(APPLICATION_STATUS_MATRIX.filter(([, , legal]) => !legal))(
+    'refuses %s carrying %s in the authorization gate too',
+    async (classification, status) => {
+      // The gate re-runs this cross-check because its executable checksum set is derived
+      // from `classification` alone; an entry wearing a status its classification forbids
+      // would otherwise buy approval by having its checksum re-approved alongside.
+      const { manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
+      const index = manifest.migrations.findLastIndex((entry) => entry.classification === classification)
+      manifest.migrations[index].applicationStatus = status
+      const result = evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest)
+      expect(result.allowed).toBe(false)
+      expect(result.reasons).toContain('migration-classification-status-mismatch')
+    },
+  )
+
+  it('rejects an application status outside the declared vocabulary entirely', async () => {
     const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
     manifest.migrations.at(-1)!.applicationStatus = 'applied-hosted'
     const result = await validateMigrationManifest(manifest, directory)
@@ -414,12 +540,13 @@ describe('manifest against the migration files on disk', () => {
  */
 describe('frozen hosted historical baseline floor', () => {
   it('pins the audited floor membership', () => {
-    expect([...FROZEN_HISTORICAL_BASELINE_FILENAMES]).toEqual([
-      '20260724074106_academy_profiles_base.sql',
-      '20260724230000_academy_student_identity_foundation.sql',
-      '20260726120000_academy_household_revision_cas.sql',
-      '20260731120000_academy_gateway_usage.sql',
-    ])
+    // Exactly the ten migrations recorded as applied against the hosted ledger — the
+    // four foundation files and the six Study files — and nothing else. The eleventh
+    // migration on this lineage has never run against hosted and must stay executable.
+    expect([...FROZEN_HISTORICAL_BASELINE_FILENAMES]).toEqual(HOSTED_APPLIED_FILENAMES)
+    expect(FROZEN_HISTORICAL_BASELINE_FILENAMES).toHaveLength(10)
+    expect(FROZEN_HISTORICAL_BASELINE_FILENAMES)
+      .not.toContain('20260806120000_academy_study_in_app_receipt_timestamp.sql')
   })
 
   it('holds every floor member as a historical baseline in the checked-in manifest', async () => {
@@ -428,7 +555,7 @@ describe('frozen hosted historical baseline floor', () => {
       expect(manifest.migrations.find((entry) => entry.filename === filename), filename)
         .toMatchObject({
           classification: 'historical-baseline',
-          applicationStatus: 'hosted-equivalent-baseline-pending-authorization',
+          applicationStatus: 'hosted-applied-ledger-recorded',
         })
     }
   })
@@ -445,11 +572,14 @@ describe('frozen hosted historical baseline floor', () => {
   })
 
   it('is the only rule that catches a demotion of the last floor member', async () => {
-    // The exact hole this session closes. Demoting the newest floor member leaves the
-    // manifest legal by every other rule — ordered, dependency-chained, correctly
-    // paired, checksums intact — so the reason set is a single entry.
+    // Demoting the newest floor member leaves the manifest legal by every other rule —
+    // ordered, dependency-chained, correctly paired, checksums intact — so the reason
+    // set is a single entry. Derived from the floor rather than named, because which
+    // migration is newest changes every time the floor grows, and naming it would quietly
+    // turn this into a test about some interior member that other rules also catch.
     const manifest = await checkedInManifest()
-    Object.assign(manifest.migrations.find((entry) => entry.filename === GATEWAY_USAGE)!, {
+    Object.assign(manifest.migrations.find((entry) =>
+      entry.filename === FROZEN_HISTORICAL_BASELINE_FILENAMES.at(-1))!, {
       classification: 'executable',
       applicationStatus: 'not-applied-hosted',
     })
@@ -585,7 +715,7 @@ describe('frozen floor is immune to duplicated frozen filenames', () => {
     manifest.migrations.splice(index, 1, ...classifications.map((classification) => ({
       ...original,
       classification,
-      applicationStatus: ALLOWED_APPLICATION_STATUS.get(classification)!,
+      applicationStatus: allowedStatus(classification),
     })))
     return { manifest, sha256: original.sha256 }
   }
@@ -707,50 +837,45 @@ describe('frozen floor is immune to duplicated frozen filenames', () => {
  * of executable work entirely.
  */
 describe('legal growth above the frozen floor', () => {
-  async function promoteFirstExecutables(count: number) {
-    const manifest = await checkedInManifest()
-    for (const entry of manifest.migrations.filter((candidate) => candidate.classification === 'executable').slice(0, count)) {
-      entry.classification = 'historical-baseline'
-      entry.applicationStatus = ALLOWED_APPLICATION_STATUS.get('historical-baseline')!
-    }
-    return manifest
-  }
+  /**
+   * Growth is exercised on fixtures rather than on the checked-in manifest. That
+   * manifest now carries exactly one executable migration, so promoting it does not
+   * demonstrate growth — it exhausts the executable set, which is the shape-rule case
+   * pinned at the end of this block. Fixtures write real files for every checksum
+   * assertion and lay down the real ten-member floor, so nothing is lost by moving.
+   */
+  const GROWTH_SIZES = [1, 2, 3, 5, 8]
 
-  it('accepts promoting the next executable migration to a historical baseline', async () => {
-    const manifest = await promoteFirstExecutables(1)
-    const historical = manifest.migrations.filter((entry) => entry.classification === 'historical-baseline')
-    expect(historical).toHaveLength(FROZEN_HISTORICAL_BASELINE_FILENAMES.length + 1)
-    await expect(validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL))
+  it.each(GROWTH_SIZES)('accepts %i migrations promoted above the floor', async (promoted) => {
+    const { directory, manifest } = await buildFixture(
+      [...Array<Classification>(promoted).fill(HISTORICAL), EXECUTABLE],
+    )
+    expect(manifest.migrations.filter((entry) => entry.classification === HISTORICAL))
+      .toHaveLength(FROZEN_HISTORICAL_BASELINE_FILENAMES.length + promoted)
+    await expect(validateMigrationManifest(manifest, directory), `promoted ${promoted}`)
       .resolves.toMatchObject({ valid: true, reasons: [] })
+    expect(
+      evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest),
+      `promoted ${promoted}`,
+    ).toMatchObject({ allowed: true, reasons: [] })
   })
 
-  it('keeps every frozen member present through that promotion', async () => {
-    const manifest = await promoteFirstExecutables(1)
+  it.each(GROWTH_SIZES)('keeps every frozen member present through %i promotions', async (promoted) => {
+    const { manifest } = await buildFixture(
+      [...Array<Classification>(promoted).fill(HISTORICAL), EXECUTABLE],
+    )
     for (const filename of FROZEN_HISTORICAL_BASELINE_FILENAMES) {
       expect(manifest.migrations.find((entry) => entry.filename === filename), filename)
-        .toMatchObject({ classification: 'historical-baseline' })
-    }
-  })
-
-  it('accepts every further promotion up to the last executable migration', async () => {
-    const checkedIn = await checkedInManifest()
-    const executables = checkedIn.migrations.filter((entry) => entry.classification === 'executable').length
-    expect(executables).toBeGreaterThan(1)
-    for (let promoted = 1; promoted < executables; promoted += 1) {
-      const manifest = await promoteFirstExecutables(promoted)
-      await expect(validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL), `promoted ${promoted}`)
-        .resolves.toMatchObject({ valid: true, reasons: [] })
-      expect(
-        evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest),
-        `promoted ${promoted}`,
-      ).toMatchObject({ allowed: true, reasons: [] })
+        .toMatchObject({ classification: HISTORICAL })
     }
   })
 
   it('stops at the shape rule, not the floor, when every executable is promoted', async () => {
-    const checkedIn = await checkedInManifest()
-    const executables = checkedIn.migrations.filter((entry) => entry.classification === 'executable').length
-    const manifest = await promoteFirstExecutables(executables)
+    const manifest = await checkedInManifest()
+    for (const entry of manifest.migrations.filter((candidate) => candidate.classification === EXECUTABLE)) {
+      entry.classification = HISTORICAL
+      entry.applicationStatus = allowedStatus(HISTORICAL)
+    }
     const result = await validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('migration-executable-set-empty')
@@ -769,7 +894,7 @@ describe('legal growth above the frozen floor', () => {
 function classified(classification: Classification, sha256: string, filename?: string) {
   return {
     classification,
-    applicationStatus: ALLOWED_APPLICATION_STATUS.get(classification),
+    applicationStatus: allowedStatus(classification),
     supersessionStatus: 'current',
     sha256,
     filename: filename ?? `2026090100000${sha256.slice(0, 1)}_synthetic.sql`,

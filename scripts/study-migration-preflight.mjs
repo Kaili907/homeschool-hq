@@ -6,16 +6,32 @@ export const EXPECTED_STUDY_PROJECT_REF = 'ymtvzmqhfvwjtxjdmybs'
 export const UNSAFE_SESSION_17_SHA256 = '46c68426d21a79b90a3011d5fbfcca19044393887636dd845ca362f6e4e69443'
 
 /**
- * Closed classification -> applicationStatus correspondence for the current
- * pre-application contract. A historical baseline is a hosted object whose local
- * definition was confirmed equivalent but whose ledger entry still awaits separate
- * authorization; an executable migration has never run against the hosted project.
- * No controlling document defines any other status, so any other pairing is a
- * misclassification rather than a state this estate has reached.
+ * Closed classification -> allowed applicationStatus SET.
+ *
+ * Classification stays bivalent — a migration is either already part of hosted history
+ * or it is work this estate may still run — because that is the only distinction the
+ * gate acts on. What a single status could not express is that the historical side has
+ * two genuinely different provenances, and they are not interchangeable:
+ *
+ *   hosted-equivalent-baseline-pending-authorization
+ *     the hosted object was confirmed equivalent to the local definition, but its
+ *     ledger entry still awaits separate authorization
+ *   hosted-applied-ledger-recorded
+ *     the migration is recorded in the hosted ledger as applied
+ *
+ * Both mean "never replayable", which is why both sit under one classification. An
+ * executable migration has never run against the hosted project, so it admits exactly
+ * one status; in particular it may never claim to be ledger-recorded, and a historical
+ * baseline may never claim it has not been applied. No controlling document defines any
+ * other status, so any other pairing is a misclassification rather than a state this
+ * estate has reached.
  */
 export const ALLOWED_APPLICATION_STATUS = new Map([
-  ['historical-baseline', 'hosted-equivalent-baseline-pending-authorization'],
-  ['executable', 'not-applied-hosted'],
+  ['historical-baseline', new Set([
+    'hosted-equivalent-baseline-pending-authorization',
+    'hosted-applied-ledger-recorded',
+  ])],
+  ['executable', new Set(['not-applied-hosted'])],
 ])
 
 /**
@@ -29,12 +45,25 @@ export const ALLOWED_APPLICATION_STATUS = new Map([
  * prefix — so any rule phrased as a count or an offset stops meaning "these
  * migrations are already hosted" the moment the lineage grows. This list is a floor,
  * not a ceiling: the historical set may grow above it and never shrink below it.
+ *
+ * Ten members: the four foundation migrations the Aug 2 2026 reset left in the hosted
+ * ledger, and the six Study migrations the Aug 3 2026 DDL burst applied to it. The six
+ * were carried as executable until this reconciliation — a repository record that had
+ * fallen behind hosted reality, and one that offered six already-applied migrations as
+ * replayable work. The eleventh migration on this lineage has never run against hosted
+ * and is deliberately absent from this floor.
  */
 export const FROZEN_HISTORICAL_BASELINE_FILENAMES = Object.freeze([
   '20260724074106_academy_profiles_base.sql',
   '20260724230000_academy_student_identity_foundation.sql',
   '20260726120000_academy_household_revision_cas.sql',
   '20260731120000_academy_gateway_usage.sql',
+  '20260801010000_academy_study_engine_storage.sql',
+  '20260801011000_academy_study_engine_authorization.sql',
+  '20260801012000_academy_study_engine_production_reconciliation.sql',
+  '20260801160000_academy_study_verified_identity.sql',
+  '20260801170000_academy_study_adult_review_operations.sql',
+  '20260801190000_academy_study_final_production_reconciliation.sql',
 ])
 
 /** One reason for every way a frozen member can stop being a present historical baseline. */
@@ -65,7 +94,7 @@ function frozenHistoricalBaselineViolated(entries) {
 
 function classificationStatusMismatch(entries) {
   return entries.some((entry) =>
-    ALLOWED_APPLICATION_STATUS.get(entry?.classification) !== entry?.applicationStatus)
+    !ALLOWED_APPLICATION_STATUS.get(entry?.classification)?.has(entry?.applicationStatus))
 }
 
 function sameStringArray(left, right) {

@@ -1,5 +1,10 @@
 {
   "schemaVersion": 1,
+  "supersededBy": {
+    "record": "hosted-applied-evidence.json",
+    "on": "2026-08-07",
+    "note": "Pointer only. Every fact below stands exactly as its author recorded it and is deliberately unedited — the author did not have hosted access, and this file must keep saying so. The later record establishes that ten migrations are ledger-recorded as applied on hosted, which this file's authorization flags predate rather than contradict. Those flags remain false and are not reopened here."
+  },
   "projectRef": "ymtvzmqhfvwjtxjdmybs",
   "organization": "Manuel Academy",
   "project": "Manuel Academy",
