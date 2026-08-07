@@ -296,6 +296,14 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           return
         }
         if (result.status === 'stopped') {
+          // STUDY-A1-BRIDGE-STATUS-C — every result reaching here is a safety
+          // determination, and that is now the runtime's guarantee rather than
+          // this branch's assumption. A structural Tutor bridge failure — an
+          // event-ledger collision, a replayed turn, an identifier the bridge
+          // refuses — arrives as `quarantined` below and never as a stop, so it
+          // writes none of what follows. See runtimeFacade's
+          // `classifiedBridgeFailure`.
+          //
           // Durable first, before anything that can fail. The lock and the
           // adult-visible record must survive a refresh and must exist even
           // when no server proposal was ever created for this stop.
@@ -334,6 +342,10 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           lifecycle.cancel('safety-stop')
           return
         }
+        // A structural refusal, carrying no classification, no delivery status
+        // and no student message: nothing durable, no safety event, no lock, no
+        // safety-stop cancellation. It fails closed into the neutral technical
+        // surface below, which offers no way to continue Tutor work.
         if (result.status === 'quarantined') throw new Error('quarantined')
         acceptedEventRef = result.eventRef
         setCheckingTutorSafety(false)
