@@ -67,6 +67,10 @@ describe('AssessmentResults tells a parent what actually happened', () => {
     expect(html).not.toContain('0 no response')
     expect(html).toContain('may')
     expect(html).toContain('left blank')
+    // both counts a seen-but-blank item could have landed in under the older rule
+    expect(html).toMatch(/skip count/)
+    expect(html).toMatch(/to-grade count/)
+    expect(html).not.toMatch(/corrupt|lost|damaged|invalid/i)
   })
 
   it('a fresh summary reporting zero says zero, with no compatibility note', () => {

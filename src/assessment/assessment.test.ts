@@ -454,6 +454,25 @@ describe('response disposition tells the truth about what the child did', () => 
     expect(report).toMatch(/NOTE: .*scored before/)
   })
 
+  it('the legacy note names BOTH counts a seen-but-blank item could have landed in', () => {
+    // Older scoring had no no-response bucket: an absent record was folded into the
+    // skip count, and a stored blank scored as unmatched and raised the human-grading
+    // count. Neither is recoverable, so the note must not name only one of them.
+    const legacy: Attempt = {
+      ...attempt({ d1: { value: '', skipped: false, msOnItem: 900 } }, NOW_FINISH),
+      autoScore: { bySection: { Only: { correct: 0, of: 0 } }, gradedItems: 1, skips: 1 },
+    }
+    const note = buildReport(test, legacy, 'Third Grader')
+      .split('\n')
+      .find((l) => l.startsWith('- NOTE:'))!
+
+    expect(note).toMatch(/skip/i)
+    expect(note).toMatch(/grading/i)
+    expect(note).toMatch(/may/i) // uncertainty, not a restatement of history
+    // it explains an older counting rule; it does not accuse the data of being broken
+    expect(note).not.toMatch(/corrupt|lost|damaged|invalid|wrong|error/i)
+  })
+
   it('a fresh autoScore reporting zero no-responses says 0', () => {
     const fresh: Attempt = {
       ...attempt({ d1: { value: '7', skipped: false, msOnItem: 900 } }, NOW_FINISH),
@@ -462,6 +481,88 @@ describe('response disposition tells the truth about what the child did', () => 
     const report = buildReport(test, fresh, 'Third Grader')
     expect(report).toContain('- Seen, no response: 0')
     expect(report).not.toMatch(/NOTE: .*scored before/)
+  })
+})
+
+// ---------- the persisted tally describes the attempt it is stored on ----------
+
+describe('finishAttempt scores the finished attempt, not the in-progress one', () => {
+  const ALL_IDS = HS_GRAMMAR.sections.flatMap((s) => s.items.map((i) => i.id))
+
+  /** Drive the real pipeline end to end: start, record only these items, finish. */
+  const run = (record: (state: ReturnType<typeof emptyAssessmentState>) => ReturnType<typeof emptyAssessmentState>): Attempt => {
+    let state = emptyAssessmentState()
+    state = startAttempt(state, HS_GRAMMAR.id, 'p', NOW_START).state
+    state = record(state)
+    state = finishAttempt(state, HS_GRAMMAR, NOW_FINISH)
+    return getState(state).attempts[0]
+  }
+
+  /** Answer everything except the listed ids. */
+  const answerAllBut = (untouched: string[]) =>
+    run((state) => {
+      for (const id of ALL_IDS) {
+        if (untouched.includes(id)) continue
+        state = recordAnswer(state, HS_GRAMMAR.id, id, 'was', false, 5000)
+      }
+      return state
+    })
+
+  const noResponseGrades = (a: Attempt) =>
+    gradeAttempt(HS_GRAMMAR, a).filter((g) => g.disposition === 'no-response').length
+
+  const cases: Array<[string, string[]]> = [
+    ['the FIRST item untouched', ['g1']],
+    ['a MIDDLE item untouched', ['g8']],
+    ['the LAST item untouched', ['g15']],
+    ['every item untouched', ALL_IDS],
+  ]
+
+  for (const [label, untouched] of cases) {
+    it(`persists the tally the finished attempt actually shows — ${label}`, () => {
+      const attempt = answerAllBut(untouched)
+      expect(attempt.finishedAt).toBe(NOW_FINISH)
+      expect(attempt.autoScore!.noResponse).toBe(untouched.length)
+      expect(attempt.autoScore!.noResponse).toBe(noResponseGrades(attempt))
+    })
+  }
+
+  it('the stored score equals a full recompute over the persisted finished attempt', () => {
+    for (const [, untouched] of cases) {
+      const attempt = answerAllBut(untouched)
+      expect(attempt.autoScore).toEqual(computeAutoScore(HS_GRAMMAR, attempt))
+    }
+  })
+
+  it('a fresh report cannot claim one no-response and then list fifteen', () => {
+    // She opened the first item, typed nothing, and never touched the other 14.
+    // Under the old ordering the stored summary said 1 and the list showed 15.
+    const attempt = run((state) => recordAnswer(state, HS_GRAMMAR.id, 'g1', '', false, 2000))
+    const report = buildReport(HS_GRAMMAR, attempt, 'Tenth Grader')
+
+    const listed = report.split('\n').filter((l) => l.includes('SEEN — NO RESPONSE')).length
+    expect(listed).toBe(itemCount(HS_GRAMMAR))
+    expect(report).toContain(`- Seen, no response: ${listed}`)
+    expect(report).not.toContain('- Seen, no response: 1\n')
+  })
+
+  it('a deliberate skip stays a skip and is never folded into the no-response tally', () => {
+    const attempt = run((state) => {
+      state = recordAnswer(state, HS_GRAMMAR.id, 'g2', '', true, 3000)
+      state = recordAnswer(state, HS_GRAMMAR.id, 'g3', 'was', false, 4000)
+      return state
+    })
+    const score = attempt.autoScore!
+    expect(score.skips).toBe(1)
+    expect(score.noResponse).toBe(13) // 15 - the skip - the answered one
+    expect(score.noResponse).toBe(noResponseGrades(attempt))
+  })
+
+  it('a fresh finished attempt never carries the legacy caveat', () => {
+    const attempt = answerAllBut(['g1'])
+    const report = buildReport(HS_GRAMMAR, attempt, 'Tenth Grader')
+    expect(report).not.toMatch(/NOTE: .*scored before/)
+    expect(report).toContain('- Seen, no response: 1')
   })
 })
 

@@ -89,8 +89,9 @@ export function AssessmentResults({ test, attempt, studentName }: AssessmentResu
 
       {score && score.noResponse === undefined && (
         <div className="mb-3 rounded border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-500">
-          Scored before seen-but-blank items were counted separately, so the skip count above may
-          include items she saw and left blank. The per-item list below is the reliable record.
+          Scored before seen-but-blank items were counted separately, so the skip count and the
+          to-grade count above may each include items she saw and left blank. The per-item list
+          below is the current record.
         </div>
       )}
 

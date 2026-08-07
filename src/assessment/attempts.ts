@@ -228,7 +228,12 @@ export function finishAttempt(
   const s = getState(state)
   const attempts = s.attempts.map((a) => {
     if (a.testId !== test.id || a.finishedAt) return a
-    return { ...a, finishedAt: nowISO, autoScore: computeAutoScore(test, a) }
+    // Score the attempt as it will be STORED, not as it is now. dispositionOf reads
+    // finishedAt to tell "never reached" from "seen and left blank", so scoring the
+    // pre-finish object persists a tally the finished attempt itself contradicts:
+    // every untouched item counts as not-reached here and as no-response forever after.
+    const finished: Attempt = { ...a, finishedAt: nowISO }
+    return { ...finished, autoScore: computeAutoScore(test, finished) }
   })
   return { ...s, attempts }
 }

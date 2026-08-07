@@ -57,13 +57,16 @@ export function buildReport(test: FixedTest, attempt: Attempt, studentName: stri
   lines.push(`- Items needing human grading: ${score.gradedItems}`)
   lines.push(`- Deliberate skips: ${score.skips}`)
   if (score.noResponse === undefined) {
-    // Persisted before this tally existed. The number is not zero — it is unknown,
-    // and the old skip count folded these items in, so say so rather than imply a
-    // precision this summary never had.
+    // Persisted before this tally existed. The number is not zero — it is unknown.
+    // Older scoring had no bucket for a seen-but-blank item, so one could land in
+    // EITHER count above: an absent record read as a skip, a stored blank read as
+    // unmatched work for a human. Which one happened is not recoverable from what
+    // was stored, so name both rather than imply a precision this summary never had.
     lines.push(`- Seen, no response: not recorded`)
     lines.push(
       `- NOTE: this attempt was scored before seen-but-blank items were counted separately. ` +
-        `Its skip count may include items that were seen and left blank; the per-item list below is authoritative.`,
+        `Its skip count and its needs-grading count may each include items that were seen and ` +
+        `left blank; read the per-item list below for the current picture.`,
     )
   } else {
     lines.push(`- Seen, no response: ${score.noResponse}`)
