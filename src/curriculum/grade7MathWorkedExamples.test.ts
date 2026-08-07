@@ -420,6 +420,12 @@ describe('Grade 7 Unit 3 renders the algebra its worked examples teach', () => {
  * corrected: that unit deliberately stopped emitting `5xx`, `0x - 8` and
  * wrong-kind distractors, and the choice sets moved with it. The other 42 digests
  * are the originals and are what proves no other Grade 7 unit moved with it.
+ *
+ * `u3:context-expression` was then re-taken a second time when that item type
+ * stopped charging a negative number of dollars per ticket. Its rate is now the
+ * magnitude of the same coefficient draw, so roughly half its prompts, correct
+ * answers and distractor sets moved. Nothing else about the draw changed, which
+ * is why this is the only digest of the 48 that moves with that correction.
  */
 const BASELINE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u1:unit-rate-fraction', '87483669116129bc803bd38fdf74d028d6beb4017bf1be7ab1fe2d2e8c94494f'],
@@ -439,7 +445,7 @@ const BASELINE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u3:factor-expression', 'a7b43e2a96de8352440e0eee9310f36fc206105f660f1b6e217bab5763bc8764'],
   ['u3:equivalent-form', '5b91112af7a165ff53e475fa50a7113b6f7c239deb0aae79815ce1841525a477'],
   ['u3:interpret-expression', '8c06cb000ce4ecb33b35aa4e3ff0d609b7a2bc136d85224c3e1d716e7f68b736'],
-  ['u3:context-expression', '7e3e8ca509ee2acadea1e8db9457deb7392f2e6ae976a21d26d3fedd031730f3'],
+  ['u3:context-expression', '87cbe237bc94b88ff0744e6d71d67cac6b51c575f0fbbb62dc7873befadcd96a'],
   ['u4:multi-step-numerical-problem', '927ca74d7943c62a1e8625f2a7137a81d1152ea4831ca7d8f359f2a453ce31bf'],
   ['u4:two-step-equation', '3a54e4891278ccc2684c80e30a33a60a49e5500b543aab35dbc654ea5168a4f0'],
   ['u4:two-step-inequality', '2bbcae05a66c8a076394b71c15e9fb0bec231529fb671225b11843dc5d9baaaa'],
