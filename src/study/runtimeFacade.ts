@@ -11,6 +11,7 @@ import { assertCompleteStudyPortBundle, type StudyPortBundle } from './ports'
 import { assertAcceptedStudyRuntime } from './runtimeCompatibility'
 import { learnerSafeResult } from './safety/learnerSafe'
 import { recordLocalPreAcceptanceSafetyStop } from './safety/localStopLedger'
+import { studyBridgeSessionRef } from './studyBridgeSessionRef'
 import type {
   HostStudyLaunchContext,
   StudyCalendarEntry,
@@ -87,7 +88,11 @@ export class Rc1LocalLearnerBindingAdapter {
       result.bridgeVersion !== '1.0.1' ||
       result.bridgeContractVersion !== 1 ||
       result.minimizedProjection.evidence.studentId !== RC1_LOCAL_LEARNER_SENTINEL ||
-      result.minimizedProjection.evidence.sessionId !== scope.sessionRef
+      // The projection echoes the identifier the bridge was GIVEN, so this must
+      // ask for the same one — the durable session reference is not what
+      // crossed the boundary. `this.#sessions` above still keys on the durable
+      // reference: that map is the host's own identity binding, not transport.
+      result.minimizedProjection.evidence.sessionId !== studyBridgeSessionRef(scope.sessionRef)
     ) {
       throw new Error('RC1 accepted result identity or version mismatch; projection quarantined.')
     }
@@ -226,7 +231,7 @@ export class AcceptedRc1HostRuntime {
     const scope = { householdRef: context.householdRef, learnerRef: context.learnerRef, sessionRef }
     this.#identity.bind(scope)
     return launchStudentSession({
-      sessionId: sessionRef,
+      sessionId: studyBridgeSessionRef(sessionRef),
       lessonId: entry.lessonRef,
       calendarBlockId: entry.blockRef,
       householdTimeZone: context.householdTimeZone,
@@ -294,6 +299,12 @@ export class AcceptedRc1HostRuntime {
           : 'not-confirmed',
       )
     }
+    // STUDY-A1-SESSIONREF-C. Bounded here, at the one seam that calls the
+    // bridge, rather than at each caller: the durable `scope.sessionRef` stays
+    // whole everywhere else in this method — the safety port, the event ledger,
+    // persistence and the identity binding all still use it — and only what
+    // crosses the bridge is bounded.
+    const bridgeSessionRef = studyBridgeSessionRef(input.scope.sessionRef)
     const classifier: UrgentSafetyClassifierPort = {
       classifierVersion: PRECHECKED_CLASSIFIER_VERSION,
       classify: () => ({
@@ -306,7 +317,10 @@ export class AcceptedRc1HostRuntime {
     }
     const eventLedger: AcceptedEventLedgerPort = {
       appendAcceptedEvent: async (sessionId, eventId, eventVersion, idempotencyKey) => {
-        if (sessionId !== input.scope.sessionRef || (input.isCurrentBinding && !input.isCurrentBinding())) {
+        // The bridge hands back the identifier it was given, so this compares
+        // against that one. The append below is still scoped by the durable
+        // `input.scope`, which is what the host event ledger is keyed on.
+        if (sessionId !== bridgeSessionRef || (input.isCurrentBinding && !input.isCurrentBinding())) {
           return { status: 'idempotency-collision' as const }
         }
         const status = await ports.eventLedger.append(input.scope, {
@@ -324,7 +338,7 @@ export class AcceptedRc1HostRuntime {
       result = await submitStudentTurn(
         {
           requestId: input.requestRef,
-          sessionId: input.scope.sessionRef,
+          sessionId: bridgeSessionRef,
           lessonId: input.entry.lessonRef,
           segmentId: input.segmentRef,
           subject: subjectForBridge(input.context.subject),

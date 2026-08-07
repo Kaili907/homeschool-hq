@@ -9,6 +9,8 @@ import { syntheticGrade5StudyContext } from '../../study/demonstrations'
 import { StudyLifecycleBoundary, runCurrentStudyWork } from '../../study/lifecycle'
 import { createLocalDevelopmentStudyPorts } from '../../study/localDevelopmentPorts'
 import type { StudyPortBundle, StudySafetyPort } from '../../study/ports'
+import { STUDY_LEARNER_STOP_MESSAGE } from '../../study/safety/learnerSafe'
+import { isSessionStoppedByLocalLedger, readLocalSafetyStops } from '../../study/safety/localStopLedger'
 import { isStudyBridgeOpaqueId } from '../../study/studyRequestRef'
 import { createSyntheticMathBlock } from '../../study/testing/syntheticStudyFixtures'
 import type { StudyCalendarEntry } from '../../study/types'
@@ -275,6 +277,121 @@ describe('host-owned Study lifecycle binding for the route and the container', (
     expect(isStudyBridgeOpaqueId(refs[0]!)).toBe(true)
     // The block reference alone is longer than the whole request reference.
     expect(long.entry.blockRef.length).toBeGreaterThan(refs[0]!.length)
+  })
+
+  // STUDY-A1-SESSIONREF-C. The container derives `${blockRef}:session` and that
+  // value reaches the Tutor bridge as `sessionId`, where the same 128-character
+  // opaque-id bound applies. An Academy-length block overshoots it, the gateway
+  // refuses the turn before the classifier runs, and the container recorded that
+  // refusal in the durable A6-5-C ledger as a learner safety stop.
+  it('does not turn an Academy-length session reference into a durable safety stop', async () => {
+    const longLesson = 'manuel-academy:mathematics:level-5:unit-04:lesson-03:multiplying-whole-numbers'
+    const long = await createSyntheticMathBlock(ports, { suffix: longLesson })
+    const sessionRef = `${long.entry.blockRef}:session`
+    // The reference the container actually builds is over the bridge's bound.
+    expect(isStudyBridgeOpaqueId(sessionRef)).toBe(false)
+    expect(sessionRef.length).toBeGreaterThan(128)
+
+    await render(
+      <StudySessionContainer
+        context={context}
+        initialEntry={long.entry}
+        ports={ports}
+        studyLifecycle={hostSeam()}
+        onBack={() => {}}
+      />,
+    )
+    const textarea = tags(container, 'TEXTAREA')[0]
+    expect(textarea).toBeDefined()
+    await act(async () => {
+      (reactProps(textarea!) as unknown as { onChange: (event: unknown) => void })
+        .onChange({ target: { value: 'ready' } })
+    })
+    const submit = tags(container, 'BUTTON').find((node) => hasText(node, 'Send through Tutor boundary'))
+    await act(async () => {
+      await (reactProps(submit!) as unknown as { onClick: () => Promise<void> }).onClick()
+    })
+    await act(async () => { await Promise.resolve() })
+
+    // Nothing durable was written, so no adult sees a safety incident and no
+    // refresh finds this session locked.
+    expect(readLocalSafetyStops(window.localStorage)).toEqual([])
+    expect(isSessionStoppedByLocalLedger(
+      { studentRef: context.learnerRef, sessionRef },
+      window.localStorage,
+    )).toBe(false)
+    // And a clear "ready" is an ordinary accepted turn.
+    expect(hasText(container, 'Study paused')).toBe(false)
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(false)
+    expect(hasText(container, 'Your Tutor Core check was accepted')).toBe(true)
+  })
+
+  it('keeps a genuine stop durable on that same Academy-length session reference', async () => {
+    // The durable A6-5-C key is the Study session reference, unchanged by this
+    // card. A real classifier stop must still lock the session across remounts.
+    const longLesson = 'manuel-academy:mathematics:level-5:unit-04:lesson-03:multiplying-whole-numbers'
+    const long = await createSyntheticMathBlock(ports, { suffix: longLesson })
+    const sessionRef = `${long.entry.blockRef}:session`
+    const flagged: StudyPortBundle = {
+      ...ports,
+      safety: {
+        mode: 'production',
+        classifierVersion: 'test-study-a1-sessionref-urgent-v1',
+        evaluate: async () => ({
+          outcome: 'urgent' as const,
+          mayContinue: false,
+          adultHelpState: 'proposed-not-delivered' as const,
+        }),
+      },
+    }
+    await render(
+      <StudySessionContainer
+        context={context}
+        initialEntry={long.entry}
+        ports={flagged}
+        studyLifecycle={hostSeam()}
+        onBack={() => {}}
+      />,
+    )
+    const textarea = tags(container, 'TEXTAREA')[0]
+    await act(async () => {
+      (reactProps(textarea!) as unknown as { onChange: (event: unknown) => void })
+        .onChange({ target: { value: 'ready' } })
+    })
+    const submit = tags(container, 'BUTTON').find((node) => hasText(node, 'Send through Tutor boundary'))
+    await act(async () => {
+      await (reactProps(submit!) as unknown as { onClick: () => Promise<void> }).onClick()
+    })
+    await act(async () => { await Promise.resolve() })
+
+    expect(hasText(container, 'Study paused')).toBe(true)
+    const records = readLocalSafetyStops(window.localStorage)
+    expect(records).toHaveLength(1)
+    // Recorded against the durable Study session reference, not a bridge value.
+    expect(records[0]!.sessionRef).toBe(sessionRef)
+    expect(isSessionStoppedByLocalLedger(
+      { studentRef: context.learnerRef, sessionRef },
+      window.localStorage,
+    )).toBe(true)
+
+    // A remount of the same genuine session — a refresh, or a new tab — is
+    // still stopped, and offers no way back in.
+    const remounted = documentTarget.createElement('div')
+    documentTarget.body.appendChild(remounted)
+    const remountRoot = createRoot(remounted as unknown as Element)
+    roots.push(remountRoot)
+    await act(async () => remountRoot.render(
+      <StudySessionContainer
+        context={context}
+        initialEntry={long.entry}
+        ports={flagged}
+        studyLifecycle={hostSeam()}
+        onBack={() => {}}
+      />,
+    ))
+    await act(async () => { await Promise.resolve() })
+    expect(hasText(remounted, 'Study paused')).toBe(true)
+    expect(hasText(remounted, 'Send through Tutor boundary')).toBe(false)
   })
 
   it('is the same seam for the same epoch, so a host re-render is not a relaunch', async () => {
