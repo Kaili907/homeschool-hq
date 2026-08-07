@@ -9,6 +9,7 @@ import {
   readJsonBody,
   responseForError,
 } from './_shared/http.js'
+import { createProductionAdultReviewWorkerComposition } from './_shared/study-adult-review-operations/composition.js'
 
 const PATHS = new Set([
   '/api/study/adult-review/worker',
@@ -17,9 +18,31 @@ const PATHS = new Set([
 
 export function createStudyAdultReviewWorkerHandler(overrides = {}) {
   const env = overrides.env ?? process.env
-  const worker = overrides.worker
-  const authorization = overrides.workerAuthorization
-  const ready = () => worker?.ready && typeof worker.run === 'function'
+  const injected = overrides.worker !== undefined || overrides.workerAuthorization !== undefined
+  const compose = overrides.compose ?? createProductionAdultReviewWorkerComposition
+  let pending = null
+
+  /**
+   * The production graph is built lazily and fail-closed. Nothing is
+   * constructed at module import time, so a missing or malformed production
+   * prerequisite surfaces as 503 service_not_ready rather than a module-load
+   * 500, and no partially started worker can exist. A failed attempt is not
+   * cached, so a transient durable outage does not wedge the deployment.
+   */
+  async function composition() {
+    if (injected) {
+      return { worker: overrides.worker, authorization: overrides.workerAuthorization }
+    }
+    if (!pending) pending = compose({ env }).catch(() => null)
+    const composed = await pending
+    if (!composed) {
+      pending = null
+      return {}
+    }
+    return { worker: composed.worker, authorization: composed.workerAuthorization }
+  }
+
+  const ready = (worker, authorization) => worker?.ready && typeof worker.run === 'function'
     && authorization?.isDurable === true
     && authorization?.isReady?.() === true
     && typeof authorization.credentialForEvent === 'function'
@@ -29,7 +52,8 @@ export function createStudyAdultReviewWorkerHandler(overrides = {}) {
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
     if (event?.httpMethod !== 'POST') return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
-    if (!ready()) return errorResponse(503, 'service_not_ready')
+    const { worker, authorization } = await composition()
+    if (!ready(worker, authorization)) return errorResponse(503, 'service_not_ready')
     try {
       const scheduled = getHeader(event.headers, 'x-nf-event') === 'schedule'
       let limit = 10
