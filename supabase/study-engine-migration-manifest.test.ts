@@ -1,7 +1,10 @@
 import { createHash } from 'node:crypto'
 import { readdir, readFile } from 'node:fs/promises'
 import { describe, expect, it } from 'vitest'
-import { ALLOWED_APPLICATION_STATUS } from '../scripts/study-migration-preflight.mjs'
+import {
+  ALLOWED_APPLICATION_STATUS,
+  FROZEN_HISTORICAL_BASELINE_FILENAMES,
+} from '../scripts/study-migration-preflight.mjs'
 
 interface ManifestEntry {
   version: string
@@ -81,6 +84,22 @@ describe('Study migration manifest consistency', () => {
       .toEqual(Array<string>(boundary).fill('historical-baseline'))
     expect(classifications.slice(boundary))
       .toEqual(Array<string>(classifications.length - boundary).fill('executable'))
+  })
+
+  it('keeps every audited hosted foundation migration a historical baseline', async () => {
+    const manifest = await loadManifest()
+    // Imported from the validator rather than restated here: a second literal list is a
+    // second thing to forget to update, and the whole point of this claim is that these
+    // filenames mean the same thing to the checked-in manifest and to the gate that
+    // reads it. Membership, never position — the boundary index legitimately moves as
+    // executable migrations are applied and promoted.
+    for (const filename of FROZEN_HISTORICAL_BASELINE_FILENAMES) {
+      const entry = manifest.migrations.find((candidate) => candidate.filename === filename)
+      expect(entry, filename).toMatchObject({
+        classification: 'historical-baseline',
+        applicationStatus: ALLOWED_APPLICATION_STATUS.get('historical-baseline'),
+      })
+    }
   })
 
   it('gives every entry the hosted application status its classification allows', async () => {

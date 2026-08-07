@@ -7,6 +7,8 @@ import {
   ALLOWED_APPLICATION_STATUS,
   evaluateMigrationPreflight,
   EXPECTED_STUDY_PROJECT_REF,
+  FROZEN_HISTORICAL_BASELINE_DEMOTED,
+  FROZEN_HISTORICAL_BASELINE_FILENAMES,
   UNSAFE_SESSION_17_SHA256,
   validateMigrationManifest,
 } from './study-migration-preflight.mjs'
@@ -46,38 +48,84 @@ function canonicalSha256(source: string) {
   return createHash('sha256').update(source.replaceAll('\r\n', '\n')).digest('hex')
 }
 
+/** A fresh in-memory copy of the real manifest, so each test mutates its own. */
+async function checkedInManifest(): Promise<Manifest> {
+  return JSON.parse(await readFile(CHECKED_IN_MANIFEST_URL, 'utf8')) as Manifest
+}
+
+function executableSha256(manifest: Manifest) {
+  return manifest.migrations
+    .filter((entry) => entry.classification === 'executable' && entry.supersessionStatus !== 'superseded')
+    .map((entry) => entry.sha256)
+}
+
 /**
- * Writes a real migration directory plus the manifest that describes it, so
- * every checksum, dependency and file-set assertion is exercised against files
- * on disk rather than against hand-written fixtures.
+ * How a fixture lays down the frozen historical floor:
+ *   'frozen'  — all members present as historical baselines: the only legal shape
+ *   'omitted' — no floor at all, for tests that must build an illegal manifest
+ *   Map       — floor filename -> the filename to write instead, or null to drop it,
+ *               which is how deletion and rename are exercised without disturbing
+ *               anything else about the manifest
  */
-async function buildFixture(classifications: Classification[], bodies?: string[]) {
+type Floor = 'frozen' | 'omitted' | ReadonlyMap<string, string | null>
+
+/**
+ * Writes a real migration directory plus the manifest that describes it, so every
+ * checksum, dependency and file-set assertion is exercised against files on disk
+ * rather than against hand-written fixtures.
+ *
+ * Every fixture is rooted in the frozen historical floor, because a manifest without
+ * it is not one this estate can ever legally present. `classifications` describes the
+ * entries that follow the floor; their versions sort after every floor member, so the
+ * boundary they create is a boundary above already-hosted work.
+ */
+async function buildFixture(
+  classifications: Classification[],
+  options: { bodies?: string[], floor?: Floor } = {},
+) {
+  const { bodies, floor = 'frozen' } = options
   const directory = await mkdtemp(join(tmpdir(), 'study-migration-preflight-'))
   temporaryDirectories.push(directory)
   const migrations: ManifestEntry[] = []
   let dependency: string | null = null
-  for (const [index, classification] of classifications.entries()) {
-    const version = `2026010100${String(index).padStart(4, '0')}`
-    const slug = `fixture_${String(index).padStart(2, '0')}`
-    const filename = `${version}_${slug}.sql`
-    const body = bodies?.[index] ?? `-- ${slug}\nselect ${index};\n`
+
+  async function append(filename: string, body: string, classification: Classification, marker: string) {
     await writeFile(join(directory, filename), body, 'utf8')
     migrations.push({
-      version,
+      version: filename.slice(0, 14),
       filename,
       sha256: canonicalSha256(body),
       dependency,
       classification,
-      applicationStatus: classification === 'historical-baseline'
-        ? 'hosted-equivalent-baseline-pending-authorization'
-        : 'not-applied-hosted',
-      requiredMarkerTransition: `${slug}_version:0->1`,
+      applicationStatus: ALLOWED_APPLICATION_STATUS.get(classification)!,
+      requiredMarkerTransition: marker,
       supersessionStatus: 'current',
     })
     dependency = filename
   }
+
+  if (floor !== 'omitted') {
+    for (const [index, member] of FROZEN_HISTORICAL_BASELINE_FILENAMES.entries()) {
+      const written = floor === 'frozen' || !floor.has(member) ? member : floor.get(member)
+      if (written === null || written === undefined) continue
+      await append(written, `-- floor ${index}\nselect ${index};\n`, 'historical-baseline', `floor_${index}:0->1`)
+    }
+  }
+
+  const aboveFloor = migrations.length
+  for (const [index, classification] of classifications.entries()) {
+    const slug = `fixture_${String(index).padStart(2, '0')}`
+    await append(
+      `2026090100${String(index).padStart(4, '0')}_${slug}.sql`,
+      bodies?.[index] ?? `-- ${slug}\nselect ${index};\n`,
+      classification,
+      `${slug}_version:0->1`,
+    )
+  }
+
   return {
     directory,
+    aboveFloor,
     manifest: { schemaVersion: 1, projectRef: EXPECTED_STUDY_PROJECT_REF, migrations } satisfies Manifest,
   }
 }
@@ -98,31 +146,28 @@ function approvedEvidence(checksums: string[]) {
 
 const HISTORICAL: Classification = 'historical-baseline'
 const EXECUTABLE: Classification = 'executable'
+const GATEWAY_USAGE = '20260731120000_academy_gateway_usage.sql'
 
 describe('manifest-driven historical/executable boundary', () => {
   it('accepts the checked-in manifest and its real migration files', async () => {
-    const manifest = JSON.parse(await readFile(CHECKED_IN_MANIFEST_URL, 'utf8')) as Manifest
-    await expect(validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL))
+    await expect(validateMigrationManifest(await checkedInManifest(), CHECKED_IN_MIGRATIONS_URL))
       .resolves.toMatchObject({ valid: true, reasons: [] })
   })
 
   it.each([
-    ['boundary before the checked-in one', [HISTORICAL, HISTORICAL, EXECUTABLE, EXECUTABLE, EXECUTABLE]],
-    ['boundary at the checked-in one', [HISTORICAL, HISTORICAL, HISTORICAL, HISTORICAL, EXECUTABLE, EXECUTABLE]],
-    [
-      'boundary after the checked-in one, extended with forward migrations',
-      [HISTORICAL, HISTORICAL, HISTORICAL, HISTORICAL, HISTORICAL, HISTORICAL, EXECUTABLE, EXECUTABLE, EXECUTABLE],
-    ],
-    ['single historical baseline and a single executable', [HISTORICAL, EXECUTABLE]],
-  ])('accepts a valid manifest whose %s', async (_label, classifications) => {
+    ['sits directly on the frozen floor', [EXECUTABLE, EXECUTABLE]],
+    ['has one promoted migration above the floor', [HISTORICAL, EXECUTABLE, EXECUTABLE]],
+    ['has several promoted migrations above the floor', [HISTORICAL, HISTORICAL, HISTORICAL, EXECUTABLE]],
+    ['has a single executable above the floor', [EXECUTABLE]],
+  ])('accepts a valid manifest whose boundary %s', async (_label, classifications) => {
     const { directory, manifest } = await buildFixture(classifications as Classification[])
     await expect(validateMigrationManifest(manifest, directory))
       .resolves.toMatchObject({ valid: true, reasons: [] })
   })
 
   it('rejects a classification outside the known vocabulary', async () => {
-    const { directory, manifest } = await buildFixture([HISTORICAL, HISTORICAL, EXECUTABLE])
-    manifest.migrations[2].classification = 'exectuable'
+    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
+    manifest.migrations.at(-1)!.classification = 'exectuable'
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('migration-classification-invalid')
@@ -144,15 +189,26 @@ describe('manifest-driven historical/executable boundary', () => {
  */
 describe('nonempty historical prefix and nonempty executable suffix', () => {
   it.each([
-    ['an all-historical manifest', [HISTORICAL, HISTORICAL, HISTORICAL], 'migration-executable-set-empty'],
-    ['a manifest with zero executable entries', [HISTORICAL], 'migration-executable-set-empty'],
-    ['an all-executable manifest', [EXECUTABLE, EXECUTABLE, EXECUTABLE], 'migration-historical-baseline-set-empty'],
-    ['a manifest with zero historical baselines', [EXECUTABLE], 'migration-historical-baseline-set-empty'],
-  ])('rejects %s', async (_label, classifications, reason) => {
+    ['an all-historical manifest', [HISTORICAL, HISTORICAL, HISTORICAL], 'frozen' as Floor],
+    ['a manifest with zero entries above the floor', [], 'frozen' as Floor],
+  ])('rejects %s', async (_label, classifications) => {
     const { directory, manifest } = await buildFixture(classifications as Classification[])
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
-    expect(result.reasons).toContain(reason)
+    expect(result.reasons).toContain('migration-executable-set-empty')
+  })
+
+  it.each([
+    ['an all-executable manifest', [EXECUTABLE, EXECUTABLE, EXECUTABLE]],
+    ['a manifest with zero historical baselines', [EXECUTABLE]],
+  ])('rejects %s', async (_label, classifications) => {
+    // A manifest with no historical prefix necessarily has no frozen floor either, so
+    // it is refused twice over; this case pins the shape rule specifically.
+    const { directory, manifest } = await buildFixture(classifications as Classification[], { floor: 'omitted' })
+    const result = await validateMigrationManifest(manifest, directory)
+    expect(result.valid).toBe(false)
+    expect(result.reasons).toContain('migration-historical-baseline-set-empty')
+    expect(result.reasons).toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
   })
 })
 
@@ -174,15 +230,15 @@ describe('classification and hosted application status correspondence', () => {
 
   it('rejects an executable entry carrying the historical hosted-equivalence status', async () => {
     const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
-    manifest.migrations[1].applicationStatus = 'hosted-equivalent-baseline-pending-authorization'
+    manifest.migrations.at(-1)!.applicationStatus = 'hosted-equivalent-baseline-pending-authorization'
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('migration-classification-status-mismatch')
   })
 
   it('rejects a historical baseline masquerading as a pending-apply executable entry', async () => {
-    const { directory, manifest } = await buildFixture([HISTORICAL, HISTORICAL, EXECUTABLE])
-    manifest.migrations[1].applicationStatus = 'not-applied-hosted'
+    const { directory, manifest, aboveFloor } = await buildFixture([HISTORICAL, EXECUTABLE])
+    manifest.migrations[aboveFloor].applicationStatus = 'not-applied-hosted'
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('migration-classification-status-mismatch')
@@ -190,7 +246,7 @@ describe('classification and hosted application status correspondence', () => {
 
   it('rejects an application status outside the closed mapping', async () => {
     const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
-    manifest.migrations[1].applicationStatus = 'applied-hosted'
+    manifest.migrations.at(-1)!.applicationStatus = 'applied-hosted'
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('migration-classification-status-mismatch')
@@ -210,8 +266,8 @@ describe('manifest structural integrity', () => {
   })
 
   it('rejects a broken dependency chain', async () => {
-    const { directory, manifest } = await buildFixture([HISTORICAL, HISTORICAL, EXECUTABLE])
-    manifest.migrations[2].dependency = manifest.migrations[0].filename
+    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
+    manifest.migrations.at(-1)!.dependency = manifest.migrations[0].filename
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('migration-dependency-invalid')
@@ -226,7 +282,7 @@ describe('manifest structural integrity', () => {
   })
 
   it('rejects manifest entries that are not in sorted order', async () => {
-    const { directory, manifest } = await buildFixture([HISTORICAL, HISTORICAL, EXECUTABLE])
+    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
     manifest.migrations.reverse()
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
@@ -236,17 +292,18 @@ describe('manifest structural integrity', () => {
   it('rejects a duplicate version', async () => {
     const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
     // Two distinct files sharing one version: nothing else about the manifest breaks.
-    const version = manifest.migrations[0].version
-    const filename = `${version}_fixture_duplicate.sql`
+    const previous = manifest.migrations.at(-2)!
+    const replaced = manifest.migrations.at(-1)!
+    const filename = `${previous.version}_fixture_duplicate.sql`
     const body = '-- duplicate version\nselect 99;\n'
     await writeFile(join(directory, filename), body, 'utf8')
-    await unlink(join(directory, manifest.migrations[1].filename))
-    manifest.migrations[1] = {
-      ...manifest.migrations[1],
-      version,
+    await unlink(join(directory, replaced.filename))
+    manifest.migrations[manifest.migrations.length - 1] = {
+      ...replaced,
+      version: previous.version,
       filename,
       sha256: canonicalSha256(body),
-      dependency: manifest.migrations[0].filename,
+      dependency: previous.filename,
     }
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
@@ -255,7 +312,10 @@ describe('manifest structural integrity', () => {
 
   it('rejects a duplicate filename', async () => {
     const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
-    manifest.migrations[1] = { ...manifest.migrations[1], filename: manifest.migrations[0].filename }
+    manifest.migrations[manifest.migrations.length - 1] = {
+      ...manifest.migrations.at(-1)!,
+      filename: manifest.migrations.at(-2)!.filename,
+    }
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('duplicate-migration-filename')
@@ -263,7 +323,7 @@ describe('manifest structural integrity', () => {
 
   it('rejects a duplicate checksum', async () => {
     const body = '-- identical body\nselect 1;\n'
-    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE], [body, body])
+    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE], { bodies: [body, body] })
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('duplicate-migration-checksum')
@@ -271,7 +331,10 @@ describe('manifest structural integrity', () => {
 
   it('rejects a filename that does not correspond to its version', async () => {
     const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
-    manifest.migrations[1] = { ...manifest.migrations[1], version: '20991231235959' }
+    manifest.migrations[manifest.migrations.length - 1] = {
+      ...manifest.migrations.at(-1)!,
+      version: '20991231235959',
+    }
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('migration-filename-version-invalid')
@@ -280,8 +343,8 @@ describe('manifest structural integrity', () => {
 
 describe('manifest against the migration files on disk', () => {
   it('rejects a manifest entry whose file is missing', async () => {
-    const { directory, manifest } = await buildFixture([HISTORICAL, HISTORICAL, EXECUTABLE])
-    await unlink(join(directory, manifest.migrations[2].filename))
+    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
+    await unlink(join(directory, manifest.migrations.at(-1)!.filename))
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('migration-file-set-mismatch')
@@ -303,24 +366,30 @@ describe('manifest against the migration files on disk', () => {
   })
 
   it('rejects a checksum that does not match the file it names', async () => {
-    const { directory, manifest } = await buildFixture([HISTORICAL, HISTORICAL, EXECUTABLE])
-    const tampered = manifest.migrations[2].filename
-    manifest.migrations[2] = { ...manifest.migrations[2], sha256: 'f'.repeat(64) }
+    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE])
+    const tampered = manifest.migrations.at(-1)!.filename
+    manifest.migrations[manifest.migrations.length - 1] = {
+      ...manifest.migrations.at(-1)!,
+      sha256: 'f'.repeat(64),
+    }
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain(`migration-checksum-mismatch:${tampered}`)
   })
 
   it('rejects the unsafe Session 17 checksum wherever it appears', async () => {
-    const { directory, manifest } = await buildFixture([HISTORICAL, EXECUTABLE, EXECUTABLE])
-    manifest.migrations[2] = { ...manifest.migrations[2], sha256: UNSAFE_SESSION_17_SHA256 }
+    const { directory, manifest } = await buildFixture([EXECUTABLE, EXECUTABLE])
+    manifest.migrations[manifest.migrations.length - 1] = {
+      ...manifest.migrations.at(-1)!,
+      sha256: UNSAFE_SESSION_17_SHA256,
+    }
     const result = await validateMigrationManifest(manifest, directory)
     expect(result.valid).toBe(false)
     expect(result.reasons).toContain('unsafe-session-17-executable')
   })
 
   it('detects tampering with any checked-in migration checksum', async () => {
-    const manifest = JSON.parse(await readFile(CHECKED_IN_MANIFEST_URL, 'utf8')) as Manifest
+    const manifest = await checkedInManifest()
     for (const index of manifest.migrations.keys()) {
       const tampered = {
         ...manifest,
@@ -334,24 +403,265 @@ describe('manifest against the migration files on disk', () => {
   })
 })
 
-function classified(classification: Classification, sha256: string) {
+/**
+ * A read-only provenance audit established that the frozen members exist in the
+ * hosted historical ledger and are permanently non-replayable. Every shape rule above
+ * constrains where the historical/executable boundary may sit; these constrain which
+ * migrations may sit below it. The two are independent: a manifest that moves the
+ * boundary back over an already-hosted migration still presents a perfectly ordered
+ * historical prefix and executable suffix, which is exactly why the shape rules alone
+ * let the demotion through.
+ */
+describe('frozen hosted historical baseline floor', () => {
+  it('pins the audited floor membership', () => {
+    expect([...FROZEN_HISTORICAL_BASELINE_FILENAMES]).toEqual([
+      '20260724074106_academy_profiles_base.sql',
+      '20260724230000_academy_student_identity_foundation.sql',
+      '20260726120000_academy_household_revision_cas.sql',
+      '20260731120000_academy_gateway_usage.sql',
+    ])
+  })
+
+  it('holds every floor member as a historical baseline in the checked-in manifest', async () => {
+    const manifest = await checkedInManifest()
+    for (const filename of FROZEN_HISTORICAL_BASELINE_FILENAMES) {
+      expect(manifest.migrations.find((entry) => entry.filename === filename), filename)
+        .toMatchObject({
+          classification: 'historical-baseline',
+          applicationStatus: 'hosted-equivalent-baseline-pending-authorization',
+        })
+    }
+  })
+
+  it.each([...FROZEN_HISTORICAL_BASELINE_FILENAMES])('rejects demoting %s to executable', async (filename) => {
+    const manifest = await checkedInManifest()
+    Object.assign(manifest.migrations.find((entry) => entry.filename === filename)!, {
+      classification: 'executable',
+      applicationStatus: 'not-applied-hosted',
+    })
+    const result = await validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL)
+    expect(result.valid).toBe(false)
+    expect(result.reasons).toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+  })
+
+  it('is the only rule that catches a demotion of the last floor member', async () => {
+    // The exact hole this session closes. Demoting the newest floor member leaves the
+    // manifest legal by every other rule — ordered, dependency-chained, correctly
+    // paired, checksums intact — so the reason set is a single entry.
+    const manifest = await checkedInManifest()
+    Object.assign(manifest.migrations.find((entry) => entry.filename === GATEWAY_USAGE)!, {
+      classification: 'executable',
+      applicationStatus: 'not-applied-hosted',
+    })
+    const result = await validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL)
+    expect(result.reasons).toEqual([FROZEN_HISTORICAL_BASELINE_DEMOTED])
+  })
+
+  it.each([...FROZEN_HISTORICAL_BASELINE_FILENAMES])('rejects deleting %s', async (filename) => {
+    // Deleted from the manifest and from disk, with the dependency chain closed over
+    // the gap: everything else about this manifest is legal.
+    const { directory, manifest } = await buildFixture([EXECUTABLE, EXECUTABLE], {
+      floor: new Map([[filename, null]]),
+    })
+    const result = await validateMigrationManifest(manifest, directory)
+    expect(result.reasons).toEqual([FROZEN_HISTORICAL_BASELINE_DEMOTED])
+  })
+
+  it.each([...FROZEN_HISTORICAL_BASELINE_FILENAMES])('rejects renaming %s', async (filename) => {
+    // Renamed consistently in the manifest, on disk, and in the dependency chain, so
+    // the file set and every checksum still agree. Only membership notices.
+    const renamed = filename.replace(/\.sql$/, '_renamed.sql')
+    const { directory, manifest } = await buildFixture([EXECUTABLE, EXECUTABLE], {
+      floor: new Map([[filename, renamed]]),
+    })
+    expect(manifest.migrations.some((entry) => entry.filename === renamed)).toBe(true)
+    const result = await validateMigrationManifest(manifest, directory)
+    expect(result.reasons).toEqual([FROZEN_HISTORICAL_BASELINE_DEMOTED])
+  })
+
+  it('leaves a floor member that keeps its classification to the status pairing rule', async () => {
+    // Division of labour: membership pins classification, the closed mapping pins the
+    // status. A floor member wearing the wrong status is caught, but not by this rule.
+    const manifest = await checkedInManifest()
+    manifest.migrations.find((entry) => entry.filename === GATEWAY_USAGE)!
+      .applicationStatus = 'not-applied-hosted'
+    const result = await validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL)
+    expect(result.valid).toBe(false)
+    expect(result.reasons).toContain('migration-classification-status-mismatch')
+    expect(result.reasons).not.toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+  })
+
+  it('leaves floor members reordered against each other to the ordering rules', async () => {
+    // Identity is preserved — all four are present as historical baselines — so this
+    // rule stays silent and the sequence rules speak instead.
+    const manifest = await checkedInManifest()
+    const [first, second, ...rest] = manifest.migrations
+    manifest.migrations = [second, first, ...rest]
+    const result = await validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL)
+    expect(result.valid).toBe(false)
+    expect(result.reasons).toContain('migration-order-invalid')
+    expect(result.reasons).toContain('migration-dependency-invalid')
+    expect(result.reasons).not.toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+  })
+
+  it('stays silent on the intact checked-in manifest', async () => {
+    const manifest = await checkedInManifest()
+    const validation = await validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL)
+    const preflight = evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest)
+    expect(validation.reasons).not.toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+    expect(preflight.reasons).not.toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+    expect(preflight.allowed).toBe(true)
+  })
+})
+
+/**
+ * The floor is enforced in the authorization gate as well as in manifest validation,
+ * because the executable checksum set is derived from `classification` alone. Demoting
+ * an already-hosted migration mints a new executable entry, and an evidence record
+ * rewritten alongside the manifest approves that enlarged set without the equality
+ * tripwire making a sound. Every case below is internally consistent on purpose.
+ */
+describe('frozen floor survives coordinated evidence re-approval', () => {
+  it('refuses a demotion even when the evidence approves the enlarged checksum set', async () => {
+    const manifest = await checkedInManifest()
+    Object.assign(manifest.migrations.find((entry) => entry.filename === GATEWAY_USAGE)!, {
+      classification: 'executable',
+      applicationStatus: 'not-applied-hosted',
+    })
+    const reapproved = executableSha256(manifest)
+    expect(reapproved).toContain(
+      manifest.migrations.find((entry) => entry.filename === GATEWAY_USAGE)!.sha256,
+    )
+    const result = evaluateMigrationPreflight(approvedEvidence(reapproved), manifest)
+    expect(result.reasons).not.toContain('final-checksum-set-not-approved')
+    expect(result.reasons).toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+    expect(result.allowed).toBe(false)
+  })
+
+  it.each([...FROZEN_HISTORICAL_BASELINE_FILENAMES])(
+    'refuses an approval whose manifest deleted %s',
+    async (filename) => {
+      const manifest = await checkedInManifest()
+      manifest.migrations = manifest.migrations.filter((entry) => entry.filename !== filename)
+      const result = evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest)
+      expect(result.reasons).not.toContain('final-checksum-set-not-approved')
+      expect(result.reasons).toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+      expect(result.allowed).toBe(false)
+    },
+  )
+
+  it.each([...FROZEN_HISTORICAL_BASELINE_FILENAMES])(
+    'refuses an approval whose manifest renamed %s',
+    async (filename) => {
+      const manifest = await checkedInManifest()
+      manifest.migrations.find((entry) => entry.filename === filename)!.filename =
+        filename.replace(/\.sql$/, '_renamed.sql')
+      const result = evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest)
+      expect(result.reasons).not.toContain('final-checksum-set-not-approved')
+      expect(result.reasons).toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+      expect(result.allowed).toBe(false)
+    },
+  )
+})
+
+/**
+ * The floor is a floor, not a ceiling. Applying an executable migration promotes it to
+ * a historical baseline, which grows the historical set above the audited four; that
+ * must stay legal at every size, and must stop only where the manifest would run out
+ * of executable work entirely.
+ */
+describe('legal growth above the frozen floor', () => {
+  async function promoteFirstExecutables(count: number) {
+    const manifest = await checkedInManifest()
+    for (const entry of manifest.migrations.filter((candidate) => candidate.classification === 'executable').slice(0, count)) {
+      entry.classification = 'historical-baseline'
+      entry.applicationStatus = ALLOWED_APPLICATION_STATUS.get('historical-baseline')!
+    }
+    return manifest
+  }
+
+  it('accepts promoting the next executable migration to a historical baseline', async () => {
+    const manifest = await promoteFirstExecutables(1)
+    const historical = manifest.migrations.filter((entry) => entry.classification === 'historical-baseline')
+    expect(historical).toHaveLength(FROZEN_HISTORICAL_BASELINE_FILENAMES.length + 1)
+    await expect(validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL))
+      .resolves.toMatchObject({ valid: true, reasons: [] })
+  })
+
+  it('keeps every frozen member present through that promotion', async () => {
+    const manifest = await promoteFirstExecutables(1)
+    for (const filename of FROZEN_HISTORICAL_BASELINE_FILENAMES) {
+      expect(manifest.migrations.find((entry) => entry.filename === filename), filename)
+        .toMatchObject({ classification: 'historical-baseline' })
+    }
+  })
+
+  it('accepts every further promotion up to the last executable migration', async () => {
+    const checkedIn = await checkedInManifest()
+    const executables = checkedIn.migrations.filter((entry) => entry.classification === 'executable').length
+    expect(executables).toBeGreaterThan(1)
+    for (let promoted = 1; promoted < executables; promoted += 1) {
+      const manifest = await promoteFirstExecutables(promoted)
+      await expect(validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL), `promoted ${promoted}`)
+        .resolves.toMatchObject({ valid: true, reasons: [] })
+      expect(
+        evaluateMigrationPreflight(approvedEvidence(executableSha256(manifest)), manifest),
+        `promoted ${promoted}`,
+      ).toMatchObject({ allowed: true, reasons: [] })
+    }
+  })
+
+  it('stops at the shape rule, not the floor, when every executable is promoted', async () => {
+    const checkedIn = await checkedInManifest()
+    const executables = checkedIn.migrations.filter((entry) => entry.classification === 'executable').length
+    const manifest = await promoteFirstExecutables(executables)
+    const result = await validateMigrationManifest(manifest, CHECKED_IN_MIGRATIONS_URL)
+    expect(result.valid).toBe(false)
+    expect(result.reasons).toContain('migration-executable-set-empty')
+    expect(result.reasons).not.toContain(FROZEN_HISTORICAL_BASELINE_DEMOTED)
+  })
+
+  it('accepts a forward migration appended above a grown historical set', async () => {
+    const { directory, manifest } = await buildFixture([HISTORICAL, HISTORICAL, EXECUTABLE, EXECUTABLE])
+    expect(manifest.migrations.filter((entry) => entry.classification === 'historical-baseline'))
+      .toHaveLength(FROZEN_HISTORICAL_BASELINE_FILENAMES.length + 2)
+    await expect(validateMigrationManifest(manifest, directory))
+      .resolves.toMatchObject({ valid: true, reasons: [] })
+  })
+})
+
+function classified(classification: Classification, sha256: string, filename?: string) {
   return {
     classification,
     applicationStatus: ALLOWED_APPLICATION_STATUS.get(classification),
     supersessionStatus: 'current',
     sha256,
+    filename: filename ?? `2026090100000${sha256.slice(0, 1)}_synthetic.sql`,
+  }
+}
+
+/**
+ * evaluateMigrationPreflight reads the manifest and never the disk, so a preflight
+ * fixture carries the frozen floor as manifest entries. Without it every fixture below
+ * would be refused for a reason these tests are not about.
+ */
+function preflightManifest(...aboveFloor: ReturnType<typeof classified>[]) {
+  return {
+    schemaVersion: 1,
+    migrations: [
+      ...FROZEN_HISTORICAL_BASELINE_FILENAMES.map((filename, index) =>
+        classified(HISTORICAL, String(index).repeat(64), filename)),
+      ...aboveFloor,
+    ],
   }
 }
 
 describe('hosted Study migration authorization preflight', () => {
-  const manifest = {
-    schemaVersion: 1,
-    migrations: [
-      classified(HISTORICAL, 'a'.repeat(64)),
-      classified(EXECUTABLE, 'b'.repeat(64)),
-      classified(EXECUTABLE, 'c'.repeat(64)),
-    ],
-  }
+  const manifest = preflightManifest(
+    classified(HISTORICAL, 'a'.repeat(64)),
+    classified(EXECUTABLE, 'b'.repeat(64)),
+    classified(EXECUTABLE, 'c'.repeat(64)),
+  )
   const checksums = ['b'.repeat(64), 'c'.repeat(64)]
 
   it('allows only an exact fully approved evidence and checksum set', () => {
@@ -360,11 +670,8 @@ describe('hosted Study migration authorization preflight', () => {
   })
 
   it('derives the executable checksum set from the checked-in manifest', async () => {
-    const checkedIn = JSON.parse(await readFile(CHECKED_IN_MANIFEST_URL, 'utf8')) as Manifest
-    const expected = checkedIn.migrations
-      .filter((entry) => entry.classification === 'executable' && entry.supersessionStatus !== 'superseded')
-      .map((entry) => entry.sha256)
-    expect(evaluateMigrationPreflight(approvedEvidence(expected), checkedIn))
+    const checkedIn = await checkedInManifest()
+    expect(evaluateMigrationPreflight(approvedEvidence(executableSha256(checkedIn)), checkedIn))
       .toMatchObject({ allowed: true, reasons: [] })
   })
 
@@ -400,36 +707,24 @@ describe('hosted Study migration authorization preflight', () => {
   })
 
   it('refuses an empty executable checksum set', () => {
-    const historicalOnly = {
-      schemaVersion: 1,
-      migrations: [classified(HISTORICAL, 'a'.repeat(64))],
-    }
+    const historicalOnly = preflightManifest(classified(HISTORICAL, 'a'.repeat(64)))
     const result = evaluateMigrationPreflight(approvedEvidence([]), historicalOnly)
     expect(result.allowed).toBe(false)
     expect(result.reasons).toContain('unsafe-or-empty-executable-checksum-set')
   })
 
   it('refuses the superseded unsafe Session 17 checksum', () => {
-    const unsafe = {
-      schemaVersion: 1,
-      migrations: [
-        classified(HISTORICAL, 'a'.repeat(64)),
-        classified(EXECUTABLE, UNSAFE_SESSION_17_SHA256),
-      ],
-    }
+    const unsafe = preflightManifest(classified(EXECUTABLE, UNSAFE_SESSION_17_SHA256))
     const result = evaluateMigrationPreflight(approvedEvidence([UNSAFE_SESSION_17_SHA256]), unsafe)
     expect(result.allowed).toBe(false)
     expect(result.reasons).toContain('unsafe-or-empty-executable-checksum-set')
   })
 
   it('refuses an executable entry carrying the baseline status even when the checksums are re-approved', () => {
-    const masquerading = {
-      schemaVersion: 1,
-      migrations: [
-        classified(HISTORICAL, 'a'.repeat(64)),
-        { ...classified(EXECUTABLE, 'b'.repeat(64)), applicationStatus: 'hosted-equivalent-baseline-pending-authorization' },
-      ],
-    }
+    const masquerading = preflightManifest({
+      ...classified(EXECUTABLE, 'b'.repeat(64)),
+      applicationStatus: 'hosted-equivalent-baseline-pending-authorization',
+    })
     // The rewrite is internally consistent: the evidence approves exactly the
     // checksum set the rewritten manifest derives, so the checksum tripwire is
     // silent. Only the classification/status cross-check catches it.
@@ -440,13 +735,10 @@ describe('hosted Study migration authorization preflight', () => {
   })
 
   it('refuses a historical baseline masquerading as a pending-apply entry', () => {
-    const masquerading = {
-      schemaVersion: 1,
-      migrations: [
-        { ...classified(HISTORICAL, 'a'.repeat(64)), applicationStatus: 'not-applied-hosted' },
-        classified(EXECUTABLE, 'b'.repeat(64)),
-      ],
-    }
+    const masquerading = preflightManifest(
+      { ...classified(HISTORICAL, 'a'.repeat(64)), applicationStatus: 'not-applied-hosted' },
+      classified(EXECUTABLE, 'b'.repeat(64)),
+    )
     const result = evaluateMigrationPreflight(approvedEvidence(['b'.repeat(64)]), masquerading)
     expect(result.allowed).toBe(false)
     expect(result.reasons).toContain('migration-classification-status-mismatch')
@@ -464,26 +756,17 @@ describe('hosted Study migration authorization preflight', () => {
  */
 describe('checksum equality as a separate-authorization tripwire', () => {
   it('stays silent when one actor rewrites the manifest and the evidence together', () => {
-    const rewritten = {
-      schemaVersion: 1,
-      migrations: [
-        classified(HISTORICAL, 'a'.repeat(64)),
-        classified(EXECUTABLE, 'e'.repeat(64)),
-      ],
-    }
+    const rewritten = preflightManifest(classified(EXECUTABLE, 'e'.repeat(64)))
     const result = evaluateMigrationPreflight(approvedEvidence(['e'.repeat(64)]), rewritten)
     expect(result.reasons).not.toContain('final-checksum-set-not-approved')
     expect(result.allowed).toBe(true)
   })
 
   it('still catches an evidence record that drifted from the manifest it approves', () => {
-    const result = evaluateMigrationPreflight(approvedEvidence(['e'.repeat(64)]), {
-      schemaVersion: 1,
-      migrations: [
-        classified(HISTORICAL, 'a'.repeat(64)),
-        classified(EXECUTABLE, 'f'.repeat(64)),
-      ],
-    })
+    const result = evaluateMigrationPreflight(
+      approvedEvidence(['e'.repeat(64)]),
+      preflightManifest(classified(EXECUTABLE, 'f'.repeat(64))),
+    )
     expect(result.allowed).toBe(false)
     expect(result.reasons).toContain('final-checksum-set-not-approved')
   })

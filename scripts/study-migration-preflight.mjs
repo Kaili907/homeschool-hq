@@ -18,6 +18,41 @@ export const ALLOWED_APPLICATION_STATUS = new Map([
   ['executable', 'not-applied-hosted'],
 ])
 
+/**
+ * The immutable hosted historical floor. A read-only provenance audit established
+ * that these migrations exist in the hosted historical ledger and are permanently
+ * non-replayable, so no manifest this estate can legally present may ever offer one
+ * of them as executable work.
+ *
+ * Membership, never position. The historical/executable boundary index legitimately
+ * moves — applying an executable migration promotes it and grows the historical
+ * prefix — so any rule phrased as a count or an offset stops meaning "these
+ * migrations are already hosted" the moment the lineage grows. This list is a floor,
+ * not a ceiling: the historical set may grow above it and never shrink below it.
+ */
+export const FROZEN_HISTORICAL_BASELINE_FILENAMES = Object.freeze([
+  '20260724074106_academy_profiles_base.sql',
+  '20260724230000_academy_student_identity_foundation.sql',
+  '20260726120000_academy_household_revision_cas.sql',
+  '20260731120000_academy_gateway_usage.sql',
+])
+
+/** One reason for every way a frozen member can stop being a present historical baseline. */
+export const FROZEN_HISTORICAL_BASELINE_DEMOTED = 'frozen-historical-baseline-demoted'
+
+/**
+ * True when any frozen member is absent from the manifest or no longer carries the
+ * historical-baseline classification. Absence covers deletion and rename alike: a
+ * renamed member is, to a membership test, simply a member that is not there.
+ */
+function frozenHistoricalBaselineViolated(entries) {
+  const classificationByFilename = new Map(
+    entries.map((entry) => [entry?.filename, entry?.classification]),
+  )
+  return FROZEN_HISTORICAL_BASELINE_FILENAMES.some((filename) =>
+    classificationByFilename.get(filename) !== 'historical-baseline')
+}
+
 function classificationStatusMismatch(entries) {
   return entries.some((entry) =>
     ALLOWED_APPLICATION_STATUS.get(entry?.classification) !== entry?.applicationStatus)
@@ -74,6 +109,11 @@ export async function validateMigrationManifest(manifest, migrationDirectory) {
       reasons.push('migration-classification-order-invalid')
     }
   }
+  // The shape rules above constrain where the boundary may sit; this one constrains
+  // which migrations may sit below it. A manifest can satisfy every shape rule and
+  // still be illegal, because moving the boundary back over an already-hosted
+  // migration leaves a perfectly ordered historical prefix and executable suffix.
+  if (frozenHistoricalBaselineViolated(entries)) reasons.push(FROZEN_HISTORICAL_BASELINE_DEMOTED)
   if (classificationStatusMismatch(entries)) reasons.push('migration-classification-status-mismatch')
   if (entries.some((entry, index) =>
     typeof entry?.applicationStatus !== 'string' ||
@@ -127,8 +167,16 @@ export function evaluateMigrationPreflight(evidence, manifest) {
   // is derived from `classification` alone, so an executable entry wearing the
   // historical hosted-equivalence status would otherwise buy itself an approval by
   // having its checksum re-approved.
-  if (classificationStatusMismatch(Array.isArray(manifest?.migrations) ? manifest.migrations : [])) {
+  const migrations = Array.isArray(manifest?.migrations) ? manifest.migrations : []
+  if (classificationStatusMismatch(migrations)) {
     reasons.push('migration-classification-status-mismatch')
+  }
+  // Enforced here as well as in validateMigrationManifest, and for the same reason:
+  // demoting an already-hosted migration mints a new executable entry, and an evidence
+  // record rewritten alongside the manifest approves that enlarged checksum set without
+  // the equality tripwire making a sound. Evidence re-approval must not buy the demotion.
+  if (frozenHistoricalBaselineViolated(migrations)) {
+    reasons.push(FROZEN_HISTORICAL_BASELINE_DEMOTED)
   }
   const approved = Array.isArray(evidence?.approvedExecutableChecksums)
     ? evidence.approvedExecutableChecksums.map((value) => typeof value === 'string' ? value.toLowerCase() : '')
