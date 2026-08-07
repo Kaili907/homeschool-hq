@@ -418,8 +418,15 @@ describe('Grade 7 Unit 3 renders the algebra its worked examples teach', () => {
  *
  * The six `u3:` digests were re-taken when Unit 3's rendering and distractors were
  * corrected: that unit deliberately stopped emitting `5xx`, `0x - 8` and
- * wrong-kind distractors, and the choice sets moved with it. The other 42 digests
- * are the originals and are what proves no other Grade 7 unit moved with it.
+ * wrong-kind distractors, and the choice sets moved with it.
+ *
+ * `u10:problem-formulation` was re-taken when Unit 10 stopped writing a unit
+ * coefficient as `1x`. Ten of that type's 180 records moved, and in each one the
+ * prompt and the correct answer are byte-identical: the only change is the
+ * swapped-rate distractor, which drops the base fee into the coefficient slot and
+ * so rendered `1x + 2 = 11; x = 7` whenever that fee was $1. The other 41 digests
+ * are the originals and are what proves no other Grade 7 unit moved with either
+ * correction.
  */
 const BASELINE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u1:unit-rate-fraction', '87483669116129bc803bd38fdf74d028d6beb4017bf1be7ab1fe2d2e8c94494f'],
@@ -464,7 +471,7 @@ const BASELINE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u9:compound-events', 'ce799fbb672355f19e2b12ccd6b08ef908786ed4e08083014f3ac58a61f14e3c'],
   ['u9:sample-spaces', 'a05f30c5e835549b7a7918e15df515e23c0fcf099c2c4cac3daf1e575aca3516'],
   ['u9:simulation-and-model-limitations', 'fd136b8c0f637e7f24c87a685eb7b945ad2573144a3d7f96f11098306db0cf08'],
-  ['u10:problem-formulation', 'f9940802038fb1cb78dab36bf6d81c2b6965a551701b5239810781b670cec436'],
+  ['u10:problem-formulation', '60771e2b9a6ed40df960c7df7a0d58a2108adbd8e6f4719af37672e45e5be55b'],
   ['u10:assumptions-and-constraints', '6243f4684cd6b5f86bf5a09dec82a01b9dd87dd3e75aab3345667310d074d3a5'],
   ['u10:proportional-and-algebraic-models', '829fcd538bfbf3c372ea591a1d64e76e2eb916fb252f3fd4cbebc1ab3503ad70'],
   ['u10:geometry-and-measurement', '35ac8cfd2ab417b010886b8de012ed5ddd666b6f97ce5ef682e52d1270065941'],
@@ -472,7 +479,7 @@ const BASELINE_FINGERPRINT: ReadonlyArray<readonly [string, string]> = [
   ['u10:argument-and-presentation', 'f37e338d34c546cf04d801756d447d1afacf7eaf39a22f630b47138c540baa3b'],
 ]
 
-describe('Grade 7 generated questions move only where Unit 3 was corrected', () => {
+describe('Grade 7 generated questions move only where Units 3 and 10 were corrected', () => {
   it('reproduces the prompt, correct answer and distractor fingerprint of all 48 item types', () => {
     const observed: Array<readonly [string, string]> = []
     for (const unit of UNITS)
