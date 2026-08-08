@@ -16,6 +16,14 @@
   VITE_USE_PROXY = "true"
   NODE_VERSION = "22"
 
+# ---- Scheduled functions ----
+# A scheduled function runs on its schedule and does NOT accept incoming web
+# requests, so this block is what makes the scheduled adult-review worker
+# private. It gets no redirect below, on purpose: publishing a route for it
+# would hand back the public surface the schedule takes away.
+[functions."study-adult-review-worker-scheduled"]
+  schedule = "*/5 * * * *"
+
 # ---- API proxies (MUST precede the SPA fallback) ----
 [[redirects]]
   from = "/api/anthropic/*"

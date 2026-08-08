@@ -294,7 +294,7 @@ describe('credential-bound adult-review worker', () => {
 })
 
 describe('adult-review HTTP boundaries', () => {
-  it('supports authenticated scheduled invocation and minimized health', async () => {
+  it('supports authenticated manual invocation and minimized health', async () => {
     const runWorker = vi.fn(async () => ({ claimed: 2, delivered: 1, indeterminate: 1, failed: 0 }))
     const handler = createStudyAdultReviewWorkerHandler({
       worker: { ready: async () => ({ ready: true }), run: runWorker },
@@ -309,14 +309,17 @@ describe('adult-review HTTP boundaries', () => {
     const response = await handler({
       httpMethod: 'POST',
       path: '/.netlify/functions/study-adult-review-worker',
-      headers: { 'x-nf-event': 'schedule' },
+      // The forged schedule marker is inert caller data: this entrypoint is
+      // manual-only, and scheduled runs have their own private entrypoint.
+      headers: { 'x-nf-event': 'schedule', 'content-type': 'application/json' },
+      body: JSON.stringify({ schemaVersion: 2, action: 'process-pending' }),
     })
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toEqual({
       status: 'processed', claimed: 2, delivered: 1, indeterminate: 1, failed: 0,
     })
     expect(runWorker).toHaveBeenCalledWith({
-      trigger: 'scheduled',
+      trigger: 'manual',
       workerCredential: 'opaque-worker-credential-0000000000000001',
       limit: 10,
     }, { limit: 10 })
@@ -346,7 +349,8 @@ describe('adult-review HTTP boundaries', () => {
     const response = await handler({
       httpMethod: 'POST',
       path: '/.netlify/functions/study-adult-review-worker',
-      headers: { 'x-nf-event': 'schedule' },
+      headers: { 'x-nf-event': 'schedule', 'content-type': 'application/json' },
+      body: JSON.stringify({ schemaVersion: 2, action: 'process-pending' }),
     })
     expect(response.statusCode).toBe(403)
     expect(runWorker).not.toHaveBeenCalled()
