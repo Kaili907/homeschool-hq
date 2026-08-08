@@ -28,6 +28,11 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/v1/authorization"
+  to = "/.netlify/functions/admin-authorization"
+  status = 200
+
+[[redirects]]
   from = "/api/study/safety/*"
   to = "/.netlify/functions/study-safety-classify"
   status = 200
