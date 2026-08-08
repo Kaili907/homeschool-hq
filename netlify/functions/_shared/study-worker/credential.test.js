@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { createSupabaseServiceRpc } from '../study-adult-review/supabase-ports.js'
 import {
   ADULT_REVIEW_WORKER_INVOCATION_HEADER,
+  createNetlifyScheduledWorkerAuthorization,
   createNetlifyWorkerCredentialVerifier,
   createNetlifyWorkerInvocationAuthorization,
 } from './credential.js'
@@ -179,9 +180,12 @@ describe('worker invocation authorization', () => {
     })).toEqual({ authorized: true, workerCredential: WORKER_CREDENTIAL })
   })
 
-  it('refuses the scheduled trigger outright: x-nf-event is not an authenticated signal', async () => {
+  // A6 -- the manual factory refuses the scheduled trigger. It serves a
+  // publicly reachable path, so authorizing a scheduled run here would mean
+  // authorizing without a presented secret on a path anybody can call.
+  it('refuses the scheduled trigger outright, secret presented or not', async () => {
     const authorization = createNetlifyWorkerInvocationAuthorization({ env: ENV, monitor: monitor() })
-    expect(authorization.scheduledInvocationAuthority).toBe('blocked')
+    expect(authorization.scheduledInvocationAuthority).toBe('refused')
     expect(await authorization.credentialForEvent({
       trigger: 'scheduled',
       event: { headers: { 'x-nf-event': 'schedule', [ADULT_REVIEW_WORKER_INVOCATION_HEADER]: INVOCATION_SECRET } },
@@ -217,5 +221,122 @@ describe('worker invocation authorization', () => {
       dimensions: { source: 'netlify-function', reason_code: 'worker-auth-failed' },
     })
     expect(JSON.stringify(sink.record.mock.calls)).not.toContain(INVOCATION_SECRET)
+  })
+})
+
+describe('scheduled worker authorization: platform path exclusivity', () => {
+  it('authorizes the scheduled trigger from server-held configuration alone', async () => {
+    const authorization = createNetlifyScheduledWorkerAuthorization({ env: ENV })
+    expect(authorization.isDurable).toBe(true)
+    expect(authorization.isReady()).toBe(true)
+    expect(authorization.scheduledInvocationAuthority).toBe('platform-path-exclusivity')
+    expect(await authorization.credentialForEvent({ trigger: 'scheduled' }))
+      .toEqual({ authorized: true, workerCredential: WORKER_CREDENTIAL })
+  })
+
+  // A5 -- the scheduled factory refuses the manual trigger. Its authority is
+  // that Netlify gives a scheduled function no public path; a manual call has
+  // a caller, and this factory has nothing to check one against.
+  it('refuses the manual trigger even when the invocation secret is presented', async () => {
+    const authorization = createNetlifyScheduledWorkerAuthorization({ env: ENV })
+    expect(await authorization.credentialForEvent({
+      trigger: 'manual',
+      event: { headers: { [ADULT_REVIEW_WORKER_INVOCATION_HEADER]: INVOCATION_SECRET } },
+    })).toEqual({ authorized: false })
+  })
+
+  it.each([undefined, '', 'schedule', 'cron', 'Scheduled', null, 0])(
+    'refuses trigger %p',
+    async (trigger) => {
+      const authorization = createNetlifyScheduledWorkerAuthorization({ env: ENV })
+      expect(await authorization.credentialForEvent({ trigger })).toEqual({ authorized: false })
+    },
+  )
+
+  it('never reads the manual invocation secret: it is ready without one configured', async () => {
+    const env = { ...ENV }
+    delete env.ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET
+    const authorization = createNetlifyScheduledWorkerAuthorization({ env })
+    expect(authorization.isReady()).toBe(true)
+    expect(await authorization.credentialForEvent({ trigger: 'scheduled' }))
+      .toEqual({ authorized: true, workerCredential: WORKER_CREDENTIAL })
+  })
+
+  // M3 -- a caller header can never be this path's authority. The factory
+  // destructures a trigger and nothing else, so an event whose every property
+  // access throws is never touched at all.
+  it('reads no part of a request: a hostile event is never accessed', async () => {
+    const authorization = createNetlifyScheduledWorkerAuthorization({ env: ENV })
+    const hostile = new Proxy({}, {
+      get() { throw new Error('scheduled authority read caller-supplied request data') },
+      has() { throw new Error('scheduled authority probed caller-supplied request data') },
+    })
+    expect(await authorization.credentialForEvent({ trigger: 'scheduled', event: hostile }))
+      .toEqual({ authorized: true, workerCredential: WORKER_CREDENTIAL })
+    expect(await authorization.credentialForEvent({ trigger: 'scheduled', headers: hostile }))
+      .toEqual({ authorized: true, workerCredential: WORKER_CREDENTIAL })
+  })
+
+  it('refuses everything when the worker credential is not configured', async () => {
+    for (const patch of [
+      { ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL: undefined },
+      { ACADEMY_STUDY_ADULT_REVIEW_WORKER_ID: undefined },
+      { ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL_VERSION: 'bad version!' },
+    ]) {
+      const env = { ...ENV, ...patch }
+      for (const [key, value] of Object.entries(patch)) if (value === undefined) delete env[key]
+      const authorization = createNetlifyScheduledWorkerAuthorization({ env })
+      expect(authorization.isReady()).toBe(false)
+      expect(await authorization.credentialForEvent({ trigger: 'scheduled' }))
+        .toEqual({ authorized: false })
+    }
+  })
+})
+
+describe('both invocation factories: shared credential guarantees', () => {
+  const FACTORIES = [
+    ['manual', (env) => createNetlifyWorkerInvocationAuthorization({
+      env, monitor: { record: vi.fn(async () => undefined) },
+    }), {
+      trigger: 'manual',
+      event: { headers: { [ADULT_REVIEW_WORKER_INVOCATION_HEADER]: INVOCATION_SECRET } },
+    }],
+    ['scheduled', (env) => createNetlifyScheduledWorkerAuthorization({ env }), { trigger: 'scheduled' }],
+  ]
+
+  // A7 -- an out-of-bounds configured credential is never handed out. Both
+  // factories read it through the same bounded-secret gate, so a 31- or
+  // 513-character credential leaves them unconfigured rather than authorizing
+  // with material the durable RPC boundary would refuse anyway.
+  it.each(FACTORIES)('%s: refuses an out-of-bounds configured credential', async (_name, build, request) => {
+    for (const credential of ['a'.repeat(31), 'a'.repeat(513)]) {
+      const authorization = build({
+        ...ENV, ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL: credential,
+      })
+      expect(authorization.isReady()).toBe(false)
+      expect(await authorization.credentialForEvent(request)).toEqual({ authorized: false })
+    }
+  })
+
+  it.each(FACTORIES)('%s: only ever emits an in-bounds credential', async (_name, build, request) => {
+    const context = await build(ENV).credentialForEvent(request)
+    expect(context.workerCredential.length).toBeGreaterThanOrEqual(32)
+    expect(context.workerCredential.length).toBeLessThanOrEqual(512)
+  })
+
+  // A8 -- worker identity is never caller-authored. The worker's own
+  // `authorize()` throws outright on a context carrying `workerIdentity`, so a
+  // factory that echoed a caller's field back would turn an injected identity
+  // into a hard failure at best and a claimed identity at worst.
+  it.each(FACTORIES)('%s: never echoes a caller-supplied workerIdentity', async (_name, build, request) => {
+    const context = await build(ENV).credentialForEvent({
+      ...request,
+      workerIdentity: 'worker:attacker',
+      authenticated: true,
+    })
+    expect(context).toEqual({ authorized: true, workerCredential: WORKER_CREDENTIAL })
+    expect(Object.keys(context)).toEqual(['authorized', 'workerCredential'])
+    expect(Object.hasOwn(context, 'workerIdentity')).toBe(false)
+    expect(Object.isFrozen(context)).toBe(true)
   })
 })

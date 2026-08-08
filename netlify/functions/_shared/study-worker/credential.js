@@ -169,17 +169,22 @@ export function createNetlifyWorkerCredentialVerifier(options = {}) {
 }
 
 /**
- * Invocation authority for the worker HTTP entrypoint.
+ * Invocation authority for the MANUAL worker HTTP entrypoint.
  *
- * `x-nf-event: schedule` is an ordinary request header on the function event.
- * Nothing in this runtime authenticates it, and a Netlify scheduled invocation
- * cannot be configured to present a secret of its own, so there is no
- * independent proof available for the scheduled trigger. Scheduled invocations
- * are therefore refused outright rather than authorized on an unauthenticated
- * marker, and no Netlify schedule is declared.
+ * This factory serves a publicly reachable function, so it authorizes against
+ * a server-held secret that a real authorized operator can actually present,
+ * compared in constant time.
  *
- * Manual invocation is authorized against a server-held secret that a real
- * authorized operator can actually present, compared in constant time.
+ * It accepts the manual trigger and nothing else. The scheduled trigger has a
+ * separate factory over a separate entrypoint whose authority is the platform
+ * path, and the two must not be interchangeable: if this one could be talked
+ * into the scheduled trigger it would be authorizing a run without a presented
+ * secret on a path anybody can reach.
+ *
+ * `x-nf-event: schedule` is not read here, or anywhere else in the invocation
+ * path. It is an ordinary request header that any caller can set, so it proves
+ * nothing; treating it as a discriminator is what let a forged header steer
+ * this entrypoint at all.
  */
 export function createNetlifyWorkerInvocationAuthorization(options = {}) {
   const env = options.env ?? process.env
@@ -192,8 +197,9 @@ export function createNetlifyWorkerInvocationAuthorization(options = {}) {
     isDurable: true,
     isReady: () => configured && typeof monitor?.record === 'function',
 
-    // Scheduled triggers are refused here, before any credential is read.
-    scheduledInvocationAuthority: 'blocked',
+    // Refused here, before any credential is read: this factory has no way to
+    // authorize a scheduled run and must never pretend otherwise.
+    scheduledInvocationAuthority: 'refused',
 
     async credentialForEvent({ event, trigger } = {}) {
       if (!configured || trigger !== 'manual') return Object.freeze({ authorized: false })
@@ -210,6 +216,53 @@ export function createNetlifyWorkerInvocationAuthorization(options = {}) {
         value: 1,
         dimensions: { source: 'netlify-function', reason_code: reasonCode },
       })
+    },
+  })
+}
+
+/**
+ * Invocation authority for the SCHEDULED worker entrypoint.
+ *
+ * The authority here is PLATFORM PATH EXCLUSIVITY. A Netlify function that has
+ * a schedule configured runs on that schedule and does not accept incoming web
+ * requests, so the scheduled entrypoint has no public path for a caller to
+ * reach in the first place. That is the entire proof, and it is the only kind
+ * available: a Netlify scheduled invocation cannot be configured to present a
+ * secret of its own.
+ *
+ * It is NOT a token, NOT a signature, NOT `x-nf-event`, and NOT a custom
+ * header. Consequently this factory reads no request at all -- it destructures
+ * a trigger and nothing else, so there is no header, body, or query for a
+ * caller to influence even if one somehow arrived. All it verifies is that the
+ * composition asked for the scheduled trigger; the configured worker
+ * credential then comes from the same server-held environment boundary the
+ * manual factory reads, under the same length rules.
+ *
+ * It deliberately never reads
+ * `ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET`. That secret exists so
+ * a human operator can prove a manual call, and the scheduled path has no
+ * caller to prove anything. Reading it here would make the two paths share a
+ * failure and would put the manual secret on a path that never needs it.
+ */
+export function createNetlifyScheduledWorkerAuthorization(options = {}) {
+  const env = options.env ?? process.env
+  const configuration = workerConfiguration(env)
+
+  return Object.freeze({
+    isDurable: true,
+    isReady: () => configuration !== null,
+
+    scheduledInvocationAuthority: 'platform-path-exclusivity',
+
+    // Named for the shape the entrypoints share, not for what it reads: this
+    // one takes no event. The manual trigger is refused, so a composition
+    // mistake surfaces as an unauthorized run rather than a silent
+    // cross-wiring of the two paths.
+    async credentialForEvent({ trigger } = {}) {
+      if (configuration === null || trigger !== 'scheduled') {
+        return Object.freeze({ authorized: false })
+      }
+      return Object.freeze({ authorized: true, workerCredential: configuration.credential })
     },
   })
 }

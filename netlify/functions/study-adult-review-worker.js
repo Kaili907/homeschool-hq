@@ -3,7 +3,6 @@ import {
   boundedInteger,
   envFlagEnabled,
   errorResponse,
-  getHeader,
   hasQuery,
   jsonResponse,
   readJsonBody,
@@ -55,16 +54,22 @@ export function createStudyAdultReviewWorkerHandler(overrides = {}) {
     const { worker, authorization } = await composition()
     if (!ready(worker, authorization)) return errorResponse(503, 'service_not_ready')
     try {
-      const scheduled = getHeader(event.headers, 'x-nf-event') === 'schedule'
+      // Unconditional. The old schedule branch skipped body validation, so a
+      // bodyless public POST carrying a forged `x-nf-event` reached the
+      // authorization check and bought a durable denial write for the cost of
+      // an empty request. Malformed input now dies here, before any durable
+      // work at all.
       let limit = 10
-      if (!scheduled) {
-        const body = assertExactObject(readJsonBody(event, 512), ['schemaVersion', 'action'], ['limit'])
-        if (body.schemaVersion !== 2 || body.action !== 'process-pending') {
-          return errorResponse(400, 'invalid_request')
-        }
-        if (body.limit !== undefined) limit = boundedInteger(body.limit, 1, 50)
+      const body = assertExactObject(readJsonBody(event, 512), ['schemaVersion', 'action'], ['limit'])
+      if (body.schemaVersion !== 2 || body.action !== 'process-pending') {
+        return errorResponse(400, 'invalid_request')
       }
-      const trigger = scheduled ? 'scheduled' : 'manual'
+      if (body.limit !== undefined) limit = boundedInteger(body.limit, 1, 50)
+      // This entrypoint is manual, always. Scheduled runs live in the separate
+      // scheduled entrypoint, which Netlify does not expose to web requests, so
+      // no header a caller can send needs to be consulted to tell them apart --
+      // and a forged `x-nf-event` is inert caller data.
+      const trigger = 'manual'
       const credentialContext = await authorization.credentialForEvent({ event, trigger })
       if (
         !credentialContext?.authorized ||

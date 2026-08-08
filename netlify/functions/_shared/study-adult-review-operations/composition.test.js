@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { dirname, resolve as resolvePath } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { createStudyAdultReviewScheduledWorkerHandler } from '../../study-adult-review-worker-scheduled.js'
 import { createStudyAdultReviewWorkerHandler } from '../../study-adult-review-worker.js'
 import { createMonitoringService, createStructuredServerLog } from '../study-monitoring/monitoring.js'
 import { createSupabaseAdultReviewOperations } from './supabase-operations.js'
@@ -225,6 +226,27 @@ function handlerFor(estate, env = ENV) {
       ...options,
       fetchImpl: estate.fetchImpl,
     }),
+  })
+}
+
+function scheduledHandlerFor(estate, env = ENV) {
+  return createStudyAdultReviewScheduledWorkerHandler({
+    env,
+    compose: (options) => createProductionAdultReviewWorkerComposition({
+      ...options,
+      fetchImpl: estate.fetchImpl,
+    }),
+  })
+}
+
+// Hands the pending job out exactly once, the way the durable claim RPC does:
+// a second claim over an already-claimed job returns nothing.
+function pendingOnce(estate, jobs) {
+  let handed = false
+  estate.override('academy_study_claim_delivery_jobs_v2', () => {
+    if (handed) return { jobs: [], serverTime: FAR_FUTURE }
+    handed = true
+    return { jobs, serverTime: FAR_FUTURE }
   })
 }
 
@@ -545,10 +567,37 @@ describe('D1 composition: invocation authorization', () => {
     expect(estate.countOf('academy_study_record_adult_review_monitoring_v2')).toBe(1)
   })
 
-  it('refuses a forged schedule header even when the invocation secret is presented', async () => {
+  it('treats a forged schedule header as inert data on an otherwise valid manual call', async () => {
+    // This entrypoint is manual-only now. `x-nf-event` is ordinary
+    // caller-supplied data on a public request, so forging it neither grants
+    // anything nor takes anything away: the call is judged purely on the
+    // server-held invocation secret and the body, and succeeds AS MANUAL.
     const estate = createDurableEstate()
     const response = await handlerFor(estate)(manualEvent({ 'x-nf-event': 'schedule' }))
-    expect(response.statusCode).toBe(403)
+    expect(response.statusCode).toBe(200)
+    expect(JSON.parse(response.body)).toEqual({
+      status: 'processed', claimed: 1, delivered: 1, indeterminate: 0, failed: 0,
+    })
+    // The 200 is itself the proof that the run went through as MANUAL: the
+    // manual factory refuses every trigger but `manual`, so a run that had
+    // been classified as scheduled could only have ended in 403.
+  })
+
+  it('gates a malformed body before any durable denial write, forged header or not', async () => {
+    // The old schedule branch skipped body validation entirely, so a bodyless
+    // public POST carrying a forged `x-nf-event` reached the authorization
+    // check and bought a durable monitoring write for the cost of one empty
+    // request. Body validation is unconditional now, so the request dies at
+    // the content-type gate and writes nothing.
+    const estate = createDurableEstate()
+    const response = await handlerFor(estate)({
+      httpMethod: 'POST',
+      path: '/api/study/adult-review/worker',
+      headers: { 'x-nf-event': 'schedule' },
+    })
+    expect(response.statusCode).toBe(415)
+    expect(JSON.parse(response.body)).toEqual({ error: { code: 'unsupported_content_type' } })
+    expect(estate.countOf('academy_study_record_adult_review_monitoring_v2')).toBe(0)
     expect(estate.names()).not.toContain('academy_study_claim_delivery_jobs_v2')
   })
 
@@ -573,6 +622,231 @@ describe('D1 composition: invocation authorization', () => {
     const serialized = JSON.stringify(denial.parameters)
     expect(serialized).not.toContain(WORKER_CREDENTIAL)
     expect(serialized).not.toContain(INVOCATION_SECRET)
+  })
+})
+
+describe('D1 scheduled entrypoint: platform path exclusivity', () => {
+  it('runs a delivery with no request of any kind, not even an event argument', async () => {
+    const estate = createDurableEstate()
+    // The handler takes no parameter. Calling it with nothing is exactly what
+    // a Netlify schedule does, and a 200 proves the run was authorized AS
+    // SCHEDULED: the scheduled factory refuses every other trigger.
+    const response = await scheduledHandlerFor(estate)()
+
+    expect(response.statusCode).toBe(200)
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+    const states = estate.callsTo('academy_study_record_attempt_event_v2')
+      .map((call) => call.parameters.p_event.state)
+    expect(states).toEqual(['created', 'submitted'])
+  })
+
+  it('has no path, method, query, body, or header gate to satisfy or to fool', async () => {
+    const estate = createDurableEstate()
+    const handler = scheduledHandlerFor(estate)
+    // Every one of these would be refused by the manual entrypoint -- wrong
+    // path, wrong method, a query string, an unparseable body, a forged
+    // schedule marker, a stolen invocation secret. None of them changes
+    // anything here, because none of them is read.
+    for (const event of [
+      undefined,
+      {},
+      { httpMethod: 'GET', path: '/nope', rawQuery: 'limit=999' },
+      {
+        httpMethod: 'DELETE',
+        path: '/.netlify/functions/study-adult-review-worker-scheduled',
+        body: 'not json',
+        headers: {
+          'x-nf-event': 'schedule',
+          'x-academy-study-worker-invocation': INVOCATION_SECRET,
+          'content-type': 'text/plain',
+        },
+      },
+    ]) {
+      const response = await handler(event)
+      expect(response.statusCode).toBe(200)
+      expect(JSON.parse(response.body)).toEqual({ status: 'processed' })
+    }
+  })
+
+  it('reveals no worker internals in its response', async () => {
+    const estate = createDurableEstate()
+    const response = await scheduledHandlerFor(estate)()
+    // Deliberately not the manual entrypoint's counts: no operator reads a
+    // scheduled response, so claimed/delivered/failed would be worker
+    // internals published to an HTTP surface for no reader.
+    expect(JSON.parse(response.body)).toEqual({ status: 'processed' })
+    for (const forbidden of [
+      WORKER_CREDENTIAL, INVOCATION_SECRET, 'household', 'student', 'recipient:',
+      'claimed', 'delivered', 'workerIdentity',
+    ]) expect(response.body).not.toContain(forbidden)
+  })
+
+  it('fails closed on the containment flag and on an unready graph', async () => {
+    const estate = createDurableEstate()
+    const disabled = { ...ENV }
+    delete disabled.ACADEMY_STUDY_ENABLED
+    expect(await scheduledHandlerFor(estate, disabled)()).toMatchObject({ statusCode: 503 })
+    expect(JSON.parse((await scheduledHandlerFor(estate, disabled)()).body))
+      .toEqual({ error: { code: 'gateway_disabled' } })
+    expect(estate.calls).toHaveLength(0)
+
+    const unconfigured = { ...ENV }
+    delete unconfigured.ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL
+    const response = await scheduledHandlerFor(estate, unconfigured)()
+    expect(response.statusCode).toBe(503)
+    expect(JSON.parse(response.body)).toEqual({ error: { code: 'service_not_ready' } })
+    expect(estate.names()).not.toContain('academy_study_claim_delivery_jobs_v2')
+  })
+
+  it('CARRIED RESIDUAL: still needs the manual invocation secret to compose', async () => {
+    // The scheduled path never READS that secret -- proven in the credential
+    // suite, where the scheduled factory is ready without one. But the shared
+    // production composition (out of custody this session) constructs the
+    // manual authorization and refuses to compose without it, so removing the
+    // manual secret also stops the schedule. Pinned so the coupling is a
+    // stated fact rather than a surprise in production.
+    const estate = createDurableEstate()
+    const env = { ...ENV }
+    delete env.ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET
+    const response = await scheduledHandlerFor(estate, env)()
+    expect(response.statusCode).toBe(503)
+    expect(JSON.parse(response.body)).toEqual({ error: { code: 'service_not_ready' } })
+  })
+})
+
+describe('D1 scheduled entrypoint: batch limit', () => {
+  it('claims exactly four jobs per scheduled run', async () => {
+    // Netlify caps a scheduled invocation at 30 seconds and one in-app
+    // delivery costs several sequential durable round trips, so the batch is
+    // sized to finish inside that ceiling; the next run is five minutes away.
+    const estate = createDurableEstate()
+    await scheduledHandlerFor(estate)()
+    expect(estate.callsTo('academy_study_claim_delivery_jobs_v2')[0].parameters.p_batch_size)
+      .toBe(4)
+  })
+
+  it('leaves the manual default batch at ten', async () => {
+    const estate = createDurableEstate()
+    await handlerFor(estate)(manualEvent())
+    expect(estate.callsTo('academy_study_claim_delivery_jobs_v2')[0].parameters.p_batch_size)
+      .toBe(10)
+  })
+
+  it('still honours an explicit manual limit, and never lets one reach the schedule', async () => {
+    const estate = createDurableEstate()
+    await handlerFor(estate)(workerEvent({
+      headers: { 'x-academy-study-worker-invocation': INVOCATION_SECRET },
+      body: JSON.stringify({ schemaVersion: 2, action: 'process-pending', limit: 37 }),
+    }))
+    expect(estate.callsTo('academy_study_claim_delivery_jobs_v2')[0].parameters.p_batch_size)
+      .toBe(37)
+
+    // The scheduled entrypoint parses no body, so no caller-supplied limit
+    // exists on that path to override the four.
+    const scheduled = createDurableEstate()
+    await scheduledHandlerFor(scheduled)({
+      body: JSON.stringify({ schemaVersion: 2, action: 'process-pending', limit: 50 }),
+      headers: { 'content-type': 'application/json' },
+    })
+    expect(scheduled.callsTo('academy_study_claim_delivery_jobs_v2')[0].parameters.p_batch_size)
+      .toBe(4)
+  })
+})
+
+describe('D1 scheduled entrypoint: replay and idempotency', () => {
+  // Idempotency is NOT authentication. Nothing below authorizes anything: it
+  // shows that repeating an already-authorized run does not repeat a delivery.
+  // The authorization argument is platform path exclusivity plus the two
+  // trigger-exclusive factories, and it is made elsewhere.
+  it('delivers once across two sequential scheduled runs over one pending job', async () => {
+    const estate = createDurableEstate()
+    pendingOnce(estate, [claimJob()])
+    const handler = scheduledHandlerFor(estate)
+
+    expect((await handler()).statusCode).toBe(200)
+    expect((await handler()).statusCode).toBe(200)
+
+    expect(estate.countOf('academy_study_claim_delivery_jobs_v2')).toBe(2)
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+    expect(estate.callsTo('academy_study_record_attempt_event_v2')
+      .map((call) => call.parameters.p_event.state)).toEqual(['created', 'submitted'])
+  })
+
+  it('lets only the lease holder proceed when two runs overlap', async () => {
+    const estate = createDurableEstate()
+    pendingOnce(estate, [claimJob()])
+    const [first, second] = await Promise.all([
+      scheduledHandlerFor(estate)(),
+      scheduledHandlerFor(estate)(),
+    ])
+    expect([first.statusCode, second.statusCode]).toEqual([200, 200])
+    // Two independent runs, two claim calls, one durable lease: the loser gets
+    // an empty batch and reaches no provider at all.
+    expect(estate.countOf('academy_study_claim_delivery_jobs_v2')).toBe(2)
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+  })
+
+  it('quarantines a submitted-but-unverified job instead of releasing it', async () => {
+    const estate = createDurableEstate()
+    let proofs = 0
+    estate.override('academy_study_prove_current_attempt_v2', (parameters) => {
+      proofs += 1
+      // The third proof is the post-submit one, after the provider boundary.
+      if (proofs > 2) return undefined
+      return {
+        current: true,
+        attemptId: `attempt:${parameters.p_job_id}:7`,
+        jobId: parameters.p_job_id,
+        leaseToken: 'lease:0001',
+        deliveryIdempotencyKey: DELIVERY_KEY,
+        providerName: 'academy-in-app',
+        providerConfigVersion: 'in-app-config-v1',
+      }
+    })
+    const response = await scheduledHandlerFor(estate)()
+    expect(response.statusCode).toBe(200)
+    // Releasing the lease would return an already-submitted delivery to
+    // 'pending', and the next scheduled run five minutes later would deliver
+    // it a second time. The C2 adapter quarantines instead.
+    expect(estate.names()).not.toContain('academy_study_release_delivery_lease_v2')
+  })
+})
+
+describe('D1 scheduled entrypoint: privacy', () => {
+  it('puts no secret, destination, or learner text on the durable wire', async () => {
+    const estate = createDurableEstate()
+    const response = await scheduledHandlerFor(estate)()
+    expect(response.statusCode).toBe(200)
+
+    const bodies = JSON.stringify(estate.calls.map((call) => call.parameters))
+    for (const forbidden of [
+      WORKER_CREDENTIAL, INVOCATION_SECRET, ENV.SUPABASE_SERVICE_ROLE_KEY,
+      '@', 'Bearer', 'rawText', 'transcript', 'disclosure', 'messageBody',
+      'emailAddress', 'phoneNumber', 'destination',
+    ]) expect(bodies).not.toContain(forbidden)
+
+    expect(response.body).not.toContain(WORKER_CREDENTIAL)
+    expect(logSpy.mock.calls.flat().join('\n')).not.toContain(WORKER_CREDENTIAL)
+  })
+
+  it('adds no monitoring dimension the manual path does not already emit', async () => {
+    // Same failing job on both paths, so the comparison is over identical
+    // work: the trigger split must not widen what is recorded.
+    function brokenEstate() {
+      const estate = createDurableEstate({ jobs: [claimJob({ route: 'email' })] })
+      return estate
+    }
+    const shape = (estate) => estate.callsTo('academy_study_record_adult_review_monitoring_v2')
+      .map((call) => `${call.parameters.p_event.eventName}:${Object.keys(call.parameters.p_event.dimensions ?? {}).sort().join(',')}`)
+      .sort()
+
+    const manual = brokenEstate()
+    await handlerFor(manual)(manualEvent())
+    const scheduled = brokenEstate()
+    await scheduledHandlerFor(scheduled)()
+
+    expect(shape(scheduled)).toEqual(shape(manual))
+    expect(shape(scheduled).length).toBeGreaterThan(0)
   })
 })
 
