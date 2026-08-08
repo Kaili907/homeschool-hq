@@ -1,3 +1,12 @@
+import type {
+  AdminCapability,
+  AdminCostKind,
+  AdminEngineId,
+  AdminHealthState,
+  AdminRole,
+  IntegerMicros,
+} from './admin0Vocabulary'
+
 export const ADMIN_SECTIONS = [
   'overview',
   'learners',
@@ -22,29 +31,46 @@ export type OverviewRange =
 
 export type Metric<T> =
   | { readonly status: 'available'; readonly value: T }
-  | { readonly status: 'unavailable'; readonly reason?: string }
-  | { readonly status: 'unknown'; readonly reason?: string }
+  | { readonly status: 'unavailable' }
+  | { readonly status: 'unknown' }
 
-export type EngineHealth = 'healthy' | 'degraded' | 'unavailable' | 'disabled' | 'unknown'
-export type OverallHealth = Exclude<EngineHealth, 'disabled'>
-export type EngineName = 'Tutor' | 'Study' | 'Assessment' | 'Jarvis' | 'TTS' | 'Sync'
+export type EngineReasonCode =
+  | 'elevated_latency'
+  | 'feature_disabled'
+  | 'partial_dependency_loss'
+  | 'persistence_unavailable'
+  | 'provider_error'
+  | 'provider_timeout'
+  | 'sync_conflict'
+  | 'telemetry_incomplete'
 
-export interface EngineStatus {
-  readonly name: EngineName
-  readonly health: EngineHealth
-  readonly detail?: string
-  readonly href?: string
+export interface EngineObservation {
+  readonly engineId: AdminEngineId
+  readonly health: AdminHealthState
+  readonly appVersion: string
+  readonly engineVersion: string
+  readonly observedAt: string
+  readonly windowStart: string
+  readonly windowEnd: string
+  readonly reasonCodes: readonly EngineReasonCode[]
+}
+
+export interface PresentedSpend {
+  readonly costMicros: IntegerMicros
+  readonly costKind: Exclude<AdminCostKind, 'unavailable'>
 }
 
 export interface AdminOverviewModel {
   readonly range: OverviewRange
+  /** Canonical observation time for this overview, separate from refresh history. */
+  readonly observedAt: string
   readonly freshness: 'current' | 'stale'
-  readonly staleReason?: string
+  readonly staleReasonCode?: OverviewStaleReasonCode
   readonly academy: {
     readonly environment: Metric<string>
     readonly appVersion: Metric<string>
     readonly curriculumVersion: Metric<string>
-    readonly overallHealth: Metric<OverallHealth>
+    readonly overallHealth: Metric<AdminHealthState>
     readonly lastSuccessfulDataRefresh: Metric<string>
   }
   readonly learners: {
@@ -54,13 +80,13 @@ export interface AdminOverviewModel {
     readonly studySessions: Metric<number>
     readonly instructionalMinutes: Metric<number>
   }
-  readonly engines: readonly EngineStatus[]
+  readonly engines: readonly EngineObservation[]
   readonly ai: {
     readonly requests: Metric<number>
     readonly inputTokens: Metric<number>
     readonly outputTokens: Metric<number>
     readonly ttsCharacters: Metric<number>
-    readonly spend: Metric<{ readonly amountUsd: number; readonly basis: 'calculated' | 'estimated' }>
+    readonly spend: Metric<PresentedSpend>
   }
   readonly safety: {
     readonly openSafetyStops: Metric<number>
@@ -75,26 +101,48 @@ export interface AdminOverviewModel {
   }
 }
 
+export type OverviewErrorCode = 'overview_timeout' | 'overview_unavailable' | 'refresh_failed'
+export type OverviewStaleReasonCode = 'refresh_delayed' | 'refresh_failed' | 'telemetry_incomplete'
+export type AuthorizationReasonCode =
+  | 'admin_assignment_required'
+  | 'authorization_unavailable'
+  | 'overview_read_required'
+
 export type OverviewLoadState =
   | { readonly status: 'loading' }
   | { readonly status: 'ready'; readonly model: AdminOverviewModel }
-  | { readonly status: 'error'; readonly message: string }
+  | { readonly status: 'error'; readonly code: OverviewErrorCode }
+
+export type ServerResolvedAdminAuthorization =
+  | { readonly status: 'resolving' }
+  | { readonly status: 'unauthorized'; readonly reasonCode: AuthorizationReasonCode }
+  | {
+      readonly status: 'authorized'
+      readonly role: AdminRole
+      readonly capabilities: readonly AdminCapability[]
+    }
 
 /**
- * Authorization is deliberately discriminated so privileged overview data cannot
- * even be supplied to the shell until ADMIN-1 has produced an authorized result.
+ * Sensitive data is structurally absent before server authorization resolves.
+ * The component also checks overview:read at render time; this remains defense
+ * in depth and never replaces ADMIN-1's server/API authorization boundary.
  */
 export type AdminConsoleProps =
-  | { readonly authorization: 'resolving' }
-  | { readonly authorization: 'unauthorized'; readonly reason?: string }
+  | { readonly authorization: Extract<ServerResolvedAdminAuthorization, { status: 'resolving' }> }
+  | { readonly authorization: Extract<ServerResolvedAdminAuthorization, { status: 'unauthorized' }> }
   | {
-      readonly authorization: 'authorized'
+      readonly authorization: Extract<ServerResolvedAdminAuthorization, { status: 'authorized' }>
       readonly overview: OverviewLoadState
       readonly selectedRange: OverviewRange
       readonly onRangeChange: (range: OverviewRange) => void
       readonly onRetry?: () => void
       readonly onNavigate?: (section: AdminSection) => void
     }
+
+export function hasOverviewReadCapability(authorization: ServerResolvedAdminAuthorization): boolean {
+  return authorization.status === 'authorized'
+    && authorization.capabilities.includes('overview:read')
+}
 
 export function validateCustomRange(start: string, end: string): string | null {
   if (!start || !end) return 'Choose both a start and end date.'
@@ -103,9 +151,7 @@ export function validateCustomRange(start: string, end: string): string | null {
     const parsed = new Date(`${value}T00:00:00Z`)
     return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value
   }
-  if (!validDate(start) || !validDate(end)) {
-    return 'Enter valid calendar dates.'
-  }
+  if (!validDate(start) || !validDate(end)) return 'Enter valid calendar dates.'
   if (start > end) return 'Start date must be on or before end date.'
   return null
 }

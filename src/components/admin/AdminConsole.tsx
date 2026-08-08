@@ -1,12 +1,20 @@
 import { useEffect, useId, useState, type KeyboardEvent } from 'react'
+import type { AdminEngineId, AdminHealthState } from '../../admin/admin0Vocabulary'
+import {
+  formatUsdMicros,
+  safeAuthorizationMessage,
+  safeEngineReasonMessage,
+  safeOverviewErrorMessage,
+  safeStaleMessage,
+} from '../../admin/overviewAdapter'
 import {
   OVERVIEW_PRESETS,
+  hasOverviewReadCapability,
   movePresetSelection,
   validateCustomRange,
   type AdminConsoleProps,
   type AdminOverviewModel,
   type AdminSection,
-  type EngineHealth,
   type Metric,
   type OverviewPreset,
   type OverviewRange,
@@ -32,7 +40,18 @@ const PRESET_LABELS: Record<OverviewPreset, string> = {
   '30-days': '30 days',
   'school-year': 'School year',
 }
-const HEALTH_LABELS: Record<EngineHealth, string> = {
+const ENGINE_LABELS: Readonly<Record<AdminEngineId, string>> = {
+  tutor: 'Tutor',
+  study: 'Study',
+  assessment: 'Assessment',
+  curriculum: 'Curriculum',
+  jarvis: 'Jarvis',
+  tts: 'TTS',
+  gateway: 'Gateway',
+  sync: 'Sync',
+}
+
+const HEALTH_LABELS: Record<AdminHealthState, string> = {
   healthy: 'Healthy',
   degraded: 'Degraded',
   unavailable: 'Unavailable',
@@ -41,16 +60,25 @@ const HEALTH_LABELS: Record<EngineHealth, string> = {
 }
 
 export function AdminConsole(props: AdminConsoleProps) {
-  if (props.authorization === 'resolving') {
+  if (props.authorization.status === 'resolving') {
     return <AuthorizationState kind="resolving" />
   }
-  if (props.authorization === 'unauthorized') {
-    return <AuthorizationState kind="unauthorized" reason={props.reason} />
+  if (!isAuthorizedConsoleProps(props)) {
+    return <AuthorizationState kind="unauthorized" reasonCode={props.authorization.reasonCode} />
+  }
+  if (!hasOverviewReadCapability(props.authorization)) {
+    return <AuthorizationState kind="unauthorized" reasonCode="overview_read_required" />
   }
   return <AuthorizedConsole {...props} />
 }
 
-function AuthorizationState({ kind, reason }: { kind: 'resolving' | 'unauthorized'; reason?: string }) {
+function isAuthorizedConsoleProps(
+  props: AdminConsoleProps,
+): props is Extract<AdminConsoleProps, { authorization: { status: 'authorized' } }> {
+  return props.authorization.status === 'authorized'
+}
+
+function AuthorizationState({ kind, reasonCode }: { kind: 'resolving' | 'unauthorized'; reasonCode?: 'admin_assignment_required' | 'authorization_unavailable' | 'overview_read_required' }) {
   const resolving = kind === 'resolving'
   return (
     <main className="admin-gate" aria-busy={resolving}>
@@ -67,14 +95,14 @@ function AuthorizationState({ kind, reason }: { kind: 'resolving' | 'unauthorize
         <p>
           {resolving
             ? 'The console will remain private until administrator authorization is confirmed.'
-            : reason ?? 'Your account is not authorized to view this console.'}
+            : safeAuthorizationMessage(reasonCode ?? 'authorization_unavailable')}
         </p>
       </section>
     </main>
   )
 }
 
-function AuthorizedConsole(props: Extract<AdminConsoleProps, { authorization: 'authorized' }>) {
+function AuthorizedConsole(props: Extract<AdminConsoleProps, { authorization: { status: 'authorized' } }>) {
   return (
     <div className="admin-shell">
       <a className="admin-skip-link" href="#admin-main">Skip to overview</a>
@@ -103,7 +131,7 @@ function AuthorizedConsole(props: Extract<AdminConsoleProps, { authorization: 'a
         </nav>
         <div className="admin-sidebar__footer">
           <span className="admin-secure-dot" aria-hidden="true" />
-          Authorized operator session
+          {props.authorization.role[0].toUpperCase() + props.authorization.role.slice(1)} operator session
         </div>
       </aside>
 
@@ -118,7 +146,7 @@ function AuthorizedConsole(props: Extract<AdminConsoleProps, { authorization: 'a
         <main id="admin-main" className="admin-main" tabIndex={-1}>
           {props.overview.status === 'loading' && <OverviewLoading />}
           {props.overview.status === 'error' && (
-            <OverviewError message={props.overview.message} onRetry={props.onRetry} />
+            <OverviewError code={props.overview.code} onRetry={props.onRetry} />
           )}
           {props.overview.status === 'ready' && <Overview model={props.overview.model} />}
         </main>
@@ -209,7 +237,7 @@ function Overview({ model }: { model: AdminOverviewModel }) {
       {model.freshness === 'stale' && (
         <div className="admin-banner admin-banner--stale" role="status">
           <StatusGlyph status="degraded" />
-          <div><strong>Data may be out of date</strong><span>{model.staleReason ?? 'The latest refresh did not complete.'}</span></div>
+          <div><strong>Data may be out of date</strong><span>{safeStaleMessage(model.staleReasonCode)}</span></div>
         </div>
       )}
 
@@ -220,6 +248,7 @@ function Overview({ model }: { model: AdminOverviewModel }) {
           <StatusItem label="App version" metric={model.academy.appVersion} />
           <StatusItem label="Curriculum" metric={model.academy.curriculumVersion} />
           <StatusItem label="Overall health" metric={model.academy.overallHealth} health />
+          <StatusItem label="Observed at" metric={{ status: 'available', value: model.observedAt }} />
           <StatusItem label="Last successful refresh" metric={model.academy.lastSuccessfulDataRefresh} />
         </dl>
       </section>
@@ -240,13 +269,14 @@ function Overview({ model }: { model: AdminOverviewModel }) {
           <SectionHeading id="engines-title" eyebrow="Service readiness" title="Engine health" />
           <ul className="admin-engine-list">
             {model.engines.map((engine) => (
-              <li key={engine.name}>
-                <div><strong>{engine.name}</strong>{engine.detail && <span>{engine.detail}</span>}</div>
-                {engine.href ? (
-                  <a href={engine.href} aria-label={`View ${engine.name} engine details`}>
-                    <HealthBadge status={engine.health} /><span aria-hidden="true">›</span>
-                  </a>
-                ) : <HealthBadge status={engine.health} />}
+              <li key={engine.engineId}>
+                <div>
+                  <strong>{ENGINE_LABELS[engine.engineId]}</strong>
+                  {engine.reasonCodes.length > 0 && <span>{engine.reasonCodes.map(safeEngineReasonMessage).join(' · ')}</span>}
+                </div>
+                <a href={`/academy/admin/engines/${engine.engineId}`} aria-label={`View ${ENGINE_LABELS[engine.engineId]} engine details`}>
+                  <HealthBadge status={engine.health} /><span aria-hidden="true">›</span>
+                </a>
               </li>
             ))}
           </ul>
@@ -260,12 +290,12 @@ function Overview({ model }: { model: AdminOverviewModel }) {
             <CompactMetric label="Output tokens" metric={model.ai.outputTokens} />
             <CompactMetric label="TTS characters" metric={model.ai.ttsCharacters} />
             <CompactMetric
-              label={model.ai.spend.status === 'available' && model.ai.spend.value.basis === 'calculated' ? 'Calculated spend' : 'Estimated spend'}
+              label={model.ai.spend.status === 'available' && model.ai.spend.value.costKind === 'reconciled' ? 'Reconciled spend' : 'Estimated spend'}
               metric={model.ai.spend}
-              formatter={(value) => `$${value.amountUsd.toFixed(2)}`}
+              formatter={(value) => formatUsdMicros(value.costMicros)}
             />
           </div>
-          <p className="admin-disclosure">Usage-derived amount. Not a reconciled provider invoice.</p>
+          <p className="admin-disclosure">Calculated values are usage-derived estimates, not reconciled provider invoices.</p>
         </section>
       </div>
 
@@ -303,13 +333,13 @@ function OverviewLoading() {
   )
 }
 
-function OverviewError({ message, onRetry }: { message: string; onRetry?: () => void }) {
+function OverviewError({ code, onRetry }: { code: 'overview_timeout' | 'overview_unavailable' | 'refresh_failed'; onRetry?: () => void }) {
   return (
     <section className="admin-error" role="alert">
       <StatusGlyph status="unavailable" />
       <p className="admin-eyebrow">Overview unavailable</p>
       <h2>We couldn’t load operational data</h2>
-      <p>{message}</p>
+      <p>{safeOverviewErrorMessage(code)}</p>
       {onRetry && <button type="button" onClick={onRetry}>Try again</button>}
     </section>
   )
@@ -322,7 +352,7 @@ function SectionHeading({ id, eyebrow, title }: { id: string; eyebrow: string; t
 function StatusItem<T>({ label, metric, health = false }: { label: string; metric: Metric<T>; health?: boolean }) {
   return (
     <div><dt>{label}</dt><dd>{health && metric.status === 'available'
-      ? <HealthBadge status={metric.value as EngineHealth} />
+      ? <HealthBadge status={metric.value as AdminHealthState} />
       : <MetricValue metric={metric} />}</dd></div>
   )
 }
@@ -343,11 +373,11 @@ function MetricValue<T>({ metric, formatter, suffix = '' }: { metric: Metric<T>;
   return <>{value}{suffix}</>
 }
 
-function HealthBadge({ status }: { status: EngineHealth }) {
+function HealthBadge({ status }: { status: AdminHealthState }) {
   return <span className={`admin-health admin-health--${status}`}><StatusGlyph status={status} />{HEALTH_LABELS[status]}</span>
 }
 
-function StatusGlyph({ status }: { status: EngineHealth }) {
+function StatusGlyph({ status }: { status: AdminHealthState }) {
   return <span className={`admin-status-glyph admin-status-glyph--${status}`} aria-hidden="true">{status === 'healthy' ? '✓' : status === 'degraded' ? '!' : status === 'disabled' ? '–' : '?'}</span>
 }
 
