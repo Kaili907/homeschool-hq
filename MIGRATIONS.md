@@ -10,6 +10,25 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: Academy Admin authorization foundation (2026-08-08)
+
+Tracked migration:
+`supabase/migrations/20260808120000_academy_admin_authorization.sql`.
+
+The migration adds a server-read role-assignment table backed by existing
+Supabase Auth user IDs. Its fixed role vocabulary is `owner`, `admin`, and
+`viewer`; a partial unique index permits at most one active assignment per user.
+RLS is enabled and forced with no client policy. `anon` and `authenticated` have
+no privileges, while `service_role` receives `SELECT` only. Admin role mutation
+remains deferred to a separately reviewed owner-authorized workflow.
+
+The corresponding Netlify helper verifies the Supabase bearer, looks up only
+the verified user ID, derives explicit capabilities server-side, and fails
+closed on missing, revoked, malformed, duplicate, timed-out, or failed lookups.
+The browser receives only a versioned role/capability projection. Validate
+locally with `npm run test:admin-auth`. This migration has not been applied to a
+hosted Supabase project.
+
 ## Supabase: Academy profiles base (2026-07-24)
 
 Deployment source of truth:
