@@ -73,10 +73,12 @@ const CUSTODY_LF_SHA256: Readonly<Record<string, string>> = {
     'd4ccea295aac2bda67dbfd310650e1c625de867485ecc47f5e993f74c8006d00',
   '20260806120000_academy_study_in_app_receipt_timestamp.sql':
     'b690c634b9c629149d570c9ffc5e1664b060be1d9f45f76cb461503de2c6f3b6',
+  '20260806140000_academy_study_c2_operations_contract.sql':
+    '8448c6d1d6eec2247a913cfb18bd21b8fd9f6793bab5acd81b414878e5333baf',
 }
 
 describe('migration byte custody', () => {
-  it('holds all eleven migrations byte-for-byte, independently of the manifest', async () => {
+  it('holds all twelve migrations byte-for-byte, independently of the manifest', async () => {
     const files = (await readdir(migrationDirectory))
       .filter((name) => /^\d{14}_.+\.sql$/.test(name))
       .sort()
@@ -171,12 +173,23 @@ describe('Study migration manifest consistency', () => {
     expect(FROZEN_HISTORICAL_BASELINE_FILENAMES).toHaveLength(10)
   })
 
-  it('leaves the one never-applied migration executable and pending', async () => {
+  // Named in full and in order, never counted, and never expressed as "everything the
+  // floor does not hold". Both forms would accept a hosted-applied member demoted out
+  // of the floor in exchange for a forward migration; only naming the members refuses
+  // that trade. Each is pinned to not-applied-hosted individually, because the
+  // executable classification admits no other status and a second executable is a
+  // second place for one to go wrong.
+  it('leaves the two never-applied migrations executable and pending', async () => {
     const manifest = await loadManifest()
     const executable = manifest.migrations.filter((entry) => entry.classification === 'executable')
     expect(executable.map((entry) => entry.filename))
-      .toEqual(['20260806120000_academy_study_in_app_receipt_timestamp.sql'])
-    expect(executable[0].applicationStatus).toBe('not-applied-hosted')
+      .toEqual([
+        '20260806120000_academy_study_in_app_receipt_timestamp.sql',
+        '20260806140000_academy_study_c2_operations_contract.sql',
+      ])
+    for (const entry of executable) {
+      expect(entry.applicationStatus, entry.filename).toBe('not-applied-hosted')
+    }
   })
 
   it('gives every entry a hosted application status its classification allows', async () => {

@@ -204,11 +204,20 @@ describe('hosted-applied migrations are never executable work', () => {
     },
   )
 
-  it('leaves exactly one executable migration on this lineage', async () => {
+  // Named in full and in order, never counted. A length assertion would be satisfied
+  // by any two executables, including a hosted-applied member demoted back out of the
+  // floor while a forward migration took its place — the exact substitution this list
+  // exists to refuse. Both members postdate the Aug 3 2026 burst and have never run
+  // against hosted: the receipt-timestamp contract and the C2 operations contract that
+  // depends on it.
+  it('leaves exactly the two never-applied migrations executable on this lineage', async () => {
     const manifest = await checkedInManifest()
     expect(manifest.migrations.filter((entry) => entry.classification === EXECUTABLE)
       .map((entry) => entry.filename))
-      .toEqual(['20260806120000_academy_study_in_app_receipt_timestamp.sql'])
+      .toEqual([
+        '20260806120000_academy_study_in_app_receipt_timestamp.sql',
+        '20260806140000_academy_study_c2_operations_contract.sql',
+      ])
   })
 
   it('records every hosted-applied migration as ledger-recorded', async () => {
