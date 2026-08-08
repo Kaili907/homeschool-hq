@@ -1,12 +1,16 @@
 import { act, useState } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
+import { readFileSync } from 'node:fs'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { emptyProfile } from '../../migration'
 import type { AcademyGrade, Profile } from '../../types'
 import type { AcademyCatalog, AcademySchedule } from '../../academy/contentTypes'
 import { resetAcademyContentCache } from '../../academy/contentClient'
 import type { AcademyProgramEntry } from '../../academy/workingLevel'
+import type { AcademyRoute } from '../../academy/academyRoute'
 import { AcademyRouter } from './AcademyRouter'
+
+const routerSource = readFileSync(new URL('./AcademyRouter.tsx', import.meta.url), 'utf8')
 
 /**
  * ACADEMY-LEVEL-DECOUPLE — the headline claim, on the surface the girl actually
@@ -154,7 +158,11 @@ describe('the student academy surface serves a decoupled program', () => {
     vi.unstubAllGlobals()
   })
 
-  async function mount(entries: AcademyProgramEntry[], profile: Profile) {
+  async function mount(
+    entries: AcademyProgramEntry[],
+    profile: Profile,
+    route: AcademyRoute = { kind: 'home' },
+  ) {
     latest = profile
     function Harness() {
       const [p, setP] = useState(profile)
@@ -164,7 +172,7 @@ describe('the student academy surface serves a decoupled program', () => {
           profile={p}
           entries={entries}
           schoolYear={undefined}
-          route={{ kind: 'home' }}
+          route={route}
           onNavigate={() => {}}
           onPatch={(update) => setP(update)}
           onExit={() => {}}
@@ -200,5 +208,46 @@ describe('the student academy surface serves a decoupled program', () => {
     expect(rendered).toContain('Mathematics · Grade 5')
     expect(rendered).not.toContain('English Language Arts')
     expect(latest.academy?.courseIds).toEqual(['ma-g5-mathematics'])
+  })
+
+  it('gives actionable copy when Academy content cannot load', async () => {
+    await mount([{ subject: 'science', level: '8' }], emptyProfile('p3', 'Sixth Grader', '6'))
+    expect(text(container)).toContain(
+      "Academy couldn't load right now. Go back home and ask a grown-up for help.",
+    )
+    expect(text(container)).not.toMatch(/try again|retry/i)
+  })
+
+  it('explains when working levels produce no configured courses', async () => {
+    await mount([{ subject: 'science', level: '5' }], emptyProfile('p3', 'Sixth Grader', '6'))
+    expect(text(container)).toContain(
+      "Your Academy courses aren't set up yet. Ask a grown-up to check your working levels in the Parent Hub.",
+    )
+  })
+
+  it('uses neutral missing-course copy without exposing the route ID', async () => {
+    const rawCourseId = 'internal-course-id-93a'
+    await mount(
+      MIXED,
+      emptyProfile('p3', 'Sixth Grader', '6'),
+      { kind: 'course', courseId: rawCourseId },
+    )
+    const rendered = text(container)
+    expect(rendered).toContain(
+      "This course isn't available. Go back to Academy and ask a grown-up for help if it keeps happening.",
+    )
+    expect(rendered).not.toContain(rawCourseId)
+  })
+
+  it('keeps the complete missing-content copy matrix truthful and actionable', () => {
+    for (const copy of [
+      "This course isn't available. Go back to Academy and ask a grown-up for help if it keeps happening.",
+      "This unit isn't available. Go back to Academy and ask a grown-up for help if it keeps happening.",
+      "This lesson isn't available. Go back to the unit and ask a grown-up for help if it keeps happening.",
+      "This assessment isn't available. Go back to the unit and ask a grown-up for help if it keeps happening.",
+    ]) {
+      expect(routerSource).toContain(copy)
+    }
+    expect(routerSource).not.toContain("That {label} isn't in this curriculum release")
   })
 })

@@ -4,19 +4,24 @@ import { createRoot } from 'react-dom/client'
 import { readFileSync } from 'node:fs'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { emptyProfile } from '../../../migration'
+import type { AcademyRoute } from '../../../academy/academyRoute'
 import { enrollInCatalog, startLesson, submitLessonCheck } from '../../../academy/academyState'
 import type { AcademyCatalog, AcademySchedule } from '../../../academy/contentTypes'
-import type { Profile } from '../../../types'
+import type { Profile, SchoolYear } from '../../../types'
 import { StudentDashboard } from './StudentDashboard'
 
 const dashboardStyles = readFileSync(new URL('./studentDashboard.css', import.meta.url), 'utf8')
 const dashboardSource = readFileSync(new URL('./StudentDashboard.tsx', import.meta.url), 'utf8')
 const dashboardDataSource = readFileSync(new URL('./dashboardData.ts', import.meta.url), 'utf8')
+const appSource = readFileSync(new URL('../../../App.tsx', import.meta.url), 'utf8')
 
 const MATH = 'ma-g5-mathematics-u01-l01'
 const ELA = 'ma-g7-english-language-arts-u01-l01'
 const SCIENCE = 'ma-g8-science-u01-l01'
 const NOW = '2026-08-03T09:00:00.000Z'
+const CONFIGURED_YEAR: SchoolYear = {
+  startDate: '2026-08-03', totalWeeks: 36, quarterBreaks: [9, 18, 27], offWeeks: [],
+}
 
 const catalog: AcademyCatalog = {
   releaseVersion: '1.0.0', grade: '5', courses: [
@@ -133,11 +138,13 @@ function renderDashboard({
   dashboardCatalog = catalog,
   dashboardSchedule = schedule,
   dashboardToday = '2026-08-03',
+  schoolYear,
 }: {
   profile?: Profile
   dashboardCatalog?: AcademyCatalog
   dashboardSchedule?: AcademySchedule
   dashboardToday?: string
+  schoolYear?: SchoolYear
 } = {}) {
   return renderToStaticMarkup(
     <StudentDashboard
@@ -145,7 +152,7 @@ function renderDashboard({
       catalog={dashboardCatalog}
       schedule={dashboardSchedule}
       levelOf={{ 'ma-g5-mathematics': '5', 'ma-g7-english-language-arts': '7', 'ma-g8-science': '8' }}
-      schoolYear={undefined}
+      schoolYear={schoolYear}
       today={dashboardToday}
       onNavigate={() => {}}
       onExit={() => {}}
@@ -153,9 +160,58 @@ function renderDashboard({
   )
 }
 
+async function mountDashboard({
+  profile = activeProfile(),
+}: {
+  profile?: Profile
+} = {}) {
+  const documentTarget = new FakeDocument()
+  const windowTarget = Object.assign(new EventTarget(), {
+    document: documentTarget,
+    setTimeout,
+    clearTimeout,
+    HTMLElement: FakeElement,
+    HTMLIFrameElement: class {},
+    getSelection: () => null,
+  }) as unknown as EventTarget & Record<string, unknown>
+  windowTarget.top = windowTarget
+  windowTarget.self = windowTarget
+  documentTarget.defaultView = windowTarget
+  vi.stubGlobal('window', windowTarget)
+  vi.stubGlobal('document', documentTarget)
+  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true)
+  const fetch = vi.fn()
+  vi.stubGlobal('fetch', fetch)
+
+  const container = documentTarget.createElement('div')
+  const onNavigate = vi.fn<(route: AcademyRoute) => void>()
+  const root = createRoot(container as unknown as Element)
+  await act(async () => root.render(
+    <StudentDashboard
+      profile={profile}
+      catalog={catalog}
+      schedule={schedule}
+      levelOf={{ 'ma-g5-mathematics': '5', 'ma-g7-english-language-arts': '7', 'ma-g8-science': '8' }}
+      schoolYear={undefined}
+      today="2026-08-03"
+      onNavigate={onNavigate}
+      onExit={() => {}}
+    />,
+  ))
+  return { container, fetch, onNavigate, profile, root }
+}
+
 afterEach(() => vi.unstubAllGlobals())
 
 describe('StudentDashboard', () => {
+  it('uses neutral Academy home-entry copy for reference schedules', () => {
+    expect(appSource).toContain('Academy lessons, your courses, and the year schedule')
+    expect(appSource).not.toContain('Today&apos;s lessons, your courses, and the year schedule')
+    expect(appSource).toContain("Academy isn't set up for this learner. Ask a grown-up for help.")
+    expect(appSource).toContain('title="Academy isn\'t set up"')
+    expect(appSource).toContain('note={null}')
+  })
+
   it('renders current learner context and text status labels', () => {
     const html = renderDashboard()
     expect(html).toContain('Hello, Avery')
@@ -176,18 +232,109 @@ describe('StudentDashboard', () => {
     expect(html).toContain('aria-label="Fractions in context, Mathematics · Grade 5, Not started"')
     expect(html).toContain('aria-label="Evidence in a text, English Language Arts · Grade 7, In progress"')
     expect(html).toContain('aria-label="Forces and motion, Science · Grade 8, Not started"')
+    expect(html).toContain('aria-label="Up next: Evidence in a text, English Language Arts · Grade 7, In progress"')
+    expect(html).toContain('aria-label="Continue lesson: Evidence in a text, English Language Arts · Grade 7, In progress"')
+  })
+
+  it('retains a deliberately long canonical title in visible markup and its accessible name', () => {
+    const longTitle = 'Launch and diagnostic: comparing proportional relationships across tables graphs equations and real-world situations'
+    const dashboardSchedule: AcademySchedule = {
+      ...schedule,
+      days: [{ week: 1, day: 1, lessons: [{ lessonId: MATH, title: longTitle }] }],
+    }
+    const html = renderDashboard({ dashboardSchedule })
+    expect(html).toContain(`<strong>${longTitle}</strong>`)
+    expect(html).toContain(`aria-label="${longTitle}, Mathematics · Grade 5, Not started"`)
+    expect(dashboardSource).toContain('<strong>{lesson.title}</strong>')
+    expect(dashboardStyles).toMatch(/\.timeline-item__copy strong[^}]*-webkit-line-clamp:\s*2/)
+  })
+
+  it('uses neutral student-facing fallbacks instead of raw internal IDs or subject slugs', () => {
+    const missingLessonId = 'ma-g5-mathematics-u99-l99'
+    const missingHtml = renderDashboard({
+      dashboardSchedule: {
+        ...schedule,
+        days: [{ week: 1, day: 1, lessons: [{ lessonId: missingLessonId, title: 'Missing lesson' }] }],
+      },
+    })
+    expect(missingHtml).toContain('Academy course')
+    expect(missingHtml).toContain("This lesson can&#x27;t be opened from the schedule. Ask a grown-up for help.")
+    expect(missingHtml).not.toContain(missingLessonId)
+
+    const internalSubject = 'internal-subject-slug'
+    const fallbackCatalog: AcademyCatalog = {
+      ...catalog,
+      courses: [{ ...catalog.courses[0], subject: internalSubject }],
+    }
+    const fallbackHtml = renderDashboard({
+      dashboardCatalog: fallbackCatalog,
+      dashboardSchedule: {
+        ...schedule,
+        days: [{ week: 1, day: 1, lessons: [{ lessonId: MATH, title: 'Fractions in context' }] }],
+      },
+    })
+    expect(fallbackHtml).toContain('Academy course · Grade 5')
+    expect(fallbackHtml).not.toContain(internalSubject)
   })
 
   it('renders the unconfigured school-year fallback state', () => {
-    expect(renderDashboard()).toContain('Starting with week 1')
+    const html = renderDashboard()
+    expect(html).toContain('Week 1 preview')
+    expect(html).toContain('A grown-up needs to set the school-year start date. Week 1 is shown for reference.')
   })
 
   it('renders an intentional no-work state on an empty weekday', () => {
-    const html = renderDashboard({ dashboardToday: '2026-08-04' })
+    const html = renderDashboard({ dashboardToday: '2026-08-04', schoolYear: CONFIGURED_YEAR })
     expect(html).toContain('No lessons scheduled today')
     expect(html).toContain('nothing assigned in your Academy schedule for today.')
     expect(html).toContain('View year schedule')
     expect(html).not.toContain('Your learning plan')
+  })
+
+  it('renders truthful weekend, before-year, off-week, and after-year display copy', () => {
+    const weekend = renderDashboard({ dashboardToday: '2026-08-09', schoolYear: CONFIGURED_YEAR })
+    expect(weekend).toContain('No Academy lessons scheduled this weekend.')
+    expect(weekend).toContain('Academy lessons are scheduled Monday through Friday.')
+    expect(weekend).not.toContain("Today&#x27;s sequence")
+
+    const before = renderDashboard({
+      dashboardToday: '2026-08-03',
+      schoolYear: { ...CONFIGURED_YEAR, startDate: '2026-08-10' },
+    })
+    expect(before).toContain('Before Week 1')
+    expect(before).toContain('Your first Academy week hasn&#x27;t begun.')
+
+    const offWeek = renderDashboard({
+      dashboardToday: '2026-08-10',
+      schoolYear: { ...CONFIGURED_YEAR, offWeeks: ['2026-08-10'] },
+    })
+    expect(offWeek).toContain('This week is marked off.')
+    expect(offWeek).toContain('The Week 1 schedule remains available.')
+    expect(offWeek).toContain('Current Academy schedule')
+
+    const afterYear = renderDashboard({
+      dashboardToday: '2026-08-10',
+      schoolYear: { ...CONFIGURED_YEAR, totalWeeks: 1, quarterBreaks: [] },
+    })
+    expect(afterYear).toContain('The final Academy week has passed.')
+    expect(afterYear).toContain('Week 1 remains available for reference.')
+    expect(afterYear).toContain('Final Academy schedule')
+  })
+
+  it('limits completion copy to the displayed Academy schedule', () => {
+    let profile = enrolledProfile()
+    for (const lessonId of [MATH, ELA, SCIENCE]) {
+      profile = submitLessonCheck(startLesson(profile, lessonId, NOW), lessonId, {
+        date: '2026-08-03', mode: 'independent', met: true, now: NOW,
+      })
+    }
+    const normalHtml = renderDashboard({ profile, schoolYear: CONFIGURED_YEAR })
+    expect(normalHtml).toContain("Today&#x27;s scheduled Academy lessons are complete.")
+    expect(normalHtml).not.toContain('done for today')
+
+    const referenceHtml = renderDashboard({ profile })
+    expect(referenceHtml).toContain('All lessons shown here are complete.')
+    expect(referenceHtml).not.toContain('done for today')
   })
 
   it('renders no fill at zero and preserves a visible minimum for realistic small progress', () => {
@@ -228,12 +375,59 @@ describe('StudentDashboard', () => {
   it('keeps Jarvis presentation-only and renders no functional assistant controls', () => {
     const html = renderDashboard()
     expect(html).toContain('Jarvis')
-    expect(html).toContain('Visual foundation')
-    expect(html).toContain('not available for conversations')
+    expect(html).toContain('Academy display')
+    expect(html).toContain('Visual only')
+    expect(html).toContain('It does not listen or answer questions.')
     const jarvis = html.match(/<aside[^>]*aria-labelledby="jarvis-heading"[\s\S]*?<\/aside>/)?.[0]
     expect(jarvis).toBeTruthy()
     expect(jarvis).not.toMatch(/<(?:button|input|textarea|form)\b/i)
     expect(jarvis).not.toMatch(/\b(?:send|microphone|voice|prompt)\b/i)
+  })
+
+  it('renders every Jarvis visual tier inside one aria-hidden decorative object', () => {
+    const html = renderDashboard()
+    const jarvisCore = html.match(/<div class="jarvis-core" aria-hidden="true">[\s\S]*?<\/div>/)?.[0]
+    expect(jarvisCore).toBeTruthy()
+    for (const layer of [
+      'ambient-halo',
+      'outer-detail',
+      'secondary-orbit',
+      'primary-ring',
+      'nucleus',
+      'monogram',
+    ]) {
+      expect(jarvisCore).toContain(`jarvis-core__${layer}`)
+    }
+    expect(jarvisCore?.match(/aria-hidden="true"/g)).toHaveLength(1)
+    expect(jarvisCore).not.toMatch(/\b(?:role|aria-label|tabindex)=/i)
+  })
+
+  it('animates only ambient/detail/orbit layers under no-preference and disables all tiers under reduced motion', () => {
+    const noPreferenceStart = dashboardStyles.indexOf('@media (prefers-reduced-motion: no-preference)')
+    const reducedStart = dashboardStyles.indexOf('@media (prefers-reduced-motion: reduce)')
+    const forcedColorsStart = dashboardStyles.indexOf('@media (forced-colors: active)')
+    const noPreference = dashboardStyles.slice(noPreferenceStart, reducedStart)
+    const reduced = dashboardStyles.slice(reducedStart, forcedColorsStart)
+    const animatedLayers = [...noPreference.matchAll(/\.jarvis-core__([a-z-]+)\s*\{[^}]*\banimation:/g)]
+      .map((match) => match[1])
+      .sort()
+    expect(animatedLayers).toEqual(['ambient-halo', 'outer-detail', 'secondary-orbit'])
+    expect(noPreference).not.toMatch(/\.jarvis-core__(?:primary-ring|nucleus|monogram)[^{]*\{[^}]*animation:/)
+    for (const layer of ['ambient-halo', 'outer-detail', 'secondary-orbit', 'primary-ring', 'nucleus', 'monogram']) {
+      expect(reduced).toContain(`.jarvis-core__${layer}`)
+    }
+    expect(reduced).toContain('animation: none')
+  })
+
+  it('keeps real ring borders and a forced-colors fallback independent of masks', () => {
+    for (const layer of ['outer-detail', 'secondary-orbit', 'primary-ring']) {
+      expect(dashboardStyles).toMatch(new RegExp(`\\.jarvis-core__${layer}\\s*\\{[^}]*border:`))
+    }
+    const forcedColors = dashboardStyles.slice(dashboardStyles.indexOf('@media (forced-colors: active)'))
+    expect(forcedColors).toContain('.jarvis-core__outer-detail, .jarvis-core__secondary-orbit, .jarvis-core__primary-ring')
+    expect(forcedColors).toContain('-webkit-mask: none')
+    expect(forcedColors).toContain('mask: none')
+    expect(forcedColors).toContain('border: 1px solid CanvasText')
   })
 
   it('presents a stale attempt as requiring restart, never as resumable', () => {
@@ -242,8 +436,11 @@ describe('StudentDashboard', () => {
       days: [{ week: 1, day: 1, lessons: [{ lessonId: ELA, title: 'Evidence in a text' }] }],
     }
     const html = renderDashboard({ profile: staleAttempt(enrolledProfile(), ELA), dashboardSchedule })
-    expect(html).toContain('Restart required')
-    expect(html).toContain('Open lesson to restart')
+    expect(html).toContain('Curriculum version changed — restart required')
+    expect(html).toContain('This lesson was started with a different curriculum version.')
+    expect(html).toContain('Open lesson')
+    expect(html).toContain('aria-label="Open lesson: Evidence in a text, English Language Arts · Grade 7"')
+    expect(html).not.toContain('Open lesson to restart')
     expect(html).not.toContain('No lessons scheduled today')
     expect(html).not.toContain('>Up next<')
     expect(html).not.toContain('Continue lesson')
@@ -260,9 +457,10 @@ describe('StudentDashboard', () => {
       days: [{ week: 1, day: 1, lessons: [{ lessonId: MATH, title: 'Fractions in context' }] }],
     }
     const html = renderDashboard({ profile, dashboardSchedule })
-    expect(html).toContain('Ready to retry')
-    expect(html).toContain('Retry lesson')
-    expect(html).toContain('0 of 1 complete today')
+    expect(html).toContain('Review needed')
+    expect(html).toContain('Open lesson')
+    expect(html).not.toContain('Ready to retry')
+    expect(html).not.toContain('Retry lesson')
   })
 
   it('does not fabricate exact remaining-time language', () => {
@@ -282,56 +480,46 @@ describe('StudentDashboard', () => {
   })
 
   it('mounts without network activity and a lesson action only emits its existing route', async () => {
-    const documentTarget = new FakeDocument()
-    const windowTarget = Object.assign(new EventTarget(), {
-      document: documentTarget,
-      setTimeout,
-      clearTimeout,
-      HTMLElement: FakeElement,
-      HTMLIFrameElement: class {},
-      getSelection: () => null,
-    }) as unknown as EventTarget & Record<string, unknown>
-    windowTarget.top = windowTarget
-    windowTarget.self = windowTarget
-    documentTarget.defaultView = windowTarget
-    vi.stubGlobal('window', windowTarget)
-    vi.stubGlobal('document', documentTarget)
-    vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true)
-    const fetch = vi.fn()
-    vi.stubGlobal('fetch', fetch)
-
-    const container = documentTarget.createElement('div')
-    const onNavigate = vi.fn()
     const profile = activeProfile()
     const profileBeforeClick = JSON.parse(JSON.stringify(profile)) as Profile
-    const root = createRoot(container as unknown as Element)
+    const mounted = await mountDashboard({ profile })
     try {
-      await act(async () => root.render(
-        <StudentDashboard
-          profile={profile}
-          catalog={catalog}
-          schedule={schedule}
-          levelOf={{ 'ma-g5-mathematics': '5', 'ma-g7-english-language-arts': '7', 'ma-g8-science': '8' }}
-          schoolYear={undefined}
-          today="2026-08-03"
-          onNavigate={onNavigate}
-          onExit={() => {}}
-        />,
-      ))
-      expect(fetch).not.toHaveBeenCalled()
+      expect(mounted.fetch).not.toHaveBeenCalled()
 
-      const button = findButton(container, 'Continue lesson')
+      const button = findButton(mounted.container, 'Continue lesson')
       expect(button).not.toBeNull()
       const click = new Event('click', { bubbles: true, cancelable: true })
       Object.defineProperty(click, 'target', { configurable: true, value: button })
-      await act(async () => { container.dispatchEvent(click) })
+      await act(async () => { mounted.container.dispatchEvent(click) })
 
-      expect(onNavigate).toHaveBeenCalledWith({
+      expect(mounted.onNavigate).toHaveBeenCalledWith({
         kind: 'lesson', courseId: 'ma-g7-english-language-arts', unitNumber: 1, lessonId: ELA,
       })
       expect(profile).toEqual(profileBeforeClick)
     } finally {
-      await act(async () => root.unmount())
+      await act(async () => mounted.root.unmount())
+    }
+  })
+
+  it('clicking a course card emits only its existing course route', async () => {
+    const profile = activeProfile()
+    const profileBeforeClick = JSON.parse(JSON.stringify(profile)) as Profile
+    const mounted = await mountDashboard({ profile })
+    try {
+      const button = findButton(mounted.container, 'Course')
+      expect(button).not.toBeNull()
+      const click = new Event('click', { bubbles: true, cancelable: true })
+      Object.defineProperty(click, 'target', { configurable: true, value: button })
+      await act(async () => { mounted.container.dispatchEvent(click) })
+
+      expect(mounted.onNavigate).toHaveBeenCalledTimes(1)
+      expect(mounted.onNavigate).toHaveBeenCalledWith({
+        kind: 'course', courseId: 'ma-g5-mathematics',
+      })
+      expect(mounted.fetch).not.toHaveBeenCalled()
+      expect(profile).toEqual(profileBeforeClick)
+    } finally {
+      await act(async () => mounted.root.unmount())
     }
   })
 
@@ -339,7 +527,7 @@ describe('StudentDashboard', () => {
     expect(dashboardStyles).toContain('@media (prefers-reduced-motion: reduce)')
     expect(dashboardStyles).toContain('animation: none')
     const html = renderDashboard()
-    expect(html).toContain('Jarvis is not available for conversations on this dashboard yet.')
+    expect(html).toContain('Jarvis is a visual part of your Academy dashboard. It does not listen or answer questions.')
     expect(html).toContain('In progress')
   })
 })

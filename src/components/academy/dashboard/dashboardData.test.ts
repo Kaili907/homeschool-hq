@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { emptyProfile } from '../../../migration'
 import { enrollInCatalog, startLesson, submitLessonCheck } from '../../../academy/academyState'
 import type { AcademyCatalog, AcademySchedule } from '../../../academy/contentTypes'
+import type { SchoolYear } from '../../../types'
 import {
   buildStudentDashboardData,
   dashboardLessonRoute,
@@ -62,13 +63,18 @@ function staleAttempt(p: ReturnType<typeof profile>, lessonId: string) {
   }
 }
 
-function dashboard(p = profile(), schedule = mondaySchedule, today = '2026-08-03') {
+function dashboard(
+  p = profile(),
+  schedule = mondaySchedule,
+  today = '2026-08-03',
+  schoolYear?: SchoolYear,
+) {
   return buildStudentDashboardData({
     profile: p,
     catalog,
     schedule,
     levelOf: { 'ma-g5-mathematics': '5', 'ma-g7-english-language-arts': '7' },
-    schoolYear: undefined,
+    schoolYear,
     today,
   })
 }
@@ -85,7 +91,9 @@ describe('Student Dashboard presentation model', () => {
   })
 
   it('uses the established week-1 fallback when the school year is unconfigured', () => {
-    expect(dashboard()).toMatchObject({ week: 1, schoolYearConfigured: false })
+    expect(dashboard()).toMatchObject({
+      week: 1, schoolYearConfigured: false, calendarState: 'unconfigured',
+    })
   })
 
   it('prefers a non-stale in-progress scheduled lesson over earlier untouched work', () => {
@@ -174,15 +182,59 @@ describe('Student Dashboard presentation model', () => {
     })
   })
 
-  it('shows no-work data for a weekend instead of manufacturing work', () => {
-    const data = dashboard(profile(), mondaySchedule, '2026-08-09')
+  it('shows no-work data for a configured weekend instead of manufacturing work', () => {
+    const schoolYear: SchoolYear = {
+      startDate: '2026-08-03', totalWeeks: 36, quarterBreaks: [9, 18, 27], offWeeks: [],
+    }
+    const data = dashboard(profile(), mondaySchedule, '2026-08-09', schoolYear)
     expect(data).toMatchObject({
+      calendarState: 'weekend',
       hasScheduledWork: false,
       allWorkComplete: false,
       completedCount: 0,
       upNext: null,
       restartRequiredLesson: null,
     })
+  })
+
+  it('classifies before-year copy state without changing the existing week-0 selection', () => {
+    const schoolYear: SchoolYear = {
+      startDate: '2026-08-10', totalWeeks: 36, quarterBreaks: [9, 18, 27], offWeeks: [],
+    }
+    expect(dashboard(profile(), mondaySchedule, '2026-08-03', schoolYear)).toMatchObject({
+      week: 0,
+      calendarState: 'before-year',
+      lessons: [],
+      hasScheduledWork: false,
+    })
+  })
+
+  it('labels off and after-year schedules for reference without suppressing final selected lessons', () => {
+    const normalYear: SchoolYear = {
+      startDate: '2026-08-03', totalWeeks: 36, quarterBreaks: [9, 18, 27], offWeeks: [],
+    }
+    const offYear: SchoolYear = {
+      ...normalYear,
+      offWeeks: ['2026-08-10'],
+    }
+    const oneWeekYear: SchoolYear = {
+      ...normalYear,
+      totalWeeks: 1,
+      quarterBreaks: [],
+    }
+    const normal = dashboard(profile(), mondaySchedule, '2026-08-03', normalYear)
+    const off = dashboard(profile(), mondaySchedule, '2026-08-10', offYear)
+    const after = dashboard(profile(), mondaySchedule, '2026-08-10', oneWeekYear)
+
+    expect(normal.calendarState).toBe('normal-weekday')
+    expect(off).toMatchObject({ week: 1, calendarState: 'off-week', hasScheduledWork: true })
+    expect(after).toMatchObject({ week: 1, calendarState: 'after-year', hasScheduledWork: true })
+    expect(off.lessons.map((lesson) => lesson.lessonId)).toEqual(
+      normal.lessons.map((lesson) => lesson.lessonId),
+    )
+    expect(after.lessons.map((lesson) => lesson.lessonId)).toEqual(
+      normal.lessons.map((lesson) => lesson.lessonId),
+    )
   })
 
   it('returns the existing Academy lesson route for a scheduled item', () => {

@@ -1,11 +1,24 @@
 import type { AcademyGrade, Profile, SchoolYear } from '../../../types'
 import { isoToday } from '../../../appState'
-import { derivedScopeWeek, isSchoolYearConfigured } from '../../../curriculum/pacing'
+import {
+  buildCalendar,
+  calendarWeekIndex,
+  derivedScopeWeek,
+  isSchoolYearConfigured,
+  isTravelWeek,
+} from '../../../curriculum/pacing'
 import type { AcademyRoute } from '../../../academy/academyRoute'
 import { isStaleAttempt } from '../../../academy/academyState'
 import type { AcademyCatalog, AcademyCatalogCourse, AcademySchedule } from '../../../academy/contentTypes'
 
 export type DashboardLessonStatus = 'complete' | 'in-progress' | 'not-started' | 'ready-to-retry'
+export type DashboardCalendarState =
+  | 'normal-weekday'
+  | 'weekend'
+  | 'unconfigured'
+  | 'before-year'
+  | 'off-week'
+  | 'after-year'
 
 export interface DashboardLesson {
   lessonId: string
@@ -20,6 +33,7 @@ export interface DashboardLesson {
 export interface StudentDashboardData {
   week: number
   schoolYearConfigured: boolean
+  calendarState: DashboardCalendarState
   lessons: DashboardLesson[]
   completedCount: number
   hasScheduledWork: boolean
@@ -45,6 +59,22 @@ function findLesson(catalog: AcademyCatalog, lessonId: string) {
   return null
 }
 
+/** Labels/explanations only; lesson selection remains in the existing block below. */
+function calendarStateFor(
+  schoolYear: SchoolYear | undefined,
+  today: string,
+  dayOfWeek: number,
+): DashboardCalendarState {
+  if (!isSchoolYearConfigured(schoolYear)) return 'unconfigured'
+  const calendarWeek = calendarWeekIndex(schoolYear, today)
+  if (calendarWeek < 0) return 'before-year'
+  const finalCalendarWeek = buildCalendar(schoolYear).length - 1
+  if (calendarWeek > finalCalendarWeek) return 'after-year'
+  if (isTravelWeek(schoolYear, today)) return 'off-week'
+  if (dayOfWeek === 0 || dayOfWeek === 6) return 'weekend'
+  return 'normal-weekday'
+}
+
 /** Presentation-only view of the existing schedule and lesson-state authority. */
 export function buildStudentDashboardData({
   profile,
@@ -64,6 +94,7 @@ export function buildStudentDashboardData({
   const schoolYearConfigured = isSchoolYearConfigured(schoolYear)
   const week = schoolYearConfigured ? derivedScopeWeek(schoolYear, today) : 1
   const dayOfWeek = new Date(`${today}T12:00:00`).getDay()
+  const calendarState = calendarStateFor(schoolYear, today, dayOfWeek)
   const day = dayOfWeek >= 1 && dayOfWeek <= 5
     ? schedule.days.find((item) => item.week === week && item.day === dayOfWeek)
     : undefined
@@ -92,6 +123,7 @@ export function buildStudentDashboardData({
   return {
     week,
     schoolYearConfigured,
+    calendarState,
     lessons,
     completedCount,
     hasScheduledWork: lessons.length > 0,

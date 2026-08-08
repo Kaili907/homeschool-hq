@@ -70,7 +70,7 @@ export function AcademyRouter(props: AcademyProps) {
         if (current) setProgram(composed)
       })
       .catch(() => {
-        if (current) setLoadError('The curriculum content could not be loaded. Check the connection and try again.')
+        if (current) setLoadError("Academy couldn't load right now. Go back home and ask a grown-up for help.")
       })
     return () => {
       current = false
@@ -106,8 +106,7 @@ export function AcademyRouter(props: AcademyProps) {
     return (
       <AcademyShell title="Manuel Academy" onExit={onExit}>
         <p role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 font-semibold">
-          This curriculum release has no courses for the levels set for you. A grown-up can change
-          your working levels in the Parent Hub.
+          Your Academy courses aren&apos;t set up yet. Ask a grown-up to check your working levels in the Parent Hub.
         </p>
       </AcademyShell>
     )
@@ -207,7 +206,7 @@ interface SharedViewProps {
 }
 
 const courseLabel = (course: AcademyCatalogCourse) =>
-  ACADEMY_SUBJECT_LABELS[course.subject] ?? course.subject
+  ACADEMY_SUBJECT_LABELS[course.subject] ?? 'Academy course'
 
 /** Subject plus the level it is served at — the girl always sees which level a
  * course is, because in a decoupled program they are no longer all the same. */
@@ -383,7 +382,7 @@ function AcademyUnitView({
                   </span>
                   <span className="block text-sm font-semibold text-slate-500">
                     {state?.status === 'reteach'
-                      ? 'Reteach — try again with fresh eyes'
+                      ? 'Reteach — review needed'
                       : state?.status === 'complete'
                         ? mastery === 'mastered'
                           ? 'Done — mastered'
@@ -482,7 +481,7 @@ function AcademyLessonView({
       exitLabel="Pause & back"
     >
       <p className="text-sm font-semibold text-slate-500">
-        {course ? courseLevelLabel(course, levelOf) : courseId} · Unit {unitNumber} · Day{' '}
+        {course ? courseLevelLabel(course, levelOf) : 'Academy course'} · Unit {unitNumber} · Day{' '}
         {lesson.day_in_unit} ·{' '}
         {lesson.estimated_minutes} minutes
       </p>
@@ -526,7 +525,7 @@ function AcademyLessonView({
 
       {stale && (
         <div role="alert" className="mt-4 rounded-xl border border-amber-400 bg-amber-50 p-3 font-semibold">
-          This lesson was started under an older curriculum version. Restart it to continue.
+          This lesson was started with a different curriculum version. Restart it to continue.
           <button
             onClick={() => onPatch((prev) => reopenLesson(prev, lessonId, 0))}
             className="ml-3 min-h-11 rounded-lg border border-amber-500 bg-white px-3 py-1 font-bold"
@@ -749,11 +748,18 @@ function LoadingShell({ onBack }: { onBack: () => void }) {
   )
 }
 
-function MissingContent({ onBack, label }: { onBack: () => void; label: string }) {
+const MISSING_CONTENT_COPY = {
+  course: "This course isn't available. Go back to Academy and ask a grown-up for help if it keeps happening.",
+  unit: "This unit isn't available. Go back to Academy and ask a grown-up for help if it keeps happening.",
+  lesson: "This lesson isn't available. Go back to the unit and ask a grown-up for help if it keeps happening.",
+  assessment: "This assessment isn't available. Go back to the unit and ask a grown-up for help if it keeps happening.",
+} as const
+
+function MissingContent({ onBack, label }: { onBack: () => void; label: keyof typeof MISSING_CONTENT_COPY }) {
   return (
     <AcademyShell title="Manuel Academy" onExit={onBack} exitLabel="Back">
       <p role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 font-semibold">
-        That {label} isn&apos;t in this curriculum release. Use the buttons to head back.
+        {MISSING_CONTENT_COPY[label]}
       </p>
     </AcademyShell>
   )

@@ -11,6 +11,7 @@ import { courseProgress } from '../../../academy/academyState'
 import {
   buildStudentDashboardData,
   dashboardLessonRoute,
+  type DashboardCalendarState,
   type DashboardLesson,
   type DashboardLessonStatus,
 } from './dashboardData'
@@ -32,7 +33,7 @@ const STATUS_COPY: Record<DashboardLessonStatus, string> = {
   complete: 'Complete',
   'in-progress': 'In progress',
   'not-started': 'Not started',
-  'ready-to-retry': 'Ready to retry',
+  'ready-to-retry': 'Review needed',
 }
 
 const STATUS_MARK: Record<DashboardLessonStatus, string> = {
@@ -43,7 +44,7 @@ const STATUS_MARK: Record<DashboardLessonStatus, string> = {
 }
 
 function lessonStatusCopy(lesson: DashboardLesson) {
-  return lesson.requiresRestart ? 'Restart required' : STATUS_COPY[lesson.status]
+  return lesson.requiresRestart ? 'Curriculum version changed — restart required' : STATUS_COPY[lesson.status]
 }
 
 function lessonStatusMark(lesson: DashboardLesson) {
@@ -51,7 +52,7 @@ function lessonStatusMark(lesson: DashboardLesson) {
 }
 
 function courseLabel(course: AcademyCatalogCourse) {
-  return ACADEMY_SUBJECT_LABELS[course.subject] ?? course.subject
+  return ACADEMY_SUBJECT_LABELS[course.subject] ?? 'Academy course'
 }
 
 function courseLevelLabel(course: AcademyCatalogCourse, levelOf: Record<string, AcademyGrade>) {
@@ -60,7 +61,7 @@ function courseLevelLabel(course: AcademyCatalogCourse, levelOf: Record<string, 
 }
 
 function lessonContext(lesson: DashboardLesson) {
-  if (!lesson.course) return lesson.lessonId
+  if (!lesson.course) return 'Academy course'
   const level = lesson.level ? ` · Grade ${lesson.level}` : ''
   return `${courseLabel(lesson.course)}${level}`
 }
@@ -84,13 +85,13 @@ function JarvisPanel() {
     <aside className="student-dashboard__jarvis panel-glass" aria-labelledby="jarvis-heading">
       <div className="jarvis-panel__heading">
         <div>
-          <p className="eyebrow">Manuel Academy guide</p>
+          <p className="eyebrow">Academy display</p>
           <h2 id="jarvis-heading">Jarvis</h2>
         </div>
-        <span className="jarvis-panel__state">Visual foundation</span>
+        <span className="jarvis-panel__state">Visual only</span>
       </div>
       <JarvisCore />
-      <p className="jarvis-panel__copy">Jarvis is not available for conversations on this dashboard yet.</p>
+      <p className="jarvis-panel__copy">Jarvis is a visual part of your Academy dashboard. It does not listen or answer questions.</p>
     </aside>
   )
 }
@@ -98,25 +99,27 @@ function JarvisPanel() {
 function UpNextCard({ lesson, onNavigate }: { lesson: DashboardLesson; onNavigate: StudentDashboardProps['onNavigate'] }) {
   const route = dashboardLessonRoute(lesson)
   const buttonLabel = lesson.requiresRestart
-    ? 'Open lesson to restart'
+    ? 'Open lesson'
     : lesson.status === 'in-progress'
       ? 'Continue lesson'
       : lesson.status === 'ready-to-retry'
-        ? 'Retry lesson'
+        ? 'Open lesson'
         : 'Start lesson'
+  const statusCopy = lessonStatusCopy(lesson)
+  const context = lessonContext(lesson)
   return (
-    <section className="up-next-card" aria-labelledby="up-next-heading">
+    <section className="up-next-card" aria-label={`Up next: ${lesson.title}, ${context}, ${statusCopy}`}>
       <div className="up-next-card__glow" aria-hidden="true" />
       <p className="eyebrow">Up next</p>
       <h2 id="up-next-heading">{lesson.title}</h2>
-      <p className="up-next-card__context">{lessonContext(lesson)}</p>
-      <p className="up-next-card__status"><span aria-hidden="true">{lessonStatusMark(lesson)}</span> {lessonStatusCopy(lesson)}</p>
+      <p className="up-next-card__context">{context}</p>
+      <p className="up-next-card__status"><span aria-hidden="true">{lessonStatusMark(lesson)}</span> {statusCopy}</p>
       {route ? (
-        <button className="button-primary" onClick={() => onNavigate(route)}>
+        <button className="button-primary" onClick={() => onNavigate(route)} aria-label={`${buttonLabel}: ${lesson.title}, ${context}, ${statusCopy}`}>
           {buttonLabel}<span aria-hidden="true">→</span>
         </button>
       ) : (
-        <p className="up-next-card__unavailable" role="status">This scheduled lesson is not available to open.</p>
+        <p className="up-next-card__unavailable" role="status">This lesson can&apos;t be opened from the schedule. Ask a grown-up for help.</p>
       )}
     </section>
   )
@@ -127,28 +130,37 @@ function RestartRequiredCard({ lesson, onNavigate }: { lesson: DashboardLesson; 
   return (
     <section className="up-next-card" aria-labelledby="restart-required-heading">
       <div className="up-next-card__glow" aria-hidden="true" />
-      <p className="eyebrow">Today&apos;s work</p>
+      <p className="eyebrow">Scheduled Academy lesson</p>
       <h2 id="restart-required-heading">{lesson.title}</h2>
       <p className="up-next-card__context">{lessonContext(lesson)}</p>
-      <p className="up-next-card__status"><span aria-hidden="true">↻</span> Restart required</p>
+      <p className="up-next-card__status"><span aria-hidden="true">↻</span> Curriculum version changed — restart required</p>
+      <p className="up-next-card__explanation">This lesson was started with a different curriculum version.</p>
       {route ? (
-        <button className="button-primary" onClick={() => onNavigate(route)}>
-          Open lesson to restart<span aria-hidden="true">→</span>
+        <button className="button-primary" onClick={() => onNavigate(route)} aria-label={`Open lesson: ${lesson.title}, ${lessonContext(lesson)}`}>
+          Open lesson<span aria-hidden="true">→</span>
         </button>
       ) : (
-        <p className="up-next-card__unavailable" role="status">This scheduled lesson is not available to open.</p>
+        <p className="up-next-card__unavailable" role="status">This lesson can&apos;t be opened from the schedule. Ask a grown-up for help.</p>
       )}
     </section>
   )
 }
 
-function TodayTimeline({ lessons, onNavigate }: { lessons: readonly DashboardLesson[]; onNavigate: StudentDashboardProps['onNavigate'] }) {
+function timelineHeading(calendarState: DashboardCalendarState) {
+  if (calendarState === 'unconfigured') return { eyebrow: 'Week 1 preview', heading: 'Week 1 schedule' }
+  if (calendarState === 'off-week') return { eyebrow: 'This week is marked off', heading: 'Current Academy schedule' }
+  if (calendarState === 'after-year') return { eyebrow: 'Available for reference', heading: 'Final Academy schedule' }
+  return { eyebrow: "Today's sequence", heading: 'Your learning plan' }
+}
+
+function TodayTimeline({ lessons, calendarState, onNavigate }: { lessons: readonly DashboardLesson[]; calendarState: DashboardCalendarState; onNavigate: StudentDashboardProps['onNavigate'] }) {
+  const copy = timelineHeading(calendarState)
   return (
     <section className="today-panel panel-glass" aria-labelledby="today-heading">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">Today&apos;s sequence</p>
-          <h2 id="today-heading">Your learning plan</h2>
+          <p className="eyebrow">{copy.eyebrow}</p>
+          <h2 id="today-heading">{copy.heading}</h2>
         </div>
         <span className="section-heading__count">{lessons.length} {lessons.length === 1 ? 'lesson' : 'lessons'}</span>
       </div>
@@ -182,27 +194,62 @@ function TodayTimeline({ lessons, onNavigate }: { lessons: readonly DashboardLes
   )
 }
 
-function CompletionState({ completedCount, total }: { completedCount: number; total: number }) {
+function CompletionState({ completedCount, total, calendarState }: { completedCount: number; total: number; calendarState: DashboardCalendarState }) {
+  const todaySpecific = calendarState === 'normal-weekday'
   return (
     <section className="completion-state panel-glass" role="status" aria-labelledby="complete-heading">
       <span className="completion-state__mark" aria-hidden="true">✓</span>
       <div>
-        <p className="eyebrow">Today&apos;s work</p>
-        <h2 id="complete-heading">You&apos;re done for today</h2>
+        <p className="eyebrow">{todaySpecific ? "Today's Academy plan" : 'Academy schedule'}</p>
+        <h2 id="complete-heading">{todaySpecific ? "Today's scheduled Academy lessons are complete." : 'All lessons shown here are complete.'}</h2>
         <p>{completedCount} of {total} scheduled {total === 1 ? 'lesson is' : 'lessons are'} complete.</p>
       </div>
     </section>
   )
 }
 
-function NoWorkState({ onNavigate }: Pick<StudentDashboardProps, 'onNavigate'>) {
+function noWorkCopy(calendarState: DashboardCalendarState, week: number) {
+  if (calendarState === 'weekend') return {
+    eyebrow: 'Weekend',
+    heading: 'No Academy lessons scheduled this weekend.',
+    body: 'Academy lessons are scheduled Monday through Friday.',
+  }
+  if (calendarState === 'unconfigured') return {
+    eyebrow: 'Week 1 preview',
+    heading: 'No lessons are shown in the Week 1 preview.',
+    body: 'A grown-up needs to set the school-year start date. Week 1 is shown for reference.',
+  }
+  if (calendarState === 'before-year') return {
+    eyebrow: 'Before Week 1',
+    heading: "Your first Academy week hasn't begun.",
+    body: 'Academy lessons will appear when Week 1 begins.',
+  }
+  if (calendarState === 'off-week') return {
+    eyebrow: 'Current Academy schedule',
+    heading: 'This week is marked off.',
+    body: week > 0 ? `The Week ${week} schedule remains available.` : 'The Academy schedule remains available.',
+  }
+  if (calendarState === 'after-year') return {
+    eyebrow: 'Final Academy schedule',
+    heading: 'The final Academy week has passed.',
+    body: `Week ${week} remains available for reference.`,
+  }
+  return {
+    eyebrow: "Today's plan",
+    heading: 'No lessons scheduled today',
+    body: "There's nothing assigned in your Academy schedule for today.",
+  }
+}
+
+function NoWorkState({ calendarState, week, onNavigate }: Pick<StudentDashboardProps, 'onNavigate'> & { calendarState: DashboardCalendarState; week: number }) {
+  const copy = noWorkCopy(calendarState, week)
   return (
     <section className="no-work-state panel-glass" aria-labelledby="no-work-heading">
       <span className="no-work-state__mark" aria-hidden="true">☼</span>
       <div>
-        <p className="eyebrow">Today&apos;s plan</p>
-        <h2 id="no-work-heading">No lessons scheduled today</h2>
-        <p>There&apos;s nothing assigned in your Academy schedule for today.</p>
+        <p className="eyebrow">{copy.eyebrow}</p>
+        <h2 id="no-work-heading">{copy.heading}</h2>
+        <p>{copy.body}</p>
       </div>
       <button className="button-secondary" onClick={() => onNavigate({ kind: 'schedule' })}>View year schedule</button>
     </section>
@@ -242,6 +289,17 @@ export function StudentDashboard({ profile, catalog, schedule, levelOf, schoolYe
   useEffect(() => { headingRef.current?.focus() }, [])
   const data = buildStudentDashboardData({ profile, catalog, schedule, levelOf, schoolYear, today })
   const firstName = profile.name.trim().split(/\s+/)[0] || 'Learner'
+  const intro = data.calendarState === 'weekend'
+    ? { eyebrow: 'Weekend', heading: 'No Academy lessons scheduled this weekend.', detail: 'Academy lessons are scheduled Monday through Friday.' }
+    : data.calendarState === 'unconfigured'
+      ? { eyebrow: 'Week 1 preview', heading: 'Week 1 preview', detail: 'A grown-up needs to set the school-year start date. Week 1 is shown for reference.' }
+      : data.calendarState === 'before-year'
+        ? { eyebrow: 'Before Week 1', heading: "Your first Academy week hasn't begun.", detail: '' }
+        : data.calendarState === 'off-week'
+          ? { eyebrow: 'Current Academy schedule', heading: 'This week is marked off.', detail: data.week > 0 ? `The Week ${data.week} schedule remains available.` : 'The Academy schedule remains available.' }
+          : data.calendarState === 'after-year'
+            ? { eyebrow: 'Final Academy schedule', heading: 'The final Academy week has passed.', detail: `Week ${data.week} remains available for reference.` }
+            : { eyebrow: "Today's Academy plan", heading: `Week ${data.week}`, detail: data.hasScheduledWork ? `${data.completedCount} of ${data.lessons.length} complete today` : '' }
 
   return (
     <main className="student-dashboard">
@@ -260,17 +318,17 @@ export function StudentDashboard({ profile, catalog, schedule, levelOf, schoolYe
         </header>
 
         <div className="student-dashboard__intro">
-          <div><p className="eyebrow">Your Academy day</p><p className="student-dashboard__week">{data.schoolYearConfigured ? `Week ${data.week}` : 'Starting with week 1'}</p></div>
-          {data.hasScheduledWork && <p className="student-dashboard__completion">{data.completedCount} of {data.lessons.length} complete today</p>}
+          <div><p className="eyebrow">{intro.eyebrow}</p><p className="student-dashboard__week">{intro.heading}</p></div>
+          {intro.detail && <p className="student-dashboard__completion">{intro.detail}</p>}
         </div>
 
         <div className="student-dashboard__primary-grid">
           <div className="student-dashboard__daily-area">
             {data.upNext && !data.allWorkComplete ? <UpNextCard lesson={data.upNext} onNavigate={onNavigate} />
               : data.restartRequiredLesson ? <RestartRequiredCard lesson={data.restartRequiredLesson} onNavigate={onNavigate} />
-              : data.allWorkComplete ? <CompletionState completedCount={data.completedCount} total={data.lessons.length} />
-                : <NoWorkState onNavigate={onNavigate} />}
-            {data.hasScheduledWork && <TodayTimeline lessons={data.lessons} onNavigate={onNavigate} />}
+              : data.allWorkComplete ? <CompletionState completedCount={data.completedCount} total={data.lessons.length} calendarState={data.calendarState} />
+                : <NoWorkState calendarState={data.calendarState} week={data.week} onNavigate={onNavigate} />}
+            {data.hasScheduledWork && <TodayTimeline lessons={data.lessons} calendarState={data.calendarState} onNavigate={onNavigate} />}
           </div>
           <JarvisPanel />
         </div>

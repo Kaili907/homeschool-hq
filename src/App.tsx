@@ -727,7 +727,9 @@ export default function App() {
       // stale /academy URL.
       return (
         <StudyUnavailable
-          reason="The Academy curriculum is not enabled for this learner."
+          title="Academy isn't set up"
+          reason="Academy isn't set up for this learner. Ask a grown-up for help."
+          note={null}
           onBack={() => {
             leaveAcademyPath()
             setScreen({ kind: 'home' })
@@ -976,15 +978,25 @@ export default function App() {
   )
 }
 
-function StudyUnavailable({ reason, onBack }: { reason: string; onBack: () => void }) {
+function StudyUnavailable({
+  title = 'Study is not available yet',
+  reason,
+  note = 'No Study persistence or safety request was made.',
+  onBack,
+}: {
+  title?: string
+  reason: string
+  note?: string | null
+  onBack: () => void
+}) {
   const headingRef = useRef<HTMLHeadingElement>(null)
   useEffect(() => { headingRef.current?.focus() }, [])
   return (
     <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900">
       <div className="mx-auto max-w-xl rounded-2xl border border-amber-200 bg-amber-50 p-6">
-        <h1 ref={headingRef} className="text-2xl font-bold" tabIndex={-1}>Study is not available yet</h1>
+        <h1 ref={headingRef} className="text-2xl font-bold" tabIndex={-1}>{title}</h1>
         <p className="mt-2">{reason}</p>
-        <p className="mt-2 text-sm">No Study persistence or safety request was made.</p>
+        {note && <p className="mt-2 text-sm">{note}</p>}
         <button className="mt-4 min-h-11 rounded-lg border border-amber-500 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
       </div>
     </main>
@@ -1207,7 +1219,7 @@ function Home({
           <span>
             <span className="block text-2xl font-extrabold">Manuel Academy</span>
             <span className="block font-bold opacity-90">
-              Today&apos;s lessons, your courses, and the year schedule
+              Academy lessons, your courses, and the year schedule
             </span>
           </span>
         </button>
