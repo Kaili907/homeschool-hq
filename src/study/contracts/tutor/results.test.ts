@@ -1,7 +1,12 @@
+import { readFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
+import * as resultsModule from './results'
 import {
   STUDY_TUTOR_REASON_CODE_MAX_LENGTH,
   STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH,
+  acceptStudyTutorResult,
   isStudyTutorReasonCode,
   parseStudyTutorResult,
 } from './results'
@@ -249,6 +254,33 @@ describe('validator integrity', () => {
     expect(parsed).toEqual({ status: 'accepted', eventRef: 'event.1', visibleText: 'ok' })
     expect(Object.hasOwn(parsed!, 'officialGrade')).toBe(false)
     expect((parsed as unknown as { officialGrade?: string }).officialGrade).toBeUndefined()
+  })
+
+  // STUDY-A1-TUTOR-CONTRACT-H3 Phase 8 — the brand is only worth as much as the
+  // module's export surface. One exported cast, and a wrapper has its bypass
+  // back with the contract still reading as honoured.
+  it('exports no way to mint a validated result except by parsing', () => {
+    const exported = Object.keys(resultsModule).sort()
+    expect(exported).toEqual([
+      'STUDY_TUTOR_REASON_CODE_MAX_LENGTH',
+      'STUDY_TUTOR_RESULT_KEYS',
+      'STUDY_TUTOR_UNPARSED_RESULT_REASON_CODE',
+      'STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH',
+      'acceptStudyTutorResult',
+      'isStudyTutorReasonCode',
+      'parseStudyTutorResult',
+    ])
+    // The two that produce one both validate first, and neither can be handed a
+    // value it will pass through unchecked.
+    expect(parseStudyTutorResult({ status: 'accepted', eventRef: 'event.1' })).toBeNull()
+    expect(acceptStudyTutorResult({ status: 'accepted', eventRef: 'event.1' }).status).toBe('quarantined')
+
+    // And the branding helper is module-private, so nothing outside this file
+    // can apply the brand to a value the parser never saw.
+    const source = readFileSync(join(dirname(fileURLToPath(import.meta.url)), 'results.ts'), 'utf8')
+    expect(source).toMatch(/\nfunction validated\(/)
+    expect(source).not.toMatch(/export\s+(?:const|function)\s+validated\b/)
+    expect(source).not.toMatch(/as\s+unknown\s+as/)
   })
 
   it('reads a field once, so a second answer cannot differ from the checked one', () => {

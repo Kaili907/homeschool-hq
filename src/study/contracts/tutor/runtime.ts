@@ -24,7 +24,9 @@
  * That is what keeps a Tutor from smuggling a learner's words into Study
  * evidence through an identifier or a code.
  */
+import type { StudyTutorLearnerText } from './learnerText'
 import type { StudyTutorRef } from './refs'
+import type { ValidatedStudyTutorResult } from './results'
 import type { CanonicalStudyTaskType, StudyRuntimeInterruption, StudySubject } from '../../types'
 
 /** Mirrors the `study-production.v1` convention in ../production/ports.ts. */
@@ -114,8 +116,17 @@ export interface StudyTutorTurn {
    * The learner's words, for this call only. Transient input, never
    * persistence: no Study record, checkpoint, event payload or adult-review
    * proposal may contain it, and nothing in StudyTutorResult can carry it back.
+   *
+   * Bounded structurally (H3), for the same reason the references above are.
+   * The bridge's pre-core gateway refuses learner text over 4,000 characters
+   * before its classifier runs, shaped as `stop-invalid-input` — which the host
+   * records as a durable learner safety stop about a child who only wrote too
+   * much. `StudyTutorLearnerText` is producible only by
+   * `parseStudyTutorLearnerText`, so that turn cannot be built. See
+   * ./learnerText.ts for the derivation and ./bridgeCompatibility.test.ts for
+   * the differential proof against the real gateway.
    */
-  readonly transientLearnerText: string
+  readonly transientLearnerText: StudyTutorLearnerText
   readonly expectedAnswer: string
   readonly occurredAt: string
   readonly learnerLocalDate: string
@@ -239,14 +250,23 @@ export interface StudyTutorRuntime {
    */
   launch(launch: StudyTutorLaunch): Promise<void>
   /**
-   * The returned value must have been through `parseStudyTutorResult` — or
-   * `acceptStudyTutorResult`, which is the same check with the fail-closed
-   * branch already taken. An implementation's raw transport output is `unknown`
-   * until then, and typing it as `StudyTutorResult` beforehand skips this
-   * boundary while appearing to honour it:
+   * The return type is `ValidatedStudyTutorResult`, not `StudyTutorResult`, and
+   * that is the whole of H3's Phase 8 (review finding: parser-first acceptance
+   * was still a convention).
+   *
+   * `StudyTutorResult` describes the SHAPE of a result. A wrapper could satisfy
+   * it by writing an object literal, or by asserting one over its transport's
+   * output, and never call the parser at all — the contract would read as
+   * honoured. `ValidatedStudyTutorResult` describes the same shape plus the fact
+   * that `parseStudyTutorResult` looked at it, and it is branded with an
+   * unexported symbol, so the only expressions that have that type are the ones
+   * the parser returned.
+   *
+   * A wrapper's raw transport output stays `unknown` until then. The short way
+   * to satisfy this method is `return acceptStudyTutorResult(raw)`:
    * STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT in ./wrapperObligations.ts.
    */
-  submit(turn: StudyTutorTurn): Promise<StudyTutorResult>
+  submit(turn: StudyTutorTurn): Promise<ValidatedStudyTutorResult>
 }
 
 /**

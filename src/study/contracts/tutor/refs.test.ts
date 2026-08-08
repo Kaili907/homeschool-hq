@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { STUDY_BRIDGE_OPAQUE_ID_MAX_LENGTH, isStudyBridgeOpaqueId } from '../../studyRequestRef'
+import { parseStudyTutorLearnerText } from './learnerText'
 import { STUDY_TUTOR_REF_MAX_LENGTH, isStudyTutorRef, parseStudyTutorRef } from './refs'
 import type { StudyTutorLaunch, StudyTutorTurn } from './runtime'
 
@@ -144,7 +145,7 @@ describe('Tutor input reference type (F2)', () => {
       subject: 'math',
       skillRef: parseStudyTutorRef('skill:equivalent-fractions')!,
       taskType: 'guided-practice',
-      transientLearnerText: 'ready',
+      transientLearnerText: parseStudyTutorLearnerText('ready')!,
       expectedAnswer: 'ready',
       occurredAt: '2026-08-01T14:00:00.000Z',
       learnerLocalDate: '2026-08-01',

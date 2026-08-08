@@ -3,6 +3,11 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import {
+  STUDY_TUTOR_LEARNER_TEXT_MAX_LENGTH,
+  isStudyTutorLearnerText,
+  parseStudyTutorLearnerText,
+} from './learnerText'
+import {
   STUDY_TUTOR_CONTRACT_VERSION,
   STUDY_TUTOR_FORBIDDEN_KEYS,
   type StudyTutorLaunch,
@@ -10,7 +15,11 @@ import {
   type StudyTutorRuntime,
   type StudyTutorTurn,
 } from './runtime'
-import { STUDY_TUTOR_RESULT_KEYS, parseStudyTutorResult } from './results'
+import {
+  STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH,
+  STUDY_TUTOR_RESULT_KEYS,
+  parseStudyTutorResult,
+} from './results'
 
 // STUDY-A1-TUTOR-CONTRACT — the boundary itself, held to its own statements.
 //
@@ -165,6 +174,52 @@ describe('production Tutor runtime contract', () => {
     expect(Object.keys(TURN_FIELDS)).toContain('transientLearnerText')
     expect(declared.filter((key) => key === 'transientLearnerText')).toHaveLength(1)
   })
+
+  // STUDY-A1-TUTOR-CONTRACT-H3 — the field set did not change, and the one
+  // free-text input field became bounded. Both halves are pinned here so a later
+  // card cannot add a persistence field beside it or loosen the bound and still
+  // pass the contract suite.
+  it('keeps the turn on exactly the fields it had, with learner text bounded', () => {
+    expect(Object.keys(TURN_FIELDS).sort()).toEqual([
+      'expectedAnswer',
+      'householdTimeZone',
+      'learnerLocalDate',
+      'lessonRef',
+      'occurredAt',
+      'requestRef',
+      'segmentRef',
+      'sessionRef',
+      'skillRef',
+      'subject',
+      'taskType',
+      'transientLearnerText',
+    ])
+    // Transient means transient: no field beside it says to keep it.
+    for (const key of ['transcript', 'persist', 'persisted', 'store', 'retain', 'history', 'learnerTextRef']) {
+      expect(Object.keys(TURN_FIELDS)).not.toContain(key)
+    }
+    expect(STUDY_TUTOR_LEARNER_TEXT_MAX_LENGTH).toBe(4_000)
+    expect(isStudyTutorLearnerText('x'.repeat(STUDY_TUTOR_LEARNER_TEXT_MAX_LENGTH))).toBe(true)
+    expect(isStudyTutorLearnerText('x'.repeat(STUDY_TUTOR_LEARNER_TEXT_MAX_LENGTH + 1))).toBe(false)
+    // Learner text and Tutor prose are bounded separately, at the bound each
+    // side's own boundary applies. Borrowing one for the other would be wrong in
+    // whichever direction it was borrowed.
+    expect(STUDY_TUTOR_LEARNER_TEXT_MAX_LENGTH).not.toBe(STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH)
+  })
+
+  // H2's bounds, held. H3 added a field type; it removed no rule.
+  it('keeps every H2 result bound in place', () => {
+    const overLongProse = 'a'.repeat(STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH + 1)
+    expect(parseStudyTutorResult({ status: 'accepted', eventRef: 'event.1', visibleText: overLongProse })).toBeNull()
+    expect(parseStudyTutorResult({ status: 'accepted', eventRef: `e${'x'.repeat(128)}`, visibleText: 'ok' })).toBeNull()
+    expect(parseStudyTutorResult({ status: 'quarantined', reasonCode: 'a'.repeat(65) })).toBeNull()
+    expect(parseStudyTutorResult({
+      status: 'accepted',
+      eventRef: 'event.1',
+      visibleText: 'ok',
+      officialGrade: 'C',
+    })).toBeNull()
+  })
 })
 
 describe('Tutor contract isolation', () => {
@@ -189,6 +244,40 @@ describe('Tutor contract isolation', () => {
     // The stripper must not have eaten the code it is asked to judge.
     expect(contractCode).toMatch(/export function parseStudyTutorResult/)
     expect(contractCode).toMatch(/export const STUDY_TUTOR_CONTRACT_VERSION/)
+    // H3 added a module to this folder. It is covered by the sweep above
+    // because the sweep reads the folder, not a list — and this is the check
+    // that the folder read actually included it.
+    expect(contractCode).toMatch(/export function parseStudyTutorLearnerText/)
+  })
+
+  // H3 — the learner-text rule is a restatement of the bridge's, because the
+  // isolation rule above forbids importing it. A restatement drifts unless
+  // something holds it, and the thing that holds it is a differential test
+  // against the real gateway. If that file stops existing, or stops calling the
+  // real gateway, the restatement is unguarded.
+  it('keeps the learner-text restatement pinned to the real bridge by a differential test', () => {
+    const differential = readFileSync(join(here, 'bridgeCompatibility.test.ts'), 'utf8')
+    expect(differential).toMatch(
+      /import\s*\{\s*evaluatePreCoreUrgentSafety\s*\}\s*from\s*'[^']*adaptive-tutor[^']*safety-gateway\.ts'/,
+    )
+    expect(differential).toMatch(/isStudyTutorLearnerText\(candidate\).*\).toBe\(bridgeAdmits\(candidate\)\)/s)
+  })
+
+  it('states the learner-text bound once, and does not restate the bridge’s content rules', () => {
+    const learnerText = readFileSync(join(here, 'learnerText.ts'), 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, ' ')
+      .replace(/(^|\s)\/\/[^\n]*/g, '$1')
+    // Exactly one numeric bound in the module, and it is the bridge's.
+    expect(learnerText.match(/4_000|4000/g)).toEqual(['4_000'])
+    // The bridge's quote folding, dash folding, punctuation collapse and
+    // obfuscation collapse are content rules and are deliberately NOT here:
+    // this contract decides how much a learner may say, never what.
+    expect(learnerText).not.toMatch(/kill|die|hurt|touch/)
+    expect(learnerText).not.toMatch(/\\u2018|\\u2010|\\u2212/)
+    // And it does not truncate.
+    expect(learnerText).not.toMatch(/\.slice\(|\.substring\(|\.substr\(/)
+    // And it does not coerce.
+    expect(learnerText).not.toMatch(/String\(|\+\s*''|`\$\{/)
   })
 
   it('declares no implementation it could be tempted to construct', () => {
