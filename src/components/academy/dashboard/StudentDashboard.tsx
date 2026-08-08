@@ -171,7 +171,7 @@ function TodayTimeline({ lessons, onNavigate }: { lessons: readonly DashboardLes
             <li key={lesson.lessonId} className="timeline-item">
               <span className="timeline-item__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               {route ? (
-                <button onClick={() => onNavigate(route)} aria-label={`${lesson.title}, ${statusCopy}`}>{contents}</button>
+                <button onClick={() => onNavigate(route)} aria-label={`${lesson.title}, ${lessonContext(lesson)}, ${statusCopy}`}>{contents}</button>
               ) : <div>{contents}</div>}
             </li>
           )
@@ -223,7 +223,9 @@ function CourseProgressGrid({ profile, catalog, levelOf, onNavigate }: Pick<Stud
               <button onClick={() => onNavigate({ kind: 'course', courseId: course.courseId })}>
                 <span className="course-card__topline"><span>Course</span><span>{percent}% complete</span></span>
                 <strong>{courseLevelLabel(course, levelOf)}</strong>
-                <span className="course-card__meter" aria-hidden="true"><span style={{ width: `${percent}%` }} /></span>
+                <span className="course-card__meter" aria-hidden="true">
+                  <span style={{ width: `${percent}%`, minWidth: percent === 0 ? 0 : undefined }} />
+                </span>
                 <span className="course-card__progress">{completed} of {course.lessonCount} lessons complete</span>
               </button>
             </li>

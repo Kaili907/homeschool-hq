@@ -15,15 +15,17 @@ const dashboardDataSource = readFileSync(new URL('./dashboardData.ts', import.me
 
 const MATH = 'ma-g5-mathematics-u01-l01'
 const ELA = 'ma-g7-english-language-arts-u01-l01'
+const SCIENCE = 'ma-g8-science-u01-l01'
 const NOW = '2026-08-03T09:00:00.000Z'
 
 const catalog: AcademyCatalog = {
   releaseVersion: '1.0.0', grade: '5', courses: [
     { courseId: 'ma-g5-mathematics', subject: 'mathematics', lessonCount: 1, units: [{ unitId: 'ma-g5-mathematics-u01', unitNumber: 1, title: 'Fractions', days: 1, essentialQuestion: 'Why?', performanceTask: 'Work', lessonIds: [MATH], hasAssessment: false }] },
     { courseId: 'ma-g7-english-language-arts', subject: 'english-language-arts', lessonCount: 1, units: [{ unitId: 'ma-g7-english-language-arts-u01', unitNumber: 1, title: 'Reading', days: 1, essentialQuestion: 'Why?', performanceTask: 'Work', lessonIds: [ELA], hasAssessment: false }] },
+    { courseId: 'ma-g8-science', subject: 'science', lessonCount: 1, units: [{ unitId: 'ma-g8-science-u01', unitNumber: 1, title: 'Physical Science', days: 1, essentialQuestion: 'Why?', performanceTask: 'Work', lessonIds: [SCIENCE], hasAssessment: false }] },
   ],
 }
-const schedule: AcademySchedule = { releaseVersion: '1.0.0', grade: '5', days: [{ week: 1, day: 1, lessons: [{ lessonId: MATH, title: 'Fractions in context' }, { lessonId: ELA, title: 'Evidence in a text' }] }] }
+const schedule: AcademySchedule = { releaseVersion: '1.0.0', grade: '5', days: [{ week: 1, day: 1, lessons: [{ lessonId: MATH, title: 'Fractions in context' }, { lessonId: ELA, title: 'Evidence in a text' }, { lessonId: SCIENCE, title: 'Forces and motion' }] }] }
 
 class FakeElement extends EventTarget {
   nodeType = 1
@@ -129,18 +131,20 @@ function staleAttempt(profile: Profile, lessonId: string) {
 function renderDashboard({
   profile = activeProfile(),
   dashboardSchedule = schedule,
+  dashboardToday = '2026-08-03',
 }: {
   profile?: Profile
   dashboardSchedule?: AcademySchedule
+  dashboardToday?: string
 } = {}) {
   return renderToStaticMarkup(
     <StudentDashboard
       profile={profile}
       catalog={catalog}
       schedule={dashboardSchedule}
-      levelOf={{ 'ma-g5-mathematics': '5', 'ma-g7-english-language-arts': '7' }}
+      levelOf={{ 'ma-g5-mathematics': '5', 'ma-g7-english-language-arts': '7', 'ma-g8-science': '8' }}
       schoolYear={undefined}
-      today="2026-08-03"
+      today={dashboardToday}
       onNavigate={() => {}}
       onExit={() => {}}
     />,
@@ -150,15 +154,48 @@ function renderDashboard({
 afterEach(() => vi.unstubAllGlobals())
 
 describe('StudentDashboard', () => {
-  it('renders current learner context, mixed course levels, and text status labels', () => {
+  it('renders current learner context and text status labels', () => {
     const html = renderDashboard()
     expect(html).toContain('Hello, Avery')
-    expect(html).toContain('Mathematics · Grade 5')
-    expect(html).toContain('English Language Arts · Grade 7')
     expect(html).toContain('Not started')
     expect(html).toContain('In progress')
-    expect(html).toContain('aria-label="Fractions in context, Not started"')
-    expect(html).toContain('aria-label="Evidence in a text, In progress"')
+  })
+
+  it('renders the learner’s real Grade 5, Grade 7, and Grade 8 working levels', () => {
+    expect(activeProfile().grade).toBe('6')
+    const html = renderDashboard()
+    expect(html).toContain('Mathematics · Grade 5')
+    expect(html).toContain('English Language Arts · Grade 7')
+    expect(html).toContain('Science · Grade 8')
+  })
+
+  it('keeps course and working-level context in timeline accessible names', () => {
+    const html = renderDashboard()
+    expect(html).toContain('aria-label="Fractions in context, Mathematics · Grade 5, Not started"')
+    expect(html).toContain('aria-label="Evidence in a text, English Language Arts · Grade 7, In progress"')
+    expect(html).toContain('aria-label="Forces and motion, Science · Grade 8, Not started"')
+  })
+
+  it('renders the unconfigured school-year fallback state', () => {
+    expect(renderDashboard()).toContain('Starting with week 1')
+  })
+
+  it('renders an intentional no-work state on an empty weekday', () => {
+    const html = renderDashboard({ dashboardToday: '2026-08-04' })
+    expect(html).toContain('No lessons scheduled today')
+    expect(html).toContain('nothing assigned in your Academy schedule for today.')
+    expect(html).toContain('View year schedule')
+    expect(html).not.toContain('Your learning plan')
+  })
+
+  it('renders no progress fill at zero while preserving non-zero visibility', () => {
+    const zeroProgressHtml = renderDashboard()
+    expect(zeroProgressHtml.match(/style="width:0%;min-width:0"/g)).toHaveLength(3)
+
+    const completedMath = submitLessonCheck(startLesson(enrolledProfile(), MATH, NOW), MATH, {
+      date: '2026-08-03', mode: 'independent', met: true, now: NOW,
+    })
+    expect(renderDashboard({ profile: completedMath })).toContain('style="width:100%"')
   })
 
   it('keeps Jarvis static and renders no functional assistant controls', () => {
@@ -212,6 +249,7 @@ describe('StudentDashboard', () => {
     expect(source).not.toMatch(/(?:from\s+|import\s*\()['"][^'"]*(?:study|tutor)[^'"]*['"]/i)
     expect(source).not.toMatch(/\b(?:fetch|XMLHttpRequest|WebSocket|getUserMedia|mediaDevices|localStorage|sessionStorage)\b/)
     expect(dashboardSource).not.toMatch(/\b(?:startLesson|completeSegment|submitLessonCheck|recordReassessment|reopenLesson)\b/)
+    expect(source).not.toMatch(/\b(?:enrollInCatalog|setWorkingLevel|reconcileEnrollment)\b/)
     expect(dashboardSource).not.toContain('onPatch')
     expect(dashboardSource).toContain('onNavigate(route)')
   })
@@ -246,7 +284,7 @@ describe('StudentDashboard', () => {
           profile={profile}
           catalog={catalog}
           schedule={schedule}
-          levelOf={{ 'ma-g5-mathematics': '5', 'ma-g7-english-language-arts': '7' }}
+          levelOf={{ 'ma-g5-mathematics': '5', 'ma-g7-english-language-arts': '7', 'ma-g8-science': '8' }}
           schoolYear={undefined}
           today="2026-08-03"
           onNavigate={onNavigate}
