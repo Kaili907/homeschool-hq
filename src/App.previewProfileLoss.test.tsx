@@ -329,6 +329,71 @@ const REMOVALS: ReadonlyArray<readonly [string, (id: string) => (prev: AppState)
   ['the sync engine clears the selection with it', withLearnerRemovedAsSyncPublishesIt],
 ]
 
+/**
+ * STUDY-A1-PREVIEW-PROFILE-LOSS-H2 — the OTHER half of the same publication:
+ * `activeProfileId` is cleared while the learner stays in the authoritative
+ * synced profile set.
+ *
+ * The profile set is rebuilt as a fresh object, exactly as `appStateWithProfiles`
+ * (src/sync/useSync.ts) builds one on every publication, so the profile-set
+ * effect genuinely RE-RUNS and genuinely decides — a version of this that left
+ * the profile set object identical would pass for the uninteresting reason that
+ * the effect never ran at all.
+ *
+ * Paired with `withLearnerRemovedAsSyncPublishesIt` this is a one-variable
+ * experiment: both publications clear the selection, both hand the App a new
+ * profile set object, and they differ only in whether that set still contains
+ * her.
+ */
+const withSelectionCleared = (prev: AppState): AppState => ({
+  ...prev,
+  profiles: { ...prev.profiles },
+  activeProfileId: null,
+})
+
+/** The same publication again, naming a different — still eligible — profile. */
+const withSelectionMovedTo = (id: string) => (prev: AppState): AppState => ({
+  ...prev,
+  profiles: { ...prev.profiles },
+  activeProfileId: id,
+})
+
+/** What the App's one boundary is left holding, as one comparable value. */
+type AuthorityOutcome = {
+  cancels: string[]
+  reason: string | null
+  stillNamesHer: boolean
+  herTokenLive: boolean
+  epochMoved: boolean
+}
+
+/**
+ * The two publications and the two outcomes they must produce. Identical in
+ * every respect the SELECTION can see — it is null on both rows — so a rule that
+ * read the selection could not tell these apart, and would have to give them the
+ * same outcome. The profile set can tell them apart, and the outcomes differ.
+ */
+const SELECTION_CLEARED: ReadonlyArray<
+  readonly [string, (prev: AppState) => AppState, AuthorityOutcome]
+> = [
+  [
+    'she is still an eligible profile',
+    withSelectionCleared,
+    { cancels: [], reason: null, stillNamesHer: true, herTokenLive: true, epochMoved: false },
+  ],
+  [
+    'she has left the profile set',
+    withLearnerRemovedAsSyncPublishesIt('p1'),
+    {
+      cancels: ['epoch-cancel:learner-switch'],
+      reason: 'learner-switch',
+      stillNamesHer: false,
+      herTokenLive: false,
+      epochMoved: false,
+    },
+  ],
+]
+
 /** The learner's working preview Study surface (the dashboard's own skip link). */
 const STUDY_PLAN = 'Skip to today’s Study plan'
 
@@ -547,6 +612,180 @@ describe('App preview Study authority when the active learner leaves the synced 
       expect(rileyToken.isCurrent()).toBe(true)
       expect(epochCancels()).toEqual([])
       expect(boundary.lastReason).toBeNull()
+    })
+  })
+
+  // ── STUDY-A1-PREVIEW-PROFILE-LOSS-H2: SELECTION IS NOT AUTHORITY ───────────
+  //
+  // The independent review of 4f3b761 closed the preview-authority condition and
+  // left exactly one test gap. Replacing the authoritative profile-set scan
+  //
+  //   Object.keys(state.profiles).some((ref) => derive(user, ref) === epochRef)
+  //
+  // with selected-`activeProfileId` logic
+  //
+  //   Boolean(active) && derive(user, active.id) === epochRef
+  //
+  // survives the ENTIRE root-app suite — 2275 tests — not because the rule is
+  // wrong but because nothing ever put the two candidate signals in
+  // disagreement. `App.tsx` says `activeProfileId` is "deliberately not
+  // consulted"; that claim was prose, and this is what makes it a test.
+  //
+  // The two signals disagree in exactly one state: the SELECTION is cleared
+  // while the learner the live epoch names is STILL in the authoritative synced
+  // profile set. Every other path masks it —
+  //
+  //  - a direct A -> B switch: the pre-existing learner-change effect
+  //    (App.tsx:336) runs FIRST and unbinds the boundary, so by the time the
+  //    profile-loss effect runs there is no `epochLearnerRef` left to compare
+  //    and both readings agree on "nothing to do";
+  //  - a genuine removal: both readings say she is gone, for different reasons;
+  //  - `signOut()`: it cancels 'logout' first, likewise leaving nothing bound.
+  //
+  // So today no ordinary product action reaches the divergent state, which is
+  // why the mutant is currently equivalent — and why it must be pinned anyway.
+  // The rule is what will keep a future selection-clearing product path (a
+  // "back to the picker" control, a household re-sync that lands the selection
+  // before the profile set) from silently retiring a live learner's authority.
+  //
+  // These publish through the App's own `setState` — the same channel the real
+  // `useSync` owns and the one every other test in this file publishes a profile
+  // set through. No production code changed, and no learner-facing navigation
+  // was invented to reach the state.
+  describe('the selection is not the authority', () => {
+    it.each(SELECTION_CLEARED)(
+      'clears the selection and decides from the profile set: %s',
+      async (_label, publication, expected) => {
+        const boundary = await livePreview()
+        const herLearnerRef = boundary.binding!.learnerRef
+        const herToken = boundary.token()
+        const bornEpoch = herToken.epoch
+        counters.events = []
+
+        await publish({ state: publication })
+
+        // True on BOTH rows, and the reason the selection cannot be what
+        // decides: it is null either way, and her surface is gone either way
+        // because `buildHostStudyContext` has no profile to resolve.
+        expect(hasText(container, STUDY_PLAN)).toBe(false)
+
+        const outcome: AuthorityOutcome = {
+          cancels: epochCancels(),
+          reason: boundary.lastReason,
+          stillNamesHer: boundary.binding?.learnerRef === herLearnerRef,
+          herTokenLive: herToken.isCurrent(),
+          epochMoved: boundary.token().epoch !== bornEpoch,
+        }
+        expect(outcome).toEqual(expected)
+      },
+    )
+
+    it('keeps one unbroken epoch across a selection excursion and back', async () => {
+      const boundary = await livePreview()
+      const herToken = boundary.token()
+      const bornEpoch = herToken.epoch
+      counters.events = []
+
+      await publish({ state: withSelectionCleared })
+      await waitFor(() => harness.picker !== null, 'the picker with no learner selected')
+      expect(herToken.isCurrent()).toBe(true)
+
+      await publish({ state: withSelectionMovedTo('p1') })
+      await waitFor(() => hasText(container, STUDY_PLAN), 'her preview Study surface again')
+
+      // The epoch was never retired, so there was nothing to revive: ONE epoch,
+      // and the token she was already holding is still the current one. A
+      // selection-driven rule would have cancelled at the null and minted a
+      // fresh epoch here, leaving her holding a stale token for work she never
+      // stopped doing — which is the damage this rule exists to prevent.
+      expect(epochCancels()).toEqual([])
+      expect(boundary.lastReason).toBeNull()
+      expect(herToken.isCurrent()).toBe(true)
+      expect(boundary.token().epoch).toBe(bornEpoch)
+    })
+
+    it('lets the lifecycle bind the next learner without adding a retirement', async () => {
+      const boundary = await livePreview()
+      const samSeam = counters.hostSeams.at(-1) as SeamLike
+      const samToken = boundary.token()
+      counters.events = []
+
+      // Sam -> nobody -> Riley. The learner-change effect sees no PREVIOUS
+      // learner across the second transition, so it returns early and this
+      // reaches the profile-loss effect unmasked — with Sam an eligible profile
+      // the whole way through.
+      await publish({ state: withSelectionCleared })
+      await publish({ state: withSelectionMovedTo('p2') })
+      await waitFor(
+        () => boundary.binding !== null && boundary.binding.learnerRef !== samSeam.binding.learnerRef,
+        'Riley\'s own preview epoch',
+      )
+
+      // Riley's epoch was ESTABLISHED by the App's own render-time derivation,
+      // and re-epoching the one boundary is what makes Sam's token stale. No
+      // effect retired anything: the profile-set rule adds no cancellation of
+      // its own on top of a legitimate rebinding.
+      expect(samToken.isCurrent()).toBe(false)
+      expect(boundary.token().isCurrent()).toBe(true)
+      expect(epochCancels()).toEqual([])
+    })
+
+    it.each(DEGRADATIONS)('stays authorization-loss when the selection clears as %s', async (_label, degraded) => {
+      const boundary = await livePreview()
+      counters.events = []
+
+      // The stronger transition and the cleared selection in one commit. The
+      // household's authorization is the one meaningful outcome, and a selection
+      // that happens to be null may never take its reason.
+      await publish({ sync: degraded, state: withSelectionCleared })
+
+      expect(boundary.binding).toBeNull()
+      expect(boundary.lastReason).toBe('authorization-loss')
+      expect(epochCancels()).toEqual(['epoch-cancel:authorization-loss'])
+    })
+
+    it('stays feature-disabled when the selection clears with Study off', async () => {
+      useMode('off')
+      await mountApp(seeded('p1'))
+      await settle()
+      counters.events = []
+
+      await publish({ state: withSelectionCleared })
+
+      expect(new Set(epochCancels())).toEqual(new Set(['epoch-cancel:feature-disabled']))
+      expect(hostBoundary().lastReason).toBe('feature-disabled')
+    })
+
+    it('does not infer a removal from a cleared selection under StrictMode', async () => {
+      const boundary = await livePreview(true)
+      const herToken = boundary.token()
+      const bornEpoch = herToken.epoch
+      counters.events = []
+
+      // Setup -> cleanup -> setup replays the effect over the divergent state.
+      // No replay may read a temporary selection as her having been removed.
+      await publish({ state: withSelectionCleared })
+
+      expect(epochCancels()).toEqual([])
+      expect(boundary.binding).not.toBeNull()
+      expect(herToken.isCurrent()).toBe(true)
+      expect(boundary.token().epoch).toBe(bornEpoch)
+      expect(boundary.lastReason).toBeNull()
+    })
+
+    it('writes no safety record when only the selection clears', async () => {
+      await livePreview()
+      counters.events = []
+
+      await publish({ state: withSelectionCleared })
+
+      // Nothing about a cleared selection is a learner safety incident, so this
+      // raises no stop, no adult safety-review event and nothing durable — and
+      // the girl is never told she is being paused or reviewed.
+      expect(readLocalSafetyStops(window.localStorage)).toEqual([])
+      expect(counters.events.some((event) => event.includes('safety'))).toBe(false)
+      expect(renderedText(container)).not.toMatch(/not in trouble|safety stop|Study is paused|adult review|grown-?up will check/i)
+      expect(counters.requestedUrls).toEqual([])
     })
   })
 
