@@ -2,10 +2,11 @@ import { describe, expect, it } from 'vitest'
 import { parseStudyTutorRef } from './refs'
 import {
   STUDY_TUTOR_UNPARSED_RESULT_REASON_CODE,
+  type ValidatedStudyTutorResult,
   acceptStudyTutorResult,
   parseStudyTutorResult,
 } from './results'
-import { STUDY_TUTOR_CONTRACT_VERSION, type StudyTutorLaunch, type StudyTutorResult, type StudyTutorRuntime, type StudyTutorTurn } from './runtime'
+import { STUDY_TUTOR_CONTRACT_VERSION, type StudyTutorLaunch, type StudyTutorRuntime, type StudyTutorTurn } from './runtime'
 import {
   STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT,
   STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT,
@@ -85,7 +86,10 @@ describe('F4 — parse before a result is a contract value', () => {
       readonly contractVersion = STUDY_TUTOR_CONTRACT_VERSION
       constructor(private readonly transport: (turn: StudyTutorTurn) => Promise<unknown>) {}
       async launch(_launch: StudyTutorLaunch): Promise<void> {}
-      async submit(turn: StudyTutorTurn): Promise<StudyTutorResult> {
+      // H3 Phase 8: the transport's output is `unknown`, and the declared return
+      // is the validated type, so `acceptStudyTutorResult` is not merely the
+      // recommended way to write this method — it is the only way that compiles.
+      async submit(turn: StudyTutorTurn): Promise<ValidatedStudyTutorResult> {
         return acceptStudyTutorResult(await this.transport(turn))
       }
     }
@@ -133,7 +137,7 @@ describe('F1 — launch must be awaited before durable preparation', () => {
     return {
       contractVersion: STUDY_TUTOR_CONTRACT_VERSION,
       launch,
-      submit: async () => ({ status: 'quarantined', reasonCode: 'not-under-test' }),
+      submit: async () => acceptStudyTutorResult({ status: 'quarantined', reasonCode: 'not-under-test' }),
     }
   }
 
@@ -215,5 +219,23 @@ describe('wrapper landing requirements stay open', () => {
       'quarantine',
       'refusal',
     ])
+  })
+
+  // H3 Phase 8/12. F4 gained a structural boundary; it did not become closed,
+  // and F1 gained nothing at all. Both of those are asserted rather than
+  // described, so a later card cannot quietly promote either one.
+  it('records the H3 structural enforcement of F4 without closing it', () => {
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.status).toBe('open')
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.contractEnforcement).toBe('validated-result-brand')
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.contractEnforcementCard).toBe('STUDY-A1-TUTOR-CONTRACT-H3')
+  })
+
+  it('leaves the async launch requirement exactly where H2 left it', () => {
+    // H3 touches nothing about F1. The host that must await `launch` still does
+    // not exist, so claiming this closed would be a claim about code nobody has
+    // written.
+    expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.status).toBe('open')
+    expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.requirement).toBe('AWAIT_LAUNCH_BEFORE_DURABLE_PREPARATION')
+    expect(Object.hasOwn(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT, 'contractEnforcement')).toBe(false)
   })
 })

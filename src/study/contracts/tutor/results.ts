@@ -63,6 +63,47 @@ export function isStudyTutorReasonCode(value: unknown): value is string {
  */
 export const STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH = 2_500
 
+declare const STUDY_TUTOR_VALIDATED_RESULT_BRAND: unique symbol
+
+/**
+ * STUDY-A1-TUTOR-CONTRACT-H3 Phase 8 — a result this contract has actually seen.
+ *
+ * H2 made the fail-closed crossing short (`acceptStudyTutorResult`) but left
+ * using it a convention: `StudyTutorResult` is a structural type, so a wrapper
+ * could declare its transport's output to be one, or build an object literal
+ * that happens to fit, and hand the host a value nothing had validated. Every
+ * sentence in the contract would still have been true.
+ *
+ * This is that shape plus a brand, and the brand is an unexported `unique
+ * symbol`. `StudyTutorRuntime.submit` returns THIS type, so a wrapper cannot
+ * express its result without a value one of the two parsers below returned —
+ * not by writing a literal, and not by a single `as` from its transport's
+ * output, because an `unknown` and an object literal alike are missing a
+ * property no module outside this one can name.
+ *
+ * Deliberately not solved by widening the return to `unknown` or `any`, and
+ * deliberately no exported cast: those would each move the problem rather than
+ * close it. The brand distributes over the union, so all four branches still
+ * narrow on `status` exactly as before.
+ */
+export type ValidatedStudyTutorResult = StudyTutorResult & {
+  readonly [STUDY_TUTOR_VALIDATED_RESULT_BRAND]: 'study-tutor.validated-result'
+}
+
+/**
+ * Module-private, and the only place the brand is applied.
+ *
+ * This is not a general cast helper and could not be used as one: it takes a
+ * `StudyTutorResult`, not an `unknown`, so nothing external can be laundered
+ * through it — the caller would have to have produced a contract-shaped value
+ * first, and the only such values in this module are the frozen ones rebuilt
+ * field by field below. Exporting it would hand a wrapper exactly the bypass
+ * the brand exists to remove, so it is not exported.
+ */
+function validated(result: StudyTutorResult): ValidatedStudyTutorResult {
+  return result as ValidatedStudyTutorResult
+}
+
 /** Exact per branch. An extra key — including any forbidden one — is a rejection. */
 export const STUDY_TUTOR_RESULT_KEYS = Object.freeze({
   accepted: Object.freeze(['status', 'eventRef', 'visibleText']),
@@ -130,7 +171,7 @@ function narrowedInterruption(value: unknown): StudyRuntimeInterruption | null {
  * Study session authorizing — and a validator that can itself throw gives a
  * wrapper a way out of being validated.
  */
-export function parseStudyTutorResult(value: unknown): StudyTutorResult | null {
+export function parseStudyTutorResult(value: unknown): ValidatedStudyTutorResult | null {
   try {
     if (!isRecord(value)) return null
     const status = value.status
@@ -145,7 +186,7 @@ export function parseStudyTutorResult(value: unknown): StudyTutorResult | null {
         visibleText.trim() === '' ||
         visibleText.length > STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH
       ) return null
-      return Object.freeze({ status: 'accepted' as const, eventRef, visibleText })
+      return validated(Object.freeze({ status: 'accepted' as const, eventRef, visibleText }))
     }
 
     if (status === 'stopped') {
@@ -154,23 +195,27 @@ export function parseStudyTutorResult(value: unknown): StudyTutorResult | null {
       const deliveryStatus = value.deliveryStatus
       if (!isStudyTutorReasonCode(reasonCode)) return null
       if (typeof deliveryStatus !== 'string' || !DELIVERY_STATUSES.has(deliveryStatus)) return null
-      return Object.freeze({
+      return validated(Object.freeze({
         status: 'stopped' as const,
         reasonCode,
         deliveryStatus: deliveryStatus as StudyTutorAdultHelpDelivery,
-      })
+      }))
     }
 
     if (status === 'interrupted') {
       if (!hasExactKeys(value, STUDY_TUTOR_RESULT_KEYS.interrupted)) return null
       const interruption = narrowedInterruption(value.interruption)
-      return interruption === null ? null : Object.freeze({ status: 'interrupted' as const, interruption })
+      return interruption === null
+        ? null
+        : validated(Object.freeze({ status: 'interrupted' as const, interruption }))
     }
 
     if (status === 'quarantined') {
       if (!hasExactKeys(value, STUDY_TUTOR_RESULT_KEYS.quarantined)) return null
       const reasonCode = value.reasonCode
-      return isStudyTutorReasonCode(reasonCode) ? Object.freeze({ status: 'quarantined' as const, reasonCode }) : null
+      return isStudyTutorReasonCode(reasonCode)
+        ? validated(Object.freeze({ status: 'quarantined' as const, reasonCode }))
+        : null
     }
 
     return null
@@ -208,9 +253,9 @@ export const STUDY_TUTOR_UNPARSED_RESULT_REASON_CODE = 'tutor-result-failed-cont
  *
  * See ./wrapperObligations.ts for the landing requirement this satisfies.
  */
-export function acceptStudyTutorResult(raw: unknown): StudyTutorResult {
-  return parseStudyTutorResult(raw) ?? Object.freeze({
+export function acceptStudyTutorResult(raw: unknown): ValidatedStudyTutorResult {
+  return parseStudyTutorResult(raw) ?? validated(Object.freeze({
     status: 'quarantined' as const,
     reasonCode: STUDY_TUTOR_UNPARSED_RESULT_REASON_CODE,
-  })
+  }))
 }

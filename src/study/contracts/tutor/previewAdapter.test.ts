@@ -6,6 +6,7 @@ import { AcceptedRc1HostRuntime, type StudyTutorTurnResult } from '../../runtime
 import { studyBridgeSessionRef } from '../../studyBridgeSessionRef'
 import { createSyntheticMathBlock, SYNTHETIC_NOW } from '../../testing/syntheticStudyFixtures'
 import type { HostStudyLaunchContext, StudyCalendarEntry, StudyLearnerScope, StudySafetyResult } from '../../types'
+import { type StudyTutorLearnerText, parseStudyTutorLearnerText } from './learnerText'
 import { type StudyTutorRef, parseStudyTutorRef } from './refs'
 import {
   STUDY_TUTOR_CONTRACT_VERSION,
@@ -14,7 +15,7 @@ import {
   type StudyTutorRuntime,
   type StudyTutorTurn,
 } from './runtime'
-import { parseStudyTutorResult } from './results'
+import { type ValidatedStudyTutorResult, acceptStudyTutorResult, parseStudyTutorResult } from './results'
 
 /**
  * STUDY-A1-TUTOR-CONTRACT Phase 8 — the contract is not fantasy.
@@ -45,6 +46,19 @@ function hostRef(value: string): StudyTutorRef {
   const ref = parseStudyTutorRef(value)
   if (ref === null) throw new Error(`Host reference is not admissible to a Tutor: ${JSON.stringify(value)}`)
   return ref
+}
+
+/**
+ * H3 Phase 11. The learner's words cross the same way her references do: by
+ * being validated at the adapter, which is the one place a host string becomes
+ * something a Tutor may be handed. A host that cannot produce admissible text
+ * has a turn it must not send — not a safety stop to record about the child who
+ * typed it.
+ */
+function hostLearnerText(value: string): StudyTutorLearnerText {
+  const text = parseStudyTutorLearnerText(value)
+  if (text === null) throw new Error(`Learner text is not admissible to a Tutor: ${value.length} characters`)
+  return text
 }
 
 /** Total over the preview union — this compiles only while it has four branches. */
@@ -86,7 +100,13 @@ class PreviewTutorAdapter implements StudyTutorRuntime {
     this.runtime.launch(this.host.context, this.host.entry, this.host.scope.sessionRef)
   }
 
-  async submit(turn: StudyTutorTurn): Promise<StudyTutorResult> {
+  /**
+   * H3 Phase 8/11. The declared return is `ValidatedStudyTutorResult`, so every
+   * exit from this method has to be a value `acceptStudyTutorResult` produced —
+   * including the adapter's own refusal, which is no more trusted than the
+   * runtime's output just because the adapter wrote it.
+   */
+  async submit(turn: StudyTutorTurn): Promise<ValidatedStudyTutorResult> {
     const segment = this.host.entry.segments.find((candidate) => candidate.segmentRef === turn.segmentRef)
     const skillRef = this.host.context.skillRefs[0] ?? `${this.host.entry.lessonRef}:completion`
     if (
@@ -96,9 +116,9 @@ class PreviewTutorAdapter implements StudyTutorRuntime {
       turn.skillRef !== skillRef ||
       (segment !== undefined && turn.taskType !== segment.taskType)
     ) {
-      return { status: 'quarantined', reasonCode: 'host-turn-mismatch' }
+      return acceptStudyTutorResult({ status: 'quarantined', reasonCode: 'host-turn-mismatch' })
     }
-    return contractResult(await this.runtime.submit({
+    return acceptStudyTutorResult(contractResult(await this.runtime.submit({
       context: this.host.context,
       entry: this.host.entry,
       scope: this.host.scope,
@@ -107,7 +127,7 @@ class PreviewTutorAdapter implements StudyTutorRuntime {
       transientLearnerText: turn.transientLearnerText,
       expectedAnswer: turn.expectedAnswer,
       occurredAt: turn.occurredAt,
-    }))
+    })))
   }
 }
 
@@ -158,7 +178,7 @@ function turnFor(host: PreviewHostBinding, overrides: Partial<StudyTutorTurn> = 
     subject: host.context.subject,
     skillRef: hostRef(host.context.skillRefs[0]!),
     taskType: segment.taskType,
-    transientLearnerText: 'ready',
+    transientLearnerText: hostLearnerText('ready'),
     expectedAnswer: 'ready',
     occurredAt: new Date(SYNTHETIC_NOW.getTime() + 5_000).toISOString(),
     learnerLocalDate: host.context.learnerLocalDate,
@@ -206,7 +226,7 @@ describe('preview runtime adapted to the production Tutor contract', () => {
       learnerLocalDate: host.context.learnerLocalDate,
     })
     const canary = 'RAW_STUDENT_ANSWER_CANARY'
-    const result = await tutor.submit(turnFor(host, { transientLearnerText: canary }))
+    const result = await tutor.submit(turnFor(host, { transientLearnerText: hostLearnerText(canary) }))
     expect(result).toEqual({
       status: 'stopped',
       reasonCode: 'mounted-input-safety-urgent',

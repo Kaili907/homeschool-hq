@@ -73,9 +73,18 @@ export const STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT = Object.freeze({
  * the boundary while appearing to honour it. `unknown` is the only correct type
  * for a value that has not been through the parser.
  *
- * Partially closed here: `acceptStudyTutorResult` exists, so the fail-closed
- * path is now shorter than writing the mistake. The obligation to use it still
- * lands with the wrapper.
+ * H2 made the fail-closed path shorter than the mistake (`acceptStudyTutorResult`).
+ * H3 made the mistake hard to express at all: `StudyTutorRuntime.submit` returns
+ * `ValidatedStudyTutorResult`, which is branded with an unexported symbol, so a
+ * wrapper cannot satisfy the method by asserting its transport's output or by
+ * writing a literal of the right shape. The only expressions of that type are
+ * the ones the parser returned.
+ *
+ * STILL OPEN, and deliberately. A brand raises the cost of the bypass; it does
+ * not remove it, because a determined wrapper can still write
+ * `as unknown as ValidatedStudyTutorResult`. What has changed is that doing so
+ * is now an explicit, greppable, reviewable lie rather than an assignment that
+ * reads as correct. The obligation not to write it lands with the wrapper.
  */
 export const STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT = Object.freeze({
   id: 'WRAPPER_LANDING_REQUIREMENT',
@@ -85,6 +94,13 @@ export const STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT = Object.freeze({
   rawResultType: 'unknown',
   admissibleOutcomes: Object.freeze(['accepted-contract-value', 'quarantine', 'refusal']),
   enforcedBy: 'production-wrapper-integration-tests',
+  /**
+   * What H3 changed, recorded so a later card can tell a structural boundary
+   * from the convention this used to be — and so that removing the brand shows
+   * up as a lie here rather than as silence.
+   */
+  contractEnforcement: 'validated-result-brand',
+  contractEnforcementCard: 'STUDY-A1-TUTOR-CONTRACT-H3',
 } as const)
 
 /** Both, for a wrapper card to enumerate rather than rediscover. */
