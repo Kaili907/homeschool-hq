@@ -130,17 +130,19 @@ function staleAttempt(profile: Profile, lessonId: string) {
 
 function renderDashboard({
   profile = activeProfile(),
+  dashboardCatalog = catalog,
   dashboardSchedule = schedule,
   dashboardToday = '2026-08-03',
 }: {
   profile?: Profile
+  dashboardCatalog?: AcademyCatalog
   dashboardSchedule?: AcademySchedule
   dashboardToday?: string
 } = {}) {
   return renderToStaticMarkup(
     <StudentDashboard
       profile={profile}
-      catalog={catalog}
+      catalog={dashboardCatalog}
       schedule={dashboardSchedule}
       levelOf={{ 'ma-g5-mathematics': '5', 'ma-g7-english-language-arts': '7', 'ma-g8-science': '8' }}
       schoolYear={undefined}
@@ -188,17 +190,42 @@ describe('StudentDashboard', () => {
     expect(html).not.toContain('Your learning plan')
   })
 
-  it('renders no progress fill at zero while preserving non-zero visibility', () => {
+  it('renders no fill at zero and preserves a visible minimum for realistic small progress', () => {
     const zeroProgressHtml = renderDashboard()
     expect(zeroProgressHtml.match(/style="width:0%;min-width:0"/g)).toHaveLength(3)
 
-    const completedMath = submitLessonCheck(startLesson(enrolledProfile(), MATH, NOW), MATH, {
+    const remainingMathLessons = Array.from(
+      { length: 179 },
+      (_, index) => `ma-g5-mathematics-u01-l${String(index + 2).padStart(3, '0')}`,
+    )
+    const partialCatalog: AcademyCatalog = {
+      ...catalog,
+      courses: catalog.courses.map((course) => course.courseId === 'ma-g5-mathematics'
+        ? {
+            ...course,
+            lessonCount: 180,
+            units: [{ ...course.units[0], days: 180, lessonIds: [MATH, ...remainingMathLessons] }],
+          }
+        : course),
+    }
+    const partialProfile = enrollInCatalog(
+      emptyProfile('p1', 'Avery Student', '6'),
+      partialCatalog,
+      NOW,
+    )
+    const oneOfOneHundredEighty = submitLessonCheck(startLesson(partialProfile, MATH, NOW), MATH, {
       date: '2026-08-03', mode: 'independent', met: true, now: NOW,
     })
-    expect(renderDashboard({ profile: completedMath })).toContain('style="width:100%"')
+    const smallProgressHtml = renderDashboard({
+      profile: oneOfOneHundredEighty,
+      dashboardCatalog: partialCatalog,
+    })
+    expect(smallProgressHtml).toContain('1% complete')
+    expect(smallProgressHtml).toContain('style="width:1%"')
+    expect(dashboardStyles).toMatch(/\.course-card__meter span\s*\{[^}]*min-width:\s*2px;/)
   })
 
-  it('keeps Jarvis static and renders no functional assistant controls', () => {
+  it('keeps Jarvis presentation-only and renders no functional assistant controls', () => {
     const html = renderDashboard()
     expect(html).toContain('Jarvis')
     expect(html).toContain('Visual foundation')
