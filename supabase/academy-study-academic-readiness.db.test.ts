@@ -95,6 +95,10 @@ const ACADEMIC_TABLES = [
   'public.academy_study_reviews',
   'public.academy_study_calendar_blocks',
   'public.academy_study_parent_settings',
+  // Accommodations is part of the contract because academy_study_effective_settings
+  // composes it into the parent-settings answer, and because the shared
+  // adult-managed ownership guard queries it on every call.
+  'public.academy_study_accommodations',
   'public.academy_study_event_ledger',
   'academy_private.study_protected_learner_work',
   'academy_private.study_adult_notes',
@@ -423,6 +427,39 @@ describe.sequential('consolidated academic readiness contract', () => {
       expect(await academicRowCounts()).toEqual(before)
     })
 
+    /**
+     * Read-only is enforced by the engine, not only by what the body happens to
+     * say. A readiness function declared STABLE cannot be given a write at all, so
+     * a future edit that tries to smuggle one in fails loudly instead of quietly
+     * mutating an academic table.
+     */
+    it('cannot be given a write while it stays declared stable', async () => {
+      await reverted(async () => {
+        await database.exec(`
+          create or replace function public.academy_study_academic_readiness_v1()
+          returns jsonb language plpgsql stable security definer
+          set search_path = pg_catalog as $injected$
+          begin
+            insert into public.academy_study_reviews (id) values ('injected');
+            return '{}'::jsonb;
+          end;
+          $injected$;
+        `)
+        // The refusal aborts the surrounding transaction, so the count below needs
+        // a savepoint to survive it.
+        await database.exec('savepoint injected_write')
+        await expect(academicReadiness()).rejects.toThrow(
+          /not allowed in a non-volatile function/,
+        )
+        await database.exec('rollback to savepoint injected_write')
+        const after = await database.query<{ total: number }>(
+          `select count(*)::int as total from public.academy_study_reviews
+           where id = 'injected'`,
+        )
+        expect(after.rows[0].total).toBe(0)
+      })
+    })
+
     it('does not write a mutation receipt or an audit event', async () => {
       const counts = async () => {
         const result = await database.query<{ receipts: number, audits: number }>(`
@@ -444,18 +481,33 @@ describe.sequential('consolidated academic readiness contract', () => {
    * dependency whose probe was never wired at all — shows up immediately.
    */
   describe('a missing required table takes down exactly its dependency', () => {
+    /**
+     * Reviews, calendar blocks and accommodations are queried by the shared
+     * adult-managed mutation's ownership guard on every call regardless of kind,
+     * so losing any one of those three tables really does break all three
+     * adult-managed dependencies. That is asserted here rather than left to be
+     * discovered: a test expecting only review-queue to fall would be wrong about
+     * the architecture, not about the contract.
+     */
     it.each([
-      ['review-queue', 'public.academy_study_reviews'],
-      ['calendar-adapter', 'public.academy_study_calendar_blocks'],
-      ['parent-settings-adapter', 'public.academy_study_parent_settings'],
-      ['event-ledger', 'public.academy_study_event_ledger'],
-      ['adult-private-adapter', 'academy_private.study_adult_notes'],
-    ] as const)('%s without %s', async (dependency, table) => {
-      await reverted(async () => {
-        await database.exec(`drop table ${table} cascade`)
-        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(dependency))
+      ['reviews', 'public.academy_study_reviews',
+        ['review-queue', 'calendar-adapter', 'parent-settings-adapter']],
+      ['calendar blocks', 'public.academy_study_calendar_blocks',
+        ['review-queue', 'calendar-adapter', 'parent-settings-adapter']],
+      ['accommodations', 'public.academy_study_accommodations',
+        ['review-queue', 'calendar-adapter', 'parent-settings-adapter']],
+      ['parent settings', 'public.academy_study_parent_settings',
+        ['parent-settings-adapter']],
+      ['the event ledger', 'public.academy_study_event_ledger', ['event-ledger']],
+      ['adult notes', 'academy_private.study_adult_notes', ['adult-private-adapter']],
+    ] as const)('losing %s closes exactly the dependencies that read it',
+      async (_label, table, dependencies) => {
+        await reverted(async () => {
+          await database.exec(`drop table ${table} cascade`)
+          expect((await academicReadiness()).dependencies)
+            .toEqual(allReadyExcept(...dependencies))
+        })
       })
-    })
 
     it('adult-private-adapter without its protected work table', async () => {
       await reverted(async () => {
@@ -519,6 +571,36 @@ describe.sequential('consolidated academic readiness contract', () => {
       ['study-session-adapter', 'public.academy_study_sessions', 'household_timezone'],
       ['checkpoint-adapter', 'public.academy_study_checkpoints', 'safe_instructional_cursor'],
       ['adult-private-adapter', 'academy_private.study_adult_notes', 'keyed_integrity_tag'],
+      // Columns the adapters demonstrably write or read that this contract used to
+      // omit. The compare-and-swap pivots on checkpoints.revision, so that one
+      // being absent from the contract was the most serious of them: the whole
+      // point of the checkpoint adapter is lost without it and readiness said ready.
+      ['checkpoint-adapter', 'public.academy_study_checkpoints', 'revision'],
+      ['checkpoint-adapter', 'public.academy_study_checkpoints', 'integrity_digest'],
+      ['checkpoint-adapter', 'public.academy_study_checkpoints', 'last_accepted_event_id'],
+      ['checkpoint-adapter', 'public.academy_study_checkpoints', 'draft_revision'],
+      ['checkpoint-adapter', 'public.academy_study_checkpoints', 'expires_at'],
+      ['checkpoint-adapter', 'public.academy_study_checkpoints', 'household_timezone'],
+      ['checkpoint-adapter', 'public.academy_study_checkpoints', 'event_version'],
+      ['checkpoint-adapter', 'public.academy_study_checkpoints', 'canonical_task_id'],
+      ['checkpoint-adapter', 'public.academy_study_checkpoints',
+        'technical_interruption_state'],
+      ['checkpoint-adapter', 'public.academy_study_checkpoints',
+        'timezone_snapshot_revision'],
+      ['event-ledger', 'public.academy_study_event_ledger', 'event_version'],
+      ['study-session-adapter', 'public.academy_study_sessions', 'study_plan_id'],
+      ['study-session-adapter', 'public.academy_study_sessions', 'schema_version'],
+      ['study-session-adapter', 'public.academy_study_sessions', 'created_by'],
+      ['study-session-adapter', 'public.academy_study_sessions',
+        'timezone_snapshot_provenance'],
+      ['review-queue', 'public.academy_study_reviews', 'household_timezone'],
+      ['calendar-adapter', 'public.academy_study_calendar_blocks', 'household_timezone'],
+      ['calendar-adapter', 'public.academy_study_calendar_blocks', 'dst_resolution'],
+      ['calendar-adapter', 'public.academy_study_calendar_blocks', 'intended_local_time'],
+      ['parent-settings-adapter', 'public.academy_study_parent_settings', 'updated_by'],
+      ['adult-private-adapter', 'academy_private.study_protected_learner_work',
+        'checkpoint_id'],
+      ['adult-private-adapter', 'academy_private.study_adult_notes', 'created_at'],
     ] as const)('%s when %s loses %s', async (dependency, table, column) => {
       await reverted(async () => {
         await database.exec(`alter table ${table} drop column ${column} cascade`)
@@ -532,8 +614,12 @@ describe.sequential('consolidated academic readiness contract', () => {
           drop table public.academy_study_reviews cascade;
           create table public.academy_study_reviews (id text primary key);
         `)
+        // The replacement carries reviews.id, so the adult-managed ownership
+        // guard's household_id/student_id are what is now missing — which closes
+        // all three adult-managed dependencies, not review-queue alone.
         expect((await academicReadiness()).dependencies)
-          .toEqual(allReadyExcept('review-queue'))
+          .toEqual(allReadyExcept(
+            'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
       })
     })
 
@@ -543,9 +629,22 @@ describe.sequential('consolidated academic readiness contract', () => {
           'alter table public.academy_study_reviews disable row level security',
         )
         expect((await academicReadiness()).dependencies)
-          .toEqual(allReadyExcept('review-queue'))
+          .toEqual(allReadyExcept(
+            'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
       })
     })
+
+    it('closes only parent-settings-adapter when accommodations loses a read column',
+      async () => {
+        await reverted(async () => {
+          // effective_settings composes accommodations into the answer, so this is
+          // a genuine parent-settings break even though its own table is intact.
+          await database.exec(`alter table public.academy_study_accommodations
+            drop column effective_from cascade`)
+          expect((await academicReadiness()).dependencies)
+            .toEqual(allReadyExcept('parent-settings-adapter'))
+        })
+      })
   })
 
   describe('the wrong function is not the right function', () => {
@@ -594,11 +693,11 @@ describe.sequential('consolidated academic readiness contract', () => {
       })
     })
 
-    it('rejects a record kind the shared mutation no longer accepts', async () => {
+    it('rejects a record kind the shared mutation can no longer serve', async () => {
       await reverted(async () => {
-        // The adult-managed mutation keeps its name, signature, owner, privileges
-        // and search_path, and still serves calendar and parent settings. Only the
-        // review branch is gone. Nothing but a body-level contract check sees this.
+        // A body that keeps the name, signature, owner, privileges and search_path
+        // but serves nothing. It no longer consults the kind authority at all, so
+        // all three adult-managed dependencies close together.
         await database.exec(`
           create or replace function public.academy_study_upsert_adult_managed_record(
             p_record_kind text, p_record jsonb,
@@ -612,8 +711,270 @@ describe.sequential('consolidated academic readiness contract', () => {
           end;
           $decoy$;
         `)
-        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept('review-queue'))
+        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+          'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
       })
+    })
+  })
+
+  /**
+   * Record-kind support, proved against the mutation path rather than its spelling.
+   *
+   * The contract this replaces searched the shared mutation's source text for
+   * `p_record_kind = '<kind>'`. Every kind carries that text twice for unrelated
+   * reasons, and the list that actually admitted a kind spelled none of them that
+   * way, so withdrawing a kind from the real accept-list left readiness reporting
+   * it ready while every call for it raised STUDY_RECORD_INVALID. Three strings in
+   * comments were enough to report all three ready.
+   *
+   * Both sides now call `study_adult_managed_record_kind_supported`. Each case
+   * below therefore asserts the pair: what the real mutation does, and what
+   * readiness says about it. A case that only checked readiness could not tell
+   * this contract from the one it replaces.
+   */
+  describe('the shared record-kind authority binds mutation and readiness', () => {
+    const GUARDIAN_A = '00000000-0000-0000-0000-0000000000a1'
+    const STUDENT_A = '00000000-0000-0000-0000-000000000101'
+    const AUTHORITY =
+      'academy_private.study_adult_managed_record_kind_supported(text)'
+    const KIND_DEPENDENCY = {
+      review: 'review-queue',
+      calendar: 'calendar-adapter',
+      parent_settings: 'parent-settings-adapter',
+    } as const
+    type ManagedKind = keyof typeof KIND_DEPENDENCY
+
+    const record = (kind: ManagedKind, tag: string) => ({
+      review: {
+        id: `review-${tag}`, student_id: STUDENT_A, skill_id: 'skill-a',
+        source_session_id: 'session-a', review_kind: 'spaced',
+        due_at: '2026-08-02T14:00:00Z', intended_local_date: '2026-08-02',
+        priority: 50, state: 'scheduled', attempt_count: 0, interval_days: 1,
+        reteaching_required: false, prerequisite_remediation_required: false,
+      },
+      calendar: {
+        id: `calendar-${tag}`, student_id: STUDENT_A, block_type: 'lesson',
+        source_reference: 'lesson-a', scheduled_start: '2026-08-02T14:00:00Z',
+        intended_local_date: '2026-08-02', explicit_offset: -240,
+        duration_minutes: 30, completion_units: 0, required_units: 1,
+        resume_session_id: null, resume_segment_id: null, state: 'scheduled',
+      },
+      parent_settings: {
+        student_id: STUDENT_A, timer_mode: 'visible', maximum_work_minutes: 30,
+        break_minimum_minutes: 5, break_maximum_minutes: 15, required_breaks: 1,
+        reduced_motion: false, no_audio: false, large_text: false,
+        read_aloud: false, speech_input_allowed: false, parent_override: false,
+      },
+    }[kind])
+
+    let attempt = 0
+    /**
+     * Calls the real mutation as a learning manager. A savepoint keeps an expected
+     * refusal from aborting the enclosing perturbation, so readiness can still be
+     * asked in the same case. The fixture already carries parent settings at
+     * revision 1, hence the differing expected revision.
+     */
+    async function upsert(kind: ManagedKind) {
+      attempt += 1
+      const point = `kind_attempt_${attempt}`
+      await database.exec(`savepoint ${point}`)
+      try {
+        const result = await asRole('authenticated', GUARDIAN_A, () =>
+          database.query<{ result: unknown }>(
+            `select public.academy_study_upsert_adult_managed_record(
+               $1, $2::jsonb, $3, $4
+             ) as result`,
+            [kind, JSON.stringify(record(kind, `k${attempt}`)),
+              kind === 'parent_settings' ? 1 : 0, `kind-attempt-${attempt}`],
+          ))
+        await database.exec(`release savepoint ${point}`)
+        return { accepted: true, result: result.rows[0].result }
+      } catch (error) {
+        await database.exec(`rollback to savepoint ${point}`)
+        return { accepted: false, error: String((error as Error).message) }
+      }
+    }
+
+    /** Redefines the single authority without one kind. */
+    async function withdraw(kind: string) {
+      const kept = ['review', 'calendar', 'parent_settings', 'accommodation']
+        .filter((candidate) => candidate !== kind)
+        .map((candidate) => `'${candidate}'`)
+        .join(', ')
+      await database.exec(`
+        create or replace function
+          academy_private.study_adult_managed_record_kind_supported(p_kind text)
+        returns boolean language sql immutable set search_path = pg_catalog
+        as $authority$ select p_kind in (${kept}) $authority$;
+      `)
+    }
+
+    it('accepts all three kinds and reports all three ready before perturbation',
+      async () => {
+        await reverted(async () => {
+          for (const kind of Object.keys(KIND_DEPENDENCY) as ManagedKind[]) {
+            expect((await upsert(kind)).accepted).toBe(true)
+          }
+          expect((await academicReadiness()).dependencies).toEqual(allReadyExcept())
+        })
+      })
+
+    /**
+     * This is also what kills a readiness probe that answers from a list of its
+     * own: only a probe still reading the authority moves when the authority does.
+     */
+    it.each(Object.keys(KIND_DEPENDENCY) as ManagedKind[])(
+      'withdrawing %s refuses it at the mutation AND closes only its dependency',
+      async (kind) => {
+        await reverted(async () => {
+          await withdraw(kind)
+          const refused = await upsert(kind)
+          expect(refused.accepted).toBe(false)
+          expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
+          expect((await academicReadiness()).dependencies)
+            .toEqual(allReadyExcept(KIND_DEPENDENCY[kind]))
+          // The other two keep working: one withdrawn kind is not a three-way outage.
+          for (const other of (Object.keys(KIND_DEPENDENCY) as ManagedKind[])
+            .filter((candidate) => candidate !== kind)) {
+            expect((await upsert(other)).accepted).toBe(true)
+          }
+        })
+      })
+
+    it.each([
+      ['comments', `
+        begin
+          -- supported: p_record_kind = 'review'
+          -- academy_private.study_adult_managed_record_kind_supported(p_record_kind)
+          -- supported: p_record_kind = 'calendar'
+          -- supported: p_record_kind = 'parent_settings'
+          raise exception 'STUDY_RECORD_INVALID' using errcode = '22023';
+        end;`],
+      ['a string literal', `
+        declare
+          dead text :=
+            'academy_private.study_adult_managed_record_kind_supported(p_record_kind)';
+        begin
+          raise exception 'STUDY_RECORD_INVALID' using errcode = '22023';
+          if p_record_kind = 'review' then return dead::jsonb; end if;
+          if p_record_kind = 'calendar' then return null; end if;
+          if p_record_kind = 'parent_settings' then return null; end if;
+        end;`],
+    ] as const)('is not satisfied by the authority appearing only in %s',
+      async (_label, body) => {
+        await reverted(async () => {
+          await database.exec(`
+            create or replace function public.academy_study_upsert_adult_managed_record(
+              p_record_kind text, p_record jsonb,
+              p_expected_revision bigint, p_idempotency_key text
+            ) returns jsonb language plpgsql security definer
+            set search_path = pg_catalog as $decoy$${body}$decoy$;
+          `)
+          for (const kind of Object.keys(KIND_DEPENDENCY) as ManagedKind[]) {
+            expect((await upsert(kind)).accepted).toBe(false)
+          }
+          expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+            'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+        })
+      })
+
+    it('closes when the mutation bypasses the authority with its own list',
+      async () => {
+        await reverted(async () => {
+          // Everything else in the real body is preserved; only the admission gate
+          // is swapped back to a narrower literal list. The mutation must match or
+          // this case is proving nothing.
+          const definition = await database.query<{ body: string }>(
+            `select replace(pg_get_functiondef(to_regprocedure($1)), chr(13), '')
+               as body`, [SHARED_ADULT_MANAGED])
+          const original = definition.rows[0].body
+          const bypassed = original.replace(
+            '  if not academy_private.study_adult_managed_record_kind_supported(\n'
+            + '       p_record_kind\n     ) or p_expected_revision is null',
+            "  if p_record_kind not in ('calendar', 'parent_settings')\n"
+            + '     or p_expected_revision is null')
+          expect(bypassed).not.toBe(original)
+          await database.exec(bypassed)
+          expect((await upsert('review')).accepted).toBe(false)
+          expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+            'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+        })
+      })
+
+    it('closes all three when the authority itself is gone', async () => {
+      await reverted(async () => {
+        await database.exec(`drop function ${AUTHORITY} cascade`)
+        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+          'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+      })
+    })
+
+    it('keeps unknown kinds refused and absent from the response', async () => {
+      // Asked as the owner, which is the only way the authority is ever reached:
+      // both callers are security-definer functions running as postgres. No client
+      // role can execute it, which the ACL case below pins separately.
+      const unknown = await database.query<{ supported: boolean }>(
+        `select academy_private.study_adult_managed_record_kind_supported($1)
+           as supported`, ['transcript'])
+      expect(unknown.rows[0].supported).toBe(false)
+      await reverted(async () => {
+        attempt += 1
+        await database.exec(`savepoint unknown_kind`)
+        const refused = await asRole('authenticated', GUARDIAN_A, async () => {
+          try {
+            await database.query(
+              `select public.academy_study_upsert_adult_managed_record(
+                 'transcript', '{}'::jsonb, 0, 'unknown-kind-probe') as result`)
+            return 'accepted'
+          } catch (error) { return String((error as Error).message) }
+        })
+        await database.exec(`rollback to savepoint unknown_kind`)
+        expect(refused).toMatch(/STUDY_RECORD_INVALID/)
+        expect(Object.keys((await academicReadiness()).dependencies)).toHaveLength(7)
+      })
+    })
+
+    it('is reachable by no client role', async () => {
+      for (const role of ['anon', 'authenticated', 'service_role', 'public']) {
+        expect(await hasExecute(role, AUTHORITY)).toBe(false)
+      }
+    })
+
+    it('is owned by postgres, immutable, and search_path pinned', async () => {
+      const result = await database.query<{
+        owner: string; volatility: string; config: string[] | null
+      }>(`select pg_get_userbyid(proowner) as owner, provolatile as volatility,
+            proconfig as config
+          from pg_proc where oid = to_regprocedure($1)`, [AUTHORITY])
+      expect(result.rows[0].owner).toBe('postgres')
+      expect(result.rows[0].volatility).toBe('i')
+      expect(result.rows[0].config).toEqual(['search_path=pg_catalog'])
+    })
+
+    it('left the frozen mutation function with no literal kind list of its own',
+      async () => {
+        const definition = await database.query<{ body: string }>(
+          'select pg_get_functiondef(to_regprocedure($1)) as body',
+          [SHARED_ADULT_MANAGED])
+        expect(definition.rows[0].body)
+          .not.toContain("'review', 'calendar', 'parent_settings', 'accommodation'")
+        expect(definition.rows[0].body).toContain(
+          'academy_private.study_adult_managed_record_kind_supported(')
+      })
+
+    it('kept the frozen mutation function otherwise intact', async () => {
+      // Owner, definer posture, pinned search_path and the adapter/anon ACL split
+      // all survive being re-declared from the catalog.
+      const result = await database.query<{
+        owner: string; definer: boolean; config: string[] | null
+      }>(`select pg_get_userbyid(proowner) as owner, prosecdef as definer,
+            proconfig as config
+          from pg_proc where oid = to_regprocedure($1)`, [SHARED_ADULT_MANAGED])
+      expect(result.rows[0].owner).toBe('postgres')
+      expect(result.rows[0].definer).toBe(true)
+      expect(result.rows[0].config).toEqual(['search_path=pg_catalog'])
+      expect(await hasExecute('authenticated', SHARED_ADULT_MANAGED)).toBe(true)
+      expect(await hasExecute('anon', SHARED_ADULT_MANAGED)).toBe(false)
     })
   })
 
@@ -782,6 +1143,48 @@ describe.sequential('consolidated academic readiness contract', () => {
       }
     })
 
+    /**
+     * The gate rewrite is a substitution, so its failure mode is matching nothing.
+     * Silently leaving the literal list behind would restore exactly the drift this
+     * migration exists to remove, while every test that only checks the authority
+     * still passed. It must abort instead.
+     */
+    it('refuses when the adult-managed admission gate is not where it expects',
+      async () => {
+        const database2 = await chainWithoutAcademicMigration()
+        try {
+          await database2.exec(`
+            create or replace function public.academy_study_upsert_adult_managed_record(
+              p_record_kind text, p_record jsonb,
+              p_expected_revision bigint, p_idempotency_key text
+            ) returns jsonb language plpgsql security definer
+            set search_path = pg_catalog as $reshaped$
+            begin
+              -- The same four kinds, spelled a different way.
+              if p_record_kind not in ('review','calendar','parent_settings','accommodation')
+              then raise exception 'STUDY_RECORD_INVALID'; end if;
+              return '{}'::jsonb;
+            end;
+            $reshaped$;
+          `)
+          await expect(database2.exec(await academicMigrationSource()))
+            .rejects.toThrow(/admission gate not found/)
+        } finally {
+          await database2.close()
+        }
+      })
+
+    it('refuses when the adult-managed mutation is absent entirely', async () => {
+      const database2 = await chainWithoutAcademicMigration()
+      try {
+        await database2.exec(`drop function ${SHARED_ADULT_MANAGED} cascade`)
+        await expect(database2.exec(await academicMigrationSource()))
+          .rejects.toThrow(/adult-managed mutation missing/)
+      } finally {
+        await database2.close()
+      }
+    })
+
     it('refuses when the metadata singleton is absent', async () => {
       const database2 = await chainWithoutAcademicMigration()
       try {
@@ -822,10 +1225,12 @@ describe.sequential('consolidated academic readiness contract', () => {
   })
 
   /**
-   * This migration adds a read-only probe. It must not have touched any academic
-   * subsystem, and must not have widened any academic privilege.
+   * The migration rewrites exactly one expression -- the adult-managed admission
+   * gate -- and adds read-only probes. Nothing else about the academic subsystems
+   * may have moved: no privilege widened, no row level security relaxed, and no
+   * academic mutation handed to the trusted server role.
    */
-  describe('the five academic subsystems are unmodified', () => {
+  describe('the academic subsystems are otherwise unmodified', () => {
     it('leaves every academic function executable by authenticated and closed to anon', async () => {
       const signatures = new Set(Object.values(REQUIRED_FUNCTIONS).flat())
       for (const signature of signatures) {

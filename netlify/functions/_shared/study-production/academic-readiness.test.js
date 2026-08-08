@@ -142,6 +142,21 @@ describe('academic readiness durable probe', () => {
     expect(call).not.toHaveBeenCalled()
   })
 
+  it('fails closed when the configuration check itself throws', async () => {
+    // read() is documented as never throwing. isConfigured is a call into the
+    // transport, so a transport that throws while answering it must be caught
+    // here rather than relying on a caller further up to have a try of its own.
+    const call = vi.fn()
+    const probe = createSupabaseStudyAcademicReadiness({
+      rpc: {
+        isConfigured: () => { throw new Error('service_role_key_unreadable') },
+        call,
+      },
+    })
+    await expect(probe.read()).resolves.toEqual(ALL_NOT_READY)
+    expect(call).not.toHaveBeenCalled()
+  })
+
   it('fails closed when the call rejects', async () => {
     const probe = createSupabaseStudyAcademicReadiness({
       rpc: {

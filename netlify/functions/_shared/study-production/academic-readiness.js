@@ -120,8 +120,11 @@ export function createSupabaseStudyAcademicReadiness(options = {}) {
   return Object.freeze({
     isConfigured: () => rpc?.isConfigured?.() === true,
     async read() {
-      if (rpc?.isConfigured?.() !== true) return academicDependenciesUnavailable()
+      // The configuration check is inside the try because it is a call into the
+      // transport, and a transport that throws here would otherwise escape a
+      // function documented as never throwing.
       try {
+        if (rpc?.isConfigured?.() !== true) return academicDependenciesUnavailable()
         return parseAcademicReadinessResult(
           await rpc.call('academy_study_academic_readiness_v1'),
         )
