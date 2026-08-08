@@ -2,9 +2,10 @@ import type { AcademyGrade, Profile, SchoolYear } from '../../../types'
 import { isoToday } from '../../../appState'
 import { derivedScopeWeek, isSchoolYearConfigured } from '../../../curriculum/pacing'
 import type { AcademyRoute } from '../../../academy/academyRoute'
+import { isStaleAttempt } from '../../../academy/academyState'
 import type { AcademyCatalog, AcademyCatalogCourse, AcademySchedule } from '../../../academy/contentTypes'
 
-export type DashboardLessonStatus = 'complete' | 'in-progress' | 'not-started' | 'ready-to-revisit'
+export type DashboardLessonStatus = 'complete' | 'in-progress' | 'not-started' | 'ready-to-retry'
 
 export interface DashboardLesson {
   lessonId: string
@@ -13,6 +14,7 @@ export interface DashboardLesson {
   unitNumber: number | null
   level: AcademyGrade | null
   status: DashboardLessonStatus
+  requiresRestart: boolean
 }
 
 export interface StudentDashboardData {
@@ -23,13 +25,14 @@ export interface StudentDashboardData {
   hasScheduledWork: boolean
   allWorkComplete: boolean
   upNext: DashboardLesson | null
+  restartRequiredLesson: DashboardLesson | null
 }
 
 function statusFor(profile: Profile, lessonId: string): DashboardLessonStatus {
   const status = profile.academy?.lessons[lessonId]?.status
   if (status === 'complete') return 'complete'
   if (status === 'in-progress') return 'in-progress'
-  if (status === 'reteach') return 'ready-to-revisit'
+  if (status === 'reteach') return 'ready-to-retry'
   return 'not-started'
 }
 
@@ -66,20 +69,25 @@ export function buildStudentDashboardData({
     : undefined
   const lessons = (day?.lessons ?? []).map(({ lessonId, title }) => {
     const location = findLesson(catalog, lessonId)
+    const status = statusFor(profile, lessonId)
     return {
       lessonId,
       title,
       course: location?.course ?? null,
       unitNumber: location?.unitNumber ?? null,
       level: location ? levelOf[location.course.courseId] ?? null : null,
-      status: statusFor(profile, lessonId),
+      status,
+      requiresRestart: status !== 'complete' && isStaleAttempt(profile, lessonId),
     }
   })
   const completedCount = lessons.filter((lesson) => lesson.status === 'complete').length
-  // Existing in-progress attempts are intentionally preferred over later untouched work.
-  const upNext = lessons.find((lesson) => lesson.status === 'in-progress')
-    ?? lessons.find((lesson) => lesson.status !== 'complete')
+  // Preserve today's schedule order inside each canonical priority group.
+  const upNext = lessons.find((lesson) => lesson.status === 'in-progress' && !lesson.requiresRestart)
+    ?? lessons.find((lesson) => lesson.status === 'not-started' || lesson.status === 'ready-to-retry')
     ?? null
+  const restartRequiredLesson = lessons.find(
+    (lesson) => lesson.status === 'in-progress' && lesson.requiresRestart,
+  ) ?? null
 
   return {
     week,
@@ -89,6 +97,7 @@ export function buildStudentDashboardData({
     hasScheduledWork: lessons.length > 0,
     allWorkComplete: lessons.length > 0 && completedCount === lessons.length,
     upNext,
+    restartRequiredLesson,
   }
 }
 

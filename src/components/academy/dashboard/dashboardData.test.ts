@@ -40,6 +40,28 @@ function profile() {
   return enrollInCatalog(emptyProfile('p1', 'Avery Student', '6'), catalog, NOW)
 }
 
+function completeLesson(p: ReturnType<typeof profile>, lessonId: string) {
+  return submitLessonCheck(startLesson(p, lessonId, NOW), lessonId, {
+    date: '2026-08-03', mode: 'independent', met: true, now: NOW,
+  })
+}
+
+function staleAttempt(p: ReturnType<typeof profile>, lessonId: string) {
+  const started = startLesson(p, lessonId, NOW)
+  const lesson = started.academy?.lessons[lessonId]
+  if (!started.academy || !lesson) throw new Error('Expected an enrolled lesson attempt')
+  return {
+    ...started,
+    academy: {
+      ...started.academy,
+      lessons: {
+        ...started.academy.lessons,
+        [lessonId]: { ...lesson, releaseVersion: '0.9.0' },
+      },
+    },
+  }
+}
+
 function dashboard(p = profile(), schedule = mondaySchedule, today = '2026-08-03') {
   return buildStudentDashboardData({
     profile: p,
@@ -62,11 +84,23 @@ describe('Student Dashboard presentation model', () => {
     expect(data.lessons[2].course?.subject).toBe('english-language-arts')
   })
 
-  it('prefers an in-progress scheduled lesson over earlier untouched work', () => {
+  it('uses the established week-1 fallback when the school year is unconfigured', () => {
+    expect(dashboard()).toMatchObject({ week: 1, schoolYearConfigured: false })
+  })
+
+  it('prefers a non-stale in-progress scheduled lesson over earlier untouched work', () => {
     const p = startLesson(profile(), MATH_2, NOW)
     const data = dashboard(p)
     expect(data.upNext?.lessonId).toBe(MATH_2)
     expect(data.upNext?.status).toBe('in-progress')
+    expect(data.upNext?.requiresRestart).toBe(false)
+  })
+
+  it('gives resume preference only to a fresh in-progress attempt', () => {
+    const p = startLesson(staleAttempt(profile(), MATH_1), ELA_1, NOW)
+    const data = dashboard(p)
+    expect(data.lessons[0]).toMatchObject({ status: 'in-progress', requiresRestart: true })
+    expect(data.upNext).toMatchObject({ lessonId: ELA_1, status: 'in-progress', requiresRestart: false })
   })
 
   it('uses the earliest unfinished scheduled lesson when none is in progress', () => {
@@ -75,27 +109,80 @@ describe('Student Dashboard presentation model', () => {
     expect(data.upNext?.status).toBe('not-started')
   })
 
-  it('keeps a reteach lesson visibly distinct and incomplete', () => {
+  it('skips completed earlier lessons when choosing the next scheduled item', () => {
+    const data = dashboard(completeLesson(profile(), MATH_1))
+    expect(data.completedCount).toBe(1)
+    expect(data.upNext?.lessonId).toBe(MATH_2)
+  })
+
+  it('keeps a reteach lesson visibly ready to retry and incomplete', () => {
     let p = startLesson(profile(), MATH_1, NOW)
     p = submitLessonCheck(p, MATH_1, { date: '2026-08-03', mode: 'guided', met: false, now: NOW })
     const data = dashboard(p)
-    expect(data.lessons[0].status).toBe('ready-to-revisit')
+    expect(data.lessons[0].status).toBe('ready-to-retry')
+    expect(data.upNext?.lessonId).toBe(MATH_1)
     expect(data.completedCount).toBe(0)
+  })
+
+  it('does not promote a stale attempt as resumable over untouched scheduled work', () => {
+    const data = dashboard(staleAttempt(profile(), MATH_1))
+    expect(data.lessons[0]).toMatchObject({ status: 'in-progress', requiresRestart: true })
+    expect(data.upNext?.lessonId).toBe(MATH_2)
+  })
+
+  it('keeps a lone stale attempt actionable as a restart through its existing route', () => {
+    const data = dashboard(staleAttempt(profile(), MATH_1), {
+      ...mondaySchedule,
+      days: [{ week: 1, day: 1, lessons: [{ lessonId: MATH_1, title: 'Fractions in context' }] }],
+    })
+    expect(data.upNext).toBeNull()
+    expect(data).toMatchObject({ hasScheduledWork: true, allWorkComplete: false })
+    expect(data.restartRequiredLesson).toMatchObject({
+      lessonId: MATH_1, status: 'in-progress', requiresRestart: true,
+    })
+    expect(dashboardLessonRoute(data.restartRequiredLesson!)).toEqual({
+      kind: 'lesson', courseId: 'ma-g5-mathematics', unitNumber: 1, lessonId: MATH_1,
+    })
+  })
+
+  it('keeps completed work complete even when its recorded release is old', () => {
+    const completed = completeLesson(profile(), MATH_1)
+    const academy = completed.academy!
+    const lesson = academy.lessons[MATH_1]
+    const p = {
+      ...completed,
+      academy: {
+        ...academy,
+        lessons: { ...academy.lessons, [MATH_1]: { ...lesson, releaseVersion: '0.9.0' } },
+      },
+    }
+    expect(dashboard(p).lessons[0]).toMatchObject({ status: 'complete', requiresRestart: false })
   })
 
   it('shows a deliberate all-complete state only when every scheduled lesson is complete', () => {
     let p = profile()
     for (const lessonId of [MATH_1, MATH_2, ELA_1]) {
-      p = startLesson(p, lessonId, NOW)
-      p = submitLessonCheck(p, lessonId, { date: '2026-08-03', mode: 'independent', met: true, now: NOW })
+      p = completeLesson(p, lessonId)
     }
     const data = dashboard(p)
-    expect(data).toMatchObject({ completedCount: 3, hasScheduledWork: true, allWorkComplete: true, upNext: null })
+    expect(data).toMatchObject({
+      completedCount: 3,
+      hasScheduledWork: true,
+      allWorkComplete: true,
+      upNext: null,
+      restartRequiredLesson: null,
+    })
   })
 
   it('shows no-work data for a weekend instead of manufacturing work', () => {
     const data = dashboard(profile(), mondaySchedule, '2026-08-09')
-    expect(data).toMatchObject({ hasScheduledWork: false, allWorkComplete: false, completedCount: 0, upNext: null })
+    expect(data).toMatchObject({
+      hasScheduledWork: false,
+      allWorkComplete: false,
+      completedCount: 0,
+      upNext: null,
+      restartRequiredLesson: null,
+    })
   })
 
   it('returns the existing Academy lesson route for a scheduled item', () => {

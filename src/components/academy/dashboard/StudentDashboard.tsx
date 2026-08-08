@@ -32,14 +32,22 @@ const STATUS_COPY: Record<DashboardLessonStatus, string> = {
   complete: 'Complete',
   'in-progress': 'In progress',
   'not-started': 'Not started',
-  'ready-to-revisit': 'Ready to revisit',
+  'ready-to-retry': 'Ready to retry',
 }
 
 const STATUS_MARK: Record<DashboardLessonStatus, string> = {
   complete: '✓',
   'in-progress': '↗',
   'not-started': '○',
-  'ready-to-revisit': '↺',
+  'ready-to-retry': '↺',
+}
+
+function lessonStatusCopy(lesson: DashboardLesson) {
+  return lesson.requiresRestart ? 'Restart required' : STATUS_COPY[lesson.status]
+}
+
+function lessonStatusMark(lesson: DashboardLesson) {
+  return lesson.requiresRestart ? '↻' : STATUS_MARK[lesson.status]
 }
 
 function courseLabel(course: AcademyCatalogCourse) {
@@ -88,17 +96,43 @@ function JarvisPanel() {
 
 function UpNextCard({ lesson, onNavigate }: { lesson: DashboardLesson; onNavigate: StudentDashboardProps['onNavigate'] }) {
   const route = dashboardLessonRoute(lesson)
-  const buttonLabel = lesson.status === 'in-progress' ? 'Continue lesson' : 'Start lesson'
+  const buttonLabel = lesson.requiresRestart
+    ? 'Open lesson to restart'
+    : lesson.status === 'in-progress'
+      ? 'Continue lesson'
+      : lesson.status === 'ready-to-retry'
+        ? 'Retry lesson'
+        : 'Start lesson'
   return (
     <section className="up-next-card" aria-labelledby="up-next-heading">
       <div className="up-next-card__glow" aria-hidden="true" />
       <p className="eyebrow">Up next</p>
       <h2 id="up-next-heading">{lesson.title}</h2>
       <p className="up-next-card__context">{lessonContext(lesson)}</p>
-      <p className="up-next-card__status"><span aria-hidden="true">{STATUS_MARK[lesson.status]}</span> {STATUS_COPY[lesson.status]}</p>
+      <p className="up-next-card__status"><span aria-hidden="true">{lessonStatusMark(lesson)}</span> {lessonStatusCopy(lesson)}</p>
       {route ? (
         <button className="button-primary" onClick={() => onNavigate(route)}>
           {buttonLabel}<span aria-hidden="true">→</span>
+        </button>
+      ) : (
+        <p className="up-next-card__unavailable" role="status">This scheduled lesson is not available to open.</p>
+      )}
+    </section>
+  )
+}
+
+function RestartRequiredCard({ lesson, onNavigate }: { lesson: DashboardLesson; onNavigate: StudentDashboardProps['onNavigate'] }) {
+  const route = dashboardLessonRoute(lesson)
+  return (
+    <section className="up-next-card" aria-labelledby="restart-required-heading">
+      <div className="up-next-card__glow" aria-hidden="true" />
+      <p className="eyebrow">Today&apos;s work</p>
+      <h2 id="restart-required-heading">{lesson.title}</h2>
+      <p className="up-next-card__context">{lessonContext(lesson)}</p>
+      <p className="up-next-card__status"><span aria-hidden="true">↻</span> Restart required</p>
+      {route ? (
+        <button className="button-primary" onClick={() => onNavigate(route)}>
+          Open lesson to restart<span aria-hidden="true">→</span>
         </button>
       ) : (
         <p className="up-next-card__unavailable" role="status">This scheduled lesson is not available to open.</p>
@@ -120,14 +154,16 @@ function TodayTimeline({ lessons, onNavigate }: { lessons: readonly DashboardLes
       <ol className="today-timeline">
         {lessons.map((lesson, index) => {
           const route = dashboardLessonRoute(lesson)
+          const statusCopy = lessonStatusCopy(lesson)
+          const statusClass = lesson.requiresRestart ? 'restart-required' : lesson.status
           const contents = (
             <>
-              <span className={`timeline-status timeline-status--${lesson.status}`} aria-hidden="true">{STATUS_MARK[lesson.status]}</span>
+              <span className={`timeline-status timeline-status--${statusClass}`} aria-hidden="true">{lessonStatusMark(lesson)}</span>
               <span className="timeline-item__copy">
                 <strong>{lesson.title}</strong>
                 <span>{lessonContext(lesson)}</span>
               </span>
-              <span className="timeline-item__state">{STATUS_COPY[lesson.status]}</span>
+              <span className="timeline-item__state">{statusCopy}</span>
               {route && <span className="timeline-item__arrow" aria-hidden="true">→</span>}
             </>
           )
@@ -135,7 +171,7 @@ function TodayTimeline({ lessons, onNavigate }: { lessons: readonly DashboardLes
             <li key={lesson.lessonId} className="timeline-item">
               <span className="timeline-item__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               {route ? (
-                <button onClick={() => onNavigate(route)} aria-label={`${lesson.title}, ${STATUS_COPY[lesson.status]}`}>{contents}</button>
+                <button onClick={() => onNavigate(route)} aria-label={`${lesson.title}, ${statusCopy}`}>{contents}</button>
               ) : <div>{contents}</div>}
             </li>
           )
@@ -228,6 +264,7 @@ export function StudentDashboard({ profile, catalog, schedule, levelOf, schoolYe
         <div className="student-dashboard__primary-grid">
           <div className="student-dashboard__daily-area">
             {data.upNext && !data.allWorkComplete ? <UpNextCard lesson={data.upNext} onNavigate={onNavigate} />
+              : data.restartRequiredLesson ? <RestartRequiredCard lesson={data.restartRequiredLesson} onNavigate={onNavigate} />
               : data.allWorkComplete ? <CompletionState completedCount={data.completedCount} total={data.lessons.length} />
                 : <NoWorkState onNavigate={onNavigate} />}
             {data.hasScheduledWork && <TodayTimeline lessons={data.lessons} onNavigate={onNavigate} />}
