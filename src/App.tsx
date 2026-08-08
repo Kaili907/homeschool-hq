@@ -497,6 +497,67 @@ export default function App() {
   const studyHostAuthorized = Boolean(
     sync.status.user && sync.status.binding === 'bound' && sync.status.provenance === 'verified',
   )
+
+  /**
+   * STUDY-A1-PREVIEW-PROFILE-LOSS — the same reconciliation again, for the
+   * LEARNER rather than for the adult.
+   *
+   * The adult can stay signed in, bound and verified while the synced household
+   * profile set stops containing the girl the epoch was established for. Her
+   * Study surface correctly disappears — `buildHostStudyContext` cannot resolve
+   * a learner — but nothing retired the App-owned epoch it had been derived
+   * from, so preview authority was left bound to a learner who is no longer an
+   * eligible profile. Production has always treated this as a learner-switch
+   * authority transition (the `!active` branch of the reconcile effect above);
+   * preview returns early at `!productionSelected` before reaching it, which is
+   * the whole of the gap.
+   *
+   * The signal is the App's own two authorities, compared in one vocabulary:
+   * the learner the LIVE epoch names, against the learner refs the current
+   * synced profile set derives. Both sides come from `deriveStudyLearnerRef`, so
+   * "the same learner" means here exactly what it meant when the binding was
+   * built. Never the surface's unmount, its absence from the DOM, or a timer.
+   *
+   * The live epoch is what separates "she has gone" from "we do not know yet".
+   * A previously-current learner is precisely one this App established an epoch
+   * for, so an unbound boundary — startup, a profile set that has not arrived,
+   * a retirement some other path already made — has no previously-valid learner
+   * to have lost, and this reads as nothing at all. That also makes it
+   * idempotent: the first cancel unbinds the boundary, so a StrictMode effect
+   * replay and every later render find nothing to retire.
+   *
+   * Precedence is explicit rather than positional: this refuses to act at all
+   * while `studyHostAuthorized` is false, which is the exact condition the
+   * authorization-loss retirement below acts on. So when a degraded binding and
+   * a vanished learner arrive in the same render, the authorization loss is the
+   * one recorded, and a profile loss can never take that reason's place.
+   *
+   * `activeProfileId` is deliberately not consulted. The existing sync
+   * architecture already reconciles it — `appStateWithProfiles` in
+   * sync/useSync.ts nulls the selection in the same commit that replaces the
+   * profile set — but it does so only when the sync engine publishes, and the
+   * App is genuinely in the in-between state until then. Reading the profile set
+   * directly is correct in both shapes and invents no second profile store.
+   *
+   * `learner-switch` is the existing canonical reason for this and introduces no
+   * second safety meaning: a girl leaving the household profile set is not a
+   * learner safety incident, so nothing durable is written and no safety event
+   * is raised. This retires authority and nothing else. The preview composition
+   * installs no Study session (only a verified production launch can), so unlike
+   * the shared learner-change effect there is nothing here to clear.
+   */
+  useEffect(() => {
+    if (!studyEnabled || !studyPreviewEnabled || !studyHostAuthorized) return
+    const lifecycle = hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current)
+    const epochLearnerRef = lifecycle.binding?.learnerRef
+    const authenticatedUserRef = sync.status.user?.id
+    if (!epochLearnerRef || !authenticatedUserRef) return
+    const stillEligible = Object.keys(state.profiles).some(
+      (hostProfileRef) => deriveStudyLearnerRef(authenticatedUserRef, hostProfileRef) === epochLearnerRef,
+    )
+    if (!stillEligible) lifecycle.cancel('learner-switch')
+  }, [studyEnabled, studyPreviewEnabled, studyHostAuthorized, state.profiles, sync.status.user?.id])
+
   useEffect(() => {
     if (!studyEnabled || !studyPreviewEnabled || studyHostAuthorized) return
     const lifecycle = hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current)
