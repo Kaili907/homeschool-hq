@@ -162,6 +162,27 @@ describe('Phase 15 — every failure lands on the branch that matches what happe
     expect(result.eventRef).toBe(REQUEST)
     // Exactly the contract's key set for this branch, so nothing extra rode along.
     expect(Object.keys(result).sort()).toEqual(['eventRef', 'status', 'visibleText'])
+    // The parser FROZE this object. That is what proves it came through
+    // `acceptStudyTutorResult` rather than from an `as ValidatedStudyTutorResult`
+    // on a fresh literal — the one residual bypass F4 records, and the mutation
+    // campaign's M15. A hand-minted brand produces an unfrozen object.
+    expect(Object.isFrozen(result)).toBe(true)
+  })
+
+  it('freezes every branch, so no branch can be hand-minted', () => {
+    // Stated for all four, because M15 could be applied to any one of them and
+    // the accepted branch is only the most tempting.
+    const branches = [
+      runtime().submit(turn()),
+      runtime({ safety: safetyPort(interrupted({ kind: 'rate-limit' })) }).submit(turn()),
+      runtime({ safety: safetyPort({ outcome: 'urgent', mayContinue: false, adultHelpState: 'proposed-not-delivered' }) }).submit(turn()),
+      runtime().submit(turn({ subject: 'other' })),
+    ]
+    return Promise.all(branches).then((results) => {
+      expect(results.map((result) => result.status).sort())
+        .toEqual(['accepted', 'interrupted', 'quarantined', 'stopped'])
+      for (const result of results) expect(Object.isFrozen(result)).toBe(true)
+    })
   })
 
   it('round-trips authorization-infrastructure as INTERRUPTED, never as a stop', async () => {
@@ -299,6 +320,49 @@ describe('Phase 16 — authority is re-asserted after every await', () => {
     if (result.status !== 'quarantined') return
     expect(result.reasonCode).toBe(STUDY_TUTOR_RUNTIME_REASON_CODES.stale)
     expect(appended).toEqual([])
+  })
+
+  it('refuses a result that arrives after the epoch ended, even though the turn itself succeeded', async () => {
+    /**
+     * The LAST async boundary, and the one the other tests in this block do not
+     * reach. The turn is authorized the whole way through — the safety checks
+     * pass, Tutor Core runs, the accepted event is appended — and the epoch ends
+     * only once that work is done. This is the late-arriving result: a learner
+     * switch or a logout that lands while the Tutor was thinking.
+     *
+     * It has to be tested separately because every earlier check would have
+     * caught a staleness that began earlier, and would go on passing with the
+     * final check deleted. Found by the mutation campaign (M19), which survived
+     * until this test existed.
+     *
+     * The trigger is the append itself rather than a call counter: the runtime
+     * asks `isCurrent()` before appending and the epoch is still live then, so
+     * flipping inside the append leaves exactly one later caller — the final
+     * check. No arithmetic to get wrong if a check is added or removed.
+     */
+    let appendHappened = false
+    const appended: StudySafeEvent[] = []
+    const production = new ProductionStudyTutorRuntime({
+      scope,
+      hostProfileRef: 'profile:runtime-test',
+      safety: safetyPort(clear()),
+      eventLedger: {
+        append: async (_scope, event) => {
+          appended.push(event)
+          appendHappened = true
+          return 'appended'
+        },
+      },
+      isCurrent: () => !appendHappened,
+      bridgeSessionRef: 'study-session:runtime-test',
+    })
+    const result = await production.submit(turn())
+    // The accepted event WAS appended — the turn genuinely succeeded — and the
+    // host is still told nothing it could show or record for the new epoch.
+    expect(appended).toHaveLength(1)
+    expect(result.status).toBe('quarantined')
+    if (result.status !== 'quarantined') return
+    expect(result.reasonCode).toBe(STUDY_TUTOR_RUNTIME_REASON_CODES.stale)
   })
 
   it('refuses the accepted-event append itself once the epoch has gone', async () => {

@@ -195,6 +195,30 @@ describe('Phase 9 — the grade band is a reviewed-content compatibility constan
       expect(Object.hasOwn(request, forbidden)).toBe(false)
     }
   })
+
+  it('refuses a caller-supplied grade at compile time', () => {
+    // The pin that makes the absence above load-bearing. Adding a `gradeBand`
+    // field to the request — the shape a browser grade or a working level would
+    // arrive in — leaves this directive unused and fails `tsc --noEmit` on
+    // TS2578. Each of the four is its own directive, so one field cannot cover
+    // for another.
+    const attempt = () => runProductionTutorTurn(
+      // @ts-expect-error the adapter request carries no gradeBand
+      { ...turnRequest(), gradeBand: 'middle-6-8' },
+      { eventLedger: acceptingLedger, safety: LOCAL_DEMO_SAFETY_CONFIGURATION, outputSafety: clearOutputSafety },
+    )
+    const grade = () => runProductionTutorTurn(
+      // @ts-expect-error the adapter request carries no grade
+      { ...turnRequest(), grade: 5 },
+      { eventLedger: acceptingLedger, safety: LOCAL_DEMO_SAFETY_CONFIGURATION, outputSafety: clearOutputSafety },
+    )
+    const workingLevel = () => runProductionTutorTurn(
+      // @ts-expect-error the adapter request carries no workingLevel
+      { ...turnRequest(), workingLevel: 'grade-5' },
+      { eventLedger: acceptingLedger, safety: LOCAL_DEMO_SAFETY_CONFIGURATION, outputSafety: clearOutputSafety },
+    )
+    expect([attempt, grade, workingLevel].every((fn) => typeof fn === 'function')).toBe(true)
+  })
 })
 
 describe('Phase 12 — an actionable adult-review proposal is never silently discarded', () => {

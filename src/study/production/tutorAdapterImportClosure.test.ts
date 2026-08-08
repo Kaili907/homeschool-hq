@@ -297,6 +297,38 @@ describe('production Tutor wrapper import closure', () => {
     expect(carriers).toEqual([])
   })
 
+  it('routes learner-facing prose through the reviewed sanitizer', () => {
+    /**
+     * A STRUCTURAL guard, and it is structural because the behavioural one
+     * cannot exist against the content that ships today.
+     *
+     * Measured rather than assumed: every utterance reachable by driving the
+     * frozen Core engine over both registered subjects, all registered math
+     * programs and several answers, for six turns each, is a FIXED POINT of
+     * `sanitizeLearnerFacingText` — 0 of them change, and 0 raise a privacy
+     * action. The frozen content is clean prose with no contact details, no
+     * diagnosis language and no name prefix, which is exactly what a reviewed
+     * corpus should be.
+     *
+     * So a mutant that deleted the sanitizer call and showed the raw utterance
+     * instead would be behaviourally EQUIVALENT today: no test driving the real
+     * engine could tell the two apart. That is a statement about the corpus, not
+     * about the risk — the sanitizer is there for the output this wrapper cannot
+     * see yet, from a hosted Tutor or a later content pack, and it must be wired
+     * in BEFORE such output exists rather than after.
+     *
+     * The call site is therefore pinned directly. ./tutorAdapter.test.ts holds
+     * the other half — that the value returned is a fixed point of the
+     * sanitizer, so the output travels rather than the input.
+     */
+    const adapter = code(readFileSync(resolve(repoRoot, 'src/study/production/tutorAdapter.ts'), 'utf8'))
+    expect(adapter).toMatch(/sanitizeLearnerFacingText\(utterance\)/)
+    expect(adapter).toMatch(/visibleText = safe\.text/)
+    // And the sanitizer's own module is genuinely in the closure, so the import
+    // above is a real edge rather than a name that resolves to nothing.
+    expect(closure.files).toContain('adaptive-tutor/study-engine/bridges/tutor-core/src/privacy.ts')
+  })
+
   it('reaches the frozen primitives it is supposed to reach', () => {
     // The positive half. Without it, a closure that had accidentally become
     // empty — an entry point renamed, a walker that stopped following — would
