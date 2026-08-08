@@ -7,23 +7,37 @@ import type { StudyDashboardPorts, StudyParentControlPorts, StudySettingsPorts }
 
 /**
  * StudyDashboardPorts, StudySettingsPorts, and StudyParentControlPorts narrow what
- * each Study surface may reach. A type assertion where the ports are handed over
- * erases that narrowing and the compiler says nothing.
+ * each Study surface may reach. A type assertion where the ports are handed over —
+ * or anywhere inside the surface that received them — erases that narrowing and the
+ * compiler says nothing.
  *
- * The predecessor guard read four named files as text and rejected three spellings
- * of the cast. Independent review found four ways past it, all reproduced on this
- * branch before this file was written:
+ * WHAT THIS FILE PROTECTS, EXACTLY:
  *
- *   E1  `ports={study.ports as Bundle}` behind `import type { StudyPortBundle as Bundle }`
- *   E2  `ports={studyRuntime.ports as unknown as StudyDashboardPorts}`
- *   E3  `(ports as any).adultPrivate` inside the consumer body
- *   E4  a fifth StudyDashboard render in a file the guard never opened
+ *   1. every expression the checker types as one of the narrow contracts, wherever
+ *      in the production program it appears; and
+ *   2. inside each discovered consumer, the narrow ports parameter and the
+ *      same-function local bindings derived from it.
  *
- * All four left `tsc --noEmit` and the guard at exit 0. The first two are spelling
- * games, so this file stops reading spellings: it asks the TypeScript checker which
- * expressions are supplied to a narrow contract, and rejects assertion *nodes*
- * regardless of the type they name. The last two are census failures, so the site
- * list is generated from source on every run rather than maintained by hand.
+ * Nothing wider. A value laundered through a helper declared elsewhere —
+ * `function launder(x: unknown) { return x as any }; const p = launder(ports)` —
+ * is outside this boundary and is pinned below as a known survivor rather than
+ * quietly implied to be covered. This is not whole-program taint analysis and does
+ * not claim to be.
+ *
+ * The predecessor read four named files as text and rejected three spellings of the
+ * cast; its successor asked the checker instead but still tracked only expressions
+ * that walked *directly* to the ports parameter, and still took its own list of
+ * consumers as authoritative. Independent review got past both, and all three were
+ * reproduced on this branch before this revision was written:
+ *
+ *   F1a `const alias = ports; void (alias as any).adultPrivate`
+ *   F1b `const { ...spread } = ports; void (spread as any).safety`
+ *   F2  delete a consumer from the hand-written scope list, then cast in its body
+ *
+ * All three left `tsc --noEmit` and the guard at exit 0 while withheld capabilities
+ * were reachable. So the consumer set is now derived from typed use rather than
+ * declared, and a small same-function alias tracker stands between the parameter
+ * and the assertion rule.
  */
 
 const sourceRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -52,50 +66,61 @@ function at(node: ts.Node): string {
 
 const textOf = (node: ts.Node) => node.getText(node.getSourceFile()).replaceAll(/\s+/g, ' ')
 
-// ── the contracts, resolved to declarations ───────────────────────────────────
-// These four names are the only ones this file spells, and every later comparison
-// is against the *declaration node* they resolve to. That is what makes an aliased
-// import (`StudyPortBundle as Bundle`) indistinguishable from the original here.
-
-const PORTS_MODULE = join(sourceRoot, 'study', 'ports.ts')
-const NARROW_CONTRACTS = ['StudyDashboardPorts', 'StudySettingsPorts', 'StudyParentControlPorts'] as const
-const FULL_BUNDLE = 'StudyPortBundle'
-
-const portsSource = program.getSourceFile(PORTS_MODULE)
-if (!portsSource) throw new Error(`the Study port contracts are not in the program: ${PORTS_MODULE}`)
-
-const interfaces = new Map<string, ts.InterfaceDeclaration>()
-ts.forEachChild(portsSource, (node) => {
-  if (ts.isInterfaceDeclaration(node)) interfaces.set(node.name.text, node)
-})
-
-const declarationOf = (name: string) => {
-  const declaration = interfaces.get(name)
-  if (!declaration) throw new Error(`${name} is no longer an interface in src/study/ports.ts`)
-  return declaration
-}
-
-const narrowByDeclaration = new Map<ts.Declaration, string>(
-  NARROW_CONTRACTS.map((name) => [declarationOf(name) as ts.Declaration, name]),
-)
-const fullBundleDeclaration = declarationOf(FULL_BUNDLE)
-
-/** The narrow contract a type resolves to, by declaration identity — never by name. */
-function narrowContractOf(type: ts.Type | undefined): string | null {
-  if (!type) return null
-  for (const candidate of type.isUnion() ? type.types : [type]) {
-    const symbol = candidate.aliasSymbol ?? candidate.getSymbol()
-    for (const declaration of symbol?.declarations ?? []) {
-      const name = narrowByDeclaration.get(declaration)
-      if (name) return name
-    }
-  }
-  return null
-}
-
 type TypeErasure = ts.AsExpression | ts.TypeAssertion
 const isTypeErasure = (node: ts.Node): node is TypeErasure =>
   ts.isAsExpression(node) || ts.isTypeAssertionExpression(node)
+
+// ── the contracts, resolved to declarations ───────────────────────────────────
+// These four names are the only ones this file spells, and every later comparison
+// is against the *declaration node* they resolve to. That is what makes an aliased
+// import (`StudyPortBundle as Bundle`, `StudyDashboardPorts as DashPorts`)
+// indistinguishable from the original here.
+
+const NARROW_CONTRACTS = ['StudyDashboardPorts', 'StudySettingsPorts', 'StudyParentControlPorts'] as const
+const FULL_BUNDLE = 'StudyPortBundle'
+
+/**
+ * Resolves the contract names against one program. Taken per program because a
+ * declaration node is only comparable within the program that parsed it — the
+ * fixture sweep at the bottom of this file builds its own.
+ */
+function contractsOf(target: ts.Program) {
+  const portsModule = join(sourceRoot, 'study', 'ports.ts')
+  const portsSource = target.getSourceFile(portsModule)
+  if (!portsSource) throw new Error(`the Study port contracts are not in the program: ${portsModule}`)
+
+  const interfaces = new Map<string, ts.InterfaceDeclaration>()
+  ts.forEachChild(portsSource, (node) => {
+    if (ts.isInterfaceDeclaration(node)) interfaces.set(node.name.text, node)
+  })
+  const declarationOf = (name: string) => {
+    const declaration = interfaces.get(name)
+    if (!declaration) throw new Error(`${name} is no longer an interface in src/study/ports.ts`)
+    return declaration
+  }
+
+  const narrowByDeclaration = new Map<ts.Declaration, string>(
+    NARROW_CONTRACTS.map((name) => [declarationOf(name) as ts.Declaration, name]),
+  )
+  const targetChecker = target.getTypeChecker()
+
+  /** The narrow contract a type resolves to, by declaration identity — never by name. */
+  const narrowContractOf = (type: ts.Type | undefined): string | null => {
+    if (!type) return null
+    for (const candidate of type.isUnion() ? type.types : [type]) {
+      const symbol = candidate.aliasSymbol ?? candidate.getSymbol()
+      for (const declaration of symbol?.declarations ?? []) {
+        const name = narrowByDeclaration.get(declaration)
+        if (name) return name
+      }
+    }
+    return null
+  }
+
+  return { checker: targetChecker, narrowContractOf, fullBundleDeclaration: declarationOf(FULL_BUNDLE) }
+}
+
+const { narrowContractOf, fullBundleDeclaration } = contractsOf(program)
 
 // ── the census: every expression supplied to a narrow contract ────────────────
 // Generated, not listed. The contextual type comes from the *declared* parameter
@@ -153,16 +178,13 @@ const REVIEWED_CENSUS = [
   'components/hub/StudyParentPanel.tsx | StudyParentControlPorts | ports',
 ]
 
-// ── the consumers, discovered from their module paths ─────────────────────────
-// The census above is blind in one direction: it finds expressions the checker
-// already types as a narrow contract. If a consumer is rendered in a form that
-// hides its ports expression — spread props, a namespace import, a computed
-// module specifier — there is no expression to type, and silence would read as
-// safety. So the consumers are also swept from the other end: every reference to
-// them is found from their module path and must land on a census entry.
-//
-// This list is the definition of scope, not the census. Adding a fifth injection
-// of any of these four changes the census without changing this list.
+// ── the consumers, discovered from typed use ──────────────────────────────────
+// Nothing below is seeded with a component name or a module path. A consumer is
+// whatever declares a parameter — directly, or through a destructured binding in
+// its parameter list — whose type resolves by declaration identity to one of the
+// narrow contracts. Add a fifth surface that takes StudyDashboardPorts and it
+// appears here on the next run; take the narrow type off an existing one and it
+// disappears. Either way the reviewed snapshot stops matching.
 
 interface Consumer {
   readonly module: string
@@ -170,31 +192,130 @@ interface Consumer {
   readonly contract: string
 }
 
-const CONSUMERS: readonly Consumer[] = [
-  { module: 'components/study/StudyDashboard.tsx', exportName: 'StudyDashboard', contract: 'StudyDashboardPorts' },
-  { module: 'components/study/StudySettings.tsx', exportName: 'StudySettings', contract: 'StudySettingsPorts' },
-  { module: 'components/hub/StudyParentPanel.tsx', exportName: 'StudyParentPanel', contract: 'StudyParentControlPorts' },
-  { module: 'study/parentController.ts', exportName: 'StudyParentController', contract: 'StudyParentControlPorts' },
-]
+interface PortsRoot {
+  readonly declaration: ts.Declaration
+  readonly consumer: Consumer
+}
 
-const consumerByPath = new Map(CONSUMERS.map((consumer) => [posix(join(sourceRoot, consumer.module)), consumer]))
+/**
+ * Forms this file does not model. Anything landing here fails the guard with a file
+ * and line rather than being waved through — an unmodelled edge is the one thing a
+ * census cannot survive silently.
+ */
+const unmodelled: string[] = []
 
-function consumerFor(fromFile: string, specifier: string): Consumer | null {
-  if (!specifier.startsWith('.')) return null
-  const base = resolve(dirname(fromFile), specifier)
-  for (const candidate of [base, `${base}.ts`, `${base}.tsx`, join(base, 'index.ts'), join(base, 'index.tsx')]) {
-    const consumer = consumerByPath.get(posix(candidate))
-    if (consumer) return consumer
+/** The parameter a declaration belongs to, or null if it is not in a parameter list. */
+function parameterOf(declaration: ts.Node): ts.ParameterDeclaration | null {
+  let current: ts.Node = declaration
+  while (ts.isBindingElement(current) || ts.isObjectBindingPattern(current) || ts.isArrayBindingPattern(current)) {
+    current = current.parent
+  }
+  return ts.isParameter(current) ? current : null
+}
+
+type Signature = ts.FunctionDeclaration | ts.ArrowFunction | ts.FunctionExpression | ts.MethodDeclaration | ts.ConstructorDeclaration
+
+function enclosingSignature(node: ts.Node): Signature | null {
+  let current: ts.Node | undefined = node
+  while (current) {
+    if (
+      ts.isFunctionDeclaration(current) ||
+      ts.isArrowFunction(current) ||
+      ts.isFunctionExpression(current) ||
+      ts.isMethodDeclaration(current) ||
+      ts.isConstructorDeclaration(current)
+    ) {
+      return current
+    }
+    current = current.parent
   }
   return null
 }
 
+/** The name a host would import this consumer by. Null means "fail closed". */
+function consumerNameOf(signature: Signature): string | null {
+  if (ts.isConstructorDeclaration(signature)) return signature.parent.name?.text ?? null
+  if (ts.isFunctionDeclaration(signature)) return signature.name?.text ?? null
+  if (ts.isMethodDeclaration(signature)) {
+    const owner = ts.isClassDeclaration(signature.parent) ? signature.parent.name?.text : undefined
+    return owner && ts.isIdentifier(signature.name) ? `${owner}.${signature.name.text}` : null
+  }
+  // An arrow or function expression is named by whatever holds it, including through
+  // a wrapper call such as memo() or forwardRef().
+  let node: ts.Node = signature
+  while (node.parent && !ts.isVariableDeclaration(node.parent) && ts.isCallExpression(node.parent)) node = node.parent
+  const holder = node.parent
+  if (holder && ts.isVariableDeclaration(holder) && ts.isIdentifier(holder.name)) return holder.name.text
+  return null
+}
+
+const portsRoots: PortsRoot[] = []
+
+for (const fileName of productionFiles) {
+  const source = program.getSourceFile(fileName)
+  if (!source) continue
+  const visit = (node: ts.Node) => {
+    if (ts.isParameter(node) || ts.isBindingElement(node)) {
+      const contract = narrowContractOf(checker.getTypeAtLocation(node))
+      if (contract && parameterOf(node)) {
+        const signature = enclosingSignature(node)
+        const exportName = signature ? consumerNameOf(signature) : null
+        if (!exportName) {
+          unmodelled.push(`${at(node)} — a ${contract} parameter belongs to a callable this sweep cannot name`)
+        } else {
+          portsRoots.push({ declaration: node, consumer: { module: underSource(fileName), exportName, contract } })
+        }
+      }
+    }
+    ts.forEachChild(node, visit)
+  }
+  visit(source)
+}
+
+const consumerReport = [
+  ...new Set(portsRoots.map((root) => `${root.consumer.module} | ${root.consumer.exportName} | ${root.consumer.contract}`)),
+].sort()
+
+const CONSUMERS: readonly Consumer[] = [
+  ...new Map(portsRoots.map((root) => [`${root.consumer.module}|${root.consumer.exportName}`, root.consumer])).values(),
+]
+
 /**
- * Forms this sweep does not model. Anything landing here fails the guard with a
- * file and line rather than being waved through — an unmodelled edge is the one
- * thing a census cannot survive silently.
+ * The reviewed consumers. Like REVIEWED_CENSUS this is a record of what a human has
+ * read, never an input: every sweep below runs off the discovered set above, so
+ * deleting a line here cannot shrink what is checked — it can only fail this file.
  */
-const unmodelled: string[] = []
+const REVIEWED_CONSUMERS = [
+  'components/hub/StudyParentPanel.tsx | StudyParentPanel | StudyParentControlPorts',
+  'components/study/StudyDashboard.tsx | StudyDashboard | StudyDashboardPorts',
+  'components/study/StudySettings.tsx | StudySettings | StudySettingsPorts',
+  'study/parentController.ts | StudyParentController | StudyParentControlPorts',
+]
+
+// ── every reference to a discovered consumer ──────────────────────────────────
+// The census is blind in one direction: it finds expressions the checker already
+// types as a narrow contract. If a consumer is rendered in a form that hides its
+// ports expression — spread props, a namespace import, a computed module specifier
+// — there is no expression to type, and silence would read as safety. So the
+// discovered consumers are also swept from the other end: every reference to them
+// is found from their module path and must land on a census entry.
+
+const consumersByPath = new Map<string, Consumer[]>()
+for (const consumer of CONSUMERS) {
+  const path = posix(join(sourceRoot, consumer.module))
+  consumersByPath.set(path, [...(consumersByPath.get(path) ?? []), consumer])
+}
+
+function consumersFor(fromFile: string, specifier: string): readonly Consumer[] {
+  if (!specifier.startsWith('.')) return []
+  const base = resolve(dirname(fromFile), specifier)
+  for (const candidate of [base, `${base}.ts`, `${base}.tsx`, join(base, 'index.ts'), join(base, 'index.tsx')]) {
+    const found = consumersByPath.get(posix(candidate))
+    if (found) return found
+  }
+  return []
+}
+
 const bindings: { consumer: Consumer; name: ts.Identifier }[] = []
 
 function collectStaticBinding(declaration: ts.ImportDeclaration, consumer: Consumer) {
@@ -245,11 +366,11 @@ for (const fileName of productionFiles) {
   if (!source) continue
   const visit = (node: ts.Node) => {
     if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)) {
-      const consumer = consumerFor(fileName, node.moduleSpecifier.text)
-      if (consumer) collectStaticBinding(node, consumer)
+      for (const consumer of consumersFor(fileName, node.moduleSpecifier.text)) collectStaticBinding(node, consumer)
     } else if (ts.isExportDeclaration(node) && node.moduleSpecifier && ts.isStringLiteral(node.moduleSpecifier)) {
-      const consumer = consumerFor(fileName, node.moduleSpecifier.text)
-      if (consumer) unmodelled.push(`${at(node)} — re-export of the ${consumer.exportName} module opens a second import path`)
+      for (const consumer of consumersFor(fileName, node.moduleSpecifier.text)) {
+        unmodelled.push(`${at(node)} — re-export of the ${consumer.exportName} module opens a second import path`)
+      }
     } else if (ts.isCallExpression(node)) {
       const specifier = node.arguments[0]
       const isDynamicImport = node.expression.kind === ts.SyntaxKind.ImportKeyword
@@ -257,9 +378,10 @@ for (const fileName of productionFiles) {
       if (isDynamicImport && (!specifier || !ts.isStringLiteral(specifier))) {
         unmodelled.push(`${at(node)} — dynamic import with a computed specifier could reach any module`)
       } else if ((isDynamicImport || isRequire) && specifier && ts.isStringLiteral(specifier)) {
-        const consumer = consumerFor(fileName, specifier.text)
-        if (consumer && isRequire) unmodelled.push(`${at(node)} — require() of the ${consumer.exportName} module`)
-        else if (consumer) collectDynamicBinding(node, consumer)
+        for (const consumer of consumersFor(fileName, specifier.text)) {
+          if (isRequire) unmodelled.push(`${at(node)} — require() of the ${consumer.exportName} module`)
+          else collectDynamicBinding(node, consumer)
+        }
       }
     }
     ts.forEachChild(node, visit)
@@ -331,68 +453,204 @@ for (const binding of bindings) {
 
 // ── assertions at the injection sites ─────────────────────────────────────────
 // The whole subtree, not the top-level node, so `{ ...ports } as any` and
-// `(identity(ports) as Bundle)` expose their assertion. The boundary is the
-// expression: a cast laundered through a helper defined elsewhere is out of reach
-// of this file, and no data-flow analysis here pretends otherwise.
+// `(identity(ports) as Bundle)` expose their assertion. When the site is a bare
+// identifier the alias it names is followed to its initializer in the same file,
+// so `const p = bundle as any` one line above the render is not a way round this.
 
-const assertionsAtInjectionSites = census.flatMap((site) => {
+function assertionsWithin(expression: ts.Expression, describe: (node: TypeErasure) => string): readonly string[] {
   const found: string[] = []
-  const visit = (node: ts.Node) => {
-    if (isTypeErasure(node)) found.push(`${at(node)} — ${site.contract} injection asserts to \`${textOf(node.type)}\``)
-    ts.forEachChild(node, visit)
+  const seen = new Set<ts.Node>()
+  const walk = (root: ts.Node) => {
+    if (seen.has(root)) return
+    seen.add(root)
+    const visit = (node: ts.Node) => {
+      if (isTypeErasure(node)) found.push(describe(node))
+      // A bare alias: follow it to the initializer it was declared with. Bounded to
+      // same-file variable declarations, which is the alias form F1 exploited.
+      if (ts.isIdentifier(node)) {
+        for (const declaration of checker.getSymbolAtLocation(node)?.declarations ?? []) {
+          if (ts.isVariableDeclaration(declaration) && declaration.initializer) walk(declaration.initializer)
+        }
+      }
+      ts.forEachChild(node, visit)
+    }
+    visit(root)
   }
-  visit(site.expression)
+  walk(expression)
   return found
-})
+}
+
+const assertionsAtInjectionSites = census.flatMap((site) =>
+  assertionsWithin(site.expression, (node) => `${at(node)} — ${site.contract} injection asserts to \`${textOf(node.type)}\``),
+)
 
 // ── assertions inside the consumer bodies ─────────────────────────────────────
-// A consumer can also widen its own parameter after receiving it. Only assertions
-// whose expression walks back to the ports parameter are rejected; the file stays
-// free to assert about anything else.
+// A consumer can also widen its own parameter after receiving it. The alias tracker
+// below starts at the discovered ports parameter and follows ordinary local
+// bindings — `const a = ports`, `const { calendar } = ports`, `const { ...rest } =
+// ports`, `const a = { ...ports }`, and aliases of those — to a fixed point, by
+// symbol identity, so a binding in a different function is a different symbol and
+// is never confused with the parameter.
+//
+// REASSIGNMENT (option A, conservative). A binding tainted once stays tainted for
+// the rest of the file. `let p = ports; p = somethingElse; (p as any)` is therefore
+// still reported. Deciding otherwise would need flow-sensitive reasoning whose
+// failure mode is silence, and silence is the one answer this file must not give.
+//
+// The boundary stops at calls. A value passed to a helper declared elsewhere and
+// asserted there is not seen, and the fixture below pins that as a known survivor.
 
-const portsParameters = new Set<ts.Declaration>()
-for (const consumer of CONSUMERS) {
-  const source = program.getSourceFile(join(sourceRoot, consumer.module))
-  if (!source) throw new Error(`the ${consumer.exportName} module is not in the program`)
-  const visit = (node: ts.Node) => {
-    if ((ts.isParameter(node) || ts.isBindingElement(node)) && narrowContractOf(checker.getTypeAtLocation(node))) {
-      portsParameters.add(node)
-    }
-    ts.forEachChild(node, visit)
-  }
-  visit(source)
+interface BodyFinding {
+  readonly line: number
+  readonly message: string
 }
 
-function derivesFromPorts(expression: ts.Expression): boolean {
-  let node: ts.Node = expression
-  for (;;) {
-    const symbol = checker.getSymbolAtLocation(node)
-    if (symbol?.declarations?.some((declaration) => portsParameters.has(declaration))) return true
-    if (
-      ts.isParenthesizedExpression(node) ||
-      ts.isNonNullExpression(node) ||
-      ts.isPropertyAccessExpression(node) ||
-      ts.isElementAccessExpression(node) ||
-      isTypeErasure(node)
-    ) {
-      node = node.expression
-    } else return false
+function assertionsOverPorts(target: ts.Program, files: readonly string[]): readonly BodyFinding[] {
+  const { checker: targetChecker, narrowContractOf: narrowOf } = contractsOf(target)
+  const sources = files.map((file) => target.getSourceFile(file)).filter((source): source is ts.SourceFile => Boolean(source))
+
+  const tainted = new Set<ts.Declaration>()
+  for (const source of sources) {
+    const visit = (node: ts.Node) => {
+      if ((ts.isParameter(node) || ts.isBindingElement(node)) && narrowOf(targetChecker.getTypeAtLocation(node)) && parameterOf(node)) {
+        tainted.add(node)
+      }
+      ts.forEachChild(node, visit)
+    }
+    visit(source)
   }
+
+  // `this.ports` on a parameter property resolves through the property name, so ask
+  // for the symbol there rather than at the access expression.
+  const symbolAt = (node: ts.Node) =>
+    ts.isPropertyAccessExpression(node) ? targetChecker.getSymbolAtLocation(node.name) : targetChecker.getSymbolAtLocation(node)
+
+  const isTainted = (node: ts.Node) =>
+    Boolean(symbolAt(node)?.declarations?.some((declaration) => tainted.has(declaration)))
+
+  function derivesFromPorts(expression: ts.Expression): boolean {
+    let node: ts.Node = expression
+    for (;;) {
+      if (isTainted(node)) return true
+      if (ts.isObjectLiteralExpression(node)) {
+        return node.properties.some((property) => ts.isSpreadAssignment(property) && derivesFromPorts(property.expression))
+      }
+      if (
+        ts.isParenthesizedExpression(node) ||
+        ts.isNonNullExpression(node) ||
+        ts.isPropertyAccessExpression(node) ||
+        ts.isElementAccessExpression(node) ||
+        isTypeErasure(node)
+      ) {
+        node = node.expression
+      } else return false
+    }
+  }
+
+  /** Taints every name a binding pattern introduces, at the declaration each one owns. */
+  function taintBinding(name: ts.BindingName, owner: ts.Declaration): boolean {
+    if (ts.isIdentifier(name)) {
+      if (tainted.has(owner)) return false
+      tainted.add(owner)
+      return true
+    }
+    let grew = false
+    for (const element of name.elements) {
+      if (ts.isOmittedExpression(element)) continue
+      grew = taintBinding(element.name, element) || grew
+    }
+    return grew
+  }
+
+  for (let growing = true; growing; ) {
+    growing = false
+    for (const source of sources) {
+      const visit = (node: ts.Node) => {
+        if (ts.isVariableDeclaration(node) && node.initializer && derivesFromPorts(node.initializer)) {
+          growing = taintBinding(node.name, node) || growing
+        } else if (
+          ts.isBinaryExpression(node) &&
+          node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+          derivesFromPorts(node.right)
+        ) {
+          for (const declaration of symbolAt(node.left)?.declarations ?? []) {
+            if (!tainted.has(declaration)) {
+              tainted.add(declaration)
+              growing = true
+            }
+          }
+        }
+        ts.forEachChild(node, visit)
+      }
+      visit(source)
+    }
+  }
+
+  const findings: BodyFinding[] = []
+  for (const source of sources) {
+    const visit = (node: ts.Node) => {
+      if (isTypeErasure(node) && derivesFromPorts(node.expression)) {
+        findings.push({
+          line: source.getLineAndCharacterOfPosition(node.getStart(source)).line + 1,
+          message: `${at(node)} — the ports handed to ${underSource(source.fileName)} are asserted to \`${textOf(node.type)}\``,
+        })
+      }
+      ts.forEachChild(node, visit)
+    }
+    visit(source)
+  }
+  return findings
 }
 
-const consumerBodyEscapes = CONSUMERS.flatMap((consumer) => {
-  const source = program.getSourceFile(join(sourceRoot, consumer.module))
-  if (!source) return []
-  const found: string[] = []
-  const visit = (node: ts.Node) => {
-    if (isTypeErasure(node) && derivesFromPorts(node.expression)) {
-      found.push(`${at(node)} — ${consumer.exportName} asserts its ports to \`${textOf(node.type)}\``)
-    }
-    ts.forEachChild(node, visit)
-  }
-  visit(source)
-  return found
-})
+const consumerModules = [...new Set(CONSUMERS.map((consumer) => join(sourceRoot, consumer.module)))]
+const consumerBodyEscapes = assertionsOverPorts(program, consumerModules).map((finding) => finding.message)
+
+// ── the alias tracker, proven against a fixture ───────────────────────────────
+// Production consumers contain no aliases today, so nothing above would notice if
+// the tracker stopped working. These cases run through `assertionsOverPorts` — the
+// same function, not a copy — over a synthetic module compiled against the real
+// ports contracts. The last two are the documented boundary: what this file does
+// not claim to catch.
+
+const ALIAS_CASES: readonly { readonly id: string; readonly body: string; readonly escapes: boolean }[] = [
+  { id: 'direct alias', body: 'const a = ports; void (a as any).adultPrivate', escapes: true },
+  { id: 'alias of alias', body: 'const a = ports; const b = a; void (b as any).outbox', escapes: true },
+  { id: 'property alias', body: 'const a = ports.calendar; void (a as any).start', escapes: true },
+  { id: 'named destructuring', body: 'const { calendar } = ports; void (calendar as any).resume', escapes: true },
+  { id: 'rest destructuring', body: 'const { ...rest } = ports; void (rest as any).adultPrivate', escapes: true },
+  { id: 'object spread', body: 'const a = { ...ports }; void (a as any).safety', escapes: true },
+  { id: 'let binding', body: 'let a = ports; void (a as any).safety', escapes: true },
+  { id: 'angle-bracket assertion', body: 'const a = ports; void (<any>a).safety', escapes: true },
+  { id: 'double assertion', body: 'const a = ports; void (a as unknown as StudyPortBundle).safety', escapes: true },
+  { id: 'assignment after declaration', body: 'let a: unknown; a = ports; void (a as any)', escapes: true },
+  { id: 'still tainted after reassignment', body: 'let a: unknown = ports; a = spare; void (a as any)', escapes: true },
+  { id: 'unrelated local', body: 'const other = { safety: spare }; void (other as any).safety; void ports.outbox', escapes: false },
+  { id: 'helper laundering — outside the boundary', body: 'const launder = (x: unknown) => x as any; void launder(ports)', escapes: false },
+]
+
+const FIXTURE_PATH = posix(join(sourceRoot, 'study', 'portsAliasFixture.generated.ts'))
+const FIXTURE_HEADER = `import type { StudyParentControlPorts, StudyPortBundle } from './ports'`
+const fixtureText = [
+  FIXTURE_HEADER,
+  ...ALIAS_CASES.map(
+    (aliasCase, index) => `export function case${index}(ports: StudyParentControlPorts, spare: unknown) { ${aliasCase.body} }`,
+  ),
+  '',
+].join('\n')
+
+function fixtureProgram(): ts.Program {
+  const host = ts.createCompilerHost(parsedConfig.options, true)
+  const getSourceFile = host.getSourceFile.bind(host)
+  const fileExists = host.fileExists.bind(host)
+  const readFile = host.readFile.bind(host)
+  host.getSourceFile = (fileName, ...rest) =>
+    posix(fileName) === FIXTURE_PATH
+      ? ts.createSourceFile(fileName, fixtureText, ts.ScriptTarget.ES2022, true, ts.ScriptKind.TS)
+      : getSourceFile(fileName, ...rest)
+  host.fileExists = (fileName) => posix(fileName) === FIXTURE_PATH || fileExists(fileName)
+  host.readFile = (fileName) => (posix(fileName) === FIXTURE_PATH ? fixtureText : readFile(fileName))
+  return ts.createProgram([FIXTURE_PATH], { ...parsedConfig.options, noEmit: true }, host)
+}
 
 /**
  * FULL_BUNDLE_STILL_UNSUPPORTED.
@@ -425,10 +683,15 @@ describe('narrow Study consumer contracts survive an AST census of their injecti
     // Anti-vacuity: every assertion below is over `productionFiles`, so a
     // misresolved tsconfig would make all of them pass by finding nothing.
     expect(productionFiles.length).toBeGreaterThan(100)
+    expect(census.length).toBeGreaterThan(0)
+    expect(portsRoots.length).toBeGreaterThan(0)
     for (const consumer of CONSUMERS) {
       expect(productionFiles.map(posix)).toContain(posix(join(sourceRoot, consumer.module)))
     }
-    expect(census.length).toBeGreaterThan(0)
+  })
+
+  it('discovers its consumers from typed use, and reports exactly the reviewed set', () => {
+    expect(consumerReport).toEqual(REVIEWED_CONSUMERS)
   })
 
   it('models every reference to a narrow Study consumer', () => {
@@ -449,6 +712,21 @@ describe('narrow Study consumer contracts survive an AST census of their injecti
 
   it('lets no consumer assert its way past the ports it was handed', () => {
     expect(consumerBodyEscapes).toEqual([])
+  })
+
+  it('follows same-function aliases of the ports parameter, and says where it stops', () => {
+    const fixture = fixtureProgram()
+    const source = fixture.getSourceFile(FIXTURE_PATH)
+    if (!source) throw new Error('the alias fixture is not in its own program')
+    // The line arithmetic below only holds if the fixture parsed as one statement
+    // per case, so both are checked before any verdict is read from it.
+    expect(fixture.getSyntacticDiagnostics(source).map((diagnostic) => diagnostic.messageText)).toEqual([])
+    expect(source.statements.length).toBe(ALIAS_CASES.length + 1)
+
+    const reported = new Set(assertionsOverPorts(fixture, [FIXTURE_PATH]).map((finding) => finding.line))
+    // Each case occupies one line, the header being line 1.
+    const verdicts = ALIAS_CASES.map((aliasCase, index) => `${aliasCase.id}: ${reported.has(index + 2) ? 'caught' : 'free'}`)
+    expect(verdicts).toEqual(ALIAS_CASES.map((aliasCase) => `${aliasCase.id}: ${aliasCase.escapes ? 'caught' : 'free'}`))
   })
 
   it('binds each consumer ports parameter to its own narrow contract', () => {
