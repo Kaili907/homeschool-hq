@@ -61,7 +61,7 @@
 .admin-section-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: .95rem; }
 .admin-section-heading p { margin: 0 0 .2rem; color: var(--admin-green); font-size: .62rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .admin-section-heading h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.16rem; font-weight: 500; letter-spacing: -.01em; }
-.admin-status-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--admin-line); }
+.admin-status-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--admin-line); }
 .admin-status-grid > div { padding: .9rem .85rem .2rem 0; }
 .admin-status-grid > div + div { padding-left: .85rem; border-left: 1px solid var(--admin-line); }
 .admin-status-grid dt, .admin-compact-metrics dt { color: var(--admin-muted); font-size: .68rem; }
