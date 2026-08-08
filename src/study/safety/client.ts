@@ -193,13 +193,20 @@ export async function classifyStudySafetyWithCaptureStatus(
       if (response.status === 429) {
         return { response: failClosed('client-rate-limited'), serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'rate-limit' }
       }
-      // STUDY-A1-AUTH-INFRA-BOUNDARY-C — 424 Failed Dependency, which this
-      // gateway emits for exactly one state: its learner-authorization verifier
-      // was unreachable. The verifier runs strictly before the classifier, so
-      // the learner's text was never read, let alone judged. It carries no
-      // `failureMode`, which is the local safety ledger's vocabulary, so a
-      // caller writing on `failureMode` alone still cannot make a durable safety
-      // record out of it.
+      // STUDY-A1-AUTH-INFRA-BOUNDARY-C — 424 Failed Dependency, the gateway's
+      // `authorization-infrastructure` category: an authorization dependency of
+      // this request could not answer at all. It is one semantic category and
+      // deliberately not one producer — it may come from any of the request's
+      // authorization-verification dependencies, and STUDY-A1-AUTH-INFRA-
+      // BOUNDARY-H2 added the adult bearer verifier's outage states to the
+      // learner/session verifier that first raised it. Which dependency it was
+      // is a server detail this client must not have to care about; the exact
+      // set is a server contract, enumerated and pinned there.
+      //
+      // Every one of them runs strictly before the classifier, so the learner's
+      // text was never read, let alone judged. None carries a `failureMode`,
+      // which is the local safety ledger's vocabulary, so a caller writing on
+      // `failureMode` alone still cannot make a durable safety record out of it.
       //
       // Only the status decides this. The body is never read or parsed here, so
       // a gateway — or anything that can answer as one — cannot talk its way

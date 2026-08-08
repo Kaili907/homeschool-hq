@@ -7,10 +7,6 @@
     "skipLibCheck": true,
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
-    // The Study boundary tests drive the real Netlify gateway handlers, which
-    // are plain ESM JavaScript. `checkJs` stays off, so their authoring style is
-    // never typechecked; this only lets a TypeScript test import them.
-    "allowJs": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "strict": true,
