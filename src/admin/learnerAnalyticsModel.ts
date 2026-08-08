@@ -1,0 +1,594 @@
+import { getStat, statusOf } from '../appState'
+import { courseProgress, masteryOf } from '../academy/academyState'
+import { ACADEMY_SUBJECT_LABELS, type AcademyCatalog } from '../academy/contentTypes'
+import { workingLevelFor } from '../academy/workingLevel'
+import { getState as getAssessmentState } from '../assessment/attempts'
+import { TEST_BY_ID } from '../assessment/banks'
+import { getAttendance, hasAttendance, yearToDateTotals } from '../attendance/attendance'
+import { isDayComplete } from '../missions'
+import { SKILL_BY_ID, skillsForGrade, type SkillId } from '../skills'
+import type {
+  StudyCalendarEntry,
+  StudyParentSettings,
+  StudyReviewRecommendation,
+} from '../study/types'
+import {
+  ACADEMY_SUBJECTS,
+  type AcademySubject,
+  type Grade,
+  type ISODate,
+  type Profile,
+} from '../types'
+
+export const LEARNERS_READ_CAPABILITY = 'learners:read' as const
+
+export type LearnerEvidenceUnavailableReason =
+  | 'not-recorded'
+  | 'catalog-not-integrated'
+  | 'study-not-integrated'
+  | 'future-integration'
+
+export type LearnerEvidenceValue<T> =
+  | { readonly status: 'available'; readonly value: T }
+  | { readonly status: 'unavailable'; readonly reason: LearnerEvidenceUnavailableReason }
+
+export interface StudyLearnerEvidence {
+  readonly calendar: readonly StudyCalendarEntry[]
+  readonly reviews: readonly StudyReviewRecommendation[]
+  readonly settings: StudyParentSettings | null
+}
+
+export type StudyLearnerEvidenceState =
+  | { readonly status: 'available'; readonly evidence: StudyLearnerEvidence }
+  | { readonly status: 'unavailable' }
+
+export interface WorkingLevelEvidence {
+  readonly subject: AcademySubject
+  readonly subjectLabel: string
+  readonly level: Grade
+  readonly source: 'explicit' | 'nominal-grade'
+}
+
+export interface CompletionEvidence {
+  readonly completed: number
+  readonly total: number
+  readonly percent: number
+  readonly complete: boolean
+}
+
+export interface MasterySummary {
+  readonly mastered: number
+  readonly developing: number
+  readonly notStarted: number
+  readonly total: number
+}
+
+export interface StudySummary {
+  readonly scheduled: number
+  readonly completed: number
+  readonly resumeNeeded: number
+  readonly active: number
+  readonly pendingReviews: number
+}
+
+export interface LearnerListItem {
+  readonly learnerRef: string
+  readonly displayName: string
+  readonly nominalGrade: Grade
+  readonly workingLevels: readonly WorkingLevelEvidence[]
+  readonly todayCompletion: LearnerEvidenceValue<CompletionEvidence>
+  readonly attendance: {
+    readonly recordedToday: boolean
+    readonly instructionalDaysYtd: number
+    readonly instructionalHoursYtd: number
+  }
+  readonly mastery: LearnerEvidenceValue<MasterySummary>
+  readonly study: LearnerEvidenceValue<StudySummary>
+  readonly openReviewCount: number
+  readonly needsDadCount: number
+}
+
+export interface CourseEvidence {
+  readonly courseRef: string
+  readonly title: string
+  readonly subject: string
+  readonly workingLevel: Grade | null
+  readonly completed: number
+  readonly total: number
+  readonly mastered: number | null
+  readonly reteach: number | null
+  readonly source: 'academy' | 'manual-course'
+}
+
+export interface MathMasteryEvidence {
+  readonly skillRef: SkillId
+  readonly skillName: string
+  readonly attempts: number
+  readonly correct: number
+  readonly mastery: number
+  readonly status: 'mastered' | 'developing' | 'not-started'
+  readonly lastSeen: ISODate | null
+}
+
+export interface AssessmentEvidence {
+  readonly assessmentRef: string
+  readonly title: string
+  readonly source: 'fixed-assessment' | 'academy'
+  readonly status: 'assigned' | 'in-progress' | 'completed' | 'not-started'
+  readonly attemptCount: number
+  readonly score: { readonly correct: number; readonly of: number } | null
+  readonly masteryOutcome: 'secure' | 'developing' | 'not-yet' | null
+  readonly percent: number | null
+  readonly requiresAdultScoring: boolean
+  readonly retakeStatus: 'ready' | 'locked' | 'not-applicable' | 'unavailable'
+}
+
+export interface RecentLearningEvidence {
+  readonly at: string
+  readonly kind: 'academy-lesson' | 'assessment' | 'mission-day' | 'reading' | 'typing' | 'mastery-snapshot' | 'study'
+  readonly title: string
+  readonly summary: string
+}
+
+export interface NeedsDadEvidence {
+  readonly skillRef: SkillId
+  readonly skillName: string
+  readonly since: ISODate
+  readonly supportSignal: 'repeated-walkthroughs' | 'tutor-review'
+}
+
+export interface ReviewEvidence {
+  readonly reviewRef: string
+  readonly dueDate: string
+  readonly status: StudyReviewRecommendation['status']
+  readonly reasonCodes: readonly string[]
+}
+
+export interface LearnerDetail {
+  readonly learnerRef: string
+  readonly displayName: string
+  readonly nominalGrade: Grade
+  readonly workingLevels: readonly WorkingLevelEvidence[]
+  readonly courses: LearnerEvidenceValue<readonly CourseEvidence[]>
+  readonly mathMastery: readonly MathMasteryEvidence[]
+  readonly manualMasterySnapshots: readonly {
+    at: string
+    subject: string
+    level: number
+  }[]
+  readonly recentEvidence: readonly RecentLearningEvidence[]
+  readonly assessments: readonly AssessmentEvidence[]
+  readonly study: LearnerEvidenceValue<{
+    readonly summary: StudySummary
+    readonly calendar: readonly Pick<StudyCalendarEntry, 'blockRef' | 'title' | 'subject' | 'intendedLocalDate' | 'state' | 'requiredWorkCompletionPercent' | 'estimatedRemainingMinutes'>[]
+    readonly workBlock: {
+      readonly maximumWorkMinutes: number
+      readonly breakMinutes: number
+      readonly timerHidden: boolean
+      readonly accommodations: number
+    } | null
+  }>
+  readonly attendance: {
+    readonly instructionalDaysYtd: number
+    readonly instructionalHoursYtd: number
+    readonly recordedToday: boolean
+    readonly recentDays: readonly { readonly date: ISODate; readonly hours: number }[]
+  }
+  readonly interventions: {
+    readonly needsDad: readonly NeedsDadEvidence[]
+    readonly adultReviews: readonly ReviewEvidence[]
+    readonly localAdultReviewRequests: number
+    readonly academyReteachCount: number
+  }
+  readonly futureIntegrations: {
+    readonly operationalTelemetry: LearnerEvidenceValue<never>
+    readonly aiCost: LearnerEvidenceValue<never>
+  }
+}
+
+export interface LearnerAnalyticsSnapshot {
+  readonly observedAt: string
+  readonly learners: readonly LearnerListItem[]
+  readonly details: Readonly<Record<string, LearnerDetail>>
+}
+
+export interface BuildLearnerAnalyticsInput {
+  readonly profiles: readonly Profile[]
+  readonly today: ISODate
+  readonly observedAt: string
+  readonly academyCatalogs?: readonly AcademyCatalog[]
+  readonly studyByProfile?: Readonly<Record<string, StudyLearnerEvidenceState>>
+}
+
+interface CatalogIndex {
+  readonly courseById: ReadonlyMap<string, AcademyCatalog['courses'][number]>
+  readonly gradeByCourseId: ReadonlyMap<string, AcademyCatalog['grade']>
+  readonly lessonLabelById: ReadonlyMap<string, string>
+  readonly assessmentLabelById: ReadonlyMap<string, string>
+}
+
+function indexCatalogs(catalogs: readonly AcademyCatalog[]): CatalogIndex {
+  const courseById = new Map<string, AcademyCatalog['courses'][number]>()
+  const gradeByCourseId = new Map<string, AcademyCatalog['grade']>()
+  const lessonLabelById = new Map<string, string>()
+  const assessmentLabelById = new Map<string, string>()
+  for (const catalog of catalogs) {
+    for (const course of catalog.courses) {
+      courseById.set(course.courseId, course)
+      gradeByCourseId.set(course.courseId, catalog.grade)
+      const subject = ACADEMY_SUBJECT_LABELS[course.subject] ?? course.subject
+      for (const unit of course.units) {
+        for (const lessonId of unit.lessonIds) {
+          lessonLabelById.set(lessonId, `${subject}: ${unit.title}`)
+        }
+        if (unit.hasAssessment) {
+          const assessmentId = `${course.courseId}-u${String(unit.unitNumber).padStart(2, '0')}-assessment`
+          assessmentLabelById.set(assessmentId, `${subject}: ${unit.title}`)
+        }
+      }
+    }
+  }
+  return { courseById, gradeByCourseId, lessonLabelById, assessmentLabelById }
+}
+
+function workingLevels(profile: Profile): WorkingLevelEvidence[] {
+  return ACADEMY_SUBJECTS.map((subject) => ({
+    subject,
+    subjectLabel: ACADEMY_SUBJECT_LABELS[subject] ?? subject,
+    level: workingLevelFor(profile, subject),
+    source: profile.workingLevels?.[subject] === undefined ? 'nominal-grade' : 'explicit',
+  }))
+}
+
+function todayCompletion(profile: Profile, today: ISODate): LearnerEvidenceValue<CompletionEvidence> {
+  const day = profile.missions[today]
+  if (!day) return { status: 'unavailable', reason: 'not-recorded' }
+  const completed = day.items.filter((item) => item.done).length
+  const total = day.items.length
+  return {
+    status: 'available',
+    value: {
+      completed,
+      total,
+      percent: total === 0 ? 0 : Math.round((completed / total) * 100),
+      complete: isDayComplete(day),
+    },
+  }
+}
+
+function masterySummary(profile: Profile, index: CatalogIndex): LearnerEvidenceValue<MasterySummary> {
+  const mathSkills = skillsForGrade(profile.grade)
+  const states = mathSkills.map((skill) => statusOf(profile.skills[skill.id]))
+  const academyLessonIds = (profile.academy?.courseIds ?? []).flatMap((courseId) =>
+    index.courseById.get(courseId)?.units.flatMap((unit) => unit.lessonIds) ?? [],
+  )
+  const academyStates = academyLessonIds.map((lessonId) => masteryOf(profile.academy?.lessons[lessonId]))
+  if (states.length === 0 && academyStates.length === 0) {
+    return { status: 'unavailable', reason: 'catalog-not-integrated' }
+  }
+  const all = [...states, ...academyStates]
+  return {
+    status: 'available',
+    value: {
+      mastered: all.filter((state) => state === 'mastered').length,
+      developing: all.filter((state) => state === 'developing').length,
+      notStarted: all.filter((state) => state === 'not-started').length,
+      total: all.length,
+    },
+  }
+}
+
+function studySummary(evidence: StudyLearnerEvidence): StudySummary {
+  return {
+    scheduled: evidence.calendar.filter((entry) => entry.state === 'scheduled').length,
+    completed: evidence.calendar.filter((entry) => entry.state === 'completed').length,
+    resumeNeeded: evidence.calendar.filter((entry) => entry.state === 'paused').length,
+    active: evidence.calendar.filter((entry) => entry.state === 'active').length,
+    pendingReviews: evidence.reviews.filter((review) => review.status === 'pending-parent').length,
+  }
+}
+
+function coursesFor(profile: Profile, catalogs: readonly AcademyCatalog[], index: CatalogIndex): LearnerEvidenceValue<readonly CourseEvidence[]> {
+  const courses: CourseEvidence[] = (profile.courses ?? []).map((course) => ({
+    courseRef: course.id,
+    title: course.name,
+    subject: course.name,
+    workingLevel: null,
+    completed: course.units.filter((unit) => unit.done).length,
+    total: course.units.length,
+    mastered: null,
+    reteach: null,
+    source: 'manual-course',
+  }))
+
+  const enrolled = profile.academy?.courseIds ?? []
+  const knownCourses = enrolled.map((courseId) => index.courseById.get(courseId)).filter((course): course is AcademyCatalog['courses'][number] => !!course)
+  if (knownCourses.length > 0) {
+    const catalog: AcademyCatalog = {
+      releaseVersion: profile.academy?.releaseVersion ?? catalogs[0]?.releaseVersion ?? '',
+      grade: index.gradeByCourseId.get(knownCourses[0].courseId) ?? catalogs[0]?.grade ?? '5',
+      courses: knownCourses,
+    }
+    const progress = courseProgress(profile, catalog)
+    for (const course of knownCourses) {
+      const summary = progress.find((item) => item.courseId === course.courseId)!
+      courses.push({
+        courseRef: course.courseId,
+        title: ACADEMY_SUBJECT_LABELS[course.subject] ?? course.subject,
+        subject: course.subject,
+        workingLevel: index.gradeByCourseId.get(course.courseId) ?? workingLevelFor(profile, course.subject as AcademySubject),
+        completed: summary.completed,
+        total: summary.total,
+        mastered: summary.mastered,
+        reteach: summary.reteach,
+        source: 'academy',
+      })
+    }
+  }
+
+  if (enrolled.length > knownCourses.length) {
+    return { status: 'unavailable', reason: 'catalog-not-integrated' }
+  }
+  return { status: 'available', value: courses }
+}
+
+function fixedAssessments(profile: Profile): AssessmentEvidence[] {
+  const state = getAssessmentState(profile.assessments)
+  const ids = new Set([
+    ...state.assigned.map((assignment) => assignment.testId),
+    ...state.attempts.map((attempt) => attempt.testId),
+  ])
+  return [...ids].map((testId) => {
+    const attempts = state.attempts.filter((attempt) => attempt.testId === testId)
+    const completed = attempts.filter((attempt) => !!attempt.finishedAt)
+    const inProgress = attempts.some((attempt) => !attempt.finishedAt)
+    const assigned = state.assigned.some((assignment) => assignment.testId === testId)
+    const latest = completed[completed.length - 1]
+    const score = latest?.autoScore
+    const totals = score
+      ? Object.values(score.bySection).reduce((sum, section) => ({ correct: sum.correct + section.correct, of: sum.of + section.of }), { correct: 0, of: 0 })
+      : null
+    return {
+      assessmentRef: testId,
+      title: TEST_BY_ID[testId]?.title ?? testId,
+      source: 'fixed-assessment' as const,
+      status: completed.length > 0 ? 'completed' as const : inProgress ? 'in-progress' as const : assigned ? 'assigned' as const : 'not-started' as const,
+      attemptCount: attempts.length,
+      score: totals,
+      masteryOutcome: null,
+      percent: totals && totals.of > 0 ? Math.round((totals.correct / totals.of) * 100) : null,
+      requiresAdultScoring: (score?.gradedItems ?? 0) > 0,
+      retakeStatus: completed.length === 0
+        ? 'not-applicable' as const
+        : (state.retakeUnlocked ?? []).includes(testId)
+          ? 'ready' as const
+          : 'locked' as const,
+    }
+  })
+}
+
+function academyAssessments(profile: Profile, index: CatalogIndex): AssessmentEvidence[] {
+  const recorded = profile.academy?.assessments ?? {}
+  const ids = new Set<string>(Object.keys(recorded))
+  for (const courseId of profile.academy?.courseIds ?? []) {
+    const course = index.courseById.get(courseId)
+    for (const unit of course?.units ?? []) {
+      if (unit.hasAssessment) ids.add(`${courseId}-u${String(unit.unitNumber).padStart(2, '0')}-assessment`)
+    }
+  }
+  return [...ids].map((assessmentId) => {
+    const attempts = recorded[assessmentId] ?? []
+    const latest = attempts[attempts.length - 1]
+    return {
+      assessmentRef: assessmentId,
+      title: index.assessmentLabelById.get(assessmentId) ?? assessmentId,
+      source: 'academy' as const,
+      status: latest ? 'completed' as const : 'not-started' as const,
+      attemptCount: attempts.length,
+      score: null,
+      masteryOutcome: latest?.outcome ?? null,
+      percent: latest?.percent ?? null,
+      requiresAdultScoring: false,
+      retakeStatus: 'unavailable' as const,
+    }
+  })
+}
+
+function recentEvidence(profile: Profile, study: StudyLearnerEvidenceState | undefined, index: CatalogIndex): RecentLearningEvidence[] {
+  const evidence: RecentLearningEvidence[] = []
+  for (const [lessonId, lesson] of Object.entries(profile.academy?.lessons ?? {})) {
+    const at = lesson.completedAt ?? lesson.startedAt
+    evidence.push({
+      at,
+      kind: 'academy-lesson',
+      title: index.lessonLabelById.get(lessonId) ?? lessonId,
+      summary: lesson.status === 'complete' ? `Completed · mastery ${masteryOf(lesson)}` : lesson.status === 'reteach' ? 'Reteach needed' : 'In progress',
+    })
+  }
+  for (const attempt of getAssessmentState(profile.assessments).attempts) {
+    evidence.push({
+      at: attempt.finishedAt ?? attempt.startedAt,
+      kind: 'assessment',
+      title: TEST_BY_ID[attempt.testId]?.title ?? attempt.testId,
+      summary: attempt.finishedAt ? 'Completed' : 'In progress',
+    })
+  }
+  for (const [date, mission] of Object.entries(profile.missions)) {
+    if (isDayComplete(mission)) evidence.push({ at: date, kind: 'mission-day', title: 'Mission day', summary: 'Completed' })
+  }
+  for (const reading of profile.reading?.sessions ?? []) {
+    evidence.push({
+      at: reading.date,
+      kind: 'reading',
+      title: 'Reading session',
+      summary: `${reading.mode === 'manual' ? 'Manual' : 'Estimated'} ${reading.wcpm} WCPM`,
+    })
+  }
+  if (profile.typing?.lastPracticedDate) {
+    evidence.push({ at: profile.typing.lastPracticedDate, kind: 'typing', title: 'Typing practice', summary: 'Practice recorded' })
+  }
+  for (const snapshot of profile.masterySnapshots ?? []) {
+    evidence.push({ at: snapshot.at, kind: 'mastery-snapshot', title: snapshot.subject, summary: `Mastery snapshot ${snapshot.level}` })
+  }
+  if (study?.status === 'available') {
+    for (const entry of study.evidence.calendar) {
+      evidence.push({ at: entry.scheduledStart, kind: 'study', title: entry.title, summary: entry.state === 'paused' ? `Resume needed · ${entry.requiredWorkCompletionPercent}% complete` : entry.state })
+    }
+  }
+  return evidence.sort((a, b) => b.at.localeCompare(a.at)).slice(0, 12)
+}
+
+function detailFor(profile: Profile, input: BuildLearnerAnalyticsInput, index: CatalogIndex): LearnerDetail {
+  const attendance = getAttendance(profile)
+  const totals = yearToDateTotals(attendance, input.today)
+  const studyState = input.studyByProfile?.[profile.id]
+  const study = studyState?.status === 'available'
+    ? {
+        status: 'available' as const,
+        value: {
+          summary: studySummary(studyState.evidence),
+          calendar: studyState.evidence.calendar.map((entry) => ({
+            blockRef: entry.blockRef,
+            title: entry.title,
+            subject: entry.subject,
+            intendedLocalDate: entry.intendedLocalDate,
+            state: entry.state,
+            requiredWorkCompletionPercent: entry.requiredWorkCompletionPercent,
+            estimatedRemainingMinutes: entry.estimatedRemainingMinutes,
+          })),
+          workBlock: studyState.evidence.settings ? {
+            maximumWorkMinutes: studyState.evidence.settings.maximumWorkMinutes,
+            breakMinutes: studyState.evidence.settings.breakMinutes,
+            timerHidden: studyState.evidence.settings.timerHidden,
+            accommodations: studyState.evidence.settings.accommodations.length,
+          } : null,
+        },
+      }
+    : { status: 'unavailable' as const, reason: 'study-not-integrated' as const }
+  const needsDad = (Object.entries(profile.tutorFlags ?? {}) as [SkillId, NonNullable<Profile['tutorFlags']>[SkillId]][])
+    .filter((entry): entry is [SkillId, NonNullable<typeof entry[1]>] => !!entry[1])
+    .map(([skillRef, flag]) => ({
+      skillRef,
+      skillName: SKILL_BY_ID[skillRef]?.name ?? skillRef,
+      since: flag.since,
+      supportSignal: flag.sessionCount > 0 || flag.weekCount > 0 ? 'repeated-walkthroughs' as const : 'tutor-review' as const,
+    }))
+  const academyReteachCount = Object.values(profile.academy?.lessons ?? {}).filter((lesson) => lesson.status === 'reteach').length
+  return {
+    learnerRef: profile.id,
+    displayName: profile.name,
+    nominalGrade: profile.grade,
+    workingLevels: workingLevels(profile),
+    courses: coursesFor(profile, input.academyCatalogs ?? [], index),
+    mathMastery: skillsForGrade(profile.grade).map((skill) => {
+      const stat = getStat(profile, skill.id)
+      return {
+        skillRef: skill.id,
+        skillName: skill.name,
+        attempts: stat.attempts,
+        correct: stat.correct,
+        mastery: stat.mastery,
+        status: statusOf(stat),
+        lastSeen: stat.lastSeen ?? null,
+      }
+    }),
+    manualMasterySnapshots: (profile.masterySnapshots ?? []).map(({ at, subject, level }) => ({ at, subject, level })),
+    recentEvidence: recentEvidence(profile, studyState, index),
+    assessments: [...fixedAssessments(profile), ...academyAssessments(profile, index)],
+    study,
+    attendance: {
+      instructionalDaysYtd: totals.days,
+      instructionalHoursYtd: totals.hours,
+      recordedToday: hasAttendance(attendance, input.today),
+      recentDays: [...attendance.log].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10),
+    },
+    interventions: {
+      needsDad,
+      adultReviews: studyState?.status === 'available'
+        ? studyState.evidence.reviews.map((review) => ({ reviewRef: review.recommendationRef, dueDate: review.dueDate, status: review.status, reasonCodes: review.reasonCodes }))
+        : [],
+      localAdultReviewRequests: studyState?.status === 'available' ? (studyState.evidence.settings?.adultReviewRequests.length ?? 0) : 0,
+      academyReteachCount,
+    },
+    futureIntegrations: {
+      operationalTelemetry: { status: 'unavailable', reason: 'future-integration' },
+      aiCost: { status: 'unavailable', reason: 'future-integration' },
+    },
+  }
+}
+
+/**
+ * Privacy-minimized projection from existing trusted learner state. This function
+ * deliberately never reads Profile.mindset journal storage, tutorChats,
+ * assistant.sessions, assessment answers, audio, or free-text flag reasons.
+ */
+export function buildLearnerAnalyticsSnapshot(input: BuildLearnerAnalyticsInput): LearnerAnalyticsSnapshot {
+  const index = indexCatalogs(input.academyCatalogs ?? [])
+  const details = Object.fromEntries(input.profiles.map((profile) => [profile.id, detailFor(profile, input, index)]))
+  const learners = input.profiles.map((profile): LearnerListItem => {
+    const detail = details[profile.id]
+    const studyState = input.studyByProfile?.[profile.id]
+    const study = studyState?.status === 'available'
+      ? { status: 'available' as const, value: studySummary(studyState.evidence) }
+      : { status: 'unavailable' as const, reason: 'study-not-integrated' as const }
+    const attendance = getAttendance(profile)
+    const totals = yearToDateTotals(attendance, input.today)
+    return {
+      learnerRef: profile.id,
+      displayName: profile.name,
+      nominalGrade: profile.grade,
+      workingLevels: detail.workingLevels,
+      todayCompletion: todayCompletion(profile, input.today),
+      attendance: {
+        recordedToday: hasAttendance(attendance, input.today),
+        instructionalDaysYtd: totals.days,
+        instructionalHoursYtd: totals.hours,
+      },
+      mastery: masterySummary(profile, index),
+      study,
+      openReviewCount: detail.interventions.needsDad.length + (study.status === 'available' ? study.value.pendingReviews : 0) + detail.interventions.localAdultReviewRequests,
+      needsDadCount: detail.interventions.needsDad.length,
+    }
+  })
+  return { observedAt: input.observedAt, learners, details }
+}
+
+export type LearnerAnalyticsAuthorization =
+  | { readonly status: 'resolving' }
+  | { readonly status: 'unauthorized'; readonly reasonCode?: string }
+  | {
+      readonly status: 'authorized'
+      readonly capabilities: readonly string[]
+    }
+
+export interface LearnerAnalyticsReadSource {
+  /** Production adapters must enforce authorization again on the server. */
+  read(request: { readonly capability: typeof LEARNERS_READ_CAPABILITY; readonly today: ISODate }): Promise<LearnerAnalyticsSnapshot>
+}
+
+export type LearnerAnalyticsViewState =
+  | { readonly status: 'resolving' }
+  | { readonly status: 'unauthorized'; readonly reasonCode: string }
+  | { readonly status: 'loading' }
+  | { readonly status: 'error'; readonly message: string }
+  | { readonly status: 'ready'; readonly snapshot: LearnerAnalyticsSnapshot }
+
+/** Presentation gate only; canonical ADMIN-1/server enforcement remains required. */
+export async function loadLearnerAnalytics(
+  authorization: LearnerAnalyticsAuthorization,
+  source: LearnerAnalyticsReadSource,
+  today: ISODate,
+): Promise<LearnerAnalyticsViewState> {
+  if (authorization.status === 'resolving') return { status: 'resolving' }
+  if (authorization.status !== 'authorized' || !authorization.capabilities.includes(LEARNERS_READ_CAPABILITY)) {
+    return {
+      status: 'unauthorized',
+      reasonCode: authorization.status === 'unauthorized' ? authorization.reasonCode ?? 'authorization_unavailable' : 'learners_read_required',
+    }
+  }
+  try {
+    return { status: 'ready', snapshot: await source.read({ capability: LEARNERS_READ_CAPABILITY, today }) }
+  } catch {
+    return { status: 'error', message: 'Learner evidence could not be loaded safely.' }
+  }
+}
