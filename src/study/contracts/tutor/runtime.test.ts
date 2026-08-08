@@ -83,6 +83,21 @@ describe('production Tutor runtime contract', () => {
     expect(branchOf({ status: 'quarantined', reasonCode: 'x-quarantine' })).toBe('x-quarantine')
   })
 
+  // STUDY-A1-TUTOR-CONTRACT-H2 Phase 7 — the H2 hardening tightened what may
+  // enter the union's fields. It changed none of the fields. Pinned exactly, so
+  // a later card cannot widen a branch while the H2 tests still pass.
+  it('keeps every branch on exactly the fields it had', () => {
+    expect(STUDY_TUTOR_RESULT_KEYS.accepted).toEqual(['status', 'eventRef', 'visibleText'])
+    expect(STUDY_TUTOR_RESULT_KEYS.stopped).toEqual(['status', 'reasonCode', 'deliveryStatus'])
+    expect(STUDY_TUTOR_RESULT_KEYS.interrupted).toEqual(['status', 'interruption'])
+    expect(STUDY_TUTOR_RESULT_KEYS.quarantined).toEqual(['status', 'reasonCode'])
+    // A stopped result still carries no Tutor-authored learner copy. The host
+    // owns the words a stopped child reads.
+    for (const key of ['studentMessage', 'learnerMessage', 'message', 'visibleText', 'safeMessage']) {
+      expect(STUDY_TUTOR_RESULT_KEYS.stopped).not.toContain(key)
+    }
+  })
+
   it('refuses a fifth catch-all success state at runtime', () => {
     expect(parseStudyTutorResult({ status: 'completed', eventRef: 'event.1' })).toBeNull()
     expect(parseStudyTutorResult({ status: 'ok' })).toBeNull()

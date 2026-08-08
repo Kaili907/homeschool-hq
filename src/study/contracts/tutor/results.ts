@@ -41,6 +41,28 @@ export function isStudyTutorReasonCode(value: unknown): value is string {
     REASON_CODE.test(value)
 }
 
+/**
+ * The upper bound on one turn's learner-facing prose (review finding F3).
+ *
+ * Derived, not invented. The approved Tutor Core event validation already bounds
+ * the learner-facing utterance — `spokenTurn.text` and its `fallbackText` — at
+ * 2500 characters (`validateSpokenTurn` in the tutor-core bridge's
+ * validation.ts), and `visibleText` is exactly that value's role on the host
+ * side: what the surface renders as `currentUtterance` for one turn. The bridge
+ * counts UTF-16 code units, so `.length` here is the same unit and the two
+ * bounds cannot disagree about a given string.
+ *
+ * Below, this field was bounded only from beneath: non-empty, and nothing else.
+ * A Tutor could return two million characters and the host would hold every one
+ * of them in surface state and render them to a ten-year-old.
+ *
+ * Oversized output is REJECTED, never truncated. Truncation would cut a Tutor's
+ * sentence in half in front of a learner, and — worse — would launder an
+ * output the host had already decided it could not vouch for into a shorter one
+ * it then treats as accepted. `null` here lets the host quarantine instead.
+ */
+export const STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH = 2_500
+
 /** Exact per branch. An extra key — including any forbidden one — is a rejection. */
 export const STUDY_TUTOR_RESULT_KEYS = Object.freeze({
   accepted: Object.freeze(['status', 'eventRef', 'visibleText']),
@@ -62,8 +84,19 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
 
+/**
+ * `Reflect.ownKeys`, not `Object.keys`: own keys that are non-enumerable or
+ * symbol-keyed are invisible to `Object.keys`, so a result could carry a
+ * `transcript` or a `bearer` past an exact-key check that never saw it. The
+ * rebuild below means such a field could not have travelled anyway, but a
+ * result carrying one is not a result this contract admits — the shape is
+ * wrong, and a shape this contract cannot vouch for is a rejection.
+ *
+ * It does not read values, so a getter cannot fire here and cannot count a
+ * read against the single-read rule.
+ */
 function hasExactKeys(candidate: Record<string, unknown>, expected: readonly string[]): boolean {
-  const keys = Object.keys(candidate)
+  const keys = Reflect.ownKeys(candidate)
   return keys.length === expected.length && expected.every((key) => Object.hasOwn(candidate, key))
 }
 
@@ -78,7 +111,7 @@ function hasExactKeys(candidate: Record<string, unknown>, expected: readonly str
  */
 function narrowedInterruption(value: unknown): StudyRuntimeInterruption | null {
   if (!isRecord(value)) return null
-  const keys = Object.keys(value)
+  const keys = Reflect.ownKeys(value)
   const kind = value.kind
   if (kind === 'rate-limit') return keys.length === 1 ? Object.freeze({ kind: 'rate-limit' as const }) : null
   if (kind !== 'session-authorization' || keys.length !== 2 || !Object.hasOwn(value, 'reason')) return null
@@ -107,7 +140,11 @@ export function parseStudyTutorResult(value: unknown): StudyTutorResult | null {
       const eventRef = value.eventRef
       const visibleText = value.visibleText
       if (typeof eventRef !== 'string' || !isStudyBridgeOpaqueId(eventRef)) return null
-      if (typeof visibleText !== 'string' || visibleText.trim() === '') return null
+      if (
+        typeof visibleText !== 'string' ||
+        visibleText.trim() === '' ||
+        visibleText.length > STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH
+      ) return null
       return Object.freeze({ status: 'accepted' as const, eventRef, visibleText })
     }
 
@@ -140,4 +177,40 @@ export function parseStudyTutorResult(value: unknown): StudyTutorResult | null {
   } catch {
     return null
   }
+}
+
+/**
+ * The reason code a result that failed the contract carries into quarantine.
+ *
+ * Structural and operator-facing, like every other quarantine code: it says the
+ * Tutor's output could not be vouched for, and says nothing whatever about the
+ * learner.
+ */
+export const STUDY_TUTOR_UNPARSED_RESULT_REASON_CODE = 'tutor-result-failed-contract-parse'
+
+/**
+ * STUDY-A1-TUTOR-CONTRACT-H2 Phase 5 — the whole crossing, in one call.
+ *
+ * Review finding F4: `parseStudyTutorResult` was opt-in. A wrapper could type
+ * its own return as `StudyTutorResult` and hand the host an unvalidated object,
+ * and nothing in the contract would have been violated on the way.
+ *
+ * This is the same validation with the fail-closed branch already chosen, so
+ * the correct thing is also the short thing: a wrapper's `submit` can
+ * `return acceptStudyTutorResult(raw)` and is then, by construction, incapable
+ * of returning an unparsed result. Choosing `parseStudyTutorResult` and handling
+ * `null` yourself remains available and is equally correct — what is no longer
+ * available is an excuse that parsing was inconvenient.
+ *
+ * It invents no production behaviour. `quarantined` is the branch the contract
+ * already defines for "this output could not be vouched for", and the host
+ * already fails closed on it. Total, like the parser it wraps.
+ *
+ * See ./wrapperObligations.ts for the landing requirement this satisfies.
+ */
+export function acceptStudyTutorResult(raw: unknown): StudyTutorResult {
+  return parseStudyTutorResult(raw) ?? Object.freeze({
+    status: 'quarantined' as const,
+    reasonCode: STUDY_TUTOR_UNPARSED_RESULT_REASON_CODE,
+  })
 }
