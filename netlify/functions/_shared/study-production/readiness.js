@@ -1,6 +1,10 @@
 import { createSupabaseStudySafetyPorts } from '../study-adult-review/supabase-ports.js'
 import { createTrustedStudySessionVerifier } from '../study-identity/supabase.js'
 import { createAnthropicSafetyClassifier } from '../study-safety/provider.js'
+import {
+  ACADEMIC_SESSION_13_DEPENDENCIES,
+  createAcademicRuntimeReadinessProbe,
+} from './academic-readiness.js'
 
 export const STUDY_PRODUCTION_READINESS_SCHEMA_VERSION = 1
 export const STUDY_PRODUCTION_READINESS_STATES = Object.freeze([
@@ -32,15 +36,6 @@ export const STUDY_PRODUCTION_DEPENDENCIES = Object.freeze([
 const IDENTITY_DEPENDENCIES = Object.freeze([
   'session-verifying-authorizer',
   'household-learner-resolver',
-])
-const ACADEMIC_SESSION_13_DEPENDENCIES = Object.freeze([
-  'study-session-adapter',
-  'checkpoint-adapter',
-  'review-queue',
-  'calendar-adapter',
-  'parent-settings-adapter',
-  'adult-private-adapter',
-  'event-ledger',
 ])
 const SAFETY_DURABLE_DEPENDENCIES = Object.freeze([
   'adult-review-proposal-store',
@@ -104,6 +99,28 @@ async function productionPolicyState(ports) {
   }
 }
 
+/**
+ * The academic probe reports one state per Session 13 dependency. A throwing,
+ * malformed, non-own, or out-of-vocabulary entry is not-ready; no key ever
+ * defaults to ready.
+ */
+async function academicStates(probe) {
+  const states = new Map(ACADEMIC_SESSION_13_DEPENDENCIES.map((key) => [key, 'not-ready']))
+  if (typeof probe !== 'function') return states
+  try {
+    const result = await probe()
+    if (!result || typeof result !== 'object' || Array.isArray(result)) return states
+    for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) {
+      if (!Object.hasOwn(result, key)) continue
+      const value = result[key]
+      if (validState(value)) states.set(key, value)
+    }
+  } catch {
+    for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) states.set(key, 'not-ready')
+  }
+  return states
+}
+
 async function optionalOperationalState(probe) {
   if (typeof probe !== 'function') return 'not-ready'
   try {
@@ -134,6 +151,8 @@ export function createStudyProductionReadinessService(options = {}) {
   const identityVerifier = options.identityVerifier ?? createTrustedStudySessionVerifier({ env, fetchImpl })
   const durablePorts = options.durablePorts ?? createSupabaseStudySafetyPorts({ env, fetchImpl })
   const classifier = options.classifier ?? createAnthropicSafetyClassifier({ env, fetchImpl })
+  const academicReadiness = options.academicReadiness
+    ?? createAcademicRuntimeReadinessProbe({ env, fetchImpl })
   const session17 = options.session17 ?? Object.freeze({})
   let cached = null
   let inFlight = null
@@ -157,7 +176,7 @@ export function createStudyProductionReadinessService(options = {}) {
       receiptProbe,
     ] = await Promise.all([
       identityState(identityVerifier),
-      optionalOperationalState(options.academicReadiness),
+      academicStates(academicReadiness),
       durableState(durablePorts),
       productionPolicyState(durablePorts),
       optionalOperationalState(session17.authorizedRecipientResolver),
@@ -193,8 +212,11 @@ export function createStudyProductionReadinessService(options = {}) {
     const statusByDependency = new Map()
     for (const key of IDENTITY_DEPENDENCIES) statusByDependency.set(key, identity)
     // The safety reconciliation probe does not prove the Session 13 academic
-    // RPC set. Those adapters require their own injected live probe.
-    for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) statusByDependency.set(key, academic)
+    // RPC set. Those adapters are answered per dependency by the academic
+    // runtime probe, which reports ready only for what the server can observe.
+    for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) {
+      statusByDependency.set(key, academic.get(key) ?? 'not-ready')
+    }
     for (const key of SAFETY_DURABLE_DEPENDENCIES) statusByDependency.set(key, safetyDurable)
     statusByDependency.set('outbox-store', adultReviewStatus)
     statusByDependency.set('rate-limiter', limiter === 'ready' ? adultReviewStatus : limiter)

@@ -1,7 +1,8 @@
 import { digestStudySessionReference } from '../study-identity/contracts.js'
 import { createSupabaseServiceRpc } from '../study-adult-review/supabase-ports.js'
 
-const OPERATIONS = Object.freeze({
+/** The complete academic capability surface this production server exposes. */
+export const VERIFIED_ACADEMIC_RUNTIME_OPERATIONS = Object.freeze({
   'dashboard:read': 'student:progress:read',
   'calendar:read': 'student:assignments:read',
   'session:begin': 'student:attempts:create',
@@ -41,10 +42,11 @@ function assertSafeTree(value, { response = false, depth = 0 } = {}) {
 export function createVerifiedAcademicRuntimeGateway(options = {}) {
   const rpc = options.rpc ?? createSupabaseServiceRpc(options)
   return Object.freeze({
+    operations: Object.freeze(Object.keys(VERIFIED_ACADEMIC_RUNTIME_OPERATIONS)),
     isReady: () => rpc?.isConfigured?.() === true,
     async execute({ sessionReference, operation, request }) {
       const tokenDigest = digestStudySessionReference(sessionReference)
-      const requiredCapability = OPERATIONS[operation]
+      const requiredCapability = VERIFIED_ACADEMIC_RUNTIME_OPERATIONS[operation]
       if (!tokenDigest || !requiredCapability || !request || typeof request !== 'object' || Array.isArray(request)) {
         throw new VerifiedAcademicRuntimeDeniedError('runtime_request_invalid')
       }

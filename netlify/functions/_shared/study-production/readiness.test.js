@@ -1,9 +1,16 @@
 import { describe, expect, it, vi } from 'vitest'
 import { createStudyProductionReadinessHandler } from '../../study-production-readiness.js'
+import { ACADEMIC_SESSION_13_DEPENDENCIES } from './academic-readiness.js'
 import {
   createStudyProductionReadinessService,
   readinessWireResult,
+  STUDY_PRODUCTION_DEPENDENCIES,
+  STUDY_PRODUCTION_READINESS_STATES,
 } from './readiness.js'
+
+const ALL_ACADEMIC_READY = Object.freeze(Object.fromEntries(
+  ACADEMIC_SESSION_13_DEPENDENCIES.map((dependency) => [dependency, 'ready']),
+))
 
 function readyDependencies(overrides = {}) {
   return {
@@ -19,7 +26,7 @@ function readyDependencies(overrides = {}) {
         adultReviewInAppDeliveryPolicy: 'approved',
       })),
     },
-    academicReadiness: vi.fn(async () => 'ready'),
+    academicReadiness: vi.fn(async () => ({ ...ALL_ACADEMIC_READY })),
     classifier: {
       isConfigured: () => true,
       circuitState: () => 'closed',
@@ -53,7 +60,12 @@ describe('Study production readiness assembly', () => {
   })
 
   it('does not use the safety reconciliation probe as academic health', async () => {
-    const dependencies = readyDependencies({ academicReadiness: undefined })
+    // Every safety/durable probe is ready; the academic probe answers not-ready.
+    const dependencies = readyDependencies({
+      academicReadiness: async () => Object.fromEntries(
+        ACADEMIC_SESSION_13_DEPENDENCIES.map((dependency) => [dependency, 'not-ready']),
+      ),
+    })
     const snapshot = await createStudyProductionReadinessService(dependencies).check()
     expect(snapshot.registrations).toContainEqual({
       dependency: 'study-session-adapter',
@@ -133,6 +145,242 @@ describe('Study production readiness assembly', () => {
     const wire = readinessWireResult(snapshot)
     expect(Object.keys(wire)).toEqual(['schemaVersion', 'status', 'expiresAt'])
     expect(JSON.stringify(wire)).not.toMatch(/dependency|provider|recipient|secret|key/i)
+  })
+})
+
+describe('Study production academic wire', () => {
+  // Permanent RED for STUDY-A1-READINESS-WIRE. Every non-academic dependency is
+  // ready and the server academic runtime transport is validly configured, so
+  // the only reason the Session 13 statuses could be not-ready is the missing
+  // academic probe in the production default composition.
+  it('wires the real server academic runtime into the production default', async () => {
+    const dependencies = readyDependencies()
+    delete dependencies.academicReadiness
+    const snapshot = await createStudyProductionReadinessService({
+      ...dependencies,
+      env: {
+        SUPABASE_URL: 'https://study.example.supabase.co',
+        SUPABASE_SERVICE_ROLE_KEY: 'x'.repeat(48),
+      },
+      fetchImpl: async () => { throw new Error('readiness must not contact hosted systems') },
+    }).check()
+
+    expect(snapshot.registrations).toContainEqual({
+      dependency: 'study-session-adapter',
+      status: 'ready',
+    })
+    expect(snapshot.registrations).toContainEqual({
+      dependency: 'checkpoint-adapter',
+      status: 'ready',
+    })
+  })
+})
+
+const CONFIGURED_ENV = Object.freeze({
+  SUPABASE_URL: 'https://study.example.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY: 'x'.repeat(48),
+})
+
+/** Every RPC a readiness GET is permitted to reach; all three are read-only. */
+const READ_ONLY_READINESS_RPCS = Object.freeze([
+  'academy_study_verified_identity_readiness_v1',
+  'academy_study_safety_durable_readiness_v1',
+  'academy_study_adult_review_readiness_v2',
+])
+
+const MUTATION_RPCS = Object.freeze([
+  'academy_study_issue_guardian_launch_v1',
+  'academy_study_execute_verified_runtime_v1',
+  'academy_study_create_session',
+  'academy_study_transition_session',
+  'academy_study_compare_and_swap_checkpoint',
+  'academy_study_append_event',
+  'academy_study_create_adult_review_proposal_v1',
+  'academy_study_claim_adult_review_proposals_v2',
+  'academy_study_claim_delivery_jobs_v2',
+  'academy_study_deliver_in_app_notification_v2',
+  'academy_study_record_delivery_receipt_v1',
+  'academy_study_reserve_rate_limit_v2',
+])
+
+/** Records every RPC the composition reaches and answers each one ready. */
+function recordingRpcFetch(policy = 'approved') {
+  const calls = []
+  const bodyFor = (name) => {
+    if (name === 'academy_study_verified_identity_readiness_v1') {
+      return { schemaVersion: 1, status: 'ready' }
+    }
+    if (name === 'academy_study_safety_durable_readiness_v1') {
+      return { schemaVersion: 1, status: 'ready' }
+    }
+    return { schemaVersion: 1, state: 'ready', adultReviewInAppDeliveryPolicy: policy }
+  }
+  const fetchImpl = vi.fn(async (url) => {
+    const name = String(url).split('/rest/v1/rpc/')[1]
+    calls.push(name)
+    return { ok: true, json: async () => bodyFor(name) }
+  })
+  return { calls, fetchImpl }
+}
+
+describe('Study production full aggregate', () => {
+  it('keeps the aggregate blocked when adult-review policy is not approved', async () => {
+    // Phase 5: every academic dependency ready must not unblock the aggregate.
+    const dependencies = readyDependencies()
+    dependencies.durablePorts.readAdultReviewReadiness = vi.fn(async () => ({
+      state: 'not-ready',
+      adultReviewInAppDeliveryPolicy: 'not-approved',
+    }))
+    const snapshot = await createStudyProductionReadinessService(dependencies).check()
+
+    for (const dependency of ACADEMIC_SESSION_13_DEPENDENCIES) {
+      expect(snapshot.registrations).toContainEqual({ dependency, status: 'ready' })
+    }
+    expect(snapshot.adultReviewInAppDeliveryPolicy).toBe('not-approved')
+    expect(snapshot.status).toBe('not-ready')
+  })
+
+  it('keeps the aggregate blocked when a Session 17 dependency is absent', async () => {
+    const session17 = readyDependencies().session17
+    const snapshot = await createStudyProductionReadinessService(readyDependencies({
+      session17: { ...session17, receiptValidator: undefined },
+    })).check()
+    for (const dependency of ACADEMIC_SESSION_13_DEPENDENCIES) {
+      expect(snapshot.registrations).toContainEqual({ dependency, status: 'ready' })
+    }
+    expect(snapshot.status).toBe('not-ready')
+  })
+
+  it('never reports the D1 worker scheduler ready while it is unwired', async () => {
+    // Phase 6: manual-only D1 composition is not automatic-worker readiness.
+    // Every other Session 17 operation is ready, so the scheduler alone decides.
+    const session17 = readyDependencies().session17
+    const blocked = await createStudyProductionReadinessService(readyDependencies({
+      session17: { ...session17, workerScheduler: undefined },
+    })).check()
+    expect(blocked.registrations).toContainEqual({ dependency: 'outbox-store', status: 'not-ready' })
+    expect(blocked.registrations).toContainEqual({
+      dependency: 'delivery-provider', status: 'not-ready',
+    })
+    expect(blocked.status).toBe('not-ready')
+
+    // The production composition supplies no Session 17 operation at all.
+    const { fetchImpl } = recordingRpcFetch()
+    const production = await createStudyProductionReadinessService({
+      env: CONFIGURED_ENV,
+      fetchImpl,
+    }).check()
+    expect(production.registrations).toContainEqual({
+      dependency: 'outbox-store', status: 'not-ready',
+    })
+    expect(production.status).toBe('not-ready')
+  })
+
+  it('never approves production policy without a durable approved record', async () => {
+    // Phase 7: approval is read, never assumed and never synthesized.
+    for (const evidence of [
+      { state: 'ready', adultReviewInAppDeliveryPolicy: 'not-approved' },
+      { state: 'not-ready', adultReviewInAppDeliveryPolicy: 'approved' },
+      { state: 'ready', adultReviewInAppDeliveryPolicy: 'APPROVED' },
+      { state: 'ready' },
+      null,
+    ]) {
+      const dependencies = readyDependencies()
+      dependencies.durablePorts.readAdultReviewReadiness = vi.fn(async () => evidence)
+      const snapshot = await createStudyProductionReadinessService(dependencies).check()
+      expect(snapshot.status).toBe('not-ready')
+      expect(snapshot.registrations).toContainEqual({
+        dependency: 'delivery-provider', status: 'not-ready',
+      })
+    }
+
+    const approved = await createStudyProductionReadinessService(readyDependencies()).check()
+    expect(approved.adultReviewInAppDeliveryPolicy).toBe('approved')
+  })
+})
+
+describe('Study production readiness side effects and privacy', () => {
+  it('reaches only read-only readiness RPCs across a full production GET', async () => {
+    // Phase 8: no grant, session, checkpoint, notification, or claim RPC.
+    const { calls, fetchImpl } = recordingRpcFetch()
+    const handler = createStudyProductionReadinessHandler({
+      env: { ...CONFIGURED_ENV, ACADEMY_STUDY_ENABLED: 'true' },
+      fetchImpl,
+      authVerifier: vi.fn(async () => ({ ok: true })),
+    })
+    const response = await handler({
+      httpMethod: 'GET',
+      path: '/api/study/production/readiness',
+      headers: { authorization: 'Bearer synthetic-token' },
+    })
+
+    expect(response.statusCode).toBe(503)
+    // Non-vacuous: the whole composition ran and reached exactly these three.
+    expect([...new Set(calls)].sort()).toEqual([...READ_ONLY_READINESS_RPCS].sort())
+    for (const mutation of MUTATION_RPCS) expect(calls).not.toContain(mutation)
+  })
+
+  it('publishes only canonical dependency keys and closed-vocabulary states', async () => {
+    // Phase 9: the academic wire adds no learner-identifying field.
+    const snapshot = await createStudyProductionReadinessService(readyDependencies()).check()
+    expect(Object.keys(snapshot)).toEqual([
+      'schemaVersion', 'status', 'checkedAtMs', 'expiresAtMs',
+      'registrations', 'adultReviewInAppDeliveryPolicy',
+    ])
+    expect(snapshot.registrations.map(({ dependency }) => dependency))
+      .toEqual([...STUDY_PRODUCTION_DEPENDENCIES])
+    for (const registration of snapshot.registrations) {
+      // Only the sanitized operational pair; no probe evidence rides along.
+      expect(Object.keys(registration)).toEqual(['dependency', 'status'])
+      expect(STUDY_PRODUCTION_READINESS_STATES).toContain(registration.status)
+    }
+    // No identifier, opaque reference, or credential-shaped value anywhere.
+    expect(JSON.stringify(snapshot)).not.toMatch(
+      /[0-9a-f]{8}-[0-9a-f]{4}|aca_stu_|[0-9a-f]{32}|Bearer|eyJ/i,
+    )
+  })
+})
+
+describe('Study production academic fail-closed aggregation', () => {
+  it('treats a throwing, malformed, or partial academic probe as not-ready', async () => {
+    const academicIsNotReady = async (probe) => {
+      const snapshot = await createStudyProductionReadinessService(
+        readyDependencies({ academicReadiness: probe }),
+      ).check()
+      for (const dependency of ACADEMIC_SESSION_13_DEPENDENCIES) {
+        expect(snapshot.registrations).toContainEqual({ dependency, status: 'not-ready' })
+      }
+      expect(snapshot.status).toBe('not-ready')
+    }
+
+    await academicIsNotReady(async () => { throw new Error('academic probe unavailable') })
+    await academicIsNotReady(() => { throw new Error('academic probe unavailable') })
+    await academicIsNotReady(async () => 'ready')
+    await academicIsNotReady(async () => null)
+    await academicIsNotReady(async () => [])
+    await academicIsNotReady(async () => ({}))
+    await academicIsNotReady(async () => Object.create(ALL_ACADEMIC_READY))
+    await academicIsNotReady(async () => Object.fromEntries(
+      ACADEMIC_SESSION_13_DEPENDENCIES.map((dependency) => [dependency, 'READY']),
+    ))
+    await academicIsNotReady('not-a-function')
+
+    // A throwing accessor must not leave earlier keys reported ready.
+    await academicIsNotReady(async () => ({
+      ...ALL_ACADEMIC_READY,
+      get 'event-ledger'() { throw new Error('academic probe hostile') },
+    }))
+  })
+
+  it('reports each academic dependency independently', async () => {
+    const snapshot = await createStudyProductionReadinessService(readyDependencies({
+      academicReadiness: async () => ({ ...ALL_ACADEMIC_READY, 'review-queue': 'degraded' }),
+    })).check()
+    expect(snapshot.registrations).toContainEqual({ dependency: 'review-queue', status: 'degraded' })
+    expect(snapshot.registrations).toContainEqual({
+      dependency: 'study-session-adapter', status: 'ready',
+    })
+    expect(snapshot.status).toBe('degraded')
   })
 })
 
