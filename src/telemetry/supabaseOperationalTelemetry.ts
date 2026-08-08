@@ -1,8 +1,11 @@
 import type {
-  OperationalEvent,
+  AcceptedOperationalEventFacts,
+  OperationalTelemetryAppendResult,
+  OperationalTelemetryReadAuthorization,
   OperationalTelemetryReadFilter,
   OperationalTelemetryStore,
 } from './operationalTelemetry'
+import { decodeStoredOperationalEvents } from './operationalTelemetry'
 
 interface DatabaseErrorLike {
   readonly code?: string
@@ -20,7 +23,6 @@ export class OperationalTelemetryStoreError extends Error {
     readonly code:
       | 'unauthorized'
       | 'invalid-event'
-      | 'event-id-collision'
       | 'database-contract'
       | 'temporarily-unavailable',
   ) {
@@ -38,8 +40,6 @@ function mappedError(error: DatabaseErrorLike): OperationalTelemetryStoreError {
     case '23503':
     case '23514':
       return new OperationalTelemetryStoreError('invalid-event')
-    case '23505':
-      return new OperationalTelemetryStoreError('event-id-collision')
     case '40001':
     case '40P01':
     case '55P03':
@@ -50,25 +50,24 @@ function mappedError(error: DatabaseErrorLike): OperationalTelemetryStoreError {
   }
 }
 
-function databaseEvent(event: OperationalEvent): Record<string, unknown> {
+function databaseFacts(facts: AcceptedOperationalEventFacts): Record<string, unknown> {
   return {
-    schema_version: event.schemaVersion,
-    event_id: event.eventId,
-    occurred_at: event.occurredAt,
-    household_id: event.householdRef,
-    learner_id: event.learnerRef,
-    engine: event.engine,
-    engine_version: event.engineVersion,
-    application_version: event.applicationVersion,
-    curriculum_version: event.curriculumVersion,
-    course_ref: event.courseRef,
-    unit_ref: event.unitRef,
-    lesson_ref: event.lessonRef,
-    skill_ref: event.skillRef,
-    event_type: event.eventType,
-    result: event.result,
-    duration_ms: event.durationMs,
-    metadata: event.metadata,
+    schema_version: facts.schemaVersion,
+    scope: facts.scope,
+    household_id: facts.householdRef,
+    learner_id: facts.learnerRef,
+    engine: facts.engine,
+    app_version: facts.appVersion,
+    engine_version: facts.engineVersion,
+    curriculum_version: facts.curriculumVersion,
+    course_ref: facts.courseRef,
+    unit_ref: facts.unitRef,
+    lesson_ref: facts.lessonRef,
+    skill_ref: facts.skillRef,
+    event_type: facts.eventType,
+    result: facts.result,
+    duration_ms: facts.durationMs,
+    metadata: facts.metadata,
   }
 }
 
@@ -82,32 +81,61 @@ async function rpc(
   return data
 }
 
-/** Database details stay in this adapter; engine callers use the generic store. */
+function appendResult(value: unknown): OperationalTelemetryAppendResult {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) {
+    throw new OperationalTelemetryStoreError('database-contract')
+  }
+  const result = value as Record<string, unknown>
+  if (
+    result.status === 'reconciliation_conflict'
+    && Object.keys(result).length === 1
+  ) {
+    return Object.freeze({ status: 'reconciliation_conflict' })
+  }
+  if (
+    (result.status === 'created' || result.status === 'replayed')
+    && Object.keys(result).length === 2
+    && typeof result.event === 'object'
+    && result.event !== null
+    && !Array.isArray(result.event)
+  ) {
+    const decoded = decodeStoredOperationalEvents([result.event])
+    if (decoded.rejectedRows !== 0 || decoded.events.length !== 1) {
+      throw new OperationalTelemetryStoreError('database-contract')
+    }
+    return Object.freeze({
+      status: result.status,
+      event: decoded.events[0],
+    })
+  }
+  throw new OperationalTelemetryStoreError('database-contract')
+}
+
+/** Server-only adapter. The client must be isolated service-role infrastructure. */
 export function createSupabaseOperationalTelemetryStore(
   client: OperationalTelemetrySupabaseClient,
 ): OperationalTelemetryStore {
   return Object.freeze({
-    async append(event: OperationalEvent): Promise<void> {
-      const result = await rpc(client, 'academy_record_operational_event_v1', {
-        p_event: databaseEvent(event),
-      })
-      if (
-        typeof result !== 'object'
-        || result === null
-        || Array.isArray(result)
-        || Object.keys(result).length !== 2
-        || (result as Record<string, unknown>).status !== 'recorded'
-        || (result as Record<string, unknown>).eventId !== event.eventId
-      ) {
-        throw new OperationalTelemetryStoreError('database-contract')
-      }
+    async append(
+      executionKey: string,
+      facts: AcceptedOperationalEventFacts,
+    ): Promise<OperationalTelemetryAppendResult> {
+      return appendResult(await rpc(client, 'academy_record_operational_event_v2', {
+        p_execution_key: executionKey,
+        p_facts: databaseFacts(facts),
+      }))
     },
 
-    async list(filter: Required<OperationalTelemetryReadFilter>): Promise<unknown> {
-      return rpc(client, 'academy_list_operational_events_v1', {
+    async list(
+      filter: OperationalTelemetryReadFilter,
+      authorization: OperationalTelemetryReadAuthorization,
+    ): Promise<unknown> {
+      return rpc(client, 'academy_list_operational_events_v2', {
+        p_scope: filter.scope,
         p_household_id: filter.householdRef,
         p_learner_id: filter.learnerRef,
         p_limit: filter.limit,
+        p_required_capability: authorization.capability,
       })
     },
   })

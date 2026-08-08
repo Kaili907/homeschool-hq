@@ -6,10 +6,7 @@ const HOUSEHOLD_ID = '10000000-0000-4000-8000-000000000001'
 const OTHER_HOUSEHOLD_ID = '10000000-0000-4000-8000-000000000002'
 const LEARNER_ID = '20000000-0000-4000-8000-000000000001'
 const OTHER_LEARNER_ID = '20000000-0000-4000-8000-000000000002'
-const RESTRICTED_LEARNER_ID = '20000000-0000-4000-8000-000000000003'
 const GUARDIAN_ID = '30000000-0000-4000-8000-000000000001'
-const STRANGER_ID = '30000000-0000-4000-8000-000000000002'
-const EVENT_ID = '40000000-0000-4000-8000-000000000001'
 
 const migrationSql = readFile(
   new URL('./migrations/20260808120000_academy_operational_events.sql', import.meta.url),
@@ -20,144 +17,32 @@ const bootstrapSql = `
   create role anon nologin;
   create role authenticated nologin;
   create role service_role nologin bypassrls;
-
   create schema auth authorization postgres;
   create schema academy_private authorization postgres;
 
   create or replace function auth.uid()
-  returns uuid
-  language sql
-  stable
-  set search_path = pg_catalog
-  as $$
-    select coalesce(
-      nullif(current_setting('request.jwt.claim.sub', true), '')::uuid,
-      nullif(
-        (nullif(current_setting('request.jwt.claims', true), '')::jsonb)->>'sub',
-        ''
-      )::uuid
-    )
+  returns uuid language sql stable set search_path = pg_catalog as $$
+    select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid
   $$;
 
-  create table public.academy_households (
-    id uuid primary key,
-    status text not null
-  );
-  create table public.academy_household_memberships (
-    id uuid primary key,
-    household_id uuid not null references public.academy_households (id),
-    user_id uuid not null,
-    member_role text not null,
-    status text not null,
-    revoked_at timestamptz
-  );
+  create table public.academy_households (id uuid primary key, status text not null);
   create table public.academy_students (
     id uuid primary key,
     household_id uuid not null references public.academy_households (id),
     status text not null,
     unique (id, household_id)
   );
-  create table public.academy_guardian_student_access (
-    id uuid primary key,
-    household_id uuid not null references public.academy_households (id),
-    membership_id uuid not null references public.academy_household_memberships (id),
-    student_id uuid not null references public.academy_students (id),
-    permission_level text not null,
-    status text not null,
-    revoked_at timestamptz
-  );
-
-  create or replace function public.academy_is_active_household_guardian(
-    target_household_id uuid
-  )
-  returns boolean
-  language sql
-  stable
-  security definer
-  set search_path = pg_catalog
-  as $$
-    select auth.uid() is not null and exists (
-      select 1
-      from public.academy_households as household
-      join public.academy_household_memberships as membership
-        on membership.household_id = household.id
-      where household.id = target_household_id
-        and household.status = 'active'
-        and membership.user_id = auth.uid()
-        and membership.member_role = 'guardian'
-        and membership.status = 'active'
-        and membership.revoked_at is null
-    )
-  $$;
-
-  create or replace function public.academy_has_student_permission(
-    target_student_id uuid,
-    required_permission text default 'viewer'
-  )
-  returns boolean
-  language sql
-  stable
-  security definer
-  set search_path = pg_catalog
-  as $$
-    select auth.uid() is not null
-      and required_permission = 'viewer'
-      and exists (
-        select 1
-        from public.academy_guardian_student_access as access
-        join public.academy_household_memberships as membership
-          on membership.id = access.membership_id
-         and membership.household_id = access.household_id
-        join public.academy_students as student
-          on student.id = access.student_id
-         and student.household_id = access.household_id
-        join public.academy_households as household
-          on household.id = access.household_id
-        where access.student_id = target_student_id
-          and household.status = 'active'
-          and student.status = 'active'
-          and membership.user_id = auth.uid()
-          and membership.member_role = 'guardian'
-          and membership.status = 'active'
-          and membership.revoked_at is null
-          and access.status = 'active'
-          and access.revoked_at is null
-      )
-  $$;
-
   grant usage on schema auth to anon, authenticated, service_role;
   grant execute on function auth.uid() to anon, authenticated, service_role;
 
   insert into public.academy_households (id, status) values
-    ('${HOUSEHOLD_ID}', 'active'),
-    ('${OTHER_HOUSEHOLD_ID}', 'active');
-  insert into public.academy_household_memberships (
-    id, household_id, user_id, member_role, status
-  ) values (
-    '50000000-0000-4000-8000-000000000001',
-    '${HOUSEHOLD_ID}',
-    '${GUARDIAN_ID}',
-    'guardian',
-    'active'
-  );
+    ('${HOUSEHOLD_ID}', 'active'), ('${OTHER_HOUSEHOLD_ID}', 'active');
   insert into public.academy_students (id, household_id, status) values
     ('${LEARNER_ID}', '${HOUSEHOLD_ID}', 'active'),
-    ('${OTHER_LEARNER_ID}', '${OTHER_HOUSEHOLD_ID}', 'active'),
-    ('${RESTRICTED_LEARNER_ID}', '${HOUSEHOLD_ID}', 'active');
-  insert into public.academy_guardian_student_access (
-    id, household_id, membership_id, student_id, permission_level, status
-  ) values (
-    '60000000-0000-4000-8000-000000000001',
-    '${HOUSEHOLD_ID}',
-    '50000000-0000-4000-8000-000000000001',
-    '${LEARNER_ID}',
-    'viewer',
-    'active'
-  );
+    ('${OTHER_LEARNER_ID}', '${OTHER_HOUSEHOLD_ID}', 'active');
 `
 
 const databases: PGlite[] = []
-
 type DatabaseRole = 'anon' | 'authenticated' | 'service_role'
 
 async function asRole<T>(
@@ -166,9 +51,7 @@ async function asRole<T>(
   userId: string | null,
   operation: () => Promise<T>,
 ): Promise<T> {
-  await database.query(`select set_config('request.jwt.claim.sub', $1, false)`, [
-    userId ?? '',
-  ])
+  await database.query(`select set_config('request.jwt.claim.sub', $1, false)`, [userId ?? ''])
   await database.query(`select set_config('request.jwt.claim.role', $1, false)`, [role])
   await database.exec(`set role ${role}`)
   try {
@@ -180,38 +63,44 @@ async function asRole<T>(
   }
 }
 
-function operationalEvent(overrides: Record<string, unknown> = {}) {
+function facts(overrides: Record<string, unknown> = {}) {
   return {
-    schema_version: 1,
-    event_id: EVENT_ID,
-    occurred_at: '2026-08-08T14:30:00.000Z',
-    household_id: HOUSEHOLD_ID,
-    learner_id: LEARNER_ID,
-    engine: 'study',
-    engine_version: 'study-runtime.v1',
-    application_version: '0.1.0',
-    curriculum_version: 'math-r1',
-    course_ref: 'math-5',
-    unit_ref: 'unit-1',
-    lesson_ref: 'lesson-2',
-    skill_ref: 'fractions.compare',
-    event_type: 'session.lifecycle',
-    result: 'success',
-    duration_ms: 1_250,
-    metadata: { phase: 'completed' },
+    schema_version: 2,
+    scope: 'household', household_id: HOUSEHOLD_ID, learner_id: LEARNER_ID,
+    engine: 'study', app_version: 'deploy.2026.08.08', engine_version: 'study.v2',
+    curriculum_version: 'math-r1', course_ref: 'math-5', unit_ref: 'unit-1',
+    lesson_ref: 'lesson-2', skill_ref: 'fractions.compare',
+    event_type: 'study.session', result: 'success', duration_ms: 1_250,
+    metadata: { operation: 'complete', reason_code: 'completed' },
     ...overrides,
   }
 }
 
-async function record(database: PGlite, event: Record<string, unknown>) {
-  return database.query<{ result: { status: string; eventId: string } }>(
-    'select public.academy_record_operational_event_v1($1::jsonb) as result',
-    [JSON.stringify(event)],
+async function record(
+  database: PGlite,
+  executionKey: string,
+  eventFacts: Record<string, unknown>,
+) {
+  return database.query<{ result: Record<string, unknown> }>(
+    'select public.academy_record_operational_event_v2($1, $2::jsonb) as result',
+    [executionKey, JSON.stringify(eventFacts)],
   )
 }
 
-async function recordAsService(database: PGlite, event: Record<string, unknown>) {
-  return asRole(database, 'service_role', null, () => record(database, event))
+async function recordAsService(
+  database: PGlite,
+  executionKey: string,
+  eventFacts: Record<string, unknown>,
+) {
+  return asRole(database, 'service_role', null, () => record(database, executionKey, eventFacts))
+}
+
+async function listAsService(database: PGlite, parameters: unknown[]) {
+  return asRole(database, 'service_role', null, () =>
+    database.query<{ events: unknown[] }>(
+      'select public.academy_list_operational_events_v2($1, $2, $3, $4, $5) as events',
+      parameters,
+    ))
 }
 
 beforeEach(async () => {
@@ -225,148 +114,169 @@ afterEach(async () => {
   await Promise.all(databases.splice(0).map((database) => database.close()))
 })
 
-describe('Academy operational event database contract', () => {
-  it('accepts a valid guardian-scoped event and returns it through the safe reader', async () => {
-    const database = databases[0]
-    const written = await asRole(database, 'authenticated', GUARDIAN_ID, () =>
-      record(database, operationalEvent()),
-    )
-    expect(written.rows[0].result).toEqual({ status: 'recorded', eventId: EVENT_ID })
-
-    const read = await asRole(database, 'authenticated', GUARDIAN_ID, () =>
-      database.query<{ events: unknown[] }>(
-        'select public.academy_list_operational_events_v1($1, $2, $3) as events',
-        [HOUSEHOLD_ID, LEARNER_ID, 10],
-      ),
-    )
-    expect(read.rows[0].events).toEqual([
-      expect.objectContaining({
-        schemaVersion: 1,
-        eventId: EVENT_ID,
-        householdRef: HOUSEHOLD_ID,
-        learnerRef: LEARNER_ID,
-        metadata: { phase: 'completed' },
-      }),
-    ])
+describe('ADMIN-0 v2 operational event database contract', () => {
+  it.each([
+    ['tutor', 'tutor.turn'], ['study', 'study.session'],
+    ['assessment', 'assessment.attempt'], ['curriculum', 'curriculum.load'],
+    ['jarvis', 'jarvis.turn'], ['tts', 'tts.synthesis'],
+    ['gateway', 'gateway.request'], ['sync', 'sync.operation'],
+  ] as const)('accepts canonical engine %s and event %s', async (engine, eventType) => {
+    const eventFacts = facts({
+      engine, event_type: eventType, engine_version: `${engine}.v2`,
+      curriculum_version: eventType === 'curriculum.load' ? 'curriculum.v2' : null,
+      course_ref: null, unit_ref: null, lesson_ref: null, skill_ref: null,
+    })
+    const written = await recordAsService(databases[0], `${engine}:execution:0001`, eventFacts)
+    expect(written.rows[0].result).toMatchObject({ status: 'created' })
   })
 
   it.each([
-    ['engine', { engine: 'jarvis' }],
-    ['result', { result: 'mostly-ok' }],
-    ['timestamp', { occurred_at: '2026-02-30T10:00:00.000Z' }],
-  ])('rejects an invalid %s', async (_name, override) => {
-    await expect(recordAsService(databases[0], operationalEvent(override))).rejects.toThrow()
+    'success', 'fallback', 'rejected', 'timeout', 'provider_error',
+    'validation_error', 'safety_stop',
+  ])('accepts canonical result %s', async (result) => {
+    const written = await recordAsService(
+      databases[0], `study:${result}:0001`, facts({ result }),
+    )
+    expect(written.rows[0].result).toMatchObject({ status: 'created' })
   })
 
-  it('enforces duration bounds', async () => {
+  it('stores explicit household and system scope', async () => {
     const database = databases[0]
-    await expect(
-      recordAsService(database, operationalEvent({ duration_ms: -1 })),
-    ).rejects.toThrow()
-    await expect(
-      recordAsService(database, operationalEvent({ duration_ms: 86_400_001 })),
-    ).rejects.toThrow()
-    await expect(
-      recordAsService(database, operationalEvent({ duration_ms: 0 })),
-    ).resolves.toBeDefined()
+    await recordAsService(database, 'study:household:0001', facts())
+    await recordAsService(database, 'gateway:system:0001', facts({
+      scope: 'system', household_id: null, learner_id: null,
+      engine: 'gateway', engine_version: 'gateway.v2', curriculum_version: null,
+      course_ref: null, unit_ref: null, lesson_ref: null, skill_ref: null,
+      event_type: 'gateway.request',
+    }))
+    const listed = await listAsService(database, [null, null, null, 10, 'engines:read'])
+    expect(listed.rows[0].events).toEqual(expect.arrayContaining([
+      expect.objectContaining({ scope: 'household', householdRef: HOUSEHOLD_ID }),
+      expect.objectContaining({ scope: 'system', householdRef: null, learnerRef: null }),
+    ]))
   })
 
-  it('rejects excessive, unknown, and prohibited content metadata', async () => {
+  it('requires app/engine versions and applies curriculum version to relevant context', async () => {
     const database = databases[0]
-    await expect(recordAsService(database, operationalEvent({
-      metadata: { phase: 'completed', padding: 'x'.repeat(2_000) },
+    await expect(recordAsService(database, 'bad:app:0001', facts({ app_version: null })))
+      .rejects.toThrow()
+    await expect(recordAsService(database, 'bad:engine:0001', facts({ engine_version: null })))
+      .rejects.toThrow()
+    await expect(recordAsService(database, 'bad:curriculum:0001', facts({ curriculum_version: null })))
+      .rejects.toThrow()
+    await expect(recordAsService(database, 'bad:load:0001', facts({
+      engine: 'curriculum', event_type: 'curriculum.load', engine_version: 'curriculum.v2',
+      curriculum_version: null, course_ref: null, unit_ref: null, lesson_ref: null, skill_ref: null,
     }))).rejects.toThrow()
-    await expect(recordAsService(database, operationalEvent({
-      metadata: { phase: 'completed', attempt: 1 },
-    }))).rejects.toThrow()
-    await expect(recordAsService(database, operationalEvent({
-      metadata: { phase: 'completed', rawTutorConversation: 'private' },
-    }))).rejects.toThrow()
-    await expect(recordAsService(database, {
-      ...operationalEvent(),
-      assessment_answer_content: 'private',
-    })).rejects.toThrow()
-  })
-
-  it('accepts a legitimate learner-less infrastructure event', async () => {
-    const database = databases[0]
-    await expect(recordAsService(database, operationalEvent({
-      learner_id: null,
-      engine: 'infrastructure',
-      engine_version: 'health-probe.v1',
-      curriculum_version: null,
-      course_ref: null,
-      unit_ref: null,
-      lesson_ref: null,
-      skill_ref: null,
-      event_type: 'infrastructure.health',
-      result: 'unavailable',
-      metadata: { component: 'database', state: 'unavailable' },
+    await expect(recordAsService(database, 'gateway:no-curriculum:0001', facts({
+      engine: 'gateway', event_type: 'gateway.request', engine_version: 'gateway.v2',
+      curriculum_version: null, course_ref: null, unit_ref: null, lesson_ref: null, skill_ref: null,
     }))).resolves.toBeDefined()
   })
 
-  it('rejects missing and cross-household learner scope', async () => {
+  it('rejects invalid scope, learner ownership, event pairings, and durations', async () => {
     const database = databases[0]
-    await expect(recordAsService(database, operationalEvent({ learner_id: null }))).rejects.toThrow()
-    await expect(recordAsService(database, operationalEvent({
-      learner_id: OTHER_LEARNER_ID,
-    }))).rejects.toThrow()
+    await expect(recordAsService(database, 'bad:system:0001', facts({ scope: 'system' })))
+      .rejects.toThrow()
+    await expect(recordAsService(database, 'bad:learner:0001', facts({ learner_id: OTHER_LEARNER_ID })))
+      .rejects.toThrow()
+    await expect(recordAsService(database, 'bad:pair:0001', facts({ engine: 'gateway' })))
+      .rejects.toThrow()
+    await expect(recordAsService(database, 'bad:duration:0001', facts({ duration_ms: 86_400_001 })))
+      .rejects.toThrow()
   })
 
-  it('denies direct student/anonymous reads and non-guardian RPC reads', async () => {
+  it('enforces canonical, bounded, flat, privacy-safe metadata', async () => {
     const database = databases[0]
-    await recordAsService(database, operationalEvent())
-    await recordAsService(database, operationalEvent({
-      event_id: '40000000-0000-4000-8000-000000000002',
-      learner_id: RESTRICTED_LEARNER_ID,
-    }))
+    await expect(recordAsService(database, 'metadata:valid:0001', facts({ metadata: {
+      attempt: 2, cache_hit: false, http_status: 503, retryable: true,
+      reason_code: 'provider_timeout', severity: 'error',
+    } }))).resolves.toBeDefined()
+    await expect(recordAsService(database, 'metadata:unknown:0001', facts({ metadata: { phase: 'done' } })))
+      .rejects.toThrow()
+    await expect(recordAsService(database, 'metadata:nested:0001', facts({ metadata: { provider: { name: 'x' } } })))
+      .rejects.toThrow()
+    await expect(recordAsService(database, 'metadata:long:0001', facts({ metadata: { provider: 'x'.repeat(129) } })))
+      .rejects.toThrow()
+    await expect(recordAsService(database, 'metadata:secret:0001', facts({ metadata: { provider: 'sk-secret-value' } })))
+      .rejects.toThrow()
+    await expect(recordAsService(database, 'metadata:raw:0001', facts({ metadata: { raw_answer: 'private' } })))
+      .rejects.toThrow()
+  })
 
-    await expect(asRole(database, 'anon', null, () =>
-      database.query('select * from public.academy_operational_events'),
-    )).rejects.toThrow()
-    await expect(asRole(database, 'anon', null, () =>
-      database.query(
-        'select public.academy_list_operational_events_v1($1, null, 10)',
-        [HOUSEHOLD_ID],
-      ),
-    )).rejects.toThrow()
-    await expect(asRole(database, 'authenticated', STRANGER_ID, () =>
-      database.query(
-        'select public.academy_list_operational_events_v1($1, null, 10)',
-        [HOUSEHOLD_ID],
-      ),
-    )).rejects.toThrow()
-    await expect(asRole(database, 'authenticated', GUARDIAN_ID, () =>
-      database.query('select * from public.academy_operational_events'),
-    )).rejects.toThrow()
+  it('generates durable event identity and occurrence time on the server', async () => {
+    const database = databases[0]
+    await expect(recordAsService(database, 'trusted:extra:0001', {
+      ...facts(), event_id: '40000000-0000-4000-8000-000000000001',
+    })).rejects.toThrow()
+    const before = Date.now()
+    const written = await recordAsService(database, 'trusted:server:0001', facts())
+    const after = Date.now()
+    const event = written.rows[0].result.event as { eventId: string; occurredAt: string }
+    expect(event.eventId).toMatch(/^[0-9a-f-]{36}$/)
+    expect(Date.parse(event.occurredAt)).toBeGreaterThanOrEqual(before - 1_000)
+    expect(Date.parse(event.occurredAt)).toBeLessThanOrEqual(after + 1_000)
+  })
 
-    const permittedFeed = await asRole(database, 'authenticated', GUARDIAN_ID, () =>
-      database.query<{ events: Array<{ learnerRef: string | null }> }>(
-        'select public.academy_list_operational_events_v1($1, null, 10) as events',
-        [HOUSEHOLD_ID],
-      ),
+  it('replays identical stable executions and reports differing facts as conflicts', async () => {
+    const database = databases[0]
+    const first = await recordAsService(database, 'stable:execution:0001', facts())
+    const replay = await recordAsService(database, 'stable:execution:0001', facts())
+    const conflict = await recordAsService(
+      database, 'stable:execution:0001', facts({ result: 'fallback' }),
     )
-    expect(permittedFeed.rows[0].events.map((event) => event.learnerRef)).toEqual([
-      LEARNER_ID,
+    expect(first.rows[0].result.status).toBe('created')
+    expect(replay.rows[0].result).toMatchObject({
+      status: 'replayed', event: first.rows[0].result.event,
+    })
+    expect(conflict.rows[0].result).toEqual({ status: 'reconciliation_conflict' })
+    const count = await database.query<{ count: number }>(
+      'select count(*)::integer as count from public.academy_operational_events',
+    )
+    expect(count.rows[0].count).toBe(1)
+  })
+
+  it('denies ordinary guardians and requires the canonical Admin read capability', async () => {
+    const database = databases[0]
+    await recordAsService(database, 'auth:seed:0001', facts())
+    await expect(asRole(database, 'authenticated', GUARDIAN_ID, () =>
+      record(database, 'auth:guardian:0001', facts()))).rejects.toThrow()
+    await expect(asRole(database, 'authenticated', GUARDIAN_ID, () =>
+      database.query('select public.academy_list_operational_events_v2(null, null, null, 10, $1)', ['engines:read'])))
+      .rejects.toThrow()
+    await expect(asRole(database, 'authenticated', GUARDIAN_ID, () =>
+      database.query('select * from public.academy_operational_events'))).rejects.toThrow()
+    await expect(listAsService(database, [null, null, null, 10, 'health:read']))
+      .rejects.toThrow()
+    await expect(listAsService(database, ['household', HOUSEHOLD_ID, null, 10, 'engines:read']))
+      .resolves.toMatchObject({ rows: [{ events: [expect.objectContaining({ scope: 'household' })] }] })
+  })
+
+  it('declares and computes bounded retention categories', async () => {
+    const database = databases[0]
+    await recordAsService(database, 'retention:short:0001', facts())
+    await recordAsService(database, 'retention:standard:0001', facts({
+      engine: 'gateway', engine_version: 'gateway.v2', event_type: 'gateway.request',
+      result: 'provider_error', curriculum_version: null,
+      course_ref: null, unit_ref: null, lesson_ref: null, skill_ref: null,
+    }))
+    await recordAsService(database, 'retention:safety:0001', facts({
+      engine: 'tutor', engine_version: 'tutor.v2', event_type: 'safety.classification',
+      result: 'safety_stop', curriculum_version: null,
+      course_ref: null, unit_ref: null, lesson_ref: null, skill_ref: null,
+    }))
+    const rows = await database.query<{
+      retention_category: string; days: number
+    }>(`select retention_category,
+          extract(epoch from (expires_at - occurred_at))::integer / 86400 as days
+        from public.academy_operational_events order by retention_category`)
+    expect(rows.rows).toEqual([
+      { retention_category: 'diagnostic_short', days: 30 },
+      { retention_category: 'operational_standard', days: 90 },
+      { retention_category: 'safety_extended', days: 365 },
     ])
     await expect(asRole(database, 'authenticated', GUARDIAN_ID, () =>
-      database.query(
-        'select public.academy_list_operational_events_v1($1, $2, 10)',
-        [HOUSEHOLD_ID, RESTRICTED_LEARNER_ID],
-      ),
-    )).rejects.toThrow()
-  })
-
-  it('rejects colliding IDs without overwriting the original row', async () => {
-    const database = databases[0]
-    await recordAsService(database, operationalEvent())
-    await expect(recordAsService(database, operationalEvent({ result: 'failure' }))).rejects.toThrow()
-    const stored = await asRole(database, 'service_role', null, () =>
-      database.query<{ result: string }>(
-        'select result from public.academy_operational_events where event_id = $1',
-        [EVENT_ID],
-      ),
-    )
-    expect(stored.rows).toEqual([{ result: 'success' }])
+      database.query('select public.academy_purge_expired_operational_events_v2(100)')))
+      .rejects.toThrow()
   })
 })

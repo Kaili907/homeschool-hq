@@ -117,11 +117,11 @@
     {
       "version": "20260808120000",
       "filename": "20260808120000_academy_operational_events.sql",
-      "sha256": "0d50f944d9faa197ccae3552d0d66bd93227bf66685df1bc60f85eda30d59cbd",
+      "sha256": "f5edffe403dad23d51e2be9a0806ba0ee9cd6e0562467ab7e51eceaee543f7aa",
       "dependency": "20260801190000_academy_study_final_production_reconciliation.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
-      "requiredMarkerTransition": "academy-operational-telemetry-v1",
+      "requiredMarkerTransition": "academy-operational-telemetry-v2",
       "supersessionStatus": "current"
     }
   ]
