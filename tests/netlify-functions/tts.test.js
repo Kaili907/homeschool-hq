@@ -29,6 +29,7 @@ function testAccess({
       if (!membership) throw new GatewayError(403, 'not_entitled')
     }),
     consumeUsage: vi.fn(async () => undefined),
+    recordProviderUsage: vi.fn(async () => undefined),
   }
 }
 
@@ -360,6 +361,7 @@ describe('authenticated TTS gateway', () => {
 
   it('times out TTS after thirty seconds with fake timers', async () => {
     installFakeAbortTimeout()
+    const access = testAccess()
     const fetchImpl = vi.fn(async (url, init) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
         return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
@@ -368,11 +370,14 @@ describe('authenticated TTS gateway', () => {
         init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true })
       })
     })
-    const pending = createTtsHandler({ fetchImpl, env: ENV })(event())
+    const pending = createTtsHandler({ fetchImpl, env: ENV, gatewayAccess: access })(event())
     await vi.advanceTimersByTimeAsync(30_000)
     const result = await pending
     expect(result.statusCode).toBe(504)
     expect(responseJson(result)).toEqual({ error: { code: 'upstream_timeout' } })
+    expect(access.recordProviderUsage).toHaveBeenCalledWith(
+      expect.objectContaining({ status: 'timeout', billingBasis: 'unknown' }),
+    )
   })
 
   it('rejects declared and streamed TTS responses above 4 MiB', async () => {
@@ -399,5 +404,56 @@ describe('authenticated TTS gateway', () => {
     })
     const streamed = await createTtsHandler({ fetchImpl: streamedFetch, env: ENV })(event())
     expect(responseJson(streamed)).toEqual({ error: { code: 'upstream_too_large' } })
+  })
+
+  it('persists exact submitted characters and approved voice without storing text or audio', async () => {
+    const access = testAccess()
+    const request = { text: 'Count 🚀 exactly.', voiceId: 'voice-1' }
+    const result = await createTtsHandler({
+      fetchImpl: fetchRouter(),
+      env: ENV,
+      gatewayAccess: access,
+      requestIdFactory: () => 'tts-ledger-test',
+    })(event(request))
+
+    expect(result.statusCode).toBe(200)
+    expect(access.recordProviderUsage).toHaveBeenCalledWith({
+      requestKey: 'tts-ledger-test',
+      occurredAt: expect.any(String),
+      userId: 'household-user',
+      engine: 'tts',
+      provider: 'elevenlabs',
+      providerProduct: 'eleven_turbo_v2_5',
+      voiceReference: 'voice-1',
+      characters: Array.from(request.text).length,
+      latencyMs: expect.any(Number),
+      status: 'success',
+      billingBasis: 'estimate',
+    })
+    const persisted = access.recordProviderUsage.mock.calls[0][0]
+    expect(JSON.stringify(persisted)).not.toContain(request.text)
+    expect(JSON.stringify(persisted)).not.toContain(result.body)
+  })
+
+  it('records throttling as non-billable and provider failures as billing-unknown', async () => {
+    const throttledAccess = testAccess()
+    await createTtsHandler({
+      fetchImpl: fetchRouter({ providerStatus: 429 }),
+      env: ENV,
+      gatewayAccess: throttledAccess,
+    })(event())
+    expect(throttledAccess.recordProviderUsage).toHaveBeenCalledWith(
+      expect.objectContaining({ status: 'provider_throttled', billingBasis: 'none' }),
+    )
+
+    const failedAccess = testAccess()
+    await createTtsHandler({
+      fetchImpl: fetchRouter({ providerStatus: 500 }),
+      env: ENV,
+      gatewayAccess: failedAccess,
+    })(event())
+    expect(failedAccess.recordProviderUsage).toHaveBeenCalledWith(
+      expect.objectContaining({ status: 'provider_error', billingBasis: 'unknown' }),
+    )
   })
 })

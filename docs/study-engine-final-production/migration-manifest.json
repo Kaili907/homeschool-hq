@@ -103,6 +103,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "final_production_version:0->1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260808120000",
+      "filename": "20260808120000_academy_provider_usage_cost_ledger.sql",
+      "sha256": "606ef581aed8d067f3e018f1007edddb179e1fca2a88c8537eb3e45e71d4e59d",
+      "dependency": "20260801190000_academy_study_final_production_reconciliation.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-provider-usage-cost-ledger-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

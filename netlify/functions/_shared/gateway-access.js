@@ -68,5 +68,32 @@ export function createGatewayAccess({ env, fetchImpl, client } = {}) {
       if (error) reject(503, 'service_unavailable')
       if (data !== true) reject(429, 'usage_limit')
     },
+
+    async recordProviderUsage(record) {
+      const signal = AbortSignal.timeout(ACCESS_TIMEOUT_MS)
+      const { error } = await getClient()
+        .rpc('academy_record_provider_usage', {
+          p_request_key: record.requestKey,
+          p_occurred_at: record.occurredAt,
+          p_user_id: record.userId,
+          p_engine: record.engine,
+          p_provider: record.provider,
+          p_logical_model_tier: record.logicalModelTier ?? null,
+          p_provider_product: record.providerProduct,
+          p_voice_reference: record.voiceReference ?? null,
+          p_input_tokens: record.inputTokens ?? null,
+          p_output_tokens: record.outputTokens ?? null,
+          p_cache_read_input_tokens: record.cacheReadInputTokens ?? null,
+          p_cache_write_input_tokens: record.cacheWriteInputTokens ?? null,
+          p_characters: record.characters ?? null,
+          p_latency_ms: record.latencyMs,
+          p_status: record.status,
+          p_billing_basis: record.billingBasis,
+        })
+        .abortSignal(signal)
+
+      if (signal.aborted) reject(504, 'upstream_timeout')
+      if (error) reject(503, 'service_unavailable')
+    },
   }
 }

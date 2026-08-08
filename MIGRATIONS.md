@@ -178,6 +178,23 @@ under a deliberately non-UTC session timezone, at-cap acceptance, over-cap
 rejection without mutation, UTC day rollover, and denial of direct client-role
 table and RPC access.
 
+## Supabase: Academy provider usage cost ledger (2026-08-08)
+
+Tracked migration:
+`supabase/migrations/20260808120000_academy_provider_usage_cost_ledger.sql`.
+
+The migration adds an append-only, forced-RLS provider pricing catalog; a
+privacy-safe AI/TTS usage ledger; snapshotted cost components; and the
+service-role-only `academy_record_provider_usage` RPC. Pricing is effective-date
+versioned, existing prices cannot be mutated, and duplicate trusted execution
+keys return the original ledger row without adding cost. The migration seeds no
+production price. Exact integer-micros arithmetic, half-up rounding, effective
+boundaries, failures, duplicates, bounds, privacy columns, and browser-role
+denial are validated in
+`supabase/academy-provider-usage-cost-ledger.db.test.ts`. Operational behavior
+and required production pricing configuration are documented in
+`docs/academy-ai-cost-accounting.md`.
+
 ## v1 → v2 (M1 multi-profile, 2026-07-23)
 
 **Before:** single profile under key `homeschool-hq:profile:v1`

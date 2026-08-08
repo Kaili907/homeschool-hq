@@ -12,6 +12,8 @@ The functions require:
 - `SUPABASE_URL` and `SUPABASE_ANON_KEY`, or the existing
   `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` values with Functions runtime
   scope.
+- `SUPABASE_SERVICE_ROLE_KEY` with Functions-only scope for household
+  entitlement, atomic daily quota, and provider usage ledger RPCs.
 - `ANTHROPIC_API_KEY` for the AI gateway.
 - `ELEVENLABS_API_KEY` for TTS.
 - `ELEVENLABS_ALLOWED_VOICE_IDS`, a comma-separated allowlist of the small set
@@ -21,8 +23,8 @@ The functions require:
 administrator kill switches. Missing keys, missing Supabase configuration, or
 an empty TTS voice allowlist fail closed.
 
-The Supabase anon key is public by design. A service-role key is neither needed
-nor accepted by the browser contract.
+The Supabase anon key is public by design. The service-role key is a server-only
+credential and is never accepted from or returned to the browser.
 
 ## Authentication
 
@@ -117,7 +119,9 @@ Success is always:
 { "text": "bounded provider reply" }
 ```
 
-Provider IDs, usage, stop reasons, errors, and other internals are discarded.
+Provider IDs, stop reasons, errors, and other internals are discarded. Trusted
+provider usage counters are persisted only to the server-side accounting ledger
+and are never added to this response.
 
 ## ElevenLabs TTS
 
@@ -166,11 +170,13 @@ methods (`405`), oversized bodies (`413`), unsupported content types (`415`),
 provider throttling (`429`), provider failures (`502`), and unavailable or
 disabled gateways (`503`).
 
-This session enforces per-request byte, text, history, output-token, model, and
+The gateways enforce per-request byte, text, history, output-token, model, and
 voice limits. Existing browser counters remain user-experience indicators and
-are not security controls. Durable per-household Tutor, Jarvis, and TTS quotas
-remain deferred because they require an atomic database-backed ledger keyed by
-the verified Supabase user. No in-memory serverless limiter is used.
+are not security controls. The server atomically enforces daily Anthropic and
+TTS request caps through `academy_consume_gateway_usage`, keyed by the verified
+Supabase user and UTC day. No in-memory serverless limiter is used. Detailed
+provider usage and estimated cost accounting is documented in
+`academy-ai-cost-accounting.md`.
 
 Local development may still call providers directly with the family's locally
 stored keys. Production builds use the authenticated proxy contract; direct

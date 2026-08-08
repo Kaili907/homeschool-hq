@@ -18,6 +18,12 @@ import {
   elevenLabsUrl,
   validateTtsRequest,
 } from './_shared/tts-policy.js'
+import {
+  elapsedMilliseconds,
+  persistProviderUsage,
+  submittedCharacterCount,
+  usageRequestKey,
+} from './_shared/usage-accounting.js'
 
 const ALLOWED_PATHS = new Set(['/api/tts/synthesize', '/.netlify/functions/tts'])
 // Leaves room for base64 expansion beneath Netlify's buffered response ceiling.
@@ -26,7 +32,7 @@ const TTS_TIMEOUT_MS = 30_000
 const DEFAULT_TTS_DAILY_LIMIT = 100
 
 export function createTtsHandler(overrides = {}) {
-  return async (event) => {
+  return async (event, context) => {
     if (event?.httpMethod !== 'POST') {
       return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
     }
@@ -59,6 +65,23 @@ export function createTtsHandler(overrides = {}) {
 
       let upstream
       let bytes
+      const occurredAt = new Date().toISOString()
+      const startedAt = Date.now()
+      const requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
+      const recordUsage = async (status, billingBasis) =>
+        persistProviderUsage(access, {
+          requestKey,
+          occurredAt,
+          userId: auth.user.id,
+          engine: 'tts',
+          provider: 'elevenlabs',
+          providerProduct: ELEVENLABS_MODEL_ID,
+          voiceReference: request.voiceId,
+          characters: submittedCharacterCount(request.text),
+          latencyMs: elapsedMilliseconds(startedAt),
+          status,
+          billingBasis,
+        })
       const signal = AbortSignal.timeout(TTS_TIMEOUT_MS)
       try {
         upstream = await fetchImpl(elevenLabsUrl(request.voiceId), {
@@ -75,21 +98,35 @@ export function createTtsHandler(overrides = {}) {
             model_id: ELEVENLABS_MODEL_ID,
           }),
         })
-        if (upstream.status === 429) return errorResponse(429, 'usage_limit')
-        if (!upstream.ok) return errorResponse(502, 'provider_failure')
+        if (upstream.status === 429) {
+          await recordUsage('provider_throttled', 'none')
+          return errorResponse(429, 'usage_limit')
+        }
+        if (!upstream.ok) {
+          await recordUsage('provider_error', 'unknown')
+          return errorResponse(502, 'provider_failure')
+        }
         const contentType = upstream.headers?.get?.('content-type') ?? ''
         if (!/^audio\/mpeg(?:\s*;|$)/i.test(contentType)) {
+          await recordUsage('provider_error', 'estimate')
           return errorResponse(502, 'provider_failure')
         }
         bytes = await readBoundedResponseBytes(upstream, MAX_AUDIO_BYTES)
       } catch (error) {
-        if (isTimeoutError(error, signal)) return errorResponse(504, 'upstream_timeout')
+        if (isTimeoutError(error, signal)) {
+          await recordUsage('timeout', 'unknown')
+          return errorResponse(504, 'upstream_timeout')
+        }
+        await recordUsage('provider_error', upstream?.ok ? 'estimate' : 'unknown')
         if (error instanceof GatewayError) throw error
         return errorResponse(502, 'provider_failure')
       }
       if (bytes.byteLength === 0) {
+        await recordUsage('provider_error', 'estimate')
         return errorResponse(502, 'provider_failure')
       }
+
+      await recordUsage('success', 'estimate')
 
       return {
         statusCode: 200,
