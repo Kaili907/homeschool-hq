@@ -37,6 +37,16 @@ const FORBIDDEN_PRODUCTION_BUNDLE_MARKERS = [
   'LOCAL DEVELOPMENT ONLY',
   'session12-local-forced-outcome-v1',
 
+  // STUDY-A1-PROD-DASH-1: preview-only Study day seeding, test-only inspection
+  // seams, and trusted-server transports. The production learner dashboard is
+  // the first real production Study surface, so these must not arrive with it.
+  'ensureLocalDevelopmentStudyDay',
+  'inspectPublicStateForTest',
+  'testOnlyPrivateNoteMatches',
+  'trustedServerRpc',
+  'trustedServerClient',
+  'SUPABASE_SERVICE_ROLE_KEY',
+
   // Frozen Math R1 subject package content (D-MATH-2): registered behind the
   // study runtime's subject registry, never in any production bundle.
   'Adaptive Math Intervention Content',
@@ -88,6 +98,58 @@ describe('production client bundle provider and preview boundary', () => {
   it('forces the authenticated same-origin Tutor and voice gateways even when proxy opt-out is requested', () => {
     expect(bundle).toContain('/api/anthropic')
     expect(bundle).toContain('/api/tts')
+  })
+
+  it.each(FORBIDDEN_PRODUCTION_BUNDLE_MARKERS)(
+    'omits forbidden production client marker %s',
+    (marker) => {
+      expect(bundle).not.toContain(marker)
+    },
+  )
+})
+
+// STUDY-A1-PROD-DASH-1 Phase 10. The scan above deliberately asks for preview
+// mode to prove the bundle stays clean under a hostile build request; this one
+// is the deployment configuration itself — Study on, preview off — and is the
+// build in which the verified learner dashboard actually ships.
+describe('production client bundle with the Study preview switched off', () => {
+  let bundle = ''
+
+  beforeAll(async () => {
+    const requests = { ...UNSAFE_BUILD_REQUESTS, VITE_STUDY_ENGINE_PREVIEW: 'false' }
+    const previous = new Map<string, string | undefined>()
+    for (const [name, value] of Object.entries(requests)) {
+      previous.set(name, process.env[name])
+      process.env[name] = value
+    }
+
+    try {
+      const result = await build({
+        mode: 'production',
+        logLevel: 'silent',
+        build: { write: false, minify: true },
+      })
+      if ('on' in result) throw new Error('Production bundle scan unexpectedly started watch mode.')
+      bundle = outputText(result)
+    } finally {
+      for (const [name, value] of previous) {
+        if (value === undefined) delete process.env[name]
+        else process.env[name] = value
+      }
+    }
+  }, 120_000)
+
+  it('ships the verified read-only learner dashboard', () => {
+    // Positive control: a bundle that did not contain the new surface at all
+    // would pass every exclusion below for the wrong reason.
+    expect(bundle).toContain('Scheduled Study blocks')
+    expect(bundle).toContain('Recent Study sessions')
+  })
+
+  it('ships no Study session launch, resume or settings control with it', () => {
+    for (const control of ['Start Study', 'Resume session', 'Study settings', 'Review queue']) {
+      expect(bundle).not.toContain(control)
+    }
   })
 
   it.each(FORBIDDEN_PRODUCTION_BUNDLE_MARKERS)(
