@@ -1,12 +1,24 @@
 import { describe, expect, it, vi } from 'vitest'
 import { createStudyProductionReadinessHandler } from '../../study-production-readiness.js'
+import { ACADEMIC_DEPENDENCIES } from './academic-readiness.js'
 import {
   createStudyProductionReadinessService,
   readinessWireResult,
 } from './readiness.js'
 
+/** A durable academic probe reporting the given state for every dependency. */
+function academicDatabase(state = 'ready', overrides = {}) {
+  return {
+    read: vi.fn(async () => Object.freeze({
+      ...Object.fromEntries(ACADEMIC_DEPENDENCIES.map((dependency) => [dependency, state])),
+      ...overrides,
+    })),
+  }
+}
+
 function readyDependencies(overrides = {}) {
   return {
+    academicDatabaseReadiness: academicDatabase('ready'),
     identityVerifier: {
       isDurable: true,
       isReady: () => true,
@@ -60,6 +72,84 @@ describe('Study production readiness assembly', () => {
       status: 'not-ready',
     })
     expect(snapshot.registrations).toContainEqual({ dependency: 'rate-limiter', status: 'ready' })
+  })
+
+  /**
+   * Defence in depth. The operation surface proves Netlify composition supports
+   * a dependency; the durable probe proves the underlying server contract exists.
+   * Either alone reporting ready must leave every academic dependency closed.
+   */
+  it('does not let the durable academic probe alone declare an academic dependency ready', async () => {
+    const snapshot = await createStudyProductionReadinessService(readyDependencies({
+      academicReadiness: undefined,
+      academicDatabaseReadiness: academicDatabase('ready'),
+    })).check()
+    for (const dependency of ACADEMIC_DEPENDENCIES) {
+      expect(snapshot.registrations).toContainEqual({ dependency, status: 'not-ready' })
+    }
+    expect(snapshot.status).toBe('not-ready')
+  })
+
+  it('does not let the operation surface alone declare an academic dependency ready', async () => {
+    const snapshot = await createStudyProductionReadinessService(readyDependencies({
+      academicDatabaseReadiness: academicDatabase('not-ready'),
+    })).check()
+    for (const dependency of ACADEMIC_DEPENDENCIES) {
+      expect(snapshot.registrations).toContainEqual({ dependency, status: 'not-ready' })
+    }
+    expect(snapshot.status).toBe('not-ready')
+  })
+
+  it('closes exactly the academic dependency the durable probe reports missing', async () => {
+    const snapshot = await createStudyProductionReadinessService(readyDependencies({
+      academicDatabaseReadiness: academicDatabase('ready', { 'review-queue': 'not-ready' }),
+    })).check()
+    expect(snapshot.registrations).toContainEqual({
+      dependency: 'review-queue',
+      status: 'not-ready',
+    })
+    expect(snapshot.registrations).toContainEqual({
+      dependency: 'calendar-adapter',
+      status: 'ready',
+    })
+    expect(snapshot.status).toBe('not-ready')
+  })
+
+  it.each([
+    ['an absent probe', undefined],
+    ['a probe with no read method', {}],
+    ['a probe whose read rejects', { read: vi.fn(async () => { throw new Error('durable') }) }],
+    ['a probe returning a partial map', { read: vi.fn(async () => ({ 'review-queue': 'ready' })) }],
+  ])('fails every academic dependency closed for %s', async (_label, probe) => {
+    const snapshot = await createStudyProductionReadinessService(readyDependencies({
+      academicDatabaseReadiness: probe,
+    })).check()
+    for (const dependency of ACADEMIC_DEPENDENCIES) {
+      expect(snapshot.registrations).toContainEqual({ dependency, status: 'not-ready' })
+    }
+    expect(snapshot.status).toBe('not-ready')
+  })
+
+  /**
+   * The academic contract being fully ready is not Study authorization. Every
+   * other production dependency must still be able to hold the aggregate closed.
+   */
+  it('keeps the aggregate closed on non-academic dependencies even with all seven ready', async () => {
+    const snapshot = await createStudyProductionReadinessService(readyDependencies({
+      session17: undefined,
+    })).check()
+    for (const dependency of ACADEMIC_DEPENDENCIES) {
+      expect(snapshot.registrations).toContainEqual({ dependency, status: 'ready' })
+    }
+    expect(snapshot.status).toBe('not-ready')
+
+    const unapproved = readyDependencies()
+    unapproved.durablePorts.readAdultReviewReadiness = vi.fn(async () => ({
+      state: 'ready',
+      adultReviewInAppDeliveryPolicy: 'not-approved',
+    }))
+    const policyBlocked = await createStudyProductionReadinessService(unapproved).check()
+    expect(policyBlocked.status).toBe('not-ready')
   })
 
   it('uses live identity and durable probes, caches only through TTL, and then revalidates', async () => {
