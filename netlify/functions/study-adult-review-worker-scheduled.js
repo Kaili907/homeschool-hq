@@ -46,19 +46,27 @@ export function createStudyAdultReviewScheduledWorkerHandler(overrides = {}) {
     if (injected) {
       return { worker: overrides.worker, authorization: overrides.workerAuthorization }
     }
-    if (!pending) pending = compose({ env }).catch(() => null)
+    // This entrypoint names its own invocation authority, and the composition
+    // builds that one and no other. The manual authority is never constructed
+    // on this path, so the optional operator secret is never read and its
+    // absence cannot stop guardian delivery. The name is a module constant, not
+    // anything derived from an invocation -- there is no request here to derive
+    // it from.
+    if (!pending) {
+      pending = compose({
+        env,
+        invocationAuthority: createNetlifyScheduledWorkerAuthorization,
+      }).catch(() => null)
+    }
     const composed = await pending
     if (!composed) {
+      // Not cached. A transient durable outage costs this one run, not every
+      // run until the next deploy: the next invocation five minutes later
+      // composes again from scratch.
       pending = null
       return {}
     }
-    // The scheduled authority is built here, from the environment, rather than
-    // taken from the composed graph: the graph's `workerAuthorization` is the
-    // MANUAL one, and this path must never hold it.
-    return {
-      worker: composed.worker,
-      authorization: createNetlifyScheduledWorkerAuthorization({ env }),
-    }
+    return { worker: composed.worker, authorization: composed.workerAuthorization }
   }
 
   const ready = (worker, authorization) => worker?.ready && typeof worker.run === 'function'

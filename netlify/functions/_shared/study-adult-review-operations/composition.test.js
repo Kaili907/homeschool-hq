@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createStudyAdultReviewScheduledWorkerHandler } from '../../study-adult-review-worker-scheduled.js'
 import { createStudyAdultReviewWorkerHandler } from '../../study-adult-review-worker.js'
 import { createMonitoringService, createStructuredServerLog } from '../study-monitoring/monitoring.js'
+import { createNetlifyScheduledWorkerAuthorization } from '../study-worker/credential.js'
 import { createSupabaseAdultReviewOperations } from './supabase-operations.js'
 import {
   ADULT_REVIEW_CLAIM_KEYS,
@@ -698,19 +699,419 @@ describe('D1 scheduled entrypoint: platform path exclusivity', () => {
     expect(estate.names()).not.toContain('academy_study_claim_delivery_jobs_v2')
   })
 
-  it('CARRIED RESIDUAL: still needs the manual invocation secret to compose', async () => {
-    // The scheduled path never READS that secret -- proven in the credential
-    // suite, where the scheduled factory is ready without one. But the shared
-    // production composition (out of custody this session) constructs the
-    // manual authorization and refuses to compose without it, so removing the
-    // manual secret also stops the schedule. Pinned so the coupling is a
-    // stated fact rather than a surprise in production.
+})
+
+/**
+ * H2 -- the automatic worker does not depend on the optional manual secret.
+ *
+ * The manual invocation secret exists so a human operator can prove a manual
+ * call. Guardian delivery is automatic and has no operator, so making the
+ * schedule depend on that secret pointed the dependency the wrong way: an
+ * absent, short, or rotated operator convenience silently stopped safety
+ * delivery for every household, forever, with a 503 nobody reads.
+ */
+describe('D1 H2: scheduled delivery is decoupled from the manual secret', () => {
+  const NO_SECRET = (() => {
+    const env = { ...ENV }
+    delete env.ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET
+    return Object.freeze(env)
+  })()
+
+  it('composes and DELIVERS with the manual invocation secret absent', async () => {
+    const estate = createDurableEstate()
+    const response = await scheduledHandlerFor(estate, NO_SECRET)()
+
+    expect(response.statusCode).toBe(200)
+    expect(JSON.parse(response.body)).toEqual({ status: 'processed' })
+    // The whole point: a real guardian delivery completed, end to end, through
+    // the durable boundary, with no manual secret configured anywhere.
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+    // Two receipt reads per delivery, both read-only: the provider reads the
+    // receipt it was handed, and `commitReceipt()` reads it again to commit.
+    expect(estate.countOf('academy_study_verify_in_app_notification_v2')).toBe(2)
+    expect(estate.callsTo('academy_study_record_attempt_event_v2')
+      .map((call) => call.parameters.p_event.state)).toEqual(['created', 'submitted'])
+  })
+
+  it.each([
+    ['absent', undefined],
+    ['empty', ''],
+    ['short', 'too-short'],
+    ['junk', '  not-a-secret'],
+    ['over-long', 'x'.repeat(513)],
+    ['valid', INVOCATION_SECRET],
+  ])('is unaffected by a %s manual secret', async (_name, secret) => {
+    const estate = createDurableEstate()
+    const env = { ...NO_SECRET }
+    if (secret !== undefined) env.ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET = secret
+    const response = await scheduledHandlerFor(estate, env)()
+    expect(response.statusCode).toBe(200)
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+  })
+
+  it('never reads the manual secret from the environment on the scheduled path', async () => {
+    // A dependency read spy, not a source scan: every property access on the
+    // environment is recorded, so an indirect read through any module in the
+    // graph is caught. The scheduled composition must never touch this key.
+    const reads = []
+    const watched = new Proxy({ ...NO_SECRET }, {
+      get(target, key) {
+        if (typeof key === 'string') reads.push(key)
+        return target[key]
+      },
+      has(target, key) {
+        if (typeof key === 'string') reads.push(key)
+        return key in target
+      },
+    })
+    const estate = createDurableEstate()
+    const response = await scheduledHandlerFor(estate, watched)()
+
+    expect(response.statusCode).toBe(200)
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+    // The spy is only meaningful if it actually observed the reads it was
+    // watching for, so prove it caught the keys the scheduled path DOES need.
+    expect(reads).toContain('ACADEMY_STUDY_ENABLED')
+    expect(reads).toContain('ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL')
+    expect(reads).not.toContain('ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET')
+  })
+
+  it('keeps the manual entrypoint fail-closed in the very same environment', async () => {
+    // Decoupling must be one-directional. In an environment with no manual
+    // secret the scheduled worker delivers (above) and the manual worker is
+    // unavailable -- it never becomes an unauthenticated public path.
+    const estate = createDurableEstate()
+    const response = await handlerFor(estate, NO_SECRET)(manualEvent())
+    expect(response.statusCode).toBe(503)
+    expect(JSON.parse(response.body)).toEqual({ error: { code: 'service_not_ready' } })
+    expect(estate.names()).not.toContain('academy_study_claim_delivery_jobs_v2')
+  })
+
+  it('still requires every ACTUAL durable prerequisite of the scheduled run', async () => {
+    // Removing the manual coupling must not have removed anything real.
+    const CASES = [
+      ['study disabled', { ACADEMY_STUDY_ENABLED: undefined }],
+      ['missing SUPABASE_URL', { SUPABASE_URL: undefined }],
+      ['missing service role key', { SUPABASE_SERVICE_ROLE_KEY: undefined }],
+      ['missing worker credential', { ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL: undefined }],
+      ['short worker credential', { ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL: 'too-short' }],
+      ['missing worker identity', { ACADEMY_STUDY_ADULT_REVIEW_WORKER_ID: undefined }],
+      ['missing credential id', { ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL_ID: undefined }],
+      ['bad credential version', { ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL_VERSION: 'bad version!' }],
+      ['missing configuration version', { ACADEMY_STUDY_ADULT_REVIEW_WORKER_CONFIGURATION_VERSION: undefined }],
+    ]
+    for (const [name, patch] of CASES) {
+      const estate = createDurableEstate()
+      const env = { ...NO_SECRET, ...patch }
+      for (const [key, value] of Object.entries(patch)) if (value === undefined) delete env[key]
+      const response = await scheduledHandlerFor(estate, env)()
+      expect(response.statusCode, name).toBe(503)
+      expect(estate.names(), name).not.toContain('academy_study_deliver_in_app_notification_v2')
+    }
+  })
+
+  it.each([
+    ['unready durable readiness', 'academy_study_safety_durable_readiness_v1',
+      () => ({ status: 'not-ready', schemaVersion: 1 })],
+    ['unready adult-review policy', 'academy_study_adult_review_readiness_v2',
+      () => ({ state: 'not-ready', adultReviewInAppDeliveryPolicy: 'approved' })],
+    ['unapproved in-app policy', 'academy_study_adult_review_readiness_v2',
+      () => ({ state: 'ready', adultReviewInAppDeliveryPolicy: 'not-approved' })],
+    ['unavailable policy RPC', 'academy_study_adult_review_readiness_v2', () => undefined],
+  ])('still refuses to compose the schedule for %s', async (_name, rpcName, handler) => {
+    const estate = createDurableEstate()
+    estate.override(rpcName, handler)
+    const response = await scheduledHandlerFor(estate, NO_SECRET)()
+    expect(response.statusCode).toBe(503)
+    expect(JSON.parse(response.body)).toEqual({ error: { code: 'service_not_ready' } })
+    expect(estate.names()).not.toContain('academy_study_claim_delivery_jobs_v2')
+  })
+})
+
+describe('D1 H2: the invocation authority is selected, never supplied by a caller', () => {
+  it.each([
+    ['a look-alike object', {
+      isDurable: true,
+      isReady: () => true,
+      credentialForEvent: async () => ({ authorized: true, workerCredential: WORKER_CREDENTIAL }),
+    }],
+    ['an always-authorizing function', () => Object.freeze({
+      isDurable: true,
+      isReady: () => true,
+      credentialForEvent: async () => ({ authorized: true, workerCredential: WORKER_CREDENTIAL }),
+    })],
+    ['a string naming the scheduled strategy', 'scheduled'],
+    ['a plain object', {}],
+  ])('refuses %s as an invocation authority, before any durable work', async (_name, authority) => {
+    const estate = createDurableEstate()
+    const error = await createProductionAdultReviewWorkerComposition({
+      env: ENV, fetchImpl: estate.fetchImpl, invocationAuthority: authority,
+    }).catch((caught) => caught)
+
+    expect(error).toBeInstanceOf(AdultReviewCompositionError)
+    expect(error.reason).toBe('unknown_invocation_authority')
+    // Refused before the first round trip: a wiring mistake must not be able to
+    // buy durable work on its way to being rejected.
+    expect(estate.calls).toHaveLength(0)
+  })
+
+  it('cannot be steered by anything a public caller sends to the manual entrypoint', async () => {
+    // The manual entrypoint names no authority, so it takes the fail-closed
+    // manual default. A body or header that tries to name the scheduled
+    // strategy is ordinary caller data and changes nothing: without the secret
+    // the call is still 403.
+    const estate = createDurableEstate()
+    const response = await handlerFor(estate)(workerEvent({
+      headers: { 'x-nf-event': 'schedule', 'x-academy-study-invocation-authority': 'scheduled' },
+      body: JSON.stringify({
+        schemaVersion: 2, action: 'process-pending', invocationAuthority: 'scheduled',
+      }),
+    }))
+    // The exact-object body gate rejects the smuggled key outright.
+    expect(response.statusCode).toBe(400)
+    expect(estate.names()).not.toContain('academy_study_claim_delivery_jobs_v2')
+  })
+
+  it('defaults to the MANUAL authority, which fails closed without a secret', async () => {
+    // An entrypoint that forgets to name its authority must get the one that
+    // demands a presented secret, never the one whose proof is the platform
+    // path. Stating no authority in an environment with no manual secret must
+    // therefore fail.
     const estate = createDurableEstate()
     const env = { ...ENV }
     delete env.ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET
-    const response = await scheduledHandlerFor(estate, env)()
-    expect(response.statusCode).toBe(503)
-    expect(JSON.parse(response.body)).toEqual({ error: { code: 'service_not_ready' } })
+    const error = await createProductionAdultReviewWorkerComposition({
+      env, fetchImpl: estate.fetchImpl,
+    }).catch((caught) => caught)
+    expect(error.reason).toBe('worker_invocation_authority_not_configured')
+  })
+})
+
+describe('D1 H2: one composition graph, one operations instance', () => {
+  const here = dirname(fileURLToPath(import.meta.url))
+  // Executable lines only. A comment may name a factory to explain it; only a
+  // real call site counts as a construction.
+  const source = readFileSync(resolvePath(here, './composition.js'), 'utf8')
+    .split(/\r?\n/)
+    .filter((line) => {
+      const trimmed = line.trim()
+      return !trimmed.startsWith('//') && !trimmed.startsWith('*') && !trimmed.startsWith('/*')
+    })
+    .join('\n')
+  const constructions = (name) => source.split(`${name}(`).length - 1
+
+  it.each([
+    'createSupabaseAdultReviewOperations',
+    'createSupabaseInAppPersistence',
+    'createDurableInAppProvider',
+    'createAdultReviewWorker',
+    'createSupabaseServiceRpc',
+  ])('constructs %s exactly once in the whole module', (name) => {
+    // The durable graph is NOT duplicated per trigger. Two full compositions
+    // would mean two operations adapters, and a delivery under the second
+    // would fail `lease_context_unknown_job` because the claim lives in the
+    // first. One call site each, for both entrypoints.
+    expect(constructions(name)).toBe(1)
+  })
+
+  it('builds the identical durable graph for both authorities', async () => {
+    const estate = createDurableEstate()
+    const manual = await createProductionAdultReviewWorkerComposition({
+      env: ENV, fetchImpl: estate.fetchImpl,
+    })
+    const scheduled = await createProductionAdultReviewWorkerComposition({
+      env: ENV,
+      fetchImpl: estate.fetchImpl,
+      invocationAuthority: createNetlifyScheduledWorkerAuthorization,
+    })
+
+    // Same shape, same route, same provider, same durable policy.
+    expect(Object.keys(scheduled).sort()).toEqual(Object.keys(manual).sort())
+    expect(scheduled.adultReviewInAppDeliveryPolicy).toBe(manual.adultReviewInAppDeliveryPolicy)
+    expect(scheduled.schema.route).toBe(manual.schema.route)
+    // The one-instance invariant holds for BOTH selections, not just manual.
+    expect(scheduled.inAppLeaseContext).toBe(scheduled.operations.leaseContext)
+    expect(manual.inAppLeaseContext).toBe(manual.operations.leaseContext)
+
+    // The ONLY difference is who may start a run.
+    expect(manual.workerAuthorization.scheduledInvocationAuthority).toBe('refused')
+    expect(scheduled.workerAuthorization.scheduledInvocationAuthority)
+      .toBe('platform-path-exclusivity')
+  })
+
+  it('does the identical durable work on both paths for the same job', async () => {
+    // Behavioural identity: one graph means one delivery sequence. If the two
+    // entrypoints had been given separate compositions, this would drift.
+    const manualEstate = createDurableEstate()
+    await handlerFor(manualEstate)(manualEvent())
+    const scheduledEstate = createDurableEstate()
+    await scheduledHandlerFor(scheduledEstate)()
+
+    expect(scheduledEstate.names()).toEqual(manualEstate.names())
+    expect(scheduledEstate.names()).toContain('academy_study_deliver_in_app_notification_v2')
+  })
+})
+
+describe('D1 H2: a failed composition is never cached', () => {
+  it('re-composes and succeeds on the NEXT scheduled run, with no redeploy', async () => {
+    const estate = createDurableEstate()
+    // One handler, created once, exactly as the deployed module does it. The
+    // handler is NOT rebuilt between the two invocations -- that is the whole
+    // point: a cached failure would wedge the schedule until the next deploy.
+    const handler = scheduledHandlerFor(estate)
+
+    estate.override('academy_study_safety_durable_readiness_v1', () => undefined)
+    const first = await handler()
+    expect(first.statusCode).toBe(503)
+    expect(JSON.parse(first.body)).toEqual({ error: { code: 'service_not_ready' } })
+    expect(estate.names()).not.toContain('academy_study_deliver_in_app_notification_v2')
+
+    // The transient durable outage clears. Same handler, same module.
+    estate.override('academy_study_safety_durable_readiness_v1', () => ({
+      status: 'ready', schemaVersion: 1,
+    }))
+    const second = await handler()
+    expect(second.statusCode).toBe(200)
+    expect(JSON.parse(second.body)).toEqual({ status: 'processed' })
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+    expect(estate.countOf('academy_study_verify_in_app_notification_v2')).toBe(2)
+  })
+
+  it('recovers from a transient failure at each composition stage in turn', async () => {
+    for (const [rpcName, healthy] of [
+      ['academy_study_safety_durable_readiness_v1', () => ({ status: 'ready', schemaVersion: 1 })],
+      ['academy_study_adult_review_readiness_v2',
+        () => ({ state: 'ready', adultReviewInAppDeliveryPolicy: 'approved' })],
+    ]) {
+      const estate = createDurableEstate()
+      const handler = scheduledHandlerFor(estate)
+      estate.override(rpcName, () => undefined)
+      expect((await handler()).statusCode, rpcName).toBe(503)
+      estate.override(rpcName, healthy)
+      expect((await handler()).statusCode, rpcName).toBe(200)
+      expect(estate.countOf('academy_study_deliver_in_app_notification_v2'), rpcName).toBe(1)
+    }
+  })
+
+  it('keeps a warm successful composition warm across runs', async () => {
+    // The flip side of not caching failure: success IS reused, so the schedule
+    // does not re-read readiness and policy on every single run.
+    const estate = createDurableEstate()
+    const handler = scheduledHandlerFor(estate)
+    await handler()
+    await handler()
+    expect(estate.countOf('academy_study_adult_review_readiness_v2')).toBe(1)
+    expect(estate.countOf('academy_study_claim_delivery_jobs_v2')).toBe(2)
+  })
+})
+
+describe('D1 H2: durable policy stays live after the graph is warm', () => {
+  it('CONTROL: a policy that closes after composition still stops delivery at SQL', async () => {
+    // The warm graph memoizes the composition-time policy read, so liveness
+    // cannot come from it. It comes from SQL: the durable delivery transaction
+    // re-checks on every single delivery. This is the control that proves the
+    // memoized 'approved' does NOT grant anything by itself.
+    const estate = createDurableEstate()
+    const handler = scheduledHandlerFor(estate)
+    expect((await handler()).statusCode).toBe(200)
+    expect(estate.countOf('academy_study_verify_in_app_notification_v2')).toBe(2)
+
+    // Durable policy closes. The composition is never rebuilt, and still holds
+    // `adultReviewInAppDeliveryPolicy: 'approved'` from before.
+    estate.override('academy_study_deliver_in_app_notification_v2', () => undefined)
+    expect((await handler()).statusCode).toBe(200)
+
+    // The attempt reached SQL and SQL refused it. No second delivery was
+    // verified, so nothing was delivered on the memoized policy.
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(2)
+    expect(estate.countOf('academy_study_verify_in_app_notification_v2')).toBe(2)
+    // Repeated claim/attempt work on a closed policy is delivery noise, not
+    // authorization: the job is never delivered while SQL refuses.
+  })
+})
+
+/**
+ * The whole point of the split, in one table: which prerequisites are shared
+ * and which belong to one path only.
+ *
+ * `manual` and `scheduled` are the outcomes each entrypoint must reach in that
+ * environment -- 'delivers', or the HTTP status it must fail with. The manual
+ * column always uses a correctly-secreted request where a secret exists, so a
+ * 403 in this table means the AUTHORITY refused, not that the test forged
+ * something.
+ */
+describe('D1 H2: security matrix across both entrypoints', () => {
+  const patched = (patch) => {
+    const env = { ...ENV, ...patch }
+    for (const [key, value] of Object.entries(patch)) if (value === undefined) delete env[key]
+    return env
+  }
+  const SECRET_KEY = 'ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET'
+
+  it.each([
+    // The optional operator secret gates ONLY the manual path.
+    ['manual secret absent', { [SECRET_KEY]: undefined }, 503, 'delivers'],
+    ['manual secret malformed', { [SECRET_KEY]: 'short' }, 503, 'delivers'],
+    ['manual secret rotated', { [SECRET_KEY]: `${INVOCATION_SECRET}-rotated` }, 403, 'delivers'],
+    // Real durable prerequisites are shared: BOTH paths close.
+    ['worker credential absent', { ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL: undefined }, 503, 503],
+    ['worker identity absent', { ACADEMY_STUDY_ADULT_REVIEW_WORKER_ID: undefined }, 503, 503],
+    ['durable service key absent', { SUPABASE_SERVICE_ROLE_KEY: undefined }, 503, 503],
+    ['study disabled', { ACADEMY_STUDY_ENABLED: undefined }, 503, 503],
+    ['study explicitly off', { ACADEMY_STUDY_ENABLED: 'false' }, 503, 503],
+  ])('%s -> manual %s, scheduled %s', async (_name, patch, manualOutcome, scheduledOutcome) => {
+    const env = patched(patch)
+
+    const manualEstate = createDurableEstate()
+    // A correctly-secreted manual request whenever a secret exists at all.
+    const secret = env[SECRET_KEY]
+    const manual = await handlerFor(manualEstate, env)(workerEvent({
+      headers: secret ? { 'x-academy-study-worker-invocation': INVOCATION_SECRET } : {},
+    }))
+    expect(manual.statusCode).toBe(manualOutcome)
+    expect(manualEstate.names()).not.toContain('academy_study_deliver_in_app_notification_v2')
+
+    const scheduledEstate = createDurableEstate()
+    const scheduled = await scheduledHandlerFor(scheduledEstate, env)()
+    if (scheduledOutcome === 'delivers') {
+      expect(scheduled.statusCode).toBe(200)
+      expect(scheduledEstate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+    } else {
+      expect(scheduled.statusCode).toBe(scheduledOutcome)
+      expect(scheduledEstate.names()).not.toContain('academy_study_deliver_in_app_notification_v2')
+    }
+  })
+
+  it('closes BOTH paths when the durable in-app policy is not approved', async () => {
+    // Policy is durable, not an env flag, so it is patched at the RPC.
+    for (const build of [
+      (estate) => handlerFor(estate)(manualEvent()),
+      (estate) => scheduledHandlerFor(estate)(),
+    ]) {
+      const estate = createDurableEstate()
+      estate.override('academy_study_adult_review_readiness_v2', () => ({
+        state: 'ready', adultReviewInAppDeliveryPolicy: 'not-approved',
+      }))
+      const response = await build(estate)
+      expect(response.statusCode).toBe(503)
+      expect(estate.names()).not.toContain('academy_study_deliver_in_app_notification_v2')
+    }
+  })
+})
+
+describe('D1 H2: concurrency across the split is unchanged', () => {
+  it('delivers once when a manual and a scheduled run overlap on one job', async () => {
+    const estate = createDurableEstate()
+    pendingOnce(estate, [claimJob()])
+    const [manual, scheduled] = await Promise.all([
+      handlerFor(estate)(manualEvent()),
+      scheduledHandlerFor(estate)(),
+    ])
+    expect([manual.statusCode, scheduled.statusCode]).toEqual([200, 200])
+    // Two independent compositions, two claim calls, one durable lease holder.
+    expect(estate.countOf('academy_study_claim_delivery_jobs_v2')).toBe(2)
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+    expect(estate.countOf('academy_study_verify_in_app_notification_v2')).toBe(2)
   })
 })
 

@@ -168,12 +168,19 @@ describe('D1 schedule binding: the config key IS the entrypoint filename', () =>
 describe('D1 schedule split: entrypoint import separation', () => {
   const manualEntrypoint = resolvePath(FUNCTIONS_DIR, `${manualEntrypointStem()}.js`)
   const scheduledEntrypoint = resolvePath(FUNCTIONS_DIR, `${scheduledEntrypointStems()[0]}.js`)
+  const COMPOSITION = 'netlify/functions/_shared/study-adult-review-operations/composition.js'
 
-  it('never reaches the scheduled authority from the manual entrypoint', () => {
-    const closure = importClosure(manualEntrypoint)
-    expect(closure.unresolved).toEqual([])
-    expect(closure.modules.size).toBeGreaterThan(5)
-    expect(importersOf(closure, SCHEDULED_AUTHORITY)).toEqual([])
+  it('never names the scheduled authority in the manual entrypoint', () => {
+    // The public entrypoint must not be able to ASK for the authority whose
+    // proof is platform path exclusivity -- that authority authorizes a run
+    // with no presented secret, which is safe only on a path no caller can
+    // reach. It names no authority at all, so it takes the composition's
+    // fail-closed default, which is the manual one.
+    const source = readFileSync(manualEntrypoint, 'utf8')
+    const bindings = importsOf(source).flatMap((statement) => statement.bindings)
+    expect(bindings).not.toContain(SCHEDULED_AUTHORITY)
+    expect(source).not.toMatch(new RegExp(escapeForPattern(SCHEDULED_AUTHORITY)))
+    expect(source).not.toMatch(/invocationAuthority/)
   })
 
   it('never reads a request from the scheduled entrypoint', () => {
@@ -188,17 +195,56 @@ describe('D1 schedule split: entrypoint import separation', () => {
     expect(source).not.toMatch(/INVOCATION/)
   })
 
-  it('declares the one residual module that still constructs manual authority', () => {
-    // The scheduled entrypoint must reach the production composition to get a
-    // worker at all, and that composition -- out of custody for this session --
-    // constructs the manual authorization for its own callers. This pins the
-    // residual to exactly one module, so any widening of it fails here rather
-    // than passing unnoticed. The scheduled entrypoint itself never imports it
-    // and never calls it (asserted above).
-    const closure = importClosure(scheduledEntrypoint)
-    expect(closure.unresolved).toEqual([])
-    expect(importersOf(closure, MANUAL_AUTHORITY))
-      .toEqual(['netlify/functions/_shared/study-adult-review-operations/composition.js'])
+  it('names its authority from a module constant, never from an invocation', () => {
+    // The scheduled entrypoint selects its authority, so the selection must be
+    // a fixed import reference -- not a string, not a lookup, not anything
+    // that could ever be assembled from input. It reads no request at all
+    // (asserted above), so there is nothing to assemble one from either.
+    const source = readFileSync(scheduledEntrypoint, 'utf8')
+    const bindings = importsOf(source).flatMap((statement) => statement.bindings)
+    expect(bindings).toContain(SCHEDULED_AUTHORITY)
+    expect(source).toMatch(
+      new RegExp(`invocationAuthority:\\s*${escapeForPattern(SCHEDULED_AUTHORITY)}`),
+    )
+  })
+
+  it('routes both authorities through exactly one selector module', () => {
+    // H2: the composition is the ONE module that knows both authorities,
+    // because it is the selector. Every other module reaches at most one. If a
+    // second module ever starts importing either factory, a path could
+    // construct an authority behind the selector's back, and that widening
+    // fails here rather than passing unnoticed.
+    for (const entry of [manualEntrypoint, scheduledEntrypoint]) {
+      const closure = importClosure(entry)
+      expect(closure.unresolved).toEqual([])
+      expect(closure.modules.size).toBeGreaterThan(5)
+      expect(importersOf(closure, MANUAL_AUTHORITY)).toEqual([COMPOSITION])
+    }
+    // The scheduled entrypoint is the one exception, and it is the intended
+    // one: it names the authority it is selecting.
+    expect(importersOf(importClosure(scheduledEntrypoint), SCHEDULED_AUTHORITY))
+      .toEqual([COMPOSITION, repoPath(scheduledEntrypoint)].sort())
+    expect(importersOf(importClosure(manualEntrypoint), SCHEDULED_AUTHORITY))
+      .toEqual([COMPOSITION])
+  })
+
+  it('reads the optional manual operator secret in exactly one module', () => {
+    // H2, structurally: the secret that gates the OPTIONAL manual path must be
+    // read in one place only -- the manual authority factory. Anything else
+    // reading it would re-couple the automatic worker to an operator
+    // convenience, which is the defect this session closed.
+    const SECRET = 'ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET'
+    const readers = []
+    for (const file of [...importClosure(scheduledEntrypoint).modules.keys()]) {
+      for (const line of readFileSync(file, 'utf8').split(/\r?\n/)) {
+        const trimmed = line.trim()
+        // Comments may still explain which path needs the secret and why; only
+        // executable lines are forbidden from naming it.
+        if (trimmed.startsWith('//') || trimmed.startsWith('*') || trimmed.startsWith('/*')) continue
+        if (trimmed.includes(SECRET)) readers.push(repoPath(file))
+      }
+    }
+    expect([...new Set(readers)]).toEqual(['netlify/functions/_shared/study-worker/credential.js'])
   })
 })
 
