@@ -57,13 +57,30 @@ const UNVALIDATED = 'study-session:9f2c1'
  * `StudyTutorLearnerText`, so the literal stops compiling at all six turn
  * fixtures below.
  *
- * Repaired by validating once, NOT by a second `@ts-expect-error` on those
- * lines. A directive there would have been satisfied by the learner-text error
- * alone, and TypeScript would then have reported nothing when the ref field
- * beside it lost its brand — the suppression would have consumed the very
- * signal each pin exists to raise, and all seven would have gone on passing
- * against an unbranded `string`. One validated constant leaves each
- * `@ts-expect-error` with exactly one error to answer for: its own field.
+ * Repaired by validating once rather than by adding a second `@ts-expect-error`
+ * on the learner-text lines.
+ *
+ * STUDY-A1-PROD-TUTOR-WRAPPER-C CORRECTION. The H4 comment here justified that
+ * choice with a masking mechanism that does not exist. It said a directive on
+ * the learner-text line would have been "satisfied by the learner-text error
+ * alone", leaving TypeScript silent when the ref field beside it lost its
+ * brand. That is not how the directive behaves, and the independent H4 review
+ * was right to flag it.
+ *
+ * Measured against this compiler rather than reasoned about: `@ts-expect-error`
+ * applies to the immediately following line, and TS2578 ("Unused
+ * '@ts-expect-error' directive") is reported PER DIRECTIVE. Two directives on
+ * two adjacent field lines are independent — with the first field correct and
+ * the second still in error, tsc reports TS2578 against the first and says
+ * nothing about the second. So a directive on a learner-text line could not
+ * have consumed the ref-field pin's signal, and each pin would have kept
+ * working.
+ *
+ * The repair below is therefore kept on its own merits and NOT because the
+ * alternative was unsafe: one validated constant leaves each `@ts-expect-error`
+ * with exactly one error to answer for — its own field — and it does so without
+ * scattering seven extra suppressions through the fixtures, each of which would
+ * be a place a future reader has to re-derive what is being suppressed and why.
  */
 const LEARNER_TEXT = parseStudyTutorLearnerText('ready')!
 

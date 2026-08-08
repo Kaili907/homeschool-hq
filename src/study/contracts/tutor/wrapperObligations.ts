@@ -35,15 +35,42 @@
  * If launch rejects and any of those already happened, the host has recorded a
  * Study session that never started for a learner who never got one.
  *
- * NOT CLOSED HERE. This card does not modify StudySessionContainer, which today
- * calls the preview runtime's synchronous `launch` for effect. The requirement
- * lands with the wrapper.
+ * CLOSED by STUDY-A1-PROD-TUTOR-WRAPPER-C, and closed on evidence rather than
+ * on the existence of a wrapper.
+ *
+ * The bar this card set for itself was that the real host must be shown
+ * incapable of the mistake, not merely written so as to avoid it. Both halves
+ * are in place:
+ *
+ *  - STRUCTURALLY. `settleStudyTutorLaunch` in
+ *    src/study/production/tutorLaunchOrdering.ts awaits the launch, re-asserts
+ *    the lifecycle epoch afterwards, and returns a `LaunchSettled` witness
+ *    branded with an unexported `unique symbol`. `prepareDurableStudySession`
+ *    — which performs all three preparations above and is the only thing that
+ *    does — requires that witness. A host cannot reach a durable write before a
+ *    settled launch without an explicit type assertion; it does not compile.
+ *
+ *  - BEHAVIOURALLY. src/study/production/tutorLaunchOrdering.integration.test.tsx
+ *    mounts the REAL StudySessionContainer against the REAL Study ports with a
+ *    Tutor whose launch rejects only after twelve microtask turns — comfortably
+ *    past where an unawaiting host would have written all three records — and
+ *    asserts that none of them happened, that no active session row exists, and
+ *    that the calendar block is still `scheduled`. The same file first
+ *    REPRODUCES the defect with the pre-card ordering against those same ports,
+ *    so the guard is shown to be guarding something real.
+ *
+ * The residual, stated plainly and in the same terms as F4's below: one
+ * `as LaunchSettled` compiles. That is what a type assertion IS, and a contract
+ * claiming otherwise would invite a later author to trust a guarantee that was
+ * never there. What the witness removes is every bypass that reads as correct
+ * code — a forgotten `await`, a reordered pair of statements, a boolean flag
+ * set too early.
  */
 export const STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT = Object.freeze({
   id: 'WRAPPER_LANDING_REQUIREMENT',
   condition: 'F1',
   requirement: 'AWAIT_LAUNCH_BEFORE_DURABLE_PREPARATION',
-  status: 'open',
+  status: 'closed',
   mustPrecede: Object.freeze([
     'calendar-start',
     'session-launched-event',
@@ -56,6 +83,12 @@ export const STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT = Object.freeze({
    * durable write.
    */
   enforcedBy: 'production-wrapper-integration-tests',
+  /** The card that discharged it, so the claim is attributable. */
+  closedBy: 'STUDY-A1-PROD-TUTOR-WRAPPER-C',
+  /** The structural half, named the way F4 names its own. */
+  contractEnforcement: 'launch-settled-witness',
+  /** The same residual the validated-result brand has, and for the same reason. */
+  residualBypass: 'single-explicit-type-assertion',
 } as const)
 
 /**
@@ -138,7 +171,15 @@ export const STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT = Object.freeze({
   ]),
 } as const)
 
-/** Both, for a wrapper card to enumerate rather than rediscover. */
+/**
+ * Both, for a wrapper card to enumerate rather than rediscover.
+ *
+ * They no longer share a status, and that asymmetry is the point. F1 was a
+ * property of how a host CALLS the contract, so a host could discharge it and
+ * one now has. F4 is a property of what a type assertion can express, so no
+ * host can discharge it and none ever will — it stays open, and the honest
+ * statement of what the brand does and does not buy stays with it.
+ */
 export const STUDY_TUTOR_WRAPPER_LANDING_REQUIREMENTS = Object.freeze([
   STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT,
   STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT,

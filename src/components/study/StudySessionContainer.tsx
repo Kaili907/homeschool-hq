@@ -5,11 +5,22 @@ import {
   type HostStudyLifecycleSeam,
 } from '../../study/composition/hostStudyLifecycle'
 import { assertCompleteStudyPortBundle, type StudyPortBundle } from '../../study/ports'
-import { AcceptedRc1HostRuntime } from '../../study/runtimeFacade'
+import { AcceptedRc1HostRuntime, type StudyTutorTurnResult } from '../../study/runtimeFacade'
 import { runCurrentStudyWork } from '../../study/production/lifecycleBoundary'
+import {
+  prepareDurableStudySession,
+  settleStudyTutorLaunch,
+} from '../../study/production/tutorLaunchOrdering'
+import {
+  parseStudyTutorLearnerText,
+  parseStudyTutorRef,
+  type StudyTutorRuntime,
+  type ValidatedStudyTutorResult,
+} from '../../study/contracts/tutor'
 import { STUDY_LEARNER_STOP_MESSAGE } from '../../study/safety/learnerSafe'
 import { isSessionStoppedByLocalLedger, recordLocalSessionSafetyStop } from '../../study/safety/localStopLedger'
 import { createStudyTurnRequestRef } from '../../study/studyRequestRef'
+import { studyBridgeSessionRef } from '../../study/studyBridgeSessionRef'
 import type { HostStudyLaunchContext, StudyAccessibilitySettings, StudyCalendarEntry, StudyCheckpoint, StudyRuntimeInterruption } from '../../study/types'
 import './study-host.css'
 
@@ -50,6 +61,68 @@ function interruptionMessage(interruption: StudyRuntimeInterruption): string {
  */
 function studyInstant(): string {
   return new Date(Math.ceil(Date.now() / 1_000) * 1_000).toISOString()
+}
+
+/**
+ * STUDY-A1-PROD-TUTOR-WRAPPER — the one turn shape this surface renders.
+ *
+ * The preview facade and the production contract answer the same four
+ * questions with two different shapes: the facade's accepted arm nests its
+ * prose under `presentation`, and its stopped arm carries a `studentMessage`
+ * and a `classification` the contract deliberately does not have.
+ *
+ * Both are normalized to this before the branches below, so there is ONE set of
+ * durable-write branches for both runtimes rather than two that must be kept in
+ * step. A safety stop writing the ledger on one path and not the other is
+ * exactly the class of drift that would not show up until it mattered.
+ */
+type StudyHostTurnResult =
+  | { readonly status: 'accepted'; readonly eventRef: string; readonly visibleText: string }
+  | {
+      readonly status: 'stopped'
+      readonly reasonCode: string
+      readonly deliveryStatus: 'proposed-not-delivered' | 'not-confirmed'
+      readonly studentMessage: string
+    }
+  | { readonly status: 'interrupted'; readonly interruption: StudyRuntimeInterruption }
+  | { readonly status: 'quarantined' }
+
+function previewTurnResult(result: StudyTutorTurnResult): StudyHostTurnResult {
+  if (result.status === 'accepted') {
+    return { status: 'accepted', eventRef: result.eventRef, visibleText: result.presentation.visibleText }
+  }
+  if (result.status === 'stopped') {
+    return {
+      status: 'stopped',
+      reasonCode: result.reasonCode,
+      deliveryStatus: result.deliveryStatus,
+      studentMessage: result.studentMessage,
+    }
+  }
+  if (result.status === 'interrupted') return { status: 'interrupted', interruption: result.interruption }
+  return { status: 'quarantined' }
+}
+
+/**
+ * The production contract's `stopped` arm carries no learner-facing message,
+ * and that absence is deliberate: the host owns the words a stopped child
+ * reads. So the message comes from the host's own constant here rather than
+ * from anything a Tutor said.
+ */
+function validatedTurnResult(result: ValidatedStudyTutorResult): StudyHostTurnResult {
+  if (result.status === 'accepted') {
+    return { status: 'accepted', eventRef: result.eventRef, visibleText: result.visibleText }
+  }
+  if (result.status === 'stopped') {
+    return {
+      status: 'stopped',
+      reasonCode: result.reasonCode,
+      deliveryStatus: result.deliveryStatus,
+      studentMessage: STUDY_LEARNER_STOP_MESSAGE,
+    }
+  }
+  if (result.status === 'interrupted') return { status: 'interrupted', interruption: result.interruption }
+  return { status: 'quarantined' }
 }
 
 export function studyAccessibilityProjection(settings: StudyAccessibilitySettings) {
@@ -94,7 +167,7 @@ export function StudyTutorSafetySurface({
   )
 }
 
-export function StudySessionContainer({ context: baseContext, initialEntry, ports, studyLifecycle, onBack }: {
+export function StudySessionContainer({ context: baseContext, initialEntry, ports, studyLifecycle, tutorRuntime, onBack }: {
   context: HostStudyLaunchContext
   initialEntry: StudyCalendarEntry
   ports: Partial<StudyPortBundle>
@@ -105,6 +178,22 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
    * before it started and the live session path was unreachable.
    */
   studyLifecycle: HostStudyLifecycleSeam
+  /**
+   * STUDY-A1-PROD-TUTOR-WRAPPER — the production Tutor, when the host has one.
+   *
+   * Optional, and absent on every path that exists today: App.tsx is untouched
+   * by this card and no production Study route is mounted
+   * (PRODUCTION_ROUTE_NOT_MOUNTED). With it absent this container drives the
+   * same preview runtime it always has, and the preview behaviour below is
+   * unchanged.
+   *
+   * What is NOT conditional on it is the ORDERING. `settleStudyTutorLaunch`
+   * runs on both paths, so the rule "await the launch before anything durable"
+   * is enforced for the preview runtime too — a rule that only applied to the
+   * production runtime would be a rule nothing currently mounted could break,
+   * which is how it would rot.
+   */
+  tutorRuntime?: StudyTutorRuntime
   onBack: () => void
 }) {
   const context: HostStudyLaunchContext = {
@@ -160,6 +249,81 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
   const accessibilityProjection = studyAccessibilityProjection(context.accessibility)
   const isCurrentBinding = () => bindingRef.current === `${context.householdRef}|${context.learnerRef}|${initialEntry.blockRef}`
 
+  /**
+   * STUDY-A1-PROD-TUTOR-WRAPPER Phase 14 — every Tutor-facing reference through
+   * a canonical parser, and no manual assertion anywhere.
+   *
+   * `sessionRef` is bounded by `studyBridgeSessionRef` first, exactly as the
+   * preview seam bounds it: the durable host reference can exceed the bridge's
+   * 128-character opaque-id rule, and a refusal there arrives as
+   * `stop-invalid-input` — a durable safety stop about a child who did nothing.
+   * The durable reference itself is untouched and stays whole everywhere else.
+   *
+   * A reference the contract will not admit throws, which rejects the launch.
+   * That is the fail-closed direction and it costs nothing durable: the witness
+   * is never produced, so no durable preparation runs.
+   */
+  const productionTutorLaunch = () => {
+    const tutorSessionRef = parseStudyTutorRef(studyBridgeSessionRef(sessionRef))
+    const tutorLessonRef = parseStudyTutorRef(initialEntry.lessonRef)
+    if (!tutorSessionRef || !tutorLessonRef) {
+      throw new Error('This Study Session has a reference the Tutor contract does not admit.')
+    }
+    return {
+      sessionRef: tutorSessionRef,
+      lessonRef: tutorLessonRef,
+      householdTimeZone: context.householdTimeZone,
+      learnerLocalDate: context.learnerLocalDate,
+    }
+  }
+
+  /**
+   * One production turn, built entirely from canonical parsers.
+   *
+   * Every reference goes through `parseStudyTutorRef` and the learner's words go
+   * through `parseStudyTutorLearnerText`. Over-long learner input is REFUSED
+   * here, not truncated: the bridge's pre-core gateway refuses text over 4,000
+   * characters before its classifier runs and shapes that refusal as
+   * `stop-invalid-input`, which the stopped branch would write to the durable
+   * safety ledger — a girl told to find a trusted adult for pasting her long
+   * division. Truncating instead would send the Tutor the stump of her sentence
+   * and let it answer that.
+   *
+   * A refusal returns `quarantined`, which writes nothing durable, locks
+   * nothing, and says nothing about her.
+   */
+  const productionTurnResult = async (
+    tutor: StudyTutorRuntime,
+    turn: {
+      readonly requestRef: string
+      readonly segmentRef: string
+      readonly transientLearnerText: string
+      readonly occurredAt: string
+    },
+  ): Promise<StudyHostTurnResult> => {
+    const launch = productionTutorLaunch()
+    const requestRef = parseStudyTutorRef(turn.requestRef)
+    const segmentRef = parseStudyTutorRef(turn.segmentRef)
+    const skillRef = parseStudyTutorRef(context.skillRefs[0] ?? `${entry.lessonRef}:completion`)
+    const transientLearnerText = parseStudyTutorLearnerText(turn.transientLearnerText)
+    if (!requestRef || !segmentRef || !skillRef || !transientLearnerText) return { status: 'quarantined' }
+    return validatedTurnResult(await tutor.submit({
+      sessionRef: launch.sessionRef,
+      requestRef,
+      lessonRef: launch.lessonRef,
+      segmentRef,
+      subject: context.subject,
+      skillRef,
+      taskType: entry.segments.find((candidate) => candidate.segmentRef === turn.segmentRef)?.taskType
+        ?? 'guided-practice',
+      transientLearnerText,
+      expectedAnswer: 'ready',
+      occurredAt: turn.occurredAt,
+      learnerLocalDate: context.learnerLocalDate,
+      householdTimeZone: context.householdTimeZone,
+    }))
+  }
+
   useEffect(() => {
     // STUDY-A1-STRICTMODE-PREVIEW — attach to the App's epoch. This never begins
     // one, and the cleanup below no longer cancels one: React runs
@@ -179,31 +343,39 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
       // turn and no calendar transition can happen behind the locked surface.
       if (isSessionStoppedByLocalLedger(stopKey)) return null
       assertCompleteStudyPortBundle(ports)
-      runtime.launch(context, initialEntry, sessionRef)
-      let next = initialEntry
+      /**
+       * STUDY-A1-PROD-TUTOR-WRAPPER — F1, closed here.
+       *
+       * This line used to be `runtime.launch(context, initialEntry, sessionRef)`
+       * with no `await`, immediately followed by the calendar transition, the
+       * session-launched event and `saveSession`. That was safe only because
+       * the preview runtime's `launch` is synchronous. The production contract's
+       * is `Promise<void>`, and on that shape the old ordering meant: mark the
+       * block begun, write a durable record saying Study started, persist an
+       * active session row — and only then discover the Tutor session does not
+       * exist. Nothing rolls back, so a girl who never got a Study session had
+       * one in her father's record and an active row her next visit resumed into.
+       *
+       * `settleStudyTutorLaunch` awaits the launch and re-asserts this epoch
+       * afterwards, and it returns a witness that `prepareDurableStudySession`
+       * requires. The ordering is therefore not a convention two adjacent
+       * statements happen to keep: reversing it does not compile.
+       */
       const now = studyInstant()
-      if (next.state === 'scheduled') next = await runCurrentStudyWork(surface.token, () => ports.calendar.start(learnerScope, next.blockRef, now))
-      if (next.state === 'paused') next = await runCurrentStudyWork(surface.token, () => ports.calendar.resume(learnerScope, next.blockRef, now))
-      const segment = next.segments.find((candidate) => !next.completedSegmentRefs.includes(candidate.segmentRef))
-      if (!segment) throw new Error('This Study block is already complete.')
-      await runCurrentStudyWork(surface.token, () => ports.eventLedger.append(scope, {
-        eventRef: `launch:${sessionRef}`,
-        occurredAt: now,
-        type: 'session-launched',
-        payload: { lessonRef: next.lessonRef, segmentRef: segment.segmentRef },
-      }))
-      await runCurrentStudyWork(surface.token, () => ports.persistence.saveSession({
+      const settled = await settleStudyTutorLaunch(surface.token, () => (
+        tutorRuntime
+          ? tutorRuntime.launch(productionTutorLaunch())
+          : runtime.launch(context, initialEntry, sessionRef)
+      ))
+      return await prepareDurableStudySession(settled, {
+        token: surface.token,
+        ports,
         scope,
-        lessonRef: next.lessonRef,
-        segmentRef: segment.segmentRef,
-        status: 'active',
-        updatedAt: now,
-        lastAcceptedEventRef: null,
-        rawAnswerIncluded: false,
-        transcriptIncluded: false,
-      }))
-      surface.token.assertCurrent()
-      return next
+        learnerScope,
+        entry: initialEntry,
+        sessionRef,
+        now,
+      })
     }
     // One preparation per epoch and session, so the replayed setup ADOPTS the
     // first one instead of launching the session, starting the calendar block and
@@ -293,24 +465,34 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
       const at = studyInstant()
       let acceptedEventRef: string | null = null
       if (entry.masteryAuthority === 'tutor-core') {
-        const result = await runCurrentStudyWork(token, () => runtime.submit({
-          context,
-          entry,
-          scope,
-          // STUDY-A1-COMP Phase 9. This used to be built from the session and
-          // the segment, so it grew with them and crossed the Tutor bridge's
-          // 128-character opaque-id bound on ordinary host lesson references —
-          // and a clear turn came back as `bridge-stop-invalid-input`, which the
-          // stopped branch below then wrote to the durable ledger as a safety
-          // incident. The session and the segment still travel to the bridge as
-          // `sessionId` and `segmentId`; only this identifier is now bounded.
-          requestRef: createStudyTurnRequestRef(),
-          segmentRef: currentSegment.segmentRef,
-          transientLearnerText: transient,
-          expectedAnswer: 'ready',
-          occurredAt: at,
-          isCurrentBinding: () => token.isCurrent() && isCurrentBinding(),
-        }))
+        // STUDY-A1-COMP Phase 9. This used to be built from the session and
+        // the segment, so it grew with them and crossed the Tutor bridge's
+        // 128-character opaque-id bound on ordinary host lesson references —
+        // and a clear turn came back as `bridge-stop-invalid-input`, which the
+        // stopped branch below then wrote to the durable ledger as a safety
+        // incident. The session and the segment still travel to the bridge as
+        // `sessionId` and `segmentId`; only this identifier is now bounded.
+        const requestRef = createStudyTurnRequestRef()
+        const result = await runCurrentStudyWork(token, () => (
+          tutorRuntime
+            ? productionTurnResult(tutorRuntime, {
+                requestRef,
+                segmentRef: currentSegment.segmentRef,
+                transientLearnerText: transient,
+                occurredAt: at,
+              })
+            : runtime.submit({
+                context,
+                entry,
+                scope,
+                requestRef,
+                segmentRef: currentSegment.segmentRef,
+                transientLearnerText: transient,
+                expectedAnswer: 'ready',
+                occurredAt: at,
+                isCurrentBinding: () => token.isCurrent() && isCurrentBinding(),
+              }).then(previewTurnResult)
+        ))
         // STUDY-A1-AUTH-C — handled before the safety-stop branch, and sharing
         // none of it. Nothing durable is written, no safety event is appended,
         // the lifecycle is not cancelled, and no claim is made about what the
@@ -391,8 +573,8 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
         if (result.status === 'quarantined') throw new Error('quarantined')
         acceptedEventRef = result.eventRef
         setCheckingTutorSafety(false)
-        setJarvisText(result.presentation.visibleText)
-        setApprovedTranscript((items) => [...items, result.presentation.visibleText])
+        setJarvisText(result.visibleText)
+        setApprovedTranscript((items) => [...items, result.visibleText])
       } else {
         setJarvisText('Activity completion recorded. No mastery decision was made.')
       }

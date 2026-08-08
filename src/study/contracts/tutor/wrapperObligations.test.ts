@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import { parseStudyTutorRef } from './refs'
@@ -192,15 +192,17 @@ describe('F1 — launch must be awaited before durable preparation', () => {
   })
 })
 
-describe('wrapper landing requirements stay open', () => {
+describe('wrapper landing requirements', () => {
   it('names both conditions the contract cannot close by itself', () => {
     expect(STUDY_TUTOR_WRAPPER_LANDING_REQUIREMENTS).toHaveLength(2)
     for (const requirement of STUDY_TUTOR_WRAPPER_LANDING_REQUIREMENTS) {
       expect(requirement.id).toBe('WRAPPER_LANDING_REQUIREMENT')
-      // Not "closed" here, and not quietly downgraded to a comment later.
-      expect(requirement.status).toBe('open')
+      // Whatever the status, the enforcement stays with the wrapper's own
+      // integration suite: a requirement that quietly became "enforced by a
+      // comment" is a requirement nothing enforces.
       expect(requirement.enforcedBy).toBe('production-wrapper-integration-tests')
       expect(Object.isFrozen(requirement)).toBe(true)
+      expect(['open', 'closed']).toContain(requirement.status)
     }
     expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.condition).toBe('F1')
     expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.requirement).toBe('AWAIT_LAUNCH_BEFORE_DURABLE_PREPARATION')
@@ -267,12 +269,45 @@ describe('wrapper landing requirements stay open', () => {
     expect(source).toMatch(/ONE assertion is\s+\* enough/)
   })
 
-  it('leaves the async launch requirement exactly where H2 left it', () => {
-    // H3 touches nothing about F1. The host that must await `launch` still does
-    // not exist, so claiming this closed would be a claim about code nobody has
-    // written.
-    expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.status).toBe('open')
-    expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.requirement).toBe('AWAIT_LAUNCH_BEFORE_DURABLE_PREPARATION')
-    expect(Object.hasOwn(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT, 'contractEnforcement')).toBe(false)
+  /**
+   * STUDY-A1-PROD-TUTOR-WRAPPER-C. F1 is closed, and this is where the claim is
+   * held to its evidence rather than to its own assertion.
+   *
+   * Closing a requirement by editing one word is exactly the paperwork move the
+   * H2 comment warned about, so the checks below are about the code that
+   * discharges it: the ordering module must exist, it must be the only producer
+   * of the witness, and the host container must actually route its preparation
+   * through both halves. If a later card deletes the ordering module or unwires
+   * the container, this fails and the closure is exposed as false.
+   */
+  it('records F1 as closed, with the structural enforcement named', () => {
+    expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.status).toBe('closed')
+    expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.closedBy).toBe('STUDY-A1-PROD-TUTOR-WRAPPER-C')
+    expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.contractEnforcement).toBe('launch-settled-witness')
+    // The same residual F4 records, stated rather than glossed over.
+    expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.residualBypass).toBe('single-explicit-type-assertion')
+  })
+
+  it('is closed by code that exists, not by an edited word', () => {
+    const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..')
+    const ordering = readFileSync(join(root, 'production', 'tutorLaunchOrdering.ts'), 'utf8')
+    // One await, one post-await re-assertion, one witness producer.
+    expect(ordering).toMatch(/await launch\(\)/)
+    expect(ordering).toMatch(/export async function settleStudyTutorLaunch/)
+    expect(ordering).toMatch(/export async function prepareDurableStudySession/)
+    // The brand is unexported, so nothing else can mint the witness.
+    expect(ordering).toMatch(/declare const STUDY_TUTOR_LAUNCH_SETTLED_BRAND: unique symbol/)
+    expect(ordering).not.toMatch(/export function settled\b/)
+
+    // And the host actually uses both halves. The three durable preparations
+    // live inside the helper, so the container reaching them any other way
+    // would show up as the container calling the ports directly during
+    // preparation — which is what the integration test proves it does not.
+    const container = readFileSync(
+      join(root, '..', 'components', 'study', 'StudySessionContainer.tsx'),
+      'utf8',
+    )
+    expect(container).toMatch(/await settleStudyTutorLaunch\(/)
+    expect(container).toMatch(/prepareDurableStudySession\(settled,/)
   })
 })
