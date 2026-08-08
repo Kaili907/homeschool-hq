@@ -116,12 +116,15 @@
     "This file records that these migrations ARE in hosted history. It does NOT record that the hosted objects are byte-identical to the current repository files, and nothing here licenses skipping a future equivalence check."
   ],
   "consequenceForThisRepository": {
+    "derivedAsOf": "2026-08-08",
+    "derivedAsOfNote": "This consequence section — and only this section — was restated after the C2 operations contract was composed onto this reconciliation. The restatement is arithmetic on the current lineage, not new provenance: no hosted contact was made, no historical evidence above this section was reopened, re-derived, or weakened, and every claim about what is in hosted history still rests exactly on the record as originally written. The prior text named a single remaining executable migration and was accurate on the eleven-file lineage it was written against; the lineage is now twelve files and that count had fallen behind. Nothing here promotes, demotes, or re-approves any migration.",
     "manifest": "All ten are classified historical-baseline with applicationStatus hosted-applied-ledger-recorded in migration-manifest.json.",
     "frozenFloor": "All ten are members of FROZEN_HISTORICAL_BASELINE_FILENAMES in scripts/study-migration-preflight.mjs, so no manifest this estate can present may offer any of them as executable work.",
     "remainingExecutable": [
-      "20260806120000_academy_study_in_app_receipt_timestamp.sql"
+      "20260806120000_academy_study_in_app_receipt_timestamp.sql",
+      "20260806140000_academy_study_c2_operations_contract.sql"
     ],
-    "remainingExecutableNote": "Authored Aug 6 2026, after the Aug 3 burst. It has never run against the hosted project and stays classified executable with applicationStatus not-applied-hosted.",
+    "remainingExecutableNote": "Both were authored Aug 6 2026, after the Aug 3 burst, and the second depends on the first. Neither has ever run against the hosted project; both stay classified executable with applicationStatus not-applied-hosted. This list is the executable set as of derivedAsOf and is expected to grow as forward migrations are appended — it is a statement of the current lineage, never a ceiling on it. The load-bearing invariant is the frozen floor above, which no append can move.",
     "gateState": "The preflight authorization gate remains allowed:false. This record does not set, and must not be read as setting, any of its evidence flags."
   }
 }

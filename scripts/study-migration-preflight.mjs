@@ -50,8 +50,10 @@ export const ALLOWED_APPLICATION_STATUS = new Map([
  * ledger, and the six Study migrations the Aug 3 2026 DDL burst applied to it. The six
  * were carried as executable until this reconciliation — a repository record that had
  * fallen behind hosted reality, and one that offered six already-applied migrations as
- * replayable work. The eleventh migration on this lineage has never run against hosted
- * and is deliberately absent from this floor.
+ * replayable work. Every migration on this lineage above the ten has never run against
+ * hosted and is deliberately absent from this floor; that set was one migration when
+ * this comment was first written and grows with each forward append, which is exactly
+ * why the rule below is membership of these ten and never a count or an offset.
  */
 export const FROZEN_HISTORICAL_BASELINE_FILENAMES = Object.freeze([
   '20260724074106_academy_profiles_base.sql',

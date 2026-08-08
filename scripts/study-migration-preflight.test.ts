@@ -550,8 +550,10 @@ describe('manifest against the migration files on disk', () => {
 describe('frozen hosted historical baseline floor', () => {
   it('pins the audited floor membership', () => {
     // Exactly the ten migrations recorded as applied against the hosted ledger — the
-    // four foundation files and the six Study files — and nothing else. The eleventh
-    // migration on this lineage has never run against hosted and must stay executable.
+    // four foundation files and the six Study files — and nothing else. Every migration
+    // on this lineage above the ten has never run against hosted and must stay
+    // executable; that set has grown past the single member it held when this was
+    // written, which is why the floor is pinned by membership and not by a count.
     expect([...FROZEN_HISTORICAL_BASELINE_FILENAMES]).toEqual(HOSTED_APPLIED_FILENAMES)
     expect(FROZEN_HISTORICAL_BASELINE_FILENAMES).toHaveLength(10)
     expect(FROZEN_HISTORICAL_BASELINE_FILENAMES)
@@ -847,10 +849,11 @@ describe('frozen floor is immune to duplicated frozen filenames', () => {
  */
 describe('legal growth above the frozen floor', () => {
   /**
-   * Growth is exercised on fixtures rather than on the checked-in manifest. That
-   * manifest now carries exactly one executable migration, so promoting it does not
-   * demonstrate growth — it exhausts the executable set, which is the shape-rule case
-   * pinned at the end of this block. Fixtures write real files for every checksum
+   * Growth is exercised on fixtures rather than on the checked-in manifest. Promoting
+   * the checked-in executables walks that manifest toward an exhausted executable set —
+   * the shape-rule case pinned at the end of this block — rather than demonstrating
+   * growth, and the size of that set moves with every forward append, so a test anchored
+   * to it would re-break on each one. Fixtures write real files for every checksum
    * assertion and lay down the real ten-member floor, so nothing is lost by moving.
    */
   const GROWTH_SIZES = [1, 2, 3, 5, 8]
