@@ -205,13 +205,14 @@ describe('hosted-applied migrations are never executable work', () => {
   )
 
   // Named in full and in order, never counted. A length assertion would be satisfied
-  // by any three executables, including a hosted-applied member demoted back out of the
+  // by any four executables, including a hosted-applied member demoted back out of the
   // floor while a forward migration took its place — the exact substitution this list
   // exists to refuse. Every member postdates the Aug 3 2026 burst and has never run
   // against hosted: the receipt-timestamp contract, the C2 operations contract that
-  // depends on it, and the actor-bound session verification overload above both. This
-  // list grows by one on each forward append and must be extended deliberately; that
-  // it has to be edited is the point, not friction to design away.
+  // depends on it, the actor-bound session verification overload above both, and the
+  // read-only academic readiness contract above that. This list grows by one on each
+  // forward append and must be extended deliberately; that it has to be edited is the
+  // point, not friction to design away.
   it('leaves exactly the never-applied migrations executable on this lineage', async () => {
     const manifest = await checkedInManifest()
     expect(manifest.migrations.filter((entry) => entry.classification === EXECUTABLE)
@@ -220,6 +221,7 @@ describe('hosted-applied migrations are never executable work', () => {
         '20260806120000_academy_study_in_app_receipt_timestamp.sql',
         '20260806140000_academy_study_c2_operations_contract.sql',
         '20260808120000_academy_study_actor_bound_session_verification.sql',
+        '20260808150000_academy_study_academic_readiness_contract.sql',
       ])
   })
 
