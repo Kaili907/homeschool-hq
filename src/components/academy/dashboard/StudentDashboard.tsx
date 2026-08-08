@@ -68,13 +68,13 @@ function lessonContext(lesson: DashboardLesson) {
 
 function JarvisCore() {
   return (
-    <div className="jarvis-core" aria-hidden="true">
-      <span className="jarvis-core__ambient-halo" />
-      <span className="jarvis-core__outer-detail" />
-      <span className="jarvis-core__secondary-orbit" />
-      <span className="jarvis-core__primary-ring" />
-      <span className="jarvis-core__nucleus">
-        <span className="jarvis-core__monogram">M</span>
+    <div className="student-dashboard__jarvis-core" aria-hidden="true">
+      <span className="student-dashboard__jarvis-ambient-halo" />
+      <span className="student-dashboard__jarvis-outer-detail" />
+      <span className="student-dashboard__jarvis-secondary-orbit" />
+      <span className="student-dashboard__jarvis-primary-ring" />
+      <span className="student-dashboard__jarvis-nucleus">
+        <span className="student-dashboard__jarvis-monogram">M</span>
       </span>
     </div>
   )

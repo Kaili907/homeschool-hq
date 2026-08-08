@@ -386,7 +386,7 @@ describe('StudentDashboard', () => {
 
   it('renders every Jarvis visual tier inside one aria-hidden decorative object', () => {
     const html = renderDashboard()
-    const jarvisCore = html.match(/<div class="jarvis-core" aria-hidden="true">[\s\S]*?<\/div>/)?.[0]
+    const jarvisCore = html.match(/<div class="student-dashboard__jarvis-core" aria-hidden="true">[\s\S]*?<\/div>/)?.[0]
     expect(jarvisCore).toBeTruthy()
     for (const layer of [
       'ambient-halo',
@@ -396,10 +396,32 @@ describe('StudentDashboard', () => {
       'nucleus',
       'monogram',
     ]) {
-      expect(jarvisCore).toContain(`jarvis-core__${layer}`)
+      expect(jarvisCore).toContain(`student-dashboard__jarvis-${layer}`)
     }
     expect(jarvisCore?.match(/aria-hidden="true"/g)).toHaveLength(1)
     expect(jarvisCore).not.toMatch(/\b(?:role|aria-label|tabindex)=/i)
+  })
+
+  it('isolates dashboard Jarvis and generic presentation selectors from other subsystems', () => {
+    for (const className of [
+      'student-dashboard__jarvis-core',
+      'student-dashboard__jarvis-ambient-halo',
+      'student-dashboard__jarvis-outer-detail',
+      'student-dashboard__jarvis-secondary-orbit',
+      'student-dashboard__jarvis-primary-ring',
+      'student-dashboard__jarvis-nucleus',
+      'student-dashboard__jarvis-monogram',
+    ]) {
+      expect(dashboardSource).toContain(`className="${className}"`)
+      expect(dashboardStyles).toContain(`.${className}`)
+    }
+    expect(dashboardSource).not.toContain('className="jarvis-core"')
+    expect(dashboardSource).not.toContain('className="jarvis-core__monogram"')
+    expect(dashboardStyles).not.toMatch(/(?:^|[,{]\s*)\.jarvis-core(?:__[-a-z]+)?\b/m)
+    for (const selector of ['eyebrow', 'panel-glass', 'button-primary', 'button-secondary', 'section-heading']) {
+      expect(dashboardStyles).toContain(`.student-dashboard .${selector}`)
+    }
+    expect(dashboardStyles).not.toMatch(/(?:^|[,{]\s*)\.(?:eyebrow|panel-glass|button-primary|button-secondary|section-heading)\b/m)
   })
 
   it('animates only ambient/detail/orbit layers under no-preference and disables all tiers under reduced motion', () => {
@@ -408,23 +430,23 @@ describe('StudentDashboard', () => {
     const forcedColorsStart = dashboardStyles.indexOf('@media (forced-colors: active)')
     const noPreference = dashboardStyles.slice(noPreferenceStart, reducedStart)
     const reduced = dashboardStyles.slice(reducedStart, forcedColorsStart)
-    const animatedLayers = [...noPreference.matchAll(/\.jarvis-core__([a-z-]+)\s*\{[^}]*\banimation:/g)]
+    const animatedLayers = [...noPreference.matchAll(/\.student-dashboard__jarvis-([a-z-]+)\s*\{[^}]*\banimation:/g)]
       .map((match) => match[1])
       .sort()
     expect(animatedLayers).toEqual(['ambient-halo', 'outer-detail', 'secondary-orbit'])
-    expect(noPreference).not.toMatch(/\.jarvis-core__(?:primary-ring|nucleus|monogram)[^{]*\{[^}]*animation:/)
+    expect(noPreference).not.toMatch(/\.student-dashboard__jarvis-(?:primary-ring|nucleus|monogram)[^{]*\{[^}]*animation:/)
     for (const layer of ['ambient-halo', 'outer-detail', 'secondary-orbit', 'primary-ring', 'nucleus', 'monogram']) {
-      expect(reduced).toContain(`.jarvis-core__${layer}`)
+      expect(reduced).toContain(`.student-dashboard__jarvis-${layer}`)
     }
     expect(reduced).toContain('animation: none')
   })
 
   it('keeps real ring borders and a forced-colors fallback independent of masks', () => {
     for (const layer of ['outer-detail', 'secondary-orbit', 'primary-ring']) {
-      expect(dashboardStyles).toMatch(new RegExp(`\\.jarvis-core__${layer}\\s*\\{[^}]*border:`))
+      expect(dashboardStyles).toMatch(new RegExp(`\\.student-dashboard__jarvis-${layer}\\s*\\{[^}]*border:`))
     }
     const forcedColors = dashboardStyles.slice(dashboardStyles.indexOf('@media (forced-colors: active)'))
-    expect(forcedColors).toContain('.jarvis-core__outer-detail, .jarvis-core__secondary-orbit, .jarvis-core__primary-ring')
+    expect(forcedColors).toContain('.student-dashboard__jarvis-outer-detail, .student-dashboard__jarvis-secondary-orbit, .student-dashboard__jarvis-primary-ring')
     expect(forcedColors).toContain('-webkit-mask: none')
     expect(forcedColors).toContain('mask: none')
     expect(forcedColors).toContain('border: 1px solid CanvasText')
