@@ -735,10 +735,15 @@ describe.sequential('consolidated academic readiness contract', () => {
    * Two claims are separate and both are tested. WHICH kinds exist is answered by
    * the authority, and only by it — that is what the withdrawal cases prove. That
    * the authority is what the mutation's ADMISSION GATE consults is a structural
-   * check over the installed definition, and requiring only the authority's NAME to
-   * appear somewhere is not that claim: a call in a dead branch and a live call
+   * check over the installed definition, and two weaker versions of that check are
+   * pinned below as failures, per kind. Requiring only the authority's NAME to
+   * appear somewhere is not the claim: a call in a dead branch and a live call
    * whose result is discarded each satisfy a name search beside a real gate that is
-   * an independent narrower list. Those two are pinned below, per kind.
+   * an independent narrower list. Requiring the whole gate expression to appear
+   * ANYWHERE is not the claim either: PL/pgSQL blocks nest, so a block that never
+   * runs can carry a verbatim copy of the entire gate — including the `begin` it
+   * opens with — beside that same narrower list. The gate is therefore required at
+   * the function's outer entry, the body's first `begin`.
    *
    * The limit of the structural check is pinned too, as a limit rather than as a
    * kill: an intact gate followed by a NEW downstream restriction reads ready here.
@@ -1003,6 +1008,115 @@ describe.sequential('consolidated academic readiness contract', () => {
       })
 
     /**
+     * THE NESTED-BLOCK DECOY, which is what a `begin` anchor alone does not stop.
+     *
+     * PL/pgSQL blocks nest, so `begin` is not a token only the function's entry can
+     * carry. A block that never runs can hold a verbatim copy of the whole expected
+     * prologue — the opening `begin`, the auth guard, the admission statement
+     * through the authority, the raise — while the live path admits kinds from an
+     * independent narrower list beside it. Requiring the gate to be PRESENT accepts
+     * every one of these; requiring it to START at the body's first `begin`, which
+     * is the only position a nested block cannot reach, refuses them all.
+     *
+     * Three placements, because "dead" has more than one spelling: a branch whose
+     * condition is false, an exception handler for something that is never raised,
+     * and a block sitting after the live logic has already returned. The second
+     * variant also opens its own DECLARE and re-declares the outer function's last
+     * declared variable, which is legal and is what defeats an anchor merely
+     * extended leftwards into the declaration tail.
+     */
+    const nestedPrologue = (pad: string) => [
+      `${pad}if auth.uid() is null then`,
+      `${pad}  raise exception 'STUDY_AUTH_REQUIRED' using errcode = '28000';`,
+      `${pad}end if;`,
+      `${pad}if not academy_private.study_adult_managed_record_kind_supported(`,
+      `${pad}     p_record_kind`,
+      `${pad}   ) or p_expected_revision is null or p_expected_revision < 0`,
+      `${pad}  or not public.academy_study_payload_is_minimized(p_record, 16384)`,
+      `${pad}  or not public.academy_study_identifier_is_valid(p_idempotency_key) then`,
+      `${pad}  raise exception 'STUDY_RECORD_INVALID' using errcode = '22023';`,
+      `${pad}end if;`,
+    ].join('\n')
+
+    const NESTED_PLACEMENTS = [
+      ['a nested block in a dead branch',
+        ['\nbegin\n  if auth.uid() is null then',
+          '\nbegin\n  if false then\n    begin\n' + nestedPrologue('      ')
+          + '\n    end;\n  end if;\n  if auth.uid() is null then'] as const],
+      ['a nested block carrying its own declaration tail',
+        ['\nbegin\n  if auth.uid() is null then',
+          '\nbegin\n  if false then\n    declare\n'
+          + '      correlation uuid := gen_random_uuid();\n    begin\n'
+          + nestedPrologue('      ')
+          + '\n    end;\n  end if;\n  if auth.uid() is null then'] as const],
+      ['a nested block in an exception handler that never fires',
+        ['\nbegin\n  if auth.uid() is null then',
+          '\nbegin\n  begin\n    perform 1;\n'
+          + '  exception when division_by_zero then\n    begin\n'
+          + nestedPrologue('      ') + '\n    end;\n  end;\n'
+          + '  if auth.uid() is null then'] as const],
+      ['a nested block appended after the live logic',
+        ['\n  return result_value;\n',
+          '\n  if false then\n    begin\n' + nestedPrologue('      ')
+          + '\n    end;\n  end if;\n  return result_value;\n'] as const],
+    ] as const
+
+    const NESTED_CASES = NESTED_PLACEMENTS.flatMap(([label, placement]) =>
+      (Object.keys(KIND_DEPENDENCY) as ManagedKind[])
+        .map((kind) => [label, kind, placement] as const))
+
+    it.each(NESTED_CASES)(
+      'a complete gate copied into %s cannot admit %s',
+      async (_label, excluded, placement) => {
+        await reverted(async () => {
+          await redefine([[REAL_GATE, narrowGate(excluded)], placement])
+          // The narrowing is real, and it is the only thing that moved: this kind
+          // is refused at runtime while the other two are still accepted.
+          const refused = await upsert(excluded)
+          expect(refused.accepted).toBe(false)
+          expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
+          for (const other of (Object.keys(KIND_DEPENDENCY) as ManagedKind[])
+            .filter((candidate) => candidate !== excluded)) {
+            expect((await upsert(other)).accepted).toBe(true)
+          }
+          expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+            'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+        })
+      })
+
+    /**
+     * The positional half of the anchor, isolated from the contiguity half.
+     *
+     * Wrapping the whole prologue in a nested block changes nothing else: the same
+     * statements run in the same order, the gate stays verbatim and unbroken, and
+     * all three kinds are still admitted. The only thing that moved is WHERE the
+     * gate sits — it no longer opens the function. A probe that searched for the
+     * gate anywhere would pass this; the outer-entry requirement refuses it.
+     *
+     * Interposing a statement, by contrast, breaks the gate text itself and is
+     * caught by contiguity alone — so it cannot stand in for this case.
+     */
+    const MOVED_OFF_ENTRY: readonly (readonly [string, string])[] = [
+      ['\nbegin\n  if auth.uid() is null then',
+        '\nbegin\n  begin\n  if auth.uid() is null then'],
+      ["\n  end if;\n  target_student_id := (p_record ->> 'student_id')::uuid;",
+        '\n  end if;\n  end;\n'
+        + "  target_student_id := (p_record ->> 'student_id')::uuid;"],
+    ]
+
+    it('refuses an intact gate that no longer opens the function', async () => {
+      await reverted(async () => {
+        await redefine(MOVED_OFF_ENTRY)
+        // Nothing about admission changed: all three kinds still work.
+        for (const kind of Object.keys(KIND_DEPENDENCY) as ManagedKind[]) {
+          expect((await upsert(kind)).accepted).toBe(true)
+        }
+        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+          'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+      })
+    })
+
+    /**
      * The call is in the gate, in the right place, and decides nothing: `and false`
      * neuters it and an independent narrower list beside it does the deciding.
      *
@@ -1056,6 +1170,43 @@ describe.sequential('consolidated academic readiness contract', () => {
     })
 
     /**
+     * The same decoy moved into the DECLARE section, which is the one region the
+     * outer-entry anchor does NOT rule out — everything there sits ahead of the
+     * function's first `begin`, so a gate found in it satisfies the position test
+     * as well as the text test. Requiring the gate at the entry is what makes this
+     * placement the interesting one, and comment stripping is the only thing
+     * standing in front of it: without the strip this reports review-queue ready
+     * while the mutation refuses review. Measured, not assumed.
+     *
+     * The comment above, sitting after `begin`, cannot show this — the anchor
+     * refuses it on position whether or not comments are stripped, so it would
+     * still pass with the strip removed.
+     */
+    it('is not satisfied by the whole gate commented into the declarations',
+      async () => {
+        await reverted(async () => {
+          await redefine([
+            [REAL_GATE, narrowGate('review')],
+            ['\n  correlation uuid := gen_random_uuid();',
+              '\n  correlation uuid := gen_random_uuid();\n'
+              + "  -- begin if auth.uid() is null then raise exception 'X'"
+              + " using errcode = 'Y'; end if; if not academy_private"
+              + '.study_adult_managed_record_kind_supported( p_record_kind ) or'
+              + ' p_expected_revision is null or p_expected_revision < 0 or not'
+              + ' public.academy_study_payload_is_minimized(p_record, 16384) or not'
+              + ' public.academy_study_identifier_is_valid(p_idempotency_key) then'
+              + " raise exception 'Z' using errcode = 'W'; end if;"],
+          ])
+          const refused = await upsert('review')
+          expect(refused.accepted).toBe(false)
+          expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
+          expect((await upsert('calendar')).accepted).toBe(true)
+          expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+            'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+        })
+      })
+
+    /**
      * The authority's name assembled from concatenated literals. Literals are
      * removed before the search, so nothing of it survives -- and it was never the
      * gate expression in the first place.
@@ -1076,12 +1227,15 @@ describe.sequential('consolidated academic readiness contract', () => {
     })
 
     /**
-     * The gate is required in place, contiguous with the prologue it belongs to:
-     * the function's opening `begin`, the authentication guard, then the admission
-     * statement. Without that anchor the whole gate expression could be copied into
-     * a branch that never runs. Interposing one harmless statement is enough to
-     * prove the anchor is load-bearing -- and it closes readiness, which is the
-     * conservative direction for a definition nobody expected to move.
+     * The gate is required whole and contiguous: the opening `begin`, the
+     * authentication guard, then the admission statement, with nothing between
+     * them. Interposing one harmless statement is enough to prove that contiguity
+     * is load-bearing -- and it closes readiness, which is the conservative
+     * direction for a definition nobody expected to move.
+     *
+     * Contiguity is only half of the anchor. It says the gate is unbroken; it does
+     * not say WHERE the gate is, and a nested block can hold an unbroken copy. The
+     * cases above carry that half.
      */
     it('requires the gate to be contiguous with the function prologue', async () => {
       await reverted(async () => {
@@ -1404,28 +1558,47 @@ describe.sequential('consolidated academic readiness contract', () => {
      * drifts. The migration therefore asks the probe, immediately after rewriting,
      * whether it recognises what was installed — and aborts if it does not.
      *
-     * Perturbed here by interposing one harmless statement ahead of the gate: the
+     * Both halves of the anchor are perturbed, because each has its own way of
+     * drifting. Interposing a harmless statement breaks contiguity. Wrapping the
+     * prologue in a nested block leaves it contiguous and leaves the mutation's
+     * behaviour alone, and moves it off the function's entry. Either way the
      * substitution the rewrite performs still matches, so only the closed loop is
-     * left to catch it. Without that assertion this migration would apply and ship
-     * a probe that closes all three adult-managed dependencies forever.
+     * left to catch it — and without that assertion this migration would apply and
+     * ship a probe that closes all three adult-managed dependencies forever.
      */
-    it('refuses when the installed gate is not the one readiness expects', async () => {
-      const database2 = await chainWithoutAcademicMigration()
-      try {
-        const definition = await database2.query<{ body: string }>(
-          `select replace(pg_get_functiondef(to_regprocedure($1)), chr(13), '')
+    it.each([
+      ['a statement interposed ahead of the gate',
+        [['\nbegin\n  if auth.uid() is null then',
+          '\nbegin\n  perform 1;\n  if auth.uid() is null then']]],
+      ['the prologue wrapped in a nested block',
+        [['\nbegin\n  if auth.uid() is null then',
+          '\nbegin\n  begin\n  if auth.uid() is null then'],
+        ["\n  end if;\n  target_student_id := (p_record ->> 'student_id')::uuid;",
+          '\n  end if;\n  end;\n'
+          + "  target_student_id := (p_record ->> 'student_id')::uuid;"]]],
+    ] as const)('refuses when the installed gate is not the one readiness expects: %s',
+      async (_label, steps) => {
+        const database2 = await chainWithoutAcademicMigration()
+        try {
+          const definition = await database2.query<{ body: string }>(
+            `select replace(pg_get_functiondef(to_regprocedure($1)), chr(13), '')
              as body`, [SHARED_ADULT_MANAGED])
-        const moved = definition.rows[0].body.replace(
-          '\nbegin\n  if auth.uid() is null then',
-          '\nbegin\n  perform 1;\n  if auth.uid() is null then')
-        expect(moved).not.toBe(definition.rows[0].body)
-        await database2.exec(moved)
-        await expect(database2.exec(await academicMigrationSource()))
-          .rejects.toThrow(/not recognised by readiness/)
-      } finally {
-        await database2.close()
-      }
-    })
+          let moved = definition.rows[0].body
+          for (const [from, to] of steps) {
+            const next = moved.replace(from, to)
+            expect(next, from).not.toBe(moved)
+            moved = next
+          }
+          expect(moved).not.toBe(definition.rows[0].body)
+          await database2.exec(moved)
+          // The intentional guard, not an environment failure: the migration's own
+          // readiness assertion is what must reject this, by name.
+          await expect(database2.exec(await academicMigrationSource()))
+            .rejects.toThrow(/not recognised by readiness/)
+        } finally {
+          await database2.close()
+        }
+      })
 
     it('refuses when the adult-managed mutation is absent entirely', async () => {
       const database2 = await chainWithoutAcademicMigration()

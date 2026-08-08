@@ -36,11 +36,14 @@
 --
 -- Readiness additionally establishes that the helper is what the mutation's
 -- admission gate actually consults, by requiring the whole expected gate
--- expression to be present and contiguous with the prologue it belongs to.
--- Requiring only that the helper's NAME appear somewhere in the body is not that
--- claim and does not hold: a call parked in a dead branch, or a live call whose
--- result is discarded, satisfies a name search beside a real admission gate that
--- is an independent narrower list refusing the kind at runtime.
+-- expression to open the function -- to start at the body's first `begin`, which
+-- is the outer entry. Weaker forms of that requirement do not hold. Requiring only
+-- the helper's NAME to appear somewhere is satisfied by a call parked in a dead
+-- branch or a live call whose result is discarded. Requiring the whole gate
+-- expression to appear ANYWHERE is satisfied by a copy of it inside a nested block
+-- that never runs, because PL/pgSQL blocks nest and a `begin` can therefore be
+-- interposed. Each of those sits beside a real admission gate that is an
+-- independent narrower list refusing the kind at runtime.
 --
 -- What that structural check cannot do is bounded and stated where it lives, on
 -- academy_private.study_academic_record_kind_ready below: it cannot prove that no
@@ -303,25 +306,59 @@ $$;
 -- leaves the readiness answer 'ready' beside a real admission gate that is an
 -- independent, narrower list refusing the kind at runtime.
 --
--- So the whole gate expression is required, in place, contiguous with the prologue
--- it belongs to: the function's opening `begin`, the authentication guard, and
--- then the admission statement whose condition routes through the authority and
--- whose body raises. A dead branch is not that statement. A discarded call is not
--- that statement. An occurrence in a comment, in a string literal, or split across
+-- So the whole gate expression is required: the opening `begin`, the
+-- authentication guard, then the admission statement whose condition routes
+-- through the authority and whose body raises. A discarded call is not that
+-- statement. An occurrence in a comment, in a string literal, or split across
 -- concatenated literals is not that statement either, because comments and
--- literals are removed before the search. Anchoring at `begin` is what makes the
--- match structural rather than textual: nothing can be interposed between the
--- function's entry and the gate without breaking it.
+-- literals are removed before the search.
+--
+-- Requiring that expression to be PRESENT is still not enough, and the `begin` it
+-- opens with does not by itself make the match structural. PL/pgSQL nests blocks,
+-- so a `begin` can be interposed: a block that never runs -- a dead branch, an
+-- unreached exception handler, a block appended after the live logic -- can carry
+-- a verbatim copy of this entire prologue while the live path admits kinds from an
+-- independent narrower list beside it. That was measured here against all three
+-- kinds in all three placements and reported ready every time. Nor is it answered
+-- by extending the expected text leftwards into the declaration section: a nested
+-- block may open its own DECLARE and reproduce the declaration tail verbatim,
+-- which was measured too.
+--
+-- What separates the real entry from every nested copy is POSITION, not more text.
+-- A PL/pgSQL body's first `begin` token is the function's own entry: everything
+-- ahead of it is the declaration section, and every nested block's `begin`
+-- necessarily comes after it. So the gate is required to START at that first
+-- `begin`. This costs no additional expected text: the declaration list is
+-- deliberately NOT spelled out, so adding or removing a declared variable cannot
+-- rot the probe.
+--
+-- The check reads prosrc rather than a rendered CREATE statement so that the
+-- position it tests means what it says: prosrc IS the body, so its first
+-- character is the function's entry. Reading pg_get_functiondef instead answers
+-- identically on this lineage -- the rendered header carries no `begin` token, so
+-- the prefix test is unaffected, and that was measured across every decoy shape
+-- the suite exercises rather than assumed. The choice is about what the check can
+-- be read to CLAIM, not about a behaviour difference it currently has.
+--
+-- Position moves the sensitive region rather than removing it. Everything AHEAD of
+-- the first `begin` -- the declaration section -- passes the position test by
+-- definition, so a whole-gate decoy planted there would satisfy both halves. What
+-- refuses it is the normalisation: comments and string literals are removed before
+-- the search, so a gate commented or quoted into the declarations is gone before
+-- the position is ever computed. That is why comment stripping is load-bearing
+-- here and not merely tidy, and it has its own forcing case in the suite.
 --
 -- The expected text IS written out by hand here, which is the obvious way for a
 -- probe like this to rot. It is not left on trust: the DO block below asserts that
 -- this probe answers true for 'review' immediately after the rewrite installs the
 -- gate, so a probe and a gate that disagree abort the migration rather than ship.
 --
--- WHAT THIS DOES NOT ESTABLISH. It is a read-only structural check, not an
--- interpreter. It proves the expected admission gate is present and routes through
--- the shared authority. It cannot prove that no LATER, independent restriction has
--- been inserted downstream of that gate: a body that keeps this prologue intact and
+-- WHAT THIS DOES NOT ESTABLISH. It is a read-only structural check over definition
+-- text, not an interpreter: it executes no PL/pgSQL and evaluates no branch. It
+-- proves the expected admission gate is present at the function's entry and that
+-- admission there routes through the shared authority. It cannot prove that no
+-- LATER, independent restriction has been inserted downstream of that gate: a
+-- body that keeps this prologue intact and
 -- then raises for one kind further down still reads structurally ready here, and
 -- would be refused at runtime. Proving otherwise would require semantically
 -- executing arbitrary PL/pgSQL, which no catalog read can do, and executing the
@@ -344,6 +381,7 @@ as $$
 declare
   target oid;
   body text;
+  gate_at integer;
   -- The prologue this migration leaves behind, in the normalised form produced
   -- below. Adjacent literals concatenate; the whole is one line of normalised SQL.
   gate constant text :=
@@ -368,14 +406,31 @@ begin
   if not academy_private.study_adult_managed_record_kind_supported(p_kind) then
     return false;
   end if;
-  body := replace(pg_get_functiondef(target), chr(13), '');
+  -- prosrc, not pg_get_functiondef: the body on its own, so that its first
+  -- character is the function's entry and the position tested below is a fact
+  -- about the body rather than about how a CREATE statement happens to render.
+  select replace(routine.prosrc, chr(13), '') into body
+  from pg_proc as routine where routine.oid = target;
+  if body is null then
+    return false;
+  end if;
   body := regexp_replace(body, '--[^\n]*', '', 'g');
   body := regexp_replace(body, '/\*.*?\*/', '', 'gs');
   -- Single-quoted literals, doubled-quote escapes included. Removing them is what
   -- defeats both the literal decoy and the split-literal decoy: neither survives.
   body := regexp_replace(body, $q$'(''|[^'])*'$q$, '', 'g');
   body := btrim(regexp_replace(body, '\s+', ' ', 'g'));
-  return strpos(body, gate) > 0;
+
+  gate_at := strpos(body, gate);
+  if gate_at = 0 then
+    return false;
+  end if;
+  -- ...and it must open the function, not merely occur in it. The body's first
+  -- `begin` token is the outer entry -- only declarations may precede it, and any
+  -- nested block's `begin` comes later -- so a gate that starts anywhere else is a
+  -- copy sitting in a block, reachable or not, beside whatever the live path
+  -- actually does. Nothing here evaluates that block; position is the whole claim.
+  return left(body, gate_at - 1) !~ '\mbegin\M';
 end;
 $$;
 
@@ -694,15 +749,21 @@ set academic_readiness_version = 1,
       -- from the authority; establishing that the authority is what the admission
       -- gate consults is a structural read of the mutation's definition text, and
       -- that read cannot prove the absence of a later independent restriction
-      -- downstream of the gate.
+      -- downstream of the gate. It reads text and position -- it evaluates no
+      -- PL/pgSQL and decides no branch.
       'academic_readiness_kind_probe_reads_definition_text', true,
       'academic_readiness_kind_probe_verifies_admission_gate', true,
+      -- The gate is required at the function's OUTER ENTRY: the body's first
+      -- `begin`. Presence anywhere is not the claim -- a nested block that never
+      -- runs can hold a verbatim copy of the whole gate.
+      'academic_readiness_kind_probe_anchors_outer_entry', true,
+      'academic_readiness_kind_probe_executes_plpgsql', false,
       'academic_readiness_kind_probe_proves_no_downstream_restriction', false
     ),
     updated_at = clock_timestamp()
 where singleton;
 
 comment on function public.academy_study_academic_readiness_v1() is
-  'Read-only consolidated Study academic readiness. Reports a closed per-dependency status for all seven academic dependencies from catalog metadata, contract metadata and the shared adult-managed record-kind authority: no academic RPC is executed, no row is read, written or counted, and no learner, settings or adult-private content is exposed. Ready means the required server-side contract exists in the expected shape, not that a table name exists. Which record kinds exist is answered by the same function the mutation gate consults, never by a list of readiness'' own; that the gate consults it is established structurally, by requiring the expected admission-gate expression to be present in the mutation definition. Being a read-only structural check it cannot prove that no later independent restriction was inserted downstream of that gate -- proving that would need semantic execution of arbitrary PL/pgSQL, which this contract does not and must not perform. Executable by service_role only. Authorizes nothing.';
+  'Read-only consolidated Study academic readiness. Reports a closed per-dependency status for all seven academic dependencies from catalog metadata, contract metadata and the shared adult-managed record-kind authority: no academic RPC is executed, no row is read, written or counted, and no learner, settings or adult-private content is exposed. Ready means the required server-side contract exists in the expected shape, not that a table name exists. Which record kinds exist is answered by the same function the mutation gate consults, never by a list of readiness'' own; that the gate consults it is established structurally, by requiring the expected admission-gate expression to OPEN the mutation -- to start at the body''s first `begin`, which is the function''s own entry. Presence anywhere in the definition is deliberately not the test, because a nested block that never runs can carry a verbatim copy of the whole gate. This reads definition text and position only; it executes no PL/pgSQL and evaluates no branch, so it cannot prove that no later independent restriction was inserted downstream of that gate -- proving that would need semantic execution of arbitrary PL/pgSQL, which this contract does not and must not perform. Executable by service_role only. Authorizes nothing.';
 
 commit;
