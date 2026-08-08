@@ -96,26 +96,39 @@ function JarvisPanel() {
   )
 }
 
-function UpNextCard({ lesson, onNavigate }: { lesson: DashboardLesson; onNavigate: StudentDashboardProps['onNavigate'] }) {
+function UpNextCard({
+  lesson,
+  isReference,
+  onNavigate,
+}: {
+  lesson: DashboardLesson
+  isReference: boolean
+  onNavigate: StudentDashboardProps['onNavigate']
+}) {
   const route = dashboardLessonRoute(lesson)
-  const buttonLabel = lesson.requiresRestart
+  const buttonLabel = isReference
     ? 'Open lesson'
-    : lesson.status === 'in-progress'
-      ? 'Continue lesson'
-      : lesson.status === 'ready-to-retry'
-        ? 'Open lesson'
-        : 'Start lesson'
+    : lesson.requiresRestart
+      ? 'Open lesson'
+      : lesson.status === 'in-progress'
+        ? 'Continue lesson'
+        : lesson.status === 'ready-to-retry'
+          ? 'Open lesson'
+          : 'Start lesson'
   const statusCopy = lessonStatusCopy(lesson)
   const context = lessonContext(lesson)
   return (
-    <section className="up-next-card" aria-label={`Up next: ${lesson.title}, ${context}, ${statusCopy}`}>
+    <section
+      className={`up-next-card${isReference ? ' up-next-card--reference' : ''}`}
+      aria-label={`${isReference ? 'Reference lesson' : 'Up next'}: ${lesson.title}, ${context}, ${statusCopy}`}
+    >
       <div className="up-next-card__glow" aria-hidden="true" />
-      <p className="eyebrow">Up next</p>
+      <p className="eyebrow">{isReference ? 'Reference lesson' : 'Up next'}</p>
       <h2 id="up-next-heading">{lesson.title}</h2>
       <p className="up-next-card__context">{context}</p>
       <p className="up-next-card__status"><span aria-hidden="true">{lessonStatusMark(lesson)}</span> {statusCopy}</p>
       {route ? (
-        <button className="button-primary" onClick={() => onNavigate(route)} aria-label={`${buttonLabel}: ${lesson.title}, ${context}, ${statusCopy}`}>
+        <button className={isReference ? 'button-secondary' : 'button-primary'} onClick={() => onNavigate(route)} aria-label={`${buttonLabel}: ${lesson.title}, ${context}, ${statusCopy}`}>
           {buttonLabel}<span aria-hidden="true">→</span>
         </button>
       ) : (
@@ -125,18 +138,32 @@ function UpNextCard({ lesson, onNavigate }: { lesson: DashboardLesson; onNavigat
   )
 }
 
-function RestartRequiredCard({ lesson, onNavigate }: { lesson: DashboardLesson; onNavigate: StudentDashboardProps['onNavigate'] }) {
+function RestartRequiredCard({
+  lesson,
+  isReference,
+  onNavigate,
+}: {
+  lesson: DashboardLesson
+  isReference: boolean
+  onNavigate: StudentDashboardProps['onNavigate']
+}) {
   const route = dashboardLessonRoute(lesson)
+  const context = lessonContext(lesson)
+  const statusCopy = lessonStatusCopy(lesson)
   return (
-    <section className="up-next-card" aria-labelledby="restart-required-heading">
+    <section
+      className={`up-next-card${isReference ? ' up-next-card--reference' : ''}`}
+      aria-label={isReference ? `Reference lesson: ${lesson.title}, ${context}, ${statusCopy}` : undefined}
+      aria-labelledby={isReference ? undefined : 'restart-required-heading'}
+    >
       <div className="up-next-card__glow" aria-hidden="true" />
-      <p className="eyebrow">Scheduled Academy lesson</p>
+      <p className="eyebrow">{isReference ? 'Reference lesson' : 'Scheduled Academy lesson'}</p>
       <h2 id="restart-required-heading">{lesson.title}</h2>
-      <p className="up-next-card__context">{lessonContext(lesson)}</p>
-      <p className="up-next-card__status"><span aria-hidden="true">↻</span> Curriculum version changed — restart required</p>
+      <p className="up-next-card__context">{context}</p>
+      <p className="up-next-card__status"><span aria-hidden="true">↻</span> {statusCopy}</p>
       <p className="up-next-card__explanation">This lesson was started with a different curriculum version.</p>
       {route ? (
-        <button className="button-primary" onClick={() => onNavigate(route)} aria-label={`Open lesson: ${lesson.title}, ${lessonContext(lesson)}`}>
+        <button className={isReference ? 'button-secondary' : 'button-primary'} onClick={() => onNavigate(route)} aria-label={`Open lesson: ${lesson.title}, ${context}${isReference ? `, ${statusCopy}` : ''}`}>
           Open lesson<span aria-hidden="true">→</span>
         </button>
       ) : (
@@ -288,6 +315,7 @@ export function StudentDashboard({ profile, catalog, schedule, levelOf, schoolYe
   const headingRef = useRef<HTMLHeadingElement>(null)
   useEffect(() => { headingRef.current?.focus() }, [])
   const data = buildStudentDashboardData({ profile, catalog, schedule, levelOf, schoolYear, today })
+  const isReferenceSchedule = data.calendarState === 'off-week' || data.calendarState === 'after-year'
   const firstName = profile.name.trim().split(/\s+/)[0] || 'Learner'
   const intro = data.calendarState === 'weekend'
     ? { eyebrow: 'Weekend', heading: 'No Academy lessons scheduled this weekend.', detail: 'Academy lessons are scheduled Monday through Friday.' }
@@ -324,8 +352,8 @@ export function StudentDashboard({ profile, catalog, schedule, levelOf, schoolYe
 
         <div className="student-dashboard__primary-grid">
           <div className="student-dashboard__daily-area">
-            {data.upNext && !data.allWorkComplete ? <UpNextCard lesson={data.upNext} onNavigate={onNavigate} />
-              : data.restartRequiredLesson ? <RestartRequiredCard lesson={data.restartRequiredLesson} onNavigate={onNavigate} />
+            {data.upNext && !data.allWorkComplete ? <UpNextCard lesson={data.upNext} isReference={isReferenceSchedule} onNavigate={onNavigate} />
+              : data.restartRequiredLesson ? <RestartRequiredCard lesson={data.restartRequiredLesson} isReference={isReferenceSchedule} onNavigate={onNavigate} />
               : data.allWorkComplete ? <CompletionState completedCount={data.completedCount} total={data.lessons.length} calendarState={data.calendarState} />
                 : <NoWorkState calendarState={data.calendarState} week={data.week} onNavigate={onNavigate} />}
             {data.hasScheduledWork && <TodayTimeline lessons={data.lessons} calendarState={data.calendarState} onNavigate={onNavigate} />}

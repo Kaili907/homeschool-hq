@@ -235,6 +235,8 @@ describe('Student Dashboard presentation model', () => {
     expect(after.lessons.map((lesson) => lesson.lessonId)).toEqual(
       normal.lessons.map((lesson) => lesson.lessonId),
     )
+    expect(off.upNext?.lessonId).toBe(normal.upNext?.lessonId)
+    expect(after.upNext?.lessonId).toBe(normal.upNext?.lessonId)
   })
 
   it('returns the existing Academy lesson route for a scheduled item', () => {

@@ -22,6 +22,8 @@ const NOW = '2026-08-03T09:00:00.000Z'
 const CONFIGURED_YEAR: SchoolYear = {
   startDate: '2026-08-03', totalWeeks: 36, quarterBreaks: [9, 18, 27], offWeeks: [],
 }
+const OFF_WEEK_YEAR: SchoolYear = { ...CONFIGURED_YEAR, offWeeks: ['2026-08-10'] }
+const AFTER_YEAR: SchoolYear = { ...CONFIGURED_YEAR, totalWeeks: 1, quarterBreaks: [] }
 
 const catalog: AcademyCatalog = {
   releaseVersion: '1.0.0', grade: '5', courses: [
@@ -162,8 +164,14 @@ function renderDashboard({
 
 async function mountDashboard({
   profile = activeProfile(),
+  dashboardSchedule = schedule,
+  dashboardToday = '2026-08-03',
+  schoolYear,
 }: {
   profile?: Profile
+  dashboardSchedule?: AcademySchedule
+  dashboardToday?: string
+  schoolYear?: SchoolYear
 } = {}) {
   const documentTarget = new FakeDocument()
   const windowTarget = Object.assign(new EventTarget(), {
@@ -190,10 +198,10 @@ async function mountDashboard({
     <StudentDashboard
       profile={profile}
       catalog={catalog}
-      schedule={schedule}
+      schedule={dashboardSchedule}
       levelOf={{ 'ma-g5-mathematics': '5', 'ma-g7-english-language-arts': '7', 'ma-g8-science': '8' }}
-      schoolYear={undefined}
-      today="2026-08-03"
+      schoolYear={schoolYear}
+      today={dashboardToday}
       onNavigate={onNavigate}
       onExit={() => {}}
     />,
@@ -245,8 +253,13 @@ describe('StudentDashboard', () => {
     const html = renderDashboard({ dashboardSchedule })
     expect(html).toContain(`<strong>${longTitle}</strong>`)
     expect(html).toContain(`aria-label="${longTitle}, Mathematics · Grade 5, Not started"`)
+    expect(html).toContain('Mathematics · Grade 5')
+    expect(html).toContain('Not started')
     expect(dashboardSource).toContain('<strong>{lesson.title}</strong>')
-    expect(dashboardStyles).toMatch(/\.timeline-item__copy strong[^}]*-webkit-line-clamp:\s*2/)
+    const titleRule = dashboardStyles.match(/\.timeline-item__copy strong\s*\{([^}]*)\}/)?.[1]
+    expect(titleRule).toContain('overflow-wrap: anywhere')
+    expect(titleRule).not.toMatch(/text-overflow|-webkit-line-clamp|max-height|overflow:\s*hidden/)
+    expect(dashboardStyles).not.toMatch(/\.timeline-item__copy strong\s*\{[^}]*(?:text-overflow|-webkit-line-clamp|max-height|overflow:\s*hidden)/)
   })
 
   it('uses neutral student-facing fallbacks instead of raw internal IDs or subject slugs', () => {
@@ -319,6 +332,21 @@ describe('StudentDashboard', () => {
     expect(afterYear).toContain('The final Academy week has passed.')
     expect(afterYear).toContain('Week 1 remains available for reference.')
     expect(afterYear).toContain('Final Academy schedule')
+  })
+
+  it.each([
+    ['off-week', OFF_WEEK_YEAR],
+    ['after-year', AFTER_YEAR],
+  ] as const)('presents the selected lesson honestly in the %s reference state', (_state, schoolYear) => {
+    const html = renderDashboard({ dashboardToday: '2026-08-10', schoolYear })
+    expect(html).toContain('>Reference lesson<')
+    expect(html).toContain('class="up-next-card up-next-card--reference"')
+    expect(html).toContain('aria-label="Reference lesson: Evidence in a text, English Language Arts · Grade 7, In progress"')
+    expect(html).toContain('aria-label="Open lesson: Evidence in a text, English Language Arts · Grade 7, In progress"')
+    expect(html).toContain('>Open lesson<span')
+    expect(html).not.toContain('>Up next<')
+    expect(html).not.toContain('aria-label="Up next:')
+    expect(html).not.toContain('>Start lesson<')
   })
 
   it('limits completion copy to the displayed Academy schedule', () => {
@@ -469,6 +497,15 @@ describe('StudentDashboard', () => {
     expect(html).not.toMatch(/\bresume\b|continue where you left off/i)
   })
 
+  it('lets the full stale-version status wrap on narrow screens without fixed-height clipping', () => {
+    const mobileRules = dashboardStyles.slice(dashboardStyles.indexOf('@media (max-width: 540px)'))
+    const statusRule = mobileRules.match(/\.timeline-item__state\s*\{([^}]*)\}/)?.[1]
+    expect(statusRule).toContain('white-space: normal')
+    expect(statusRule).toContain('overflow-wrap: anywhere')
+    expect(statusRule).toContain('min-width: 0')
+    expect(statusRule).not.toMatch(/height|max-height|overflow:\s*hidden/)
+  })
+
   it('uses calm retry language and keeps reteach work incomplete', () => {
     let profile = startLesson(enrolledProfile(), MATH, NOW)
     profile = submitLessonCheck(profile, MATH, {
@@ -517,6 +554,62 @@ describe('StudentDashboard', () => {
       expect(mounted.onNavigate).toHaveBeenCalledWith({
         kind: 'lesson', courseId: 'ma-g7-english-language-arts', unitNumber: 1, lessonId: ELA,
       })
+      expect(profile).toEqual(profileBeforeClick)
+    } finally {
+      await act(async () => mounted.root.unmount())
+    }
+  })
+
+  it.each([
+    ['off-week', OFF_WEEK_YEAR],
+    ['after-year', AFTER_YEAR],
+  ] as const)('keeps the %s selected lesson navigation-only and side-effect free', async (_state, schoolYear) => {
+    const profile = activeProfile()
+    const profileBeforeClick = JSON.parse(JSON.stringify(profile)) as Profile
+    const mounted = await mountDashboard({ profile, dashboardToday: '2026-08-10', schoolYear })
+    try {
+      expect(elementText(mounted.container)).toContain('Reference lesson')
+      expect(elementText(mounted.container)).not.toContain('Up next')
+      expect(elementText(mounted.container)).not.toContain('Start lesson')
+      expect(mounted.fetch).not.toHaveBeenCalled()
+
+      const button = findButton(mounted.container, 'Open lesson')
+      expect(button).not.toBeNull()
+      const click = new Event('click', { bubbles: true, cancelable: true })
+      Object.defineProperty(click, 'target', { configurable: true, value: button })
+      await act(async () => { mounted.container.dispatchEvent(click) })
+
+      expect(mounted.onNavigate).toHaveBeenCalledTimes(1)
+      expect(mounted.onNavigate).toHaveBeenCalledWith({
+        kind: 'lesson', courseId: 'ma-g7-english-language-arts', unitNumber: 1, lessonId: ELA,
+      })
+      expect(mounted.fetch).not.toHaveBeenCalled()
+      expect(profile).toEqual(profileBeforeClick)
+    } finally {
+      await act(async () => mounted.root.unmount())
+    }
+  })
+
+  it('preserves ordinary Up Next and Start lesson behavior on a configured weekday', async () => {
+    const profile = enrolledProfile()
+    const profileBeforeClick = JSON.parse(JSON.stringify(profile)) as Profile
+    const mounted = await mountDashboard({ profile, schoolYear: CONFIGURED_YEAR })
+    try {
+      expect(elementText(mounted.container)).toContain('Up next')
+      expect(elementText(mounted.container)).toContain('Start lesson')
+      expect(elementText(mounted.container)).not.toContain('Reference lesson')
+
+      const button = findButton(mounted.container, 'Start lesson')
+      expect(button).not.toBeNull()
+      const click = new Event('click', { bubbles: true, cancelable: true })
+      Object.defineProperty(click, 'target', { configurable: true, value: button })
+      await act(async () => { mounted.container.dispatchEvent(click) })
+
+      expect(mounted.onNavigate).toHaveBeenCalledTimes(1)
+      expect(mounted.onNavigate).toHaveBeenCalledWith({
+        kind: 'lesson', courseId: 'ma-g5-mathematics', unitNumber: 1, lessonId: MATH,
+      })
+      expect(mounted.fetch).not.toHaveBeenCalled()
       expect(profile).toEqual(profileBeforeClick)
     } finally {
       await act(async () => mounted.root.unmount())
