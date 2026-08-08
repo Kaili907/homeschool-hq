@@ -1,29 +1,33 @@
 import { describe, expect, it, vi } from 'vitest'
 import {
+  ADMIN_OPERATIONAL_CAPABILITIES,
+  ADMIN_OWNER_CAPABILITIES,
+  ADMIN_READ_CAPABILITIES,
   ADMIN_ROLE_CAPABILITIES,
-  createAdminAuthorization,
-} from './admin-authorization.js'
+} from '../../../src/admin/contracts.ts'
+import { createAdminAuthorization } from './admin-authorization.js'
 
 const VERIFIED_USER_ID = '00000000-0000-4000-8000-000000000001'
+const ACCESS_TOKEN = 'verified.access.token'
 
 function event(overrides = {}) {
   return {
     httpMethod: 'POST',
-    headers: { authorization: 'Bearer verified.access.token' },
-    body: JSON.stringify({ role: 'owner', capability: 'admin:roles:manage' }),
+    headers: {
+      authorization: `Bearer ${ACCESS_TOKEN}`,
+      'x-admin-role': 'owner',
+    },
+    body: JSON.stringify({
+      role: 'owner',
+      capabilities: ADMIN_ROLE_CAPABILITIES.owner,
+    }),
     ...overrides,
   }
 }
 
 function roleClient(result) {
-  const builder = {
-    select: vi.fn(() => builder),
-    eq: vi.fn(() => builder),
-    is: vi.fn(() => builder),
-    limit: vi.fn(() => builder),
-    abortSignal: vi.fn(async () => result),
-  }
-  return { client: { from: vi.fn(() => builder) }, builder }
+  const builder = { abortSignal: vi.fn(async () => result) }
+  return { client: { rpc: vi.fn(() => builder) }, builder }
 }
 
 function verifiedAuthorization(result) {
@@ -31,7 +35,11 @@ function verifiedAuthorization(result) {
   return {
     authorization: createAdminAuthorization({
       client,
-      authVerifier: async () => ({ ok: true, user: { id: VERIFIED_USER_ID } }),
+      authVerifier: async () => ({
+        ok: true,
+        user: { id: VERIFIED_USER_ID },
+        accessToken: ACCESS_TOKEN,
+      }),
     }),
     client,
     builder,
@@ -42,114 +50,136 @@ function responseJson(result) {
   return JSON.parse(result.response.body)
 }
 
-describe('server-derived Admin Console authorization', () => {
+describe('ADMIN-0 v2 server-derived authorization', () => {
   it('rejects a normal authenticated user without an admin assignment', async () => {
     const { authorization } = verifiedAuthorization({ data: [], error: null })
-    const result = await authorization.require(event(), 'admin:read')
+    const result = await authorization.require(event(), 'overview:read')
     expect(result.ok).toBe(false)
     expect(result.response.statusCode).toBe(403)
     expect(responseJson(result)).toEqual({ error: { code: 'admin_access_denied' } })
   })
 
-  it('allows viewer reads and rejects viewer mutations', async () => {
-    const role = { role: 'viewer', status: 'active', revoked_at: null }
-    const readable = verifiedAuthorization({ data: [role], error: null })
-    const read = await readable.authorization.require(event(), 'admin:read')
-    expect(read.ok).toBe(true)
-    expect(read.principal).toEqual({
-      userId: VERIFIED_USER_ID,
-      role: 'viewer',
-      capabilities: ['admin:read'],
-    })
-
-    const mutable = verifiedAuthorization({ data: [role], error: null })
-    const mutation = await mutable.authorization.require(event(), 'admin:operate')
-    expect(mutation.ok).toBe(false)
-    expect(mutation.response.statusCode).toBe(403)
-  })
-
-  it('gives admin only the read and operational capabilities', async () => {
-    const { authorization } = verifiedAuthorization({
-      data: [{ role: 'admin', status: 'active', revoked_at: null }],
+  it('gives viewer every canonical read capability and no operational or owner capability', async () => {
+    const { authorization, client } = verifiedAuthorization({
+      data: [{ role: 'viewer' }],
       error: null,
     })
-    const result = await authorization.require(event(), 'admin:operate')
-    expect(result.ok).toBe(true)
-    expect(result.principal.capabilities).toEqual(['admin:read', 'admin:operate'])
-    expect(result.principal.capabilities).not.toContain('admin:roles:manage')
+    for (const capability of ADMIN_READ_CAPABILITIES) {
+      await expect(authorization.require(event(), capability)).resolves.toMatchObject({ ok: true })
+    }
+    for (const capability of [...ADMIN_OPERATIONAL_CAPABILITIES, ...ADMIN_OWNER_CAPABILITIES]) {
+      const result = await authorization.require(event(), capability)
+      expect(result.ok, capability).toBe(false)
+      expect(result.response.statusCode, capability).toBe(403)
+    }
+    expect(client.rpc).toHaveBeenCalledWith('academy_admin_authorization_v2')
   })
 
-  it('gives owner the complete owner capability set', async () => {
+  it('gives admin every read and operational capability but no owner capability', async () => {
     const { authorization } = verifiedAuthorization({
-      data: [{ role: 'owner', status: 'active', revoked_at: null }],
+      data: [{ role: 'admin' }],
       error: null,
     })
-    const result = await authorization.require(event(), 'admin:releases:manage')
-    expect(result.ok).toBe(true)
-    expect(result.principal.capabilities).toEqual(ADMIN_ROLE_CAPABILITIES.owner)
+    for (const capability of [...ADMIN_READ_CAPABILITIES, ...ADMIN_OPERATIONAL_CAPABILITIES]) {
+      await expect(authorization.require(event(), capability)).resolves.toMatchObject({ ok: true })
+    }
+    for (const capability of ADMIN_OWNER_CAPABILITIES) {
+      const result = await authorization.require(event(), capability)
+      expect(result.ok, capability).toBe(false)
+      expect(result.response.statusCode, capability).toBe(403)
+    }
   })
 
-  it('never treats a forged browser role or capability as authority', async () => {
-    const { authorization, builder } = verifiedAuthorization({
-      data: [{ role: 'viewer', status: 'active', revoked_at: null }],
+  it('gives owner the complete canonical capability matrix', async () => {
+    const { authorization } = verifiedAuthorization({
+      data: [{ role: 'owner' }],
+      error: null,
+    })
+    for (const capability of ADMIN_ROLE_CAPABILITIES.owner) {
+      await expect(authorization.require(event(), capability)).resolves.toMatchObject({ ok: true })
+    }
+  })
+
+  it('never treats a forged browser role or capability array as authority', async () => {
+    const { authorization } = verifiedAuthorization({
+      data: [{ role: 'viewer' }],
       error: null,
     })
     const result = await authorization.require(event({
-      headers: {
-        authorization: 'Bearer verified.access.token',
-        'x-admin-role': 'owner',
-      },
-      queryStringParameters: { role: 'owner' },
-    }), 'admin:roles:manage')
-    expect(result.ok).toBe(false)
-    expect(result.response.statusCode).toBe(403)
-    expect(builder.eq).toHaveBeenNthCalledWith(1, 'user_id', VERIFIED_USER_ID)
-    expect(builder.eq).toHaveBeenNthCalledWith(2, 'status', 'active')
-    expect(builder.is).toHaveBeenCalledWith('revoked_at', null)
-  })
-
-  it('denies a revoked assignment immediately on the next lookup', async () => {
-    const active = verifiedAuthorization({
-      data: [{ role: 'admin', status: 'active', revoked_at: null }],
-      error: null,
-    })
-    await expect(active.authorization.require(event(), 'admin:read')).resolves.toMatchObject({
-      ok: true,
-    })
-
-    const revoked = verifiedAuthorization({ data: [], error: null })
-    const result = await revoked.authorization.require(event(), 'admin:read')
+      queryStringParameters: { role: 'owner', capability: 'admin_roles:manage' },
+    }), 'admin_roles:manage')
     expect(result.ok).toBe(false)
     expect(result.response.statusCode).toBe(403)
   })
 
-  it('fails closed for lookup errors, malformed rows, and duplicate active rows', async () => {
+  it.each(['revoked', 'expired'])('denies a %s assignment returned as no current row', async () => {
+    const { authorization } = verifiedAuthorization({ data: [], error: null })
+    const result = await authorization.require(event(), 'overview:read')
+    expect(result.ok).toBe(false)
+    expect(result.response.statusCode).toBe(403)
+  })
+
+  it('fails closed for lookup errors, malformed rows, and ambiguous rows', async () => {
     for (const databaseResult of [
       { data: null, error: { message: 'database unavailable' } },
-      { data: [{ role: 'superuser', status: 'active', revoked_at: null }], error: null },
-      {
-        data: [
-          { role: 'viewer', status: 'active', revoked_at: null },
-          { role: 'owner', status: 'active', revoked_at: null },
-        ],
-        error: null,
-      },
+      { data: [{ role: 'superuser' }], error: null },
+      { data: [{ role: 'viewer', capabilities: ['admin_roles:manage'] }], error: null },
+      { data: [{ role: 'viewer' }, { role: 'owner' }], error: null },
     ]) {
       const { authorization } = verifiedAuthorization(databaseResult)
-      const result = await authorization.require(event(), 'admin:read')
+      const result = await authorization.require(event(), 'overview:read')
       expect(result.ok).toBe(false)
       expect(result.response.statusCode).toBe(503)
       expect(responseJson(result)).toEqual({ error: { code: 'authorization_unavailable' } })
     }
   })
 
-  it('fails closed when server-only database configuration is absent', async () => {
+  it('fails closed without the exact pinned verified bearer', async () => {
+    const { client } = roleClient({ data: [{ role: 'owner' }], error: null })
     const authorization = createAdminAuthorization({
-      env: {},
+      client,
       authVerifier: async () => ({ ok: true, user: { id: VERIFIED_USER_ID } }),
     })
-    const result = await authorization.require(event(), 'admin:read')
+    const result = await authorization.require(event(), 'overview:read')
     expect(result.ok).toBe(false)
     expect(result.response.statusCode).toBe(503)
+  })
+
+  it('pins the verified token into the authenticated RPC client', async () => {
+    const { client } = roleClient({ data: [{ role: 'viewer' }], error: null })
+    const clientFactory = vi.fn(() => client)
+    const authorization = createAdminAuthorization({
+      clientFactory,
+      authVerifier: async () => ({
+        ok: true,
+        user: { id: VERIFIED_USER_ID },
+        accessToken: ACCESS_TOKEN,
+      }),
+    })
+    await expect(authorization.require(event(), 'overview:read')).resolves.toMatchObject({ ok: true })
+    expect(clientFactory).toHaveBeenCalledWith(ACCESS_TOKEN)
+  })
+
+  it('fails closed when public Supabase RPC configuration is absent', async () => {
+    const authorization = createAdminAuthorization({
+      env: {},
+      authVerifier: async () => ({
+        ok: true,
+        user: { id: VERIFIED_USER_ID },
+        accessToken: ACCESS_TOKEN,
+      }),
+    })
+    const result = await authorization.require(event(), 'overview:read')
+    expect(result.ok).toBe(false)
+    expect(result.response.statusCode).toBe(503)
+  })
+
+  it('rejects unknown and removed generic capability aliases', async () => {
+    const { authorization } = verifiedAuthorization({ data: [{ role: 'owner' }], error: null })
+    for (const capability of ['admin:read', 'admin:operate', 'admin:roles:manage']) {
+      const result = await authorization.require(event(), capability)
+      expect(result.ok, capability).toBe(false)
+      expect(result.response.statusCode, capability).toBe(403)
+    }
   })
 })

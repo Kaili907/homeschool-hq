@@ -15,19 +15,27 @@ Every schema version bump is documented here. Rules (from the build spec):
 Tracked migration:
 `supabase/migrations/20260808120000_academy_admin_authorization.sql`.
 
-The migration adds a server-read role-assignment table backed by existing
-Supabase Auth user IDs. Its fixed role vocabulary is `owner`, `admin`, and
-`viewer`; a partial unique index permits at most one active assignment per user.
-RLS is enabled and forced with no client policy. `anon` and `authenticated` have
-no privileges, while `service_role` receives `SELECT` only. Admin role mutation
-remains deferred to a separately reviewed owner-authorized workflow.
+The migration adds a role-assignment history table backed by existing Supabase
+Auth user IDs. Its fixed role vocabulary is `owner`, `admin`, and `viewer`; a
+partial unique index permits at most one active assignment per user. Optional
+immutable expiry is checked on every lookup. RLS is enabled and forced with no
+client policy, and no application role has direct table privileges.
 
-The corresponding Netlify helper verifies the Supabase bearer, looks up only
-the verified user ID, derives explicit capabilities server-side, and fails
-closed on missing, revoked, malformed, duplicate, timed-out, or failed lookups.
-The browser receives only a versioned role/capability projection. Validate
-locally with `npm run test:admin-auth`. This migration has not been applied to a
-hosted Supabase project.
+The only readable database boundary is the stable, security-definer
+`academy_admin_authorization_v2()` function with `search_path=pg_catalog`. It
+accepts no identity or role argument, derives `auth.uid()`, excludes revoked and
+expired assignments, and grants execution only to `authenticated`. Assignment
+history cannot be deleted or edited; only the one-way, audit-shaped revocation
+transition is permitted. Role mutation remains deferred to a separately
+reviewed owner-authorized function that must append the canonical Admin audit
+event atomically.
+
+The corresponding Netlify helper verifies and pins the Supabase bearer, invokes
+the narrow function, derives the ADMIN-0-R1 version-2 canonical capabilities,
+and fails closed on missing, revoked, expired, malformed, duplicate, timed-out,
+or failed lookups. The browser receives only contract version, safe state, role,
+and capabilities. Validate locally with `npm run test:admin-auth`. This migration
+has not been applied to a hosted Supabase project.
 
 ## Supabase: Academy profiles base (2026-07-24)
 

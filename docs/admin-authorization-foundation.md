@@ -2,70 +2,84 @@
 
 ## Boundary
 
+This implementation conforms to the controlling ADMIN-0-R1 contract version 2.
 `/academy/admin` uses the existing Supabase Auth adult identity. ADMIN-1 adds no
 password, PIN, student session, email-domain, or parallel identity system.
 Student Study bearers are not Supabase access tokens and are rejected by the
 Supabase Auth verification step.
 
 Browser visibility is advisory only. The browser reads a minimized versioned
-authorization projection from `GET /api/admin/v1/authorization`; it never reads
-the role table or a service-role credential. Every later Admin data or mutation
-endpoint must independently call the server-side authorization helper with its
-required capability. A hidden route or forged client state therefore grants no
-data or action authority.
+authorization state from `GET /api/admin/v1/authorization`; it never reads the
+role table or receives a service-role credential. Every later Admin data or
+mutation endpoint must independently call the server capability boundary with a
+canonical capability. Hidden routes and forged client state grant no authority.
 
-## Role and capability contract
+## Canonical role and capability contract
 
-| Role | Capabilities |
-| --- | --- |
-| `viewer` | `admin:read` |
-| `admin` | `admin:read`, `admin:operate` |
-| `owner` | all admin capabilities, including role management, high-risk configuration, curriculum publication, and release management |
+`src/admin/contracts.ts` is the single source of truth. Roles are exactly
+`owner`, `admin`, and `viewer`, with additive capability inheritance:
 
-The exact owner-only capability identifiers are:
+- `viewer` receives the resource-specific read capabilities: overview,
+  learners, engines, costs, safety, health, curriculum, configuration, audit,
+  and releases.
+- `admin` additionally receives engine operation, safety triage, incident
+  acknowledgement, and curriculum-draft write capabilities.
+- `owner` additionally receives Admin-role management, global configuration,
+  curriculum approval/publication, and release management capabilities.
 
-- `admin:roles:manage`
-- `admin:config:manage`
-- `admin:curriculum:publish`
-- `admin:releases:manage`
-
-Those capabilities are authorization vocabulary and integration seams only.
-ADMIN-1 does not implement role management, configuration, curriculum, release,
-rollback, telemetry, cost, or audit-log workflows.
+The removed `admin:read`, `admin:operate`, and `admin:*:manage` aliases are not
+accepted. Adding or renaming a capability requires an Admin contract revision.
 
 ## Server enforcement flow
 
 1. Validate the bearer against the configured Supabase Auth `/auth/v1/user`
-   endpoint.
-2. Use only the verified Auth user ID to query one active, non-revoked
-   `academy_admin_role_assignments` row through the server-held service role.
-3. Derive the fixed capability set from that database role.
-4. Require the endpoint's capability. Missing, revoked, duplicate, malformed,
-   timed-out, or failed lookups deny access.
+   endpoint with a bounded timeout.
+2. Pin that exact verified access token into an authenticated Supabase RPC
+   client.
+3. Invoke `academy_admin_authorization_v2()` with no user, role, or capability
+   arguments. The fixed-search-path security-definer function derives
+   `auth.uid()` and returns only a current, active, non-revoked, unexpired role.
+4. Derive the ADMIN-0 capability set from that role and require the endpoint's
+   exact capability.
 
-Request roles, JWT user metadata, parent PIN state, query parameters, and route
-visibility are never consulted. The service-role key remains confined to the
-Netlify helper and is not returned in the browser contract.
+Missing, revoked, expired, ambiguous, malformed, timed-out, or failed lookups
+deny access. Request roles, JWT user metadata, parent PIN state, query values,
+and route visibility are never consulted.
 
-## Database contract
+## Database and lifecycle contract
 
-Migration `20260808120000_academy_admin_authorization.sql` creates the role
-assignment table in `public` so the trusted Netlify Data API client can read it.
-It references `auth.users`, permits only `owner`/`admin`/`viewer`, allows at most
-one active assignment per user, and preserves revoked assignment rows.
+Migration `20260808120000_academy_admin_authorization.sql` creates
+`academy_admin_role_assignments`, linked to `auth.users`. Forced RLS has no
+client policy and no application role receives direct table privileges.
+`authenticated` receives only `EXECUTE` on the narrow authorization function;
+`anon` and `service_role` do not.
 
-RLS is enabled and forced with no browser policy. `anon` and `authenticated`
-receive no table privileges. `service_role` receives `SELECT` only; it cannot
-assign, elevate, or revoke roles. A later owner-authorized role-management
-workflow requires a separately reviewed mutation boundary.
+Assignments may have an immutable `expires_at`. Expired rows remain preserved
+as history but the authorization function never returns them. A partial unique
+index allows at most one active assignment per user.
 
-The migration is repository-only and must not be applied to hosted Supabase by
-this session.
+Role mutation is deliberately not exposed. The table permits only a one-way
+active-to-revoked revision transition and refuses deletion. Its actor user/role
+snapshot, bounded reason-code, revision, and correlation fields map to the
+future canonical `admin_role.assign` and `admin_role.revoke` audit events, using
+the assignment ID as the `admin_role_assignment` resource reference. A later
+owner-only mutation function must append that Admin audit event atomically or
+fail the mutation.
 
-## ADMIN-0 / ADMIN-5 reconciliation seam
+The migration is repository-only and has not been applied to hosted Supabase.
+Its timestamp remains unchanged for dispatcher-led cross-branch reconciliation.
 
-ADMIN-0 may reconcile endpoint naming, shared contract placement, and capability
-ownership while preserving the security properties above. ADMIN-5 may use
-`readAdminAuthorization` and `hasAdminCapability` to guard rendering at
-`/academy/admin`, but must treat those results as presentation state only.
-Protected API handlers remain the enforcement points.
+## Browser and ADMIN-5 seam
+
+The browser accepts only this exact safe state:
+
+- `contractVersion: 2`
+- `status: "authorized"`
+- the server-resolved canonical `role`
+- the exact canonical capability array for that role
+
+`readAdminAuthorization` fails closed for any mismatch.
+`hasAdminAuthorizationCapability` lets ADMIN-5 ask for capabilities such as
+`overview:read`; it remains an advisory rendering guard. ADMIN-5 must recognize
+the canonical `/academy/admin` path before the learner Academy parser and must
+wait for authorization resolution before rendering sensitive data.

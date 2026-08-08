@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
+import { ADMIN_ROLE_CAPABILITIES } from '../../src/admin/contracts.ts'
 import { errorResponse } from './_shared/http.js'
 import { createAdminAuthorizationHandler } from './admin-authorization.js'
 
@@ -38,32 +39,27 @@ describe('Admin authorization read endpoint', () => {
       headers: { authorization: `Bearer aca_stu_v1_${'a'.repeat(43)}` },
     }))
     expect(response.statusCode).toBe(401)
-    expect(fetchImpl).toHaveBeenCalledWith(
-      'https://academy.supabase.co/auth/v1/user',
-      expect.objectContaining({ method: 'GET' }),
-    )
   })
 
-  it('returns only the versioned browser-safe role and capabilities', async () => {
-    const handler = createAdminAuthorizationHandler({
-      authorization: {
-        require: vi.fn(async () => ({
-          ok: true,
-          principal: {
-            userId: 'private-user-id',
-            role: 'viewer',
-            capabilities: ['admin:read'],
-            accessToken: 'must-not-leak',
-          },
-        })),
+  it('returns only the canonical v2 browser-safe state', async () => {
+    const require = vi.fn(async () => ({
+      ok: true,
+      principal: {
+        userId: 'private-user-id',
+        role: 'viewer',
+        capabilities: ADMIN_ROLE_CAPABILITIES.viewer,
+        accessToken: 'must-not-leak',
       },
-    })
+    }))
+    const handler = createAdminAuthorizationHandler({ authorization: { require } })
     const response = await handler(event())
+    expect(require).toHaveBeenCalledWith(expect.anything(), 'overview:read')
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toEqual({
-      schemaVersion: 1,
+      contractVersion: 2,
+      status: 'authorized',
       role: 'viewer',
-      capabilities: ['admin:read'],
+      capabilities: ADMIN_ROLE_CAPABILITIES.viewer,
     })
     expect(response.body).not.toContain('private-user-id')
     expect(response.body).not.toContain('must-not-leak')

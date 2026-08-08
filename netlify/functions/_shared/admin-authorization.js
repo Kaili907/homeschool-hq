@@ -1,42 +1,32 @@
 import { createClient } from '@supabase/supabase-js'
+import {
+  ADMIN_CONTRACT_VERSION,
+  ADMIN_ROLE_CAPABILITIES,
+  hasAdminCapability,
+} from '../../../src/admin/contracts.ts'
 import { errorResponse, isTimeoutError } from './http.js'
 import { verifySupabaseBearer } from './supabase-auth.js'
 
 const ADMIN_ROLE_LOOKUP_TIMEOUT_MS = 5_000
-
-export const ADMIN_ROLE_CAPABILITIES = Object.freeze({
-  viewer: Object.freeze(['admin:read']),
-  admin: Object.freeze(['admin:read', 'admin:operate']),
-  owner: Object.freeze([
-    'admin:read',
-    'admin:operate',
-    'admin:roles:manage',
-    'admin:config:manage',
-    'admin:curriculum:publish',
-    'admin:releases:manage',
-  ]),
-})
-
 const KNOWN_CAPABILITIES = new Set(Object.values(ADMIN_ROLE_CAPABILITIES).flat())
 
-function serviceConfig(env) {
+function publicAuthConfig(env) {
   const rawUrl = (env?.SUPABASE_URL || env?.VITE_SUPABASE_URL || '').trim()
-  const serviceRoleKey = (env?.SUPABASE_SERVICE_ROLE_KEY || '').trim()
+  const anonKey = (env?.SUPABASE_ANON_KEY || env?.VITE_SUPABASE_ANON_KEY || '').trim()
   try {
     const url = new URL(rawUrl)
-    if (url.protocol !== 'https:' || url.username || url.password || !serviceRoleKey) return null
-    return { url: url.toString().replace(/\/+$/, ''), serviceRoleKey }
+    if (url.protocol !== 'https:' || url.username || url.password || !anonKey) return null
+    return { url: url.toString().replace(/\/+$/, ''), anonKey }
   } catch {
     return null
   }
 }
 
-function principalFor(userId, row) {
+function resolvePrincipal(userId, row) {
   if (
     !row ||
     typeof row !== 'object' ||
-    row.status !== 'active' ||
-    row.revoked_at !== null ||
+    Object.keys(row).length !== 1 ||
     !Object.hasOwn(ADMIN_ROLE_CAPABILITIES, row.role)
   ) {
     return null
@@ -51,38 +41,40 @@ function principalFor(userId, row) {
 /**
  * Server-only authorization boundary for every Admin Console endpoint.
  *
- * Supabase Auth verifies the bearer identity first. Authority is then loaded
- * from the durable database assignment for that verified user id. Request
- * bodies, query strings, headers, and JWT metadata are never role sources.
+ * Supabase Auth verifies the bearer first. The same pinned access token invokes
+ * the fixed-search-path database function, which derives auth.uid() and returns
+ * only a current role. Request bodies, query strings, JWT metadata, and browser
+ * capability arrays are never authority sources.
  */
-export function createAdminAuthorization({ env, fetchImpl, client, authVerifier } = {}) {
-  let serviceClient = client
+export function createAdminAuthorization({
+  env,
+  fetchImpl,
+  client,
+  clientFactory,
+  authVerifier,
+} = {}) {
   const verify = authVerifier ?? verifySupabaseBearer
 
-  function getClient() {
-    if (serviceClient) return serviceClient
-    const config = serviceConfig(env)
+  function getClient(accessToken) {
+    if (client) return client
+    if (clientFactory) return clientFactory(accessToken)
+    const config = publicAuthConfig(env)
     if (!config) return null
-    serviceClient = createClient(config.url, config.serviceRoleKey, {
+    return createClient(config.url, config.anonKey, {
+      accessToken: async () => accessToken,
       auth: { autoRefreshToken: false, detectSessionInUrl: false, persistSession: false },
       global: { fetch: fetchImpl },
     })
-    return serviceClient
   }
 
-  async function lookup(userId) {
-    const database = getClient()
+  async function lookup(userId, accessToken) {
+    const database = getClient(accessToken)
     if (!database) return { ok: false, response: errorResponse(503, 'authorization_unavailable') }
 
     const signal = AbortSignal.timeout(ADMIN_ROLE_LOOKUP_TIMEOUT_MS)
     try {
       const { data, error } = await database
-        .from('academy_admin_role_assignments')
-        .select('role,status,revoked_at')
-        .eq('user_id', userId)
-        .eq('status', 'active')
-        .is('revoked_at', null)
-        .limit(2)
+        .rpc('academy_admin_authorization_v2')
         .abortSignal(signal)
 
       if (signal.aborted) {
@@ -95,31 +87,35 @@ export function createAdminAuthorization({ env, fetchImpl, client, authVerifier 
       if (data.length !== 1) {
         return { ok: false, response: errorResponse(503, 'authorization_unavailable') }
       }
-      const principal = principalFor(userId, data[0])
+      const principal = resolvePrincipal(userId, data[0])
       return principal
         ? { ok: true, principal }
         : { ok: false, response: errorResponse(503, 'authorization_unavailable') }
     } catch (error) {
+      const timedOut = isTimeoutError(error, signal)
       return {
         ok: false,
         response: errorResponse(
-          isTimeoutError(error, signal) ? 504 : 503,
-          isTimeoutError(error, signal) ? 'upstream_timeout' : 'authorization_unavailable',
+          timedOut ? 504 : 503,
+          timedOut ? 'upstream_timeout' : 'authorization_unavailable',
         ),
       }
     }
   }
 
   return Object.freeze({
-    async require(event, requiredCapability = 'admin:read') {
+    async require(event, requiredCapability = 'overview:read') {
       if (!KNOWN_CAPABILITIES.has(requiredCapability)) {
         return { ok: false, response: errorResponse(403, 'admin_access_denied') }
       }
       const auth = await verify(event, { fetchImpl, env })
       if (!auth.ok) return auth
-      const authorization = await lookup(auth.user.id)
+      if (typeof auth.accessToken !== 'string' || auth.accessToken === '') {
+        return { ok: false, response: errorResponse(503, 'authorization_unavailable') }
+      }
+      const authorization = await lookup(auth.user.id, auth.accessToken)
       if (!authorization.ok) return authorization
-      if (!authorization.principal.capabilities.includes(requiredCapability)) {
+      if (!hasAdminCapability(authorization.principal.role, requiredCapability)) {
         return { ok: false, response: errorResponse(403, 'admin_access_denied') }
       }
       return authorization
@@ -129,7 +125,8 @@ export function createAdminAuthorization({ env, fetchImpl, client, authVerifier 
 
 export function adminAuthorizationWire(principal) {
   return Object.freeze({
-    schemaVersion: 1,
+    contractVersion: ADMIN_CONTRACT_VERSION,
+    status: 'authorized',
     role: principal.role,
     capabilities: principal.capabilities,
   })

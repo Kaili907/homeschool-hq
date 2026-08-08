@@ -1,8 +1,13 @@
 import { readFile } from 'node:fs/promises'
 import { describe, expect, it, vi } from 'vitest'
 import {
+  ADMIN_CONTRACT_VERSION,
   ADMIN_ROLE_CAPABILITIES,
-  hasAdminCapability,
+  type AdminRole,
+} from './contracts'
+import {
+  type AdminAuthorizationState,
+  hasAdminAuthorizationCapability,
   readAdminAuthorization,
 } from './authorization'
 
@@ -10,7 +15,16 @@ function response(status: number, body: unknown) {
   return { status, json: async () => body }
 }
 
-describe('Admin route authorization state', () => {
+function wire(role: AdminRole): AdminAuthorizationState {
+  return {
+    contractVersion: ADMIN_CONTRACT_VERSION,
+    status: 'authorized',
+    role,
+    capabilities: ADMIN_ROLE_CAPABILITIES[role],
+  }
+}
+
+describe('ADMIN-0 v2 route authorization state', () => {
   it('fails closed without an authenticated Supabase access token', async () => {
     const fetchImpl = vi.fn()
     await expect(readAdminAuthorization({
@@ -21,7 +35,7 @@ describe('Admin route authorization state', () => {
   })
 
   it.each(['viewer', 'admin', 'owner'] as const)(
-    'accepts the exact versioned %s contract',
+    'accepts the exact canonical v2 %s state',
     async (role) => {
       const state = await readAdminAuthorization({
         getAccessToken: async () => 'verified.access.token',
@@ -29,32 +43,22 @@ describe('Admin route authorization state', () => {
           expect(init.method).toBe('GET')
           expect(init.headers).toEqual({ Authorization: 'Bearer verified.access.token' })
           expect(init.credentials).toBe('omit')
-          return response(200, {
-            schemaVersion: 1,
-            role,
-            capabilities: ADMIN_ROLE_CAPABILITIES[role],
-          })
+          return response(200, wire(role))
         },
       })
-      expect(state).toEqual({
-        status: 'authorized',
-        role,
-        capabilities: ADMIN_ROLE_CAPABILITIES[role],
-      })
+      expect(state).toEqual(wire(role))
     },
   )
 
-  it('rejects malformed, expanded, or mismatched server contracts', async () => {
+  it('rejects browser attempts to add, remove, reorder, or elevate capabilities', async () => {
     const invalidContracts = [
-      { schemaVersion: 1, role: 'owner', capabilities: ['admin:read'] },
-      { schemaVersion: 1, role: 'superuser', capabilities: ['admin:read'] },
-      {
-        schemaVersion: 1,
-        role: 'viewer',
-        capabilities: ['admin:read'],
-        serviceRoleKey: 'secret',
-      },
-      { schemaVersion: 2, role: 'viewer', capabilities: ['admin:read'] },
+      { ...wire('viewer'), capabilities: ['overview:read', 'admin_roles:manage'] },
+      { ...wire('owner'), capabilities: ['overview:read'] },
+      { ...wire('viewer'), capabilities: [...ADMIN_ROLE_CAPABILITIES.viewer].reverse() },
+      { ...wire('viewer'), role: 'owner' },
+      { ...wire('viewer'), serviceRoleKey: 'secret' },
+      { ...wire('viewer'), contractVersion: 1 },
+      { ...wire('viewer'), status: 'elevated' },
     ]
     for (const contract of invalidContracts) {
       await expect(readAdminAuthorization({
@@ -78,15 +82,11 @@ describe('Admin route authorization state', () => {
     }
   })
 
-  it('keeps capability checks advisory and exact', () => {
-    const viewer = {
-      status: 'authorized' as const,
-      role: 'viewer' as const,
-      capabilities: ADMIN_ROLE_CAPABILITIES.viewer,
-    }
-    expect(hasAdminCapability(viewer, 'admin:read')).toBe(true)
-    expect(hasAdminCapability(viewer, 'admin:operate')).toBe(false)
-    expect(hasAdminCapability({ status: 'forbidden' }, 'admin:read')).toBe(false)
+  it('gives ADMIN-5 an advisory canonical overview:read seam', () => {
+    const viewer = wire('viewer')
+    expect(hasAdminAuthorizationCapability(viewer, 'overview:read')).toBe(true)
+    expect(hasAdminAuthorizationCapability(viewer, 'engines:operate')).toBe(false)
+    expect(hasAdminAuthorizationCapability({ status: 'forbidden' }, 'overview:read')).toBe(false)
   })
 
   it('never references server credentials from the browser authorization module', async () => {
