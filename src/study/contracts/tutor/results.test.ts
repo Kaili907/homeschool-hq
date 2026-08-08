@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { STUDY_TUTOR_REASON_CODE_MAX_LENGTH, isStudyTutorReasonCode, parseStudyTutorResult } from './results'
+import {
+  STUDY_TUTOR_REASON_CODE_MAX_LENGTH,
+  STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH,
+  isStudyTutorReasonCode,
+  parseStudyTutorResult,
+} from './results'
 
 // STUDY-A1-TUTOR-CONTRACT — unknown implementation output is rejected here or
 // nowhere. A production wrapper is out-of-process work the host does not own,
@@ -34,6 +39,30 @@ describe('accepted results', () => {
   it('refuses an empty or non-string presentation', () => {
     expect(parseStudyTutorResult({ status: 'accepted', eventRef: 'event.1', visibleText: '   ' })).toBeNull()
     expect(parseStudyTutorResult({ status: 'accepted', eventRef: 'event.1', visibleText: null })).toBeNull()
+  })
+
+  // STUDY-A1-TUTOR-CONTRACT-H2 Phase 4 — review finding F3: accepted
+  // `visibleText` was bounded below (non-empty) and not above, so a Tutor could
+  // hand the host a megabyte of prose and the host would hold all of it in
+  // surface state and render it to a ten-year-old.
+  it('refuses a presentation larger than one learner-facing turn', () => {
+    const megabytes = 'a'.repeat(2_000_000)
+    expect(parseStudyTutorResult({ status: 'accepted', eventRef: 'event.1', visibleText: megabytes })).toBeNull()
+    expect(parseStudyTutorResult({
+      status: 'accepted',
+      eventRef: 'event.1',
+      visibleText: 'a'.repeat(STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH + 1),
+    })).toBeNull()
+  })
+
+  it('admits a presentation at the bound, and does not truncate it', () => {
+    const atBound = 'a'.repeat(STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH)
+    const parsed = parseStudyTutorResult({ status: 'accepted', eventRef: 'event.1', visibleText: atBound })
+    expect(parsed).toEqual({ status: 'accepted', eventRef: 'event.1', visibleText: atBound })
+    // Oversized output is rejected, never shortened: a truncated turn is a
+    // Tutor's sentence cut in half in front of a learner, and it would also let
+    // an over-long payload through as a shorter one the host then trusts.
+    expect((parsed as { visibleText: string }).visibleText).toHaveLength(STUDY_TUTOR_VISIBLE_TEXT_MAX_LENGTH)
   })
 
   it('refuses a missing or an extra field', () => {
@@ -166,6 +195,60 @@ describe('validator integrity', () => {
     }
     expect(() => parseStudyTutorResult(hostile)).not.toThrow()
     expect(parseStudyTutorResult(hostile)).toBeNull()
+  })
+
+  // STUDY-A1-TUTOR-CONTRACT-H2 Phase 8 — `Object.keys` sees neither of these,
+  // so an exact-key check built on it would have waved both through. The
+  // rebuild meant they could never have travelled; the shape is still one this
+  // contract does not admit, and it is rejected rather than silently dropped.
+  it('rejects an extra property hidden from Object.keys', () => {
+    const smuggled = { status: 'accepted', eventRef: 'event.1', visibleText: 'ok' }
+    Object.defineProperty(smuggled, 'transcript', {
+      value: ['turn one', 'turn two'],
+      enumerable: false,
+      writable: false,
+      configurable: false,
+    })
+    expect(Object.keys(smuggled)).toEqual(['status', 'eventRef', 'visibleText'])
+    expect(parseStudyTutorResult(smuggled)).toBeNull()
+
+    const bearer = { status: 'quarantined', reasonCode: 'x-quarantine' }
+    Object.defineProperty(bearer, 'authorization', { value: 'adult-bearer-token', enumerable: false })
+    expect(parseStudyTutorResult(bearer)).toBeNull()
+  })
+
+  it('rejects a symbol-keyed extra property', () => {
+    const smuggled = {
+      status: 'stopped',
+      reasonCode: 'x-stop',
+      deliveryStatus: 'not-confirmed',
+      [Symbol.for('studentId')]: 'learner:real-child',
+    }
+    expect(Object.keys(smuggled)).toEqual(['status', 'reasonCode', 'deliveryStatus'])
+    expect(parseStudyTutorResult(smuggled)).toBeNull()
+  })
+
+  it('rejects a hidden extra property on a nested interruption', () => {
+    const interruption = { kind: 'rate-limit' }
+    Object.defineProperty(interruption, 'bearer', { value: 'adult-bearer-token', enumerable: false })
+    expect(parseStudyTutorResult({ status: 'interrupted', interruption })).toBeNull()
+  })
+
+  it('admits a prototype-inherited approved shape only when its own keys are exact', () => {
+    // Inherited properties are not own properties: a result that keeps its
+    // fields on a prototype has none of the keys it appears to have.
+    const parent = { status: 'accepted', eventRef: 'event.1', visibleText: 'ok' }
+    expect(parseStudyTutorResult(Object.create(parent))).toBeNull()
+    // And an approved own shape whose prototype carries a forbidden field still
+    // rebuilds without it.
+    const child = Object.create({ officialGrade: 'C' }) as Record<string, unknown>
+    child.status = 'accepted'
+    child.eventRef = 'event.1'
+    child.visibleText = 'ok'
+    const parsed = parseStudyTutorResult(child)
+    expect(parsed).toEqual({ status: 'accepted', eventRef: 'event.1', visibleText: 'ok' })
+    expect(Object.hasOwn(parsed!, 'officialGrade')).toBe(false)
+    expect((parsed as unknown as { officialGrade?: string }).officialGrade).toBeUndefined()
   })
 
   it('reads a field once, so a second answer cannot differ from the checked one', () => {

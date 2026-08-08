@@ -24,6 +24,7 @@
  * That is what keeps a Tutor from smuggling a learner's words into Study
  * evidence through an identifier or a code.
  */
+import type { StudyTutorRef } from './refs'
 import type { CanonicalStudyTaskType, StudyRuntimeInterruption, StudySubject } from '../../types'
 
 /** Mirrors the `study-production.v1` convention in ../production/ports.ts. */
@@ -55,9 +56,13 @@ export interface StudyTutorLaunch {
    * Bounded by the already-approved host boundary — `isStudyBridgeOpaqueId` in
    * src/study/studyRequestRef.ts, at most 128 characters — so a long reference
    * cannot come back as a refusal the host records as a safety incident.
+   *
+   * That bound is structural, not documentary: `StudyTutorRef` is producible
+   * only by `parseStudyTutorRef`. See ./refs.ts for the per-field derivation of
+   * which references are bridge-facing and what each one's refusal costs.
    */
-  readonly sessionRef: string
-  readonly lessonRef: string
+  readonly sessionRef: StudyTutorRef
+  readonly lessonRef: StudyTutorRef
   /** IANA zone; the Tutor's day boundary, not a location claim. */
   readonly householdTimeZone: string
   /** ISO calendar date in the household's zone. */
@@ -85,11 +90,16 @@ export interface StudyTutorLaunch {
  */
 export interface StudyTutorTurn {
   /** See StudyTutorLaunch.sessionRef. Same bound, same opacity. */
-  readonly sessionRef: string
-  /** Per-turn idempotency reference. Bounded like `sessionRef`. */
-  readonly requestRef: string
-  readonly lessonRef: string
-  readonly segmentRef: string
+  readonly sessionRef: StudyTutorRef
+  /**
+   * Per-turn idempotency reference. Bounded like `sessionRef`, and for the same
+   * reason: it reaches the bridge's pre-core gateway as `eventId`, where an
+   * over-long value is refused as `stop-invalid-input` before the classifier
+   * runs — a durable safety stop about a child who did nothing.
+   */
+  readonly requestRef: StudyTutorRef
+  readonly lessonRef: StudyTutorRef
+  readonly segmentRef: StudyTutorRef
   /**
    * Host vocabulary, not Tutor vocabulary. An implementation that cannot teach
    * a subject or a task type returns `quarantined` rather than guessing — which
@@ -98,7 +108,7 @@ export interface StudyTutorTurn {
    */
   readonly subject: StudySubject
   /** One skill. The host chooses which; the preview takes `skillRefs[0]`. */
-  readonly skillRef: string
+  readonly skillRef: StudyTutorRef
   readonly taskType: CanonicalStudyTaskType
   /**
    * The learner's words, for this call only. Transient input, never
@@ -213,7 +223,29 @@ export type StudyTutorResult =
 export interface StudyTutorRuntime {
   /** Pinned so a host can refuse a mismatched wrapper once, at installation. */
   readonly contractVersion: typeof STUDY_TUTOR_CONTRACT_VERSION
+  /**
+   * Asynchronous, and therefore awaitable — which is an obligation on the host,
+   * not a detail of the return type.
+   *
+   * A host that does not await this has started nothing it can rely on. Until
+   * the promise settles the Tutor session may not exist and may still fail, so
+   * calendar start, the session-launched event and session persistence must all
+   * wait for it: STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT in ./wrapperObligations.ts.
+   * Otherwise a rejected launch leaves a durable record of a Study session a
+   * learner never got.
+   *
+   * WRAPPER_LANDING_REQUIREMENT, open. The mounted preview host calls the
+   * preview runtime's synchronous launch for effect and is out of scope here.
+   */
   launch(launch: StudyTutorLaunch): Promise<void>
+  /**
+   * The returned value must have been through `parseStudyTutorResult` — or
+   * `acceptStudyTutorResult`, which is the same check with the fail-closed
+   * branch already taken. An implementation's raw transport output is `unknown`
+   * until then, and typing it as `StudyTutorResult` beforehand skips this
+   * boundary while appearing to honour it:
+   * STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT in ./wrapperObligations.ts.
+   */
   submit(turn: StudyTutorTurn): Promise<StudyTutorResult>
 }
 
