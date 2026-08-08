@@ -6,7 +6,7 @@ tables. A later database implementation may project those domain audits into an
 Admin read model, but it must not rewrite them or force incompatible Admin actions
 into their closed event vocabularies.
 
-`AdminAuditEvent` version 1 contains:
+`AdminAuditEvent` version 2 contains the unchanged audit shape:
 
 - server-generated event ID and acceptance timestamp;
 - actor user reference and the server-resolved Admin role used for the decision;

@@ -36,16 +36,29 @@ contract-change issue; they do not fork local enums.
 
 - Preserve `academy_gateway_usage` and existing quotas; add a distinct immutable
   usage/cost ledger and effective-dated pricing catalog.
-- Capture provider usage and provider model IDs inside the gateways after trusted
-  authentication/provider responses. Do not trust browser token/cost fields.
+- Capture the verified account reference on every record. Resolve a household
+  only from trusted relationships; never substitute account/user ID when the
+  household is absent or ambiguous.
+- Capture provider product/model IDs inside the gateways after trusted
+  authentication/provider responses. Require logical tier for tiered Anthropic
+  requests and use null for current TTS rather than a fabricated tier.
+- Store cache-read and cache-write token quantities/rates separately. Do not trust
+  browser identity, token, or cost fields.
 - Keep learner Anthropic/TTS response shapes unchanged.
 - Use database integers/BigInt and decimal-string JSON. Implement the frozen
   half-up component rounding rule and checked sums; never use floating-point
   money.
-- Store null/unavailable when usage or pricing is unknown, not zero. Label
+- Bind calculations to one immutable USD catalog version. Reject overlapping
+  catalog/rate intervals and snapshot each component's selected rate/effective
+  period; do not collapse them into one effective timestamp.
+- Keep canonical operational result, billing disposition, and cost kind separate.
+  Store null/unavailable when usage or pricing is unknown, not zero, and label
   calculated estimates separately from future invoice reconciliation.
-- Bind duplicate/retry handling to a stable provider-attempt idempotency key and
-  exclude prompts, responses, and audio from the ledger.
+- Record required app version and nullable-by-applicability engine/curriculum
+  versions from trusted execution context.
+- Bind duplicate/retry handling to a stable trusted execution key. Replay only
+  when immutable facts match; reject different facts as a reconciliation
+  conflict. Exclude prompts, responses, and audio from the ledger.
 
 ## ADMIN-5: shell and overview
 

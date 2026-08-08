@@ -1,6 +1,8 @@
 # Manuel Academy Admin Console architecture
 
-Status: controlling ADMIN-0 contract, version 1.
+Status: controlling ADMIN-0 contract, version 2. Version 2 refines only the
+provider usage/cost shape; the authorization, telemetry, health, routing, audit,
+and curriculum decisions remain unchanged.
 
 The Admin Console is an authenticated operator surface at `/academy/admin`. It
 will aggregate operational views and narrowly approved controls without becoming

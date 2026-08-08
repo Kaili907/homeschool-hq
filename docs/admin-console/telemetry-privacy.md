@@ -7,13 +7,14 @@ and which safe operational outcome occurred. It is not a replacement for Study
 learning evidence, safety records, gateway quotas, protected learner work, or
 administrative audit history.
 
-Contract version 1 is `AdminOperationalEvent` in `src/admin/contracts.ts`.
+Contract version 2 is `AdminOperationalEvent` in `src/admin/contracts.ts`; the
+operational event shape is unchanged by the cost-contract amendment.
 
 ## Required event shape
 
 Each accepted event contains:
 
-- `schemaVersion`, currently `1`;
+- `schemaVersion`, currently `2`;
 - a globally unique `eventId` and UTC `occurredAt` instant;
 - `scope`: `household` or `system`;
 - an opaque `householdRef` for household events and optional opaque
@@ -32,7 +33,7 @@ or cost claim as authoritative.
 
 ## Event and metadata allowlists
 
-Version 1 event types are:
+Version 2 event types remain:
 
 - `tutor.turn`
 - `study.session`
