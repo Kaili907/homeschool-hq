@@ -113,6 +113,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-authorization-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260808120000",
+      "filename": "20260808120000_academy_operational_events.sql",
+      "sha256": "0d50f944d9faa197ccae3552d0d66bd93227bf66685df1bc60f85eda30d59cbd",
+      "dependency": "20260801190000_academy_study_final_production_reconciliation.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-operational-telemetry-v1",
+      "supersessionStatus": "current"
     }
   ]
 }
