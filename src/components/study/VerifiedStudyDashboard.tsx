@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import {
   parseVerifiedStudyCalendar,
   parseVerifiedStudyDashboard,
+  VERIFIED_CALENDAR_BLOCK_LIMIT,
   VerifiedStudyContractError,
   type VerifiedStudyBlockState,
   type VerifiedStudyBlockType,
@@ -181,8 +182,24 @@ export function VerifiedStudyDashboard({
               <h2 id="verified-study-blocks" className="text-xl font-bold">Scheduled Study blocks</h2>
               {view.blocks.length === 0 ? (
                 <p className="mt-2" data-empty="blocks">No Study blocks are scheduled.</p>
-              ) : (
-                groupByIntendedLocalDate(view.blocks).map(([intendedLocalDate, blocks]) => (
+              ) : (<>
+                {/*
+                  The server answers calendar:read with at most
+                  VERIFIED_CALENDAR_BLOCK_LIMIT blocks, ordered by scheduled
+                  start, and returns no continuation cursor with them. So at
+                  exactly the limit this surface cannot tell whether the plan
+                  ends there, and it says so rather than letting a full page
+                  read as a complete plan.
+                */}
+                <p
+                  className="mt-2 text-sm"
+                  data-block-limit={view.blocks.length === VERIFIED_CALENDAR_BLOCK_LIMIT ? 'reached' : 'under'}
+                >
+                  {view.blocks.length === VERIFIED_CALENDAR_BLOCK_LIMIT
+                    ? `Showing the first ${VERIFIED_CALENDAR_BLOCK_LIMIT} scheduled Study blocks. There may be more that are not shown here.`
+                    : `Showing up to ${VERIFIED_CALENDAR_BLOCK_LIMIT} scheduled Study blocks.`}
+                </p>
+                {groupByIntendedLocalDate(view.blocks).map(([intendedLocalDate, blocks]) => (
                   <div key={intendedLocalDate} className="mt-4" data-intended-local-date={intendedLocalDate}>
                     <h3 className="font-bold">{intendedLocalDate}</h3>
                     <ul className="mt-2 space-y-2">
@@ -202,8 +219,8 @@ export function VerifiedStudyDashboard({
                       ))}
                     </ul>
                   </div>
-                ))
-              )}
+                ))}
+              </>)}
             </section>
 
             <section className="mt-8" aria-labelledby="verified-study-sessions">

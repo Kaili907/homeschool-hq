@@ -45,21 +45,79 @@ function between(source: string, start: string, end: string, what: string): stri
   return source.slice(from, to)
 }
 
-/** The quoted values of a `check (<column> in ( ... ))` constraint. */
+/**
+ * The quoted values of a `check (<column> in ( ... ))` constraint.
+ *
+ * STUDY-A1-PROD-DASH-H2 Phase 6 — this used to collect `/'([a-z_]+)'/g` from the
+ * clause text, which silently dropped any value the charset did not cover. A
+ * server enum widened to `'level2'` or `'inProgress'` would have been extracted
+ * as nothing at all, the extracted set would still have equalled the browser's
+ * unchanged enum, and this file would have reported no drift — the exact failure
+ * it exists to prevent.
+ *
+ * So the list is now scanned to its matching close paren and then consumed
+ * whole, as SQL string literals and separators and nothing else. A value this
+ * extractor cannot account for fails the test instead of vanishing from it,
+ * because a partial extraction and a correct one are indistinguishable at the
+ * call site: both are just a shorter list.
+ */
 function checkedValues(table: string, column: string): readonly string[] {
   const marker = `check (${column} in (`
   const from = table.indexOf(marker)
   expect(from, `${column} check constraint`).toBeGreaterThanOrEqual(0)
-  const to = table.indexOf('))', from)
-  expect(to, `${column} check constraint close`).toBeGreaterThan(from)
-  const values = [...table.slice(from + marker.length, to).matchAll(/'([a-z_]+)'/g)].map(([, value]) => value)
+
+  // Walk to the paren closing the `in (` list. Quote state is tracked so a
+  // literal containing a paren cannot end the scan early.
+  const start = from + marker.length
+  let index = start
+  let depth = 1
+  let quoted = false
+  while (index < table.length && depth > 0) {
+    const char = table[index]!
+    if (quoted) {
+      // '' is an escaped quote inside a SQL string literal, not its end.
+      if (char === "'") {
+        if (table[index + 1] === "'") index += 1
+        else quoted = false
+      }
+    } else if (char === "'") quoted = true
+    else if (char === '(') depth += 1
+    else if (char === ')') depth -= 1
+    index += 1
+  }
+  expect(depth, `${column} check constraint close`).toBe(0)
+  const list = table.slice(start, index - 1)
+
+  // Sticky, so each literal must begin exactly where the previous one ended:
+  // an unparsed gap cannot be skipped over, only reported.
+  const literal = /\s*'((?:[^']|'')*)'\s*(,)?/y
+  const values: string[] = []
+  while (literal.lastIndex < list.length) {
+    const match = literal.exec(list)
+    if (!match) break
+    values.push(match[1]!.replaceAll("''", "'"))
+    if (!match[2]) break
+  }
+  expect(
+    list.slice(literal.lastIndex).trim(),
+    `unparsed remainder of the ${column} check list`,
+  ).toBe('')
   expect(values.length, `${column} check values`).toBeGreaterThan(0)
   return values
 }
 
-/** The response keys of a `jsonb_build_object('key', table.column, ...)` row builder. */
+/**
+ * The response keys of a `jsonb_build_object('key', table.column, ...)` row
+ * builder.
+ *
+ * The key charset is deliberately unrestricted for the same reason as above: a
+ * key this pattern could not match would be dropped rather than reported. What
+ * anchors the match is the `table.column` value form, and a key whose value
+ * stopped taking that form drops the count, which the exact comparison at the
+ * call site fails on.
+ */
 function builtKeys(branch: string): readonly string[] {
-  const keys = [...branch.matchAll(/'([A-Za-z][A-Za-z0-9]*)',\s*\w+\.\w+/g)].map(([, key]) => key)
+  const keys = [...branch.matchAll(/'([^']+)',\s*\w+\.\w+/g)].map(([, key]) => key)
   expect(keys.length, 'jsonb_build_object row keys').toBeGreaterThan(0)
   return keys
 }
@@ -94,6 +152,63 @@ const calendarBranch = between(
   `when 'session:begin' then`,
   'calendar:read branch',
 )
+
+// STUDY-A1-PROD-DASH-H2 Phase 6 — the extractor is what every assertion in the
+// next block depends on, so it is exercised against clauses the real migrations
+// do not contain yet. A digit or a capital in a future server enum is the case
+// that used to pass silently; each one below now either comes out of the
+// extractor or stops the test.
+describe('the CHECK extractor derives values instead of pattern-matching them', () => {
+  it('reads the single-line form', () => {
+    expect(checkedValues(`check (state in ('scheduled', 'available'))`, 'state'))
+      .toEqual(['scheduled', 'available'])
+  })
+
+  it('reads the multi-line, indented form the sessions table uses', () => {
+    expect(checkedValues(
+      "check (state in (\n      'planned', 'active',\n      'approved_break'\n    ))",
+      'state',
+    )).toEqual(['planned', 'active', 'approved_break'])
+  })
+
+  it.each([
+    ['a digit', `check (state in ('active', 'level2'))`, ['active', 'level2']],
+    ['a capital', `check (state in ('active', 'inProgress'))`, ['active', 'inProgress']],
+    ['a hyphen', `check (state in ('active', 'in-progress'))`, ['active', 'in-progress']],
+    ['a space', `check (state in ('active', 'needs review'))`, ['active', 'needs review']],
+    ['an escaped quote', `check (state in ('active', 'it''s'))`, ['active', "it's"]],
+  ])('derives a future enum value containing %s', (_name, clause, expected) => {
+    // Every one of these was invisible to the old `[a-z_]+` collector, which
+    // would have returned only `['active']` and matched an unchanged browser
+    // enum without complaint.
+    expect(checkedValues(clause, 'state')).toEqual(expected)
+  })
+
+  it('reads a value containing a parenthesis without ending the scan early', () => {
+    expect(checkedValues(`check (state in ('active', 'paused (adult)'))`, 'state'))
+      .toEqual(['active', 'paused (adult)'])
+  })
+
+  it.each([
+    ['a function call among the values', `check (state in ('active', lower('B')))`],
+    ['a subquery', `check (state in (select code from public.states))`],
+    ['a column reference', `check (state in ('active', legacy_state))`],
+    ['an unterminated list', `check (state in ('active', 'paused'`],
+  ])('fails loudly on %s rather than returning what it understood', (_name, clause) => {
+    expect(() => checkedValues(clause, 'state')).toThrow()
+  })
+
+  it('fails when the named column has no check constraint at all', () => {
+    expect(() => checkedValues(`check (block_type in ('lesson'))`, 'state')).toThrow()
+  })
+
+  it('reports a widened enum as a different list, which is what drift detection needs', () => {
+    const before = checkedValues(`check (state in ('active', 'paused'))`, 'state')
+    const after = checkedValues(`check (state in ('active', 'paused', 'level2'))`, 'state')
+    expect(after).not.toEqual(before)
+    expect(after).toContain('level2')
+  })
+})
 
 describe('verified dashboard contracts track the server migrations', () => {
   it('mirrors academy_study_identifier_is_valid exactly', () => {

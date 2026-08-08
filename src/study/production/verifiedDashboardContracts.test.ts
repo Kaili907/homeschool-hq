@@ -264,6 +264,24 @@ describe('verified calendar:read contract', () => {
     expect(() => parseVerifiedStudyCalendar({ blocks: rows.slice(0, -1) })).not.toThrow()
   })
 
+  // STUDY-A1-PROD-DASH-H2 Phase 4 — the cap is a boundary, so it is walked
+  // rather than sampled. A full page is a legal server answer and must parse;
+  // one row more is not, and must not.
+  it.each([0, 1, 99, VERIFIED_CALENDAR_BLOCK_LIMIT])('accepts %i blocks in one response', (count) => {
+    const rows = Array.from({ length: count }, (_value, index) =>
+      block({ blockId: `calendar-block-${index}` }))
+    expect(parseVerifiedStudyCalendar({ blocks: rows }).blocks).toHaveLength(count)
+  })
+
+  it('refuses the first block past the cap and returns nothing at all', () => {
+    const rows = Array.from({ length: VERIFIED_CALENDAR_BLOCK_LIMIT + 1 }, (_value, index) =>
+      block({ blockId: `calendar-block-${index}` }))
+    // Not truncated to the cap: a body the server could not have produced is
+    // refused whole, because the extra row means the response is not the one
+    // this contract describes.
+    refusedCalendar({ blocks: rows }).toThrow(VerifiedStudyContractError)
+  })
+
   it.each([
     ['null', null],
     ['a body with no blocks key', {}],
@@ -283,5 +301,218 @@ describe('verified calendar:read contract', () => {
       // No server value may travel out inside the refusal.
       expect((error as Error).message).not.toContain('secret')
     }
+  })
+})
+
+// STUDY-A1-PROD-DASH-H2 Phase 5 — hostile object shapes, committed.
+//
+// These parsers are correct against all of it today. They were not covered by a
+// test, which means nothing stopped a later "simplification" — a superset key
+// check, a re-read of a field after validating it, a prototype-tolerant lookup
+// — from quietly removing the property. Each case below is one such regression.
+//
+// The claim being held: refuse the body, read each field exactly once, return a
+// freshly built frozen value, and leave Object.prototype alone.
+describe('adversarial object shapes', () => {
+  const SESSION_JSON =
+    '"sessionId":"study-session-01","state":"active","lessonId":"math.g5.u2.l3",' +
+    '"revision":4,"updatedAt":"2026-08-07T13:05:00+00:00"'
+
+  function pollutionProbe(): unknown {
+    return (Object.prototype as Record<string, unknown>).polluted
+  }
+
+  it('leaves Object.prototype alone across every case in this file', () => {
+    expect(pollutionProbe()).toBeUndefined()
+  })
+
+  describe('__proto__ arriving as a real own property', () => {
+    // JSON.parse assigns `__proto__` as an ordinary own data property instead
+    // of invoking the setter, so a body off the wire can carry one. An object
+    // literal in this file could not reproduce that.
+    it('refuses a row carrying __proto__ alongside every valid field', () => {
+      const body = JSON.parse(`{"sessions":[{${SESSION_JSON},"__proto__":{"polluted":"yes"}}]}`)
+      expect(Object.hasOwn(body.sessions[0], '__proto__')).toBe(true)
+      refusedDashboard(body).toThrow(VerifiedStudyContractError)
+      expect(pollutionProbe()).toBeUndefined()
+    })
+
+    it('refuses a row that hides a required field behind __proto__', () => {
+      // The sharp case: exactly five own keys, so a count check alone passes,
+      // and `state` reachable only by walking the prototype chain.
+      const body = JSON.parse(
+        '{"sessions":[{"sessionId":"study-session-01","lessonId":"math.g5.u2.l3",' +
+        '"revision":4,"updatedAt":"2026-08-07T13:05:00+00:00",' +
+        '"__proto__":{"state":"active"}}]}',
+      )
+      expect(Object.keys(body.sessions[0])).toHaveLength(5)
+      refusedDashboard(body).toThrow(VerifiedStudyContractError)
+      expect(pollutionProbe()).toBeUndefined()
+    })
+
+    it('refuses a calendar block carrying __proto__', () => {
+      const body = JSON.parse(
+        '{"blocks":[{"blockId":"calendar-block-01","blockType":"lesson",' +
+        '"sourceReference":"math.g5.u2.l3","scheduledStart":"2026-08-07T13:00:00+00:00",' +
+        '"intendedLocalDate":"2026-08-07","state":"scheduled","revision":1,' +
+        '"__proto__":{"polluted":"yes"}}]}',
+      )
+      refusedCalendar(body).toThrow(VerifiedStudyContractError)
+      expect(pollutionProbe()).toBeUndefined()
+    })
+  })
+
+  describe('fields reachable only through the prototype', () => {
+    it('refuses a row whose required field lives on the prototype', () => {
+      const row = Object.create({ state: 'active' })
+      Object.assign(row, omit(session(), 'state'))
+      refusedDashboard({ sessions: [row] }).toThrow(VerifiedStudyContractError)
+    })
+
+    it('refuses a row with the right own-key count but a prototype-only field', () => {
+      // Five own keys, one of them unknown, `state` only inherited.
+      const row = Object.create({ state: 'active' })
+      Object.assign(row, { ...omit(session(), 'state'), completionPercent: 40 })
+      expect(Object.keys(row)).toHaveLength(5)
+      refusedDashboard({ sessions: [row] }).toThrow(VerifiedStudyContractError)
+    })
+
+    it('refuses a class instance whose field is a prototype getter', () => {
+      class SessionRow {
+        sessionId = 'study-session-01'
+        lessonId = 'math.g5.u2.l3'
+        revision = 4
+        updatedAt = '2026-08-07T13:05:00+00:00'
+        // Declared in the class body, so it lives on SessionRow.prototype and
+        // is not an own property of any instance.
+        get state(): string { return 'active' }
+      }
+      const row = new SessionRow()
+      expect(Object.hasOwn(row, 'state')).toBe(false)
+      refusedDashboard({ sessions: [row] }).toThrow(VerifiedStudyContractError)
+    })
+
+    it('refuses a row built with a null prototype and a missing field', () => {
+      const row = Object.assign(Object.create(null), omit(session(), 'updatedAt'))
+      refusedDashboard({ sessions: [row] }).toThrow(VerifiedStudyContractError)
+    })
+  })
+
+  describe('getters', () => {
+    it('reads each field once, so a getter cannot change it after validation', () => {
+      let reads = 0
+      const row = {
+        get sessionId(): string {
+          reads += 1
+          // Valid on the read the parser makes; hostile on any read after it.
+          return reads === 1 ? 'study-session-01' : 'not a valid identifier'
+        },
+        state: 'active',
+        lessonId: 'math.g5.u2.l3',
+        revision: 4,
+        updatedAt: '2026-08-07T13:05:00+00:00',
+      }
+
+      const parsed = parseVerifiedStudyDashboard({ sessions: [row] })
+      expect(reads).toBe(1)
+      expect(parsed.sessions[0]!.sessionId).toBe('study-session-01')
+    })
+
+    it('rebuilds the row as plain frozen data, carrying no accessor out', () => {
+      let reads = 0
+      const row = {
+        get state(): string { reads += 1; return 'active' },
+        sessionId: 'study-session-01',
+        lessonId: 'math.g5.u2.l3',
+        revision: 4,
+        updatedAt: '2026-08-07T13:05:00+00:00',
+      }
+
+      const parsed = parseVerifiedStudyDashboard({ sessions: [row] })
+      const descriptor = Object.getOwnPropertyDescriptor(parsed.sessions[0]!, 'state')!
+      // If the accessor had survived onto the returned object, every later read
+      // of `state` would run the server's code again.
+      expect(descriptor.get).toBeUndefined()
+      expect(descriptor.value).toBe('active')
+      expect(Object.isFrozen(parsed.sessions[0])).toBe(true)
+      expect(parsed.sessions[0]).not.toBe(row)
+
+      const before = reads
+      void parsed.sessions[0]!.state
+      void parsed.sessions[0]!.state
+      expect(reads).toBe(before)
+    })
+
+    it('refuses a getter that returns a valid value and then an invalid one', () => {
+      // The same flip, on a field whose first read already fails: the refusal
+      // must come from the first read rather than from a retry.
+      let reads = 0
+      const row = {
+        get revision(): unknown { reads += 1; return reads === 1 ? 0 : 4 },
+        sessionId: 'study-session-01',
+        state: 'active',
+        lessonId: 'math.g5.u2.l3',
+        updatedAt: '2026-08-07T13:05:00+00:00',
+      }
+      refusedDashboard({ sessions: [row] }).toThrow(VerifiedStudyContractError)
+      expect(reads).toBe(1)
+    })
+
+    it('returns nothing at all when a getter throws', () => {
+      const row = {
+        get lessonId(): string { throw new Error('hostile-getter') },
+        sessionId: 'study-session-01',
+        state: 'active',
+        revision: 4,
+        updatedAt: '2026-08-07T13:05:00+00:00',
+      }
+      // The throw propagates rather than becoming a contract code, so the
+      // dashboard renders `unavailable` instead of `malformed`. Either way no
+      // part of the body reaches a learner, which is the property that matters.
+      expect(() => parseVerifiedStudyDashboard({ sessions: [row] })).toThrow()
+    })
+
+    it('refuses an enumerable getter on the body envelope itself', () => {
+      let reads = 0
+      const body = {
+        get sessions(): unknown { reads += 1; return reads === 1 ? [] : 'not an array' },
+      }
+      expect(parseVerifiedStudyDashboard(body).sessions).toEqual([])
+      expect(reads).toBe(1)
+    })
+  })
+
+  describe('arrays where objects belong, and objects where arrays belong', () => {
+    it('refuses a row that is an array of the right length', () => {
+      const row = ['study-session-01', 'active', 'math.g5.u2.l3', 4, '2026-08-07T13:05:00+00:00']
+      refusedDashboard({ sessions: [row] }).toThrow(VerifiedStudyContractError)
+    })
+
+    it('refuses an array carrying the field names as properties', () => {
+      const row = Object.assign([] as unknown[], session())
+      expect(Object.keys(row)).toHaveLength(5)
+      refusedDashboard({ sessions: [row] }).toThrow(VerifiedStudyContractError)
+    })
+
+    it('refuses an array-like object standing in for the row list', () => {
+      refusedDashboard({ sessions: { 0: session(), length: 1 } })
+        .toThrow(VerifiedStudyContractError)
+    })
+
+    it('refuses a calendar block that is an array', () => {
+      refusedCalendar({ blocks: [Object.values(block())] }).toThrow(VerifiedStudyContractError)
+    })
+
+    it('accepts the ordinary object form the server actually sends', () => {
+      // Positive control: the refusals above must be about shape, not about
+      // this suite handing the parser something broken every time.
+      expect(parseVerifiedStudyDashboard({ sessions: [session()] }).sessions).toHaveLength(1)
+      expect(parseVerifiedStudyCalendar({ blocks: [block()] }).blocks).toHaveLength(1)
+    })
+  })
+
+  it('still leaves Object.prototype alone after every case above', () => {
+    expect(pollutionProbe()).toBeUndefined()
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined()
   })
 })

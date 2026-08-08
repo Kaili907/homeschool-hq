@@ -127,6 +127,28 @@ const BLOCKS = Object.freeze({
   ],
 })
 
+/**
+ * STUDY-A1-PROD-DASH-H2 Phase 4 — a calendar:read body of a given size.
+ *
+ * Every block is well formed and distinct, so a refusal in these cases can only
+ * be the row cap and never a malformed row.
+ */
+function calendarOf(count: number): { readonly blocks: readonly unknown[] } {
+  return Object.freeze({
+    blocks: Array.from({ length: count }, (_value, index) => ({
+      blockId: `calendar-block-${index}`,
+      blockType: 'lesson',
+      sourceReference: 'math.g5.u2.l3',
+      scheduledStart:
+        `2026-08-07T${String(9 + Math.floor(index / 60)).padStart(2, '0')}` +
+        `:${String(index % 60).padStart(2, '0')}:00+00:00`,
+      intendedLocalDate: '2026-08-07',
+      state: 'scheduled',
+      revision: 1,
+    })),
+  })
+}
+
 interface RuntimeProbe {
   readonly adapter: VerifiedStudyRuntimeAdapter
   readonly calls: VerifiedRuntimeExecuteInput[]
@@ -357,6 +379,77 @@ describe('VerifiedStudyDashboard', () => {
       }))
       expect(view()).toBe('malformed')
       expect(text(surface(container))).not.toContain('11111111')
+    })
+  })
+
+  // STUDY-A1-PROD-DASH-H2 Phase 3/4 — calendar:read returns at most 100 blocks
+  // and no continuation cursor, so a full page is exactly the case where the
+  // surface cannot know whether the plan ends there. The request does carry a
+  // `cursor` key, but the server filters it as `id > cursor` while ordering by
+  // `scheduled_start`, so a cursor derived from the last rendered block would
+  // skip blocks rather than page through them. Saying so is the honest fix; the
+  // dishonest one would be to paginate on a cursor that does not mean what the
+  // ordering implies.
+  describe('the server calendar block limit', () => {
+    async function mountBlocks(count: number): Promise<FakeElement> {
+      await mount(serving({ 'calendar:read': calendarOf(count) }))
+      return surface(container)
+    }
+
+    it.each([0, 1, 99, 100])('renders every one of the %i blocks the server sent', async (count) => {
+      const node = await mountBlocks(count)
+      expect(view()).toBe('ready')
+      expect(withAttribute(node, 'data-block-state')).toHaveLength(count)
+    })
+
+    it('claims nothing about a limit when the server sent no blocks', async () => {
+      const node = await mountBlocks(0)
+      expect(text(node)).toContain('No Study blocks are scheduled.')
+      expect(withAttribute(node, 'data-block-limit')).toEqual([])
+    })
+
+    it.each([1, 99])('states the cap without warning of more at %i blocks', async (count) => {
+      const node = await mountBlocks(count)
+      const note = withAttribute(node, 'data-block-limit')
+      expect(note).toHaveLength(1)
+      expect(note[0]!.getAttribute('data-block-limit')).toBe('under')
+      // Below the cap the server returned everything it had, so there is
+      // nothing to warn about.
+      expect(text(node)).toContain('Showing up to 100 scheduled Study blocks.')
+      expect(text(node)).not.toContain('There may be more')
+    })
+
+    it('does not imply the plan is complete at exactly the limit', async () => {
+      const node = await mountBlocks(100)
+      const note = withAttribute(node, 'data-block-limit')
+      expect(note).toHaveLength(1)
+      expect(note[0]!.getAttribute('data-block-limit')).toBe('reached')
+      const rendered = text(node)
+      expect(rendered).toContain('Showing the first 100 scheduled Study blocks.')
+      expect(rendered).toContain('There may be more that are not shown here.')
+      // The claim that would be false at exactly the cap.
+      expect(rendered).not.toContain('No Study blocks are scheduled.')
+      // Scoped to the note itself: the rest of the surface renders server block
+      // states like "Completed", which this must stay free to say.
+      expect(text(note[0]!)).not.toMatch(/\ball\b|complete|every|entire|only/i)
+    })
+
+    it('refuses the whole body when the server sends more blocks than it may', async () => {
+      await mount(serving({ 'calendar:read': calendarOf(101) }))
+      expect(view()).toBe('malformed')
+      expect(withAttribute(surface(container), 'data-block-state')).toEqual([])
+      expect(withAttribute(surface(container), 'data-block-limit')).toEqual([])
+    })
+
+    it('offers no page, load-more or next control at the limit', async () => {
+      const node = await mountBlocks(100)
+      // The honest statement replaces pagination; it must not grow one.
+      expect(tags(node, 'BUTTON')).toHaveLength(1)
+      expect(text(tags(node, 'BUTTON')[0]!)).toContain('Back home')
+      const rendered = text(node).toLowerCase()
+      for (const control of ['load more', 'show more', 'next page', 'see all', 'view all']) {
+        expect(rendered).not.toContain(control)
+      }
     })
   })
 

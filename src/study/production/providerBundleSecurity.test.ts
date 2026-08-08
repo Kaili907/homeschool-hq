@@ -1,5 +1,44 @@
+import { readFileSync, readdirSync } from 'node:fs'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { beforeAll, describe, expect, it } from 'vitest'
 import { build, type Rollup } from 'vite'
+
+const sourceRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..')
+
+/**
+ * STUDY-A1-PROD-DASH-H2 Phase 2 — the bundle half of the import-closure claim.
+ *
+ * Minification renames identifiers, so an identifier is worthless as a bundle
+ * marker: `getGatewayAccessToken` and `createVerifiedStudyRuntimeAdapter` are
+ * both absent from a bundle that ships them. Only string literals survive, so
+ * every marker below is a literal, and the positive control asserts that
+ * literals of exactly this shape do reach the bundle.
+ *
+ * These are derived from the adapter sources rather than transcribed, so a new
+ * direct browser-to-database Study call is covered the day it is written.
+ *
+ * `@supabase/supabase-js` and `createClient` are deliberately NOT markers here:
+ * the app authenticates through that client, so both are in every production
+ * bundle and asserting their absence would be a test that can only fail. That
+ * the verified dashboard does not reach them is a claim about the dashboard's
+ * own import closure, and it is enforced where it can be true —
+ * `productionImportBoundary.test.ts`, against the value closure.
+ */
+function directStudyDatabaseMarkers(): readonly string[] {
+  const directories = [join(sourceRoot, 'study', 'persistence'), join(sourceRoot, 'study', 'generated')]
+  const markers = new Set<string>()
+  for (const directory of directories) {
+    for (const name of readdirSync(directory)) {
+      if (!name.endsWith('.ts') || name.endsWith('.test.ts')) continue
+      for (const [, marker] of readFileSync(join(directory, name), 'utf8')
+        .matchAll(/'(academy_study_[a-z_]+)'/g)) markers.add(marker)
+    }
+  }
+  return [...markers].sort()
+}
+
+const DIRECT_STUDY_DATABASE_MARKERS = directStudyDatabaseMarkers()
 
 const UNSAFE_BUILD_REQUESTS = Object.freeze({
   // Vitest itself runs with NODE_ENV=test. Override it for the nested Vite build
@@ -106,6 +145,13 @@ describe('production client bundle provider and preview boundary', () => {
       expect(bundle).not.toContain(marker)
     },
   )
+
+  it.each(DIRECT_STUDY_DATABASE_MARKERS)(
+    'omits direct browser-to-database Study call %s',
+    (marker) => {
+      expect(bundle).not.toContain(marker)
+    },
+  )
 })
 
 // STUDY-A1-PROD-DASH-1 Phase 10. The scan above deliberately asks for preview
@@ -145,6 +191,24 @@ describe('production client bundle with the Study preview switched off', () => {
     expect(bundle).toContain('Scheduled Study blocks')
     expect(bundle).toContain('Recent Study sessions')
   })
+
+  it('proves a Study string literal of the forbidden shape would be caught', () => {
+    // The exclusions below are only worth anything if a marker of the same kind
+    // survives minification. These three are snake_case-and-colon Study
+    // operation literals that the verified surface genuinely ships, so an
+    // `academy_study_*` literal would be just as visible if one arrived.
+    expect(DIRECT_STUDY_DATABASE_MARKERS.length).toBeGreaterThan(10)
+    for (const shipped of ['dashboard:read', 'calendar:read', 'student:progress:read']) {
+      expect(bundle).toContain(shipped)
+    }
+  })
+
+  it.each(DIRECT_STUDY_DATABASE_MARKERS)(
+    'omits direct browser-to-database Study call %s',
+    (marker) => {
+      expect(bundle).not.toContain(marker)
+    },
+  )
 
   it('ships no Study session launch, resume or settings control with it', () => {
     for (const control of ['Start Study', 'Resume session', 'Study settings', 'Review queue']) {
