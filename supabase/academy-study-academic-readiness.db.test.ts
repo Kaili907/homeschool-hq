@@ -731,6 +731,17 @@ describe.sequential('consolidated academic readiness contract', () => {
    * below therefore asserts the pair: what the real mutation does, and what
    * readiness says about it. A case that only checked readiness could not tell
    * this contract from the one it replaces.
+   *
+   * Two claims are separate and both are tested. WHICH kinds exist is answered by
+   * the authority, and only by it — that is what the withdrawal cases prove. That
+   * the authority is what the mutation's ADMISSION GATE consults is a structural
+   * check over the installed definition, and requiring only the authority's NAME to
+   * appear somewhere is not that claim: a call in a dead branch and a live call
+   * whose result is discarded each satisfy a name search beside a real gate that is
+   * an independent narrower list. Those two are pinned below, per kind.
+   *
+   * The limit of the structural check is pinned too, as a limit rather than as a
+   * kill: an intact gate followed by a NEW downstream restriction reads ready here.
    */
   describe('the shared record-kind authority binds mutation and readiness', () => {
     const GUARDIAN_A = '00000000-0000-0000-0000-0000000000a1'
@@ -900,6 +911,219 @@ describe.sequential('consolidated academic readiness contract', () => {
             'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
         })
       })
+
+    /**
+     * The two arrangements that defeat a name-only search. Each keeps the real
+     * admission gate as an independent literal list that excludes one kind, and
+     * parks a reference to the authority somewhere the gate cannot see: once in a
+     * branch that never runs, once in a live statement whose result is discarded.
+     *
+     * Both are genuine narrowings rather than broken functions -- the excluded kind
+     * is refused at runtime while the other two are still accepted -- which is what
+     * makes the fail-open they used to produce a real one. Readiness closes all
+     * three, because the gate it verifies is no longer there at all; closing more
+     * than the one withdrawn kind is the conservative direction.
+     */
+    const REAL_GATE =
+      '  if not academy_private.study_adult_managed_record_kind_supported(\n'
+      + '       p_record_kind\n     ) or p_expected_revision is null'
+
+    /** The real gate replaced by an independent list that admits everything but one. */
+    function narrowGate(excluded: ManagedKind) {
+      const kept = ['review', 'calendar', 'parent_settings', 'accommodation']
+        .filter((candidate) => candidate !== excluded)
+        .map((candidate) => `'${candidate}'`)
+        .join(', ')
+      return `  if p_record_kind not in (${kept})\n     or p_expected_revision is null`
+    }
+
+    /**
+     * Rewrites the live definition step by step and installs the result. A step
+     * that matches nothing fails the case rather than silently leaving the real
+     * definition in place, which would make the case prove nothing.
+     */
+    async function redefine(steps: readonly (readonly [string, string])[]) {
+      const definition = await database.query<{ body: string }>(
+        `select replace(pg_get_functiondef(to_regprocedure($1)), chr(13), '')
+           as body`, [SHARED_ADULT_MANAGED])
+      let source = definition.rows[0].body
+      for (const [from, to] of steps) {
+        const next = source.replace(from, to)
+        expect(next, from).not.toBe(source)
+        source = next
+      }
+      await database.exec(source)
+    }
+
+    const DEAD_BRANCH: readonly [string, string] = [
+      '\nbegin\n  if auth.uid() is null then',
+      '\nbegin\n  if false then\n'
+      + '    if not academy_private.study_adult_managed_record_kind_supported(\n'
+      + '         p_record_kind\n       ) then\n'
+      + "      raise exception 'STUDY_RECORD_INVALID' using errcode = '22023';\n"
+      + '    end if;\n  end if;\n  if auth.uid() is null then',
+    ]
+
+    const DISCARDED_CALL: readonly (readonly [string, string])[] = [
+      ['\n  correlation uuid := gen_random_uuid();',
+        '\n  correlation uuid := gen_random_uuid();\n  observed boolean;'],
+      ['\nbegin\n  if auth.uid() is null then',
+        '\nbegin\n  observed := academy_private'
+        + ".study_adult_managed_record_kind_supported('accommodation');\n"
+        + '  if auth.uid() is null then'],
+    ]
+
+    const DECOYS = [
+      ['a dead branch', (excluded: ManagedKind) =>
+        [[REAL_GATE, narrowGate(excluded)] as const, DEAD_BRANCH]],
+      ['a live call whose result is discarded', (excluded: ManagedKind) =>
+        [[REAL_GATE, narrowGate(excluded)] as const, ...DISCARDED_CALL]],
+    ] as const
+
+    const KIND_DECOY_CASES = DECOYS.flatMap(([label, steps]) =>
+      (Object.keys(KIND_DEPENDENCY) as ManagedKind[])
+        .map((kind) => [label, kind, steps] as const))
+
+    it.each(KIND_DECOY_CASES)(
+      'the authority reached only from %s cannot admit %s',
+      async (_label, excluded, steps) => {
+        await reverted(async () => {
+          await redefine(steps(excluded))
+          // The narrowing is real: this kind is refused, the other two still work.
+          const refused = await upsert(excluded)
+          expect(refused.accepted).toBe(false)
+          expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
+          for (const other of (Object.keys(KIND_DEPENDENCY) as ManagedKind[])
+            .filter((candidate) => candidate !== excluded)) {
+            expect((await upsert(other)).accepted).toBe(true)
+          }
+          expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+            'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+        })
+      })
+
+    /**
+     * The call is in the gate, in the right place, and decides nothing: `and false`
+     * neuters it and an independent narrower list beside it does the deciding.
+     *
+     * This is what makes the REST of the gate expression load-bearing rather than
+     * decorative. A probe that stopped at the authority call — right helper, right
+     * argument, right position — would accept this, because everything it looked at
+     * is genuinely there. Only requiring the whole condition through to the raise
+     * refuses it.
+     */
+    it('is not satisfied by an authority call neutered inside the gate', async () => {
+      await reverted(async () => {
+        await redefine([[REAL_GATE,
+          '  if not academy_private.study_adult_managed_record_kind_supported(\n'
+          + '       p_record_kind\n     ) and false\n'
+          + "     or p_record_kind not in ('calendar', 'parent_settings')\n"
+          + '     or p_expected_revision is null']])
+        const refused = await upsert('review')
+        expect(refused.accepted).toBe(false)
+        expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
+        expect((await upsert('calendar')).accepted).toBe(true)
+        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+          'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+      })
+    })
+
+    /**
+     * The whole gate, spelled out on one line of comment, above a real gate that is
+     * an independent narrower list. A `--` comment cannot span lines, but the gate
+     * survives being written as one, and normalising whitespace is exactly what
+     * makes the one-line form match. This is why comments are stripped first: the
+     * decoy that carries a bare authority NAME in a comment is the easy one, and
+     * this is the one that would still be standing without the strip.
+     */
+    it('is not satisfied by the whole gate written into a comment', async () => {
+      await reverted(async () => {
+        await redefine([
+          [REAL_GATE, narrowGate('review')],
+          ['\nbegin\n',
+            "\nbegin\n  -- begin if auth.uid() is null then raise exception 'X'"
+            + " using errcode = 'Y'; end if; if not academy_private"
+            + '.study_adult_managed_record_kind_supported( p_record_kind ) or'
+            + ' p_expected_revision is null or p_expected_revision < 0 or not'
+            + ' public.academy_study_payload_is_minimized(p_record, 16384) or not'
+            + ' public.academy_study_identifier_is_valid(p_idempotency_key) then'
+            + " raise exception 'Z' using errcode = 'W'; end if;\n"],
+        ])
+        expect((await upsert('review')).accepted).toBe(false)
+        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+          'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+      })
+    })
+
+    /**
+     * The authority's name assembled from concatenated literals. Literals are
+     * removed before the search, so nothing of it survives -- and it was never the
+     * gate expression in the first place.
+     */
+    it('is not satisfied by the authority name split across literals', async () => {
+      await reverted(async () => {
+        await redefine([
+          [REAL_GATE, narrowGate('review')],
+          ['\n  correlation uuid := gen_random_uuid();',
+            '\n  correlation uuid := gen_random_uuid();\n  assembled text :='
+            + " 'academy_private.study_adult'\n    || '_managed_record_kind_supported('"
+            + " || 'p_record_kind)';"],
+        ])
+        expect((await upsert('review')).accepted).toBe(false)
+        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+          'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+      })
+    })
+
+    /**
+     * The gate is required in place, contiguous with the prologue it belongs to:
+     * the function's opening `begin`, the authentication guard, then the admission
+     * statement. Without that anchor the whole gate expression could be copied into
+     * a branch that never runs. Interposing one harmless statement is enough to
+     * prove the anchor is load-bearing -- and it closes readiness, which is the
+     * conservative direction for a definition nobody expected to move.
+     */
+    it('requires the gate to be contiguous with the function prologue', async () => {
+      await reverted(async () => {
+        await redefine([['\nbegin\n  if auth.uid() is null then',
+          '\nbegin\n  perform 1;\n  if auth.uid() is null then']])
+        // The mutation still works. Readiness closes anyway: it no longer
+        // recognises the definition, and an unrecognised definition is not evidence.
+        expect((await upsert('review')).accepted).toBe(true)
+        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+          'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+      })
+    })
+
+    /**
+     * THE DOCUMENTED LIMIT, pinned as a limit and not as a kill.
+     *
+     * The gate this contract verifies is intact and does route through the shared
+     * authority; a new, independent restriction has been inserted downstream of it.
+     * The mutation refuses review at runtime and readiness reports review-queue
+     * ready. That is not a defect in the check — it is the boundary of what a
+     * read-only structural probe can establish. Closing it would require semantic
+     * execution of arbitrary PL/pgSQL, or calling the real mutation from inside a
+     * readiness probe, and this RPC is read-only by contract.
+     *
+     * This case exists so the limit cannot be quietly lost: if a later change makes
+     * readiness close here, this case fails and the claim gets restated honestly
+     * rather than the documentation drifting away from the code.
+     */
+    it('cannot see a NEW restriction added downstream of an intact gate', async () => {
+      await reverted(async () => {
+        await redefine([[
+          "  target_student_id := (p_record ->> 'student_id')::uuid;",
+          "  if p_record_kind = 'review' then\n"
+          + "    raise exception 'STUDY_RECORD_INVALID' using errcode = '22023';\n"
+          + "  end if;\n  target_student_id := (p_record ->> 'student_id')::uuid;",
+        ]])
+        const refused = await upsert('review')
+        expect(refused.accepted).toBe(false)
+        expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
+        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept())
+      })
+    })
 
     it('closes all three when the authority itself is gone', async () => {
       await reverted(async () => {
@@ -1173,6 +1397,35 @@ describe.sequential('consolidated academic readiness contract', () => {
           await database2.close()
         }
       })
+
+    /**
+     * The readiness probe carries a written-out copy of the prologue the rewrite
+     * installs, and a hand-written expectation is exactly the kind of thing that
+     * drifts. The migration therefore asks the probe, immediately after rewriting,
+     * whether it recognises what was installed — and aborts if it does not.
+     *
+     * Perturbed here by interposing one harmless statement ahead of the gate: the
+     * substitution the rewrite performs still matches, so only the closed loop is
+     * left to catch it. Without that assertion this migration would apply and ship
+     * a probe that closes all three adult-managed dependencies forever.
+     */
+    it('refuses when the installed gate is not the one readiness expects', async () => {
+      const database2 = await chainWithoutAcademicMigration()
+      try {
+        const definition = await database2.query<{ body: string }>(
+          `select replace(pg_get_functiondef(to_regprocedure($1)), chr(13), '')
+             as body`, [SHARED_ADULT_MANAGED])
+        const moved = definition.rows[0].body.replace(
+          '\nbegin\n  if auth.uid() is null then',
+          '\nbegin\n  perform 1;\n  if auth.uid() is null then')
+        expect(moved).not.toBe(definition.rows[0].body)
+        await database2.exec(moved)
+        await expect(database2.exec(await academicMigrationSource()))
+          .rejects.toThrow(/not recognised by readiness/)
+      } finally {
+        await database2.close()
+      }
+    })
 
     it('refuses when the adult-managed mutation is absent entirely', async () => {
       const database2 = await chainWithoutAcademicMigration()

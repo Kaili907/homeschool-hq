@@ -34,6 +34,21 @@
 -- the mutation path and reported not-ready by readiness in the same change,
 -- because both are reading the same function.
 --
+-- Readiness additionally establishes that the helper is what the mutation's
+-- admission gate actually consults, by requiring the whole expected gate
+-- expression to be present and contiguous with the prologue it belongs to.
+-- Requiring only that the helper's NAME appear somewhere in the body is not that
+-- claim and does not hold: a call parked in a dead branch, or a live call whose
+-- result is discarded, satisfies a name search beside a real admission gate that
+-- is an independent narrower list refusing the kind at runtime.
+--
+-- What that structural check cannot do is bounded and stated where it lives, on
+-- academy_private.study_academic_record_kind_ready below: it cannot prove that no
+-- later, independent restriction was inserted downstream of the gate it verifies.
+-- Nothing a read-only catalog probe can do would prove that, and this RPC executes
+-- no academic operation by contract, so the limit is documented rather than
+-- narrowed by fragile scanning for every statement a body might contain.
+--
 -- The mutation function itself lives in 20260801011000, which is in hosted
 -- history and frozen. Its definition is therefore repaired additively from here,
 -- as repository policy requires for a frozen migration: the stored definition is
@@ -274,23 +289,51 @@ $$;
 -- privileges and search_path but quietly stopped accepting a kind would otherwise
 -- read as ready for a subsystem it can no longer serve.
 --
--- The answer is the shared authority, not the function's source text. This asks
--- academy_private.study_adult_managed_record_kind_supported the same question the
--- mutation function's gate asks it, so the two agree by construction. Losing the
+-- Which kinds exist is answered by the shared authority, not by the mutation's
+-- source text. This asks academy_private.study_adult_managed_record_kind_supported
+-- the same question the mutation function's gate asks it, so the two agree by
+-- construction, and withdrawing a kind closes exactly its dependency. Losing the
 -- shared mutation entirely is an honest three-way outage and closes all three.
 --
--- The final condition is defence in depth and deliberately not the deciding one:
--- it requires the mutation function to still route its gate through the authority,
--- so a body that hardcodes a narrower list of its own is caught. It can only make
--- readiness more conservative -- a kind withdrawn from the authority is already
--- not-ready before this is reached -- which is the only safe way to use a signal
--- this weak.
+-- The second condition establishes that the authority is what the mutation's
+-- ADMISSION GATE actually consults. Requiring only that the authority's name
+-- appear somewhere in the body -- which is what this used to do -- is satisfied by
+-- a call that decides nothing, and two arrangements defeat it outright: a call
+-- parked in a dead branch, and a live call whose result is discarded. Either one
+-- leaves the readiness answer 'ready' beside a real admission gate that is an
+-- independent, narrower list refusing the kind at runtime.
 --
--- Comments AND string literals are stripped before the search. A commented-out
--- reference is the obvious decoy; a reference parked in a string literal is the
--- one that actually got past an earlier version of this guard, so both are
--- removed. Stripping cannot produce a false ready: anything it removes by mistake
--- can only make the search fail, which closes the dependency.
+-- So the whole gate expression is required, in place, contiguous with the prologue
+-- it belongs to: the function's opening `begin`, the authentication guard, and
+-- then the admission statement whose condition routes through the authority and
+-- whose body raises. A dead branch is not that statement. A discarded call is not
+-- that statement. An occurrence in a comment, in a string literal, or split across
+-- concatenated literals is not that statement either, because comments and
+-- literals are removed before the search. Anchoring at `begin` is what makes the
+-- match structural rather than textual: nothing can be interposed between the
+-- function's entry and the gate without breaking it.
+--
+-- The expected text IS written out by hand here, which is the obvious way for a
+-- probe like this to rot. It is not left on trust: the DO block below asserts that
+-- this probe answers true for 'review' immediately after the rewrite installs the
+-- gate, so a probe and a gate that disagree abort the migration rather than ship.
+--
+-- WHAT THIS DOES NOT ESTABLISH. It is a read-only structural check, not an
+-- interpreter. It proves the expected admission gate is present and routes through
+-- the shared authority. It cannot prove that no LATER, independent restriction has
+-- been inserted downstream of that gate: a body that keeps this prologue intact and
+-- then raises for one kind further down still reads structurally ready here, and
+-- would be refused at runtime. Proving otherwise would require semantically
+-- executing arbitrary PL/pgSQL, which no catalog read can do, and executing the
+-- real mutation from inside a readiness probe -- which is forbidden, because this
+-- RPC is read-only by contract. That limit is inherent to read-only structural
+-- readiness and is stated here rather than papered over.
+--
+-- Normalisation is comment removal, string-literal removal, then collapsing every
+-- whitespace run to a single space, so reindentation and line rewrapping are
+-- tolerated and content is not. Normalisation cannot produce a false ready:
+-- anything it removes by mistake can only make the search fail, which closes the
+-- dependency.
 create function academy_private.study_academic_record_kind_ready(p_kind text)
 returns boolean
 language plpgsql
@@ -301,6 +344,15 @@ as $$
 declare
   target oid;
   body text;
+  -- The prologue this migration leaves behind, in the normalised form produced
+  -- below. Adjacent literals concatenate; the whole is one line of normalised SQL.
+  gate constant text :=
+    'begin if auth.uid() is null then raise exception using errcode = ; end if;'
+    ' if not academy_private.study_adult_managed_record_kind_supported('
+    ' p_record_kind ) or p_expected_revision is null or p_expected_revision < 0'
+    ' or not public.academy_study_payload_is_minimized(p_record, 16384)'
+    ' or not public.academy_study_identifier_is_valid(p_idempotency_key) then'
+    ' raise exception using errcode = ; end if;';
 begin
   target := to_regprocedure(
     'public.academy_study_upsert_adult_managed_record(text,jsonb,bigint,text)'
@@ -316,15 +368,28 @@ begin
   if not academy_private.study_adult_managed_record_kind_supported(p_kind) then
     return false;
   end if;
-  body := pg_get_functiondef(target);
+  body := replace(pg_get_functiondef(target), chr(13), '');
   body := regexp_replace(body, '--[^\n]*', '', 'g');
   body := regexp_replace(body, '/\*.*?\*/', '', 'gs');
-  -- Single-quoted literals, doubled-quote escapes included.
+  -- Single-quoted literals, doubled-quote escapes included. Removing them is what
+  -- defeats both the literal decoy and the split-literal decoy: neither survives.
   body := regexp_replace(body, $q$'(''|[^'])*'$q$, '', 'g');
-  return strpos(
-    body,
-    'academy_private.study_adult_managed_record_kind_supported('
-  ) > 0;
+  body := btrim(regexp_replace(body, '\s+', ' ', 'g'));
+  return strpos(body, gate) > 0;
+end;
+$$;
+
+-- The closed loop. The gate above is rewritten by this migration and the expected
+-- text is written out separately in the probe; nothing but this assertion stops
+-- the two from drifting. Run after both exist, it fails the whole migration if the
+-- definition actually installed is not the one the probe recognises -- which is the
+-- only way to keep a hand-written expectation honest.
+do $$
+begin
+  if not academy_private.study_academic_record_kind_ready('review') then
+    raise exception
+      'STUDY_ACADEMIC_READINESS admission gate not recognised by readiness';
+  end if;
 end;
 $$;
 
@@ -625,12 +690,19 @@ set academic_readiness_version = 1,
       'adult_managed_kind_authority',
         'academy_private.study_adult_managed_record_kind_supported',
       'adult_managed_gate_rewritten_from', '20260808150000',
-      'academic_readiness_kind_probe_reads_source_text', false
+      -- Stated as it is, not as it would be convenient. The per-kind ANSWER comes
+      -- from the authority; establishing that the authority is what the admission
+      -- gate consults is a structural read of the mutation's definition text, and
+      -- that read cannot prove the absence of a later independent restriction
+      -- downstream of the gate.
+      'academic_readiness_kind_probe_reads_definition_text', true,
+      'academic_readiness_kind_probe_verifies_admission_gate', true,
+      'academic_readiness_kind_probe_proves_no_downstream_restriction', false
     ),
     updated_at = clock_timestamp()
 where singleton;
 
 comment on function public.academy_study_academic_readiness_v1() is
-  'Read-only consolidated Study academic readiness. Reports a closed per-dependency status for all seven academic dependencies from catalog metadata, contract metadata and the shared adult-managed record-kind authority: no academic RPC is executed, no row is read, written or counted, and no learner, settings or adult-private content is exposed. Ready means the required server-side contract exists in the expected shape, not that a table name exists; record-kind support is answered by the same function the mutation gate consults, never by searching its source text. Executable by service_role only. Authorizes nothing.';
+  'Read-only consolidated Study academic readiness. Reports a closed per-dependency status for all seven academic dependencies from catalog metadata, contract metadata and the shared adult-managed record-kind authority: no academic RPC is executed, no row is read, written or counted, and no learner, settings or adult-private content is exposed. Ready means the required server-side contract exists in the expected shape, not that a table name exists. Which record kinds exist is answered by the same function the mutation gate consults, never by a list of readiness'' own; that the gate consults it is established structurally, by requiring the expected admission-gate expression to be present in the mutation definition. Being a read-only structural check it cannot prove that no later independent restriction was inserted downstream of that gate -- proving that would need semantic execution of arbitrary PL/pgSQL, which this contract does not and must not perform. Executable by service_role only. Authorizes nothing.';
 
 commit;
