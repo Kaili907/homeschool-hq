@@ -15,7 +15,6 @@ import {
   type AcademyUnitChunk,
 } from '../../academy/contentTypes'
 import {
-  courseProgress,
   enrollInCatalog,
   isStaleAttempt,
   masteryOf,
@@ -26,6 +25,7 @@ import {
   submitLessonCheck,
   recordReassessment,
 } from '../../academy/academyState'
+import { StudentDashboard } from './dashboard/StudentDashboard'
 
 /**
  * CURR-1 — the Manuel Academy student surface, lazy-loaded from App.tsx behind
@@ -134,7 +134,7 @@ export function AcademyRouter(props: AcademyProps) {
   }
   switch (route.kind) {
     case 'home':
-      return <AcademyHome {...shared} />
+      return <StudentDashboard {...shared} />
     case 'schedule':
       return <AcademyScheduleView {...shared} />
     case 'course':
@@ -217,112 +217,6 @@ const courseLevelLabel = (
 ) => {
   const level = levelOf[course.courseId]
   return level ? `${courseLabel(course)} · Grade ${level}` : courseLabel(course)
-}
-
-// ---------- home: today's work + course catalog ----------
-
-function AcademyHome({ profile, catalog, schedule, levelOf, schoolYear, onNavigate, onExit }: SharedViewProps) {
-  const today = isoToday()
-  const configured = isSchoolYearConfigured(schoolYear)
-  const scopeWeek = configured ? derivedScopeWeek(schoolYear, today) : 1
-  // Schedule days are 1 (Mon) … 5 (Fri); weekends have no scheduled lessons.
-  const jsDay = new Date(`${today}T12:00:00`).getDay()
-  const scopeDay = jsDay >= 1 && jsDay <= 5 ? jsDay : 0
-  const day = schedule.days.find((d) => d.week === scopeWeek && d.day === scopeDay)
-  const findLesson = (lessonId: string) => {
-    for (const course of catalog.courses) {
-      for (const unit of course.units) {
-        if (unit.lessonIds.includes(lessonId)) {
-          return { course, unit }
-        }
-      }
-    }
-    return null
-  }
-  return (
-    <AcademyShell title="Manuel Academy" onExit={onExit}>
-      <section aria-labelledby="academy-today">
-        <div className="flex items-center justify-between gap-3">
-          <h2 id="academy-today" className="text-xl font-extrabold">
-            Today — week {scopeWeek}
-          </h2>
-          <button
-            onClick={() => onNavigate({ kind: 'schedule' })}
-            className="min-h-11 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-bold hover:border-slate-500"
-          >
-            Year schedule
-          </button>
-        </div>
-        {!configured && (
-          <p className="mt-2 text-sm font-semibold text-slate-500">
-            The school-year start date is not set yet (Grown-Ups → pacing), so today shows week 1.
-          </p>
-        )}
-        {day && day.lessons.length > 0 ? (
-          <ul className="mt-3 space-y-2">
-            {day.lessons.map(({ lessonId, title }) => {
-              const where = findLesson(lessonId)
-              const state = profile.academy?.lessons[lessonId]
-              const done = state?.status === 'complete'
-              return (
-                <li key={lessonId}>
-                  <button
-                    onClick={() =>
-                      where &&
-                      onNavigate({
-                        kind: 'lesson',
-                        courseId: where.course.courseId,
-                        unitNumber: where.unit.unitNumber,
-                        lessonId,
-                      })
-                    }
-                    className="flex min-h-11 w-full items-center gap-3 rounded-xl border border-slate-300 bg-white p-3 text-left hover:border-cyan-500"
-                  >
-                    <span aria-hidden="true">{done ? '✅' : state ? '⏸️' : '▫️'}</span>
-                    <span className="flex-1">
-                      <span className="block font-bold">{title}</span>
-                      <span className="block text-sm font-semibold text-slate-500">
-                        {where ? courseLevelLabel(where.course, levelOf) : lessonId}
-                        {done ? ' — done' : state ? ' — in progress' : ''}
-                      </span>
-                    </span>
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-        ) : (
-          <p className="mt-3 font-semibold text-slate-500">No lessons scheduled today.</p>
-        )}
-      </section>
-
-      <section aria-labelledby="academy-courses" className="mt-8">
-        <h2 id="academy-courses" className="text-xl font-extrabold">
-          Your courses
-        </h2>
-        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-          {catalog.courses.map((course) => {
-            const progress = courseProgress(profile, catalog).find(
-              (c) => c.courseId === course.courseId,
-            )
-            return (
-              <li key={course.courseId}>
-                <button
-                  onClick={() => onNavigate({ kind: 'course', courseId: course.courseId })}
-                  className="min-h-11 w-full rounded-xl border border-slate-300 bg-white p-4 text-left hover:border-cyan-500"
-                >
-                  <span className="block font-extrabold">{courseLevelLabel(course, levelOf)}</span>
-                  <span className="block text-sm font-semibold text-slate-500">
-                    {progress?.completed ?? 0} of {course.lessonCount} lessons done
-                  </span>
-                </button>
-              </li>
-            )
-          })}
-        </ul>
-      </section>
-    </AcademyShell>
-  )
 }
 
 // ---------- year schedule (36 weeks) ----------
