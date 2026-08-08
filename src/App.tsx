@@ -462,9 +462,67 @@ export default function App() {
     sync.status.user?.id,
   ])
 
-  useEffect(() => () => {
-    void studyVerifiedRuntimeRef.current?.cancel('navigation-away')
-  }, [])
+  /**
+   * STUDY-A1-PREVIEW-AUTH-DEGRADE — the preview half of the reconciliation the
+   * effect above performs, for the one case that effect returns early on.
+   *
+   * `buildHostStudyContext` refuses to build a preview host context the moment
+   * the adult sync binding or its provenance degrades, so the learner's Study
+   * surface correctly disappears. But the reconcile effect returns at
+   * `!productionSelected` BEFORE it reaches its own authorization check, so
+   * nothing retired the epoch that vanished context had been derived from: the
+   * one boundary was left bound, current, and with no reason recorded, holding
+   * App authority for a host context that was no longer authorized.
+   *
+   * The signal is the App's own authorization state — the same tuple the
+   * production branch reads, and the same tuple the context builder refuses on.
+   * Never the surface's unmount, its absence from the DOM, or a timer: those say
+   * something about a surface, and this is an authority decision.
+   *
+   * `authorization-loss` is the existing canonical reason for exactly this, used
+   * by the production reconciliation and by the session-authorization-failure
+   * recovery alike. No second safety meaning is introduced: a degraded household
+   * binding is not a learner safety incident, so nothing durable is written and
+   * no safety event is raised. This retires authority and nothing else.
+   *
+   * The live epoch is the guard, and it is what keeps this honest in three ways:
+   *  - it cannot fire before an authorized host was ever established, because at
+   *    startup the boundary is unbound while the adult session is still
+   *    resolving — which is unknown, not degraded;
+   *  - it cannot fire twice, because the first cancel unbinds the boundary;
+   *  - it cannot relabel a retirement another path already made. A logout, a
+   *    learner switch and a switched-off feature each leave the boundary
+   *    unbound, so their own reason stands as the one meaningful outcome.
+   */
+  const studyHostAuthorized = Boolean(
+    sync.status.user && sync.status.binding === 'bound' && sync.status.provenance === 'verified',
+  )
+  useEffect(() => {
+    if (!studyEnabled || !studyPreviewEnabled || studyHostAuthorized) return
+    const lifecycle = hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current)
+    if (lifecycle.binding) lifecycle.cancel('authorization-loss')
+  }, [studyEnabled, studyPreviewEnabled, studyHostAuthorized])
+
+  // STUDY-A1-PREVIEW-AUTH-DEGRADE — the App's own unmount cleanup used to run
+  // `studyVerifiedRuntimeRef.current?.cancel('navigation-away')` here, and that
+  // is the same defect 72ed777 removed from the route and the container, one
+  // level up.
+  //
+  // `main.tsx` wraps this App in <StrictMode>, which replays effect
+  // setup → cleanup → setup inside the mount commit — so this cleanup fired on
+  // every real mount, and `runtime.cancel` reaches the ONE shared boundary. The
+  // App therefore cancelled its own epoch as `navigation-away` while starting up
+  // (and revoked the Study session with it), and only a later render put the
+  // epoch back. A surface that mounted in that same commit would have attached
+  // to the cancelled epoch, been handed a token that authorizes nothing, and
+  // stayed on "Rechecking…" — the very blocker the seam cache exists to prevent.
+  //
+  // An App unmount is not an authorization event. Every retirement that means
+  // something already has an explicit owner-state path: logout, learner switch,
+  // feature-disabled, authorization-loss above, and `navigation-away` from the
+  // production host's own Back control. In-flight launch work is separately
+  // aborted by the reconcile effect's own controller, which is surface-scoped
+  // and correct there.
 
   // SE-B attendance: when the signed-in girl's mission day is complete, append one
   // attendance day (invisible to her, append-only). recordAttendance is idempotent
