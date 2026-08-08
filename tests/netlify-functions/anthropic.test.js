@@ -33,6 +33,7 @@ function testAccess({
       if (!membership) throw new GatewayError(403, 'not_entitled')
     }),
     consumeUsage: vi.fn(async () => undefined),
+    recordProviderUsage: vi.fn(async () => undefined),
   }
 }
 
@@ -558,6 +559,7 @@ describe('authenticated Anthropic gateway', () => {
 
   it('times out Anthropic after thirty seconds with fake timers', async () => {
     installFakeAbortTimeout()
+    const access = testAccess()
     const fetchImpl = vi.fn(async (url, init) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
         return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
@@ -566,11 +568,14 @@ describe('authenticated Anthropic gateway', () => {
         init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true })
       })
     })
-    const pending = createAnthropicHandler({ fetchImpl, env: ENV })(event())
+    const pending = createAnthropicHandler({ fetchImpl, env: ENV, gatewayAccess: access })(event())
     await vi.advanceTimersByTimeAsync(30_000)
     const result = await pending
     expect(result.statusCode).toBe(504)
     expect(responseJson(result)).toEqual({ error: { code: 'upstream_timeout' } })
+    expect(access.recordProviderUsage).toHaveBeenCalledWith(
+      expect.objectContaining({ status: 'timeout', billingBasis: 'unknown' }),
+    )
   })
 
   it('rejects declared and streamed Anthropic responses above 256 KiB', async () => {
@@ -610,5 +615,116 @@ describe('authenticated Anthropic gateway', () => {
     })
     const streamed = await createAnthropicHandler({ fetchImpl: streamedFetch, env: ENV })(event())
     expect(responseJson(streamed)).toEqual({ error: { code: 'upstream_too_large' } })
+  })
+
+  it('persists trustworthy provider usage without changing or expanding the browser response', async () => {
+    const access = testAccess()
+    const providerBody = {
+      id: 'private-provider-request-id',
+      model: 'untrusted-provider-model',
+      stop_reason: 'end_turn',
+      usage: {
+        input_tokens: 120,
+        output_tokens: 30,
+        cache_read_input_tokens: 10,
+        cache_creation_input_tokens: 5,
+      },
+      content: [{ type: 'text', text: 'Try subtracting the ones place first.' }],
+    }
+    const result = await createAnthropicHandler({
+      fetchImpl: fetchRouter({ providerBody }),
+      env: ENV,
+      gatewayAccess: access,
+      requestIdFactory: () => 'anthropic-ledger-test',
+    })(event())
+
+    expect(responseJson(result)).toEqual({ text: 'Try subtracting the ones place first.' })
+    expect(access.recordProviderUsage).toHaveBeenCalledWith({
+      requestKey: 'anthropic-ledger-test',
+      occurredAt: expect.any(String),
+      userId: 'household-user',
+      engine: 'tutor',
+      provider: 'anthropic',
+      logicalModelTier: 'sonnet',
+      providerProduct: 'claude-sonnet-4-6',
+      inputTokens: 120,
+      outputTokens: 30,
+      cacheReadInputTokens: 10,
+      cacheWriteInputTokens: 5,
+      latencyMs: expect.any(Number),
+      status: 'success',
+      billingBasis: 'estimate',
+    })
+    const persisted = access.recordProviderUsage.mock.calls[0][0]
+    expect(JSON.stringify(persisted)).not.toContain('Can I have one hint?')
+    expect(JSON.stringify(persisted)).not.toContain('private-provider-request-id')
+    expect(JSON.stringify(persisted)).not.toContain('Try subtracting')
+  })
+
+  it.each([
+    ['missing', undefined, 'missing_usage'],
+    ['malformed', { input_tokens: 1 }, 'malformed_usage'],
+  ])('records %s provider usage without withholding a compatible reply', async (_label, usage, status) => {
+    const access = testAccess()
+    const providerBody = {
+      content: [{ type: 'text', text: 'Take one small step.' }],
+      ...(usage === undefined ? {} : { usage }),
+    }
+    const result = await createAnthropicHandler({
+      fetchImpl: fetchRouter({ providerBody }),
+      env: ENV,
+      gatewayAccess: access,
+    })(event())
+    expect(responseJson(result)).toEqual({ text: 'Take one small step.' })
+    expect(access.recordProviderUsage).toHaveBeenCalledWith(
+      expect.objectContaining({ status, billingBasis: 'unknown' }),
+    )
+  })
+
+  it('records a provider-billed response that cannot pass response sanitization', async () => {
+    const access = testAccess()
+    const result = await createAnthropicHandler({
+      fetchImpl: fetchRouter({
+        providerBody: { usage: { input_tokens: 7, output_tokens: 2 }, content: [] },
+      }),
+      env: ENV,
+      gatewayAccess: access,
+    })(event())
+    expect(responseJson(result)).toEqual({ error: { code: 'provider_failure' } })
+    expect(access.recordProviderUsage).toHaveBeenCalledWith(
+      expect.objectContaining({
+        status: 'response_sanitization_failure',
+        inputTokens: 7,
+        outputTokens: 2,
+        billingBasis: 'estimate',
+      }),
+    )
+  })
+
+  it('records provider failures and keeps accounting failures out of the learner response', async () => {
+    const providerFailureAccess = testAccess()
+    const failed = await createAnthropicHandler({
+      fetchImpl: fetchRouter({ providerStatus: 500 }),
+      env: ENV,
+      gatewayAccess: providerFailureAccess,
+    })(event())
+    expect(responseJson(failed)).toEqual({ error: { code: 'provider_failure' } })
+    expect(providerFailureAccess.recordProviderUsage).toHaveBeenCalledWith(
+      expect.objectContaining({ status: 'provider_error', billingBasis: 'unknown' }),
+    )
+
+    const accountingFailureAccess = testAccess()
+    accountingFailureAccess.recordProviderUsage.mockRejectedValue(new Error('database unavailable'))
+    const successful = await createAnthropicHandler({
+      fetchImpl: fetchRouter({
+        providerBody: {
+          usage: { input_tokens: 1, output_tokens: 1 },
+          content: [{ type: 'text', text: 'Take one small step.' }],
+        },
+      }),
+      env: ENV,
+      gatewayAccess: accountingFailureAccess,
+    })(event())
+    expect(responseJson(successful)).toEqual({ text: 'Take one small step.' })
   })
 })

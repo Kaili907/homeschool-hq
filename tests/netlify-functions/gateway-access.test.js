@@ -50,6 +50,48 @@ describe('gateway service-role access', () => {
     })
   })
 
+  it('passes only the bounded accounting contract to the server ledger RPC', async () => {
+    const rpcBuilder = {
+      abortSignal: vi.fn(async () => ({ data: 'usage-id', error: null })),
+    }
+    const client = { rpc: vi.fn(() => rpcBuilder) }
+    const access = createGatewayAccess({ client })
+    await access.recordProviderUsage({
+      requestKey: 'request-key',
+      occurredAt: '2026-08-08T12:00:00.000Z',
+      userId: 'verified-user-id',
+      engine: 'tutor',
+      provider: 'anthropic',
+      logicalModelTier: 'sonnet',
+      providerProduct: 'claude-sonnet-4-6',
+      inputTokens: 10,
+      outputTokens: 4,
+      cacheReadInputTokens: 2,
+      cacheWriteInputTokens: 1,
+      latencyMs: 80,
+      status: 'success',
+      billingBasis: 'estimate',
+    })
+    expect(client.rpc).toHaveBeenCalledWith('academy_record_provider_usage', {
+      p_request_key: 'request-key',
+      p_occurred_at: '2026-08-08T12:00:00.000Z',
+      p_user_id: 'verified-user-id',
+      p_engine: 'tutor',
+      p_provider: 'anthropic',
+      p_logical_model_tier: 'sonnet',
+      p_provider_product: 'claude-sonnet-4-6',
+      p_voice_reference: null,
+      p_input_tokens: 10,
+      p_output_tokens: 4,
+      p_cache_read_input_tokens: 2,
+      p_cache_write_input_tokens: 1,
+      p_characters: null,
+      p_latency_ms: 80,
+      p_status: 'success',
+      p_billing_basis: 'estimate',
+    })
+  })
+
   it('uses safe defaults for absent, malformed, zero, or excessive limits', () => {
     expect(dailyLimit({}, 'LIMIT', 50)).toBe(50)
     expect(dailyLimit({ LIMIT: 'nope' }, 'LIMIT', 50)).toBe(50)
