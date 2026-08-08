@@ -516,3 +516,294 @@ describe('adversarial object shapes', () => {
     expect(({} as Record<string, unknown>).polluted).toBeUndefined()
   })
 })
+
+// STUDY-A1-PROD-DASH-H3 Phase 7 — the row cap, as an invariant rather than a
+// check.
+//
+// `for...of` over an array re-reads `length` on every step. A row whose field is
+// a getter therefore gets to append more rows to the list it is being read out
+// of, and the loop walks straight into them. Measured against the H2 parsers:
+// one calendar block became 51, a full page of 100 became 200, and the dashboard
+// sessions parser did the same at its own cap of 50.
+//
+// No response off `response.json()` can carry a getter, so this was never a
+// shipped leak. But the contract's claim is that the result cannot hold more
+// rows than the server can send, and a claim that only holds for inputs that
+// happen to be inert is not the claim. The rule below is stronger than the cap:
+// if the list changes at all while it is being parsed, the body is refused
+// whole — never truncated to the cap, because a short, well-formed projection of
+// a response the server could not have sent is exactly the invented plan these
+// parsers exist to refuse.
+describe('a row list that changes while it is parsed', () => {
+  /** A valid row that appends `extra` more valid rows the first time it is read. */
+  function appendingSession(list: unknown[], extra: number): Record<string, unknown> {
+    let fired = false
+    return {
+      ...session(),
+      get sessionId(): string {
+        if (!fired) {
+          fired = true
+          for (let index = 0; index < extra; index += 1) list.push(session())
+        }
+        return 'study-session-01'
+      },
+    }
+  }
+
+  function appendingBlock(list: unknown[], extra: number): Record<string, unknown> {
+    let fired = false
+    return {
+      ...block(),
+      get blockId(): string {
+        if (!fired) {
+          fired = true
+          for (let index = 0; index < extra; index += 1) list.push(block())
+        }
+        return 'calendar-block-01'
+      },
+    }
+  }
+
+  it('refuses one block that grows itself into 51', () => {
+    const blocks: unknown[] = []
+    blocks.push(appendingBlock(blocks, 50))
+    refusedCalendar({ blocks }).toThrow(VerifiedStudyContractError)
+  })
+
+  it('refuses a full page of blocks that grows itself into two', () => {
+    const blocks: unknown[] = []
+    for (let index = 0; index < VERIFIED_CALENDAR_BLOCK_LIMIT; index += 1) {
+      blocks.push(appendingBlock(blocks, 1))
+    }
+    refusedCalendar({ blocks }).toThrow(VerifiedStudyContractError)
+    // The growth is real: the body under test genuinely carries a list that
+    // doubles, so the refusal above is about the cap and not about the fixture
+    // being malformed some other way.
+    expect(blocks.length).toBe(VERIFIED_CALENDAR_BLOCK_LIMIT * 2)
+  })
+
+  it('refuses a full page of blocks that grows by exactly one', () => {
+    const blocks: unknown[] = []
+    for (let index = 0; index < VERIFIED_CALENDAR_BLOCK_LIMIT; index += 1) blocks.push(block())
+    blocks[0] = appendingBlock(blocks, 1)
+    refusedCalendar({ blocks }).toThrow(VerifiedStudyContractError)
+  })
+
+  it('refuses one session that grows itself into 51', () => {
+    const sessions: unknown[] = []
+    sessions.push(appendingSession(sessions, 50))
+    refusedDashboard({ sessions }).toThrow(VerifiedStudyContractError)
+  })
+
+  it('refuses a full page of sessions that grows itself into two', () => {
+    const sessions: unknown[] = []
+    for (let index = 0; index < VERIFIED_DASHBOARD_SESSION_LIMIT; index += 1) {
+      sessions.push(appendingSession(sessions, 1))
+    }
+    refusedDashboard({ sessions }).toThrow(VerifiedStudyContractError)
+    expect(sessions.length).toBe(VERIFIED_DASHBOARD_SESSION_LIMIT * 2)
+  })
+
+  it('refuses a list that shrinks under the parse rather than reading past its end', () => {
+    const blocks: unknown[] = [block(), block(), block()]
+    let fired = false
+    blocks[0] = {
+      ...block(),
+      get blockId(): string {
+        if (!fired) { fired = true; blocks.length = 1 }
+        return 'calendar-block-01'
+      },
+    }
+    refusedCalendar({ blocks }).toThrow(VerifiedStudyContractError)
+  })
+
+  it('refuses growth that stays under the cap, because the body still is not the one measured', () => {
+    // Nothing here exceeds 100. The refusal is not "too many rows"; it is that
+    // the list the cap was checked against is not the list that was parsed.
+    const blocks: unknown[] = [appendingBlock([], 0)]
+    const growing: unknown[] = []
+    growing.push(appendingBlock(growing, 2))
+    void blocks
+    refusedCalendar({ blocks: growing }).toThrow(VerifiedStudyContractError)
+    expect(growing.length).toBe(3)
+  })
+
+  // STUDY-A1-PROD-DASH-H3 Phase 10 — refused, never trimmed. A parser that
+  // sliced to the cap would satisfy "never more than the cap" while handing a
+  // learner a plan the server never sent.
+  it('never returns a truncated projection of an oversized static body', () => {
+    const rows = Array.from({ length: VERIFIED_CALENDAR_BLOCK_LIMIT + 1 }, (_value, index) =>
+      block({ blockId: `calendar-block-${index}` }))
+    let returned: unknown = 'nothing was returned'
+    try {
+      returned = parseVerifiedStudyCalendar({ blocks: rows })
+    } catch (error) {
+      expect(error).toBeInstanceOf(VerifiedStudyContractError)
+    }
+    expect(returned).toBe('nothing was returned')
+  })
+
+  it('never returns a truncated projection of a body that grew', () => {
+    const blocks: unknown[] = []
+    blocks.push(appendingBlock(blocks, 50))
+    let returned: unknown = 'nothing was returned'
+    try {
+      returned = parseVerifiedStudyCalendar({ blocks })
+    } catch (error) {
+      expect(error).toBeInstanceOf(VerifiedStudyContractError)
+    }
+    expect(returned).toBe('nothing was returned')
+  })
+
+  // The two halves of the fix are separately load-bearing, and each needs a body
+  // that the other half cannot catch. Without these, reverting to a live
+  // `for...of` or trading the cap check for a `Math.min` both stay green.
+  it('reads only the indexes it measured, even when the list is put back afterwards', () => {
+    // Grow far past the cap, then restore the original length from the last
+    // appended row. A live `for...of` reads all 151 rows and then finds the
+    // length back at 1, so the after-the-fact stability check sees nothing
+    // wrong and hands back 151 blocks against a cap of 100.
+    const blocks: unknown[] = []
+    const restore = {
+      ...block(),
+      get blockId(): string { blocks.length = 1; return 'calendar-block-restore' },
+    }
+    let fired = false
+    blocks.push({
+      ...block(),
+      get blockId(): string {
+        if (!fired) {
+          fired = true
+          for (let index = 0; index < VERIFIED_CALENDAR_BLOCK_LIMIT + 49; index += 1) {
+            blocks.push(block())
+          }
+          blocks.push(restore)
+        }
+        return 'calendar-block-01'
+      },
+    })
+
+    refusedCalendar({ blocks }).toThrow(VerifiedStudyContractError)
+    // The restoring row was never reached, which is the point: the parse walked
+    // index 0 and stopped, so the list is still the grown one.
+    expect(blocks.length).toBe(VERIFIED_CALENDAR_BLOCK_LIMIT + 51)
+  })
+
+  it('refuses an oversized list before parsing it, not after measuring what fits', () => {
+    // A cap enforced as `Math.min(length, cap)` would parse the first 100 of
+    // these 101 rows; the row that shrinks the list back to 100 then makes the
+    // stability check agree, and a truncated 100-row plan is returned for a body
+    // the server could not have sent. The refusal has to come from the length
+    // the body arrived with.
+    const blocks: unknown[] = []
+    let fired = false
+    blocks.push({
+      ...block(),
+      get blockId(): string {
+        if (!fired) { fired = true; blocks.pop() }
+        return 'calendar-block-01'
+      },
+    })
+    for (let index = 1; index < VERIFIED_CALENDAR_BLOCK_LIMIT + 1; index += 1) {
+      blocks.push(block({ blockId: `calendar-block-${index}` }))
+    }
+    expect(blocks).toHaveLength(VERIFIED_CALENDAR_BLOCK_LIMIT + 1)
+
+    let returned: unknown = 'nothing was returned'
+    try {
+      returned = parseVerifiedStudyCalendar({ blocks })
+    } catch (error) {
+      expect(error).toBeInstanceOf(VerifiedStudyContractError)
+    }
+    expect(returned).toBe('nothing was returned')
+  })
+
+  it('refuses an oversized session list before parsing it', () => {
+    const sessions: unknown[] = []
+    let fired = false
+    sessions.push({
+      ...session(),
+      get sessionId(): string {
+        if (!fired) { fired = true; sessions.pop() }
+        return 'study-session-01'
+      },
+    })
+    for (let index = 1; index < VERIFIED_DASHBOARD_SESSION_LIMIT + 1; index += 1) {
+      sessions.push(session({ sessionId: `study-session-${index}` }))
+    }
+    refusedDashboard({ sessions }).toThrow(VerifiedStudyContractError)
+  })
+
+  it('reads only the indexes it measured for sessions too', () => {
+    const sessions: unknown[] = []
+    const restore = {
+      ...session(),
+      get sessionId(): string { sessions.length = 1; return 'study-session-restore' },
+    }
+    let fired = false
+    sessions.push({
+      ...session(),
+      get sessionId(): string {
+        if (!fired) {
+          fired = true
+          for (let index = 0; index < VERIFIED_DASHBOARD_SESSION_LIMIT + 49; index += 1) {
+            sessions.push(session())
+          }
+          sessions.push(restore)
+        }
+        return 'study-session-01'
+      },
+    })
+    refusedDashboard({ sessions }).toThrow(VerifiedStudyContractError)
+    expect(sessions.length).toBe(VERIFIED_DASHBOARD_SESSION_LIMIT + 51)
+  })
+
+  // STUDY-A1-PROD-DASH-H3 Phase 11 — the cap fix must not buy its invariant with
+  // a second read of a row field. A re-read is what H2 closed.
+  it('still reads each row field exactly once at a full page', () => {
+    const reads = new Map<number, number>()
+    const blocks = Array.from({ length: VERIFIED_CALENDAR_BLOCK_LIMIT }, (_value, index) => ({
+      ...block(),
+      get blockId(): string {
+        reads.set(index, (reads.get(index) ?? 0) + 1)
+        return `calendar-block-${index}`
+      },
+    }))
+    expect(parseVerifiedStudyCalendar({ blocks }).blocks).toHaveLength(VERIFIED_CALENDAR_BLOCK_LIMIT)
+    expect([...reads.values()]).toEqual(Array(VERIFIED_CALENDAR_BLOCK_LIMIT).fill(1))
+  })
+
+  it('still reads the body envelope exactly once', () => {
+    let reads = 0
+    const body = {
+      get blocks(): unknown { reads += 1; return reads === 1 ? [block()] : 'not an array' },
+    }
+    expect(parseVerifiedStudyCalendar(body).blocks).toHaveLength(1)
+    expect(reads).toBe(1)
+  })
+
+  // STUDY-A1-PROD-DASH-H3 Phase 9 — the two caps are the server's own, and they
+  // are not the same number. A shared limit would silently widen `dashboard:read`
+  // by fifty rows or narrow `calendar:read` by the same.
+  it('holds each read to its own server cap', () => {
+    expect(VERIFIED_DASHBOARD_SESSION_LIMIT).toBe(50)
+    expect(VERIFIED_CALENDAR_BLOCK_LIMIT).toBe(100)
+    expect(VERIFIED_DASHBOARD_SESSION_LIMIT).not.toBe(VERIFIED_CALENDAR_BLOCK_LIMIT)
+
+    const atSessionCap = Array.from({ length: VERIFIED_DASHBOARD_SESSION_LIMIT }, (_value, index) =>
+      session({ sessionId: `study-session-${index}` }))
+    expect(parseVerifiedStudyDashboard({ sessions: atSessionCap }).sessions)
+      .toHaveLength(VERIFIED_DASHBOARD_SESSION_LIMIT)
+    refusedDashboard({ sessions: [...atSessionCap, session({ sessionId: 'study-session-over' })] })
+      .toThrow(VerifiedStudyContractError)
+  })
+
+  it.each([0, 1, 49, VERIFIED_DASHBOARD_SESSION_LIMIT])(
+    'accepts %i static sessions in one response',
+    (count) => {
+      const rows = Array.from({ length: count }, (_value, index) =>
+        session({ sessionId: `study-session-${index}` }))
+      expect(parseVerifiedStudyDashboard({ sessions: rows }).sessions).toHaveLength(count)
+    },
+  )
+})

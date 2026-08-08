@@ -1,4 +1,5 @@
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
@@ -38,8 +39,47 @@ const sourceRoot = resolve(here, '..', '..')
 type ImportEdgeKind = 'value' | 'type'
 
 interface ImportEdge {
-  readonly specifier: string
+  /**
+   * The module this edge names, or `null` when the edge is a call whose target
+   * is not a string literal. `null` is not "no edge": it is an edge the
+   * boundary cannot read, and the walk below fails on it rather than passing it
+   * by silence.
+   */
+  readonly specifier: string | null
   readonly kind: ImportEdgeKind
+}
+
+/**
+ * STUDY-A1-PROD-DASH-H3 Phase 3 — a call is a `require`, however it is reached.
+ *
+ * A bare `require('m')` is the shape that matters, but `globalThis.require?.('m')`
+ * and `globalThis['require']('m')` are the same edge written to slip past a check
+ * that only looks for an identifier, so the name is matched wherever the callee
+ * ends.
+ */
+function isRequireCall(node: ts.CallExpression): boolean {
+  const callee = node.expression
+  if (ts.isIdentifier(callee)) return callee.text === 'require'
+  if (ts.isPropertyAccessExpression(callee)) return callee.name.text === 'require'
+  if (ts.isElementAccessExpression(callee)) {
+    return ts.isStringLiteral(callee.argumentExpression) &&
+      callee.argumentExpression.text === 'require'
+  }
+  return false
+}
+
+/**
+ * The specifier of a `require(...)` or `import(...)`, or `null` when it is not a
+ * string literal.
+ *
+ * Only a literal is read. Nothing here executes, resolves or evaluates the
+ * argument: a variable, a template and a conditional are all reported as
+ * unknown, because a guess about where such a call leads is worth less than an
+ * admission that the boundary cannot see it.
+ */
+function literalSpecifier(node: ts.CallExpression): string | null {
+  const first = node.arguments[0]
+  return first && ts.isStringLiteral(first) ? first.text : null
 }
 
 /**
@@ -80,12 +120,29 @@ function importEdges(fileName: string, text: string): readonly ImportEdge[] {
       })
     } else if (
       ts.isCallExpression(node) &&
-      node.expression.kind === ts.SyntaxKind.ImportKeyword &&
-      node.arguments.length > 0 &&
-      ts.isStringLiteral(node.arguments[0]!)
+      node.expression.kind === ts.SyntaxKind.ImportKeyword
     ) {
       // A dynamic import is a runtime edge whatever the imported names are.
-      edges.push({ specifier: (node.arguments[0] as ts.StringLiteral).text, kind: 'value' })
+      edges.push({ specifier: literalSpecifier(node), kind: 'value' })
+    } else if (
+      ts.isImportEqualsDeclaration(node) &&
+      ts.isExternalModuleReference(node.moduleReference)
+    ) {
+      // `import x = require('m')`. `tsc` refuses this form under this repo's
+      // `module: ESNext`, so it cannot reach a source file today — but that is
+      // the compiler's guarantee, not this walk's, and a `module` change would
+      // hand it back silently.
+      const reference = node.moduleReference.expression
+      edges.push({
+        specifier: ts.isStringLiteral(reference) ? reference.text : null,
+        kind: node.isTypeOnly ? 'type' : 'value',
+      })
+    } else if (ts.isCallExpression(node) && isRequireCall(node)) {
+      // TypeScript erases nothing here: a `require` is a call, and a call is a
+      // value edge. Classifying it as anything else is what let an injected
+      // `require('../../study/localDevelopmentPorts')` cross this boundary
+      // unseen.
+      edges.push({ specifier: literalSpecifier(node), kind: 'value' })
     }
     ts.forEachChild(node, visit)
   }
@@ -118,6 +175,13 @@ interface ImportClosure {
   readonly packages: readonly string[]
   /** Relative specifiers that resolved to nothing, as `<file> -> <specifier>`. */
   readonly unresolved: readonly string[]
+  /**
+   * Files carrying a `require(...)` or `import(...)` whose target is not a
+   * string literal. The walk cannot say where such a call leads, so the file is
+   * named here and the boundary fails on it — the one thing that must never
+   * happen is treating "unreadable" as "reaches nothing".
+   */
+  readonly unanalyzable: readonly string[]
 }
 
 /**
@@ -130,6 +194,7 @@ function importClosure(entry: string, follow: ReadonlySet<ImportEdgeKind>): Impo
   const seen = new Set<string>()
   const packages = new Set<string>()
   const unresolved = new Set<string>()
+  const unanalyzable = new Set<string>()
   const pending = [entry]
   while (pending.length > 0) {
     const file = pending.pop()!
@@ -137,6 +202,13 @@ function importClosure(entry: string, follow: ReadonlySet<ImportEdgeKind>): Impo
     seen.add(file)
     for (const edge of importEdges(file, readFileSync(file, 'utf8'))) {
       if (!follow.has(edge.kind)) continue
+      if (edge.specifier === null) {
+        // Collected like the unresolved ones, and for the same reason: throwing
+        // here would turn every boundary question into one error about whichever
+        // call happened to be unreadable first.
+        unanalyzable.add(relative(sourceRoot, file).replaceAll('\\', '/'))
+        continue
+      }
       if (!edge.specifier.startsWith('.')) {
         // Bare specifiers never resolve to a file here, but a forbidden package
         // is still reachable, so they are recorded rather than dropped.
@@ -152,6 +224,7 @@ function importClosure(entry: string, follow: ReadonlySet<ImportEdgeKind>): Impo
     files: [...seen].map((file) => relative(sourceRoot, file).replaceAll('\\', '/')),
     packages: [...packages],
     unresolved: [...unresolved],
+    unanalyzable: [...unanalyzable],
   }
 }
 
@@ -219,6 +292,219 @@ describe('production import edge classification', () => {
   })
 })
 
+// STUDY-A1-PROD-DASH-H3 Phases 3 and 4 — the classifier above understood ESM and
+// nothing else.
+//
+// A `require('../../study/localDevelopmentPorts')` injected into the real
+// dashboard source typechecked, built, and left every assertion in this file
+// green: the walk simply did not see the edge. Rollup happens to leave that call
+// unresolved today rather than bundling the module, so the gap was never a
+// shipped leak — but "the bundler currently declines to follow it" is not the
+// boundary this file claims to hold.
+//
+// Two rules, and the second matters as much as the first. A `require` with a
+// string literal is a VALUE edge, because TypeScript erases nothing about a
+// call. A `require` whose target is not a literal is an edge this walk cannot
+// read, and it is reported as unknown rather than skipped — silence would make
+// `require(name)` the way around everything above.
+describe('production import edge classification of CommonJS require', () => {
+  const edge = (source: string) => importEdges('probe.ts', source)[0]
+
+  it.each([
+    'const x = require(\'./foo\')',
+    'require("../bar")',
+    'const { a } = require(\'./foo\')',
+    'export const x = require(\'./foo\')',
+    'function load() { return require(\'./foo\') }',
+    'if (flag) { require(\'./foo\') }',
+  ])('classifies %s as a value edge to a named module', (source) => {
+    expect(edge(source)?.kind).toBe('value')
+    expect(typeof edge(source)?.specifier).toBe('string')
+  })
+
+  it.each([
+    ['const x = require(\'./foo\')', './foo'],
+    ['require("../bar")', '../bar'],
+    ['require(\'@supabase/supabase-js\')', '@supabase/supabase-js'],
+  ])('reads the specifier of %s', (source, specifier) => {
+    expect(edge(source)).toEqual({ specifier, kind: 'value' })
+  })
+
+  it('never classifies a require as an erased edge', () => {
+    // The mutation this kills: `kind: 'type'`. A require is a call; there is no
+    // TypeScript setting under which it disappears, so a type classification
+    // would hide every forbidden module reached this way.
+    for (const source of [
+      'const x = require(\'./foo\')',
+      'require(\'@supabase/supabase-js\')',
+      'const x = require(name)',
+    ]) {
+      expect(edge(source)?.kind).toBe('value')
+      expect(edge(source)?.kind).not.toBe('type')
+    }
+  })
+
+  it.each([
+    ['a variable', 'const x = require(name)'],
+    ['a template with a substitution', 'const x = require(`./${name}`)'],
+    ['a conditional', 'const x = require(condition ? \'./a\' : \'./b\')'],
+    ['an optional call through globalThis', 'globalThis.require?.(name)'],
+    ['an indexed access', 'globalThis[\'require\'](name)'],
+    ['a concatenation', 'const x = require(\'./\' + name)'],
+    ['no argument at all', 'require()'],
+  ])('reports %s as an edge it cannot read, not as no edge', (_name, source) => {
+    const found = edge(source)
+    expect(found, `${source} produced no edge at all`).toBeDefined()
+    expect(found!.kind).toBe('value')
+    expect(found!.specifier).toBeNull()
+  })
+
+  it('reads the literal even when the call is reached through globalThis', () => {
+    // Conservative in the safe direction: the specifier is legible, so the edge
+    // is recorded by name and the forbidden set gets to judge it.
+    expect(edge('globalThis.require?.(\'./x\')')).toEqual({ specifier: './x', kind: 'value' })
+  })
+
+  it('sees a require nested inside a function body', () => {
+    expect(importEdges('probe.ts', `
+      export function load() { return require('./lazy') }
+    `)).toEqual([{ specifier: './lazy', kind: 'value' }])
+  })
+
+  it('leaves a require that is not a call alone', () => {
+    // No call, no edge. A guard that fired on the identifier alone would report
+    // edges that do not exist and train a reader to ignore it.
+    expect(importEdges('probe.ts', 'const options = { require: false }')).toEqual([])
+    expect(importEdges('probe.ts', 'const alias = require')).toEqual([])
+  })
+
+  it('classifies an import-equals require as a value edge', () => {
+    // Unreachable in this repo — `tsc` rejects it under `module: ESNext` — so
+    // this is held here rather than through an injection into real source. The
+    // point is that the walk does not depend on that compiler setting staying
+    // where it is.
+    expect(edge('import x = require(\'./foo\')')).toEqual({ specifier: './foo', kind: 'value' })
+  })
+
+  it('applies the same rule to a dynamic import it cannot read', () => {
+    // `import(name)` is the identical gap written the other way. Closing one and
+    // not the other would leave the fail-closed rule a formality.
+    expect(edge('const m = await import(name)')).toEqual({ specifier: null, kind: 'value' })
+    expect(edge('const m = await import(`./${name}`)')).toEqual({ specifier: null, kind: 'value' })
+  })
+
+  it('reports require edges alongside the ESM ones, in order', () => {
+    expect(importEdges('probe.ts', `
+      import type { A } from './types'
+      const b = require('./values')
+      import './side-effect'
+      const c = require(name)
+    `)).toEqual([
+      { specifier: './types', kind: 'type' },
+      { specifier: './values', kind: 'value' },
+      { specifier: './side-effect', kind: 'value' },
+      { specifier: null, kind: 'value' },
+    ])
+  })
+})
+
+// STUDY-A1-PROD-DASH-H3 Phase 4 — the walk itself, on a closure built for the
+// purpose.
+//
+// Classifying an edge correctly is only half of it: the closure has to act on
+// the classification. Neither property is provable against the real dashboard
+// graph, because that graph contains no require at all — every assertion about
+// `unanalyzable` there passes by being empty, whether the walk collects
+// unreadable calls or drops them on the floor. These fixtures give the walk
+// something to find.
+describe('the closure walk over CommonJS edges', () => {
+  function withFixture(files: Readonly<Record<string, string>>, check: (dir: string) => void): void {
+    const dir = mkdtempSync(join(tmpdir(), 'h3-import-boundary-'))
+    try {
+      for (const [name, text] of Object.entries(files)) writeFileSync(join(dir, name), text)
+      check(dir)
+    } finally {
+      rmSync(dir, { recursive: true, force: true })
+    }
+  }
+
+  const valueOnly = () => new Set<ImportEdgeKind>(['value'])
+
+  it('follows a require into the file it names', () => {
+    withFixture({
+      'entry.ts': `const forbidden = require('./leaf')\nvoid forbidden\n`,
+      'leaf.ts': `export const leaf = 1\n`,
+    }, (dir) => {
+      const closure = importClosure(join(dir, 'entry.ts'), valueOnly())
+      expect(closure.files).toHaveLength(2)
+      expect(closure.files.some((file) => file.endsWith('leaf.ts'))).toBe(true)
+      expect(closure.unanalyzable).toEqual([])
+      expect(closure.unresolved).toEqual([])
+    })
+  })
+
+  it('records a bare-package require as a reachable package', () => {
+    withFixture({
+      'entry.ts': `const client = require('@supabase/supabase-js')\nvoid client\n`,
+    }, (dir) => {
+      const closure = importClosure(join(dir, 'entry.ts'), valueOnly())
+      expect(closure.packages).toEqual(['@supabase/supabase-js'])
+    })
+  })
+
+  it('names the file when a require target cannot be read, rather than walking past it', () => {
+    // The mutation this kills: dropping the `unanalyzable.add` and keeping the
+    // `continue`. Against the real graph that mutant is invisible, because the
+    // real graph never produces an unreadable edge for it to swallow.
+    withFixture({
+      'entry.ts': `declare const name: string\nconst hidden = require(name)\nvoid hidden\n`,
+    }, (dir) => {
+      const closure = importClosure(join(dir, 'entry.ts'), valueOnly())
+      expect(closure.unanalyzable).toHaveLength(1)
+      expect(closure.unanalyzable[0]).toContain('entry.ts')
+      // And it is not quietly recorded as a package named something unreadable.
+      expect(closure.packages).toEqual([])
+    })
+  })
+
+  it('names the file for an unreadable dynamic import too', () => {
+    withFixture({
+      'entry.ts': `declare const name: string\nexport const load = () => import(name)\n`,
+    }, (dir) => {
+      expect(importClosure(join(dir, 'entry.ts'), valueOnly()).unanalyzable).toHaveLength(1)
+    })
+  })
+
+  it('reaches a forbidden module through a require one hop away', () => {
+    // The shape the boundary actually exists to catch: the entry file's own
+    // imports look clean, and the forbidden edge is a require in a file it
+    // pulls in.
+    withFixture({
+      'entry.ts': `import './hop'\n`,
+      'hop.ts': `const ports = require('./localDevelopmentPorts')\nvoid ports\n`,
+      'localDevelopmentPorts.ts': `export const ports = 1\n`,
+    }, (dir) => {
+      const closure = importClosure(join(dir, 'entry.ts'), valueOnly())
+      expect(closure.files.some((file) => file.endsWith('localDevelopmentPorts.ts'))).toBe(true)
+    })
+  })
+
+  it('does not follow a require that only a type edge reaches', () => {
+    // The erasure asymmetry still holds under the new edge form: a require
+    // inside a module reached only by `import type` is not in the value closure.
+    withFixture({
+      'entry.ts': `import type { A } from './types'\nexport type B = A\n`,
+      'types.ts': `const ports = require('./localDevelopmentPorts')\nvoid ports\nexport type A = 1\n`,
+      'localDevelopmentPorts.ts': `export const ports = 1\n`,
+    }, (dir) => {
+      const production = importClosure(join(dir, 'entry.ts'), valueOnly())
+      const raw = importClosure(join(dir, 'entry.ts'), new Set<ImportEdgeKind>(['value', 'type']))
+      expect(production.files).toHaveLength(1)
+      expect(raw.files.some((file) => file.endsWith('localDevelopmentPorts.ts'))).toBe(true)
+    })
+  })
+})
+
 describe('verified production Study dashboard import boundary', () => {
   const entry = join(sourceRoot, 'components', 'study', 'VerifiedStudyDashboard.tsx')
   const raw = importClosure(entry, new Set<ImportEdgeKind>(['value', 'type']))
@@ -235,6 +521,10 @@ describe('verified production Study dashboard import boundary', () => {
     // Nothing was skipped, so "absent from the closure" means absent.
     expect(raw.unresolved).toEqual([])
     expect(production.unresolved).toEqual([])
+    // And nothing was unreadable, so "absent" is not standing in for "there is a
+    // call here whose target this walk could not name".
+    expect(raw.unanalyzable).toEqual([])
+    expect(production.unanalyzable).toEqual([])
   })
 
   it('walked a real production closure, and it is a subset of the raw one', () => {

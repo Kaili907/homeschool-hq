@@ -178,12 +178,42 @@ function localDate(value: unknown): string | null {
     : null
 }
 
-function rows(body: unknown, key: string, limit: number): readonly unknown[] | null {
+/**
+ * The row list a body carries, together with the length it had when the cap was
+ * checked. Nothing else may bound the parse.
+ */
+interface RowList {
+  readonly source: readonly unknown[]
+  readonly count: number
+}
+
+/**
+ * The cap, measured once.
+ *
+ * `for...of` over an array re-reads `length` on every step, so a row whose field
+ * is a getter can append more rows to the list it is being read out of and carry
+ * the loop past the cap — one block became 51, a full page of 100 became 200.
+ * The length is therefore taken once, the cap is checked against that number,
+ * and callers walk exactly those indexes rather than a live iterator.
+ */
+function rows(body: unknown, key: string, limit: number): RowList | null {
   const envelope = exactKeys(body, [key])
   if (!envelope) return null
   const list = envelope[key]
-  if (!Array.isArray(list) || list.length > limit) return null
-  return list
+  if (!Array.isArray(list)) return null
+  const count = list.length
+  if (count > limit) return null
+  return { source: list, count }
+}
+
+/**
+ * Whether the list that was parsed is still the list the cap was checked
+ * against. A body that changed under its own parse is refused whole: truncating
+ * it to the measured count would hand a learner a short, well-formed plan the
+ * server never sent, which is the one outcome these parsers exist to prevent.
+ */
+function settled(list: RowList): boolean {
+  return list.source.length === list.count
 }
 
 /** `dashboard:read` — `{ sessions: [{ sessionId, state, lessonId, revision, updatedAt }] }`. */
@@ -192,8 +222,8 @@ export function parseVerifiedStudyDashboard(body: unknown): VerifiedStudyDashboa
   const list = rows(body, 'sessions', VERIFIED_DASHBOARD_SESSION_LIMIT) ?? refuse()
 
   const sessions: VerifiedStudySessionRecord[] = []
-  for (const entry of list) {
-    const row = exactKeys(entry, VERIFIED_DASHBOARD_SESSION_KEYS) ?? refuse()
+  for (let index = 0; index < list.count; index += 1) {
+    const row = exactKeys(list.source[index], VERIFIED_DASHBOARD_SESSION_KEYS) ?? refuse()
     const sessionId = identifier(row.sessionId) ?? refuse()
     const state = member(row.state, VERIFIED_STUDY_SESSION_STATES) ?? refuse()
     const lessonId = identifier(row.lessonId) ?? refuse()
@@ -203,6 +233,7 @@ export function parseVerifiedStudyDashboard(body: unknown): VerifiedStudyDashboa
     // reachable through the value this returns.
     sessions.push(Object.freeze({ sessionId, state, lessonId, revision: sessionRevision, updatedAt }))
   }
+  if (!settled(list)) refuse()
   return Object.freeze({ sessions: Object.freeze(sessions) })
 }
 
@@ -215,8 +246,8 @@ export function parseVerifiedStudyCalendar(body: unknown): VerifiedStudyCalendar
   const list = rows(body, 'blocks', VERIFIED_CALENDAR_BLOCK_LIMIT) ?? refuse()
 
   const blocks: VerifiedStudyCalendarBlock[] = []
-  for (const entry of list) {
-    const row = exactKeys(entry, VERIFIED_CALENDAR_BLOCK_KEYS) ?? refuse()
+  for (let index = 0; index < list.count; index += 1) {
+    const row = exactKeys(list.source[index], VERIFIED_CALENDAR_BLOCK_KEYS) ?? refuse()
     const blockId = identifier(row.blockId) ?? refuse()
     const blockType = member(row.blockType, VERIFIED_STUDY_BLOCK_TYPES) ?? refuse()
     const sourceReference = identifier(row.sourceReference) ?? refuse()
@@ -234,5 +265,6 @@ export function parseVerifiedStudyCalendar(body: unknown): VerifiedStudyCalendar
       revision: blockRevision,
     }))
   }
+  if (!settled(list)) refuse()
   return Object.freeze({ blocks: Object.freeze(blocks) })
 }
