@@ -1,26 +1,18 @@
+import {
+  ADMIN_CONTRACT_VERSION,
+  ADMIN_ROLE_CAPABILITIES,
+  type AdminCapability,
+  type AdminRole,
+  hasAdminCapability,
+} from './contracts'
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
 
 export const ADMIN_AUTHORIZATION_ENDPOINT = '/api/admin/v1/authorization'
 export const ADMIN_AUTHORIZATION_TIMEOUT_MS = 5_000
 
-export const ADMIN_ROLE_CAPABILITIES = {
-  viewer: ['admin:read'],
-  admin: ['admin:read', 'admin:operate'],
-  owner: [
-    'admin:read',
-    'admin:operate',
-    'admin:roles:manage',
-    'admin:config:manage',
-    'admin:curriculum:publish',
-    'admin:releases:manage',
-  ],
-} as const
-
-export type AdminRole = keyof typeof ADMIN_ROLE_CAPABILITIES
-export type AdminCapability = (typeof ADMIN_ROLE_CAPABILITIES)[AdminRole][number]
-
 export type AdminAuthorizationState =
   | {
+      readonly contractVersion: typeof ADMIN_CONTRACT_VERSION
       readonly status: 'authorized'
       readonly role: AdminRole
       readonly capabilities: readonly AdminCapability[]
@@ -43,8 +35,9 @@ function exactAuthorization(value: unknown): AdminAuthorizationState | null {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null
   const record = value as Record<string, unknown>
   if (
-    Object.keys(record).length !== 3 ||
-    record.schemaVersion !== 1 ||
+    Object.keys(record).length !== 4 ||
+    record.contractVersion !== ADMIN_CONTRACT_VERSION ||
+    record.status !== 'authorized' ||
     typeof record.role !== 'string' ||
     !Object.hasOwn(ADMIN_ROLE_CAPABILITIES, record.role) ||
     !Array.isArray(record.capabilities)
@@ -58,6 +51,7 @@ function exactAuthorization(value: unknown): AdminAuthorizationState | null {
   ) return null
 
   return Object.freeze({
+    contractVersion: ADMIN_CONTRACT_VERSION,
     status: 'authorized',
     role,
     capabilities: Object.freeze([...expected]),
@@ -111,10 +105,14 @@ export async function readAdminAuthorization(
   }
 }
 
-/** Advisory UI guard only. Server capability checks remain authoritative. */
-export function hasAdminCapability(
+/** Advisory ADMIN-5 UI guard only. Server capability checks remain authoritative. */
+export function hasAdminAuthorizationCapability(
   state: AdminAuthorizationState,
   capability: AdminCapability,
 ): boolean {
-  return state.status === 'authorized' && state.capabilities.includes(capability)
+  return (
+    state.status === 'authorized' &&
+    hasAdminCapability(state.role, capability) &&
+    state.capabilities.includes(capability)
+  )
 }

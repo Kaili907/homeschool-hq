@@ -28,7 +28,7 @@ export function createAdminAuthorizationHandler(overrides = {}) {
     }
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
 
-    const result = await authorization.require(event, 'admin:read')
+    const result = await authorization.require(event, 'overview:read')
     if (!result.ok) return result.response
     return jsonResponse(200, adminAuthorizationWire(result.principal))
   }
