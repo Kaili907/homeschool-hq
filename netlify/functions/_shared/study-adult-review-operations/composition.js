@@ -4,6 +4,7 @@ import { createSupabaseInAppPersistence } from '../study-delivery/supabase-in-ap
 import { MONITORING_EVENT_CATALOG, createMonitoringService, createStructuredServerLog } from '../study-monitoring/monitoring.js'
 import { createSupabaseAdultReviewMonitoringSink } from '../study-monitoring/supabase-sink.js'
 import {
+  createNetlifyScheduledWorkerAuthorization,
   createNetlifyWorkerCredentialVerifier,
   createNetlifyWorkerInvocationAuthorization,
 } from '../study-worker/credential.js'
@@ -31,6 +32,31 @@ export const ADULT_REVIEW_TEMPLATE_CODE = 'study-safety-adult-review-v1'
 // provider, durable provider required, approved policy required, no test
 // receipt), regardless of what NODE_ENV happens to be inside the function.
 const PRODUCTION_ENVIRONMENT = 'production'
+
+/**
+ * The invocation authorities this composition may build, and the only ones.
+ *
+ * The manual and scheduled entrypoints differ in exactly one thing -- who is
+ * allowed to start a run -- so that is the only thing injected. Everything
+ * downstream (the RPC client, the operations adapter and its lease context, the
+ * provider, the policy, the monitoring, the worker) is built identically for
+ * both, from one graph.
+ *
+ * Membership is by FUNCTION IDENTITY against this frozen set, not by name or by
+ * shape, so the selection cannot be reached from anything a caller can send: no
+ * JSON body, header, or query can carry a function, and nothing outside these
+ * two modules holds either of these references. A caller therefore cannot
+ * choose the authority, and cannot smuggle in a third one that authorizes
+ * itself.
+ *
+ * The DEFAULT is the manual authority, which fails closed: an entrypoint that
+ * forgets to state its authority gets the one that demands a presented secret,
+ * never the one whose authority is the platform path.
+ */
+const INVOCATION_AUTHORITIES = new Set([
+  createNetlifyWorkerInvocationAuthorization,
+  createNetlifyScheduledWorkerAuthorization,
+])
 
 // The exact key set the C2 claim projection emits, in
 // `createSupabaseAdultReviewOperations().claim()`.
@@ -187,6 +213,11 @@ function fail(reason) {
 export async function createProductionAdultReviewWorkerComposition(options = {}) {
   const env = options.env ?? process.env
   const fetchImpl = options.fetchImpl ?? globalThis.fetch
+  // Checked first, before a single durable round trip: an unrecognised
+  // authority is a wiring mistake, and it must not be able to buy durable work
+  // on its way to being refused.
+  const invocationAuthority = options.invocationAuthority ?? createNetlifyWorkerInvocationAuthorization
+  if (!INVOCATION_AUTHORITIES.has(invocationAuthority)) fail('unknown_invocation_authority')
   // One RPC client, one set of durable credentials, one boundary.
   const rpc = options.rpc ?? createSupabaseServiceRpc({ env, fetchImpl })
   if (rpc.isConfigured?.() !== true) fail('durable_rpc_not_configured')
@@ -259,10 +290,13 @@ export async function createProductionAdultReviewWorkerComposition(options = {})
     environment: PRODUCTION_ENVIRONMENT,
   })
 
-  const workerAuthorization = createNetlifyWorkerInvocationAuthorization({
-    env,
-    monitor: monitoring,
-  })
+  // The selected authority, and only it, is constructed. Selecting the
+  // scheduled one therefore never CALLS the manual factory, which is the only
+  // place `ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET` is read -- so
+  // the automatic worker composes with that secret absent, malformed, or
+  // rotated. The manual operator path is optional; guardian delivery is not,
+  // and must not inherit the optional path's prerequisites.
+  const workerAuthorization = invocationAuthority({ env, monitor: monitoring })
   if (workerAuthorization.isReady() !== true) fail('worker_invocation_authority_not_configured')
 
   return Object.freeze({
