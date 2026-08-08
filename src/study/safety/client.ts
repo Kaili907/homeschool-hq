@@ -70,12 +70,19 @@ function failClosed(reasonCode: string): StudySafetyClassificationResponseV1 {
 /**
  * Which thing could not be obtained. `session-authorization` means the adult
  * bearer or the learner's Study session was missing, expired, revoked, or
- * refused; `rate-limit` means the gateway shed the request; `classifier` means
- * everything else that stopped a classification. All three fail closed — none
- * may continue tutoring — but only the third is a safety-classifier incident,
- * so an ordinary session expiry and a rate limit are never reported as one.
+ * refused; `rate-limit` means the gateway shed the request;
+ * `authorization-infrastructure` means the gateway's learner-authorization
+ * verifier was itself unreachable, so nothing was refused and nothing was
+ * judged; `classifier` means everything else that stopped a classification. All
+ * four fail closed — none may continue tutoring — but only the last is a
+ * safety-classifier incident, so an ordinary session expiry, a rate limit and an
+ * authorization outage are never reported as one.
  */
-export type StudySafetyFailureCategory = 'session-authorization' | 'rate-limit' | 'classifier'
+export type StudySafetyFailureCategory =
+  | 'session-authorization'
+  | 'rate-limit'
+  | 'authorization-infrastructure'
+  | 'classifier'
 
 /**
  * Which half of the authorization pair was refused, as a non-secret code. The
@@ -185,6 +192,22 @@ export async function classifyStudySafetyWithCaptureStatus(
       // is nothing about this learner to record.
       if (response.status === 429) {
         return { response: failClosed('client-rate-limited'), serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'rate-limit' }
+      }
+      // STUDY-A1-AUTH-INFRA-BOUNDARY-C — 424 Failed Dependency, which this
+      // gateway emits for exactly one state: its learner-authorization verifier
+      // was unreachable. The verifier runs strictly before the classifier, so
+      // the learner's text was never read, let alone judged. It carries no
+      // `failureMode`, which is the local safety ledger's vocabulary, so a
+      // caller writing on `failureMode` alone still cannot make a durable safety
+      // record out of it.
+      //
+      // Only the status decides this. The body is never read or parsed here, so
+      // a gateway — or anything that can answer as one — cannot talk its way
+      // into or out of this category with an error string, and the same
+      // `authorization_unavailable` payload on a 500 or a 503 stays firmly on
+      // the safety side below.
+      if (response.status === 424) {
+        return { response: failClosed('client-authorization-infrastructure-unavailable'), serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'authorization-infrastructure' }
       }
       return { response: failClosed('client-gateway-error'), failureMode: response.status === 503 ? 'gateway-503' : 'classifier-unreachable', serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'classifier' }
     }

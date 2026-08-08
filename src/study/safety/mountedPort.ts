@@ -40,6 +40,15 @@ function sessionInterruption(result: StudySafetyClientResult): StudyRuntimeInter
     })
   }
   if (result.failureCategory === 'rate-limit') return Object.freeze({ kind: 'rate-limit' as const })
+  // STUDY-A1-AUTH-INFRA-BOUNDARY-C. Deliberately reason-less: nothing was
+  // refused, so there is no half of the authorization pair to name and no
+  // recovery for an adult to perform. It is not folded into
+  // `session-authorization` precisely because that kind's recovery — sign the
+  // adult in again, re-issue the learner's session — is wrong here and would
+  // clear an identity that is still perfectly valid.
+  if (result.failureCategory === 'authorization-infrastructure') {
+    return Object.freeze({ kind: 'authorization-infrastructure' as const })
+  }
   return undefined
 }
 
@@ -97,8 +106,17 @@ export function createMountedStudySafetyPort(
       // by name rather than admitting only 'classifier' is deliberate — an
       // unrecognised category keeps writing, because losing a real safety stop
       // is the far worse direction to fail in.
+      //
+      // STUDY-A1-AUTH-INFRA-BOUNDARY-C adds the third name. An unreachable
+      // authorization verifier is the same shape of non-event: it runs before
+      // the classifier, so the learner's text was never judged, and a durable
+      // record would tell her parent she was stopped for something she wrote.
+      // Still excluded BY NAME, not by admitting only 'classifier' — an
+      // unrecognised category keeps writing, because losing a real safety stop
+      // is the far worse direction to fail in.
       const isSafetyIncident = result.failureCategory !== 'session-authorization' &&
-        result.failureCategory !== 'rate-limit'
+        result.failureCategory !== 'rate-limit' &&
+        result.failureCategory !== 'authorization-infrastructure'
       // sessionRef is what the A6-5-C durable stop lock keys on. Without it an
       // outage record stays visible to the parent but never locks the session,
       // so a learner stopped by a gateway outage could refresh straight back in.

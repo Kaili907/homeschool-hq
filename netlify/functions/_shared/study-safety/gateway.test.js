@@ -161,7 +161,13 @@ describe('Study safety gateway security and privacy', () => {
     })
     const spy = vi.spyOn(classifier, 'classify')
     const result = await handler(event())
-    expect(result.statusCode).toBe(status === 'denied' ? 403 : 503)
+    // STUDY-A1-AUTH-INFRA-BOUNDARY-C — both still fail closed and neither
+    // reaches the classifier, which is what this test is for. Only the
+    // unavailable arm's status moved, from 503 to 424 Failed Dependency: the
+    // verifier is an unreachable dependency of this request, not a safety
+    // service that went down, and the host must be able to tell them apart
+    // without reading the body.
+    expect(result.statusCode).toBe(status === 'denied' ? 403 : 424)
     expect(spy).not.toHaveBeenCalled()
   })
 

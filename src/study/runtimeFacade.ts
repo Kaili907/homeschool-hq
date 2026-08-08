@@ -168,6 +168,11 @@ function narrowedInterruption(value: unknown): StudyRuntimeInterruption | null {
   const keys = Object.keys(candidate)
   const kind = candidate.kind
   if (kind === 'rate-limit') return keys.length === 1 ? Object.freeze({ kind: 'rate-limit' as const }) : null
+  // STUDY-A1-AUTH-INFRA-BOUNDARY-C — reason-less, so the key count is the whole
+  // check, exactly as for 'rate-limit'. An extra field is still a rejection.
+  if (kind === 'authorization-infrastructure') {
+    return keys.length === 1 ? Object.freeze({ kind: 'authorization-infrastructure' as const }) : null
+  }
   if (kind !== 'session-authorization' || keys.length !== 2 || !Object.hasOwn(candidate, 'reason')) return null
   const reason = candidate.reason
   return isSessionAuthorizationReason(reason)

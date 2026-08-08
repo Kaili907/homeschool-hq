@@ -185,8 +185,16 @@ function createStudySafetyHandler(overrides = {}) {
         if (authorization?.status === 'denied') {
           await record('study_safety.request_unauthorized', 'warning', 'learner-not-authorized')
         }
+        // STUDY-A1-AUTH-INFRA-BOUNDARY-C — 424 Failed Dependency, and only for
+        // this exact case. The learner-authorization verifier is a dependency of
+        // this request that could not be reached, so nothing about this child was
+        // ever evaluated: the classifier runs strictly after this point. 503 said
+        // "this safety service is unavailable", which the host could only read as
+        // a safety-classifier outage and record as a learner safety incident.
+        // Every other 503 here — `gateway_disabled`, `service_not_ready`, the
+        // rate-limiter's own failures — keeps its status and its meaning.
         return authorization?.status === 'unavailable'
-          ? errorResponse(503, 'authorization_unavailable')
+          ? errorResponse(424, 'authorization_unavailable')
           : errorResponse(403, 'learner_not_authorized')
       }
 

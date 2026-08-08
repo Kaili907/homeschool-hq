@@ -21,9 +21,17 @@ export const STUDY_TUTOR_OUTPUT_PENDING_MESSAGE = 'I’m checking the Tutor repl
 // a session, or an adult account.
 export const STUDY_SESSION_UNAVAILABLE_MESSAGE = 'The Study session ended. Please ask your dad to sign in again. You are not in trouble.'
 export const STUDY_BUSY_RETRY_MESSAGE = 'Study is busy right now. Wait a moment, then try again.'
+// STUDY-A1-AUTH-INFRA-BOUNDARY-C — a technical interruption, worded as one. It
+// says Study is unavailable, not that the learner is: no status, no service, no
+// session, no adult account, and nothing about what she wrote or whether she is
+// in trouble. It does not say "busy", because the service is not shedding her
+// request, and it does not say the session ended, because it has not.
+export const STUDY_UNAVAILABLE_RETRY_MESSAGE = 'Study is not available right now. Wait a moment, then try again.'
 
 function interruptionMessage(interruption: StudyRuntimeInterruption): string {
-  return interruption.kind === 'rate-limit' ? STUDY_BUSY_RETRY_MESSAGE : STUDY_SESSION_UNAVAILABLE_MESSAGE
+  if (interruption.kind === 'rate-limit') return STUDY_BUSY_RETRY_MESSAGE
+  if (interruption.kind === 'authorization-infrastructure') return STUDY_UNAVAILABLE_RETRY_MESSAGE
+  return STUDY_SESSION_UNAVAILABLE_MESSAGE
 }
 
 /**
@@ -314,7 +322,17 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
           // typed is put back rather than made her retype it. It stays in this
           // component's state exactly as before and is never persisted. A
           // refused session is not retryable here, so its text stays discarded.
-          if (result.interruption.kind === 'rate-limit') setAnswer(transient)
+          //
+          // STUDY-A1-AUTH-INFRA-BOUNDARY-C — an unreachable authorization
+          // verifier is retryable in exactly the same way and for the same
+          // reason: the request never reached a verdict, so the next attempt is
+          // an ordinary first attempt. The lesson stays live because
+          // `sessionAuthorizationLost` below matches only 'session-authorization',
+          // and nothing durable was written to stand in the way of the retry.
+          if (
+            result.interruption.kind === 'rate-limit' ||
+            result.interruption.kind === 'authorization-infrastructure'
+          ) setAnswer(transient)
           setCheckingTutorSafety(false)
           setBusy(false)
           return
