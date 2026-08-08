@@ -2,7 +2,7 @@
 
 ## Canonical engine identifiers
 
-The version 1 identifiers are exactly:
+The version 2 identifiers are unchanged and exactly:
 
 | ID | Boundary |
 | --- | --- |

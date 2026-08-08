@@ -5,7 +5,7 @@
  * later Admin sessions; it does not authorize a request or persist a record.
  */
 
-export const ADMIN_CONTRACT_VERSION = 1 as const
+export const ADMIN_CONTRACT_VERSION = 2 as const
 export const ADMIN_CONSOLE_PATH = '/academy/admin' as const
 
 export const ADMIN_ROLES = ['owner', 'admin', 'viewer'] as const
@@ -202,58 +202,198 @@ export type IntegerMicros = string
 export const ADMIN_COST_KINDS = ['calculated', 'reconciled', 'unavailable'] as const
 export type AdminCostKind = (typeof ADMIN_COST_KINDS)[number]
 
-export interface AdminUsageCostRecord extends AdminVersionSnapshot {
+export const ADMIN_BILLING_DISPOSITIONS = [
+  'billable',
+  'not_billable',
+  'unknown',
+] as const
+export type AdminBillingDisposition =
+  (typeof ADMIN_BILLING_DISPOSITIONS)[number]
+
+export const ADMIN_HOUSEHOLD_ATTRIBUTION_STATES = [
+  'resolved',
+  'no_active_household',
+  'ambiguous',
+  'lookup_unavailable',
+] as const
+export type AdminHouseholdAttributionState =
+  (typeof ADMIN_HOUSEHOLD_ATTRIBUTION_STATES)[number]
+
+export const ADMIN_CURRENCIES = ['USD'] as const
+export type AdminCurrency = (typeof ADMIN_CURRENCIES)[number]
+
+/** Version applicability for a trusted provider execution. */
+export interface AdminUsageVersionSnapshot {
+  /** Every provider execution is attributable to one immutable deployed build. */
+  readonly appVersion: string
+  /** Null only when the calling engine has no independent version. */
+  readonly engineVersion: string | null
+  /** Null when the provider execution has no trusted curriculum context. */
+  readonly curriculumVersion: string | null
+}
+
+export interface AdminAppliedPriceSnapshot {
+  readonly rateId: string
+  readonly pricingCatalogVersion: string
+  readonly provider: string
+  readonly providerProductId: string
+  readonly logicalModelTier: string | null
+  readonly unit: AdminPricingUnit
+  readonly unitSize: number
+  readonly priceMicrosPerUnitSize: IntegerMicros
+  readonly currency: AdminCurrency
+  readonly effectiveFrom: string
+  readonly effectiveTo: string | null
+}
+
+export interface AdminUsageCostComponent {
+  readonly unit: AdminPricingUnit
+  readonly quantity: number
+  readonly rate: AdminAppliedPriceSnapshot
+  readonly calculatedCostMicros: IntegerMicros
+}
+
+export interface AdminUsageCostRecord extends AdminUsageVersionSnapshot {
   readonly schemaVersion: typeof ADMIN_CONTRACT_VERSION
   readonly usageId: string
   readonly occurredAt: string
-  readonly householdRef: string
+  /** Verified Supabase account/user reference; never a browser claim. */
+  readonly accountRef: string
+  readonly householdRef: string | null
+  readonly householdAttribution: AdminHouseholdAttributionState
   readonly learnerRef: string | null
   readonly engine: AdminEngineId
   readonly provider: string
-  readonly logicalModelTier: string
+  /** Billable provider product/SKU selected by trusted server policy. */
+  readonly providerProductId: string
+  /** Null for products, such as current TTS, with no Academy logical tier. */
+  readonly logicalModelTier: string | null
   /** Server/Admin-only. Never add this field to learner gateway responses. */
   readonly providerModelId: string
   /** Null means the provider did not return trustworthy usage; it never means zero. */
   readonly inputTokens: number | null
   readonly outputTokens: number | null
-  readonly cachedInputTokens: number | null
-  readonly ttsCharacters: number
+  readonly cachedInputReadTokens: number | null
+  readonly cachedInputWriteTokens: number | null
+  readonly ttsCharacters: number | null
   readonly requestCount: number
   readonly latencyMs: number
-  readonly status: AdminOperationalResult
+  readonly result: AdminOperationalResult
+  readonly resultReasonCode: string | null
+  readonly billingDisposition: AdminBillingDisposition
   /** Null when usage or an effective price is unavailable. */
   readonly costMicros: IntegerMicros | null
-  readonly currency: 'USD'
+  readonly currency: AdminCurrency
   readonly costKind: AdminCostKind
   readonly pricingCatalogVersion: string | null
-  readonly priceEffectiveAt: string | null
+  readonly costComponents: readonly AdminUsageCostComponent[]
+  /** Required only when costKind is reconciled. */
+  readonly reconciliationRef: string | null
 }
 
 export const ADMIN_PRICING_UNITS = [
   'input_token',
   'output_token',
-  'cached_input_token',
+  'cached_input_read_token',
+  'cached_input_write_token',
   'tts_character',
   'request',
 ] as const
 export type AdminPricingUnit = (typeof ADMIN_PRICING_UNITS)[number]
 
-export interface AdminProviderPrice {
+export interface AdminPricingCatalog {
   readonly schemaVersion: typeof ADMIN_CONTRACT_VERSION
   readonly pricingCatalogVersion: string
+  readonly currency: AdminCurrency
+  readonly effectiveFrom: string
+  readonly effectiveTo: string | null
+  readonly publishedAt: string
+  readonly sourceRef: string
+}
+
+export interface AdminProviderPrice {
+  readonly schemaVersion: typeof ADMIN_CONTRACT_VERSION
+  readonly rateId: string
+  readonly pricingCatalogVersion: string
   readonly provider: string
+  readonly providerProductId: string
   readonly providerModelId: string
-  readonly logicalModelTier: string
+  readonly logicalModelTier: string | null
   readonly unit: AdminPricingUnit
   readonly unitSize: number
   readonly priceMicrosPerUnitSize: IntegerMicros
-  readonly currency: 'USD'
+  readonly currency: AdminCurrency
   readonly effectiveFrom: string
   readonly effectiveTo: string | null
 }
 
+export const ADMIN_USAGE_IDEMPOTENCY_RESULTS = [
+  'created',
+  'replayed',
+  'reconciliation_conflict',
+] as const
+export type AdminUsageIdempotencyResult =
+  (typeof ADMIN_USAGE_IDEMPOTENCY_RESULTS)[number]
+
 export function isCanonicalIntegerMicros(value: string): value is IntegerMicros {
   return /^(0|[1-9]\d*)$/.test(value)
+}
+
+/** Shared cross-field checks for the version 2 usage/cost wire shape. */
+export function hasConsistentAdminUsageCost(
+  record: Pick<
+    AdminUsageCostRecord,
+    | 'householdRef'
+    | 'householdAttribution'
+    | 'learnerRef'
+    | 'billingDisposition'
+    | 'costMicros'
+    | 'costKind'
+    | 'pricingCatalogVersion'
+    | 'costComponents'
+    | 'currency'
+    | 'reconciliationRef'
+  >,
+): boolean {
+  if (
+    (record.householdAttribution === 'resolved') !==
+      (record.householdRef !== null) ||
+    (record.learnerRef !== null && record.householdRef === null)
+  ) {
+    return false
+  }
+
+  const hasCost =
+    record.costMicros !== null && isCanonicalIntegerMicros(record.costMicros)
+  if (record.costKind === 'unavailable') {
+    return (
+      record.billingDisposition !== 'not_billable' &&
+      record.costMicros === null &&
+      record.reconciliationRef === null &&
+      record.costComponents.length === 0
+    )
+  }
+  if (!hasCost || record.billingDisposition === 'unknown') return false
+
+  if (record.costKind === 'reconciled') {
+    return !!record.reconciliationRef && record.costComponents.length === 0
+  }
+  if (record.reconciliationRef !== null) return false
+
+  if (record.billingDisposition === 'not_billable') {
+    return record.costMicros === '0' && record.costComponents.length === 0
+  }
+
+  if (record.costMicros !== '0' && record.costComponents.length === 0) {
+    return false
+  }
+  return record.costComponents.every(
+    (component) =>
+      component.unit === component.rate.unit &&
+      component.rate.currency === record.currency &&
+      component.rate.pricingCatalogVersion === record.pricingCatalogVersion &&
+      isCanonicalIntegerMicros(component.calculatedCostMicros),
+  )
 }
 
 export const ADMIN_AUDIT_ACTIONS = [

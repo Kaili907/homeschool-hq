@@ -1,21 +1,30 @@
 import { describe, expect, it } from 'vitest'
 import {
+  ADMIN_BILLING_DISPOSITIONS,
+  ADMIN_CONTRACT_VERSION,
+  ADMIN_COST_KINDS,
+  ADMIN_CURRENCIES,
   ADMIN_ENGINE_IDS,
   ADMIN_HEALTH_STATES,
+  ADMIN_HOUSEHOLD_ATTRIBUTION_STATES,
   ADMIN_OPERATIONAL_CAPABILITIES,
   ADMIN_OPERATIONAL_RESULTS,
   ADMIN_OWNER_CAPABILITIES,
+  ADMIN_PRICING_UNITS,
   ADMIN_PROHIBITED_TELEMETRY_FIELDS,
   ADMIN_READ_CAPABILITIES,
   ADMIN_ROLE_CAPABILITIES,
   ADMIN_ROLES,
   ADMIN_TELEMETRY_METADATA_KEYS,
+  ADMIN_USAGE_IDEMPOTENCY_RESULTS,
+  hasConsistentAdminUsageCost,
   hasAdminCapability,
   isCanonicalIntegerMicros,
 } from './contracts'
 
 describe('ADMIN-0 shared vocabulary', () => {
   it('freezes the canonical roles, engines, health states, and result states', () => {
+    expect(ADMIN_CONTRACT_VERSION).toBe(2)
     expect(ADMIN_ROLES).toEqual(['owner', 'admin', 'viewer'])
     expect(ADMIN_ENGINE_IDS).toEqual([
       'tutor',
@@ -43,6 +52,89 @@ describe('ADMIN-0 shared vocabulary', () => {
       'validation_error',
       'safety_stop',
     ])
+  })
+
+  it('keeps provider accounting lossless and explicit', () => {
+    expect(ADMIN_PRICING_UNITS).toEqual([
+      'input_token',
+      'output_token',
+      'cached_input_read_token',
+      'cached_input_write_token',
+      'tts_character',
+      'request',
+    ])
+    expect(ADMIN_COST_KINDS).toEqual([
+      'calculated',
+      'reconciled',
+      'unavailable',
+    ])
+    expect(ADMIN_BILLING_DISPOSITIONS).toEqual([
+      'billable',
+      'not_billable',
+      'unknown',
+    ])
+    expect(ADMIN_HOUSEHOLD_ATTRIBUTION_STATES).toEqual([
+      'resolved',
+      'no_active_household',
+      'ambiguous',
+      'lookup_unavailable',
+    ])
+    expect(ADMIN_CURRENCIES).toEqual(['USD'])
+    expect(ADMIN_USAGE_IDEMPOTENCY_RESULTS).toEqual([
+      'created',
+      'replayed',
+      'reconciliation_conflict',
+    ])
+  })
+
+  it('enforces identity and cost-kind cross-field invariants', () => {
+    const calculatedZero = {
+      householdRef: 'household-1',
+      householdAttribution: 'resolved' as const,
+      learnerRef: null,
+      billingDisposition: 'billable' as const,
+      costMicros: '0',
+      costKind: 'calculated' as const,
+      pricingCatalogVersion: null,
+      costComponents: [],
+      currency: 'USD' as const,
+      reconciliationRef: null,
+    }
+    expect(hasConsistentAdminUsageCost(calculatedZero)).toBe(true)
+    expect(
+      hasConsistentAdminUsageCost({
+        ...calculatedZero,
+        householdRef: null,
+        householdAttribution: 'ambiguous',
+      }),
+    ).toBe(true)
+    expect(
+      hasConsistentAdminUsageCost({
+        ...calculatedZero,
+        householdRef: null,
+      }),
+    ).toBe(false)
+    expect(
+      hasConsistentAdminUsageCost({
+        ...calculatedZero,
+        billingDisposition: 'unknown',
+        costKind: 'unavailable',
+        costMicros: null,
+      }),
+    ).toBe(true)
+    expect(
+      hasConsistentAdminUsageCost({
+        ...calculatedZero,
+        billingDisposition: 'unknown',
+      }),
+    ).toBe(false)
+    expect(
+      hasConsistentAdminUsageCost({
+        ...calculatedZero,
+        billingDisposition: 'not_billable',
+        costMicros: '1',
+      }),
+    ).toBe(false)
   })
 
   it('makes role capability inheritance explicit', () => {
