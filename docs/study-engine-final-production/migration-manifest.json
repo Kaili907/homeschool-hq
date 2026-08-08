@@ -123,6 +123,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "c2_operations_contract_version:0->1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260808120000",
+      "filename": "20260808120000_academy_study_actor_bound_session_verification.sql",
+      "sha256": "21462128be7f207cd31e60620acc1ec125f61e2e62fa2c41bb7272a764750f83",
+      "dependency": "20260806140000_academy_study_c2_operations_contract.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "actor_binding_version:0->1",
+      "supersessionStatus": "current"
     }
   ]
 }

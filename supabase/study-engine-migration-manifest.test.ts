@@ -75,10 +75,12 @@ const CUSTODY_LF_SHA256: Readonly<Record<string, string>> = {
     'b690c634b9c629149d570c9ffc5e1664b060be1d9f45f76cb461503de2c6f3b6',
   '20260806140000_academy_study_c2_operations_contract.sql':
     '8448c6d1d6eec2247a913cfb18bd21b8fd9f6793bab5acd81b414878e5333baf',
+  '20260808120000_academy_study_actor_bound_session_verification.sql':
+    '21462128be7f207cd31e60620acc1ec125f61e2e62fa2c41bb7272a764750f83',
 }
 
 describe('migration byte custody', () => {
-  it('holds all twelve migrations byte-for-byte, independently of the manifest', async () => {
+  it('holds every migration byte-for-byte, independently of the manifest', async () => {
     const files = (await readdir(migrationDirectory))
       .filter((name) => /^\d{14}_.+\.sql$/.test(name))
       .sort()
@@ -177,15 +179,16 @@ describe('Study migration manifest consistency', () => {
   // floor does not hold". Both forms would accept a hosted-applied member demoted out
   // of the floor in exchange for a forward migration; only naming the members refuses
   // that trade. Each is pinned to not-applied-hosted individually, because the
-  // executable classification admits no other status and a second executable is a
-  // second place for one to go wrong.
-  it('leaves the two never-applied migrations executable and pending', async () => {
+  // executable classification admits no other status and each further executable is a
+  // further place for one to go wrong.
+  it('leaves the never-applied migrations executable and pending', async () => {
     const manifest = await loadManifest()
     const executable = manifest.migrations.filter((entry) => entry.classification === 'executable')
     expect(executable.map((entry) => entry.filename))
       .toEqual([
         '20260806120000_academy_study_in_app_receipt_timestamp.sql',
         '20260806140000_academy_study_c2_operations_contract.sql',
+        '20260808120000_academy_study_actor_bound_session_verification.sql',
       ])
     for (const entry of executable) {
       expect(entry.applicationStatus, entry.filename).toBe('not-applied-hosted')
