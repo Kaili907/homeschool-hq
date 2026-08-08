@@ -80,11 +80,34 @@ export const STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT = Object.freeze({
  * writing a literal of the right shape. The only expressions of that type are
  * the ones the parser returned.
  *
- * STILL OPEN, and deliberately. A brand raises the cost of the bypass; it does
- * not remove it, because a determined wrapper can still write
- * `as unknown as ValidatedStudyTutorResult`. What has changed is that doing so
- * is now an explicit, greppable, reviewable lie rather than an assignment that
- * reads as correct. The obligation not to write it lands with the wrapper.
+ * STILL OPEN, and deliberately.
+ *
+ * H4 CORRECTION. H3 recorded the residual bypass as `as unknown as
+ * ValidatedStudyTutorResult`, i.e. a double assertion. That overstated what the
+ * brand costs an attacker, and the independent review was right to say so.
+ * Measured against this tree rather than reasoned about: ONE assertion is
+ * enough, from any of the three starting points a wrapper actually has —
+ *
+ *   raw as ValidatedStudyTutorResult                  // its transport's output
+ *   unknownValue as ValidatedStudyTutorResult         // straight from unknown
+ *   { status: 'quarantined', reasonCode: 'x' } as ValidatedStudyTutorResult
+ *
+ * — and all three compile clean under `strict`. That is not a hole in the
+ * brand; it is what a type assertion IS. TypeScript cannot prevent a programmer
+ * from asserting, and a contract that claimed otherwise would be inviting a
+ * wrapper author to trust a guarantee that was never there.
+ *
+ * So the honest statement of what the brand buys is narrower than H3's, and
+ * still worth having: it removes the bypasses that DO NOT look like one. A
+ * wrapper can no longer satisfy `submit` by declaring its transport's return
+ * type, or by writing an object literal of the right shape — the two mistakes
+ * that read as correct code and pass review. What remains is an explicit,
+ * greppable assertion that a reviewer can see and ask about.
+ *
+ * The obligation is therefore unchanged and lands with the wrapper: no
+ * assertion to `ValidatedStudyTutorResult`, in any form. The admissible
+ * crossing is the one at the top of this comment, and it is shorter to write
+ * than the bypass.
  */
 export const STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT = Object.freeze({
   id: 'WRAPPER_LANDING_REQUIREMENT',
@@ -101,6 +124,18 @@ export const STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT = Object.freeze({
    */
   contractEnforcement: 'validated-result-brand',
   contractEnforcementCard: 'STUDY-A1-TUTOR-CONTRACT-H3',
+  /**
+   * What the brand does NOT stop, recorded as data so a wrapper card reads it
+   * rather than inferring a stronger guarantee from prose. H3 said the residual
+   * cost was a double assertion; it is a single one.
+   */
+  residualBypass: 'single-explicit-type-assertion',
+  residualBypassCorrectedBy: 'STUDY-A1-TUTOR-CONTRACT-H4',
+  /** The two mistakes the brand DOES remove — the ones that read as correct. */
+  removesBypasses: Object.freeze([
+    'declaring-the-transport-return-type-as-the-contract-type',
+    'object-literal-of-the-right-shape',
+  ]),
 } as const)
 
 /** Both, for a wrapper card to enumerate rather than rediscover. */

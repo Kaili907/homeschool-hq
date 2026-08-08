@@ -121,6 +121,85 @@ const SESSION_AUTHORIZATION_REASONS: ReadonlySet<string> =
     'study-session-rejected',
   ])
 
+/**
+ * STUDY-A1-TUTOR-CONTRACT-H4 — the interruption set, derived from the type
+ * rather than remembered.
+ *
+ * `narrowedInterruption` used to enumerate two kinds by hand. When
+ * STUDY-A1-AUTH-INFRA-BOUNDARY added a third — `authorization-infrastructure`,
+ * raised when the gateway's learner-authorization verifier cannot be reached —
+ * nothing here noticed, and the parser turned a valid Study interruption into
+ * `null`. `null` is not a silent failure at this boundary; it is a REJECTION,
+ * so `acceptStudyTutorResult` converted an honest "the verifier was
+ * unreachable, retry" into `quarantined` with a contract-parse failure code.
+ * The host would then have shown a learner a structural fault where the true
+ * state was a retryable outage — the very confusion the auth-infra card split
+ * the kinds apart to prevent.
+ *
+ * A hand-written list is what allowed it, so this stops being hand-written. The
+ * tuple below is the single canonical runtime statement of the kind set, and
+ * the two assertions under it make `StudyRuntimeInterruption` its authority in
+ * BOTH directions: a kind added to the union and not to the tuple fails to
+ * compile, and a kind in the tuple that the union does not declare fails to
+ * compile. Neither list can drift, because there is only one list and the type
+ * audits it.
+ *
+ * It lives here rather than beside the type in src/study/types.ts deliberately.
+ * That module is pure types today — it emits nothing — and giving it a runtime
+ * value would put a new module in the App's bundle for every consumer of a type
+ * import. This card owns src/study/contracts/tutor/** and changes nothing
+ * outside it. The drift protection that proximity to the type would have bought
+ * is bought instead by the assertions, which read the type directly.
+ */
+export const STUDY_TUTOR_INTERRUPTION_KINDS = Object.freeze([
+  'session-authorization',
+  'rate-limit',
+  'authorization-infrastructure',
+] as const)
+
+type InterruptionKind = StudyRuntimeInterruption['kind']
+
+/**
+ * The kinds whose entire value is the kind — no reason, no payload — computed
+ * from the union rather than listed. If a field is ever added to `rate-limit`
+ * or `authorization-infrastructure`, that kind drops out of this type and the
+ * assertion below fails, so the generic single-key branch can never silently
+ * start accepting a member that has since grown a field.
+ */
+type BareInterruptionKind = {
+  [K in InterruptionKind]: keyof Extract<StudyRuntimeInterruption, { kind: K }> extends 'kind' ? K : never
+}[InterruptionKind]
+
+const BARE_INTERRUPTION_KINDS = Object.freeze(['rate-limit', 'authorization-infrastructure'] as const)
+
+/** Compiles only when its argument is `never`; the drift alarm. */
+type Exhaustive<T extends never> = T
+
+/*
+ * The four aliases below are never referenced, and that is what they are for:
+ * each one is a claim that its `Exclude` is empty, checked when the file is
+ * typechecked. Nothing reads them at runtime and nothing should; deleting one
+ * silently removes a guard, so each names precisely what it would catch.
+ */
+/** A kind the union declares and the tuple omits. */
+type _EveryKindEnumerated =
+  Exhaustive<Exclude<InterruptionKind, (typeof STUDY_TUTOR_INTERRUPTION_KINDS)[number]>>
+/** A kind the tuple invents and the union does not declare. */
+type _NoKindInvented =
+  Exhaustive<Exclude<(typeof STUDY_TUTOR_INTERRUPTION_KINDS)[number], InterruptionKind>>
+/** A payload-free kind the bare tuple omits. */
+type _EveryBareKindEnumerated =
+  Exhaustive<Exclude<BareInterruptionKind, (typeof BARE_INTERRUPTION_KINDS)[number]>>
+/** A kind the bare tuple claims is payload-free when the union gives it fields. */
+type _NoBareKindInvented =
+  Exhaustive<Exclude<(typeof BARE_INTERRUPTION_KINDS)[number], BareInterruptionKind>>
+
+const BARE_INTERRUPTION_KIND_SET: ReadonlySet<string> = new Set(BARE_INTERRUPTION_KINDS)
+
+function isBareInterruptionKind(value: string): value is BareInterruptionKind {
+  return BARE_INTERRUPTION_KIND_SET.has(value)
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
@@ -146,19 +225,38 @@ function hasExactKeys(candidate: Record<string, unknown>, expected: readonly str
  * unrecognised kind, an unrecognised reason, a missing reason and any extra
  * field are all rejected.
  *
+ * Every kind the union declares round-trips; nothing else does. The membership
+ * test is `BARE_INTERRUPTION_KIND_SET`, derived above from the type, so adding
+ * a payload-free kind to `StudyRuntimeInterruption` is enough to make it
+ * round-trip here — and adding one that carries a payload fails to compile
+ * rather than falling through to the single-key branch.
+ *
  * Deliberately re-stated here rather than shared with the preview facade, whose
  * copy is module-private and belongs to a runtime this contract must not know
  * about.
+ *
+ * The single-read rule from the module header still holds exactly: `kind` and
+ * `reason` are each read once, and the value REBUILT is the value that was
+ * CHECKED, so an accessor cannot answer the check with one string and hand the
+ * rebuild another.
  */
 function narrowedInterruption(value: unknown): StudyRuntimeInterruption | null {
   if (!isRecord(value)) return null
   const keys = Reflect.ownKeys(value)
   const kind = value.kind
-  if (kind === 'rate-limit') return keys.length === 1 ? Object.freeze({ kind: 'rate-limit' as const }) : null
+  if (typeof kind !== 'string') return null
+
+  // Payload-free kinds: the kind IS the whole value, so an exact one-key shape
+  // is the entire check. `rate-limit` and `authorization-infrastructure` are
+  // both here, and a future one arrives without touching this function.
+  if (isBareInterruptionKind(kind)) {
+    return keys.length === 1 ? Object.freeze({ kind }) : null
+  }
+
   if (kind !== 'session-authorization' || keys.length !== 2 || !Object.hasOwn(value, 'reason')) return null
   const reason = value.reason
   return typeof reason === 'string' && SESSION_AUTHORIZATION_REASONS.has(reason)
-    ? Object.freeze({ kind: 'session-authorization' as const, reason: reason as 'adult-authentication-rejected' | 'study-session-rejected' })
+    ? Object.freeze({ kind, reason: reason as 'adult-authentication-rejected' | 'study-session-rejected' })
     : null
 }
 

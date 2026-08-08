@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import { parseStudyTutorRef } from './refs'
 import {
@@ -228,6 +231,40 @@ describe('wrapper landing requirements stay open', () => {
     expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.status).toBe('open')
     expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.contractEnforcement).toBe('validated-result-brand')
     expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.contractEnforcementCard).toBe('STUDY-A1-TUTOR-CONTRACT-H3')
+  })
+
+  // H4 Phase 10. H3 documented the residual bypass as a DOUBLE assertion, which
+  // overstated what the brand costs. Measured on this tree, a single assertion
+  // compiles from the transport's output, from `unknown`, and from an object
+  // literal. The correction is pinned as data so the weaker, comfortable
+  // sentence cannot come back.
+  it('states the residual bypass as one assertion, not two', () => {
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.residualBypass)
+      .toBe('single-explicit-type-assertion')
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.residualBypassCorrectedBy)
+      .toBe('STUDY-A1-TUTOR-CONTRACT-H4')
+    // Still open: naming the bypass precisely is not the same as closing it,
+    // and TypeScript cannot close it at all.
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.status).toBe('open')
+  })
+
+  it('names the two bypasses the brand does remove, so the claim stays narrow', () => {
+    expect([...STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.removesBypasses]).toEqual([
+      'declaring-the-transport-return-type-as-the-contract-type',
+      'object-literal-of-the-right-shape',
+    ])
+  })
+
+  it('does not claim in prose that a double assertion is required', () => {
+    // The overstatement lived in a comment, so a comment is where it is held
+    // shut. `as unknown as` must not reappear as the stated cost of the bypass.
+    const source = readFileSync(
+      join(dirname(fileURLToPath(import.meta.url)), 'wrapperObligations.ts'),
+      'utf8',
+    )
+    const doubleAssertion = new RegExp(`as${'\\s'}+unknown${'\\s'}+as${'\\s'}+ValidatedStudyTutorResult`)
+    expect(source).not.toMatch(doubleAssertion)
+    expect(source).toMatch(/ONE assertion is\s+\* enough/)
   })
 
   it('leaves the async launch requirement exactly where H2 left it', () => {

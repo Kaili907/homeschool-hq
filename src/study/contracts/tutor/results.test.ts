@@ -262,6 +262,11 @@ describe('validator integrity', () => {
   it('exports no way to mint a validated result except by parsing', () => {
     const exported = Object.keys(resultsModule).sort()
     expect(exported).toEqual([
+      // H4 adds the canonical interruption-kind tuple. It is inert data — a
+      // frozen list of strings the parser and its tests both read — and it
+      // cannot mint anything: there is still no exported value that turns a
+      // result into a validated one without going through a parser.
+      'STUDY_TUTOR_INTERRUPTION_KINDS',
       'STUDY_TUTOR_REASON_CODE_MAX_LENGTH',
       'STUDY_TUTOR_RESULT_KEYS',
       'STUDY_TUTOR_UNPARSED_RESULT_REASON_CODE',

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { parseStudyTutorLearnerText } from './learnerText'
 import { STUDY_TUTOR_REF_MAX_LENGTH, isStudyTutorRef, parseStudyTutorRef } from './refs'
 import type { StudyTutorLaunch, StudyTutorTurn } from './runtime'
 
@@ -46,6 +47,25 @@ import type { StudyTutorLaunch, StudyTutorTurn } from './runtime'
  * compile the day the brand was dropped.
  */
 const UNVALIDATED = 'study-session:9f2c1'
+
+/**
+ * STUDY-A1-TUTOR-CONTRACT-H4 — the composition repair.
+ *
+ * These pins were written against the sibling H3 line, where
+ * `transientLearnerText` was still a bare `string` and `'ready'` could be
+ * written at it directly. Converged with the production H3 line the field is
+ * `StudyTutorLearnerText`, so the literal stops compiling at all six turn
+ * fixtures below.
+ *
+ * Repaired by validating once, NOT by a second `@ts-expect-error` on those
+ * lines. A directive there would have been satisfied by the learner-text error
+ * alone, and TypeScript would then have reported nothing when the ref field
+ * beside it lost its brand — the suppression would have consumed the very
+ * signal each pin exists to raise, and all seven would have gone on passing
+ * against an unbranded `string`. One validated constant leaves each
+ * `@ts-expect-error` with exactly one error to answer for: its own field.
+ */
+const LEARNER_TEXT = parseStudyTutorLearnerText('ready')!
 
 const SESSION = parseStudyTutorRef('study-session:9f2c1')!
 const REQUEST = parseStudyTutorRef('study-turn:0d7f3a1e-4b62-4c19-9f88-2a1c5e6d7b03')!
@@ -95,7 +115,7 @@ describe('every Tutor reference field is pinned to the validated type (H3)', () 
       subject: 'math',
       skillRef: SKILL,
       taskType: 'guided-practice',
-      transientLearnerText: 'ready',
+      transientLearnerText: LEARNER_TEXT,
       expectedAnswer: 'ready',
       occurredAt: '2026-08-01T14:00:00.000Z',
       learnerLocalDate: '2026-08-01',
@@ -117,7 +137,7 @@ describe('every Tutor reference field is pinned to the validated type (H3)', () 
       subject: 'math',
       skillRef: SKILL,
       taskType: 'guided-practice',
-      transientLearnerText: 'ready',
+      transientLearnerText: LEARNER_TEXT,
       expectedAnswer: 'ready',
       occurredAt: '2026-08-01T14:00:00.000Z',
       learnerLocalDate: '2026-08-01',
@@ -136,7 +156,7 @@ describe('every Tutor reference field is pinned to the validated type (H3)', () 
       subject: 'math',
       skillRef: SKILL,
       taskType: 'guided-practice',
-      transientLearnerText: 'ready',
+      transientLearnerText: LEARNER_TEXT,
       expectedAnswer: 'ready',
       occurredAt: '2026-08-01T14:00:00.000Z',
       learnerLocalDate: '2026-08-01',
@@ -155,7 +175,7 @@ describe('every Tutor reference field is pinned to the validated type (H3)', () 
       subject: 'math',
       skillRef: SKILL,
       taskType: 'guided-practice',
-      transientLearnerText: 'ready',
+      transientLearnerText: LEARNER_TEXT,
       expectedAnswer: 'ready',
       occurredAt: '2026-08-01T14:00:00.000Z',
       learnerLocalDate: '2026-08-01',
@@ -174,7 +194,7 @@ describe('every Tutor reference field is pinned to the validated type (H3)', () 
       // @ts-expect-error an unvalidated string is not a StudyTutorRef
       skillRef: UNVALIDATED,
       taskType: 'guided-practice',
-      transientLearnerText: 'ready',
+      transientLearnerText: LEARNER_TEXT,
       expectedAnswer: 'ready',
       occurredAt: '2026-08-01T14:00:00.000Z',
       learnerLocalDate: '2026-08-01',
@@ -217,7 +237,7 @@ describe('a validated reference remains assignable to every pinned field (H3)', 
       subject: 'math',
       skillRef: SKILL,
       taskType: 'guided-practice',
-      transientLearnerText: 'ready',
+      transientLearnerText: LEARNER_TEXT,
       expectedAnswer: 'ready',
       occurredAt: '2026-08-01T14:00:00.000Z',
       learnerLocalDate: '2026-08-01',
