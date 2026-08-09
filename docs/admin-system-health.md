@@ -31,6 +31,9 @@ codes with vetted UI mappings. Unknown codes render generic copy.
   old. Older evidence is `stale`; absence is `no_evidence`.
 - Observation time comes from trusted event timestamps. Projection generation
   time is displayed separately and is never a health observation.
+- Every health window is at most 7 days, below the shortest 30-day operational
+  retention. The TEL-FOUNDATION aggregate exposes explicit retention
+  completeness for the future raw-reader replacement.
 
 ## Deterministic thresholds
 

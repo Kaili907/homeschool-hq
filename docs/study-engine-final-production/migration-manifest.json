@@ -143,6 +143,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-safety-operations-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260809120000",
+      "filename": "20260809120000_academy_operational_telemetry_foundation.sql",
+      "sha256": "5646d92084f85dd1a5b5463cff3f97970dc1e9017c85a809443266d8dcb1c23d",
+      "dependency": "20260808123000_academy_admin_safety_operations.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-operational-telemetry-foundation-v1",
+      "supersessionStatus": "current"
     }
   ]
 }
