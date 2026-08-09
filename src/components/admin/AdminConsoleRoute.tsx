@@ -16,10 +16,17 @@ import {
   readAdminCurriculumValidation,
 } from '../../admin/curriculum-validation/httpSource'
 import type { CurriculumValidationReadModel } from '../../admin/curriculum-validation/model'
+import {
+  readAdminEnginePerformance,
+  type EnginePerformanceReadState,
+} from '../../admin/engine-performance/httpSource'
+import type { AdminEngineId } from '../../admin/contracts'
+import type { EnginePerformanceWindowPreset } from '../../admin/enginePerformanceModel'
 import { AdminConsole } from './AdminConsole'
 import { LearnerAnalytics } from './LearnerAnalytics'
 import { AdminSafetyOperations } from './AdminSafetyOperations'
 import { CurriculumValidationDashboard } from './CurriculumValidationDashboard'
+import { EnginePerformanceDashboard } from './EnginePerformanceDashboard'
 
 export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
 
@@ -62,6 +69,11 @@ export function AdminConsoleRoute() {
   const [pathname, setPathname] = useState(() => window.location.pathname)
   const [range, setRange] = useState<OverviewRange>({ kind: 'preset', preset: 'today' })
   const [validationModel, setValidationModel] = useState<CurriculumValidationReadModel | null>(null)
+  const [engineState, setEngineState] = useState<EnginePerformanceReadState>({ status: 'loading' })
+  const [selectedEngine, setSelectedEngine] = useState<AdminEngineId>('tutor')
+  const [engineWindow, setEngineWindow] = useState<EnginePerformanceWindowPreset>('30d')
+  const [selectedEngineVersion, setSelectedEngineVersion] = useState<string | null>(null)
+  const [engineRetry, setEngineRetry] = useState(0)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
   const section = adminRouteSection(pathname) ?? 'unknown'
@@ -85,6 +97,28 @@ export function AdminConsoleRoute() {
     })
     return () => controller.abort()
   }, [authorization, section])
+
+  useEffect(() => {
+    if (section !== 'engines') return
+    if (
+      authorizationState.status !== 'authorized'
+      || !authorizationState.capabilities.includes('engines:read')
+    ) {
+      setEngineState({ status: 'unauthorized' })
+      return
+    }
+    const controller = new AbortController()
+    setEngineState({ status: 'loading' })
+    void readAdminEnginePerformance({
+      window: engineWindow,
+      engine: selectedEngine,
+      engineVersion: selectedEngineVersion,
+      signal: controller.signal,
+    }).then((state) => {
+      if (!controller.signal.aborted) setEngineState(state)
+    })
+    return () => controller.abort()
+  }, [authorizationState, section, selectedEngine, engineWindow, selectedEngineVersion, engineRetry])
 
   useEffect(() => {
     const onPopState = () => setPathname(window.location.pathname)
@@ -121,6 +155,7 @@ export function AdminConsoleRoute() {
           <nav aria-label="Admin section navigation" className="flex flex-wrap gap-3 text-sm">
             <button type="button" onClick={() => navigate('overview')}>Overview</button>
             <button type="button" onClick={() => navigate('learners')}>Learners</button>
+            <button type="button" onClick={() => navigate('engines')}>Engines</button>
             <button type="button" onClick={() => navigate('safety')}>Safety</button>
             <button type="button" onClick={() => navigate('curriculum')}>Curriculum</button>
           </nav>
@@ -131,6 +166,24 @@ export function AdminConsoleRoute() {
           <LearnerAnalytics state={hasCapability(authorization, 'learners:read')
             ? { status: 'error', message: 'The authorized learner projection is not available.' }
             : { status: 'unauthorized', reasonCode: 'learners_read_required' }} />
+        )}
+        {section === 'engines' && (
+          <EnginePerformanceDashboard
+            state={hasCapability(authorization, 'engines:read') ? engineState : { status: 'unauthorized' }}
+            selectedEngine={selectedEngine}
+            selectedWindow={engineWindow}
+            selectedVersion={selectedEngineVersion}
+            onEngineChange={(engine) => {
+              setSelectedEngine(engine)
+              setSelectedEngineVersion(null)
+            }}
+            onWindowChange={(window) => {
+              setEngineWindow(window)
+              setSelectedEngineVersion(null)
+            }}
+            onVersionChange={setSelectedEngineVersion}
+            onRetry={() => setEngineRetry((value) => value + 1)}
+          />
         )}
         {section === 'safety' && (
           <AdminSafetyOperations
@@ -156,7 +209,7 @@ export function AdminConsoleRoute() {
             model={validationModel}
           />
         )}
-        {!['learners', 'safety', 'curriculum', 'curriculum-validation'].includes(section) && (
+        {!['learners', 'engines', 'safety', 'curriculum', 'curriculum-validation'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>

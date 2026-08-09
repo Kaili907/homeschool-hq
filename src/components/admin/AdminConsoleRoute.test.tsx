@@ -7,6 +7,8 @@ describe('Admin Console integration route', () => {
     ['/academy/admin', 'overview'],
     ['/academy/admin/', 'overview'],
     ['/academy/admin/learners', 'learners'],
+    ['/academy/admin/engines', 'engines'],
+    ['/academy/admin/engines/tutor', 'engines'],
     ['/academy/admin/safety/events/one', 'safety'],
     ['/academy/admin/curriculum', 'curriculum'],
     ['/academy/admin/curriculum/validation', 'curriculum-validation'],

@@ -1,0 +1,29 @@
+.engine-performance { display: grid; gap: 1.5rem; color: #0f172a; }
+.engine-performance__header, .engine-performance__section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.engine-performance__header h1 { margin: .2rem 0 .5rem; font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.engine-performance__header a { border: 1px solid #94a3b8; border-radius: .65rem; padding: .7rem 1rem; background: white; font-weight: 700; }
+.engine-performance__eyebrow { margin: 0; color: #475569; font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.engine-performance__notice, .engine-performance__empty { border: 1px solid #f59e0b; border-radius: .75rem; background: #fffbeb; padding: 1rem; }
+.engine-performance__filters { display: flex; flex-wrap: wrap; gap: 1rem; border-radius: .85rem; background: #e2e8f0; padding: 1rem; }
+.engine-performance__filters label { display: grid; gap: .35rem; min-width: 11rem; font-weight: 700; }
+.engine-performance__filters select { min-height: 2.75rem; border: 1px solid #94a3b8; border-radius: .5rem; background: white; padding: .5rem; }
+.engine-performance__engine-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .65rem; }
+.engine-performance__engine-list button { display: grid; gap: .2rem; min-height: 4.5rem; border: 1px solid #cbd5e1; border-radius: .75rem; background: white; padding: .75rem; text-align: left; }
+.engine-performance__engine-list button[aria-current="page"] { border-color: #2563eb; box-shadow: 0 0 0 2px #bfdbfe; }
+.engine-performance__engine-list span { color: #64748b; font-size: .75rem; }
+.engine-performance__metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+.engine-performance__metric, .engine-performance__panel { border: 1px solid #cbd5e1; border-radius: .85rem; background: white; padding: 1rem; }
+.engine-performance__metric > strong { display: block; margin: .65rem 0; font-size: 1.5rem; }
+.engine-performance__metric.is-insufficient_evidence { border-color: #f59e0b; }
+.engine-performance__metric.is-unavailable { background: #f8fafc; color: #475569; }
+.engine-performance__metric dl { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; font-size: .8rem; }
+.engine-performance__metric dl div { display: grid; gap: .1rem; }
+.engine-performance__metric dt { color: #64748b; }
+.engine-performance__panel ul { display: grid; gap: .75rem; padding-left: 1.2rem; }
+.engine-performance__panel li span, .engine-performance__panel li small { display: block; color: #475569; }
+.engine-performance__table-wrap { overflow-x: auto; }
+.engine-performance table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+.engine-performance caption { padding: .5rem; text-align: left; font-weight: 700; }
+.engine-performance th, .engine-performance td { border-bottom: 1px solid #e2e8f0; padding: .7rem; text-align: left; }
+.engine-performance__method { border-top: 1px solid #cbd5e1; padding-top: 1rem; color: #475569; font-size: .9rem; }
+@media (max-width: 640px) { .engine-performance__header, .engine-performance__section-heading { display: grid; } }
