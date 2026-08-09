@@ -10,10 +10,15 @@ const READ_TIMEOUT_MS = 5_000
 const ACTIONS = new Set(ADMIN_AUDIT_ACTIONS)
 const RESOURCE_TYPES = new Set(ADMIN_AUDIT_RESOURCE_TYPES)
 const ROLES = new Set(ADMIN_ROLES)
-const VALUE_KEYS = new Set([
+const LEGACY_VALUE_KEYS = new Set([
   'value', 'state', 'enabled', 'limit', 'quota', 'model_tier', 'model_tiers',
   'voice', 'version', 'revision', 'role', 'status', 'release',
 ])
+const ENTITY_VALUE_KEYS = new Set([
+  'entity_ref', 'entity_type', 'draft_revision', 'position', 'status', 'tombstoned', 'digest',
+])
+const COLLABORATOR_VALUE_KEYS = new Set(['collaborator_ref', 'role', 'status'])
+const DIGEST = /^[0-9a-f]{64}$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$/
 const TOKEN = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
@@ -49,24 +54,52 @@ function safeIso(value) {
   return date.toISOString()
 }
 
-function safeValue(value) {
+function isSafeToken(value) {
+  return typeof value === 'string' && value.length <= 128 && TOKEN.test(value)
+    && !value.includes('://')
+    && !/(?:^|[._:/-])(?:sk|pk|secret|credential|bearer|token|password|jwt|api.?key)(?:[._:/-]|$)|^eyj/i.test(value)
+}
+
+function curriculumValueKeys(action) {
+  if (action.startsWith('curriculum_entity.')) return ENTITY_VALUE_KEYS
+  if (action.startsWith('curriculum_draft.collaborator.')) return COLLABORATOR_VALUE_KEYS
+  return null
+}
+
+function isSafeCurriculumValue(key, value) {
+  if (['entity_ref', 'entity_type', 'collaborator_ref', 'role', 'status'].includes(key)) {
+    return isSafeToken(value)
+  }
+  if (key === 'draft_revision' || key === 'position') {
+    return typeof value === 'number' && Number.isInteger(value)
+      && value >= 0 && value <= 1_000_000_000_000
+  }
+  if (key === 'tombstoned') return typeof value === 'boolean'
+  return key === 'digest' && typeof value === 'string' && DIGEST.test(value)
+}
+
+function safeValue(action, value) {
   if (value === null) return null
   if (!value || typeof value !== 'object' || Array.isArray(value)) fail()
   const keys = Object.keys(value)
-  if (keys.length < 1 || keys.length > 8 || keys.some((key) => !VALUE_KEYS.has(key))) fail()
+  const curriculumKeys = curriculumValueKeys(action)
+  const allowedKeys = curriculumKeys ?? LEGACY_VALUE_KEYS
+  if (keys.length < 1 || keys.length > allowedKeys.size || keys.some((key) => !allowedKeys.has(key))) fail()
+  if (curriculumKeys === COLLABORATOR_VALUE_KEYS && !keys.includes('collaborator_ref')) fail()
   const result = {}
   for (const key of keys) {
     const candidate = value[key]
+    if (curriculumKeys) {
+      if (Array.isArray(candidate) || !isSafeCurriculumValue(key, candidate)) fail()
+      result[key] = candidate
+      continue
+    }
     const values = Array.isArray(candidate) ? candidate : [candidate]
     if (values.length > 16) fail()
     for (const item of values) {
       if (item === null || typeof item === 'boolean') continue
       if (typeof item === 'number' && Number.isFinite(item) && Math.abs(item) <= 1_000_000_000_000) continue
-      if (
-        typeof item === 'string' && item.length <= 128 && TOKEN.test(item)
-        && !item.includes('://')
-        && !/(?:^|[._:/-])(?:sk|pk|secret|credential|bearer|token|password|jwt|api.?key)(?:[._:/-]|$)|^eyj/i.test(item)
-      ) continue
+      if (isSafeToken(item)) continue
       fail()
     }
     result[key] = Array.isArray(candidate) ? Object.freeze([...candidate]) : candidate
@@ -98,8 +131,8 @@ function safeEvent(row) {
     resourceRef: row.resourceRef,
     resourceVersion: row.resourceVersion,
     resourceRevision: row.resourceRevision,
-    previousValue: safeValue(row.previousValue),
-    newValue: safeValue(row.newValue),
+    previousValue: safeValue(row.action, row.previousValue),
+    newValue: safeValue(row.action, row.newValue),
     reasonCode: row.reasonCode,
     correlationId: row.correlationId.toLowerCase(),
   })

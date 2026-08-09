@@ -9,10 +9,15 @@ import type { AdminAuditFilters, AdminAuditLogEvent, AdminAuditPage } from './au
 const ACTIONS = new Set<string>(ADMIN_AUDIT_ACTIONS)
 const RESOURCE_TYPES = new Set<string>(ADMIN_AUDIT_RESOURCE_TYPES)
 const ROLES = new Set<string>(ADMIN_ROLES)
-const VALUE_KEYS = new Set([
+const LEGACY_VALUE_KEYS = new Set([
   'value', 'state', 'enabled', 'limit', 'quota', 'model_tier', 'model_tiers',
   'voice', 'version', 'revision', 'role', 'status', 'release',
 ])
+const ENTITY_VALUE_KEYS = new Set([
+  'entity_ref', 'entity_type', 'draft_revision', 'position', 'status', 'tombstoned', 'digest',
+])
+const COLLABORATOR_VALUE_KEYS = new Set(['collaborator_ref', 'role', 'status'])
+const DIGEST = /^[0-9a-f]{64}$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$/
 const TOKEN = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
@@ -31,24 +36,58 @@ interface ReadOptions {
   readonly fetchImpl?: typeof fetch
 }
 
-function safeValue(value: unknown): AdminAuditLogEvent['previousValue'] {
+function isSafeToken(value: unknown) {
+  return typeof value === 'string' && value.length <= 128 && TOKEN.test(value)
+    && !value.includes('://')
+    && !/(?:^|[._:/-])(?:sk|pk|secret|credential|bearer|token|password|jwt|api.?key)(?:[._:/-]|$)|^eyj/i.test(value)
+}
+
+function curriculumValueKeys(action: AdminAuditLogEvent['action']) {
+  if (action.startsWith('curriculum_entity.')) return ENTITY_VALUE_KEYS
+  if (action.startsWith('curriculum_draft.collaborator.')) return COLLABORATOR_VALUE_KEYS
+  return null
+}
+
+function isSafeCurriculumValue(key: string, value: unknown) {
+  if (['entity_ref', 'entity_type', 'collaborator_ref', 'role', 'status'].includes(key)) {
+    return isSafeToken(value)
+  }
+  if (key === 'draft_revision' || key === 'position') {
+    return typeof value === 'number' && Number.isInteger(value)
+      && value >= 0 && value <= 1_000_000_000_000
+  }
+  if (key === 'tombstoned') return typeof value === 'boolean'
+  return key === 'digest' && typeof value === 'string' && DIGEST.test(value)
+}
+
+function safeValue(action: AdminAuditLogEvent['action'], value: unknown): AdminAuditLogEvent['previousValue'] {
   if (value === null) return null
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new AdminAuditReadError('audit_unavailable')
   const source = value as Record<string, unknown>
   const keys = Object.keys(source)
-  if (keys.length < 1 || keys.length > 8 || keys.some((key) => !VALUE_KEYS.has(key))) {
+  const curriculumKeys = curriculumValueKeys(action)
+  const allowedKeys = curriculumKeys ?? LEGACY_VALUE_KEYS
+  if (keys.length < 1 || keys.length > allowedKeys.size || keys.some((key) => !allowedKeys.has(key))) {
+    throw new AdminAuditReadError('audit_unavailable')
+  }
+  if (curriculumKeys === COLLABORATOR_VALUE_KEYS && !keys.includes('collaborator_ref')) {
     throw new AdminAuditReadError('audit_unavailable')
   }
   const result: Record<string, string | number | boolean | null | readonly (string | number | boolean | null)[]> = {}
   for (const key of keys) {
     const candidate = source[key]
+    if (curriculumKeys) {
+      if (Array.isArray(candidate) || !isSafeCurriculumValue(key, candidate)) {
+        throw new AdminAuditReadError('audit_unavailable')
+      }
+      result[key] = candidate as typeof result[string]
+      continue
+    }
     const values = Array.isArray(candidate) ? candidate : [candidate]
     if (values.length > 16 || values.some((item) => {
       if (item === null || typeof item === 'boolean') return false
       if (typeof item === 'number') return !Number.isFinite(item) || Math.abs(item) > 1_000_000_000_000
-      return typeof item !== 'string' || item.length > 128 || !TOKEN.test(item)
-        || item.includes('://')
-        || /(?:^|[._:/-])(?:sk|pk|secret|credential|bearer|token|password|jwt|api.?key)(?:[._:/-]|$)|^eyj/i.test(item)
+      return !isSafeToken(item)
     })) throw new AdminAuditReadError('audit_unavailable')
     result[key] = candidate as typeof result[string]
   }
@@ -80,8 +119,8 @@ function safeEvent(value: unknown): AdminAuditLogEvent {
     resourceRef: row.resourceRef,
     resourceVersion: row.resourceVersion as string | null,
     resourceRevision: row.resourceRevision as string | null,
-    previousValue: safeValue(row.previousValue),
-    newValue: safeValue(row.newValue),
+    previousValue: safeValue(row.action as AdminAuditLogEvent['action'], row.previousValue),
+    newValue: safeValue(row.action as AdminAuditLogEvent['action'], row.newValue),
     reasonCode: row.reasonCode as string | null,
     correlationId: row.correlationId.toLowerCase(),
   })
