@@ -14,30 +14,60 @@ import type { StudyDashboardPorts, StudyParentControlPorts, StudySettingsPorts }
  * WHAT THIS FILE PROTECTS, EXACTLY:
  *
  *   1. every expression the checker types as one of the narrow contracts, wherever
- *      in the production program it appears; and
- *   2. inside each discovered consumer, the narrow ports parameter and the
- *      same-function local bindings derived from it.
+ *      in the production program it appears;
+ *   2. every property of a parameter's declared type that the checker resolves to
+ *      one of the narrow contracts — `props: { ports: StudyDashboardPorts }` and a
+ *      named `interface Props` alike — and that property alone, not its siblings;
+ *      and
+ *   3. inside every module that declares such a parameter, the values whose
+ *      provenance runs back to one of those roots through the forms implemented
+ *      below, tracked to a fixed point by symbol identity:
  *
- * Nothing wider. A value laundered through a helper declared elsewhere —
- * `function launder(x: unknown) { return x as any }; const p = launder(ports)` —
- * is outside this boundary and is pinned below as a known survivor rather than
- * quietly implied to be covered. This is not whole-program taint analysis and does
- * not claim to be.
+ *        binding      const a = root · let a = root · a = root (later) ·
+ *                     for (const a of [root]) · class C { field = root }
+ *        destructure  const { k } = · const { k: renamed } = · const { ...rest } =
+ *                     · const [a] = · and the same patterns nested
+ *        object       { ...root } · { root } · { k: root } · { k: { root } }
+ *        array        [root] · [root.k] · [...roots]  (index-blind: an array that
+ *                     carries anywhere is treated as carrying everywhere)
+ *        reads        a.k · a[0] · a['k'] · this.field · (a) · a! · a as T · <T>a ·
+ *                     a satisfies T · (f(), a)
+ *        joins        cond ? a : b · a ?? b · a || b · a && b
  *
- * The predecessor read four named files as text and rejected three spellings of the
- * cast; its successor asked the checker instead but still tracked only expressions
- * that walked *directly* to the ports parameter, and still took its own list of
- * consumers as authoritative. Independent review got past both, and all three were
- * reproduced on this branch before this revision was written:
+ * Nothing wider. What is NOT covered, and is pinned below as a known survivor rather
+ * than quietly implied to be covered:
  *
- *   F1a `const alias = ports; void (alias as any).adultPrivate`
- *   F1b `const { ...spread } = ports; void (spread as any).safety`
- *   F2  delete a consumer from the hand-written scope list, then cast in its body
+ *   - interprocedural laundering. `function launder(x: unknown) { return x as any }`
+ *     called as `launder(ports)` passes the capability across a call boundary this
+ *     file does not follow, in either direction. Object-literal methods and getters
+ *     are the same boundary wearing a different hat.
  *
- * All three left `tsc --noEmit` and the guard at exit 0 while withheld capabilities
- * were reachable. So the consumer set is now derived from typed use rather than
- * declared, and a small same-function alias tracker stands between the parameter
- * and the assertion rule.
+ * This is not whole-program taint analysis and does not claim to be. The list above
+ * is the claim, and every line of it is forced by a fixture case.
+ *
+ * The predecessors were each got past by independent review, and every escape was
+ * reproduced on this branch before the revision that closed it was written:
+ *
+ *   E1–E4 spelling games at the injection sites, and a fifth render in a file the
+ *         guard never opened                                    (closed by the census)
+ *   F1a   `const alias = ports; void (alias as any).adultPrivate`
+ *   F1b   `const { ...spread } = ports; void (spread as any).safety`
+ *   F2    delete a consumer from the hand-written scope list, then cast in its body
+ *                                        (closed by deriving consumers from typed use)
+ *   G1    `const w = { ports }; void (w.ports as any).safety`, and the same through
+ *         `{ inner: ports }`, `[ports]`, `[ports.calendar]`, `const { ports: back } =
+ *         w`, and multi-hop chains of those                    (closed by (3) above)
+ *   G2    a consumer shaped `function Thing(props: { ports: StudyDashboardPorts })`,
+ *         invisible to a sweep that only reads parameter types (closed by (2) above)
+ *   G3    `class W { readonly leaked = ports }`, `for (const a of [ports])`, and
+ *         `(f(), ports) as any` — three bindings the first pass at (3) still missed
+ *
+ * Eleven forms in all, each run against the parent commit's own guard first, and each
+ * leaving `tsc --noEmit` and that guard at exit 0 while `safety` — a role no narrow
+ * contract carries — was reachable.
+ *
+ * Copying a *parameter property* the same way is not a twelfth: `readonly leaked =
+ * this.ports` inside StudyParentController is TS2729, so the compiler closes it.
  */
 
 const sourceRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -135,6 +165,8 @@ function suppliedExpressions(node: ts.Node): readonly ts.Expression[] {
   }
   if (ts.isCallExpression(node) || ts.isNewExpression(node)) return node.arguments ?? []
   if (ts.isPropertyAssignment(node)) return [node.initializer]
+  // `f({ ports })` hands over just as much as `f({ ports: ports })` does.
+  if (ts.isShorthandPropertyAssignment(node)) return [node.name]
   if ((ts.isVariableDeclaration(node) || ts.isPropertyDeclaration(node)) && node.initializer) return [node.initializer]
   return []
 }
@@ -178,23 +210,62 @@ const REVIEWED_CENSUS = [
   'components/hub/StudyParentPanel.tsx | StudyParentControlPorts | ports',
 ]
 
-// ── the consumers, discovered from typed use ──────────────────────────────────
-// Nothing below is seeded with a component name or a module path. A consumer is
-// whatever declares a parameter — directly, or through a destructured binding in
-// its parameter list — whose type resolves by declaration identity to one of the
-// narrow contracts. Add a fifth surface that takes StudyDashboardPorts and it
-// appears here on the next run; take the narrow type off an existing one and it
-// disappears. Either way the reviewed snapshot stops matching.
+// ── capability roots and their provenance ─────────────────────────────────────
+// Nothing below is seeded with a component name or a module path. A capability root
+// is a parameter — directly, through a destructured binding in its parameter list,
+// or as a *property of the parameter's declared type* — that the checker resolves by
+// declaration identity to one of the narrow contracts.
+//
+// What a value carries is then modelled structurally rather than as a single bit, so
+// that `props.ports` is a capability while `props.other` beside it is not, and
+// `w.ports` is one while `w.unrelated` is not. `whole` means the value itself is (or
+// conservatively stands for) a capability; `members` names the keys known to carry
+// one. Anything a form below cannot attribute to a key widens to `whole` — this
+// analysis is allowed to be wrong in the direction of a failing test, never in the
+// direction of a reachable role.
+
+interface Carriage {
+  whole: boolean
+  readonly members: Set<string>
+}
+
+const nothing = (): Carriage => ({ whole: false, members: new Set() })
+const everything = (): Carriage => ({ whole: true, members: new Set() })
+const carries = (carriage: Carriage) => carriage.whole || carriage.members.size > 0
+
+function absorb(into: Carriage, from: Carriage): boolean {
+  let grew = false
+  if (from.whole && !into.whole) {
+    into.whole = true
+    grew = true
+  }
+  if (!into.whole) {
+    for (const key of from.members) {
+      if (!into.members.has(key)) {
+        into.members.add(key)
+        grew = true
+      }
+    }
+  }
+  return grew
+}
 
 interface Consumer {
   readonly module: string
   readonly exportName: string
   readonly contract: string
+  /** The prop that carries the contract, or null when the parameter itself is it. */
+  readonly propName: string | null
 }
 
 interface PortsRoot {
   readonly declaration: ts.Declaration
   readonly consumer: Consumer
+}
+
+interface BodyFinding {
+  readonly line: number
+  readonly message: string
 }
 
 /**
@@ -249,35 +320,314 @@ function consumerNameOf(signature: Signature): string | null {
   return null
 }
 
-const portsRoots: PortsRoot[] = []
-
-for (const fileName of productionFiles) {
-  const source = program.getSourceFile(fileName)
-  if (!source) continue
-  const visit = (node: ts.Node) => {
-    if (ts.isParameter(node) || ts.isBindingElement(node)) {
-      const contract = narrowContractOf(checker.getTypeAtLocation(node))
-      if (contract && parameterOf(node)) {
-        const signature = enclosingSignature(node)
-        const exportName = signature ? consumerNameOf(signature) : null
-        if (!exportName) {
-          unmodelled.push(`${at(node)} — a ${contract} parameter belongs to a callable this sweep cannot name`)
-        } else {
-          portsRoots.push({ declaration: node, consumer: { module: underSource(fileName), exportName, contract } })
-        }
-      }
-    }
-    ts.forEachChild(node, visit)
-  }
-  visit(source)
+/** A property key this analysis can name, or null when it is computed. */
+function staticKeyOf(name: ts.Node): string | null {
+  if (ts.isIdentifier(name) || ts.isStringLiteral(name) || ts.isNumericLiteral(name)) return name.text
+  return null
 }
 
-const consumerReport = [
-  ...new Set(portsRoots.map((root) => `${root.consumer.module} | ${root.consumer.exportName} | ${root.consumer.contract}`)),
-].sort()
+/** The prop a destructured parameter binding reads, when it reads one directly. */
+function propKeyOf(node: ts.ParameterDeclaration | ts.BindingElement): string | null {
+  if (ts.isParameter(node)) return null
+  const pattern = node.parent
+  if (!ts.isObjectBindingPattern(pattern) || !ts.isParameter(pattern.parent)) return null
+  return staticKeyOf(node.propertyName ?? node.name)
+}
 
+/**
+ * Seeds the capability roots in one file set and follows their provenance to a fixed
+ * point. Used unchanged by the production sweep and by the fixture at the bottom of
+ * this file, so the fixture proves the code production runs rather than a copy of it.
+ *
+ * REASSIGNMENT (conservative). A binding that carries once carries for the rest of
+ * the file: `let p = ports; p = other; (p as any)` is still reported. Flow-sensitive
+ * reasoning would buy a few false positives back at the price of a failure mode that
+ * is silence, and silence is the one answer a census must not give.
+ */
+function capabilityScope(target: ts.Program, files: readonly string[]) {
+  const { checker: targetChecker, narrowContractOf: narrowOf } = contractsOf(target)
+  const sources = files
+    .map((file) => target.getSourceFile(file))
+    .filter((source): source is ts.SourceFile => Boolean(source))
+
+  const carriage = new Map<ts.Declaration, Carriage>()
+  /** Property symbols the checker resolves to a narrow contract, by symbol identity. */
+  const narrowProperties = new Set<ts.Symbol>()
+  const roots: PortsRoot[] = []
+  const unnameable: string[] = []
+
+  const carriageFor = (declaration: ts.Declaration) => {
+    const existing = carriage.get(declaration)
+    if (existing) return existing
+    const fresh = nothing()
+    carriage.set(declaration, fresh)
+    return fresh
+  }
+
+  function record(declaration: ts.Declaration, contract: string, propName: string | null) {
+    const signature = enclosingSignature(declaration)
+    const exportName = signature ? consumerNameOf(signature) : null
+    if (!exportName) {
+      unnameable.push(`${at(declaration)} — a ${contract} parameter belongs to a callable this sweep cannot name`)
+      return
+    }
+    const module = underSource(declaration.getSourceFile().fileName)
+    roots.push({ declaration, consumer: { module, exportName, contract, propName } })
+  }
+
+  /** Members of an object-ish type, per union constituent so a narrow arm is not lost. */
+  function propertiesOf(type: ts.Type): readonly ts.Symbol[] {
+    const constituents = type.isUnionOrIntersection() ? type.types : [type]
+    const found: ts.Symbol[] = []
+    for (const constituent of constituents) {
+      if (!(constituent.flags & ts.TypeFlags.Object)) continue
+      found.push(...targetChecker.getPropertiesOfType(constituent))
+    }
+    return found
+  }
+
+  for (const source of sources) {
+    const seed = (node: ts.Node) => {
+      if ((ts.isParameter(node) || ts.isBindingElement(node)) && parameterOf(node)) {
+        const type = targetChecker.getTypeAtLocation(node)
+        const own = narrowOf(type)
+        if (own) {
+          absorb(carriageFor(node), everything())
+          record(node, own, propKeyOf(node))
+        } else {
+          // A props object. The contract lives on a property of the declared type, so
+          // only that property becomes a capability — a sibling prop of an unrelated
+          // type is left alone, which is the whole point of asking the checker rather
+          // than tainting the parameter wholesale.
+          for (const property of propertiesOf(type)) {
+            const contract = narrowOf(targetChecker.getTypeOfSymbolAtLocation(property, node))
+            if (!contract) continue
+            narrowProperties.add(property)
+            carriageFor(node).members.add(property.name)
+            record(node, contract, ts.isParameter(node) ? property.name : null)
+          }
+        }
+      }
+      ts.forEachChild(node, seed)
+    }
+    seed(source)
+  }
+
+  // `this.ports` on a parameter property resolves through the property name, so ask
+  // for the symbol there rather than at the access expression.
+  const symbolAt = (node: ts.Node) =>
+    ts.isPropertyAccessExpression(node) ? targetChecker.getSymbolAtLocation(node.name) : targetChecker.getSymbolAtLocation(node)
+
+  const carriageAtDeclarations = (declarations: readonly ts.Declaration[] | undefined): Carriage | null => {
+    for (const declaration of declarations ?? []) {
+      const found = carriage.get(declaration)
+      if (found) return found
+    }
+    return null
+  }
+
+  const declaredCarriage = (node: ts.Node): Carriage | null => carriageAtDeclarations(symbolAt(node)?.declarations)
+
+  /**
+   * `{ ports }` binds its own property symbol to that identifier, so the value it
+   * copies has to be asked for separately — otherwise the shorthand form reads as
+   * carrying nothing while `{ ports: ports }` beside it reads correctly.
+   */
+  const shorthandValueCarriage = (property: ts.ShorthandPropertyAssignment): Carriage =>
+    carriageAtDeclarations(targetChecker.getShorthandAssignmentValueSymbol(property)?.declarations) ?? nothing()
+
+  /** What an expression carries. Never mutated by callers; stored carriages are shared. */
+  function carriageOf(expression: ts.Node): Carriage {
+    const declared = declaredCarriage(expression)
+    if (declared) return declared
+
+    if (ts.isPropertyAccessExpression(expression)) {
+      const property = targetChecker.getSymbolAtLocation(expression.name)
+      if (property && narrowProperties.has(property)) return everything()
+      const base = carriageOf(expression.expression)
+      return base.whole || base.members.has(expression.name.text) ? everything() : nothing()
+    }
+    if (ts.isElementAccessExpression(expression)) {
+      const base = carriageOf(expression.expression)
+      if (base.whole) return everything()
+      const key = staticKeyOf(expression.argumentExpression)
+      const hit = key === null ? base.members.size > 0 : base.members.has(key)
+      return hit ? everything() : nothing()
+    }
+    if (ts.isObjectLiteralExpression(expression)) {
+      const result = nothing()
+      for (const property of expression.properties) {
+        if (ts.isSpreadAssignment(property)) {
+          // A spread cannot be attributed to a key without knowing the source shape.
+          if (carries(carriageOf(property.expression))) result.whole = true
+        } else if (ts.isPropertyAssignment(property)) {
+          if (!carries(carriageOf(property.initializer))) continue
+          const key = staticKeyOf(property.name)
+          if (key === null) result.whole = true
+          else result.members.add(key)
+        } else if (ts.isShorthandPropertyAssignment(property)) {
+          if (carries(shorthandValueCarriage(property))) result.members.add(property.name.text)
+        }
+        // Methods, getters and setters close over their scope across a call boundary
+        // this file does not follow; see the header.
+      }
+      return result
+    }
+    if (ts.isArrayLiteralExpression(expression)) {
+      for (const element of expression.elements) {
+        const value = ts.isSpreadElement(element) ? element.expression : element
+        if (carries(carriageOf(value))) return everything()
+      }
+      return nothing()
+    }
+    if (ts.isConditionalExpression(expression)) {
+      const result = nothing()
+      absorb(result, carriageOf(expression.whenTrue))
+      absorb(result, carriageOf(expression.whenFalse))
+      return result
+    }
+    if (ts.isBinaryExpression(expression)) {
+      const operator = expression.operatorToken.kind
+      if (operator === ts.SyntaxKind.EqualsToken || operator === ts.SyntaxKind.CommaToken) {
+        return carriageOf(expression.right)
+      }
+      if (
+        operator === ts.SyntaxKind.QuestionQuestionToken ||
+        operator === ts.SyntaxKind.BarBarToken ||
+        operator === ts.SyntaxKind.AmpersandAmpersandToken
+      ) {
+        const result = nothing()
+        absorb(result, carriageOf(expression.left))
+        absorb(result, carriageOf(expression.right))
+        return result
+      }
+      return nothing()
+    }
+    if (
+      ts.isParenthesizedExpression(expression) ||
+      ts.isNonNullExpression(expression) ||
+      ts.isSatisfiesExpression(expression) ||
+      isTypeErasure(expression)
+    ) {
+      return carriageOf(expression.expression)
+    }
+    return nothing()
+  }
+
+  /** Distributes what a value carries over the names one binding pattern introduces. */
+  function bindPattern(name: ts.BindingName, owner: ts.Declaration, value: Carriage): boolean {
+    if (ts.isIdentifier(name)) return absorb(carriageFor(owner), value)
+
+    if (ts.isObjectBindingPattern(name)) {
+      let grew = false
+      const claimed = new Set<string>()
+      for (const element of name.elements) {
+        if (element.dotDotDotToken) continue
+        const key = staticKeyOf(element.propertyName ?? element.name)
+        if (key !== null) claimed.add(key)
+        // A named key inherits only what that key carries; a computed one cannot be
+        // attributed, so it inherits everything the source carries.
+        const inherited = value.whole || key === null ? value : value.members.has(key) ? everything() : nothing()
+        if (carries(inherited)) grew = bindPattern(element.name, element, everything()) || grew
+      }
+      for (const element of name.elements) {
+        if (!element.dotDotDotToken) continue
+        const rest = nothing()
+        if (value.whole) rest.whole = true
+        else for (const key of value.members) if (!claimed.has(key)) rest.members.add(key)
+        if (carries(rest)) grew = bindPattern(element.name, element, rest) || grew
+      }
+      return grew
+    }
+
+    // Array patterns are index-blind, matching how array literals are read above.
+    let grew = false
+    if (!carries(value)) return grew
+    for (const element of name.elements) {
+      if (ts.isOmittedExpression(element)) continue
+      grew = bindPattern(element.name, element, everything()) || grew
+    }
+    return grew
+  }
+
+  function findings(): readonly BodyFinding[] {
+    for (let growing = true; growing; ) {
+      growing = false
+      for (const source of sources) {
+        const visit = (node: ts.Node) => {
+          if (ts.isVariableDeclaration(node) && node.initializer) {
+            const value = carriageOf(node.initializer)
+            if (carries(value)) growing = bindPattern(node.name, node, value) || growing
+          } else if (ts.isForOfStatement(node) && ts.isVariableDeclarationList(node.initializer)) {
+            // A loop binding has no initializer of its own, so it is neither seeded
+            // nor reached by the arm above. Index-blind, like the array literal it
+            // usually iterates.
+            if (carries(carriageOf(node.expression))) {
+              for (const declaration of node.initializer.declarations) {
+                growing = bindPattern(declaration.name, declaration, everything()) || growing
+              }
+            }
+          } else if (ts.isPropertyDeclaration(node) && node.initializer) {
+            // `class C { readonly copy = ports }` declared inside a consumer, which
+            // survived on the parent commit. Copying a *parameter property* the same
+            // way — `readonly copy = this.ports` in StudyParentController — is not
+            // the same hole: TS2729 rejects it, so the compiler already closes it.
+            const value = carriageOf(node.initializer)
+            if (carries(value)) growing = absorb(carriageFor(node), value) || growing
+          } else if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken) {
+            const value = carriageOf(node.right)
+            if (carries(value)) {
+              for (const declaration of symbolAt(node.left)?.declarations ?? []) {
+                growing = absorb(carriageFor(declaration), value) || growing
+              }
+            }
+          }
+          ts.forEachChild(node, visit)
+        }
+        visit(source)
+      }
+    }
+
+    const found: BodyFinding[] = []
+    for (const source of sources) {
+      const visit = (node: ts.Node) => {
+        if (isTypeErasure(node) && carries(carriageOf(node.expression))) {
+          found.push({
+            line: source.getLineAndCharacterOfPosition(node.getStart(source)).line + 1,
+            message: `${at(node)} — the ports handed to ${underSource(source.fileName)} are asserted to \`${textOf(node.type)}\``,
+          })
+        }
+        ts.forEachChild(node, visit)
+      }
+      visit(source)
+    }
+    return found
+  }
+
+  return { roots, unnameable, findings }
+}
+
+// ── the consumers, discovered from typed use ──────────────────────────────────
+// Add a fifth surface that takes StudyDashboardPorts — as a parameter or as a prop
+// on one — and it appears here on the next run; take the narrow type off an existing
+// one and it disappears. Either way the reviewed snapshot stops matching.
+
+const productionScope = capabilityScope(program, productionFiles)
+const portsRoots = productionScope.roots
+unmodelled.push(...productionScope.unnameable)
+
+const describeConsumer = (consumer: Consumer) =>
+  `${consumer.module} | ${consumer.exportName} | ${consumer.contract} | ${consumer.propName ?? '(positional)'}`
+
+const consumerReport = [...new Set(portsRoots.map((root) => describeConsumer(root.consumer)))].sort()
+
+/**
+ * One entry per distinct contract *and* carrying prop, not one per module. A surface
+ * whose props object declared two different narrow contracts would appear twice and
+ * be swept twice, rather than the second one being dropped by a dedupe.
+ */
 const CONSUMERS: readonly Consumer[] = [
-  ...new Map(portsRoots.map((root) => [`${root.consumer.module}|${root.consumer.exportName}`, root.consumer])).values(),
+  ...new Map(portsRoots.map((root) => [describeConsumer(root.consumer), root.consumer])).values(),
 ]
 
 /**
@@ -286,10 +636,10 @@ const CONSUMERS: readonly Consumer[] = [
  * deleting a line here cannot shrink what is checked — it can only fail this file.
  */
 const REVIEWED_CONSUMERS = [
-  'components/hub/StudyParentPanel.tsx | StudyParentPanel | StudyParentControlPorts',
-  'components/study/StudyDashboard.tsx | StudyDashboard | StudyDashboardPorts',
-  'components/study/StudySettings.tsx | StudySettings | StudySettingsPorts',
-  'study/parentController.ts | StudyParentController | StudyParentControlPorts',
+  'components/hub/StudyParentPanel.tsx | StudyParentPanel | StudyParentControlPorts | ports',
+  'components/study/StudyDashboard.tsx | StudyDashboard | StudyDashboardPorts | ports',
+  'components/study/StudySettings.tsx | StudySettings | StudySettingsPorts | ports',
+  'study/parentController.ts | StudyParentController | StudyParentControlPorts | (positional)',
 ]
 
 // ── every reference to a discovered consumer ──────────────────────────────────
@@ -396,19 +746,45 @@ function portsExpressionInJsx(element: ts.JsxOpeningLikeElement, consumer: Consu
     unmodelled.push(`${at(spread)} — ${consumer.exportName} receives spread props, which hide the ports expression`)
     return null
   }
+  // The prop to open is the one discovery found the contract on — not a name this
+  // file chooses. A positional consumer rendered as an element has no such prop.
+  if (consumer.propName === null) {
+    unmodelled.push(`${at(element)} — ${consumer.exportName} takes its ${consumer.contract} positionally but is rendered as an element`)
+    return null
+  }
   const attribute = properties.find(
-    (property): property is ts.JsxAttribute => ts.isJsxAttribute(property) && textOf(property.name) === 'ports',
+    (property): property is ts.JsxAttribute => ts.isJsxAttribute(property) && textOf(property.name) === consumer.propName,
   )
   if (!attribute) {
-    unmodelled.push(`${at(element)} — ${consumer.exportName} is rendered without an explicit ports prop`)
+    unmodelled.push(`${at(element)} — ${consumer.exportName} is rendered without an explicit ${consumer.propName} prop`)
     return null
   }
   const initializer = attribute.initializer
   if (!initializer || !ts.isJsxExpression(initializer) || !initializer.expression) {
-    unmodelled.push(`${at(attribute)} — the ports prop on ${consumer.exportName} is not a braced expression`)
+    unmodelled.push(`${at(attribute)} — the ${consumer.propName} prop on ${consumer.exportName} is not a braced expression`)
     return null
   }
   return initializer.expression
+}
+
+/** The ports expression inside a call or construction argument. */
+function portsExpressionInArgument(argument: ts.Expression, consumer: Consumer): ts.Expression | null {
+  if (consumer.propName === null) return argument
+  if (!ts.isObjectLiteralExpression(argument)) {
+    unmodelled.push(`${at(argument)} — ${consumer.exportName} is given a props object this sweep cannot open`)
+    return null
+  }
+  for (const property of argument.properties) {
+    if (ts.isSpreadAssignment(property)) {
+      unmodelled.push(`${at(property)} — ${consumer.exportName} receives spread props, which hide the ports expression`)
+      return null
+    }
+    if (staticKeyOf(property.name ?? property) !== consumer.propName) continue
+    if (ts.isPropertyAssignment(property)) return property.initializer
+    if (ts.isShorthandPropertyAssignment(property)) return property.name
+  }
+  unmodelled.push(`${at(argument)} — ${consumer.exportName} is constructed without an explicit ${consumer.propName} prop`)
+  return null
 }
 
 function portsExpressionAt(reference: ts.Identifier, consumer: Consumer): ts.Expression | null {
@@ -422,7 +798,7 @@ function portsExpressionAt(reference: ts.Identifier, consumer: Consumer): ts.Exp
       unmodelled.push(`${at(parent)} — new ${consumer.exportName}() supplies no ports argument`)
       return null
     }
-    return first
+    return portsExpressionInArgument(first, consumer)
   }
   // `!StudyDashboard` is the availability test the lazy bindings need. It reads the
   // binding without passing anything to it, so it cannot inject ports.
@@ -485,134 +861,48 @@ const assertionsAtInjectionSites = census.flatMap((site) =>
 )
 
 // ── assertions inside the consumer bodies ─────────────────────────────────────
-// A consumer can also widen its own parameter after receiving it. The alias tracker
-// below starts at the discovered ports parameter and follows ordinary local
-// bindings — `const a = ports`, `const { calendar } = ports`, `const { ...rest } =
-// ports`, `const a = { ...ports }`, and aliases of those — to a fixed point, by
-// symbol identity, so a binding in a different function is a different symbol and
-// is never confused with the parameter.
-//
-// REASSIGNMENT (option A, conservative). A binding tainted once stays tainted for
-// the rest of the file. `let p = ports; p = somethingElse; (p as any)` is therefore
-// still reported. Deciding otherwise would need flow-sensitive reasoning whose
-// failure mode is silence, and silence is the one answer this file must not give.
-//
-// The boundary stops at calls. A value passed to a helper declared elsewhere and
-// asserted there is not seen, and the fixture below pins that as a known survivor.
-
-interface BodyFinding {
-  readonly line: number
-  readonly message: string
-}
-
-function assertionsOverPorts(target: ts.Program, files: readonly string[]): readonly BodyFinding[] {
-  const { checker: targetChecker, narrowContractOf: narrowOf } = contractsOf(target)
-  const sources = files.map((file) => target.getSourceFile(file)).filter((source): source is ts.SourceFile => Boolean(source))
-
-  const tainted = new Set<ts.Declaration>()
-  for (const source of sources) {
-    const visit = (node: ts.Node) => {
-      if ((ts.isParameter(node) || ts.isBindingElement(node)) && narrowOf(targetChecker.getTypeAtLocation(node)) && parameterOf(node)) {
-        tainted.add(node)
-      }
-      ts.forEachChild(node, visit)
-    }
-    visit(source)
-  }
-
-  // `this.ports` on a parameter property resolves through the property name, so ask
-  // for the symbol there rather than at the access expression.
-  const symbolAt = (node: ts.Node) =>
-    ts.isPropertyAccessExpression(node) ? targetChecker.getSymbolAtLocation(node.name) : targetChecker.getSymbolAtLocation(node)
-
-  const isTainted = (node: ts.Node) =>
-    Boolean(symbolAt(node)?.declarations?.some((declaration) => tainted.has(declaration)))
-
-  function derivesFromPorts(expression: ts.Expression): boolean {
-    let node: ts.Node = expression
-    for (;;) {
-      if (isTainted(node)) return true
-      if (ts.isObjectLiteralExpression(node)) {
-        return node.properties.some((property) => ts.isSpreadAssignment(property) && derivesFromPorts(property.expression))
-      }
-      if (
-        ts.isParenthesizedExpression(node) ||
-        ts.isNonNullExpression(node) ||
-        ts.isPropertyAccessExpression(node) ||
-        ts.isElementAccessExpression(node) ||
-        isTypeErasure(node)
-      ) {
-        node = node.expression
-      } else return false
-    }
-  }
-
-  /** Taints every name a binding pattern introduces, at the declaration each one owns. */
-  function taintBinding(name: ts.BindingName, owner: ts.Declaration): boolean {
-    if (ts.isIdentifier(name)) {
-      if (tainted.has(owner)) return false
-      tainted.add(owner)
-      return true
-    }
-    let grew = false
-    for (const element of name.elements) {
-      if (ts.isOmittedExpression(element)) continue
-      grew = taintBinding(element.name, element) || grew
-    }
-    return grew
-  }
-
-  for (let growing = true; growing; ) {
-    growing = false
-    for (const source of sources) {
-      const visit = (node: ts.Node) => {
-        if (ts.isVariableDeclaration(node) && node.initializer && derivesFromPorts(node.initializer)) {
-          growing = taintBinding(node.name, node) || growing
-        } else if (
-          ts.isBinaryExpression(node) &&
-          node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
-          derivesFromPorts(node.right)
-        ) {
-          for (const declaration of symbolAt(node.left)?.declarations ?? []) {
-            if (!tainted.has(declaration)) {
-              tainted.add(declaration)
-              growing = true
-            }
-          }
-        }
-        ts.forEachChild(node, visit)
-      }
-      visit(source)
-    }
-  }
-
-  const findings: BodyFinding[] = []
-  for (const source of sources) {
-    const visit = (node: ts.Node) => {
-      if (isTypeErasure(node) && derivesFromPorts(node.expression)) {
-        findings.push({
-          line: source.getLineAndCharacterOfPosition(node.getStart(source)).line + 1,
-          message: `${at(node)} — the ports handed to ${underSource(source.fileName)} are asserted to \`${textOf(node.type)}\``,
-        })
-      }
-      ts.forEachChild(node, visit)
-    }
-    visit(source)
-  }
-  return findings
-}
 
 const consumerModules = [...new Set(CONSUMERS.map((consumer) => join(sourceRoot, consumer.module)))]
-const consumerBodyEscapes = assertionsOverPorts(program, consumerModules).map((finding) => finding.message)
+const consumerBodyEscapes = capabilityScope(program, consumerModules)
+  .findings()
+  .map((finding) => finding.message)
 
-// ── the alias tracker, proven against a fixture ───────────────────────────────
-// Production consumers contain no aliases today, so nothing above would notice if
-// the tracker stopped working. These cases run through `assertionsOverPorts` — the
-// same function, not a copy — over a synthetic module compiled against the real
-// ports contracts. The last two are the documented boundary: what this file does
-// not claim to catch.
+// ── the provenance tracker, proven against a fixture ──────────────────────────
+// Production consumers wrap nothing today, so nothing above would notice if the
+// tracker stopped working. These cases run through `capabilityScope` — the same
+// function, not a copy — over a synthetic module compiled against the real ports
+// contracts. Three of them are the documented boundary: what this file does not
+// claim to catch.
 
-const ALIAS_CASES: readonly { readonly id: string; readonly body: string; readonly escapes: boolean }[] = [
+/** The parameter list a case is compiled against, and what discovery must find on it. */
+const SHAPES = {
+  positional: {
+    params: '(ports: StudyParentControlPorts, spare: unknown)',
+    discovers: ['(positional) | StudyParentControlPorts'],
+  },
+  props: {
+    params: '(props: { ports: StudyParentControlPorts; other: { safety: unknown } }, spare: unknown)',
+    discovers: ['ports | StudyParentControlPorts'],
+  },
+  twoContracts: {
+    params: '(props: { dash: StudyDashboardPorts; parent: StudyParentControlPorts }, spare: unknown)',
+    discovers: ['dash | StudyDashboardPorts', 'parent | StudyParentControlPorts'],
+  },
+} as const
+
+type ShapeName = keyof typeof SHAPES
+
+interface ProvenanceCase {
+  readonly id: string
+  readonly shape?: ShapeName
+  readonly body: string
+  readonly escapes: boolean
+  /** Roots this case declares beyond its own signature, as `owner | prop | contract`. */
+  readonly alsoDiscovers?: readonly string[]
+}
+
+const PROVENANCE_CASES: readonly ProvenanceCase[] = [
+  // Bindings — the F1 class, carried over.
   { id: 'direct alias', body: 'const a = ports; void (a as any).adultPrivate', escapes: true },
   { id: 'alias of alias', body: 'const a = ports; const b = a; void (b as any).outbox', escapes: true },
   { id: 'property alias', body: 'const a = ports.calendar; void (a as any).start', escapes: true },
@@ -620,20 +910,129 @@ const ALIAS_CASES: readonly { readonly id: string; readonly body: string; readon
   { id: 'rest destructuring', body: 'const { ...rest } = ports; void (rest as any).adultPrivate', escapes: true },
   { id: 'object spread', body: 'const a = { ...ports }; void (a as any).safety', escapes: true },
   { id: 'let binding', body: 'let a = ports; void (a as any).safety', escapes: true },
-  { id: 'angle-bracket assertion', body: 'const a = ports; void (<any>a).safety', escapes: true },
-  { id: 'double assertion', body: 'const a = ports; void (a as unknown as StudyPortBundle).safety', escapes: true },
   { id: 'assignment after declaration', body: 'let a: unknown; a = ports; void (a as any)', escapes: true },
   { id: 'still tainted after reassignment', body: 'let a: unknown = ports; a = spare; void (a as any)', escapes: true },
-  { id: 'unrelated local', body: 'const other = { safety: spare }; void (other as any).safety; void ports.outbox', escapes: false },
+  // Copied before its source is assigned. Flow-insensitively `a` carries, so `b`
+  // does too — and reaching that verdict needs a second pass over the file, which
+  // is the fixed point earning its keep rather than a one-shot walk.
+  { id: 'copied before the source is assigned', body: 'let a: unknown = spare; let b: unknown = a; a = ports; void (b as any)', escapes: true },
+
+  // Object literal provenance — the G1 class.
+  { id: 'shorthand property', body: 'const w = { ports }; void (w.ports as any).safety', escapes: true },
+  { id: 'named property', body: 'const w = { inner: ports }; void (w.inner as any).safety', escapes: true },
+  { id: 'property of a role', body: 'const w = { p: ports.calendar }; void (w.p as any).start', escapes: true },
+  { id: 'shorthand of an alias', body: 'const source = ports; const w = { source }; void (w.source as any).safety', escapes: true },
+  { id: 'nested object literal', body: 'const w = { inner: { ports } }; void (w.inner.ports as any).safety', escapes: true },
+  { id: 'string-key read', body: 'const w = { ports }; void (w["ports"] as any).safety', escapes: true },
+  { id: 'wrapper asserted whole', body: 'const w = { ports }; void (w as any).ports.safety', escapes: true },
+  { id: 'sibling key of a wrapper stays free', body: 'const w = { ports, other: spare }; void (w.other as any); void ports.outbox', escapes: false },
+
+  // Array literal provenance.
+  { id: 'array element', body: 'const w = [ports]; void (w[0] as any).safety', escapes: true },
+  { id: 'array of a role', body: 'const w = [ports.calendar]; void (w[0] as any).start', escapes: true },
+  { id: 'array of an alias', body: 'const a = ports; const w = [a]; void (w[0] as any).safety', escapes: true },
+  { id: 'array spread', body: 'const w = [...[ports]]; void (w[0] as any).safety', escapes: true },
+  { id: 'array read at a computed index', body: 'const w = [ports]; void (w[Number("0")] as any).safety', escapes: true },
+  { id: 'array destructuring', body: 'const w = [ports]; const [first] = w; void (first as any).safety', escapes: true },
+
+  // Loop and class-field bindings, and the read forms in between.
+  { id: 'for-of binding', body: 'for (const a of [ports]) void (a as any).safety', escapes: true },
+  {
+    id: 'class field copy',
+    body: 'class Wrapper { readonly leaked = ports; read() { void (this.leaked as any).safety } } void Wrapper',
+    escapes: true,
+  },
+  {
+    id: 'class parameter property',
+    body: 'class ParamProps { constructor(private readonly q: StudyParentControlPorts) {} read() { void (this.q as any).safety } } void ParamProps',
+    escapes: true,
+    alsoDiscovers: ['ParamProps | (positional) | StudyParentControlPorts'],
+  },
+  { id: 'parenthesised read', body: 'const a = ports; void ((a) as any).safety', escapes: true },
+  { id: 'non-null read', body: 'const w = { ports }; void (w.ports! as any).safety', escapes: true },
+  { id: 'satisfies read', body: 'const a = ports satisfies StudyParentControlPorts; void (a as any).safety', escapes: true },
+  { id: 'comma operator', body: 'void ((String(spare), ports) as any).safety', escapes: true },
+
+  // Joins.
+  { id: 'conditional join', body: 'const a = spare ? ports : ports.calendar; void (a as any).safety', escapes: true },
+  {
+    id: 'nullish join',
+    body: 'const maybe: StudyParentControlPorts | undefined = ports; const a = maybe ?? spare; void (a as any)',
+    escapes: true,
+  },
+  {
+    id: 'logical-or join',
+    body: 'const maybe: StudyParentControlPorts | undefined = ports; const a = maybe || spare; void (a as any)',
+    escapes: true,
+  },
+  { id: 'logical-and join', body: 'const flag = Boolean(spare); const a = flag && ports; void (a as any)', escapes: true },
+
+  // Round-trip destructuring.
+  { id: 'destructure back from a wrapper', body: 'const w = { ports }; const { ports: back } = w; void (back as any).safety', escapes: true },
+  { id: 'destructure back inline', body: 'const { ports: back } = { ports }; void (back as any).safety', escapes: true },
+  { id: 'destructure a nested wrapper', body: 'const w = { inner: { ports } }; const { inner: { ports: back } } = w; void (back as any).safety', escapes: true },
+  { id: 'rest of a wrapper keeps the key', body: 'const w = { ports, other: spare }; const { other, ...rest } = w; void (rest as any).ports.safety', escapes: true },
+
+  // Multi-hop: object -> destructure -> alias -> array -> read.
+  {
+    id: 'four hops',
+    body: 'const w = { ports }; const { ports: back } = w; const a = back; const arr = [a]; void (arr[0] as any).safety',
+    escapes: true,
+  },
+  {
+    id: 'five hops through a nested wrapper',
+    body: 'const w = { inner: { ports } }; const i = w.inner; const { ports: back } = i; const arr = [{ back }]; void (arr[0].back as any).safety',
+    escapes: true,
+  },
+
+  // Assertion forms over a newly traced value. No target spelling is privileged.
+  { id: 'as any', body: 'const w = { ports }; void (w.ports as any).safety', escapes: true },
+  { id: 'as unknown as full bundle', body: 'const w = { ports }; void (w.ports as unknown as StudyPortBundle).safety', escapes: true },
+  { id: 'as the full bundle', body: 'const w = { ports }; void ((w as any).ports as StudyPortBundle).safety', escapes: true },
+  { id: 'as its own narrow type', body: 'const w = { ports }; void (w.ports as StudyParentControlPorts).outbox', escapes: true },
+  { id: 'double assertion', body: 'const w = { ports }; void (w.ports as unknown as any).safety', escapes: true },
+  {
+    id: 'intersection assertion',
+    body: 'const w = { ports }; void (w.ports as unknown as StudyParentControlPorts & { safety: unknown }).safety',
+    escapes: true,
+  },
+  { id: 'angle-bracket assertion', body: 'const w = { ports }; void (<any>w.ports).safety', escapes: true },
+
+  // Props-object consumers: discovery seeds `props.<prop>`, not `props`.
+  { id: 'props member direct', shape: 'props', body: 'void (props.ports as any).safety', escapes: true },
+  { id: 'props member alias', shape: 'props', body: 'const p = props.ports; void (p as any).safety', escapes: true },
+  { id: 'props member destructured', shape: 'props', body: 'const { ports } = props; void (ports as any).safety', escapes: true },
+  { id: 'props member wrapped', shape: 'props', body: 'const w = { p: props.ports }; void (w.p as any).safety', escapes: true },
+  { id: 'props member in an array', shape: 'props', body: 'const w = [props.ports]; void (w[0] as any).safety', escapes: true },
+  { id: 'props object asserted whole', shape: 'props', body: 'void (props as any).ports.safety', escapes: true },
+  { id: 'unrelated props member stays free', shape: 'props', body: 'void (props.other as any).safety; void props.ports.outbox', escapes: false },
+  {
+    id: 'unrelated props member destructured stays free',
+    shape: 'props',
+    body: 'const { other } = props; void (other as any).safety; void props.ports.outbox',
+    escapes: false,
+  },
+
+  // Two narrow contracts on one props object: both are seeded, neither is dropped.
+  { id: 'first of two contracts', shape: 'twoContracts', body: 'void (props.dash as any).safety', escapes: true },
+  { id: 'second of two contracts', shape: 'twoContracts', body: 'void (props.parent as any).safety', escapes: true },
+
+  // Controls: values that never touch a capability.
+  { id: 'unrelated local object', body: 'const other = { safety: spare }; void (other as any).safety; void ports.outbox', escapes: false },
+  { id: 'unrelated local array', body: 'const other = [spare]; void (other[0] as any); void ports.outbox', escapes: false },
+  // The documented boundary: both sides of a call, however the call is spelled.
   { id: 'helper laundering — outside the boundary', body: 'const launder = (x: unknown) => x as any; void launder(ports)', escapes: false },
+  { id: 'object getter — outside the boundary', body: 'const w = { get p() { return ports } }; void (w.p as any).safety', escapes: false },
+  { id: 'object method — outside the boundary', body: 'const w = { p() { return ports } }; void (w.p() as any).safety', escapes: false },
 ]
 
-const FIXTURE_PATH = posix(join(sourceRoot, 'study', 'portsAliasFixture.generated.ts'))
-const FIXTURE_HEADER = `import type { StudyParentControlPorts, StudyPortBundle } from './ports'`
+const FIXTURE_PATH = posix(join(sourceRoot, 'study', 'portsProvenanceFixture.generated.ts'))
+const FIXTURE_HEADER = `import type { StudyDashboardPorts, StudyParentControlPorts, StudyPortBundle } from './ports'`
 const fixtureText = [
   FIXTURE_HEADER,
-  ...ALIAS_CASES.map(
-    (aliasCase, index) => `export function case${index}(ports: StudyParentControlPorts, spare: unknown) { ${aliasCase.body} }`,
+  ...PROVENANCE_CASES.map(
+    (provenanceCase, index) =>
+      `export function case${index}${SHAPES[provenanceCase.shape ?? 'positional'].params} { ${provenanceCase.body} }`,
   ),
   '',
 ].join('\n')
@@ -714,25 +1113,66 @@ describe('narrow Study consumer contracts survive an AST census of their injecti
     expect(consumerBodyEscapes).toEqual([])
   })
 
-  it('follows same-function aliases of the ports parameter, and says where it stops', () => {
+  it('discovers a narrow contract on a props object, and names the prop that carries it', () => {
+    // Production has no props-object consumer, so the rule that finds one is proven
+    // here — over the same `capabilityScope` the production sweep runs — rather than
+    // being taken on trust until someone writes one.
     const fixture = fixtureProgram()
-    const source = fixture.getSourceFile(FIXTURE_PATH)
-    if (!source) throw new Error('the alias fixture is not in its own program')
-    // The line arithmetic below only holds if the fixture parsed as one statement
-    // per case, so both are checked before any verdict is read from it.
-    expect(fixture.getSyntacticDiagnostics(source).map((diagnostic) => diagnostic.messageText)).toEqual([])
-    expect(source.statements.length).toBe(ALIAS_CASES.length + 1)
-
-    const reported = new Set(assertionsOverPorts(fixture, [FIXTURE_PATH]).map((finding) => finding.line))
-    // Each case occupies one line, the header being line 1.
-    const verdicts = ALIAS_CASES.map((aliasCase, index) => `${aliasCase.id}: ${reported.has(index + 2) ? 'caught' : 'free'}`)
-    expect(verdicts).toEqual(ALIAS_CASES.map((aliasCase) => `${aliasCase.id}: ${aliasCase.escapes ? 'caught' : 'free'}`))
+    const roots = capabilityScope(fixture, [FIXTURE_PATH]).roots
+    // The whole discovered set, not a per-case lookup: an extra root cannot hide in
+    // a case nobody asked about, and a missing one cannot be excused by a sibling.
+    const discovered = [
+      ...new Set(roots.map((root) => `${root.consumer.exportName} | ${root.consumer.propName ?? '(positional)'} | ${root.consumer.contract}`)),
+    ].sort()
+    const expected = [
+      ...new Set(
+        PROVENANCE_CASES.flatMap((provenanceCase, index) => [
+          ...SHAPES[provenanceCase.shape ?? 'positional'].discovers.map((entry) => `case${index} | ${entry}`),
+          ...(provenanceCase.alsoDiscovers ?? []),
+        ]),
+      ),
+    ].sort()
+    expect(discovered).toEqual(expected)
+    // Anti-vacuity: some case really is a props object carrying two contracts, and
+    // some case really does declare its contract on a prop rather than positionally.
+    const propsRoots = discovered.filter((entry) => !entry.includes('(positional)'))
+    expect(propsRoots.length).toBeGreaterThan(1)
+    expect(new Set(propsRoots.map((entry) => entry.split(' | ')[0])).size).toBeLessThan(propsRoots.length)
   })
 
-  it('binds each consumer ports parameter to its own narrow contract', () => {
-    const bound = CONSUMERS.map((consumer) => {
+  it('follows the provenance forms it claims, and says where it stops', () => {
+    const fixture = fixtureProgram()
+    const source = fixture.getSourceFile(FIXTURE_PATH)
+    if (!source) throw new Error('the provenance fixture is not in its own program')
+    // The line arithmetic below only holds if the fixture parsed as one statement
+    // per case, so both are checked before any verdict is read from it. The semantic
+    // diagnostics are checked too: a case that no longer compiles would otherwise
+    // report "free" and read as a documented boundary.
+    expect(fixture.getSyntacticDiagnostics(source).map((diagnostic) => diagnostic.messageText)).toEqual([])
+    expect(fixture.getSemanticDiagnostics(source).map((diagnostic) => `${diagnostic.start}: ${diagnostic.messageText}`)).toEqual([])
+    expect(source.statements.length).toBe(PROVENANCE_CASES.length + 1)
+
+    const reported = new Set(capabilityScope(fixture, [FIXTURE_PATH]).findings().map((finding) => finding.line))
+    // Each case occupies one line, the header being line 1.
+    const verdicts = PROVENANCE_CASES.map(
+      (provenanceCase, index) => `${provenanceCase.id}: ${reported.has(index + 2) ? 'caught' : 'free'}`,
+    )
+    expect(verdicts).toEqual(PROVENANCE_CASES.map((provenanceCase) => `${provenanceCase.id}: ${provenanceCase.escapes ? 'caught' : 'free'}`))
+  })
+
+  it('binds each discovered consumer to the contract its own module declares', () => {
+    // Per module: the contracts the sweep found there must be exactly the contracts
+    // the reported consumers claim. A module carrying two narrow contracts therefore
+    // has to report both.
+    const declared = new Map<string, Set<string>>()
+    for (const root of portsRoots) {
+      const contracts = declared.get(root.consumer.module) ?? new Set<string>()
+      contracts.add(root.consumer.contract)
+      declared.set(root.consumer.module, contracts)
+    }
+    const bound = [...declared.keys()].sort().map((module) => {
       const contracts = new Set<string>()
-      const source = program.getSourceFile(join(sourceRoot, consumer.module))
+      const source = program.getSourceFile(join(sourceRoot, module))
       const visit = (node: ts.Node) => {
         if (ts.isParameter(node) || ts.isBindingElement(node)) {
           const contract = narrowContractOf(checker.getTypeAtLocation(node))
@@ -741,9 +1181,11 @@ describe('narrow Study consumer contracts survive an AST census of their injecti
         ts.forEachChild(node, visit)
       }
       if (source) visit(source)
-      return `${consumer.module} -> ${[...contracts].sort().join(', ') || 'no narrow contract'}`
+      return `${module} -> ${[...contracts].sort().join(', ') || 'no narrow contract'}`
     })
-    expect(bound).toEqual(CONSUMERS.map((consumer) => `${consumer.module} -> ${consumer.contract}`))
+    expect(bound).toEqual(
+      [...declared.keys()].sort().map((module) => `${module} -> ${[...declared.get(module)!].sort().join(', ')}`),
+    )
   })
 
   it('leaves the pre-existing StudySessionContainer full-bundle casts out of scope', () => {
