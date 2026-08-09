@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it, vi } from 'vitest'
 import {
   isAuthorityEstablishmentForbidden,
   LEARNER_CREDENTIAL_SCHEMA_VERSION,
@@ -8,6 +8,7 @@ import {
   createLearnerCredentialRecord,
   CredentialVaultError,
   deleteLearnerCredential,
+  enrollLegacyCredential,
   enrollLearnerPin,
   learnerCredentialStorageKey,
   markLearnerCredentialResetRequired,
@@ -115,5 +116,59 @@ describe('device-local learner credential vault', () => {
     expect(JSON.stringify(reset)).not.toMatch(/admin|staff|study|guardian/i)
     expect(isAuthorityEstablishmentForbidden('learner', 'admin')).toBe(true)
     expect(isAuthorityEstablishmentForbidden('learner', 'study-guardian')).toBe(true)
+  })
+
+  it('replaces enrolled verifier material with a fresh reset tombstone', async () => {
+    const storage = new MemoryCredentialStorage()
+    const enrolled = await enrollLearnerPin('p1', '1234', { storage })
+    const reset = await markLearnerCredentialResetRequired('p1', { storage })
+    const durableRaw = storage.getItem(learnerCredentialStorageKey('p1'))!
+
+    expect(reset.state).toBe('reset-required')
+    expect(reset.saltBase64).not.toBe(enrolled.saltBase64)
+    expect(reset.verifierBase64).not.toBe(enrolled.verifierBase64)
+    expect(durableRaw).not.toContain(enrolled.saltBase64)
+    expect(durableRaw).not.toContain(enrolled.verifierBase64)
+    const importKey = vi.fn()
+    await expect(verifyLearnerPin('p1', '1234', {
+      storage,
+      crypto: {
+        getRandomValues: vi.fn(),
+        subtle: { importKey } as unknown as SubtleCrypto,
+      },
+    })).resolves.toBe(false)
+    expect(importKey).not.toHaveBeenCalled()
+    await expect(verifyLearnerPin('p1', '0000', { storage })).resolves.toBe(false)
+    await expect(verifyLearnerPin('p1', '9999', { storage })).resolves.toBe(false)
+  })
+
+  it('exposes an awaitable legacy enrollment handoff with verified durability', async () => {
+    const storage = new MemoryCredentialStorage()
+    const enrollment = enrollLegacyCredential('p1', '2468', { storage })
+
+    expect(enrollment).toBeInstanceOf(Promise)
+    expect(readLearnerCredential('p1', { storage })).toBeNull()
+    await expect(enrollment).resolves.toMatchObject({
+      profileId: 'p1',
+      state: 'enrolled',
+    })
+    await expect(verifyLearnerPin('p1', '2468', { storage })).resolves.toBe(true)
+  })
+
+  it('rejects malformed UTF-16 profile IDs without leaking URIError', () => {
+    for (const profileId of ['\ud800', '\udc00', `learner-\ud800`]) {
+      try {
+        learnerCredentialStorageKey(profileId)
+        throw new Error('Expected malformed profile ID to be rejected.')
+      } catch (cause) {
+        expect(cause).toBeInstanceOf(CredentialVaultError)
+        expect(cause).not.toBeInstanceOf(URIError)
+        expect(cause).toMatchObject({ code: 'invalid-profile-id' })
+      }
+    }
+
+    expect(learnerCredentialStorageKey('learner-\ud83d\ude00')).not.toBe(
+      learnerCredentialStorageKey('learner-\ud83d\ude01'),
+    )
   })
 })

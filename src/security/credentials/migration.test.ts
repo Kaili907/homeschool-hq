@@ -5,6 +5,7 @@ import {
   classifyLegacyPin,
   migrateLegacyEducationalCredentials,
   readLegacyCredentialMigrationRecord,
+  type DurableEducationalDataPersistence,
   type LegacyMigrationStage,
 } from './migration'
 import { MemoryCredentialStorage } from './testStorage'
@@ -33,11 +34,22 @@ function legacyData(pins: Record<string, unknown>): Record<string, unknown> {
   }
 }
 
+function durableEducationalDataPersistence(): DurableEducationalDataPersistence {
+  let durableValue: unknown
+  return {
+    write: (value) => {
+      durableValue = JSON.parse(JSON.stringify(value)) as unknown
+    },
+    read: () => JSON.parse(JSON.stringify(durableValue)) as unknown,
+  }
+}
+
 describe('legacy learner credential migration', () => {
   it('classifies an empty legacy PIN as unenrolled without creating a credential', async () => {
     const storage = new MemoryCredentialStorage()
     const result = await migrateLegacyEducationalCredentials(legacyData({ p1: '' }), {
       storage,
+      educationalDataPersistence: durableEducationalDataPersistence(),
     })
 
     expect(classifyLegacyPin('')).toBe('unenrolled')
@@ -57,6 +69,7 @@ describe('legacy learner credential migration', () => {
     const storage = new MemoryCredentialStorage()
     const result = await migrateLegacyEducationalCredentials(legacyData({ p1: '1234' }), {
       storage,
+      educationalDataPersistence: durableEducationalDataPersistence(),
     })
 
     expect(result.outcomes[0]).toMatchObject({
@@ -75,6 +88,7 @@ describe('legacy learner credential migration', () => {
       const storage = new MemoryCredentialStorage()
       const result = await migrateLegacyEducationalCredentials(legacyData({ p1: pin }), {
         storage,
+        educationalDataPersistence: durableEducationalDataPersistence(),
       })
 
       expect(result.outcomes[0]).toMatchObject({
@@ -93,10 +107,12 @@ describe('legacy learner credential migration', () => {
     'educational-data-sanitized',
   ])('safely resumes after interruption at %s', async (interruptedStage) => {
     const storage = new MemoryCredentialStorage()
+    const persistence = durableEducationalDataPersistence()
     let interrupted = false
     await expect(
       migrateLegacyEducationalCredentials(legacyData({ p1: '4321' }), {
         storage,
+        educationalDataPersistence: persistence,
         afterStage: (_profileId, stage) => {
           if (!interrupted && stage === interruptedStage) {
             interrupted = true
@@ -111,17 +127,164 @@ describe('legacy learner credential migration', () => {
     )
     const resumed = await migrateLegacyEducationalCredentials(legacyData({ p1: '4321' }), {
       storage,
+      educationalDataPersistence: persistence,
     })
     expect(resumed.outcomes[0].resumed).toBe(true)
     expect(readLegacyCredentialMigrationRecord('p1', { storage })?.stage).toBe('complete')
     await expect(verifyLearnerPin('p1', '4321', { storage })).resolves.toBe(true)
   })
 
+  it('does not write educational data when interrupted before durable persistence', async () => {
+    const storage = new MemoryCredentialStorage()
+    const persistence = durableEducationalDataPersistence()
+    let writes = 0
+
+    await expect(
+      migrateLegacyEducationalCredentials(legacyData({ p1: '1234' }), {
+        storage,
+        educationalDataPersistence: {
+          write: (value) => {
+            writes += 1
+            return persistence.write(value)
+          },
+          read: () => persistence.read(),
+        },
+        afterStage: (_profileId, stage) => {
+          if (stage === 'verifier-verified') throw new Error('crash before durable write')
+        },
+      }),
+    ).rejects.toThrow(/crash before durable write/)
+
+    expect(writes).toBe(0)
+    expect(readLegacyCredentialMigrationRecord('p1', { storage })?.stage).toBe('verifier-verified')
+    await expect(verifyLearnerPin('p1', '1234', { storage })).resolves.toBe(true)
+  })
+
+  it('remains retryable when the durable educational-data write fails', async () => {
+    const storage = new MemoryCredentialStorage()
+    let writeAttempts = 0
+    let durableValue: unknown
+    const persistence: DurableEducationalDataPersistence = {
+      write: (value) => {
+        writeAttempts += 1
+        if (writeAttempts === 1) throw new Error('crash during durable write')
+        durableValue = JSON.parse(JSON.stringify(value)) as unknown
+      },
+      read: () => JSON.parse(JSON.stringify(durableValue)) as unknown,
+    }
+
+    await expect(
+      migrateLegacyEducationalCredentials(legacyData({ p1: '1234' }), {
+        storage,
+        educationalDataPersistence: persistence,
+      }),
+    ).rejects.toThrow(/crash during durable write/)
+    expect(readLegacyCredentialMigrationRecord('p1', { storage })?.stage).toBe('verifier-verified')
+    await expect(verifyLearnerPin('p1', '1234', { storage })).resolves.toBe(true)
+
+    await expect(
+      migrateLegacyEducationalCredentials(legacyData({ p1: '1234' }), {
+        storage,
+        educationalDataPersistence: persistence,
+      }),
+    ).resolves.toMatchObject({ outcomes: [{ credentialState: 'enrolled' }] })
+    expect(JSON.stringify(durableValue)).not.toMatch(/1234|9876/)
+    expect(readLegacyCredentialMigrationRecord('p1', { storage })?.stage).toBe('complete')
+  })
+
+  it('does not advance after a durable write when read-back crashes', async () => {
+    const storage = new MemoryCredentialStorage()
+    let durableValue: unknown
+    let failRead = true
+    const persistence: DurableEducationalDataPersistence = {
+      write: (value) => {
+        durableValue = JSON.parse(JSON.stringify(value)) as unknown
+      },
+      read: () => {
+        if (failRead) throw new Error('crash before durable read-back')
+        return JSON.parse(JSON.stringify(durableValue)) as unknown
+      },
+    }
+
+    await expect(
+      migrateLegacyEducationalCredentials(legacyData({ p1: '1234' }), {
+        storage,
+        educationalDataPersistence: persistence,
+      }),
+    ).rejects.toThrow(/crash before durable read-back/)
+    expect(JSON.stringify(durableValue)).not.toMatch(/1234|9876/)
+    expect(readLegacyCredentialMigrationRecord('p1', { storage })?.stage).toBe('verifier-verified')
+
+    failRead = false
+    await migrateLegacyEducationalCredentials(legacyData({ p1: '1234' }), {
+      storage,
+      educationalDataPersistence: persistence,
+    })
+    expect(readLegacyCredentialMigrationRecord('p1', { storage })?.stage).toBe('complete')
+  })
+
+  it('rejects mismatched or credential-bearing durable read-back', async () => {
+    const storage = new MemoryCredentialStorage()
+    let durableValue: unknown
+    const persistence: DurableEducationalDataPersistence = {
+      write: (value) => {
+        durableValue = JSON.parse(JSON.stringify(value)) as unknown
+      },
+      read: () => ({
+        ...(durableValue as Record<string, unknown>),
+        parentPin: '9876',
+      }),
+    }
+
+    await expect(
+      migrateLegacyEducationalCredentials(legacyData({ p1: '1234' }), {
+        storage,
+        educationalDataPersistence: persistence,
+      }),
+    ).rejects.toThrow(/exact credential-free read-back verification/)
+    expect(readLegacyCredentialMigrationRecord('p1', { storage })?.stage).toBe('verifier-verified')
+    await expect(verifyLearnerPin('p1', '1234', { storage })).resolves.toBe(true)
+  })
+
+  it('requires durable persistence and resumes after verified state precedes completion', async () => {
+    const storage = new MemoryCredentialStorage()
+    await expect(
+      migrateLegacyEducationalCredentials(legacyData({ p1: '1234' }), {
+        storage,
+      }),
+    ).rejects.toThrow(/persistence and read-back are required/)
+    expect(readLegacyCredentialMigrationRecord('p1', { storage })?.stage).toBe('verifier-verified')
+
+    const persistence = durableEducationalDataPersistence()
+    let interrupted = false
+    await expect(
+      migrateLegacyEducationalCredentials(legacyData({ p1: '1234' }), {
+        storage,
+        educationalDataPersistence: persistence,
+        afterStage: (_profileId, stage) => {
+          if (!interrupted && stage === 'educational-data-sanitized') {
+            interrupted = true
+            throw new Error('crash before journal completion')
+          }
+        },
+      }),
+    ).rejects.toThrow(/crash before journal completion/)
+    expect(readLegacyCredentialMigrationRecord('p1', { storage })?.stage).toBe(
+      'educational-data-sanitized',
+    )
+
+    await migrateLegacyEducationalCredentials(legacyData({ p1: '1234' }), {
+      storage,
+      educationalDataPersistence: persistence,
+    })
+    expect(readLegacyCredentialMigrationRecord('p1', { storage })?.stage).toBe('complete')
+  })
+
   it('handles multiple profile classifications independently', async () => {
     const storage = new MemoryCredentialStorage()
     const result = await migrateLegacyEducationalCredentials(
       legacyData({ p1: '1111', p2: '', p3: 'bad' }),
-      { storage },
+      { storage, educationalDataPersistence: durableEducationalDataPersistence() },
     )
 
     expect(result.outcomes.map(({ profileId, classification, credentialState }) => ({
@@ -145,6 +308,7 @@ describe('legacy learner credential migration', () => {
 
     const result = await migrateLegacyEducationalCredentials(legacyData({ p1: '2222' }), {
       storage,
+      educationalDataPersistence: durableEducationalDataPersistence(),
     })
     expect(result.outcomes[0].credentialState).toBe('reset-required')
     await expect(verifyLearnerPin('p1', '1111', { storage })).resolves.toBe(false)
@@ -155,7 +319,7 @@ describe('legacy learner credential migration', () => {
     const storage = new MemoryCredentialStorage()
     const result = await sanitizeAndEnrollLegacyImportCredentials(
       legacyData({ p1: '2468' }),
-      { storage },
+      { storage, educationalDataPersistence: durableEducationalDataPersistence() },
     )
 
     await expect(verifyLearnerPin('p1', '2468', { storage })).resolves.toBe(true)

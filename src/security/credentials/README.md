@@ -49,6 +49,12 @@ Reset-required tombstones contain verifier-shaped material derived from a
 cryptographically random secret that is immediately discarded. Their state
 always rejects PIN verification; the material exists only to preserve one
 strict versioned record shape without inventing a plaintext reset credential.
+Converting an enrolled record replaces both its salt and verifier with fresh
+tombstone material, so no previously usable verifier material survives.
+
+`enrollLegacyCredential(profileId, pin)` is the asynchronous legacy handoff
+boundary. It resolves only after PBKDF2 derivation, vault write/read-back, and
+successful verification of the source PIN.
 
 ## Legacy migration state machine
 
@@ -59,7 +65,12 @@ Per profile, migration advances monotonically through:
 An empty legacy PIN is classified `unenrolled` and creates no credential. An
 exact four-digit PIN is `migratable`: it is used in memory to create the
 verifier, the record is persisted, read back, and verified before the
-credential-free educational clone is produced. Every other value is
+credential-free educational clone is produced. A caller-supplied educational
+data persistence port must then durably write that clone and return its
+read-back. The migration verifies exact, credential-free structural equality
+before either final journal stage is recorded. Missing persistence, write or
+read failure, and mismatched read-back leave the journal retryable at
+`verifier-verified`. Every other value is
 `reset-required`; an unusable reset tombstone is persisted and the learner must
 re-enroll. Existing partial records are verified and reused on retry. A
 conflicting record fails closed into reset-required state. Journal stages make

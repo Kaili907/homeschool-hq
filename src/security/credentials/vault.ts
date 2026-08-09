@@ -83,11 +83,32 @@ function storageFrom(options?: CredentialOperationOptions): CredentialStorage {
 }
 
 function requireProfileId(profileId: string): void {
+  if (typeof profileId !== 'string') {
+    throw new CredentialVaultError(
+      'invalid-profile-id',
+      'A stable non-empty profile identifier is required.',
+    )
+  }
+  let hasMalformedSurrogate = false
+  for (let index = 0; index < profileId.length; index += 1) {
+    const codeUnit = profileId.charCodeAt(index)
+    if (codeUnit >= 0xd800 && codeUnit <= 0xdbff) {
+      const next = profileId.charCodeAt(index + 1)
+      if (!(next >= 0xdc00 && next <= 0xdfff)) {
+        hasMalformedSurrogate = true
+        break
+      }
+      index += 1
+    } else if (codeUnit >= 0xdc00 && codeUnit <= 0xdfff) {
+      hasMalformedSurrogate = true
+      break
+    }
+  }
   if (
-    typeof profileId !== 'string' ||
     profileId.length === 0 ||
     profileId.length > 256 ||
-    /[\u0000-\u001f\u007f]/.test(profileId)
+    /[\u0000-\u001f\u007f]/.test(profileId) ||
+    hasMalformedSurrogate
   ) {
     throw new CredentialVaultError(
       'invalid-profile-id',
@@ -306,6 +327,19 @@ export async function enrollLearnerPin(
   )
 }
 
+/**
+ * Async handoff boundary for callers that still hold a legacy plaintext PIN.
+ * Resolution means derivation, durable vault read-back, and source-PIN
+ * verification have all succeeded, so the caller may discard its source PIN.
+ */
+export function enrollLegacyCredential(
+  profileId: string,
+  pin: string,
+  options?: CredentialOperationOptions,
+): Promise<StoredLearnerCredentialRecord> {
+  return enrollLearnerPin(profileId, pin, options)
+}
+
 export async function rotateLearnerPin(
   profileId: string,
   currentPin: unknown,
@@ -359,13 +393,18 @@ export async function markLearnerCredentialResetRequired(
   const existing = readLearnerCredential(profileId, options)
   if (existing?.state === 'reset-required') return existing
   const now = timestamp(options)
+  const verifier = await createUnusablePinVerifier(options?.crypto)
   if (existing) {
     return writeLearnerCredential(
-      { ...existing, state: 'reset-required', rotatedAt: now },
+      {
+        ...existing,
+        ...verifier,
+        state: 'reset-required',
+        rotatedAt: now,
+      },
       options,
     )
   }
-  const verifier = await createUnusablePinVerifier(options?.crypto)
   return writeLearnerCredential(
     {
       schemaVersion: LEARNER_CREDENTIAL_SCHEMA_VERSION,

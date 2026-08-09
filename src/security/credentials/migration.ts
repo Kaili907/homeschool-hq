@@ -4,7 +4,7 @@ import {
 } from '../appData'
 import { isFourDigitPin } from './pinVerifier'
 import {
-  enrollLearnerPin,
+  enrollLegacyCredential,
   learnerCredentialStorageKey,
   markLearnerCredentialResetRequired,
   readLearnerCredential,
@@ -54,10 +54,20 @@ export interface LegacyCredentialMigrationResult {
 
 export interface LegacyCredentialMigrationOptions extends CredentialOperationOptions {
   readonly journalNamespace?: string
+  readonly educationalDataPersistence?: DurableEducationalDataPersistence
   readonly afterStage?: (
     profileId: string,
     stage: LegacyMigrationStage,
   ) => void | Promise<void>
+}
+
+/**
+ * Final integration owns AppState persistence. The migration supplies only an
+ * already-sanitized value, then independently validates the durable read-back.
+ */
+export interface DurableEducationalDataPersistence {
+  write(educationalData: CredentialFreeJsonValue): void | Promise<void>
+  read(): unknown | Promise<unknown>
 }
 
 const STAGES: readonly LegacyMigrationStage[] = Object.freeze([
@@ -221,6 +231,39 @@ function legacyProfilesFrom(value: unknown): LegacyProfileInput[] {
   })
 }
 
+function canonicalCredentialFreeJson(value: CredentialFreeJsonValue): string {
+  if (value === null || typeof value !== 'object') return JSON.stringify(value)
+  if (Array.isArray(value)) {
+    return `[${value.map((entry) => canonicalCredentialFreeJson(entry)).join(',')}]`
+  }
+  return `{${Object.keys(value)
+    .sort()
+    .map((key) => `${JSON.stringify(key)}:${canonicalCredentialFreeJson(value[key])}`)
+    .join(',')}}`
+}
+
+async function persistAndVerifyEducationalData(
+  educationalData: CredentialFreeJsonValue,
+  options?: LegacyCredentialMigrationOptions,
+): Promise<void> {
+  const persistence = options?.educationalDataPersistence
+  if (!persistence) {
+    throw new Error(
+      'Durable educational-data persistence and read-back are required to complete credential migration.',
+    )
+  }
+  await persistence.write(educationalData)
+  const readBack = await persistence.read()
+  const credentialFreeReadBack = sanitizeCredentialFreeEducationalData(readBack)
+  const expected = canonicalCredentialFreeJson(educationalData)
+  if (
+    canonicalCredentialFreeJson(credentialFreeReadBack) !== expected ||
+    canonicalCredentialFreeJson(readBack as CredentialFreeJsonValue) !== expected
+  ) {
+    throw new Error('Durable educational data failed exact credential-free read-back verification.')
+  }
+}
+
 async function migrateOneProfile(
   profile: LegacyProfileInput,
   options?: LegacyCredentialMigrationOptions,
@@ -274,7 +317,7 @@ async function migrateOneProfile(
   const rawPin = profile.pin as string
   let credential = priorCredential
   if (!credential) {
-    credential = await enrollLearnerPin(profile.profileId, rawPin, options)
+    credential = await enrollLegacyCredential(profile.profileId, rawPin, options)
   } else if (!(await verifyLearnerCredentialRecord(credential, rawPin, options))) {
     credential = await markLearnerCredentialResetRequired(profile.profileId, options)
   }
@@ -322,6 +365,7 @@ export async function migrateLegacyEducationalCredentials(
   }
 
   const educationalData = sanitizeCredentialFreeEducationalData(value)
+  await persistAndVerifyEducationalData(educationalData, options)
   for (const profile of profiles) {
     await advanceMigrationStage(
       profile.profileId,
