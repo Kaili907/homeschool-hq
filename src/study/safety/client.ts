@@ -71,12 +71,23 @@ function failClosed(reasonCode: string): StudySafetyClassificationResponseV1 {
  * Which thing could not be obtained. `session-authorization` means the adult
  * bearer or the learner's Study session was missing, expired, revoked, or
  * refused; `rate-limit` means the gateway shed the request;
- * `authorization-infrastructure` means the gateway's learner-authorization
- * verifier was itself unreachable, so nothing was refused and nothing was
- * judged; `classifier` means everything else that stopped a classification. All
- * four fail closed — none may continue tutoring — but only the last is a
- * safety-classifier incident, so an ordinary session expiry, a rate limit and an
- * authorization outage are never reported as one.
+ * `authorization-infrastructure` means a trusted authorization dependency of
+ * this request could not produce a usable authorization answer at all — the
+ * question went unanswered rather than answered "no", so nothing was refused and
+ * nothing was judged; `classifier` means everything else that stopped a
+ * classification. All four fail closed — none may continue tutoring — but only
+ * the last is a safety-classifier incident, so an ordinary session expiry, a
+ * rate limit and an authorization outage are never reported as one.
+ *
+ * `authorization-infrastructure` is defined by that semantics and not by its
+ * producer: any of the request's authorization-verification dependencies may
+ * raise it, and which one did is a server detail this client must not have to
+ * care about — the set is a server contract, enumerated and pinned there. It is
+ * correspondingly narrower than "the gateway failed": an authorization answer of
+ * "no" is an identity refusal and stays `session-authorization`, and a server
+ * error or an unavailability that is not this signal stays `classifier`. What
+ * the category buys the learner is a technical retry interruption instead of a
+ * learner-safety classification.
  */
 export type StudySafetyFailureCategory =
   | 'session-authorization'
