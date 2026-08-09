@@ -176,6 +176,8 @@ begin
   -- migration must refuse rather than redefine a function it did not write.
   if to_regprocedure('public.academy_study_academic_readiness_v1()') is not null
      or to_regprocedure(
+       'academy_private.study_academic_required_function_metadata()') is not null
+     or to_regprocedure(
        'academy_private.study_academic_function_ready(text)') is not null
      or to_regprocedure(
        'academy_private.study_academic_table_ready(text,text[])') is not null
@@ -205,6 +207,54 @@ begin
     raise exception 'STUDY_ACADEMIC_READINESS adult-managed mutation missing';
   end if;
 end;
+$$;
+
+-- The single reviewed metadata authority for every function Academic Readiness
+-- requires. Identity is the schema-qualified name plus argument types used by
+-- to_regprocedure; return type and proretset are separate catalog attributes and
+-- are therefore carried explicitly rather than incorrectly attributed to that
+-- identity. Strictness is explicit for the same operational reason: making a
+-- required RPC STRICT can turn a reviewed nullable argument into a silent NULL
+-- result without executing the body.
+create function academy_private.study_academic_required_function_metadata()
+returns table (
+  signature text,
+  expected_language text,
+  expected_volatility text,
+  expected_result text,
+  expected_returns_set boolean,
+  expected_strict boolean
+)
+language sql
+immutable
+security definer
+set search_path = pg_catalog
+as $$
+  values
+    ('public.academy_study_create_session(jsonb,text)',
+      'plpgsql', 'v', 'jsonb', false, false),
+    ('public.academy_study_transition_session(text,bigint,text,timestamptz,text)',
+      'plpgsql', 'v', 'jsonb', false, false),
+    ('public.academy_study_read_checkpoint(text)',
+      'plpgsql', 's', 'jsonb', false, false),
+    ('public.academy_study_compare_and_swap_checkpoint(text,bigint,text,jsonb)',
+      'plpgsql', 'v', 'jsonb', false, false),
+    ('public.academy_study_upsert_adult_managed_record(text,jsonb,bigint,text)',
+      'plpgsql', 'v', 'jsonb', false, false),
+    ('public.academy_study_effective_settings(uuid,date)',
+      'plpgsql', 's', 'jsonb', false, false),
+    ('public.academy_study_store_protected_work(jsonb)',
+      'plpgsql', 'v', 'jsonb', false, false),
+    ('public.academy_study_read_protected_work(uuid,text,bigint)',
+      'plpgsql', 's', 'jsonb', false, false),
+    ('public.academy_study_append_adult_note(jsonb)',
+      'plpgsql', 'v', 'jsonb', false, false),
+    ('public.academy_study_list_adult_note_metadata(uuid)',
+      'plpgsql', 's', 'jsonb', false, false),
+    ('public.academy_study_read_adult_note(uuid,text,bigint,uuid)',
+      'plpgsql', 'v', 'jsonb', false, false),
+    ('public.academy_study_append_event(text,text,integer,text)',
+      'plpgsql', 'v', 'jsonb', false, false);
 $$;
 
 -- The single authority for which adult-managed record kinds exist. The mutation
@@ -273,9 +323,11 @@ end;
 $$;
 
 -- A required academic function is ready only when the whole contract holds: the
--- exact signature exists, it is owned by postgres, it is security definer with a
--- pinned search_path, the learner-facing role the adapters authenticate as can
--- execute it, and no unauthenticated role can. Anything less is a name.
+-- exact schema-qualified argument signature exists and occurs in the reviewed
+-- authority; its language, volatility, result type, set-returning posture and
+-- strictness match that authority; it is owned by postgres; it is security definer
+-- with a pinned search_path; the learner-facing role the adapters authenticate as
+-- can execute it; and no unauthenticated role can. Anything less is a name.
 --
 -- The anon test is what catches a PUBLIC grant: anon inherits PUBLIC, so a
 -- privilege widened to PUBLIC shows up here without a separate probe.
@@ -287,22 +339,24 @@ security definer
 set search_path = pg_catalog
 as $$
 declare
-  target oid;
   ready boolean;
 begin
-  target := to_regprocedure(p_signature);
-  if target is null then
-    return false;
-  end if;
   select routine.prosecdef
     and pg_get_userbyid(routine.proowner) = 'postgres'
     and coalesce(routine.proconfig, array[]::text[])
       @> array['search_path=pg_catalog']
-    and has_function_privilege('authenticated', target, 'EXECUTE')
-    and not has_function_privilege('anon', target, 'EXECUTE')
+    and language.lanname = expected.expected_language
+    and routine.provolatile::text = expected.expected_volatility
+    and pg_get_function_result(routine.oid) = expected.expected_result
+    and routine.proretset = expected.expected_returns_set
+    and routine.proisstrict = expected.expected_strict
+    and has_function_privilege('authenticated', routine.oid, 'EXECUTE')
+    and not has_function_privilege('anon', routine.oid, 'EXECUTE')
   into ready
-  from pg_proc as routine
-  where routine.oid = target;
+  from academy_private.study_academic_required_function_metadata() as expected
+  join pg_proc as routine on routine.oid = to_regprocedure(expected.signature)
+  join pg_language as language on language.oid = routine.prolang
+  where expected.signature = p_signature;
   return coalesce(ready, false);
 end;
 $$;
@@ -432,13 +486,14 @@ $$;
 --   caller identity -- the trusted-server guard on the readiness RPC itself, which
 --                    is upstream of every probe here.
 --
--- What remains uncovered is stated as a gap rather than left to be inferred from the
--- list: prorows, procost, proparallel, proleakproof and proretset are not pinned.
--- None of them can make this mutation stop working the way prolang and provolatile
--- can -- proretset and the argument/return types are fixed by the exact signature the
--- probes resolve, and the rest are planner hints on a function the planner is never
--- asked to optimise. Pinning them would be a change to what readiness demands of the
--- estate rather than a closure of the body-versus-metadata asymmetry.
+-- Return type, proretset and strictness are pinned by the generic required-function
+-- metadata authority. to_regprocedure identity fixes the argument types only; it
+-- does not fix any of those three attributes. What remains deliberately unpinned is
+-- planner metadata: prorows, procost, proparallel and proleakproof. These functions
+-- are invoked as RPC entry points, not used as planner expressions or security
+-- barrier predicates, so those attributes cannot make the reviewed direct operation
+-- unusable. Pinning them would add decorative estate requirements rather than close
+-- a demonstrated READY-while-broken path.
 create function academy_private.study_adult_managed_body_fingerprint_ok()
 returns boolean
 language plpgsql
@@ -986,6 +1041,8 @@ begin
 end;
 $$;
 
+alter function academy_private.study_academic_required_function_metadata()
+  owner to postgres;
 alter function academy_private.study_academic_function_ready(text)
   owner to postgres;
 alter function academy_private.study_academic_table_ready(text, text[])
@@ -1006,6 +1063,9 @@ alter function public.academy_study_academic_readiness_v1() owner to postgres;
 
 -- The helpers are implementation detail of the readiness function, which runs as
 -- postgres; no role needs them directly.
+revoke all on function
+  academy_private.study_academic_required_function_metadata()
+  from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_academic_function_ready(text)
   from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_academic_table_ready(text, text[])
@@ -1053,6 +1113,11 @@ set academic_readiness_version = 1,
       'academic_readiness_read_only', true,
       'academic_readiness_execute_role', 'service_role',
       'academic_readiness_dependency_count', 7,
+      'academic_readiness_required_function_count', 12,
+      'academic_readiness_required_function_language_pinned_all', true,
+      'academic_readiness_required_function_volatility_pinned_all', true,
+      'academic_readiness_required_function_result_shape_pinned_all', true,
+      'academic_readiness_required_function_strictness_pinned_all', true,
       'academic_readiness_authorizes_study', false,
       -- The record-kind authority is now one shared function rather than a literal
       -- list inside the mutation plus a source-text search inside readiness.

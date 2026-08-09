@@ -88,6 +88,27 @@ const REQUIRED_FUNCTIONS: Readonly<Record<AcademicDependency, readonly string[]>
   'event-ledger': ['public.academy_study_append_event(text,text,integer,text)'],
 }
 
+const REQUIRED_FUNCTION_METADATA = [
+  { signature: 'public.academy_study_create_session(jsonb,text)', volatility: 'v', behavior: 'write', dependencies: ['study-session-adapter'] },
+  { signature: 'public.academy_study_transition_session(text,bigint,text,timestamptz,text)', volatility: 'v', behavior: 'write', dependencies: ['study-session-adapter'] },
+  { signature: 'public.academy_study_read_checkpoint(text)', volatility: 's', behavior: 'read', dependencies: ['checkpoint-adapter'] },
+  { signature: 'public.academy_study_compare_and_swap_checkpoint(text,bigint,text,jsonb)', volatility: 'v', behavior: 'write', dependencies: ['checkpoint-adapter'] },
+  { signature: SHARED_ADULT_MANAGED, volatility: 'v', behavior: 'write', dependencies: ['review-queue', 'calendar-adapter', 'parent-settings-adapter'] },
+  { signature: 'public.academy_study_effective_settings(uuid,date)', volatility: 's', behavior: 'read', dependencies: ['parent-settings-adapter'] },
+  { signature: 'public.academy_study_store_protected_work(jsonb)', volatility: 'v', behavior: 'write', dependencies: ['adult-private-adapter'] },
+  { signature: 'public.academy_study_read_protected_work(uuid,text,bigint)', volatility: 's', behavior: 'read', dependencies: ['adult-private-adapter'] },
+  { signature: 'public.academy_study_append_adult_note(jsonb)', volatility: 'v', behavior: 'write', dependencies: ['adult-private-adapter'] },
+  { signature: 'public.academy_study_list_adult_note_metadata(uuid)', volatility: 's', behavior: 'read', dependencies: ['adult-private-adapter'] },
+  // Reading a note appends its audited access event, so the reviewed declaration is volatile.
+  { signature: 'public.academy_study_read_adult_note(uuid,text,bigint,uuid)', volatility: 'v', behavior: 'write', dependencies: ['adult-private-adapter'] },
+  { signature: 'public.academy_study_append_event(text,text,integer,text)', volatility: 'v', behavior: 'write', dependencies: ['event-ledger'] },
+] as const satisfies readonly {
+  signature: string
+  volatility: 'v' | 's' | 'i'
+  behavior: 'read' | 'write'
+  dependencies: readonly AcademicDependency[]
+}[]
+
 /** Every academic table the readiness contract reads metadata about. */
 const ACADEMIC_TABLES = [
   'public.academy_study_sessions',
@@ -579,6 +600,226 @@ describe.sequential('consolidated academic readiness contract', () => {
           allReadyExcept('review-queue', 'calendar-adapter', 'parent-settings-adapter'),
         )
       })
+    })
+  })
+
+  describe('H8 required-function metadata authority', () => {
+    const AUTHORITY =
+      'academy_private.study_academic_required_function_metadata()'
+
+    async function genericReady(signature: string) {
+      const result = await database.query<{ ready: boolean }>(
+        `select academy_private.study_academic_function_ready($1) as ready`,
+        [signature],
+      )
+      return result.rows[0].ready
+    }
+
+    it('is the exact reviewed census, including read/write-derived volatility', async () => {
+      const result = await database.query<{
+        signature: string
+        expected_language: string
+        expected_volatility: string
+        expected_result: string
+        expected_returns_set: boolean
+        expected_strict: boolean
+      }>(`select * from ${AUTHORITY}`)
+      expect(result.rows).toEqual(REQUIRED_FUNCTION_METADATA.map((entry) => ({
+        signature: entry.signature,
+        expected_language: 'plpgsql',
+        expected_volatility: entry.volatility,
+        expected_result: 'jsonb',
+        expected_returns_set: false,
+        expected_strict: false,
+      })))
+      expect(new Set(result.rows.map((row) => row.signature)).size).toBe(12)
+      expect(result.rows.filter((row) => row.expected_volatility === 'v')).toHaveLength(8)
+      expect(result.rows.filter((row) => row.expected_volatility === 's')).toHaveLength(4)
+    })
+
+    it('derives the same closed function set as the dependency authority', async () => {
+      expect(new Set(Object.values(REQUIRED_FUNCTIONS).flat()))
+        .toEqual(new Set(REQUIRED_FUNCTION_METADATA.map((entry) => entry.signature)))
+    })
+
+    it.each(REQUIRED_FUNCTION_METADATA)(
+      'accepts the reviewed catalog row for $signature', async ({ signature }) => {
+        await expect(genericReady(signature)).resolves.toBe(true)
+      })
+
+    it.each(REQUIRED_FUNCTION_METADATA)(
+      'rejects wrong LANGUAGE for $signature', async ({ signature, dependencies }) => {
+        await reverted(async () => {
+          const rendered = await database.query<{ definition: string }>(
+            'select pg_get_functiondef(to_regprocedure($1)) as definition',
+            [signature],
+          )
+          const wrong = rendered.rows[0].definition.replace(
+            'LANGUAGE plpgsql', 'LANGUAGE sql',
+          )
+          expect(wrong).not.toBe(rendered.rows[0].definition)
+          // The reviewed PL/pgSQL source is intentionally invalid SQL. This is the
+          // one experiment that cannot install with body checking on; restore it
+          // before evaluating readiness or attempting the operation.
+          await database.exec('set local check_function_bodies = off')
+          await database.exec(wrong)
+          await database.exec('set local check_function_bodies = on')
+          expect(await genericReady(signature)).toBe(false)
+          expect((await academicReadiness()).dependencies).toEqual(
+            allReadyExcept(...dependencies),
+          )
+        })
+      })
+
+    it.each(REQUIRED_FUNCTION_METADATA.flatMap((entry) =>
+      (entry.volatility === 'v' ? ['stable', 'immutable'] : ['volatile', 'immutable'])
+        .map((wrong) => ({ ...entry, wrong }))))(
+      'rejects $wrong volatility for $signature',
+      async ({ signature, dependencies, wrong }) => {
+        await reverted(async () => {
+          await database.exec(`alter function ${signature} ${wrong}`)
+          expect(await genericReady(signature)).toBe(false)
+          expect((await academicReadiness()).dependencies).toEqual(
+            allReadyExcept(...dependencies),
+          )
+        })
+      },
+    )
+
+    it.each(REQUIRED_FUNCTION_METADATA)(
+      'rejects the exact function moved to the wrong schema: $signature',
+      async ({ signature, dependencies }) => {
+        await reverted(async () => {
+          await database.exec(`alter function ${signature} set schema academy_private`)
+          expect(await genericReady(signature)).toBe(false)
+          expect((await academicReadiness()).dependencies).toEqual(
+            allReadyExcept(...dependencies),
+          )
+        })
+      })
+
+    it.each(REQUIRED_FUNCTION_METADATA)(
+      'rejects a name-only wrong overload for $signature',
+      async ({ signature, dependencies, volatility }) => {
+        await reverted(async () => {
+          const qualifiedName = signature.slice(0, signature.indexOf('('))
+          const functionName = qualifiedName.slice(qualifiedName.lastIndexOf('.') + 1)
+          await database.exec(`alter function ${signature} rename to ${functionName}_h8_original`)
+          await database.exec(`
+            create function ${qualifiedName}() returns jsonb
+            language plpgsql ${volatility === 'v' ? 'volatile' : volatility === 's' ? 'stable' : 'immutable'}
+            security definer set search_path = pg_catalog
+            as $decoy$ begin return '{}'::jsonb; end $decoy$;
+            grant execute on function ${qualifiedName}() to authenticated;
+          `)
+          expect(await genericReady(signature)).toBe(false)
+          expect((await academicReadiness()).dependencies).toEqual(
+            allReadyExcept(...dependencies),
+          )
+        })
+      })
+
+    it('pins result type, proretset and strictness separately from regprocedure identity',
+      async () => {
+        const signature = 'public.academy_study_transition_session(text,bigint,text,timestamptz,text)'
+        await reverted(async () => {
+          // The signature still resolves because STRICT is not part of regprocedure
+          // identity, but a nullable completed_at would now silently skip the body.
+          await database.exec(`alter function ${signature} strict`)
+          expect(await regprocedureExists(signature)).toBe(true)
+          expect(await genericReady(signature)).toBe(false)
+          expect((await academicReadiness()).dependencies)
+            .toEqual(allReadyExcept('study-session-adapter'))
+        })
+      })
+
+    it('closes the create-session STABLE false-ready and correlates the operation',
+      async () => {
+        await reverted(async () => {
+          const payload = JSON.stringify({
+            id: 'session-h8-reviewed', schema_version: 1,
+            student_id: '00000000-0000-0000-0000-000000000101',
+            lesson_id: 'lesson-h8', subject_id: 'math', study_plan_id: 'plan-h8',
+            state: 'active', started_at: '2026-08-09T18:00:00Z',
+            completed_at: null, intended_local_date: '2026-08-09',
+          })
+          const invoke = (id: string) => asRole(
+            'authenticated', '00000000-0000-0000-0000-0000000000a1',
+            () => database.query(
+              `select public.academy_study_create_session(
+                 ($1::jsonb || jsonb_build_object('id', $2::text)), $3
+               ) as result`,
+              [payload, id, `key-${id}`],
+            ),
+          )
+          await expect(invoke('session-h8-reviewed')).resolves.toMatchObject({
+            rows: [{ result: { status: 'created' } }],
+          })
+          await database.exec(
+            'alter function public.academy_study_create_session(jsonb,text) stable',
+          )
+          expect((await academicReadiness()).dependencies)
+            .toEqual(allReadyExcept('study-session-adapter'))
+          await database.exec('savepoint h8_broken_create')
+          let failure = ''
+          try {
+            await invoke('session-h8-stable')
+          } catch (error) {
+            failure = String((error as Error).message)
+            await database.exec('rollback to savepoint h8_broken_create')
+            await database.exec('reset role')
+          }
+          expect(failure).toMatch(/INSERT is not allowed in a non-volatile function/)
+        })
+      })
+
+    it('closes the read-checkpoint wrong-LANGUAGE false-ready before its parse failure',
+      async () => {
+        await reverted(async () => {
+          const invoke = () => asRole(
+            'authenticated', '00000000-0000-0000-0000-0000000000a1',
+            () => database.query(
+              `select public.academy_study_read_checkpoint('session-a') as result`,
+            ),
+          )
+          await expect(invoke()).resolves.toMatchObject({ rows: [{ result: null }] })
+          const rendered = await database.query<{ definition: string }>(
+            'select pg_get_functiondef(to_regprocedure($1)) as definition',
+            ['public.academy_study_read_checkpoint(text)'],
+          )
+          await database.exec('set local check_function_bodies = off')
+          await database.exec(rendered.rows[0].definition.replace(
+            'LANGUAGE plpgsql', 'LANGUAGE sql',
+          ))
+          await database.exec('set local check_function_bodies = on')
+          expect((await academicReadiness()).dependencies)
+            .toEqual(allReadyExcept('checkpoint-adapter'))
+          await database.exec('savepoint h8_broken_language')
+          let failure = ''
+          try {
+            await invoke()
+          } catch (error) {
+            failure = String((error as Error).message)
+            await database.exec('rollback to savepoint h8_broken_language')
+            await database.exec('reset role')
+          }
+          expect(failure).toMatch(/syntax error/)
+        })
+      })
+
+    it('is postgres-owned, immutable, definer, pinned and client-unreachable', async () => {
+      const result = await database.query<{
+        owner: string; volatility: string; definer: boolean; config: string[] | null
+      }>(`select pg_get_userbyid(proowner) as owner, provolatile as volatility,
+            prosecdef as definer, proconfig as config
+          from pg_proc where oid = to_regprocedure($1)`, [AUTHORITY])
+      expect(result.rows[0]).toEqual({
+        owner: 'postgres', volatility: 'i', definer: true,
+        config: ['search_path=pg_catalog'],
+      })
+      for (const role of ['anon', 'authenticated', 'service_role', 'public']) {
+        expect(await hasExecute(role, AUTHORITY)).toBe(false)
+      }
     })
   })
 
@@ -2303,6 +2544,11 @@ describe.sequential('consolidated academic readiness contract', () => {
         academic_readiness_version: 1,
         academic_readiness_read_only: true,
         academic_readiness_execute_role: 'service_role',
+        academic_readiness_required_function_count: 12,
+        academic_readiness_required_function_language_pinned_all: true,
+        academic_readiness_required_function_volatility_pinned_all: true,
+        academic_readiness_required_function_result_shape_pinned_all: true,
+        academic_readiness_required_function_strictness_pinned_all: true,
       })
     })
 
@@ -2445,6 +2691,48 @@ describe.sequential('consolidated academic readiness contract', () => {
       }
     })
 
+    it('allows a wrong-volatility predecessor to reach H8 and closes it at runtime',
+      async () => {
+        const database2 = await chainWithoutAcademicMigration()
+        try {
+          const signature = 'public.academy_study_create_session(jsonb,text)'
+          await database2.exec(`alter function ${signature} stable`)
+          await expect(database2.exec(await academicMigrationSource())).resolves.toBeDefined()
+          const result = await database2.query<{ ready: boolean }>(
+            'select academy_private.study_academic_function_ready($1) as ready',
+            [signature],
+          )
+          expect(result.rows[0].ready).toBe(false)
+        } finally {
+          await database2.close()
+        }
+      })
+
+    it('allows a wrong-language predecessor to reach H8 and closes it at runtime',
+      async () => {
+        const database2 = await chainWithoutAcademicMigration()
+        try {
+          const signature = 'public.academy_study_read_checkpoint(text)'
+          const rendered = await database2.query<{ definition: string }>(
+            'select pg_get_functiondef(to_regprocedure($1)) as definition',
+            [signature],
+          )
+          await database2.exec('set check_function_bodies = off')
+          await database2.exec(rendered.rows[0].definition.replace(
+            'LANGUAGE plpgsql', 'LANGUAGE sql',
+          ))
+          await database2.exec('set check_function_bodies = on')
+          await expect(database2.exec(await academicMigrationSource())).resolves.toBeDefined()
+          const result = await database2.query<{ ready: boolean }>(
+            'select academy_private.study_academic_function_ready($1) as ready',
+            [signature],
+          )
+          expect(result.rows[0].ready).toBe(false)
+        } finally {
+          await database2.close()
+        }
+      })
+
     /**
      * Creation, never replacement, extends to the four body probes this migration
      * adds. A pre-existing function wearing any of those names would otherwise be
@@ -2453,6 +2741,7 @@ describe.sequential('consolidated academic readiness contract', () => {
      * stub standing where the check is supposed to be.
      */
     it.each([
+      'academy_private.study_academic_required_function_metadata',
       'academy_private.study_adult_managed_body_fingerprint_ok',
       'academy_private.study_adult_managed_language_ok',
       'academy_private.study_adult_managed_volatility_ok',
