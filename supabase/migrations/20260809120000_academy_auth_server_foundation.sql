@@ -179,6 +179,8 @@ create table academy_private.parent_installation_grants (
     )
   ),
   authority_revision bigint not null check (authority_revision >= 1),
+  expected_binding_revision bigint check (expected_binding_revision >= 1),
+  expected_session_generation bigint check (expected_session_generation >= 1),
   status text not null default 'issued'
     check (status in ('issued', 'consumed', 'revoked')),
   issued_at timestamptz not null default now(),
@@ -203,6 +205,18 @@ create table academy_private.parent_installation_grants (
     or (
       purpose = 'recovery'
       and capability = 'parent_installation:recover'
+    )
+  ),
+  constraint parent_installation_grants_authorization_epoch_check check (
+    (
+      purpose = 'recovery'
+      and expected_binding_revision is not null
+      and expected_session_generation is not null
+    )
+    or (
+      purpose in ('first_claim', 'legacy_upgrade')
+      and expected_binding_revision is null
+      and expected_session_generation is null
     )
   ),
   constraint parent_installation_grants_status_dates_check check (
@@ -368,6 +382,7 @@ as $function$
 declare
   grant_row academy_private.parent_installation_grants%rowtype;
   authority academy_private.parent_installation_capabilities%rowtype;
+  target_binding academy_private.parent_installation_bindings%rowtype;
 begin
   if p_token_digest is null
      or p_token_digest !~ '^[0-9a-f]{64}$'
@@ -378,6 +393,25 @@ begin
      or auth.uid() is null then
     raise exception 'Parent installation grant denied'
       using errcode = '42501';
+  end if;
+
+  -- Recovery serializes on the installation binding before the grant row.
+  -- Every recovery path uses this same lock order, so two old-generation
+  -- grants cannot both validate before the authorization epoch rotates.
+  if p_purpose = 'recovery' then
+    select stored.*
+      into target_binding
+      from academy_private.parent_installation_bindings as stored
+     where stored.installation_id = p_installation_id
+       and stored.dataset_epoch = p_dataset_epoch
+       and stored.status = 'active'
+       and stored.revoked_at is null
+     for update;
+
+    if not found then
+      raise exception 'Parent installation grant denied'
+        using errcode = '42501';
+    end if;
   end if;
 
   select stored.*
@@ -394,7 +428,17 @@ begin
      or grant_row.actor_user_id <> auth.uid()
      or grant_row.installation_id <> p_installation_id
      or grant_row.dataset_epoch <> p_dataset_epoch
-     or grant_row.purpose <> p_purpose then
+     or grant_row.purpose <> p_purpose
+     or (
+       p_purpose = 'recovery'
+       and (
+         grant_row.household_id <> target_binding.household_id
+         or grant_row.expected_binding_revision
+              is distinct from target_binding.binding_revision
+         or grant_row.expected_session_generation
+              is distinct from target_binding.session_generation
+       )
+     ) then
     raise exception 'Parent installation grant denied'
       using errcode = '42501';
   end if;
@@ -461,9 +505,17 @@ security definer
 set search_path = pg_catalog, pg_temp
 as $function$
 declare
+  caller_household_id uuid := auth.uid();
   rejection jsonb;
   snapshot jsonb;
 begin
+  -- The legacy sync authority model derives the household boundary directly
+  -- from auth.uid(). Authenticate before protocol-control or data access.
+  if caller_household_id is null then
+    raise exception 'Academy sync requires an authenticated household'
+      using errcode = '28000';
+  end if;
+
   rejection := academy_private.academy_sync_v2_gate(p_protocol_version);
   if rejection is not null then
     return rejection;
@@ -489,12 +541,20 @@ security definer
 set search_path = pg_catalog, pg_temp
 as $function$
 declare
+  caller_household_id uuid := auth.uid();
   rejection jsonb;
   credential_policy text;
   mutation_result jsonb;
 begin
-  -- This gate is intentionally first. No receipt lookup/creation, CAS lock,
-  -- or profile validation/write may precede protocol and maintenance control.
+  -- Preserve the legacy sync authority model while denying unauthenticated
+  -- callers before protocol, maintenance, or credential-policy disclosure.
+  if caller_household_id is null then
+    raise exception 'Academy sync requires an authenticated household'
+      using errcode = '28000';
+  end if;
+
+  -- After authentication, the gate still precedes validation, receipt work,
+  -- the CAS lock, and profile writes.
   rejection := academy_private.academy_sync_v2_gate(p_protocol_version);
   if rejection is not null then
     return rejection;
@@ -608,6 +668,7 @@ as $function$
 declare
   required_capability text;
   authority academy_private.parent_installation_capabilities%rowtype;
+  issuance_binding academy_private.parent_installation_bindings%rowtype;
   issued academy_private.parent_installation_grants%rowtype;
 begin
   required_capability := case
@@ -640,15 +701,19 @@ begin
   end if;
 
   if p_purpose = 'recovery' then
-    if not exists (
-      select 1
-      from academy_private.parent_installation_bindings as binding
-      where binding.installation_id = p_installation_id
-        and binding.household_id = p_household_id
-        and binding.dataset_epoch = p_dataset_epoch
-        and binding.status = 'active'
-        and binding.revoked_at is null
-    ) then
+    -- Capture the current server-side authorization epoch while preventing a
+    -- concurrent recovery/revocation from rotating it during issuance.
+    select stored.*
+      into issuance_binding
+      from academy_private.parent_installation_bindings as stored
+     where stored.installation_id = p_installation_id
+       and stored.household_id = p_household_id
+       and stored.dataset_epoch = p_dataset_epoch
+       and stored.status = 'active'
+       and stored.revoked_at is null
+     for update;
+
+    if not found then
       raise exception 'Parent installation grant issuance denied'
         using errcode = '42501';
     end if;
@@ -681,6 +746,8 @@ begin
     capability_id,
     capability,
     authority_revision,
+    expected_binding_revision,
+    expected_session_generation,
     expires_at,
     issued_correlation_id
   ) values (
@@ -694,6 +761,12 @@ begin
     authority.id,
     authority.capability,
     authority.authority_revision,
+    case
+      when p_purpose = 'recovery' then issuance_binding.binding_revision
+    end,
+    case
+      when p_purpose = 'recovery' then issuance_binding.session_generation
+    end,
     now() + interval '10 minutes',
     p_correlation_id
   )
@@ -824,6 +897,8 @@ begin
    where installation_id = p_installation_id
      and household_id = consumed.household_id
      and dataset_epoch = p_dataset_epoch
+     and binding_revision = consumed.expected_binding_revision
+     and session_generation = consumed.expected_session_generation
      and status = 'active'
      and revoked_at is null
   returning * into binding;
@@ -832,6 +907,18 @@ begin
     raise exception 'Parent installation recovery denied'
       using errcode = '42501';
   end if;
+
+  -- The successful rotation ends every outstanding authority-transition grant
+  -- for this installation and dataset. The consumed grant is already excluded
+  -- by status; unrelated household grants are untouched.
+  update academy_private.parent_installation_grants
+     set status = 'revoked',
+         revoked_at = now()
+   where household_id = consumed.household_id
+     and installation_id = p_installation_id
+     and dataset_epoch = p_dataset_epoch
+     and purpose in ('first_claim', 'legacy_upgrade', 'recovery')
+     and status = 'issued';
 
   return jsonb_build_object(
     'schemaVersion', 1,

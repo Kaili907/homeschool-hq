@@ -113,6 +113,107 @@ function handler(installations) {
 }
 
 describe('trusted Parent installation Netlify boundary', () => {
+  it('rejects missing and invalid bearers before any privileged RPC', async () => {
+    const installations = fakeInstallations()
+    const fetchImpl = vi.fn(async () => ({ ok: false, status: 401 }))
+    const run = createParentInstallationsHandler({
+      env: ENV,
+      fetchImpl,
+      installations,
+      createGrant: () => RAW_GRANT,
+      createCorrelationId: () => CORRELATION,
+    })
+
+    const missing = await run(event(
+      '/api/parent/installations/status',
+      {
+        schemaVersion: 1,
+        householdId: HOUSEHOLD,
+        installationId: INSTALLATION,
+      },
+      { headers: { 'content-type': 'application/json' } },
+    ))
+    expect(missing.statusCode).toBe(401)
+    expect(fetchImpl).not.toHaveBeenCalled()
+
+    const invalid = await run(event(
+      '/api/parent/installations/status',
+      {
+        schemaVersion: 1,
+        householdId: HOUSEHOLD,
+        installationId: INSTALLATION,
+      },
+      { headers: {
+        authorization: 'Bearer invalid-access-token',
+        'content-type': 'application/json',
+      } },
+    ))
+    expect(invalid.statusCode).toBe(401)
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+    expect(installations.status).not.toHaveBeenCalled()
+    expect(installations.issue).not.toHaveBeenCalled()
+    expect(installations.claim).not.toHaveBeenCalled()
+    expect(installations.recover).not.toHaveBeenCalled()
+    expect(installations.revoke).not.toHaveBeenCalled()
+  })
+
+  it('rejects unsupported methods and query parameters before authentication', async () => {
+    const installations = fakeInstallations()
+    const authVerifier = vi.fn(async () => ({
+      ok: true,
+      user: { id: ACTOR },
+      accessToken: ACCESS_TOKEN,
+    }))
+    const run = createParentInstallationsHandler({
+      env: ENV,
+      installations,
+      authVerifier,
+    })
+    const method = await run(event(
+      '/api/parent/installations/status',
+      {},
+      { httpMethod: 'GET' },
+    ))
+    expect(method.statusCode).toBe(405)
+    expect(method.headers.allow).toBe('POST')
+
+    const query = await run(event(
+      '/api/parent/installations/status',
+      {},
+      { queryStringParameters: { debug: 'true' } },
+    ))
+    expect(query.statusCode).toBe(400)
+    expect(authVerifier).not.toHaveBeenCalled()
+    expect(installations.status).not.toHaveBeenCalled()
+  })
+
+  it('rejects malformed, oversized, and wrong-shape bodies before RPC calls', async () => {
+    const installations = fakeInstallations()
+    const run = handler(installations)
+    const malformed = await run(event(
+      '/api/parent/installations/status',
+      {},
+      { body: '{"schemaVersion":' },
+    ))
+    expect(malformed.statusCode).toBe(400)
+    expect(body(malformed)).toEqual({ error: { code: 'malformed_json' } })
+
+    const oversized = await run(event(
+      '/api/parent/installations/status',
+      {},
+      { body: JSON.stringify({ padding: 'x'.repeat(2_100) }) },
+    ))
+    expect(oversized.statusCode).toBe(413)
+
+    const wrongShape = await run(event(
+      '/api/parent/installations/status',
+      {},
+      { body: JSON.stringify(['not', 'an', 'object']) },
+    ))
+    expect(wrongShape.statusCode).toBe(400)
+    expect(installations.status).not.toHaveBeenCalled()
+  })
+
   it('returns a raw grant once while sending only its digest to the database port', async () => {
     const installations = fakeInstallations()
     const log = vi.spyOn(console, 'log').mockImplementation(() => undefined)
@@ -256,6 +357,45 @@ describe('trusted Parent installation Netlify boundary', () => {
     expect(body(replay)).toEqual({ error: { code: 'not_authorized' } })
   })
 
+  it('maps RPC outages and unexpected secret-bearing failures safely', async () => {
+    const unavailable = fakeInstallations({
+      status: vi.fn(async () => {
+        throw new Error('parent_installation_unavailable')
+      }),
+    })
+    const outage = await handler(unavailable)(event(
+      '/api/parent/installations/status',
+      {
+        schemaVersion: 1,
+        householdId: HOUSEHOLD,
+        installationId: INSTALLATION,
+      },
+    ))
+    expect(outage.statusCode).toBe(503)
+    expect(body(outage)).toEqual({ error: { code: 'service_unavailable' } })
+
+    const leakingFailure = fakeInstallations({
+      recover: vi.fn(async () => {
+        throw new Error(`pin=${RAW_GRANT};digest=${TOKEN_DIGEST}`)
+      }),
+    })
+    const failed = await handler(leakingFailure)(event(
+      '/api/parent/installations/recover',
+      {
+        schemaVersion: 1,
+        installationId: INSTALLATION,
+        datasetEpoch: DATASET,
+        grantToken: RAW_GRANT,
+        localCredentialEnrollmentId: LOCAL_ENROLLMENT,
+      },
+    ))
+    expect(failed.statusCode).toBe(500)
+    expect(body(failed)).toEqual({ error: { code: 'internal_error' } })
+    expect(failed.body).not.toContain(RAW_GRANT)
+    expect(failed.body).not.toContain(TOKEN_DIGEST)
+    expect(failed.body).not.toMatch(/pin/i)
+  })
+
   it('exposes status, claim, and revoke but no Study/Admin authority inputs', async () => {
     const installations = fakeInstallations()
     const run = handler(installations)
@@ -384,5 +524,19 @@ describe('Parent installation Supabase bearer RPC port', () => {
       householdId: HOUSEHOLD,
       installationId: INSTALLATION,
     })).rejects.toThrow('parent_installation_denied')
+
+    const unavailable = createParentInstallationPort({
+      env: ENV,
+      fetchImpl: vi.fn(async () => ({
+        ok: false,
+        status: 500,
+        json: async () => ({ message: `pin=${RAW_GRANT}` }),
+      })),
+    })
+    await expect(unavailable.status({
+      accessToken: ACCESS_TOKEN,
+      householdId: HOUSEHOLD,
+      installationId: INSTALLATION,
+    })).rejects.toThrow('parent_installation_unavailable')
   })
 })

@@ -13,6 +13,7 @@ const MIGRATIONS = [
 
 const HOUSEHOLD = '10000000-0000-4000-8000-000000000001'
 const MANAGER = '00000000-0000-4000-8000-00000000000a'
+const MANAGER_B = '00000000-0000-4000-8000-00000000000e'
 const ORDINARY_GUARDIAN = '00000000-0000-4000-8000-00000000000b'
 const REVOKED_MEMBER = '00000000-0000-4000-8000-00000000000c'
 const REVOKED_CAPABILITY = '00000000-0000-4000-8000-00000000000d'
@@ -21,8 +22,10 @@ const MEMBERSHIP_ORDINARY = '20000000-0000-4000-8000-00000000000b'
 const MEMBERSHIP_REVOKED = '20000000-0000-4000-8000-00000000000c'
 const MEMBERSHIP_REVOKED_CAPABILITY =
   '20000000-0000-4000-8000-00000000000d'
+const MEMBERSHIP_MANAGER_B = '20000000-0000-4000-8000-00000000000e'
 const CAPABILITY_CLAIM = '30000000-0000-4000-8000-00000000000a'
 const CAPABILITY_RECOVER = '30000000-0000-4000-8000-00000000000b'
+const CAPABILITY_RECOVER_B = '30000000-0000-4000-8000-00000000000e'
 const STUDENT = '40000000-0000-4000-8000-000000000001'
 const INSTALLATION_A = '50000000-0000-4000-8000-000000000001'
 const INSTALLATION_B = '50000000-0000-4000-8000-000000000002'
@@ -135,6 +138,87 @@ describe('Academy auth server foundation migration', () => {
     return claim({ installationId, datasetEpoch, tokenDigest })
   }
 
+  async function recover({
+    actor = MANAGER,
+    tokenDigest,
+    localCredentialEnrollmentId = LOCAL_ENROLLMENT,
+    correlationId = CORRELATION_B,
+  }: {
+    actor?: string
+    tokenDigest: string
+    localCredentialEnrollmentId?: string
+    correlationId?: string
+  }) {
+    return asAuthenticated(actor, async () => {
+      const result = await database.query<{ result: Record<string, unknown> }>(
+        `select public.academy_parent_recover_installation_v1(
+          $1::uuid, $2::uuid, $3::text, $4::uuid, $5::uuid
+        ) as result`,
+        [
+          INSTALLATION_A,
+          DATASET_A,
+          tokenDigest,
+          localCredentialEnrollmentId,
+          correlationId,
+        ],
+      )
+      return result.rows[0].result
+    })
+  }
+
+  async function syncPersistenceState() {
+    const result = await database.query<{
+      profiles: unknown[]
+      revisions: unknown[]
+      receipts: unknown[]
+    }>(`
+      select
+        coalesce((
+          select jsonb_agg(to_jsonb(profile) order by household_id, profile_id)
+          from public.profiles as profile
+        ), '[]'::jsonb) as profiles,
+        coalesce((
+          select jsonb_agg(to_jsonb(state) order by household_id)
+          from public.academy_household_sync_state as state
+        ), '[]'::jsonb) as revisions,
+        coalesce((
+          select jsonb_agg(
+            to_jsonb(receipt) order by household_id, mutation_id
+          )
+          from public.academy_household_sync_mutations as receipt
+        ), '[]'::jsonb) as receipts
+    `)
+    return result.rows[0]
+  }
+
+  async function recoveryState() {
+    const result = await database.query<{
+      binding_revision: string
+      session_generation: string
+      grants: unknown[]
+    }>(`
+      select
+        binding.binding_revision::text as binding_revision,
+        binding.session_generation::text as session_generation,
+        coalesce((
+          select jsonb_agg(
+            jsonb_build_object(
+              'tokenDigest', grant_row.token_digest,
+              'status', grant_row.status,
+              'consumedAt', grant_row.consumed_at,
+              'revokedAt', grant_row.revoked_at
+            ) order by grant_row.token_digest
+          )
+          from academy_private.parent_installation_grants as grant_row
+          where grant_row.installation_id = binding.installation_id
+        ), '[]'::jsonb) as grants
+      from academy_private.parent_installation_bindings as binding
+      where binding.installation_id = $1::uuid
+        and binding.status = 'active'
+    `, [INSTALLATION_A])
+    return result.rows[0]
+  }
+
   beforeAll(async () => {
     database = await PGlite.create()
     await database.exec(`
@@ -173,6 +257,7 @@ describe('Academy auth server foundation migration', () => {
     await database.exec(`
       insert into auth.users (id) values
         ('${MANAGER}'),
+        ('${MANAGER_B}'),
         ('${ORDINARY_GUARDIAN}'),
         ('${REVOKED_MEMBER}'),
         ('${REVOKED_CAPABILITY}');
@@ -204,6 +289,10 @@ describe('Academy auth server foundation migration', () => {
         ),
         (
           '${MEMBERSHIP_ORDINARY}', '${HOUSEHOLD}', '${ORDINARY_GUARDIAN}',
+          'active', now(), null, null
+        ),
+        (
+          '${MEMBERSHIP_MANAGER_B}', '${HOUSEHOLD}', '${MANAGER_B}',
           'active', now(), null, null
         ),
         (
@@ -258,6 +347,10 @@ describe('Academy auth server foundation migration', () => {
           '${MANAGER}', 'parent_installation:recover', 'active', null
         ),
         (
+          '${CAPABILITY_RECOVER_B}', '${HOUSEHOLD}', '${MEMBERSHIP_MANAGER_B}',
+          '${MANAGER_B}', 'parent_installation:recover', 'active', null
+        ),
+        (
           '30000000-0000-4000-8000-00000000000c', '${HOUSEHOLD}',
           '${MEMBERSHIP_REVOKED}', '${REVOKED_MEMBER}',
           'parent_installation:claim', 'active', null
@@ -280,7 +373,10 @@ describe('Academy auth server foundation migration', () => {
       update academy_private.parent_installation_capabilities
          set authority_revision = 1,
              updated_at = now()
-       where id in ('${CAPABILITY_CLAIM}', '${CAPABILITY_RECOVER}');
+       where id in (
+         '${CAPABILITY_CLAIM}', '${CAPABILITY_RECOVER}',
+         '${CAPABILITY_RECOVER_B}'
+       );
       update academy_private.academy_sync_protocol_control
          set current_protocol = 2,
              minimum_supported_protocol = 1,
@@ -481,6 +577,21 @@ describe('Academy auth server foundation migration', () => {
       capability: 'parent_installation:recover',
     })
 
+    const issuedEpoch = await database.query<{
+      expected_binding_revision: string
+      expected_session_generation: string
+    }>(`
+      select
+        expected_binding_revision::text,
+        expected_session_generation::text
+      from academy_private.parent_installation_grants
+      where token_digest = $1
+    `, [recoveryDigest])
+    expect(issuedEpoch.rows[0]).toEqual({
+      expected_binding_revision: '1',
+      expected_session_generation: '1',
+    })
+
     const recovered = await asAuthenticated(MANAGER, async () => {
       const result = await database.query<{ result: Record<string, unknown> }>(
         `select public.academy_parent_recover_installation_v1(
@@ -537,6 +648,74 @@ describe('Academy auth server foundation migration', () => {
         CORRELATION_B,
       ],
     ))).rejects.toThrow(/denied/i)
+  })
+
+  it('rejects a recovery grant after its binding generation becomes stale', async () => {
+    await claimInstallation()
+    const staleDigest = digest('stale-generation-recovery')
+    await issueGrant({ purpose: 'recovery', tokenDigest: staleDigest })
+
+    await database.exec(`
+      update academy_private.parent_installation_bindings
+         set binding_revision = binding_revision + 1,
+             session_generation = session_generation + 1,
+             updated_at = now()
+       where installation_id = '${INSTALLATION_A}'
+         and status = 'active'
+    `)
+    const before = await recoveryState()
+
+    await expect(recover({ tokenDigest: staleDigest }))
+      .rejects.toThrow(/denied/i)
+    expect(await recoveryState()).toEqual(before)
+    expect(before).toMatchObject({
+      binding_revision: '2',
+      session_generation: '2',
+    })
+    expect(before.grants).toHaveLength(2)
+    expect(before.grants).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        tokenDigest: staleDigest,
+        status: 'issued',
+        consumedAt: null,
+        revokedAt: null,
+      }),
+      expect.objectContaining({ status: 'consumed' }),
+    ]))
+  })
+
+  it('lets only one manager recover an authorization epoch', async () => {
+    await claimInstallation()
+    const managerADigest = digest('manager-a-recovery')
+    const managerBDigest = digest('manager-b-recovery')
+    await issueGrant({ purpose: 'recovery', tokenDigest: managerADigest })
+    await issueGrant({
+      actor: MANAGER_B,
+      purpose: 'recovery',
+      tokenDigest: managerBDigest,
+    })
+
+    await expect(recover({ tokenDigest: managerADigest })).resolves.toMatchObject({
+      bindingRevision: '2',
+      sessionGeneration: '2',
+    })
+    const afterFirstRecovery = await recoveryState()
+    expect(afterFirstRecovery.grants).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        tokenDigest: managerADigest,
+        status: 'consumed',
+      }),
+      expect.objectContaining({
+        tokenDigest: managerBDigest,
+        status: 'revoked',
+      }),
+    ]))
+
+    await expect(recover({
+      actor: MANAGER_B,
+      tokenDigest: managerBDigest,
+    })).rejects.toThrow(/denied/i)
+    expect(await recoveryState()).toEqual(afterFirstRecovery)
   })
 
   it('revokes the binding, live grants, and prior session generation', async () => {
@@ -600,9 +779,111 @@ describe('Academy auth server foundation migration', () => {
     }>('select public.academy_sync_snapshot_v2(2) as result'))
     expect(snapshot.rows[0].result.syncProtocolVersion).toBe(2)
     expect(snapshot.rows[0].result.rows).toHaveLength(1)
+
+    await asAuthenticated(ORDINARY_GUARDIAN, () => database.query(
+      `select public.academy_apply_profile_mutation_v2(
+        2, 0, 'cross-household-row', $1::jsonb
+      )`,
+      [JSON.stringify([profileRow()])],
+    ))
+    const isolated = await asAuthenticated(MANAGER, () => database.query<{
+      result: { rows: Array<{ profile_id: string }> }
+    }>('select public.academy_sync_snapshot_v2(2) as result'))
+    expect(isolated.rows[0].result.rows).toHaveLength(1)
+    expect(isolated.rows[0].result.rows[0].profile_id).toBe('p1')
+  })
+
+  it('authenticates snapshots before every protocol or maintenance response', async () => {
+    await database.exec(`
+      update academy_private.academy_sync_protocol_control
+         set minimum_supported_protocol = 2,
+             mode = 'normal'
+       where singleton
+    `)
+    await expect(database.query(
+      'select public.academy_sync_snapshot_v2(1)',
+    )).rejects.toThrow(/authenticated household/i)
+
+    await database.exec(`
+      update academy_private.academy_sync_protocol_control
+         set mode = 'maintenance'
+       where singleton
+    `)
+    await expect(database.query(
+      'select public.academy_sync_snapshot_v2(2)',
+    )).rejects.toThrow(/authenticated household/i)
+
+    await database.exec(`
+      update academy_private.academy_sync_protocol_control
+         set mode = 'normal'
+       where singleton
+    `)
+    await expect(database.query(
+      'select public.academy_sync_snapshot_v2(2)',
+    )).rejects.toThrow(/authenticated household/i)
+
+    const authenticated = await asAuthenticated(MANAGER, () => database.query<{
+      result: Record<string, unknown>
+    }>('select public.academy_sync_snapshot_v2(1) as result'))
+    expect(authenticated.rows[0].result).toMatchObject({
+      status: 'update-required',
+      syncProtocolVersion: 2,
+      minimumSupportedSyncVersion: 2,
+    })
+  })
+
+  it('authenticates mutations before gate, policy, receipt, CAS, or writes', async () => {
+    const cases = [
+      {
+        control: `minimum_supported_protocol = 1, mode = 'normal',
+          credential_policy = 'legacy_compatible', legacy_rpc_enabled = true`,
+        protocol: 0,
+        mutationId: 'unauthenticated-unsupported',
+        payload: null,
+      },
+      {
+        control: `minimum_supported_protocol = 1, mode = 'maintenance',
+          credential_policy = 'legacy_compatible', legacy_rpc_enabled = true`,
+        protocol: 2,
+        mutationId: 'unauthenticated-maintenance',
+        payload: null,
+      },
+      {
+        control: `minimum_supported_protocol = 1, mode = 'normal',
+          credential_policy = 'reject_legacy_credentials',
+          legacy_rpc_enabled = false`,
+        protocol: 2,
+        mutationId: 'unauthenticated-credential-policy',
+        payload: JSON.stringify([profileRow()]),
+      },
+      {
+        control: `minimum_supported_protocol = 1, mode = 'normal',
+          credential_policy = 'legacy_compatible', legacy_rpc_enabled = true`,
+        protocol: 2,
+        mutationId: 'unauthenticated-valid-protocol',
+        payload: JSON.stringify([profileRow()]),
+      },
+    ]
+
+    for (const testCase of cases) {
+      await database.exec(`
+        update academy_private.academy_sync_protocol_control
+           set ${testCase.control}
+         where singleton
+      `)
+      const before = await syncPersistenceState()
+      await expect(database.query(
+        `select public.academy_apply_profile_mutation_v2(
+          $1::integer, 0, $2::text, $3::jsonb
+        )`,
+        [testCase.protocol, testCase.mutationId, testCase.payload],
+      )).rejects.toThrow(/authenticated household/i)
+      expect(await syncPersistenceState()).toEqual(before)
+    }
   })
 
   it('rejects unsupported and maintenance writes before any receipt work', async () => {
+    const before = await syncPersistenceState()
     const unsupported = await asAuthenticated(MANAGER, () => database.query<{
       result: Record<string, unknown>
     }>(`
@@ -653,6 +934,7 @@ describe('Academy auth server foundation migration', () => {
       )
     `)
     expect(receipts.rows[0].count).toBe(0)
+    expect(await syncPersistenceState()).toEqual(before)
   })
 
   it('provides a credential rejection seam before receipts without activating it', async () => {
@@ -662,6 +944,7 @@ describe('Academy auth server foundation migration', () => {
              legacy_rpc_enabled = false
        where singleton
     `)
+    const before = await syncPersistenceState()
     await expect(asAuthenticated(MANAGER, () => database.query(
       `select public.academy_apply_profile_mutation_v2(
         2, 0, 'credential-before-receipt', $1::jsonb
@@ -675,6 +958,7 @@ describe('Academy auth server foundation migration', () => {
       where mutation_id = 'credential-before-receipt'
     `)
     expect(receipt.rows[0].count).toBe(0)
+    expect(await syncPersistenceState()).toEqual(before)
   })
 
   it('leaves the currently deployed legacy sync path intentionally unaffected', async () => {
@@ -733,12 +1017,16 @@ describe('Academy auth server foundation migration', () => {
     const definitions = await database.query<{
       name: string
       definition: string
+      config: string
+      security_definer: boolean
       anon_execute: boolean
       authenticated_execute: boolean
     }>(`
       select
         procedure.proname as name,
         pg_get_functiondef(procedure.oid) as definition,
+        coalesce(array_to_string(procedure.proconfig, ','), '') as config,
+        procedure.prosecdef as security_definer,
         has_function_privilege('anon', procedure.oid, 'execute')
           as anon_execute,
         has_function_privilege('authenticated', procedure.oid, 'execute')
@@ -747,14 +1035,102 @@ describe('Academy auth server foundation migration', () => {
       join pg_namespace as namespace
         on namespace.oid = procedure.pronamespace
       where namespace.nspname = 'public'
-        and procedure.proname like 'academy_parent_%'
+        and (
+          procedure.proname like 'academy_parent_%'
+          or procedure.proname in (
+            'academy_sync_protocol_status_v1',
+            'academy_sync_snapshot_v2',
+            'academy_apply_profile_mutation_v2'
+          )
+        )
       order by procedure.proname
     `)
-    expect(definitions.rows).toHaveLength(5)
+    expect(definitions.rows).toHaveLength(8)
+    const applicationRelations = [
+      'academy_sync_protocol_control',
+      'parent_installation_capabilities',
+      'parent_installation_bindings',
+      'parent_installation_grants',
+      'academy_household_memberships',
+      'academy_households',
+      'academy_household_sync_state',
+      'academy_household_sync_mutations',
+      'profiles',
+    ]
     for (const definition of definitions.rows) {
+      const sqlWithoutComments = definition.definition.replace(/--.*$/gm, '')
+      expect(definition.security_definer).toBe(true)
+      expect(definition.config).toContain('search_path=pg_catalog, pg_temp')
       expect(definition.anon_execute).toBe(false)
       expect(definition.authenticated_execute).toBe(true)
       expect(definition.definition).not.toMatch(/academy_study|admin|staff/i)
+      for (const relation of applicationRelations) {
+        expect(sqlWithoutComments).not.toMatch(new RegExp(
+          `\\b(?:from|join|update|insert\\s+into|delete\\s+from)\\s+${relation}\\b`,
+          'i',
+        ))
+      }
     }
+
+    const privateDefinitions = await database.query<{
+      name: string
+      definition: string
+      config: string
+      security_definer: boolean
+      anon_execute: boolean
+      authenticated_execute: boolean
+      service_execute: boolean
+    }>(`
+      select
+        procedure.proname as name,
+        pg_get_functiondef(procedure.oid) as definition,
+        coalesce(array_to_string(procedure.proconfig, ','), '') as config,
+        procedure.prosecdef as security_definer,
+        has_function_privilege('anon', procedure.oid, 'execute')
+          as anon_execute,
+        has_function_privilege('authenticated', procedure.oid, 'execute')
+          as authenticated_execute,
+        has_function_privilege('service_role', procedure.oid, 'execute')
+          as service_execute
+      from pg_proc as procedure
+      join pg_namespace as namespace
+        on namespace.oid = procedure.pronamespace
+      where namespace.nspname = 'academy_private'
+        and procedure.proname in (
+          'parent_installation_uuid_is_v4',
+          'current_parent_installation_capability',
+          'academy_sync_v2_gate',
+          'academy_sync_payload_has_legacy_credentials',
+          'consume_parent_installation_grant'
+        )
+      order by procedure.proname
+    `)
+    expect(privateDefinitions.rows).toHaveLength(5)
+    for (const definition of privateDefinitions.rows) {
+      const sqlWithoutComments = definition.definition.replace(/--.*$/gm, '')
+      expect(definition.security_definer).toBe(true)
+      expect(definition.config).toContain('search_path=pg_catalog')
+      expect(definition.anon_execute).toBe(false)
+      expect(definition.authenticated_execute).toBe(false)
+      expect(definition.service_execute).toBe(false)
+      for (const relation of applicationRelations) {
+        expect(sqlWithoutComments).not.toMatch(new RegExp(
+          `\\b(?:from|join|update|insert\\s+into|delete\\s+from)\\s+${relation}\\b`,
+          'i',
+        ))
+      }
+    }
+
+    const consumeDefinition = privateDefinitions.rows.find(
+      (definition) => definition.name === 'consume_parent_installation_grant',
+    )?.definition.toLowerCase() ?? ''
+    expect(consumeDefinition.indexOf(
+      'from academy_private.parent_installation_bindings',
+    )).toBeLessThan(consumeDefinition.indexOf(
+      'from academy_private.parent_installation_grants',
+    ))
+    expect(consumeDefinition).toContain('for update')
+    expect(consumeDefinition).toContain('expected_binding_revision')
+    expect(consumeDefinition).toContain('expected_session_generation')
   })
 })
