@@ -10,6 +10,8 @@ import type {
   OverviewRange,
   ServerResolvedAdminAuthorization,
 } from '../../admin/overviewModel'
+import { readAdminCosts, AdminCostsReadError } from '../../admin/costsHttpSource'
+import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/costsModel'
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
 import { CurriculumBrowser } from '../../admin/curriculum/CurriculumBrowser'
 import {
@@ -17,6 +19,7 @@ import {
 } from '../../admin/curriculum-validation/httpSource'
 import type { CurriculumValidationReadModel } from '../../admin/curriculum-validation/model'
 import { AdminConsole } from './AdminConsole'
+import { AdminCostsDashboard } from './AdminCostsDashboard'
 import { LearnerAnalytics } from './LearnerAnalytics'
 import { AdminSafetyOperations } from './AdminSafetyOperations'
 import { CurriculumValidationDashboard } from './CurriculumValidationDashboard'
@@ -30,7 +33,7 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (suffix === 'curriculum/validation') return 'curriculum-validation'
   const section = suffix.split('/')[0]
   return [
-    'learners', 'engines', 'ai-costs', 'curriculum', 'safety', 'system-health',
+    'learners', 'engines', 'costs', 'curriculum', 'safety', 'system-health',
     'configuration', 'audit-log', 'releases',
   ].includes(section) ? section as AdminSection : 'unknown'
 }
@@ -61,6 +64,9 @@ export function AdminConsoleRoute() {
   const [authorizationState, setAuthorizationState] = useState<AdminAuthorizationState | { status: 'resolving' }>({ status: 'resolving' })
   const [pathname, setPathname] = useState(() => window.location.pathname)
   const [range, setRange] = useState<OverviewRange>({ kind: 'preset', preset: 'today' })
+  const [costRange, setCostRange] = useState<AdminCostRangeSelection>({ kind: 'preset', preset: 'today' })
+  const [costsState, setCostsState] = useState<AdminCostsReadState>({ status: 'idle' })
+  const [costsRefresh, setCostsRefresh] = useState(0)
   const [validationModel, setValidationModel] = useState<CurriculumValidationReadModel | null>(null)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
@@ -85,6 +91,39 @@ export function AdminConsoleRoute() {
     })
     return () => controller.abort()
   }, [authorization, section])
+
+  useEffect(() => {
+    if (section !== 'costs') return
+    if (!hasCapability(authorization, 'costs:read')) {
+      setCostsState({ status: 'unauthorized' })
+      return
+    }
+    const controller = new AbortController()
+    const retained = costsState.status === 'ready' && costRangeMatches(costsState.model.range, costRange)
+      ? costsState
+      : null
+    if (!retained) setCostsState({ status: 'loading' })
+    void readAdminCosts(costRange, { signal: controller.signal }).then(
+      (model) => {
+        if (!controller.signal.aborted) setCostsState({ status: 'ready', model, freshness: 'current' })
+      },
+      (error) => {
+        if (controller.signal.aborted) return
+        if (error instanceof AdminCostsReadError && error.code === 'costs_unauthorized') {
+          setCostsState({ status: 'unauthorized' })
+          return
+        }
+        if (retained) setCostsState({ ...retained, freshness: 'stale' })
+        else setCostsState({
+          status: 'error',
+          code: error instanceof AdminCostsReadError && error.code !== 'costs_unauthorized'
+            ? error.code
+            : 'costs_unavailable',
+        })
+      },
+    )
+    return () => controller.abort()
+  }, [authorizationState, costRange, costsRefresh, section])
 
   useEffect(() => {
     const onPopState = () => setPathname(window.location.pathname)
@@ -121,6 +160,7 @@ export function AdminConsoleRoute() {
           <nav aria-label="Admin section navigation" className="flex flex-wrap gap-3 text-sm">
             <button type="button" onClick={() => navigate('overview')}>Overview</button>
             <button type="button" onClick={() => navigate('learners')}>Learners</button>
+            <button type="button" onClick={() => navigate('costs')}>AI &amp; Costs</button>
             <button type="button" onClick={() => navigate('safety')}>Safety</button>
             <button type="button" onClick={() => navigate('curriculum')}>Curriculum</button>
           </nav>
@@ -131,6 +171,15 @@ export function AdminConsoleRoute() {
           <LearnerAnalytics state={hasCapability(authorization, 'learners:read')
             ? { status: 'error', message: 'The authorized learner projection is not available.' }
             : { status: 'unauthorized', reasonCode: 'learners_read_required' }} />
+        )}
+        {section === 'costs' && (
+          <AdminCostsDashboard
+            authorized={hasCapability(authorization, 'costs:read')}
+            state={costsState}
+            range={costRange}
+            onRangeChange={setCostRange}
+            onRetry={() => setCostsRefresh((value) => value + 1)}
+          />
         )}
         {section === 'safety' && (
           <AdminSafetyOperations
@@ -156,7 +205,7 @@ export function AdminConsoleRoute() {
             model={validationModel}
           />
         )}
-        {!['learners', 'safety', 'curriculum', 'curriculum-validation'].includes(section) && (
+        {!['learners', 'costs', 'safety', 'curriculum', 'curriculum-validation'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>
@@ -165,4 +214,13 @@ export function AdminConsoleRoute() {
       </div>
     </div>
   )
+}
+
+function costRangeMatches(
+  resolved: { readonly kind: string; readonly start: string; readonly end: string },
+  selected: AdminCostRangeSelection,
+): boolean {
+  return selected.kind === 'preset'
+    ? resolved.kind === selected.preset
+    : resolved.kind === 'custom' && resolved.start === selected.start && resolved.end === selected.end
 }

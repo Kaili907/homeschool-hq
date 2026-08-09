@@ -33,6 +33,11 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/v1/costs"
+  to = "/.netlify/functions/admin-costs"
+  status = 200
+
+[[redirects]]
   from = "/api/admin/curriculum/*"
   to = "/.netlify/functions/admin-curriculum/:splat"
   status = 200
