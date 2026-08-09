@@ -8,9 +8,11 @@ import { ADMIN_CONSOLE_PATH, type AdminCapability } from '../../admin/contracts'
 import { isAdminConsolePath } from '../../admin/adminRoute'
 import type {
   AdminSection,
+  OverviewLoadState,
   OverviewRange,
   ServerResolvedAdminAuthorization,
 } from '../../admin/overviewModel'
+import { AdminOverviewReadError, readAdminOverview } from '../../admin/overviewHttpSource'
 import { readAdminCosts, AdminCostsReadError } from '../../admin/costsHttpSource'
 import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/costsModel'
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
@@ -83,6 +85,8 @@ export function AdminConsoleRoute() {
   const [authorizationState, setAuthorizationState] = useState<AdminAuthorizationState | { status: 'resolving' }>({ status: 'resolving' })
   const [pathname, setPathname] = useState(() => window.location.pathname)
   const [range, setRange] = useState<OverviewRange>({ kind: 'preset', preset: 'today' })
+  const [overviewState, setOverviewState] = useState<OverviewLoadState>({ status: 'loading' })
+  const [overviewReload, setOverviewReload] = useState(0)
   const [costRange, setCostRange] = useState<AdminCostRangeSelection>({ kind: 'preset', preset: 'today' })
   const [costsState, setCostsState] = useState<AdminCostsReadState>({ status: 'idle' })
   const [costsRefresh, setCostsRefresh] = useState(0)
@@ -109,6 +113,31 @@ export function AdminConsoleRoute() {
     })
     return () => controller.abort()
   }, [])
+
+  useEffect(() => {
+    if (section !== 'overview') return
+    if (!hasCapability(authorization, 'overview:read')) {
+      setOverviewState({ status: 'error', code: 'overview_unavailable' })
+      return
+    }
+    const controller = new AbortController()
+    setOverviewState({ status: 'loading' })
+    void readAdminOverview(range, { signal: controller.signal }).then(
+      (model) => {
+        if (!controller.signal.aborted) setOverviewState({ status: 'ready', model })
+      },
+      (error) => {
+        if (controller.signal.aborted) return
+        setOverviewState({
+          status: 'error',
+          code: error instanceof AdminOverviewReadError && error.code === 'overview_timeout'
+            ? 'overview_timeout'
+            : 'overview_unavailable',
+        })
+      },
+    )
+    return () => controller.abort()
+  }, [authorizationState, overviewReload, range, section])
 
   useEffect(() => {
     if (!hasCapability(authorization, 'safety:read') || section !== 'safety') {
@@ -245,9 +274,10 @@ export function AdminConsoleRoute() {
     return (
       <AdminConsole
         authorization={authorization}
-        overview={{ status: 'error', code: 'overview_unavailable' }}
+        overview={overviewState}
         selectedRange={range}
         onRangeChange={setRange}
+        onRetry={() => setOverviewReload((value) => value + 1)}
         onNavigate={navigate}
       />
     )

@@ -1,7 +1,7 @@
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import { errorResponse, hasQuery, jsonResponse } from './_shared/http.js'
 import { createFilesystemCurriculumSource } from '../../src/admin/curriculum/filesystemSource.node.ts'
-import { readFile } from 'node:fs/promises'
+import { loadAdminCurriculumValidationEvidence } from './_shared/admin-curriculum-evidence.js'
 
 const API_PREFIX = '/api/admin/curriculum/'
 const FUNCTION_PREFIX = '/.netlify/functions/admin-curriculum/'
@@ -27,24 +27,6 @@ function routeFromPath(path) {
   }
 }
 
-async function loadValidationEvidence() {
-  const root = new URL('../../curriculum-content/manuel-academy/1.0.0/', import.meta.url)
-  const [validation, curriculumManifest, packageManifest, checksumManifest, manifestVerification] = await Promise.all([
-    readFile(new URL('validation/validation.json', root), 'utf8'),
-    readFile(new URL('curriculum-manifest.json', root), 'utf8'),
-    readFile(new URL('MANIFEST.json', root), 'utf8'),
-    readFile(new URL('SHA256SUMS.txt', root), 'utf8'),
-    readFile(new URL('validation/manifest-verification.txt', root), 'utf8'),
-  ])
-  return {
-    validation: JSON.parse(validation),
-    curriculumManifest: JSON.parse(curriculumManifest),
-    packageManifest: JSON.parse(packageManifest),
-    checksumManifest,
-    manifestVerification,
-  }
-}
-
 export function createAdminCurriculumHandler(overrides = {}) {
   const authorization = overrides.authorization ?? createAdminAuthorization({
     env: overrides.env ?? process.env,
@@ -54,7 +36,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
   })
   const source = overrides.source ?? {
     ...createFilesystemCurriculumSource(),
-    loadValidationEvidence,
+    loadValidationEvidence: loadAdminCurriculumValidationEvidence,
   }
 
   return async (event) => {

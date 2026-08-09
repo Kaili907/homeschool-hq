@@ -33,6 +33,11 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/v1/overview"
+  to = "/.netlify/functions/admin-overview"
+  status = 200
+
+[[redirects]]
   from = "/api/admin/v1/engine-performance"
   to = "/.netlify/functions/admin-engine-performance"
   status = 200
