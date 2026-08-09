@@ -300,11 +300,18 @@ body {
 
 .academy-card-action span { font-size: 1.05rem; }
 
-.academy-grownups {
-  display: grid;
+.academy-entry-actions {
+  display: flex;
   width: min(100%, 390px);
-  min-height: 58px;
   margin-top: clamp(1.5rem, 3.5vh, 2.7rem);
+  align-items: center;
+  flex-direction: column;
+}
+
+.academy-parent-login {
+  display: grid;
+  width: 100%;
+  min-height: 58px;
   padding: 0 1.2rem;
   grid-template-columns: 28px 1fr 28px;
   align-items: center;
@@ -319,12 +326,12 @@ body {
   transition: border-color 160ms ease, background 160ms ease;
 }
 
-.academy-grownups:hover {
+.academy-parent-login:hover {
   border-color: rgba(240, 200, 106, 0.75);
   background: rgba(15, 25, 35, 0.92);
 }
 
-.academy-grownups-icon {
+.academy-parent-login-icon {
   display: grid;
   width: 25px;
   height: 29px;
@@ -332,6 +339,39 @@ body {
   border: 1px solid rgba(215, 169, 68, 0.82);
   border-radius: 45% 45% 48% 48%;
   font-size: 0.85rem;
+}
+
+.academy-admin-entry {
+  display: flex;
+  margin-top: 0.7rem;
+  align-items: center;
+  flex-direction: column;
+}
+
+.academy-admin-login {
+  min-height: 44px;
+  padding: 0 1.1rem;
+  border: 0;
+  border-radius: 8px;
+  color: rgba(245, 239, 226, 0.7);
+  background: rgba(7, 13, 20, 0.54);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: not-allowed;
+}
+
+.academy-admin-login:hover {
+  color: rgba(245, 239, 226, 0.82);
+  background: rgba(10, 18, 27, 0.66);
+}
+
+.academy-admin-entry p {
+  margin: 0.12rem 0 0;
+  color: rgba(245, 239, 226, 0.42);
+  font-size: 0.63rem;
+  letter-spacing: 0.04em;
 }
 
 .academy-migration {
@@ -589,7 +629,7 @@ body {
     font-size: 0;
   }
   .academy-card-action span { font-size: 1.4rem; }
-  .academy-grownups { margin-top: 1.1rem; }
+  .academy-entry-actions { margin-top: 1.1rem; }
   .academy-pin-page { justify-content: flex-start; padding: 1.1rem 0.75rem; }
   .academy-pin-panel { margin-top: 0.9rem; padding: 1.05rem; }
   .academy-portrait--pin { width: 76px; height: 76px; }

@@ -2,6 +2,8 @@ import type { AppState } from '../types'
 import { AcademyBrand, AcademyEntryShell } from '../entry/AcademyEntry'
 import { LEARNER_PRESENTATIONS } from '../entry/learnerPresentation'
 
+export const ADMIN_ENTRY_HANDOFF = Object.freeze({ status: 'awaiting-admin-workstream' as const })
+
 interface PickerProps {
   state: AppState
   migrationBanner?: { onDownload: () => void; onDismiss: () => void }
@@ -53,11 +55,27 @@ export function Picker({ state, migrationBanner, onPick, onGrownUps }: PickerPro
           </div>
         </section>
 
-        <button type="button" onClick={onGrownUps} className="academy-grownups">
-          <span className="academy-grownups-icon" aria-hidden="true">◇</span>
-          <span>Grown-Ups access</span>
-          <span aria-hidden="true">→</span>
-        </button>
+        <div className="academy-entry-actions" aria-label="Parent and administrator entry">
+          <button type="button" onClick={onGrownUps} className="academy-parent-login">
+            <span className="academy-parent-login-icon" aria-hidden="true">◇</span>
+            <span>Parent Login</span>
+            <span aria-hidden="true">→</span>
+          </button>
+
+          {/* No authoritative admin route exists on origin/master yet. This
+              intentionally has no click handler or inferred authorization. */}
+          <div className="academy-admin-entry">
+            <button
+              type="button"
+              className="academy-admin-login"
+              aria-disabled="true"
+              aria-describedby="admin-entry-status"
+            >
+              Admin Login
+            </button>
+            <p id="admin-entry-status" role="status">Admin entry awaiting approved setup</p>
+          </div>
+        </div>
       </main>
     </AcademyEntryShell>
   )

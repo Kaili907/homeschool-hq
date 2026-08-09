@@ -2,7 +2,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { defaultAppState } from '../migration'
 import { learnerPresentationForProfile } from '../entry/learnerPresentation'
-import { Picker } from './Picker'
+import { ADMIN_ENTRY_HANDOFF, Picker } from './Picker'
 import { PinPad } from './PinPad'
 
 describe('Manuel Academy branded learner entry', () => {
@@ -25,8 +25,17 @@ describe('Manuel Academy branded learner entry', () => {
       expect(html).toContain(grade)
       expect(html).toContain(`>${initials}<`)
     }
-    expect(html).toContain('Grown-Ups access')
+    expect(html).toContain('Parent Login')
+    expect(html).toContain('Admin Login')
+    expect(html).toContain('aria-disabled="true"')
+    expect(html).toContain('Admin entry awaiting approved setup')
+    expect(html).not.toMatch(/href="\/admin|action="\/admin/i)
     expect(html).not.toContain('first sign-in')
+  })
+
+  it('marks Admin Login as pending without inventing a route or authentication handoff', () => {
+    expect(ADMIN_ENTRY_HANDOFF).toEqual({ status: 'awaiting-admin-workstream' })
+    expect(Object.keys(ADMIN_ENTRY_HANDOFF)).toEqual(['status'])
   })
 
   it('keeps the matching learner identity on the PIN screen with accessible controls', () => {
@@ -46,6 +55,8 @@ describe('Manuel Academy branded learner entry', () => {
     expect(html).toContain('aria-label="Digit 1"')
     expect(html).toContain('aria-label="Delete last digit"')
     expect(html).toContain('Back to learners')
+    expect(html).not.toContain('Parent Login')
+    expect(html).not.toContain('Admin Login')
     expect(html).not.toMatch(/fingerprint|biometric/i)
   })
 })

@@ -679,8 +679,9 @@ export default function App() {
         <div style={{ fontFamily: t.font, background: t.appBg }} className="min-h-screen">
           {screen.kind === 'parentPin' ? (
             <PinPad
-              title="Grown-Ups only"
+              title="Parent Login"
               subtitle="Enter the parent PIN"
+              backLabel="Back to Manuel Academy"
               onComplete={(pin) => {
                 if (pin === state.parentPin) {
                   establishParentStudyAuthorization()
@@ -693,12 +694,13 @@ export default function App() {
             />
           ) : (
             <PinPad
-              title={screen.firstEntry ? 'Confirm parent PIN' : 'Set a parent PIN'}
+              title={screen.firstEntry ? 'Confirm Parent PIN' : 'Create Parent PIN'}
               subtitle={
                 screen.firstEntry
                   ? 'Type it again to confirm'
                   : 'This PIN gates the Grown-Ups panel'
               }
+              backLabel="Back to Manuel Academy"
               onComplete={(pin) => {
                 if (!screen.firstEntry) {
                   setScreen({ kind: 'parentPinCreate', firstEntry: pin })

@@ -435,6 +435,27 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     }
   })
 
+  it('keeps Parent Login on the existing parent PIN boundary and rejects a learner PIN', async () => {
+    pathname = '/'
+    const state = seeded(null)
+    state.parentPin = '9090'
+    await mountApp(state)
+
+    await act(async () => harness.picker!.onGrownUps())
+    expect(harness.pin?.title).toBe('Parent Login')
+    await act(async () => {
+      expect(harness.pin!.onComplete('1234')).toBe('Wrong PIN.')
+    })
+    expect(hasText(container, 'Parent Hub')).toBe(false)
+
+    await act(async () => {
+      expect(harness.pin!.onComplete('9090')).toBeNull()
+    })
+    await settle()
+    expect(hasText(container, 'Parent Hub')).toBe(true)
+    expect(harness.academy).toBeNull()
+  })
+
   it('keeps the classic workspace reachable through the dashboard tool callback', async () => {
     pathname = '/academy'
     await mountApp(seeded('p2'))
