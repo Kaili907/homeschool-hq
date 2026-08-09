@@ -1,6 +1,11 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { AcademyEntryBackground, AcademyEntryVideo, canRenderEntryVideo } from './AcademyEntry'
+import {
+  AcademyEntryBackground,
+  AcademyEntryVideo,
+  canRenderEntryVideo,
+  isTerminalEntryVideoError,
+} from './AcademyEntry'
 
 describe('Academy entry background media', () => {
   it('uses the approved decorative native video behavior and responsive source order', () => {
@@ -42,5 +47,29 @@ describe('Academy entry background media', () => {
     expect(canRenderEntryVideo(false, true, false)).toBe(false)
     expect(canRenderEntryVideo(false, false, true)).toBe(false)
     expect(canRenderEntryVideo(false, false, false)).toBe(true)
+  })
+
+  it('does not mistake a rejected responsive source candidate for terminal video failure', () => {
+    const rejectedSource = new EventTarget()
+    const loadingVideo = Object.assign(new EventTarget(), { error: null })
+
+    expect(isTerminalEntryVideoError(rejectedSource, loadingVideo)).toBe(false)
+    expect(isTerminalEntryVideoError(loadingVideo, loadingVideo)).toBe(true)
+  })
+
+  it('still treats a real media-element failure as terminal poster fallback', () => {
+    const failedSource = new EventTarget()
+    const failedVideo = Object.assign(new EventTarget(), {
+      error: { code: 4 } as MediaError,
+    })
+
+    expect(isTerminalEntryVideoError(failedSource, failedVideo)).toBe(true)
+    expect(canRenderEntryVideo(false, false, true)).toBe(false)
+  })
+
+  it('keeps normal, reduced-motion, and Save-Data decisions explicit and independent', () => {
+    expect(canRenderEntryVideo(false, false, false)).toBe(true)
+    expect(canRenderEntryVideo(true, false, false)).toBe(false)
+    expect(canRenderEntryVideo(false, true, false)).toBe(false)
   })
 })

@@ -62,6 +62,13 @@ interface AcademyEntryVideoProps {
   onError: () => void
 }
 
+export function isTerminalEntryVideoError(
+  eventTarget: EventTarget | null,
+  video: Pick<HTMLVideoElement, 'error'> & EventTarget,
+): boolean {
+  return eventTarget === video || video.error !== null
+}
+
 export function AcademyEntryVideo({ ready, onReady, onError }: AcademyEntryVideoProps) {
   return (
     <video
@@ -76,7 +83,13 @@ export function AcademyEntryVideo({ ready, onReady, onError }: AcademyEntryVideo
       aria-hidden="true"
       onLoadedData={onReady}
       onPlaying={onReady}
-      onError={onError}
+      onError={(event) => {
+        // A rejected responsive <source> candidate bubbles through React's
+        // synthetic onError. It is not a terminal video failure: the browser
+        // may already be loading the next valid source (desktop after mobile).
+        if (!isTerminalEntryVideoError(event.target, event.currentTarget)) return
+        onError()
+      }}
     >
       <source
         src="/media/manuel-academy-entry-space-loop-720p.mp4"
