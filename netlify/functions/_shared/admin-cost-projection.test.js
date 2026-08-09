@@ -147,6 +147,50 @@ describe('Admin cost aggregate projection', () => {
     ])
   })
 
+  it('carries request plus token and character pricing into the dashboard aggregate', () => {
+    const ai = record({
+      costMicros: '1700',
+      costComponents: [
+        {
+          unit: 'input_token',
+          rate: { unit: 'input_token', currency: 'USD', pricingCatalogVersion: 'catalog-v1' },
+          calculatedCostMicros: '700',
+        },
+        {
+          unit: 'request',
+          rate: { unit: 'request', currency: 'USD', pricingCatalogVersion: 'catalog-v1' },
+          calculatedCostMicros: '1000',
+        },
+      ],
+    })
+    const speech = ttsRecord({
+      costMicros: '1300',
+      costComponents: [
+        {
+          unit: 'tts_character',
+          rate: { unit: 'tts_character', currency: 'USD', pricingCatalogVersion: 'catalog-v1' },
+          calculatedCostMicros: '800',
+        },
+        {
+          unit: 'request',
+          rate: { unit: 'request', currency: 'USD', pricingCatalogVersion: 'catalog-v1' },
+          calculatedCostMicros: '500',
+        },
+      ],
+    })
+
+    const model = buildAdminCostProjection([ai, speech], today, NOW)
+
+    expect(model.summary.totalRequests).toEqual({ status: 'available', value: 2 })
+    expect(model.summary.calculatedCost).toEqual({
+      status: 'available', micros: '3000', currency: 'USD',
+    })
+    expect(model.breakdowns.providers).toEqual(expect.arrayContaining([
+      expect.objectContaining({ label: 'Anthropic', calculatedCost: expect.objectContaining({ micros: '1700' }) }),
+      expect.objectContaining({ label: 'ElevenLabs', calculatedCost: expect.objectContaining({ micros: '1300' }) }),
+    ]))
+  })
+
   it('keeps unknown usage and calculated cost unavailable instead of zero', () => {
     const model = buildAdminCostProjection([
       record({

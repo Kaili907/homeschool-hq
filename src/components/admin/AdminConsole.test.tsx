@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import type { AdminEngineId } from '../../admin/admin0Vocabulary'
 import { adaptAdminOverview, type AdminOverviewSource, type CostSource } from '../../admin/overviewAdapter'
 import type { AdminConsoleProps, EngineObservation } from '../../admin/overviewModel'
-import { AdminConsole } from './AdminConsole'
+import { AdminConsole, AdminShell } from './AdminConsole'
 
 const OBSERVED_AT = '2026-08-08T14:00:00.000Z'
 
@@ -120,6 +120,26 @@ describe('AdminConsole authorization and load states', () => {
     expect(markup).toContain('does not include overview access')
     expect(markup).not.toContain('SENSITIVE ENVIRONMENT')
     expect(markup).not.toContain('Active learners')
+  })
+
+  it('shows only capability-authorized operational destinations in the canonical shell', () => {
+    const markup = renderToStaticMarkup(
+      <AdminShell
+        authorization={{ status: 'authorized', role: 'viewer', capabilities: ['costs:read', 'health:read'] }}
+        activeSection="costs"
+        title="AI & Costs"
+      >
+        <p>Authorized cost surface</p>
+      </AdminShell>,
+    )
+    expect(markup).toContain('AI &amp; Costs')
+    expect(markup).toContain('System Health')
+    expect(markup).toContain('aria-current="page"')
+    expect(markup).not.toContain('>Overview<')
+    expect(markup).not.toContain('>Learners<')
+    expect(markup).not.toContain('Configuration')
+    expect(markup).not.toContain('Audit Log')
+    expect(markup).not.toContain('Releases')
   })
 
   it('renders loading without numeric-looking metric placeholders', () => {

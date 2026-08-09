@@ -80,7 +80,7 @@ describe('ADMIN-4 engine performance projection', () => {
     expect(model.engines.map((candidate) => candidate.engineId)).toEqual(ADMIN_ENGINE_IDS)
     expect(model.engines.every((candidate) => candidate.evidenceState === 'unavailable')).toBe(true)
     expect(JSON.stringify(model)).not.toMatch(/qualityScore|"health"/)
-    expect(model.engines[0].technicalHealthReference.path).toBe('/academy/admin/system-health')
+    expect(model.engines[0].technicalHealthReference.path).toBe('/academy/admin/health')
   })
 
   it('shows no evidence as unavailable and a sub-threshold rate as insufficient evidence', () => {

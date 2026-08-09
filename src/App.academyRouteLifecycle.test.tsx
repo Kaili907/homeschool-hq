@@ -23,6 +23,7 @@ const harness = vi.hoisted(() => ({
     onExit: () => void
   },
   admin: false,
+  adminShouldFail: false,
 }))
 
 vi.mock('./sync/useSync', () => ({
@@ -67,6 +68,7 @@ vi.mock('./components/academy/AcademyRouter', () => ({
 }))
 vi.mock('./components/admin/AdminConsoleRoute', () => ({
   AdminConsoleRoute: () => {
+    if (harness.adminShouldFail) throw new Error('simulated Admin route failure')
     harness.admin = true
     return <main data-surface="admin">Admin Console</main>
   },
@@ -165,6 +167,7 @@ describe('App academy route lifecycle (CURR-1)', () => {
     harness.pin = null
     harness.academy = null
     harness.admin = false
+    harness.adminShouldFail = false
     root = null
     pathname = '/academy'
     vi.stubEnv('VITE_ACADEMY_GRADE_5_ENABLED', 'true')
@@ -315,6 +318,15 @@ describe('App academy route lifecycle (CURR-1)', () => {
 
   it('does not treat /academy/administrator as an Admin route and leaves the learner app available', async () => {
     pathname = '/academy/administrator'
+    await mountApp(seeded('p2'))
+    expect(harness.admin).toBe(false)
+    expect(harness.academy).not.toBeNull()
+    expect(harness.academy?.route).toEqual({ kind: 'home' })
+  })
+
+  it('keeps the learner Academy available when the isolated Admin route would fail', async () => {
+    harness.adminShouldFail = true
+    pathname = '/academy'
     await mountApp(seeded('p2'))
     expect(harness.admin).toBe(false)
     expect(harness.academy).not.toBeNull()

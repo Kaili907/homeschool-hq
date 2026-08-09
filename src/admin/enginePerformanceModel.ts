@@ -90,7 +90,7 @@ export interface EnginePerformanceSummary {
   readonly versionComparison: EngineVersionComparison
   readonly technicalHealthReference: {
     readonly label: 'View technical system health'
-    readonly path: '/academy/admin/system-health'
+    readonly path: '/academy/admin/health'
   }
 }
 
@@ -499,7 +499,7 @@ export function buildEnginePerformanceProjection(
       metrics,
       unsupportedMetrics: UNSUPPORTED[engineId],
       versionComparison: versionComparison(engineId, events, filters),
-      technicalHealthReference: Object.freeze({ label: 'View technical system health' as const, path: '/academy/admin/system-health' as const }),
+      technicalHealthReference: Object.freeze({ label: 'View technical system health' as const, path: '/academy/admin/health' as const }),
     })
   })
   return Object.freeze({
@@ -665,5 +665,5 @@ function validWireEngine(value: unknown, expectedId: AdminEngineId): boolean {
     && isRecord(healthReference)
     && hasExactKeys(healthReference, ['label', 'path'])
     && healthReference.label === 'View technical system health'
-    && healthReference.path === '/academy/admin/system-health'
+    && healthReference.path === '/academy/admin/health'
 }

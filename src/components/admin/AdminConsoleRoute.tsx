@@ -34,7 +34,7 @@ import type { AdminEngineId } from '../../admin/contracts'
 import type { EnginePerformanceWindowPreset } from '../../admin/enginePerformanceModel'
 import { readSystemHealth, type SystemHealthReadState } from '../../admin/systemHealthClient'
 import type { SystemHealthWindow } from '../../admin/systemHealth'
-import { AdminConsole } from './AdminConsole'
+import { AdminConsole, AdminShell } from './AdminConsole'
 import { AdminCostsDashboard } from './AdminCostsDashboard'
 import { LearnerAnalytics } from './LearnerAnalytics'
 import { AdminSafetyOperations } from './AdminSafetyOperations'
@@ -253,23 +253,25 @@ export function AdminConsoleRoute() {
     )
   }
 
+  const activeSection: AdminSection = section === 'curriculum-validation'
+    ? 'curriculum'
+    : section === 'unknown' ? 'overview' : section
+  const title = section === 'curriculum-validation'
+    ? 'Curriculum validation'
+    : section === 'system-health' ? 'System Health'
+      : section === 'engines' ? 'Engine Performance'
+        : section === 'costs' ? 'AI & Costs'
+          : section === 'learners' ? 'Learner Analytics'
+            : section === 'safety' ? 'Safety Operations'
+              : section === 'curriculum' ? 'Curriculum' : 'Admin section unavailable'
+
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-950">
-      <header className="border-b border-slate-200 bg-slate-950 px-4 py-4 text-white">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3">
-          <div><strong>Manuel Academy Admin Console</strong><span className="ml-3 text-sm text-slate-300">{authorization.role}</span></div>
-          <nav aria-label="Admin section navigation" className="flex flex-wrap gap-3 text-sm">
-            <button type="button" onClick={() => navigate('overview')}>Overview</button>
-            <button type="button" onClick={() => navigate('learners')}>Learners</button>
-            <button type="button" onClick={() => navigate('engines')}>Engines</button>
-            <button type="button" onClick={() => navigate('costs')}>AI &amp; Costs</button>
-            <button type="button" onClick={() => navigate('safety')}>Safety</button>
-            <button type="button" onClick={() => navigate('curriculum')}>Curriculum</button>
-            <button type="button" onClick={() => navigate('system-health')}>System Health</button>
-          </nav>
-        </div>
-      </header>
-      <div className="mx-auto max-w-7xl p-4 sm:p-8">
+    <AdminShell
+      authorization={authorization}
+      activeSection={activeSection}
+      title={title}
+      onNavigate={navigate}
+    >
         {section === 'learners' && (
           <LearnerAnalytics state={learnerState} />
         )}
@@ -339,8 +341,7 @@ export function AdminConsoleRoute() {
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>
           </section>
         )}
-      </div>
-    </div>
+    </AdminShell>
   )
 }
 

@@ -1,5 +1,5 @@
-import { useEffect, useId, useState, type KeyboardEvent } from 'react'
-import type { AdminEngineId, AdminHealthState } from '../../admin/admin0Vocabulary'
+import { useEffect, useId, useState, type KeyboardEvent, type ReactNode } from 'react'
+import type { AdminCapability, AdminEngineId, AdminHealthState } from '../../admin/admin0Vocabulary'
 import {
   formatUsdMicros,
   safeAuthorizationMessage,
@@ -24,17 +24,14 @@ import {
 } from '../../admin/overviewModel'
 import './admin-console.css'
 
-const NAVIGATION: readonly { id: AdminSection; label: string; shortLabel?: string }[] = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'learners', label: 'Learners' },
-  { id: 'engines', label: 'Engines' },
-  { id: 'costs', label: 'AI & Costs' },
-  { id: 'curriculum', label: 'Curriculum' },
-  { id: 'safety', label: 'Safety' },
-  { id: 'system-health', label: 'System Health' },
-  { id: 'configuration', label: 'Configuration' },
-  { id: 'audit-log', label: 'Audit Log' },
-  { id: 'releases', label: 'Releases' },
+const NAVIGATION: readonly { id: AdminSection; label: string; capability: AdminCapability }[] = [
+  { id: 'overview', label: 'Overview', capability: 'overview:read' },
+  { id: 'learners', label: 'Learners', capability: 'learners:read' },
+  { id: 'engines', label: 'Engine Performance', capability: 'engines:read' },
+  { id: 'costs', label: 'AI & Costs', capability: 'costs:read' },
+  { id: 'system-health', label: 'System Health', capability: 'health:read' },
+  { id: 'safety', label: 'Safety', capability: 'safety:read' },
+  { id: 'curriculum', label: 'Curriculum', capability: 'curriculum:read' },
 ]
 
 const PRESET_LABELS: Record<OverviewPreset, string> = {
@@ -107,8 +104,44 @@ function AuthorizationState({ kind, reasonCode }: { kind: 'resolving' | 'unautho
 
 function AuthorizedConsole(props: Extract<AdminConsoleProps, { authorization: { status: 'authorized' } }>) {
   return (
+    <AdminShell
+      authorization={props.authorization}
+      activeSection="overview"
+      title="Academy overview"
+      toolbar={<TimeRangeControl selected={props.selectedRange} onChange={props.onRangeChange} />}
+      onNavigate={props.onNavigate}
+    >
+      {props.overview.status === 'loading' && <OverviewLoading />}
+      {props.overview.status === 'error' && (
+        <OverviewError code={props.overview.code} onRetry={props.onRetry} />
+      )}
+      {props.overview.status === 'ready' && <Overview model={props.overview.model} />}
+    </AdminShell>
+  )
+}
+
+type AuthorizedAdmin = Extract<AdminConsoleProps, { authorization: { status: 'authorized' } }>['authorization']
+
+export function AdminShell({
+  authorization,
+  activeSection,
+  title,
+  toolbar,
+  onNavigate,
+  children,
+}: {
+  readonly authorization: AuthorizedAdmin
+  readonly activeSection: AdminSection
+  readonly title: string
+  readonly toolbar?: ReactNode
+  readonly onNavigate?: (section: AdminSection) => void
+  readonly children: ReactNode
+}) {
+  const activeLabel = NAVIGATION.find((item) => item.id === activeSection)?.label ?? title
+  const visibleNavigation = NAVIGATION.filter((item) => authorization.capabilities.includes(item.capability))
+  return (
     <div className="admin-shell">
-      <a className="admin-skip-link" href="#admin-main">Skip to overview</a>
+      <a className="admin-skip-link" href="#admin-main">Skip to {activeLabel.toLowerCase()}</a>
       <aside className="admin-sidebar">
         <div className="admin-brand">
           <BrandMark />
@@ -117,13 +150,13 @@ function AuthorizedConsole(props: Extract<AdminConsoleProps, { authorization: { 
         <nav aria-label="Admin sections">
           <p className="admin-nav-label">Workspace</p>
           <ul>
-            {NAVIGATION.map((item) => (
+            {visibleNavigation.map((item) => (
               <li key={item.id}>
                 <button
                   type="button"
-                  className={item.id === 'overview' ? 'is-active' : ''}
-                  aria-current={item.id === 'overview' ? 'page' : undefined}
-                  onClick={() => props.onNavigate?.(item.id)}
+                  className={item.id === activeSection ? 'is-active' : ''}
+                  aria-current={item.id === activeSection ? 'page' : undefined}
+                  onClick={() => onNavigate?.(item.id)}
                 >
                   <NavIcon section={item.id} />
                   <span>{item.label}</span>
@@ -134,24 +167,20 @@ function AuthorizedConsole(props: Extract<AdminConsoleProps, { authorization: { 
         </nav>
         <div className="admin-sidebar__footer">
           <span className="admin-secure-dot" aria-hidden="true" />
-          {props.authorization.role[0].toUpperCase() + props.authorization.role.slice(1)} operator session
+          {authorization.role[0].toUpperCase() + authorization.role.slice(1)} operator session
         </div>
       </aside>
 
       <div className="admin-workspace">
         <header className="admin-topbar">
           <div>
-            <p className="admin-breadcrumb">Admin console <span aria-hidden="true">/</span> Overview</p>
-            <h1>Academy overview</h1>
+            <p className="admin-breadcrumb">Admin console <span aria-hidden="true">/</span> {activeLabel}</p>
+            <h1>{title}</h1>
           </div>
-          <TimeRangeControl selected={props.selectedRange} onChange={props.onRangeChange} />
+          {toolbar}
         </header>
         <main id="admin-main" className="admin-main" tabIndex={-1}>
-          {props.overview.status === 'loading' && <OverviewLoading />}
-          {props.overview.status === 'error' && (
-            <OverviewError code={props.overview.code} onRetry={props.onRetry} />
-          )}
-          {props.overview.status === 'ready' && <Overview model={props.overview.model} />}
+          {children}
         </main>
       </div>
     </div>

@@ -34,6 +34,7 @@ describe('authorized Admin costs endpoint', () => {
 
   it.each([
     ['missing bearer', 401, 'unauthenticated'],
+    ['student bearer', 401, 'unauthenticated'],
     ['ordinary guardian', 403, 'admin_access_denied'],
     ['revoked Admin', 403, 'admin_access_denied'],
     ['expired Admin', 403, 'admin_access_denied'],
