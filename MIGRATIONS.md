@@ -72,10 +72,11 @@ The integrated ADMIN-R1 migration order is:
 3. `20260808122000_academy_provider_usage_cost_ledger.sql`
 4. `20260808123000_academy_admin_safety_operations.sql`
 5. `20260809120000_academy_operational_telemetry_foundation.sql`
-6. `20260809130000_academy_admin_audit_foundation.sql`
-7. `20260809140000_academy_admin_configuration_core.sql`
-8. `20260809150000_academy_logical_voice_profile_contract.sql`
-9. `20260810140000_academy_admin_configuration_runtime_enforcement.sql`
+6. `20260809121000_academy_provider_usage_cost_aggregate.sql`
+7. `20260809130000_academy_admin_audit_foundation.sql`
+8. `20260809140000_academy_admin_configuration_core.sql`
+9. `20260809150000_academy_logical_voice_profile_contract.sql`
+10. `20260810140000_academy_admin_configuration_runtime_enforcement.sql`
 
 The manifest is a strict linear chain in filename order. These unique versions
 replace the parallel-branch timestamp collision; none has been applied to
@@ -96,6 +97,26 @@ retention class; it contains no event IDs, execution keys, household/learner
 identity, raw metadata, or raw rows. Logically expired rows are excluded even if
 the bounded purge job has not removed them yet. This migration has not been
 applied to a hosted Supabase project.
+
+## Supabase: scalable provider usage cost aggregate (2026-08-09)
+
+Tracked migration:
+`supabase/migrations/20260809121000_academy_provider_usage_cost_aggregate.sql`.
+
+The additive migration leaves provider usage rows and ADMIN-3-R2 pricing rules
+unchanged. It adds the service-role-only, `costs:read`-asserting
+`academy_aggregate_provider_usage_costs_v1` RPC. Queries use half-open ranges,
+cover at most 366 days, aggregate every matching ledger row, and return only
+fixed daily/engine/provider/logical-tier/cost-kind/billing-disposition groups.
+The 384-group ceiling fails explicitly; successful results are never silently
+truncated and return no raw ledger rows or identity/provider internals.
+
+All database integer/numeric aggregates cross JSON as decimal strings. Money
+remains canonical IntegerMicros and never passes through JavaScript `Number`.
+Query coverage is separate from unverified provider-traffic coverage. Retained
+TEL-AI accounting-persistence gap evidence is reported separately and never
+fabricates usage or cost. This migration seeds no prices and has not been
+applied hosted. Architecture is in `docs/admin-costs-aggregate-v2.md`.
 
 ## Supabase: authorized Admin safety projection (2026-08-08)
 

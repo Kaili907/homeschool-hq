@@ -3,6 +3,9 @@ import {
   isCanonicalIntegerMicros,
 } from '../../../src/admin/contracts.ts'
 import { reject } from './http.js'
+import {
+  buildAdminCostAggregateProjection,
+} from './admin-cost-aggregate.js'
 
 export const ADMIN_COST_RECORD_LIMIT = 500
 export const ADMIN_COST_MAX_RANGE_DAYS = 366
@@ -413,18 +416,18 @@ export function buildAdminCostProjection(records, range, generatedAt = new Date(
 }
 
 export function createAdminCostProjection({ gatewayAccess, now = () => new Date() }) {
-  if (!gatewayAccess || typeof gatewayAccess.readProviderUsageCosts !== 'function') {
-    throw new TypeError('admin cost projection requires the provider usage read seam')
+  if (!gatewayAccess || typeof gatewayAccess.aggregateProviderUsageCosts !== 'function') {
+    throw new TypeError('admin cost projection requires the provider usage aggregate seam')
   }
   return Object.freeze({
     async read(event) {
       const observedAt = now()
       const range = resolveAdminCostRange(event, observedAt)
-      const records = await gatewayAccess.readProviderUsageCosts({
-        limit: ADMIN_COST_RECORD_LIMIT,
-        before: range.endExclusive,
+      const aggregate = await gatewayAccess.aggregateProviderUsageCosts({
+        start: range.startAt,
+        endExclusive: range.endExclusive,
       })
-      return buildAdminCostProjection(records, range, observedAt)
+      return buildAdminCostAggregateProjection(aggregate, range, observedAt)
     },
   })
 }
