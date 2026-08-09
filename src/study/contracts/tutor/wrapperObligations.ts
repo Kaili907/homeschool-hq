@@ -224,15 +224,112 @@ export const STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT = Object.freeze({
 } as const)
 
 /**
- * Both, for a wrapper card to enumerate rather than rediscover.
+ * F5 — content eligibility before durable work.
  *
- * They no longer share a status, and that asymmetry is the point. F1 was a
+ * THE DEFECT, reproduced rather than described.
+ * `selectTutorProgram` in the frozen subject registry ends
+ * `matched ?? registration.programs[0]`, so an unmatched lesson or skill
+ * reference does not refuse — it returns the subject's DEFAULT program. Driven
+ * at this card's base, a turn carrying `lessonRef: 'lesson:fractions-week-3'`
+ * and `skillRef: 'skill:equivalent-fractions'` came back `accepted`, asking the
+ * learner a place-value comparison question from sequence 01. Nothing anywhere
+ * reported a mismatch, because a wrongly-selected program is still reviewed,
+ * still in band and still schema-valid: every later check answers correctly
+ * about the wrong lesson.
+ *
+ * The known "unsupported content is discovered on submit" failure is the
+ * BENIGN half of this. It at least quarantines. The silent half taught the
+ * wrong lesson and recorded a normal session.
+ *
+ * THE REQUIREMENT. A host must settle content eligibility BEFORE any of the
+ * four steps in `mustPrecede`, and an ineligible answer must refuse rather than
+ * choose a program. Ordered first among them is `settleStudyTutorLaunch`
+ * itself: eligibility is a property of the block, knowable before a Tutor
+ * session is opened, and a launch that succeeded for content the Tutor cannot
+ * teach has already cost something even when nothing durable followed it.
+ *
+ * WHAT IS IN PLACE.
+ *
+ *  - `evaluateStudyTutorContentEligibility` in
+ *    src/study/production/tutorContentEligibility.ts, and its fail-closed
+ *    selector `selectEligibleTutorProgram`, whose entire difference from the
+ *    legacy one is `?? null` where that has `?? registration.programs[0]`.
+ *    LEGACY SEMANTICS ARE UNCHANGED, deliberately: the mounted preview host
+ *    depends on the fallback, and the frozen tree's own suite pins it.
+ *    src/study/production/tutorContentEligibility.test.ts drives both over one
+ *    unmatched input and asserts they disagree, so the difference is a tested
+ *    fact rather than a comment.
+ *  - `settleEligibleStudyTutorLaunch` in
+ *    src/study/production/tutorLaunchOrdering.ts, which reparses the decision
+ *    as `unknown` — F4's rule applied to the eligibility transport — and throws
+ *    before `launch` is called. No witness is minted, so
+ *    `prepareDurableStudySession` cannot run.
+ *  - src/study/production/tutorContentEligibilityOrdering.integration.test.tsx,
+ *    which drives that seam against the REAL local Study ports and asserts that
+ *    an ineligible block leaves the calendar block `scheduled`, appends no
+ *    `session-launched` event and writes no session row — and that an eligible
+ *    one does all three, so the guard is not passing by doing nothing.
+ *
+ * STILL OPEN, and deliberately. The production host does not exist
+ * (PRODUCTION_ROUTE_NOT_MOUNTED), so nothing can yet be required to come
+ * through that door: a host may still call `settleStudyTutorLaunch` directly
+ * and skip the check entirely. That is the honest residual, recorded the way
+ * F4's single type assertion is. It closes when a mounted production host
+ * discharges it.
+ *
+ * The transport-facing half — `parseStudyTutorEligibilityRequest`,
+ * `parseStudyTutorEligibility` and `acceptStudyTutorEligibility` in
+ * ./eligibility.ts — is complete and is what a future server check answers
+ * over. Malformed and over-long references are REFUSED there, never trimmed:
+ * a truncated `lesson:...` is a different lesson reference, and one that may
+ * well match a reviewed program, which is this same defect with a new entrance.
+ */
+export const STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT = Object.freeze({
+  id: 'WRAPPER_LANDING_REQUIREMENT',
+  condition: 'F5',
+  requirement: 'SETTLE_CONTENT_ELIGIBILITY_BEFORE_ANY_DURABLE_WORK',
+  status: 'open',
+  /** In order. The launch is first because eligibility precedes it too. */
+  mustPrecede: Object.freeze([
+    'tutor-launch-settlement',
+    'calendar-start',
+    'session-launched-event',
+    'session-persistence',
+  ]),
+  enforcedBy: 'production-wrapper-integration-tests',
+  /** The seam that refuses, and the only one that reparses the decision. */
+  contractEnforcement: 'ineligible-content-refused-before-launch',
+  contractEnforcementCard: 'STUDY-A1-TUTOR-CONTENT-ELIGIBILITY-CONTRACT-C',
+  /**
+   * The legacy fallback is NOT removed, and a later card must be able to tell
+   * that from data rather than from prose. `selectTutorProgram` still answers an
+   * unmatched routing id with `registration.programs[0]`; the production
+   * selector is a separate function that answers `null`.
+   */
+  legacySelectorRemainsFallback: true,
+  productionSelector: 'selectEligibleTutorProgram',
+  /** Refuse, never trim — the rule the reference parsers hold to. */
+  malformedReferencePolicy: 'reject-not-truncate',
+  /** No learner grade and no working level is an input, in either half. */
+  usesLearnerGradeAuthority: false,
+  /** What a host can still do, stated the way F4 states its own residual. */
+  residualBypass: 'calling-settleStudyTutorLaunch-directly',
+} as const)
+
+/**
+ * All three, for a wrapper card to enumerate rather than rediscover.
+ *
+ * They do not share a status, and that asymmetry is the point. F1 was a
  * property of how a host CALLS the contract, so a host could discharge it and
  * one now has. F4 is a property of what a type assertion can express, so no
  * host can discharge it and none ever will — it stays open, and the honest
- * statement of what the brand does and does not buy stays with it.
+ * statement of what the brand does and does not buy stays with it. F5 is a
+ * property of a host that has not been built: the machinery to discharge it is
+ * in place and tested, and it stays open until something is mounted that has to
+ * use it.
  */
 export const STUDY_TUTOR_WRAPPER_LANDING_REQUIREMENTS = Object.freeze([
   STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT,
   STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT,
+  STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT,
 ] as const)

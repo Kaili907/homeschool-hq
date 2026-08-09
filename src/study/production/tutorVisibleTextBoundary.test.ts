@@ -68,12 +68,22 @@ import {
 import type { StudyEventLedgerPort, StudySafetyPort } from '../ports'
 import type { StudySafeEvent } from '../types'
 import { ProductionStudyTutorRuntime, STUDY_TUTOR_RUNTIME_REASON_CODES } from './tutorRuntime'
+import { REVIEWED_TUTOR_MATH_SKILL_REF } from '../testing/syntheticStudyFixtures'
 
 const SESSION = parseStudyTutorRef('study-session:visible-text-boundary')!
 const REQUEST = parseStudyTutorRef('study-turn:visible-text-boundary')!
 const LESSON = parseStudyTutorRef('lesson:visible-text-boundary')!
 const SEGMENT = parseStudyTutorRef('segment:visible-text-boundary')!
-const SKILL = parseStudyTutorRef('skill:visible-text-boundary')!
+/**
+ * STUDY-A1-TUTOR-CONTENT-ELIGIBILITY-CONTRACT — a routable skill reference.
+ *
+ * This was 'skill:visible-text-boundary', which matches no registered program.
+ * Before this card it reached sequence 01 through `selectTutorProgram`'s
+ * `programs[0]` fallback, so every turn below ran against the place-value
+ * program by accident. Unroutable content is refused now, and a fixture that
+ * wants an accepted turn has to carry content the reviewed Tutor declares.
+ */
+const SKILL = parseStudyTutorRef(REVIEWED_TUTOR_MATH_SKILL_REF)!
 const LEARNER_TEXT = parseStudyTutorLearnerText('ready')!
 
 const clearSafety: StudySafetyPort = {

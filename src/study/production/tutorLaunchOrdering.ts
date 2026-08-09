@@ -42,6 +42,10 @@
  * `as LaunchSettled` compiles. What the brand removes is every bypass that
  * reads as correct code.
  */
+import {
+  acceptStudyTutorEligibility,
+  type StudyTutorIneligibleReason,
+} from '../contracts/tutor/eligibility'
 import { runCurrentStudyWork, type StudyLifecycleToken } from '../lifecycle'
 import type { StudyPortBundle } from '../ports'
 import type { StudyCalendarEntry, StudyScope, StudyLearnerScope } from '../types'
@@ -105,6 +109,78 @@ export async function settleStudyTutorLaunch(
   await launch()
   token.assertCurrent()
   return settled(token.epoch)
+}
+
+/**
+ * STUDY-A1-TUTOR-CONTENT-ELIGIBILITY-CONTRACT — the refusal a host raises when
+ * the Tutor cannot teach this block's content.
+ *
+ * Deliberately an ERROR and not a result. `settleEligibleStudyTutorLaunch`
+ * returns `Promise<LaunchSettled>`, and a witness is the ONLY thing it may
+ * return: an ineligible outcome that came back as a value would have to be a
+ * second branch a caller could ignore, and ignoring it is exactly the mistake.
+ * A rejection lands on the failure surface the host already has for a launch
+ * that could not start, and — because no witness was produced —
+ * `prepareDurableStudySession` cannot run on any path that reaches it.
+ *
+ * The reason code travels so an operator can tell WHICH refusal happened. It is
+ * content vocabulary, never learner vocabulary, so nothing about a child is
+ * recorded by raising it.
+ */
+export class StudyTutorContentIneligibleError extends Error {
+  readonly reasonCode: StudyTutorIneligibleReason
+  constructor(reasonCode: StudyTutorIneligibleReason) {
+    super(`This Study block's content is not eligible for the Tutor: ${reasonCode}`)
+    this.name = 'StudyTutorContentIneligibleError'
+    this.reasonCode = reasonCode
+  }
+}
+
+/**
+ * STUDY-A1-TUTOR-CONTENT-ELIGIBILITY-CONTRACT — content eligibility, before the
+ * launch and therefore before everything.
+ *
+ * ZERO DURABLE WORK is the property being bought, and the ordering that buys it
+ * is the whole of this function: the eligibility decision is settled BEFORE
+ * `launch` is called, so an ineligible block never opens a Tutor session, never
+ * mints a `LaunchSettled`, and therefore cannot reach `calendar.start`, the
+ * `session-launched` event or `saveSession` — the three writes
+ * `prepareDurableStudySession` performs and the only place they are performed.
+ *
+ * The decision arrives as `unknown` and is REPARSED here. That is F4's lesson
+ * applied to a second transport: this decision is destined to come back from a
+ * pre-launch server check, and a host that trusted a `StudyTutorEligibility`
+ * type its caller declared would be trusting a compile-time fact about a value
+ * that crossed a network. `acceptStudyTutorEligibility` fails closed — an
+ * unparseable answer is INELIGIBLE, not a shrug — so a malformed or truncated
+ * response cannot read as a yes.
+ *
+ * WHY THIS IS A SECOND ENTRY POINT rather than a parameter on
+ * `settleStudyTutorLaunch`. That function is on the mounted preview path too,
+ * and the preview does not route reviewed Tutor content at launch: its
+ * `AcceptedRc1HostRuntime.launch` selects no program at all, and program
+ * selection happens later, on submit. Requiring an eligibility decision there
+ * would mean inventing one for a path that has nothing to decide, and the only
+ * shape that invention can take is a constant that always says yes — the
+ * `programs[0]` fallback again, wearing a different hat.
+ *
+ * THE RESIDUAL, stated plainly and in the same terms F1 and F4 use for theirs:
+ * a production host can still call `settleStudyTutorLaunch` directly and skip
+ * this. That is not closed here and cannot be, because the production host does
+ * not exist yet — the obligation to come through this door is recorded as F5 in
+ * ../contracts/tutor/wrapperObligations.ts and stays OPEN until a mounted
+ * production host discharges it. What this entry point removes is the harder
+ * failure: a host that DOES check eligibility but checks it in the wrong place.
+ * There is one ordering rule here and one code path that implements it.
+ */
+export async function settleEligibleStudyTutorLaunch(
+  eligibility: unknown,
+  token: StudyLifecycleToken,
+  launch: () => unknown,
+): Promise<LaunchSettled> {
+  const decision = acceptStudyTutorEligibility(eligibility)
+  if (!decision.eligible) throw new StudyTutorContentIneligibleError(decision.reason)
+  return settleStudyTutorLaunch(token, launch)
 }
 
 /**

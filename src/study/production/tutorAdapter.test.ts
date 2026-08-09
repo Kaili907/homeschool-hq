@@ -17,10 +17,7 @@
  */
 import { describe, expect, it } from 'vitest'
 import { LOCAL_DEMO_SAFETY_CONFIGURATION } from '../../../adaptive-tutor/study-engine/runtime/src/safety.ts'
-import {
-  resolveTutorSubjectRegistration,
-  selectTutorProgram,
-} from '../../../adaptive-tutor/study-engine/runtime/src/subject-registry.ts'
+import { resolveTutorSubjectRegistration } from '../../../adaptive-tutor/study-engine/runtime/src/subject-registry.ts'
 import {
   sanitizeLearnerFacingText,
   type BridgeOutboxEventV1,
@@ -30,12 +27,16 @@ import {
 import type { TutorProgram } from '../../../adaptive-tutor/core/index.ts'
 import {
   STUDY_TUTOR_ADAPTER_REASON_CODES,
-  STUDY_TUTOR_V1_GRADE_BAND,
-  STUDY_TUTOR_V1_REVIEWED_GRADE_ENVELOPE,
-  reviewedV1GradeBand,
   routableAsRoutineV1,
   runProductionTutorTurn,
 } from './tutorAdapter'
+import {
+  STUDY_TUTOR_V1_GRADE_BAND,
+  STUDY_TUTOR_V1_REVIEWED_GRADE_ENVELOPE,
+  reviewedV1GradeBand,
+  selectEligibleTutorProgram,
+} from './tutorContentEligibility'
+import { REVIEWED_TUTOR_MATH_SKILL_REF } from '../testing/syntheticStudyFixtures'
 import { isStudyTutorReasonCode } from '../contracts/tutor'
 
 const acceptingLedger = {
@@ -57,7 +58,17 @@ function turnRequest(overrides: Partial<Parameters<typeof runProductionTutorTurn
     learnerPseudonym: 'learner:00112233445566778899aabbccddeeff',
     lessonRef: 'lesson:adapter-test',
     segmentRef: 'segment:adapter-test',
-    skillRef: 'skill:adapter-test',
+    /**
+     * STUDY-A1-TUTOR-CONTENT-ELIGIBILITY-CONTRACT — routable, on purpose.
+     *
+     * This was 'skill:adapter-test'. It matches no registered program, and
+     * before this card it reached sequence 01 through `selectTutorProgram`'s
+     * `programs[0]` fallback — so every "accepted turn" in this file was an
+     * accepted turn of a lesson the request never asked for. A turn that is
+     * supposed to be accepted now has to carry content the reviewed Tutor
+     * declares, and the ineligible cases say so explicitly instead.
+     */
+    skillRef: REVIEWED_TUTOR_MATH_SKILL_REF,
     subject: 'math' as const,
     taskType: 'guided-practice' as const,
     transientLearnerText: 'ready',
@@ -70,7 +81,13 @@ function turnRequest(overrides: Partial<Parameters<typeof runProductionTutorTurn
 }
 
 function programWithBand(min: number, max: number): TutorProgram {
-  const base = selectTutorProgram(resolveTutorSubjectRegistration('math'), 'skill:none')
+  // A real registered program with its band rewritten, so the check below is
+  // measured against content rather than against a hand-built object. Selected
+  // by a routing id the frozen content declares, not by the fallback.
+  const base = selectEligibleTutorProgram(
+    resolveTutorSubjectRegistration('math'),
+    REVIEWED_TUTOR_MATH_SKILL_REF,
+  )!.program
   return { ...base, gradeBand: { min, max, label: `Grades ${min}–${max}` } }
 }
 
