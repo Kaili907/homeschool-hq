@@ -18,6 +18,11 @@ The functions require:
 - `ELEVENLABS_API_KEY` for TTS.
 - `ELEVENLABS_ALLOWED_VOICE_IDS`, a comma-separated allowlist of the small set
   of voice IDs approved for the Academy.
+- `ACADEMY_APP_VERSION` with the immutable deployed application version. The
+  platform `COMMIT_REF` or `DEPLOY_ID` is accepted as a trusted fallback.
+- Optional `ACADEMY_TUTOR_ENGINE_VERSION`, `ACADEMY_JARVIS_ENGINE_VERSION`, and
+  `ACADEMY_TTS_ENGINE_VERSION` values when those engines are independently
+  versioned.
 
 `ACADEMY_AI_ENABLED=false` and `ACADEMY_TTS_ENABLED=false` are optional
 administrator kill switches. Missing keys, missing Supabase configuration, or
@@ -36,8 +41,9 @@ Authorization: Bearer <supabase-access-token>
 
 For every request, the function calls the configured Supabase project's fixed
 `/auth/v1/user` endpoint with the bearer token and public anon key. A successful
-top-level user `id` is the verified household identity used by the repository's
-current RLS policy. Request bodies do not contain—and the functions never
+top-level user `id` is the verified account identity. The service entitlement
+lookup separately resolves household attribution and never substitutes the
+account ID for a household ID. Request bodies do not contain—and the functions never
 trust—user IDs, household IDs, or profile IDs.
 
 Invalid or expired tokens return `401`. A Supabase outage or missing server

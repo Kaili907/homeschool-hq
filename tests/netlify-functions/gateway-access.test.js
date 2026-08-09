@@ -14,14 +14,19 @@ function membershipClient(result) {
 
 describe('gateway service-role access', () => {
   it('queries only an active, non-revoked membership for the verified user id', async () => {
-    const { client, builder } = membershipClient({ data: [{ id: 'membership-id' }], error: null })
+    const { client, builder } = membershipClient({ data: [{ household_id: 'household-id' }], error: null })
     const access = createGatewayAccess({ client })
-    await expect(access.requireEntitlement('verified-user-id')).resolves.toBeUndefined()
+    await expect(access.requireEntitlement('verified-user-id')).resolves.toEqual({
+      householdRef: 'household-id',
+      householdAttribution: 'resolved',
+    })
     expect(client.from).toHaveBeenCalledWith('academy_household_memberships')
     expect(builder.eq).toHaveBeenNthCalledWith(1, 'user_id', 'verified-user-id')
     expect(builder.eq).toHaveBeenNthCalledWith(2, 'status', 'active')
+    expect(builder.eq).toHaveBeenNthCalledWith(3, 'academy_households.status', 'active')
     expect(builder.is).toHaveBeenCalledWith('revoked_at', null)
-    expect(builder.limit).toHaveBeenCalledWith(1)
+    expect(builder.select).toHaveBeenCalledWith('household_id, academy_households!inner(status)')
+    expect(builder.limit).toHaveBeenCalledWith(2)
   })
 
   it('fails closed when the verified user has no current membership', async () => {
@@ -59,36 +64,74 @@ describe('gateway service-role access', () => {
     await access.recordProviderUsage({
       requestKey: 'request-key',
       occurredAt: '2026-08-08T12:00:00.000Z',
-      userId: 'verified-user-id',
+      accountRef: 'verified-user-id',
+      householdRef: 'household-id',
+      householdAttribution: 'resolved',
+      appVersion: 'build-1',
+      engineVersion: 'tutor-v1',
+      curriculumVersion: null,
       engine: 'tutor',
       provider: 'anthropic',
       logicalModelTier: 'sonnet',
-      providerProduct: 'claude-sonnet-4-6',
+      providerProductId: 'claude-sonnet-4-6',
+      providerModelId: 'claude-sonnet-4-6',
       inputTokens: 10,
       outputTokens: 4,
-      cacheReadInputTokens: 2,
-      cacheWriteInputTokens: 1,
+      cachedInputReadTokens: 2,
+      cachedInputWriteTokens: 1,
+      ttsCharacters: null,
       latencyMs: 80,
-      status: 'success',
-      billingBasis: 'estimate',
+      result: 'success',
+      resultReasonCode: null,
+      billingDisposition: 'billable',
     })
     expect(client.rpc).toHaveBeenCalledWith('academy_record_provider_usage', {
-      p_request_key: 'request-key',
+      p_execution_key: 'request-key',
       p_occurred_at: '2026-08-08T12:00:00.000Z',
-      p_user_id: 'verified-user-id',
+      p_account_id: 'verified-user-id',
+      p_household_id: 'household-id',
+      p_household_attribution: 'resolved',
+      p_app_version: 'build-1',
+      p_engine_version: 'tutor-v1',
+      p_curriculum_version: null,
       p_engine: 'tutor',
       p_provider: 'anthropic',
       p_logical_model_tier: 'sonnet',
-      p_provider_product: 'claude-sonnet-4-6',
-      p_voice_reference: null,
+      p_provider_product_id: 'claude-sonnet-4-6',
+      p_provider_model_id: 'claude-sonnet-4-6',
       p_input_tokens: 10,
       p_output_tokens: 4,
-      p_cache_read_input_tokens: 2,
-      p_cache_write_input_tokens: 1,
-      p_characters: null,
+      p_cached_input_read_tokens: 2,
+      p_cached_input_write_tokens: 1,
+      p_tts_characters: null,
       p_latency_ms: 80,
-      p_status: 'success',
-      p_billing_basis: 'estimate',
+      p_result: 'success',
+      p_result_reason_code: null,
+      p_billing_disposition: 'billable',
+    })
+  })
+
+  it('reports ambiguous household attribution without guessing a household', async () => {
+    const { client } = membershipClient({
+      data: [{ household_id: 'household-a' }, { household_id: 'household-b' }],
+      error: null,
+    })
+    await expect(createGatewayAccess({ client }).requireEntitlement('verified-user-id')).resolves.toEqual({
+      householdRef: null,
+      householdAttribution: 'ambiguous',
+    })
+  })
+
+  it('reads the bounded canonical cost projection through the service RPC', async () => {
+    const data = [{ costMicros: '9007199254740993' }]
+    const client = { rpc: vi.fn(() => ({ abortSignal: vi.fn(async () => ({ data, error: null })) })) }
+    await expect(createGatewayAccess({ client }).readProviderUsageCosts({
+      limit: 25,
+      before: '2026-08-08T12:00:00.000Z',
+    })).resolves.toBe(data)
+    expect(client.rpc).toHaveBeenCalledWith('academy_read_provider_usage_costs', {
+      p_limit: 25,
+      p_before: '2026-08-08T12:00:00.000Z',
     })
   })
 

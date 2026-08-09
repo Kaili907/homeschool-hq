@@ -1,105 +1,91 @@
 # Academy AI and TTS usage/cost accounting
 
-This contract adds privacy-safe server accounting to the existing authenticated
-Anthropic and ElevenLabs gateways. It does not change the browser success or
-error shapes, provider selection, authentication, household entitlement, or
-daily quota ordering.
+This server-only contract records privacy-safe Anthropic and ElevenLabs usage
+without changing learner responses, gateway security, quota ordering, or
+provider retry behavior. It implements ADMIN contract version 2.
 
-## Trusted identity and captured usage
+## Canonical usage and identity
 
-The gateway verifies the Supabase bearer token and persists that verified user
-ID. The database derives a household ID only when the user has exactly one
-active, non-revoked membership in an active household. Ambiguous household
-membership remains null instead of inventing attribution. Current Tutor,
-Jarvis, and TTS requests do not carry a trusted learner grant, so `learner_id`
-is deliberately always null.
+Every row has a trusted platform execution key, occurrence and bounded latency,
+one request, mandatory verified `accountRef`, and a household attribution state.
+`householdRef` is present only for `resolved`; it is null for
+`no_active_household`, `ambiguous`, and `lookup_unavailable`. A learner may be
+attributed only through a trusted resolved household relationship. Current
+gateway calls do not carry such a learner grant, so `learnerRef` remains null.
 
-Each ledger row stores only:
+The server snapshots the engine, required application version, optional
+independently versioned engine version, and curriculum version only when a
+trusted curriculum binding exists. Browser problem/context data is never used
+to reconstruct a curriculum version.
 
-- server occurrence/recording timestamps and a server/platform execution key;
-- verified user and safely derived household identity;
-- Tutor, Jarvis, or TTS engine; provider; logical model tier; and the
-  server-selected provider product;
-- Anthropic input/output and cache-read/cache-write token counters when the
-  provider usage object is complete and bounded;
-- validated TTS Unicode code-point count and approved voice reference;
-- one request, bounded latency, result status, calculation status, and
-  calculated estimated cost in integer micros.
+Anthropic rows retain the server-selected provider product and model IDs, a
+required Academy logical tier, and separate input, output, cached-input-read,
+and cached-input-write counters. ElevenLabs rows retain provider product/model
+IDs and exact submitted Unicode code-point count; their logical tier is null
+because no Academy tier exists. No tier is invented.
 
-There is no parameter or column for prompts, messages, provider responses,
-conversations, assessment answers, audio, provider request IDs, stop reasons,
-or raw usage objects. Returned audio is never persisted.
+There are no columns or RPC parameters for prompts, messages, conversations,
+assessment answers, provider responses or request IDs, audio, or raw usage.
 
-## Pricing catalog and historical calculation
+## Pricing and exact calculation
 
-`academy_provider_prices` is an append-only, server-only catalog keyed by
-provider, provider product, billing unit, and `effective_from`. A later version
-must have a strictly later effective start and implicitly supersedes an earlier
-open period. Optional `effective_to` creates an explicit exclusive end/gap.
-Existing rows cannot be updated or deleted. Each calculated cost component also
-snapshots the selected price ID, price micros, unit quantity, quantity, and
-result, so already-recorded history remains reproducible after new prices are
-added.
+`academy_provider_pricing_catalogs` contains immutable, non-overlapping USD
+catalog versions with half-open applicability periods `[effectiveFrom,
+effectiveTo)`. Exactly one catalog must apply at the occurrence time. Rates are
+immutable and confined to their catalog period. For a provider/product/tier,
+each billing unit has non-overlapping half-open rate intervals. There is no
+"latest wins" rule.
 
-The migration intentionally inserts no prices. The repository contains only
-fixtures labeled `DETERMINISTIC TEST FIXTURE - NOT PRODUCTION PRICING` inside
-the isolated database test. Before production cost estimates are meaningful,
-an authorized operator must insert independently verified Anthropic prices for
-every deployed model/billing unit and the account-specific ElevenLabs product
-price, with correct effective dates and source labels. No migration in this
-session is applied to a hosted project.
+The independently priced units are `input_token`, `output_token`,
+`cached_input_read_token`, `cached_input_write_token`, `tts_character`, and
+`request`. Every calculated component snapshots its rate ID, catalog version,
+provider/product/model/tier dimensions, interval, USD currency, unit size,
+integer-micros price, quantity, and component result.
 
-## Exact money arithmetic
-
-All money is integer micro-units. For each nonzero billing component, SQL uses
-arbitrary-precision `numeric` intermediates and component-wise half-up rounding:
+SQL uses arbitrary-precision intermediates and component-wise half-up rounding:
 
 ```text
-component_cost_micros = floor(
-  (quantity * price_micros + unit_quantity / 2) / unit_quantity
+componentCostMicros = floor(
+  (quantity * priceMicrosPerUnitSize + unitSize / 2) / unitSize
 )
-total_cost_micros = sum(component_cost_micros)
+costMicros = sum(componentCostMicros)
 ```
 
-TTS `character` quantity means Unicode code points in the exact validated text
-submitted to ElevenLabs (not UTF-16 code units or bytes). Quantities are
-limited to 1,000,000,000, price micros to 1,000,000,000,
-unit quantities to 1..1,000,000,000, latency to 0..300,000 ms, and the final
-stored value to signed PostgreSQL `bigint`. The maximum permitted single
-component is therefore 1,000,000,000,000,000,000 micros, inside the signed
-`bigint` bound. Floating-point arithmetic is never used for cost.
+All stored money is signed PostgreSQL `bigint`. At the Admin JSON boundary,
+every integer-micros price and cost is explicitly cast to a decimal string;
+JavaScript never converts it through `number`.
 
-`calculated_cost_micros` is an estimate, not an invoice or reconciled billed
-amount. This model does not claim invoice reconciliation.
+The migration deliberately seeds no prices. Production requires an authorized
+operator to publish independently verified, effective-dated Anthropic and
+account-specific ElevenLabs USD catalogs. Test prices are deterministic
+fixtures only. This migration is not applied to a hosted project in this work.
 
-## Result, failure, and retry semantics
+## Result, billing, and cost semantics
 
-| Outcome | Ledger status | Cost treatment |
-| --- | --- | --- |
-| Provider success with valid usage | `success` | Estimate from effective prices |
-| Anthropic success with missing/malformed usage | `missing_usage` / `malformed_usage` | Unknown; no invented tokens or cost |
-| Provider 429 | `provider_throttled` | Explicit zero/non-billable |
-| Provider non-2xx or transport/read error | `provider_error` | Billing outcome unknown |
-| Provider timeout | `timeout` | Billing outcome unknown |
-| Provider accepted TTS but returned invalid/empty audio | `provider_error` | Character estimate retained |
-| Anthropic response cannot pass sanitization | `response_sanitization_failure` | Valid provider usage is still estimated |
-| Required price is absent or outside its period | original result status | `price_unavailable`, null cost |
+Operational `result`, bounded `resultReasonCode`, `billingDisposition`, and
+`costKind` are independent. Canonical cost kinds are:
 
-The gateway performs no provider retry. A browser retry is a new provider
-attempt and receives a new platform execution key, so it is counted separately.
-Repeated persistence of the same trusted platform execution key returns the
-existing ledger row and cannot add a second request or cost component. This
-idempotency does not rely on a client-supplied token or cost value.
+- `calculated`: non-null exact cost and optional component snapshots;
+- `reconciled`: non-null externally reconciled cost plus reconciliation ref;
+- `unavailable`: null cost, never an invented zero.
 
-Accounting persistence is awaited but isolated from the established learner
-response. A database accounting outage does not replace an otherwise valid
-Tutor/Jarvis text or TTS audio response. Existing daily quota reservation still
-occurs before the provider call and remains fail-closed.
+Trusted `not_billable` semantics produce calculated zero with no catalog or
+components. A rejection or HTTP 429 alone does not prove that outcome; provider
+throttles and uncertain failures use `billingDisposition: unknown` and null
+unavailable cost. Accepted responses with trusted quantities remain billable
+even if response validation later fails. The gateway performs no provider
+retry.
+
+Repeating an execution key with identical immutable facts returns the existing
+record as a replay. Reusing it with different facts raises
+`reconciliation_conflict`; the first record is not silently accepted or
+overwritten.
 
 ## Access boundary
 
-All three accounting tables use forced RLS. `PUBLIC`, `anon`, and
-`authenticated` receive no table access and cannot execute the recording RPC.
-Only the server `service_role` can record usage or read the catalog/ledger.
-ADMIN-0 still owns the final authorized Admin Console read contracts; this
-session intentionally adds no browser/admin query RPC and no UI.
+Catalog, rate, ledger, and component tables use forced RLS with no browser-role
+access. Recording and the canonical projection are service-role-only RPCs.
+The narrow application seam calls an ADMIN-1-supplied authorization check for
+the exact `costs:read` capability before invoking that projection. Browser role
+claims are never accepted, raw provider internals are not projected, and no
+learner response contains usage, billing, catalog, or cost data.

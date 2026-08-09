@@ -24,6 +24,7 @@ import {
   elapsedMilliseconds,
   parseAnthropicUsage,
   persistProviderUsage,
+  trustedUsageVersions,
   usageRequestKey,
 } from './_shared/usage-accounting.js'
 
@@ -54,9 +55,10 @@ export function createAnthropicHandler(overrides = {}) {
       }
 
       const access = overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl })
-      await access.requireEntitlement(auth.user.id)
+      const entitlement = await access.requireEntitlement(auth.user.id)
 
       const request = validateAnthropicRequest(readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES))
+      const versions = trustedUsageVersions(env, request.mode)
 
       const apiKey = typeof env.ANTHROPIC_API_KEY === 'string' ? env.ANTHROPIC_API_KEY.trim() : ''
       if (!apiKey) return errorResponse(503, 'service_unavailable')
@@ -73,22 +75,28 @@ export function createAnthropicHandler(overrides = {}) {
       const occurredAt = new Date().toISOString()
       const startedAt = Date.now()
       const requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
-      const recordUsage = async (status, usage, billingBasis) =>
+      const recordUsage = async (result, resultReasonCode, usage, billingDisposition) =>
         persistProviderUsage(access, {
           requestKey,
           occurredAt,
-          userId: auth.user.id,
+          accountRef: auth.user.id,
+          householdRef: entitlement.householdRef,
+          householdAttribution: entitlement.householdAttribution,
+          ...versions,
           engine: request.mode,
           provider: 'anthropic',
           logicalModelTier: request.modelTier,
-          providerProduct: providerBody.model,
+          providerProductId: providerBody.model,
+          providerModelId: providerBody.model,
           inputTokens: usage?.inputTokens,
           outputTokens: usage?.outputTokens,
-          cacheReadInputTokens: usage?.cacheReadInputTokens,
-          cacheWriteInputTokens: usage?.cacheWriteInputTokens,
+          cachedInputReadTokens: usage?.cacheReadInputTokens,
+          cachedInputWriteTokens: usage?.cacheWriteInputTokens,
+          ttsCharacters: null,
           latencyMs: elapsedMilliseconds(startedAt),
-          status,
-          billingBasis,
+          result,
+          resultReasonCode,
+          billingDisposition,
         })
       const signal = AbortSignal.timeout(ANTHROPIC_TIMEOUT_MS)
       try {
@@ -105,11 +113,11 @@ export function createAnthropicHandler(overrides = {}) {
           body: JSON.stringify(providerBody),
         })
         if (upstream.status === 429) {
-          await recordUsage('provider_throttled', null, 'none')
+          await recordUsage('rejected', 'provider_throttled', null, 'unknown')
           return errorResponse(429, 'usage_limit')
         }
         if (!upstream.ok) {
-          await recordUsage('provider_error', null, 'unknown')
+          await recordUsage('provider_error', 'provider_rejected', null, 'unknown')
           return errorResponse(502, 'provider_failure')
         }
 
@@ -117,10 +125,15 @@ export function createAnthropicHandler(overrides = {}) {
         providerData = JSON.parse(new TextDecoder().decode(bytes))
       } catch (error) {
         if (isTimeoutError(error, signal)) {
-          await recordUsage('timeout', null, 'unknown')
+          await recordUsage('timeout', 'upstream_timeout', null, 'unknown')
           return errorResponse(504, 'upstream_timeout')
         }
-        await recordUsage('provider_error', null, 'unknown')
+        await recordUsage(
+          'provider_error',
+          'invalid_provider_response',
+          null,
+          upstream?.ok ? 'billable' : 'unknown',
+        )
         if (error instanceof GatewayError) throw error
         return errorResponse(502, 'provider_failure')
       }
@@ -130,25 +143,28 @@ export function createAnthropicHandler(overrides = {}) {
         text = sanitizeGatewayText(request, extractAnthropicText(providerData))
       } catch (error) {
         await recordUsage(
-          'response_sanitization_failure',
+          'validation_error',
+          'response_sanitization_rejected',
           usage.kind === 'valid' ? usage : null,
-          usage.kind === 'valid' ? 'estimate' : 'unknown',
+          'billable',
         )
         throw error
       }
       if (!text) {
         await recordUsage(
-          'response_sanitization_failure',
+          'validation_error',
+          'response_sanitization_rejected',
           usage.kind === 'valid' ? usage : null,
-          usage.kind === 'valid' ? 'estimate' : 'unknown',
+          'billable',
         )
         return errorResponse(502, 'provider_failure')
       }
 
       await recordUsage(
-        usage.kind === 'valid' ? 'success' : `${usage.kind}_usage`,
+        'success',
+        usage.kind === 'valid' ? null : `${usage.kind}_provider_usage`,
         usage.kind === 'valid' ? usage : null,
-        usage.kind === 'valid' ? 'estimate' : 'unknown',
+        'billable',
       )
 
       return jsonResponse(200, { text })

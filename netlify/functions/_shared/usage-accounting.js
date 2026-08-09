@@ -1,8 +1,15 @@
 import { randomUUID } from 'node:crypto'
+import { reject } from './http.js'
 
 const MAX_USAGE_QUANTITY = 1_000_000_000
 const MAX_LATENCY_MS = 300_000
 const REQUEST_KEY_PATTERN = /^[A-Za-z0-9_-]{1,128}$/
+const VERSION_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:@/-]{0,127}$/
+const ENGINE_VERSION_ENV = Object.freeze({
+  tutor: 'ACADEMY_TUTOR_ENGINE_VERSION',
+  jarvis: 'ACADEMY_JARVIS_ENGINE_VERSION',
+  tts: 'ACADEMY_TTS_ENGINE_VERSION',
+})
 
 function nonnegativeInteger(value) {
   return Number.isSafeInteger(value) && value >= 0 && value <= MAX_USAGE_QUANTITY
@@ -54,6 +61,29 @@ export function elapsedMilliseconds(startedAt, now = Date.now()) {
 
 export function submittedCharacterCount(text) {
   return Array.from(text).length
+}
+
+function optionalVersion(value) {
+  if (value === undefined || value === null || value === '') return null
+  if (typeof value !== 'string' || !VERSION_PATTERN.test(value)) {
+    reject(503, 'service_unavailable')
+  }
+  return value
+}
+
+export function trustedUsageVersions(env, engine) {
+  const appVersion = [env?.ACADEMY_APP_VERSION, env?.COMMIT_REF, env?.DEPLOY_ID]
+    .find((value) => typeof value === 'string' && value !== '')
+  if (typeof appVersion !== 'string' || !VERSION_PATTERN.test(appVersion)) {
+    reject(503, 'service_unavailable')
+  }
+  return {
+    appVersion,
+    engineVersion: optionalVersion(env?.[ENGINE_VERSION_ENV[engine]]),
+    // Current account-authenticated provider calls carry no trusted immutable
+    // curriculum binding. Never infer this from browser problem/context data.
+    curriculumVersion: null,
+  }
 }
 
 /** Accounting must never replace the established learner-facing response. */
