@@ -7,8 +7,11 @@ import { emptyProfile } from '../../../migration'
 import type { AcademyRoute } from '../../../academy/academyRoute'
 import { enrollInCatalog, startLesson, submitLessonCheck } from '../../../academy/academyState'
 import type { AcademyCatalog, AcademySchedule } from '../../../academy/contentTypes'
-import type { Profile, SchoolYear } from '../../../types'
-import { StudentDashboard } from './StudentDashboard'
+import type { MissionItem, Profile, SchoolYear } from '../../../types'
+import {
+  StudentDashboard,
+  type StudentDashboardComposition,
+} from './StudentDashboard'
 
 const dashboardStyles = readFileSync(new URL('./studentDashboard.css', import.meta.url), 'utf8')
 const dashboardSource = readFileSync(new URL('./StudentDashboard.tsx', import.meta.url), 'utf8')
@@ -135,18 +138,41 @@ function staleAttempt(profile: Profile, lessonId: string) {
   }
 }
 
+function legacyDashboard(
+  items: MissionItem[] = [
+    { id: 'writing', label: 'Writing', done: false },
+    { id: 'typing', label: 'Typing — 5 minutes', done: false, auto: true, autoKind: 'typing' },
+    { id: 'reading', label: 'Reading 20 minutes', done: true },
+  ],
+  overrides: Partial<StudentDashboardComposition> = {},
+): StudentDashboardComposition {
+  return {
+    onSignOut: vi.fn(),
+    mission: {
+      day: { items },
+      launchableKinds: ['typing'],
+      onToggle: vi.fn(),
+      onLaunch: vi.fn(),
+    },
+    tools: [],
+    ...overrides,
+  }
+}
+
 function renderDashboard({
   profile = activeProfile(),
   dashboardCatalog = catalog,
   dashboardSchedule = schedule,
   dashboardToday = '2026-08-03',
   schoolYear,
+  dashboard,
 }: {
   profile?: Profile
   dashboardCatalog?: AcademyCatalog
   dashboardSchedule?: AcademySchedule
   dashboardToday?: string
   schoolYear?: SchoolYear
+  dashboard?: StudentDashboardComposition
 } = {}) {
   return renderToStaticMarkup(
     <StudentDashboard
@@ -158,6 +184,7 @@ function renderDashboard({
       today={dashboardToday}
       onNavigate={() => {}}
       onExit={() => {}}
+      dashboard={dashboard}
     />,
   )
 }
@@ -167,11 +194,13 @@ async function mountDashboard({
   dashboardSchedule = schedule,
   dashboardToday = '2026-08-03',
   schoolYear,
+  dashboard,
 }: {
   profile?: Profile
   dashboardSchedule?: AcademySchedule
   dashboardToday?: string
   schoolYear?: SchoolYear
+  dashboard?: StudentDashboardComposition
 } = {}) {
   const documentTarget = new FakeDocument()
   const windowTarget = Object.assign(new EventTarget(), {
@@ -204,6 +233,7 @@ async function mountDashboard({
       today={dashboardToday}
       onNavigate={onNavigate}
       onExit={() => {}}
+      dashboard={dashboard}
     />,
   ))
   return { container, fetch, onNavigate, profile, root }
@@ -212,12 +242,26 @@ async function mountDashboard({
 afterEach(() => vi.unstubAllGlobals())
 
 describe('StudentDashboard', () => {
-  it('uses neutral Academy home-entry copy for reference schedules', () => {
-    expect(appSource).toContain('Academy lessons, your courses, and the year schedule')
-    expect(appSource).not.toContain('Today&apos;s lessons, your courses, and the year schedule')
-    expect(appSource).toContain("Academy isn't set up for this learner. Ask a grown-up for help.")
-    expect(appSource).toContain('title="Academy isn\'t set up"')
-    expect(appSource).toContain('note={null}')
+  it('keeps an unconfigured learner inside the dark dashboard shell', () => {
+    const emptyCatalog: AcademyCatalog = { releaseVersion: '', grade: '5', courses: [] }
+    const emptySchedule: AcademySchedule = { releaseVersion: '', grade: '5', days: [] }
+    const html = renderDashboard({
+      dashboardCatalog: emptyCatalog,
+      dashboardSchedule: emptySchedule,
+      dashboard: legacyDashboard(),
+    })
+    expect(html).toContain('class="student-dashboard"')
+    expect(html).toContain("Academy courses aren&#x27;t set up yet.")
+    expect(html).toContain('Today&#x27;s Mission')
+    expect(html).toContain('Writing')
+    expect(html).toContain('No Academy courses are assigned yet.')
+    expect(appSource).not.toContain('if (academyEntries.length === 0)')
+  })
+
+  it('uses the dark student dashboard while the lazy Academy router chunk loads', () => {
+    expect(appSource).toContain('const loadingStudentDashboard = (')
+    expect(appSource).toContain('<Suspense fallback={loadingStudentDashboard}>')
+    expect(appSource).toContain('academyStatus="loading"')
   })
 
   it('renders current learner context and text status labels', () => {
@@ -236,7 +280,7 @@ describe('StudentDashboard', () => {
   })
 
   it('keeps course and working-level context in timeline accessible names', () => {
-    const html = renderDashboard()
+    const html = renderDashboard({ schoolYear: CONFIGURED_YEAR })
     expect(html).toContain('aria-label="Fractions in context, Mathematics · Grade 5, Not started"')
     expect(html).toContain('aria-label="Evidence in a text, English Language Arts · Grade 7, In progress"')
     expect(html).toContain('aria-label="Forces and motion, Science · Grade 8, Not started"')
@@ -265,6 +309,7 @@ describe('StudentDashboard', () => {
   it('uses neutral student-facing fallbacks instead of raw internal IDs or subject slugs', () => {
     const missingLessonId = 'ma-g5-mathematics-u99-l99'
     const missingHtml = renderDashboard({
+      schoolYear: CONFIGURED_YEAR,
       dashboardSchedule: {
         ...schedule,
         days: [{ week: 1, day: 1, lessons: [{ lessonId: missingLessonId, title: 'Missing lesson' }] }],
@@ -337,16 +382,73 @@ describe('StudentDashboard', () => {
   it.each([
     ['off-week', OFF_WEEK_YEAR],
     ['after-year', AFTER_YEAR],
-  ] as const)('presents the selected lesson honestly in the %s reference state', (_state, schoolYear) => {
-    const html = renderDashboard({ dashboardToday: '2026-08-10', schoolYear })
-    expect(html).toContain('>Reference lesson<')
-    expect(html).toContain('class="up-next-card up-next-card--reference"')
-    expect(html).toContain('aria-label="Reference lesson: Evidence in a text, English Language Arts · Grade 7, In progress"')
-    expect(html).toContain('aria-label="Open lesson: Evidence in a text, English Language Arts · Grade 7, In progress"')
-    expect(html).toContain('>Open lesson<span')
-    expect(html).not.toContain('>Up next<')
-    expect(html).not.toContain('aria-label="Up next:')
+  ] as const)('keeps the %s Academy schedule secondary to real mission work', (state, schoolYear) => {
+    const html = renderDashboard({
+      dashboardToday: '2026-08-10',
+      schoolYear,
+      dashboard: legacyDashboard(),
+    })
+    expect(html).toContain('aria-label="Up next: Writing, Other work"')
+    expect(html).toContain('Mark complete: Writing')
+    expect(html).toContain('Evidence in a text')
+    expect(html).toContain(state === 'off-week' ? 'Current Academy schedule' : 'Final Academy schedule')
+    expect(html).not.toContain('class="up-next-card up-next-card--reference"')
+    expect(html).not.toContain('aria-label="Up next: Evidence in a text')
     expect(html).not.toContain('>Start lesson<')
+  })
+
+  it('gives current-day Academy work display precedence without hiding mission work', () => {
+    const html = renderDashboard({ schoolYear: CONFIGURED_YEAR, dashboard: legacyDashboard() })
+    expect(html).toContain('aria-label="Up next: Evidence in a text, English Language Arts · Grade 7, In progress"')
+    expect(html).not.toContain('aria-label="Up next: Writing, Other work"')
+    expect(html).toContain('Today&#x27;s Mission')
+    expect(html).toContain('Writing')
+    expect(html).toContain('Typing — 5 minutes')
+    expect(html).toContain('Reading 20 minutes')
+  })
+
+  it('uses a legitimate mission as Up Next when no Academy program exists', () => {
+    const html = renderDashboard({
+      dashboardCatalog: { releaseVersion: '', grade: '5', courses: [] },
+      dashboardSchedule: { releaseVersion: '', grade: '5', days: [] },
+      dashboard: legacyDashboard(),
+    })
+    expect(html).toContain('aria-label="Up next: Writing, Other work"')
+    expect(html).toContain('Mark complete: Writing')
+    expect(html).toContain("Academy courses aren&#x27;t set up yet.")
+    expect(html).toContain('No Academy courses are assigned yet.')
+  })
+
+  it('labels the legacy Academy mission as a separate checklist, not Academy progress', () => {
+    const html = renderDashboard({
+      dashboardToday: '2026-08-10',
+      schoolYear: OFF_WEEK_YEAR,
+      dashboard: legacyDashboard([
+        {
+          id: 'academy-lessons',
+          label: "Today's Academy lessons",
+          done: false,
+        },
+      ]),
+    })
+
+    expect(html).toContain('aria-label="Up next: Today&#x27;s Academy lessons, Other work"')
+    expect(html).toContain('Separate mission checklist; does not update Academy lesson progress')
+    expect(html).toContain(
+      'aria-label="Mark complete: Today&#x27;s Academy lessons. Separate mission checklist; does not update Academy lesson progress"',
+    )
+    expect(html).toContain('Current Academy schedule')
+  })
+
+  it('renders a truthful no-next state instead of promoting reference work', () => {
+    const dashboard = legacyDashboard([
+      { id: 'done', label: 'Finished mission item', done: true },
+    ])
+    const html = renderDashboard({ dashboardToday: '2026-08-10', schoolYear: OFF_WEEK_YEAR, dashboard })
+    expect(html).toContain('No next item is waiting right now.')
+    expect(html).toContain('Finished mission item')
+    expect(html).toContain('Current Academy schedule')
+    expect(html).not.toContain('aria-label="Up next: Evidence in a text')
   })
 
   it('limits completion copy to the displayed Academy schedule', () => {
@@ -361,7 +463,9 @@ describe('StudentDashboard', () => {
     expect(normalHtml).not.toContain('done for today')
 
     const referenceHtml = renderDashboard({ profile })
-    expect(referenceHtml).toContain('All lessons shown here are complete.')
+    expect(referenceHtml).toContain('No next item is waiting right now.')
+    expect(referenceHtml).toContain('Week 1 schedule')
+    expect(referenceHtml).toContain('Complete')
     expect(referenceHtml).not.toContain('done for today')
   })
 
@@ -485,7 +589,11 @@ describe('StudentDashboard', () => {
       ...schedule,
       days: [{ week: 1, day: 1, lessons: [{ lessonId: ELA, title: 'Evidence in a text' }] }],
     }
-    const html = renderDashboard({ profile: staleAttempt(enrolledProfile(), ELA), dashboardSchedule })
+    const html = renderDashboard({
+      profile: staleAttempt(enrolledProfile(), ELA),
+      dashboardSchedule,
+      schoolYear: CONFIGURED_YEAR,
+    })
     expect(html).toContain('Curriculum version changed — restart required')
     expect(html).toContain('This lesson was started with a different curriculum version.')
     expect(html).toContain('Open lesson')
@@ -515,7 +623,7 @@ describe('StudentDashboard', () => {
       ...schedule,
       days: [{ week: 1, day: 1, lessons: [{ lessonId: MATH, title: 'Fractions in context' }] }],
     }
-    const html = renderDashboard({ profile, dashboardSchedule })
+    const html = renderDashboard({ profile, dashboardSchedule, schoolYear: CONFIGURED_YEAR })
     expect(html).toContain('Review needed')
     expect(html).toContain('Open lesson')
     expect(html).not.toContain('Ready to retry')
@@ -541,7 +649,8 @@ describe('StudentDashboard', () => {
   it('mounts without network activity and a lesson action only emits its existing route', async () => {
     const profile = activeProfile()
     const profileBeforeClick = JSON.parse(JSON.stringify(profile)) as Profile
-    const mounted = await mountDashboard({ profile })
+    const dashboard = legacyDashboard()
+    const mounted = await mountDashboard({ profile, schoolYear: CONFIGURED_YEAR, dashboard })
     try {
       expect(mounted.fetch).not.toHaveBeenCalled()
 
@@ -554,7 +663,75 @@ describe('StudentDashboard', () => {
       expect(mounted.onNavigate).toHaveBeenCalledWith({
         kind: 'lesson', courseId: 'ma-g7-english-language-arts', unitNumber: 1, lessonId: ELA,
       })
+      expect(dashboard.mission?.onToggle).not.toHaveBeenCalled()
+      expect(dashboard.mission?.onLaunch).not.toHaveBeenCalled()
       expect(profile).toEqual(profileBeforeClick)
+    } finally {
+      await act(async () => mounted.root.unmount())
+    }
+  })
+
+  it('delegates mission controls without touching Academy routing or profile state', async () => {
+    const profile = activeProfile()
+    const profileBeforeClick = JSON.parse(JSON.stringify(profile)) as Profile
+    const dashboard = legacyDashboard()
+    const mounted = await mountDashboard({
+      profile,
+      dashboardToday: '2026-08-10',
+      schoolYear: OFF_WEEK_YEAR,
+      dashboard,
+    })
+    try {
+      const manualButton = findButton(mounted.container, 'Mark complete')
+      expect(manualButton).not.toBeNull()
+      const manualClick = new Event('click', { bubbles: true, cancelable: true })
+      Object.defineProperty(manualClick, 'target', { configurable: true, value: manualButton })
+      await act(async () => { mounted.container.dispatchEvent(manualClick) })
+
+      expect(dashboard.mission?.onToggle).toHaveBeenCalledWith('writing', true)
+      expect(dashboard.mission?.onLaunch).not.toHaveBeenCalled()
+      expect(mounted.onNavigate).not.toHaveBeenCalled()
+      expect(profile).toEqual(profileBeforeClick)
+
+      const autoButton = findButton(mounted.container, 'Start')
+      expect(autoButton).not.toBeNull()
+      const autoClick = new Event('click', { bubbles: true, cancelable: true })
+      Object.defineProperty(autoClick, 'target', { configurable: true, value: autoButton })
+      await act(async () => { mounted.container.dispatchEvent(autoClick) })
+
+      expect(dashboard.mission?.onLaunch).toHaveBeenCalledWith('typing')
+      expect(dashboard.mission?.onToggle).toHaveBeenCalledTimes(1)
+      expect(mounted.onNavigate).not.toHaveBeenCalled()
+      expect(profile).toEqual(profileBeforeClick)
+    } finally {
+      await act(async () => mounted.root.unmount())
+    }
+  })
+
+  it('uses the existing sign-out, Prize Shop, and learning-tool callbacks', async () => {
+    const onSignOut = vi.fn()
+    const onOpenShop = vi.fn()
+    const onOpenTool = vi.fn()
+    const dashboard = legacyDashboard(undefined, {
+      onSignOut,
+      rewards: { stars: 42, onOpenShop },
+      tools: [{ id: 'reading', title: 'Reading', description: 'Read today', onOpen: onOpenTool }],
+    })
+    const mounted = await mountDashboard({ dashboard })
+    try {
+      for (const [label, callback] of [
+        ['Sign out', onSignOut],
+        ['Prize Shop', onOpenShop],
+        ['Read today', onOpenTool],
+      ] as const) {
+        const button = findButton(mounted.container, label)
+        expect(button).not.toBeNull()
+        const click = new Event('click', { bubbles: true, cancelable: true })
+        Object.defineProperty(click, 'target', { configurable: true, value: button })
+        await act(async () => { mounted.container.dispatchEvent(click) })
+        expect(callback).toHaveBeenCalledTimes(1)
+      }
+      expect(mounted.onNavigate).not.toHaveBeenCalled()
     } finally {
       await act(async () => mounted.root.unmount())
     }
@@ -563,17 +740,19 @@ describe('StudentDashboard', () => {
   it.each([
     ['off-week', OFF_WEEK_YEAR],
     ['after-year', AFTER_YEAR],
-  ] as const)('keeps the %s selected lesson navigation-only and side-effect free', async (_state, schoolYear) => {
+  ] as const)('keeps the %s reference lesson secondary, navigation-only, and side-effect free', async (state, schoolYear) => {
     const profile = activeProfile()
     const profileBeforeClick = JSON.parse(JSON.stringify(profile)) as Profile
     const mounted = await mountDashboard({ profile, dashboardToday: '2026-08-10', schoolYear })
     try {
-      expect(elementText(mounted.container)).toContain('Reference lesson')
-      expect(elementText(mounted.container)).not.toContain('Up next')
+      expect(elementText(mounted.container)).toContain('No next item is waiting right now.')
+      expect(elementText(mounted.container)).toContain(
+        state === 'off-week' ? 'Current Academy schedule' : 'Final Academy schedule',
+      )
       expect(elementText(mounted.container)).not.toContain('Start lesson')
       expect(mounted.fetch).not.toHaveBeenCalled()
 
-      const button = findButton(mounted.container, 'Open lesson')
+      const button = findButton(mounted.container, 'Evidence in a text')
       expect(button).not.toBeNull()
       const click = new Event('click', { bubbles: true, cancelable: true })
       Object.defineProperty(click, 'target', { configurable: true, value: button })

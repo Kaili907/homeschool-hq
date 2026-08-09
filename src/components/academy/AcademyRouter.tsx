@@ -25,12 +25,15 @@ import {
   submitLessonCheck,
   recordReassessment,
 } from '../../academy/academyState'
-import { StudentDashboard } from './dashboard/StudentDashboard'
+import {
+  StudentDashboard,
+  type StudentDashboardComposition,
+} from './dashboard/StudentDashboard'
 
 /**
- * CURR-1 — the Manuel Academy student surface, lazy-loaded from App.tsx behind
- * the per-level feature flags. Self-styled (calm slate look, matching the study
- * surface), text-first, no animation (reduced-motion safe by construction),
+ * CURR-1 — the Manuel Academy curriculum router, lazy-loaded from App.tsx while
+ * the universal dashboard shell remains synchronous. Per-level feature flags
+ * gate only the entries composed inside it. The surface is self-styled, text-first,
  * keyboard-first: every control is a real button/input, headings receive focus
  * on view changes, and content renders without any media.
  *
@@ -49,36 +52,106 @@ interface AcademyProps {
   onNavigate: (route: AcademyRoute) => void
   onPatch: (update: (prev: Profile) => Profile) => void
   onExit: () => void
+  dashboard?: StudentDashboardComposition
+}
+
+type ProgramLoadState =
+  | { entriesKey: string; status: 'loading' }
+  | { entriesKey: string; status: 'ready'; program: AcademyProgram }
+  | { entriesKey: string; status: 'error'; message: string }
+
+const EMPTY_DASHBOARD_CATALOG: AcademyCatalog = {
+  releaseVersion: '',
+  grade: '5',
+  courses: [],
+}
+const EMPTY_DASHBOARD_SCHEDULE: AcademySchedule = {
+  releaseVersion: '',
+  grade: '5',
+  days: [],
+}
+
+/**
+ * Authorize a parsed route against the CURRENT composed program before any
+ * child view can fetch a unit or write lesson state. The catalog summaries are
+ * sufficient for every check: course membership, unit membership, lesson
+ * membership, and whether an assessment exists.
+ */
+function routeAvailable(catalog: AcademyCatalog, route: AcademyRoute): boolean {
+  if (route.kind === 'home' || route.kind === 'schedule') return true
+  const course = catalog.courses.find((item) => item.courseId === route.courseId)
+  if (!course) return false
+  if (route.kind === 'course') return true
+  const unit = course.units.find((item) => item.unitNumber === route.unitNumber)
+  if (!unit) return false
+  if (route.kind === 'unit') return true
+  if (route.kind === 'lesson') return unit.lessonIds.includes(route.lessonId)
+  return unit.hasAssessment
+}
+
+function unavailableRouteLabel(route: AcademyRoute): keyof typeof MISSING_CONTENT_COPY {
+  switch (route.kind) {
+    case 'course':
+      return 'course'
+    case 'unit':
+      return 'unit'
+    case 'lesson':
+      return 'lesson'
+    case 'assessment':
+      return 'assessment'
+    case 'home':
+    case 'schedule':
+      return 'course'
+  }
 }
 
 export function AcademyRouter(props: AcademyProps) {
   const { profile, entries, route, onNavigate, onPatch, onExit } = props
-  const [program, setProgram] = useState<AcademyProgram | null>(null)
-  const [loadError, setLoadError] = useState<string | null>(null)
   // The entries array is rebuilt on every render; its CONTENT is the real
   // dependency, so the key drives the effect and the ref carries the values.
   const entriesKey = entries.map((e) => `${e.subject}@${e.level}`).join(',')
+  const [loadState, setLoadState] = useState<ProgramLoadState>({
+    entriesKey,
+    status: 'loading',
+  })
   const entriesRef = useRef(entries)
   entriesRef.current = entries
 
   useEffect(() => {
     let current = true
-    setLoadError(null)
-    setProgram(null)
+    const requestedKey = entriesKey
+    setLoadState({ entriesKey: requestedKey, status: 'loading' })
     loadProgram(entriesRef.current)
       .then((composed) => {
-        if (current) setProgram(composed)
+        if (current) {
+          setLoadState({ entriesKey: requestedKey, status: 'ready', program: composed })
+        }
       })
       .catch(() => {
-        if (current) setLoadError("Academy couldn't load right now. Go back home and ask a grown-up for help.")
+        if (current) {
+          setLoadState({
+            entriesKey: requestedKey,
+            status: 'error',
+            message: "Academy courses couldn't load right now. Ask a grown-up for help.",
+          })
+        }
       })
     return () => {
       current = false
     }
   }, [entriesKey])
 
+  // A resolved program belongs only to the exact entry set that requested it.
+  // Treat an older result as loading during the render before the effect above
+  // starts the replacement request, so removed courses cannot authorize a child.
+  const currentLoadState: ProgramLoadState = loadState.entriesKey === entriesKey
+    ? loadState
+    : { entriesKey, status: 'loading' }
+  const program = currentLoadState.status === 'ready' ? currentLoadState.program : null
+  const loadError = currentLoadState.status === 'error' ? currentLoadState.message : null
   const catalog = program?.catalog ?? null
   const schedule = program?.schedule ?? null
+  const routeIsAvailable = catalog !== null && routeAvailable(catalog, route)
 
   // Enrollment mirrors the program's course list. It re-runs when a parent
   // changes a working level (the course set changes), and enrollInCatalog
@@ -88,12 +161,28 @@ export function AcademyRouter(props: AcademyProps) {
   const enrolledKey = enrolledIds ? [...enrolledIds].sort().join(',') : null
   const inSync = catalog !== null && desiredKey === enrolledKey && profile.academy?.grade === catalog.grade
   useEffect(() => {
-    if (!catalog || inSync || catalog.courses.length === 0) return
+    if (!catalog || !routeIsAvailable || inSync || catalog.courses.length === 0) return
     const now = new Date().toISOString()
     onPatch((prev) => enrollInCatalog(prev, catalog, now))
-  }, [catalog, inSync, onPatch])
+  }, [catalog, inSync, onPatch, routeIsAvailable])
 
   if (loadError) {
+    if (route.kind === 'home') {
+      return (
+        <StudentDashboard
+          profile={profile}
+          catalog={EMPTY_DASHBOARD_CATALOG}
+          schedule={EMPTY_DASHBOARD_SCHEDULE}
+          levelOf={{}}
+          schoolYear={props.schoolYear}
+          academyStatus="error"
+          academyNotice={loadError}
+          onNavigate={onNavigate}
+          onExit={onExit}
+          dashboard={props.dashboard}
+        />
+      )
+    }
     return (
       <AcademyShell title="Manuel Academy" onExit={onExit}>
         <p role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 font-semibold">
@@ -102,16 +191,22 @@ export function AcademyRouter(props: AcademyProps) {
       </AcademyShell>
     )
   }
-  if (program && program.catalog.courses.length === 0) {
-    return (
-      <AcademyShell title="Manuel Academy" onExit={onExit}>
-        <p role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 font-semibold">
-          Your Academy courses aren&apos;t set up yet. Ask a grown-up to check your working levels in the Parent Hub.
-        </p>
-      </AcademyShell>
-    )
-  }
-  if (!catalog || !schedule || !program || !profile.academy) {
+  if (!catalog || !schedule || !program) {
+    if (route.kind === 'home') {
+      return (
+        <StudentDashboard
+          profile={profile}
+          catalog={EMPTY_DASHBOARD_CATALOG}
+          schedule={EMPTY_DASHBOARD_SCHEDULE}
+          levelOf={{}}
+          schoolYear={props.schoolYear}
+          academyStatus="loading"
+          onNavigate={onNavigate}
+          onExit={onExit}
+          dashboard={props.dashboard}
+        />
+      )
+    }
     return (
       <AcademyShell title="Manuel Academy" onExit={onExit}>
         <p role="status" className="font-semibold text-slate-500">
@@ -119,6 +214,25 @@ export function AcademyRouter(props: AcademyProps) {
         </p>
       </AcademyShell>
     )
+  }
+
+  // The dashboard shell is universal, but deep content remains program-bound.
+  // Reject unavailable targets here, before their components mount and before
+  // loadUnit/startLesson can run.
+  if (!routeIsAvailable) {
+    return (
+      <MissingContent
+        onBack={() => onNavigate({ kind: 'home' })}
+        label={unavailableRouteLabel(route)}
+      />
+    )
+  }
+
+  // A zero-entry program intentionally has no AcademyState. Home still renders
+  // against its empty catalog/schedule; authorized deep routes wait for the
+  // existing enrollment reconciliation before mounting stateful content.
+  if (route.kind !== 'home' && route.kind !== 'schedule' && !inSync) {
+    return <LoadingShell onBack={() => onNavigate({ kind: 'home' })} />
   }
 
   const shared = {
@@ -133,7 +247,7 @@ export function AcademyRouter(props: AcademyProps) {
   }
   switch (route.kind) {
     case 'home':
-      return <StudentDashboard {...shared} />
+      return <StudentDashboard {...shared} dashboard={props.dashboard} />
     case 'schedule':
       return <AcademyScheduleView {...shared} />
     case 'course':

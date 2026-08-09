@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { emptyProfile } from '../../migration'
 import type { AcademyGrade, Profile } from '../../types'
 import type { AcademyCatalog, AcademySchedule } from '../../academy/contentTypes'
+import { enrollInCatalog } from '../../academy/academyState'
 import { resetAcademyContentCache } from '../../academy/contentClient'
 import type { AcademyProgramEntry } from '../../academy/workingLevel'
 import type { AcademyRoute } from '../../academy/academyRoute'
@@ -64,6 +65,11 @@ class FakeDocument extends EventTarget {
 
 function text(node: FakeElement): string {
   return `${node.textContent} ${node.childNodes.map(text).join(' ')}`
+}
+
+function hasClass(node: FakeElement, className: string): boolean {
+  if (node.getAttribute('class')?.split(/\s+/).includes(className)) return true
+  return node.childNodes.some((child) => hasClass(child, className))
 }
 
 // ---- fixture content, one course per level ----
@@ -140,14 +146,14 @@ describe('the student academy surface serves a decoupled program', () => {
     vi.stubGlobal('window', windowTarget)
     vi.stubGlobal('document', documentTarget)
     vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true)
-    vi.stubGlobal('fetch', (path: string) => {
+    vi.stubGlobal('fetch', vi.fn((path: string) => {
       const body = BODIES[path]
       return Promise.resolve({
         ok: body !== undefined,
         status: body === undefined ? 404 : 200,
         json: async () => body,
       })
-    })
+    }))
     container = documentTarget.createElement('div')
   })
 
@@ -162,6 +168,7 @@ describe('the student academy surface serves a decoupled program', () => {
     entries: AcademyProgramEntry[],
     profile: Profile,
     route: AcademyRoute = { kind: 'home' },
+    onPatch?: (update: (prev: Profile) => Profile) => void,
   ) {
     latest = profile
     function Harness() {
@@ -174,7 +181,7 @@ describe('the student academy surface serves a decoupled program', () => {
           schoolYear={undefined}
           route={route}
           onNavigate={() => {}}
-          onPatch={(update) => setP(update)}
+          onPatch={(update) => onPatch ? onPatch(update) : setP(update)}
           onExit={() => {}}
         />
       )
@@ -213,16 +220,173 @@ describe('the student academy surface serves a decoupled program', () => {
   it('gives actionable copy when Academy content cannot load', async () => {
     await mount([{ subject: 'science', level: '8' }], emptyProfile('p3', 'Sixth Grader', '6'))
     expect(text(container)).toContain(
-      "Academy couldn't load right now. Go back home and ask a grown-up for help.",
+      "Academy courses couldn't load right now. Ask a grown-up for help.",
     )
+    expect(text(container).replaceAll(/\s+/g, ' ')).toContain('Hello, Sixth')
     expect(text(container)).not.toMatch(/try again|retry/i)
   })
 
   it('explains when working levels produce no configured courses', async () => {
     await mount([{ subject: 'science', level: '5' }], emptyProfile('p3', 'Sixth Grader', '6'))
     expect(text(container)).toContain(
-      "Your Academy courses aren't set up yet. Ask a grown-up to check your working levels in the Parent Hub.",
+      "Academy courses aren't set up yet.",
     )
+  })
+
+  it('renders the dark student dashboard for an empty program without creating Academy state', async () => {
+    const onPatch = vi.fn()
+    await mount([], emptyProfile('p3', 'Sixth Grader', '6'), { kind: 'home' }, onPatch)
+
+    expect(hasClass(container, 'student-dashboard')).toBe(true)
+    expect(text(container)).toContain('Student dashboard')
+    expect(fetch).not.toHaveBeenCalled()
+    expect(onPatch).not.toHaveBeenCalled()
+  })
+
+  it('keeps dashboard actions visible while Academy courses are still loading', async () => {
+    let resolveCatalog!: (response: {
+      ok: boolean
+      status: number
+      json: () => Promise<unknown>
+    }) => void
+    const pendingCatalog = new Promise<{
+      ok: boolean
+      status: number
+      json: () => Promise<unknown>
+    }>((resolve) => {
+      resolveCatalog = resolve
+    })
+    vi.stubGlobal('fetch', vi.fn((path: string) => {
+      if (path === '/curriculum/1.0.0/grade-5/catalog.json') return pendingCatalog
+      const body = BODIES[path]
+      return Promise.resolve({
+        ok: body !== undefined,
+        status: body === undefined ? 404 : 200,
+        json: async () => body,
+      })
+    }))
+
+    await mount(
+      [{ subject: 'mathematics', level: '5' }],
+      emptyProfile('p3', 'Sixth Grader', '6'),
+    )
+
+    expect(hasClass(container, 'student-dashboard')).toBe(true)
+    expect(text(container)).toContain('Academy courses are loading')
+    expect(text(container)).toContain('Sign out')
+
+    await act(async () => {
+      resolveCatalog({
+        ok: true,
+        status: 200,
+        json: async () => BODIES['/curriculum/1.0.0/grade-5/catalog.json'],
+      })
+      await pendingCatalog
+      await new Promise((resolve) => setTimeout(resolve, 0))
+    })
+  })
+
+  it('rejects a zero-entry lesson route before fetching content or patching state', async () => {
+    const onPatch = vi.fn()
+    await mount(
+      [],
+      emptyProfile('p3', 'Sixth Grader', '6'),
+      {
+        kind: 'lesson',
+        courseId: 'ma-g5-mathematics',
+        unitNumber: 1,
+        lessonId: 'ma-g5-mathematics-u01-l01',
+      },
+      onPatch,
+    )
+
+    expect(text(container)).toContain("This lesson isn't available.")
+    expect(fetch).not.toHaveBeenCalled()
+    expect(onPatch).not.toHaveBeenCalled()
+  })
+
+  it('does not reconcile enrollment for an unauthorized deep route', async () => {
+    const onPatch = vi.fn()
+    await mount(
+      MIXED,
+      emptyProfile('p3', 'Sixth Grader', '6'),
+      {
+        kind: 'lesson',
+        courseId: 'ma-g5-science',
+        unitNumber: 1,
+        lessonId: 'ma-g5-science-u01-l01',
+      },
+      onPatch,
+    )
+
+    expect(text(container)).toContain("This lesson isn't available.")
+    const deepFetches = vi.mocked(fetch).mock.calls.filter(([path]) =>
+      String(path).includes('/courses/'),
+    )
+    expect(deepFetches).toEqual([])
+    expect(onPatch).not.toHaveBeenCalled()
+  })
+
+  it.each([
+    [
+      'an unassigned course',
+      { kind: 'course', courseId: 'ma-g5-science' } as AcademyRoute,
+      "This course isn't available.",
+    ],
+    [
+      'an unassigned lesson',
+      {
+        kind: 'lesson',
+        courseId: 'ma-g5-science',
+        unitNumber: 1,
+        lessonId: 'ma-g5-science-u01-l01',
+      } as AcademyRoute,
+      "This lesson isn't available.",
+    ],
+    [
+      'a unit absent from an assigned course',
+      { kind: 'unit', courseId: 'ma-g5-mathematics', unitNumber: 2 } as AcademyRoute,
+      "This unit isn't available.",
+    ],
+    [
+      'a lesson absent from an assigned unit',
+      {
+        kind: 'lesson',
+        courseId: 'ma-g5-mathematics',
+        unitNumber: 1,
+        lessonId: 'ma-g5-mathematics-u01-l99',
+      } as AcademyRoute,
+      "This lesson isn't available.",
+    ],
+    [
+      'an assessment absent from an assigned unit',
+      { kind: 'assessment', courseId: 'ma-g5-mathematics', unitNumber: 1 } as AcademyRoute,
+      "This assessment isn't available.",
+    ],
+  ])('rejects %s before mounting its deep view', async (_case, route, expectedCopy) => {
+    const onPatch = vi.fn()
+    const mixedCatalog: AcademyCatalog = {
+      releaseVersion: '1.0.0',
+      grade: '5',
+      courses: [
+        ...catalogFor('5', 'mathematics').courses,
+        ...catalogFor('7', 'english-language-arts').courses,
+      ],
+    }
+    const profile = enrollInCatalog(
+      emptyProfile('p3', 'Sixth Grader', '6'),
+      mixedCatalog,
+      '2026-08-03T09:00:00.000Z',
+    )
+
+    await mount(MIXED, profile, route, onPatch)
+
+    expect(text(container)).toContain(expectedCopy)
+    const deepFetches = vi.mocked(fetch).mock.calls.filter(([path]) =>
+      String(path).includes('/courses/'),
+    )
+    expect(deepFetches).toEqual([])
+    expect(onPatch).not.toHaveBeenCalled()
   })
 
   it('uses neutral missing-course copy without exposing the route ID', async () => {
@@ -237,6 +401,75 @@ describe('the student academy surface serves a decoupled program', () => {
       "This course isn't available. Go back to Academy and ask a grown-up for help if it keeps happening.",
     )
     expect(rendered).not.toContain(rawCourseId)
+  })
+
+  it('never authorizes a removed course from the previous working-level program', async () => {
+    const mathematicsEntries: AcademyProgramEntry[] = [
+      { subject: 'mathematics', level: '5' },
+    ]
+    const englishEntries: AcademyProgramEntry[] = [
+      { subject: 'english-language-arts', level: '7' },
+    ]
+    const mathematicsProfile = enrollInCatalog(
+      emptyProfile('p3', 'Sixth Grader', '6'),
+      catalogFor('5', 'mathematics'),
+      '2026-08-03T09:00:00.000Z',
+    )
+    const onPatch = vi.fn()
+    let changeProgram!: (next: {
+      entries: AcademyProgramEntry[]
+      route: AcademyRoute
+    }) => void
+
+    function Harness() {
+      const [configuration, setConfiguration] = useState({
+        entries: mathematicsEntries,
+        route: { kind: 'home' } as AcademyRoute,
+      })
+      changeProgram = setConfiguration
+      return (
+        <AcademyRouter
+          profile={mathematicsProfile}
+          entries={configuration.entries}
+          schoolYear={undefined}
+          route={configuration.route}
+          onNavigate={() => {}}
+          onPatch={onPatch}
+          onExit={() => {}}
+        />
+      )
+    }
+
+    root = createRoot(container as unknown as Element)
+    await act(async () => root?.render(<Harness />))
+    await act(async () => {
+      await Promise.resolve()
+      await new Promise((resolve) => setTimeout(resolve, 0))
+    })
+    vi.mocked(fetch).mockClear()
+
+    await act(async () => {
+      changeProgram({
+        entries: englishEntries,
+        route: {
+          kind: 'lesson',
+          courseId: 'ma-g5-mathematics',
+          unitNumber: 1,
+          lessonId: 'ma-g5-mathematics-u01-l01',
+        },
+      })
+    })
+    await act(async () => {
+      await Promise.resolve()
+      await new Promise((resolve) => setTimeout(resolve, 0))
+    })
+
+    expect(text(container)).toContain("This lesson isn't available.")
+    const deepFetches = vi.mocked(fetch).mock.calls.filter(([path]) =>
+      String(path).includes('/courses/'),
+    )
+    expect(deepFetches).toEqual([])
+    expect(onPatch).not.toHaveBeenCalled()
   })
 
   it('keeps the complete missing-content copy matrix truthful and actionable', () => {

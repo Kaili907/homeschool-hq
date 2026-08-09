@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import type { AcademyGrade, Profile, SchoolYear } from '../../../types'
+import type { AcademyGrade, AutoKind, MissionDay, Profile, SchoolYear } from '../../../types'
 import type { AcademyRoute } from '../../../academy/academyRoute'
 import {
   ACADEMY_SUBJECT_LABELS,
@@ -15,9 +15,42 @@ import {
   type DashboardLesson,
   type DashboardLessonStatus,
 } from './dashboardData'
+import {
+  legacyMissionActionCopy,
+  LegacyMissionPanel,
+  type LegacyMissionPanelProps,
+} from './LegacyMissionPanel'
+import {
+  buildLegacyMissionData,
+  type LegacyMissionDisplayItem,
+} from './legacyMissionData'
 import './studentDashboard.css'
 
-interface StudentDashboardProps {
+export interface StudentDashboardTool {
+  id: string
+  title: string
+  description: string
+  onOpen: () => void
+}
+
+export interface StudentDashboardComposition {
+  onSignOut: () => void
+  mission?: {
+    day: MissionDay | undefined
+    launchableKinds: readonly AutoKind[]
+    onToggle: LegacyMissionPanelProps['onToggle']
+    onLaunch: LegacyMissionPanelProps['onLaunch']
+  }
+  tools?: readonly StudentDashboardTool[]
+  rewards?: {
+    stars: number
+    onOpenShop: () => void
+  }
+  /** Preserves the existing complete learner workspace while its tools are composed here. */
+  onOpenClassicHome?: () => void
+}
+
+export interface StudentDashboardProps {
   profile: Profile
   catalog: AcademyCatalog
   schedule: AcademySchedule
@@ -25,8 +58,13 @@ interface StudentDashboardProps {
   schoolYear: SchoolYear | undefined
   /** Test-only override; production uses the local Academy date helper. */
   today?: string
+  /** Academy program loading is independent from the always-available shell. */
+  academyStatus?: 'ready' | 'loading' | 'error'
+  /** Curriculum loading failures stay inside the universal shell. */
+  academyNotice?: string
   onNavigate: (route: AcademyRoute) => void
   onExit: () => void
+  dashboard?: StudentDashboardComposition
 }
 
 const STATUS_COPY: Record<DashboardLessonStatus, string> = {
@@ -138,6 +176,77 @@ function UpNextCard({
   )
 }
 
+function MissionUpNextCard({
+  displayItem,
+  onToggle,
+  onLaunch,
+}: {
+  displayItem: LegacyMissionDisplayItem
+  onToggle: LegacyMissionPanelProps['onToggle']
+  onLaunch: LegacyMissionPanelProps['onLaunch']
+}) {
+  const { item } = displayItem
+  const isLaunch = displayItem.action === 'launch' && displayItem.autoKind
+  const buttonLabel = isLaunch ? 'Start activity' : 'Mark complete'
+  const actionContext = item.id === 'academy-lessons'
+    ? `. ${legacyMissionActionCopy(displayItem)}`
+    : ''
+  return (
+    <section className="up-next-card up-next-card--mission" aria-label={`Up next: ${item.label}, Other work`}>
+      <div className="up-next-card__glow" aria-hidden="true" />
+      <p className="eyebrow">Up next · Other work</p>
+      <h2 id="up-next-heading">{item.label}</h2>
+      <p className="up-next-card__context">Today&apos;s Mission</p>
+      <p className="up-next-card__status">
+        <span aria-hidden="true">{isLaunch ? '↗' : '○'}</span>{' '}
+        {isLaunch ? 'Complete this in its learning activity' : legacyMissionActionCopy(displayItem)}
+      </p>
+      <button
+        type="button"
+        className="button-primary"
+        onClick={() => {
+          if (isLaunch) onLaunch(displayItem.autoKind!)
+          else onToggle(item.id, true)
+        }}
+        aria-label={`${buttonLabel}: ${item.label}${actionContext}`}
+      >
+        {buttonLabel}<span aria-hidden="true">→</span>
+      </button>
+    </section>
+  )
+}
+
+function NoNextState({
+  hasAcademyCourses,
+  hasMissionDay,
+  academyStatus,
+  academyNotice,
+}: {
+  hasAcademyCourses: boolean
+  hasMissionDay: boolean
+  academyStatus: 'ready' | 'loading' | 'error'
+  academyNotice?: string
+}) {
+  return (
+    <section className="no-next-state panel-glass" role="status" aria-labelledby="no-next-heading">
+      <span className="no-work-state__mark" aria-hidden="true">☆</span>
+      <div>
+        <p className="eyebrow">Up next</p>
+        <h2 id="no-next-heading">No next item is waiting right now.</h2>
+        <p>
+          {!hasAcademyCourses
+            ? academyStatus === 'loading'
+              ? "Academy courses are loading. You can still use Today's Mission and your learning tools."
+              : academyNotice ?? "Academy courses aren't set up yet. You can still use Today's Mission and your learning tools."
+            : hasMissionDay
+              ? 'Your current Academy and mission work has no unfinished actionable item.'
+              : "Today's mission is still being prepared."}
+        </p>
+      </div>
+    </section>
+  )
+}
+
 function RestartRequiredCard({
   lesson,
   isReference,
@@ -174,10 +283,10 @@ function RestartRequiredCard({
 }
 
 function timelineHeading(calendarState: DashboardCalendarState) {
-  if (calendarState === 'unconfigured') return { eyebrow: 'Week 1 preview', heading: 'Week 1 schedule' }
-  if (calendarState === 'off-week') return { eyebrow: 'This week is marked off', heading: 'Current Academy schedule' }
-  if (calendarState === 'after-year') return { eyebrow: 'Available for reference', heading: 'Final Academy schedule' }
-  return { eyebrow: "Today's sequence", heading: 'Your learning plan' }
+  if (calendarState === 'unconfigured') return { eyebrow: 'Academy · Week 1 preview', heading: 'Week 1 schedule' }
+  if (calendarState === 'off-week') return { eyebrow: 'Academy · This week is marked off', heading: 'Current Academy schedule' }
+  if (calendarState === 'after-year') return { eyebrow: 'Academy · Available for reference', heading: 'Final Academy schedule' }
+  return { eyebrow: "Academy · Today's sequence", heading: 'Academy' }
 }
 
 function TodayTimeline({ lessons, calendarState, onNavigate }: { lessons: readonly DashboardLesson[]; calendarState: DashboardCalendarState; onNavigate: StudentDashboardProps['onNavigate'] }) {
@@ -283,7 +392,59 @@ function NoWorkState({ calendarState, week, onNavigate }: Pick<StudentDashboardP
   )
 }
 
-function CourseProgressGrid({ profile, catalog, levelOf, onNavigate }: Pick<StudentDashboardProps, 'profile' | 'catalog' | 'levelOf' | 'onNavigate'>) {
+function NoAcademyCoursesState({
+  status,
+  notice,
+}: {
+  status: 'ready' | 'loading' | 'error'
+  notice?: string
+}) {
+  return (
+    <section className="academy-empty-state panel-glass" aria-labelledby="academy-empty-heading">
+      <span className="no-work-state__mark" aria-hidden="true">A</span>
+      <div>
+        <p className="eyebrow">Academy</p>
+        <h2 id="academy-empty-heading">
+          {status === 'loading'
+            ? 'Academy courses are loading…'
+            : status === 'error'
+              ? "Academy courses couldn't load right now."
+              : "Academy courses aren't set up yet."}
+        </h2>
+        <p>
+          {status === 'loading'
+            ? "Today's Mission and learning tools are ready while Academy courses load."
+            : notice ?? "Your dashboard, Today's Mission, and learning tools are still available."}
+        </p>
+      </div>
+    </section>
+  )
+}
+
+function CourseProgressGrid({ profile, catalog, levelOf, onNavigate, academyStatus, academyNotice }: Pick<StudentDashboardProps, 'profile' | 'catalog' | 'levelOf' | 'onNavigate' | 'academyStatus' | 'academyNotice'>) {
+  if (catalog.courses.length === 0) {
+    return (
+      <section className="courses-panel" aria-labelledby="courses-heading">
+        <div className="section-heading">
+          <div><p className="eyebrow">Your courses</p><h2 id="courses-heading">Academy courses</h2></div>
+        </div>
+        <div className="courses-empty panel-glass" role="status">
+          <strong>
+            {academyStatus === 'loading'
+              ? 'Academy courses are loading…'
+              : academyStatus === 'error'
+                ? 'Academy courses are unavailable right now.'
+                : 'No Academy courses are assigned yet.'}
+          </strong>
+          <span>
+            {academyStatus === 'loading'
+              ? 'The rest of your dashboard is ready now.'
+              : academyNotice ?? 'A grown-up can set working levels when curriculum is ready. The rest of your dashboard stays available.'}
+          </span>
+        </div>
+      </section>
+    )
+  }
   const progressByCourse = new Map(courseProgress(profile, catalog).map((item) => [item.courseId, item]))
   return (
     <section className="courses-panel" aria-labelledby="courses-heading">
@@ -311,13 +472,86 @@ function CourseProgressGrid({ profile, catalog, levelOf, onNavigate }: Pick<Stud
   )
 }
 
-export function StudentDashboard({ profile, catalog, schedule, levelOf, schoolYear, today, onNavigate, onExit }: StudentDashboardProps) {
+function LearningToolsPanel({
+  tools,
+  onOpenClassicHome,
+}: {
+  tools: readonly StudentDashboardTool[]
+  onOpenClassicHome?: () => void
+}) {
+  if (tools.length === 0 && !onOpenClassicHome) return null
+  return (
+    <section className="learning-tools-panel" aria-labelledby="learning-tools-heading">
+      <div className="section-heading">
+        <div><p className="eyebrow">Learning tools</p><h2 id="learning-tools-heading">Keep learning</h2></div>
+      </div>
+      <ul className="learning-tools-grid">
+        {tools.map((tool) => (
+          <li key={tool.id}>
+            <button type="button" onClick={tool.onOpen} aria-label={`${tool.title}: ${tool.description}`}>
+              <strong>{tool.title}</strong>
+              <span>{tool.description}</span>
+              <span className="learning-tools-card__action">Open <span aria-hidden="true">→</span></span>
+            </button>
+          </li>
+        ))}
+        {onOpenClassicHome && (
+          <li>
+            <button
+              type="button"
+              onClick={onOpenClassicHome}
+              aria-label="More learning tools: Open the existing practice, progress, and planning workspace"
+            >
+              <strong>More learning tools</strong>
+              <span>Open the existing practice, progress, and planning workspace.</span>
+              <span className="learning-tools-card__action">Open <span aria-hidden="true">→</span></span>
+            </button>
+          </li>
+        )}
+      </ul>
+    </section>
+  )
+}
+
+export function StudentDashboard({
+  profile,
+  catalog,
+  schedule,
+  levelOf,
+  schoolYear,
+  today,
+  academyStatus = 'ready',
+  academyNotice,
+  onNavigate,
+  onExit,
+  dashboard,
+}: StudentDashboardProps) {
   const headingRef = useRef<HTMLHeadingElement>(null)
   useEffect(() => { headingRef.current?.focus() }, [])
   const data = buildStudentDashboardData({ profile, catalog, schedule, levelOf, schoolYear, today })
-  const isReferenceSchedule = data.calendarState === 'off-week' || data.calendarState === 'after-year'
+  const hasAcademyCourses = catalog.courses.length > 0
+  const isCurrentAcademyDay = data.calendarState === 'normal-weekday'
+  const currentAcademyUpNext = isCurrentAcademyDay ? data.upNext : null
+  const currentAcademyRestart = isCurrentAcademyDay ? data.restartRequiredLesson : null
+  const missionData = buildLegacyMissionData(
+    dashboard?.mission?.day,
+    dashboard?.mission?.launchableKinds ?? [],
+  )
+  const missionUpNext = !currentAcademyUpNext && !currentAcademyRestart
+    ? missionData.upNext
+    : null
   const firstName = profile.name.trim().split(/\s+/)[0] || 'Learner'
-  const intro = data.calendarState === 'weekend'
+  const intro = !hasAcademyCourses
+    ? {
+        eyebrow: 'Student dashboard',
+        heading: 'Today',
+        detail: academyStatus === 'loading'
+          ? 'Academy courses are loading…'
+          : academyStatus === 'error'
+            ? "Academy courses couldn't load right now."
+            : "Academy courses aren't set up yet.",
+      }
+    : data.calendarState === 'weekend'
     ? { eyebrow: 'Weekend', heading: 'No Academy lessons scheduled this weekend.', detail: 'Academy lessons are scheduled Monday through Friday.' }
     : data.calendarState === 'unconfigured'
       ? { eyebrow: 'Week 1 preview', heading: 'Week 1 preview', detail: 'A grown-up needs to set the school-year start date. Week 1 is shown for reference.' }
@@ -339,9 +573,18 @@ export function StudentDashboard({ profile, catalog, schedule, levelOf, schoolYe
             <span className="student-topbar__mark" aria-hidden="true">M</span>
             <div><p>Manuel Academy</p><h1 ref={headingRef} tabIndex={-1}>Hello, {firstName}</h1></div>
           </div>
-          <nav className="student-topbar__nav" aria-label="Academy navigation">
-            <button onClick={() => onNavigate({ kind: 'schedule' })}>Year schedule</button>
-            <button className="student-topbar__exit" onClick={onExit}>Back home</button>
+          <nav className="student-topbar__nav" aria-label="Student dashboard navigation">
+            {dashboard?.rewards && (
+              <button
+                className="student-topbar__reward"
+                onClick={dashboard.rewards.onOpenShop}
+                aria-label={`Open Prize Shop, ${dashboard.rewards.stars} stars`}
+              >
+                <span aria-hidden="true">★</span> {dashboard.rewards.stars} <span>Prize Shop</span>
+              </button>
+            )}
+            {hasAcademyCourses && <button onClick={() => onNavigate({ kind: 'schedule' })}>Year schedule</button>}
+            <button className="student-topbar__exit" onClick={dashboard?.onSignOut ?? onExit}>Sign out</button>
           </nav>
         </header>
 
@@ -352,15 +595,61 @@ export function StudentDashboard({ profile, catalog, schedule, levelOf, schoolYe
 
         <div className="student-dashboard__primary-grid">
           <div className="student-dashboard__daily-area">
-            {data.upNext && !data.allWorkComplete ? <UpNextCard lesson={data.upNext} isReference={isReferenceSchedule} onNavigate={onNavigate} />
-              : data.restartRequiredLesson ? <RestartRequiredCard lesson={data.restartRequiredLesson} isReference={isReferenceSchedule} onNavigate={onNavigate} />
-              : data.allWorkComplete ? <CompletionState completedCount={data.completedCount} total={data.lessons.length} calendarState={data.calendarState} />
-                : <NoWorkState calendarState={data.calendarState} week={data.week} onNavigate={onNavigate} />}
-            {data.hasScheduledWork && <TodayTimeline lessons={data.lessons} calendarState={data.calendarState} onNavigate={onNavigate} />}
+            {currentAcademyUpNext ? (
+              <UpNextCard lesson={currentAcademyUpNext} isReference={false} onNavigate={onNavigate} />
+            ) : currentAcademyRestart ? (
+              <RestartRequiredCard lesson={currentAcademyRestart} isReference={false} onNavigate={onNavigate} />
+            ) : missionUpNext && dashboard?.mission ? (
+              <MissionUpNextCard
+                displayItem={missionUpNext}
+                onToggle={dashboard.mission.onToggle}
+                onLaunch={dashboard.mission.onLaunch}
+              />
+            ) : isCurrentAcademyDay && data.allWorkComplete ? (
+              <CompletionState completedCount={data.completedCount} total={data.lessons.length} calendarState={data.calendarState} />
+            ) : (
+              <NoNextState
+                hasAcademyCourses={hasAcademyCourses}
+                hasMissionDay={Boolean(dashboard?.mission?.day)}
+                academyStatus={academyStatus}
+                academyNotice={academyNotice}
+              />
+            )}
+
+            <div className="student-dashboard__today-heading">
+              <p className="eyebrow">Today</p>
+              <h2>Today&apos;s learning</h2>
+            </div>
+            {!hasAcademyCourses ? (
+              <NoAcademyCoursesState status={academyStatus} notice={academyNotice} />
+            ) : data.hasScheduledWork ? (
+              <TodayTimeline lessons={data.lessons} calendarState={data.calendarState} onNavigate={onNavigate} />
+            ) : (
+              <NoWorkState calendarState={data.calendarState} week={data.week} onNavigate={onNavigate} />
+            )}
+            {dashboard?.mission && (
+              <LegacyMissionPanel
+                day={dashboard.mission.day}
+                launchableKinds={dashboard.mission.launchableKinds}
+                onToggle={dashboard.mission.onToggle}
+                onLaunch={dashboard.mission.onLaunch}
+              />
+            )}
           </div>
           <JarvisPanel />
         </div>
-        <CourseProgressGrid profile={profile} catalog={catalog} levelOf={levelOf} onNavigate={onNavigate} />
+        <CourseProgressGrid
+          profile={profile}
+          catalog={catalog}
+          levelOf={levelOf}
+          onNavigate={onNavigate}
+          academyStatus={academyStatus}
+          academyNotice={academyNotice}
+        />
+        <LearningToolsPanel
+          tools={dashboard?.tools ?? []}
+          onOpenClassicHome={dashboard?.onOpenClassicHome}
+        />
       </div>
     </main>
   )

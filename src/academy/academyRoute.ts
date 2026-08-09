@@ -3,7 +3,8 @@
  * state stays the routing authority (see App.tsx); these paths exist so deep
  * links and refreshes land on the right academy surface (MOUNT-2 pattern: the
  * academy path is evaluated before the picker default when a valid persisted
- * profile exists and reaches an enabled academy level).
+ * learner exists). The dashboard shell is universal; deep content remains
+ * authorized against that learner's current working-level program.
  */
 
 export const ACADEMY_PATH = '/academy'
