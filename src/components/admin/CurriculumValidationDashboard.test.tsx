@@ -39,19 +39,24 @@ describe('CurriculumValidationDashboard', () => {
             check: 'schema-validation',
             result: 'FAIL',
             details: 'Required field standards is missing.',
-            affected: { lesson: 'lesson-2' },
+            affected: { lesson: 'ma-g5-mathematics-u01-l02' },
           },
           {
             check: 'broken-reference',
             result: 'FAIL',
             details: 'Unit reference does not resolve.',
-            affected: { reference: 'unit-404' },
+            affected: { reference: 'ma-g7-science-u09' },
           },
           {
             check: 'duplicate-lesson-id',
             result: 'FAIL',
             details: 'ID appears twice.',
-            affected: { grade: 5, course: 'math', unit: 'u01', lesson: 'lesson-1' },
+            affected: {
+              grade: 5,
+              course: 'ma-g5-mathematics',
+              unit: 'ma-g5-mathematics-u01',
+              lesson: 'ma-g5-mathematics-u01-l01',
+            },
           },
           {
             check: 'standards-coverage',
@@ -68,7 +73,7 @@ describe('CurriculumValidationDashboard', () => {
       checksumManifest: `${conflictingHash}  lesson.json`,
       coverage: [{
         standard: '5.NBT.1',
-        lessons: ['lesson-1'],
+        lessons: ['ma-g5-mathematics-u01-l01'],
         assessments: [],
         state: 'gap',
       }],
@@ -76,13 +81,15 @@ describe('CurriculumValidationDashboard', () => {
     const html = render(model)
 
     expect(html).toContain('Overall validation status: FAIL')
-    expect(html).toContain('Required field standards is missing.')
-    expect(html).toContain('Unit reference does not resolve.')
+    expect(html).toContain('Lesson schema validation failed the recorded check.')
+    expect(html).toContain('Curriculum reference integrity failed the recorded check.')
+    expect(html).not.toContain('Required field standards is missing.')
+    expect(html).not.toContain('Unit reference does not resolve.')
     expect(html).toContain('Checksum declaration consistency')
-    expect(html).toContain('declaration mismatch')
-    expect(html).toContain('duplicate-lesson-id')
+    expect(html).toContain('checksum declaration mismatch')
+    expect(html).toContain('Duplicate lesson identifiers')
     expect(html).toContain('grade: 5')
-    expect(html).toContain('course: math')
+    expect(html).toContain('course: ma-g5-mathematics')
     expect(html).toContain('No mapped assessments')
     expect(html).toContain('GAP')
   })
@@ -131,14 +138,35 @@ describe('CurriculumValidationDashboard', () => {
         checks: [{
           check: 'schema-validation',
           result: 'FAIL',
-          details: 'secret-token\n at parse (C:\\Users\\Owner\\private.ts:1:1)',
+          details: 'sk-live-plain-single-line-secret',
         }],
       },
     })
     const html = render(model)
 
-    expect(html).toContain('Unsafe technical detail omitted.')
-    expect(html).not.toContain('secret-token')
-    expect(html).not.toContain('Owner')
+    expect(html).toContain('Lesson schema validation failed the recorded check.')
+    expect(html).not.toContain('sk-live-plain-single-line-secret')
+  })
+
+  it('shows the authoritative package version and retains a conflicting validation version as evidence', () => {
+    const model = buildCurriculumValidationReadModel({
+      validation: {
+        package_id: 'manuel-academy-test',
+        version: '9.9.9',
+        overall: 'PASS',
+        checks: [{ check: 'schema-validation', result: 'PASS' }],
+      },
+      curriculumManifest: { package_id: 'manuel-academy-test', version: '1.2.3' },
+      packageManifest: { version: '1.2.3', files: [] },
+    })
+    const html = render(model)
+
+    expect(html).toContain('Overall validation status: FAIL')
+    expect(html).toContain('Curriculum version</dt><dd')
+    expect(html).toContain('Validation-reported curriculum version</dt><dd')
+    expect(html).toContain('>1.2.3</dd>')
+    expect(html).toContain('>9.9.9</dd>')
+    expect(html).toContain('Curriculum version consistency')
+    expect(html).toContain('Conflicting recorded versions')
   })
 })

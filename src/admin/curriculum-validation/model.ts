@@ -57,6 +57,7 @@ export interface CurriculumValidationReadModel {
   readonly status: CurriculumValidationStatus
   readonly packageId: string | null
   readonly curriculumVersion: string | null
+  readonly validationReportedCurriculumVersion: string | null
   readonly validationArtifactVersion: string | null
   readonly validatedAt: string | null
   readonly summary: {
@@ -104,34 +105,136 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
-function safeString(value: unknown, maxLength = 280): string | null {
-  if (typeof value !== 'string') return null
-  if (/\r?\n\s*at\s|\bat\s+\S+\s*\(|[A-Za-z]:\\|(?:\/Users|\/home)\//.test(value)) {
-    return 'Unsafe technical detail omitted.'
+interface FindingPresentation {
+  readonly category: ValidationCategoryId
+  readonly label: string
+  readonly subject: string
+}
+
+const KNOWN_FINDINGS: Readonly<Record<string, FindingPresentation>> = {
+  'three-grades': { category: 'completeness', label: 'Expected grade set', subject: 'The expected curriculum grade set' },
+  'ten-courses-per-grade': { category: 'completeness', label: 'Courses per grade', subject: 'Course totals for each grade' },
+  'course-count': { category: 'completeness', label: 'Course count', subject: 'The package course count' },
+  'lesson-count': { category: 'completeness', label: 'Lesson count', subject: 'The package lesson count' },
+  'grade-lesson-counts': { category: 'completeness', label: 'Lessons per grade', subject: 'Lesson totals for each grade' },
+  'unique-course-ids': { category: 'identifiers', label: 'Unique course identifiers', subject: 'Course identifier uniqueness' },
+  'unique-unit-ids': { category: 'identifiers', label: 'Unique unit identifiers', subject: 'Unit identifier uniqueness' },
+  'unique-lesson-ids': { category: 'identifiers', label: 'Unique lesson identifiers', subject: 'Lesson identifier uniqueness' },
+  'duplicate-course-id': { category: 'identifiers', label: 'Duplicate course identifiers', subject: 'Course identifier uniqueness' },
+  'duplicate-unit-id': { category: 'identifiers', label: 'Duplicate unit identifiers', subject: 'Unit identifier uniqueness' },
+  'duplicate-lesson-id': { category: 'identifiers', label: 'Duplicate lesson identifiers', subject: 'Lesson identifier uniqueness' },
+  'invalid-id': { category: 'identifiers', label: 'Identifier format', subject: 'Curriculum identifier formatting' },
+  'schedule-covers-every-lesson-once': { category: 'references', label: 'Schedule lesson coverage', subject: 'Schedule-to-lesson reference coverage' },
+  'broken-reference': { category: 'references', label: 'Reference integrity', subject: 'Curriculum reference integrity' },
+  'missing-reference': { category: 'references', label: 'Required references', subject: 'Required curriculum references' },
+  'missing-lesson': { category: 'references', label: 'Required lessons', subject: 'Required lesson references' },
+  'missing-unit': { category: 'references', label: 'Required units', subject: 'Required unit references' },
+  'missing-assessment': { category: 'references', label: 'Required assessments', subject: 'Required assessment references' },
+  'schema-validation': { category: 'schema', label: 'Lesson schema validation', subject: 'Lesson schema validation' },
+  'lesson-required-fields': { category: 'completeness', label: 'Required lesson fields', subject: 'Required lesson fields' },
+  'optional-media-and-fallback': { category: 'completeness', label: 'Optional media fallbacks', subject: 'Optional media fallback coverage' },
+  'accessibility-depth': { category: 'completeness', label: 'Accessibility requirements', subject: 'Lesson accessibility requirements' },
+  'safety-depth': { category: 'completeness', label: 'Safety requirements', subject: 'Lesson safety requirements' },
+  'multi-occasion-mastery': { category: 'completeness', label: 'Multi-occasion mastery', subject: 'Multi-occasion mastery requirements' },
+  'original-text-count': { category: 'completeness', label: 'Original text count', subject: 'The original practice text count' },
+  'frozen-baselines-recorded': { category: 'frozen-references', label: 'Frozen baselines', subject: 'Frozen baseline references' },
+  'frozen-reference-verification': { category: 'frozen-references', label: 'Frozen reference verification', subject: 'Frozen artifact reference verification' },
+  'grade8-finance-pf1-pf7': { category: 'standards', label: 'Grade 8 finance PF1–PF7', subject: 'Grade 8 finance PF1–PF7 mapping' },
+  'grade8-finance-72-sessions': { category: 'completeness', label: 'Grade 8 finance sessions', subject: 'The Grade 8 finance session count' },
+  'standards-coverage': { category: 'standards', label: 'Standards coverage', subject: 'Recorded standards coverage' },
+  'generator-validation': { category: 'build', label: 'Generator validation', subject: 'Curriculum generator validation' },
+  'build-validation': { category: 'build', label: 'Build validation', subject: 'Curriculum build validation' },
+  'no-required-photo-or-voice': { category: 'completeness', label: 'Photo and voice fallback', subject: 'No-photo and no-voice fallback requirements' },
+}
+
+function findingDetail(
+  presentation: FindingPresentation | null,
+  state: Exclude<ValidationCheckState, 'not_checked'>,
+): string {
+  if (!presentation) {
+    if (state === 'passed') return 'An unrecognized validation check reported a pass; unvetted details were omitted.'
+    if (state === 'warning') return 'An unrecognized validation check reported a warning; unvetted details were omitted.'
+    return 'An unrecognized validation check reported a failure; unvetted details were omitted.'
   }
-  const oneLine = value.replaceAll(/[\r\n\t]+/g, ' ').replaceAll(/\s+/g, ' ').trim()
-  if (!oneLine) return null
-  return oneLine.slice(0, maxLength)
+  if (state === 'passed') return `${presentation.subject} passed the recorded check.`
+  if (state === 'warning') return `${presentation.subject} completed with a recorded warning.`
+  return `${presentation.subject} failed the recorded check.`
 }
 
-function safeRef(value: unknown): string | undefined {
-  if (typeof value === 'number' && Number.isFinite(value)) return String(value)
-  const ref = safeString(value, 100)
-  return ref ?? undefined
+function normalizedFindingCode(value: unknown): string | null {
+  if (typeof value !== 'string') return null
+  const normalized = value.trim().toLowerCase()
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(normalized) ? normalized : null
 }
 
-function checkCategory(check: string): ValidationCategoryId {
-  const value = check.toLowerCase()
-  if (/schema|malformed/.test(value)) return 'schema'
-  if (/checksum|sha|hash/.test(value)) return 'checksums'
-  if (/manifest/.test(value)) return 'manifest'
-  if (/frozen|baseline/.test(value)) return 'frozen-references'
-  if (/standard|coverage|pf1|pf7/.test(value)) return 'standards'
-  if (/reference|schedule|index|missing-(lesson|unit|assessment)/.test(value)) return 'references'
-  if (/unique|duplicate|invalid-id|identifier/.test(value)) return 'identifiers'
-  if (/generator|build/.test(value)) return 'build'
-  if (/version/.test(value)) return 'version-consistency'
-  return 'completeness'
+function safeGrade(value: unknown): string | undefined {
+  const grade = typeof value === 'number' ? String(value) : value
+  return grade === '5' || grade === '7' || grade === '8' ? grade : undefined
+}
+
+function safeCourseRef(value: unknown): string | undefined {
+  return typeof value === 'string' && /^ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*$/.test(value)
+    ? value
+    : undefined
+}
+
+function safeUnitRef(value: unknown): string | undefined {
+  return typeof value === 'string' && /^(?:ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*-)?u\d{2}$/.test(value)
+    ? value
+    : undefined
+}
+
+function safeLessonRef(value: unknown): string | undefined {
+  return typeof value === 'string' && /^ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*-u\d{2}-l\d{2}$/.test(value)
+    ? value
+    : undefined
+}
+
+function safeAssessmentRef(value: unknown): string | undefined {
+  return typeof value === 'string' && /^ma-g(?:5|7|8)-[a-z]+(?:-[a-z]+)*-u\d{2}-assessment$/.test(value)
+    ? value
+    : undefined
+}
+
+function safeStandardRef(value: unknown): string | undefined {
+  if (typeof value !== 'string') return undefined
+  return /^(?:PF\d(?:\.\d+)?|MP\.\d+|[0-9A-Z]{1,8}(?:[.-][0-9A-Z]{1,12}){1,6})$/.test(value)
+    ? value
+    : undefined
+}
+
+function safeReference(value: unknown): string | undefined {
+  return safeLessonRef(value)
+    ?? safeAssessmentRef(value)
+    ?? safeUnitRef(value)
+    ?? safeCourseRef(value)
+    ?? safeStandardRef(value)
+}
+
+function semanticVersion(value: unknown): string | null {
+  return typeof value === 'string' && /^\d+\.\d+\.\d+(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?$/.test(value)
+    ? value
+    : null
+}
+
+function validationArtifactVersion(value: unknown): string | null {
+  if (typeof value !== 'string') return null
+  return /^(?:validation[-_.][a-z0-9]+(?:[-_.][a-z0-9]+)*|\d+\.\d+)$/.test(value)
+    ? value
+    : null
+}
+
+function recordedDate(value: unknown): string | null {
+  if (typeof value !== 'string') return null
+  return /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z)?$/.test(value)
+    ? value
+    : null
+}
+
+function packageId(value: unknown): string | null {
+  return typeof value === 'string' && /^manuel-academy-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)
+    ? value
+    : null
 }
 
 function checkState(value: unknown): Exclude<ValidationCheckState, 'not_checked'> | null {
@@ -156,32 +259,33 @@ function checkState(value: unknown): Exclude<ValidationCheckState, 'not_checked'
 function scopeFrom(raw: Record<string, unknown>): ValidationScope {
   const affected = isRecord(raw.affected) ? raw.affected : raw
   return {
-    grade: safeRef(affected.grade),
-    course: safeRef(affected.course ?? affected.course_id),
-    unit: safeRef(affected.unit ?? affected.unit_id),
-    lesson: safeRef(affected.lesson ?? affected.lesson_id),
-    reference: safeRef(affected.reference ?? affected.path),
+    grade: safeGrade(affected.grade),
+    course: safeCourseRef(affected.course ?? affected.course_id),
+    unit: safeUnitRef(affected.unit ?? affected.unit_id),
+    lesson: safeLessonRef(affected.lesson ?? affected.lesson_id),
+    reference: safeReference(affected.reference),
   }
 }
 
 function findingFromCheck(raw: unknown, index: number): ValidationFinding | null {
   if (!isRecord(raw)) return null
-  const check = safeString(raw.check ?? raw.name, 100)
+  const code = normalizedFindingCode(raw.check ?? raw.name)
   const state = checkState(raw.result ?? raw.status)
-  if (!check || !state) return null
+  if (!code || !state) return null
+  const presentation = KNOWN_FINDINGS[code] ?? null
   return {
-    id: `${check.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-')}-${index}`,
-    category: checkCategory(check),
-    check,
+    id: presentation ? `${code}-${index}` : `unrecognized-finding-${index}`,
+    category: presentation?.category ?? 'completeness',
+    check: presentation?.label ?? 'Unrecognized validation finding',
     state,
-    detail: safeString(raw.details ?? raw.detail ?? raw.message) ?? 'No additional detail recorded.',
-    scope: scopeFrom(raw),
-    source: safeString(raw.source, 160) ?? VALIDATION_SOURCE,
+    detail: findingDetail(presentation, state),
+    scope: presentation ? scopeFrom(raw) : {},
+    source: VALIDATION_SOURCE,
   }
 }
 
 function versionOf(value: unknown): string | null {
-  return isRecord(value) ? safeString(value.version, 50) : null
+  return isRecord(value) ? semanticVersion(value.version) : null
 }
 
 function parseManifestVerification(value: unknown): ValidationFinding | null {
@@ -222,9 +326,14 @@ function checksumConsistency(
   let compared = 0
   for (const item of packageManifest.files) {
     if (!isRecord(item)) continue
-    const path = safeString(item.path, 180)
-    const hash = safeString(item.sha256, 64)
-    if (!path || !hash) continue
+    const path = typeof item.path === 'string' && /^[A-Za-z0-9][A-Za-z0-9._/-]{0,239}$/.test(item.path)
+      && !item.path.split('/').includes('..')
+      ? item.path
+      : null
+    const hash = typeof item.sha256 === 'string' && /^[a-f0-9]{64}$/.test(item.sha256)
+      ? item.sha256
+      : null
+    if (path === null || hash === null) continue
     compared++
     if (checksums.get(path) !== hash) mismatches.push(path)
   }
@@ -235,9 +344,9 @@ function checksumConsistency(
     check: 'Checksum declaration consistency',
     state: mismatches.length ? 'failed' : 'passed',
     detail: mismatches.length
-      ? `${mismatches.length} declaration mismatch(es), including ${mismatches.slice(0, 3).join(', ')}.`
+      ? `${mismatches.length} checksum declaration mismatch(es) were found.`
       : `${compared} package hash declarations match ${CHECKSUM_SOURCE}; file bytes were not recomputed by this dashboard.`,
-    scope: mismatches[0] ? { reference: mismatches[0] } : {},
+    scope: {},
     source: `${PACKAGE_MANIFEST_SOURCE}; ${CHECKSUM_SOURCE}`,
   }
 }
@@ -268,13 +377,16 @@ function parseCoverage(value: unknown): StandardsCoverageRow[] {
   if (!Array.isArray(value)) return []
   return value.flatMap((raw): StandardsCoverageRow[] => {
     if (!isRecord(raw)) return []
-    const standard = safeString(raw.standard, 100)
+    const standard = safeStandardRef(raw.standard)
     if (!standard) return []
-    const refs = (candidate: unknown) => Array.isArray(candidate)
-      ? candidate.flatMap((item) => safeRef(item) ?? [])
+    const lessonCandidates = raw.lessonRefs ?? raw.lessons
+    const assessmentCandidates = raw.assessmentRefs ?? raw.assessments
+    const lessonRefs = Array.isArray(lessonCandidates)
+      ? lessonCandidates.flatMap((item: unknown) => safeLessonRef(item) ?? [])
       : []
-    const lessonRefs = refs(raw.lessonRefs ?? raw.lessons)
-    const assessmentRefs = refs(raw.assessmentRefs ?? raw.assessments)
+    const assessmentRefs = Array.isArray(assessmentCandidates)
+      ? assessmentCandidates.flatMap((item: unknown) => safeAssessmentRef(item) ?? [])
+      : []
     return [{
       standard,
       lessonRefs,
@@ -339,10 +451,13 @@ export function buildCurriculumValidationReadModel(
 
   return {
     status,
-    packageId: safeString(validationRecord?.package_id ?? manifest?.package_id, 120),
-    curriculumVersion: versionOf(validation) ?? versionOf(bundle.curriculumManifest) ?? versionOf(bundle.packageManifest),
-    validationArtifactVersion: safeString(validationRecord?.artifact_version ?? validationRecord?.schema_version, 50),
-    validatedAt: safeString(validationRecord?.validated_at ?? validationRecord?.validated_on, 50),
+    packageId: packageId(manifest?.package_id) ?? packageId(validationRecord?.package_id),
+    curriculumVersion: versionOf(bundle.curriculumManifest) ?? versionOf(bundle.packageManifest),
+    validationReportedCurriculumVersion: versionOf(validation),
+    validationArtifactVersion: validationArtifactVersion(
+      validationRecord?.artifact_version ?? validationRecord?.schema_version,
+    ),
+    validatedAt: recordedDate(validationRecord?.validated_at ?? validationRecord?.validated_on),
     summary: {
       checked: stateCounts.passed + stateCounts.warning + stateCounts.failed,
       passed: stateCounts.passed,
