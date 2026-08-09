@@ -51,6 +51,7 @@ const SOURCE_LABELS: Record<SafetyEvidenceSource, string> = {
   'study-safety-stops': 'Study safety stops',
   'study-adult-review': 'Adult-review operations',
   'study-safety-monitoring': 'Study safety monitoring',
+  'operational-telemetry': 'Admin operational telemetry',
 }
 
 export function AdminSafetyOperations({ authorization, readState }: AdminSafetyOperationsProps) {
@@ -124,6 +125,7 @@ function AuthorizedSafetyOperations({ readState }: { readState: Extract<SafetyOp
           <SummaryMetric label="Resolved safety stops" metric={model.summary.resolvedSafetyStops} />
           <SummaryMetric label="Adult review pending" metric={model.summary.adultReviewPending} />
           <SummaryMetric label="Fail-closed events" metric={model.summary.failClosedEvents} />
+          <SummaryMetric label="Canonical safety stops" metric={model.summary.safetyStopEvents} />
           <SummaryMetric label="Fallback / rejection events" metric={model.summary.fallbackRejectionEvents} />
           <SummaryMetric label="Unresolved conditions" metric={model.summary.unresolvedSafetyConditions} />
         </dl>
@@ -136,9 +138,8 @@ function AuthorizedSafetyOperations({ readState }: { readState: Extract<SafetyOp
         </div>
         <ul>
           {model.sources.map((source) => <li key={source.source}><span>{SOURCE_LABELS[source.source]}</span><strong className={`is-${source.status}`}>{source.status === 'available' ? 'Available' : 'Unavailable'}</strong></li>)}
-          <li><span>Admin operational telemetry enrichment</span><strong className="is-future">Future source unavailable</strong></li>
         </ul>
-        <p>Unavailable sources are never counted as zero. Future ADMIN-2 enrichment is not synthesized on this page.</p>
+        <p>Unavailable sources are never counted as zero. Only canonical safety evidence is projected.</p>
       </section>
 
       <section aria-labelledby="safety-events-title">
@@ -166,7 +167,7 @@ function AuthorizedSafetyOperations({ readState }: { readState: Extract<SafetyOp
               <thead><tr><th scope="col">Learner</th><th scope="col">Occurred</th><th scope="col">Engine</th><th scope="col">Evidence</th><th scope="col">State</th><th scope="col">Inspect</th></tr></thead>
               <tbody>{visibleEvents.map((event) => (
                 <tr key={event.eventRef}>
-                  <td><strong>{event.learner.displayName ?? 'Learner'}</strong><span>{event.learner.reference}</span></td>
+                  <td><strong>{event.learner?.displayName ?? (event.learner ? 'Learner' : 'System')}</strong>{event.learner && <span>{event.learner.reference}</span>}</td>
                   <td><time dateTime={event.occurredAt}>{formatTime(event.occurredAt)}</time></td>
                   <td>{engineLabel(event.engine)}</td>
                   <td>{CATEGORY_LABELS[event.evidenceCategory]}</td>
@@ -183,7 +184,7 @@ function AuthorizedSafetyOperations({ readState }: { readState: Extract<SafetyOp
             const reasonCode = canonicalSafetyReasonCode(event.reasonCode)
             return (
               <details id={`safety-event-${event.eventRef}`} key={event.eventRef}>
-                <summary>{event.learner.displayName ?? event.learner.reference} · {CATEGORY_LABELS[event.evidenceCategory]} · {STATE_LABELS[event.state]}</summary>
+                <summary>{event.learner?.displayName ?? event.learner?.reference ?? 'System'} · {CATEGORY_LABELS[event.evidenceCategory]} · {STATE_LABELS[event.state]}</summary>
                 <dl>
                   <Detail label="Event reference" value={event.eventRef} />
                   <Detail label="Evidence category" value={CATEGORY_LABELS[event.evidenceCategory]} />

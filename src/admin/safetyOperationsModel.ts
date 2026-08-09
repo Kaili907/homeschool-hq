@@ -5,7 +5,7 @@ import type { AdminOperationalEvent } from '../telemetry/operationalTelemetry'
 
 export const ADMIN_SAFETY_READ_CAPABILITY = 'safety:read' as const
 export const SAFETY_OPERATIONS_SCHEMA_VERSION = 1 as const
-export const SAFETY_OPERATIONS_EVENT_LIMIT = 200 as const
+export const SAFETY_OPERATIONS_EVENT_LIMIT = 100 as const
 export const SAFETY_EVENT_HISTORY_LIMIT = 50 as const
 
 export type AdminSafetyReadAuthorization =
@@ -21,6 +21,7 @@ export type SafetyEvidenceSource =
   | 'study-safety-stops'
   | 'study-adult-review'
   | 'study-safety-monitoring'
+  | 'operational-telemetry'
 
 export type SafetyEvidenceCategory =
   | 'safety-stop'
@@ -36,7 +37,7 @@ export interface SafetyOperationsEventV1 {
   readonly schemaVersion: typeof SAFETY_OPERATIONS_SCHEMA_VERSION
   readonly eventRef: string
   readonly source: SafetyEvidenceSource
-  readonly learner: {
+  readonly learner?: {
     readonly reference: string
     readonly displayName?: string
   }
@@ -74,6 +75,7 @@ export interface SafetyOperationsSnapshotV1 {
     readonly resolvedSafetyStops: SafetyCountMetric
     readonly adultReviewPending: SafetyCountMetric
     readonly failClosedEvents: SafetyCountMetric
+    readonly safetyStopEvents: SafetyCountMetric
     readonly fallbackRejectionEvents: SafetyCountMetric
     readonly unresolvedSafetyConditions: SafetyCountMetric
   }
@@ -81,9 +83,12 @@ export interface SafetyOperationsSnapshotV1 {
     readonly source: SafetyEvidenceSource
     readonly status: 'available' | 'unavailable'
   }[]
-  /** ADMIN-2 enrichment is deliberately represented as unavailable, never synthesized here. */
-  readonly operationalTelemetry: { readonly status: 'future-unavailable' }
+  readonly operationalTelemetry: { readonly status: 'available' | 'unavailable' }
   readonly events: readonly SafetyOperationsEventV1[]
+  readonly page: {
+    readonly limit: number
+    readonly nextCursor: string | null
+  }
 }
 
 export type SafetyOperationsReadState =
@@ -128,6 +133,7 @@ const EMPTY_SUMMARY: SafetyOperationsSnapshotV1['summary'] = Object.freeze({
   resolvedSafetyStops: UNAVAILABLE_METRIC,
   adultReviewPending: UNAVAILABLE_METRIC,
   failClosedEvents: UNAVAILABLE_METRIC,
+  safetyStopEvents: UNAVAILABLE_METRIC,
   fallbackRejectionEvents: UNAVAILABLE_METRIC,
   unresolvedSafetyConditions: UNAVAILABLE_METRIC,
 })
@@ -136,6 +142,7 @@ const SOURCES = new Set<SafetyEvidenceSource>([
   'study-safety-stops',
   'study-adult-review',
   'study-safety-monitoring',
+  'operational-telemetry',
 ])
 const ENGINES = new Set<SafetyEngine>(ADMIN_ENGINE_IDS)
 const CATEGORIES = new Set<SafetyEvidenceCategory>(['safety-stop', 'adult-review', 'fail-closed', 'fallback-rejection'])
@@ -222,13 +229,15 @@ export function safeSafetyReasonMessage(reasonCode: string): string {
 
 export function buildSafetyOperationsModel(snapshot: SafetyOperationsSnapshotV1): SafetyOperationsModel {
   if (snapshot.schemaVersion !== SAFETY_OPERATIONS_SCHEMA_VERSION) {
-    return { observedAt: null, summary: EMPTY_SUMMARY, sources: [], operationalTelemetry: { status: 'future-unavailable' }, events: [] }
+    return { observedAt: null, summary: EMPTY_SUMMARY, sources: [], operationalTelemetry: { status: 'unavailable' }, events: [] }
   }
   return {
     observedAt: isIsoTime(snapshot.observedAt) ? snapshot.observedAt : null,
     summary: sanitizeSummary(snapshot.summary),
     sources: snapshot.sources.flatMap((source) => SOURCES.has(source.source) && (source.status === 'available' || source.status === 'unavailable') ? [{ source: source.source, status: source.status }] : []),
-    operationalTelemetry: { status: 'future-unavailable' },
+    operationalTelemetry: snapshot.operationalTelemetry?.status === 'available'
+      ? { status: 'available' }
+      : { status: 'unavailable' },
     events: snapshot.events.slice(0, SAFETY_OPERATIONS_EVENT_LIMIT).flatMap(sanitizeEvent).sort((left, right) => right.occurredAt.localeCompare(left.occurredAt)),
   }
 }
@@ -239,6 +248,7 @@ function sanitizeSummary(summary: SafetyOperationsSnapshotV1['summary']): Safety
     resolvedSafetyStops: sanitizeMetric(summary.resolvedSafetyStops),
     adultReviewPending: sanitizeMetric(summary.adultReviewPending),
     failClosedEvents: sanitizeMetric(summary.failClosedEvents),
+    safetyStopEvents: sanitizeMetric(summary.safetyStopEvents),
     fallbackRejectionEvents: sanitizeMetric(summary.fallbackRejectionEvents),
     unresolvedSafetyConditions: sanitizeMetric(summary.unresolvedSafetyConditions),
   }
@@ -255,21 +265,21 @@ function sanitizeEvent(event: SafetyOperationsEventV1): SafetyOperationsEventV1[
     event?.schemaVersion !== SAFETY_OPERATIONS_SCHEMA_VERSION
     || !isOpaqueReference(event.eventRef)
     || !SOURCES.has(event.source)
-    || !isOpaqueReference(event.learner?.reference)
+    || (event.learner !== undefined && !isOpaqueReference(event.learner?.reference))
     || !isIsoTime(event.occurredAt)
     || !ENGINES.has(event.engine)
     || !CATEGORIES.has(event.evidenceCategory)
     || !EVENT_STATES.has(event.state)
     || !RESOLUTION_STATES.has(event.resolution?.state)
   ) return []
-  const displayName = safeDisplayName(event.learner.displayName)
+  const displayName = safeDisplayName(event.learner?.displayName)
   const resolvedAt = isIsoTime(event.resolution.resolvedAt) ? event.resolution.resolvedAt : undefined
   const authorizedAdultRef = isOpaqueReference(event.resolution.authorizedAdultRef) ? event.resolution.authorizedAdultRef : undefined
   return [{
     schemaVersion: SAFETY_OPERATIONS_SCHEMA_VERSION,
     eventRef: event.eventRef,
     source: event.source,
-    learner: { reference: event.learner.reference, ...(displayName ? { displayName } : {}) },
+    ...(event.learner ? { learner: { reference: event.learner.reference, ...(displayName ? { displayName } : {}) } } : {}),
     occurredAt: event.occurredAt,
     engine: event.engine,
     ...(event.versionSnapshot ? { versionSnapshot: sanitizeVersionSnapshot(event.versionSnapshot) } : {}),
@@ -316,15 +326,17 @@ function isVersion(value: unknown): value is string {
 export function adaptOperationalSafetyEvent(
   event: AdminOperationalEvent,
 ): SafetyOperationsEventV1 | null {
-  if (event.result !== 'safety_stop' || event.scope !== 'household' || !event.learnerRef) return null
+  if (event.result !== 'safety_stop') return null
   const reasonCode = typeof event.metadata.reason_code === 'string'
     ? canonicalSafetyReasonCode(event.metadata.reason_code)
     : UNKNOWN_SAFETY_REASON_CODE
   return {
     schemaVersion: SAFETY_OPERATIONS_SCHEMA_VERSION,
     eventRef: event.eventId,
-    source: 'study-safety-monitoring',
-    learner: { reference: event.learnerRef },
+    source: 'operational-telemetry',
+    ...(event.scope === 'household' && event.learnerRef
+      ? { learner: { reference: event.learnerRef } }
+      : {}),
     occurredAt: event.occurredAt,
     engine: event.engine,
     versionSnapshot: {
@@ -334,8 +346,8 @@ export function adaptOperationalSafetyEvent(
     },
     evidenceCategory: 'safety-stop',
     reasonCode,
-    state: 'fail-closed',
-    resolution: { state: 'unresolved' },
+    state: 'unknown',
+    resolution: { state: 'unknown' },
     history: [],
   }
 }
