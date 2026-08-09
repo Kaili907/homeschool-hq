@@ -43,7 +43,7 @@
  * reads as correct code.
  */
 import { runCurrentStudyWork, type StudyLifecycleToken } from '../lifecycle'
-import type { StudyPortBundle } from '../ports'
+import type { ProductionStudySessionPorts } from '../ports'
 import type { StudyCalendarEntry, StudyScope, StudyLearnerScope } from '../types'
 
 declare const STUDY_TUTOR_LAUNCH_SETTLED_BRAND: unique symbol
@@ -120,7 +120,19 @@ export async function settleStudyTutorLaunch(
  */
 export interface DurableStudySessionPreparation {
   readonly token: StudyLifecycleToken
-  readonly ports: StudyPortBundle
+  /**
+   * The three roles this preparation consumes, and not the nine-role bundle it
+   * used to ask for. A durable preparation touches the calendar, the event
+   * ledger and the session row; it has never touched the review queue, parent
+   * settings, adult-private notes or the outbox, and requiring them said a
+   * deployment could not open a session until it could deliver an adult review.
+   *
+   * `StudyPortBundle` is still accepted — it is assignable to this — so the
+   * mounted host's call site is unchanged. What is no longer accepted is the
+   * reverse: this signature can no longer be read as a licence to reach for a
+   * fourth role without saying so here first.
+   */
+  readonly ports: Pick<ProductionStudySessionPorts, 'calendar' | 'eventLedger' | 'persistence'>
   readonly scope: StudyScope
   readonly learnerScope: StudyLearnerScope
   readonly entry: StudyCalendarEntry
