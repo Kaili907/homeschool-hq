@@ -14,7 +14,7 @@ export const ADMIN_SECTIONS = [
   'overview',
   'learners',
   'engines',
-  'ai-costs',
+  'costs',
   'curriculum',
   'safety',
   'system-health',

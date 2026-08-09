@@ -28,7 +28,7 @@ const NAVIGATION: readonly { id: AdminSection; label: string; shortLabel?: strin
   { id: 'overview', label: 'Overview' },
   { id: 'learners', label: 'Learners' },
   { id: 'engines', label: 'Engines' },
-  { id: 'ai-costs', label: 'AI & Costs' },
+  { id: 'costs', label: 'AI & Costs' },
   { id: 'curriculum', label: 'Curriculum' },
   { id: 'safety', label: 'Safety' },
   { id: 'system-health', label: 'System Health' },
@@ -415,7 +415,7 @@ function BrandMark() {
 
 function NavIcon({ section }: { section: AdminSection }) {
   const icons: Record<AdminSection, string> = {
-    overview: '⌂', learners: '◉', engines: '◇', 'ai-costs': '✦', curriculum: '▤',
+    overview: '⌂', learners: '◉', engines: '◇', costs: '✦', curriculum: '▤',
     safety: '◆', 'system-health': '⌁', configuration: '⚙', 'audit-log': '≡', releases: '↑',
   }
   return <span className="admin-nav-icon" aria-hidden="true">{icons[section]}</span>
