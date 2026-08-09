@@ -9,7 +9,8 @@ import {
   systemSecurityClock,
 } from '../session/runtime'
 
-export const FAILED_ATTEMPT_LEDGER_SCHEMA_VERSION = 1 as const
+export const FAILED_ATTEMPT_LEDGER_SCHEMA_VERSION = 2 as const
+// Retain the original key so schema-v1 history fails closed in place instead of disappearing.
 export const FAILED_ATTEMPT_STORAGE_PREFIX = 'manuel-academy.security.failed-attempt.v1:'
 
 const SECOND_MS = 1_000
@@ -43,6 +44,7 @@ interface FailedAttemptRecord {
   readonly schemaVersion: typeof FAILED_ATTEMPT_LEDGER_SCHEMA_VERSION
   readonly failedAttempts: number
   readonly lastFailureAt: string
+  readonly maxObservedAt: string
   readonly retryAt: string | null
   readonly lockedUntil: string | null
 }
@@ -62,6 +64,7 @@ const RECORD_KEYS = Object.freeze([
   'schemaVersion',
   'failedAttempts',
   'lastFailureAt',
+  'maxObservedAt',
   'retryAt',
   'lockedUntil',
 ] as const)
@@ -84,6 +87,8 @@ function parseRecord(serialized: string): FailedAttemptRecord | null {
     if (value.schemaVersion !== FAILED_ATTEMPT_LEDGER_SCHEMA_VERSION) return null
     if (!Number.isSafeInteger(value.failedAttempts) || Number(value.failedAttempts) < 1) return null
     if (parseCanonicalTimestamp(value.lastFailureAt) === null) return null
+    const maxObservedAt = parseCanonicalTimestamp(value.maxObservedAt)
+    if (maxObservedAt === null || maxObservedAt < Date.parse(String(value.lastFailureAt))) return null
     const retryAt = parseNullableTimestamp(value.retryAt)
     const lockedUntil = parseNullableTimestamp(value.lockedUntil)
     if (retryAt === undefined || lockedUntil === undefined) return null
@@ -109,50 +114,14 @@ export class FailedAttemptLedger {
   }
 
   status(subject: FailedAttemptSubject): FailedAttemptStatus {
-    const key = subjectStorageKey(subject)
     const now = requireSafeTimestamp(this.#clock)
-    let serialized: string | null
-    try {
-      serialized = this.#storage.getItem(key)
-    } catch {
-      return Object.freeze({ status: 'ledger-invalid', failedAttempts: 0 })
-    }
-    if (serialized === null) return Object.freeze({ status: 'ready', failedAttempts: 0 })
-    const record = parseRecord(serialized)
-    if (!record) return Object.freeze({ status: 'ledger-invalid', failedAttempts: 0 })
-    const lastFailureAt = Date.parse(record.lastFailureAt)
-    if (now < lastFailureAt) return Object.freeze({ status: 'ledger-invalid', failedAttempts: record.failedAttempts })
-    if (record.lockedUntil) {
-      const lockedUntil = Date.parse(record.lockedUntil)
-      if (now < lockedUntil) {
-        return Object.freeze({
-          status: 'temporarily-locked',
-          failedAttempts: record.failedAttempts,
-          lockedUntil: record.lockedUntil,
-          remainingMs: lockedUntil - now,
-        })
-      }
-      safeRemove(this.#storage, key)
-      return Object.freeze({ status: 'ready', failedAttempts: 0 })
-    }
-    if (record.retryAt) {
-      const retryAt = Date.parse(record.retryAt)
-      if (now < retryAt) {
-        return Object.freeze({
-          status: 'cooldown',
-          failedAttempts: record.failedAttempts,
-          retryAt: record.retryAt,
-          remainingMs: retryAt - now,
-        })
-      }
-    }
-    return Object.freeze({ status: 'ready', failedAttempts: record.failedAttempts })
+    return this.#statusAt(subject, now)
   }
 
   recordFailure(subject: FailedAttemptSubject): FailedAttemptStatus {
-    const current = this.status(subject)
-    if (current.status !== 'ready') return current
     const now = requireSafeTimestamp(this.#clock)
+    const current = this.#statusAt(subject, now)
+    if (current.status !== 'ready') return current
     const failedAttempts = current.failedAttempts + 1
     const lockMs = subject.kind === 'learner'
       ? FAILED_ATTEMPT_POLICY.temporaryLockMs.learner
@@ -164,10 +133,12 @@ export class FailedAttemptLedger {
     const retryAt = lockedUntil === null && cooldownMs > 0
       ? new Date(now + cooldownMs).toISOString()
       : null
+    const observedAt = new Date(now).toISOString()
     const record: FailedAttemptRecord = Object.freeze({
       schemaVersion: FAILED_ATTEMPT_LEDGER_SCHEMA_VERSION,
       failedAttempts,
-      lastFailureAt: new Date(now).toISOString(),
+      lastFailureAt: observedAt,
+      maxObservedAt: observedAt,
       retryAt,
       lockedUntil,
     })
@@ -188,6 +159,62 @@ export class FailedAttemptLedger {
 
   recordSuccess(subject: FailedAttemptSubject): void {
     safeRemove(this.#storage, subjectStorageKey(subject))
+  }
+
+  #statusAt(subject: FailedAttemptSubject, now: number): FailedAttemptStatus {
+    const key = subjectStorageKey(subject)
+    let serialized: string | null
+    try {
+      serialized = this.#storage.getItem(key)
+    } catch {
+      return Object.freeze({ status: 'ledger-invalid', failedAttempts: 0 })
+    }
+    if (serialized === null) return Object.freeze({ status: 'ready', failedAttempts: 0 })
+    const record = parseRecord(serialized)
+    if (!record) return Object.freeze({ status: 'ledger-invalid', failedAttempts: 0 })
+    const lastFailureAt = Date.parse(record.lastFailureAt)
+    const maxObservedAt = Date.parse(record.maxObservedAt)
+    if (now < lastFailureAt || now < maxObservedAt) {
+      return Object.freeze({ status: 'ledger-invalid', failedAttempts: record.failedAttempts })
+    }
+    if (now > maxObservedAt) {
+      try {
+        const observedRecord = JSON.stringify({
+          ...record,
+          maxObservedAt: new Date(now).toISOString(),
+        } satisfies FailedAttemptRecord)
+        this.#storage.setItem(key, observedRecord)
+        if (this.#storage.getItem(key) !== observedRecord) {
+          return Object.freeze({ status: 'ledger-invalid', failedAttempts: record.failedAttempts })
+        }
+      } catch {
+        return Object.freeze({ status: 'ledger-invalid', failedAttempts: record.failedAttempts })
+      }
+    }
+    if (record.lockedUntil) {
+      const lockedUntil = Date.parse(record.lockedUntil)
+      if (now < lockedUntil) {
+        return Object.freeze({
+          status: 'temporarily-locked',
+          failedAttempts: record.failedAttempts,
+          lockedUntil: record.lockedUntil,
+          remainingMs: lockedUntil - now,
+        })
+      }
+      return Object.freeze({ status: 'ready', failedAttempts: record.failedAttempts })
+    }
+    if (record.retryAt) {
+      const retryAt = Date.parse(record.retryAt)
+      if (now < retryAt) {
+        return Object.freeze({
+          status: 'cooldown',
+          failedAttempts: record.failedAttempts,
+          retryAt: record.retryAt,
+          remainingMs: retryAt - now,
+        })
+      }
+    }
+    return Object.freeze({ status: 'ready', failedAttempts: record.failedAttempts })
   }
 }
 

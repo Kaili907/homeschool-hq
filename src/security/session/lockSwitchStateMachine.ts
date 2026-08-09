@@ -2,7 +2,11 @@ import type { SecurityLifecycleEvent, SecurityLifecycleEventType } from '../cont
 import type { LocalSessionId } from '../contracts/sessions'
 import { studyCancellationReasonFor } from '../contracts/studyBridge'
 import type { StudyCancellationReason } from '../../study/lifecycle/StudyLifecycle'
-import type { GlobalRevocationCause, GlobalRevocationPort } from './revocation'
+import type {
+  GlobalRevocationCause,
+  GlobalRevocationNotice,
+  GlobalRevocationSource,
+} from './revocation'
 
 export type LearnerAccessState =
   | Readonly<{ status: 'locked'; reason: 'initial' | 'lock' | 'logout' | 'switch-cancelled' | 'session-expired' | 'authorization-loss' | 'household-switch' }>
@@ -131,29 +135,34 @@ export function transitionLearnerAccess(
 }
 
 export interface LearnerAccessActionPorts {
-  readonly revocation: GlobalRevocationPort
+  readonly revocation: GlobalRevocationSource & Readonly<{
+    revoke: (
+      cause: GlobalRevocationCause,
+    ) => GlobalRevocationNotice | Promise<GlobalRevocationNotice>
+    close: () => void
+  }>
   readonly onLifecycle: (
     event: SecurityLifecycleEvent,
     studyCancellationReason: StudyCancellationReason | null,
-  ) => void
-  readonly requestLearnerPin: (profileId: string) => void
+  ) => void | Promise<void>
+  readonly requestLearnerPin: (profileId: string) => void | Promise<void>
 }
 
 /** Executes the pure effects in sequence; it never imports or calls Study. */
-export function executeLearnerAccessActions(
+export async function executeLearnerAccessActions(
   actions: readonly LearnerAccessAction[],
   ports: LearnerAccessActionPorts,
-): void {
+): Promise<void> {
   for (const action of actions) {
     switch (action.type) {
       case 'revoke-global':
-        ports.revocation.revoke(action.cause)
+        await ports.revocation.revoke(action.cause)
         break
       case 'security-lifecycle':
-        ports.onLifecycle(action.event, action.studyCancellationReason)
+        await ports.onLifecycle(action.event, action.studyCancellationReason)
         break
       case 'request-learner-pin':
-        ports.requestLearnerPin(action.profileId)
+        await ports.requestLearnerPin(action.profileId)
         break
     }
   }

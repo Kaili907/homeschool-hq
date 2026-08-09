@@ -19,8 +19,10 @@ import {
 import { ParentSessionController } from './parentSession'
 import { ParentStepUpController } from './parentStepUp'
 import {
+  GLOBAL_REVOCATION_LOCK_NAME,
   GlobalRevocationCoordinator,
   type RevocationBroadcastPort,
+  type RevocationLockManager,
 } from './revocation'
 import type { SecurityStorage } from './runtime'
 
@@ -70,6 +72,37 @@ class BroadcastChannelFake implements RevocationBroadcastPort {
 
   close(): void {
     this.hub.channels.delete(this)
+  }
+}
+
+class SerialLockManager implements RevocationLockManager {
+  #tail: Promise<void> = Promise.resolve()
+  #call = 0
+  active = 0
+  maximumActive = 0
+
+  constructor(private readonly beforeCallback?: (call: number) => void | Promise<void>) {}
+
+  request<T>(
+    name: string,
+    _options: { readonly mode: 'exclusive' },
+    callback: () => T | Promise<T>,
+  ): Promise<T> {
+    expect(name).toBe(GLOBAL_REVOCATION_LOCK_NAME)
+    const result = this.#tail.then(async () => {
+      const call = this.#call
+      this.#call += 1
+      await this.beforeCallback?.(call)
+      this.active += 1
+      this.maximumActive = Math.max(this.maximumActive, this.active)
+      try {
+        return await callback()
+      } finally {
+        this.active -= 1
+      }
+    })
+    this.#tail = result.then(() => undefined, () => undefined)
+    return result
   }
 }
 
@@ -204,13 +237,19 @@ describe('learner session controller', () => {
 })
 
 describe('meaningful activity accounting', () => {
-  it('counts visible pointer/keyboard/approved interactions and ignores hidden activity and pointermove', () => {
+  it('counts only trusted visible DOM activity while retaining the explicit approved API', () => {
     const runtime = setupLearner({ writeThrottleMs: 0 })
     runtime.session.create('learner-a')
     const documentEvents = new EventTarget()
     const pageEvents = new EventTarget()
     let visibility: DocumentVisibilityState = 'visible'
     const intervals: Array<() => void> = []
+    const trustedEvents = new WeakSet<Event>()
+    const dispatchTrusted = (type: string) => {
+      const event = new Event(type)
+      trustedEvents.add(event)
+      documentEvents.dispatchEvent(event)
+    }
     const scheduler: ActivityScheduler = {
       setInterval: (callback) => { intervals.push(callback); return callback },
       clearInterval: () => undefined,
@@ -222,41 +261,94 @@ describe('meaningful activity accounting', () => {
       visibility: () => visibility,
       clock: runtime.now,
       scheduler,
+      isTrustedActivity: (event) => trustedEvents.has(event),
     })
     activity.start()
 
     runtime.advance(1_000)
     documentEvents.dispatchEvent(new Event('pointerdown'))
-    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+    documentEvents.dispatchEvent(new Event('keydown'))
+    documentEvents.dispatchEvent(new Event('input'))
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:00.000Z')
+    runtime.advance(1_000)
+    dispatchTrusted('pointerdown')
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:02.000Z')
     runtime.advance(1_000)
     documentEvents.dispatchEvent(new Event('pointermove'))
-    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:02.000Z')
     visibility = 'hidden'
     runtime.advance(1_000)
-    documentEvents.dispatchEvent(new Event('keydown'))
+    dispatchTrusted('keydown')
     expect(activity.approvedLearnerInteraction().status).toBe('active')
-    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:02.000Z')
     intervals[0]()
-    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:02.000Z')
     visibility = 'visible'
     documentEvents.dispatchEvent(new Event('visibilitychange'))
     runtime.advance(1_000)
     activity.approvedLearnerInteraction()
-    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:04.000Z')
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:05.000Z')
+    activity.stop()
+  })
+
+  it('counts a trusted scroll only after actual displacement', () => {
+    const runtime = setupLearner({ writeThrottleMs: 0 })
+    runtime.session.create('learner-a')
+    const documentEvents = new EventTarget()
+    const trustedEvents = new WeakSet<Event>()
+    let position = { x: 0, y: 0 }
+    let visibility: DocumentVisibilityState = 'visible'
+    const activity = new LearnerActivityController({
+      session: runtime.session,
+      documentEvents,
+      pageEvents: new EventTarget(),
+      visibility: () => visibility,
+      clock: runtime.now,
+      scheduler: { setInterval: () => 1, clearInterval: () => undefined },
+      isTrustedActivity: (event) => trustedEvents.has(event),
+      scrollPosition: () => position,
+      scrollThrottleMs: 0,
+    })
+    const scroll = (trusted: boolean) => {
+      const event = new Event('scroll')
+      if (trusted) trustedEvents.add(event)
+      documentEvents.dispatchEvent(event)
+    }
+    activity.start()
+
+    runtime.advance(1_000)
+    scroll(true)
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:00.000Z')
+    position = { x: 0, y: 20 }
+    scroll(false)
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:00.000Z')
+    scroll(true)
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+    visibility = 'hidden'
+    position = { x: 0, y: 40 }
+    scroll(true)
+    visibility = 'visible'
+    documentEvents.dispatchEvent(new Event('visibilitychange'))
+    runtime.advance(1_000)
+    scroll(true)
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+    position = { x: 0, y: 60 }
+    scroll(true)
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:02.000Z')
     activity.stop()
   })
 })
 
 describe('global and cross-tab revocation', () => {
-  it('persists and increments a non-secret global epoch', () => {
+  it('persists and increments a non-secret global epoch', async () => {
     const storage = new MemoryStorage()
-    const coordinator = new GlobalRevocationCoordinator({ storage, clock: () => START })
+    const coordinator = new GlobalRevocationCoordinator({ storage, clock: () => START, lockManager: new SerialLockManager() })
     expect(coordinator.currentEpoch()).toBe(0)
-    expect(coordinator.revoke('learner-lock')).toMatchObject({ epoch: 1, cause: 'learner-lock' })
+    await expect(coordinator.revoke('learner-lock')).resolves.toMatchObject({ epoch: 1, cause: 'learner-lock' })
     expect(new GlobalRevocationCoordinator({ storage }).currentEpoch()).toBe(1)
   })
 
-  it('invalidates learner sessions in multiple tabs after an explicit revocation', () => {
+  it('invalidates learner sessions in multiple tabs after an explicit revocation', async () => {
     const deviceStorage = new MemoryStorage()
     const hub = new BroadcastHub()
     let now = START
@@ -264,6 +356,7 @@ describe('global and cross-tab revocation', () => {
       storage: deviceStorage,
       clock: () => now,
       channelFactory: hub.create,
+      lockManager: new SerialLockManager(),
     })
     const secondEpoch = new GlobalRevocationCoordinator({
       storage: deviceStorage,
@@ -279,7 +372,7 @@ describe('global and cross-tab revocation', () => {
     first.create('learner-a')
     second.create('learner-a')
 
-    firstEpoch.revoke('learner-lock')
+    await firstEpoch.revoke('learner-lock')
 
     expect(first.recheck()).toEqual({ status: 'ended', reason: 'global-revocation' })
     expect(second.recheck()).toEqual({ status: 'ended', reason: 'global-revocation' })
@@ -287,6 +380,53 @@ describe('global and cross-tab revocation', () => {
     second.close()
     firstEpoch.close()
     secondEpoch.close()
+  })
+
+  it('serializes concurrent revocations without losing an increment', async () => {
+    const storage = new MemoryStorage()
+    const locks = new SerialLockManager()
+    const first = new GlobalRevocationCoordinator({ storage, clock: () => START, lockManager: locks })
+    const second = new GlobalRevocationCoordinator({ storage, clock: () => START + 1, lockManager: locks })
+
+    const notices = await Promise.all([
+      first.revoke('learner-lock'),
+      second.revoke('learner-sign-out'),
+    ])
+
+    expect(notices.map((notice) => notice.epoch)).toEqual([1, 2])
+    expect(storage.getItem('manuel-academy.security.global-revocation-epoch.v1')).toBe('2')
+    expect(locks.maximumActive).toBe(1)
+  })
+
+  it('invalidates a session created between two already-requested revocations', async () => {
+    let releaseSecond!: () => void
+    const secondGate = new Promise<void>((resolve) => { releaseSecond = resolve })
+    const storage = new MemoryStorage()
+    const locks = new SerialLockManager((call) => call === 1 ? secondGate : undefined)
+    const first = new GlobalRevocationCoordinator({ storage, clock: () => START, lockManager: locks })
+    const second = new GlobalRevocationCoordinator({ storage, clock: () => START + 1, lockManager: locks })
+
+    const firstRevocation = first.revoke('learner-lock')
+    const secondRevocation = second.revoke('learner-sign-out')
+    await firstRevocation
+    const session = new LearnerSessionController({
+      storage: new MemoryStorage(),
+      revocation: first,
+      clock: () => START + 2,
+      randomUUID: () => UUID_C,
+    })
+    session.create('learner-between-revocations')
+    expect(session.recheck().status).toBe('active')
+
+    releaseSecond()
+    await secondRevocation
+
+    expect(session.recheck()).toEqual({ status: 'ended', reason: 'global-revocation' })
+  })
+
+  it('fails closed when cross-tab serialization is unavailable', async () => {
+    const coordinator = new GlobalRevocationCoordinator({ storage: new MemoryStorage() })
+    await expect(coordinator.revoke('learner-lock')).rejects.toThrow('coordination is unavailable')
   })
 
   it('never propagates an unlock or newly created tab session', () => {
@@ -417,8 +557,10 @@ describe('Lock/Switch state machine and Study lifecycle seam', () => {
     })
   })
 
-  it('executes revocation, lifecycle emission, then PIN request in order', () => {
+  it('awaits lifecycle cancellation before requesting the next learner PIN', async () => {
     const order: string[] = []
+    let finishCancellation!: () => void
+    const cancellation = new Promise<void>((resolve) => { finishCancellation = resolve })
     const active = {
       status: 'active' as const,
       profileId: 'learner-a',
@@ -429,17 +571,31 @@ describe('Lock/Switch state machine and Study lifecycle seam', () => {
       targetProfileId: 'learner-b',
       occurredAt: '2026-08-09T12:01:00.000Z',
     })
-    executeLearnerAccessActions(transition.actions, {
+    const execution = executeLearnerAccessActions(transition.actions, {
       revocation: {
         currentEpoch: () => 0,
         subscribe: () => () => undefined,
-        revoke: () => { order.push('revoke'); return { schemaVersion: 1, epoch: 1, cause: 'learner-switch-start', occurredAt: '2026-08-09T12:01:00.000Z' } },
+        revoke: async () => {
+          order.push('revoke')
+          return { schemaVersion: 1, epoch: 1, cause: 'learner-switch-start', occurredAt: '2026-08-09T12:01:00.000Z' }
+        },
         close: () => undefined,
       },
-      onLifecycle: () => order.push('lifecycle'),
-      requestLearnerPin: () => order.push('pin'),
+      onLifecycle: async () => {
+        order.push('cancel-start')
+        await cancellation
+        order.push('cancel-done')
+      },
+      requestLearnerPin: () => { order.push('pin') },
     })
-    expect(order).toEqual(['revoke', 'lifecycle', 'pin'])
+    await Promise.resolve()
+    await Promise.resolve()
+    expect(order).toEqual(['revoke', 'cancel-start'])
+
+    finishCancellation()
+    await execution
+
+    expect(order).toEqual(['revoke', 'cancel-start', 'cancel-done', 'pin'])
   })
 
   it('exposes logout, session-expired, authorization-loss, and household-switch vocabulary', () => {
