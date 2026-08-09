@@ -79,6 +79,16 @@
 -- what it replaces: it pins the mutation's OWN body, not the bodies of the
 -- functions that body calls, and not triggers on the tables it writes.
 --
+-- It also does not reach outside prosrc at all, which is not the same limit and is
+-- easy to read past. prolang is metadata beside the body, so the exact reviewed
+-- bytes can be re-declared as LANGUAGE sql: the digest agrees, the gate text agrees,
+-- readiness reports ready, and every call to the mutation fails to parse. Measured
+-- before it was closed. The language is therefore pinned by its own probe,
+-- academy_private.study_adult_managed_language_ok, resolved through pg_language by
+-- name rather than against a numeric OID that is an artefact of installation order.
+-- The full list of non-body metadata and which check covers each is on
+-- academy_private.study_academic_record_kind_ready below.
+--
 -- The mutation function itself lives in 20260801011000, which is in hosted
 -- history and frozen. Its definition is therefore repaired additively from here,
 -- as repository policy requires for a frozen migration: the stored definition is
@@ -162,6 +172,8 @@ begin
      ) is not null
      or to_regprocedure(
        'academy_private.study_adult_managed_body_fingerprint_ok()') is not null
+     or to_regprocedure(
+       'academy_private.study_adult_managed_language_ok()') is not null
      or to_regprocedure(
        'academy_private.study_adult_managed_gate_text_ok()') is not null then
     raise exception 'STUDY_ACADEMIC_READINESS object collision';
@@ -380,6 +392,28 @@ $$;
 -- claim rests on SHA-256 collision resistance -- a semantically different body with
 -- an identical digest would defeat it, which is a cryptographic assumption rather
 -- than a proof.
+--
+-- IT ALSO DOES NOT COVER ANY NON-BODY METADATA, and that is worth spelling out
+-- because "the body is pinned WHOLE" reads like it covers the function. It covers
+-- prosrc. Everything else about the function is metadata beside prosrc and is
+-- unchanged by any edit to it, so each piece that matters is checked separately and
+-- named here rather than assumed to come along with the digest:
+--
+--   prolang       -- academy_private.study_adult_managed_language_ok, below.
+--                    The one that was missing until H6, and the one that can make
+--                    identical bytes mean something else entirely.
+--   prosecdef     -- study_academic_function_ready: security definer required.
+--   proowner      -- study_academic_function_ready: postgres required.
+--   proconfig     -- study_academic_function_ready: search_path=pg_catalog required.
+--   ACL           -- study_academic_function_ready: authenticated may execute and
+--                    anon may not, which is also what catches a PUBLIC grant.
+--   caller identity -- the trusted-server guard on the readiness RPC itself, which
+--                    is upstream of every probe here.
+--
+-- provolatile is deliberately NOT in that list, and this is the statement of a gap
+-- rather than of a defence: nothing in this contract pins the mutation's volatility.
+-- It is left as it is because narrowing it is a change to what readiness requires of
+-- the estate, not a closure of the body-versus-metadata asymmetry H6 exists to fix.
 create function academy_private.study_adult_managed_body_fingerprint_ok()
 returns boolean
 language plpgsql
@@ -415,6 +449,50 @@ begin
   -- lineage and is deliberately not depended on. convert_to fixes the encoding so
   -- the digest is over bytes rather than over a server-encoding-dependent rendering.
   return encode(sha256(convert_to(body, 'UTF8')), 'hex') = reviewed;
+end;
+$$;
+
+-- WHAT THE DIGEST CANNOT REACH: the language the body is written in.
+--
+-- prosrc is the body. prolang is not in it, and prolang is what decides how those
+-- bytes are executed -- so the two are separable, and separating them is a real
+-- asymmetry rather than a theoretical one. It was reproduced before being closed:
+-- the exact reviewed prosrc, byte for byte, re-declared as LANGUAGE sql. The digest
+-- agreed, the gate text agreed, readiness reported all seven dependencies ready and
+-- the top-level status ready, and every call to the mutation failed with a syntax
+-- error, because a PL/pgSQL body is not a SQL one. The estate was down and the
+-- contract said it was up, which is the one direction this contract may not fail in.
+--
+-- Reaching that state needs check_function_bodies = off and ownership of the
+-- function, so it is not a low-privilege attack. It is pinned anyway: the whole
+-- point of a byte-exact body pin is that it does not get to decide which drift was
+-- harmless, and a body that cannot execute is not harmless drift.
+--
+-- The check resolves the language by NAME through pg_language rather than by
+-- comparing prolang against a numeric OID constant. plpgsql's OID is assigned when
+-- the extension is created and is not a fixed catalog constant, so a constant would
+-- be pinning an accident of installation order.
+--
+-- exists() rather than an equality that could be NULL: an absent function, and a
+-- prolang naming no language, both produce no row and so produce false. There is no
+-- separate early return for the absent case because there is no path where one
+-- would answer differently, and a branch that cannot be forced is not a defence.
+create function academy_private.study_adult_managed_language_ok()
+returns boolean
+language plpgsql
+stable
+security definer
+set search_path = pg_catalog
+as $$
+begin
+  return exists (
+    select 1
+    from pg_proc as routine
+    join pg_language as language on language.oid = routine.prolang
+    where routine.oid = to_regprocedure(
+        'public.academy_study_upsert_adult_managed_record(text,jsonb,bigint,text)')
+      and language.lanname = 'plpgsql'
+  );
 end;
 $$;
 
@@ -486,10 +564,16 @@ end;
 $$;
 
 -- Which kinds exist is the authority's answer; whether the mutation that consults
--- it is still the reviewed one is the fingerprint's. Both are required, and the
--- fingerprint is listed first because it is the dominating term: no arrangement of
--- definition text can make this true while the installed body differs from the
--- reviewed one.
+-- it is still the reviewed one is the fingerprint's, together with the language
+-- probe that says those reviewed bytes are still executed as PL/pgSQL. All three
+-- are required, and the fingerprint is listed first because it is the dominating
+-- term over body content: no arrangement of definition text can make this true
+-- while the installed body differs from the reviewed one.
+--
+-- The three terms are separable on purpose, and each closes something the other two
+-- do not: the fingerprint answers for the bytes, the language probe for the one
+-- piece of non-body metadata that changes what those bytes mean, and the gate text
+-- for a fingerprint constant re-pinned to a body whose gate is gone.
 create function academy_private.study_academic_record_kind_ready(p_kind text)
 returns boolean
 language plpgsql
@@ -513,6 +597,7 @@ begin
     return false;
   end if;
   return academy_private.study_adult_managed_body_fingerprint_ok()
+    and academy_private.study_adult_managed_language_ok()
     and academy_private.study_adult_managed_gate_text_ok();
 end;
 $$;
@@ -536,6 +621,15 @@ $$;
 -- kept. It could not fire on any input the second does not already reject, and a
 -- mutation confirmed it by deleting the assertion and surviving the entire suite.
 -- An assertion that cannot fail is not defence in depth, it is furniture.
+--
+-- The language probe gets no assertion of its own here for the same reason, and the
+-- reason is stronger: the second assertion already ANDs it, and the language cannot
+-- change during an apply that reaches this point at all. The rewrite re-executes
+-- pg_get_functiondef, which renders the predecessor's own LANGUAGE clause, and a
+-- predecessor that was not PL/pgSQL would not carry the PL/pgSQL gate the
+-- substitution above requires -- so it would already have aborted on
+-- 'admission gate not found'. There is no input on which a language assertion here
+-- could be the thing that fires.
 do $$
 begin
   if not academy_private.study_adult_managed_body_fingerprint_ok() then
@@ -802,6 +896,8 @@ alter function academy_private.study_adult_managed_record_kind_supported(text)
   owner to postgres;
 alter function academy_private.study_adult_managed_body_fingerprint_ok()
   owner to postgres;
+alter function academy_private.study_adult_managed_language_ok()
+  owner to postgres;
 alter function academy_private.study_adult_managed_gate_text_ok()
   owner to postgres;
 alter function public.academy_study_academic_readiness_v1() owner to postgres;
@@ -815,8 +911,11 @@ revoke all on function academy_private.study_academic_table_ready(text, text[])
 revoke all on function academy_private.study_academic_record_kind_ready(text)
   from public, anon, authenticated, service_role;
 -- The body probes read a security-definer function's source. Nothing client-facing
--- needs them, and the definition text they inspect is estate shape.
+-- needs them, and the definition text they inspect is estate shape. The language
+-- probe reads catalog metadata about the same function and carries the same posture.
 revoke all on function academy_private.study_adult_managed_body_fingerprint_ok()
+  from public, anon, authenticated, service_role;
+revoke all on function academy_private.study_adult_managed_language_ok()
   from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_adult_managed_gate_text_ok()
   from public, anon, authenticated, service_role;
@@ -864,6 +963,12 @@ set academic_readiness_version = 1,
       'academic_readiness_kind_probe_verifies_admission_gate', true,
       'academic_readiness_body_fingerprint_algorithm', 'sha256',
       'academic_readiness_body_fingerprint_normalises_at_read', false,
+      -- The digest is over prosrc, and prolang is not in prosrc. Identical reviewed
+      -- bytes re-declared as LANGUAGE sql passed the digest and the gate text while
+      -- every call failed to parse, so the language is pinned separately, by name.
+      'academic_readiness_body_fingerprint_covers_language', false,
+      'academic_readiness_function_language_pinned', true,
+      'academic_readiness_function_language', 'plpgsql',
       -- Carriage returns are stripped ONCE, by the rewrite, so the installed body
       -- does not depend on how the frozen predecessor was checked out.
       'academic_readiness_body_normalised_at_apply', 'strip-cr',
@@ -883,6 +988,6 @@ set academic_readiness_version = 1,
 where singleton;
 
 comment on function public.academy_study_academic_readiness_v1() is
-  'Read-only consolidated Study academic readiness. Reports a closed per-dependency status for all seven academic dependencies from catalog metadata, contract metadata and the shared adult-managed record-kind authority: no academic RPC is executed, no row is read, written or counted, and no learner, settings or adult-private content is exposed. Ready means the required server-side contract exists in the expected shape, not that a table name exists. Which record kinds exist is answered by the same function the mutation gate consults, never by a list of readiness'' own. That the gate consults it is established by pinning the mutation''s WHOLE body: the exact stored source is hashed with the built-in sha256 and compared against a fingerprint reviewed and written into the migration, with no normalisation at read time, so any byte that differs from the reviewed body closes the dependency. Carriage returns are stripped once, by the migration''s own reconstruction of the body, which is what makes the pin independent of how the frozen predecessor was checked out. The older structural gate-text check is retained only as an ANDed secondary term, so it can close a dependency but never open one. This executes no PL/pgSQL and evaluates no branch; it does not need to, because a downstream restriction changes the body and so changes the fingerprint. What the pin does not reach is the bodies of the functions this one calls and the triggers on the tables it writes, and it rests on SHA-256 collision resistance. Executable by service_role only. Authorizes nothing.';
+  'Read-only consolidated Study academic readiness. Reports a closed per-dependency status for all seven academic dependencies from catalog metadata, contract metadata and the shared adult-managed record-kind authority: no academic RPC is executed, no row is read, written or counted, and no learner, settings or adult-private content is exposed. Ready means the required server-side contract exists in the expected shape, not that a table name exists. Which record kinds exist is answered by the same function the mutation gate consults, never by a list of readiness'' own. That the gate consults it is established by pinning the mutation''s WHOLE body: the exact stored source is hashed with the built-in sha256 and compared against a fingerprint reviewed and written into the migration, with no normalisation at read time, so any byte that differs from the reviewed body closes the dependency. Carriage returns are stripped once, by the migration''s own reconstruction of the body, which is what makes the pin independent of how the frozen predecessor was checked out. The digest covers prosrc and nothing beside it, so the function''s LANGUAGE is pinned separately and by name: the same reviewed bytes re-declared as LANGUAGE sql satisfy the digest and the gate text while every call fails to parse. The older structural gate-text check is retained only as an ANDed secondary term, so it can close a dependency but never open one. This executes no PL/pgSQL and evaluates no branch; it does not need to, because a downstream restriction changes the body and so changes the fingerprint. What the pin does not reach is the bodies of the functions this one calls and the triggers on the tables it writes, and it rests on SHA-256 collision resistance. Executable by service_role only. Authorizes nothing.';
 
 commit;

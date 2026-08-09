@@ -1005,11 +1005,12 @@ describe.sequential('consolidated academic readiness contract', () => {
 
     const FINGERPRINT_PROBE =
       'academy_private.study_adult_managed_body_fingerprint_ok()'
+    const LANGUAGE_PROBE = 'academy_private.study_adult_managed_language_ok()'
     const GATE_TEXT_PROBE = 'academy_private.study_adult_managed_gate_text_ok()'
 
     /**
-     * Both halves of the body check, asked directly. Reached as the owner, which is
-     * how they are always reached: their only callers are security-definer
+     * All three terms of the body check, asked directly. Reached as the owner, which
+     * is how they are always reached: their only callers are security-definer
      * functions running as postgres, and no client role may execute them (pinned
      * separately below).
      *
@@ -1017,14 +1018,21 @@ describe.sequential('consolidated academic readiness contract', () => {
      * gate-text probe's branches are unreachable through the RPC — every input that
      * would distinguish them has already been refused — so a case that only called
      * the RPC could not tell a working text probe from a broken one.
+     *
+     * The language term is asked alongside them because the three are separable and
+     * the interesting failures are the ones where they DISAGREE: identical reviewed
+     * bytes in the wrong language answer true, true, false, and only reading all
+     * three shows that it is the language term doing the closing.
      */
     async function bodyProbes() {
       const result = await database.query<{
-        fingerprint: boolean; gate_text: boolean
+        fingerprint: boolean; language: boolean; gate_text: boolean
       }>(`select ${FINGERPRINT_PROBE} as fingerprint,
+                 ${LANGUAGE_PROBE} as language,
                  ${GATE_TEXT_PROBE} as gate_text`)
       return {
         fingerprint: result.rows[0].fingerprint,
+        language: result.rows[0].language,
         gateText: result.rows[0].gate_text,
       }
     }
@@ -1374,12 +1382,17 @@ describe.sequential('consolidated academic readiness contract', () => {
      * `left(body, -1)` has nothing to catch.
      *
      * It cannot be forced through the RPC, because the fingerprint refuses all of
-     * these first. So it is forced by name. Each case asserts the text probe's own
-     * answer as well as the closed dependency, which is what makes the weakened
+     * these first. So it is forced by name. Each case asserts all three probe
+     * answers as well as the closed dependency, which is what makes the weakened
      * branch fail here rather than pass unnoticed behind a dominating AND.
+     *
+     * The language column is carried per case rather than assumed: two of these are
+     * `language sql` and close on that term as well, and the third is genuinely
+     * PL/pgSQL, so it is gate text alone that refuses it. Writing the expected
+     * language out keeps the third case from silently becoming a language case.
      */
     it.each([
-      ['a language sql body, which carries no `begin` token', `
+      ['a language sql body, which carries no `begin` token', false, `
         create or replace function public.academy_study_upsert_adult_managed_record(
           p_record_kind text, p_record jsonb,
           p_expected_revision bigint, p_idempotency_key text
@@ -1388,14 +1401,14 @@ describe.sequential('consolidated academic readiness contract', () => {
           select case when p_record_kind = 'review'
             then (1 / 0)::text::jsonb else '{}'::jsonb end
         $decoy$;`],
-      ['a SQL-standard BEGIN ATOMIC body, whose prosrc is null', `
+      ['a SQL-standard BEGIN ATOMIC body, whose prosrc is null', false, `
         create or replace function public.academy_study_upsert_adult_managed_record(
           p_record_kind text, p_record jsonb,
           p_expected_revision bigint, p_idempotency_key text
         ) returns jsonb language sql security definer
         set search_path = pg_catalog
         begin atomic select '{}'::jsonb; end;`],
-      ['a plpgsql body with no admission gate at all', `
+      ['a plpgsql body with no admission gate at all', true, `
         create or replace function public.academy_study_upsert_adult_managed_record(
           p_record_kind text, p_record jsonb,
           p_expected_revision bigint, p_idempotency_key text
@@ -1403,10 +1416,11 @@ describe.sequential('consolidated academic readiness contract', () => {
         set search_path = pg_catalog as $decoy$
         begin return '{}'::jsonb; end;
         $decoy$;`],
-    ] as const)('reports not-ready for %s', async (_label, ddl) => {
+    ] as const)('reports not-ready for %s', async (_label, language, ddl) => {
       await reverted(async () => {
         await database.exec(ddl)
-        expect(await bodyProbes()).toEqual({ fingerprint: false, gateText: false })
+        expect(await bodyProbes())
+          .toEqual({ fingerprint: false, language, gateText: false })
         expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
           'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
       })
@@ -1441,12 +1455,295 @@ describe.sequential('consolidated academic readiness contract', () => {
               begin return '{}'::jsonb; end;
               $decoy$;
           `)
-          // The fingerprint now agrees with a body it has never seen...
-          expect(await bodyProbes()).toEqual({ fingerprint: true, gateText: false })
+          // The fingerprint now agrees with a body it has never seen, and the decoy
+          // is genuinely PL/pgSQL, so the language term agrees too...
+          expect(await bodyProbes())
+            .toEqual({ fingerprint: true, language: true, gateText: false })
           // ...and the dependency closes anyway.
           expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
             'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
         })
+      })
+
+    /**
+     * The expected gate in the normalised form the text probe compares against,
+     * written out here independently of the migration that pins it — the same
+     * two-copies-must-agree arrangement as REVIEWED_BODY_FINGERPRINT. It is used
+     * only to establish that the anchor case below actually reaches the anchor.
+     */
+    const EXPECTED_GATE_NORMALISED =
+      'begin if auth.uid() is null then raise exception using errcode = ; end if;'
+      + ' if not academy_private.study_adult_managed_record_kind_supported('
+      + ' p_record_kind ) or p_expected_revision is null or p_expected_revision < 0'
+      + ' or not public.academy_study_payload_is_minimized(p_record, 16384)'
+      + ' or not public.academy_study_identifier_is_valid(p_idempotency_key) then'
+      + ' raise exception using errcode = ; end if;'
+
+    /** Makes the fingerprint probe agree with any body at all. */
+    async function stageLyingFingerprint() {
+      await database.exec(`
+        create or replace function ${FINGERPRINT_PROBE.replace('()', '')}()
+        returns boolean language sql stable
+        set search_path = pg_catalog as $lie$ select true $lie$;
+      `)
+    }
+
+    /**
+     * THE LANGUAGE ASYMMETRY, which is what a digest over prosrc cannot see.
+     *
+     * The fingerprint hashes prosrc. prolang is not in prosrc — it is metadata
+     * beside the body — so the two can be separated, and separating them is not
+     * theoretical. This re-declares the mutation with the bytes it already has,
+     * asserted byte-identical below, and nothing else changed but the language.
+     *
+     * `check_function_bodies = off` is what makes it installable: a PL/pgSQL body
+     * does not parse as SQL, so the server would otherwise refuse it. SET LOCAL
+     * keeps the relaxation inside the enclosing rollback. That, plus ownership of
+     * the function, is the privilege this needs — so it is not a low-privilege
+     * attack, and it is pinned anyway, because a body that cannot execute is not
+     * the harmless drift a byte-exact pin gets to wave through.
+     */
+    async function relanguage(language: 'sql' | 'plpgsql') {
+      const current = await database.query<{ prosrc: string }>(
+        'select prosrc from pg_proc where oid = to_regprocedure($1)',
+        [SHARED_ADULT_MANAGED])
+      await database.exec('set local check_function_bodies = off')
+      // Rendered by the server via format(%L) rather than by string concatenation
+      // here, so the bytes that go back in are the bytes that came out.
+      const rendered = await database.query<{ ddl: string }>(
+        `select format($f$create or replace function
+             public.academy_study_upsert_adult_managed_record(
+               p_record_kind text, p_record jsonb,
+               p_expected_revision bigint, p_idempotency_key text)
+             returns jsonb language ${language} security definer
+             set search_path = pg_catalog as %L$f$, $1::text) as ddl`,
+        [current.rows[0].prosrc])
+      await database.exec(rendered.rows[0].ddl)
+      return current.rows[0].prosrc
+    }
+
+    /** prosrc, and every piece of metadata the contract checks apart from prolang. */
+    async function mutationShape() {
+      const result = await database.query<{
+        prosrc: string; language: string; owner: string
+        definer: boolean; config: string[] | null
+      }>(`select routine.prosrc, language.lanname as language,
+            pg_get_userbyid(routine.proowner) as owner, routine.prosecdef as definer,
+            routine.proconfig as config
+          from pg_proc as routine
+          join pg_language as language on language.oid = routine.prolang
+          where routine.oid = to_regprocedure($1)`, [SHARED_ADULT_MANAGED])
+      return {
+        ...result.rows[0],
+        authenticated: await hasExecute('authenticated', SHARED_ADULT_MANAGED),
+        anon: await hasExecute('anon', SHARED_ADULT_MANAGED),
+      }
+    }
+
+    it('closes on the reviewed bytes re-declared in the wrong language', async () => {
+      const before = await mutationShape()
+      await reverted(async () => {
+        const original = await relanguage('sql')
+        const after = await mutationShape()
+
+        // ONLY the language moved. Byte-identical source, same owner, same definer
+        // posture, same pinned search_path, same adapter/anon ACL split.
+        expect(after.prosrc).toBe(original)
+        expect(after).toEqual({ ...before, language: 'sql' })
+
+        // The digest agrees, because the bytes are the reviewed bytes. The gate text
+        // agrees, because the gate is in them, at the entry, unbroken. Before H6 that
+        // was the whole answer and this estate read ready.
+        expect(await bodyProbes())
+          .toEqual({ fingerprint: true, language: false, gateText: true })
+
+        // And the mutation is not merely degraded, it is unusable: a PL/pgSQL body
+        // executed as SQL does not parse. Readiness must not call this ready.
+        const refused = await upsert('review')
+        expect(refused.accepted).toBe(false)
+        expect(refused.error).toMatch(/syntax error/)
+
+        const readiness = await academicReadiness()
+        expect(readiness.dependencies).toEqual(allReadyExcept(
+          'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+        expect(readiness.status).toBe('not-ready')
+      })
+    })
+
+    /**
+     * The control for the case above. The same re-declaration, in the language the
+     * function already has, must change nothing — otherwise `relanguage` itself
+     * would be what closes the dependency and the case above would prove nothing
+     * about prolang.
+     */
+    it('is unmoved by the same re-declaration in the language it already has',
+      async () => {
+        const before = await mutationShape()
+        await reverted(async () => {
+          const original = await relanguage('plpgsql')
+          const after = await mutationShape()
+          expect(after.prosrc).toBe(original)
+          expect(after).toEqual(before)
+          expect(await bodyProbes())
+            .toEqual({ fingerprint: true, language: true, gateText: true })
+          expect((await upsert('review')).accepted).toBe(true)
+          expect((await academicReadiness()).dependencies).toEqual(allReadyExcept())
+        })
+      })
+
+    it('closes the language term when the mutation is absent entirely', async () => {
+      await reverted(async () => {
+        await database.exec(`drop function ${SHARED_ADULT_MANAGED} cascade`)
+        // No row to join, so no true to return. The probe needs no separate
+        // absent-function branch and deliberately does not have one.
+        expect(await bodyProbes())
+          .toEqual({ fingerprint: false, language: false, gateText: false })
+      })
+    })
+
+    /**
+     * `language sql` is the whole attack surface here, and that is a measured fact
+     * rather than a convenient one: it is the only other language a function on this
+     * lineage can be written in. `c` and `internal` need a shared library and are
+     * not reachable by DDL alone, and no second procedural language is installed —
+     * plpgsql is the only entry with lanispl.
+     *
+     * If a PL were ever added, this fails, and the language probe's expectation gets
+     * looked at again rather than silently continuing to name one of several.
+     */
+    it('has no other procedural language for a body to be re-declared in', async () => {
+      const languages = await database.query<{ lanname: string; lanispl: boolean }>(
+        'select lanname, lanispl from pg_language order by lanname')
+      expect(languages.rows.map((row) => row.lanname))
+        .toEqual(['c', 'internal', 'plpgsql', 'sql'])
+      expect(languages.rows.filter((row) => row.lanispl).map((row) => row.lanname))
+        .toEqual(['plpgsql'])
+    })
+
+    /**
+     * THE SECONDARY ANCHOR BRANCH, forced directly. H5-R found it unforced.
+     *
+     * `return left(body, gate_at - 1) !~ '\mbegin\M'` is the positional half of the
+     * gate-text probe, and replacing it outright with `return true` survived the
+     * entire H5 suite. It is not equivalent — it just needs a state no case reached.
+     *
+     * Reaching it takes both halves of a specific arrangement. The gate text must be
+     * FOUND, so gate_at is not zero and the early return above does not answer
+     * first; and it must be found somewhere a `begin` already precedes it, so the
+     * anchor is what refuses it. A nested-block copy of the whole prologue is
+     * exactly that: the real gate at the entry is narrowed to an independent list so
+     * strpos walks past it, and the verbatim copy inside the dead block is what
+     * strpos lands on, with the function's own outer `begin` sitting in front.
+     *
+     * The gateless cases above cannot stand in for this: gate_at = 0 short-circuits
+     * before the anchor is evaluated at all.
+     *
+     * And the fingerprint has to be staged to lie, because the reviewed digest
+     * refuses this body long before the text probe is consulted — which is precisely
+     * the condition that let a weakened branch hide.
+     */
+    it('refuses a gate found behind an earlier `begin`, on the anchor alone',
+      async () => {
+        await reverted(async () => {
+          await stageLyingFingerprint()
+          await redefine([
+            [REAL_GATE, narrowGate('review')],
+            // The whole prologue, verbatim, inside a branch that never runs.
+            NESTED_PLACEMENTS[0][1],
+          ])
+
+          // The state the anchor exists for: the gate text IS present, so gate_at is
+          // not zero, and a `begin` precedes it. Measured rather than assumed,
+          // because a case that did not actually reach the anchor would pass for the
+          // wrong reason and leave the branch as unforced as H5 left it.
+          const located = await database.query<{ gate_at: number; prefix: boolean }>(`
+            with normalised as (
+              select btrim(regexp_replace(regexp_replace(regexp_replace(
+                regexp_replace(replace(prosrc, chr(13), ''), '--[^\\n]*', '', 'g'),
+                '/\\*.*?\\*/', '', 'gs'), $q$'(''|[^'])*'$q$, '', 'g'),
+                '\\s+', ' ', 'g')) as body
+              from pg_proc where oid = to_regprocedure($1)
+            )
+            select strpos(body, $2) as gate_at,
+                   left(body, strpos(body, $2) - 1) ~ '\\mbegin\\M' as prefix
+            from normalised`,
+            [SHARED_ADULT_MANAGED, EXPECTED_GATE_NORMALISED])
+          expect(located.rows[0].gate_at).toBeGreaterThan(0)
+          expect(located.rows[0].prefix).toBe(true)
+
+          // So the anchor is the only term left to refuse it, and it must.
+          expect(await bodyProbes())
+            .toEqual({ fingerprint: true, language: true, gateText: false })
+          expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+            'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+        })
+      })
+
+    /**
+     * THE FINAL AUTHORITY TABLE.
+     *
+     * Three separable terms, one row each for the term that closes. Written as one
+     * case so the whole table is read at once and a row cannot quietly stop being
+     * asserted. A row whose label says `(staged)` needs the fingerprint made to lie,
+     * because a fingerprint that agrees honestly IS the reviewed body and the other
+     * two terms could not then disagree with it.
+     */
+    it('resolves fingerprint, language and gate text as one authority table',
+      async () => {
+        const rows: {
+          label: string
+          arrange: () => Promise<void>
+          probes: { fingerprint: boolean; language: boolean; gateText: boolean }
+          ready: boolean
+        }[] = [
+          {
+            label: 'fp true + language plpgsql + gate true => eligible',
+            arrange: async () => {},
+            probes: { fingerprint: true, language: true, gateText: true },
+            ready: true,
+          },
+          {
+            label: 'fp true + language sql + gate true => not ready',
+            arrange: async () => { await relanguage('sql') },
+            probes: { fingerprint: true, language: false, gateText: true },
+            ready: false,
+          },
+          {
+            label: 'fp false + language plpgsql + gate true => not ready',
+            arrange: async () => {
+              await redefine([[
+                "  target_student_id := (p_record ->> 'student_id')::uuid;",
+                "  if p_record_kind = 'review' then\n"
+                + "    raise exception 'STUDY_RECORD_INVALID' using errcode = '22023';\n"
+                + "  end if;\n  target_student_id := (p_record ->> 'student_id')::uuid;",
+              ]])
+            },
+            probes: { fingerprint: false, language: true, gateText: true },
+            ready: false,
+          },
+          {
+            label: 'fp true (staged) + language plpgsql + gate false => not ready',
+            arrange: async () => {
+              await stageLyingFingerprint()
+              await redefine([[REAL_GATE, narrowGate('review')],
+                NESTED_PLACEMENTS[0][1]])
+            },
+            probes: { fingerprint: true, language: true, gateText: false },
+            ready: false,
+          },
+        ]
+
+        for (const row of rows) {
+          await reverted(async () => {
+            await row.arrange()
+            expect(await bodyProbes(), row.label).toEqual(row.probes)
+            const dependencies = (await academicReadiness()).dependencies
+            expect(dependencies, row.label).toEqual(row.ready
+              ? allReadyExcept()
+              : allReadyExcept('review-queue', 'calendar-adapter',
+                'parent-settings-adapter'))
+          })
+        }
       })
 
     /**
@@ -1460,7 +1757,8 @@ describe.sequential('consolidated academic readiness contract', () => {
          from pg_proc where oid = to_regprocedure($1)`, [SHARED_ADULT_MANAGED])
       expect(result.rows[0].null_source).toBe(false)
       expect(result.rows[0].length).toBeGreaterThan(1000)
-      expect(await bodyProbes()).toEqual({ fingerprint: true, gateText: true })
+      expect(await bodyProbes())
+        .toEqual({ fingerprint: true, language: true, gateText: true })
     })
 
     /**
@@ -1533,7 +1831,8 @@ describe.sequential('consolidated academic readiness contract', () => {
         const refused = await upsert('review')
         expect(refused.accepted).toBe(false)
         expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
-        expect(await bodyProbes()).toEqual({ fingerprint: false, gateText: true })
+        expect(await bodyProbes())
+          .toEqual({ fingerprint: false, language: true, gateText: true })
         expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
           'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
       })
@@ -1572,8 +1871,9 @@ describe.sequential('consolidated academic readiness contract', () => {
         const refused = await upsert('review')
         expect(refused.accepted).toBe(false)
         expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
-        // The body is untouched, so both probes agree it is the reviewed one.
-        expect(await bodyProbes()).toEqual({ fingerprint: true, gateText: true })
+        // The body is untouched, so all three probes agree it is the reviewed one.
+        expect(await bodyProbes())
+          .toEqual({ fingerprint: true, language: true, gateText: true })
         expect((await academicReadiness()).dependencies).toEqual(allReadyExcept())
       })
     })
@@ -1629,10 +1929,11 @@ describe.sequential('consolidated academic readiness contract', () => {
     })
 
     /**
-     * The two body probes read a security-definer function's source, which is
-     * estate shape. They carry the same posture as every other private helper here.
+     * The three body probes read a security-definer function's source and catalog
+     * metadata, which is estate shape. They carry the same posture as every other
+     * private helper here.
      */
-    it.each([FINGERPRINT_PROBE, GATE_TEXT_PROBE])(
+    it.each([FINGERPRINT_PROBE, LANGUAGE_PROBE, GATE_TEXT_PROBE])(
       '%s is postgres-owned, stable, definer, pinned, and client-unreachable',
       async (signature) => {
         const result = await database.query<{
@@ -1813,6 +2114,10 @@ describe.sequential('consolidated academic readiness contract', () => {
      * inserted downstream now changes the fingerprint. It is asserted alongside the
      * limit that replaces it — the pin does not cover transitive callees — so the
      * pair cannot drift apart into a claim that is stronger than the code.
+     *
+     * H6 adds the other limit of the same shape, and for the same reason: the digest
+     * is over prosrc, so it says nothing about prolang. covers_language: false is
+     * asserted next to language_pinned: true, so neither can be read alone.
      */
     it('states what the body pin establishes and what it does not', async () => {
       const result = await database.query<{ manifest: Record<string, unknown> }>(
@@ -1822,6 +2127,9 @@ describe.sequential('consolidated academic readiness contract', () => {
         academic_readiness_body_fingerprint_algorithm: 'sha256',
         academic_readiness_body_fingerprint_normalises_at_read: false,
         academic_readiness_body_normalised_at_apply: 'strip-cr',
+        academic_readiness_body_fingerprint_covers_language: false,
+        academic_readiness_function_language_pinned: true,
+        academic_readiness_function_language: 'plpgsql',
         academic_readiness_kind_probe_anchors_outer_entry: true,
         academic_readiness_gate_text_probe_is_secondary: true,
         academic_readiness_kind_probe_executes_plpgsql: false,
@@ -1930,12 +2238,15 @@ describe.sequential('consolidated academic readiness contract', () => {
     })
 
     /**
-     * Creation, never replacement, extends to the two body probes this migration
-     * adds. A pre-existing function wearing either name would otherwise be silently
-     * redefined — or, worse, left in place by a migration that assumed it wrote it.
+     * Creation, never replacement, extends to the three body probes this migration
+     * adds. A pre-existing function wearing any of those names would otherwise be
+     * silently redefined — or, worse, left in place by a migration that assumed it
+     * wrote it, which for the language probe means a `select true` stub standing
+     * where the check is supposed to be.
      */
     it.each([
       'academy_private.study_adult_managed_body_fingerprint_ok',
+      'academy_private.study_adult_managed_language_ok',
       'academy_private.study_adult_managed_gate_text_ok',
     ])('refuses when %s already exists', async (name) => {
       const database2 = await chainWithoutAcademicMigration()
