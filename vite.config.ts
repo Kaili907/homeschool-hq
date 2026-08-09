@@ -22,7 +22,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'root-app',
-          include: ['src/**/*.test.{ts,tsx}', 'tests/**/*.test.js'],
+          include: ['src/**/*.test.{ts,tsx}', 'tests/**/*.test.js', 'scripts/**/*.test.ts'],
           pool: 'threads',
           maxWorkers: 4,
           testTimeout: 120_000,

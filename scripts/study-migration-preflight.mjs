@@ -10,6 +10,18 @@ function sameStringArray(left, right) {
     left.length === right.length && left.every((value, index) => value === right[index])
 }
 
+export function historicalVersions(manifest) {
+  if (manifest?.schemaVersion !== 1 || !Array.isArray(manifest.migrations)) return []
+  return manifest.migrations
+    .filter((entry) => entry.classification === 'historical-baseline')
+    .map((entry) => entry.version)
+}
+
+export function requiredMarkerTransitions(manifest) {
+  if (manifest?.schemaVersion !== 1 || !Array.isArray(manifest.migrations)) return []
+  return manifest.migrations.map((entry) => entry.requiredMarkerTransition)
+}
+
 export function executableChecksums(manifest) {
   if (manifest?.schemaVersion !== 1 || !Array.isArray(manifest.migrations)) return []
   return manifest.migrations
@@ -21,8 +33,10 @@ export async function validateMigrationManifest(manifest, migrationDirectory) {
   const reasons = []
   const entries = Array.isArray(manifest?.migrations) ? manifest.migrations : []
   if (manifest?.schemaVersion !== 1 || entries.length === 0) {
-    return Object.freeze({ valid: false, reasons: Object.freeze(['manifest-invalid-or-empty']) })
+    const contractErrors = Object.freeze(['manifest-invalid-or-empty'])
+    return Object.freeze({ valid: false, reasons: contractErrors, contractErrors })
   }
+  if (manifest?.projectRef !== EXPECTED_STUDY_PROJECT_REF) reasons.push('manifest-project-ref-invalid')
   const filenames = entries.map((entry) => entry?.filename)
   const versions = entries.map((entry) => entry?.version)
   const hashes = entries.map((entry) => typeof entry?.sha256 === 'string' ? entry.sha256.toLowerCase() : '')
@@ -39,9 +53,19 @@ export async function validateMigrationManifest(manifest, migrationDirectory) {
   if (entries.some((entry, index) =>
     entry?.dependency !== (index === 0 ? null : filenames[index - 1])
   )) reasons.push('migration-dependency-invalid')
+  let executableSeen = false
+  let classificationOrderInvalid = false
+  for (const entry of entries) {
+    if (entry?.classification === 'executable') {
+      executableSeen = true
+    } else if (entry?.classification === 'historical-baseline') {
+      if (executableSeen) classificationOrderInvalid = true
+    } else {
+      classificationOrderInvalid = true
+    }
+  }
+  if (classificationOrderInvalid) reasons.push('migration-classification-order-invalid')
   if (entries.some((entry, index) =>
-    (index < 3 && entry?.classification !== 'historical-baseline') ||
-    (index >= 3 && entry?.classification !== 'executable') ||
     typeof entry?.applicationStatus !== 'string' ||
     typeof entry?.requiredMarkerTransition !== 'string' ||
     entry.requiredMarkerTransition.length === 0 ||
@@ -73,15 +97,27 @@ export async function validateMigrationManifest(manifest, migrationDirectory) {
       }
     }
   }
-  return Object.freeze({ valid: reasons.length === 0, reasons: Object.freeze(reasons) })
+  const contractErrors = Object.freeze(reasons)
+  return Object.freeze({ valid: reasons.length === 0, reasons: contractErrors, contractErrors })
 }
 
 /** Pure, local, non-mutating authorization gate. */
 export function evaluateMigrationPreflight(evidence, manifest) {
   const reasons = []
   const checksums = executableChecksums(manifest)
-  if (evidence?.projectRef !== EXPECTED_STUDY_PROJECT_REF || evidence?.exactProjectVerified !== true) {
+  const expectedHistoricalVersions = historicalVersions(manifest)
+  const expectedMarkerTransitions = requiredMarkerTransitions(manifest)
+  if (manifest?.projectRef !== EXPECTED_STUDY_PROJECT_REF ||
+      evidence?.projectRef !== manifest?.projectRef ||
+      evidence?.projectRef !== EXPECTED_STUDY_PROJECT_REF ||
+      evidence?.exactProjectVerified !== true) {
     reasons.push('exact-project-not-verified')
+  }
+  if (!sameStringArray(evidence?.historicalVersions, expectedHistoricalVersions)) {
+    reasons.push('historical-version-evidence-mismatch')
+  }
+  if (!sameStringArray(evidence?.approvedRequiredMarkerTransitions, expectedMarkerTransitions)) {
+    reasons.push('required-marker-transition-evidence-mismatch')
   }
   if (evidence?.foundationObjectEquivalenceReconfirmed !== true) reasons.push('foundation-equivalence-not-reconfirmed')
   if (evidence?.historicalBaselineAuthorization !== true) reasons.push('historical-baseline-authorization-absent')
@@ -94,7 +130,13 @@ export function evaluateMigrationPreflight(evidence, manifest) {
     : evidence?.approvedExecutableChecksums
   if (checksums.length === 0 || checksums.includes(UNSAFE_SESSION_17_SHA256)) reasons.push('unsafe-or-empty-executable-checksum-set')
   if (!sameStringArray(approved, checksums)) reasons.push('final-checksum-set-not-approved')
-  return Object.freeze({ allowed: reasons.length === 0, reasons: Object.freeze(reasons), checksums: Object.freeze(checksums) })
+  const readinessHolds = Object.freeze(reasons)
+  return Object.freeze({
+    allowed: reasons.length === 0,
+    reasons: readinessHolds,
+    readinessHolds,
+    checksums: Object.freeze(checksums),
+  })
 }
 
 async function main() {
@@ -111,7 +153,12 @@ async function main() {
   const result = evaluateMigrationPreflight(evidence, manifest)
   const reasons = [...manifestValidation.reasons, ...result.reasons]
   const allowed = manifestValidation.valid && result.allowed
-  process.stdout.write(`${JSON.stringify({ allowed, reasons })}\n`)
+  process.stdout.write(`${JSON.stringify({
+    allowed,
+    contractErrors: manifestValidation.contractErrors,
+    readinessHolds: result.readinessHolds,
+    reasons,
+  })}\n`)
   if (!allowed) process.exitCode = 2
 }
 
