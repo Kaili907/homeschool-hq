@@ -2,3 +2,4 @@
 export * from './attempts'
 export * from './navigation'
 export * from './session'
+export * from './study'
