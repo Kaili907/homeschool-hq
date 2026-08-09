@@ -1,0 +1,158 @@
+import { describe, expect, it, vi } from 'vitest'
+import {
+  createAdminAuditHandler,
+  decodeAuditCursor,
+  encodeAuditCursor,
+  parseAuditQuery,
+} from './admin-audit.js'
+import { AdminAuditReadError } from './_shared/admin-audit-reader.js'
+
+const EVENT = Object.freeze({
+  schemaVersion: 2,
+  eventId: '10000000-0000-4000-8000-000000000001',
+  occurredAt: '2026-08-09T13:00:00.000Z',
+  actorRole: 'owner',
+  action: 'engine.control',
+  resourceType: 'engine',
+  resourceRef: 'tts',
+  resourceVersion: null,
+  resourceRevision: null,
+  previousValue: { state: 'enabled' },
+  newValue: { state: 'disabled' },
+  reasonCode: 'engine.controlled',
+  correlationId: '20000000-0000-4000-8000-000000000001',
+})
+
+const event = (overrides = {}) => ({
+  httpMethod: 'GET',
+  path: '/api/admin/v1/audit',
+  headers: { authorization: 'Bearer verified-token' },
+  queryStringParameters: null,
+  ...overrides,
+})
+
+const authorized = Object.freeze({
+  ok: true,
+  principal: { userId: 'admin-user', role: 'viewer', capabilities: ['audit:read'] },
+  accessToken: 'verified-token',
+})
+
+function handlerWith({ auth = authorized, result = { events: [EVENT], hasMore: false }, error } = {}) {
+  const authorization = { require: vi.fn(async () => auth) }
+  const reader = { list: vi.fn(async () => {
+    if (error) throw error
+    return result
+  }) }
+  return { handler: createAdminAuditHandler({ authorization, reader }), authorization, reader }
+}
+
+describe('GET /api/admin/v1/audit', () => {
+  it('requires audit:read and returns the canonical safe DTO', async () => {
+    const { handler, authorization, reader } = handlerWith()
+    const response = await handler(event())
+    expect(response.statusCode).toBe(200)
+    expect(JSON.parse(response.body)).toEqual({ schemaVersion: 2, events: [EVENT], nextCursor: null })
+    expect(authorization.require).toHaveBeenCalledWith(expect.anything(), 'audit:read')
+    expect(reader.list).toHaveBeenCalledWith({
+      action: undefined, resourceType: undefined, resourceRef: undefined,
+      limit: 50, cursor: undefined,
+    })
+    expect(response.headers['cache-control']).toBe('no-store')
+  })
+
+  it.each([
+    ['unauthenticated', 401, 'authentication_required'],
+    ['student', 403, 'admin_access_denied'],
+    ['guardian', 403, 'admin_access_denied'],
+    ['revoked Admin', 403, 'admin_access_denied'],
+    ['expired Admin', 403, 'admin_access_denied'],
+    ['forged role', 403, 'admin_access_denied'],
+  ])('denies %s before reading audit history', async (_label, statusCode, code) => {
+    const { handler, reader } = handlerWith({
+      auth: { ok: false, response: { statusCode, body: JSON.stringify({ error: { code } }) } },
+    })
+    const response = await handler(event())
+    expect(response.statusCode).toBe(statusCode)
+    expect(reader.list).not.toHaveBeenCalled()
+  })
+
+  it('supports bounded filters, max 100, and an opaque deterministic cursor', async () => {
+    const cursor = encodeAuditCursor({ occurredAt: EVENT.occurredAt, eventId: EVENT.eventId })
+    const { handler, reader } = handlerWith()
+    const response = await handler(event({ rawQueryString: new URLSearchParams({
+      action: 'engine.control', resourceType: 'engine', resourceRef: 'tts',
+      limit: '100', cursor,
+    }).toString() }))
+    expect(response.statusCode).toBe(200)
+    expect(reader.list).toHaveBeenCalledWith({
+      action: 'engine.control', resourceType: 'engine', resourceRef: 'tts', limit: 100,
+      cursor: { occurredAt: EVENT.occurredAt, eventId: EVENT.eventId },
+    })
+    expect(decodeAuditCursor(cursor)).toEqual({ occurredAt: EVENT.occurredAt, eventId: EVENT.eventId })
+  })
+
+  it('returns a cursor only when another page exists', async () => {
+    const { handler } = handlerWith({ result: { events: [EVENT], hasMore: true } })
+    const body = JSON.parse((await handler(event())).body)
+    expect(decodeAuditCursor(body.nextCursor)).toEqual({
+      occurredAt: EVENT.occurredAt,
+      eventId: EVENT.eventId,
+    })
+  })
+
+  it.each([
+    'limit=0', 'limit=101', 'limit=050', 'limit=1&limit=2',
+    'action=wildcard.*', 'resourceType=all', 'resourceRef=has%20spaces',
+    'search=anything',
+  ])('rejects unsafe query %s', async (rawQueryString) => {
+    const { handler, reader } = handlerWith()
+    const response = await handler(event({ rawQueryString }))
+    expect(response.statusCode).toBe(400)
+    expect(JSON.parse(response.body).error.code).toBe('invalid_query')
+    expect(reader.list).not.toHaveBeenCalled()
+  })
+
+  it.each([
+    'not-base64!',
+    Buffer.from('{}').toString('base64url'),
+    Buffer.from(JSON.stringify({ occurredAt: EVENT.occurredAt })).toString('base64url'),
+    Buffer.from(JSON.stringify({ occurredAt: 'not-a-date', eventId: EVENT.eventId })).toString('base64url'),
+    Buffer.from(JSON.stringify({ occurredAt: EVENT.occurredAt, eventId: 'not-a-uuid' })).toString('base64url'),
+  ])('rejects malformed cursor %s', async (cursor) => {
+    const { handler, reader } = handlerWith()
+    const response = await handler(event({ rawQueryString: `cursor=${encodeURIComponent(cursor)}` }))
+    expect(response.statusCode).toBe(400)
+    expect(JSON.parse(response.body).error.code).toBe('invalid_cursor')
+    expect(reader.list).not.toHaveBeenCalled()
+  })
+
+  it('does not expose source exceptions or private data', async () => {
+    const { handler } = handlerWith({ error: new Error('database SECRET learner transcript') })
+    const response = await handler(event())
+    expect(response.statusCode).toBe(500)
+    expect(response.body).toBe(JSON.stringify({ error: { code: 'internal_error' } }))
+    expect(response.body).not.toMatch(/SECRET|learner|database/)
+  })
+
+  it.each([
+    ['source_unavailable', 503, 'audit_source_unavailable'],
+    ['source_timeout', 504, 'audit_source_timeout'],
+  ])('maps %s to a bounded response', async (code, statusCode, responseCode) => {
+    const { handler } = handlerWith({ error: new AdminAuditReadError(code) })
+    const response = await handler(event())
+    expect(response.statusCode).toBe(statusCode)
+    expect(JSON.parse(response.body)).toEqual({ error: { code: responseCode } })
+  })
+
+  it('rejects non-GET methods and unknown paths', async () => {
+    const { handler } = handlerWith()
+    expect((await handler(event({ httpMethod: 'POST' }))).statusCode).toBe(405)
+    expect((await handler(event({ path: '/api/admin/v1/audit/export' }))).statusCode).toBe(404)
+  })
+
+  it('parses object query parameters without accepting arbitrary arrays', () => {
+    expect(parseAuditQuery(event({ queryStringParameters: { limit: '1' } }))).toMatchObject({ limit: 1 })
+    expect(() => parseAuditQuery(event({ multiValueQueryStringParameters: { limit: ['1', '2'] } })))
+      .toThrow()
+  })
+})

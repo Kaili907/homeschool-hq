@@ -2,9 +2,10 @@
 
 Administrative audit history is an append-only accountability ledger, separate
 from operational telemetry and the existing domain-specific identity/Study audit
-tables. A later database implementation may project those domain audits into an
-Admin read model, but it must not rewrite them or force incompatible Admin actions
-into their closed event vocabularies.
+tables. ADMIN-15 implements the private ledger, atomic internal append helper,
+authorized read projection, API, and read-only Audit Log. It does not rewrite
+domain audits or force incompatible Admin actions into their closed event
+vocabularies.
 
 `AdminAuditEvent` version 2 contains the unchanged audit shape:
 
@@ -37,3 +38,7 @@ accepts a caller-supplied actor/role as fact.
 The initial action and resource vocabularies are frozen in
 `src/admin/contracts.ts`. New actions require a contract revision and an explicit
 old/new-value allowlist.
+
+The implemented schema, local reason-code boundary, safe-value grammar, service
+read contract, browser privacy projection, and ADMIN-14 handoff are documented in
+[`../admin-audit-foundation.md`](../admin-audit-foundation.md).
