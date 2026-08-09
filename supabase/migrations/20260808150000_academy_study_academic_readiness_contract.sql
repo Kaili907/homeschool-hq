@@ -35,22 +35,49 @@
 -- because both are reading the same function.
 --
 -- Readiness additionally establishes that the helper is what the mutation's
--- admission gate actually consults, by requiring the whole expected gate
--- expression to open the function -- to start at the body's first `begin`, which
--- is the outer entry. Weaker forms of that requirement do not hold. Requiring only
--- the helper's NAME to appear somewhere is satisfied by a call parked in a dead
--- branch or a live call whose result is discarded. Requiring the whole gate
--- expression to appear ANYWHERE is satisfied by a copy of it inside a nested block
--- that never runs, because PL/pgSQL blocks nest and a `begin` can therefore be
--- interposed. Each of those sits beside a real admission gate that is an
--- independent narrower list refusing the kind at runtime.
+-- admission gate actually consults. Four rounds of review established what does
+-- NOT establish it, and every one of the failures was the same failure: a probe
+-- that hand-parses PL/pgSQL is only as good as its lexer, and each round found one
+-- more construct the lexer did not model. Requiring the helper's NAME somewhere is
+-- satisfied by a dead branch or a discarded call. Requiring the whole gate
+-- expression ANYWHERE is satisfied by a verbatim copy inside a nested block, since
+-- PL/pgSQL blocks nest and a `begin` can be interposed. Requiring it to START at
+-- the body's first `begin` moves the sensitive region into the declaration
+-- section, where a whole-gate decoy survives inside a dollar-quoted default or a
+-- double-quoted identifier -- neither of which the comment-and-literal stripping
+-- removes. That last one was measured here at twelve of twelve before it was
+-- closed: real narrowing at the mutation, `ready` at readiness.
 --
--- What that structural check cannot do is bounded and stated where it lives, on
--- academy_private.study_academic_record_kind_ready below: it cannot prove that no
--- later, independent restriction was inserted downstream of the gate it verifies.
--- Nothing a read-only catalog probe can do would prove that, and this RPC executes
--- no academic operation by contract, so the limit is documented rather than
--- narrowed by fragile scanning for every statement a body might contain.
+-- So the authority is no longer a lexer. The mutation's body is pinned WHOLE, by
+-- a SHA-256 fingerprint of its exact stored source, against a constant reviewed
+-- and written out in this migration. There is nothing left to parse and therefore
+-- nothing left to hide a decoy from: any byte of that body that differs from the
+-- reviewed one closes the dependency, whether the difference is a smuggled gate,
+-- a downstream restriction, or a harmless reindentation. Closing on harmless drift
+-- is the accepted cost, and it is the right direction -- readiness may false-close,
+-- and may never false-open.
+--
+-- That is only deterministic because this migration RECONSTRUCTS the body rather
+-- than finding it: it reads the definition back, strips carriage returns, swaps
+-- exactly one expression and re-executes. The strip is what makes the result
+-- independent of how the frozen predecessor happened to be checked out -- measured
+-- on a CRLF checkout, the body carries 351 carriage returns before the rewrite and
+-- none after it. Normalisation therefore happens ONCE, here, at apply time; the
+-- runtime probe normalises nothing at all, so it creates no equivalence class for
+-- anything to hide in.
+--
+-- The digest primitive is the built-in sha256(bytea), which is core pg_catalog
+-- from PostgreSQL 11 onwards. That was verified rather than assumed: pgcrypto is
+-- NOT installed on this lineage -- pg_extension lists plpgsql alone and there is
+-- no digest() in pg_proc -- so a pgcrypto-based gate would have failed closed
+-- forever. No extension is added, no dependency is introduced, and convert_to and
+-- encode are core as well, so the already-pinned search_path = pg_catalog reaches
+-- all three.
+--
+-- What the fingerprint does NOT establish is stated on
+-- academy_private.study_academic_record_kind_ready below, and it is narrower than
+-- what it replaces: it pins the mutation's OWN body, not the bodies of the
+-- functions that body calls, and not triggers on the tables it writes.
 --
 -- The mutation function itself lives in 20260801011000, which is in hosted
 -- history and frozen. Its definition is therefore repaired additively from here,
@@ -132,7 +159,11 @@ begin
        'academy_private.study_academic_record_kind_ready(text)') is not null
      or to_regprocedure(
        'academy_private.study_adult_managed_record_kind_supported(text)'
-     ) is not null then
+     ) is not null
+     or to_regprocedure(
+       'academy_private.study_adult_managed_body_fingerprint_ok()') is not null
+     or to_regprocedure(
+       'academy_private.study_adult_managed_gate_text_ok()') is not null then
     raise exception 'STUDY_ACADEMIC_READINESS object collision';
   end if;
 
@@ -299,79 +330,104 @@ $$;
 -- shared mutation entirely is an honest three-way outage and closes all three.
 --
 -- The second condition establishes that the authority is what the mutation's
--- ADMISSION GATE actually consults. Requiring only that the authority's name
--- appear somewhere in the body -- which is what this used to do -- is satisfied by
--- a call that decides nothing, and two arrangements defeat it outright: a call
--- parked in a dead branch, and a live call whose result is discarded. Either one
--- leaves the readiness answer 'ready' beside a real admission gate that is an
--- independent, narrower list refusing the kind at runtime.
+-- ADMISSION GATE actually consults, and it does so by pinning the mutation's whole
+-- body rather than by reading it.
 --
--- So the whole gate expression is required: the opening `begin`, the
--- authentication guard, then the admission statement whose condition routes
--- through the authority and whose body raises. A discarded call is not that
--- statement. An occurrence in a comment, in a string literal, or split across
--- concatenated literals is not that statement either, because comments and
--- literals are removed before the search.
+-- INTEGRITY AUTHORITY. The exact stored source of the adult-managed mutation is
+-- hashed and compared against the fingerprint of the body this migration installs,
+-- written out below as a reviewed constant. Nothing is normalised at read time --
+-- not comments, not literals, not whitespace, not line endings. Every equivalence
+-- class a probe defines is somewhere a decoy can live, so this one defines none:
+-- the comparison is over the bytes.
 --
--- Requiring that expression to be PRESENT is still not enough, and the `begin` it
--- opens with does not by itself make the match structural. PL/pgSQL nests blocks,
--- so a `begin` can be interposed: a block that never runs -- a dead branch, an
--- unreached exception handler, a block appended after the live logic -- can carry
--- a verbatim copy of this entire prologue while the live path admits kinds from an
--- independent narrower list beside it. That was measured here against all three
--- kinds in all three placements and reported ready every time. Nor is it answered
--- by extending the expected text leftwards into the declaration section: a nested
--- block may open its own DECLARE and reproduce the declaration tail verbatim,
--- which was measured too.
+-- That is well defined only because this migration RECONSTRUCTS the body. It reads
+-- the frozen definition back, strips carriage returns, substitutes one expression
+-- and re-executes, so the installed source is a function of the predecessor's bytes
+-- and one reviewed edit -- not of how the predecessor was checked out. Measured on
+-- a CRLF checkout: 351 carriage returns in the body before the rewrite, none after.
 --
--- What separates the real entry from every nested copy is POSITION, not more text.
--- A PL/pgSQL body's first `begin` token is the function's own entry: everything
--- ahead of it is the declaration section, and every nested block's `begin`
--- necessarily comes after it. So the gate is required to START at that first
--- `begin`. This costs no additional expected text: the declaration list is
--- deliberately NOT spelled out, so adding or removing a declared variable cannot
--- rot the probe.
+-- WHY THE FINGERPRINT AND NOT MORE LEXING. Every previous version of this check
+-- was a hand-written parser for a language that does not want to be hand-parsed,
+-- and each review round found one more construct it did not model: nested blocks
+-- carrying a verbatim copy of the prologue, then -- once the gate was anchored at
+-- the outer entry -- whole-gate decoys planted AHEAD of that entry, in the
+-- declaration section, inside a dollar-quoted default or a double-quoted
+-- identifier. Neither is a comment and neither is a single-quoted literal, so the
+-- stripping walked straight past them; twelve of twelve reported ready while the
+-- mutation refused a supported kind. The defect was never the particular missing
+-- rule. It was that the probe's authority rested on enumerating carriers.
 --
--- The check reads prosrc rather than a rendered CREATE statement so that the
--- position it tests means what it says: prosrc IS the body, so its first
--- character is the function's entry. Reading pg_get_functiondef instead answers
--- identically on this lineage -- the rendered header carries no `begin` token, so
--- the prefix test is unaffected, and that was measured across every decoy shape
--- the suite exercises rather than assumed. The choice is about what the check can
--- be read to CLAIM, not about a behaviour difference it currently has.
+-- A digest enumerates nothing. Any byte of the body that differs from the reviewed
+-- one closes the dependency, so a decoy cannot be added, a restriction cannot be
+-- inserted, and an expression cannot be swapped, whatever lexical costume it wears.
 --
--- Position moves the sensitive region rather than removing it. Everything AHEAD of
--- the first `begin` -- the declaration section -- passes the position test by
--- definition, so a whole-gate decoy planted there would satisfy both halves. What
--- refuses it is the normalisation: comments and string literals are removed before
--- the search, so a gate commented or quoted into the declarations is gone before
--- the position is ever computed. That is why comment stripping is load-bearing
--- here and not merely tidy, and it has its own forcing case in the suite.
+-- THE GATE-TEXT PROBE IS RETAINED, AS A SECONDARY AND. It is no longer the
+-- authority and cannot make anything ready on its own: readiness requires the
+-- fingerprint AND the gate text, so the fingerprint always dominates to not-ready
+-- and the text probe can only ever close something the fingerprint left open. It
+-- earns its keep in exactly one scenario -- a reviewed fingerprint constant
+-- re-pinned to a body whose gate is gone -- where the digest agrees with itself and
+-- only the text probe still objects.
 --
--- The expected text IS written out by hand here, which is the obvious way for a
--- probe like this to rot. It is not left on trust: the DO block below asserts that
--- this probe answers true for 'review' immediately after the rewrite installs the
--- gate, so a probe and a gate that disagree abort the migration rather than ship.
+-- WHAT THIS DOES NOT ESTABLISH, restated because H5 made the old statement wrong.
+-- The previous version could not see a restriction inserted downstream of an intact
+-- gate, and documented that as inherent to read-only structural readiness. It is
+-- not inherent, and it is no longer true: a downstream restriction changes the
+-- body, the body's fingerprint changes with it, and the dependency closes. What
+-- remains is narrower and is a genuine boundary. The pin covers the mutation's OWN
+-- source and nothing further: a restriction moved into a function this body CALLS,
+-- or into a trigger on a table it writes, leaves these bytes untouched. And the
+-- claim rests on SHA-256 collision resistance -- a semantically different body with
+-- an identical digest would defeat it, which is a cryptographic assumption rather
+-- than a proof.
+create function academy_private.study_adult_managed_body_fingerprint_ok()
+returns boolean
+language plpgsql
+stable
+security definer
+set search_path = pg_catalog
+as $$
+declare
+  target oid;
+  body text;
+  -- The fingerprint of the body this migration installs. Reviewed and pinned here,
+  -- never derived at run time: a probe that hashed the current body and compared it
+  -- to itself would agree with every body there is. The DO block below closes the
+  -- loop by requiring the reconstructed definition to match this constant, so the
+  -- value cannot drift from what is actually installed without failing the apply.
+  reviewed constant text :=
+    '8e1cf860b98f31e626ae288d6b6cbdc59ad263b3c30118dd600b409a17940989';
+begin
+  target := to_regprocedure(
+    'public.academy_study_upsert_adult_managed_record(text,jsonb,bigint,text)'
+  );
+  if target is null then
+    return false;
+  end if;
+  select routine.prosrc into body
+  from pg_proc as routine where routine.oid = target;
+  -- A missing definition is not a passing one. An absent function, a null prosrc
+  -- and an empty prosrc all reach a digest that cannot equal the reviewed constant.
+  if body is null then
+    return false;
+  end if;
+  -- sha256 is core pg_catalog from PostgreSQL 11; pgcrypto is NOT installed on this
+  -- lineage and is deliberately not depended on. convert_to fixes the encoding so
+  -- the digest is over bytes rather than over a server-encoding-dependent rendering.
+  return encode(sha256(convert_to(body, 'UTF8')), 'hex') = reviewed;
+end;
+$$;
+
+-- The secondary text probe. Same requirement as before H5 -- the whole expected
+-- admission gate, normalised, must START at the body's first `begin`, which is the
+-- function's outer entry -- and the same normalisation: comment removal, then
+-- single-quoted literal removal, then whitespace collapse.
 --
--- WHAT THIS DOES NOT ESTABLISH. It is a read-only structural check over definition
--- text, not an interpreter: it executes no PL/pgSQL and evaluates no branch. It
--- proves the expected admission gate is present at the function's entry and that
--- admission there routes through the shared authority. It cannot prove that no
--- LATER, independent restriction has been inserted downstream of that gate: a
--- body that keeps this prologue intact and
--- then raises for one kind further down still reads structurally ready here, and
--- would be refused at runtime. Proving otherwise would require semantically
--- executing arbitrary PL/pgSQL, which no catalog read can do, and executing the
--- real mutation from inside a readiness probe -- which is forbidden, because this
--- RPC is read-only by contract. That limit is inherent to read-only structural
--- readiness and is stated here rather than papered over.
---
--- Normalisation is comment removal, string-literal removal, then collapsing every
--- whitespace run to a single space, so reindentation and line rewrapping are
--- tolerated and content is not. Normalisation cannot produce a false ready:
--- anything it removes by mistake can only make the search fail, which closes the
--- dependency.
-create function academy_private.study_academic_record_kind_ready(p_kind text)
+-- It is kept in its own function so that it can be forced directly. As an ANDed
+-- term behind a byte-exact fingerprint it is otherwise untestable in isolation:
+-- every input that would distinguish its branches has already been refused by the
+-- digest, which is precisely how a weakened branch survived the previous suite.
+create function academy_private.study_adult_managed_gate_text_ok()
 returns boolean
 language plpgsql
 stable
@@ -395,15 +451,7 @@ begin
   target := to_regprocedure(
     'public.academy_study_upsert_adult_managed_record(text,jsonb,bigint,text)'
   );
-  if target is null or p_kind is null then
-    return false;
-  end if;
-  if to_regprocedure(
-       'academy_private.study_adult_managed_record_kind_supported(text)'
-     ) is null then
-    return false;
-  end if;
-  if not academy_private.study_adult_managed_record_kind_supported(p_kind) then
+  if target is null then
     return false;
   end if;
   -- prosrc, not pg_get_functiondef: the body on its own, so that its first
@@ -422,6 +470,9 @@ begin
   body := btrim(regexp_replace(body, '\s+', ' ', 'g'));
 
   gate_at := strpos(body, gate);
+  -- No recognised gate is NOT READY, and says so here rather than falling through.
+  -- A body in another language carries no `begin` at all, so `left(body, -1)` would
+  -- have nothing to catch: without this the absent case would read as ready.
   if gate_at = 0 then
     return false;
   end if;
@@ -434,13 +485,63 @@ begin
 end;
 $$;
 
--- The closed loop. The gate above is rewritten by this migration and the expected
--- text is written out separately in the probe; nothing but this assertion stops
--- the two from drifting. Run after both exist, it fails the whole migration if the
--- definition actually installed is not the one the probe recognises -- which is the
--- only way to keep a hand-written expectation honest.
+-- Which kinds exist is the authority's answer; whether the mutation that consults
+-- it is still the reviewed one is the fingerprint's. Both are required, and the
+-- fingerprint is listed first because it is the dominating term: no arrangement of
+-- definition text can make this true while the installed body differs from the
+-- reviewed one.
+create function academy_private.study_academic_record_kind_ready(p_kind text)
+returns boolean
+language plpgsql
+stable
+security definer
+set search_path = pg_catalog
+as $$
+begin
+  if p_kind is null
+     or to_regprocedure(
+       'public.academy_study_upsert_adult_managed_record(text,jsonb,bigint,text)'
+     ) is null then
+    return false;
+  end if;
+  if to_regprocedure(
+       'academy_private.study_adult_managed_record_kind_supported(text)'
+     ) is null then
+    return false;
+  end if;
+  if not academy_private.study_adult_managed_record_kind_supported(p_kind) then
+    return false;
+  end if;
+  return academy_private.study_adult_managed_body_fingerprint_ok()
+    and academy_private.study_adult_managed_gate_text_ok();
+end;
+$$;
+
+-- The closed loop. Both expectations above -- the reviewed fingerprint and the
+-- expected gate text -- are written out by hand, which is the obvious way for them
+-- to rot. Nothing but this assertion stops them from drifting from the definition
+-- the migration actually installs. Run after both probes exist, it fails the whole
+-- migration rather than shipping a readiness answer nobody has checked.
+--
+-- Two conditions, and they are NOT two independent lines of defence -- stated
+-- plainly because it would be easy to read them as such. The second is the AND of
+-- the kind authority, the fingerprint and the gate text, so it already aborts on
+-- everything the first catches. The first earns its place by naming the common
+-- case precisely: "the body I just installed is not the body that was reviewed" is
+-- what an operator needs to read, and the end-to-end failure alone does not say it.
+-- The second has reach the first does not, which is why the order is not reversed:
+-- a kind withdrawn from the authority fails only there.
+--
+-- A third, gate-text-only assertion sat between them and was removed rather than
+-- kept. It could not fire on any input the second does not already reject, and a
+-- mutation confirmed it by deleting the assertion and surviving the entire suite.
+-- An assertion that cannot fail is not defence in depth, it is furniture.
 do $$
 begin
+  if not academy_private.study_adult_managed_body_fingerprint_ok() then
+    raise exception
+      'STUDY_ACADEMIC_READINESS installed body is not the reviewed body';
+  end if;
   if not academy_private.study_academic_record_kind_ready('review') then
     raise exception
       'STUDY_ACADEMIC_READINESS admission gate not recognised by readiness';
@@ -699,6 +800,10 @@ alter function academy_private.study_academic_record_kind_ready(text)
   owner to postgres;
 alter function academy_private.study_adult_managed_record_kind_supported(text)
   owner to postgres;
+alter function academy_private.study_adult_managed_body_fingerprint_ok()
+  owner to postgres;
+alter function academy_private.study_adult_managed_gate_text_ok()
+  owner to postgres;
 alter function public.academy_study_academic_readiness_v1() owner to postgres;
 
 -- The helpers are implementation detail of the readiness function, which runs as
@@ -708,6 +813,12 @@ revoke all on function academy_private.study_academic_function_ready(text)
 revoke all on function academy_private.study_academic_table_ready(text, text[])
   from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_academic_record_kind_ready(text)
+  from public, anon, authenticated, service_role;
+-- The body probes read a security-definer function's source. Nothing client-facing
+-- needs them, and the definition text they inspect is estate shape.
+revoke all on function academy_private.study_adult_managed_body_fingerprint_ok()
+  from public, anon, authenticated, service_role;
+revoke all on function academy_private.study_adult_managed_gate_text_ok()
   from public, anon, authenticated, service_role;
 -- The kind authority is reached only from inside security-definer functions that
 -- already run as postgres, so no client role needs it either. A learner-facing
@@ -746,24 +857,32 @@ set academic_readiness_version = 1,
         'academy_private.study_adult_managed_record_kind_supported',
       'adult_managed_gate_rewritten_from', '20260808150000',
       -- Stated as it is, not as it would be convenient. The per-kind ANSWER comes
-      -- from the authority; establishing that the authority is what the admission
-      -- gate consults is a structural read of the mutation's definition text, and
-      -- that read cannot prove the absence of a later independent restriction
-      -- downstream of the gate. It reads text and position -- it evaluates no
-      -- PL/pgSQL and decides no branch.
+      -- from the authority. That the authority is what the admission gate consults
+      -- is established by pinning the mutation's whole body to a reviewed SHA-256
+      -- fingerprint of its exact stored source, with no normalisation at read time.
       'academic_readiness_kind_probe_reads_definition_text', true,
       'academic_readiness_kind_probe_verifies_admission_gate', true,
-      -- The gate is required at the function's OUTER ENTRY: the body's first
-      -- `begin`. Presence anywhere is not the claim -- a nested block that never
-      -- runs can hold a verbatim copy of the whole gate.
+      'academic_readiness_body_fingerprint_algorithm', 'sha256',
+      'academic_readiness_body_fingerprint_normalises_at_read', false,
+      -- Carriage returns are stripped ONCE, by the rewrite, so the installed body
+      -- does not depend on how the frozen predecessor was checked out.
+      'academic_readiness_body_normalised_at_apply', 'strip-cr',
+      -- The gate text probe is retained but demoted: it is ANDed behind the
+      -- fingerprint and can only close a dependency, never open one.
       'academic_readiness_kind_probe_anchors_outer_entry', true,
+      'academic_readiness_gate_text_probe_is_secondary', true,
       'academic_readiness_kind_probe_executes_plpgsql', false,
-      'academic_readiness_kind_probe_proves_no_downstream_restriction', false
+      -- TRUE as of H5, and it was false before. A restriction inserted downstream
+      -- of an intact gate changes the body, which changes the fingerprint, which
+      -- closes the dependency. What the pin does NOT reach is the bodies of the
+      -- functions this one calls and the triggers on the tables it writes.
+      'academic_readiness_kind_probe_proves_no_downstream_restriction', true,
+      'academic_readiness_body_pin_covers_transitive_callees', false
     ),
     updated_at = clock_timestamp()
 where singleton;
 
 comment on function public.academy_study_academic_readiness_v1() is
-  'Read-only consolidated Study academic readiness. Reports a closed per-dependency status for all seven academic dependencies from catalog metadata, contract metadata and the shared adult-managed record-kind authority: no academic RPC is executed, no row is read, written or counted, and no learner, settings or adult-private content is exposed. Ready means the required server-side contract exists in the expected shape, not that a table name exists. Which record kinds exist is answered by the same function the mutation gate consults, never by a list of readiness'' own; that the gate consults it is established structurally, by requiring the expected admission-gate expression to OPEN the mutation -- to start at the body''s first `begin`, which is the function''s own entry. Presence anywhere in the definition is deliberately not the test, because a nested block that never runs can carry a verbatim copy of the whole gate. This reads definition text and position only; it executes no PL/pgSQL and evaluates no branch, so it cannot prove that no later independent restriction was inserted downstream of that gate -- proving that would need semantic execution of arbitrary PL/pgSQL, which this contract does not and must not perform. Executable by service_role only. Authorizes nothing.';
+  'Read-only consolidated Study academic readiness. Reports a closed per-dependency status for all seven academic dependencies from catalog metadata, contract metadata and the shared adult-managed record-kind authority: no academic RPC is executed, no row is read, written or counted, and no learner, settings or adult-private content is exposed. Ready means the required server-side contract exists in the expected shape, not that a table name exists. Which record kinds exist is answered by the same function the mutation gate consults, never by a list of readiness'' own. That the gate consults it is established by pinning the mutation''s WHOLE body: the exact stored source is hashed with the built-in sha256 and compared against a fingerprint reviewed and written into the migration, with no normalisation at read time, so any byte that differs from the reviewed body closes the dependency. Carriage returns are stripped once, by the migration''s own reconstruction of the body, which is what makes the pin independent of how the frozen predecessor was checked out. The older structural gate-text check is retained only as an ANDed secondary term, so it can close a dependency but never open one. This executes no PL/pgSQL and evaluates no branch; it does not need to, because a downstream restriction changes the body and so changes the fingerprint. What the pin does not reach is the bodies of the functions this one calls and the triggers on the tables it writes, and it rests on SHA-256 collision resistance. Executable by service_role only. Authorizes nothing.';
 
 commit;

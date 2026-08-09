@@ -135,6 +135,30 @@ async function chainWithoutAcademicMigration() {
   return candidate
 }
 
+/**
+ * The whole lineage, academic migration included, with every source rewritten to
+ * one line ending. Used to prove the installed body is checkout-independent
+ * rather than merely LF on the machine that happened to run the suite.
+ */
+async function chainWithLineEnding(ending: '\r\n' | '\n') {
+  const candidate = await PGlite.create()
+  await candidate.exec(bootstrap)
+  for (const source of await sources) {
+    if (!source) continue
+    await candidate.exec(source.replaceAll('\r\n', '\n').replaceAll('\n', ending))
+  }
+  return candidate
+}
+
+/**
+ * The fingerprint of the adult-managed mutation body this migration installs,
+ * written out here independently of the migration that pins it. Two copies that
+ * must agree is the point: a change to the migration's constant alone, without a
+ * corresponding change to the body, fails here.
+ */
+const REVIEWED_BODY_FINGERPRINT =
+  '8e1cf860b98f31e626ae288d6b6cbdc59ad263b3c30118dd600b409a17940989'
+
 const bootstrap = `
   create role anon nologin;
   create role authenticated nologin;
@@ -734,19 +758,31 @@ describe.sequential('consolidated academic readiness contract', () => {
    *
    * Two claims are separate and both are tested. WHICH kinds exist is answered by
    * the authority, and only by it — that is what the withdrawal cases prove. That
-   * the authority is what the mutation's ADMISSION GATE consults is a structural
-   * check over the installed definition, and two weaker versions of that check are
-   * pinned below as failures, per kind. Requiring only the authority's NAME to
-   * appear somewhere is not the claim: a call in a dead branch and a live call
-   * whose result is discarded each satisfy a name search beside a real gate that is
-   * an independent narrower list. Requiring the whole gate expression to appear
-   * ANYWHERE is not the claim either: PL/pgSQL blocks nest, so a block that never
-   * runs can carry a verbatim copy of the entire gate — including the `begin` it
-   * opens with — beside that same narrower list. The gate is therefore required at
-   * the function's outer entry, the body's first `begin`.
+   * the authority is what the mutation's ADMISSION GATE consults is answered by
+   * pinning the mutation's WHOLE body to a reviewed SHA-256 fingerprint of its
+   * exact stored source.
    *
-   * The limit of the structural check is pinned too, as a limit rather than as a
-   * kill: an intact gate followed by a NEW downstream restriction reads ready here.
+   * The history behind that is why the cases below look the way they do. Every
+   * earlier version of this check hand-parsed PL/pgSQL, and every review round
+   * found one more construct the parser did not model: a name search satisfied by
+   * a dead branch or a discarded call; a whole-gate search satisfied by a verbatim
+   * copy inside a nested block; and finally, once the gate was anchored at the
+   * body's first `begin`, whole-gate decoys planted AHEAD of that anchor — in the
+   * declaration section, inside a dollar-quoted default or a double-quoted
+   * identifier, neither of which comment-and-literal stripping removes. All of
+   * those remain below, because they must all still close; but they now close
+   * because the body's bytes changed, not because a rule was added for each.
+   *
+   * The gate-text probe is retained as an ANDed secondary term. It is exercised
+   * directly, by name, rather than only through the RPC — behind a byte-exact
+   * fingerprint every input that would distinguish its branches has already been
+   * refused, which is exactly how a weakened branch survived the previous suite.
+   *
+   * The limit that used to be pinned here — an intact gate followed by a NEW
+   * downstream restriction reading ready — is GONE, and is now pinned as a kill.
+   * The limit that replaces it is narrower and is pinned in its place: a
+   * restriction moved OUTSIDE the body, into a trigger on a table it writes,
+   * leaves these bytes untouched and does still read ready.
    */
   describe('the shared record-kind authority binds mutation and readiness', () => {
     const GUARDIAN_A = '00000000-0000-0000-0000-0000000000a1'
@@ -946,6 +982,13 @@ describe.sequential('consolidated academic readiness contract', () => {
      * Rewrites the live definition step by step and installs the result. A step
      * that matches nothing fails the case rather than silently leaving the real
      * definition in place, which would make the case prove nothing.
+     *
+     * The replacement is a FUNCTION, not a string. A string replacement runs the
+     * decoy through JS's `$`-escape rules, so a `$$` dollar quote in a carrier
+     * collapses to a single `$` and installs something the case did not name —
+     * which reads as "PostgreSQL rejected this construct" rather than as a broken
+     * harness. Matching nothing is a loud failure here; installing the wrong thing
+     * is not, so this is the direction that has to be safe.
      */
     async function redefine(steps: readonly (readonly [string, string])[]) {
       const definition = await database.query<{ body: string }>(
@@ -953,11 +996,37 @@ describe.sequential('consolidated academic readiness contract', () => {
            as body`, [SHARED_ADULT_MANAGED])
       let source = definition.rows[0].body
       for (const [from, to] of steps) {
-        const next = source.replace(from, to)
+        const next = source.replace(from, () => to)
         expect(next, from).not.toBe(source)
         source = next
       }
       await database.exec(source)
+    }
+
+    const FINGERPRINT_PROBE =
+      'academy_private.study_adult_managed_body_fingerprint_ok()'
+    const GATE_TEXT_PROBE = 'academy_private.study_adult_managed_gate_text_ok()'
+
+    /**
+     * Both halves of the body check, asked directly. Reached as the owner, which is
+     * how they are always reached: their only callers are security-definer
+     * functions running as postgres, and no client role may execute them (pinned
+     * separately below).
+     *
+     * Asking them by name is not a convenience. Behind a byte-exact fingerprint the
+     * gate-text probe's branches are unreachable through the RPC — every input that
+     * would distinguish them has already been refused — so a case that only called
+     * the RPC could not tell a working text probe from a broken one.
+     */
+    async function bodyProbes() {
+      const result = await database.query<{
+        fingerprint: boolean; gate_text: boolean
+      }>(`select ${FINGERPRINT_PROBE} as fingerprint,
+                 ${GATE_TEXT_PROBE} as gate_text`)
+      return {
+        fingerprint: result.rows[0].fingerprint,
+        gateText: result.rows[0].gate_text,
+      }
     }
 
     const DEAD_BRANCH: readonly [string, string] = [
@@ -1207,6 +1276,194 @@ describe.sequential('consolidated academic readiness contract', () => {
       })
 
     /**
+     * THE DECLARATION-REGION CARRIERS, which is what defeated the H4 anchor.
+     *
+     * Anchoring the gate at the body's first `begin` moved the sensitive region
+     * rather than removing it: everything AHEAD of that anchor is the declaration
+     * section, and a whole-gate decoy planted there satisfies the position test by
+     * definition. H4 claimed normalisation defended it. Normalisation strips `--`
+     * comments, block comments and SINGLE-quoted literals — so it walks straight
+     * past a dollar-quoted default and past a double-quoted identifier, and both
+     * are legal PL/pgSQL in exactly that position. Measured on the parent commit at
+     * twelve of twelve: the excluded kind refused with STUDY_RECORD_INVALID, the
+     * other two accepted, and readiness reporting `ready` at the dependency and at
+     * the top level.
+     *
+     * Every carrier below closes now, and none of them closes because a rule was
+     * written for it. They close because each one is a byte that the reviewed body
+     * does not contain. The two that H4 already handled — the line comment and the
+     * single-quoted literal — are kept in the same list so the list reads as what
+     * it is: a sweep of the region, not a patch set.
+     */
+    const DECLARATION_ANCHOR = '\n  correlation uuid := gen_random_uuid();'
+
+    /** The whole gate on one line, with literals that normalise to the expected form. */
+    const GATE_ONE_LINE =
+      "begin if auth.uid() is null then raise exception 'X' using errcode = 'Y';"
+      + ' end if; if not academy_private'
+      + '.study_adult_managed_record_kind_supported( p_record_kind ) or'
+      + ' p_expected_revision is null or p_expected_revision < 0 or not'
+      + ' public.academy_study_payload_is_minimized(p_record, 16384) or not'
+      + ' public.academy_study_identifier_is_valid(p_idempotency_key) then'
+      + " raise exception 'Z' using errcode = 'W'; end if;"
+
+    /** Longer than NAMEDATALEN, so the identifier is truncated in the catalog but
+     * survives whole in prosrc — which is what the probe reads. */
+    const OVERLONG = 'z'.repeat(80)
+
+    const DECLARATION_CARRIERS = [
+      ['a line comment', `  -- ${GATE_ONE_LINE}`],
+      ['a block comment', `  /* ${GATE_ONE_LINE} */`],
+      ['a single-quoted default',
+        `  decoy text := '${GATE_ONE_LINE.replaceAll("'", "''")}';`],
+      ['an E-string default',
+        `  decoy text := E'${GATE_ONE_LINE.replaceAll("'", "\\'")}';`],
+      ['a $$ dollar-quoted default', `  decoy text := $$ ${GATE_ONE_LINE} $$;`],
+      ['a $tag$ dollar-quoted default',
+        `  decoy text := $tag$ ${GATE_ONE_LINE} $tag$;`],
+      ['a $_tag123$ dollar-quoted default',
+        `  decoy text := $_tag123$ ${GATE_ONE_LINE} $_tag123$;`],
+      ['a double-quoted identifier', `  "${GATE_ONE_LINE}" text;`],
+      ['a double-quoted identifier with escaped quotes',
+        `  "${GATE_ONE_LINE} ""q""" text;`],
+      ['a quoted identifier longer than 63 bytes',
+        `  "${OVERLONG} ${GATE_ONE_LINE}" text;`],
+      ['a multi-line default expression',
+        `  decoy text := $tag$\n${GATE_ONE_LINE}\n$tag$\n    || $tag$ tail $tag$;`],
+      ['a nested DECLARE inside a dollar quote',
+        `  decoy text := $tag$ declare x int; ${GATE_ONE_LINE} $tag$;`],
+      ['CRLF inside a dollar-quoted default',
+        `  decoy text := $tag$ ${GATE_ONE_LINE.replaceAll('; ', ';\r\n')} $tag$;`],
+      ['a block label inside a dollar quote',
+        `  decoy text := $tag$ <<outer>> ${GATE_ONE_LINE} $tag$;`],
+    ] as const
+
+    const DECLARATION_CASES = DECLARATION_CARRIERS.flatMap(([label, carrier]) =>
+      (Object.keys(KIND_DEPENDENCY) as ManagedKind[])
+        .map((kind) => [label, kind, carrier] as const))
+
+    it.each(DECLARATION_CASES)(
+      'a whole gate carried in the declarations by %s cannot admit %s',
+      async (_label, excluded, carrier) => {
+        await reverted(async () => {
+          await redefine([
+            [REAL_GATE, narrowGate(excluded)],
+            [DECLARATION_ANCHOR, `${DECLARATION_ANCHOR}\n${carrier}`],
+          ])
+          // The narrowing is real: this kind is refused, the other two still work.
+          const refused = await upsert(excluded)
+          expect(refused.accepted).toBe(false)
+          expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
+          for (const other of (Object.keys(KIND_DEPENDENCY) as ManagedKind[])
+            .filter((candidate) => candidate !== excluded)) {
+            expect((await upsert(other)).accepted).toBe(true)
+          }
+          expect((await bodyProbes()).fingerprint).toBe(false)
+          expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+            'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+        })
+      })
+
+    /**
+     * GATE_AT ZERO, forced directly.
+     *
+     * A body with no recognised outer gate must be NOT READY. The gate-text probe
+     * says so by an explicit early return, and that early return survived the H4
+     * suite unpinned: weakened to `return true`, a body carrying no `begin` token
+     * at all — a `language sql` body, say — read as recognised, because
+     * `left(body, -1)` has nothing to catch.
+     *
+     * It cannot be forced through the RPC, because the fingerprint refuses all of
+     * these first. So it is forced by name. Each case asserts the text probe's own
+     * answer as well as the closed dependency, which is what makes the weakened
+     * branch fail here rather than pass unnoticed behind a dominating AND.
+     */
+    it.each([
+      ['a language sql body, which carries no `begin` token', `
+        create or replace function public.academy_study_upsert_adult_managed_record(
+          p_record_kind text, p_record jsonb,
+          p_expected_revision bigint, p_idempotency_key text
+        ) returns jsonb language sql security definer
+        set search_path = pg_catalog as $decoy$
+          select case when p_record_kind = 'review'
+            then (1 / 0)::text::jsonb else '{}'::jsonb end
+        $decoy$;`],
+      ['a SQL-standard BEGIN ATOMIC body, whose prosrc is null', `
+        create or replace function public.academy_study_upsert_adult_managed_record(
+          p_record_kind text, p_record jsonb,
+          p_expected_revision bigint, p_idempotency_key text
+        ) returns jsonb language sql security definer
+        set search_path = pg_catalog
+        begin atomic select '{}'::jsonb; end;`],
+      ['a plpgsql body with no admission gate at all', `
+        create or replace function public.academy_study_upsert_adult_managed_record(
+          p_record_kind text, p_record jsonb,
+          p_expected_revision bigint, p_idempotency_key text
+        ) returns jsonb language plpgsql security definer
+        set search_path = pg_catalog as $decoy$
+        begin return '{}'::jsonb; end;
+        $decoy$;`],
+    ] as const)('reports not-ready for %s', async (_label, ddl) => {
+      await reverted(async () => {
+        await database.exec(ddl)
+        expect(await bodyProbes()).toEqual({ fingerprint: false, gateText: false })
+        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+          'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+      })
+    })
+
+    /**
+     * THE SECONDARY AND, forced.
+     *
+     * The gate-text probe is retained precisely for the case where the fingerprint
+     * is wrong — a reviewed constant re-pinned, by accident, to a body whose gate is
+     * gone. That case cannot arise naturally, because a fingerprint that agrees is
+     * a body that is the reviewed one; so it is staged, by making the fingerprint
+     * probe lie. With it lying, a gateless body must still be refused, and it is
+     * the AND in study_academic_record_kind_ready that does the refusing.
+     *
+     * Without this, dropping `and ...gate_text_ok()` from that expression would
+     * change nothing any other case can see.
+     */
+    it('closes on a gateless body even when the fingerprint probe is wrong',
+      async () => {
+        await reverted(async () => {
+          await database.exec(`
+            create or replace function ${FINGERPRINT_PROBE.replace('()', '')}()
+            returns boolean language sql stable
+            set search_path = pg_catalog as $lie$ select true $lie$;
+            create or replace function
+              public.academy_study_upsert_adult_managed_record(
+                p_record_kind text, p_record jsonb,
+                p_expected_revision bigint, p_idempotency_key text
+              ) returns jsonb language plpgsql security definer
+              set search_path = pg_catalog as $decoy$
+              begin return '{}'::jsonb; end;
+              $decoy$;
+          `)
+          // The fingerprint now agrees with a body it has never seen...
+          expect(await bodyProbes()).toEqual({ fingerprint: true, gateText: false })
+          // ...and the dependency closes anyway.
+          expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+            'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+        })
+      })
+
+    /**
+     * The reviewed body is not one of those degenerate cases, so the assertions
+     * above are about something. Without this, dropping prosrc entirely from the
+     * lineage would make every case above pass for the wrong reason.
+     */
+    it('holds a retrievable source for the reviewed body', async () => {
+      const result = await database.query<{ null_source: boolean; length: number }>(
+        `select prosrc is null as null_source, length(prosrc) as length
+         from pg_proc where oid = to_regprocedure($1)`, [SHARED_ADULT_MANAGED])
+      expect(result.rows[0].null_source).toBe(false)
+      expect(result.rows[0].length).toBeGreaterThan(1000)
+      expect(await bodyProbes()).toEqual({ fingerprint: true, gateText: true })
+    })
+
+    /**
      * The authority's name assembled from concatenated literals. Literals are
      * removed before the search, so nothing of it survives -- and it was never the
      * gate expression in the first place.
@@ -1250,21 +1507,22 @@ describe.sequential('consolidated academic readiness contract', () => {
     })
 
     /**
-     * THE DOCUMENTED LIMIT, pinned as a limit and not as a kill.
+     * WAS THE DOCUMENTED LIMIT UNTIL H5; NOW A KILL.
      *
-     * The gate this contract verifies is intact and does route through the shared
-     * authority; a new, independent restriction has been inserted downstream of it.
-     * The mutation refuses review at runtime and readiness reports review-queue
-     * ready. That is not a defect in the check — it is the boundary of what a
-     * read-only structural probe can establish. Closing it would require semantic
-     * execution of arbitrary PL/pgSQL, or calling the real mutation from inside a
-     * readiness probe, and this RPC is read-only by contract.
+     * The gate is intact and does route through the shared authority; a new,
+     * independent restriction is inserted downstream of it. Until H5 this read
+     * ready, and that was documented as inherent to read-only structural readiness.
+     * It was not inherent — it was a property of checking a fragment instead of the
+     * whole. The restriction changes the body, the body's fingerprint changes with
+     * it, and the dependency closes.
      *
-     * This case exists so the limit cannot be quietly lost: if a later change makes
-     * readiness close here, this case fails and the claim gets restated honestly
-     * rather than the documentation drifting away from the code.
+     * The second assertion is what makes this case worth keeping rather than
+     * merely flipping: the gate-text probe still answers TRUE here, because the
+     * gate genuinely is intact and at the entry. Only the fingerprint closes this,
+     * so this is the case that proves the fingerprint is load-bearing rather than
+     * a second opinion about something the text probe already caught.
      */
-    it('cannot see a NEW restriction added downstream of an intact gate', async () => {
+    it('closes on a NEW restriction added downstream of an intact gate', async () => {
       await reverted(async () => {
         await redefine([[
           "  target_student_id := (p_record ->> 'student_id')::uuid;",
@@ -1275,6 +1533,47 @@ describe.sequential('consolidated academic readiness contract', () => {
         const refused = await upsert('review')
         expect(refused.accepted).toBe(false)
         expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
+        expect(await bodyProbes()).toEqual({ fingerprint: false, gateText: true })
+        expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
+          'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
+      })
+    })
+
+    /**
+     * THE LIMIT THAT REPLACES IT, pinned as a limit and not as a kill.
+     *
+     * The fingerprint pins the mutation's OWN source. A restriction moved outside
+     * that source — here, a trigger on a table the mutation writes — leaves every
+     * byte of the pinned body alone. Review is refused at runtime and readiness
+     * reports review-queue ready.
+     *
+     * This is a real boundary, not an oversight: the pin would have to extend to
+     * the transitive closure of everything the body reaches to close it, and each
+     * such extension is another expectation that can rot. It is stated in the
+     * migration and in the security manifest as
+     * academic_readiness_body_pin_covers_transitive_callees: false.
+     *
+     * The case exists so the limit cannot be quietly lost or quietly widened: if a
+     * later change makes readiness close here, this fails and the claim gets
+     * restated rather than the documentation drifting away from the code.
+     */
+    it('cannot see a restriction moved OUTSIDE the pinned body', async () => {
+      await reverted(async () => {
+        await database.exec(`
+          create function academy_private.probe_block_reviews() returns trigger
+          language plpgsql as $t$
+          begin
+            raise exception 'STUDY_RECORD_INVALID' using errcode = '22023';
+          end; $t$;
+          create trigger probe_block_reviews
+            before insert on public.academy_study_reviews
+            for each row execute function academy_private.probe_block_reviews();
+        `)
+        const refused = await upsert('review')
+        expect(refused.accepted).toBe(false)
+        expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
+        // The body is untouched, so both probes agree it is the reviewed one.
+        expect(await bodyProbes()).toEqual({ fingerprint: true, gateText: true })
         expect((await academicReadiness()).dependencies).toEqual(allReadyExcept())
       })
     })
@@ -1327,6 +1626,90 @@ describe.sequential('consolidated academic readiness contract', () => {
       expect(result.rows[0].owner).toBe('postgres')
       expect(result.rows[0].volatility).toBe('i')
       expect(result.rows[0].config).toEqual(['search_path=pg_catalog'])
+    })
+
+    /**
+     * The two body probes read a security-definer function's source, which is
+     * estate shape. They carry the same posture as every other private helper here.
+     */
+    it.each([FINGERPRINT_PROBE, GATE_TEXT_PROBE])(
+      '%s is postgres-owned, stable, definer, pinned, and client-unreachable',
+      async (signature) => {
+        const result = await database.query<{
+          owner: string; volatility: string; definer: boolean
+          config: string[] | null
+        }>(`select pg_get_userbyid(proowner) as owner, provolatile as volatility,
+              prosecdef as definer, proconfig as config
+            from pg_proc where oid = to_regprocedure($1)`, [signature])
+        expect(result.rows[0].owner).toBe('postgres')
+        expect(result.rows[0].volatility).toBe('s')
+        expect(result.rows[0].definer).toBe(true)
+        expect(result.rows[0].config).toEqual(['search_path=pg_catalog'])
+        for (const role of ['anon', 'authenticated', 'service_role', 'public']) {
+          expect(await hasExecute(role, signature)).toBe(false)
+        }
+      })
+
+    /**
+     * The digest primitive, pinned as an available fact rather than an assumption.
+     *
+     * A body-integrity gate built on pgcrypto would have failed closed forever on
+     * this lineage: pgcrypto is NOT installed. sha256 is core pg_catalog from
+     * PostgreSQL 11 onwards, which is why it is what the probe uses. The NIST
+     * vector is asserted so that a primitive which exists but does not compute
+     * SHA-256 cannot pass for one that does.
+     */
+    it('rests on a built-in sha256, not on an extension', async () => {
+      const installed = await database.query<{ extname: string }>(
+        'select extname from pg_extension')
+      expect(installed.rows.map((row) => row.extname)).not.toContain('pgcrypto')
+      const digest = await database.query<{ vector: string; empty: string }>(
+        `select encode(sha256(convert_to('abc', 'UTF8')), 'hex') as vector,
+                encode(sha256(convert_to('', 'UTF8')), 'hex') as empty`)
+      expect(digest.rows[0].vector).toBe(
+        'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad')
+      // An unretrievable body cannot coincide with the pin by hashing to nothing.
+      expect(digest.rows[0].empty).not.toBe(digest.rows[0].vector)
+    })
+
+    /**
+     * CHECKOUT INDEPENDENCE, which is what makes a byte-exact pin usable at all.
+     *
+     * The frozen predecessor is checked out with whatever line endings the platform
+     * gives it — CRLF here — so the body Postgres stores before the rewrite is not
+     * the same bytes everywhere. The migration reconstructs the body and strips
+     * carriage returns while doing so, which is the ONE normalisation in the whole
+     * design and the reason the runtime probe can afford to do none.
+     *
+     * Asserting "this checkout has CRLF" would only be true on this platform. So
+     * the lineage is built TWICE from the same sources, once with every line ending
+     * forced to CRLF and once to LF, and the two installed bodies are required to
+     * be byte-identical and to carry the pinned digest. That is the claim itself,
+     * and it holds wherever the suite runs.
+     */
+    it('installs a body whose bytes do not depend on the checkout', async () => {
+      const [crlf, lf] = await Promise.all(
+        (['\r\n', '\n'] as const).map(async (ending) => {
+          const candidate = await chainWithLineEnding(ending)
+          try {
+            const result = await candidate.query<{
+              carriage_returns: number; fingerprint: string
+            }>(`select length(prosrc) - length(replace(prosrc, chr(13), ''))
+                    as carriage_returns,
+                  encode(sha256(convert_to(prosrc, 'UTF8')), 'hex') as fingerprint
+                from pg_proc where oid = to_regprocedure($1)`,
+              [SHARED_ADULT_MANAGED])
+            return result.rows[0]
+          } finally {
+            await candidate.close()
+          }
+        }))
+
+      expect(crlf.fingerprint).toBe(lf.fingerprint)
+      expect(crlf.carriage_returns).toBe(0)
+      expect(lf.carriage_returns).toBe(0)
+      // The pinned constant, spelled out here independently of the migration.
+      expect(crlf.fingerprint).toBe(REVIEWED_BODY_FINGERPRINT)
     })
 
     it('left the frozen mutation function with no literal kind list of its own',
@@ -1419,6 +1802,31 @@ describe.sequential('consolidated academic readiness contract', () => {
         academic_readiness_version: 1,
         academic_readiness_read_only: true,
         academic_readiness_execute_role: 'service_role',
+      })
+    })
+
+    /**
+     * The manifest states what the kind probe does and does not establish, and the
+     * two claims H5 changed are pinned here rather than left to prose.
+     *
+     * proves_no_downstream_restriction went FALSE -> TRUE, because a restriction
+     * inserted downstream now changes the fingerprint. It is asserted alongside the
+     * limit that replaces it — the pin does not cover transitive callees — so the
+     * pair cannot drift apart into a claim that is stronger than the code.
+     */
+    it('states what the body pin establishes and what it does not', async () => {
+      const result = await database.query<{ manifest: Record<string, unknown> }>(
+        `select security_manifest as manifest
+         from academy_private.study_persistence_metadata where singleton`)
+      expect(result.rows[0].manifest).toMatchObject({
+        academic_readiness_body_fingerprint_algorithm: 'sha256',
+        academic_readiness_body_fingerprint_normalises_at_read: false,
+        academic_readiness_body_normalised_at_apply: 'strip-cr',
+        academic_readiness_kind_probe_anchors_outer_entry: true,
+        academic_readiness_gate_text_probe_is_secondary: true,
+        academic_readiness_kind_probe_executes_plpgsql: false,
+        academic_readiness_kind_probe_proves_no_downstream_restriction: true,
+        academic_readiness_body_pin_covers_transitive_callees: false,
       })
     })
 
@@ -1522,6 +1930,28 @@ describe.sequential('consolidated academic readiness contract', () => {
     })
 
     /**
+     * Creation, never replacement, extends to the two body probes this migration
+     * adds. A pre-existing function wearing either name would otherwise be silently
+     * redefined — or, worse, left in place by a migration that assumed it wrote it.
+     */
+    it.each([
+      'academy_private.study_adult_managed_body_fingerprint_ok',
+      'academy_private.study_adult_managed_gate_text_ok',
+    ])('refuses when %s already exists', async (name) => {
+      const database2 = await chainWithoutAcademicMigration()
+      try {
+        await database2.exec(`
+          create function ${name}() returns boolean
+          language sql stable as $decoy$ select true $decoy$;
+        `)
+        await expect(database2.exec(await academicMigrationSource()))
+          .rejects.toThrow(/object collision/)
+      } finally {
+        await database2.close()
+      }
+    })
+
+    /**
      * The gate rewrite is a substitution, so its failure mode is matching nothing.
      * Silently leaving the literal list behind would restore exactly the drift this
      * migration exists to remove, while every test that only checks the authority
@@ -1553,20 +1983,32 @@ describe.sequential('consolidated academic readiness contract', () => {
       })
 
     /**
-     * The readiness probe carries a written-out copy of the prologue the rewrite
-     * installs, and a hand-written expectation is exactly the kind of thing that
-     * drifts. The migration therefore asks the probe, immediately after rewriting,
-     * whether it recognises what was installed — and aborts if it does not.
+     * THE APPLY-TIME CLOSED LOOP.
      *
-     * Both halves of the anchor are perturbed, because each has its own way of
-     * drifting. Interposing a harmless statement breaks contiguity. Wrapping the
-     * prologue in a nested block leaves it contiguous and leaves the mutation's
-     * behaviour alone, and moves it off the function's entry. Either way the
-     * substitution the rewrite performs still matches, so only the closed loop is
-     * left to catch it — and without that assertion this migration would apply and
-     * ship a probe that closes all three adult-managed dependencies forever.
+     * The migration carries two hand-written expectations about the body it
+     * installs — the reviewed fingerprint and the expected gate text — and a
+     * hand-written expectation is exactly the kind of thing that drifts. So after
+     * rewriting, the migration hashes what it actually installed and refuses to
+     * commit if it is not the reviewed body.
+     *
+     * The perturbations are applied to the predecessor BEFORE the migration runs,
+     * so in each case the gate substitution still matches and the rewrite still
+     * succeeds. Only the closed loop is left to catch them. The first is a single
+     * harmless byte — a space — which changes no behaviour whatsoever and must
+     * still abort, because "conservative" means the migration does not get to
+     * decide which drift was harmless. The rest move or narrow real logic.
+     *
+     * Without the assertion each of these applies cleanly and ships a contract
+     * whose expectations do not describe what is installed; that is pinned by
+     * mutation rather than asserted here.
      */
     it.each([
+      ['one harmless byte of whitespace',
+        [['\nbegin\n  if auth.uid() is null then',
+          '\nbegin\n  if auth.uid() is null  then']]],
+      ['a comment nobody reads',
+        [['\nbegin\n  if auth.uid() is null then',
+          '\nbegin\n  -- harmless\n  if auth.uid() is null then']]],
       ['a statement interposed ahead of the gate',
         [['\nbegin\n  if auth.uid() is null then',
           '\nbegin\n  perform 1;\n  if auth.uid() is null then']]],
@@ -1576,7 +2018,12 @@ describe.sequential('consolidated academic readiness contract', () => {
         ["\n  end if;\n  target_student_id := (p_record ->> 'student_id')::uuid;",
           '\n  end if;\n  end;\n'
           + "  target_student_id := (p_record ->> 'student_id')::uuid;"]]],
-    ] as const)('refuses when the installed gate is not the one readiness expects: %s',
+      ['a semantic restriction downstream of the gate',
+        [["  target_student_id := (p_record ->> 'student_id')::uuid;",
+          "  if p_record_kind = 'review' then\n"
+          + "    raise exception 'STUDY_RECORD_INVALID' using errcode = '22023';\n"
+          + "  end if;\n  target_student_id := (p_record ->> 'student_id')::uuid;"]]],
+    ] as const)('aborts when the body it installs is not the reviewed body: %s',
       async (_label, steps) => {
         const database2 = await chainWithoutAcademicMigration()
         try {
@@ -1585,16 +2032,19 @@ describe.sequential('consolidated academic readiness contract', () => {
              as body`, [SHARED_ADULT_MANAGED])
           let moved = definition.rows[0].body
           for (const [from, to] of steps) {
-            const next = moved.replace(from, to)
+            // Function replacement: a plain string would let `$$`/`$&` in a
+            // perturbation be eaten as a JS replacement escape, silently
+            // installing something other than what the case names.
+            const next = moved.replace(from, () => to)
             expect(next, from).not.toBe(moved)
             moved = next
           }
           expect(moved).not.toBe(definition.rows[0].body)
           await database2.exec(moved)
           // The intentional guard, not an environment failure: the migration's own
-          // readiness assertion is what must reject this, by name.
+          // closed loop is what must reject this, by name.
           await expect(database2.exec(await academicMigrationSource()))
-            .rejects.toThrow(/not recognised by readiness/)
+            .rejects.toThrow(/installed body is not the reviewed body/)
         } finally {
           await database2.close()
         }
