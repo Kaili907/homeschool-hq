@@ -32,8 +32,8 @@ const model = buildEnginePerformanceProjection(rows, {
   },
 })
 
-function readyMarkup() {
-  return renderToStaticMarkup(<EnginePerformanceDashboard state={{ status: 'ready', model }} selectedEngine="study" selectedWindow="30d" selectedVersion={null} />)
+function readyMarkup(readyModel = model) {
+  return renderToStaticMarkup(<EnginePerformanceDashboard state={{ status: 'ready', model: readyModel }} selectedEngine="study" selectedWindow="30d" selectedVersion={null} />)
 }
 
 describe('EnginePerformanceDashboard', () => {
@@ -69,6 +69,28 @@ describe('EnginePerformanceDashboard', () => {
     expect(html).toContain('20 samples')
     expect(html).toContain('no version is declared “better.”')
     expect(html).not.toMatch(/winner|rank engines/i)
+  })
+
+  it('keeps bounded and rejected-evidence notices visible when a malformed row reaches the raw limit', () => {
+    const boundedRows = [
+      ...Array.from({ length: 499 }, (_, index) => event(1_000 + index, 'start')),
+      { malformed: true },
+    ]
+    const boundedModel = buildEnginePerformanceProjection(boundedRows, {
+      generatedAt: '2026-08-31T12:00:00.000Z',
+      filters: {
+        start: '2026-08-01T12:00:00.000Z', end: '2026-08-31T12:00:00.000Z',
+        engine: null, engineVersion: null, courseRef: null, unitRef: null,
+      },
+    })
+    const html = readyMarkup(boundedModel)
+
+    expect(boundedModel.source).toMatchObject({
+      rawRowCount: 500, acceptedEventCount: 499, rejectedRowCount: 1,
+      limitReached: true, completeness: 'partial',
+    })
+    expect(html).toContain('canonical 500-event read limit was reached')
+    expect(html).toContain('Some malformed stored evidence was rejected')
   })
 
   it('provides loading, unauthorized, and safe error states with accessibility landmarks', () => {
