@@ -87,6 +87,11 @@
   to = "/.netlify/functions/study-academic-runtime"
   status = 200
 
+[[redirects]]
+  from = "/api/parent/installations/*"
+  to = "/.netlify/functions/parent-installations"
+  status = 200
+
 # ---- SPA fallback: every other path serves the cached app shell ----
 [[redirects]]
   from = "/*"
