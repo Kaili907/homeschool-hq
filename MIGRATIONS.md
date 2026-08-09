@@ -190,7 +190,8 @@ a service-role-only ADMIN-0 v2 projection. Identical execution facts replay;
 conflicting facts raise `reconciliation_conflict`. Money is transported as
 exact decimal strings, and browser roles receive no table or RPC access. The
 migration seeds no production price. Cache read/write separation, identity and
-household attribution, cost kinds, exact arithmetic, interval boundaries,
+household attribution, optional request-unit components, mixed request/usage
+pricing, cost kinds, exact arithmetic, interval boundaries,
 version snapshots, replay/conflict behavior, privacy, and access denial are validated in
 `supabase/academy-provider-usage-cost-ledger.db.test.ts`. Operational behavior
 and required production pricing configuration are documented in

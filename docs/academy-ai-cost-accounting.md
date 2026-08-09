@@ -42,6 +42,15 @@ The independently priced units are `input_token`, `output_token`,
 provider/product/model/tier dimensions, interval, USD currency, unit size,
 integer-micros price, quantity, and component result.
 
+The trusted request quantity is the ledger's server-owned `requestCount`, which
+is exactly one for each recorded provider execution. When one effective
+`request` rate exists, its component is added to any token or character
+components. A missing request rate is optional and contributes nothing; it does
+not make otherwise complete token/character pricing unavailable. By contrast,
+every positive provider-reported usage quantity still requires exactly one
+matching effective rate. An ambiguous request rate makes the whole calculated
+cost unavailable rather than selecting or partially totaling a rate.
+
 SQL uses arbitrary-precision intermediates and component-wise half-up rounding:
 
 ```text
@@ -74,7 +83,7 @@ components. A rejection or HTTP 429 alone does not prove that outcome; provider
 throttles and uncertain failures use `billingDisposition: unknown` and null
 unavailable cost. Accepted responses with trusted quantities remain billable
 even if response validation later fails. The gateway performs no provider
-retry.
+retry. Merely configuring a request rate never changes billing disposition.
 
 Repeating an execution key with identical immutable facts returns the existing
 record as a replay. Reusing it with different facts raises
