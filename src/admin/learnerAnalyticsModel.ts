@@ -19,6 +19,7 @@ import {
   type ISODate,
   type Profile,
 } from '../types'
+import type { AdminCapability } from './contracts'
 
 export const LEARNERS_READ_CAPABILITY = 'learners:read' as const
 
@@ -558,7 +559,7 @@ export type LearnerAnalyticsAuthorization =
   | { readonly status: 'unauthorized'; readonly reasonCode?: string }
   | {
       readonly status: 'authorized'
-      readonly capabilities: readonly string[]
+      readonly capabilities: readonly AdminCapability[]
     }
 
 export interface LearnerAnalyticsReadSource {

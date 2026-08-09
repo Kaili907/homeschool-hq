@@ -24,7 +24,7 @@ async function createDatabase() {
     insert into public.academy_households (id, status) values ('${HOUSEHOLD_ID}', 'active');
   `)
   const migration = await readFile(
-    new URL('./migrations/20260808120000_academy_provider_usage_cost_ledger.sql', import.meta.url),
+    new URL('./migrations/20260808122000_academy_provider_usage_cost_ledger.sql', import.meta.url),
     'utf8',
   )
   await database.exec(migration)

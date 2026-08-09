@@ -115,20 +115,20 @@
       "supersessionStatus": "current"
     },
     {
-      "version": "20260808120000",
-      "filename": "20260808120000_academy_operational_events.sql",
-      "sha256": "f5edffe403dad23d51e2be9a0806ba0ee9cd6e0562467ab7e51eceaee543f7aa",
-      "dependency": "20260801190000_academy_study_final_production_reconciliation.sql",
+      "version": "20260808121000",
+      "filename": "20260808121000_academy_operational_events.sql",
+      "sha256": "50e8f86bd76cfa049accf6c9ed0ecac46a73589147870d3c93dd268701ef3a66",
+      "dependency": "20260808120000_academy_admin_authorization.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-operational-telemetry-v2",
       "supersessionStatus": "current"
     },
     {
-      "version": "20260808120000",
-      "filename": "20260808120000_academy_provider_usage_cost_ledger.sql",
+      "version": "20260808122000",
+      "filename": "20260808122000_academy_provider_usage_cost_ledger.sql",
       "sha256": "3ad31f1ab79185a87cbf5cb13899a2c0a0bdcf40799dbebd17c3d617e71c78a9",
-      "dependency": "20260801190000_academy_study_final_production_reconciliation.sql",
+      "dependency": "20260808121000_academy_operational_events.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-provider-usage-cost-ledger-v1",

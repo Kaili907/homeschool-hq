@@ -4,19 +4,28 @@ import {
   type CurriculumCatalog,
   type CurriculumLessonDetail,
 } from './contracts'
+import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
 
 export type CurriculumBrowserFetch = (
   input: string,
   init: RequestInit,
 ) => Promise<Pick<Response, 'ok' | 'status' | 'json'>>
 
-async function getJson<T>(fetcher: CurriculumBrowserFetch, path: string): Promise<T> {
+async function getJson<T>(
+  fetcher: CurriculumBrowserFetch,
+  getAccessToken: () => Promise<string | null>,
+  path: string,
+): Promise<T> {
   let response: Pick<Response, 'ok' | 'status' | 'json'>
   try {
+    const accessToken = await getAccessToken()
+    if (!accessToken) throw new CurriculumSourceError('unavailable', 'Administrator authorization is unavailable')
     response = await fetcher(path, {
       method: 'GET',
-      credentials: 'include',
-      headers: { Accept: 'application/json' },
+      credentials: 'omit',
+      cache: 'no-store',
+      referrerPolicy: 'no-referrer',
+      headers: { Accept: 'application/json', Authorization: `Bearer ${accessToken}` },
     })
   } catch {
     throw new CurriculumSourceError('unavailable', 'The authorized curriculum service is unavailable')
@@ -43,11 +52,13 @@ async function getJson<T>(fetcher: CurriculumBrowserFetch, path: string): Promis
 export function createAdminCurriculumHttpSource(
   fetcher: CurriculumBrowserFetch = fetch,
   basePath = '/api/admin/curriculum',
+  getAccessToken: () => Promise<string | null> = getGatewayAccessToken,
 ): CurriculumBrowserSource {
   return {
-    loadCatalog: () => getJson<CurriculumCatalog>(fetcher, `${basePath}/catalog`),
+    loadCatalog: () => getJson<CurriculumCatalog>(fetcher, getAccessToken, `${basePath}/catalog`),
     loadLesson: (lessonId) => getJson<CurriculumLessonDetail>(
       fetcher,
+      getAccessToken,
       `${basePath}/lessons/${encodeURIComponent(lessonId)}`,
     ),
   }

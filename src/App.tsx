@@ -72,6 +72,7 @@ import {
   syncAcademyPath,
   type AcademyRoute,
 } from './academy/academyRoute'
+import { isAdminConsolePath } from './admin/adminRoute'
 import {
   buildHostStudyContext,
   deriveStudyHouseholdRef,
@@ -109,6 +110,10 @@ const AcademyRouter = lazy(() =>
   import('./components/academy/AcademyRouter').then((module) => ({ default: module.AcademyRouter })),
 )
 
+const AdminConsoleRoute = lazy(() =>
+  import('./components/admin/AdminConsoleRoute').then((module) => ({ default: module.AdminConsoleRoute })),
+)
+
 // MOUNT-G5-MATH: the Grade 5 math practice surface. Lazy for the same reason as
 // the academy chunk — the ten unit generators load only when an enabled grade-5
 // profile opens the surface, never on initial application load.
@@ -141,6 +146,7 @@ type Screen =
   | { kind: 'studySession'; blockRef: string; learnerRef: string }
   | { kind: 'academy'; route: AcademyRoute }
   | { kind: 'g5MathPractice' }
+  | { kind: 'admin' }
 
 export default function App() {
   const loaded = useMemo(loadAppState, [])
@@ -175,6 +181,9 @@ export default function App() {
   // on the study surface. No active profile or flag-off falls through to the
   // picker/normal app (the loader guarantees a non-null activeProfileId exists).
   const [screen, setScreen] = useState<Screen>(() => {
+    // Admin routing must win before the learner Academy parser. Server-resolved
+    // authorization inside AdminConsoleRoute remains the actual access gate.
+    if (isAdminConsolePath(window.location.pathname)) return { kind: 'admin' }
     if (studyEnabled && loaded.state.activeProfileId && isStudyEnginePath(window.location.pathname)) {
       return { kind: 'studyDashboard' }
     }
@@ -426,6 +435,10 @@ export default function App() {
   }
 
   // ---------- profile-free screens ----------
+
+  if (screen.kind === 'admin') {
+    return <Suspense fallback={<main aria-busy="true">Verifying administrator access.</main>}><AdminConsoleRoute /></Suspense>
+  }
 
   if (screen.kind === 'picker') {
     return (

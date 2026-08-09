@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {
+  ADMIN_ENGINE_IDS,
   DEFAULT_SAFETY_EVENT_FILTER,
   buildSafetyOperationsModel,
   canonicalSafetyReasonCode,
@@ -189,6 +190,11 @@ function AuthorizedSafetyOperations({ readState }: { readState: Extract<SafetyOp
                   <Detail label="Canonical reason code" value={reasonCode} code />
                   <Detail label="Safe presentation" value={safeSafetyReasonMessage(reasonCode)} />
                   <Detail label="Current state" value={STATE_LABELS[event.state]} />
+                  {event.versionSnapshot && <>
+                    <Detail label="App version" value={event.versionSnapshot.appVersion} />
+                    <Detail label="Engine version" value={event.versionSnapshot.engineVersion} />
+                    <Detail label="Curriculum version" value={event.versionSnapshot.curriculumVersion ?? 'Not applicable'} />
+                  </>}
                   <Detail label="Resolution status" value={RESOLUTION_LABELS[event.resolution.state]} />
                   {event.resolution.resolvedAt && <Detail label="Resolved at" value={formatTime(event.resolution.resolvedAt)} />}
                   {event.resolution.authorizedAdultRef && <Detail label="Authorized adult reference" value={event.resolution.authorizedAdultRef} />}
@@ -223,7 +229,7 @@ function SafetyFilters({ filter, onChange }: { filter: SafetyEventFilter; onChan
         <option value="all">All states</option>{Object.entries(STATE_LABELS).map(([value, label]) => <option value={value} key={value}>{label}</option>)}
       </select></label>
       <label>Engine<select value={filter.engine} onChange={(event) => onChange({ ...filter, engine: event.target.value as SafetyEventFilter['engine'] })}>
-        <option value="all">All engines</option><option value="study">Study</option><option value="tutor">Tutor</option><option value="gateway">Gateway</option>
+        <option value="all">All engines</option>{ADMIN_ENGINE_IDS.map((engine) => <option value={engine} key={engine}>{engineLabel(engine)}</option>)}
       </select></label>
       <label>Evidence<select value={filter.category} onChange={(event) => onChange({ ...filter, category: event.target.value as SafetyEventFilter['category'] })}>
         <option value="all">All evidence</option>{Object.entries(CATEGORY_LABELS).map(([value, label]) => <option value={value} key={value}>{label}</option>)}
@@ -236,8 +242,8 @@ function Detail({ label, value, code = false }: { label: string; value: string; 
   return <div><dt>{label}</dt><dd>{code ? <code>{value}</code> : value}</dd></div>
 }
 
-function engineLabel(engine: 'study' | 'tutor' | 'gateway'): string {
-  return engine === 'study' ? 'Study' : engine === 'tutor' ? 'Tutor' : 'Gateway'
+function engineLabel(engine: (typeof ADMIN_ENGINE_IDS)[number]): string {
+  return engine[0].toUpperCase() + engine.slice(1)
 }
 
 function formatTime(value: string): string {

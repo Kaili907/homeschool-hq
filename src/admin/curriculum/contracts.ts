@@ -6,7 +6,7 @@ export type CurriculumGrade = 5 | 7 | 8
 export type CurriculumReadAuthorization =
   | { readonly status: 'checking' }
   | { readonly status: 'denied'; readonly message?: string }
-  | { readonly status: 'authorized'; readonly capabilities: readonly string[] }
+  | { readonly status: 'authorized'; readonly capabilities: readonly AdminCapability[] }
 
 export interface CurriculumSourceIdentity {
   readonly packageId: string
@@ -151,3 +151,4 @@ export class CurriculumSourceError extends Error {
     this.code = code
   }
 }
+import type { AdminCapability } from '../contracts'

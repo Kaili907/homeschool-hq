@@ -37,6 +37,16 @@ or failed lookups. The browser receives only contract version, safe state, role,
 and capabilities. Validate locally with `npm run test:admin-auth`. This migration
 has not been applied to a hosted Supabase project.
 
+The integrated ADMIN-R1 migration order is:
+
+1. `20260808120000_academy_admin_authorization.sql`
+2. `20260808121000_academy_operational_events.sql`
+3. `20260808122000_academy_provider_usage_cost_ledger.sql`
+
+The telemetry manifest entry depends on authorization, and the provider
+usage/cost entry depends on telemetry. These unique versions replace the
+parallel-branch timestamp collision; none has been applied to hosted Supabase.
+
 ## Supabase: Academy profiles base (2026-07-24)
 
 Deployment source of truth:
@@ -208,7 +218,7 @@ table and RPC access.
 ## Supabase: Academy provider usage cost ledger (2026-08-08)
 
 Tracked migration:
-`supabase/migrations/20260808120000_academy_provider_usage_cost_ledger.sql`.
+`supabase/migrations/20260808122000_academy_provider_usage_cost_ledger.sql`.
 
 The migration adds immutable, non-overlapping, effective-dated USD pricing
 catalogs and rates; a privacy-safe AI/TTS usage ledger; immutable component

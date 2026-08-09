@@ -80,9 +80,9 @@ Retention is declared at write time and enforced by expiry:
 | `safety_extended` | 365 days | safety classifications and `safety_stop` results |
 
 Expired rows are removed only by the bounded service-role purge RPC. The
-migration remains named `20260808120000_academy_operational_events.sql`; its
-known version collision with other ADMIN branches is intentionally left for the
-integrator and no hosted migration is applied by ADMIN-2.
+migration is named `20260808121000_academy_operational_events.sql`; the ADMIN-R1
+integration assigns it after Admin authorization and before provider usage/cost
+accounting. No hosted migration has been applied.
 
 ## Ownership boundary
 

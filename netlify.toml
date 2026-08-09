@@ -33,6 +33,11 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/curriculum/*"
+  to = "/.netlify/functions/admin-curriculum/:splat"
+  status = 200
+
+[[redirects]]
   from = "/api/study/safety/*"
   to = "/.netlify/functions/study-safety-classify"
   status = 200

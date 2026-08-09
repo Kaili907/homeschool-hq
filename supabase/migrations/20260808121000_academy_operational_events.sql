@@ -1,6 +1,6 @@
 -- ADMIN-2-R1: privacy-minimized operational telemetry, ADMIN contract v2.
--- Additive only. This timestamp remains intentionally unchanged; the shared
--- ADMIN migration-version collision is resolved only by the integrator.
+-- Additive only. The integration-assigned version follows Admin authorization
+-- and precedes provider usage/cost accounting.
 
 begin;
 

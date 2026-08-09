@@ -200,14 +200,16 @@ describe('ADMIN-11 read-only Admin surface', () => {
       calls.push({ path, init })
       return { ok: true, status: 200, json: async () => path.endsWith('/catalog') ? catalog : knownLesson }
     })
-    const httpSource = createAdminCurriculumHttpSource(fetcher)
+    const httpSource = createAdminCurriculumHttpSource(fetcher, '/api/admin/curriculum', async () => 'test-access-token')
     await httpSource.loadCatalog()
     await httpSource.loadLesson('lesson id/with spaces')
     expect(calls.map((call) => call.path)).toEqual([
       '/api/admin/curriculum/catalog',
       '/api/admin/curriculum/lessons/lesson%20id%2Fwith%20spaces',
     ])
-    expect(calls.every((call) => call.init.method === 'GET' && call.init.credentials === 'include')).toBe(true)
+    expect(calls.every((call) => call.init.method === 'GET'
+      && call.init.credentials === 'omit'
+      && (call.init.headers as Record<string, string>).Authorization === 'Bearer test-access-token')).toBe(true)
     expect(JSON.stringify(calls)).not.toMatch(/role|capabilit|actor/i)
   })
 })

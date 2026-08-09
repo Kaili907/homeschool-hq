@@ -4,6 +4,7 @@ import {
   ADMIN_SAFETY_READ_CAPABILITY,
   SAFETY_OPERATIONS_SCHEMA_VERSION,
   SAFETY_OPERATIONS_EVENT_LIMIT,
+  adaptOperationalSafetyEvent,
   buildSafetyOperationsModel,
   filterSafetyOperationsEvents,
   readAuthorizedSafetyOperations,
@@ -11,15 +12,13 @@ import {
   type SafetyOperationsEventV1,
   type SafetyOperationsSnapshotV1,
 } from '../../admin/safetyOperationsModel'
+import type { AdminOperationalEvent } from '../../telemetry/operationalTelemetry'
 import { AdminSafetyOperations } from './AdminSafetyOperations'
 
 const AUTHORIZED: AdminSafetyReadAuthorization = {
   status: 'authorized',
-  grant: {
-    capability: ADMIN_SAFETY_READ_CAPABILITY,
-    authorizationEvidenceRef: 'admin-auth:safety-read:test',
-    expiresAt: '2026-08-08T18:00:00.000Z',
-  },
+  role: 'viewer',
+  capabilities: [ADMIN_SAFETY_READ_CAPABILITY],
 }
 
 const OPEN_STOP: SafetyOperationsEventV1 = {
@@ -73,6 +72,38 @@ function render(snapshotValue: SafetyOperationsSnapshotV1): string {
 }
 
 describe('ADMIN-10 read-only Safety Operations', () => {
+  it('adapts only canonical safety stops and preserves operational version evidence', () => {
+    const operational: AdminOperationalEvent = {
+      schemaVersion: 2,
+      eventId: 'event:safety:one',
+      occurredAt: '2026-08-08T14:00:00.000Z',
+      scope: 'household',
+      householdRef: 'household:one',
+      learnerRef: 'learner:one',
+      engine: 'assessment',
+      appVersion: 'app-1',
+      engineVersion: 'assessment-2',
+      curriculumVersion: 'curriculum-1',
+      courseRef: null,
+      unitRef: null,
+      lessonRef: null,
+      skillRef: null,
+      eventType: 'safety.classification',
+      result: 'safety_stop',
+      durationMs: 12,
+      metadata: { reason_code: 'safety-uncertain-danger-v1' },
+    }
+    const adapted = adaptOperationalSafetyEvent(operational)
+    expect(adapted?.engine).toBe('assessment')
+    expect(adapted?.versionSnapshot).toEqual({
+      appVersion: 'app-1', engineVersion: 'assessment-2', curriculumVersion: 'curriculum-1',
+    })
+    expect(adaptOperationalSafetyEvent({ ...operational, result: 'provider_error' })).toBeNull()
+    const html = render(snapshot(adapted ? [adapted] : []))
+    expect(html).toContain('assessment-2')
+    expect(html).toContain('curriculum-1')
+  })
+
   it('displays an open safety stop and its bounded drilldown', () => {
     const value = snapshot([OPEN_STOP], { summary: summary({ openSafetyStops: metric(1), unresolvedSafetyConditions: metric(1) }) })
     const html = render(value)

@@ -9,7 +9,7 @@ const OTHER_LEARNER_ID = '20000000-0000-4000-8000-000000000002'
 const GUARDIAN_ID = '30000000-0000-4000-8000-000000000001'
 
 const migrationSql = readFile(
-  new URL('./migrations/20260808120000_academy_operational_events.sql', import.meta.url),
+  new URL('./migrations/20260808121000_academy_operational_events.sql', import.meta.url),
   'utf8',
 )
 

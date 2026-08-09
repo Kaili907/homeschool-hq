@@ -1,4 +1,7 @@
 import type { StudySafetyMonitoringEventName } from '../study/contracts/safety'
+import { ADMIN_ENGINE_IDS, type AdminCapability, type AdminEngineId, type AdminRole } from './contracts'
+export { ADMIN_ENGINE_IDS } from './contracts'
+import type { AdminOperationalEvent } from '../telemetry/operationalTelemetry'
 
 export const ADMIN_SAFETY_READ_CAPABILITY = 'safety:read' as const
 export const SAFETY_OPERATIONS_SCHEMA_VERSION = 1 as const
@@ -10,11 +13,8 @@ export type AdminSafetyReadAuthorization =
   | { readonly status: 'denied'; readonly reasonCode: 'admin_assignment_required' | 'authorization_unavailable' | 'safety_read_required' }
   | {
       readonly status: 'authorized'
-      readonly grant: {
-        readonly capability: typeof ADMIN_SAFETY_READ_CAPABILITY
-        readonly authorizationEvidenceRef: string
-        readonly expiresAt: string
-      }
+      readonly role: AdminRole
+      readonly capabilities: readonly AdminCapability[]
     }
 
 export type SafetyEvidenceSource =
@@ -30,7 +30,7 @@ export type SafetyEvidenceCategory =
 
 export type SafetyEventState = 'open' | 'resolved' | 'pending-review' | 'fail-closed' | 'rejected' | 'unknown'
 export type SafetyResolutionState = 'unresolved' | 'pending-adult-review' | 'resolved' | 'not-applicable' | 'unknown'
-export type SafetyEngine = 'study' | 'tutor' | 'gateway'
+export type SafetyEngine = AdminEngineId
 
 export interface SafetyOperationsEventV1 {
   readonly schemaVersion: typeof SAFETY_OPERATIONS_SCHEMA_VERSION
@@ -42,6 +42,11 @@ export interface SafetyOperationsEventV1 {
   }
   readonly occurredAt: string
   readonly engine: SafetyEngine
+  readonly versionSnapshot?: {
+    readonly appVersion: string
+    readonly engineVersion: string
+    readonly curriculumVersion: string | null
+  }
   readonly evidenceCategory: SafetyEvidenceCategory
   readonly reasonCode: string
   readonly state: SafetyEventState
@@ -87,8 +92,9 @@ export type SafetyOperationsReadState =
   | { readonly status: 'ready'; readonly snapshot: SafetyOperationsSnapshotV1 }
 
 export interface AdminSafetyOperationsReadPort {
+  /** The server endpoint must resolve identity and capability again. */
   read(input: {
-    readonly grant: Extract<AdminSafetyReadAuthorization, { status: 'authorized' }>['grant']
+    readonly capability: typeof ADMIN_SAFETY_READ_CAPABILITY
   }): Promise<SafetyOperationsReadState>
 }
 
@@ -97,16 +103,15 @@ export async function readAuthorizedSafetyOperations(
   port: AdminSafetyOperationsReadPort,
 ): Promise<SafetyOperationsReadState> {
   if (!hasSafetyReadGrant(authorization)) return { status: 'unavailable', reasonCode: 'read_failed' }
-  return port.read({ grant: authorization.grant })
+  return port.read({ capability: ADMIN_SAFETY_READ_CAPABILITY })
 }
 
 export function hasSafetyReadGrant(
   authorization: AdminSafetyReadAuthorization,
 ): authorization is Extract<AdminSafetyReadAuthorization, { status: 'authorized' }> {
   return authorization.status === 'authorized'
-    && authorization.grant?.capability === ADMIN_SAFETY_READ_CAPABILITY
-    && isOpaqueReference(authorization.grant.authorizationEvidenceRef)
-    && isIsoTime(authorization.grant.expiresAt)
+    && Array.isArray(authorization.capabilities)
+    && authorization.capabilities.includes(ADMIN_SAFETY_READ_CAPABILITY)
 }
 
 export interface SafetyOperationsModel {
@@ -132,7 +137,7 @@ const SOURCES = new Set<SafetyEvidenceSource>([
   'study-adult-review',
   'study-safety-monitoring',
 ])
-const ENGINES = new Set<SafetyEngine>(['study', 'tutor', 'gateway'])
+const ENGINES = new Set<SafetyEngine>(ADMIN_ENGINE_IDS)
 const CATEGORIES = new Set<SafetyEvidenceCategory>(['safety-stop', 'adult-review', 'fail-closed', 'fallback-rejection'])
 const EVENT_STATES = new Set<SafetyEventState>(['open', 'resolved', 'pending-review', 'fail-closed', 'rejected', 'unknown'])
 const RESOLUTION_STATES = new Set<SafetyResolutionState>(['unresolved', 'pending-adult-review', 'resolved', 'not-applicable', 'unknown'])
@@ -267,6 +272,7 @@ function sanitizeEvent(event: SafetyOperationsEventV1): SafetyOperationsEventV1[
     learner: { reference: event.learner.reference, ...(displayName ? { displayName } : {}) },
     occurredAt: event.occurredAt,
     engine: event.engine,
+    ...(event.versionSnapshot ? { versionSnapshot: sanitizeVersionSnapshot(event.versionSnapshot) } : {}),
     evidenceCategory: event.evidenceCategory,
     reasonCode: canonicalSafetyReasonCode(event.reasonCode),
     state: event.state,
@@ -284,6 +290,54 @@ function sanitizeEvent(event: SafetyOperationsEventV1): SafetyOperationsEventV1[
       }]
     }),
   }]
+}
+
+function sanitizeVersionSnapshot(
+  snapshot: SafetyOperationsEventV1['versionSnapshot'],
+): SafetyOperationsEventV1['versionSnapshot'] | undefined {
+  if (!snapshot || !isVersion(snapshot.appVersion) || !isVersion(snapshot.engineVersion)) return undefined
+  if (snapshot.curriculumVersion !== null && !isVersion(snapshot.curriculumVersion)) return undefined
+  return {
+    appVersion: snapshot.appVersion,
+    engineVersion: snapshot.engineVersion,
+    curriculumVersion: snapshot.curriculumVersion,
+  }
+}
+
+function isVersion(value: unknown): value is string {
+  return typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9._+-]{0,127}$/.test(value)
+}
+
+/**
+ * Trusted ADMIN-2 adapter. Provider errors, timeouts, fallbacks, and rejections
+ * are deliberately excluded; only a canonical safety_stop result becomes a
+ * Safety Operations event.
+ */
+export function adaptOperationalSafetyEvent(
+  event: AdminOperationalEvent,
+): SafetyOperationsEventV1 | null {
+  if (event.result !== 'safety_stop' || event.scope !== 'household' || !event.learnerRef) return null
+  const reasonCode = typeof event.metadata.reason_code === 'string'
+    ? canonicalSafetyReasonCode(event.metadata.reason_code)
+    : UNKNOWN_SAFETY_REASON_CODE
+  return {
+    schemaVersion: SAFETY_OPERATIONS_SCHEMA_VERSION,
+    eventRef: event.eventId,
+    source: 'study-safety-monitoring',
+    learner: { reference: event.learnerRef },
+    occurredAt: event.occurredAt,
+    engine: event.engine,
+    versionSnapshot: {
+      appVersion: event.appVersion,
+      engineVersion: event.engineVersion,
+      curriculumVersion: event.curriculumVersion,
+    },
+    evidenceCategory: 'safety-stop',
+    reasonCode,
+    state: 'fail-closed',
+    resolution: { state: 'unresolved' },
+    history: [],
+  }
 }
 
 function safeDisplayName(value: unknown): string | undefined {

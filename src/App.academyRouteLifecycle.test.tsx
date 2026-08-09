@@ -22,6 +22,7 @@ const harness = vi.hoisted(() => ({
     onNavigate: (route: AcademyRoute) => void
     onExit: () => void
   },
+  admin: false,
 }))
 
 vi.mock('./sync/useSync', () => ({
@@ -62,6 +63,12 @@ vi.mock('./components/academy/AcademyRouter', () => ({
       onExit: props.onExit,
     }
     return <main data-surface="academy">Manuel Academy surface ({props.route.kind})</main>
+  },
+}))
+vi.mock('./components/admin/AdminConsoleRoute', () => ({
+  AdminConsoleRoute: () => {
+    harness.admin = true
+    return <main data-surface="admin">Admin Console</main>
   },
 }))
 vi.mock('./tutor/voice', async (importOriginal) => ({
@@ -157,6 +164,7 @@ describe('App academy route lifecycle (CURR-1)', () => {
     harness.picker = null
     harness.pin = null
     harness.academy = null
+    harness.admin = false
     root = null
     pathname = '/academy'
     vi.stubEnv('VITE_ACADEMY_GRADE_5_ENABLED', 'true')
@@ -295,6 +303,22 @@ describe('App academy route lifecycle (CURR-1)', () => {
     await mountApp(seeded(null))
     expect(harness.academy).toBeNull()
     expect(harness.picker).not.toBeNull()
+  })
+
+  it('recognizes the exact Admin prefix before learner Academy parsing, including nested routes', async () => {
+    pathname = '/academy/admin/safety'
+    await mountApp(seeded(null))
+    expect(harness.admin).toBe(true)
+    expect(harness.academy).toBeNull()
+    expect(harness.picker).toBeNull()
+  })
+
+  it('does not treat /academy/administrator as an Admin route and leaves the learner app available', async () => {
+    pathname = '/academy/administrator'
+    await mountApp(seeded('p2'))
+    expect(harness.admin).toBe(false)
+    expect(harness.academy).not.toBeNull()
+    expect(harness.academy?.route).toEqual({ kind: 'home' })
   })
 
   it('exit + sign-out normalize the URL so the next learner cannot re-enter (A4-X)', async () => {
