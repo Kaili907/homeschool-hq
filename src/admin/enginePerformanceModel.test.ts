@@ -3,6 +3,7 @@ import { ADMIN_ENGINE_IDS, type AdminEngineId } from './contracts'
 import {
   buildEnginePerformanceProjection,
   ENGINE_PERFORMANCE_RATE_MIN_SAMPLE,
+  ENGINE_PERFORMANCE_SOURCE_LIMIT,
   ENGINE_PERFORMANCE_VERSION_COMPARISON_MIN_SAMPLE,
   isEnginePerformanceProjection,
   type EnginePerformanceFilters,
@@ -59,8 +60,8 @@ function operationalEvent(
   } as AdminOperationalEvent
 }
 
-function projection(events: readonly AdminOperationalEvent[], selectedFilters = filters) {
-  return buildEnginePerformanceProjection(events, {
+function projection(rows: unknown, selectedFilters = filters) {
+  return buildEnginePerformanceProjection(rows, {
     generatedAt: END,
     filters: selectedFilters,
   })
@@ -94,6 +95,76 @@ describe('ADMIN-4 engine performance projection', () => {
       denominator: ENGINE_PERFORMANCE_RATE_MIN_SAMPLE - 1,
       sampleCount: ENGINE_PERFORMANCE_RATE_MIN_SAMPLE - 1,
       reasonCode: 'minimum_sample_not_met',
+    })
+  })
+
+  it('derives the reached source bound from exactly 500 raw rows', () => {
+    const model = projection(Array.from({ length: ENGINE_PERFORMANCE_SOURCE_LIMIT }, () =>
+      operationalEvent('study', { operation: 'start' })))
+
+    expect(model.source).toMatchObject({
+      rawRowCount: 500,
+      acceptedEventCount: 500,
+      rejectedRowCount: 0,
+      limitReached: true,
+      completeness: 'partial',
+    })
+  })
+
+  it('keeps the source bound reached when one of exactly 500 raw rows is rejected', () => {
+    const rows = [
+      ...Array.from({ length: ENGINE_PERFORMANCE_SOURCE_LIMIT - 1 }, () =>
+        operationalEvent('study', { operation: 'start' })),
+      { malformed: true },
+    ]
+    const model = projection(rows)
+
+    expect(model.source).toMatchObject({
+      rawRowCount: 500,
+      acceptedEventCount: 499,
+      rejectedRowCount: 1,
+      limitReached: true,
+      completeness: 'partial',
+    })
+  })
+
+  it('does not report the source limit reached for 499 raw rows with one rejected', () => {
+    const rows = [
+      ...Array.from({ length: ENGINE_PERFORMANCE_SOURCE_LIMIT - 2 }, () =>
+        operationalEvent('study', { operation: 'start' })),
+      { malformed: true },
+    ]
+    const model = projection(rows)
+
+    expect(model.source).toMatchObject({
+      rawRowCount: 499,
+      acceptedEventCount: 498,
+      rejectedRowCount: 1,
+      limitReached: false,
+      completeness: 'partial',
+    })
+  })
+
+  it('excludes malformed rows from metrics and evidence-sufficiency thresholds', () => {
+    const rows = [
+      ...Array.from({ length: ENGINE_PERFORMANCE_RATE_MIN_SAMPLE - 1 }, () =>
+        operationalEvent('tutor', { operation: 'intervention', result: 'success' })),
+      { malformed: true },
+    ]
+    const model = projection(rows)
+
+    expect(model.source).toMatchObject({
+      rawRowCount: 10,
+      acceptedEventCount: 9,
+      rejectedRowCount: 1,
+      completeness: 'partial',
+    })
+    expect(metric(model, 'tutor', 'tutor_interventions')).toMatchObject({ value: 9, sampleCount: 9 })
+    expect(metric(model, 'tutor', 'fallback_rate')).toMatchObject({
+      availability: 'insufficient_evidence',
+      value: null,
+      denominator: 9,
+      sampleCount: 9,
     })
   })
 
@@ -188,6 +259,25 @@ describe('ADMIN-4 engine performance projection', () => {
     const tiny = projection(sufficient.slice(0, 10).concat(sufficient.slice(20, 30)))
     expect(engine(tiny, 'tutor').versionComparison.availability).toBe('insufficient_evidence')
     expect(engine(tiny, 'tutor').versionComparison.metrics.every((candidate) => candidate.previous.value === null && candidate.current.value === null)).toBe(true)
+  })
+
+  it('keeps version comparison based on accepted evidence under the corrected source model', () => {
+    const rows = [
+      ...Array.from({ length: ENGINE_PERFORMANCE_VERSION_COMPARISON_MIN_SAMPLE }, (_, index) =>
+        operationalEvent('tutor', { operation: 'intervention', engineVersion: 'v1', occurredAt: '2026-08-05T12:00:00.000Z', result: index < 4 ? 'fallback' : 'success' })),
+      ...Array.from({ length: ENGINE_PERFORMANCE_VERSION_COMPARISON_MIN_SAMPLE }, (_, index) =>
+        operationalEvent('tutor', { operation: 'intervention', engineVersion: 'v2', occurredAt: '2026-08-15T12:00:00.000Z', result: index < 2 ? 'fallback' : 'success' })),
+      { malformed: true },
+    ]
+    const model = projection(rows)
+    const comparison = engine(model, 'tutor').versionComparison
+
+    expect(model.source).toMatchObject({ rawRowCount: 41, acceptedEventCount: 40, rejectedRowCount: 1 })
+    expect(comparison).toMatchObject({ availability: 'available', previousVersion: 'v1', currentVersion: 'v2' })
+    expect(comparison.metrics.find((candidate) => candidate.metricId === 'fallback_rate')).toMatchObject({
+      previous: { value: 20, sampleCount: 20 },
+      current: { value: 10, sampleCount: 20 },
+    })
   })
 
   it('applies bounded time, engine, version, course, and unit filters before aggregation', () => {

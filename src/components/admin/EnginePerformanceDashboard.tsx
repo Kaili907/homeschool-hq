@@ -67,7 +67,7 @@ export function EnginePerformanceDashboard({
       </header>
 
       {state.model.source.limitReached && (
-        <p className="engine-performance__notice" role="status">The canonical 500-event read limit was reached. Results describe the bounded returned evidence, not an assumed complete history.</p>
+        <p className="engine-performance__notice" role="status">The canonical {state.model.source.limit.toLocaleString()}-event read limit was reached. Results describe the bounded returned evidence, not an assumed complete history.</p>
       )}
       {state.model.source.rejectedRowCount > 0 && (
         <p className="engine-performance__notice" role="status">Some malformed stored evidence was rejected and is not represented.</p>

@@ -51,6 +51,13 @@ describe('ADMIN-4 engine performance endpoint', () => {
     expect(authorization.require).toHaveBeenCalledWith(expect.anything(), 'engines:read')
     expect(reader.list).toHaveBeenCalledWith(500)
     expect(body.engines).toHaveLength(8)
+    expect(body.source).toMatchObject({
+      rawRowCount: 1,
+      acceptedEventCount: 1,
+      rejectedRowCount: 0,
+      limitReached: false,
+      completeness: 'complete',
+    })
     expect(body.source.filteredEventCount).toBe(1)
     expect(response.body).not.toMatch(/"(?:eventId|householdRef|learnerRef|conversation|transcript|prompt|response|student_audio|assessment_answer)"\s*:/)
   })

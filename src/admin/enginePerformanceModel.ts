@@ -103,11 +103,13 @@ export interface EnginePerformanceProjection {
     readonly versionComparisonMinimumSample: typeof ENGINE_PERFORMANCE_VERSION_COMPARISON_MIN_SAMPLE
   }
   readonly source: {
+    readonly rawRowCount: number
     readonly acceptedEventCount: number
     readonly rejectedRowCount: number
     readonly filteredEventCount: number
     readonly limit: typeof ENGINE_PERFORMANCE_SOURCE_LIMIT
     readonly limitReached: boolean
+    readonly completeness: 'complete' | 'partial'
   }
   readonly engines: readonly EnginePerformanceSummary[]
 }
@@ -479,6 +481,8 @@ export function buildEnginePerformanceProjection(
 ): EnginePerformanceProjection {
   if (!isInstant(options.generatedAt)) throw new TypeError('engine_performance_generated_at_invalid')
   const filters = normalizeFilters(options.filters)
+  const rawRowCount = Array.isArray(rows) ? rows.length : 0
+  const sourceLimit = options.sourceLimit ?? ENGINE_PERFORMANCE_SOURCE_LIMIT
   const decoded = decodeStoredOperationalEvents(rows)
   const filtered = decoded.events.filter((event) =>
     event.occurredAt >= filters.start
@@ -511,11 +515,13 @@ export function buildEnginePerformanceProjection(
       versionComparisonMinimumSample: ENGINE_PERFORMANCE_VERSION_COMPARISON_MIN_SAMPLE,
     }),
     source: Object.freeze({
+      rawRowCount,
       acceptedEventCount: decoded.events.length,
       rejectedRowCount: decoded.rejectedRows,
       filteredEventCount: filtered.length,
       limit: ENGINE_PERFORMANCE_SOURCE_LIMIT,
-      limitReached: decoded.events.length >= (options.sourceLimit ?? ENGINE_PERFORMANCE_SOURCE_LIMIT),
+      limitReached: rawRowCount >= sourceLimit,
+      completeness: rawRowCount >= sourceLimit || decoded.rejectedRows > 0 ? 'partial' as const : 'complete' as const,
     }),
     engines: Object.freeze(engines),
   })
@@ -582,12 +588,18 @@ function validWireThresholds(value: unknown): boolean {
 
 function validWireSource(value: unknown): boolean {
   return isRecord(value)
-    && hasExactKeys(value, ['acceptedEventCount', 'rejectedRowCount', 'filteredEventCount', 'limit', 'limitReached'])
+    && hasExactKeys(value, ['rawRowCount', 'acceptedEventCount', 'rejectedRowCount', 'filteredEventCount', 'limit', 'limitReached', 'completeness'])
+    && safeCount(value.rawRowCount)
     && safeCount(value.acceptedEventCount)
     && safeCount(value.rejectedRowCount)
     && safeCount(value.filteredEventCount)
     && value.limit === ENGINE_PERFORMANCE_SOURCE_LIMIT
     && typeof value.limitReached === 'boolean'
+    && (value.completeness === 'complete' || value.completeness === 'partial')
+    && value.limitReached === ((value.rawRowCount as number) >= ENGINE_PERFORMANCE_SOURCE_LIMIT)
+    && value.completeness === (
+      value.limitReached || (value.rejectedRowCount as number) > 0 ? 'partial' : 'complete'
+    )
 }
 
 function validWireMetric(value: unknown): boolean {
