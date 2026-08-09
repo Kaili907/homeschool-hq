@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import type { SecurityLifecycleEvent, SecurityLifecycleEventType } from '../contracts/lifecycle'
+import { createLocalSessionId } from '../contracts/sessions'
 import type { StudyIdentityClient } from '../../study/client/studyIdentityClient'
 import { STUDY_READINESS_SCHEMA_VERSION } from '../../study/contracts/production/versions'
 import {
@@ -7,8 +8,13 @@ import {
   StudyLifecycleAbortError,
   StudyLifecycleBoundary,
   type StudyLifecycleBinding,
+  type StudyCancellationReason,
 } from '../../study/lifecycle/StudyLifecycle'
 import { createVerifiedStudyRuntimeAdapter } from '../../study/production/verifiedRuntimeAdapter'
+import {
+  executeLearnerAccessActions,
+  transitionLearnerAccess,
+} from '../session/lockSwitchStateMachine'
 import {
   cancelStudyForSecurityLifecycleEvent,
   type StudyCancellationPort,
@@ -16,6 +22,7 @@ import {
 
 const OCCURRED_AT = '2026-08-09T12:00:00.000Z'
 const EXPIRES_AT = '2099-08-09T12:00:00.000Z'
+const LEARNER_A_SESSION_ID = 'd9428888-122b-4f9b-9424-1f35c63d5750'
 
 const learnerABinding: StudyLifecycleBinding = Object.freeze({
   authenticatedSessionRef: 'session:opaque-a',
@@ -48,7 +55,6 @@ describe('auth security to Study cancellation bridge', () => {
     ['global-revocation', 'authorization-loss'],
     ['learner-sign-out', 'logout'],
     ['learner-lock', 'logout'],
-    ['parent-lock', 'logout'],
     ['household-sign-out', 'logout'],
   ] as const)('maps %s to the authoritative %s cancellation', async (type, reason) => {
     const cancel = vi.fn()
@@ -59,7 +65,7 @@ describe('auth security to Study cancellation bridge', () => {
     expect(cancel).toHaveBeenCalledWith(reason)
   })
 
-  it.each(['learner-authenticated', 'parent-session-expired'] as const)(
+  it.each(['learner-authenticated'] as const)(
     'preserves Study for the explicitly unrelated %s event',
     async (type) => {
       const cancel = vi.fn()
@@ -69,6 +75,33 @@ describe('auth security to Study cancellation bridge', () => {
       expect(cancel).not.toHaveBeenCalled()
     },
   )
+
+  it.each(['parent-lock', 'parent-session-expired'] as const)(
+    'preserves active Study learner authority across %s',
+    async (type) => {
+      const lifecycle = new StudyLifecycleBoundary(learnerABinding)
+      const learnerAuthority = lifecycle.token()
+      const cancel = vi.fn((reason: StudyCancellationReason) => lifecycle.cancel(reason))
+
+      await expect(cancelStudyForSecurityLifecycleEvent(event(type), { cancel })).resolves.toBeNull()
+
+      expect(cancel).not.toHaveBeenCalled()
+      expect(learnerAuthority.isCurrent()).toBe(true)
+      expect(learnerAuthority.signal.aborted).toBe(false)
+      expect(lifecycle.binding).toEqual(learnerABinding)
+    },
+  )
+
+  it('does not create Study authority when learner authentication is announced', async () => {
+    const lifecycle = new StudyLifecycleBoundary()
+    const cancel = vi.fn((reason: StudyCancellationReason) => lifecycle.cancel(reason))
+
+    await expect(cancelStudyForSecurityLifecycleEvent(event('learner-authenticated'), { cancel }))
+      .resolves.toBeNull()
+
+    expect(cancel).not.toHaveBeenCalled()
+    expect(lifecycle.binding).toBeNull()
+  })
 
   it('fails closed when an untyped caller sends an unmapped event into the security-only seam', async () => {
     const cancel = vi.fn()
@@ -102,6 +135,66 @@ describe('auth security to Study cancellation bridge', () => {
     expect(learnerB.epoch).toBeGreaterThan(learnerA.epoch)
     expect(learnerB.binding.learnerRef).toBe('learner:verified-b')
     expect(JSON.stringify(learnerB.binding)).not.toContain('opaque-a')
+  })
+
+  it('invalidates active Study authority with logout when the learner locks', async () => {
+    const lifecycle = new StudyLifecycleBoundary(learnerABinding)
+    const learnerAuthority = lifecycle.token()
+
+    await expect(cancelStudyForSecurityLifecycleEvent(event('learner-lock'), lifecycle))
+      .resolves.toBe('logout')
+
+    expect(learnerAuthority.isCurrent()).toBe(false)
+    expect(learnerAuthority.signal.reason).toBe('logout')
+    expect(lifecycle.binding).toBeNull()
+  })
+
+  it('awaits the actual Session Runtime executor bridge before requesting learner B PIN', async () => {
+    const order: string[] = []
+    const cancellation = deferred<void>()
+    const transition = transitionLearnerAccess({
+      status: 'active',
+      profileId: 'learner-a',
+      sessionId: createLocalSessionId(() => LEARNER_A_SESSION_ID),
+    }, {
+      type: 'learner-switch',
+      targetProfileId: 'learner-b',
+      occurredAt: OCCURRED_AT,
+    })
+    const studyPort: StudyCancellationPort = {
+      async cancel() {
+        order.push('cancel-start')
+        await cancellation.promise
+        order.push('cancel-done')
+      },
+    }
+
+    const execution = executeLearnerAccessActions(transition.actions, {
+      revocation: {
+        currentEpoch: () => 0,
+        subscribe: () => () => undefined,
+        async revoke(cause) {
+          order.push('revoke')
+          return Object.freeze({
+            schemaVersion: 1 as const,
+            epoch: 1,
+            cause,
+            occurredAt: OCCURRED_AT,
+          })
+        },
+        close: () => undefined,
+      },
+      onLifecycle: async (lifecycleEvent) => {
+        await cancelStudyForSecurityLifecycleEvent(lifecycleEvent, studyPort)
+      },
+      requestLearnerPin: () => { order.push('pin') },
+    })
+    await vi.waitFor(() => expect(order).toEqual(['revoke', 'cancel-start']))
+
+    cancellation.resolve()
+    await execution
+
+    expect(order).toEqual(['revoke', 'cancel-start', 'cancel-done', 'pin'])
   })
 
   it('routes learner expiry through the preview lifecycle and rejects a late response', async () => {
