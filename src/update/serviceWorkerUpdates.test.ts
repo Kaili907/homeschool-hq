@@ -4,6 +4,7 @@ import {
   BrowserServiceWorkerUpdates,
   type ServiceWorkerContainerLike,
 } from './serviceWorkerUpdates'
+import { ClientUpdateCoordinator } from './updateCoordinator'
 
 class FakeWorker {
   state = 'activated'
@@ -124,6 +125,84 @@ describe('BrowserServiceWorkerUpdates', () => {
       updateAvailable: false,
       controllerChanged: true,
     })
+  })
+
+  it('handles overlapping worker lifecycle events once after approved persistence', async () => {
+    const order: string[] = []
+    const container = new FakeContainer()
+    container.registration.update.mockImplementation(async () => {
+      order.push('worker-update')
+    })
+    const monitor = monitorFor(container)
+    await monitor.start()
+    const storage = new Map<string, string>()
+    const reload = vi.fn(() => order.push('reload'))
+    const coordinator = new ClientUpdateCoordinator({
+      clientBuildId: 'overlap-build',
+      clientSyncProtocolVersion: 2,
+      workerUpdates: monitor,
+      storage: {
+        getItem: (key) => storage.get(key) ?? null,
+        setItem: (key, value) => storage.set(key, value),
+      },
+      persistEducationalState: () => {
+        order.push('persist')
+      },
+      reload,
+    })
+
+    coordinator.reportSyncCompatibility({
+      status: 'update-required',
+      syncProtocolVersion: 3,
+      minimumSupportedSyncVersion: 3,
+    })
+    await coordinator.whenPrepared()
+
+    expect(order).toEqual(['persist', 'worker-update'])
+    expect(reload).not.toHaveBeenCalled()
+
+    const waiting = new FakeWorker()
+    waiting.state = 'installed'
+    container.registration.waiting = waiting
+    waiting.postMessage.mockImplementation(() => {
+      order.push('activation')
+      container.registration.waiting = null
+      container.registration.installing = waiting
+      waiting.state = 'installing'
+      container.registration.emitUpdateFound()
+      order.push('updatefound')
+
+      container.registration.installing = null
+      container.registration.waiting = waiting
+      waiting.transition('installed')
+      order.push('statechange')
+
+      container.emitControllerChange()
+      order.push('controllerchange')
+    })
+
+    await expect(coordinator.requestRefresh()).resolves.toEqual({
+      accepted: true,
+      waitingForWorker: false,
+    })
+    waiting.transition('activated')
+    container.emitControllerChange()
+
+    expect(order).toEqual([
+      'persist',
+      'worker-update',
+      'activation',
+      'updatefound',
+      'statechange',
+      'controllerchange',
+      'reload',
+    ])
+    expect(reload).toHaveBeenCalledOnce()
+
+    monitor.dispose()
+    expect(container.controllerListeners).toHaveLength(0)
+    expect(container.registration.updateFoundListeners).toHaveLength(0)
+    expect(waiting.listeners).toHaveLength(0)
   })
 
   it('deterministically disposes every worker lifecycle observer', async () => {
