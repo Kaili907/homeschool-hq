@@ -79,6 +79,8 @@ const CUSTODY_LF_SHA256: Readonly<Record<string, string>> = {
     '21462128be7f207cd31e60620acc1ec125f61e2e62fa2c41bb7272a764750f83',
   '20260808150000_academy_study_academic_readiness_contract.sql':
     'd892a8bf38204a25f131fe7b26e95b603d3d9d5b64bf8e0ee97f69de3d14655e',
+  '20260809120000_academy_study_learner_runtime_operations.sql':
+    '693f437220ad4947345fa1846840718a4074e6a02df334f8937d15a975cbb2b1',
 }
 
 describe('migration byte custody', () => {
@@ -192,6 +194,7 @@ describe('Study migration manifest consistency', () => {
         '20260806140000_academy_study_c2_operations_contract.sql',
         '20260808120000_academy_study_actor_bound_session_verification.sql',
         '20260808150000_academy_study_academic_readiness_contract.sql',
+        '20260809120000_academy_study_learner_runtime_operations.sql',
       ])
     for (const entry of executable) {
       expect(entry.applicationStatus, entry.filename).toBe('not-applied-hosted')

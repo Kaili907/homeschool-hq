@@ -1,13 +1,25 @@
 import { digestStudySessionReference } from '../study-identity/contracts.js'
 import { createSupabaseServiceRpc } from '../study-adult-review/supabase-ports.js'
 
-const OPERATIONS = Object.freeze({
+/**
+ * The gateway's own copy of the operation -> capability allow-list.
+ *
+ * Deliberately a literal, and deliberately not imported from the browser bundle
+ * or read from the database at request time: the server list has to be able to
+ * disagree with a stale deployed client, and a drift test is what makes it say
+ * so out loud. academy_private.study_runtime_operation_contract() is the SQL
+ * authority; supabase/academy-study-learner-runtime-operations.db.test.ts
+ * executes it and requires this map to match it exactly.
+ */
+export const OPERATIONS = Object.freeze({
   'dashboard:read': 'student:progress:read',
   'calendar:read': 'student:assignments:read',
+  'calendar:transition': 'student:attempts:create',
   'session:begin': 'student:attempts:create',
   'session:transition': 'student:attempts:create',
   'checkpoint:read': 'student:progress:read',
   'checkpoint:compare-and-swap': 'student:attempts:create',
+  'event:append': 'student:attempts:create',
 })
 
 const CALLER_AUTHORITY_KEY = /^(?:household|household_?id|student|student_?id|learner|learner_?ref|grant|grant_?id|session_?epoch|authorization_?revision|membership|relationship)$/i

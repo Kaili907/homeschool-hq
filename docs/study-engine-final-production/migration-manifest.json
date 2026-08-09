@@ -143,6 +143,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academic_readiness_version:0->1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260809120000",
+      "filename": "20260809120000_academy_study_learner_runtime_operations.sql",
+      "sha256": "693f437220ad4947345fa1846840718a4074e6a02df334f8937d15a975cbb2b1",
+      "dependency": "20260808150000_academy_study_academic_readiness_contract.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "learner_runtime_operations_version:0->1",
+      "supersessionStatus": "current"
     }
   ]
 }
