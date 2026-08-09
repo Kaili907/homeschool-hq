@@ -137,9 +137,10 @@ export function CurriculumValidationDashboard({
           </div>
         )}
 
-        <section className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4" aria-label="Validation evidence metadata">
+        <section className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5" aria-label="Validation evidence metadata">
           {[
             ['Curriculum version', metadata(model.curriculumVersion)],
+            ['Validation-reported curriculum version', metadata(model.validationReportedCurriculumVersion)],
             ['Package', metadata(model.packageId)],
             ['Validated on', metadata(model.validatedAt)],
             ['Validation artifact version', metadata(model.validationArtifactVersion)],

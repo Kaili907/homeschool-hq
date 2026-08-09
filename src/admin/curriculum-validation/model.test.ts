@@ -37,8 +37,12 @@ describe('curriculum validation read model', () => {
 
     expect(model.status).toBe('pass')
     expect(model.curriculumVersion).toBe('1.2.3')
+    expect(model.validationReportedCurriculumVersion).toBe('1.2.3')
     expect(model.validationArtifactVersion).toBe('validation-v2')
     expect(model.validatedAt).toBe('2026-08-08')
+    expect(finding(model, 'Lesson schema validation')?.detail)
+      .toBe('Lesson schema validation passed the recorded check.')
+    expect(JSON.stringify(model)).not.toContain('2736 records')
   })
 
   it('derives PASS WITH WARNINGS from recorded warning evidence', () => {
@@ -48,7 +52,7 @@ describe('curriculum validation read model', () => {
     ], 'PASS WITH WARNINGS'))
 
     expect(model.status).toBe('pass_with_warnings')
-    expect(finding(model, 'standards-coverage')?.state).toBe('warning')
+    expect(finding(model, 'Standards coverage')?.state).toBe('warning')
   })
 
   it('derives FAIL from failed evidence and retains safe affected scope', () => {
@@ -57,14 +61,19 @@ describe('curriculum validation read model', () => {
         check: 'broken-reference',
         result: 'FAIL',
         details: 'Lesson points to an unknown unit.',
-        affected: { grade: 7, course_id: 'ma-g7-science', lesson_id: 'lesson-9' },
+        affected: {
+          grade: 7,
+          course_id: 'ma-g7-science',
+          lesson_id: 'ma-g7-science-u01-l09',
+        },
       },
     ], 'FAIL'))
 
     expect(model.status).toBe('fail')
-    expect(finding(model, 'broken-reference')).toMatchObject({
+    expect(finding(model, 'Reference integrity')).toMatchObject({
       state: 'failed',
-      scope: { grade: '7', course: 'ma-g7-science', lesson: 'lesson-9' },
+      detail: 'Curriculum reference integrity failed the recorded check.',
+      scope: { grade: '7', course: 'ma-g7-science', lesson: 'ma-g7-science-u01-l09' },
     })
   })
 
@@ -91,22 +100,23 @@ describe('curriculum validation read model', () => {
     expect(model.status).toBe('fail')
     expect(finding(model, 'Checksum declaration consistency')).toMatchObject({
       state: 'failed',
-      scope: { reference: 'lesson.json' },
+      detail: '1 checksum declaration mismatch(es) were found.',
+      scope: {},
     })
   })
 
   it.each([
-    ['schema-validation', 'Schema validation'],
-    ['broken-reference', 'References and indexes'],
-    ['duplicate-lesson-id', 'Identifiers'],
-  ])('surfaces %s failures in %s', (check, expectedCategory) => {
+    ['schema-validation', 'Schema validation', 'Lesson schema validation'],
+    ['broken-reference', 'References and indexes', 'Reference integrity'],
+    ['duplicate-lesson-id', 'Identifiers', 'Duplicate lesson identifiers'],
+  ])('surfaces %s failures in %s', (check, expectedCategory, expectedLabel) => {
     const model = buildCurriculumValidationReadModel(evidence([
       { check, result: 'FAIL', details: 'Controlled failure detail.' },
     ], 'FAIL'))
 
     const category = model.categories.find((item) => item.label === expectedCategory)
     expect(category?.state).toBe('failed')
-    expect(category?.findings[0]?.check).toBe(check)
+    expect(category?.findings[0]?.check).toBe(expectedLabel)
   })
 
   it('preserves deterministic standards mappings and coverage gaps', () => {
@@ -135,12 +145,21 @@ describe('curriculum validation read model', () => {
 
   it('fails on conflicting recorded curriculum versions', () => {
     const model = buildCurriculumValidationReadModel({
-      ...evidence([{ check: 'schema-validation', result: 'PASS' }]),
-      packageManifest: { version: '9.9.9', files: [] },
+      validation: {
+        package_id: 'manuel-academy-test',
+        version: '9.9.9',
+        overall: 'PASS',
+        checks: [{ check: 'schema-validation', result: 'PASS' }],
+      },
+      curriculumManifest: { package_id: 'manuel-academy-test', version: '1.2.3' },
+      packageManifest: { version: '1.2.3', files: [] },
     })
 
     expect(model.status).toBe('fail')
+    expect(model.curriculumVersion).toBe('1.2.3')
+    expect(model.validationReportedCurriculumVersion).toBe('9.9.9')
     expect(finding(model, 'Curriculum version consistency')?.state).toBe('failed')
+    expect(finding(model, 'Curriculum version consistency')?.detail).toContain('9.9.9')
   })
 
   it('does not treat absent categories as passed', () => {
@@ -164,7 +183,7 @@ describe('curriculum validation read model', () => {
     expect(malformedCheck.evidenceError).toBe('Validation evidence could not be interpreted safely.')
   })
 
-  it('omits raw stack traces and machine-local paths', () => {
+  it('replaces raw stack traces and machine-local paths with vetted finding copy', () => {
     const model = buildCurriculumValidationReadModel(evidence([
       {
         check: 'schema-validation',
@@ -172,10 +191,41 @@ describe('curriculum validation read model', () => {
         details: 'Error: private payload\n    at validate (C:\\Users\\Owner\\secret.ts:4:2)',
       },
     ], 'FAIL'))
-    const detail = finding(model, 'schema-validation')?.detail
+    const detail = finding(model, 'Lesson schema validation')?.detail
 
-    expect(detail).toBe('Unsafe technical detail omitted.')
+    expect(detail).toBe('Lesson schema validation failed the recorded check.')
     expect(detail).not.toContain('Owner')
     expect(detail).not.toContain('private payload')
+  })
+
+  it('does not retain a plain single-line secret or arbitrary exception message', () => {
+    const model = buildCurriculumValidationReadModel(evidence([
+      {
+        check: 'schema-validation',
+        result: 'FAIL',
+        details: 'sk-live-plain-single-line-secret',
+      },
+      {
+        check: 'future-provider-failure',
+        result: 'ERROR',
+        message: 'Database exploded because credential=hunter2',
+        source: 'Bearer private-token',
+        affected: {
+          course: 'Bearer another-private-token',
+          reference: 'C:\\Users\\Owner\\secret.txt',
+        },
+      },
+    ], 'FAIL'))
+    const serialized = JSON.stringify(model)
+
+    expect(serialized).not.toContain('sk-live-plain-single-line-secret')
+    expect(serialized).not.toContain('Database exploded')
+    expect(serialized).not.toContain('hunter2')
+    expect(serialized).not.toContain('Bearer private-token')
+    expect(serialized).not.toContain('another-private-token')
+    expect(serialized).not.toContain('future-provider-failure')
+    expect(serialized).not.toContain('Owner')
+    expect(finding(model, 'Unrecognized validation finding')?.detail)
+      .toBe('An unrecognized validation check reported a failure; unvetted details were omitted.')
   })
 })
