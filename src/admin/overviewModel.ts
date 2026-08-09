@@ -1,8 +1,11 @@
 import type {
+  AdminBillingDisposition,
   AdminCapability,
   AdminCostKind,
+  AdminCurrency,
   AdminEngineId,
   AdminHealthState,
+  AdminOperationalResult,
   AdminRole,
   IntegerMicros,
 } from './admin0Vocabulary'
@@ -34,6 +37,8 @@ export type Metric<T> =
   | { readonly status: 'unavailable' }
   | { readonly status: 'unknown' }
 
+export type ApplicableMetric<T> = Metric<T> | { readonly status: 'not_applicable' }
+
 export type EngineReasonCode =
   | 'elevated_latency'
   | 'feature_disabled'
@@ -48,19 +53,48 @@ export interface EngineObservation {
   readonly engineId: AdminEngineId
   readonly health: AdminHealthState
   readonly appVersion: string
-  readonly engineVersion: string
+  /** Null means no independently versioned engine legitimately applies. */
+  readonly engineVersion: string | null
   readonly observedAt: string
   readonly windowStart: string
   readonly windowEnd: string
   readonly reasonCodes: readonly EngineReasonCode[]
 }
 
-export interface PresentedSpend {
-  readonly costMicros: IntegerMicros
-  readonly costKind: Exclude<AdminCostKind, 'unavailable'>
+export type CostResultReasonCode =
+  | 'attribution_incomplete'
+  | 'missing_effective_price'
+  | 'missing_provider_usage'
+  | 'provider_throttled'
+  | 'provider_timeout'
+  | 'reconciliation_conflict'
+  | 'response_sanitization_rejected'
+
+export type AggregateCompleteness =
+  | 'complete'
+  | 'partial_attribution_ambiguous'
+  | 'partial_attribution_unresolved'
+  | 'partial_usage_unavailable'
+
+interface SpendContext {
+  readonly billingDisposition: AdminBillingDisposition
+  readonly currency: AdminCurrency
+  readonly completeness: AggregateCompleteness
+  readonly result: AdminOperationalResult
+  readonly resultReasonCode: CostResultReasonCode | null
 }
 
+export type PresentedSpend =
+  | SpendContext & {
+      readonly status: 'available'
+      readonly costMicros: IntegerMicros
+      readonly costKind: Exclude<AdminCostKind, 'unavailable'>
+    }
+  | SpendContext & { readonly status: 'unavailable'; readonly costKind: 'unavailable' }
+  | SpendContext & { readonly status: 'unknown'; readonly costKind: AdminCostKind }
+
 export interface AdminOverviewModel {
+  readonly contractVersion: 2
   readonly range: OverviewRange
   /** Canonical observation time for this overview, separate from refresh history. */
   readonly observedAt: string
@@ -69,7 +103,7 @@ export interface AdminOverviewModel {
   readonly academy: {
     readonly environment: Metric<string>
     readonly appVersion: Metric<string>
-    readonly curriculumVersion: Metric<string>
+    readonly curriculumVersion: ApplicableMetric<string>
     readonly overallHealth: Metric<AdminHealthState>
     readonly lastSuccessfulDataRefresh: Metric<string>
   }
@@ -85,8 +119,10 @@ export interface AdminOverviewModel {
     readonly requests: Metric<number>
     readonly inputTokens: Metric<number>
     readonly outputTokens: Metric<number>
+    readonly cachedInputReadTokens: Metric<number>
+    readonly cachedInputWriteTokens: Metric<number>
     readonly ttsCharacters: Metric<number>
-    readonly spend: Metric<PresentedSpend>
+    readonly spend: PresentedSpend
   }
   readonly safety: {
     readonly openSafetyStops: Metric<number>
