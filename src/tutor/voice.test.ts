@@ -14,7 +14,8 @@ import {
   type BrowserTts,
   type FetchLike,
 } from './voice'
-import { getVoicePrefs, migrateLegacyVoiceToDefault, resolveSlotRef, setSlotRef } from './tutorState'
+import { getVoicePrefs, resolveSlotRef, setSlotRef, setVoiceSelection } from './tutorState'
+import type { PublicVoiceStatus, VoiceCatalogAccess } from './voiceCatalog'
 import { emptyProfile } from '../migration'
 
 // A fixed-month usage meter over an in-memory string cell (no localStorage needed).
@@ -36,6 +37,10 @@ function harness(opts: { cap?: number; startChars?: number } = {}) {
     online: true,
     failNetwork: false,
     fetchCalls: 0,
+    synthesisEnabled: true,
+    cachedPlaybackAllowed: true,
+    deploymentAvailable: true,
+    status: 'active' as PublicVoiceStatus,
   }
   const usage = makeUsage(opts.cap, opts.startChars)
   const fetchImpl: FetchLike = async () => {
@@ -49,6 +54,20 @@ function harness(opts: { cap?: number; startChars?: number } = {}) {
     isOnline: () => state.online,
     usage,
   })
+  const catalog: VoiceCatalogAccess = {
+    load: async () => ({
+      catalogVersion: 'test-v1', synthesisEnabled: state.synthesisEnabled,
+      defaultVoiceRef: 'academy.tts.synthetic', voices: [],
+    }),
+    resolve: async (voiceRef, voiceVersion) => voiceRef === 'academy.tts.synthetic'
+      ? {
+          voiceRef, voiceVersion, displayLabel: 'Synthetic', providerClass: 'premium',
+          status: state.status, deploymentAvailable: state.deploymentAvailable,
+          cachedPlaybackAllowed: state.cachedPlaybackAllowed,
+          synthesisEnabled: state.synthesisEnabled,
+        }
+      : null,
+  }
   const browserSpoke: string[] = []
   const browser: BrowserTts = {
     available: () => true,
@@ -59,6 +78,7 @@ function harness(opts: { cap?: number; startChars?: number } = {}) {
   const adapter = createVoiceAdapter({
     cache: createMemoryCache(),
     usage,
+    catalog,
     elevenLabs,
     browser,
     playAudio: async (b) => {
@@ -70,18 +90,23 @@ function harness(opts: { cap?: number; startChars?: number } = {}) {
 }
 
 describe('MT-V ref encoding', () => {
-  it('round-trips ElevenLabs and browser refs; browser refs never look premium', () => {
-    expect(encodeVoiceRef({ provider: 'elevenlabs', ref: 'v1', label: 'x' })).toBe('el:v1')
-    expect(encodeVoiceRef({ provider: 'browser', ref: 'urn:moz-tts:sapi:x', label: 'x' })).toBe(
-      'urn:moz-tts:sapi:x',
-    )
-    expect(encodeVoiceRef(undefined)).toBeUndefined()
-    expect(parseVoiceRef('el:v1')).toEqual({ provider: 'elevenlabs', ref: 'v1' })
-    expect(parseVoiceRef('urn:moz-tts:sapi:x')).toEqual({
-      provider: 'browser',
-      ref: 'urn:moz-tts:sapi:x',
+  it('encodes only logical catalog refs and separate browser refs', () => {
+    expect(encodeVoiceRef({
+      kind: 'catalog', voiceRef: 'academy.tts.synthetic',
+      voiceVersion: 'v1', displayLabel: 'Synthetic',
+    })).toBe('catalog:academy.tts.synthetic:v1')
+    expect(encodeVoiceRef({
+      kind: 'browser', voiceURI: 'urn:moz-tts:sapi:x', displayLabel: 'Browser',
+    })).toBe('urn:moz-tts:sapi:x')
+    expect(encodeVoiceRef({
+      kind: 'legacy', displayLabel: 'Legacy premium voice (browser fallback)',
+    })).toBeUndefined()
+    expect(parseVoiceRef('catalog:academy.tts.synthetic:v1')).toEqual({
+      provider: 'catalog', voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1',
     })
-    expect(parseVoiceRef(undefined)).toEqual({ provider: 'browser', ref: '' })
+    expect(parseVoiceRef('urn:moz-tts:sapi:x')).toEqual({
+      provider: 'browser', ref: 'urn:moz-tts:sapi:x',
+    })
   })
 })
 
@@ -90,19 +115,19 @@ describe('MT-V adapter chain: cache → ElevenLabs → browser (silent degradati
     const h = harness()
 
     // valid key + online → premium
-    expect(await h.adapter.speak({ text: 'one', voiceRef: 'el:v1' })).toBe('elevenlabs')
+    expect(await h.adapter.speak({ text: 'one', voiceRef: 'catalog:academy.tts.synthetic:v1' })).toBe('elevenlabs')
     expect(h.state.fetchCalls).toBe(1)
     expect(h.played).toHaveLength(1)
 
     // kill the network mid-session → next utterance is browser, no error surfaced
     h.state.online = false
-    expect(await h.adapter.speak({ text: 'two', voiceRef: 'el:v1' })).toBe('browser')
+    expect(await h.adapter.speak({ text: 'two', voiceRef: 'catalog:academy.tts.synthetic:v1' })).toBe('browser')
     expect(h.browserSpoke).toContain('two')
     expect(h.state.fetchCalls).toBe(1) // no network call was attempted while offline
 
     // restore → back to ElevenLabs
     h.state.online = true
-    expect(await h.adapter.speak({ text: 'three', voiceRef: 'el:v1' })).toBe(
+    expect(await h.adapter.speak({ text: 'three', voiceRef: 'catalog:academy.tts.synthetic:v1' })).toBe(
       'elevenlabs',
     )
     expect(h.state.fetchCalls).toBe(2)
@@ -111,7 +136,7 @@ describe('MT-V adapter chain: cache → ElevenLabs → browser (silent degradati
   it('a mid-request fetch failure also degrades silently to browser', async () => {
     const h = harness()
     h.state.failNetwork = true
-    expect(await h.adapter.speak({ text: 'boom', voiceRef: 'el:v1' })).toBe('browser')
+    expect(await h.adapter.speak({ text: 'boom', voiceRef: 'catalog:academy.tts.synthetic:v1' })).toBe('browser')
     expect(h.browserSpoke).toContain('boom')
   })
 
@@ -127,7 +152,7 @@ describe('MT-V adapter chain: cache → ElevenLabs → browser (silent degradati
 describe('MT-V cache: same line = one API call', () => {
   it('synthesizes once, then serves the second identical line from cache', async () => {
     const h = harness()
-    const req = { text: 'same line', voiceRef: 'el:v1', rate: 1 }
+    const req = { text: 'same line', voiceRef: 'catalog:academy.tts.synthetic:v1', rate: 1 }
 
     expect(await h.adapter.speak(req)).toBe('elevenlabs')
     expect(await h.adapter.speak(req)).toBe('cache')
@@ -143,13 +168,13 @@ describe('MT-V usage cap flips the chain to browser-only', () => {
     const h = harness({ cap: 8 }) // tiny soft cap
 
     // first line (10 chars) is allowed (chars 0 < cap 8), and pushes usage over the cap
-    expect(await h.adapter.speak({ text: 'abcdefghij', voiceRef: 'el:v1' })).toBe(
+    expect(await h.adapter.speak({ text: 'abcdefghij', voiceRef: 'catalog:academy.tts.synthetic:v1' })).toBe(
       'elevenlabs',
     )
     expect(h.usage.overCap()).toBe(true)
 
     // next line: cap reached → adapter no longer chooses ElevenLabs
-    expect(await h.adapter.speak({ text: 'next one', voiceRef: 'el:v1' })).toBe(
+    expect(await h.adapter.speak({ text: 'next one', voiceRef: 'catalog:academy.tts.synthetic:v1' })).toBe(
       'browser',
     )
     expect(h.state.fetchCalls).toBe(1)
@@ -159,7 +184,7 @@ describe('MT-V usage cap flips the chain to browser-only', () => {
 describe('MT-V pre-warm', () => {
   it('caches a static line so it later plays from cache with no extra API call', async () => {
     const h = harness()
-    const req = { text: "Let's work it out together.", voiceRef: 'el:v1', rate: 0.85 }
+    const req = { text: "Let's work it out together.", voiceRef: 'catalog:academy.tts.synthetic:v1', rate: 0.85 }
 
     expect(await h.adapter.prewarmLine(req)).toBe(true)
     expect(h.state.fetchCalls).toBe(1)
@@ -174,44 +199,81 @@ describe('MT-V pre-warm', () => {
 describe('MT-V voice-map resolution + fall-through', () => {
   const g6 = () => emptyProfile('p3', '6th Grader', '6')
 
-  it('two slots for one girl resolve to two different voices', () => {
+  it('resolves canonical logical selections by slot and version', () => {
     let p = g6()
-    p = setSlotRef(p, 'mathTutor', { provider: 'elevenlabs', ref: 'aaa', label: 'Rachel' })
-    p = setSlotRef(p, 'mindset', { provider: 'elevenlabs', ref: 'bbb', label: 'Bella' })
-    expect(resolveSlotRef(p, 'mathTutor')?.ref).toBe('aaa')
-    expect(resolveSlotRef(p, 'mindset')?.ref).toBe('bbb')
+    p = setVoiceSelection(p, 'default', {
+      kind: 'catalog', voiceRef: 'academy.tts.default', voiceVersion: 'v1', displayLabel: 'Default',
+    })
+    p = setVoiceSelection(p, 'mathTutor', {
+      kind: 'catalog', voiceRef: 'academy.tts.math', voiceVersion: 'v2', displayLabel: 'Math',
+    })
+    expect(resolveSlotRef(p, 'mindset')).toMatchObject({ voiceRef: 'academy.tts.default', voiceVersion: 'v1' })
+    expect(getVoicePrefs(p).voiceURI).toBe('catalog:academy.tts.math:v2')
   })
 
-  it('an unset slot falls through to the default slot', () => {
-    let p = g6()
-    p = setSlotRef(p, 'default', { provider: 'elevenlabs', ref: 'def', label: 'Default' })
-    // mathTutor is unset → resolves to the default slot
-    expect(resolveSlotRef(p, 'mathTutor')?.ref).toBe('def')
-    // and getVoicePrefs (the walkthrough path) encodes that as a premium ref
-    expect(getVoicePrefs(p).voiceURI).toBe('el:def')
+  it('keeps historical raw premium data but exposes only a legacy fallback sentinel', () => {
+    const p = setSlotRef(g6(), 'mathTutor', {
+      provider: 'elevenlabs', ref: 'historical-raw-provider-value', label: 'Hidden',
+    })
+    expect(p.tutor?.voiceMap?.mathTutor?.ref).toBe('historical-raw-provider-value')
+    expect(resolveSlotRef(p, 'mathTutor')).toEqual({
+      kind: 'legacy', displayLabel: 'Legacy premium voice (browser fallback)',
+    })
+    expect(getVoicePrefs(p).voiceURI).toBeUndefined()
   })
 
-  it('the math-tutor slot wins over the default slot for the walkthrough', () => {
-    let p = g6()
-    p = setSlotRef(p, 'default', { provider: 'elevenlabs', ref: 'def', label: 'D' })
-    p = setSlotRef(p, 'mathTutor', { provider: 'elevenlabs', ref: 'math', label: 'M' })
-    expect(getVoicePrefs(p).voiceURI).toBe('el:math')
+  it('never sends a preserved legacy premium selection to the provider', async () => {
+    const h = harness()
+    const p = setSlotRef(g6(), 'mathTutor', {
+      provider: 'elevenlabs', ref: 'historical-raw-provider-value', label: 'Hidden',
+    })
+    const resolved = resolveSlotRef(p, 'mathTutor')
+    expect(await h.adapter.speak({
+      text: 'legacy selection', voiceRef: encodeVoiceRef(resolved),
+    })).toBe('browser')
+    expect(h.state.fetchCalls).toBe(0)
   })
 
-  it('an MT-1 single voice migrates into the default slot and resolves as a browser ref', () => {
-    let p = g6()
-    p = { ...p, tutor: { ...p.tutor, voiceURI: 'urn:moz-tts:sapi:kid' } }
-    // even before migration, resolution falls through to the legacy voice
-    expect(getVoicePrefs(p).voiceURI).toBe('urn:moz-tts:sapi:kid')
-    p = migrateLegacyVoiceToDefault(p)
-    expect(getSlotRefViaResolve(p)).toBe('urn:moz-tts:sapi:kid')
-    // migration is idempotent
-    expect(migrateLegacyVoiceToDefault(p)).toBe(p)
+  it('continues to dual-read historical browser speech selections', () => {
+    const p = setSlotRef(g6(), 'default', {
+      provider: 'browser', ref: 'urn:browser:historical', label: 'System voice',
+    })
+    expect(getVoicePrefs(p).voiceURI).toBe('urn:browser:historical')
+  })
+})
+
+describe('MT-V cache policy and version identity', () => {
+  it('plays an allowed existing cache hit while new synthesis is disabled', async () => {
+    const h = harness()
+    const req = { text: 'cached while disabled', voiceRef: 'catalog:academy.tts.synthetic:v1' }
+    expect(await h.adapter.speak(req)).toBe('elevenlabs')
+    h.state.synthesisEnabled = false
+    expect(await h.adapter.speak(req)).toBe('cache')
+    expect(h.state.fetchCalls).toBe(1)
   })
 
-  function getSlotRefViaResolve(p: ReturnType<typeof g6>): string | undefined {
-    return resolveSlotRef(p, 'default')?.ref
-  }
+  it('blocks revoked and cache-denied playback', async () => {
+    const h = harness()
+    const req = { text: 'revoked cache', voiceRef: 'catalog:academy.tts.synthetic:v1' }
+    expect(await h.adapter.speak(req)).toBe('elevenlabs')
+    h.state.status = 'revoked'
+    h.state.synthesisEnabled = false
+    expect(await h.adapter.speak(req)).toBe('browser')
+    h.state.status = 'active'
+    h.state.cachedPlaybackAllowed = false
+    expect(await h.adapter.speak(req)).toBe('browser')
+  })
+
+  it('changes cache identity when voiceVersion changes', async () => {
+    const h = harness()
+    expect(await h.adapter.speak({
+      text: 'same versioned line', voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1',
+    })).toBe('elevenlabs')
+    expect(await h.adapter.speak({
+      text: 'same versioned line', voiceRef: 'academy.tts.synthetic', voiceVersion: 'v2',
+    })).toBe('elevenlabs')
+    expect(h.state.fetchCalls).toBe(2)
+  })
 })
 
 describe('MT-V cache lifecycle hardening', () => {

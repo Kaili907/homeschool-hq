@@ -17,6 +17,10 @@ const migrationPath = new URL(
   './migrations/20260726120000_academy_household_revision_cas.sql',
   import.meta.url,
 )
+const logicalVoiceMigrationPath = new URL(
+  './migrations/20260809150000_academy_logical_voice_profile_contract.sql',
+  import.meta.url,
+)
 
 function profileRow(
   id: string,
@@ -141,6 +145,9 @@ describe('Academy household server revision CAS migration', () => {
     // The tracked migration must remain safe when the local migration runner
     // encounters it a second time.
     await database.exec(migration)
+    const logicalVoiceMigration = await readFile(logicalVoiceMigrationPath, 'utf8')
+    await database.exec(logicalVoiceMigration)
+    await database.exec(logicalVoiceMigration)
 
     server = new PGLiteSocketServer({
       db: database,
@@ -321,6 +328,39 @@ describe('Academy household server revision CAS migration', () => {
       [HOUSEHOLD_C],
     )
     expect(receipts.rows[0].count).toBe('0')
+    await configureClient(clientA, HOUSEHOLD_A)
+  })
+
+  it('validates the additive logical voice profile contract without rewriting legacy data', async () => {
+    await clientA.query('reset role')
+    const base = structuredClone(defaultAppState().profiles.p1) as Record<string, unknown>
+    const valid = structuredClone(base) as Record<string, any>
+    valid.tutor = {
+      voiceMap: { default: { provider: 'elevenlabs', ref: 'historical-preserved', label: 'Hidden' } },
+      voiceSelections: {
+        default: {
+          kind: 'catalog', voiceRef: 'academy.tts.synthetic-db',
+          voiceVersion: 'v1', displayLabel: 'Synthetic DB voice',
+        },
+      },
+    }
+    const invalid = structuredClone(valid)
+    invalid.tutor.voiceSelections.default.provider = 'elevenlabs'
+    const result = await clientA.query<{ valid: boolean; invalid: boolean }>(
+      `select
+         public.academy_sync_logical_voice_contract_is_valid($1::jsonb) as valid,
+         public.academy_sync_logical_voice_contract_is_valid($2::jsonb) as invalid`,
+      [JSON.stringify(valid), JSON.stringify(invalid)],
+    )
+    expect(result.rows).toEqual([{ valid: true, invalid: false }])
+    expect(valid.tutor.voiceMap.default.ref).toBe('historical-preserved')
+    const constraint = await clientA.query<{ validated: boolean }>(
+      `select convalidated as validated
+         from pg_catalog.pg_constraint
+        where conrelid = 'public.profiles'::regclass
+          and conname = 'profiles_logical_voice_contract_check'`,
+    )
+    expect(constraint.rows).toEqual([{ validated: true }])
     await configureClient(clientA, HOUSEHOLD_A)
   })
 

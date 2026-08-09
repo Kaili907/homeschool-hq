@@ -358,12 +358,41 @@ function validateStars(value: unknown): boolean {
   )
 }
 
+const LOGICAL_VOICE_REF = /^academy\.tts\.[a-z0-9]+(?:[.-][a-z0-9]+)*$/
+const LOGICAL_VOICE_VERSION = /^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/
+
+function exactRecordKeys(value: Record<string, unknown>, keys: readonly string[]): boolean {
+  const actual = Object.keys(value)
+  return actual.length === keys.length && keys.every((key) => Object.hasOwn(value, key))
+}
+
+function validateVoiceSelection(value: unknown): boolean {
+  if (!plainRecord(value)) return false
+  if (value.kind === 'catalog') {
+    return (
+      exactRecordKeys(value, ['kind', 'voiceRef', 'voiceVersion', 'displayLabel']) &&
+      text(value.voiceRef, 128) &&
+      LOGICAL_VOICE_REF.test(value.voiceRef) &&
+      text(value.voiceVersion, 64) &&
+      LOGICAL_VOICE_VERSION.test(value.voiceVersion) &&
+      text(value.displayLabel, 120)
+    )
+  }
+  return (
+    value.kind === 'browser' &&
+    exactRecordKeys(value, ['kind', 'voiceURI', 'displayLabel']) &&
+    text(value.voiceURI) && value.voiceURI.length > 0 &&
+    text(value.displayLabel, 120) && value.displayLabel.length > 0
+  )
+}
+
 function validateTutorPrefs(value: unknown): boolean {
   return (
     plainRecord(value) &&
     optional(value.voiceURI, text) &&
     optional(value.rate, finiteNumber) &&
     optional(value.voiceOptIn, (candidate) => typeof candidate === 'boolean') &&
+    optional(value.voiceSelections, (candidate) => boundedRecord(candidate, validateVoiceSelection)) &&
     optional(value.voiceMap, (candidate) =>
       boundedRecord(
         candidate,

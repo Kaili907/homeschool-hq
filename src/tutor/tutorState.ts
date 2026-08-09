@@ -1,4 +1,7 @@
-import type { AppState, Grade, NeedsDadFlag, Profile, VoiceRef, VoiceSlot, WalkthroughEvent } from '../types'
+import type {
+  AppState, Grade, NeedsDadFlag, Profile, ResolvedVoiceSelection,
+  VoiceRef, VoiceSelection, VoiceSlot, WalkthroughEvent,
+} from '../types'
 import type { SkillId } from '../skills'
 import { encodeVoiceRef } from './voice'
 
@@ -61,7 +64,15 @@ export const VOICE_SLOTS: { slot: VoiceSlot; label: string; hint: string }[] = [
   { slot: 'default', label: 'Default', hint: 'backs every unset slot' },
 ]
 
-/** The voice mapped DIRECTLY to a slot (no fall-through) — for editing UI. */
+/** Canonical tagged selection mapped directly to a slot (no fall-through). */
+export function getSlotSelection(p: Profile, slot: VoiceSlot): VoiceSelection | undefined {
+  return p.tutor?.voiceSelections?.[slot]
+}
+
+export function hasLegacyPremiumSelection(p: Profile, slot: VoiceSlot): boolean {
+  return p.tutor?.voiceMap?.[slot]?.provider === 'elevenlabs'
+}
+
 export function getSlotRef(p: Profile, slot: VoiceSlot): VoiceRef | undefined {
   return p.tutor?.voiceMap?.[slot]
 }
@@ -70,13 +81,25 @@ export function getSlotRef(p: Profile, slot: VoiceSlot): VoiceRef | undefined {
  * The voice a slot RESOLVES to, applying fall-through:
  * slot → `default` slot → legacy MT-1 single voice (browser) → undefined (browser default).
  */
-export function resolveSlotRef(p: Profile, slot: VoiceSlot): VoiceRef | undefined {
+function historicalSelection(ref: VoiceRef | undefined): ResolvedVoiceSelection | undefined {
+  if (!ref) return undefined
+  if (ref.provider === 'browser') {
+    return { kind: 'browser', voiceURI: ref.ref, displayLabel: ref.label }
+  }
+  return { kind: 'legacy', displayLabel: 'Legacy premium voice (browser fallback)' }
+}
+
+export function resolveSlotRef(p: Profile, slot: VoiceSlot): ResolvedVoiceSelection | undefined {
+  const selections = p.tutor?.voiceSelections
+  const directSelection = selections?.[slot]
+  if (directSelection) return directSelection
+  if (slot !== 'default' && selections?.default) return selections.default
   const map = p.tutor?.voiceMap
   const direct = map?.[slot]
-  if (direct) return direct
-  if (slot !== 'default' && map?.default) return map.default
+  if (direct) return historicalSelection(direct)
+  if (slot !== 'default' && map?.default) return historicalSelection(map.default)
   const legacy = p.tutor?.voiceURI
-  if (legacy) return { provider: 'browser', ref: legacy, label: 'System voice' }
+  if (legacy) return { kind: 'browser', voiceURI: legacy, displayLabel: 'System voice' }
   return undefined
 }
 
@@ -89,35 +112,43 @@ export function setSlotRef(p: Profile, slot: VoiceSlot, ref: VoiceRef | undefine
   return { ...p, tutor: { ...p.tutor, voiceMap: nextMap } }
 }
 
-/**
- * Migrate an MT-1 single voice into the `default` slot (once). No-op if there is
- * no legacy voice or a `default` slot already exists. Keeps `voiceURI` in place so
- * resolution stays correct even before this runs.
- */
+/** New writes update only the canonical tagged map and preserve historical mappings. */
+export function setVoiceSelection(
+  p: Profile,
+  slot: VoiceSlot,
+  selection: VoiceSelection | undefined,
+): Profile {
+  const map: Partial<Record<VoiceSlot, VoiceSelection>> = { ...(p.tutor?.voiceSelections ?? {}) }
+  if (selection) map[slot] = selection
+  else delete map[slot]
+  return { ...p, tutor: { ...p.tutor, voiceSelections: Object.keys(map).length ? map : undefined } }
+}
+
+/** Explicit opt-in compatibility helper; never called during normal profile load. */
 export function migrateLegacyVoiceToDefault(p: Profile): Profile {
   const t = p.tutor
   if (!t?.voiceURI || t.voiceMap?.default) return p
   return setSlotRef(p, 'default', { provider: 'browser', ref: t.voiceURI, label: 'System voice' })
 }
 
-/**
- * Distinct ElevenLabs (encoded voiceRef, rate) pairs currently mapped to a spoken
- * slot across the family — the set "Download voices for offline" pre-warms.
- */
-export function prewarmTargets(state: AppState): { voiceRef: string; rate: number; label: string }[] {
+/** Distinct logical catalog ref/version/rate targets selected for offline pre-warming. */
+export function prewarmTargets(state: AppState): { voiceRef: string; voiceVersion: string; rate: number; label: string }[] {
   const seen = new Set<string>()
-  const out: { voiceRef: string; rate: number; label: string }[] = []
+  const out: { voiceRef: string; voiceVersion: string; rate: number; label: string }[] = []
   for (const p of Object.values(state.profiles)) {
     const rate = getVoicePrefs(p).rate
     for (const slot of ['mathTutor', 'assistant', 'default'] as VoiceSlot[]) {
       const ref = resolveSlotRef(p, slot)
-      if (!ref || ref.provider !== 'elevenlabs') continue
-      const encoded = encodeVoiceRef(ref)
-      if (!encoded) continue
-      const dkey = `${encoded}|${rate}`
+      if (!ref || ref.kind !== 'catalog') continue
+      const dkey = `${ref.voiceRef}|${ref.voiceVersion}|${rate}`
       if (seen.has(dkey)) continue
       seen.add(dkey)
-      out.push({ voiceRef: encoded, rate, label: ref.label })
+      out.push({
+        voiceRef: ref.voiceRef,
+        voiceVersion: ref.voiceVersion,
+        rate,
+        label: ref.displayLabel,
+      })
     }
   }
   return out

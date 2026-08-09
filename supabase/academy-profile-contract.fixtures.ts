@@ -37,6 +37,19 @@ export function academyProfileContractFixtures(): AcademyProfileContractFixture[
       rate: 1,
       voiceOptIn: true,
       voiceMap: {},
+      voiceSelections: {
+        mathTutor: {
+          kind: 'catalog',
+          voiceRef: 'academy.tts.synthetic-fixture',
+          voiceVersion: 'fixture-v1',
+          displayLabel: 'Synthetic fixture voice',
+        },
+        default: {
+          kind: 'browser',
+          voiceURI: 'urn:synthetic-browser-voice',
+          displayLabel: 'Synthetic browser voice',
+        },
+      },
     },
     tutorFlags: {},
     walkthroughLog: [],
