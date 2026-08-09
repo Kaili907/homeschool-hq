@@ -38,6 +38,16 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/v1/learners/*"
+  to = "/.netlify/functions/admin-learners/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/v1/learners"
+  to = "/.netlify/functions/admin-learners"
+  status = 200
+
+[[redirects]]
   from = "/api/admin/curriculum/*"
   to = "/.netlify/functions/admin-curriculum/:splat"
   status = 200

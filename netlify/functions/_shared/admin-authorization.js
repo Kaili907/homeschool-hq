@@ -118,7 +118,9 @@ export function createAdminAuthorization({
       if (!hasAdminCapability(authorization.principal.role, requiredCapability)) {
         return { ok: false, response: errorResponse(403, 'admin_access_denied') }
       }
-      return authorization
+      // The pinned bearer is server-internal authority for downstream RLS
+      // reads. Browser wire projections deliberately omit it.
+      return { ...authorization, accessToken: auth.accessToken }
     },
   })
 }
