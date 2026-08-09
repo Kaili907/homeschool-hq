@@ -211,14 +211,17 @@ $$;
 
 -- The single reviewed metadata authority for every function Academic Readiness
 -- requires. Identity is the schema-qualified name plus argument types used by
--- to_regprocedure; return type and proretset are separate catalog attributes and
--- are therefore carried explicitly rather than incorrectly attributed to that
--- identity. Strictness is explicit for the same operational reason: making a
+-- to_regprocedure. Input argument names are a separate part of the callable RPC
+-- contract because PostgREST resolves the named object keys sent by Supabase
+-- clients. Return type and proretset are separate catalog attributes and are
+-- therefore carried explicitly rather than incorrectly attributed to identity.
+-- Strictness is explicit for the same operational reason: making a
 -- required RPC STRICT can turn a reviewed nullable argument into a silent NULL
 -- result without executing the body.
 create function academy_private.study_academic_required_function_metadata()
 returns table (
   signature text,
+  expected_argument_names text[],
   expected_language text,
   expected_volatility text,
   expected_result text,
@@ -232,28 +235,45 @@ set search_path = pg_catalog
 as $$
   values
     ('public.academy_study_create_session(jsonb,text)',
+      array['p_session', 'p_idempotency_key']::text[],
       'plpgsql', 'v', 'jsonb', false, false),
     ('public.academy_study_transition_session(text,bigint,text,timestamptz,text)',
+      array['p_session_id', 'p_expected_revision', 'p_state',
+        'p_completed_at', 'p_idempotency_key']::text[],
       'plpgsql', 'v', 'jsonb', false, false),
     ('public.academy_study_read_checkpoint(text)',
+      array['p_session_id']::text[],
       'plpgsql', 's', 'jsonb', false, false),
     ('public.academy_study_compare_and_swap_checkpoint(text,bigint,text,jsonb)',
+      array['p_session_id', 'p_expected_revision', 'p_mutation_id',
+        'p_checkpoint']::text[],
       'plpgsql', 'v', 'jsonb', false, false),
     ('public.academy_study_upsert_adult_managed_record(text,jsonb,bigint,text)',
+      array['p_record_kind', 'p_record', 'p_expected_revision',
+        'p_idempotency_key']::text[],
       'plpgsql', 'v', 'jsonb', false, false),
     ('public.academy_study_effective_settings(uuid,date)',
+      array['p_student_id', 'p_effective_date']::text[],
       'plpgsql', 's', 'jsonb', false, false),
     ('public.academy_study_store_protected_work(jsonb)',
+      array['p_work']::text[],
       'plpgsql', 'v', 'jsonb', false, false),
     ('public.academy_study_read_protected_work(uuid,text,bigint)',
+      array['p_student_id', 'p_work_id', 'p_revision']::text[],
       'plpgsql', 's', 'jsonb', false, false),
     ('public.academy_study_append_adult_note(jsonb)',
+      array['p_note']::text[],
       'plpgsql', 'v', 'jsonb', false, false),
     ('public.academy_study_list_adult_note_metadata(uuid)',
+      array['p_student_id']::text[],
       'plpgsql', 's', 'jsonb', false, false),
     ('public.academy_study_read_adult_note(uuid,text,bigint,uuid)',
+      array['p_student_id', 'p_note_id', 'p_revision',
+        'p_correlation_id']::text[],
       'plpgsql', 'v', 'jsonb', false, false),
     ('public.academy_study_append_event(text,text,integer,text)',
+      array['p_session_id', 'p_event_id', 'p_event_version',
+        'p_idempotency_key']::text[],
       'plpgsql', 'v', 'jsonb', false, false);
 $$;
 
@@ -323,8 +343,9 @@ end;
 $$;
 
 -- A required academic function is ready only when the whole contract holds: the
--- exact schema-qualified argument signature exists and occurs in the reviewed
--- authority; its language, volatility, result type, set-returning posture and
+-- exact schema-qualified argument-type signature exists and occurs in the reviewed
+-- authority; its input argument names match in exact order; its language,
+-- volatility, result type, set-returning posture and
 -- strictness match that authority; it is owned by postgres; it is security definer
 -- with a pinned search_path; the learner-facing role the adapters authenticate as
 -- can execute it; and no unauthenticated role can. Anything less is a name.
@@ -347,6 +368,20 @@ begin
       @> array['search_path=pg_catalog']
     and language.lanname = expected.expected_language
     and routine.provolatile::text = expected.expected_volatility
+    and coalesce((
+      select array_agg(routine.proargnames[position] order by position)
+      from generate_subscripts(
+        coalesce(
+          routine.proargmodes,
+          array_fill('i'::"char", array[routine.pronargs])
+        ),
+        1
+      ) as position
+      where (coalesce(
+        routine.proargmodes,
+        array_fill('i'::"char", array[routine.pronargs])
+      ))[position] in ('i'::"char", 'b'::"char", 'v'::"char")
+    ), array[]::text[]) = expected.expected_argument_names
     and pg_get_function_result(routine.oid) = expected.expected_result
     and routine.proretset = expected.expected_returns_set
     and routine.proisstrict = expected.expected_strict
@@ -1114,6 +1149,7 @@ set academic_readiness_version = 1,
       'academic_readiness_execute_role', 'service_role',
       'academic_readiness_dependency_count', 7,
       'academic_readiness_required_function_count', 12,
+      'academic_readiness_required_function_argument_names_pinned_all', true,
       'academic_readiness_required_function_language_pinned_all', true,
       'academic_readiness_required_function_volatility_pinned_all', true,
       'academic_readiness_required_function_result_shape_pinned_all', true,
