@@ -48,6 +48,32 @@ export interface StudyIdentityClientDeps {
   readonly onSessionInvalidated?: (notice: StudySessionInvalidationNotice) => void
 }
 
+/**
+ * The browser client's own copy of the operation -> capability allow-list.
+ *
+ * One of three independent literals — this one, the Netlify gateway's, and
+ * academy_private.study_runtime_operation_contract() in the database — kept as
+ * separate lists on purpose, so a stale client cannot silently agree with the
+ * server it no longer matches. supabase/academy-study-learner-runtime-operations.db.test.ts
+ * executes the SQL authority and requires all three to be identical.
+ *
+ * preferences:write is absent by design: adult preferences are an adult/parent
+ * authority operation and never ride a learner-session grant.
+ */
+export const STUDY_ACADEMIC_OPERATIONS = Object.freeze({
+  'dashboard:read': 'student:progress:read',
+  'calendar:read': 'student:assignments:read',
+  'calendar:transition': 'student:attempts:create',
+  'session:begin': 'student:attempts:create',
+  'session:transition': 'student:attempts:create',
+  'checkpoint:read': 'student:progress:read',
+  'checkpoint:compare-and-swap': 'student:attempts:create',
+  'event:append': 'student:attempts:create',
+}) satisfies Readonly<Record<string, StudyStudentCapability>>
+
+/** Derived from the map above so the accepted names cannot drift from it. */
+export type StudyAcademicOperation = keyof typeof STUDY_ACADEMIC_OPERATIONS
+
 export interface StudyIdentityClient {
   issueGuardianLaunch(input: {
     readonly accessToken: string
@@ -59,13 +85,7 @@ export interface StudyIdentityClient {
     readonly signal?: AbortSignal
   }): Promise<VerifiedStudySession>
   executeAcademicOperation(input: {
-    readonly operation:
-      | 'dashboard:read'
-      | 'calendar:read'
-      | 'session:begin'
-      | 'session:transition'
-      | 'checkpoint:read'
-      | 'checkpoint:compare-and-swap'
+    readonly operation: StudyAcademicOperation
     readonly request: Readonly<Record<string, unknown>>
     readonly signal?: AbortSignal
   }): Promise<unknown>

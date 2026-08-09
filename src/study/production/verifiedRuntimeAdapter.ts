@@ -1,5 +1,6 @@
-import type {
-  StudyIdentityClient,
+import {
+  STUDY_ACADEMIC_OPERATIONS,
+  type StudyIdentityClient,
 } from '../client/studyIdentityClient'
 import type {
   StudyProductionReadinessWire,
@@ -68,14 +69,14 @@ export interface VerifiedStudyRuntimeAdapterOptions {
   readonly onSessionGrantIssued?: (grant: StudySessionGrant) => void
 }
 
-const CAPABILITY_BY_OPERATION: Readonly<Record<VerifiedAcademicOperation, StudyStudentCapability>> = Object.freeze({
-  'dashboard:read': 'student:progress:read',
-  'calendar:read': 'student:assignments:read',
-  'session:begin': 'student:attempts:create',
-  'session:transition': 'student:attempts:create',
-  'checkpoint:read': 'student:progress:read',
-  'checkpoint:compare-and-swap': 'student:attempts:create',
-})
+/**
+ * The capability this adapter re-verifies before each operation. Read from the
+ * client's allow-list rather than restated here: a second literal in the same
+ * lane would be one more place for the same map to go stale, and the map that
+ * types `executeAcademicOperation` is the one that decides what may be sent.
+ */
+const CAPABILITY_BY_OPERATION: Readonly<Record<VerifiedAcademicOperation, StudyStudentCapability>> =
+  STUDY_ACADEMIC_OPERATIONS
 
 function selectorKey(selector: StudyLearnerSelector): string {
   return `${selector.kind}\u001f${selector.value}`
