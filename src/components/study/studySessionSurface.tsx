@@ -544,10 +544,11 @@ export function StudySessionSurface({ context: baseContext, initialEntry, ports,
                 ? 'server-answered-stop'
                 : 'server-acceptance-not-confirmed',
           }).catch(() => null)
-          setStopped(true)
-          setCheckingTutorSafety(false)
-          setJarvisText(result.studentMessage)
-          setBusy(false)
+          // The local ledger may have waited on a Web Lock. The token above is
+          // the authority that classified THIS stop; never reacquire a token
+          // here, because a fresh token would name whichever learner/session
+          // replaced it while the lock was held.
+          token.assertCurrent()
           try {
             await runCurrentStudyWork(token, () => (ports as StudyPortBundle).eventLedger.append(scope, {
               eventRef: `stop:${sessionRef}:${Date.now()}`,
@@ -558,8 +559,17 @@ export function StudySessionSurface({ context: baseContext, initialEntry, ports,
           } catch {
             // The stop is already recorded durably; a failed event append must
             // not undo it or surface as a recoverable error to the student.
+            // A stale-authority rejection is different: it ends every remaining
+            // effect owned by this completion instead of being permission to
+            // continue against the current epoch.
+            token.assertCurrent()
           }
-          lifecycle.cancel('safety-stop')
+          token.assertCurrent()
+          setStopped(true)
+          setCheckingTutorSafety(false)
+          setJarvisText(result.studentMessage)
+          setBusy(false)
+          lifecycle.cancelIfCurrent(token, 'safety-stop')
           return
         }
         // A structural refusal, carrying no classification, no delivery status

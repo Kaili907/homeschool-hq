@@ -82,7 +82,7 @@ describe('production Study import boundary', () => {
    * the day they were written and diverge silently afterwards, and the
    * divergence would only be visible at the moment it mattered.
    *
-   * Each name below is one of those rules. `cancel('safety-stop')` rather than
+   * Each name below is one of those rules. `cancelIfCurrent(token, 'safety-stop')` rather than
    * `lifecycle.cancel(` because the route and App legitimately cancel the epoch
    * for navigation, learner switch and authorization loss — it is the
    * safety-stop cancellation specifically that must exist once.
@@ -95,7 +95,7 @@ describe('production Study import boundary', () => {
       { call: 'settleStudyTutorLaunch', rule: 'HOST_AWAIT: the launch is awaited before anything durable' },
       { call: 'prepareDurableStudySession', rule: 'HOST_AWAIT: the durable preparation set behind the witness' },
       { call: 'recordLocalSessionSafetyStop', rule: 'safety-stop mapping: the durable ledger write' },
-      { call: "cancel('safety-stop')", rule: 'safety-stop mapping: the lifecycle cancellation' },
+      { call: "cancelIfCurrent(token, 'safety-stop')", rule: 'safety-stop mapping: epoch-owned lifecycle cancellation' },
       { call: 'isSessionStoppedByLocalLedger', rule: 'safety-stop mapping: the durable stop lock' },
       { call: 'interruptionMessage', rule: 'interruption mapping' },
       { call: 'saveSession(', rule: 'privacy: what a durable session row may carry' },
@@ -111,6 +111,30 @@ describe('production Study import boundary', () => {
     for (const wrapper of ['StudySessionContainer.tsx', 'ProductionStudySessionContainer.tsx']) {
       expect(code(readFileSync(join(hostDirectory, wrapper), 'utf8'))).toContain('<StudySessionSurface')
     }
+  })
+
+  it('binds safety-stop finalization to the one token captured before its awaits', () => {
+    const surface = code(readFileSync(join(sourceRoot, 'components', 'study', 'studySessionSurface.tsx'), 'utf8'))
+    const start = surface.indexOf("if (result.status === 'stopped')")
+    const end = surface.indexOf("if (result.status === 'quarantined')", start)
+    expect(start).toBeGreaterThan(-1)
+    expect(end).toBeGreaterThan(start)
+    const stoppedBranch = surface.slice(start, end)
+
+    // The first guard is specifically after the Web Lock-backed local record;
+    // a guard before that await says nothing about the authority on return.
+    expect(stoppedBranch).toMatch(
+      /await recordLocalSessionSafetyStop\([\s\S]*?\.catch\(\(\) => null\)[\s\S]*?token\.assertCurrent\(\)[\s\S]*?runCurrentStudyWork\(token,/,
+    )
+    // A stale rejection from the guarded append is not swallowed into the
+    // remaining UI/cancellation effects, and the final cancellation names the
+    // originating token rather than whichever epoch happens to be current.
+    expect(stoppedBranch).toMatch(
+      /catch \{[\s\S]*?token\.assertCurrent\(\)[\s\S]*?\}[\s\S]*?token\.assertCurrent\(\)[\s\S]*?cancelIfCurrent\(token, 'safety-stop'\)/,
+    )
+    // A fresh token acquired inside the stopped branch would name Epoch B and
+    // make every post-await check trivially pass.
+    expect(stoppedBranch).not.toContain('lifecycle.token()')
   })
 
   /**

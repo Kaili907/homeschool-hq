@@ -216,6 +216,12 @@ interface DurableWrites {
   readonly sessions: StudySessionSnapshot[]
 }
 
+function deferred(): { readonly promise: Promise<void>; readonly resolve: () => void } {
+  let resolve!: () => void
+  const promise = new Promise<void>((done) => { resolve = done })
+  return { promise, resolve }
+}
+
 describe('the production host reparses every Tutor result before it can act on one', () => {
   let container: FakeElement
   let documentTarget: FakeDocument
@@ -351,6 +357,62 @@ describe('the production host reparses every Tutor result before it can act on o
       await onClick()
     })
     await settle()
+  }
+
+  async function beginAnswerSubmission(text: string): Promise<{ readonly completion: Promise<void> }> {
+    const textarea = tags(container, 'TEXTAREA')[0]
+    if (!textarea) throw new Error('The live Study surface never rendered a response field.')
+    await act(async () => {
+      const onChange = reactProps(textarea).onChange as unknown as (event: unknown) => void
+      onChange({ target: { value: text } })
+    })
+    const send = control('Send through Tutor boundary')
+    if (!send) throw new Error('The live Study surface never rendered a submit control.')
+    let completion!: Promise<void>
+    await act(async () => {
+      const onClick = reactProps(send).onClick as unknown as () => void | Promise<void>
+      completion = Promise.resolve(onClick()).then(() => undefined)
+      await Promise.resolve()
+    })
+    return { completion }
+  }
+
+  function holdSafetyLedgerLock(): {
+    readonly entered: Promise<void>
+    readonly release: () => void
+  } {
+    const entered = deferred()
+    const released = deferred()
+    Object.assign(globalThis.navigator, {
+      locks: {
+        request: async <T,>(_name: string, callback: () => Promise<T>): Promise<T> => {
+          entered.resolve()
+          await released.promise
+          return callback()
+        },
+      },
+    })
+    return { entered: entered.promise, release: released.resolve }
+  }
+
+  async function beginHeldCanonicalStop(suffix: string): Promise<{
+    readonly epochA: ReturnType<HostStudyLifecycleSeam['boundary']['token']>
+    readonly completion: Promise<void>
+    readonly release: () => void
+  }> {
+    const heldLock = holdSafetyLedgerLock()
+    await mount({
+      suffix,
+      forge: () => acceptStudyTutorResult({
+        status: 'stopped',
+        reasonCode: 'mounted-input-safety-urgent',
+        deliveryStatus: 'proposed-not-delivered',
+      }),
+    })
+    const epochA = seam.boundary.token()
+    const { completion } = await beginAnswerSubmission('ready')
+    await heldLock.entered
+    return { epochA, completion, release: heldLock.release }
   }
 
   /** The whole durable footprint plus local storage, as one searchable string. */
@@ -562,6 +624,7 @@ describe('the production host reparses every Tutor result before it can act on o
         deliveryStatus: 'proposed-not-delivered',
       }),
     })
+    const originatingEpoch = seam.boundary.token()
     await submitAnswer('ready')
 
     // The reparse must not have cost a real stop its durability. This is the
@@ -576,6 +639,194 @@ describe('the production host reparses every Tutor result before it can act on o
     })
     expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(true)
     expect(hasText(container, 'Study paused')).toBe(true)
+    expect(originatingEpoch.isCurrent()).toBe(false)
+    expect(seam.boundary.lastReason).toBe('safety-stop')
+  })
+
+  it('does not let an old safety-stop completion cancel the newer learner epoch', async () => {
+    const { epochA, completion: oldCompletion, release } = await beginHeldCanonicalStop(
+      'stale-safety-stop-epoch-a',
+    )
+
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-stale-authority:epoch-b',
+      learnerRef: 'learner:epoch-b',
+      launchGrantRef: 'opaque-grant-epoch:2',
+      authorizationRevision: 2,
+    })
+    const epochB = seam.boundary.token()
+    expect(epochA.isCurrent()).toBe(false)
+    expect(epochB.isCurrent()).toBe(true)
+
+    release()
+    await act(async () => { await oldCompletion })
+    await settle()
+
+    expect(epochB.isCurrent()).toBe(true)
+    expect(seam.boundary.binding?.learnerRef).toBe('learner:epoch-b')
+    expect(seam.boundary.lastReason).not.toBe('safety-stop')
+    expect(durable.events.map((event) => event.type)).not.toContain('safety-stop')
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(false)
+    const records = readLocalSafetyStops(storage)
+    expect(records).toHaveLength(1)
+    expect(records[0]).toMatchObject({ studentRef: context.learnerRef, sessionRef })
+    expect(records.some((record) => record.studentRef === 'learner:epoch-b')).toBe(false)
+  })
+
+  it('does not let Epoch A cancel Epoch C after two authority rotations while its lock waits', async () => {
+    const { epochA, completion, release } = await beginHeldCanonicalStop(
+      'stale-safety-stop-epoch-a-to-b-to-c',
+    )
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-stale-authority:epoch-b',
+      learnerRef: 'learner:epoch-b',
+      launchGrantRef: 'opaque-grant-epoch:2',
+      authorizationRevision: 2,
+    })
+    const epochB = seam.boundary.token()
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-stale-authority:epoch-c',
+      learnerRef: 'learner:epoch-c',
+      launchGrantRef: 'opaque-grant-epoch:3',
+      authorizationRevision: 3,
+    })
+    const epochC = seam.boundary.token()
+    expect(epochA.isCurrent()).toBe(false)
+    expect(epochB.isCurrent()).toBe(false)
+    expect(epochC.isCurrent()).toBe(true)
+
+    release()
+    await act(async () => { await completion })
+    await settle()
+
+    expect(epochB.isCurrent()).toBe(false)
+    expect(epochC.isCurrent()).toBe(true)
+    expect(seam.boundary.binding?.learnerRef).toBe('learner:epoch-c')
+    expect(durable.events.map((event) => event.type)).not.toContain('safety-stop')
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(false)
+  })
+
+  it('uses epoch identity rather than learner equality for a same-learner replacement session', async () => {
+    const { epochA, completion, release } = await beginHeldCanonicalStop(
+      'stale-safety-stop-same-learner-new-epoch',
+    )
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-stale-authority:same-learner-epoch-b',
+      launchGrantRef: 'opaque-grant-same-learner-epoch:2',
+      authorizationRevision: 2,
+    })
+    const replacementEpoch = seam.boundary.token()
+    expect(epochA.binding.learnerRef).toBe(replacementEpoch.binding.learnerRef)
+    expect(epochA.isCurrent()).toBe(false)
+    expect(replacementEpoch.isCurrent()).toBe(true)
+
+    release()
+    await act(async () => { await completion })
+    await settle()
+
+    expect(replacementEpoch.isCurrent()).toBe(true)
+    expect(seam.boundary.binding?.authenticatedSessionRef).toContain('same-learner-epoch-b')
+    expect(durable.events.map((event) => event.type)).not.toContain('safety-stop')
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(false)
+  })
+
+  it('stops after a swallowed stale event-append rejection instead of finalizing against Epoch B', async () => {
+    await mount({
+      suffix: 'stale-during-safety-event-append',
+      forge: () => acceptStudyTutorResult({
+        status: 'stopped',
+        reasonCode: 'mounted-input-safety-urgent',
+        deliveryStatus: 'proposed-not-delivered',
+      }),
+    })
+    const appendEntered = deferred()
+    const appendReleased = deferred()
+    Object.assign(ports, { eventLedger: {
+      append: async () => {
+        appendEntered.resolve()
+        await appendReleased.promise
+        throw new Error('event ledger unavailable')
+      },
+    } })
+    const epochA = seam.boundary.token()
+    const { completion } = await beginAnswerSubmission('ready')
+    await appendEntered.promise
+
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-stale-append:epoch-b',
+      learnerRef: 'learner:stale-append-epoch-b',
+      launchGrantRef: 'opaque-grant-stale-append:2',
+      authorizationRevision: 2,
+    })
+    const epochB = seam.boundary.token()
+    expect(epochA.isCurrent()).toBe(false)
+    expect(epochB.isCurrent()).toBe(true)
+
+    appendReleased.resolve()
+    await act(async () => { await completion })
+    await settle()
+
+    expect(epochB.isCurrent()).toBe(true)
+    expect(seam.boundary.lastReason).not.toBe('safety-stop')
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(false)
+    expect(durable.events.map((event) => event.type)).not.toContain('safety-stop')
+  })
+
+  it('does not let an unmounted Epoch A completion cancel a newly mounted current epoch', async () => {
+    const { epochA, completion, release } = await beginHeldCanonicalStop(
+      'stale-safety-stop-unmounted-epoch-a',
+    )
+    const oldRoot = roots.pop()
+    if (!oldRoot) throw new Error('The Epoch A root was not mounted.')
+    await act(async () => { oldRoot.unmount() })
+
+    const epochBContext = { ...context, learnerRef: 'learner:newly-mounted-epoch-b' }
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-unmount:epoch-b',
+      learnerRef: epochBContext.learnerRef,
+      launchGrantRef: 'opaque-grant-unmount:2',
+      authorizationRevision: 2,
+    })
+    const epochBBinding = seam.boundary.binding
+    if (!epochBBinding) throw new Error('Epoch B did not bind.')
+    const epochBSeam: HostStudyLifecycleSeam = Object.freeze({
+      boundary: seam.boundary,
+      binding: epochBBinding,
+    })
+    const epochB = seam.boundary.token()
+    container = documentTarget.createElement('div')
+    documentTarget.body.appendChild(container)
+    const newRoot = createRoot(container as unknown as Element)
+    roots.push(newRoot)
+    await act(async () => {
+      newRoot.render(
+        <ProductionStudySessionContainer
+          context={epochBContext}
+          initialEntry={entry}
+          ports={ports}
+          studyLifecycle={epochBSeam}
+          tutorRuntime={runtime}
+          onBack={() => {}}
+        />,
+      )
+    })
+    await settle()
+    expect(epochA.isCurrent()).toBe(false)
+    expect(epochB.isCurrent()).toBe(true)
+
+    release()
+    await act(async () => { await completion })
+    await settle()
+
+    expect(epochB.isCurrent()).toBe(true)
+    expect(seam.boundary.binding?.learnerRef).toBe(epochBContext.learnerRef)
+    expect(seam.boundary.lastReason).not.toBe('safety-stop')
   })
 
   it('preserves a genuine rate-limit interruption whose result really is canonical', async () => {
