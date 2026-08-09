@@ -9,6 +9,7 @@ const ENV = Object.freeze({
   ELEVENLABS_API_KEY: 'elevenlabs-provider-secret',
   ELEVENLABS_ALLOWED_VOICE_IDS: 'voice-1,voice_2',
   ACADEMY_TTS_ENABLED: 'enabled',
+  ACADEMY_APP_VERSION: 'academy-test-build',
 })
 
 function testAccess({
@@ -18,6 +19,7 @@ function testAccess({
       user_id: 'household-user',
       status: 'active',
       revoked_at: null,
+      household_id: 'household-1',
     },
   ],
 } = {}) {
@@ -27,6 +29,7 @@ function testAccess({
         (row) => row.user_id === userId && row.status === 'active' && row.revoked_at === null,
       )
       if (!membership) throw new GatewayError(403, 'not_entitled')
+      return { householdRef: membership.household_id, householdAttribution: 'resolved' }
     }),
     consumeUsage: vi.fn(async () => undefined),
     recordProviderUsage: vi.fn(async () => undefined),
@@ -376,7 +379,7 @@ describe('authenticated TTS gateway', () => {
     expect(result.statusCode).toBe(504)
     expect(responseJson(result)).toEqual({ error: { code: 'upstream_timeout' } })
     expect(access.recordProviderUsage).toHaveBeenCalledWith(
-      expect.objectContaining({ status: 'timeout', billingBasis: 'unknown' }),
+      expect.objectContaining({ result: 'timeout', resultReasonCode: 'upstream_timeout', billingDisposition: 'unknown' }),
     )
   })
 
@@ -420,22 +423,33 @@ describe('authenticated TTS gateway', () => {
     expect(access.recordProviderUsage).toHaveBeenCalledWith({
       requestKey: 'tts-ledger-test',
       occurredAt: expect.any(String),
-      userId: 'household-user',
+      accountRef: 'household-user',
+      householdRef: 'household-1',
+      householdAttribution: 'resolved',
+      appVersion: 'academy-test-build',
+      engineVersion: null,
+      curriculumVersion: null,
       engine: 'tts',
       provider: 'elevenlabs',
-      providerProduct: 'eleven_turbo_v2_5',
-      voiceReference: 'voice-1',
-      characters: Array.from(request.text).length,
+      providerProductId: 'eleven_turbo_v2_5',
+      providerModelId: 'eleven_turbo_v2_5',
+      logicalModelTier: null,
+      inputTokens: null,
+      outputTokens: null,
+      cachedInputReadTokens: null,
+      cachedInputWriteTokens: null,
+      ttsCharacters: Array.from(request.text).length,
       latencyMs: expect.any(Number),
-      status: 'success',
-      billingBasis: 'estimate',
+      result: 'success',
+      resultReasonCode: null,
+      billingDisposition: 'billable',
     })
     const persisted = access.recordProviderUsage.mock.calls[0][0]
     expect(JSON.stringify(persisted)).not.toContain(request.text)
     expect(JSON.stringify(persisted)).not.toContain(result.body)
   })
 
-  it('records throttling as non-billable and provider failures as billing-unknown', async () => {
+  it('records throttling and provider failures as billing-unknown', async () => {
     const throttledAccess = testAccess()
     await createTtsHandler({
       fetchImpl: fetchRouter({ providerStatus: 429 }),
@@ -443,7 +457,7 @@ describe('authenticated TTS gateway', () => {
       gatewayAccess: throttledAccess,
     })(event())
     expect(throttledAccess.recordProviderUsage).toHaveBeenCalledWith(
-      expect.objectContaining({ status: 'provider_throttled', billingBasis: 'none' }),
+      expect.objectContaining({ result: 'rejected', resultReasonCode: 'provider_throttled', billingDisposition: 'unknown' }),
     )
 
     const failedAccess = testAccess()
@@ -453,7 +467,7 @@ describe('authenticated TTS gateway', () => {
       gatewayAccess: failedAccess,
     })(event())
     expect(failedAccess.recordProviderUsage).toHaveBeenCalledWith(
-      expect.objectContaining({ status: 'provider_error', billingBasis: 'unknown' }),
+      expect.objectContaining({ result: 'provider_error', resultReasonCode: 'provider_rejected', billingDisposition: 'unknown' }),
     )
   })
 })

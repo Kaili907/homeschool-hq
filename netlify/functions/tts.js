@@ -22,6 +22,7 @@ import {
   elapsedMilliseconds,
   persistProviderUsage,
   submittedCharacterCount,
+  trustedUsageVersions,
   usageRequestKey,
 } from './_shared/usage-accounting.js'
 
@@ -51,9 +52,10 @@ export function createTtsHandler(overrides = {}) {
       }
 
       const access = overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl })
-      await access.requireEntitlement(auth.user.id)
+      const entitlement = await access.requireEntitlement(auth.user.id)
 
       const request = validateTtsRequest(readJsonBody(event, TTS_REQUEST_LIMIT_BYTES), env)
+      const versions = trustedUsageVersions(env, 'tts')
       const apiKey = typeof env.ELEVENLABS_API_KEY === 'string' ? env.ELEVENLABS_API_KEY.trim() : ''
       if (!apiKey) return errorResponse(503, 'service_unavailable')
 
@@ -68,19 +70,28 @@ export function createTtsHandler(overrides = {}) {
       const occurredAt = new Date().toISOString()
       const startedAt = Date.now()
       const requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
-      const recordUsage = async (status, billingBasis) =>
+      const recordUsage = async (result, resultReasonCode, billingDisposition) =>
         persistProviderUsage(access, {
           requestKey,
           occurredAt,
-          userId: auth.user.id,
+          accountRef: auth.user.id,
+          householdRef: entitlement.householdRef,
+          householdAttribution: entitlement.householdAttribution,
+          ...versions,
           engine: 'tts',
           provider: 'elevenlabs',
-          providerProduct: ELEVENLABS_MODEL_ID,
-          voiceReference: request.voiceId,
-          characters: submittedCharacterCount(request.text),
+          providerProductId: ELEVENLABS_MODEL_ID,
+          providerModelId: ELEVENLABS_MODEL_ID,
+          logicalModelTier: null,
+          inputTokens: null,
+          outputTokens: null,
+          cachedInputReadTokens: null,
+          cachedInputWriteTokens: null,
+          ttsCharacters: submittedCharacterCount(request.text),
           latencyMs: elapsedMilliseconds(startedAt),
-          status,
-          billingBasis,
+          result,
+          resultReasonCode,
+          billingDisposition,
         })
       const signal = AbortSignal.timeout(TTS_TIMEOUT_MS)
       try {
@@ -99,34 +110,38 @@ export function createTtsHandler(overrides = {}) {
           }),
         })
         if (upstream.status === 429) {
-          await recordUsage('provider_throttled', 'none')
+          await recordUsage('rejected', 'provider_throttled', 'unknown')
           return errorResponse(429, 'usage_limit')
         }
         if (!upstream.ok) {
-          await recordUsage('provider_error', 'unknown')
+          await recordUsage('provider_error', 'provider_rejected', 'unknown')
           return errorResponse(502, 'provider_failure')
         }
         const contentType = upstream.headers?.get?.('content-type') ?? ''
         if (!/^audio\/mpeg(?:\s*;|$)/i.test(contentType)) {
-          await recordUsage('provider_error', 'estimate')
+          await recordUsage('provider_error', 'invalid_provider_audio', 'billable')
           return errorResponse(502, 'provider_failure')
         }
         bytes = await readBoundedResponseBytes(upstream, MAX_AUDIO_BYTES)
       } catch (error) {
         if (isTimeoutError(error, signal)) {
-          await recordUsage('timeout', 'unknown')
+          await recordUsage('timeout', 'upstream_timeout', 'unknown')
           return errorResponse(504, 'upstream_timeout')
         }
-        await recordUsage('provider_error', upstream?.ok ? 'estimate' : 'unknown')
+        await recordUsage(
+          'provider_error',
+          upstream?.ok ? 'invalid_provider_audio' : 'provider_transport_error',
+          upstream?.ok ? 'billable' : 'unknown',
+        )
         if (error instanceof GatewayError) throw error
         return errorResponse(502, 'provider_failure')
       }
       if (bytes.byteLength === 0) {
-        await recordUsage('provider_error', 'estimate')
+        await recordUsage('provider_error', 'invalid_provider_audio', 'billable')
         return errorResponse(502, 'provider_failure')
       }
 
-      await recordUsage('success', 'estimate')
+      await recordUsage('success', null, 'billable')
 
       return {
         statusCode: 200,

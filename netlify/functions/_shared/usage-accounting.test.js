@@ -4,6 +4,7 @@ import {
   parseAnthropicUsage,
   persistProviderUsage,
   submittedCharacterCount,
+  trustedUsageVersions,
   usageAccountingBounds,
   usageRequestKey,
 } from './usage-accounting.js'
@@ -81,6 +82,23 @@ describe('usage execution metadata', () => {
 
   it('counts submitted TTS characters as Unicode code points rather than UTF-16 units', () => {
     expect(submittedCharacterCount('Read 🚀 aloud.')).toBe(13)
+  })
+
+  it('requires a trusted app version while keeping optional snapshots nullable', () => {
+    expect(trustedUsageVersions({ ACADEMY_APP_VERSION: 'build-1' }, 'tutor')).toEqual({
+      appVersion: 'build-1',
+      engineVersion: null,
+      curriculumVersion: null,
+    })
+    expect(trustedUsageVersions({ COMMIT_REF: 'commit-1', ACADEMY_TUTOR_ENGINE_VERSION: 'tutor-v2' }, 'tutor')).toEqual({
+      appVersion: 'commit-1',
+      engineVersion: 'tutor-v2',
+      curriculumVersion: null,
+    })
+    expect(() => trustedUsageVersions({}, 'tts')).toThrow(expect.objectContaining({
+      statusCode: 503,
+      code: 'service_unavailable',
+    }))
   })
 
   it('keeps accounting persistence failures isolated from learner responses', async () => {

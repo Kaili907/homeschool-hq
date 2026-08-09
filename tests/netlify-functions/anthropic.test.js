@@ -13,6 +13,7 @@ const ENV = Object.freeze({
   SUPABASE_ANON_KEY: 'public-anon-key',
   ANTHROPIC_API_KEY: 'anthropic-provider-secret',
   ACADEMY_AI_ENABLED: 'true',
+  ACADEMY_APP_VERSION: 'academy-test-build',
 })
 
 function testAccess({
@@ -22,6 +23,7 @@ function testAccess({
       user_id: 'household-user',
       status: 'active',
       revoked_at: null,
+      household_id: 'household-1',
     },
   ],
 } = {}) {
@@ -31,6 +33,7 @@ function testAccess({
         (row) => row.user_id === userId && row.status === 'active' && row.revoked_at === null,
       )
       if (!membership) throw new GatewayError(403, 'not_entitled')
+      return { householdRef: membership.household_id, householdAttribution: 'resolved' }
     }),
     consumeUsage: vi.fn(async () => undefined),
     recordProviderUsage: vi.fn(async () => undefined),
@@ -574,7 +577,7 @@ describe('authenticated Anthropic gateway', () => {
     expect(result.statusCode).toBe(504)
     expect(responseJson(result)).toEqual({ error: { code: 'upstream_timeout' } })
     expect(access.recordProviderUsage).toHaveBeenCalledWith(
-      expect.objectContaining({ status: 'timeout', billingBasis: 'unknown' }),
+      expect.objectContaining({ result: 'timeout', resultReasonCode: 'upstream_timeout', billingDisposition: 'unknown' }),
     )
   })
 
@@ -642,18 +645,26 @@ describe('authenticated Anthropic gateway', () => {
     expect(access.recordProviderUsage).toHaveBeenCalledWith({
       requestKey: 'anthropic-ledger-test',
       occurredAt: expect.any(String),
-      userId: 'household-user',
+      accountRef: 'household-user',
+      householdRef: 'household-1',
+      householdAttribution: 'resolved',
+      appVersion: 'academy-test-build',
+      engineVersion: null,
+      curriculumVersion: null,
       engine: 'tutor',
       provider: 'anthropic',
       logicalModelTier: 'sonnet',
-      providerProduct: 'claude-sonnet-4-6',
+      providerProductId: 'claude-sonnet-4-6',
+      providerModelId: 'claude-sonnet-4-6',
       inputTokens: 120,
       outputTokens: 30,
-      cacheReadInputTokens: 10,
-      cacheWriteInputTokens: 5,
+      cachedInputReadTokens: 10,
+      cachedInputWriteTokens: 5,
+      ttsCharacters: null,
       latencyMs: expect.any(Number),
-      status: 'success',
-      billingBasis: 'estimate',
+      result: 'success',
+      resultReasonCode: null,
+      billingDisposition: 'billable',
     })
     const persisted = access.recordProviderUsage.mock.calls[0][0]
     expect(JSON.stringify(persisted)).not.toContain('Can I have one hint?')
@@ -662,9 +673,9 @@ describe('authenticated Anthropic gateway', () => {
   })
 
   it.each([
-    ['missing', undefined, 'missing_usage'],
-    ['malformed', { input_tokens: 1 }, 'malformed_usage'],
-  ])('records %s provider usage without withholding a compatible reply', async (_label, usage, status) => {
+    ['missing', undefined, 'missing_provider_usage'],
+    ['malformed', { input_tokens: 1 }, 'malformed_provider_usage'],
+  ])('records %s provider usage without withholding a compatible reply', async (_label, usage, reason) => {
     const access = testAccess()
     const providerBody = {
       content: [{ type: 'text', text: 'Take one small step.' }],
@@ -677,7 +688,7 @@ describe('authenticated Anthropic gateway', () => {
     })(event())
     expect(responseJson(result)).toEqual({ text: 'Take one small step.' })
     expect(access.recordProviderUsage).toHaveBeenCalledWith(
-      expect.objectContaining({ status, billingBasis: 'unknown' }),
+      expect.objectContaining({ result: 'success', resultReasonCode: reason, billingDisposition: 'billable' }),
     )
   })
 
@@ -693,10 +704,11 @@ describe('authenticated Anthropic gateway', () => {
     expect(responseJson(result)).toEqual({ error: { code: 'provider_failure' } })
     expect(access.recordProviderUsage).toHaveBeenCalledWith(
       expect.objectContaining({
-        status: 'response_sanitization_failure',
+        result: 'validation_error',
+        resultReasonCode: 'response_sanitization_rejected',
         inputTokens: 7,
         outputTokens: 2,
-        billingBasis: 'estimate',
+        billingDisposition: 'billable',
       }),
     )
   })
@@ -710,7 +722,7 @@ describe('authenticated Anthropic gateway', () => {
     })(event())
     expect(responseJson(failed)).toEqual({ error: { code: 'provider_failure' } })
     expect(providerFailureAccess.recordProviderUsage).toHaveBeenCalledWith(
-      expect.objectContaining({ status: 'provider_error', billingBasis: 'unknown' }),
+      expect.objectContaining({ result: 'provider_error', resultReasonCode: 'provider_rejected', billingDisposition: 'unknown' }),
     )
 
     const accountingFailureAccess = testAccess()

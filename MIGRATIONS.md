@@ -183,14 +183,15 @@ table and RPC access.
 Tracked migration:
 `supabase/migrations/20260808120000_academy_provider_usage_cost_ledger.sql`.
 
-The migration adds an append-only, forced-RLS provider pricing catalog; a
-privacy-safe AI/TTS usage ledger; snapshotted cost components; and the
-service-role-only `academy_record_provider_usage` RPC. Pricing is effective-date
-versioned, existing prices cannot be mutated, and duplicate trusted execution
-keys return the original ledger row without adding cost. The migration seeds no
-production price. Exact integer-micros arithmetic, half-up rounding, effective
-boundaries, failures, duplicates, bounds, privacy columns, and browser-role
-denial are validated in
+The migration adds immutable, non-overlapping, effective-dated USD pricing
+catalogs and rates; a privacy-safe AI/TTS usage ledger; immutable component
+rate snapshots; the service-role-only `academy_record_provider_usage` RPC; and
+a service-role-only ADMIN-0 v2 projection. Identical execution facts replay;
+conflicting facts raise `reconciliation_conflict`. Money is transported as
+exact decimal strings, and browser roles receive no table or RPC access. The
+migration seeds no production price. Cache read/write separation, identity and
+household attribution, cost kinds, exact arithmetic, interval boundaries,
+version snapshots, replay/conflict behavior, privacy, and access denial are validated in
 `supabase/academy-provider-usage-cost-ledger.db.test.ts`. Operational behavior
 and required production pricing configuration are documented in
 `docs/academy-ai-cost-accounting.md`.
