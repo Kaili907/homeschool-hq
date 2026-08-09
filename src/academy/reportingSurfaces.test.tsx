@@ -45,6 +45,29 @@ const sy = defaultSchoolYear('2026-08-03')
 describe('reporting surfaces keep reading NOMINAL grade', () => {
   afterEach(() => vi.unstubAllEnvs())
 
+  it('the Parent Hub receives the same five canonical names and nominal grades', () => {
+    const state = defaultAppState()
+    const html = renderToStaticMarkup(
+      <TodayView
+        profiles={Object.values(state.profiles)}
+        docs={loadPlans()}
+        sy={sy}
+        today={today}
+        state={state}
+      />,
+    )
+    for (const [name, grade] of [
+      ['Kaili Manuel', '12'],
+      ['Arianna Manuel', '10'],
+      ['Stephanie Manuel', '7'],
+      ['Lucia Manuel', '4'],
+      ['Aly Manuel', '3'],
+    ]) {
+      expect(html).toContain(name)
+      expect(html).toContain(`Gr ${grade}`)
+    }
+  })
+
   it('the Parent Hub Status view reports her grade, not her working level', () => {
     const html = renderToStaticMarkup(
       <StatusView profiles={[decoupledSixthGrader()]} today={today} onPatchProfile={() => {}} />,
@@ -69,13 +92,14 @@ describe('reporting surfaces keep reading NOMINAL grade', () => {
     expect(html).not.toContain('Gr 5')
   })
 
-  it('the sign-in picker uses the approved presentation grade without changing her nominal grade', () => {
+  it('the sign-in picker renders the profile nominal grade without a decorative override', () => {
     const state = stateWith(decoupledSixthGrader())
     const html = renderToStaticMarkup(
       <Picker state={state} onStudentSelect={() => {}} onParentLogin={() => {}} />,
     )
-    expect(html).toContain('Stephanie Manuel')
-    expect(html).toContain('7th Grade')
+    expect(html).toContain('Sixth Grader')
+    expect(html).toContain('6th Grade')
+    expect(html).not.toContain('7th Grade')
     expect(state.profiles.p3.grade).toBe('6')
   })
 

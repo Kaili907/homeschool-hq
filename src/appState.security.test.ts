@@ -133,6 +133,34 @@ describe('bounded AppState loading and migration', () => {
     expect(localStorage.getItem(V1_KEY)).toBe(malformedLegacy)
     expect(validateAppStateForSync(loaded.state)).toMatchObject({ ok: true })
   })
+
+  it('persists the guarded v2 identity correction without a recovery reset', () => {
+    const legacy = defaultAppState()
+    delete legacy.learnerIdentityVersion
+    legacy.profiles.p3 = {
+      ...legacy.profiles.p3,
+      name: '6th Grader',
+      grade: '6',
+      pin: '4321',
+      workingLevels: { mathematics: '5' },
+      totals: { questionsAnswered: 18, correct: 14, bestStreak: 4, sessions: 2 },
+    }
+    legacy.profiles.p2 = { ...legacy.profiles.p2, name: 'Custom Name' }
+    localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(legacy))
+
+    const loaded = loadAppState()
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!)
+
+    expect(loaded.recoveryError).toBeUndefined()
+    expect(loaded.migrated).toBe(false)
+    expect(loaded.state.profiles.p3).toMatchObject({
+      id: 'p3', name: 'Stephanie Manuel', grade: '7', pin: '4321',
+      workingLevels: { mathematics: '5' },
+      totals: { questionsAnswered: 18, correct: 14, bestStreak: 4, sessions: 2 },
+    })
+    expect(loaded.state.profiles.p2.name).toBe('Custom Name')
+    expect(persisted).toEqual(loaded.state)
+  })
 })
 
 describe('Study Engine state isolation', () => {

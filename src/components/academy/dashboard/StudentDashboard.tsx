@@ -540,7 +540,6 @@ export function StudentDashboard({
   const missionUpNext = !currentAcademyUpNext && !currentAcademyRestart
     ? missionData.upNext
     : null
-  const firstName = profile.name.trim().split(/\s+/)[0] || 'Learner'
   const intro = !hasAcademyCourses
     ? {
         eyebrow: 'Student dashboard',
@@ -571,7 +570,7 @@ export function StudentDashboard({
         <header className="student-topbar">
           <div className="student-topbar__identity">
             <span className="student-topbar__mark" aria-hidden="true">M</span>
-            <div><p>Manuel Academy</p><h1 ref={headingRef} tabIndex={-1}>Hello, {firstName}</h1></div>
+            <div><p>Manuel Academy · Grade {profile.grade}</p><h1 ref={headingRef} tabIndex={-1}>Hello, {profile.name}</h1></div>
           </div>
           <nav className="student-topbar__nav" aria-label="Student dashboard navigation">
             {dashboard?.rewards && (

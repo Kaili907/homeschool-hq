@@ -744,6 +744,8 @@ export interface WalkthroughEvent {
 export interface AppState {
   /** bump on every breaking change; document in MIGRATIONS.md */
   schemaVersion: 2
+  /** One-time canonical family-identity correction; additive under schema v2. */
+  learnerIdentityVersion?: 1
   profiles: Record<string, Profile>
   activeProfileId: string | null
   /** gates the Grown-Ups panel. '' = not set yet. */

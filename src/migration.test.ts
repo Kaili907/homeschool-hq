@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { defaultAppState, isAppState, migrateV1ToV2 } from './migration'
+import {
+  LEARNER_IDENTITY_VERSION,
+  defaultAppState,
+  isAppState,
+  migrateDefaultFamilyIdentities,
+  migrateV1ToV2,
+} from './migration'
+import { hasExplicitWorkingLevel, workingLevelFor } from './academy/workingLevel'
 import type { V1Profile } from './types'
 
 /** Realistic v1 payload matching the real 3rd grader's data shape. */
@@ -65,7 +72,8 @@ describe('migrateV1ToV2', () => {
     expect(Object.keys(state.profiles)).toEqual(['p1', 'p2', 'p3', 'p4', 'p5'])
     expect(state.profiles.p2.grade).toBe('4')
     expect(state.profiles.p2.theme).toBe('playful')
-    expect(state.profiles.p3.grade).toBe('6')
+    expect(state.profiles.p3.name).toBe('Stephanie Manuel')
+    expect(state.profiles.p3.grade).toBe('7')
     expect(state.profiles.p3.theme).toBe('cool')
     expect(state.profiles.p4.grade).toBe('10')
     expect(state.profiles.p4.theme).toBe('clean')
@@ -110,5 +118,68 @@ describe('migrateV1ToV2', () => {
     const state = defaultAppState()
     expect(isAppState(state)).toBe(true)
     expect(Object.keys(state.profiles)).toHaveLength(5)
+    expect(state.learnerIdentityVersion).toBe(LEARNER_IDENTITY_VERSION)
+  })
+})
+
+describe('migrateDefaultFamilyIdentities', () => {
+  function legacyDefaults() {
+    const state = defaultAppState()
+    delete state.learnerIdentityVersion
+    state.profiles.p1 = { ...state.profiles.p1, name: '3rd Grader', grade: '3' }
+    state.profiles.p2 = { ...state.profiles.p2, name: '4th Grader', grade: '4' }
+    state.profiles.p3 = { ...state.profiles.p3, name: '6th Grader', grade: '6' }
+    state.profiles.p4 = { ...state.profiles.p4, name: 'Sophomore', grade: '10' }
+    state.profiles.p5 = { ...state.profiles.p5, name: 'Senior', grade: '12' }
+    return state
+  }
+
+  it('corrects only canonical identity fields while preserving stable IDs and progress', () => {
+    const state = legacyDefaults()
+    state.activeProfileId = 'p3'
+    state.parentPin = '9876'
+    state.profiles.p3 = {
+      ...state.profiles.p3,
+      pin: '4321',
+      workingLevels: { mathematics: '5' },
+      skills: { mult: { attempts: 8, correct: 6, mastery: 71, lastSeen: '2026-08-08' } },
+      missions: {
+        '2026-08-08': { items: [{ id: 'reading', label: 'Read', done: true }] },
+      },
+      totals: { questionsAnswered: 22, correct: 17, bestStreak: 5, sessions: 3 },
+    }
+    const before = state.profiles.p3
+    const migrated = migrateDefaultFamilyIdentities(state)
+
+    expect(Object.keys(migrated.profiles)).toEqual(['p1', 'p2', 'p3', 'p4', 'p5'])
+    expect(migrated.profiles.p3).toEqual({ ...before, name: 'Stephanie Manuel', grade: '7' })
+    expect(migrated.profiles.p3.skills).toBe(before.skills)
+    expect(migrated.profiles.p3.missions).toBe(before.missions)
+    expect(migrated.profiles.p3.workingLevels).toBe(before.workingLevels)
+    expect(migrated.activeProfileId).toBe('p3')
+    expect(migrated.parentPin).toBe('9876')
+  })
+
+  it('does not assign a working level when Stephanie moves to nominal grade 7', () => {
+    const state = legacyDefaults()
+    const profile = migrateDefaultFamilyIdentities(state).profiles.p3
+
+    expect(profile.grade).toBe('7')
+    expect(profile.workingLevels).toBeUndefined()
+    expect(hasExplicitWorkingLevel(profile, 'mathematics')).toBe(false)
+    expect(workingLevelFor(profile, 'mathematics')).toBe('7')
+  })
+
+  it('protects customized names or grades and is deterministic and idempotent', () => {
+    const state = legacyDefaults()
+    state.profiles.p2 = { ...state.profiles.p2, name: 'Lulu' }
+    state.profiles.p3 = { ...state.profiles.p3, grade: '7' }
+
+    const migrated = migrateDefaultFamilyIdentities(state)
+    expect(migrated.profiles.p2.name).toBe('Lulu')
+    expect(migrated.profiles.p3.name).toBe('6th Grader')
+    expect(migrated.profiles.p3.grade).toBe('7')
+    expect(migrateDefaultFamilyIdentities(migrated)).toBe(migrated)
+    expect(migrated.learnerIdentityVersion).toBe(LEARNER_IDENTITY_VERSION)
   })
 })

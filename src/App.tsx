@@ -44,7 +44,7 @@ import { MissionCard } from './components/MissionCard'
 import { QuizSession } from './components/QuizSession'
 import { HighSchoolHome } from './components/HighSchoolHome'
 import { SkillTree } from './components/SkillTree'
-import { Picker } from './components/Picker'
+import { Picker, type PickerFocusTarget } from './components/Picker'
 import { PinPad } from './components/PinPad'
 import { AcademyEntryShell } from './entry/AcademyEntry'
 import { learnerPresentationForProfile } from './entry/learnerPresentation'
@@ -222,6 +222,7 @@ export default function App() {
   const [showMigration, setShowMigration] = useState(loaded.migrated)
   const [parentStudyAuthorization, setParentStudyAuthorization] = useState<StudyAdultAuthorization | null>(null)
   const seenRef = useRef(new Set<string>())
+  const pickerFocusTargetRef = useRef<PickerFocusTarget>({ kind: 'heading' })
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
 
@@ -435,6 +436,7 @@ export default function App() {
     studyReadinessClientRef.current?.invalidate()
     studySelectedProfileRef.current = null
     setParentStudyAuthorization(null)
+    pickerFocusTargetRef.current = { kind: 'heading' }
     setState((s) => ({ ...s, activeProfileId: null }))
     setScreen({ kind: 'picker' })
   }
@@ -599,6 +601,7 @@ export default function App() {
       <AcademyEntryShell className="academy-picker-shell">
         <Picker
           state={state}
+          restoreFocusTo={pickerFocusTargetRef.current}
           migrationBanner={
             showMigration && loaded.backupKey
               ? {
@@ -611,12 +614,14 @@ export default function App() {
               : undefined
           }
           onStudentSelect={(profileId) => {
+            pickerFocusTargetRef.current = { kind: 'learner', profileId }
             const p = state.profiles[profileId]
             setScreen(p.pin === '' ? { kind: 'kidPinCreate', profileId } : { kind: 'kidPin', profileId })
           }}
-          onParentLogin={() =>
+          onParentLogin={() => {
+            pickerFocusTargetRef.current = { kind: 'parent' }
             setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
-          }
+          }}
         />
       </AcademyEntryShell>
     )
@@ -624,7 +629,7 @@ export default function App() {
 
   if (screen.kind === 'kidPin' || screen.kind === 'kidPinCreate') {
     const profile = state.profiles[screen.profileId]
-    const learner = learnerPresentationForProfile(profile.id)
+    const learner = learnerPresentationForProfile(profile)
     const t = THEMES[profile.theme]
     return (
       <AcademyEntryShell className="academy-pin-shell">
@@ -790,13 +795,16 @@ export default function App() {
       <AcademyEntryShell className="academy-picker-shell">
         <Picker
           state={state}
+          restoreFocusTo={pickerFocusTargetRef.current}
           onStudentSelect={(profileId) => {
+            pickerFocusTargetRef.current = { kind: 'learner', profileId }
             const p = state.profiles[profileId]
             setScreen(p.pin === '' ? { kind: 'kidPinCreate', profileId } : { kind: 'kidPin', profileId })
           }}
-          onParentLogin={() =>
+          onParentLogin={() => {
+            pickerFocusTargetRef.current = { kind: 'parent' }
             setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
-          }
+          }}
         />
       </AcademyEntryShell>
     )

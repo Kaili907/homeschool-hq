@@ -266,7 +266,8 @@ describe('StudentDashboard', () => {
 
   it('renders current learner context and text status labels', () => {
     const html = renderDashboard()
-    expect(html).toContain('Hello, Avery')
+    expect(html).toContain('Manuel Academy · Grade 6')
+    expect(html).toContain('Hello, Avery Student')
     expect(html).toContain('Not started')
     expect(html).toContain('In progress')
   })

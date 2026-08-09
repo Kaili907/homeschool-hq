@@ -1,4 +1,8 @@
-import { SCHEMA_VERSION } from '../migration'
+import {
+  LEARNER_IDENTITY_VERSION,
+  SCHEMA_VERSION,
+  migrateDefaultFamilyIdentities,
+} from '../migration'
 import type { AppState, Profile } from '../types'
 import type { HouseholdSyncMeta, RemoteProfileRow } from './types'
 
@@ -899,6 +903,7 @@ export function validateAppStateForSync(value: unknown): AppStateValidation {
       ) ||
       Object.keys(profiles).length > MAX_SYNC_PROFILES ||
       !text(value.parentPin, 64) ||
+      !optional(value.learnerIdentityVersion, (candidate) => candidate === LEARNER_IDENTITY_VERSION) ||
       !optional(
         value.tutorMuted,
         (candidate) => typeof candidate === 'boolean',
@@ -918,7 +923,10 @@ export function validateAppStateForSync(value: unknown): AppStateValidation {
         error: 'Stored Academy profile data is malformed.',
       }
     }
-    return { ok: true, state: value as unknown as AppState }
+    return {
+      ok: true,
+      state: migrateDefaultFamilyIdentities(value as unknown as AppState),
+    }
   } catch (cause) {
     return {
       ok: false,

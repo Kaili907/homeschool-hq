@@ -32,7 +32,7 @@ const dayColumn = (html: string, day: string, next: string) =>
 describe('ScheduleView', () => {
   it('shows every girl and the full Mon–Fri Core Day', () => {
     const html = render()
-    for (const name of ['3rd Grader', '4th Grader', '6th Grader', 'Sophomore', 'Senior']) {
+    for (const name of ['Aly Manuel', 'Lucia Manuel', 'Stephanie Manuel', 'Arianna Manuel', 'Kaili Manuel']) {
       expect(html).toContain(name)
     }
     for (const day of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']) expect(html).toContain(`>${day}</span>`)

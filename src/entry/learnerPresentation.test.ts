@@ -1,10 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import { defaultAppState } from '../migration'
-import { LEARNER_PRESENTATIONS, learnerPresentationForProfile } from './learnerPresentation'
+import { LEARNER_PROFILE_ORDER, learnerPresentationForProfile } from './learnerPresentation'
 
 describe('Manuel Academy learner presentation mapping', () => {
-  it('exposes the approved five learner identities in display order', () => {
-    expect(LEARNER_PRESENTATIONS.map(({ fullName, gradeLabel }) => [fullName, gradeLabel])).toEqual([
+  it('derives the approved display identities from the authoritative profiles', () => {
+    const state = defaultAppState()
+    const identities = LEARNER_PROFILE_ORDER.map((id) => {
+      const learner = learnerPresentationForProfile(state.profiles[id])
+      return [learner.fullName, learner.gradeLabel]
+    })
+
+    expect(identities).toEqual([
       ['Kaili Manuel', '12th Grade'],
       ['Arianna Manuel', '10th Grade'],
       ['Stephanie Manuel', '7th Grade'],
@@ -13,23 +19,20 @@ describe('Manuel Academy learner presentation mapping', () => {
     ])
   })
 
-  it('keeps names, grades, initials, and future portraits presentation-only', () => {
-    const state = defaultAppState()
-
-    expect(state.profiles.p3.grade).toBe('6')
-    expect(learnerPresentationForProfile('p3').gradeLabel).toBe('7th Grade')
-    expect(Object.keys(LEARNER_PRESENTATIONS[0]).sort()).toEqual([
-      'fullName',
-      'gradeLabel',
-      'initials',
-      'profileId',
-    ])
-    expect(JSON.stringify(LEARNER_PRESENTATIONS)).not.toMatch(/pin|auth|supabase|blob|base64/i)
+  it('never substitutes a decorative identity for a customized profile', () => {
+    const profile = { ...defaultAppState().profiles.p3, name: 'Custom Learner', grade: '6' as const }
+    expect(learnerPresentationForProfile(profile)).toMatchObject({
+      profileId: 'p3',
+      fullName: 'Custom Learner',
+      gradeLabel: '6th Grade',
+      initials: 'CL',
+    })
   })
 
   it('gives duplicate AM initials distinct full-name and grade labels', () => {
-    const arianna = learnerPresentationForProfile('p4')
-    const aly = learnerPresentationForProfile('p1')
+    const state = defaultAppState()
+    const arianna = learnerPresentationForProfile(state.profiles.p4)
+    const aly = learnerPresentationForProfile(state.profiles.p1)
 
     expect(arianna.initials).toBe('AM')
     expect(aly.initials).toBe('AM')

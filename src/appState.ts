@@ -53,7 +53,12 @@ export function loadAppState(): LoadResult {
     try {
       const parsed = JSON.parse(raw2) as unknown
       const validation = validateAppStateForSync(parsed)
-      if (validation.ok) return { state: validation.state, migrated: false }
+      if (validation.ok) {
+        if (validation.state !== parsed) {
+          localStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(validation.state))
+        }
+        return { state: validation.state, migrated: false }
+      }
     } catch {
       // The exact malformed JSON is quarantined below before a safe default is
       // published; it is never silently discarded.

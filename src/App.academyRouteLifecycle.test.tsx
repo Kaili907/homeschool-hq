@@ -6,6 +6,7 @@ import { defaultAppState } from './migration'
 import type { AppState, Profile } from './types'
 import type { AcademyRoute } from './academy/academyRoute'
 import type { StudentDashboardComposition } from './components/academy/dashboard/StudentDashboard'
+import type { PickerFocusTarget } from './components/Picker'
 import { buildLegacyMissionData } from './components/academy/dashboard/legacyMissionData'
 
 // UI-HOME-1 default-home lifecycle. The Academy surface is mocked so these tests
@@ -17,6 +18,7 @@ const harness = vi.hoisted(() => ({
     onStudentSelect: (id: string) => void
     onParentLogin: () => void
     onAdminLogin?: () => void
+    restoreFocusTo?: PickerFocusTarget
   },
   pin: null as null | { title: string; onComplete: (pin: string) => string | null; onCancel: () => void },
   academy: null as null | {
@@ -44,6 +46,7 @@ vi.mock('./components/Picker', () => ({
     onStudentSelect: (id: string) => void
     onParentLogin: () => void
     onAdminLogin?: () => void
+    restoreFocusTo?: PickerFocusTarget
   }) => {
     harness.picker = props
     harness.pin = null
@@ -438,7 +441,7 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
       expect(harness.picker, `grade ${grade} should start at the picker`).not.toBeNull()
 
       await act(async () => harness.picker!.onStudentSelect('p1'))
-      expect(harness.pin?.title).toBe('Welcome back, Aly')
+      expect(harness.pin?.title).toBe('Welcome back, Grade')
       await act(async () => {
         expect(harness.pin!.onComplete('1234')).toBeNull()
       })
@@ -483,20 +486,26 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     await mountApp(state)
 
     expect(harness.entryShellMounts).toBe(1)
+    expect(harness.picker?.restoreFocusTo).toEqual({ kind: 'heading' })
     await act(async () => harness.picker!.onStudentSelect('p1'))
     await settle()
-    expect(harness.pin?.title).toBe('Welcome back, Aly')
+    expect(harness.pin?.title).toBe('Welcome back, Sam')
     expect(harness.entryShellMounts).toBe(1)
 
     await act(async () => harness.pin!.onCancel())
     await settle()
     expect(harness.picker).not.toBeNull()
+    expect(harness.picker?.restoreFocusTo).toEqual({ kind: 'learner', profileId: 'p1' })
     expect(harness.entryShellMounts).toBe(1)
 
     await act(async () => harness.picker!.onParentLogin())
     await settle()
     expect(harness.pin?.title).toBe('Parent Login')
     expect(harness.entryShellMounts).toBe(1)
+
+    await act(async () => harness.pin!.onCancel())
+    await settle()
+    expect(harness.picker?.restoreFocusTo).toEqual({ kind: 'parent' })
   })
 
   it('keeps a successful learner PIN scoped to learner entry only', async () => {
@@ -625,6 +634,7 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     await settle()
     expect(pathname).toBe('/')
     expect(harness.picker).not.toBeNull()
+    expect(harness.picker?.restoreFocusTo).toEqual({ kind: 'heading' })
     expect(harness.academy).not.toBeNull() // the harness intentionally keeps the last Router props
     expect(hasText(container, 'Manuel Academy surface')).toBe(false)
     const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState

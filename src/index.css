@@ -330,6 +330,12 @@ body {
   transition: border-color 160ms ease, background 160ms ease;
 }
 
+/* Route-announcement headings receive programmatic focus; controls retain the visible focus ring. */
+.academy-learner-section h2:focus,
+.academy-pin-panel h2:focus { outline: none; }
+
+.academy-parent-login--compact { display: none; }
+
 .academy-parent-login:hover {
   border-color: rgba(240, 200, 106, 0.75);
   background: rgba(15, 25, 35, 0.92);
@@ -555,6 +561,17 @@ body {
   letter-spacing: 0.02em;
 }
 
+.academy-backspace-icon {
+  width: 27px;
+  height: 20px;
+  margin: 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .academy-keypad-secondary span[aria-hidden="true"]:first-child { font-size: 1.18rem; }
 
 .academy-pin-back {
@@ -583,6 +600,12 @@ body {
 
 @media (max-width: 1179px) {
   .academy-picker { justify-content: flex-start; }
+  .academy-parent-login--compact {
+    display: grid;
+    width: min(100%, 390px);
+    margin: 0 auto 1.25rem;
+  }
+  .academy-parent-login--desktop { display: none; }
   .academy-learner-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 

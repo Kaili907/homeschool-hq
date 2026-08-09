@@ -52,7 +52,7 @@ describe('Manuel Academy branded learner entry', () => {
       <PinPad
         title="Welcome back, Kaili"
         subtitle="Enter your PIN"
-        learner={learnerPresentationForProfile('p5')}
+        learner={learnerPresentationForProfile(defaultAppState().profiles.p5)}
         onComplete={() => null}
         onCancel={() => {}}
       />,
@@ -63,6 +63,8 @@ describe('Manuel Academy branded learner entry', () => {
     expect(html).toContain('0 of 4 PIN digits entered')
     expect(html).toContain('aria-label="Digit 1"')
     expect(html).toContain('aria-label="Delete last digit"')
+    expect(html).toContain('academy-backspace-icon')
+    expect(html).not.toContain('⌫')
     expect(html).toContain('Back to learners')
     expect(html).not.toContain('Parent Login')
     expect(html).not.toContain('Admin Login')
