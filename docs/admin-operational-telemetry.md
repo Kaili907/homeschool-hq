@@ -74,6 +74,22 @@ groups contain allowlisted operational dimensions, counts, duration summaries,
 and first/last timestamps only—never event/execution IDs, household/learner
 identity, or raw metadata.
 
+### ADMIN-4 bounded performance source
+
+Engine Performance currently consumes the legacy 500-row read. Its projection
+captures the raw source row count before stored-event decoding. Reaching 500 raw
+rows marks the source partial even when malformed rows reduce the accepted event
+count; rejected rows are reported separately, excluded from every metric and
+evidence threshold, and also keep source completeness partial below the limit.
+
+After TEL-FOUNDATION is integrated, a dedicated follow-up should source Engine
+Performance from `academy_aggregate_operational_events_v2`, map its declared
+group and retention completeness into the projection, and preserve the existing
+metric and insufficient-evidence semantics. This ADMIN-4 correction did not
+integrate that additive migration or aggregate reader; aggregate adoption is
+performed separately so the corrected raw-source completeness semantics remain
+explicit and testable.
+
 ## Failure and retention semantics
 
 Operational telemetry is best effort. Invalid input fails before persistence;
