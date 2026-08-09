@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "migration": {
+    "filename": "20260809160000_academy_curriculum_release_registry.sql",
+    "version": "20260809160000",
+    "sha256": "41dbfda8aa88b2c1dfe006fe753c58481deadba4aa3e031ad914aa7894454978",
+    "classification": "additive_immutable_registry_bootstrap",
+    "sourceCommit": "4056e31d8beb36622be5ac27ea7f20145266343b",
+    "sourceRoot": "curriculum-content/manuel-academy/1.0.0",
+    "sourceInventorySha256": "346ffa3886764314f1371fe68236741523bad8b638bdf2300e6b6c2eab93ba35",
+    "hostedApplied": false
+  }
+}
