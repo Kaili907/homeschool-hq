@@ -1,4 +1,5 @@
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { createHash } from 'node:crypto'
 import { tmpdir } from 'node:os'
 import { basename, join, resolve } from 'node:path'
 import { spawnSync } from 'node:child_process'
@@ -8,18 +9,36 @@ const censusPath = join(root, 'src', 'study', 'studyConsumerPortInjectionCensus.
 const portsPath = join(root, 'src', 'study', 'ports.ts')
 const tscPath = join(root, 'node_modules', 'typescript', 'bin', 'tsc')
 const vitestPath = join(root, 'node_modules', 'vitest', 'vitest.mjs')
-const originals = new Map([
-  [censusPath, readFileSync(censusPath, 'utf8')],
-  [portsPath, readFileSync(portsPath, 'utf8')],
+const originalBytes = new Map([
+  [censusPath, readFileSync(censusPath)],
+  [portsPath, readFileSync(portsPath)],
 ])
+const originals = new Map([...originalBytes].map(([file, contents]) => [file, contents.toString('utf8')]))
+const digest = (contents) => createHash('sha256').update(contents).digest('hex')
+const originalDigests = new Map([...originalBytes].map(([file, contents]) => [file, digest(contents)]))
 const rescue = mkdtempSync(join(tmpdir(), 'study-ports-h6-rescue-'))
-for (const [file, contents] of originals) writeFileSync(join(rescue, basename(file)), contents)
+for (const [file, contents] of originalBytes) writeFileSync(join(rescue, basename(file)), contents)
 
-function changed(file, needle, replacement) {
-  const original = originals.get(file)
-  if (original === undefined) throw new Error(`HARNESS_ERROR: no rescue source for ${file}`)
+function detectEol(contents, file) {
+  const lineFeeds = contents.match(/\n/g)?.length ?? 0
+  const carriageReturns = contents.match(/\r\n/g)?.length ?? 0
+  if (lineFeeds === 0 || carriageReturns === 0) return '\n'
+  if (lineFeeds === carriageReturns) return '\r\n'
+  throw new Error(`HARNESS_ERROR: mixed line endings in ${file}`)
+}
+
+const fragmentForEol = (fragment, eol) => fragment.replace(/\r?\n/g, eol)
+
+function changed(mutant, original = originals.get(mutant.file), eol = detectEol(original, mutant.file)) {
+  if (original === undefined) throw new Error(`HARNESS_ERROR: no rescue source for ${mutant.file}`)
+  const needle = fragmentForEol(mutant.needle, eol)
+  const replacement = fragmentForEol(mutant.replacement, eol)
   const matches = original.split(needle).length - 1
-  if (matches !== 1) throw new Error(`HARNESS_ERROR: expected one match, found ${matches}: ${needle.slice(0, 80)}`)
+  if (matches !== 1) {
+    throw new Error(
+      `HARNESS_ERROR: ${mutant.id} ${mutant.name}: expected one match, found ${matches}: ${JSON.stringify(needle.slice(0, 80))}`,
+    )
+  }
   return original.replace(needle, replacement)
 }
 
@@ -158,6 +177,20 @@ const requestedId = process.argv[2]
 const selectedMutants = requestedId ? mutants.filter((mutant) => mutant.id === requestedId) : mutants
 if (requestedId && selectedMutants.length !== 1) throw new Error(`HARNESS_ERROR: unknown mutant ${requestedId}`)
 
+function proveEolResolution() {
+  for (const [label, eol] of [
+    ['LF', '\n'],
+    ['CRLF', '\r\n'],
+  ]) {
+    for (const mutant of mutants) {
+      const canonical = originals.get(mutant.file).replace(/\r\n/g, '\n')
+      const candidate = fragmentForEol(canonical, eol)
+      changed(mutant, candidate, eol)
+    }
+    console.log(`EOL_PROOF ${label} ${mutants.length}_OF_${mutants.length}_RESOLVED`)
+  }
+}
+
 function run(command, args) {
   const result = spawnSync(command, args, { cwd: root, encoding: 'utf8', windowsHide: true })
   if (result.error || result.status === null) {
@@ -166,60 +199,97 @@ function run(command, args) {
   return { status: result.status, output: `${result.stdout ?? ''}${result.stderr ?? ''}` }
 }
 
-function restore() {
-  for (const [file, contents] of originals) writeFileSync(file, contents)
+function restoreAndVerify() {
+  for (const [file, contents] of originalBytes) writeFileSync(file, contents)
+  for (const [file, expected] of originalDigests) {
+    const actual = digest(readFileSync(file))
+    if (actual !== expected) {
+      throw new Error(`HARNESS_ERROR: byte restoration failed for ${file}: expected ${expected}, found ${actual}`)
+    }
+  }
 }
+
+let rescueRemoved = false
+function cleanupRescue() {
+  if (rescueRemoved) return
+  rmSync(rescue, { recursive: true, force: true })
+  rescueRemoved = true
+}
+
+function handleSignal(signal) {
+  try {
+    restoreAndVerify()
+    cleanupRescue()
+  } catch (error) {
+    console.error(error)
+  }
+  process.exit(signal === 'SIGINT' ? 130 : 143)
+}
+
+const handleSigint = () => handleSignal('SIGINT')
+const handleSigterm = () => handleSignal('SIGTERM')
+process.once('SIGINT', handleSigint)
+process.once('SIGTERM', handleSigterm)
 
 const results = []
 try {
+  proveEolResolution()
   for (const mutant of selectedMutants) {
-    restore()
-    writeFileSync(mutant.file, changed(mutant.file, mutant.needle, mutant.replacement))
-    const typecheck = run(process.execPath, [tscPath, '--noEmit'])
-    let guard = { status: 0, output: 'compile-time contract mutant; focused runtime guard not applicable' }
-    if (!mutant.typeLevel) {
-      guard = run(process.execPath, [
-        vitestPath,
-        'run',
-        '--project',
-        'root-app',
-        'src/study/studyConsumerPortInjectionCensus.test.ts',
-      ])
+    restoreAndVerify()
+    try {
+      writeFileSync(mutant.file, changed(mutant))
+      const typecheck = run(process.execPath, [tscPath, '--noEmit'])
+      let guard = { status: 0, output: 'compile-time contract mutant; focused runtime guard not applicable' }
+      if (!mutant.typeLevel) {
+        guard = run(process.execPath, [
+          vitestPath,
+          'run',
+          '--project',
+          'root-app',
+          'src/study/studyConsumerPortInjectionCensus.test.ts',
+        ])
+      }
+      const typecheckOk = mutant.typeLevel ? typecheck.status !== 0 : typecheck.status === 0
+      const killed = mutant.typeLevel ? typecheck.status !== 0 : guard.status !== 0
+      if (!typecheckOk || !killed) {
+        const tail = `${typecheck.output}\n${guard.output}`.split(/\r?\n/).slice(-30).join('\n')
+        throw new Error(
+          `HARNESS_ERROR: ${mutant.id} ${mutant.name}: typecheck=${typecheck.status}, guard=${guard.status}\n${tail}`,
+        )
+      }
+      results.push({ id: mutant.id, name: mutant.name, typecheck: typecheck.status, guard: guard.status, killed: true })
+      console.log(`${mutant.id} KILLED typecheck=${typecheck.status} guard=${guard.status} ${mutant.name}`)
+    } finally {
+      restoreAndVerify()
     }
-    const typecheckOk = mutant.typeLevel ? typecheck.status !== 0 : typecheck.status === 0
-    const killed = mutant.typeLevel ? typecheck.status !== 0 : guard.status !== 0
-    if (!typecheckOk || !killed) {
-      const tail = `${typecheck.output}\n${guard.output}`.split(/\r?\n/).slice(-30).join('\n')
-      throw new Error(
-        `HARNESS_ERROR: ${mutant.id} ${mutant.name}: typecheck=${typecheck.status}, guard=${guard.status}\n${tail}`,
-      )
-    }
-    results.push({ id: mutant.id, name: mutant.name, typecheck: typecheck.status, guard: guard.status, killed: true })
-    console.log(`${mutant.id} KILLED typecheck=${typecheck.status} guard=${guard.status} ${mutant.name}`)
   }
 
-  restore()
-  const controlText = `${originals.get(censusPath)}\n// H6 inert mutation control\n`
-  writeFileSync(censusPath, controlText)
-  const controlTypecheck = run(process.execPath, [tscPath, '--noEmit'])
-  const controlGuard = run(process.execPath, [
-    vitestPath,
-    'run',
-    '--project',
-    'root-app',
-    'src/study/studyConsumerPortInjectionCensus.test.ts',
-  ])
-  if (controlTypecheck.status !== 0 || controlGuard.status !== 0) {
-    throw new Error(`HARNESS_ERROR: inert control did not survive: typecheck=${controlTypecheck.status}, guard=${controlGuard.status}`)
+  restoreAndVerify()
+  try {
+    const eol = detectEol(originals.get(censusPath), censusPath)
+    const controlText = `${originals.get(censusPath)}${eol}// H6 inert mutation control${eol}`
+    writeFileSync(censusPath, controlText)
+    const controlTypecheck = run(process.execPath, [tscPath, '--noEmit'])
+    const controlGuard = run(process.execPath, [
+      vitestPath,
+      'run',
+      '--project',
+      'root-app',
+      'src/study/studyConsumerPortInjectionCensus.test.ts',
+    ])
+    if (controlTypecheck.status !== 0 || controlGuard.status !== 0) {
+      throw new Error(`HARNESS_ERROR: inert control did not survive: typecheck=${controlTypecheck.status}, guard=${controlGuard.status}`)
+    }
+    console.log(`CONTROL SURVIVED typecheck=${controlTypecheck.status} guard=${controlGuard.status}`)
+  } finally {
+    restoreAndVerify()
   }
-  console.log(`CONTROL SURVIVED typecheck=${controlTypecheck.status} guard=${controlGuard.status}`)
 } finally {
-  restore()
+  restoreAndVerify()
+  cleanupRescue()
+  process.removeListener('SIGINT', handleSigint)
+  process.removeListener('SIGTERM', handleSigterm)
 }
 
-for (const [file, contents] of originals) {
-  if (readFileSync(file, 'utf8') !== contents) throw new Error(`HARNESS_ERROR: byte restoration failed for ${file}`)
-}
-
+console.log(`BYTE_RESTORATION EXACT ${[...originalDigests.values()].join(' ')}`)
 console.log(JSON.stringify({ rescue, semanticKilled: results.length, semanticTotal: selectedMutants.length, controlsSurvived: 1, controlsTotal: 1 }))
-rmSync(rescue, { recursive: true, force: true })
