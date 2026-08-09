@@ -69,6 +69,21 @@ describe('Admin costs browser contract', () => {
         observedMicros: '2', warningMicros: '1000000000001', criticalMicros: '1000000000002',
         configurationRevisions: { warning: '1', critical: '1' },
       },
+  it('requires complete query coverage without promoting provider traffic coverage', () => {
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel(source)?.source).toMatchObject({
+      queryCoverage: 'complete',
+      providerTrafficCoverage: 'coverage_unverified',
+      groupLimit: 384,
+      groupCount: 7,
+    })
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, queryCoverage: 'unavailable' },
+    })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, providerTrafficCoverage: 'complete' },
     })).toBeNull()
   })
 

@@ -39,7 +39,10 @@ describe('Admin AI and Costs dashboard', () => {
     expect(markup).toContain('Cached input read tokens')
     expect(markup).toContain('Cached input write tokens')
     expect(markup).toContain('TTS characters')
-    expect(markup).toContain('not provider-invoice truth')
+    expect(markup).toContain('Usage-derived marginal provider cost')
+    expect(markup).toContain('not a complete provider invoice')
+    expect(markup).toContain('Provider traffic')
+    expect(markup).toContain('Unverified')
   })
 
   it('renders the enforced monthly threshold as calculated evidence, not invoice economics', () => {
@@ -65,7 +68,10 @@ describe('Admin AI and Costs dashboard', () => {
   it('renders unavailable cost explicitly and never as $0', () => {
     const source = costsModelFixture()
     const model = costsModelFixture({
-      source: { status: 'partial', reasons: ['calculated_cost_unavailable'], recordLimit: 500, recordsIncluded: 1 },
+      source: {
+        ...source.source, status: 'partial',
+        reasons: ['calculated_cost_unavailable'], recordsIncluded: 1,
+      },
       summary: {
         ...source.summary,
         calculatedCost: { status: 'unavailable', micros: null, currency: 'USD' },
@@ -82,8 +88,8 @@ describe('Admin AI and Costs dashboard', () => {
     const source = costsModelFixture()
     const model = costsModelFixture({
       source: {
-        status: 'partial', reasons: ['ambiguous_attribution', 'unresolved_attribution'],
-        recordLimit: 500, recordsIncluded: 3,
+        ...source.source, status: 'partial',
+        reasons: ['ambiguous_attribution', 'unresolved_attribution'], recordsIncluded: 3,
       },
       summary: {
         ...source.summary,
@@ -93,7 +99,7 @@ describe('Admin AI and Costs dashboard', () => {
       },
     })
     const markup = render({ status: 'ready', model, freshness: 'current' })
-    expect(markup).toContain('Partial totals')
+    expect(markup).toContain('Evidence limitations')
     expect(markup).toContain('ambiguous household attribution')
     expect(markup).toContain('Billing disposition')
     expect(markup).toContain('Cost kind')
@@ -113,12 +119,13 @@ describe('Admin AI and Costs dashboard', () => {
     })
     const source = costsModelFixture()
     const model = costsModelFixture({
-      source: { status: 'complete', reasons: [], recordLimit: 500, recordsIncluded: 0 },
+      source: { ...source.source, status: 'complete', reasons: [], recordsIncluded: 0 },
       summary: { ...source.summary, ...zero, usageUnavailableCount: 0 },
       trend: [], breakdowns: { engines: [], providers: [], models: [], costKinds: [], billingDispositions: [] },
     })
     const markup = render({ status: 'ready', model, freshness: 'current' })
-    expect(markup).toContain('proves zero stored AI and TTS requests')
+    expect(markup).toContain('zero recorded AI and TTS ledger attempts')
+    expect(markup).toContain('does not prove zero provider traffic')
     expect(markup).toContain('$0.00')
     expect(markup).toContain('No real daily usage points')
   })
