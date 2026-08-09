@@ -30,12 +30,15 @@ import {
 } from '../../admin/engine-performance/httpSource'
 import type { AdminEngineId } from '../../admin/contracts'
 import type { EnginePerformanceWindowPreset } from '../../admin/enginePerformanceModel'
+import { readSystemHealth, type SystemHealthReadState } from '../../admin/systemHealthClient'
+import type { SystemHealthWindow } from '../../admin/systemHealth'
 import { AdminConsole } from './AdminConsole'
 import { AdminCostsDashboard } from './AdminCostsDashboard'
 import { LearnerAnalytics } from './LearnerAnalytics'
 import { AdminSafetyOperations } from './AdminSafetyOperations'
 import { CurriculumValidationDashboard } from './CurriculumValidationDashboard'
 import { EnginePerformanceDashboard } from './EnginePerformanceDashboard'
+import { SystemHealthDashboard } from './SystemHealthDashboard'
 
 export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
 
@@ -44,6 +47,7 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
   if (!suffix) return 'overview'
   if (suffix === 'curriculum/validation') return 'curriculum-validation'
+  if (suffix === 'health' || suffix.startsWith('health/')) return 'system-health'
   const section = suffix.split('/')[0]
   return [
     'learners', 'engines', 'costs', 'curriculum', 'safety', 'system-health',
@@ -80,6 +84,9 @@ export function AdminConsoleRoute() {
   const [costRange, setCostRange] = useState<AdminCostRangeSelection>({ kind: 'preset', preset: 'today' })
   const [costsState, setCostsState] = useState<AdminCostsReadState>({ status: 'idle' })
   const [costsRefresh, setCostsRefresh] = useState(0)
+  const [healthWindow, setHealthWindow] = useState<SystemHealthWindow>('1h')
+  const [healthReload, setHealthReload] = useState(0)
+  const [healthReadState, setHealthReadState] = useState<SystemHealthReadState>({ status: 'loading' })
   const [validationModel, setValidationModel] = useState<CurriculumValidationReadModel | null>(null)
   const [engineState, setEngineState] = useState<EnginePerformanceReadState>({ status: 'loading' })
   const [selectedEngine, setSelectedEngine] = useState<AdminEngineId>('tutor')
@@ -187,13 +194,30 @@ export function AdminConsoleRoute() {
   }, [authorizationState, costRange, costsRefresh, section])
 
   useEffect(() => {
+    if (section !== 'system-health' || !hasCapability(authorization, 'health:read')) {
+      setHealthReadState(section === 'system-health' ? { status: 'denied' } : { status: 'loading' })
+      return
+    }
+    const controller = new AbortController()
+    setHealthReadState({ status: 'loading' })
+    void readSystemHealth({ window: healthWindow, signal: controller.signal }).then((state) => {
+      if (!controller.signal.aborted) setHealthReadState(state)
+    })
+    return () => controller.abort()
+  }, [authorizationState, section, healthWindow, healthReload])
+
+  useEffect(() => {
     const onPopState = () => setPathname(window.location.pathname)
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
   }, [])
 
   function navigate(next: AdminSection) {
-    const nextPath = next === 'overview' ? ADMIN_CONSOLE_PATH : `${ADMIN_CONSOLE_PATH}/${next}`
+    const nextPath = next === 'overview'
+      ? ADMIN_CONSOLE_PATH
+      : next === 'system-health'
+        ? `${ADMIN_CONSOLE_PATH}/health`
+        : `${ADMIN_CONSOLE_PATH}/${next}`
     window.history.pushState({}, '', nextPath)
     setPathname(nextPath)
   }
@@ -225,6 +249,7 @@ export function AdminConsoleRoute() {
             <button type="button" onClick={() => navigate('costs')}>AI &amp; Costs</button>
             <button type="button" onClick={() => navigate('safety')}>Safety</button>
             <button type="button" onClick={() => navigate('curriculum')}>Curriculum</button>
+            <button type="button" onClick={() => navigate('system-health')}>System Health</button>
           </nav>
         </div>
       </header>
@@ -283,7 +308,16 @@ export function AdminConsoleRoute() {
             model={validationModel}
           />
         )}
-        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation'].includes(section) && (
+        {section === 'system-health' && (
+          <SystemHealthDashboard
+            authorization={authorization}
+            readState={healthReadState}
+            selectedWindow={healthWindow}
+            onWindowChange={setHealthWindow}
+            onRetry={() => setHealthReload((value) => value + 1)}
+          />
+        )}
+        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>
