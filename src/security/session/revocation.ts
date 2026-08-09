@@ -3,6 +3,7 @@ import { hasExactKeys, type SecurityClock, type SecurityStorage, systemSecurityC
 
 export const GLOBAL_REVOCATION_STORAGE_KEY = 'manuel-academy.security.global-revocation-epoch.v1'
 export const GLOBAL_REVOCATION_CHANNEL_NAME = 'manuel-academy.security.global-revocation.v1'
+export const GLOBAL_REVOCATION_LOCK_NAME = 'manuel-academy.security.global-revocation-epoch.v1'
 export const GLOBAL_REVOCATION_NOTICE_VERSION = 1 as const
 
 export const GLOBAL_REVOCATION_CAUSES = Object.freeze([
@@ -32,8 +33,16 @@ export interface GlobalRevocationSource {
 }
 
 export interface GlobalRevocationPort extends GlobalRevocationSource {
-  revoke(cause: GlobalRevocationCause): GlobalRevocationNotice
+  revoke(cause: GlobalRevocationCause): Promise<GlobalRevocationNotice>
   close(): void
+}
+
+export interface RevocationLockManager {
+  request<T>(
+    name: string,
+    options: { readonly mode: 'exclusive' },
+    callback: () => T | Promise<T>,
+  ): Promise<T>
 }
 
 export interface RevocationBroadcastPort {
@@ -57,6 +66,7 @@ export interface GlobalRevocationCoordinatorOptions {
   readonly clock?: SecurityClock
   readonly channelFactory?: (name: string) => RevocationBroadcastPort | null
   readonly storageEvents?: RevocationStorageEventSource
+  readonly lockManager?: RevocationLockManager
 }
 
 function parseStoredEpoch(value: string | null): number | null {
@@ -90,6 +100,7 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
   readonly #clock: SecurityClock
   readonly #channel: RevocationBroadcastPort | null
   readonly #storageEvents?: RevocationStorageEventSource
+  readonly #lockManager?: RevocationLockManager
   readonly #listeners = new Set<() => void>()
   #observedEpoch: number
   #closed = false
@@ -110,6 +121,7 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
   constructor(options: GlobalRevocationCoordinatorOptions) {
     this.#storage = options.storage
     this.#clock = options.clock ?? systemSecurityClock
+    this.#lockManager = options.lockManager
     const initial = parseStoredEpoch(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY))
     this.#observedEpoch = initial ?? -1
     this.#storageEvents = options.storageEvents
@@ -138,24 +150,36 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
     return stored
   }
 
-  revoke(cause: GlobalRevocationCause): GlobalRevocationNotice {
-    const current = this.currentEpoch()
-    if (current === null || current === Number.MAX_SAFE_INTEGER) {
-      throw new Error('Global revocation epoch is unavailable.')
+  async revoke(cause: GlobalRevocationCause): Promise<GlobalRevocationNotice> {
+    if (!this.#lockManager) {
+      throw new Error('Global revocation coordination is unavailable.')
     }
-    const now = this.#clock()
-    if (!Number.isSafeInteger(now) || now < 0) throw new Error('Security clock is unavailable.')
-    const notice: GlobalRevocationNotice = Object.freeze({
-      schemaVersion: GLOBAL_REVOCATION_NOTICE_VERSION,
-      epoch: current + 1,
-      cause,
-      occurredAt: new Date(now).toISOString(),
-    })
-    this.#storage.setItem(GLOBAL_REVOCATION_STORAGE_KEY, String(notice.epoch))
-    this.#observedEpoch = notice.epoch
-    this.#channel?.postMessage(notice)
-    this.#notify()
-    return notice
+    return this.#lockManager.request(
+      GLOBAL_REVOCATION_LOCK_NAME,
+      { mode: 'exclusive' },
+      () => {
+        const current = this.currentEpoch()
+        if (current === null || current === Number.MAX_SAFE_INTEGER) {
+          throw new Error('Global revocation epoch is unavailable.')
+        }
+        const now = this.#clock()
+        if (!Number.isSafeInteger(now) || now < 0) throw new Error('Security clock is unavailable.')
+        const notice: GlobalRevocationNotice = Object.freeze({
+          schemaVersion: GLOBAL_REVOCATION_NOTICE_VERSION,
+          epoch: current + 1,
+          cause,
+          occurredAt: new Date(now).toISOString(),
+        })
+        this.#storage.setItem(GLOBAL_REVOCATION_STORAGE_KEY, String(notice.epoch))
+        if (parseStoredEpoch(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY)) !== notice.epoch) {
+          throw new Error('Global revocation epoch could not be verified.')
+        }
+        this.#observedEpoch = notice.epoch
+        this.#channel?.postMessage(notice)
+        this.#notify()
+        return notice
+      },
+    )
   }
 
   subscribe(listener: () => void): () => void {
@@ -189,8 +213,11 @@ export function createBrowserGlobalRevocationCoordinator(): GlobalRevocationCoor
   } catch {
     throw new Error('Browser revocation storage is unavailable.')
   }
+  const lockManager = (navigator as Navigator & { locks?: RevocationLockManager }).locks
+  if (!lockManager) throw new Error('Browser revocation coordination is unavailable.')
   return new GlobalRevocationCoordinator({
     storage,
+    lockManager,
     storageEvents: window as unknown as RevocationStorageEventSource,
     channelFactory: typeof BroadcastChannel === 'undefined'
       ? undefined

@@ -14,6 +14,11 @@ export interface ActivityScheduler {
   clearInterval(handle: unknown): void
 }
 
+export interface LearnerScrollPosition {
+  readonly x: number
+  readonly y: number
+}
+
 export interface LearnerActivityControllerOptions {
   readonly session: LearnerSessionController
   readonly documentEvents: ActivityEventTarget
@@ -21,6 +26,9 @@ export interface LearnerActivityControllerOptions {
   readonly visibility: () => DocumentVisibilityState
   readonly clock?: SecurityClock
   readonly scheduler?: ActivityScheduler
+  /** Test seam; browser production uses Event.isTrusted. */
+  readonly isTrustedActivity?: (event: Event) => boolean
+  readonly scrollPosition?: () => LearnerScrollPosition | null
   readonly foregroundCheckIntervalMs?: number
   readonly scrollThrottleMs?: number
   readonly onSessionCheck?: (result: LearnerSessionCheck) => void
@@ -39,16 +47,26 @@ export class LearnerActivityController {
   readonly #visibility: () => DocumentVisibilityState
   readonly #clock: SecurityClock
   readonly #scheduler: ActivityScheduler
+  readonly #isTrustedActivity: (event: Event) => boolean
+  readonly #scrollPosition: () => LearnerScrollPosition | null
   readonly #foregroundCheckIntervalMs: number
   readonly #scrollThrottleMs: number
   readonly #onSessionCheck?: (result: LearnerSessionCheck) => void
   #interval: unknown = null
   #started = false
   #lastScrollAt: number | null = null
+  #lastScrollPosition: LearnerScrollPosition | null = null
 
-  readonly #onDirectActivity: EventListener = () => this.#recordVisibleActivity()
-  readonly #onScroll: EventListener = () => {
+  readonly #onDirectActivity: EventListener = (event) => {
+    if (!this.#isTrustedActivity(event)) return
+    this.#recordVisibleActivity()
+  }
+  readonly #onScroll: EventListener = (event) => {
+    if (!this.#isTrustedActivity(event)) return
     if (this.#visibility() !== 'visible') return
+    const position = this.#readScrollPosition()
+    if (!position || !this.#scrollDisplaced(position)) return
+    this.#lastScrollPosition = position
     const checked = this.#session.recheck()
     this.#report(checked)
     if (checked.status !== 'active') return
@@ -62,11 +80,16 @@ export class LearnerActivityController {
     this.#report(this.#session.noteMeaningfulActivity())
   }
   readonly #onVisibilityChange: EventListener = () => {
-    if (this.#visibility() === 'visible') this.#report(this.#session.recheck())
-    else this.#report(this.#session.flushActivity())
+    if (this.#visibility() === 'visible') {
+      this.#lastScrollPosition = this.#readScrollPosition()
+      this.#report(this.#session.recheck())
+    } else this.#report(this.#session.flushActivity())
   }
   readonly #onForegroundBoundary: EventListener = () => {
-    if (this.#visibility() === 'visible') this.#report(this.#session.recheck())
+    if (this.#visibility() === 'visible') {
+      this.#lastScrollPosition = this.#readScrollPosition()
+      this.#report(this.#session.recheck())
+    }
   }
 
   constructor(options: LearnerActivityControllerOptions) {
@@ -76,6 +99,8 @@ export class LearnerActivityController {
     this.#visibility = options.visibility
     this.#clock = options.clock ?? systemSecurityClock
     this.#scheduler = options.scheduler ?? browserScheduler
+    this.#isTrustedActivity = options.isTrustedActivity ?? ((event) => event.isTrusted)
+    this.#scrollPosition = options.scrollPosition ?? (() => null)
     this.#foregroundCheckIntervalMs = options.foregroundCheckIntervalMs ?? FOREGROUND_EXPIRATION_CHECK_INTERVAL_MS
     this.#scrollThrottleMs = options.scrollThrottleMs ?? MEANINGFUL_SCROLL_THROTTLE_MS
     this.#onSessionCheck = options.onSessionCheck
@@ -87,6 +112,7 @@ export class LearnerActivityController {
   start(): void {
     if (this.#started) return
     this.#started = true
+    this.#lastScrollPosition = this.#readScrollPosition()
     for (const type of ['pointerdown', 'keydown', 'input']) {
       this.#documentEvents.addEventListener(type, this.#onDirectActivity)
     }
@@ -130,6 +156,18 @@ export class LearnerActivityController {
     this.#report(this.#session.noteMeaningfulActivity())
   }
 
+  #readScrollPosition(): LearnerScrollPosition | null {
+    const position = this.#scrollPosition()
+    if (!position || !Number.isFinite(position.x) || !Number.isFinite(position.y)) return null
+    return position
+  }
+
+  #scrollDisplaced(position: LearnerScrollPosition): boolean {
+    return this.#lastScrollPosition !== null && (
+      position.x !== this.#lastScrollPosition.x || position.y !== this.#lastScrollPosition.y
+    )
+  }
+
   #report(result: LearnerSessionCheck): void {
     this.#onSessionCheck?.(result)
   }
@@ -147,6 +185,7 @@ export function createBrowserLearnerActivityController(
     documentEvents: document,
     pageEvents: window,
     visibility: () => document.visibilityState,
+    scrollPosition: () => ({ x: window.scrollX, y: window.scrollY }),
     onSessionCheck,
   })
 }

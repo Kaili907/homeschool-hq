@@ -32,6 +32,8 @@ function setup() {
   return {
     ledger,
     storage,
+    now: () => now,
+    setNow: (value: number) => { now = value },
     advance: (ms: number) => { now += ms },
   }
 }
@@ -94,15 +96,43 @@ describe('failed PIN attempt ledger', () => {
     })
   })
 
-  it('allows a fresh cycle after the temporary learner lock expires', () => {
+  it('allows another attempt after normal lock expiry without erasing history', () => {
     const runtime = setup()
     const subject = { kind: 'learner' as const, profileId: 'learner-a' }
     failureCycle(runtime.ledger, subject, runtime.advance)
 
     runtime.advance(FAILED_ATTEMPT_POLICY.temporaryLockMs.learner)
 
-    expect(runtime.ledger.status(subject)).toEqual({ status: 'ready', failedAttempts: 0 })
-    expect(runtime.ledger.recordFailure(subject)).toEqual({ status: 'ready', failedAttempts: 1 })
+    expect(runtime.ledger.status(subject)).toEqual({ status: 'ready', failedAttempts: 10 })
+    expect(runtime.ledger.recordFailure(subject)).toMatchObject({
+      status: 'temporarily-locked',
+      failedAttempts: 11,
+    })
+  })
+
+  it('persists a forward observation and fails closed after rollback', () => {
+    const runtime = setup()
+    const subject = { kind: 'learner' as const, profileId: 'learner-a' }
+    failureCycle(runtime.ledger, subject, runtime.advance)
+    const beforeJump = runtime.now()
+
+    runtime.advance(365 * 24 * 60 * 60 * 1_000)
+    expect(runtime.ledger.status(subject)).toEqual({ status: 'ready', failedAttempts: 10 })
+    runtime.setNow(beforeJump + FAILED_ATTEMPT_POLICY.temporaryLockMs.learner + 1)
+
+    expect(runtime.ledger.status(subject)).toEqual({ status: 'ledger-invalid', failedAttempts: 10 })
+    expect(runtime.ledger.recordFailure(subject)).toEqual({ status: 'ledger-invalid', failedAttempts: 10 })
+  })
+
+  it('handles sleep and restore as monotonic elapsed time', () => {
+    const runtime = setup()
+    const subject = { kind: 'parent' as const, householdId: 'household-a' }
+    failureCycle(runtime.ledger, subject, runtime.advance)
+
+    runtime.advance(FAILED_ATTEMPT_POLICY.temporaryLockMs.parent + 1)
+    expect(runtime.ledger.status(subject)).toEqual({ status: 'ready', failedAttempts: 10 })
+    runtime.advance(1_000)
+    expect(runtime.ledger.status(subject)).toEqual({ status: 'ready', failedAttempts: 10 })
   })
 
   it('resets all failure state after a successful attempt', () => {
@@ -113,6 +143,19 @@ describe('failed PIN attempt ledger', () => {
     expect(runtime.ledger.status(subject)).toEqual({ status: 'ready', failedAttempts: 2 })
 
     runtime.ledger.recordSuccess(subject)
+
+    expect(runtime.ledger.status(subject)).toEqual({ status: 'ready', failedAttempts: 0 })
+  })
+
+  it('treats successful authentication as the approved reset after a later observation', () => {
+    const runtime = setup()
+    const subject = { kind: 'parent' as const, householdId: 'household-a' }
+    runtime.ledger.recordFailure(subject)
+    runtime.advance(60_000)
+    expect(runtime.ledger.status(subject)).toEqual({ status: 'ready', failedAttempts: 1 })
+
+    runtime.ledger.recordSuccess(subject)
+    runtime.setNow(START)
 
     expect(runtime.ledger.status(subject)).toEqual({ status: 'ready', failedAttempts: 0 })
   })
