@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { createSupabaseOperationalTelemetryStore } from '../../../src/telemetry/supabaseOperationalTelemetry.ts'
 import { reject } from './http.js'
 
 const ACCESS_TIMEOUT_MS = 5_000
@@ -38,6 +39,10 @@ export function createGatewayAccess({ env, fetchImpl, client } = {}) {
   }
 
   return {
+    createOperationalTelemetryStore() {
+      return createSupabaseOperationalTelemetryStore(getClient())
+    },
+
     async requireEntitlement(userId) {
       const signal = AbortSignal.timeout(ACCESS_TIMEOUT_MS)
       const { data, error } = await getClient()
