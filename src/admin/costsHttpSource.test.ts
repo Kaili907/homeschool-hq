@@ -8,7 +8,7 @@ describe('authorized Admin costs browser reader', () => {
     await expect(readAdminCosts(
       { kind: 'preset', preset: 'today' },
       { getAccessToken: async () => 'verified-token', fetchImpl },
-    )).resolves.toMatchObject({ contractVersion: 2, currency: 'USD' })
+    )).resolves.toMatchObject({ contractVersion: 3, currency: 'USD' })
     expect(fetchImpl).toHaveBeenCalledWith('/api/admin/v1/costs?range=today', {
       method: 'GET',
       headers: { Accept: 'application/json', Authorization: 'Bearer verified-token' },

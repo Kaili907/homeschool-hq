@@ -16,14 +16,19 @@ export function costsModelFixture(overrides: Partial<AdminCostsModel> = {}): Adm
   const values = costAggregateFixture()
   const row = { key: 'tutor', label: 'Tutor', ...values }
   return {
-    contractVersion: 2,
+    contractVersion: 3,
     generatedAt: '2026-08-08T18:30:00.000Z',
     currency: 'USD',
     range: {
       kind: 'today', start: '2026-08-08', end: '2026-08-08',
       startAt: '2026-08-08T00:00:00.000Z', endExclusive: '2026-08-09T00:00:00.000Z', days: 1,
     },
-    source: { status: 'complete', reasons: [], recordLimit: 500, recordsIncluded: 3 },
+    source: {
+      status: 'complete', reasons: [], queryCoverage: 'complete',
+      providerTrafficCoverage: 'coverage_unverified', groupLimit: 384,
+      groupCount: 7, recordsIncluded: 3,
+      accountingGapEvidence: { observedCount: 0, retentionCoverage: 'within_retention' },
+    },
     summary: {
       ...values,
       usageUnavailableCount: 0,

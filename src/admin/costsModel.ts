@@ -63,7 +63,7 @@ export interface AdminCostBreakdownRow extends AdminCostAggregate {
 }
 
 export interface AdminCostsModel {
-  readonly contractVersion: 2
+  readonly contractVersion: 3
   readonly generatedAt: string
   readonly currency: 'USD'
   readonly range: {
@@ -77,8 +77,15 @@ export interface AdminCostsModel {
   readonly source: {
     readonly status: 'complete' | 'partial'
     readonly reasons: readonly AdminCostCompletenessReason[]
-    readonly recordLimit: 500
+    readonly queryCoverage: 'complete'
+    readonly providerTrafficCoverage: 'coverage_unverified'
+    readonly groupLimit: 384
+    readonly groupCount: number
     readonly recordsIncluded: number
+    readonly accountingGapEvidence: {
+      readonly observedCount: number
+      readonly retentionCoverage: 'within_retention' | 'retention_limited'
+    }
   }
   readonly summary: AdminCostSummary
   readonly trend: readonly AdminCostTrendPoint[]
@@ -92,11 +99,11 @@ export interface AdminCostsModel {
 }
 
 export type AdminCostCompletenessReason =
-  | 'source_record_limit'
   | 'ambiguous_attribution'
   | 'unresolved_attribution'
   | 'usage_unavailable'
   | 'calculated_cost_unavailable'
+  | 'accounting_gap_evidence'
 
 export type AdminCostsReadState =
   | { readonly status: 'idle' | 'loading' }
@@ -109,11 +116,11 @@ export type AdminCostsErrorCode = 'costs_timeout' | 'costs_unavailable' | 'inval
 const DATE = /^\d{4}-\d{2}-\d{2}$/
 const METRIC_STATUSES = new Set<AdminCostMetricStatus>(['available', 'partial', 'unavailable'])
 const REASONS = new Set<AdminCostCompletenessReason>([
-  'source_record_limit',
   'ambiguous_attribution',
   'unresolved_attribution',
   'usage_unavailable',
   'calculated_cost_unavailable',
+  'accounting_gap_evidence',
 ])
 const BREAKDOWN_LABELS = new Set([
   'Tutor',
@@ -123,7 +130,7 @@ const BREAKDOWN_LABELS = new Set([
   'ElevenLabs',
   'Anthropic Sonnet tier',
   'Anthropic Haiku tier',
-  'ElevenLabs Turbo speech',
+  'No logical tier (speech)',
   'Calculated',
   'Reconciled',
   'Unavailable',
@@ -227,6 +234,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const source = record(value)
   const range = record(source?.range)
   const sourceState = record(source?.source)
+  const gapEvidence = record(sourceState?.accountingGapEvidence)
   const summarySource = record(source?.summary)
   const summaryAggregate = aggregate(summarySource)
   const billing = fixedCounts(summarySource?.billingDispositionCounts, ['billable', 'notBillable', 'unknown'])
@@ -234,7 +242,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const attribution = fixedCounts(summarySource?.attributionCounts, ['resolved', 'ambiguous', 'unresolved'])
   const usageUnavailableCount = safeCount(summarySource?.usageUnavailableCount)
   if (
-    !source || source.contractVersion !== 2 || source.currency !== 'USD'
+    !source || source.contractVersion !== 3 || source.currency !== 'USD'
     || typeof source.generatedAt !== 'string' || Number.isNaN(Date.parse(source.generatedAt))
     || !range || !(ADMIN_COST_PRESETS as readonly string[]).concat('custom').includes(range.kind as string)
     || typeof range.start !== 'string' || !DATE.test(range.start)
@@ -244,7 +252,17 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
     || safeCount(range.days) === null || (range.days as number) < 1 || (range.days as number) > 366
     || !sourceState || !['complete', 'partial'].includes(sourceState.status as string)
     || !Array.isArray(sourceState.reasons) || sourceState.reasons.some((reason) => !REASONS.has(reason))
-    || sourceState.recordLimit !== 500 || safeCount(sourceState.recordsIncluded) === null
+    || (sourceState.status === 'complete') !== (sourceState.reasons.length === 0)
+    || sourceState.queryCoverage !== 'complete'
+    || sourceState.providerTrafficCoverage !== 'coverage_unverified'
+    || sourceState.groupLimit !== 384
+    || safeCount(sourceState.groupCount) === null || (sourceState.groupCount as number) < 1
+    || (sourceState.groupCount as number) > 384
+    || safeCount(sourceState.recordsIncluded) === null
+    || !gapEvidence || safeCount(gapEvidence.observedCount) === null
+    || !['within_retention', 'retention_limited'].includes(
+      gapEvidence.retentionCoverage as string,
+    )
     || !summaryAggregate || !billing || !costKinds || !attribution || usageUnavailableCount === null
     || !Array.isArray(source.trend) || source.trend.length > 366
   ) return null
@@ -263,18 +281,29 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const models = breakdownRows(breakdownsSource?.models)
   const breakdownCostKinds = breakdownRows(breakdownsSource?.costKinds)
   const billingDispositions = breakdownRows(breakdownsSource?.billingDispositions)
-  if (!engines || !providers || !models || !breakdownCostKinds || !billingDispositions) return null
+  if (
+    !engines || !providers || !models || !breakdownCostKinds || !billingDispositions
+    || sourceState.groupCount !== 1 + trend.length + engines.length + providers.length
+      + models.length + breakdownCostKinds.length + billingDispositions.length
+  ) return null
 
   return {
-    contractVersion: 2,
+    contractVersion: 3,
     generatedAt: source.generatedAt,
     currency: 'USD',
     range: range as unknown as AdminCostsModel['range'],
     source: {
       status: sourceState.status as 'complete' | 'partial',
       reasons: [...sourceState.reasons] as AdminCostCompletenessReason[],
-      recordLimit: 500,
+      queryCoverage: 'complete',
+      providerTrafficCoverage: 'coverage_unverified',
+      groupLimit: 384,
+      groupCount: sourceState.groupCount as number,
       recordsIncluded: sourceState.recordsIncluded as number,
+      accountingGapEvidence: {
+        observedCount: gapEvidence.observedCount as number,
+        retentionCoverage: gapEvidence.retentionCoverage as 'within_retention' | 'retention_limited',
+      },
     },
     summary: {
       ...summaryAggregate,
@@ -304,11 +333,11 @@ export function validateAdminCostCustomRange(start: string, end: string, today: 
 }
 
 export const ADMIN_COST_COMPLETENESS_MESSAGES: Readonly<Record<AdminCostCompletenessReason, string>> = {
-  source_record_limit: 'The selected range exceeded the bounded 500-record read, so totals are partial.',
   ambiguous_attribution: 'Some usage had ambiguous household attribution.',
   unresolved_attribution: 'Some usage could not be resolved to a household.',
   usage_unavailable: 'Some provider usage quantities were unavailable.',
   calculated_cost_unavailable: 'Some usage had no trustworthy calculated cost, commonly because no effective production price was configured.',
+  accounting_gap_evidence: 'Recorded gateway telemetry shows provider activity whose accounting persistence failed; no usage or cost was fabricated for those signals.',
 }
 
 export const ADMIN_COST_ERROR_MESSAGES: Readonly<Record<AdminCostsErrorCode, string>> = {

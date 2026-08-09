@@ -1,9 +1,8 @@
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
   ADMIN_COST_MAX_RANGE_DAYS,
   ADMIN_COST_RECORD_LIMIT,
   buildAdminCostProjection,
-  createAdminCostProjection,
   resolveAdminCostRange,
 } from './admin-cost-projection.js'
 
@@ -245,7 +244,7 @@ describe('Admin cost aggregate projection', () => {
     expect(model.trend).toEqual([])
   })
 
-  it('marks totals partial when the existing server seam cannot prove more than its record ceiling', () => {
+  it('keeps the legacy raw-row builder conservative at its record ceiling', () => {
     const records = Array.from({ length: ADMIN_COST_RECORD_LIMIT }, (_, index) => record({ usageId: `usage-${index}` }))
     const model = buildAdminCostProjection(records, today, NOW)
     expect(model.source.status).toBe('partial')
@@ -254,16 +253,6 @@ describe('Admin cost aggregate projection', () => {
     expect(model.summary.calculatedCost.status).toBe('partial')
   })
 
-  it('uses only the bounded ADMIN-3 server read seam', async () => {
-    const gatewayAccess = { readProviderUsageCosts: vi.fn(async () => [record()]) }
-    const projection = createAdminCostProjection({ gatewayAccess, now: () => NOW })
-    const model = await projection.read(event({ range: '7-days' }))
-    expect(model.summary.aiRequests.value).toBe(1)
-    expect(gatewayAccess.readProviderUsageCosts).toHaveBeenCalledWith({
-      limit: ADMIN_COST_RECORD_LIMIT,
-      before: '2026-08-09T00:00:00.000Z',
-    })
-  })
 
   it('fails closed for malformed ledger rows rather than surfacing raw fields', () => {
     expect(() => buildAdminCostProjection([

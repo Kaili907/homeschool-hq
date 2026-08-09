@@ -38,6 +38,24 @@ describe('Admin costs browser contract', () => {
     expect(model?.summary.calculatedCost).toEqual({ status: 'unavailable', micros: null, currency: 'USD' })
   })
 
+  it('requires complete query coverage without promoting provider traffic coverage', () => {
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel(source)?.source).toMatchObject({
+      queryCoverage: 'complete',
+      providerTrafficCoverage: 'coverage_unverified',
+      groupLimit: 384,
+      groupCount: 7,
+    })
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, queryCoverage: 'unavailable' },
+    })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, providerTrafficCoverage: 'complete' },
+    })).toBeNull()
+  })
+
   it('validates calendar order, future dates, and the 366-day maximum', () => {
     expect(validateAdminCostCustomRange('2026-08-01', '2026-08-08', '2026-08-08')).toBeNull()
     expect(validateAdminCostCustomRange('2026-08-09', '2026-08-08', '2026-08-08')).toContain('on or before')

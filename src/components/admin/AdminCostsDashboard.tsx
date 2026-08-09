@@ -54,7 +54,7 @@ export function AdminCostsDashboard({
         <div>
           <p className="admin-costs-eyebrow">Provider usage ledger</p>
           <h1>AI &amp; Costs</h1>
-          <p>Read-only usage and provider-cost evidence. All calendar boundaries are UTC.</p>
+          <p>Usage-derived marginal provider cost for recorded provider attempts, calculated from verified effective-dated pricing terms. All calendar boundaries are UTC.</p>
         </div>
         <div className="admin-costs-header__controls">
           <CostRangeControl range={range} onChange={onRangeChange} today={today} />
@@ -169,7 +169,7 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
       )}
       {model.source.status === 'partial' && (
         <section className="admin-costs-banner admin-costs-banner--partial" aria-labelledby="costs-partial-title">
-          <strong id="costs-partial-title">Partial totals</strong>
+          <strong id="costs-partial-title">Evidence limitations</strong>
           <ul>
             {model.source.reasons.map((reason) => <li key={reason}>{ADMIN_COST_COMPLETENESS_MESSAGES[reason]}</li>)}
           </ul>
@@ -178,7 +178,7 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
       {empty && (
         <section className="admin-costs-empty" role="status">
           <h2>No recorded provider usage</h2>
-          <p>The complete authorized projection proves zero stored AI and TTS requests for this range.</p>
+          <p>The complete database query found zero recorded AI and TTS ledger attempts for this range. It does not prove zero provider traffic.</p>
         </section>
       )}
 
@@ -200,7 +200,7 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
             <span>records without trustworthy cost</span>
           </article>
         </div>
-        <p className="admin-costs-disclosure">Calculated cost is usage-derived and is not provider-invoice truth. Reconciled cost is reported separately.</p>
+        <p className="admin-costs-disclosure">Calculated cost covers recorded marginal usage only. It excludes subscription or plan fees, taxes, credits, included allowances, rollover, account adjustments, and unrepresented discounts; it is not a complete provider invoice. Reconciled cost is separate.</p>
       </section>
 
       <section className="admin-costs-panel" aria-labelledby="cost-completeness-title">
@@ -221,8 +221,14 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
             ['Reconciled', model.summary.costKindCounts.reconciled],
             ['Unavailable', model.summary.costKindCounts.unavailable],
           ]} />
+          <div><h3>Coverage</h3><dl>
+            <div><dt>Aggregate query</dt><dd>Complete</dd></div>
+            <div><dt>Provider traffic</dt><dd>Unverified</dd></div>
+            <div><dt>Observed accounting gaps</dt><dd>{model.source.accountingGapEvidence.observedCount.toLocaleString()}</dd></div>
+          </dl></div>
         </div>
         <p className="admin-costs-disclosure">No learner-cost breakdown is shown because the integrated ledger does not contain trusted learner attribution for these provider calls.</p>
+        <p className="admin-costs-disclosure">Accounting-gap evidence is retained telemetry only and never becomes fabricated usage or cost. A zero count cannot prove complete provider-attempt coverage{model.source.accountingGapEvidence.retentionCoverage === 'retention_limited' ? ', and this range extends beyond the conservative telemetry-retention window' : ''}.</p>
       </section>
 
       <section className="admin-costs-panel" aria-labelledby="cost-trend-title">
@@ -259,7 +265,7 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
       </div>
 
       <footer className="admin-costs-footer">
-        Projection generated <time dateTime={model.generatedAt}>{formatUtc(model.generatedAt)}</time>. {model.source.recordsIncluded.toLocaleString()} bounded ledger records included.
+        Projection generated <time dateTime={model.generatedAt}>{formatUtc(model.generatedAt)}</time>. Exact database aggregate of {model.source.recordsIncluded.toLocaleString()} recorded attempts across {model.source.groupCount.toLocaleString()} of {model.source.groupLimit.toLocaleString()} allowed groups. Provider-attempt coverage remains unverified.
       </footer>
     </>
   )

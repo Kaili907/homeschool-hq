@@ -90,6 +90,22 @@ record as a replay. Reusing it with different facts raises
 `reconciliation_conflict`; the first record is not silently accepted or
 overwritten.
 
+## Scalable Admin aggregate
+
+ADMIN-8 uses `academy_aggregate_provider_usage_costs_v1`, not the newest-500
+raw ledger projection, for authoritative supported-range totals. The RPC covers
+every matching stored ledger row in a positive half-open range of at most 366
+days and returns only fixed summary, UTC-day, engine, provider, approved logical
+tier/no-tier speech, cost-kind, and billing-disposition groups. Results are
+capped at 384 groups and fail rather than truncate.
+
+Every database integer/numeric aggregate crosses JSON as a decimal string.
+IntegerMicros remains a string through the server and browser. Successful query
+coverage is `complete`; provider-traffic coverage remains `coverage_unverified`.
+Retained accounting-persistence gap telemetry is reported separately and is
+never converted to usage or cost. The dashboard claim is limited to
+usage-derived marginal provider cost for recorded provider attempts calculated
+from verified effective-dated pricing terms, not complete invoice economics.
 ## Access boundary
 
 Catalog, rate, ledger, and component tables use forced RLS with no browser-role
