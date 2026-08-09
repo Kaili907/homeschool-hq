@@ -5,6 +5,7 @@
 
 const CACHE = 'homeschool-hq-__BUILD_ID__'
 const SHELL = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg']
+const ACTIVATE_ACADEMY_SERVICE_WORKER = 'ACADEMY_ACTIVATE_SERVICE_WORKER'
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -22,6 +23,11 @@ self.addEventListener('activate', (event) => {
       .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim()),
   )
+})
+
+self.addEventListener('message', (event) => {
+  if (event.data?.type !== ACTIVATE_ACADEMY_SERVICE_WORKER) return
+  event.waitUntil(self.skipWaiting())
 })
 
 self.addEventListener('fetch', (event) => {
