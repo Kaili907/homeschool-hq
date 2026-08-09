@@ -3,6 +3,8 @@ import type { AdminEngineId, AdminHealthState } from '../../admin/admin0Vocabula
 import {
   formatUsdMicros,
   safeAuthorizationMessage,
+  safeCompletenessMessage,
+  safeCostReasonMessage,
   safeEngineReasonMessage,
   safeOverviewErrorMessage,
   safeStaleMessage,
@@ -15,6 +17,7 @@ import {
   type AdminConsoleProps,
   type AdminOverviewModel,
   type AdminSection,
+  type ApplicableMetric,
   type Metric,
   type OverviewPreset,
   type OverviewRange,
@@ -272,7 +275,10 @@ function Overview({ model }: { model: AdminOverviewModel }) {
               <li key={engine.engineId}>
                 <div>
                   <strong>{ENGINE_LABELS[engine.engineId]}</strong>
-                  {engine.reasonCodes.length > 0 && <span>{engine.reasonCodes.map(safeEngineReasonMessage).join(' · ')}</span>}
+                  <span>
+                    {engine.engineVersion ?? 'Version not applicable'}
+                    {engine.reasonCodes.length > 0 && ` · ${engine.reasonCodes.map(safeEngineReasonMessage).join(' · ')}`}
+                  </span>
                 </div>
                 <a href={`/academy/admin/engines/${engine.engineId}`} aria-label={`View ${ENGINE_LABELS[engine.engineId]} engine details`}>
                   <HealthBadge status={engine.health} /><span aria-hidden="true">›</span>
@@ -286,15 +292,17 @@ function Overview({ model }: { model: AdminOverviewModel }) {
           <SectionHeading id="ai-title" eyebrow="Usage telemetry" title="AI & speech" />
           <div className="admin-compact-metrics">
             <CompactMetric label="AI requests" metric={model.ai.requests} />
-            <CompactMetric label="Input tokens" metric={model.ai.inputTokens} />
+            <CompactMetric label="Non-cached input tokens" metric={model.ai.inputTokens} />
             <CompactMetric label="Output tokens" metric={model.ai.outputTokens} />
+            <CompactMetric label="Cached input read tokens" metric={model.ai.cachedInputReadTokens} />
+            <CompactMetric label="Cached input write tokens" metric={model.ai.cachedInputWriteTokens} />
             <CompactMetric label="TTS characters" metric={model.ai.ttsCharacters} />
-            <CompactMetric
-              label={model.ai.spend.status === 'available' && model.ai.spend.value.costKind === 'reconciled' ? 'Reconciled spend' : 'Estimated spend'}
-              metric={model.ai.spend}
-              formatter={(value) => formatUsdMicros(value.costMicros)}
-            />
+            <SpendMetric spend={model.ai.spend} />
           </div>
+          <p className="admin-disclosure">
+            {billingDispositionLabel(model.ai.spend.billingDisposition)}. {safeCompletenessMessage(model.ai.spend.completeness)}
+            {safeCostReasonMessage(model.ai.spend.resultReasonCode) && ` ${safeCostReasonMessage(model.ai.spend.resultReasonCode)}`}
+          </p>
           <p className="admin-disclosure">Calculated values are usage-derived estimates, not reconciled provider invoices.</p>
         </section>
       </div>
@@ -349,7 +357,7 @@ function SectionHeading({ id, eyebrow, title }: { id: string; eyebrow: string; t
   return <header className="admin-section-heading"><div><p>{eyebrow}</p><h2 id={id}>{title}</h2></div></header>
 }
 
-function StatusItem<T>({ label, metric, health = false }: { label: string; metric: Metric<T>; health?: boolean }) {
+function StatusItem<T>({ label, metric, health = false }: { label: string; metric: ApplicableMetric<T>; health?: boolean }) {
   return (
     <div><dt>{label}</dt><dd>{health && metric.status === 'available'
       ? <HealthBadge status={metric.value as AdminHealthState} />
@@ -365,9 +373,29 @@ function CompactMetric<T>({ label, metric, formatter, suffix }: { label: string;
   return <div><dt>{label}</dt><dd><MetricValue metric={metric} formatter={formatter} suffix={suffix} /></dd></div>
 }
 
-function MetricValue<T>({ metric, formatter, suffix = '' }: { metric: Metric<T>; formatter?: (value: T) => string; suffix?: string }) {
+function SpendMetric({ spend }: { spend: AdminOverviewModel['ai']['spend'] }) {
+  const label = spend.status !== 'available' ? 'Spend' : spend.costKind === 'reconciled' ? 'Reconciled spend' : 'Estimated spend'
+  return (
+    <div>
+      <dt>{label}</dt>
+      <dd>{spend.status === 'available'
+        ? formatUsdMicros(spend.costMicros, spend.currency)
+        : <span className="admin-metric-missing"><span aria-hidden="true">—</span> {spend.status === 'unknown' ? 'Unknown' : 'Unavailable'}</span>}
+      </dd>
+    </div>
+  )
+}
+
+function billingDispositionLabel(disposition: AdminOverviewModel['ai']['spend']['billingDisposition']): string {
+  if (disposition === 'billable') return 'Billable usage'
+  if (disposition === 'not_billable') return 'Explicitly not billable'
+  return 'Billing disposition unknown'
+}
+
+function MetricValue<T>({ metric, formatter, suffix = '' }: { metric: ApplicableMetric<T>; formatter?: (value: T) => string; suffix?: string }) {
   if (metric.status !== 'available') {
-    return <span className="admin-metric-missing"><span aria-hidden="true">—</span> {metric.status === 'unknown' ? 'Unknown' : 'Unavailable'}</span>
+    const label = metric.status === 'not_applicable' ? 'Not applicable' : metric.status === 'unknown' ? 'Unknown' : 'Unavailable'
+    return <span className="admin-metric-missing"><span aria-hidden="true">—</span> {label}</span>
   }
   const value = formatter ? formatter(metric.value) : typeof metric.value === 'number' ? metric.value.toLocaleString() : String(metric.value)
   return <>{value}{suffix}</>

@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import type { AdminEngineId } from '../../admin/admin0Vocabulary'
-import { adaptAdminOverview, type AdminOverviewSource } from '../../admin/overviewAdapter'
+import { adaptAdminOverview, type AdminOverviewSource, type CostSource } from '../../admin/overviewAdapter'
 import type { AdminConsoleProps, EngineObservation } from '../../admin/overviewModel'
 import { AdminConsole } from './AdminConsole'
 
@@ -20,13 +20,22 @@ function engine(engineId: AdminEngineId, health: EngineObservation['health'] = '
   }
 }
 
+function costSource(overrides: Partial<CostSource> = {}): CostSource {
+  return {
+    costMicros: '1840000', costKind: 'calculated', billingDisposition: 'billable', currency: 'USD',
+    completeness: 'complete', result: 'success', resultReasonCode: null, ...overrides,
+  }
+}
+
 function completeSource(overrides: Partial<AdminOverviewSource> = {}): AdminOverviewSource {
   return {
+    contractVersion: 2,
     range: { kind: 'preset', preset: 'today' },
     observedAt: OBSERVED_AT,
     freshness: 'current',
     academy: {
-      environment: 'Production', appVersion: 'build-2026.08.08.1', curriculumVersion: '1.0.0',
+      environment: 'Production', appVersion: 'build-2026.08.08.1',
+      curriculumVersion: { applicability: 'trusted', version: '1.0.0' },
       overallHealth: 'healthy', lastSuccessfulDataRefresh: '2026-08-08T13:55:00.000Z',
     },
     learners: { activeLearners: 4, lessonsStarted: 8, lessonsCompleted: 5, studySessions: 3, instructionalMinutes: 126 },
@@ -35,8 +44,9 @@ function completeSource(overrides: Partial<AdminOverviewSource> = {}): AdminOver
       engine('jarvis', 'unknown'), engine('tts', 'disabled'), engine('gateway'), engine('sync', 'unavailable'),
     ],
     ai: {
-      requests: 42, inputTokens: 12000, outputTokens: 3600, ttsCharacters: 8000,
-      spend: { costMicros: '1840000', costKind: 'calculated', currency: 'USD' },
+      requests: 42, inputTokens: 12000, outputTokens: 3600,
+      cachedInputReadTokens: 2100, cachedInputWriteTokens: 425, ttsCharacters: 8000,
+      spend: costSource(),
     },
     safety: {
       openSafetyStops: { evidence: 'complete', value: 1 },
@@ -95,7 +105,8 @@ describe('AdminConsole authorization and load states', () => {
 
   it('requires overview:read even after server-resolved role authorization', () => {
     const secretModel = adaptAdminOverview(completeSource({ academy: {
-      environment: 'SENSITIVE ENVIRONMENT', appVersion: 'build-1', curriculumVersion: '1.0.0',
+      environment: 'SENSITIVE ENVIRONMENT', appVersion: 'build-1',
+      curriculumVersion: { applicability: 'trusted', version: '1.0.0' },
       overallHealth: 'healthy', lastSuccessfulDataRefresh: OBSERVED_AT,
     } }))
     const markup = renderToStaticMarkup(
@@ -150,13 +161,19 @@ describe('AdminConsole canonical overview presentation', () => {
     expect(markup).toContain(OBSERVED_AT)
     expect(markup).toContain('$1.84')
     expect(markup).toContain('Estimated spend')
+    expect(markup).toContain('Billable usage')
+    expect(markup).toContain('Cached input read tokens')
+    expect(markup).toContain('2,100')
+    expect(markup).toContain('Cached input write tokens')
+    expect(markup).toContain('425')
     expect(markup).toContain('not reconciled provider invoices')
   })
 
   it('labels reconciled cost explicitly', () => {
     const source = completeSource({ ai: {
-      requests: 1, inputTokens: 1, outputTokens: 1, ttsCharacters: 0,
-      spend: { costMicros: '2000000', costKind: 'reconciled', currency: 'USD' },
+      requests: 1, inputTokens: 1, outputTokens: 1, cachedInputReadTokens: 0,
+      cachedInputWriteTokens: 0, ttsCharacters: 0,
+      spend: costSource({ costMicros: '2000000', costKind: 'reconciled' }),
     } })
     const markup = authorized(source)
     expect(markup).toContain('Reconciled spend')
@@ -172,17 +189,43 @@ describe('AdminConsole canonical overview presentation', () => {
         safeguardFailures: { evidence: 'complete', value: 0 },
       },
       system: { apiErrorRatePercent: 0, latencyMs: 0, syncFailures: 0, persistenceFailures: 0 },
-      ai: { requests: 0, inputTokens: 0, outputTokens: 0, ttsCharacters: 0, spend: { costMicros: '0', costKind: 'calculated', currency: 'USD' } },
+      ai: {
+        requests: 0, inputTokens: 0, outputTokens: 0, cachedInputReadTokens: 0,
+        cachedInputWriteTokens: 0, ttsCharacters: 0, spend: costSource({ costMicros: '0' }),
+      },
     })
     const markup = authorized(source)
     expect(markup).toContain('$0.00')
+    expect(markup).toContain('Billable usage')
     expect(markup).toContain('0 min')
+  })
+
+  it('distinguishes calculated billable zero from explicitly non-billable zero', () => {
+    const billable = authorized(completeSource({ ai: {
+      requests: 0, inputTokens: 0, outputTokens: 0, cachedInputReadTokens: 0,
+      cachedInputWriteTokens: 0, ttsCharacters: 0,
+      spend: costSource({ costMicros: '0', billingDisposition: 'billable' }),
+    } }))
+    const notBillable = authorized(completeSource({ ai: {
+      requests: 0, inputTokens: 0, outputTokens: 0, cachedInputReadTokens: 0,
+      cachedInputWriteTokens: 0, ttsCharacters: 0,
+      spend: costSource({ costMicros: '0', billingDisposition: 'not_billable' }),
+    } }))
+    expect(billable).toContain('Billable usage')
+    expect(notBillable).toContain('Explicitly not billable')
   })
 
   it('keeps unavailable and unknown evidence distinct without fake costs', () => {
     const source = completeSource({
       learners: { activeLearners: 2, lessonsStarted: null, lessonsCompleted: null, studySessions: null, instructionalMinutes: null },
-      ai: { requests: null, inputTokens: null, outputTokens: null, ttsCharacters: null, spend: { costMicros: null, costKind: 'unavailable', currency: 'USD' } },
+      ai: {
+        requests: null, inputTokens: null, outputTokens: null, cachedInputReadTokens: null,
+        cachedInputWriteTokens: null, ttsCharacters: null,
+        spend: costSource({
+          costMicros: null, costKind: 'unavailable', billingDisposition: 'unknown',
+          completeness: 'partial_usage_unavailable', resultReasonCode: 'missing_provider_usage',
+        }),
+      },
       safety: {
         openSafetyStops: { evidence: 'incomplete' },
         adultReviewsPending: { evidence: 'unavailable' },
@@ -192,7 +235,44 @@ describe('AdminConsole canonical overview presentation', () => {
     const markup = authorized(source)
     expect(markup).toContain('Unavailable')
     expect(markup).toContain('Unknown')
+    expect(markup).toContain('Billing disposition unknown')
+    expect(markup).toContain('Aggregate is partial because some trustworthy usage was unavailable')
+    expect(markup).toContain('Trustworthy provider usage was unavailable')
     expect(markup).not.toContain('$0.00')
+  })
+
+  it('renders version inapplicability separately from unknown curriculum evidence', () => {
+    const engines = completeSource().engines.map((item) => item.engineId === 'gateway' ? { ...item, engineVersion: null } : item)
+    const notApplicable = authorized(completeSource({
+      engines,
+      academy: {
+        environment: 'Production', appVersion: 'build-2026.08.08.1',
+        curriculumVersion: { applicability: 'not_applicable' }, overallHealth: 'healthy',
+        lastSuccessfulDataRefresh: OBSERVED_AT,
+      },
+    }))
+    const unknown = authorized(completeSource({ academy: {
+      environment: 'Production', appVersion: 'build-2026.08.08.1',
+      curriculumVersion: { applicability: 'unknown' }, overallHealth: 'healthy',
+      lastSuccessfulDataRefresh: OBSERVED_AT,
+    } }))
+    expect(notApplicable).toContain('Version not applicable')
+    expect(notApplicable).toContain('Not applicable')
+    expect(unknown).toContain('Unknown')
+  })
+
+  it('never renders a raw cost reason or attribution identity', () => {
+    const source = completeSource({ ai: {
+      requests: 1, inputTokens: 1, outputTokens: 1, cachedInputReadTokens: 0,
+      cachedInputWriteTokens: 0, ttsCharacters: 0,
+      spend: { ...costSource({ completeness: 'partial_attribution_ambiguous' }), resultReasonCode: 'raw provider SECRET' } as unknown as CostSource,
+    } })
+    const markup = authorized(source)
+    expect(markup).toContain('attribution was ambiguous')
+    expect(markup).toContain('Additional cost detail is unavailable')
+    expect(markup).not.toContain('SECRET')
+    expect(markup).not.toContain('accountRef')
+    expect(markup).not.toContain('householdRef')
   })
 
   it('maps stale and engine reason codes to safe display copy', () => {
