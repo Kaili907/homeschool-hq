@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { emptyProfile } from '../migration'
 import { ACADEMY_SYNC_PROTOCOL_VERSION } from '../security/contracts'
+import type { CredentialFreeEducationalProfile } from '../security/contracts'
 import type { Profile } from '../types'
 import { serializeCredentialFreeEducationalProfile } from './credentialFreeProfile'
 import {
@@ -54,13 +55,17 @@ const profile = (pin = '1234'): Profile => ({
   pin,
 })
 
-const mutationRow = (data = profile()): ProfileMutationRowInput => ({
+const mutationRow = (
+  data: Profile | CredentialFreeEducationalProfile = profile(),
+): ProfileMutationRowInput => ({
   profile_id: 'p1',
   data,
   updated_at: '2026-08-09T12:00:00.000Z',
 })
 
-const mutationRequest = (data = profile()) => ({
+const mutationRequest = (
+  data: Profile | CredentialFreeEducationalProfile = profile(),
+) => ({
   expectedRevision: '1',
   mutationId: 'mutation-1',
   profiles: [mutationRow(data)],
@@ -109,10 +114,26 @@ describe('Sync Protocol v2 RPC declarations', () => {
       profile_id: 'p1',
       updated_at: '2026-08-09T12:00:00.000Z',
     })
-    expect(Object.prototype.hasOwnProperty.call(params.p_profiles[0].data, 'pin')).toBe(
+    expect(
+      Object.prototype.hasOwnProperty.call(params.p_profiles[0].data, 'pin'),
+    ).toBe(false)
+    expect(JSON.stringify(params.p_profiles)).not.toContain('1234')
+  })
+
+  it('accepts an already credential-free educational profile as mutation input', async () => {
+    const credentialFree = serializeCredentialFreeEducationalProfile(profile())
+    const { client, rpc } = mockRpcClient()
+    rpc.mockResolvedValue(mutationResponse())
+
+    await expect(
+      new AcademySyncV2Client(client).applyMutation(
+        mutationRequest(credentialFree),
+      ),
+    ).resolves.toMatchObject({ ok: true, operation: 'mutation' })
+    expect(rpc.mock.calls[0][1].p_profiles[0].data).toEqual(credentialFree)
+    expect(Object.prototype.hasOwnProperty.call(credentialFree, 'pin')).toBe(
       false,
     )
-    expect(JSON.stringify(params.p_profiles)).not.toContain('1234')
   })
 
   it('rejects a nested credential before any mutation RPC or receipt can be created', async () => {
@@ -167,6 +188,93 @@ describe('v2 snapshot compatibility reader', () => {
     expect(result.legacyCredentialHandoffs).toHaveLength(1)
     expect(JSON.stringify(result)).not.toContain('2468')
   })
+
+  it.each([
+    ['parentPin', '9876'],
+    ['accessToken', 'session-secret'],
+    ['refreshToken', 'session-secret'],
+    ['sessionToken', 'session-secret'],
+    ['pinHash', 'session-secret'],
+    ['recoveryToken', 'session-secret'],
+  ])(
+    'fails closed on nested incoming %s without diagnostic leakage',
+    async (key, secret) => {
+      const unsafe = {
+        ...serializeCredentialFreeEducationalProfile(profile()),
+        missions: {
+          '2026-08-09': {
+            items: [
+              {
+                id: 'mission-1',
+                label: 'Educational text may say password safely.',
+                done: false,
+                nested: { [key]: secret },
+              },
+            ],
+          },
+        },
+      }
+      const { client, rpc } = mockRpcClient()
+      rpc.mockResolvedValue(
+        snapshotResponse([
+          {
+            profile_id: 'p1',
+            data: unsafe,
+            updated_at: '2026-08-09T12:00:00.000Z',
+          },
+        ]),
+      )
+
+      const result = await new AcademySyncV2Client(client).snapshot()
+      expect(result).toMatchObject({
+        ok: false,
+        classification: 'credential-bearing-payload-rejection',
+      })
+      expect(JSON.stringify(result)).not.toContain(secret)
+    },
+  )
+})
+
+describe('strict protocol-v2 response shapes', () => {
+  it.each([
+    [
+      'unknown status in normal mode',
+      { status: 'future-success', mode: 'normal' },
+    ],
+    ['known status in unknown mode', { status: 'ok', mode: 'future-mode' }],
+    ['missing status in normal mode', { mode: 'normal' }],
+  ])('rejects an %s snapshot response', async (_label, shape) => {
+    const { client, rpc } = mockRpcClient()
+    rpc.mockResolvedValue({
+      data: { ...shape, ...protocolAdvertisement, revision: '1', rows: [] },
+      error: null,
+    })
+    await expect(
+      new AcademySyncV2Client(client).snapshot(),
+    ).resolves.toMatchObject({
+      ok: false,
+      classification: 'authentication-provenance-mismatch',
+    })
+  })
+
+  it('rejects an applied mutation paired with an unknown mode', async () => {
+    const { client, rpc } = mockRpcClient()
+    rpc.mockResolvedValue({
+      data: {
+        status: 'applied',
+        mode: 'future-mode',
+        ...protocolAdvertisement,
+        revision: '2',
+      },
+      error: null,
+    })
+    await expect(
+      new AcademySyncV2Client(client).applyMutation(mutationRequest()),
+    ).resolves.toMatchObject({
+      ok: false,
+      classification: 'authentication-provenance-mismatch',
+    })
+  })
 })
 
 describe('v2 maintenance and update-required controls', () => {
@@ -216,7 +324,11 @@ describe('v2 maintenance and update-required controls', () => {
     const { client, rpc } = mockRpcClient()
     rpc
       .mockResolvedValueOnce({
-        data: { status: 'maintenance', mode: 'maintenance', ...protocolAdvertisement },
+        data: {
+          status: 'maintenance',
+          mode: 'maintenance',
+          ...protocolAdvertisement,
+        },
         error: null,
       })
       .mockRejectedValueOnce(new TypeError('offline'))
@@ -284,9 +396,9 @@ describe('v2 maintenance and update-required controls', () => {
 describe('v2 outcome and retry classification', () => {
   it('retries only a network/transient failure with bounded exponential backoff', async () => {
     const { client, rpc } = mockRpcClient()
-    rpc.mockRejectedValueOnce(new TypeError('offline')).mockResolvedValueOnce(
-      snapshotResponse([], '7'),
-    )
+    rpc
+      .mockRejectedValueOnce(new TypeError('offline'))
+      .mockResolvedValueOnce(snapshotResponse([], '7'))
     const wait = vi.fn(async () => undefined)
     const result = await runWithNetworkRetry(
       () => new AcademySyncV2Client(client).snapshot(),
@@ -345,7 +457,11 @@ describe('unsynced educational data preservation', () => {
   it('retains dirty local educational profiles for reviewed reconciliation', async () => {
     const { client, rpc } = mockRpcClient()
     rpc.mockResolvedValue({
-      data: { status: 'maintenance', mode: 'maintenance', ...protocolAdvertisement },
+      data: {
+        status: 'maintenance',
+        mode: 'maintenance',
+        ...protocolAdvertisement,
+      },
       error: null,
     })
     const outcome = await new AcademySyncV2Client(client).snapshot()
@@ -361,18 +477,18 @@ describe('unsynced educational data preservation', () => {
     expect(preserved.profiles.p1.name).toBe('Ada')
     expect(preserved.disposition).toBe('maintenance-paused')
     expect(JSON.stringify(preserved)).not.toContain('8642')
-    expect(Object.prototype.hasOwnProperty.call(preserved.profiles.p1, 'pin')).toBe(
-      false,
-    )
+    expect(
+      Object.prototype.hasOwnProperty.call(preserved.profiles.p1, 'pin'),
+    ).toBe(false)
   })
 })
 
 describe('legacy endpoint exclusion', () => {
   it('never intentionally calls a legacy mutation or snapshot endpoint', async () => {
     const { client, rpc } = mockRpcClient()
-    rpc.mockResolvedValueOnce(snapshotResponse()).mockResolvedValueOnce(
-      mutationResponse(),
-    )
+    rpc
+      .mockResolvedValueOnce(snapshotResponse())
+      .mockResolvedValueOnce(mutationResponse())
     const sync = new AcademySyncV2Client(client)
     await sync.snapshot()
     await sync.applyMutation(mutationRequest())

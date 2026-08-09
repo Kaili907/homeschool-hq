@@ -43,9 +43,9 @@ describe('credential and educational Profile boundaries', () => {
       createdAt: '2026-08-09T12:00:00.000Z',
     }
 
-    expect(() => toCredentialFreeEducationalProfile(credential as unknown as Profile)).toThrow(
-      /credential-like material/i,
-    )
+    expect(() =>
+      toCredentialFreeEducationalProfile(credential as unknown as Profile),
+    ).toThrow(/credential-like material/i)
   })
 
   it('omits the accepted legacy PIN and rejects credential-like material at any depth', () => {
@@ -63,23 +63,75 @@ describe('credential and educational Profile boundaries', () => {
       grade: 5,
       nestedEducationalData: { completed: true },
     })
-    expect(() => toCredentialFreeEducationalProfile({
-      ...legacy,
-      nestedEducationalData: { recoverySecret: 'not-for-sync' },
-    } as unknown as Profile)).toThrow(/recoverySecret/)
-    expect(() => toCredentialFreeEducationalProfile({
-      ...legacy,
-      pinVerifier: 'not-for-sync',
-    } as unknown as Profile)).toThrow(/pinVerifier/)
+    expect(() =>
+      toCredentialFreeEducationalProfile({
+        ...legacy,
+        nestedEducationalData: { recoverySecret: 'not-for-sync' },
+      } as unknown as Profile),
+    ).toThrow(/recoverySecret/)
+    expect(() =>
+      toCredentialFreeEducationalProfile({
+        ...legacy,
+        pinVerifier: 'not-for-sync',
+      } as unknown as Profile),
+    ).toThrow(/pinVerifier/)
   })
+
+  it.each([
+    ['pin', '9876'],
+    ['parentPin', '9876'],
+    ['pinHash', 'session-secret'],
+    ['pinVerifier', 'session-secret'],
+    ['verifier', 'session-secret'],
+    ['salt', 'session-secret'],
+    ['password', 'session-secret'],
+    ['credential', 'session-secret'],
+    ['credentials', 'session-secret'],
+    ['recoverySecret', 'session-secret'],
+    ['recoveryToken', 'session-secret'],
+    ['accessToken', 'session-secret'],
+    ['refreshToken', 'session-secret'],
+    ['sessionToken', 'session-secret'],
+    ['authorization', 'session-secret'],
+    ['bearer', 'session-secret'],
+    ['activeSession', 'session-secret'],
+    ['session', 'session-secret'],
+    ['grant', 'session-secret'],
+    ['secret', 'session-secret'],
+  ])(
+    'rejects nested %s structure without inspecting educational text values',
+    (key, secret) => {
+      const legacy = {
+        id: 'learner-1',
+        name: 'A password is private.',
+        grade: 5,
+        pin: '1234',
+        nestedEducationalData: [{ deeper: { [key]: secret } }],
+      } as unknown as Profile
+      expect(() => toCredentialFreeEducationalProfile(legacy)).toThrow(
+        new RegExp(key, 'i'),
+      )
+    },
+  )
 })
 
 describe('local session contracts', () => {
   it('keeps all approved time bounds in the one policy object', () => {
     expect(SECURITY_SESSION_POLICY).toEqual({
-      learner: { idleTimeoutMs: 30 * 60_000, absoluteTimeoutMs: 8 * 60 * 60_000 },
-      parent: { storage: 'memory-only', idleTimeoutMs: 15 * 60_000, absoluteTimeoutMs: 60 * 60_000 },
-      parentStepUp: { storage: 'memory-only', maximumLifetimeMs: 2 * 60_000, operationUseLimit: 1 },
+      learner: {
+        idleTimeoutMs: 30 * 60_000,
+        absoluteTimeoutMs: 8 * 60 * 60_000,
+      },
+      parent: {
+        storage: 'memory-only',
+        idleTimeoutMs: 15 * 60_000,
+        absoluteTimeoutMs: 60 * 60_000,
+      },
+      parentStepUp: {
+        storage: 'memory-only',
+        maximumLifetimeMs: 2 * 60_000,
+        operationUseLimit: 1,
+      },
     })
     expect(Object.isFrozen(SECURITY_SESSION_POLICY)).toBe(true)
   })
@@ -96,32 +148,46 @@ describe('local session contracts', () => {
       expiresAt: '2026-08-09T12:02:00.000Z',
     }
     expect(isParentStepUpGrantPolicyCompliant(grant)).toBe(true)
-    expect(isParentStepUpGrantPolicyCompliant({
-      ...grant,
-      expiresAt: '2026-08-09T12:02:00.001Z',
-    })).toBe(false)
-    expect(isParentStepUpGrantPolicyCompliant({
-      ...grant,
-      operationUseLimit: 2,
-    } as unknown as ParentStepUpGrant)).toBe(false)
+    expect(
+      isParentStepUpGrantPolicyCompliant({
+        ...grant,
+        expiresAt: '2026-08-09T12:02:00.001Z',
+      }),
+    ).toBe(false)
+    expect(
+      isParentStepUpGrantPolicyCompliant({
+        ...grant,
+        operationUseLimit: 2,
+      } as unknown as ParentStepUpGrant),
+    ).toBe(false)
   })
 })
 
 describe('pending destination and sync protocol contracts', () => {
   it('accepts only allowlisted route descriptors, never arbitrary redirects', () => {
-    expect(parsePendingDestination({ kind: 'root-dashboard' })).toEqual({ kind: 'root-dashboard' })
-    expect(parsePendingDestination({
-      kind: 'academy',
-      route: {
-        kind: 'lesson',
-        courseId: 'ma-g5-mathematics',
-        unitNumber: 2,
-        lessonId: 'ma-g5-mathematics-u02-l01',
-      },
-    })).not.toBeNull()
-    expect(parsePendingDestination('https://example.com/steal-session')).toBeNull()
-    expect(parsePendingDestination({ kind: 'url', url: 'https://example.com' })).toBeNull()
-    expect(parsePendingDestination({ kind: 'study', url: 'https://example.com' })).toBeNull()
+    expect(parsePendingDestination({ kind: 'root-dashboard' })).toEqual({
+      kind: 'root-dashboard',
+    })
+    expect(
+      parsePendingDestination({
+        kind: 'academy',
+        route: {
+          kind: 'lesson',
+          courseId: 'ma-g5-mathematics',
+          unitNumber: 2,
+          lessonId: 'ma-g5-mathematics-u02-l01',
+        },
+      }),
+    ).not.toBeNull()
+    expect(
+      parsePendingDestination('https://example.com/steal-session'),
+    ).toBeNull()
+    expect(
+      parsePendingDestination({ kind: 'url', url: 'https://example.com' }),
+    ).toBeNull()
+    expect(
+      parsePendingDestination({ kind: 'study', url: 'https://example.com' }),
+    ).toBeNull()
   })
 
   it('pins wire compatibility to Sync Protocol v2', () => {
@@ -134,7 +200,9 @@ describe('installation-manager and authority separation contracts', () => {
     const randomUUID = vi.fn(() => UUID_A)
     expect(createInstallationId(randomUUID)).toBe(UUID_A)
     expect(randomUUID).toHaveBeenCalledOnce()
-    expect(() => createInstallationId(() => 'browser-fingerprint')).toThrow(/UUIDv4/)
+    expect(() => createInstallationId(() => 'browser-fingerprint')).toThrow(
+      /UUIDv4/,
+    )
   })
 
   it('requires explicit claim/recovery capabilities with deterministic purposes', () => {
@@ -147,14 +215,18 @@ describe('installation-manager and authority separation contracts', () => {
       legacy_upgrade: 'parent_installation:claim',
       recovery: 'parent_installation:recover',
     })
-    expect(isInstallationGrantCapabilityConsistent({
-      purpose: 'recovery',
-      capability: 'parent_installation:recover',
-    })).toBe(true)
-    expect(isInstallationGrantCapabilityConsistent({
-      purpose: 'recovery',
-      capability: 'parent_installation:claim',
-    })).toBe(false)
+    expect(
+      isInstallationGrantCapabilityConsistent({
+        purpose: 'recovery',
+        capability: 'parent_installation:recover',
+      }),
+    ).toBe(true)
+    expect(
+      isInstallationGrantCapabilityConsistent({
+        purpose: 'recovery',
+        capability: 'parent_installation:claim',
+      }),
+    ).toBe(false)
   })
 
   it('does not interchange learner, Parent, installation, Study, Admin, or staff authority', () => {
@@ -162,8 +234,15 @@ describe('installation-manager and authority separation contracts', () => {
     expect(isAuthorityEstablishmentForbidden('learner', 'admin')).toBe(true)
     expect(isAuthorityEstablishmentForbidden('parent', 'admin')).toBe(true)
     expect(isAuthorityEstablishmentForbidden('parent', 'staff')).toBe(true)
-    expect(isAuthorityEstablishmentForbidden('parent', 'study-guardian')).toBe(true)
-    expect(isAuthorityEstablishmentForbidden('guardian-membership', 'installation-manager')).toBe(true)
+    expect(isAuthorityEstablishmentForbidden('parent', 'study-guardian')).toBe(
+      true,
+    )
+    expect(
+      isAuthorityEstablishmentForbidden(
+        'guardian-membership',
+        'installation-manager',
+      ),
+    ).toBe(true)
     expect(isAuthorityEstablishmentForbidden('study', 'parent')).toBe(true)
     expect(AUTHORITY_SEPARATION_RULES).toHaveLength(5)
   })
@@ -171,21 +250,41 @@ describe('installation-manager and authority separation contracts', () => {
 
 describe('security lifecycle and Study bridge vocabulary', () => {
   it('defines every event exactly once with deterministic semantics and mapping', () => {
-    expect(new Set(SECURITY_LIFECYCLE_EVENT_TYPES).size).toBe(SECURITY_LIFECYCLE_EVENT_TYPES.length)
-    expect(Object.keys(SECURITY_LIFECYCLE_EVENT_SEMANTICS)).toEqual([...SECURITY_LIFECYCLE_EVENT_TYPES])
-    expect(Object.keys(STUDY_BRIDGE_EVENT_MAP)).toEqual([...SECURITY_LIFECYCLE_EVENT_TYPES])
+    expect(new Set(SECURITY_LIFECYCLE_EVENT_TYPES).size).toBe(
+      SECURITY_LIFECYCLE_EVENT_TYPES.length,
+    )
+    expect(Object.keys(SECURITY_LIFECYCLE_EVENT_SEMANTICS)).toEqual([
+      ...SECURITY_LIFECYCLE_EVENT_TYPES,
+    ])
+    expect(Object.keys(STUDY_BRIDGE_EVENT_MAP)).toEqual([
+      ...SECURITY_LIFECYCLE_EVENT_TYPES,
+    ])
     for (const event of SECURITY_LIFECYCLE_EVENT_TYPES) {
-      expect(studyCancellationReasonFor(event)).toBe(STUDY_BRIDGE_EVENT_MAP[event])
+      expect(studyCancellationReasonFor(event)).toBe(
+        STUDY_BRIDGE_EVENT_MAP[event],
+      )
     }
   })
 
   it('uses the approved existing Study cancellation vocabulary', () => {
-    expect(studyCancellationReasonFor('learner-session-expired')).toBe('session-expired')
-    expect(studyCancellationReasonFor('learner-switch-start')).toBe('learner-switch')
-    expect(studyCancellationReasonFor('household-switch')).toBe('household-switch')
-    expect(studyCancellationReasonFor('learner-credential-reset')).toBe('authorization-loss')
-    expect(studyCancellationReasonFor('import-or-replacement')).toBe('authorization-loss')
-    expect(studyCancellationReasonFor('provenance-loss')).toBe('authorization-loss')
+    expect(studyCancellationReasonFor('learner-session-expired')).toBe(
+      'session-expired',
+    )
+    expect(studyCancellationReasonFor('learner-switch-start')).toBe(
+      'learner-switch',
+    )
+    expect(studyCancellationReasonFor('household-switch')).toBe(
+      'household-switch',
+    )
+    expect(studyCancellationReasonFor('learner-credential-reset')).toBe(
+      'authorization-loss',
+    )
+    expect(studyCancellationReasonFor('import-or-replacement')).toBe(
+      'authorization-loss',
+    )
+    expect(studyCancellationReasonFor('provenance-loss')).toBe(
+      'authorization-loss',
+    )
     expect(studyCancellationReasonFor('learner-lock')).toBe('logout')
     expect(studyCancellationReasonFor('learner-sign-out')).toBe('logout')
   })

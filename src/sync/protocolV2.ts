@@ -2,17 +2,16 @@ import {
   ACADEMY_SYNC_PROTOCOL_VERSION,
   type CredentialFreeEducationalProfile,
 } from '../security/contracts'
-import type { Profile } from '../types'
 import {
   CredentialBearingProfileError,
   InvalidEducationalProfileError,
   readEducationalProfile,
   serializeCredentialFreeEducationalProfile,
+  type EducationalProfileInput,
   type LegacyPinHandoff,
 } from './credentialFreeProfile'
 
-export const ACADEMY_SYNC_SNAPSHOT_V2_RPC =
-  'academy_sync_snapshot_v2' as const
+export const ACADEMY_SYNC_SNAPSHOT_V2_RPC = 'academy_sync_snapshot_v2' as const
 export const ACADEMY_APPLY_PROFILE_MUTATION_V2_RPC =
   'academy_apply_profile_mutation_v2' as const
 
@@ -53,8 +52,7 @@ export interface AcademySyncV2RpcResponse {
   readonly error: AcademySyncV2RpcError | null
 }
 
-export interface AcademySyncV2RpcQuery
-  extends PromiseLike<AcademySyncV2RpcResponse> {
+export interface AcademySyncV2RpcQuery extends PromiseLike<AcademySyncV2RpcResponse> {
   abortSignal?(signal: AbortSignal): AcademySyncV2RpcQuery
 }
 
@@ -113,17 +111,18 @@ export type AcademySyncV2ClientState =
       controls: StoppedSyncControls
     }>
 
-const NORMAL_STATE: Extract<AcademySyncV2ClientState, { status: 'normal' }> = Object.freeze({
-  status: 'normal',
-  syncProtocolVersion: ACADEMY_SYNC_PROTOCOL_VERSION,
-  controls: Object.freeze({
-    automaticWrites: 'enabled',
-    manualWrites: 'enabled',
-    debouncedWrites: 'enabled',
-    reconnectWrites: 'enabled',
-    retryTimers: 'enabled',
-  }),
-})
+const NORMAL_STATE: Extract<AcademySyncV2ClientState, { status: 'normal' }> =
+  Object.freeze({
+    status: 'normal',
+    syncProtocolVersion: ACADEMY_SYNC_PROTOCOL_VERSION,
+    controls: Object.freeze({
+      automaticWrites: 'enabled',
+      manualWrites: 'enabled',
+      debouncedWrites: 'enabled',
+      reconnectWrites: 'enabled',
+      retryTimers: 'enabled',
+    }),
+  })
 
 export type AcademySyncV2OutcomeClass =
   | 'network-transient'
@@ -180,7 +179,7 @@ export type AcademySyncV2OperationResult =
 
 export interface ProfileMutationRowInput {
   readonly profile_id: string
-  readonly data: Profile
+  readonly data: EducationalProfileInput
   readonly updated_at: string
 }
 
@@ -209,15 +208,12 @@ function safeInteger(value: unknown): number | null {
 }
 
 function advertisedProtocol(record: Record<string, unknown>): number | null {
-  return safeInteger(
-    record.sync_protocol_version ?? record.syncProtocolVersion,
-  )
+  return safeInteger(record.sync_protocol_version ?? record.syncProtocolVersion)
 }
 
 function advertisedMinimum(record: Record<string, unknown>): number | null {
   return safeInteger(
-    record.minimum_supported_sync_version ??
-      record.minimumSupportedSyncVersion,
+    record.minimum_supported_sync_version ?? record.minimumSupportedSyncVersion,
   )
 }
 
@@ -230,9 +226,7 @@ function normalizedStatus(value: unknown): string {
 function parseRevision(value: unknown): string | null {
   if (
     (typeof value === 'string' && /^(0|[1-9]\d*)$/.test(value)) ||
-    (typeof value === 'number' &&
-      Number.isSafeInteger(value) &&
-      value >= 0)
+    (typeof value === 'number' && Number.isSafeInteger(value) && value >= 0)
   ) {
     return String(value)
   }
@@ -347,7 +341,10 @@ function errorClassification(
   ) {
     return 'network-transient'
   }
-  if (code === 'ACADEMY_SYNC_CAS_CONFLICT' || /\bcas conflict\b/.test(message)) {
+  if (
+    code === 'ACADEMY_SYNC_CAS_CONFLICT' ||
+    /\bcas conflict\b/.test(message)
+  ) {
     return 'cas-conflict'
   }
   if (code === 'ACADEMY_SYNC_MAINTENANCE' || /\bmaintenance\b/.test(message)) {
@@ -391,7 +388,9 @@ function mutationPayload(
   rows: readonly ProfileMutationRowInput[],
 ): readonly CredentialFreeProfileMutationRow[] {
   if (rows.length > 5) {
-    throw new InvalidEducationalProfileError('Too many profiles were supplied for synchronization.')
+    throw new InvalidEducationalProfileError(
+      'Too many profiles were supplied for synchronization.',
+    )
   }
   const ids = new Set<string>()
   return rows.map((row) => {
@@ -432,8 +431,14 @@ interface ParsedSnapshotRows {
   readonly handoffs: readonly LegacyPinHandoff[]
 }
 
-function parseSnapshotRows(value: unknown): ParsedSnapshotRows | AcademySyncV2Failure {
-  if (!Array.isArray(value) || value.length > 5 || Object.keys(value).length !== value.length) {
+function parseSnapshotRows(
+  value: unknown,
+): ParsedSnapshotRows | AcademySyncV2Failure {
+  if (
+    !Array.isArray(value) ||
+    value.length > 5 ||
+    Object.keys(value).length !== value.length
+  ) {
     return failure(
       'authentication-provenance-mismatch',
       'The cloud returned an invalid profile list.',
@@ -487,8 +492,13 @@ function parseSnapshotRows(value: unknown): ParsedSnapshotRows | AcademySyncV2Fa
       )
     }
     ids.add(profileId)
-    rows.push({ profile_id: profileId, data: read.profile, updated_at: updatedAt })
-    if (read.legacyCredentialHandoff) handoffs.push(read.legacyCredentialHandoff)
+    rows.push({
+      profile_id: profileId,
+      data: read.profile,
+      updated_at: updatedAt,
+    })
+    if (read.legacyCredentialHandoff)
+      handoffs.push(read.legacyCredentialHandoff)
   }
   return { rows, handoffs }
 }
@@ -512,10 +522,12 @@ export class AcademySyncV2Client {
     return this.#state
   }
 
-  async snapshot(options: {
-    readonly intent?: AcademySyncV2SnapshotIntent
-    readonly signal?: AbortSignal
-  } = {}): Promise<AcademySyncV2SnapshotSuccess | AcademySyncV2Failure> {
+  async snapshot(
+    options: {
+      readonly intent?: AcademySyncV2SnapshotIntent
+      readonly signal?: AbortSignal
+    } = {},
+  ): Promise<AcademySyncV2SnapshotSuccess | AcademySyncV2Failure> {
     const intent = options.intent ?? 'automatic'
     if (this.#state.status === 'update-required') {
       return failure(
@@ -524,7 +536,10 @@ export class AcademySyncV2Client {
         this.#state,
       )
     }
-    if (this.#state.status === 'maintenance' && intent !== 'maintenance-probe') {
+    if (
+      this.#state.status === 'maintenance' &&
+      intent !== 'maintenance-probe'
+    ) {
       return failure('maintenance', this.#state.message, this.#state)
     }
     if (options.signal?.aborted) {
@@ -565,7 +580,9 @@ export class AcademySyncV2Client {
     if (controlled) return controlled
     const status = normalizedStatus(response.data.status)
     const mode = normalizedStatus(response.data.mode)
-    if (status !== 'ok' && status !== 'normal' && mode !== 'normal') {
+    const acceptedSnapshotShape =
+      mode === 'normal' && (status === 'ok' || status === 'normal')
+    if (!acceptedSnapshotShape) {
       return failure(
         'authentication-provenance-mismatch',
         'The cloud returned an unknown Sync Protocol v2 snapshot result.',
@@ -674,7 +691,15 @@ export class AcademySyncV2Client {
     const controlled = this.#serverControl(response.data)
     if (controlled) return controlled
     const status = normalizedStatus(response.data.status)
+    const mode = normalizedStatus(response.data.mode)
     const revision = parseRevision(response.data.revision)
+    if (mode !== '' && mode !== 'normal') {
+      return failure(
+        'authentication-provenance-mismatch',
+        'The cloud returned an unknown Sync Protocol v2 mutation result.',
+        this.#state,
+      )
+    }
     if (status === 'conflict') {
       return failure(
         'cas-conflict',
@@ -683,7 +708,10 @@ export class AcademySyncV2Client {
         revision ?? undefined,
       )
     }
-    if (status === 'credential-rejected' || status === 'credential-bearing-payload') {
+    if (
+      status === 'credential-rejected' ||
+      status === 'credential-bearing-payload'
+    ) {
       return failure(
         'credential-bearing-payload-rejection',
         messageForClassification('credential-bearing-payload-rejection'),
@@ -736,7 +764,7 @@ export class AcademySyncV2Client {
         this.#state,
       )
     }
-    if (status === 'maintenance' || mode === 'maintenance') {
+    if (status === 'maintenance' && mode === 'maintenance') {
       this.#state = maintenanceState(record)
       return failure('maintenance', this.#state.message, this.#state)
     }
@@ -746,9 +774,13 @@ export class AcademySyncV2Client {
   #failureFromRpcError(error: AcademySyncV2RpcError): AcademySyncV2Failure {
     const classification = errorClassification(error)
     if (classification === 'maintenance') {
-      this.#state = maintenanceState(Object.create(null) as Record<string, unknown>)
+      this.#state = maintenanceState(
+        Object.create(null) as Record<string, unknown>,
+      )
     } else if (classification === 'unsupported-protocol-update-required') {
-      this.#state = updateRequiredState(Object.create(null) as Record<string, unknown>)
+      this.#state = updateRequiredState(
+        Object.create(null) as Record<string, unknown>,
+      )
     }
     return failure(
       classification,
