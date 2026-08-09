@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AcademyBrand, AcademyEntryShell } from '../entry/AcademyEntry'
+import { AcademyBrand } from '../entry/AcademyEntry'
 import type { LearnerPresentation } from '../entry/learnerPresentation'
 
 interface PinPadProps {
@@ -40,8 +40,7 @@ export function PinPad({ title, subtitle, learner, backLabel, onComplete, onCanc
   }
 
   return (
-    <AcademyEntryShell className="academy-pin-shell">
-      <main className="academy-pin-page">
+    <main className="academy-pin-page">
         <AcademyBrand compact />
         <section className="academy-pin-panel" aria-labelledby="pin-title">
           {learner && (
@@ -88,7 +87,6 @@ export function PinPad({ title, subtitle, learner, backLabel, onComplete, onCanc
             {backLabel ?? (learner ? 'Back to learners' : 'Back')}
           </button>
         </section>
-      </main>
-    </AcademyEntryShell>
+    </main>
   )
 }

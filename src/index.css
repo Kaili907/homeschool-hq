@@ -62,11 +62,15 @@ body {
 
 .academy-entry-video {
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 700ms ease;
 }
+
+.academy-entry-video.is-ready { opacity: 1; }
 
 .academy-entry-scrim {
   background:
-    linear-gradient(180deg, rgba(2, 7, 12, 0.62) 0%, rgba(4, 10, 17, 0.72) 55%, rgba(2, 6, 10, 0.9) 100%),
+    linear-gradient(180deg, rgba(2, 7, 12, 0.52) 0%, rgba(4, 10, 17, 0.6) 55%, rgba(2, 6, 10, 0.65) 100%),
     linear-gradient(90deg, rgba(1, 4, 8, 0.18), transparent 35%, transparent 65%, rgba(1, 4, 8, 0.2));
 }
 
@@ -209,8 +213,8 @@ body {
   border-radius: 15px;
   color: var(--academy-cream);
   background:
-    linear-gradient(145deg, rgba(24, 34, 44, 0.84), rgba(6, 12, 19, 0.94)),
-    rgba(8, 15, 23, 0.88);
+    linear-gradient(145deg, rgba(24, 34, 44, 0.82), rgba(6, 12, 19, 0.9)),
+    rgba(8, 15, 23, 0.86);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3), inset 0 1px rgba(255, 255, 255, 0.035);
   cursor: pointer;
   transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
@@ -422,7 +426,7 @@ body {
   flex-direction: column;
   border: 1px solid rgba(215, 169, 68, 0.35);
   border-radius: 18px;
-  background: linear-gradient(145deg, rgba(17, 28, 39, 0.9), rgba(4, 10, 17, 0.95));
+  background: linear-gradient(145deg, rgba(17, 28, 39, 0.84), rgba(4, 10, 17, 0.9));
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.48), inset 0 1px rgba(255, 255, 255, 0.035);
   backdrop-filter: blur(9px);
 }
@@ -630,7 +634,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .academy-entry-video { display: none; }
+  .academy-entry-video { display: none; transition: none; }
   .academy-learner-card,
   .academy-keypad button { transition: none; }
   .academy-learner-card:hover { transform: none; }

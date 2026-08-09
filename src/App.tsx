@@ -46,6 +46,7 @@ import { HighSchoolHome } from './components/HighSchoolHome'
 import { SkillTree } from './components/SkillTree'
 import { Picker } from './components/Picker'
 import { PinPad } from './components/PinPad'
+import { AcademyEntryShell } from './entry/AcademyEntry'
 import { learnerPresentationForProfile } from './entry/learnerPresentation'
 import { GrownUps } from './components/GrownUps'
 import { ParentHub } from './components/hub/ParentHub'
@@ -595,27 +596,29 @@ export default function App() {
 
   if (screen.kind === 'picker') {
     return (
-      <Picker
-        state={state}
-        migrationBanner={
-          showMigration && loaded.backupKey
-            ? {
-                onDownload: () => {
-                  const raw = readLocalStorageKey(loaded.backupKey!)
-                  if (raw) downloadJson(`${loaded.backupKey!.replaceAll(':', '_')}.json`, raw)
-                },
-                onDismiss: () => setShowMigration(false),
-              }
-            : undefined
-        }
-        onStudentSelect={(profileId) => {
-          const p = state.profiles[profileId]
-          setScreen(p.pin === '' ? { kind: 'kidPinCreate', profileId } : { kind: 'kidPin', profileId })
-        }}
-        onParentLogin={() =>
-          setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
-        }
-      />
+      <AcademyEntryShell className="academy-picker-shell">
+        <Picker
+          state={state}
+          migrationBanner={
+            showMigration && loaded.backupKey
+              ? {
+                  onDownload: () => {
+                    const raw = readLocalStorageKey(loaded.backupKey!)
+                    if (raw) downloadJson(`${loaded.backupKey!.replaceAll(':', '_')}.json`, raw)
+                  },
+                  onDismiss: () => setShowMigration(false),
+                }
+              : undefined
+          }
+          onStudentSelect={(profileId) => {
+            const p = state.profiles[profileId]
+            setScreen(p.pin === '' ? { kind: 'kidPinCreate', profileId } : { kind: 'kidPin', profileId })
+          }}
+          onParentLogin={() =>
+            setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
+          }
+        />
+      </AcademyEntryShell>
     )
   }
 
@@ -624,8 +627,9 @@ export default function App() {
     const learner = learnerPresentationForProfile(profile.id)
     const t = THEMES[profile.theme]
     return (
-      <ThemeContext.Provider value={t}>
-        <div style={{ fontFamily: t.font, background: t.appBg }} className="min-h-screen">
+      <AcademyEntryShell className="academy-pin-shell">
+        <ThemeContext.Provider value={t}>
+          <div style={{ fontFamily: t.font }} className="min-h-screen">
           {screen.kind === 'kidPin' ? (
             <PinPad
               title={`Welcome back, ${learner.fullName.split(' ')[0]}`}
@@ -667,16 +671,18 @@ export default function App() {
               onCancel={() => setScreen({ kind: 'picker' })}
             />
           )}
-        </div>
-      </ThemeContext.Provider>
+          </div>
+        </ThemeContext.Provider>
+      </AcademyEntryShell>
     )
   }
 
   if (screen.kind === 'parentPin' || screen.kind === 'parentPinCreate') {
     const t = THEMES.clean
     return (
-      <ThemeContext.Provider value={t}>
-        <div style={{ fontFamily: t.font, background: t.appBg }} className="min-h-screen">
+      <AcademyEntryShell className="academy-pin-shell">
+        <ThemeContext.Provider value={t}>
+          <div style={{ fontFamily: t.font }} className="min-h-screen">
           {screen.kind === 'parentPin' ? (
             <PinPad
               title="Parent Login"
@@ -718,8 +724,9 @@ export default function App() {
               onCancel={() => setScreen({ kind: 'picker' })}
             />
           )}
-        </div>
-      </ThemeContext.Provider>
+          </div>
+        </ThemeContext.Provider>
+      </AcademyEntryShell>
     )
   }
 
@@ -780,16 +787,18 @@ export default function App() {
   if (!active) {
     // defensive: no active profile → back to picker
     return (
-      <Picker
-        state={state}
-        onStudentSelect={(profileId) => {
-          const p = state.profiles[profileId]
-          setScreen(p.pin === '' ? { kind: 'kidPinCreate', profileId } : { kind: 'kidPin', profileId })
-        }}
-        onParentLogin={() =>
-          setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
-        }
-      />
+      <AcademyEntryShell className="academy-picker-shell">
+        <Picker
+          state={state}
+          onStudentSelect={(profileId) => {
+            const p = state.profiles[profileId]
+            setScreen(p.pin === '' ? { kind: 'kidPinCreate', profileId } : { kind: 'kidPin', profileId })
+          }}
+          onParentLogin={() =>
+            setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
+          }
+        />
+      </AcademyEntryShell>
     )
   }
 

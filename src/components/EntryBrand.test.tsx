@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { defaultAppState } from '../migration'
+import { AcademyEntryShell } from '../entry/AcademyEntry'
 import { learnerPresentationForProfile } from '../entry/learnerPresentation'
 import { Picker } from './Picker'
 import { PinPad } from './PinPad'
@@ -70,16 +71,19 @@ describe('Manuel Academy branded learner entry', () => {
 
   it('shares the cinematic EntryShell with the existing parent PIN gate', () => {
     const html = renderToStaticMarkup(
-      <PinPad
-        title="Parent Login"
-        subtitle="Enter the parent PIN"
-        backLabel="Back to Manuel Academy"
-        onComplete={() => null}
-        onCancel={() => {}}
-      />,
+      <AcademyEntryShell>
+        <PinPad
+          title="Parent Login"
+          subtitle="Enter the parent PIN"
+          backLabel="Back to Manuel Academy"
+          onComplete={() => null}
+          onCancel={() => {}}
+        />
+      </AcademyEntryShell>,
     )
 
     expect(html).toContain('academy-entry-root')
+    expect(html.match(/academy-entry-root/g)).toHaveLength(1)
     expect(html).toContain('academy-entry-poster')
     expect(html).toContain('Parent Login')
     expect(html).toContain('Back to Manuel Academy')

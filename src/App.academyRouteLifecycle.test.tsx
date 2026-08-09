@@ -1,4 +1,4 @@
-import { act } from 'react'
+import { act, useEffect, type ReactNode } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { APP_STATE_STORAGE_KEY } from './sync/provenance'
@@ -28,6 +28,7 @@ const harness = vi.hoisted(() => ({
     dashboard?: StudentDashboardComposition
   },
   assistantMounts: 0,
+  entryShellMounts: 0,
   networkCalls: 0,
   mediaRequests: 0,
   speechCalls: 0,
@@ -54,6 +55,14 @@ vi.mock('./components/PinPad', () => ({
     harness.picker = null
     harness.pin = props
     return <main data-surface="pin">{props.title}</main>
+  },
+}))
+vi.mock('./entry/AcademyEntry', () => ({
+  AcademyEntryShell: ({ children }: { children: ReactNode }) => {
+    useEffect(() => {
+      harness.entryShellMounts += 1
+    }, [])
+    return <div data-surface="entry-shell">{children}</div>
   },
 }))
 vi.mock('./components/hub/ParentHub', () => ({
@@ -208,6 +217,7 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     harness.pin = null
     harness.academy = null
     harness.assistantMounts = 0
+    harness.entryShellMounts = 0
     harness.networkCalls = 0
     harness.mediaRequests = 0
     harness.speechCalls = 0
@@ -464,6 +474,29 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     expect(hasText(container, 'Parent Hub')).toBe(true)
     expect(hasText(container, 'Admin Login')).toBe(false)
     expect(harness.academy).toBeNull()
+  })
+
+  it('keeps one entry shell mounted across picker, learner PIN, and parent PIN transitions', async () => {
+    pathname = '/'
+    const state = seeded(null)
+    state.parentPin = '9090'
+    await mountApp(state)
+
+    expect(harness.entryShellMounts).toBe(1)
+    await act(async () => harness.picker!.onStudentSelect('p1'))
+    await settle()
+    expect(harness.pin?.title).toBe('Welcome back, Aly')
+    expect(harness.entryShellMounts).toBe(1)
+
+    await act(async () => harness.pin!.onCancel())
+    await settle()
+    expect(harness.picker).not.toBeNull()
+    expect(harness.entryShellMounts).toBe(1)
+
+    await act(async () => harness.picker!.onParentLogin())
+    await settle()
+    expect(harness.pin?.title).toBe('Parent Login')
+    expect(harness.entryShellMounts).toBe(1)
   })
 
   it('keeps a successful learner PIN scoped to learner entry only', async () => {

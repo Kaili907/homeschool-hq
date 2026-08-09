@@ -1,5 +1,5 @@
 import type { AppState } from '../types'
-import { AcademyBrand, AcademyEntryShell } from '../entry/AcademyEntry'
+import { AcademyBrand } from '../entry/AcademyEntry'
 import { LEARNER_PRESENTATIONS } from '../entry/learnerPresentation'
 
 export interface PickerProps {
@@ -21,8 +21,7 @@ export function Picker({
   const learners = LEARNER_PRESENTATIONS.filter((learner) => state.profiles[learner.profileId])
 
   return (
-    <AcademyEntryShell className="academy-picker-shell">
-      <main className="academy-picker">
+    <main className="academy-picker">
         {migrationBanner && (
           <aside className="academy-migration" aria-label="Progress migration complete">
             <p>Your old progress was moved over safely. A backup was saved.</p>
@@ -79,7 +78,6 @@ export function Picker({
             </div>
           )}
         </div>
-      </main>
-    </AcademyEntryShell>
+    </main>
   )
 }
