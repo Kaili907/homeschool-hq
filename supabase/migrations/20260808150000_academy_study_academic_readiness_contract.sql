@@ -80,12 +80,26 @@
 -- functions that body calls, and not triggers on the tables it writes.
 --
 -- It also does not reach outside prosrc at all, which is not the same limit and is
--- easy to read past. prolang is metadata beside the body, so the exact reviewed
--- bytes can be re-declared as LANGUAGE sql: the digest agrees, the gate text agrees,
--- readiness reports ready, and every call to the mutation fails to parse. Measured
--- before it was closed. The language is therefore pinned by its own probe,
--- academy_private.study_adult_managed_language_ok, resolved through pg_language by
--- name rather than against a numeric OID that is an artefact of installation order.
+-- easy to read past. The class is non-body catalog metadata that changes what the
+-- reviewed bytes DO, and it has more than one member.
+--
+-- prolang is the first. The exact reviewed bytes can be re-declared as LANGUAGE sql:
+-- the digest agrees, the gate text agrees, readiness reports ready, and every call to
+-- the mutation fails to parse. Measured before it was closed. The language is pinned
+-- by its own probe, academy_private.study_adult_managed_language_ok, resolved through
+-- pg_language by name rather than against a numeric OID that is an artefact of
+-- installation order.
+--
+-- provolatile is the second, and it is CHEAPER to reach than the first. The mutation
+-- takes SELECT ... FOR UPDATE, which PostgreSQL permits only in a VOLATILE function,
+-- so re-declaring the identical bytes STABLE or IMMUTABLE leaves a function that
+-- installs on a plain CREATE OR REPLACE -- no check_function_bodies relaxation, which
+-- the language case needs -- and then fails EVERY call with `SELECT FOR UPDATE is not
+-- allowed in a non-volatile function`, for all three record kinds. The digest agrees,
+-- the language probe agrees, the gate text agrees, and readiness reported all seven
+-- dependencies ready. Measured on this lineage before it was closed. It is pinned by
+-- academy_private.study_adult_managed_volatility_ok.
+--
 -- The full list of non-body metadata and which check covers each is on
 -- academy_private.study_academic_record_kind_ready below.
 --
@@ -174,6 +188,8 @@ begin
        'academy_private.study_adult_managed_body_fingerprint_ok()') is not null
      or to_regprocedure(
        'academy_private.study_adult_managed_language_ok()') is not null
+     or to_regprocedure(
+       'academy_private.study_adult_managed_volatility_ok()') is not null
      or to_regprocedure(
        'academy_private.study_adult_managed_gate_text_ok()') is not null then
     raise exception 'STUDY_ACADEMIC_READINESS object collision';
@@ -397,11 +413,17 @@ $$;
 -- because "the body is pinned WHOLE" reads like it covers the function. It covers
 -- prosrc. Everything else about the function is metadata beside prosrc and is
 -- unchanged by any edit to it, so each piece that matters is checked separately and
--- named here rather than assumed to come along with the digest:
+-- named here rather than assumed to come along with the digest. The body bytes are
+-- fingerprinted; the language and the volatility are separately VERIFIED. Neither is
+-- implied by the digest and neither should be read as covered by it:
 --
 --   prolang       -- academy_private.study_adult_managed_language_ok, below.
 --                    The one that was missing until H6, and the one that can make
 --                    identical bytes mean something else entirely.
+--   provolatile   -- academy_private.study_adult_managed_volatility_ok, below.
+--                    The one that was missing until H7. Same class as prolang and
+--                    cheaper to reach: it needs no check_function_bodies relaxation,
+--                    and the failure is total rather than partial.
 --   prosecdef     -- study_academic_function_ready: security definer required.
 --   proowner      -- study_academic_function_ready: postgres required.
 --   proconfig     -- study_academic_function_ready: search_path=pg_catalog required.
@@ -410,10 +432,13 @@ $$;
 --   caller identity -- the trusted-server guard on the readiness RPC itself, which
 --                    is upstream of every probe here.
 --
--- provolatile is deliberately NOT in that list, and this is the statement of a gap
--- rather than of a defence: nothing in this contract pins the mutation's volatility.
--- It is left as it is because narrowing it is a change to what readiness requires of
--- the estate, not a closure of the body-versus-metadata asymmetry H6 exists to fix.
+-- What remains uncovered is stated as a gap rather than left to be inferred from the
+-- list: prorows, procost, proparallel, proleakproof and proretset are not pinned.
+-- None of them can make this mutation stop working the way prolang and provolatile
+-- can -- proretset and the argument/return types are fixed by the exact signature the
+-- probes resolve, and the rest are planner hints on a function the planner is never
+-- asked to optimise. Pinning them would be a change to what readiness demands of the
+-- estate rather than a closure of the body-versus-metadata asymmetry.
 create function academy_private.study_adult_managed_body_fingerprint_ok()
 returns boolean
 language plpgsql
@@ -496,6 +521,54 @@ begin
 end;
 $$;
 
+-- WHAT THE DIGEST CANNOT REACH, SECOND: the volatility the body is executed under.
+--
+-- Same class as the language and cheaper to reach, which is why it is pinned rather
+-- than accepted. provolatile is metadata beside prosrc, so the exact reviewed bytes
+-- can be re-declared STABLE or IMMUTABLE with everything else identical -- same
+-- owner, same SECURITY DEFINER, same pinned search_path, same authenticated/anon ACL
+-- split, byte-identical source. Measured on this lineage before it was closed: the
+-- digest agreed, the language probe agreed, the gate text agreed, readiness reported
+-- all seven dependencies ready and the top-level status ready.
+--
+-- And the estate was wholly down. This body takes SELECT ... FOR UPDATE, which
+-- PostgreSQL permits only in a VOLATILE function, so every call for every kind --
+-- review, calendar AND parent_settings -- failed with `SELECT FOR UPDATE is not
+-- allowed in a non-volatile function`. Not a degraded path: no call succeeds.
+--
+-- It is a cheaper reach than the language case in the way that matters. Re-declaring
+-- the body as LANGUAGE sql needs check_function_bodies = off, because a PL/pgSQL body
+-- does not parse as SQL. Re-declaring it STABLE needs nothing: the body parses, the
+-- restriction is a run-time one, and a plain CREATE OR REPLACE installs it.
+--
+-- 'v' is spelled out as a literal, and that is not the mistake the language probe
+-- avoided. prolang holds an OID assigned when the plpgsql extension is created, so a
+-- numeric constant there would pin an accident of installation order -- hence the
+-- join to pg_language by name. provolatile is a "char" whose three values are fixed
+-- by the catalog's own definition, i/s/v, identical on every installation; there is
+-- no name table to resolve through and nothing installation-dependent to get wrong.
+--
+-- exists() over the same exact schema-qualified signature, for the same reason as the
+-- language probe: an absent function produces no row and so produces false, with no
+-- separate early-return branch that no input could force.
+create function academy_private.study_adult_managed_volatility_ok()
+returns boolean
+language plpgsql
+stable
+security definer
+set search_path = pg_catalog
+as $$
+begin
+  return exists (
+    select 1
+    from pg_proc as routine
+    where routine.oid = to_regprocedure(
+        'public.academy_study_upsert_adult_managed_record(text,jsonb,bigint,text)')
+      and routine.provolatile = 'v'
+  );
+end;
+$$;
+
 -- The secondary text probe. Same requirement as before H5 -- the whole expected
 -- admission gate, normalised, must START at the body's first `begin`, which is the
 -- function's outer entry -- and the same normalisation: comment removal, then
@@ -564,16 +637,21 @@ end;
 $$;
 
 -- Which kinds exist is the authority's answer; whether the mutation that consults
--- it is still the reviewed one is the fingerprint's, together with the language
--- probe that says those reviewed bytes are still executed as PL/pgSQL. All three
--- are required, and the fingerprint is listed first because it is the dominating
--- term over body content: no arrangement of definition text can make this true
--- while the installed body differs from the reviewed one.
+-- it is still the reviewed one is the fingerprint's, together with the two metadata
+-- probes that say those reviewed bytes are still executed as PL/pgSQL and still
+-- executed VOLATILE. All four are required, and the fingerprint is listed first
+-- because it is the dominating term over body content: no arrangement of definition
+-- text can make this true while the installed body differs from the reviewed one.
 --
--- The three terms are separable on purpose, and each closes something the other two
--- do not: the fingerprint answers for the bytes, the language probe for the one
--- piece of non-body metadata that changes what those bytes mean, and the gate text
--- for a fingerprint constant re-pinned to a body whose gate is gone.
+-- The four terms are separable on purpose, and each closes something the other three
+-- do not: the fingerprint answers for the bytes, the language and volatility probes
+-- for the two pieces of non-body metadata that change what those bytes DO, and the
+-- gate text for a fingerprint constant re-pinned to a body whose gate is gone.
+--
+-- The AND is the whole point of the arrangement, and it is one-directional by
+-- construction: no term can override another, so a correct fingerprint, a correct
+-- language and a correct lexical gate cannot between them make a wrong volatility
+-- read ready. Each term may only close.
 create function academy_private.study_academic_record_kind_ready(p_kind text)
 returns boolean
 language plpgsql
@@ -598,6 +676,7 @@ begin
   end if;
   return academy_private.study_adult_managed_body_fingerprint_ok()
     and academy_private.study_adult_managed_language_ok()
+    and academy_private.study_adult_managed_volatility_ok()
     and academy_private.study_adult_managed_gate_text_ok();
 end;
 $$;
@@ -630,11 +709,32 @@ $$;
 -- substitution above requires -- so it would already have aborted on
 -- 'admission gate not found'. There is no input on which a language assertion here
 -- could be the thing that fires.
+--
+-- THE VOLATILITY ASSERTION IS DIFFERENT, and it is here because that difference was
+-- measured rather than assumed. Volatility survives the rewrite exactly the way the
+-- language does not: pg_get_functiondef renders STABLE or IMMUTABLE when the function
+-- carries one, the substitution touches only the admission gate, and a non-volatile
+-- predecessor still carries the PL/pgSQL gate -- so it does NOT abort on
+-- 'admission gate not found'. Measured on the H6 contract, which had no volatility
+-- term at all: with the predecessor re-declared STABLE, and again IMMUTABLE, the
+-- whole migration APPLIED CLEANLY and installed a mutation on which every call fails.
+--
+-- With the volatility term ANDed above, that input now aborts. But it aborts on the
+-- second assertion, which would name the gate -- and the gate is intact and correct.
+-- An abort that names the wrong cause sends an operator to the wrong place, so the
+-- volatility gets the same treatment the fingerprint got and for the same stated
+-- reason: it names the common case precisely. This is not furniture. Unlike the
+-- language assertion it CAN fire, it fires FIRST on an input that reaches here, and
+-- the input is the one this migration exists to refuse.
 do $$
 begin
   if not academy_private.study_adult_managed_body_fingerprint_ok() then
     raise exception
       'STUDY_ACADEMIC_READINESS installed body is not the reviewed body';
+  end if;
+  if not academy_private.study_adult_managed_volatility_ok() then
+    raise exception
+      'STUDY_ACADEMIC_READINESS installed mutation is not volatile';
   end if;
   if not academy_private.study_academic_record_kind_ready('review') then
     raise exception
@@ -898,6 +998,8 @@ alter function academy_private.study_adult_managed_body_fingerprint_ok()
   owner to postgres;
 alter function academy_private.study_adult_managed_language_ok()
   owner to postgres;
+alter function academy_private.study_adult_managed_volatility_ok()
+  owner to postgres;
 alter function academy_private.study_adult_managed_gate_text_ok()
   owner to postgres;
 alter function public.academy_study_academic_readiness_v1() owner to postgres;
@@ -911,11 +1013,14 @@ revoke all on function academy_private.study_academic_table_ready(text, text[])
 revoke all on function academy_private.study_academic_record_kind_ready(text)
   from public, anon, authenticated, service_role;
 -- The body probes read a security-definer function's source. Nothing client-facing
--- needs them, and the definition text they inspect is estate shape. The language
--- probe reads catalog metadata about the same function and carries the same posture.
+-- needs them, and the definition text they inspect is estate shape. The language and
+-- volatility probes read catalog metadata about the same function and carry the same
+-- posture.
 revoke all on function academy_private.study_adult_managed_body_fingerprint_ok()
   from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_adult_managed_language_ok()
+  from public, anon, authenticated, service_role;
+revoke all on function academy_private.study_adult_managed_volatility_ok()
   from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_adult_managed_gate_text_ok()
   from public, anon, authenticated, service_role;
@@ -969,6 +1074,15 @@ set academic_readiness_version = 1,
       'academic_readiness_body_fingerprint_covers_language', false,
       'academic_readiness_function_language_pinned', true,
       'academic_readiness_function_language', 'plpgsql',
+      -- provolatile is not in prosrc either, and it is the same class: identical
+      -- reviewed bytes re-declared STABLE or IMMUTABLE passed the digest, the
+      -- language probe and the gate text while EVERY call failed on
+      -- `SELECT FOR UPDATE is not allowed in a non-volatile function`. Pinned
+      -- separately, by its own probe, and stated separately here so that
+      -- covers_volatility: false cannot be read as covered by the digest.
+      'academic_readiness_body_fingerprint_covers_volatility', false,
+      'academic_readiness_function_volatility_pinned', true,
+      'academic_readiness_function_volatility', 'volatile',
       -- Carriage returns are stripped ONCE, by the rewrite, so the installed body
       -- does not depend on how the frozen predecessor was checked out.
       'academic_readiness_body_normalised_at_apply', 'strip-cr',
@@ -988,6 +1102,6 @@ set academic_readiness_version = 1,
 where singleton;
 
 comment on function public.academy_study_academic_readiness_v1() is
-  'Read-only consolidated Study academic readiness. Reports a closed per-dependency status for all seven academic dependencies from catalog metadata, contract metadata and the shared adult-managed record-kind authority: no academic RPC is executed, no row is read, written or counted, and no learner, settings or adult-private content is exposed. Ready means the required server-side contract exists in the expected shape, not that a table name exists. Which record kinds exist is answered by the same function the mutation gate consults, never by a list of readiness'' own. That the gate consults it is established by pinning the mutation''s WHOLE body: the exact stored source is hashed with the built-in sha256 and compared against a fingerprint reviewed and written into the migration, with no normalisation at read time, so any byte that differs from the reviewed body closes the dependency. Carriage returns are stripped once, by the migration''s own reconstruction of the body, which is what makes the pin independent of how the frozen predecessor was checked out. The digest covers prosrc and nothing beside it, so the function''s LANGUAGE is pinned separately and by name: the same reviewed bytes re-declared as LANGUAGE sql satisfy the digest and the gate text while every call fails to parse. The older structural gate-text check is retained only as an ANDed secondary term, so it can close a dependency but never open one. This executes no PL/pgSQL and evaluates no branch; it does not need to, because a downstream restriction changes the body and so changes the fingerprint. What the pin does not reach is the bodies of the functions this one calls and the triggers on the tables it writes, and it rests on SHA-256 collision resistance. Executable by service_role only. Authorizes nothing.';
+  'Read-only consolidated Study academic readiness. Reports a closed per-dependency status for all seven academic dependencies from catalog metadata, contract metadata and the shared adult-managed record-kind authority: no academic RPC is executed, no row is read, written or counted, and no learner, settings or adult-private content is exposed. Ready means the required server-side contract exists in the expected shape, not that a table name exists. Which record kinds exist is answered by the same function the mutation gate consults, never by a list of readiness'' own. That the gate consults it is established by pinning the mutation''s WHOLE body: the exact stored source is hashed with the built-in sha256 and compared against a fingerprint reviewed and written into the migration, with no normalisation at read time, so any byte that differs from the reviewed body closes the dependency. Carriage returns are stripped once, by the migration''s own reconstruction of the body, which is what makes the pin independent of how the frozen predecessor was checked out. The digest covers prosrc and nothing beside it, so the two pieces of catalog metadata that change what those bytes DO are pinned separately: the function''s LANGUAGE, by name, because the same reviewed bytes re-declared as LANGUAGE sql satisfy the digest and the gate text while every call fails to parse; and its VOLATILITY, because the same bytes re-declared STABLE or IMMUTABLE satisfy the digest, the language probe and the gate text while every call fails on SELECT FOR UPDATE in a non-volatile function. Body bytes are fingerprinted; language and volatility are separately verified, and neither is implied by the fingerprint. The older structural gate-text check is retained only as an ANDed secondary term, so it can close a dependency but never open one. This executes no PL/pgSQL and evaluates no branch; it does not need to, because a downstream restriction changes the body and so changes the fingerprint. What the pin does not reach is the bodies of the functions this one calls and the triggers on the tables it writes, and it rests on SHA-256 collision resistance. Executable by service_role only. Authorizes nothing.';
 
 commit;

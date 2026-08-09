@@ -78,7 +78,7 @@ const CUSTODY_LF_SHA256: Readonly<Record<string, string>> = {
   '20260808120000_academy_study_actor_bound_session_verification.sql':
     '21462128be7f207cd31e60620acc1ec125f61e2e62fa2c41bb7272a764750f83',
   '20260808150000_academy_study_academic_readiness_contract.sql':
-    '000c62e02ea1e3fd83f6141ac5ac3abcf800a80562017aa224f526ca13ec94de',
+    'd892a8bf38204a25f131fe7b26e95b603d3d9d5b64bf8e0ee97f69de3d14655e',
 }
 
 describe('migration byte custody', () => {

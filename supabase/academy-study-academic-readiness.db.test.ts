@@ -1006,10 +1006,11 @@ describe.sequential('consolidated academic readiness contract', () => {
     const FINGERPRINT_PROBE =
       'academy_private.study_adult_managed_body_fingerprint_ok()'
     const LANGUAGE_PROBE = 'academy_private.study_adult_managed_language_ok()'
+    const VOLATILITY_PROBE = 'academy_private.study_adult_managed_volatility_ok()'
     const GATE_TEXT_PROBE = 'academy_private.study_adult_managed_gate_text_ok()'
 
     /**
-     * All three terms of the body check, asked directly. Reached as the owner, which
+     * All four terms of the body check, asked directly. Reached as the owner, which
      * is how they are always reached: their only callers are security-definer
      * functions running as postgres, and no client role may execute them (pinned
      * separately below).
@@ -1019,20 +1020,24 @@ describe.sequential('consolidated academic readiness contract', () => {
      * would distinguish them has already been refused — so a case that only called
      * the RPC could not tell a working text probe from a broken one.
      *
-     * The language term is asked alongside them because the three are separable and
-     * the interesting failures are the ones where they DISAGREE: identical reviewed
-     * bytes in the wrong language answer true, true, false, and only reading all
-     * three shows that it is the language term doing the closing.
+     * The two metadata terms are asked alongside them because all four are separable
+     * and the interesting failures are the ones where they DISAGREE: identical
+     * reviewed bytes in the wrong language answer true/false/true/true, the same bytes
+     * at the wrong volatility answer true/true/false/true, and only reading all four
+     * shows WHICH term is doing the closing.
      */
     async function bodyProbes() {
       const result = await database.query<{
-        fingerprint: boolean; language: boolean; gate_text: boolean
+        fingerprint: boolean; language: boolean
+        volatility: boolean; gate_text: boolean
       }>(`select ${FINGERPRINT_PROBE} as fingerprint,
                  ${LANGUAGE_PROBE} as language,
+                 ${VOLATILITY_PROBE} as volatility,
                  ${GATE_TEXT_PROBE} as gate_text`)
       return {
         fingerprint: result.rows[0].fingerprint,
         language: result.rows[0].language,
+        volatility: result.rows[0].volatility,
         gateText: result.rows[0].gate_text,
       }
     }
@@ -1419,8 +1424,10 @@ describe.sequential('consolidated academic readiness contract', () => {
     ] as const)('reports not-ready for %s', async (_label, language, ddl) => {
       await reverted(async () => {
         await database.exec(ddl)
+        // Each decoy is declared without a volatility clause, so it installs
+        // VOLATILE and the volatility term is not what refuses any of these.
         expect(await bodyProbes())
-          .toEqual({ fingerprint: false, language, gateText: false })
+          .toEqual({ fingerprint: false, language, volatility: true, gateText: false })
         expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
           'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
       })
@@ -1456,9 +1463,10 @@ describe.sequential('consolidated academic readiness contract', () => {
               $decoy$;
           `)
           // The fingerprint now agrees with a body it has never seen, and the decoy
-          // is genuinely PL/pgSQL, so the language term agrees too...
-          expect(await bodyProbes())
-            .toEqual({ fingerprint: true, language: true, gateText: false })
+          // is genuinely PL/pgSQL and genuinely volatile, so both metadata terms
+          // agree too...
+          expect(await bodyProbes()).toEqual(
+            { fingerprint: true, language: true, volatility: true, gateText: false })
           // ...and the dependency closes anyway.
           expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
             'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
@@ -1522,12 +1530,22 @@ describe.sequential('consolidated academic readiness contract', () => {
       return current.rows[0].prosrc
     }
 
-    /** prosrc, and every piece of metadata the contract checks apart from prolang. */
+    /**
+     * prosrc, and every piece of metadata the contract checks — INCLUDING
+     * provolatile.
+     *
+     * H6 left volatility out of this helper, and that omission is why its "only the
+     * language moved" control could not have noticed a volatility change: a shape
+     * that does not read a column cannot witness that the column held still. It is
+     * read here so that every `toEqual({ ...before, ... })` below is a statement
+     * about volatility too, and a perturbation that moved it silently would fail.
+     */
     async function mutationShape() {
       const result = await database.query<{
-        prosrc: string; language: string; owner: string
+        prosrc: string; language: string; volatility: string; owner: string
         definer: boolean; config: string[] | null
       }>(`select routine.prosrc, language.lanname as language,
+            routine.provolatile as volatility,
             pg_get_userbyid(routine.proowner) as owner, routine.prosecdef as definer,
             routine.proconfig as config
           from pg_proc as routine
@@ -1538,6 +1556,35 @@ describe.sequential('consolidated academic readiness contract', () => {
         authenticated: await hasExecute('authenticated', SHARED_ADULT_MANAGED),
         anon: await hasExecute('anon', SHARED_ADULT_MANAGED),
       }
+    }
+
+    /**
+     * THE VOLATILITY ASYMMETRY, which is the same class as the language one and
+     * cheaper to reach.
+     *
+     * Re-declares the mutation with the bytes it already has and the language it
+     * already has, changing nothing but the volatility clause. Unlike `relanguage`
+     * this needs NO `check_function_bodies` relaxation: the body parses fine as
+     * PL/pgSQL, and `SELECT ... FOR UPDATE` in a non-volatile function is a run-time
+     * refusal rather than a definition-time one. A plain CREATE OR REPLACE installs
+     * it, which is what makes this the cheaper of the two reaches.
+     */
+    async function revolatile(volatility: 'stable' | 'immutable' | 'volatile') {
+      const current = await database.query<{ prosrc: string }>(
+        'select prosrc from pg_proc where oid = to_regprocedure($1)',
+        [SHARED_ADULT_MANAGED])
+      // Rendered by the server via format(%L) rather than by string concatenation
+      // here, so the bytes that go back in are the bytes that came out.
+      const rendered = await database.query<{ ddl: string }>(
+        `select format($f$create or replace function
+             public.academy_study_upsert_adult_managed_record(
+               p_record_kind text, p_record jsonb,
+               p_expected_revision bigint, p_idempotency_key text)
+             returns jsonb language plpgsql ${volatility} security definer
+             set search_path = pg_catalog as %L$f$, $1::text) as ddl`,
+        [current.rows[0].prosrc])
+      await database.exec(rendered.rows[0].ddl)
+      return current.rows[0].prosrc
     }
 
     it('closes on the reviewed bytes re-declared in the wrong language', async () => {
@@ -1552,10 +1599,11 @@ describe.sequential('consolidated academic readiness contract', () => {
         expect(after).toEqual({ ...before, language: 'sql' })
 
         // The digest agrees, because the bytes are the reviewed bytes. The gate text
-        // agrees, because the gate is in them, at the entry, unbroken. Before H6 that
-        // was the whole answer and this estate read ready.
-        expect(await bodyProbes())
-          .toEqual({ fingerprint: true, language: false, gateText: true })
+        // agrees, because the gate is in them, at the entry, unbroken. The volatility
+        // agrees, because only the language moved. Before H6 that was the whole
+        // answer and this estate read ready.
+        expect(await bodyProbes()).toEqual(
+          { fingerprint: true, language: false, volatility: true, gateText: true })
 
         // And the mutation is not merely degraded, it is unusable: a PL/pgSQL body
         // executed as SQL does not parse. Readiness must not call this ready.
@@ -1584,22 +1632,24 @@ describe.sequential('consolidated academic readiness contract', () => {
           const after = await mutationShape()
           expect(after.prosrc).toBe(original)
           expect(after).toEqual(before)
-          expect(await bodyProbes())
-            .toEqual({ fingerprint: true, language: true, gateText: true })
+          expect(await bodyProbes()).toEqual(
+            { fingerprint: true, language: true, volatility: true, gateText: true })
           expect((await upsert('review')).accepted).toBe(true)
           expect((await academicReadiness()).dependencies).toEqual(allReadyExcept())
         })
       })
 
-    it('closes the language term when the mutation is absent entirely', async () => {
-      await reverted(async () => {
-        await database.exec(`drop function ${SHARED_ADULT_MANAGED} cascade`)
-        // No row to join, so no true to return. The probe needs no separate
-        // absent-function branch and deliberately does not have one.
-        expect(await bodyProbes())
-          .toEqual({ fingerprint: false, language: false, gateText: false })
+    it('closes the language and volatility terms when the mutation is absent',
+      async () => {
+        await reverted(async () => {
+          await database.exec(`drop function ${SHARED_ADULT_MANAGED} cascade`)
+          // No row to match, so no true to return. Neither probe needs a separate
+          // absent-function branch and deliberately neither has one.
+          expect(await bodyProbes()).toEqual({
+            fingerprint: false, language: false, volatility: false, gateText: false,
+          })
+        })
       })
-    })
 
     /**
      * `language sql` is the whole attack surface here, and that is a measured fact
@@ -1619,6 +1669,119 @@ describe.sequential('consolidated academic readiness contract', () => {
       expect(languages.rows.filter((row) => row.lanispl).map((row) => row.lanname))
         .toEqual(['plpgsql'])
     })
+
+    /**
+     * THE VOLATILITY MATRIX — the second non-body attribute, and the one that H6
+     * named as an accepted gap. It is not an acceptable gap: it produces exactly the
+     * READY-while-broken state this contract exists to remove.
+     *
+     * The reviewed mutation is VOLATILE. That is not a preference about catalog
+     * hygiene, it is operation viability: the body takes SELECT ... FOR UPDATE, and
+     * PostgreSQL permits that only in a volatile function. Re-declared STABLE or
+     * IMMUTABLE the function still exists, still carries the reviewed bytes, still
+     * runs as PL/pgSQL and still opens with the reviewed gate — and cannot perform a
+     * single one of the three reviewed operations.
+     *
+     * The control row is what makes the other two mean something: the SAME
+     * re-declaration in the volatility the function already has must move nothing,
+     * otherwise `revolatile` itself would be what closes the dependency.
+     */
+    const VOLATILITY_MATRIX = [
+      ['volatile', 'v', true],
+      ['stable', 's', false],
+      ['immutable', 'i', false],
+    ] as const
+
+    it.each(VOLATILITY_MATRIX)(
+      're-declared %s: only volatility moves, and readiness follows the estate',
+      async (volatility, expected, usable) => {
+        const before = await mutationShape()
+        await reverted(async () => {
+          const original = await revolatile(volatility)
+          const after = await mutationShape()
+
+          // ONLY the volatility moved. Byte-identical source, same language, same
+          // owner, same definer posture, same pinned search_path, same ACL split.
+          expect(after.prosrc).toBe(original)
+          expect(after).toEqual({ ...before, volatility: expected })
+
+          // The body terms all agree — the bytes ARE the reviewed bytes, the language
+          // IS plpgsql, the gate IS at the entry. Only the volatility term differs,
+          // and for the non-volatile rows it is the sole term doing the closing.
+          expect(await bodyProbes()).toEqual({
+            fingerprint: true, language: true, volatility: usable, gateText: true,
+          })
+
+          // OPERATIONAL CORRELATION, for every supported record kind. This is the
+          // half that makes the metadata check a statement about the estate rather
+          // than about the catalog: the volatile row performs all three reviewed
+          // operations, and the non-volatile rows perform none of them.
+          for (const kind of Object.keys(KIND_DEPENDENCY) as ManagedKind[]) {
+            const outcome = await upsert(kind)
+            expect(outcome.accepted, `${volatility} / ${kind}`).toBe(usable)
+            if (!usable) {
+              expect(outcome.error)
+                .toMatch(/SELECT FOR UPDATE is not allowed in a non-volatile function/)
+            }
+          }
+
+          // And readiness mirrors that difference exactly.
+          const readiness = await academicReadiness()
+          expect(readiness.dependencies).toEqual(usable
+            ? allReadyExcept()
+            : allReadyExcept('review-queue', 'calendar-adapter',
+              'parent-settings-adapter'))
+          expect(readiness.status).toBe(usable ? 'ready' : 'not-ready')
+        })
+      })
+
+    /**
+     * WHY THIS ONE IS CHEAPER TO REACH THAN THE LANGUAGE CASE, measured rather than
+     * asserted in prose.
+     *
+     * `relanguage` needs `check_function_bodies = off`, because a PL/pgSQL body does
+     * not parse as SQL and the server refuses the definition outright. The volatility
+     * re-declaration needs no such relaxation: the body parses, and the FOR UPDATE
+     * restriction is enforced at run time. So this installs on a plain CREATE OR
+     * REPLACE, with `check_function_bodies` left at its default.
+     *
+     * Asserting the setting is still on is what makes this a statement about the
+     * re-declaration rather than about the harness: if some earlier case leaked a
+     * relaxation into the session, this would be proving nothing.
+     */
+    it('needs no check_function_bodies relaxation, unlike the language case',
+      async () => {
+        const setting = await database.query<{ value: string }>(
+          `select current_setting('check_function_bodies') as value`)
+        expect(setting.rows[0].value).toBe('on')
+        await reverted(async () => {
+          await revolatile('stable')
+          expect((await bodyProbes()).volatility).toBe(false)
+        })
+      })
+
+    /**
+     * `provolatile` has exactly three values, fixed by the catalog's own definition,
+     * and 'v' is one of them. This is the counterpart of the pg_language case above,
+     * and it is why the volatility probe may compare against a literal where the
+     * language probe may not: prolang holds an OID assigned when the plpgsql
+     * extension is created, so a numeric constant there would pin an accident of
+     * installation order. i/s/v are identical on every installation.
+     *
+     * Measured over the whole catalog rather than declared, so a server that admitted
+     * a fourth volatility class would fail here instead of silently leaving the
+     * probe's literal naming one of several.
+     */
+    it('has exactly three volatility classes, one of which is the pinned one',
+      async () => {
+        const observed = await database.query<{ provolatile: string }>(
+          'select distinct provolatile from pg_proc order by provolatile')
+        expect(observed.rows.map((row) => row.provolatile)).toEqual(['i', 's', 'v'])
+        const mutation = await database.query<{ provolatile: string }>(
+          'select provolatile from pg_proc where oid = to_regprocedure($1)',
+          [SHARED_ADULT_MANAGED])
+        expect(mutation.rows[0].provolatile).toBe('v')
+      })
 
     /**
      * THE SECONDARY ANCHOR BRANCH, forced directly. H5-R found it unforced.
@@ -1672,8 +1835,8 @@ describe.sequential('consolidated academic readiness contract', () => {
           expect(located.rows[0].prefix).toBe(true)
 
           // So the anchor is the only term left to refuse it, and it must.
-          expect(await bodyProbes())
-            .toEqual({ fingerprint: true, language: true, gateText: false })
+          expect(await bodyProbes()).toEqual(
+            { fingerprint: true, language: true, volatility: true, gateText: false })
           expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
             'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
         })
@@ -1682,34 +1845,63 @@ describe.sequential('consolidated academic readiness contract', () => {
     /**
      * THE FINAL AUTHORITY TABLE.
      *
-     * Three separable terms, one row each for the term that closes. Written as one
+     * Four separable terms, one row each for the term that closes. Written as one
      * case so the whole table is read at once and a row cannot quietly stop being
      * asserted. A row whose label says `(staged)` needs the fingerprint made to lie,
      * because a fingerprint that agrees honestly IS the reviewed body and the other
-     * two terms could not then disagree with it.
+     * three terms could not then disagree with it.
+     *
+     * The two volatility rows are what make the AND one-directional in the direction
+     * H7 exists to fix: every other term is TRUE in both of them — the reviewed
+     * bytes, PL/pgSQL, the gate at the entry — and the dependency still closes. A
+     * correct fingerprint plus a correct language plus a correct lexical gate may not
+     * outvote a wrong volatility.
      */
-    it('resolves fingerprint, language and gate text as one authority table',
+    it('resolves fingerprint, language, volatility and gate text as one authority table',
       async () => {
         const rows: {
           label: string
           arrange: () => Promise<void>
-          probes: { fingerprint: boolean; language: boolean; gateText: boolean }
+          probes: {
+            fingerprint: boolean; language: boolean
+            volatility: boolean; gateText: boolean
+          }
           ready: boolean
         }[] = [
           {
-            label: 'fp true + language plpgsql + gate true => eligible',
+            label: 'fp true + plpgsql + volatile + gate true => eligible',
             arrange: async () => {},
-            probes: { fingerprint: true, language: true, gateText: true },
+            probes: {
+              fingerprint: true, language: true, volatility: true, gateText: true,
+            },
             ready: true,
           },
           {
-            label: 'fp true + language sql + gate true => not ready',
+            label: 'fp true + language sql + volatile + gate true => not ready',
             arrange: async () => { await relanguage('sql') },
-            probes: { fingerprint: true, language: false, gateText: true },
+            probes: {
+              fingerprint: true, language: false, volatility: true, gateText: true,
+            },
             ready: false,
           },
           {
-            label: 'fp false + language plpgsql + gate true => not ready',
+            label: 'fp true + plpgsql + STABLE + gate true => not ready',
+            arrange: async () => { await revolatile('stable') },
+            probes: {
+              fingerprint: true, language: true, volatility: false, gateText: true,
+            },
+            ready: false,
+          },
+          {
+            label: 'fp true + plpgsql + IMMUTABLE + gate true => not ready',
+            arrange: async () => { await revolatile('immutable') },
+            probes: {
+              fingerprint: true, language: true, volatility: false, gateText: true,
+            },
+            ready: false,
+          },
+          {
+            label: 'fp false + plpgsql + volatile + gate true => not ready',
             arrange: async () => {
               await redefine([[
                 "  target_student_id := (p_record ->> 'student_id')::uuid;",
@@ -1718,17 +1910,21 @@ describe.sequential('consolidated academic readiness contract', () => {
                 + "  end if;\n  target_student_id := (p_record ->> 'student_id')::uuid;",
               ]])
             },
-            probes: { fingerprint: false, language: true, gateText: true },
+            probes: {
+              fingerprint: false, language: true, volatility: true, gateText: true,
+            },
             ready: false,
           },
           {
-            label: 'fp true (staged) + language plpgsql + gate false => not ready',
+            label: 'fp true (staged) + plpgsql + volatile + gate false => not ready',
             arrange: async () => {
               await stageLyingFingerprint()
               await redefine([[REAL_GATE, narrowGate('review')],
                 NESTED_PLACEMENTS[0][1]])
             },
-            probes: { fingerprint: true, language: true, gateText: false },
+            probes: {
+              fingerprint: true, language: true, volatility: true, gateText: false,
+            },
             ready: false,
           },
         ]
@@ -1757,8 +1953,8 @@ describe.sequential('consolidated academic readiness contract', () => {
          from pg_proc where oid = to_regprocedure($1)`, [SHARED_ADULT_MANAGED])
       expect(result.rows[0].null_source).toBe(false)
       expect(result.rows[0].length).toBeGreaterThan(1000)
-      expect(await bodyProbes())
-        .toEqual({ fingerprint: true, language: true, gateText: true })
+      expect(await bodyProbes()).toEqual(
+        { fingerprint: true, language: true, volatility: true, gateText: true })
     })
 
     /**
@@ -1831,8 +2027,8 @@ describe.sequential('consolidated academic readiness contract', () => {
         const refused = await upsert('review')
         expect(refused.accepted).toBe(false)
         expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
-        expect(await bodyProbes())
-          .toEqual({ fingerprint: false, language: true, gateText: true })
+        expect(await bodyProbes()).toEqual(
+          { fingerprint: false, language: true, volatility: true, gateText: true })
         expect((await academicReadiness()).dependencies).toEqual(allReadyExcept(
           'review-queue', 'calendar-adapter', 'parent-settings-adapter'))
       })
@@ -1871,9 +2067,9 @@ describe.sequential('consolidated academic readiness contract', () => {
         const refused = await upsert('review')
         expect(refused.accepted).toBe(false)
         expect(refused.error).toMatch(/STUDY_RECORD_INVALID/)
-        // The body is untouched, so all three probes agree it is the reviewed one.
-        expect(await bodyProbes())
-          .toEqual({ fingerprint: true, language: true, gateText: true })
+        // The body is untouched, so all four probes agree it is the reviewed one.
+        expect(await bodyProbes()).toEqual(
+          { fingerprint: true, language: true, volatility: true, gateText: true })
         expect((await academicReadiness()).dependencies).toEqual(allReadyExcept())
       })
     })
@@ -1929,11 +2125,11 @@ describe.sequential('consolidated academic readiness contract', () => {
     })
 
     /**
-     * The three body probes read a security-definer function's source and catalog
+     * The four body probes read a security-definer function's source and catalog
      * metadata, which is estate shape. They carry the same posture as every other
      * private helper here.
      */
-    it.each([FINGERPRINT_PROBE, LANGUAGE_PROBE, GATE_TEXT_PROBE])(
+    it.each([FINGERPRINT_PROBE, LANGUAGE_PROBE, VOLATILITY_PROBE, GATE_TEXT_PROBE])(
       '%s is postgres-owned, stable, definer, pinned, and client-unreachable',
       async (signature) => {
         const result = await database.query<{
@@ -2025,15 +2221,19 @@ describe.sequential('consolidated academic readiness contract', () => {
       })
 
     it('kept the frozen mutation function otherwise intact', async () => {
-      // Owner, definer posture, pinned search_path and the adapter/anon ACL split
-      // all survive being re-declared from the catalog.
+      // Owner, definer posture, pinned search_path, volatility and the adapter/anon
+      // ACL split all survive being re-declared from the catalog. Volatility is
+      // asserted here because the rewrite re-executes pg_get_functiondef, which
+      // renders a STABLE or IMMUTABLE clause when the predecessor carries one — so
+      // the rewrite propagates whatever the predecessor had rather than fixing it.
       const result = await database.query<{
-        owner: string; definer: boolean; config: string[] | null
+        owner: string; definer: boolean; volatility: string; config: string[] | null
       }>(`select pg_get_userbyid(proowner) as owner, prosecdef as definer,
-            proconfig as config
+            provolatile as volatility, proconfig as config
           from pg_proc where oid = to_regprocedure($1)`, [SHARED_ADULT_MANAGED])
       expect(result.rows[0].owner).toBe('postgres')
       expect(result.rows[0].definer).toBe(true)
+      expect(result.rows[0].volatility).toBe('v')
       expect(result.rows[0].config).toEqual(['search_path=pg_catalog'])
       expect(await hasExecute('authenticated', SHARED_ADULT_MANAGED)).toBe(true)
       expect(await hasExecute('anon', SHARED_ADULT_MANAGED)).toBe(false)
@@ -2118,6 +2318,11 @@ describe.sequential('consolidated academic readiness contract', () => {
      * H6 adds the other limit of the same shape, and for the same reason: the digest
      * is over prosrc, so it says nothing about prolang. covers_language: false is
      * asserted next to language_pinned: true, so neither can be read alone.
+     *
+     * H7 adds the third of that shape. covers_volatility: false sits next to
+     * volatility_pinned: true for the same reason — the manifest must not be readable
+     * as "the fingerprint takes care of it". Body bytes are fingerprinted; language
+     * and volatility are separately verified.
      */
     it('states what the body pin establishes and what it does not', async () => {
       const result = await database.query<{ manifest: Record<string, unknown> }>(
@@ -2130,6 +2335,9 @@ describe.sequential('consolidated academic readiness contract', () => {
         academic_readiness_body_fingerprint_covers_language: false,
         academic_readiness_function_language_pinned: true,
         academic_readiness_function_language: 'plpgsql',
+        academic_readiness_body_fingerprint_covers_volatility: false,
+        academic_readiness_function_volatility_pinned: true,
+        academic_readiness_function_volatility: 'volatile',
         academic_readiness_kind_probe_anchors_outer_entry: true,
         academic_readiness_gate_text_probe_is_secondary: true,
         academic_readiness_kind_probe_executes_plpgsql: false,
@@ -2238,15 +2446,16 @@ describe.sequential('consolidated academic readiness contract', () => {
     })
 
     /**
-     * Creation, never replacement, extends to the three body probes this migration
+     * Creation, never replacement, extends to the four body probes this migration
      * adds. A pre-existing function wearing any of those names would otherwise be
      * silently redefined — or, worse, left in place by a migration that assumed it
-     * wrote it, which for the language probe means a `select true` stub standing
-     * where the check is supposed to be.
+     * wrote it, which for the language and volatility probes means a `select true`
+     * stub standing where the check is supposed to be.
      */
     it.each([
       'academy_private.study_adult_managed_body_fingerprint_ok',
       'academy_private.study_adult_managed_language_ok',
+      'academy_private.study_adult_managed_volatility_ok',
       'academy_private.study_adult_managed_gate_text_ok',
     ])('refuses when %s already exists', async (name) => {
       const database2 = await chainWithoutAcademicMigration()
@@ -2356,6 +2565,57 @@ describe.sequential('consolidated academic readiness contract', () => {
           // closed loop is what must reject this, by name.
           await expect(database2.exec(await academicMigrationSource()))
             .rejects.toThrow(/installed body is not the reviewed body/)
+        } finally {
+          await database2.close()
+        }
+      })
+
+    /**
+     * A NON-VOLATILE PREDECESSOR, which the rewrite propagates rather than repairs.
+     *
+     * This is the apply-time half of the H7 finding, and the reason the volatility
+     * assertion is not the furniture the language assertion would have been. The
+     * language cannot survive this path: a non-PL/pgSQL predecessor does not carry
+     * the PL/pgSQL gate the substitution requires, so it aborts earlier, on
+     * 'admission gate not found'. Volatility is different in every respect that
+     * matters — pg_get_functiondef renders STABLE or IMMUTABLE when the predecessor
+     * carries one, the substitution touches only the admission gate, and the gate is
+     * still exactly where it is expected. Measured against the H6 contract, which had
+     * no volatility term: the whole migration APPLIED CLEANLY on both, and installed
+     * a mutation on which every call fails.
+     *
+     * So the input reaches the closed loop, and it must abort there by the name of
+     * the thing that is actually wrong. Asserting the message rather than merely the
+     * rejection is the point: without the dedicated assertion this still aborts, but
+     * on the gate — and the gate is intact and correct, so that abort would send an
+     * operator to the wrong place entirely.
+     */
+    it.each(['stable', 'immutable'] as const)(
+      'aborts when the predecessor mutation is declared %s', async (volatility) => {
+        const database2 = await chainWithoutAcademicMigration()
+        try {
+          const current = await database2.query<{ prosrc: string }>(
+            'select prosrc from pg_proc where oid = to_regprocedure($1)',
+            [SHARED_ADULT_MANAGED])
+          const rendered = await database2.query<{ ddl: string }>(
+            `select format($f$create or replace function
+                 public.academy_study_upsert_adult_managed_record(
+                   p_record_kind text, p_record jsonb,
+                   p_expected_revision bigint, p_idempotency_key text)
+                 returns jsonb language plpgsql ${volatility} security definer
+                 set search_path = pg_catalog as %L$f$, $1::text) as ddl`,
+            [current.rows[0].prosrc])
+          await database2.exec(rendered.rows[0].ddl)
+
+          // The body is untouched, so the gate substitution below will still match
+          // and the rewrite will still succeed. Only the volatility is wrong.
+          const staged = await database2.query<{ volatility: string }>(
+            'select provolatile as volatility from pg_proc where oid = to_regprocedure($1)',
+            [SHARED_ADULT_MANAGED])
+          expect(staged.rows[0].volatility).toBe(volatility === 'stable' ? 's' : 'i')
+
+          await expect(database2.exec(await academicMigrationSource()))
+            .rejects.toThrow(/installed mutation is not volatile/)
         } finally {
           await database2.close()
         }
