@@ -1,0 +1,3904 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manuel.academy/schemas/curriculum-authoring/2.0.0/schema-set.json",
+  "title": "Manuel Academy Curriculum Authoring Schema Set 2.0.0",
+  "schema_set_version": "2.0.0",
+  "$defs": {
+    "curriculum_manifest": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "curriculum_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "draft_version": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 64,
+          "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[a-z0-9.-]+)?$"
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "in-review"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "policy_set_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "framework_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9][a-z0-9:-]*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "course_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9][a-z0-9:-]*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "schedule_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9][a-z0-9:-]*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "resource_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9][a-z0-9:-]*$"
+          },
+          "uniqueItems": true
+        },
+        "counts": {
+          "type": "object",
+          "properties": {
+            "courses": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "units": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "lessons": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "assessments": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "schedules": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "resources": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "courses",
+            "units",
+            "lessons",
+            "assessments",
+            "schedules",
+            "resources"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "curriculum_id",
+        "draft_version",
+        "status",
+        "title",
+        "policy_set_ref",
+        "framework_refs",
+        "course_refs",
+        "schedule_refs",
+        "resource_refs",
+        "counts"
+      ],
+      "additionalProperties": false
+    },
+    "course": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "course_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "grade": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "subject": {
+          "enum": [
+            "mathematics",
+            "english-language-arts",
+            "science",
+            "social-studies",
+            "health",
+            "physical-education",
+            "ready-for-life",
+            "technology",
+            "arts-and-music",
+            "financial-literacy"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "capstone": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 366
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "unit_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9][a-z0-9:-]*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "standards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "framework_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "standard_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "legacy_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "mapping_status": {
+                "enum": [
+                  "canonical",
+                  "unverified",
+                  "human-review"
+                ]
+              }
+            },
+            "required": [
+              "framework_ref",
+              "mapping_status"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9.-]+\\/[a-z][a-z0-9.-]+$"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9_.-]*$"
+              },
+              "schema_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "projection": {
+                "enum": [
+                  "student-safe",
+                  "protected"
+                ]
+              },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string"
+                      },
+                      "value": {
+                        "type": "string",
+                        "maxLength": 2000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "number"
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": -1000000,
+                        "maximum": 1000000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "boolean"
+                      },
+                      "value": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string-list"
+                      },
+                      "value": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 240
+                        },
+                        "maxItems": 100
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "namespace",
+              "key",
+              "schema_ref",
+              "projection",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "course_id",
+        "grade",
+        "subject",
+        "title",
+        "description",
+        "days",
+        "order",
+        "unit_refs",
+        "standards"
+      ],
+      "additionalProperties": false
+    },
+    "unit": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "unit_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "course_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "grade": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "subject": {
+          "enum": [
+            "mathematics",
+            "english-language-arts",
+            "science",
+            "social-studies",
+            "health",
+            "physical-education",
+            "ready-for-life",
+            "technology",
+            "arts-and-music",
+            "financial-literacy"
+          ]
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 366
+        },
+        "standards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "framework_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "standard_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "legacy_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "mapping_status": {
+                "enum": [
+                  "canonical",
+                  "unverified",
+                  "human-review"
+                ]
+              }
+            },
+            "required": [
+              "framework_ref",
+              "mapping_status"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "essential_question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "performance_task": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "lesson_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9][a-z0-9:-]*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "assessment_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9.-]+\\/[a-z][a-z0-9.-]+$"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9_.-]*$"
+              },
+              "schema_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "projection": {
+                "enum": [
+                  "student-safe",
+                  "protected"
+                ]
+              },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string"
+                      },
+                      "value": {
+                        "type": "string",
+                        "maxLength": 2000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "number"
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": -1000000,
+                        "maximum": 1000000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "boolean"
+                      },
+                      "value": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string-list"
+                      },
+                      "value": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 240
+                        },
+                        "maxItems": 100
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "namespace",
+              "key",
+              "schema_ref",
+              "projection",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "unit_id",
+        "course_ref",
+        "grade",
+        "subject",
+        "order",
+        "title",
+        "days",
+        "standards",
+        "essential_question",
+        "topics",
+        "performance_task",
+        "lesson_refs"
+      ],
+      "additionalProperties": false
+    },
+    "lesson": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "lesson_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "course_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "unit_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "grade": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "subject": {
+          "enum": [
+            "mathematics",
+            "english-language-arts",
+            "science",
+            "social-studies",
+            "health",
+            "physical-education",
+            "ready-for-life",
+            "technology",
+            "arts-and-music",
+            "financial-literacy"
+          ]
+        },
+        "course_day": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 366
+        },
+        "day_in_unit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 366
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "phase": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "focus": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "estimated_duration": {
+          "type": "object",
+          "properties": {
+            "minimum_minutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 480
+            },
+            "maximum_minutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 480
+            }
+          },
+          "required": [
+            "minimum_minutes",
+            "maximum_minutes"
+          ],
+          "additionalProperties": false
+        },
+        "standards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "framework_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "standard_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "legacy_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "mapping_status": {
+                "enum": [
+                  "canonical",
+                  "unverified",
+                  "human-review"
+                ]
+              }
+            },
+            "required": [
+              "framework_ref",
+              "mapping_status"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "essential_question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "learning_objectives": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "success_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "materials": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "maxItems": 100
+        },
+        "lesson_flow": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "segment_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "duration": {
+                "type": "object",
+                "properties": {
+                  "minimum_minutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 480
+                  },
+                  "maximum_minutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 480
+                  }
+                },
+                "required": [
+                  "minimum_minutes",
+                  "maximum_minutes"
+                ],
+                "additionalProperties": false
+              },
+              "teacher_or_tutor_action": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 12000
+              }
+            },
+            "required": [
+              "segment_id",
+              "title",
+              "duration",
+              "teacher_or_tutor_action"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "student_activity": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "formative_check": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "scoring_guidance": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "mastery": {
+          "type": "object",
+          "properties": {
+            "policy_ref": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 128,
+              "pattern": "^[a-z0-9][a-z0-9:-]*$"
+            },
+            "minimum_occasions": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            },
+            "minimum_distinct_dates": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            },
+            "independent_evidence_required": {
+              "type": "boolean"
+            },
+            "evidence_types": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "worked-example",
+                  "explanation",
+                  "error-analysis",
+                  "application",
+                  "retrieval",
+                  "performance"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "transfer_requirement": {
+              "enum": [
+                "none",
+                "retrieval",
+                "novel-context"
+              ]
+            }
+          },
+          "required": [
+            "policy_ref"
+          ],
+          "additionalProperties": false
+        },
+        "tutor_routes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "signal": {
+                "enum": [
+                  "prerequisite-gap",
+                  "procedure-without-understanding",
+                  "correct-low-confidence",
+                  "repeated-error-pattern",
+                  "mastery-evidence"
+                ]
+              },
+              "strategy": {
+                "enum": [
+                  "prerequisite-reteach",
+                  "conceptual-explanation",
+                  "confidence-calibration",
+                  "error-pattern-contrast",
+                  "mastery-evidence-collection"
+                ]
+              },
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "representation": {
+                    "enum": [
+                      "text",
+                      "visual",
+                      "concrete",
+                      "worked-example"
+                    ]
+                  },
+                  "retry_count": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3
+                  },
+                  "review_timing": {
+                    "enum": [
+                      "same-session",
+                      "same-day",
+                      "next-session"
+                    ]
+                  },
+                  "require_explanation": {
+                    "type": "boolean"
+                  },
+                  "evidence_type": {
+                    "enum": [
+                      "worked-example",
+                      "explanation",
+                      "error-analysis",
+                      "application",
+                      "retrieval",
+                      "performance"
+                    ]
+                  }
+                },
+                "required": [],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "signal",
+              "strategy",
+              "parameters"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "extension_activity": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "accessibility": {
+          "type": "object",
+          "properties": {
+            "policy_ref": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 128,
+              "pattern": "^[a-z0-9][a-z0-9:-]*$"
+            },
+            "text_fallback": {
+              "const": "required"
+            },
+            "keyboard": {
+              "enum": [
+                "required",
+                "not-applicable"
+              ]
+            },
+            "caption_or_transcript": {
+              "enum": [
+                "required-when-media",
+                "not-applicable"
+              ]
+            },
+            "alt_or_long_description": {
+              "enum": [
+                "required-when-visual",
+                "not-applicable"
+              ]
+            },
+            "reduced_motion": {
+              "enum": [
+                "available",
+                "not-applicable"
+              ]
+            },
+            "high_contrast": {
+              "enum": [
+                "available",
+                "not-applicable"
+              ]
+            },
+            "extended_time": {
+              "type": "boolean"
+            },
+            "timer_accommodation": {
+              "enum": [
+                "hidden",
+                "extended",
+                "untimed",
+                "not-applicable"
+              ]
+            },
+            "movement_break": {
+              "type": "boolean"
+            },
+            "response_modes": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "typed",
+                  "handwritten",
+                  "spoken",
+                  "drawn",
+                  "manipulative",
+                  "demonstrated"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "policy_ref",
+            "text_fallback",
+            "keyboard",
+            "caption_or_transcript",
+            "alt_or_long_description",
+            "reduced_motion",
+            "high_contrast",
+            "extended_time",
+            "timer_accommodation",
+            "movement_break",
+            "response_modes"
+          ],
+          "additionalProperties": false
+        },
+        "safety_privacy": {
+          "type": "object",
+          "properties": {
+            "policy_ref": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 128,
+              "pattern": "^[a-z0-9][a-z0-9:-]*$"
+            },
+            "hazards": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "physical",
+                      "chemical",
+                      "online",
+                      "financial",
+                      "privacy",
+                      "emotional"
+                    ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "mitigation": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  }
+                },
+                "required": [
+                  "kind",
+                  "description",
+                  "mitigation"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 20
+            },
+            "sensitivity": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "maxItems": 20,
+              "uniqueItems": true
+            },
+            "supervision": {
+              "enum": [
+                "none",
+                "nearby-adult",
+                "direct-adult"
+              ]
+            },
+            "guardian_visibility": {
+              "enum": [
+                "summary",
+                "confirmation-required",
+                "direct-observation"
+              ]
+            },
+            "stop_conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "minItems": 1,
+              "maxItems": 20
+            },
+            "privacy_declarations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "minItems": 1,
+              "maxItems": 20
+            },
+            "academic_integrity_mode": {
+              "enum": [
+                "practice-support",
+                "independent-graded",
+                "collaborative"
+              ]
+            }
+          },
+          "required": [
+            "policy_ref",
+            "hazards",
+            "sensitivity",
+            "supervision",
+            "guardian_visibility",
+            "stop_conditions",
+            "privacy_declarations",
+            "academic_integrity_mode"
+          ],
+          "additionalProperties": false
+        },
+        "resource_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9][a-z0-9:-]*$"
+          },
+          "uniqueItems": true
+        },
+        "guardian_visibility_note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "home_connection": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9.-]+\\/[a-z][a-z0-9.-]+$"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9_.-]*$"
+              },
+              "schema_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "projection": {
+                "enum": [
+                  "student-safe",
+                  "protected"
+                ]
+              },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string"
+                      },
+                      "value": {
+                        "type": "string",
+                        "maxLength": 2000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "number"
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": -1000000,
+                        "maximum": 1000000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "boolean"
+                      },
+                      "value": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string-list"
+                      },
+                      "value": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 240
+                        },
+                        "maxItems": 100
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "namespace",
+              "key",
+              "schema_ref",
+              "projection",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "lesson_id",
+        "course_ref",
+        "unit_ref",
+        "grade",
+        "subject",
+        "course_day",
+        "day_in_unit",
+        "title",
+        "phase",
+        "focus",
+        "estimated_duration",
+        "standards",
+        "essential_question",
+        "learning_objectives",
+        "success_criteria",
+        "materials",
+        "lesson_flow",
+        "student_activity",
+        "formative_check",
+        "scoring_guidance",
+        "mastery",
+        "tutor_routes",
+        "accessibility",
+        "safety_privacy",
+        "resource_refs",
+        "guardian_visibility_note"
+      ],
+      "additionalProperties": false
+    },
+    "assessment": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "assessment_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "course_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "unit_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "standards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "framework_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "standard_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "legacy_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "mapping_status": {
+                "enum": [
+                  "canonical",
+                  "unverified",
+                  "human-review"
+                ]
+              }
+            },
+            "required": [
+              "framework_ref",
+              "mapping_status"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "total_points": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "prompts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prompt_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "type": {
+                "enum": [
+                  "concept-vocabulary",
+                  "representation-source",
+                  "application",
+                  "error-claim-analysis",
+                  "connection",
+                  "performance-evidence",
+                  "reflection-transfer",
+                  "other"
+                ]
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 12000
+              },
+              "points": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "resource_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 128,
+                  "pattern": "^[a-z0-9][a-z0-9:-]*$"
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "prompt_id",
+              "type",
+              "prompt",
+              "points",
+              "resource_refs"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 500
+        },
+        "rubric_dimensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "minItems": 1,
+          "maxItems": 50
+        },
+        "accommodation_note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "protected_interpretation_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9.-]+\\/[a-z][a-z0-9.-]+$"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9_.-]*$"
+              },
+              "schema_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "projection": {
+                "enum": [
+                  "student-safe",
+                  "protected"
+                ]
+              },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string"
+                      },
+                      "value": {
+                        "type": "string",
+                        "maxLength": 2000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "number"
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": -1000000,
+                        "maximum": 1000000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "boolean"
+                      },
+                      "value": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string-list"
+                      },
+                      "value": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 240
+                        },
+                        "maxItems": 100
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "namespace",
+              "key",
+              "schema_ref",
+              "projection",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "assessment_id",
+        "course_ref",
+        "unit_ref",
+        "title",
+        "standards",
+        "total_points",
+        "prompts",
+        "rubric_dimensions",
+        "accommodation_note",
+        "protected_interpretation_ref"
+      ],
+      "additionalProperties": false
+    },
+    "assessment_protected_interpretation": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "interpretation_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "assessment_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "secure_minimum_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "developing_minimum_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "not_yet_maximum_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "mastery_rule": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "prompt_scoring": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prompt_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "scoring_guidance": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 12000
+              }
+            },
+            "required": [
+              "prompt_ref",
+              "scoring_guidance"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9.-]+\\/[a-z][a-z0-9.-]+$"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9_.-]*$"
+              },
+              "schema_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "projection": {
+                "enum": [
+                  "student-safe",
+                  "protected"
+                ]
+              },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string"
+                      },
+                      "value": {
+                        "type": "string",
+                        "maxLength": 2000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "number"
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": -1000000,
+                        "maximum": 1000000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "boolean"
+                      },
+                      "value": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string-list"
+                      },
+                      "value": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 240
+                        },
+                        "maxItems": 100
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "namespace",
+              "key",
+              "schema_ref",
+              "projection",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "interpretation_id",
+        "assessment_ref",
+        "secure_minimum_percent",
+        "developing_minimum_percent",
+        "not_yet_maximum_percent",
+        "mastery_rule",
+        "prompt_scoring"
+      ],
+      "additionalProperties": false
+    },
+    "schedule": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "schedule_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "grade": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "weeks": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 53
+        },
+        "instructional_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 366
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "week": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 53
+              },
+              "day": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 7
+              },
+              "lesson_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 128,
+                  "pattern": "^[a-z0-9][a-z0-9:-]*$"
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "week",
+              "day",
+              "lesson_refs"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 366
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "schedule_id",
+        "grade",
+        "weeks",
+        "instructional_days",
+        "entries"
+      ],
+      "additionalProperties": false
+    },
+    "standard_framework": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "framework_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "jurisdiction": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "framework_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "authority_status": {
+          "enum": [
+            "verified",
+            "reference-only",
+            "legacy-unverified"
+          ]
+        },
+        "standards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "standard_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "code": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 12000
+              },
+              "parent_standard_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              }
+            },
+            "required": [
+              "standard_id",
+              "code",
+              "label"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "framework_id",
+        "name",
+        "jurisdiction",
+        "framework_version",
+        "authority_status",
+        "standards"
+      ],
+      "additionalProperties": false
+    },
+    "standard_reference": {
+      "type": "object",
+      "properties": {
+        "framework_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "standard_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "legacy_label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "mapping_status": {
+          "enum": [
+            "canonical",
+            "unverified",
+            "human-review"
+          ]
+        }
+      },
+      "required": [
+        "framework_ref",
+        "mapping_status"
+      ],
+      "additionalProperties": false
+    },
+    "mastery": {
+      "type": "object",
+      "properties": {
+        "policy_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "minimum_occasions": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "minimum_distinct_dates": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "independent_evidence_required": {
+          "type": "boolean"
+        },
+        "evidence_types": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "worked-example",
+              "explanation",
+              "error-analysis",
+              "application",
+              "retrieval",
+              "performance"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "transfer_requirement": {
+          "enum": [
+            "none",
+            "retrieval",
+            "novel-context"
+          ]
+        }
+      },
+      "required": [
+        "policy_ref",
+        "minimum_occasions",
+        "minimum_distinct_dates",
+        "independent_evidence_required",
+        "evidence_types",
+        "transfer_requirement"
+      ],
+      "additionalProperties": false
+    },
+    "tutor_route": {
+      "type": "object",
+      "properties": {
+        "signal": {
+          "enum": [
+            "prerequisite-gap",
+            "procedure-without-understanding",
+            "correct-low-confidence",
+            "repeated-error-pattern",
+            "mastery-evidence"
+          ]
+        },
+        "strategy": {
+          "enum": [
+            "prerequisite-reteach",
+            "conceptual-explanation",
+            "confidence-calibration",
+            "error-pattern-contrast",
+            "mastery-evidence-collection"
+          ]
+        },
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "representation": {
+              "enum": [
+                "text",
+                "visual",
+                "concrete",
+                "worked-example"
+              ]
+            },
+            "retry_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "review_timing": {
+              "enum": [
+                "same-session",
+                "same-day",
+                "next-session"
+              ]
+            },
+            "require_explanation": {
+              "type": "boolean"
+            },
+            "evidence_type": {
+              "enum": [
+                "worked-example",
+                "explanation",
+                "error-analysis",
+                "application",
+                "retrieval",
+                "performance"
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "signal",
+        "strategy",
+        "parameters"
+      ],
+      "additionalProperties": false
+    },
+    "accessibility": {
+      "type": "object",
+      "properties": {
+        "policy_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "text_fallback": {
+          "const": "required"
+        },
+        "keyboard": {
+          "enum": [
+            "required",
+            "not-applicable"
+          ]
+        },
+        "caption_or_transcript": {
+          "enum": [
+            "required-when-media",
+            "not-applicable"
+          ]
+        },
+        "alt_or_long_description": {
+          "enum": [
+            "required-when-visual",
+            "not-applicable"
+          ]
+        },
+        "reduced_motion": {
+          "enum": [
+            "available",
+            "not-applicable"
+          ]
+        },
+        "high_contrast": {
+          "enum": [
+            "available",
+            "not-applicable"
+          ]
+        },
+        "extended_time": {
+          "type": "boolean"
+        },
+        "timer_accommodation": {
+          "enum": [
+            "hidden",
+            "extended",
+            "untimed",
+            "not-applicable"
+          ]
+        },
+        "movement_break": {
+          "type": "boolean"
+        },
+        "response_modes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "typed",
+              "handwritten",
+              "spoken",
+              "drawn",
+              "manipulative",
+              "demonstrated"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "policy_ref",
+        "text_fallback",
+        "keyboard",
+        "caption_or_transcript",
+        "alt_or_long_description",
+        "reduced_motion",
+        "high_contrast",
+        "extended_time",
+        "timer_accommodation",
+        "movement_break",
+        "response_modes"
+      ],
+      "additionalProperties": false
+    },
+    "safety_privacy": {
+      "type": "object",
+      "properties": {
+        "policy_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "hazards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "enum": [
+                  "physical",
+                  "chemical",
+                  "online",
+                  "financial",
+                  "privacy",
+                  "emotional"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "mitigation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              }
+            },
+            "required": [
+              "kind",
+              "description",
+              "mitigation"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "sensitivity": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "maxItems": 20,
+          "uniqueItems": true
+        },
+        "supervision": {
+          "enum": [
+            "none",
+            "nearby-adult",
+            "direct-adult"
+          ]
+        },
+        "guardian_visibility": {
+          "enum": [
+            "summary",
+            "confirmation-required",
+            "direct-observation"
+          ]
+        },
+        "stop_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "privacy_declarations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "academic_integrity_mode": {
+          "enum": [
+            "practice-support",
+            "independent-graded",
+            "collaborative"
+          ]
+        }
+      },
+      "required": [
+        "policy_ref",
+        "hazards",
+        "sensitivity",
+        "supervision",
+        "guardian_visibility",
+        "stop_conditions",
+        "privacy_declarations",
+        "academic_integrity_mode"
+      ],
+      "additionalProperties": false
+    },
+    "media_resource": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "resource_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "kind": {
+          "enum": [
+            "text",
+            "image",
+            "audio",
+            "video",
+            "interactive",
+            "document",
+            "physical"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "rights": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "text_fallback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "caption_or_transcript": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "alt_text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "long_description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "resource_id",
+        "kind",
+        "title",
+        "locator",
+        "rights",
+        "required",
+        "text_fallback"
+      ],
+      "additionalProperties": false
+    },
+    "policy_set": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "policy_set_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "mastery_floor": {
+          "type": "object",
+          "properties": {
+            "policy_ref": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 128,
+              "pattern": "^[a-z0-9][a-z0-9:-]*$"
+            },
+            "minimum_occasions": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            },
+            "minimum_distinct_dates": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            },
+            "independent_evidence_required": {
+              "type": "boolean"
+            },
+            "evidence_types": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "worked-example",
+                  "explanation",
+                  "error-analysis",
+                  "application",
+                  "retrieval",
+                  "performance"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "transfer_requirement": {
+              "enum": [
+                "none",
+                "retrieval",
+                "novel-context"
+              ]
+            }
+          },
+          "required": [
+            "policy_ref",
+            "minimum_occasions",
+            "minimum_distinct_dates",
+            "independent_evidence_required",
+            "evidence_types",
+            "transfer_requirement"
+          ],
+          "additionalProperties": false
+        },
+        "tutor_authority": {
+          "type": "object",
+          "properties": {
+            "reveals_answers": {
+              "const": false
+            },
+            "gives_final_graded_answer": {
+              "const": false
+            },
+            "controls_graded_work_policy": {
+              "const": false
+            }
+          },
+          "required": [
+            "reveals_answers",
+            "gives_final_graded_answer",
+            "controls_graded_work_policy"
+          ],
+          "additionalProperties": false
+        },
+        "safety_privacy": {
+          "type": "object",
+          "properties": {
+            "non_disableable_prohibitions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "required_privacy_declarations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "non_disableable_prohibitions",
+            "required_privacy_declarations"
+          ],
+          "additionalProperties": false
+        },
+        "extension_namespaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9.-]+\\/[a-z][a-z0-9.-]+$"
+              },
+              "value_schema_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "allowed_projection": {
+                "enum": [
+                  "student-safe",
+                  "protected"
+                ]
+              }
+            },
+            "required": [
+              "namespace",
+              "value_schema_ref",
+              "allowed_projection"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "policy_set_id",
+        "title",
+        "mastery_floor",
+        "tutor_authority",
+        "safety_privacy",
+        "extension_namespaces"
+      ],
+      "additionalProperties": false
+    },
+    "student_lesson_projection": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "lesson_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "course_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "unit_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "grade": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "subject": {
+          "enum": [
+            "mathematics",
+            "english-language-arts",
+            "science",
+            "social-studies",
+            "health",
+            "physical-education",
+            "ready-for-life",
+            "technology",
+            "arts-and-music",
+            "financial-literacy"
+          ]
+        },
+        "course_day": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 366
+        },
+        "day_in_unit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 366
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "phase": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "focus": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "estimated_duration": {
+          "type": "object",
+          "properties": {
+            "minimum_minutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 480
+            },
+            "maximum_minutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 480
+            }
+          },
+          "required": [
+            "minimum_minutes",
+            "maximum_minutes"
+          ],
+          "additionalProperties": false
+        },
+        "standards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "framework_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "standard_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "legacy_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "mapping_status": {
+                "enum": [
+                  "canonical",
+                  "unverified",
+                  "human-review"
+                ]
+              }
+            },
+            "required": [
+              "framework_ref",
+              "mapping_status"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "essential_question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "learning_objectives": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "success_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "materials": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "maxItems": 100
+        },
+        "lesson_flow": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "segment_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "duration": {
+                "type": "object",
+                "properties": {
+                  "minimum_minutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 480
+                  },
+                  "maximum_minutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 480
+                  }
+                },
+                "required": [
+                  "minimum_minutes",
+                  "maximum_minutes"
+                ],
+                "additionalProperties": false
+              },
+              "teacher_or_tutor_action": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 12000
+              }
+            },
+            "required": [
+              "segment_id",
+              "title",
+              "duration",
+              "teacher_or_tutor_action"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "student_activity": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "formative_check": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "extension_activity": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "accessibility": {
+          "type": "object",
+          "properties": {
+            "policy_ref": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 128,
+              "pattern": "^[a-z0-9][a-z0-9:-]*$"
+            },
+            "text_fallback": {
+              "const": "required"
+            },
+            "keyboard": {
+              "enum": [
+                "required",
+                "not-applicable"
+              ]
+            },
+            "caption_or_transcript": {
+              "enum": [
+                "required-when-media",
+                "not-applicable"
+              ]
+            },
+            "alt_or_long_description": {
+              "enum": [
+                "required-when-visual",
+                "not-applicable"
+              ]
+            },
+            "reduced_motion": {
+              "enum": [
+                "available",
+                "not-applicable"
+              ]
+            },
+            "high_contrast": {
+              "enum": [
+                "available",
+                "not-applicable"
+              ]
+            },
+            "extended_time": {
+              "type": "boolean"
+            },
+            "timer_accommodation": {
+              "enum": [
+                "hidden",
+                "extended",
+                "untimed",
+                "not-applicable"
+              ]
+            },
+            "movement_break": {
+              "type": "boolean"
+            },
+            "response_modes": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "typed",
+                  "handwritten",
+                  "spoken",
+                  "drawn",
+                  "manipulative",
+                  "demonstrated"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "policy_ref",
+            "text_fallback",
+            "keyboard",
+            "caption_or_transcript",
+            "alt_or_long_description",
+            "reduced_motion",
+            "high_contrast",
+            "extended_time",
+            "timer_accommodation",
+            "movement_break",
+            "response_modes"
+          ],
+          "additionalProperties": false
+        },
+        "resource_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9][a-z0-9:-]*$"
+          },
+          "uniqueItems": true
+        },
+        "home_connection": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9.-]+\\/[a-z][a-z0-9.-]+$"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9_.-]*$"
+              },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string"
+                      },
+                      "value": {
+                        "type": "string",
+                        "maxLength": 2000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "number"
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": -1000000,
+                        "maximum": 1000000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "boolean"
+                      },
+                      "value": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string-list"
+                      },
+                      "value": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 240
+                        },
+                        "maxItems": 100
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "namespace",
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "lesson_id",
+        "course_ref",
+        "unit_ref",
+        "grade",
+        "subject",
+        "course_day",
+        "day_in_unit",
+        "title",
+        "phase",
+        "focus",
+        "estimated_duration",
+        "standards",
+        "essential_question",
+        "learning_objectives",
+        "success_criteria",
+        "materials",
+        "lesson_flow",
+        "student_activity",
+        "formative_check",
+        "accessibility",
+        "resource_refs",
+        "extensions"
+      ],
+      "additionalProperties": false
+    },
+    "protected_lesson_projection": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "lesson_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "scoring_guidance": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "mastery": {
+          "type": "object",
+          "properties": {
+            "policy_ref": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 128,
+              "pattern": "^[a-z0-9][a-z0-9:-]*$"
+            },
+            "minimum_occasions": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            },
+            "minimum_distinct_dates": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            },
+            "independent_evidence_required": {
+              "type": "boolean"
+            },
+            "evidence_types": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "worked-example",
+                  "explanation",
+                  "error-analysis",
+                  "application",
+                  "retrieval",
+                  "performance"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "transfer_requirement": {
+              "enum": [
+                "none",
+                "retrieval",
+                "novel-context"
+              ]
+            }
+          },
+          "required": [
+            "policy_ref",
+            "minimum_occasions",
+            "minimum_distinct_dates",
+            "independent_evidence_required",
+            "evidence_types",
+            "transfer_requirement"
+          ],
+          "additionalProperties": false
+        },
+        "tutor_routes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "signal": {
+                "enum": [
+                  "prerequisite-gap",
+                  "procedure-without-understanding",
+                  "correct-low-confidence",
+                  "repeated-error-pattern",
+                  "mastery-evidence"
+                ]
+              },
+              "strategy": {
+                "enum": [
+                  "prerequisite-reteach",
+                  "conceptual-explanation",
+                  "confidence-calibration",
+                  "error-pattern-contrast",
+                  "mastery-evidence-collection"
+                ]
+              },
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "representation": {
+                    "enum": [
+                      "text",
+                      "visual",
+                      "concrete",
+                      "worked-example"
+                    ]
+                  },
+                  "retry_count": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3
+                  },
+                  "review_timing": {
+                    "enum": [
+                      "same-session",
+                      "same-day",
+                      "next-session"
+                    ]
+                  },
+                  "require_explanation": {
+                    "type": "boolean"
+                  },
+                  "evidence_type": {
+                    "enum": [
+                      "worked-example",
+                      "explanation",
+                      "error-analysis",
+                      "application",
+                      "retrieval",
+                      "performance"
+                    ]
+                  }
+                },
+                "required": [],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "signal",
+              "strategy",
+              "parameters"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        },
+        "safety_privacy": {
+          "type": "object",
+          "properties": {
+            "policy_ref": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 128,
+              "pattern": "^[a-z0-9][a-z0-9:-]*$"
+            },
+            "hazards": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "physical",
+                      "chemical",
+                      "online",
+                      "financial",
+                      "privacy",
+                      "emotional"
+                    ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  },
+                  "mitigation": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 240
+                  }
+                },
+                "required": [
+                  "kind",
+                  "description",
+                  "mitigation"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 20
+            },
+            "sensitivity": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "maxItems": 20,
+              "uniqueItems": true
+            },
+            "supervision": {
+              "enum": [
+                "none",
+                "nearby-adult",
+                "direct-adult"
+              ]
+            },
+            "guardian_visibility": {
+              "enum": [
+                "summary",
+                "confirmation-required",
+                "direct-observation"
+              ]
+            },
+            "stop_conditions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "minItems": 1,
+              "maxItems": 20
+            },
+            "privacy_declarations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "minItems": 1,
+              "maxItems": 20
+            },
+            "academic_integrity_mode": {
+              "enum": [
+                "practice-support",
+                "independent-graded",
+                "collaborative"
+              ]
+            }
+          },
+          "required": [
+            "policy_ref",
+            "hazards",
+            "sensitivity",
+            "supervision",
+            "guardian_visibility",
+            "stop_conditions",
+            "privacy_declarations",
+            "academic_integrity_mode"
+          ],
+          "additionalProperties": false
+        },
+        "guardian_visibility_note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9.-]+\\/[a-z][a-z0-9.-]+$"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9_.-]*$"
+              },
+              "schema_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "projection": {
+                "enum": [
+                  "student-safe",
+                  "protected"
+                ]
+              },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string"
+                      },
+                      "value": {
+                        "type": "string",
+                        "maxLength": 2000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "number"
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": -1000000,
+                        "maximum": 1000000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "boolean"
+                      },
+                      "value": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string-list"
+                      },
+                      "value": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 240
+                        },
+                        "maxItems": 100
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "namespace",
+              "key",
+              "schema_ref",
+              "projection",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "lesson_id",
+        "scoring_guidance",
+        "mastery",
+        "tutor_routes",
+        "safety_privacy",
+        "guardian_visibility_note",
+        "extensions"
+      ],
+      "additionalProperties": false
+    },
+    "student_assessment_projection": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "assessment_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "course_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "unit_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "standards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "framework_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "standard_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "legacy_label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "mapping_status": {
+                "enum": [
+                  "canonical",
+                  "unverified",
+                  "human-review"
+                ]
+              }
+            },
+            "required": [
+              "framework_ref",
+              "mapping_status"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "total_points": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "prompts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prompt_id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "type": {
+                "enum": [
+                  "concept-vocabulary",
+                  "representation-source",
+                  "application",
+                  "error-claim-analysis",
+                  "connection",
+                  "performance-evidence",
+                  "reflection-transfer",
+                  "other"
+                ]
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 12000
+              },
+              "points": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1000
+              },
+              "resource_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 128,
+                  "pattern": "^[a-z0-9][a-z0-9:-]*$"
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "prompt_id",
+              "type",
+              "prompt",
+              "points",
+              "resource_refs"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 500
+        },
+        "rubric_dimensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "minItems": 1,
+          "maxItems": 50
+        },
+        "accommodation_note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9.-]+\\/[a-z][a-z0-9.-]+$"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9_.-]*$"
+              },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string"
+                      },
+                      "value": {
+                        "type": "string",
+                        "maxLength": 2000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "number"
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": -1000000,
+                        "maximum": 1000000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "boolean"
+                      },
+                      "value": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string-list"
+                      },
+                      "value": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 240
+                        },
+                        "maxItems": 100
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "namespace",
+              "key",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "assessment_id",
+        "course_ref",
+        "unit_ref",
+        "title",
+        "standards",
+        "total_points",
+        "prompts",
+        "rubric_dimensions",
+        "accommodation_note",
+        "extensions"
+      ],
+      "additionalProperties": false
+    },
+    "protected_assessment_projection": {
+      "type": "object",
+      "properties": {
+        "schema_set_version": {
+          "const": "2.0.0"
+        },
+        "interpretation_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "assessment_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9:-]*$"
+        },
+        "secure_minimum_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "developing_minimum_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "not_yet_maximum_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "mastery_rule": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "prompt_scoring": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prompt_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "scoring_guidance": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 12000
+              }
+            },
+            "required": [
+              "prompt_ref",
+              "scoring_guidance"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9.-]+\\/[a-z][a-z0-9.-]+$"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[a-z][a-z0-9_.-]*$"
+              },
+              "schema_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "pattern": "^[a-z0-9][a-z0-9:-]*$"
+              },
+              "projection": {
+                "enum": [
+                  "student-safe",
+                  "protected"
+                ]
+              },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string"
+                      },
+                      "value": {
+                        "type": "string",
+                        "maxLength": 2000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "number"
+                      },
+                      "value": {
+                        "type": "number",
+                        "minimum": -1000000,
+                        "maximum": 1000000
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "boolean"
+                      },
+                      "value": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "string-list"
+                      },
+                      "value": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 240
+                        },
+                        "maxItems": 100
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "namespace",
+              "key",
+              "schema_ref",
+              "projection",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_set_version",
+        "interpretation_id",
+        "assessment_ref",
+        "secure_minimum_percent",
+        "developing_minimum_percent",
+        "not_yet_maximum_percent",
+        "mastery_rule",
+        "prompt_scoring"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
