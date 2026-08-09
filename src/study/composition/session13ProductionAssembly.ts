@@ -30,7 +30,16 @@ const IMPLEMENTATION_IDS = Object.freeze(Object.fromEntries(
   ]),
 ) as unknown as Readonly<Record<Session13DurableAcademicDependency, string>>)
 
-/** The one concrete Session 13 adapter-to-production-registry assembly path. */
+/**
+ * The one concrete Session 13 adapter-to-production-registry assembly path.
+ *
+ * ZERO CALLERS (STUDY-A1-PROD-DEAD-PRODUCER-RETIREMENT-C). It produces branded
+ * production registry ports over `contracts/persistence`, which is a different
+ * contract from the host `StudyPortBundle` in src/study/ports.ts despite the two
+ * sharing slot and type names. Giving it a caller — in particular making it the
+ * browser's port bundle — is an explicit review, not a refactor:
+ * src/study/production/deadProducerBoundary.test.ts fails on both.
+ */
 export function createSession13ProductionAssembly(input: Session13ProductionAssemblyInput) {
   const adapters = Object.freeze({
     studySession: new SupabaseStudyPersistenceAdapter(input.authenticatedClient),
