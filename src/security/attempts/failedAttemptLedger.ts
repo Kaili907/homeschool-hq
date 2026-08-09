@@ -3,7 +3,6 @@ import {
   isPlainRecord,
   parseCanonicalTimestamp,
   requireSafeTimestamp,
-  safeRemove,
   type SecurityClock,
   type SecurityStorage,
   systemSecurityClock,
@@ -12,6 +11,7 @@ import {
 export const FAILED_ATTEMPT_LEDGER_SCHEMA_VERSION = 2 as const
 // Retain the original key so schema-v1 history fails closed in place instead of disappearing.
 export const FAILED_ATTEMPT_STORAGE_PREFIX = 'manuel-academy.security.failed-attempt.v1:'
+export const FAILED_ATTEMPT_LOCK_PREFIX = 'manuel-academy.security.failed-attempt.v1:lock:'
 
 const SECOND_MS = 1_000
 const MINUTE_MS = 60 * SECOND_MS
@@ -58,6 +58,15 @@ export type FailedAttemptStatus =
 export interface FailedAttemptLedgerOptions {
   readonly storage: SecurityStorage
   readonly clock?: SecurityClock
+  readonly lockManager?: AttemptLockManager
+}
+
+export interface AttemptLockManager {
+  request<T>(
+    name: string,
+    options: { readonly mode: 'exclusive' },
+    callback: () => T | Promise<T>,
+  ): Promise<T>
 }
 
 const RECORD_KEYS = Object.freeze([
@@ -69,10 +78,32 @@ const RECORD_KEYS = Object.freeze([
   'lockedUntil',
 ] as const)
 
-function subjectStorageKey(subject: FailedAttemptSubject): string {
+function subjectIdentity(subject: FailedAttemptSubject): { readonly id: string; readonly scope: 'profile' | 'household' } {
   const id = subject.kind === 'learner' ? subject.profileId : subject.householdId
-  if (!id || id.trim() !== id) throw new Error('Attempt subject ID is required.')
+  if (
+    !id ||
+    id.trim() !== id ||
+    id.length > 512 ||
+    /[\u0000-\u001f\u007f]/.test(id)
+  ) throw new Error('Attempt subject ID is invalid.')
+  return { id, scope: subject.kind === 'learner' ? 'profile' : 'household' }
+}
+
+function encodedSubject(subject: FailedAttemptSubject): string {
+  const { id, scope } = subjectIdentity(subject)
+  const encoded = encodeURIComponent(id)
+  return `pin:${subject.kind}:${scope}:${encoded.length}:${encoded}`
+}
+
+function subjectStorageKey(subject: FailedAttemptSubject): string {
+  const { id } = subjectIdentity(subject)
+  // Preserve the accepted durable key so existing attempt history remains in
+  // force; only the coordination lock uses the stronger structured identity.
   return `${FAILED_ATTEMPT_STORAGE_PREFIX}${subject.kind}:${encodeURIComponent(id)}`
+}
+
+export function failedAttemptLockName(subject: FailedAttemptSubject): string {
+  return `${FAILED_ATTEMPT_LOCK_PREFIX}${encodedSubject(subject)}`
 }
 
 function parseNullableTimestamp(value: unknown): number | null | undefined {
@@ -103,62 +134,91 @@ function cooldownForAttempt(attempt: number): number {
   return FAILED_ATTEMPT_POLICY.cooldownMsByAttempt[attempt] ?? 0
 }
 
-/** Durable non-secret counters; this is friction, not a server security boundary. */
+/**
+ * Durable non-secret counters; this is friction, not a server security boundary.
+ * Every operation requires subject-scoped Web-Lock-style coordination and
+ * rejects when no coordinator is supplied; there is no unlocked fallback.
+ */
 export class FailedAttemptLedger {
   readonly #storage: SecurityStorage
   readonly #clock: SecurityClock
+  readonly #lockManager?: AttemptLockManager
 
   constructor(options: FailedAttemptLedgerOptions) {
     this.#storage = options.storage
     this.#clock = options.clock ?? systemSecurityClock
+    this.#lockManager = options.lockManager
   }
 
-  status(subject: FailedAttemptSubject): FailedAttemptStatus {
-    const now = requireSafeTimestamp(this.#clock)
-    return this.#statusAt(subject, now)
-  }
-
-  recordFailure(subject: FailedAttemptSubject): FailedAttemptStatus {
-    const now = requireSafeTimestamp(this.#clock)
-    const current = this.#statusAt(subject, now)
-    if (current.status !== 'ready') return current
-    const failedAttempts = current.failedAttempts + 1
-    const lockMs = subject.kind === 'learner'
-      ? FAILED_ATTEMPT_POLICY.temporaryLockMs.learner
-      : FAILED_ATTEMPT_POLICY.temporaryLockMs.parent
-    const lockedUntil = failedAttempts >= FAILED_ATTEMPT_POLICY.temporaryLockAtAttempt
-      ? new Date(now + lockMs).toISOString()
-      : null
-    const cooldownMs = cooldownForAttempt(failedAttempts)
-    const retryAt = lockedUntil === null && cooldownMs > 0
-      ? new Date(now + cooldownMs).toISOString()
-      : null
-    const observedAt = new Date(now).toISOString()
-    const record: FailedAttemptRecord = Object.freeze({
-      schemaVersion: FAILED_ATTEMPT_LEDGER_SCHEMA_VERSION,
-      failedAttempts,
-      lastFailureAt: observedAt,
-      maxObservedAt: observedAt,
-      retryAt,
-      lockedUntil,
+  async status(subject: FailedAttemptSubject): Promise<FailedAttemptStatus> {
+    return this.#withSubjectLock(subject, () => {
+      const now = requireSafeTimestamp(this.#clock)
+      return this.#statusAt(subject, now)
     })
-    this.#storage.setItem(subjectStorageKey(subject), JSON.stringify(record))
-    if (lockedUntil) {
-      return Object.freeze({
-        status: 'temporarily-locked',
-        failedAttempts,
-        lockedUntil,
-        remainingMs: lockMs,
-      })
-    }
-    if (retryAt) {
-      return Object.freeze({ status: 'cooldown', failedAttempts, retryAt, remainingMs: cooldownMs })
-    }
-    return Object.freeze({ status: 'ready', failedAttempts })
   }
 
-  recordSuccess(subject: FailedAttemptSubject): void {
-    safeRemove(this.#storage, subjectStorageKey(subject))
+  async recordFailure(subject: FailedAttemptSubject): Promise<FailedAttemptStatus> {
+    return this.#withSubjectLock(subject, () => {
+      const now = requireSafeTimestamp(this.#clock)
+      const current = this.#statusAt(subject, now)
+      if (current.status === 'ledger-invalid') return current
+      if (current.failedAttempts === Number.MAX_SAFE_INTEGER) {
+        return Object.freeze({ status: 'ledger-invalid', failedAttempts: current.failedAttempts })
+      }
+      // A failure represents an authentication operation that already ran. It
+      // must be counted even if another tab established a cooldown while this
+      // operation was in flight.
+      const failedAttempts = current.failedAttempts + 1
+      const lockMs = subject.kind === 'learner'
+        ? FAILED_ATTEMPT_POLICY.temporaryLockMs.learner
+        : FAILED_ATTEMPT_POLICY.temporaryLockMs.parent
+      const lockedUntil = failedAttempts >= FAILED_ATTEMPT_POLICY.temporaryLockAtAttempt
+        ? new Date(now + lockMs).toISOString()
+        : null
+      const cooldownMs = cooldownForAttempt(failedAttempts)
+      const retryAt = lockedUntil === null && cooldownMs > 0
+        ? new Date(now + cooldownMs).toISOString()
+        : null
+      const observedAt = new Date(now).toISOString()
+      const record: FailedAttemptRecord = Object.freeze({
+        schemaVersion: FAILED_ATTEMPT_LEDGER_SCHEMA_VERSION,
+        failedAttempts,
+        lastFailureAt: observedAt,
+        maxObservedAt: observedAt,
+        retryAt,
+        lockedUntil,
+      })
+      if (!this.#writeVerified(subjectStorageKey(subject), record)) {
+        return Object.freeze({ status: 'ledger-invalid', failedAttempts })
+      }
+      if (lockedUntil) {
+        return Object.freeze({
+          status: 'temporarily-locked',
+          failedAttempts,
+          lockedUntil,
+          remainingMs: lockMs,
+        })
+      }
+      if (retryAt) {
+        return Object.freeze({ status: 'cooldown', failedAttempts, retryAt, remainingMs: cooldownMs })
+      }
+      return Object.freeze({ status: 'ready', failedAttempts })
+    })
+  }
+
+  async recordSuccess(subject: FailedAttemptSubject): Promise<void> {
+    return this.#withSubjectLock(subject, () => {
+      const now = requireSafeTimestamp(this.#clock)
+      const current = this.#statusAt(subject, now)
+      if (current.status === 'ledger-invalid') throw new Error('Failed-attempt ledger is invalid.')
+      const key = subjectStorageKey(subject)
+      try {
+        this.#storage.removeItem(key)
+        if (this.#storage.getItem(key) !== null) throw new Error('Failed-attempt reset could not be verified.')
+      } catch {
+        throw new Error('Failed-attempt reset could not be verified.')
+      }
+    })
   }
 
   #statusAt(subject: FailedAttemptSubject, now: number): FailedAttemptStatus {
@@ -179,12 +239,11 @@ export class FailedAttemptLedger {
     }
     if (now > maxObservedAt) {
       try {
-        const observedRecord = JSON.stringify({
+        const observedRecord = {
           ...record,
           maxObservedAt: new Date(now).toISOString(),
-        } satisfies FailedAttemptRecord)
-        this.#storage.setItem(key, observedRecord)
-        if (this.#storage.getItem(key) !== observedRecord) {
+        } satisfies FailedAttemptRecord
+        if (!this.#writeVerified(key, observedRecord)) {
           return Object.freeze({ status: 'ledger-invalid', failedAttempts: record.failedAttempts })
         }
       } catch {
@@ -216,8 +275,27 @@ export class FailedAttemptLedger {
     }
     return Object.freeze({ status: 'ready', failedAttempts: record.failedAttempts })
   }
+
+  #writeVerified(key: string, record: FailedAttemptRecord): boolean {
+    try {
+      const serialized = JSON.stringify(record)
+      this.#storage.setItem(key, serialized)
+      return this.#storage.getItem(key) === serialized
+    } catch {
+      return false
+    }
+  }
+
+  #withSubjectLock<T>(subject: FailedAttemptSubject, operation: () => T | Promise<T>): Promise<T> {
+    const lockName = failedAttemptLockName(subject)
+    if (!this.#lockManager) {
+      return Promise.reject(new Error('Failed-attempt coordination is unavailable.'))
+    }
+    return this.#lockManager.request(lockName, { mode: 'exclusive' }, operation)
+  }
 }
 
+/** Requires Web Locks; unsupported browsers fail closed instead of racing localStorage. */
 export function createBrowserFailedAttemptLedger(): FailedAttemptLedger {
   if (typeof window === 'undefined') throw new Error('Browser attempt storage is unavailable.')
   let storage: Storage
@@ -226,5 +304,7 @@ export function createBrowserFailedAttemptLedger(): FailedAttemptLedger {
   } catch {
     throw new Error('Browser attempt storage is unavailable.')
   }
-  return new FailedAttemptLedger({ storage })
+  const lockManager = (navigator as Navigator & { locks?: AttemptLockManager }).locks
+  if (!lockManager) throw new Error('Browser failed-attempt coordination is unavailable.')
+  return new FailedAttemptLedger({ storage, lockManager })
 }

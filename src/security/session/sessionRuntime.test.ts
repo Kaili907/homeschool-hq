@@ -291,7 +291,7 @@ describe('meaningful activity accounting', () => {
     activity.stop()
   })
 
-  it('counts a trusted scroll only after actual displacement', () => {
+  it('ignores programmatic displacement even when the scroll event is trusted', () => {
     const runtime = setupLearner({ writeThrottleMs: 0 })
     runtime.session.create('learner-a')
     const documentEvents = new EventTarget()
@@ -320,21 +320,100 @@ describe('meaningful activity accounting', () => {
     scroll(true)
     expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:00.000Z')
     position = { x: 0, y: 20 }
+    scroll(true)
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:00.000Z')
+
+    position = { x: 0, y: 40 }
     scroll(false)
     expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:00.000Z')
-    scroll(true)
-    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+
     visibility = 'hidden'
-    position = { x: 0, y: 40 }
+    position = { x: 0, y: 60 }
     scroll(true)
     visibility = 'visible'
     documentEvents.dispatchEvent(new Event('visibilitychange'))
     runtime.advance(1_000)
+    position = { x: 0, y: 80 }
     scroll(true)
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:00.000Z')
+    activity.stop()
+  })
+
+  it('accepts one displaced scroll per trusted wheel intent and ignores momentum', () => {
+    const runtime = setupLearner({ writeThrottleMs: 0 })
+    runtime.session.create('learner-a')
+    const documentEvents = new EventTarget()
+    const trustedEvents = new WeakSet<Event>()
+    let position = { x: 0, y: 0 }
+    const dispatchTrusted = (type: string) => {
+      const event = new Event(type)
+      trustedEvents.add(event)
+      documentEvents.dispatchEvent(event)
+    }
+    const activity = new LearnerActivityController({
+      session: runtime.session,
+      documentEvents,
+      pageEvents: new EventTarget(),
+      visibility: () => 'visible',
+      clock: runtime.now,
+      scheduler: { setInterval: () => 1, clearInterval: () => undefined },
+      isTrustedActivity: (event) => trustedEvents.has(event),
+      scrollPosition: () => position,
+      scrollThrottleMs: 0,
+    })
+    activity.start()
+
+    runtime.advance(1_000)
+    dispatchTrusted('wheel')
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:00.000Z')
+    position = { x: 0, y: 20 }
+    documentEvents.dispatchEvent(new Event('scroll'))
     expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+
+    runtime.advance(500)
+    position = { x: 0, y: 40 }
+    documentEvents.dispatchEvent(new Event('scroll'))
+    runtime.advance(500)
     position = { x: 0, y: 60 }
-    scroll(true)
-    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:02.000Z')
+    documentEvents.dispatchEvent(new Event('scroll'))
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+
+    dispatchTrusted('wheel')
+    runtime.advance(1_001)
+    position = { x: 0, y: 80 }
+    documentEvents.dispatchEvent(new Event('scroll'))
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+    activity.stop()
+  })
+
+  it('counts a trusted keydown once without a duplicate scroll update', () => {
+    const runtime = setupLearner({ writeThrottleMs: 0 })
+    runtime.session.create('learner-a')
+    const documentEvents = new EventTarget()
+    const trustedEvents = new WeakSet<Event>()
+    let position = { x: 0, y: 0 }
+    const activity = new LearnerActivityController({
+      session: runtime.session,
+      documentEvents,
+      pageEvents: new EventTarget(),
+      visibility: () => 'visible',
+      clock: runtime.now,
+      scheduler: { setInterval: () => 1, clearInterval: () => undefined },
+      isTrustedActivity: (event) => trustedEvents.has(event),
+      scrollPosition: () => position,
+      scrollThrottleMs: 0,
+    })
+    activity.start()
+
+    runtime.advance(1_000)
+    const keydown = new Event('keydown')
+    trustedEvents.add(keydown)
+    documentEvents.dispatchEvent(keydown)
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+    runtime.advance(500)
+    position = { x: 0, y: 20 }
+    documentEvents.dispatchEvent(new Event('scroll'))
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
     activity.stop()
   })
 })
