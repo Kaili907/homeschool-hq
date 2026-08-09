@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import { ADMIN_ENGINE_IDS, type AdminEngineId, type AdminOperationalEvent, type AdminOperationalResult } from './contracts'
-import { SYSTEM_HEALTH_THRESHOLDS, buildSystemHealthProjection } from './systemHealth'
+import {
+  SYSTEM_HEALTH_THRESHOLDS,
+  buildSystemHealthProjection,
+  buildSystemHealthProjectionFromAggregates,
+  type SystemHealthAggregateEvidence,
+  type SystemHealthAggregateSummary,
+  type SystemHealthEngineAggregateSummary,
+  type SystemHealthWindowAggregate,
+} from './systemHealth'
 
 const NOW = new Date('2026-08-08T12:00:00.000Z')
 
@@ -40,6 +48,57 @@ function event(
 
 function results(engine: AdminEngineId, values: readonly AdminOperationalResult[]): AdminOperationalEvent[] {
   return values.map((result, index) => event(engine, result, index + 1))
+}
+
+function aggregateSummary(
+  overrides: Partial<SystemHealthAggregateSummary> = {},
+): SystemHealthAggregateSummary {
+  return {
+    eventCount: 0,
+    successCount: 0,
+    fallbackCount: 0,
+    rejectedCount: 0,
+    timeoutCount: 0,
+    providerErrorCount: 0,
+    validationErrorCount: 0,
+    safetyStopCount: 0,
+    durationCount: 0,
+    durationP50Ms: null,
+    durationP95Ms: null,
+    firstOccurredAt: null,
+    lastOccurredAt: null,
+    ...overrides,
+  }
+}
+
+function aggregateEngine(
+  engineId: AdminEngineId,
+  overrides: Partial<SystemHealthEngineAggregateSummary> = {},
+): SystemHealthEngineAggregateSummary {
+  return {
+    ...aggregateSummary(),
+    engineId,
+    appVersion: 'deploy.2026.08.08',
+    engineVersion: `${engineId}.v2`,
+    curriculumVersion: engineId === 'curriculum' ? 'curriculum.1.0.0' : null,
+    ...overrides,
+  }
+}
+
+function aggregateWindow(
+  engines: readonly SystemHealthEngineAggregateSummary[] = [],
+  summary: SystemHealthAggregateSummary = aggregateSummary(),
+  incidentGroups: SystemHealthWindowAggregate['incidentGroups'] = [],
+): SystemHealthWindowAggregate {
+  return { summary, engines, services: [], incidentGroups }
+}
+
+function aggregateEvidence(
+  evaluation: SystemHealthWindowAggregate,
+  history: SystemHealthWindowAggregate = evaluation,
+  previous: SystemHealthWindowAggregate = aggregateWindow(),
+): SystemHealthAggregateEvidence {
+  return { evaluation, history, previous }
 }
 
 describe('deterministic System Health aggregation', () => {
@@ -237,5 +296,156 @@ describe('deterministic System Health aggregation', () => {
     expect(projection.generatedAt).toBe(NOW.toISOString())
     expect(projection.observedAt).toBe('2026-08-08T11:55:00.000Z')
     expect(projection.observedAt).not.toBe(projection.generatedAt)
+  })
+
+  it('keeps complete health evidence when every engine exceeds the old 500-row ceiling', () => {
+    const observedAt = '2026-08-08T11:59:50.000Z'
+    const engines = ADMIN_ENGINE_IDS.map((engineId) => aggregateEngine(engineId, {
+      eventCount: 501,
+      successCount: 501,
+      durationCount: 501,
+      durationP50Ms: 100,
+      durationP95Ms: 100,
+      firstOccurredAt: '2026-08-08T11:00:00.000Z',
+      lastOccurredAt: observedAt,
+    }))
+    const total = 501 * ADMIN_ENGINE_IDS.length
+    const window = aggregateWindow(engines, aggregateSummary({
+      eventCount: total,
+      successCount: total,
+      durationCount: total,
+      durationP50Ms: 100,
+      durationP95Ms: 100,
+      firstOccurredAt: '2026-08-08T11:00:00.000Z',
+      lastOccurredAt: observedAt,
+    }))
+    const projection = buildSystemHealthProjectionFromAggregates(
+      aggregateEvidence(window),
+      { now: NOW },
+    )
+    expect(projection.evidenceCompleteness).toBe('complete')
+    expect(projection.overallHealth).toBe('healthy')
+    expect(projection.historyMetrics.eventCount).toBe(total)
+    expect(projection.engines.every((engine) =>
+      engine.health === 'healthy' && engine.eventCount === 501)).toBe(true)
+  })
+
+  it('uses exact aggregate p50/p95 samples and keeps safety stops separate', () => {
+    const observedAt = '2026-08-08T11:59:50.000Z'
+    const tutor = aggregateEngine('tutor', {
+      eventCount: 20,
+      successCount: 19,
+      safetyStopCount: 1,
+      durationCount: 20,
+      durationP50Ms: 11,
+      durationP95Ms: 19,
+      firstOccurredAt: '2026-08-08T11:30:00.000Z',
+      lastOccurredAt: observedAt,
+    })
+    const summary = aggregateSummary({
+      eventCount: 20,
+      successCount: 19,
+      safetyStopCount: 1,
+      durationCount: 20,
+      durationP50Ms: 11,
+      durationP95Ms: 19,
+      firstOccurredAt: '2026-08-08T11:30:00.000Z',
+      lastOccurredAt: observedAt,
+    })
+    const projection = buildSystemHealthProjectionFromAggregates(
+      aggregateEvidence(aggregateWindow([tutor], summary)),
+      { now: NOW },
+    )
+    expect(projection.engines[0]).toMatchObject({
+      health: 'healthy', eligibleEventCount: 19, safetyStopCount: 1,
+      p50LatencyMs: 11, p95LatencyMs: 19,
+    })
+    expect(projection.engines[0].reasonCodes).toContain('safety_policy_working')
+  })
+
+  it('preserves critical unavailable precedence with aggregate evidence', () => {
+    const observedAt = '2026-08-08T11:59:50.000Z'
+    const engines = ADMIN_ENGINE_IDS.map((engineId) => aggregateEngine(engineId, {
+      eventCount: 5,
+      successCount: 5,
+      firstOccurredAt: '2026-08-08T11:30:00.000Z',
+      lastOccurredAt: observedAt,
+    }))
+    engines[7] = aggregateEngine('sync', {
+      eventCount: 5,
+      successCount: 2,
+      timeoutCount: 1,
+      providerErrorCount: 1,
+      validationErrorCount: 1,
+      firstOccurredAt: '2026-08-08T11:30:00.000Z',
+      lastOccurredAt: observedAt,
+    })
+    const projection = buildSystemHealthProjectionFromAggregates(
+      aggregateEvidence(aggregateWindow(engines)),
+      { now: NOW },
+    )
+    expect(projection.engines[7].health).toBe('unavailable')
+    expect(projection.overallHealth).toBe('unavailable')
+  })
+
+  it('keeps aggregate truth separate from bounded incident group samples', () => {
+    const observedAt = '2026-08-08T11:59:50.000Z'
+    const summary = aggregateSummary({
+      eventCount: 501, successCount: 498, providerErrorCount: 3,
+      firstOccurredAt: '2026-08-08T11:00:00.000Z', lastOccurredAt: observedAt,
+    })
+    const tutor = aggregateEngine('tutor', { ...summary })
+    const window = aggregateWindow([tutor], summary, [{
+      engineId: 'tutor', eventType: 'tutor.turn', result: 'provider_error',
+      operation: null, provider: 'anthropic', route: null,
+      eventCount: 3, lastOccurredAt: observedAt,
+    }])
+    const projection = buildSystemHealthProjectionFromAggregates(aggregateEvidence(window), { now: NOW })
+    expect(projection.historyMetrics).toMatchObject({ eventCount: 501, providerErrorCount: 3 })
+    expect(projection.currentFailureCount).toBe(3)
+    expect(projection.incidents).toHaveLength(1)
+    expect(projection.incidents[0]).toMatchObject({ reasonCode: 'provider_failure' })
+  })
+
+  it('preserves degraded, stale, and disabled decisions on the aggregate path', () => {
+    const current = '2026-08-08T11:59:50.000Z'
+    const stale = '2026-08-08T11:40:00.000Z'
+    const tutor = aggregateEngine('tutor', {
+      eventCount: 10, successCount: 8, timeoutCount: 2,
+      firstOccurredAt: '2026-08-08T11:30:00.000Z', lastOccurredAt: current,
+    })
+    const study = aggregateEngine('study', {
+      eventCount: 5, successCount: 5,
+      firstOccurredAt: '2026-08-08T11:30:00.000Z', lastOccurredAt: current,
+    })
+    const assessment = aggregateEngine('assessment', {
+      eventCount: 5, successCount: 5,
+      firstOccurredAt: '2026-08-08T11:20:00.000Z', lastOccurredAt: stale,
+    })
+    const window = aggregateWindow([tutor, study, assessment], aggregateSummary({
+      eventCount: 20, successCount: 18, timeoutCount: 2,
+      firstOccurredAt: '2026-08-08T11:20:00.000Z', lastOccurredAt: current,
+    }))
+    const projection = buildSystemHealthProjectionFromAggregates(
+      aggregateEvidence(window),
+      { now: NOW, disabledEngines: new Set<AdminEngineId>(['study']) },
+    )
+    expect(projection.engines[0]).toMatchObject({
+      health: 'degraded', reasonCodes: expect.arrayContaining(['elevated_timeout_rate']),
+    })
+    expect(projection.engines[1]).toMatchObject({
+      health: 'disabled', reasonCodes: ['feature_disabled'],
+    })
+    expect(projection.engines[2]).toMatchObject({
+      health: 'unknown', freshness: 'stale', reasonCodes: ['stale_evidence'],
+    })
+  })
+
+  it('fails invalid or unavailable aggregate evidence closed to unknown', () => {
+    const projection = buildSystemHealthProjectionFromAggregates(null, { now: NOW })
+    expect(projection.evidenceCompleteness).toBe('invalid_rows_rejected')
+    expect(projection.overallHealth).toBe('unknown')
+    expect(projection.engines.every((engine) => engine.health === 'unknown')).toBe(true)
+    expect(projection.failureTrend).toBe('unknown')
   })
 })
