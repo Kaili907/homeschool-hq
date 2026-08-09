@@ -73,9 +73,47 @@ describe('Admin audit service reader', () => {
     expect(JSON.stringify(result)).not.toMatch(/private-user|private-assignment|SECRET|rawRows|databaseError/)
   })
 
+  it('accepts minimized granular curriculum entity projections', async () => {
+    const entityEvent = {
+      ...EVENT,
+      action: 'curriculum_entity.update',
+      resourceType: 'curriculum_entity',
+      resourceRef: 'draft-1/lesson-1',
+      resourceRevision: '4',
+      previousValue: { entity_ref: 'lesson-1', draft_revision: 3, status: 'active' },
+      newValue: {
+        entity_ref: 'lesson-1',
+        entity_type: 'lesson',
+        draft_revision: 4,
+        position: 2,
+        status: 'active',
+        tombstoned: false,
+        digest: 'a'.repeat(64),
+      },
+      reasonCode: 'curriculum.authored',
+    }
+    const client = clientWith({ schemaVersion: 2, events: [entityEvent], hasMore: false })
+    await expect(createAdminAuditReader({ client }).list({ limit: 50 }))
+      .resolves.toEqual({ events: [entityEvent], hasMore: false })
+  })
+
   it.each([
     { ...EVENT, actorRole: 'student' },
     { ...EVENT, action: 'configuration.*' },
+    {
+      ...EVENT,
+      action: 'curriculum_entity.update',
+      resourceType: 'curriculum_entity',
+      previousValue: null,
+      newValue: { lesson_body: 'private' },
+    },
+    {
+      ...EVENT,
+      action: 'curriculum_draft.collaborator.add',
+      resourceType: 'curriculum_draft',
+      previousValue: null,
+      newValue: { collaborator_ref: 'admin-1', email: 'admin@example.test' },
+    },
     { ...EVENT, newValue: { prompt: 'private' } },
     { ...EVENT, newValue: { value: { nested: 'private' } } },
     { ...EVENT, newValue: { value: 'https://example.test?secret=x' } },

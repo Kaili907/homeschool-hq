@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
+  ADMIN_AUDIT_ACTIONS,
+  ADMIN_AUDIT_RESOURCE_TYPES,
   ADMIN_BILLING_DISPOSITIONS,
   ADMIN_CONTRACT_VERSION,
   ADMIN_COST_KINDS,
@@ -51,6 +53,40 @@ describe('ADMIN-0 shared vocabulary', () => {
       'provider_error',
       'validation_error',
       'safety_stop',
+    ])
+  })
+
+  it('extends audit version 2 with only the immediate granular curriculum vocabulary', () => {
+    expect(ADMIN_CONTRACT_VERSION).toBe(2)
+    expect(ADMIN_AUDIT_ACTIONS).toEqual([
+      'admin_role.assign',
+      'admin_role.revoke',
+      'configuration.update',
+      'engine.control',
+      'safety.triage',
+      'incident.acknowledge',
+      'curriculum_draft.create',
+      'curriculum_draft.update',
+      'curriculum_entity.create',
+      'curriculum_entity.update',
+      'curriculum_entity.tombstone',
+      'curriculum_draft.collaborator.add',
+      'curriculum_draft.collaborator.revoke',
+      'curriculum.approve',
+      'curriculum.publish',
+      'release.activate',
+      'release.rollback',
+    ])
+    expect(ADMIN_AUDIT_RESOURCE_TYPES).toEqual([
+      'admin_role_assignment',
+      'configuration',
+      'engine',
+      'safety_case',
+      'incident',
+      'curriculum_draft',
+      'curriculum_entity',
+      'curriculum_release',
+      'application_release',
     ])
   })
 

@@ -35,10 +35,14 @@ accepts a caller-supplied actor/role as fact.
   audio, assessment answers, protected work, or unrestricted configuration blobs.
 - Reads require `audit:read`. No Admin role has an audit mutation capability.
 
-The initial action and resource vocabularies are frozen in
-`src/admin/contracts.ts`. New actions require a contract revision and an explicit
-old/new-value allowlist.
+The action and resource vocabularies are closed unions in
+`src/admin/contracts.ts`. Additive actions require an explicit reviewed
+action/resource pair and old/new-value allowlist. A version bump is required
+when the stored/wire shape or authorization contract changes, but not for this
+backward-compatible closed-union extension.
 
-The implemented schema, local reason-code boundary, safe-value grammar, service
-read contract, browser privacy projection, and ADMIN-14 handoff are documented in
-[`../admin-audit-foundation.md`](../admin-audit-foundation.md).
+The implemented schema, local reason-code boundary, base safe-value grammar,
+service read contract, browser privacy projection, and ADMIN-14 handoff are
+documented in [`../admin-audit-foundation.md`](../admin-audit-foundation.md).
+The granular ADMIN-16B handoff is documented in
+[`../admin-curriculum-audit-vocabulary.md`](../admin-curriculum-audit-vocabulary.md).

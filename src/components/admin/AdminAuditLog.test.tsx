@@ -112,6 +112,44 @@ describe('production Admin Audit Log experience', () => {
     expect(markup).not.toContain('After</strong>')
   })
 
+  it('safely renders granular curriculum actions and structural facts', () => {
+    const entityEvent = {
+      ...EVENT,
+      action: 'curriculum_entity.tombstone' as const,
+      resourceType: 'curriculum_entity' as const,
+      resourceRef: 'draft-1/lesson-1',
+      resourceRevision: '4',
+      previousValue: {
+        entity_ref: 'lesson-1',
+        entity_type: 'lesson',
+        draft_revision: 3,
+        position: 2,
+        status: 'active',
+        tombstoned: false,
+      },
+      newValue: {
+        entity_ref: 'lesson-1',
+        entity_type: 'lesson',
+        draft_revision: 4,
+        position: 2,
+        status: 'tombstoned',
+        tombstoned: true,
+        digest: 'a'.repeat(64),
+      },
+      reasonCode: 'curriculum.authored',
+    }
+    const markup = render({
+      status: 'ready',
+      page: { events: [entityEvent], nextCursor: null },
+    })
+    expect(markup).toContain('curriculum_entity.tombstone')
+    expect(markup).toContain('curriculum_entity')
+    expect(markup).toContain('entity ref')
+    expect(markup).toContain('draft revision')
+    expect(markup).toContain('lesson-1')
+    expect(markup).not.toMatch(/raw JSON|lesson body|assessment prompt/i)
+  })
+
   it('renders cursor pagination and a non-destructive page-loading state', () => {
     const first = render({ status: 'ready', page: { events: [EVENT], nextCursor: 'opaque' } })
     expect(first).toContain('Newer events')
