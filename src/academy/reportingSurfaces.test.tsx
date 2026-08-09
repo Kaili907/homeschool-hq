@@ -72,7 +72,7 @@ describe('reporting surfaces keep reading NOMINAL grade', () => {
   it('the sign-in picker uses the approved presentation grade without changing her nominal grade', () => {
     const state = stateWith(decoupledSixthGrader())
     const html = renderToStaticMarkup(
-      <Picker state={state} onPick={() => {}} onGrownUps={() => {}} />,
+      <Picker state={state} onStudentSelect={() => {}} onParentLogin={() => {}} />,
     )
     expect(html).toContain('Stephanie Manuel')
     expect(html).toContain('7th Grade')

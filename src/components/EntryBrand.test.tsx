@@ -2,13 +2,13 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { defaultAppState } from '../migration'
 import { learnerPresentationForProfile } from '../entry/learnerPresentation'
-import { ADMIN_ENTRY_HANDOFF, Picker } from './Picker'
+import { Picker } from './Picker'
 import { PinPad } from './PinPad'
 
 describe('Manuel Academy branded learner entry', () => {
   it('renders the exact five approved learner cards and intentional portrait fallbacks', () => {
     const html = renderToStaticMarkup(
-      <Picker state={defaultAppState()} onPick={() => {}} onGrownUps={() => {}} />,
+      <Picker state={defaultAppState()} onStudentSelect={() => {}} onParentLogin={() => {}} />,
     )
 
     expect(html).toContain('Manuel Academy')
@@ -26,16 +26,24 @@ describe('Manuel Academy branded learner entry', () => {
       expect(html).toContain(`>${initials}<`)
     }
     expect(html).toContain('Parent Login')
-    expect(html).toContain('Admin Login')
-    expect(html).toContain('aria-disabled="true"')
-    expect(html).toContain('Admin entry awaiting approved setup')
-    expect(html).not.toMatch(/href="\/admin|action="\/admin/i)
+    expect(html).not.toContain('Admin Login')
     expect(html).not.toContain('first sign-in')
   })
 
-  it('marks Admin Login as pending without inventing a route or authentication handoff', () => {
-    expect(ADMIN_ENTRY_HANDOFF).toEqual({ status: 'awaiting-admin-workstream' })
-    expect(Object.keys(ADMIN_ENTRY_HANDOFF)).toEqual(['status'])
+  it('renders the tertiary Admin Login layout only when a handoff is supplied by a fixture', () => {
+    const html = renderToStaticMarkup(
+      <Picker
+        state={defaultAppState()}
+        onStudentSelect={() => {}}
+        onParentLogin={() => {}}
+        onAdminLogin={() => {}}
+      />,
+    )
+
+    expect(html).toContain('Parent Login')
+    expect(html).toContain('Admin Login')
+    expect(html).toContain('academy-admin-login')
+    expect(html).not.toMatch(/href="\/admin|action="\/admin|admin pin|admin credential|<form/i)
   })
 
   it('keeps the matching learner identity on the PIN screen with accessible controls', () => {
@@ -58,5 +66,23 @@ describe('Manuel Academy branded learner entry', () => {
     expect(html).not.toContain('Parent Login')
     expect(html).not.toContain('Admin Login')
     expect(html).not.toMatch(/fingerprint|biometric/i)
+  })
+
+  it('shares the cinematic EntryShell with the existing parent PIN gate', () => {
+    const html = renderToStaticMarkup(
+      <PinPad
+        title="Parent Login"
+        subtitle="Enter the parent PIN"
+        backLabel="Back to Manuel Academy"
+        onComplete={() => null}
+        onCancel={() => {}}
+      />,
+    )
+
+    expect(html).toContain('academy-entry-root')
+    expect(html).toContain('academy-entry-poster')
+    expect(html).toContain('Parent Login')
+    expect(html).toContain('Back to Manuel Academy')
+    expect(html).not.toContain('Admin Login')
   })
 })

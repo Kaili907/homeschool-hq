@@ -12,7 +12,7 @@ import type { AppState } from './types'
 // tests look for the real picker copy the child would see.
 
 const harness = vi.hoisted(() => ({
-  picker: null as null | { onPick: (id: string) => void; onGrownUps: () => void },
+  picker: null as null | { onStudentSelect: (id: string) => void; onParentLogin: () => void },
   pin: null as null | { title: string; onComplete: (pin: string) => string | null; onCancel: () => void },
   dashboard: null as null | {
     profileId: string
@@ -27,7 +27,7 @@ vi.mock('./sync/useSync', () => ({
   }),
 }))
 vi.mock('./components/Picker', () => ({
-  Picker: (props: { onPick: (id: string) => void; onGrownUps: () => void }) => {
+  Picker: (props: { onStudentSelect: (id: string) => void; onParentLogin: () => void }) => {
     harness.picker = props
     harness.pin = null
     return <main data-surface="picker">Who's learning today?</main>
@@ -251,7 +251,7 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
   }
 
   async function signIn(profileId: string, pin: string) {
-    await act(async () => harness.picker?.onPick(profileId))
+    await act(async () => harness.picker?.onStudentSelect(profileId))
     await act(async () => { harness.pin?.onComplete(pin) })
     await settle()
   }

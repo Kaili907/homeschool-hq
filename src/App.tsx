@@ -608,11 +608,11 @@ export default function App() {
               }
             : undefined
         }
-        onPick={(profileId) => {
+        onStudentSelect={(profileId) => {
           const p = state.profiles[profileId]
           setScreen(p.pin === '' ? { kind: 'kidPinCreate', profileId } : { kind: 'kidPin', profileId })
         }}
-        onGrownUps={() =>
+        onParentLogin={() =>
           setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
         }
       />
@@ -782,11 +782,11 @@ export default function App() {
     return (
       <Picker
         state={state}
-        onPick={(profileId) => {
+        onStudentSelect={(profileId) => {
           const p = state.profiles[profileId]
           setScreen(p.pin === '' ? { kind: 'kidPinCreate', profileId } : { kind: 'kidPin', profileId })
         }}
-        onGrownUps={() =>
+        onParentLogin={() =>
           setScreen(state.parentPin === '' ? { kind: 'parentPinCreate' } : { kind: 'parentPin' })
         }
       />

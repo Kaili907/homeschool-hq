@@ -13,7 +13,11 @@ import { buildLegacyMissionData } from './components/academy/dashboard/legacyMis
 // normalization, and state preservation rather than AcademyRouter internals.
 
 const harness = vi.hoisted(() => ({
-  picker: null as null | { onPick: (id: string) => void; onGrownUps: () => void },
+  picker: null as null | {
+    onStudentSelect: (id: string) => void
+    onParentLogin: () => void
+    onAdminLogin?: () => void
+  },
   pin: null as null | { title: string; onComplete: (pin: string) => string | null; onCancel: () => void },
   academy: null as null | {
     profile: Profile
@@ -35,7 +39,11 @@ vi.mock('./sync/useSync', () => ({
   }),
 }))
 vi.mock('./components/Picker', () => ({
-  Picker: (props: { onPick: (id: string) => void; onGrownUps: () => void }) => {
+  Picker: (props: {
+    onStudentSelect: (id: string) => void
+    onParentLogin: () => void
+    onAdminLogin?: () => void
+  }) => {
     harness.picker = props
     harness.pin = null
     return <main data-surface="picker">Who's learning today?</main>
@@ -419,7 +427,7 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
       expect(harness.academy, `grade ${grade} should start at the picker`).toBeNull()
       expect(harness.picker, `grade ${grade} should start at the picker`).not.toBeNull()
 
-      await act(async () => harness.picker!.onPick('p1'))
+      await act(async () => harness.picker!.onStudentSelect('p1'))
       expect(harness.pin?.title).toBe('Welcome back, Aly')
       await act(async () => {
         expect(harness.pin!.onComplete('1234')).toBeNull()
@@ -441,7 +449,8 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     state.parentPin = '9090'
     await mountApp(state)
 
-    await act(async () => harness.picker!.onGrownUps())
+    expect(harness.picker?.onAdminLogin).toBeUndefined()
+    await act(async () => harness.picker!.onParentLogin())
     expect(harness.pin?.title).toBe('Parent Login')
     await act(async () => {
       expect(harness.pin!.onComplete('1234')).toBe('Wrong PIN.')
@@ -453,7 +462,24 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     })
     await settle()
     expect(hasText(container, 'Parent Hub')).toBe(true)
+    expect(hasText(container, 'Admin Login')).toBe(false)
     expect(harness.academy).toBeNull()
+  })
+
+  it('keeps a successful learner PIN scoped to learner entry only', async () => {
+    pathname = '/'
+    await mountApp(seeded(null))
+
+    expect(harness.picker?.onAdminLogin).toBeUndefined()
+    await act(async () => harness.picker!.onStudentSelect('p1'))
+    await act(async () => {
+      expect(harness.pin!.onComplete('1234')).toBeNull()
+    })
+    await settle()
+
+    expect(harness.academy?.profile.id).toBe('p1')
+    expect(hasText(container, 'Parent Hub')).toBe(false)
+    expect(hasText(container, 'Admin Login')).toBe(false)
   })
 
   it('keeps the classic workspace reachable through the dashboard tool callback', async () => {

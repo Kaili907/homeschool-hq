@@ -2,16 +2,22 @@ import type { AppState } from '../types'
 import { AcademyBrand, AcademyEntryShell } from '../entry/AcademyEntry'
 import { LEARNER_PRESENTATIONS } from '../entry/learnerPresentation'
 
-export const ADMIN_ENTRY_HANDOFF = Object.freeze({ status: 'awaiting-admin-workstream' as const })
-
-interface PickerProps {
+export interface PickerProps {
   state: AppState
   migrationBanner?: { onDownload: () => void; onDismiss: () => void }
-  onPick: (profileId: string) => void
-  onGrownUps: () => void
+  onStudentSelect: (profileId: string) => void
+  onParentLogin: () => void
+  /** Supplied only by the future admin-owned route composition or visual fixtures. */
+  onAdminLogin?: () => void
 }
 
-export function Picker({ state, migrationBanner, onPick, onGrownUps }: PickerProps) {
+export function Picker({
+  state,
+  migrationBanner,
+  onStudentSelect,
+  onParentLogin,
+  onAdminLogin,
+}: PickerProps) {
   const learners = LEARNER_PRESENTATIONS.filter((learner) => state.profiles[learner.profileId])
 
   return (
@@ -37,7 +43,7 @@ export function Picker({ state, migrationBanner, onPick, onGrownUps }: PickerPro
               <button
                 type="button"
                 key={learner.profileId}
-                onClick={() => onPick(learner.profileId)}
+                onClick={() => onStudentSelect(learner.profileId)}
                 className="academy-learner-card"
                 aria-label={`Continue as ${learner.fullName}, ${learner.gradeLabel}`}
               >
@@ -55,26 +61,23 @@ export function Picker({ state, migrationBanner, onPick, onGrownUps }: PickerPro
           </div>
         </section>
 
-        <div className="academy-entry-actions" aria-label="Parent and administrator entry">
-          <button type="button" onClick={onGrownUps} className="academy-parent-login">
+        <div
+          className="academy-entry-actions"
+          aria-label={onAdminLogin ? 'Parent and administrator entry' : 'Parent entry'}
+        >
+          <button type="button" onClick={onParentLogin} className="academy-parent-login">
             <span className="academy-parent-login-icon" aria-hidden="true">◇</span>
             <span>Parent Login</span>
             <span aria-hidden="true">→</span>
           </button>
 
-          {/* No authoritative admin route exists on origin/master yet. This
-              intentionally has no click handler or inferred authorization. */}
-          <div className="academy-admin-entry">
-            <button
-              type="button"
-              className="academy-admin-login"
-              aria-disabled="true"
-              aria-describedby="admin-entry-status"
-            >
-              Admin Login
-            </button>
-            <p id="admin-entry-status" role="status">Admin entry awaiting approved setup</p>
-          </div>
+          {onAdminLogin && (
+            <div className="academy-admin-entry">
+              <button type="button" className="academy-admin-login" onClick={onAdminLogin}>
+                Admin Login
+              </button>
+            </div>
+          )}
         </div>
       </main>
     </AcademyEntryShell>

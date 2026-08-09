@@ -12,7 +12,7 @@ import type { AppState } from './types'
 // so the tests exercise App's route/screen ordering, not the study internals.
 
 const harness = vi.hoisted(() => ({
-  picker: null as null | { onPick: (id: string) => void; onGrownUps: () => void },
+  picker: null as null | { onStudentSelect: (id: string) => void; onParentLogin: () => void },
   pin: null as null | { title: string; onComplete: (pin: string) => string | null; onCancel: () => void },
   dashboard: null as null | {
     profileId: string
@@ -36,7 +36,7 @@ vi.mock('./sync/useSync', () => ({
   }),
 }))
 vi.mock('./components/Picker', () => ({
-  Picker: (props: { onPick: (id: string) => void; onGrownUps: () => void }) => {
+  Picker: (props: { onStudentSelect: (id: string) => void; onParentLogin: () => void }) => {
     harness.picker = props
     harness.pin = null
     return <main data-surface="picker">Who's learning today?</main>
@@ -316,7 +316,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     expect(harness.picker).not.toBeNull()
     expect(harness.cancels).toContain('logout')
     const launchesBeforeSwitch = harness.launches.length
-    await act(async () => harness.picker?.onPick('p2'))
+    await act(async () => harness.picker?.onStudentSelect('p2'))
     expect(harness.pin?.title).toBe('Welcome back, Lucia')
     await act(async () => { harness.pin?.onComplete('2222') })
     await waitFor(() => hasText(container, 'Student Dashboard for Riley'))
@@ -347,7 +347,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     vi.stubEnv('VITE_STUDY_ENGINE_ENABLED', '')
     await mountApp(seeded('p1'))
     expect(harness.picker).not.toBeNull()
-    await act(async () => harness.picker?.onPick('p1'))
+    await act(async () => harness.picker?.onStudentSelect('p1'))
     await act(async () => { harness.pin?.onComplete('1234') })
     await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
     expect(hasText(container, 'Verified Study workspace')).toBe(false)
@@ -402,7 +402,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
     await press(findButton('Sign out'))
     expect(harness.picker).not.toBeNull()
-    await act(async () => harness.picker?.onPick('p2'))
+    await act(async () => harness.picker?.onStudentSelect('p2'))
     await act(async () => { harness.pin?.onComplete('2222') })
     await waitFor(() => hasText(container, 'Student Dashboard for Riley'))
     await act(async () => root?.unmount())
