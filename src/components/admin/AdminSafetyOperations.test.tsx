@@ -45,6 +45,7 @@ function summary(overrides: Partial<SafetyOperationsSnapshotV1['summary']> = {})
     resolvedSafetyStops: metric(0),
     adultReviewPending: metric(0),
     failClosedEvents: metric(0),
+    safetyStopEvents: metric(0),
     fallbackRejectionEvents: metric(0),
     unresolvedSafetyConditions: metric(0),
     ...overrides,
@@ -61,8 +62,9 @@ function snapshot(events: readonly SafetyOperationsEventV1[] = [], overrides: Pa
       { source: 'study-adult-review', status: 'available' },
       { source: 'study-safety-monitoring', status: 'available' },
     ],
-    operationalTelemetry: { status: 'future-unavailable' },
+    operationalTelemetry: { status: 'available' },
     events,
+    page: { limit: 50, nextCursor: null },
     ...overrides,
   }
 }
@@ -157,7 +159,7 @@ describe('ADMIN-10 read-only Safety Operations', () => {
     const html = render(snapshot())
     expect(html).toContain('No safety events in the authorized range')
     expect(html).toContain('legitimate zero state')
-    expect(html.match(/<dd>0<\/dd>/g)).toHaveLength(6)
+    expect(html.match(/<dd>0<\/dd>/g)).toHaveLength(7)
   })
 
   it('distinguishes unavailable sources and metrics from zero', () => {
@@ -168,6 +170,7 @@ describe('ADMIN-10 read-only Safety Operations', () => {
         resolvedSafetyStops: { status: 'unavailable' },
         adultReviewPending: { status: 'unavailable' },
         failClosedEvents: { status: 'unavailable' },
+        safetyStopEvents: { status: 'unavailable' },
         fallbackRejectionEvents: { status: 'unavailable' },
         unresolvedSafetyConditions: { status: 'unavailable' },
       },
@@ -175,7 +178,7 @@ describe('ADMIN-10 read-only Safety Operations', () => {
     const html = render(value)
     expect(html).toContain('Unavailable')
     expect(html).toContain('Unavailable sources are never counted as zero')
-    expect(html).toContain('Future source unavailable')
+    expect(html).toContain('Only canonical safety evidence is projected')
     expect(html).toContain('Missing evidence is not treated as zero')
     expect(html).not.toContain('legitimate zero state')
 
@@ -281,6 +284,6 @@ describe('ADMIN-10 read-only Safety Operations', () => {
     }))
     const model = buildSafetyOperationsModel(snapshot(events))
     expect(model.events).toHaveLength(SAFETY_OPERATIONS_EVENT_LIMIT)
-    expect(model.events.find((event) => event.eventRef === 'safety-event:bounded-0')?.learner.displayName).toBeUndefined()
+    expect(model.events.find((event) => event.eventRef === 'safety-event:bounded-0')?.learner?.displayName).toBeUndefined()
   })
 })

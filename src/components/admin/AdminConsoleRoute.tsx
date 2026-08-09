@@ -14,6 +14,8 @@ import type {
 import { readAdminCosts, AdminCostsReadError } from '../../admin/costsHttpSource'
 import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/costsModel'
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
+import { readAdminSafetyOperations } from '../../admin/safetyOperationsHttpSource'
+import type { SafetyOperationsReadState } from '../../admin/safetyOperationsModel'
 import { CurriculumBrowser } from '../../admin/curriculum/CurriculumBrowser'
 import {
   readAdminCurriculumValidation,
@@ -94,6 +96,7 @@ export function AdminConsoleRoute() {
   const [selectedEngineVersion, setSelectedEngineVersion] = useState<string | null>(null)
   const [engineRetry, setEngineRetry] = useState(0)
   const [learnerState, setLearnerState] = useState<LearnerAnalyticsViewState>({ status: 'resolving' })
+  const [safetyReadState, setSafetyReadState] = useState<SafetyOperationsReadState>({ status: 'loading' })
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
@@ -106,6 +109,19 @@ export function AdminConsoleRoute() {
     })
     return () => controller.abort()
   }, [])
+
+  useEffect(() => {
+    if (!hasCapability(authorization, 'safety:read') || section !== 'safety') {
+      setSafetyReadState({ status: 'loading' })
+      return
+    }
+    const controller = new AbortController()
+    setSafetyReadState({ status: 'loading' })
+    void readAdminSafetyOperations({ signal: controller.signal }).then((state) => {
+      if (!controller.signal.aborted) setSafetyReadState(state)
+    })
+    return () => controller.abort()
+  }, [authorizationState, section])
 
   useEffect(() => {
     if (!hasCapability(authorization, 'curriculum:read') || section !== 'curriculum-validation') {
@@ -289,7 +305,7 @@ export function AdminConsoleRoute() {
             authorization={hasCapability(authorization, 'safety:read')
               ? { status: 'authorized', role: authorization.role, capabilities: authorization.capabilities }
               : { status: 'denied', reasonCode: 'safety_read_required' }}
-            readState={{ status: 'unavailable', reasonCode: 'source_unavailable' }}
+            readState={safetyReadState}
           />
         )}
         {section === 'curriculum' && (

@@ -42,10 +42,34 @@ The integrated ADMIN-R1 migration order is:
 1. `20260808120000_academy_admin_authorization.sql`
 2. `20260808121000_academy_operational_events.sql`
 3. `20260808122000_academy_provider_usage_cost_ledger.sql`
+4. `20260808123000_academy_admin_safety_operations.sql`
 
 The telemetry manifest entry depends on authorization, and the provider
 usage/cost entry depends on telemetry. These unique versions replace the
 parallel-branch timestamp collision; none has been applied to hosted Supabase.
+
+## Supabase: authorized Admin safety projection (2026-08-08)
+
+Tracked migration:
+`supabase/migrations/20260808123000_academy_admin_safety_operations.sql`.
+
+No new safety table or mutation is introduced. The migration adds one bounded,
+service-role-only `academy_admin_read_safety_operations_v1` RPC over three
+existing durable sources: canonical operational events whose result is exactly
+`safety_stop`, minimized Study adult-review proposals, and allowlisted Study
+safety-monitoring events. The RPC requires the fixed `safety:read` capability
+marker, supports deterministic time/reference pagination and optional verified
+household/learner scope, and returns no raw telemetry metadata, monitoring
+attributes, conversation, journal, audio, provider body, exception, or private
+adult-note content. Provider errors, timeouts, fallbacks, and generic rejections
+do not become safety events.
+
+The Netlify endpoint independently resolves current Admin authority before
+using service-only database access. Browser roles have no RPC or table access,
+and source failure returns only a stable error code. Permanent local validation
+is in `supabase/academy-admin-safety-operations.db.test.ts` plus the focused
+ADMIN-10B endpoint/reader/UI tests. This migration has not been applied to a
+hosted Supabase project.
 
 ## Supabase: Academy profiles base (2026-07-24)
 
