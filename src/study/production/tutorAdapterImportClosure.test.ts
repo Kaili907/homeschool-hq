@@ -13,26 +13,18 @@
  * wrapper's five production modules, follows every edge it can see, and holds
  * the whole reachable set to the derivation recorded below.
  *
- * THREE WAYS A GUARD LIKE THIS FAILS OPEN, and what is done about each.
- *
- * It throws on the first violation, so the second one is never reported and the
- * next card fixes one import at a time. Every violation is COLLECTED here and
- * asserted at the end.
- *
- * It models `import` and not `require`, so a single `require()` is invisible.
- * Both forms are modelled below, and so is dynamic `import()`.
- *
- * It models `require('x')` syntactically, so `const r = require; r('x')` walks
- * straight past it — the classifier sees no `require(` and reports nothing,
- * which is the worst of the three because it reads as a clean pass. Every
- * mention of `require` and every dynamic `import` that is NOT immediately
- * applied to a string literal is recorded as an UNANALYSABLE edge and fails
- * this test. A guard that cannot see an edge must say so, not stay quiet.
+ * The walker itself lives in ../testing/importClosure.ts, where the production
+ * container's closure guard shares it. The three ways a guard like this fails
+ * open — stopping at the first violation, modelling `import` but not `require`,
+ * and modelling `require('x')` but not `const r = require; r('x')` — are
+ * documented and handled there. The entry points, the forbidden list and the
+ * size pin below are this guard's own.
  */
-import { readFileSync, existsSync, statSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
+import { code, walkImportClosure, RC1_SENTINEL } from '../testing/importClosure'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const repoRoot = resolve(here, '..', '..', '..')
@@ -49,16 +41,6 @@ const ENTRY_POINTS = [
   'src/study/production/tutorPresentation.ts',
   'src/study/production/tutorLaunchOrdering.ts',
 ]
-
-/**
- * Bare specifiers this repository maps to a path. Taken from `resolve.alias` in
- * vite.config.ts, so the walk follows the same edge the bundler does — an
- * aliased package that was merely allowed rather than followed would hide its
- * own subtree, which is a 9-file hole in this particular closure.
- */
-const PACKAGE_ALIASES: Readonly<Record<string, string>> = {
-  '@frozen/tutor-math-r1': 'adaptive-tutor/subjects/math/index.ts',
-}
 
 /**
  * FORBIDDEN, and each entry with the reason it is forbidden rather than a bare
@@ -82,172 +64,8 @@ const FORBIDDEN_MODULES: readonly { readonly fragment: string; readonly because:
   { fragment: 'src/study/demonstrations', because: 'synthetic demonstration data' },
 ]
 
-/** The sentinel identity the preview bridge sends for every learner. */
-const RC1_SENTINEL = ['learner', 'local-release-candidate'].join(':')
-
-interface Edge {
-  readonly from: string
-  readonly specifier: string
-}
-
-interface WalkResult {
-  readonly files: readonly string[]
-  readonly packages: readonly Edge[]
-  readonly unresolved: readonly Edge[]
-  readonly unanalysable: readonly string[]
-}
-
-/**
- * Static import/export, dynamic `import(...)` and `require(...)`, each with a
- * string literal. Bare `import './x'` is included — a side-effect import is an
- * edge like any other.
- */
-const LITERAL_EDGE =
-  /(?:^|[\s;{}()])(?:import|export)\s+(?:type\s+)?[^'"]*?from\s*['"]([^'"]+)['"]|(?:^|[\s;{}()=,[])import\s*\(\s*['"]([^'"]+)['"]\s*\)|(?:^|[\s;{}()=,[])require\s*\(\s*['"]([^'"]+)['"]\s*\)|(?:^|[\s;{}()])import\s+['"]([^'"]+)['"]/g
-
-/** Any `require` mention, and any dynamic `import(`, for the negative check. */
-const REQUIRE_MENTION = /\brequire\b/g
-const REQUIRE_LITERAL = /\brequire\s*\(\s*['"][^'"]+['"]\s*\)/g
-const DYNAMIC_IMPORT = /\bimport\s*\(/g
-const DYNAMIC_IMPORT_LITERAL = /\bimport\s*\(\s*['"][^'"]+['"]\s*\)/g
-
-/**
- * Comments removed. Edge extraction runs on this: the specifiers it looks for
- * are themselves string literals, so strings must survive here.
- */
-function code(text: string): string {
-  return text
-    .replace(/\/\*[\s\S]*?\*\//g, ' ')
-    .replace(/(^|[^:])\/\/[^\n]*/g, '$1')
-}
-
-/**
- * Comments AND string literals removed, for the negative scan only.
- *
- * The frozen Math R1 lesson content is JSON-shaped TypeScript whose prose says
- * things like "Never require a camera". A bare `\brequire\b` counter reports
- * every one of those as an unanalysable edge, and a guard that cries wolf on
- * curriculum copy is a guard the next card deletes. Executable code cannot live
- * inside a string literal, so blanking them costs nothing and removes the whole
- * false-positive class.
- *
- * Written as a scanner rather than a regex because quote characters nest: an
- * apostrophe inside a double-quoted sentence would end a naive single-quote
- * match and desynchronise everything after it.
- */
-function executableCode(text: string): string {
-  const source = code(text)
-  let out = ''
-  let quote: string | null = null
-  for (let index = 0; index < source.length; index += 1) {
-    const character = source[index]!
-    if (quote === null) {
-      if (character === '"' || character === "'" || character === '`') {
-        quote = character
-        out += ' '
-        continue
-      }
-      out += character
-      continue
-    }
-    if (character === '\\') {
-      index += 1
-      out += ' '
-      continue
-    }
-    if (character === quote) quote = null
-    out += ' '
-  }
-  return out
-}
-
-function resolveSpecifier(fromFile: string, specifier: string): { kind: 'file' | 'package' | 'unresolved'; id: string } {
-  if (!specifier.startsWith('.')) {
-    const alias = PACKAGE_ALIASES[specifier]
-    if (alias) return { kind: 'file', id: resolve(repoRoot, alias) }
-    return { kind: 'package', id: specifier }
-  }
-  const base = resolve(dirname(fromFile), specifier)
-  const candidates = [
-    base,
-    base.replace(/\.js$/, '.ts'),
-    base.replace(/\.js$/, '.tsx'),
-    `${base}.ts`,
-    `${base}.tsx`,
-    `${base}.js`,
-    `${base}/index.ts`,
-    `${base}/index.tsx`,
-    `${base}/index.js`,
-  ]
-  for (const candidate of candidates) {
-    if (existsSync(candidate) && statSync(candidate).isFile()) return { kind: 'file', id: candidate }
-  }
-  return { kind: 'unresolved', id: base }
-}
-
-/**
- * Collects, and never throws mid-walk.
- *
- * An exception here would stop the walk at the first surprise and report a
- * closure smaller than the real one — the failure mode where a guard is loudest
- * about the least important thing and silent about the rest.
- */
-function walk(entries: readonly string[]): WalkResult {
-  const seen = new Set<string>()
-  const packages: Edge[] = []
-  const unresolved: Edge[] = []
-  const unanalysable: string[] = []
-  const stack = entries.map((entry) => resolve(repoRoot, entry))
-
-  while (stack.length > 0) {
-    const file = stack.pop()!
-    if (seen.has(file)) continue
-    seen.add(file)
-    let raw: string
-    try {
-      raw = readFileSync(file, 'utf8')
-    } catch {
-      unresolved.push({ from: file, specifier: '<unreadable>' })
-      continue
-    }
-    const source = code(raw)
-    // The negative scan reads the string-stripped form; the edge extraction
-    // below reads the form that still has its specifiers in it.
-    const executable = executableCode(raw)
-
-    const requireMentions = (executable.match(REQUIRE_MENTION) ?? []).length
-    const requireLiterals = (source.match(REQUIRE_LITERAL) ?? []).length
-    if (requireMentions > requireLiterals) {
-      unanalysable.push(`${relative(repoRoot, file).replaceAll('\\', '/')}: ${requireMentions - requireLiterals} require mention(s) not applied to a string literal`)
-    }
-    const dynamicImports = (executable.match(DYNAMIC_IMPORT) ?? []).length
-    const dynamicImportLiterals = (source.match(DYNAMIC_IMPORT_LITERAL) ?? []).length
-    if (dynamicImports > dynamicImportLiterals) {
-      unanalysable.push(`${relative(repoRoot, file).replaceAll('\\', '/')}: ${dynamicImports - dynamicImportLiterals} dynamic import(s) without a string literal`)
-    }
-
-    LITERAL_EDGE.lastIndex = 0
-    let match: RegExpExecArray | null
-    while ((match = LITERAL_EDGE.exec(source)) !== null) {
-      const specifier = match[1] ?? match[2] ?? match[3] ?? match[4]
-      if (!specifier) continue
-      const resolved = resolveSpecifier(file, specifier)
-      if (resolved.kind === 'package') packages.push({ from: file, specifier })
-      else if (resolved.kind === 'unresolved') unresolved.push({ from: file, specifier })
-      else if (!seen.has(resolved.id)) stack.push(resolved.id)
-    }
-  }
-
-  return {
-    files: [...seen].map((file) => relative(repoRoot, file).replaceAll('\\', '/')).sort(),
-    packages,
-    unresolved,
-    unanalysable,
-  }
-}
-
 describe('production Tutor wrapper import closure', () => {
-  const closure = walk(ENTRY_POINTS)
+  const closure = walkImportClosure(repoRoot, ENTRY_POINTS)
 
   it('resolves every edge it can see, and reports every edge it cannot', () => {
     // Ordered so a failure names the unseeable edges first: an unanalysable

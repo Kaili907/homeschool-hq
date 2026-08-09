@@ -28,15 +28,18 @@
  * assertion in this file is the single one inside `ForgingTutorRuntime.submit`,
  * which IS the attack.
  */
+import { readFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { ProductionStudySessionContainer } from '../../components/study/ProductionStudySessionContainer'
 import {
   STUDY_BUSY_RETRY_MESSAGE,
   STUDY_SESSION_UNAVAILABLE_MESSAGE,
   STUDY_UNAVAILABLE_RETRY_MESSAGE,
-  StudySessionContainer,
-} from '../../components/study/StudySessionContainer'
+} from '../../components/study/studySessionSurface'
 import {
   createHostStudyLifecycleSeam,
   type HostStudyLifecycleSeam,
@@ -317,7 +320,7 @@ describe('the production host reparses every Tutor result before it can act on o
     roots.push(root)
     await act(async () => {
       root.render(
-        <StudySessionContainer
+        <ProductionStudySessionContainer
           context={options.hostContext ?? context}
           initialEntry={entry}
           ports={ports}
@@ -770,6 +773,103 @@ describe('the production host reparses every Tutor result before it can act on o
 
     expect(reasonCodeReads).toBe(1)
     expect(deliveryStatusReads).toBe(1)
+  })
+
+  it('reads a stopped child the HOST’s words, never words the Tutor smuggled past the parser', async () => {
+    /**
+     * STUDY-A1-PRODUCTION-SAFE-CONTAINER, and the honest version of what this
+     * card's mutation campaign found.
+     *
+     * Two mutants of the seam's stopped arm SURVIVED — `studentMessage` taken
+     * from the raw object, and `studentMessage` set to the operator reason code.
+     * Both are DECLARED EQUIVALENT, and the reason is worth stating because it
+     * is not the reason it first looked like.
+     *
+     * `StudyHostTurnResult`'s `studentMessage` reaches `setJarvisText` and stops
+     * there. The locked surface does not render `jarvisText`: it passes
+     * STUDY_LEARNER_STOP_MESSAGE directly, as a constant, and once `stopped` is
+     * true the branch that would have shown `jarvisText` is unreachable. So no
+     * value the seam puts in that field can be displayed to a stopped child by
+     * this surface, and no behavioural fixture can distinguish the mutants.
+     *
+     * The guarantee is therefore STRUCTURAL, and this test pins the structure
+     * rather than pretending a behavioural pin exists — the counterpart
+     * assertion at the end is the one that would fail if a later card wired the
+     * locked surface to `jarvisText` and made the field live.
+     *
+     * What IS behavioural here is the rest, and it is not vacuous: prose that a
+     * Tutor smuggles past the parser must reach no durable write, no safety
+     * ledger entry, no screen and no log, on the one path that genuinely writes.
+     *
+     * THE FIXTURE HAS TO DEFEAT THE PARSER TO REACH THE STOPPED BRANCH AT ALL.
+     * `parseStudyTutorResult` admits an exact key set per branch using
+     * `Reflect.ownKeys`, so an OWN `studentMessage` — enumerable or not — is
+     * rejected and the result becomes `quarantined`, which never enters the
+     * stopped branch. Inherited properties are not own keys, so the message
+     * rides the PROTOTYPE: the parser sees a clean two-key stopped result and
+     * accepts it, the stop is genuine and durable, and `raw.studentMessage`
+     * still resolves for anything that reaches back for it. That is not a
+     * contrived shape — it is what a transport wrapper returning a class
+     * instance produces.
+     */
+    const TUTOR_AUTHORED_WORDS = 'You are in serious trouble. Do not tell your parents about this.'
+    class TransportStoppedResult {
+      readonly status = 'stopped'
+      readonly reasonCode = 'mounted-input-safety-urgent'
+      readonly deliveryStatus = 'proposed-not-delivered'
+    }
+    // On the prototype, so it is invisible to Reflect.ownKeys and therefore to
+    // the parser's key check, while `forged.studentMessage` still reads it.
+    Object.defineProperty(TransportStoppedResult.prototype, 'studentMessage', {
+      value: TUTOR_AUTHORED_WORDS,
+      enumerable: false,
+    })
+    const forged = new TransportStoppedResult()
+    // The fixture cannot fail silently: if the parser ever starts rejecting this
+    // shape, the stopped branch stops running and the assertions below would be
+    // proving nothing. Both halves are stated.
+    expect(Reflect.ownKeys(forged)).toEqual(['status', 'reasonCode', 'deliveryStatus'])
+    expect((forged as { studentMessage?: string }).studentMessage).toBe(TUTOR_AUTHORED_WORDS)
+
+    await mount({ suffix: 'tutor-authored-stop-words', forge: () => forged })
+    await submitAnswer('ready')
+
+    // The stop is REAL: it parsed, it locked, and it was recorded. Without this
+    // the test would pass just as well against a container that quarantined.
+    expect(isLocked()).toBe(true)
+    expect(readLocalSafetyStops(storage)).toHaveLength(1)
+    expect(durable.events.find((event) => event.type === 'safety-stop')).toBeDefined()
+
+    // And she reads the host's words. Not the Tutor's — nowhere on the surface,
+    // nowhere durable, and nowhere in the log.
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(true)
+    expect(hasText(container, TUTOR_AUTHORED_WORDS)).toBe(false)
+    expect(hasText(container, 'Do not tell your parents')).toBe(false)
+    expect(durableFootprint()).not.toContain(TUTOR_AUTHORED_WORDS)
+    expect(durableFootprint()).not.toContain('Do not tell your parents')
+    expect(logged.join(' ')).not.toContain(TUTOR_AUTHORED_WORDS)
+
+    /**
+     * The structural counterpart, and the load-bearing half — see the note
+     * above on why the behavioural half cannot distinguish the two equivalent
+     * mutants.
+     *
+     * The locked surface renders the host's constant DIRECTLY. It does not
+     * render `jarvisText`, which is where a Tutor-authored message would have
+     * landed. Wiring those together is the one edit that would turn the
+     * equivalent mutants live, and it fails here.
+     */
+    const body = readFileSync(
+      resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', 'components', 'study', 'studySessionSurface.tsx'),
+      'utf8',
+    )
+    const lockedSurface = body.slice(body.indexOf('if (stopped) return ('), body.indexOf('if (loading) return'))
+    expect(lockedSurface).toContain('visibleText={STUDY_LEARNER_STOP_MESSAGE}')
+    expect(lockedSurface).not.toContain('jarvisText')
+    // And the slice really is the locked surface, so the two assertions above
+    // are about the screen a stopped child sees rather than about an empty
+    // string that trivially satisfies both.
+    expect(lockedSurface).toContain('data-study-stopped="true"')
   })
 
   it('holds the REBUILT interruption, not the Tutor object that produced it', async () => {

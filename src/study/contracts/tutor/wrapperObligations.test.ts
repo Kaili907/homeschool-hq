@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
@@ -345,11 +345,22 @@ describe('wrapper landing requirements', () => {
     // live inside the helper, so the container reaching them any other way
     // would show up as the container calling the ports directly during
     // preparation — which is what the integration test proves it does not.
-    const container = readFileSync(
-      join(root, '..', 'components', 'study', 'StudySessionContainer.tsx'),
-      'utf8',
-    )
-    expect(container).toMatch(/await settleStudyTutorLaunch\(/)
-    expect(container).toMatch(/prepareDurableStudySession\(settled,/)
+    //
+    // STUDY-A1-PRODUCTION-SAFE-CONTAINER — the host body is now
+    // studySessionSurface.tsx, rendered by both the preview and the production
+    // container. Reading it here is reading the one place the ordering exists.
+    const hostDirectory = join(root, '..', 'components', 'study')
+    const surface = readFileSync(join(hostDirectory, 'studySessionSurface.tsx'), 'utf8')
+    expect(surface).toMatch(/await settleStudyTutorLaunch\(/)
+    expect(surface).toMatch(/prepareDurableStudySession\(settled,/)
+
+    // ONE implementation, not two that agree. A production container with its
+    // own copy of the ordering would satisfy every assertion above while being
+    // free to drift from the preview one, and F1 would be closed for whichever
+    // of the two a later card happened to look at.
+    const orderingCallers = readdirSync(hostDirectory)
+      .filter((name) => (name.endsWith('.ts') || name.endsWith('.tsx')) && !name.includes('.test.'))
+      .filter((name) => readFileSync(join(hostDirectory, name), 'utf8').includes('settleStudyTutorLaunch'))
+    expect(orderingCallers).toEqual(['studySessionSurface.tsx'])
   })
 })
