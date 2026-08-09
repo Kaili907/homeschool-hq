@@ -44,19 +44,19 @@ export function EnginePerformanceDashboard({
   readonly onRetry?: () => void
 }) {
   if (state.status === 'loading') {
-    return <main className="engine-performance" aria-busy="true"><p role="status">Loading engine performance evidence…</p></main>
+    return <div className="engine-performance" aria-busy="true"><p role="status">Loading engine performance evidence…</p></div>
   }
   if (state.status === 'unauthorized') {
-    return <main className="engine-performance"><section role="alert"><h1>Engine analytics unavailable</h1><p>Your verified Admin assignment does not include <code>engines:read</code>.</p></section></main>
+    return <div className="engine-performance"><section role="alert"><h1>Engine analytics unavailable</h1><p>Your verified Admin assignment does not include <code>engines:read</code>.</p><a href="/academy">Back to Academy</a></section></div>
   }
   if (state.status === 'error') {
-    return <main className="engine-performance"><section role="alert"><h1>Engine analytics unavailable</h1><p>{state.code === 'timeout' ? 'The authorized evidence read timed out.' : 'The authorized performance projection could not be loaded.'} No substitute data is shown.</p>{onRetry && <button type="button" onClick={onRetry}>Try again</button>}</section></main>
+    return <div className="engine-performance"><section role="alert"><h1>Engine analytics unavailable</h1><p>{state.code === 'timeout' ? 'The authorized evidence read timed out.' : 'The authorized performance projection could not be loaded.'} No substitute data is shown.</p>{onRetry && <button type="button" onClick={onRetry}>Try again</button>}</section></div>
   }
 
   const selected = state.model.engines.find((engine) => engine.engineId === selectedEngine) ?? state.model.engines[0]
   const availableVersions = selected.versions
   return (
-    <main className="engine-performance" aria-labelledby="engine-performance-title">
+    <div className="engine-performance" aria-labelledby="engine-performance-title">
       <header className="engine-performance__header">
         <div>
           <p className="engine-performance__eyebrow">Educational and operational outcomes</p>
@@ -75,19 +75,19 @@ export function EnginePerformanceDashboard({
 
       <section className="engine-performance__filters" aria-label="Performance filters">
         <label>Time range<select value={selectedWindow} onChange={(event) => onWindowChange?.(event.target.value as EnginePerformanceWindowPreset)}>{Object.entries(WINDOW_LABELS).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
-        <label>Engine<select value={selectedEngine} onChange={(event) => onEngineChange?.(event.target.value as AdminEngineId)}>{state.model.engines.map((engine) => <option key={engine.engineId} value={engine.engineId}>{ENGINE_LABELS[engine.engineId]}</option>)}</select></label>
+        <label>Engine<select value={selectedEngine} aria-controls="selected-engine-panel" onChange={(event) => onEngineChange?.(event.target.value as AdminEngineId)}>{state.model.engines.map((engine) => <option key={engine.engineId} value={engine.engineId}>{ENGINE_LABELS[engine.engineId]}</option>)}</select></label>
         <label>Engine version<select value={selectedVersion ?? ''} onChange={(event) => onVersionChange?.(event.target.value || null)}><option value="">All recorded versions</option>{availableVersions.map((version) => <option key={version} value={version}>{version}</option>)}</select></label>
       </section>
 
       <nav aria-label="Canonical engines" className="engine-performance__engine-list">
         {state.model.engines.map((engine) => (
-          <button key={engine.engineId} type="button" aria-current={engine.engineId === selectedEngine ? 'page' : undefined} onClick={() => onEngineChange?.(engine.engineId)}>
+          <button key={engine.engineId} type="button" aria-controls="selected-engine-panel" aria-current={engine.engineId === selectedEngine ? 'page' : undefined} onClick={() => onEngineChange?.(engine.engineId)}>
             <strong>{ENGINE_LABELS[engine.engineId]}</strong><span>{engine.evidenceState.replaceAll('_', ' ')} · {engine.sampleCount.toLocaleString()} samples</span>
           </button>
         ))}
       </nav>
 
-      <section aria-labelledby="selected-engine-title">
+      <section id="selected-engine-panel" aria-labelledby="selected-engine-title" aria-live="polite">
         <div className="engine-performance__section-heading">
           <div><p className="engine-performance__eyebrow">Selected engine</p><h2 id="selected-engine-title">{ENGINE_LABELS[selected.engineId]}</h2></div>
           <p><strong>{selected.sampleCount.toLocaleString()}</strong> filtered evidence samples</p>
@@ -129,6 +129,6 @@ export function EnginePerformanceDashboard({
       <footer className="engine-performance__method">
         Rates require at least {state.model.thresholds.rateMinimumSample} denominator samples. Version comparisons require {state.model.thresholds.versionComparisonMinimumSample} samples per cohort. Safety stops are displayed separately and are not automatically classified as performance failures.
       </footer>
-    </main>
+    </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useId, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { AdminCapability, AdminEngineId, AdminHealthState } from '../../admin/admin0Vocabulary'
 import {
   formatUsdMicros,
@@ -98,6 +98,7 @@ function AuthorizationState({ kind, reasonCode }: { kind: 'resolving' | 'unautho
             ? 'The console will remain private until administrator authorization is confirmed.'
             : safeAuthorizationMessage(reasonCode ?? 'authorization_unavailable')}
         </p>
+        {!resolving && <a className="admin-gate__back" href="/academy">Back to Academy</a>}
       </section>
     </main>
   )
@@ -138,8 +139,14 @@ export function AdminShell({
   readonly onNavigate?: (section: AdminSection) => void
   readonly children: ReactNode
 }) {
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const previousTitle = useRef<string | null>(null)
   const activeLabel = NAVIGATION.find((item) => item.id === activeSection)?.label ?? title
   const visibleNavigation = NAVIGATION.filter((item) => authorization.capabilities.includes(item.capability))
+  useEffect(() => {
+    applyAdminRoutePresentation(title, document, headingRef.current, previousTitle.current !== null)
+    previousTitle.current = title
+  }, [title])
   return (
     <div className="admin-shell">
       <a className="admin-skip-link" href="#admin-main">Skip to {activeLabel.toLowerCase()}</a>
@@ -156,11 +163,12 @@ export function AdminShell({
                 <button
                   type="button"
                   className={item.id === activeSection ? 'is-active' : ''}
+                  aria-label={item.label}
                   aria-current={item.id === activeSection ? 'page' : undefined}
                   onClick={() => onNavigate?.(item.id)}
                 >
                   <NavIcon section={item.id} />
-                  <span>{item.label}</span>
+                  <span className="admin-nav-text">{item.label}</span>
                 </button>
               </li>
             ))}
@@ -176,7 +184,7 @@ export function AdminShell({
         <header className="admin-topbar">
           <div>
             <p className="admin-breadcrumb">Admin console <span aria-hidden="true">/</span> {activeLabel}</p>
-            <h1>{title}</h1>
+            <h1 ref={headingRef} tabIndex={-1}>{title}</h1>
           </div>
           {toolbar}
         </header>
@@ -186,6 +194,16 @@ export function AdminShell({
       </div>
     </div>
   )
+}
+
+export function applyAdminRoutePresentation(
+  title: string,
+  documentTarget: Pick<Document, 'title'>,
+  heading: Pick<HTMLElement, 'focus'> | null,
+  focusHeading = true,
+) {
+  documentTarget.title = `${title} | Manuel Academy Admin`
+  if (focusHeading) heading?.focus()
 }
 
 function TimeRangeControl({ selected, onChange }: { selected: OverviewRange; onChange: (range: OverviewRange) => void }) {
@@ -446,7 +464,7 @@ function CompactMetric<T>({ label, metric, formatter, suffix }: { label: string;
 }
 
 function SpendMetric({ spend }: { spend: AdminOverviewModel['ai']['spend'] }) {
-  const label = spend.status !== 'available' ? 'Spend' : spend.costKind === 'reconciled' ? 'Reconciled spend' : 'Estimated spend'
+  const label = spend.status !== 'available' ? 'Provider cost' : spend.costKind === 'reconciled' ? 'Reconciled provider cost' : 'Calculated provider cost (estimate)'
   return (
     <div>
       <dt>{label}</dt>

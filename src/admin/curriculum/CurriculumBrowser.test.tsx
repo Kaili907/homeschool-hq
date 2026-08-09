@@ -19,6 +19,7 @@ import { createAdminCurriculumHttpSource } from './httpSource'
 import {
   CurriculumBrowser,
   CurriculumBrowserView,
+  CurriculumBrowserStateMessage,
   hasCurriculumReadAccess,
   type CurriculumBrowserLocation,
 } from './CurriculumBrowser'
@@ -178,6 +179,19 @@ describe('ADMIN-11 read-only Admin surface', () => {
     expect(markup).not.toContain('publish curriculum')
     expect(markup).not.toContain('edit curriculum')
     expect(markup).not.toContain('delete curriculum')
+    expect(markup).toContain('href="/academy/admin/curriculum/validation"')
+    expect(markup).toContain('validation evidence')
+    expect(markup).not.toContain('<main')
+  })
+
+  it('offers retry for a transient curriculum source failure', () => {
+    const markup = renderToStaticMarkup(
+      <CurriculumBrowserStateMessage role="alert" title="Curriculum source unavailable" onRetry={noop}>
+        The authorized source could not be loaded.
+      </CurriculumBrowserStateMessage>,
+    )
+    expect(markup).toContain('Try again')
+    expect(markup).toContain('type="button"')
   })
 
   it('requires the canonical curriculum read capability before loading', () => {

@@ -21,18 +21,18 @@ import type { SafetyOperationsReadState } from '../../admin/safetyOperationsMode
 import { CurriculumBrowser } from '../../admin/curriculum/CurriculumBrowser'
 import {
   readAdminCurriculumValidation,
+  type CurriculumValidationReadState,
 } from '../../admin/curriculum-validation/httpSource'
 import {
   loadLearnerAnalytics,
   type LearnerAnalyticsViewState,
 } from '../../admin/learnerAnalyticsModel'
 import { createAdminLearnerAnalyticsHttpSource } from '../../admin/learnerAnalyticsHttpSource'
-import type { CurriculumValidationReadModel } from '../../admin/curriculum-validation/model'
 import {
   readAdminEnginePerformance,
   type EnginePerformanceReadState,
 } from '../../admin/engine-performance/httpSource'
-import type { AdminEngineId } from '../../admin/contracts'
+import { ADMIN_ENGINE_IDS, type AdminEngineId } from '../../admin/contracts'
 import type { EnginePerformanceWindowPreset } from '../../admin/enginePerformanceModel'
 import { readSystemHealth, type SystemHealthReadState } from '../../admin/systemHealthClient'
 import type { SystemHealthWindow } from '../../admin/systemHealth'
@@ -46,17 +46,41 @@ import { SystemHealthDashboard } from './SystemHealthDashboard'
 
 export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
 
+const ENGINE_PAGE_LABELS: Readonly<Record<AdminEngineId, string>> = {
+  tutor: 'Tutor',
+  study: 'Study',
+  assessment: 'Assessment',
+  curriculum: 'Curriculum',
+  jarvis: 'Jarvis',
+  tts: 'TTS',
+  gateway: 'Gateway',
+  sync: 'Sync',
+}
+
 export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (!isAdminConsolePath(pathname)) return null
   const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
   if (!suffix) return 'overview'
   if (suffix === 'curriculum/validation') return 'curriculum-validation'
   if (suffix === 'health' || suffix.startsWith('health/')) return 'system-health'
+  if (suffix === 'engines') return 'engines'
+  if (suffix.startsWith('engines/')) return adminRouteEngine(pathname) ? 'engines' : 'unknown'
   const section = suffix.split('/')[0]
   return [
-    'learners', 'engines', 'costs', 'curriculum', 'safety', 'system-health',
+    'learners', 'costs', 'curriculum', 'safety', 'system-health',
     'configuration', 'audit-log', 'releases',
   ].includes(section) ? section as AdminSection : 'unknown'
+}
+
+export function adminRouteEngine(pathname: string): AdminEngineId | null {
+  if (!isAdminConsolePath(pathname)) return null
+  const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
+  if (suffix === 'engines') return 'tutor'
+  const segments = suffix.split('/')
+  if (segments.length !== 2 || segments[0] !== 'engines') return null
+  return ADMIN_ENGINE_IDS.includes(segments[1] as AdminEngineId)
+    ? segments[1] as AdminEngineId
+    : null
 }
 
 export function presentationAuthorization(
@@ -93,14 +117,17 @@ export function AdminConsoleRoute() {
   const [healthWindow, setHealthWindow] = useState<SystemHealthWindow>('1h')
   const [healthReload, setHealthReload] = useState(0)
   const [healthReadState, setHealthReadState] = useState<SystemHealthReadState>({ status: 'loading' })
-  const [validationModel, setValidationModel] = useState<CurriculumValidationReadModel | null>(null)
+  const [validationState, setValidationState] = useState<CurriculumValidationReadState>({ status: 'loading' })
+  const [validationRetry, setValidationRetry] = useState(0)
   const [engineState, setEngineState] = useState<EnginePerformanceReadState>({ status: 'loading' })
-  const [selectedEngine, setSelectedEngine] = useState<AdminEngineId>('tutor')
+  const [selectedEngine, setSelectedEngine] = useState<AdminEngineId>(() => adminRouteEngine(window.location.pathname) ?? 'tutor')
   const [engineWindow, setEngineWindow] = useState<EnginePerformanceWindowPreset>('30d')
   const [selectedEngineVersion, setSelectedEngineVersion] = useState<string | null>(null)
   const [engineRetry, setEngineRetry] = useState(0)
   const [learnerState, setLearnerState] = useState<LearnerAnalyticsViewState>({ status: 'resolving' })
+  const [learnerRetry, setLearnerRetry] = useState(0)
   const [safetyReadState, setSafetyReadState] = useState<SafetyOperationsReadState>({ status: 'loading' })
+  const [safetyRetry, setSafetyRetry] = useState(0)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
@@ -150,19 +177,32 @@ export function AdminConsoleRoute() {
       if (!controller.signal.aborted) setSafetyReadState(state)
     })
     return () => controller.abort()
-  }, [authorizationState, section])
+  }, [authorizationState, safetyRetry, section])
 
   useEffect(() => {
-    if (!hasCapability(authorization, 'curriculum:read') || section !== 'curriculum-validation') {
-      setValidationModel(null)
+    if (section !== 'curriculum-validation') {
+      setValidationState({ status: 'loading' })
+      return
+    }
+    if (!hasCapability(authorization, 'curriculum:read')) {
+      setValidationState({ status: 'denied' })
       return
     }
     const controller = new AbortController()
-    void readAdminCurriculumValidation({ signal: controller.signal }).then((model) => {
-      if (!controller.signal.aborted) setValidationModel(model)
+    setValidationState({ status: 'loading' })
+    void readAdminCurriculumValidation({ signal: controller.signal }).then((state) => {
+      if (!controller.signal.aborted) setValidationState(state)
     })
     return () => controller.abort()
-  }, [authorization, section])
+  }, [authorizationState, section, validationRetry])
+
+  useEffect(() => {
+    if (section !== 'engines') return
+    const requestedEngine = adminRouteEngine(pathname)
+    if (!requestedEngine || requestedEngine === selectedEngine) return
+    setSelectedEngine(requestedEngine)
+    setSelectedEngineVersion(null)
+  }, [pathname, section, selectedEngine])
 
   useEffect(() => {
     if (section !== 'engines') return
@@ -203,7 +243,7 @@ export function AdminConsoleRoute() {
       if (active) setLearnerState(state)
     })
     return () => { active = false }
-  }, [authorizationState, learnerSource, section])
+  }, [authorizationState, learnerRetry, learnerSource, section])
 
   useEffect(() => {
     if (section !== 'costs') return
@@ -267,6 +307,12 @@ export function AdminConsoleRoute() {
     setPathname(nextPath)
   }
 
+  function navigateEngine(engine: AdminEngineId) {
+    const nextPath = `${ADMIN_CONSOLE_PATH}/engines/${engine}`
+    window.history.pushState({}, '', nextPath)
+    setPathname(nextPath)
+  }
+
   if (authorization.status === 'resolving') return <AdminConsole authorization={authorization} />
   if (authorization.status === 'unauthorized') return <AdminConsole authorization={authorization} />
 
@@ -289,7 +335,7 @@ export function AdminConsoleRoute() {
   const title = section === 'curriculum-validation'
     ? 'Curriculum validation'
     : section === 'system-health' ? 'System Health'
-      : section === 'engines' ? 'Engine Performance'
+      : section === 'engines' ? `${ENGINE_PAGE_LABELS[selectedEngine]} Engine Performance`
         : section === 'costs' ? 'AI & Costs'
           : section === 'learners' ? 'Learner Analytics'
             : section === 'safety' ? 'Safety Operations'
@@ -303,7 +349,7 @@ export function AdminConsoleRoute() {
       onNavigate={navigate}
     >
         {section === 'learners' && (
-          <LearnerAnalytics state={learnerState} />
+          <LearnerAnalytics state={learnerState} onRetry={() => setLearnerRetry((value) => value + 1)} />
         )}
         {section === 'engines' && (
           <EnginePerformanceDashboard
@@ -314,6 +360,7 @@ export function AdminConsoleRoute() {
             onEngineChange={(engine) => {
               setSelectedEngine(engine)
               setSelectedEngineVersion(null)
+              navigateEngine(engine)
             }}
             onWindowChange={(window) => {
               setEngineWindow(window)
@@ -338,6 +385,7 @@ export function AdminConsoleRoute() {
               ? { status: 'authorized', role: authorization.role, capabilities: authorization.capabilities }
               : { status: 'denied', reasonCode: 'safety_read_required' }}
             readState={safetyReadState}
+            onRetry={() => setSafetyRetry((value) => value + 1)}
           />
         )}
         {section === 'curriculum' && (
@@ -353,7 +401,8 @@ export function AdminConsoleRoute() {
             authorization={hasCapability(authorization, 'curriculum:read')
               ? { state: 'authorized', capability: 'curriculum:read' }
               : { state: 'denied' }}
-            model={validationModel}
+            readState={validationState}
+            onRetry={() => setValidationRetry((value) => value + 1)}
           />
         )}
         {section === 'system-health' && (

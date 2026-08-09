@@ -9,14 +9,23 @@ type FetchLike = (input: string, init: RequestInit) => Promise<{
   json(): Promise<unknown>
 }>
 
+export type CurriculumValidationReadState =
+  | { readonly status: 'loading' }
+  | { readonly status: 'ready'; readonly model: CurriculumValidationReadModel }
+  | { readonly status: 'no-evidence' }
+  | { readonly status: 'unavailable' }
+  | { readonly status: 'denied' }
+  | { readonly status: 'error'; readonly code: 'unexpected_response' }
+
 export async function readAdminCurriculumValidation(options: {
   readonly fetchImpl?: FetchLike
   readonly getAccessToken?: () => Promise<string | null>
   readonly signal?: AbortSignal
-} = {}): Promise<CurriculumValidationReadModel | null> {
+} = {}): Promise<CurriculumValidationReadState> {
   try {
     const token = await (options.getAccessToken ?? getGatewayAccessToken)()
-    if (!token || options.signal?.aborted) return null
+    if (!token) return { status: 'denied' }
+    if (options.signal?.aborted) return { status: 'unavailable' }
     const response = await (options.fetchImpl ?? fetch)('/api/admin/curriculum/validation', {
       method: 'GET',
       headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
@@ -25,9 +34,19 @@ export async function readAdminCurriculumValidation(options: {
       referrerPolicy: 'no-referrer',
       signal: options.signal,
     })
-    if (response.status !== 200) return null
-    return buildCurriculumValidationReadModel(await response.json())
+    if (response.status === 401 || response.status === 403) return { status: 'denied' }
+    if (response.status === 204 || response.status === 404) return { status: 'no-evidence' }
+    if (response.status >= 500) return { status: 'unavailable' }
+    if (response.status !== 200) return { status: 'error', code: 'unexpected_response' }
+    try {
+      return {
+        status: 'ready',
+        model: buildCurriculumValidationReadModel(await response.json()),
+      }
+    } catch {
+      return { status: 'error', code: 'unexpected_response' }
+    }
   } catch {
-    return null
+    return { status: 'unavailable' }
   }
 }

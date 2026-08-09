@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import type { AdminEngineId } from '../../admin/admin0Vocabulary'
 import { ADMIN_ROLE_CAPABILITIES } from '../../admin/contracts'
-import { adminRouteSection, presentationAuthorization } from './AdminConsoleRoute'
+import { adminRouteEngine, adminRouteSection, presentationAuthorization } from './AdminConsoleRoute'
 
 describe('Admin Console integration route', () => {
   it.each([
@@ -18,6 +19,20 @@ describe('Admin Console integration route', () => {
     ['/academy/admin/system-health', 'system-health'],
   ] as const)('maps %s to %s', (pathname, section) => {
     expect(adminRouteSection(pathname)).toBe(section)
+  })
+
+  it.each([
+    'tutor', 'study', 'assessment', 'curriculum', 'jarvis', 'tts', 'gateway', 'sync',
+  ] as const)('supports the canonical %s engine deep link', (engine: AdminEngineId) => {
+    const pathname = '/academy/admin/engines/' + engine
+    expect(adminRouteEngine(pathname)).toBe(engine)
+    expect(adminRouteSection(pathname)).toBe('engines')
+  })
+
+  it('fails closed for invalid or trailing engine deep links', () => {
+    expect(adminRouteEngine('/academy/admin/engines/not-an-engine')).toBeNull()
+    expect(adminRouteSection('/academy/admin/engines/not-an-engine')).toBe('unknown')
+    expect(adminRouteSection('/academy/admin/engines/tutor/details')).toBe('unknown')
   })
 
   it('never matches the learner administrator-like path', () => {

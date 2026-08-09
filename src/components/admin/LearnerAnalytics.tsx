@@ -24,9 +24,11 @@ export function moveLearnerSelection(
 export function LearnerAnalytics({
   state,
   initialLearnerRef,
+  onRetry,
 }: {
   state: LearnerAnalyticsViewState
   initialLearnerRef?: string
+  onRetry?: () => void
 }) {
   const [selectedRef, setSelectedRef] = useState(initialLearnerRef ?? '')
 
@@ -34,29 +36,29 @@ export function LearnerAnalytics({
     return <AccessState busy title="Verifying access" message="Learner evidence stays private until administrator authorization is confirmed." />
   }
   if (state.status === 'unauthorized') {
-    return <AccessState title="Learner analytics unavailable" message="The canonical learners:read capability is required." />
+    return <AccessState title="Learner analytics unavailable" message="The canonical learners:read capability is required." backToAcademy />
   }
   if (state.status === 'loading') {
     return <AccessState busy title="Loading learner evidence" message="Reading authorized educational records." />
   }
   if (state.status === 'error') {
-    return <AccessState title="Learner evidence unavailable" message={state.message} alert />
+    return <AccessState title="Learner evidence unavailable" message={state.message} alert onRetry={onRetry} />
   }
 
   const { learners, details, observedAt } = state.snapshot
   const selected = details[selectedRef] ?? details[learners[0]?.learnerRef ?? '']
   if (!selected) {
     return (
-      <main className="rounded-2xl border border-slate-200 bg-white p-6" aria-labelledby="learner-analytics-title">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6" aria-labelledby="learner-analytics-title">
         <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Admin console</p>
         <h1 id="learner-analytics-title" className="mt-1 text-3xl font-bold text-slate-950">Learner analytics</h1>
         <p className="mt-4 text-slate-600">No learner records are available to this authorized view.</p>
-      </main>
+      </div>
     )
   }
 
   return (
-    <main className="space-y-6" aria-labelledby="learner-analytics-title">
+    <div className="space-y-6" aria-labelledby="learner-analytics-title">
       <header className="rounded-2xl border border-slate-200 bg-white p-6">
         <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Admin console</p>
         <div className="mt-1 flex flex-wrap items-end justify-between gap-3">
@@ -102,19 +104,21 @@ export function LearnerAnalytics({
       </section>
 
       <LearnerDetailView detail={selected} />
-    </main>
+    </div>
   )
 }
 
-function AccessState({ busy = false, title, message, alert = false }: { busy?: boolean; title: string; message: string; alert?: boolean }) {
+function AccessState({ busy = false, title, message, alert = false, onRetry, backToAcademy = false }: { busy?: boolean; title: string; message: string; alert?: boolean; onRetry?: () => void; backToAcademy?: boolean }) {
   return (
-    <main className="flex min-h-72 items-center justify-center rounded-2xl border border-slate-200 bg-white p-6" aria-busy={busy}>
+    <div className="flex min-h-72 items-center justify-center rounded-2xl border border-slate-200 bg-white p-6" aria-busy={busy}>
       <section className="max-w-lg text-center" aria-live="polite" role={alert ? 'alert' : undefined}>
         <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Learner analytics</p>
         <h1 className="mt-2 text-2xl font-bold text-slate-950">{title}</h1>
         <p className="mt-2 text-slate-600">{message}</p>
+        {onRetry && <button type="button" onClick={onRetry} className="mt-4 min-h-11 rounded-lg bg-slate-950 px-4 py-2 font-bold text-white">Try again</button>}
+        {backToAcademy && <a href="/academy" className="mt-4 inline-flex min-h-11 items-center rounded-lg border border-slate-400 px-4 py-2 font-bold text-slate-900">Back to Academy</a>}
       </section>
-    </main>
+    </div>
   )
 }
 
@@ -135,6 +139,7 @@ function LearnerRow({ learner, selected, allRefs, onSelect }: { learner: Learner
           type="button"
           data-learner-ref={learner.learnerRef}
           aria-pressed={selected}
+          aria-controls="learner-detail"
           tabIndex={selected ? 0 : -1}
           onClick={() => onSelect(learner.learnerRef)}
           onKeyDown={handleKey}
@@ -180,7 +185,7 @@ function Unavailable({ reason }: { reason: LearnerEvidenceUnavailableReason }) {
 
 function LearnerDetailView({ detail }: { detail: LearnerDetail }) {
   return (
-    <article className="space-y-5" aria-labelledby="learner-detail-title">
+    <article id="learner-detail" className="space-y-5" aria-labelledby="learner-detail-title" aria-live="polite">
       <header className="rounded-2xl bg-slate-950 p-6 text-white">
         <p className="text-xs font-bold uppercase tracking-widest text-sky-300">Learner detail</p>
         <h2 id="learner-detail-title" className="mt-1 text-3xl font-bold">{detail.displayName}</h2>
@@ -228,7 +233,7 @@ function LearnerDetailView({ detail }: { detail: LearnerDetail }) {
       </DetailSection>
 
       <DetailSection id="future-title" title="Future integrations">
-        <div className="grid gap-3 md:grid-cols-2"><IntegrationEmpty title="Operational telemetry">Unavailable pending an authorized ADMIN-2 integration.</IntegrationEmpty><IntegrationEmpty title="AI cost per learner">Unavailable pending a reconciled ADMIN-3 integration. No usage or cost is inferred here.</IntegrationEmpty></div>
+        <div className="grid gap-3 md:grid-cols-2"><IntegrationEmpty title="Operational telemetry">Unavailable until the authorized operational telemetry connection is available.</IntegrationEmpty><IntegrationEmpty title="AI cost per learner">Unavailable until reconciled learner attribution is available. No usage or cost is inferred here.</IntegrationEmpty></div>
       </DetailSection>
     </article>
   )

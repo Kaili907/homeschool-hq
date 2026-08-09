@@ -8,7 +8,7 @@ const authorized = { state: 'authorized', capability: 'curriculum:read' } as con
 
 function render(model = buildCanonicalCurriculumValidationReadModel()) {
   return renderToStaticMarkup(
-    <CurriculumValidationDashboard authorization={authorized} model={model} />,
+    <CurriculumValidationDashboard authorization={authorized} readState={{ status: 'ready', model }} />,
   )
 }
 
@@ -92,6 +92,8 @@ describe('CurriculumValidationDashboard', () => {
     expect(html).toContain('course: ma-g5-mathematics')
     expect(html).toContain('No mapped assessments')
     expect(html).toContain('GAP')
+    expect(html).toContain('scope="col"')
+    expect(html).toContain('scope="row"')
   })
 
   it('does not expose privileged evidence while authorization is unresolved or denied', () => {
@@ -104,10 +106,10 @@ describe('CurriculumValidationDashboard', () => {
       },
     })
     const unresolved = renderToStaticMarkup(
-      <CurriculumValidationDashboard authorization={{ state: 'unresolved' }} model={secretModel} />,
+      <CurriculumValidationDashboard authorization={{ state: 'unresolved' }} readState={{ status: 'ready', model: secretModel }} />,
     )
     const denied = renderToStaticMarkup(
-      <CurriculumValidationDashboard authorization={{ state: 'denied' }} model={secretModel} />,
+      <CurriculumValidationDashboard authorization={{ state: 'denied' }} readState={{ status: 'ready', model: secretModel }} />,
     )
 
     expect(unresolved).toContain('Authorization is still being verified')
@@ -122,13 +124,32 @@ describe('CurriculumValidationDashboard', () => {
   it('is a navigable read-only surface with no repair or publishing controls', () => {
     const html = render()
 
-    expect(html).toMatch(/<main[^>]+aria-labelledby="validation-title"/)
+    expect(html).not.toContain('<main')
+    expect(html).toContain('aria-labelledby="validation-title"')
+    expect(html).toContain('<dl class="mt-6')
+    expect(html).toContain('aria-current="page"')
+    expect(html).toContain('aria-controls="validation-check-results"')
     expect(html).toContain('<details')
     expect(html).toContain('<summary')
     expect(html).toContain('for="validation-search"')
     expect(html).toContain('for="validation-state"')
     expect(html).not.toContain('<button')
     expect(html).not.toMatch(/>\s*(Fix|Repair|Regenerate|Publish)\s*</i)
+  })
+
+  it('renders loading, no-evidence, unavailable, denied, and error as distinct truthful states', () => {
+    const loading = renderToStaticMarkup(<CurriculumValidationDashboard authorization={authorized} readState={{ status: 'loading' }} />)
+    const empty = renderToStaticMarkup(<CurriculumValidationDashboard authorization={authorized} readState={{ status: 'no-evidence' }} />)
+    const unavailable = renderToStaticMarkup(<CurriculumValidationDashboard authorization={authorized} readState={{ status: 'unavailable' }} onRetry={() => {}} />)
+    const denied = renderToStaticMarkup(<CurriculumValidationDashboard authorization={authorized} readState={{ status: 'denied' }} />)
+    const error = renderToStaticMarkup(<CurriculumValidationDashboard authorization={authorized} readState={{ status: 'error', code: 'unexpected_response' }} onRetry={() => {}} />)
+    expect(loading).toContain('Loading validation evidence')
+    expect(empty).toContain('UNKNOWN / NOT VALIDATED')
+    expect(unavailable).toContain('This is not a validation result')
+    expect(unavailable).toContain('Try again')
+    expect(denied).toContain('does not include curriculum:read')
+    expect(error).toContain('unexpected response')
+    expect(error).not.toContain('UNKNOWN / NOT VALIDATED')
   })
 
   it('renders controlled error text instead of arbitrary exception content', () => {
