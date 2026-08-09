@@ -59,8 +59,10 @@ existing event ledger unchanged. It adds a service-only, authorization-asserting
 `academy_aggregate_operational_events_v2` RPC and a range index. Queries are
 half-open, limited to 366 days and 4,096 allowlisted groups, and fail instead of
 silently truncating. The result contains counts, bounded operational dimensions,
-duration summaries, explicit group completeness, and completeness for each
-retention class; it contains no event IDs, execution keys, household/learner
+exact total/engine/service P50 and P95 duration summaries, explicit group
+completeness, and completeness for each retention class. The exact summaries
+support ADMIN-9 without combining grouped percentiles or substituting averages;
+the result contains no event IDs, execution keys, household/learner
 identity, raw metadata, or raw rows. Logically expired rows are excluded even if
 the bounded purge job has not removed them yet. This migration has not been
 applied to a hosted Supabase project.

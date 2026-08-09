@@ -6,7 +6,7 @@ import {
 import { errorResponse, jsonResponse } from './_shared/http.js'
 import {
   SYSTEM_HEALTH_WINDOWS,
-  buildSystemHealthProjection,
+  buildSystemHealthProjectionFromAggregates,
 } from '../../src/admin/systemHealth.ts'
 
 const ADMIN_HEALTH_PATHS = new Set([
@@ -52,18 +52,21 @@ export function createAdminHealthHandler(overrides = {}) {
     }
     if (!authorized.ok) return authorized.response
 
+    const observationTime = now()
     try {
-      const evidence = await source.list()
-      const projection = buildSystemHealthProjection(evidence.events, {
-        now: now(),
+      const evidence = await source.read({ now: observationTime, selectedWindow: window })
+      const projection = buildSystemHealthProjectionFromAggregates(evidence, {
+        now: observationTime,
         selectedWindow: window,
         disabledEngines: overrides.disabledEngines ?? disabledHealthEngines(env),
-        sourceTruncated: evidence.sourceTruncated,
-        rejectedRows: evidence.rejectedRows,
       })
       return jsonResponse(200, projection)
     } catch {
-      return errorResponse(503, 'health_source_unavailable')
+      return jsonResponse(200, buildSystemHealthProjectionFromAggregates(null, {
+        now: observationTime,
+        selectedWindow: window,
+        disabledEngines: overrides.disabledEngines ?? disabledHealthEngines(env),
+      }))
     }
   }
 }

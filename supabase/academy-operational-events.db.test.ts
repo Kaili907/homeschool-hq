@@ -300,7 +300,7 @@ describe('ADMIN-0 v2 operational event database contract', () => {
     await asRole(database, 'service_role', null, () => database.query(`
       select public.academy_record_operational_event_v2(
         'aggregate:execution:' || series::text,
-        $1::jsonb
+        jsonb_set($1::jsonb, '{duration_ms}', to_jsonb(series))
       )
       from generate_series(1, 501) as series
     `, [JSON.stringify(facts({
@@ -320,11 +320,52 @@ describe('ADMIN-0 v2 operational event database contract', () => {
         grouping: 'complete', groupCount: 1, groupLimit: 4096,
         allRetentionClasses: true,
       },
-      groups: [{ engine: 'study', eventType: 'study.session', eventCount: 501 }],
+      summary: {
+        eventCount: 501, successCount: 501, durationCount: 501,
+        durationP50Ms: 251, durationP95Ms: 476,
+      },
+      engineSummaries: [{
+        engine: 'study', eventCount: 501, successCount: 501,
+        durationCount: 501, durationP50Ms: 251, durationP95Ms: 476,
+      }],
+      groups: [{
+        engine: 'study', eventType: 'study.session', eventCount: 501,
+        durationP50Ms: 251, durationP95Ms: 476,
+      }],
     })
     expect(JSON.stringify(aggregate)).not.toMatch(
       /eventId|executionKey|householdRef|learnerRef|metadata|conversation|prompt|response|audio|assessmentAnswer/i,
     )
+  })
+
+  it('returns exact cross-group latency summaries for health engines and services', async () => {
+    const database = databases[0]
+    await asRole(database, 'service_role', null, () => database.query(`
+      select public.academy_record_operational_event_v2(
+        'health-latency:execution:' || series::text,
+        jsonb_set($1::jsonb, '{duration_ms}', to_jsonb(series))
+      )
+      from generate_series(1, 20) as series
+    `, [JSON.stringify(facts({
+      scope: 'system', household_id: null, learner_id: null,
+      engine: 'gateway', engine_version: 'gateway.v2', curriculum_version: null,
+      course_ref: null, unit_ref: null, lesson_ref: null, skill_ref: null,
+      event_type: 'gateway.request', metadata: { operation: 'request', provider: 'anthropic' },
+    }))]))
+    const end = new Date(Date.now() + 60_000)
+    const start = new Date(end.getTime() - 60 * 60 * 1_000)
+    const response = await aggregateAsService(database, [
+      start.toISOString(), end.toISOString(), 'gateway', null, null, null, 'health:read',
+    ])
+    expect(response.rows[0].aggregate).toMatchObject({
+      summary: { eventCount: 20, durationCount: 20, durationP50Ms: 11, durationP95Ms: 19 },
+      engineSummaries: [{
+        engine: 'gateway', eventCount: 20, durationP50Ms: 11, durationP95Ms: 19,
+      }],
+      serviceSummaries: [{
+        serviceId: 'anthropic_gateway', eventCount: 20, durationP50Ms: 11, durationP95Ms: 19,
+      }],
+    })
   })
 
   it('declares retention-safe windows instead of mixing differently retained populations', async () => {

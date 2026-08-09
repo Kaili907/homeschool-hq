@@ -41,6 +41,9 @@ declare
   detected_groups integer;
   total_events bigint;
   aggregate_groups jsonb;
+  aggregate_summary jsonb;
+  engine_summaries jsonb;
+  service_summaries jsonb;
 begin
   if auth.uid() is not null
      or not academy_private.operational_is_trusted_server()
@@ -168,8 +171,9 @@ begin
       count(*)::bigint as event_count,
       count(event.duration_ms)::bigint as duration_count,
       coalesce(sum(event.duration_ms), 0)::bigint as duration_total_ms,
-      percentile_disc(0.50) within group (order by event.duration_ms)
-        filter (where event.duration_ms is not null) as duration_p50_ms,
+      round((percentile_cont(0.50) within group (order by event.duration_ms)
+        filter (where event.duration_ms is not null))::numeric)::bigint
+        as duration_p50_ms,
       percentile_disc(0.95) within group (order by event.duration_ms)
         filter (where event.duration_ms is not null) as duration_p95_ms,
       min(event.occurred_at) as first_occurred_at,
@@ -197,6 +201,163 @@ begin
       event.metadata ->> 'provider',
       event.metadata ->> 'route'
   ) as grouped;
+
+  select jsonb_build_object(
+    'eventCount', count(*)::bigint,
+    'successCount', count(*) filter (where event.result = 'success')::bigint,
+    'fallbackCount', count(*) filter (where event.result = 'fallback')::bigint,
+    'rejectedCount', count(*) filter (where event.result = 'rejected')::bigint,
+    'timeoutCount', count(*) filter (where event.result = 'timeout')::bigint,
+    'providerErrorCount', count(*) filter (where event.result = 'provider_error')::bigint,
+    'validationErrorCount', count(*) filter (where event.result = 'validation_error')::bigint,
+    'safetyStopCount', count(*) filter (where event.result = 'safety_stop')::bigint,
+    'durationCount', count(event.duration_ms)::bigint,
+    'durationP50Ms', case when count(event.duration_ms) = 0 then null else
+      round((percentile_cont(0.50) within group (order by event.duration_ms)
+        filter (where event.duration_ms is not null))::numeric)::bigint end,
+    'durationP95Ms', percentile_disc(0.95) within group (order by event.duration_ms)
+      filter (where event.duration_ms is not null),
+    'firstOccurredAt', min(event.occurred_at),
+    'lastOccurredAt', max(event.occurred_at)
+  ) into aggregate_summary
+  from public.academy_operational_events as event
+  where event.occurred_at >= p_start
+    and event.occurred_at < p_end
+    and event.expires_at > reference_time
+    and (p_engine is null or event.engine = p_engine)
+    and (p_engine_version is null or event.engine_version = p_engine_version)
+    and (p_course_ref is null or event.course_ref = p_course_ref)
+    and (p_unit_ref is null or event.unit_ref = p_unit_ref);
+
+  select coalesce(
+    jsonb_agg(
+      jsonb_build_object(
+        'engine', summary.engine,
+        'appVersion', summary.app_version,
+        'engineVersion', summary.engine_version,
+        'curriculumVersion', summary.curriculum_version,
+        'eventCount', summary.event_count,
+        'successCount', summary.success_count,
+        'fallbackCount', summary.fallback_count,
+        'rejectedCount', summary.rejected_count,
+        'timeoutCount', summary.timeout_count,
+        'providerErrorCount', summary.provider_error_count,
+        'validationErrorCount', summary.validation_error_count,
+        'safetyStopCount', summary.safety_stop_count,
+        'durationCount', summary.duration_count,
+        'durationP50Ms', summary.duration_p50_ms,
+        'durationP95Ms', summary.duration_p95_ms,
+        'firstOccurredAt', summary.first_occurred_at,
+        'lastOccurredAt', summary.last_occurred_at
+      ) order by summary.engine
+    ),
+    '[]'::jsonb
+  ) into engine_summaries
+  from (
+    select
+      event.engine,
+      (array_agg(event.app_version order by event.occurred_at desc, event.event_id desc))[1]
+        as app_version,
+      (array_agg(event.engine_version order by event.occurred_at desc, event.event_id desc))[1]
+        as engine_version,
+      (array_agg(event.curriculum_version order by event.occurred_at desc, event.event_id desc))[1]
+        as curriculum_version,
+      count(*)::bigint as event_count,
+      count(*) filter (where event.result = 'success')::bigint as success_count,
+      count(*) filter (where event.result = 'fallback')::bigint as fallback_count,
+      count(*) filter (where event.result = 'rejected')::bigint as rejected_count,
+      count(*) filter (where event.result = 'timeout')::bigint as timeout_count,
+      count(*) filter (where event.result = 'provider_error')::bigint as provider_error_count,
+      count(*) filter (where event.result = 'validation_error')::bigint as validation_error_count,
+      count(*) filter (where event.result = 'safety_stop')::bigint as safety_stop_count,
+      count(event.duration_ms)::bigint as duration_count,
+      case when count(event.duration_ms) = 0 then null else
+        round((percentile_cont(0.50) within group (order by event.duration_ms)
+          filter (where event.duration_ms is not null))::numeric)::bigint end
+        as duration_p50_ms,
+      percentile_disc(0.95) within group (order by event.duration_ms)
+        filter (where event.duration_ms is not null) as duration_p95_ms,
+      min(event.occurred_at) as first_occurred_at,
+      max(event.occurred_at) as last_occurred_at
+    from public.academy_operational_events as event
+    where event.occurred_at >= p_start
+      and event.occurred_at < p_end
+      and event.expires_at > reference_time
+      and (p_engine is null or event.engine = p_engine)
+      and (p_engine_version is null or event.engine_version = p_engine_version)
+      and (p_course_ref is null or event.course_ref = p_course_ref)
+      and (p_unit_ref is null or event.unit_ref = p_unit_ref)
+    group by event.engine
+  ) as summary;
+
+  select coalesce(
+    jsonb_agg(
+      jsonb_build_object(
+        'serviceId', summary.service_id,
+        'eventCount', summary.event_count,
+        'successCount', summary.success_count,
+        'fallbackCount', summary.fallback_count,
+        'rejectedCount', summary.rejected_count,
+        'timeoutCount', summary.timeout_count,
+        'providerErrorCount', summary.provider_error_count,
+        'validationErrorCount', summary.validation_error_count,
+        'safetyStopCount', summary.safety_stop_count,
+        'durationCount', summary.duration_count,
+        'durationP50Ms', summary.duration_p50_ms,
+        'durationP95Ms', summary.duration_p95_ms,
+        'firstOccurredAt', summary.first_occurred_at,
+        'lastOccurredAt', summary.last_occurred_at
+      ) order by summary.service_id
+    ),
+    '[]'::jsonb
+  ) into service_summaries
+  from (
+    select
+      scoped.service_id,
+      count(*)::bigint as event_count,
+      count(*) filter (where scoped.result = 'success')::bigint as success_count,
+      count(*) filter (where scoped.result = 'fallback')::bigint as fallback_count,
+      count(*) filter (where scoped.result = 'rejected')::bigint as rejected_count,
+      count(*) filter (where scoped.result = 'timeout')::bigint as timeout_count,
+      count(*) filter (where scoped.result = 'provider_error')::bigint as provider_error_count,
+      count(*) filter (where scoped.result = 'validation_error')::bigint as validation_error_count,
+      count(*) filter (where scoped.result = 'safety_stop')::bigint as safety_stop_count,
+      count(scoped.duration_ms)::bigint as duration_count,
+      case when count(scoped.duration_ms) = 0 then null else
+        round((percentile_cont(0.50) within group (order by scoped.duration_ms)
+          filter (where scoped.duration_ms is not null))::numeric)::bigint end
+        as duration_p50_ms,
+      percentile_disc(0.95) within group (order by scoped.duration_ms)
+        filter (where scoped.duration_ms is not null) as duration_p95_ms,
+      min(scoped.occurred_at) as first_occurred_at,
+      max(scoped.occurred_at) as last_occurred_at
+    from (
+      select
+        event.*,
+        case
+          when event.metadata ->> 'operation' = 'authorization'
+            or event.metadata ->> 'route' = 'admin' then 'admin_api'
+          when event.event_type = 'persistence.operation' then 'persistence'
+          when event.engine = 'tts'
+            or event.metadata ->> 'provider' = 'elevenlabs' then 'tts_gateway'
+          when event.engine = 'gateway'
+            or event.metadata ->> 'provider' = 'anthropic' then 'anthropic_gateway'
+          when event.engine = 'sync' then 'sync'
+          when event.engine = 'curriculum' then 'curriculum_read'
+          else 'academy_engine'
+        end as service_id
+      from public.academy_operational_events as event
+      where event.occurred_at >= p_start
+        and event.occurred_at < p_end
+        and event.expires_at > reference_time
+        and (p_engine is null or event.engine = p_engine)
+        and (p_engine_version is null or event.engine_version = p_engine_version)
+        and (p_course_ref is null or event.course_ref = p_course_ref)
+        and (p_unit_ref is null or event.unit_ref = p_unit_ref)
+    ) as scoped
+    where scoped.service_id <> 'academy_engine'
+    group by scoped.service_id
+  ) as summary;
 
   return jsonb_build_object(
     'schemaVersion', 2,
@@ -236,6 +397,9 @@ begin
       )
     ),
     'totalEventCount', total_events,
+    'summary', aggregate_summary,
+    'engineSummaries', engine_summaries,
+    'serviceSummaries', service_summaries,
     'groups', aggregate_groups
   );
 end;

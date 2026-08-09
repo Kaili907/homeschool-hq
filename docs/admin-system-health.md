@@ -2,38 +2,46 @@
 
 ADMIN-9 adds the read-only `/academy/admin/health` surface and the
 authorized `GET /api/admin/v1/health` projection. It uses Admin contract version
-2 and the existing ADMIN-2 `academy_list_operational_events_v2` seam. It does
-not add a health event ledger or a database migration.
+2 and TEL-FOUNDATION's `academy_aggregate_operational_events_v2` seam. It does
+not add a health event ledger or a new migration; the unreleased telemetry
+foundation migration carries the exact health summary extension.
 
 ## Authorization and privacy
 
 The browser authorization state is presentation-only. Every health request is
 authorized again by the server with `health:read`; the server then uses the
-service-only telemetry RPC with its canonical internal `engines:read`
+service-only aggregate RPC with its canonical internal `health:read`
 assertion. Anonymous users, students, guardians, expired/revoked assignments,
 and authorization lookup failures fail closed before telemetry access.
 
 The browser receives an aggregate DTO, not event rows. Event metadata,
 household/learner references, raw errors, provider bodies, and exception or SQL
 messages are structurally absent. Incident and status explanations are bounded
-codes with vetted UI mappings. Unknown codes render generic copy.
+codes with vetted UI mappings. Incident cards are bounded examples derived from
+the latest timestamp in an aggregate group; aggregate counts, rather than those
+examples, remain the complete health truth. Unknown codes render generic copy.
 
 ## Evidence bounds and time policy
 
-- The source reads at most the newest 500 canonical events. Exactly 500 rows is
-  conservatively treated as truncated evidence.
+- The source reads complete database aggregates for the requested bounded
+  windows. Event volume above the former 500-row raw-read ceiling does not make
+  otherwise valid health evidence unknown.
+- Aggregate grouping is bounded at 4,096 groups and fails closed rather than
+  truncating. Malformed, incomplete, unavailable, or retention-unsafe aggregate
+  evidence produces unknown health.
 - Primary health evaluation is always the last rolling hour. UI history windows
   are Last hour, Today (UTC), rolling 24 hours, and rolling 7 days.
 - Failure trend compares the selected history window with the immediately
   preceding equal-duration window. It is `unknown` when evidence is empty,
-  rejected, or truncated.
+  invalid, or unavailable.
 - Evidence is `current` only when its newest observation is at most 15 minutes
   old. Older evidence is `stale`; absence is `no_evidence`.
 - Observation time comes from trusted event timestamps. Projection generation
   time is displayed separately and is never a health observation.
 - Every health window is at most 7 days, below the shortest 30-day operational
-  retention. The TEL-FOUNDATION aggregate exposes explicit retention
-  completeness for the future raw-reader replacement.
+  retention. The TEL-FOUNDATION aggregate's explicit retention completeness is
+  required before ADMIN-9 will use the counts.
+- No raw telemetry row API is used by the health projection.
 
 ## Deterministic thresholds
 
@@ -60,8 +68,11 @@ infrastructure failure. Timeouts, provider errors, and validation errors are
 core failures. Fallbacks are a quality-degradation signal.
 
 P50 is the integer median (half values rounded to the nearest integer). P95 is
-the nearest-rank value. A percentile remains null until its sample minimum is
-met; the UI says that samples are insufficient instead of fabricating a value.
+the nearest-rank value. TEL-FOUNDATION computes those exact percentiles across
+the complete total, engine, and service populations; group percentiles are not
+combined or substituted, and average latency is never used as a percentile. A
+percentile remains null until its sample minimum is met; the UI says that
+samples are insufficient instead of fabricating a value.
 
 ## Health and safety semantics
 
