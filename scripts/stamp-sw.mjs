@@ -1,15 +1,26 @@
-// Post-build step: stamp the built service worker with a unique per-build id so
-// every deploy gets a fresh cache name (the SW's activate step then deletes old
-// caches → cache-bust). public/sw.js ships the literal `__BUILD_ID__`; Vite copies
-// it to dist/sw.js, and this replaces it. Runs as part of `npm run build`.
+// Post-build step: stamp the built client document and service worker with one
+// non-secret per-build id. The client uses it only for stale-refresh loop
+// diagnostics, while the worker uses it for cache busting.
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
-const sw = resolve(process.cwd(), 'dist/sw.js')
-if (!existsSync(sw)) {
-  console.error('stamp-sw: dist/sw.js not found — did the build run?')
-  process.exit(1)
-}
 const id = `${Date.now()}`
-writeFileSync(sw, readFileSync(sw, 'utf8').replaceAll('__BUILD_ID__', id))
-console.log(`stamp-sw: cache id ${id}`)
+const outputs = [
+  resolve(process.cwd(), 'dist/index.html'),
+  resolve(process.cwd(), 'dist/sw.js'),
+]
+
+for (const output of outputs) {
+  if (!existsSync(output)) {
+    console.error(`stamp-sw: ${output} not found — did the build run?`)
+    process.exit(1)
+  }
+  const source = readFileSync(output, 'utf8')
+  if (!source.includes('__BUILD_ID__')) {
+    console.error(`stamp-sw: ${output} has no build identity placeholder`)
+    process.exit(1)
+  }
+  writeFileSync(output, source.replaceAll('__BUILD_ID__', id))
+}
+
+console.log(`stamp-sw: client/worker build id ${id}`)

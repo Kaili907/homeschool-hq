@@ -6,6 +6,10 @@ const workerSource = readFileSync(
   new URL('../public/sw.js', import.meta.url),
   'utf8',
 )
+const clientDocumentSource = readFileSync(
+  new URL('../index.html', import.meta.url),
+  'utf8',
+)
 
 function createHarness() {
   const listeners = new Map()
@@ -48,6 +52,13 @@ function createHarness() {
 }
 
 describe('service-worker update lifecycle', () => {
+  it('shares one stamped build identity placeholder with the client document', () => {
+    expect(clientDocumentSource).toContain(
+      '<meta name="manuel-academy-build-id" content="__BUILD_ID__" />',
+    )
+    expect(workerSource).toContain("homeschool-hq-__BUILD_ID__")
+  })
+
   it('keeps build-versioned cleanup and clients.claim on activate', async () => {
     const { caches, dispatch, self } = createHarness()
 
@@ -75,5 +86,25 @@ describe('service-worker update lifecycle', () => {
     })
     expect(accepted.waitUntil).toHaveBeenCalledOnce()
     expect(self.skipWaiting).toHaveBeenCalledOnce()
+  })
+
+  it('keeps Range video requests outside the cache path', async () => {
+    const { caches, dispatch } = createHarness()
+    const respondWith = vi.fn()
+
+    await dispatch('fetch', {
+      request: {
+        destination: 'video',
+        headers: new Headers({ Range: 'bytes=0-1023' }),
+        method: 'GET',
+        mode: 'cors',
+        url: 'https://academy.example/media/entry-loop.mp4',
+      },
+      respondWith,
+    })
+
+    expect(respondWith).not.toHaveBeenCalled()
+    expect(caches.match).not.toHaveBeenCalled()
+    expect(caches.open).not.toHaveBeenCalled()
   })
 })

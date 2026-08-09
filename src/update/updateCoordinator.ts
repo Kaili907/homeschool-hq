@@ -106,6 +106,8 @@ export interface UpdateAttemptStorage {
 }
 
 export interface ClientUpdateCoordinatorOptions {
+  /** Shared client/worker build stamp used only for stale-refresh diagnostics. */
+  readonly clientBuildId: string
   readonly clientSyncProtocolVersion: number
   readonly workerUpdates: ServiceWorkerUpdatePort
   readonly storage: UpdateAttemptStorage | null
@@ -115,6 +117,7 @@ export interface ClientUpdateCoordinatorOptions {
 }
 
 interface UpdateAttemptMetadata {
+  readonly clientBuildId: string
   readonly clientSyncProtocolVersion: number
   readonly serverSyncProtocolVersion: number
   readonly minimumSupportedSyncVersion: number
@@ -173,6 +176,7 @@ function sameAttempt(
   right: UpdateAttemptMetadata,
 ): boolean {
   return (
+    left.clientBuildId === right.clientBuildId &&
     left.clientSyncProtocolVersion === right.clientSyncProtocolVersion &&
     left.serverSyncProtocolVersion === right.serverSyncProtocolVersion &&
     left.minimumSupportedSyncVersion === right.minimumSupportedSyncVersion
@@ -190,14 +194,17 @@ function parseAttempt(value: string | null): UpdateAttemptMetadata | null {
     const keys = Object.keys(record).sort()
     if (
       keys.join(',') !==
-      'clientSyncProtocolVersion,minimumSupportedSyncVersion,serverSyncProtocolVersion'
+      'clientBuildId,clientSyncProtocolVersion,minimumSupportedSyncVersion,serverSyncProtocolVersion'
     ) {
       return null
     }
+    const build = record.clientBuildId
     const client = record.clientSyncProtocolVersion
     const server = record.serverSyncProtocolVersion
     const minimum = record.minimumSupportedSyncVersion
     if (
+      typeof build !== 'string' ||
+      build.length === 0 ||
       !Number.isSafeInteger(client) ||
       !Number.isSafeInteger(server) ||
       !Number.isSafeInteger(minimum)
@@ -205,6 +212,7 @@ function parseAttempt(value: string | null): UpdateAttemptMetadata | null {
       return null
     }
     return {
+      clientBuildId: build,
       clientSyncProtocolVersion: client as number,
       serverSyncProtocolVersion: server as number,
       minimumSupportedSyncVersion: minimum as number,
@@ -225,8 +233,12 @@ export class ClientUpdateCoordinator {
   #preparation: Promise<void> = Promise.resolve()
   #terminalAbort = new AbortController()
   #reloadExecuted = false
+  #refreshRequestStarted = false
 
   constructor(private readonly options: ClientUpdateCoordinatorOptions) {
+    if (!options.clientBuildId.trim()) {
+      throw new Error('A non-empty client build identity is required.')
+    }
     if (!Number.isSafeInteger(options.clientSyncProtocolVersion)) {
       throw new Error('A numeric client sync protocol version is required.')
     }
@@ -287,6 +299,7 @@ export class ClientUpdateCoordinator {
     }
 
     this.#attempt = {
+      clientBuildId: this.options.clientBuildId,
       clientSyncProtocolVersion: this.options.clientSyncProtocolVersion,
       serverSyncProtocolVersion: signal.syncProtocolVersion,
       minimumSupportedSyncVersion: signal.minimumSupportedSyncVersion,
@@ -364,6 +377,7 @@ export class ClientUpdateCoordinator {
       return { accepted: false, reason: 'storage-unavailable' }
     }
     if (
+      this.#refreshRequestStarted ||
       this.#state.refresh === 'waiting-for-worker' ||
       this.#state.refresh === 'reloading'
     ) {
@@ -372,6 +386,7 @@ export class ClientUpdateCoordinator {
     if (this.#state.refresh !== 'available' || !this.#attempt) {
       return { accepted: false, reason: 'not-ready' }
     }
+    this.#refreshRequestStarted = true
     if (!this.#writeAttempt(this.#attempt)) {
       this.#setRefresh('storage-unavailable', storageDetail)
       return { accepted: false, reason: 'storage-unavailable' }
@@ -379,12 +394,15 @@ export class ClientUpdateCoordinator {
 
     const waitingForWorker =
       await this.options.workerUpdates.activateWaitingWorker()
-    if (
-      waitingForWorker &&
-      !this.options.workerUpdates.state.controllerChanged
-    ) {
+    if (waitingForWorker) {
       this.#setRefresh('waiting-for-worker', null)
-      return { accepted: true, waitingForWorker: true }
+      if (this.options.workerUpdates.state.controllerChanged) {
+        this.#reloadOnce()
+      }
+      return {
+        accepted: true,
+        waitingForWorker: !this.#reloadExecuted,
+      }
     }
     this.#reloadOnce()
     return { accepted: true, waitingForWorker: false }

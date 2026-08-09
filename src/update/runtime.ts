@@ -23,6 +23,15 @@ function browserStorage(): Storage | null {
   }
 }
 
+function clientWorkerBuildId(): string {
+  if (typeof document === 'undefined') return '__BUILD_ID__'
+  return (
+    document
+      .querySelector<HTMLMetaElement>('meta[name="manuel-academy-build-id"]')
+      ?.content.trim() || '__BUILD_ID__'
+  )
+}
+
 const workerUpdates =
   typeof navigator !== 'undefined' && 'serviceWorker' in navigator
     ? new BrowserServiceWorkerUpdates(
@@ -31,6 +40,7 @@ const workerUpdates =
     : new UnavailableServiceWorkerUpdates()
 
 export const academyUpdateCoordinator = new ClientUpdateCoordinator({
+  clientBuildId: clientWorkerBuildId(),
   clientSyncProtocolVersion: ACADEMY_SYNC_PROTOCOL_VERSION,
   workerUpdates,
   storage: browserStorage(),

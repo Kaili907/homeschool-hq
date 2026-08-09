@@ -14,6 +14,10 @@ class FakeWorker {
     this.listeners.add(listener)
   }
 
+  removeEventListener(_type: 'statechange', listener: () => void): void {
+    this.listeners.delete(listener)
+  }
+
   transition(state: string): void {
     this.state = state
     for (const listener of this.listeners) listener()
@@ -31,6 +35,10 @@ class FakeRegistration {
     this.updateFoundListeners.add(listener)
   }
 
+  removeEventListener(_type: 'updatefound', listener: () => void): void {
+    this.updateFoundListeners.delete(listener)
+  }
+
   emitUpdateFound(): void {
     for (const listener of this.updateFoundListeners) listener()
   }
@@ -44,6 +52,10 @@ class FakeContainer {
 
   addEventListener(_type: 'controllerchange', listener: () => void): void {
     this.controllerListeners.add(listener)
+  }
+
+  removeEventListener(_type: 'controllerchange', listener: () => void): void {
+    this.controllerListeners.delete(listener)
   }
 
   emitControllerChange(): void {
@@ -112,5 +124,35 @@ describe('BrowserServiceWorkerUpdates', () => {
       updateAvailable: false,
       controllerChanged: true,
     })
+  })
+
+  it('deterministically disposes every worker lifecycle observer', async () => {
+    const container = new FakeContainer()
+    const installing = new FakeWorker()
+    installing.state = 'installing'
+    container.registration.installing = installing
+    const monitor = monitorFor(container)
+    const observed = vi.fn()
+    monitor.subscribe(observed)
+    await monitor.start()
+
+    expect(container.controllerListeners).toHaveLength(1)
+    expect(container.registration.updateFoundListeners).toHaveLength(1)
+    expect(installing.listeners).toHaveLength(1)
+
+    monitor.dispose()
+    monitor.dispose()
+
+    expect(container.controllerListeners).toHaveLength(0)
+    expect(container.registration.updateFoundListeners).toHaveLength(0)
+    expect(installing.listeners).toHaveLength(0)
+    const callsAfterDispose = observed.mock.calls.length
+
+    container.emitControllerChange()
+    container.registration.emitUpdateFound()
+    installing.transition('installed')
+
+    expect(observed).toHaveBeenCalledTimes(callsAfterDispose)
+    await expect(monitor.activateWaitingWorker()).resolves.toBe(false)
   })
 })

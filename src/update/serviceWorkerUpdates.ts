@@ -23,12 +23,14 @@ export interface ServiceWorkerUpdatePort {
   requestUpdate(): Promise<void>
   activateWaitingWorker(): Promise<boolean>
   subscribe(listener: (state: ServiceWorkerUpdateSnapshot) => void): () => void
+  dispose(): void
 }
 
 interface WorkerLike {
   readonly state: string
   postMessage(message: unknown): void
   addEventListener(type: 'statechange', listener: () => void): void
+  removeEventListener(type: 'statechange', listener: () => void): void
 }
 
 interface RegistrationLike {
@@ -37,12 +39,14 @@ interface RegistrationLike {
   readonly waiting: WorkerLike | null
   update(): Promise<unknown>
   addEventListener(type: 'updatefound', listener: () => void): void
+  removeEventListener(type: 'updatefound', listener: () => void): void
 }
 
 export interface ServiceWorkerContainerLike {
   readonly controller: WorkerLike | null
   register(scriptURL: string): Promise<RegistrationLike>
   addEventListener(type: 'controllerchange', listener: () => void): void
+  removeEventListener(type: 'controllerchange', listener: () => void): void
 }
 
 const unavailableState: ServiceWorkerUpdateSnapshot = Object.freeze({
@@ -65,6 +69,8 @@ export class UnavailableServiceWorkerUpdates
   subscribe(): () => void {
     return () => {}
   }
+
+  dispose(): void {}
 }
 
 /**
@@ -75,14 +81,25 @@ export class BrowserServiceWorkerUpdates implements ServiceWorkerUpdatePort {
   readonly #listeners = new Set<
     (state: ServiceWorkerUpdateSnapshot) => void
   >()
-  readonly #observedRegistrations = new WeakSet<object>()
-  readonly #observedWorkers = new WeakSet<object>()
+  readonly #registrationListeners = new Map<RegistrationLike, () => void>()
+  readonly #workerListeners = new Map<WorkerLike, () => void>()
   #registration: RegistrationLike | null = null
   #startPromise: Promise<void> | null = null
+  #controllerListenerAttached = false
+  #disposed = false
   #state: ServiceWorkerUpdateSnapshot = {
     phase: 'idle',
     updateAvailable: false,
     controllerChanged: false,
+  }
+  readonly #handleControllerChange = (): void => {
+    if (this.#disposed) return
+    this.#state = {
+      phase: 'controller-changed',
+      updateAvailable: false,
+      controllerChanged: true,
+    }
+    this.#emit()
   }
 
   constructor(
@@ -97,17 +114,20 @@ export class BrowserServiceWorkerUpdates implements ServiceWorkerUpdatePort {
   subscribe(
     listener: (state: ServiceWorkerUpdateSnapshot) => void,
   ): () => void {
+    if (this.#disposed) return () => {}
     this.#listeners.add(listener)
     listener(this.#state)
     return () => this.#listeners.delete(listener)
   }
 
   start(): Promise<void> {
+    if (this.#disposed) return Promise.resolve()
     this.#startPromise ??= this.#start()
     return this.#startPromise
   }
 
   async requestUpdate(): Promise<void> {
+    if (this.#disposed) return
     await this.start()
     const registration = this.#registration
     if (!registration) return
@@ -123,6 +143,7 @@ export class BrowserServiceWorkerUpdates implements ServiceWorkerUpdatePort {
   }
 
   async activateWaitingWorker(): Promise<boolean> {
+    if (this.#disposed) return false
     const waiting = this.#registration?.waiting
     if (!waiting) return false
 
@@ -136,18 +157,38 @@ export class BrowserServiceWorkerUpdates implements ServiceWorkerUpdatePort {
     }
   }
 
+  dispose(): void {
+    if (this.#disposed) return
+    this.#disposed = true
+    if (this.#controllerListenerAttached) {
+      this.container.removeEventListener(
+        'controllerchange',
+        this.#handleControllerChange,
+      )
+      this.#controllerListenerAttached = false
+    }
+    for (const [registration, listener] of this.#registrationListeners) {
+      registration.removeEventListener('updatefound', listener)
+    }
+    this.#registrationListeners.clear()
+    for (const [worker, listener] of this.#workerListeners) {
+      worker.removeEventListener('statechange', listener)
+    }
+    this.#workerListeners.clear()
+    this.#listeners.clear()
+    this.#registration = null
+  }
+
   async #start(): Promise<void> {
-    this.container.addEventListener('controllerchange', () => {
-      this.#state = {
-        phase: 'controller-changed',
-        updateAvailable: false,
-        controllerChanged: true,
-      }
-      this.#emit()
-    })
+    this.container.addEventListener(
+      'controllerchange',
+      this.#handleControllerChange,
+    )
+    this.#controllerListenerAttached = true
 
     try {
       const registration = await this.container.register(this.scriptURL)
+      if (this.#disposed) return
       this.#registration = registration
       this.#observeRegistration(registration)
       this.#refreshRegistrationState(registration)
@@ -157,13 +198,14 @@ export class BrowserServiceWorkerUpdates implements ServiceWorkerUpdatePort {
   }
 
   #observeRegistration(registration: RegistrationLike): void {
-    if (this.#observedRegistrations.has(registration)) return
-    this.#observedRegistrations.add(registration)
-    registration.addEventListener('updatefound', () => {
+    if (this.#disposed || this.#registrationListeners.has(registration)) return
+    const listener = () => {
       const installing = registration.installing
       if (installing) this.#observeWorker(installing, registration)
       this.#refreshRegistrationState(registration)
-    })
+    }
+    this.#registrationListeners.set(registration, listener)
+    registration.addEventListener('updatefound', listener)
     if (registration.installing) {
       this.#observeWorker(registration.installing, registration)
     }
@@ -173,11 +215,12 @@ export class BrowserServiceWorkerUpdates implements ServiceWorkerUpdatePort {
   }
 
   #observeWorker(worker: WorkerLike, registration: RegistrationLike): void {
-    if (this.#observedWorkers.has(worker)) return
-    this.#observedWorkers.add(worker)
-    worker.addEventListener('statechange', () => {
+    if (this.#disposed || this.#workerListeners.has(worker)) return
+    const listener = () => {
       this.#refreshRegistrationState(registration, worker)
-    })
+    }
+    this.#workerListeners.set(worker, listener)
+    worker.addEventListener('statechange', listener)
   }
 
   #refreshRegistrationState(

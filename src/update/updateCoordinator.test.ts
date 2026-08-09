@@ -43,10 +43,23 @@ class FakeWorkerUpdates implements ServiceWorkerUpdatePort {
   requestCount = 0
   activateCount = 0
   waiting = false
-  state: ServiceWorkerUpdateSnapshot = {
+  onStateRead: (() => void) | null = null
+  #state: ServiceWorkerUpdateSnapshot = {
     phase: 'current',
     updateAvailable: false,
     controllerChanged: false,
+  }
+
+  get state(): ServiceWorkerUpdateSnapshot {
+    const state = this.#state
+    const onStateRead = this.onStateRead
+    this.onStateRead = null
+    onStateRead?.()
+    return state
+  }
+
+  set state(state: ServiceWorkerUpdateSnapshot) {
+    this.#state = state
   }
 
   async requestUpdate(): Promise<void> {
@@ -66,8 +79,12 @@ class FakeWorkerUpdates implements ServiceWorkerUpdatePort {
     return () => this.listeners.delete(listener)
   }
 
+  dispose(): void {
+    this.listeners.clear()
+  }
+
   emit(state: ServiceWorkerUpdateSnapshot): void {
-    this.state = state
+    this.#state = state
     for (const listener of this.listeners) listener(state)
   }
 }
@@ -79,6 +96,7 @@ function setup(
     reload?: () => void
     online?: boolean
     worker?: FakeWorkerUpdates
+    buildId?: string
   } = {},
 ) {
   const worker = options.worker ?? new FakeWorkerUpdates()
@@ -87,6 +105,7 @@ function setup(
   const persist = options.persist ?? vi.fn()
   const reload = options.reload ?? vi.fn()
   const coordinator = new ClientUpdateCoordinator({
+    clientBuildId: options.buildId ?? 'client-worker-build-a',
     clientSyncProtocolVersion: 2,
     workerUpdates: worker,
     storage,
@@ -214,7 +233,34 @@ describe('ClientUpdateCoordinator', () => {
     expect(reload).not.toHaveBeenCalled()
   })
 
-  it('waits for controllerchange after activating a waiting worker', async () => {
+  it('continues when controllerchange happens before waiting-for-worker', async () => {
+    const worker = new FakeWorkerUpdates()
+    worker.waiting = true
+    worker.state = {
+      phase: 'waiting',
+      updateAvailable: true,
+      controllerChanged: false,
+    }
+    const reload = vi.fn()
+    const { coordinator } = setup({ worker, reload })
+    coordinator.reportSyncCompatibility(updateRequired)
+    await coordinator.whenPrepared()
+    worker.onStateRead = () =>
+      worker.emit({
+        phase: 'controller-changed',
+        updateAvailable: false,
+        controllerChanged: true,
+      })
+
+    await expect(coordinator.requestRefresh()).resolves.toEqual({
+      accepted: true,
+      waitingForWorker: false,
+    })
+    expect(coordinator.state).toMatchObject({ refresh: 'reloading' })
+    expect(reload).toHaveBeenCalledOnce()
+  })
+
+  it('waits when controllerchange happens after waiting-for-worker', async () => {
     const worker = new FakeWorkerUpdates()
     worker.waiting = true
     worker.state = {
@@ -258,14 +304,50 @@ describe('ClientUpdateCoordinator', () => {
     expect(reload).toHaveBeenCalledOnce()
   })
 
-  it('prevents same-protocol reload loops in one browser session', async () => {
+  it('executes only one activation and reload for concurrent approved requests', async () => {
+    const worker = new FakeWorkerUpdates()
+    let finishActivation: ((waiting: boolean) => void) | undefined
+    worker.activateWaitingWorker = vi.fn(
+      () =>
+        new Promise<boolean>((resolve) => {
+          finishActivation = resolve
+        }),
+    )
+    const reload = vi.fn()
+    const { coordinator } = setup({ worker, reload })
+    coordinator.reportSyncCompatibility(updateRequired)
+    await coordinator.whenPrepared()
+
+    const firstRequest = coordinator.requestRefresh()
+    await vi.waitFor(() =>
+      expect(worker.activateWaitingWorker).toHaveBeenCalledOnce(),
+    )
+    await expect(coordinator.requestRefresh()).resolves.toEqual({
+      accepted: false,
+      reason: 'already-requested',
+    })
+    finishActivation?.(false)
+
+    await expect(firstRequest).resolves.toEqual({
+      accepted: true,
+      waitingForWorker: false,
+    })
+    expect(worker.activateWaitingWorker).toHaveBeenCalledOnce()
+    expect(reload).toHaveBeenCalledOnce()
+  })
+
+  it('rejects the same protocol tuple for the same stale client build', async () => {
     const storage = new MemoryStorage()
-    const first = setup({ storage })
+    const first = setup({ storage, buildId: 'stale-build-101' })
     first.coordinator.reportSyncCompatibility(updateRequired)
     await first.coordinator.requestRefresh()
 
     const staleReload = vi.fn()
-    const stale = setup({ storage, reload: staleReload })
+    const stale = setup({
+      storage,
+      reload: staleReload,
+      buildId: 'stale-build-101',
+    })
     stale.coordinator.reportSyncCompatibility(updateRequired)
     await stale.coordinator.whenPrepared()
 
@@ -278,6 +360,34 @@ describe('ClientUpdateCoordinator', () => {
       reason: 'loop-prevented',
     })
     expect(staleReload).not.toHaveBeenCalled()
+  })
+
+  it('permits progression for a genuinely new build with the same protocol tuple', async () => {
+    const storage = new MemoryStorage()
+    const stale = setup({ storage, buildId: 'stale-build-101' })
+    stale.coordinator.reportSyncCompatibility(updateRequired)
+    await stale.coordinator.requestRefresh()
+
+    const reload = vi.fn()
+    const updated = setup({
+      storage,
+      reload,
+      buildId: 'new-build-102',
+    })
+    updated.coordinator.reportSyncCompatibility(updateRequired)
+    await updated.coordinator.whenPrepared()
+
+    expect(updated.coordinator.state).toMatchObject({
+      status: 'update-required',
+      terminal: true,
+      refresh: 'available',
+      sync: { manual: 'stopped', retry: 'disabled' },
+    })
+    await expect(updated.coordinator.requestRefresh()).resolves.toEqual({
+      accepted: true,
+      waitingForWorker: false,
+    })
+    expect(reload).toHaveBeenCalledOnce()
   })
 
   it('lets an offline client reconnect once, then fails closed on mismatch', async () => {
@@ -327,7 +437,7 @@ describe('ClientUpdateCoordinator', () => {
     expect(reload).not.toHaveBeenCalled()
   })
 
-  it('writes only non-secret protocol attempt metadata', async () => {
+  it('writes only non-secret build and protocol attempt metadata', async () => {
     const storage = new MemoryStorage()
     const { coordinator } = setup({ storage })
     coordinator.reportSyncCompatibility(updateRequired)
@@ -335,6 +445,7 @@ describe('ClientUpdateCoordinator', () => {
 
     const raw = storage.getItem(UPDATE_ATTEMPT_STORAGE_KEY)
     expect(JSON.parse(raw ?? '')).toEqual({
+      clientBuildId: 'client-worker-build-a',
       clientSyncProtocolVersion: 2,
       serverSyncProtocolVersion: 3,
       minimumSupportedSyncVersion: 3,
