@@ -13,26 +13,44 @@ import type { StudyDashboardPorts, StudyParentControlPorts, StudySettingsPorts }
  *
  * WHAT THIS FILE PROTECTS, EXACTLY:
  *
- *   1. every expression the checker types as one of the narrow contracts, wherever
- *      in the production program it appears;
+ *   1. every expression the checker types as one of the narrow contracts, at the
+ *      hand-over forms `suppliedExpressions` models: a JSX attribute, a call or
+ *      construction argument, a named or shorthand property of an object literal,
+ *      and the initializer of a variable or class field whose type is declared;
  *   2. every property of a parameter's declared type that the checker resolves to
  *      one of the narrow contracts — `props: { ports: StudyDashboardPorts }` and a
  *      named `interface Props` alike — and that property alone, not its siblings;
  *      and
- *   3. inside every module that declares such a parameter, the values whose
- *      provenance runs back to one of those roots through the forms implemented
- *      below, tracked to a fixed point by symbol identity:
+ *   3. across the whole production program — not only the modules that declare a
+ *      root, so a capability parked in one module's state and asserted in another is
+ *      still reported, an imported binding being followed to the declaration it
+ *      aliases — the values whose provenance runs back to one of those roots through
+ *      the forms implemented below, tracked to a fixed point by symbol identity:
  *
  *        binding      const a = root · let a = root · a = root (later) ·
+ *                     a ??= root · a ||= root · a &&= root ·
  *                     for (const a of [root]) · class C { field = root }
  *        destructure  const { k } = · const { k: renamed } = · const { ...rest } =
- *                     · const [a] = · and the same patterns nested
- *        object       { ...root } · { root } · { k: root } · { k: { root } }
+ *                     · const [a] = · const { a = root } = · const [a = root] = ·
+ *                     (p = root) => · and the same patterns nested
+ *        destructure  ({ k } = ·) ({ k: renamed } = ·) ({ ...rest } = ·)
+ *          (assigned) ({ k = root } = ·) [a] = · [...rest] = ·  — literal syntax
+ *                     meaning what the patterns above mean, and a separate code path
+ *        write        arr[i] = root · w['k'] = root  (the *container* widens to
+ *                     `whole`; see the note on index blindness below)
+ *        object       { ...root } · { root } · { k: root } · { k: { root } } ·
+ *                     { [computed]: root } (widens to `whole`)
  *        array        [root] · [root.k] · [...roots]  (index-blind: an array that
  *                     carries anywhere is treated as carrying everywhere)
- *        reads        a.k · a[0] · a['k'] · this.field · (a) · a! · a as T · <T>a ·
- *                     a satisfies T · (f(), a)
- *        joins        cond ? a : b · a ?? b · a || b · a && b
+ *        reads        a.k · a?.k · a[0] · a['k'] · a[computed] · this.field · (a) ·
+ *                     a! · await a · a as T · <T>a · a satisfies T · (f(), a)
+ *        joins        cond ? a : b (either arm alone) · a ?? b · a || b · a && b
+ *
+ * Three deliberate imprecisions, each of which can only add a finding, never remove
+ * one: reassignment is flow-insensitive, so a binding that carries once carries for
+ * the rest of the file; arrays are index-blind on both the read and the write side;
+ * and an indexed or keyed *write* widens the whole container rather than the written
+ * key, so `w['k'] = ports` taints `w.other` too.
  *
  * Nothing wider. What is NOT covered, and is pinned below as a known survivor rather
  * than quietly implied to be covered:
@@ -40,7 +58,13 @@ import type { StudyDashboardPorts, StudyParentControlPorts, StudySettingsPorts }
  *   - interprocedural laundering. `function launder(x: unknown) { return x as any }`
  *     called as `launder(ports)` passes the capability across a call boundary this
  *     file does not follow, in either direction. Object-literal methods and getters
- *     are the same boundary wearing a different hat.
+ *     are the same boundary wearing a different hat. This is the only class of local
+ *     escape known to remain, and it is the *only* thing the three pinned survivors
+ *     at the end of PROVENANCE_CASES assert — not that nothing else exists.
+ *   - a hand-over written as a spread argument, `Consumer(...[ports])`, has no
+ *     per-parameter contextual type, so (1) cannot see it. For a *discovered*
+ *     consumer that form fails closed instead, through the reference sweep; for a
+ *     callee that is not a discovered consumer there is no narrow contract to erase.
  *
  * This is not whole-program taint analysis and does not claim to be. The list above
  * is the claim, and every line of it is forced by a fixture case.
@@ -61,13 +85,28 @@ import type { StudyDashboardPorts, StudyParentControlPorts, StudySettingsPorts }
  *         invisible to a sweep that only reads parameter types (closed by (2) above)
  *   G3    `class W { readonly leaked = ports }`, `for (const a of [ports])`, and
  *         `(f(), ports) as any` — three bindings the first pass at (3) still missed
+ *   H1    a props-object consumer was *discovered* by (2) and then rejected as
+ *         unbound, because the check binding consumers to their modules re-derived
+ *         contracts from parameter and binding *types* only. The advertised form was
+ *         dark: fail-closed, never usable       (closed by one shared seeding rule)
+ *   H2    `arr[0] = ports`, `({ a } = { a: ports })`, `[a] = [ports]` and
+ *         `const { a = ports } = holder` — four same-function local forms the
+ *         assignment arm never reached, because it read only `symbolAt(left)` and a
+ *         default is not an initializer of the thing destructured
+ *                                                     (closed by `assign` and above)
+ *   H3    three implemented branches no fixture forced: the shorthand arm of
+ *         `suppliedExpressions`, index-blind element access on an *object*, and the
+ *         false arm of a conditional join. Removing any of the three left every test
+ *         green                                       (closed by forcing cases, not
+ *                                                      by changing the analysis)
  *
- * Eleven forms in all, each run against the parent commit's own guard first, and each
- * leaving `tsc --noEmit` and that guard at exit 0 while `safety` — a role no narrow
- * contract carries — was reachable.
+ * Every one of those was run against its parent commit's own guard first, and each
+ * left `tsc --noEmit` and that guard at exit 0 while `safety` — a role no narrow
+ * contract carries — was reachable. H3 is the exception that proves the rule: nothing
+ * was reachable, but nothing was proving it was not.
  *
- * Copying a *parameter property* the same way is not a twelfth: `readonly leaked =
- * this.ports` inside StudyParentController is TS2729, so the compiler closes it.
+ * Copying a *parameter property* the same way is not another escape: `readonly leaked
+ * = this.ports` inside StudyParentController is TS2729, so the compiler closes it.
  */
 
 const sourceRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -99,6 +138,18 @@ const textOf = (node: ts.Node) => node.getText(node.getSourceFile()).replaceAll(
 type TypeErasure = ts.AsExpression | ts.TypeAssertion
 const isTypeErasure = (node: ts.Node): node is TypeErasure =>
   ts.isAsExpression(node) || ts.isTypeAssertionExpression(node)
+
+/**
+ * Assignment operators that can move a whole object into their target. `+=` and the
+ * arithmetic family cannot, so they are not here; the three logical assignments can,
+ * and are the same joins as `??`, `||` and `&&` with a store attached.
+ */
+const CARRYING_ASSIGNMENTS = new Set<ts.SyntaxKind>([
+  ts.SyntaxKind.EqualsToken,
+  ts.SyntaxKind.QuestionQuestionEqualsToken,
+  ts.SyntaxKind.BarBarEqualsToken,
+  ts.SyntaxKind.AmpersandAmpersandEqualsToken,
+])
 
 // ── the contracts, resolved to declarations ───────────────────────────────────
 // These four names are the only ones this file spells, and every later comparison
@@ -150,7 +201,7 @@ function contractsOf(target: ts.Program) {
   return { checker: targetChecker, narrowContractOf, fullBundleDeclaration: declarationOf(FULL_BUNDLE) }
 }
 
-const { narrowContractOf, fullBundleDeclaration } = contractsOf(program)
+const { fullBundleDeclaration } = contractsOf(program)
 
 // ── the census: every expression supplied to a narrow contract ────────────────
 // Generated, not listed. The contextual type comes from the *declared* parameter
@@ -177,23 +228,34 @@ interface InjectionSite {
   readonly expression: ts.Expression
 }
 
-const census: InjectionSite[] = []
-const censusExpressions = new Set<ts.Node>()
-
-for (const fileName of productionFiles) {
-  const source = program.getSourceFile(fileName)
-  if (!source) continue
-  const visit = (node: ts.Node) => {
-    for (const expression of suppliedExpressions(node)) {
-      const contract = narrowContractOf(checker.getContextualType(expression))
-      if (!contract) continue
-      census.push({ file: underSource(fileName), contract, expression })
-      censusExpressions.add(expression)
+/**
+ * Every hand-over in one file set. Taken as a function so the fixture at the bottom
+ * of this file can run it too: production writes none of its injections as a
+ * shorthand property or a class field, so those arms of `suppliedExpressions` have
+ * nothing here to force them.
+ */
+function censusOf(target: ts.Program, files: readonly string[]) {
+  const { checker: targetChecker, narrowContractOf: narrowOf } = contractsOf(target)
+  const sites: InjectionSite[] = []
+  const expressions = new Set<ts.Node>()
+  for (const fileName of files) {
+    const source = target.getSourceFile(fileName)
+    if (!source) continue
+    const visit = (node: ts.Node) => {
+      for (const expression of suppliedExpressions(node)) {
+        const contract = narrowOf(targetChecker.getContextualType(expression))
+        if (!contract) continue
+        sites.push({ file: underSource(fileName), contract, expression })
+        expressions.add(expression)
+      }
+      ts.forEachChild(node, visit)
     }
-    ts.forEachChild(node, visit)
+    visit(source)
   }
-  visit(source)
+  return { sites, expressions }
 }
+
+const { sites: census, expressions: censusExpressions } = censusOf(program, productionFiles)
 
 const censusReport = census.map((site) => `${site.file} | ${site.contract} | ${textOf(site.expression)}`).sort()
 
@@ -334,6 +396,48 @@ function propKeyOf(node: ts.ParameterDeclaration | ts.BindingElement): string | 
   return staticKeyOf(node.propertyName ?? node.name)
 }
 
+interface NarrowDeclaration {
+  /** The narrow contract this parameter position declares. */
+  readonly contract: string
+  /** The property symbol carrying it, or null when the parameter's own type is it. */
+  readonly property: ts.Symbol | null
+  /** The prop a host hands it over as, or null when the position is positional. */
+  readonly propName: string | null
+}
+
+/**
+ * What one parameter — or one destructured binding in a parameter list — declares.
+ *
+ * ONE rule, used by the seeding pass and by the bind check at the bottom of this
+ * file, so the two cannot drift into disagreeing about what a props object declares.
+ * A second, weaker copy here is exactly what left the props-object form discovered
+ * but unadoptable: it read parameter and binding *types* only, so a contract living
+ * on a PropertySignature was reported by discovery and then rejected as unbound.
+ */
+function narrowContractsAt(
+  targetChecker: ts.TypeChecker,
+  narrowOf: (type: ts.Type | undefined) => string | null,
+  node: ts.ParameterDeclaration | ts.BindingElement,
+): readonly NarrowDeclaration[] {
+  const type = targetChecker.getTypeAtLocation(node)
+  const own = narrowOf(type)
+  if (own) return [{ contract: own, property: null, propName: propKeyOf(node) }]
+  // A props object. The contract lives on a property of the declared type, so only
+  // that property is a capability — a sibling prop of an unrelated type is left
+  // alone, which is the whole point of asking the checker rather than tainting the
+  // parameter wholesale. Per union/intersection constituent, so a narrow arm of a
+  // union is not lost.
+  const found: NarrowDeclaration[] = []
+  for (const constituent of type.isUnionOrIntersection() ? type.types : [type]) {
+    if (!(constituent.flags & ts.TypeFlags.Object)) continue
+    for (const property of targetChecker.getPropertiesOfType(constituent)) {
+      const contract = narrowOf(targetChecker.getTypeOfSymbolAtLocation(property, node))
+      if (contract) found.push({ contract, property, propName: ts.isParameter(node) ? property.name : null })
+    }
+  }
+  return found
+}
+
 /**
  * Seeds the capability roots in one file set and follows their provenance to a fixed
  * point. Used unchanged by the production sweep and by the fixture at the bottom of
@@ -375,37 +479,16 @@ function capabilityScope(target: ts.Program, files: readonly string[]) {
     roots.push({ declaration, consumer: { module, exportName, contract, propName } })
   }
 
-  /** Members of an object-ish type, per union constituent so a narrow arm is not lost. */
-  function propertiesOf(type: ts.Type): readonly ts.Symbol[] {
-    const constituents = type.isUnionOrIntersection() ? type.types : [type]
-    const found: ts.Symbol[] = []
-    for (const constituent of constituents) {
-      if (!(constituent.flags & ts.TypeFlags.Object)) continue
-      found.push(...targetChecker.getPropertiesOfType(constituent))
-    }
-    return found
-  }
-
   for (const source of sources) {
     const seed = (node: ts.Node) => {
       if ((ts.isParameter(node) || ts.isBindingElement(node)) && parameterOf(node)) {
-        const type = targetChecker.getTypeAtLocation(node)
-        const own = narrowOf(type)
-        if (own) {
-          absorb(carriageFor(node), everything())
-          record(node, own, propKeyOf(node))
-        } else {
-          // A props object. The contract lives on a property of the declared type, so
-          // only that property becomes a capability — a sibling prop of an unrelated
-          // type is left alone, which is the whole point of asking the checker rather
-          // than tainting the parameter wholesale.
-          for (const property of propertiesOf(type)) {
-            const contract = narrowOf(targetChecker.getTypeOfSymbolAtLocation(property, node))
-            if (!contract) continue
-            narrowProperties.add(property)
-            carriageFor(node).members.add(property.name)
-            record(node, contract, ts.isParameter(node) ? property.name : null)
+        for (const declared of narrowContractsAt(targetChecker, narrowOf, node)) {
+          if (declared.property === null) absorb(carriageFor(node), everything())
+          else {
+            narrowProperties.add(declared.property)
+            carriageFor(node).members.add(declared.property.name)
           }
+          record(node, declared.contract, declared.propName)
         }
       }
       ts.forEachChild(node, seed)
@@ -414,9 +497,16 @@ function capabilityScope(target: ts.Program, files: readonly string[]) {
   }
 
   // `this.ports` on a parameter property resolves through the property name, so ask
-  // for the symbol there rather than at the access expression.
-  const symbolAt = (node: ts.Node) =>
-    ts.isPropertyAccessExpression(node) ? targetChecker.getSymbolAtLocation(node.name) : targetChecker.getSymbolAtLocation(node)
+  // for the symbol there rather than at the access expression. An *imported* binding
+  // resolves to its own import specifier, so it has to be followed to the declaration
+  // it aliases — otherwise a capability parked in one module's state and asserted in
+  // another reads as carrying nothing, and the whole-program sweep buys nothing.
+  const symbolAt = (node: ts.Node) => {
+    const found = ts.isPropertyAccessExpression(node)
+      ? targetChecker.getSymbolAtLocation(node.name)
+      : targetChecker.getSymbolAtLocation(node)
+    return found && found.flags & ts.SymbolFlags.Alias ? targetChecker.getAliasedSymbol(found) : found
+  }
 
   const carriageAtDeclarations = (declarations: readonly ts.Declaration[] | undefined): Carriage | null => {
     for (const declaration of declarations ?? []) {
@@ -491,10 +581,13 @@ function capabilityScope(target: ts.Program, files: readonly string[]) {
       if (operator === ts.SyntaxKind.EqualsToken || operator === ts.SyntaxKind.CommaToken) {
         return carriageOf(expression.right)
       }
+      // `a ??= b` yields either operand exactly as `a ?? b` does, so the three
+      // logical assignments join here beside the operators they are built from.
       if (
         operator === ts.SyntaxKind.QuestionQuestionToken ||
         operator === ts.SyntaxKind.BarBarToken ||
-        operator === ts.SyntaxKind.AmpersandAmpersandToken
+        operator === ts.SyntaxKind.AmpersandAmpersandToken ||
+        CARRYING_ASSIGNMENTS.has(operator)
       ) {
         const result = nothing()
         absorb(result, carriageOf(expression.left))
@@ -507,6 +600,8 @@ function capabilityScope(target: ts.Program, files: readonly string[]) {
       ts.isParenthesizedExpression(expression) ||
       ts.isNonNullExpression(expression) ||
       ts.isSatisfiesExpression(expression) ||
+      // `await x` on a non-thenable yields x itself, so it is a read like the others.
+      ts.isAwaitExpression(expression) ||
       isTypeErasure(expression)
     ) {
       return carriageOf(expression.expression)
@@ -550,6 +645,81 @@ function capabilityScope(target: ts.Program, files: readonly string[]) {
     return grew
   }
 
+  /**
+   * `({ a } = …)` binds the object literal's *own* property symbol to that identifier
+   * on the writing side just as it does on the reading side, so the variable actually
+   * being assigned has to be asked for separately. Without this the named form
+   * `({ p: a } = …)` closes while the shorthand beside it stays open.
+   */
+  function assignToShorthand(property: ts.ShorthandPropertyAssignment): boolean {
+    let grew = false
+    for (const declaration of targetChecker.getShorthandAssignmentValueSymbol(property)?.declarations ?? []) {
+      grew = absorb(carriageFor(declaration), everything()) || grew
+    }
+    return grew
+  }
+
+  /**
+   * Distributes what a value carries over an *assignment* target.
+   *
+   * `({ a } = …)` and `[a] = …` mean what the binding patterns above mean, but they
+   * are object- and array-*literal* nodes rather than patterns, so they arrive here
+   * and not at `bindPattern`. Reading only `symbolAt(left)` is what let all three of
+   * `arr[0] = ports`, `({ a } = { a: ports })` and `[a] = [ports]` through.
+   */
+  function assign(target: ts.Expression, value: Carriage): boolean {
+    let grew = false
+    if (!carries(value)) return grew
+    if (ts.isParenthesizedExpression(target)) return assign(target.expression, value)
+
+    if (ts.isObjectLiteralExpression(target)) {
+      const claimed = new Set<string>()
+      for (const property of target.properties) {
+        if (ts.isSpreadAssignment(property)) continue
+        const key = staticKeyOf(property.name)
+        if (key !== null) claimed.add(key)
+        // A named key inherits only what that key carries; one that cannot be named
+        // inherits everything the source carries.
+        const supplied = value.whole || key === null ? value : value.members.has(key) ? everything() : nothing()
+        if (!carries(supplied)) continue
+        if (ts.isPropertyAssignment(property)) grew = assign(property.initializer, everything()) || grew
+        else if (ts.isShorthandPropertyAssignment(property)) grew = assignToShorthand(property) || grew
+      }
+      for (const property of target.properties) {
+        if (!ts.isSpreadAssignment(property)) continue
+        const rest = nothing()
+        if (value.whole) rest.whole = true
+        else for (const key of value.members) if (!claimed.has(key)) rest.members.add(key)
+        if (carries(rest)) grew = assign(property.expression, rest) || grew
+      }
+      return grew
+    }
+
+    // Index-blind, matching the array literal and array pattern above.
+    if (ts.isArrayLiteralExpression(target)) {
+      for (const element of target.elements) {
+        if (ts.isOmittedExpression(element)) continue
+        grew = assign(ts.isSpreadElement(element) ? element.expression : element, everything()) || grew
+      }
+      return grew
+    }
+
+    // `arr[0] = ports`. A slot has no declaration of its own to hang a carriage on,
+    // so the write lands on the container — and on the *whole* container, not the
+    // written key. That is deliberate: element reads are already index-blind, so
+    // attributing a write to `0` would make `arr[1]` and `arr[i]` disagree about the
+    // same array. Precise element flow is not attempted; the container widens
+    // instead, which is wrong only in the direction of a failing test. `w['k'] = ports`
+    // therefore taints `w.other` as well.
+    if (ts.isElementAccessExpression(target)) return assign(target.expression, everything())
+
+    // An identifier, or `w.k` / `this.field` — all of which have a declaration.
+    for (const declaration of symbolAt(target)?.declarations ?? []) {
+      grew = absorb(carriageFor(declaration), value) || grew
+    }
+    return grew
+  }
+
   function findings(): readonly BodyFinding[] {
     for (let growing = true; growing; ) {
       growing = false
@@ -574,13 +744,20 @@ function capabilityScope(target: ts.Program, files: readonly string[]) {
             // the same hole: TS2729 rejects it, so the compiler already closes it.
             const value = carriageOf(node.initializer)
             if (carries(value)) growing = absorb(carriageFor(node), value) || growing
-          } else if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.EqualsToken) {
+          } else if (ts.isShorthandPropertyAssignment(node) && node.objectAssignmentInitializer) {
+            // `({ a = ports } = source)`. The default is reached whether or not
+            // `source` carries, so it is not routed through the distribution below.
+            const value = carriageOf(node.objectAssignmentInitializer)
+            if (carries(value)) growing = assignToShorthand(node) || growing
+          } else if ((ts.isBindingElement(node) || ts.isParameter(node)) && node.initializer) {
+            // A default: `const { a = ports } = holder`, `const [a = ports] = list`,
+            // `(a = ports) => …`. The value never passes through the thing being
+            // destructured, so neither the arm above nor `bindPattern` reaches it.
+            const value = carriageOf(node.initializer)
+            if (carries(value)) growing = bindPattern(node.name, node, value) || growing
+          } else if (ts.isBinaryExpression(node) && CARRYING_ASSIGNMENTS.has(node.operatorToken.kind)) {
             const value = carriageOf(node.right)
-            if (carries(value)) {
-              for (const declaration of symbolAt(node.left)?.declarations ?? []) {
-                growing = absorb(carriageFor(declaration), value) || growing
-              }
-            }
+            if (carries(value)) growing = assign(node.left, value) || growing
           }
           ts.forEachChild(node, visit)
         }
@@ -626,9 +803,58 @@ const consumerReport = [...new Set(portsRoots.map((root) => describeConsumer(roo
  * whose props object declared two different narrow contracts would appear twice and
  * be swept twice, rather than the second one being dropped by a dedupe.
  */
-const CONSUMERS: readonly Consumer[] = [
-  ...new Map(portsRoots.map((root) => [describeConsumer(root.consumer), root.consumer])).values(),
+const consumersOf = (roots: readonly PortsRoot[]): readonly Consumer[] => [
+  ...new Map(roots.map((root) => [describeConsumer(root.consumer), root.consumer])).values(),
 ]
+
+const CONSUMERS = consumersOf(portsRoots)
+
+/**
+ * What every module in a file set declares, keyed as `contract | prop`, read straight
+ * from the checker by the *same* rule the seeding pass uses.
+ *
+ * Sharing `narrowContractsAt` is the point. This check exists to catch a declaration
+ * the reported consumer set has lost — the dedupe above is the lossy step — and a
+ * second, weaker walk here would instead reject the props-object form the seeding
+ * pass supports, which is how the predecessor left that form discovered but
+ * unadoptable.
+ */
+function declarationsByModule(target: ts.Program, files: readonly string[]): Map<string, Set<string>> {
+  const { checker: targetChecker, narrowContractOf: narrowOf } = contractsOf(target)
+  const byModule = new Map<string, Set<string>>()
+  for (const fileName of files) {
+    const source = target.getSourceFile(fileName)
+    if (!source) continue
+    const module = underSource(fileName)
+    const visit = (node: ts.Node) => {
+      if ((ts.isParameter(node) || ts.isBindingElement(node)) && parameterOf(node)) {
+        for (const declared of narrowContractsAt(targetChecker, narrowOf, node)) {
+          const found = byModule.get(module) ?? new Set<string>()
+          found.add(`${declared.contract} | ${declared.propName ?? '(positional)'}`)
+          byModule.set(module, found)
+        }
+      }
+      ts.forEachChild(node, visit)
+    }
+    visit(source)
+  }
+  return byModule
+}
+
+/** Per module: what the reported consumers claim, beside what the checker declares. */
+function bindingReport(target: ts.Program, files: readonly string[]) {
+  const claimed = new Map<string, Set<string>>()
+  for (const consumer of consumersOf(capabilityScope(target, files).roots)) {
+    const found = claimed.get(consumer.module) ?? new Set<string>()
+    found.add(`${consumer.contract} | ${consumer.propName ?? '(positional)'}`)
+    claimed.set(consumer.module, found)
+  }
+  const declared = declarationsByModule(target, files)
+  const modules = [...new Set([...claimed.keys(), ...declared.keys()])].sort()
+  const render = (source: Map<string, Set<string>>) =>
+    modules.map((module) => `${module} -> ${[...(source.get(module) ?? [])].sort().join(', ') || 'no narrow contract'}`)
+  return { claimed: render(claimed), declared: render(declared) }
+}
 
 /**
  * The reviewed consumers. Like REVIEWED_CENSUS this is a record of what a human has
@@ -862,10 +1088,11 @@ const assertionsAtInjectionSites = census.flatMap((site) =>
 
 // ── assertions inside the consumer bodies ─────────────────────────────────────
 
-const consumerModules = [...new Set(CONSUMERS.map((consumer) => join(sourceRoot, consumer.module)))]
-const consumerBodyEscapes = capabilityScope(program, consumerModules)
-  .findings()
-  .map((finding) => finding.message)
+// The whole production program, not just the consumer modules. Roots are only seeded
+// where a narrow contract is declared, so widening the file set costs nothing in
+// precision — and it closes the one place a capability could be parked in module
+// state by a consumer and asserted from a file that is not itself a consumer.
+const consumerBodyEscapes = productionScope.findings().map((finding) => finding.message)
 
 // ── the provenance tracker, proven against a fixture ──────────────────────────
 // Production consumers wrap nothing today, so nothing above would notice if the
@@ -899,6 +1126,8 @@ interface ProvenanceCase {
   readonly escapes: boolean
   /** Roots this case declares beyond its own signature, as `owner | prop | contract`. */
   readonly alsoDiscovers?: readonly string[]
+  /** Census entries this case must produce, as `contract | text`. */
+  readonly supplies?: readonly string[]
 }
 
 const PROVENANCE_CASES: readonly ProvenanceCase[] = [
@@ -933,6 +1162,18 @@ const PROVENANCE_CASES: readonly ProvenanceCase[] = [
   { id: 'array of an alias', body: 'const a = ports; const w = [a]; void (w[0] as any).safety', escapes: true },
   { id: 'array spread', body: 'const w = [...[ports]]; void (w[0] as any).safety', escapes: true },
   { id: 'array read at a computed index', body: 'const w = [ports]; void (w[Number("0")] as any).safety', escapes: true },
+  // An *object* read at a key this analysis cannot name. The array cases above all
+  // reach `whole` first, so only this one forces the index-blind arm for members.
+  {
+    id: 'object read at a computed key',
+    body: 'const w: Record<string, unknown> = { ports }; void (w[String("x")] as any).safety',
+    escapes: true,
+  },
+  {
+    id: 'clean object read at a computed key stays free',
+    body: 'const w: Record<string, unknown> = { safety: spare }; void (w[String("x")] as any); void ports.outbox',
+    escapes: false,
+  },
   { id: 'array destructuring', body: 'const w = [ports]; const [first] = w; void (first as any).safety', escapes: true },
 
   // Loop and class-field bindings, and the read forms in between.
@@ -952,18 +1193,63 @@ const PROVENANCE_CASES: readonly ProvenanceCase[] = [
   { id: 'non-null read', body: 'const w = { ports }; void (w.ports! as any).safety', escapes: true },
   { id: 'satisfies read', body: 'const a = ports satisfies StudyParentControlPorts; void (a as any).safety', escapes: true },
   { id: 'comma operator', body: 'void ((String(spare), ports) as any).safety', escapes: true },
+  // Awaiting a non-thenable yields it unchanged, so `await` is a read, not a boundary.
+  { id: 'awaited read', body: 'const inner = async () => { const a = await ports; void (a as any).safety }; void inner', escapes: true },
+
+  // Assignment targets that wear a literal's syntax — the H4-R F3 class.
+  { id: 'indexed assignment', body: 'const arr: unknown[] = [spare]; arr[0] = ports; void (arr[0] as any).safety', escapes: true },
+  {
+    id: 'indexed assignment of a role, read at another index',
+    // The container widens whole, so an index the write never touched still reports.
+    body: 'const arr: unknown[] = [spare]; arr[1] = ports.calendar; void (arr[0] as any).start',
+    escapes: true,
+  },
+  { id: 'keyed assignment onto an object', body: 'const w: Record<string, unknown> = {}; w["k"] = ports; void (w["other"] as any).safety', escapes: true },
+  { id: 'object destructuring assignment', body: 'let a: unknown; ({ a } = { a: ports }); void (a as any).safety', escapes: true },
+  { id: 'renamed object destructuring assignment', body: 'let a: unknown; ({ p: a } = { p: ports }); void (a as any).safety', escapes: true },
+  { id: 'rest of an object destructuring assignment', body: 'let rest: Record<string, unknown>; ({ ...rest } = { p: ports }); void (rest as any).safety', escapes: true },
+  { id: 'default in an object destructuring assignment', body: 'let a: unknown; ({ a = ports } = {} as { a?: unknown }); void (a as any).safety', escapes: true },
+  { id: 'array destructuring assignment', body: 'let a: unknown; [a] = [ports]; void (a as any).safety', escapes: true },
+  { id: 'array destructuring assignment then alias', body: 'let a: unknown; let b: unknown; [a] = [ports]; b = a; void (b as any).safety', escapes: true },
+  { id: 'rest of an array destructuring assignment', body: 'let rest: unknown[]; [...rest] = [ports]; void (rest[0] as any).safety', escapes: true },
+
+  // Defaults. The value never passes through the thing being destructured.
+  {
+    id: 'object binding default initializer',
+    body: 'const holder: { a?: StudyParentControlPorts } = {}; const { a = ports } = holder; void (a as any).safety',
+    escapes: true,
+  },
+  {
+    id: 'array binding default initializer',
+    body: 'const list: (StudyParentControlPorts | undefined)[] = []; const [a = ports] = list; void (a as any).safety',
+    escapes: true,
+  },
+  { id: 'parameter default initializer', body: 'const inner = (a: unknown = ports) => (a as any).safety; void inner', escapes: true },
+
+  // Logical assignment: the joins below with a store attached.
+  { id: 'nullish assignment', body: 'let a: unknown; a ??= ports; void (a as any).safety', escapes: true },
+  { id: 'logical-or assignment', body: 'let a: unknown; a ||= ports; void (a as any).safety', escapes: true },
+  { id: 'logical-and assignment', body: 'let a: unknown = spare; a &&= ports; void (a as any).safety', escapes: true },
+  { id: 'value of a logical assignment', body: 'let a: unknown; void ((a ??= ports) as any).safety', escapes: true },
 
   // Joins.
   { id: 'conditional join', body: 'const a = spare ? ports : ports.calendar; void (a as any).safety', escapes: true },
+  // One arm at a time, so removing either side of the join fails on its own case.
+  { id: 'conditional false arm only', body: 'const a = spare ? spare : ports; void (a as any).safety', escapes: true },
+  { id: 'conditional true arm only', body: 'const a = spare ? ports : spare; void (a as any).safety', escapes: true },
   {
     id: 'nullish join',
     body: 'const maybe: StudyParentControlPorts | undefined = ports; const a = maybe ?? spare; void (a as any)',
     escapes: true,
+    // The declared constant is a hand-over in its own right, and the census sees it
+    // through a union constituent.
+    supplies: ['StudyParentControlPorts | ports'],
   },
   {
     id: 'logical-or join',
     body: 'const maybe: StudyParentControlPorts | undefined = ports; const a = maybe || spare; void (a as any)',
     escapes: true,
+    supplies: ['StudyParentControlPorts | ports'],
   },
   { id: 'logical-and join', body: 'const flag = Boolean(spare); const a = flag && ports; void (a as any)', escapes: true },
 
@@ -1013,23 +1299,112 @@ const PROVENANCE_CASES: readonly ProvenanceCase[] = [
     escapes: false,
   },
 
+  // A property the checker resolved to a narrow contract is a capability wherever it
+  // is read, including on a value whose own provenance this file never traced. The
+  // call below is the documented boundary, so `make()` carries nothing — but
+  // `make().ports` names a property symbol seeding already resolved, and that is what
+  // reports it. Nothing else in this fixture reaches that arm.
+  {
+    id: 'narrow prop read on a value this file did not trace',
+    shape: 'props',
+    body: 'const make = (): typeof props => props; void (make().ports as any).safety',
+    escapes: true,
+  },
+  {
+    id: 'props member multi-hop',
+    shape: 'props',
+    body: 'const w = { p: props.ports }; const { p } = w; const arr = [p]; void (arr[0] as any).safety',
+    escapes: true,
+  },
+
+  // The long chain, written in reverse dependency order so each hop needs its own
+  // pass: props member -> assignment -> object -> object destructuring assignment ->
+  // array -> array destructuring assignment -> conditional false arm -> assertion.
+  // Three growth passes, so a fixpoint cut to one — or to two — fails here.
+  {
+    id: 'eight hops needing three passes',
+    shape: 'props',
+    body:
+      'let seeded: unknown; let wrapped: unknown; let listed: unknown; let joined: unknown; ' +
+      '[listed] = [wrapped]; ({ k: wrapped } = { k: seeded }); seeded = props.ports; ' +
+      'joined = spare ? spare : listed; void (joined as any).safety',
+    escapes: true,
+  },
+
   // Two narrow contracts on one props object: both are seeded, neither is dropped.
   { id: 'first of two contracts', shape: 'twoContracts', body: 'void (props.dash as any).safety', escapes: true },
   { id: 'second of two contracts', shape: 'twoContracts', body: 'void (props.parent as any).safety', escapes: true },
 
+  // Hand-overs. `suppliedExpressions` decides what the census can see at all, and
+  // production writes none of these four forms — its four sites are all JSX
+  // attributes — so without these the arms below go unforced.
+  { id: 'supplied as a call argument', body: 'take(ports)', escapes: false, supplies: ['StudyParentControlPorts | ports'] },
+  { id: 'supplied to a constructor', body: 'void new Holder(ports)', escapes: false, supplies: ['StudyParentControlPorts | ports'] },
+  { id: 'supplied as a named property', body: 'panel({ ports: ports })', escapes: false, supplies: ['StudyParentControlPorts | ports'] },
+  // `panel({ ports })` hands over exactly as much as `panel({ ports: ports })` does,
+  // and reaches the census through a different arm.
+  { id: 'supplied as a shorthand property', body: 'panel({ ports })', escapes: false, supplies: ['StudyParentControlPorts | ports'] },
+  {
+    id: 'supplied to a declared constant',
+    body: 'const held: StudyParentControlPorts = ports; void held',
+    escapes: false,
+    supplies: ['StudyParentControlPorts | ports'],
+  },
+  {
+    id: 'supplied to a declared class field',
+    body: 'class Field { readonly held: StudyParentControlPorts = ports } void Field',
+    escapes: false,
+    supplies: ['StudyParentControlPorts | ports'],
+  },
+
   // Controls: values that never touch a capability.
   { id: 'unrelated local object', body: 'const other = { safety: spare }; void (other as any).safety; void ports.outbox', escapes: false },
   { id: 'unrelated local array', body: 'const other = [spare]; void (other[0] as any); void ports.outbox', escapes: false },
+  { id: 'unrelated indexed assignment', body: 'const arr: unknown[] = [spare]; arr[0] = spare; void (arr[0] as any); void ports.outbox', escapes: false },
+  { id: 'unrelated object destructuring assignment', body: 'let a: unknown; ({ a } = { a: spare }); void (a as any); void ports.outbox', escapes: false },
+  { id: 'unrelated array destructuring assignment', body: 'let a: unknown; [a] = [spare]; void (a as any); void ports.outbox', escapes: false },
+  { id: 'unrelated binding default', body: 'const holder: { a?: unknown } = {}; const { a = spare } = holder; void (a as any); void ports.outbox', escapes: false },
+  { id: 'unrelated logical assignment', body: 'let a: unknown; a ??= spare; void (a as any); void ports.outbox', escapes: false },
   // The documented boundary: both sides of a call, however the call is spelled.
   { id: 'helper laundering — outside the boundary', body: 'const launder = (x: unknown) => x as any; void launder(ports)', escapes: false },
   { id: 'object getter — outside the boundary', body: 'const w = { get p() { return ports } }; void (w.p as any).safety', escapes: false },
   { id: 'object method — outside the boundary', body: 'const w = { p() { return ports } }; void (w.p() as any).safety', escapes: false },
+  // A call is a call however its return type is written: declaring the contract on
+  // the way out does not make the boundary followable. `make().ports` above is caught
+  // for a different reason — the property symbol, not the call.
+  {
+    id: 'call returning the contract — outside the boundary',
+    body: 'const make = (): StudyParentControlPorts => ports; void (make() as any).safety',
+    escapes: false,
+  },
 ]
 
 const FIXTURE_PATH = posix(join(sourceRoot, 'study', 'portsProvenanceFixture.generated.ts'))
-const FIXTURE_HEADER = `import type { StudyDashboardPorts, StudyParentControlPorts, StudyPortBundle } from './ports'`
+
+/**
+ * The receivers the hand-over cases above supply. Each declares a narrow contract on
+ * a parameter, so each is also a discovered consumer — spelled out in `discovers`
+ * rather than loosening the discovery expectation to tolerate them.
+ */
+const FIXTURE_PREAMBLE = {
+  lines: [
+    `import type { StudyDashboardPorts, StudyParentControlPorts, StudyPortBundle } from './ports'`,
+    `declare function take(ports: StudyParentControlPorts): void`,
+    `declare function panel(props: { ports: StudyParentControlPorts }): void`,
+    `declare class Holder { constructor(ports: StudyParentControlPorts) }`,
+  ],
+  discovers: [
+    'take | (positional) | StudyParentControlPorts',
+    'panel | ports | StudyParentControlPorts',
+    'Holder | (positional) | StudyParentControlPorts',
+  ],
+} as const
+
+/** The 1-based line one case occupies. Every case is emitted as a single line. */
+const lineOfCase = (index: number) => FIXTURE_PREAMBLE.lines.length + index + 1
+
 const fixtureText = [
-  FIXTURE_HEADER,
+  ...FIXTURE_PREAMBLE.lines,
   ...PROVENANCE_CASES.map(
     (provenanceCase, index) =>
       `export function case${index}${SHAPES[provenanceCase.shape ?? 'positional'].params} { ${provenanceCase.body} }`,
@@ -1125,12 +1500,13 @@ describe('narrow Study consumer contracts survive an AST census of their injecti
       ...new Set(roots.map((root) => `${root.consumer.exportName} | ${root.consumer.propName ?? '(positional)'} | ${root.consumer.contract}`)),
     ].sort()
     const expected = [
-      ...new Set(
-        PROVENANCE_CASES.flatMap((provenanceCase, index) => [
+      ...new Set([
+        ...FIXTURE_PREAMBLE.discovers,
+        ...PROVENANCE_CASES.flatMap((provenanceCase, index) => [
           ...SHAPES[provenanceCase.shape ?? 'positional'].discovers.map((entry) => `case${index} | ${entry}`),
           ...(provenanceCase.alsoDiscovers ?? []),
         ]),
-      ),
+      ]),
     ].sort()
     expect(discovered).toEqual(expected)
     // Anti-vacuity: some case really is a props object carrying two contracts, and
@@ -1150,42 +1526,59 @@ describe('narrow Study consumer contracts survive an AST census of their injecti
     // report "free" and read as a documented boundary.
     expect(fixture.getSyntacticDiagnostics(source).map((diagnostic) => diagnostic.messageText)).toEqual([])
     expect(fixture.getSemanticDiagnostics(source).map((diagnostic) => `${diagnostic.start}: ${diagnostic.messageText}`)).toEqual([])
-    expect(source.statements.length).toBe(PROVENANCE_CASES.length + 1)
+    expect(source.statements.length).toBe(FIXTURE_PREAMBLE.lines.length + PROVENANCE_CASES.length)
 
     const reported = new Set(capabilityScope(fixture, [FIXTURE_PATH]).findings().map((finding) => finding.line))
-    // Each case occupies one line, the header being line 1.
     const verdicts = PROVENANCE_CASES.map(
-      (provenanceCase, index) => `${provenanceCase.id}: ${reported.has(index + 2) ? 'caught' : 'free'}`,
+      (provenanceCase, index) => `${provenanceCase.id}: ${reported.has(lineOfCase(index)) ? 'caught' : 'free'}`,
     )
     expect(verdicts).toEqual(PROVENANCE_CASES.map((provenanceCase) => `${provenanceCase.id}: ${provenanceCase.escapes ? 'caught' : 'free'}`))
   })
 
-  it('binds each discovered consumer to the contract its own module declares', () => {
-    // Per module: the contracts the sweep found there must be exactly the contracts
-    // the reported consumers claim. A module carrying two narrow contracts therefore
-    // has to report both.
-    const declared = new Map<string, Set<string>>()
-    for (const root of portsRoots) {
-      const contracts = declared.get(root.consumer.module) ?? new Set<string>()
-      contracts.add(root.consumer.contract)
-      declared.set(root.consumer.module, contracts)
+  it('sees every hand-over form its census claims, including the ones production never writes', () => {
+    // `suppliedExpressions` decides what the census can see at all. Production's four
+    // sites are all JSX attributes, so a call argument, a constructor argument, a
+    // named property, a shorthand property, a declared constant and a declared class
+    // field would each be silently unreachable without this.
+    const fixture = fixtureProgram()
+    const source = fixture.getSourceFile(FIXTURE_PATH)
+    if (!source) throw new Error('the provenance fixture is not in its own program')
+    const byLine = new Map<number, string[]>()
+    for (const site of censusOf(fixture, [FIXTURE_PATH]).sites) {
+      const line = source.getLineAndCharacterOfPosition(site.expression.getStart(source)).line + 1
+      byLine.set(line, [...(byLine.get(line) ?? []), `${site.contract} | ${textOf(site.expression)}`])
     }
-    const bound = [...declared.keys()].sort().map((module) => {
-      const contracts = new Set<string>()
-      const source = program.getSourceFile(join(sourceRoot, module))
-      const visit = (node: ts.Node) => {
-        if (ts.isParameter(node) || ts.isBindingElement(node)) {
-          const contract = narrowContractOf(checker.getTypeAtLocation(node))
-          if (contract) contracts.add(contract)
-        }
-        ts.forEachChild(node, visit)
-      }
-      if (source) visit(source)
-      return `${module} -> ${[...contracts].sort().join(', ') || 'no narrow contract'}`
-    })
-    expect(bound).toEqual(
-      [...declared.keys()].sort().map((module) => `${module} -> ${[...declared.get(module)!].sort().join(', ')}`),
+    const render = (entries: readonly string[]) => [...entries].sort().join(' + ') || 'nothing'
+    const reported = PROVENANCE_CASES.map(
+      (provenanceCase, index) => `${provenanceCase.id}: ${render(byLine.get(lineOfCase(index)) ?? [])}`,
     )
+    expect(reported).toEqual(
+      PROVENANCE_CASES.map((provenanceCase) => `${provenanceCase.id}: ${render(provenanceCase.supplies ?? [])}`),
+    )
+    // Anti-vacuity: some case really did hand ports over.
+    expect(PROVENANCE_CASES.filter((provenanceCase) => provenanceCase.supplies).length).toBeGreaterThan(4)
+  })
+
+  it('binds every declared narrow contract to a reported consumer, prop included', () => {
+    // Per module: what the reported consumers claim must be exactly what the checker
+    // declares there — contract *and* carrying prop. The dedupe that produces
+    // CONSUMERS is the lossy step this catches, so a module declaring two narrow
+    // contracts, or one contract on two different props, has to report both.
+    const production = bindingReport(program, productionFiles)
+    expect(production.claimed).toEqual(production.declared)
+
+    // Proven where production cannot: no production surface takes its ports on a
+    // props object, and that is the form the predecessor discovered and then rejected
+    // as unbound. The fixture declares three of them.
+    const fixture = fixtureProgram()
+    const onFixture = bindingReport(fixture, [FIXTURE_PATH])
+    expect(onFixture.claimed).toEqual(onFixture.declared)
+    // Anti-vacuity: the fixture really does carry contracts on props, and really does
+    // carry two different ones, so an empty or positional-only report cannot pass.
+    const declaredOnFixture = onFixture.declared.join('\n')
+    expect(declaredOnFixture).toContain('StudyParentControlPorts | ports')
+    expect(declaredOnFixture).toContain('StudyDashboardPorts | dash')
+    expect(declaredOnFixture).toContain('StudyParentControlPorts | (positional)')
   })
 
   it('leaves the pre-existing StudySessionContainer full-bundle casts out of scope', () => {
