@@ -1,5 +1,5 @@
 export const LEARNER_CREDENTIAL_SCHEMA_VERSION = 1 as const
-export const LEARNER_PIN_VERIFIER_SCHEME_VERSION = 1 as const
+export const LEARNER_PIN_VERIFIER_SCHEME_VERSION = 2 as const
 
 export type LearnerCredentialState = 'enrolled' | 'reset-required'
 

@@ -35,7 +35,7 @@ describe('credential and educational Profile boundaries', () => {
       profileId: 'learner-1',
       credentialKind: 'learner-pin',
       verifierScheme: 'pbkdf2-sha256',
-      verifierSchemeVersion: 1,
+      verifierSchemeVersion: 2,
       saltBase64: 'c2FsdA==',
       verifierBase64: 'dmVyaWZpZXI=',
       costParameters: { iterations: 210_000, derivedKeyBytes: 32 },

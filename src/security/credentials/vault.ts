@@ -219,7 +219,7 @@ export async function createLearnerCredentialRecord(
   options?: CredentialOperationOptions,
 ): Promise<StoredLearnerCredentialRecord> {
   validateLearnerProfileId(profileId)
-  const verifier = await createPinVerifier(pin, options?.crypto)
+  const verifier = await createPinVerifier(profileId, pin, options?.crypto)
   return {
     schemaVersion: LEARNER_CREDENTIAL_SCHEMA_VERSION,
     storage: 'device-local-only',
@@ -290,7 +290,7 @@ export async function verifyLearnerCredentialRecord(
     return false
   }
   return validated.state === 'enrolled' &&
-    verifyPinVerifier(pin, validated, options?.crypto)
+    verifyPinVerifier(validated.profileId, pin, validated, options?.crypto)
 }
 
 export async function verifyLearnerPin(
@@ -394,7 +394,7 @@ export async function markLearnerCredentialResetRequired(
   const existing = readLearnerCredential(profileId, options)
   if (existing?.state === 'reset-required') return existing
   const now = timestamp(options)
-  const verifier = await createUnusablePinVerifier(options?.crypto)
+  const verifier = await createUnusablePinVerifier(profileId, options?.crypto)
   if (existing) {
     return writeLearnerCredential(
       {

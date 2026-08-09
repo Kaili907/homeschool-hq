@@ -3,6 +3,7 @@ import type { LearnerPinCostParameters } from '../contracts'
 export const LEARNER_PIN_COST_PARAMETERS_VERSION = 1 as const
 export const LEARNER_PIN_SALT_BYTES = 16 as const
 export const LEARNER_PIN_DERIVED_KEY_BYTES = 32 as const
+export const LEARNER_PIN_VERIFIER_DOMAIN = 'manuel-academy:learner-pin:v2' as const
 
 /**
  * Version 1 is intentionally immutable. A future work-factor change must add a
@@ -86,14 +87,36 @@ export function isSupportedPinCostParameters(
   )
 }
 
+function framedProfileBoundSecret(profileId: string, secret: string): Uint8Array {
+  const encoder = new TextEncoder()
+  const parts = [
+    encoder.encode(LEARNER_PIN_VERIFIER_DOMAIN),
+    encoder.encode(profileId),
+    encoder.encode(secret),
+  ]
+  const framed = new Uint8Array(
+    parts.reduce((total, part) => total + 4 + part.byteLength, 0),
+  )
+  const view = new DataView(framed.buffer)
+  let offset = 0
+  for (const part of parts) {
+    view.setUint32(offset, part.byteLength, false)
+    offset += 4
+    framed.set(part, offset)
+    offset += part.byteLength
+  }
+  return framed
+}
+
 async function deriveVerifier(
+  profileId: string,
   secret: string,
   salt: Uint8Array,
   cryptoProvider: PinVerifierCrypto,
 ): Promise<Uint8Array> {
   const key = await cryptoProvider.subtle.importKey(
     'raw',
-    new TextEncoder().encode(secret),
+    framedProfileBoundSecret(profileId, secret),
     'PBKDF2',
     false,
     ['deriveBits'],
@@ -121,12 +144,13 @@ function constantTimeEqual(left: Uint8Array, right: Uint8Array): boolean {
 }
 
 async function createVerifierForSecret(
+  profileId: string,
   secret: string,
   cryptoProvider?: PinVerifierCrypto,
 ): Promise<PinVerifierMaterial> {
   const crypto = requireCrypto(cryptoProvider)
   const salt = crypto.getRandomValues(new Uint8Array(LEARNER_PIN_SALT_BYTES))
-  const verifier = await deriveVerifier(secret, salt, crypto)
+  const verifier = await deriveVerifier(profileId, secret, salt, crypto)
   return {
     costParametersVersion: LEARNER_PIN_COST_PARAMETERS_VERSION,
     costParameters: { ...LEARNER_PIN_COST_PARAMETERS_V1 },
@@ -136,13 +160,14 @@ async function createVerifierForSecret(
 }
 
 export async function createPinVerifier(
+  profileId: string,
   pin: string,
   cryptoProvider?: PinVerifierCrypto,
 ): Promise<PinVerifierMaterial> {
   if (!isFourDigitPin(pin)) {
     throw new Error('A learner PIN must contain exactly four decimal digits.')
   }
-  return createVerifierForSecret(pin, cryptoProvider)
+  return createVerifierForSecret(profileId, pin, cryptoProvider)
 }
 
 /**
@@ -150,16 +175,18 @@ export async function createPinVerifier(
  * used only for reset-required tombstones; reset state always rejects PINs.
  */
 export async function createUnusablePinVerifier(
+  profileId: string,
   cryptoProvider?: PinVerifierCrypto,
 ): Promise<PinVerifierMaterial> {
   const crypto = requireCrypto(cryptoProvider)
   const discardedSecret = bytesToBase64(
     crypto.getRandomValues(new Uint8Array(LEARNER_PIN_DERIVED_KEY_BYTES)),
   )
-  return createVerifierForSecret(discardedSecret, crypto)
+  return createVerifierForSecret(profileId, discardedSecret, crypto)
 }
 
 export async function verifyPinVerifier(
+  profileId: string,
   pin: unknown,
   material: PinVerifierMaterial,
   cryptoProvider?: PinVerifierCrypto,
@@ -180,7 +207,7 @@ export async function verifyPinVerifier(
       material.verifierBase64,
       LEARNER_PIN_DERIVED_KEY_BYTES,
     )
-    const actual = await deriveVerifier(pin, salt, crypto)
+    const actual = await deriveVerifier(profileId, pin, salt, crypto)
     return constantTimeEqual(actual, expected)
   } catch {
     return false

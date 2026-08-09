@@ -11,23 +11,31 @@ Admin, staff, installation-manager, or Study identity. Migration journals use
 their own `homeschool-hq:security:*:v1` namespaces and contain state labels and
 profile IDs only. They never contain a PIN, verifier, salt, or recovery secret.
 
-## Verifier scheme v1
+## Verifier scheme v2
 
 - WebCrypto PBKDF2 with HMAC-SHA-256
+- versioned domain `manuel-academy:learner-pin:v2`
+- independently length-framed UTF-8 domain, exact profile ID, and PIN input
+- no profile-ID normalization; composed and decomposed valid IDs remain distinct
 - independently generated 16-byte salt for every enrollment/rotation
 - 600,000 iterations
 - 32-byte derived verifier
 - immutable cost-parameter version `1`
-- immutable verifier-scheme version `1`
+- immutable verifier-scheme version `2`
 
 The selected default follows the current
 [OWASP PBKDF2-HMAC-SHA-256 baseline](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html).
 On 2026-08-09, Node 24.14.1 WebCrypto on the development machine measured three
 600,000-iteration samples at 213.7, 217.4, and 216.3 ms (215.8 ms mean).
 For comparison, 210,000 iterations averaged 74.0 ms and 310,000 averaged
-107.5 ms. Scheme v1 therefore uses 600,000 while remaining well below the
-one-second interactive ceiling. A future work-factor change must introduce a
-new cost-parameter version rather than silently changing v1.
+107.5 ms. The version-1 cost contract therefore uses 600,000 while remaining
+well below the one-second interactive ceiling. A future work-factor change must
+introduce a new cost-parameter version rather than silently changing it.
+
+The earlier undeployed verifier-scheme version `1` bound only the PIN and salt.
+It is non-authoritative and is rejected rather than accepted indefinitely.
+Development vaults containing that format must remove the old record and
+re-enroll so every authenticating record uses the profile-bound version `2`.
 
 A four-digit PIN has only 10,000 possible values. PBKDF2 and unique salts make
 stolen-record guessing more expensive, but they do not turn the PIN into strong
