@@ -141,6 +141,39 @@ export const STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT = Object.freeze({
  * assertion to `ValidatedStudyTutorResult`, in any form. The admissible
  * crossing is the one at the top of this comment, and it is shorter to write
  * than the bypass.
+ *
+ * STUDY-A1-F4-PARSE-BEFORE-HOST-C — the host stopped depending on it.
+ *
+ * This obligation is STILL OPEN and this card does not close it. Nothing here
+ * could: `raw as ValidatedStudyTutorResult` remains expressible in any wrapper
+ * that wants to write it, forever, and no host-side change makes a TypeScript
+ * assertion fail to compile. A card claiming otherwise would be claiming
+ * something about the language that is not true.
+ *
+ * What changed is narrower and worth stating exactly: the bypass is no longer
+ * LOAD-BEARING AT THE HOST. `StudySessionContainer`'s normalizer used to take a
+ * `ValidatedStudyTutorResult` and read its fields straight into presentation
+ * and durable state, so a forged brand carried a Tutor's content — 25,000
+ * characters of prose to a ten-year-old, a 500-character reference into her
+ * father's durable record, a learner's own sentence into the safety-stop
+ * ledger under a field named `reasonCode`. It now takes `unknown` and its first
+ * operation is `acceptStudyTutorResult(raw)`; every branch reads the canonical
+ * rebuilt value and none reads the caller's object. A forged brand still
+ * compiles and now buys nothing: it reaches a parser that never looked at the
+ * type.
+ *
+ * So there are two independent layers with separate failure modes, which is the
+ * point of keeping both. The brand is a compile-time layer that removes the two
+ * bypasses which read as correct code (`removesBypasses` below). The host
+ * reparse is a runtime layer that does not care whether the brand was earned.
+ * `StudyTutorRuntime.submit` therefore still returns
+ * `ValidatedStudyTutorResult` and must keep doing so — widening it to `unknown`
+ * would delete the compile-time layer to celebrate the runtime one.
+ *
+ * Enforcement of the host half is
+ * src/study/production/hostResultAcceptance.integration.test.tsx, which mounts
+ * the real container against a runtime that performs exactly the one assertion
+ * this comment says cannot be prevented.
  */
 export const STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT = Object.freeze({
   id: 'WRAPPER_LANDING_REQUIREMENT',
@@ -169,6 +202,25 @@ export const STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT = Object.freeze({
     'declaring-the-transport-return-type-as-the-contract-type',
     'object-literal-of-the-right-shape',
   ]),
+  /**
+   * STUDY-A1-F4-PARSE-BEFORE-HOST-C — the host-side half, recorded as data.
+   *
+   * These four fields say something different from `status`, and the difference
+   * is the whole reason they exist. `status` is about the WRAPPER obligation,
+   * which is open and stays open. These are about what the HOST does, and a
+   * later reader must be able to tell the two apart without inferring it from
+   * prose.
+   */
+  hostEnforcement: 'host-reparse-of-untrusted-result',
+  hostEnforcementCard: 'STUDY-A1-F4-PARSE-BEFORE-HOST-C',
+  /** The host names no branded type and takes no compile-time fact on trust. */
+  hostTrustsTheBrand: false,
+  /**
+   * The residual bypass is still expressible and still compiles. It just no
+   * longer decides anything at the host, because the host reparses regardless.
+   * This is NOT a claim that the assertion was closed.
+   */
+  loadBearingAtHost: false,
 } as const)
 
 /**

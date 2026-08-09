@@ -250,6 +250,48 @@ describe('wrapper landing requirements', () => {
     expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.status).toBe('open')
   })
 
+  /**
+   * STUDY-A1-F4-PARSE-BEFORE-HOST-C Phase 12. The host reparse is recorded
+   * WITHOUT closing the wrapper obligation, and the two facts are pinned
+   * together so neither can drift into the other. A later card that flips
+   * `status` to 'closed' because "the host handles it now" fails the first
+   * assertion; one that quietly drops the host fields fails the rest.
+   */
+  it('records the host reparse without closing the wrapper obligation', () => {
+    // Unchanged, and the point: a wrapper can still write the assertion.
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.status).toBe('open')
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.residualBypass)
+      .toBe('single-explicit-type-assertion')
+
+    // What the host card did change.
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.hostEnforcement)
+      .toBe('host-reparse-of-untrusted-result')
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.hostEnforcementCard)
+      .toBe('STUDY-A1-F4-PARSE-BEFORE-HOST-C')
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.hostTrustsTheBrand).toBe(false)
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.loadBearingAtHost).toBe(false)
+
+    // The compile-time layer is NOT retired to celebrate the runtime one. Both
+    // are named, and they are named as different things.
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.contractEnforcement).toBe('validated-result-brand')
+    expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.contractEnforcement)
+      .not.toBe(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.hostEnforcement)
+  })
+
+  it('does not claim in prose that the host closed the wrapper obligation', () => {
+    // The honest sentence is "open, but not load-bearing at the host". The
+    // comfortable one — that reparsing closed F4 — is held shut here, in the
+    // same place and for the same reason the `as unknown as` overstatement is.
+    const source = readFileSync(
+      join(dirname(fileURLToPath(import.meta.url)), 'wrapperObligations.ts'),
+      'utf8',
+    )
+    expect(source).toContain('STILL OPEN')
+    expect(source).toContain('LOAD-BEARING AT THE HOST')
+    expect(source).not.toMatch(/F4 is (?:now )?closed/i)
+    expect(source).not.toMatch(/closes? (?:the )?F4/i)
+  })
+
   it('names the two bypasses the brand does remove, so the claim stays narrow', () => {
     expect([...STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.removesBypasses]).toEqual([
       'declaring-the-transport-return-type-as-the-contract-type',

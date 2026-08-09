@@ -12,10 +12,10 @@ import {
   settleStudyTutorLaunch,
 } from '../../study/production/tutorLaunchOrdering'
 import {
+  acceptStudyTutorResult,
   parseStudyTutorLearnerText,
   parseStudyTutorRef,
   type StudyTutorRuntime,
-  type ValidatedStudyTutorResult,
 } from '../../study/contracts/tutor'
 import { STUDY_LEARNER_STOP_MESSAGE } from '../../study/safety/learnerSafe'
 import { isSessionStoppedByLocalLedger, recordLocalSessionSafetyStop } from '../../study/safety/localStopLedger'
@@ -104,12 +104,40 @@ function previewTurnResult(result: StudyTutorTurnResult): StudyHostTurnResult {
 }
 
 /**
+ * STUDY-A1-F4-PARSE-BEFORE-HOST — the host's own acceptance of a Tutor result.
+ *
+ * The parameter is `unknown`, and that is the whole of this card. It used to be
+ * the branded validated-result type that `StudyTutorRuntime.submit` returns —
+ * so this function trusted a COMPILE-TIME fact about a value produced by
+ * out-of-process work the host does not own. A single explicit `as` to that
+ * branded type forges it, from a wrapper's raw transport output or straight
+ * from `unknown`, and no host can make that expression impossible.
+ * `wrapperObligations.ts` records the residual honestly and F4 stays OPEN for
+ * exactly that reason. What this function does is make it stop mattering here:
+ * the brand is no longer load-bearing at the host, because the host does not
+ * rely on it.
+ *
+ * The branded type is deliberately not NAMED anywhere in this file — not
+ * imported, not annotated, not asserted — and a tripwire in
+ * src/study/production/productionImportBoundary.test.ts keeps it that way. The
+ * host's only dependency is `unknown` in, canonical parser, canonical value
+ * out.
+ *
+ * `acceptStudyTutorResult` is the FIRST operation, before any branch and before
+ * anything is read. Everything below reads the canonical value it rebuilt — a
+ * frozen object whose every field was validated and copied — and never the
+ * caller's object. So a hostile accessor is read once, by the parser, and the
+ * value that was CHECKED is the value that travels. A result the contract
+ * cannot vouch for arrives here as `quarantined`, which writes nothing durable,
+ * locks nothing, invents no interruption, and says nothing about the learner.
+ *
  * The production contract's `stopped` arm carries no learner-facing message,
  * and that absence is deliberate: the host owns the words a stopped child
  * reads. So the message comes from the host's own constant here rather than
  * from anything a Tutor said.
  */
-function validatedTurnResult(result: ValidatedStudyTutorResult): StudyHostTurnResult {
+function acceptedTurnResult(raw: unknown): StudyHostTurnResult {
+  const result = acceptStudyTutorResult(raw)
   if (result.status === 'accepted') {
     return { status: 'accepted', eventRef: result.eventRef, visibleText: result.visibleText }
   }
@@ -307,7 +335,7 @@ export function StudySessionContainer({ context: baseContext, initialEntry, port
     const skillRef = parseStudyTutorRef(context.skillRefs[0] ?? `${entry.lessonRef}:completion`)
     const transientLearnerText = parseStudyTutorLearnerText(turn.transientLearnerText)
     if (!requestRef || !segmentRef || !skillRef || !transientLearnerText) return { status: 'quarantined' }
-    return validatedTurnResult(await tutor.submit({
+    return acceptedTurnResult(await tutor.submit({
       sessionRef: launch.sessionRef,
       requestRef,
       lessonRef: launch.lessonRef,
