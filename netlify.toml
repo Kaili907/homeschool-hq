@@ -68,6 +68,21 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/v1/configuration"
+  to = "/.netlify/functions/admin-configuration"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/v1/configuration/preview"
+  to = "/.netlify/functions/admin-configuration"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/v1/configuration/commit"
+  to = "/.netlify/functions/admin-configuration"
+  status = 200
+
+[[redirects]]
   from = "/api/admin/curriculum/*"
   to = "/.netlify/functions/admin-curriculum/:splat"
   status = 200
