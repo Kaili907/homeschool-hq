@@ -6,6 +6,7 @@ import { defaultAppState } from './migration'
 import type { AppState, Profile } from './types'
 import type { AcademyRoute } from './academy/academyRoute'
 import type { StudentDashboardComposition } from './components/academy/dashboard/StudentDashboard'
+import { buildLegacyMissionData } from './components/academy/dashboard/legacyMissionData'
 
 // UI-HOME-1 default-home lifecycle. The Academy surface is mocked so these tests
 // exercise App's picker/PIN boundary, dashboard composition, deep links, URL
@@ -22,6 +23,10 @@ const harness = vi.hoisted(() => ({
     onExit: () => void
     dashboard?: StudentDashboardComposition
   },
+  assistantMounts: 0,
+  networkCalls: 0,
+  mediaRequests: 0,
+  speechCalls: 0,
 }))
 
 vi.mock('./sync/useSync', () => ({
@@ -66,9 +71,23 @@ vi.mock('./components/academy/AcademyRouter', () => ({
     return <main data-surface="academy">Manuel Academy surface ({props.route.kind})</main>
   },
 }))
+vi.mock('./components/assistant/AssistantOrb', () => ({
+  AssistantOrb: () => {
+    harness.assistantMounts += 1
+    return (
+      <section data-surface="assistant-orb">
+        <label>Assistant prompt<input aria-label="Assistant prompt" /></label>
+        <button>Talk microphone</button>
+        <button>Send</button>
+      </section>
+    )
+  },
+}))
 vi.mock('./tutor/voice', async (importOriginal) => ({
   ...(await importOriginal<typeof import('./tutor/voice')>()),
   purgeVoiceCache: async () => {},
+  speak: () => { harness.speechCalls += 1 },
+  cancelSpeech: () => { harness.speechCalls += 1 },
 }))
 
 class MemStorage implements Storage {
@@ -132,6 +151,8 @@ function seeded(active: string | null): AppState {
   state.profiles.p1 = { ...state.profiles.p1, name: 'Sam', pin: '1234' }
   state.profiles.p2 = { ...state.profiles.p2, name: 'Riley', pin: '2222', grade: '5' }
   state.profiles.p3 = { ...state.profiles.p3, name: 'Morgan', pin: '3333', grade: '6' }
+  state.profiles.p4 = { ...state.profiles.p4, name: 'Taylor', pin: '4444', grade: '10' }
+  state.profiles.p5 = { ...state.profiles.p5, name: 'Jordan', pin: '5555', grade: '12' }
   state.activeProfileId = active
   return state
 }
@@ -150,6 +171,24 @@ function hasText(node: FakeElement, needle: string): boolean {
   return renderedText(node).replaceAll(/\s+/g, '').includes(needle.replaceAll(/\s+/g, ''))
 }
 
+function findButton(label: string, node: FakeElement): FakeElement | null {
+  if (node.tagName === 'BUTTON' && hasText(node, label)) return node
+  for (const child of node.childNodes) {
+    const found = findButton(label, child)
+    if (found) return found
+  }
+  return null
+}
+
+async function press(button: FakeElement | null) {
+  expect(button).not.toBeNull()
+  const key = Object.keys(button!).find((candidate) => candidate.startsWith('__reactProps$'))
+  if (!key) throw new Error(`No React props on <${button!.tagName}>`)
+  const props = (button as unknown as Record<string, { onClick?: () => void }>)[key]
+  if (!props.onClick) throw new Error(`No onClick on <${button!.tagName}>`)
+  await act(async () => props.onClick!())
+}
+
 describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
   let root: Root | null
   let container: FakeElement
@@ -160,6 +199,10 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     harness.picker = null
     harness.pin = null
     harness.academy = null
+    harness.assistantMounts = 0
+    harness.networkCalls = 0
+    harness.mediaRequests = 0
+    harness.speechCalls = 0
     root = null
     pathname = '/academy'
     vi.stubEnv('VITE_ACADEMY_GRADE_5_ENABLED', 'true')
@@ -181,13 +224,27 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     documentTarget.defaultView = windowTarget
     vi.stubGlobal('window', windowTarget)
     vi.stubGlobal('document', documentTarget)
-    vi.stubGlobal('navigator', { onLine: false, userAgent: 'Vitest' })
+    vi.stubGlobal('fetch', async () => {
+      harness.networkCalls += 1
+      return { ok: true }
+    })
+    vi.stubGlobal('navigator', {
+      onLine: true,
+      userAgent: 'Vitest',
+      mediaDevices: {
+        getUserMedia: async () => {
+          harness.mediaRequests += 1
+          return {}
+        },
+      },
+    })
     vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true)
     container = documentTarget.createElement('div')
   })
 
   afterEach(async () => {
     if (root) await act(async () => root?.unmount())
+    vi.useRealTimers()
     vi.unstubAllEnvs()
     vi.unstubAllGlobals()
   })
@@ -220,7 +277,9 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
 
   it('boots onto the academy surface for a deep link with a persisted grade-5 profile', async () => {
     pathname = '/academy/course/ma-g5-mathematics/unit/2/lesson/ma-g5-mathematics-u02-l03'
-    await mountApp(seeded('p2'))
+    const state = seeded('p2')
+    state.profiles.p2 = { ...state.profiles.p2, missions: {} }
+    await mountApp(state)
     expect(harness.picker).toBeNull()
     expect(harness.academy).not.toBeNull()
     expect(harness.academy!.profile.id).toBe('p2')
@@ -236,6 +295,21 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     })
     // deep-link pathname is left untouched on entry (A4-X: exit normalizes, entry never writes)
     expect(pathname).toBe('/academy/course/ma-g5-mathematics/unit/2/lesson/ma-g5-mathematics-u02-l03')
+    expect(harness.academy!.dashboard?.mission?.day).toBeUndefined()
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p2.missions).toEqual({})
+  })
+
+  it('does not create a mission day from direct Academy course navigation', async () => {
+    pathname = '/academy/course/ma-g5-mathematics'
+    const state = seeded('p2')
+    state.profiles.p2 = { ...state.profiles.p2, missions: {} }
+    await mountApp(state)
+
+    expect(harness.academy?.route).toEqual({ kind: 'course', courseId: 'ma-g5-mathematics' })
+    expect(harness.academy?.dashboard?.mission?.day).toBeUndefined()
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p2.missions).toEqual({})
   })
 
   it('re-enters the academy after a refresh-equivalent remount mid-lesson', async () => {
@@ -375,14 +449,97 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
     expect(hasText(container, 'Hi, Riley!')).toBe(true)
   })
 
+  it('opens an assistant-free high-school workspace while preserving legitimate tools', async () => {
+    pathname = '/academy'
+    const state = seeded('p5')
+    state.profiles.p5 = { ...state.profiles.p5, assistant: undefined }
+    await mountApp(state)
+    expect(hasText(container, 'Manuel Academy surface (home)')).toBe(true)
+
+    const workspace = harness.academy?.dashboard?.tools?.find((tool) => tool.id === 'classic-home')
+    expect(workspace).toMatchObject({ title: 'High-school workspace' })
+    await act(async () => workspace!.onOpen())
+    await settle()
+
+    expect(hasText(container, 'College-app deadlines')).toBe(true)
+    expect(hasText(container, 'Service hours')).toBe(true)
+    expect(hasText(container, 'Geometry practice')).toBe(true)
+    expect(hasText(container, 'Algebra I warm-up')).toBe(true)
+    expect(hasText(container, 'Timed quiz')).toBe(true)
+    expect(hasText(container, 'Course progress')).toBe(true)
+    expect(renderedText(container)).not.toMatch(/assistant prompt|school-day assistant|talk microphone|\bsend\b/i)
+    await press(findButton('Start warm-up', container))
+    await settle()
+    expect(hasText(container, '1/5')).toBe(true)
+    expect(harness.assistantMounts).toBe(0)
+    expect(harness.networkCalls).toBe(0)
+    expect(harness.mediaRequests).toBe(0)
+    expect(harness.speechCalls).toBe(0)
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p5.assistant).toBeUndefined()
+  })
+
+  it('keeps Mindset non-actionable and out of Up Next before the existing unlock date', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date(2026, 6, 22, 12))
+    pathname = '/academy'
+    const state = seeded('p3')
+    state.mindsetStartDate = '2026-07-20'
+    state.profiles.p3 = { ...state.profiles.p3, missions: {} }
+    await mountApp(state)
+
+    const mission = harness.academy?.dashboard?.mission
+    const mindsetItem = mission?.day?.items.find((item) => item.id === 'mindset-lesson')
+    expect(mindsetItem).toBeDefined()
+    expect(mission?.launchableKinds).not.toContain('mindset')
+    expect(harness.academy?.dashboard?.tools?.some((tool) => tool.id === 'mindset')).toBe(false)
+    const mindsetOnly = buildLegacyMissionData({ items: [mindsetItem!] }, mission?.launchableKinds)
+    expect(mindsetOnly.items[0]).toMatchObject({ action: 'none', upNextEligible: false })
+    expect(mindsetOnly.upNext).toBeNull()
+
+    await act(async () => mission?.onLaunch('mindset'))
+    await settle()
+    expect(hasText(container, 'Manuel Academy surface (home)')).toBe(true)
+  })
+
+  it('launches Mindset through the existing flow after unlock without completing on open', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date(2026, 6, 29, 12))
+    pathname = '/academy'
+    const state = seeded('p3')
+    state.mindsetStartDate = '2026-07-20'
+    state.profiles.p3 = { ...state.profiles.p3, missions: {} }
+    await mountApp(state)
+
+    const mission = harness.academy?.dashboard?.mission
+    const mindsetItem = mission?.day?.items.find((item) => item.id === 'mindset-lesson')
+    expect(mindsetItem).toMatchObject({ done: false, auto: true, autoKind: 'mindset' })
+    expect(mission?.launchableKinds).toContain('mindset')
+    expect(harness.academy?.dashboard?.tools?.some((tool) => tool.id === 'mindset')).toBe(true)
+    const mindsetOnly = buildLegacyMissionData({ items: [mindsetItem!] }, mission?.launchableKinds)
+    expect(mindsetOnly.items[0]).toMatchObject({ action: 'launch', upNextEligible: true })
+    expect(mindsetOnly.upNext?.item.id).toBe('mindset-lesson')
+
+    await act(async () => mission?.onLaunch('mindset'))
+    await settle()
+    expect(hasText(container, 'Your quiet corner')).toBe(true)
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p3.missions['2026-07-29'].items.find((item) => item.id === 'mindset-lesson')?.done).toBe(false)
+    expect(persisted.profiles.p3.mindset).toBeUndefined()
+  })
+
   it('returns a deep Academy route to dashboard home, then signs out through the composition', async () => {
     pathname = '/academy/course/ma-g5-mathematics'
-    await mountApp(seeded('p2'))
+    const state = seeded('p2')
+    state.profiles.p2 = { ...state.profiles.p2, missions: {} }
+    await mountApp(state)
     expect(harness.academy?.route).toEqual({ kind: 'course', courseId: 'ma-g5-mathematics' })
+    expect(harness.academy?.dashboard?.mission?.day).toBeUndefined()
     await act(async () => harness.academy!.onExit())
     await settle()
     expect(pathname).toBe('/')
     expect(harness.academy?.route).toEqual({ kind: 'home' })
+    expect(harness.academy?.dashboard?.mission?.day).toBeDefined()
     expect(hasText(container, 'Hi, Riley!')).toBe(false)
     await act(async () => harness.academy!.dashboard!.onSignOut())
     await settle()

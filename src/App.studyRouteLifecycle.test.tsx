@@ -2,6 +2,7 @@ import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { APP_STATE_STORAGE_KEY } from './sync/provenance'
+import { isoToday } from './appState'
 import { defaultAppState } from './migration'
 import type { AppState } from './types'
 
@@ -282,6 +283,8 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await reachStudySurface()
     expect(harness.picker).toBeNull()
     expect(harness.launches[0]).toEqual({ student: 'p1', host: 'household-a' })
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p1.missions[isoToday()]).toBeUndefined()
     // A4-X: entry never writes the URL — deep-link pathname is left untouched.
     expect(pathname).toBe('/study-engine')
   })
@@ -363,6 +366,9 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await reachStudySurface()
     await press(findButton('Back home'))
     await waitFor(() => hasText(container, 'Student Dashboard for Sam'))
+    await settle()
+    const homeState = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(homeState.profiles.p1.missions[isoToday()]).toBeDefined()
     expect(pathname).toBe('/')
     await act(async () => root?.unmount())
     root = null

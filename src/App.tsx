@@ -58,6 +58,7 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { currentWeek } from './mindset/mindset'
 import {
   StudentDashboard,
   type StudentDashboardComposition,
@@ -442,21 +443,16 @@ export default function App() {
   }
 
   const today = isoToday()
-  const learnerScreen = ![
-    'picker',
-    'kidPin',
-    'kidPinCreate',
-    'parentPin',
-    'parentPinCreate',
-    'grownups',
-    'parentHub',
-  ].includes(screen.kind)
+  const missionHomeScreen =
+    screen.kind === 'home' ||
+    screen.kind === 'classicHome' ||
+    (screen.kind === 'academy' && screen.route.kind === 'home')
   const activeMissionDay = active?.missions[today]
   useEffect(() => {
     const profileId = active?.id
-    if (!learnerScreen || !profileId || activeMissionDay) return
+    if (!missionHomeScreen || !profileId || activeMissionDay) return
     setState((s) => patchProfile(s, profileId, (p) => ensureToday(p, today)))
-  }, [active?.id, activeMissionDay, learnerScreen, today])
+  }, [active?.id, activeMissionDay, missionHomeScreen, today])
 
   const toggleMissionItem = (itemId: string, done: boolean) =>
     patchActive((p) => {
@@ -472,11 +468,12 @@ export default function App() {
   const openClassicHome = () => openStudentScreen({ kind: 'classicHome' })
   const trainerReady = active?.grade === '3' || active?.grade === '4' || active?.grade === '6'
   const highSchool = active?.grade === '10' || active?.grade === '12'
+  const mindsetUnlocked = currentWeek(state.mindsetStartDate, today) > 0
   const launchableMissionKinds: AutoKind[] = active
     ? [
         ...(trainerReady ? (['math'] as const) : []),
         ...(!highSchool ? (['typing', 'reading'] as const) : []),
-        'mindset',
+        ...(mindsetUnlocked ? (['mindset'] as const) : []),
       ]
     : []
   const launchMission = (kind: AutoKind) => {
@@ -553,12 +550,16 @@ export default function App() {
                 },
               ]
             : []),
-          {
-            id: 'mindset',
-            title: 'Mindset',
-            description: 'Open this week’s reflection',
-            onOpen: () => openStudentScreen({ kind: 'mindset' }),
-          },
+          ...(mindsetUnlocked
+            ? [
+                {
+                  id: 'mindset',
+                  title: 'Mindset',
+                  description: 'Open this week’s reflection',
+                  onOpen: () => launchMission('mindset'),
+                },
+              ]
+            : []),
           ...(studyPreviewReady || studyProductionSelected
             ? [
                 {
@@ -1304,7 +1305,6 @@ function Home({
         onProfileChange={onProfileChange}
         onSignOut={onSignOut}
         onToggleItem={onToggleItem}
-        muted={muted}
         assessmentCards={assessmentCards}
         onOpenAssessment={onOpenAssessment}
         onOpenMindset={onOpenMindset}

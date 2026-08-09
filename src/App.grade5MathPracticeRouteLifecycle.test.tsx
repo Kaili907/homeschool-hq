@@ -2,6 +2,7 @@ import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { APP_STATE_STORAGE_KEY } from './sync/provenance'
+import { isoToday } from './appState'
 import { defaultAppState } from './migration'
 import type { AppState } from './types'
 
@@ -262,6 +263,8 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await waitForSurface()
     expect(harness.picker).toBeNull()
     expect(hasText(container, 'Unit 10')).toBe(true)
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p2.missions[isoToday()]).toBeUndefined()
     // entry never writes the URL (A4-X: exit normalizes, entry leaves it alone)
     expect(pathname).toBe('/practice/grade-5-math')
   })
@@ -310,6 +313,9 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await waitForSurface()
     await press(findButton('Back home'))
     expect(hasText(container, 'Student Dashboard for Riley')).toBe(true)
+    await settle()
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p2.missions[isoToday()]).toBeDefined()
     expect(pathname).toBe('/')
   })
 
