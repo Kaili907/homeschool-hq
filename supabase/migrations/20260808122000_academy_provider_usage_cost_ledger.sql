@@ -386,7 +386,9 @@ declare
   selected_rate public.academy_provider_prices%rowtype;
   component_cost numeric;
   total_cost numeric := 0;
-  has_positive_quantity boolean := false;
+  has_positive_usage_quantity boolean := false;
+  has_priced_component boolean := false;
+  request_quantity bigint;
 begin
   if p_execution_key is null or p_execution_key !~ '^[A-Za-z0-9_-]{1,128}$'
     or p_occurred_at is null
@@ -577,6 +579,11 @@ begin
     raise exception 'reconciliation_conflict' using errcode = '23505';
   end if;
 
+  select ledger.request_count::bigint
+  into request_quantity
+  from public.academy_provider_usage_ledger as ledger
+  where ledger.id = new_usage_id;
+
   if p_billing_disposition <> 'billable' then
     return jsonb_build_object('usageId', new_usage_id, 'idempotencyResult', 'created');
   end if;
@@ -585,25 +592,12 @@ begin
     return jsonb_build_object('usageId', new_usage_id, 'idempotencyResult', 'created');
   end if;
 
-  for component in
-    select * from (values
-      ('input_token'::text, p_input_tokens),
-      ('output_token'::text, p_output_tokens),
-      ('cached_input_read_token'::text, p_cached_input_read_tokens),
-      ('cached_input_write_token'::text, p_cached_input_write_tokens),
-      ('tts_character'::text, p_tts_characters)
-    ) as quantities(billing_unit, quantity)
-    where quantity is not null and quantity > 0
-  loop
-    has_positive_quantity := true;
-  end loop;
-
-  if not has_positive_quantity then
-    update public.academy_provider_usage_ledger
-    set cost_kind = 'calculated', cost_micros = 0
-    where id = new_usage_id;
-    return jsonb_build_object('usageId', new_usage_id, 'idempotencyResult', 'created');
-  end if;
+  has_positive_usage_quantity :=
+    coalesce(p_input_tokens, 0) > 0
+    or coalesce(p_output_tokens, 0) > 0
+    or coalesce(p_cached_input_read_tokens, 0) > 0
+    or coalesce(p_cached_input_write_tokens, 0) > 0
+    or coalesce(p_tts_characters, 0) > 0;
 
   select count(*), min(catalog.version)
   into matching_catalog_count, selected_catalog_version
@@ -612,18 +606,26 @@ begin
     and catalog.effective_from <= p_occurred_at
     and (catalog.effective_to is null or p_occurred_at < catalog.effective_to);
 
+  if matching_catalog_count = 0 and not has_positive_usage_quantity then
+    update public.academy_provider_usage_ledger
+    set cost_kind = 'calculated', cost_micros = 0
+    where id = new_usage_id;
+    return jsonb_build_object('usageId', new_usage_id, 'idempotencyResult', 'created');
+  end if;
+
   if matching_catalog_count <> 1 then
     return jsonb_build_object('usageId', new_usage_id, 'idempotencyResult', 'created');
   end if;
 
   for component in
     select * from (values
-      ('input_token'::text, p_input_tokens),
-      ('output_token'::text, p_output_tokens),
-      ('cached_input_read_token'::text, p_cached_input_read_tokens),
-      ('cached_input_write_token'::text, p_cached_input_write_tokens),
-      ('tts_character'::text, p_tts_characters)
-    ) as quantities(billing_unit, quantity)
+      ('input_token'::text, p_input_tokens, false),
+      ('output_token'::text, p_output_tokens, false),
+      ('cached_input_read_token'::text, p_cached_input_read_tokens, false),
+      ('cached_input_write_token'::text, p_cached_input_write_tokens, false),
+      ('tts_character'::text, p_tts_characters, false),
+      ('request'::text, request_quantity, true)
+    ) as quantities(billing_unit, quantity, optional_rate)
     where quantity is not null and quantity > 0
   loop
     matching_rate_id := null;
@@ -639,6 +641,10 @@ begin
       and price.currency = 'USD'
       and price.effective_from <= p_occurred_at
       and (price.effective_to is null or p_occurred_at < price.effective_to);
+
+    if component.optional_rate and matching_rate_count = 0 then
+      continue;
+    end if;
 
     if matching_rate_count <> 1 then
       delete from public.academy_provider_usage_cost_components where usage_id = new_usage_id;
@@ -693,7 +699,15 @@ begin
       component_cost::bigint
     );
     total_cost := total_cost + component_cost;
+    has_priced_component := true;
   end loop;
+
+  if not has_priced_component then
+    update public.academy_provider_usage_ledger
+    set cost_kind = 'calculated', cost_micros = 0
+    where id = new_usage_id;
+    return jsonb_build_object('usageId', new_usage_id, 'idempotencyResult', 'created');
+  end if;
 
   if total_cost > 9223372036854775807 then
     raise exception 'calculated provider cost exceeds bigint bounds' using errcode = '22003';

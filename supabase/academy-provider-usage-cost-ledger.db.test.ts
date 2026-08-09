@@ -149,17 +149,31 @@ async function ledger(database: PGlite, executionKey: string) {
   return result.rows[0]
 }
 
+async function components(database: PGlite, executionKey: string) {
+  const result = await database.query<Record<string, unknown>>(
+    `select component.billing_unit, component.quantity, component.price_micros,
+            component.calculated_cost_micros
+     from public.academy_provider_usage_cost_components as component
+     join public.academy_provider_usage_ledger as ledger on ledger.id = component.usage_id
+     where ledger.execution_key = $1
+     order by component.billing_unit`,
+    [executionKey],
+  )
+  return result.rows
+}
+
 beforeEach(createDatabase)
 afterEach(async () => Promise.all(databases.splice(0).map((database) => database.close())))
 
 describe('Academy provider usage cost ledger v2', () => {
-  it('keeps cache read/write quantities, prices, and immutable component snapshots distinct', async () => {
+  it('calculates all AI usage units plus request with distinct immutable snapshots', async () => {
     const database = databases[0]
     await insertCatalog(database)
     await insertRate(database, { unit: 'input_token', priceMicros: 3_000_000 })
     await insertRate(database, { unit: 'output_token', priceMicros: 15_000_000 })
     await insertRate(database, { unit: 'cached_input_read_token', priceMicros: 300_000 })
     await insertRate(database, { unit: 'cached_input_write_token', priceMicros: 3_750_000 })
+    await insertRate(database, { unit: 'request', priceMicros: 25, unitQuantity: 1 })
     await record(database, {
       executionKey: 'combined-ai', inputTokens: 500_000, outputTokens: 200_000,
       cachedInputReadTokens: 100_000, cachedInputWriteTokens: 100_000,
@@ -173,16 +187,44 @@ describe('Academy provider usage cost ledger v2', () => {
       cost_kind: 'calculated',
       pricing_catalog_version: 'test-catalog-v1',
     })
-    expect(String((await ledger(database, 'combined-ai')).cost_micros)).toBe('4905000')
-    const components = await database.query<Record<string, unknown>>(
-      `select billing_unit, quantity, price_micros, calculated_cost_micros
-       from public.academy_provider_usage_cost_components order by billing_unit`,
-    )
-    expect(components.rows.map((row) => ({ ...row, calculated_cost_micros: String(row.calculated_cost_micros) }))).toEqual([
+    expect(String((await ledger(database, 'combined-ai')).cost_micros)).toBe('4905025')
+    expect((await components(database, 'combined-ai')).map((row) => ({ ...row, calculated_cost_micros: String(row.calculated_cost_micros) }))).toEqual([
       { billing_unit: 'cached_input_read_token', quantity: 100_000, price_micros: 300_000, calculated_cost_micros: '30000' },
       { billing_unit: 'cached_input_write_token', quantity: 100_000, price_micros: 3_750_000, calculated_cost_micros: '375000' },
       { billing_unit: 'input_token', quantity: 500_000, price_micros: 3_000_000, calculated_cost_micros: '1500000' },
       { billing_unit: 'output_token', quantity: 200_000, price_micros: 15_000_000, calculated_cost_micros: '3000000' },
+      { billing_unit: 'request', quantity: 1, price_micros: 25, calculated_cost_micros: '25' },
+    ])
+  })
+
+  it('calculates request-only, single-usage-plus-request, cache-plus-request, and mixed AI pricing', async () => {
+    const database = databases[0]
+    await insertCatalog(database)
+    await insertRate(database, { unit: 'input_token', priceMicros: 2, unitQuantity: 1 })
+    await insertRate(database, { unit: 'output_token', priceMicros: 3, unitQuantity: 1 })
+    await insertRate(database, { unit: 'cached_input_read_token', priceMicros: 5, unitQuantity: 1 })
+    await insertRate(database, { unit: 'cached_input_write_token', priceMicros: 7, unitQuantity: 1 })
+    await insertRate(database, { unit: 'request', priceMicros: 11, unitQuantity: 1 })
+
+    await record(database, { executionKey: 'request-only' })
+    await record(database, { executionKey: 'input-request', inputTokens: 2 })
+    await record(database, { executionKey: 'output-request', outputTokens: 2 })
+    await record(database, { executionKey: 'cache-request', cachedInputReadTokens: 2, cachedInputWriteTokens: 3 })
+    await record(database, {
+      executionKey: 'all-request', inputTokens: 1, outputTokens: 1,
+      cachedInputReadTokens: 1, cachedInputWriteTokens: 1,
+    })
+
+    expect(String((await ledger(database, 'request-only')).cost_micros)).toBe('11')
+    expect(await components(database, 'request-only')).toMatchObject([
+      { billing_unit: 'request', quantity: 1 },
+    ])
+    expect(String((await ledger(database, 'input-request')).cost_micros)).toBe('15')
+    expect(String((await ledger(database, 'output-request')).cost_micros)).toBe('17')
+    expect(String((await ledger(database, 'cache-request')).cost_micros)).toBe('42')
+    expect(String((await ledger(database, 'all-request')).cost_micros)).toBe('28')
+    expect((await components(database, 'all-request')).map((row) => row.billing_unit)).toEqual([
+      'cached_input_read_token', 'cached_input_write_token', 'input_token', 'output_token', 'request',
     ])
   })
 
@@ -190,14 +232,57 @@ describe('Academy provider usage cost ledger v2', () => {
     const database = databases[0]
     await insertCatalog(database)
     await insertRate(database, { provider: 'elevenlabs', tier: null, unit: 'tts_character', priceMicros: 300_000, unitQuantity: 1_000 })
+    await insertRate(database, { provider: 'elevenlabs', tier: null, unit: 'request', priceMicros: 100, unitQuantity: 1 })
     await record(database, { executionKey: 'tts-exact', engine: 'tts', provider: 'elevenlabs', ttsCharacters: 333 })
+    await record(database, { executionKey: 'tts-zero', engine: 'tts', provider: 'elevenlabs', ttsCharacters: 0 })
     const row = await ledger(database, 'tts-exact')
     expect(row).toMatchObject({ logical_model_tier: null, tts_characters: 333, cost_kind: 'calculated' })
-    expect(String(row.cost_micros)).toBe('99900')
+    expect(String(row.cost_micros)).toBe('100000')
+    expect(String((await ledger(database, 'tts-zero')).cost_micros)).toBe('100')
+    expect((await components(database, 'tts-exact')).map((component) => component.billing_unit)).toEqual([
+      'request', 'tts_character',
+    ])
     const forbidden = await database.query(`select column_name from information_schema.columns
       where table_schema = 'public' and table_name like 'academy_provider_usage%'
       and column_name ~ '(prompt|conversation|student_audio|assessment_answer|answer_content|raw_answer)'`)
     expect(forbidden.rows).toEqual([])
+  })
+
+  it('keeps request pricing optional while requiring every positive usage quantity to have a rate', async () => {
+    const database = databases[0]
+    await insertCatalog(database)
+    await insertRate(database, { unit: 'input_token', priceMicros: 2, unitQuantity: 1 })
+    await record(database, { executionKey: 'no-request-rate', inputTokens: 3 })
+    expect(String((await ledger(database, 'no-request-rate')).cost_micros)).toBe('6')
+    expect((await components(database, 'no-request-rate')).map((row) => row.billing_unit)).toEqual([
+      'input_token',
+    ])
+
+    await insertRate(database, { unit: 'request', priceMicros: 11, unitQuantity: 1 })
+    await record(database, { executionKey: 'missing-output-rate', inputTokens: 3, outputTokens: 1 })
+    expect(await ledger(database, 'missing-output-rate')).toMatchObject({
+      cost_kind: 'unavailable',
+      cost_micros: null,
+      pricing_catalog_version: null,
+    })
+    expect(await components(database, 'missing-output-rate')).toEqual([])
+  })
+
+  it('rejects an ambiguous effective request rate instead of silently selecting one', async () => {
+    const database = databases[0]
+    await insertCatalog(database)
+    await insertRate(database, { unit: 'request', priceMicros: 10, unitQuantity: 1 })
+    await database.exec(`drop trigger academy_provider_prices_no_overlap on public.academy_provider_prices`)
+    await insertRate(database, {
+      unit: 'request', priceMicros: 20, unitQuantity: 1,
+      effectiveFrom: '2026-02-01T00:00:00.000Z',
+    })
+    await record(database, { executionKey: 'ambiguous-request-rate' })
+    expect(await ledger(database, 'ambiguous-request-rate')).toMatchObject({
+      cost_kind: 'unavailable',
+      cost_micros: null,
+    })
+    expect(await components(database, 'ambiguous-request-rate')).toEqual([])
   })
 
   it.each(['resolved', 'no_active_household', 'ambiguous', 'lookup_unavailable'] as const)(
@@ -217,18 +302,18 @@ describe('Academy provider usage cost ledger v2', () => {
     },
   )
 
-  it('uses exactly one catalog at half-open boundaries and rejects catalog/rate overlap', async () => {
+  it('uses request prices at half-open catalog/rate boundaries and rejects overlap', async () => {
     const database = databases[0]
     await insertCatalog(database)
     await insertCatalog(database, 'test-catalog-v2', '2026-07-01T00:00:00.000Z', null)
-    await insertRate(database, { unit: 'input_token', priceMicros: 2, unitQuantity: 1 })
-    await insertRate(database, { catalog: 'test-catalog-v2', unit: 'input_token', priceMicros: 3, unitQuantity: 1, effectiveFrom: '2026-07-01T00:00:00.000Z', effectiveTo: null })
-    await record(database, { executionKey: 'before-boundary', occurredAt: '2026-06-30T23:59:59.999Z', inputTokens: 10 })
-    await record(database, { executionKey: 'at-boundary', occurredAt: '2026-07-01T00:00:00.000Z', inputTokens: 10 })
-    expect(String((await ledger(database, 'before-boundary')).cost_micros)).toBe('20')
-    expect(String((await ledger(database, 'at-boundary')).cost_micros)).toBe('30')
+    await insertRate(database, { unit: 'request', priceMicros: 2, unitQuantity: 1 })
+    await insertRate(database, { catalog: 'test-catalog-v2', unit: 'request', priceMicros: 3, unitQuantity: 1, effectiveFrom: '2026-07-01T00:00:00.000Z', effectiveTo: null })
+    await record(database, { executionKey: 'before-boundary', occurredAt: '2026-06-30T23:59:59.999Z' })
+    await record(database, { executionKey: 'at-boundary', occurredAt: '2026-07-01T00:00:00.000Z' })
+    expect(String((await ledger(database, 'before-boundary')).cost_micros)).toBe('2')
+    expect(String((await ledger(database, 'at-boundary')).cost_micros)).toBe('3')
     await expect(insertCatalog(database, 'overlap', '2026-06-01T00:00:00Z', '2026-08-01T00:00:00Z')).rejects.toThrow(/may not overlap/)
-    await expect(insertRate(database, { unit: 'input_token', priceMicros: 4, effectiveFrom: '2026-06-01T00:00:00Z' })).rejects.toThrow(/may not overlap/)
+    await expect(insertRate(database, { unit: 'request', priceMicros: 4, effectiveFrom: '2026-06-01T00:00:00Z' })).rejects.toThrow(/may not overlap/)
   })
 
   it('enforces USD and represents unavailable, calculated, reconciled, and billing independently', async () => {
@@ -236,10 +321,19 @@ describe('Academy provider usage cost ledger v2', () => {
     await expect(insertCatalog(database, 'eur-catalog', '2025-01-01T00:00:00Z', '2025-02-01T00:00:00Z', 'EUR')).rejects.toThrow()
     await insertCatalog(database)
     await expect(insertRate(database, { unit: 'input_token', priceMicros: 1, currency: 'EUR' })).rejects.toThrow()
+    await insertRate(database, { unit: 'request', priceMicros: 17, unitQuantity: 1 })
     await record(database, { executionKey: 'unknown', inputTokens: null, outputTokens: null, cachedInputReadTokens: null, cachedInputWriteTokens: null, result: 'timeout', reason: 'upstream_timeout', billingDisposition: 'unknown' })
     await record(database, { executionKey: 'not-billable', billingDisposition: 'not_billable', result: 'rejected', reason: 'trusted_not_billed' })
+    await record(database, { executionKey: 'billable-provider-error', result: 'provider_error', reason: 'invalid_provider_response', billingDisposition: 'billable' })
+    await record(database, { executionKey: 'billable-missing-usage', inputTokens: null, outputTokens: null, cachedInputReadTokens: null, cachedInputWriteTokens: null, result: 'provider_error', reason: 'invalid_provider_response', billingDisposition: 'billable' })
     expect(await ledger(database, 'unknown')).toMatchObject({ cost_kind: 'unavailable', cost_micros: null, billing_disposition: 'unknown', result: 'timeout' })
     expect(await ledger(database, 'not-billable')).toMatchObject({ cost_kind: 'calculated', cost_micros: 0, billing_disposition: 'not_billable', result: 'rejected' })
+    expect(await ledger(database, 'billable-provider-error')).toMatchObject({ cost_kind: 'calculated', cost_micros: 17, billing_disposition: 'billable', result: 'provider_error' })
+    expect(await ledger(database, 'billable-missing-usage')).toMatchObject({ cost_kind: 'unavailable', cost_micros: null, billing_disposition: 'billable', result: 'provider_error' })
+    expect(await components(database, 'unknown')).toEqual([])
+    expect(await components(database, 'not-billable')).toEqual([])
+    expect((await components(database, 'billable-provider-error')).map((row) => row.billing_unit)).toEqual(['request'])
+    expect(await components(database, 'billable-missing-usage')).toEqual([])
     await database.exec(`update public.academy_provider_usage_ledger set
       cost_kind = 'reconciled', cost_micros = 123456789, billing_disposition = 'billable',
       pricing_catalog_version = null, reconciliation_ref = 'invoice-line-1'
@@ -256,12 +350,17 @@ describe('Academy provider usage cost ledger v2', () => {
 
   it('replays identical immutable facts and rejects conflicting facts for one execution key', async () => {
     const database = databases[0]
-    const facts: UsageInput = { executionKey: 'same-execution', inputTokens: 5 }
+    await insertCatalog(database)
+    await insertRate(database, { unit: 'request', priceMicros: 5, unitQuantity: 1 })
+    const facts: UsageInput = { executionKey: 'same-execution' }
     const first = await record(database, facts)
     await database.exec(`set timezone = 'America/Los_Angeles'`)
     const replay = await record(database, facts)
     expect(replay.rows[0].result).toEqual({ usageId: first.rows[0].result.usageId, idempotencyResult: 'replayed' })
-    await expect(record(database, { ...facts, inputTokens: 6 })).rejects.toThrow(/reconciliation_conflict/)
+    expect(String((await ledger(database, 'same-execution')).cost_micros)).toBe('5')
+    expect(await components(database, 'same-execution')).toHaveLength(1)
+    await expect(record(database, { ...facts, inputTokens: 1 })).rejects.toThrow(/reconciliation_conflict/)
+    expect(await components(database, 'same-execution')).toHaveLength(1)
   })
 
   it('transports IntegerMicros and rates as exact decimal strings beyond JS safe integers', async () => {
@@ -286,11 +385,11 @@ describe('Academy provider usage cost ledger v2', () => {
     await database.exec('reset role;')
   })
 
-  it('uses half-up component rounding and makes catalogs/rates immutable', async () => {
+  it('uses exact half-up request-component rounding and makes catalogs/rates immutable', async () => {
     const database = databases[0]
     await insertCatalog(database)
-    await insertRate(database, { unit: 'input_token', priceMicros: 1, unitQuantity: 2 })
-    await record(database, { executionKey: 'rounding', inputTokens: 1 })
+    await insertRate(database, { unit: 'request', priceMicros: 1, unitQuantity: 2 })
+    await record(database, { executionKey: 'rounding' })
     expect(String((await ledger(database, 'rounding')).cost_micros)).toBe('1')
     await expect(database.exec(`update public.academy_provider_prices set price_micros = 2`)).rejects.toThrow(/immutable/)
     await expect(database.exec(`delete from public.academy_provider_pricing_catalogs`)).rejects.toThrow(/immutable/)
