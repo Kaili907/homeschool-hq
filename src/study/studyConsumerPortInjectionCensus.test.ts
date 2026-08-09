@@ -36,8 +36,9 @@ import type { StudyDashboardPorts, StudyParentControlPorts, StudySettingsPorts }
  *        destructure  ({ k } = ·) ({ k: renamed } = ·) ({ ...rest } = ·)
  *          (assigned) ({ k = root } = ·) [a] = · [...rest] = ·  — literal syntax
  *                     meaning what the patterns above mean, and a separate code path
- *        write        arr[i] = root · w['k'] = root  (the *container* widens to
- *                     `whole`; see the note on index blindness below)
+ *        write        arr[i] = root · w['k'] = root · w.k = root when `k` has no
+ *                     declared symbol (the *container* widens to `whole`; see the
+ *                     note on index blindness below)
  *        object       { ...root } · { root } · { k: root } · { k: { root } } ·
  *                     { [computed]: root } (widens to `whole`)
  *        array        [root] · [root.k] · [...roots]  (index-blind: an array that
@@ -55,12 +56,14 @@ import type { StudyDashboardPorts, StudyParentControlPorts, StudySettingsPorts }
  * Nothing wider. What is NOT covered, and is pinned below as a known survivor rather
  * than quietly implied to be covered:
  *
- *   - interprocedural laundering. `function launder(x: unknown) { return x as any }`
+ *   - known remaining out-of-scope interprocedural forms. `function
+ *     launder(x: unknown) { return x as any }`
  *     called as `launder(ports)` passes the capability across a call boundary this
  *     file does not follow, in either direction. Object-literal methods and getters
- *     are the same boundary wearing a different hat. This is the only class of local
- *     escape known to remain, and it is the *only* thing the three pinned survivors
- *     at the end of PROVENANCE_CASES assert — not that nothing else exists.
+ *     are the same boundary wearing a different hat, as is a call with a declared
+ *     narrow return type. The pinned survivors at the end of PROVENANCE_CASES assert
+ *     only that these named forms remain outside this intentionally bounded model —
+ *     not that they are the only possible JavaScript or TypeScript escapes.
  *   - a hand-over written as a spread argument, `Consumer(...[ports])`, has no
  *     per-parameter contextual type, so (1) cannot see it. For a *discovered*
  *     consumer that form fails closed instead, through the reference sweep; for a
@@ -99,6 +102,10 @@ import type { StudyDashboardPorts, StudyParentControlPorts, StudySettingsPorts }
  *         false arm of a conditional join. Removing any of the three left every test
  *         green                                       (closed by forcing cases, not
  *                                                      by changing the analysis)
+ *   H4    `(globalThis as any).leakedPorts = ports`, `reg.k = ports`, and
+ *         `reg.k ??= ports` disappeared when the dotted property had no declared
+ *         symbol, although `reg['k'] = ports` widened its receiver correctly
+ *                         (closed by widening the dotted receiver or failing closed)
  *
  * Every one of those was run against its parent commit's own guard first, and each
  * left `tsc --noEmit` and that guard at exit 0 while `safety` — a role no narrow
@@ -659,6 +666,24 @@ function capabilityScope(target: ts.Program, files: readonly string[]) {
     return grew
   }
 
+  /** Whether an assignment target can ultimately store carriage on a declaration. */
+  function hasAssignmentAnchor(target: ts.Expression): boolean {
+    if (
+      ts.isParenthesizedExpression(target) ||
+      ts.isNonNullExpression(target) ||
+      ts.isSatisfiesExpression(target) ||
+      isTypeErasure(target)
+    ) {
+      return hasAssignmentAnchor(target.expression)
+    }
+    if (ts.isElementAccessExpression(target)) return hasAssignmentAnchor(target.expression)
+    if (ts.isPropertyAccessExpression(target)) {
+      if ((symbolAt(target)?.declarations?.length ?? 0) > 0) return true
+      return hasAssignmentAnchor(target.expression)
+    }
+    return (symbolAt(target)?.declarations?.length ?? 0) > 0
+  }
+
   /**
    * Distributes what a value carries over an *assignment* target.
    *
@@ -670,7 +695,14 @@ function capabilityScope(target: ts.Program, files: readonly string[]) {
   function assign(target: ts.Expression, value: Carriage): boolean {
     let grew = false
     if (!carries(value)) return grew
-    if (ts.isParenthesizedExpression(target)) return assign(target.expression, value)
+    if (
+      ts.isParenthesizedExpression(target) ||
+      ts.isNonNullExpression(target) ||
+      ts.isSatisfiesExpression(target) ||
+      isTypeErasure(target)
+    ) {
+      return assign(target.expression, value)
+    }
 
     if (ts.isObjectLiteralExpression(target)) {
       const claimed = new Set<string>()
@@ -713,7 +745,25 @@ function capabilityScope(target: ts.Program, files: readonly string[]) {
     // therefore taints `w.other` as well.
     if (ts.isElementAccessExpression(target)) return assign(target.expression, everything())
 
-    // An identifier, or `w.k` / `this.field` — all of which have a declaration.
+    if (ts.isPropertyAccessExpression(target)) {
+      const declarations = symbolAt(target)?.declarations ?? []
+      if (declarations.length > 0) {
+        for (const declaration of declarations) grew = absorb(carriageFor(declaration), value) || grew
+        return grew
+      }
+
+      // An index signature, `any`, or another symbol-less dotted property has no
+      // declaration on which to store provenance. Widen its receiver just as an
+      // element-access write does. If even the receiver has no declaration (for
+      // example `makeRegistry().slot = ports`), fail closed instead of silently
+      // dropping the write.
+      if (hasAssignmentAnchor(target.expression)) return assign(target.expression, everything())
+      const message = `${at(target)} — a symbol-less dotted property write carries narrow ports through a receiver this sweep cannot anchor`
+      if (!unnameable.includes(message)) unnameable.push(message)
+      return grew
+    }
+
+    // An identifier — declared property accesses returned above.
     for (const declaration of symbolAt(target)?.declarations ?? []) {
       grew = absorb(carriageFor(declaration), value) || grew
     }
@@ -789,7 +839,18 @@ function capabilityScope(target: ts.Program, files: readonly string[]) {
 // on one — and it appears here on the next run; take the narrow type off an existing
 // one and it disappears. Either way the reviewed snapshot stops matching.
 
-const productionScope = capabilityScope(program, productionFiles)
+/** The intentionally rejected alternative: scan only modules that declare roots. */
+function consumerModuleFiles(target: ts.Program, files: readonly string[]): readonly string[] {
+  const modules = new Set(capabilityScope(target, files).roots.map((root) => posix(root.declaration.getSourceFile().fileName)))
+  return files.filter((file) => modules.has(posix(file)))
+}
+
+/** One seam shared by production and the cross-module fixture, so the file-set claim is forceable. */
+function wholeProgramCapabilityScope(target: ts.Program, files: readonly string[]) {
+  return capabilityScope(target, files)
+}
+
+const productionScope = wholeProgramCapabilityScope(program, productionFiles)
 const portsRoots = productionScope.roots
 unmodelled.push(...productionScope.unnameable)
 
@@ -1098,7 +1159,7 @@ const consumerBodyEscapes = productionScope.findings().map((finding) => finding.
 // Production consumers wrap nothing today, so nothing above would notice if the
 // tracker stopped working. These cases run through `capabilityScope` — the same
 // function, not a copy — over a synthetic module compiled against the real ports
-// contracts. Three of them are the documented boundary: what this file does not
+// contracts. Four of them are the documented boundary: what this file does not
 // claim to catch.
 
 /** The parameter list a case is compiled against, and what discovery must find on it. */
@@ -1124,6 +1185,8 @@ interface ProvenanceCase {
   readonly shape?: ShapeName
   readonly body: string
   readonly escapes: boolean
+  /** The write must fail closed because no stable receiver declaration exists. */
+  readonly unmodelled?: boolean
   /** Roots this case declares beyond its own signature, as `owner | prop | contract`. */
   readonly alsoDiscovers?: readonly string[]
   /** Census entries this case must produce, as `contract | text`. */
@@ -1155,6 +1218,11 @@ const PROVENANCE_CASES: readonly ProvenanceCase[] = [
   { id: 'string-key read', body: 'const w = { ports }; void (w["ports"] as any).safety', escapes: true },
   { id: 'wrapper asserted whole', body: 'const w = { ports }; void (w as any).ports.safety', escapes: true },
   { id: 'sibling key of a wrapper stays free', body: 'const w = { ports, other: spare }; void (w.other as any); void ports.outbox', escapes: false },
+  {
+    id: 'computed-key object literal widens whole',
+    body: 'const key = String(spare); const w = { [key]: ports, clean: spare }; void (w.clean as any).safety',
+    escapes: true,
+  },
 
   // Array literal provenance.
   { id: 'array element', body: 'const w = [ports]; void (w[0] as any).safety', escapes: true },
@@ -1205,6 +1273,23 @@ const PROVENANCE_CASES: readonly ProvenanceCase[] = [
     escapes: true,
   },
   { id: 'keyed assignment onto an object', body: 'const w: Record<string, unknown> = {}; w["k"] = ports; void (w["other"] as any).safety', escapes: true },
+  { id: 'symbol-less dotted assignment', body: 'const w: Record<string, unknown> = {}; w.k = ports; void (w.k as any).safety', escapes: true },
+  { id: 'symbol-less dotted nullish assignment', body: 'const w: Record<string, unknown> = {}; w.k ??= ports; void (w.k as any).safety', escapes: true },
+  { id: 'symbol-less dotted logical-or assignment', body: 'const w: Record<string, unknown> = {}; w.k ||= ports; void (w.k as any).safety', escapes: true },
+  { id: 'symbol-less dotted logical-and assignment', body: 'const w: Record<string, unknown> = { k: spare }; w.k &&= ports; void (w.k as any).safety', escapes: true },
+  { id: 'declared dotted property assignment', body: 'const w: { k?: unknown } = {}; w.k = ports; void (w.k as any).safety', escapes: true },
+  {
+    id: 'global symbol-less dotted assignment',
+    body: '(globalThis as any).leakedPorts = ports; void ((globalThis as any).leakedPorts as any).safety',
+    escapes: false,
+    unmodelled: true,
+  },
+  {
+    id: 'unanchored symbol-less dotted assignment fails closed',
+    body: 'const make = (): Record<string, unknown> => ({}); make().k = ports',
+    escapes: false,
+    unmodelled: true,
+  },
   { id: 'object destructuring assignment', body: 'let a: unknown; ({ a } = { a: ports }); void (a as any).safety', escapes: true },
   { id: 'renamed object destructuring assignment', body: 'let a: unknown; ({ p: a } = { p: ports }); void (a as any).safety', escapes: true },
   { id: 'rest of an object destructuring assignment', body: 'let rest: Record<string, unknown>; ({ ...rest } = { p: ports }); void (rest as any).safety', escapes: true },
@@ -1380,6 +1465,14 @@ const PROVENANCE_CASES: readonly ProvenanceCase[] = [
 ]
 
 const FIXTURE_PATH = posix(join(sourceRoot, 'study', 'portsProvenanceFixture.generated.ts'))
+const PARKING_FIXTURE_PATH = posix(join(sourceRoot, 'study', 'portsProvenanceParkingFixture.generated.ts'))
+const FIXTURE_FILES = [FIXTURE_PATH, PARKING_FIXTURE_PATH] as const
+
+const parkingFixtureText = [
+  `export const registry: Record<string, unknown> = {}`,
+  `void (registry.leaked as any).safety`,
+  '',
+].join('\n')
 
 /**
  * The receivers the hand-over cases above supply. Each declares a narrow contract on
@@ -1389,14 +1482,17 @@ const FIXTURE_PATH = posix(join(sourceRoot, 'study', 'portsProvenanceFixture.gen
 const FIXTURE_PREAMBLE = {
   lines: [
     `import type { StudyDashboardPorts, StudyParentControlPorts, StudyPortBundle } from './ports'`,
+    `import { registry as parkingRegistry } from './portsProvenanceParkingFixture.generated'`,
     `declare function take(ports: StudyParentControlPorts): void`,
     `declare function panel(props: { ports: StudyParentControlPorts }): void`,
     `declare class Holder { constructor(ports: StudyParentControlPorts) }`,
+    `export function parkAcrossModule(ports: StudyParentControlPorts) { parkingRegistry.leaked = ports }`,
   ],
   discovers: [
     'take | (positional) | StudyParentControlPorts',
     'panel | ports | StudyParentControlPorts',
     'Holder | (positional) | StudyParentControlPorts',
+    'parkAcrossModule | (positional) | StudyParentControlPorts',
   ],
 } as const
 
@@ -1417,13 +1513,17 @@ function fixtureProgram(): ts.Program {
   const getSourceFile = host.getSourceFile.bind(host)
   const fileExists = host.fileExists.bind(host)
   const readFile = host.readFile.bind(host)
+  const virtualFiles = new Map([
+    [FIXTURE_PATH, fixtureText],
+    [PARKING_FIXTURE_PATH, parkingFixtureText],
+  ])
   host.getSourceFile = (fileName, ...rest) =>
-    posix(fileName) === FIXTURE_PATH
-      ? ts.createSourceFile(fileName, fixtureText, ts.ScriptTarget.ES2022, true, ts.ScriptKind.TS)
+    virtualFiles.has(posix(fileName))
+      ? ts.createSourceFile(fileName, virtualFiles.get(posix(fileName))!, ts.ScriptTarget.ES2022, true, ts.ScriptKind.TS)
       : getSourceFile(fileName, ...rest)
-  host.fileExists = (fileName) => posix(fileName) === FIXTURE_PATH || fileExists(fileName)
-  host.readFile = (fileName) => (posix(fileName) === FIXTURE_PATH ? fixtureText : readFile(fileName))
-  return ts.createProgram([FIXTURE_PATH], { ...parsedConfig.options, noEmit: true }, host)
+  host.fileExists = (fileName) => virtualFiles.has(posix(fileName)) || fileExists(fileName)
+  host.readFile = (fileName) => virtualFiles.get(posix(fileName)) ?? readFile(fileName)
+  return ts.createProgram(FIXTURE_FILES, { ...parsedConfig.options, noEmit: true }, host)
 }
 
 /**
@@ -1528,11 +1628,49 @@ describe('narrow Study consumer contracts survive an AST census of their injecti
     expect(fixture.getSemanticDiagnostics(source).map((diagnostic) => `${diagnostic.start}: ${diagnostic.messageText}`)).toEqual([])
     expect(source.statements.length).toBe(FIXTURE_PREAMBLE.lines.length + PROVENANCE_CASES.length)
 
-    const reported = new Set(capabilityScope(fixture, [FIXTURE_PATH]).findings().map((finding) => finding.line))
-    const verdicts = PROVENANCE_CASES.map(
-      (provenanceCase, index) => `${provenanceCase.id}: ${reported.has(lineOfCase(index)) ? 'caught' : 'free'}`,
+    const scope = capabilityScope(fixture, [FIXTURE_PATH])
+    const reported = new Set(scope.findings().map((finding) => finding.line))
+    const failedClosed = new Set(
+      scope.unnameable.flatMap((entry) => {
+        const match = entry.match(/:(\d+) —/)
+        return match ? [Number(match[1])] : []
+      }),
     )
-    expect(verdicts).toEqual(PROVENANCE_CASES.map((provenanceCase) => `${provenanceCase.id}: ${provenanceCase.escapes ? 'caught' : 'free'}`))
+    const verdicts = PROVENANCE_CASES.map(
+      (provenanceCase, index) =>
+        `${provenanceCase.id}: ${
+          reported.has(lineOfCase(index)) ? 'caught' : failedClosed.has(lineOfCase(index)) ? 'unmodelled' : 'free'
+        }`,
+    )
+    expect(verdicts).toEqual(
+      PROVENANCE_CASES.map(
+        (provenanceCase) => `${provenanceCase.id}: ${provenanceCase.unmodelled ? 'unmodelled' : provenanceCase.escapes ? 'caught' : 'free'}`,
+      ),
+    )
+  })
+
+  it('follows an imported alias to cross-module state and sweeps the second fixture module', () => {
+    const fixture = fixtureProgram()
+    for (const fileName of FIXTURE_FILES) {
+      const source = fixture.getSourceFile(fileName)
+      if (!source) throw new Error(`fixture source is missing: ${fileName}`)
+      expect(fixture.getSyntacticDiagnostics(source).map((diagnostic) => diagnostic.messageText)).toEqual([])
+      expect(fixture.getSemanticDiagnostics(source).map((diagnostic) => `${diagnostic.start}: ${diagnostic.messageText}`)).toEqual([])
+    }
+
+    const wholeProgram = wholeProgramCapabilityScope(fixture, FIXTURE_FILES).findings().map((finding) => finding.message)
+    expect(wholeProgram.filter((message) => message.includes('portsProvenanceParkingFixture.generated.ts:2'))).toEqual([
+      expect.stringContaining('portsProvenanceParkingFixture.generated.ts:2'),
+    ])
+
+    // Restricting the scan to the consumer module leaves the parked assertion free.
+    // This is the forcing control for the production call's whole-program file set.
+    expect(
+      capabilityScope(fixture, consumerModuleFiles(fixture, FIXTURE_FILES))
+        .findings()
+        .map((finding) => finding.message)
+        .filter((message) => message.includes('portsProvenanceParkingFixture.generated.ts')),
+    ).toEqual([])
   })
 
   it('sees every hand-over form its census claims, including the ones production never writes', () => {
