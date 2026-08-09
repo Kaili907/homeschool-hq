@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { isoToday } from '../../appState'
 import {
   readAdminAuthorization,
   type AdminAuthorizationState,
@@ -15,6 +16,11 @@ import { CurriculumBrowser } from '../../admin/curriculum/CurriculumBrowser'
 import {
   readAdminCurriculumValidation,
 } from '../../admin/curriculum-validation/httpSource'
+import {
+  loadLearnerAnalytics,
+  type LearnerAnalyticsViewState,
+} from '../../admin/learnerAnalyticsModel'
+import { createAdminLearnerAnalyticsHttpSource } from '../../admin/learnerAnalyticsHttpSource'
 import type { CurriculumValidationReadModel } from '../../admin/curriculum-validation/model'
 import { AdminConsole } from './AdminConsole'
 import { LearnerAnalytics } from './LearnerAnalytics'
@@ -62,7 +68,9 @@ export function AdminConsoleRoute() {
   const [pathname, setPathname] = useState(() => window.location.pathname)
   const [range, setRange] = useState<OverviewRange>({ kind: 'preset', preset: 'today' })
   const [validationModel, setValidationModel] = useState<CurriculumValidationReadModel | null>(null)
+  const [learnerState, setLearnerState] = useState<LearnerAnalyticsViewState>({ status: 'resolving' })
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
+  const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
   const section = adminRouteSection(pathname) ?? 'unknown'
 
@@ -85,6 +93,25 @@ export function AdminConsoleRoute() {
     })
     return () => controller.abort()
   }, [authorization, section])
+
+  useEffect(() => {
+    if (section !== 'learners') return
+    const current = presentationAuthorization(authorizationState)
+    if (current.status === 'resolving') {
+      setLearnerState({ status: 'resolving' })
+      return
+    }
+    if (current.status !== 'authorized' || !current.capabilities.includes('learners:read')) {
+      setLearnerState({ status: 'unauthorized', reasonCode: current.status === 'unauthorized' ? current.reasonCode : 'learners_read_required' })
+      return
+    }
+    let active = true
+    setLearnerState({ status: 'loading' })
+    void loadLearnerAnalytics(current, learnerSource, isoToday()).then((state) => {
+      if (active) setLearnerState(state)
+    })
+    return () => { active = false }
+  }, [authorizationState, learnerSource, section])
 
   useEffect(() => {
     const onPopState = () => setPathname(window.location.pathname)
@@ -128,9 +155,7 @@ export function AdminConsoleRoute() {
       </header>
       <div className="mx-auto max-w-7xl p-4 sm:p-8">
         {section === 'learners' && (
-          <LearnerAnalytics state={hasCapability(authorization, 'learners:read')
-            ? { status: 'error', message: 'The authorized learner projection is not available.' }
-            : { status: 'unauthorized', reasonCode: 'learners_read_required' }} />
+          <LearnerAnalytics state={learnerState} />
         )}
         {section === 'safety' && (
           <AdminSafetyOperations

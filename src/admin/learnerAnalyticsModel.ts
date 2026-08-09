@@ -22,6 +22,27 @@ import {
 import type { AdminCapability } from './contracts'
 
 export const LEARNERS_READ_CAPABILITY = 'learners:read' as const
+export const LEARNER_ANALYTICS_LIMITS = Object.freeze({
+  learners: 5,
+  courses: 32,
+  assessments: 32,
+  recentEvidence: 12,
+  studyCalendar: 30,
+  studyReviews: 30,
+  masterySnapshots: 30,
+  needsDad: 32,
+  attendanceDays: 10,
+})
+
+const SAFE_LABEL_LENGTH = 120
+
+function safeLabel(value: string, fallback: string): string {
+  const normalized = value
+    .replace(/[\u0000-\u001f\u007f]/gu, ' ')
+    .replace(/\s+/gu, ' ')
+    .trim()
+  return (normalized || fallback).slice(0, SAFE_LABEL_LENGTH)
+}
 
 export type LearnerEvidenceUnavailableReason =
   | 'not-recorded'
@@ -280,20 +301,22 @@ function masterySummary(profile: Profile, index: CatalogIndex): LearnerEvidenceV
 }
 
 function studySummary(evidence: StudyLearnerEvidence): StudySummary {
+  const calendar = evidence.calendar.slice(0, LEARNER_ANALYTICS_LIMITS.studyCalendar)
+  const reviews = evidence.reviews.slice(0, LEARNER_ANALYTICS_LIMITS.studyReviews)
   return {
-    scheduled: evidence.calendar.filter((entry) => entry.state === 'scheduled').length,
-    completed: evidence.calendar.filter((entry) => entry.state === 'completed').length,
-    resumeNeeded: evidence.calendar.filter((entry) => entry.state === 'paused').length,
-    active: evidence.calendar.filter((entry) => entry.state === 'active').length,
-    pendingReviews: evidence.reviews.filter((review) => review.status === 'pending-parent').length,
+    scheduled: calendar.filter((entry) => entry.state === 'scheduled').length,
+    completed: calendar.filter((entry) => entry.state === 'completed').length,
+    resumeNeeded: calendar.filter((entry) => entry.state === 'paused').length,
+    active: calendar.filter((entry) => entry.state === 'active').length,
+    pendingReviews: reviews.filter((review) => review.status === 'pending-parent').length,
   }
 }
 
 function coursesFor(profile: Profile, catalogs: readonly AcademyCatalog[], index: CatalogIndex): LearnerEvidenceValue<readonly CourseEvidence[]> {
-  const courses: CourseEvidence[] = (profile.courses ?? []).map((course) => ({
+  const courses: CourseEvidence[] = (profile.courses ?? []).slice(0, LEARNER_ANALYTICS_LIMITS.courses).map((course) => ({
     courseRef: course.id,
-    title: course.name,
-    subject: course.name,
+    title: safeLabel(course.name, 'Course'),
+    subject: safeLabel(course.name, 'Course'),
     workingLevel: null,
     completed: course.units.filter((unit) => unit.done).length,
     total: course.units.length,
@@ -330,20 +353,22 @@ function coursesFor(profile: Profile, catalogs: readonly AcademyCatalog[], index
   if (enrolled.length > knownCourses.length) {
     return { status: 'unavailable', reason: 'catalog-not-integrated' }
   }
-  return { status: 'available', value: courses }
+  return { status: 'available', value: courses.slice(0, LEARNER_ANALYTICS_LIMITS.courses) }
 }
 
 function fixedAssessments(profile: Profile): AssessmentEvidence[] {
   const state = getAssessmentState(profile.assessments)
+  const assignedRecords = state.assigned.slice(-LEARNER_ANALYTICS_LIMITS.assessments)
+  const attemptRecords = state.attempts.slice(-LEARNER_ANALYTICS_LIMITS.assessments)
   const ids = new Set([
-    ...state.assigned.map((assignment) => assignment.testId),
-    ...state.attempts.map((attempt) => attempt.testId),
+    ...assignedRecords.map((assignment) => assignment.testId),
+    ...attemptRecords.map((attempt) => attempt.testId),
   ])
-  return [...ids].map((testId) => {
-    const attempts = state.attempts.filter((attempt) => attempt.testId === testId)
+  return [...ids].slice(0, LEARNER_ANALYTICS_LIMITS.assessments).map((testId) => {
+    const attempts = attemptRecords.filter((attempt) => attempt.testId === testId)
     const completed = attempts.filter((attempt) => !!attempt.finishedAt)
     const inProgress = attempts.some((attempt) => !attempt.finishedAt)
-    const assigned = state.assigned.some((assignment) => assignment.testId === testId)
+    const assigned = assignedRecords.some((assignment) => assignment.testId === testId)
     const latest = completed[completed.length - 1]
     const score = latest?.autoScore
     const totals = score
@@ -370,14 +395,14 @@ function fixedAssessments(profile: Profile): AssessmentEvidence[] {
 
 function academyAssessments(profile: Profile, index: CatalogIndex): AssessmentEvidence[] {
   const recorded = profile.academy?.assessments ?? {}
-  const ids = new Set<string>(Object.keys(recorded))
+  const ids = new Set<string>(Object.keys(recorded).slice(0, LEARNER_ANALYTICS_LIMITS.assessments))
   for (const courseId of profile.academy?.courseIds ?? []) {
     const course = index.courseById.get(courseId)
     for (const unit of course?.units ?? []) {
       if (unit.hasAssessment) ids.add(`${courseId}-u${String(unit.unitNumber).padStart(2, '0')}-assessment`)
     }
   }
-  return [...ids].map((assessmentId) => {
+  return [...ids].slice(0, LEARNER_ANALYTICS_LIMITS.assessments).map((assessmentId) => {
     const attempts = recorded[assessmentId] ?? []
     const latest = attempts[attempts.length - 1]
     return {
@@ -397,7 +422,7 @@ function academyAssessments(profile: Profile, index: CatalogIndex): AssessmentEv
 
 function recentEvidence(profile: Profile, study: StudyLearnerEvidenceState | undefined, index: CatalogIndex): RecentLearningEvidence[] {
   const evidence: RecentLearningEvidence[] = []
-  for (const [lessonId, lesson] of Object.entries(profile.academy?.lessons ?? {})) {
+  for (const [lessonId, lesson] of Object.entries(profile.academy?.lessons ?? {}).slice(-32)) {
     const at = lesson.completedAt ?? lesson.startedAt
     evidence.push({
       at,
@@ -406,7 +431,7 @@ function recentEvidence(profile: Profile, study: StudyLearnerEvidenceState | und
       summary: lesson.status === 'complete' ? `Completed · mastery ${masteryOf(lesson)}` : lesson.status === 'reteach' ? 'Reteach needed' : 'In progress',
     })
   }
-  for (const attempt of getAssessmentState(profile.assessments).attempts) {
+  for (const attempt of getAssessmentState(profile.assessments).attempts.slice(-32)) {
     evidence.push({
       at: attempt.finishedAt ?? attempt.startedAt,
       kind: 'assessment',
@@ -414,10 +439,10 @@ function recentEvidence(profile: Profile, study: StudyLearnerEvidenceState | und
       summary: attempt.finishedAt ? 'Completed' : 'In progress',
     })
   }
-  for (const [date, mission] of Object.entries(profile.missions)) {
+  for (const [date, mission] of Object.entries(profile.missions).slice(-32)) {
     if (isDayComplete(mission)) evidence.push({ at: date, kind: 'mission-day', title: 'Mission day', summary: 'Completed' })
   }
-  for (const reading of profile.reading?.sessions ?? []) {
+  for (const reading of (profile.reading?.sessions ?? []).slice(-32)) {
     evidence.push({
       at: reading.date,
       kind: 'reading',
@@ -428,15 +453,15 @@ function recentEvidence(profile: Profile, study: StudyLearnerEvidenceState | und
   if (profile.typing?.lastPracticedDate) {
     evidence.push({ at: profile.typing.lastPracticedDate, kind: 'typing', title: 'Typing practice', summary: 'Practice recorded' })
   }
-  for (const snapshot of profile.masterySnapshots ?? []) {
-    evidence.push({ at: snapshot.at, kind: 'mastery-snapshot', title: snapshot.subject, summary: `Mastery snapshot ${snapshot.level}` })
+  for (const snapshot of (profile.masterySnapshots ?? []).slice(-LEARNER_ANALYTICS_LIMITS.masterySnapshots)) {
+    evidence.push({ at: snapshot.at, kind: 'mastery-snapshot', title: safeLabel(snapshot.subject, 'Subject'), summary: `Mastery snapshot ${snapshot.level}` })
   }
   if (study?.status === 'available') {
-    for (const entry of study.evidence.calendar) {
+    for (const entry of study.evidence.calendar.slice(0, LEARNER_ANALYTICS_LIMITS.studyCalendar)) {
       evidence.push({ at: entry.scheduledStart, kind: 'study', title: entry.title, summary: entry.state === 'paused' ? `Resume needed · ${entry.requiredWorkCompletionPercent}% complete` : entry.state })
     }
   }
-  return evidence.sort((a, b) => b.at.localeCompare(a.at)).slice(0, 12)
+  return evidence.sort((a, b) => b.at.localeCompare(a.at)).slice(0, LEARNER_ANALYTICS_LIMITS.recentEvidence)
 }
 
 function detailFor(profile: Profile, input: BuildLearnerAnalyticsInput, index: CatalogIndex): LearnerDetail {
@@ -448,9 +473,9 @@ function detailFor(profile: Profile, input: BuildLearnerAnalyticsInput, index: C
         status: 'available' as const,
         value: {
           summary: studySummary(studyState.evidence),
-          calendar: studyState.evidence.calendar.map((entry) => ({
+          calendar: studyState.evidence.calendar.slice(0, LEARNER_ANALYTICS_LIMITS.studyCalendar).map((entry) => ({
             blockRef: entry.blockRef,
-            title: entry.title,
+            title: safeLabel(entry.title, 'Study block'),
             subject: entry.subject,
             intendedLocalDate: entry.intendedLocalDate,
             state: entry.state,
@@ -468,6 +493,7 @@ function detailFor(profile: Profile, input: BuildLearnerAnalyticsInput, index: C
     : { status: 'unavailable' as const, reason: 'study-not-integrated' as const }
   const needsDad = (Object.entries(profile.tutorFlags ?? {}) as [SkillId, NonNullable<Profile['tutorFlags']>[SkillId]][])
     .filter((entry): entry is [SkillId, NonNullable<typeof entry[1]>] => !!entry[1])
+    .slice(0, LEARNER_ANALYTICS_LIMITS.needsDad)
     .map(([skillRef, flag]) => ({
       skillRef,
       skillName: SKILL_BY_ID[skillRef]?.name ?? skillRef,
@@ -477,7 +503,7 @@ function detailFor(profile: Profile, input: BuildLearnerAnalyticsInput, index: C
   const academyReteachCount = Object.values(profile.academy?.lessons ?? {}).filter((lesson) => lesson.status === 'reteach').length
   return {
     learnerRef: profile.id,
-    displayName: profile.name,
+    displayName: safeLabel(profile.name, 'Learner'),
     nominalGrade: profile.grade,
     workingLevels: workingLevels(profile),
     courses: coursesFor(profile, input.academyCatalogs ?? [], index),
@@ -493,20 +519,20 @@ function detailFor(profile: Profile, input: BuildLearnerAnalyticsInput, index: C
         lastSeen: stat.lastSeen ?? null,
       }
     }),
-    manualMasterySnapshots: (profile.masterySnapshots ?? []).map(({ at, subject, level }) => ({ at, subject, level })),
+    manualMasterySnapshots: (profile.masterySnapshots ?? []).slice(-LEARNER_ANALYTICS_LIMITS.masterySnapshots).map(({ at, subject, level }) => ({ at, subject: safeLabel(subject, 'Subject'), level })),
     recentEvidence: recentEvidence(profile, studyState, index),
-    assessments: [...fixedAssessments(profile), ...academyAssessments(profile, index)],
+    assessments: [...fixedAssessments(profile), ...academyAssessments(profile, index)].slice(0, LEARNER_ANALYTICS_LIMITS.assessments),
     study,
     attendance: {
       instructionalDaysYtd: totals.days,
       instructionalHoursYtd: totals.hours,
       recordedToday: hasAttendance(attendance, input.today),
-      recentDays: [...attendance.log].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10),
+      recentDays: [...attendance.log].sort((a, b) => b.date.localeCompare(a.date)).slice(0, LEARNER_ANALYTICS_LIMITS.attendanceDays),
     },
     interventions: {
       needsDad,
       adultReviews: studyState?.status === 'available'
-        ? studyState.evidence.reviews.map((review) => ({ reviewRef: review.recommendationRef, dueDate: review.dueDate, status: review.status, reasonCodes: review.reasonCodes }))
+        ? studyState.evidence.reviews.slice(0, LEARNER_ANALYTICS_LIMITS.studyReviews).map((review) => ({ reviewRef: review.recommendationRef, dueDate: review.dueDate, status: review.status, reasonCodes: review.reasonCodes.slice(0, 8).map((code) => safeLabel(code, 'review')) }))
         : [],
       localAdultReviewRequests: studyState?.status === 'available' ? (studyState.evidence.settings?.adultReviewRequests.length ?? 0) : 0,
       academyReteachCount,
@@ -525,8 +551,9 @@ function detailFor(profile: Profile, input: BuildLearnerAnalyticsInput, index: C
  */
 export function buildLearnerAnalyticsSnapshot(input: BuildLearnerAnalyticsInput): LearnerAnalyticsSnapshot {
   const index = indexCatalogs(input.academyCatalogs ?? [])
-  const details = Object.fromEntries(input.profiles.map((profile) => [profile.id, detailFor(profile, input, index)]))
-  const learners = input.profiles.map((profile): LearnerListItem => {
+  const profiles = input.profiles.slice(0, LEARNER_ANALYTICS_LIMITS.learners)
+  const details = Object.fromEntries(profiles.map((profile) => [profile.id, detailFor(profile, input, index)]))
+  const learners = profiles.map((profile): LearnerListItem => {
     const detail = details[profile.id]
     const studyState = input.studyByProfile?.[profile.id]
     const study = studyState?.status === 'available'
@@ -536,7 +563,7 @@ export function buildLearnerAnalyticsSnapshot(input: BuildLearnerAnalyticsInput)
     const totals = yearToDateTotals(attendance, input.today)
     return {
       learnerRef: profile.id,
-      displayName: profile.name,
+      displayName: safeLabel(profile.name, 'Learner'),
       nominalGrade: profile.grade,
       workingLevels: detail.workingLevels,
       todayCompletion: todayCompletion(profile, input.today),

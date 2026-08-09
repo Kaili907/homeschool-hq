@@ -242,6 +242,46 @@ describe('learner analytics projection', () => {
     })
     expect(serialized).not.toMatch(/inputTokens|outputTokens|tokenUsage|costMicros/)
   })
+
+  it('bounds expandable collections and normalizes the safe display label', () => {
+    const profile = emptyProfile('p1', `  Ada\u0000  ${'A'.repeat(200)}  `, '6')
+    profile.courses = Array.from({ length: 50 }, (_, index) => ({
+      id: `course-${index}`, name: `Course ${index}`, units: [],
+    }))
+    profile.masterySnapshots = Array.from({ length: 50 }, (_, index) => ({
+      at: `2026-09-09T${String(index % 24).padStart(2, '0')}:00:00.000Z`,
+      subject: `Subject ${index}`,
+      level: index,
+    }))
+    profile.attendance = {
+      log: Array.from({ length: 50 }, (_, index) => ({
+        date: `2026-${String(Math.floor(index / 28) + 1).padStart(2, '0')}-${String((index % 28) + 1).padStart(2, '0')}`,
+        hours: 1,
+      })),
+    }
+    profile.assessments = {
+      assigned: Array.from({ length: 50 }, (_, index) => ({
+        testId: `assessment-${index}`,
+        startCode: `private-${index}`,
+        assignedAt: `2026-09-09T${String(index % 24).padStart(2, '0')}:00:00.000Z`,
+      })),
+      attempts: [],
+    }
+    const profiles = [profile, ...Array.from({ length: 6 }, (_, index) => emptyProfile(`extra-${index}`, `Extra ${index}`, '6'))]
+    const snapshot = buildLearnerAnalyticsSnapshot({ profiles, today: TODAY, observedAt: `${TODAY}T12:00:00.000Z` })
+    expect(snapshot.learners).toHaveLength(5)
+    expect(snapshot.learners[0].displayName).not.toMatch(/[\u0000-\u001f\u007f]/u)
+    expect(snapshot.learners[0].displayName.length).toBeLessThanOrEqual(120)
+    expect(snapshot.details.p1.courses).toMatchObject({ status: 'available', value: expect.any(Array) })
+    if (snapshot.details.p1.courses.status === 'available') {
+      expect(snapshot.details.p1.courses.value).toHaveLength(32)
+    }
+    expect(snapshot.details.p1.manualMasterySnapshots).toHaveLength(30)
+    expect(snapshot.details.p1.assessments).toHaveLength(32)
+    expect(snapshot.details.p1.recentEvidence.length).toBeLessThanOrEqual(12)
+    expect(snapshot.details.p1.attendance.recentDays).toHaveLength(10)
+    expect(JSON.stringify(snapshot)).not.toContain('private-49')
+  })
 })
 
 describe('canonical learner read boundary', () => {
