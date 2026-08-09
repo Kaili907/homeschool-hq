@@ -69,12 +69,14 @@ describe('reporting surfaces keep reading NOMINAL grade', () => {
     expect(html).not.toContain('Gr 5')
   })
 
-  it('the sign-in picker reports her grade', () => {
+  it('the sign-in picker uses the approved presentation grade without changing her nominal grade', () => {
+    const state = stateWith(decoupledSixthGrader())
     const html = renderToStaticMarkup(
-      <Picker state={stateWith(decoupledSixthGrader())} onPick={() => {}} onGrownUps={() => {}} />,
+      <Picker state={state} onPick={() => {}} onGrownUps={() => {}} />,
     )
-    expect(html).toContain('6th grade')
-    expect(html).not.toContain('5th grade')
+    expect(html).toContain('Stephanie Manuel')
+    expect(html).toContain('7th Grade')
+    expect(state.profiles.p3.grade).toBe('6')
   })
 
   it('the Academy parent panel labels the learner by grade while serving her levels', () => {

@@ -420,7 +420,7 @@ describe('App academy route and default-home lifecycle (UI-HOME-1)', () => {
       expect(harness.picker, `grade ${grade} should start at the picker`).not.toBeNull()
 
       await act(async () => harness.picker!.onPick('p1'))
-      expect(harness.pin?.title).toBe(`Hi, Grade ${grade} learner!`)
+      expect(harness.pin?.title).toBe('Welcome back, Aly')
       await act(async () => {
         expect(harness.pin!.onComplete('1234')).toBeNull()
       })

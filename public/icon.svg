@@ -1,4 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Homeschool HQ">
-  <rect width="512" height="512" rx="112" fill="#7c3aed" />
-  <path d="M168 148 h44 v88 h88 v-88 h44 v216 h-44 v-84 h-88 v84 h-44 Z" fill="#ffffff" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Manuel Academy">
+  <defs>
+    <radialGradient id="bg" cx="38%" cy="28%" r="78%">
+      <stop offset="0" stop-color="#1d3040" />
+      <stop offset="1" stop-color="#050a10" />
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0c86a" />
+      <stop offset="0.5" stop-color="#d7a944" />
+      <stop offset="1" stop-color="#9d7026" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+  <circle cx="256" cy="256" r="166" fill="none" stroke="#d7a944" stroke-width="8" />
+  <circle cx="256" cy="256" r="143" fill="none" stroke="#d7a944" stroke-opacity=".35" stroke-width="3" />
+  <text x="256" y="345" fill="url(#gold)" font-family="Georgia, 'Times New Roman', serif" font-size="250" text-anchor="middle">M</text>
 </svg>

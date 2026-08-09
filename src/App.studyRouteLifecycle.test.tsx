@@ -317,7 +317,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     expect(harness.cancels).toContain('logout')
     const launchesBeforeSwitch = harness.launches.length
     await act(async () => harness.picker?.onPick('p2'))
-    expect(harness.pin?.title).toBe('Hi, Riley!')
+    expect(harness.pin?.title).toBe('Welcome back, Lucia')
     await act(async () => { harness.pin?.onComplete('2222') })
     await waitFor(() => hasText(container, 'Student Dashboard for Riley'))
     expect(harness.dashboard?.profileId).toBe('p2')

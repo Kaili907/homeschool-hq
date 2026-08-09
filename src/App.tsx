@@ -46,6 +46,7 @@ import { HighSchoolHome } from './components/HighSchoolHome'
 import { SkillTree } from './components/SkillTree'
 import { Picker } from './components/Picker'
 import { PinPad } from './components/PinPad'
+import { learnerPresentationForProfile } from './entry/learnerPresentation'
 import { GrownUps } from './components/GrownUps'
 import { ParentHub } from './components/hub/ParentHub'
 import { useSync } from './sync/useSync'
@@ -620,14 +621,17 @@ export default function App() {
 
   if (screen.kind === 'kidPin' || screen.kind === 'kidPinCreate') {
     const profile = state.profiles[screen.profileId]
+    const learner = learnerPresentationForProfile(profile.id)
     const t = THEMES[profile.theme]
     return (
       <ThemeContext.Provider value={t}>
         <div style={{ fontFamily: t.font, background: t.appBg }} className="min-h-screen">
           {screen.kind === 'kidPin' ? (
             <PinPad
-              title={`Hi, ${profile.name}!`}
-              subtitle="Enter your secret PIN"
+              title={`Welcome back, ${learner.fullName.split(' ')[0]}`}
+              subtitle="Enter your PIN"
+              learner={learner}
+              backLabel="Back to learners"
               onComplete={(pin) => {
                 if (pin === profile.pin) {
                   setState((s) => ({ ...s, activeProfileId: profile.id }))
@@ -640,10 +644,12 @@ export default function App() {
             />
           ) : (
             <PinPad
-              title={screen.firstEntry ? 'One more time!' : `Welcome, ${profile.name}!`}
+              title={screen.firstEntry ? 'Confirm your PIN' : `Create your PIN, ${learner.fullName.split(' ')[0]}`}
               subtitle={
                 screen.firstEntry ? 'Type your new PIN again to lock it in' : 'Choose a secret 4-digit PIN'
               }
+              learner={learner}
+              backLabel="Back to learners"
               onComplete={(pin) => {
                 if (!screen.firstEntry) {
                   setScreen({ kind: 'kidPinCreate', profileId: profile.id, firstEntry: pin })

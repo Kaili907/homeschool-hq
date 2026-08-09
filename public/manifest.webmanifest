@@ -1,13 +1,13 @@
 {
-  "name": "Homeschool HQ — Math Trainer",
-  "short_name": "Homeschool HQ",
-  "description": "Family math trainer with visual walkthroughs and a hint-only tutor.",
+  "name": "Manuel Academy",
+  "short_name": "Manuel Academy",
+  "description": "Private family academy learning portal.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#ffffff",
-  "theme_color": "#7c3aed",
+  "background_color": "#050a10",
+  "theme_color": "#08131f",
   "icons": [
     { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
   ]
