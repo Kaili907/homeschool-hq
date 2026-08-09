@@ -252,10 +252,11 @@ async function persistAndVerifyEducationalData(
       'Durable educational-data persistence and read-back are required to complete credential migration.',
     )
   }
-  await persistence.write(educationalData)
+  const expected = canonicalCredentialFreeJson(educationalData)
+  const detachedForWrite = JSON.parse(expected) as CredentialFreeJsonValue
+  await persistence.write(detachedForWrite)
   const readBack = await persistence.read()
   const credentialFreeReadBack = sanitizeCredentialFreeEducationalData(readBack)
-  const expected = canonicalCredentialFreeJson(educationalData)
   if (
     canonicalCredentialFreeJson(credentialFreeReadBack) !== expected ||
     canonicalCredentialFreeJson(readBack as CredentialFreeJsonValue) !== expected

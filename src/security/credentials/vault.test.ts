@@ -16,6 +16,7 @@ import {
   readLearnerCredential,
   rotateLearnerPin,
   type StoredLearnerCredentialRecord,
+  verifyLearnerCredentialRecord,
   verifyLearnerPin,
 } from './vault'
 
@@ -170,5 +171,44 @@ describe('device-local learner credential vault', () => {
     expect(learnerCredentialStorageKey('learner-\ud83d\ude00')).not.toBe(
       learnerCredentialStorageKey('learner-\ud83d\ude01'),
     )
+  })
+
+  it('rejects a credential record relabeled with a malformed profile ID', async () => {
+    const enrolled = await createLearnerCredentialRecord('profile-a', '1234')
+    const relabeled = { ...enrolled, profileId: '\ud800' }
+
+    try {
+      parseLearnerCredentialRecord(relabeled)
+      throw new Error('Expected malformed record profile ID to be rejected.')
+    } catch (cause) {
+      expect(cause).toBeInstanceOf(CredentialVaultError)
+      expect(cause).not.toBeInstanceOf(URIError)
+      expect(cause).toMatchObject({ code: 'invalid-profile-id' })
+    }
+    await expect(
+      verifyLearnerCredentialRecord(
+        relabeled as StoredLearnerCredentialRecord,
+        '1234',
+      ),
+    ).resolves.toBe(false)
+  })
+
+  it('preserves valid Unicode profile IDs as distinct credential identities', async () => {
+    const composed = 'learner-\u00e9-\ud83d\ude00'
+    const decomposed = 'learner-e\u0301-\ud83d\ude00'
+    const composedRecord = await createLearnerCredentialRecord(composed, '1234')
+    const decomposedRecord = await createLearnerCredentialRecord(decomposed, '5678')
+
+    expect(learnerCredentialStorageKey(composed)).not.toBe(
+      learnerCredentialStorageKey(decomposed),
+    )
+    expect(parseLearnerCredentialRecord(composedRecord).profileId).toBe(composed)
+    expect(parseLearnerCredentialRecord(decomposedRecord).profileId).toBe(decomposed)
+    await expect(
+      verifyLearnerCredentialRecord(composedRecord, '1234'),
+    ).resolves.toBe(true)
+    await expect(
+      verifyLearnerCredentialRecord(decomposedRecord, '5678'),
+    ).resolves.toBe(true)
   })
 })

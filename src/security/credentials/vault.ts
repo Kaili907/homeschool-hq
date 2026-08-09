@@ -82,7 +82,7 @@ function storageFrom(options?: CredentialOperationOptions): CredentialStorage {
   )
 }
 
-function requireProfileId(profileId: string): void {
+export function validateLearnerProfileId(profileId: unknown): asserts profileId is string {
   if (typeof profileId !== 'string') {
     throw new CredentialVaultError(
       'invalid-profile-id',
@@ -118,7 +118,7 @@ function requireProfileId(profileId: string): void {
 }
 
 export function learnerCredentialStorageKey(profileId: string): string {
-  requireProfileId(profileId)
+  validateLearnerProfileId(profileId)
   return `${LEARNER_CREDENTIAL_STORAGE_NAMESPACE}:${encodeURIComponent(profileId)}`
 }
 
@@ -143,6 +143,9 @@ export function parseLearnerCredentialRecord(
   expectedProfileId?: string,
 ): StoredLearnerCredentialRecord {
   if (!plainRecord(value)) malformed('Learner credential record is not an object.')
+
+  validateLearnerProfileId(value.profileId)
+  if (expectedProfileId !== undefined) validateLearnerProfileId(expectedProfileId)
 
   if (
     value.schemaVersion !== LEARNER_CREDENTIAL_SCHEMA_VERSION ||
@@ -170,8 +173,6 @@ export function parseLearnerCredentialRecord(
     value.storage !== 'device-local-only' ||
     value.credentialKind !== 'learner-pin' ||
     value.verifierScheme !== 'pbkdf2-sha256' ||
-    typeof value.profileId !== 'string' ||
-    value.profileId.length === 0 ||
     (expectedProfileId !== undefined && value.profileId !== expectedProfileId) ||
     (value.state !== 'enrolled' && value.state !== 'reset-required') ||
     !isSupportedPinCostParameters(
@@ -217,7 +218,7 @@ export async function createLearnerCredentialRecord(
   pin: string,
   options?: CredentialOperationOptions,
 ): Promise<StoredLearnerCredentialRecord> {
-  requireProfileId(profileId)
+  validateLearnerProfileId(profileId)
   const verifier = await createPinVerifier(pin, options?.crypto)
   return {
     schemaVersion: LEARNER_CREDENTIAL_SCHEMA_VERSION,
