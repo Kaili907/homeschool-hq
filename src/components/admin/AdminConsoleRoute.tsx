@@ -13,6 +13,8 @@ import type {
 } from '../../admin/overviewModel'
 import { readAdminCosts, AdminCostsReadError } from '../../admin/costsHttpSource'
 import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/costsModel'
+import { readAdminAuditPage, AdminAuditReadError } from '../../admin/auditHttpSource'
+import type { AdminAuditFilters, AdminAuditReadState } from '../../admin/auditLogModel'
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
 import { readAdminSafetyOperations } from '../../admin/safetyOperationsHttpSource'
 import type { SafetyOperationsReadState } from '../../admin/safetyOperationsModel'
@@ -41,6 +43,7 @@ import { AdminSafetyOperations } from './AdminSafetyOperations'
 import { CurriculumValidationDashboard } from './CurriculumValidationDashboard'
 import { EnginePerformanceDashboard } from './EnginePerformanceDashboard'
 import { SystemHealthDashboard } from './SystemHealthDashboard'
+import { AdminAuditLog } from './AdminAuditLog'
 
 export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
 
@@ -97,10 +100,15 @@ export function AdminConsoleRoute() {
   const [engineRetry, setEngineRetry] = useState(0)
   const [learnerState, setLearnerState] = useState<LearnerAnalyticsViewState>({ status: 'resolving' })
   const [safetyReadState, setSafetyReadState] = useState<SafetyOperationsReadState>({ status: 'loading' })
+  const [auditFilters, setAuditFilters] = useState<AdminAuditFilters>({ limit: 50 })
+  const [auditCursors, setAuditCursors] = useState<readonly (string | null)[]>([null])
+  const [auditReadState, setAuditReadState] = useState<AdminAuditReadState>({ status: 'loading' })
+  const [auditRetry, setAuditRetry] = useState(0)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
   const section = adminRouteSection(pathname) ?? 'unknown'
+  const auditCursor = auditCursors.at(-1) ?? null
 
   useEffect(() => {
     const controller = new AbortController()
@@ -122,6 +130,37 @@ export function AdminConsoleRoute() {
     })
     return () => controller.abort()
   }, [authorizationState, section])
+
+  useEffect(() => {
+    if (section !== 'audit-log') return
+    if (!hasCapability(authorization, 'audit:read')) {
+      setAuditReadState({ status: 'unauthorized' })
+      return
+    }
+    const controller = new AbortController()
+    setAuditReadState({ status: 'loading' })
+    void readAdminAuditPage(auditFilters, auditCursor, { signal: controller.signal }).then(
+      (page) => {
+        if (controller.signal.aborted) return
+        setAuditReadState(page.events.length === 0
+          ? { status: 'empty' }
+          : { status: 'ready', page })
+      },
+      (error) => {
+        if (controller.signal.aborted) return
+        if (error instanceof AdminAuditReadError && error.code === 'audit_unauthorized') {
+          setAuditReadState({ status: 'unauthorized' })
+          return
+        }
+        setAuditReadState({
+          status: 'error',
+          code: error instanceof AdminAuditReadError && error.code === 'audit_timeout'
+            ? 'audit_timeout' : 'audit_unavailable',
+        })
+      },
+    )
+    return () => controller.abort()
+  }, [authorizationState, section, auditFilters, auditCursor, auditRetry])
 
   useEffect(() => {
     if (!hasCapability(authorization, 'curriculum:read') || section !== 'curriculum-validation') {
@@ -238,6 +277,19 @@ export function AdminConsoleRoute() {
     setPathname(nextPath)
   }
 
+  function applyAuditFilters(filters: AdminAuditFilters) {
+    setAuditFilters(filters)
+    setAuditCursors([null])
+  }
+
+  function showOlderAuditEvents(cursor: string) {
+    setAuditCursors((current) => [...current, cursor])
+  }
+
+  function showNewerAuditEvents() {
+    setAuditCursors((current) => current.length > 1 ? current.slice(0, -1) : current)
+  }
+
   if (authorization.status === 'resolving') return <AdminConsole authorization={authorization} />
   if (authorization.status === 'unauthorized') return <AdminConsole authorization={authorization} />
 
@@ -263,7 +315,8 @@ export function AdminConsoleRoute() {
         : section === 'costs' ? 'AI & Costs'
           : section === 'learners' ? 'Learner Analytics'
             : section === 'safety' ? 'Safety Operations'
-              : section === 'curriculum' ? 'Curriculum' : 'Admin section unavailable'
+              : section === 'audit-log' ? 'Audit Log'
+                : section === 'curriculum' ? 'Curriculum' : 'Admin section unavailable'
 
   return (
     <AdminShell
@@ -335,7 +388,20 @@ export function AdminConsoleRoute() {
             onRetry={() => setHealthReload((value) => value + 1)}
           />
         )}
-        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health'].includes(section) && (
+        {section === 'audit-log' && (
+          <AdminAuditLog
+            authorized={hasCapability(authorization, 'audit:read')}
+            state={auditReadState}
+            filters={auditFilters}
+            pageNumber={auditCursors.length}
+            canGoBack={auditCursors.length > 1}
+            onFiltersChange={applyAuditFilters}
+            onNext={showOlderAuditEvents}
+            onPrevious={showNewerAuditEvents}
+            onRetry={() => setAuditRetry((value) => value + 1)}
+          />
+        )}
+        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'audit-log'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>
