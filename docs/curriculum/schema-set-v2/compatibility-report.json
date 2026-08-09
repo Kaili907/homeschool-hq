@@ -1,0 +1,154 @@
+{
+  "schema_set_version": "2.0.0",
+  "source_release": "1.0.0",
+  "source_immutable": true,
+  "result": "COMPATIBLE_DRAFT_REQUIRES_REVIEW",
+  "counts": {
+    "courses": 30,
+    "units": 232,
+    "lessons": 2736,
+    "assessments": 232,
+    "schedules": 3,
+    "resources": 18,
+    "unique_legacy_standard_labels": 384
+  },
+  "classification_counts": {
+    "NO_BREAK": 0,
+    "MIGRATION_REQUIRED": 2968,
+    "CONTENT_CORRECTION_REQUIRED": 4,
+    "SCHEMA_VERSION_REQUIRED": 284
+  },
+  "standards": {
+    "canonical_ids_guessed": 0,
+    "human_review_labels": [
+      {
+        "legacy_label": "2",
+        "affected_references": 157,
+        "classification": "CONTENT_CORRECTION_REQUIRED"
+      },
+      {
+        "legacy_label": "3",
+        "affected_references": 87,
+        "classification": "CONTENT_CORRECTION_REQUIRED"
+      },
+      {
+        "legacy_label": "4",
+        "affected_references": 185,
+        "classification": "CONTENT_CORRECTION_REQUIRED"
+      },
+      {
+        "legacy_label": "5",
+        "affected_references": 241,
+        "classification": "CONTENT_CORRECTION_REQUIRED"
+      }
+    ],
+    "unverified_labels": 380
+  },
+  "preservation": {
+    "source_records_retained_in_memory": 3252,
+    "source_fields_dropped": 0,
+    "field_inventory": {
+      "manifest": [
+        "authored_on",
+        "boundaries",
+        "counts",
+        "entry_points",
+        "frozen_baselines",
+        "grades",
+        "jurisdictional_alignment",
+        "package_id",
+        "school_year",
+        "status",
+        "subjects",
+        "version"
+      ],
+      "course": [
+        "capstone",
+        "course_id",
+        "days",
+        "description",
+        "grade",
+        "path",
+        "subject",
+        "title"
+      ],
+      "unit": [
+        "assessment_id",
+        "course_id",
+        "days",
+        "essential_question",
+        "grade",
+        "lesson_ids",
+        "performance_task",
+        "standards",
+        "subject",
+        "title",
+        "topics",
+        "unit_id",
+        "unit_number"
+      ],
+      "lesson": [
+        "accessibility_and_accommodations",
+        "adaptive_tutor_routes",
+        "answer_or_scoring_guidance",
+        "course_day",
+        "course_id",
+        "day_in_unit",
+        "essential_question",
+        "estimated_minutes",
+        "extension",
+        "focus",
+        "formative_check",
+        "grade",
+        "home_connection",
+        "learning_objectives",
+        "lesson_flow",
+        "lesson_id",
+        "mastery_rule",
+        "materials",
+        "media",
+        "parent_or_guardian_visibility",
+        "phase",
+        "safety_and_privacy",
+        "schema_version",
+        "standards",
+        "student_activity",
+        "subject",
+        "success_criteria",
+        "title",
+        "unit_number",
+        "unit_title"
+      ],
+      "assessment": [
+        "accommodation_note",
+        "assessment_id",
+        "mastery_interpretation",
+        "prompts",
+        "rubric_dimensions",
+        "standards",
+        "total_points",
+        "unit_number",
+        "unit_title"
+      ],
+      "schedule": [
+        "entries",
+        "headers"
+      ],
+      "resource": [
+        "genre",
+        "id",
+        "text",
+        "title"
+      ]
+    }
+  },
+  "validation": {
+    "valid": true,
+    "issue_count": 0
+  },
+  "runtime_dependencies": [
+    "Learner mastery runtime must record evidence type before every v2 evidence-type rule can be enforced.",
+    "Learner mastery runtime must record transfer mode before transfer requirements can be enforced.",
+    "ADMIN-16 owns any future database authoring model; this schema set requires no database migration."
+  ]
+}
