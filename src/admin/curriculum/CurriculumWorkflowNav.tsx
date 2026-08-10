@@ -1,4 +1,4 @@
-export type CurriculumWorkflowView = 'published' | 'studio' | 'validation' | 'preview'
+export type CurriculumWorkflowView = 'published' | 'integrity' | 'studio' | 'validation' | 'preview'
 
 const WORKFLOW_DESTINATIONS: readonly {
   readonly id: CurriculumWorkflowView
@@ -6,6 +6,7 @@ const WORKFLOW_DESTINATIONS: readonly {
   readonly path: string
 }[] = [
   { id: 'published', label: 'Published', path: '/academy/admin/curriculum' },
+  { id: 'integrity', label: 'Release integrity', path: '/academy/admin/curriculum/integrity' },
   { id: 'studio', label: 'Studio', path: '/academy/admin/curriculum/studio' },
   { id: 'validation', label: 'Validation', path: '/academy/admin/curriculum/validation' },
   { id: 'preview', label: 'Preview / Diff', path: '/academy/admin/curriculum/preview' },

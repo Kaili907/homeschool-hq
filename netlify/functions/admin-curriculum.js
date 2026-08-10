@@ -2,6 +2,10 @@ import { createHash } from 'node:crypto'
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import { createAdminCurriculumAuthoringService } from './_shared/admin-curriculum-authoring.js'
 import { createAdminCurriculumApprovalService } from './_shared/admin-curriculum-approval.js'
+import {
+  createAdminCurriculumIntegrityEvidenceReader,
+  createAdminCurriculumIntegrityService,
+} from './_shared/admin-curriculum-integrity.js'
 import { createAdminCurriculumRegistryReader } from './_shared/admin-curriculum-registry-reader.js'
 import { createAdminCurriculumStagingPersistence } from './_shared/admin-curriculum-staging.js'
 import { createAdminCurriculumStudioService } from './_shared/admin-curriculum-studio.js'
@@ -94,6 +98,7 @@ function routeFromPath(path) {
   if (authoringRoute) return authoringRoute
   if (resource === 'catalog') return { kind: 'catalog' }
   if (resource === 'validation') return { kind: 'validation' }
+  if (resource === 'integrity') return { kind: 'integrity' }
   if (resource === 'releases') return { kind: 'releases' }
   if (resource === 'production-pointer') return { kind: 'production-pointer' }
   if (resource.startsWith('releases/')) {
@@ -313,6 +318,15 @@ export function createAdminCurriculumHandler(overrides = {}) {
     client: overrides.stagingClient,
   })
   const studio = overrides.studio ?? createAdminCurriculumStudioService({ authoring, approval, staging })
+  const integrityEvidence = overrides.integrityEvidence ?? createAdminCurriculumIntegrityEvidenceReader({
+    env: overrides.env ?? process.env,
+    fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
+    client: overrides.integrityClient,
+  })
+  const integrity = overrides.integrity ?? createAdminCurriculumIntegrityService({
+    evidence: integrityEvidence,
+    registry,
+  })
 
   return async (event) => {
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
@@ -387,7 +401,9 @@ export function createAdminCurriculumHandler(overrides = {}) {
     const authorized = await authorization.require(event, 'curriculum:read')
     if (!authorized.ok) return authorized.response
     try {
-      const value = route.kind === 'catalog'
+      const value = route.kind === 'integrity'
+        ? await integrity.verify(authorized.principal.userId)
+        : route.kind === 'catalog'
         ? await source.loadCatalog()
         : route.kind === 'validation'
           ? await source.loadValidationEvidence()
@@ -411,7 +427,10 @@ export function createAdminCurriculumHandler(overrides = {}) {
           ? 'curriculum_release_unavailable'
           : 'curriculum_record_unavailable',
       )
-      return errorResponse(503, 'curriculum_source_unavailable')
+      return errorResponse(
+        503,
+        route.kind === 'integrity' ? 'curriculum_integrity_unavailable' : 'curriculum_source_unavailable',
+      )
     }
   }
 }

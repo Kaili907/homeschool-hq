@@ -227,6 +227,40 @@ describe('curriculum release staging database boundary', () => {
       .toEqual({ count: 0 })
   })
 
+  it('projects exact verifier evidence through curriculum:read without changing release state', async () => {
+    const database = databases[0]
+    const ready = await eligible(database, '2.0.0-integrity.1')
+    await stage(database, {
+      draftId: ready.draft.draftId, revision: 1, target: '2.0.0-integrity.1',
+      validationId: ready.validation.validationSnapshotId,
+      approvalId: ready.approval.currentDecision.approvalId,
+    })
+    const before = {
+      staged: (await database.query('select * from public.academy_curriculum_staged_releases')).rows,
+      artifacts: (await database.query('select * from public.academy_curriculum_staged_release_artifacts')).rows,
+      releases: (await database.query('select * from public.academy_curriculum_releases')).rows,
+      pointers: (await database.query('select * from public.academy_curriculum_active_pointers')).rows,
+    }
+    const evidence = await readIntegrity(database)
+    expect(evidence).toMatchObject({ schemaVersion: 1, candidates: [{
+      schemaVersion: 1, status: 'staged', publicationStatus: 'not_published', draftId: ready.draft.draftId,
+      draftRevision: 1, baseReleaseVersion: '1.0.0', targetVersion: '2.0.0-integrity.1',
+      schemaSetVersion: '2.0.0', validationSnapshotId: ready.validation.validationSnapshotId,
+      approvalId: ready.approval.currentDecision.approvalId,
+      manifestCanonical: expect.any(String), artifacts: [{
+        relativePath: 'snapshot/manifest.json', byteCount: 2, sha256: HASH_A,
+        canonicalContent: '{}',
+      }],
+      validation: { status: 'valid', publicationReady: true, resultDigest: HASH_A },
+      approval: { decision: 'approved', reasonCode: 'approval.ready' },
+    }] })
+    expect(JSON.stringify(evidence)).not.toMatch(/stagedBy|validatedBy|decidedBy|requestId/i)
+    expect((await database.query('select * from public.academy_curriculum_staged_releases')).rows).toEqual(before.staged)
+    expect((await database.query('select * from public.academy_curriculum_staged_release_artifacts')).rows).toEqual(before.artifacts)
+    expect((await database.query('select * from public.academy_curriculum_releases')).rows).toEqual(before.releases)
+    expect((await database.query('select * from public.academy_curriculum_active_pointers')).rows).toEqual(before.pointers)
+  })
+
   it('fails closed for missing, invalid, incomplete, human-blocked, changes-requested, and stale approval states', async () => {
     const database = databases[0]
     const missing = await createDraft(database, '2.0.0-block.1')
@@ -403,6 +437,22 @@ describe('curriculum release staging database boundary', () => {
         expect(privilege.rows[0].allowed, `${role}:${table}`).toBe(false)
       }
     }
+    expect((await database.query<{ allowed: boolean }>(`
+      select has_function_privilege(
+        'service_role',
+        'public.academy_admin_read_curriculum_staging_integrity_v1(uuid,text)',
+        'EXECUTE'
+      ) as allowed
+    `)).rows[0].allowed).toBe(true)
+    for (const role of ['anon', 'authenticated']) {
+      expect((await database.query<{ allowed: boolean }>(`
+        select has_function_privilege(
+          $1,
+          'public.academy_admin_read_curriculum_staging_integrity_v1(uuid,text)',
+          'EXECUTE'
+        ) as allowed
+      `, [role])).rows[0].allowed).toBe(false)
+    }
     const ready = await eligible(database, '2.0.0-immutable.1')
     await stage(database, {
       draftId: ready.draft.draftId, revision: 1, target: '2.0.0-immutable.1',
@@ -440,6 +490,19 @@ async function readStatus(database: PGlite, draftId: string) {
         $1, $2, 'curriculum:read'
       ) as value
     `, [VIEWER, draftId])).rows[0].value
+  } finally {
+    await reset(database)
+  }
+}
+
+async function readIntegrity(database: PGlite) {
+  await setService(database)
+  try {
+    return (await database.query<{ value: any }>(`
+      select public.academy_admin_read_curriculum_staging_integrity_v1(
+        $1, 'curriculum:read'
+      ) as value
+    `, [VIEWER])).rows[0].value
   } finally {
     await reset(database)
   }
