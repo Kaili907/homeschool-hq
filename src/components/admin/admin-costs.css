@@ -34,12 +34,34 @@
 .admin-costs-section-heading { margin-bottom: .8rem; }
 .admin-costs-section-heading h2 { font-size: 1.2rem; font-weight: 800; margin-top: .15rem; }
 .admin-costs-disclosure, .admin-costs-footer { color: #526474; font-size: .78rem; margin-top: .8rem; }
+.admin-provider-coverage { display: grid; gap: 1rem; }
+.admin-provider-coverage .admin-costs-section-heading { margin-bottom: 0; }
+.admin-provider-coverage__status { align-items: start; background: #edf8f6; border: 1px solid #9bcac2; border-left: .35rem solid #196b6b; border-radius: .75rem; display: grid; gap: .65rem; grid-template-columns: minmax(10rem, .8fr) minmax(16rem, 2fr) minmax(10rem, 1fr); padding: .85rem 1rem; }
+.admin-provider-coverage__status > div { display: grid; gap: .15rem; }
+.admin-provider-coverage__status span { color: #526474; font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.admin-provider-coverage__status strong { font-weight: 800; }
+.admin-provider-coverage__status p { color: #405766; font-size: .82rem; }
+.admin-provider-coverage__status--partial, .admin-provider-coverage__status--insufficient_evidence { background: #fff9e9; border-color: #e5bd62; border-left-color: #b16a13; }
+.admin-provider-coverage__status--gaps_detected, .admin-provider-coverage__status--reconciliation_conflict { background: #fff2ef; border-color: #e5aaa3; border-left-color: #a53b33; }
+.admin-provider-coverage__metrics { display: grid; gap: .65rem; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); }
+.admin-provider-coverage__metric { background: #f7fafb; border: 1px solid #d8e1e4; border-radius: .7rem; min-height: 7.2rem; padding: .8rem; }
+.admin-provider-coverage__metric p { color: #526474; font-size: .74rem; font-weight: 800; min-height: 2.2rem; }
+.admin-provider-coverage__metric strong { display: block; font-size: 1.25rem; margin-top: .35rem; }
+.admin-provider-coverage__metric span { color: #627581; display: block; font-size: .68rem; line-height: 1.35; margin-top: .3rem; }
+.admin-provider-coverage__breakdown { display: grid; gap: .5rem; }
+.admin-provider-coverage__breakdown h3 { font-size: .9rem; font-weight: 800; }
+.admin-provider-coverage__scope { background: #f4f7f8; border-radius: .7rem; color: #405766; display: grid; font-size: .78rem; gap: .35rem; padding: .85rem 1rem; }
+.admin-provider-coverage__scope strong { color: #172a3a; }
+.admin-provider-coverage__unavailable { background: #fff9e9; border: 1px solid #e5bd62; border-radius: .75rem; display: grid; gap: .4rem; padding: 1rem; }
+.admin-provider-coverage__unavailable button { background: #173f4a; border-radius: .5rem; color: #fff; font-weight: 800; justify-self: start; margin-top: .25rem; min-height: 2.5rem; padding: .45rem .8rem; }
+.admin-provider-coverage__unavailable button:hover, .admin-provider-coverage__unavailable button:focus-visible { background: #196b6b; outline: 2px solid #196b6b; outline-offset: 2px; }
 .admin-costs-completeness-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); }
 .admin-costs-completeness-grid h3 { font-size: .85rem; font-weight: 800; }
 .admin-costs-completeness-grid dl { display: grid; gap: .3rem; margin-top: .4rem; }
 .admin-costs-completeness-grid dl div { display: flex; justify-content: space-between; }
 .admin-costs-completeness-grid dd { font-variant-numeric: tabular-nums; font-weight: 800; }
 .admin-costs-table-wrap { overflow-x: auto; }
+.admin-costs-table-wrap:focus-visible { outline: 2px solid #196b6b; outline-offset: 2px; }
 .admin-costs table { border-collapse: collapse; min-width: 46rem; width: 100%; }
 .admin-costs caption { height: 1px; overflow: hidden; position: absolute; width: 1px; clip: rect(0 0 0 0); }
 .admin-costs th, .admin-costs td { border-bottom: 1px solid #e3eaec; font-size: .78rem; padding: .65rem .55rem; text-align: right; vertical-align: top; }
@@ -60,4 +82,9 @@
   .admin-costs-range__presets { width: 100%; }
   .admin-costs-range__presets button { flex: 1 1 auto; }
   .admin-costs-two-column { grid-template-columns: 1fr; }
+  .admin-provider-coverage__status { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .admin-provider-coverage__metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-provider-coverage__metric { min-height: 6.6rem; padding: .7rem; }
 }

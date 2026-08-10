@@ -393,6 +393,38 @@ describe('Academy Provider Attempt Journal foundation', () => {
       invoiceCompletenessClaim: false,
       costAuthority: 'academy_provider_usage_ledger',
       states: { ledgered: 1, gapPending: 1 },
+      breakdowns: {
+        engines: [{
+          key: 'tutor', recordedProviderAttempts: 2, ledgerLinkedAttempts: 1,
+          journaledMissingLedgerRelationship: 1,
+          states: { ledgered: 1, gapPending: 1 },
+        }],
+        purposes: [{
+          key: 'tutor_turn', recordedProviderAttempts: 2, ledgerLinkedAttempts: 1,
+          journaledMissingLedgerRelationship: 1,
+        }],
+        providers: [{
+          key: 'anthropic', recordedProviderAttempts: 2, ledgerLinkedAttempts: 1,
+          journaledMissingLedgerRelationship: 1,
+        }],
+      },
+    })
+  })
+
+  it('returns insufficient raw evidence and empty safe dimensions for an empty range', async () => {
+    const projection = await databases[0].query<{ coverage: Record<string, any> }>(`
+      select public.academy_read_provider_attempt_coverage_v1(
+        clock_timestamp() - interval '1 day',
+        clock_timestamp() + interval '1 day',
+        'costs:read'
+      ) as coverage
+    `)
+    expect(projection.rows[0].coverage).toMatchObject({
+      coverageStatus: 'no_data',
+      recordedProviderAttempts: 0,
+      ledgerLinkedAttempts: 0,
+      breakdowns: { engines: [], purposes: [], providers: [] },
+      invoiceCompletenessClaim: false,
     })
   })
 })

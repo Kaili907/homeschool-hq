@@ -255,14 +255,36 @@ describe('Admin cost aggregate projection', () => {
   })
 
   it('uses only the bounded ADMIN-3 server read seam', async () => {
-    const gatewayAccess = { readProviderUsageCosts: vi.fn(async () => [record()]) }
+    const gatewayAccess = {
+      readProviderUsageCosts: vi.fn(async () => [record()]),
+      readProviderAttemptCoverage: vi.fn(async () => null),
+    }
     const projection = createAdminCostProjection({ gatewayAccess, now: () => NOW })
     const model = await projection.read(event({ range: '7-days' }))
     expect(model.summary.aiRequests.value).toBe(1)
+    expect(model.providerAccountingCoverage.status).toBe('unavailable')
     expect(gatewayAccess.readProviderUsageCosts).toHaveBeenCalledWith({
       limit: ADMIN_COST_RECORD_LIMIT,
       before: '2026-08-09T00:00:00.000Z',
     })
+    expect(gatewayAccess.readProviderAttemptCoverage).toHaveBeenCalledWith({
+      startAt: '2026-08-02T00:00:00.000Z',
+      endExclusive: '2026-08-09T00:00:00.000Z',
+    })
+  })
+
+  it('keeps authorized cost data available when the coverage RPC is unavailable', async () => {
+    const gatewayAccess = {
+      readProviderUsageCosts: vi.fn(async () => [record()]),
+      readProviderAttemptCoverage: vi.fn(async () => { throw new Error('PRIVATE SQL ERROR') }),
+    }
+    const model = await createAdminCostProjection({ gatewayAccess, now: () => NOW })
+      .read(event({ range: 'today' }))
+    expect(model.summary.totalRequests.value).toBe(1)
+    expect(model.providerAccountingCoverage).toMatchObject({
+      status: 'unavailable', metrics: null, invoiceCompletenessClaim: false,
+    })
+    expect(JSON.stringify(model)).not.toContain('PRIVATE SQL ERROR')
   })
 
   it('fails closed for malformed ledger rows rather than surfacing raw fields', () => {
