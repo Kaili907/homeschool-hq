@@ -158,7 +158,7 @@
       "version": "20260809130000",
       "filename": "20260809130000_academy_admin_audit_foundation.sql",
       "sha256": "b422853994fb86983eabe39ca53e0cb375511306bd5e694d45585ce5f335ac25",
-      "dependency": "20260808123000_academy_admin_safety_operations.sql",
+      "dependency": "20260809120000_academy_operational_telemetry_foundation.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-audit-foundation-v1",
@@ -178,10 +178,20 @@
       "version": "20260809150000",
       "filename": "20260809150000_academy_logical_voice_profile_contract.sql",
       "sha256": "d111cd566a39fb016cade408b5a64adb46d98ec9a8155f1060ac67d62053cd74",
-      "dependency": "20260809120000_academy_operational_telemetry_foundation.sql",
+      "dependency": "20260809140000_academy_admin_configuration_core.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "profiles_logical_voice_contract_check",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810140000",
+      "filename": "20260810140000_academy_admin_configuration_runtime_enforcement.sql",
+      "sha256": "b8833bd7fcaf3cc9a5a0d2744500b98e2a461bf3521aa0099b6890727026a984",
+      "dependency": "20260809150000_academy_logical_voice_profile_contract.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-admin-configuration-runtime-v1",
       "supersessionStatus": "current"
     }
   ]

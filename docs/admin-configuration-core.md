@@ -1,12 +1,15 @@
 # ADMIN-14A durable configuration core
 
-Status: implemented locally; migration not applied hosted; runtime enforcement deferred to ADMIN-14B.
+Status: durable core implemented locally; migration not applied hosted. ADMIN-14B
+runtime enforcement is documented in `admin-configuration-runtime.md`.
 
 `20260809140000_academy_admin_configuration_core.sql` adds the durable Admin
 configuration data/control authority on top of ADMIN-15. Nothing in this card
 changes the Anthropic gateway, TTS gateway, or Study runtime. Every database and
-HTTP projection reports `pending_runtime_integration` so a stored value cannot
-be mistaken for an enforced production value.
+At the ADMIN-14A migration stage, the HTTP projection reports
+`pending_runtime_integration` so a stored value cannot be mistaken for an
+enforced production value. The ADMIN-14B follow-up migration advances this
+status only alongside the runtime consumers.
 
 ## Authority and storage
 
@@ -96,7 +99,6 @@ Requests are exact key-specific objects, not a generic JSON editor. Responses
 contain no environment value, credential, bearer, actor identity, assignment,
 or raw database row.
 
-No configuration UI is mounted in ADMIN-14A. Exposing controls before runtime
-integration would let an operator mistake durable desired state for active
-production enforcement. ADMIN-14B owns runtime consumption, deployment-ceiling
-resolution, protective disable-only behavior, and the later UI decision.
+No configuration UI is mounted in ADMIN-14A. ADMIN-14B adds server runtime
+consumption, deployment-ceiling resolution, and protective disable behavior;
+it does not add a generic browser configuration authority.

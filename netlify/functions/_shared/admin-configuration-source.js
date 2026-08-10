@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import {
-  ADMIN_CONFIGURATION_INTEGRATION_STATUS,
   isAdminConfigurationKey,
+  isAdminConfigurationIntegrationStatus,
   isAdminConfigurationValue,
   sanitizeAdminConfigurationProjection,
 } from '../../../src/admin/configurationModel.ts'
@@ -88,7 +88,7 @@ function previewProjection(value) {
     || !UUID.test(value.confirmationId)
     || typeof value.confirmationExpiresAt !== 'string'
     || !Number.isFinite(Date.parse(value.confirmationExpiresAt))
-    || value.integrationStatus !== ADMIN_CONFIGURATION_INTEGRATION_STATUS) return null
+    || !isAdminConfigurationIntegrationStatus(value.integrationStatus)) return null
   return Object.freeze({ ...value })
 }
 
@@ -103,7 +103,7 @@ function commitProjection(value) {
     || typeof value.revision !== 'string'
     || !POSITIVE_REVISION.test(value.revision)
     || (value.idempotencyResult !== 'created' && value.idempotencyResult !== 'replayed')
-    || value.integrationStatus !== ADMIN_CONFIGURATION_INTEGRATION_STATUS) return null
+    || !isAdminConfigurationIntegrationStatus(value.integrationStatus)) return null
   return Object.freeze({ ...value })
 }
 

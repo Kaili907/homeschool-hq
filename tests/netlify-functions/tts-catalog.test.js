@@ -4,7 +4,7 @@ import {
   createTtsVoiceCatalog,
   projectPublicTtsCatalog,
 } from '../../netlify/functions/_shared/tts-catalog.js'
-import { createTtsHandler } from '../../netlify/functions/tts.js'
+import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
 
 const PROVIDER_SENTINEL = 'server-only-provider-voice-sentinel'
 const ENV = Object.freeze({
@@ -15,6 +15,18 @@ const ENV = Object.freeze({
   ACADEMY_TTS_ENABLED: 'true',
   ACADEMY_APP_VERSION: 'catalog-test-build',
 })
+const EFFECTIVE_CONFIGURATION = Object.freeze({
+  status: 'available',
+  runtime: Object.freeze({ ttsEnabled: true }),
+  quotas: Object.freeze({ ttsRequestsPerAccountDay: 100 }),
+})
+
+function createTtsHandler(overrides = {}) {
+  return createBaseTtsHandler({
+    effectiveConfigurationReader: { read: vi.fn(async () => EFFECTIVE_CONFIGURATION) },
+    ...overrides,
+  })
+}
 
 function entry(overrides = {}) {
   return {
@@ -99,7 +111,7 @@ describe('server-owned TTS catalog contract', () => {
       entry({ voiceRef: 'academy.tts.legacy', providerVoiceId: 'legacy-private', status: 'legacy' }),
       entry({ voiceRef: 'academy.tts.revoked', providerVoiceId: 'revoked-private', status: 'revoked' }),
     ])
-    const projected = projectPublicTtsCatalog(privateCatalog, ENV)
+    const projected = projectPublicTtsCatalog(privateCatalog, ENV, true)
     expect(projected.synthesisEnabled).toBe(true)
     expect(projected.voices.map((voice) => voice.status)).toEqual([
       'active', 'disabled', 'legacy', 'revoked',
@@ -125,6 +137,26 @@ describe('server-owned TTS catalog contract', () => {
       voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1',
       displayLabel: 'Synthetic voice', providerClass: 'premium', status: 'active',
       deploymentAvailable: true, cachedPlaybackAllowed: true,
+    })
+    expect(result.body).not.toContain(PROVIDER_SENTINEL)
+  })
+
+  it('reports provider synthesis disabled without revoking safe cached playback', async () => {
+    const result = await createTtsHandler({
+      env: ENV,
+      catalog: catalog(),
+      fetchImpl: authFetch(),
+      gatewayAccess: access(),
+      effectiveConfigurationReader: { read: vi.fn(async () => ({
+        status: 'available', runtime: { ttsEnabled: false },
+      })) },
+    })(catalogEvent())
+    const body = JSON.parse(result.body)
+    expect(body.synthesisEnabled).toBe(false)
+    expect(body.voices[0]).toMatchObject({
+      voiceRef: 'academy.tts.synthetic',
+      deploymentAvailable: true,
+      cachedPlaybackAllowed: true,
     })
     expect(result.body).not.toContain(PROVIDER_SENTINEL)
   })

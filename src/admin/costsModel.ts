@@ -80,6 +80,7 @@ export interface AdminCostsModel {
     readonly recordLimit: 500
     readonly recordsIncluded: number
   }
+  readonly monthlyCostThreshold: AdminMonthlyCostThreshold
   readonly summary: AdminCostSummary
   readonly trend: readonly AdminCostTrendPoint[]
   readonly breakdowns: {
@@ -89,6 +90,31 @@ export interface AdminCostsModel {
     readonly costKinds: readonly AdminCostBreakdownRow[]
     readonly billingDispositions: readonly AdminCostBreakdownRow[]
   }
+}
+
+export type AdminMonthlyCostThresholdStatus =
+  | 'not_applicable'
+  | 'unavailable'
+  | 'below_warning'
+  | 'warning'
+  | 'critical'
+
+export interface AdminMonthlyCostThreshold {
+  readonly status: AdminMonthlyCostThresholdStatus
+  readonly reason:
+    | 'range_not_month'
+    | 'configuration_unavailable'
+    | 'calculated_cost_unavailable'
+    | 'calculated_cost_partial'
+    | null
+  readonly basis: 'calculated_usage_estimate'
+  readonly observedMicros: IntegerMicros | null
+  readonly warningMicros: IntegerMicros | null
+  readonly criticalMicros: IntegerMicros | null
+  readonly configurationRevisions: {
+    readonly warning: string
+    readonly critical: string
+  } | null
 }
 
 export type AdminCostCompletenessReason =
@@ -131,6 +157,14 @@ const BREAKDOWN_LABELS = new Set([
   'Not billable',
   'Unknown',
 ])
+const THRESHOLD_STATUSES = new Set<AdminMonthlyCostThresholdStatus>([
+  'not_applicable', 'unavailable', 'below_warning', 'warning', 'critical',
+])
+const THRESHOLD_REASONS = new Set([
+  'range_not_month', 'configuration_unavailable',
+  'calculated_cost_unavailable', 'calculated_cost_partial',
+])
+const POSITIVE_REVISION = /^[1-9]\d*$/
 
 function record(value: unknown): Record<string, unknown> | null {
   return value && typeof value === 'object' && !Array.isArray(value)
@@ -223,6 +257,66 @@ function breakdownRows(value: unknown): AdminCostBreakdownRow[] | null {
   return rows
 }
 
+function monthlyCostThreshold(value: unknown): AdminMonthlyCostThreshold | null {
+  const source = record(value)
+  if (
+    !source
+    || Object.keys(source).length !== 7
+    || !THRESHOLD_STATUSES.has(source.status as AdminMonthlyCostThresholdStatus)
+    || source.basis !== 'calculated_usage_estimate'
+    || !(source.reason === null || THRESHOLD_REASONS.has(source.reason as string))
+  ) return null
+  const micros = (candidate: unknown) => candidate === null
+    || (typeof candidate === 'string' && isCanonicalIntegerMicros(candidate))
+  if (!micros(source.observedMicros) || !micros(source.warningMicros) || !micros(source.criticalMicros)) return null
+  const revisions = record(source.configurationRevisions)
+  if (source.configurationRevisions !== null && (
+    !revisions
+    || Object.keys(revisions).length !== 2
+    || typeof revisions.warning !== 'string'
+    || !POSITIVE_REVISION.test(revisions.warning)
+    || typeof revisions.critical !== 'string'
+    || !POSITIVE_REVISION.test(revisions.critical)
+  )) return null
+  const configured = typeof source.warningMicros === 'string'
+    && typeof source.criticalMicros === 'string'
+    && revisions !== null
+    && source.warningMicros.length <= 13
+    && source.criticalMicros.length <= 13
+    && BigInt(source.warningMicros) >= 1n
+    && BigInt(source.warningMicros) < BigInt(source.criticalMicros)
+    && BigInt(source.criticalMicros) <= 1_000_000_000_000n
+  const observed = typeof source.observedMicros === 'string'
+  const classified = ['below_warning', 'warning', 'critical'].includes(source.status as string)
+  if (
+    (source.status === 'not_applicable' && !(
+      source.reason === 'range_not_month' && source.observedMicros === null
+      && source.warningMicros === null && source.criticalMicros === null && revisions === null
+    ))
+    || (source.status === 'unavailable' && source.reason === 'configuration_unavailable' && !(
+      source.observedMicros === null && source.warningMicros === null
+      && source.criticalMicros === null && revisions === null
+    ))
+    || (source.status === 'unavailable' && source.reason === 'calculated_cost_unavailable'
+      && !(source.observedMicros === null && configured))
+    || (source.status === 'unavailable' && source.reason === 'calculated_cost_partial'
+      && !(observed && configured))
+    || (source.status === 'unavailable' && ![
+      'configuration_unavailable', 'calculated_cost_unavailable', 'calculated_cost_partial',
+    ].includes(source.reason as string))
+    || (classified && !(source.reason === null && observed && configured))
+  ) return null
+  return {
+    status: source.status as AdminMonthlyCostThresholdStatus,
+    reason: source.reason as AdminMonthlyCostThreshold['reason'],
+    basis: 'calculated_usage_estimate',
+    observedMicros: source.observedMicros as IntegerMicros | null,
+    warningMicros: source.warningMicros as IntegerMicros | null,
+    criticalMicros: source.criticalMicros as IntegerMicros | null,
+    configurationRevisions: revisions as unknown as AdminMonthlyCostThreshold['configurationRevisions'],
+  }
+}
+
 export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const source = record(value)
   const range = record(source?.range)
@@ -233,6 +327,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const costKinds = fixedCounts(summarySource?.costKindCounts, ['calculated', 'reconciled', 'unavailable'])
   const attribution = fixedCounts(summarySource?.attributionCounts, ['resolved', 'ambiguous', 'unresolved'])
   const usageUnavailableCount = safeCount(summarySource?.usageUnavailableCount)
+  const threshold = monthlyCostThreshold(source?.monthlyCostThreshold)
   if (
     !source || source.contractVersion !== 2 || source.currency !== 'USD'
     || typeof source.generatedAt !== 'string' || Number.isNaN(Date.parse(source.generatedAt))
@@ -246,6 +341,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
     || !Array.isArray(sourceState.reasons) || sourceState.reasons.some((reason) => !REASONS.has(reason))
     || sourceState.recordLimit !== 500 || safeCount(sourceState.recordsIncluded) === null
     || !summaryAggregate || !billing || !costKinds || !attribution || usageUnavailableCount === null
+    || !threshold
     || !Array.isArray(source.trend) || source.trend.length > 366
   ) return null
 
@@ -276,6 +372,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
       recordLimit: 500,
       recordsIncluded: sourceState.recordsIncluded as number,
     },
+    monthlyCostThreshold: threshold,
     summary: {
       ...summaryAggregate,
       usageUnavailableCount,

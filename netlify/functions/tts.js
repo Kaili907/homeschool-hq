@@ -9,10 +9,12 @@ import {
   jsonResponse,
   readBoundedResponseBytes,
   readJsonBody,
+  reject,
   responseForError,
 } from './_shared/http.js'
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
-import { createGatewayAccess, dailyLimit } from './_shared/gateway-access.js'
+import { createGatewayAccess } from './_shared/gateway-access.js'
+import { createEffectiveConfigurationReader } from './_shared/effective-configuration.js'
 import {
   createGatewayOperationalTelemetry,
   gatewayErrorTerminal,
@@ -42,9 +44,12 @@ const CATALOG_PATHS = new Set(['/api/tts/catalog', '/.netlify/functions/tts/cata
 // Leaves room for base64 expansion beneath Netlify's buffered response ceiling.
 const MAX_AUDIO_BYTES = 4 * 1024 * 1024
 const TTS_TIMEOUT_MS = 30_000
-const DEFAULT_TTS_DAILY_LIMIT = 100
 
 export function createTtsHandler(overrides = {}) {
+  const env = overrides.env ?? process.env
+  const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
+  const configurationReader = overrides.effectiveConfigurationReader
+    ?? createEffectiveConfigurationReader({ env, fetchImpl })
   return async (event, context) => {
     const path = event?.path ?? ''
     const isSynthesis = SYNTHESIS_PATHS.has(path)
@@ -56,8 +61,6 @@ export function createTtsHandler(overrides = {}) {
     }
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
 
-    const env = overrides.env ?? process.env
-    const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
     let finalizeTelemetry
     let telemetryRecorded = false
 
@@ -67,7 +70,12 @@ export function createTtsHandler(overrides = {}) {
 
       const catalog = overrides.catalog ?? TTS_VOICE_CATALOG
       if (isCatalog) {
-        return jsonResponse(200, projectPublicTtsCatalog(catalog, env))
+        const configuration = await configurationReader.read()
+        return jsonResponse(200, projectPublicTtsCatalog(
+          catalog,
+          env,
+          configuration.status === 'available' && configuration.runtime.ttsEnabled,
+        ))
       }
 
       if (!envFlagEnabled(env, 'ACADEMY_TTS_ENABLED')) {
@@ -108,6 +116,9 @@ export function createTtsHandler(overrides = {}) {
         request.voiceVersion,
         env,
       )
+      const configuration = await configurationReader.read()
+      if (configuration.status !== 'available') reject(503, 'configuration_unavailable')
+      if (!configuration.runtime.ttsEnabled) reject(503, 'gateway_disabled')
       const versions = trustedUsageVersions(env, 'tts')
       const apiKey = typeof env.ELEVENLABS_API_KEY === 'string' ? env.ELEVENLABS_API_KEY.trim() : ''
       if (!apiKey) {
@@ -120,7 +131,7 @@ export function createTtsHandler(overrides = {}) {
       await access.consumeUsage(
         auth.user.id,
         'tts',
-        dailyLimit(env, 'ACADEMY_TTS_DAILY_LIMIT', DEFAULT_TTS_DAILY_LIMIT),
+        configuration.quotas.ttsRequestsPerAccountDay,
       )
 
       let upstream

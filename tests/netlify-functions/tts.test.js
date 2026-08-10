@@ -28,6 +28,11 @@ const TEST_CATALOG = createTtsVoiceCatalog({
     adminApproved: true,
   }],
 })
+const EFFECTIVE_CONFIGURATION = Object.freeze({
+  status: 'available',
+  runtime: Object.freeze({ ttsEnabled: true }),
+  quotas: Object.freeze({ ttsRequestsPerAccountDay: 100 }),
+})
 
 function testAccess({
   memberships = [
@@ -54,7 +59,12 @@ function testAccess({
 }
 
 function createTtsHandler(overrides = {}) {
-  return createBaseTtsHandler({ gatewayAccess: testAccess(), catalog: TEST_CATALOG, ...overrides })
+  return createBaseTtsHandler({
+    gatewayAccess: testAccess(),
+    catalog: TEST_CATALOG,
+    effectiveConfigurationReader: { read: vi.fn(async () => EFFECTIVE_CONFIGURATION) },
+    ...overrides,
+  })
 }
 
 afterEach(() => {
@@ -352,7 +362,50 @@ describe('authenticated TTS gateway', () => {
     })(event())
     expect(result.statusCode).toBe(200)
     expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
-    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 125)
+    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 100)
+  })
+
+  it.each([
+    ['unavailable authority', { status: 'unavailable' }, 'configuration_unavailable'],
+    ['durable disablement', { ...EFFECTIVE_CONFIGURATION,
+      runtime: { ttsEnabled: false } }, 'gateway_disabled'],
+  ])('fails closed for %s before quota or provider synthesis', async (_label, configuration, code) => {
+    const access = testAccess()
+    const fetchImpl = fetchRouter()
+    const result = await createTtsHandler({
+      fetchImpl,
+      env: ENV,
+      gatewayAccess: access,
+      effectiveConfigurationReader: { read: vi.fn(async () => configuration) },
+    })(event())
+    expect(responseJson(result)).toEqual({ error: { code } })
+    expect(access.consumeUsage).not.toHaveBeenCalled()
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('uses the effective TTS quota and keeps raw provider authority rejection ahead of config', async () => {
+    const access = testAccess()
+    const reader = { read: vi.fn(async () => ({
+      ...EFFECTIVE_CONFIGURATION,
+      quotas: { ttsRequestsPerAccountDay: 37 },
+    })) }
+    const result = await createTtsHandler({
+      fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
+      effectiveConfigurationReader: reader,
+    })(event())
+    expect(result.statusCode).toBe(200)
+    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 37)
+
+    const configReader = { read: vi.fn(async () => ({ status: 'unavailable' })) }
+    const rejected = await createTtsHandler({
+      fetchImpl: fetchRouter(), env: ENV,
+      effectiveConfigurationReader: configReader,
+    })(event({
+      text: 'No browser provider authority.', voiceRef: 'academy.tts.synthetic',
+      voiceVersion: 'v1', voiceId: 'raw-provider-id',
+    }))
+    expect(responseJson(rejected)).toEqual({ error: { code: 'invalid_request' } })
+    expect(configReader.read).not.toHaveBeenCalled()
   })
 
   it('returns usage_limit before the provider call when the ledger is at cap', async () => {

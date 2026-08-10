@@ -71,6 +71,17 @@ describe('Admin configuration Supabase source', () => {
     const unsafe = client({ data: { ...READ, secret: 'provider-key' }, error: null })
     await expect(createAdminConfigurationSource({ serviceClient: unsafe }).read())
       .rejects.toMatchObject({ code: 'source_unavailable' })
+
+    const runtime = {
+      ...READ,
+      integrationStatus: 'runtime_enforced',
+      settings: READ.settings.map((setting) => ({
+        ...setting, integrationStatus: 'runtime_enforced',
+      })),
+    }
+    await expect(createAdminConfigurationSource({
+      serviceClient: client({ data: runtime, error: null }),
+    }).read()).resolves.toEqual(runtime)
   })
 
   it('pins the actor bearer and passes exact preview/commit parameters', async () => {

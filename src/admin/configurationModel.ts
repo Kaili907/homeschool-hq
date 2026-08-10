@@ -27,6 +27,13 @@ export type AdminConfigurationValue =
 
 export const ADMIN_CONFIGURATION_INTEGRATION_STATUS =
   'pending_runtime_integration' as const
+export const ADMIN_CONFIGURATION_RUNTIME_STATUS = 'runtime_enforced' as const
+export const ADMIN_CONFIGURATION_INTEGRATION_STATUSES = [
+  ADMIN_CONFIGURATION_INTEGRATION_STATUS,
+  ADMIN_CONFIGURATION_RUNTIME_STATUS,
+] as const
+export type AdminConfigurationIntegrationStatus =
+  (typeof ADMIN_CONFIGURATION_INTEGRATION_STATUSES)[number]
 
 export interface AdminConfigurationSetting {
   readonly key: AdminConfigurationKey
@@ -44,12 +51,12 @@ export interface AdminConfigurationSetting {
     | 'allowlist_subset'
     | 'allowlist_member'
   readonly registryVersion: 1
-  readonly integrationStatus: typeof ADMIN_CONFIGURATION_INTEGRATION_STATUS
+  readonly integrationStatus: AdminConfigurationIntegrationStatus
 }
 
 export interface AdminConfigurationProjection {
   readonly schemaVersion: typeof ADMIN_CONTRACT_VERSION
-  readonly integrationStatus: typeof ADMIN_CONFIGURATION_INTEGRATION_STATUS
+  readonly integrationStatus: AdminConfigurationIntegrationStatus
   readonly settings: readonly AdminConfigurationSetting[]
 }
 
@@ -69,6 +76,13 @@ function hasExactKeys(value: Record<string, unknown>, keys: readonly string[]): 
 
 export function isAdminConfigurationKey(value: unknown): value is AdminConfigurationKey {
   return typeof value === 'string' && KEY_SET.has(value)
+}
+
+export function isAdminConfigurationIntegrationStatus(
+  value: unknown,
+): value is AdminConfigurationIntegrationStatus {
+  return value === ADMIN_CONFIGURATION_INTEGRATION_STATUS
+    || value === ADMIN_CONFIGURATION_RUNTIME_STATUS
 }
 
 export function isAdminConfigurationValue(
@@ -131,7 +145,7 @@ function sanitizeSetting(value: unknown): AdminConfigurationSetting | null {
     'boolean_enablement', 'integer_maximum', 'integer_micros_maximum',
     'allowlist_subset', 'allowlist_member',
   ].includes(String(value.deploymentCeilingType))) return null
-  if (value.registryVersion !== 1 || value.integrationStatus !== ADMIN_CONFIGURATION_INTEGRATION_STATUS) return null
+  if (value.registryVersion !== 1 || !isAdminConfigurationIntegrationStatus(value.integrationStatus)) return null
   const protectiveExpected = value.key === 'runtime.ai.enabled' || value.key === 'runtime.tts.enabled'
   if ((value.protectiveCapability === 'engines:operate') !== protectiveExpected) return null
   return Object.freeze({
@@ -145,7 +159,7 @@ function sanitizeSetting(value: unknown): AdminConfigurationSetting | null {
     allowlist,
     deploymentCeilingType: value.deploymentCeilingType as AdminConfigurationSetting['deploymentCeilingType'],
     registryVersion: 1,
-    integrationStatus: ADMIN_CONFIGURATION_INTEGRATION_STATUS,
+    integrationStatus: value.integrationStatus,
   })
 }
 
@@ -154,15 +168,16 @@ export function sanitizeAdminConfigurationProjection(
 ): AdminConfigurationProjection | null {
   if (!isRecord(value) || !hasExactKeys(value, ['schemaVersion', 'integrationStatus', 'settings'])) return null
   if (value.schemaVersion !== ADMIN_CONTRACT_VERSION
-    || value.integrationStatus !== ADMIN_CONFIGURATION_INTEGRATION_STATUS
+    || !isAdminConfigurationIntegrationStatus(value.integrationStatus)
     || !Array.isArray(value.settings)
     || value.settings.length !== ADMIN_CONFIGURATION_KEYS.length) return null
   const settings = value.settings.map(sanitizeSetting)
   if (settings.some((setting) => setting === null)) return null
   if (new Set(settings.map((setting) => setting?.key)).size !== ADMIN_CONFIGURATION_KEYS.length) return null
+  if (settings.some((setting) => setting?.integrationStatus !== value.integrationStatus)) return null
   return Object.freeze({
     schemaVersion: ADMIN_CONTRACT_VERSION,
-    integrationStatus: ADMIN_CONFIGURATION_INTEGRATION_STATUS,
+    integrationStatus: value.integrationStatus,
     settings: Object.freeze(settings as AdminConfigurationSetting[]),
   })
 }

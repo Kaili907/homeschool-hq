@@ -191,9 +191,11 @@ function normalizeJarvisContext(value) {
 }
 
 export function validateAnthropicRequest(value) {
-  const request = assertExactObject(value, ['mode', 'modelTier', 'context', 'messages'])
+  const request = assertExactObject(value, ['mode', 'context', 'messages'], ['modelTier'])
   if (request.mode !== 'tutor' && request.mode !== 'jarvis') reject(400, 'unknown_mode')
-  const modelTier = enumString(request.modelTier, new Set(Object.keys(ANTHROPIC_MODELS)))
+  const modelTier = Object.hasOwn(request, 'modelTier')
+    ? enumString(request.modelTier, new Set(Object.keys(ANTHROPIC_MODELS)))
+    : null
   const messages = normalizeMessages(request.messages)
   const context =
     request.mode === 'tutor' ? normalizeTutorContext(request.context) : normalizeJarvisContext(request.context)

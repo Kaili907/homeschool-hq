@@ -4,8 +4,8 @@ import {
   createGatewayOperationalTelemetry,
   recordGatewayTerminal,
 } from '../../netlify/functions/_shared/gateway-telemetry.js'
-import { createAnthropicHandler } from '../../netlify/functions/anthropic.js'
-import { createTtsHandler } from '../../netlify/functions/tts.js'
+import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netlify/functions/anthropic.js'
+import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
 import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catalog.js'
 
 const HOUSEHOLD_ID = '10000000-0000-4000-8000-000000000001'
@@ -30,6 +30,26 @@ const ENV = Object.freeze({
   ACADEMY_GATEWAY_ENGINE_VERSION: 'gateway-v3',
   ACADEMY_JARVIS_ENGINE_VERSION: 'jarvis-v2',
 })
+const EFFECTIVE_CONFIGURATION = Object.freeze({
+  status: 'available',
+  runtime: Object.freeze({ aiEnabled: true, ttsEnabled: true }),
+  quotas: Object.freeze({ aiRequestsPerAccountDay: 50, ttsRequestsPerAccountDay: 100 }),
+  ai: Object.freeze({ approvedTiers: Object.freeze(['sonnet', 'haiku']), defaultTier: 'sonnet' }),
+})
+
+function createAnthropicHandler(overrides = {}) {
+  return createBaseAnthropicHandler({
+    effectiveConfigurationReader: { read: vi.fn(async () => EFFECTIVE_CONFIGURATION) },
+    ...overrides,
+  })
+}
+
+function createTtsHandler(overrides = {}) {
+  return createBaseTtsHandler({
+    effectiveConfigurationReader: { read: vi.fn(async () => EFFECTIVE_CONFIGURATION) },
+    ...overrides,
+  })
+}
 
 function access(overrides = {}) {
   return {

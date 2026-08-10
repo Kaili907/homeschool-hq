@@ -5,7 +5,10 @@ import {
   sanitizeAdminConfigurationProjection,
 } from './configurationModel'
 
-function setting(key: (typeof ADMIN_CONFIGURATION_KEYS)[number]) {
+function setting(
+  key: (typeof ADMIN_CONFIGURATION_KEYS)[number],
+  integrationStatus: 'pending_runtime_integration' | 'runtime_enforced' = 'pending_runtime_integration',
+) {
   const runtime = key.startsWith('runtime.')
   const quota = key.startsWith('quota.')
   const money = key.startsWith('cost.')
@@ -31,15 +34,17 @@ function setting(key: (typeof ADMIN_CONFIGURATION_KEYS)[number]) {
         : money ? 'integer_micros_maximum'
           : approved ? 'allowlist_subset' : 'allowlist_member',
     registryVersion: 1,
-    integrationStatus: 'pending_runtime_integration',
+    integrationStatus,
   }
 }
 
-function projection() {
+function projection(
+  integrationStatus: 'pending_runtime_integration' | 'runtime_enforced' = 'pending_runtime_integration',
+) {
   return {
     schemaVersion: 2,
-    integrationStatus: 'pending_runtime_integration',
-    settings: ADMIN_CONFIGURATION_KEYS.map(setting),
+    integrationStatus,
+    settings: ADMIN_CONFIGURATION_KEYS.map((key) => setting(key, integrationStatus)),
   }
 }
 
@@ -49,6 +54,14 @@ describe('Admin configuration browser model', () => {
     expect(model?.settings.map((item) => item.key)).toEqual(ADMIN_CONFIGURATION_KEYS)
     expect(model?.settings.every((item) => item.integrationStatus === 'pending_runtime_integration'))
       .toBe(true)
+  })
+
+  it('accepts the runtime-enforced projection and rejects mixed status', () => {
+    expect(sanitizeAdminConfigurationProjection(projection('runtime_enforced'))?.integrationStatus)
+      .toBe('runtime_enforced')
+    const mixed = projection('runtime_enforced')
+    mixed.settings[0] = { ...mixed.settings[0], integrationStatus: 'pending_runtime_integration' }
+    expect(sanitizeAdminConfigurationProjection(mixed)).toBeNull()
   })
 
   it.each([

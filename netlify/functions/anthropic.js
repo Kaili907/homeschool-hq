@@ -16,10 +16,12 @@ import {
   jsonResponse,
   readBoundedResponseBytes,
   readJsonBody,
+  reject,
   responseForError,
 } from './_shared/http.js'
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
-import { createGatewayAccess, dailyLimit } from './_shared/gateway-access.js'
+import { createGatewayAccess } from './_shared/gateway-access.js'
+import { createEffectiveConfigurationReader } from './_shared/effective-configuration.js'
 import {
   createGatewayOperationalTelemetry,
   gatewayErrorTerminal,
@@ -37,10 +39,13 @@ const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages'
 const ANTHROPIC_VERSION = '2023-06-01'
 const ANTHROPIC_TIMEOUT_MS = 30_000
 const MAX_ANTHROPIC_RESPONSE_BYTES = 256 * 1024
-const DEFAULT_ANTHROPIC_DAILY_LIMIT = 50
 const ALLOWED_PATHS = new Set(['/api/anthropic/v1/messages', '/.netlify/functions/anthropic'])
 
 export function createAnthropicHandler(overrides = {}) {
+  const env = overrides.env ?? process.env
+  const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
+  const configurationReader = overrides.effectiveConfigurationReader
+    ?? createEffectiveConfigurationReader({ env, fetchImpl })
   return async (event, context) => {
     if (event?.httpMethod !== 'POST') {
       return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
@@ -48,8 +53,6 @@ export function createAnthropicHandler(overrides = {}) {
     if (!ALLOWED_PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
 
-    const env = overrides.env ?? process.env
-    const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
     let finalizeTelemetry
     let telemetryRecorded = false
 
@@ -90,8 +93,16 @@ export function createAnthropicHandler(overrides = {}) {
         })
       }
 
-      const request = validateAnthropicRequest(readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES))
+      let request = validateAnthropicRequest(readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES))
       mode = request.mode
+      const configuration = await configurationReader.read()
+      if (configuration.status !== 'available') reject(503, 'configuration_unavailable')
+      if (!configuration.runtime.aiEnabled) reject(503, 'gateway_disabled')
+      const selectedTier = request.modelTier ?? configuration.ai.defaultTier
+      if (!configuration.ai.approvedTiers.includes(selectedTier)) {
+        reject(403, 'model_tier_not_approved')
+      }
+      request = Object.freeze({ ...request, modelTier: selectedTier })
       const versions = trustedUsageVersions(env, request.mode)
 
       const apiKey = typeof env.ANTHROPIC_API_KEY === 'string' ? env.ANTHROPIC_API_KEY.trim() : ''
@@ -105,7 +116,7 @@ export function createAnthropicHandler(overrides = {}) {
       await access.consumeUsage(
         auth.user.id,
         'anthropic',
-        dailyLimit(env, 'ACADEMY_AI_DAILY_LIMIT', DEFAULT_ANTHROPIC_DAILY_LIMIT),
+        configuration.quotas.aiRequestsPerAccountDay,
       )
 
       let upstream

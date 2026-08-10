@@ -15,6 +15,12 @@ const ENV = Object.freeze({
   ACADEMY_AI_ENABLED: 'true',
   ACADEMY_APP_VERSION: 'academy-test-build',
 })
+const EFFECTIVE_CONFIGURATION = Object.freeze({
+  status: 'available',
+  runtime: Object.freeze({ aiEnabled: true }),
+  quotas: Object.freeze({ aiRequestsPerAccountDay: 50 }),
+  ai: Object.freeze({ approvedTiers: Object.freeze(['sonnet', 'haiku']), defaultTier: 'sonnet' }),
+})
 
 function testAccess({
   memberships = [
@@ -41,7 +47,11 @@ function testAccess({
 }
 
 function createAnthropicHandler(overrides = {}) {
-  return createBaseAnthropicHandler({ gatewayAccess: testAccess(), ...overrides })
+  return createBaseAnthropicHandler({
+    gatewayAccess: testAccess(),
+    effectiveConfigurationReader: { read: vi.fn(async () => EFFECTIVE_CONFIGURATION) },
+    ...overrides,
+  })
 }
 
 afterEach(() => {
@@ -516,7 +526,81 @@ describe('authenticated Anthropic gateway', () => {
     })(event())
     expect(result.statusCode).toBe(200)
     expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
-    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 73)
+    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 50)
+  })
+
+  it.each([
+    ['unavailable authority', { status: 'unavailable' }, 'configuration_unavailable'],
+    ['durable disablement', { ...EFFECTIVE_CONFIGURATION,
+      runtime: { aiEnabled: false } }, 'gateway_disabled'],
+  ])('fails closed for %s before quota or provider use', async (_label, configuration, code) => {
+    const access = testAccess()
+    const fetchImpl = fetchRouter()
+    const result = await createAnthropicHandler({
+      fetchImpl,
+      env: ENV,
+      gatewayAccess: access,
+      effectiveConfigurationReader: { read: vi.fn(async () => configuration) },
+    })(event())
+    expect(responseJson(result)).toEqual({ error: { code } })
+    expect(access.consumeUsage).not.toHaveBeenCalled()
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('enforces approved tiers and uses the durable default when the caller omits a tier', async () => {
+    const configuration = {
+      ...EFFECTIVE_CONFIGURATION,
+      quotas: { aiRequestsPerAccountDay: 17 },
+      ai: { approvedTiers: ['haiku'], defaultTier: 'haiku' },
+    }
+    const reader = { read: vi.fn(async () => configuration) }
+    const deniedAccess = testAccess()
+    const deniedFetch = fetchRouter()
+    const denied = await createAnthropicHandler({
+      fetchImpl: deniedFetch, env: ENV, gatewayAccess: deniedAccess,
+      effectiveConfigurationReader: reader,
+    })(event(tutorRequest()))
+    expect(responseJson(denied)).toEqual({ error: { code: 'model_tier_not_approved' } })
+    expect(deniedAccess.consumeUsage).not.toHaveBeenCalled()
+    expect(deniedFetch).toHaveBeenCalledTimes(1)
+
+    const selectedAccess = testAccess()
+    const selectedFetch = fetchRouter()
+    const withoutTier = tutorRequest()
+    delete withoutTier.modelTier
+    const selected = await createAnthropicHandler({
+      fetchImpl: selectedFetch, env: ENV, gatewayAccess: selectedAccess,
+      effectiveConfigurationReader: reader,
+    })(event(withoutTier))
+    expect(selected.statusCode).toBe(200)
+    expect(JSON.parse(selectedFetch.mock.calls.find(
+      ([url]) => url === 'https://api.anthropic.com/v1/messages',
+    )[1].body).model).toBe('claude-haiku-4-5')
+    expect(selectedAccess.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 17)
+    expect(selectedAccess.recordProviderUsage).toHaveBeenCalledWith(
+      expect.objectContaining({ logicalModelTier: 'haiku' }),
+    )
+  })
+
+  it('keeps entitlement and graded-work safety ahead of runtime configuration', async () => {
+    const unavailable = { read: vi.fn(async () => ({ status: 'unavailable' })) }
+    const deniedAccess = testAccess({ memberships: [] })
+    const notEntitled = await createAnthropicHandler({
+      fetchImpl: fetchRouter(), env: ENV, gatewayAccess: deniedAccess,
+      effectiveConfigurationReader: unavailable,
+    })(event())
+    expect(responseJson(notEntitled)).toEqual({ error: { code: 'not_entitled' } })
+    expect(unavailable.read).not.toHaveBeenCalled()
+
+    const graded = tutorRequest()
+    graded.context.graded = true
+    const safetyReader = { read: vi.fn(async () => ({ status: 'unavailable' })) }
+    const safety = await createAnthropicHandler({
+      fetchImpl: fetchRouter(), env: ENV,
+      effectiveConfigurationReader: safetyReader,
+    })(event(graded))
+    expect(responseJson(safety)).toEqual({ error: { code: 'graded_assistance_denied' } })
+    expect(safetyReader.read).not.toHaveBeenCalled()
   })
 
   it('returns usage_limit before the provider call when the ledger is at cap', async () => {

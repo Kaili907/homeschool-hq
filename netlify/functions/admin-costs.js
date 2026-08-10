@@ -1,5 +1,9 @@
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import { createAdminCostProjection } from './_shared/admin-cost-projection.js'
+import {
+  createEffectiveConfigurationReader,
+  evaluateMonthlyCostThreshold,
+} from './_shared/effective-configuration.js'
 import { createGatewayAccess } from './_shared/gateway-access.js'
 import { errorResponse, GatewayError, jsonResponse, responseForError } from './_shared/http.js'
 
@@ -26,6 +30,8 @@ export function createAdminCostsHandler(overrides = {}) {
     gatewayAccess,
     now: overrides.now,
   })
+  const configurationReader = overrides.effectiveConfigurationReader
+    ?? createEffectiveConfigurationReader({ env, fetchImpl })
 
   return async (event) => {
     if (event?.httpMethod !== 'GET') {
@@ -37,7 +43,16 @@ export function createAdminCostsHandler(overrides = {}) {
     if (!authorized.ok) return authorized.response
 
     try {
-      return jsonResponse(200, await projection.read(event))
+      const costs = await projection.read(event)
+      const configuration = await configurationReader.read()
+      return jsonResponse(200, {
+        ...costs,
+        monthlyCostThreshold: evaluateMonthlyCostThreshold({
+          rangeKind: costs.range?.kind,
+          calculatedCost: costs.summary?.calculatedCost,
+          configuration,
+        }),
+      })
     } catch (error) {
       if (error instanceof GatewayError && error.statusCode >= 500) {
         return errorResponse(

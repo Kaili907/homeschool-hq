@@ -175,6 +175,7 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
           </ul>
         </section>
       )}
+      <CostThresholdBanner model={model} />
       {empty && (
         <section className="admin-costs-empty" role="status">
           <h2>No recorded provider usage</h2>
@@ -262,6 +263,33 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
         Projection generated <time dateTime={model.generatedAt}>{formatUtc(model.generatedAt)}</time>. {model.source.recordsIncluded.toLocaleString()} bounded ledger records included.
       </footer>
     </>
+  )
+}
+
+function CostThresholdBanner({ model }: { model: AdminCostsModel }) {
+  const threshold = model.monthlyCostThreshold
+  if (threshold.status === 'not_applicable') return null
+  if (threshold.status === 'unavailable') {
+    return (
+      <section className="admin-costs-banner admin-costs-banner--partial" role="status">
+        <strong>Monthly cost threshold unavailable</strong>
+        <span>The durable threshold or a complete calculated usage-cost total could not be established.</span>
+      </section>
+    )
+  }
+  const observed = formatUsdMicros(threshold.observedMicros!, 'USD')
+  const limit = threshold.status === 'critical'
+    ? formatUsdMicros(threshold.criticalMicros!, 'USD')
+    : formatUsdMicros(threshold.warningMicros!, 'USD')
+  return (
+    <section className="admin-costs-banner" role="status">
+      <strong>{threshold.status === 'critical'
+        ? 'Critical monthly cost threshold reached'
+        : threshold.status === 'warning'
+          ? 'Monthly cost warning threshold reached'
+          : 'Below the monthly cost warning threshold'}</strong>
+      <span>{observed} calculated usage cost; configured comparison threshold {limit}. This is not provider-invoice economics.</span>
+    </section>
   )
 }
 

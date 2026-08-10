@@ -42,6 +42,26 @@ describe('Admin AI and Costs dashboard', () => {
     expect(markup).toContain('not provider-invoice truth')
   })
 
+  it('renders the enforced monthly threshold as calculated evidence, not invoice economics', () => {
+    const model = costsModelFixture({
+      range: {
+        kind: 'month', start: '2026-08-01', end: '2026-08-08',
+        startAt: '2026-08-01T00:00:00.000Z', endExclusive: '2026-08-09T00:00:00.000Z', days: 8,
+      },
+      monthlyCostThreshold: {
+        status: 'warning', reason: null, basis: 'calculated_usage_estimate',
+        observedMicros: '11000000', warningMicros: '10000000',
+        criticalMicros: '25000000', configurationRevisions: { warning: '2', critical: '3' },
+      },
+    })
+    const markup = render({ status: 'ready', model, freshness: 'current' }, true, {
+      kind: 'preset', preset: 'month',
+    })
+    expect(markup).toContain('Monthly cost warning threshold reached')
+    expect(markup).toContain('$11.00 calculated usage cost')
+    expect(markup).toContain('not provider-invoice economics')
+  })
+
   it('renders unavailable cost explicitly and never as $0', () => {
     const source = costsModelFixture()
     const model = costsModelFixture({

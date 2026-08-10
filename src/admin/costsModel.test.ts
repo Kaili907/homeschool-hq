@@ -38,6 +38,40 @@ describe('Admin costs browser contract', () => {
     expect(model?.summary.calculatedCost).toEqual({ status: 'unavailable', micros: null, currency: 'USD' })
   })
 
+  it('keeps configured monthly thresholds and observed cost as exact decimal strings', () => {
+    const model = parseAdminCostsModel(costsModelFixture({
+      monthlyCostThreshold: {
+        status: 'warning', reason: null, basis: 'calculated_usage_estimate',
+        observedMicros: '9007199254740993', warningMicros: '10000000',
+        criticalMicros: '25000000', configurationRevisions: { warning: '2', critical: '3' },
+      },
+    }))
+    expect(model?.monthlyCostThreshold).toMatchObject({
+      status: 'warning', observedMicros: '9007199254740993',
+    })
+    expect(typeof model?.monthlyCostThreshold.observedMicros).toBe('string')
+  })
+
+  it('rejects classified thresholds with missing or out-of-registry bounds', () => {
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel({
+      ...source,
+      monthlyCostThreshold: {
+        status: 'critical', reason: null, basis: 'calculated_usage_estimate',
+        observedMicros: '2', warningMicros: null, criticalMicros: '1',
+        configurationRevisions: { warning: '1', critical: '1' },
+      },
+    })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...source,
+      monthlyCostThreshold: {
+        status: 'warning', reason: null, basis: 'calculated_usage_estimate',
+        observedMicros: '2', warningMicros: '1000000000001', criticalMicros: '1000000000002',
+        configurationRevisions: { warning: '1', critical: '1' },
+      },
+    })).toBeNull()
+  })
+
   it('validates calendar order, future dates, and the 366-day maximum', () => {
     expect(validateAdminCostCustomRange('2026-08-01', '2026-08-08', '2026-08-08')).toBeNull()
     expect(validateAdminCostCustomRange('2026-08-09', '2026-08-08', '2026-08-08')).toContain('on or before')

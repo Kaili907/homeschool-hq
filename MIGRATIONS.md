@@ -10,6 +10,20 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: Admin configuration runtime enforcement (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql`.
+
+After the durable configuration core and logical TTS profile contract, this
+migration advances the eight code-owned registry entries from
+`pending_runtime_integration` to `runtime_enforced`. It preserves the immutable
+registry trigger, revision history, grants, and trusted-server read boundary;
+the read projection reports the effective integration status without exposing
+credentials or raw database rows. Canonical LF SHA-256:
+`b8833bd7fcaf3cc9a5a0d2744500b98e2a461bf3521aa0099b6890727026a984`.
+This migration has not been applied to a hosted Supabase project.
+
 ## Supabase: logical TTS voice profile contract (2026-08-09)
 
 Tracked migration:
@@ -58,10 +72,14 @@ The integrated ADMIN-R1 migration order is:
 3. `20260808122000_academy_provider_usage_cost_ledger.sql`
 4. `20260808123000_academy_admin_safety_operations.sql`
 5. `20260809120000_academy_operational_telemetry_foundation.sql`
+6. `20260809130000_academy_admin_audit_foundation.sql`
+7. `20260809140000_academy_admin_configuration_core.sql`
+8. `20260809150000_academy_logical_voice_profile_contract.sql`
+9. `20260810140000_academy_admin_configuration_runtime_enforcement.sql`
 
-The telemetry manifest entry depends on authorization, and the provider
-usage/cost entry depends on telemetry. These unique versions replace the
-parallel-branch timestamp collision; none has been applied to hosted Supabase.
+The manifest is a strict linear chain in filename order. These unique versions
+replace the parallel-branch timestamp collision; none has been applied to
+hosted Supabase.
 
 ## Supabase: operational telemetry foundation (2026-08-09)
 
