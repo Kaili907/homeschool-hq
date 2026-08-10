@@ -173,6 +173,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "session_semantics_version:0->2",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810155000",
+      "filename": "20260810155000_academy_study_session_telemetry_outbox.sql",
+      "sha256": "f3685d4457141a9a00ddf32a23be27daa3f552d7061b42838fb41b4645e4f340",
+      "dependency": "20260810151000_academy_study_session_semantics_v2.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "session_telemetry_outbox_version:0->1",
+      "supersessionStatus": "current"
     }
   ]
 }

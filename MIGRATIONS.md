@@ -10,6 +10,30 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: Study session telemetry outbox (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810155000_academy_study_session_telemetry_outbox.sql`.
+
+The additive migration creates a forced-RLS, server-private transactional
+outbox for accepted Study session begin, resume, transition, checkpoint,
+completion, and abandonment facts. Failed or rejected Study operations create
+no false success receipt. Service-only claim/lease, completion, retry, and
+readiness RPCs feed the existing ADMIN operational telemetry V2 writer using a
+stable server-derived execution key; duplicate delivery replays without
+double-counting, and delivery failure never rolls back a committed session.
+
+The outbox has no learner identifier and accepts no learner content, transcript,
+answer, note, audio, inference, prompt/response, secret, provider object, raw
+exception, or raw database error. The migration also repairs the existing V2
+telemetry writer's provisional `academy_students.status` binding to the
+integrated identity contract's `lifecycle_status` without changing its public
+signature or vocabulary. It depends on migrations `20260810151000` and
+`20260808121000`, has normalized SHA-256
+`f3685d4457141a9a00ddf32a23be27daa3f552d7061b42838fb41b4645e4f340`, and has
+not been applied to a hosted project. See
+`docs/study-session-telemetry-outbox.md`.
+
 ## Supabase: Study Effective Settings V2 (2026-08-10)
 
 Tracked migration:
