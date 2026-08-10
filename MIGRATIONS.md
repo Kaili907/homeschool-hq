@@ -76,7 +76,8 @@ The integrated ADMIN-R1 migration order is:
 7. `20260809130000_academy_admin_audit_foundation.sql`
 8. `20260809140000_academy_admin_configuration_core.sql`
 9. `20260809150000_academy_logical_voice_profile_contract.sql`
-10. `20260810140000_academy_admin_configuration_runtime_enforcement.sql`
+10. `20260810120000_academy_provider_pricing_terms.sql`
+11. `20260810140000_academy_admin_configuration_runtime_enforcement.sql`
 
 The manifest is a strict linear chain in filename order. These unique versions
 replace the parallel-branch timestamp collision; none has been applied to
@@ -117,6 +118,25 @@ Query coverage is separate from unverified provider-traffic coverage. Retained
 TEL-AI accounting-persistence gap evidence is reported separately and never
 fabricates usage or cost. This migration seeds no prices and has not been
 applied hosted. Architecture is in `docs/admin-costs-contract-v3.md`.
+
+## Admin provider pricing terms foundation (2026-08-10, not applied hosted)
+
+`supabase/migrations/20260810120000_academy_provider_pricing_terms.sql` adds the
+private effective-dated pricing-term authority used by new provider ledger rows.
+It depends on the exact cost aggregate and ADMIN-15 audit migrations, requires
+the legacy catalog/rate tables to be empty, and seeds no provider price.
+
+Terms use the ledger's provider/product/model/logical-tier/usage-unit dimensions,
+fixed USD, bigint IntegerMicros, half-open non-overlapping periods, immutable
+dimension/rate facts, per-dimension revisions, server-derived Owner authority,
+and audited future replacement/end/disable operations. Direct application-role
+table access remains denied. Missing terms return `pricing_unconfigured` or
+leave billable cost unavailable; old ledger rows are never recomputed.
+
+Anthropic cache-write pricing remains unsupported because current accounting
+does not retain a trusted five-minute versus one-hour TTL quantity split. The
+migration, Admin API, and database lookup reject that pricing dimension; a
+positive cache-write usage row fails closed to unavailable cost.
 
 ## Supabase: authorized Admin safety projection (2026-08-08)
 

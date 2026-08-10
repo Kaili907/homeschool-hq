@@ -83,6 +83,16 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/v1/provider-pricing-terms/*"
+  to = "/.netlify/functions/admin-provider-pricing-terms/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/v1/provider-pricing-terms"
+  to = "/.netlify/functions/admin-provider-pricing-terms"
+  status = 200
+
+[[redirects]]
   from = "/api/admin/curriculum/*"
   to = "/.netlify/functions/admin-curriculum/:splat"
   status = 200

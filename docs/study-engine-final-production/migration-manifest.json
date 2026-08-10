@@ -195,10 +195,20 @@
       "supersessionStatus": "current"
     },
     {
+      "version": "20260810120000",
+      "filename": "20260810120000_academy_provider_pricing_terms.sql",
+      "sha256": "40baeb9f0554059462a5fd22ff7e3159273133c35f85522421c763ac33d8e6ff",
+      "dependency": "20260809150000_academy_logical_voice_profile_contract.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-provider-pricing-terms-v1",
+      "supersessionStatus": "current"
+    },
+    {
       "version": "20260810140000",
       "filename": "20260810140000_academy_admin_configuration_runtime_enforcement.sql",
       "sha256": "b8833bd7fcaf3cc9a5a0d2744500b98e2a461bf3521aa0099b6890727026a984",
-      "dependency": "20260809150000_academy_logical_voice_profile_contract.sql",
+      "dependency": "20260810120000_academy_provider_pricing_terms.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-configuration-runtime-v1",

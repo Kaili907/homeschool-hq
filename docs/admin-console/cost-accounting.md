@@ -82,36 +82,37 @@ Null is the explicit not-applicable/unavailable representation. No current
 version may be backfilled into historical records whose execution context did
 not establish it.
 
-## Pricing catalog and effective periods
+## Pricing terms and effective periods
 
-Pricing is an immutable, server-controlled catalog. R1 currency is explicitly
-`USD` on catalog, rate, component, and usage records. A catalog version has its
-own non-overlapping half-open activation period `[effectiveFrom, effectiveTo)`.
-Trusted calculation binds exactly one active catalog version for `occurredAt`.
+Pricing is an immutable, server-controlled set of verified private terms. R1
+currency is explicitly `USD` on terms, components, and usage records. Each term
+has a non-overlapping half-open period `[effectiveFrom, effectiveUntil)`.
+Trusted calculation binds exactly one term per positive usage dimension for
+`occurredAt`.
 
-Within that catalog, a price key is:
+The price key is:
 
-`provider + providerProductId + logicalModelTier + unit + currency`
+`provider + providerProductId + providerModelId + logicalModelTier + unit + currency`
 
 For one price key, rate intervals are half-open and must not overlap. At
 `occurredAt` there is either exactly one applicable rate or none. Ties,
 overlapping rows, implicit "latest wins," and insertion-order precedence are
 invalid. A missing or ambiguous rate makes cost unavailable.
 
-Canonical pricing units are `input_token`, `output_token`,
-`cached_input_read_token`, `cached_input_write_token`, `tts_character`, and
-`request`.
+Supported pricing units are Anthropic `input_token`, `output_token`,
+`cached_input_read_token`, and `request`, plus ElevenLabs `tts_character` and
+`request`. A generic Anthropic cache-write term is unsupported until trusted
+per-TTL quantities exist.
 
-Each calculated component snapshots its immutable rate ID, catalog version,
-product/tier/unit/currency, component-specific effective interval, unit size,
-price micros, quantity, and component cost micros. Components in one usage
-record share one catalog version but may legitimately reference rates with
-different effective start/end dates. There is no single `priceEffectiveAt`
-field.
+Each calculated component snapshots its immutable term ID/revision,
+product/model/tier/unit/currency, component-specific effective interval, unit
+size, price micros, quantity, and component cost micros. Components in one
+usage record may legitimately reference terms with different effective
+start/end dates. There is no single `priceEffectiveAt` field.
 
-Historical catalog/rate versions and component snapshots are not overwritten or
-deleted. Dashboards sum stored costs; they do not recalculate history using a
-current catalog.
+Historical terms and component snapshots are not overwritten or deleted.
+Dashboards sum stored costs; they do not recalculate history using a current
+term.
 
 ## Exact arithmetic
 
