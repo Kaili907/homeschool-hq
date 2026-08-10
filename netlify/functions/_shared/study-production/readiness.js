@@ -114,6 +114,23 @@ async function optionalOperationalState(probe) {
   }
 }
 
+async function effectiveSettingsState(probe) {
+  if (typeof probe !== 'function') return 'not-ready'
+  try {
+    const result = await probe()
+    const status = typeof result === 'string' ? result : result?.status
+    return status === 'ready' ? 'ready' : 'not-ready'
+  } catch {
+    return 'not-ready'
+  }
+}
+
+function weakestState(...states) {
+  if (states.includes('not-ready')) return 'not-ready'
+  if (states.includes('degraded')) return 'degraded'
+  return 'ready'
+}
+
 function aggregateStatus(registrations) {
   if (registrations.some(({ status }) => status === 'not-ready')) return 'not-ready'
   if (registrations.some(({ status }) => status === 'degraded')) return 'degraded'
@@ -143,6 +160,7 @@ export function createStudyProductionReadinessService(options = {}) {
     const [
       identity,
       academic,
+      effectiveSettings,
       safetyDurable,
       policyEvidence,
       recipient,
@@ -158,6 +176,7 @@ export function createStudyProductionReadinessService(options = {}) {
     ] = await Promise.all([
       identityState(identityVerifier),
       optionalOperationalState(options.academicReadiness),
+      effectiveSettingsState(options.effectiveSettingsReadiness),
       durableState(durablePorts),
       productionPolicyState(durablePorts),
       optionalOperationalState(session17.authorizedRecipientResolver),
@@ -195,6 +214,10 @@ export function createStudyProductionReadinessService(options = {}) {
     // The safety reconciliation probe does not prove the Session 13 academic
     // RPC set. Those adapters require their own injected live probe.
     for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) statusByDependency.set(key, academic)
+    statusByDependency.set(
+      'parent-settings-adapter',
+      weakestState(academic, effectiveSettings),
+    )
     for (const key of SAFETY_DURABLE_DEPENDENCIES) statusByDependency.set(key, safetyDurable)
     statusByDependency.set('outbox-store', adultReviewStatus)
     statusByDependency.set('rate-limiter', limiter === 'ready' ? adultReviewStatus : limiter)

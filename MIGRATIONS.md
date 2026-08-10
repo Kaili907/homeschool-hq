@@ -38,6 +38,23 @@ validator. Canonical LF SHA-256:
 `d111cd566a39fb016cade408b5a64adb46d98ec9a8155f1060ac67d62053cd74`.
 This migration has not been applied to a hosted Supabase project.
 
+## Supabase: Study Effective Settings V2 (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql`.
+
+The additive migration creates typed private Admin-default and safety-policy
+singletons plus the authorized `academy_study_effective_settings_v2(uuid,date)`
+RPC. The RPC preserves `admin_default < guardian < accommodation < safety`,
+keeps Admin `required_break_interval_minutes` separate from guardian
+`minimumBreakCount`, returns only `ready`, `manual_review`, or `unavailable`, and
+exposes minimized per-field source categories without private content. Both
+tables use forced RLS with no application-role table grants; only
+`authenticated` can execute the RPC, which derives household access server-side.
+V1 remains unchanged. This migration has not been applied to a hosted project.
+See `docs/study-effective-settings-v2.md` and
+`supabase/study-effective-settings-v2.db.test.ts`.
+
 ## Supabase: Academy Admin authorization foundation (2026-08-08)
 
 Tracked migration:

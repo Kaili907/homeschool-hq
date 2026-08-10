@@ -10,6 +10,7 @@ import type {
   StudySessionRecord,
   Uuid,
 } from './types'
+import type { StudyEffectiveSettingsResult } from '../../effectiveSettings'
 
 export interface StudyPersistencePort {
   createSession(
@@ -59,7 +60,7 @@ export interface StudyParentSettingsPort {
     expectedRevision: number,
     idempotencyKey: string,
   ): Promise<StoredResult>
-  effectiveSettings(studentId: Uuid, effectiveDate?: string): Promise<Record<string, unknown>>
+  effectiveSettings(studentId: Uuid, effectiveDate?: string): Promise<StudyEffectiveSettingsResult>
 }
 
 export interface StudyAdultPrivatePort {
