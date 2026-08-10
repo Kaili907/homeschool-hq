@@ -23,9 +23,15 @@ async function fetchChunk<T>(path: string): Promise<T> {
   const request = fetch(path).then(async (res) => {
     if (!res.ok) {
       cache.delete(key)
+      if (res.status === 504) {
+        throw new Error(`pinned curriculum chunk ${path} is unavailable offline`)
+      }
       throw new Error(`curriculum chunk ${path}: HTTP ${res.status}`)
     }
     return (await res.json()) as unknown
+  }, () => {
+    cache.delete(key)
+    throw new Error(`pinned curriculum chunk ${path} is unavailable offline`)
   })
   cache.set(key, request)
   request.catch(() => cache.delete(key))
