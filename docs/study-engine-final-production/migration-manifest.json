@@ -183,6 +183,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "curriculum_binding_version:1->2",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810154000",
+      "filename": "20260810154000_academy_study_bound_content_authority.sql",
+      "sha256": "09162c2cbe8cd9abcf34654a68c53177786c889a967d3ae8801bf2fec8101251",
+      "dependency": "20260810153000_academy_study_release_registry_bridge.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "study-bound-content-authority-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

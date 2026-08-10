@@ -17,6 +17,7 @@ const files = [
   './migrations/20260810120000_academy_study_effective_settings_v2.sql',
   './migrations/20260810150000_academy_study_curriculum_binding.sql',
   './migrations/20260810153000_academy_study_release_registry_bridge.sql',
+  './migrations/20260810154000_academy_study_bound_content_authority.sql',
 ] as const
 
 const sql = Promise.all(files.map((path) =>
@@ -366,6 +367,48 @@ describe.sequential('Study immutable curriculum release binding', () => {
       from public.academy_study_sessions
       where id = 'session-forged-manifest'
     `)).rows[0].count).toBe(0)
+  })
+
+  it('projects exact-session content authority and learner course scope only to the trusted server', async () => {
+    const authority = await service(() => rpc<Record<string, unknown>>(`
+      select public.academy_study_read_bound_content_authority_v1(
+        $1::text, 'session-bound-a'
+      ) as result
+    `, [sessionDigest]))
+    expect(authority).toEqual({
+      schemaVersion: 1,
+      status: 'ready',
+      session: {
+        sessionRef: 'session-bound-a',
+        lessonRef: 'lesson-session-bound-a',
+        subjectRef: 'math',
+        intendedLocalDate: '2026-08-10',
+      },
+      learnerScope: { eligibleCourseRefs: ['ma-g5-mathematics'] },
+      curriculumBinding: {
+        schemaVersion: 1,
+        status: 'bound',
+        releaseId: RELEASE_ID,
+        packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
+        releaseVersion: '1.0.0',
+        curriculumManifestSha256: MANIFEST_SHA,
+        sourceRoot: 'curriculum-content/manuel-academy/1.0.0',
+      },
+    })
+    await expect(guardian(GUARDIAN_A, () => rpc(`
+      select public.academy_study_read_bound_content_authority_v1(
+        $1::text, 'session-bound-a'
+      ) as result
+    `, [sessionDigest]))).rejects.toThrow()
+    await expect(service(() => rpc<Record<string, unknown>>(`
+      select public.academy_study_read_bound_content_authority_v1(
+        $1::text, 'session-out-of-scope'
+      ) as result
+    `, [sessionDigest]))).resolves.toEqual({
+      schemaVersion: 1,
+      status: 'unavailable',
+      reasonCode: 'study-session-unavailable',
+    })
   })
 
   it('returns bounded missing, unsupported, unavailable, and mismatch results', async () => {

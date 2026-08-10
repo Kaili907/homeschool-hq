@@ -35,6 +35,7 @@ export const STUDY_RPC = {
   effectiveSettings: 'academy_study_effective_settings',
   effectiveSettingsV2: 'academy_study_effective_settings_v2',
   curriculumBindingReadiness: 'academy_study_curriculum_binding_readiness_v1',
+  readBoundContentAuthority: 'academy_study_read_bound_content_authority_v1',
   appendAdultNote: 'academy_study_append_adult_note',
   listAdultNoteMetadata: 'academy_study_list_adult_note_metadata',
   readAdultNote: 'academy_study_read_adult_note',
