@@ -53,6 +53,17 @@ describe('Admin costs browser contract', () => {
     })).toBeNull()
   })
 
+  it('accepts the bounded Study cost breakdown label', () => {
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel({
+      ...source,
+      breakdowns: {
+        ...source.breakdowns,
+        engines: [{ ...source.breakdowns.engines[0], key: 'study', label: 'Study' }],
+      },
+    })?.breakdowns.engines[0]).toMatchObject({ key: 'study', label: 'Study' })
+  })
+
   it('keeps unavailable money null and never coerces it to zero', () => {
     const source = costsModelFixture()
     const model = parseAdminCostsModel({

@@ -3,7 +3,7 @@ import { reject } from './http.js'
 
 export const ADMIN_COST_GROUP_LIMIT = 384
 
-const ENGINES = new Set(['tutor', 'jarvis', 'tts'])
+const ENGINES = new Set(['tutor', 'study', 'jarvis', 'tts'])
 const PROVIDERS = new Set(['anthropic', 'elevenlabs'])
 const COST_KINDS = new Set(['calculated', 'reconciled', 'unavailable'])
 const BILLING_DISPOSITIONS = new Set(['billable', 'not_billable', 'unknown'])
@@ -208,7 +208,13 @@ function present(groupValue) {
 
 function label(dimension, key) {
   if (dimension === 'engine') {
-    return key === 'tutor' ? 'Tutor' : key === 'jarvis' ? 'Jarvis' : 'Text to speech'
+    return key === 'tutor'
+      ? 'Tutor'
+      : key === 'study'
+        ? 'Study'
+        : key === 'jarvis'
+          ? 'Jarvis'
+          : 'Text to speech'
   }
   if (dimension === 'provider') return key === 'anthropic' ? 'Anthropic' : 'ElevenLabs'
   if (dimension === 'logical_tier') {
