@@ -9,6 +9,11 @@ import {
   createAdminConfigurationSource,
 } from './_shared/admin-configuration-source.js'
 import {
+  projectAdminRuntimeConfiguration,
+  resolveEffectiveRuntimeConfiguration,
+} from './_shared/admin-runtime-configuration.js'
+import { TTS_VOICE_CATALOG } from './_shared/tts-catalog.js'
+import {
   assertExactObject,
   errorResponse,
   hasQuery,
@@ -113,6 +118,9 @@ export function createAdminConfigurationHandler(overrides = {}) {
     serviceClient: overrides.serviceClient,
     mutationClientFactory: overrides.mutationClientFactory,
   })
+  const catalog = overrides.catalog ?? TTS_VOICE_CATALOG
+  const effectiveResolver = overrides.effectiveResolver
+    ?? ((projection) => resolveEffectiveRuntimeConfiguration(projection, { env, catalog }))
   const tokenFactory = overrides.tokenFactory ?? (() => randomBytes(32).toString('base64url'))
 
   return async (event) => {
@@ -133,7 +141,17 @@ export function createAdminConfigurationHandler(overrides = {}) {
     const authorized = await authorization.require(event, capability)
     if (!authorized.ok) return authorized.response
     try {
-      if (isRead) return jsonResponse(200, await source.read())
+      if (isRead) {
+        const saved = await source.read()
+        try {
+          return jsonResponse(200, projectAdminRuntimeConfiguration(
+            saved,
+            await effectiveResolver(saved),
+          ))
+        } catch {
+          throw new AdminConfigurationSourceError('source_unavailable')
+        }
+      }
       if (isPreview) {
         const request = parseConfigurationPreviewRequest(event)
         const confirmationToken = tokenFactory()

@@ -190,10 +190,27 @@ function normalizeJarvisContext(value) {
   }
 }
 
-export function validateAnthropicRequest(value) {
-  const request = assertExactObject(value, ['mode', 'modelTier', 'context', 'messages'])
+export function validateAnthropicRequest(value, modelPolicy = {
+  approvedTiers: Object.keys(ANTHROPIC_MODELS),
+  defaultTier: 'sonnet',
+}) {
+  const request = assertExactObject(value, ['mode', 'context', 'messages'], ['modelTier'])
   if (request.mode !== 'tutor' && request.mode !== 'jarvis') reject(400, 'unknown_mode')
-  const modelTier = enumString(request.modelTier, new Set(Object.keys(ANTHROPIC_MODELS)))
+  const hardTiers = new Set(Object.keys(ANTHROPIC_MODELS))
+  const approvedTiers = new Set(
+    Array.isArray(modelPolicy?.approvedTiers)
+      ? modelPolicy.approvedTiers.filter((tier) => hardTiers.has(tier))
+      : [],
+  )
+  const defaultTier = typeof modelPolicy?.defaultTier === 'string'
+    && approvedTiers.has(modelPolicy.defaultTier)
+    ? modelPolicy.defaultTier
+    : null
+  if (!defaultTier) reject(503, 'gateway_disabled')
+  const modelTier = request.modelTier === undefined
+    ? defaultTier
+    : enumString(request.modelTier, hardTiers)
+  if (!approvedTiers.has(modelTier)) reject(403, 'model_tier_not_approved')
   const messages = normalizeMessages(request.messages)
   const context =
     request.mode === 'tutor' ? normalizeTutorContext(request.context) : normalizeJarvisContext(request.context)

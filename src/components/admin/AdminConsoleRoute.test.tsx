@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import type { AdminEngineId } from '../../admin/admin0Vocabulary'
 import { ADMIN_ROLE_CAPABILITIES } from '../../admin/contracts'
-import { adminRouteEngine, adminRouteSection, presentationAuthorization } from './AdminConsoleRoute'
+import {
+  adminRouteEngine,
+  adminRouteSection,
+  configurationReadStateAfterCommit,
+  configurationRetryAfterCommit,
+  presentationAuthorization,
+} from './AdminConsoleRoute'
 
 describe('Admin Console integration route', () => {
   it.each([
@@ -61,5 +67,10 @@ describe('Admin Console integration route', () => {
       role,
       capabilities: ADMIN_ROLE_CAPABILITIES[role],
     })).toEqual({ status: 'authorized', role, capabilities: ADMIN_ROLE_CAPABILITIES[role] })
+  })
+
+  it('invalidates browser state after commit and triggers an authoritative reread', () => {
+    expect(configurationReadStateAfterCommit()).toEqual({ status: 'loading' })
+    expect(configurationRetryAfterCommit(4)).toBe(5)
   })
 })

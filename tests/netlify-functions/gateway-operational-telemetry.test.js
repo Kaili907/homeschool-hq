@@ -4,9 +4,10 @@ import {
   createGatewayOperationalTelemetry,
   recordGatewayTerminal,
 } from '../../netlify/functions/_shared/gateway-telemetry.js'
-import { createAnthropicHandler } from '../../netlify/functions/anthropic.js'
-import { createTtsHandler } from '../../netlify/functions/tts.js'
+import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netlify/functions/anthropic.js'
+import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
 import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catalog.js'
+import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
 
 const HOUSEHOLD_ID = '10000000-0000-4000-8000-000000000001'
 const TTS_CATALOG = createTtsVoiceCatalog({
@@ -30,6 +31,18 @@ const ENV = Object.freeze({
   ACADEMY_GATEWAY_ENGINE_VERSION: 'gateway-v3',
   ACADEMY_JARVIS_ENGINE_VERSION: 'jarvis-v2',
 })
+
+const runtimeConfigurationSource = Object.freeze({
+  read: async () => savedRuntimeConfigurationProjection(),
+})
+
+function createAnthropicHandler(overrides) {
+  return createBaseAnthropicHandler({ runtimeConfigurationSource, ...overrides })
+}
+
+function createTtsHandler(overrides) {
+  return createBaseTtsHandler({ runtimeConfigurationSource, ...overrides })
+}
 
 function access(overrides = {}) {
   return {

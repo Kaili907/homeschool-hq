@@ -21,11 +21,14 @@ describe('System Health telemetry source', () => {
     await expect(source.list()).rejects.toThrow('health_source_unavailable')
   })
 
-  it('derives disabled states only from server-owned exact-default-off gates', () => {
+  it('uses resolved AI/TTS flags while Study remains exact-default-off env-owned', () => {
     expect([...disabledHealthEngines({})]).toEqual(['study', 'tts', 'gateway'])
     expect([...disabledHealthEngines({
       ACADEMY_STUDY_ENABLED: 'true', ACADEMY_TTS_ENABLED: 'on', ACADEMY_AI_ENABLED: '1',
-    })]).toEqual([])
-    expect([...disabledHealthEngines({ ACADEMY_STUDY_ENABLED: 'true' })]).toEqual(['tts', 'gateway'])
+    }, { aiEnabled: true, ttsEnabled: true })]).toEqual([])
+    expect([...disabledHealthEngines(
+      { ACADEMY_STUDY_ENABLED: 'true', ACADEMY_TTS_ENABLED: 'off', ACADEMY_AI_ENABLED: 'off' },
+      { aiEnabled: false, ttsEnabled: false },
+    )]).toEqual(['tts', 'gateway'])
   })
 })

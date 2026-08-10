@@ -24,9 +24,14 @@ The functions require:
   `ACADEMY_TTS_ENGINE_VERSION` values when those engines are independently
   versioned.
 
-`ACADEMY_AI_ENABLED=false` and `ACADEMY_TTS_ENABLED=false` are optional
-administrator kill switches. Missing keys, missing Supabase configuration, or
-an empty TTS voice allowlist fail closed.
+The gateway reads the authoritative ADMIN-14A snapshot through the service-only
+configuration RPC on every request. Saved AI/TTS disables are enforced, while
+`ACADEMY_AI_ENABLED` and `ACADEMY_TTS_ENABLED` remain stronger deployment-owned
+enablement ceilings. Saved daily quotas are also bounded by the existing
+deployment/code ceilings (`ACADEMY_AI_DAILY_LIMIT`, default 50;
+`ACADEMY_TTS_DAILY_LIMIT`, default 100). Missing configuration authority,
+missing Supabase configuration, or an empty deployable TTS logical-voice
+catalog fails closed before quota or provider use.
 
 The Supabase anon key is public by design. The service-role key is a server-only
 credential and is never accepted from or returned to the browser.
@@ -75,10 +80,13 @@ Exact envelope:
 }
 ```
 
-Allowed modes are `tutor` and `jarvis`; allowed logical tiers are `sonnet` and
-`haiku`. The server maps those tiers to its fixed model allowlist. Provider
-model IDs, `system`, `max_tokens`, tools, sampling settings, metadata, and
-unknown fields are rejected.
+Allowed modes are `tutor` and `jarvis`; the only code-owned logical tiers are
+`sonnet` and `haiku`. `modelTier` is an untrusted preference, not provider
+authority. The server keeps it only when it is in the effective Admin-approved
+set and otherwise selects the effective Admin default. Unknown tiers are still
+rejected. The server maps the selected logical tier to its fixed provider-model
+allowlist. Provider model IDs, `system`, `max_tokens`, tools, sampling settings,
+metadata, and unknown fields are rejected.
 
 Tutor context is question-scoped and explicitly rejects `graded: true`. Its
 static server policy provides hints one step at a time, refuses assessed or
@@ -142,20 +150,24 @@ Exact body:
 ```json
 {
   "text": "Let's work through one small step.",
-  "voiceId": "approved-voice-id"
+  "voiceRef": "academy.tts.clear-guide",
+  "voiceVersion": "v1"
 }
 ```
 
-All other paths and query strings are rejected. `voiceId` must match the
-server-owned `ELEVENLABS_ALLOWED_VOICE_IDS` allowlist. Provider model, output
-format, voice settings, URL/path, latency, seed, and unknown fields are
-rejected.
+All other paths and query strings are rejected. The logical `voiceRef` and
+`voiceVersion` must resolve through the private server catalog to an active,
+approved, deployment-available entry. Provider IDs never cross the browser
+boundary. Provider model, output format, voice settings, URL/path, latency,
+seed, and unknown fields are rejected.
 
 Limits:
 
 - decoded request body: 8 KiB;
 - text: 1–1,000 characters;
-- voice ID: at most 64 characters using letters, numbers, `_`, or `-`;
+- logical voice reference: at most 128 characters in the
+  `academy.tts.<slug>` namespace;
+- voice version: at most 64 bounded identifier characters;
 - returned MP3: at most 4 MiB before base64 encoding.
 
 The function calls one fixed ElevenLabs text-to-speech endpoint with a

@@ -143,7 +143,13 @@ function sources(overrides = {}) {
 function handler(overrides = {}) {
   return createAdminOverviewHandler({
     authorization: authorization(), sources: sources(), now: () => NOW,
-    env: { CONTEXT: 'production', APP_VERSION: 'build-2026.08.09' }, ...overrides,
+    env: {
+      CONTEXT: 'production', APP_VERSION: 'build-2026.08.09', ACADEMY_STUDY_ENABLED: 'true',
+    },
+    runtimeConfigurationResolver: {
+      resolve: vi.fn(async () => ({ values: { aiEnabled: true, ttsEnabled: true } })),
+    },
+    ...overrides,
   })
 }
 
@@ -215,6 +221,32 @@ describe('Admin Overview authorization composition', () => {
       availability: 'available', completeness: 'complete',
       window: { label: 'Engine performance: trailing 30 days (one-hour retention margin)' },
     })
+  })
+
+  it('uses resolved AI/TTS flags for Health and fails closed if resolution throws', async () => {
+    const disabled = await handler({
+      runtimeConfigurationResolver: {
+        resolve: vi.fn(async () => ({ values: { aiEnabled: false, ttsEnabled: false } })),
+      },
+    })(event())
+    expect(body(disabled).engineHealth.data.engines).toEqual(expect.arrayContaining([
+      expect.objectContaining({ engineId: 'gateway', health: 'disabled' }),
+      expect.objectContaining({ engineId: 'tts', health: 'disabled' }),
+      expect.objectContaining({ engineId: 'study', health: 'unknown' }),
+    ]))
+
+    const unavailable = await handler({
+      runtimeConfigurationResolver: {
+        resolve: vi.fn(async () => { throw new Error('SECRET configuration detail') }),
+      },
+    })(event())
+    expect(unavailable.statusCode).toBe(200)
+    expect(body(unavailable).engineHealth.data.engines).toEqual(expect.arrayContaining([
+      expect.objectContaining({ engineId: 'gateway', health: 'disabled' }),
+      expect.objectContaining({ engineId: 'tts', health: 'disabled' }),
+      expect.objectContaining({ engineId: 'study', health: 'unknown' }),
+    ]))
+    expect(unavailable.body).not.toContain('SECRET')
   })
 })
 

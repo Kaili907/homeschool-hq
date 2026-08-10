@@ -9,23 +9,84 @@ import { AdminConfigurationSourceError } from './_shared/admin-configuration-sou
 
 const TOKEN = 'A'.repeat(43)
 const REQUEST_ID = '10000000-0000-4000-8000-000000000101'
-const SETTING = Object.freeze({
-  key: 'runtime.ai.enabled',
-  value: false,
-  revision: '1',
-  requiredCapability: 'configuration:manage',
-  protectiveCapability: 'engines:operate',
-  warningLevel: 'critical',
-  bounds: null,
-  allowlist: null,
-  deploymentCeilingType: 'boolean_enablement',
-  registryVersion: 1,
-  integrationStatus: 'pending_runtime_integration',
-})
+const CONFIGURATION_KEYS = Object.freeze([
+  'runtime.ai.enabled',
+  'runtime.tts.enabled',
+  'quota.ai.requests_per_account_day',
+  'quota.tts.requests_per_account_day',
+  'cost.warning.monthly_micros',
+  'cost.critical.monthly_micros',
+  'ai.approved_tiers',
+  'ai.default_tier',
+])
+
+function savedValue(key) {
+  if (key.startsWith('runtime.')) return false
+  if (key === 'quota.ai.requests_per_account_day') return 50
+  if (key === 'quota.tts.requests_per_account_day') return 200
+  if (key === 'cost.warning.monthly_micros') return '10000000'
+  if (key === 'cost.critical.monthly_micros') return '25000000'
+  if (key === 'ai.approved_tiers') return Object.freeze(['sonnet', 'haiku'])
+  return 'sonnet'
+}
+
+function savedSetting(key) {
+  const isRuntime = key.startsWith('runtime.')
+  const isQuota = key.startsWith('quota.')
+  const isCost = key.startsWith('cost.')
+  const isApproved = key === 'ai.approved_tiers'
+  return Object.freeze({
+    key,
+    value: savedValue(key),
+    revision: '1',
+    requiredCapability: 'configuration:manage',
+    protectiveCapability: isRuntime ? 'engines:operate' : null,
+    warningLevel: isRuntime || isApproved || key === 'cost.critical.monthly_micros'
+      ? 'critical' : 'warning',
+    bounds: isQuota
+      ? Object.freeze({ minimum: '1', maximum: key.includes('.ai.') ? '200' : '1000' })
+      : isCost ? Object.freeze({ minimum: '1', maximum: '1000000000000' }) : null,
+    allowlist: key.startsWith('ai.') ? Object.freeze(['sonnet', 'haiku']) : null,
+    deploymentCeilingType: isRuntime ? 'boolean_enablement'
+      : isQuota ? 'integer_maximum'
+        : isCost ? 'integer_micros_maximum'
+          : isApproved ? 'allowlist_subset' : 'allowlist_member',
+    registryVersion: 1,
+    integrationStatus: 'pending_runtime_integration',
+  })
+}
+
+const SETTINGS = Object.freeze(CONFIGURATION_KEYS.map(savedSetting))
 const READ_RESULT = Object.freeze({
   schemaVersion: 2,
   integrationStatus: 'pending_runtime_integration',
-  settings: [SETTING],
+  settings: SETTINGS,
+})
+function runtimeState(setting) {
+  const isCost = setting.key.startsWith('cost.')
+  const isTts = setting.key === 'runtime.tts.enabled'
+    || setting.key === 'quota.tts.requests_per_account_day'
+  return Object.freeze({
+    classification: isCost ? 'NOT_YET_ENFORCEABLE' : 'ENFORCEABLE_NOW',
+    effectiveValue: isCost ? null : setting.value,
+    enforcement: isCost ? 'unavailable' : 'enforced',
+    resolution: isCost ? 'unavailable' : 'saved',
+    reason: isCost ? 'runtime_consumer_unavailable' : 'saved_value_enforced',
+    trustedConsumer: isCost ? null : isTts ? 'tts_gateway' : 'anthropic_gateway',
+    studyStatus: isCost ? 'not_applicable' : 'unavailable',
+  })
+}
+const RUNTIME = Object.freeze(Object.fromEntries(
+  SETTINGS.map((setting) => [setting.key, runtimeState(setting)]),
+))
+const EFFECTIVE_READ_RESULT = Object.freeze({
+  schemaVersion: 2,
+  integrationStatus: 'pending_runtime_integration',
+  runtimeStatus: 'partial_runtime_enforcement',
+  settings: SETTINGS.map((setting) => Object.freeze({
+    ...setting,
+    runtime: RUNTIME[setting.key],
+  })),
 })
 const PREVIEW_RESULT = Object.freeze({
   schemaVersion: 2,
@@ -94,7 +155,7 @@ const AUTHORIZED = Object.freeze({
   accessToken: 'pinned-access-token',
 })
 
-function setup({ auth = AUTHORIZED, sourceError } = {}) {
+function setup({ auth = AUTHORIZED, sourceError, resolverError } = {}) {
   const authorization = { require: vi.fn(async () => auth) }
   const source = {
     read: vi.fn(async () => {
@@ -110,23 +171,45 @@ function setup({ auth = AUTHORIZED, sourceError } = {}) {
       return COMMIT_RESULT
     }),
   }
+  const effectiveResolver = vi.fn(async (projection) => {
+    if (resolverError) throw resolverError
+    return { runtime: RUNTIME, projection }
+  })
   return {
-    handler: createAdminConfigurationHandler({ authorization, source, tokenFactory: () => TOKEN }),
+    handler: createAdminConfigurationHandler({
+      authorization,
+      source,
+      tokenFactory: () => TOKEN,
+      effectiveResolver,
+    }),
     authorization,
     source,
+    effectiveResolver,
   }
 }
 
 describe('Admin configuration API', () => {
-  it('requires configuration:read and returns only the sanitized pending-integration projection', async () => {
-    const { handler, authorization, source } = setup()
+  it('requires configuration:read and returns only the trusted runtime-effective projection', async () => {
+    const { handler, authorization, source, effectiveResolver } = setup()
     const response = await handler(event())
     expect(response.statusCode).toBe(200)
-    expect(JSON.parse(response.body)).toEqual(READ_RESULT)
+    expect(JSON.parse(response.body)).toEqual(EFFECTIVE_READ_RESULT)
     expect(authorization.require).toHaveBeenCalledWith(expect.anything(), 'configuration:read')
     expect(source.read).toHaveBeenCalledOnce()
+    expect(effectiveResolver).toHaveBeenCalledOnce()
+    expect(effectiveResolver).toHaveBeenCalledWith(READ_RESULT)
     expect(response.headers['cache-control']).toBe('no-store')
     expect(response.body).not.toMatch(/secret|token|actor|assignment/i)
+  })
+
+  it('fails closed when trusted effective resolution fails', async () => {
+    const { handler } = setup({ resolverError: new Error('resolver SECRET') })
+    const response = await handler(event())
+    expect(response.statusCode).toBe(503)
+    expect(response.body).toBe(JSON.stringify({
+      error: { code: 'configuration_source_unavailable' },
+    }))
+    expect(response.body).not.toContain('SECRET')
   })
 
   it('requires configuration:manage for preview and returns the raw token only once from the API', async () => {
@@ -177,6 +260,12 @@ describe('Admin configuration API', () => {
     [previewBody({ newValue: 'true' })],
     [previewBody({ reasonCode: 'free text' })],
     [previewBody({ extra: 'field' })],
+    [previewBody({ effectiveValue: true })],
+    [previewBody({ enforcement: 'enforced' })],
+    [previewBody({ enforced: true })],
+    [previewBody({ runtimeStatus: 'partial_runtime_enforcement' })],
+    [previewBody({ role: 'owner' })],
+    [previewBody({ capabilities: ['configuration:manage'] })],
     [{ ...previewBody(), requestId: REQUEST_ID }],
   ])('rejects narrow preview request %j', async (body) => {
     const { handler, source } = setup()
@@ -194,6 +283,11 @@ describe('Admin configuration API', () => {
     [commitBody({ settingKey: 'cost.warning.monthly_micros', newValue: 1000 })],
     [commitBody({ settingKey: 'cost.warning.monthly_micros', newValue: '01' })],
     [commitBody({ settingKey: 'ai.approved_tiers', newValue: ['opus'] })],
+    [commitBody({ effectiveValue: true })],
+    [commitBody({ enforced: true })],
+    [commitBody({ runtimeStatus: 'partial_runtime_enforcement' })],
+    [commitBody({ role: 'owner' })],
+    [commitBody({ capabilities: ['configuration:manage'] })],
   ])('rejects narrow commit request %j', async (body) => {
     const { handler, source } = setup()
     const response = await handler(post('/api/admin/v1/configuration/commit', body))

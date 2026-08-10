@@ -4,6 +4,7 @@ import {
   disabledHealthEngines,
 } from './_shared/admin-health-source.js'
 import { errorResponse, jsonResponse } from './_shared/http.js'
+import { createRuntimeConfigurationResolver } from './_shared/admin-runtime-configuration.js'
 import {
   SYSTEM_HEALTH_WINDOWS,
   buildSystemHealthProjection,
@@ -53,11 +54,26 @@ export function createAdminHealthHandler(overrides = {}) {
     if (!authorized.ok) return authorized.response
 
     try {
+      let runtimeValues = { aiEnabled: false, ttsEnabled: false }
+      if (overrides.disabledEngines === undefined) {
+        try {
+          const runtimeConfigurationResolver = overrides.runtimeConfigurationResolver
+            ?? createRuntimeConfigurationResolver({
+              env,
+              fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
+              source: overrides.runtimeConfigurationSource,
+              serviceClient: overrides.configurationClient,
+            })
+          runtimeValues = (await runtimeConfigurationResolver.resolve()).values
+        } catch {
+          // Injected resolvers fail closed just like the production resolver.
+        }
+      }
       const evidence = await source.list()
       const projection = buildSystemHealthProjection(evidence.events, {
         now: now(),
         selectedWindow: window,
-        disabledEngines: overrides.disabledEngines ?? disabledHealthEngines(env),
+        disabledEngines: overrides.disabledEngines ?? disabledHealthEngines(env, runtimeValues),
         sourceTruncated: evidence.sourceTruncated,
         rejectedRows: evidence.rejectedRows,
       })

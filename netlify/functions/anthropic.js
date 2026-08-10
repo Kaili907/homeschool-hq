@@ -1,6 +1,7 @@
 /** Authenticated, policy-owned Netlify gateway for Anthropic Messages. */
 
 import {
+  ANTHROPIC_MODELS,
   ANTHROPIC_REQUEST_LIMIT_BYTES,
   buildAnthropicProviderBody,
   extractAnthropicText,
@@ -9,7 +10,6 @@ import {
 } from './_shared/anthropic-policy.js'
 import {
   GatewayError,
-  envFlagEnabled,
   errorResponse,
   hasQuery,
   isTimeoutError,
@@ -19,7 +19,11 @@ import {
   responseForError,
 } from './_shared/http.js'
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
-import { createGatewayAccess, dailyLimit } from './_shared/gateway-access.js'
+import { createGatewayAccess } from './_shared/gateway-access.js'
+import {
+  createRuntimeConfigurationResolver,
+  safeRuntimeConfigurationFallback,
+} from './_shared/admin-runtime-configuration.js'
 import {
   createGatewayOperationalTelemetry,
   gatewayErrorTerminal,
@@ -37,7 +41,6 @@ const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages'
 const ANTHROPIC_VERSION = '2023-06-01'
 const ANTHROPIC_TIMEOUT_MS = 30_000
 const MAX_ANTHROPIC_RESPONSE_BYTES = 256 * 1024
-const DEFAULT_ANTHROPIC_DAILY_LIMIT = 50
 const ALLOWED_PATHS = new Set(['/api/anthropic/v1/messages', '/.netlify/functions/anthropic'])
 
 export function createAnthropicHandler(overrides = {}) {
@@ -57,7 +60,20 @@ export function createAnthropicHandler(overrides = {}) {
       const auth = await verifySupabaseBearer(event, { fetchImpl, env })
       if (!auth.ok) return auth.response
 
-      if (!envFlagEnabled(env, 'ACADEMY_AI_ENABLED')) {
+      const runtimeConfigurationResolver = overrides.runtimeConfigurationResolver
+        ?? createRuntimeConfigurationResolver({
+          env,
+          fetchImpl,
+          source: overrides.runtimeConfigurationSource,
+          serviceClient: overrides.configurationClient,
+        })
+      let runtimeConfiguration
+      try {
+        runtimeConfiguration = await runtimeConfigurationResolver.resolve()
+      } catch {
+        runtimeConfiguration = safeRuntimeConfigurationFallback()
+      }
+      if (!runtimeConfiguration.values.aiEnabled) {
         return errorResponse(503, 'gateway_disabled')
       }
 
@@ -90,7 +106,19 @@ export function createAnthropicHandler(overrides = {}) {
         })
       }
 
-      const request = validateAnthropicRequest(readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES))
+      const preferredRequest = validateAnthropicRequest(
+        readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES),
+        {
+          approvedTiers: Object.keys(ANTHROPIC_MODELS),
+          defaultTier: runtimeConfiguration.values.defaultTier,
+        },
+      )
+      const request = {
+        ...preferredRequest,
+        modelTier: runtimeConfiguration.values.approvedTiers.includes(preferredRequest.modelTier)
+          ? preferredRequest.modelTier
+          : runtimeConfiguration.values.defaultTier,
+      }
       mode = request.mode
       const versions = trustedUsageVersions(env, request.mode)
 
@@ -105,7 +133,7 @@ export function createAnthropicHandler(overrides = {}) {
       await access.consumeUsage(
         auth.user.id,
         'anthropic',
-        dailyLimit(env, 'ACADEMY_AI_DAILY_LIMIT', DEFAULT_ANTHROPIC_DAILY_LIMIT),
+        runtimeConfiguration.values.aiDailyLimit,
       )
 
       let upstream

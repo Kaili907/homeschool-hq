@@ -7,6 +7,7 @@ import {
 } from '../../netlify/functions/_shared/anthropic-policy.js'
 import { GatewayError } from '../../netlify/functions/_shared/http.js'
 import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netlify/functions/anthropic.js'
+import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
 
 const ENV = Object.freeze({
   SUPABASE_URL: 'https://academy.supabase.co',
@@ -41,7 +42,25 @@ function testAccess({
 }
 
 function createAnthropicHandler(overrides = {}) {
-  return createBaseAnthropicHandler({ gatewayAccess: testAccess(), ...overrides })
+  const runtimeConfigurationSource = overrides.runtimeConfigurationSource ?? {
+    read: vi.fn(async () => savedRuntimeConfigurationProjection()),
+  }
+  return createBaseAnthropicHandler({
+    gatewayAccess: testAccess(), runtimeConfigurationSource, ...overrides,
+  })
+}
+
+function runtimeResolver(overrides = {}) {
+  return {
+    resolve: vi.fn(async () => ({
+      values: {
+        aiEnabled: true, ttsEnabled: false,
+        aiDailyLimit: 50, ttsDailyLimit: 100,
+        approvedTiers: ['sonnet', 'haiku'], defaultTier: 'sonnet',
+        ...overrides,
+      },
+    })),
+  }
 }
 
 afterEach(() => {
@@ -269,6 +288,8 @@ describe('authenticated Anthropic gateway', () => {
     ['temperature', 1],
     ['userId', 'forged-user'],
     ['profileId', 'p1'],
+    ['effectiveValue', true],
+    ['enforcement', 'enforced'],
   ])('rejects forbidden provider/client field %s', async (field, value) => {
     const fetchImpl = fetchRouter()
     const result = await createAnthropicHandler({ fetchImpl, env: ENV })(event({ ...tutorRequest(), [field]: value }))
@@ -517,6 +538,64 @@ describe('authenticated Anthropic gateway', () => {
     expect(result.statusCode).toBe(200)
     expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
     expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 73)
+  })
+
+  it('uses only the trusted resolved gate and exact effective daily quota', async () => {
+    const access = testAccess()
+    const disabled = await createAnthropicHandler({
+      fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
+      runtimeConfigurationResolver: runtimeResolver({ aiEnabled: false, aiDailyLimit: 17 }),
+    })(event())
+    expect(disabled.statusCode).toBe(503)
+    expect(access.requireEntitlement).not.toHaveBeenCalled()
+
+    const enabled = await createAnthropicHandler({
+      fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
+      runtimeConfigurationResolver: runtimeResolver({ aiDailyLimit: 17 }),
+    })(event())
+    expect(enabled.statusCode).toBe(200)
+    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 17)
+  })
+
+  it('treats a known browser tier as a preference and uses the trusted default when needed', async () => {
+    const fetchImpl = fetchRouter()
+    const policy = runtimeResolver({ approvedTiers: ['haiku'], defaultTier: 'haiku' })
+    const access = testAccess()
+    const selectedFallback = await createAnthropicHandler({
+      fetchImpl, env: ENV, runtimeConfigurationResolver: policy,
+      gatewayAccess: access,
+    })(event(tutorRequest()))
+    expect(selectedFallback.statusCode).toBe(200)
+
+    const withoutTier = tutorRequest()
+    delete withoutTier.modelTier
+    const allowed = await createAnthropicHandler({
+      fetchImpl, env: ENV, runtimeConfigurationResolver: policy,
+      gatewayAccess: access,
+    })(event(withoutTier))
+    expect(allowed.statusCode).toBe(200)
+    const providerCalls = fetchImpl.mock.calls.filter(([url]) =>
+      url === 'https://api.anthropic.com/v1/messages')
+    expect(providerCalls).toHaveLength(2)
+    expect(providerCalls.map(([, init]) => JSON.parse(init.body).model))
+      .toEqual(['claude-haiku-4-5', 'claude-haiku-4-5'])
+    expect(access.recordProviderUsage).toHaveBeenCalledTimes(2)
+    expect(access.recordProviderUsage.mock.calls.every(([usage]) =>
+      usage.logicalModelTier === 'haiku' && usage.providerModelId === 'claude-haiku-4-5'))
+      .toBe(true)
+  })
+
+  it('fails closed when the trusted resolver itself throws', async () => {
+    const fetchImpl = fetchRouter()
+    const access = testAccess()
+    const result = await createAnthropicHandler({
+      fetchImpl, env: ENV, gatewayAccess: access,
+      runtimeConfigurationResolver: { resolve: vi.fn(async () => { throw new Error('SECRET') }) },
+    })(event())
+    expect(result.statusCode).toBe(503)
+    expect(responseJson(result)).toEqual({ error: { code: 'gateway_disabled' } })
+    expect(result.body).not.toContain('SECRET')
+    expect(access.requireEntitlement).not.toHaveBeenCalled()
   })
 
   it('returns usage_limit before the provider call when the ledger is at cap', async () => {
