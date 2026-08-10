@@ -58,6 +58,13 @@ capability lists, account/household details, raw rows, and database errors. The
 Audit Log UI renders values field-by-field in a semantic table; it never dumps
 raw JSON and has no mutation control.
 
+## Granular curriculum extension
+
+The additive ADMIN-16B handoff vocabulary preserves contract version 2, the
+existing event shape, and the ungranted v1 appender signature. It adds exact
+entity and collaborator pairs plus action-aware safe-value validation. See
+[granular curriculum draft audit vocabulary](admin-curriculum-audit-vocabulary.md).
+
 ## ADMIN-14 handoff
 
 ADMIN-14 may add configuration storage and narrow configuration mutation RPCs.

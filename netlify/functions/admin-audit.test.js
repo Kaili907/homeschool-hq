@@ -91,6 +91,22 @@ describe('GET /api/admin/v1/audit', () => {
     expect(decodeAuditCursor(cursor)).toEqual({ occurredAt: EVENT.occurredAt, eventId: EVENT.eventId })
   })
 
+  it('accepts granular curriculum filters without changing pagination shape', async () => {
+    const { handler, reader } = handlerWith()
+    const response = await handler(event({
+      rawQueryString: 'action=curriculum_entity.update&resourceType=curriculum_entity&resourceRef=draft-1%2Flesson-1&limit=25',
+    }))
+    expect(response.statusCode).toBe(200)
+    expect(reader.list).toHaveBeenCalledWith({
+      action: 'curriculum_entity.update',
+      resourceType: 'curriculum_entity',
+      resourceRef: 'draft-1/lesson-1',
+      limit: 25,
+      cursor: undefined,
+    })
+    expect(JSON.parse(response.body)).toHaveProperty('nextCursor', null)
+  })
+
   it('returns a cursor only when another page exists', async () => {
     const { handler } = handlerWith({ result: { events: [EVENT], hasMore: true } })
     const body = JSON.parse((await handler(event())).body)

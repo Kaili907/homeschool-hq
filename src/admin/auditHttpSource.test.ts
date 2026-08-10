@@ -55,9 +55,51 @@ describe('authorized Admin audit browser reader', () => {
     })).rejects.toMatchObject({ code })
   })
 
+  it('accepts minimized granular curriculum entity DTOs', async () => {
+    const entityEvent = {
+      ...EVENT,
+      action: 'curriculum_entity.update',
+      resourceType: 'curriculum_entity',
+      resourceRef: 'draft-1/lesson-1',
+      resourceRevision: '4',
+      previousValue: { entity_ref: 'lesson-1', draft_revision: 3, status: 'active' },
+      newValue: {
+        entity_ref: 'lesson-1',
+        entity_type: 'lesson',
+        draft_revision: 4,
+        position: 2,
+        status: 'active',
+        tombstoned: false,
+        digest: 'a'.repeat(64),
+      },
+      reasonCode: 'curriculum.authored',
+    } as const
+    await expect(readAdminAuditPage({ limit: 50 }, null, {
+      getAccessToken: async () => 'token',
+      fetchImpl: (async () => ({
+        status: 200,
+        json: async () => ({ schemaVersion: 2, events: [entityEvent], nextCursor: null }),
+      })) as unknown as typeof fetch,
+    })).resolves.toEqual({ events: [entityEvent], nextCursor: null })
+  })
+
   it.each([
     { ...EVENT, actorRole: 'student' },
     { ...EVENT, action: 'configuration.*' },
+    {
+      ...EVENT,
+      action: 'curriculum_entity.update',
+      resourceType: 'curriculum_entity',
+      previousValue: null,
+      newValue: { lesson_body: 'private' },
+    },
+    {
+      ...EVENT,
+      action: 'curriculum_draft.collaborator.add',
+      resourceType: 'curriculum_draft',
+      previousValue: null,
+      newValue: { collaborator_ref: 'admin-1', email: 'admin@example.test' },
+    },
     { ...EVENT, newValue: { prompt: 'private learner content' } },
     { ...EVENT, newValue: { value: { nested: 'private' } } },
     { ...EVENT, newValue: { value: 'https://example.test?token=secret' } },

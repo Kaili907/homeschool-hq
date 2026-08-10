@@ -163,6 +163,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-curriculum-release-registry-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260809170000",
+      "filename": "20260809170000_academy_admin_curriculum_audit_vocabulary.sql",
+      "sha256": "0a2e350cf7b7df239961a68c759ef0e47bd162a97ba817b594382303e95f69dd",
+      "dependency": "20260809160000_academy_curriculum_release_registry.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-admin-curriculum-audit-vocabulary-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

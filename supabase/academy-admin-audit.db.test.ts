@@ -89,6 +89,10 @@ async function createDatabase() {
     new URL('./migrations/20260809130000_academy_admin_audit_foundation.sql', import.meta.url),
     'utf8',
   ))
+  await database.exec(await readFile(
+    new URL('./migrations/20260809170000_academy_admin_curriculum_audit_vocabulary.sql', import.meta.url),
+    'utf8',
+  ))
   await database.exec(`
     create function public.test_admin_audit_append(
       p_action text,
@@ -155,8 +159,10 @@ async function append(
     values.action ?? 'configuration.update',
     values.resourceType ?? 'configuration',
     values.resourceRef ?? 'ai.enabled',
-    JSON.stringify(values.previousValue ?? { value: false }),
-    JSON.stringify(values.newValue ?? { value: true }),
+    values.previousValue === null
+      ? null : JSON.stringify(values.previousValue === undefined ? { value: false } : values.previousValue),
+    values.newValue === null
+      ? null : JSON.stringify(values.newValue === undefined ? { value: true } : values.newValue),
     values.reasonCode === undefined ? 'configuration.changed' : values.reasonCode,
     values.correlationId ?? null,
   ]))
@@ -265,6 +271,119 @@ describe('ADMIN-15 append-only Admin audit database foundation', () => {
       .rejects.toThrow(/append-only/)
   })
 
+  it('keeps every existing ADMIN-15 action/resource pair valid', async () => {
+    const pairs = [
+      ['admin_role.assign', 'admin_role_assignment'],
+      ['admin_role.revoke', 'admin_role_assignment'],
+      ['configuration.update', 'configuration'],
+      ['engine.control', 'engine'],
+      ['safety.triage', 'safety_case'],
+      ['incident.acknowledge', 'incident'],
+      ['curriculum_draft.create', 'curriculum_draft'],
+      ['curriculum_draft.update', 'curriculum_draft'],
+      ['curriculum.approve', 'curriculum_release'],
+      ['curriculum.publish', 'curriculum_release'],
+      ['release.activate', 'application_release'],
+      ['release.rollback', 'application_release'],
+    ] as const
+    for (const [action, resourceType] of pairs) {
+      await expect(append(databases[0], ADMIN_ID, {
+        action, resourceType, reasonCode: null,
+      })).resolves.toBeDefined()
+    }
+  })
+
+  it('allows only the new granular curriculum action/resource pairs', async () => {
+    const database = databases[0]
+    const entityValue = {
+      entity_ref: 'lesson-1',
+      entity_type: 'lesson',
+      draft_revision: 3,
+      position: 2,
+      status: 'active',
+      tombstoned: false,
+      digest: 'a'.repeat(64),
+    }
+    for (const action of [
+      'curriculum_entity.create',
+      'curriculum_entity.update',
+      'curriculum_entity.tombstone',
+    ]) {
+      await expect(append(database, ADMIN_ID, {
+        action,
+        resourceType: 'curriculum_entity',
+        resourceRef: 'draft-1/lesson-1',
+        previousValue: entityValue,
+        newValue: {
+          ...entityValue,
+          draft_revision: 4,
+          tombstoned: action === 'curriculum_entity.tombstone',
+        },
+        reasonCode: 'curriculum.authored',
+      })).resolves.toBeDefined()
+    }
+
+    await expect(append(database, ADMIN_ID, {
+      action: 'curriculum_draft.collaborator.add',
+      resourceType: 'curriculum_draft',
+      resourceRef: 'draft-1',
+      previousValue: null,
+      newValue: { collaborator_ref: ADMIN_ID, role: 'editor', status: 'active' },
+      reasonCode: 'access.granted',
+    })).resolves.toBeDefined()
+    await expect(append(database, ADMIN_ID, {
+      action: 'curriculum_draft.collaborator.revoke',
+      resourceType: 'curriculum_draft',
+      resourceRef: 'draft-1',
+      previousValue: { collaborator_ref: ADMIN_ID, role: 'editor', status: 'active' },
+      newValue: { collaborator_ref: ADMIN_ID, role: 'editor', status: 'revoked' },
+      reasonCode: 'access.revoked',
+    })).resolves.toBeDefined()
+
+    await expect(append(database, ADMIN_ID, {
+      action: 'curriculum_entity.create',
+      resourceType: 'curriculum_draft',
+      previousValue: entityValue,
+      newValue: entityValue,
+    })).rejects.toThrow(/ACTION_RESOURCE_INVALID/)
+    await expect(append(database, ADMIN_ID, {
+      action: 'curriculum_draft.collaborator.add',
+      resourceType: 'curriculum_entity',
+      previousValue: null,
+      newValue: { collaborator_ref: ADMIN_ID, role: 'editor', status: 'active' },
+    })).rejects.toThrow(/ACTION_RESOURCE_INVALID/)
+  })
+
+  it('keeps the internal append helper ungranted after replacement', async () => {
+    const privileges = await databases[0].query<{
+      anon_execute: boolean
+      authenticated_execute: boolean
+      service_execute: boolean
+    }>(`
+      select
+        has_function_privilege(
+          'anon',
+          'academy_private.append_admin_audit_event_v1(text,text,text,text,text,jsonb,jsonb,text,uuid)',
+          'EXECUTE'
+        ) as anon_execute,
+        has_function_privilege(
+          'authenticated',
+          'academy_private.append_admin_audit_event_v1(text,text,text,text,text,jsonb,jsonb,text,uuid)',
+          'EXECUTE'
+        ) as authenticated_execute,
+        has_function_privilege(
+          'service_role',
+          'academy_private.append_admin_audit_event_v1(text,text,text,text,text,jsonb,jsonb,text,uuid)',
+          'EXECUTE'
+        ) as service_execute
+    `)
+    expect(privileges.rows).toEqual([{
+      anon_execute: false,
+      authenticated_execute: false,
+      service_execute: false,
+    }])
+  })
+
   it('validates canonical actions and their exact resource pairing', async () => {
     const database = databases[0]
     await expect(append(database, ADMIN_ID, { action: 'configuration.delete' }))
@@ -298,6 +417,64 @@ describe('ADMIN-15 append-only Admin audit database foundation', () => {
   ])('rejects prohibited, nested, URL, credential, or free-content value %j', async (newValue) => {
     await expect(append(databases[0], ADMIN_ID, { newValue }))
       .rejects.toThrow(/VALUE_INVALID/)
+  })
+
+  it.each([
+    [{ lesson_body: 'private lesson body' }],
+    [{ assessment_prompt: 'private assessment prompt' }],
+    [{ answer_guidance: 'private answer guidance' }],
+    [{ scoring_guidance: 'private scoring guidance' }],
+    [{ tutor_routes: ['private-route'] }],
+    [{ safety_narrative: 'private safety narrative' }],
+    [{ raw_curriculum_payload: { lesson: 'private' } }],
+    [{ entity_ref: 'lesson-1', arbitrary_json: { nested: true } }],
+  ])('rejects raw curriculum content from entity audit values %j', async (newValue) => {
+    await expect(append(databases[0], ADMIN_ID, {
+      action: 'curriculum_entity.update',
+      resourceType: 'curriculum_entity',
+      resourceRef: 'draft-1/lesson-1',
+      previousValue: null,
+      newValue,
+      reasonCode: 'curriculum.authored',
+    })).rejects.toThrow(/VALUE_INVALID/)
+  })
+
+  it.each([
+    [{ entity_ref: 'x'.repeat(129) }],
+    [{ status: 'x'.repeat(3000) }],
+    [{ draft_revision: 1.5 }],
+    [{ position: -1 }],
+    [{ tombstoned: 'false' }],
+    [{ digest: 'a'.repeat(63) }],
+    [{ collaborator_ref: ADMIN_ID }],
+  ])('rejects oversized, malformed, or action-mismatched entity facts %j', async (newValue) => {
+    await expect(append(databases[0], ADMIN_ID, {
+      action: 'curriculum_entity.update',
+      resourceType: 'curriculum_entity',
+      resourceRef: 'draft-1/lesson-1',
+      previousValue: null,
+      newValue,
+      reasonCode: null,
+    })).rejects.toThrow(/VALUE_INVALID/)
+  })
+
+  it.each([
+    [{ collaborator_ref: ADMIN_ID, role: 'editor', status: 'active', email: 'admin@example.test' }],
+    [{ collaborator_ref: ADMIN_ID, display_name: 'Admin' }],
+    [{ role: 'editor', status: 'active' }],
+    [{ collaborator_ref: ADMIN_ID, draft_revision: 4 }],
+    [{ collaborator_ref: ADMIN_ID, role: ['editor'] }],
+    [{ collaborator_ref: { user: ADMIN_ID } }],
+    [{ entity_ref: 'lesson-1' }],
+  ])('keeps collaborator values minimized %j', async (newValue) => {
+    await expect(append(databases[0], ADMIN_ID, {
+      action: 'curriculum_draft.collaborator.add',
+      resourceType: 'curriculum_draft',
+      resourceRef: 'draft-1',
+      previousValue: null,
+      newValue,
+      reasonCode: 'access.granted',
+    })).rejects.toThrow(/VALUE_INVALID/)
   })
 
   it('accepts only bounded minimized flat values', async () => {
@@ -368,6 +545,24 @@ describe('ADMIN-15 append-only Admin audit database foundation', () => {
       .rejects.toThrow(/QUERY_INVALID/)
     await expect(readAudit(database, [50, null, null, 'wildcard.*', null, null, 'audit:read']))
       .rejects.toThrow(/QUERY_INVALID/)
+    await append(database, ADMIN_ID, {
+      action: 'curriculum_entity.update',
+      resourceType: 'curriculum_entity',
+      resourceRef: 'draft-1/lesson-1',
+      previousValue: { entity_ref: 'lesson-1', draft_revision: 3, status: 'active' },
+      newValue: { entity_ref: 'lesson-1', draft_revision: 4, status: 'active' },
+      reasonCode: 'curriculum.authored',
+    })
+    const filtered = (await readAudit(database, [
+      50, null, null, 'curriculum_entity.update', 'curriculum_entity',
+      'draft-1/lesson-1', 'audit:read',
+    ])).rows[0].projection
+    expect(filtered.events).toHaveLength(1)
+    expect(filtered.events[0]).toMatchObject({
+      action: 'curriculum_entity.update',
+      resourceType: 'curriculum_entity',
+      resourceRef: 'draft-1/lesson-1',
+    })
   })
 
   it('orders equal timestamps by event ID and paginates deterministically', async () => {
