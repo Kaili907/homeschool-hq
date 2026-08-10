@@ -64,7 +64,7 @@ export async function ensureLocalDevelopmentStudyDay(input: {
   readonly scope: StudyLearnerScope
   readonly grade: number
   readonly householdTimeZone: string
-  readonly calendar: StudyCalendarPort
+  readonly calendar: Pick<StudyCalendarPort, 'list' | 'create'>
   readonly timerHidden: boolean
   readonly now?: Date
 }): Promise<readonly StudyCalendarEntry[]> {

@@ -52,9 +52,9 @@ export interface StudyReviewQueuePort {
    * Zero non-test callers, and unlike `loadSession` there is no production
    * caller coming: a review recommendation is derived from accepted evidence
    * server-side, and the browser's part is `list` and `decide`, both of which
-   * are called. The local development services enqueue their own seed data,
-   * which is why every adapter still implements it and why removing it now
-   * would break the preview day-seeding this card must not touch.
+   * are called. The local-development adapter retains `enqueue`, and focused
+   * tests use it to seed recommendations and verify idempotency behavior.
+   * Preview-day seeding is unrelated: it uses `calendar.create`.
    *
    * Kept, marked, and out of the production session subset entirely — the
    * learner session has no review-queue role at all.
@@ -204,6 +204,12 @@ export function assertCompleteStudyPortBundle(ports: Partial<StudyPortBundle>): 
  * being told which revision the caller believed was current and which write
  * this is.
  *
+ * This contract makes CAS and idempotency intent expressible; it does not
+ * enforce either one. Existing callers may omit `write`, and existing adapters
+ * do. The later production wire/adapter line must supply real
+ * `expectedRevision` and `mutationRef` values and enforce them; this contract
+ * split must not synthesize either value.
+ *
  * `StudyOperationContext.operationRef` looks like it would already do this job,
  * and it is deliberately not reused. It is optional, it identifies a lifecycle
  * operation rather than a write, and one operation can perform two writes — a
@@ -246,11 +252,11 @@ export type StudyDurableWriteOutcome =
  * block (StudySessionRoute), `start` and `resume` to open it, `pause` for a
  * break, and `completeCurrentSegment` on the way out.
  *
- * Absent on purpose. `create` belongs to StudyDashboard's day seeding, which a
- * session never performs. `createContinuation` has no caller anywhere in the
- * app — it is left on `StudyCalendarPort` for the local services that implement
- * it, and asking a production adapter for an eight-argument method nothing
- * calls is exactly the over-ask this split exists to remove.
+ * Absent on purpose. `create` belongs to StudyDashboard's preview-day seeding,
+ * which a session never performs. `createContinuation` is called by
+ * `StudyParentController` when an authorized adult reschedules incomplete work.
+ * Both remain on `StudyCalendarPort`, but neither belongs to learner-session
+ * capability.
  *
  * Derived by `Pick` rather than restated so the shared signatures cannot drift:
  * a change to `pause`'s category union has to reach both sides at once.
@@ -309,9 +315,11 @@ export interface ProductionStudyPersistencePort {
 /**
  * The five roles a production learner session needs, and no others.
  *
- * `eventLedger` and `safety` are the whole existing interfaces because the
- * session uses every member each declares — `append`, and `mode`,
- * `classifierVersion` and `evaluate`. Narrowing them would be decoration.
+ * `eventLedger` remains whole because `append` is its sole member. Learner-session
+ * code reads `safety.mode` and calls `evaluate`; `classifierVersion` has no direct
+ * learner-session consumer. Retaining the canonical `StudySafetyPort` is acceptable
+ * because that passive provenance metadata grants no adult capability, and avoids
+ * a redundant parallel safety alias.
  * `StudyEventLedgerPort.append` already answers `'idempotency-collision'`,
  * which is why it needed no widening.
  */
@@ -345,4 +353,49 @@ export function assertCompleteProductionStudySessionPorts(
   if (missing.length > 0) {
     throw new Error(`Study session unavailable: missing ${missing.join(', ')} port.`)
   }
+}
+
+/**
+ * Narrow consumer contracts.
+ *
+ * Each names exactly the port methods one Study surface genuinely calls, so a
+ * host composing that surface need not supply — or fabricate — roles it never
+ * exercises. They are derived from the canonical interfaces above with Pick<>,
+ * so a signature change there reaches every consumer instead of drifting behind
+ * a duplicated copy.
+ *
+ * StudyPortBundle remains the complete nine-role preview/full-host contract:
+ * narrowing what a consumer requires does not narrow what "complete" means, and
+ * assertCompleteStudyPortBundle still demands all nine roles.
+ */
+
+/**
+ * calendar.create is required because the dashboard seeds the local-development
+ * preview day through ensureLocalDevelopmentStudyDay. It is a real call on the
+ * current component, not an aspirational one.
+ */
+export interface StudyDashboardPorts {
+  readonly calendar: Pick<StudyCalendarPort, 'list' | 'create'>
+  readonly reviewQueue: Pick<StudyReviewQueuePort, 'list'>
+}
+
+export interface StudySettingsPorts {
+  readonly persistence: Pick<StudyPersistencePort, 'loadPreferences' | 'savePreferences'>
+}
+
+/**
+ * Shared by StudyParentController and the parent panel that drives it. The
+ * panel's own reads (parentSettings.read, calendar.list, reviewQueue.list) are a
+ * strict subset of the controller's, so a second alias would draw a distinction
+ * the source does not support.
+ *
+ * parentSettings, adultPrivate, and outbox appear whole because the parent
+ * control path calls every method those roles declare.
+ */
+export interface StudyParentControlPorts {
+  readonly calendar: Pick<StudyCalendarPort, 'list' | 'pause' | 'createContinuation'>
+  readonly reviewQueue: Pick<StudyReviewQueuePort, 'list' | 'decide'>
+  readonly parentSettings: StudyParentSettingsPort
+  readonly adultPrivate: StudyAdultPrivatePort
+  readonly outbox: StudyOutboxPort
 }

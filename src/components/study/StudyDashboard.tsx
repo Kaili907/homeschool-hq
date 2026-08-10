@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import type { StudyPortBundle } from '../../study/ports'
+import type { StudyDashboardPorts } from '../../study/ports'
 import type { HostStudyLaunchContext, StudyCalendarEntry, StudyReviewRecommendation } from '../../study/types'
 import { ensureLocalDevelopmentStudyDay } from '../../study/calendarAdapter'
 import './study-host.css'
 
 interface Props {
   context: HostStudyLaunchContext
-  ports: StudyPortBundle
+  ports: StudyDashboardPorts
   onLaunch: (entry: StudyCalendarEntry) => void
   onSettings: () => void
   onBack: () => void

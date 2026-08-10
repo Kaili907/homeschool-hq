@@ -57,7 +57,18 @@ const PRODUCTION_SESSION_ROLES = ['calendar', 'checkpoint', 'persistence', 'even
  * The learner session's whole calendar vocabulary. `create` and
  * `createContinuation` are absent, and their absence is the split.
  */
-const PRODUCTION_CALENDAR_METHODS = ['list', 'start', 'pause', 'resume', 'completeCurrentSegment'] as const
+const PRODUCTION_CALENDAR_METHODS = [
+  'list',
+  'start',
+  'pause',
+  'resume',
+  'completeCurrentSegment',
+] as const satisfies readonly (keyof ProductionStudyCalendarPort)[]
+
+const PRODUCTION_CHECKPOINT_METHODS = [
+  'loadLatest',
+  'save',
+] as const satisfies readonly (keyof ProductionStudyCheckpointPort)[]
 
 /** The shipping preview bundle, with no adaptation of any kind. */
 function localBundle(): StudyPortBundle {
@@ -104,8 +115,27 @@ describe('the production session subset is five roles, and every existing adapte
     }
     // @ts-expect-error `create` is StudyDashboard's day seeding, not a session's
     expect(typeof calendar.create).toBe('function')
-    // @ts-expect-error `createContinuation` has no caller in the app at all
+    // @ts-expect-error `createContinuation` is adult parent-control behavior, not a learner-session capability
     expect(typeof calendar.createContinuation).toBe('function')
+  })
+
+  it('requires both checkpoint methods a learner session uses', () => {
+    const checkpoint: ProductionStudyCheckpointPort = localBundle().checkpoint
+    for (const method of PRODUCTION_CHECKPOINT_METHODS) {
+      expect(typeof checkpoint[method]).toBe('function')
+    }
+  })
+
+  it('excludes every adult capability role', () => {
+    const ports = completeSessionPorts()
+    // @ts-expect-error reviewQueue belongs to dashboard/parent control, not learner session
+    expect(ports.reviewQueue).toBeUndefined()
+    // @ts-expect-error parentSettings is adult parent-control capability
+    expect(ports.parentSettings).toBeUndefined()
+    // @ts-expect-error adultPrivate is adult parent-control capability
+    expect(ports.adultPrivate).toBeUndefined()
+    // @ts-expect-error outbox is adult parent-control capability
+    expect(ports.outbox).toBeUndefined()
   })
 })
 
@@ -328,6 +358,7 @@ describe('prepareDurableStudySession asks for the three roles it consumes', () =
     const token = boundary.token()
     const appended: StudySafeEvent[] = []
     const saved: StudySessionSnapshot[] = []
+    const writeIntents: (StudyDurableWriteIntent | undefined)[] = []
 
     // Exactly three roles. Under the previous `StudyPortBundle` field this
     // object does not compile, which is what kills the widen-it-back mutant —
@@ -342,8 +373,9 @@ describe('prepareDurableStudySession asks for the three roles it consumes', () =
         },
       },
       persistence: {
-        async saveSession(next: StudySessionSnapshot) {
+        async saveSession(next: StudySessionSnapshot, _operation?: unknown, write?: StudyDurableWriteIntent) {
           saved.push(next)
+          writeIntents.push(write)
         },
       },
     }
@@ -366,6 +398,7 @@ describe('prepareDurableStudySession asks for the three roles it consumes', () =
     expect(prepared.state).toBe('active')
     expect(appended.map((event) => event.type)).toEqual(['session-launched'])
     expect(saved.map((row) => row.status)).toEqual(['active'])
+    expect(writeIntents).toEqual([undefined])
   })
 
   it('still accepts the nine-role bundle the mounted host hands it', () => {
