@@ -1,4 +1,10 @@
 import type { Profile } from '../../types'
+import {
+  assertPortableSecurityKeyFree,
+  PortableSecurityStructureError,
+  type PortableSecurityKeyFreeJsonValue,
+} from './portableSecurity'
+import { parseProfileId } from './profileId'
 
 /** Fields that can never cross the credential-free educational boundary. */
 export interface ForbiddenSyncedSecurityFields {
@@ -20,48 +26,37 @@ export type CredentialFreeEducationalProfile = Readonly<
   Omit<Profile, 'pin'> & ForbiddenSyncedSecurityFields
 >
 
-const FORBIDDEN_SECURITY_KEYS = new Set([
-  'pin',
-  'rawpin',
-  'learnerpin',
-  'pinverifier',
-  'pinsalt',
-  'verifier',
-  'verifierbase64',
-  'verifierscheme',
-  'verifierschemeversion',
-  'salt',
-  'saltbase64',
-  'credential',
-  'credentials',
-  'credentialkind',
-  'credentialmetadata',
-  'credentialstate',
-  'costparameters',
-  'activelearnerauthorization',
-  'activelearnersession',
-  'learnersession',
-  'recoverysecret',
-])
-
-function normalizedKey(key: string): string {
-  return key.replace(/[-_]/g, '').toLowerCase()
+function fail(path: string, message: string): never {
+  throw new PortableSecurityStructureError(path, message)
 }
 
-function cloneCredentialFreeValue(value: unknown, path: string): unknown {
-  if (Array.isArray(value)) {
-    return value.map((item, index) => cloneCredentialFreeValue(item, `${path}[${index}]`))
+function withoutExactLegacyRootPin(profile: Profile): Record<string, unknown> {
+  if (profile === null || typeof profile !== 'object' || Array.isArray(profile)) {
+    fail('$', 'Educational Profile must be a plain object')
   }
-  if (value === null || typeof value !== 'object') return value
+  const prototype = Object.getPrototypeOf(profile)
+  if (prototype !== Object.prototype && prototype !== null) {
+    fail('$', 'Educational Profile must be a plain object')
+  }
 
-  const clone: Record<string, unknown> = {}
-  for (const [key, child] of Object.entries(value)) {
-    if (FORBIDDEN_SECURITY_KEYS.has(normalizedKey(key))) {
-      throw new Error(`Credential-like material is forbidden in synchronized Profile data at ${path}.${key}`)
+  const educationalData: Record<string, unknown> = {}
+  for (const key of Reflect.ownKeys(profile)) {
+    if (typeof key === 'symbol') {
+      fail('$', 'Portable data contains a symbol key')
     }
-    clone[key] = cloneCredentialFreeValue(child, `${path}.${key}`)
+    const descriptor = Object.getOwnPropertyDescriptor(profile, key)
+    if (!descriptor || !descriptor.enumerable || !('value' in descriptor)) {
+      fail(`$.${key}`, 'Portable data contains a non-JSON or accessor property')
+    }
+    if (key === 'pin') continue
+    Object.defineProperty(educationalData, key, {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: descriptor.value,
+    })
   }
-  return clone
+  return educationalData
 }
 
 /**
@@ -72,6 +67,13 @@ function cloneCredentialFreeValue(value: unknown, path: string): unknown {
 export function toCredentialFreeEducationalProfile(
   profile: Profile,
 ): CredentialFreeEducationalProfile {
-  const { pin: _legacyPin, ...educationalData } = profile
-  return cloneCredentialFreeValue(educationalData, 'profile') as CredentialFreeEducationalProfile
+  const educationalData = withoutExactLegacyRootPin(profile)
+  assertPortableSecurityKeyFree(educationalData)
+  if (parseProfileId(educationalData.id) === null) {
+    fail('$.id', 'Educational Profile requires a canonical ProfileId')
+  }
+
+  const detached = JSON.parse(JSON.stringify(educationalData)) as PortableSecurityKeyFreeJsonValue
+  assertPortableSecurityKeyFree(detached)
+  return detached as unknown as CredentialFreeEducationalProfile
 }

@@ -12,6 +12,7 @@ import {
   isParentStepUpGrantPolicyCompliant,
   parseProfileId,
   parsePendingDestination,
+  PortableSecurityStructureError,
   SECURITY_LIFECYCLE_EVENT_SEMANTICS,
   SECURITY_LIFECYCLE_EVENT_TYPES,
   SECURITY_SESSION_POLICY,
@@ -44,14 +45,14 @@ describe('credential and educational Profile boundaries', () => {
       createdAt: '2026-08-09T12:00:00.000Z',
     }
 
-    expect(() => toCredentialFreeEducationalProfile(credential as unknown as Profile)).toThrow(
-      /credential-like material/i,
-    )
+    expect(() =>
+      toCredentialFreeEducationalProfile(credential as unknown as Profile),
+    ).toThrow(PortableSecurityStructureError)
   })
 
   it('omits the accepted legacy PIN and rejects credential-like material at any depth', () => {
     const legacy = {
-      id: 'learner-1',
+      id: 'p1',
       name: 'Synthetic Learner',
       grade: 5,
       pin: '1234',
@@ -59,7 +60,7 @@ describe('credential and educational Profile boundaries', () => {
     } as unknown as Profile
 
     expect(toCredentialFreeEducationalProfile(legacy)).toEqual({
-      id: 'learner-1',
+      id: 'p1',
       name: 'Synthetic Learner',
       grade: 5,
       nestedEducationalData: { completed: true },

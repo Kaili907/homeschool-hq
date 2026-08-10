@@ -2,6 +2,7 @@ import type { Profile } from '../../types'
 import {
   assertPortableSecurityKeyFree,
   isProhibitedPortableSecurityKey,
+  parseProfileId,
   PortableSecurityStructureError,
   toCredentialFreeEducationalProfile,
   type CredentialFreeEducationalProfile,
@@ -25,7 +26,31 @@ function fail(path: string, message: string): never {
 
 function isKnownLegacyCredentialPath(path: readonly string[], key: string): boolean {
   if (path.length === 0 && key === 'parentPin') return true
-  return path.length === 2 && path[0] === 'profiles' && key === 'pin'
+  return (
+    path.length === 2 &&
+    path[0] === 'profiles' &&
+    parseProfileId(path[1]) !== null &&
+    key === 'pin'
+  )
+}
+
+function assertCanonicalProfilesCollection(value: unknown): void {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) {
+    fail('$.profiles', 'Legacy profiles must be a plain canonical ProfileId record')
+  }
+  const prototype = Object.getPrototypeOf(value)
+  if (prototype !== Object.prototype && prototype !== null) {
+    fail('$.profiles', 'Legacy profiles must be a plain canonical ProfileId record')
+  }
+
+  for (const key of Reflect.ownKeys(value)) {
+    if (typeof key === 'symbol') {
+      fail('$.profiles', 'Portable data contains a symbol key')
+    }
+    if (parseProfileId(key) === null) {
+      fail(`$.profiles.${key}`, 'Legacy profile key must be a canonical ProfileId')
+    }
+  }
 }
 
 function stripKnownLegacyCredentialFields(
@@ -85,6 +110,9 @@ function stripKnownLegacyCredentialFields(
       const descriptor = Object.getOwnPropertyDescriptor(value, key)
       if (!descriptor || !descriptor.enumerable || !('value' in descriptor)) {
         fail(childPath, 'Portable data contains a non-JSON or accessor property')
+      }
+      if (path.length === 0 && key === 'profiles') {
+        assertCanonicalProfilesCollection(descriptor.value)
       }
       if (isKnownLegacyCredentialPath(path, key)) continue
       if (isProhibitedPortableSecurityKey(key)) {

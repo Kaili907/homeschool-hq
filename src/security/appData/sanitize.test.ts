@@ -1,10 +1,61 @@
 import { describe, expect, it } from 'vitest'
+import type { Profile } from '../../types'
 import { PROHIBITED_PORTABLE_SECURITY_KEY_ALIASES } from '../contracts'
 import {
   CredentialSanitizationError,
   sanitizeCredentialFreeEducationalData,
+  sanitizeCredentialFreeEducationalProfile,
   serializeCredentialFreeEducationalData,
 } from './sanitize'
+
+const PROHIBITED_PORTABLE_SECURITY_PATTERN_EXAMPLES = [
+  'lessonCredentialHint',
+  'parent-authorization-state',
+  'bearer_metadata',
+  'derivedVerifierBytes',
+  'passwordReminder',
+  'sharedSecretMaterial',
+  'identityToken',
+  'pinEntry',
+  'backupPin',
+  'saltMaterial',
+  'derivedSalt',
+  'replacementGrant',
+  'sessionRuntime',
+  'classSession',
+] as const
+
+const REQUIRED_PUBLIC_PROFILE_SECURITY_KEYS = [
+  'pin',
+  'parentPin',
+  'pinHash',
+  'pinVerifier',
+  'verifier',
+  'salt',
+  'password',
+  'credential',
+  'credentials',
+  'credentialmetadata',
+  'recoverySecret',
+  'recoveryToken',
+  'accessToken',
+  'refreshToken',
+  'sessionToken',
+  'authorization',
+  'bearer',
+  'activeSession',
+  'session',
+  'grant',
+  'secret',
+] as const
+
+const COMPLETE_PUBLIC_PROFILE_SECURITY_KEY_MATRIX = [
+  ...new Set([
+    ...PROHIBITED_PORTABLE_SECURITY_KEY_ALIASES,
+    ...REQUIRED_PUBLIC_PROFILE_SECURITY_KEYS,
+    ...PROHIBITED_PORTABLE_SECURITY_PATTERN_EXAMPLES,
+  ]),
+]
 
 function legacyData(): Record<string, unknown> {
   return {
@@ -20,6 +71,20 @@ function legacyData(): Record<string, unknown> {
       },
     },
   }
+}
+
+function legacyProfile(
+  id = 'p1',
+  additionalData: Record<string, unknown> = {},
+): Profile {
+  return {
+    id,
+    name: 'Learner One',
+    grade: 5,
+    pin: '1234',
+    lessonText: 'Ordinary educational content.',
+    ...additionalData,
+  } as unknown as Profile
 }
 
 describe('credential-free educational-data sanitizer', () => {
@@ -39,6 +104,79 @@ describe('credential-free educational-data sanitizer', () => {
       },
     })
     expect((source.profiles as Record<string, Record<string, unknown>>).p1.pin).toBe('1234')
+  })
+
+  it.each(['p1', 'p2', 'p3', 'p4', 'p5'])(
+    'strips the exact legacy Profile PIN for canonical profile key %s',
+    (profileId) => {
+      const source = legacyData()
+      source.activeProfileId = profileId
+      source.profiles = {
+        [profileId]: {
+          id: profileId,
+          name: `Learner ${profileId}`,
+          pin: '1234',
+        },
+      }
+
+      expect(sanitizeCredentialFreeEducationalData(source)).toEqual({
+        schemaVersion: 2,
+        activeProfileId: profileId,
+        profiles: {
+          [profileId]: {
+            id: profileId,
+            name: `Learner ${profileId}`,
+          },
+        },
+      })
+    },
+  )
+
+  it.each(['P1', 'p6', ' p1', 'foo'])(
+    'rejects noncanonical legacy profile key %s instead of stripping its PIN',
+    (profileId) => {
+      const source = legacyData()
+      source.profiles = {
+        [profileId]: { id: profileId, name: 'Malformed learner', pin: '1234' },
+      }
+
+      expect(() => sanitizeCredentialFreeEducationalData(source)).toThrow(
+        CredentialSanitizationError,
+      )
+    },
+  )
+
+  it('rejects an array-shaped profiles collection instead of treating its PIN as legacy', () => {
+    const source = legacyData()
+    source.profiles = [{ id: 'p1', name: 'Learner One', pin: '1234' }]
+
+    expect(() => sanitizeCredentialFreeEducationalData(source)).toThrow(
+      CredentialSanitizationError,
+    )
+  })
+
+  it('rejects a nested Profile PIN path instead of silently stripping it', () => {
+    const source = legacyData()
+    ;(source.profiles as Record<string, Record<string, unknown>>).p1 = {
+      id: 'p1',
+      name: 'Learner One',
+      pin: '1234',
+      deep: { pin: '5678' },
+    }
+
+    expect(() => sanitizeCredentialFreeEducationalData(source)).toThrow(
+      CredentialSanitizationError,
+    )
+  })
+
+  it('allows only root parentPin consumption and rejects nested parentPin', () => {
+    expect(sanitizeCredentialFreeEducationalData(legacyData())).not.toHaveProperty('parentPin')
+    expect(() =>
+      sanitizeCredentialFreeEducationalData({
+        ...legacyData(),
+        lesson: { parentPin: '9876' },
+      }),
+    ).toThrow(CredentialSanitizationError)
   })
 
   it.each([
@@ -128,5 +266,67 @@ describe('credential-free educational-data sanitizer', () => {
     expect(serialized).not.toContain('1234')
     expect(serialized).not.toContain('9876')
     expect(parsed).not.toHaveProperty('parentPin')
+  })
+})
+
+describe('credential-free single-profile sanitizer', () => {
+  it('fails closed on the exact previously leaking public-API payload', () => {
+    expect(() =>
+      sanitizeCredentialFreeEducationalProfile(
+        legacyProfile('p1', {
+          accessToken: 'token-value',
+          parentPin: '9876',
+          lesson: { password: 'pw' },
+        }),
+      ),
+    ).toThrow(CredentialSanitizationError)
+  })
+
+  it.each(COMPLETE_PUBLIC_PROFILE_SECURITY_KEY_MATRIX)(
+    'enforces the shared prohibited key %s at every profile placement',
+    (key) => {
+      const placements = [
+        { [key]: 'blocked' },
+        { nested: { [key]: 'blocked' } },
+        { one: { two: { three: { [key]: 'blocked' } } } },
+        { items: [{ [key]: 'blocked' }] },
+        { records: { lessonOne: { [key]: 'blocked' } } },
+      ]
+
+      for (const placement of placements) {
+        if (key === 'pin' && Object.hasOwn(placement, 'pin')) {
+          expect(
+            sanitizeCredentialFreeEducationalProfile(legacyProfile('p1', placement)),
+          ).not.toHaveProperty('pin')
+        } else {
+          expect(() =>
+            sanitizeCredentialFreeEducationalProfile(legacyProfile('p1', placement)),
+          ).toThrow(CredentialSanitizationError)
+        }
+      }
+    },
+  )
+
+  it('preserves security vocabulary in values and returns a detached profile', () => {
+    const source = legacyProfile('p1', {
+      lesson: { lessonText: 'Never share your password or secret.' },
+    })
+    const sanitized = sanitizeCredentialFreeEducationalProfile(source)
+
+    expect(sanitized).toMatchObject({
+      id: 'p1',
+      lesson: { lessonText: 'Never share your password or secret.' },
+    })
+    expect(sanitized).not.toHaveProperty('pin')
+    expect(sanitized).not.toBe(source)
+    expect((sanitized as unknown as Record<string, unknown>).lesson).not.toBe(
+      (source as unknown as Record<string, unknown>).lesson,
+    )
+  })
+
+  it.each(['P1', 'p6'])('rejects noncanonical profile id %s', (profileId) => {
+    expect(() => sanitizeCredentialFreeEducationalProfile(legacyProfile(profileId))).toThrow(
+      CredentialSanitizationError,
+    )
   })
 })

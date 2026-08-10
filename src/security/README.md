@@ -18,6 +18,9 @@ server request, changes an RPC, or wires session lifecycle into `App`.
   migration-backup, replacement-backup, conflict, and recovery sanitation seam.
   It removes only exact legacy `Profile.pin` and root `AppState.parentPin`
   locations before enforcing the shared policy across the complete clone.
+- `sanitizeCredentialFreeEducationalProfile` is the profile-projection seam. It
+  validates the canonical profile ID, removes only exact root `Profile.pin`,
+  and enforces that same shared recursive policy on a detached clone.
 - `sessionPolicy.ts`, `sessions.ts`, and `lifecycle.ts` define the single policy
   source, future learner/Parent records, one-operation Parent step-up grant,
   and stable lifecycle vocabulary.
