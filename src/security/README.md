@@ -11,6 +11,13 @@ server request, changes an RPC, or wires session lifecycle into `App`.
   credentials from synchronized educational data. The sanitizer strips the
   accepted legacy `Profile.pin` and fails closed on other credential-like
   material.
+- `profileId.ts` defines the canonical learner identity (`p1` through `p5`).
+  `portableSecurity.ts` owns the shared recursive structural-key policy used by
+  Local and Sync portable-data boundaries.
+- `sanitizeCredentialFreeEducationalData` is the reusable Local export, import,
+  migration-backup, replacement-backup, conflict, and recovery sanitation seam.
+  It removes only exact legacy `Profile.pin` and root `AppState.parentPin`
+  locations before enforcing the shared policy across the complete clone.
 - `sessionPolicy.ts`, `sessions.ts`, and `lifecycle.ts` define the single policy
   source, future learner/Parent records, one-operation Parent step-up grant,
   and stable lifecycle vocabulary.

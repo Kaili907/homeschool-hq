@@ -10,6 +10,7 @@ import {
   isAuthorityEstablishmentForbidden,
   isInstallationGrantCapabilityConsistent,
   isParentStepUpGrantPolicyCompliant,
+  parseProfileId,
   parsePendingDestination,
   SECURITY_LIFECYCLE_EVENT_SEMANTICS,
   SECURITY_LIFECYCLE_EVENT_TYPES,
@@ -32,7 +33,7 @@ describe('credential and educational Profile boundaries', () => {
     const credential: LearnerCredentialRecord = {
       schemaVersion: 1,
       storage: 'device-local-only',
-      profileId: 'learner-1',
+      profileId: parseProfileId('p1')!,
       credentialKind: 'learner-pin',
       verifierScheme: 'pbkdf2-sha256',
       verifierSchemeVersion: 2,
@@ -63,23 +64,38 @@ describe('credential and educational Profile boundaries', () => {
       grade: 5,
       nestedEducationalData: { completed: true },
     })
-    expect(() => toCredentialFreeEducationalProfile({
-      ...legacy,
-      nestedEducationalData: { recoverySecret: 'not-for-sync' },
-    } as unknown as Profile)).toThrow(/recoverySecret/)
-    expect(() => toCredentialFreeEducationalProfile({
-      ...legacy,
-      pinVerifier: 'not-for-sync',
-    } as unknown as Profile)).toThrow(/pinVerifier/)
+    expect(() =>
+      toCredentialFreeEducationalProfile({
+        ...legacy,
+        nestedEducationalData: { recoverySecret: 'not-for-sync' },
+      } as unknown as Profile),
+    ).toThrow(/recoverySecret/)
+    expect(() =>
+      toCredentialFreeEducationalProfile({
+        ...legacy,
+        pinVerifier: 'not-for-sync',
+      } as unknown as Profile),
+    ).toThrow(/pinVerifier/)
   })
 })
 
 describe('local session contracts', () => {
   it('keeps all approved time bounds in the one policy object', () => {
     expect(SECURITY_SESSION_POLICY).toEqual({
-      learner: { idleTimeoutMs: 30 * 60_000, absoluteTimeoutMs: 8 * 60 * 60_000 },
-      parent: { storage: 'memory-only', idleTimeoutMs: 15 * 60_000, absoluteTimeoutMs: 60 * 60_000 },
-      parentStepUp: { storage: 'memory-only', maximumLifetimeMs: 2 * 60_000, operationUseLimit: 1 },
+      learner: {
+        idleTimeoutMs: 30 * 60_000,
+        absoluteTimeoutMs: 8 * 60 * 60_000,
+      },
+      parent: {
+        storage: 'memory-only',
+        idleTimeoutMs: 15 * 60_000,
+        absoluteTimeoutMs: 60 * 60_000,
+      },
+      parentStepUp: {
+        storage: 'memory-only',
+        maximumLifetimeMs: 2 * 60_000,
+        operationUseLimit: 1,
+      },
     })
     expect(Object.isFrozen(SECURITY_SESSION_POLICY)).toBe(true)
   })
@@ -96,29 +112,37 @@ describe('local session contracts', () => {
       expiresAt: '2026-08-09T12:02:00.000Z',
     }
     expect(isParentStepUpGrantPolicyCompliant(grant)).toBe(true)
-    expect(isParentStepUpGrantPolicyCompliant({
-      ...grant,
-      expiresAt: '2026-08-09T12:02:00.001Z',
-    })).toBe(false)
-    expect(isParentStepUpGrantPolicyCompliant({
-      ...grant,
-      operationUseLimit: 2,
-    } as unknown as ParentStepUpGrant)).toBe(false)
+    expect(
+      isParentStepUpGrantPolicyCompliant({
+        ...grant,
+        expiresAt: '2026-08-09T12:02:00.001Z',
+      }),
+    ).toBe(false)
+    expect(
+      isParentStepUpGrantPolicyCompliant({
+        ...grant,
+        operationUseLimit: 2,
+      } as unknown as ParentStepUpGrant),
+    ).toBe(false)
   })
 })
 
 describe('pending destination and sync protocol contracts', () => {
   it('accepts only allowlisted route descriptors, never arbitrary redirects', () => {
-    expect(parsePendingDestination({ kind: 'root-dashboard' })).toEqual({ kind: 'root-dashboard' })
-    expect(parsePendingDestination({
-      kind: 'academy',
-      route: {
-        kind: 'lesson',
-        courseId: 'ma-g5-mathematics',
-        unitNumber: 2,
-        lessonId: 'ma-g5-mathematics-u02-l01',
-      },
-    })).not.toBeNull()
+    expect(parsePendingDestination({ kind: 'root-dashboard' })).toEqual({
+      kind: 'root-dashboard',
+    })
+    expect(
+      parsePendingDestination({
+        kind: 'academy',
+        route: {
+          kind: 'lesson',
+          courseId: 'ma-g5-mathematics',
+          unitNumber: 2,
+          lessonId: 'ma-g5-mathematics-u02-l01',
+        },
+      }),
+    ).not.toBeNull()
     expect(parsePendingDestination('https://example.com/steal-session')).toBeNull()
     expect(parsePendingDestination({ kind: 'url', url: 'https://example.com' })).toBeNull()
     expect(parsePendingDestination({ kind: 'study', url: 'https://example.com' })).toBeNull()
@@ -138,23 +162,24 @@ describe('installation-manager and authority separation contracts', () => {
   })
 
   it('requires explicit claim/recovery capabilities with deterministic purposes', () => {
-    expect(INSTALLATION_MANAGER_CAPABILITIES).toEqual([
-      'parent_installation:claim',
-      'parent_installation:recover',
-    ])
+    expect(INSTALLATION_MANAGER_CAPABILITIES).toEqual(['parent_installation:claim', 'parent_installation:recover'])
     expect(INSTALLATION_GRANT_CAPABILITY_BY_PURPOSE).toEqual({
       first_claim: 'parent_installation:claim',
       legacy_upgrade: 'parent_installation:claim',
       recovery: 'parent_installation:recover',
     })
-    expect(isInstallationGrantCapabilityConsistent({
-      purpose: 'recovery',
-      capability: 'parent_installation:recover',
-    })).toBe(true)
-    expect(isInstallationGrantCapabilityConsistent({
-      purpose: 'recovery',
-      capability: 'parent_installation:claim',
-    })).toBe(false)
+    expect(
+      isInstallationGrantCapabilityConsistent({
+        purpose: 'recovery',
+        capability: 'parent_installation:recover',
+      }),
+    ).toBe(true)
+    expect(
+      isInstallationGrantCapabilityConsistent({
+        purpose: 'recovery',
+        capability: 'parent_installation:claim',
+      }),
+    ).toBe(false)
   })
 
   it('does not interchange learner, Parent, installation, Study, Admin, or staff authority', () => {

@@ -1,7 +1,9 @@
 import {
   LEARNER_CREDENTIAL_SCHEMA_VERSION,
   LEARNER_PIN_VERIFIER_SCHEME_VERSION,
+  parseProfileId,
   type LearnerCredentialRecord,
+  type ProfileId,
 } from '../contracts'
 import {
   base64ToBytes,
@@ -15,8 +17,7 @@ import {
   verifyPinVerifier,
 } from './pinVerifier'
 
-export const LEARNER_CREDENTIAL_STORAGE_NAMESPACE =
-  'homeschool-hq:security:learner-credentials:v1' as const
+export const LEARNER_CREDENTIAL_STORAGE_NAMESPACE = 'homeschool-hq:security:learner-credentials:v1' as const
 
 export interface StoredLearnerCredentialRecord extends LearnerCredentialRecord {
   readonly costParametersVersion: typeof LEARNER_PIN_COST_PARAMETERS_VERSION
@@ -76,48 +77,19 @@ function storageFrom(options?: CredentialOperationOptions): CredentialStorage {
   } catch {
     // Fall through to the fail-closed error.
   }
-  throw new CredentialVaultError(
-    'storage-unavailable',
-    'Device-local learner credential storage is unavailable.',
-  )
+  throw new CredentialVaultError('storage-unavailable', 'Device-local learner credential storage is unavailable.')
 }
 
-export function validateLearnerProfileId(profileId: unknown): asserts profileId is string {
-  if (typeof profileId !== 'string') {
+export function validateLearnerProfileId(profileId: unknown): asserts profileId is ProfileId {
+  if (parseProfileId(profileId) === null) {
     throw new CredentialVaultError(
       'invalid-profile-id',
-      'A stable non-empty profile identifier is required.',
-    )
-  }
-  let hasMalformedSurrogate = false
-  for (let index = 0; index < profileId.length; index += 1) {
-    const codeUnit = profileId.charCodeAt(index)
-    if (codeUnit >= 0xd800 && codeUnit <= 0xdbff) {
-      const next = profileId.charCodeAt(index + 1)
-      if (!(next >= 0xdc00 && next <= 0xdfff)) {
-        hasMalformedSurrogate = true
-        break
-      }
-      index += 1
-    } else if (codeUnit >= 0xdc00 && codeUnit <= 0xdfff) {
-      hasMalformedSurrogate = true
-      break
-    }
-  }
-  if (
-    profileId.length === 0 ||
-    profileId.length > 256 ||
-    /[\u0000-\u001f\u007f]/.test(profileId) ||
-    hasMalformedSurrogate
-  ) {
-    throw new CredentialVaultError(
-      'invalid-profile-id',
-      'A stable non-empty profile identifier is required.',
+      'A canonical Manuel Academy profile identifier (p1 through p5) is required.',
     )
   }
 }
 
-export function learnerCredentialStorageKey(profileId: string): string {
+export function learnerCredentialStorageKey(profileId: unknown): string {
   validateLearnerProfileId(profileId)
   return `${LEARNER_CREDENTIAL_STORAGE_NAMESPACE}:${encodeURIComponent(profileId)}`
 }
@@ -140,7 +112,7 @@ function malformed(message: string): never {
 
 export function parseLearnerCredentialRecord(
   value: unknown,
-  expectedProfileId?: string,
+  expectedProfileId?: unknown,
 ): StoredLearnerCredentialRecord {
   if (!plainRecord(value)) malformed('Learner credential record is not an object.')
 
@@ -152,20 +124,12 @@ export function parseLearnerCredentialRecord(
     value.verifierSchemeVersion !== LEARNER_PIN_VERIFIER_SCHEME_VERSION ||
     value.costParametersVersion !== LEARNER_PIN_COST_PARAMETERS_VERSION
   ) {
-    throw new CredentialVaultError(
-      'unsupported-version',
-      'Learner credential record uses an unsupported version.',
-    )
+    throw new CredentialVaultError('unsupported-version', 'Learner credential record uses an unsupported version.')
   }
 
-  const allowedKeys = value.rotatedAt === undefined
-    ? REQUIRED_RECORD_KEYS
-    : [...REQUIRED_RECORD_KEYS, 'rotatedAt']
+  const allowedKeys = value.rotatedAt === undefined ? REQUIRED_RECORD_KEYS : [...REQUIRED_RECORD_KEYS, 'rotatedAt']
   const keys = Object.keys(value)
-  if (
-    keys.length !== allowedKeys.length ||
-    !keys.every((key) => allowedKeys.includes(key as never))
-  ) {
+  if (keys.length !== allowedKeys.length || !keys.every((key) => allowedKeys.includes(key as never))) {
     malformed('Learner credential record contains missing or unexpected fields.')
   }
 
@@ -175,14 +139,10 @@ export function parseLearnerCredentialRecord(
     value.verifierScheme !== 'pbkdf2-sha256' ||
     (expectedProfileId !== undefined && value.profileId !== expectedProfileId) ||
     (value.state !== 'enrolled' && value.state !== 'reset-required') ||
-    !isSupportedPinCostParameters(
-      value.costParametersVersion,
-      value.costParameters,
-    ) ||
+    !isSupportedPinCostParameters(value.costParametersVersion, value.costParameters) ||
     !validIsoTimestamp(value.createdAt) ||
     (value.rotatedAt !== undefined && !validIsoTimestamp(value.rotatedAt)) ||
-    (typeof value.rotatedAt === 'string' &&
-      Date.parse(value.rotatedAt) < Date.parse(value.createdAt))
+    (typeof value.rotatedAt === 'string' && Date.parse(value.rotatedAt) < Date.parse(value.createdAt))
   ) {
     malformed('Learner credential record violates the device-local credential contract.')
   }
@@ -197,7 +157,7 @@ export function parseLearnerCredentialRecord(
   return value as unknown as StoredLearnerCredentialRecord
 }
 
-function parseStoredRecord(raw: string, profileId: string): StoredLearnerCredentialRecord {
+function parseStoredRecord(raw: string, profileId: ProfileId): StoredLearnerCredentialRecord {
   let parsed: unknown
   try {
     parsed = JSON.parse(raw) as unknown
@@ -214,7 +174,7 @@ function timestamp(options?: CredentialOperationOptions): string {
 }
 
 export async function createLearnerCredentialRecord(
-  profileId: string,
+  profileId: unknown,
   pin: string,
   options?: CredentialOperationOptions,
 ): Promise<StoredLearnerCredentialRecord> {
@@ -234,28 +194,26 @@ export async function createLearnerCredentialRecord(
 }
 
 export function readLearnerCredential(
-  profileId: string,
+  profileId: unknown,
   options?: CredentialOperationOptions,
 ): StoredLearnerCredentialRecord | null {
-  const storage = storageFrom(options)
+  validateLearnerProfileId(profileId)
   const key = learnerCredentialStorageKey(profileId)
+  const storage = storageFrom(options)
   let raw: string | null
   try {
     raw = storage.getItem(key)
   } catch {
-    throw new CredentialVaultError(
-      'storage-unavailable',
-      'Device-local learner credential storage could not be read.',
-    )
+    throw new CredentialVaultError('storage-unavailable', 'Device-local learner credential storage could not be read.')
   }
   return raw === null ? null : parseStoredRecord(raw, profileId)
 }
 
 export function writeLearnerCredential(
-  record: StoredLearnerCredentialRecord,
+  record: unknown,
   options?: CredentialOperationOptions,
 ): StoredLearnerCredentialRecord {
-  const validated = parseLearnerCredentialRecord(record, record.profileId)
+  const validated = parseLearnerCredentialRecord(record)
   const storage = storageFrom(options)
   const key = learnerCredentialStorageKey(validated.profileId)
   const serialized = JSON.stringify(validated)
@@ -279,22 +237,21 @@ export function writeLearnerCredential(
 }
 
 export async function verifyLearnerCredentialRecord(
-  record: StoredLearnerCredentialRecord,
+  record: unknown,
   pin: unknown,
   options?: CredentialOperationOptions,
 ): Promise<boolean> {
   let validated: StoredLearnerCredentialRecord
   try {
-    validated = parseLearnerCredentialRecord(record, record.profileId)
+    validated = parseLearnerCredentialRecord(record)
   } catch {
     return false
   }
-  return validated.state === 'enrolled' &&
-    verifyPinVerifier(validated.profileId, pin, validated, options?.crypto)
+  return validated.state === 'enrolled' && verifyPinVerifier(validated.profileId, pin, validated, options?.crypto)
 }
 
 export async function verifyLearnerPin(
-  profileId: string,
+  profileId: unknown,
   pin: unknown,
   options?: CredentialOperationOptions,
 ): Promise<boolean> {
@@ -307,9 +264,7 @@ export async function verifyLearnerPin(
   } catch (cause) {
     if (
       cause instanceof CredentialVaultError &&
-      (cause.code === 'malformed-record' ||
-        cause.code === 'unsupported-version' ||
-        cause.code === 'invalid-profile-id')
+      (cause.code === 'malformed-record' || cause.code === 'unsupported-version' || cause.code === 'invalid-profile-id')
     ) {
       return false
     }
@@ -319,15 +274,12 @@ export async function verifyLearnerPin(
 }
 
 export async function enrollLearnerPin(
-  profileId: string,
+  profileId: unknown,
   pin: string,
   options?: CredentialOperationOptions,
 ): Promise<StoredLearnerCredentialRecord> {
   if (readLearnerCredential(profileId, options) !== null) {
-    throw new CredentialVaultError(
-      'credential-exists',
-      'A learner credential already exists for this profile.',
-    )
+    throw new CredentialVaultError('credential-exists', 'A learner credential already exists for this profile.')
   }
   const record = await createLearnerCredentialRecord(profileId, pin, options)
   const persisted = writeLearnerCredential(record, options)
@@ -350,7 +302,7 @@ export async function enrollLearnerPin(
  * verification have all succeeded, so the caller may discard its source PIN.
  */
 export function enrollLegacyCredential(
-  profileId: string,
+  profileId: unknown,
   pin: string,
   options?: CredentialOperationOptions,
 ): Promise<StoredLearnerCredentialRecord> {
@@ -358,7 +310,7 @@ export function enrollLegacyCredential(
 }
 
 export async function rotateLearnerPin(
-  profileId: string,
+  profileId: unknown,
   currentPin: unknown,
   replacementPin: string,
   options?: CredentialOperationOptions,
@@ -368,17 +320,10 @@ export async function rotateLearnerPin(
     throw new CredentialVaultError('credential-missing', 'Learner credential is not enrolled.')
   }
   if (!(await verifyLearnerCredentialRecord(previous, currentPin, options))) {
-    throw new CredentialVaultError(
-      'credential-mismatch',
-      'Current learner credential verification failed.',
-    )
+    throw new CredentialVaultError('credential-mismatch', 'Current learner credential verification failed.')
   }
 
-  const replacement = await createLearnerCredentialRecord(
-    profileId,
-    replacementPin,
-    options,
-  )
+  const replacement = await createLearnerCredentialRecord(profileId, replacementPin, options)
   const rotated: StoredLearnerCredentialRecord = {
     ...replacement,
     createdAt: previous.createdAt,
@@ -389,10 +334,7 @@ export async function rotateLearnerPin(
     if (await verifyLearnerCredentialRecord(persisted, replacementPin, options)) {
       return persisted
     }
-    throw new CredentialVaultError(
-      'persistence-verification-failed',
-      'Rotated learner credential failed verification.',
-    )
+    throw new CredentialVaultError('persistence-verification-failed', 'Rotated learner credential failed verification.')
   } catch (cause) {
     try {
       writeLearnerCredential(previous, options)
@@ -404,9 +346,10 @@ export async function rotateLearnerPin(
 }
 
 export async function markLearnerCredentialResetRequired(
-  profileId: string,
+  profileId: unknown,
   options?: CredentialOperationOptions,
 ): Promise<StoredLearnerCredentialRecord> {
+  validateLearnerProfileId(profileId)
   const existing = readLearnerCredential(profileId, options)
   if (existing?.state === 'reset-required') return existing
   const now = timestamp(options)
@@ -438,10 +381,7 @@ export async function markLearnerCredentialResetRequired(
   )
 }
 
-export function deleteLearnerCredential(
-  profileId: string,
-  options?: CredentialOperationOptions,
-): void {
+export function deleteLearnerCredential(profileId: unknown, options?: CredentialOperationOptions): void {
   const storage = storageFrom(options)
   const key = learnerCredentialStorageKey(profileId)
   try {
@@ -454,9 +394,6 @@ export function deleteLearnerCredential(
     }
   } catch (cause) {
     if (cause instanceof CredentialVaultError) throw cause
-    throw new CredentialVaultError(
-      'storage-unavailable',
-      'Device-local learner credential could not be deleted.',
-    )
+    throw new CredentialVaultError('storage-unavailable', 'Device-local learner credential could not be deleted.')
   }
 }

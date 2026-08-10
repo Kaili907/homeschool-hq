@@ -1,71 +1,26 @@
 import type { Profile } from '../../types'
 import {
+  assertPortableSecurityKeyFree,
+  isProhibitedPortableSecurityKey,
+  PortableSecurityStructureError,
   toCredentialFreeEducationalProfile,
   type CredentialFreeEducationalProfile,
+  type PortableSecurityKeyFreeJsonValue,
 } from '../contracts'
 
-export type CredentialFreeJsonValue =
-  | null
-  | boolean
-  | number
-  | string
-  | CredentialFreeJsonValue[]
-  | { [key: string]: CredentialFreeJsonValue }
-
-export class CredentialSanitizationError extends Error {
-  constructor(
-    readonly path: string,
-    message: string,
-  ) {
-    super(`${message} at ${path}`)
-    this.name = 'CredentialSanitizationError'
-  }
-}
-
-/** Mirrors the aliases locked by the foundation contracts, plus AppState.parentPin. */
-const FORBIDDEN_SECURITY_KEYS = new Set([
-  'pin',
-  'parentpin',
-  'rawpin',
-  'learnerpin',
-  'pinverifier',
-  'pinsalt',
-  'verifier',
-  'verifierbase64',
-  'verifierscheme',
-  'verifierschemeversion',
-  'salt',
-  'saltbase64',
-  'credential',
-  'credentials',
-  'credentialkind',
-  'credentialmetadata',
-  'credentialstate',
-  'credentialcontainer',
-  'credentialvault',
-  'learnercredential',
-  'costparameters',
-  'recoverysecret',
-  'recoverycode',
-  'recoverykey',
-  'activeauthorization',
-  'activelearnerauthorization',
-  'activelearnersession',
-  'learnersession',
-  'parentsession',
-  'sessiontoken',
-  'accesstoken',
-  'refreshtoken',
-])
-
-const RESERVED_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
-
-function normalizedKey(key: string): string {
-  return key.replace(/[-_\s]/g, '').toLowerCase()
-}
+export type CredentialFreeJsonValue = PortableSecurityKeyFreeJsonValue
+export { PortableSecurityStructureError as CredentialSanitizationError }
 
 function propertyPath(parent: readonly string[], key: string): string {
-  return [...parent, key].join('.') || '<root>'
+  return `$.${[...parent, key].join('.')}`
+}
+
+function valuePath(path: readonly string[]): string {
+  return path.length === 0 ? '$' : `$.${path.join('.')}`
+}
+
+function fail(path: string, message: string): never {
+  throw new PortableSecurityStructureError(path, message)
 }
 
 function isKnownLegacyCredentialPath(path: readonly string[], key: string): boolean {
@@ -73,87 +28,74 @@ function isKnownLegacyCredentialPath(path: readonly string[], key: string): bool
   return path.length === 2 && path[0] === 'profiles' && key === 'pin'
 }
 
-function cloneCredentialFreeValue(
+function stripKnownLegacyCredentialFields(
   value: unknown,
   path: readonly string[],
   activeObjects: WeakSet<object>,
-): CredentialFreeJsonValue {
+): PortableSecurityKeyFreeJsonValue {
   if (value === null || typeof value === 'string' || typeof value === 'boolean') {
     return value
   }
   if (typeof value === 'number') {
     if (!Number.isFinite(value)) {
-      throw new CredentialSanitizationError(
-        path.join('.') || '<root>',
-        'Educational data contains a non-finite number',
-      )
+      fail(valuePath(path), 'Portable data contains a non-finite number')
     }
     return value
   }
   if (typeof value !== 'object') {
-    throw new CredentialSanitizationError(
-      path.join('.') || '<root>',
-      'Educational data contains a non-JSON value',
-    )
+    fail(valuePath(path), 'Portable data contains a non-JSON value')
   }
   if (activeObjects.has(value)) {
-    throw new CredentialSanitizationError(
-      path.join('.') || '<root>',
-      'Educational data contains a cycle',
-    )
+    fail(valuePath(path), 'Portable data contains a cycle')
   }
 
   activeObjects.add(value)
   try {
     if (Array.isArray(value)) {
-      const clone: CredentialFreeJsonValue[] = []
+      const keys = Reflect.ownKeys(value)
+      if (keys.some((key) => typeof key === 'symbol')) {
+        fail(valuePath(path), 'Portable data contains a symbol key')
+      }
+      if (keys.length !== value.length + 1 || !keys.includes('length')) {
+        fail(valuePath(path), 'Portable data contains a sparse array or a non-index property')
+      }
+
+      const clone: PortableSecurityKeyFreeJsonValue[] = []
       for (let index = 0; index < value.length; index += 1) {
-        if (!Object.hasOwn(value, index)) {
-          throw new CredentialSanitizationError(
-            `${path.join('.')}[${index}]`,
-            'Educational data contains a sparse array entry',
-          )
+        const descriptor = Object.getOwnPropertyDescriptor(value, String(index))
+        if (!descriptor || !descriptor.enumerable || !('value' in descriptor)) {
+          fail(`${valuePath(path)}[${index}]`, 'Portable data contains a sparse or accessor array entry')
         }
-        clone.push(
-          cloneCredentialFreeValue(value[index], [...path, `[${index}]`], activeObjects),
-        )
+        clone.push(stripKnownLegacyCredentialFields(descriptor.value, [...path, `[${index}]`], activeObjects))
       }
       return clone
     }
 
     const prototype = Object.getPrototypeOf(value)
     if (prototype !== Object.prototype && prototype !== null) {
-      throw new CredentialSanitizationError(
-        path.join('.') || '<root>',
-        'Educational data contains a non-plain object',
-      )
+      fail(valuePath(path), 'Portable data contains a non-plain object')
     }
 
-    const clone: Record<string, CredentialFreeJsonValue> = {}
-    for (const key of Object.keys(value)) {
-      const childPath = propertyPath(path, key)
-      if (RESERVED_KEYS.has(key)) {
-        throw new CredentialSanitizationError(childPath, 'Reserved object key is forbidden')
+    const clone: Record<string, PortableSecurityKeyFreeJsonValue> = {}
+    for (const key of Reflect.ownKeys(value)) {
+      if (typeof key === 'symbol') {
+        fail(valuePath(path), 'Portable data contains a symbol key')
       }
+      const childPath = propertyPath(path, key)
       const descriptor = Object.getOwnPropertyDescriptor(value, key)
-      if (!descriptor || !('value' in descriptor)) {
-        throw new CredentialSanitizationError(
-          childPath,
-          'Accessor properties are forbidden in educational data',
-        )
+      if (!descriptor || !descriptor.enumerable || !('value' in descriptor)) {
+        fail(childPath, 'Portable data contains a non-JSON or accessor property')
       }
       if (isKnownLegacyCredentialPath(path, key)) continue
-      if (FORBIDDEN_SECURITY_KEYS.has(normalizedKey(key))) {
-        throw new CredentialSanitizationError(
-          childPath,
-          'Credential, recovery, or active-session material is forbidden',
-        )
+      if (isProhibitedPortableSecurityKey(key)) {
+        fail(childPath, 'Portable security material is forbidden')
       }
-      clone[key] = cloneCredentialFreeValue(
-        descriptor.value,
-        [...path, key],
-        activeObjects,
-      )
+      Object.defineProperty(clone, key, {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: stripKnownLegacyCredentialFields(descriptor.value, [...path, key], activeObjects),
+      })
     }
     return clone
   } finally {
@@ -166,22 +108,17 @@ function cloneCredentialFreeValue(
  * stripped: AppState.parentPin and Profile.pin under AppState.profiles.
  * Credential-like aliases anywhere else fail closed rather than disappearing.
  */
-export function sanitizeCredentialFreeEducationalData(
-  value: unknown,
-): CredentialFreeJsonValue {
-  return cloneCredentialFreeValue(value, [], new WeakSet())
+export function sanitizeCredentialFreeEducationalData(value: unknown): CredentialFreeJsonValue {
+  const stripped = stripKnownLegacyCredentialFields(value, [], new WeakSet())
+  assertPortableSecurityKeyFree(stripped)
+  return stripped
 }
 
-export function serializeCredentialFreeEducationalData(
-  value: unknown,
-  space = 2,
-): string {
+export function serializeCredentialFreeEducationalData(value: unknown, space = 2): string {
   return JSON.stringify(sanitizeCredentialFreeEducationalData(value), null, space)
 }
 
 /** Uses the foundation Profile contract for the single-profile boundary. */
-export function sanitizeCredentialFreeEducationalProfile(
-  profile: Profile,
-): CredentialFreeEducationalProfile {
+export function sanitizeCredentialFreeEducationalProfile(profile: Profile): CredentialFreeEducationalProfile {
   return toCredentialFreeEducationalProfile(profile)
 }

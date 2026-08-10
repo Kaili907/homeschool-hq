@@ -1,13 +1,11 @@
 import { beforeAll, describe, expect, it, vi } from 'vitest'
 import {
+  CANONICAL_PROFILE_IDS,
   isAuthorityEstablishmentForbidden,
   LEARNER_CREDENTIAL_SCHEMA_VERSION,
   LEARNER_PIN_VERIFIER_SCHEME_VERSION,
 } from '../contracts'
-import {
-  LEARNER_PIN_VERIFIER_DOMAIN,
-  type PinVerifierCrypto,
-} from './pinVerifier'
+import { LEARNER_PIN_VERIFIER_DOMAIN, type PinVerifierCrypto } from './pinVerifier'
 import { MemoryCredentialStorage } from './testStorage'
 import {
   createLearnerCredentialRecord,
@@ -41,7 +39,7 @@ describe('device-local learner credential vault', () => {
   let template: StoredLearnerCredentialRecord
 
   beforeAll(async () => {
-    template = await createLearnerCredentialRecord('template-profile', '1234', {
+    template = await createLearnerCredentialRecord('p1', '1234', {
       now: () => new Date('2026-08-09T12:00:00.000Z'),
     })
   })
@@ -55,10 +53,10 @@ describe('device-local learner credential vault', () => {
   })
 
   it('binds the same PIN and deterministic salt to the exact profile ID', async () => {
-    const left = await createLearnerCredentialRecord('profile-a', '1234', {
+    const left = await createLearnerCredentialRecord('p1', '1234', {
       crypto: deterministicCrypto(0x5a),
     })
-    const right = await createLearnerCredentialRecord('profile-b', '1234', {
+    const right = await createLearnerCredentialRecord('p2', '1234', {
       crypto: deterministicCrypto(0x5a),
     })
 
@@ -103,16 +101,12 @@ describe('device-local learner credential vault', () => {
   })
 
   it('rejects unknown schema, verifier, and cost-parameter versions', () => {
-    for (const mutation of [
-      { schemaVersion: 2 },
-      { verifierSchemeVersion: 1 },
-      { costParametersVersion: 2 },
-    ]) {
-      expect(() =>
-        parseLearnerCredentialRecord({ ...template, ...mutation }),
-      ).toThrowError(expect.objectContaining<Partial<CredentialVaultError>>({
-        code: 'unsupported-version',
-      }))
+    for (const mutation of [{ schemaVersion: 2 }, { verifierSchemeVersion: 1 }, { costParametersVersion: 2 }]) {
+      expect(() => parseLearnerCredentialRecord({ ...template, ...mutation })).toThrowError(
+        expect.objectContaining<Partial<CredentialVaultError>>({
+          code: 'unsupported-version',
+        }),
+      )
     }
     expect(template.schemaVersion).toBe(LEARNER_CREDENTIAL_SCHEMA_VERSION)
     expect(template.verifierSchemeVersion).toBe(LEARNER_PIN_VERIFIER_SCHEME_VERSION)
@@ -136,35 +130,22 @@ describe('device-local learner credential vault', () => {
         code: 'unsupported-version',
       }),
     )
-    await expect(
-      verifyLearnerCredentialRecord(
-        unbound as StoredLearnerCredentialRecord,
-        '1234',
-      ),
-    ).resolves.toBe(false)
-    await expect(
-      verifyLearnerCredentialRecord(
-        unbound as StoredLearnerCredentialRecord,
-        '9999',
-      ),
-    ).resolves.toBe(false)
-    storage.setItem(
-      learnerCredentialStorageKey(template.profileId),
-      JSON.stringify(unbound),
-    )
-    await expect(
-      verifyLearnerPin(template.profileId, '1234', { storage }),
-    ).resolves.toBe(false)
-    await expect(
-      verifyLearnerPin(template.profileId, '9999', { storage }),
-    ).resolves.toBe(false)
+    await expect(verifyLearnerCredentialRecord(unbound as StoredLearnerCredentialRecord, '1234')).resolves.toBe(false)
+    await expect(verifyLearnerCredentialRecord(unbound as StoredLearnerCredentialRecord, '9999')).resolves.toBe(false)
+    storage.setItem(learnerCredentialStorageKey(template.profileId), JSON.stringify(unbound))
+    await expect(verifyLearnerPin(template.profileId, '1234', { storage })).resolves.toBe(false)
+    await expect(verifyLearnerPin(template.profileId, '9999', { storage })).resolves.toBe(false)
   })
 
   it('fails closed for malformed stored credential material', async () => {
     const storage = new MemoryCredentialStorage()
     storage.setItem(
       learnerCredentialStorageKey('p1'),
-      JSON.stringify({ ...template, profileId: 'p1', verifierBase64: 'not-base64' }),
+      JSON.stringify({
+        ...template,
+        profileId: 'p1',
+        verifierBase64: 'not-base64',
+      }),
     )
 
     await expect(verifyLearnerPin('p1', '1234', { storage })).resolves.toBe(false)
@@ -204,9 +185,7 @@ describe('device-local learner credential vault', () => {
     await expect(verifyLearnerPin('p1', '2222', { storage })).resolves.toBe(true)
 
     const relabeled = { ...after, profileId: 'p2' }
-    await expect(
-      verifyLearnerCredentialRecord(relabeled, '2222'),
-    ).resolves.toBe(false)
+    await expect(verifyLearnerCredentialRecord(relabeled, '2222')).resolves.toBe(false)
     storage.setItem(learnerCredentialStorageKey('p2'), JSON.stringify(relabeled))
     await expect(verifyLearnerPin('p2', '2222', { storage })).resolves.toBe(false)
 
@@ -237,13 +216,15 @@ describe('device-local learner credential vault', () => {
     expect(durableRaw).not.toContain(enrolled.saltBase64)
     expect(durableRaw).not.toContain(enrolled.verifierBase64)
     const importKey = vi.fn()
-    await expect(verifyLearnerPin('p1', '1234', {
-      storage,
-      crypto: {
-        getRandomValues: vi.fn(),
-        subtle: { importKey } as unknown as SubtleCrypto,
-      },
-    })).resolves.toBe(false)
+    await expect(
+      verifyLearnerPin('p1', '1234', {
+        storage,
+        crypto: {
+          getRandomValues: vi.fn(),
+          subtle: { importKey } as unknown as SubtleCrypto,
+        },
+      }),
+    ).resolves.toBe(false)
     expect(importKey).not.toHaveBeenCalled()
     await expect(verifyLearnerPin('p1', '0000', { storage })).resolves.toBe(false)
     await expect(verifyLearnerPin('p1', '9999', { storage })).resolves.toBe(false)
@@ -262,118 +243,75 @@ describe('device-local learner credential vault', () => {
       verifierSchemeVersion: LEARNER_PIN_VERIFIER_SCHEME_VERSION,
     })
     await expect(verifyLearnerPin('p1', '2468', { storage })).resolves.toBe(true)
-    await expect(
-      verifyLearnerCredentialRecord({ ...enrolled, profileId: 'p2' }, '2468'),
-    ).resolves.toBe(false)
+    await expect(verifyLearnerCredentialRecord({ ...enrolled, profileId: 'p2' }, '2468')).resolves.toBe(false)
   })
 
-  it('rejects malformed UTF-16 profile IDs without leaking URIError', () => {
-    for (const profileId of ['\ud800', '\udc00', `learner-\ud800`]) {
-      try {
-        learnerCredentialStorageKey(profileId)
-        throw new Error('Expected malformed profile ID to be rejected.')
-      } catch (cause) {
-        expect(cause).toBeInstanceOf(CredentialVaultError)
-        expect(cause).not.toBeInstanceOf(URIError)
-        expect(cause).toMatchObject({ code: 'invalid-profile-id' })
-      }
-    }
-
-    expect(learnerCredentialStorageKey('learner-\ud83d\ude00')).not.toBe(
-      learnerCredentialStorageKey('learner-\ud83d\ude01'),
-    )
+  it.each(CANONICAL_PROFILE_IDS)('accepts canonical profile ID %s', (profileId) => {
+    expect(learnerCredentialStorageKey(profileId)).toBe(`homeschool-hq:security:learner-credentials:v1:${profileId}`)
   })
 
-  it('rejects a credential record relabeled with a malformed profile ID', async () => {
-    const enrolled = await createLearnerCredentialRecord('profile-a', '1234')
+  it.each(['P1', 'p0', 'p6', 'p01', ' p1', 'p1 ', '\ud83d\ude00', '\u00e9', 'e\u0301', '', '\ud800', '\udc00'])(
+    'rejects unsupported profile ID %j for storage, creation, and authentication',
+    async (profileId) => {
+      expect(() => learnerCredentialStorageKey(profileId)).toThrowError(
+        expect.objectContaining<Partial<CredentialVaultError>>({
+          code: 'invalid-profile-id',
+        }),
+      )
+      await expect(createLearnerCredentialRecord(profileId, '1234')).rejects.toMatchObject({
+        code: 'invalid-profile-id',
+      })
+      await expect(
+        verifyLearnerPin(profileId, '1234', {
+          storage: new MemoryCredentialStorage(),
+        }),
+      ).rejects.toMatchObject({ code: 'invalid-profile-id' })
+    },
+  )
+
+  it('rejects a credential record relabeled with an unsupported profile ID', async () => {
+    const enrolled = await createLearnerCredentialRecord('p1', '1234')
     const relabeled = { ...enrolled, profileId: '\ud800' }
 
-    try {
-      parseLearnerCredentialRecord(relabeled)
-      throw new Error('Expected malformed record profile ID to be rejected.')
-    } catch (cause) {
-      expect(cause).toBeInstanceOf(CredentialVaultError)
-      expect(cause).not.toBeInstanceOf(URIError)
-      expect(cause).toMatchObject({ code: 'invalid-profile-id' })
-    }
-    await expect(
-      verifyLearnerCredentialRecord(
-        relabeled as StoredLearnerCredentialRecord,
-        '1234',
-      ),
-    ).resolves.toBe(false)
+    expect(() => parseLearnerCredentialRecord(relabeled)).toThrowError(
+      expect.objectContaining<Partial<CredentialVaultError>>({
+        code: 'invalid-profile-id',
+      }),
+    )
+    await expect(verifyLearnerCredentialRecord(relabeled, '1234')).resolves.toBe(false)
   })
 
-  it('rejects a valid credential copied and relabeled to another valid profile', async () => {
+  it('rejects a valid p1 credential copied and relabeled to p2', async () => {
     const storage = new MemoryCredentialStorage()
-    await enrollLearnerPin('profile-a', '1234', { storage })
-    const enrolled = readLearnerCredential('profile-a', { storage })!
-    const relabeled = { ...enrolled, profileId: 'profile-b' }
+    await enrollLearnerPin('p1', '1234', { storage })
+    const enrolled = readLearnerCredential('p1', { storage })!
+    const relabeled = { ...enrolled, profileId: 'p2' }
     const parsed = parseLearnerCredentialRecord(relabeled)
 
-    expect(parsed.profileId).toBe('profile-b')
-    expect({ ...parsed, profileId: 'profile-a' }).toEqual(enrolled)
-    await expect(
-      verifyLearnerCredentialRecord(parsed, '1234'),
-    ).resolves.toBe(false)
+    expect(parsed.profileId).toBe('p2')
+    await expect(verifyLearnerCredentialRecord(parsed, '1234')).resolves.toBe(false)
 
-    storage.setItem(
-      learnerCredentialStorageKey('profile-b'),
-      JSON.stringify(relabeled),
-    )
-    await expect(
-      verifyLearnerPin('profile-b', '1234', { storage }),
-    ).resolves.toBe(false)
+    storage.setItem(learnerCredentialStorageKey('p2'), JSON.stringify(relabeled))
+    await expect(verifyLearnerPin('p2', '1234', { storage })).resolves.toBe(false)
   })
 
-  it('fails closed across the profile and PIN identity matrix', async () => {
-    const profileA = await createLearnerCredentialRecord('profile-a', '1234', {
+  it('fails closed across the canonical profile and PIN identity matrix', async () => {
+    const profileA = await createLearnerCredentialRecord('p1', '1234', {
       crypto: deterministicCrypto(0x33),
     })
-    const profileB = await createLearnerCredentialRecord('profile-b', '5678', {
+    const profileB = await createLearnerCredentialRecord('p2', '5678', {
       crypto: deterministicCrypto(0x33),
     })
-    const samePinB = await createLearnerCredentialRecord('profile-b', '1234', {
+    const samePinB = await createLearnerCredentialRecord('p2', '1234', {
       crypto: deterministicCrypto(0x33),
     })
 
     await expect(verifyLearnerCredentialRecord(profileA, '1234')).resolves.toBe(true)
-    await expect(
-      verifyLearnerCredentialRecord({ ...profileA, profileId: 'profile-b' }, '1234'),
-    ).resolves.toBe(false)
+    await expect(verifyLearnerCredentialRecord({ ...profileA, profileId: 'p2' }, '1234')).resolves.toBe(false)
     await expect(verifyLearnerCredentialRecord(profileA, '9999')).resolves.toBe(false)
-    await expect(
-      verifyLearnerCredentialRecord({ ...profileB, profileId: 'profile-a' }, '5678'),
-    ).resolves.toBe(false)
+    await expect(verifyLearnerCredentialRecord({ ...profileB, profileId: 'p1' }, '5678')).resolves.toBe(false)
     await expect(verifyLearnerCredentialRecord(samePinB, '1234')).resolves.toBe(true)
-    await expect(
-      verifyLearnerCredentialRecord({ ...samePinB, profileId: 'profile-a' }, '1234'),
-    ).resolves.toBe(false)
+    await expect(verifyLearnerCredentialRecord({ ...samePinB, profileId: 'p1' }, '1234')).resolves.toBe(false)
     expect(profileA.verifierBase64).not.toBe(samePinB.verifierBase64)
-  })
-
-  it('preserves valid Unicode profile IDs as distinct credential identities', async () => {
-    const composed = 'learner-\u00e9-\ud83d\ude00'
-    const decomposed = 'learner-e\u0301-\ud83d\ude00'
-    const composedRecord = await createLearnerCredentialRecord(composed, '1234')
-    const decomposedRecord = await createLearnerCredentialRecord(decomposed, '5678')
-
-    expect(learnerCredentialStorageKey(composed)).not.toBe(
-      learnerCredentialStorageKey(decomposed),
-    )
-    expect(parseLearnerCredentialRecord(composedRecord).profileId).toBe(composed)
-    expect(parseLearnerCredentialRecord(decomposedRecord).profileId).toBe(decomposed)
-    await expect(
-      verifyLearnerCredentialRecord(composedRecord, '1234'),
-    ).resolves.toBe(true)
-    await expect(
-      verifyLearnerCredentialRecord(decomposedRecord, '5678'),
-    ).resolves.toBe(true)
-    await expect(
-      verifyLearnerCredentialRecord(
-        { ...composedRecord, profileId: decomposed },
-        '1234',
-      ),
-    ).resolves.toBe(false)
   })
 })

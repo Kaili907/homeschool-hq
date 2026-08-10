@@ -1,7 +1,5 @@
-import {
-  sanitizeCredentialFreeEducationalData,
-  type CredentialFreeJsonValue,
-} from '../appData'
+import { sanitizeCredentialFreeEducationalData, type CredentialFreeJsonValue } from '../appData'
+import { parseProfileId, type ProfileId } from '../contracts'
 import { isFourDigitPin } from './pinVerifier'
 import {
   enrollLegacyCredential,
@@ -14,15 +12,11 @@ import {
 } from './vault'
 
 export const LEGACY_CREDENTIAL_MIGRATION_SCHEMA_VERSION = 1 as const
-export const LEGACY_CREDENTIAL_MIGRATION_NAMESPACE =
-  'homeschool-hq:security:learner-pin-migration:v1' as const
+export const LEGACY_CREDENTIAL_MIGRATION_NAMESPACE = 'homeschool-hq:security:learner-pin-migration:v1' as const
 export const LEGACY_IMPORT_CREDENTIAL_MIGRATION_NAMESPACE =
   'homeschool-hq:security:legacy-import-pin-migration:v1' as const
 
-export type LegacyPinClassification =
-  | 'unenrolled'
-  | 'migratable'
-  | 'reset-required'
+export type LegacyPinClassification = 'unenrolled' | 'migratable' | 'reset-required'
 
 export type LegacyMigrationStage =
   | 'classified'
@@ -34,14 +28,14 @@ export type LegacyMigrationStage =
 export interface LegacyCredentialMigrationRecord {
   readonly schemaVersion: typeof LEGACY_CREDENTIAL_MIGRATION_SCHEMA_VERSION
   readonly storage: 'device-local-migration-journal'
-  readonly profileId: string
+  readonly profileId: ProfileId
   readonly classification: LegacyPinClassification
   readonly stage: LegacyMigrationStage
   readonly updatedAt: string
 }
 
 export interface LegacyCredentialMigrationOutcome {
-  readonly profileId: string
+  readonly profileId: ProfileId
   readonly classification: LegacyPinClassification
   readonly credentialState: 'none' | 'enrolled' | 'reset-required'
   readonly resumed: boolean
@@ -55,10 +49,7 @@ export interface LegacyCredentialMigrationResult {
 export interface LegacyCredentialMigrationOptions extends CredentialOperationOptions {
   readonly journalNamespace?: string
   readonly educationalDataPersistence?: DurableEducationalDataPersistence
-  readonly afterStage?: (
-    profileId: string,
-    stage: LegacyMigrationStage,
-  ) => void | Promise<void>
+  readonly afterStage?: (profileId: ProfileId, stage: LegacyMigrationStage) => void | Promise<void>
 }
 
 /**
@@ -102,13 +93,17 @@ function namespaceFrom(options?: LegacyCredentialMigrationOptions): string {
   return namespace
 }
 
-function migrationStorageKey(
-  profileId: string,
-  options?: LegacyCredentialMigrationOptions,
-): string {
+function migrationStorageKey(profileId: ProfileId, options?: LegacyCredentialMigrationOptions): string {
   // Reuse the vault's strict profile-id validation without sharing its namespace.
   learnerCredentialStorageKey(profileId)
   return `${namespaceFrom(options)}:${encodeURIComponent(profileId)}`
+}
+
+function requireProfileId(value: unknown): ProfileId {
+  const profileId = parseProfileId(value)
+  if (profileId !== null) return profileId
+  learnerCredentialStorageKey(value)
+  throw new Error('A canonical Manuel Academy profile ID is required.')
 }
 
 function timestamp(options?: LegacyCredentialMigrationOptions): string {
@@ -124,20 +119,10 @@ export function classifyLegacyPin(value: unknown): LegacyPinClassification {
   return isFourDigitPin(value) ? 'migratable' : 'reset-required'
 }
 
-function parseMigrationRecord(
-  value: unknown,
-  expectedProfileId: string,
-): LegacyCredentialMigrationRecord {
+function parseMigrationRecord(value: unknown, expectedProfileId: ProfileId): LegacyCredentialMigrationRecord {
   if (!plainRecord(value)) throw new Error('Credential migration journal is malformed.')
   const keys = Object.keys(value)
-  const expectedKeys = [
-    'schemaVersion',
-    'storage',
-    'profileId',
-    'classification',
-    'stage',
-    'updatedAt',
-  ]
+  const expectedKeys = ['schemaVersion', 'storage', 'profileId', 'classification', 'stage', 'updatedAt']
   const updatedAt = typeof value.updatedAt === 'string' ? Date.parse(value.updatedAt) : NaN
   if (
     keys.length !== expectedKeys.length ||
@@ -158,9 +143,10 @@ function parseMigrationRecord(
 }
 
 export function readLegacyCredentialMigrationRecord(
-  profileId: string,
+  value: unknown,
   options?: LegacyCredentialMigrationOptions,
 ): LegacyCredentialMigrationRecord | null {
+  const profileId = requireProfileId(value)
   const storage = storageFrom(options)
   const raw = storage.getItem(migrationStorageKey(profileId, options))
   if (raw === null) return null
@@ -174,7 +160,7 @@ export function readLegacyCredentialMigrationRecord(
 }
 
 async function advanceMigrationStage(
-  profileId: string,
+  profileId: ProfileId,
   classification: LegacyPinClassification,
   stage: LegacyMigrationStage,
   options?: LegacyCredentialMigrationOptions,
@@ -209,7 +195,7 @@ async function advanceMigrationStage(
 }
 
 interface LegacyProfileInput {
-  readonly profileId: string
+  readonly profileId: ProfileId
   readonly pin: unknown
   readonly classification: LegacyPinClassification
 }
@@ -219,12 +205,16 @@ function legacyProfilesFrom(value: unknown): LegacyProfileInput[] {
     throw new Error('Legacy educational data must contain a profiles object.')
   }
   return Object.entries(value.profiles).map(([profileId, profile]) => {
-    learnerCredentialStorageKey(profileId)
+    const canonicalProfileId = parseProfileId(profileId)
+    if (canonicalProfileId === null) {
+      throw new Error(`Legacy profile ${profileId} has an unsupported profile ID.`)
+    }
+    learnerCredentialStorageKey(canonicalProfileId)
     if (!plainRecord(profile) || profile.id !== profileId || !Object.hasOwn(profile, 'pin')) {
       throw new Error(`Legacy profile ${profileId} is malformed.`)
     }
     return {
-      profileId,
+      profileId: canonicalProfileId,
       pin: profile.pin,
       classification: classifyLegacyPin(profile.pin),
     }
@@ -248,9 +238,7 @@ async function persistAndVerifyEducationalData(
 ): Promise<void> {
   const persistence = options?.educationalDataPersistence
   if (!persistence) {
-    throw new Error(
-      'Durable educational-data persistence and read-back are required to complete credential migration.',
-    )
+    throw new Error('Durable educational-data persistence and read-back are required to complete credential migration.')
   }
   const expected = canonicalCredentialFreeJson(educationalData)
   const detachedForWrite = JSON.parse(expected) as CredentialFreeJsonValue
@@ -272,12 +260,7 @@ async function migrateOneProfile(
   const priorJournal = readLegacyCredentialMigrationRecord(profile.profileId, options)
   const priorCredential = readLearnerCredential(profile.profileId, options)
   const resumed = priorJournal !== null || priorCredential !== null
-  await advanceMigrationStage(
-    profile.profileId,
-    profile.classification,
-    'classified',
-    options,
-  )
+  await advanceMigrationStage(profile.profileId, profile.classification, 'classified', options)
 
   if (profile.classification === 'unenrolled') {
     return {
@@ -290,23 +273,16 @@ async function migrateOneProfile(
 
   if (profile.classification === 'reset-required') {
     const reset = await markLearnerCredentialResetRequired(profile.profileId, options)
-    await advanceMigrationStage(
-      profile.profileId,
-      profile.classification,
-      'credential-persisted',
-      options,
-    )
+    await advanceMigrationStage(profile.profileId, profile.classification, 'credential-persisted', options)
     const readBack = readLearnerCredential(profile.profileId, options)
-    if (!readBack || readBack.state !== 'reset-required' || readBack !== reset &&
-      JSON.stringify(readBack) !== JSON.stringify(reset)) {
+    if (
+      !readBack ||
+      readBack.state !== 'reset-required' ||
+      (readBack !== reset && JSON.stringify(readBack) !== JSON.stringify(reset))
+    ) {
       throw new Error('Reset-required credential failed migration read-back verification.')
     }
-    await advanceMigrationStage(
-      profile.profileId,
-      profile.classification,
-      'verifier-verified',
-      options,
-    )
+    await advanceMigrationStage(profile.profileId, profile.classification, 'verifier-verified', options)
     return {
       profileId: profile.profileId,
       classification: profile.classification,
@@ -322,27 +298,17 @@ async function migrateOneProfile(
   } else if (!(await verifyLearnerCredentialRecord(credential, rawPin, options))) {
     credential = await markLearnerCredentialResetRequired(profile.profileId, options)
   }
-  await advanceMigrationStage(
-    profile.profileId,
-    profile.classification,
-    'credential-persisted',
-    options,
-  )
+  await advanceMigrationStage(profile.profileId, profile.classification, 'credential-persisted', options)
 
   const readBack = readLearnerCredential(profile.profileId, options)
   if (!readBack) throw new Error('Migrated learner credential is missing after persistence.')
-  const credentialState = await verifyLearnerCredentialRecord(readBack, rawPin, options)
+  const credentialState = (await verifyLearnerCredentialRecord(readBack, rawPin, options))
     ? 'enrolled'
     : 'reset-required'
   if (credentialState === 'reset-required' && readBack.state !== 'reset-required') {
     throw new Error('Migrated learner verifier failed correctness verification.')
   }
-  await advanceMigrationStage(
-    profile.profileId,
-    profile.classification,
-    'verifier-verified',
-    options,
-  )
+  await advanceMigrationStage(profile.profileId, profile.classification, 'verifier-verified', options)
   return {
     profileId: profile.profileId,
     classification: profile.classification,
@@ -360,26 +326,16 @@ export async function migrateLegacyEducationalCredentials(
   options?: LegacyCredentialMigrationOptions,
 ): Promise<LegacyCredentialMigrationResult> {
   const profiles = legacyProfilesFrom(value)
+  const educationalData = sanitizeCredentialFreeEducationalData(value)
   const outcomes: LegacyCredentialMigrationOutcome[] = []
   for (const profile of profiles) {
     outcomes.push(await migrateOneProfile(profile, options))
   }
 
-  const educationalData = sanitizeCredentialFreeEducationalData(value)
   await persistAndVerifyEducationalData(educationalData, options)
   for (const profile of profiles) {
-    await advanceMigrationStage(
-      profile.profileId,
-      profile.classification,
-      'educational-data-sanitized',
-      options,
-    )
-    await advanceMigrationStage(
-      profile.profileId,
-      profile.classification,
-      'complete',
-      options,
-    )
+    await advanceMigrationStage(profile.profileId, profile.classification, 'educational-data-sanitized', options)
+    await advanceMigrationStage(profile.profileId, profile.classification, 'complete', options)
   }
   return { educationalData, outcomes }
 }

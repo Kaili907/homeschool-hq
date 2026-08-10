@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { PROHIBITED_PORTABLE_SECURITY_KEY_ALIASES } from '../contracts'
 import {
   CredentialSanitizationError,
   sanitizeCredentialFreeEducationalData,
@@ -48,10 +49,32 @@ describe('credential-free educational-data sanitizer', () => {
     ['session token alias', { lesson: { session_token: 'secret' } }],
     ['root Parent PIN alias', { parent_pin: '9876' }],
   ])('rejects %s instead of silently stripping it', (_label, injected) => {
-    expect(() =>
-      sanitizeCredentialFreeEducationalData({ ...legacyData(), ...injected }),
-    ).toThrow(CredentialSanitizationError)
+    expect(() => sanitizeCredentialFreeEducationalData({ ...legacyData(), ...injected })).toThrow(
+      CredentialSanitizationError,
+    )
   })
+
+  it.each(PROHIBITED_PORTABLE_SECURITY_KEY_ALIASES)(
+    'rejects shared prohibited key %s at every portable-data placement',
+    (key) => {
+      const placements = [
+        { [key]: 'blocked' },
+        { nested: { [key]: 'blocked' } },
+        { one: { two: { three: { [key]: 'blocked' } } } },
+        { items: [{ [key]: 'blocked' }] },
+        { records: { lessonOne: { [key]: 'blocked' } } },
+      ]
+
+      for (const placement of placements) {
+        expect(() =>
+          sanitizeCredentialFreeEducationalData({
+            ...legacyData(),
+            ...placement,
+          }),
+        ).toThrow(CredentialSanitizationError)
+      }
+    },
+  )
 
   it('rejects an aliased Profile PIN at the accepted legacy path', () => {
     const source = legacyData()
@@ -59,9 +82,7 @@ describe('credential-free educational-data sanitizer', () => {
     delete profiles.p1.pin
     profiles.p1.p_i_n = '1234'
 
-    expect(() => sanitizeCredentialFreeEducationalData(source)).toThrow(
-      CredentialSanitizationError,
-    )
+    expect(() => sanitizeCredentialFreeEducationalData(source)).toThrow(CredentialSanitizationError)
   })
 
   it('rejects active authorization and session material at any depth', () => {
@@ -72,7 +93,31 @@ describe('credential-free educational-data sanitizer', () => {
           activeLearnerSession: { sessionId: 'local-session' },
         },
       }),
-    ).toThrow(/active-session material/i)
+    ).toThrow(CredentialSanitizationError)
+  })
+
+  it('rejects unexpected session, grant, and token families after legacy stripping', () => {
+    for (const injected of [
+      { runtime: { session: {} } },
+      { runtime: { delegatedGrant: 'blocked' } },
+      { runtime: { backupToken: 'blocked' } },
+    ]) {
+      expect(() => sanitizeCredentialFreeEducationalData({ ...legacyData(), ...injected })).toThrow(
+        CredentialSanitizationError,
+      )
+    }
+  })
+
+  it('allows security words in learner-authored values because only keys are structural', () => {
+    expect(
+      sanitizeCredentialFreeEducationalData({
+        answer: 'Never share your password or secret.',
+        note: 'A bearer token and parent PIN are security lesson vocabulary.',
+      }),
+    ).toEqual({
+      answer: 'Never share your password or secret.',
+      note: 'A bearer token and parent PIN are security lesson vocabulary.',
+    })
   })
 
   it('serializes a detached credential-free clone', () => {

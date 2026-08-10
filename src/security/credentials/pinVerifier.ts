@@ -1,4 +1,4 @@
-import type { LearnerPinCostParameters } from '../contracts'
+import type { LearnerPinCostParameters, ProfileId } from '../contracts'
 
 export const LEARNER_PIN_COST_PARAMETERS_VERSION = 1 as const
 export const LEARNER_PIN_SALT_BYTES = 16 as const
@@ -9,11 +9,10 @@ export const LEARNER_PIN_VERIFIER_DOMAIN = 'manuel-academy:learner-pin:v2' as co
  * Version 1 is intentionally immutable. A future work-factor change must add a
  * new cost-parameter version so existing records remain reproducible.
  */
-export const LEARNER_PIN_COST_PARAMETERS_V1: Readonly<LearnerPinCostParameters> =
-  Object.freeze({
-    iterations: 600_000,
-    derivedKeyBytes: LEARNER_PIN_DERIVED_KEY_BYTES,
-  })
+export const LEARNER_PIN_COST_PARAMETERS_V1: Readonly<LearnerPinCostParameters> = Object.freeze({
+  iterations: 600_000,
+  derivedKeyBytes: LEARNER_PIN_DERIVED_KEY_BYTES,
+})
 
 export interface PinVerifierMaterial {
   readonly costParametersVersion: typeof LEARNER_PIN_COST_PARAMETERS_VERSION
@@ -36,11 +35,7 @@ export function isFourDigitPin(value: unknown): value is string {
 
 function requireCrypto(cryptoProvider?: PinVerifierCrypto): PinVerifierCrypto {
   const candidate = cryptoProvider ?? globalThis.crypto
-  if (
-    !candidate ||
-    typeof candidate.getRandomValues !== 'function' ||
-    !candidate.subtle
-  ) {
+  if (!candidate || typeof candidate.getRandomValues !== 'function' || !candidate.subtle) {
     throw new Error('Web Crypto is required for learner credential operations.')
   }
   return candidate
@@ -67,10 +62,7 @@ export function base64ToBytes(value: string, expectedBytes: number): Uint8Array 
   return bytes
 }
 
-export function isSupportedPinCostParameters(
-  version: unknown,
-  value: unknown,
-): value is LearnerPinCostParameters {
+export function isSupportedPinCostParameters(version: unknown, value: unknown): value is LearnerPinCostParameters {
   if (
     version !== LEARNER_PIN_COST_PARAMETERS_VERSION ||
     value === null ||
@@ -87,16 +79,10 @@ export function isSupportedPinCostParameters(
   )
 }
 
-function framedProfileBoundSecret(profileId: string, secret: string): Uint8Array {
+function framedProfileBoundSecret(profileId: ProfileId, secret: string): Uint8Array {
   const encoder = new TextEncoder()
-  const parts = [
-    encoder.encode(LEARNER_PIN_VERIFIER_DOMAIN),
-    encoder.encode(profileId),
-    encoder.encode(secret),
-  ]
-  const framed = new Uint8Array(
-    parts.reduce((total, part) => total + 4 + part.byteLength, 0),
-  )
+  const parts = [encoder.encode(LEARNER_PIN_VERIFIER_DOMAIN), encoder.encode(profileId), encoder.encode(secret)]
+  const framed = new Uint8Array(parts.reduce((total, part) => total + 4 + part.byteLength, 0))
   const view = new DataView(framed.buffer)
   let offset = 0
   for (const part of parts) {
@@ -109,7 +95,7 @@ function framedProfileBoundSecret(profileId: string, secret: string): Uint8Array
 }
 
 async function deriveVerifier(
-  profileId: string,
+  profileId: ProfileId,
   secret: string,
   salt: Uint8Array,
   cryptoProvider: PinVerifierCrypto,
@@ -144,7 +130,7 @@ function constantTimeEqual(left: Uint8Array, right: Uint8Array): boolean {
 }
 
 async function createVerifierForSecret(
-  profileId: string,
+  profileId: ProfileId,
   secret: string,
   cryptoProvider?: PinVerifierCrypto,
 ): Promise<PinVerifierMaterial> {
@@ -160,7 +146,7 @@ async function createVerifierForSecret(
 }
 
 export async function createPinVerifier(
-  profileId: string,
+  profileId: ProfileId,
   pin: string,
   cryptoProvider?: PinVerifierCrypto,
 ): Promise<PinVerifierMaterial> {
@@ -175,38 +161,28 @@ export async function createPinVerifier(
  * used only for reset-required tombstones; reset state always rejects PINs.
  */
 export async function createUnusablePinVerifier(
-  profileId: string,
+  profileId: ProfileId,
   cryptoProvider?: PinVerifierCrypto,
 ): Promise<PinVerifierMaterial> {
   const crypto = requireCrypto(cryptoProvider)
-  const discardedSecret = bytesToBase64(
-    crypto.getRandomValues(new Uint8Array(LEARNER_PIN_DERIVED_KEY_BYTES)),
-  )
+  const discardedSecret = bytesToBase64(crypto.getRandomValues(new Uint8Array(LEARNER_PIN_DERIVED_KEY_BYTES)))
   return createVerifierForSecret(profileId, discardedSecret, crypto)
 }
 
 export async function verifyPinVerifier(
-  profileId: string,
+  profileId: ProfileId,
   pin: unknown,
   material: PinVerifierMaterial,
   cryptoProvider?: PinVerifierCrypto,
 ): Promise<boolean> {
   if (!isFourDigitPin(pin)) return false
-  if (
-    !isSupportedPinCostParameters(
-      material.costParametersVersion,
-      material.costParameters,
-    )
-  ) {
+  if (!isSupportedPinCostParameters(material.costParametersVersion, material.costParameters)) {
     return false
   }
   try {
     const crypto = requireCrypto(cryptoProvider)
     const salt = base64ToBytes(material.saltBase64, LEARNER_PIN_SALT_BYTES)
-    const expected = base64ToBytes(
-      material.verifierBase64,
-      LEARNER_PIN_DERIVED_KEY_BYTES,
-    )
+    const expected = base64ToBytes(material.verifierBase64, LEARNER_PIN_DERIVED_KEY_BYTES)
     const actual = await deriveVerifier(profileId, pin, salt, crypto)
     return constantTimeEqual(actual, expected)
   } catch {

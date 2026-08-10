@@ -16,7 +16,8 @@ profile IDs only. They never contain a PIN, verifier, salt, or recovery secret.
 - WebCrypto PBKDF2 with HMAC-SHA-256
 - versioned domain `manuel-academy:learner-pin:v2`
 - independently length-framed UTF-8 domain, exact profile ID, and PIN input
-- no profile-ID normalization; composed and decomposed valid IDs remain distinct
+- canonical profile IDs are exactly `p1` through `p5`
+- no profile-ID trimming, case folding, or Unicode normalization
 - independently generated 16-byte salt for every enrollment/rotation
 - 600,000 iterations
 - 32-byte derived verifier
@@ -73,8 +74,8 @@ Per profile, migration advances monotonically through:
 An empty legacy PIN is classified `unenrolled` and creates no credential. An
 exact four-digit PIN is `migratable`: it is used in memory to create the
 verifier, the record is persisted, read back, and verified before the
-credential-free educational clone is produced. A caller-supplied educational
-data persistence port must then durably write that clone and return its
+preflighted credential-free educational clone is durably written. A
+caller-supplied educational data persistence port must write that clone and return its
 read-back. The migration verifies exact, credential-free structural equality
 before either final journal stage is recorded. Missing persistence, write or
 read failure, and mismatched read-back leave the journal retryable at
