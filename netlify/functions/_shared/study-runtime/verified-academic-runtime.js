@@ -13,6 +13,8 @@ const OPERATIONS = Object.freeze({
 const CALLER_AUTHORITY_KEY = /^(?:household|household_?id|student|student_?id|learner|learner_?ref|grant|grant_?id|session_?epoch|authorization_?revision|membership|relationship)$/i
 const PROTECTED_RESPONSE_KEY = /(?:raw.?answer|transcript|adult.?private|credential|service.?role|token.?digest)/i
 const NON_PRODUCTION_SENTINEL = /(?:^|[._:/-])(sentinel|demo|preview|fixture|synthetic|local-release-candidate)(?:$|[._:/-])/i
+const SAFE_REF = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,191}$/
+const RELEASE_VERSION = /^[0-9]+\.[0-9]+\.[0-9]+$/
 
 export class VerifiedAcademicRuntimeDeniedError extends Error {}
 export class VerifiedAcademicRuntimeUnavailableError extends Error {}
@@ -38,6 +40,35 @@ function assertSafeTree(value, { response = false, depth = 0 } = {}) {
   }
 }
 
+function exactObject(value, keys) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+  const actual = Object.keys(value)
+  return actual.length === keys.length && actual.every((key) => keys.includes(key))
+}
+
+/**
+ * The Academy context is a bounded proposal only. The trusted RPC injects the
+ * verified student and resolves release authority independently.
+ */
+function assertAdvisoryCurriculumContext(operation, request) {
+  if (operation !== 'session:begin') return
+  if (!exactObject(request, ['session', 'idempotencyKey', 'curriculumContext']) ||
+      !exactObject(request.session, [
+        'id', 'schema_version', 'lesson_id', 'subject_id', 'study_plan_id',
+        'state', 'started_at', 'completed_at', 'intended_local_date',
+      ]) ||
+      !exactObject(request.curriculumContext, ['releaseVersion', 'lessonRef', 'skillRefs'])) {
+    throw new VerifiedAcademicRuntimeDeniedError('runtime_curriculum_context_invalid')
+  }
+  const { releaseVersion, lessonRef, skillRefs } = request.curriculumContext
+  if (!RELEASE_VERSION.test(releaseVersion) || !SAFE_REF.test(lessonRef) ||
+      lessonRef !== request.session.lesson_id || !Array.isArray(skillRefs) ||
+      skillRefs.length > 64 || skillRefs.some((ref) => !SAFE_REF.test(ref)) ||
+      new Set(skillRefs).size !== skillRefs.length) {
+    throw new VerifiedAcademicRuntimeDeniedError('runtime_curriculum_context_invalid')
+  }
+}
+
 export function createVerifiedAcademicRuntimeGateway(options = {}) {
   const rpc = options.rpc ?? createSupabaseServiceRpc(options)
   return Object.freeze({
@@ -49,6 +80,7 @@ export function createVerifiedAcademicRuntimeGateway(options = {}) {
         throw new VerifiedAcademicRuntimeDeniedError('runtime_request_invalid')
       }
       assertSafeTree(request)
+      assertAdvisoryCurriculumContext(operation, request)
       let result
       try {
         result = await rpc.call('academy_study_execute_verified_runtime_v1', {

@@ -14,7 +14,7 @@ function functionPort(methods: readonly string[]): Record<string, (...args: neve
 
 function adapters(): Session13DurableAcademicAdapters {
   return {
-    studySession: functionPort(['createSession', 'transitionSession']),
+    studySession: functionPort(['resolveCurriculumBinding', 'createSession', 'transitionSession']),
     checkpoint: functionPort(['readCheckpoint', 'compareAndSwapCheckpoint']),
     reviewQueue: functionPort(['upsertReview']),
     calendar: functionPort(['upsertCalendarBlock']),

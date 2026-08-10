@@ -21,9 +21,11 @@ export const STUDY_PRIVATE_TABLES = [
   'study_persistence_metadata',
   'study_effective_settings_admin_defaults',
   'study_effective_settings_safety_policy',
+  'study_curriculum_release_approvals',
 ] as const
 
 export const STUDY_RPC = {
+  resolveCurriculumBinding: 'academy_study_resolve_curriculum_binding_v1',
   createSession: 'academy_study_create_session',
   transitionSession: 'academy_study_transition_session',
   appendEvent: 'academy_study_append_event',
@@ -32,6 +34,7 @@ export const STUDY_RPC = {
   upsertAdultManagedRecord: 'academy_study_upsert_adult_managed_record',
   effectiveSettings: 'academy_study_effective_settings',
   effectiveSettingsV2: 'academy_study_effective_settings_v2',
+  curriculumBindingReadiness: 'academy_study_curriculum_binding_readiness_v1',
   appendAdultNote: 'academy_study_append_adult_note',
   listAdultNoteMetadata: 'academy_study_list_adult_note_metadata',
   readAdultNote: 'academy_study_read_adult_note',
