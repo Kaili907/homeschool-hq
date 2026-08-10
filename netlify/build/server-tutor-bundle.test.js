@@ -13,18 +13,27 @@
  * the opposite of what is claimed, so the frozen content is reached through the
  * real alias, bundled by the real bundler, and executed as real JavaScript.
  */
-import { mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest'
+import { viteConfig } from '../../vite.config'
 import {
+  DEFAULT_SERVER_TUTOR_OUTPUT_DIRECTORY,
+  FROZEN_PACKAGE_ALIAS_SOURCES,
   NETLIFY_FUNCTION_BUILD,
   PRODUCTION_TUTOR_ENTRY_POINTS,
+  SERVER_TUTOR_ARTIFACT_SCHEMA_VERSION,
+  SERVER_TUTOR_BUNDLE_FILE,
+  SERVER_TUTOR_MANIFEST_FILE,
   TUTOR_ADAPTER_ENTRY_POINT,
+  buildServerTutorPrebundle,
   bundleProductionTutor,
   frozenPackageAliases,
+  verifyFrozenTutorCustody,
 } from './server-tutor-bundle.mjs'
 
 const repoRoot = new URL('../../', import.meta.url)
@@ -285,5 +294,257 @@ describe('server-side Tutor build feasibility', () => {
     expect(netlifyConfig).toContain('functions = "netlify/functions"')
     const published = readRepoFile('netlify.toml').includes('functions = "netlify/build"')
     expect(published).toBe(false)
+  })
+})
+
+const repoRootPath = fileURLToPath(repoRoot)
+const TEST_MAPPING_FIXTURE = 'netlify/build/host-content-mapping.test.json'
+
+async function relativeFiles(root) {
+  const entries = await readdir(root, { recursive: true, withFileTypes: true })
+  return entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => join(entry.parentPath, entry.name).slice(root.length + 1).replaceAll('\\', '/'))
+    .sort()
+}
+
+describe('production-grade server Tutor prebundle', () => {
+  let workingDirectory
+  let first
+  let second
+  let bundleText
+  let serverEntry
+  let functionFilesBefore
+
+  beforeAll(async () => {
+    workingDirectory = await mkdtemp(join(tmpdir(), 'study-server-tutor-prebundle-'))
+    functionFilesBefore = await relativeFiles(join(repoRootPath, 'netlify', 'functions'))
+    first = await buildServerTutorPrebundle({
+      mapping: { mode: 'test', fixturePath: TEST_MAPPING_FIXTURE },
+      outputDirectory: join(workingDirectory, 'first'),
+      buildSourceSha: null,
+    })
+    second = await buildServerTutorPrebundle({
+      mapping: { mode: 'test', fixturePath: TEST_MAPPING_FIXTURE },
+      outputDirectory: join(workingDirectory, 'second'),
+      buildSourceSha: null,
+    })
+    const bundlePath = join(first.outputDirectory, SERVER_TUTOR_BUNDLE_FILE)
+    bundleText = await readFile(bundlePath, 'utf8')
+    serverEntry = await import(pathToFileURL(bundlePath).href)
+  }, 120_000)
+
+  afterAll(async () => {
+    if (workingDirectory) await rm(workingDirectory, { recursive: true, force: true })
+  })
+
+  it('feeds browser Vite and server esbuild from one canonical alias authority', () => {
+    expect(viteConfig.resolve?.alias).toBe(frozenPackageAliases)
+    expect(FROZEN_PACKAGE_ALIAS_SOURCES).toEqual({
+      '@frozen/tutor-math-r1': 'adaptive-tutor/subjects/math/index.ts',
+    })
+    expect(Object.keys(frozenPackageAliases)).toEqual(Object.keys(FROZEN_PACKAGE_ALIAS_SOURCES))
+    const serverInputs = Object.keys(first.metafile.inputs).map((path) => path.replaceAll('\\', '/'))
+    expect(serverInputs.some((path) => path.endsWith(FROZEN_PACKAGE_ALIAS_SOURCES['@frozen/tutor-math-r1']))).toBe(true)
+  })
+
+  it('verifies the real frozen package against the external custody pin', async () => {
+    await expect(verifyFrozenTutorCustody()).resolves.toEqual({
+      packageName: '@manuel-academy/adaptive-tutor-math-content',
+      packageVersion: '1.0.2',
+      manifestVersion: '1.0.0',
+      checksumManifestSha256: 'a9c44585d36e120dfac6b95aade0cf77763cabeff1026490672244dbc87f27ee',
+      checksumEntryCount: 91,
+    })
+  })
+
+  it('fails before bundling when the frozen package is missing', async () => {
+    await expect(verifyFrozenTutorCustody({
+      packageRoot: join(workingDirectory, 'missing-frozen-package'),
+    })).rejects.toThrow('Frozen Tutor package is missing')
+  })
+
+  it('fails before bundling when the frozen checksum set drifts', async () => {
+    const corrupt = await mkdtemp(join(tmpdir(), 'study-corrupt-frozen-tutor-'))
+    try {
+      await Promise.all([
+        writeFile(join(corrupt, 'package.json'), JSON.stringify({
+          name: '@manuel-academy/adaptive-tutor-math-content',
+          version: '1.0.2',
+        })),
+        writeFile(join(corrupt, 'manifest.json'), JSON.stringify({ version: '1.0.0' })),
+        writeFile(join(corrupt, 'SHA256SUMS.txt'), `${'0'.repeat(64)}  ./index.ts\n`),
+      ])
+      await expect(verifyFrozenTutorCustody({ packageRoot: corrupt }))
+        .rejects.toThrow('Frozen Tutor checksum manifest mismatch')
+    } finally {
+      await rm(corrupt, { recursive: true, force: true })
+    }
+  })
+
+  it('emits the exact v1 manifest schema and verified digests', async () => {
+    const fixtureBytes = await readFile(fileURLToPath(new URL(TEST_MAPPING_FIXTURE, repoRoot)))
+    const expectedMappingDigest = createHash('sha256').update(fixtureBytes).digest('hex')
+    const manifestOnDisk = JSON.parse(await readFile(
+      join(first.outputDirectory, SERVER_TUTOR_MANIFEST_FILE),
+      'utf8',
+    ))
+
+    expect(Object.keys(first.manifest)).toEqual([
+      'schemaVersion',
+      'runtime',
+      'frozenPackage',
+      'adapterContractVersion',
+      'bundle',
+      'hostContentMapping',
+      'buildSourceSha',
+    ])
+    expect(first.manifest).toEqual({
+      schemaVersion: SERVER_TUTOR_ARTIFACT_SCHEMA_VERSION,
+      runtime: { platform: 'node', nodeTarget: 'node22', moduleFormat: 'esm' },
+      frozenPackage: {
+        specifier: '@frozen/tutor-math-r1',
+        name: '@manuel-academy/adaptive-tutor-math-content',
+        packageVersion: '1.0.2',
+        manifestVersion: '1.0.0',
+        checksumManifestSha256: 'a9c44585d36e120dfac6b95aade0cf77763cabeff1026490672244dbc87f27ee',
+        checksumEntryCount: 91,
+      },
+      adapterContractVersion: 'study-tutor.v1',
+      bundle: {
+        file: 'server-tutor.mjs',
+        sha256: createHash('sha256').update(Buffer.from(bundleText)).digest('hex'),
+      },
+      hostContentMapping: {
+        status: 'test-fixture',
+        artifactPath: TEST_MAPPING_FIXTURE,
+        sha256: expectedMappingDigest,
+      },
+      buildSourceSha: null,
+    })
+    expect(manifestOnDisk).toEqual(first.manifest)
+  })
+
+  it('emits byte-identical bundle and manifest digests across unchanged builds', async () => {
+    expect(second.manifest).toEqual(first.manifest)
+    expect(await readFile(join(second.outputDirectory, SERVER_TUTOR_BUNDLE_FILE)))
+      .toEqual(await readFile(join(first.outputDirectory, SERVER_TUTOR_BUNDLE_FILE)))
+    expect(await readFile(join(second.outputDirectory, SERVER_TUTOR_MANIFEST_FILE)))
+      .toEqual(await readFile(join(first.outputDirectory, SERVER_TUTOR_MANIFEST_FILE)))
+  })
+
+  it('requires a reviewed mapping artifact and digest in production mode', async () => {
+    await expect(buildServerTutorPrebundle({
+      mapping: { mode: 'production' },
+      outputDirectory: join(workingDirectory, 'missing-production-mapping'),
+    })).rejects.toThrow('requires a reviewed mapping artifact and SHA-256 digest')
+  })
+
+  it('pins the future production order without weakening the current browser build', () => {
+    const packageJson = JSON.parse(readRepoFile('package.json'))
+    const documentation = readRepoFile('docs/server-tutor-prebundle.md')
+    expect(packageJson.scripts['server-tutor:bundle']).toBe('node netlify/build/server-tutor-bundle.mjs')
+    expect(packageJson.scripts.build).not.toContain('server-tutor:bundle')
+    expect(documentation).toContain(
+      'curriculum:build -> server-tutor:bundle (reviewed mapping) -> vite build -> stamp-sw',
+    )
+  })
+
+  it('allows the dedicated mapping fixture only in explicit test mode', async () => {
+    await expect(buildServerTutorPrebundle({
+      mapping: {
+        mode: 'production',
+        artifactPath: TEST_MAPPING_FIXTURE,
+        expectedSha256: '0'.repeat(64),
+      },
+      outputDirectory: join(workingDirectory, 'fixture-in-production'),
+    })).rejects.toThrow('test mapping fixture cannot be used in production mode')
+    expect(first.manifest.hostContentMapping.status).toBe('test-fixture')
+  })
+
+  it('exports only the server factory and contract version', () => {
+    expect(Object.keys(serverEntry).sort()).toEqual([
+      'SERVER_TUTOR_ADAPTER_CONTRACT_VERSION',
+      'createProductionServerTutorRuntime',
+    ])
+    expect(serverEntry.SERVER_TUTOR_ADAPTER_CONTRACT_VERSION).toBe('study-tutor.v1')
+  })
+
+  it('executes a non-default frozen Tutor program through the server factory in Node', async () => {
+    const runtime = serverEntry.createProductionServerTutorRuntime({
+      scope: {
+        householdRef: 'household:server-prebundle-test',
+        learnerRef: 'learner:server-prebundle-test',
+        sessionRef: 'study-session:server-prebundle-test',
+      },
+      hostProfileRef: 'profile:server-prebundle-test',
+      safety: {
+        mode: 'production',
+        classifierVersion: 'server-prebundle-test-v1',
+        evaluate: async () => ({ outcome: 'clear', mayContinue: true, adultHelpState: 'not-needed' }),
+      },
+      eventLedger: { append: async () => 'appended' },
+      isCurrent: () => true,
+      bridgeSessionRef: 'study-session:server-prebundle-test',
+    })
+    await runtime.launch({
+      sessionRef: 'study-session:server-prebundle-test',
+      lessonRef: 'math-lesson-04-multistep-word-problem-reasoning',
+      householdTimeZone: 'America/Detroit',
+      learnerLocalDate: '2026-08-01',
+    })
+    const result = await runtime.submit({
+      requestRef: 'study-turn:server-prebundle-test',
+      sessionRef: 'study-session:server-prebundle-test',
+      lessonRef: 'math-lesson-04-multistep-word-problem-reasoning',
+      segmentRef: 'segment:server-prebundle-test',
+      skillRef: SEQUENCE_04_ID,
+      subject: 'math',
+      taskType: 'guided-practice',
+      transientLearnerText: 'ready',
+      expectedAnswer: 'ready',
+      occurredAt: '2026-08-01T14:00:00.000Z',
+      learnerLocalDate: '2026-08-01',
+      householdTimeZone: 'America/Detroit',
+    })
+    expect(result).toEqual({
+      status: 'accepted',
+      eventRef: 'study-turn:server-prebundle-test',
+      visibleText: SEQUENCE_04_PROMPT,
+    })
+    expect(result.visibleText).not.toBe(DEFAULT_SEQUENCE_PROMPT)
+  })
+
+  it('keeps the server artifact out of browser inputs, dist and source maps', async () => {
+    const inputs = Object.keys(first.metafile.inputs).map((path) => path.replaceAll('\\', '/'))
+    expect(inputs.some((path) => path === 'src/App.tsx' || path.startsWith('src/components/'))).toBe(false)
+    expect(inputs.some((path) => /\.(?:css|scss|sass|less)$/.test(path))).toBe(false)
+    expect(bundleText).not.toContain('@frozen/tutor-math-r1')
+    expect(bundleText).not.toMatch(/\bimport\s*\(/)
+
+    const distRoot = join(repoRootPath, 'dist')
+    const distFiles = await relativeFiles(distRoot).catch(() => [])
+    expect(distFiles.some((path) => /server-tutor|generated/i.test(path))).toBe(false)
+    for (const mapFile of distFiles.filter((path) => path.endsWith('.map'))) {
+      const mapText = await readFile(join(distRoot, mapFile), 'utf8')
+      expect(mapText).not.toContain('math-seq-pv-regroup-v1')
+      expect(mapText).not.toContain('Adaptive Math Intervention Content')
+    }
+
+    const sourceFiles = (await relativeFiles(join(repoRootPath, 'src')))
+      .filter((path) => /\.(?:ts|tsx|js|jsx)$/.test(path))
+    for (const sourceFile of sourceFiles) {
+      const source = await readFile(join(repoRootPath, 'src', sourceFile), 'utf8')
+      expect(source).not.toContain(DEFAULT_SERVER_TUTOR_OUTPUT_DIRECTORY)
+      expect(source).not.toContain(SERVER_TUTOR_BUNDLE_FILE)
+    }
+  })
+
+  it('does not create a callable Netlify function or Tutor route', async () => {
+    expect(await relativeFiles(join(repoRootPath, 'netlify', 'functions'))).toEqual(functionFilesBefore)
+    expect(DEFAULT_SERVER_TUTOR_OUTPUT_DIRECTORY.startsWith('netlify/functions/')).toBe(false)
+    const netlifyConfig = readRepoFile('netlify.toml')
+    expect(netlifyConfig).not.toMatch(/from = "\/api\/study\/tutor/i)
+    expect(netlifyConfig).not.toMatch(/functions\/[^\s"]*tutor/i)
   })
 })

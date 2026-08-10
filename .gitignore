@@ -8,5 +8,8 @@ backups/
 # Local Netlify folder
 .netlify
 
+# Server-only Tutor prebundle staging (recreated deterministically by the build).
+netlify/build/generated/
+
 # CURR-1: generated curriculum chunks (rebuilt from curriculum-content/ by scripts/build-curriculum.mjs)
 public/curriculum/

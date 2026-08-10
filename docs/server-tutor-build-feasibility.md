@@ -1,5 +1,9 @@
 # Server-side Tutor: build feasibility
 
+> Successor: the reusable, deterministic infrastructure proved by this spike is
+> documented in [server-tutor-prebundle.md](./server-tutor-prebundle.md). This
+> file remains the historical feasibility record.
+
 **STUDY-A1-SERVER-TUTOR-BUILD-FEASIBILITY-C**, base `a310702`.
 
 ```

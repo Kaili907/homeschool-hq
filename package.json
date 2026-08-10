@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npm run curriculum:build && vite",
     "build": "npm run curriculum:build && vite build && node scripts/stamp-sw.mjs",
+    "server-tutor:bundle": "node netlify/build/server-tutor-bundle.mjs",
     "curriculum:build": "node scripts/build-curriculum.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",

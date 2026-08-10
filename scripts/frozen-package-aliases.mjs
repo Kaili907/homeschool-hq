@@ -26,9 +26,26 @@
  */
 import { fileURLToPath } from 'node:url'
 
-/** Specifier to repo-relative path. Written this way so it reads as data. */
+/**
+ * The reviewed frozen Tutor package and the custody pins outside its protected
+ * tree. The SHA-256 is the digest of the package's own SHA256SUMS.txt; that
+ * file in turn pins every interior file. Keeping these values beside the alias
+ * prevents build resolution and custody from acquiring separate authorities.
+ */
+export const FROZEN_TUTOR_PACKAGE = Object.freeze({
+  specifier: '@frozen/tutor-math-r1',
+  aliasSource: 'adaptive-tutor/subjects/math/index.ts',
+  packageRoot: 'adaptive-tutor/subjects/math/',
+  packageName: '@manuel-academy/adaptive-tutor-math-content',
+  packageVersion: '1.0.2',
+  manifestVersion: '1.0.0',
+  checksumManifest: 'SHA256SUMS.txt',
+  checksumManifestSha256: 'a9c44585d36e120dfac6b95aade0cf77763cabeff1026490672244dbc87f27ee',
+})
+
+/** Specifier to repo-relative path. This is the ONE alias authority. */
 export const FROZEN_PACKAGE_ALIAS_SOURCES = Object.freeze({
-  '@frozen/tutor-math-r1': 'adaptive-tutor/subjects/math/index.ts',
+  [FROZEN_TUTOR_PACKAGE.specifier]: FROZEN_TUTOR_PACKAGE.aliasSource,
 })
 
 const repoRoot = new URL('../', import.meta.url)

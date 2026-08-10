@@ -5,14 +5,14 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { frozenPackageAliases } from './scripts/frozen-package-aliases.mjs'
 
-export default defineConfig({
+export const viteConfig = defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     // Frozen Math R1 subject package, consumed through the study runtime's
     // subject registry (see adaptive-tutor/study-engine/runtime/src/frozen-math-r1.d.ts).
     // Declared in ./scripts/frozen-package-aliases.mjs so the server build
     // resolves the specifier to the same file this one does.
-    alias: { ...frozenPackageAliases },
+    alias: frozenPackageAliases,
   },
   test: {
     projects: [
@@ -60,3 +60,5 @@ export default defineConfig({
   // real path), which Vite's default allow-list check doesn't recognize as the root.
   server: { port: 5173, strictPort: true, fs: { strict: false } },
 })
+
+export default viteConfig
