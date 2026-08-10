@@ -226,6 +226,25 @@ describe('the student academy surface serves a decoupled program', () => {
     expect(text(container)).not.toMatch(/try again|retry/i)
   })
 
+  it('fails visibly without falling back when an existing learner pin is unsupported', async () => {
+    const onPatch = vi.fn()
+    const pinned = enrollInCatalog(
+      emptyProfile('p3', 'Sixth Grader', '6'),
+      catalogFor('5', 'mathematics'),
+      '2026-08-03T09:00:00.000Z',
+    )
+    pinned.academy!.releaseVersion = '2.0.0'
+
+    await mount([{ subject: 'mathematics', level: '5' }], pinned, { kind: 'home' }, onPatch)
+
+    expect(text(container)).toContain(
+      "This curriculum version isn't available on this device. Ask a grown-up for help.",
+    )
+    expect(fetch).not.toHaveBeenCalled()
+    expect(onPatch).not.toHaveBeenCalled()
+    expect(pinned.academy?.releaseVersion).toBe('2.0.0')
+  })
+
   it('explains when working levels produce no configured courses', async () => {
     await mount([{ subject: 'science', level: '5' }], emptyProfile('p3', 'Sixth Grader', '6'))
     expect(text(container)).toContain(

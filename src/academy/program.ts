@@ -1,5 +1,10 @@
 import type { AcademyGrade } from '../types'
-import { loadCatalog, loadSchedule } from './contentClient'
+import {
+  AcademyContentVersionError,
+  assertSupportedAcademyRelease,
+  loadCatalog,
+  loadSchedule,
+} from './contentClient'
 import type {
   AcademyCatalog,
   AcademyCatalogCourse,
@@ -47,7 +52,21 @@ const dayKey = (week: number, day: number) => `${week}:${day}`
 export function composeProgram(
   entries: readonly AcademyProgramEntry[],
   sources: readonly AcademyProgramSource[],
+  expectedReleaseVersion?: string,
 ): AcademyProgram {
+  const releaseVersion = expectedReleaseVersion ?? sources[0]?.catalog.releaseVersion ?? ''
+  for (const source of sources) {
+    for (const actualVersion of [source.catalog.releaseVersion, source.schedule.releaseVersion]) {
+      if (actualVersion !== releaseVersion) {
+        throw new AcademyContentVersionError(
+          'release-mismatch',
+          releaseVersion,
+          actualVersion,
+        )
+      }
+    }
+  }
+
   const byLevel = new Map(sources.map((s) => [s.level, s]))
   const courses: AcademyCatalogCourse[] = []
   const levelOf: Record<string, AcademyGrade> = {}
@@ -80,7 +99,6 @@ export function composeProgram(
   }
 
   const levels = levelsOf(entries.filter((e) => byLevel.has(e.level)))
-  const releaseVersion = sources[0]?.catalog.releaseVersion ?? ''
   const primary = levels[0] ?? sources[0]?.level ?? '5'
 
   return {
@@ -99,13 +117,18 @@ export function composeProgram(
 /** Fetch every level this program needs (one catalog + schedule each), then compose. */
 export async function loadProgram(
   entries: readonly AcademyProgramEntry[],
+  releaseVersion: string,
 ): Promise<AcademyProgram> {
+  assertSupportedAcademyRelease(releaseVersion)
   const levels = levelsOf(entries)
   const sources = await Promise.all(
     levels.map(async (level): Promise<AcademyProgramSource> => {
-      const [catalog, schedule] = await Promise.all([loadCatalog(level), loadSchedule(level)])
+      const [catalog, schedule] = await Promise.all([
+        loadCatalog(level, releaseVersion),
+        loadSchedule(level, releaseVersion),
+      ])
       return { level, catalog, schedule }
     }),
   )
-  return composeProgram(entries, sources)
+  return composeProgram(entries, sources, releaseVersion)
 }

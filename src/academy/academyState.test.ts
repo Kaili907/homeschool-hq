@@ -65,6 +65,17 @@ describe('CURR-1 enrollment', () => {
     expect(again.academy?.lessons[L1].segmentIndex).toBe(1)
     expect(again.academy?.enrolledAt).toBe(NOW)
   })
+
+  it('does not overwrite an existing learner release pin during re-enrollment', () => {
+    const p = enrolled()
+    const futureCatalog = { ...catalog, releaseVersion: '2.0.0' }
+    const again = enrollInCatalog(p, futureCatalog, '2026-09-01T00:00:00.000Z')
+    expect(again.academy?.releaseVersion).toBe('1.0.0')
+  })
+
+  it('bootstraps brand-new Academy state from the current runtime release', () => {
+    expect(emptyAcademyState('7', NOW).releaseVersion).toBe('1.0.0')
+  })
 })
 
 describe('CURR-1 start / resume', () => {
@@ -219,6 +230,14 @@ describe('CURR-1 stale-attempt protection', () => {
     expect(isStaleAttempt(p, L1)).toBe(false)
     p = { ...p, academy: { ...p.academy!, releaseVersion: '2.0.0' } }
     expect(isStaleAttempt(p, L1)).toBe(true)
+  })
+
+  it('keeps an existing lesson attempt bound to its starting release', () => {
+    let p = startLesson(enrolled(), L1, NOW)
+    const futureCatalog = { ...catalog, releaseVersion: '2.0.0' }
+    p = enrollInCatalog(p, futureCatalog, '2026-09-01T00:00:00.000Z')
+    expect(p.academy?.releaseVersion).toBe('1.0.0')
+    expect(p.academy?.lessons[L1].releaseVersion).toBe('1.0.0')
   })
 })
 

@@ -3,8 +3,13 @@ import type { AcademyAssessmentAttempt, ISODate, Profile, SchoolYear } from '../
 import { isoToday } from '../../appState'
 import { isSchoolYearConfigured, nudgePointer, resolvePointer } from '../../curriculum/pacing'
 import { enabledAcademyEntries, hasEnabledAcademyProgram } from '../../academy/workingLevel'
+import { isAcademyContentVersionError } from '../../academy/contentClient'
 import { loadProgram } from '../../academy/program'
-import { ACADEMY_SUBJECT_LABELS, type AcademyCatalog } from '../../academy/contentTypes'
+import {
+  ACADEMY_RELEASE_VERSION,
+  ACADEMY_SUBJECT_LABELS,
+  type AcademyCatalog,
+} from '../../academy/contentTypes'
 import { courseProgress, masteryOf, recordAssessmentAttempt } from '../../academy/academyState'
 
 /**
@@ -28,19 +33,30 @@ export function AcademyParentPanel({ profiles, sy, onPatchProfile }: Props) {
   // ACADEMY-LEVEL-DECOUPLE: progress is reported over her PROGRAM (per-subject
   // working levels), which may draw courses from more than one level.
   const entries = useMemo(() => (learner ? enabledAcademyEntries(learner) : []), [learner])
+  const releaseVersion = learner?.academy?.releaseVersion ?? ACADEMY_RELEASE_VERSION
   const [catalog, setCatalog] = useState<AcademyCatalog | null>(null)
+  const [loadError, setLoadError] = useState<string | null>(null)
 
   useEffect(() => {
     let current = true
     setCatalog(null)
+    setLoadError(null)
     if (entries.length === 0) return
-    loadProgram(entries)
+    loadProgram(entries, releaseVersion)
       .then((program) => current && setCatalog(program.catalog))
-      .catch(() => current && setCatalog(null))
+      .catch((error: unknown) => {
+        if (!current) return
+        setCatalog(null)
+        setLoadError(
+          isAcademyContentVersionError(error)
+            ? "This learner's curriculum version isn't available on this device."
+            : "This learner's Academy catalog couldn't load right now.",
+        )
+      })
     return () => {
       current = false
     }
-  }, [entries])
+  }, [entries, releaseVersion])
 
   if (!learner) {
     return (
@@ -69,7 +85,11 @@ export function AcademyParentPanel({ profiles, sy, onPatchProfile }: Props) {
           </button>
         ))}
       </div>
-      {!catalog ? (
+      {loadError ? (
+        <p role="alert" className="rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm font-semibold">
+          {loadError}
+        </p>
+      ) : !catalog ? (
         <p role="status" className="text-sm font-semibold text-slate-500">
           Loading her course catalog…
         </p>

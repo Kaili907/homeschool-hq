@@ -3,10 +3,11 @@ import type { AcademyGrade, Profile, SchoolYear } from '../../types'
 import { isoToday } from '../../appState'
 import { derivedScopeWeek, isSchoolYearConfigured, resolvePointer } from '../../curriculum/pacing'
 import type { AcademyRoute } from '../../academy/academyRoute'
-import { loadUnit } from '../../academy/contentClient'
+import { isAcademyContentVersionError, loadUnit } from '../../academy/contentClient'
 import { loadProgram, type AcademyProgram } from '../../academy/program'
 import type { AcademyProgramEntry } from '../../academy/workingLevel'
 import {
+  ACADEMY_RELEASE_VERSION,
   ACADEMY_SUBJECT_LABELS,
   type AcademyCatalog,
   type AcademyCatalogCourse,
@@ -60,6 +61,13 @@ type ProgramLoadState =
   | { entriesKey: string; status: 'ready'; program: AcademyProgram }
   | { entriesKey: string; status: 'error'; message: string }
 
+const VERSION_UNAVAILABLE_COPY =
+  "This curriculum version isn't available on this device. Ask a grown-up for help."
+
+function contentLoadMessage(error: unknown, fallback: string): string {
+  return isAcademyContentVersionError(error) ? VERSION_UNAVAILABLE_COPY : fallback
+}
+
 const EMPTY_DASHBOARD_CATALOG: AcademyCatalog = {
   releaseVersion: '',
   grade: '5',
@@ -110,8 +118,10 @@ export function AcademyRouter(props: AcademyProps) {
   // The entries array is rebuilt on every render; its CONTENT is the real
   // dependency, so the key drives the effect and the ref carries the values.
   const entriesKey = entries.map((e) => `${e.subject}@${e.level}`).join(',')
+  const releaseVersion = profile.academy?.releaseVersion ?? ACADEMY_RELEASE_VERSION
+  const loadKey = `${releaseVersion}|${entriesKey}`
   const [loadState, setLoadState] = useState<ProgramLoadState>({
-    entriesKey,
+    entriesKey: loadKey,
     status: 'loading',
   })
   const entriesRef = useRef(entries)
@@ -119,34 +129,37 @@ export function AcademyRouter(props: AcademyProps) {
 
   useEffect(() => {
     let current = true
-    const requestedKey = entriesKey
+    const requestedKey = loadKey
     setLoadState({ entriesKey: requestedKey, status: 'loading' })
-    loadProgram(entriesRef.current)
+    loadProgram(entriesRef.current, releaseVersion)
       .then((composed) => {
         if (current) {
           setLoadState({ entriesKey: requestedKey, status: 'ready', program: composed })
         }
       })
-      .catch(() => {
+      .catch((error: unknown) => {
         if (current) {
           setLoadState({
             entriesKey: requestedKey,
             status: 'error',
-            message: "Academy courses couldn't load right now. Ask a grown-up for help.",
+            message: contentLoadMessage(
+              error,
+              "Academy courses couldn't load right now. Ask a grown-up for help.",
+            ),
           })
         }
       })
     return () => {
       current = false
     }
-  }, [entriesKey])
+  }, [loadKey, releaseVersion])
 
   // A resolved program belongs only to the exact entry set that requested it.
   // Treat an older result as loading during the render before the effect above
   // starts the replacement request, so removed courses cannot authorize a child.
-  const currentLoadState: ProgramLoadState = loadState.entriesKey === entriesKey
+  const currentLoadState: ProgramLoadState = loadState.entriesKey === loadKey
     ? loadState
-    : { entriesKey, status: 'loading' }
+    : { entriesKey: loadKey, status: 'loading' }
   const program = currentLoadState.status === 'ready' ? currentLoadState.program : null
   const loadError = currentLoadState.status === 'error' ? currentLoadState.message : null
   const catalog = program?.catalog ?? null
@@ -159,7 +172,10 @@ export function AcademyRouter(props: AcademyProps) {
   const enrolledIds = profile.academy?.courseIds
   const desiredKey = catalog?.courses.map((c) => c.courseId).sort().join(',') ?? null
   const enrolledKey = enrolledIds ? [...enrolledIds].sort().join(',') : null
-  const inSync = catalog !== null && desiredKey === enrolledKey && profile.academy?.grade === catalog.grade
+  const inSync = catalog !== null
+    && desiredKey === enrolledKey
+    && profile.academy?.grade === catalog.grade
+    && profile.academy.releaseVersion === releaseVersion
   useEffect(() => {
     if (!catalog || !routeIsAvailable || inSync || catalog.courses.length === 0) return
     const now = new Date().toISOString()
@@ -244,6 +260,7 @@ export function AcademyRouter(props: AcademyProps) {
     onPatch,
     onExit,
     schoolYear: props.schoolYear,
+    releaseVersion,
   }
   switch (route.kind) {
     case 'home':
@@ -314,6 +331,7 @@ interface SharedViewProps {
   /** courseId → the academy level it came from (courses may span levels). */
   levelOf: Record<string, AcademyGrade>
   schoolYear: SchoolYear | undefined
+  releaseVersion: string
   onNavigate: (route: AcademyRoute) => void
   onPatch: (update: (prev: Profile) => Profile) => void
   onExit: () => void
@@ -438,25 +456,31 @@ function AcademyCourseView({
 function AcademyUnitView({
   profile,
   catalog,
+  releaseVersion,
   onNavigate,
   courseId,
   unitNumber,
 }: SharedViewProps & { courseId: string; unitNumber: number }) {
   const [unit, setUnit] = useState<AcademyUnitChunk | null>(null)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   useEffect(() => {
     let current = true
     setUnit(null)
-    setError(false)
-    loadUnit(courseId, unitNumber)
+    setError(null)
+    loadUnit(courseId, unitNumber, releaseVersion)
       .then((u) => current && setUnit(u))
-      .catch(() => current && setError(true))
+      .catch((loadError: unknown) => current && setError(
+        contentLoadMessage(loadError, MISSING_CONTENT_COPY.unit),
+      ))
     return () => {
       current = false
     }
-  }, [courseId, unitNumber])
+  }, [courseId, unitNumber, releaseVersion])
   const course = catalog.courses.find((c) => c.courseId === courseId)
-  if (error || !course) {
+  if (error) {
+    return <ContentUnavailable onBack={() => onNavigate({ kind: 'home' })} message={error} />
+  }
+  if (!course) {
     return <MissingContent onBack={() => onNavigate({ kind: 'home' })} label="unit" />
   }
   if (!unit) return <LoadingShell onBack={() => onNavigate({ kind: 'course', courseId })} />
@@ -532,6 +556,7 @@ function AcademyLessonView({
   profile,
   catalog,
   levelOf,
+  releaseVersion,
   onNavigate,
   onPatch,
   courseId,
@@ -539,20 +564,22 @@ function AcademyLessonView({
   lessonId,
 }: SharedViewProps & { courseId: string; unitNumber: number; lessonId: string }) {
   const [unit, setUnit] = useState<AcademyUnitChunk | null>(null)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [adultOk, setAdultOk] = useState(false)
   const [checkMode, setCheckMode] = useState<'guided' | 'independent'>('independent')
   useEffect(() => {
     let current = true
     setUnit(null)
-    setError(false)
-    loadUnit(courseId, unitNumber)
+    setError(null)
+    loadUnit(courseId, unitNumber, releaseVersion)
       .then((u) => current && setUnit(u))
-      .catch(() => current && setError(true))
+      .catch((loadError: unknown) => current && setError(
+        contentLoadMessage(loadError, MISSING_CONTENT_COPY.lesson),
+      ))
     return () => {
       current = false
     }
-  }, [courseId, unitNumber])
+  }, [courseId, unitNumber, releaseVersion])
 
   const lesson = unit?.lessons.find((l) => l.lesson_id === lessonId)
   const state = profile.academy?.lessons[lessonId]
@@ -564,7 +591,15 @@ function AcademyLessonView({
     onPatch((prev) => startLesson(prev, lessonId, now))
   }, [lesson, state, lessonId, onPatch])
 
-  if (error || (unit && !lesson)) {
+  if (error) {
+    return (
+      <ContentUnavailable
+        onBack={() => onNavigate({ kind: 'unit', courseId, unitNumber })}
+        message={error}
+      />
+    )
+  }
+  if (unit && !lesson) {
     return <MissingContent onBack={() => onNavigate({ kind: 'unit', courseId, unitNumber })} label="lesson" />
   }
   if (!unit || !lesson || !state) {
@@ -795,22 +830,35 @@ function AcademyLessonView({
 
 function AcademyAssessmentView({
   profile,
+  releaseVersion,
   onNavigate,
   courseId,
   unitNumber,
 }: SharedViewProps & { courseId: string; unitNumber: number }) {
   const [unit, setUnit] = useState<AcademyUnitChunk | null>(null)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   useEffect(() => {
     let current = true
-    loadUnit(courseId, unitNumber)
+    setUnit(null)
+    setError(null)
+    loadUnit(courseId, unitNumber, releaseVersion)
       .then((u) => current && setUnit(u))
-      .catch(() => current && setError(true))
+      .catch((loadError: unknown) => current && setError(
+        contentLoadMessage(loadError, MISSING_CONTENT_COPY.assessment),
+      ))
     return () => {
       current = false
     }
-  }, [courseId, unitNumber])
-  if (error || (unit && !unit.assessment)) {
+  }, [courseId, unitNumber, releaseVersion])
+  if (error) {
+    return (
+      <ContentUnavailable
+        onBack={() => onNavigate({ kind: 'unit', courseId, unitNumber })}
+        message={error}
+      />
+    )
+  }
+  if (unit && !unit.assessment) {
     return <MissingContent onBack={() => onNavigate({ kind: 'unit', courseId, unitNumber })} label="assessment" />
   }
   if (!unit) return <LoadingShell onBack={() => onNavigate({ kind: 'unit', courseId, unitNumber })} />
@@ -874,6 +922,16 @@ function MissingContent({ onBack, label }: { onBack: () => void; label: keyof ty
     <AcademyShell title="Manuel Academy" onExit={onBack} exitLabel="Back">
       <p role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 font-semibold">
         {MISSING_CONTENT_COPY[label]}
+      </p>
+    </AcademyShell>
+  )
+}
+
+function ContentUnavailable({ onBack, message }: { onBack: () => void; message: string }) {
+  return (
+    <AcademyShell title="Manuel Academy" onExit={onBack} exitLabel="Back">
+      <p role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 font-semibold">
+        {message}
       </p>
     </AcademyShell>
   )

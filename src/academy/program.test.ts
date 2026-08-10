@@ -117,6 +117,27 @@ describe('composeProgram', () => {
     expect(program.schedule.days).toEqual([])
     expect(program.levels).toEqual([])
   })
+
+  it('rejects catalog and schedule content from different releases', () => {
+    const mismatched: AcademyProgramSource = {
+      ...G5,
+      schedule: { ...G5.schedule, releaseVersion: '0.9.0' },
+    }
+    expect(() => composeProgram(MIXED, [mismatched, G7], '1.0.0')).toThrow(
+      /release mismatch/,
+    )
+  })
+
+  it('rejects catalogs from a release other than the requested pin', () => {
+    const mismatched: AcademyProgramSource = {
+      ...G7,
+      catalog: { ...G7.catalog, releaseVersion: '0.9.0' },
+      schedule: { ...G7.schedule, releaseVersion: '0.9.0' },
+    }
+    expect(() => composeProgram(MIXED, [G5, mismatched], '1.0.0')).toThrow(
+      /release mismatch/,
+    )
+  })
 })
 
 describe('loadProgram', () => {
@@ -139,12 +160,34 @@ describe('loadProgram', () => {
       return Promise.resolve({ ok: body !== undefined, status: body ? 200 : 404, json: async () => body })
     })
 
-    return loadProgram(MIXED).then((program) => {
+    return loadProgram(MIXED, '1.0.0').then((program) => {
       expect(seen.sort()).toEqual(Object.keys(bodies).sort())
       expect(program.catalog.courses.map((c) => c.courseId)).toEqual([
         'ma-g5-mathematics',
         'ma-g7-english-language-arts',
       ])
     })
+  })
+
+  it('rejects an unsupported pinned release before fetching any fallback content', async () => {
+    const fetchMock = vi.fn()
+    vi.stubGlobal('fetch', fetchMock)
+
+    await expect(loadProgram(MIXED, '2.0.0')).rejects.toMatchObject({
+      code: 'unsupported-release',
+      requestedVersion: '2.0.0',
+    })
+    expect(fetchMock).not.toHaveBeenCalled()
+  })
+
+  it('rejects an unsupported pin even when the learner currently has no program entries', async () => {
+    const fetchMock = vi.fn()
+    vi.stubGlobal('fetch', fetchMock)
+
+    await expect(loadProgram([], '2.0.0')).rejects.toMatchObject({
+      code: 'unsupported-release',
+      requestedVersion: '2.0.0',
+    })
+    expect(fetchMock).not.toHaveBeenCalled()
   })
 })
