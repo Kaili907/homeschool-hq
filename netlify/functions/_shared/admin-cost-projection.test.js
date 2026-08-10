@@ -190,6 +190,15 @@ describe('Admin cost aggregate projection', () => {
     ]))
   })
 
+  it('accepts Study Anthropic usage without relabeling it as Tutor, Jarvis, or TTS', () => {
+    const model = buildAdminCostProjection([
+      record({ engine: 'study', engineVersion: 'study-safety-v1' }),
+    ], today, NOW)
+    expect(model.breakdowns.engines).toEqual([
+      expect.objectContaining({ key: 'study', label: 'Study' }),
+    ])
+  })
+
   it('keeps unknown usage and calculated cost unavailable instead of zero', () => {
     const model = buildAdminCostProjection([
       record({

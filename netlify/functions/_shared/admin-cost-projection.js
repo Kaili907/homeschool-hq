@@ -12,7 +12,7 @@ export const ADMIN_COST_MAX_RANGE_DAYS = 366
 
 const DAY_MS = 24 * 60 * 60 * 1_000
 const RANGE_PRESETS = new Set(['today', '7-days', '30-days', 'month'])
-const ENGINES = new Set(['tutor', 'jarvis', 'tts'])
+const ENGINES = new Set(['tutor', 'study', 'jarvis', 'tts'])
 const PROVIDERS = new Set(['anthropic', 'elevenlabs'])
 const MODEL_TIERS = new Set(['sonnet', 'haiku'])
 const BILLING_DISPOSITIONS = new Set(['billable', 'not_billable', 'unknown'])
@@ -154,7 +154,7 @@ function validateRecord(record) {
     reject(503, 'cost_source_unavailable')
   }
   const aiShape = record.provider === 'anthropic'
-    && (record.engine === 'tutor' || record.engine === 'jarvis')
+    && (record.engine === 'tutor' || record.engine === 'study' || record.engine === 'jarvis')
     && MODEL_TIERS.has(record.logicalModelTier)
     && record.ttsCharacters === null
   const ttsShape = record.provider === 'elevenlabs'
@@ -301,7 +301,13 @@ function presentAggregate(aggregate, sourcePartial) {
 }
 
 function engineLabel(engine) {
-  return engine === 'tutor' ? 'Tutor' : engine === 'jarvis' ? 'Jarvis' : 'Text to speech'
+  return engine === 'tutor'
+    ? 'Tutor'
+    : engine === 'study'
+      ? 'Study'
+      : engine === 'jarvis'
+        ? 'Jarvis'
+        : 'Text to speech'
 }
 
 function providerLabel(provider) {

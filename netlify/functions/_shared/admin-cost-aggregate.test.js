@@ -147,6 +147,18 @@ describe('Admin cost database aggregate projection', () => {
     ])
   })
 
+  it('accepts and truthfully labels the bounded Study engine group', () => {
+    const model = buildAdminCostAggregateProjection(aggregateSource({
+      groups: [
+        group(),
+        group({ dimension: 'engine', key: 'study' }),
+      ],
+    }), RANGE, NOW)
+    expect(model.breakdowns.engines).toEqual([
+      expect.objectContaining({ key: 'study', label: 'Study' }),
+    ])
+  })
+
   it('surfaces accounting-gap evidence separately without fabricating usage or cost', () => {
     const empty = group({
       records: '0',

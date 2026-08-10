@@ -47,11 +47,13 @@ The integrated ADMIN-R1 migration order is:
 6. `20260809121000_academy_provider_usage_cost_aggregate.sql`
 7. `20260809130000_academy_admin_audit_foundation.sql`
 8. `20260810120000_academy_provider_pricing_terms.sql`
+9. `20260810141000_academy_study_provider_cost_accounting.sql`
 
 The telemetry manifest entry depends on authorization, and the provider
 usage/cost entry depends on telemetry. Provider pricing depends on the aggregate
 and ADMIN-15 audit foundation. These unique versions replace the parallel-branch
-timestamp collision; none has been applied to hosted Supabase.
+timestamp collision. Study cost accounting uses the later globally unique
+`20260810141000` version; none has been applied to hosted Supabase.
 
 ## Supabase: operational telemetry foundation (2026-08-09)
 
@@ -107,6 +109,25 @@ Anthropic cache-write pricing remains unsupported because current accounting
 does not retain a trusted five-minute versus one-hour TTL quantity split. The
 migration, Admin API, and database lookup reject that pricing dimension; a
 positive cache-write usage row fails closed to unavailable cost.
+
+## Supabase: Study safety provider cost accounting (2026-08-10, not applied hosted)
+
+`supabase/migrations/20260810141000_academy_study_provider_cost_accounting.sql`
+adds the bounded nullable ledger `purpose` dimension and the service-only
+`academy_record_provider_usage_v2` RPC. Existing Tutor, Jarvis, and TTS calls
+delegate to the unchanged v1 recorder with a null purpose. The only newly
+admitted tuple is `engine=study`, `purpose=safety_classification`, and
+`provider=anthropic`.
+
+Study billable usage is calculated only by the existing insert-time,
+effective-dated provider-pricing trigger. No price is seeded. No matching term
+leaves `cost_kind=unavailable` and `cost_micros=null`, including all-zero
+billable usage; positive Anthropic
+cache-write usage remains unavailable. Immutable component snapshots retain
+exact bigint IntegerMicros rates and results, and later terms do not recompute
+old rows. The v2 RPC returns the canonical ledger `usageId` so later Provider
+Attempt Journal instrumentation can store that linkage without this migration
+duplicating journal tables. See `docs/study-provider-cost-accounting.md`.
 
 ## Supabase: authorized Admin safety projection (2026-08-08)
 

@@ -124,6 +124,7 @@ const REASONS = new Set<AdminCostCompletenessReason>([
 ])
 const BREAKDOWN_LABELS = new Set([
   'Tutor',
+  'Study',
   'Jarvis',
   'Text to speech',
   'Anthropic',

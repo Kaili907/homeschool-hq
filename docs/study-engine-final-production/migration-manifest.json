@@ -183,6 +183,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-provider-pricing-terms-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810141000",
+      "filename": "20260810141000_academy_study_provider_cost_accounting.sql",
+      "sha256": "ae7cba827236b1a0e41c89533d321e2e82d00b54d17eb6e13234db7791f307a3",
+      "dependency": "20260810120000_academy_provider_pricing_terms.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-study-provider-cost-accounting-v1",
+      "supersessionStatus": "current"
     }
   ]
 }
