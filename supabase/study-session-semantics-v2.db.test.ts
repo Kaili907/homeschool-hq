@@ -13,15 +13,20 @@ const files = [
   './migrations/20260801170000_academy_study_adult_review_operations.sql',
   './migrations/20260801190000_academy_study_final_production_reconciliation.sql',
   './tests/study_engine_fixtures.sql',
+  './migrations/20260809160000_academy_curriculum_release_registry.sql',
   './migrations/20260810120000_academy_study_effective_settings_v2.sql',
   './migrations/20260810150000_academy_study_curriculum_binding.sql',
   './migrations/20260810151000_academy_study_session_semantics_v2.sql',
+  './migrations/20260810153000_academy_study_release_registry_bridge.sql',
 ] as const
 
 const sql = Promise.all(files.map((path) => readFile(new URL(path, import.meta.url), 'utf8')))
 const GUARDIAN_A = '00000000-0000-0000-0000-0000000000a1'
 const HOUSEHOLD_A = '00000000-0000-0000-0000-000000000011'
 const STUDENT_A = '00000000-0000-0000-0000-000000000101'
+const RELEASE_ID = '16000000-0000-4000-8000-000000000001'
+const RELEASE_2_ID = '26000000-0000-4000-8000-000000000002'
+const MANIFEST_2_SHA = 'b'.repeat(64)
 
 let database: PGlite
 let sessionDigest: string
@@ -153,6 +158,68 @@ function checkpoint(revision: number) {
   }
 }
 
+async function registerRelease2() {
+  await database.exec(`
+    insert into public.academy_curriculum_releases (
+      release_id, package_id, version, status, registered_at, authored_on,
+      provenance_class, source_commit, source_root,
+      package_manifest_sha256, checksum_manifest_sha256,
+      curriculum_manifest_sha256, file_inventory_sha256,
+      file_count, byte_count, course_count, unit_count, lesson_count,
+      assessment_count, text_count, schedule_count,
+      grade_5_course_count, grade_5_unit_count, grade_5_lesson_count,
+      grade_5_assessment_count, grade_5_text_count, grade_5_schedule_count,
+      grade_7_course_count, grade_7_unit_count, grade_7_lesson_count,
+      grade_7_assessment_count, grade_7_text_count, grade_7_schedule_count,
+      grade_8_course_count, grade_8_unit_count, grade_8_lesson_count,
+      grade_8_assessment_count, grade_8_text_count, grade_8_schedule_count
+    )
+    select
+      '${RELEASE_2_ID}', 'manuel-academy-grades-5-7-8-curriculum-v2',
+      '2.0.0', 'published', '2026-08-10T15:35:00Z', '2026-08-10',
+      'legacy_import', '${'2'.repeat(40)}',
+      'curriculum-content/manuel-academy/2.0.0',
+      '${'a'.repeat(64)}', '${'c'.repeat(64)}', '${MANIFEST_2_SHA}',
+      '${'d'.repeat(64)}',
+      1, 1, course_count, unit_count, lesson_count,
+      assessment_count, text_count, schedule_count,
+      grade_5_course_count, grade_5_unit_count, grade_5_lesson_count,
+      grade_5_assessment_count, grade_5_text_count, grade_5_schedule_count,
+      grade_7_course_count, grade_7_unit_count, grade_7_lesson_count,
+      grade_7_assessment_count, grade_7_text_count, grade_7_schedule_count,
+      grade_8_course_count, grade_8_unit_count, grade_8_lesson_count,
+      grade_8_assessment_count, grade_8_text_count, grade_8_schedule_count
+    from public.academy_curriculum_releases
+    where version = '1.0.0';
+    insert into public.academy_curriculum_release_files (
+      release_id, relative_path, byte_count, sha256, content_type,
+      safe_classification, immutable_locator
+    ) values (
+      '${RELEASE_2_ID}', 'curriculum-manifest.json', 1,
+      '${MANIFEST_2_SHA}', 'application/json',
+      'metadata_only_internal_source',
+      'git_commit_path:${'2'.repeat(40)}:curriculum-content/manuel-academy/2.0.0/curriculum-manifest.json'
+    );
+  `)
+}
+
+async function appendProductionPointer(
+  releaseId: string,
+  revision: number,
+  changeKind: 'activate' | 'rollback',
+  registeredAt: string,
+) {
+  await database.exec(`
+    insert into public.academy_curriculum_active_pointers (
+      environment, release_id, revision, change_kind, binding_mode,
+      registered_at
+    ) values (
+      'production', '${releaseId}', ${revision}, '${changeKind}',
+      'study_new_sessions', '${registeredAt}'
+    )
+  `)
+}
+
 beforeAll(async () => {
   database = await PGlite.create()
   await database.exec(bootstrap)
@@ -220,7 +287,9 @@ describe.sequential('authoritative production Study session semantics V2', () =>
         revision: 1,
         lessonId: 'lesson-production-a',
         currentSegmentId: 'segment-production-a',
-        curriculumBinding: { status: 'bound', releaseVersion: '1.0.0' },
+        curriculumBinding: {
+          status: 'bound', releaseId: RELEASE_ID, releaseVersion: '1.0.0',
+        },
         effectiveSettings: { maximumWorkMinutes: 30 },
       },
     })
@@ -363,6 +432,111 @@ describe.sequential('authoritative production Study session semantics V2', () =>
     expect(JSON.stringify(resumed.body)).not.toMatch(
       /private.?note|raw.?safety|tutor.?chat|assessment.?answer|emotional|personality|diagnostic|secret|raw.?db/i,
     )
+  })
+
+  it('pins V2 sessions across registry activation and rollback', async () => {
+    await registerRelease2()
+    await appendProductionPointer(
+      RELEASE_2_ID, 3, 'activate', '2026-08-10T15:40:00Z',
+    )
+    const release2Request = {
+      ...beginRequest,
+      idempotencyKey: 'begin-production-release-2',
+      lessonId: 'lesson-production-release-2',
+      initialSegmentId: 'segment-production-release-2',
+      curriculumContext: {
+        releaseVersion: '2.0.0',
+        lessonRef: 'lesson-production-release-2',
+        skillRefs: ['skill-production-release-2'],
+      },
+    }
+    await expect(runtime('session:begin', {
+      ...release2Request,
+      idempotencyKey: 'begin-production-release-2-mismatch',
+    })).resolves.toMatchObject({
+      body: { status: 'unavailable', reasonCode: 'curriculum-release-mismatch' },
+    })
+
+    await database.exec(`
+      update public.academy_subject_enrollments
+      set curriculum_version = '2.0.0'
+      where id = '15100000-0000-4000-8000-000000000001'::uuid
+    `)
+    const release2 = await runtime('session:begin', release2Request)
+    expect(release2.body).toMatchObject({
+      status: 'begun', revision: 1,
+      curriculumBinding: {
+        status: 'bound', releaseId: RELEASE_2_ID, releaseVersion: '2.0.0',
+      },
+    })
+    const release2SessionId = release2.body.sessionId as string
+    await expect(runtime('session:resume', {
+      sessionId, curriculumReleaseVersion: '1.0.0',
+    })).resolves.toMatchObject({
+      body: {
+        status: 'resumable',
+        curriculumBinding: { releaseId: RELEASE_ID, releaseVersion: '1.0.0' },
+      },
+    })
+
+    await appendProductionPointer(
+      RELEASE_ID, 4, 'rollback', '2026-08-10T15:50:00Z',
+    )
+    const rollbackRequest = {
+      ...beginRequest,
+      idempotencyKey: 'begin-production-after-rollback',
+      lessonId: 'lesson-production-after-rollback',
+      initialSegmentId: 'segment-production-after-rollback',
+      curriculumContext: {
+        releaseVersion: '1.0.0',
+        lessonRef: 'lesson-production-after-rollback',
+        skillRefs: ['skill-production-after-rollback'],
+      },
+    }
+    await expect(runtime('session:begin', {
+      ...rollbackRequest,
+      idempotencyKey: 'begin-production-after-rollback-mismatch',
+    })).resolves.toMatchObject({
+      body: { status: 'unavailable', reasonCode: 'curriculum-release-mismatch' },
+    })
+    await database.exec(`
+      update public.academy_subject_enrollments
+      set curriculum_version = '1.0.0'
+      where id = '15100000-0000-4000-8000-000000000001'::uuid
+    `)
+    const rollback = await runtime('session:begin', rollbackRequest)
+    expect(rollback.body).toMatchObject({
+      status: 'begun', revision: 1,
+      curriculumBinding: {
+        status: 'bound', releaseId: RELEASE_ID, releaseVersion: '1.0.0',
+      },
+    })
+    const rollbackSessionId = rollback.body.sessionId as string
+    await expect(runtime('session:resume', {
+      sessionId: release2SessionId, curriculumReleaseVersion: '2.0.0',
+    })).resolves.toMatchObject({
+      body: {
+        status: 'resumable',
+        curriculumBinding: { releaseId: RELEASE_2_ID, releaseVersion: '2.0.0' },
+      },
+    })
+
+    const pinned = await database.query<{
+      id: string
+      curriculum_release_version: string
+    }>(`
+      select id, curriculum_release_version
+      from public.academy_study_sessions
+      where id in ($1, $2, $3)
+      order by curriculum_release_version, id
+    `, [sessionId, release2SessionId, rollbackSessionId])
+    expect(pinned.rows).toEqual([
+      { id: rollbackSessionId, curriculum_release_version: '1.0.0' },
+      { id: sessionId, curriculum_release_version: '1.0.0' },
+      { id: release2SessionId, curriculum_release_version: '2.0.0' },
+    ].sort((a, b) =>
+      a.curriculum_release_version.localeCompare(b.curriculum_release_version)
+      || a.id.localeCompare(b.id)))
   })
 
   it('preserves the immutable release and rejects a mid-session release change', async () => {
