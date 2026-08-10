@@ -410,6 +410,7 @@ export const ADMIN_AUDIT_ACTIONS = [
   'curriculum_entity.tombstone',
   'curriculum_draft.collaborator.add',
   'curriculum_draft.collaborator.revoke',
+  'curriculum_standard_review.update',
   'curriculum.approve',
   'curriculum.publish',
   'release.activate',
@@ -425,6 +426,7 @@ export const ADMIN_AUDIT_RESOURCE_TYPES = [
   'incident',
   'curriculum_draft',
   'curriculum_entity',
+  'curriculum_standard_review',
   'curriculum_release',
   'application_release',
 ] as const

@@ -18,6 +18,14 @@ import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/c
 import { readAdminAuditPage, AdminAuditReadError } from '../../admin/auditHttpSource'
 import type { AdminAuditFilters, AdminAuditReadState } from '../../admin/auditLogModel'
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
+import {
+  createCurriculumStandardsReviewHttpSource,
+} from '../../admin/curriculum-standards-review/httpSource'
+import {
+  CurriculumStandardsReviewError,
+  type CurriculumStandardsReviewDecision,
+  type CurriculumStandardsReviewItem,
+} from '../../admin/curriculum-standards-review/contracts'
 import { readAdminSafetyOperations } from '../../admin/safetyOperationsHttpSource'
 import type { SafetyOperationsReadState } from '../../admin/safetyOperationsModel'
 import { CurriculumBrowser } from '../../admin/curriculum/CurriculumBrowser'
@@ -43,11 +51,16 @@ import { AdminCostsDashboard } from './AdminCostsDashboard'
 import { LearnerAnalytics } from './LearnerAnalytics'
 import { AdminSafetyOperations } from './AdminSafetyOperations'
 import { CurriculumValidationDashboard } from './CurriculumValidationDashboard'
+import {
+  CurriculumStandardsReviewWorkspace,
+  type CurriculumStandardsReviewReadState,
+  type StandardsReviewFormValue,
+} from './CurriculumStandardsReviewWorkspace'
 import { EnginePerformanceDashboard } from './EnginePerformanceDashboard'
 import { SystemHealthDashboard } from './SystemHealthDashboard'
 import { AdminAuditLog } from './AdminAuditLog'
 
-export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
+export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'curriculum-standards-review' | 'unknown'
 
 const ENGINE_PAGE_LABELS: Readonly<Record<AdminEngineId, string>> = {
   tutor: 'Tutor',
@@ -65,6 +78,7 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
   if (!suffix) return 'overview'
   if (suffix === 'curriculum/validation') return 'curriculum-validation'
+  if (suffix === 'curriculum/standards-review') return 'curriculum-standards-review'
   if (suffix === 'health' || suffix.startsWith('health/')) return 'system-health'
   if (suffix === 'engines') return 'engines'
   if (suffix.startsWith('engines/')) return adminRouteEngine(pathname) ? 'engines' : 'unknown'
@@ -122,6 +136,10 @@ export function AdminConsoleRoute() {
   const [healthReadState, setHealthReadState] = useState<SystemHealthReadState>({ status: 'loading' })
   const [validationState, setValidationState] = useState<CurriculumValidationReadState>({ status: 'loading' })
   const [validationRetry, setValidationRetry] = useState(0)
+  const [standardsReviewState, setStandardsReviewState] = useState<CurriculumStandardsReviewReadState>({ status: 'loading' })
+  const [standardsReviewRetry, setStandardsReviewRetry] = useState(0)
+  const [savingStandardsReviewKey, setSavingStandardsReviewKey] = useState<string | null>(null)
+  const [standardsReviewSaveError, setStandardsReviewSaveError] = useState<'invalid' | 'conflict' | 'forbidden' | 'unavailable' | null>(null)
   const [engineState, setEngineState] = useState<EnginePerformanceReadState>({ status: 'loading' })
   const [selectedEngine, setSelectedEngine] = useState<AdminEngineId>(() => adminRouteEngine(window.location.pathname) ?? 'tutor')
   const [engineWindow, setEngineWindow] = useState<EnginePerformanceWindowPreset>('30d')
@@ -136,6 +154,7 @@ export function AdminConsoleRoute() {
   const [auditReadState, setAuditReadState] = useState<AdminAuditReadState>({ status: 'loading' })
   const [auditRetry, setAuditRetry] = useState(0)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
+  const standardsReviewSource = useMemo(() => createCurriculumStandardsReviewHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
   const section = adminRouteSection(pathname) ?? 'unknown'
@@ -234,6 +253,28 @@ export function AdminConsoleRoute() {
     })
     return () => controller.abort()
   }, [authorizationState, section, validationRetry])
+
+  useEffect(() => {
+    if (section !== 'curriculum-standards-review') {
+      setStandardsReviewState({ status: 'loading' })
+      return
+    }
+    if (!hasCapability(authorization, 'curriculum:read')) {
+      setStandardsReviewState({ status: 'denied' })
+      return
+    }
+    const controller = new AbortController()
+    setStandardsReviewState({ status: 'loading' })
+    void standardsReviewSource.list('published_release', '1.0.0').then(
+      (value) => {
+        if (!controller.signal.aborted) setStandardsReviewState({ status: 'ready', decisions: value.decisions })
+      },
+      () => {
+        if (!controller.signal.aborted) setStandardsReviewState({ status: 'error' })
+      },
+    )
+    return () => controller.abort()
+  }, [authorizationState, section, standardsReviewRetry, standardsReviewSource])
 
   useEffect(() => {
     if (section !== 'engines') return
@@ -365,6 +406,34 @@ export function AdminConsoleRoute() {
     setAuditCursors((current) => current.length > 1 ? current.slice(0, -1) : current)
   }
 
+  async function updateStandardsReview(item: CurriculumStandardsReviewItem, value: StandardsReviewFormValue) {
+    const { decision, status: _currentStatus, ...candidate } = item
+    setSavingStandardsReviewKey(item.reviewKey)
+    setStandardsReviewSaveError(null)
+    try {
+      const result = await standardsReviewSource.update({
+        ...candidate,
+        ...value,
+        expectedRevision: decision?.revision ?? 0,
+        idempotencyKey: crypto.randomUUID(),
+      })
+      setStandardsReviewState((current) => {
+        if (current.status !== 'ready') return current
+        const decisions: CurriculumStandardsReviewDecision[] = current.decisions
+          .filter((currentDecision) => currentDecision.reviewKey !== result.decision.reviewKey)
+          .concat(result.decision)
+        return { status: 'ready', decisions }
+      })
+    } catch (error) {
+      const code = error instanceof CurriculumStandardsReviewError ? error.code : 'unavailable'
+      setStandardsReviewSaveError(code === 'invalid' ? 'invalid'
+        : code === 'conflict' ? 'conflict'
+          : code === 'forbidden' || code === 'unauthenticated' ? 'forbidden' : 'unavailable')
+    } finally {
+      setSavingStandardsReviewKey(null)
+    }
+  }
+
   if (authorization.status === 'resolving') return <AdminConsole authorization={authorization} />
   if (authorization.status === 'unauthorized') return <AdminConsole authorization={authorization} />
 
@@ -381,11 +450,12 @@ export function AdminConsoleRoute() {
     )
   }
 
-  const activeSection: AdminSection = section === 'curriculum-validation'
+  const activeSection: AdminSection = section === 'curriculum-validation' || section === 'curriculum-standards-review'
     ? 'curriculum'
     : section === 'unknown' ? 'overview' : section
   const title = section === 'curriculum-validation'
     ? 'Curriculum validation'
+    : section === 'curriculum-standards-review' ? 'Curriculum standards review'
     : section === 'system-health' ? 'System Health'
       : section === 'engines' ? `${ENGINE_PAGE_LABELS[selectedEngine]} Engine Performance`
         : section === 'costs' ? 'AI & Costs'
@@ -458,6 +528,17 @@ export function AdminConsoleRoute() {
             onRetry={() => setValidationRetry((value) => value + 1)}
           />
         )}
+        {section === 'curriculum-standards-review' && (
+          <CurriculumStandardsReviewWorkspace
+            readState={standardsReviewState}
+            canManage={hasCapability(authorization, 'curriculum:drafts:write')}
+            canApprove={hasCapability(authorization, 'curriculum:approve')}
+            savingReviewKey={savingStandardsReviewKey}
+            saveError={standardsReviewSaveError}
+            onRetry={() => setStandardsReviewRetry((value) => value + 1)}
+            onUpdate={updateStandardsReview}
+          />
+        )}
         {section === 'system-health' && (
           <SystemHealthDashboard
             authorization={authorization}
@@ -480,7 +561,7 @@ export function AdminConsoleRoute() {
             onRetry={() => setAuditRetry((value) => value + 1)}
           />
         )}
-        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'audit-log'].includes(section) && (
+        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'curriculum-standards-review', 'system-health', 'audit-log'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>

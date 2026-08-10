@@ -10,6 +10,26 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: curriculum standards human review (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810130000_academy_curriculum_standards_review.sql`.
+
+The migration adds a forced-RLS standards-review decision ledger and private
+idempotency receipts after the draft-authoring and validation foundations. It
+uses exact ADMIN-18 finding sets, revision CAS, database reauthorization, and
+an evidence-gated lifecycle. Reads require `curriculum:read`; ordinary review
+state writes require `curriculum:drafts:write`; approved mappings require
+`curriculum:approve` and complete canonical ID, framework/version, title/text,
+evidence source, and reviewer note fields.
+
+The additive `curriculum_standard_review.update` audit action records only
+status and revision. The migration does not change immutable release content,
+draft entity payloads, learner data, or runtime release binding. Decisions wait
+for a later explicit apply-to-draft workflow. It has not been applied to hosted
+Supabase. Its tracked SHA-256 is in
+`docs/admin-console/curriculum-standards-review-migration.json`.
+
 ## Supabase: Curriculum Studio draft authoring (2026-08-10)
 
 Tracked migration:

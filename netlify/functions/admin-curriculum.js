@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import { createAdminCurriculumAuthoringService } from './_shared/admin-curriculum-authoring.js'
+import { createAdminCurriculumStandardsReviewService } from './_shared/admin-curriculum-standards-review.js'
 import { createAdminCurriculumRegistryReader } from './_shared/admin-curriculum-registry-reader.js'
 import {
   assertExactObject,
@@ -25,6 +26,8 @@ const RELEASE_VERSION = /^[0-9]+\.[0-9]+\.[0-9]+$/
 const TARGET_VERSION = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9.-]+)?$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const ENTITY_REF = /^[a-z0-9][a-z0-9:-]{2,127}$/
+const REVIEW_KEY = /^csr-[0-9a-f]{16}$/
+const FINDING_ID = /^cvf-[0-9a-f]{16}$/
 const ENTITY_TYPES = new Set(CURRICULUM_DRAFT_ENTITY_TYPES)
 const MAX_BODY_BYTES = 1_100_000
 
@@ -64,6 +67,14 @@ function routeFromPath(path) {
       : null
   if (!prefix) return null
   const resource = path.slice(prefix.length)
+  if (resource === 'standards-reviews') return { kind: 'standards-reviews' }
+  if (resource.startsWith('standards-reviews/')) {
+    const segments = resource.split('/')
+    if (segments.length !== 3 || !['published_release', 'draft'].includes(segments[1])) return null
+    const contextRef = decode(segments[2])
+    if (!contextRef || contextRef.length > 128 || !/^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/.test(contextRef)) return null
+    return { kind: 'standards-review-list', contextKind: segments[1], contextRef }
+  }
   const authoringRoute = draftRoute(resource)
   if (authoringRoute) return authoringRoute
   if (resource === 'catalog') return { kind: 'catalog' }
@@ -177,6 +188,72 @@ function parseTombstone(event, route) {
   return { ...input, requestDigest: requestHash(input) }
 }
 
+function boundedText(value, minimum, maximum, nullable = false) {
+  if (nullable && value === null) return null
+  if (
+    typeof value !== 'string' || value.trim() !== value
+    || value.length < minimum || value.length > maximum
+    || /[\u0000-\u001f\u007f]/.test(value)
+  ) throw Object.assign(new Error('invalid_request'), { request: true })
+  return value
+}
+
+function parseStandardsReview(event) {
+  const body = exactBody(event, [
+    'reviewKey', 'contextKind', 'contextRef', 'sourceLabel', 'grade', 'courseRef',
+    'findingRule', 'affectedCount', 'findingIds', 'status', 'canonicalStandardId',
+    'frameworkVersion', 'canonicalTitle', 'evidenceSource', 'reviewerNote',
+    'expectedRevision', 'idempotencyKey',
+  ])
+  if (
+    typeof body.reviewKey !== 'string' || !REVIEW_KEY.test(body.reviewKey)
+    || !['published_release', 'draft'].includes(body.contextKind)
+    || typeof body.contextRef !== 'string' || body.contextRef.length > 128
+    || !/^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/.test(body.contextRef)
+    || (body.contextKind === 'published_release' && !RELEASE_VERSION.test(body.contextRef))
+    || (body.contextKind === 'draft' && !UUID.test(body.contextRef))
+    || typeof body.courseRef !== 'string' || !ENTITY_REF.test(body.courseRef)
+    || body.findingRule !== 'standards.human_review_required'
+    || !Array.isArray(body.findingIds) || body.findingIds.length < 1 || body.findingIds.length > 1000
+    || body.findingIds.some((findingId) => typeof findingId !== 'string' || !FINDING_ID.test(findingId))
+    || new Set(body.findingIds).size !== body.findingIds.length
+    || !['in_review', 'approved_mapping', 'rejected_mapping', 'needs_evidence'].includes(body.status)
+  ) throw Object.assign(new Error('invalid_request'), { request: true })
+  const input = {
+    reviewKey: body.reviewKey,
+    contextKind: body.contextKind,
+    contextRef: body.contextRef,
+    sourceLabel: boundedText(body.sourceLabel, 1, 240),
+    grade: boundedInteger(body.grade, 0, 12),
+    courseRef: body.courseRef,
+    findingRule: body.findingRule,
+    affectedCount: boundedInteger(body.affectedCount, 1, 1000),
+    findingIds: body.findingIds,
+    status: body.status,
+    canonicalStandardId: boundedText(body.canonicalStandardId, 1, 160, true),
+    frameworkVersion: boundedText(body.frameworkVersion, 1, 160, true),
+    canonicalTitle: boundedText(body.canonicalTitle, 1, 500, true),
+    evidenceSource: boundedText(body.evidenceSource, 8, 1000, true),
+    reviewerNote: boundedText(body.reviewerNote, 1, 500, true),
+    expectedRevision: boundedInteger(body.expectedRevision, 0, Number.MAX_SAFE_INTEGER),
+    idempotencyKey: uuid(body.idempotencyKey),
+  }
+  if (input.affectedCount !== input.findingIds.length) {
+    throw Object.assign(new Error('invalid_request'), { request: true })
+  }
+  const mappingValues = [input.canonicalStandardId, input.frameworkVersion, input.canonicalTitle, input.evidenceSource]
+  if (input.status === 'approved_mapping') {
+    if (mappingValues.some((value) => value === null) || !input.reviewerNote || input.reviewerNote.length < 8) {
+      throw Object.assign(new Error('evidence_required'), { evidence: true })
+    }
+  } else if (mappingValues.some((value) => value !== null)) {
+    throw Object.assign(new Error('invalid_request'), { request: true })
+  } else if (['rejected_mapping', 'needs_evidence'].includes(input.status) && (!input.reviewerNote || input.reviewerNote.length < 8)) {
+    throw Object.assign(new Error('evidence_required'), { evidence: true })
+  }
+  return { ...input, requestDigest: requestHash(input) }
+}
+
 function authoringMethod(route, method) {
   if (route.kind === 'drafts') return method === 'GET' || method === 'POST'
   if (route.kind === 'draft') return method === 'GET'
@@ -214,11 +291,53 @@ export function createAdminCurriculumHandler(overrides = {}) {
     fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
     client: overrides.authoringClient,
   })
+  const standardsReview = overrides.standardsReview ?? createAdminCurriculumStandardsReviewService({
+    env: overrides.env ?? process.env,
+    fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
+    client: overrides.standardsReviewClient,
+  })
 
   return async (event) => {
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
     const route = routeFromPath(event?.path)
     if (!route) return errorResponse(404, 'not_found')
+
+    if (route.kind === 'standards-review-list') {
+      if (event?.httpMethod !== 'GET') return errorResponse(405, 'method_not_allowed', { allow: 'GET' })
+      const authorized = await authorization.require(event, 'curriculum:read')
+      if (!authorized.ok) return authorized.response
+      try {
+        return jsonResponse(200, await standardsReview.list(
+          authorized.principal.userId, route.contextKind, route.contextRef,
+        ))
+      } catch {
+        return errorResponse(503, 'curriculum_standards_review_unavailable')
+      }
+    }
+
+    if (route.kind === 'standards-reviews') {
+      if (event?.httpMethod !== 'POST') return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
+      let input
+      try {
+        input = parseStandardsReview(event)
+      } catch (error) {
+        return errorResponse(error?.evidence ? 422 : 400, error?.evidence ? 'standards_mapping_evidence_required' : 'invalid_request')
+      }
+      const authorized = await authorization.require(
+        event,
+        input.status === 'approved_mapping' ? 'curriculum:approve' : 'curriculum:drafts:write',
+      )
+      if (!authorized.ok) return authorized.response
+      try {
+        return jsonResponse(200, await standardsReview.update(authorized.principal.userId, input))
+      } catch (error) {
+        if (error?.code === 'conflict' || error?.code === 'replay-conflict') {
+          return errorResponse(409, error.code === 'replay-conflict' ? 'idempotency_conflict' : 'revision_conflict')
+        }
+        if (error?.code === 'invalid') return errorResponse(422, 'standards_mapping_evidence_required')
+        return errorResponse(503, 'curriculum_standards_review_unavailable')
+      }
+    }
 
     if (route.kind.startsWith('draft')) {
       if (!authoringMethod(route, event?.httpMethod)) return errorResponse(405, 'method_not_allowed')
