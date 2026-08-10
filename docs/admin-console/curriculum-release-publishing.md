@@ -71,7 +71,8 @@ learner enrollment state. Curriculum Studio offers Publish only when the
 server-resolved capability permits it and renders the success state exactly as
 `PUBLISHED, NOT ACTIVE`. There is no Activate action in ADMIN-20B.
 
-Activation and rollback remain separate authorized work. A future activation
-card must select an already-published immutable registry row, update the
-append-only active-pointer model, define learner pinning policy, and provide
-its own rollback and cache/runtime-binding evidence.
+The integrated activation and rollback control remains a separate
+`releases:manage` operation. It selects only an already-published immutable
+registry row, independently verifies the applicable legacy or staged-publish
+evidence, and appends a new compare-and-swap pointer revision without changing
+existing learner pins.

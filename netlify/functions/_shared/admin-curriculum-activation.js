@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 
 const TIMEOUT_MS = 10_000
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-const VERSION = /^\d+\.\d+\.\d+$/
+const VERSION = /^\d+\.\d+\.\d+(?:-[a-z0-9.-]+)?$/
 const HASH = /^[0-9a-f]{64}$/
 const KINDS = new Set(['migration_seed', 'activation', 'rollback'])
 

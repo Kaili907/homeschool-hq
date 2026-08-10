@@ -13,7 +13,7 @@ app: `npm test`.
 ## Supabase: Curriculum activation and rollback (2026-08-10)
 
 Tracked migration:
-`supabase/migrations/20260810160000_academy_curriculum_activation_rollback.sql`.
+`supabase/migrations/20260810170000_academy_curriculum_activation_rollback.sql`.
 
 The migration converts the existing registry-only production pointer into a
 CAS-governed default/current authority without changing its seeded release. It
@@ -36,6 +36,26 @@ separate governed migration. The migration and control surface are local only:
 no hosted migration, pointer transition, deployment, or push occurred. Its
 tracked SHA-256 is in
 `docs/admin-console/curriculum-activation-rollback-migration.json`.
+
+## Supabase: Immutable curriculum release publishing (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810160000_academy_curriculum_release_publishing.sql`.
+
+The migration publishes one exact immutable staging identity into the release
+registry without changing the production pointer. It rechecks the persisted
+draft revision, validation and approval identities, every canonical artifact
+byte and SHA-256, the manifest inventory and SHA-256, and the package SHA-256.
+New releases retain their staging foreign key and the content, manifest, and
+package hashes; operational timestamps are never used to join provenance.
+
+The trusted-server RPC independently reauthorizes `curriculum:publish` and
+preserves a publication-specific request receipt. Exact replay is safe, target
+identity reuse with different evidence conflicts, and publication never
+replays staging or activation. Its terminal state is `PUBLISHED, NOT ACTIVE`.
+The migration is repository-only and has not been applied hosted. Its tracked
+SHA-256 is in
+`docs/admin-console/curriculum-release-publishing-migration.json`.
 
 ## Supabase: Curriculum release staging (2026-08-10)
 

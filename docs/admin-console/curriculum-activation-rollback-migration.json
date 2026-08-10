@@ -1,12 +1,13 @@
 {
-  "migration": "supabase/migrations/20260810160000_academy_curriculum_activation_rollback.sql",
-  "sha256": "e3283b843b8503d4634ab7fda771529b6eccba1626d23d4fac9cb28dc48c3bf0",
+  "migration": "supabase/migrations/20260810170000_academy_curriculum_activation_rollback.sql",
+  "sha256": "6d7d3cbbe740e1153aa6303ae90480beec2dcac7e29fff91754e05c58614f0da",
   "status": "repository-only-not-applied-hosted",
   "dependsOn": [
     "20260808120000_academy_admin_authorization.sql",
     "20260808121000_academy_operational_events.sql",
     "20260809130000_academy_admin_audit_foundation.sql",
     "20260809160000_academy_curriculum_release_registry.sql",
-    "20260810150000_academy_curriculum_release_staging.sql"
+    "20260810150000_academy_curriculum_release_staging.sql",
+    "20260810160000_academy_curriculum_release_publishing.sql"
   ]
 }

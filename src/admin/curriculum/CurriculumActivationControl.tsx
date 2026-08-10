@@ -199,10 +199,16 @@ export function CurriculumActivationView({
             <ul>
               {candidates.map((candidate) => {
                 const kind = candidate.previouslyActive ? 'rollback' : 'activation'
+                const lifecycle = candidate.active
+                  ? 'ACTIVE'
+                  : candidate.previouslyActive
+                    ? `PREVIOUSLY ACTIVE · ${candidate.eligible ? 'ROLLBACK ELIGIBLE' : 'ROLLBACK BLOCKED'}`
+                    : `PUBLISHED, NOT ACTIVE · ${candidate.eligible ? 'ACTIVATION ELIGIBLE' : 'ACTIVATION BLOCKED'}`
                 return (
                   <li key={candidate.releaseVersion}>
                     <div>
                       <strong>{candidate.releaseVersion}</strong>
+                      <span>{lifecycle}</span>
                       <span>{candidate.status.toUpperCase()} · artifacts {candidate.artifactState}</span>
                     </div>
                     {candidate.active ? (
