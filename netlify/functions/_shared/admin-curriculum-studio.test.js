@@ -95,4 +95,21 @@ describe('Curriculum Studio materialization service', () => {
     await expect(service.readMaterialization('actor', DRAFT_ID, 3)).rejects.toMatchObject({ code: 'conflict' })
     expect(authoring.readEntity).not.toHaveBeenCalled()
   })
+
+  it('rejects a concurrent draft change after entity reads instead of returning a mixed revision', async () => {
+    const bootstrap = createAdminCurriculumStudioService({ authoring: {} })
+    const courseEntry = bootstrap.readBaseIndex('1.0.0').entities.find((entity) => entity.entityType === 'course')
+    const course = bootstrap.readBaseEntity('1.0.0', 'course', courseEntry.entityRef).payload
+    const entity = summary('course', courseEntry.entityRef, 'base_override', courseEntry.position)
+    const authoring = {
+      read: vi.fn()
+        .mockResolvedValueOnce(detail([entity], 3))
+        .mockResolvedValueOnce(detail([entity], 4)),
+      readEntity: vi.fn(async () => ({ schemaVersion: 1, draftId: DRAFT_ID, ...entity, payload: course })),
+    }
+    const service = createAdminCurriculumStudioService({ authoring })
+    await expect(service.readMaterialization('actor', DRAFT_ID, 3)).rejects.toMatchObject({ code: 'conflict' })
+    expect(authoring.readEntity).toHaveBeenCalledOnce()
+    expect(authoring.read).toHaveBeenCalledTimes(2)
+  })
 })

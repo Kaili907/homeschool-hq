@@ -40,19 +40,3 @@ export function CurriculumWorkflowNav({
     </nav>
   )
 }
-
-export function CurriculumPreviewUnavailable() {
-  return (
-    <section className="curriculum-preview-state" aria-labelledby="curriculum-preview-heading">
-      <p className="curriculum-studio-eyebrow">Preview / Diff</p>
-      <h2 id="curriculum-preview-heading">No draft is available to compare</h2>
-      <p>
-        Preview and semantic diff remain separate from the Studio shell. They will become available
-        after the draft-authoring service supplies an authorized draft selection.
-      </p>
-      <div role="status">
-        No draft was loaded, no comparison was generated, and no published curriculum was changed.
-      </div>
-    </section>
-  )
-}

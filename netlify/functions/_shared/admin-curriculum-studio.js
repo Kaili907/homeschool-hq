@@ -111,6 +111,23 @@ async function materialize(authoring, actorUserRef, draftId, expectedRevision) {
     entity.entityType,
     entity.entityRef,
   ))
+  // Entity reads are separate authorized RPCs. Confirm the workspace revision
+  // again so a concurrent committed mutation cannot produce a mixed snapshot.
+  const confirmedDraft = await authoring.read(actorUserRef, draftId)
+  if (confirmedDraft.revision !== expectedRevision) {
+    throw Object.assign(new Error('curriculum_revision_conflict'), { code: 'conflict' })
+  }
+  if (details.some((detail, index) => {
+    const summary = liveSummaries[index]
+    return detail.draftId !== draftId
+      || detail.entityType !== summary.entityType
+      || detail.entityRef !== summary.entityRef
+      || detail.origin !== summary.origin
+      || detail.revision !== summary.revision
+      || detail.position !== summary.position
+      || detail.tombstoned
+      || detail.digest !== summary.digest
+  })) throw new Error('curriculum_authoring_unavailable')
   const detailByKey = new Map(details.map((detail) => [`${detail.entityType}:${detail.entityRef}`, detail]))
   const composed = new Map(baseEntities(draft.baseReleaseVersion).map((entity) => [
     `${entity.entityType}:${entity.entityRef}`,
@@ -225,6 +242,7 @@ export function createAdminCurriculumStudioService({ authoring } = {}) {
 }
 
 export const adminCurriculumStudioInternals = Object.freeze({
+  materialize,
   baseEntities,
   entityEntry,
   snapshotFromMaterialization,

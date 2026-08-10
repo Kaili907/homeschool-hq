@@ -28,10 +28,10 @@ import type { SafetyOperationsReadState } from '../../admin/safetyOperationsMode
 import { CurriculumBrowser } from '../../admin/curriculum/CurriculumBrowser'
 import { CurriculumStudio } from '../../admin/curriculum/CurriculumStudio'
 import {
-  CurriculumPreviewUnavailable,
   CurriculumWorkflowNav,
   type CurriculumWorkflowView,
 } from '../../admin/curriculum/CurriculumWorkflowNav'
+import { CurriculumPreview } from '../../admin/curriculum-preview/CurriculumPreview'
 import {
   readAdminCurriculumValidation,
   type CurriculumValidationReadState,
@@ -524,7 +524,12 @@ export function AdminConsoleRoute() {
         {section === 'curriculum-preview' && (
           <>
             <CurriculumWorkflowNav current="preview" onNavigate={navigateCurriculum} />
-            <CurriculumPreviewUnavailable />
+            <CurriculumPreview
+              authorization={hasCapability(authorization, 'curriculum:read')
+                ? { status: 'authorized', capabilities: authorization.capabilities }
+                : { status: 'denied' }}
+              source={curriculumAuthoringSource}
+            />
           </>
         )}
         {section === 'system-health' && (
