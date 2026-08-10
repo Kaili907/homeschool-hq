@@ -22,6 +22,8 @@
     "plan:migration-reconciliation:json": "node scripts/migration-reconciliation-planner.mjs --format json",
     "preflight:admin-production": "node scripts/admin-production-preflight.mjs --format operator",
     "preflight:admin-production:json": "node scripts/admin-production-preflight.mjs --format json",
+    "preflight:study-deployment-env": "node scripts/study-deployment-env-preflight.mjs",
+    "test:study-deployment-env-preflight": "vitest run --project root-app tests/study-deployment-env-preflight.test.js",
     "test:engine": "vitest run --config adaptive-tutor/study-engine/tests/final-assembly/component-vitest.config.mjs",
     "test:tutor": "npm --prefix adaptive-tutor run test",
     "test:calendar": "npm --prefix adaptive-tutor/study-engine/integration-labs/calendar-parent-runtime run test",
