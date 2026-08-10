@@ -35,6 +35,7 @@ export interface StudyIdentityClient {
       | 'dashboard:read'
       | 'calendar:read'
       | 'session:begin'
+      | 'session:resume'
       | 'session:transition'
       | 'checkpoint:read'
       | 'checkpoint:compare-and-swap'

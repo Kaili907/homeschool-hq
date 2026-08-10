@@ -156,6 +156,8 @@ export function createStudyProductionReadinessService(options = {}) {
   const bindingRpc = options.bindingRpc ?? createSupabaseServiceRpc({ env, fetchImpl })
   const curriculumBindingReadiness = options.curriculumBindingReadiness ?? (() =>
     bindingRpc.call('academy_study_curriculum_binding_readiness_v1'))
+  const sessionSemanticsReadiness = options.sessionSemanticsReadiness ?? (() =>
+    bindingRpc.call('academy_study_session_semantics_readiness_v2'))
   const classifier = options.classifier ?? createAnthropicSafetyClassifier({ env, fetchImpl })
   const session17 = options.session17 ?? Object.freeze({})
   let cached = null
@@ -167,6 +169,7 @@ export function createStudyProductionReadinessService(options = {}) {
       identity,
       academic,
       curriculumBinding,
+      sessionSemantics,
       effectiveSettings,
       safetyDurable,
       policyEvidence,
@@ -184,6 +187,7 @@ export function createStudyProductionReadinessService(options = {}) {
       identityState(identityVerifier),
       optionalOperationalState(options.academicReadiness),
       effectiveSettingsState(curriculumBindingReadiness),
+      effectiveSettingsState(sessionSemanticsReadiness),
       effectiveSettingsState(options.effectiveSettingsReadiness),
       durableState(durablePorts),
       productionPolicyState(durablePorts),
@@ -224,7 +228,7 @@ export function createStudyProductionReadinessService(options = {}) {
     for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) statusByDependency.set(key, academic)
     statusByDependency.set(
       'study-session-adapter',
-      weakestState(academic, curriculumBinding),
+      weakestState(academic, curriculumBinding, sessionSemantics),
     )
     statusByDependency.set(
       'parent-settings-adapter',

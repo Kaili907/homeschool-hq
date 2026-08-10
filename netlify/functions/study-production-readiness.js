@@ -28,6 +28,7 @@ export function createStudyProductionReadinessHandler(overrides = {}) {
     durablePorts: overrides.durablePorts,
     academicReadiness: overrides.academicReadiness,
     curriculumBindingReadiness: overrides.curriculumBindingReadiness,
+    sessionSemanticsReadiness: overrides.sessionSemanticsReadiness,
     effectiveSettingsReadiness: overrides.effectiveSettingsReadiness,
     classifier: overrides.classifier,
     session17: overrides.session17,

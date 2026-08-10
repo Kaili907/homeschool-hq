@@ -4,6 +4,62 @@ import { createStudyAcademicRuntimeHandler } from '../../study-academic-runtime.
 import { createVerifiedAcademicRuntimeGateway } from './verified-academic-runtime.js'
 
 const reference = `aca_stu_v1_${'A'.repeat(43)}`
+const binding = {
+  schemaVersion: 1,
+  status: 'bound',
+  releaseId: '16000000-0000-4000-8000-000000000001',
+  packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
+  releaseVersion: '1.0.0',
+  curriculumManifestSha256: 'a'.repeat(64),
+}
+const settings = {
+  timerMode: 'visible', maximumWorkMinutes: 30,
+  breakMinimumMinutes: 5, breakMaximumMinutes: 15,
+  minimumBreakCount: 0, requiredBreakIntervalMinutes: 30,
+  reducedMotion: false, noAudio: false, largeText: false,
+  readAloud: false, speechInputAllowed: false,
+}
+
+function begunBody(overrides = {}) {
+  return {
+    schemaVersion: 2,
+    status: 'begun',
+    sessionId: 'session:server-generated-a',
+    state: 'active',
+    revision: 1,
+    acceptedAt: '2026-08-10T15:00:00.000Z',
+    updatedAt: '2026-08-10T15:00:00.000Z',
+    lessonId: 'lesson-bound-a',
+    subjectId: 'math',
+    studyPlanId: null,
+    intendedLocalDate: '2026-08-10',
+    currentSegmentId: 'segment-bound-a',
+    completedAt: null,
+    lastTransition: {
+      type: 'session-started', acceptedAt: '2026-08-10T15:00:00.000Z',
+    },
+    curriculumBinding: binding,
+    effectiveSettings: settings,
+    ...overrides,
+  }
+}
+
+function beginRequest(overrides = {}) {
+  return {
+    idempotencyKey: 'session-bound-a-create',
+    lessonId: 'lesson-bound-a',
+    subjectId: 'math',
+    studyPlanId: null,
+    intendedLocalDate: '2026-08-10',
+    initialSegmentId: 'segment-bound-a',
+    curriculumContext: {
+      releaseVersion: '1.0.0',
+      lessonRef: 'lesson-bound-a',
+      skillRefs: ['skill-bound-a'],
+    },
+    ...overrides,
+  }
+}
 
 describe('verified academic runtime gateway', () => {
   it('passes only a digest and capability into one transactional RPC', async () => {
@@ -35,38 +91,14 @@ describe('verified academic runtime gateway', () => {
   })
 
   it('passes bounded Academy curriculum context only as an advisory proposal', async () => {
-    const body = {
-      status: 'created',
-      curriculumBinding: {
-        schemaVersion: 1,
-        status: 'bound',
-        releaseId: '16000000-0000-4000-8000-000000000001',
-        packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
-        releaseVersion: '1.0.0',
-        curriculumManifestSha256: 'a'.repeat(64),
-      },
-    }
+    const body = begunBody()
     const call = vi.fn(async () => ({
       schemaVersion: 1,
       status: 'ok',
       operation: 'session:begin',
       body,
     }))
-    const request = {
-      session: {
-        id: 'session-bound-a', schema_version: 1,
-        lesson_id: 'lesson-bound-a', subject_id: 'math',
-        study_plan_id: null, state: 'active',
-        started_at: '2026-08-10T15:00:00.000Z', completed_at: null,
-        intended_local_date: '2026-08-10',
-      },
-      idempotencyKey: 'session-bound-a-create',
-      curriculumContext: {
-        releaseVersion: '1.0.0',
-        lessonRef: 'lesson-bound-a',
-        skillRefs: ['skill-bound-a'],
-      },
-    }
+    const request = beginRequest()
     const gateway = createVerifiedAcademicRuntimeGateway({
       rpc: { isConfigured: () => true, call },
     })
@@ -76,8 +108,66 @@ describe('verified academic runtime gateway', () => {
       operation: 'session:begin',
       request,
     })).resolves.toMatchObject({ body })
+    expect(call).toHaveBeenCalledWith('academy_study_execute_session_lifecycle_v2', {
+      p_token_digest: createHash('sha256').update(reference, 'ascii').digest('hex'),
+      p_required_capability: 'student:attempts:create',
+      p_operation: 'session:begin',
+      p_request: request,
+    })
     expect(call.mock.calls[0][1].p_request).toEqual(request)
     expect(JSON.stringify(call.mock.calls[0][1])).not.toMatch(/studentId|householdId/)
+  })
+
+  it('rejects caller-authored begin authority and exact-response additions', async () => {
+    const gateway = createVerifiedAcademicRuntimeGateway({
+      rpc: { isConfigured: () => true, call: vi.fn() },
+    })
+    for (const tamper of [
+      { studentId: '22222222-2222-4222-8222-222222222222' },
+      { role: 'guardian' },
+      { revision: 99 },
+      { acceptedAt: '1999-01-01T00:00:00.000Z' },
+    ]) {
+      await expect(gateway.execute({
+        sessionReference: reference,
+        operation: 'session:begin',
+        request: beginRequest(tamper),
+      })).rejects.toThrow()
+    }
+
+    const resumeRequest = {
+      sessionId: 'session:server-generated-a',
+      curriculumReleaseVersion: '1.0.0',
+    }
+    const resumed = createVerifiedAcademicRuntimeGateway({
+      rpc: { isConfigured: () => true, call: vi.fn(async () => ({
+        schemaVersion: 1,
+        status: 'ok',
+        operation: 'session:resume',
+        body: begunBody({ status: 'resumable', checkpoint: null }),
+      })) },
+    })
+    await expect(resumed.execute({
+      sessionReference: reference,
+      operation: 'session:resume',
+      request: resumeRequest,
+    })).resolves.toMatchObject({ body: { status: 'resumable', checkpoint: null } })
+
+    const leaking = createVerifiedAcademicRuntimeGateway({
+      rpc: { isConfigured: () => true, call: vi.fn(async () => ({
+        schemaVersion: 1,
+        status: 'ok',
+        operation: 'session:resume',
+        body: begunBody({
+          status: 'resumable', checkpoint: null, privateNotes: ['forbidden'],
+        }),
+      })) },
+    })
+    await expect(leaking.execute({
+      sessionReference: reference,
+      operation: 'session:resume',
+      request: resumeRequest,
+    })).rejects.toThrow(/contract/i)
   })
 
   it('rejects caller identity, sentinels, and protected response payloads', async () => {
@@ -92,7 +182,7 @@ describe('verified academic runtime gateway', () => {
     await expect(gateway.execute({
       sessionReference: reference,
       operation: 'session:begin',
-      request: { session: { student_id: '22222222-2222-4222-8222-222222222222' } },
+      request: { learnerRef: '22222222-2222-4222-8222-222222222222' },
     })).rejects.toThrow(/authority/i)
     await expect(gateway.execute({
       sessionReference: reference,
@@ -103,19 +193,15 @@ describe('verified academic runtime gateway', () => {
       sessionReference: reference,
       operation: 'session:begin',
       request: {
-        session: {
-          id: 'session-a', schema_version: 1, lesson_id: 'lesson-a',
-          subject_id: 'math', study_plan_id: null, state: 'active',
-          started_at: '2026-08-10T15:00:00.000Z', completed_at: null,
-          intended_local_date: '2026-08-10',
-        },
         idempotencyKey: 'session-a-create',
+        lessonId: 'lesson-a', subjectId: 'math', studyPlanId: null,
+        intendedLocalDate: '2026-08-10', initialSegmentId: 'segment-a',
         curriculumContext: {
           releaseVersion: '1.0.0', lessonRef: 'lesson-a', skillRefs: [],
           releaseId: 'browser-must-not-author-release-id',
         },
       },
-    })).rejects.toThrow(/curriculum/i)
+    })).rejects.toThrow(/invalid/i)
 
     const leaking = createVerifiedAcademicRuntimeGateway({
       rpc: { isConfigured: () => true, call: vi.fn(async () => ({

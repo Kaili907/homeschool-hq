@@ -21,6 +21,7 @@ function readyDependencies(overrides = {}) {
     },
     academicReadiness: vi.fn(async () => 'ready'),
     curriculumBindingReadiness: vi.fn(async () => ({ status: 'ready' })),
+    sessionSemanticsReadiness: vi.fn(async () => ({ status: 'ready' })),
     effectiveSettingsReadiness: vi.fn(async () => ({ status: 'ready' })),
     classifier: {
       isConfigured: () => true,
@@ -77,6 +78,17 @@ describe('Study production readiness assembly', () => {
     expect(snapshot.registrations).toContainEqual({
       dependency: 'parent-settings-adapter',
       status: 'ready',
+    })
+  })
+
+  it('blocks session start readiness when authoritative session semantics V2 is absent', async () => {
+    const snapshot = await createStudyProductionReadinessService(readyDependencies({
+      sessionSemanticsReadiness: vi.fn(async () => ({ status: 'not-ready' })),
+    })).check()
+    expect(snapshot.status).toBe('not-ready')
+    expect(snapshot.registrations).toContainEqual({
+      dependency: 'study-session-adapter',
+      status: 'not-ready',
     })
   })
 

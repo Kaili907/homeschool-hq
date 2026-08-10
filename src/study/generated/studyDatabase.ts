@@ -26,6 +26,8 @@ export const STUDY_PRIVATE_TABLES = [
 
 export const STUDY_RPC = {
   resolveCurriculumBinding: 'academy_study_resolve_curriculum_binding_v1',
+  sessionLifecycleV2: 'academy_study_execute_session_lifecycle_v2',
+  sessionSemanticsReadinessV2: 'academy_study_session_semantics_readiness_v2',
   createSession: 'academy_study_create_session',
   transitionSession: 'academy_study_transition_session',
   appendEvent: 'academy_study_append_event',
