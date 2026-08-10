@@ -4,7 +4,9 @@ This server-only contract records privacy-safe Anthropic and ElevenLabs usage
 without changing learner responses, gateway security, quota ordering, or
 provider retry behavior. The canonical ledger row remains
 `AdminUsageCostRecord` version 2; the authorized Admin Costs aggregate response
-is contract version 3.
+is contract version 3. Study provider usage is bounded to Anthropic safety
+classification with `engine = study` and `purpose = safety_classification`; it
+is never reported as Tutor, Jarvis, TTS, or gateway usage.
 
 ## Canonical usage and identity
 
@@ -28,6 +30,10 @@ because no Academy tier exists. No tier is invented.
 
 There are no columns or RPC parameters for prompts, messages, conversations,
 assessment answers, provider responses or request IDs, audio, or raw usage.
+
+The nullable accounting purpose is exact: Tutor, Jarvis, and TTS rows retain a
+null purpose, while Study rows require `safety_classification`. No other Study
+purpose is admitted.
 
 ## Pricing and exact calculation
 

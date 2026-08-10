@@ -163,7 +163,7 @@ const AGGREGATE_KEYS = [
   'calculatedCost', 'reconciledCost', 'unavailableCostCount',
 ] as const
 const BREAKDOWN_LABELS = {
-  engines: { tutor: 'Tutor', jarvis: 'Jarvis', tts: 'Text to speech' },
+  engines: { tutor: 'Tutor', study: 'Study', jarvis: 'Jarvis', tts: 'Text to speech' },
   providers: { anthropic: 'Anthropic', elevenlabs: 'ElevenLabs' },
   models: {
     'anthropic:sonnet': 'Anthropic Sonnet tier',
