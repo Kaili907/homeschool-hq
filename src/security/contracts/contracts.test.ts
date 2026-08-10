@@ -11,6 +11,7 @@ import {
   isInstallationGrantCapabilityConsistent,
   isParentStepUpGrantPolicyCompliant,
   parsePendingDestination,
+  parseProfileId,
   SECURITY_LIFECYCLE_EVENT_SEMANTICS,
   SECURITY_LIFECYCLE_EVENT_TYPES,
   SECURITY_SESSION_POLICY,
@@ -32,7 +33,7 @@ describe('credential and educational Profile boundaries', () => {
     const credential: LearnerCredentialRecord = {
       schemaVersion: 1,
       storage: 'device-local-only',
-      profileId: 'learner-1',
+      profileId: parseProfileId('p1')!,
       credentialKind: 'learner-pin',
       verifierScheme: 'pbkdf2-sha256',
       verifierSchemeVersion: 1,

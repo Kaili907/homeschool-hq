@@ -1,4 +1,5 @@
 import type { SecurityLifecycleEvent, SecurityLifecycleEventType } from '../contracts/lifecycle'
+import type { ProfileId } from '../contracts/profileId'
 import type { LocalSessionId } from '../contracts/sessions'
 import { studyCancellationReasonFor } from '../contracts/studyBridge'
 import type { StudyCancellationReason } from '../../study/lifecycle/StudyLifecycle'
@@ -10,8 +11,8 @@ import type {
 
 export type LearnerAccessState =
   | Readonly<{ status: 'locked'; reason: 'initial' | 'lock' | 'logout' | 'switch-cancelled' | 'session-expired' | 'authorization-loss' | 'household-switch' }>
-  | Readonly<{ status: 'active'; profileId: string; sessionId: LocalSessionId }>
-  | Readonly<{ status: 'switching'; previousProfileId: string; targetProfileId: string }>
+  | Readonly<{ status: 'active'; profileId: ProfileId; sessionId: LocalSessionId }>
+  | Readonly<{ status: 'switching'; previousProfileId: ProfileId; targetProfileId: ProfileId }>
 
 export type AuthorizationLossLifecycleType = Extract<
   SecurityLifecycleEventType,
@@ -19,23 +20,24 @@ export type AuthorizationLossLifecycleType = Extract<
 >
 
 export type LearnerAccessEvent =
-  | Readonly<{ type: 'authenticated'; profileId: string; sessionId: LocalSessionId; occurredAt: string }>
+  | Readonly<{ type: 'authenticated'; profileId: ProfileId; sessionId: LocalSessionId; occurredAt: string }>
   | Readonly<{ type: 'lock'; occurredAt: string }>
   | Readonly<{ type: 'logout'; occurredAt: string }>
-  | Readonly<{ type: 'learner-switch'; targetProfileId: string; occurredAt: string }>
+  | Readonly<{ type: 'learner-switch'; targetProfileId: ProfileId; occurredAt: string }>
   | Readonly<{ type: 'cancel-switch' }>
   | Readonly<{ type: 'session-expired'; occurredAt: string }>
   | Readonly<{ type: 'authorization-loss'; source: AuthorizationLossLifecycleType; occurredAt: string }>
   | Readonly<{ type: 'household-switch'; occurredAt: string }>
 
 export type LearnerAccessAction =
+  | Readonly<{ type: 'clear-local-session' }>
   | Readonly<{ type: 'revoke-global'; cause: GlobalRevocationCause }>
   | Readonly<{
       type: 'security-lifecycle'
       event: SecurityLifecycleEvent
       studyCancellationReason: StudyCancellationReason | null
     }>
-  | Readonly<{ type: 'request-learner-pin'; profileId: string }>
+  | Readonly<{ type: 'request-learner-pin'; profileId: ProfileId }>
 
 export interface LearnerAccessTransition {
   readonly state: LearnerAccessState
@@ -77,6 +79,7 @@ export function transitionLearnerAccess(
       return Object.freeze({
         state: locked('lock'),
         actions: Object.freeze([
+          Object.freeze({ type: 'clear-local-session' }),
           Object.freeze({ type: 'revoke-global', cause: 'learner-lock' }),
           lifecycle('learner-lock', event.occurredAt),
         ]),
@@ -85,6 +88,7 @@ export function transitionLearnerAccess(
       return Object.freeze({
         state: locked('logout'),
         actions: Object.freeze([
+          Object.freeze({ type: 'clear-local-session' }),
           Object.freeze({ type: 'revoke-global', cause: 'learner-sign-out' }),
           lifecycle('learner-sign-out', event.occurredAt),
         ]),
@@ -98,6 +102,7 @@ export function transitionLearnerAccess(
           targetProfileId: event.targetProfileId,
         }),
         actions: Object.freeze([
+          Object.freeze({ type: 'clear-local-session' }),
           Object.freeze({ type: 'revoke-global', cause: 'learner-switch-start' }),
           lifecycle('learner-switch-start', event.occurredAt),
           Object.freeze({ type: 'request-learner-pin', profileId: event.targetProfileId }),
@@ -119,7 +124,10 @@ export function transitionLearnerAccess(
         actions: Object.freeze([
           ...(event.source === 'global-revocation'
             ? []
-            : [Object.freeze({ type: 'revoke-global' as const, cause: event.source })]),
+            : [
+                Object.freeze({ type: 'clear-local-session' as const }),
+                Object.freeze({ type: 'revoke-global' as const, cause: event.source }),
+              ]),
           lifecycle(event.source, event.occurredAt),
         ]),
       })
@@ -127,6 +135,7 @@ export function transitionLearnerAccess(
       return Object.freeze({
         state: locked('household-switch'),
         actions: Object.freeze([
+          Object.freeze({ type: 'clear-local-session' }),
           Object.freeze({ type: 'revoke-global', cause: 'household-switch' }),
           lifecycle('household-switch', event.occurredAt),
         ]),
@@ -135,6 +144,9 @@ export function transitionLearnerAccess(
 }
 
 export interface LearnerAccessActionPorts {
+  readonly learnerSession: Readonly<{
+    clearLocal: () => void | Promise<void>
+  }>
   readonly revocation: GlobalRevocationSource & Readonly<{
     revoke: (
       cause: GlobalRevocationCause,
@@ -144,8 +156,8 @@ export interface LearnerAccessActionPorts {
   readonly onLifecycle: (
     event: SecurityLifecycleEvent,
     studyCancellationReason: StudyCancellationReason | null,
-  ) => void | Promise<void>
-  readonly requestLearnerPin: (profileId: string) => void | Promise<void>
+  ) => void | Promise<unknown>
+  readonly requestLearnerPin: (profileId: ProfileId) => void | Promise<void>
 }
 
 /** Executes the pure effects in sequence; it never imports or calls Study. */
@@ -155,6 +167,9 @@ export async function executeLearnerAccessActions(
 ): Promise<void> {
   for (const action of actions) {
     switch (action.type) {
+      case 'clear-local-session':
+        await ports.learnerSession.clearLocal()
+        break
       case 'revoke-global':
         await ports.revocation.revoke(action.cause)
         break

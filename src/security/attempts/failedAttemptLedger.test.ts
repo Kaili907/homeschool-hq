@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { parseProfileId } from '../contracts/profileId'
 import {
   FAILED_ATTEMPT_LOCK_PREFIX,
   FAILED_ATTEMPT_POLICY,
@@ -12,6 +13,8 @@ import {
 import type { SecurityStorage } from '../session/runtime'
 
 const START = Date.parse('2026-08-09T12:00:00.000Z')
+const P1 = parseProfileId('p1')!
+const P2 = parseProfileId('p2')!
 
 class MemoryStorage implements SecurityStorage {
   readonly values = new Map<string, string>()
@@ -79,7 +82,7 @@ async function failureCycle(
 describe('failed PIN attempt ledger', () => {
   it('implements the approved progressive learner schedule', async () => {
     const runtime = setup()
-    const subject = { kind: 'learner' as const, profileId: 'learner-a' }
+    const subject = { kind: 'learner' as const, profileId: P1 }
     const results = await failureCycle(runtime.ledger, subject, runtime.advance)
 
     expect(results.map((result) => result.status)).toEqual([
@@ -103,15 +106,15 @@ describe('failed PIN attempt ledger', () => {
       remainingMs: FAILED_ATTEMPT_POLICY.temporaryLockMs.learner,
     })
     expect([...runtime.storage.values.keys()]).toEqual([
-      `${FAILED_ATTEMPT_STORAGE_PREFIX}learner:learner-a`,
+      `${FAILED_ATTEMPT_STORAGE_PREFIX}learner:p1`,
     ])
     expect([...runtime.storage.values.values()].join(' ')).not.toMatch(/pin|verifier|secret|1234/i)
   })
 
   it('uses unambiguous credential, authority, scope, and encoded-subject lock names', async () => {
     const runtime = setup()
-    const learner = { kind: 'learner' as const, profileId: 'same:id/%' }
-    const parent = { kind: 'parent' as const, householdId: 'same:id/%' }
+    const learner = { kind: 'learner' as const, profileId: P1 }
+    const parent = { kind: 'parent' as const, householdId: 'p1' }
 
     await Promise.all([runtime.ledger.status(learner), runtime.ledger.status(parent)])
 
@@ -123,13 +126,21 @@ describe('failed PIN attempt ledger', () => {
     expect(runtime.locks.names.every((name) => name.startsWith(FAILED_ATTEMPT_LOCK_PREFIX))).toBe(true)
     expect(failedAttemptLockName(learner)).toContain('pin:learner:profile:')
     expect(failedAttemptLockName(parent)).toContain('pin:parent:household:')
-    expect(() => failedAttemptLockName({ kind: 'learner', profileId: 'bad\nsubject' })).toThrow('invalid')
+    expect(() => failedAttemptLockName(
+      { kind: 'learner', profileId: 'bad\nsubject' } as unknown as FailedAttemptSubject,
+    )).toThrow('invalid')
+  })
+
+  it.each([' p1', 'P1', 'p6', '😀'])('rejects a noncanonical learner attempt subject: %s', (profileId) => {
+    expect(() => failedAttemptLockName(
+      { kind: 'learner', profileId } as unknown as FailedAttemptSubject,
+    )).toThrow('invalid')
   })
 
   it('keeps learner and Parent counters separate and applies the Parent lock duration', async () => {
     const runtime = setup()
-    const learner = { kind: 'learner' as const, profileId: 'same-visible-id' }
-    const parent = { kind: 'parent' as const, householdId: 'same-visible-id' }
+    const learner = { kind: 'learner' as const, profileId: P1 }
+    const parent = { kind: 'parent' as const, householdId: 'p1' }
 
     await runtime.ledger.recordFailure(learner)
     await expect(runtime.ledger.status(parent)).resolves.toEqual({ status: 'ready', failedAttempts: 0 })
@@ -142,7 +153,7 @@ describe('failed PIN attempt ledger', () => {
 
   it('allows another attempt after normal lock expiry without erasing history', async () => {
     const runtime = setup()
-    const subject = { kind: 'learner' as const, profileId: 'learner-a' }
+    const subject = { kind: 'learner' as const, profileId: P1 }
     await failureCycle(runtime.ledger, subject, runtime.advance)
 
     runtime.advance(FAILED_ATTEMPT_POLICY.temporaryLockMs.learner)
@@ -157,7 +168,7 @@ describe('failed PIN attempt ledger', () => {
   it('serializes two concurrent failures without losing either increment', async () => {
     const storage = new MemoryStorage()
     const locks = new SerialAttemptLockManager()
-    const subject = { kind: 'learner' as const, profileId: 'learner-a' }
+    const subject = { kind: 'learner' as const, profileId: P1 }
     const first = new FailedAttemptLedger({ storage, clock: () => START, lockManager: locks })
     const second = new FailedAttemptLedger({ storage, clock: () => START, lockManager: locks })
 
@@ -169,7 +180,7 @@ describe('failed PIN attempt ledger', () => {
 
   it('applies the stronger final policy when concurrent failures cross the lock threshold', async () => {
     const runtime = setup()
-    const subject = { kind: 'learner' as const, profileId: 'learner-threshold' }
+    const subject = { kind: 'learner' as const, profileId: P2 }
     await failureCycle(runtime.ledger, subject, runtime.advance, 8)
     const second = new FailedAttemptLedger({
       storage: runtime.storage,
@@ -197,7 +208,7 @@ describe('failed PIN attempt ledger', () => {
   it('does not let an earlier concurrent observer overwrite maxObservedAt', async () => {
     const storage = new MemoryStorage()
     const locks = new SerialAttemptLockManager()
-    const subject = { kind: 'learner' as const, profileId: 'learner-clock' }
+    const subject = { kind: 'learner' as const, profileId: P2 }
     const initial = new FailedAttemptLedger({ storage, clock: () => START, lockManager: locks })
     await initial.recordFailure(subject)
     const later = new FailedAttemptLedger({ storage, clock: () => START + 10_000, lockManager: locks })
@@ -231,7 +242,7 @@ describe('failed PIN attempt ledger', () => {
 
   it('persists a forward observation and fails closed after rollback', async () => {
     const runtime = setup()
-    const subject = { kind: 'learner' as const, profileId: 'learner-a' }
+    const subject = { kind: 'learner' as const, profileId: P1 }
     await failureCycle(runtime.ledger, subject, runtime.advance)
     const beforeJump = runtime.now()
 
@@ -281,7 +292,7 @@ describe('failed PIN attempt ledger', () => {
 
   it('fails closed instead of using an unlocked fallback', async () => {
     const ledger = new FailedAttemptLedger({ storage: new MemoryStorage(), clock: () => START })
-    const subject = { kind: 'learner' as const, profileId: 'learner-a' }
+    const subject = { kind: 'learner' as const, profileId: P1 }
 
     await expect(ledger.status(subject)).rejects.toThrow('coordination is unavailable')
     await expect(ledger.recordFailure(subject)).rejects.toThrow('coordination is unavailable')

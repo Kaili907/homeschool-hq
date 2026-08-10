@@ -1,5 +1,12 @@
 import type { SecurityLifecycleEventType } from '../contracts/lifecycle'
-import { hasExactKeys, type SecurityClock, type SecurityStorage, systemSecurityClock } from './runtime'
+import {
+  hasExactKeys,
+  parseCanonicalTimestamp,
+  requireSafeTimestamp,
+  type SecurityClock,
+  type SecurityStorage,
+  systemSecurityClock,
+} from './runtime'
 
 export const GLOBAL_REVOCATION_STORAGE_KEY = 'manuel-academy.security.global-revocation-epoch.v1'
 export const GLOBAL_REVOCATION_CHANNEL_NAME = 'manuel-academy.security.global-revocation.v1'
@@ -27,9 +34,13 @@ export interface GlobalRevocationNotice {
   readonly occurredAt: string
 }
 
+export type GlobalRevocationListener = (
+  notice: GlobalRevocationNotice,
+) => void | Promise<void>
+
 export interface GlobalRevocationSource {
   currentEpoch(): number | null
-  subscribe(listener: () => void): () => void
+  subscribe(listener: GlobalRevocationListener): () => void
 }
 
 export interface GlobalRevocationPort extends GlobalRevocationSource {
@@ -69,7 +80,7 @@ export interface GlobalRevocationCoordinatorOptions {
   readonly lockManager?: RevocationLockManager
 }
 
-function parseStoredEpoch(value: string | null): number | null {
+function parseLegacyEpoch(value: string | null): number | null {
   if (value === null) return 0
   if (!/^(0|[1-9]\d*)$/.test(value)) return null
   const epoch = Number(value)
@@ -80,20 +91,39 @@ function isCause(value: unknown): value is GlobalRevocationCause {
   return typeof value === 'string' && GLOBAL_REVOCATION_CAUSES.includes(value as GlobalRevocationCause)
 }
 
-function parseNotice(value: unknown): GlobalRevocationNotice | null {
+export function parseGlobalRevocationNotice(value: unknown): GlobalRevocationNotice | null {
   if (value === null || typeof value !== 'object' || Array.isArray(value)) return null
   const record = value as Record<string, unknown>
   if (!hasExactKeys(record, ['schemaVersion', 'epoch', 'cause', 'occurredAt'])) return null
   if (record.schemaVersion !== GLOBAL_REVOCATION_NOTICE_VERSION) return null
   if (!Number.isSafeInteger(record.epoch) || Number(record.epoch) < 1) return null
   if (!isCause(record.cause)) return null
-  if (typeof record.occurredAt !== 'string' || !Number.isFinite(Date.parse(record.occurredAt))) return null
-  return record as unknown as GlobalRevocationNotice
+  if (parseCanonicalTimestamp(record.occurredAt) === null) return null
+  return Object.freeze(record as unknown as GlobalRevocationNotice)
+}
+
+function parseStoredNotice(value: string | null): GlobalRevocationNotice | null {
+  if (value === null) return null
+  try {
+    return parseGlobalRevocationNotice(JSON.parse(value))
+  } catch {
+    return null
+  }
+}
+
+function parseStoredEpoch(value: string | null): number | null {
+  const legacy = parseLegacyEpoch(value)
+  if (legacy !== null) return legacy
+  return parseStoredNotice(value)?.epoch ?? null
 }
 
 /**
- * Maintains a non-secret, monotonic device revocation epoch. BroadcastChannel
- * delivers promptly; the durable epoch and storage event remain the fallback.
+ * Maintains a non-secret, monotonic device revocation epoch. New writes persist
+ * the complete causeful envelope in the existing durable slot; numeric legacy
+ * epochs remain readable and are delivered with the generic fail-closed cause.
+ *
+ * Lock order: callers must release learner-session ownership before requesting
+ * this revocation lock. This coordinator never acquires an ownership or PIN lock.
  */
 export class GlobalRevocationCoordinator implements GlobalRevocationPort {
   readonly #storage: SecurityStorage
@@ -101,21 +131,22 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
   readonly #channel: RevocationBroadcastPort | null
   readonly #storageEvents?: RevocationStorageEventSource
   readonly #lockManager?: RevocationLockManager
-  readonly #listeners = new Set<() => void>()
+  readonly #listeners = new Set<GlobalRevocationListener>()
+  #deliveryTail: Promise<void> = Promise.resolve()
   #observedEpoch: number
   #closed = false
 
   readonly #onStorage = (event: RevocationStorageEvent): void => {
-    if (event.key !== GLOBAL_REVOCATION_STORAGE_KEY) return
+    if (event.key !== GLOBAL_REVOCATION_STORAGE_KEY || this.#closed) return
     const epoch = parseStoredEpoch(event.newValue)
     if (epoch === null || epoch < this.#observedEpoch) {
-      this.#notify()
+      this.#deliverMalformed()
       return
     }
-    if (epoch > this.#observedEpoch) {
-      this.#observedEpoch = epoch
-      this.#notify()
-    }
+    if (epoch === this.#observedEpoch) return
+    const notice = parseStoredNotice(event.newValue) ?? this.#genericNotice(epoch)
+    this.#observedEpoch = epoch
+    this.#enqueueDelivery(notice)
   }
 
   constructor(options: GlobalRevocationCoordinatorOptions) {
@@ -129,10 +160,15 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
     this.#channel = options.channelFactory?.(GLOBAL_REVOCATION_CHANNEL_NAME) ?? null
     if (this.#channel) {
       this.#channel.onmessage = (event) => {
-        const notice = parseNotice(event.data)
-        if (!notice || notice.epoch <= this.#observedEpoch) return
+        if (this.#closed) return
+        const notice = parseGlobalRevocationNotice(event.data)
+        if (!notice) {
+          this.#deliverMalformed()
+          return
+        }
+        if (notice.epoch <= this.#observedEpoch) return
         this.#observedEpoch = notice.epoch
-        this.#notify()
+        this.#enqueueDelivery(notice)
       }
     }
   }
@@ -151,38 +187,44 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
   }
 
   async revoke(cause: GlobalRevocationCause): Promise<GlobalRevocationNotice> {
+    if (!isCause(cause)) throw new Error('Global revocation cause is invalid.')
     if (!this.#lockManager) {
       throw new Error('Global revocation coordination is unavailable.')
     }
     return this.#lockManager.request(
       GLOBAL_REVOCATION_LOCK_NAME,
       { mode: 'exclusive' },
-      () => {
+      async () => {
         const current = this.currentEpoch()
         if (current === null || current === Number.MAX_SAFE_INTEGER) {
           throw new Error('Global revocation epoch is unavailable.')
         }
-        const now = this.#clock()
-        if (!Number.isSafeInteger(now) || now < 0) throw new Error('Security clock is unavailable.')
+        const now = requireSafeTimestamp(this.#clock)
         const notice: GlobalRevocationNotice = Object.freeze({
           schemaVersion: GLOBAL_REVOCATION_NOTICE_VERSION,
           epoch: current + 1,
           cause,
           occurredAt: new Date(now).toISOString(),
         })
-        this.#storage.setItem(GLOBAL_REVOCATION_STORAGE_KEY, String(notice.epoch))
-        if (parseStoredEpoch(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY)) !== notice.epoch) {
+        const serialized = JSON.stringify(notice)
+        this.#storage.setItem(GLOBAL_REVOCATION_STORAGE_KEY, serialized)
+        const verified = parseStoredNotice(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY))
+        if (!verified || verified.epoch !== notice.epoch || verified.cause !== notice.cause) {
           throw new Error('Global revocation epoch could not be verified.')
         }
         this.#observedEpoch = notice.epoch
-        this.#channel?.postMessage(notice)
-        this.#notify()
+        try {
+          this.#channel?.postMessage(notice)
+        } catch {
+          // The durable envelope and storage event remain the cross-tab path.
+        }
+        await this.#enqueueDelivery(notice)
         return notice
       },
     )
   }
 
-  subscribe(listener: () => void): () => void {
+  subscribe(listener: GlobalRevocationListener): () => void {
     if (this.#closed) return () => undefined
     this.#listeners.add(listener)
     return () => this.#listeners.delete(listener)
@@ -199,8 +241,42 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
     this.#listeners.clear()
   }
 
-  #notify(): void {
-    for (const listener of [...this.#listeners]) listener()
+  #genericNotice(epoch: number): GlobalRevocationNotice {
+    let now = 0
+    try {
+      now = requireSafeTimestamp(this.#clock)
+    } catch {
+      // Epoch and generic cause are sufficient for fail-closed delivery.
+    }
+    return Object.freeze({
+      schemaVersion: GLOBAL_REVOCATION_NOTICE_VERSION,
+      epoch: Math.max(1, epoch),
+      cause: 'global-revocation',
+      occurredAt: new Date(now).toISOString(),
+    })
+  }
+
+  #deliverMalformed(): void {
+    const nextEpoch = this.#observedEpoch < Number.MAX_SAFE_INTEGER
+      ? Math.max(1, this.#observedEpoch + 1)
+      : Number.MAX_SAFE_INTEGER
+    this.#observedEpoch = nextEpoch
+    this.#enqueueDelivery(this.#genericNotice(nextEpoch))
+  }
+
+  #enqueueDelivery(notice: GlobalRevocationNotice): Promise<void> {
+    const listeners = [...this.#listeners]
+    const delivery = this.#deliveryTail.then(async () => {
+      for (const listener of listeners) {
+        try {
+          await listener(notice)
+        } catch {
+          // Subscribers own fail-closed cleanup; contain their delivery failure.
+        }
+      }
+    })
+    this.#deliveryTail = delivery.catch(() => undefined)
+    return this.#deliveryTail
   }
 }
 

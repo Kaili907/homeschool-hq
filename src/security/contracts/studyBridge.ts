@@ -15,7 +15,7 @@ export const STUDY_BRIDGE_EVENT_MAP: Readonly<
   'learner-switch-start': 'learner-switch',
   'learner-credential-reset': 'authorization-loss',
   'parent-session-expired': null,
-  'parent-lock': 'logout',
+  'parent-lock': null,
   'household-switch': 'household-switch',
   'household-sign-out': 'logout',
   'import-or-replacement': 'authorization-loss',

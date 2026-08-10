@@ -5,8 +5,14 @@ import {
   LOCAL_SESSION_SCHEMA_VERSION,
   type ParentSessionRecord,
 } from '../contracts/sessions'
-import type { GlobalRevocationSource } from './revocation'
-import { requireSafeTimestamp, type SecurityClock, systemSecurityClock } from './runtime'
+import { SerializedLifecycleDelivery, type SecurityLifecycleSink } from './lifecycleDelivery'
+import type { GlobalRevocationNotice, GlobalRevocationSource } from './revocation'
+import {
+  parseCanonicalTimestamp,
+  requireSafeTimestamp,
+  type SecurityClock,
+  systemSecurityClock,
+} from './runtime'
 
 export type ParentSessionEndReason =
   | 'none'
@@ -25,7 +31,7 @@ export interface ParentSessionControllerOptions {
   readonly revocation: GlobalRevocationSource
   readonly clock?: SecurityClock
   readonly randomUUID?: () => string
-  readonly onLifecycleEvent?: (event: SecurityLifecycleEvent) => void
+  readonly onLifecycleEvent?: SecurityLifecycleSink
 }
 
 /** Parent authority intentionally has no storage dependency and cannot survive refresh. */
@@ -33,7 +39,7 @@ export class ParentSessionController {
   readonly #revocation: GlobalRevocationSource
   readonly #clock: SecurityClock
   readonly #randomUUID?: () => string
-  readonly #onLifecycleEvent?: (event: SecurityLifecycleEvent) => void
+  readonly #lifecycle: SerializedLifecycleDelivery
   readonly #endListeners = new Set<(reason: ParentSessionEndReason) => void>()
   readonly #unsubscribeRevocation: () => void
   #session: ParentSessionRecord | null = null
@@ -44,10 +50,8 @@ export class ParentSessionController {
     this.#revocation = options.revocation
     this.#clock = options.clock ?? systemSecurityClock
     this.#randomUUID = options.randomUUID
-    this.#onLifecycleEvent = options.onLifecycleEvent
-    this.#unsubscribeRevocation = this.#revocation.subscribe(() => {
-      if (this.#session) this.recheck()
-    })
+    this.#lifecycle = new SerializedLifecycleDelivery(options.onLifecycleEvent)
+    this.#unsubscribeRevocation = this.#revocation.subscribe((notice) => this.#handleRevocation(notice))
   }
 
   create(verifiedParentActorId: string, householdId: string): ParentSessionRecord {
@@ -94,7 +98,7 @@ export class ParentSessionController {
     this.#lastObservedAt = now
     const epoch = this.#revocation.currentEpoch()
     if (epoch === null || epoch !== this.#session.globalRevocationEpoch) {
-      return this.#end('global-revocation', true, now)
+      return this.#end('global-revocation', true, now, 'global-revocation')
     }
     if (now >= absoluteAt) return this.#end('absolute-expired', true, now)
     if (now - activityAt >= SECURITY_SESSION_POLICY.parent.idleTimeoutMs) {
@@ -133,7 +137,20 @@ export class ParentSessionController {
     return this.#session
   }
 
-  #end(reason: ParentSessionEndReason, emit = true, occurredAt?: number): ParentSessionCheck {
+  whenLifecycleIdle(): Promise<void> {
+    return this.#lifecycle.whenIdle()
+  }
+
+  get lifecycleDeliveryFailed(): boolean {
+    return this.#lifecycle.failed
+  }
+
+  #end(
+    reason: ParentSessionEndReason,
+    emit = true,
+    occurredAt?: number,
+    lifecycleType?: SecurityLifecycleEventType,
+  ): ParentSessionCheck {
     const hadSession = this.#session !== null
     this.#session = null
     this.#lastObservedAt = null
@@ -141,19 +158,18 @@ export class ParentSessionController {
     if (hadSession) {
       for (const listener of [...this.#endListeners]) listener(reason)
       if (emit && reason !== 'replaced') {
-        const type: SecurityLifecycleEventType = reason === 'global-revocation'
+        const type: SecurityLifecycleEventType = lifecycleType ?? (reason === 'global-revocation'
           ? 'global-revocation'
           : reason === 'parent-lock'
             ? 'parent-lock'
-            : 'parent-session-expired'
-        this.#emit(type, occurredAt)
+            : 'parent-session-expired')
+        void this.#emit(type, occurredAt)
       }
     }
     return Object.freeze({ status: 'ended', reason })
   }
 
-  #emit(type: SecurityLifecycleEventType, occurredAt?: number): void {
-    if (!this.#onLifecycleEvent) return
+  #emit(type: SecurityLifecycleEventType, occurredAt?: number): Promise<boolean> {
     let timestamp = occurredAt
     if (timestamp === undefined) {
       try {
@@ -162,6 +178,22 @@ export class ParentSessionController {
         timestamp = 0
       }
     }
-    this.#onLifecycleEvent(Object.freeze({ type, occurredAt: new Date(timestamp).toISOString() }))
+    const event: SecurityLifecycleEvent = Object.freeze({
+      type,
+      occurredAt: new Date(timestamp).toISOString(),
+    })
+    return this.#lifecycle.enqueue(event, () => {
+      this.#session = null
+      this.#lastObservedAt = null
+      this.#lastEndReason = 'global-revocation'
+    })
+  }
+
+  async #handleRevocation(notice: GlobalRevocationNotice): Promise<void> {
+    const session = this.#session
+    if (!session || notice.epoch <= session.globalRevocationEpoch) return
+    const occurredAt = parseCanonicalTimestamp(notice.occurredAt) ?? undefined
+    this.#end('global-revocation', true, occurredAt, notice.cause)
+    await this.#lifecycle.whenIdle()
   }
 }

@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { SECURITY_LIFECYCLE_EVENT_TYPES } from '../contracts/lifecycle'
+import { parseProfileId } from '../contracts/profileId'
 import { SECURITY_SESSION_POLICY } from '../contracts/sessionPolicy'
 import { createLocalSessionId } from '../contracts/sessions'
 import { studyCancellationReasonFor } from '../contracts/studyBridge'
@@ -10,6 +11,8 @@ import {
 import {
   LearnerSessionController,
   LEARNER_SESSION_STORAGE_KEY,
+  type LearnerSessionOwnershipLock,
+  type LearnerSessionOwnershipLockManager,
 } from './learnerSession'
 import {
   executeLearnerAccessActions,
@@ -30,6 +33,8 @@ const UUID_A = 'd9428888-122b-4f9b-9424-1f35c63d5750'
 const UUID_B = 'b3d48c11-53bb-4d8f-bb8b-d2f311abf5ef'
 const UUID_C = '44444444-4444-4444-8444-444444444444'
 const START = Date.parse('2026-08-09T12:00:00.000Z')
+const P1 = parseProfileId('p1')!
+const P2 = parseProfileId('p2')!
 
 class MemoryStorage implements SecurityStorage {
   readonly values = new Map<string, string>()
@@ -106,15 +111,37 @@ class SerialLockManager implements RevocationLockManager {
   }
 }
 
+class ExclusiveOwnershipLockManager implements LearnerSessionOwnershipLockManager {
+  readonly #held = new Set<string>()
+
+  request<T>(
+    name: string,
+    _options: { readonly mode: 'exclusive'; readonly ifAvailable: true },
+    callback: (lock: LearnerSessionOwnershipLock | null) => T | Promise<T>,
+  ): Promise<T> {
+    if (this.#held.has(name)) return Promise.resolve(callback(null))
+    this.#held.add(name)
+    return Promise.resolve(callback({ name })).finally(() => {
+      this.#held.delete(name)
+    })
+  }
+
+  isHeld(name: string): boolean {
+    return this.#held.has(name)
+  }
+}
+
 function setupLearner(options: { writeThrottleMs?: number } = {}) {
   const sessionStorage = new MemoryStorage()
   const deviceStorage = new MemoryStorage()
+  const ownershipLocks = new ExclusiveOwnershipLockManager()
   let now = START
   const revocation = new GlobalRevocationCoordinator({ storage: deviceStorage, clock: () => now })
   const lifecycle = vi.fn()
   const session = new LearnerSessionController({
     storage: sessionStorage,
     revocation,
+    ownershipLockManager: ownershipLocks,
     clock: () => now,
     randomUUID: () => UUID_A,
     activityWriteThrottleMs: options.writeThrottleMs,
@@ -124,6 +151,7 @@ function setupLearner(options: { writeThrottleMs?: number } = {}) {
     session,
     sessionStorage,
     deviceStorage,
+    ownershipLocks,
     revocation,
     lifecycle,
     now: () => now,
@@ -133,14 +161,14 @@ function setupLearner(options: { writeThrottleMs?: number } = {}) {
 }
 
 describe('learner session controller', () => {
-  it('creates only the approved tab-scoped session metadata', () => {
+  it('creates only the approved tab-scoped session metadata', async () => {
     const runtime = setupLearner()
-    const record = runtime.session.create('learner-a')
+    const record = await runtime.session.create(P1)
 
     expect(record).toMatchObject({
       schemaVersion: 1,
       sessionId: UUID_A,
-      profileId: 'learner-a',
+      profileId: 'p1',
       authenticatedAt: '2026-08-09T12:00:00.000Z',
       lastMeaningfulActivityAt: '2026-08-09T12:00:00.000Z',
       absoluteExpiresAt: '2026-08-09T20:00:00.000Z',
@@ -162,25 +190,27 @@ describe('learner session controller', () => {
     })
   })
 
-  it('restores a refresh-compatible session record in the same tab', () => {
+  it('restores a refresh-compatible session record in the same tab', async () => {
     const runtime = setupLearner()
-    const created = runtime.session.create('learner-a')
+    const created = await runtime.session.create(P1)
+    await runtime.session.close()
     const refreshed = new LearnerSessionController({
       storage: runtime.sessionStorage,
       revocation: runtime.revocation,
+      ownershipLockManager: runtime.ownershipLocks,
       clock: runtime.now,
     })
 
-    expect(refreshed.restore()).toEqual({ status: 'active', session: created })
-    refreshed.close()
+    await expect(refreshed.restore()).resolves.toEqual({ status: 'active', session: created })
+    await refreshed.close()
   })
 
-  it('fails closed and removes malformed or extended session records', () => {
+  it('fails closed and removes malformed or extended session records', async () => {
     const runtime = setupLearner()
     runtime.sessionStorage.setItem(LEARNER_SESSION_STORAGE_KEY, JSON.stringify({
       schemaVersion: 1,
       sessionId: UUID_A,
-      profileId: 'learner-a',
+      profileId: 'p1',
       authenticatedAt: '2026-08-09T12:00:00.000Z',
       lastMeaningfulActivityAt: '2026-08-09T12:00:00.000Z',
       absoluteExpiresAt: '2026-08-09T20:00:00.000Z',
@@ -188,22 +218,22 @@ describe('learner session controller', () => {
       pin: '1234',
     }))
 
-    expect(runtime.session.restore()).toEqual({ status: 'ended', reason: 'malformed-record' })
+    await expect(runtime.session.restore()).resolves.toEqual({ status: 'ended', reason: 'malformed-record' })
     expect(runtime.sessionStorage.getItem(LEARNER_SESSION_STORAGE_KEY)).toBeNull()
   })
 
-  it('expires at the 30-minute idle boundary', () => {
+  it('expires at the 30-minute idle boundary', async () => {
     const runtime = setupLearner()
-    runtime.session.create('learner-a')
+    await runtime.session.create(P1)
     runtime.advance(SECURITY_SESSION_POLICY.learner.idleTimeoutMs - 1)
     expect(runtime.session.recheck().status).toBe('active')
     runtime.advance(1)
     expect(runtime.session.recheck()).toEqual({ status: 'ended', reason: 'idle-expired' })
   })
 
-  it('expires at the 8-hour absolute boundary despite continued activity', () => {
+  it('expires at the 8-hour absolute boundary despite continued activity', async () => {
     const runtime = setupLearner({ writeThrottleMs: 0 })
-    runtime.session.create('learner-a')
+    await runtime.session.create(P1)
     while (runtime.now() + 14 * 60_000 < START + SECURITY_SESSION_POLICY.learner.absoluteTimeoutMs) {
       runtime.advance(14 * 60_000)
       expect(runtime.session.noteMeaningfulActivity().status).toBe('active')
@@ -212,9 +242,9 @@ describe('learner session controller', () => {
     expect(runtime.session.recheck()).toEqual({ status: 'ended', reason: 'absolute-expired' })
   })
 
-  it('updates meaningful activity in memory and throttles sessionStorage writes', () => {
+  it('updates meaningful activity in memory and throttles sessionStorage writes', async () => {
     const runtime = setupLearner({ writeThrottleMs: 5_000 })
-    runtime.session.create('learner-a')
+    await runtime.session.create(P1)
     runtime.advance(1_000)
     expect(runtime.session.noteMeaningfulActivity()).toMatchObject({
       status: 'active',
@@ -226,9 +256,9 @@ describe('learner session controller', () => {
     expect(runtime.sessionStorage.writes).toBe(2)
   })
 
-  it('fails closed on a backward clock jump even when still after authentication', () => {
+  it('fails closed on a backward clock jump even when still after authentication', async () => {
     const runtime = setupLearner()
-    runtime.session.create('learner-a')
+    await runtime.session.create(P1)
     runtime.advance(10_000)
     expect(runtime.session.recheck().status).toBe('active')
     runtime.advance(-1)
@@ -237,9 +267,9 @@ describe('learner session controller', () => {
 })
 
 describe('meaningful activity accounting', () => {
-  it('counts only trusted visible DOM activity while retaining the explicit approved API', () => {
+  it('counts only trusted visible DOM activity while retaining the explicit approved API', async () => {
     const runtime = setupLearner({ writeThrottleMs: 0 })
-    runtime.session.create('learner-a')
+    await runtime.session.create(P1)
     const documentEvents = new EventTarget()
     const pageEvents = new EventTarget()
     let visibility: DocumentVisibilityState = 'visible'
@@ -292,9 +322,9 @@ describe('meaningful activity accounting', () => {
     activity.stop()
   })
 
-  it('ignores programmatic displacement even when the scroll event is trusted', () => {
+  it('ignores programmatic displacement even when the scroll event is trusted', async () => {
     const runtime = setupLearner({ writeThrottleMs: 0 })
-    runtime.session.create('learner-a')
+    await runtime.session.create(P1)
     const documentEvents = new EventTarget()
     const trustedEvents = new WeakSet<Event>()
     let position = { x: 0, y: 0 }
@@ -340,9 +370,9 @@ describe('meaningful activity accounting', () => {
     activity.stop()
   })
 
-  it('counts a trusted wheel burst once and permits a later completed gesture', () => {
+  it('counts a trusted wheel burst once and permits a later completed gesture', async () => {
     const runtime = setupLearner({ writeThrottleMs: 0 })
-    runtime.session.create('learner-a')
+    await runtime.session.create(P1)
     const documentEvents = new EventTarget()
     const trustedEvents = new WeakSet<Event>()
     const gestureTimer: { end: (() => void) | null } = { end: null }
@@ -396,9 +426,9 @@ describe('meaningful activity accounting', () => {
   it.each([
     { supportsPointerEvents: true, activityType: 'pointerdown' },
     { supportsPointerEvents: false, activityType: 'touchstart' },
-  ])('counts $activityType once without authorizing resulting scroll', ({ supportsPointerEvents, activityType }) => {
+  ])('counts $activityType once without authorizing resulting scroll', async ({ supportsPointerEvents, activityType }) => {
     const runtime = setupLearner({ writeThrottleMs: 0 })
-    runtime.session.create('learner-a')
+    await runtime.session.create(P1)
     const documentEvents = new EventTarget()
     const trustedEvents = new WeakSet<Event>()
     const dispatchTrusted = (type: string) => {
@@ -427,9 +457,9 @@ describe('meaningful activity accounting', () => {
     activity.stop()
   })
 
-  it('counts a trusted keydown once without a duplicate scroll update', () => {
+  it('counts a trusted keydown once without a duplicate scroll update', async () => {
     const runtime = setupLearner({ writeThrottleMs: 0 })
-    runtime.session.create('learner-a')
+    await runtime.session.create(P1)
     const documentEvents = new EventTarget()
     const trustedEvents = new WeakSet<Event>()
     let position = { x: 0, y: 0 }
@@ -483,21 +513,24 @@ describe('global and cross-tab revocation', () => {
       clock: () => now,
       channelFactory: hub.create,
     })
+    const ownershipLocks = new ExclusiveOwnershipLockManager()
     const first = new LearnerSessionController({
       storage: new MemoryStorage(), revocation: firstEpoch, clock: () => now, randomUUID: () => UUID_A,
+      ownershipLockManager: ownershipLocks,
     })
     const second = new LearnerSessionController({
       storage: new MemoryStorage(), revocation: secondEpoch, clock: () => now, randomUUID: () => UUID_B,
+      ownershipLockManager: ownershipLocks,
     })
-    first.create('learner-a')
-    second.create('learner-a')
+    await first.create(P1)
+    await second.create(P1)
 
     await firstEpoch.revoke('learner-lock')
 
     expect(first.recheck()).toEqual({ status: 'ended', reason: 'global-revocation' })
     expect(second.recheck()).toEqual({ status: 'ended', reason: 'global-revocation' })
-    first.close()
-    second.close()
+    await first.close()
+    await second.close()
     firstEpoch.close()
     secondEpoch.close()
   })
@@ -514,7 +547,10 @@ describe('global and cross-tab revocation', () => {
     ])
 
     expect(notices.map((notice) => notice.epoch)).toEqual([1, 2])
-    expect(storage.getItem('manuel-academy.security.global-revocation-epoch.v1')).toBe('2')
+    expect(JSON.parse(storage.getItem('manuel-academy.security.global-revocation-epoch.v1')!)).toMatchObject({
+      epoch: 2,
+      cause: 'learner-sign-out',
+    })
     expect(locks.maximumActive).toBe(1)
   })
 
@@ -532,10 +568,11 @@ describe('global and cross-tab revocation', () => {
     const session = new LearnerSessionController({
       storage: new MemoryStorage(),
       revocation: first,
+      ownershipLockManager: new ExclusiveOwnershipLockManager(),
       clock: () => START + 2,
       randomUUID: () => UUID_C,
     })
-    session.create('learner-between-revocations')
+    await session.create(P2)
     expect(session.recheck().status).toBe('active')
 
     releaseSecond()
@@ -549,7 +586,7 @@ describe('global and cross-tab revocation', () => {
     await expect(coordinator.revoke('learner-lock')).rejects.toThrow('coordination is unavailable')
   })
 
-  it('never propagates an unlock or newly created tab session', () => {
+  it('never propagates an unlock or newly created tab session', async () => {
     const deviceStorage = new MemoryStorage()
     const hub = new BroadcastHub()
     const firstEpoch = new GlobalRevocationCoordinator({ storage: deviceStorage, channelFactory: hub.create })
@@ -558,12 +595,14 @@ describe('global and cross-tab revocation', () => {
     secondEpoch.subscribe(notices)
     const first = new LearnerSessionController({
       storage: new MemoryStorage(), revocation: firstEpoch, clock: () => START, randomUUID: () => UUID_A,
+      ownershipLockManager: new ExclusiveOwnershipLockManager(),
     })
     const second = new LearnerSessionController({
       storage: new MemoryStorage(), revocation: secondEpoch, clock: () => START, randomUUID: () => UUID_B,
+      ownershipLockManager: new ExclusiveOwnershipLockManager(),
     })
 
-    first.create('learner-a')
+    await first.create(P1)
 
     expect(notices).not.toHaveBeenCalled()
     expect(second.recheck()).toEqual({ status: 'ended', reason: 'none' })
@@ -656,21 +695,22 @@ describe('Lock/Switch state machine and Study lifecycle seam', () => {
   it('revokes Learner A before requesting Learner B PIN and leaves cancel locked', () => {
     const active = transitionLearnerAccess(INITIAL_LEARNER_ACCESS_STATE, {
       type: 'authenticated',
-      profileId: 'learner-a',
+      profileId: P1,
       sessionId: createLocalSessionId(() => UUID_A),
       occurredAt: '2026-08-09T12:00:00.000Z',
     }).state
     const switching = transitionLearnerAccess(active, {
       type: 'learner-switch',
-      targetProfileId: 'learner-b',
+      targetProfileId: P2,
       occurredAt: '2026-08-09T12:01:00.000Z',
     })
     expect(switching.actions.map((action) => action.type)).toEqual([
+      'clear-local-session',
       'revoke-global',
       'security-lifecycle',
       'request-learner-pin',
     ])
-    expect(switching.actions[1]).toMatchObject({ studyCancellationReason: 'learner-switch' })
+    expect(switching.actions[2]).toMatchObject({ studyCancellationReason: 'learner-switch' })
     expect(transitionLearnerAccess(switching.state, { type: 'cancel-switch' }).state).toEqual({
       status: 'locked',
       reason: 'switch-cancelled',
@@ -681,47 +721,60 @@ describe('Lock/Switch state machine and Study lifecycle seam', () => {
     const order: string[] = []
     let finishCancellation!: () => void
     const cancellation = new Promise<void>((resolve) => { finishCancellation = resolve })
-    const active = {
-      status: 'active' as const,
-      profileId: 'learner-a',
-      sessionId: createLocalSessionId(() => UUID_A),
-    }
+    const storage = new MemoryStorage()
+    const revocation = new GlobalRevocationCoordinator({
+      storage,
+      clock: () => START + 60_000,
+      lockManager: new SerialLockManager(),
+    })
+    const session = new LearnerSessionController({
+      storage: new MemoryStorage(),
+      revocation,
+      ownershipLockManager: new ExclusiveOwnershipLockManager(),
+      clock: () => START,
+      randomUUID: () => UUID_A,
+      onLifecycleEvent: (event) => {
+        if (event.type === 'global-revocation') order.push('generic-cancel')
+      },
+    })
+    const record = await session.create(P1)
+    const active = { status: 'active' as const, profileId: P1, sessionId: record.sessionId }
     const transition = transitionLearnerAccess(active, {
       type: 'learner-switch',
-      targetProfileId: 'learner-b',
+      targetProfileId: P2,
       occurredAt: '2026-08-09T12:01:00.000Z',
     })
+    revocation.subscribe((notice) => {
+      if (notice.cause === 'learner-switch-start') order.push('revoke')
+    })
     const execution = executeLearnerAccessActions(transition.actions, {
-      revocation: {
-        currentEpoch: () => 0,
-        subscribe: () => () => undefined,
-        revoke: async () => {
-          order.push('revoke')
-          return { schemaVersion: 1, epoch: 1, cause: 'learner-switch-start', occurredAt: '2026-08-09T12:01:00.000Z' }
-        },
-        close: () => undefined,
-      },
-      onLifecycle: async () => {
+      learnerSession: session,
+      revocation,
+      onLifecycle: async (event) => {
+        expect(event.type).toBe('learner-switch-start')
         order.push('cancel-start')
         await cancellation
         order.push('cancel-done')
       },
-      requestLearnerPin: () => { order.push('pin') },
+      requestLearnerPin: () => { order.push('PIN') },
     })
-    await Promise.resolve()
-    await Promise.resolve()
-    expect(order).toEqual(['revoke', 'cancel-start'])
+    await vi.waitFor(() => {
+      expect(order).toEqual(['revoke', 'cancel-start'])
+    })
 
     finishCancellation()
     await execution
 
-    expect(order).toEqual(['revoke', 'cancel-start', 'cancel-done', 'pin'])
+    expect(order).toEqual(['revoke', 'cancel-start', 'cancel-done', 'PIN'])
+    expect(session.session).toBeNull()
+    await session.close()
+    revocation.close()
   })
 
   it('exposes logout, session-expired, authorization-loss, and household-switch vocabulary', () => {
     const active = {
       status: 'active' as const,
-      profileId: 'learner-a',
+      profileId: P1,
       sessionId: createLocalSessionId(() => UUID_A),
     }
     expect(transitionLearnerAccess(active, {

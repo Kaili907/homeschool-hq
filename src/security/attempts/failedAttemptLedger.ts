@@ -1,3 +1,4 @@
+import { isProfileId, type ProfileId } from '../contracts/profileId'
 import {
   hasExactKeys,
   isPlainRecord,
@@ -36,7 +37,7 @@ export const FAILED_ATTEMPT_POLICY = Object.freeze({
 })
 
 export type FailedAttemptSubject = Readonly<
-  | { kind: 'learner'; profileId: string }
+  | { kind: 'learner'; profileId: ProfileId }
   | { kind: 'parent'; householdId: string }
 >
 
@@ -80,6 +81,9 @@ const RECORD_KEYS = Object.freeze([
 
 function subjectIdentity(subject: FailedAttemptSubject): { readonly id: string; readonly scope: 'profile' | 'household' } {
   const id = subject.kind === 'learner' ? subject.profileId : subject.householdId
+  if (subject.kind === 'learner' && !isProfileId(id)) {
+    throw new Error('Attempt subject ID is invalid.')
+  }
   if (
     !id ||
     id.trim() !== id ||

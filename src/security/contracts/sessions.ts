@@ -1,4 +1,5 @@
 import { createRandomUuidV4 } from './identifiers'
+import type { ProfileId } from './profileId'
 import { SECURITY_SESSION_POLICY } from './sessionPolicy'
 
 export const LOCAL_SESSION_SCHEMA_VERSION = 1 as const
@@ -15,7 +16,7 @@ export function createLocalSessionId(randomUUID?: () => string): LocalSessionId 
 export interface LearnerSessionRecord {
   readonly schemaVersion: typeof LOCAL_SESSION_SCHEMA_VERSION
   readonly sessionId: LocalSessionId
-  readonly profileId: string
+  readonly profileId: ProfileId
   readonly authenticatedAt: string
   readonly lastMeaningfulActivityAt: string
   readonly absoluteExpiresAt: string

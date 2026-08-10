@@ -1,3 +1,5 @@
+import type { ProfileId } from './profileId'
+
 export const LEARNER_CREDENTIAL_SCHEMA_VERSION = 1 as const
 export const LEARNER_PIN_VERIFIER_SCHEME_VERSION = 1 as const
 
@@ -17,7 +19,7 @@ export interface LearnerPinCostParameters {
 export interface LearnerCredentialRecord {
   readonly schemaVersion: typeof LEARNER_CREDENTIAL_SCHEMA_VERSION
   readonly storage: 'device-local-only'
-  readonly profileId: string
+  readonly profileId: ProfileId
   readonly credentialKind: 'learner-pin'
   readonly verifierScheme: 'pbkdf2-sha256'
   readonly verifierSchemeVersion: typeof LEARNER_PIN_VERIFIER_SCHEME_VERSION
