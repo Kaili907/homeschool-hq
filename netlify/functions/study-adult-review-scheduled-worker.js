@@ -5,6 +5,7 @@ import {
   responseForSystemicError,
   resultResponse,
 } from './_shared/study-adult-review-operations/entrypoint-result.js'
+import { executeAdultReviewWorkerRun } from './_shared/study-adult-review-operations/run-evidence.js'
 
 export const STUDY_ADULT_REVIEW_SCHEDULE = Object.freeze({
   scheduled: 'configured',
@@ -25,6 +26,7 @@ export function createStudyAdultReviewScheduledWorkerHandler(overrides = {}) {
       return {
         worker: overrides.worker,
         credentialSource: overrides.scheduledWorkerCredentialSource,
+        runEvidence: overrides.runEvidence,
       }
     }
     if (!pending) pending = compose({ env }).catch(() => null)
@@ -36,15 +38,21 @@ export function createStudyAdultReviewScheduledWorkerHandler(overrides = {}) {
     return {
       worker: composed.worker,
       credentialSource: composed.scheduledWorkerCredentialSource,
+      runEvidence: composed.runEvidence,
     }
   }
 
-  const ready = (worker, credentialSource) => typeof worker?.ready === 'function'
+  const ready = (worker, credentialSource, runEvidence) => typeof worker?.ready === 'function'
     && typeof worker.run === 'function'
     && credentialSource?.isDurable === true
     && credentialSource?.isReady?.() === true
     && credentialSource?.authorityBoundary === 'netlify-scheduled-function'
     && typeof credentialSource.credentialForRun === 'function'
+    && (injected || (
+      runEvidence?.isDurable === true
+      && runEvidence?.isReady?.() === true
+      && typeof runEvidence.record === 'function'
+    ))
 
   // Deliberately accepts no request-derived authority. Netlify invokes this
   // handler only through the schedule declared in netlify.toml; it has no
@@ -53,8 +61,8 @@ export function createStudyAdultReviewScheduledWorkerHandler(overrides = {}) {
     if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) {
       return resultResponse(503, 'unavailable')
     }
-    const { worker, credentialSource } = await composition()
-    if (!ready(worker, credentialSource)) return resultResponse(503, 'unavailable')
+    const { worker, credentialSource, runEvidence } = await composition()
+    if (!ready(worker, credentialSource, runEvidence)) return resultResponse(503, 'unavailable')
 
     try {
       const workerCredential = await credentialSource.credentialForRun()
@@ -65,6 +73,17 @@ export function createStudyAdultReviewScheduledWorkerHandler(overrides = {}) {
       ) return resultResponse(503, 'unavailable')
 
       const limit = STUDY_ADULT_REVIEW_SCHEDULED_BATCH_LIMIT
+      if (runEvidence) {
+        return executeAdultReviewWorkerRun({
+          worker,
+          runEvidence,
+          invocationKind: 'scheduled',
+          workerCredential,
+          limit,
+          now: overrides.now,
+          createRunId: overrides.createRunId,
+        })
+      }
       return responseForRun(await worker.run({
         trigger: 'scheduled',
         workerCredential,

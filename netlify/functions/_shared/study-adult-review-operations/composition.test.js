@@ -179,6 +179,9 @@ function createDurableEstate({ jobs = [claimJob()] } = {}) {
     }),
     academy_study_release_delivery_lease_v2: () => ({ released: true }),
     academy_study_record_adult_review_monitoring_v2: () => ({ recorded: true }),
+    academy_study_record_adult_review_worker_run_v1: () => ({
+      recorded: true, replayed: false,
+    }),
   }
 
   const overrides = new Map()

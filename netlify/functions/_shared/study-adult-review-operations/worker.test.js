@@ -296,6 +296,7 @@ describe('credential-bound adult-review worker', () => {
 describe('adult-review HTTP boundaries', () => {
   it('supports an authorized manual invocation and minimized health', async () => {
     const runWorker = vi.fn(async () => ({ claimed: 2, delivered: 1, indeterminate: 1, failed: 0 }))
+    const recordRun = vi.fn(async () => ({ recorded: true, replayed: false }))
     const handler = createStudyAdultReviewWorkerHandler({
       worker: { ready: async () => ({ ready: true }), run: runWorker },
       workerAuthorization: readyPort({
@@ -305,6 +306,11 @@ describe('adult-review HTTP boundaries', () => {
           workerCredential: 'opaque-worker-credential-0000000000000001',
         }),
       }),
+      runEvidence: readyPort({ isDurable: true, record: recordRun }),
+      createRunId: () => '00000000-0000-4000-8000-000000000101',
+      now: vi.fn()
+        .mockReturnValueOnce(new Date('2026-08-10T12:00:00.000Z'))
+        .mockReturnValueOnce(new Date('2026-08-10T12:00:01.000Z')),
     })
     const response = await handler({
       httpMethod: 'POST',
@@ -321,6 +327,18 @@ describe('adult-review HTTP boundaries', () => {
       workerCredential: 'opaque-worker-credential-0000000000000001',
       limit: 10,
     }, { limit: 10 })
+    expect(recordRun).toHaveBeenCalledWith({
+      runId: '00000000-0000-4000-8000-000000000101',
+      startedAt: '2026-08-10T12:00:00.000Z',
+      completedAt: '2026-08-10T12:00:01.000Z',
+      resultCategory: 'processed',
+      claimedCount: 2,
+      processedCount: 2,
+      retryableFailureCount: 0,
+      terminalFailureCount: 0,
+      invocationKind: 'manual',
+      reasonCode: 'completed',
+    })
     const health = createStudyAdultReviewHealthHandler({
       readiness: readyPort({
         isDurable: true,
