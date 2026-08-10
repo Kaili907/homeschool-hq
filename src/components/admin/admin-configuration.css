@@ -1,0 +1,93 @@
+.admin-configuration { display: grid; gap: 1.35rem; }
+.admin-config-notice { display: flex; gap: .85rem; align-items: flex-start; border: 1px solid #e1bd7b; border-radius: .65rem; padding: 1rem 1.1rem; background: var(--admin-amber-soft); color: #674514; }
+.admin-config-notice > span { display: grid; width: 1.55rem; height: 1.55rem; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #f2d7a6; font-weight: 900; }
+.admin-config-notice h2, .admin-config-notice p { margin: 0; }
+.admin-config-notice h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.05rem; font-weight: 600; }
+.admin-config-notice p { margin-top: .28rem; color: #7c5b29; font-size: .78rem; line-height: 1.55; }
+.admin-config-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border: 1px solid var(--admin-line); border-radius: .65rem; background: white; box-shadow: var(--admin-shadow); }
+.admin-config-summary > div { padding: .95rem 1rem; }
+.admin-config-summary > div + div { border-left: 1px solid var(--admin-line); }
+.admin-config-summary dt, .admin-config-facts dt { color: var(--admin-muted); font-size: .66rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.admin-config-summary dd, .admin-config-facts dd { margin: .3rem 0 0; font-size: .78rem; font-weight: 700; }
+.admin-config-readonly { margin: 0; border-left: 3px solid var(--admin-blue); padding: .7rem .85rem; background: #eaf1f4; color: #315c6d; font-size: .78rem; }
+.admin-config-readonly code { font-size: .74rem; }
+.admin-config-group, .admin-config-unsupported { display: grid; gap: .8rem; }
+.admin-config-group__heading { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; padding-top: .35rem; }
+.admin-config-group__heading p, .admin-config-group__heading h2 { margin: 0; }
+.admin-config-group__heading p { margin-bottom: .2rem; color: var(--admin-green); font-size: .62rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.admin-config-group__heading h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.18rem; font-weight: 500; }
+.admin-config-group__heading > span { max-width: 36rem; color: var(--admin-muted); font-size: .7rem; line-height: 1.45; text-align: right; }
+.admin-config-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; }
+.admin-config-card { min-width: 0; border: 1px solid var(--admin-line); border-radius: .65rem; padding: 1rem 1.05rem; background: white; box-shadow: var(--admin-shadow); }
+.admin-config-card.is-editing { border-color: #8bb7a6; box-shadow: 0 0 0 2px rgba(20,92,70,.08), var(--admin-shadow); }
+.admin-config-card__heading { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.admin-config-card__heading h3, .admin-config-card__heading p { margin: 0; }
+.admin-config-card__heading h3 { font-family: Georgia, "Times New Roman", serif; font-size: 1rem; font-weight: 600; }
+.admin-config-card__heading p { margin-top: .22rem; color: var(--admin-muted); font-size: .7rem; line-height: 1.45; }
+.admin-config-severity { flex: 0 0 auto; border-radius: 999px; padding: .22rem .46rem; background: #edf1ef; color: #617069; font-size: .59rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+.admin-config-severity--warning { background: var(--admin-amber-soft); color: var(--admin-amber); }
+.admin-config-severity--critical { background: var(--admin-red-soft); color: var(--admin-red); }
+.admin-config-facts { display: grid; grid-template-columns: 1fr 1fr; margin: .9rem 0; border-top: 1px solid var(--admin-line); }
+.admin-config-facts > div { padding: .68rem .5rem .2rem 0; }
+.admin-config-facts dd { overflow-wrap: anywhere; }
+.admin-config-editor, .admin-config-confirmation { display: grid; gap: .75rem; margin-top: .85rem; border-top: 1px solid var(--admin-line); padding-top: .85rem; }
+.admin-config-field { display: grid; gap: .3rem; color: var(--admin-ink); font-size: .72rem; font-weight: 700; }
+.admin-config-field input, .admin-config-field select { width: 100%; min-height: 2.35rem; border: 1px solid #b9c8c1; border-radius: .4rem; padding: .48rem .55rem; background: white; color: var(--admin-ink); font: inherit; font-size: .78rem; }
+.admin-config-field small { color: var(--admin-muted); font-size: .65rem; font-weight: 500; line-height: 1.4; }
+.admin-config-fieldset { display: flex; flex-wrap: wrap; gap: .55rem 1rem; margin: 0; border: 1px solid #d4ddd9; border-radius: .45rem; padding: .65rem .75rem .7rem; }
+.admin-config-fieldset legend { padding: 0 .25rem; font-size: .71rem; font-weight: 700; }
+.admin-config-fieldset label { font-size: .76rem; }
+.admin-config-actions { display: flex; flex-wrap: wrap; gap: .55rem; }
+.admin-config-actions button, .admin-config-card > button, .admin-config-state button { border: 1px solid var(--admin-green); border-radius: .4rem; padding: .52rem .72rem; background: var(--admin-green); color: white; font: inherit; font-size: .72rem; font-weight: 750; cursor: pointer; }
+.admin-config-actions button:disabled, .admin-config-card > button:disabled { cursor: not-allowed; opacity: .55; }
+.admin-config-actions .admin-config-secondary, .admin-config-card > .admin-config-secondary { border-color: #aebdb6; background: white; color: #365248; }
+.admin-config-card > .admin-config-secondary { margin-top: .2rem; }
+.admin-config-actions button:focus-visible, .admin-config-card button:focus-visible, .admin-config-card input:focus-visible, .admin-config-card select:focus-visible, .admin-config-card input[type="checkbox"]:focus-visible, .admin-config-state button:focus-visible { outline: 3px solid #84c7ae; outline-offset: 2px; }
+.admin-config-error { margin: 0; border-left: 3px solid var(--admin-red); padding: .58rem .7rem; background: var(--admin-red-soft); color: #782a26; font-size: .7rem; line-height: 1.45; }
+.admin-config-confirmation h4 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: .92rem; }
+.admin-config-confirmation > dl { display: grid; grid-template-columns: 1fr 1fr; margin: 0; border: 1px solid var(--admin-line); border-radius: .45rem; }
+.admin-config-confirmation > dl div { padding: .55rem .65rem; }
+.admin-config-confirmation dt { color: var(--admin-muted); font-size: .63rem; }
+.admin-config-confirmation dd { margin: .2rem 0 0; font-size: .73rem; font-weight: 750; overflow-wrap: anywhere; }
+.admin-config-confirmation__warning { margin: 0; color: #6d4b19; font-size: .68rem; line-height: 1.5; }
+.admin-config-success { display: grid; gap: .16rem; margin: .75rem 0; border-left: 3px solid var(--admin-green); padding: .6rem .7rem; background: var(--admin-green-soft); color: #1f5845; }
+.admin-config-success strong { font-size: .72rem; }
+.admin-config-success span { font-size: .66rem; line-height: 1.4; }
+.admin-config-unsupported { border-top: 1px solid var(--admin-line); padding-top: .75rem; }
+.admin-config-unavailable-copy { margin: .75rem 0 0; color: var(--admin-muted); font-size: .7rem; line-height: 1.5; }
+.admin-config-voice-list { margin: .75rem 0 0; padding: 0; list-style: none; border-top: 1px solid var(--admin-line); }
+.admin-config-voice-list li { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .58rem 0; border-bottom: 1px solid #edf1ef; }
+.admin-config-voice-list strong, .admin-config-voice-list code { display: block; }
+.admin-config-voice-list strong { font-size: .73rem; }
+.admin-config-voice-list code { margin-top: .1rem; color: var(--admin-muted); font-size: .62rem; overflow-wrap: anywhere; }
+.admin-config-voice-list li > span { color: var(--admin-muted); font-size: .64rem; text-align: right; }
+.admin-config-state { max-width: 580px; margin: 8vh auto; border: 1px solid var(--admin-line); border-radius: .65rem; padding: 2rem; background: white; text-align: center; box-shadow: var(--admin-shadow); }
+.admin-config-state > span { display: inline-grid; width: 2rem; height: 2rem; place-items: center; border-radius: 50%; background: var(--admin-amber-soft); color: var(--admin-amber); font-weight: 900; }
+.admin-config-state h2 { margin: .7rem 0 .35rem; font-family: Georgia, "Times New Roman", serif; font-size: 1.35rem; font-weight: 500; }
+.admin-config-state p { margin: 0; color: var(--admin-muted); font-size: .78rem; }
+.admin-config-state button { margin-top: .85rem; }
+
+@media (max-width: 900px) {
+  .admin-config-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-config-summary > div + div { border-left: 0; }
+  .admin-config-summary > div:nth-child(even) { border-left: 1px solid var(--admin-line); }
+  .admin-config-summary > div:nth-child(n+3) { border-top: 1px solid var(--admin-line); }
+}
+
+@media (max-width: 700px) {
+  .admin-config-grid { grid-template-columns: 1fr; }
+  .admin-config-group__heading { align-items: flex-start; flex-direction: column; gap: .35rem; }
+  .admin-config-group__heading > span { text-align: left; }
+}
+
+@media (max-width: 460px) {
+  .admin-config-summary, .admin-config-facts, .admin-config-confirmation > dl { grid-template-columns: 1fr; }
+  .admin-config-summary > div:nth-child(even) { border-left: 0; }
+  .admin-config-summary > div + div, .admin-config-summary > div:nth-child(n+3) { border-top: 1px solid var(--admin-line); }
+  .admin-config-actions { align-items: stretch; flex-direction: column; }
+  .admin-config-actions button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-config-card { scroll-behavior: auto; }
+}
