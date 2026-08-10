@@ -61,6 +61,22 @@ function handler(overrides = {}) {
 }
 
 describe('ADMIN-16B curriculum authoring API', () => {
+  it('serves authorized revision-bound materialization and validation without granting a write', async () => {
+    const service = authoring()
+    const studio = {
+      readMaterialization: vi.fn().mockResolvedValue({ schemaVersion: 1, draftId: DRAFT_ID, draftRevision: 3, entities: [] }),
+      validateDraft: vi.fn().mockResolvedValue({ schemaVersion: 1, draftId: DRAFT_ID, draftRevision: 3, run: { status: 'valid' } }),
+      readBaseIndex: vi.fn(), readBaseEntity: vi.fn(),
+    }
+    const authorization = { require: vi.fn().mockResolvedValue({ ok: true, principal }) }
+    const handle = handler({ authoring: service, studio, authorization })
+    expect((await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/materialization/3`))).statusCode).toBe(200)
+    expect((await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/validation/3`))).statusCode).toBe(200)
+    expect(studio.readMaterialization).toHaveBeenCalledWith(principal.userId, DRAFT_ID, 3)
+    expect(studio.validateDraft).toHaveBeenCalledWith(principal.userId, DRAFT_ID, 3)
+    expect(authorization.require.mock.calls.map((call) => call[1])).toEqual(['curriculum:read', 'curriculum:read'])
+  })
+
   it('routes workspace and entity reads with curriculum:read', async () => {
     const service = authoring()
     const authorization = { require: vi.fn().mockResolvedValue({ ok: true, principal }) }

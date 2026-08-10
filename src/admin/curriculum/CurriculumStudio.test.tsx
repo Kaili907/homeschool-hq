@@ -3,11 +3,22 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it, vi } from 'vitest'
 import type { AdminCapability } from '../contracts'
 import type { CurriculumCatalog, CurriculumLessonSummary } from './contracts'
-import { CurriculumStudio, CurriculumStudioView } from './CurriculumStudio'
+import type {
+  CurriculumDraftAuthoringSource,
+  CurriculumStudioEntityIndexEntry,
+} from '../curriculum-authoring/contracts'
+import {
+  CurriculumStudio,
+  CurriculumStudioView,
+  confirmCurriculumNavigation,
+  curriculumPayloadDirty,
+  curriculumSavedMessage,
+} from './CurriculumStudio'
 import { CurriculumWorkflowNav, CurriculumPreviewUnavailable } from './CurriculumWorkflowNav'
 import {
   CURRICULUM_STUDIO_RENDER_LIMIT,
   buildCurriculumStudioIndex,
+  buildMaterializedCurriculumStudioIndex,
   canWriteCurriculumDrafts,
   createCurriculumStudioSource,
   curriculumTreeKeyboardAction,
@@ -59,6 +70,44 @@ const catalog: CurriculumCatalog = {
 const viewerCapabilities: readonly AdminCapability[] = ['curriculum:read']
 const authorCapabilities: readonly AdminCapability[] = ['curriculum:read', 'curriculum:drafts:write']
 
+const baseEntries: readonly CurriculumStudioEntityIndexEntry[] = [
+  {
+    entityType: 'course', entityRef: 'g5-math', origin: 'base', revision: null, position: 0,
+    parentId: 'grade:5', grade: 5, subject: 'mathematics', label: 'Grade 5 Mathematics', context: 'mathematics · 1 unit',
+  },
+  {
+    entityType: 'unit', entityRef: 'g5-math-u01', origin: 'base', revision: null, position: 0,
+    parentId: 'course:g5-math', grade: 5, subject: 'mathematics', courseRef: 'g5-math',
+    label: 'Unit 1: Patterns and place value', context: '1 lesson · assessment',
+  },
+  {
+    entityType: 'lesson', entityRef: lesson.lessonId, origin: 'base', revision: null, position: 0,
+    parentId: 'unit:g5-math-u01', grade: 5, subject: 'mathematics', courseRef: 'g5-math', unitRef: 'g5-math-u01',
+    label: 'Lesson 1: Notice the pattern', context: 'launch · day 1',
+  },
+  {
+    entityType: 'assessment', entityRef: 'g5-math-u01-assessment', origin: 'base', revision: null, position: 0,
+    parentId: 'unit:g5-math-u01', courseRef: 'g5-math', unitRef: 'g5-math-u01',
+    label: 'Assessment: Patterns', context: '20 points',
+  },
+  {
+    entityType: 'media_resource', entityRef: 'g5-source-01', origin: 'base', revision: null, position: 0,
+    parentId: 'resources:all', label: 'Original source', context: 'text · optional',
+  },
+]
+
+function authoringSource(): CurriculumDraftAuthoringSource {
+  return {
+    listDrafts: vi.fn(async () => ({ schemaVersion: 1 as const, drafts: [] })),
+    readDraft: vi.fn(), readEntity: vi.fn(), createDraft: vi.fn(), createEntity: vi.fn(),
+    updateEntity: vi.fn(), tombstoneEntity: vi.fn(),
+    readBaseIndex: vi.fn(async () => ({ schemaVersion: 1 as const, baseReleaseVersion: '1.0.0', entities: baseEntries })),
+    readBaseEntity: vi.fn(), readMaterialization: vi.fn(), validateDraft: vi.fn(),
+  }
+}
+
+const studioSource = createCurriculumStudioSource({ loadCatalog: vi.fn(async () => catalog) }, authoringSource())
+
 describe('Curriculum Studio shell', () => {
   it('builds the canonical Grade → Course → Unit → Lesson / Assessment hierarchy', () => {
     const index = buildCurriculumStudioIndex(catalog)
@@ -80,6 +129,18 @@ describe('Curriculum Studio shell', () => {
       'grade:5', 'course:g5-math', 'unit:g5-math-u01',
     ])
     expect(resolveCurriculumStudioEntity(index, 'lesson:not-real')).toBeNull()
+  })
+
+  it('materializes overrides once, retains draft-created entities, and includes media resources', () => {
+    const override = { ...baseEntries[0], origin: 'base_override' as const, revision: 2, label: 'Revised Mathematics' }
+    const created = {
+      ...baseEntries[4], entityRef: 'draft-resource', origin: 'draft_created' as const,
+      revision: 1, position: 1, label: 'Draft resource',
+    }
+    const index = buildMaterializedCurriculumStudioIndex([...baseEntries, override, created])
+    expect(index.rows.filter((row) => row.id === 'course:g5-math')).toHaveLength(1)
+    expect(index.byId.get('course:g5-math')?.label).toBe('Revised Mathematics')
+    expect(index.byId.get('media_resource:draft-resource')?.parentId).toBe('resources:all')
   })
 
   it('does not render a giant expanded tree eagerly', () => {
@@ -140,9 +201,19 @@ describe('Curriculum Studio shell', () => {
     })
   })
 
-  it('renders the three landmarks, editor slots, focusable tree, and truthful viewer state', () => {
+  it('truthfully models dirty navigation protection and replay-confirmed saves', () => {
+    const original = { schema_set_version: '2.0.0', resource_id: 'test-resource', kind: 'text', title: 'Original', locator: 'test', rights: 'Owned', required: false, text_fallback: 'Text' } as const
+    expect(curriculumPayloadDirty(original, original)).toBe(false)
+    expect(curriculumPayloadDirty({ ...original, title: 'Changed' }, original)).toBe(true)
+    expect(confirmCurriculumNavigation(true, () => false)).toBe(false)
+    expect(confirmCurriculumNavigation(true, () => true)).toBe(true)
+    expect(curriculumSavedMessage(false)).toBe('Saved')
+    expect(curriculumSavedMessage(true)).toContain('replay confirmed')
+  })
+
+  it('renders the responsive three-pane workspace, focusable tree, media, and truthful viewer state', () => {
     const markup = renderToStaticMarkup(
-      <CurriculumStudioView catalog={catalog} capabilities={viewerCapabilities} />,
+      <CurriculumStudioView catalog={catalog} capabilities={viewerCapabilities} source={studioSource} initialBaseEntries={baseEntries} />,
     )
     expect(markup).toContain('aria-label="Curriculum hierarchy"')
     expect(markup).toContain('aria-label="Selected entity editor workspace"')
@@ -150,50 +221,45 @@ describe('Curriculum Studio shell', () => {
     expect(markup).toContain('role="tree"')
     expect(markup).toContain('role="treeitem"')
     expect(markup).toContain('tabindex="0"')
-    expect(markup).toContain('data-editor-slot="lesson-fields"')
-    expect(markup).toContain('data-editor-slot="assessment-fields"')
-    expect(markup).toContain('data-editor-slot="resources"')
-    expect(markup).toContain('data-editor-slot="standards-mastery"')
-    expect(markup).toContain('data-editor-slot="tutor-routes"')
-    expect(markup).toContain('data-editor-slot="safety-privacy"')
-    expect(markup).toContain('data-editor-slot="accessibility"')
-    expect(markup).toContain('Read-only Admin session')
-    expect(markup).toContain('does not include curriculum:drafts:write')
-    expect(markup).not.toMatch(/>Save</)
+    expect(markup).toContain('Media resources')
+    expect(markup).toContain('Read-only: curriculum:drafts:write is unavailable')
+    expect(markup).toContain('no active release is implied')
+    expect(markup).not.toContain('Create draft entity')
     expect(markup).not.toContain('autosaved')
   })
 
-  it('is truthful when a draft-capable role has no draft service', () => {
+  it('is connected but does not imply an editable workspace until a draft is open', () => {
     expect(canWriteCurriculumDrafts(viewerCapabilities)).toBe(false)
     expect(canWriteCurriculumDrafts(authorCapabilities)).toBe(true)
     const markup = renderToStaticMarkup(
-      <CurriculumStudioView catalog={catalog} capabilities={authorCapabilities} />,
+      <CurriculumStudioView catalog={catalog} capabilities={authorCapabilities} source={studioSource} initialBaseEntries={baseEntries} />,
     )
-    expect(markup).toContain('data-draft-service="not-connected"')
-    expect(markup).toContain('Draft service not connected')
-    expect(markup).toContain('Authoring is not connected')
-    expect(markup).toContain('no save is implied')
-    expect(markup).toContain('No save attempted')
-    expect(markup).not.toMatch(/>Save</)
+    expect(markup).toContain('data-draft-service="connected"')
+    expect(markup).toContain('Draft service connected')
+    expect(markup).toContain('Target-version intent')
+    expect(markup).toContain('Select a draft or create a new workspace')
+    expect(markup).toContain('Create from 1.0.0')
   })
 
   it('fails closed before curriculum read authorization and never calls the source during render', () => {
     const loadPublishedCatalog = vi.fn()
     const markup = renderToStaticMarkup(
-      <CurriculumStudio authorization={{ status: 'denied' }} source={{ loadPublishedCatalog }} />,
+      <CurriculumStudio authorization={{ status: 'denied' }} source={{ ...authoringSource(), loadPublishedCatalog }} />,
     )
     expect(markup).toContain('Curriculum Studio access unavailable')
-    expect(markup).toContain('No hierarchy or entity metadata was loaded')
+    expect(markup).toContain('No hierarchy or draft metadata was loaded')
     expect(markup).not.toContain(catalog.source.packageId)
     expect(loadPublishedCatalog).not.toHaveBeenCalled()
   })
 
-  it('adapts only the existing published read and defines no competing mutation seam', async () => {
+  it('combines the published read with the real draft authoring seam', async () => {
     const loadCatalog = vi.fn(async () => catalog)
-    const source = createCurriculumStudioSource({ loadCatalog })
+    const draftSource = authoringSource()
+    const source = createCurriculumStudioSource({ loadCatalog }, draftSource)
     await expect(source.loadPublishedCatalog()).resolves.toBe(catalog)
+    await expect(source.listDrafts()).resolves.toEqual({ schemaVersion: 1, drafts: [] })
     expect(loadCatalog).toHaveBeenCalledOnce()
-    expect(Object.keys(source)).toEqual(['loadPublishedCatalog'])
+    expect(source.createEntity).toBe(draftSource.createEntity)
   })
 
   it('exposes all controlled curriculum workflow destinations without publish activation', () => {

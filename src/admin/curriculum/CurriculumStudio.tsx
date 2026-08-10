@@ -8,25 +8,64 @@ import {
   type ReactNode,
 } from 'react'
 import type { AdminCapability } from '../contracts'
-import type { CurriculumCatalog, CurriculumReadAuthorization } from './contracts'
 import {
-  buildCurriculumStudioIndex,
+  CURRICULUM_AUTHORING_SCHEMA_VERSION,
+  CurriculumDraftAuthoringError,
+  validateCurriculumDraftEntity,
+  type CurriculumDraftDetail,
+  type CurriculumDraftEntityPayload,
+  type CurriculumDraftEntityType,
+  type CurriculumDraftMaterialization,
+  type CurriculumDraftSummary,
+  type CurriculumStudioEntityIndexEntry,
+  type CreateCurriculumDraftEntityInput,
+  type TombstoneCurriculumDraftEntityInput,
+  type UpdateCurriculumDraftEntityInput,
+} from '../curriculum-authoring/contracts'
+import type { ValidationIssue } from '../../curriculum-authoring/v2/schema'
+import type { CurriculumCatalog, CurriculumReadAuthorization } from './contracts'
+import { CurriculumValidationWorkspace } from '../../components/admin/CurriculumValidationWorkspace'
+import type { CurriculumDraftValidationResult } from '../curriculum-authoring/contracts'
+import {
+  buildMaterializedCurriculumStudioIndex,
   canWriteCurriculumDrafts,
+  CURRICULUM_STUDIO_NAVIGATION_REQUEST,
   curriculumTreeKeyboardAction,
   expandedAncestorsFor,
   resolveCurriculumStudioEntity,
   visibleCurriculumStudioRows,
-  type CurriculumStudioEntity,
   type CurriculumStudioIndex,
   type CurriculumStudioRow,
   type CurriculumStudioSource,
   type CurriculumTreeKey,
 } from './studioModel'
+import { StructuredEntityEditor } from './StructuredEntityEditor'
+import { createDraftEntityPayload, CURRICULUM_ENTITY_REF_PATTERN } from './studioEditorModel'
 import './curriculum-studio.css'
 
 const TREE_KEYS = new Set<CurriculumTreeKey>([
   'ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End', 'Enter', ' ',
 ])
+
+type SaveState =
+  | { readonly kind: 'saved'; readonly message: string }
+  | { readonly kind: 'unsaved'; readonly message: string }
+  | { readonly kind: 'saving'; readonly message: string }
+  | { readonly kind: 'conflict'; readonly message: string }
+  | { readonly kind: 'failed'; readonly message: string }
+
+type PendingOperation =
+  | { readonly kind: 'create'; readonly input: CreateCurriculumDraftEntityInput }
+  | { readonly kind: 'update'; readonly input: UpdateCurriculumDraftEntityInput }
+  | {
+    readonly kind: 'tombstone'
+    readonly draftId: string
+    readonly entry: CurriculumStudioEntityIndexEntry
+    readonly payload: CurriculumDraftEntityPayload
+    readonly expectedDraftRevision: number
+    readonly createIdempotencyKey: string
+    readonly tombstoneIdempotencyKey: string
+  }
 
 export interface CurriculumStudioProps {
   readonly authorization: CurriculumReadAuthorization
@@ -37,21 +76,27 @@ export function CurriculumStudio({ authorization, source }: CurriculumStudioProp
   const canRead = authorization.status === 'authorized'
     && authorization.capabilities.includes('curriculum:read')
   const [catalog, setCatalog] = useState<CurriculumCatalog | null>(null)
+  const [drafts, setDrafts] = useState<readonly CurriculumDraftSummary[]>([])
   const [error, setError] = useState<string | null>(null)
   const [reload, setReload] = useState(0)
 
   useEffect(() => {
     if (!canRead) {
       setCatalog(null)
+      setDrafts([])
       return
     }
     let current = true
     setCatalog(null)
     setError(null)
-    source.loadPublishedCatalog().then(
-      (next) => { if (current) setCatalog(next) },
+    Promise.all([source.loadPublishedCatalog(), source.listDrafts()]).then(
+      ([nextCatalog, nextDrafts]) => {
+        if (!current) return
+        setCatalog(nextCatalog)
+        setDrafts(nextDrafts.drafts)
+      },
       (reason: unknown) => {
-        if (current) setError(reason instanceof Error ? reason.message : 'Unknown curriculum source failure')
+        if (current) setError(authoringErrorMessage(reason, 'The authorized Curriculum Studio service is unavailable.'))
       },
     )
     return () => { current = false }
@@ -63,21 +108,24 @@ export function CurriculumStudio({ authorization, source }: CurriculumStudioProp
   if (!canRead) {
     return (
       <StudioState role="alert" title="Curriculum Studio access unavailable">
-        This Admin session does not have the curriculum:read capability. No hierarchy or entity metadata was loaded.
+        This Admin session does not have the curriculum:read capability. No hierarchy or draft metadata was loaded.
       </StudioState>
     )
   }
   if (error) {
-    return (
-      <StudioState role="alert" title="Published curriculum unavailable" onRetry={() => setReload((value) => value + 1)}>
-        The Studio could not load its published navigation source: {error}
-      </StudioState>
-    )
+    return <StudioState role="alert" title="Curriculum Studio unavailable" onRetry={() => setReload((value) => value + 1)}>{error}</StudioState>
   }
   if (!catalog) {
-    return <StudioState role="status" title="Loading Curriculum Studio">Loading the authorized published hierarchy.</StudioState>
+    return <StudioState role="status" title="Loading Curriculum Studio">Loading the published base and authorized draft list.</StudioState>
   }
-  return <CurriculumStudioView catalog={catalog} capabilities={authorization.capabilities} />
+  return (
+    <CurriculumStudioView
+      catalog={catalog}
+      capabilities={authorization.capabilities}
+      source={source}
+      initialDrafts={drafts}
+    />
+  )
 }
 
 function StudioState({
@@ -104,37 +152,147 @@ function StudioState({
 export function CurriculumStudioView({
   catalog,
   capabilities,
+  source,
+  initialDrafts = [],
+  initialBaseEntries = [],
 }: {
   readonly catalog: CurriculumCatalog
   readonly capabilities: readonly AdminCapability[]
+  readonly source: CurriculumStudioSource
+  readonly initialDrafts?: readonly CurriculumDraftSummary[]
+  readonly initialBaseEntries?: readonly CurriculumStudioEntityIndexEntry[]
 }) {
-  const index = useMemo(() => buildCurriculumStudioIndex(catalog), [catalog])
-  const initial = useMemo(() => initialStudioRow(index), [index])
-  const [selectedId, setSelectedId] = useState(initial?.id ?? '')
-  const [focusedId, setFocusedId] = useState(initial?.id ?? '')
-  const [expandedIds, setExpandedIds] = useState<ReadonlySet<string>>(() => {
-    const expanded = new Set(initial ? expandedAncestorsFor(index, initial.id) : [])
-    if (initial?.hasChildren) expanded.add(initial.id)
-    return expanded
-  })
+  const [drafts, setDrafts] = useState(initialDrafts)
+  const [draftChoice, setDraftChoice] = useState(initialDrafts[0]?.draftId ?? '')
+  const [draft, setDraft] = useState<CurriculumDraftDetail | null>(null)
+  const [materialization, setMaterialization] = useState<CurriculumDraftMaterialization | null>(null)
+  const [baseEntries, setBaseEntries] = useState<readonly CurriculumStudioEntityIndexEntry[]>(initialBaseEntries)
+  const [workspaceMessage, setWorkspaceMessage] = useState('Select a draft or create a new workspace.')
+  const [workspaceBusy, setWorkspaceBusy] = useState(initialBaseEntries.length === 0)
+  const [targetVersion, setTargetVersion] = useState('')
+  const [createRequestKey, setCreateRequestKey] = useState<string | null>(null)
+  const [serverWriteAllowed, setServerWriteAllowed] = useState(true)
+  const initialEntityToken = useMemo(() => {
+    if (typeof window === 'undefined') return ''
+    return new URLSearchParams(window.location.search).get('entity') ?? ''
+  }, [])
+  const [selectedId, setSelectedId] = useState(initialEntityToken)
+  const [focusedId, setFocusedId] = useState(initialEntityToken)
+  const [expandedIds, setExpandedIds] = useState<ReadonlySet<string>>(new Set())
   const [query, setQuery] = useState('')
+  const [payload, setPayload] = useState<CurriculumDraftEntityPayload | null>(null)
+  const [savedPayload, setSavedPayload] = useState<CurriculumDraftEntityPayload | null>(null)
+  const [entityLoading, setEntityLoading] = useState(false)
+  const [entityError, setEntityError] = useState<string | null>(null)
+  const [issues, setIssues] = useState<readonly ValidationIssue[]>([])
+  const [saveState, setSaveState] = useState<SaveState>({ kind: 'saved', message: 'Saved' })
+  const [pendingOperation, setPendingOperation] = useState<PendingOperation | null>(null)
+  const [newEntityType, setNewEntityType] = useState<CurriculumDraftEntityType>('lesson')
+  const [newEntityRef, setNewEntityRef] = useState('')
+  const [validation, setValidation] = useState<CurriculumDraftValidationResult | null>(null)
+  const [validationBusy, setValidationBusy] = useState(false)
+  const [validationError, setValidationError] = useState<string | null>(null)
   const focusRequested = useRef(false)
+  const nextLoadedSaveMessage = useRef('Saved')
   const itemRefs = useRef(new Map<string, HTMLButtonElement>())
-  const visible = useMemo(
-    () => visibleCurriculumStudioRows(index, expandedIds, query),
-    [expandedIds, index, query],
-  )
-  const selected = resolveCurriculumStudioEntity(index, selectedId) ?? index.rows[0] ?? null
   const draftCapable = canWriteCurriculumDrafts(capabilities)
+  const writeAllowed = draftCapable && serverWriteAllowed && draft !== null
+  const entries = materialization?.entities ?? baseEntries
+  const index = useMemo(() => buildMaterializedCurriculumStudioIndex(entries), [entries])
+  const visible = useMemo(() => visibleCurriculumStudioRows(index, expandedIds, query), [expandedIds, index, query])
+  const selected = resolveCurriculumStudioEntity(index, selectedId) ?? index.rows[0] ?? null
+  const effectiveFocusedId = focusedId || selected?.id || ''
+  const selectedEntry = selected?.entity.kind === 'authoring' ? selected.entity.entry : null
+  const dirty = curriculumPayloadDirty(payload, savedPayload)
+  const validationStale = validation !== null && draft !== null && validation.draftRevision !== draft.revision
 
   useEffect(() => {
-    if (selected) return
+    if (initialBaseEntries.length > 0) return
+    let current = true
+    setWorkspaceBusy(true)
+    source.readBaseIndex(catalog.source.version).then(
+      (value) => {
+        if (!current) return
+        setBaseEntries(value.entities)
+        setWorkspaceBusy(false)
+      },
+      (reason) => {
+        if (!current) return
+        setWorkspaceBusy(false)
+        setWorkspaceMessage(authoringErrorMessage(reason, 'The immutable base materialization is unavailable.'))
+      },
+    )
+    return () => { current = false }
+  }, [catalog.source.version, initialBaseEntries.length, source])
+
+  useEffect(() => {
     const fallback = index.rows[0]
-    if (fallback) {
-      setSelectedId(fallback.id)
-      setFocusedId(fallback.id)
+    if (!fallback) {
+      setSelectedId('')
+      setFocusedId('')
+      return
     }
-  }, [index, selected])
+    if (index.byId.has(selectedId)) return
+    setSelectedId(fallback.id)
+    setFocusedId(fallback.id)
+    const expanded = new Set(expandedAncestorsFor(index, fallback.id))
+    if (fallback.hasChildren) expanded.add(fallback.id)
+    setExpandedIds(expanded)
+  }, [index, selectedId])
+
+  useEffect(() => {
+    if (!selectedEntry) {
+      setPayload(null)
+      setSavedPayload(null)
+      setEntityError(null)
+      return
+    }
+    let current = true
+    setEntityLoading(true)
+    setEntityError(null)
+    setIssues([])
+    const request = selectedEntry.origin === 'base'
+      ? source.readBaseEntity(catalog.source.version, selectedEntry.entityType, selectedEntry.entityRef)
+          .then((value) => value.payload)
+      : draft
+        ? source.readEntity(draft.draftId, selectedEntry.entityType, selectedEntry.entityRef).then((value) => value.payload)
+        : Promise.reject(new CurriculumDraftAuthoringError('not-found'))
+    request.then(
+      (nextPayload) => {
+        if (!current) return
+        setPayload(structuredClone(nextPayload))
+        setSavedPayload(structuredClone(nextPayload))
+        setSaveState({ kind: 'saved', message: nextLoadedSaveMessage.current })
+        nextLoadedSaveMessage.current = 'Saved'
+        setPendingOperation(null)
+        setEntityLoading(false)
+      },
+      (reason) => {
+        if (!current) return
+        if (isPermissionLoss(reason)) setServerWriteAllowed(false)
+        setEntityError(authoringErrorMessage(reason, 'This entity is unavailable.'))
+        setEntityLoading(false)
+      },
+    )
+    return () => { current = false }
+  }, [catalog.source.version, draft, selectedEntry?.entityRef, selectedEntry?.entityType, selectedEntry?.origin, selectedEntry?.revision, source])
+
+  useEffect(() => {
+    if (!dirty || typeof window === 'undefined') return
+    const beforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault()
+      event.returnValue = ''
+    }
+    window.addEventListener('beforeunload', beforeUnload)
+    const navigationRequest = (event: Event) => {
+      if (!confirmDiscard(true)) event.preventDefault()
+    }
+    window.addEventListener(CURRICULUM_STUDIO_NAVIGATION_REQUEST, navigationRequest)
+    return () => {
+      window.removeEventListener('beforeunload', beforeUnload)
+      window.removeEventListener(CURRICULUM_STUDIO_NAVIGATION_REQUEST, navigationRequest)
+    }
+  }, [dirty])
 
   useEffect(() => {
     if (!focusRequested.current) return
@@ -147,16 +305,17 @@ export function CurriculumStudioView({
     const onPopState = () => {
       const token = new URLSearchParams(window.location.search).get('entity')
       const row = resolveCurriculumStudioEntity(index, token)
-      if (!row) return
+      if (!row || !confirmDiscard(dirty)) return
       setSelectedId(row.id)
       setFocusedId(row.id)
       setExpandedIds((current) => unionSets(current, expandedAncestorsFor(index, row.id)))
     }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
-  }, [index])
+  }, [dirty, index])
 
   function selectRow(row: CurriculumStudioRow, updateHistory = true) {
+    if (row.id !== selectedId && !confirmDiscard(dirty)) return
     setSelectedId(row.id)
     setFocusedId(row.id)
     setExpandedIds((current) => unionSets(current, expandedAncestorsFor(index, row.id)))
@@ -195,257 +354,418 @@ export function CurriculumStudioView({
     setFocusedId(action.focusId)
   }
 
+  async function openDraft(draftId: string) {
+    if (!draftId || !confirmDiscard(dirty)) return
+    setWorkspaceBusy(true)
+    setWorkspaceMessage('Opening revision-bound draft materialization…')
+    try {
+      const nextDraft = await source.readDraft(draftId)
+      const nextMaterialization = await source.readMaterialization(draftId, nextDraft.revision)
+      setDraft(nextDraft)
+      setMaterialization(nextMaterialization)
+      setDraftChoice(draftId)
+      setWorkspaceMessage(`Draft revision ${nextDraft.revision} is open.`)
+      setServerWriteAllowed(true)
+    } catch (reason) {
+      if (isPermissionLoss(reason)) setServerWriteAllowed(false)
+      setWorkspaceMessage(authoringErrorMessage(reason, 'The draft could not be opened.'))
+    } finally {
+      setWorkspaceBusy(false)
+    }
+  }
+
+  async function refreshDraft(options: { readonly selectId?: string } = {}) {
+    if (!draft || !confirmDiscard(dirty)) return
+    setWorkspaceBusy(true)
+    try {
+      const nextDraft = await source.readDraft(draft.draftId)
+      const nextMaterialization = await source.readMaterialization(draft.draftId, nextDraft.revision)
+      setDraft(nextDraft)
+      setMaterialization(nextMaterialization)
+      setDrafts((current) => replaceDraftSummary(current, nextDraft))
+      if (options.selectId) {
+        setSelectedId(options.selectId)
+        setFocusedId(options.selectId)
+      }
+      setWorkspaceMessage(`Draft revision ${nextDraft.revision} is current.`)
+      setPendingOperation(null)
+      setSaveState({ kind: 'saved', message: 'Saved' })
+    } catch (reason) {
+      setWorkspaceMessage(authoringErrorMessage(reason, 'The draft could not be refreshed.'))
+    } finally {
+      setWorkspaceBusy(false)
+    }
+  }
+
+  async function createDraft() {
+    if (!draftCapable || !serverWriteAllowed || !targetVersion.trim() || !confirmDiscard(dirty)) return
+    const key = createRequestKey ?? uuid()
+    setCreateRequestKey(key)
+    setWorkspaceBusy(true)
+    setWorkspaceMessage('Creating a draft from the immutable published base…')
+    try {
+      const result = await source.createDraft({
+        baseReleaseVersion: catalog.source.version,
+        targetVersion: targetVersion.trim(),
+        authoringSchemaVersion: CURRICULUM_AUTHORING_SCHEMA_VERSION,
+        idempotencyKey: key,
+      })
+      setCreateRequestKey(null)
+      const nextDraft = await source.readDraft(result.draftId)
+      const nextMaterialization = await source.readMaterialization(result.draftId, nextDraft.revision)
+      setDraft(nextDraft)
+      setMaterialization(nextMaterialization)
+      setDrafts((current) => replaceDraftSummary(current, nextDraft))
+      setDraftChoice(result.draftId)
+      setWorkspaceMessage(result.replayed ? 'Draft creation replay confirmed.' : 'Draft created and opened.')
+    } catch (reason) {
+      if (isPermissionLoss(reason)) setServerWriteAllowed(false)
+      setWorkspaceMessage(authoringErrorMessage(reason, 'Draft creation failed. Retry preserves the same idempotency key.'))
+    } finally {
+      setWorkspaceBusy(false)
+    }
+  }
+
+  function editPayload(next: CurriculumDraftEntityPayload) {
+    setPayload(next)
+    setIssues([])
+    setSaveState({ kind: 'unsaved', message: 'Unsaved changes' })
+  }
+
+  async function save() {
+    if (!draft || !selectedEntry || !payload || !writeAllowed) return
+    const validationResult = validateCurriculumDraftEntity(selectedEntry.entityType, selectedEntry.entityRef, payload)
+    if (!validationResult.success) {
+      setIssues(validationResult.issues)
+      setSaveState({ kind: 'failed', message: 'Save failed: Schema v2 validation rejected the entity.' })
+      return
+    }
+    const operation: PendingOperation = selectedEntry.origin === 'base'
+      ? {
+        kind: 'create',
+        input: {
+          draftId: draft.draftId,
+          entityType: selectedEntry.entityType,
+          entityRef: selectedEntry.entityRef,
+          origin: 'base_override',
+          position: selectedEntry.position,
+          payload: validationResult.payload,
+          expectedDraftRevision: draft.revision,
+          idempotencyKey: uuid(),
+        },
+      }
+      : {
+        kind: 'update',
+        input: {
+          draftId: draft.draftId,
+          entityType: selectedEntry.entityType,
+          entityRef: selectedEntry.entityRef,
+          position: selectedEntry.position,
+          payload: validationResult.payload,
+          expectedRevision: selectedEntry.revision!,
+          expectedDraftRevision: draft.revision,
+          idempotencyKey: uuid(),
+        },
+      }
+    await execute(operation)
+  }
+
+  async function execute(operation: PendingOperation) {
+    setPendingOperation(operation)
+    setSaveState({ kind: 'saving', message: 'Saving' })
+    setIssues([])
+    try {
+      let replayed = false
+      if (operation.kind === 'create') {
+        replayed = (await source.createEntity(operation.input)).replayed
+      } else if (operation.kind === 'update') {
+        replayed = (await source.updateEntity(operation.input)).replayed
+      } else if (operation.entry.origin === 'base') {
+        const created = await source.createEntity({
+          draftId: operation.draftId,
+          entityType: operation.entry.entityType,
+          entityRef: operation.entry.entityRef,
+          origin: 'base_override',
+          position: operation.entry.position,
+          payload: operation.payload,
+          expectedDraftRevision: operation.expectedDraftRevision,
+          idempotencyKey: operation.createIdempotencyKey,
+        })
+        const tombstoned = await source.tombstoneEntity({
+          draftId: operation.draftId,
+          entityType: operation.entry.entityType,
+          entityRef: operation.entry.entityRef,
+          expectedRevision: created.entity!.revision,
+          expectedDraftRevision: created.draftRevision,
+          idempotencyKey: operation.tombstoneIdempotencyKey,
+        })
+        replayed = created.replayed || tombstoned.replayed
+      } else {
+        const input: TombstoneCurriculumDraftEntityInput = {
+          draftId: operation.draftId,
+          entityType: operation.entry.entityType,
+          entityRef: operation.entry.entityRef,
+          expectedRevision: operation.entry.revision!,
+          expectedDraftRevision: operation.expectedDraftRevision,
+          idempotencyKey: operation.tombstoneIdempotencyKey,
+        }
+        replayed = (await source.tombstoneEntity(input)).replayed
+      }
+      setPendingOperation(null)
+      setSavedPayload(payload ? structuredClone(payload) : null)
+      nextLoadedSaveMessage.current = curriculumSavedMessage(replayed)
+      setSaveState({ kind: 'saved', message: nextLoadedSaveMessage.current })
+      const selection = operation.kind === 'tombstone'
+        ? undefined
+        : operation.kind === 'create'
+          ? `${operation.input.entityType}:${operation.input.entityRef}`
+          : `${operation.input.entityType}:${operation.input.entityRef}`
+      await refreshAfterMutation(selection)
+    } catch (reason) {
+      await handleMutationFailure(reason, operation)
+    }
+  }
+
+  async function refreshAfterMutation(selectId?: string) {
+    if (!draft) return
+    const nextDraft = await source.readDraft(draft.draftId)
+    const nextMaterialization = await source.readMaterialization(draft.draftId, nextDraft.revision)
+    setDraft(nextDraft)
+    setMaterialization(nextMaterialization)
+    setDrafts((current) => replaceDraftSummary(current, nextDraft))
+    if (selectId) {
+      setSelectedId(selectId)
+      setFocusedId(selectId)
+    }
+    setWorkspaceMessage(`Draft revision ${nextDraft.revision} is current.`)
+  }
+
+  async function handleMutationFailure(reason: unknown, operation: PendingOperation) {
+    if (reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict') {
+      let classification = reason.reason === 'idempotency-conflict'
+        ? 'Conflicting reuse of an idempotency key was rejected.'
+        : 'The workspace revision is stale.'
+      if (reason.reason !== 'idempotency-conflict' && draft && selectedEntry) {
+        try {
+          const latestDraft = await source.readDraft(draft.draftId)
+          const latestEntity = selectedEntry.origin === 'base'
+            ? null
+            : await source.readEntity(draft.draftId, selectedEntry.entityType, selectedEntry.entityRef)
+          if (latestEntity && latestEntity.revision !== selectedEntry.revision) {
+            classification = latestDraft.revision !== draft.revision
+              ? 'Both workspace and entity revisions are stale.'
+              : 'The entity revision is stale.'
+          } else if (latestDraft.revision !== draft.revision) {
+            classification = 'The workspace revision is stale.'
+          }
+        } catch {
+          // The safe generic conflict remains when classification cannot be refreshed.
+        }
+      }
+      setPendingOperation(null)
+      setSaveState({ kind: 'conflict', message: `Conflict: ${classification} Reload the server version before reapplying changes.` })
+      return
+    }
+    if (isPermissionLoss(reason)) {
+      setServerWriteAllowed(false)
+      setPendingOperation(null)
+      setSaveState({ kind: 'failed', message: 'Save failed: draft write permission was lost. The workspace is now read-only.' })
+      return
+    }
+    if (reason instanceof CurriculumDraftAuthoringError && reason.code === 'invalid') {
+      setPendingOperation(null)
+      setSaveState({ kind: 'failed', message: 'Save failed: the server rejected this Schema v2 mutation.' })
+      return
+    }
+    setPendingOperation(operation)
+    setSaveState({ kind: 'failed', message: 'Save failed: the server is unavailable. Retry will reuse the same idempotency key.' })
+  }
+
+  async function tombstone() {
+    if (!draft || !selectedEntry || !savedPayload || !writeAllowed) return
+    if (typeof window !== 'undefined' && !window.confirm(`Remove ${selectedEntry.label} from this draft snapshot?`)) return
+    await execute({
+      kind: 'tombstone',
+      draftId: draft.draftId,
+      entry: selectedEntry,
+      payload: savedPayload,
+      expectedDraftRevision: draft.revision,
+      createIdempotencyKey: uuid(),
+      tombstoneIdempotencyKey: uuid(),
+    })
+  }
+
+  async function createEntity() {
+    if (!draft || !writeAllowed || !CURRICULUM_ENTITY_REF_PATTERN.test(newEntityRef)) return
+    const selectedAuthoring = selected?.entity.kind === 'authoring' ? selected.entity.entry : null
+    const nextPayload = createDraftEntityPayload(newEntityType, newEntityRef, selectedAuthoring, entries)
+    const position = Math.max(-1, ...entries.filter((entry) => entry.entityType === newEntityType).map((entry) => entry.position)) + 1
+    await execute({
+      kind: 'create',
+      input: {
+        draftId: draft.draftId,
+        entityType: newEntityType,
+        entityRef: newEntityRef,
+        origin: 'draft_created',
+        position,
+        payload: nextPayload,
+        expectedDraftRevision: draft.revision,
+        idempotencyKey: uuid(),
+      },
+    })
+    setNewEntityRef('')
+  }
+
+  async function runValidation() {
+    if (!draft) return
+    setValidationBusy(true)
+    setValidationError(null)
+    try {
+      const result = await source.validateDraft(draft.draftId, draft.revision)
+      setValidation(result)
+    } catch (reason) {
+      setValidationError(
+        reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict'
+          ? 'The draft changed before validation could bind to this revision. Refresh and validate again.'
+          : authoringErrorMessage(reason, 'Validation is unavailable.'),
+      )
+    } finally {
+      setValidationBusy(false)
+    }
+  }
+
+  function jumpToValidationEntity(entity: { readonly type: string; readonly id: string | null }) {
+    if (!entity.id) return
+    const type = entity.type === 'resource' ? 'media_resource' : entity.type
+    const row = index.byId.get(`${type}:${entity.id}`)
+    if (row) selectRow(row)
+  }
+
   return (
-    <div className="curriculum-studio" data-draft-service="not-connected">
+    <div className="curriculum-studio" data-draft-service="connected">
       <header className="curriculum-studio-header">
         <div>
-          <p className="curriculum-studio-eyebrow">Published navigation · authoring seam ready</p>
+          <p className="curriculum-studio-eyebrow">Draft authoring · Schema v2</p>
           <h2>Curriculum Studio</h2>
-          <p>
-            Package <strong>{catalog.source.packageId}</strong> · version <strong>{catalog.source.version}</strong>
-          </p>
+          <p>Immutable base <strong>{catalog.source.version}</strong> · no active release is implied</p>
         </div>
-        <div className="curriculum-studio-connection" role="status">
-          <span aria-hidden="true" />
-          Draft service not connected
-        </div>
+        <div className="curriculum-studio-connection is-connected" role="status"><span aria-hidden="true" />Draft service connected</div>
       </header>
+
+      <section className="curriculum-draft-toolbar" aria-label="Draft workspace controls">
+        <div className="curriculum-draft-open">
+          <label htmlFor="curriculum-draft-choice">Draft workspace</label>
+          <select id="curriculum-draft-choice" value={draftChoice} onChange={(event) => setDraftChoice(event.target.value)}>
+            <option value="">Select a draft</option>
+            {drafts.map((item) => <option key={item.draftId} value={item.draftId}>{item.targetVersion} · rev {item.revision}</option>)}
+          </select>
+          <button type="button" disabled={!draftChoice || workspaceBusy} onClick={() => void openDraft(draftChoice)}>Open</button>
+          {draft && <button type="button" disabled={workspaceBusy} onClick={() => void refreshDraft()}>Refresh</button>}
+        </div>
+        {draftCapable && serverWriteAllowed ? (
+          <div className="curriculum-draft-create">
+            <label htmlFor="curriculum-target-version">Target-version intent</label>
+            <input id="curriculum-target-version" value={targetVersion} placeholder="2.0.0-draft.1" onChange={(event) => { setTargetVersion(event.target.value); setCreateRequestKey(null) }} />
+            <button type="button" disabled={!targetVersion.trim() || workspaceBusy} onClick={() => void createDraft()}>Create from {catalog.source.version}</button>
+          </div>
+        ) : <p className="curriculum-readonly-toolbar">Read-only: curriculum:drafts:write is unavailable.</p>}
+        <p className="curriculum-workspace-message" role="status" aria-live="polite">{workspaceBusy ? 'Working… ' : ''}{workspaceMessage}</p>
+      </section>
+
+      {draft && (
+        <dl className="curriculum-draft-facts" aria-label="Open draft facts">
+          <div><dt>Base release</dt><dd>{draft.baseReleaseVersion}</dd></div>
+          <div><dt>Target intent</dt><dd>{draft.targetVersion}</dd></div>
+          <div><dt>Workspace revision</dt><dd>{draft.revision}</dd></div>
+          <div><dt>Lifecycle</dt><dd>{draft.lifecycleState}</dd></div>
+          <div><dt>Access</dt><dd>{writeAllowed ? 'Editable' : 'Read-only'}</dd></div>
+        </dl>
+      )}
 
       <div className="curriculum-studio-grid">
         <aside className="curriculum-studio-pane curriculum-studio-tree-pane" aria-label="Curriculum hierarchy">
-          <div className="curriculum-studio-pane-heading">
-            <div><p>Navigator</p><h3>Curriculum</h3></div>
-            <span>{catalog.lessons.length.toLocaleString()} lessons</span>
-          </div>
-          <label className="curriculum-studio-search">
-            <span className="admin-sr-only">Filter curriculum hierarchy</span>
-            <input
-              type="search"
-              value={query}
-              placeholder="Find a course, unit, or lesson"
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </label>
-          <p className="curriculum-tree-help" id="curriculum-tree-help">
-            Arrow keys navigate. Right and left expand or collapse. Enter selects.
-          </p>
-          {visible.rows.length === 0 ? (
-            <div className="curriculum-tree-empty" role="status">No curriculum entities match “{query}”.</div>
+          <div className="curriculum-studio-pane-heading"><div><p>Navigator</p><h3>Materialized snapshot</h3></div><span>{entries.length.toLocaleString()} entities</span></div>
+          <label className="curriculum-studio-search"><span className="admin-sr-only">Filter curriculum hierarchy</span><input type="search" value={query} placeholder="Find an entity" onChange={(event) => setQuery(event.target.value)} /></label>
+          <p className="curriculum-tree-help" id="curriculum-tree-help">Arrow keys navigate. Right and left expand or collapse. Enter selects.</p>
+          {workspaceBusy && entries.length === 0 ? <div className="curriculum-tree-empty" role="status">Loading the immutable authoring index.</div> : visible.rows.length === 0 ? (
+            <div className="curriculum-tree-empty" role="status">No entities match “{query}”.</div>
           ) : (
-            <ul className="curriculum-tree" role="tree" aria-label="Published curriculum hierarchy" aria-describedby="curriculum-tree-help">
+            <ul className="curriculum-tree" role="tree" aria-label="Draft materialized curriculum hierarchy" aria-describedby="curriculum-tree-help">
               {visible.rows.map((row) => {
                 const expanded = row.hasChildren ? expandedIds.has(row.id) : undefined
                 return (
-                  <li key={row.id} role="none">
-                    <div
-                      className={`curriculum-tree-row${selected?.id === row.id ? ' is-selected' : ''}`}
-                      style={{ '--curriculum-tree-depth': row.depth } as CSSProperties}
-                    >
-                      {row.hasChildren ? (
-                        <button
-                          type="button"
-                          className="curriculum-tree-toggle"
-                          aria-label={`${expanded ? 'Collapse' : 'Expand'} ${row.label}`}
-                          tabIndex={-1}
-                          onClick={() => toggleRow(row)}
-                        >
-                          <span aria-hidden="true">{expanded ? '−' : '+'}</span>
-                        </button>
-                      ) : <span className="curriculum-tree-leaf" aria-hidden="true">•</span>}
-                      <button
-                        type="button"
-                        role="treeitem"
-                        ref={(node) => {
-                          if (node) itemRefs.current.set(row.id, node)
-                          else itemRefs.current.delete(row.id)
-                        }}
-                        data-entity-id={row.id}
-                        aria-level={row.depth}
-                        aria-expanded={expanded}
-                        aria-selected={selected?.id === row.id}
-                        tabIndex={focusedId === row.id ? 0 : -1}
-                        onFocus={() => setFocusedId(row.id)}
-                        onKeyDown={handleTreeKey}
-                        onClick={() => selectRow(row)}
-                      >
-                        <span>{row.label}</span>
-                        <small>{row.context}</small>
-                      </button>
-                    </div>
-                  </li>
+                  <li key={row.id} role="none"><div className={`curriculum-tree-row${selected?.id === row.id ? ' is-selected' : ''}`} style={{ '--curriculum-tree-depth': row.depth } as CSSProperties}>
+                    {row.hasChildren ? <button type="button" className="curriculum-tree-toggle" aria-label={`${expanded ? 'Collapse' : 'Expand'} ${row.label}`} tabIndex={-1} onClick={() => toggleRow(row)}><span aria-hidden="true">{expanded ? '−' : '+'}</span></button> : <span className="curriculum-tree-leaf" aria-hidden="true">•</span>}
+                    <button
+                      type="button" role="treeitem"
+                      ref={(node) => { if (node) itemRefs.current.set(row.id, node); else itemRefs.current.delete(row.id) }}
+                      data-entity-id={row.id} aria-level={row.depth} aria-expanded={expanded} aria-selected={selected?.id === row.id}
+                      tabIndex={effectiveFocusedId === row.id ? 0 : -1} onFocus={() => setFocusedId(row.id)} onKeyDown={handleTreeKey} onClick={() => selectRow(row)}
+                    ><span>{row.label}</span><small>{row.context}</small></button>
+                  </div></li>
                 )
               })}
             </ul>
           )}
-          {visible.limited && (
-            <p className="curriculum-tree-limit" role="status">
-              Showing {visible.rows.length} of {visible.total} matching rows. Refine the filter or collapse branches.
-            </p>
+          {visible.limited && <p className="curriculum-tree-limit" role="status">Showing {visible.rows.length} of {visible.total} matching rows. Refine the filter or collapse branches.</p>}
+          {draft && writeAllowed && (
+            <fieldset className="curriculum-create-entity">
+              <legend>Create draft entity</legend>
+              <select aria-label="New entity type" value={newEntityType} onChange={(event) => setNewEntityType(event.target.value as CurriculumDraftEntityType)}>
+                <option value="course">Course</option><option value="unit">Unit</option><option value="lesson">Lesson</option><option value="assessment">Assessment</option><option value="media_resource">Media resource</option>
+              </select>
+              <input aria-label="New stable entity ID" value={newEntityRef} placeholder="stable-entity-id" onChange={(event) => setNewEntityRef(event.target.value)} />
+              <button type="button" disabled={!CURRICULUM_ENTITY_REF_PATTERN.test(newEntityRef) || saveState.kind === 'saving'} onClick={() => void createEntity()}>Create</button>
+              <small>Protected classes remain server-owned. New standards stay human-review until verified.</small>
+            </fieldset>
           )}
         </aside>
 
         <section className="curriculum-studio-pane curriculum-studio-editor" aria-label="Selected entity editor workspace">
-          {selected ? (
-            <EntityEditor row={selected} catalog={catalog} draftCapable={draftCapable} />
+          {selectedEntry ? (
+            <>
+              <header className="curriculum-editor-heading"><div><p>{entityTypeLabel(selectedEntry.entityType)} · {originLabel(selectedEntry.origin)}</p><h3>{selectedEntry.label}</h3><span>{selectedEntry.entityRef}</span></div><span className={writeAllowed ? 'curriculum-editable-badge' : 'curriculum-readonly-badge'}>{writeAllowed ? 'Schema v2 editor' : 'Read-only'}</span></header>
+              {!draft && <div className="curriculum-draft-notice" role="status"><strong>No draft is open</strong><p>This is the immutable published base. Open or create a draft before editing.</p></div>}
+              {!draftCapable && <div className="curriculum-draft-notice" role="status"><strong>Viewer mode</strong><p>You can open and validate drafts, but curriculum:drafts:write is required to mutate them.</p></div>}
+              {draftCapable && !serverWriteAllowed && <div className="curriculum-draft-notice" role="alert"><strong>Write permission unavailable</strong><p>The server rejected draft write authority. The current snapshot remains readable.</p></div>}
+              <div className={`curriculum-save-state is-${saveState.kind}`} role={saveState.kind === 'conflict' || saveState.kind === 'failed' ? 'alert' : 'status'} aria-live="polite"><strong>{saveState.message}</strong>{dirty && saveState.kind === 'saved' && <span>Unsaved changes</span>}</div>
+              {entityLoading ? <p role="status">Loading the structured entity payload…</p> : entityError ? <p role="alert">{entityError}</p> : payload ? (
+                <>
+                  <StructuredEntityEditor entityType={selectedEntry.entityType} payload={payload} disabled={!writeAllowed || saveState.kind === 'saving' || pendingOperation !== null && saveState.kind === 'failed'} issues={issues} onChange={editPayload} />
+                  <div className="curriculum-editor-actions">
+                    <button type="button" disabled={!dirty || !writeAllowed || saveState.kind === 'saving' || pendingOperation !== null} onClick={() => void save()}>Save changes</button>
+                    <button type="button" disabled={!dirty || saveState.kind === 'saving'} onClick={() => { if (savedPayload && confirmDiscard(true)) { setPayload(structuredClone(savedPayload)); setIssues([]); setPendingOperation(null); setSaveState({ kind: 'saved', message: 'Saved' }) } }}>Discard edits</button>
+                    {pendingOperation && saveState.kind === 'failed' && <button type="button" onClick={() => void execute(pendingOperation)}>Retry save</button>}
+                    {pendingOperation && saveState.kind === 'failed' && <button type="button" onClick={() => { setPendingOperation(null); setSaveState({ kind: 'unsaved', message: 'Unsaved changes' }) }}>Edit again</button>}
+                    {saveState.kind === 'conflict' && <button type="button" onClick={() => void refreshDraft()}>Reload server version</button>}
+                    <button type="button" className="curriculum-tombstone-button" disabled={!writeAllowed || saveState.kind === 'saving' || dirty} onClick={() => void tombstone()}>Remove from draft</button>
+                  </div>
+                </>
+              ) : null}
+            </>
           ) : (
-            <div className="curriculum-studio-empty" role="status">
-              <h3>No curriculum entity available</h3>
-              <p>The authorized published catalog is empty.</p>
-            </div>
+            <div className="curriculum-studio-empty" role="status"><h3>{selected?.label ?? 'No curriculum entity available'}</h3><p>Select a course, unit, lesson, assessment, or media resource to inspect its structured fields.</p></div>
           )}
         </section>
 
         <aside className="curriculum-studio-pane curriculum-studio-inspector" aria-label="Curriculum metadata and status inspector">
-          <Inspector catalog={catalog} selected={selected} draftCapable={draftCapable} />
+          <div className="curriculum-inspector-content">
+            <div className="curriculum-studio-pane-heading"><div><p>Inspector</p><h3>Metadata & status</h3></div></div>
+            <InspectorSection title="Lifecycle"><StatusLine label="Published base" value={catalog.source.version} tone="positive" /><StatusLine label="Draft" value={draft ? draft.targetVersion : 'Not open'} tone={draft ? 'positive' : 'warning'} /><StatusLine label="Save state" value={dirty ? 'Unsaved changes' : saveState.message} tone={saveState.kind === 'failed' || saveState.kind === 'conflict' ? 'warning' : 'neutral'} /></InspectorSection>
+            <InspectorSection title="Selection"><dl className="curriculum-inspector-list"><div><dt>Type</dt><dd>{selectedEntry ? entityTypeLabel(selectedEntry.entityType) : 'Group'}</dd></div><div><dt>Stable ID</dt><dd>{selectedEntry?.entityRef ?? selected?.id ?? 'None'}</dd></div><div><dt>Origin</dt><dd>{selectedEntry ? originLabel(selectedEntry.origin) : 'Virtual navigation'}</dd></div><div><dt>Entity rev</dt><dd>{selectedEntry?.revision ?? 'Base'}</dd></div></dl></InspectorSection>
+            <InspectorSection title="Authorization"><p>{writeAllowed ? 'Draft authoring enabled' : 'Read-only mode'}</p><small>All reads require curriculum:read. Every mutation is reauthorized for curriculum:drafts:write by the server.</small></InspectorSection>
+            <InspectorSection title="Protected classes"><p>Server-owned and read-only</p><small>Schedules, policy sets, standards frameworks, protected assessment interpretations, schema versions, and entity identities are not exposed as unrestricted JSON.</small></InspectorSection>
+            <InspectorSection title="Validation"><StatusLine label="Revision" value={validation ? String(validation.draftRevision) : 'Not run'} tone={validationStale ? 'warning' : validation ? 'positive' : 'neutral'} /><button type="button" disabled={!draft || validationBusy} onClick={() => void runValidation()}>{validationBusy ? 'Validating…' : `Validate${draft ? ` revision ${draft.revision}` : ''}`}</button>{validationError && <p role="alert">{validationError}</p>}</InspectorSection>
+          </div>
         </aside>
       </div>
-    </div>
-  )
-}
 
-function EntityEditor({
-  row,
-  catalog,
-  draftCapable,
-}: {
-  readonly row: CurriculumStudioRow
-  readonly catalog: CurriculumCatalog
-  readonly draftCapable: boolean
-}) {
-  return (
-    <>
-      <header className="curriculum-editor-heading">
-        <div>
-          <p>{entityKindLabel(row.entity)} · Published reference</p>
-          <h3>{row.label}</h3>
-          <span>{row.context}</span>
-        </div>
-        <span className="curriculum-readonly-badge">Read-only source</span>
-      </header>
-      <div className={`curriculum-draft-notice${draftCapable ? ' is-pending-connection' : ''}`} role="status">
-        <strong>{draftCapable ? 'Authoring is not connected' : 'Read-only Admin session'}</strong>
-        <p>
-          {draftCapable
-            ? 'Your role can author drafts, but the draft service is unavailable in this shell. Editing and save controls are disabled; no save is implied.'
-            : 'Your role can inspect published curriculum but does not include curriculum:drafts:write. No editing or save controls are available.'}
-        </p>
-      </div>
-      <PublishedEntitySummary entity={row.entity} catalog={catalog} />
-      <section className="curriculum-editor-slots" aria-labelledby="curriculum-editor-slots-heading">
-        <div className="curriculum-section-heading">
-          <div><p>Future authoring surface</p><h4 id="curriculum-editor-slots-heading">Editor structure</h4></div>
-          <span>Awaiting draft adapter</span>
-        </div>
-        <div className="curriculum-slot-grid">
-          <EditorSlot name="lesson-fields" title="Lesson fields">Objectives, lesson flow, formative checks, and guidance.</EditorSlot>
-          <EditorSlot name="assessment-fields" title="Assessment fields">Prompts, scoring, rubrics, and accommodations.</EditorSlot>
-          <EditorSlot name="resources" title="Resources">Applicable resource references and media fallbacks.</EditorSlot>
-          <EditorSlot name="standards-mastery" title="Standards & mastery">Alignment, success criteria, and mastery evidence.</EditorSlot>
-          <EditorSlot name="tutor-routes" title="Tutor routes">Signals, actions, and protected instructional routes.</EditorSlot>
-          <EditorSlot name="safety-privacy" title="Safety & privacy">Safeguards, visibility, and privacy constraints.</EditorSlot>
-          <EditorSlot name="accessibility" title="Accessibility">Accommodations and accessible alternatives.</EditorSlot>
-        </div>
-      </section>
-    </>
-  )
-}
-
-function EditorSlot({ name, title, children }: { readonly name: string; readonly title: string; readonly children: ReactNode }) {
-  return (
-    <article className="curriculum-editor-slot" data-editor-slot={name} aria-disabled="true">
-      <span aria-hidden="true">◇</span>
-      <div><h5>{title}</h5><p>{children}</p></div>
-    </article>
-  )
-}
-
-function PublishedEntitySummary({ entity, catalog }: { readonly entity: CurriculumStudioEntity; readonly catalog: CurriculumCatalog }) {
-  let values: readonly [string, string][]
-  if (entity.kind === 'grade') {
-    values = [
-      ['Grade', String(entity.grade)],
-      ['Courses', String(catalog.courses.filter((course) => course.grade === entity.grade).length)],
-      ['Units', String(catalog.units.filter((unit) => unit.grade === entity.grade).length)],
-      ['Lessons', String(catalog.lessons.filter((lesson) => lesson.grade === entity.grade).length)],
-    ]
-  } else if (entity.kind === 'course') {
-    values = [
-      ['Course ID', entity.course.courseId], ['Subject', entity.course.subject],
-      ['Grade', String(entity.course.grade)], ['Instructional days', String(entity.course.days)],
-    ]
-  } else if (entity.kind === 'unit') {
-    values = [
-      ['Unit ID', entity.unit.unitId], ['Course', entity.unit.courseId],
-      ['Instructional days', String(entity.unit.days)], ['Standards', entity.unit.standards.join(', ') || 'Not indexed'],
-      ['Topics', entity.unit.topics.join(', ') || 'Not indexed'], ['Assessment', entity.unit.assessmentId ?? 'Not indexed'],
-    ]
-  } else if (entity.kind === 'lesson') {
-    values = [
-      ['Lesson ID', entity.lesson.lessonId], ['Course day', String(entity.lesson.courseDay)],
-      ['Unit day', String(entity.lesson.dayInUnit)], ['Phase', entity.lesson.phase ?? 'Not indexed'],
-      ['Focus', entity.lesson.focus ?? 'Not indexed'], ['Standards', entity.lesson.standards.join(', ') || 'Not indexed'],
-    ]
-  } else {
-    values = [
-      ['Assessment ID', entity.assessment.assessmentId], ['Course', entity.assessment.courseId],
-      ['Unit', String(entity.assessment.unitNumber)], ['Total points', String(entity.assessment.totalPoints ?? 'Not indexed')],
-      ['Standards', entity.assessment.standards.join(', ') || 'Not indexed'],
-    ]
-  }
-  return (
-    <section className="curriculum-published-summary" aria-labelledby="published-entity-summary-heading">
-      <div className="curriculum-section-heading">
-        <div><p>Existing metadata</p><h4 id="published-entity-summary-heading">Published summary</h4></div>
-      </div>
-      <dl>{values.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-    </section>
-  )
-}
-
-function Inspector({
-  catalog,
-  selected,
-  draftCapable,
-}: {
-  readonly catalog: CurriculumCatalog
-  readonly selected: CurriculumStudioRow | null
-  readonly draftCapable: boolean
-}) {
-  return (
-    <div className="curriculum-inspector-content">
-      <div className="curriculum-studio-pane-heading"><div><p>Inspector</p><h3>Metadata & status</h3></div></div>
-      <InspectorSection title="Lifecycle">
-        <StatusLine label="Published source" value={catalog.source.lifecycle} tone="positive" />
-        <StatusLine label="Draft service" value="Not connected" tone="warning" />
-        <StatusLine label="Save state" value="No save attempted" />
-      </InspectorSection>
-      <InspectorSection title="Selection">
-        <dl className="curriculum-inspector-list">
-          <div><dt>Type</dt><dd>{selected ? entityKindLabel(selected.entity) : 'None'}</dd></div>
-          <div><dt>Stable ID</dt><dd>{selected?.id ?? 'None'}</dd></div>
-          <div><dt>Source version</dt><dd>{catalog.source.version}</dd></div>
-        </dl>
-      </InspectorSection>
-      <InspectorSection title="Access">
-        <p>{draftCapable ? 'Draft-capable Admin role' : 'Published read-only role'}</p>
-        <small>
-          {draftCapable
-            ? 'The role includes curriculum:drafts:write; the service connection is still required.'
-            : 'The role does not include curriculum:drafts:write.'}
-        </small>
-      </InspectorSection>
-      <InspectorSection title="Validation">
-        <StatusLine
-          label="Published evidence"
-          value={catalog.source.validationStatus === 'passed' ? 'Passed' : 'Unavailable'}
-          tone={catalog.source.validationStatus === 'passed' ? 'positive' : 'warning'}
-        />
-        <a href="/academy/admin/curriculum/validation">Open validation evidence</a>
-      </InspectorSection>
-      <InspectorSection title="Resources">
-        <p>Resource records are not exposed by the published summary index.</p>
-        <small>The editor slot remains available for the future draft adapter without inventing resource data.</small>
-      </InspectorSection>
+      {validation && (
+        <section className="curriculum-studio-validation" aria-label="Revision-bound draft validation">
+          {validationStale && <div className="curriculum-validation-stale" role="alert"><strong>Validation is stale.</strong> This result is bound to revision {validation.draftRevision}; the open draft is revision {draft?.revision}. Run validation again before relying on it.</div>}
+          <CurriculumValidationWorkspace run={validation.run} onJumpToEntity={jumpToValidationEntity} />
+        </section>
+      )}
     </div>
   )
 }
@@ -458,17 +778,70 @@ function StatusLine({ label, value, tone = 'neutral' }: { readonly label: string
   return <div className={`curriculum-status-line is-${tone}`}><span>{label}</span><strong>{value}</strong></div>
 }
 
-function entityKindLabel(entity: CurriculumStudioEntity): string {
-  return entity.kind[0].toUpperCase() + entity.kind.slice(1)
+function entityTypeLabel(type: CurriculumDraftEntityType): string {
+  return type === 'media_resource' ? 'Media resource' : type[0].toUpperCase() + type.slice(1)
 }
 
-function initialStudioRow(index: CurriculumStudioIndex): CurriculumStudioRow | null {
-  if (typeof window !== 'undefined') {
-    const token = new URLSearchParams(window.location.search).get('entity')
-    const selected = resolveCurriculumStudioEntity(index, token)
-    if (selected) return selected
-  }
-  return index.rows[0] ?? null
+function originLabel(origin: CurriculumStudioEntityIndexEntry['origin']): string {
+  if (origin === 'base') return 'Immutable base'
+  if (origin === 'base_override') return 'Draft override'
+  return 'Draft-created'
+}
+
+function replaceDraftSummary(
+  drafts: readonly CurriculumDraftSummary[],
+  detail: CurriculumDraftDetail,
+): readonly CurriculumDraftSummary[] {
+  const { entities: _entities, ...summary } = detail
+  return [...drafts.filter((draft) => draft.draftId !== detail.draftId), summary]
+    .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt))
+}
+
+function authoringErrorMessage(reason: unknown, fallback: string): string {
+  if (!(reason instanceof CurriculumDraftAuthoringError)) return fallback
+  if (reason.code === 'unauthenticated') return 'The Admin session is no longer authenticated.'
+  if (reason.code === 'forbidden') return 'The server denied the required curriculum permission.'
+  if (reason.code === 'not-found') return 'The requested draft or entity no longer exists.'
+  if (reason.code === 'conflict') return 'The requested revision is stale.'
+  if (reason.code === 'invalid') return 'The server rejected the request as invalid.'
+  return fallback
+}
+
+function isPermissionLoss(reason: unknown): boolean {
+  return reason instanceof CurriculumDraftAuthoringError
+    && (reason.code === 'forbidden' || reason.code === 'unauthenticated')
+}
+
+export function curriculumPayloadDirty(
+  payload: CurriculumDraftEntityPayload | null,
+  savedPayload: CurriculumDraftEntityPayload | null,
+): boolean {
+  return payload !== null && savedPayload !== null && JSON.stringify(payload) !== JSON.stringify(savedPayload)
+}
+
+export function confirmCurriculumNavigation(dirty: boolean, confirm: () => boolean): boolean {
+  return !dirty || confirm()
+}
+
+export function curriculumSavedMessage(replayed: boolean): string {
+  return replayed ? 'Saved · replay confirmed' : 'Saved'
+}
+
+function confirmDiscard(dirty: boolean): boolean {
+  return confirmCurriculumNavigation(
+    dirty,
+    () => typeof window === 'undefined' || window.confirm('Discard unsaved curriculum changes?'),
+  )
+}
+
+function uuid(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') return crypto.randomUUID()
+  const bytes = new Uint8Array(16)
+  crypto.getRandomValues(bytes)
+  bytes[6] = (bytes[6] & 0x0f) | 0x40
+  bytes[8] = (bytes[8] & 0x3f) | 0x80
+  const hex = [...bytes].map((value) => value.toString(16).padStart(2, '0')).join('')
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`
 }
 
 export function writeStudioEntityLocation(entityId: string): void {

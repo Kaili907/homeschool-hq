@@ -11,6 +11,7 @@ import {
   type Unit,
 } from '../../curriculum-authoring/v2/contracts'
 import { validateWithSchema, type AuthoringSchema, type ValidationIssue } from '../../curriculum-authoring/v2/schema'
+import type { CurriculumSnapshotValidationRun } from '../curriculum-validation/engine'
 
 export const CURRICULUM_DRAFT_SCHEMA_VERSION = 1 as const
 export const CURRICULUM_AUTHORING_SCHEMA_VERSION = '2.0.0' as const
@@ -117,6 +118,50 @@ export interface CurriculumDraftMutationResult {
   readonly entity?: CurriculumDraftEntitySummary
 }
 
+export interface CurriculumStudioEntityIndexEntry {
+  readonly entityType: CurriculumDraftEntityType
+  readonly entityRef: string
+  readonly origin: 'base' | CurriculumDraftEntityOrigin
+  readonly revision: number | null
+  readonly position: number
+  readonly parentId: string
+  readonly label: string
+  readonly context: string
+  readonly grade?: number
+  readonly subject?: string
+  readonly courseRef?: string
+  readonly unitRef?: string
+}
+
+export interface CurriculumBaseAuthoringIndex {
+  readonly schemaVersion: 1
+  readonly baseReleaseVersion: string
+  readonly entities: readonly CurriculumStudioEntityIndexEntry[]
+}
+
+export interface CurriculumBaseAuthoringEntity {
+  readonly schemaVersion: 1
+  readonly baseReleaseVersion: string
+  readonly entityType: CurriculumDraftEntityType
+  readonly entityRef: string
+  readonly payload: CurriculumDraftEntityPayload
+}
+
+export interface CurriculumDraftMaterialization {
+  readonly schemaVersion: 1
+  readonly draftId: string
+  readonly draftRevision: number
+  readonly baseReleaseVersion: string
+  readonly entities: readonly CurriculumStudioEntityIndexEntry[]
+}
+
+export interface CurriculumDraftValidationResult {
+  readonly schemaVersion: 1
+  readonly draftId: string
+  readonly draftRevision: number
+  readonly run: CurriculumSnapshotValidationRun
+}
+
 export interface CreateCurriculumDraftInput {
   readonly baseReleaseVersion: string
   readonly targetVersion: string
@@ -163,14 +208,24 @@ export interface CurriculumDraftAuthoringSource {
   createEntity(input: CreateCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
   updateEntity(input: UpdateCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
   tombstoneEntity(input: TombstoneCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
+  readBaseIndex(baseReleaseVersion: string): Promise<CurriculumBaseAuthoringIndex>
+  readBaseEntity(
+    baseReleaseVersion: string,
+    entityType: CurriculumDraftEntityType,
+    entityRef: string,
+  ): Promise<CurriculumBaseAuthoringEntity>
+  readMaterialization(draftId: string, revision: number): Promise<CurriculumDraftMaterialization>
+  validateDraft(draftId: string, revision: number): Promise<CurriculumDraftValidationResult>
 }
 
 export class CurriculumDraftAuthoringError extends Error {
   readonly code: 'unauthenticated' | 'forbidden' | 'invalid' | 'conflict' | 'not-found' | 'unavailable'
+  readonly reason?: 'revision-conflict' | 'idempotency-conflict' | 'schema-v2-rejected'
 
-  constructor(code: CurriculumDraftAuthoringError['code']) {
+  constructor(code: CurriculumDraftAuthoringError['code'], reason?: CurriculumDraftAuthoringError['reason']) {
     super(code)
     this.name = 'CurriculumDraftAuthoringError'
     this.code = code
+    this.reason = reason
   }
 }

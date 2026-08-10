@@ -18,7 +18,11 @@ import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/c
 import { readAdminAuditPage, AdminAuditReadError } from '../../admin/auditHttpSource'
 import type { AdminAuditFilters, AdminAuditReadState } from '../../admin/auditLogModel'
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
-import { createCurriculumStudioSource } from '../../admin/curriculum/studioModel'
+import { createCurriculumDraftAuthoringHttpSource } from '../../admin/curriculum-authoring/httpSource'
+import {
+  createCurriculumStudioSource,
+  CURRICULUM_STUDIO_NAVIGATION_REQUEST,
+} from '../../admin/curriculum/studioModel'
 import { readAdminSafetyOperations } from '../../admin/safetyOperationsHttpSource'
 import type { SafetyOperationsReadState } from '../../admin/safetyOperationsModel'
 import { CurriculumBrowser } from '../../admin/curriculum/CurriculumBrowser'
@@ -149,9 +153,10 @@ export function AdminConsoleRoute() {
   const [auditReadState, setAuditReadState] = useState<AdminAuditReadState>({ status: 'loading' })
   const [auditRetry, setAuditRetry] = useState(0)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
+  const curriculumAuthoringSource = useMemo(() => createCurriculumDraftAuthoringHttpSource(), [])
   const curriculumStudioSource = useMemo(
-    () => createCurriculumStudioSource(curriculumSource),
-    [curriculumSource],
+    () => createCurriculumStudioSource(curriculumSource, curriculumAuthoringSource),
+    [curriculumAuthoringSource, curriculumSource],
   )
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
@@ -348,12 +353,20 @@ export function AdminConsoleRoute() {
   }, [authorizationState, section, healthWindow, healthReload])
 
   useEffect(() => {
-    const onPopState = () => setPathname(window.location.pathname)
+    const onPopState = () => {
+      if (window.location.pathname === pathname) return
+      if (!requestCurriculumStudioNavigation()) {
+        window.history.pushState({}, '', pathname)
+        return
+      }
+      setPathname(window.location.pathname)
+    }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
-  }, [])
+  }, [pathname])
 
   function navigate(next: AdminSection) {
+    if (!requestCurriculumStudioNavigation()) return
     const nextPath = next === 'overview'
       ? ADMIN_CONSOLE_PATH
       : next === 'system-health'
@@ -364,12 +377,14 @@ export function AdminConsoleRoute() {
   }
 
   function navigateEngine(engine: AdminEngineId) {
+    if (!requestCurriculumStudioNavigation()) return
     const nextPath = `${ADMIN_CONSOLE_PATH}/engines/${engine}`
     window.history.pushState({}, '', nextPath)
     setPathname(nextPath)
   }
 
   function navigateCurriculum(view: CurriculumWorkflowView) {
+    if (!requestCurriculumStudioNavigation()) return
     const nextPath = view === 'published'
       ? `${ADMIN_CONSOLE_PATH}/curriculum`
       : `${ADMIN_CONSOLE_PATH}/curriculum/${view}`
@@ -542,6 +557,10 @@ export function AdminConsoleRoute() {
         )}
     </AdminShell>
   )
+}
+
+function requestCurriculumStudioNavigation(): boolean {
+  return window.dispatchEvent(new Event(CURRICULUM_STUDIO_NAVIGATION_REQUEST, { cancelable: true }))
 }
 
 function costRangeMatches(

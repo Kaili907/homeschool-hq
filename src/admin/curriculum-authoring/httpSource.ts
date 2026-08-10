@@ -5,6 +5,10 @@ import {
   type CreateCurriculumDraftInput,
   type CurriculumDraftAuthoringSource,
   type CurriculumDraftDetail,
+  type CurriculumDraftMaterialization,
+  type CurriculumDraftValidationResult,
+  type CurriculumBaseAuthoringEntity,
+  type CurriculumBaseAuthoringIndex,
   type CurriculumDraftEntityDetail,
   type CurriculumDraftEntityType,
   type CurriculumDraftMutationResult,
@@ -15,12 +19,22 @@ import {
 
 type FetchLike = (input: string, init: RequestInit) => Promise<Pick<Response, 'ok' | 'status' | 'json'>>
 
-function failure(status: number): CurriculumDraftAuthoringError {
+function failure(status: number, responseCode?: string): CurriculumDraftAuthoringError {
   if (status === 401) return new CurriculumDraftAuthoringError('unauthenticated')
   if (status === 403) return new CurriculumDraftAuthoringError('forbidden')
-  if (status === 400 || status === 413 || status === 415 || status === 422) return new CurriculumDraftAuthoringError('invalid')
+  if (status === 400 || status === 413 || status === 415 || status === 422) {
+    return new CurriculumDraftAuthoringError(
+      'invalid',
+      responseCode === 'schema_v2_rejected' ? 'schema-v2-rejected' : undefined,
+    )
+  }
   if (status === 404) return new CurriculumDraftAuthoringError('not-found')
-  if (status === 409) return new CurriculumDraftAuthoringError('conflict')
+  if (status === 409) {
+    return new CurriculumDraftAuthoringError(
+      'conflict',
+      responseCode === 'idempotency_conflict' ? 'idempotency-conflict' : 'revision-conflict',
+    )
+  }
   return new CurriculumDraftAuthoringError('unavailable')
 }
 
@@ -54,7 +68,16 @@ export function createCurriculumDraftAuthoringHttpSource(
     } catch {
       throw new CurriculumDraftAuthoringError('unavailable')
     }
-    if (!response.ok) throw failure(response.status)
+    if (!response.ok) {
+      let responseCode: string | undefined
+      try {
+        const failureBody = await response.json() as { error?: { code?: unknown } }
+        if (typeof failureBody?.error?.code === 'string') responseCode = failureBody.error.code
+      } catch {
+        // Status remains authoritative when an intermediary strips the safe error envelope.
+      }
+      throw failure(response.status, responseCode)
+    }
     try {
       return await response.json() as T
     } catch {
@@ -77,5 +100,21 @@ export function createCurriculumDraftAuthoringHttpSource(
       request<CurriculumDraftMutationResult>(entityPath(draftId, entityType, entityRef), 'PUT', body),
     tombstoneEntity: ({ draftId, entityType, entityRef, ...body }: TombstoneCurriculumDraftEntityInput) =>
       request<CurriculumDraftMutationResult>(`${entityPath(draftId, entityType, entityRef)}/tombstone`, 'POST', body),
+    readBaseIndex: (baseReleaseVersion: string) => request<CurriculumBaseAuthoringIndex>(
+      `/api/admin/curriculum/releases/${encodeURIComponent(baseReleaseVersion)}/authoring-index`,
+    ),
+    readBaseEntity: (
+      baseReleaseVersion: string,
+      entityType: CurriculumDraftEntityType,
+      entityRef: string,
+    ) => request<CurriculumBaseAuthoringEntity>(
+      `/api/admin/curriculum/releases/${encodeURIComponent(baseReleaseVersion)}/authoring/entities/${encodeURIComponent(entityType)}/${encodeURIComponent(entityRef)}`,
+    ),
+    readMaterialization: (draftId: string, revision: number) => request<CurriculumDraftMaterialization>(
+      `${basePath}/${encodeURIComponent(draftId)}/materialization/${revision}`,
+    ),
+    validateDraft: (draftId: string, revision: number) => request<CurriculumDraftValidationResult>(
+      `${basePath}/${encodeURIComponent(draftId)}/validation/${revision}`,
+    ),
   })
 }
