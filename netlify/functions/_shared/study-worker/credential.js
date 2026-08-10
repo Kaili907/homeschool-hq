@@ -174,9 +174,10 @@ export function createNetlifyWorkerCredentialVerifier(options = {}) {
  * `x-nf-event: schedule` is an ordinary request header on the function event.
  * Nothing in this runtime authenticates it, and a Netlify scheduled invocation
  * cannot be configured to present a secret of its own, so there is no
- * independent proof available for the scheduled trigger. Scheduled invocations
- * are therefore refused outright rather than authorized on an unauthenticated
- * marker, and no Netlify schedule is declared.
+ * independent proof available for the scheduled trigger. This public/manual
+ * authority therefore refuses scheduled claims outright. The separate
+ * Netlify Scheduled Function uses the platform's private schedule boundary,
+ * never this request-header authority.
  *
  * Manual invocation is authorized against a server-held secret that a real
  * authorized operator can actually present, compared in constant time.
@@ -210,6 +211,35 @@ export function createNetlifyWorkerInvocationAuthorization(options = {}) {
         value: 1,
         dimensions: { source: 'netlify-function', reason_code: reasonCode },
       })
+    },
+  })
+}
+
+/**
+ * Server-configured credential source for the separate Netlify Scheduled
+ * Function entrypoint.
+ *
+ * This object does not inspect an event, request, header, payload, learner, or
+ * session. Netlify's checked-in `schedule` configuration is the invocation
+ * boundary: scheduled functions have no production URL. Once that private
+ * platform boundary has invoked the entrypoint, this source supplies the same
+ * deployment credential that the worker verifies locally and every durable
+ * RPC re-verifies against the SQL worker registry.
+ */
+export function createNetlifyScheduledWorkerCredentialSource(options = {}) {
+  const env = options.env ?? process.env
+  const configuration = workerConfiguration(env)
+
+  return Object.freeze({
+    isDurable: true,
+    isReady: () => configuration !== null,
+    authorityBoundary: 'netlify-scheduled-function',
+
+    async credentialForRun() {
+      if (!configuration) throw new WorkerCredentialConfigurationError(
+        'Scheduled worker credential is not configured',
+      )
+      return configuration.credential
     },
   })
 }

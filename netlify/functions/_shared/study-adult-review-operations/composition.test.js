@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { dirname, resolve as resolvePath } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { createStudyAdultReviewScheduledWorkerHandler } from '../../study-adult-review-scheduled-worker.js'
 import { createStudyAdultReviewWorkerHandler } from '../../study-adult-review-worker.js'
 import { createMonitoringService, createStructuredServerLog } from '../study-monitoring/monitoring.js'
 import { createSupabaseAdultReviewOperations } from './supabase-operations.js'
@@ -220,6 +221,16 @@ function manualEvent(extra = {}) {
 
 function handlerFor(estate, env = ENV) {
   return createStudyAdultReviewWorkerHandler({
+    env,
+    compose: (options) => createProductionAdultReviewWorkerComposition({
+      ...options,
+      fetchImpl: estate.fetchImpl,
+    }),
+  })
+}
+
+function scheduledHandlerFor(estate, env = ENV) {
+  return createStudyAdultReviewScheduledWorkerHandler({
     env,
     compose: (options) => createProductionAdultReviewWorkerComposition({
       ...options,
@@ -588,6 +599,85 @@ describe('D1 composition: end-to-end worker run', () => {
 })
 
 describe('D1 composition: invocation authorization', () => {
+  it('runs through the private scheduled entrypoint without manual invocation authority', async () => {
+    const estate = createDurableEstate()
+    const env = { ...ENV }
+    delete env.ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET
+
+    const response = await scheduledHandlerFor(estate, env)()
+    expect(response.statusCode).toBe(200)
+    expect(JSON.parse(response.body)).toEqual({
+      status: 'processed', claimed: 1, delivered: 1, indeterminate: 0, failed: 0,
+    })
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+    const claim = estate.callsTo('academy_study_claim_delivery_jobs_v2')[0]
+    expect(claim.headers['x-academy-study-worker-credential']).toBe(WORKER_CREDENTIAL)
+  })
+
+  it('keeps overlapping scheduled cycles deduplicated by the durable claim boundary', async () => {
+    const estate = createDurableEstate()
+    let claimed = false
+    estate.override('academy_study_claim_delivery_jobs_v2', () => {
+      if (claimed) return { jobs: [], serverTime: FAR_FUTURE }
+      claimed = true
+      return { jobs: [claimJob()], serverTime: FAR_FUTURE }
+    })
+
+    const first = scheduledHandlerFor(estate)
+    const second = scheduledHandlerFor(estate)
+    const responses = await Promise.all([first(), second()])
+    expect(responses.map((response) => JSON.parse(response.body).status).sort())
+      .toEqual(['no_work', 'processed'])
+    expect(estate.countOf('academy_study_deliver_in_app_notification_v2')).toBe(1)
+  })
+
+  it('preserves a retryable scheduled claim and reports a partial non-success', async () => {
+    const jobs = [
+      claimJob({ claimId: 'claim:0001', jobId: 'job:0001' }),
+      claimJob({
+        claimId: 'claim:0002', jobId: 'job:0002', proposalId: 'proposal:0002',
+        leaseToken: 'lease:0002', idempotencyKey: `delivery:${'b'.repeat(64)}`,
+      }),
+    ]
+    const estate = createDurableEstate({ jobs })
+    let secondProofs = 0
+    estate.override('academy_study_prove_delivery_lease_v2', (parameters) => {
+      if (parameters.p_job_id === 'job:0001') {
+        return {
+          active: false, jobId: 'job:0001', leaseToken: null,
+          leaseRevision: null, leaseExpiresAt: null,
+        }
+      }
+      secondProofs += 1
+      return {
+        active: true, jobId: 'job:0002', leaseToken: 'lease:0002',
+        leaseRevision: secondProofs === 1 ? 1 : secondProofs === 2 ? 2 : 3,
+        leaseExpiresAt: FAR_FUTURE,
+      }
+    })
+
+    const response = await scheduledHandlerFor(estate)()
+    expect(response.statusCode).toBe(503)
+    expect(JSON.parse(response.body)).toEqual({
+      status: 'partial_with_retryable_failures',
+      claimed: 2, delivered: 1, indeterminate: 0, failed: 1,
+    })
+    const releases = estate.callsTo('academy_study_release_delivery_lease_v2')
+    expect(releases).toHaveLength(1)
+    expect(releases[0].parameters.p_job_id).toBe('job:0001')
+  })
+
+  it('fails a systemic scheduled outage closed with no durable detail', async () => {
+    const estate = createDurableEstate()
+    estate.override('academy_study_claim_delivery_jobs_v2', () => undefined)
+    const response = await scheduledHandlerFor(estate)()
+    expect(response.statusCode).toBe(503)
+    expect(JSON.parse(response.body)).toEqual({
+      status: 'unavailable', claimed: 0, delivered: 0, indeterminate: 0, failed: 0,
+    })
+    expect(response.body).not.toContain('durable_port')
+  })
+
   it('treats a forged Netlify schedule header as inert and still requires the manual secret', async () => {
     const estate = createDurableEstate()
     const response = await handlerFor(estate)(workerEvent({
