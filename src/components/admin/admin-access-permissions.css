@@ -1,0 +1,87 @@
+.admin-access { display: grid; gap: 1.5rem; color: #172033; }
+.admin-access__intro, .admin-access__section-heading { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+.admin-access__intro h2, .admin-access__section-heading h3 { margin: .15rem 0 .45rem; letter-spacing: -.025em; }
+.admin-access__intro h2 { font-size: clamp(1.55rem, 2.5vw, 2rem); }
+.admin-access__intro > div > p:last-child { max-width: 48rem; margin: 0; color: #60708a; line-height: 1.6; }
+.admin-access__eyebrow, .admin-access__section-heading p { margin: 0; color: #5570d9; font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.admin-access__mode { flex: none; border: 1px solid #d8dfeb; border-radius: 999px; padding: .45rem .75rem; color: #5f6c80; background: #fff; font-size: .78rem; font-weight: 750; }
+.admin-access__mode.is-manage { border-color: #bcd8cb; background: #edf8f2; color: #236047; }
+.admin-access__notice, .admin-access__result { display: flex; gap: .5rem; flex-wrap: wrap; border: 1px solid #cdd7ea; border-radius: .9rem; background: #f5f8ff; padding: .9rem 1rem; color: #53647d; }
+.admin-access__notice strong { color: #273a58; }
+.admin-access__roles, .admin-access__principals { border: 1px solid #e0e5ed; border-radius: 1rem; background: #fff; padding: 1.25rem; box-shadow: 0 10px 26px rgba(28, 38, 55, .045); }
+.admin-access__section-heading { align-items: end; padding-bottom: 1rem; }
+.admin-access__section-heading h3 { font-size: 1.15rem; }
+.admin-access__section-heading > span { color: #748198; font-size: .8rem; }
+.admin-access__role-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem; }
+.admin-access__role-card { min-width: 0; border: 1px solid #e2e7ef; border-radius: .85rem; padding: 1rem; background: #fbfcfe; }
+.admin-access__role-card > div { display: flex; align-items: center; gap: .5rem; }
+.admin-access__role-card h4, .admin-access__role-card p { margin: 0; }
+.admin-access__role-card p { min-height: 6rem; margin-top: .65rem; color: #627087; font-size: .88rem; line-height: 1.55; }
+.admin-access__role-dot { width: .58rem; height: .58rem; border-radius: 50%; background: #76859c; }
+.admin-access__role-card.is-owner .admin-access__role-dot { background: #7d56d8; }
+.admin-access__role-card.is-admin .admin-access__role-dot { background: #3179c7; }
+.admin-access__role-card.is-viewer .admin-access__role-dot { background: #4e9277; }
+.admin-access details { margin-top: .75rem; border-top: 1px solid #e7ebf1; padding-top: .7rem; }
+.admin-access summary { cursor: pointer; color: #425574; font-size: .8rem; font-weight: 750; }
+.admin-access details ul { max-height: 11rem; overflow: auto; margin: .75rem 0 0; padding-left: 1.15rem; }
+.admin-access details li { margin: .25rem 0; color: #69768b; font-size: .73rem; }
+.admin-access code { overflow-wrap: anywhere; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.admin-access__principal-list { display: grid; gap: .8rem; }
+.admin-access__principal { display: grid; grid-template-columns: minmax(12rem, 1.15fr) minmax(17rem, 1.4fr); gap: 1rem 1.5rem; border: 1px solid #e0e6ef; border-radius: .9rem; padding: 1rem; }
+.admin-access__principal-identity > div { display: flex; align-items: center; gap: .45rem; flex-wrap: wrap; }
+.admin-access__principal-identity > code { display: block; margin-top: .55rem; color: #647189; font-size: .75rem; }
+.admin-access__you, .admin-access__protected { border-radius: 999px; padding: .22rem .48rem; background: #edf3ff; color: #4263a1; font-size: .68rem; font-weight: 750; }
+.admin-access__protected { background: #fff3dd; color: #875b13; }
+.admin-access__principal-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; margin: 0; }
+.admin-access__principal-facts div { min-width: 0; }
+.admin-access__principal-facts dt { color: #7a8799; font-size: .68rem; font-weight: 750; text-transform: uppercase; letter-spacing: .05em; }
+.admin-access__principal-facts dd { margin: .35rem 0 0; color: #3a4960; font-size: .78rem; line-height: 1.35; }
+.admin-access__role { display: inline-flex; border-radius: 999px; padding: .3rem .55rem; background: #edf1f7; font-size: .72rem; font-weight: 800; }
+.admin-access__role.is-owner { background: #f0ebff; color: #6640b8; }
+.admin-access__role.is-admin { background: #e9f3ff; color: #2862a1; }
+.admin-access__role.is-viewer { background: #eaf7f1; color: #35745d; }
+.admin-access__active { display: inline-flex; align-items: center; gap: .35rem; }
+.admin-access__active > span { width: .45rem; height: .45rem; border-radius: 50%; background: #36a36f; }
+.admin-access__controls { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(10rem, .8fr) minmax(11rem, 1fr) auto; align-items: end; gap: .75rem; border-top: 1px solid #e7ebf1; padding-top: .9rem; }
+.admin-access__controls label { display: grid; gap: .35rem; color: #596980; font-size: .74rem; font-weight: 750; }
+.admin-access select { width: 100%; min-height: 2.55rem; border: 1px solid #ccd5e2; border-radius: .55rem; background: #fff; padding: .45rem .65rem; color: #26364d; }
+.admin-access__actions { display: flex; gap: .5rem; }
+.admin-access button { min-height: 2.55rem; border: 1px solid #315fbb; border-radius: .55rem; background: #315fbb; padding: .55rem .8rem; color: #fff; font-weight: 750; cursor: pointer; }
+.admin-access button.is-danger { border-color: #a63e43; background: #fff; color: #96353a; }
+.admin-access button:disabled { cursor: not-allowed; opacity: .48; }
+.admin-access button:focus-visible, .admin-access select:focus-visible, .admin-access summary:focus-visible { outline: 3px solid #f1b34c; outline-offset: 2px; }
+.admin-access__state { display: flex; align-items: center; gap: .8rem; min-height: 6rem; border: 1px dashed #ced7e4; border-radius: .8rem; padding: 1rem; color: #64738a; }
+.admin-access__state div { display: grid; gap: .25rem; }
+.admin-access__state strong { color: #33445e; }
+.admin-access__spinner { width: 1.15rem; height: 1.15rem; border: 2px solid #d6deea; border-top-color: #426bc2; border-radius: 50%; animation: admin-access-spin .8s linear infinite; }
+.admin-access__result.is-success { border-color: #b9ddca; background: #eef9f3; color: #2e684e; }
+.admin-access__result.is-error { border-color: #ecc4c6; background: #fff3f3; color: #85383c; }
+.admin-access__confirm { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(19, 28, 43, .58); padding: 1rem; }
+.admin-access__confirm > div { width: min(34rem, 100%); border-radius: 1rem; background: #fff; padding: 1.35rem; box-shadow: 0 24px 70px rgba(0, 0, 0, .28); }
+.admin-access__confirm h3 { margin: .25rem 0 .6rem; }
+.admin-access__confirm p { color: #5d6b80; line-height: 1.55; }
+.admin-access__confirm > div > code { display: block; border-radius: .5rem; background: #f4f6f9; padding: .65rem; font-size: .75rem; }
+.admin-access__confirm-actions { display: flex; justify-content: flex-end; gap: .6rem; margin-top: 1rem; }
+.admin-access__confirm-actions button:first-child { border-color: #ccd5e2; background: #fff; color: #3c4c63; }
+@keyframes admin-access-spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 900px) {
+  .admin-access__role-grid { grid-template-columns: 1fr; }
+  .admin-access__role-card p { min-height: 0; }
+  .admin-access__principal { grid-template-columns: 1fr; }
+  .admin-access__controls { grid-column: 1; grid-template-columns: 1fr 1fr; }
+  .admin-access__actions { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .admin-access__intro, .admin-access__section-heading { display: grid; }
+  .admin-access__roles, .admin-access__principals { padding: .9rem; }
+  .admin-access__principal { padding: .85rem; }
+  .admin-access__principal-facts, .admin-access__controls { grid-template-columns: 1fr; }
+  .admin-access__principal-facts { gap: .8rem; }
+  .admin-access__actions { grid-column: 1; display: grid; }
+  .admin-access__confirm-actions { display: grid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-access__spinner { animation: none; }
+}

@@ -193,6 +193,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-audit-query-filters-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810144700",
+      "filename": "20260810144700_academy_admin_access_management.sql",
+      "sha256": "56bb1b1efd798586f9abce6ada581e38f70bf0704ec4e93602062c6eef268bbe",
+      "dependency": "20260810120000_academy_admin_audit_query_filters.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-admin-access-management-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

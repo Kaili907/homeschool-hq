@@ -35,6 +35,7 @@ const NAVIGATION: readonly { id: AdminSection; label: string; capability: AdminC
   { id: 'curriculum', label: 'Curriculum', capability: 'curriculum:read' },
   { id: 'configuration', label: 'Configuration', capability: 'configuration:read' },
   { id: 'audit-log', label: 'Audit Log', capability: 'audit:read' },
+  { id: 'access', label: 'Access & Permissions', capability: 'overview:read' },
 ]
 
 const PRESET_LABELS: Record<OverviewPreset, string> = {
@@ -508,7 +509,7 @@ function BrandMark() {
 function NavIcon({ section }: { section: AdminSection }) {
   const icons: Record<AdminSection, string> = {
     overview: '⌂', learners: '◉', engines: '◇', costs: '✦', curriculum: '▤',
-    safety: '◆', 'system-health': '⌁', configuration: '⚙', 'audit-log': '≡', releases: '↑',
+    safety: '◆', 'system-health': '⌁', configuration: '⚙', 'audit-log': '≡', access: '⌘', releases: '↑',
   }
   return <span className="admin-nav-icon" aria-hidden="true">{icons[section]}</span>
 }

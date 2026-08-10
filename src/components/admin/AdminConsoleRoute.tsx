@@ -57,6 +57,9 @@ import {
   type AdminConfigurationCommitResult,
 } from '../../admin/configurationHttpSource'
 import { getVoiceCatalogAccess } from '../../tutor/voiceCatalog'
+import { createAdminAccessHttpSource, AdminAccessError } from '../../admin/accessHttpSource'
+import type { AdminAccessReadState } from '../../admin/accessModel'
+import { AdminAccessPermissions } from './AdminAccessPermissions'
 
 export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
 
@@ -82,7 +85,7 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   const section = suffix.split('/')[0]
   return [
     'learners', 'costs', 'curriculum', 'safety', 'system-health',
-    'configuration', 'audit-log', 'releases',
+    'configuration', 'audit-log', 'access', 'releases',
   ].includes(section) ? section as AdminSection : 'unknown'
 }
 
@@ -121,6 +124,7 @@ function hasCapability(
 
 export function AdminConsoleRoute() {
   const [authorizationState, setAuthorizationState] = useState<AdminAuthorizationState | { status: 'resolving' }>({ status: 'resolving' })
+  const [authorizationReload, setAuthorizationReload] = useState(0)
   const [pathname, setPathname] = useState(() => window.location.pathname)
   const [range, setRange] = useState<OverviewRange>({ kind: 'preset', preset: 'today' })
   const [overviewState, setOverviewState] = useState<OverviewLoadState>({ status: 'loading' })
@@ -150,10 +154,13 @@ export function AdminConsoleRoute() {
   const [configurationRetry, setConfigurationRetry] = useState(0)
   const [voiceCatalogState, setVoiceCatalogState] = useState<AdminVoiceCatalogReadState>({ status: 'loading' })
   const [configurationDirty, setConfigurationDirty] = useState(false)
+  const [accessReadState, setAccessReadState] = useState<AdminAccessReadState>({ status: 'loading' })
+  const [accessRetry, setAccessRetry] = useState(0)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const configurationSource = useMemo(() => createAdminConfigurationHttpSource(), [])
   const voiceCatalogSource = useMemo(() => getVoiceCatalogAccess(), [])
+  const accessSource = useMemo(() => createAdminAccessHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
   const section = adminRouteSection(pathname) ?? 'unknown'
   const auditCursor = auditCursors.at(-1) ?? null
@@ -169,7 +176,37 @@ export function AdminConsoleRoute() {
       if (!controller.signal.aborted) setAuthorizationState(state)
     })
     return () => controller.abort()
-  }, [])
+  }, [authorizationReload])
+
+  useEffect(() => {
+    if (section !== 'access') return
+    if (!hasCapability(authorization, 'overview:read')) {
+      setAccessReadState({ status: 'unauthorized' })
+      return
+    }
+    const controller = new AbortController()
+    setAccessReadState({ status: 'loading' })
+    void accessSource.read({ signal: controller.signal }).then(
+      (projection) => {
+        if (!controller.signal.aborted) setAccessReadState({ status: 'ready', projection })
+      },
+      (error) => {
+        if (controller.signal.aborted) return
+        if (error instanceof AdminAccessError && error.code === 'access_unauthorized') {
+          setAccessReadState({ status: 'unauthorized' })
+          return
+        }
+        setAccessReadState({
+          status: 'error',
+          code: error instanceof AdminAccessError && error.code === 'access_timeout'
+            ? 'access_timeout'
+            : error instanceof AdminAccessError && error.code === 'access_malformed'
+              ? 'access_malformed' : 'access_unavailable',
+        })
+      },
+    )
+    return () => controller.abort()
+  }, [accessRetry, accessSource, authorizationState, section])
 
   useEffect(() => {
     if (section !== 'overview') return
@@ -482,6 +519,7 @@ export function AdminConsoleRoute() {
           : section === 'learners' ? 'Learner Analytics'
             : section === 'safety' ? 'Safety Operations'
               : section === 'audit-log' ? 'Audit Log'
+                : section === 'access' ? 'Access & Permissions'
                 : section === 'configuration' ? 'Configuration'
                 : section === 'curriculum' ? 'Curriculum' : 'Admin section unavailable'
 
@@ -582,7 +620,18 @@ export function AdminConsoleRoute() {
             onDirtyChange={setConfigurationDirty}
           />
         )}
-        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'configuration', 'audit-log'].includes(section) && (
+        {section === 'access' && (
+          <AdminAccessPermissions
+            authorization={authorization}
+            state={accessReadState}
+            source={accessSource}
+            onMutated={() => {
+              setAccessRetry((value) => value + 1)
+              setAuthorizationReload((value) => value + 1)
+            }}
+          />
+        )}
+        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'configuration', 'audit-log', 'access'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>
