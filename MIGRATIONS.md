@@ -10,6 +10,31 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: Study / Admin release registry bridge (2026-08-10)
+
+Tracked migrations:
+
+- `supabase/migrations/20260810150000_academy_study_curriculum_binding.sql`
+- `supabase/migrations/20260810153000_academy_study_release_registry_bridge.sql`
+
+The first migration introduced immutable Study session snapshots while the
+Admin release registry dependency was unavailable. The additive bridge now
+removes that migration's private approval table and makes immutable published
+`academy_curriculum_releases` rows the only release authority. Session release
+UUID, package, version, and curriculum-manifest digest have a direct composite
+foreign key to the registry. Active subject enrollment remains an additional
+Study eligibility restriction.
+
+The historical registry-only production pointer is preserved as immutable
+revision 1. The bridge makes the pointer history append-only and records
+revision 2 as the new-session Study binding transition. A later activation or
+rollback can append a revision that affects new sessions only; bound sessions
+never repin, and legacy ambiguous sessions remain manual-review. Browser roles
+have no release/pointer table grants and cannot author identity, publication,
+digest, or active-pointer facts. See `docs/study-release-registry-bridge.md` and
+`supabase/study-curriculum-binding.db.test.ts`. Neither migration has been
+applied to a hosted project.
+
 ## Supabase: immutable curriculum release registry (2026-08-09)
 
 Tracked migration:

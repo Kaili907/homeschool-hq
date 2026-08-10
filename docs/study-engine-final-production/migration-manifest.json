@@ -173,6 +173,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "curriculum_binding_version:0->1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810153000",
+      "filename": "20260810153000_academy_study_release_registry_bridge.sql",
+      "sha256": "7021be59d3c10e74d5ca213efdec6108da1553e17e5ae8f0864bd2505faff50f",
+      "dependency": "20260810150000_academy_study_curriculum_binding.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "curriculum_binding_version:1->2",
+      "supersessionStatus": "current"
     }
   ]
 }

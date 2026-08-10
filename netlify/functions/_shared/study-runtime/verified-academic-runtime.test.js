@@ -110,9 +110,13 @@ describe('verified academic runtime gateway', () => {
           intended_local_date: '2026-08-10',
         },
         idempotencyKey: 'session-a-create',
+        role: 'owner',
         curriculumContext: {
           releaseVersion: '1.0.0', lessonRef: 'lesson-a', skillRefs: [],
           releaseId: 'browser-must-not-author-release-id',
+          manifestHash: 'a'.repeat(64),
+          publishedState: 'published',
+          activePointer: { environment: 'production', revision: 999 },
         },
       },
     })).rejects.toThrow(/curriculum/i)
