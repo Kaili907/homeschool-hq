@@ -96,7 +96,9 @@ Requests are exact key-specific objects, not a generic JSON editor. Responses
 contain no environment value, credential, bearer, actor identity, assignment,
 or raw database row.
 
-No configuration UI is mounted in ADMIN-14A. Exposing controls before runtime
-integration would let an operator mistake durable desired state for active
-production enforcement. ADMIN-14B owns runtime consumption, deployment-ceiling
-resolution, protective disable-only behavior, and the later UI decision.
+ADMIN-14A itself mounts no configuration UI and provides no runtime-effective
+projection. A later UI layered on this core must label commits as saved
+configuration with `pending_runtime_integration`, keep runtime effective or
+enforced state unavailable, and never describe a successful save as active
+production enforcement. ADMIN-14B owns runtime consumption,
+deployment-ceiling resolution, and protective disable-only behavior.

@@ -306,7 +306,7 @@ export function AdminConfiguration({
   }
 
   const statusMessage = editor.status === 'success'
-    ? `Stored ${SETTING_PRESENTATION[editor.result.settingKey].title} at revision ${editor.result.revision}. Runtime behavior is unchanged.`
+    ? `Saved configuration for ${SETTING_PRESENTATION[editor.result.settingKey].title} at revision ${editor.result.revision}. Runtime effective and enforced state remains unavailable.`
     : editor.status === 'confirming' && editor.operation === 'saving'
       ? 'Saving the confirmed configuration change.'
       : editor.status === 'confirming' && editor.operation === 'error' && editor.errorCode
@@ -325,8 +325,8 @@ export function AdminConfiguration({
       </section>
 
       <dl className="admin-config-summary" aria-label="Configuration authority summary">
-        <div><dt>Source</dt><dd>Durable Admin registry</dd></div>
-        <div><dt>Effective runtime</dt><dd>Unavailable</dd></div>
+        <div><dt>Saved configuration</dt><dd>Durable Admin registry</dd></div>
+        <div><dt>Runtime effective / enforced state</dt><dd>Unavailable</dd></div>
         <div><dt>Integration</dt><dd>Pending runtime integration</dd></div>
         <div><dt>Access</dt><dd>{canManage ? 'Manage capability confirmed' : 'Read only'}</dd></div>
       </dl>
@@ -404,16 +404,16 @@ function ConfigurationSettingCard({
         </span>
       </div>
       <dl className="admin-config-facts">
-        <div><dt>Stored desired value</dt><dd>{formatAdminConfigurationValue(setting.key, setting.value)}</dd></div>
-        <div><dt>Effective value</dt><dd>Unavailable</dd></div>
+        <div><dt>Saved configuration</dt><dd>{formatAdminConfigurationValue(setting.key, setting.value)}</dd></div>
+        <div><dt>Runtime effective / enforced state</dt><dd>Unavailable</dd></div>
         <div><dt>Source</dt><dd>Registry revision {setting.revision}</dd></div>
-        <div><dt>Status</dt><dd>Not runtime-enforced</dd></div>
+        <div><dt>Status</dt><dd>Saved — runtime integration pending</dd></div>
       </dl>
 
       {success && (
         <div className="admin-config-success" role="status">
-          <strong>Stored successfully at revision {editor.result.revision}</strong>
-          <span>The authoritative audit was committed atomically. Runtime behavior remains unchanged.</span>
+          <strong>Saved configuration at revision {editor.result.revision}</strong>
+          <span>Saved — runtime integration pending. The authoritative audit was committed atomically; runtime effective and enforced state remains unavailable.</span>
         </div>
       )}
 
@@ -657,7 +657,7 @@ function VoiceCatalogCard({ state }: { readonly state: AdminVoiceCatalogReadStat
           ))}
         </ul>
       ) : (
-        <p className="admin-config-unavailable-copy">No approved logical voices are available. Provider identifiers and credentials are never exposed.</p>
+        <p className="admin-config-unavailable-copy">No approved premium logical voices are available. Browser-native speech remains the safe production fallback. Provider identifiers and credentials are never exposed.</p>
       )}
       <p className="admin-config-unavailable-copy">Not editable until an authoritative Admin logical-voice setting exists.</p>
     </article>
