@@ -40,6 +40,37 @@ function costRecord(index, costMicros = '9007199254740993') {
   }
 }
 
+function providerCoverage({ startAt, endExclusive }) {
+  const states = {
+    reserved: 0, dispatchPossible: 0, outcomeObserved: 0, ledgered: 1,
+    gapPending: 0, reconciliationConflict: 0, reconciled: 0,
+    confirmedNotDispatched: 0, unresolvable: 0,
+  }
+  const row = {
+    recordedProviderAttempts: 1,
+    ledgerLinkedAttempts: 1,
+    journaledMissingLedgerRelationship: 0,
+    states,
+  }
+  return {
+    schemaVersion: 1,
+    coverageStatus: 'covered',
+    range: { startAt, endExclusive },
+    recordedProviderAttempts: 1,
+    ledgerLinkedAttempts: 1,
+    journaledMissingLedgerRelationship: 0,
+    ledgerRowsWithoutJournalRelationship: 0,
+    states,
+    breakdowns: {
+      engines: [{ key: 'tutor', ...row }],
+      purposes: [{ key: 'tutor_turn', ...row }],
+      providers: [{ key: 'anthropic', ...row }],
+    },
+    costAuthority: 'academy_provider_usage_ledger',
+    invoiceCompletenessClaim: false,
+  }
+}
+
 function operationalEvent(index, occurredAt) {
   return {
     schemaVersion: 2,
@@ -122,6 +153,7 @@ function sources(overrides = {}) {
       endExclusive: input.endExclusive,
     })),
     costs: vi.fn(async () => []),
+    providerAttemptCoverage: vi.fn(async (range) => providerCoverage(range)),
     safety: vi.fn(async () => ({
       observedAt: '2026-08-09T14:20:00.000Z',
       summary: { openSafetyStops: count(2), adultReviewPending: count(1), failClosedEvents: count(3) },
@@ -180,6 +212,7 @@ describe('Admin Overview authorization composition', () => {
     expect(domainSources.learners).not.toHaveBeenCalled()
     expect(domainSources.enginePerformance).not.toHaveBeenCalled()
     expect(domainSources.costs).not.toHaveBeenCalled()
+    expect(domainSources.providerAttemptCoverage).not.toHaveBeenCalled()
     expect(domainSources.safety).not.toHaveBeenCalled()
     expect(domainSources.curriculumCatalog).not.toHaveBeenCalled()
     expect(domainSources.curriculumValidation).not.toHaveBeenCalled()
@@ -426,5 +459,31 @@ describe('Admin Overview domain semantics and isolation', () => {
       status: 'partial', micros: '4503599627370496500', currency: 'USD',
     })
     expect(response.body).not.toMatch(/private-account|private-household|private-provider-model/)
+  })
+
+  it('uses the same partial provider-accounting truth as Costs without an invoice claim', async () => {
+    const domainSources = sources()
+    const response = await handler({ sources: domainSources })(event())
+    const coverage = body(response).costs.data.providerAccountingCoverage
+
+    expect(domainSources.providerAttemptCoverage).toHaveBeenCalledWith({
+      startAt: '2026-08-09T00:00:00.000Z',
+      endExclusive: '2026-08-10T00:00:00.000Z',
+    })
+    expect(coverage).toMatchObject({
+      status: 'partial',
+      journalStatus: 'complete_for_journaled_attempts',
+      providerInstrumentation: {
+        status: 'partial',
+        engines: expect.arrayContaining([
+          { key: 'tutor', status: 'covered' },
+          { key: 'jarvis', status: 'covered' },
+          { key: 'tts', status: 'covered' },
+          { key: 'study', status: 'pending' },
+        ]),
+      },
+      invoiceCompletenessClaim: false,
+    })
+    expect(response.body).not.toMatch(/private-account|private-household|attemptId|ledgerExecutionKey/)
   })
 })

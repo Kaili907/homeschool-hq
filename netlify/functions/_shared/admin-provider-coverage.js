@@ -28,6 +28,16 @@ const DIMENSIONS = Object.freeze({
   providers: new Set(['anthropic', 'elevenlabs']),
 })
 
+const PROVIDER_INSTRUMENTATION = Object.freeze({
+  status: 'partial',
+  engines: Object.freeze([
+    Object.freeze({ key: 'tutor', status: 'covered' }),
+    Object.freeze({ key: 'jarvis', status: 'covered' }),
+    Object.freeze({ key: 'tts', status: 'covered' }),
+    Object.freeze({ key: 'study', status: 'pending' }),
+  ]),
+})
+
 const RAW_COVERAGE_KEYS = [
   'schemaVersion',
   'coverageStatus',
@@ -113,10 +123,17 @@ function presentMetrics({ recorded, linked, missing, orphan = 0, states }) {
     observedOutcomes: states.outcomeObserved,
     ledgerLinkedAttempts: linked,
     accountingGaps,
+    gapPending: states.gapPending,
     reconciliationConflicts: states.reconciliationConflict,
     confirmedNotDispatched: states.confirmedNotDispatched,
     unresolvable: states.unresolvable,
   }
+}
+
+function overallStatusFor(journalStatus) {
+  return journalStatus === 'complete_for_journaled_attempts'
+    ? PROVIDER_INSTRUMENTATION.status
+    : journalStatus
 }
 
 function expectedRawStatus(metrics, states) {
@@ -168,8 +185,9 @@ function breakdownMatchesSummary(rows, { recorded, linked, missing }) {
 export function unavailableProviderAccountingCoverage() {
   return Object.freeze({
     status: 'unavailable',
+    journalStatus: 'unavailable',
     reconciliationState: 'unavailable',
-    gatewayInstrumentation: 'incomplete',
+    providerInstrumentation: PROVIDER_INSTRUMENTATION,
     invoiceCompletenessClaim: false,
     metrics: null,
     breakdowns: { engines: [], purposes: [], providers: [] },
@@ -213,15 +231,28 @@ export function buildAdminProviderAccountingCoverage(value, range) {
     || expectedRawStatus(metrics, states) !== source.coverageStatus
   ) return unavailableProviderAccountingCoverage()
 
-  const status = statusFor(metrics, states)
+  const journalStatus = statusFor(metrics, states)
   return Object.freeze({
-    status,
-    reconciliationState: reconciliationStateFor(status),
-    // Gateway instrumentation is delivered separately. Until it is integrated,
-    // even a clear journal cannot prove unjournaled provider paths are covered.
-    gatewayInstrumentation: 'incomplete',
+    status: overallStatusFor(journalStatus),
+    journalStatus,
+    reconciliationState: reconciliationStateFor(journalStatus),
+    providerInstrumentation: PROVIDER_INSTRUMENTATION,
     invoiceCompletenessClaim: false,
     metrics,
     breakdowns: { engines, purposes, providers },
   })
+}
+
+/** Shared fail-closed read seam for Costs and Overview. */
+export async function readAdminProviderAccountingCoverage(readCoverage, range) {
+  if (typeof readCoverage !== 'function') return unavailableProviderAccountingCoverage()
+  try {
+    const rawCoverage = await readCoverage({
+      startAt: range.startAt,
+      endExclusive: range.endExclusive,
+    })
+    return buildAdminProviderAccountingCoverage(rawCoverage, range)
+  } catch {
+    return unavailableProviderAccountingCoverage()
+  }
 }

@@ -1,6 +1,7 @@
 import { ADMIN_CONTRACT_VERSION, ADMIN_ENGINE_IDS, ADMIN_HEALTH_STATES, isCanonicalIntegerMicros, type AdminBillingDisposition, type AdminCostKind, type AdminEngineId, type AdminHealthState } from './contracts'
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
 import type { AdminOverviewModel, Metric, OverviewDomain, OverviewDomainStatus, OverviewRange, PresentedSpend } from './overviewModel'
+import { parseAdminProviderAccountingCoverage } from './costsModel'
 
 export const ADMIN_OVERVIEW_ENDPOINT = '/api/admin/v1/overview'
 const TIMEOUT_MS = 10_000
@@ -149,6 +150,7 @@ export function parseAdminOverview(value: unknown): AdminOverviewModel | null {
   const health = record(record(source.engineHealth)?.data) ?? {}
   const performance = record(record(source.enginePerformance)?.data) ?? {}
   const costs = record(record(source.costs)?.data) ?? {}
+  const providerAccounting = parseAdminProviderAccountingCoverage(costs.providerAccountingCoverage)
   const safety = record(record(source.safety)?.data) ?? {}
   const system = record(record(source.system)?.data) ?? {}
   const curriculum = record(record(source.curriculum)?.data) ?? {}
@@ -180,6 +182,7 @@ export function parseAdminOverview(value: unknown): AdminOverviewModel | null {
   }).sort().at(-1) ?? null
   const partial = Object.values(statuses).some((status) => status.observationStatus === 'partial')
   const stale = Object.values(statuses).some((status) => status.observationStatus === 'stale')
+  if (statuses.costs.availability === 'available' && !providerAccounting) return null
   return {
     contractVersion: ADMIN_CONTRACT_VERSION,
     range: selection,
@@ -211,6 +214,7 @@ export function parseAdminOverview(value: unknown): AdminOverviewModel | null {
       ttsCharacters: metricFromCost(costs.ttsCharacters),
       spend: spendFromCost(costs.calculatedCost, 'calculated', costs, statuses.costs.completeness),
       reconciledSpend: spendFromCost(costs.reconciledCost, 'reconciled', costs, statuses.costs.completeness),
+      ...(providerAccounting ? { providerAccounting } : {}),
     },
     safety: {
       openSafetyStops: countMetric(safety.openSafetyStops),

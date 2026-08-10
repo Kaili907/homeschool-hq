@@ -84,9 +84,20 @@ export interface AdminProviderAccountingCoverageMetrics {
   readonly observedOutcomes: number
   readonly ledgerLinkedAttempts: number
   readonly accountingGaps: number
+  readonly gapPending: number
   readonly reconciliationConflicts: number
   readonly confirmedNotDispatched: number
   readonly unresolvable: number
+}
+
+export type AdminProviderInstrumentationStatus = 'covered' | 'pending'
+
+export interface AdminProviderInstrumentationCoverage {
+  readonly status: 'partial'
+  readonly engines: readonly {
+    readonly key: 'tutor' | 'jarvis' | 'tts' | 'study'
+    readonly status: AdminProviderInstrumentationStatus
+  }[]
 }
 
 export interface AdminProviderAccountingCoverageBreakdownRow
@@ -97,8 +108,9 @@ export interface AdminProviderAccountingCoverageBreakdownRow
 
 export interface AdminProviderAccountingCoverage {
   readonly status: AdminProviderAccountingCoverageStatus
+  readonly journalStatus: AdminProviderAccountingCoverageStatus
   readonly reconciliationState: AdminProviderAccountingReconciliationState
-  readonly gatewayInstrumentation: 'incomplete'
+  readonly providerInstrumentation: AdminProviderInstrumentationCoverage
   readonly invoiceCompletenessClaim: false
   readonly metrics: AdminProviderAccountingCoverageMetrics | null
   readonly breakdowns: {
@@ -200,10 +212,17 @@ const PROVIDER_COVERAGE_METRIC_KEYS = [
   'observedOutcomes',
   'ledgerLinkedAttempts',
   'accountingGaps',
+  'gapPending',
   'reconciliationConflicts',
   'confirmedNotDispatched',
   'unresolvable',
 ] as const
+const PROVIDER_INSTRUMENTATION_STATUSES = Object.freeze({
+  tutor: 'covered',
+  jarvis: 'covered',
+  tts: 'covered',
+  study: 'pending',
+} as const)
 const PROVIDER_COVERAGE_DIMENSIONS = {
   engines: new Set<string>(['tutor', 'study', 'jarvis', 'tts']),
   purposes: new Set<string>(['tutor_turn', 'jarvis_turn', 'tts_synthesis', 'safety_classification']),
@@ -345,15 +364,38 @@ function providerCoverageRows(
   return rows
 }
 
-function providerAccountingCoverage(value: unknown): AdminProviderAccountingCoverage | null {
+function providerInstrumentationCoverage(value: unknown): AdminProviderInstrumentationCoverage | null {
+  const source = record(value)
+  if (
+    !source || source.status !== 'partial' || Object.keys(source).length !== 2
+    || !Array.isArray(source.engines) || source.engines.length !== 4
+  ) return null
+  const seen = new Set<string>()
+  const engines: AdminProviderInstrumentationCoverage['engines'][number][] = []
+  for (const item of source.engines) {
+    const row = record(item)
+    const key = row?.key as keyof typeof PROVIDER_INSTRUMENTATION_STATUSES
+    if (
+      !row || Object.keys(row).length !== 2 || !(key in PROVIDER_INSTRUMENTATION_STATUSES)
+      || row.status !== PROVIDER_INSTRUMENTATION_STATUSES[key] || seen.has(key)
+    ) return null
+    engines.push({ key, status: row.status as AdminProviderInstrumentationStatus })
+    seen.add(key)
+  }
+  return { status: 'partial', engines }
+}
+
+export function parseAdminProviderAccountingCoverage(value: unknown): AdminProviderAccountingCoverage | null {
   const source = record(value)
   const breakdownsSource = record(source?.breakdowns)
+  const instrumentation = providerInstrumentationCoverage(source?.providerInstrumentation)
   if (
     !source || !PROVIDER_COVERAGE_STATUSES.has(source.status as AdminProviderAccountingCoverageStatus)
+    || !PROVIDER_COVERAGE_STATUSES.has(source.journalStatus as AdminProviderAccountingCoverageStatus)
     || !PROVIDER_RECONCILIATION_STATES.has(
       source.reconciliationState as AdminProviderAccountingReconciliationState,
     )
-    || source.gatewayInstrumentation !== 'incomplete'
+    || !instrumentation
     || source.invoiceCompletenessClaim !== false
     || !breakdownsSource || Object.keys(breakdownsSource).length !== 3
   ) return null
@@ -373,18 +415,24 @@ function providerAccountingCoverage(value: unknown): AdminProviderAccountingCove
   } as const
   if (
     source.reconciliationState
-    !== expectedReconciliation[source.status as AdminProviderAccountingCoverageStatus]
+    !== expectedReconciliation[source.journalStatus as AdminProviderAccountingCoverageStatus]
   ) return null
+  const expectedOverall = source.journalStatus === 'complete_for_journaled_attempts'
+    ? instrumentation.status
+    : source.journalStatus
+  if (source.status !== expectedOverall) return null
 
   if (source.status === 'unavailable') {
     if (
-      source.metrics !== null || source.reconciliationState !== 'unavailable'
+      source.journalStatus !== 'unavailable' || source.metrics !== null
+      || source.reconciliationState !== 'unavailable'
       || engines.length > 0 || purposes.length > 0 || providers.length > 0
     ) return null
     return {
       status: 'unavailable',
+      journalStatus: 'unavailable',
       reconciliationState: 'unavailable',
-      gatewayInstrumentation: 'incomplete',
+      providerInstrumentation: instrumentation,
       invoiceCompletenessClaim: false,
       metrics: null,
       breakdowns: { engines, purposes, providers },
@@ -395,11 +443,12 @@ function providerAccountingCoverage(value: unknown): AdminProviderAccountingCove
   if (!metrics) return null
   return {
     status: source.status as Exclude<AdminProviderAccountingCoverageStatus, 'unavailable'>,
+    journalStatus: source.journalStatus as Exclude<AdminProviderAccountingCoverageStatus, 'unavailable'>,
     reconciliationState: source.reconciliationState as Exclude<
       AdminProviderAccountingReconciliationState,
       'unavailable'
     >,
-    gatewayInstrumentation: 'incomplete',
+    providerInstrumentation: instrumentation,
     invoiceCompletenessClaim: false,
     metrics,
     breakdowns: { engines, purposes, providers },
@@ -416,7 +465,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const costKinds = fixedCounts(summarySource?.costKindCounts, ['calculated', 'reconciled', 'unavailable'])
   const attribution = fixedCounts(summarySource?.attributionCounts, ['resolved', 'ambiguous', 'unresolved'])
   const usageUnavailableCount = safeCount(summarySource?.usageUnavailableCount)
-  const coverage = providerAccountingCoverage(source?.providerAccountingCoverage)
+  const coverage = parseAdminProviderAccountingCoverage(source?.providerAccountingCoverage)
   if (
     !source || source.contractVersion !== 3 || source.currency !== 'USD'
     || typeof source.generatedAt !== 'string' || Number.isNaN(Date.parse(source.generatedAt))

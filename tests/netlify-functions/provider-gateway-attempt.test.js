@@ -4,8 +4,9 @@ import {
   finishGatewayProviderAttempt,
   gatewayProviderAttemptIdentity,
 } from '../../netlify/functions/_shared/provider-gateway-attempt.js'
-import { createAnthropicHandler } from '../../netlify/functions/anthropic.js'
-import { createTtsHandler } from '../../netlify/functions/tts.js'
+import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netlify/functions/anthropic.js'
+import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catalog.js'
+import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
 import { TEST_PROVIDER_ATTEMPT_ID } from './provider-attempt-test-helpers.js'
 
 const ACCOUNT_ID = '10000000-0000-4000-8000-000000000001'
@@ -25,6 +26,51 @@ const TTS_ENV = Object.freeze({
   ACADEMY_TTS_ENABLED: 'true',
   ACADEMY_APP_VERSION: 'academy-test-build',
 })
+const TTS_CATALOG = createTtsVoiceCatalog({
+  catalogVersion: 'provider-accounting-test-v1',
+  defaultVoiceRef: 'academy.tts.provider-accounting-test',
+  voices: [{
+    voiceRef: 'academy.tts.provider-accounting-test',
+    displayLabel: 'Provider accounting test',
+    providerClass: 'premium',
+    provider: 'elevenlabs',
+    providerVoiceId: 'private-voice-1',
+    voiceVersion: 'v1',
+    status: 'active',
+    cachedPlayback: 'allow',
+    adminApproved: true,
+  }],
+})
+
+function runtimeConfigurationResolver(env = {}) {
+  return {
+    resolve: async () => ({
+      values: {
+        aiEnabled: env.ACADEMY_AI_ENABLED !== 'false',
+        ttsEnabled: env.ACADEMY_TTS_ENABLED !== 'false',
+        aiDailyLimit: 50,
+        ttsDailyLimit: 100,
+        approvedTiers: ['sonnet', 'haiku'],
+        defaultTier: 'sonnet',
+      },
+    }),
+  }
+}
+
+function createAnthropicHandler(overrides = {}) {
+  return createBaseAnthropicHandler({
+    runtimeConfigurationResolver: runtimeConfigurationResolver(overrides.env),
+    ...overrides,
+  })
+}
+
+function createTtsHandler(overrides = {}) {
+  return createBaseTtsHandler({
+    catalog: TTS_CATALOG,
+    runtimeConfigurationResolver: runtimeConfigurationResolver(overrides.env),
+    ...overrides,
+  })
+}
 
 function anthropicEvent(mode = 'tutor') {
   const context = mode === 'tutor'
@@ -65,7 +111,11 @@ function ttsEvent() {
       authorization: 'Bearer header.payload.signature',
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ text: 'Private speech input.', voiceId: 'private-voice-1' }),
+    body: JSON.stringify({
+      text: 'Private speech input.',
+      voiceRef: 'academy.tts.provider-accounting-test',
+      voiceVersion: 'v1',
+    }),
   }
 }
 

@@ -3,7 +3,7 @@ import {
   isCanonicalIntegerMicros,
 } from '../../../src/admin/contracts.ts'
 import {
-  buildAdminProviderAccountingCoverage,
+  readAdminProviderAccountingCoverage,
   unavailableProviderAccountingCoverage,
 } from './admin-provider-coverage.js'
 import { reject } from './http.js'
@@ -433,19 +433,16 @@ export function createAdminCostProjection({ gatewayAccess, now = () => new Date(
     async read(event) {
       const observedAt = now()
       const range = resolveAdminCostRange(event, observedAt)
-      const [records, rawCoverage] = await Promise.all([
+      const [records, coverage] = await Promise.all([
         gatewayAccess.readProviderUsageCosts({
           limit: ADMIN_COST_RECORD_LIMIT,
           before: range.endExclusive,
         }),
-        gatewayAccess.readProviderAttemptCoverage({
-          startAt: range.startAt,
-          endExclusive: range.endExclusive,
-        }).catch(() => null),
+        readAdminProviderAccountingCoverage(
+          (input) => gatewayAccess.readProviderAttemptCoverage(input),
+          range,
+        ),
       ])
-      const coverage = rawCoverage === null
-        ? unavailableProviderAccountingCoverage()
-        : buildAdminProviderAccountingCoverage(rawCoverage, range)
       return buildAdminCostProjection(records, range, observedAt, coverage)
     },
   })

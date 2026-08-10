@@ -9,6 +9,7 @@ import type {
   AdminRole,
   IntegerMicros,
 } from './admin0Vocabulary'
+import type { AdminProviderAccountingCoverage } from './costsModel'
 
 export const ADMIN_SECTIONS = [
   'overview',
@@ -125,6 +126,7 @@ export interface AdminOverviewModel {
     readonly ttsCharacters: Metric<number>
     readonly spend: PresentedSpend
     readonly reconciledSpend?: PresentedSpend
+    readonly providerAccounting?: AdminProviderAccountingCoverage
   }
   readonly safety: {
     readonly openSafetyStops: Metric<number>

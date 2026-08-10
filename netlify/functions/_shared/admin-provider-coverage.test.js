@@ -72,15 +72,25 @@ describe('Admin provider accounting coverage projection', () => {
   it('reports terminal journal coverage without making a provider invoice claim', () => {
     const coverage = buildAdminProviderAccountingCoverage(rawCoverage(), RANGE)
     expect(coverage).toMatchObject({
-      status: 'complete_for_journaled_attempts',
+      status: 'partial',
+      journalStatus: 'complete_for_journaled_attempts',
       reconciliationState: 'clear_for_journaled_attempts',
-      gatewayInstrumentation: 'incomplete',
+      providerInstrumentation: {
+        status: 'partial',
+        engines: [
+          { key: 'tutor', status: 'covered' },
+          { key: 'jarvis', status: 'covered' },
+          { key: 'tts', status: 'covered' },
+          { key: 'study', status: 'pending' },
+        ],
+      },
       invoiceCompletenessClaim: false,
       metrics: {
         reservedAttempts: 2,
         ledgerLinkedAttempts: 1,
         confirmedNotDispatched: 1,
         accountingGaps: 0,
+        gapPending: 0,
       },
     })
   })

@@ -35,7 +35,7 @@ const PROVIDER_COVERAGE_STATUS_LABELS: Readonly<Record<AdminProviderAccountingCo
 
 const PROVIDER_COVERAGE_STATUS_COPY: Readonly<Record<AdminProviderAccountingCoverageStatus, string>> = {
   complete_for_journaled_attempts: 'Every journaled attempt in this range has a supported terminal accounting resolution.',
-  partial: 'Some journaled attempts are still between reservation, dispatch readiness, outcome, and final accounting.',
+  partial: 'Provider accounting coverage is partial. Instrumented paths and journal lifecycle evidence are shown below.',
   gaps_detected: 'The journal knows about missing accounting relationships or attempts that could not be resolved.',
   reconciliation_conflict: 'At least one journaled attempt conflicts with the authoritative usage ledger.',
   unavailable: 'The journal coverage projection could not be read safely.',
@@ -335,12 +335,13 @@ function ProviderAccountingCoverageSection({
           <p>{PROVIDER_COVERAGE_STATUS_COPY.unavailable} Existing usage and cost totals above remain independently sourced.</p>
           {onRetry && <button type="button" onClick={onRetry}>Retry coverage</button>}
         </div>
-        <CoverageScopeDisclosure />
+        <CoverageScopeDisclosure coverage={coverage} />
       </section>
     )
   }
 
   const metrics = coverage.metrics
+  const journalLabel = PROVIDER_COVERAGE_STATUS_LABELS[coverage.journalStatus]
   const reconciliationLabel = coverage.reconciliationState === 'clear_for_journaled_attempts'
     ? 'Clear for journaled attempts'
     : coverage.reconciliationState === 'in_progress'
@@ -362,6 +363,7 @@ function ProviderAccountingCoverageSection({
           <strong>{PROVIDER_COVERAGE_STATUS_LABELS[coverage.status]}</strong>
         </div>
         <p>{PROVIDER_COVERAGE_STATUS_COPY[coverage.status]}</p>
+        <p><strong>Journal state:</strong> {journalLabel}</p>
         <p><strong>Reconciliation state:</strong> {reconciliationLabel}</p>
       </div>
 
@@ -372,6 +374,7 @@ function ProviderAccountingCoverageSection({
           ['Observed outcomes', metrics.observedOutcomes, 'Awaiting final accounting state'],
           ['Ledger-linked attempts', metrics.ledgerLinkedAttempts, 'Exact authoritative ledger relationship'],
           ['Accounting gaps', metrics.accountingGaps, 'Missing journal or ledger relationships'],
+          ['Gap pending', metrics.gapPending, 'Known provider attempts awaiting a ledger relationship'],
           ['Reconciliation conflicts', metrics.reconciliationConflicts, 'Conflicting durable facts'],
           ['Confirmed not dispatched', metrics.confirmedNotDispatched, 'Trusted evidence that no provider call occurred'],
           ['Unresolvable', metrics.unresolvable, 'Closed without recoverable resolution'],
@@ -399,16 +402,23 @@ function ProviderAccountingCoverageSection({
         caption="Journaled provider accounting coverage grouped by provider"
         rows={coverage.breakdowns.providers}
       />
-      <CoverageScopeDisclosure />
+      <CoverageScopeDisclosure coverage={coverage} />
     </section>
   )
 }
 
-function CoverageScopeDisclosure() {
+function CoverageScopeDisclosure({ coverage }: { coverage: AdminProviderAccountingCoverage }) {
   return (
     <div className="admin-provider-coverage__scope" role="note">
       <strong>Coverage boundary</strong>
-      <p>Provider gateway instrumentation is not yet complete across every relevant provider path. This view is therefore incomplete beyond the attempts and ledger relationships already known to the journal.</p>
+      <ul>
+        {coverage.providerInstrumentation.engines.map((engine) => (
+          <li key={engine.key}>
+            {PROVIDER_COVERAGE_DIMENSION_LABELS[engine.key]} provider instrumentation: {engine.status}
+          </li>
+        ))}
+      </ul>
+      <p>The instrumentation rows above are the server-owned coverage contract. Any pending path keeps overall provider coverage partial.</p>
       <p>This is an accounting-trail check, not a provider bill comparison. It cannot establish that stored activity equals a provider bill.</p>
     </div>
   )
