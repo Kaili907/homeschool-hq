@@ -64,8 +64,9 @@ import {
   type StudentDashboardComposition,
 } from './components/academy/dashboard/StudentDashboard'
 import type { AcademyCatalog, AcademySchedule } from './academy/contentTypes'
+import type { AcademyStudyContext } from './academy/adapters/studyContextAdapter'
 import { isStudyEngineEnabledFromHost, isStudyEnginePreviewEnabledFromHost } from './study/featureFlag'
-import { isStudyEnginePath, leaveStudyEnginePath } from './studyEngineRoute'
+import { isStudyEnginePath, leaveStudyEnginePath, syncStudyEnginePath } from './studyEngineRoute'
 import { enabledAcademyEntries } from './academy/workingLevel'
 import { grade5MathPracticeAvailableFromHost } from './curriculum/practice/featureFlag'
 import {
@@ -154,6 +155,7 @@ type Screen =
   | { kind: 'reading' }
   | { kind: 'mindset' }
   | { kind: 'studyDashboard' }
+  | { kind: 'academyStudyEntry'; launchContext: AcademyStudyContext }
   | { kind: 'studySettings' }
   | { kind: 'studySession'; blockRef: string; learnerRef: string }
   | { kind: 'academy'; route: AcademyRoute }
@@ -466,6 +468,21 @@ export default function App() {
     setScreen(next)
   }
   const openClassicHome = () => openStudentScreen({ kind: 'classicHome' })
+  const openAcademyStudy = (context: AcademyStudyContext) => {
+    // Copy only the versioned scheduling contract. Browser state never supplies
+    // identity, authorization, readiness, settings, or Study session authority.
+    const launchContext: AcademyStudyContext = Object.freeze({
+      adapterVersion: context.adapterVersion,
+      releaseVersion: context.releaseVersion,
+      lessonRef: context.lessonRef,
+      skillRefs: Object.freeze([...context.skillRefs]),
+      scopeWeek: context.scopeWeek,
+      scopeDay: context.scopeDay,
+    })
+    leaveAcademyPath()
+    syncStudyEnginePath()
+    setScreen({ kind: 'academyStudyEntry', launchContext })
+  }
   const trainerReady = active?.grade === '3' || active?.grade === '4' || active?.grade === '6'
   const highSchool = active?.grade === '10' || active?.grade === '12'
   const mindsetUnlocked = currentWeek(state.mindsetStartDate, today) > 0
@@ -488,6 +505,7 @@ export default function App() {
   const dashboardComposition: StudentDashboardComposition | undefined = active
     ? {
         onSignOut: signOut,
+        studyLaunch: { onOpen: openAcademyStudy },
         mission: {
           day: activeMissionDay,
           launchableKinds: launchableMissionKinds,
@@ -806,9 +824,23 @@ export default function App() {
 
   if (
     screen.kind === 'studyDashboard' ||
+    screen.kind === 'academyStudyEntry' ||
     screen.kind === 'studySettings' ||
     screen.kind === 'studySession'
   ) {
+    if (screen.kind === 'academyStudyEntry' && (!studyEnabled || studyPreviewEnabled)) {
+      return (
+        <StudyUnavailable
+          reason={!studyEnabled
+            ? 'Study is disabled. Today’s Academy schedule was not opened.'
+            : 'Production Study is not available. The Academy launch did not enter preview mode.'}
+          onBack={() => {
+            leaveStudyEnginePath()
+            setScreen({ kind: 'home' })
+          }}
+        />
+      )
+    }
     if (studyProductionSelected) {
       const verifiedRuntime = studyVerifiedRuntimeRef.current
       if (studyProductionStatus !== 'ready' || !verifiedRuntime?.isReady()) {
@@ -825,6 +857,7 @@ export default function App() {
       return (
         <VerifiedProductionStudyHost
           runtime={verifiedRuntime}
+          launchContext={screen.kind === 'academyStudyEntry' ? screen.launchContext : undefined}
           onBack={() => {
             void verifiedRuntime.cancel('navigation-away')
             leaveStudyEnginePath()
@@ -1194,9 +1227,11 @@ function StudyUnavailable({
 
 function VerifiedProductionStudyHost({
   runtime,
+  launchContext,
   onBack,
 }: {
   runtime: VerifiedStudyRuntimeAdapter
+  launchContext?: AcademyStudyContext
   onBack: () => void
 }) {
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -1227,6 +1262,11 @@ function VerifiedProductionStudyHost({
         {status === 'loading' && <p className="mt-2" role="status">Checking your current Study planÃ¢â‚¬Â¦</p>}
         {status === 'ready' && (
           <p className="mt-2" role="status">Your Study workspace is ready for this learner.</p>
+        )}
+        {launchContext && (
+          <p className="mt-2 text-sm">
+            Academy suggested Week {launchContext.scopeWeek}, Day {launchContext.scopeDay}. Study confirms the learner, curriculum, settings, and session authority independently.
+          </p>
         )}
         {status === 'unavailable' && (
           <p className="mt-2" role="alert">Study took a safe pause. No late result was applied.</p>

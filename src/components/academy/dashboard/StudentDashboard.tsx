@@ -1,6 +1,11 @@
 import { useEffect, useRef } from 'react'
 import type { AcademyGrade, AutoKind, MissionDay, Profile, SchoolYear } from '../../../types'
+import { isoToday } from '../../../appState'
 import type { AcademyRoute } from '../../../academy/academyRoute'
+import {
+  buildAcademyStudyContext,
+  type AcademyStudyContext,
+} from '../../../academy/adapters/studyContextAdapter'
 import {
   ACADEMY_SUBJECT_LABELS,
   type AcademyCatalog,
@@ -35,6 +40,10 @@ export interface StudentDashboardTool {
 
 export interface StudentDashboardComposition {
   onSignOut: () => void
+  /** Advisory scheduled-work handoff; Study still establishes all authority. */
+  studyLaunch?: {
+    onOpen: (context: AcademyStudyContext) => void
+  }
   mission?: {
     day: MissionDay | undefined
     launchableKinds: readonly AutoKind[]
@@ -330,6 +339,34 @@ function TodayTimeline({ lessons, calendarState, onNavigate }: { lessons: readon
   )
 }
 
+function AcademyStudyLaunch({
+  context,
+  lessonCount,
+  onOpen,
+}: {
+  context: AcademyStudyContext
+  lessonCount: number
+  onOpen: (context: AcademyStudyContext) => void
+}) {
+  return (
+    <section className="academy-study-launch panel-glass" aria-labelledby="academy-study-launch-heading">
+      <div>
+        <p className="eyebrow">Academy → Study</p>
+        <h2 id="academy-study-launch-heading">Continue today&apos;s scheduled work in Study</h2>
+        <p>Study will independently confirm the learner, curriculum, settings, and readiness.</p>
+      </div>
+      <button
+        type="button"
+        className="button-primary"
+        onClick={() => onOpen(context)}
+        aria-label={`Open scheduled Academy work in Study: Week ${context.scopeWeek}, Day ${context.scopeDay}, ${lessonCount} ${lessonCount === 1 ? 'lesson' : 'lessons'}`}
+      >
+        Open in Study<span aria-hidden="true">→</span>
+      </button>
+    </section>
+  )
+}
+
 function CompletionState({ completedCount, total, calendarState }: { completedCount: number; total: number; calendarState: DashboardCalendarState }) {
   const todaySpecific = calendarState === 'normal-weekday'
   return (
@@ -529,6 +566,11 @@ export function StudentDashboard({
   const headingRef = useRef<HTMLHeadingElement>(null)
   useEffect(() => { headingRef.current?.focus() }, [])
   const data = buildStudentDashboardData({ profile, catalog, schedule, levelOf, schoolYear, today })
+  const resolvedToday = today ?? isoToday()
+  const scopeDay = new Date(`${resolvedToday}T12:00:00`).getDay()
+  const academyStudyContext = data.calendarState === 'normal-weekday' && dashboard?.studyLaunch
+    ? buildAcademyStudyContext(profile, schedule, data.week, scopeDay)
+    : null
   const hasAcademyCourses = catalog.courses.length > 0
   const isCurrentAcademyDay = data.calendarState === 'normal-weekday'
   const currentAcademyUpNext = isCurrentAcademyDay ? data.upNext : null
@@ -626,6 +668,13 @@ export function StudentDashboard({
               <TodayTimeline lessons={data.lessons} calendarState={data.calendarState} onNavigate={onNavigate} />
             ) : (
               <NoWorkState calendarState={data.calendarState} week={data.week} onNavigate={onNavigate} />
+            )}
+            {academyStudyContext && dashboard?.studyLaunch && (
+              <AcademyStudyLaunch
+                context={academyStudyContext}
+                lessonCount={data.lessons.length}
+                onOpen={dashboard.studyLaunch.onOpen}
+              />
             )}
             {dashboard?.mission && (
               <LegacyMissionPanel

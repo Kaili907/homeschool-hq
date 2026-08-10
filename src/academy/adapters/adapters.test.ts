@@ -102,8 +102,11 @@ describe('CURR-1 study context adapter (contract v1)', () => {
     })
   })
 
-  it('returns null off-schedule and for unenrolled profiles', () => {
+  it('returns no launch context when the requested schedule day is missing', () => {
     expect(buildAcademyStudyContext(profile, schedule, 40, 1)).toBeNull()
+  })
+
+  it('returns no launch context when the profile has no Academy state', () => {
     expect(
       buildAcademyStudyContext(emptyProfile('p3', 'Sixth', '6'), schedule, 2, 3),
     ).toBeNull()

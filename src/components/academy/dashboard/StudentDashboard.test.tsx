@@ -419,6 +419,55 @@ describe('StudentDashboard', () => {
     expect(html).toContain('No Academy courses are assigned yet.')
   })
 
+  it('offers an accessible Study handoff only for an enrolled, scheduled Academy day', async () => {
+    const onOpen = vi.fn()
+    const dashboard = legacyDashboard([], { studyLaunch: { onOpen } })
+    const html = renderDashboard({ schoolYear: CONFIGURED_YEAR, dashboard })
+    expect(html).toContain('Continue today&#x27;s scheduled work in Study')
+    expect(html).toContain('Study will independently confirm the learner, curriculum, settings, and readiness.')
+    expect(html).toContain('aria-label="Open scheduled Academy work in Study: Week 1, Day 1, 3 lessons"')
+    expect(html).not.toContain('household')
+
+    const mounted = await mountDashboard({ schoolYear: CONFIGURED_YEAR, dashboard })
+    try {
+      const button = findButton(mounted.container, 'Open in Study')
+      expect(button).not.toBeNull()
+      const click = new Event('click', { bubbles: true, cancelable: true })
+      Object.defineProperty(click, 'target', { configurable: true, value: button })
+      await act(async () => { mounted.container.dispatchEvent(click) })
+
+      expect(onOpen).toHaveBeenCalledWith({
+        adapterVersion: 1,
+        releaseVersion: '1.0.0',
+        lessonRef: 'grade-5:academy-week-1-day-1',
+        skillRefs: [MATH, ELA, SCIENCE],
+        scopeWeek: 1,
+        scopeDay: 1,
+      })
+      expect(mounted.onNavigate).not.toHaveBeenCalled()
+      expect(mounted.fetch).not.toHaveBeenCalled()
+    } finally {
+      await act(async () => mounted.root.unmount())
+    }
+  })
+
+  it('creates no Study launch control without Academy state or without the scheduled day', () => {
+    const dashboard = legacyDashboard([], { studyLaunch: { onOpen: vi.fn() } })
+    const noAcademyState = renderDashboard({
+      profile: emptyProfile('p1', 'Avery Student', '6'),
+      schoolYear: CONFIGURED_YEAR,
+      dashboard,
+    })
+    const missingDay = renderDashboard({
+      dashboardSchedule: { ...schedule, days: [] },
+      schoolYear: CONFIGURED_YEAR,
+      dashboard,
+    })
+
+    expect(noAcademyState).not.toContain('Open scheduled Academy work in Study')
+    expect(missingDay).not.toContain('Open scheduled Academy work in Study')
+  })
+
   it('labels the legacy Academy mission as a separate checklist, not Academy progress', () => {
     const html = renderDashboard({
       dashboardToday: '2026-08-10',
@@ -636,9 +685,10 @@ describe('StudentDashboard', () => {
     expect(html).not.toMatch(/\b\d+\s*(?:minutes?|mins?|hours?|hrs?)\b/i)
   })
 
-  it('keeps dashboard actions navigation-only and imports no Study or Tutor runtime', () => {
+  it('keeps dashboard actions navigation-only and imports only the Academy Study adapter, never a runtime', () => {
     const source = `${dashboardSource}\n${dashboardDataSource}`
-    expect(source).not.toMatch(/(?:from\s+|import\s*\()['"][^'"]*(?:study|tutor)[^'"]*['"]/i)
+    expect(dashboardSource).toContain("../../../academy/adapters/studyContextAdapter")
+    expect(source).not.toMatch(/(?:from\s+|import\s*\()['"][^'"]*\/(?:study|tutor)\/[^'"]*['"]/i)
     expect(source).not.toMatch(/\b(?:fetch|XMLHttpRequest|WebSocket|getUserMedia|mediaDevices|localStorage|sessionStorage)\b/)
     expect(dashboardSource).not.toMatch(/\b(?:startLesson|completeSegment|submitLessonCheck|recordReassessment|reopenLesson)\b/)
     expect(source).not.toMatch(/\b(?:enrollInCatalog|setWorkingLevel|reconcileEnrollment)\b/)

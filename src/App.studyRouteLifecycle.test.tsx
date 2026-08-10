@@ -5,6 +5,7 @@ import { APP_STATE_STORAGE_KEY } from './sync/provenance'
 import { isoToday } from './appState'
 import { defaultAppState } from './migration'
 import type { AppState } from './types'
+import type { AcademyStudyContext } from './academy/adapters/studyContextAdapter'
 
 // MOUNT-2 route lifecycle (Session A2). Harness adapted from the recovered
 // mount work (87a8076 / 11a63e2) and src/sync/useSync.mounted.test.tsx; the
@@ -18,14 +19,18 @@ const harness = vi.hoisted(() => ({
     profileId: string
     tools: readonly { id: string; title: string; onOpen: () => void }[]
     onSignOut: () => void
+    studyLaunch?: { onOpen: (context: AcademyStudyContext) => void }
   },
   syncUser: null as null | { id: string; email: string },
   launches: [] as Array<{ student: string; host: string }>,
+  executions: [] as Array<{ operation: string; request: Readonly<Record<string, unknown>> }>,
   cancels: [] as string[],
   runtimeReady: false,
+  readinessCalls: 0,
+  readinessStatus: 'ready' as 'ready' | 'not-ready' | 'degraded',
   readiness: () => ({
     schemaVersion: 1,
-    status: 'ready' as const,
+    status: harness.readinessStatus,
     expiresAt: new Date(Date.now() + 60_000).toISOString(),
   }),
 }))
@@ -58,6 +63,7 @@ vi.mock('./components/academy/AcademyRouter', () => ({
     dashboard?: {
       tools?: readonly { id: string; title: string; onOpen: () => void }[]
       onSignOut: () => void
+      studyLaunch?: { onOpen: (context: AcademyStudyContext) => void }
     }
   }) => {
     if (!props.dashboard) {
@@ -68,6 +74,7 @@ vi.mock('./components/academy/AcademyRouter', () => ({
       profileId: props.profile.id,
       tools,
       onSignOut: props.dashboard.onSignOut,
+      studyLaunch: props.dashboard.studyLaunch,
     }
     return (
       <main data-surface="student-dashboard">
@@ -82,8 +89,8 @@ vi.mock('./components/academy/AcademyRouter', () => ({
 }))
 vi.mock('./study/client/studyProductionReadinessClient', () => ({
   createStudyProductionReadinessClient: () => ({
-    read: async () => harness.readiness(),
-    revalidate: async () => harness.readiness(),
+    read: async () => { harness.readinessCalls += 1; return harness.readiness() },
+    revalidate: async () => { harness.readinessCalls += 1; return harness.readiness() },
     invalidate: () => {},
   }),
 }))
@@ -94,7 +101,13 @@ vi.mock('./study/production/verifiedRuntimeAdapter', () => ({
       harness.runtimeReady = true
       return { status: 'ready' }
     },
-    execute: async () => ({}),
+    execute: async (input: { operation: string; request: Readonly<Record<string, unknown>> }) => {
+      harness.executions.push({ operation: input.operation, request: input.request })
+      return {}
+    },
+    applyReadiness: async () => {
+      harness.runtimeReady = false
+    },
     cancel: async (reason: string) => {
       harness.cancels.push(reason)
       harness.runtimeReady = false
@@ -194,8 +207,11 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     harness.dashboard = null
     harness.syncUser = { id: 'household-a', email: 'household-a@example.com' }
     harness.launches = []
+    harness.executions = []
     harness.cancels = []
     harness.runtimeReady = false
+    harness.readinessCalls = 0
+    harness.readinessStatus = 'ready'
     root = null
     pathname = '/study-engine'
     vi.stubEnv('VITE_STUDY_ENGINE_ENABLED', 'true')
@@ -278,6 +294,23 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await waitFor(() => hasText(container, 'Verified Study workspace'))
   }
 
+  const academyContext: AcademyStudyContext = {
+    adapterVersion: 1,
+    releaseVersion: '1.0.0',
+    lessonRef: 'grade-5:academy-week-2-day-3',
+    skillRefs: ['ma-g5-mathematics-u01-l08', 'ma-g5-science-u01-l03'],
+    scopeWeek: 2,
+    scopeDay: 3,
+  }
+
+  async function launchFromAcademy(context: AcademyStudyContext = academyContext) {
+    pathname = '/academy'
+    await mountApp(seeded('p1'))
+    await waitFor(() => Boolean(harness.dashboard?.studyLaunch))
+    await act(async () => harness.dashboard?.studyLaunch?.onOpen(context))
+    await settle()
+  }
+
   it('reaches the study surface on fresh navigation to /study-engine with a persisted active profile', async () => {
     await mountApp(seeded('p1'))
     await reachStudySurface()
@@ -354,6 +387,73 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     expect(hasText(container, 'Study is not available')).toBe(false)
     expect(hasText(container, 'Today’s Study plan')).toBe(false)
     expect(harness.launches).toEqual([])
+  })
+
+  it('keeps a disabled Academy Study launch in the bounded unavailable experience', async () => {
+    vi.stubEnv('VITE_STUDY_ENGINE_ENABLED', '')
+    await launchFromAcademy()
+
+    expect(hasText(container, 'Study is disabled. Today’s Academy schedule was not opened.')).toBe(true)
+    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(harness.launches).toEqual([])
+    expect(pathname).toBe('/study-engine')
+  })
+
+  it('keeps a not-ready Academy Study launch out of the production host', async () => {
+    harness.readinessStatus = 'not-ready'
+    pathname = '/academy'
+    await mountApp(seeded('p1'))
+    await waitFor(() => harness.readinessCalls > 0)
+    await act(async () => harness.dashboard?.studyLaunch?.onOpen(academyContext))
+    await waitFor(() => hasText(container, 'Study is not available yet'))
+
+    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(harness.launches).toEqual([])
+    expect(harness.executions).toEqual([])
+  })
+
+  it('keeps an unavailable unauthenticated Academy Study launch fail-closed', async () => {
+    harness.syncUser = null
+    await launchFromAcademy()
+
+    expect(hasText(container, 'Sign in and select an available learner before opening Study.')).toBe(true)
+    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(harness.launches).toEqual([])
+  })
+
+  it('never diverts an Academy launch into the development Study preview', async () => {
+    vi.stubEnv('VITE_STUDY_ENGINE_PREVIEW', 'true')
+    await launchFromAcademy()
+
+    expect(hasText(container, 'The Academy launch did not enter preview mode.')).toBe(true)
+    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(harness.launches).toEqual([])
+    expect(harness.executions).toEqual([])
+  })
+
+  it('delivers scheduling context to the ready production entry without using it as authority', async () => {
+    const browserCandidate = {
+      ...academyContext,
+      householdId: 'private-household-id',
+      learnerId: 'private-learner-id',
+      privateNotes: 'private note',
+      assessmentAnswers: ['private answer'],
+    } as AcademyStudyContext & Record<string, unknown>
+    pathname = '/academy'
+    await mountApp(seeded('p1'))
+    await waitFor(() => harness.runtimeReady)
+    await act(async () => harness.dashboard?.studyLaunch?.onOpen(browserCandidate))
+    await waitFor(() => hasText(container, 'Verified Study workspace'))
+    await waitFor(() => harness.executions.length > 0)
+
+    expect(hasText(container, 'Academy suggested Week 2, Day 3.')).toBe(true)
+    expect(hasText(container, 'Study confirms the learner, curriculum, settings, and session authority independently.')).toBe(true)
+    expect(harness.launches.at(-1)).toEqual({ student: 'p1', host: 'household-a' })
+    expect(harness.executions.at(-1)).toEqual({ operation: 'dashboard:read', request: {} })
+    expect(renderedText(container)).not.toMatch(/private-household-id|private-learner-id|private note|private answer/)
+    expect(pathname).toBe('/study-engine')
+    expect(pathname).not.toContain('?')
+    expect(pathname).not.toContain('#')
   })
 
   // A4-X exit-time URL normalization (adopted ruling on the A2/A4 residual):

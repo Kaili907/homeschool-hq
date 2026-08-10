@@ -6,21 +6,21 @@ import type { AcademySchedule } from '../contentTypes'
  * Engine's host-context vocabulary (see study/hostContext.buildHostStudyContext:
  * `lessonRef` / `skillRefs` strings). ADAPTER CONTRACT v1: the academy exposes
  * its scheduled work as refs the study layer already understands; it never
- * reaches into study state, and the study line (parked, PARKED.md §A) never
- * mutates academy state. Not yet mounted — contract fixed and tested now.
+ * reaches into study state, and Study never mutates Academy state. Mounted by
+ * the scheduled-day dashboard control as advisory context only.
  */
 
 export const ACADEMY_STUDY_ADAPTER_VERSION = 1 as const
 
 export interface AcademyStudyContext {
-  adapterVersion: typeof ACADEMY_STUDY_ADAPTER_VERSION
-  releaseVersion: string
+  readonly adapterVersion: typeof ACADEMY_STUDY_ADAPTER_VERSION
+  readonly releaseVersion: string
   /** study-vocabulary lesson ref for the day's academy block. */
-  lessonRef: string
+  readonly lessonRef: string
   /** the day's scheduled lesson ids, in order (study scheduling input). */
-  skillRefs: string[]
-  scopeWeek: number
-  scopeDay: number
+  readonly skillRefs: readonly string[]
+  readonly scopeWeek: number
+  readonly scopeDay: number
 }
 
 /**
