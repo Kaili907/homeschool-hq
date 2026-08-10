@@ -78,7 +78,7 @@ function candidate(value) {
   if (
     !exactKeys(value, keys)
     || typeof value.stagingId !== 'string' || !UUID.test(value.stagingId)
-    || value.status !== 'staged' || value.publicationStatus !== 'not_published'
+    || value.status !== 'staged' || !['not_published', 'published'].includes(value.publicationStatus)
     || typeof value.validationSnapshotId !== 'string' || !UUID.test(value.validationSnapshotId)
     || typeof value.approvalId !== 'string' || !UUID.test(value.approvalId)
     || !projectedCounts || !integer(value.fileCount, 1) || !integer(value.byteCount, 1)

@@ -38,7 +38,11 @@ export function CurriculumReleaseStaging({
           <h3 id="curriculum-release-staging-title">Release staging</h3>
         </div>
         <strong className={`curriculum-staging-state is-${status?.stageState ?? 'unavailable'}`}>
-          {candidate ? 'STAGED, NOT PUBLISHED' : status?.eligible ? 'READY TO STAGE' : 'NOT ELIGIBLE'}
+          {candidate?.publicationStatus === 'published'
+            ? 'STAGED · PUBLISHED'
+            : candidate
+              ? 'STAGED, NOT PUBLISHED'
+              : status?.eligible ? 'READY TO STAGE' : 'NOT ELIGIBLE'}
         </strong>
       </header>
 
@@ -70,7 +74,9 @@ export function CurriculumReleaseStaging({
                 <div><dt>Manifest SHA-256</dt><dd><code>{candidate.manifestHash}</code></dd></div>
                 <div><dt>Package SHA-256</dt><dd><code>{candidate.packageHash}</code></dd></div>
               </dl>
-              <p>This candidate is isolated from the published registry and learner runtime.</p>
+              <p>{candidate.publicationStatus === 'published'
+                ? 'Published custody exists. Learner runtime and active release selection remain unchanged.'
+                : 'This candidate is isolated from the published registry and learner runtime.'}</p>
             </div>
           )}
         </>

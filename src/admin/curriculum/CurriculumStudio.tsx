@@ -49,10 +49,15 @@ import { StructuredEntityEditor } from './StructuredEntityEditor'
 import { createDraftEntityPayload, CURRICULUM_ENTITY_REF_PATTERN } from './studioEditorModel'
 import { CurriculumApprovalReview } from './CurriculumApprovalReview'
 import { CurriculumReleaseStaging } from './CurriculumReleaseStaging'
+import { CurriculumReleasePublishing } from './CurriculumReleasePublishing'
 import {
   CurriculumStagingError,
   type CurriculumStagingStatusResult,
 } from '../curriculum-staging/contracts'
+import {
+  CurriculumPublishingError,
+  type CurriculumPublishingStatusResult,
+} from '../curriculum-publishing/contracts'
 import './curriculum-studio.css'
 
 const TREE_KEYS = new Set<CurriculumTreeKey>([
@@ -213,6 +218,11 @@ export function CurriculumStudioView({
   const [stagingError, setStagingError] = useState<string | null>(null)
   const [stagingReload, setStagingReload] = useState(0)
   const stagingRequestKey = useRef<string | null>(null)
+  const [publication, setPublication] = useState<CurriculumPublishingStatusResult | null>(null)
+  const [publicationBusy, setPublicationBusy] = useState(false)
+  const [publicationError, setPublicationError] = useState<string | null>(null)
+  const [publicationReload, setPublicationReload] = useState(0)
+  const publicationRequestKey = useRef<string | null>(null)
   const approvalRequestKeys = useRef(new Map<string, string>())
   const focusRequested = useRef(false)
   const nextLoadedSaveMessage = useRef('Saved')
@@ -254,6 +264,31 @@ export function CurriculumStudioView({
     )
     return () => { current = false }
   }, [draft?.draftId, draft?.revision, source, stagingReload])
+
+  useEffect(() => {
+    if (!draft) {
+      setPublication(null)
+      setPublicationError(null)
+      return
+    }
+    let current = true
+    setPublicationBusy(true)
+    setPublicationError(null)
+    source.readPublication(draft.draftId).then(
+      (value) => {
+        if (!current) return
+        setPublication(value)
+        setPublicationBusy(false)
+      },
+      (reason) => {
+        if (!current) return
+        setPublication(null)
+        setPublicationError(publishingErrorMessage(reason, 'The release publication service is unavailable.'))
+        setPublicationBusy(false)
+      },
+    )
+    return () => { current = false }
+  }, [draft?.draftId, draft?.revision, publicationReload, source])
 
   useEffect(() => {
     if (initialBaseEntries.length > 0) return
@@ -682,6 +717,7 @@ export function CurriculumStudioView({
       setValidation(result)
       await refreshApproval(draft.draftId)
       setStagingReload((value) => value + 1)
+      setPublicationReload((value) => value + 1)
     } catch (reason) {
       setValidationError(
         reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict'
@@ -732,6 +768,7 @@ export function CurriculumStudioView({
       setApproval(result)
       approvalRequestKeys.current.delete(fingerprint)
       setStagingReload((value) => value + 1)
+      setPublicationReload((value) => value + 1)
     } catch (reason) {
       setApprovalError(approvalErrorMessage(reason, 'The decision could not be recorded. Retry will reuse the same request identity.'))
     } finally {
@@ -753,6 +790,7 @@ export function CurriculumStudioView({
       })
       setStaging(result)
       stagingRequestKey.current = null
+      setPublicationReload((value) => value + 1)
     } catch (reason) {
       setStagingError(stagingErrorMessage(
         reason,
@@ -760,6 +798,36 @@ export function CurriculumStudioView({
       ))
     } finally {
       setStagingBusy(false)
+    }
+  }
+
+  async function publishRelease() {
+    const candidate = publication?.candidate
+    if (!draft || !stagingCapable || !publication?.eligible || !candidate) return
+    if (
+      typeof window !== 'undefined'
+      && !window.confirm(`Publish immutable curriculum release ${publication.targetVersion}? This will not activate it.`)
+    ) return
+    const idempotencyKey = publicationRequestKey.current ?? uuid()
+    publicationRequestKey.current = idempotencyKey
+    setPublicationBusy(true)
+    setPublicationError(null)
+    try {
+      const result = await source.publishStaged({
+        draftId: draft.draftId,
+        stagingId: candidate.stagingId,
+        idempotencyKey,
+      })
+      setPublication(result)
+      publicationRequestKey.current = null
+      setStagingReload((value) => value + 1)
+    } catch (reason) {
+      setPublicationError(publishingErrorMessage(
+        reason,
+        'Publication is unavailable. Retry will reuse the same request identity.',
+      ))
+    } finally {
+      setPublicationBusy(false)
     }
   }
 
@@ -913,6 +981,14 @@ export function CurriculumStudioView({
             onRefresh={() => setStagingReload((value) => value + 1)}
             onStage={() => void stageRelease()}
           />
+          <CurriculumReleasePublishing
+            status={publication}
+            busy={publicationBusy}
+            error={publicationError}
+            canPublish={stagingCapable}
+            onRefresh={() => setPublicationReload((value) => value + 1)}
+            onPublish={() => void publishRelease()}
+          />
         </>
       )}
 
@@ -992,6 +1068,24 @@ function stagingErrorMessage(reason: unknown, fallback: string): string {
   if (reason.reason === 'idempotency-conflict') return 'Conflicting reuse of the staging request identity was rejected.'
   if (reason.code === 'conflict') return 'The draft revision changed before staging completed.'
   if (reason.code === 'invalid') return 'The server rejected the candidate package contract.'
+  return fallback
+}
+
+function publishingErrorMessage(reason: unknown, fallback: string): string {
+  if (!(reason instanceof CurriculumPublishingError)) return fallback
+  if (reason.code === 'unauthenticated') return 'The Admin session is no longer authenticated.'
+  if (reason.code === 'forbidden') return 'Permission denied: the server and database require curriculum:publish.'
+  if (reason.code === 'not-found') return 'The exact staged candidate is unavailable.'
+  if (reason.reason === 'artifact-invalid') return 'Publication stopped because staged artifact bytes or counts failed verification.'
+  if (reason.reason === 'manifest-mismatch') return 'Publication stopped because the immutable manifest failed verification.'
+  if (reason.reason === 'package-mismatch') return 'Publication stopped because the package digest failed verification.'
+  if (reason.reason === 'approval-stale') return 'Publication stopped because the exact approval is stale.'
+  if (reason.reason === 'validation-blocked') return 'Publication stopped because the exact validation is not publication-ready.'
+  if (reason.reason === 'human-review-blocked') return 'Publication stopped because human review is unresolved.'
+  if (reason.reason === 'target-version-collision') return 'The target version already belongs to a different immutable release.'
+  if (reason.reason === 'revision-conflict') return 'The staged draft identity changed before publication.'
+  if (reason.reason === 'idempotency-conflict') return 'Conflicting reuse of the publication request identity was rejected.'
+  if (reason.code === 'invalid') return 'The server rejected the bounded publication request.'
   return fallback
 }
 
