@@ -421,6 +421,39 @@
 .curriculum-studio-validation { border-top: 1px solid #cbd7d1; background: #020617; }
 .curriculum-validation-stale { margin: 0; border-bottom: 1px solid #d09a46; padding: 1rem 1.25rem; background: #fff4dc; color: #6b4816; font-size: .76rem; }
 
+.curriculum-approval-review { border-top: 1px solid #cbd7d1; padding: 1.2rem; background: #f8faf9; }
+.curriculum-approval-review > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.curriculum-approval-review h3 { margin: .2rem 0 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.18rem; font-weight: 500; }
+.curriculum-approval-review header p:last-child { margin: .3rem 0 0; color: var(--admin-muted); font-size: .68rem; }
+.curriculum-approval-badge { border: 1px solid #bdcbc5; border-radius: 999px; padding: .4rem .68rem; color: #4f6158; font-size: .64rem; font-weight: 800; white-space: nowrap; }
+.curriculum-approval-badge.is-approved { border-color: #79ad94; background: #e7f4ed; color: #245b46; }
+.curriculum-approval-badge.is-stale,
+.curriculum-approval-badge.is-changes_requested { border-color: #d5aa67; background: #fff5e1; color: #704b17; }
+.curriculum-approval-alert { margin-top: .85rem; border-left: 3px solid #a96e1e; padding: .7rem .8rem; background: #fff5e1; color: #704b17; font-size: .7rem; line-height: 1.5; }
+.curriculum-approval-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; margin-top: 1rem; }
+.curriculum-approval-grid > section { min-width: 0; border: 1px solid #dce5e0; border-radius: .55rem; padding: .85rem; background: white; }
+.curriculum-approval-grid h4 { margin: 0 0 .65rem; color: var(--admin-muted); font-size: .61rem; letter-spacing: .09em; text-transform: uppercase; }
+.curriculum-approval-grid dl { margin: 0; }
+.curriculum-approval-grid dl div { display: flex; justify-content: space-between; gap: .7rem; border-top: 1px solid #edf1ef; padding: .38rem 0; font-size: .65rem; }
+.curriculum-approval-grid dl div:first-child { border-top: 0; }
+.curriculum-approval-grid dt { color: var(--admin-muted); }
+.curriculum-approval-grid dd { margin: 0; font-weight: 750; text-align: right; }
+.curriculum-approval-grid p { color: var(--admin-muted); font-size: .63rem; line-height: 1.5; }
+.curriculum-approval-grid a { color: var(--admin-green); font-size: .66rem; font-weight: 750; }
+.curriculum-approval-grid label { display: block; margin-top: .75rem; color: var(--admin-muted); font-size: .61rem; font-weight: 750; }
+.curriculum-approval-grid select { width: 100%; min-height: 2.45rem; margin-top: .3rem; border: 1px solid #c4d1cb; border-radius: .4rem; padding: .45rem .55rem; background: white; font: inherit; font-size: .66rem; }
+.curriculum-approval-grid button { width: 100%; min-height: 2.5rem; border: 1px solid #2f7258; border-radius: .4rem; padding: .45rem .7rem; background: #2f7258; color: white; font: inherit; font-size: .67rem; font-weight: 750; cursor: pointer; }
+.curriculum-approval-grid button:disabled { cursor: not-allowed; opacity: .5; }
+.curriculum-approval-grid .curriculum-request-changes { margin-top: .5rem; border-color: #a55f42; background: #8c4f37; }
+.curriculum-approval-blockers,
+.curriculum-approval-history { margin: .65rem 0; padding-left: 1.1rem; }
+.curriculum-approval-blockers li,
+.curriculum-approval-history li { margin-top: .5rem; font-size: .63rem; line-height: 1.4; }
+.curriculum-approval-blockers span,
+.curriculum-approval-history span,
+.curriculum-approval-history time,
+.curriculum-approval-history em { display: block; margin-top: .12rem; color: var(--admin-muted); font-style: normal; }
+
 .curriculum-status-line { display: flex; align-items: center; justify-content: space-between; gap: .65rem; min-height: 2rem; border-top: 1px solid #edf1ef; font-size: .64rem; }
 .curriculum-status-line:first-of-type { border-top: 0; }
 .curriculum-status-line span { color: var(--admin-muted); }
@@ -461,6 +494,7 @@
   .curriculum-studio-inspector { border-top: 1px solid #d8e1dd; border-left: 0; }
   .curriculum-inspector-content { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .curriculum-inspector-content > .curriculum-studio-pane-heading { grid-column: 1 / -1; }
+  .curriculum-approval-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 760px) {
@@ -483,6 +517,7 @@
   .curriculum-draft-create { grid-template-columns: minmax(0, 1fr); }
   .curriculum-readonly-toolbar { grid-column: 1; }
   .curriculum-draft-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .curriculum-approval-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 480px) {

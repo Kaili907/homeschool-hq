@@ -19,6 +19,7 @@ import { readAdminAuditPage, AdminAuditReadError } from '../../admin/auditHttpSo
 import type { AdminAuditFilters, AdminAuditReadState } from '../../admin/auditLogModel'
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
 import { createCurriculumDraftAuthoringHttpSource } from '../../admin/curriculum-authoring/httpSource'
+import { createCurriculumApprovalHttpSource } from '../../admin/curriculum-approval/httpSource'
 import {
   createCurriculumStudioSource,
   CURRICULUM_STUDIO_NAVIGATION_REQUEST,
@@ -154,9 +155,14 @@ export function AdminConsoleRoute() {
   const [auditRetry, setAuditRetry] = useState(0)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const curriculumAuthoringSource = useMemo(() => createCurriculumDraftAuthoringHttpSource(), [])
+  const curriculumApprovalSource = useMemo(() => createCurriculumApprovalHttpSource(), [])
   const curriculumStudioSource = useMemo(
-    () => createCurriculumStudioSource(curriculumSource, curriculumAuthoringSource),
-    [curriculumAuthoringSource, curriculumSource],
+    () => createCurriculumStudioSource(
+      curriculumSource,
+      curriculumAuthoringSource,
+      curriculumApprovalSource,
+    ),
+    [curriculumApprovalSource, curriculumAuthoringSource, curriculumSource],
   )
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)

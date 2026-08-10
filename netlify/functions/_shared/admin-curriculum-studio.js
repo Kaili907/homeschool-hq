@@ -1,5 +1,6 @@
 import { importImmutableV1 } from '../../../src/curriculum-authoring/v2/v1Importer.node.ts'
 import { validateCurriculumSnapshot } from '../../../src/admin/curriculum-validation/engine.ts'
+import { createHash } from 'node:crypto'
 
 const SUPPORTED_RELEASE = '1.0.0'
 const ENTITY_COLLECTIONS = Object.freeze({
@@ -170,7 +171,7 @@ function snapshotFromMaterialization(materialization) {
   }
 }
 
-export function createAdminCurriculumStudioService({ authoring } = {}) {
+export function createAdminCurriculumStudioService({ authoring, approval } = {}) {
   if (!authoring) throw new Error('curriculum_authoring_service_required')
   return Object.freeze({
     readBaseIndex(version) {
@@ -210,15 +211,29 @@ export function createAdminCurriculumStudioService({ authoring } = {}) {
     async validateDraft(actorUserRef, draftId, expectedRevision) {
       const value = await materialize(authoring, actorUserRef, draftId, expectedRevision)
       const snapshot = snapshotFromMaterialization(value)
+      const run = validateCurriculumSnapshot(snapshot, {
+        origin: 'draft',
+        snapshotId: `${draftId}@${value.draft.revision}`,
+        expectedVersion: value.draft.targetVersion,
+      })
+      if (!approval) throw new Error('curriculum_approval_service_required')
+      const validationSnapshot = await approval.recordValidation(actorUserRef, {
+        draftId,
+        draftRevision: value.draft.revision,
+        engineVersion: run.engineVersion,
+        resultDigest: createHash('sha256').update(JSON.stringify(run)).digest('hex'),
+        status: run.status,
+        publicationReady: run.publicationReady,
+        blockingCount: run.summary.blocking,
+        blockingErrorCount: run.findings.filter((finding) => finding.blocking && finding.severity === 'error').length,
+        humanReviewBlockerCount: run.findings.filter((finding) => finding.blocking && finding.rule === 'standards.human_review_required').length,
+      })
       return {
         schemaVersion: 1,
         draftId,
         draftRevision: value.draft.revision,
-        run: validateCurriculumSnapshot(snapshot, {
-          origin: 'draft',
-          snapshotId: `${draftId}@${value.draft.revision}`,
-          expectedVersion: value.draft.targetVersion,
-        }),
+        validationSnapshot,
+        run,
       }
     },
   })

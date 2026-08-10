@@ -76,7 +76,21 @@ describe('Curriculum Studio materialization service', () => {
 
   it('binds validation to the exact draft revision and preserves Michigan PE human-review blockers', async () => {
     const authoring = { read: vi.fn(async () => detail([], 3)), readEntity: vi.fn() }
-    const service = createAdminCurriculumStudioService({ authoring })
+    const approval = {
+      recordValidation: vi.fn(async (_actor, input) => ({
+        validationSnapshotId: '40000000-0000-4000-8000-000000000001',
+        draftRevision: input.draftRevision,
+        engineVersion: input.engineVersion,
+        resultDigest: input.resultDigest,
+        status: input.status,
+        publicationReady: input.publicationReady,
+        blockingCount: input.blockingCount,
+        blockingErrorCount: input.blockingErrorCount,
+        humanReviewBlockerCount: input.humanReviewBlockerCount,
+        validatedAt: '2026-08-10T12:00:00Z',
+      })),
+    }
+    const service = createAdminCurriculumStudioService({ authoring, approval })
     const result = await service.validateDraft('actor', DRAFT_ID, 3)
     expect(result.draftRevision).toBe(3)
     expect(result.run.source.snapshotId).toBe(`${DRAFT_ID}@3`)
@@ -87,6 +101,18 @@ describe('Curriculum Studio materialization service', () => {
         entity: expect.objectContaining({ id: expect.stringContaining('physical-education') }),
       }),
     ]))
+    expect(result.validationSnapshot).toMatchObject({
+      draftRevision: 3,
+      status: result.run.status,
+      publicationReady: false,
+      humanReviewBlockerCount: expect.any(Number),
+    })
+    expect(approval.recordValidation).toHaveBeenCalledWith('actor', expect.objectContaining({
+      draftId: DRAFT_ID,
+      draftRevision: 3,
+      resultDigest: expect.stringMatching(/^[0-9a-f]{64}$/),
+      humanReviewBlockerCount: expect.any(Number),
+    }))
   })
 
   it('rejects stale materialization before reading entity payloads', async () => {

@@ -12,6 +12,7 @@ import {
 } from '../../curriculum-authoring/v2/contracts'
 import { validateWithSchema, type AuthoringSchema, type ValidationIssue } from '../../curriculum-authoring/v2/schema'
 import type { CurriculumSnapshotValidationRun } from '../curriculum-validation/engine'
+import type { CurriculumValidationSnapshotSummary } from '../curriculum-approval/contracts'
 
 export const CURRICULUM_DRAFT_SCHEMA_VERSION = 1 as const
 export const CURRICULUM_AUTHORING_SCHEMA_VERSION = '2.0.0' as const
@@ -159,6 +160,7 @@ export interface CurriculumDraftValidationResult {
   readonly schemaVersion: 1
   readonly draftId: string
   readonly draftRevision: number
+  readonly validationSnapshot: CurriculumValidationSnapshotSummary
   readonly run: CurriculumSnapshotValidationRun
 }
 

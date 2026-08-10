@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import { createAdminCurriculumAuthoringService } from './_shared/admin-curriculum-authoring.js'
+import { createAdminCurriculumApprovalService } from './_shared/admin-curriculum-approval.js'
 import { createAdminCurriculumRegistryReader } from './_shared/admin-curriculum-registry-reader.js'
 import { createAdminCurriculumStudioService } from './_shared/admin-curriculum-studio.js'
 import {
@@ -17,6 +18,10 @@ import {
   CURRICULUM_DRAFT_ENTITY_TYPES,
   validateCurriculumDraftEntity,
 } from '../../src/admin/curriculum-authoring/contracts.ts'
+import {
+  CURRICULUM_APPROVAL_DECISIONS,
+  CURRICULUM_APPROVAL_REASON_CODES,
+} from '../../src/admin/curriculum-approval/contracts.ts'
 import { loadAdminCurriculumValidationEvidence } from './_shared/admin-curriculum-evidence.js'
 
 const API_PREFIX = '/api/admin/curriculum/'
@@ -27,6 +32,8 @@ const TARGET_VERSION = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9.-]+)?$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const ENTITY_REF = /^[a-z0-9][a-z0-9:-]{2,127}$/
 const ENTITY_TYPES = new Set(CURRICULUM_DRAFT_ENTITY_TYPES)
+const APPROVAL_DECISIONS = new Set(CURRICULUM_APPROVAL_DECISIONS)
+const APPROVAL_REASON_CODES = new Set(CURRICULUM_APPROVAL_REASON_CODES)
 const MAX_BODY_BYTES = 1_100_000
 
 function decode(value) {
@@ -44,6 +51,9 @@ function draftRoute(resource) {
   const draftId = decode(segments[1])
   if (!draftId || !UUID.test(draftId)) return null
   if (segments.length === 2) return { kind: 'draft', draftId }
+  if (segments.length === 3 && segments[2] === 'approval') {
+    return { kind: 'draft-approval', draftId }
+  }
   if (
     segments.length === 4
     && (segments[2] === 'materialization' || segments[2] === 'validation')
@@ -209,6 +219,29 @@ function parseTombstone(event, route) {
   return { ...input, requestDigest: requestHash(input) }
 }
 
+function parseApprovalDecision(event, draftId) {
+  const body = exactBody(event, [
+    'draftRevision', 'decision', 'reasonCode', 'validationSnapshotId', 'idempotencyKey',
+  ])
+  if (!APPROVAL_DECISIONS.has(body.decision) || !APPROVAL_REASON_CODES.has(body.reasonCode)) {
+    throw Object.assign(new Error('invalid_request'), { request: true })
+  }
+  if (
+    (body.decision === 'approved' && body.reasonCode !== 'approval.ready')
+    || (body.decision === 'changes_requested' && !body.reasonCode.startsWith('changes.'))
+    || (body.validationSnapshotId !== null && (typeof body.validationSnapshotId !== 'string' || !UUID.test(body.validationSnapshotId)))
+  ) throw Object.assign(new Error('invalid_request'), { request: true })
+  const input = {
+    draftId,
+    draftRevision: boundedInteger(body.draftRevision, 1, Number.MAX_SAFE_INTEGER),
+    decision: body.decision,
+    reasonCode: body.reasonCode,
+    validationSnapshotId: body.validationSnapshotId === null ? null : uuid(body.validationSnapshotId),
+    idempotencyKey: uuid(body.idempotencyKey),
+  }
+  return { ...input, requestDigest: requestHash(input) }
+}
+
 function authoringMethod(route, method) {
   if (route.kind === 'drafts') return method === 'GET' || method === 'POST'
   if (route.kind === 'draft') return method === 'GET'
@@ -216,14 +249,18 @@ function authoringMethod(route, method) {
   if (route.kind === 'draft-entity') return method === 'GET' || method === 'PUT'
   if (route.kind === 'draft-entity-tombstone') return method === 'POST'
   if (route.kind === 'draft-materialization' || route.kind === 'draft-validation') return method === 'GET'
+  if (route.kind === 'draft-approval') return method === 'GET' || method === 'POST'
   return false
 }
 
-function serviceError(error) {
+function serviceError(error, unavailableCode = 'curriculum_authoring_unavailable') {
   if (error?.code === 'not-found') return errorResponse(404, 'curriculum_draft_unavailable')
+  if (error?.code === 'forbidden') return errorResponse(403, 'admin_access_denied')
+  if (error?.code === 'validation-blocked') return errorResponse(409, 'validation_blocked')
+  if (error?.code === 'decision-conflict') return errorResponse(409, 'approval_transition_conflict')
   if (error?.code === 'conflict' || error?.code === 'replay-conflict') return errorResponse(409, error.code === 'replay-conflict' ? 'idempotency_conflict' : 'revision_conflict')
   if (error?.code === 'invalid') return errorResponse(400, 'invalid_request')
-  return errorResponse(503, 'curriculum_authoring_unavailable')
+  return errorResponse(503, unavailableCode)
 }
 
 export function createAdminCurriculumHandler(overrides = {}) {
@@ -247,7 +284,12 @@ export function createAdminCurriculumHandler(overrides = {}) {
     fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
     client: overrides.authoringClient,
   })
-  const studio = overrides.studio ?? createAdminCurriculumStudioService({ authoring })
+  const approval = overrides.approval ?? createAdminCurriculumApprovalService({
+    env: overrides.env ?? process.env,
+    fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
+    client: overrides.approvalClient,
+  })
+  const studio = overrides.studio ?? createAdminCurriculumStudioService({ authoring, approval })
 
   return async (event) => {
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
@@ -259,33 +301,52 @@ export function createAdminCurriculumHandler(overrides = {}) {
       const writing = event.httpMethod !== 'GET'
       const authorized = await authorization.require(
         event,
-        writing ? 'curriculum:drafts:write' : 'curriculum:read',
+        route.kind === 'draft-approval' && writing
+          ? 'curriculum:approve'
+          : writing ? 'curriculum:drafts:write' : 'curriculum:read',
       )
       if (!authorized.ok) return authorized.response
       try {
         const actor = authorized.principal.userId
-        const value = route.kind === 'drafts' && event.httpMethod === 'GET'
-          ? await authoring.list(actor)
-          : route.kind === 'drafts'
-            ? await authoring.createDraft(actor, parseCreateDraft(event))
-            : route.kind === 'draft'
-              ? await authoring.read(actor, route.draftId)
-              : route.kind === 'draft-entities'
-                ? await authoring.createEntity(actor, parseCreateEntity(event, route.draftId))
-                : route.kind === 'draft-entity' && event.httpMethod === 'GET'
-                  ? await authoring.readEntity(actor, route.draftId, route.entityType, route.entityRef)
-                  : route.kind === 'draft-materialization'
-                    ? await studio.readMaterialization(actor, route.draftId, route.revision)
-                    : route.kind === 'draft-validation'
-                      ? await studio.validateDraft(actor, route.draftId, route.revision)
-                  : route.kind === 'draft-entity'
-                    ? await authoring.updateEntity(actor, parseUpdateEntity(event, route))
-                    : await authoring.tombstoneEntity(actor, parseTombstone(event, route))
-        return jsonResponse(writing && value.replayed === false && (route.kind === 'drafts' || route.kind === 'draft-entities') ? 201 : 200, value)
+        let value
+        if (route.kind === 'drafts' && event.httpMethod === 'GET') {
+          value = await authoring.list(actor)
+        } else if (route.kind === 'drafts') {
+          value = await authoring.createDraft(actor, parseCreateDraft(event))
+        } else if (route.kind === 'draft') {
+          value = await authoring.read(actor, route.draftId)
+        } else if (route.kind === 'draft-entities') {
+          value = await authoring.createEntity(actor, parseCreateEntity(event, route.draftId))
+        } else if (route.kind === 'draft-entity' && event.httpMethod === 'GET') {
+          value = await authoring.readEntity(actor, route.draftId, route.entityType, route.entityRef)
+        } else if (route.kind === 'draft-materialization') {
+          value = await studio.readMaterialization(actor, route.draftId, route.revision)
+        } else if (route.kind === 'draft-validation') {
+          value = await studio.validateDraft(actor, route.draftId, route.revision)
+        } else if (route.kind === 'draft-approval' && event.httpMethod === 'GET') {
+          value = await approval.read(actor, route.draftId)
+        } else if (route.kind === 'draft-approval') {
+          value = await approval.decide(actor, parseApprovalDecision(event, route.draftId))
+        } else if (route.kind === 'draft-entity') {
+          value = await authoring.updateEntity(actor, parseUpdateEntity(event, route))
+        } else {
+          value = await authoring.tombstoneEntity(actor, parseTombstone(event, route))
+        }
+        return jsonResponse(
+          writing && value.replayed === false
+            && (route.kind === 'drafts' || route.kind === 'draft-entities' || route.kind === 'draft-approval')
+            ? 201 : 200,
+          value,
+        )
       } catch (error) {
         if (error?.schema) return errorResponse(422, 'schema_v2_rejected')
         if (error?.request || error?.name === 'GatewayError') return errorResponse(400, 'invalid_request')
-        return serviceError(error)
+        return serviceError(
+          error,
+          route.kind === 'draft-approval'
+            ? 'curriculum_approval_unavailable'
+            : 'curriculum_authoring_unavailable',
+        )
       }
     }
 

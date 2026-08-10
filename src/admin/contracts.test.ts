@@ -72,6 +72,8 @@ describe('ADMIN-0 shared vocabulary', () => {
       'curriculum_entity.tombstone',
       'curriculum_draft.collaborator.add',
       'curriculum_draft.collaborator.revoke',
+      'curriculum_approval.approve',
+      'curriculum_approval.changes_requested',
       'curriculum.approve',
       'curriculum.publish',
       'release.activate',
@@ -85,6 +87,7 @@ describe('ADMIN-0 shared vocabulary', () => {
       'incident',
       'curriculum_draft',
       'curriculum_entity',
+      'curriculum_approval',
       'curriculum_release',
       'application_release',
     ])
