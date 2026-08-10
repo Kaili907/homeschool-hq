@@ -33,16 +33,19 @@ describe('Admin AI and Costs dashboard', () => {
 
   it('renders exact calculated and reconciled semantics with separate cache token classes', () => {
     const markup = render()
-    expect(markup).toContain('Calculated / estimated provider cost')
+    expect(markup).toContain('Usage-derived marginal provider cost')
     expect(markup).toContain('Reconciled cost')
     expect(markup).toContain('$9,007,199,254.74')
     expect(markup).toContain('Cached input read tokens')
     expect(markup).toContain('Cached input write tokens')
     expect(markup).toContain('TTS characters')
     expect(markup).toContain('Usage-derived marginal provider cost')
-    expect(markup).toContain('not a complete provider invoice')
+    expect(markup).toContain('Reconciled provider-invoice economics remain separate and are not inferred')
+    expect(markup).toContain('Complete for stored ledger rows')
     expect(markup).toContain('Provider traffic')
     expect(markup).toContain('Unverified')
+    expect(markup).not.toContain('500-record')
+    expect(markup).not.toContain('All provider traffic accounted for')
   })
 
   it('renders unavailable cost explicitly and never as $0', () => {
@@ -86,6 +89,26 @@ describe('Admin AI and Costs dashboard', () => {
     expect(markup).toContain('No learner-cost breakdown')
     expect(markup).not.toContain('accountRef')
     expect(markup).not.toContain('householdRef')
+  })
+
+  it('renders accounting-gap evidence separately from query and provider-traffic coverage', () => {
+    const source = costsModelFixture()
+    const model = costsModelFixture({
+      source: {
+        ...source.source,
+        status: 'partial',
+        reasons: ['accounting_gap_evidence'],
+        accountingGapEvidence: { observedCount: 2, retentionCoverage: 'retention_limited' },
+      },
+    })
+    const markup = render({ status: 'ready', model, freshness: 'current' })
+    expect(markup).toContain('Aggregate query')
+    expect(markup).toContain('Complete for stored ledger rows')
+    expect(markup).toContain('Provider traffic')
+    expect(markup).toContain('Unverified')
+    expect(markup).toMatch(/Observed accounting gaps<\/dt><dd>2/)
+    expect(markup).toContain('extends beyond the conservative telemetry-retention window')
+    expect(markup).not.toContain('All provider traffic accounted for')
   })
 
   it('distinguishes a proven empty range from unavailable and creates no fake trend points', () => {

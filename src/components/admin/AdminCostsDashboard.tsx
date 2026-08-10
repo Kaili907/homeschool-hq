@@ -21,6 +21,14 @@ const PRESET_LABELS = {
   month: 'Current month',
 } as const
 
+const QUERY_COVERAGE_LABELS: Readonly<Record<AdminCostsModel['source']['queryCoverage'], string>> = {
+  complete: 'Complete for stored ledger rows',
+}
+
+const PROVIDER_TRAFFIC_COVERAGE_LABELS: Readonly<Record<AdminCostsModel['source']['providerTrafficCoverage'], string>> = {
+  coverage_unverified: 'Unverified',
+}
+
 export interface AdminCostsDashboardProps {
   readonly authorized: boolean
   readonly state: AdminCostsReadState
@@ -192,7 +200,7 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
           <MetricCard label="Cached input read tokens" metric={model.summary.cachedInputReadTokens} />
           <MetricCard label="Cached input write tokens" metric={model.summary.cachedInputWriteTokens} />
           <MetricCard label="TTS characters" metric={model.summary.ttsCharacters} />
-          <MoneyCard label="Calculated / estimated provider cost" metric={model.summary.calculatedCost} />
+          <MoneyCard label="Usage-derived marginal provider cost" metric={model.summary.calculatedCost} />
           <MoneyCard label="Reconciled cost" metric={model.summary.reconciledCost} />
           <article className="admin-costs-card">
             <p>Unavailable costs</p>
@@ -200,7 +208,7 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
             <span>records without trustworthy cost</span>
           </article>
         </div>
-        <p className="admin-costs-disclosure">Calculated cost covers recorded marginal usage only. It excludes subscription or plan fees, taxes, credits, included allowances, rollover, account adjustments, and unrepresented discounts; it is not a complete provider invoice. Reconciled cost is separate.</p>
+        <p className="admin-costs-disclosure">Calculated cost is usage-derived marginal provider cost for recorded provider attempts using verified effective-dated pricing terms. It excludes subscription or plan fees, taxes, credits, included allowances, rollover, account adjustments, and unrepresented discounts. Reconciled provider-invoice economics remain separate and are not inferred.</p>
       </section>
 
       <section className="admin-costs-panel" aria-labelledby="cost-completeness-title">
@@ -222,8 +230,8 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
             ['Unavailable', model.summary.costKindCounts.unavailable],
           ]} />
           <div><h3>Coverage</h3><dl>
-            <div><dt>Aggregate query</dt><dd>Complete</dd></div>
-            <div><dt>Provider traffic</dt><dd>Unverified</dd></div>
+            <div><dt>Aggregate query</dt><dd>{QUERY_COVERAGE_LABELS[model.source.queryCoverage]}</dd></div>
+            <div><dt>Provider traffic</dt><dd>{PROVIDER_TRAFFIC_COVERAGE_LABELS[model.source.providerTrafficCoverage]}</dd></div>
             <div><dt>Observed accounting gaps</dt><dd>{model.source.accountingGapEvidence.observedCount.toLocaleString()}</dd></div>
           </dl></div>
         </div>
@@ -265,7 +273,7 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
       </div>
 
       <footer className="admin-costs-footer">
-        Projection generated <time dateTime={model.generatedAt}>{formatUtc(model.generatedAt)}</time>. Exact database aggregate of {model.source.recordsIncluded.toLocaleString()} recorded attempts across {model.source.groupCount.toLocaleString()} of {model.source.groupLimit.toLocaleString()} allowed groups. Provider-attempt coverage remains unverified.
+        Projection generated <time dateTime={model.generatedAt}>{formatUtc(model.generatedAt)}</time>. Exact database aggregate of {model.source.recordsIncluded.toLocaleString()} recorded attempts across {model.source.groupCount.toLocaleString()} of {model.source.groupLimit.toLocaleString()} allowed groups. Provider traffic: {PROVIDER_TRAFFIC_COVERAGE_LABELS[model.source.providerTrafficCoverage].toLowerCase()}.
       </footer>
     </>
   )

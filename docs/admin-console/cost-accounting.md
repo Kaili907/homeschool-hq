@@ -1,7 +1,9 @@
 # AI and TTS usage and cost accounting contract
 
-Status: ADMIN cost contract version 2. Version 2 supersedes the version 1 cost
-shape; it does not loosen the privacy or exact-money boundaries.
+Status: the canonical `AdminUsageCostRecord` ledger row remains version 2, which
+supersedes the version 1 row shape. The authorized Admin Costs aggregate
+response is contract version 3. Neither version loosens the privacy or
+exact-money boundaries.
 
 ## Boundary
 
@@ -124,6 +126,26 @@ For each priced component:
 
 Round each component once, then sum component micros with checked integer
 arithmetic. Aggregate totals are integer-micro sums.
+
+## Admin Costs aggregate response v3
+
+`GET /api/admin/v1/costs` uses the exact database aggregate for supported
+half-open ranges of at most 366 days. Successful results never use the bounded
+raw-row diagnostic reader as their authority and fail instead of truncating at
+the 384-group ceiling.
+
+The version 3 `source` preserves `recordsIncluded` and carries distinct
+`queryCoverage`, `providerTrafficCoverage`, `groupLimit`, `groupCount`, and
+`accountingGapEvidence` fields. `queryCoverage: complete` proves coverage of
+matching stored ledger rows only. It does not promote
+`providerTrafficCoverage: coverage_unverified`, and a zero accounting-gap count
+does not prove all provider attempts were recorded.
+
+All integer-micro money fields remain canonical decimal strings through browser
+decode and presentation. The supported calculated-cost claim is usage-derived
+marginal provider cost for recorded provider attempts using verified
+effective-dated pricing terms. It does not represent provider invoice totals or
+provider-account economics.
 
 ## Operational result, billing disposition, and cost kind
 
