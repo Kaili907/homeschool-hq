@@ -30,6 +30,7 @@ const NAVIGATION: readonly { id: AdminSection; label: string; capability: AdminC
   { id: 'engines', label: 'Engine Performance', capability: 'engines:read' },
   { id: 'costs', label: 'AI & Costs', capability: 'costs:read' },
   { id: 'system-health', label: 'System Health', capability: 'health:read' },
+  { id: 'study-operations', label: 'Study Operations', capability: 'health:read' },
   { id: 'safety', label: 'Safety', capability: 'safety:read' },
   { id: 'curriculum', label: 'Curriculum', capability: 'curriculum:read' },
   { id: 'audit-log', label: 'Audit Log', capability: 'audit:read' },
@@ -456,6 +457,7 @@ function BrandMark() {
 
 function NavIcon({ section }: { section: AdminSection }) {
   const icons: Record<AdminSection, string> = {
+    'study-operations': 'S',
     overview: '⌂', learners: '◉', engines: '◇', costs: '✦', curriculum: '▤',
     safety: '◆', 'system-health': '⌁', configuration: '⚙', 'audit-log': '≡', releases: '↑',
   }
