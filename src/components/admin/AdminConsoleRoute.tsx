@@ -36,6 +36,8 @@ import type { AdminEngineId } from '../../admin/contracts'
 import type { EnginePerformanceWindowPreset } from '../../admin/enginePerformanceModel'
 import { readSystemHealth, type SystemHealthReadState } from '../../admin/systemHealthClient'
 import type { SystemHealthWindow } from '../../admin/systemHealth'
+import { readAdminStudyOperations } from '../../admin/studyOperationsHttpSource'
+import type { StudyOperationsReadState } from '../../admin/studyOperationsModel'
 import { AdminConsole, AdminShell } from './AdminConsole'
 import { AdminCostsDashboard } from './AdminCostsDashboard'
 import { LearnerAnalytics } from './LearnerAnalytics'
@@ -44,6 +46,7 @@ import { CurriculumValidationDashboard } from './CurriculumValidationDashboard'
 import { EnginePerformanceDashboard } from './EnginePerformanceDashboard'
 import { SystemHealthDashboard } from './SystemHealthDashboard'
 import { AdminAuditLog } from './AdminAuditLog'
+import { AdminStudyOperations } from './AdminStudyOperations'
 
 export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
 
@@ -55,7 +58,7 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (suffix === 'health' || suffix.startsWith('health/')) return 'system-health'
   const section = suffix.split('/')[0]
   return [
-    'learners', 'engines', 'costs', 'curriculum', 'safety', 'system-health',
+    'learners', 'engines', 'costs', 'curriculum', 'safety', 'system-health', 'study-operations',
     'configuration', 'audit-log', 'releases',
   ].includes(section) ? section as AdminSection : 'unknown'
 }
@@ -92,6 +95,8 @@ export function AdminConsoleRoute() {
   const [healthWindow, setHealthWindow] = useState<SystemHealthWindow>('1h')
   const [healthReload, setHealthReload] = useState(0)
   const [healthReadState, setHealthReadState] = useState<SystemHealthReadState>({ status: 'loading' })
+  const [studyOperationsState, setStudyOperationsState] = useState<StudyOperationsReadState>({ status: 'loading' })
+  const [studyOperationsRetry, setStudyOperationsRetry] = useState(0)
   const [validationModel, setValidationModel] = useState<CurriculumValidationReadModel | null>(null)
   const [engineState, setEngineState] = useState<EnginePerformanceReadState>({ status: 'loading' })
   const [selectedEngine, setSelectedEngine] = useState<AdminEngineId>('tutor')
@@ -262,6 +267,21 @@ export function AdminConsoleRoute() {
   }, [authorizationState, section, healthWindow, healthReload])
 
   useEffect(() => {
+    if (section !== 'study-operations' || !hasCapability(authorization, 'health:read')) {
+      setStudyOperationsState(section === 'study-operations'
+        ? { status: 'denied' }
+        : { status: 'loading' })
+      return
+    }
+    const controller = new AbortController()
+    setStudyOperationsState({ status: 'loading' })
+    void readAdminStudyOperations({ signal: controller.signal }).then((state) => {
+      if (!controller.signal.aborted) setStudyOperationsState(state)
+    })
+    return () => controller.abort()
+  }, [authorizationState, section, studyOperationsRetry])
+
+  useEffect(() => {
     const onPopState = () => setPathname(window.location.pathname)
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
@@ -311,12 +331,13 @@ export function AdminConsoleRoute() {
   const title = section === 'curriculum-validation'
     ? 'Curriculum validation'
     : section === 'system-health' ? 'System Health'
-      : section === 'engines' ? 'Engine Performance'
-        : section === 'costs' ? 'AI & Costs'
-          : section === 'learners' ? 'Learner Analytics'
-            : section === 'safety' ? 'Safety Operations'
-              : section === 'audit-log' ? 'Audit Log'
-                : section === 'curriculum' ? 'Curriculum' : 'Admin section unavailable'
+      : section === 'study-operations' ? 'Study Operations'
+        : section === 'engines' ? 'Engine Performance'
+          : section === 'costs' ? 'AI & Costs'
+            : section === 'learners' ? 'Learner Analytics'
+              : section === 'safety' ? 'Safety Operations'
+                : section === 'audit-log' ? 'Audit Log'
+                  : section === 'curriculum' ? 'Curriculum' : 'Admin section unavailable'
 
   return (
     <AdminShell
@@ -388,6 +409,13 @@ export function AdminConsoleRoute() {
             onRetry={() => setHealthReload((value) => value + 1)}
           />
         )}
+        {section === 'study-operations' && (
+          <AdminStudyOperations
+            authorized={hasCapability(authorization, 'health:read')}
+            state={studyOperationsState}
+            onRetry={() => setStudyOperationsRetry((value) => value + 1)}
+          />
+        )}
         {section === 'audit-log' && (
           <AdminAuditLog
             authorized={hasCapability(authorization, 'audit:read')}
@@ -401,7 +429,7 @@ export function AdminConsoleRoute() {
             onRetry={() => setAuditRetry((value) => value + 1)}
           />
         )}
-        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'audit-log'].includes(section) && (
+        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'study-operations', 'audit-log'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>

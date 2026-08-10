@@ -58,6 +58,11 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/v1/study-operations"
+  to = "/.netlify/functions/admin-study-operations"
+  status = 200
+
+[[redirects]]
   from = "/api/admin/v1/safety-operations"
   to = "/.netlify/functions/admin-safety-operations"
   status = 200

@@ -134,6 +134,7 @@ describe('AdminConsole authorization and load states', () => {
     )
     expect(markup).toContain('AI &amp; Costs')
     expect(markup).toContain('System Health')
+    expect(markup).toContain('Study Operations')
     expect(markup).toContain('aria-current="page"')
     expect(markup).not.toContain('>Overview<')
     expect(markup).not.toContain('>Learners<')
