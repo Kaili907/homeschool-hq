@@ -130,9 +130,9 @@ const mutants = [
     label: 'remove positive safety-stop cancellation',
     files: [surfacePath],
     tests: authorityTests,
-    mutate: (source) => stoppedBranch(source, (branch) => replaceExact(
+    mutate: (source) => stoppedBranch(source, (branch) => replacePattern(
       branch,
-      "          lifecycle.cancelIfCurrent(token, 'safety-stop')\n",
+      /          lifecycle\.cancelIfCurrent\(token, 'safety-stop'\)\r?\n/,
       '',
     )),
   },
