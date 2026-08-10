@@ -22,6 +22,8 @@
 
 .curriculum-workflow-nav ul {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: .25rem;
   margin: 0;
   padding: 0;

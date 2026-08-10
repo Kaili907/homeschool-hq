@@ -6,6 +6,7 @@ import {
   createAdminCurriculumIntegrityEvidenceReader,
   createAdminCurriculumIntegrityService,
 } from './_shared/admin-curriculum-integrity.js'
+import { createAdminCurriculumActivationPersistence } from './_shared/admin-curriculum-activation.js'
 import { createAdminCurriculumRegistryReader } from './_shared/admin-curriculum-registry-reader.js'
 import { createAdminCurriculumStagingPersistence } from './_shared/admin-curriculum-staging.js'
 import { createAdminCurriculumPublishingPersistence } from './_shared/admin-curriculum-publishing.js'
@@ -103,6 +104,7 @@ function routeFromPath(path) {
   if (resource === 'catalog') return { kind: 'catalog' }
   if (resource === 'validation') return { kind: 'validation' }
   if (resource === 'integrity') return { kind: 'integrity' }
+  if (resource === 'activation') return { kind: 'activation' }
   if (resource === 'releases') return { kind: 'releases' }
   if (resource === 'production-pointer') return { kind: 'production-pointer' }
   if (resource.startsWith('releases/')) {
@@ -273,6 +275,30 @@ function parsePublishingRequest(event, draftId) {
   }
 }
 
+function parseActivationRequest(event) {
+  const body = exactBody(event, [
+    'targetReleaseVersion', 'expectedPointerRevision', 'transitionKind',
+    'reasonCode', 'idempotencyKey',
+  ])
+  if (!['activation', 'rollback'].includes(body.transitionKind)) {
+    throw Object.assign(new Error('invalid_request'), { request: true })
+  }
+  const expectedReason = body.transitionKind === 'activation'
+    ? 'release.activated' : 'release.rolled_back'
+  if (body.reasonCode !== expectedReason) {
+    throw Object.assign(new Error('invalid_request'), { request: true })
+  }
+  return {
+    targetReleaseVersion: version(body.targetReleaseVersion, RELEASE_VERSION),
+    expectedPointerRevision: boundedInteger(
+      body.expectedPointerRevision, 1, Number.MAX_SAFE_INTEGER,
+    ),
+    transitionKind: body.transitionKind,
+    reasonCode: body.reasonCode,
+    idempotencyKey: uuid(body.idempotencyKey),
+  }
+}
+
 function authoringMethod(route, method) {
   if (route.kind === 'drafts') return method === 'GET' || method === 'POST'
   if (route.kind === 'draft') return method === 'GET'
@@ -310,6 +336,18 @@ function serviceError(error, unavailableCode = 'curriculum_authoring_unavailable
   return errorResponse(503, unavailableCode)
 }
 
+function activationError(error) {
+  if (error?.code === 'forbidden') return errorResponse(403, 'admin_access_denied')
+  if (error?.code === 'invalid') return errorResponse(400, 'invalid_request')
+  if (error?.code === 'target-not-found') return errorResponse(404, 'curriculum_release_unavailable')
+  if (error?.code === 'replay-conflict') return errorResponse(409, 'idempotency_conflict')
+  if (error?.code === 'pointer-conflict') return errorResponse(409, 'pointer_revision_conflict')
+  if (error?.code === 'target-not-published') return errorResponse(409, 'target_not_published')
+  if (error?.code === 'artifacts-unavailable') return errorResponse(409, 'release_artifacts_unavailable')
+  if (error?.code === 'kind-conflict') return errorResponse(409, 'transition_kind_conflict')
+  return errorResponse(503, 'curriculum_activation_unavailable')
+}
+
 export function createAdminCurriculumHandler(overrides = {}) {
   const authorization = overrides.authorization ?? createAdminAuthorization({
     env: overrides.env ?? process.env,
@@ -345,6 +383,11 @@ export function createAdminCurriculumHandler(overrides = {}) {
     env: overrides.env ?? process.env,
     fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
     client: overrides.publishingClient,
+  })
+  const activation = overrides.activation ?? createAdminCurriculumActivationPersistence({
+    env: overrides.env ?? process.env,
+    fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
+    client: overrides.activationClient,
   })
   const studio = overrides.studio ?? createAdminCurriculumStudioService({ authoring, approval, staging })
   const integrityEvidence = overrides.integrityEvidence ?? createAdminCurriculumIntegrityEvidenceReader({
@@ -429,6 +472,35 @@ export function createAdminCurriculumHandler(overrides = {}) {
                 ? 'curriculum_publication_unavailable'
             : 'curriculum_authoring_unavailable',
         )
+      }
+    }
+
+    if (route.kind === 'activation') {
+      if (!['GET', 'POST'].includes(event?.httpMethod)) {
+        return errorResponse(405, 'method_not_allowed', { allow: 'GET, POST' })
+      }
+      const writing = event.httpMethod === 'POST'
+      const authorized = await authorization.require(
+        event,
+        writing ? 'releases:manage' : 'curriculum:read',
+      )
+      if (!authorized.ok) return authorized.response
+      try {
+        const value = writing
+          ? await activation.transition(
+            authorized.principal.userId,
+            parseActivationRequest(event),
+          )
+          : await activation.read(authorized.principal.userId)
+        return jsonResponse(
+          writing && value.transition.state === 'transitioned' && !value.replayed ? 201 : 200,
+          value,
+        )
+      } catch (error) {
+        if (error?.request || error?.name === 'GatewayError') {
+          return errorResponse(400, 'invalid_request')
+        }
+        return activationError(error)
       }
     }
 

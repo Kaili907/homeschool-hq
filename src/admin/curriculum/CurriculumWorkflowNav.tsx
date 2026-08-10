@@ -1,4 +1,4 @@
-export type CurriculumWorkflowView = 'published' | 'integrity' | 'studio' | 'validation' | 'preview'
+export type CurriculumWorkflowView = 'published' | 'integrity' | 'studio' | 'validation' | 'preview' | 'activation'
 
 const WORKFLOW_DESTINATIONS: readonly {
   readonly id: CurriculumWorkflowView
@@ -10,6 +10,7 @@ const WORKFLOW_DESTINATIONS: readonly {
   { id: 'studio', label: 'Studio', path: '/academy/admin/curriculum/studio' },
   { id: 'validation', label: 'Validation', path: '/academy/admin/curriculum/validation' },
   { id: 'preview', label: 'Preview / Diff', path: '/academy/admin/curriculum/preview' },
+  { id: 'activation', label: 'Activation / Rollback', path: '/academy/admin/curriculum/activation' },
 ]
 
 export function CurriculumWorkflowNav({

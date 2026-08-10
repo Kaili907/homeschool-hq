@@ -213,6 +213,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-curriculum-release-publishing-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810160000",
+      "filename": "20260810160000_academy_curriculum_activation_rollback.sql",
+      "sha256": "e3283b843b8503d4634ab7fda771529b6eccba1626d23d4fac9cb28dc48c3bf0",
+      "dependency": "20260810150000_academy_curriculum_release_staging.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-curriculum-activation-rollback-v1",
+      "supersessionStatus": "current"
     }
   ]
 }
