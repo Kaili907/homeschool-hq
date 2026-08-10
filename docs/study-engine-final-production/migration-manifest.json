@@ -183,6 +183,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-curriculum-draft-authoring-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810141500",
+      "filename": "20260810141500_academy_curriculum_draft_collaborators.sql",
+      "sha256": "7c234539d46619ab41f6941a809d4fcdf834241f5dc8a5c3411ed4e398510121",
+      "dependency": "20260810120000_academy_curriculum_draft_authoring.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-curriculum-draft-collaborators-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

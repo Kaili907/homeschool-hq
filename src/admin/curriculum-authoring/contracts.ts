@@ -29,6 +29,7 @@ export const CURRICULUM_DRAFT_ENTITY_TYPES = [
 export type CurriculumDraftEntityType = (typeof CURRICULUM_DRAFT_ENTITY_TYPES)[number]
 export type CurriculumDraftEntityOrigin = 'base_override' | 'draft_created'
 export type CurriculumDraftEntityPayload = Course | Unit | Lesson | Assessment | MediaResource
+export type CurriculumDraftCollaboratorResponsibility = 'editor' | 'reviewer'
 
 const schemas: Readonly<Record<CurriculumDraftEntityType, AuthoringSchema<unknown>>> = Object.freeze({
   course: courseSchema,
@@ -118,6 +119,31 @@ export interface CurriculumDraftMutationResult {
   readonly entity?: CurriculumDraftEntitySummary
 }
 
+export interface CurriculumDraftCollaborator {
+  readonly principalRef: string
+  readonly responsibility: CurriculumDraftCollaboratorResponsibility
+  readonly status: 'active' | 'revoked'
+  readonly assignmentRevision: number
+  readonly assignedAt: string
+  readonly revokedAt: string | null
+}
+
+export interface CurriculumDraftCollaborators {
+  readonly schemaVersion: typeof CURRICULUM_DRAFT_SCHEMA_VERSION
+  readonly draftId: string
+  readonly draftRevision: number
+  readonly currentResponsibility: CurriculumDraftCollaboratorResponsibility
+  readonly collaborators: readonly CurriculumDraftCollaborator[]
+}
+
+export interface CurriculumDraftCollaboratorMutationResult {
+  readonly schemaVersion: typeof CURRICULUM_DRAFT_SCHEMA_VERSION
+  readonly replayed: boolean
+  readonly draftId: string
+  readonly draftRevision: number
+  readonly collaborator: CurriculumDraftCollaborator
+}
+
 export interface CurriculumStudioEntityIndexEntry {
   readonly entityType: CurriculumDraftEntityType
   readonly entityRef: string
@@ -200,6 +226,21 @@ export interface TombstoneCurriculumDraftEntityInput {
   readonly idempotencyKey: string
 }
 
+export interface AddCurriculumDraftCollaboratorInput {
+  readonly draftId: string
+  readonly principalRef: string
+  readonly responsibility: CurriculumDraftCollaboratorResponsibility
+  readonly expectedDraftRevision: number
+  readonly idempotencyKey: string
+}
+
+export interface RevokeCurriculumDraftCollaboratorInput {
+  readonly draftId: string
+  readonly principalRef: string
+  readonly expectedDraftRevision: number
+  readonly idempotencyKey: string
+}
+
 export interface CurriculumDraftAuthoringSource {
   listDrafts(): Promise<{ readonly schemaVersion: 1; readonly drafts: readonly CurriculumDraftSummary[] }>
   readDraft(draftId: string): Promise<CurriculumDraftDetail>
@@ -208,6 +249,9 @@ export interface CurriculumDraftAuthoringSource {
   createEntity(input: CreateCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
   updateEntity(input: UpdateCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
   tombstoneEntity(input: TombstoneCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
+  listCollaborators(draftId: string): Promise<CurriculumDraftCollaborators>
+  addCollaborator(input: AddCurriculumDraftCollaboratorInput): Promise<CurriculumDraftCollaboratorMutationResult>
+  revokeCollaborator(input: RevokeCurriculumDraftCollaboratorInput): Promise<CurriculumDraftCollaboratorMutationResult>
   readBaseIndex(baseReleaseVersion: string): Promise<CurriculumBaseAuthoringIndex>
   readBaseEntity(
     baseReleaseVersion: string,
@@ -220,7 +264,13 @@ export interface CurriculumDraftAuthoringSource {
 
 export class CurriculumDraftAuthoringError extends Error {
   readonly code: 'unauthenticated' | 'forbidden' | 'invalid' | 'conflict' | 'not-found' | 'unavailable'
-  readonly reason?: 'revision-conflict' | 'idempotency-conflict' | 'schema-v2-rejected'
+  readonly reason?:
+    | 'revision-conflict'
+    | 'idempotency-conflict'
+    | 'schema-v2-rejected'
+    | 'verified-principal-required'
+    | 'last-editor'
+    | 'already-assigned'
 
   constructor(code: CurriculumDraftAuthoringError['code'], reason?: CurriculumDraftAuthoringError['reason']) {
     super(code)

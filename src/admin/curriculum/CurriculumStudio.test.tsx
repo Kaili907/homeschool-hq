@@ -5,11 +5,14 @@ import type { AdminCapability } from '../contracts'
 import type { CurriculumCatalog, CurriculumLessonSummary } from './contracts'
 import type {
   CurriculumDraftAuthoringSource,
+  CurriculumDraftCollaborators,
+  CurriculumDraftDetail,
   CurriculumStudioEntityIndexEntry,
 } from '../curriculum-authoring/contracts'
 import {
   CurriculumStudio,
   CurriculumStudioView,
+  confirmCurriculumCollaboratorRevocation,
   confirmCurriculumNavigation,
   curriculumPayloadDirty,
   curriculumSavedMessage,
@@ -69,6 +72,41 @@ const catalog: CurriculumCatalog = {
 
 const viewerCapabilities: readonly AdminCapability[] = ['curriculum:read']
 const authorCapabilities: readonly AdminCapability[] = ['curriculum:read', 'curriculum:drafts:write']
+const DRAFT_ID = '10000000-0000-4000-8000-000000000001'
+const EDITOR_ID = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
+const REVIEWER_ID = 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'
+
+const openDraft: CurriculumDraftDetail = {
+  schemaVersion: 1,
+  draftId: DRAFT_ID,
+  baseReleaseVersion: '1.0.0',
+  targetVersion: '2.0.0-draft.1',
+  authoringSchemaVersion: '2.0.0',
+  lifecycleState: 'draft',
+  revision: 3,
+  createdAt: '2026-08-10T12:00:00Z',
+  updatedAt: '2026-08-10T12:05:00Z',
+  entities: [],
+}
+
+function collaborators(currentResponsibility: 'editor' | 'reviewer'): CurriculumDraftCollaborators {
+  return {
+    schemaVersion: 1,
+    draftId: DRAFT_ID,
+    draftRevision: 3,
+    currentResponsibility,
+    collaborators: [
+      {
+        principalRef: EDITOR_ID, responsibility: 'editor', status: 'active',
+        assignmentRevision: 1, assignedAt: '2026-08-10T12:00:00Z', revokedAt: null,
+      },
+      {
+        principalRef: REVIEWER_ID, responsibility: 'reviewer', status: 'active',
+        assignmentRevision: 1, assignedAt: '2026-08-10T12:01:00Z', revokedAt: null,
+      },
+    ],
+  }
+}
 
 const baseEntries: readonly CurriculumStudioEntityIndexEntry[] = [
   {
@@ -101,6 +139,7 @@ function authoringSource(): CurriculumDraftAuthoringSource {
     listDrafts: vi.fn(async () => ({ schemaVersion: 1 as const, drafts: [] })),
     readDraft: vi.fn(), readEntity: vi.fn(), createDraft: vi.fn(), createEntity: vi.fn(),
     updateEntity: vi.fn(), tombstoneEntity: vi.fn(),
+    listCollaborators: vi.fn(), addCollaborator: vi.fn(), revokeCollaborator: vi.fn(),
     readBaseIndex: vi.fn(async () => ({ schemaVersion: 1 as const, baseReleaseVersion: '1.0.0', entities: baseEntries })),
     readBaseEntity: vi.fn(), readMaterialization: vi.fn(), validateDraft: vi.fn(),
   }
@@ -241,6 +280,61 @@ describe('Curriculum Studio shell', () => {
     expect(markup).toContain('Create from 1.0.0')
   })
 
+  it('renders bounded collaborator assignments with labeled add/revoke controls for editors', () => {
+    const markup = renderToStaticMarkup(
+      <CurriculumStudioView
+        catalog={catalog}
+        capabilities={authorCapabilities}
+        source={studioSource}
+        initialBaseEntries={baseEntries}
+        initialOpenDraft={openDraft}
+        initialCollaboration={collaborators('editor')}
+      />,
+    )
+    expect(markup).toContain('Current draft collaborators')
+    expect(markup).toContain('Add verified Admin principal')
+    expect(markup).toContain('for="curriculum-collaborator-principal"')
+    expect(markup).toContain(`aria-label="Revoke reviewer collaborator ${REVIEWER_ID}"`)
+    expect(markup).toContain('Editor requires underlying curriculum:drafts:write')
+    expect(markup).not.toMatch(/email|learner|student work|private note/i)
+  })
+
+  it('keeps a globally capable reviewer read-only and confirms destructive revocation accessibly', () => {
+    const markup = renderToStaticMarkup(
+      <CurriculumStudioView
+        catalog={catalog}
+        capabilities={authorCapabilities}
+        source={studioSource}
+        initialBaseEntries={baseEntries}
+        initialOpenDraft={openDraft}
+        initialCollaboration={collaborators('reviewer')}
+      />,
+    )
+    expect(markup).toContain('Reviewer assignment')
+    expect(markup).toContain('resource assignment is read-only')
+    expect(markup).not.toContain('Add verified Admin principal')
+    expect(markup).not.toContain('>Revoke</button>')
+    const confirm = vi.fn(() => false)
+    expect(confirmCurriculumCollaboratorRevocation(REVIEWER_ID, 'reviewer', confirm)).toBe(false)
+    expect(confirm).toHaveBeenCalledWith(
+      `Revoke reviewer access for Admin principal ${REVIEWER_ID}?`,
+    )
+  })
+
+  it('renders the collaborator empty state without inventing authority', () => {
+    const markup = renderToStaticMarkup(
+      <CurriculumStudioView
+        catalog={catalog}
+        capabilities={authorCapabilities}
+        source={studioSource}
+        initialBaseEntries={baseEntries}
+        initialOpenDraft={openDraft}
+        initialCollaboration={{ ...collaborators('editor'), collaborators: [] }}
+      />,
+    )
+    expect(markup).toContain('No current collaborators')
+  })
+
   it('fails closed before curriculum read authorization and never calls the source during render', () => {
     const loadPublishedCatalog = vi.fn()
     const markup = renderToStaticMarkup(
@@ -279,10 +373,15 @@ describe('Curriculum Studio shell', () => {
 
   it('defines desktop, tablet, mobile, and visible-focus behavior', () => {
     const css = readFileSync(new URL('./curriculum-studio.css', import.meta.url), 'utf8')
+    const component = readFileSync(new URL('./CurriculumStudio.tsx', import.meta.url), 'utf8')
     expect(css).toContain('grid-template-areas: "tree editor inspector"')
     expect(css).toContain('@container (max-width: 1050px)')
     expect(css).toContain('@media (max-width: 760px)')
     expect(css).toContain('@media (max-width: 480px)')
     expect(css).toContain(':focus-visible')
+    expect(component).toContain('Permission denied: this Admin principal is not assigned to the draft.')
+    expect(component).toContain('Collaborators are unavailable. The draft remains conservatively read-only.')
+    expect(component).toContain('Stale collaborator change: refresh the draft before trying again.')
+    expect(component).toContain('Retry will reuse the same idempotency key.')
   })
 })

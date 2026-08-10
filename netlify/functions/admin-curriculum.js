@@ -44,6 +44,17 @@ function draftRoute(resource) {
   const draftId = decode(segments[1])
   if (!draftId || !UUID.test(draftId)) return null
   if (segments.length === 2) return { kind: 'draft', draftId }
+  if (segments[2] === 'collaborators') {
+    if (segments.length === 3) return { kind: 'draft-collaborators', draftId }
+    const principalRef = segments.length > 3 ? decode(segments[3]) : null
+    if (
+      segments.length === 5
+      && segments[4] === 'revoke'
+      && principalRef
+      && UUID.test(principalRef)
+    ) return { kind: 'draft-collaborator-revoke', draftId, principalRef: principalRef.toLowerCase() }
+    return null
+  }
   if (
     segments.length === 4
     && (segments[2] === 'materialization' || segments[2] === 'validation')
@@ -209,9 +220,39 @@ function parseTombstone(event, route) {
   return { ...input, requestDigest: requestHash(input) }
 }
 
+function parseAddCollaborator(event, draftId) {
+  const body = exactBody(event, [
+    'principalRef', 'responsibility', 'expectedDraftRevision', 'idempotencyKey',
+  ])
+  if (!['editor', 'reviewer'].includes(body.responsibility)) {
+    throw Object.assign(new Error('invalid_request'), { request: true })
+  }
+  const input = {
+    draftId,
+    principalRef: uuid(body.principalRef),
+    responsibility: body.responsibility,
+    expectedDraftRevision: boundedInteger(body.expectedDraftRevision, 1, Number.MAX_SAFE_INTEGER),
+    idempotencyKey: uuid(body.idempotencyKey),
+  }
+  return { ...input, requestDigest: requestHash(input) }
+}
+
+function parseRevokeCollaborator(event, route) {
+  const body = exactBody(event, ['expectedDraftRevision', 'idempotencyKey'])
+  const input = {
+    draftId: route.draftId,
+    principalRef: route.principalRef,
+    expectedDraftRevision: boundedInteger(body.expectedDraftRevision, 1, Number.MAX_SAFE_INTEGER),
+    idempotencyKey: uuid(body.idempotencyKey),
+  }
+  return { ...input, requestDigest: requestHash(input) }
+}
+
 function authoringMethod(route, method) {
   if (route.kind === 'drafts') return method === 'GET' || method === 'POST'
   if (route.kind === 'draft') return method === 'GET'
+  if (route.kind === 'draft-collaborators') return method === 'GET' || method === 'POST'
+  if (route.kind === 'draft-collaborator-revoke') return method === 'POST'
   if (route.kind === 'draft-entities') return method === 'POST'
   if (route.kind === 'draft-entity') return method === 'GET' || method === 'PUT'
   if (route.kind === 'draft-entity-tombstone') return method === 'POST'
@@ -221,6 +262,10 @@ function authoringMethod(route, method) {
 
 function serviceError(error) {
   if (error?.code === 'not-found') return errorResponse(404, 'curriculum_draft_unavailable')
+  if (error?.code === 'forbidden') return errorResponse(403, 'curriculum_collaboration_required')
+  if (error?.code === 'verified-principal') return errorResponse(422, 'verified_admin_principal_required')
+  if (error?.code === 'last-editor') return errorResponse(422, 'last_editor_required')
+  if (error?.code === 'already-assigned') return errorResponse(409, 'collaborator_already_assigned')
   if (error?.code === 'conflict' || error?.code === 'replay-conflict') return errorResponse(409, error.code === 'replay-conflict' ? 'idempotency_conflict' : 'revision_conflict')
   if (error?.code === 'invalid') return errorResponse(400, 'invalid_request')
   return errorResponse(503, 'curriculum_authoring_unavailable')
@@ -270,6 +315,12 @@ export function createAdminCurriculumHandler(overrides = {}) {
             ? await authoring.createDraft(actor, parseCreateDraft(event))
             : route.kind === 'draft'
               ? await authoring.read(actor, route.draftId)
+              : route.kind === 'draft-collaborators' && event.httpMethod === 'GET'
+                ? await authoring.listCollaborators(actor, route.draftId)
+                : route.kind === 'draft-collaborators'
+                  ? await authoring.addCollaborator(actor, parseAddCollaborator(event, route.draftId))
+                  : route.kind === 'draft-collaborator-revoke'
+                    ? await authoring.revokeCollaborator(actor, parseRevokeCollaborator(event, route))
               : route.kind === 'draft-entities'
                 ? await authoring.createEntity(actor, parseCreateEntity(event, route.draftId))
                 : route.kind === 'draft-entity' && event.httpMethod === 'GET'
@@ -281,7 +332,14 @@ export function createAdminCurriculumHandler(overrides = {}) {
                   : route.kind === 'draft-entity'
                     ? await authoring.updateEntity(actor, parseUpdateEntity(event, route))
                     : await authoring.tombstoneEntity(actor, parseTombstone(event, route))
-        return jsonResponse(writing && value.replayed === false && (route.kind === 'drafts' || route.kind === 'draft-entities') ? 201 : 200, value)
+        return jsonResponse(
+          writing
+            && value.replayed === false
+            && ['drafts', 'draft-entities', 'draft-collaborators'].includes(route.kind)
+            ? 201
+            : 200,
+          value,
+        )
       } catch (error) {
         if (error?.schema) return errorResponse(422, 'schema_v2_rejected')
         if (error?.request || error?.name === 'GatewayError') return errorResponse(400, 'invalid_request')

@@ -60,6 +60,69 @@ describe('Curriculum Studio authoring HTTP source', () => {
     ])
   })
 
+  it('uses draft-scoped collaborator routes without browser authority claims', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue({
+      ok: true, status: 200,
+      json: vi.fn().mockResolvedValue({
+        schemaVersion: 1, replayed: false, draftId: DRAFT, draftRevision: 4,
+        collaborator: {
+          principalRef: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
+          responsibility: 'reviewer', status: 'active', assignmentRevision: 1,
+          assignedAt: '2026-08-10T12:00:00Z', revokedAt: null,
+        },
+      }),
+    })
+    const source = createCurriculumDraftAuthoringHttpSource(fetchImpl, async () => 'verified-token')
+    const principalRef = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
+    await source.addCollaborator({
+      draftId: DRAFT, principalRef, responsibility: 'reviewer',
+      expectedDraftRevision: 3, idempotencyKey: REQUEST,
+    })
+    expect(fetchImpl.mock.calls[0][0]).toBe(`/api/admin/curriculum/drafts/${DRAFT}/collaborators`)
+    const body = JSON.parse(fetchImpl.mock.calls[0][1].body)
+    expect(body).toEqual({
+      principalRef, responsibility: 'reviewer', expectedDraftRevision: 3,
+      idempotencyKey: REQUEST,
+    })
+    expect(JSON.stringify(body)).not.toMatch(/actor|globalRole|capabilit|email|name/i)
+
+    await source.revokeCollaborator({
+      draftId: DRAFT, principalRef, expectedDraftRevision: 4, idempotencyKey: REQUEST,
+    })
+    expect(fetchImpl.mock.calls[1][0]).toBe(
+      `/api/admin/curriculum/drafts/${DRAFT}/collaborators/${principalRef}/revoke`,
+    )
+    expect(JSON.parse(fetchImpl.mock.calls[1][1].body)).toEqual({
+      expectedDraftRevision: 4, idempotencyKey: REQUEST,
+    })
+  })
+
+  it('maps verified-principal and collaborator CAS failures to bounded client reasons', async () => {
+    const principalRef = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
+    const invalidSource = createCurriculumDraftAuthoringHttpSource(
+      vi.fn().mockResolvedValue({
+        ok: false, status: 422,
+        json: vi.fn().mockResolvedValue({ error: { code: 'verified_admin_principal_required' } }),
+      }),
+      async () => 'verified-token',
+    )
+    await expect(invalidSource.addCollaborator({
+      draftId: DRAFT, principalRef, responsibility: 'editor',
+      expectedDraftRevision: 3, idempotencyKey: REQUEST,
+    })).rejects.toMatchObject({ code: 'invalid', reason: 'verified-principal-required' })
+
+    const staleSource = createCurriculumDraftAuthoringHttpSource(
+      vi.fn().mockResolvedValue({
+        ok: false, status: 409,
+        json: vi.fn().mockResolvedValue({ error: { code: 'revision_conflict' } }),
+      }),
+      async () => 'verified-token',
+    )
+    await expect(staleSource.revokeCollaborator({
+      draftId: DRAFT, principalRef, expectedDraftRevision: 3, idempotencyKey: REQUEST,
+    })).rejects.toMatchObject({ code: 'conflict', reason: 'revision-conflict' })
+  })
+
   it('does not issue a request without an access token', async () => {
     const fetchImpl = vi.fn()
     const source = createCurriculumDraftAuthoringHttpSource(fetchImpl, async () => null)

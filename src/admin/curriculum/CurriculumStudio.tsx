@@ -12,6 +12,8 @@ import {
   CURRICULUM_AUTHORING_SCHEMA_VERSION,
   CurriculumDraftAuthoringError,
   validateCurriculumDraftEntity,
+  type AddCurriculumDraftCollaboratorInput,
+  type CurriculumDraftCollaborators,
   type CurriculumDraftDetail,
   type CurriculumDraftEntityPayload,
   type CurriculumDraftEntityType,
@@ -19,6 +21,7 @@ import {
   type CurriculumDraftSummary,
   type CurriculumStudioEntityIndexEntry,
   type CreateCurriculumDraftEntityInput,
+  type RevokeCurriculumDraftCollaboratorInput,
   type TombstoneCurriculumDraftEntityInput,
   type UpdateCurriculumDraftEntityInput,
 } from '../curriculum-authoring/contracts'
@@ -46,6 +49,7 @@ import './curriculum-studio.css'
 const TREE_KEYS = new Set<CurriculumTreeKey>([
   'ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End', 'Enter', ' ',
 ])
+const ADMIN_PRINCIPAL_REF_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
 type SaveState =
   | { readonly kind: 'saved'; readonly message: string }
@@ -66,6 +70,15 @@ type PendingOperation =
     readonly createIdempotencyKey: string
     readonly tombstoneIdempotencyKey: string
   }
+
+type PendingCollaboratorOperation =
+  | { readonly kind: 'add'; readonly input: AddCurriculumDraftCollaboratorInput }
+  | { readonly kind: 'revoke'; readonly input: RevokeCurriculumDraftCollaboratorInput }
+
+type CollaboratorNotice = {
+  readonly kind: 'status' | 'error' | 'conflict'
+  readonly message: string
+}
 
 export interface CurriculumStudioProps {
   readonly authorization: CurriculumReadAuthorization
@@ -155,16 +168,20 @@ export function CurriculumStudioView({
   source,
   initialDrafts = [],
   initialBaseEntries = [],
+  initialOpenDraft = null,
+  initialCollaboration = null,
 }: {
   readonly catalog: CurriculumCatalog
   readonly capabilities: readonly AdminCapability[]
   readonly source: CurriculumStudioSource
   readonly initialDrafts?: readonly CurriculumDraftSummary[]
   readonly initialBaseEntries?: readonly CurriculumStudioEntityIndexEntry[]
+  readonly initialOpenDraft?: CurriculumDraftDetail | null
+  readonly initialCollaboration?: CurriculumDraftCollaborators | null
 }) {
   const [drafts, setDrafts] = useState(initialDrafts)
-  const [draftChoice, setDraftChoice] = useState(initialDrafts[0]?.draftId ?? '')
-  const [draft, setDraft] = useState<CurriculumDraftDetail | null>(null)
+  const [draftChoice, setDraftChoice] = useState(initialOpenDraft?.draftId ?? initialDrafts[0]?.draftId ?? '')
+  const [draft, setDraft] = useState<CurriculumDraftDetail | null>(initialOpenDraft)
   const [materialization, setMaterialization] = useState<CurriculumDraftMaterialization | null>(null)
   const [baseEntries, setBaseEntries] = useState<readonly CurriculumStudioEntityIndexEntry[]>(initialBaseEntries)
   const [workspaceMessage, setWorkspaceMessage] = useState('Select a draft or create a new workspace.')
@@ -192,11 +209,23 @@ export function CurriculumStudioView({
   const [validation, setValidation] = useState<CurriculumDraftValidationResult | null>(null)
   const [validationBusy, setValidationBusy] = useState(false)
   const [validationError, setValidationError] = useState<string | null>(null)
+  const [collaboration, setCollaboration] = useState<CurriculumDraftCollaborators | null>(initialCollaboration)
+  const [collaboratorBusy, setCollaboratorBusy] = useState(false)
+  const [collaboratorNotice, setCollaboratorNotice] = useState<CollaboratorNotice>({
+    kind: 'status',
+    message: initialCollaboration
+      ? `${initialCollaboration.collaborators.length} current collaborator${initialCollaboration.collaborators.length === 1 ? '' : 's'}.`
+      : 'Open a draft to view its collaborators.',
+  })
+  const [collaboratorPrincipalRef, setCollaboratorPrincipalRef] = useState('')
+  const [collaboratorResponsibility, setCollaboratorResponsibility] = useState<'editor' | 'reviewer'>('reviewer')
+  const [pendingCollaboratorOperation, setPendingCollaboratorOperation] = useState<PendingCollaboratorOperation | null>(null)
   const focusRequested = useRef(false)
   const nextLoadedSaveMessage = useRef('Saved')
   const itemRefs = useRef(new Map<string, HTMLButtonElement>())
   const draftCapable = canWriteCurriculumDrafts(capabilities)
-  const writeAllowed = draftCapable && serverWriteAllowed && draft !== null
+  const isDraftEditor = collaboration?.currentResponsibility === 'editor'
+  const writeAllowed = draftCapable && serverWriteAllowed && draft !== null && isDraftEditor
   const entries = materialization?.entities ?? baseEntries
   const index = useMemo(() => buildMaterializedCurriculumStudioIndex(entries), [entries])
   const visible = useMemo(() => visibleCurriculumStudioRows(index, expandedIds, query), [expandedIds, index, query])
@@ -354,6 +383,44 @@ export function CurriculumStudioView({
     setFocusedId(action.focusId)
   }
 
+  async function loadCollaborators(draftId: string, expectedDraftRevision: number) {
+    setCollaboratorBusy(true)
+    setCollaboratorNotice({ kind: 'status', message: 'Loading current collaborators…' })
+    try {
+      const value = await source.listCollaborators(draftId)
+      if (value.draftRevision !== expectedDraftRevision) {
+        throw new CurriculumDraftAuthoringError('conflict', 'revision-conflict')
+      }
+      setCollaboration(value)
+      setCollaboratorNotice({
+        kind: 'status',
+        message: value.collaborators.length === 0
+          ? 'No current collaborators.'
+          : `${value.collaborators.length} current collaborator${value.collaborators.length === 1 ? '' : 's'}.`,
+      })
+    } catch (reason) {
+      setCollaboration(null)
+      if (reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict') {
+        setCollaboratorNotice({
+          kind: 'conflict',
+          message: 'Collaborator state is stale. Refresh the draft before managing assignments.',
+        })
+      } else if (isPermissionLoss(reason)) {
+        setCollaboratorNotice({
+          kind: 'error',
+          message: 'Permission denied: this Admin principal is not assigned to the draft.',
+        })
+      } else {
+        setCollaboratorNotice({
+          kind: 'error',
+          message: 'Collaborators are unavailable. The draft remains conservatively read-only.',
+        })
+      }
+    } finally {
+      setCollaboratorBusy(false)
+    }
+  }
+
   async function openDraft(draftId: string) {
     if (!draftId || !confirmDiscard(dirty)) return
     setWorkspaceBusy(true)
@@ -366,6 +433,7 @@ export function CurriculumStudioView({
       setDraftChoice(draftId)
       setWorkspaceMessage(`Draft revision ${nextDraft.revision} is open.`)
       setServerWriteAllowed(true)
+      await loadCollaborators(draftId, nextDraft.revision)
     } catch (reason) {
       if (isPermissionLoss(reason)) setServerWriteAllowed(false)
       setWorkspaceMessage(authoringErrorMessage(reason, 'The draft could not be opened.'))
@@ -390,6 +458,7 @@ export function CurriculumStudioView({
       setWorkspaceMessage(`Draft revision ${nextDraft.revision} is current.`)
       setPendingOperation(null)
       setSaveState({ kind: 'saved', message: 'Saved' })
+      await loadCollaborators(nextDraft.draftId, nextDraft.revision)
     } catch (reason) {
       setWorkspaceMessage(authoringErrorMessage(reason, 'The draft could not be refreshed.'))
     } finally {
@@ -418,6 +487,7 @@ export function CurriculumStudioView({
       setDrafts((current) => replaceDraftSummary(current, nextDraft))
       setDraftChoice(result.draftId)
       setWorkspaceMessage(result.replayed ? 'Draft creation replay confirmed.' : 'Draft created and opened.')
+      await loadCollaborators(nextDraft.draftId, nextDraft.revision)
     } catch (reason) {
       if (isPermissionLoss(reason)) setServerWriteAllowed(false)
       setWorkspaceMessage(authoringErrorMessage(reason, 'Draft creation failed. Retry preserves the same idempotency key.'))
@@ -538,6 +608,7 @@ export function CurriculumStudioView({
       setFocusedId(selectId)
     }
     setWorkspaceMessage(`Draft revision ${nextDraft.revision} is current.`)
+    await loadCollaborators(nextDraft.draftId, nextDraft.revision)
   }
 
   async function handleMutationFailure(reason: unknown, operation: PendingOperation) {
@@ -616,6 +687,119 @@ export function CurriculumStudioView({
     setNewEntityRef('')
   }
 
+  async function addDraftCollaborator() {
+    if (
+      !draft || !writeAllowed || dirty
+      || !ADMIN_PRINCIPAL_REF_PATTERN.test(collaboratorPrincipalRef)
+    ) return
+    await executeCollaboratorOperation({
+      kind: 'add',
+      input: {
+        draftId: draft.draftId,
+        principalRef: collaboratorPrincipalRef.toLowerCase(),
+        responsibility: collaboratorResponsibility,
+        expectedDraftRevision: draft.revision,
+        idempotencyKey: uuid(),
+      },
+    })
+  }
+
+  async function revokeDraftCollaborator(principalRef: string, responsibility: 'editor' | 'reviewer') {
+    if (!draft || !writeAllowed || dirty) return
+    if (
+      typeof window !== 'undefined'
+      && !confirmCurriculumCollaboratorRevocation(
+        principalRef, responsibility, (message) => window.confirm(message),
+      )
+    ) return
+    await executeCollaboratorOperation({
+      kind: 'revoke',
+      input: {
+        draftId: draft.draftId,
+        principalRef,
+        expectedDraftRevision: draft.revision,
+        idempotencyKey: uuid(),
+      },
+    })
+  }
+
+  async function executeCollaboratorOperation(operation: PendingCollaboratorOperation) {
+    setPendingCollaboratorOperation(operation)
+    setCollaboratorBusy(true)
+    setCollaboratorNotice({
+      kind: 'status',
+      message: operation.kind === 'add' ? 'Adding verified Admin principal…' : 'Revoking collaborator…',
+    })
+    try {
+      const result = operation.kind === 'add'
+        ? await source.addCollaborator(operation.input)
+        : await source.revokeCollaborator(operation.input)
+      setPendingCollaboratorOperation(null)
+      if (operation.kind === 'add') setCollaboratorPrincipalRef('')
+      try {
+        const nextDraft = await source.readDraft(result.draftId)
+        const nextMaterialization = await source.readMaterialization(result.draftId, nextDraft.revision)
+        setDraft(nextDraft)
+        setMaterialization(nextMaterialization)
+        setDrafts((current) => replaceDraftSummary(current, nextDraft))
+        await loadCollaborators(nextDraft.draftId, nextDraft.revision)
+        setCollaboratorNotice({
+          kind: 'status',
+          message: result.replayed
+            ? 'Collaborator mutation replay confirmed.'
+            : operation.kind === 'add'
+              ? 'Collaborator added.'
+              : 'Collaborator revoked.',
+        })
+      } catch (refreshReason) {
+        if (isPermissionLoss(refreshReason)) {
+          setServerWriteAllowed(false)
+          setCollaboration(null)
+        }
+        setCollaboratorNotice({
+          kind: 'error',
+          message: 'The collaborator mutation succeeded, but the refreshed workspace is unavailable.',
+        })
+      }
+    } catch (reason) {
+      if (reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict') {
+        setPendingCollaboratorOperation(null)
+        setCollaboratorNotice({
+          kind: 'conflict',
+          message: reason.reason === 'idempotency-conflict'
+            ? 'Conflicting idempotency-key reuse was rejected.'
+            : reason.reason === 'already-assigned'
+              ? 'That Admin principal already has a current draft assignment.'
+              : 'Stale collaborator change: refresh the draft before trying again.',
+        })
+      } else if (isPermissionLoss(reason)) {
+        setPendingCollaboratorOperation(null)
+        setServerWriteAllowed(false)
+        setCollaboratorNotice({
+          kind: 'error',
+          message: 'Permission denied: current global capability and editor assignment are both required.',
+        })
+      } else if (reason instanceof CurriculumDraftAuthoringError && reason.code === 'invalid') {
+        setPendingCollaboratorOperation(null)
+        setCollaboratorNotice({
+          kind: 'error',
+          message: reason.reason === 'verified-principal-required'
+            ? 'Add failed: use a verified Admin principal with the capability required by this responsibility.'
+            : reason.reason === 'last-editor'
+              ? 'Revocation denied: every draft must retain at least one editor.'
+              : 'The collaborator request was rejected as invalid.',
+        })
+      } else {
+        setCollaboratorNotice({
+          kind: 'error',
+          message: 'Collaborator service unavailable. Retry will reuse the same idempotency key.',
+        })
+      }
+    } finally {
+      setCollaboratorBusy(false)
+    }
+  }
+
   async function runValidation() {
     if (!draft) return
     setValidationBusy(true)
@@ -678,7 +862,7 @@ export function CurriculumStudioView({
           <div><dt>Target intent</dt><dd>{draft.targetVersion}</dd></div>
           <div><dt>Workspace revision</dt><dd>{draft.revision}</dd></div>
           <div><dt>Lifecycle</dt><dd>{draft.lifecycleState}</dd></div>
-          <div><dt>Access</dt><dd>{writeAllowed ? 'Editable' : 'Read-only'}</dd></div>
+          <div><dt>Access</dt><dd>{collaboration ? collaboration.currentResponsibility : writeAllowed ? 'Editor' : 'Read-only'}</dd></div>
         </dl>
       )}
 
@@ -722,6 +906,7 @@ export function CurriculumStudioView({
         </aside>
 
         <section className="curriculum-studio-pane curriculum-studio-editor" aria-label="Selected entity editor workspace">
+          {draft && collaboration?.currentResponsibility === 'reviewer' && <div className="curriculum-draft-notice" role="status"><strong>Reviewer assignment</strong><p>This draft resource assignment is read-only even when the global Admin role has broader capability.</p></div>}
           {selectedEntry ? (
             <>
               <header className="curriculum-editor-heading"><div><p>{entityTypeLabel(selectedEntry.entityType)} · {originLabel(selectedEntry.origin)}</p><h3>{selectedEntry.label}</h3><span>{selectedEntry.entityRef}</span></div><span className={writeAllowed ? 'curriculum-editable-badge' : 'curriculum-readonly-badge'}>{writeAllowed ? 'Schema v2 editor' : 'Read-only'}</span></header>
@@ -753,7 +938,77 @@ export function CurriculumStudioView({
             <div className="curriculum-studio-pane-heading"><div><p>Inspector</p><h3>Metadata & status</h3></div></div>
             <InspectorSection title="Lifecycle"><StatusLine label="Published base" value={catalog.source.version} tone="positive" /><StatusLine label="Draft" value={draft ? draft.targetVersion : 'Not open'} tone={draft ? 'positive' : 'warning'} /><StatusLine label="Save state" value={dirty ? 'Unsaved changes' : saveState.message} tone={saveState.kind === 'failed' || saveState.kind === 'conflict' ? 'warning' : 'neutral'} /></InspectorSection>
             <InspectorSection title="Selection"><dl className="curriculum-inspector-list"><div><dt>Type</dt><dd>{selectedEntry ? entityTypeLabel(selectedEntry.entityType) : 'Group'}</dd></div><div><dt>Stable ID</dt><dd>{selectedEntry?.entityRef ?? selected?.id ?? 'None'}</dd></div><div><dt>Origin</dt><dd>{selectedEntry ? originLabel(selectedEntry.origin) : 'Virtual navigation'}</dd></div><div><dt>Entity rev</dt><dd>{selectedEntry?.revision ?? 'Base'}</dd></div></dl></InspectorSection>
-            <InspectorSection title="Authorization"><p>{writeAllowed ? 'Draft authoring enabled' : 'Read-only mode'}</p><small>All reads require curriculum:read. Every mutation is reauthorized for curriculum:drafts:write by the server.</small></InspectorSection>
+            <InspectorSection title="Authorization"><p>{writeAllowed ? 'Draft editor assignment active' : 'Read-only mode'}</p><small>Reads require curriculum:read plus a current draft assignment. Mutations require curriculum:drafts:write plus an editor assignment; the database reauthorizes both.</small></InspectorSection>
+            <InspectorSection title="Collaborators">
+              {!draft ? (
+                <p className="curriculum-collaborator-empty">Open a draft to view its resource assignments.</p>
+              ) : (
+                <>
+                  {collaboratorBusy && !collaboration && <p role="status">Loading collaborators…</p>}
+                  {collaboration && collaboration.collaborators.length === 0 && (
+                    <p className="curriculum-collaborator-empty" role="status">No current collaborators.</p>
+                  )}
+                  {collaboration && collaboration.collaborators.length > 0 && (
+                    <ul className="curriculum-collaborator-list" aria-label="Current draft collaborators">
+                      {collaboration.collaborators.map((collaborator) => (
+                        <li key={collaborator.principalRef}>
+                          <div><strong>{collaborator.responsibility}</strong><code>{collaborator.principalRef}</code></div>
+                          {writeAllowed && (
+                            <button
+                              type="button"
+                              className="curriculum-collaborator-revoke"
+                              aria-label={`Revoke ${collaborator.responsibility} collaborator ${collaborator.principalRef}`}
+                              disabled={collaboratorBusy || dirty || pendingCollaboratorOperation !== null}
+                              onClick={() => void revokeDraftCollaborator(collaborator.principalRef, collaborator.responsibility)}
+                            >Revoke</button>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {writeAllowed && (
+                    <fieldset className="curriculum-collaborator-add" disabled={collaboratorBusy || pendingCollaboratorOperation !== null}>
+                      <legend>Add verified Admin principal</legend>
+                      <label htmlFor="curriculum-collaborator-principal">Principal UUID</label>
+                      <input
+                        id="curriculum-collaborator-principal"
+                        value={collaboratorPrincipalRef}
+                        autoComplete="off"
+                        placeholder="00000000-0000-4000-8000-000000000000"
+                        onChange={(event) => setCollaboratorPrincipalRef(event.target.value)}
+                      />
+                      <label htmlFor="curriculum-collaborator-responsibility">Responsibility</label>
+                      <select
+                        id="curriculum-collaborator-responsibility"
+                        value={collaboratorResponsibility}
+                        onChange={(event) => setCollaboratorResponsibility(event.target.value as 'editor' | 'reviewer')}
+                      ><option value="reviewer">Reviewer</option><option value="editor">Editor</option></select>
+                      <button
+                        type="button"
+                        disabled={
+                          !ADMIN_PRINCIPAL_REF_PATTERN.test(collaboratorPrincipalRef)
+                          || collaboratorBusy || dirty || pendingCollaboratorOperation !== null
+                        }
+                        onClick={() => void addDraftCollaborator()}
+                      >Add collaborator</button>
+                      <small>Editor requires underlying curriculum:drafts:write. Reviewer requires curriculum:read.</small>
+                    </fieldset>
+                  )}
+                  {dirty && writeAllowed && <p className="curriculum-collaborator-dirty">Save or discard entity edits before changing collaborators.</p>}
+                  <p
+                    className={`curriculum-collaborator-notice is-${collaboratorNotice.kind}`}
+                    role={collaboratorNotice.kind === 'status' ? 'status' : 'alert'}
+                    aria-live="polite"
+                  >{collaboratorNotice.message}</p>
+                  {pendingCollaboratorOperation && collaboratorNotice.message.includes('unavailable') && (
+                    <button type="button" disabled={collaboratorBusy} onClick={() => void executeCollaboratorOperation(pendingCollaboratorOperation)}>Retry collaborator change</button>
+                  )}
+                  {collaboratorNotice.kind === 'conflict' && (
+                    <button type="button" disabled={workspaceBusy} onClick={() => void refreshDraft()}>Refresh collaborator state</button>
+                  )}
+                </>
+              )}
+            </InspectorSection>
             <InspectorSection title="Protected classes"><p>Server-owned and read-only</p><small>Schedules, policy sets, standards frameworks, protected assessment interpretations, schema versions, and entity identities are not exposed as unrestricted JSON.</small></InspectorSection>
             <InspectorSection title="Validation"><StatusLine label="Revision" value={validation ? String(validation.draftRevision) : 'Not run'} tone={validationStale ? 'warning' : validation ? 'positive' : 'neutral'} /><button type="button" disabled={!draft || validationBusy} onClick={() => void runValidation()}>{validationBusy ? 'Validating…' : `Validate${draft ? ` revision ${draft.revision}` : ''}`}</button>{validationError && <p role="alert">{validationError}</p>}</InspectorSection>
           </div>
@@ -825,6 +1080,14 @@ export function confirmCurriculumNavigation(dirty: boolean, confirm: () => boole
 
 export function curriculumSavedMessage(replayed: boolean): string {
   return replayed ? 'Saved · replay confirmed' : 'Saved'
+}
+
+export function confirmCurriculumCollaboratorRevocation(
+  principalRef: string,
+  responsibility: 'editor' | 'reviewer',
+  confirm: (message: string) => boolean,
+): boolean {
+  return confirm(`Revoke ${responsibility} access for Admin principal ${principalRef}?`)
 }
 
 function confirmDiscard(dirty: boolean): boolean {

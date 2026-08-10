@@ -1,10 +1,13 @@
 import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
 import {
   CurriculumDraftAuthoringError,
+  type AddCurriculumDraftCollaboratorInput,
   type CreateCurriculumDraftEntityInput,
   type CreateCurriculumDraftInput,
   type CurriculumDraftAuthoringSource,
   type CurriculumDraftDetail,
+  type CurriculumDraftCollaboratorMutationResult,
+  type CurriculumDraftCollaborators,
   type CurriculumDraftMaterialization,
   type CurriculumDraftValidationResult,
   type CurriculumBaseAuthoringEntity,
@@ -14,6 +17,7 @@ import {
   type CurriculumDraftMutationResult,
   type CurriculumDraftSummary,
   type TombstoneCurriculumDraftEntityInput,
+  type RevokeCurriculumDraftCollaboratorInput,
   type UpdateCurriculumDraftEntityInput,
 } from './contracts'
 
@@ -25,14 +29,24 @@ function failure(status: number, responseCode?: string): CurriculumDraftAuthorin
   if (status === 400 || status === 413 || status === 415 || status === 422) {
     return new CurriculumDraftAuthoringError(
       'invalid',
-      responseCode === 'schema_v2_rejected' ? 'schema-v2-rejected' : undefined,
+      responseCode === 'schema_v2_rejected'
+        ? 'schema-v2-rejected'
+        : responseCode === 'verified_admin_principal_required'
+          ? 'verified-principal-required'
+          : responseCode === 'last_editor_required'
+            ? 'last-editor'
+            : undefined,
     )
   }
   if (status === 404) return new CurriculumDraftAuthoringError('not-found')
   if (status === 409) {
     return new CurriculumDraftAuthoringError(
       'conflict',
-      responseCode === 'idempotency_conflict' ? 'idempotency-conflict' : 'revision-conflict',
+      responseCode === 'idempotency_conflict'
+        ? 'idempotency-conflict'
+        : responseCode === 'collaborator_already_assigned'
+          ? 'already-assigned'
+          : 'revision-conflict',
     )
   }
   return new CurriculumDraftAuthoringError('unavailable')
@@ -100,6 +114,19 @@ export function createCurriculumDraftAuthoringHttpSource(
       request<CurriculumDraftMutationResult>(entityPath(draftId, entityType, entityRef), 'PUT', body),
     tombstoneEntity: ({ draftId, entityType, entityRef, ...body }: TombstoneCurriculumDraftEntityInput) =>
       request<CurriculumDraftMutationResult>(`${entityPath(draftId, entityType, entityRef)}/tombstone`, 'POST', body),
+    listCollaborators: (draftId: string) => request<CurriculumDraftCollaborators>(
+      `${basePath}/${encodeURIComponent(draftId)}/collaborators`,
+    ),
+    addCollaborator: ({ draftId, ...body }: AddCurriculumDraftCollaboratorInput) =>
+      request<CurriculumDraftCollaboratorMutationResult>(
+        `${basePath}/${encodeURIComponent(draftId)}/collaborators`, 'POST', body,
+      ),
+    revokeCollaborator: ({ draftId, principalRef, ...body }: RevokeCurriculumDraftCollaboratorInput) =>
+      request<CurriculumDraftCollaboratorMutationResult>(
+        `${basePath}/${encodeURIComponent(draftId)}/collaborators/${encodeURIComponent(principalRef)}/revoke`,
+        'POST',
+        body,
+      ),
     readBaseIndex: (baseReleaseVersion: string) => request<CurriculumBaseAuthoringIndex>(
       `/api/admin/curriculum/releases/${encodeURIComponent(baseReleaseVersion)}/authoring-index`,
     ),
