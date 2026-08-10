@@ -1,8 +1,11 @@
 import type { LearnerSessionCheck, LearnerSessionController } from './learnerSession'
-import { type SecurityClock, systemSecurityClock } from './runtime'
+import type { SecurityClock } from './runtime'
 
 export const FOREGROUND_EXPIRATION_CHECK_INTERVAL_MS = 60_000
+export const WHEEL_GESTURE_QUIET_PERIOD_MS = 2_000
+/** @deprecated Scroll events no longer authorize learner activity. */
 export const MEANINGFUL_SCROLL_THROTTLE_MS = 1_000
+/** @deprecated Scroll events no longer authorize learner activity. */
 export const TRUSTED_SCROLL_INTENT_WINDOW_MS = 1_000
 
 export interface ActivityEventTarget {
@@ -15,6 +18,11 @@ export interface ActivityScheduler {
   clearInterval(handle: unknown): void
 }
 
+export interface ActivityTimeoutScheduler {
+  setTimeout(callback: () => void, delayMs: number): unknown
+  clearTimeout(handle: unknown): void
+}
+
 export interface LearnerScrollPosition {
   readonly x: number
   readonly y: number
@@ -25,13 +33,19 @@ export interface LearnerActivityControllerOptions {
   readonly documentEvents: ActivityEventTarget
   readonly pageEvents: ActivityEventTarget
   readonly visibility: () => DocumentVisibilityState
+  /** @deprecated Retained for source compatibility; scroll events use no clock authority. */
   readonly clock?: SecurityClock
   readonly scheduler?: ActivityScheduler
+  readonly wheelGestureScheduler?: ActivityTimeoutScheduler
   /** Test seam; browser production uses Event.isTrusted. */
   readonly isTrustedActivity?: (event: Event) => boolean
+  readonly supportsPointerEvents?: boolean
+  /** @deprecated Scroll events no longer authorize learner activity. */
   readonly scrollPosition?: () => LearnerScrollPosition | null
   readonly foregroundCheckIntervalMs?: number
+  /** @deprecated Scroll events no longer authorize learner activity. */
   readonly scrollThrottleMs?: number
+  readonly wheelGestureQuietPeriodMs?: number
   readonly onSessionCheck?: (result: LearnerSessionCheck) => void
 }
 
@@ -40,74 +54,55 @@ const browserScheduler: ActivityScheduler = {
   clearInterval: (handle) => globalThis.clearInterval(handle as ReturnType<typeof setInterval>),
 }
 
+const browserTimeoutScheduler: ActivityTimeoutScheduler = {
+  setTimeout: (callback, delayMs) => globalThis.setTimeout(callback, delayMs),
+  clearTimeout: (handle) => globalThis.clearTimeout(handle as ReturnType<typeof setTimeout>),
+}
+
 /** Accounts only explicit, visible-document learner activity. */
 export class LearnerActivityController {
   readonly #session: LearnerSessionController
   readonly #documentEvents: ActivityEventTarget
   readonly #pageEvents: ActivityEventTarget
   readonly #visibility: () => DocumentVisibilityState
-  readonly #clock: SecurityClock
   readonly #scheduler: ActivityScheduler
+  readonly #wheelGestureScheduler: ActivityTimeoutScheduler
   readonly #isTrustedActivity: (event: Event) => boolean
-  readonly #scrollPosition: () => LearnerScrollPosition | null
+  readonly #pointerActivityType: 'pointerdown' | 'touchstart'
   readonly #foregroundCheckIntervalMs: number
-  readonly #scrollThrottleMs: number
+  readonly #wheelGestureQuietPeriodMs: number
   readonly #onSessionCheck?: (result: LearnerSessionCheck) => void
   #interval: unknown = null
+  #wheelGestureTimeout: unknown = null
+  #wheelGestureActive = false
   #started = false
-  #lastScrollAt: number | null = null
-  #lastScrollPosition: LearnerScrollPosition | null = null
-  #scrollIntentExpiresAt: number | null = null
 
   readonly #onDirectActivity: EventListener = (event) => {
     if (!this.#isTrustedActivity(event)) return
     this.#recordVisibleActivity()
   }
-  readonly #onPointerScrollIntent: EventListener = (event) => {
+  readonly #onPointerActivity: EventListener = (event) => {
     if (!this.#isTrustedActivity(event)) return
-    this.#armScrollIntent()
     this.#recordVisibleActivity()
   }
-  readonly #onWheelScrollIntent: EventListener = (event) => {
+  readonly #onWheelActivity: EventListener = (event) => {
     if (!this.#isTrustedActivity(event)) return
-    this.#armScrollIntent()
-  }
-  readonly #onScroll: EventListener = (event) => {
     if (this.#visibility() !== 'visible') return
-    const position = this.#readScrollPosition()
-    if (!position || !this.#scrollDisplaced(position)) return
-    this.#lastScrollPosition = position
-    const now = this.#clock()
-    if (!Number.isFinite(now)) {
-      this.#scrollIntentExpiresAt = null
-      this.#report(this.#session.recheck())
-      return
+    if (!this.#wheelGestureActive) {
+      this.#wheelGestureActive = true
+      this.#recordVisibleActivity()
     }
-    const intentExpiresAt = this.#scrollIntentExpiresAt
-    this.#scrollIntentExpiresAt = null
-    // Browser-generated scroll events can be trusted even when script initiated
-    // the displacement. Only a separate, recent trusted input intent authorizes
-    // one displaced scroll; the scroll event's own isTrusted value is irrelevant.
-    if (intentExpiresAt === null || now > intentExpiresAt) return
-    const checked = this.#session.recheck()
-    this.#report(checked)
-    if (checked.status !== 'active') return
-    if (this.#lastScrollAt !== null && now - this.#lastScrollAt < this.#scrollThrottleMs) return
-    this.#lastScrollAt = now
-    this.#report(this.#session.noteMeaningfulActivity())
+    this.#scheduleWheelGestureEnd()
   }
   readonly #onVisibilityChange: EventListener = () => {
     if (this.#visibility() === 'visible') {
-      this.#lastScrollPosition = this.#readScrollPosition()
       this.#report(this.#session.recheck())
     } else {
-      this.#scrollIntentExpiresAt = null
       this.#report(this.#session.flushActivity())
     }
   }
   readonly #onForegroundBoundary: EventListener = () => {
     if (this.#visibility() === 'visible') {
-      this.#lastScrollPosition = this.#readScrollPosition()
       this.#report(this.#session.recheck())
     }
   }
@@ -117,16 +112,19 @@ export class LearnerActivityController {
     this.#documentEvents = options.documentEvents
     this.#pageEvents = options.pageEvents
     this.#visibility = options.visibility
-    this.#clock = options.clock ?? systemSecurityClock
     this.#scheduler = options.scheduler ?? browserScheduler
+    this.#wheelGestureScheduler = options.wheelGestureScheduler ?? browserTimeoutScheduler
     this.#isTrustedActivity = options.isTrustedActivity ?? ((event) => event.isTrusted)
-    this.#scrollPosition = options.scrollPosition ?? (() => null)
+    this.#pointerActivityType = (options.supportsPointerEvents ?? typeof globalThis.PointerEvent !== 'undefined')
+      ? 'pointerdown'
+      : 'touchstart'
     this.#foregroundCheckIntervalMs = options.foregroundCheckIntervalMs ?? FOREGROUND_EXPIRATION_CHECK_INTERVAL_MS
-    this.#scrollThrottleMs = options.scrollThrottleMs ?? MEANINGFUL_SCROLL_THROTTLE_MS
+    this.#wheelGestureQuietPeriodMs = options.wheelGestureQuietPeriodMs ?? WHEEL_GESTURE_QUIET_PERIOD_MS
     this.#onSessionCheck = options.onSessionCheck
     if (
       this.#foregroundCheckIntervalMs <= 0 ||
-      this.#scrollThrottleMs < 0
+      this.#wheelGestureQuietPeriodMs <= 0 ||
+      (options.scrollThrottleMs !== undefined && options.scrollThrottleMs < 0)
     ) {
       throw new Error('Learner activity timing configuration is invalid.')
     }
@@ -135,15 +133,11 @@ export class LearnerActivityController {
   start(): void {
     if (this.#started) return
     this.#started = true
-    this.#lastScrollPosition = this.#readScrollPosition()
     for (const type of ['keydown', 'input']) {
       this.#documentEvents.addEventListener(type, this.#onDirectActivity)
     }
-    for (const type of ['pointerdown', 'touchstart']) {
-      this.#documentEvents.addEventListener(type, this.#onPointerScrollIntent)
-    }
-    this.#documentEvents.addEventListener('wheel', this.#onWheelScrollIntent)
-    this.#documentEvents.addEventListener('scroll', this.#onScroll)
+    this.#documentEvents.addEventListener(this.#pointerActivityType, this.#onPointerActivity)
+    this.#documentEvents.addEventListener('wheel', this.#onWheelActivity)
     this.#documentEvents.addEventListener('visibilitychange', this.#onVisibilityChange)
     this.#pageEvents.addEventListener('focus', this.#onForegroundBoundary)
     this.#pageEvents.addEventListener('pageshow', this.#onForegroundBoundary)
@@ -169,17 +163,14 @@ export class LearnerActivityController {
     for (const type of ['keydown', 'input']) {
       this.#documentEvents.removeEventListener(type, this.#onDirectActivity)
     }
-    for (const type of ['pointerdown', 'touchstart']) {
-      this.#documentEvents.removeEventListener(type, this.#onPointerScrollIntent)
-    }
-    this.#documentEvents.removeEventListener('wheel', this.#onWheelScrollIntent)
-    this.#documentEvents.removeEventListener('scroll', this.#onScroll)
+    this.#documentEvents.removeEventListener(this.#pointerActivityType, this.#onPointerActivity)
+    this.#documentEvents.removeEventListener('wheel', this.#onWheelActivity)
     this.#documentEvents.removeEventListener('visibilitychange', this.#onVisibilityChange)
     this.#pageEvents.removeEventListener('focus', this.#onForegroundBoundary)
     this.#pageEvents.removeEventListener('pageshow', this.#onForegroundBoundary)
     if (this.#interval !== null) this.#scheduler.clearInterval(this.#interval)
     this.#interval = null
-    this.#scrollIntentExpiresAt = null
+    this.#clearWheelGesture()
     this.#session.flushActivity()
   }
 
@@ -188,27 +179,22 @@ export class LearnerActivityController {
     this.#report(this.#session.noteMeaningfulActivity())
   }
 
-  #armScrollIntent(): void {
-    if (this.#visibility() !== 'visible') return
-    const now = this.#clock()
-    if (!Number.isFinite(now)) {
-      this.#scrollIntentExpiresAt = null
-      this.#report(this.#session.recheck())
-      return
+  #scheduleWheelGestureEnd(): void {
+    if (this.#wheelGestureTimeout !== null) {
+      this.#wheelGestureScheduler.clearTimeout(this.#wheelGestureTimeout)
     }
-    this.#scrollIntentExpiresAt = now + TRUSTED_SCROLL_INTENT_WINDOW_MS
+    this.#wheelGestureTimeout = this.#wheelGestureScheduler.setTimeout(() => {
+      this.#wheelGestureTimeout = null
+      this.#wheelGestureActive = false
+    }, this.#wheelGestureQuietPeriodMs)
   }
 
-  #readScrollPosition(): LearnerScrollPosition | null {
-    const position = this.#scrollPosition()
-    if (!position || !Number.isFinite(position.x) || !Number.isFinite(position.y)) return null
-    return position
-  }
-
-  #scrollDisplaced(position: LearnerScrollPosition): boolean {
-    return this.#lastScrollPosition !== null && (
-      position.x !== this.#lastScrollPosition.x || position.y !== this.#lastScrollPosition.y
-    )
+  #clearWheelGesture(): void {
+    if (this.#wheelGestureTimeout !== null) {
+      this.#wheelGestureScheduler.clearTimeout(this.#wheelGestureTimeout)
+    }
+    this.#wheelGestureTimeout = null
+    this.#wheelGestureActive = false
   }
 
   #report(result: LearnerSessionCheck): void {
@@ -228,7 +214,7 @@ export function createBrowserLearnerActivityController(
     documentEvents: document,
     pageEvents: window,
     visibility: () => document.visibilityState,
-    scrollPosition: () => ({ x: window.scrollX, y: window.scrollY }),
+    supportsPointerEvents: typeof window.PointerEvent !== 'undefined',
     onSessionCheck,
   })
 }

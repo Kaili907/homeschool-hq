@@ -262,6 +262,7 @@ describe('meaningful activity accounting', () => {
       clock: runtime.now,
       scheduler,
       isTrustedActivity: (event) => trustedEvents.has(event),
+      supportsPointerEvents: true,
     })
     activity.start()
 
@@ -339,12 +340,67 @@ describe('meaningful activity accounting', () => {
     activity.stop()
   })
 
-  it('accepts one displaced scroll per trusted wheel intent and ignores momentum', () => {
+  it('counts a trusted wheel burst once and permits a later completed gesture', () => {
     const runtime = setupLearner({ writeThrottleMs: 0 })
     runtime.session.create('learner-a')
     const documentEvents = new EventTarget()
     const trustedEvents = new WeakSet<Event>()
-    let position = { x: 0, y: 0 }
+    const gestureTimer: { end: (() => void) | null } = { end: null }
+    const dispatchTrusted = (type: string) => {
+      const event = new Event(type)
+      trustedEvents.add(event)
+      documentEvents.dispatchEvent(event)
+    }
+    const activity = new LearnerActivityController({
+      session: runtime.session,
+      documentEvents,
+      pageEvents: new EventTarget(),
+      visibility: () => 'visible',
+      clock: runtime.now,
+      scheduler: { setInterval: () => 1, clearInterval: () => undefined },
+      wheelGestureScheduler: {
+        setTimeout: (callback) => {
+          gestureTimer.end = callback
+          return callback
+        },
+        clearTimeout: (handle) => {
+          if (gestureTimer.end === handle) gestureTimer.end = null
+        },
+      },
+      isTrustedActivity: (event) => trustedEvents.has(event),
+    })
+    activity.start()
+
+    runtime.advance(1_000)
+    dispatchTrusted('wheel')
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+
+    for (let event = 0; event < 20; event += 1) {
+      runtime.advance(250)
+      dispatchTrusted('wheel')
+    }
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+
+    runtime.advance(250)
+    documentEvents.dispatchEvent(new Event('scroll'))
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
+
+    expect(gestureTimer.end).not.toBeNull()
+    gestureTimer.end?.()
+    runtime.advance(1)
+    dispatchTrusted('wheel')
+    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:06.251Z')
+    activity.stop()
+  })
+
+  it.each([
+    { supportsPointerEvents: true, activityType: 'pointerdown' },
+    { supportsPointerEvents: false, activityType: 'touchstart' },
+  ])('counts $activityType once without authorizing resulting scroll', ({ supportsPointerEvents, activityType }) => {
+    const runtime = setupLearner({ writeThrottleMs: 0 })
+    runtime.session.create('learner-a')
+    const documentEvents = new EventTarget()
+    const trustedEvents = new WeakSet<Event>()
     const dispatchTrusted = (type: string) => {
       const event = new Event(type)
       trustedEvents.add(event)
@@ -358,30 +414,15 @@ describe('meaningful activity accounting', () => {
       clock: runtime.now,
       scheduler: { setInterval: () => 1, clearInterval: () => undefined },
       isTrustedActivity: (event) => trustedEvents.has(event),
-      scrollPosition: () => position,
-      scrollThrottleMs: 0,
+      supportsPointerEvents,
     })
     activity.start()
 
     runtime.advance(1_000)
-    dispatchTrusted('wheel')
-    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:00.000Z')
-    position = { x: 0, y: 20 }
-    documentEvents.dispatchEvent(new Event('scroll'))
+    dispatchTrusted(activityType)
     expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
-
     runtime.advance(500)
-    position = { x: 0, y: 40 }
-    documentEvents.dispatchEvent(new Event('scroll'))
-    runtime.advance(500)
-    position = { x: 0, y: 60 }
-    documentEvents.dispatchEvent(new Event('scroll'))
-    expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
-
-    dispatchTrusted('wheel')
-    runtime.advance(1_001)
-    position = { x: 0, y: 80 }
-    documentEvents.dispatchEvent(new Event('scroll'))
+    dispatchTrusted('scroll')
     expect(runtime.session.session?.lastMeaningfulActivityAt).toBe('2026-08-09T12:00:01.000Z')
     activity.stop()
   })
