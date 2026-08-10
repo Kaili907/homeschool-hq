@@ -25,4 +25,25 @@ describe('Admin operational aggregate reader', () => {
       p_required_capability: 'engines:read',
     })
   })
+
+  it('maps aggregate group overflow to incomplete evidence without exposing database detail', async () => {
+    const client = {
+      rpc: vi.fn(() => ({
+        abortSignal: vi.fn().mockResolvedValue({
+          data: null,
+          error: { code: '54000', message: 'raw SQL aggregate detail SECRET' },
+        }),
+      })),
+    }
+    await expect(createAdminOperationalAggregateReader({ client }).aggregate({
+      start: '2026-08-08T00:00:00.000Z',
+      endExclusive: '2026-08-09T00:00:00.000Z',
+      capability: 'health:read',
+    })).rejects.toMatchObject({ code: 'source_group_incomplete' })
+    await expect(createAdminOperationalAggregateReader({ client }).aggregate({
+      start: '2026-08-08T00:00:00.000Z',
+      endExclusive: '2026-08-09T00:00:00.000Z',
+      capability: 'health:read',
+    })).rejects.not.toThrow(/SECRET/)
+  })
 })

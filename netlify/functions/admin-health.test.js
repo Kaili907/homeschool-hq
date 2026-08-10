@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { ADMIN_ROLE_CAPABILITIES } from '../../src/admin/contracts.ts'
+import { AdminHealthSourceReadError } from './_shared/admin-health-source.js'
 import { createAdminHealthHandler } from './admin-health.js'
 
 const NOW = new Date('2026-08-08T12:00:00.000Z')
@@ -115,9 +116,30 @@ describe('authorized Admin System Health endpoint', () => {
     const response = await handler(request())
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toMatchObject({
-      overallHealth: 'unknown', evidenceCompleteness: 'invalid_rows_rejected',
+      overallHealth: 'unknown', evidenceCompleteness: 'unavailable',
     })
     expect(response.body).not.toContain('SECRET')
+  })
+
+  it.each([
+    'partial',
+    'retention_limited',
+    'malformed',
+    'unavailable',
+    'timeout',
+    'group_incomplete',
+  ])('preserves the privacy-safe %s completeness state and never reports healthy', async (completeness) => {
+    const handler = createAdminHealthHandler({
+      authorization: { require: vi.fn().mockResolvedValue(authorized()) },
+      source: { read: vi.fn().mockRejectedValue(new AdminHealthSourceReadError(completeness)) },
+      now: () => NOW,
+      disabledEngines: new Set(),
+    })
+    const response = await handler(request())
+    const body = JSON.parse(response.body)
+    expect(body).toMatchObject({ evidenceCompleteness: completeness, overallHealth: 'unknown' })
+    expect(body.engines.every((engine) => engine.health === 'unknown')).toBe(true)
+    expect(response.body).not.toMatch(/prompt|response|chat|assessmentAnswer|audio|privateNote|SECRET/i)
   })
 
   it('returns complete health beyond 500 events without exposing raw rows', async () => {
