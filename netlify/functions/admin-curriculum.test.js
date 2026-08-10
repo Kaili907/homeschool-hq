@@ -44,6 +44,21 @@ describe('admin curriculum handler', () => {
     expect(registry.productionPointer).toHaveBeenCalledOnce()
   })
 
+  it('authorizes narrow immutable Schema v2 index and entity reads', async () => {
+    const authorization = { require: vi.fn().mockResolvedValue({ ok: true, principal }) }
+    const { source, registry } = sources()
+    const studio = {
+      readBaseIndex: vi.fn().mockReturnValue({ schemaVersion: 1, baseReleaseVersion: '1.0.0', entities: [] }),
+      readBaseEntity: vi.fn().mockReturnValue({ schemaVersion: 1, baseReleaseVersion: '1.0.0', entityType: 'course', entityRef: 'course:math-5', payload: {} }),
+    }
+    const handler = createAdminCurriculumHandler({ authorization, source, registry, studio })
+    expect((await handler(event('/api/admin/curriculum/releases/1.0.0/authoring-index'))).statusCode).toBe(200)
+    expect((await handler(event('/api/admin/curriculum/releases/1.0.0/authoring/entities/course/course%3Amath-5'))).statusCode).toBe(200)
+    expect(studio.readBaseIndex).toHaveBeenCalledWith('1.0.0')
+    expect(studio.readBaseEntity).toHaveBeenCalledWith('1.0.0', 'course', 'course:math-5')
+    expect(authorization.require.mock.calls.every((call) => call[1] === 'curriculum:read')).toBe(true)
+  })
+
   it('fails closed before touching curriculum when authorization is denied', async () => {
     const { source, registry } = sources()
     const handler = createAdminCurriculumHandler({
