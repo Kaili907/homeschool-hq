@@ -15,7 +15,8 @@ function validateAttempt(input) {
     throw new TypeError('invalid_delivery_attempt')
   }
   if (
-    !/^study-safety-delivery:[a-f0-9]{64}$/.test(input.idempotencyKey) ||
+    // The durable estate keys delivery jobs `'delivery:' || study_sha256_json(...)`.
+    !/^delivery:[a-f0-9]{64}$/.test(input.idempotencyKey) ||
     !/^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/.test(input.attemptId) ||
     !/^recipient:[A-Za-z0-9._/-]{1,96}$/.test(input.recipientRef) ||
     !/^(?:email|in-app|sms)-route:[A-Za-z0-9._/-]{1,96}$/.test(input.routeRef) ||

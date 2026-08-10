@@ -223,6 +223,26 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-study-provider-cost-accounting-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810152000",
+      "filename": "20260810152000_academy_study_in_app_receipt_timestamp.sql",
+      "sha256": "6d9656bcda6d5a2493947ddc4bb396dfb82d1ec6e575e468fbbe71620ba62f93",
+      "dependency": "20260810150000_academy_study_curriculum_binding.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "security_manifest.in_app_receipt_delivered_at_normalized:absent->true",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810152100",
+      "filename": "20260810152100_academy_study_worker_operations_contract.sql",
+      "sha256": "0ab55c40fe1aacc614b150b9d395415f10b48e1503a8ba090288ebefddfc31d6",
+      "dependency": "20260810152000_academy_study_in_app_receipt_timestamp.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "c2_operations_contract_version:0->1",
+      "supersessionStatus": "current"
     }
   ]
 }

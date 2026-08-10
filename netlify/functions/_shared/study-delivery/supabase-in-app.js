@@ -1,5 +1,9 @@
 import { createSupabaseServiceRpc } from '../study-adult-review/supabase-ports.js'
 import { workerContextForRpc } from '../study-worker/context.js'
+import {
+  assertExactInAppDeliveryPayload,
+  assertExactInAppVerifyBinding,
+} from './in-app-receipt-validator.js'
 
 export function createSupabaseInAppPersistence(options = {}) {
   const rpc = options.rpc ?? createSupabaseServiceRpc(options)
@@ -26,9 +30,8 @@ export function createSupabaseInAppPersistence(options = {}) {
       }
       return rpc.call('academy_study_deliver_in_app_notification_v2', {
         p_worker_id: workerContext.workerIdentity,
-        p_delivery: {
+        p_delivery: assertExactInAppDeliveryPayload({
           schemaVersion: 2,
-          workerContext,
           jobId: input.jobId,
           leaseToken: lease.leaseToken,
           expectedRevision: lease.expectedRevision,
@@ -41,7 +44,7 @@ export function createSupabaseInAppPersistence(options = {}) {
           studentId: input.studentId,
           providerName: input.providerName,
           providerConfigVersion: input.providerConfigVersion,
-        },
+        }),
       }, { requireWorkerCredential: true, workerContext })
     },
     async verifyNotificationReceipt(binding) {
@@ -50,10 +53,7 @@ export function createSupabaseInAppPersistence(options = {}) {
       const { workerContext: _ignored, ...receiptBinding } = binding
       return rpc.call('academy_study_verify_in_app_notification_v2', {
         p_worker_id: workerContext.workerIdentity,
-        p_binding: {
-          ...receiptBinding,
-          workerContext,
-        },
+        p_binding: assertExactInAppVerifyBinding(receiptBinding),
       }, { requireWorkerCredential: true, workerContext })
     },
   })

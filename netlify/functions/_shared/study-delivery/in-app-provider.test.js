@@ -1,15 +1,18 @@
 import { describe, expect, it, vi } from 'vitest'
 import { createDurableInAppProvider } from './in-app-provider.js'
 
+const DELIVERY_KEY = `delivery:${'a'.repeat(64)}`
+const ROUTE_REF = `route:${'b'.repeat(64)}`
+
 const ATTEMPT = Object.freeze({
-  idempotencyKey: `study-safety-delivery:${'a'.repeat(64)}`,
+  idempotencyKey: DELIVERY_KEY,
   jobId: 'job:synthetic-1',
   attemptId: 'attempt:synthetic-1',
   proposalId: 'proposal:synthetic-1',
   householdId: 'household:synthetic-1',
   studentId: 'student:synthetic-1',
-  recipientRef: 'recipient:synthetic-guardian-1',
-  routeRef: 'in-app-route:synthetic-guardian-1',
+  recipientRef: `recipient:${'c'.repeat(64)}`,
+  routeRef: ROUTE_REF,
   templateCode: 'study-safety-adult-review-v1',
 })
 const WORKER_CONTEXT = Object.freeze({
@@ -224,32 +227,55 @@ describe('durable in-app notification provider', () => {
       .rejects.toThrow('in_app_persistence_contract')
   })
 
-  it('rejects raw/contact input, forged recipient, and forged routes before persistence', async () => {
+  it.each([
+    ['raw learner text', { rawLearnerText: 'synthetic learner disclosure' }],
+    ['raw tutor text', { rawTutorText: 'synthetic tutor reply' }],
+    ['transcript', { transcript: 'synthetic transcript' }],
+    ['prompt', { prompt: 'synthetic prompt' }],
+    ['response', { response: 'synthetic response' }],
+    ['disclosure body', { disclosureBody: 'synthetic disclosure' }],
+    ['email', { email: 'guardian@example.invalid' }],
+    ['phone', { phone: '+15555550123' }],
+    ['postal address', { postalAddress: '1 Synthetic Way' }],
+    ['destination string', { destination: 'synthetic destination' }],
+    ['message body', { messageBody: 'synthetic message body' }],
+  ])('rejects caller-supplied %s before persistence', async (_label, extra) => {
+    const persistence = durablePersistence()
+    await expect(provider(persistence).deliver(request({ ...ATTEMPT, ...extra })))
+      .rejects.toThrow('invalid_in_app_delivery_request')
+    await expect(provider(persistence).deliver(request(ATTEMPT, {
+      recipient: { recipientRef: ATTEMPT.recipientRef, ...extra },
+    }))).rejects.toThrow('invalid_in_app_delivery_request')
+    expect(persistence.insertNotification).not.toHaveBeenCalled()
+  })
+
+  it('rejects forged recipients and non-in-app routes before persistence', async () => {
     const persistence = durablePersistence()
     const configured = provider(persistence)
-    for (const extra of [
-      { rawText: 'synthetic disclosure' },
-      { transcript: 'synthetic transcript' },
-      { email: 'guardian@example.invalid' },
-      { destination: 'synthetic destination' },
-    ]) {
-      await expect(configured.deliver(request({ ...ATTEMPT, ...extra })))
-        .rejects.toThrow('invalid_in_app_delivery_request')
+    for (const routeRef of [
+      'email-route:forged',
+      'sms-route:forged',
+      'route:',
+      `in-app-route:${'b'.repeat(64)}`,
+    ])  {
+      await expect(configured.deliver(request({ ...ATTEMPT, routeRef })))
+        .rejects.toThrow('invalid_in_app_delivery')
     }
-    await expect(configured.deliver(request({ ...ATTEMPT, routeRef: 'email-route:forged' })))
-      .rejects.toThrow('invalid_in_app_delivery')
     await expect(configured.deliver(request(ATTEMPT, {
-      recipient: { recipientRef: 'recipient:forged' },
+      recipient: { recipientRef: `recipient:${'d'.repeat(64)}` },
     }))).rejects.toThrow('invalid_in_app_delivery_request')
+    await expect(configured.deliver(request({ ...ATTEMPT, templateCode: 'study-external-email-v1' })))
+      .rejects.toThrow('invalid_in_app_delivery')
     expect(persistence.insertNotification).not.toHaveBeenCalled()
   })
 
   it.each([
     ['unverified', { verified: false }],
-    ['wrong recipient', { recipientRef: 'recipient:another-guardian' }],
+    ['wrong recipient', { recipientRef: `recipient:${'e'.repeat(64)}` }],
     ['wrong attempt', { attemptId: 'attempt:another-attempt' }],
     ['wrong job', { jobId: 'job:another-job' }],
-    ['wrong route', { routeRef: 'in-app-route:another' }],
+    ['wrong proposal', { proposalId: 'proposal:another-proposal' }],
+    ['wrong route', { routeRef: `route:${'c'.repeat(64)}` }],
     ['wrong household', { householdId: 'household:another' }],
     ['wrong student', { studentId: 'student:another' }],
     ['wrong provider version', { providerConfigVersion: 'in-app-config-v0' }],
@@ -261,6 +287,96 @@ describe('durable in-app notification provider', () => {
     })
     await expect(provider(persistence).deliver(request()))
       .rejects.toThrow(/(?:in_app_persistence_contract|receipt_binding_mismatch)/)
+  })
+
+  it('rejects a receipt bound to another notification receipt ref', async () => {
+    const persistence = durablePersistence({
+      verifyNotificationReceipt: vi.fn(async () => ({
+        ...RECEIPT,
+        providerReceiptRef: 'in-app-receipt:another-notification',
+      })),
+    })
+    await expect(provider(persistence).deliver(request()))
+      .rejects.toThrow('receipt_binding_mismatch:providerReceiptRef')
+  })
+
+  it('treats an already-delivered retry as idempotent without a second notification', async () => {
+    const persistence = durablePersistence({
+      insertNotification: vi.fn(async () => insertResult({ state: 'already-delivered' })),
+    })
+    const configured = provider(persistence)
+    const first = await configured.deliver(request())
+    const retry = await configured.deliver(request())
+
+    expect(retry).toEqual(first)
+    expect(retry).toMatchObject({
+      state: 'already-delivered',
+      verified: true,
+      providerReceiptRef: RECEIPT.providerReceiptRef,
+      attemptId: ATTEMPT.attemptId,
+    })
+    expect(persistence.insertNotification).toHaveBeenCalledTimes(2)
+    expect(persistence.insertNotification.mock.calls[0]).toEqual(
+      persistence.insertNotification.mock.calls[1],
+    )
+  })
+
+  it.each([
+    ['malformed receipt reference', { providerReceiptRef: 'notification:synthetic-1' }],
+    ['unknown result field', { extraField: 'synthetic' }],
+    ['unknown insert state', { state: 'submitted' }],
+  ])('rejects an insert result with a %s', async (_label, patch) => {
+    const persistence = durablePersistence({
+      insertNotification: vi.fn(async () => insertResult(patch)),
+    })
+    await expect(provider(persistence).deliver(request()))
+      .rejects.toThrow('in_app_persistence_contract')
+    expect(persistence.verifyNotificationReceipt).not.toHaveBeenCalled()
+  })
+
+  it.each([
+    'providerReceiptRef', 'jobId', 'attemptId', 'proposalId', 'householdId',
+    'studentId', 'deliveryIdempotencyKey', 'recipientRef', 'routeRef',
+    'providerName', 'providerConfigVersion', 'notification',
+  ])('rejects an insert result missing %s', async (key) => {
+    const { [key]: _dropped, ...incomplete } = insertResult()
+    const persistence = durablePersistence({
+      insertNotification: vi.fn(async () => incomplete),
+    })
+    await expect(provider(persistence).deliver(request()))
+      .rejects.toThrow('in_app_persistence_contract')
+    expect(persistence.verifyNotificationReceipt).not.toHaveBeenCalled()
+  })
+
+  it('rejects a malformed evidence reference on an otherwise valid receipt', async () => {
+    const persistence = durablePersistence({
+      verifyNotificationReceipt: vi.fn(async () => ({
+        ...RECEIPT, evidenceRef: 'https://example.invalid/evidence',
+      })),
+    })
+    await expect(provider(persistence).deliver(request()))
+      .rejects.toThrow('in_app_persistence_contract')
+  })
+
+  it('leaks no lease token, idempotency key, or credential in thrown errors', async () => {
+    const leaseToken = 'lease:synthetic-secret-token'
+    const secrets = [leaseToken, ATTEMPT.idempotencyKey, WORKER_CONTEXT.credentialId]
+
+    const rejected = await provider(durablePersistence())
+      .deliver(request(ATTEMPT, { leaseToken }))
+      .catch((thrown) => thrown)
+    expect(rejected.message).toBe('invalid_in_app_delivery_request')
+
+    const failed = await provider(durablePersistence({
+      insertNotification: vi.fn(async () => { throw new Error('in_app_lease_context_invalid') }),
+    })).deliver(request()).catch((thrown) => thrown)
+    expect(failed.message).toBe('in_app_lease_context_invalid')
+
+    for (const error of [rejected, failed]) {
+      for (const secret of secrets) {
+        expect(`${error.message}${error.stack}`).not.toContain(secret)
+      }
+    }
   })
 
   it('rejects revoked, expired, wrong-scope, or forged-version worker contexts', async () => {
