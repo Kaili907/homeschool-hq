@@ -17,6 +17,18 @@ function summary(overrides = {}) {
   }
 }
 
+function completeness(overrides = {}) {
+  return {
+    grouping: 'complete', groupCount: 1, groupLimit: 4096, allRetentionClasses: true,
+    retentionClasses: [
+      { category: 'diagnostic_short', retainedDays: 30, complete: true },
+      { category: 'operational_standard', retainedDays: 90, complete: true },
+      { category: 'safety_extended', retainedDays: 365, complete: true },
+    ],
+    ...overrides,
+  }
+}
+
 function aggregate(overrides = {}) {
   const complete = summary({
     eventCount: 501, successCount: 501, durationCount: 501,
@@ -25,7 +37,12 @@ function aggregate(overrides = {}) {
   })
   return {
     schemaVersion: 2,
-    completeness: { grouping: 'complete', groupCount: 1, groupLimit: 4096, allRetentionClasses: true },
+    range: {
+      start: '2026-08-08T11:00:00.000Z', endExclusive: '2026-08-08T12:00:00.001Z',
+      maximumDays: 366,
+    },
+    filters: { engine: null, engineVersion: null, courseRef: null, unitRef: null },
+    completeness: completeness(),
     totalEventCount: 501,
     summary: complete,
     engineSummaries: [{
@@ -34,9 +51,11 @@ function aggregate(overrides = {}) {
     }],
     serviceSummaries: [],
     groups: [{
+      retentionCategory: 'diagnostic_short',
       engine: 'study', eventType: 'study.session', result: 'success',
       operation: 'complete', provider: null, route: null,
-      eventCount: 501, lastOccurredAt: OBSERVED_AT,
+      eventCount: 501, durationCount: 501,
+      firstOccurredAt: '2026-08-08T11:00:00.000Z', lastOccurredAt: OBSERVED_AT,
     }],
     ...overrides,
   }
@@ -44,8 +63,18 @@ function aggregate(overrides = {}) {
 
 describe('System Health telemetry source', () => {
   it('uses only TEL-FOUNDATION aggregates with health:read and keeps >500 complete', async () => {
-    const abortSignal = vi.fn().mockResolvedValue({ data: aggregate(), error: null })
-    const rpc = vi.fn(() => ({ abortSignal }))
+    const rpc = vi.fn((_name, parameters) => {
+      const firstOccurredAt = parameters.p_start
+      const lastOccurredAt = new Date(Date.parse(parameters.p_end) - 10).toISOString()
+      const value = aggregate({
+        range: { start: parameters.p_start, endExclusive: parameters.p_end, maximumDays: 366 },
+      })
+      for (const item of [value.summary, value.engineSummaries[0], value.groups[0]]) {
+        item.firstOccurredAt = firstOccurredAt
+        item.lastOccurredAt = lastOccurredAt
+      }
+      return { abortSignal: vi.fn().mockResolvedValue({ data: value, error: null }) }
+    })
     const source = createAdminHealthSource({ client: { rpc } })
     const evidence = await source.read({ now: NOW, selectedWindow: '1h' })
     expect(evidence.evaluation).toMatchObject({
@@ -77,7 +106,7 @@ describe('System Health telemetry source', () => {
   it('accepts a complete empty aggregate as no telemetry', () => {
     expect(decodeSystemHealthAggregate(aggregate({
       completeness: {
-        grouping: 'complete', groupCount: 0, groupLimit: 4096, allRetentionClasses: true,
+        ...completeness(), groupCount: 0,
       },
       totalEventCount: 0,
       summary: summary(),
@@ -89,10 +118,77 @@ describe('System Health telemetry source', () => {
 
   it('rejects incomplete or internally inconsistent aggregate evidence', async () => {
     expect(decodeSystemHealthAggregate(aggregate({
-      completeness: { grouping: 'complete', groupCount: 1, groupLimit: 4096, allRetentionClasses: false },
+      completeness: completeness({ allRetentionClasses: false }),
     }))).toBeNull()
     expect(decodeSystemHealthAggregate(aggregate({ totalEventCount: 500 }))).toBeNull()
     const reader = { aggregate: vi.fn().mockResolvedValue(aggregate({ totalEventCount: 500 })) }
+    await expect(createAdminHealthSource({ reader }).read({ now: NOW, selectedWindow: '1h' }))
+      .rejects.toThrow('health_source_unavailable')
+  })
+
+  it('cross-checks result, engine, service, duration, range, and retention facts', () => {
+    const complete = summary({
+      eventCount: 20, successCount: 20, durationCount: 20,
+      durationP50Ms: 11, durationP95Ms: 19,
+      firstOccurredAt: '2026-08-08T11:00:00.000Z', lastOccurredAt: OBSERVED_AT,
+    })
+    const valid = aggregate({
+      totalEventCount: 20,
+      summary: complete,
+      engineSummaries: [{
+        engine: 'gateway', appVersion: 'deploy.1', engineVersion: 'gateway.v2',
+        curriculumVersion: null, ...complete,
+      }],
+      serviceSummaries: [{ serviceId: 'anthropic_gateway', ...complete }],
+      groups: [{
+        retentionCategory: 'operational_standard', engine: 'gateway',
+        eventType: 'gateway.request', result: 'success', operation: 'request',
+        provider: 'anthropic', route: null, eventCount: 20, durationCount: 20,
+        firstOccurredAt: '2026-08-08T11:00:00.000Z', lastOccurredAt: OBSERVED_AT,
+      }],
+    })
+    expect(decodeSystemHealthAggregate(valid)).toMatchObject({
+      summary: { eventCount: 20, successCount: 20 },
+      engines: [{ engineId: 'gateway', eventCount: 20 }],
+      services: [{ serviceId: 'anthropic_gateway', eventCount: 20 }],
+    })
+
+    const contradictoryResult = structuredClone(valid)
+    contradictoryResult.summary.successCount = 0
+    contradictoryResult.summary.timeoutCount = 20
+    expect(decodeSystemHealthAggregate(contradictoryResult)).toBeNull()
+
+    const contradictoryEngine = structuredClone(valid)
+    contradictoryEngine.engineSummaries[0].successCount = 0
+    contradictoryEngine.engineSummaries[0].timeoutCount = 20
+    expect(decodeSystemHealthAggregate(contradictoryEngine)).toBeNull()
+
+    const contradictoryService = structuredClone(valid)
+    contradictoryService.serviceSummaries[0].eventCount = 19
+    contradictoryService.serviceSummaries[0].successCount = 19
+    contradictoryService.serviceSummaries[0].durationCount = 19
+    expect(decodeSystemHealthAggregate(contradictoryService)).toBeNull()
+
+    const invalidLatency = structuredClone(valid)
+    invalidLatency.summary.durationP50Ms = 20
+    invalidLatency.summary.durationP95Ms = 10
+    expect(decodeSystemHealthAggregate(invalidLatency)).toBeNull()
+
+    const unsafeVersion = structuredClone(valid)
+    unsafeVersion.engineSummaries[0].appVersion = 'raw provider secret'
+    expect(decodeSystemHealthAggregate(unsafeVersion)).toBeNull()
+
+    const inconsistentRetention = structuredClone(valid)
+    inconsistentRetention.completeness.retentionClasses[0].complete = false
+    expect(decodeSystemHealthAggregate(inconsistentRetention)).toBeNull()
+
+    const missingRange = structuredClone(valid)
+    delete missingRange.range
+    expect(decodeSystemHealthAggregate(missingRange)).toBeNull()
+  })
+
+  it('rejects a valid aggregate returned for a different requested range', async () => {
+    const reader = { aggregate: vi.fn().mockResolvedValue(aggregate()) }
     await expect(createAdminHealthSource({ reader }).read({ now: NOW, selectedWindow: '1h' }))
       .rejects.toThrow('health_source_unavailable')
   })
