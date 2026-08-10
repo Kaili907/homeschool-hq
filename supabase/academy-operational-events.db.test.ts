@@ -12,6 +12,10 @@ const migrationSql = readFile(
   new URL('./migrations/20260808121000_academy_operational_events.sql', import.meta.url),
   'utf8',
 )
+const foundationMigrationSql = readFile(
+  new URL('./migrations/20260809120000_academy_operational_telemetry_foundation.sql', import.meta.url),
+  'utf8',
+)
 
 const bootstrapSql = `
   create role anon nologin;
@@ -103,11 +107,22 @@ async function listAsService(database: PGlite, parameters: unknown[]) {
     ))
 }
 
+async function aggregateAsService(database: PGlite, parameters: unknown[]) {
+  return asRole(database, 'service_role', null, () =>
+    database.query<{ aggregate: Record<string, unknown> }>(
+      `select public.academy_aggregate_operational_events_v2(
+        $1, $2, $3, $4, $5, $6, $7
+      ) as aggregate`,
+      parameters,
+    ))
+}
+
 beforeEach(async () => {
   const database = await PGlite.create()
   databases.push(database)
   await database.exec(bootstrapSql)
   await database.exec(await migrationSql)
+  await database.exec(await foundationMigrationSql)
 })
 
 afterEach(async () => {
@@ -278,5 +293,72 @@ describe('ADMIN-0 v2 operational event database contract', () => {
     await expect(asRole(database, 'authenticated', GUARDIAN_ID, () =>
       database.query('select public.academy_purge_expired_operational_events_v2(100)')))
       .rejects.toThrow()
+  })
+
+  it('returns a complete bounded aggregate beyond the raw 500-event read ceiling', async () => {
+    const database = databases[0]
+    await asRole(database, 'service_role', null, () => database.query(`
+      select public.academy_record_operational_event_v2(
+        'aggregate:execution:' || series::text,
+        $1::jsonb
+      )
+      from generate_series(1, 501) as series
+    `, [JSON.stringify(facts({
+      curriculum_version: null, course_ref: null, unit_ref: null,
+      lesson_ref: null, skill_ref: null,
+    }))]))
+    const end = new Date(Date.now() + 60_000)
+    const start = new Date(end.getTime() - 24 * 60 * 60 * 1_000)
+    const response = await aggregateAsService(database, [
+      start.toISOString(), end.toISOString(), 'study', null, null, null, 'engines:read',
+    ])
+    const aggregate = response.rows[0].aggregate as any
+    expect(aggregate).toMatchObject({
+      schemaVersion: 2,
+      totalEventCount: 501,
+      completeness: {
+        grouping: 'complete', groupCount: 1, groupLimit: 4096,
+        allRetentionClasses: true,
+      },
+      groups: [{ engine: 'study', eventType: 'study.session', eventCount: 501 }],
+    })
+    expect(JSON.stringify(aggregate)).not.toMatch(
+      /eventId|executionKey|householdRef|learnerRef|metadata|conversation|prompt|response|audio|assessmentAnswer/i,
+    )
+  })
+
+  it('declares retention-safe windows instead of mixing differently retained populations', async () => {
+    const end = new Date(Date.now() + 60_000)
+    const start = new Date(end.getTime() - 31 * 24 * 60 * 60 * 1_000)
+    const response = await aggregateAsService(databases[0], [
+      start.toISOString(), end.toISOString(), null, null, null, null, 'engines:read',
+    ])
+    const completeness = (response.rows[0].aggregate as any).completeness
+    expect(completeness.allRetentionClasses).toBe(false)
+    expect(completeness.retentionClasses).toEqual([
+      { category: 'diagnostic_short', retainedDays: 30, complete: false },
+      { category: 'operational_standard', retainedDays: 90, complete: true },
+      { category: 'safety_extended', retainedDays: 365, complete: true },
+    ])
+  })
+
+  it('enforces Admin authorization and deterministic aggregate range bounds', async () => {
+    const database = databases[0]
+    const end = new Date(Date.now() + 60_000)
+    const validStart = new Date(end.getTime() - 24 * 60 * 60 * 1_000)
+    const tooEarly = new Date(end.getTime() - 367 * 24 * 60 * 60 * 1_000)
+    await expect(asRole(database, 'authenticated', GUARDIAN_ID, () =>
+      database.query(`select public.academy_aggregate_operational_events_v2(
+        $1, $2, null, null, null, null, 'engines:read'
+      )`, [validStart.toISOString(), end.toISOString()]))).rejects.toThrow()
+    await expect(aggregateAsService(database, [
+      validStart.toISOString(), end.toISOString(), null, null, null, null, 'learners:read',
+    ])).rejects.toThrow()
+    await expect(aggregateAsService(database, [
+      validStart.toISOString(), end.toISOString(), null, null, null, null, null,
+    ])).rejects.toThrow()
+    await expect(aggregateAsService(database, [
+      tooEarly.toISOString(), end.toISOString(), null, null, null, null, 'health:read',
+    ])).rejects.toThrow()
   })
 })

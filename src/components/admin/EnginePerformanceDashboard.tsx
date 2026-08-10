@@ -12,7 +12,7 @@ const ENGINE_LABELS: Readonly<Record<AdminEngineId, string>> = {
 }
 
 const WINDOW_LABELS: Readonly<Record<EnginePerformanceWindowPreset, string>> = {
-  '7d': 'Last 7 days', '30d': 'Last 30 days', '90d': 'Last 90 days',
+  '7d': 'Last 7 days', '30d': 'Last 30 days',
 }
 
 function metricValue(metric: EnginePerformanceMetric): string {

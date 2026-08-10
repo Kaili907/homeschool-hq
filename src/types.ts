@@ -598,6 +598,31 @@ export interface VoiceRef {
   label: string
 }
 
+/** New premium writes contain logical catalog authority only. */
+export interface CatalogVoiceSelection {
+  kind: 'catalog'
+  voiceRef: string
+  voiceVersion: string
+  displayLabel: string
+}
+
+/** Browser speech selection remains a separate device-native reference. */
+export interface BrowserVoiceSelection {
+  kind: 'browser'
+  voiceURI: string
+  displayLabel: string
+}
+
+export type VoiceSelection = CatalogVoiceSelection | BrowserVoiceSelection
+
+/** Read-only runtime sentinel for a preserved historical raw premium selection. */
+export interface LegacyPremiumVoiceSelection {
+  kind: 'legacy'
+  displayLabel: 'Legacy premium voice (browser fallback)'
+}
+
+export type ResolvedVoiceSelection = VoiceSelection | LegacyPremiumVoiceSelection
+
 /** SE-A: best result a girl has reached on one typing lesson. */
 export interface TypingLessonState {
   /** best accuracy % ever hit on this lesson (0–100). */
@@ -719,9 +744,14 @@ export interface TutorPrefs {
   /**
    * MT-V per-subject voice map (additive; no schema bump). Unset slots fall
    * through to `default`, then to the legacy `voiceURI` (browser), then the
-   * browser default. An MT-1 single voice migrates into the `default` slot.
+   * browser default. Historical values are never rewritten during normal profile load.
    */
   voiceMap?: Partial<Record<VoiceSlot, VoiceRef>>
+  /**
+   * Canonical tagged selections for all new writes. Catalog entries carry only
+   * logical ref/version; historical voiceMap values remain untouched beneath it.
+   */
+  voiceSelections?: Partial<Record<VoiceSlot, VoiceSelection>>
 }
 
 /** One "Needs Dad" flag: the skill is gated from practice until Dad clears it. */

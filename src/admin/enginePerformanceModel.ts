@@ -12,7 +12,9 @@ export const ENGINE_PERFORMANCE_RATE_MIN_SAMPLE = 10
 export const ENGINE_PERFORMANCE_VERSION_COMPARISON_MIN_SAMPLE = 20
 export const ENGINE_PERFORMANCE_SOURCE_LIMIT = 500
 
-export const ENGINE_PERFORMANCE_WINDOWS = ['7d', '30d', '90d'] as const
+// Ordinary successful observations retain for 30 days. Longer performance
+// windows would compare them with longer-retained failures and bias rates.
+export const ENGINE_PERFORMANCE_WINDOWS = ['7d', '30d'] as const
 export type EnginePerformanceWindowPreset = (typeof ENGINE_PERFORMANCE_WINDOWS)[number]
 
 export interface EnginePerformanceFilters {

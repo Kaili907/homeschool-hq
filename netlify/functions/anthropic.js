@@ -21,6 +21,11 @@ import {
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
 import { createGatewayAccess, dailyLimit } from './_shared/gateway-access.js'
 import {
+  createGatewayOperationalTelemetry,
+  gatewayErrorTerminal,
+  recordGatewayTerminal,
+} from './_shared/gateway-telemetry.js'
+import {
   elapsedMilliseconds,
   parseAnthropicUsage,
   persistProviderUsage,
@@ -45,6 +50,8 @@ export function createAnthropicHandler(overrides = {}) {
 
     const env = overrides.env ?? process.env
     const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
+    let finalizeTelemetry
+    let telemetryRecorded = false
 
     try {
       const auth = await verifySupabaseBearer(event, { fetchImpl, env })
@@ -57,11 +64,43 @@ export function createAnthropicHandler(overrides = {}) {
       const access = overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl })
       const entitlement = await access.requireEntitlement(auth.user.id)
 
+      const startedAt = Date.now()
+      const requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
+      const authority = entitlement
+      const telemetry = overrides.telemetry
+        ?? createGatewayOperationalTelemetry({ env, access })
+      let mode
+      let providerReceiptDurationMs
+      finalizeTelemetry = async ({
+        result, statusCode, reasonCode, accountingAvailable,
+      }) => {
+        telemetryRecorded = true
+        return recordGatewayTerminal(telemetry, {
+          requestKey,
+          authority,
+          mode,
+          operation: 'anthropic_messages',
+          provider: 'anthropic',
+          route: 'anthropic',
+          result,
+          statusCode,
+          durationMs: providerReceiptDurationMs ?? elapsedMilliseconds(startedAt),
+          reasonCode,
+          accountingAvailable,
+        })
+      }
+
       const request = validateAnthropicRequest(readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES))
+      mode = request.mode
       const versions = trustedUsageVersions(env, request.mode)
 
       const apiKey = typeof env.ANTHROPIC_API_KEY === 'string' ? env.ANTHROPIC_API_KEY.trim() : ''
-      if (!apiKey) return errorResponse(503, 'service_unavailable')
+      if (!apiKey) {
+        await finalizeTelemetry({
+          result: 'provider_error', statusCode: 503, reasonCode: 'service_unavailable',
+        })
+        return errorResponse(503, 'service_unavailable')
+      }
 
       await access.consumeUsage(
         auth.user.id,
@@ -73,10 +112,9 @@ export function createAnthropicHandler(overrides = {}) {
       let providerData
       const providerBody = buildAnthropicProviderBody(request)
       const occurredAt = new Date().toISOString()
-      const startedAt = Date.now()
-      const requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
-      const recordUsage = async (result, resultReasonCode, usage, billingDisposition) =>
-        persistProviderUsage(access, {
+      const recordUsage = async (result, resultReasonCode, usage, billingDisposition) => {
+        providerReceiptDurationMs = elapsedMilliseconds(startedAt)
+        return persistProviderUsage(access, {
           requestKey,
           occurredAt,
           accountRef: auth.user.id,
@@ -93,11 +131,12 @@ export function createAnthropicHandler(overrides = {}) {
           cachedInputReadTokens: usage?.cacheReadInputTokens,
           cachedInputWriteTokens: usage?.cacheWriteInputTokens,
           ttsCharacters: null,
-          latencyMs: elapsedMilliseconds(startedAt),
+          latencyMs: providerReceiptDurationMs,
           result,
           resultReasonCode,
           billingDisposition,
         })
+      }
       const signal = AbortSignal.timeout(ANTHROPIC_TIMEOUT_MS)
       try {
         upstream = await fetchImpl(ANTHROPIC_URL, {
@@ -113,11 +152,19 @@ export function createAnthropicHandler(overrides = {}) {
           body: JSON.stringify(providerBody),
         })
         if (upstream.status === 429) {
-          await recordUsage('rejected', 'provider_throttled', null, 'unknown')
+          const accountingAvailable = await recordUsage('rejected', 'provider_throttled', null, 'unknown')
+          await finalizeTelemetry({
+            result: 'rejected', statusCode: 429, reasonCode: 'provider_throttled',
+            accountingAvailable,
+          })
           return errorResponse(429, 'usage_limit')
         }
         if (!upstream.ok) {
-          await recordUsage('provider_error', 'provider_rejected', null, 'unknown')
+          const accountingAvailable = await recordUsage('provider_error', 'provider_rejected', null, 'unknown')
+          await finalizeTelemetry({
+            result: 'provider_error', statusCode: 502, reasonCode: 'provider_rejected',
+            accountingAvailable,
+          })
           return errorResponse(502, 'provider_failure')
         }
 
@@ -125,15 +172,23 @@ export function createAnthropicHandler(overrides = {}) {
         providerData = JSON.parse(new TextDecoder().decode(bytes))
       } catch (error) {
         if (isTimeoutError(error, signal)) {
-          await recordUsage('timeout', 'upstream_timeout', null, 'unknown')
+          const accountingAvailable = await recordUsage('timeout', 'upstream_timeout', null, 'unknown')
+          await finalizeTelemetry({
+            result: 'timeout', statusCode: 504, reasonCode: 'upstream_timeout',
+            accountingAvailable,
+          })
           return errorResponse(504, 'upstream_timeout')
         }
-        await recordUsage(
+        const reasonCode = 'invalid_provider_response'
+        const accountingAvailable = await recordUsage(
           'provider_error',
-          'invalid_provider_response',
+          reasonCode,
           null,
           upstream?.ok ? 'billable' : 'unknown',
         )
+        await finalizeTelemetry({
+          result: 'provider_error', statusCode: 502, reasonCode, accountingAvailable,
+        })
         if (error instanceof GatewayError) throw error
         return errorResponse(502, 'provider_failure')
       }
@@ -142,33 +197,51 @@ export function createAnthropicHandler(overrides = {}) {
       try {
         text = sanitizeGatewayText(request, extractAnthropicText(providerData))
       } catch (error) {
-        await recordUsage(
+        const reasonCode = 'response_sanitization_rejected'
+        const accountingAvailable = await recordUsage(
           'validation_error',
-          'response_sanitization_rejected',
+          reasonCode,
           usage.kind === 'valid' ? usage : null,
           'billable',
         )
+        await finalizeTelemetry({
+          result: 'validation_error', statusCode: 502, reasonCode, accountingAvailable,
+        })
         throw error
       }
       if (!text) {
-        await recordUsage(
+        const reasonCode = 'response_sanitization_rejected'
+        const accountingAvailable = await recordUsage(
           'validation_error',
-          'response_sanitization_rejected',
+          reasonCode,
           usage.kind === 'valid' ? usage : null,
           'billable',
         )
+        await finalizeTelemetry({
+          result: 'validation_error', statusCode: 502, reasonCode, accountingAvailable,
+        })
         return errorResponse(502, 'provider_failure')
       }
 
-      await recordUsage(
+      const usageReason = usage.kind === 'valid' ? null : `${usage.kind}_provider_usage`
+      const accountingAvailable = await recordUsage(
         'success',
-        usage.kind === 'valid' ? null : `${usage.kind}_provider_usage`,
+        usageReason,
         usage.kind === 'valid' ? usage : null,
         'billable',
       )
 
+      await finalizeTelemetry({
+        result: 'success',
+        statusCode: 200,
+        reasonCode: usageReason ?? 'completed',
+        accountingAvailable,
+      })
       return jsonResponse(200, { text })
     } catch (error) {
+      if (finalizeTelemetry && !telemetryRecorded) {
+        await finalizeTelemetry(gatewayErrorTerminal(error))
+      }
       return responseForError(error)
     }
   }

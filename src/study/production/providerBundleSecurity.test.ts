@@ -30,6 +30,8 @@ const FORBIDDEN_PRODUCTION_BUNDLE_MARKERS = [
   'VITE_ELEVENLABS_API_KEY',
   UNSAFE_BUILD_REQUESTS.VITE_ANTHROPIC_API_KEY,
   UNSAFE_BUILD_REQUESTS.VITE_ELEVENLABS_API_KEY,
+  'server-only-provider-voice-sentinel',
+  'synthetic-provider-voice-secret',
 
   // Frozen RC1 and explicit local-preview identities/implementations.
   'learner:local-release-candidate',

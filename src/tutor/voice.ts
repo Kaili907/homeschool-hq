@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import type { VoiceProviderId, VoiceRef } from '../types'
+import type { ResolvedVoiceSelection } from '../types'
 import { getGatewayAccessToken } from './gatewayAuth'
+import { getVoiceCatalogAccess, resetVoiceCatalogAccess, type VoiceCatalogAccess } from './voiceCatalog'
 
 /**
  * MT-V voice: a ranked provider adapter — **cache → ElevenLabs → browser TTS**.
@@ -13,7 +14,7 @@ import { getGatewayAccessToken } from './gatewayAuth'
  * The public `speak()` / `cancelSpeech()` / `SpeakOptions` surface is unchanged so
  * Walkthrough / QuizSession keep calling the speak layer exactly as before; the
  * only new wire is that `SpeakOptions.voiceURI` may now carry an encoded premium
- * ref (`el:<voiceId>`) which the adapter routes to ElevenLabs.
+ * ref (`catalog:<voiceRef>:<voiceVersion>`) which the adapter routes through the authenticated Academy gateway.
  */
 
 // ---------- MT-1 browser voice list (unchanged) ----------
@@ -44,27 +45,46 @@ export function useVoices(): SpeechSynthesisVoice[] {
 const clampRate = (r: number) => Math.max(0.5, Math.min(1.5, r))
 
 export interface SpeakOptions {
-  /** browser voiceURI, or an encoded premium ref (`el:<voiceId>`) — see encodeVoiceRef. */
+  /** browser voiceURI, or an encoded premium ref (`catalog:<voiceRef>:<voiceVersion>`) — see encodeVoiceRef. */
   voiceURI?: string
   rate?: number
 }
 
-// ---------- ref encoding: pack (provider, ref) into one opaque string ----------
+// ---------- ref encoding: pack the logical catalog selection into one opaque string ----------
 // Walkthrough/QuizSession forward SpeakOptions.voiceURI untouched, so the provider
-// choice rides inside that string. Browser voiceURIs never start with "el:".
+// logical selection rides inside that string. Browser voiceURIs never start with "catalog:".
 
-const EL_PREFIX = 'el:'
+const CATALOG_PREFIX = 'catalog:'
 
-export function encodeVoiceRef(v: VoiceRef | undefined): string | undefined {
-  if (!v || !v.ref) return undefined
-  return v.provider === 'elevenlabs' ? EL_PREFIX + v.ref : v.ref
+export function encodeVoiceRef(v: ResolvedVoiceSelection | undefined): string | undefined {
+  if (!v || v.kind === 'legacy') return undefined
+  if (v.kind === 'browser') return v.voiceURI || undefined
+  return `${CATALOG_PREFIX}${encodeURIComponent(v.voiceRef)}:${encodeURIComponent(v.voiceVersion)}`
 }
 
-export function parseVoiceRef(voiceURI?: string): { provider: VoiceProviderId; ref: string } {
-  if (voiceURI && voiceURI.startsWith(EL_PREFIX)) {
-    return { provider: 'elevenlabs', ref: voiceURI.slice(EL_PREFIX.length) }
+export type ParsedVoiceRef =
+  | { provider: 'catalog'; voiceRef: string; voiceVersion: string }
+  | { provider: 'browser'; ref: string }
+
+export function parseVoiceRef(value?: string, explicitVersion?: string): ParsedVoiceRef {
+  if (value && explicitVersion && /^academy\.tts\./.test(value)) {
+    return { provider: 'catalog', voiceRef: value, voiceVersion: explicitVersion }
   }
-  return { provider: 'browser', ref: voiceURI ?? '' }
+  if (value?.startsWith(CATALOG_PREFIX)) {
+    const parts = value.slice(CATALOG_PREFIX.length).split(':')
+    if (parts.length === 2) {
+      try {
+        return {
+          provider: 'catalog',
+          voiceRef: decodeURIComponent(parts[0]),
+          voiceVersion: decodeURIComponent(parts[1]),
+        }
+      } catch {
+        // Malformed catalog selections safely degrade to browser speech.
+      }
+    }
+  }
+  return { provider: 'browser', ref: value ?? '' }
 }
 
 // ---------- deterministic cache key: hash(voiceRef + rate + text) ----------
@@ -84,16 +104,22 @@ export function hashKey(str: string): string {
   return n.toString(36)
 }
 
-export function cacheKeyFor(voiceRef: string | undefined, rate: number, text: string): string {
-  return hashKey(`${voiceRef ?? ''}${rate}${text}`)
+export function cacheKeyFor(
+  voiceRef: string,
+  voiceVersion: string,
+  rate: number,
+  text: string,
+): string {
+  return hashKey(`${voiceRef}${voiceVersion}${rate}${text}`)
 }
 
 // ---------- interfaces (all provider-agnostic + dependency-injectable for tests) ----------
 
 export interface SpeakRequest {
   text: string
-  /** encoded ref: `el:<voiceId>` for ElevenLabs, else a browser voiceURI (or undefined). */
+  /** Logical premium ref (with voiceVersion), encoded selection, or browser voiceURI. */
   voiceRef?: string
+  voiceVersion?: string
   rate?: number
 }
 
@@ -119,7 +145,7 @@ export interface UsageMeter {
 
 export interface ElevenLabsSynth {
   available(): boolean
-  synthesize(req: { text: string; voiceId: string }): Promise<Blob>
+  synthesize(req: { text: string; voiceRef: string; voiceVersion: string }): Promise<Blob>
 }
 
 export interface BrowserTts {
@@ -132,6 +158,7 @@ export interface VoiceAdapterDeps {
   cache: AudioCache
   usage: UsageMeter
   elevenLabs: ElevenLabsSynth
+  catalog: VoiceCatalogAccess
   browser: BrowserTts
   /** play a synthesized mp3 blob through the single shared Audio element. */
   playAudio: (blob: Blob) => Promise<void>
@@ -151,73 +178,20 @@ export interface VoiceAdapter {
 // ---------- the adapter ----------
 
 export function createVoiceAdapter(deps: VoiceAdapterDeps): VoiceAdapter {
-  const { cache, usage, elevenLabs, browser, playAudio, stopAudio, log } = deps
+  const { cache, usage, elevenLabs, catalog, browser, playAudio, stopAudio, log } = deps
 
   const cancel = () => {
-    try {
-      browser.cancel()
-    } catch {
-      /* ignore */
-    }
-    try {
-      stopAudio()
-    } catch {
-      /* ignore */
-    }
+    try { browser.cancel() } catch { /* ignore */ }
+    try { stopAudio() } catch { /* ignore */ }
   }
 
   async function tryCache(key: string): Promise<Blob | undefined> {
-    try {
-      return await cache.get(key)
-    } catch {
-      return undefined
-    }
+    try { return await cache.get(key) } catch { return undefined }
   }
 
-  async function speak(req: SpeakRequest): Promise<UsedProvider> {
-    if (!req.text.trim()) return 'none'
-    cancel() // never let two lines overlap (mirrors MT-1 synth.cancel())
-    const { provider, ref } = parseVoiceRef(req.voiceRef)
-    const rate = req.rate ?? 1
-
-    if (provider === 'elevenlabs') {
-      const key = cacheKeyFor(req.voiceRef, rate, req.text)
-
-      // 1. cache — always first, and works offline once pre-warmed.
-      const hit = await tryCache(key)
-      if (hit) {
-        try {
-          await playAudio(hit)
-        } catch {
-          /* even a play glitch shouldn't error the kid — fall through to browser */
-        }
-        log?.('cache', req)
-        return 'cache'
-      }
-
-      // 2. ElevenLabs — only when a key is present, online and under the cap.
-      if (elevenLabs.available()) {
-        try {
-          const blob = await elevenLabs.synthesize({ text: req.text, voiceId: ref })
-          usage.add(req.text.length) // count ACTUAL characters sent
-          try {
-            await cache.put(key, blob)
-          } catch {
-            /* cache write is best-effort */
-          }
-          await playAudio(blob)
-          log?.('elevenlabs', req)
-          return 'elevenlabs'
-        } catch {
-          /* network / api / decode failure → silently degrade to browser */
-        }
-      }
-    }
-
-    // 3. browser TTS — the always-available fallback tier.
+  function speakWithBrowser(req: SpeakRequest, voiceURI: string | undefined, rate: number): UsedProvider {
     if (browser.available()) {
-      // an ElevenLabs ref is not a browser voiceURI → let the browser use its default.
-      browser.speak({ text: req.text, voiceURI: provider === 'browser' ? ref : undefined, rate })
+      browser.speak({ text: req.text, voiceURI, rate })
       log?.('browser', req)
       return 'browser'
     }
@@ -225,16 +199,70 @@ export function createVoiceAdapter(deps: VoiceAdapterDeps): VoiceAdapter {
     return 'none'
   }
 
+  async function speak(req: SpeakRequest): Promise<UsedProvider> {
+    if (!req.text.trim()) return 'none'
+    cancel()
+    const parsed = parseVoiceRef(req.voiceRef, req.voiceVersion)
+    const rate = req.rate ?? 1
+
+    if (parsed.provider === 'catalog') {
+      const policy = await catalog.resolve(parsed.voiceRef, parsed.voiceVersion)
+      if (!policy) return speakWithBrowser(req, undefined, rate)
+      const key = cacheKeyFor(parsed.voiceRef, parsed.voiceVersion, rate, req.text)
+
+      if (policy.cachedPlaybackAllowed && policy.status !== 'revoked') {
+        const hit = await tryCache(key)
+        if (hit) {
+          try { await playAudio(hit) } catch { /* browser fallback remains available */ }
+          log?.('cache', req)
+          return 'cache'
+        }
+      }
+
+      if (
+        policy.synthesisEnabled && policy.status === 'active'
+        && policy.deploymentAvailable && elevenLabs.available()
+      ) {
+        try {
+          const blob = await elevenLabs.synthesize({
+            text: req.text,
+            voiceRef: parsed.voiceRef,
+            voiceVersion: parsed.voiceVersion,
+          })
+          usage.add(req.text.length)
+          if (policy.cachedPlaybackAllowed) {
+            try { await cache.put(key, blob) } catch { /* best-effort */ }
+          }
+          await playAudio(blob)
+          log?.('elevenlabs', req)
+          return 'elevenlabs'
+        } catch {
+          // Provider and gateway failures silently degrade for the learner.
+        }
+      }
+    }
+
+    return speakWithBrowser(req, parsed.provider === 'browser' ? parsed.ref : undefined, rate)
+  }
+
   async function prewarmLine(req: SpeakRequest): Promise<boolean> {
     if (!req.text.trim()) return false
-    const { provider, ref } = parseVoiceRef(req.voiceRef)
-    if (provider !== 'elevenlabs') return false
-    const key = cacheKeyFor(req.voiceRef, req.rate ?? 1, req.text)
-    const hit = await tryCache(key)
-    if (hit) return true // already offline-ready
-    if (!elevenLabs.available()) return false
+    const parsed = parseVoiceRef(req.voiceRef, req.voiceVersion)
+    if (parsed.provider !== 'catalog') return false
+    const policy = await catalog.resolve(parsed.voiceRef, parsed.voiceVersion)
+    if (!policy || policy.status === 'revoked' || !policy.cachedPlaybackAllowed) return false
+    const key = cacheKeyFor(parsed.voiceRef, parsed.voiceVersion, req.rate ?? 1, req.text)
+    if (await tryCache(key)) return true
+    if (
+      !policy.synthesisEnabled || policy.status !== 'active'
+      || !policy.deploymentAvailable || !elevenLabs.available()
+    ) return false
     try {
-      const blob = await elevenLabs.synthesize({ text: req.text, voiceId: ref })
+      const blob = await elevenLabs.synthesize({
+        text: req.text,
+        voiceRef: parsed.voiceRef,
+        voiceVersion: parsed.voiceVersion,
+      })
       usage.add(req.text.length)
       await cache.put(key, blob)
       return true
@@ -267,6 +295,13 @@ export type VoiceGatewayErrorCode =
   | 'not_entitled'
   | 'usage_limit'
   | 'gateway_disabled'
+  | 'unknown_voice_ref'
+  | 'voice_ref_disabled'
+  | 'stale_voice_ref'
+  | 'legacy_voice_ref'
+  | 'voice_ref_not_approved'
+  | 'voice_deployment_mismatch'
+  | 'provider_unavailable'
   | 'error'
 
 export class VoiceGatewayError extends Error {
@@ -284,7 +319,14 @@ async function voiceGatewayError(response: { json?: () => Promise<unknown> }): P
       code === 'unauthenticated' ||
       code === 'not_entitled' ||
       code === 'usage_limit' ||
-      code === 'gateway_disabled'
+      code === 'gateway_disabled' ||
+      code === 'unknown_voice_ref' ||
+      code === 'voice_ref_disabled' ||
+      code === 'stale_voice_ref' ||
+      code === 'legacy_voice_ref' ||
+      code === 'voice_ref_not_approved' ||
+      code === 'voice_deployment_mismatch' ||
+      code === 'provider_unavailable'
     ) {
       return new VoiceGatewayError(code)
     }
@@ -306,7 +348,7 @@ export function createElevenLabsSynth(deps: {
     available() {
       return deps.isOnline() && !deps.usage.overCap()
     },
-    async synthesize({ text, voiceId }) {
+    async synthesize({ text, voiceRef, voiceVersion }) {
       const accessToken = await (deps.getAccessToken ?? getGatewayAccessToken)()
       if (!accessToken) throw new VoiceGatewayError('unauthenticated')
       const res = await deps.fetchImpl(`${base}/synthesize`, {
@@ -316,7 +358,7 @@ export function createElevenLabsSynth(deps: {
           'content-type': 'application/json',
           accept: 'audio/mpeg',
         },
-        body: JSON.stringify({ text, voiceId }),
+        body: JSON.stringify({ text, voiceRef, voiceVersion }),
       })
       if (!res.ok) throw await voiceGatewayError(res)
       const buf = await res.arrayBuffer()
@@ -755,6 +797,7 @@ export function getVoiceAdapter(): VoiceAdapter {
   _adapter = createVoiceAdapter({
     cache: getVoiceCache(),
     usage,
+    catalog: getVoiceCatalogAccess(),
     elevenLabs: createElevenLabsSynth({
       getAccessToken: getGatewayAccessToken,
       fetchImpl: (url, init) => fetch(url, init as RequestInit),
@@ -774,6 +817,7 @@ export function __resetVoiceRuntime(): void {
   _adapter = null
   _meter = null
   _cache = null
+  resetVoiceCatalogAccess()
 }
 
 // ---------- MT-1 public surface (unchanged signatures; now routed through the chain) ----------
