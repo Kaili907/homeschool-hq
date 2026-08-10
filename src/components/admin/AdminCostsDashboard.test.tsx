@@ -18,6 +18,7 @@ function render(
       range={range}
       onRangeChange={() => {}}
       onRetry={() => {}}
+      onOpenProviderPricing={() => {}}
       today="2026-08-08"
     />,
   )
@@ -46,6 +47,7 @@ describe('Admin AI and Costs dashboard', () => {
     expect(markup).toContain('Unverified')
     expect(markup).not.toContain('500-record')
     expect(markup).not.toContain('All provider traffic accounted for')
+    expect(markup).toContain('Provider Pricing')
   })
 
   it('renders the enforced monthly threshold as calculated evidence, not invoice economics', () => {

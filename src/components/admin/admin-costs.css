@@ -4,7 +4,9 @@
 .admin-costs-header > div:first-child > p:last-child { color: #526474; margin-top: .35rem; }
 .admin-costs-header__controls { display: grid; gap: .6rem; justify-items: end; }
 .admin-costs-refresh { background: #173f4a; border-radius: .5rem; color: #fff; font-size: .78rem; font-weight: 800; min-height: 2.5rem; padding: .45rem .8rem; }
+.admin-costs-pricing { background: #fff; border: 1px solid #9fb7be; border-radius: .5rem; color: #173f4a; font-size: .78rem; font-weight: 800; min-height: 2.5rem; padding: .45rem .8rem; }
 .admin-costs-refresh:hover, .admin-costs-refresh:focus-visible { background: #196b6b; outline: 2px solid #196b6b; outline-offset: 2px; }
+.admin-costs-pricing:hover, .admin-costs-pricing:focus-visible { border-color: #196b6b; outline: 2px solid #196b6b; outline-offset: 2px; }
 .admin-costs-eyebrow, .admin-costs-section-heading p { color: #196b6b; font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .admin-costs-range { display: grid; gap: .6rem; justify-items: end; }
 .admin-costs-range__presets { background: #e9f0f1; border-radius: .7rem; display: flex; flex-wrap: wrap; gap: .2rem; padding: .25rem; }
