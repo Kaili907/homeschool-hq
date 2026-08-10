@@ -7,6 +7,7 @@ import {
   adminRouteSection,
   configurationReadStateAfterCommit,
   configurationRetryAfterCommit,
+  defaultIncidentFilters,
   presentationAuthorization,
 } from './AdminConsoleRoute'
 
@@ -28,6 +29,8 @@ describe('Admin Console integration route', () => {
     ['/academy/admin/system-health', 'system-health'],
     ['/academy/admin/configuration', 'configuration'],
     ['/academy/admin/audit-log', 'audit-log'],
+    ['/academy/admin/incidents', 'incidents'],
+    ['/academy/admin/correlations', 'incidents'],
     ['/academy/admin/access', 'access'],
     ['/academy/admin/production-readiness', 'releases'],
     ['/academy/admin/readiness', 'releases'],
@@ -88,5 +91,14 @@ describe('Admin Console integration route', () => {
   it('invalidates browser state after commit and triggers an authoritative reread', () => {
     expect(configurationReadStateAfterCommit()).toEqual({ status: 'loading' })
     expect(configurationRetryAfterCommit(4)).toBe(5)
+  })
+
+  it('starts the incident explorer with a bounded trailing 24-hour query', () => {
+    expect(defaultIncidentFilters(new Date('2026-08-10T16:00:00.000Z'))).toEqual({
+      occurredFrom: '2026-08-09T16:00:00.000Z',
+      occurredTo: '2026-08-10T16:00:00.000Z',
+      domain: 'all',
+      limit: 50,
+    })
   })
 })

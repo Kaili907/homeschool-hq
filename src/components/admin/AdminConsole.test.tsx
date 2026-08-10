@@ -175,6 +175,20 @@ describe('AdminConsole authorization and load states', () => {
     expect(markup).toContain('aria-current="page"')
   })
 
+  it('shows Incident Explorer with any one of its independently enforced read capabilities', () => {
+    for (const capability of ['engines:read', 'audit:read', 'costs:read'] as const) {
+      const markup = renderToStaticMarkup(
+        <AdminShell
+          authorization={{ status: 'authorized', role: 'viewer', capabilities: [capability] }}
+          activeSection="incidents"
+          title="Incident Explorer"
+        ><section>Safe incident evidence</section></AdminShell>,
+      )
+      expect(markup).toContain('aria-label="Incident Explorer"')
+      expect(markup).toContain('aria-current="page"')
+    }
+  })
+
   it('includes the safe Access & Permissions view for the canonical baseline read capability', () => {
     const markup = renderToStaticMarkup(
       <AdminShell

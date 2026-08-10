@@ -20,6 +20,7 @@ export const ADMIN_SECTIONS = [
   'curriculum',
   'safety',
   'system-health',
+  'incidents',
   'configuration',
   'audit-log',
   'access',

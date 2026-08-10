@@ -223,6 +223,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-study-safety-provider-accounting-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810180000",
+      "filename": "20260810180000_academy_admin_correlation_runtime_read.sql",
+      "sha256": "604d1ea775c666f5210b55ce531f86f73595518dcdfbf13f66ade2b50035be0d",
+      "dependency": "20260810144700_academy_admin_access_management.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-admin-correlation-runtime-read-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

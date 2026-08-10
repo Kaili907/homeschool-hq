@@ -17,6 +17,8 @@ import { readAdminCosts, AdminCostsReadError } from '../../admin/costsHttpSource
 import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/costsModel'
 import { readAdminAuditPage, AdminAuditReadError } from '../../admin/auditHttpSource'
 import type { AdminAuditFilters, AdminAuditReadState } from '../../admin/auditLogModel'
+import { AdminIncidentReadError, readAdminIncidentPage } from '../../admin/incidentExplorerHttpSource'
+import type { AdminIncidentFilters, AdminIncidentReadState } from '../../admin/incidentExplorerModel'
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
 import { readAdminSafetyOperations } from '../../admin/safetyOperationsHttpSource'
 import type { SafetyOperationsReadState } from '../../admin/safetyOperationsModel'
@@ -46,6 +48,7 @@ import { CurriculumValidationDashboard } from './CurriculumValidationDashboard'
 import { EnginePerformanceDashboard } from './EnginePerformanceDashboard'
 import { SystemHealthDashboard } from './SystemHealthDashboard'
 import { AdminAuditLog } from './AdminAuditLog'
+import { AdminCorrelationExplorer } from './AdminCorrelationExplorer'
 import {
   AdminConfiguration,
   type AdminConfigurationReadState,
@@ -99,10 +102,11 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (suffix === 'engines') return 'engines'
   if (suffix.startsWith('engines/')) return adminRouteEngine(pathname) ? 'engines' : 'unknown'
   if (suffix === 'production-readiness' || suffix === 'readiness') return 'releases'
+  if (suffix === 'correlations') return 'incidents'
   const section = suffix.split('/')[0]
   return [
     'costs', 'curriculum', 'safety', 'system-health',
-    'configuration', 'audit-log', 'access', 'releases',
+    'incidents', 'configuration', 'audit-log', 'access', 'releases',
   ].includes(section) ? section as AdminSection : 'unknown'
 }
 
@@ -131,6 +135,16 @@ export function configurationReadStateAfterCommit(): AdminConfigurationReadState
 
 export function configurationRetryAfterCommit(current: number): number {
   return current + 1
+}
+
+export function defaultIncidentFilters(now = new Date()): AdminIncidentFilters {
+  const occurredTo = now.toISOString()
+  return {
+    occurredFrom: new Date(now.getTime() - 24 * 60 * 60 * 1_000).toISOString(),
+    occurredTo,
+    domain: 'all',
+    limit: 50,
+  }
 }
 
 export function presentationAuthorization(
@@ -183,6 +197,10 @@ export function AdminConsoleRoute() {
   const [auditCursors, setAuditCursors] = useState<readonly (string | null)[]>([null])
   const [auditReadState, setAuditReadState] = useState<AdminAuditReadState>({ status: 'loading' })
   const [auditRetry, setAuditRetry] = useState(0)
+  const [incidentFilters, setIncidentFilters] = useState<AdminIncidentFilters>(() => defaultIncidentFilters())
+  const [incidentCursors, setIncidentCursors] = useState<readonly (string | null)[]>([null])
+  const [incidentReadState, setIncidentReadState] = useState<AdminIncidentReadState>({ status: 'loading' })
+  const [incidentRetry, setIncidentRetry] = useState(0)
   const [configurationReadState, setConfigurationReadState] = useState<AdminConfigurationReadState>({ status: 'loading' })
   const [configurationRetry, setConfigurationRetry] = useState(0)
   const [voiceCatalogState, setVoiceCatalogState] = useState<AdminVoiceCatalogReadState>({ status: 'loading' })
@@ -201,6 +219,7 @@ export function AdminConsoleRoute() {
   const authorization = presentationAuthorization(authorizationState)
   const section = adminRouteSection(pathname) ?? 'unknown'
   const auditCursor = auditCursors.at(-1) ?? null
+  const incidentCursor = incidentCursors.at(-1) ?? null
   const pathnameRef = useRef(pathname)
   const configurationDirtyRef = useRef(configurationDirty)
 
@@ -340,6 +359,39 @@ export function AdminConsoleRoute() {
     )
     return () => controller.abort()
   }, [authorizationState, section, auditFilters, auditCursor, auditRetry])
+
+  useEffect(() => {
+    if (section !== 'incidents') return
+    const canReadAnySource = authorization.status === 'authorized'
+      && ['engines:read', 'audit:read', 'costs:read'].some((capability) =>
+        authorization.capabilities.includes(capability as AdminCapability))
+    if (!canReadAnySource) {
+      setIncidentReadState({ status: 'unauthorized' })
+      return
+    }
+    const controller = new AbortController()
+    setIncidentReadState((current) => current.status === 'loading-page' ? current : { status: 'loading' })
+    void readAdminIncidentPage(incidentFilters, incidentCursor, { signal: controller.signal }).then(
+      (page) => {
+        if (controller.signal.aborted) return
+        setIncidentReadState(page.events.length === 0 ? { status: 'empty', page } : { status: 'ready', page })
+      },
+      (error) => {
+        if (controller.signal.aborted) return
+        if (error instanceof AdminIncidentReadError && error.code === 'incident_unauthorized') {
+          setIncidentReadState({ status: 'unauthorized' })
+          return
+        }
+        setIncidentReadState({
+          status: 'error',
+          code: error instanceof AdminIncidentReadError && error.code !== 'incident_unauthorized'
+            ? error.code
+            : 'incident_unavailable',
+        })
+      },
+    )
+    return () => controller.abort()
+  }, [authorizationState, section, incidentFilters, incidentCursor, incidentRetry])
 
   useEffect(() => {
     if (section !== 'configuration') return
@@ -575,6 +627,26 @@ export function AdminConsoleRoute() {
     setAuditCursors((current) => current.length > 1 ? current.slice(0, -1) : current)
   }
 
+  function applyIncidentFilters(filters: AdminIncidentFilters) {
+    setIncidentReadState({ status: 'loading' })
+    setIncidentFilters(filters)
+    setIncidentCursors([null])
+  }
+
+  function showOlderIncidentEvents(cursor: string) {
+    setIncidentReadState((current) => current.status === 'ready' || current.status === 'empty'
+      ? { status: 'loading-page', page: current.page, direction: 'older' }
+      : current)
+    setIncidentCursors((current) => [...current, cursor])
+  }
+
+  function showNewerIncidentEvents() {
+    setIncidentReadState((current) => current.status === 'ready' || current.status === 'empty'
+      ? { status: 'loading-page', page: current.page, direction: 'newer' }
+      : current)
+    setIncidentCursors((current) => current.length > 1 ? current.slice(0, -1) : current)
+  }
+
   function applyConfigurationCommit(_result: AdminConfigurationCommitResult) {
     setConfigurationReadState(configurationReadStateAfterCommit())
     setConfigurationRetry(configurationRetryAfterCommit)
@@ -607,6 +679,7 @@ export function AdminConsoleRoute() {
         : section === 'costs' ? 'AI & Costs'
           : section === 'learners' ? (adminRouteLearnerRef(pathname) ? 'Learner Detail' : 'Learner Operations')
             : section === 'safety' ? 'Safety Operations'
+              : section === 'incidents' ? 'Incident Explorer'
               : section === 'audit-log' ? 'Audit Log'
                 : section === 'access' ? 'Access & Permissions'
                 : section === 'configuration' ? 'Configuration'
@@ -710,6 +783,20 @@ export function AdminConsoleRoute() {
             onRetry={() => setAuditRetry((value) => value + 1)}
           />
         )}
+        {section === 'incidents' && (
+          <AdminCorrelationExplorer
+            authorized={['engines:read', 'audit:read', 'costs:read'].some((capability) =>
+              hasCapability(authorization, capability as AdminCapability))}
+            state={incidentReadState}
+            filters={incidentFilters}
+            pageNumber={incidentCursors.length}
+            canGoBack={incidentCursors.length > 1}
+            onFiltersChange={applyIncidentFilters}
+            onNext={showOlderIncidentEvents}
+            onPrevious={showNewerIncidentEvents}
+            onRetry={() => setIncidentRetry((value) => value + 1)}
+          />
+        )}
         {section === 'configuration' && (
           <AdminConfiguration
             authorization={authorization}
@@ -738,7 +825,7 @@ export function AdminConsoleRoute() {
             onRetry={() => setReadinessRetry((value) => value + 1)}
           />
         )}
-        {!['attention', 'learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
+        {!['attention', 'learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'incidents', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>

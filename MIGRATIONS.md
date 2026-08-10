@@ -10,6 +10,27 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: Admin correlation runtime read (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810180000_academy_admin_correlation_runtime_read.sql`.
+
+The additive migration adds one service-only, read-only runtime incident
+projection. The operational event table remains unavailable for direct service
+or browser reads. The RPC requires trusted service execution plus the asserted
+canonical `engines:read` capability, requires a time range of at most 90 days,
+limits pages to 100, uses the `(occurred_at, event_id)` cursor, filters logically
+expired events, and returns only the safe execution correlation, engine, event
+type, result, duration, and selected operational metadata facts. It omits
+household/learner identity, curriculum context references, unrestricted
+metadata, content, and raw errors.
+
+The `20260810180000` prefix was selected after scanning migration filenames in
+all active Academy worktrees; the latest observed prefix was `20260810170000`.
+Canonical LF SHA-256:
+`604d1ea775c666f5210b55ce531f86f73595518dcdfbf13f66ade2b50035be0d`.
+This migration has not been applied to a hosted Supabase project.
+
 ## Supabase: Admin audit query filters (2026-08-10)
 
 Tracked migration:
