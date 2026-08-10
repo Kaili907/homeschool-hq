@@ -12,9 +12,10 @@ import {
   CurriculumStudioView,
   confirmCurriculumNavigation,
   curriculumPayloadDirty,
+  curriculumPreviewHref,
   curriculumSavedMessage,
 } from './CurriculumStudio'
-import { CurriculumWorkflowNav, CurriculumPreviewUnavailable } from './CurriculumWorkflowNav'
+import { CurriculumWorkflowNav } from './CurriculumWorkflowNav'
 import {
   CURRICULUM_STUDIO_RENDER_LIMIT,
   buildCurriculumStudioIndex,
@@ -102,7 +103,7 @@ function authoringSource(): CurriculumDraftAuthoringSource {
     readDraft: vi.fn(), readEntity: vi.fn(), createDraft: vi.fn(), createEntity: vi.fn(),
     updateEntity: vi.fn(), tombstoneEntity: vi.fn(),
     readBaseIndex: vi.fn(async () => ({ schemaVersion: 1 as const, baseReleaseVersion: '1.0.0', entities: baseEntries })),
-    readBaseEntity: vi.fn(), readMaterialization: vi.fn(), validateDraft: vi.fn(),
+    readBaseEntity: vi.fn(), readMaterialization: vi.fn(), validateDraft: vi.fn(), readPreview: vi.fn(),
   }
 }
 
@@ -271,10 +272,12 @@ describe('Curriculum Studio shell', () => {
     expect(markup).toContain('aria-current="page"')
     expect(markup).not.toMatch(/publish curriculum|activate publish/i)
 
-    const preview = renderToStaticMarkup(<CurriculumPreviewUnavailable />)
-    expect(preview).toContain('No draft is available to compare')
-    expect(preview).toContain('No draft was loaded')
-    expect(preview).not.toContain('generated successfully')
+  })
+
+  it('builds an exact revision preview deep link without carrying mutable authority', () => {
+    expect(curriculumPreviewHref('10000000-0000-4000-8000-000000000001', 7)).toBe(
+      '/academy/admin/curriculum/preview?draft=10000000-0000-4000-8000-000000000001&revision=7',
+    )
   })
 
   it('defines desktop, tablet, mobile, and visible-focus behavior', () => {

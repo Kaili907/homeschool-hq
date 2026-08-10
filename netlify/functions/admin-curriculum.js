@@ -3,6 +3,7 @@ import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import { createAdminCurriculumAuthoringService } from './_shared/admin-curriculum-authoring.js'
 import { createAdminCurriculumRegistryReader } from './_shared/admin-curriculum-registry-reader.js'
 import { createAdminCurriculumStudioService } from './_shared/admin-curriculum-studio.js'
+import { createAdminCurriculumPreviewService } from './_shared/admin-curriculum-preview.js'
 import {
   assertExactObject,
   boundedInteger,
@@ -46,11 +47,13 @@ function draftRoute(resource) {
   if (segments.length === 2) return { kind: 'draft', draftId }
   if (
     segments.length === 4
-    && (segments[2] === 'materialization' || segments[2] === 'validation')
+    && (segments[2] === 'materialization' || segments[2] === 'validation' || segments[2] === 'preview')
     && /^[1-9][0-9]{0,14}$/.test(segments[3])
   ) {
     return {
-      kind: segments[2] === 'materialization' ? 'draft-materialization' : 'draft-validation',
+      kind: segments[2] === 'materialization'
+        ? 'draft-materialization'
+        : segments[2] === 'validation' ? 'draft-validation' : 'draft-preview',
       draftId,
       revision: Number(segments[3]),
     }
@@ -215,7 +218,7 @@ function authoringMethod(route, method) {
   if (route.kind === 'draft-entities') return method === 'POST'
   if (route.kind === 'draft-entity') return method === 'GET' || method === 'PUT'
   if (route.kind === 'draft-entity-tombstone') return method === 'POST'
-  if (route.kind === 'draft-materialization' || route.kind === 'draft-validation') return method === 'GET'
+  if (route.kind === 'draft-materialization' || route.kind === 'draft-validation' || route.kind === 'draft-preview') return method === 'GET'
   return false
 }
 
@@ -248,6 +251,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
     client: overrides.authoringClient,
   })
   const studio = overrides.studio ?? createAdminCurriculumStudioService({ authoring })
+  const preview = overrides.preview ?? createAdminCurriculumPreviewService({ authoring })
 
   return async (event) => {
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
@@ -278,6 +282,8 @@ export function createAdminCurriculumHandler(overrides = {}) {
                     ? await studio.readMaterialization(actor, route.draftId, route.revision)
                     : route.kind === 'draft-validation'
                       ? await studio.validateDraft(actor, route.draftId, route.revision)
+                      : route.kind === 'draft-preview'
+                        ? await preview.read(actor, route.draftId, route.revision)
                   : route.kind === 'draft-entity'
                     ? await authoring.updateEntity(actor, parseUpdateEntity(event, route))
                     : await authoring.tombstoneEntity(actor, parseTombstone(event, route))

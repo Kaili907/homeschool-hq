@@ -756,6 +756,7 @@ export function CurriculumStudioView({
             <InspectorSection title="Authorization"><p>{writeAllowed ? 'Draft authoring enabled' : 'Read-only mode'}</p><small>All reads require curriculum:read. Every mutation is reauthorized for curriculum:drafts:write by the server.</small></InspectorSection>
             <InspectorSection title="Protected classes"><p>Server-owned and read-only</p><small>Schedules, policy sets, standards frameworks, protected assessment interpretations, schema versions, and entity identities are not exposed as unrestricted JSON.</small></InspectorSection>
             <InspectorSection title="Validation"><StatusLine label="Revision" value={validation ? String(validation.draftRevision) : 'Not run'} tone={validationStale ? 'warning' : validation ? 'positive' : 'neutral'} /><button type="button" disabled={!draft || validationBusy} onClick={() => void runValidation()}>{validationBusy ? 'Validating…' : `Validate${draft ? ` revision ${draft.revision}` : ''}`}</button>{validationError && <p role="alert">{validationError}</p>}</InspectorSection>
+            {draft && <InspectorSection title="Preview / Diff"><p>Inspect the exact saved candidate</p><a href={curriculumPreviewHref(draft.draftId, draft.revision)}>Preview revision {draft.revision}</a><small>The preview is read-only and remains bound to this revision.</small></InspectorSection>}
           </div>
         </aside>
       </div>
@@ -768,6 +769,10 @@ export function CurriculumStudioView({
       )}
     </div>
   )
+}
+
+export function curriculumPreviewHref(draftId: string, revision: number): string {
+  return `/academy/admin/curriculum/preview?draft=${encodeURIComponent(draftId)}&revision=${revision}`
 }
 
 function InspectorSection({ title, children }: { readonly title: string; readonly children: ReactNode }) {

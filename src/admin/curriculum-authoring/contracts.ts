@@ -162,6 +162,90 @@ export interface CurriculumDraftValidationResult {
   readonly run: CurriculumSnapshotValidationRun
 }
 
+export const CURRICULUM_PREVIEW_CHANGE_TYPES = ['unchanged', 'added', 'modified', 'removed'] as const
+export type CurriculumPreviewChangeType = (typeof CURRICULUM_PREVIEW_CHANGE_TYPES)[number]
+
+export type CurriculumPreviewFieldCategory =
+  | 'identity'
+  | 'content'
+  | 'navigation'
+  | 'lesson-content'
+  | 'standards'
+  | 'mastery'
+  | 'tutor-routing'
+  | 'safety-privacy'
+  | 'accessibility'
+  | 'assessment-structure'
+  | 'resources'
+  | 'extensions'
+  | 'protected'
+
+export interface CurriculumPreviewFieldValue {
+  readonly kind: 'empty' | 'text' | 'number' | 'boolean' | 'list' | 'structure' | 'withheld'
+  readonly display: string
+  readonly itemCount?: number
+  readonly truncated?: boolean
+}
+
+export interface CurriculumPreviewFieldChange {
+  readonly path: string
+  readonly label: string
+  readonly category: CurriculumPreviewFieldCategory
+  readonly before: CurriculumPreviewFieldValue
+  readonly after: CurriculumPreviewFieldValue
+}
+
+export interface CurriculumPreviewEntityDiff {
+  readonly entityType: CurriculumDraftEntityType
+  readonly entityRef: string
+  readonly label: string
+  readonly context: string
+  readonly changeType: CurriculumPreviewChangeType
+  readonly basePosition: number | null
+  readonly candidatePosition: number | null
+  readonly fieldChangeCount: number
+  readonly fieldChangesLimited: boolean
+  readonly fieldChanges: readonly CurriculumPreviewFieldChange[]
+}
+
+export interface CurriculumPreviewChangeCounts {
+  readonly unchanged: number
+  readonly added: number
+  readonly modified: number
+  readonly removed: number
+}
+
+export interface CurriculumPreviewResult {
+  readonly schemaVersion: 1
+  readonly previewRef: string
+  readonly authority: {
+    readonly draftId: string
+    readonly draftRevision: number
+    readonly baseReleaseVersion: string
+    readonly targetVersion: string
+    readonly schemaSetVersion: typeof CURRICULUM_AUTHORING_SCHEMA_VERSION
+    readonly candidateDigest: string
+  }
+  readonly freshness: 'current'
+  readonly summary: CurriculumPreviewChangeCounts & {
+    readonly baseEntities: number
+    readonly candidateEntities: number
+    readonly totalCompared: number
+    readonly byEntityType: Readonly<Record<CurriculumDraftEntityType, CurriculumPreviewChangeCounts>>
+    readonly validationStatus: CurriculumSnapshotValidationRun['status']
+    readonly publicationReady: boolean
+    readonly validationBlockers: number
+    readonly humanReviewBlockers: number
+    readonly standardsBlockers: number
+  }
+  readonly validation: {
+    readonly state: 'current' | 'not-current' | 'unavailable'
+    readonly draftRevision: number | null
+    readonly run: CurriculumSnapshotValidationRun | null
+  }
+  readonly entities: readonly CurriculumPreviewEntityDiff[]
+}
+
 export interface CreateCurriculumDraftInput {
   readonly baseReleaseVersion: string
   readonly targetVersion: string
@@ -216,6 +300,7 @@ export interface CurriculumDraftAuthoringSource {
   ): Promise<CurriculumBaseAuthoringEntity>
   readMaterialization(draftId: string, revision: number): Promise<CurriculumDraftMaterialization>
   validateDraft(draftId: string, revision: number): Promise<CurriculumDraftValidationResult>
+  readPreview(draftId: string, revision: number): Promise<CurriculumPreviewResult>
 }
 
 export class CurriculumDraftAuthoringError extends Error {

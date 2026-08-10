@@ -61,7 +61,7 @@ function handler(overrides = {}) {
 }
 
 describe('ADMIN-16B curriculum authoring API', () => {
-  it('serves authorized revision-bound materialization and validation without granting a write', async () => {
+  it('serves authorized revision-bound materialization, validation, and preview without granting a write', async () => {
     const service = authoring()
     const studio = {
       readMaterialization: vi.fn().mockResolvedValue({ schemaVersion: 1, draftId: DRAFT_ID, draftRevision: 3, entities: [] }),
@@ -69,12 +69,50 @@ describe('ADMIN-16B curriculum authoring API', () => {
       readBaseIndex: vi.fn(), readBaseEntity: vi.fn(),
     }
     const authorization = { require: vi.fn().mockResolvedValue({ ok: true, principal }) }
-    const handle = handler({ authoring: service, studio, authorization })
+    const preview = {
+      read: vi.fn().mockResolvedValue({
+        schemaVersion: 1, previewRef: `${DRAFT_ID}@3`,
+        authority: { draftId: DRAFT_ID, draftRevision: 3 }, entities: [],
+      }),
+    }
+    const handle = handler({ authoring: service, studio, preview, authorization })
     expect((await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/materialization/3`))).statusCode).toBe(200)
     expect((await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/validation/3`))).statusCode).toBe(200)
+    expect((await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/preview/3`))).statusCode).toBe(200)
     expect(studio.readMaterialization).toHaveBeenCalledWith(principal.userId, DRAFT_ID, 3)
     expect(studio.validateDraft).toHaveBeenCalledWith(principal.userId, DRAFT_ID, 3)
-    expect(authorization.require.mock.calls.map((call) => call[1])).toEqual(['curriculum:read', 'curriculum:read'])
+    expect(preview.read).toHaveBeenCalledWith(principal.userId, DRAFT_ID, 3)
+    expect(authorization.require.mock.calls.map((call) => call[1])).toEqual(['curriculum:read', 'curriculum:read', 'curriculum:read'])
+  })
+
+  it('keeps preview read-only and maps exact-revision conflicts without leaking server detail', async () => {
+    const service = authoring()
+    const preview = { read: vi.fn().mockRejectedValue(Object.assign(new Error('/private/draft/history'), { code: 'conflict' })) }
+    const authorization = { require: vi.fn().mockResolvedValue({ ok: true, principal }) }
+    const handle = handler({ authoring: service, preview, authorization })
+    const path = `/api/admin/curriculum/drafts/${DRAFT_ID}/preview/2`
+    const response = await handle(event(path))
+    expect(response.statusCode).toBe(409)
+    expect(response.body).toContain('revision_conflict')
+    expect(response.body).not.toContain('private')
+    expect((await handle(event(path, 'POST'))).statusCode).toBe(405)
+    expect(service.createDraft).not.toHaveBeenCalled()
+    expect(service.createEntity).not.toHaveBeenCalled()
+    expect(service.updateEntity).not.toHaveBeenCalled()
+    expect(service.tombstoneEntity).not.toHaveBeenCalled()
+  })
+
+  it('allows an assigned read-only Admin reviewer to inspect preview without draft-write capability', async () => {
+    const reviewer = { userId: 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', role: 'viewer', capabilities: ['curriculum:read'] }
+    const service = authoring()
+    const preview = { read: vi.fn().mockResolvedValue({ schemaVersion: 1, previewRef: `${DRAFT_ID}@1`, entities: [] }) }
+    const authorization = { require: vi.fn().mockResolvedValue({ ok: true, principal: reviewer }) }
+    const handle = handler({ authoring: service, preview, authorization })
+    const response = await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/preview/1`))
+    expect(response.statusCode).toBe(200)
+    expect(authorization.require).toHaveBeenCalledWith(expect.anything(), 'curriculum:read')
+    expect(preview.read).toHaveBeenCalledWith(reviewer.userId, DRAFT_ID, 1)
+    expect(service.createDraft).not.toHaveBeenCalled()
   })
 
   it('routes workspace and entity reads with curriculum:read', async () => {
