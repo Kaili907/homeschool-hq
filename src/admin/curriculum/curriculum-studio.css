@@ -508,6 +508,40 @@
 .curriculum-staging-manifest code { font-size: .72rem; overflow-wrap: anywhere; }
 .curriculum-staging-permission { color: #9a3412; }
 
+.curriculum-release-publishing {
+  margin-top: 1rem;
+  border: 1px solid #a7c4b5;
+  border-radius: .9rem;
+  padding: 1rem;
+  background: #f8fcfa;
+}
+.curriculum-release-publishing > header,
+.curriculum-publishing-actions { display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
+.curriculum-release-publishing h3 { margin: .2rem 0 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.18rem; font-weight: 500; }
+.curriculum-publishing-state { padding: .35rem .65rem; border-radius: 999px; background: #fff7ed; color: #9a3412; }
+.curriculum-publishing-state.is-eligible,
+.curriculum-publishing-state.is-published { background: #dcfce7; color: #166534; }
+.curriculum-publishing-facts,
+.curriculum-publishing-verification dl,
+.curriculum-published-result dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .65rem; }
+.curriculum-publishing-facts div,
+.curriculum-publishing-verification dl div,
+.curriculum-published-result dl div { min-width: 0; border-radius: .6rem; padding: .65rem; background: #fff; }
+.curriculum-publishing-facts dt,
+.curriculum-publishing-verification dt,
+.curriculum-published-result dt { color: #64748b; font-size: .78rem; }
+.curriculum-publishing-facts dd,
+.curriculum-publishing-verification dd,
+.curriculum-published-result dd { margin: .2rem 0 0; overflow-wrap: anywhere; }
+.curriculum-publishing-verification,
+.curriculum-published-result { margin: .8rem 0; border: 1px solid #bbd7c8; border-radius: .7rem; padding: .8rem; background: #effaf4; }
+.curriculum-publishing-verification code,
+.curriculum-published-result code { font-size: .72rem; overflow-wrap: anywhere; }
+.curriculum-publishing-blockers { margin: .8rem 0; border-left: 4px solid #b91c1c; padding: .75rem; background: #fef2f2; color: #7f1d1d; }
+.curriculum-published-result > strong { color: #166534; font-size: 1rem; letter-spacing: .04em; }
+.curriculum-publishing-permission { color: #9a3412; }
+.curriculum-publishing-actions { margin-top: .8rem; }
+
 @container (max-width: 1050px) {
   .curriculum-studio-grid {
     grid-template-columns: minmax(15rem, 17rem) minmax(0, 1fr);
