@@ -25,6 +25,7 @@ describe('Admin Console integration route', () => {
     ['/academy/admin/safety/events/one', 'safety'],
     ['/academy/admin/curriculum', 'curriculum'],
     ['/academy/admin/curriculum/studio', 'curriculum-studio'],
+    ['/academy/admin/curriculum/integrity', 'curriculum-integrity'],
     ['/academy/admin/curriculum/validation', 'curriculum-validation'],
     ['/academy/admin/curriculum/preview', 'curriculum-preview'],
     ['/academy/admin/curriculum/standards-review', 'curriculum-standards-review'],

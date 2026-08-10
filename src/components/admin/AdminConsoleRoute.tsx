@@ -23,6 +23,7 @@ import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSour
 import { createCurriculumDraftAuthoringHttpSource } from '../../admin/curriculum-authoring/httpSource'
 import { createCurriculumApprovalHttpSource } from '../../admin/curriculum-approval/httpSource'
 import { createCurriculumStagingHttpSource } from '../../admin/curriculum-staging/httpSource'
+import { createCurriculumIntegrityHttpSource } from '../../admin/curriculum-integrity/httpSource'
 import {
   createCurriculumStudioSource,
   CURRICULUM_STUDIO_NAVIGATION_REQUEST,
@@ -39,6 +40,7 @@ import { readAdminSafetyOperations } from '../../admin/safetyOperationsHttpSourc
 import type { SafetyOperationsReadState } from '../../admin/safetyOperationsModel'
 import { CurriculumBrowser } from '../../admin/curriculum/CurriculumBrowser'
 import { CurriculumStudio } from '../../admin/curriculum/CurriculumStudio'
+import { CurriculumReleaseIntegrity } from '../../admin/curriculum/CurriculumReleaseIntegrity'
 import {
   CurriculumWorkflowNav,
   type CurriculumWorkflowView,
@@ -105,6 +107,7 @@ import {
 
 export type AdminRouteSection = AdminSection
   | 'curriculum-studio'
+  | 'curriculum-integrity'
   | 'curriculum-validation'
   | 'curriculum-preview'
   | 'curriculum-standards-review'
@@ -141,6 +144,7 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (!suffix) return 'overview'
   if (suffix === 'attention') return 'attention'
   if (suffix === 'curriculum/studio') return 'curriculum-studio'
+  if (suffix === 'curriculum/integrity') return 'curriculum-integrity'
   if (suffix === 'curriculum/validation') return 'curriculum-validation'
   if (suffix === 'curriculum/preview') return 'curriculum-preview'
   if (suffix === 'curriculum/standards-review') return 'curriculum-standards-review'
@@ -268,6 +272,7 @@ export function AdminConsoleRoute() {
   const curriculumAuthoringSource = useMemo(() => createCurriculumDraftAuthoringHttpSource(), [])
   const curriculumApprovalSource = useMemo(() => createCurriculumApprovalHttpSource(), [])
   const curriculumStagingSource = useMemo(() => createCurriculumStagingHttpSource(), [])
+  const curriculumIntegritySource = useMemo(() => createCurriculumIntegrityHttpSource(), [])
   const curriculumStudioSource = useMemo(
     () => createCurriculumStudioSource(
       curriculumSource,
@@ -826,6 +831,7 @@ export function AdminConsoleRoute() {
 
   const activeSection: AdminSection = (
     section === 'curriculum-studio'
+    || section === 'curriculum-integrity'
     || section === 'curriculum-validation'
     || section === 'curriculum-preview'
     || section === 'curriculum-standards-review'
@@ -834,6 +840,7 @@ export function AdminConsoleRoute() {
     : section === 'unknown' ? 'overview' : section
   const title = section === 'curriculum-studio'
     ? 'Curriculum Studio'
+    : section === 'curriculum-integrity' ? 'Curriculum Release Integrity / Provenance'
     : section === 'curriculum-validation' ? 'Curriculum validation'
       : section === 'curriculum-preview' ? 'Curriculum Preview / Diff'
         : section === 'curriculum-standards-review' ? 'Curriculum standards review'
@@ -926,6 +933,17 @@ export function AdminConsoleRoute() {
               : { status: 'denied' }}
             source={curriculumStudioSource}
           />
+        )}
+        {section === 'curriculum-integrity' && (
+          <>
+            <CurriculumWorkflowNav current="integrity" onNavigate={navigateCurriculum} />
+            <CurriculumReleaseIntegrity
+              authorization={hasCapability(authorization, 'curriculum:read')
+                ? { status: 'authorized', capabilities: authorization.capabilities }
+                : { status: 'denied' }}
+              source={curriculumIntegritySource}
+            />
+          </>
         )}
         {section === 'curriculum-validation' && (
           <>
@@ -1028,7 +1046,7 @@ export function AdminConsoleRoute() {
             onRetry={() => setReadinessRetry((value) => value + 1)}
           />
         )}
-        {!['attention', 'learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-studio', 'curriculum-validation', 'curriculum-standards-review', 'curriculum-preview', 'system-health', 'incidents', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
+        {!['attention', 'learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-studio', 'curriculum-integrity', 'curriculum-validation', 'curriculum-standards-review', 'curriculum-preview', 'system-health', 'incidents', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>

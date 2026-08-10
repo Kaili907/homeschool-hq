@@ -1,0 +1,47 @@
+.curriculum-integrity,
+.curriculum-integrity-state { color: #e2e8f0; background: #020617; padding: 1.5rem; }
+.curriculum-integrity { display: grid; gap: 1rem; }
+.curriculum-integrity > header,
+.curriculum-integrity-subject > header,
+.curriculum-integrity-section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.curriculum-integrity h2,
+.curriculum-integrity h3,
+.curriculum-integrity h4,
+.curriculum-integrity-state h2 { margin: .2rem 0; }
+.curriculum-integrity p,
+.curriculum-integrity-state p { color: #cbd5e1; }
+.curriculum-integrity-eyebrow { margin: 0; color: #22d3ee !important; font-size: .75rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.curriculum-integrity-subject,
+.curriculum-integrity-state { border: 1px solid #334155; border-radius: 1rem; background: #0f172a; padding: 1.25rem; }
+.curriculum-integrity-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: .65rem; margin: 1rem 0; }
+.curriculum-integrity-facts div { min-width: 0; border-radius: .65rem; background: #020617; padding: .7rem; }
+.curriculum-integrity-facts dt { color: #94a3b8; font-size: .78rem; }
+.curriculum-integrity-facts dd { margin: .3rem 0 0; overflow-wrap: anywhere; font-weight: 700; }
+.curriculum-integrity-badge { display: inline-flex; align-items: center; min-height: 1.75rem; border: 1px solid #475569; border-radius: 999px; padding: .15rem .55rem; font-size: .72rem; font-weight: 900; letter-spacing: .04em; }
+.curriculum-integrity-badge.is-verified { border-color: #047857; background: #022c22; color: #6ee7b7; }
+.curriculum-integrity-badge.is-mismatch { border-color: #dc2626; background: #450a0a; color: #fecaca; }
+.curriculum-integrity-badge.is-incomplete,
+.curriculum-integrity-badge.is-unverified { border-color: #d97706; background: #451a03; color: #fde68a; }
+.curriculum-integrity-badge.is-unavailable { border-color: #64748b; background: #1e293b; color: #cbd5e1; }
+.curriculum-integrity-provenance,
+.curriculum-integrity-findings,
+.curriculum-integrity-gaps { margin-top: 1rem; border: 1px solid #334155; border-radius: .75rem; padding: .9rem; }
+.curriculum-integrity-provenance ol { display: grid; grid-template-columns: repeat(5, minmax(8rem, 1fr)); gap: .5rem; margin: .75rem 0 0; padding: 0; list-style: none; }
+.curriculum-integrity-provenance li { display: flex; gap: .4rem; min-width: 0; }
+.curriculum-integrity-provenance li:first-child .curriculum-integrity-arrow { visibility: hidden; }
+.curriculum-integrity-provenance li div { display: grid; align-content: start; justify-items: start; gap: .4rem; min-width: 0; }
+.curriculum-integrity-provenance code { max-width: 100%; color: #bae6fd; font-size: .68rem; overflow-wrap: anywhere; }
+.curriculum-integrity-provenance p { margin: 0; font-size: .78rem; }
+.curriculum-integrity-arrow { color: #64748b; }
+.curriculum-integrity-findings { border-color: #991b1b; background: #450a0a; }
+.curriculum-integrity-gaps { border-color: #92400e; background: #451a03; }
+.curriculum-integrity-findings ul,
+.curriculum-integrity-gaps ul { margin: .6rem 0 0; padding-left: 1.25rem; }
+.curriculum-integrity-findings li,
+.curriculum-integrity-gaps li { margin-top: .4rem; overflow-wrap: anywhere; }
+.curriculum-integrity-empty { border: 1px dashed #64748b; border-radius: .75rem; padding: 1rem; color: #cbd5e1; }
+.curriculum-integrity-state button { min-height: 2.75rem; border: 1px solid #0891b2; border-radius: .6rem; background: #0e7490; color: white; padding: .55rem 1rem; font-weight: 800; }
+@media (max-width: 800px) {
+  .curriculum-integrity-provenance ol { grid-template-columns: 1fr; }
+  .curriculum-integrity-provenance li:first-child .curriculum-integrity-arrow { visibility: visible; }
+}
