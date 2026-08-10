@@ -32,8 +32,9 @@ Household attribution is:
   fact may still be recorded and `householdRef` is null.
 
 A non-null `learnerRef` requires a trusted learner grant/relationship and must
-belong to the resolved household. Current account-authenticated Tutor, Jarvis,
-and TTS calls without a trusted learner context record `learnerRef: null`.
+belong to the resolved household. Current account-authenticated Tutor, Study
+safety, Jarvis, and TTS provider calls record `learnerRef: null`; Study safety
+never copies the authorized student identity into provider accounting.
 
 ## Usage quantities and product identity
 
@@ -175,3 +176,10 @@ A browser retry is a new provider attempt and uses a new trusted execution key.
 Never store prompts, responses, conversation text, TTS audio, assessment answer
 content, API keys, bearer tokens, credentials, or raw provider usage objects in
 usage, pricing, component, or idempotency records.
+
+The admitted provider dimensions are closed: `tutor/tutor_turn`,
+`study/safety_classification`, `jarvis/jarvis_turn`, and `tts/tts_synthesis`.
+Study safety is always Anthropic with a reviewed logical tier and is never
+relabeled as Tutor or Jarvis. The generated ledger purpose makes the mapping
+authoritative without allowing callers to submit arbitrary purposes; the
+version 2 Admin projection continues to group on canonical engine.

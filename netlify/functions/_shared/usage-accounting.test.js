@@ -95,6 +95,14 @@ describe('usage execution metadata', () => {
       engineVersion: 'tutor-v2',
       curriculumVersion: null,
     })
+    expect(trustedUsageVersions({
+      ACADEMY_APP_VERSION: 'build-1',
+      ACADEMY_STUDY_ENGINE_VERSION: 'study-safety-v1',
+    }, 'study')).toEqual({
+      appVersion: 'build-1',
+      engineVersion: 'study-safety-v1',
+      curriculumVersion: null,
+    })
     expect(() => trustedUsageVersions({}, 'tts')).toThrow(expect.objectContaining({
       statusCode: 503,
       code: 'service_unavailable',

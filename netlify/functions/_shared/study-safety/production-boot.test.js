@@ -19,6 +19,7 @@ const ENV = Object.freeze({
   SUPABASE_ANON_KEY: 'public-test-key',
   SUPABASE_SERVICE_ROLE_KEY: 'service-role-test-key',
   ANTHROPIC_API_KEY: 'provider-test-key',
+  ACADEMY_APP_VERSION: 'study-safety-test-build',
   STUDY_SAFETY_RATE_LIMIT_HMAC_KEY: 'test-rate-limit-correlation-key',
 })
 const SESSION_REFERENCE = `aca_stu_v1_${'A'.repeat(43)}`
@@ -126,6 +127,26 @@ function validResult(classifierVersion, outcome = 'clear') {
   }
 }
 
+function providerAccountingOptions() {
+  let sequence = 0
+  return {
+    gatewayAccess: { recordProviderUsage: vi.fn(async () => undefined) },
+    providerAttemptJournal: {
+      reserve: vi.fn(async () => ({
+        status: 'created',
+        attemptId: `90000000-0000-4000-8000-${String(++sequence).padStart(12, '0')}`,
+        state: 'reserved',
+      })),
+      transition: vi.fn(async (input) => ({
+        status: 'created', attemptId: input.attemptId, state: input.toState,
+      })),
+      linkLedger: vi.fn(async (input) => ({
+        status: 'created', attemptId: input.attemptId, state: 'gap_pending',
+      })),
+    },
+  }
+}
+
 describe('production Study safety boot gate', () => {
   it('refuses to boot unmistakably when the injected classifier is not production mode', () => {
     expect(() => createProductionStudySafetyHandler({
@@ -189,12 +210,14 @@ describe('production Study safety boot gate', () => {
   it.each([
     ['API error', () => createAnthropicSafetyClassifier({
       env: ENV,
+      ...providerAccountingOptions(),
       fetchImpl: vi.fn(async () => { throw new Error('synthetic provider outage') }),
       delay: async () => {},
       maxAttempts: 1,
     })],
     ['timeout', () => createAnthropicSafetyClassifier({
       env: ENV,
+      ...providerAccountingOptions(),
       fetchImpl: vi.fn(async (_url, init) => new Promise((_resolve, reject) => {
         init.signal.addEventListener('abort', () => reject(new DOMException('timeout', 'AbortError')), { once: true })
       })),
