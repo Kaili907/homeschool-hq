@@ -66,8 +66,9 @@ describe('Admin Configuration page', () => {
   it('gives a viewer current stored values and source/status without mutation controls', () => {
     const markup = render(['configuration:read'])
     expect(markup).toContain('Stored policy is not active runtime policy')
-    expect(markup).toContain('Durable Admin registry')
-    expect(markup).toContain('Effective runtime</dt><dd>Unavailable')
+    expect(markup).toContain('Saved configuration</dt><dd>Durable Admin registry')
+    expect(markup).toContain('Runtime effective / enforced state</dt><dd>Unavailable')
+    expect(markup).toContain('Saved — runtime integration pending')
     expect(markup).toContain('Read only')
     expect(markup).not.toContain('<button')
     expect(markup).not.toContain('<form')
@@ -125,7 +126,9 @@ describe('Admin Configuration page', () => {
     expect(renderToStaticMarkup(<AdminConfiguration {...common} state={{ status: 'loading' }} />)).toContain('Loading configuration')
     expect(renderToStaticMarkup(<AdminConfiguration {...common} state={{ status: 'error', code: 'configuration_unavailable' }} />)).toContain('Try again')
     const empty = { catalogVersion: 'catalog-v2', synthesisEnabled: false, defaultVoiceRef: null, voices: [] }
-    expect(render(['configuration:read'], empty)).toContain('No approved logical voices are available')
+    const markup = render(['configuration:read'], empty)
+    expect(markup).toContain('No approved premium logical voices are available')
+    expect(markup).toContain('Browser-native speech remains the safe production fallback')
   })
 
   it('has responsive reflow and visible keyboard focus rules', () => {
