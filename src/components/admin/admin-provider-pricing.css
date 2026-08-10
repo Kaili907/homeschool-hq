@@ -1,0 +1,88 @@
+.admin-pricing { color: #172a3a; display: grid; gap: 1.25rem; min-width: 0; }
+.admin-pricing-header { align-items: flex-start; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+.admin-pricing-header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -.03em; }
+.admin-pricing-header > div > p:last-child { color: #526474; margin-top: .35rem; max-width: 54rem; }
+.admin-pricing-eyebrow, .admin-pricing-section-heading p { color: #196b6b; font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.admin-pricing-support { background: #fff; border: 1px solid #d8e1e4; border-radius: .9rem; display: grid; gap: 1rem; grid-template-columns: minmax(0, 1.3fr) minmax(18rem, .7fr); min-width: 0; padding: 1.1rem; }
+.admin-pricing-support h2, .admin-pricing-editor h2, .admin-pricing-message h1, .admin-pricing-message h2, .admin-pricing-empty h2 { font-size: 1.35rem; font-weight: 800; margin-top: .15rem; }
+.admin-pricing-support p, .admin-pricing-editor > p, .admin-pricing-message p, .admin-pricing-empty p { color: #526474; margin-top: .35rem; }
+.admin-pricing-support__notice { background: #fff7e6; border: 1px solid #e1ba63; border-radius: .7rem; display: grid; gap: .25rem; padding: .85rem; }
+.admin-pricing-support__notice strong { color: #744b0b; }
+.admin-pricing-support__notice span { color: #604c2a; font-size: .82rem; }
+.admin-pricing-readonly, .admin-pricing-success, .admin-pricing-mutation-error { border-radius: .75rem; display: grid; gap: .25rem; padding: .9rem 1rem; }
+.admin-pricing-readonly { background: #eef5f7; border: 1px solid #accbd1; }
+.admin-pricing-success { background: #edf8f3; border: 1px solid #91c7ad; color: #15523a; }
+.admin-pricing-mutation-error { background: #fff1ef; border: 1px solid #d9a39c; color: #7d2923; }
+.admin-pricing-mutation-error button { justify-self: start; margin-top: .35rem; }
+.admin-pricing-primary, .admin-pricing-secondary, .admin-pricing-danger, .admin-pricing-message button, .admin-pricing-actions button, .admin-pricing-mutation-error button { border: 1px solid transparent; border-radius: .5rem; font-size: .82rem; font-weight: 800; min-height: 2.5rem; padding: .5rem .85rem; }
+.admin-pricing-primary { background: #173f4a; color: #fff; justify-self: start; }
+.admin-pricing-secondary, .admin-pricing-actions button, .admin-pricing-mutation-error button { background: #fff; border-color: #9fb7be; color: #173f4a; }
+.admin-pricing-danger { background: #963c34; color: #fff; }
+.admin-pricing-primary:hover, .admin-pricing-primary:focus-visible { background: #196b6b; }
+.admin-pricing-danger:hover, .admin-pricing-danger:focus-visible { background: #762b25; }
+.admin-pricing-secondary:hover, .admin-pricing-secondary:focus-visible, .admin-pricing-actions button:hover, .admin-pricing-actions button:focus-visible, .admin-pricing-mutation-error button:hover, .admin-pricing-mutation-error button:focus-visible { border-color: #196b6b; }
+.admin-pricing button:focus-visible, .admin-pricing input:focus-visible, .admin-pricing select:focus-visible, .admin-pricing-dialog:focus-visible { outline: 3px solid #70b7aa; outline-offset: 2px; }
+.admin-pricing button:disabled, .admin-pricing-dialog button:disabled { cursor: wait; opacity: .65; }
+.admin-pricing-editor { background: #fff; border: 1px solid #a9c7c4; border-left: .35rem solid #196b6b; border-radius: .85rem; padding: 1.1rem; }
+.admin-pricing-editor form { display: grid; gap: 1rem; margin-top: 1rem; }
+.admin-pricing-editor fieldset { border: 0; display: grid; gap: .8rem; margin: 0; min-width: 0; padding: 0; }
+.admin-pricing-editor legend { font-size: .9rem; font-weight: 800; margin-bottom: .75rem; }
+.admin-pricing-form-grid { display: grid; gap: .85rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.admin-pricing-field { align-content: start; display: grid; gap: .3rem; }
+.admin-pricing-field > label { font-size: .78rem; font-weight: 800; }
+.admin-pricing-field input, .admin-pricing-field select { background: #fff; border: 1px solid #9fb2ba; border-radius: .45rem; min-height: 2.65rem; min-width: 0; padding: .45rem .55rem; width: 100%; }
+.admin-pricing-field input:disabled, .admin-pricing-field select:disabled { background: #edf1f2; color: #3d505c; opacity: 1; }
+.admin-pricing-field [aria-invalid="true"] { border-color: #a53b33; }
+.admin-pricing-field small { color: #60727d; font-size: .72rem; }
+.admin-pricing-field > strong[role="alert"] { color: #9d2d25; font-size: .74rem; }
+.admin-pricing-form-actions { display: flex; flex-wrap: wrap; gap: .65rem; }
+.admin-pricing-term-groups { display: grid; gap: 1rem; }
+.admin-pricing-panel { background: #fff; border: 1px solid #d8e1e4; border-radius: .85rem; min-width: 0; padding: 1rem; }
+.admin-pricing-section-heading { margin-bottom: .7rem; }
+.admin-pricing-section-heading h2 { font-size: 1.2rem; font-weight: 800; margin-top: .1rem; }
+.admin-pricing-table-wrap { max-width: 100%; overflow-x: auto; }
+.admin-pricing table { border-collapse: collapse; min-width: 64rem; width: 100%; }
+.admin-pricing caption { clip: rect(0 0 0 0); height: 1px; overflow: hidden; position: absolute; width: 1px; }
+.admin-pricing th, .admin-pricing td { border-bottom: 1px solid #e3eaec; font-size: .78rem; padding: .75rem .6rem; text-align: left; vertical-align: top; }
+.admin-pricing thead th { color: #526474; font-size: .7rem; letter-spacing: .04em; text-transform: uppercase; }
+.admin-pricing tbody th { font-weight: 400; min-width: 16rem; }
+.admin-pricing-dimension, .admin-pricing-interval, .admin-pricing-price, .admin-pricing td:nth-child(4) { display: grid; gap: .18rem; }
+.admin-pricing-dimension span, .admin-pricing-interval span, .admin-pricing-price span, .admin-pricing td:nth-child(4) > span:not(.admin-pricing-status) { color: #586b77; }
+.admin-pricing-price strong { font-size: .95rem; font-variant-numeric: tabular-nums; }
+.admin-pricing-status { border-radius: 999px; font-size: .68rem; font-weight: 800; justify-self: start; padding: .2rem .5rem; text-transform: capitalize; }
+.admin-pricing-status--published { background: #daf1e7; color: #15523a; }
+.admin-pricing-status--ended { background: #eee9dd; color: #65501e; }
+.admin-pricing-status--disabled { background: #eceff1; color: #4c5b64; }
+.admin-pricing-actions { min-width: 9rem; }
+.admin-pricing-actions button { display: block; margin-bottom: .4rem; width: 100%; }
+.admin-pricing-actions span { color: #657782; }
+.admin-pricing-empty, .admin-pricing-message { background: #fff; border: 1px solid #d8e1e4; border-radius: .85rem; padding: 1.5rem; }
+.admin-pricing-empty { background: #fff9e9; border-color: #e5bd62; }
+.admin-pricing-loading { display: grid; gap: 1rem; }
+.admin-pricing-skeleton { animation: admin-pricing-pulse 1.5s ease-in-out infinite; background: #dce6e8; border-radius: .85rem; min-height: 14rem; }
+.admin-pricing-skeleton--wide { min-height: 6rem; }
+.admin-pricing-sr-only { clip: rect(0 0 0 0); height: 1px; overflow: hidden; position: absolute; width: 1px; }
+.admin-pricing-dialog-backdrop { align-items: center; background: #0d1c21b8; display: flex; inset: 0; justify-content: center; padding: 1rem; position: fixed; z-index: 100; }
+.admin-pricing-dialog { background: #fff; border-radius: .9rem; box-shadow: 0 1rem 3rem #0005; max-height: calc(100vh - 2rem); max-width: 46rem; overflow-y: auto; padding: 1.25rem; width: 100%; }
+.admin-pricing-dialog h2 { font-size: 1.45rem; font-weight: 800; margin-top: .15rem; }
+.admin-pricing-confirmation-list { display: grid; gap: 0; margin: 1rem 0; }
+.admin-pricing-confirmation-list > div { border-top: 1px solid #e1e8ea; display: grid; gap: .6rem; grid-template-columns: 10rem minmax(0, 1fr); padding: .7rem 0; }
+.admin-pricing-confirmation-list dt { color: #526474; font-size: .75rem; font-weight: 800; }
+.admin-pricing-confirmation-list dd { font-size: .85rem; overflow-wrap: anywhere; }
+.admin-pricing-expiry { color: #526474; font-size: .78rem; margin-bottom: .8rem; }
+.admin-pricing-inline-error { background: #fff1ef; border: 1px solid #d9a39c; border-radius: .5rem; color: #7d2923; margin-bottom: .8rem; padding: .7rem; }
+@keyframes admin-pricing-pulse { 50% { opacity: .55; } }
+@media (prefers-reduced-motion: reduce) { .admin-pricing-skeleton { animation: none; } }
+@media (max-width: 980px) {
+  .admin-pricing-support { grid-template-columns: 1fr; }
+  .admin-pricing-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .admin-pricing-header { display: grid; }
+  .admin-pricing-header .admin-pricing-secondary { width: 100%; }
+  .admin-pricing-form-grid { grid-template-columns: 1fr; }
+  .admin-pricing-confirmation-list > div { grid-template-columns: 1fr; }
+  .admin-pricing-form-actions > button { flex: 1 1 100%; }
+  .admin-pricing-dialog-backdrop { align-items: flex-end; padding: 0; }
+  .admin-pricing-dialog { border-radius: .9rem .9rem 0 0; max-height: 92vh; }
+}

@@ -18,6 +18,7 @@ function render(
       range={range}
       onRangeChange={() => {}}
       onRetry={() => {}}
+      onOpenProviderPricing={() => {}}
       today="2026-08-08"
     />,
   )
@@ -43,6 +44,7 @@ describe('Admin AI and Costs dashboard', () => {
     expect(markup).toContain('not a complete provider invoice')
     expect(markup).toContain('Provider traffic')
     expect(markup).toContain('Unverified')
+    expect(markup).toContain('Provider Pricing')
   })
 
   it('renders unavailable cost explicitly and never as $0', () => {
