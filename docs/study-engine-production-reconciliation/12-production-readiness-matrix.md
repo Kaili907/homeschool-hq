@@ -10,6 +10,7 @@
 | Direct-student issuer | Not supplied | not-ready |
 | Staff authorization/audit model | Not supplied | disabled |
 | Durable local migration semantics | Local PostgreSQL suites passed | ready locally |
+| Effective settings V2 | Typed resolver/RPC present; live production probe not supplied | not-ready |
 | Exact hosted schema/RLS/ACL state | Access unavailable | unknown / blocking |
 | Delivery providers and receipt validators | Not supplied | not-ready |
 | Adult-review worker authorization/schedule | Not supplied | not-ready |

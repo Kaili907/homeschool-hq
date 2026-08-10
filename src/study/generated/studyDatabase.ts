@@ -19,6 +19,8 @@ export const STUDY_PRIVATE_TABLES = [
   'study_outbox',
   'study_mutation_receipts',
   'study_persistence_metadata',
+  'study_effective_settings_admin_defaults',
+  'study_effective_settings_safety_policy',
 ] as const
 
 export const STUDY_RPC = {
@@ -29,6 +31,7 @@ export const STUDY_RPC = {
   readCheckpoint: 'academy_study_read_checkpoint',
   upsertAdultManagedRecord: 'academy_study_upsert_adult_managed_record',
   effectiveSettings: 'academy_study_effective_settings',
+  effectiveSettingsV2: 'academy_study_effective_settings_v2',
   appendAdultNote: 'academy_study_append_adult_note',
   listAdultNoteMetadata: 'academy_study_list_adult_note_metadata',
   readAdultNote: 'academy_study_read_adult_note',
