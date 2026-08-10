@@ -6,7 +6,10 @@ function deliveryKey(proposalId, recipientRef, routeRef, channel) {
   const hash = createHash('sha256')
     .update(['study-safety-delivery-v1', proposalId, recipientRef, routeRef, channel, 'study-safety-adult-review-v1'].join('\u001f'))
     .digest('hex')
-  return `study-safety-delivery:${hash}`
+  // The durable estate keys delivery jobs `'delivery:' || study_sha256_json(...)`.
+  // This in-memory stack derives its own digest, but it mints the durable
+  // namespace so no legacy delivery identifier survives anywhere in the tree.
+  return `delivery:${hash}`
 }
 
 function evidenceRef(prefix, value) {
