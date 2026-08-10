@@ -1,5 +1,6 @@
 import { importImmutableV1 } from '../../../src/curriculum-authoring/v2/v1Importer.node.ts'
 import { validateCurriculumSnapshot } from '../../../src/admin/curriculum-validation/engine.ts'
+import { buildCurriculumResourceLibrary } from '../../../src/admin/curriculum/resourceLibraryModel.ts'
 
 const SUPPORTED_RELEASE = '1.0.0'
 const ENTITY_COLLECTIONS = Object.freeze({
@@ -18,6 +19,7 @@ const ID_KEYS = Object.freeze({
 })
 
 let immutableImport
+let immutableResourceLibrary
 
 function baseRelease(version) {
   if (version !== SUPPORTED_RELEASE) {
@@ -104,8 +106,10 @@ async function materialize(authoring, actorUserRef, draftId, expectedRevision) {
   if (draft.revision !== expectedRevision) {
     throw Object.assign(new Error('curriculum_revision_conflict'), { code: 'conflict' })
   }
-  const liveSummaries = draft.entities.filter((entity) => !entity.tombstoned)
-  const details = await mapConcurrent(liveSummaries, 12, (entity) => authoring.readEntity(
+  const requiredSummaries = draft.entities.filter((entity) =>
+    !entity.tombstoned || entity.entityType === 'media_resource',
+  )
+  const details = await mapConcurrent(requiredSummaries, 12, (entity) => authoring.readEntity(
     actorUserRef,
     draftId,
     entity.entityType,
@@ -133,7 +137,30 @@ async function materialize(authoring, actorUserRef, draftId, expectedRevision) {
       payload: detail.payload,
     })
   }
-  return { draft, entities: [...composed.values()] }
+  const tombstonedResources = draft.entities
+    .filter((entity) => entity.tombstoned && entity.entityType === 'media_resource')
+    .map((summary) => {
+      const detail = detailByKey.get(`${summary.entityType}:${summary.entityRef}`)
+      if (!detail) throw new Error('curriculum_authoring_unavailable')
+      return {
+        entityType: summary.entityType,
+        entityRef: summary.entityRef,
+        origin: summary.origin,
+        revision: summary.revision,
+        position: summary.position,
+        tombstoned: true,
+        payload: detail.payload,
+      }
+    })
+  const entities = [...composed.values()]
+  return {
+    draft,
+    entities,
+    resourceAnalysisEntities: [
+      ...entities.map((entity) => ({ ...entity, tombstoned: false })),
+      ...tombstonedResources,
+    ],
+  }
 }
 
 function snapshotFromMaterialization(materialization) {
@@ -170,6 +197,33 @@ function snapshotFromMaterialization(materialization) {
   }
 }
 
+function resourceLibraryForBase(version) {
+  if (immutableResourceLibrary) return immutableResourceLibrary
+  const snapshot = baseRelease(version)
+  const validation = validateCurriculumSnapshot(snapshot, {
+    origin: 'published-release',
+    snapshotId: `release:${version}`,
+    expectedVersion: version,
+  })
+  immutableResourceLibrary = buildCurriculumResourceLibrary({
+    origin: 'published-release',
+    baseReleaseVersion: version,
+    entities: baseEntities(version).map((entity) => ({ ...entity, tombstoned: false })),
+    validation,
+  })
+  return immutableResourceLibrary
+}
+
+function draftSnapshotAndValidation(materialization) {
+  const snapshot = snapshotFromMaterialization(materialization)
+  const validation = validateCurriculumSnapshot(snapshot, {
+    origin: 'draft',
+    snapshotId: `${materialization.draft.draftId}@${materialization.draft.revision}`,
+    expectedVersion: materialization.draft.targetVersion,
+  })
+  return { snapshot, validation }
+}
+
 export function createAdminCurriculumStudioService({ authoring } = {}) {
   if (!authoring) throw new Error('curriculum_authoring_service_required')
   return Object.freeze({
@@ -180,6 +234,7 @@ export function createAdminCurriculumStudioService({ authoring } = {}) {
         entities: baseEntities(version).map((entity) => entityEntry(
           entity.entityType, entity.payload, entity.origin, entity.revision, entity.position,
         )),
+        resourceLibrary: resourceLibraryForBase(version),
       }
     },
     readBaseEntity(version, entityType, ref) {
@@ -197,6 +252,7 @@ export function createAdminCurriculumStudioService({ authoring } = {}) {
     },
     async readMaterialization(actorUserRef, draftId, expectedRevision) {
       const value = await materialize(authoring, actorUserRef, draftId, expectedRevision)
+      const { validation } = draftSnapshotAndValidation(value)
       return {
         schemaVersion: 1,
         draftId,
@@ -205,20 +261,24 @@ export function createAdminCurriculumStudioService({ authoring } = {}) {
         entities: value.entities.map((entity) => entityEntry(
           entity.entityType, entity.payload, entity.origin, entity.revision, entity.position,
         )),
+        resourceLibrary: buildCurriculumResourceLibrary({
+          origin: 'draft',
+          baseReleaseVersion: value.draft.baseReleaseVersion,
+          draftId,
+          draftRevision: value.draft.revision,
+          entities: value.resourceAnalysisEntities,
+          validation,
+        }),
       }
     },
     async validateDraft(actorUserRef, draftId, expectedRevision) {
       const value = await materialize(authoring, actorUserRef, draftId, expectedRevision)
-      const snapshot = snapshotFromMaterialization(value)
+      const { validation } = draftSnapshotAndValidation(value)
       return {
         schemaVersion: 1,
         draftId,
         draftRevision: value.draft.revision,
-        run: validateCurriculumSnapshot(snapshot, {
-          origin: 'draft',
-          snapshotId: `${draftId}@${value.draft.revision}`,
-          expectedVersion: value.draft.targetVersion,
-        }),
+        run: validation,
       }
     },
   })

@@ -17,6 +17,8 @@ import {
   type CurriculumDraftEntityType,
   type CurriculumDraftMaterialization,
   type CurriculumDraftSummary,
+  type CurriculumResourceLibrary,
+  type CurriculumResourceReference,
   type CurriculumStudioEntityIndexEntry,
   type CreateCurriculumDraftEntityInput,
   type TombstoneCurriculumDraftEntityInput,
@@ -40,6 +42,7 @@ import {
   type CurriculumTreeKey,
 } from './studioModel'
 import { StructuredEntityEditor } from './StructuredEntityEditor'
+import { CurriculumResourceLibraryView } from './CurriculumResourceLibrary'
 import { createDraftEntityPayload, CURRICULUM_ENTITY_REF_PATTERN } from './studioEditorModel'
 import './curriculum-studio.css'
 
@@ -155,18 +158,22 @@ export function CurriculumStudioView({
   source,
   initialDrafts = [],
   initialBaseEntries = [],
+  initialBaseResourceLibrary = null,
 }: {
   readonly catalog: CurriculumCatalog
   readonly capabilities: readonly AdminCapability[]
   readonly source: CurriculumStudioSource
   readonly initialDrafts?: readonly CurriculumDraftSummary[]
   readonly initialBaseEntries?: readonly CurriculumStudioEntityIndexEntry[]
+  readonly initialBaseResourceLibrary?: CurriculumResourceLibrary | null
 }) {
   const [drafts, setDrafts] = useState(initialDrafts)
   const [draftChoice, setDraftChoice] = useState(initialDrafts[0]?.draftId ?? '')
   const [draft, setDraft] = useState<CurriculumDraftDetail | null>(null)
   const [materialization, setMaterialization] = useState<CurriculumDraftMaterialization | null>(null)
   const [baseEntries, setBaseEntries] = useState<readonly CurriculumStudioEntityIndexEntry[]>(initialBaseEntries)
+  const [baseResourceLibrary, setBaseResourceLibrary] = useState<CurriculumResourceLibrary | null>(initialBaseResourceLibrary)
+  const [studioView, setStudioView] = useState<'curriculum' | 'resources'>('curriculum')
   const [workspaceMessage, setWorkspaceMessage] = useState('Select a draft or create a new workspace.')
   const [workspaceBusy, setWorkspaceBusy] = useState(initialBaseEntries.length === 0)
   const [targetVersion, setTargetVersion] = useState('')
@@ -198,6 +205,7 @@ export function CurriculumStudioView({
   const draftCapable = canWriteCurriculumDrafts(capabilities)
   const writeAllowed = draftCapable && serverWriteAllowed && draft !== null
   const entries = materialization?.entities ?? baseEntries
+  const resourceLibrary = materialization?.resourceLibrary ?? baseResourceLibrary
   const index = useMemo(() => buildMaterializedCurriculumStudioIndex(entries), [entries])
   const visible = useMemo(() => visibleCurriculumStudioRows(index, expandedIds, query), [expandedIds, index, query])
   const selected = resolveCurriculumStudioEntity(index, selectedId) ?? index.rows[0] ?? null
@@ -214,6 +222,7 @@ export function CurriculumStudioView({
       (value) => {
         if (!current) return
         setBaseEntries(value.entities)
+        setBaseResourceLibrary(value.resourceLibrary)
         setWorkspaceBusy(false)
       },
       (reason) => {
@@ -314,12 +323,29 @@ export function CurriculumStudioView({
     return () => window.removeEventListener('popstate', onPopState)
   }, [dirty, index])
 
-  function selectRow(row: CurriculumStudioRow, updateHistory = true) {
-    if (row.id !== selectedId && !confirmDiscard(dirty)) return
+  function selectRow(row: CurriculumStudioRow, updateHistory = true): boolean {
+    if (row.id !== selectedId && !confirmDiscard(dirty)) return false
     setSelectedId(row.id)
     setFocusedId(row.id)
     setExpandedIds((current) => unionSets(current, expandedAncestorsFor(index, row.id)))
     if (updateHistory) writeStudioEntityLocation(row.id)
+    return true
+  }
+
+  function openResourceEditor(resourceId: string) {
+    const row = index.byId.get(`media_resource:${resourceId}`)
+    if (row && selectRow(row)) setStudioView('curriculum')
+  }
+
+  function startResourceCreate() {
+    if (!writeAllowed) return
+    setNewEntityType('media_resource')
+    setStudioView('curriculum')
+  }
+
+  function jumpToResourceReference(reference: CurriculumResourceReference) {
+    const row = index.byId.get(reference.navigationId)
+    if (row && selectRow(row)) setStudioView('curriculum')
   }
 
   function toggleRow(row: CurriculumStudioRow) {
@@ -682,7 +708,12 @@ export function CurriculumStudioView({
         </dl>
       )}
 
-      <div className="curriculum-studio-grid">
+      <nav className="curriculum-studio-view-switcher" aria-label="Curriculum Studio views">
+        <button type="button" aria-pressed={studioView === 'curriculum'} onClick={() => setStudioView('curriculum')}>Navigator &amp; editor</button>
+        <button type="button" aria-pressed={studioView === 'resources'} onClick={() => setStudioView('resources')}>Resource Library <span>{resourceLibrary?.totals.resources ?? 0}</span></button>
+      </nav>
+
+      {studioView === 'curriculum' ? <div className="curriculum-studio-grid">
         <aside className="curriculum-studio-pane curriculum-studio-tree-pane" aria-label="Curriculum hierarchy">
           <div className="curriculum-studio-pane-heading"><div><p>Navigator</p><h3>Materialized snapshot</h3></div><span>{entries.length.toLocaleString()} entities</span></div>
           <label className="curriculum-studio-search"><span className="admin-sr-only">Filter curriculum hierarchy</span><input type="search" value={query} placeholder="Find an entity" onChange={(event) => setQuery(event.target.value)} /></label>
@@ -758,7 +789,20 @@ export function CurriculumStudioView({
             <InspectorSection title="Validation"><StatusLine label="Revision" value={validation ? String(validation.draftRevision) : 'Not run'} tone={validationStale ? 'warning' : validation ? 'positive' : 'neutral'} /><button type="button" disabled={!draft || validationBusy} onClick={() => void runValidation()}>{validationBusy ? 'Validating…' : `Validate${draft ? ` revision ${draft.revision}` : ''}`}</button>{validationError && <p role="alert">{validationError}</p>}</InspectorSection>
           </div>
         </aside>
-      </div>
+      </div> : resourceLibrary ? (
+        <CurriculumResourceLibraryView
+          library={resourceLibrary}
+          writeAllowed={writeAllowed}
+          onCreateResource={startResourceCreate}
+          onOpenResource={openResourceEditor}
+          onJumpToReference={jumpToResourceReference}
+        />
+      ) : (
+        <section className="curriculum-resource-library-unavailable" role={workspaceBusy ? 'status' : 'alert'}>
+          <h3>{workspaceBusy ? 'Loading Resource Library' : 'Resource Library unavailable'}</h3>
+          <p>{workspaceBusy ? 'Building the immutable resource inventory.' : 'The exact-snapshot resource analysis could not be loaded.'}</p>
+        </section>
+      )}
 
       {validation && (
         <section className="curriculum-studio-validation" aria-label="Revision-bound draft validation">

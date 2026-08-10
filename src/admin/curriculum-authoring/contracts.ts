@@ -11,7 +11,7 @@ import {
   type Unit,
 } from '../../curriculum-authoring/v2/contracts'
 import { validateWithSchema, type AuthoringSchema, type ValidationIssue } from '../../curriculum-authoring/v2/schema'
-import type { CurriculumSnapshotValidationRun } from '../curriculum-validation/engine'
+import type { CurriculumSnapshotValidationRun, CurriculumValidationFinding } from '../curriculum-validation/engine'
 
 export const CURRICULUM_DRAFT_SCHEMA_VERSION = 1 as const
 export const CURRICULUM_AUTHORING_SCHEMA_VERSION = '2.0.0' as const
@@ -133,10 +133,77 @@ export interface CurriculumStudioEntityIndexEntry {
   readonly unitRef?: string
 }
 
+export type CurriculumResourceKind = MediaResource['kind']
+export type CurriculumResourceOrigin = 'base' | CurriculumDraftEntityOrigin | 'missing' | 'invalid'
+export type CurriculumResourceLifecycle = 'active' | 'tombstoned' | 'missing' | 'invalid'
+export type CurriculumResourceReferenceStatus =
+  | 'referenced'
+  | 'unreferenced'
+  | 'missing-reference'
+  | 'tombstoned-but-referenced'
+  | 'invalid-reference'
+export type CurriculumResourceValidationStatus = 'valid' | 'invalid' | 'not-applicable'
+
+export interface CurriculumResourceReference {
+  readonly entityType: 'lesson' | 'assessment'
+  readonly entityRef: string
+  readonly entityTitle: string
+  readonly promptRef: string | null
+  readonly path: string
+  readonly navigationId: string
+  readonly valid: boolean
+}
+
+export interface CurriculumResourceLibraryItem {
+  /** Stable UI identity. Missing and invalid references do not masquerade as entities. */
+  readonly key: string
+  readonly resourceId: string | null
+  readonly metadata: MediaResource | null
+  readonly title: string
+  readonly kind: CurriculumResourceKind | null
+  readonly required: boolean | null
+  readonly origin: CurriculumResourceOrigin
+  readonly revision: number | null
+  readonly position: number | null
+  readonly lifecycle: CurriculumResourceLifecycle
+  readonly overridden: boolean
+  readonly referenceStatus: CurriculumResourceReferenceStatus
+  readonly referenceCount: number
+  readonly referencingEntityCount: number
+  readonly references: readonly CurriculumResourceReference[]
+  readonly validationStatus: CurriculumResourceValidationStatus
+  readonly validationFindings: readonly CurriculumValidationFinding[]
+}
+
+export interface CurriculumResourceLibrary {
+  readonly schemaVersion: 1
+  readonly source: {
+    readonly origin: 'published-release' | 'draft'
+    readonly baseReleaseVersion: string
+    readonly draftId: string | null
+    readonly draftRevision: number | null
+  }
+  readonly totals: {
+    readonly resources: number
+    readonly active: number
+    readonly referenced: number
+    readonly unreferenced: number
+    readonly overridden: number
+    readonly draftCreated: number
+    readonly tombstoned: number
+    readonly missingReferences: number
+    readonly invalidReferences: number
+    readonly referenceOccurrences: number
+    readonly validationInvalid: number
+  }
+  readonly items: readonly CurriculumResourceLibraryItem[]
+}
+
 export interface CurriculumBaseAuthoringIndex {
   readonly schemaVersion: 1
   readonly baseReleaseVersion: string
   readonly entities: readonly CurriculumStudioEntityIndexEntry[]
+  readonly resourceLibrary: CurriculumResourceLibrary
 }
 
 export interface CurriculumBaseAuthoringEntity {
@@ -153,6 +220,7 @@ export interface CurriculumDraftMaterialization {
   readonly draftRevision: number
   readonly baseReleaseVersion: string
   readonly entities: readonly CurriculumStudioEntityIndexEntry[]
+  readonly resourceLibrary: CurriculumResourceLibrary
 }
 
 export interface CurriculumDraftValidationResult {

@@ -15,6 +15,7 @@ import {
   curriculumSavedMessage,
 } from './CurriculumStudio'
 import { CurriculumWorkflowNav, CurriculumPreviewUnavailable } from './CurriculumWorkflowNav'
+import { CurriculumResourceLibraryView } from './CurriculumResourceLibrary'
 import {
   CURRICULUM_STUDIO_RENDER_LIMIT,
   buildCurriculumStudioIndex,
@@ -26,6 +27,7 @@ import {
   resolveCurriculumStudioEntity,
   visibleCurriculumStudioRows,
 } from './studioModel'
+import { buildCurriculumResourceLibrary } from './resourceLibraryModel'
 
 const lesson: CurriculumLessonSummary = {
   lessonId: 'g5-math-u01-d01',
@@ -96,12 +98,30 @@ const baseEntries: readonly CurriculumStudioEntityIndexEntry[] = [
   },
 ]
 
+const baseResourceLibrary = buildCurriculumResourceLibrary({
+  origin: 'published-release',
+  baseReleaseVersion: '1.0.0',
+  validation: { findings: [] },
+  entities: [{
+    entityType: 'media_resource', entityRef: 'g5-source-01', origin: 'base', revision: null,
+    position: 0, tombstoned: false,
+    payload: {
+      schema_set_version: '2.0.0', resource_id: 'g5-source-01', kind: 'text', title: 'Original source',
+      locator: 'curriculum/original-source.txt', rights: 'Locally authored.', required: false,
+      text_fallback: 'Original source text.',
+    },
+  }],
+})
+
 function authoringSource(): CurriculumDraftAuthoringSource {
   return {
     listDrafts: vi.fn(async () => ({ schemaVersion: 1 as const, drafts: [] })),
     readDraft: vi.fn(), readEntity: vi.fn(), createDraft: vi.fn(), createEntity: vi.fn(),
     updateEntity: vi.fn(), tombstoneEntity: vi.fn(),
-    readBaseIndex: vi.fn(async () => ({ schemaVersion: 1 as const, baseReleaseVersion: '1.0.0', entities: baseEntries })),
+    readBaseIndex: vi.fn(async () => ({
+      schemaVersion: 1 as const, baseReleaseVersion: '1.0.0', entities: baseEntries,
+      resourceLibrary: baseResourceLibrary,
+    })),
     readBaseEntity: vi.fn(), readMaterialization: vi.fn(), validateDraft: vi.fn(),
   }
 }
@@ -222,10 +242,50 @@ describe('Curriculum Studio shell', () => {
     expect(markup).toContain('role="treeitem"')
     expect(markup).toContain('tabindex="0"')
     expect(markup).toContain('Media resources')
+    expect(markup).toContain('Resource Library')
     expect(markup).toContain('Read-only: curriculum:drafts:write is unavailable')
     expect(markup).toContain('no active release is implied')
     expect(markup).not.toContain('Create draft entity')
     expect(markup).not.toContain('autosaved')
+  })
+
+  it('renders the accessible Resource Library inventory, filters, details, validation seam, and editor navigation', () => {
+    const referencedLibrary = buildCurriculumResourceLibrary({
+      origin: 'draft', baseReleaseVersion: '1.0.0', draftId: 'draft-one', draftRevision: 4,
+      validation: { findings: [] },
+      entities: [{
+        entityType: 'media_resource', entityRef: 'g5-source-01', origin: 'base_override', revision: 2,
+        position: 0, tombstoned: false,
+        payload: {
+          schema_set_version: '2.0.0', resource_id: 'g5-source-01', kind: 'text', title: 'Original source',
+          locator: 'curriculum/original-source.txt', rights: 'Locally authored.', required: false,
+          text_fallback: 'Original source text.',
+        },
+      }, {
+        entityType: 'lesson', entityRef: lesson.lessonId, origin: 'base_override', revision: 3,
+        position: 0, tombstoned: false,
+        payload: { lesson_id: lesson.lessonId, title: lesson.title, resource_refs: ['g5-source-01'] },
+      }],
+    })
+    const markup = renderToStaticMarkup(
+      <CurriculumResourceLibraryView
+        library={referencedLibrary}
+        writeAllowed={false}
+        onCreateResource={vi.fn()}
+        onOpenResource={vi.fn()}
+        onJumpToReference={vi.fn()}
+      />,
+    )
+    expect(markup).toContain('aria-labelledby="curriculum-resource-library-title"')
+    expect(markup).toContain('aria-label="Filter resource inventory"')
+    expect(markup).toContain('Type / category')
+    expect(markup).toContain('Reference status')
+    expect(markup).toContain('Draft override')
+    expect(markup).toContain('Open in structured editor (read-only)')
+    expect(markup).toContain(`Jump to lesson`)
+    expect(markup).toContain('No resource finding was reported')
+    expect(markup).toMatch(/no uploads, downloads, or storage-provider actions/i)
+    expect(markup).not.toMatch(/upload file|signed url|cdn/i)
   })
 
   it('is connected but does not imply an editable workspace until a draft is open', () => {
@@ -284,5 +344,7 @@ describe('Curriculum Studio shell', () => {
     expect(css).toContain('@media (max-width: 760px)')
     expect(css).toContain('@media (max-width: 480px)')
     expect(css).toContain(':focus-visible')
+    expect(css).toContain('.curriculum-resource-layout')
+    expect(css).not.toContain('CURRICULUM_RESOURCE_LIBRARY_RENDER_LIMIT')
   })
 })
