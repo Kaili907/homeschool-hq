@@ -27,7 +27,10 @@ candidate; conflicting identity reuse fails closed.
 Candidate and artifact rows are append-only, forced-RLS, and inaccessible by
 application roles. Their state is only `staged` / `not_published`; no published
 release row, active pointer, learner pin, runtime cache, or production artifact
-is changed. The migration is repository-only and has not been applied hosted.
+is changed. A service-only `curriculum:read` projection supplies exact persisted
+canonical bytes and revision-bound validation/approval identities to the
+server-side integrity verifier; those bytes are never sent to the browser. The
+migration is repository-only and has not been applied hosted.
 Its tracked SHA-256 is in
 `docs/admin-console/curriculum-release-staging-migration.json`.
 

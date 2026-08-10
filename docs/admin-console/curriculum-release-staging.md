@@ -63,6 +63,14 @@ states, target, blocking reasons, eligibility, and immutable checksum summary.
 Curriculum Studio clearly labels success `STAGED, NOT PUBLISHED`, exposes safe
 retry and unavailable/permission states, and contains no activation action.
 
+The service-only
+`academy_admin_read_curriculum_staging_integrity_v1` projection additionally
+supplies persisted canonical artifact bytes and their exact draft, validation,
+approval, base-release, target-version, and Schema Set bindings to the trusted
+server verifier. It requires the existing `curriculum:read` capability marker,
+has no mutation path, retains forced-RLS/no-table-access custody, and never
+returns curriculum payloads to the browser.
+
 ADMIN-20B remains responsible for release publication, registry promotion,
 artifact delivery, active-pointer transitions, learner binding, rollback, and
 all production execution of those operations.

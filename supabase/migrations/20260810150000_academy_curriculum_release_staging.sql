@@ -410,6 +410,94 @@ begin
 end;
 $$;
 
+-- Project exact persisted bytes only to the trusted server verifier. The
+-- browser never receives canonical_content or curriculum payloads.
+create function public.academy_admin_read_curriculum_staging_integrity_v1(
+  p_actor_user_ref uuid,
+  p_required_capability text default null
+)
+returns jsonb
+language plpgsql
+stable
+security definer
+set search_path = pg_catalog
+as $$
+declare
+  projection jsonb;
+begin
+  perform academy_private.curriculum_staging_require_actor(
+    p_actor_user_ref, p_required_capability
+  );
+  select jsonb_build_object(
+    'schemaVersion', 1,
+    'candidates', coalesce(jsonb_agg(jsonb_build_object(
+      'stagingId', candidate.staging_id,
+      'schemaVersion', candidate.schema_version,
+      'status', candidate.status,
+      'publicationStatus', candidate.publication_status,
+      'draftId', candidate.draft_id,
+      'draftRevision', candidate.draft_revision,
+      'baseReleaseVersion', base_release.version,
+      'targetVersion', candidate.target_version,
+      'schemaSetVersion', candidate.schema_set_version,
+      'validationSnapshotId', candidate.validation_snapshot_id,
+      'validationResultDigest', candidate.validation_result_sha256,
+      'approvalId', candidate.approval_id,
+      'entityCounts', candidate.entity_counts,
+      'fileCount', candidate.file_count,
+      'byteCount', candidate.byte_count,
+      'contentHash', candidate.content_sha256,
+      'manifestHash', candidate.manifest_sha256,
+      'packageHash', candidate.package_sha256,
+      'manifest', candidate.manifest,
+      'manifestCanonical', candidate.manifest_canonical,
+      'stagedAt', to_char(candidate.staged_at at time zone 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'),
+      'validation', jsonb_build_object(
+        'validationSnapshotId', validation.validation_snapshot_id,
+        'draftId', validation.draft_id,
+        'draftRevision', validation.draft_revision,
+        'baseReleaseVersion', base_release.version,
+        'targetVersion', validation.target_version,
+        'schemaSetVersion', validation.schema_set_version,
+        'resultDigest', validation.result_sha256,
+        'status', validation.validation_status,
+        'publicationReady', validation.publication_ready
+      ),
+      'approval', jsonb_build_object(
+        'approvalId', approval.approval_id,
+        'draftId', approval.draft_id,
+        'draftRevision', approval.draft_revision,
+        'baseReleaseVersion', base_release.version,
+        'targetVersion', approval.target_version,
+        'schemaSetVersion', approval.schema_set_version,
+        'validationSnapshotId', approval.validation_snapshot_id,
+        'validationResultDigest', approval.validation_result_sha256,
+        'decision', approval.decision,
+        'reasonCode', approval.reason_code
+      ),
+      'artifacts', coalesce((
+        select jsonb_agg(jsonb_build_object(
+          'relativePath', artifact.relative_path,
+          'byteCount', artifact.byte_count,
+          'sha256', artifact.sha256,
+          'canonicalContent', artifact.canonical_content
+        ) order by artifact.relative_path)
+        from public.academy_curriculum_staged_release_artifacts as artifact
+        where artifact.staging_id = candidate.staging_id
+      ), '[]'::jsonb)
+    ) order by candidate.target_version, candidate.staging_id), '[]'::jsonb)
+  ) into projection
+  from public.academy_curriculum_staged_releases as candidate
+  join public.academy_curriculum_releases as base_release
+    on base_release.release_id = candidate.base_release_id
+  join public.academy_curriculum_draft_validation_snapshots as validation
+    on validation.validation_snapshot_id = candidate.validation_snapshot_id
+  join public.academy_curriculum_draft_approval_decisions as approval
+    on approval.approval_id = candidate.approval_id;
+  return projection;
+end;
+$$;
+
 create function public.academy_admin_stage_curriculum_release_v1(
   p_actor_user_ref uuid,
   p_draft_id uuid,
@@ -725,6 +813,7 @@ alter function academy_private.curriculum_staging_candidate_projection(uuid) own
 alter function academy_private.curriculum_staging_status_projection(uuid) owner to postgres;
 alter function academy_private.curriculum_staging_append_audit(uuid, uuid, text, bigint, uuid, text, uuid) owner to postgres;
 alter function public.academy_admin_read_curriculum_staging_v1(uuid, uuid, text) owner to postgres;
+alter function public.academy_admin_read_curriculum_staging_integrity_v1(uuid, text) owner to postgres;
 alter function public.academy_admin_stage_curriculum_release_v1(uuid, uuid, bigint, uuid, uuid, jsonb, text, jsonb, text, text, text, uuid, text, text) owner to postgres;
 alter function public.academy_admin_read_audit_events_v1(integer, timestamptz, uuid, text, text, text, text) owner to postgres;
 
@@ -747,10 +836,14 @@ revoke all on function academy_private.curriculum_staging_append_audit(uuid, uui
   from public, anon, authenticated, service_role;
 revoke all on function public.academy_admin_read_curriculum_staging_v1(uuid, uuid, text)
   from public, anon, authenticated, service_role;
+revoke all on function public.academy_admin_read_curriculum_staging_integrity_v1(uuid, text)
+  from public, anon, authenticated, service_role;
 revoke all on function public.academy_admin_stage_curriculum_release_v1(uuid, uuid, bigint, uuid, uuid, jsonb, text, jsonb, text, text, text, uuid, text, text)
   from public, anon, authenticated, service_role;
 
 grant execute on function public.academy_admin_read_curriculum_staging_v1(uuid, uuid, text)
+  to service_role;
+grant execute on function public.academy_admin_read_curriculum_staging_integrity_v1(uuid, text)
   to service_role;
 grant execute on function public.academy_admin_stage_curriculum_release_v1(uuid, uuid, bigint, uuid, uuid, jsonb, text, jsonb, text, text, text, uuid, text, text)
   to service_role;
@@ -761,5 +854,7 @@ comment on table public.academy_curriculum_staged_release_artifacts is
   'Complete deterministic Schema v2 snapshot artifacts for a staged candidate.';
 comment on function public.academy_admin_stage_curriculum_release_v1(uuid, uuid, bigint, uuid, uuid, jsonb, text, jsonb, text, text, text, uuid, text, text) is
   'Service-only curriculum:publish staging mutation; never publishes or activates.';
+comment on function public.academy_admin_read_curriculum_staging_integrity_v1(uuid, text) is
+  'Service-only curriculum:read evidence projection for independent read-only integrity verification.';
 
 commit;
