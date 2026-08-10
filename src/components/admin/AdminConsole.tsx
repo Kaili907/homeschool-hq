@@ -25,18 +25,19 @@ import {
 } from '../../admin/overviewModel'
 import './admin-console.css'
 
-const NAVIGATION: readonly { id: AdminSection; label: string; capability: AdminCapability }[] = [
-  { id: 'overview', label: 'Overview', capability: 'overview:read' },
-  { id: 'learners', label: 'Learners', capability: 'learners:read' },
-  { id: 'engines', label: 'Engine Performance', capability: 'engines:read' },
-  { id: 'costs', label: 'AI & Costs', capability: 'costs:read' },
-  { id: 'system-health', label: 'System Health', capability: 'health:read' },
-  { id: 'safety', label: 'Safety', capability: 'safety:read' },
-  { id: 'curriculum', label: 'Curriculum', capability: 'curriculum:read' },
-  { id: 'configuration', label: 'Configuration', capability: 'configuration:read' },
-  { id: 'audit-log', label: 'Audit Log', capability: 'audit:read' },
-  { id: 'access', label: 'Access & Permissions', capability: 'overview:read' },
-  { id: 'releases', label: 'Production Readiness', capability: 'releases:read' },
+const NAVIGATION: readonly { id: AdminSection; label: string; capabilities: readonly AdminCapability[] }[] = [
+  { id: 'overview', label: 'Overview', capabilities: ['overview:read'] },
+  { id: 'learners', label: 'Learners', capabilities: ['learners:read'] },
+  { id: 'engines', label: 'Engine Performance', capabilities: ['engines:read'] },
+  { id: 'costs', label: 'AI & Costs', capabilities: ['costs:read'] },
+  { id: 'system-health', label: 'System Health', capabilities: ['health:read'] },
+  { id: 'incidents', label: 'Incident Explorer', capabilities: ['engines:read', 'audit:read', 'costs:read'] },
+  { id: 'safety', label: 'Safety', capabilities: ['safety:read'] },
+  { id: 'curriculum', label: 'Curriculum', capabilities: ['curriculum:read'] },
+  { id: 'configuration', label: 'Configuration', capabilities: ['configuration:read'] },
+  { id: 'audit-log', label: 'Audit Log', capabilities: ['audit:read'] },
+  { id: 'access', label: 'Access & Permissions', capabilities: ['overview:read'] },
+  { id: 'releases', label: 'Production Readiness', capabilities: ['releases:read'] },
 ]
 
 const PRESET_LABELS: Record<OverviewPreset, string> = {
@@ -146,7 +147,8 @@ export function AdminShell({
   const headingRef = useRef<HTMLHeadingElement>(null)
   const previousTitle = useRef<string | null>(null)
   const activeLabel = NAVIGATION.find((item) => item.id === activeSection)?.label ?? title
-  const visibleNavigation = NAVIGATION.filter((item) => authorization.capabilities.includes(item.capability))
+  const visibleNavigation = NAVIGATION.filter((item) =>
+    item.capabilities.some((capability) => authorization.capabilities.includes(capability)))
   useEffect(() => {
     applyAdminRoutePresentation(title, document, headingRef.current, previousTitle.current !== null)
     previousTitle.current = title
@@ -510,7 +512,7 @@ function BrandMark() {
 function NavIcon({ section }: { section: AdminSection }) {
   const icons: Record<AdminSection, string> = {
     overview: '⌂', learners: '◉', engines: '◇', costs: '✦', curriculum: '▤',
-    safety: '◆', 'system-health': '⌁', configuration: '⚙', 'audit-log': '≡', access: '⌘', releases: '↑',
+    safety: '◆', 'system-health': '⌁', incidents: '◎', configuration: '⚙', 'audit-log': '≡', access: '⌘', releases: '↑',
   }
   return <span className="admin-nav-icon" aria-hidden="true">{icons[section]}</span>
 }
