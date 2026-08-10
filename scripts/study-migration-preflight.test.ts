@@ -199,9 +199,16 @@ describe('hosted Study migration authorization evidence', () => {
   it('includes TEL-FOUNDATION only through its exact canonical checksum', async () => {
     const checkedInManifest = await loadCheckedInJson('migration-manifest.json')
     const checksums = executableChecksums(checkedInManifest)
+    const telemetryEntries = checkedInManifest.migrations.filter((entry: Record<string, unknown>) =>
+      entry.filename === '20260809120000_academy_operational_telemetry_foundation.sql',
+    )
 
-    expect(checksums).toContain('5646d92084f85dd1a5b5463cff3f97970dc1e9017c85a809443266d8dcb1c23d')
-    expect(checksums.at(-1)).toBe('5646d92084f85dd1a5b5463cff3f97970dc1e9017c85a809443266d8dcb1c23d')
+    expect(checksums.filter((value) =>
+      value === '5646d92084f85dd1a5b5463cff3f97970dc1e9017c85a809443266d8dcb1c23d',
+    )).toHaveLength(1)
+    expect(telemetryEntries).toEqual([expect.objectContaining({
+      sha256: '5646d92084f85dd1a5b5463cff3f97970dc1e9017c85a809443266d8dcb1c23d',
+    })])
   })
 
   it('keeps checked-in unresolved evidence blocked for real readiness holds', async () => {
