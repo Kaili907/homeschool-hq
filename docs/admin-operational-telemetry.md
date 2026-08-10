@@ -89,6 +89,13 @@ returned. Declared partial grouping and retention-limited windows remain visible
 and make affected per-engine evidence partial. Malformed responses and group
 overflow fail closed; neither can become a successful projection.
 
+The Overview composes its Engine Performance domain through this same aggregate
+reader and projection. Its fixed trailing-30-day view starts one hour inside the
+diagnostic retention boundary so normal request latency and service/database
+clock skew do not make every refresh retention-limited. It preserves per-domain
+capability isolation while mapping partial grouping or retention-limited
+evidence to the Overview contract's explicit `partial` state.
+
 The corrected legacy raw projection remains covered as a compatibility seam:
 its source bound is derived from raw row count, malformed rows never conceal a
 reached 500-row limit, and rejected rows remain excluded from every metric and

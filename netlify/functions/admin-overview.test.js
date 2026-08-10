@@ -1,8 +1,13 @@
 import { describe, expect, it, vi } from 'vitest'
 import { createAdminOverviewHandler } from './admin-overview.js'
+import { AdminOperationalAggregateReadError } from './_shared/admin-operational-aggregate-reader.js'
 import { resolveAdminOverviewRange } from './_shared/admin-overview.js'
 
 const NOW = new Date('2026-08-09T14:30:00.000Z')
+const PERFORMANCE_RETENTION_MARGIN_MS = 60 * 60 * 1_000
+const PERFORMANCE_START = new Date(
+  NOW.getTime() - 30 * 24 * 60 * 60 * 1_000 + PERFORMANCE_RETENTION_MARGIN_MS,
+).toISOString()
 const ALL_CAPABILITIES = ['overview:read', 'learners:read', 'engines:read', 'health:read', 'costs:read', 'safety:read', 'curriculum:read']
 
 function event(query = { range: 'today' }, overrides = {}) {
@@ -47,6 +52,60 @@ function operationalEvent(index, occurredAt) {
   }
 }
 
+function performanceGroup(overrides = {}) {
+  return {
+    retentionCategory: 'diagnostic_short',
+    engine: 'tutor',
+    appVersion: 'build-1',
+    engineVersion: 'tutor-1',
+    curriculumVersion: null,
+    courseRef: null,
+    unitRef: null,
+    eventType: 'tutor.turn',
+    result: 'success',
+    operation: 'turn',
+    reasonCode: null,
+    provider: null,
+    route: null,
+    eventCount: 1,
+    durationCount: 1,
+    durationTotalMs: 100,
+    durationP50Ms: 100,
+    durationP95Ms: 100,
+    firstOccurredAt: '2026-08-01T12:00:00.000Z',
+    lastOccurredAt: '2026-08-01T12:00:00.000Z',
+    ...overrides,
+  }
+}
+
+function performanceAggregate({
+  start = PERFORMANCE_START,
+  endExclusive = NOW.toISOString(),
+  groups = [],
+  grouping = 'complete',
+  retentionClasses = [
+    { category: 'diagnostic_short', retainedDays: 30, complete: true },
+    { category: 'operational_standard', retainedDays: 90, complete: true },
+    { category: 'safety_extended', retainedDays: 365, complete: true },
+  ],
+  totalEventCount = groups.reduce((total, group) => total + group.eventCount, 0),
+} = {}) {
+  return {
+    schemaVersion: 2,
+    range: { start, endExclusive, maximumDays: 366 },
+    filters: { engine: null, engineVersion: null, courseRef: null, unitRef: null },
+    completeness: {
+      grouping,
+      groupCount: groups.length,
+      groupLimit: 4096,
+      allRetentionClasses: retentionClasses.every((item) => item.complete),
+      retentionClasses,
+    },
+    totalEventCount,
+    groups,
+  }
+}
+
 function sources(overrides = {}) {
   return {
     learners: vi.fn(async () => ({
@@ -58,7 +117,10 @@ function sources(overrides = {}) {
     })),
     health: vi.fn(async () => ({ events: [], rejectedRows: 0, sourceTruncated: false })),
     disabledEngines: new Set(),
-    enginePerformance: vi.fn(async () => []),
+    enginePerformance: vi.fn(async (input) => performanceAggregate({
+      start: input.start,
+      endExclusive: input.endExclusive,
+    })),
     costs: vi.fn(async () => []),
     safety: vi.fn(async () => ({
       observedAt: '2026-08-09T14:20:00.000Z',
@@ -115,6 +177,44 @@ describe('Admin Overview authorization composition', () => {
     expect(domainSources.safety).not.toHaveBeenCalled()
     expect(domainSources.curriculumCatalog).not.toHaveBeenCalled()
     expect(domainSources.curriculumValidation).not.toHaveBeenCalled()
+  })
+
+  it('wires the default Engine Performance domain to a retention-safe service aggregate read', async () => {
+    const databaseReferenceTime = new Date(NOW.getTime() + 5 * 60 * 1_000)
+    const aggregate = vi.fn(async (input) => {
+      const diagnosticComplete = Date.parse(input.start)
+        >= databaseReferenceTime.getTime() - 30 * 24 * 60 * 60 * 1_000
+      expect(diagnosticComplete).toBe(true)
+      return performanceAggregate({
+        start: input.start,
+        endExclusive: input.endExclusive,
+        retentionClasses: [
+          { category: 'diagnostic_short', retainedDays: 30, complete: diagnosticComplete },
+          { category: 'operational_standard', retainedDays: 90, complete: true },
+          { category: 'safety_extended', retainedDays: 365, complete: true },
+        ],
+      })
+    })
+    const response = await handler({
+      authorization: authorization(['overview:read', 'engines:read']),
+      sources: undefined,
+      performanceReader: { aggregate },
+    })(event())
+
+    expect(response.statusCode).toBe(200)
+    expect(aggregate).toHaveBeenCalledWith({
+      start: PERFORMANCE_START,
+      endExclusive: NOW.toISOString(),
+      engine: null,
+      engineVersion: null,
+      courseRef: null,
+      unitRef: null,
+      capability: 'engines:read',
+    })
+    expect(body(response).enginePerformance).toMatchObject({
+      availability: 'available', completeness: 'complete',
+      window: { label: 'Engine performance: trailing 30 days (one-hour retention margin)' },
+    })
   })
 })
 
@@ -181,6 +281,79 @@ describe('Admin Overview domain semantics and isolation', () => {
     expect(body(response).engineHealth).toMatchObject({
       availability: 'available', freshness: 'stale', completeness: 'complete', observationStatus: 'stale',
     })
+  })
+
+  it('composes scalable Engine Performance evidence beyond 500 events without exposing aggregate dimensions', async () => {
+    const enginePerformance = vi.fn(async () => performanceAggregate({
+      groups: [performanceGroup({
+        eventCount: 501,
+        durationCount: 501,
+        durationTotalMs: 50_100,
+        provider: 'private-provider',
+        route: 'private-route',
+      })],
+    }))
+    const response = await handler({ sources: sources({ enginePerformance }) })(event())
+    const model = body(response)
+
+    expect(enginePerformance).toHaveBeenCalledWith({
+      start: PERFORMANCE_START,
+      endExclusive: NOW.toISOString(),
+      engine: null,
+      engineVersion: null,
+      courseRef: null,
+      unitRef: null,
+      capability: 'engines:read',
+    })
+    expect(model.enginePerformance).toMatchObject({
+      availability: 'available', completeness: 'complete', observationStatus: 'unknown',
+    })
+    expect(model.enginePerformance.data.engines.find((engine) => engine.engineId === 'tutor'))
+      .toMatchObject({ evidenceState: 'partial' })
+    expect(response.body).not.toMatch(/private-provider|private-route/)
+  })
+
+  it.each([
+    ['partial grouping', performanceAggregate({
+      groups: [performanceGroup({ eventCount: 20, durationCount: 20, durationTotalMs: 2_000 })],
+      grouping: 'partial',
+    })],
+    ['retention-limited evidence', performanceAggregate({
+      groups: [performanceGroup({ eventCount: 20, durationCount: 20, durationTotalMs: 2_000 })],
+      retentionClasses: [
+        { category: 'diagnostic_short', retainedDays: 30, complete: false },
+        { category: 'operational_standard', retainedDays: 90, complete: true },
+        { category: 'safety_extended', retainedDays: 365, complete: true },
+      ],
+    })],
+  ])('maps %s to the Overview partial state', async (_label, aggregate) => {
+    const response = await handler({
+      sources: sources({ enginePerformance: vi.fn(async () => aggregate) }),
+    })(event())
+    const domain = body(response).enginePerformance
+
+    expect(domain).toMatchObject({
+      availability: 'available', completeness: 'partial', observationStatus: 'partial',
+    })
+    expect(domain.data.engines.find((engine) => engine.engineId === 'tutor'))
+      .toMatchObject({ evidenceState: 'partial' })
+  })
+
+  it('isolates malformed or over-bounded Engine Performance aggregates', async () => {
+    const failingSources = [
+      vi.fn(async () => performanceAggregate({ totalEventCount: 2 })),
+      vi.fn(async () => { throw new AdminOperationalAggregateReadError('source_group_limit') }),
+    ]
+    for (const enginePerformance of failingSources) {
+      const response = await handler({ sources: sources({ enginePerformance }) })(event())
+      const model = body(response)
+      expect(response.statusCode).toBe(200)
+      expect(model.enginePerformance).toMatchObject({
+        availability: 'unavailable', observationStatus: 'unavailable', reasonCode: 'source_unavailable',
+      })
+      expect(model.learners.availability).toBe('available')
+      expect(response.body).not.toMatch(/aggregate_malformed|source_group_limit/)
+    }
   })
 
   it('defines active learners by attendance and leaves unproven metrics unavailable', async () => {

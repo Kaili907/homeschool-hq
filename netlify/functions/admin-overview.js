@@ -1,7 +1,7 @@
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import { createAdminLearnerReader } from './_shared/admin-learner-reader.js'
 import { createAdminHealthSource, disabledHealthEngines } from './_shared/admin-health-source.js'
-import { createAdminEnginePerformanceReader } from './_shared/admin-engine-performance-reader.js'
+import { createAdminOperationalAggregateReader } from './_shared/admin-operational-aggregate-reader.js'
 import { createGatewayAccess } from './_shared/gateway-access.js'
 import { createAdminSafetyReader } from './_shared/admin-safety-reader.js'
 import { loadAdminCurriculumValidationEvidence } from './_shared/admin-curriculum-evidence.js'
@@ -29,7 +29,7 @@ export function createAdminOverviewHandler(overrides = {}) {
   const healthSource = overrides.healthSource ?? createAdminHealthSource({
     env, fetchImpl, client: overrides.telemetryClient,
   })
-  const performanceReader = overrides.performanceReader ?? createAdminEnginePerformanceReader({
+  const performanceReader = overrides.performanceReader ?? createAdminOperationalAggregateReader({
     env, fetchImpl, client: overrides.telemetryClient,
   })
   const gatewayAccess = overrides.gatewayAccess ?? createGatewayAccess({
@@ -44,7 +44,7 @@ export function createAdminOverviewHandler(overrides = {}) {
     learners: (input) => learnerReader.readSnapshot(input),
     health: () => healthSource.list(),
     disabledEngines: disabledHealthEngines(env),
-    enginePerformance: (limit) => performanceReader.list(limit),
+    enginePerformance: (input) => performanceReader.aggregate(input),
     costs: (input) => gatewayAccess.readProviderUsageCosts(input),
     safety: (input) => safetyReader.read(input),
     curriculumCatalog: () => curriculumSource.loadCatalog(),

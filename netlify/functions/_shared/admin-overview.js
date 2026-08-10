@@ -1,10 +1,11 @@
 import { ADMIN_CONTRACT_VERSION } from '../../../src/admin/contracts.ts'
 import { buildCurriculumValidationReadModel } from '../../../src/admin/curriculum-validation/model.ts'
-import { buildEnginePerformanceProjection, ENGINE_PERFORMANCE_SOURCE_LIMIT } from '../../../src/admin/enginePerformanceModel.ts'
+import { buildEnginePerformanceProjectionFromAggregate } from '../../../src/admin/enginePerformanceModel.ts'
 import { buildSystemHealthProjection } from '../../../src/admin/systemHealth.ts'
 import { buildAdminCostProjection, ADMIN_COST_RECORD_LIMIT } from './admin-cost-projection.js'
 
 const DAY_MS = 24 * 60 * 60 * 1_000
+const PERFORMANCE_RETENTION_MARGIN_MS = 60 * 60 * 1_000
 const RANGE_KINDS = new Set(['today', '7-days', '30-days', 'school-year', 'custom'])
 const DOMAIN_CAPABILITIES = Object.freeze({
   learners: 'learners:read',
@@ -227,8 +228,8 @@ export async function composeAdminOverview({ principal, accessToken, range, gene
   const healthWindow = window('fixed', 'System health: selected 1-hour history and fixed evaluation window', null, generatedAt)
   const performanceWindow = window(
     'fixed',
-    'Engine performance: trailing 30 days',
-    new Date(Date.parse(generatedAt) - 30 * DAY_MS).toISOString(),
+    'Engine performance: trailing 30 days (one-hour retention margin)',
+    new Date(Date.parse(generatedAt) - 30 * DAY_MS + PERFORMANCE_RETENTION_MARGIN_MS).toISOString(),
     generatedAt,
   )
   const asOfSafety = window('as-of', 'Safety durable projection as of observation', null, null)
@@ -273,22 +274,28 @@ export async function composeAdminOverview({ principal, accessToken, range, gene
       })
     }),
     isolatedDomain(capabilities, 'enginePerformance', performanceWindow, async () => {
-      const rows = await sources.enginePerformance(ENGINE_PERFORMANCE_SOURCE_LIMIT)
-      const projection = buildEnginePerformanceProjection(rows, {
-        generatedAt,
-        filters: {
-          start: performanceWindow.startInclusive,
-          end: performanceWindow.endExclusive,
-          engine: null,
-          engineVersion: null,
-          courseRef: null,
-          unitRef: null,
-        },
-        sourceLimit: ENGINE_PERFORMANCE_SOURCE_LIMIT,
+      const filters = {
+        start: performanceWindow.startInclusive,
+        end: performanceWindow.endExclusive,
+        engine: null,
+        engineVersion: null,
+        courseRef: null,
+        unitRef: null,
+      }
+      const aggregate = await sources.enginePerformance({
+        start: filters.start,
+        endExclusive: filters.end,
+        engine: filters.engine,
+        engineVersion: filters.engineVersion,
+        courseRef: filters.courseRef,
+        unitRef: filters.unitRef,
+        capability: DOMAIN_CAPABILITIES.enginePerformance,
       })
-      const completeness = projection.source.limitReached
-        ? 'truncated'
-        : projection.source.rejectedRowCount > 0 ? 'partial' : 'complete'
+      const projection = buildEnginePerformanceProjectionFromAggregate(aggregate, {
+        generatedAt,
+        filters,
+      })
+      const completeness = projection.source.completeness === 'complete' ? 'complete' : 'partial'
       const unknown = projection.engines.every((engine) =>
         engine.evidenceState === 'unavailable' || engine.evidenceState === 'insufficient_evidence')
       return available({
