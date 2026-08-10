@@ -2,6 +2,10 @@ import {
   hasConsistentAdminUsageCost,
   isCanonicalIntegerMicros,
 } from '../../../src/admin/contracts.ts'
+import {
+  buildAdminProviderAccountingCoverage,
+  unavailableProviderAccountingCoverage,
+} from './admin-provider-coverage.js'
 import { reject } from './http.js'
 
 export const ADMIN_COST_RECORD_LIMIT = 500
@@ -322,7 +326,12 @@ function groupedRows(records, sourcePartial, keyFor, labelFor) {
     .sort((left, right) => left.label.localeCompare(right.label))
 }
 
-export function buildAdminCostProjection(records, range, generatedAt = new Date()) {
+export function buildAdminCostProjection(
+  records,
+  range,
+  generatedAt = new Date(),
+  providerCoverage = unavailableProviderAccountingCoverage(),
+) {
   if (!Array.isArray(records)) reject(503, 'cost_source_unavailable')
   const validated = records.map(validateRecord)
   const inRange = validated.filter(
@@ -368,7 +377,7 @@ export function buildAdminCostProjection(records, range, generatedAt = new Date(
   if (costKindCounts.unavailable > 0) reasons.push('calculated_cost_unavailable')
 
   return Object.freeze({
-    contractVersion: 2,
+    contractVersion: 3,
     generatedAt: generatedAt.toISOString(),
     currency: 'USD',
     range,
@@ -409,22 +418,35 @@ export function buildAdminCostProjection(records, range, generatedAt = new Date(
           : record.billingDisposition[0].toUpperCase() + record.billingDisposition.slice(1),
       ),
     },
+    providerAccountingCoverage: providerCoverage,
   })
 }
 
 export function createAdminCostProjection({ gatewayAccess, now = () => new Date() }) {
-  if (!gatewayAccess || typeof gatewayAccess.readProviderUsageCosts !== 'function') {
-    throw new TypeError('admin cost projection requires the provider usage read seam')
+  if (
+    !gatewayAccess || typeof gatewayAccess.readProviderUsageCosts !== 'function'
+    || typeof gatewayAccess.readProviderAttemptCoverage !== 'function'
+  ) {
+    throw new TypeError('admin cost projection requires provider usage and attempt coverage read seams')
   }
   return Object.freeze({
     async read(event) {
       const observedAt = now()
       const range = resolveAdminCostRange(event, observedAt)
-      const records = await gatewayAccess.readProviderUsageCosts({
-        limit: ADMIN_COST_RECORD_LIMIT,
-        before: range.endExclusive,
-      })
-      return buildAdminCostProjection(records, range, observedAt)
+      const [records, rawCoverage] = await Promise.all([
+        gatewayAccess.readProviderUsageCosts({
+          limit: ADMIN_COST_RECORD_LIMIT,
+          before: range.endExclusive,
+        }),
+        gatewayAccess.readProviderAttemptCoverage({
+          startAt: range.startAt,
+          endExclusive: range.endExclusive,
+        }).catch(() => null),
+      ])
+      const coverage = rawCoverage === null
+        ? unavailableProviderAccountingCoverage()
+        : buildAdminProviderAccountingCoverage(rawCoverage, range)
+      return buildAdminCostProjection(records, range, observedAt, coverage)
     },
   })
 }

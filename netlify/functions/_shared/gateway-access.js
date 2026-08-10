@@ -139,5 +139,20 @@ export function createGatewayAccess({ env, fetchImpl, client } = {}) {
       if (error) reject(503, 'service_unavailable')
       return data
     },
+
+    async readProviderAttemptCoverage({ startAt, endExclusive }) {
+      const signal = AbortSignal.timeout(ACCESS_TIMEOUT_MS)
+      const { data, error } = await getClient()
+        .rpc('academy_read_provider_attempt_coverage_v1', {
+          p_start_at: startAt,
+          p_end_exclusive: endExclusive,
+          p_required_capability: 'costs:read',
+        })
+        .abortSignal(signal)
+
+      if (signal.aborted) reject(504, 'upstream_timeout')
+      if (error) reject(503, 'service_unavailable')
+      return data
+    },
   }
 }

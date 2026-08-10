@@ -11,6 +11,9 @@ import {
   type AdminCostRangeSelection,
   type AdminCostsModel,
   type AdminCostsReadState,
+  type AdminProviderAccountingCoverage,
+  type AdminProviderAccountingCoverageBreakdownRow,
+  type AdminProviderAccountingCoverageStatus,
 } from '../../admin/costsModel'
 import './admin-costs.css'
 
@@ -20,6 +23,37 @@ const PRESET_LABELS = {
   '30-days': '30 days',
   month: 'Current month',
 } as const
+
+const PROVIDER_COVERAGE_STATUS_LABELS: Readonly<Record<AdminProviderAccountingCoverageStatus, string>> = {
+  complete_for_journaled_attempts: 'Complete for journaled attempts',
+  partial: 'Partial',
+  gaps_detected: 'Gaps detected',
+  reconciliation_conflict: 'Reconciliation conflict',
+  unavailable: 'Unavailable',
+  insufficient_evidence: 'Insufficient evidence',
+}
+
+const PROVIDER_COVERAGE_STATUS_COPY: Readonly<Record<AdminProviderAccountingCoverageStatus, string>> = {
+  complete_for_journaled_attempts: 'Every journaled attempt in this range has a supported terminal accounting resolution.',
+  partial: 'Some journaled attempts are still between reservation, dispatch readiness, outcome, and final accounting.',
+  gaps_detected: 'The journal knows about missing accounting relationships or attempts that could not be resolved.',
+  reconciliation_conflict: 'At least one journaled attempt conflicts with the authoritative usage ledger.',
+  unavailable: 'The journal coverage projection could not be read safely.',
+  insufficient_evidence: 'No journaled attempts or unmatched ledger rows were observed in this range. Absence is not proof of provider-path coverage.',
+}
+
+const PROVIDER_COVERAGE_DIMENSION_LABELS: Readonly<Record<string, string>> = {
+  tutor: 'Tutor',
+  study: 'Study safety',
+  jarvis: 'Jarvis',
+  tts: 'Text to speech',
+  tutor_turn: 'Tutor turn',
+  jarvis_turn: 'Jarvis turn',
+  tts_synthesis: 'Speech synthesis',
+  safety_classification: 'Safety classification',
+  anthropic: 'Anthropic',
+  elevenlabs: 'ElevenLabs',
+}
 
 export interface AdminCostsDashboardProps {
   readonly authorized: boolean
@@ -71,7 +105,13 @@ export function AdminCostsDashboard({
           {onRetry && <button type="button" onClick={onRetry}>Try again</button>}
         </section>
       )}
-      {state.status === 'ready' && <CostsContent model={state.model} stale={state.freshness === 'stale'} />}
+      {state.status === 'ready' && (
+        <CostsContent
+          model={state.model}
+          stale={state.freshness === 'stale'}
+          onRetry={onRetry}
+        />
+      )}
     </div>
   )
 }
@@ -157,7 +197,15 @@ function CostsLoading() {
   )
 }
 
-function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean }) {
+function CostsContent({
+  model,
+  stale,
+  onRetry,
+}: {
+  model: AdminCostsModel
+  stale: boolean
+  onRetry?: () => void
+}) {
   const empty = model.summary.totalRequests.status === 'available' && model.summary.totalRequests.value === 0
   return (
     <>
@@ -202,6 +250,11 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
         </div>
         <p className="admin-costs-disclosure">Calculated provider cost is a usage-derived estimate, not provider-invoice truth. Reconciled provider cost is reported separately.</p>
       </section>
+
+      <ProviderAccountingCoverageSection
+        coverage={model.providerAccountingCoverage}
+        onRetry={onRetry}
+      />
 
       <section className="admin-costs-panel" aria-labelledby="cost-completeness-title">
         <SectionHeading id="cost-completeness-title" eyebrow="Evidence quality" title="Completeness and disposition" />
@@ -262,6 +315,141 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
         Projection generated <time dateTime={model.generatedAt}>{formatUtc(model.generatedAt)}</time>. {model.source.recordsIncluded.toLocaleString()} bounded ledger records included.
       </footer>
     </>
+  )
+}
+
+function ProviderAccountingCoverageSection({
+  coverage,
+  onRetry,
+}: {
+  coverage: AdminProviderAccountingCoverage
+  onRetry?: () => void
+}) {
+  const titleId = useId()
+  if (coverage.status === 'unavailable' || coverage.metrics === null) {
+    return (
+      <section className="admin-costs-panel admin-provider-coverage" aria-labelledby={titleId}>
+        <SectionHeading id={titleId} eyebrow="Accounting trail" title="Provider accounting coverage" />
+        <div className="admin-provider-coverage__unavailable" role="status">
+          <strong>Coverage unavailable</strong>
+          <p>{PROVIDER_COVERAGE_STATUS_COPY.unavailable} Existing usage and cost totals above remain independently sourced.</p>
+          {onRetry && <button type="button" onClick={onRetry}>Retry coverage</button>}
+        </div>
+        <CoverageScopeDisclosure />
+      </section>
+    )
+  }
+
+  const metrics = coverage.metrics
+  const reconciliationLabel = coverage.reconciliationState === 'clear_for_journaled_attempts'
+    ? 'Clear for journaled attempts'
+    : coverage.reconciliationState === 'in_progress'
+      ? 'In progress'
+      : coverage.reconciliationState === 'gaps_detected'
+        ? 'Gaps detected'
+        : coverage.reconciliationState === 'conflict'
+          ? 'Conflict'
+          : 'Insufficient evidence'
+  return (
+    <section className="admin-costs-panel admin-provider-coverage" aria-labelledby={titleId}>
+      <SectionHeading id={titleId} eyebrow="Accounting trail" title="Provider accounting coverage" />
+      <div
+        className={`admin-provider-coverage__status admin-provider-coverage__status--${coverage.status}`}
+        role="status"
+      >
+        <div>
+          <span>Status</span>
+          <strong>{PROVIDER_COVERAGE_STATUS_LABELS[coverage.status]}</strong>
+        </div>
+        <p>{PROVIDER_COVERAGE_STATUS_COPY[coverage.status]}</p>
+        <p><strong>Reconciliation state:</strong> {reconciliationLabel}</p>
+      </div>
+
+      <div className="admin-provider-coverage__metrics" aria-label="Provider accounting coverage summary">
+        {([
+          ['Reserved attempts', metrics.reservedAttempts, 'Journal reservations in the selected range'],
+          ['Dispatch-possible', metrics.dispatchPossibleAttempts, 'Current lifecycle state'],
+          ['Observed outcomes', metrics.observedOutcomes, 'Awaiting final accounting state'],
+          ['Ledger-linked attempts', metrics.ledgerLinkedAttempts, 'Exact authoritative ledger relationship'],
+          ['Accounting gaps', metrics.accountingGaps, 'Missing journal or ledger relationships'],
+          ['Reconciliation conflicts', metrics.reconciliationConflicts, 'Conflicting durable facts'],
+          ['Confirmed not dispatched', metrics.confirmedNotDispatched, 'Trusted evidence that no provider call occurred'],
+          ['Unresolvable', metrics.unresolvable, 'Closed without recoverable resolution'],
+        ] as const).map(([label, value, detail]) => (
+          <article className="admin-provider-coverage__metric" key={label}>
+            <p>{label}</p>
+            <strong>{value.toLocaleString()}</strong>
+            <span>{detail}</span>
+          </article>
+        ))}
+      </div>
+
+      <CoverageBreakdownTable
+        title="Coverage by engine"
+        caption="Journaled provider accounting coverage grouped by engine"
+        rows={coverage.breakdowns.engines}
+      />
+      <CoverageBreakdownTable
+        title="Coverage by purpose"
+        caption="Journaled provider accounting coverage grouped by purpose"
+        rows={coverage.breakdowns.purposes}
+      />
+      <CoverageBreakdownTable
+        title="Coverage by provider"
+        caption="Journaled provider accounting coverage grouped by provider"
+        rows={coverage.breakdowns.providers}
+      />
+      <CoverageScopeDisclosure />
+    </section>
+  )
+}
+
+function CoverageScopeDisclosure() {
+  return (
+    <div className="admin-provider-coverage__scope" role="note">
+      <strong>Coverage boundary</strong>
+      <p>Provider gateway instrumentation is not yet complete across every relevant provider path. This view is therefore incomplete beyond the attempts and ledger relationships already known to the journal.</p>
+      <p>This is an accounting-trail check, not a provider bill comparison. It cannot establish that stored activity equals a provider bill.</p>
+    </div>
+  )
+}
+
+function CoverageBreakdownTable({
+  title,
+  caption,
+  rows,
+}: {
+  title: string
+  caption: string
+  rows: readonly AdminProviderAccountingCoverageBreakdownRow[]
+}) {
+  const id = useId()
+  return (
+    <section className="admin-provider-coverage__breakdown" aria-labelledby={id}>
+      <h3 id={id}>{title}</h3>
+      {rows.length === 0 ? (
+        <p className="admin-costs-table-empty">No journaled attempts to break down.</p>
+      ) : (
+        <div className="admin-costs-table-wrap" tabIndex={0}>
+          <table>
+            <caption>{caption}. Unmatched ledger rows without a journal relationship remain in the summary only.</caption>
+            <thead>
+              <tr><th scope="col">Dimension</th><th scope="col">Reserved</th><th scope="col">Ledger linked</th><th scope="col">Gaps</th><th scope="col">Conflicts</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>{rows.map((row) => (
+              <tr key={row.key}>
+                <th scope="row">{PROVIDER_COVERAGE_DIMENSION_LABELS[row.key]}</th>
+                <td>{row.reservedAttempts.toLocaleString()}</td>
+                <td>{row.ledgerLinkedAttempts.toLocaleString()}</td>
+                <td>{row.accountingGaps.toLocaleString()}</td>
+                <td>{row.reconciliationConflicts.toLocaleString()}</td>
+                <td>{PROVIDER_COVERAGE_STATUS_LABELS[row.status]}</td>
+              </tr>
+            ))}</tbody>
+          </table>
+        </div>
+      )}
+    </section>
   )
 }
 

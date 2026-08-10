@@ -1,4 +1,8 @@
-import type { AdminCostAggregate, AdminCostsModel } from './costsModel'
+import type {
+  AdminCostAggregate,
+  AdminCostsModel,
+  AdminProviderAccountingCoverage,
+} from './costsModel'
 
 export function costAggregateFixture(overrides: Partial<AdminCostAggregate> = {}): AdminCostAggregate {
   const count = (value: number) => ({ status: 'available' as const, value })
@@ -12,11 +16,40 @@ export function costAggregateFixture(overrides: Partial<AdminCostAggregate> = {}
   }
 }
 
+export function providerAccountingCoverageFixture(
+  overrides: Partial<AdminProviderAccountingCoverage> = {},
+): AdminProviderAccountingCoverage {
+  const metrics = {
+    reservedAttempts: 3,
+    dispatchPossibleAttempts: 0,
+    observedOutcomes: 0,
+    ledgerLinkedAttempts: 2,
+    accountingGaps: 0,
+    reconciliationConflicts: 0,
+    confirmedNotDispatched: 1,
+    unresolvable: 0,
+  }
+  const row = { key: 'tutor', status: 'complete_for_journaled_attempts' as const, ...metrics }
+  return {
+    status: 'complete_for_journaled_attempts',
+    reconciliationState: 'clear_for_journaled_attempts',
+    gatewayInstrumentation: 'incomplete',
+    invoiceCompletenessClaim: false,
+    metrics,
+    breakdowns: {
+      engines: [row],
+      purposes: [{ ...row, key: 'tutor_turn' }],
+      providers: [{ ...row, key: 'anthropic' }],
+    },
+    ...overrides,
+  }
+}
+
 export function costsModelFixture(overrides: Partial<AdminCostsModel> = {}): AdminCostsModel {
   const values = costAggregateFixture()
   const row = { key: 'tutor', label: 'Tutor', ...values }
   return {
-    contractVersion: 2,
+    contractVersion: 3,
     generatedAt: '2026-08-08T18:30:00.000Z',
     currency: 'USD',
     range: {
@@ -39,6 +72,7 @@ export function costsModelFixture(overrides: Partial<AdminCostsModel> = {}): Adm
       costKinds: [{ ...row, key: 'calculated', label: 'Calculated' }],
       billingDispositions: [{ ...row, key: 'billable', label: 'Billable' }],
     },
+    providerAccountingCoverage: providerAccountingCoverageFixture(),
     ...overrides,
   }
 }
