@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import type { AdminEngineId } from '../../admin/admin0Vocabulary'
@@ -329,6 +330,14 @@ describe('AdminConsole canonical overview presentation', () => {
     expect(markup).toContain('aria-current="page"')
     expect(markup).toContain('aria-label="Overview time range"')
     expect(markup).toContain('Viewer operator session')
+  })
+
+  it('contains mobile navigation overflow without widening the page', () => {
+    const css = readFileSync(new URL('./admin-console.css', import.meta.url), 'utf8')
+    expect(css).toContain('.admin-shell { grid-template-columns: minmax(0, 1fr); }')
+    expect(css).toContain('.admin-sidebar { position: static; width: auto; min-width: 0;')
+    expect(css).toContain('.admin-sidebar nav { min-width: 0; }')
+    expect(css).toContain('.admin-sidebar nav ul { display: flex; overflow-x: auto; }')
   })
 
   it('renders the custom range editor without calculating data locally', () => {

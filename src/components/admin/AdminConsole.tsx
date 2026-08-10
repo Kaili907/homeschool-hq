@@ -144,11 +144,20 @@ export function AdminShell({
   const activeLabel = NAVIGATION.find((item) => item.id === activeSection)?.label ?? title
   const visibleNavigation = NAVIGATION.filter((item) => authorization.capabilities.includes(item.capability))
   useEffect(() => {
-    const list = navigationListRef.current
-    const active = activeNavigationRef.current
-    if (!list || !active) return
-    const centered = active.offsetLeft - (list.clientWidth - active.offsetWidth) / 2
-    list.scrollLeft = Math.max(0, Math.min(centered, list.scrollWidth - list.clientWidth))
+    const frame = window.requestAnimationFrame(() => {
+      const navigation = navigationListRef.current
+      const active = activeNavigationRef.current
+      if (!navigation || !active || navigation.scrollWidth <= navigation.clientWidth) return
+      const navigationRect = navigation.getBoundingClientRect()
+      const activeRect = active.getBoundingClientRect()
+      const focusOutlineClearance = 4
+      if (activeRect.left < navigationRect.left + focusOutlineClearance) {
+        navigation.scrollLeft -= navigationRect.left - activeRect.left + focusOutlineClearance
+      } else if (activeRect.right > navigationRect.right - focusOutlineClearance) {
+        navigation.scrollLeft += activeRect.right - navigationRect.right + focusOutlineClearance
+      }
+    })
+    return () => window.cancelAnimationFrame(frame)
   }, [activeSection])
   return (
     <div className="admin-shell">
