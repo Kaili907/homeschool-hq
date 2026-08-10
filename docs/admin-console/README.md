@@ -73,6 +73,10 @@ but only the server/API and database policies authorize data or actions.
 - [Engines and health](health-engines.md)
 - [Administrative audit](audit.md)
 - [Curriculum and versioning](curriculum-versioning.md)
+- [Curriculum standards human review](curriculum-standards-review.md)
+- [Curriculum draft collaborators](curriculum-draft-collaborators.md)
+- [Curriculum human approval](curriculum-human-approval.md)
+- [Curriculum release staging](curriculum-release-staging.md)
 - [Integration guidance](integration-guidance.md)
 - Shared TypeScript vocabulary: `src/admin/contracts.ts`
 

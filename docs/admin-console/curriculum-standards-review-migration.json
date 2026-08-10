@@ -1,0 +1,12 @@
+{
+  "migration": "supabase/migrations/20260810130000_academy_curriculum_standards_review.sql",
+  "sha256": "bb014de57a1a8cedce97020becf041e5f3af69d26186988fab2095af4bcac739",
+  "status": "repository-only-not-applied-hosted",
+  "dependsOn": [
+    "20260808120000_academy_admin_authorization.sql",
+    "20260809130000_academy_admin_audit_foundation.sql",
+    "20260809160000_academy_curriculum_release_registry.sql",
+    "20260809170000_academy_admin_curriculum_audit_vocabulary.sql",
+    "20260810120000_academy_curriculum_draft_authoring.sql"
+  ]
+}

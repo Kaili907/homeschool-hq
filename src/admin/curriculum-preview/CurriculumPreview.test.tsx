@@ -115,6 +115,7 @@ function source(): CurriculumDraftAuthoringSource {
   return {
     listDrafts: vi.fn(), readDraft: vi.fn(), readEntity: vi.fn(), createDraft: vi.fn(), createEntity: vi.fn(),
     updateEntity: vi.fn(), tombstoneEntity: vi.fn(), readBaseIndex: vi.fn(), readBaseEntity: vi.fn(),
+    listCollaborators: vi.fn(), addCollaborator: vi.fn(), revokeCollaborator: vi.fn(),
     readMaterialization: vi.fn(), validateDraft: vi.fn(), readPreview: vi.fn(),
   }
 }

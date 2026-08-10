@@ -1,0 +1,55 @@
+import { describe, expect, it, vi } from 'vitest'
+import { createCurriculumApprovalHttpSource } from './httpSource'
+
+const DRAFT = '10000000-0000-4000-8000-000000000001'
+const VALIDATION = '20000000-0000-4000-8000-000000000001'
+const REQUEST = '30000000-0000-4000-8000-000000000001'
+
+describe('curriculum approval HTTP source', () => {
+  it('sends only the exact decision body and bearer credential', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue({ ok: true, status: 201, json: vi.fn().mockResolvedValue({}) })
+    const source = createCurriculumApprovalHttpSource(fetchImpl, async () => 'verified-token')
+    await source.decideApproval({
+      draftId: DRAFT,
+      draftRevision: 3,
+      decision: 'approved',
+      reasonCode: 'approval.ready',
+      validationSnapshotId: VALIDATION,
+      idempotencyKey: REQUEST,
+    })
+    expect(fetchImpl).toHaveBeenCalledWith(
+      `/api/admin/curriculum/drafts/${DRAFT}/approval`,
+      expect.objectContaining({ method: 'POST', headers: expect.objectContaining({ Authorization: 'Bearer verified-token' }) }),
+    )
+    expect(JSON.parse(fetchImpl.mock.calls[0][1].body)).toEqual({
+      draftRevision: 3,
+      decision: 'approved',
+      reasonCode: 'approval.ready',
+      validationSnapshotId: VALIDATION,
+      idempotencyKey: REQUEST,
+    })
+    expect(fetchImpl.mock.calls[0][1].body).not.toMatch(/actor|role|capabilit|payload/i)
+  })
+
+  it('maps validation, replay, authorization, and unavailable failures', async () => {
+    for (const [status, responseCode, expected] of [
+      [409, 'validation_blocked', { code: 'conflict', reason: 'validation-blocked' }],
+      [409, 'idempotency_conflict', { code: 'conflict', reason: 'idempotency-conflict' }],
+      [403, 'admin_access_denied', { code: 'forbidden' }],
+      [503, 'curriculum_approval_unavailable', { code: 'unavailable' }],
+    ] as const) {
+      const fetchImpl = vi.fn().mockResolvedValue({
+        ok: false, status, json: vi.fn().mockResolvedValue({ error: { code: responseCode } }),
+      })
+      const source = createCurriculumApprovalHttpSource(fetchImpl, async () => 'token')
+      await expect(source.readApproval(DRAFT)).rejects.toMatchObject(expected)
+    }
+  })
+
+  it('does not issue a request without an access token', async () => {
+    const fetchImpl = vi.fn()
+    const source = createCurriculumApprovalHttpSource(fetchImpl, async () => null)
+    await expect(source.readApproval(DRAFT)).rejects.toMatchObject({ code: 'unauthenticated' })
+    expect(fetchImpl).not.toHaveBeenCalled()
+  })
+})

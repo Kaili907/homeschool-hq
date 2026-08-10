@@ -51,6 +51,26 @@ function authoring() {
     createEntity: vi.fn().mockResolvedValue({ schemaVersion: 1, replayed: false, draftId: DRAFT_ID, draftRevision: 2, entity }),
     updateEntity: vi.fn().mockResolvedValue({ schemaVersion: 1, replayed: false, draftId: DRAFT_ID, draftRevision: 3, entity: { ...entity, revision: 2 } }),
     tombstoneEntity: vi.fn().mockResolvedValue({ schemaVersion: 1, replayed: false, draftId: DRAFT_ID, draftRevision: 4, entity: { ...entity, revision: 3, tombstoned: true } }),
+    listCollaborators: vi.fn().mockResolvedValue({
+      schemaVersion: 1, draftId: DRAFT_ID, draftRevision: 1,
+      currentResponsibility: 'editor', collaborators: [],
+    }),
+    addCollaborator: vi.fn().mockResolvedValue({
+      schemaVersion: 1, replayed: false, draftId: DRAFT_ID, draftRevision: 2,
+      collaborator: {
+        principalRef: 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', responsibility: 'reviewer',
+        status: 'active', assignmentRevision: 1,
+        assignedAt: '2026-08-10T12:00:00Z', revokedAt: null,
+      },
+    }),
+    revokeCollaborator: vi.fn().mockResolvedValue({
+      schemaVersion: 1, replayed: false, draftId: DRAFT_ID, draftRevision: 3,
+      collaborator: {
+        principalRef: 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', responsibility: 'reviewer',
+        status: 'revoked', assignmentRevision: 2,
+        assignedAt: '2026-08-10T12:00:00Z', revokedAt: '2026-08-10T12:05:00Z',
+      },
+    }),
   }
 }
 
@@ -63,8 +83,16 @@ function handler(overrides = {}) {
 describe('ADMIN-16B curriculum authoring API', () => {
   it('serves authorized revision-bound materialization, validation, and preview without granting a write', async () => {
     const service = authoring()
+    const resourceLibrary = {
+      schemaVersion: 1,
+      source: { origin: 'draft', baseReleaseVersion: '1.0.0', draftId: DRAFT_ID, draftRevision: 3 },
+      totals: { resources: 1 },
+      items: [{ key: 'resource:source-one', resourceId: 'source-one' }],
+    }
     const studio = {
-      readMaterialization: vi.fn().mockResolvedValue({ schemaVersion: 1, draftId: DRAFT_ID, draftRevision: 3, entities: [] }),
+      readMaterialization: vi.fn().mockResolvedValue({
+        schemaVersion: 1, draftId: DRAFT_ID, draftRevision: 3, entities: [], resourceLibrary,
+      }),
       validateDraft: vi.fn().mockResolvedValue({ schemaVersion: 1, draftId: DRAFT_ID, draftRevision: 3, run: { status: 'valid' } }),
       readBaseIndex: vi.fn(), readBaseEntity: vi.fn(),
     }
@@ -76,7 +104,9 @@ describe('ADMIN-16B curriculum authoring API', () => {
       }),
     }
     const handle = handler({ authoring: service, studio, preview, authorization })
-    expect((await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/materialization/3`))).statusCode).toBe(200)
+    const materialization = await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/materialization/3`))
+    expect(materialization.statusCode).toBe(200)
+    expect(JSON.parse(materialization.body).resourceLibrary).toEqual(resourceLibrary)
     expect((await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/validation/3`))).statusCode).toBe(200)
     expect((await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/preview/3`))).statusCode).toBe(200)
     expect(studio.readMaterialization).toHaveBeenCalledWith(principal.userId, DRAFT_ID, 3)
@@ -205,6 +235,84 @@ describe('ADMIN-16B curriculum authoring API', () => {
     expect(service.tombstoneEntity).toHaveBeenCalledWith(principal.userId, expect.objectContaining({
       expectedRevision: 2, expectedDraftRevision: 3,
     }))
+  })
+
+  it('lists, adds, and revokes bounded collaborators with per-request capability checks', async () => {
+    const service = authoring()
+    const authorization = { require: vi.fn().mockResolvedValue({ ok: true, principal }) }
+    const handle = handler({ authoring: service, authorization })
+    const principalRef = 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'
+
+    expect((await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/collaborators`))).statusCode).toBe(200)
+    expect(service.listCollaborators).toHaveBeenCalledWith(principal.userId, DRAFT_ID)
+
+    const addBody = {
+      principalRef, responsibility: 'reviewer', expectedDraftRevision: 1,
+      idempotencyKey: REQUEST_ID,
+    }
+    const added = await handle(event(
+      `/api/admin/curriculum/drafts/${DRAFT_ID}/collaborators`, 'POST', addBody,
+    ))
+    expect(added.statusCode).toBe(201)
+    expect(service.addCollaborator).toHaveBeenCalledWith(principal.userId, expect.objectContaining({
+      draftId: DRAFT_ID, ...addBody, requestDigest: expect.stringMatching(/^[0-9a-f]{64}$/),
+    }))
+    expect(JSON.stringify(service.addCollaborator.mock.calls[0][1])).not.toMatch(/email|name|globalRole|capabilities/i)
+
+    const revoked = await handle(event(
+      `/api/admin/curriculum/drafts/${DRAFT_ID}/collaborators/${principalRef}/revoke`,
+      'POST',
+      { expectedDraftRevision: 2, idempotencyKey: REQUEST_ID },
+    ))
+    expect(revoked.statusCode).toBe(200)
+    expect(service.revokeCollaborator).toHaveBeenCalledWith(principal.userId, expect.objectContaining({
+      draftId: DRAFT_ID, principalRef, expectedDraftRevision: 2,
+    }))
+    expect(authorization.require.mock.calls.map((call) => call[1])).toEqual([
+      'curriculum:read', 'curriculum:drafts:write', 'curriculum:drafts:write',
+    ])
+  })
+
+  it('rejects collaborator authority injection and maps verified-principal, permission, and CAS failures', async () => {
+    const service = authoring()
+    const handle = handler({
+      authoring: service,
+      authorization: { require: vi.fn().mockResolvedValue({ ok: true, principal }) },
+    })
+    const principalRef = 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'
+    const injected = await handle(event(
+      `/api/admin/curriculum/drafts/${DRAFT_ID}/collaborators`,
+      'POST',
+      {
+        principalRef, responsibility: 'editor', expectedDraftRevision: 1,
+        idempotencyKey: REQUEST_ID, role: 'owner', capability: 'curriculum:drafts:write',
+      },
+    ))
+    expect(injected.statusCode).toBe(400)
+    expect(service.addCollaborator).not.toHaveBeenCalled()
+
+    service.addCollaborator.mockRejectedValueOnce(Object.assign(new Error('private'), { code: 'verified-principal' }))
+    const invalid = await handle(event(
+      `/api/admin/curriculum/drafts/${DRAFT_ID}/collaborators`,
+      'POST',
+      { principalRef, responsibility: 'editor', expectedDraftRevision: 1, idempotencyKey: REQUEST_ID },
+    ))
+    expect(invalid.statusCode).toBe(422)
+    expect(invalid.body).toContain('verified_admin_principal_required')
+
+    service.listCollaborators.mockRejectedValueOnce(Object.assign(new Error('private'), { code: 'forbidden' }))
+    const denied = await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/collaborators`))
+    expect(denied.statusCode).toBe(403)
+    expect(denied.body).not.toContain('private')
+
+    service.revokeCollaborator.mockRejectedValueOnce(Object.assign(new Error('private'), { code: 'conflict' }))
+    const stale = await handle(event(
+      `/api/admin/curriculum/drafts/${DRAFT_ID}/collaborators/${principalRef}/revoke`,
+      'POST',
+      { expectedDraftRevision: 2, idempotencyKey: REQUEST_ID },
+    ))
+    expect(stale.statusCode).toBe(409)
+    expect(stale.body).toContain('revision_conflict')
   })
 
   it('fails closed before mutations and maps CAS/replay failures without leaking service detail', async () => {

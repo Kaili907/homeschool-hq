@@ -60,4 +60,59 @@ describe('Admin curriculum authoring server service', () => {
       idempotencyKey: REQUEST, requestDigest: HASH,
     })).rejects.toMatchObject({ code: 'conflict', message: 'curriculum_authoring_unavailable' })
   })
+
+  it('projects collaborator RPCs and passes only stable principal identity plus CAS metadata', async () => {
+    const collaborator = {
+      principalRef: 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',
+      responsibility: 'reviewer', status: 'active', assignmentRevision: 1,
+      assignedAt: '2026-08-10T12:00:00Z', revokedAt: null,
+    }
+    const database = client({
+      schemaVersion: 1, replayed: false, draftId: DRAFT, draftRevision: 2,
+      collaborator,
+    })
+    const service = createAdminCurriculumAuthoringService({ client: database })
+    await expect(service.addCollaborator(ACTOR, {
+      draftId: DRAFT, principalRef: collaborator.principalRef,
+      responsibility: 'reviewer', expectedDraftRevision: 1,
+      idempotencyKey: REQUEST, requestDigest: HASH,
+    })).resolves.toMatchObject({ collaborator })
+    expect(database.rpc).toHaveBeenCalledWith(
+      'academy_admin_add_curriculum_draft_collaborator_v1',
+      {
+        p_actor_user_ref: ACTOR,
+        p_draft_id: DRAFT,
+        p_principal_user_ref: collaborator.principalRef,
+        p_responsibility: 'reviewer',
+        p_expected_draft_revision: 1,
+        p_request_id: REQUEST,
+        p_request_digest: HASH,
+        p_required_capability: 'curriculum:drafts:write',
+      },
+    )
+
+    const listDatabase = client({
+      schemaVersion: 1, draftId: DRAFT, draftRevision: 2,
+      currentResponsibility: 'editor', collaborators: [collaborator],
+    })
+    await expect(
+      createAdminCurriculumAuthoringService({ client: listDatabase }).listCollaborators(ACTOR, DRAFT),
+    ).resolves.toMatchObject({ currentResponsibility: 'editor', collaborators: [collaborator] })
+  })
+
+  it('fails closed on malformed collaborator projections and maps assignment denial', async () => {
+    const malformed = createAdminCurriculumAuthoringService({ client: client({
+      schemaVersion: 1, draftId: DRAFT, draftRevision: 1,
+      currentResponsibility: 'editor',
+      collaborators: [{ principalRef: 'admin@example.test', responsibility: 'editor' }],
+    }) })
+    await expect(malformed.listCollaborators(ACTOR, DRAFT)).rejects.toMatchObject({ code: 'unavailable' })
+
+    const denied = createAdminCurriculumAuthoringService({
+      client: client(null, { message: 'CURRICULUM_COLLABORATION_REQUIRED private detail' }),
+    })
+    await expect(denied.listCollaborators(ACTOR, DRAFT)).rejects.toMatchObject({
+      code: 'forbidden', message: 'curriculum_authoring_unavailable',
+    })
+  })
 })

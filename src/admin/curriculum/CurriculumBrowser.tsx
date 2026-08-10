@@ -196,6 +196,9 @@ export function CurriculumBrowserView({
             <a href="/academy/admin/curriculum/validation" className={navButton(false)}>
               Validation evidence
             </a>
+            <a href="/academy/admin/curriculum/standards-review" className={navButton(false)}>
+              Standards review
+            </a>
           </nav>
         </header>
 
