@@ -173,6 +173,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-audit-foundation-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810120000",
+      "filename": "20260810120000_academy_provider_pricing_terms.sql",
+      "sha256": "40baeb9f0554059462a5fd22ff7e3159273133c35f85522421c763ac33d8e6ff",
+      "dependency": "20260809130000_academy_admin_audit_foundation.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-provider-pricing-terms-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

@@ -45,10 +45,13 @@ The integrated ADMIN-R1 migration order is:
 4. `20260808123000_academy_admin_safety_operations.sql`
 5. `20260809120000_academy_operational_telemetry_foundation.sql`
 6. `20260809121000_academy_provider_usage_cost_aggregate.sql`
+7. `20260809130000_academy_admin_audit_foundation.sql`
+8. `20260810120000_academy_provider_pricing_terms.sql`
 
 The telemetry manifest entry depends on authorization, and the provider
-usage/cost entry depends on telemetry. These unique versions replace the
-parallel-branch timestamp collision; none has been applied to hosted Supabase.
+usage/cost entry depends on telemetry. Provider pricing depends on the aggregate
+and ADMIN-15 audit foundation. These unique versions replace the parallel-branch
+timestamp collision; none has been applied to hosted Supabase.
 
 ## Supabase: operational telemetry foundation (2026-08-09)
 
@@ -85,6 +88,25 @@ Query coverage is separate from unverified provider-traffic coverage. Retained
 TEL-AI accounting-persistence gap evidence is reported separately and never
 fabricates usage or cost. This migration seeds no prices and has not been
 applied hosted. Architecture is in `docs/admin-costs-aggregate-v2.md`.
+
+## Admin provider pricing terms foundation (2026-08-10, not applied hosted)
+
+`supabase/migrations/20260810120000_academy_provider_pricing_terms.sql` adds the
+private effective-dated pricing-term authority used by new provider ledger rows.
+It depends on the exact cost aggregate and ADMIN-15 audit migrations, requires
+the legacy catalog/rate tables to be empty, and seeds no provider price.
+
+Terms use the ledger's provider/product/model/logical-tier/usage-unit dimensions,
+fixed USD, bigint IntegerMicros, half-open non-overlapping periods, immutable
+dimension/rate facts, per-dimension revisions, server-derived Owner authority,
+and audited future replacement/end/disable operations. Direct application-role
+table access remains denied. Missing terms return `pricing_unconfigured` or
+leave billable cost unavailable; old ledger rows are never recomputed.
+
+Anthropic cache-write pricing remains unsupported because current accounting
+does not retain a trusted five-minute versus one-hour TTL quantity split. The
+migration, Admin API, and database lookup reject that pricing dimension; a
+positive cache-write usage row fails closed to unavailable cost.
 
 ## Supabase: authorized Admin safety projection (2026-08-08)
 
