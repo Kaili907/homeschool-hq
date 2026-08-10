@@ -3,6 +3,10 @@ import type {
   StudyParentSettingsPort,
   StudyParentSettingsRecord,
 } from '../contracts/persistence'
+import {
+  sanitizeStudyEffectiveSettingsResult,
+  unavailableStudyEffectiveSettingsResult,
+} from '../effectiveSettings'
 import { authenticatedRpc, record, type StudySupabaseClient } from './supabaseShared'
 
 export class SupabaseStudyParentSettingsAdapter implements StudyParentSettingsPort {
@@ -39,13 +43,16 @@ export class SupabaseStudyParentSettingsAdapter implements StudyParentSettingsPo
   }
 
   async effectiveSettings(studentId: string, effectiveDate?: string) {
-    return record(await authenticatedRpc(
+    const resolvedDate = effectiveDate ?? new Date().toISOString().slice(0, 10)
+    const result = await authenticatedRpc(
       this.client,
-      'academy_study_effective_settings',
+      'academy_study_effective_settings_v2',
       {
         p_student_id: studentId,
-        p_effective_date: effectiveDate ?? new Date().toISOString().slice(0, 10),
+        p_effective_date: resolvedDate,
       },
-    ))
+    )
+    return sanitizeStudyEffectiveSettingsResult(result)
+      ?? unavailableStudyEffectiveSettingsResult(studentId, resolvedDate)
   }
 }
