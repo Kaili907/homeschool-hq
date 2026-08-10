@@ -8,8 +8,13 @@ import type {
   CurriculumLessonSummary,
   CurriculumUnitSummary,
 } from './contracts'
+import type {
+  CurriculumDraftAuthoringSource,
+  CurriculumStudioEntityIndexEntry,
+} from '../curriculum-authoring/contracts'
 
 export const CURRICULUM_STUDIO_RENDER_LIMIT = 250 as const
+export const CURRICULUM_STUDIO_NAVIGATION_REQUEST = 'curriculum-studio:navigation-request' as const
 
 export type CurriculumStudioEntity =
   | { readonly kind: 'grade'; readonly id: string; readonly grade: CurriculumGrade }
@@ -17,8 +22,10 @@ export type CurriculumStudioEntity =
   | { readonly kind: 'unit'; readonly id: string; readonly unit: CurriculumUnitSummary }
   | { readonly kind: 'lesson'; readonly id: string; readonly lesson: CurriculumLessonSummary }
   | { readonly kind: 'assessment'; readonly id: string; readonly assessment: CurriculumAssessmentEvidence }
+  | { readonly kind: 'authoring'; readonly id: string; readonly entry: CurriculumStudioEntityIndexEntry }
+  | { readonly kind: 'group'; readonly id: string; readonly label: string }
 
-export interface CurriculumStudioSource {
+export interface CurriculumStudioSource extends CurriculumDraftAuthoringSource {
   loadPublishedCatalog(): Promise<CurriculumCatalog>
 }
 
@@ -60,14 +67,12 @@ export interface CurriculumTreeKeyboardAction {
   readonly selectId?: string
 }
 
-/**
- * ADMIN-17A intentionally adapts only the existing published read. ADMIN-16B
- * will provide the later draft-authoring connection at this boundary.
- */
+/** Combines the immutable published read with the server-authoritative draft seam. */
 export function createCurriculumStudioSource(
   publishedSource: Pick<CurriculumBrowserSource, 'loadCatalog'>,
+  authoringSource: CurriculumDraftAuthoringSource,
 ): CurriculumStudioSource {
-  return { loadPublishedCatalog: () => publishedSource.loadCatalog() }
+  return { ...authoringSource, loadPublishedCatalog: () => publishedSource.loadCatalog() }
 }
 
 export function canWriteCurriculumDrafts(capabilities: readonly AdminCapability[]): boolean {
@@ -171,6 +176,84 @@ export function buildCurriculumStudioIndex(catalog: CurriculumCatalog): Curricul
   return { rows, byId: new Map(rows.map((row) => [row.id, row])) }
 }
 
+export function buildMaterializedCurriculumStudioIndex(
+  sourceEntries: readonly CurriculumStudioEntityIndexEntry[],
+): CurriculumStudioIndex {
+  const deduplicated = new Map<string, CurriculumStudioEntityIndexEntry>()
+  sourceEntries.forEach((entry) => deduplicated.set(`${entry.entityType}:${entry.entityRef}`, entry))
+  const entries = [...deduplicated.values()]
+  const rows: CurriculumStudioRow[] = []
+  const add = (
+    entity: CurriculumStudioEntity,
+    parentId: string | null,
+    ancestorIds: readonly string[],
+    label: string,
+    context: string,
+    hasChildren: boolean,
+  ) => rows.push({
+    id: entity.id,
+    parentId,
+    ancestorIds,
+    depth: ancestorIds.length + 1,
+    label,
+    context,
+    hasChildren,
+    entity,
+  })
+  const sort = (left: CurriculumStudioEntityIndexEntry, right: CurriculumStudioEntityIndexEntry) =>
+    left.position - right.position || left.label.localeCompare(right.label) || left.entityRef.localeCompare(right.entityRef)
+  const added = new Set<string>()
+
+  const grades = [...new Set(entries.filter((entry) => entry.entityType === 'course' && entry.grade).map((entry) => entry.grade!))]
+    .sort((left, right) => left - right)
+  for (const grade of grades) {
+    const gradeId = `grade:${grade}`
+    const courses = entries.filter((entry) => entry.entityType === 'course' && entry.parentId === gradeId).sort(sort)
+    add({ kind: 'grade', id: gradeId, grade: grade as CurriculumGrade }, null, [], `Grade ${grade}`, `${courses.length} courses`, courses.length > 0)
+    for (const course of courses) {
+      const courseId = `course:${course.entityRef}`
+      const units = entries.filter((entry) => entry.entityType === 'unit' && entry.parentId === courseId).sort(sort)
+      add({ kind: 'authoring', id: courseId, entry: course }, gradeId, [gradeId], course.label, course.context, units.length > 0)
+      added.add(courseId)
+      for (const unit of units) {
+        const unitId = `unit:${unit.entityRef}`
+        const children = entries
+          .filter((entry) => (entry.entityType === 'lesson' || entry.entityType === 'assessment') && entry.parentId === unitId)
+          .sort(sort)
+        add({ kind: 'authoring', id: unitId, entry: unit }, courseId, [gradeId, courseId], unit.label, unit.context, children.length > 0)
+        added.add(unitId)
+        for (const child of children) {
+          const childId = `${child.entityType}:${child.entityRef}`
+          add({ kind: 'authoring', id: childId, entry: child }, unitId, [gradeId, courseId, unitId], child.label, child.context, false)
+          added.add(childId)
+        }
+      }
+    }
+  }
+
+  const resources = entries.filter((entry) => entry.entityType === 'media_resource').sort(sort)
+  if (resources.length) {
+    const resourceRoot = 'resources:all'
+    add({ kind: 'group', id: resourceRoot, label: 'Media resources' }, null, [], 'Media resources', `${resources.length} resources`, true)
+    resources.forEach((entry) => {
+      const id = `media_resource:${entry.entityRef}`
+      add({ kind: 'authoring', id, entry }, resourceRoot, [resourceRoot], entry.label, entry.context, false)
+      added.add(id)
+    })
+  }
+
+  const unattached = entries.filter((entry) => !added.has(`${entry.entityType}:${entry.entityRef}`)).sort(sort)
+  if (unattached.length) {
+    const rootId = 'unattached:all'
+    add({ kind: 'group', id: rootId, label: 'Unattached entities' }, null, [], 'Unattached entities', `${unattached.length} require relationship repair`, true)
+    unattached.forEach((entry) => {
+      const id = `${entry.entityType}:${entry.entityRef}`
+      add({ kind: 'authoring', id, entry }, rootId, [rootId], entry.label, entry.context, false)
+    })
+  }
+  return { rows, byId: new Map(rows.map((row) => [row.id, row])) }
+}
+
 export function visibleCurriculumStudioRows(
   index: CurriculumStudioIndex,
   expandedIds: ReadonlySet<string>,
@@ -200,6 +283,10 @@ export function visibleCurriculumStudioRows(
 }
 
 function entitySearchText(entity: CurriculumStudioEntity): string {
+  if (entity.kind === 'authoring') {
+    return [entity.entry.entityType, entity.entry.entityRef, entity.entry.origin, entity.entry.subject ?? ''].join(' ')
+  }
+  if (entity.kind === 'group') return entity.label
   if (entity.kind === 'grade') return String(entity.grade)
   if (entity.kind === 'course') {
     return [entity.course.courseId, entity.course.subject, entity.course.description ?? '', entity.course.capstone ?? ''].join(' ')

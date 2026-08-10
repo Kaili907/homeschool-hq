@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   CURRICULUM_VALIDATION_CATEGORIES,
   type CurriculumEntityReference,
@@ -9,6 +9,7 @@ import {
 } from '../../admin/curriculum-validation/engine.ts'
 
 export type CurriculumFindingGroupBy = 'entity' | 'rule' | 'severity'
+export const CURRICULUM_VALIDATION_RENDER_BATCH = 250 as const
 
 export interface CurriculumFindingFilters {
   readonly query: string
@@ -187,6 +188,7 @@ export function CurriculumValidationWorkspace({
   const [category, setCategory] = useState<CurriculumValidationCategory | 'all'>('all')
   const [blocking, setBlocking] = useState<'all' | 'blocking' | 'non-blocking'>('all')
   const [groupBy, setGroupBy] = useState<CurriculumFindingGroupBy>('entity')
+  const [renderLimit, setRenderLimit] = useState<number>(CURRICULUM_VALIDATION_RENDER_BATCH)
   const status = STATUS_COPY[run.status]
 
   const visibleFindings = useMemo(() => filterCurriculumValidationFindings(run.findings, {
@@ -195,11 +197,16 @@ export function CurriculumValidationWorkspace({
     category,
     blocking,
   }), [run.findings, query, severity, category, blocking])
+  const renderedFindings = useMemo(() => visibleFindings.slice(0, renderLimit), [renderLimit, visibleFindings])
   const groups = useMemo(
-    () => groupCurriculumValidationFindings(visibleFindings, groupBy),
-    [visibleFindings, groupBy],
+    () => groupCurriculumValidationFindings(renderedFindings, groupBy),
+    [renderedFindings, groupBy],
   )
   const blockingFindings = run.findings.filter((finding) => finding.blocking)
+
+  useEffect(() => {
+    setRenderLimit(CURRICULUM_VALIDATION_RENDER_BATCH)
+  }, [blocking, category, groupBy, query, run, severity])
 
   return (
     <div className="min-w-0 bg-slate-950 py-6 text-slate-100" aria-labelledby="curriculum-validation-workspace-title">
@@ -313,7 +320,9 @@ export function CurriculumValidationWorkspace({
             </div>
           </form>
 
-          <p className="mt-4 text-sm text-slate-400" aria-live="polite">Showing {visibleFindings.length} of {run.findings.length} findings.</p>
+          <p className="mt-4 text-sm text-slate-400" aria-live="polite">
+            Rendering {renderedFindings.length} of {visibleFindings.length} matching findings ({run.findings.length} total).
+          </p>
           <div className="mt-4 space-y-4" id="curriculum-validation-results">
             {groups.map((group) => (
               <section key={group.key} className="rounded-xl border border-slate-700 bg-slate-900 p-4" aria-label={`${group.label} findings`}>
@@ -328,6 +337,15 @@ export function CurriculumValidationWorkspace({
             ))}
             {groups.length === 0 && (
               <p className="rounded-xl border border-slate-700 bg-slate-900 p-5 text-slate-400">No findings match the current filters.</p>
+            )}
+            {renderedFindings.length < visibleFindings.length && (
+              <button
+                type="button"
+                onClick={() => setRenderLimit((value) => value + CURRICULUM_VALIDATION_RENDER_BATCH)}
+                className="min-h-11 rounded-lg border border-sky-500 px-4 py-2 font-bold text-sky-200 hover:bg-sky-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+              >
+                Show {Math.min(CURRICULUM_VALIDATION_RENDER_BATCH, visibleFindings.length - renderedFindings.length)} more findings
+              </button>
             )}
           </div>
         </section>

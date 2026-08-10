@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import { createAdminCurriculumAuthoringService } from './_shared/admin-curriculum-authoring.js'
 import { createAdminCurriculumRegistryReader } from './_shared/admin-curriculum-registry-reader.js'
+import { createAdminCurriculumStudioService } from './_shared/admin-curriculum-studio.js'
 import {
   assertExactObject,
   boundedInteger,
@@ -43,6 +44,17 @@ function draftRoute(resource) {
   const draftId = decode(segments[1])
   if (!draftId || !UUID.test(draftId)) return null
   if (segments.length === 2) return { kind: 'draft', draftId }
+  if (
+    segments.length === 4
+    && (segments[2] === 'materialization' || segments[2] === 'validation')
+    && /^[1-9][0-9]{0,14}$/.test(segments[3])
+  ) {
+    return {
+      kind: segments[2] === 'materialization' ? 'draft-materialization' : 'draft-validation',
+      draftId,
+      revision: Number(segments[3]),
+    }
+  }
   if (segments[2] !== 'entities') return null
   if (segments.length === 3) return { kind: 'draft-entities', draftId }
   const entityType = decode(segments[3])
@@ -72,8 +84,28 @@ function routeFromPath(path) {
   if (resource === 'production-pointer') return { kind: 'production-pointer' }
   if (resource.startsWith('releases/')) {
     try {
-      const version = decodeURIComponent(resource.slice('releases/'.length))
-      return RELEASE_VERSION.test(version) ? { kind: 'release', version } : null
+      const segments = resource.split('/').map(decodeURIComponent)
+      const version = segments[1]
+      if (!RELEASE_VERSION.test(version)) return null
+      if (segments.length === 2) return { kind: 'release', version }
+      if (segments.length === 3 && segments[2] === 'authoring-index') {
+        return { kind: 'release-authoring-index', version }
+      }
+      if (
+        segments.length === 6
+        && segments[2] === 'authoring'
+        && segments[3] === 'entities'
+        && ENTITY_TYPES.has(segments[4])
+        && ENTITY_REF.test(segments[5])
+      ) {
+        return {
+          kind: 'release-authoring-entity',
+          version,
+          entityType: segments[4],
+          entityRef: segments[5],
+        }
+      }
+      return null
     } catch {
       return null
     }
@@ -183,6 +215,7 @@ function authoringMethod(route, method) {
   if (route.kind === 'draft-entities') return method === 'POST'
   if (route.kind === 'draft-entity') return method === 'GET' || method === 'PUT'
   if (route.kind === 'draft-entity-tombstone') return method === 'POST'
+  if (route.kind === 'draft-materialization' || route.kind === 'draft-validation') return method === 'GET'
   return false
 }
 
@@ -214,6 +247,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
     fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
     client: overrides.authoringClient,
   })
+  const studio = overrides.studio ?? createAdminCurriculumStudioService({ authoring })
 
   return async (event) => {
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
@@ -240,6 +274,10 @@ export function createAdminCurriculumHandler(overrides = {}) {
                 ? await authoring.createEntity(actor, parseCreateEntity(event, route.draftId))
                 : route.kind === 'draft-entity' && event.httpMethod === 'GET'
                   ? await authoring.readEntity(actor, route.draftId, route.entityType, route.entityRef)
+                  : route.kind === 'draft-materialization'
+                    ? await studio.readMaterialization(actor, route.draftId, route.revision)
+                    : route.kind === 'draft-validation'
+                      ? await studio.validateDraft(actor, route.draftId, route.revision)
                   : route.kind === 'draft-entity'
                     ? await authoring.updateEntity(actor, parseUpdateEntity(event, route))
                     : await authoring.tombstoneEntity(actor, parseTombstone(event, route))
@@ -264,15 +302,21 @@ export function createAdminCurriculumHandler(overrides = {}) {
             ? await source.loadLesson(route.lessonRef)
             : route.kind === 'releases'
               ? await registry.list()
-              : route.kind === 'release'
+            : route.kind === 'release'
                 ? await registry.details(route.version)
+                : route.kind === 'release-authoring-index'
+                  ? await studio.readBaseIndex(route.version)
+                  : route.kind === 'release-authoring-entity'
+                    ? await studio.readBaseEntity(route.version, route.entityType, route.entityRef)
                 : await registry.productionPointer()
       return jsonResponse(200, value)
     } catch (error) {
       const code = error && typeof error === 'object' && 'code' in error ? error.code : null
       if (code === 'not-found') return errorResponse(
         404,
-        route.kind === 'release' ? 'curriculum_release_unavailable' : 'curriculum_record_unavailable',
+        route.kind === 'release' || route.kind === 'release-authoring-index'
+          ? 'curriculum_release_unavailable'
+          : 'curriculum_record_unavailable',
       )
       return errorResponse(503, 'curriculum_source_unavailable')
     }
