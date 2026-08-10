@@ -1,7 +1,5 @@
-import {
-  assertServerReceiptRuntime,
-  validateVerifiedAdultReviewReceipt,
-} from './receipt-contract.js'
+import { assertServerReceiptRuntime } from './receipt-contract.js'
+import { validateInAppNotificationReceipt } from './in-app-receipt-validator.js'
 import { validateVerifiedWorkerContext } from '../study-worker/context.js'
 
 const PROVIDER_NAME = 'academy-in-app'
@@ -18,7 +16,10 @@ const DELIVERY_REQUEST_KEYS = new Set([
   'delivery', 'recipient', 'workerContext', 'trigger', 'onAttemptSubmitted',
 ])
 const FORBIDDEN_DELIVERY_KEYS = new Set([
-  'rawText', 'transcript', 'disclosure', 'email', 'phone', 'destination', 'messageBody',
+  'rawText', 'rawLearnerText', 'learnerText', 'rawTutorText', 'tutorText',
+  'transcript', 'prompt', 'response', 'disclosure', 'disclosureBody',
+  'email', 'emailAddress', 'phone', 'phoneNumber', 'postalAddress', 'address',
+  'destination', 'messageBody', 'body', 'subject',
 ])
 const INSERT_KEYS = new Set([
   'state', 'providerReceiptRef', 'jobId', 'attemptId', 'proposalId', 'householdId',
@@ -34,9 +35,15 @@ const VERIFY_REQUEST_KEYS = new Set([
 ])
 const UNVERIFIED_RECEIPT_KEYS = new Set(['verified'])
 const REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
-const IDEMPOTENCY_KEY = /^study-safety-delivery:[a-f0-9]{64}$/
-const RECIPIENT_REF = /^recipient:[A-Za-z0-9._/-]{1,96}$/
-const ROUTE_REF = /^in-app-route:[A-Za-z0-9._/-]{1,96}$/
+// The durable estate builds this key as `'delivery:' || study_sha256_json(...)`.
+const IDEMPOTENCY_KEY = /^delivery:[a-f0-9]{64}$/
+// `study_adult_notification_permissions.recipient_ref` is constrained to this
+// form by the durable recipient resolution, and only rows matching it are ever
+// resolved into a delivery job.
+const RECIPIENT_REF = /^recipient:[a-f0-9]{64}$/
+// `study_adult_notification_routes.route_ref` is constrained to this form, and
+// only rows matching it are ever resolved into a delivery job.
+const ROUTE_REF = /^route:[a-f0-9]{64}$/
 const RECEIPT_REF = /^in-app-receipt:[A-Za-z0-9._/-]{1,96}$/
 const EVIDENCE_REF = /^in-app-evidence:[A-Za-z0-9._/-]{1,96}$/
 const ACTION_REF = /^adult-review:[A-Za-z0-9._/-]{1,96}$/
@@ -60,17 +67,23 @@ function validRef(value) {
   return typeof value === 'string' && REF.test(value)
 }
 
+// `RegExp#test` coerces its argument, so the string guard is what stops a
+// hostile carrier object from presenting a durable identifier it does not hold.
+function matches(pattern, value) {
+  return typeof value === 'string' && pattern.test(value)
+}
+
 function validateDelivery(value) {
   if (
     !exactObject(value, DELIVERY_INPUT_KEYS) ||
-    !IDEMPOTENCY_KEY.test(value.idempotencyKey) ||
+    !matches(IDEMPOTENCY_KEY, value.idempotencyKey) ||
     !validRef(value.jobId) ||
     !validRef(value.attemptId) ||
     !validRef(value.proposalId) ||
     !validRef(value.householdId) ||
     !validRef(value.studentId) ||
-    !RECIPIENT_REF.test(value.recipientRef) ||
-    !ROUTE_REF.test(value.routeRef) ||
+    !matches(RECIPIENT_REF, value.recipientRef) ||
+    !matches(ROUTE_REF, value.routeRef) ||
     value.templateCode !== TEMPLATE_CODE
   ) throw new TypeError('invalid_in_app_delivery')
 
@@ -82,10 +95,11 @@ function validateDeliveryRequest(value) {
     !exactObject(value, DELIVERY_REQUEST_KEYS) ||
     !value.delivery ||
     !value.recipient ||
-    !RECIPIENT_REF.test(value.recipient.recipientRef) ||
+    !matches(RECIPIENT_REF, value.recipient.recipientRef) ||
     !['scheduled', 'manual'].includes(value.trigger) ||
     typeof value.onAttemptSubmitted !== 'function' ||
-    Object.keys(value.delivery).some((key) => FORBIDDEN_DELIVERY_KEYS.has(key))
+    Object.keys(value.delivery).some((key) => FORBIDDEN_DELIVERY_KEYS.has(key)) ||
+    Object.keys(value.recipient).some((key) => FORBIDDEN_DELIVERY_KEYS.has(key))
   ) throw new TypeError('invalid_in_app_delivery_request')
   const workerContext = validateVerifiedWorkerContext(value.workerContext)
   const delivery = validateDelivery({
@@ -115,7 +129,7 @@ function validateNotification(value) {
     !exactObject(value, NOTIFICATION_KEYS) ||
     value.title !== LEARNER_SAFE_TITLE ||
     REASON_URGENCY.get(value.reasonCategory) !== value.urgency ||
-    !ACTION_REF.test(value.actionRef)
+    !matches(ACTION_REF, value.actionRef)
   ) throw new Error('in_app_persistence_contract')
 
   return Object.freeze({ ...value })
@@ -132,7 +146,7 @@ function validateInsertResult(value, input) {
   if (
     !exactObject(value, INSERT_KEYS) ||
     !['delivered', 'already-delivered'].includes(value.state) ||
-    !RECEIPT_REF.test(value.providerReceiptRef) ||
+    !matches(RECEIPT_REF, value.providerReceiptRef) ||
     value.jobId !== input.jobId ||
     !validRef(value.attemptId) ||
     value.proposalId !== input.proposalId ||
@@ -163,10 +177,10 @@ function validateVerifyRequest(value) {
     !validRef(value.proposalId) ||
     !validRef(value.householdId) ||
     !validRef(value.studentId) ||
-    !IDEMPOTENCY_KEY.test(value.deliveryIdempotencyKey) ||
-    !RECIPIENT_REF.test(value.recipientRef) ||
-    !ROUTE_REF.test(value.routeRef) ||
-    !RECEIPT_REF.test(value.providerReceiptRef)
+    !matches(IDEMPOTENCY_KEY, value.deliveryIdempotencyKey) ||
+    !matches(RECIPIENT_REF, value.recipientRef) ||
+    !matches(ROUTE_REF, value.routeRef) ||
+    !matches(RECEIPT_REF, value.providerReceiptRef)
   ) throw new TypeError('invalid_in_app_receipt_request')
 
   const workerContext = validateVerifiedWorkerContext(value.workerContext)
@@ -178,11 +192,11 @@ function validateReceipt(value, binding, environment) {
   if (exactObject(value, UNVERIFIED_RECEIPT_KEYS) && value.verified === false) {
     return Object.freeze({ verified: false })
   }
-  if (!EVIDENCE_REF.test(value?.evidenceRef) || !RECEIPT_REF.test(value?.providerReceiptRef)) {
+  if (!matches(EVIDENCE_REF, value?.evidenceRef) || !matches(RECEIPT_REF, value?.providerReceiptRef)) {
     throw new Error('in_app_persistence_contract')
   }
   try {
-    return validateVerifiedAdultReviewReceipt(value, binding, { environment })
+    return validateInAppNotificationReceipt(value, binding, { environment })
   } catch (error) {
     if (String(error?.message).startsWith('receipt_binding_mismatch:')) throw error
     throw new Error('in_app_persistence_contract')

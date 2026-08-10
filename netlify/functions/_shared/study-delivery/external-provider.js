@@ -1,8 +1,12 @@
 const CONTRACT_VERSION = 'study-external-delivery-contract-v1'
 const TEMPLATE_CODE = 'study-safety-adult-review-v1'
-const DELIVERY_KEY = /^study-safety-delivery:[a-f0-9]{64}$/
+// The durable estate builds this key as `'delivery:' || study_sha256_json(...)`.
+const DELIVERY_KEY = /^delivery:[a-f0-9]{64}$/
 const ATTEMPT_REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
-const RECIPIENT_REF = /^recipient:[A-Za-z0-9._/-]{1,96}$/
+// Only permissions whose `recipient_ref` matches `^recipient:[0-9a-f]{64}$` are
+// ever disclosed by the durable recipient resolution, so no other form can
+// reach a delivery job.
+const RECIPIENT_REF = /^recipient:[a-f0-9]{64}$/
 const OPAQUE_REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
 const CONFIG_KEYS = new Set([
   'channel',
@@ -96,17 +100,23 @@ function assertProductionComposition(isTestProvider, deploymentMode) {
   }
 }
 
+// `RegExp#test` coerces its argument, so the string guard is what stops a
+// hostile carrier object from presenting an identifier it does not hold.
+function matches(pattern, value) {
+  return typeof value === 'string' && pattern.test(value)
+}
+
 function validIdentity(value) {
-  return typeof value === 'string' && OPAQUE_REF.test(value)
+  return matches(OPAQUE_REF, value)
 }
 
 function validateDeliveryInput(value, channel) {
   exactObject(value, DELIVERY_KEYS, 'invalid_external_delivery_input')
   if (
-    !DELIVERY_KEY.test(value.idempotencyKey) ||
-    !ATTEMPT_REF.test(value.attemptId) ||
-    !RECIPIENT_REF.test(value.recipientRef) ||
-    !routePattern(channel).test(value.routeRef) ||
+    !matches(DELIVERY_KEY, value.idempotencyKey) ||
+    !matches(ATTEMPT_REF, value.attemptId) ||
+    !matches(RECIPIENT_REF, value.recipientRef) ||
+    !matches(routePattern(channel), value.routeRef) ||
     value.templateCode !== TEMPLATE_CODE
   ) throw new TypeError('invalid_external_delivery_input')
   return Object.freeze({ ...value })
@@ -115,10 +125,10 @@ function validateDeliveryInput(value, channel) {
 function validateReconciliationInput(value, channel) {
   exactObject(value, RECONCILIATION_KEYS, 'invalid_external_reconciliation_input')
   if (
-    !DELIVERY_KEY.test(value.idempotencyKey) ||
-    !ATTEMPT_REF.test(value.attemptId) ||
-    !RECIPIENT_REF.test(value.recipientRef) ||
-    !routePattern(channel).test(value.routeRef) ||
+    !matches(DELIVERY_KEY, value.idempotencyKey) ||
+    !matches(ATTEMPT_REF, value.attemptId) ||
+    !matches(RECIPIENT_REF, value.recipientRef) ||
+    !matches(routePattern(channel), value.routeRef) ||
     !validIdentity(value.providerAcceptanceRef)
   ) throw new TypeError('invalid_external_reconciliation_input')
   return Object.freeze({ ...value })
@@ -127,9 +137,9 @@ function validateReconciliationInput(value, channel) {
 function validateReceiptInput(value, channel) {
   exactObject(value, RECEIPT_KEYS, 'invalid_external_receipt_input')
   if (
-    !DELIVERY_KEY.test(value.deliveryIdempotencyKey) ||
-    !RECIPIENT_REF.test(value.recipientRef) ||
-    !routePattern(channel).test(value.routeRef) ||
+    !matches(DELIVERY_KEY, value.deliveryIdempotencyKey) ||
+    !matches(RECIPIENT_REF, value.recipientRef) ||
+    !matches(routePattern(channel), value.routeRef) ||
     !validIdentity(value.providerReceiptRef)
   ) throw new TypeError('invalid_external_receipt_input')
   return Object.freeze({ ...value })
@@ -198,7 +208,7 @@ function normalizeReceipt(value) {
   if (
     value.verified === true &&
     Object.keys(value).length === 3 &&
-    ATTEMPT_REF.test(value.attemptId) &&
+    matches(ATTEMPT_REF, value.attemptId) &&
     validIdentity(value.evidenceRef)
   ) {
     return frozen({ verified: true, attemptId: value.attemptId, evidenceRef: value.evidenceRef })

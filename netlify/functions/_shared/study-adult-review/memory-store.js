@@ -179,7 +179,8 @@ export function createInMemoryAdultReviewStore(options = {}) {
           !/^recipient:[A-Za-z0-9._/-]{1,96}$/.test(route.recipientRef) ||
           !/^(?:email|in-app|sms)-route:[A-Za-z0-9._/-]{1,96}$/.test(route.routeRef) ||
           !['email', 'in-app', 'sms'].includes(route.channel) ||
-          !/^study-safety-delivery:[a-f0-9]{64}$/.test(route.deliveryIdempotencyKey)
+          // The durable estate keys delivery jobs as `'delivery:' || study_sha256_json(...)`.
+          !/^delivery:[a-f0-9]{64}$/.test(route.deliveryIdempotencyKey)
         ) throw new TypeError('invalid_recipient_route_job')
         const uniqueRoute = `${route.recipientRef}:${route.routeRef}:${route.channel}`
         if (routeKeys.has(uniqueRoute)) throw new Error('duplicate_recipient_route')
