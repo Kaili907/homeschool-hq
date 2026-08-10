@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { createSupabaseServiceRpc } from '../study-adult-review/supabase-ports.js'
 import {
   ADULT_REVIEW_WORKER_INVOCATION_HEADER,
+  createNetlifyScheduledWorkerCredentialSource,
   createNetlifyWorkerCredentialVerifier,
   createNetlifyWorkerInvocationAuthorization,
 } from './credential.js'
@@ -217,5 +218,35 @@ describe('worker invocation authorization', () => {
       dimensions: { source: 'netlify-function', reason_code: 'worker-auth-failed' },
     })
     expect(JSON.stringify(sink.record.mock.calls)).not.toContain(INVOCATION_SECRET)
+  })
+})
+
+describe('scheduled worker credential source', () => {
+  it('uses deployment configuration without depending on manual invocation authority', async () => {
+    const env = { ...ENV }
+    delete env.ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET
+    const source = createNetlifyScheduledWorkerCredentialSource({ env })
+
+    expect(source.isDurable).toBe(true)
+    expect(source.isReady()).toBe(true)
+    expect(source.authorityBoundary).toBe('netlify-scheduled-function')
+    expect(await source.credentialForRun()).toBe(WORKER_CREDENTIAL)
+    expect(JSON.stringify(source)).not.toContain(WORKER_CREDENTIAL)
+  })
+
+  it.each([
+    'ACADEMY_STUDY_ADULT_REVIEW_WORKER_ID',
+    'ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL_ID',
+    'ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL',
+    'ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL_VERSION',
+    'ACADEMY_STUDY_ADULT_REVIEW_WORKER_CONFIGURATION_VERSION',
+  ])('fails closed without %s', async (key) => {
+    const env = { ...ENV }
+    delete env[key]
+    const source = createNetlifyScheduledWorkerCredentialSource({ env })
+    expect(source.isReady()).toBe(false)
+    await expect(source.credentialForRun()).rejects.toThrow(
+      'Scheduled worker credential is not configured',
+    )
   })
 })
