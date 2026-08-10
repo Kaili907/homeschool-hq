@@ -59,6 +59,7 @@ const CAPABILITY_BY_OPERATION: Readonly<Record<VerifiedAcademicOperation, StudyS
   'dashboard:read': 'student:progress:read',
   'calendar:read': 'student:assignments:read',
   'session:begin': 'student:attempts:create',
+  'session:resume': 'student:progress:read',
   'session:transition': 'student:attempts:create',
   'checkpoint:read': 'student:progress:read',
   'checkpoint:compare-and-swap': 'student:attempts:create',
