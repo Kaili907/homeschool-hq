@@ -22,6 +22,23 @@ const CLAIM = Object.freeze({
 })
 
 describe('Study session telemetry Supabase outbox store', () => {
+  it('reads and validates the existing service-only readiness contract', async () => {
+    const rpc = vi.fn(async () => ({
+      data: { schemaVersion: 1, status: 'ready' }, error: null,
+    }))
+    const store = createStudySessionTelemetryOutboxStore({ rpc })
+    await expect(store.readiness()).resolves.toEqual({ schemaVersion: 1, status: 'ready' })
+    expect(rpc).toHaveBeenCalledWith(
+      'academy_study_session_telemetry_outbox_readiness_v1',
+      {},
+    )
+
+    rpc.mockResolvedValueOnce({
+      data: { schemaVersion: 1, status: 'ready', pendingRows: [] }, error: null,
+    })
+    await expect(store.readiness()).rejects.toMatchObject({ code: 'database-contract' })
+  })
+
   it('claims through the narrow service RPC and validates the returned contract', async () => {
     const rpc = vi.fn(async () => ({ data: [CLAIM], error: null }))
     const store = createStudySessionTelemetryOutboxStore({ rpc })

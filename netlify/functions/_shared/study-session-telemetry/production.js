@@ -1,6 +1,10 @@
 import { createClient } from '@supabase/supabase-js'
 import { createSupabaseOperationalTelemetryStore } from '../../../../src/telemetry/supabaseOperationalTelemetry.ts'
-import { createServerOperationalTelemetryWriter } from '../operational-telemetry-writer.js'
+import {
+  createServerOperationalTelemetryWriter,
+  resolveTrustedAppVersion,
+  resolveTrustedEngineVersion,
+} from '../operational-telemetry-writer.js'
 import { createStudySessionTelemetryOutboxStore } from './outbox-store.js'
 import { createStudySessionTelemetryWorker } from './worker.js'
 
@@ -25,6 +29,8 @@ export function createProductionStudySessionTelemetryWorker({
   fetchImpl,
   client,
 } = {}) {
+  resolveTrustedAppVersion(env)
+  resolveTrustedEngineVersion(env, 'study')
   let serviceClient = client
   if (!serviceClient) {
     const config = serviceConfig(env)

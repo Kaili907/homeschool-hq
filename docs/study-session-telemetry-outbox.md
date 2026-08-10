@@ -90,10 +90,25 @@ backoff. Stored delivery failure codes are only `validation_error`, `timeout`,
 `telemetry_unavailable`, and `reconciliation_conflict`; arbitrary exception or
 database text is never serialized.
 
-The production composition module intentionally exposes no HTTP handler or
-schedule. An authorized scheduled/manual invoker is deployment composition
-work and must be reviewed before activation. Until then, durable receipts
-accumulate safely without affecting Study authority.
+Each bounded run reports `no_work`, `processed`,
+`partial_with_retryable_failures`, `failed`, or `unavailable`. Lease loss is
+reported separately from another acknowledgement outage; both remain safe for
+lease-expiry recovery. A claim-storage outage returns `unavailable` without
+serializing the underlying exception or database object.
+
+The production composition exposes no HTTP handler or schedule. The trusted
+manual/server entrypoint runs one bounded batch and is available locally as
+`npm run study:telemetry:deliver`; it requires the existing service-role
+Supabase configuration plus `ACADEMY_APP_VERSION` and
+`ACADEMY_STUDY_ENGINE_VERSION`. It prints only the bounded delivery and health
+projection and exits nonzero for unavailable, failed, or partial delivery. No
+cadence is defined or implied.
+
+Health uses the existing service-only readiness RPC and reports worker
+`available` or `unavailable` plus the current delivery result category. The
+current database contract has no aggregate backlog RPC, so `pendingCount` and
+`oldestPendingAgeBucket` are explicitly `null`; no learner rows or fabricated
+last-success timestamp are exposed.
 
 ## Migration and validation
 
@@ -106,6 +121,9 @@ Normalized SHA-256:
 It creates a forced-RLS `academy_private` table with no application-role table
 grants, narrow service-role claim/complete/retry/readiness RPCs, and a Study
 persistence metadata marker. It has not been applied to a hosted project.
+
+WIN-17 requires no new migration. It reuses those frozen receipt, lease,
+retry, readiness, and operational-event persistence contracts unchanged.
 
 Permanent focused coverage lives in
 `supabase/study-session-telemetry-outbox.db.test.ts` and
