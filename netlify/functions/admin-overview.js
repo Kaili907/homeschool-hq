@@ -1,4 +1,5 @@
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
+import { createAdminConfigurationSource } from './_shared/admin-configuration-source.js'
 import { createAdminLearnerReader } from './_shared/admin-learner-reader.js'
 import { createAdminHealthSource, disabledHealthEngines } from './_shared/admin-health-source.js'
 import { createAdminOperationalAggregateReader } from './_shared/admin-operational-aggregate-reader.js'
@@ -9,6 +10,7 @@ import { createFilesystemCurriculumSource } from '../../src/admin/curriculum/fil
 import { composeAdminOverview, resolveAdminOverviewRange } from './_shared/admin-overview.js'
 import { errorResponse, jsonResponse } from './_shared/http.js'
 import { createRuntimeConfigurationResolver } from './_shared/admin-runtime-configuration.js'
+import { createAdminMonthlyCostAlertEvaluator } from './_shared/admin-monthly-cost-alert.js'
 
 const PATHS = new Set([
   '/api/admin/v1/overview',
@@ -41,6 +43,14 @@ export function createAdminOverviewHandler(overrides = {}) {
   })
   const curriculumSource = overrides.curriculumSource ?? createFilesystemCurriculumSource()
   const now = overrides.now ?? (() => new Date())
+  const configurationSource = overrides.runtimeConfigurationSource
+    ?? createAdminConfigurationSource({
+      env,
+      fetchImpl,
+      serviceClient: overrides.configurationClient ?? overrides.serviceClient,
+    })
+  const monthlyCostAlertEvaluator = overrides.monthlyCostAlertEvaluator
+    ?? createAdminMonthlyCostAlertEvaluator({ gatewayAccess, configurationSource, now })
   const sources = overrides.sources ?? {
     learners: (input) => learnerReader.readSnapshot(input),
     health: () => healthSource.list(),
@@ -49,6 +59,7 @@ export function createAdminOverviewHandler(overrides = {}) {
     providerAttemptCoverage: typeof gatewayAccess.readProviderAttemptCoverage === 'function'
       ? (input) => gatewayAccess.readProviderAttemptCoverage(input)
       : undefined,
+    monthlyCostAlert: (input) => monthlyCostAlertEvaluator.read(input),
     safety: (input) => safetyReader.read(input),
     curriculumCatalog: () => curriculumSource.loadCatalog(),
     curriculumValidation: loadAdminCurriculumValidationEvidence,
@@ -83,7 +94,7 @@ export function createAdminOverviewHandler(overrides = {}) {
             ?? createRuntimeConfigurationResolver({
               env,
               fetchImpl,
-              source: overrides.runtimeConfigurationSource,
+              source: configurationSource,
               serviceClient: overrides.configurationClient,
             })
           runtimeValues = (await runtimeConfigurationResolver.resolve()).values

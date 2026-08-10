@@ -50,12 +50,12 @@ function runtimeState(key: ConfigurationKey) {
   const money = key.startsWith('cost.')
   const tts = key === 'runtime.tts.enabled' || key === 'quota.tts.requests_per_account_day'
   return money ? {
-    classification: 'NOT_YET_ENFORCEABLE',
-    effectiveValue: null,
-    enforcement: 'unavailable',
-    resolution: 'unavailable',
-    reason: 'runtime_consumer_unavailable',
-    trustedConsumer: null,
+    classification: 'ENFORCEABLE_NOW',
+    effectiveValue: key === 'cost.warning.monthly_micros' ? '10000000' : '25000000',
+    enforcement: 'enforced',
+    resolution: 'saved',
+    reason: 'saved_value_enforced',
+    trustedConsumer: 'cost_alert_evaluator',
     studyStatus: 'not_applicable',
   } : {
     classification: 'ENFORCEABLE_NOW',
@@ -143,7 +143,7 @@ describe('Admin configuration browser model', () => {
     ['unknown reason', (value: any) => { value.settings[0].runtime.reason = 'browser_claimed_active' }],
     ['wrong trusted consumer', (value: any) => { value.settings[0].runtime.trustedConsumer = 'tts_gateway' }],
     ['wrong Study status', (value: any) => { value.settings[0].runtime.studyStatus = 'not_applicable' }],
-    ['unavailable cost claimed enforced', (value: any) => { value.settings[4].runtime.enforcement = 'enforced' }],
+    ['cost alert consumer removed', (value: any) => { value.settings[4].runtime.trustedConsumer = null }],
   ])('rejects %s in a browser runtime response', (_label, forge) => {
     const candidate = runtimeProjection()
     forge(candidate)

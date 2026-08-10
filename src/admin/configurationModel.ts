@@ -83,6 +83,7 @@ export type AdminRuntimeConfigurationReason =
 export type AdminRuntimeConfigurationTrustedConsumer =
   | 'anthropic_gateway'
   | 'tts_gateway'
+  | 'cost_alert_evaluator'
 export type AdminRuntimeConfigurationStudyStatus = 'unavailable' | 'not_applicable'
 
 export interface AdminRuntimeConfigurationState {
@@ -228,8 +229,8 @@ export const ADMIN_RUNTIME_CONFIGURATION_CLASSIFICATIONS = Object.freeze({
   'runtime.tts.enabled': 'ENFORCEABLE_NOW',
   'quota.ai.requests_per_account_day': 'ENFORCEABLE_NOW',
   'quota.tts.requests_per_account_day': 'ENFORCEABLE_NOW',
-  'cost.warning.monthly_micros': 'NOT_YET_ENFORCEABLE',
-  'cost.critical.monthly_micros': 'NOT_YET_ENFORCEABLE',
+  'cost.warning.monthly_micros': 'ENFORCEABLE_NOW',
+  'cost.critical.monthly_micros': 'ENFORCEABLE_NOW',
   'ai.approved_tiers': 'ENFORCEABLE_NOW',
   'ai.default_tier': 'ENFORCEABLE_NOW',
 } satisfies Readonly<Record<AdminConfigurationKey, AdminRuntimeConfigurationClassification>>)
@@ -239,8 +240,8 @@ export const ADMIN_RUNTIME_CONFIGURATION_TRUSTED_CONSUMERS = Object.freeze({
   'runtime.tts.enabled': 'tts_gateway',
   'quota.ai.requests_per_account_day': 'anthropic_gateway',
   'quota.tts.requests_per_account_day': 'tts_gateway',
-  'cost.warning.monthly_micros': null,
-  'cost.critical.monthly_micros': null,
+  'cost.warning.monthly_micros': 'cost_alert_evaluator',
+  'cost.critical.monthly_micros': 'cost_alert_evaluator',
   'ai.approved_tiers': 'anthropic_gateway',
   'ai.default_tier': 'anthropic_gateway',
 } satisfies Readonly<Record<AdminConfigurationKey, AdminRuntimeConfigurationTrustedConsumer | null>>)
@@ -298,17 +299,19 @@ function sanitizeRuntimeState(
   const resolution = value.resolution as AdminRuntimeConfigurationResolution
   const reason = value.reason as AdminRuntimeConfigurationReason
   if (!resolutionMatchesReason(resolution, reason)) return null
+  const expectedStudyStatus = key.startsWith('cost.') ? 'not_applicable' : 'unavailable'
+  if (value.studyStatus !== expectedStudyStatus) return null
 
   if (classification === 'NOT_YET_ENFORCEABLE') {
     if (value.effectiveValue !== null
       || enforcement !== 'unavailable'
-      || resolution !== 'unavailable'
-      || value.studyStatus !== 'not_applicable') return null
+      || resolution !== 'unavailable') return null
+  } else if (enforcement === 'unavailable') {
+    if (value.effectiveValue !== null || resolution !== 'unavailable') return null
   } else {
     if (!isAdminConfigurationValue(key, value.effectiveValue)
       || enforcement !== 'enforced'
-      || resolution === 'unavailable'
-      || value.studyStatus !== 'unavailable') return null
+      || resolution === 'unavailable') return null
   }
 
   return Object.freeze({

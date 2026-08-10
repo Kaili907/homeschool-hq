@@ -224,8 +224,12 @@ export function resolveEffectiveRuntimeConfiguration(
       settings.get('quota.tts.requests_per_account_day'),
       deploymentQuota(env, 'ACADEMY_TTS_DAILY_LIMIT', SAFE_TTS_DAILY_LIMIT),
     ),
-    'cost.warning.monthly_micros': unavailableState('cost.warning.monthly_micros'),
-    'cost.critical.monthly_micros': unavailableState('cost.critical.monthly_micros'),
+    'cost.warning.monthly_micros': savedState(
+      'cost.warning.monthly_micros', settings.get('cost.warning.monthly_micros'),
+    ),
+    'cost.critical.monthly_micros': savedState(
+      'cost.critical.monthly_micros', settings.get('cost.critical.monthly_micros'),
+    ),
     'ai.approved_tiers': savedState('ai.approved_tiers', approvedTiers),
     'ai.default_tier': savedState('ai.default_tier', defaultTier),
   })

@@ -32,9 +32,10 @@ function setting(key: AdminConfigurationKey) {
     deploymentCeilingType: isRuntime ? 'boolean_enablement' : quota ? 'integer_maximum' : money ? 'integer_micros_maximum' : approved ? 'allowlist_subset' : 'allowlist_member',
     registryVersion: 1, integrationStatus: 'pending_runtime_integration',
     runtime: money ? {
-      classification: 'NOT_YET_ENFORCEABLE', effectiveValue: null,
-      enforcement: 'unavailable', resolution: 'unavailable',
-      reason: 'runtime_consumer_unavailable', trustedConsumer: null,
+      classification: 'ENFORCEABLE_NOW', effectiveValue: key === 'cost.warning.monthly_micros'
+        ? '10000000' : '25000000',
+      enforcement: 'enforced', resolution: 'saved',
+      reason: 'saved_value_enforced', trustedConsumer: 'cost_alert_evaluator',
       studyStatus: 'not_applicable',
     } : {
       classification: 'ENFORCEABLE_NOW',

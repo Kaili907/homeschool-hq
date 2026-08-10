@@ -3,6 +3,7 @@ import { buildCurriculumValidationReadModel } from '../../../src/admin/curriculu
 import { buildEnginePerformanceProjectionFromAggregate } from '../../../src/admin/enginePerformanceModel.ts'
 import { buildSystemHealthProjection } from '../../../src/admin/systemHealth.ts'
 import { buildAdminCostProjection, ADMIN_COST_RECORD_LIMIT } from './admin-cost-projection.js'
+import { evaluateAdminMonthlyCostAlert } from './admin-monthly-cost-alert.js'
 import { readAdminProviderAccountingCoverage } from './admin-provider-coverage.js'
 
 const DAY_MS = 24 * 60 * 60 * 1_000
@@ -314,9 +315,16 @@ export async function composeAdminOverview({ principal, accessToken, range, gene
     }),
     isolatedDomain(capabilities, 'costs', requestedWindow, async () => {
       const providerRange = costWindow(range)
-      const [records, providerAccountingCoverage] = await Promise.all([
+      const [records, providerAccountingCoverage, monthlyCostAlert] = await Promise.all([
         sources.costs({ limit: ADMIN_COST_RECORD_LIMIT, before: range.endExclusive }),
         readAdminProviderAccountingCoverage(sources.providerAttemptCoverage, providerRange),
+        typeof sources.monthlyCostAlert === 'function'
+          ? sources.monthlyCostAlert({ generatedAt })
+          : evaluateAdminMonthlyCostAlert({
+              costProjection: null,
+              configuration: null,
+              generatedAt,
+            }),
       ])
       const projection = buildAdminCostProjection(
         records,
@@ -343,6 +351,8 @@ export async function composeAdminOverview({ principal, accessToken, range, gene
         usageUnavailableCount: projection.summary.usageUnavailableCount,
         reasons: projection.source.reasons,
         providerAccountingCoverage: projection.providerAccountingCoverage,
+        monthlyCostAlert,
+        activeCriticalCostAlert: monthlyCostAlert.activeCritical,
       }, {
         freshness: 'unknown',
         completeness,

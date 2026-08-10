@@ -35,12 +35,43 @@ policy. Study has no ADMIN-14A effective-settings consumer on this branch.
 | `quota.tts.requests_per_account_day` | `ENFORCEABLE_NOW` | Atomic TTS account/day limiter |
 | `ai.approved_tiers` | `ENFORCEABLE_NOW` | Server logical-tier admission |
 | `ai.default_tier` | `ENFORCEABLE_NOW` | Server fallback for a known but unapproved browser preference |
-| `cost.warning.monthly_micros` | `NOT_YET_ENFORCEABLE` | None; no authoritative warning evaluator exists |
-| `cost.critical.monthly_micros` | `NOT_YET_ENFORCEABLE` | None; no authoritative critical evaluator exists |
+| `cost.warning.monthly_micros` | `ENFORCEABLE_NOW` | Monthly cost alert evaluator |
+| `cost.critical.monthly_micros` | `ENFORCEABLE_NOW` | Monthly cost alert evaluator |
 
 No registered setting is `UNSUPPORTED`. The cost thresholds remain durable and
-editable, but the Admin UI reports their runtime state as unavailable rather
-than inventing a budget alert or provider shutdown behavior.
+editable and are effective only as operational alert thresholds. They are not
+provider spending hard caps and do not disable AI/TTS, change quotas or tiers,
+or alter provider routing.
+
+## Monthly cost alert authority
+
+The trusted monthly evaluator owns threshold calculation for Costs, Overview,
+and future Production Readiness consumers. It derives a full UTC calendar-month
+window from server observation time: the inclusive first instant of the month
+through the exclusive first instant of the next month. Browser dates, totals,
+threshold status, and invoice claims are never accepted.
+
+The sole amount under evaluation is the authoritative ledger's recorded
+`calculated` provider cost: an exact decimal-string IntegerMicros total derived
+from provider usage and the effective pricing catalog. Reconciled cost remains
+separate. The evaluated amount is therefore a usage-derived operational
+estimate, not a provider invoice total. The provider-attempt journal supplies
+coverage evidence only and is never used to calculate cost or threshold state.
+
+The evaluator returns `normal`, `warning`, `critical`, `partial`, or
+`unavailable`, along with the recorded monthly total, both thresholds, and
+positive remaining amounts when a complete total makes them exact. Recorded
+costs are non-negative and additive, so an incomplete total is a lower bound.
+That lower bound can safely prove `critical` once it reaches the critical
+threshold. Below critical, it cannot distinguish normal, warning, or a hidden
+critical total, so the result remains `partial`; it is never falsely classified
+normal. An unavailable aggregate or invalid/missing threshold projection yields
+`unavailable` without inventing zero.
+
+Cost alert reads stay behind `costs:read`. Configuration reads and mutations
+retain their existing Configuration authority, confirmation, CAS, and audit
+boundaries. This integration uses the existing configuration and usage ledger;
+it adds no migration.
 
 ## Effective rules and fallback
 

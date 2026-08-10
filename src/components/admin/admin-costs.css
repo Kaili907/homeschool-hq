@@ -31,6 +31,18 @@
 .admin-costs-message h1, .admin-costs-message h2 { font-size: 1.5rem; font-weight: 800; }
 .admin-costs-message button { background: #173f4a; color: #fff; justify-self: start; margin-top: .5rem; }
 .admin-costs-panel { background: #fff; border: 1px solid #d8e1e4; border-radius: .85rem; padding: 1rem; }
+.admin-cost-alert { background: #edf8f6; border: 1px solid #9bcac2; border-left: .4rem solid #196b6b; border-radius: .85rem; display: grid; gap: .85rem; padding: 1rem; }
+.admin-cost-alert--warning, .admin-cost-alert--partial { background: #fff9e9; border-color: #e5bd62; border-left-color: #b16a13; }
+.admin-cost-alert--critical, .admin-cost-alert--unavailable { background: #fff2ef; border-color: #e5aaa3; border-left-color: #a53b33; }
+.admin-cost-alert .admin-costs-section-heading { margin-bottom: 0; }
+.admin-cost-alert__status { display: grid; gap: .15rem; }
+.admin-cost-alert__status span { color: #526474; font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.admin-cost-alert__status strong { font-size: 1.15rem; }
+.admin-cost-alert__values { display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); }
+.admin-cost-alert__values div { background: #ffffffa6; border: 1px solid #d8e1e4; border-radius: .65rem; display: grid; gap: .25rem; padding: .7rem; }
+.admin-cost-alert__values dt { color: #526474; font-size: .72rem; font-weight: 800; }
+.admin-cost-alert__values dd { font-weight: 800; overflow-wrap: anywhere; }
+.admin-cost-alert > p:not(.admin-costs-disclosure) { color: #405766; font-size: .8rem; }
 .admin-costs-section-heading { margin-bottom: .8rem; }
 .admin-costs-section-heading h2 { font-size: 1.2rem; font-weight: 800; margin-top: .15rem; }
 .admin-costs-disclosure, .admin-costs-footer { color: #526474; font-size: .78rem; margin-top: .8rem; }

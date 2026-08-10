@@ -6,6 +6,7 @@ import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catal
 import { createAnthropicHandler } from '../../netlify/functions/anthropic.js'
 import { createTtsHandler } from '../../netlify/functions/tts.js'
 import { parseAdminCostsModel } from '../../src/admin/costsModel.ts'
+import { monthlyCostAlertFixture } from '../../src/admin/costsTestFixtures.ts'
 import {
   createMemoryCache,
   createUsageMeter,
@@ -399,7 +400,11 @@ describe('provider accounting end-to-end contract', () => {
     })
 
     const projection = await readAdminProjection(harness)
-    const browserModel = parseAdminCostsModel(projection)
+    const browserModel = parseAdminCostsModel({
+      ...projection,
+      contractVersion: 4,
+      monthlyCostAlert: monthlyCostAlertFixture({ generatedAt: NOW.toISOString() }),
+    })
     expect(harness.access.readProviderAttemptCoverage).toHaveBeenCalledWith({
       startAt: '2026-08-10T00:00:00.000Z',
       endExclusive: '2026-08-11T00:00:00.000Z',

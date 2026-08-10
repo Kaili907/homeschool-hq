@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import {
+  parseAdminMonthlyCostAlert,
   parseAdminCostsModel,
   validateAdminCostCustomRange,
 } from './costsModel'
-import { costsModelFixture } from './costsTestFixtures'
+import { costsModelFixture, monthlyCostAlertFixture } from './costsTestFixtures'
 
 describe('Admin costs browser contract', () => {
   it('accepts exact IntegerMicros beyond Number safe range without converting it', () => {
@@ -89,5 +90,23 @@ describe('Admin costs browser contract', () => {
     expect(wire).not.toContain('SECRET')
     expect(wire).not.toContain('prompt')
     expect(wire).not.toContain('rawProviderError')
+  })
+
+  it('accepts only internally consistent authoritative monthly alert results', () => {
+    expect(parseAdminMonthlyCostAlert(monthlyCostAlertFixture())).toMatchObject({
+      status: 'normal',
+      monthlyCostMicros: '9000000',
+      remainingToWarningMicros: '1000000',
+      providerInvoiceTotalClaim: false,
+      automaticProviderShutdown: false,
+    })
+    expect(parseAdminMonthlyCostAlert(monthlyCostAlertFixture({
+      status: 'critical',
+      activeCritical: false,
+    }))).toBeNull()
+    expect(parseAdminMonthlyCostAlert({
+      ...monthlyCostAlertFixture(),
+      browserClaimedCost: '25000000',
+    })).toBeNull()
   })
 })

@@ -104,8 +104,8 @@ describe('trusted Admin runtime configuration resolver', () => {
       'runtime.tts.enabled': 'ENFORCEABLE_NOW',
       'quota.ai.requests_per_account_day': 'ENFORCEABLE_NOW',
       'quota.tts.requests_per_account_day': 'ENFORCEABLE_NOW',
-      'cost.warning.monthly_micros': 'NOT_YET_ENFORCEABLE',
-      'cost.critical.monthly_micros': 'NOT_YET_ENFORCEABLE',
+      'cost.warning.monthly_micros': 'ENFORCEABLE_NOW',
+      'cost.critical.monthly_micros': 'ENFORCEABLE_NOW',
       'ai.approved_tiers': 'ENFORCEABLE_NOW',
       'ai.default_tier': 'ENFORCEABLE_NOW',
     })
@@ -141,6 +141,17 @@ describe('trusted Admin runtime configuration resolver', () => {
       trustedConsumer: 'tts_gateway',
       studyStatus: 'unavailable',
     })
+    expect(resolved.runtime['cost.warning.monthly_micros']).toMatchObject({
+      classification: 'ENFORCEABLE_NOW',
+      effectiveValue: '10000000',
+      enforcement: 'enforced',
+      trustedConsumer: 'cost_alert_evaluator',
+      studyStatus: 'not_applicable',
+    })
+    expect(resolved.runtime['cost.critical.monthly_micros']).toMatchObject({
+      effectiveValue: '25000000',
+      trustedConsumer: 'cost_alert_evaluator',
+    })
     expect(Object.values(resolved.runtime).filter(
       (state) => state.studyStatus === 'unavailable',
     )).toHaveLength(6)
@@ -168,6 +179,25 @@ describe('trusted Admin runtime configuration resolver', () => {
       effectiveValue: 100,
       resolution: 'fallback',
       reason: 'safe_fallback_quota_ceiling',
+    })
+  })
+
+  it('never changes provider controls based on cost threshold amounts', () => {
+    const lowThresholds = resolveEffectiveRuntimeConfiguration(savedProjection({
+      'cost.warning.monthly_micros': '1',
+      'cost.critical.monthly_micros': '2',
+    }), { env: enabledEnv(), catalog: DEPLOYABLE_CATALOG })
+    const highThresholds = resolveEffectiveRuntimeConfiguration(savedProjection({
+      'cost.warning.monthly_micros': '999999999999',
+      'cost.critical.monthly_micros': '1000000000000',
+    }), { env: enabledEnv(), catalog: DEPLOYABLE_CATALOG })
+
+    expect(lowThresholds.values).toEqual(highThresholds.values)
+    expect(lowThresholds.runtime['cost.warning.monthly_micros']).toMatchObject({
+      effectiveValue: '1', trustedConsumer: 'cost_alert_evaluator',
+    })
+    expect(highThresholds.runtime['cost.critical.monthly_micros']).toMatchObject({
+      effectiveValue: '1000000000000', trustedConsumer: 'cost_alert_evaluator',
     })
   })
 
