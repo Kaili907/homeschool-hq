@@ -497,11 +497,11 @@ describe('v2 maintenance and update-required controls', () => {
 
 describe('structured compatibility authority', () => {
   const misleadingMessages = [
-    'update-required minimum supported protocol is 99',
+    'update-required minimum version 99',
     'maintenance',
     'please upgrade',
-    'protocol unsupported',
-    'minimum version 3',
+    'unsupported protocol',
+    'minimum protocol 3',
   ] as const
 
   it.each(misleadingMessages)(
@@ -708,6 +708,120 @@ describe('structured compatibility authority', () => {
         state: { status: 'normal', syncProtocolVersion: 2 },
       })
       expect(result.state).not.toHaveProperty('minimumSupportedSyncVersion')
+    },
+  )
+
+  const validRetryAfterValues = [
+    '2026-08-10T20:15:00Z',
+    '2026-08-31T23:59:59.999Z',
+    '2028-02-29T12:00:00Z',
+  ] as const
+
+  const invalidRetryAfterValues: readonly [string, unknown][] = [
+    ['not a date', 'not-a-date'],
+    ['natural language', 'tomorrow'],
+    ['malformed date', '2026-99-99'],
+    ['impossible day', '2026-02-30T12:00:00Z'],
+    ['impossible month 13', '2026-13-01T00:00:00Z'],
+    ['impossible month 00', '2026-00-01T00:00:00Z'],
+    ['invalid non-leap day', '2027-02-29T12:00:00Z'],
+    ['invalid hour', '2026-08-10T25:00:00Z'],
+    ['rejected leap second', '2026-08-10T20:15:61Z'],
+    ['missing timezone', '2026-08-10T20:15:00'],
+    ['offset timezone', '2026-08-10T16:15:00-04:00'],
+    ['empty string', ''],
+    ['whitespace', '   '],
+    ['null', null],
+    ['number', 123],
+    ['object', {}],
+    ['array', []],
+    ['boolean', true],
+    ['excessive length', `2026-08-10T20:15:00.${'0'.repeat(256)}Z`],
+  ]
+
+  describe.each(['response', 'typed-error'] as const)(
+    '%s retryAfter authority',
+    (source) => {
+      function rpcResult(retryAfter: unknown, status = 'maintenance') {
+        if (source === 'response') {
+          return {
+            data: {
+              status,
+              mode: status,
+              ...(status === 'maintenance'
+                ? protocolAdvertisement
+                : {
+                    sync_protocol_version: 3,
+                    minimum_supported_sync_version: 3,
+                  }),
+              retry_after: retryAfter,
+            },
+            error: null,
+          }
+        }
+        return {
+          data: null,
+          error: {
+            message: 'opaque server control',
+            status,
+            mode: status,
+            syncProtocolVersion: status === 'maintenance' ? 2 : 3,
+            minimumSupportedSyncVersion: status === 'maintenance' ? 2 : 3,
+            retryAfter,
+          },
+        }
+      }
+
+      it.each(validRetryAfterValues)(
+        'accepts valid UTC timestamp %s',
+        async (retryAfter) => {
+          const { client, rpc } = mockRpcClient()
+          rpc.mockResolvedValue(rpcResult(retryAfter))
+
+          await expect(
+            new AcademySyncV2Client(client).snapshot(),
+          ).resolves.toMatchObject({
+            ok: false,
+            classification: 'maintenance',
+            state: { status: 'maintenance', retryAfter },
+          })
+        },
+      )
+
+      it.each(invalidRetryAfterValues)(
+        'fails closed for %s',
+        async (_label, retryAfter) => {
+          const { client, rpc } = mockRpcClient()
+          rpc.mockResolvedValue(rpcResult(retryAfter))
+
+          const result = await new AcademySyncV2Client(client).snapshot()
+          expect(result).toMatchObject({
+            ok: false,
+            classification: 'authentication-provenance-mismatch',
+            state: { status: 'normal', syncProtocolVersion: 2 },
+          })
+          expect(result.state).not.toHaveProperty('retryAfter')
+          expect(result.state).not.toHaveProperty(
+            'minimumSupportedSyncVersion',
+          )
+        },
+      )
+
+      it('rejects retryAfter on update-required control', async () => {
+        const { client, rpc } = mockRpcClient()
+        rpc.mockResolvedValue(
+          rpcResult('2026-08-10T20:15:00Z', 'update-required'),
+        )
+
+        const result = await new AcademySyncV2Client(client).snapshot()
+        expect(result).toMatchObject({
+          ok: false,
+          classification: 'authentication-provenance-mismatch',
+          state: { status: 'normal', syncProtocolVersion: 2 },
+        })
+        expect(result.state).not.toHaveProperty('retryAfter')
+        expect(result.state).not.toHaveProperty('minimumSupportedSyncVersion')
+      })
     },
   )
 })

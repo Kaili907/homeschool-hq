@@ -341,9 +341,78 @@ function aliasedOptionalRetryAfter(record: Record<string, unknown>): {
   if (hasSnakeCase && hasCamelCase) return { valid: false }
   if (!hasSnakeCase && !hasCamelCase) return { valid: true }
   const value = record[hasSnakeCase ? 'retry_after' : 'retryAfter']
-  return typeof value === 'string' && value.length > 0 && value.length <= 256
+  return isValidRetryAfter(value)
     ? { valid: true, value }
     : { valid: false }
+}
+
+// Sync V2 retry-after authority is a strict RFC3339 UTC subset:
+// YYYY-MM-DDTHH:mm:ss[.SSS]Z, with 1-3 fractional digits when present.
+// Leap seconds are intentionally rejected; seconds must be 00-59.
+const RETRY_AFTER_MAX_LENGTH = 24
+const RETRY_AFTER_PATTERN =
+  /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,3}))?Z$/
+
+function isValidRetryAfter(value: unknown): value is string {
+  if (
+    typeof value !== 'string' ||
+    value.length === 0 ||
+    value.length > RETRY_AFTER_MAX_LENGTH
+  ) {
+    return false
+  }
+  const match = RETRY_AFTER_PATTERN.exec(value)
+  if (!match) return false
+
+  const [, yearText, monthText, dayText, hourText, minuteText, secondText] =
+    match
+  const year = Number(yearText)
+  const month = Number(monthText)
+  const day = Number(dayText)
+  const hour = Number(hourText)
+  const minute = Number(minuteText)
+  const second = Number(secondText)
+  if (
+    month < 1 ||
+    month > 12 ||
+    day < 1 ||
+    hour > 23 ||
+    minute > 59 ||
+    second > 59
+  ) {
+    return false
+  }
+
+  const leapYear = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)
+  const daysInMonth = [
+    31,
+    leapYear ? 29 : 28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31,
+  ][month - 1]
+  if (day > daysInMonth) return false
+
+  const timestamp = Date.parse(value)
+  if (!Number.isFinite(timestamp)) return false
+  const parsed = new Date(timestamp)
+  const millisecond = Number((match[7] ?? '').padEnd(3, '0') || 0)
+  return (
+    parsed.getUTCFullYear() === year &&
+    parsed.getUTCMonth() + 1 === month &&
+    parsed.getUTCDate() === day &&
+    parsed.getUTCHours() === hour &&
+    parsed.getUTCMinutes() === minute &&
+    parsed.getUTCSeconds() === second &&
+    parsed.getUTCMilliseconds() === millisecond
+  )
 }
 
 function parseProtocolControl(
