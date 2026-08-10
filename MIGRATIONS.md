@@ -10,6 +10,33 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: immutable curriculum release registry (2026-08-09)
+
+Tracked migration:
+`supabase/migrations/20260809160000_academy_curriculum_release_registry.sql`.
+
+The migration adds only the immutable published-release registry, its complete
+file custody inventory, and a registry-only production pointer. Release 1.0.0
+is registered from source commit
+`4056e31d8beb36622be5ac27ea7f20145266343b` as a `legacy_import`:
+182 files / 23,196,845 bytes, 30 courses, 232 units, 2,736 lessons, 232
+assessments, 18 original texts, and three schedules. The unavailable historical
+source ZIP digest is intentionally not recorded as verified provenance.
+
+Published release, release-file, and pointer rows reject updates and deletes.
+All three tables are postgres-owned with RLS enabled and forced and no direct
+application-role grants. The only database reads are three fixed-search-path,
+service-role RPCs behind the server-derived `curriculum:read` capability. The
+production pointer is revision 1 / `migration_seed` / `registry_only`;
+the learner runtime remains hard-coded to 1.0.0 and does not read the pointer.
+
+Permanent local validation is in
+`supabase/academy-curriculum-release-registry.db.test.ts`, the Admin
+curriculum endpoint/reader tests, and the repository migration manifest. The
+migration has not been applied to a hosted project. Editable drafts remain
+deferred to ADMIN-16B after ADMIN-15 audit foundations, curriculum audit
+vocabulary, and Curriculum Schema Set v2.
+
 ## Supabase: Academy Admin authorization foundation (2026-08-08)
 
 Tracked migration:

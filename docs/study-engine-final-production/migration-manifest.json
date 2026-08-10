@@ -153,6 +153,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-audit-foundation-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260809160000",
+      "filename": "20260809160000_academy_curriculum_release_registry.sql",
+      "sha256": "41dbfda8aa88b2c1dfe006fe753c58481deadba4aa3e031ad914aa7894454978",
+      "dependency": "20260809130000_academy_admin_audit_foundation.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-curriculum-release-registry-v1",
+      "supersessionStatus": "current"
     }
   ]
 }
