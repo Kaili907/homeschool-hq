@@ -17,7 +17,23 @@
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { resolve, join } from 'node:path'
 
-const VERSION = '1.0.0'
+const RELEASE_REGISTRY = resolve(
+  process.cwd(),
+  'curriculum-content/manuel-academy/production-release-registry.json',
+)
+const registry = JSON.parse(readFileSync(RELEASE_REGISTRY, 'utf8'))
+if (registry?.schemaVersion !== 1
+  || typeof registry.currentRelease !== 'string'
+  || !Array.isArray(registry.releases)) {
+  throw new Error('build-curriculum: invalid production release registry')
+}
+const activeReleases = registry.releases.filter((release) => release?.status === 'active')
+if (activeReleases.length !== 1
+  || activeReleases[0].version !== registry.currentRelease
+  || activeReleases[0].sourceDirectory !== registry.currentRelease) {
+  throw new Error('build-curriculum: production release registry must identify exactly one current active release')
+}
+const VERSION = registry.currentRelease
 const SOURCE = resolve(process.cwd(), 'curriculum-content/manuel-academy', VERSION)
 const OUT = resolve(process.cwd(), 'public/curriculum', VERSION)
 

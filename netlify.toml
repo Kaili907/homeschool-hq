@@ -88,6 +88,11 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/v1/production-readiness"
+  to = "/.netlify/functions/admin-production-readiness"
+  status = 200
+
+[[redirects]]
   from = "/api/admin/curriculum/*"
   to = "/.netlify/functions/admin-curriculum/:splat"
   status = 200

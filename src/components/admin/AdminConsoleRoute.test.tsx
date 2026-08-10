@@ -25,6 +25,9 @@ describe('Admin Console integration route', () => {
     ['/academy/admin/system-health', 'system-health'],
     ['/academy/admin/configuration', 'configuration'],
     ['/academy/admin/audit-log', 'audit-log'],
+    ['/academy/admin/production-readiness', 'releases'],
+    ['/academy/admin/readiness', 'releases'],
+    ['/academy/admin/releases', 'releases'],
   ] as const)('maps %s to %s', (pathname, section) => {
     expect(adminRouteSection(pathname)).toBe(section)
   })

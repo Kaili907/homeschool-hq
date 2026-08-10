@@ -35,6 +35,7 @@ const NAVIGATION: readonly { id: AdminSection; label: string; capability: AdminC
   { id: 'curriculum', label: 'Curriculum', capability: 'curriculum:read' },
   { id: 'configuration', label: 'Configuration', capability: 'configuration:read' },
   { id: 'audit-log', label: 'Audit Log', capability: 'audit:read' },
+  { id: 'releases', label: 'Production Readiness', capability: 'releases:read' },
 ]
 
 const PRESET_LABELS: Record<OverviewPreset, string> = {
