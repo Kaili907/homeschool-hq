@@ -14,7 +14,7 @@ export type CurriculumStagingBlockingReason =
 export interface CurriculumStagedCandidate {
   readonly stagingId: string
   readonly status: 'staged'
-  readonly publicationStatus: 'not_published'
+  readonly publicationStatus: 'not_published' | 'published'
   readonly validationSnapshotId: string
   readonly approvalId: string
   readonly entityCounts: Readonly<Record<string, number>>

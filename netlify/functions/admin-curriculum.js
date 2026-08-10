@@ -9,6 +9,7 @@ import {
 } from './_shared/admin-curriculum-integrity.js'
 import { createAdminCurriculumRegistryReader } from './_shared/admin-curriculum-registry-reader.js'
 import { createAdminCurriculumStagingPersistence } from './_shared/admin-curriculum-staging.js'
+import { createAdminCurriculumPublishingPersistence } from './_shared/admin-curriculum-publishing.js'
 import { createAdminCurriculumStudioService } from './_shared/admin-curriculum-studio.js'
 import { createAdminCurriculumPreviewService } from './_shared/admin-curriculum-preview.js'
 import {
@@ -77,6 +78,9 @@ function draftRoute(resource) {
   if (segments.length === 3 && segments[2] === 'staging') {
     return { kind: 'draft-staging', draftId }
   }
+  if (segments.length === 3 && segments[2] === 'publishing') {
+    return { kind: 'draft-publishing', draftId }
+  }
   if (
     segments.length === 4
     && segments[2] === 'standards-review'
@@ -135,7 +139,7 @@ function routeFromPath(path) {
     try {
       const segments = resource.split('/').map(decodeURIComponent)
       const version = segments[1]
-      if (!RELEASE_VERSION.test(version)) return null
+      if (!TARGET_VERSION.test(version)) return null
       if (segments.length === 2) return { kind: 'release', version }
       if (segments.length === 3 && segments[2] === 'authoring-index') {
         return { kind: 'release-authoring-index', version }
@@ -384,6 +388,15 @@ function parseStagingRequest(event, draftId) {
   }
 }
 
+function parsePublishingRequest(event, draftId) {
+  const body = exactBody(event, ['stagingId', 'idempotencyKey'])
+  return {
+    draftId,
+    stagingId: uuid(body.stagingId),
+    idempotencyKey: uuid(body.idempotencyKey),
+  }
+}
+
 function authoringMethod(route, method) {
   if (route.kind === 'drafts') return method === 'GET' || method === 'POST'
   if (route.kind === 'draft') return method === 'GET'
@@ -396,6 +409,7 @@ function authoringMethod(route, method) {
   if (route.kind === 'draft-standards-review') return method === 'GET'
   if (route.kind === 'draft-approval') return method === 'GET' || method === 'POST'
   if (route.kind === 'draft-staging') return method === 'GET' || method === 'POST'
+  if (route.kind === 'draft-publishing') return method === 'GET' || method === 'POST'
   return false
 }
 
@@ -410,9 +424,19 @@ function serviceError(error, unavailableCode = 'curriculum_authoring_unavailable
   if (error?.code === 'verified-principal') return errorResponse(422, 'verified_admin_principal_required')
   if (error?.code === 'last-editor') return errorResponse(422, 'last_editor_required')
   if (error?.code === 'already-assigned') return errorResponse(409, 'collaborator_already_assigned')
-  if (error?.code === 'validation-blocked') return errorResponse(409, 'validation_blocked')
+  if (error?.code === 'validation-blocked') return errorResponse(
+    409,
+    unavailableCode === 'curriculum_publication_unavailable'
+      ? 'publication_validation_blocked'
+      : 'validation_blocked',
+  )
   if (error?.code === 'decision-conflict') return errorResponse(409, 'approval_transition_conflict')
   if (error?.code === 'gate-blocked') return errorResponse(409, 'staging_gate_blocked')
+  if (error?.code === 'artifact-invalid') return errorResponse(409, 'publication_artifact_invalid')
+  if (error?.code === 'manifest-mismatch') return errorResponse(409, 'publication_manifest_mismatch')
+  if (error?.code === 'package-mismatch') return errorResponse(409, 'publication_package_mismatch')
+  if (error?.code === 'approval-stale') return errorResponse(409, 'publication_approval_stale')
+  if (error?.code === 'human-review-blocked') return errorResponse(409, 'publication_human_review_blocked')
   if (error?.code === 'target-collision') return errorResponse(409, 'target_version_collision')
   if (error?.code === 'package-conflict') return errorResponse(409, 'staging_package_conflict')
   if (error?.code === 'revision-conflict') return errorResponse(409, 'revision_conflict')
@@ -464,6 +488,11 @@ export function createAdminCurriculumHandler(overrides = {}) {
     standardsReview,
   })
   const preview = overrides.preview ?? createAdminCurriculumPreviewService({ authoring, standardsReview })
+  const publishing = overrides.publishing ?? createAdminCurriculumPublishingPersistence({
+    env: overrides.env ?? process.env,
+    fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
+    client: overrides.publishingClient,
+  })
   const integrityEvidence = overrides.integrityEvidence ?? createAdminCurriculumIntegrityEvidenceReader({
     env: overrides.env ?? process.env,
     fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
@@ -529,7 +558,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
         event,
         route.kind === 'draft-approval' && writing
           ? 'curriculum:approve'
-          : route.kind === 'draft-staging' && writing
+          : (route.kind === 'draft-staging' || route.kind === 'draft-publishing') && writing
             ? 'curriculum:publish'
           : writing ? 'curriculum:drafts:write' : 'curriculum:read',
       )
@@ -577,6 +606,11 @@ export function createAdminCurriculumHandler(overrides = {}) {
         } else if (route.kind === 'draft-staging') {
           const input = parseStagingRequest(event, route.draftId)
           value = await studio.stageDraft(actor, input.draftId, input.draftRevision, input.idempotencyKey)
+        } else if (route.kind === 'draft-publishing' && event.httpMethod === 'GET') {
+          value = await publishing.read(actor, route.draftId)
+        } else if (route.kind === 'draft-publishing') {
+          const input = parsePublishingRequest(event, route.draftId)
+          value = await publishing.publish(actor, input.stagingId, input.idempotencyKey)
         } else if (route.kind === 'draft-entity') {
           value = await authoring.updateEntity(actor, parseUpdateEntity(event, route))
         } else {
@@ -584,7 +618,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
         }
         return jsonResponse(
           writing && value.replayed === false
-            && ['drafts', 'draft-entities', 'draft-collaborators', 'draft-approval', 'draft-staging'].includes(route.kind)
+            && ['drafts', 'draft-entities', 'draft-collaborators', 'draft-approval', 'draft-staging', 'draft-publishing'].includes(route.kind)
             ? 201 : 200,
           value,
         )
@@ -597,6 +631,8 @@ export function createAdminCurriculumHandler(overrides = {}) {
             ? 'curriculum_approval_unavailable'
             : route.kind === 'draft-staging'
               ? 'curriculum_staging_unavailable'
+              : route.kind === 'draft-publishing'
+                ? 'curriculum_publication_unavailable'
             : 'curriculum_authoring_unavailable',
         )
       }

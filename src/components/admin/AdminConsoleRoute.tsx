@@ -24,6 +24,7 @@ import { createCurriculumDraftAuthoringHttpSource } from '../../admin/curriculum
 import { createCurriculumApprovalHttpSource } from '../../admin/curriculum-approval/httpSource'
 import { createCurriculumStagingHttpSource } from '../../admin/curriculum-staging/httpSource'
 import { createCurriculumIntegrityHttpSource } from '../../admin/curriculum-integrity/httpSource'
+import { createCurriculumPublishingHttpSource } from '../../admin/curriculum-publishing/httpSource'
 import {
   createCurriculumStudioSource,
   CURRICULUM_STUDIO_NAVIGATION_REQUEST,
@@ -273,14 +274,16 @@ export function AdminConsoleRoute() {
   const curriculumApprovalSource = useMemo(() => createCurriculumApprovalHttpSource(), [])
   const curriculumStagingSource = useMemo(() => createCurriculumStagingHttpSource(), [])
   const curriculumIntegritySource = useMemo(() => createCurriculumIntegrityHttpSource(), [])
+  const curriculumPublishingSource = useMemo(() => createCurriculumPublishingHttpSource(), [])
   const curriculumStudioSource = useMemo(
     () => createCurriculumStudioSource(
       curriculumSource,
       curriculumAuthoringSource,
       curriculumApprovalSource,
       curriculumStagingSource,
+      curriculumPublishingSource,
     ),
-    [curriculumApprovalSource, curriculumAuthoringSource, curriculumSource, curriculumStagingSource],
+    [curriculumApprovalSource, curriculumAuthoringSource, curriculumPublishingSource, curriculumSource, curriculumStagingSource],
   )
   const standardsReviewSource = useMemo(() => createCurriculumStandardsReviewHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])

@@ -112,4 +112,54 @@ describe('ADMIN-16A curriculum registry reader', () => {
     await expect(createAdminCurriculumRegistryReader({ client: errorClient }).list())
       .rejects.toThrow('curriculum_registry_unavailable')
   })
+
+  it('reads staged-publish registry metadata without exposing embedded artifact bodies', async () => {
+    const stagingId = '20000000-0000-4000-8000-000000000001'
+    const stagedSummary = {
+      ...summary,
+      version: '2.0.0-rc.1',
+      authoredOn: null,
+      provenanceClass: 'staged_publish',
+      sourceCommit: null,
+      sourceRoot: null,
+      stagingId,
+      fileCount: 1,
+      byteCount: 2,
+    }
+    const values = {
+      ...projections,
+      academy_admin_list_curriculum_releases_v1: { schemaVersion: 1, releases: [summary, stagedSummary] },
+      academy_admin_read_curriculum_release_v1: {
+        schemaVersion: 1,
+        ...stagedSummary,
+        digests: projections.academy_admin_read_curriculum_release_v1.digests,
+        publicationEvidence: {
+          stagingId,
+          contentHash: hash,
+          manifestHash: hash,
+          packageHash: hash,
+          activationStatus: 'not_active',
+        },
+        gradeCounts,
+        files: [{
+          path: 'snapshot/manifest.json',
+          byteCount: 2,
+          sha256: hash,
+          contentType: 'application/json',
+          safeClassification: 'immutable_embedded_json',
+          immutableLocator: `curriculum_registry:${stagingId}:snapshot/manifest.json`,
+          contents: 'must not cross the metadata reader',
+        }],
+      },
+    }
+    const reader = createAdminCurriculumRegistryReader({ client: clientFor(values) })
+    await expect(reader.list()).resolves.toMatchObject({ releases: [{ version: '1.0.0' }, { version: '2.0.0-rc.1' }] })
+    const detail = await reader.details('2.0.0-rc.1')
+    expect(detail).toMatchObject({
+      version: '2.0.0-rc.1', provenanceClass: 'staged_publish', stagingId,
+      publicationEvidence: { activationStatus: 'not_active' },
+      files: [{ safeClassification: 'immutable_embedded_json' }],
+    })
+    expect(JSON.stringify(detail)).not.toContain('must not cross')
+  })
 })

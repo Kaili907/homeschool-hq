@@ -1,0 +1,11 @@
+{
+  "migration": "supabase/migrations/20260810160000_academy_curriculum_release_publishing.sql",
+  "sha256": "ba9291c66af40dcc693532aef6db94f9bc4fa5b6937369407c8a3a7de2d5dece",
+  "status": "repository-only-not-applied-hosted",
+  "dependsOn": [
+    "20260809160000_academy_curriculum_release_registry.sql",
+    "20260810140000_academy_curriculum_human_approval.sql",
+    "20260810150000_academy_curriculum_release_staging.sql"
+  ],
+  "terminalState": "PUBLISHED, NOT ACTIVE"
+}

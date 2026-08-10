@@ -11,6 +11,7 @@ import type {
 } from '../curriculum-authoring/contracts'
 import type { CurriculumApprovalSource } from '../curriculum-approval/contracts'
 import type { CurriculumStagingSource } from '../curriculum-staging/contracts'
+import type { CurriculumPublishingSource } from '../curriculum-publishing/contracts'
 import {
   CurriculumStudio,
   CurriculumStudioView,
@@ -182,11 +183,16 @@ function stagingSource(): CurriculumStagingSource {
   return { readStaging: vi.fn(), stageDraft: vi.fn() }
 }
 
+function publishingSource(): CurriculumPublishingSource {
+  return { readPublication: vi.fn(), publishStaged: vi.fn() }
+}
+
 const studioSource = createCurriculumStudioSource(
   { loadCatalog: vi.fn(async () => catalog) },
   authoringSource(),
   approvalSource(),
   stagingSource(),
+  publishingSource(),
 )
 
 describe('Curriculum Studio shell', () => {
@@ -420,7 +426,7 @@ describe('Curriculum Studio shell', () => {
   it('fails closed before curriculum read authorization and never calls the source during render', () => {
     const loadPublishedCatalog = vi.fn()
     const markup = renderToStaticMarkup(
-      <CurriculumStudio authorization={{ status: 'denied' }} source={{ ...authoringSource(), ...approvalSource(), ...stagingSource(), loadPublishedCatalog }} />,
+      <CurriculumStudio authorization={{ status: 'denied' }} source={{ ...authoringSource(), ...approvalSource(), ...stagingSource(), ...publishingSource(), loadPublishedCatalog }} />,
     )
     expect(markup).toContain('Curriculum Studio access unavailable')
     expect(markup).toContain('No hierarchy or draft metadata was loaded')
@@ -431,7 +437,7 @@ describe('Curriculum Studio shell', () => {
   it('combines the published read with the real draft authoring seam', async () => {
     const loadCatalog = vi.fn(async () => catalog)
     const draftSource = authoringSource()
-    const source = createCurriculumStudioSource({ loadCatalog }, draftSource, approvalSource(), stagingSource())
+    const source = createCurriculumStudioSource({ loadCatalog }, draftSource, approvalSource(), stagingSource(), publishingSource())
     await expect(source.loadPublishedCatalog()).resolves.toBe(catalog)
     await expect(source.listDrafts()).resolves.toEqual({ schemaVersion: 1, drafts: [] })
     expect(loadCatalog).toHaveBeenCalledOnce()
