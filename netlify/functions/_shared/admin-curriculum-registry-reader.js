@@ -138,6 +138,14 @@ function adaptDetails(value) {
 }
 
 function adaptPointer(value) {
+  const historical = value?.changeKind === 'migration_seed'
+    && value?.bindingMode === 'registry_only'
+    && value?.registryOnly === true
+    && value?.runtimeBinding === 'hard-coded'
+  const studyBound = ['bridge_activation', 'activate', 'rollback'].includes(value?.changeKind)
+    && value?.bindingMode === 'study_new_sessions'
+    && value?.registryOnly === false
+    && value?.runtimeBinding === 'study-new-sessions'
   if (
     !isRecord(value)
     || value.schemaVersion !== 1
@@ -147,10 +155,7 @@ function adaptPointer(value) {
     || !VERSION.test(value.releaseVersion)
     || integer(value.revision) === null
     || value.revision < 1
-    || value.changeKind !== 'migration_seed'
-    || value.bindingMode !== 'registry_only'
-    || value.registryOnly !== true
-    || value.runtimeBinding !== 'hard-coded'
+    || (!historical && !studyBound)
     || timestamp(value.registeredAt) === null
   ) return null
   return Object.freeze({
@@ -161,7 +166,7 @@ function adaptPointer(value) {
     revision: value.revision,
     changeKind: value.changeKind,
     bindingMode: value.bindingMode,
-    registryOnly: true,
+    registryOnly: value.registryOnly,
     runtimeBinding: value.runtimeBinding,
     registeredAt: value.registeredAt,
   })

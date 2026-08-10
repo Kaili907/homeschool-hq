@@ -1,8 +1,14 @@
 # Immutable curriculum release registry
 
-ADMIN-16A adds metadata custody for the already-published Manuel Academy
+ADMIN-16A originally added metadata custody for the already-published Manuel Academy
 curriculum release. It does not add drafts, editing, validation runs, preview
 builds, approvals, publish jobs, activation history, or any pointer mutation.
+
+The later Study/Admin bridge is documented in
+`docs/study-release-registry-bridge.md`. It leaves the ADMIN-16A release and
+revision-1 pointer rows immutable, evolves the pointer relation into append-only
+history, and makes its latest production revision authoritative only for new
+Study sessions.
 
 ## Registered release
 
@@ -77,10 +83,12 @@ read RPCs using `service_role`; browser roles have no RPC execution grant. The
 detail response contains custody metadata, not file contents. There is no
 activate, rollback, pointer update, draft, or publish endpoint.
 
-The pointer response explicitly returns `bindingMode: registry_only`,
-`registryOnly: true`, and `runtimeBinding: hard-coded`. The learner runtime
-continues to use `ACADEMY_RELEASE_VERSION = '1.0.0'` and does not query the
-registry pointer.
+At the ADMIN-16A migration boundary, the pointer response returns
+`bindingMode: registry_only`, `registryOnly: true`, and
+`runtimeBinding: hard-coded`. After the additive Study/Admin bridge, the latest
+pointer returns `bindingMode: study_new_sessions`, `registryOnly: false`, and
+`runtimeBinding: study-new-sessions`. Existing Study sessions continue to use
+their immutable snapshot and never follow a later pointer revision.
 
 ## Local verification and dependency boundary
 

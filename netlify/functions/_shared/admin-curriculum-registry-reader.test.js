@@ -48,12 +48,12 @@ const projections = {
     environment: 'production',
     packageId: summary.packageId,
     releaseVersion: '1.0.0',
-    revision: 1,
-    changeKind: 'migration_seed',
-    bindingMode: 'registry_only',
-    registryOnly: true,
-    runtimeBinding: 'hard-coded',
-    registeredAt: '2026-08-09T16:00:00.000Z',
+    revision: 2,
+    changeKind: 'bridge_activation',
+    bindingMode: 'study_new_sessions',
+    registryOnly: false,
+    runtimeBinding: 'study-new-sessions',
+    registeredAt: '2026-08-10T15:30:00.000Z',
   },
 }
 
@@ -72,13 +72,33 @@ describe('ADMIN-16A curriculum registry reader', () => {
     await expect(reader.list()).resolves.toMatchObject({ schemaVersion: 1, releases: [{ version: '1.0.0' }] })
     await expect(reader.details('1.0.0')).resolves.toMatchObject({ version: '1.0.0', files: [{ path: 'README.md' }] })
     await expect(reader.productionPointer()).resolves.toMatchObject({
-      releaseVersion: '1.0.0', registryOnly: true, runtimeBinding: 'hard-coded',
+      releaseVersion: '1.0.0', registryOnly: false, runtimeBinding: 'study-new-sessions',
     })
     expect(client.rpc.mock.calls).toEqual([
       ['academy_admin_list_curriculum_releases_v1', { p_required_capability: 'curriculum:read' }],
       ['academy_admin_read_curriculum_release_v1', { p_version: '1.0.0', p_required_capability: 'curriculum:read' }],
       ['academy_admin_read_curriculum_production_pointer_v1', { p_required_capability: 'curriculum:read' }],
     ])
+  })
+
+  it('accepts the historical registry-only seed while rejecting mixed authority states', async () => {
+    const historical = structuredClone(projections)
+    historical.academy_admin_read_curriculum_production_pointer_v1 = {
+      ...historical.academy_admin_read_curriculum_production_pointer_v1,
+      revision: 1,
+      changeKind: 'migration_seed',
+      bindingMode: 'registry_only',
+      registryOnly: true,
+      runtimeBinding: 'hard-coded',
+      registeredAt: '2026-08-09T16:00:00.000Z',
+    }
+    await expect(createAdminCurriculumRegistryReader({ client: clientFor(historical) })
+      .productionPointer()).resolves.toMatchObject({ registryOnly: true })
+
+    const mixed = structuredClone(projections)
+    mixed.academy_admin_read_curriculum_production_pointer_v1.registryOnly = true
+    await expect(createAdminCurriculumRegistryReader({ client: clientFor(mixed) })
+      .productionPointer()).rejects.toThrow('curriculum_registry_unavailable')
   })
 
   it('allowlists metadata fields and never copies unknown source data', async () => {

@@ -13,8 +13,10 @@ const files = [
   './migrations/20260801170000_academy_study_adult_review_operations.sql',
   './migrations/20260801190000_academy_study_final_production_reconciliation.sql',
   './tests/study_engine_fixtures.sql',
+  './migrations/20260809160000_academy_curriculum_release_registry.sql',
   './migrations/20260810120000_academy_study_effective_settings_v2.sql',
   './migrations/20260810150000_academy_study_curriculum_binding.sql',
+  './migrations/20260810153000_academy_study_release_registry_bridge.sql',
 ] as const
 
 const sql = Promise.all(files.map((path) =>
@@ -24,8 +26,10 @@ const GUARDIAN_B = '00000000-0000-0000-0000-0000000000b1'
 const HOUSEHOLD_A = '00000000-0000-0000-0000-000000000011'
 const STUDENT_A = '00000000-0000-0000-0000-000000000101'
 const RELEASE_ID = '16000000-0000-4000-8000-000000000001'
+const RELEASE_2_ID = '26000000-0000-4000-8000-000000000002'
 const MANIFEST_SHA =
   '54c622ac0f745f88ef4eecb359e5f4f411cf1d8c7f48899fd5fcabb32b019c7b'
+const MANIFEST_2_SHA = 'b'.repeat(64)
 
 let database: PGlite
 let sessionDigest: string
@@ -128,6 +132,68 @@ function sessionBegin(
   })
 }
 
+async function registerRelease2() {
+  await database.exec(`
+    insert into public.academy_curriculum_releases (
+      release_id, package_id, version, status, registered_at, authored_on,
+      provenance_class, source_commit, source_root,
+      package_manifest_sha256, checksum_manifest_sha256,
+      curriculum_manifest_sha256, file_inventory_sha256,
+      file_count, byte_count, course_count, unit_count, lesson_count,
+      assessment_count, text_count, schedule_count,
+      grade_5_course_count, grade_5_unit_count, grade_5_lesson_count,
+      grade_5_assessment_count, grade_5_text_count, grade_5_schedule_count,
+      grade_7_course_count, grade_7_unit_count, grade_7_lesson_count,
+      grade_7_assessment_count, grade_7_text_count, grade_7_schedule_count,
+      grade_8_course_count, grade_8_unit_count, grade_8_lesson_count,
+      grade_8_assessment_count, grade_8_text_count, grade_8_schedule_count
+    )
+    select
+      '${RELEASE_2_ID}', 'manuel-academy-grades-5-7-8-curriculum-v2',
+      '2.0.0', 'published', '2026-08-10T15:35:00Z', '2026-08-10',
+      'legacy_import', '${'2'.repeat(40)}',
+      'curriculum-content/manuel-academy/2.0.0',
+      '${'a'.repeat(64)}', '${'c'.repeat(64)}', '${MANIFEST_2_SHA}',
+      '${'d'.repeat(64)}',
+      1, 1, course_count, unit_count, lesson_count,
+      assessment_count, text_count, schedule_count,
+      grade_5_course_count, grade_5_unit_count, grade_5_lesson_count,
+      grade_5_assessment_count, grade_5_text_count, grade_5_schedule_count,
+      grade_7_course_count, grade_7_unit_count, grade_7_lesson_count,
+      grade_7_assessment_count, grade_7_text_count, grade_7_schedule_count,
+      grade_8_course_count, grade_8_unit_count, grade_8_lesson_count,
+      grade_8_assessment_count, grade_8_text_count, grade_8_schedule_count
+    from public.academy_curriculum_releases
+    where version = '1.0.0';
+    insert into public.academy_curriculum_release_files (
+      release_id, relative_path, byte_count, sha256, content_type,
+      safe_classification, immutable_locator
+    ) values (
+      '${RELEASE_2_ID}', 'curriculum-manifest.json', 1,
+      '${MANIFEST_2_SHA}', 'application/json',
+      'metadata_only_internal_source',
+      'git_commit_path:${'2'.repeat(40)}:curriculum-content/manuel-academy/2.0.0/curriculum-manifest.json'
+    );
+  `)
+}
+
+async function appendProductionPointer(
+  releaseId: string,
+  revision: number,
+  changeKind: 'activate' | 'rollback',
+  registeredAt: string,
+) {
+  await database.exec(`
+    insert into public.academy_curriculum_active_pointers (
+      environment, release_id, revision, change_kind, binding_mode,
+      registered_at
+    ) values (
+      'production', '${releaseId}', ${revision}, '${changeKind}',
+      'study_new_sessions', '${registeredAt}'
+    )
+  `)
+}
+
 beforeAll(async () => {
   database = await PGlite.create()
   await database.exec(bootstrap)
@@ -168,7 +234,7 @@ beforeAll(async () => {
 afterAll(async () => database?.close())
 
 describe.sequential('Study immutable curriculum release binding', () => {
-  it('records a private immutable approval and reports binding readiness', async () => {
+  it('uses the immutable Admin registry directly and reports binding readiness', async () => {
     const readiness = await service(() => rpc<Record<string, unknown>>(
       'select public.academy_study_curriculum_binding_readiness_v1() as result',
     ))
@@ -176,36 +242,67 @@ describe.sequential('Study immutable curriculum release binding', () => {
 
     const custody = await database.query<{
       release_id: string
-      release_version: string
+      version: string
       curriculum_manifest_sha256: string
       curriculum_binding_version: number
       browser_grants: number
+      private_approval: string | null
+      pointer_revision: number
+      pointer_mode: string
     }>(`
-      select approval.release_id, approval.release_version,
-        approval.curriculum_manifest_sha256,
+      select release.release_id, release.version,
+        release.curriculum_manifest_sha256,
         metadata.curriculum_binding_version,
         (select count(*)::integer
           from information_schema.role_table_grants
-          where table_schema = 'academy_private'
-            and table_name = 'study_curriculum_release_approvals'
+          where table_schema = 'public'
+            and table_name in (
+              'academy_curriculum_releases',
+              'academy_curriculum_active_pointers'
+            )
             and grantee in ('anon', 'authenticated', 'service_role'))
-          as browser_grants
-      from academy_private.study_curriculum_release_approvals as approval
+          as browser_grants,
+        to_regclass('academy_private.study_curriculum_release_approvals')::text
+          as private_approval,
+        pointer.revision as pointer_revision,
+        pointer.binding_mode as pointer_mode
+      from public.academy_curriculum_releases as release
       cross join academy_private.study_persistence_metadata as metadata
-      where metadata.singleton
+      join public.academy_curriculum_active_pointers as pointer
+        on pointer.release_id = release.release_id
+       and pointer.environment = 'production'
+       and pointer.revision = 2
+      where metadata.singleton and release.version = '1.0.0'
     `)
     expect(custody.rows).toEqual([{
       release_id: RELEASE_ID,
-      release_version: '1.0.0',
+      version: '1.0.0',
       curriculum_manifest_sha256: MANIFEST_SHA,
-      curriculum_binding_version: 1,
+      curriculum_binding_version: 2,
       browser_grants: 0,
+      private_approval: null,
+      pointer_revision: 2,
+      pointer_mode: 'study_new_sessions',
     }])
     await expect(database.exec(`
-      update academy_private.study_curriculum_release_approvals
-      set release_version = '1.0.1'
+      update public.academy_curriculum_releases
+      set version = '1.0.1'
       where release_id = '${RELEASE_ID}'::uuid
     `)).rejects.toThrow(/immutable/i)
+    await expect(database.exec(`
+      update public.academy_curriculum_active_pointers
+      set release_id = '${RELEASE_2_ID}'::uuid
+      where environment = 'production' and revision = 2
+    `)).rejects.toThrow(/immutable/i)
+    await expect(database.exec(`
+      insert into public.academy_curriculum_active_pointers (
+        environment, release_id, revision, change_kind, binding_mode,
+        registered_at
+      ) values (
+        'production', '${RELEASE_ID}', 4, 'activate',
+        'study_new_sessions', '2026-08-10T15:31:00Z'
+      )
+    `)).rejects.toThrow(/revision/i)
   })
 
   it('resolves and snapshots a new session binding on the trusted server', async () => {
@@ -246,6 +343,29 @@ describe.sequential('Study immutable curriculum release binding', () => {
       curriculum_release_version: '1.0.0',
       curriculum_manifest_sha256: MANIFEST_SHA,
     })
+    await expect(database.exec(`
+      insert into public.academy_study_sessions (
+        id, schema_version, household_id, student_id, lesson_id, subject_id,
+        study_plan_id, state, started_at, completed_at,
+        intended_local_date, household_timezone, created_by,
+        curriculum_binding_schema_version, curriculum_release_id,
+        curriculum_package_id, curriculum_release_version,
+        curriculum_manifest_sha256
+      )
+      select
+        'session-forged-manifest', schema_version, household_id, student_id,
+        'lesson-forged-manifest', subject_id, study_plan_id, state, started_at,
+        completed_at, intended_local_date, household_timezone, created_by,
+        curriculum_binding_schema_version, curriculum_release_id,
+        curriculum_package_id, curriculum_release_version, '${'f'.repeat(64)}'
+      from public.academy_study_sessions
+      where id = 'session-bound-a'
+    `)).rejects.toThrow(/foreign key|constraint/i)
+    expect((await database.query<{ count: number }>(`
+      select count(*)::integer as count
+      from public.academy_study_sessions
+      where id = 'session-forged-manifest'
+    `)).rows[0].count).toBe(0)
   })
 
   it('returns bounded missing, unsupported, unavailable, and mismatch results', async () => {
@@ -268,6 +388,41 @@ describe.sequential('Study immutable curriculum release binding', () => {
     await expect(sessionBegin('session-unsupported', '9.9.9')).resolves.toMatchObject({
       body: { status: 'unavailable', reasonCode: 'curriculum-release-unsupported' },
     })
+    await expect(database.exec(`
+      insert into public.academy_curriculum_releases (
+        release_id, package_id, version, status, registered_at,
+        provenance_class, source_commit, source_root,
+        package_manifest_sha256, checksum_manifest_sha256,
+        curriculum_manifest_sha256, file_inventory_sha256,
+        file_count, byte_count, course_count, unit_count, lesson_count,
+        assessment_count, text_count, schedule_count,
+        grade_5_course_count, grade_5_unit_count, grade_5_lesson_count,
+        grade_5_assessment_count, grade_5_text_count, grade_5_schedule_count,
+        grade_7_course_count, grade_7_unit_count, grade_7_lesson_count,
+        grade_7_assessment_count, grade_7_text_count, grade_7_schedule_count,
+        grade_8_course_count, grade_8_unit_count, grade_8_lesson_count,
+        grade_8_assessment_count, grade_8_text_count, grade_8_schedule_count
+      )
+      select
+        '36000000-0000-4000-8000-000000000003', 'draft-package',
+        '3.0.0', 'draft', '2026-08-10T15:34:00Z',
+        provenance_class, '${'3'.repeat(40)}',
+        'curriculum-content/manuel-academy/3.0.0',
+        package_manifest_sha256, checksum_manifest_sha256,
+        curriculum_manifest_sha256, file_inventory_sha256,
+        file_count, byte_count, course_count, unit_count, lesson_count,
+        assessment_count, text_count, schedule_count,
+        grade_5_course_count, grade_5_unit_count, grade_5_lesson_count,
+        grade_5_assessment_count, grade_5_text_count, grade_5_schedule_count,
+        grade_7_course_count, grade_7_unit_count, grade_7_lesson_count,
+        grade_7_assessment_count, grade_7_text_count, grade_7_schedule_count,
+        grade_8_course_count, grade_8_unit_count, grade_8_lesson_count,
+        grade_8_assessment_count, grade_8_text_count, grade_8_schedule_count
+      from public.academy_curriculum_releases where version = '1.0.0'
+    `)).rejects.toThrow()
+    await expect(sessionBegin('session-draft', '3.0.0')).resolves.toMatchObject({
+      body: { status: 'unavailable', reasonCode: 'curriculum-release-unsupported' },
+    })
 
     await database.exec(`
       update public.academy_subject_enrollments
@@ -286,22 +441,17 @@ describe.sequential('Study immutable curriculum release binding', () => {
       update public.academy_subject_enrollments
       set curriculum_version = '1.0.0'
       where id = '15000000-0000-4000-8000-000000000001'::uuid;
-      insert into academy_private.study_curriculum_release_approvals (
-        release_id, package_id, release_version,
-        curriculum_manifest_sha256, approval_state, approval_basis, approved_at
-      ) values (
-        '26000000-0000-4000-8000-000000000002',
-        'manuel-academy-grades-5-7-8-curriculum-v2', '2.0.0',
-        '${'b'.repeat(64)}', 'approved', 'published-immutable-package',
-        '2026-08-10T15:05:00Z'
-      );
     `)
+    await registerRelease2()
     await expect(sessionBegin('session-mismatch', '2.0.0')).resolves.toMatchObject({
       body: { status: 'unavailable', reasonCode: 'curriculum-release-mismatch' },
     })
     expect((await database.query<{ count: number }>(`
       select count(*)::integer as count from public.academy_study_sessions
-      where id in ('session-missing-release', 'session-unsupported', 'session-mismatch')
+      where id in (
+        'session-missing-release', 'session-unsupported', 'session-draft',
+        'session-mismatch'
+      )
     `)).rows[0].count).toBe(0)
   })
 
@@ -328,6 +478,9 @@ describe.sequential('Study immutable curriculum release binding', () => {
         'calendar-bound-resume-create'
       )
     `)
+    await appendProductionPointer(
+      RELEASE_2_ID, 3, 'activate', '2026-08-10T15:40:00Z',
+    )
 
     await expect(runtime('student:progress:read', 'checkpoint:read', {
       sessionId: 'session-bound-a',
@@ -361,6 +514,61 @@ describe.sequential('Study immutable curriculum release binding', () => {
         curriculumBinding: { status: 'bound', releaseVersion: '2.0.0' },
       },
     })
+    await appendProductionPointer(
+      RELEASE_ID, 4, 'rollback', '2026-08-10T15:50:00Z',
+    )
+    const pointer = await service(() => rpc<Record<string, unknown>>(`
+      select public.academy_admin_read_curriculum_production_pointer_v1(
+        'curriculum:read'
+      ) as result
+    `))
+    expect(pointer).toMatchObject({
+      releaseVersion: '1.0.0',
+      revision: 4,
+      changeKind: 'rollback',
+      bindingMode: 'study_new_sessions',
+      registryOnly: false,
+      runtimeBinding: 'study-new-sessions',
+    })
+    await database.exec(`
+      update public.academy_subject_enrollments
+      set curriculum_version = '1.0.0'
+      where id = '15000000-0000-4000-8000-000000000001'::uuid
+    `)
+    await expect(runtime('student:progress:read', 'checkpoint:read', {
+      sessionId: 'session-after-update-new',
+      curriculumReleaseVersion: '2.0.0',
+    })).resolves.toMatchObject({
+      body: {
+        curriculumBinding: { status: 'bound', releaseVersion: '2.0.0' },
+      },
+    })
+    await expect(sessionBegin('session-after-rollback-newer', '2.0.0')).resolves.toMatchObject({
+      body: { status: 'unavailable', reasonCode: 'curriculum-release-mismatch' },
+    })
+    await expect(sessionBegin('session-after-rollback-restored', '1.0.0')).resolves.toMatchObject({
+      body: {
+        status: 'created',
+        curriculumBinding: { status: 'bound', releaseVersion: '1.0.0' },
+      },
+    })
+    const pinned = await database.query<{
+      id: string
+      curriculum_release_version: string
+    }>(`
+      select id, curriculum_release_version
+      from public.academy_study_sessions
+      where id in (
+        'session-bound-a', 'session-after-update-new',
+        'session-after-rollback-restored'
+      )
+      order by id
+    `)
+    expect(pinned.rows).toEqual([
+      { id: 'session-after-rollback-restored', curriculum_release_version: '1.0.0' },
+      { id: 'session-after-update-new', curriculum_release_version: '2.0.0' },
+      { id: 'session-bound-a', curriculum_release_version: '1.0.0' },
+    ])
   })
 
   it('classifies legacy sessions for manual review without fabricating a release', async () => {
@@ -446,6 +654,18 @@ describe.sequential('Study immutable curriculum release binding', () => {
         '${STUDENT_A}', 'math', '2026-08-10', '2.0.0'
       ) as result
     `))).rejects.toThrow()
+    for (const role of ['authenticated', 'service_role'] as const) {
+      await expect(asRole(role, role === 'authenticated' ? GUARDIAN_A : null, () =>
+        database.exec(`
+          insert into public.academy_curriculum_active_pointers (
+            environment, release_id, revision, change_kind, binding_mode,
+            registered_at
+          ) values (
+            'production', '${RELEASE_2_ID}', 5, 'activate',
+            'study_new_sessions', '2026-08-10T16:00:00Z'
+          )
+        `))).rejects.toThrow()
+    }
 
     const settings = await guardian(GUARDIAN_A, () => rpc<Record<string, unknown>>(`
       select public.academy_study_effective_settings_v2(
