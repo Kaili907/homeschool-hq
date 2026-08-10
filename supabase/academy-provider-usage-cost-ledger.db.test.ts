@@ -14,6 +14,9 @@ async function createDatabase() {
     create role authenticated nologin;
     create role service_role nologin bypassrls;
     create schema auth authorization postgres;
+    create function auth.uid() returns uuid language sql stable set search_path = pg_catalog as $$
+      select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid
+    $$;
     create table auth.users (id uuid primary key);
     create table public.academy_households (id uuid primary key, status text not null);
     create table public.academy_students (
@@ -23,11 +26,14 @@ async function createDatabase() {
     insert into auth.users (id) values ('${ACCOUNT_ID}');
     insert into public.academy_households (id, status) values ('${HOUSEHOLD_ID}', 'active');
   `)
-  const migration = await readFile(
-    new URL('./migrations/20260808122000_academy_provider_usage_cost_ledger.sql', import.meta.url),
-    'utf8',
-  )
-  await database.exec(migration)
+  for (const name of [
+    '20260808122000_academy_provider_usage_cost_ledger.sql',
+    '20260810120000_academy_provider_attempt_journal.sql',
+    '20260810151000_academy_study_safety_provider_accounting.sql',
+  ]) {
+    const migration = await readFile(new URL(`./migrations/${name}`, import.meta.url), 'utf8')
+    await database.exec(migration)
+  }
   return database
 }
 
@@ -40,7 +46,7 @@ type UsageInput = {
   appVersion?: string
   engineVersion?: string | null
   curriculumVersion?: string | null
-  engine?: 'tutor' | 'jarvis' | 'tts'
+  engine?: 'tutor' | 'study' | 'jarvis' | 'tts'
   provider?: 'anthropic' | 'elevenlabs'
   product?: string
   model?: string
@@ -195,6 +201,50 @@ describe('Academy provider usage cost ledger v2', () => {
       { billing_unit: 'output_token', quantity: 200_000, price_micros: 15_000_000, calculated_cost_micros: '3000000' },
       { billing_unit: 'request', quantity: 1, price_micros: 25, calculated_cost_micros: '25' },
     ])
+  })
+
+  it('admits only Study safety as study/safety_classification and calculates authoritative usage', async () => {
+    const database = databases[0]
+    await insertCatalog(database)
+    const rate = {
+      product: 'claude-haiku-4-5', model: 'claude-haiku-4-5', tier: 'haiku',
+    }
+    await insertRate(database, { ...rate, unit: 'input_token', priceMicros: 2, unitQuantity: 1 })
+    await insertRate(database, { ...rate, unit: 'output_token', priceMicros: 3, unitQuantity: 1 })
+    await insertRate(database, { ...rate, unit: 'request', priceMicros: 5, unitQuantity: 1 })
+    await record(database, {
+      executionKey: 'study-safety-success',
+      engine: 'study',
+      engineVersion: 'study-safety-v1',
+      provider: 'anthropic',
+      product: 'claude-haiku-4-5',
+      model: 'claude-haiku-4-5',
+      tier: 'haiku',
+      inputTokens: 11,
+      outputTokens: 7,
+      cachedInputReadTokens: 0,
+      cachedInputWriteTokens: 0,
+    })
+
+    expect(await ledger(database, 'study-safety-success')).toMatchObject({
+      engine: 'study',
+      purpose: 'safety_classification',
+      provider: 'anthropic',
+      logical_model_tier: 'haiku',
+      cost_kind: 'calculated',
+    })
+    expect(String((await ledger(database, 'study-safety-success')).cost_micros)).toBe('48')
+    await expect(record(database, {
+      executionKey: 'study-wrong-provider',
+      engine: 'study',
+      provider: 'elevenlabs',
+      tier: null,
+      inputTokens: null,
+      outputTokens: null,
+      cachedInputReadTokens: null,
+      cachedInputWriteTokens: null,
+      ttsCharacters: 1,
+    })).rejects.toThrow(/invalid provider usage record/)
   })
 
   it('calculates request-only, single-usage-plus-request, cache-plus-request, and mixed AI pricing', async () => {

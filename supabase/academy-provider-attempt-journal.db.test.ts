@@ -30,6 +30,7 @@ async function createDatabase() {
   for (const name of [
     '20260808122000_academy_provider_usage_cost_ledger.sql',
     '20260810120000_academy_provider_attempt_journal.sql',
+    '20260810151000_academy_study_safety_provider_accounting.sql',
   ]) {
     const migration = await readFile(new URL(`./migrations/${name}`, import.meta.url), 'utf8')
     await database.exec(migration)
@@ -285,13 +286,14 @@ describe('Academy Provider Attempt Journal foundation', () => {
     ])
   })
 
-  it('represents Study safety as study/safety_classification and detects its ledger gap', async () => {
+  it('links Study safety only as study/safety_classification', async () => {
     const database = databases[0]
     const study = {
       engine: 'study', purpose: 'safety_classification', logicalModelTier: 'haiku',
       engineVersion: 'study.v1',
     }
     const attemptId = await readyOutcome(database, 'study-safety', study)
+    await recordLedger(database, 'ledger_study-safety', study)
     await linkLedger(database, attemptId, 'study-safety.link')
     const row = await database.query(
       `select engine, purpose, logical_model_tier from public.academy_provider_attempts
@@ -301,7 +303,14 @@ describe('Academy Provider Attempt Journal foundation', () => {
     expect(row.rows).toEqual([{
       engine: 'study', purpose: 'safety_classification', logical_model_tier: 'haiku',
     }])
-    expect((await states(database, attemptId)).at(-1)).toBe('gap_pending')
+    expect((await states(database, attemptId)).at(-1)).toBe('ledgered')
+    const usage = await database.query(
+      `select engine, purpose, logical_model_tier from public.academy_provider_usage_ledger
+       where execution_key = 'ledger_study-safety'`,
+    )
+    expect(usage.rows).toEqual([{
+      engine: 'study', purpose: 'safety_classification', logical_model_tier: 'haiku',
+    }])
     await expect(reserve(database, 'study-mislabeled', {
       engine: 'tutor', purpose: 'safety_classification', logicalModelTier: 'haiku',
     })).rejects.toThrow(/DIMENSIONS_INVALID/)

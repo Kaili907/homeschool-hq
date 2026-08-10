@@ -1,7 +1,7 @@
 # Provider Attempt Journal foundation
 
-Status: contract version 1 with Tutor, Jarvis, and premium TTS gateway
-instrumentation. The foundation migration is repository-only and has not been
+Status: contract version 1 with Tutor, Study safety, Jarvis, and premium TTS
+gateway instrumentation. The migrations are repository-only and have not been
 applied to hosted Supabase.
 
 ## Authority boundary
@@ -22,9 +22,9 @@ Provider dispatch integrations follow this ordering:
 5. append normalized outcome and accounting/reconciliation transitions.
 
 If reservation fails, Tutor and Jarvis use their existing safe gateway failure
-path, premium TTS falls through its existing voice-adapter behavior, and a
-future Study safety integration must fail closed rather than dispatching and
-later describing that call as fully accounted.
+path, premium TTS falls through its existing voice-adapter behavior, and Study
+safety returns its existing invalid classification so academic continuation
+remains fail closed. No provider dispatch occurs.
 
 ## Physical attempts and idempotency
 
@@ -103,10 +103,10 @@ reservation-before-occurrence ordering, account/household attribution,
 engine/version snapshots, provider product/model, and logical tier.
 
 A missing row creates `gap_pending`. A mismatched or already-linked row creates
-`reconciliation_conflict` and is not linked. Study safety can therefore be
-journaled truthfully today even though the current cost-ledger RPC does not yet
-admit `study`; the resulting gap stays visible instead of becoming a fabricated
-Tutor/Jarvis cost row.
+`reconciliation_conflict` and is not linked. The additive Study accounting
+migration admits only `study/safety_classification` for Anthropic usage. Missing
+or malformed provider usage and ledger persistence failure stay visible as gaps
+instead of becoming fabricated Tutor/Jarvis rows or invented token counts.
 
 `academy_read_provider_attempt_coverage_v1` is a service-only, `costs:read`
 projection over a bounded half-open range. It reports recorded attempts,
@@ -138,7 +138,7 @@ voice behavior, and pre-dispatch rejections do not reach this seam. The journal
 stores the server-owned ElevenLabs model identity, never the provider voice ID,
 text, or audio.
 
-Both handlers use `provider-gateway-attempt.js` for the same ordering: reserve,
+All three provider paths use `provider-gateway-attempt.js` for the same ordering: reserve,
 `dispatch_possible`, physical request, `outcome_observed`, authoritative usage
 ledger persistence, and journal linkage. A missing ledger becomes
 `gap_pending`; a mismatched or already-linked ledger becomes
@@ -147,20 +147,17 @@ than gateway inference. The coordinator accepts a stable logical operation,
 distinct physical execution key, and explicit retry index so any future
 internal retry produces its own attempt and usage receipt.
 
-## Remaining Study integration seam
+## Study safety integration
 
-Study is intentionally unchanged. Its physical request loop is
-`createAnthropicSafetyClassifier().classify()` in
-`netlify/functions/_shared/study-safety/provider.js`, immediately around the
-`fetchImpl(PROVIDER_URL, ...)` call. A later Study card must thread a
-content-free trusted accounting context from the authorized
-`study-safety-classify.js` request into that classifier, reserve separately
-inside the loop for every `attempt` value, and establish `dispatch_possible`
-before each fetch. Reservation/readiness failure must retain the current
-fail-closed invalid safety result.
+`createAnthropicSafetyClassifier().classify()` reserves inside its physical
+retry loop immediately before every Anthropic fetch. Retry indexes start at
+zero, share one content-free logical operation key, and use distinct derived
+physical execution and ledger keys. Reservation or dispatch-readiness failure
+prevents the fetch and returns the existing invalid fail-closed classification.
 
-That integration must remain `engine = study` and
-`purpose = safety_classification`. Before its successful provider receipts can
-be ledgered, the cost-ledger contract needs an additive, independently reviewed
-change admitting `study`; until then, journaled Study calls would truthfully end
-in `gap_pending`. No Study call is relabeled as Tutor or Jarvis.
+Every actual response is reduced to a bounded outcome. Only valid Anthropic
+usage counters from that response may reach the usage/cost ledger. A timeout,
+transport failure, missing/malformed usage, ledger failure, or absent link ends
+as `gap_pending`; none of those accounting states weakens or replaces the
+safety decision. Study remains `engine = study`,
+`purpose = safety_classification`, and `provider = anthropic` throughout.

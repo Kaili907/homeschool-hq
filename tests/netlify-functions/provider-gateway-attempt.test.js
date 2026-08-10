@@ -3,6 +3,7 @@ import {
   beginGatewayProviderAttempt,
   finishGatewayProviderAttempt,
   gatewayProviderAttemptIdentity,
+  gatewayProviderPhysicalExecutionKey,
 } from '../../netlify/functions/_shared/provider-gateway-attempt.js'
 import { createAnthropicHandler } from '../../netlify/functions/anthropic.js'
 import { createTtsHandler } from '../../netlify/functions/tts.js'
@@ -408,6 +409,20 @@ describe('real provider gateway attempt coordination', () => {
     expect(attempt1.ledgerExecutionKey).not.toBe(attempt0.ledgerExecutionKey)
     expect(attempt1.operationalExecutionKey).not.toBe(attempt0.operationalExecutionKey)
     expect([attempt0.physicalRetryIndex, attempt1.physicalRetryIndex]).toEqual([0, 1])
+  })
+
+  it('derives distinct content-free Study physical retry execution keys', () => {
+    const first = gatewayProviderPhysicalExecutionKey({
+      engine: 'study', logicalOperationSeed: 'study-operation', physicalRetryIndex: 0,
+    })
+    const second = gatewayProviderPhysicalExecutionKey({
+      engine: 'study', logicalOperationSeed: 'study-operation', physicalRetryIndex: 1,
+    })
+
+    expect(first).toMatch(/^study_[a-f0-9]{64}$/)
+    expect(second).toMatch(/^study_[a-f0-9]{64}$/)
+    expect(second).not.toBe(first)
+    expect(first).not.toContain('private')
   })
 
   it('journals Jarvis under its own engine and never stores private provider material', async () => {

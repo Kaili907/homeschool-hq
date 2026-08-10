@@ -69,7 +69,7 @@ export function gatewayProviderAttemptIdentity({
   physicalRetryIndex,
 }) {
   if (
-    !['tutor', 'jarvis', 'tts'].includes(engine)
+    !['tutor', 'study', 'jarvis', 'tts'].includes(engine)
     || typeof logicalOperationSeed !== 'string'
     || !EXECUTION_KEY_PATTERN.test(logicalOperationSeed)
     || typeof physicalExecutionKey !== 'string'
@@ -97,6 +97,27 @@ export function gatewayProviderAttemptIdentity({
       ledger: `ledger:${attemptDigest}`,
     }),
   })
+}
+
+/** Derive a distinct, content-free ledger/telemetry key for one physical retry. */
+export function gatewayProviderPhysicalExecutionKey({
+  engine,
+  logicalOperationSeed,
+  physicalRetryIndex,
+}) {
+  if (
+    !['tutor', 'study', 'jarvis', 'tts'].includes(engine)
+    || typeof logicalOperationSeed !== 'string'
+    || !EXECUTION_KEY_PATTERN.test(logicalOperationSeed)
+    || !Number.isSafeInteger(physicalRetryIndex)
+    || physicalRetryIndex < 0
+    || physicalRetryIndex > 100
+  ) {
+    throw serviceUnavailable()
+  }
+  return `${engine}_${digest(
+    `academy-provider-physical-execution\0${engine}\0${logicalOperationSeed}\0${physicalRetryIndex}`,
+  )}`
 }
 
 /** Bind the journal foundation to the same trusted service-role gateway client. */
