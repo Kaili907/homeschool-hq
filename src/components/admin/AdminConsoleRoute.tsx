@@ -13,6 +13,11 @@ import type {
 } from '../../admin/overviewModel'
 import { readAdminCosts, AdminCostsReadError } from '../../admin/costsHttpSource'
 import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/costsModel'
+import {
+  AdminProviderPricingHttpError,
+  readAdminProviderPricing,
+} from '../../admin/providerPricingHttpSource'
+import type { ProviderPricingReadState } from '../../admin/providerPricingModel'
 import { readAdminAuditPage, AdminAuditReadError } from '../../admin/auditHttpSource'
 import type { AdminAuditFilters, AdminAuditReadState } from '../../admin/auditLogModel'
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
@@ -38,6 +43,7 @@ import { readSystemHealth, type SystemHealthReadState } from '../../admin/system
 import type { SystemHealthWindow } from '../../admin/systemHealth'
 import { AdminConsole, AdminShell } from './AdminConsole'
 import { AdminCostsDashboard } from './AdminCostsDashboard'
+import { AdminProviderPricingDashboard } from './AdminProviderPricingDashboard'
 import { LearnerAnalytics } from './LearnerAnalytics'
 import { AdminSafetyOperations } from './AdminSafetyOperations'
 import { CurriculumValidationDashboard } from './CurriculumValidationDashboard'
@@ -45,13 +51,14 @@ import { EnginePerformanceDashboard } from './EnginePerformanceDashboard'
 import { SystemHealthDashboard } from './SystemHealthDashboard'
 import { AdminAuditLog } from './AdminAuditLog'
 
-export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
+export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'provider-pricing' | 'unknown'
 
 export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (!isAdminConsolePath(pathname)) return null
   const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
   if (!suffix) return 'overview'
   if (suffix === 'curriculum/validation') return 'curriculum-validation'
+  if (suffix === 'costs/provider-pricing') return 'provider-pricing'
   if (suffix === 'health' || suffix.startsWith('health/')) return 'system-health'
   const section = suffix.split('/')[0]
   return [
@@ -89,6 +96,8 @@ export function AdminConsoleRoute() {
   const [costRange, setCostRange] = useState<AdminCostRangeSelection>({ kind: 'preset', preset: 'today' })
   const [costsState, setCostsState] = useState<AdminCostsReadState>({ status: 'idle' })
   const [costsRefresh, setCostsRefresh] = useState(0)
+  const [pricingState, setPricingState] = useState<ProviderPricingReadState>({ status: 'idle' })
+  const [pricingRefresh, setPricingRefresh] = useState(0)
   const [healthWindow, setHealthWindow] = useState<SystemHealthWindow>('1h')
   const [healthReload, setHealthReload] = useState(0)
   const [healthReadState, setHealthReadState] = useState<SystemHealthReadState>({ status: 'loading' })
@@ -249,6 +258,34 @@ export function AdminConsoleRoute() {
   }, [authorizationState, costRange, costsRefresh, section])
 
   useEffect(() => {
+    if (section !== 'provider-pricing') return
+    if (!hasCapability(authorization, 'costs:read')) {
+      setPricingState({ status: 'unauthorized' })
+      return
+    }
+    const controller = new AbortController()
+    setPricingState({ status: 'loading' })
+    void readAdminProviderPricing({ signal: controller.signal }).then(
+      (model) => {
+        if (!controller.signal.aborted) setPricingState({ status: 'ready', model })
+      },
+      (error) => {
+        if (controller.signal.aborted) return
+        if (error instanceof AdminProviderPricingHttpError && error.code === 'read_denied') {
+          setPricingState({ status: 'unauthorized' })
+          return
+        }
+        setPricingState({
+          status: 'error',
+          code: error instanceof AdminProviderPricingHttpError && error.code === 'source_timeout'
+            ? 'source_timeout' : 'source_unavailable',
+        })
+      },
+    )
+    return () => controller.abort()
+  }, [authorizationState, pricingRefresh, section])
+
+  useEffect(() => {
     if (section !== 'system-health' || !hasCapability(authorization, 'health:read')) {
       setHealthReadState(section === 'system-health' ? { status: 'denied' } : { status: 'loading' })
       return
@@ -273,6 +310,12 @@ export function AdminConsoleRoute() {
       : next === 'system-health'
         ? `${ADMIN_CONSOLE_PATH}/health`
         : `${ADMIN_CONSOLE_PATH}/${next}`
+    window.history.pushState({}, '', nextPath)
+    setPathname(nextPath)
+  }
+
+  function navigateToProviderPricing() {
+    const nextPath = `${ADMIN_CONSOLE_PATH}/costs/provider-pricing`
     window.history.pushState({}, '', nextPath)
     setPathname(nextPath)
   }
@@ -307,12 +350,14 @@ export function AdminConsoleRoute() {
 
   const activeSection: AdminSection = section === 'curriculum-validation'
     ? 'curriculum'
+    : section === 'provider-pricing' ? 'costs'
     : section === 'unknown' ? 'overview' : section
   const title = section === 'curriculum-validation'
     ? 'Curriculum validation'
     : section === 'system-health' ? 'System Health'
       : section === 'engines' ? 'Engine Performance'
         : section === 'costs' ? 'AI & Costs'
+          : section === 'provider-pricing' ? 'Provider Pricing'
           : section === 'learners' ? 'Learner Analytics'
             : section === 'safety' ? 'Safety Operations'
               : section === 'audit-log' ? 'Audit Log'
@@ -353,6 +398,17 @@ export function AdminConsoleRoute() {
             range={costRange}
             onRangeChange={setCostRange}
             onRetry={() => setCostsRefresh((value) => value + 1)}
+            onOpenProviderPricing={navigateToProviderPricing}
+          />
+        )}
+        {section === 'provider-pricing' && (
+          <AdminProviderPricingDashboard
+            readAuthorized={hasCapability(authorization, 'costs:read')}
+            manageAuthorized={hasCapability(authorization, 'configuration:manage')}
+            state={pricingState}
+            onRetry={() => setPricingRefresh((value) => value + 1)}
+            onUpdated={() => setPricingRefresh((value) => value + 1)}
+            onBack={() => navigate('costs')}
           />
         )}
         {section === 'safety' && (
@@ -401,7 +457,7 @@ export function AdminConsoleRoute() {
             onRetry={() => setAuditRetry((value) => value + 1)}
           />
         )}
-        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'audit-log'].includes(section) && (
+        {!['learners', 'engines', 'costs', 'provider-pricing', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'audit-log'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>

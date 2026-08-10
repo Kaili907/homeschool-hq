@@ -35,6 +35,7 @@ export interface AdminCostsDashboardProps {
   readonly range: AdminCostRangeSelection
   readonly onRangeChange: (range: AdminCostRangeSelection) => void
   readonly onRetry?: () => void
+  readonly onOpenProviderPricing?: () => void
   readonly today?: string
 }
 
@@ -44,6 +45,7 @@ export function AdminCostsDashboard({
   range,
   onRangeChange,
   onRetry,
+  onOpenProviderPricing,
   today = new Date().toISOString().slice(0, 10),
 }: AdminCostsDashboardProps) {
   if (!authorized || state.status === 'unauthorized') {
@@ -65,6 +67,7 @@ export function AdminCostsDashboard({
           <p>Usage-derived marginal provider cost for recorded provider attempts, calculated from verified effective-dated pricing terms. All calendar boundaries are UTC.</p>
         </div>
         <div className="admin-costs-header__controls">
+          {onOpenProviderPricing && <button className="admin-costs-pricing" type="button" onClick={onOpenProviderPricing}>Provider Pricing</button>}
           <CostRangeControl range={range} onChange={onRangeChange} today={today} />
           {state.status === 'ready' && onRetry && <button className="admin-costs-refresh" type="button" onClick={onRetry}>Refresh data</button>}
         </div>
