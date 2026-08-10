@@ -38,8 +38,8 @@
 .admin-topbar { display: flex; min-height: 106px; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.2rem clamp(1.25rem, 3vw, 2.75rem); border-bottom: 1px solid var(--admin-line); background: rgba(255,255,255,.88); }
 .admin-breadcrumb, .admin-eyebrow { margin: 0 0 .28rem; color: var(--admin-muted); font-size: .68rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
 .admin-breadcrumb span { padding: 0 .25rem; color: #a4afa9; }
-.admin-topbar h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.55rem, 2.4vw, 2rem); font-weight: 500; letter-spacing: -.025em; }
-.admin-main { width: 100%; max-width: 1540px; margin: 0 auto; padding: 2rem clamp(1.25rem, 3vw, 2.75rem) 4rem; }
+.admin-topbar h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.55rem, 2.4vw, 2rem); font-weight: 500; letter-spacing: -.025em; outline: none; }
+.admin-main { width: 100%; max-width: 1540px; min-width: 0; margin: 0 auto; padding: 2rem clamp(1.25rem, 3vw, 2.75rem) 4rem; overflow-x: clip; }
 .admin-range { position: relative; }
 .admin-range__presets { display: flex; padding: .22rem; border: 1px solid var(--admin-line); border-radius: .55rem; background: #f6f8f7; }
 .admin-range__presets button { border: 0; border-radius: .36rem; padding: .46rem .66rem; background: transparent; color: var(--admin-muted); font: inherit; font-size: .74rem; white-space: nowrap; cursor: pointer; }
@@ -111,7 +111,9 @@
 .admin-gate__panel { max-width: 460px; text-align: center; }
 .admin-gate__panel .admin-eyebrow { color: #7ea896; }
 .admin-gate__panel h1 { margin: .35rem 0 .6rem; font-family: Georgia, "Times New Roman", serif; font-size: 2rem; font-weight: 500; }
-.admin-gate__panel p:last-child { color: #a5b6ae; font-size: .83rem; line-height: 1.65; }
+.admin-gate__panel p:last-of-type { color: #a5b6ae; font-size: .83rem; line-height: 1.65; }
+.admin-gate__back { display: inline-flex; margin-top: 1rem; border: 1px solid #5f7f72; border-radius: .4rem; padding: .6rem .85rem; color: white; font-size: .82rem; font-weight: 700; text-decoration: none; }
+.admin-gate__back:focus-visible { outline: 3px solid #84c7ae; outline-offset: 3px; }
 .admin-gate__icon { display: inline-grid; width: 2.4rem; height: 2.4rem; margin-bottom: 1rem; place-items: center; border: 1px solid #5f7f72; border-radius: 50%; color: #8fb09f; }
 .admin-gate__icon.is-loading { border-color: #395249; border-top-color: #8fc0ab; animation: admin-spin .9s linear infinite; }
 .admin-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
@@ -123,7 +125,8 @@
   .admin-shell { grid-template-columns: 76px minmax(0, 1fr); }
   .admin-sidebar { padding-inline: .65rem; }
   .admin-brand { justify-content: center; padding-inline: 0; }
-  .admin-brand > div, .admin-nav-label, .admin-sidebar nav button span:not(.admin-nav-icon), .admin-sidebar__footer { display: none; }
+  .admin-brand > div, .admin-nav-label, .admin-sidebar__footer { display: none; }
+  .admin-nav-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
   .admin-sidebar nav button { justify-content: center; padding-inline: .5rem; }
   .admin-nav-icon { font-size: 1.05rem; }
   .admin-status-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -144,8 +147,11 @@
   .admin-sidebar { position: static; width: auto; height: auto; padding: .75rem; }
   .admin-brand { justify-content: flex-start; padding: 0 .25rem .65rem; }
   .admin-brand > div { display: block; }
-  .admin-sidebar nav ul { display: flex; overflow-x: auto; }
-  .admin-sidebar nav button span:not(.admin-nav-icon) { display: block; white-space: nowrap; }
+  .admin-sidebar nav { position: relative; }
+  .admin-sidebar nav::after { position: absolute; z-index: 1; right: 0; bottom: 0; width: 2.25rem; height: 100%; background: linear-gradient(90deg, transparent, #192a24); content: ""; pointer-events: none; }
+  .admin-sidebar nav ul { display: flex; overflow-x: auto; padding-right: 2rem; scrollbar-width: thin; }
+  .admin-nav-text { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: nowrap; }
+  .admin-main { padding: 1rem .75rem 2.5rem; }
   .admin-sidebar__footer { display: none; }
   .admin-custom-range { position: static; grid-template-columns: 1fr; min-width: 0; margin-top: .5rem; }
   .admin-custom-range p { grid-column: auto; }

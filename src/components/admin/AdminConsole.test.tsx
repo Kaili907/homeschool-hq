@@ -1,9 +1,10 @@
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import type { AdminEngineId } from '../../admin/admin0Vocabulary'
 import { adaptAdminOverview, type AdminOverviewSource, type CostSource } from '../../admin/overviewAdapter'
 import type { AdminConsoleProps, EngineObservation } from '../../admin/overviewModel'
-import { AdminConsole, AdminShell } from './AdminConsole'
+import { AdminConsole, AdminShell, applyAdminRoutePresentation } from './AdminConsole'
 
 const OBSERVED_AT = '2026-08-08T14:00:00.000Z'
 
@@ -99,6 +100,7 @@ describe('AdminConsole authorization and load states', () => {
     } as unknown as AdminConsoleProps
     const markup = renderToStaticMarkup(<AdminConsole {...props} />)
     expect(markup).toContain('active Admin assignment')
+    expect(markup).toContain('href="/academy"')
     expect(markup).not.toContain('SECRET')
     expect(markup).not.toContain('Academy status')
   })
@@ -142,6 +144,44 @@ describe('AdminConsole authorization and load states', () => {
     expect(markup).not.toContain('Releases')
   })
 
+  it('keeps exactly one named main landmark and accessible nav names in the shell', () => {
+    const markup = renderToStaticMarkup(
+      <AdminShell
+        authorization={{ status: 'authorized', role: 'viewer', capabilities: ['overview:read', 'learners:read', 'engines:read'] }}
+        activeSection="overview"
+        title="Overview"
+      >
+        <section>Authorized surface</section>
+      </AdminShell>,
+    )
+    expect(markup.match(/<main\b/g)).toHaveLength(1)
+    expect(markup.match(/id="admin-main"/g)).toHaveLength(1)
+    for (const label of ['Overview', 'Learners', 'Engine Performance']) {
+      expect(markup).toContain('aria-label="' + label + '"')
+    }
+  })
+
+  it('updates the route title and moves focus to the route heading', () => {
+    const focus = vi.fn()
+    const documentTarget = { title: '' }
+    applyAdminRoutePresentation('System Health', documentTarget, { focus })
+    expect(documentTarget.title).toBe('System Health | Manuel Academy Admin')
+    expect(focus).toHaveBeenCalledOnce()
+  })
+
+  it('contains tablet accessible-name and mobile overflow safeguards', () => {
+    const css = readFileSync(new URL('./admin-console.css', import.meta.url), 'utf8')
+    const tablet = css.slice(css.indexOf('@media (max-width: 1120px)'), css.indexOf('@media (max-width: 820px)'))
+    const mobile = css.slice(css.indexOf('@media (max-width: 600px)'), css.indexOf('@media (prefers-reduced-motion: reduce)'))
+    expect(tablet).toContain('.admin-nav-text')
+    expect(tablet).toContain('clip: rect(0, 0, 0, 0)')
+    expect(tablet).not.toMatch(/\.admin-nav-text[^}]*display:\s*none/)
+    expect(mobile).toContain('.admin-sidebar nav::after')
+    expect(mobile).toContain('overflow-x: auto')
+    expect(mobile).toContain('.admin-main { padding: 1rem .75rem 2.5rem; }')
+    expect(css).toContain('overflow-x: clip')
+  })
+
   it('renders loading without numeric-looking metric placeholders', () => {
     const markup = renderToStaticMarkup(
       <AdminConsole authorization={AUTHORIZED} overview={{ status: 'loading' }} selectedRange={{ kind: 'preset', preset: 'today' }} onRangeChange={() => {}} />,
@@ -156,10 +196,11 @@ describe('AdminConsole authorization and load states', () => {
       status: 'error', code: 'overview_timeout', rawException: 'SECRET raw database exception',
     } as const
     const markup = renderToStaticMarkup(
-      <AdminConsole authorization={AUTHORIZED} overview={overview} selectedRange={{ kind: 'preset', preset: 'today' }} onRangeChange={() => {}} />,
+      <AdminConsole authorization={AUTHORIZED} overview={overview} selectedRange={{ kind: 'preset', preset: 'today' }} onRangeChange={() => {}} onRetry={() => {}} />,
     )
     expect(markup).toContain('overview request timed out')
     expect(markup).not.toContain('SECRET')
+    expect(markup).toContain('Try again')
   })
 })
 
@@ -180,7 +221,7 @@ describe('AdminConsole canonical overview presentation', () => {
     expect(markup).toContain('Observed at')
     expect(markup).toContain(OBSERVED_AT)
     expect(markup).toContain('$1.84')
-    expect(markup).toContain('Estimated spend')
+    expect(markup).toContain('Calculated provider cost (estimate)')
     expect(markup).toContain('Billable usage')
     expect(markup).toContain('Cached input read tokens')
     expect(markup).toContain('2,100')
@@ -196,7 +237,7 @@ describe('AdminConsole canonical overview presentation', () => {
       spend: costSource({ costMicros: '2000000', costKind: 'reconciled' }),
     } })
     const markup = authorized(source)
-    expect(markup).toContain('Reconciled spend')
+    expect(markup).toContain('Reconciled provider cost')
     expect(markup).toContain('$2.00')
   })
 

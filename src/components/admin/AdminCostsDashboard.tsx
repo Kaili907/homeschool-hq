@@ -192,15 +192,15 @@ function CostsContent({ model, stale }: { model: AdminCostsModel; stale: boolean
           <MetricCard label="Cached input read tokens" metric={model.summary.cachedInputReadTokens} />
           <MetricCard label="Cached input write tokens" metric={model.summary.cachedInputWriteTokens} />
           <MetricCard label="TTS characters" metric={model.summary.ttsCharacters} />
-          <MoneyCard label="Calculated / estimated provider cost" metric={model.summary.calculatedCost} />
-          <MoneyCard label="Reconciled cost" metric={model.summary.reconciledCost} />
+          <MoneyCard label="Calculated provider cost (estimate)" metric={model.summary.calculatedCost} />
+          <MoneyCard label="Reconciled provider cost" metric={model.summary.reconciledCost} />
           <article className="admin-costs-card">
             <p>Unavailable costs</p>
             <strong>{model.summary.unavailableCostCount.toLocaleString()}</strong>
             <span>records without trustworthy cost</span>
           </article>
         </div>
-        <p className="admin-costs-disclosure">Calculated cost is usage-derived and is not provider-invoice truth. Reconciled cost is reported separately.</p>
+        <p className="admin-costs-disclosure">Calculated provider cost is a usage-derived estimate, not provider-invoice truth. Reconciled provider cost is reported separately.</p>
       </section>
 
       <section className="admin-costs-panel" aria-labelledby="cost-completeness-title">

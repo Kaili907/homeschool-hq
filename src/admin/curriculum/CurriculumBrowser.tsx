@@ -40,6 +40,7 @@ export function CurriculumBrowser({ authorization, source }: CurriculumBrowserPr
   const [lessonError, setLessonError] = useState<string | null>(null)
   const [filters, setFilters] = useState<CurriculumSearchFilters>({})
 
+  const [reload, setReload] = useState(0)
   useEffect(() => {
     if (!canRead) {
       setCatalog(null)
@@ -56,7 +57,7 @@ export function CurriculumBrowser({ authorization, source }: CurriculumBrowserPr
         if (current) setCatalogError(error instanceof Error ? error.message : 'Unknown curriculum source failure')
       })
     return () => { current = false }
-  }, [canRead, source])
+  }, [canRead, reload, source])
 
   useEffect(() => {
     if (!canRead || !location.lessonId) {
@@ -78,22 +79,22 @@ export function CurriculumBrowser({ authorization, source }: CurriculumBrowserPr
   }, [canRead, location.lessonId, source])
 
   if (authorization.status === 'checking') {
-    return <AdminMessage role="status" title="Checking Admin access">Curriculum data has not been requested yet.</AdminMessage>
+    return <CurriculumBrowserStateMessage role="status" title="Checking Admin access">Curriculum data has not been requested yet.</CurriculumBrowserStateMessage>
   }
   if (!canRead) {
     return (
-      <AdminMessage role="alert" title="Curriculum access unavailable">
+      <CurriculumBrowserStateMessage role="alert" title="Curriculum access unavailable">
         {authorization.status === 'denied' && authorization.message
           ? authorization.message
           : 'This Admin session does not have the curriculum:read capability.'}
-      </AdminMessage>
+      </CurriculumBrowserStateMessage>
     )
   }
   if (catalogError) {
-    return <AdminMessage role="alert" title="Curriculum source unavailable">The published curriculum could not be validated: {catalogError}</AdminMessage>
+    return <CurriculumBrowserStateMessage role="alert" title="Curriculum source unavailable" onRetry={() => setReload((value) => value + 1)}>The published curriculum could not be validated: {catalogError}</CurriculumBrowserStateMessage>
   }
   if (!catalog) {
-    return <AdminMessage role="status" title="Loading curriculum">Loading the authorized published curriculum read model.</AdminMessage>
+    return <CurriculumBrowserStateMessage role="status" title="Loading curriculum">Loading the authorized published curriculum read model.</CurriculumBrowserStateMessage>
   }
   return (
     <CurriculumBrowserView
@@ -108,14 +109,15 @@ export function CurriculumBrowser({ authorization, source }: CurriculumBrowserPr
   )
 }
 
-function AdminMessage({ role, title, children }: { role: 'status' | 'alert'; title: string; children: ReactNode }) {
+export function CurriculumBrowserStateMessage({ role, title, children, onRetry }: { role: 'status' | 'alert'; title: string; children: ReactNode; onRetry?: () => void }) {
   return (
-    <main className="min-h-screen bg-slate-950 p-4 text-slate-100 sm:p-8">
+    <div className="bg-slate-950 py-6 text-slate-100">
       <div role={role} className="mx-auto max-w-3xl rounded-xl border border-slate-700 bg-slate-900 p-6">
         <h1 className="text-2xl font-bold">{title}</h1>
         <p className="mt-2 text-slate-300">{children}</p>
+        {onRetry && <button type="button" onClick={onRetry} className="mt-4 min-h-11 rounded-lg bg-cyan-700 px-4 py-2 font-bold text-white">Try again</button>}
       </div>
-    </main>
+    </div>
   )
 }
 
@@ -166,7 +168,7 @@ export function CurriculumBrowserView({
   })
 
   return (
-    <main className="min-h-screen bg-slate-950 p-4 text-slate-100 sm:p-6 lg:p-8">
+    <div className="min-w-0 bg-slate-950 py-4 text-slate-100 sm:py-6">
       <div className="mx-auto max-w-7xl">
         <header className="rounded-2xl border border-slate-700 bg-slate-900 p-5 shadow-xl">
           <div className="flex flex-wrap items-start justify-between gap-4">
@@ -185,12 +187,15 @@ export function CurriculumBrowserView({
             </span>
           </div>
           <nav aria-label="Curriculum browser views" className="mt-4 flex flex-wrap gap-2">
-            <button type="button" onClick={() => onLocationChange(ROOT_LOCATION)} className={navButton(location.mode === 'hierarchy')}>
+            <button type="button" aria-current={location.mode === 'hierarchy' ? 'page' : undefined} onClick={() => onLocationChange(ROOT_LOCATION)} className={navButton(location.mode === 'hierarchy')}>
               Curriculum hierarchy
             </button>
-            <button type="button" onClick={() => onLocationChange({ mode: 'standards' })} className={navButton(location.mode === 'standards')}>
+            <button type="button" aria-current={location.mode === 'standards' ? 'page' : undefined} onClick={() => onLocationChange({ mode: 'standards' })} className={navButton(location.mode === 'standards')}>
               Standards coverage
             </button>
+            <a href="/academy/admin/curriculum/validation" className={navButton(false)}>
+              Validation evidence
+            </a>
           </nav>
         </header>
 
@@ -227,7 +232,7 @@ export function CurriculumBrowserView({
           )}
         </div>
       </div>
-    </main>
+    </div>
   )
 }
 

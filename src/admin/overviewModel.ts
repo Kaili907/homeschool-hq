@@ -52,10 +52,10 @@ export type EngineReasonCode =
 export interface EngineObservation {
   readonly engineId: AdminEngineId
   readonly health: AdminHealthState
-  readonly appVersion: string
+  readonly appVersion: string | null
   /** Null means no independently versioned engine legitimately applies. */
   readonly engineVersion: string | null
-  readonly observedAt: string
+  readonly observedAt: string | null
   readonly windowStart: string
   readonly windowEnd: string
   readonly reasonCodes: readonly EngineReasonCode[]
@@ -80,7 +80,7 @@ interface SpendContext {
   readonly billingDisposition: AdminBillingDisposition
   readonly currency: AdminCurrency
   readonly completeness: AggregateCompleteness
-  readonly result: AdminOperationalResult
+  readonly result: AdminOperationalResult | null
   readonly resultReasonCode: CostResultReasonCode | null
 }
 
@@ -97,7 +97,7 @@ export interface AdminOverviewModel {
   readonly contractVersion: 2
   readonly range: OverviewRange
   /** Canonical observation time for this overview, separate from refresh history. */
-  readonly observedAt: string
+  readonly observedAt: string | null
   readonly freshness: 'current' | 'stale'
   readonly staleReasonCode?: OverviewStaleReasonCode
   readonly academy: {
@@ -123,6 +123,7 @@ export interface AdminOverviewModel {
     readonly cachedInputWriteTokens: Metric<number>
     readonly ttsCharacters: Metric<number>
     readonly spend: PresentedSpend
+    readonly reconciledSpend?: PresentedSpend
   }
   readonly safety: {
     readonly openSafetyStops: Metric<number>
@@ -135,6 +136,36 @@ export interface AdminOverviewModel {
     readonly syncFailures: Metric<number>
     readonly persistenceFailures: Metric<number>
   }
+  readonly curriculum?: {
+    readonly publishedVersion: Metric<string>
+    readonly validationState: Metric<string>
+    readonly validatedAt: Metric<string>
+    readonly validationArtifactVersion: Metric<string>
+    readonly coverageWarning: Metric<string>
+  }
+  readonly enginePerformance?: readonly {
+    readonly engineId: AdminEngineId
+    readonly evidenceState: 'available' | 'partial' | 'insufficient_evidence' | 'unavailable'
+  }[]
+  readonly domainStatuses?: Readonly<Record<OverviewDomain, OverviewDomainStatus>>
+}
+
+export type OverviewDomain =
+  | 'academy'
+  | 'learners'
+  | 'engineHealth'
+  | 'enginePerformance'
+  | 'costs'
+  | 'safety'
+  | 'system'
+  | 'curriculum'
+
+export interface OverviewDomainStatus {
+  readonly availability: 'available' | 'unavailable'
+  readonly freshness: 'current' | 'stale' | 'unknown'
+  readonly completeness: 'complete' | 'partial' | 'truncated' | 'unknown'
+  readonly observationStatus: 'current' | 'stale' | 'partial' | 'unavailable' | 'unknown'
+  readonly windowLabel: string
 }
 
 export type OverviewErrorCode = 'overview_timeout' | 'overview_unavailable' | 'refresh_failed'

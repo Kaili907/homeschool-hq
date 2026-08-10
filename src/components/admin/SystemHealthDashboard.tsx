@@ -97,21 +97,22 @@ export function SystemHealthDashboard(props: SystemHealthDashboardProps) {
 
 function HealthAccessState({ busy = false, title, message, onRetry }: { busy?: boolean; title: string; message: string; onRetry?: () => void }) {
   return (
-    <main className="health-state" aria-busy={busy} aria-live="polite">
+    <div className="health-state" aria-busy={busy} aria-live="polite">
       <span className={`health-state__glyph ${busy ? 'is-loading' : ''}`} aria-hidden="true">{busy ? '' : '!'}</span>
       <h1>{title}</h1><p>{message}</p>
       {onRetry && <button type="button" onClick={onRetry}>Try again</button>}
-    </main>
+      {!busy && <a href="/academy">Back to Academy</a>}
+    </div>
   )
 }
 
 function HealthLoading() {
   return (
-    <main className="health-dashboard" aria-busy="true" aria-live="polite">
+    <div className="health-dashboard" aria-busy="true" aria-live="polite">
       <span className="health-sr-only">Loading System Health</span>
       <div className="health-skeleton health-skeleton--hero" />
       <div className="health-skeleton-grid">{ADMIN_ENGINE_IDS.map((engine) => <div className="health-skeleton" key={engine} />)}</div>
-    </main>
+    </div>
   )
 }
 
@@ -124,12 +125,13 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
   const detail = projection.engines.find((engine) => engine.engineId === selectedEngine) ?? projection.engines[0]
 
   return (
-    <main id="admin-main" className="health-dashboard" tabIndex={-1}>
+    <div className="health-dashboard">
       <header className="health-heading">
         <div><p>Read-only operations</p><h1>System Health</h1><span>Deterministic status from bounded trusted telemetry.</span></div>
         <div className="health-window" role="group" aria-label="System Health history window">
           {SYSTEM_HEALTH_WINDOWS.map((window) => <button key={window} type="button" aria-pressed={selectedWindow === window} className={selectedWindow === window ? 'is-active' : ''} onClick={() => onWindowChange(window)}>{WINDOW_LABELS[window]}</button>)}
         </div>
+        <p className="health-window-explanation">Overall Health and each primary engine status always use the most recent one-hour evaluation. These controls change only the history summaries and incident list below.</p>
       </header>
 
       {projection.evidenceCompleteness !== 'complete' && (
@@ -155,7 +157,7 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
         <SectionTitle eyebrow="Primary one-hour evaluation" title="Eight canonical engines" id="engine-grid-title" />
         <div className="health-engine-grid">
           {projection.engines.map((engine) => (
-            <button key={engine.engineId} type="button" aria-pressed={selectedEngine === engine.engineId} onClick={() => setSelectedEngine(engine.engineId)}>
+            <button key={engine.engineId} type="button" aria-controls="health-engine-detail" aria-pressed={selectedEngine === engine.engineId} onClick={() => setSelectedEngine(engine.engineId)}>
               <span><strong>{ENGINE_LABELS[engine.engineId]}</strong><small>{freshnessLabel(engine.freshness)} · {engine.eventCount} events</small></span>
               <HealthBadge health={engine.health} />
             </button>
@@ -163,15 +165,15 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
         </div>
       </section>
 
-      <section className="health-detail" aria-labelledby="engine-detail-title">
+      <section id="health-engine-detail" className="health-detail" aria-labelledby="engine-detail-title" aria-live="polite">
         <SectionTitle eyebrow="Engine drilldown" title={ENGINE_LABELS[detail.engineId]} id="engine-detail-title" />
         <div className="health-detail__status"><HealthBadge health={detail.health} /><span>{detail.reasonCodes.map(safeReason).join(' ')}</span></div>
         <dl className="health-metrics">
           <Metric label="Observed at" value={detail.observedAt ?? 'No evidence'} />
           <Metric label="Evaluation window" value={`${detail.windowStart} – ${detail.windowEnd}`} />
           <Metric label="App version" value={detail.appVersion ?? 'Unknown'} />
-          <Metric label="Engine version" value={detail.engineVersion ?? 'Not applicable / unknown'} />
-          <Metric label="Curriculum version" value={detail.curriculumVersion ?? 'Not applicable / unknown'} />
+          <Metric label="Engine version" value={detail.engineVersion ?? 'Unknown'} />
+          <Metric label="Curriculum version" value={detail.curriculumVersion ?? 'Unknown'} />
           <Metric label="Events" value={detail.eventCount} />
           <Metric label="Success" value={countRate(detail.successCount, detail.successRatePercent)} />
           <Metric label="Fallback" value={countRate(detail.fallbackCount, detail.fallbackRatePercent)} />
@@ -221,7 +223,7 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
             </li>
           ))}</ol>}
       </section>
-    </main>
+    </div>
   )
 }
 
