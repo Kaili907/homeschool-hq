@@ -236,6 +236,14 @@ describe('ADMIN-10 read-only Safety Operations', () => {
     expect(read).not.toHaveBeenCalled()
   })
 
+  it('offers retry for a transient authorized safety read failure', () => {
+    const html = renderToStaticMarkup(
+      <AdminSafetyOperations authorization={AUTHORIZED} readState={{ status: 'unavailable', reasonCode: 'source_unavailable' }} onRetry={() => undefined} />,
+    )
+    expect(html).toContain('Try again')
+    expect(html).toContain('type="button"')
+  })
+
   it('contains no safety mutation controls', () => {
     const html = render(snapshot([OPEN_STOP]))
     expect(html).not.toMatch(/<button/i)
@@ -254,12 +262,20 @@ describe('ADMIN-10 read-only Safety Operations', () => {
     expect(html).toContain('id="safety-event-safety-event:open-1"')
   })
 
+  it('states explicitly when the authorized safety page is incomplete', () => {
+    const html = render(snapshot([OPEN_STOP], { page: { limit: 50, nextCursor: 'cursor:next' } }))
+    expect(html).toContain('More safety events exist')
+    expect(html).toContain('This page is incomplete')
+    expect(html).not.toContain('All safety events')
+  })
+
   it('provides accessible landmarks, labels, table semantics, times, and drilldowns', () => {
     const html = render(snapshot([OPEN_STOP]))
-    expect(html).toContain('<main')
+    expect(html).not.toContain('<main')
     expect(html).toContain('<h1>Safety</h1>')
     expect(html).toContain('<fieldset')
     expect(html).toContain('<legend>Filter safety events</legend>')
+    expect(html).toContain('aria-controls="safety-events-results"')
     expect(html).toContain('<caption>')
     expect(html).toContain('<th scope="col"')
     expect(html).toContain('<time dateTime="2026-08-08T14:00:00.000Z"')

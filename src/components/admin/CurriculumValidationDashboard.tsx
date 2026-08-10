@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react'
 import {
   CURRICULUM_VALIDATION_CAPABILITY,
-  type CurriculumValidationReadModel,
   type CurriculumValidationStatus,
   type ValidationCheckState,
   type ValidationScope,
 } from '../../admin/curriculum-validation/model'
+import type { CurriculumValidationReadState } from '../../admin/curriculum-validation/httpSource'
 
 export type CurriculumValidationAuthorization =
   | { readonly state: 'unresolved' }
@@ -17,7 +17,8 @@ export type CurriculumValidationAuthorization =
 
 export interface CurriculumValidationDashboardProps {
   readonly authorization: CurriculumValidationAuthorization
-  readonly model: CurriculumValidationReadModel | null
+  readonly readState: CurriculumValidationReadState
+  readonly onRetry?: () => void
 }
 
 const STATUS_LABELS: Readonly<Record<CurriculumValidationStatus, string>> = {
@@ -58,7 +59,7 @@ function scopeText(scope: ValidationScope): string {
 
 function LockedValidationSurface({ state }: { readonly state: 'unresolved' | 'denied' }) {
   return (
-    <main className="min-h-screen bg-slate-950 px-4 py-10 text-slate-100" aria-labelledby="validation-access-title">
+    <div className="bg-slate-950 py-10 text-slate-100" aria-labelledby="validation-access-title">
       <section className="mx-auto max-w-xl rounded-2xl border border-slate-700 bg-slate-900 p-8 shadow-xl">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300">Admin Console</p>
         <h1 id="validation-access-title" className="mt-3 text-2xl font-bold">Curriculum validation unavailable</h1>
@@ -67,15 +68,39 @@ function LockedValidationSurface({ state }: { readonly state: 'unresolved' | 'de
             ? 'Authorization is still being verified. Validation evidence remains hidden.'
             : 'Your Admin assignment does not include curriculum:read.'}
         </p>
+        {state === 'denied' && <a href="/academy" className="mt-4 inline-flex min-h-11 items-center rounded-lg border border-slate-500 px-4 py-2 font-bold text-white">Back to Academy</a>}
       </section>
-    </main>
+    </div>
+  )
+}
+
+function ValidationReadStateSurface({ state, onRetry }: { state: Exclude<CurriculumValidationReadState, { status: 'ready' }>; onRetry?: () => void }) {
+  const content = state.status === 'loading'
+    ? { title: 'Loading validation evidence', message: 'Reading the authorized validation record.', role: 'status' as const }
+    : state.status === 'no-evidence'
+      ? { title: 'UNKNOWN / NOT VALIDATED', message: 'No validation evidence exists for the published curriculum package.', role: 'status' as const }
+      : state.status === 'error'
+        ? { title: 'Validation response could not be used', message: 'The authorized source returned an unexpected response. No validation conclusion is shown.', role: 'alert' as const }
+        : { title: 'Validation evidence unavailable', message: 'The authorized validation source could not be reached. This is not a validation result.', role: 'alert' as const }
+  return (
+    <div className="bg-slate-950 py-10 text-slate-100" aria-busy={state.status === 'loading'}>
+      <section className="mx-auto max-w-xl rounded-2xl border border-slate-700 bg-slate-900 p-8" role={content.role}>
+        <h1 className="text-2xl font-bold">{content.title}</h1>
+        <p className="mt-3 text-slate-300">{content.message}</p>
+        {(state.status === 'unavailable' || state.status === 'error') && onRetry && (
+          <button type="button" onClick={onRetry} className="mt-4 min-h-11 rounded-lg bg-sky-700 px-4 py-2 font-bold text-white">Try again</button>
+        )}
+      </section>
+    </div>
   )
 }
 
 export function CurriculumValidationDashboard({
   authorization,
-  model,
+  readState,
+  onRetry,
 }: CurriculumValidationDashboardProps) {
+  const model = readState.status === 'ready' ? readState.model : null
   const [query, setQuery] = useState('')
   const [stateFilter, setStateFilter] = useState<ValidationCheckState | 'all'>('all')
 
@@ -101,25 +126,22 @@ export function CurriculumValidationDashboard({
     return <LockedValidationSurface state={authorization.state} />
   }
 
-  if (!model) {
-    return (
-      <main className="min-h-screen bg-slate-950 px-4 py-10 text-slate-100" aria-labelledby="validation-empty-title">
-        <section className="mx-auto max-w-xl rounded-2xl border border-slate-700 bg-slate-900 p-8">
-          <h1 id="validation-empty-title" className="text-2xl font-bold">UNKNOWN / NOT VALIDATED</h1>
-          <p className="mt-3 text-slate-300" role="status">No validation evidence was provided.</p>
-        </section>
-      </main>
-    )
-  }
+  if (readState.status === 'denied') return <LockedValidationSurface state="denied" />
+  if (readState.status !== 'ready') return <ValidationReadStateSurface state={readState} onRetry={onRetry} />
+  if (!model) return null
 
   return (
-    <main className="min-h-screen bg-slate-950 px-4 py-8 text-slate-100 sm:px-6" aria-labelledby="validation-title">
+    <div className="min-w-0 bg-slate-950 py-6 text-slate-100" aria-labelledby="validation-title">
       <div className="mx-auto max-w-7xl">
         <header className="flex flex-col gap-5 border-b border-slate-700 pb-7 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300">Admin Console · Read only</p>
             <h1 id="validation-title" className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Curriculum Validation</h1>
             <p className="mt-2 max-w-2xl text-slate-300">Recorded validation evidence for the immutable curriculum package.</p>
+            <nav aria-label="Curriculum administration" className="mt-4 flex gap-4 text-sm font-bold">
+              <a href="/academy/admin/curriculum" className="text-sky-300">Curriculum browser</a>
+              <a href="/academy/admin/curriculum/validation" aria-current="page" className="text-white">Validation evidence</a>
+            </nav>
           </div>
           <div
             className={`rounded-xl border px-5 py-4 ${STATUS_STYLES[model.status]}`}
@@ -137,7 +159,7 @@ export function CurriculumValidationDashboard({
           </div>
         )}
 
-        <section className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5" aria-label="Validation evidence metadata">
+        <dl className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5" aria-label="Validation evidence metadata">
           {[
             ['Curriculum version', metadata(model.curriculumVersion)],
             ['Validation-reported curriculum version', metadata(model.validationReportedCurriculumVersion)],
@@ -150,7 +172,7 @@ export function CurriculumValidationDashboard({
               <dd className="mt-2 break-words font-mono text-sm text-slate-100">{value}</dd>
             </div>
           ))}
-        </section>
+        </dl>
 
         <section className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5" aria-label="Validation category totals">
           {[
@@ -173,7 +195,7 @@ export function CurriculumValidationDashboard({
               <h2 id="checks-title" className="text-2xl font-bold">Validation checks</h2>
               <p className="mt-1 text-sm text-slate-400">Open a category to inspect recorded findings and affected references.</p>
             </div>
-            <form className="grid gap-3 sm:grid-cols-2" role="search" onSubmit={(event) => event.preventDefault()}>
+            <form className="grid gap-3 sm:grid-cols-2" role="search" aria-controls="validation-check-results" onSubmit={(event) => event.preventDefault()}>
               <div>
                 <label htmlFor="validation-search" className="mb-1 block text-sm font-medium">Search findings</label>
                 <input
@@ -203,7 +225,7 @@ export function CurriculumValidationDashboard({
             </form>
           </div>
 
-          <div className="mt-5 space-y-3">
+          <div id="validation-check-results" className="mt-5 space-y-3" aria-live="polite">
             {visibleCategories.map((category) => (
               <details key={category.id} className="rounded-xl border border-slate-700 bg-slate-900 open:border-slate-500">
                 <summary className="cursor-pointer list-none px-5 py-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">
@@ -255,7 +277,7 @@ export function CurriculumValidationDashboard({
               <table className="w-full min-w-[720px] border-collapse text-left text-sm">
                 <caption className="sr-only">Canonical standards mappings and identified gaps</caption>
                 <thead className="bg-slate-800 text-slate-200">
-                  <tr><th className="p-3">Standard</th><th className="p-3">Lessons</th><th className="p-3">Assessments</th><th className="p-3">Coverage</th></tr>
+                  <tr><th scope="col" className="p-3">Standard</th><th scope="col" className="p-3">Lessons</th><th scope="col" className="p-3">Assessments</th><th scope="col" className="p-3">Coverage</th></tr>
                 </thead>
                 <tbody>
                   {model.coverage.map((row) => (
@@ -281,6 +303,6 @@ export function CurriculumValidationDashboard({
           </ul>
         </section>
       </div>
-    </main>
+    </div>
   )
 }

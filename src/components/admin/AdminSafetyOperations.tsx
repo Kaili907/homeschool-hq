@@ -21,6 +21,7 @@ import './admin-safety-operations.css'
 export interface AdminSafetyOperationsProps {
   readonly authorization: AdminSafetyReadAuthorization
   readonly readState: SafetyOperationsReadState
+  readonly onRetry?: () => void
 }
 
 const STATE_LABELS: Record<SafetyEventState, string> = {
@@ -54,44 +55,46 @@ const SOURCE_LABELS: Record<SafetyEvidenceSource, string> = {
   'operational-telemetry': 'Admin operational telemetry',
 }
 
-export function AdminSafetyOperations({ authorization, readState }: AdminSafetyOperationsProps) {
+export function AdminSafetyOperations({ authorization, readState, onRetry }: AdminSafetyOperationsProps) {
   if (authorization.status === 'resolving') return <SafetyAuthorizationGate resolving />
   if (!hasSafetyReadGrant(authorization)) return <SafetyAuthorizationGate resolving={false} />
   if (readState.status === 'loading') return <SafetyLoading />
-  if (readState.status === 'unavailable') return <SafetyUnavailable />
+  if (readState.status === 'unavailable') return <SafetyUnavailable onRetry={onRetry} />
   return <AuthorizedSafetyOperations readState={readState} />
 }
 
 function SafetyAuthorizationGate({ resolving }: { resolving: boolean }) {
   return (
-    <main className="safety-ops-gate" aria-busy={resolving}>
+    <div className="safety-ops-gate" aria-busy={resolving}>
       <section aria-live="polite" aria-labelledby="safety-access-title">
         <p className="safety-ops-eyebrow">Safety operations</p>
         <h1 id="safety-access-title">{resolving ? 'Verifying safety access' : 'Safety data unavailable'}</h1>
         <p>{resolving
           ? 'Safety evidence remains hidden until the canonical administrator read capability is confirmed.'
           : 'The canonical safety read capability is required. Household guardian membership does not grant Admin access.'}</p>
+        {!resolving && <a href="/academy">Back to Academy</a>}
       </section>
-    </main>
+    </div>
   )
 }
 
 function SafetyLoading() {
   return (
-    <main className="safety-ops-state" aria-busy="true" aria-live="polite">
+    <div className="safety-ops-state" aria-busy="true" aria-live="polite">
       <p className="safety-ops-eyebrow">Safety operations</p>
       <h1>Loading authorized safety evidence</h1>
-    </main>
+    </div>
   )
 }
 
-function SafetyUnavailable() {
+function SafetyUnavailable({ onRetry }: { onRetry?: () => void }) {
   return (
-    <main className="safety-ops-state" role="alert">
+    <div className="safety-ops-state" role="alert">
       <p className="safety-ops-eyebrow">Safety operations</p>
       <h1>Safety evidence is unavailable</h1>
       <p>No safety counts or event details are shown because the authorized read source could not be confirmed.</p>
-    </main>
+      {onRetry && <button type="button" onClick={onRetry}>Try again</button>}
+    </div>
   )
 }
 
@@ -105,7 +108,7 @@ function AuthorizedSafetyOperations({ readState }: { readState: Extract<SafetyOp
     && model.sources.every((source) => source.status === 'available')
 
   return (
-    <main className="safety-ops" id="admin-safety-main">
+    <div className="safety-ops" id="admin-safety-surface">
       <header className="safety-ops-header">
         <div>
           <p className="safety-ops-eyebrow">Read-only operations</p>
@@ -142,7 +145,10 @@ function AuthorizedSafetyOperations({ readState }: { readState: Extract<SafetyOp
         <p>Unavailable sources are never counted as zero. Only canonical safety evidence is projected.</p>
       </section>
 
-      <section aria-labelledby="safety-events-title">
+      {readState.snapshot.page.nextCursor && (
+        <p className="safety-ops-incomplete" role="status">More safety events exist beyond this bounded response. This page is incomplete; narrow the authorized query or continue from the server-provided pagination flow before drawing a complete-range conclusion.</p>
+      )}
+      <section id="safety-events-results" aria-labelledby="safety-events-title" aria-live="polite">
         <div className="safety-ops-section-heading safety-ops-events-heading">
           <div><p>Bounded records</p><h2 id="safety-events-title">Safety events</h2></div>
           <SafetyFilters filter={filter} onChange={setFilter} />
@@ -214,7 +220,7 @@ function AuthorizedSafetyOperations({ readState }: { readState: Extract<SafetyOp
         <strong>Privacy boundary</strong>
         <p>This view excludes Tutor and Study conversation, audio, journal text, emotional labels, diagnostic inference, credentials, and arbitrary exception bodies.</p>
       </aside>
-    </main>
+    </div>
   )
 }
 
@@ -224,7 +230,7 @@ function SummaryMetric({ label, metric }: { label: string; metric: SafetyCountMe
 
 function SafetyFilters({ filter, onChange }: { filter: SafetyEventFilter; onChange: (filter: SafetyEventFilter) => void }) {
   return (
-    <fieldset className="safety-ops-filters">
+    <fieldset className="safety-ops-filters" aria-controls="safety-events-results">
       <legend>Filter safety events</legend>
       <label>State<select value={filter.state} onChange={(event) => onChange({ ...filter, state: event.target.value as SafetyEventFilter['state'] })}>
         <option value="all">All states</option>{Object.entries(STATE_LABELS).map(([value, label]) => <option value={value} key={value}>{label}</option>)}

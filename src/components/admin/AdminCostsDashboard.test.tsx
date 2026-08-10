@@ -33,8 +33,8 @@ describe('Admin AI and Costs dashboard', () => {
 
   it('renders exact calculated and reconciled semantics with separate cache token classes', () => {
     const markup = render()
-    expect(markup).toContain('Calculated / estimated provider cost')
-    expect(markup).toContain('Reconciled cost')
+    expect(markup).toContain('Calculated provider cost (estimate)')
+    expect(markup).toContain('Reconciled provider cost')
     expect(markup).toContain('$9,007,199,254.74')
     expect(markup).toContain('Cached input read tokens')
     expect(markup).toContain('Cached input write tokens')

@@ -1,4 +1,4 @@
-import { useEffect, useId, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { AdminCapability, AdminEngineId, AdminHealthState } from '../../admin/admin0Vocabulary'
 import {
   formatUsdMicros,
@@ -21,6 +21,7 @@ import {
   type Metric,
   type OverviewPreset,
   type OverviewRange,
+  type OverviewDomainStatus,
 } from '../../admin/overviewModel'
 import './admin-console.css'
 
@@ -97,6 +98,7 @@ function AuthorizationState({ kind, reasonCode }: { kind: 'resolving' | 'unautho
             ? 'The console will remain private until administrator authorization is confirmed.'
             : safeAuthorizationMessage(reasonCode ?? 'authorization_unavailable')}
         </p>
+        {!resolving && <a className="admin-gate__back" href="/academy">Back to Academy</a>}
       </section>
     </main>
   )
@@ -137,8 +139,14 @@ export function AdminShell({
   readonly onNavigate?: (section: AdminSection) => void
   readonly children: ReactNode
 }) {
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const previousTitle = useRef<string | null>(null)
   const activeLabel = NAVIGATION.find((item) => item.id === activeSection)?.label ?? title
   const visibleNavigation = NAVIGATION.filter((item) => authorization.capabilities.includes(item.capability))
+  useEffect(() => {
+    applyAdminRoutePresentation(title, document, headingRef.current, previousTitle.current !== null)
+    previousTitle.current = title
+  }, [title])
   return (
     <div className="admin-shell">
       <a className="admin-skip-link" href="#admin-main">Skip to {activeLabel.toLowerCase()}</a>
@@ -155,11 +163,12 @@ export function AdminShell({
                 <button
                   type="button"
                   className={item.id === activeSection ? 'is-active' : ''}
+                  aria-label={item.label}
                   aria-current={item.id === activeSection ? 'page' : undefined}
                   onClick={() => onNavigate?.(item.id)}
                 >
                   <NavIcon section={item.id} />
-                  <span>{item.label}</span>
+                  <span className="admin-nav-text">{item.label}</span>
                 </button>
               </li>
             ))}
@@ -175,7 +184,7 @@ export function AdminShell({
         <header className="admin-topbar">
           <div>
             <p className="admin-breadcrumb">Admin console <span aria-hidden="true">/</span> {activeLabel}</p>
-            <h1>{title}</h1>
+            <h1 ref={headingRef} tabIndex={-1}>{title}</h1>
           </div>
           {toolbar}
         </header>
@@ -185,6 +194,16 @@ export function AdminShell({
       </div>
     </div>
   )
+}
+
+export function applyAdminRoutePresentation(
+  title: string,
+  documentTarget: Pick<Document, 'title'>,
+  heading: Pick<HTMLElement, 'focus'> | null,
+  focusHeading = true,
+) {
+  documentTarget.title = `${title} | Manuel Academy Admin`
+  if (focusHeading) heading?.focus()
 }
 
 function TimeRangeControl({ selected, onChange }: { selected: OverviewRange; onChange: (range: OverviewRange) => void }) {
@@ -280,9 +299,10 @@ function Overview({ model }: { model: AdminOverviewModel }) {
           <StatusItem label="App version" metric={model.academy.appVersion} />
           <StatusItem label="Curriculum" metric={model.academy.curriculumVersion} />
           <StatusItem label="Overall health" metric={model.academy.overallHealth} health />
-          <StatusItem label="Observed at" metric={{ status: 'available', value: model.observedAt }} />
+          <StatusItem label="Observed at" metric={model.observedAt === null ? { status: 'unknown' } : { status: 'available', value: model.observedAt }} />
           <StatusItem label="Last successful refresh" metric={model.academy.lastSuccessfulDataRefresh} />
         </dl>
+        <DomainStatus status={model.domainStatuses?.academy} />
       </section>
 
       <section aria-labelledby="learners-title">
@@ -294,6 +314,7 @@ function Overview({ model }: { model: AdminOverviewModel }) {
           <StatCard label="Study sessions" metric={model.learners.studySessions} />
           <StatCard label="Instructional time" metric={model.learners.instructionalMinutes} suffix=" min" />
         </div>
+        <DomainStatus status={model.domainStatuses?.learners} />
       </section>
 
       <div className="admin-two-column">
@@ -307,6 +328,7 @@ function Overview({ model }: { model: AdminOverviewModel }) {
                   <span>
                     {engine.engineVersion ?? 'Version not applicable'}
                     {engine.reasonCodes.length > 0 && ` · ${engine.reasonCodes.map(safeEngineReasonMessage).join(' · ')}`}
+                    {model.enginePerformance?.find((value) => value.engineId === engine.engineId) && ` · Performance evidence: ${performanceEvidenceLabel(model.enginePerformance.find((value) => value.engineId === engine.engineId)!.evidenceState)}`}
                   </span>
                 </div>
                 <a href={`/academy/admin/engines/${engine.engineId}`} aria-label={`View ${ENGINE_LABELS[engine.engineId]} engine details`}>
@@ -315,6 +337,8 @@ function Overview({ model }: { model: AdminOverviewModel }) {
               </li>
             ))}
           </ul>
+          <DomainStatus status={model.domainStatuses?.engineHealth} />
+          <DomainStatus status={model.domainStatuses?.enginePerformance} />
         </section>
 
         <section className="admin-panel" aria-labelledby="ai-title">
@@ -327,12 +351,14 @@ function Overview({ model }: { model: AdminOverviewModel }) {
             <CompactMetric label="Cached input write tokens" metric={model.ai.cachedInputWriteTokens} />
             <CompactMetric label="TTS characters" metric={model.ai.ttsCharacters} />
             <SpendMetric spend={model.ai.spend} />
+            {model.ai.reconciledSpend && <SpendMetric spend={model.ai.reconciledSpend} />}
           </div>
           <p className="admin-disclosure">
             {billingDispositionLabel(model.ai.spend.billingDisposition)}. {safeCompletenessMessage(model.ai.spend.completeness)}
             {safeCostReasonMessage(model.ai.spend.resultReasonCode) && ` ${safeCostReasonMessage(model.ai.spend.resultReasonCode)}`}
           </p>
           <p className="admin-disclosure">Calculated values are usage-derived estimates, not reconciled provider invoices.</p>
+          <DomainStatus status={model.domainStatuses?.costs} />
         </section>
       </div>
 
@@ -344,6 +370,7 @@ function Overview({ model }: { model: AdminOverviewModel }) {
             <CompactMetric label="Adult reviews pending" metric={model.safety.adultReviewsPending} />
             <CompactMetric label="Safeguard failures" metric={model.safety.safeguardFailures} />
           </div>
+          <DomainStatus status={model.domainStatuses?.safety} />
         </section>
         <section className="admin-panel" aria-labelledby="system-title">
           <SectionHeading id="system-title" eyebrow="Platform signals" title="System" />
@@ -353,8 +380,23 @@ function Overview({ model }: { model: AdminOverviewModel }) {
             <CompactMetric label="Sync failures" metric={model.system.syncFailures} />
             <CompactMetric label="Persistence failures" metric={model.system.persistenceFailures} />
           </div>
+          <DomainStatus status={model.domainStatuses?.system} />
         </section>
       </div>
+
+      {model.curriculum && (
+        <section className="admin-status-panel" aria-labelledby="curriculum-overview-title">
+          <SectionHeading id="curriculum-overview-title" eyebrow="Published evidence" title="Curriculum" />
+          <dl className="admin-status-grid">
+            <StatusItem label="Published version" metric={model.curriculum.publishedVersion} />
+            <StatusItem label="Validation state" metric={model.curriculum.validationState} />
+            <StatusItem label="Validated at" metric={model.curriculum.validatedAt} />
+            <StatusItem label="Validation artifact" metric={model.curriculum.validationArtifactVersion} />
+            <StatusItem label="Coverage warning" metric={model.curriculum.coverageWarning} />
+          </dl>
+          <DomainStatus status={model.domainStatuses?.curriculum} />
+        </section>
+      )}
     </div>
   )
 }
@@ -386,6 +428,25 @@ function SectionHeading({ id, eyebrow, title }: { id: string; eyebrow: string; t
   return <header className="admin-section-heading"><div><p>{eyebrow}</p><h2 id={id}>{title}</h2></div></header>
 }
 
+function DomainStatus({ status }: { status?: OverviewDomainStatus }) {
+  if (!status || (status.observationStatus === 'current' && status.completeness === 'complete')) return null
+  const label = status.observationStatus === 'unavailable'
+    ? 'Unavailable'
+    : status.completeness === 'truncated'
+      ? 'Truncated'
+      : status.observationStatus === 'partial'
+        ? 'Partial'
+        : status.observationStatus === 'stale'
+          ? 'Stale'
+          : 'Unknown'
+  return <p className="admin-disclosure" role="status"><strong>{label}:</strong> {status.windowLabel}</p>
+}
+
+function performanceEvidenceLabel(state: NonNullable<AdminOverviewModel['enginePerformance']>[number]['evidenceState']): string {
+  if (state === 'insufficient_evidence') return 'insufficient evidence'
+  return state
+}
+
 function StatusItem<T>({ label, metric, health = false }: { label: string; metric: ApplicableMetric<T>; health?: boolean }) {
   return (
     <div><dt>{label}</dt><dd>{health && metric.status === 'available'
@@ -403,7 +464,7 @@ function CompactMetric<T>({ label, metric, formatter, suffix }: { label: string;
 }
 
 function SpendMetric({ spend }: { spend: AdminOverviewModel['ai']['spend'] }) {
-  const label = spend.status !== 'available' ? 'Spend' : spend.costKind === 'reconciled' ? 'Reconciled spend' : 'Estimated spend'
+  const label = spend.status !== 'available' ? 'Provider cost' : spend.costKind === 'reconciled' ? 'Reconciled provider cost' : 'Calculated provider cost (estimate)'
   return (
     <div>
       <dt>{label}</dt>

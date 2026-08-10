@@ -30,6 +30,7 @@ describe('LearnerAnalytics', () => {
     }
     expect(resolving).toContain('aria-busy="true"')
     expect(unauthorized).toContain('learners:read')
+    expect(unauthorized).toContain('href="/academy"')
   })
 
   it('renders the list and all requested learner detail sections read-only', () => {
@@ -44,24 +45,33 @@ describe('LearnerAnalytics', () => {
     expect(html).toContain('78%')
     expect(html).toContain('Study evidence unavailable')
     expect(html).toContain('AI cost per learner')
-    expect(html).toContain('Unavailable pending')
+    expect(html).toContain('Unavailable until reconciled learner attribution is available')
     expect(html).not.toContain('PRIVATE REASON')
+    expect(html).not.toMatch(/ADMIN-[23]/)
     expect(html).not.toMatch(/\b\d+\s+(?:input|output)?\s*tokens?\b/i)
   })
 
   it('uses native controls, landmarks, labels, and deterministic keyboard navigation', () => {
     const html = renderToStaticMarkup(<LearnerAnalytics state={readyState()} />)
-    expect(html).toContain('<main')
+    expect(html).not.toContain('<main')
     expect(html).toContain('<table')
     expect(html).toContain('scope="col"')
     expect(html).toContain('scope="row"')
     expect(html).toContain('type="button"')
     expect(html).toContain('aria-pressed="true"')
+    expect(html).toContain('aria-controls="learner-detail"')
+    expect(html).toContain('id="learner-detail"')
     expect(html).toContain('aria-labelledby="learner-detail-title"')
     expect(moveLearnerSelection(['first', 'second'], 'first', 'ArrowDown')).toBe('second')
     expect(moveLearnerSelection(['first', 'second'], 'first', 'ArrowUp')).toBe('second')
     expect(moveLearnerSelection(['first', 'second'], 'second', 'Home')).toBe('first')
     expect(moveLearnerSelection(['first', 'second'], 'first', 'End')).toBe('second')
+  })
+
+  it('offers retry only for a recoverable load error', () => {
+    const error = renderToStaticMarkup(<LearnerAnalytics state={{ status: 'error', message: 'unavailable' }} onRetry={() => undefined} />)
+    expect(error).toContain('Try again')
+    expect(error).not.toContain('<main')
   })
 
   it('renders a truthful empty authorized state', () => {
