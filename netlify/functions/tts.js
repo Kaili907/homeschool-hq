@@ -39,6 +39,12 @@ import {
   trustedUsageVersions,
   usageRequestKey,
 } from './_shared/usage-accounting.js'
+import {
+  beginGatewayProviderAttempt,
+  createGatewayProviderAttemptJournal,
+  finishGatewayProviderAttempt,
+  gatewayProviderExecutionKey,
+} from './_shared/provider-gateway-attempt.js'
 
 const SYNTHESIS_PATHS = new Set(['/api/tts/synthesize', '/.netlify/functions/tts'])
 const CATALOG_PATHS = new Set(['/api/tts/catalog', '/.netlify/functions/tts/catalog'])
@@ -97,7 +103,7 @@ export function createTtsHandler(overrides = {}) {
       const entitlement = await access.requireEntitlement(auth.user.id)
 
       const startedAt = Date.now()
-      const requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
+      let requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
       const telemetry = overrides.telemetry
         ?? createGatewayOperationalTelemetry({ env, access })
       let providerReceiptDurationMs
@@ -127,6 +133,12 @@ export function createTtsHandler(overrides = {}) {
         request.voiceVersion,
         env,
       )
+      requestKey = gatewayProviderExecutionKey({
+        event,
+        accountRef: auth.user.id,
+        engine: 'tts',
+        fallbackRequestKey: requestKey,
+      })
       const versions = trustedUsageVersions(env, 'tts')
       const apiKey = typeof env.ELEVENLABS_API_KEY === 'string' ? env.ELEVENLABS_API_KEY.trim() : ''
       if (!apiKey) {
@@ -144,31 +156,54 @@ export function createTtsHandler(overrides = {}) {
 
       let upstream
       let bytes
-      const occurredAt = new Date().toISOString()
-      const recordUsage = async (result, resultReasonCode, billingDisposition) => {
-        providerReceiptDurationMs = elapsedMilliseconds(startedAt)
-        return persistProviderUsage(access, {
-          requestKey,
-          occurredAt,
+      const journal = overrides.providerAttemptJournal
+        ?? createGatewayProviderAttemptJournal({ env, access })
+      const providerAttempt = await beginGatewayProviderAttempt({
+        journal,
+        requestKey,
+        engine: 'tts',
+        purpose: 'tts_synthesis',
+        provider: 'elevenlabs',
+        providerProductId: ELEVENLABS_MODEL_ID,
+        providerModelId: ELEVENLABS_MODEL_ID,
+        logicalModelTier: null,
+        authority: {
           accountRef: auth.user.id,
           householdRef: entitlement.householdRef,
           householdAttribution: entitlement.householdAttribution,
-          ...versions,
-          engine: 'tts',
-          provider: 'elevenlabs',
-          providerProductId: ELEVENLABS_MODEL_ID,
-          providerModelId: ELEVENLABS_MODEL_ID,
-          logicalModelTier: null,
-          inputTokens: null,
-          outputTokens: null,
-          cachedInputReadTokens: null,
-          cachedInputWriteTokens: null,
-          ttsCharacters: submittedCharacterCount(request.text),
-          latencyMs: providerReceiptDurationMs,
-          result,
-          resultReasonCode,
-          billingDisposition,
+        },
+        versions,
+      })
+      const recordUsage = async (result, resultReasonCode, billingDisposition) => {
+        providerReceiptDurationMs = elapsedMilliseconds(startedAt)
+        const finalized = await finishGatewayProviderAttempt({
+          journal,
+          attempt: providerAttempt,
+          outcomeResult: result,
+          persistUsage: () => persistProviderUsage(access, {
+            requestKey: providerAttempt.ledgerExecutionKey,
+            occurredAt: new Date().toISOString(),
+            accountRef: auth.user.id,
+            householdRef: entitlement.householdRef,
+            householdAttribution: entitlement.householdAttribution,
+            ...versions,
+            engine: 'tts',
+            provider: 'elevenlabs',
+            providerProductId: ELEVENLABS_MODEL_ID,
+            providerModelId: ELEVENLABS_MODEL_ID,
+            logicalModelTier: null,
+            inputTokens: null,
+            outputTokens: null,
+            cachedInputReadTokens: null,
+            cachedInputWriteTokens: null,
+            ttsCharacters: submittedCharacterCount(request.text),
+            latencyMs: providerReceiptDurationMs,
+            result,
+            resultReasonCode,
+            billingDisposition,
+          }),
         })
+        return finalized.accountingAvailable
       }
       const signal = AbortSignal.timeout(TTS_TIMEOUT_MS)
       try {

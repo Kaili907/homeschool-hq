@@ -8,6 +8,7 @@ import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netl
 import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
 import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catalog.js'
 import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
+import { createTestProviderAttemptJournal } from './provider-attempt-test-helpers.js'
 
 const HOUSEHOLD_ID = '10000000-0000-4000-8000-000000000001'
 const TTS_CATALOG = createTtsVoiceCatalog({
@@ -36,12 +37,21 @@ const runtimeConfigurationSource = Object.freeze({
   read: async () => savedRuntimeConfigurationProjection(),
 })
 
-function createAnthropicHandler(overrides) {
-  return createBaseAnthropicHandler({ runtimeConfigurationSource, ...overrides })
+function createAnthropicHandler(overrides = {}) {
+  return createBaseAnthropicHandler({
+    runtimeConfigurationSource,
+    providerAttemptJournal: createTestProviderAttemptJournal(),
+    ...overrides,
+  })
 }
 
-function createTtsHandler(overrides) {
-  return createBaseTtsHandler({ runtimeConfigurationSource, ...overrides })
+function createTtsHandler(overrides = {}) {
+  return createBaseTtsHandler({
+    catalog: TTS_CATALOG,
+    runtimeConfigurationSource,
+    providerAttemptJournal: createTestProviderAttemptJournal(),
+    ...overrides,
+  })
 }
 
 function access(overrides = {}) {

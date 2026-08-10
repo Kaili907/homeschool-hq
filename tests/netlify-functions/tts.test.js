@@ -4,6 +4,7 @@ import { GatewayError } from '../../netlify/functions/_shared/http.js'
 import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catalog.js'
 import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
 import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
+import { createTestProviderAttemptJournal } from './provider-attempt-test-helpers.js'
 
 const ENV = Object.freeze({
   SUPABASE_URL: 'https://academy.supabase.co',
@@ -59,7 +60,11 @@ function createTtsHandler(overrides = {}) {
     read: vi.fn(async () => savedRuntimeConfigurationProjection()),
   }
   return createBaseTtsHandler({
-    gatewayAccess: testAccess(), catalog: TEST_CATALOG, runtimeConfigurationSource, ...overrides,
+    gatewayAccess: testAccess(),
+    catalog: TEST_CATALOG,
+    providerAttemptJournal: createTestProviderAttemptJournal(),
+    runtimeConfigurationSource,
+    ...overrides,
   })
 }
 

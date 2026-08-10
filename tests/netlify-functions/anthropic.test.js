@@ -8,6 +8,7 @@ import {
 import { GatewayError } from '../../netlify/functions/_shared/http.js'
 import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netlify/functions/anthropic.js'
 import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
+import { createTestProviderAttemptJournal } from './provider-attempt-test-helpers.js'
 
 const ENV = Object.freeze({
   SUPABASE_URL: 'https://academy.supabase.co',
@@ -46,7 +47,10 @@ function createAnthropicHandler(overrides = {}) {
     read: vi.fn(async () => savedRuntimeConfigurationProjection()),
   }
   return createBaseAnthropicHandler({
-    gatewayAccess: testAccess(), runtimeConfigurationSource, ...overrides,
+    gatewayAccess: testAccess(),
+    providerAttemptJournal: createTestProviderAttemptJournal(),
+    runtimeConfigurationSource,
+    ...overrides,
   })
 }
 

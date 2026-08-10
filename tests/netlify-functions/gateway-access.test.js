@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
 import { createGatewayAccess, dailyLimit } from '../../netlify/functions/_shared/gateway-access.js'
 
+const TEST_ATTEMPT_ID = '90000000-0000-4000-8000-000000000001'
+
 function membershipClient(result) {
   const builder = {
     select: vi.fn(() => builder),
@@ -13,6 +15,39 @@ function membershipClient(result) {
 }
 
 describe('gateway service-role access', () => {
+  it('exposes the journal RPC adapter through the same service-role client', async () => {
+    const client = {
+      rpc: vi.fn(async () => ({
+        data: { status: 'created', attemptId: TEST_ATTEMPT_ID, state: 'reserved' },
+        error: null,
+      })),
+    }
+    const store = createGatewayAccess({ client }).createProviderAttemptStore()
+    await store.reserve({
+      reservationKey: 'reserve.gateway',
+      logicalOperationKey: 'operation.gateway',
+      physicalRetryIndex: 0,
+      operationalExecutionKey: 'telemetry.gateway',
+      ledgerExecutionKey: 'ledger_gateway',
+      accountRef: '10000000-0000-4000-8000-000000000001',
+      householdRef: '20000000-0000-4000-8000-000000000001',
+      householdAttribution: 'resolved',
+      appVersion: 'build-v1',
+      engineVersion: 'tutor-v1',
+      curriculumVersion: null,
+      engine: 'tutor',
+      purpose: 'tutor_turn',
+      provider: 'anthropic',
+      providerProductId: 'claude-sonnet-4-6',
+      providerModelId: 'claude-sonnet-4-6',
+      logicalModelTier: 'sonnet',
+    })
+    expect(client.rpc).toHaveBeenCalledWith(
+      'academy_reserve_provider_attempt_v1',
+      expect.objectContaining({ p_reservation_key: 'reserve.gateway' }),
+    )
+  })
+
   it('queries only an active, non-revoked membership for the verified user id', async () => {
     const { client, builder } = membershipClient({ data: [{ household_id: 'household-id' }], error: null })
     const access = createGatewayAccess({ client })
