@@ -161,6 +161,18 @@ describe('AdminConsole authorization and load states', () => {
     }
   })
 
+  it('includes Configuration navigation only with the server-resolved read capability', () => {
+    const markup = renderToStaticMarkup(
+      <AdminShell
+        authorization={{ status: 'authorized', role: 'viewer', capabilities: ['configuration:read'] }}
+        activeSection="configuration"
+        title="Configuration"
+      ><section>Configuration surface</section></AdminShell>,
+    )
+    expect(markup).toContain('aria-label="Configuration"')
+    expect(markup).toContain('aria-current="page"')
+  })
+
   it('updates the route title and moves focus to the route heading', () => {
     const focus = vi.fn()
     const documentTarget = { title: '' }

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { isoToday } from '../../appState'
 import {
   readAdminAuthorization,
@@ -46,6 +46,17 @@ import { CurriculumValidationDashboard } from './CurriculumValidationDashboard'
 import { EnginePerformanceDashboard } from './EnginePerformanceDashboard'
 import { SystemHealthDashboard } from './SystemHealthDashboard'
 import { AdminAuditLog } from './AdminAuditLog'
+import {
+  AdminConfiguration,
+  type AdminConfigurationReadState,
+  type AdminVoiceCatalogReadState,
+} from './AdminConfiguration'
+import {
+  AdminConfigurationError,
+  createAdminConfigurationHttpSource,
+  type AdminConfigurationCommitResult,
+} from '../../admin/configurationHttpSource'
+import { getVoiceCatalogAccess } from '../../tutor/voiceCatalog'
 
 export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
 
@@ -135,11 +146,22 @@ export function AdminConsoleRoute() {
   const [auditCursors, setAuditCursors] = useState<readonly (string | null)[]>([null])
   const [auditReadState, setAuditReadState] = useState<AdminAuditReadState>({ status: 'loading' })
   const [auditRetry, setAuditRetry] = useState(0)
+  const [configurationReadState, setConfigurationReadState] = useState<AdminConfigurationReadState>({ status: 'loading' })
+  const [configurationRetry, setConfigurationRetry] = useState(0)
+  const [voiceCatalogState, setVoiceCatalogState] = useState<AdminVoiceCatalogReadState>({ status: 'loading' })
+  const [configurationDirty, setConfigurationDirty] = useState(false)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
+  const configurationSource = useMemo(() => createAdminConfigurationHttpSource(), [])
+  const voiceCatalogSource = useMemo(() => getVoiceCatalogAccess(), [])
   const authorization = presentationAuthorization(authorizationState)
   const section = adminRouteSection(pathname) ?? 'unknown'
   const auditCursor = auditCursors.at(-1) ?? null
+  const pathnameRef = useRef(pathname)
+  const configurationDirtyRef = useRef(configurationDirty)
+
+  pathnameRef.current = pathname
+  configurationDirtyRef.current = configurationDirty
 
   useEffect(() => {
     const controller = new AbortController()
@@ -217,6 +239,34 @@ export function AdminConsoleRoute() {
     )
     return () => controller.abort()
   }, [authorizationState, section, auditFilters, auditCursor, auditRetry])
+
+  useEffect(() => {
+    if (section !== 'configuration') return
+    if (!hasCapability(authorization, 'configuration:read')) {
+      setConfigurationReadState({ status: 'unauthorized' })
+      return
+    }
+    const controller = new AbortController()
+    setConfigurationReadState({ status: 'loading' })
+    setVoiceCatalogState({ status: 'loading' })
+    void configurationSource.read({ signal: controller.signal }).then(
+      (projection) => {
+        if (!controller.signal.aborted) setConfigurationReadState({ status: 'ready', projection })
+      },
+      (error) => {
+        if (controller.signal.aborted) return
+        setConfigurationReadState({
+          status: 'error',
+          code: error instanceof AdminConfigurationError && error.code === 'configuration_timeout'
+            ? 'configuration_timeout' : 'configuration_unavailable',
+        })
+      },
+    )
+    void voiceCatalogSource.load().then((catalog) => {
+      if (!controller.signal.aborted) setVoiceCatalogState({ status: 'ready', catalog })
+    })
+    return () => controller.abort()
+  }, [authorizationState, configurationRetry, configurationSource, section, voiceCatalogSource])
 
   useEffect(() => {
     if (section !== 'curriculum-validation') {
@@ -331,12 +381,24 @@ export function AdminConsoleRoute() {
   }, [authorizationState, section, healthWindow, healthReload])
 
   useEffect(() => {
-    const onPopState = () => setPathname(window.location.pathname)
+    const onPopState = () => {
+      if (adminRouteSection(pathnameRef.current) === 'configuration'
+        && configurationDirtyRef.current
+        && !window.confirm('Discard unsaved configuration changes?')) {
+        window.history.pushState({}, '', pathnameRef.current)
+        return
+      }
+      configurationDirtyRef.current = false
+      setConfigurationDirty(false)
+      setPathname(window.location.pathname)
+    }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
   }, [])
 
   function navigate(next: AdminSection) {
+    if (section === 'configuration' && configurationDirty
+      && !window.confirm('Discard unsaved configuration changes?')) return
     const nextPath = next === 'overview'
       ? ADMIN_CONSOLE_PATH
       : next === 'system-health'
@@ -344,6 +406,7 @@ export function AdminConsoleRoute() {
         : `${ADMIN_CONSOLE_PATH}/${next}`
     window.history.pushState({}, '', nextPath)
     setPathname(nextPath)
+    setConfigurationDirty(false)
   }
 
   function navigateEngine(engine: AdminEngineId) {
@@ -363,6 +426,21 @@ export function AdminConsoleRoute() {
 
   function showNewerAuditEvents() {
     setAuditCursors((current) => current.length > 1 ? current.slice(0, -1) : current)
+  }
+
+  function applyConfigurationCommit(result: AdminConfigurationCommitResult) {
+    setConfigurationReadState((current) => {
+      if (current.status !== 'ready') return current
+      return {
+        status: 'ready',
+        projection: {
+          ...current.projection,
+          settings: current.projection.settings.map((setting) => setting.key === result.settingKey
+            ? { ...setting, value: result.value, revision: result.revision }
+            : setting),
+        },
+      }
+    })
   }
 
   if (authorization.status === 'resolving') return <AdminConsole authorization={authorization} />
@@ -392,6 +470,7 @@ export function AdminConsoleRoute() {
           : section === 'learners' ? 'Learner Analytics'
             : section === 'safety' ? 'Safety Operations'
               : section === 'audit-log' ? 'Audit Log'
+                : section === 'configuration' ? 'Configuration'
                 : section === 'curriculum' ? 'Curriculum' : 'Admin section unavailable'
 
   return (
@@ -480,7 +559,18 @@ export function AdminConsoleRoute() {
             onRetry={() => setAuditRetry((value) => value + 1)}
           />
         )}
-        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'audit-log'].includes(section) && (
+        {section === 'configuration' && (
+          <AdminConfiguration
+            authorization={authorization}
+            state={configurationReadState}
+            voiceCatalog={voiceCatalogState}
+            source={configurationSource}
+            onCommitted={applyConfigurationCommit}
+            onRetry={() => setConfigurationRetry((value) => value + 1)}
+            onDirtyChange={setConfigurationDirty}
+          />
+        )}
+        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'configuration', 'audit-log'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>
