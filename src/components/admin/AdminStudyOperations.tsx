@@ -1,3 +1,4 @@
+import { useEffect, useRef, type RefObject } from 'react'
 import type {
   StudyOperationAction,
   StudyOperationGate,
@@ -114,11 +115,20 @@ const GROUPS: readonly {
 ]
 
 export function AdminStudyOperations(props: AdminStudyOperationsProps) {
+  const recoveryHeadingRef = useRef<HTMLHeadingElement>(null)
+  const retryPendingRef = useRef(false)
+  useEffect(() => {
+    if (props.state.status === 'loading' || !retryPendingRef.current) return
+    retryPendingRef.current = false
+    recoveryHeadingRef.current?.focus()
+  }, [props.state.status])
+
   if (!props.authorized || props.state.status === 'denied') {
     return (
       <StudyOperationsState
         title="Study Operations unavailable"
         message="The canonical health:read capability is required. Guardian access does not grant this permission."
+        headingRef={recoveryHeadingRef}
       />
     )
   }
@@ -130,22 +140,37 @@ export function AdminStudyOperations(props: AdminStudyOperationsProps) {
         message={props.state.code === 'study_operations_timeout'
           ? 'The authorized Study Operations request timed out.'
           : 'The authorized Study Operations projection could not be loaded.'}
-        onRetry={props.onRetry}
+        headingRef={recoveryHeadingRef}
+        announcement="alert"
+        onRetry={props.onRetry && (() => {
+          retryPendingRef.current = true
+          props.onRetry?.()
+        })}
       />
     )
   }
-  return <StudyOperationsReady projection={props.state.projection} />
+  return <StudyOperationsReady projection={props.state.projection} headingRef={recoveryHeadingRef} />
 }
 
-function StudyOperationsReady({ projection }: { projection: StudyOperationsProjection }) {
+function StudyOperationsReady({
+  projection,
+  headingRef,
+}: {
+  projection: StudyOperationsProjection
+  headingRef: RefObject<HTMLHeadingElement | null>
+}) {
   const readyCount = projection.gates.filter((gate) => gate.status === 'ready').length
   const byId = new Map(projection.gates.map((gate) => [gate.id, gate]))
   return (
-    <div className="study-ops" aria-live="polite">
+    <div className="study-ops">
+      <span className="study-ops__sr-only" role="status">
+        Study Operations loaded. {readyCount} of {projection.gates.length} gates ready.
+        Overall status: {STATUS_LABELS[projection.overallStatus]}.
+      </span>
       <section className="study-ops__summary" aria-labelledby="study-ops-summary-title">
         <div>
           <p className="study-ops__eyebrow">Read-only production readiness</p>
-          <h2 id="study-ops-summary-title">Study production gates</h2>
+          <h2 id="study-ops-summary-title" ref={headingRef} tabIndex={-1}>Study production gates</h2>
           <p>Separate operational authorities are shown without inferring readiness from deployed code.</p>
         </div>
         <div className="study-ops__score">
@@ -224,15 +249,23 @@ function StudyOperationsState({
   title,
   message,
   onRetry,
+  headingRef,
+  announcement = 'status',
 }: {
   readonly title: string
   readonly message: string
   readonly onRetry?: () => void
+  readonly headingRef: RefObject<HTMLHeadingElement | null>
+  readonly announcement?: 'alert' | 'status'
 }) {
   return (
-    <section className="study-ops-state" aria-live="polite">
+    <section
+      className="study-ops-state"
+      role={announcement}
+      aria-live={announcement === 'alert' ? 'assertive' : 'polite'}
+    >
       <span className="study-ops-state__glyph" aria-hidden="true">!</span>
-      <h2>{title}</h2>
+      <h2 ref={headingRef} tabIndex={-1}>{title}</h2>
       <p>{message}</p>
       {onRetry && <button type="button" onClick={onRetry}>Try again</button>}
     </section>
@@ -241,7 +274,7 @@ function StudyOperationsState({
 
 function StudyOperationsLoading() {
   return (
-    <div className="study-ops study-ops--loading" aria-busy="true" aria-live="polite">
+    <div className="study-ops study-ops--loading" role="status" aria-busy="true" aria-live="polite">
       <span className="study-ops__sr-only">Loading Study Operations</span>
       <div className="study-ops__skeleton study-ops__skeleton--summary" />
       <div className="study-ops__grid">

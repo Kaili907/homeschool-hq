@@ -1,4 +1,4 @@
-import { useEffect, useId, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { AdminCapability, AdminEngineId, AdminHealthState } from '../../admin/admin0Vocabulary'
 import {
   formatUsdMicros,
@@ -141,6 +141,23 @@ export function AdminShell({
 }) {
   const activeLabel = NAVIGATION.find((item) => item.id === activeSection)?.label ?? title
   const visibleNavigation = NAVIGATION.filter((item) => authorization.capabilities.includes(item.capability))
+  const navigationRef = useRef<HTMLUListElement>(null)
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const navigation = navigationRef.current
+      const active = navigation?.querySelector<HTMLButtonElement>('[aria-current="page"]')
+      if (!navigation || !active || navigation.scrollWidth <= navigation.clientWidth) return
+      const navigationRect = navigation.getBoundingClientRect()
+      const activeRect = active.getBoundingClientRect()
+      const focusOutlineClearance = 4
+      if (activeRect.left < navigationRect.left + focusOutlineClearance) {
+        navigation.scrollLeft -= navigationRect.left - activeRect.left + focusOutlineClearance
+      } else if (activeRect.right > navigationRect.right - focusOutlineClearance) {
+        navigation.scrollLeft += activeRect.right - navigationRect.right + focusOutlineClearance
+      }
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [activeSection])
   return (
     <div className="admin-shell">
       <a className="admin-skip-link" href="#admin-main">Skip to {activeLabel.toLowerCase()}</a>
@@ -151,7 +168,7 @@ export function AdminShell({
         </div>
         <nav aria-label="Admin sections">
           <p className="admin-nav-label">Workspace</p>
-          <ul>
+          <ul ref={navigationRef}>
             {visibleNavigation.map((item) => (
               <li key={item.id}>
                 <button

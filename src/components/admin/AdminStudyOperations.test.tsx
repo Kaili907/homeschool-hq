@@ -108,7 +108,9 @@ describe('Admin Study Operations dashboard', () => {
     )
     expect(error).toContain('request timed out')
     expect(error).toContain('Try again')
-    expect(error).toContain('aria-live="polite"')
+    expect(error).toContain('role="alert"')
+    expect(error).toContain('aria-live="assertive"')
+    expect(error).toContain('tabindex="-1"')
   })
 
   it('uses labelled sections, headings, status live regions, and native details', () => {
@@ -118,6 +120,7 @@ describe('Admin Study Operations dashboard', () => {
     expect(markup).toContain('aria-labelledby="study-ops-summary-title"')
     expect(markup).toContain('aria-labelledby="study-core-gates"')
     expect(markup).toContain('role="status"')
+    expect(markup).toContain('Study Operations loaded. 2 of 10 gates ready.')
     expect(markup).toContain('<dl>')
     expect(markup).toContain('<dt>Contract / version</dt>')
   })
@@ -137,6 +140,7 @@ describe('Admin Study Operations dashboard', () => {
     expect(css).toContain('@media (max-width: 680px)')
     expect(css).toContain('grid-template-columns: 1fr')
     expect(css).toContain(':focus-visible')
+    expect(css).toContain('min-height: 2.75rem')
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
   })
 })

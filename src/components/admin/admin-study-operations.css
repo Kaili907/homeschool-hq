@@ -120,7 +120,7 @@
 
 .study-ops-state { max-width: 570px; margin: 10vh auto; padding: 2rem; text-align: center; }
 .study-ops-state p { color: var(--study-ops-muted); line-height: 1.6; }
-.study-ops-state button { border: 0; border-radius: .42rem; padding: .65rem .9rem; background: var(--study-ops-green); color: white; font: inherit; font-weight: 750; cursor: pointer; }
+.study-ops-state button { min-width: 2.75rem; min-height: 2.75rem; border: 0; border-radius: .42rem; padding: .65rem .9rem; background: var(--study-ops-green); color: white; font: inherit; font-weight: 750; cursor: pointer; }
 .study-ops-state button:focus-visible { outline: 3px solid #4d9c80; outline-offset: 3px; }
 .study-ops-state__glyph { display: inline-grid; width: 2.25rem; height: 2.25rem; margin-bottom: .6rem; place-items: center; border: 1px solid #80978e; border-radius: 50%; }
 .study-ops__skeleton { min-height: 230px; border-radius: .68rem; background: linear-gradient(90deg, #e8eeeb, #f4f7f5, #e8eeeb); background-size: 200% 100%; animation: study-ops-shimmer 1.3s linear infinite; }
