@@ -29,7 +29,18 @@ export function executableChecksums(manifest) {
     .map((entry) => typeof entry.sha256 === 'string' ? entry.sha256.toLowerCase() : '')
 }
 
-export async function validateMigrationManifest(manifest, migrationDirectory) {
+function exactHistoricalReconciliation(approvals, filename, previousSha256, replacementSha256) {
+  return Array.isArray(approvals) && approvals.some((approval) =>
+    approval?.approved === true &&
+    approval?.filename === filename &&
+    approval?.previousSha256?.toLowerCase() === previousSha256 &&
+    approval?.replacementSha256?.toLowerCase() === replacementSha256 &&
+    typeof approval?.approvalReference === 'string' &&
+    /^[A-Z0-9][A-Z0-9._/-]{2,80}$/.test(approval.approvalReference)
+  )
+}
+
+export async function validateMigrationManifest(manifest, migrationDirectory, options = {}) {
   const reasons = []
   const entries = Array.isArray(manifest?.migrations) ? manifest.migrations : []
   if (manifest?.schemaVersion !== 1 || entries.length === 0) {
@@ -82,18 +93,57 @@ export async function validateMigrationManifest(manifest, migrationDirectory) {
   } catch {
     reasons.push('migration-directory-unavailable')
   }
+  const fileVersions = files.map((filename) => filename.slice(0, 14))
+  const duplicateFileVersions = [...new Set(fileVersions.filter((version, index) =>
+    fileVersions.indexOf(version) !== index,
+  ))]
+  for (const version of duplicateFileVersions) reasons.push(`duplicate-migration-version:${version}`)
+
+  const fileSet = new Set(files)
+  const manifestFileSet = new Set(filenames)
+  for (const filename of files) {
+    if (!manifestFileSet.has(filename)) reasons.push(`missing-manifest-entry:${filename}`)
+  }
+  for (const filename of filenames) {
+    if (typeof filename === 'string' && !fileSet.has(filename)) reasons.push(`orphan-manifest-entry:${filename}`)
+  }
   if (JSON.stringify(files) !== JSON.stringify(filenames)) reasons.push('migration-file-set-mismatch')
-  if (files.length === filenames.length) {
-    for (let index = 0; index < entries.length; index += 1) {
-      try {
-        const migrationPath = migrationDirectory instanceof URL
-          ? new URL(filenames[index], migrationDirectory)
-          : resolve(migrationDirectory, filenames[index])
-        const source = await readFile(migrationPath, 'utf8')
-        const actual = createHash('sha256').update(source.replaceAll('\r\n', '\n')).digest('hex')
-        if (actual !== hashes[index]) reasons.push(`migration-checksum-mismatch:${filenames[index]}`)
-      } catch {
-        reasons.push(`migration-unreadable:${filenames[index]}`)
+  for (let index = 0; index < entries.length; index += 1) {
+    if (!fileSet.has(filenames[index])) continue
+    try {
+      const migrationPath = migrationDirectory instanceof URL
+        ? new URL(filenames[index], migrationDirectory)
+        : resolve(migrationDirectory, filenames[index])
+      const source = await readFile(migrationPath, 'utf8')
+      const actual = createHash('sha256').update(source.replaceAll('\r\n', '\n')).digest('hex')
+      if (actual !== hashes[index]) reasons.push(`migration-checksum-mismatch:${filenames[index]}`)
+    } catch {
+      reasons.push(`migration-unreadable:${filenames[index]}`)
+    }
+  }
+
+  const frozenHistory = options?.frozenHistoricalMigrations
+  const approvals = options?.approvedHistoricalReconciliations
+  if (frozenHistory !== undefined && !Array.isArray(frozenHistory)) {
+    reasons.push('historical-baseline-contract-invalid')
+  } else if (Array.isArray(frozenHistory)) {
+    for (const frozen of frozenHistory) {
+      const previousSha256 = typeof frozen?.sha256 === 'string' ? frozen.sha256.toLowerCase() : ''
+      const current = entries.find((entry) => entry?.filename === frozen?.filename)
+      const replacementSha256 = typeof current?.sha256 === 'string' ? current.sha256.toLowerCase() : ''
+      if (typeof frozen?.filename !== 'string' || !/^[0-9a-f]{64}$/.test(previousSha256)) {
+        reasons.push('historical-baseline-contract-invalid')
+      } else if (!current) {
+        reasons.push(`historical-migration-missing:${frozen.filename}`)
+      } else if (current.classification !== 'historical-baseline') {
+        reasons.push(`historical-migration-reclassified:${frozen.filename}`)
+      } else if (replacementSha256 !== previousSha256 && !exactHistoricalReconciliation(
+        approvals,
+        frozen.filename,
+        previousSha256,
+        replacementSha256,
+      )) {
+        reasons.push(`historical-migration-mutation-unapproved:${frozen.filename}`)
       }
     }
   }
