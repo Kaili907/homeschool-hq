@@ -298,7 +298,23 @@ export async function verifyLearnerPin(
   pin: unknown,
   options?: CredentialOperationOptions,
 ): Promise<boolean> {
-  const record = readLearnerCredential(profileId, options)
+  // Keep invalid caller input distinct from invalid credential material read
+  // from an otherwise valid profile's storage location.
+  validateLearnerProfileId(profileId)
+  let record: StoredLearnerCredentialRecord | null
+  try {
+    record = readLearnerCredential(profileId, options)
+  } catch (cause) {
+    if (
+      cause instanceof CredentialVaultError &&
+      (cause.code === 'malformed-record' ||
+        cause.code === 'unsupported-version' ||
+        cause.code === 'invalid-profile-id')
+    ) {
+      return false
+    }
+    throw cause
+  }
   return record === null ? false : verifyLearnerCredentialRecord(record, pin, options)
 }
 

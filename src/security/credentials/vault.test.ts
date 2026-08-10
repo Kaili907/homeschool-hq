@@ -118,9 +118,18 @@ describe('device-local learner credential vault', () => {
     expect(template.verifierSchemeVersion).toBe(LEARNER_PIN_VERIFIER_SCHEME_VERSION)
   })
 
-  it('treats the undeployed unbound verifier scheme as non-authoritative', async () => {
+  it('treats a genuine prior unbound verifier as non-authoritative', async () => {
     const storage = new MemoryCredentialStorage()
-    const unbound = { ...template, verifierSchemeVersion: 1 }
+    // Generated from the exact scheme-v1 implementation in commit 087e79f:
+    // PBKDF2-SHA256 over raw UTF-8 PIN "1234", a 16-byte 0x5a salt,
+    // 600,000 iterations, and a 32-byte result. Production v1 verification is
+    // intentionally not restored merely to create this historical fixture.
+    const unbound = {
+      ...template,
+      verifierSchemeVersion: 1,
+      saltBase64: 'WlpaWlpaWlpaWlpaWlpaWg==',
+      verifierBase64: '/W6yvXqhSUrO7R+fJY1R4NtLM+fJ9bwGktEYtBUtFyM=',
+    }
 
     expect(() => parseLearnerCredentialRecord(unbound)).toThrowError(
       expect.objectContaining<Partial<CredentialVaultError>>({
@@ -133,13 +142,47 @@ describe('device-local learner credential vault', () => {
         '1234',
       ),
     ).resolves.toBe(false)
+    await expect(
+      verifyLearnerCredentialRecord(
+        unbound as StoredLearnerCredentialRecord,
+        '9999',
+      ),
+    ).resolves.toBe(false)
     storage.setItem(
       learnerCredentialStorageKey(template.profileId),
       JSON.stringify(unbound),
     )
     await expect(
       verifyLearnerPin(template.profileId, '1234', { storage }),
-    ).rejects.toMatchObject({ code: 'unsupported-version' })
+    ).resolves.toBe(false)
+    await expect(
+      verifyLearnerPin(template.profileId, '9999', { storage }),
+    ).resolves.toBe(false)
+  })
+
+  it('fails closed for malformed stored credential material', async () => {
+    const storage = new MemoryCredentialStorage()
+    storage.setItem(
+      learnerCredentialStorageKey('p1'),
+      JSON.stringify({ ...template, profileId: 'p1', verifierBase64: 'not-base64' }),
+    )
+
+    await expect(verifyLearnerPin('p1', '1234', { storage })).resolves.toBe(false)
+  })
+
+  it('propagates operational storage read failures', async () => {
+    const operationalFailure = new Error('credential storage offline')
+    const storage = {
+      getItem: vi.fn(() => {
+        throw operationalFailure
+      }),
+      setItem: vi.fn(),
+      removeItem: vi.fn(),
+    }
+
+    await expect(verifyLearnerPin('p1', '1234', { storage })).rejects.toMatchObject({
+      code: 'storage-unavailable',
+    })
   })
 
   it('rotates with a fresh salt, invalidates the old PIN, and verifies deletion', async () => {
