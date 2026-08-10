@@ -39,4 +39,20 @@ describe('authorized engine performance HTTP source', () => {
       fetchImpl: vi.fn().mockResolvedValue({ status: 200, json: async () => ({ ...model, rows: [{ conversation: 'private' }] }) }),
     })).resolves.toEqual({ status: 'error', code: 'invalid_response' })
   })
+
+  it('distinguishes malformed, group-incomplete, and unavailable aggregate failures', async () => {
+    const common = { window: '7d' as const, engine: 'study' as const, getAccessToken: async () => 'token' }
+    await expect(readAdminEnginePerformance({
+      ...common,
+      fetchImpl: vi.fn().mockResolvedValue({ status: 502, json: async () => ({ error: { code: 'engine_performance_malformed' } }) }),
+    })).resolves.toEqual({ status: 'error', code: 'malformed' })
+    await expect(readAdminEnginePerformance({
+      ...common,
+      fetchImpl: vi.fn().mockResolvedValue({ status: 503, json: async () => ({ error: { code: 'engine_performance_incomplete' } }) }),
+    })).resolves.toEqual({ status: 'error', code: 'incomplete' })
+    await expect(readAdminEnginePerformance({
+      ...common,
+      fetchImpl: vi.fn().mockResolvedValue({ status: 503, json: async () => ({ error: { code: 'engine_performance_unavailable' } }) }),
+    })).resolves.toEqual({ status: 'error', code: 'unavailable' })
+  })
 })

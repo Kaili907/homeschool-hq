@@ -1,13 +1,13 @@
 import { ADMIN_ENGINE_IDS } from '../../src/admin/contracts.ts'
 import {
-  buildEnginePerformanceProjection,
-  ENGINE_PERFORMANCE_SOURCE_LIMIT,
+  buildEnginePerformanceProjectionFromAggregate,
+  EnginePerformanceAggregateError,
 } from '../../src/admin/enginePerformanceModel.ts'
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import {
-  AdminEnginePerformanceReadError,
-  createAdminEnginePerformanceReader,
-} from './_shared/admin-engine-performance-reader.js'
+  AdminOperationalAggregateReadError,
+  createAdminOperationalAggregateReader,
+} from './_shared/admin-operational-aggregate-reader.js'
 import { errorResponse, jsonResponse } from './_shared/http.js'
 
 const PATHS = new Set([
@@ -68,7 +68,7 @@ export function createAdminEnginePerformanceHandler(overrides = {}) {
     client: overrides.authorizationClient,
     authVerifier: overrides.authVerifier,
   })
-  const reader = overrides.reader ?? createAdminEnginePerformanceReader({
+  const reader = overrides.reader ?? createAdminOperationalAggregateReader({
     env,
     fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
     client: overrides.telemetryClient,
@@ -86,15 +86,28 @@ export function createAdminEnginePerformanceHandler(overrides = {}) {
     if (!authorized.ok) return authorized.response
 
     try {
-      const rows = await reader.list(ENGINE_PERFORMANCE_SOURCE_LIMIT)
-      return jsonResponse(200, buildEnginePerformanceProjection(rows, {
+      const aggregate = await reader.aggregate({
+        start: filters.start,
+        endExclusive: filters.end,
+        engine: filters.engine,
+        engineVersion: filters.engineVersion,
+        courseRef: filters.courseRef,
+        unitRef: filters.unitRef,
+        capability: 'engines:read',
+      })
+      return jsonResponse(200, buildEnginePerformanceProjectionFromAggregate(aggregate, {
         generatedAt,
         filters,
-        sourceLimit: ENGINE_PERFORMANCE_SOURCE_LIMIT,
       }))
     } catch (error) {
-      if (error instanceof AdminEnginePerformanceReadError && error.code === 'source_timeout') {
+      if (error instanceof AdminOperationalAggregateReadError && error.code === 'source_timeout') {
         return errorResponse(504, 'engine_performance_timeout')
+      }
+      if (error instanceof AdminOperationalAggregateReadError && error.code === 'source_group_limit') {
+        return errorResponse(503, 'engine_performance_incomplete')
+      }
+      if (error instanceof EnginePerformanceAggregateError) {
+        return errorResponse(502, 'engine_performance_malformed')
       }
       return errorResponse(503, 'engine_performance_unavailable')
     }

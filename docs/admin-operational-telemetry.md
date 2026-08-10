@@ -74,21 +74,26 @@ groups contain allowlisted operational dimensions, counts, duration summaries,
 and first/last timestamps only—never event/execution IDs, household/learner
 identity, or raw metadata.
 
-### ADMIN-4 bounded performance source
+### ADMIN-4 performance source
 
-Engine Performance currently consumes the legacy 500-row read. Its projection
-captures the raw source row count before stored-event decoding. Reaching 500 raw
-rows marks the source partial even when malformed rows reduce the accepted event
-count; rejected rows are reported separately, excluded from every metric and
-evidence threshold, and also keep source completeness partial below the limit.
+Engine Performance consumes `academy_aggregate_operational_events_v2` through
+the shared service-only aggregate reader. The endpoint sends its authorized
+time, engine/version, and course/unit filters to SQL and calculates the approved
+counts, rates, and version cohorts from weighted aggregate groups. Event volume
+is not bounded by the legacy newest-500 read.
 
-After TEL-FOUNDATION is integrated, a dedicated follow-up should source Engine
-Performance from `academy_aggregate_operational_events_v2`, map its declared
-group and retention completeness into the projection, and preserve the existing
-metric and insufficient-evidence semantics. This ADMIN-4 correction did not
-integrate that additive migration or aggregate reader; aggregate adoption is
-performed separately so the corrected raw-source completeness semantics remain
-explicit and testable.
+The aggregate response is decoded as untrusted input. Exact range and filter
+echoes, canonical dimensions, group count, 4,096-group bound, retention classes,
+and the sum of represented events must reconcile before any projection is
+returned. Declared partial grouping and retention-limited windows remain visible
+and make affected per-engine evidence partial. Malformed responses and group
+overflow fail closed; neither can become a successful projection.
+
+The corrected legacy raw projection remains covered as a compatibility seam:
+its source bound is derived from raw row count, malformed rows never conceal a
+reached 500-row limit, and rejected rows remain excluded from every metric and
+evidence threshold. The Admin Engine Performance endpoint no longer calls that
+reader. No migration change was required for aggregate adoption.
 
 ## Failure and retention semantics
 

@@ -50,7 +50,14 @@ export function EnginePerformanceDashboard({
     return <div className="engine-performance"><section role="alert"><h1>Engine analytics unavailable</h1><p>Your verified Admin assignment does not include <code>engines:read</code>.</p><a href="/academy">Back to Academy</a></section></div>
   }
   if (state.status === 'error') {
-    return <div className="engine-performance"><section role="alert"><h1>Engine analytics unavailable</h1><p>{state.code === 'timeout' ? 'The authorized evidence read timed out.' : 'The authorized performance projection could not be loaded.'} No substitute data is shown.</p>{onRetry && <button type="button" onClick={onRetry}>Try again</button>}</section></div>
+    const message = state.code === 'timeout'
+      ? 'The authorized evidence read timed out.'
+      : state.code === 'incomplete'
+        ? 'The aggregate evidence exceeded its trustworthy group bound.'
+        : state.code === 'malformed' || state.code === 'invalid_response'
+          ? 'The authorized aggregate response was malformed.'
+          : 'The authorized performance projection could not be loaded.'
+    return <div className="engine-performance"><section role="alert"><h1>Engine analytics unavailable</h1><p>{message} No substitute data is shown.</p>{onRetry && <button type="button" onClick={onRetry}>Try again</button>}</section></div>
   }
 
   const selected = state.model.engines.find((engine) => engine.engineId === selectedEngine) ?? state.model.engines[0]
@@ -66,11 +73,17 @@ export function EnginePerformanceDashboard({
         <a href={selected.technicalHealthReference.path}>{selected.technicalHealthReference.label}</a>
       </header>
 
-      {state.model.source.limitReached && (
+      {'limitReached' in state.model.source && state.model.source.limitReached && (
         <p className="engine-performance__notice" role="status">The canonical {state.model.source.limit.toLocaleString()}-event read limit was reached. Results describe the bounded returned evidence, not an assumed complete history.</p>
       )}
-      {state.model.source.rejectedRowCount > 0 && (
+      {'rejectedRowCount' in state.model.source && state.model.source.rejectedRowCount > 0 && (
         <p className="engine-performance__notice" role="status">Some malformed stored evidence was rejected and is not represented.</p>
+      )}
+      {'mode' in state.model.source && state.model.source.grouping === 'partial' && (
+        <p className="engine-performance__notice" role="status">The aggregate evidence is incomplete. Metrics describe only the represented groups and every affected engine remains qualified as partial.</p>
+      )}
+      {'mode' in state.model.source && state.model.source.retention.status === 'retention_limited' && (
+        <p className="engine-performance__notice" role="status">Retention does not fully cover this evidence window. Metrics remain retention-limited and are not presented as complete history.</p>
       )}
 
       <section className="engine-performance__filters" aria-label="Performance filters">
