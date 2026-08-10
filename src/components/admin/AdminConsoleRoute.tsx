@@ -21,10 +21,20 @@ import { AdminIncidentReadError, readAdminIncidentPage } from '../../admin/incid
 import type { AdminIncidentFilters, AdminIncidentReadState } from '../../admin/incidentExplorerModel'
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
 import { createCurriculumDraftAuthoringHttpSource } from '../../admin/curriculum-authoring/httpSource'
+import { createCurriculumApprovalHttpSource } from '../../admin/curriculum-approval/httpSource'
+import { createCurriculumStagingHttpSource } from '../../admin/curriculum-staging/httpSource'
 import {
   createCurriculumStudioSource,
   CURRICULUM_STUDIO_NAVIGATION_REQUEST,
 } from '../../admin/curriculum/studioModel'
+import {
+  createCurriculumStandardsReviewHttpSource,
+} from '../../admin/curriculum-standards-review/httpSource'
+import {
+  CurriculumStandardsReviewError,
+  type CurriculumStandardsReviewDecision,
+  type CurriculumStandardsReviewItem,
+} from '../../admin/curriculum-standards-review/contracts'
 import { readAdminSafetyOperations } from '../../admin/safetyOperationsHttpSource'
 import type { SafetyOperationsReadState } from '../../admin/safetyOperationsModel'
 import { CurriculumBrowser } from '../../admin/curriculum/CurriculumBrowser'
@@ -56,6 +66,11 @@ import { AdminCostsDashboard } from './AdminCostsDashboard'
 import { LearnerAnalytics } from './LearnerAnalytics'
 import { AdminSafetyOperations } from './AdminSafetyOperations'
 import { CurriculumValidationDashboard } from './CurriculumValidationDashboard'
+import {
+  CurriculumStandardsReviewWorkspace,
+  type CurriculumStandardsReviewReadState,
+  type StandardsReviewFormValue,
+} from './CurriculumStandardsReviewWorkspace'
 import { EnginePerformanceDashboard } from './EnginePerformanceDashboard'
 import { SystemHealthDashboard } from './SystemHealthDashboard'
 import { AdminAuditLog } from './AdminAuditLog'
@@ -92,6 +107,7 @@ export type AdminRouteSection = AdminSection
   | 'curriculum-studio'
   | 'curriculum-validation'
   | 'curriculum-preview'
+  | 'curriculum-standards-review'
   | 'unknown'
 
 const ENGINE_PAGE_LABELS: Readonly<Record<AdminEngineId, string>> = {
@@ -105,6 +121,20 @@ const ENGINE_PAGE_LABELS: Readonly<Record<AdminEngineId, string>> = {
   sync: 'Sync',
 }
 
+const CURRICULUM_DRAFT_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+
+export function curriculumWorkflowIdentityFromSearch(search: string): {
+  readonly draftId: string
+  readonly draftRevision: number
+} | null {
+  const params = new URLSearchParams(search)
+  const draftId = params.get('draft')
+  const revision = params.get('revision')
+  if (!draftId || !CURRICULUM_DRAFT_ID.test(draftId) || !revision || !/^[1-9][0-9]{0,14}$/.test(revision)) return null
+  const draftRevision = Number(revision)
+  return Number.isSafeInteger(draftRevision) ? { draftId: draftId.toLowerCase(), draftRevision } : null
+}
+
 export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (!isAdminConsolePath(pathname)) return null
   const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
@@ -113,6 +143,7 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (suffix === 'curriculum/studio') return 'curriculum-studio'
   if (suffix === 'curriculum/validation') return 'curriculum-validation'
   if (suffix === 'curriculum/preview') return 'curriculum-preview'
+  if (suffix === 'curriculum/standards-review') return 'curriculum-standards-review'
   if (suffix === 'learners' || adminRouteLearnerRef(pathname)) return 'learners'
   if (suffix.startsWith('learners/')) return 'unknown'
   if (suffix === 'health' || suffix.startsWith('health/')) return 'system-health'
@@ -190,6 +221,7 @@ export function AdminConsoleRoute() {
   const [authorizationState, setAuthorizationState] = useState<AdminAuthorizationState | { status: 'resolving' }>({ status: 'resolving' })
   const [authorizationReload, setAuthorizationReload] = useState(0)
   const [pathname, setPathname] = useState(() => window.location.pathname)
+  const [search, setSearch] = useState(() => window.location.search)
   const [range, setRange] = useState<OverviewRange>({ kind: 'preset', preset: 'today' })
   const [overviewState, setOverviewState] = useState<OverviewLoadState>({ status: 'loading' })
   const [overviewReload, setOverviewReload] = useState(0)
@@ -201,6 +233,10 @@ export function AdminConsoleRoute() {
   const [healthReadState, setHealthReadState] = useState<SystemHealthReadState>({ status: 'loading' })
   const [validationState, setValidationState] = useState<CurriculumValidationReadState>({ status: 'loading' })
   const [validationRetry, setValidationRetry] = useState(0)
+  const [standardsReviewState, setStandardsReviewState] = useState<CurriculumStandardsReviewReadState>({ status: 'loading' })
+  const [standardsReviewRetry, setStandardsReviewRetry] = useState(0)
+  const [savingStandardsReviewKey, setSavingStandardsReviewKey] = useState<string | null>(null)
+  const [standardsReviewSaveError, setStandardsReviewSaveError] = useState<'invalid' | 'conflict' | 'forbidden' | 'unavailable' | null>(null)
   const [engineState, setEngineState] = useState<EnginePerformanceReadState>({ status: 'loading' })
   const [selectedEngine, setSelectedEngine] = useState<AdminEngineId>(() => adminRouteEngine(window.location.pathname) ?? 'tutor')
   const [engineWindow, setEngineWindow] = useState<EnginePerformanceWindowPreset>('30d')
@@ -230,16 +266,25 @@ export function AdminConsoleRoute() {
   const [attentionRetry, setAttentionRetry] = useState(0)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const curriculumAuthoringSource = useMemo(() => createCurriculumDraftAuthoringHttpSource(), [])
+  const curriculumApprovalSource = useMemo(() => createCurriculumApprovalHttpSource(), [])
+  const curriculumStagingSource = useMemo(() => createCurriculumStagingHttpSource(), [])
   const curriculumStudioSource = useMemo(
-    () => createCurriculumStudioSource(curriculumSource, curriculumAuthoringSource),
-    [curriculumAuthoringSource, curriculumSource],
+    () => createCurriculumStudioSource(
+      curriculumSource,
+      curriculumAuthoringSource,
+      curriculumApprovalSource,
+      curriculumStagingSource,
+    ),
+    [curriculumApprovalSource, curriculumAuthoringSource, curriculumSource, curriculumStagingSource],
   )
+  const standardsReviewSource = useMemo(() => createCurriculumStandardsReviewHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const configurationSource = useMemo(() => createAdminConfigurationHttpSource(), [])
   const voiceCatalogSource = useMemo(() => getVoiceCatalogAccess(), [])
   const accessSource = useMemo(() => createAdminAccessHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
   const section = adminRouteSection(pathname) ?? 'unknown'
+  const curriculumWorkflowIdentity = curriculumWorkflowIdentityFromSearch(search)
   const auditCursor = auditCursors.at(-1) ?? null
   const incidentCursor = incidentCursors.at(-1) ?? null
   const pathnameRef = useRef(pathname)
@@ -461,6 +506,49 @@ export function AdminConsoleRoute() {
   }, [authorizationState, section, validationRetry])
 
   useEffect(() => {
+    if (section !== 'curriculum-standards-review') {
+      setStandardsReviewState({ status: 'loading' })
+      return
+    }
+    if (!hasCapability(authorization, 'curriculum:read')) {
+      setStandardsReviewState({ status: 'denied' })
+      return
+    }
+    if (!curriculumWorkflowIdentity) {
+      setStandardsReviewState({ status: 'missing-context' })
+      return
+    }
+    let current = true
+    setStandardsReviewState({ status: 'loading' })
+    void standardsReviewSource.readDraftWorkspace(
+      curriculumWorkflowIdentity.draftId,
+      curriculumWorkflowIdentity.draftRevision,
+    ).then(
+      (value) => {
+        if (current) setStandardsReviewState({
+          status: 'ready',
+          decisions: value.decisions,
+          occurrences: value.occurrences,
+          context: { kind: 'draft', ref: value.draftId },
+          identity: {
+            draftRevision: value.draftRevision,
+            baseReleaseVersion: value.baseReleaseVersion,
+            targetVersion: value.targetVersion,
+          },
+        })
+      },
+      (error) => {
+        if (current) setStandardsReviewState(
+          error instanceof CurriculumStandardsReviewError && error.code === 'conflict'
+            ? { status: 'stale' }
+            : { status: 'error' },
+        )
+      },
+    )
+    return () => { current = false }
+  }, [authorizationState, curriculumWorkflowIdentity?.draftId, curriculumWorkflowIdentity?.draftRevision, section, standardsReviewRetry, standardsReviewSource])
+
+  useEffect(() => {
     if (section !== 'engines') return
     const requestedEngine = adminRouteEngine(pathname)
     if (!requestedEngine || requestedEngine === selectedEngine) return
@@ -586,24 +674,25 @@ export function AdminConsoleRoute() {
 
   useEffect(() => {
     const onPopState = () => {
-      if (window.location.pathname === pathnameRef.current) return
+      if (window.location.pathname === pathnameRef.current && window.location.search === search) return
       if (adminRouteSection(pathnameRef.current) === 'configuration'
         && configurationDirtyRef.current
         && !window.confirm('Discard unsaved configuration changes?')) {
-        window.history.pushState({}, '', pathnameRef.current)
+        window.history.pushState({}, '', `${pathnameRef.current}${search}`)
         return
       }
       if (!requestCurriculumStudioNavigation()) {
-        window.history.pushState({}, '', pathnameRef.current)
+        window.history.pushState({}, '', `${pathnameRef.current}${search}`)
         return
       }
       configurationDirtyRef.current = false
       setConfigurationDirty(false)
       setPathname(window.location.pathname)
+      setSearch(window.location.search)
     }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
-  }, [pathname])
+  }, [pathname, search])
 
   function navigate(next: AdminSection) {
     if (section === 'configuration' && configurationDirty
@@ -619,6 +708,7 @@ export function AdminConsoleRoute() {
     window.history.pushState({}, '', nextPath)
     setPathname(nextPath)
     setConfigurationDirty(false)
+    setSearch('')
   }
 
   function navigateEngine(engine: AdminEngineId) {
@@ -626,6 +716,7 @@ export function AdminConsoleRoute() {
     const nextPath = `${ADMIN_CONSOLE_PATH}/engines/${engine}`
     window.history.pushState({}, '', nextPath)
     setPathname(nextPath)
+    setSearch('')
   }
 
   function navigateLearner(learnerRef: string | null) {
@@ -636,13 +727,12 @@ export function AdminConsoleRoute() {
     setPathname(nextPath)
   }
 
-  function navigateCurriculum(view: CurriculumWorkflowView) {
+  function navigateCurriculum(_view: CurriculumWorkflowView, href: string) {
     if (!requestCurriculumStudioNavigation()) return
-    const nextPath = view === 'published'
-      ? `${ADMIN_CONSOLE_PATH}/curriculum`
-      : `${ADMIN_CONSOLE_PATH}/curriculum/${view}`
-    window.history.pushState({}, '', nextPath)
-    setPathname(nextPath)
+    const next = new URL(href, window.location.origin)
+    window.history.pushState({}, '', `${next.pathname}${next.search}${next.hash}`)
+    setPathname(next.pathname)
+    setSearch(next.search)
   }
 
   function applyAuditFilters(filters: AdminAuditFilters) {
@@ -690,6 +780,34 @@ export function AdminConsoleRoute() {
     setConfigurationRetry(configurationRetryAfterCommit)
   }
 
+  async function updateStandardsReview(item: CurriculumStandardsReviewItem, value: StandardsReviewFormValue) {
+    const { decision, status: _currentStatus, ...candidate } = item
+    setSavingStandardsReviewKey(item.reviewKey)
+    setStandardsReviewSaveError(null)
+    try {
+      const result = await standardsReviewSource.update({
+        ...candidate,
+        ...value,
+        expectedRevision: decision?.revision ?? 0,
+        idempotencyKey: crypto.randomUUID(),
+      })
+      setStandardsReviewState((current) => {
+        if (current.status !== 'ready') return current
+        const decisions: CurriculumStandardsReviewDecision[] = current.decisions
+          .filter((currentDecision) => currentDecision.reviewKey !== result.decision.reviewKey)
+          .concat(result.decision)
+        return { ...current, decisions }
+      })
+    } catch (error) {
+      const code = error instanceof CurriculumStandardsReviewError ? error.code : 'unavailable'
+      setStandardsReviewSaveError(code === 'invalid' ? 'invalid'
+        : code === 'conflict' ? 'conflict'
+          : code === 'forbidden' || code === 'unauthenticated' ? 'forbidden' : 'unavailable')
+    } finally {
+      setSavingStandardsReviewKey(null)
+    }
+  }
+
   if (authorization.status === 'resolving') return <AdminConsole authorization={authorization} />
   if (authorization.status === 'unauthorized') return <AdminConsole authorization={authorization} />
 
@@ -710,16 +828,17 @@ export function AdminConsoleRoute() {
     section === 'curriculum-studio'
     || section === 'curriculum-validation'
     || section === 'curriculum-preview'
+    || section === 'curriculum-standards-review'
   )
     ? 'curriculum'
     : section === 'unknown' ? 'overview' : section
   const title = section === 'curriculum-studio'
     ? 'Curriculum Studio'
-    : section === 'curriculum-validation'
-    ? 'Curriculum validation'
-    : section === 'curriculum-preview' ? 'Curriculum Preview / Diff'
-    : section === 'attention' ? 'Admin Attention Center'
-      : section === 'system-health' ? 'System Health'
+    : section === 'curriculum-validation' ? 'Curriculum validation'
+      : section === 'curriculum-preview' ? 'Curriculum Preview / Diff'
+        : section === 'curriculum-standards-review' ? 'Curriculum standards review'
+          : section === 'attention' ? 'Admin Attention Center'
+            : section === 'system-health' ? 'System Health'
       : section === 'engines' ? `${ENGINE_PAGE_LABELS[selectedEngine]} Engine Performance`
         : section === 'costs' ? 'AI & Costs'
           : section === 'learners' ? (adminRouteLearnerRef(pathname) ? 'Learner Detail' : 'Learner Operations')
@@ -801,15 +920,12 @@ export function AdminConsoleRoute() {
           </>
         )}
         {section === 'curriculum-studio' && (
-          <>
-            <CurriculumWorkflowNav current="studio" onNavigate={navigateCurriculum} />
-            <CurriculumStudio
-              authorization={hasCapability(authorization, 'curriculum:read')
-                ? { status: 'authorized', capabilities: authorization.capabilities }
-                : { status: 'denied' }}
-              source={curriculumStudioSource}
-            />
-          </>
+          <CurriculumStudio
+            authorization={hasCapability(authorization, 'curriculum:read')
+              ? { status: 'authorized', capabilities: authorization.capabilities }
+              : { status: 'denied' }}
+            source={curriculumStudioSource}
+          />
         )}
         {section === 'curriculum-validation' && (
           <>
@@ -825,12 +941,26 @@ export function AdminConsoleRoute() {
         )}
         {section === 'curriculum-preview' && (
           <>
-            <CurriculumWorkflowNav current="preview" onNavigate={navigateCurriculum} />
+            <CurriculumWorkflowNav current="preview" identity={curriculumWorkflowIdentity} onNavigate={navigateCurriculum} />
             <CurriculumPreview
               authorization={hasCapability(authorization, 'curriculum:read')
                 ? { status: 'authorized', capabilities: authorization.capabilities }
                 : { status: 'denied' }}
               source={curriculumAuthoringSource}
+            />
+          </>
+        )}
+        {section === 'curriculum-standards-review' && (
+          <>
+            <CurriculumWorkflowNav current="standards-review" identity={curriculumWorkflowIdentity} onNavigate={navigateCurriculum} />
+            <CurriculumStandardsReviewWorkspace
+              readState={standardsReviewState}
+              canManage={hasCapability(authorization, 'curriculum:drafts:write')}
+              canApprove={hasCapability(authorization, 'curriculum:approve')}
+              savingReviewKey={savingStandardsReviewKey}
+              saveError={standardsReviewSaveError}
+              onRetry={() => setStandardsReviewRetry((value) => value + 1)}
+              onUpdate={updateStandardsReview}
             />
           </>
         )}
@@ -898,7 +1028,7 @@ export function AdminConsoleRoute() {
             onRetry={() => setReadinessRetry((value) => value + 1)}
           />
         )}
-        {!['attention', 'learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-studio', 'curriculum-validation', 'curriculum-preview', 'system-health', 'incidents', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
+        {!['attention', 'learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-studio', 'curriculum-validation', 'curriculum-standards-review', 'curriculum-preview', 'system-health', 'incidents', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>

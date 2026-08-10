@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { createAdminCurriculumPreviewService } from './admin-curriculum-preview.js'
 import { createAdminCurriculumStudioService } from './admin-curriculum-studio.js'
 import { adaptCurriculumPreview } from '../../../src/admin/curriculum-authoring/httpSource.ts'
+import { buildCurriculumStandardsReviewQueue } from '../../../src/admin/curriculum-standards-review/model.ts'
 
 const DRAFT_ID = '10000000-0000-4000-8000-000000000001'
 const ACTOR = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
@@ -160,6 +161,47 @@ describe('ADMIN-19 revision-bound curriculum preview service', () => {
     expect(result.validation.run.findings).toEqual(expect.arrayContaining([
       expect.objectContaining({ rule: 'standards.human_review_required', blocking: true }),
     ]))
+  })
+
+  it('uses the same exact approved mapping evidence as draft validation', async () => {
+    const { authoring } = fixture()
+    let decisions = []
+    const standardsReview = { list: vi.fn(async () => ({ schemaVersion: 1, decisions })) }
+    const studio = createAdminCurriculumStudioService({ authoring, standardsReview })
+    const workspace = await studio.readStandardsReview(ACTOR, DRAFT_ID, 7)
+    const queue = buildCurriculumStandardsReviewQueue(
+      workspace.occurrences,
+      { kind: 'draft', ref: DRAFT_ID },
+      [],
+    )
+    decisions = queue.map((item) => ({
+      schemaVersion: 1,
+      reviewKey: item.reviewKey,
+      contextKind: item.contextKind,
+      contextRef: item.contextRef,
+      sourceLabel: item.sourceLabel,
+      grade: item.grade,
+      courseRef: item.courseRef,
+      findingRule: item.findingRule,
+      affectedCount: item.affectedCount,
+      findingIds: item.entities.map((entity) => entity.findingId),
+      status: 'approved_mapping',
+      canonicalStandardId: `canonical:${item.sourceLabel}`,
+      frameworkVersion: 'MI-2026',
+      canonicalTitle: item.sourceLabel,
+      evidenceSource: 'Official state framework',
+      reviewerNote: 'Verified for the exact finding set.',
+      revision: 1,
+      updatedAt: '2026-08-10T12:00:00Z',
+    }))
+
+    const result = await createAdminCurriculumPreviewService({ authoring, standardsReview })
+      .read(ACTOR, DRAFT_ID, 7)
+    expect(result.authority).toMatchObject({ draftId: DRAFT_ID, draftRevision: 7 })
+    expect(result.summary.humanReviewBlockers).toBe(0)
+    expect(result.validation.run.findings.some((finding) => (
+      finding.rule === 'standards.human_review_required' && finding.blocking
+    ))).toBe(false)
   })
 
   it('rejects a stale requested revision before entity reads and performs no mutation', async () => {

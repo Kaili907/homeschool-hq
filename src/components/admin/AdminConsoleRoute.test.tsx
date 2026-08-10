@@ -8,6 +8,7 @@ import {
   configurationReadStateAfterCommit,
   configurationRetryAfterCommit,
   defaultIncidentFilters,
+  curriculumWorkflowIdentityFromSearch,
   presentationAuthorization,
 } from './AdminConsoleRoute'
 
@@ -26,6 +27,7 @@ describe('Admin Console integration route', () => {
     ['/academy/admin/curriculum/studio', 'curriculum-studio'],
     ['/academy/admin/curriculum/validation', 'curriculum-validation'],
     ['/academy/admin/curriculum/preview', 'curriculum-preview'],
+    ['/academy/admin/curriculum/standards-review', 'curriculum-standards-review'],
     ['/academy/admin/health', 'system-health'],
     ['/academy/admin/health/gateway', 'system-health'],
     ['/academy/admin/system-health', 'system-health'],
@@ -66,6 +68,17 @@ describe('Admin Console integration route', () => {
 
   it('never matches the learner administrator-like path', () => {
     expect(adminRouteSection('/academy/administrator')).toBeNull()
+  })
+
+  it('accepts only a complete exact draft workflow identity', () => {
+    const draftId = '10000000-0000-4000-8000-000000000001'
+    expect(curriculumWorkflowIdentityFromSearch(`?draft=${draftId}&revision=12`)).toEqual({
+      draftId,
+      draftRevision: 12,
+    })
+    expect(curriculumWorkflowIdentityFromSearch(`?draft=${draftId}`)).toBeNull()
+    expect(curriculumWorkflowIdentityFromSearch('?draft=not-a-uuid&revision=12')).toBeNull()
+    expect(curriculumWorkflowIdentityFromSearch(`?draft=${draftId}&revision=0`)).toBeNull()
   })
 
   it('keeps authorization unresolved and unavailable states fail closed', () => {

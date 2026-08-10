@@ -7,6 +7,7 @@ const REF = /^[a-z0-9][a-z0-9:-]{2,127}$/
 const HASH = /^[0-9a-f]{64}$/
 const ENTITY_TYPES = new Set(['course', 'unit', 'lesson', 'assessment', 'media_resource'])
 const ORIGINS = new Set(['base_override', 'draft_created'])
+const COLLABORATOR_RESPONSIBILITIES = new Set(['editor', 'reviewer'])
 
 function config(env) {
   const rawUrl = (env?.SUPABASE_URL || env?.VITE_SUPABASE_URL || '').trim()
@@ -98,16 +99,71 @@ function adaptMutation(value) {
   return Object.freeze({ ...value, ...(projectedEntity ? { entity: projectedEntity } : {}) })
 }
 
+function collaborator(value) {
+  const keys = [
+    'principalRef', 'responsibility', 'status', 'assignmentRevision',
+    'assignedAt', 'revokedAt',
+  ]
+  if (
+    !exactKeys(value, keys)
+    || typeof value.principalRef !== 'string' || !UUID.test(value.principalRef)
+    || !COLLABORATOR_RESPONSIBILITIES.has(value.responsibility)
+    || !['active', 'revoked'].includes(value.status)
+    || !integer(value.assignmentRevision, 1)
+    || !timestamp(value.assignedAt)
+    || (value.revokedAt !== null && !timestamp(value.revokedAt))
+    || (value.status === 'active' && (value.assignmentRevision !== 1 || value.revokedAt !== null))
+    || (value.status === 'revoked' && (value.assignmentRevision !== 2 || value.revokedAt === null))
+  ) return null
+  return Object.freeze({ ...value })
+}
+
+function adaptCollaborators(value) {
+  if (
+    !exactKeys(value, [
+      'schemaVersion', 'draftId', 'draftRevision', 'currentResponsibility',
+      'collaborators',
+    ])
+    || value.schemaVersion !== 1
+    || typeof value.draftId !== 'string' || !UUID.test(value.draftId)
+    || !integer(value.draftRevision, 1)
+    || !COLLABORATOR_RESPONSIBILITIES.has(value.currentResponsibility)
+    || !Array.isArray(value.collaborators) || value.collaborators.length > 1_000
+  ) return null
+  const projected = value.collaborators.map(collaborator)
+  if (projected.some((item) => item === null || item.status !== 'active')) return null
+  return Object.freeze({ ...value, collaborators: Object.freeze(projected) })
+}
+
+function adaptCollaboratorMutation(value) {
+  if (
+    !exactKeys(value, [
+      'schemaVersion', 'replayed', 'draftId', 'draftRevision', 'collaborator',
+    ])
+    || value.schemaVersion !== 1 || typeof value.replayed !== 'boolean'
+    || typeof value.draftId !== 'string' || !UUID.test(value.draftId)
+    || !integer(value.draftRevision, 1)
+  ) return null
+  const projected = collaborator(value.collaborator)
+  return projected ? Object.freeze({ ...value, collaborator: projected }) : null
+}
+
 function unavailable(error) {
   const message = error && typeof error === 'object' && typeof error.message === 'string' ? error.message : ''
   const known = [
     ['CURRICULUM_DRAFT_NOT_FOUND', 'not-found'],
     ['CURRICULUM_ENTITY_NOT_FOUND', 'not-found'],
+    ['CURRICULUM_COLLABORATOR_NOT_FOUND', 'not-found'],
+    ['CURRICULUM_COLLABORATION_REQUIRED', 'forbidden'],
+    ['CURRICULUM_COLLABORATOR_PRINCIPAL_INVALID', 'verified-principal'],
+    ['CURRICULUM_COLLABORATOR_LAST_EDITOR', 'last-editor'],
+    ['CURRICULUM_COLLABORATOR_EXISTS', 'already-assigned'],
     ['CURRICULUM_CAS_CONFLICT', 'conflict'],
     ['CURRICULUM_REPLAY_CONFLICT', 'replay-conflict'],
     ['CURRICULUM_ENTITY_EXISTS', 'conflict'],
     ['CURRICULUM_DRAFT_INPUT_INVALID', 'invalid'],
     ['CURRICULUM_ENTITY_INPUT_INVALID', 'invalid'],
+    ['CURRICULUM_COLLABORATOR_INPUT_INVALID', 'invalid'],
     ['CURRICULUM_BASE_RELEASE_INVALID', 'invalid'],
   ]
   const match = known.find(([marker]) => message.includes(marker))
@@ -194,6 +250,33 @@ export function createAdminCurriculumAuthoringService({ env, fetchImpl, client }
         p_expected_draft_revision: input.expectedDraftRevision, p_request_id: input.idempotencyKey,
         p_request_digest: input.requestDigest, p_required_capability: 'curriculum:drafts:write',
       }, adaptMutation)
+    },
+    listCollaborators(actorUserRef, draftId) {
+      return call('academy_admin_list_curriculum_draft_collaborators_v1', {
+        p_actor_user_ref: actorUserRef, p_draft_id: draftId,
+        p_required_capability: 'curriculum:read',
+      }, adaptCollaborators)
+    },
+    addCollaborator(actorUserRef, input) {
+      return call('academy_admin_add_curriculum_draft_collaborator_v1', {
+        p_actor_user_ref: actorUserRef, p_draft_id: input.draftId,
+        p_principal_user_ref: input.principalRef,
+        p_responsibility: input.responsibility,
+        p_expected_draft_revision: input.expectedDraftRevision,
+        p_request_id: input.idempotencyKey,
+        p_request_digest: input.requestDigest,
+        p_required_capability: 'curriculum:drafts:write',
+      }, adaptCollaboratorMutation)
+    },
+    revokeCollaborator(actorUserRef, input) {
+      return call('academy_admin_revoke_curriculum_draft_collaborator_v1', {
+        p_actor_user_ref: actorUserRef, p_draft_id: input.draftId,
+        p_principal_user_ref: input.principalRef,
+        p_expected_draft_revision: input.expectedDraftRevision,
+        p_request_id: input.idempotencyKey,
+        p_request_digest: input.requestDigest,
+        p_required_capability: 'curriculum:drafts:write',
+      }, adaptCollaboratorMutation)
     },
   })
 }

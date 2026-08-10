@@ -8,7 +8,81 @@ Every schema version bump is documented here. Rules (from the build spec):
   Snapshots are downloadable from the Grown-Ups panel.
 - Migration logic lives in `src/migration.ts` and is covered by
   `src/migration.test.ts`. Tests run before the migration ever executes in the
-  app: `npm test`.
+app: `npm test`.
+
+## Supabase: Curriculum release staging (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810150000_academy_curriculum_release_staging.sql`.
+
+The migration creates an immutable candidate plane distinct from the published
+release registry. One exact current draft revision, validation snapshot, and
+human approval are bound to a target version. The postgres-owned staging RPC
+independently reauthorizes `curriculum:publish`, rechecks the approval
+`publishGate`, rejects release or staged-version collisions, and writes the
+candidate, complete deterministic Schema v2 artifacts, receipt, and bounded
+audit event in one transaction. Exact and semantic retries resolve to the same
+candidate; conflicting identity reuse fails closed.
+
+Candidate and artifact rows are append-only, forced-RLS, and inaccessible by
+application roles. Their state is only `staged` / `not_published`; no published
+release row, active pointer, learner pin, runtime cache, or production artifact
+is changed. The migration is repository-only and has not been applied hosted.
+Its tracked SHA-256 is in
+`docs/admin-console/curriculum-release-staging-migration.json`.
+
+## Supabase: Curriculum Studio draft collaborators (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810141500_academy_curriculum_draft_collaborators.sql`.
+
+The migration adds a revision-bound assignment ledger for verified Admin
+principals. Every active draft retains an editor; editors require both
+`curriculum:drafts:write` and an active editor assignment, while reviewers
+require `curriculum:read` and remain read-only. Assignment mutations use draft
+revision CAS, idempotency receipts, database reauthorization, forced RLS, and
+bounded audit events. They advance the draft revision so validation, approval,
+and staging evidence cannot remain current silently.
+
+The migration is repository-only and has not been applied hosted. Its tracked
+SHA-256 is in
+`docs/admin-console/curriculum-draft-collaborators-migration.json`.
+
+## Supabase: Curriculum human approval (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810140000_academy_curriculum_human_approval.sql`.
+
+The migration stores immutable validation snapshots and exact-revision human
+decisions. Approval requires `curriculum:approve`, a current publication-ready
+validation identity, zero blockers, and the matching draft revision. Later
+draft mutations project prior approval as stale rather than current. The
+approval gate does not publish or activate a release.
+
+The migration is repository-only and has not been applied hosted. Its tracked
+SHA-256 is in
+`docs/admin-console/curriculum-human-approval-migration.json`.
+
+## Supabase: curriculum standards human review (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810130000_academy_curriculum_standards_review.sql`.
+
+The migration adds a forced-RLS standards-review decision ledger and private
+idempotency receipts after the draft-authoring and validation foundations. It
+uses exact ADMIN-18 finding sets, revision CAS, database reauthorization, and
+an evidence-gated lifecycle. Reads require `curriculum:read`; ordinary review
+state writes require `curriculum:drafts:write`; approved mappings require
+`curriculum:approve` and complete canonical ID, framework/version, title/text,
+evidence source, and reviewer note fields.
+
+The additive `curriculum_standard_review.update` audit action records only
+status and revision. The migration does not change immutable release content,
+draft entity payloads, learner data, or runtime release binding. An exact
+approved mapping is consumed as evidence by draft validation and Preview/Diff;
+it does not rewrite authored standards. It has not been applied to hosted
+Supabase. Its tracked SHA-256 is in
+`docs/admin-console/curriculum-standards-review-migration.json`.
 
 ## Supabase: Admin correlation runtime read (2026-08-10)
 

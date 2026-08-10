@@ -1,5 +1,13 @@
+import { createHash } from 'node:crypto'
 import { importImmutableV1 } from '../../../src/curriculum-authoring/v2/v1Importer.node.ts'
 import { validateCurriculumSnapshot } from '../../../src/admin/curriculum-validation/engine.ts'
+import { buildCurriculumResourceLibrary } from '../../../src/admin/curriculum/resourceLibraryModel.ts'
+import {
+  approvedStandardsReviewDecisions,
+  buildCurriculumStandardsReviewQueue,
+  collectCurriculumStandardsReviewOccurrences,
+} from '../../../src/admin/curriculum-standards-review/model.ts'
+import { buildCurriculumStagedCandidate } from './admin-curriculum-staging.js'
 
 const SUPPORTED_RELEASE = '1.0.0'
 const ENTITY_COLLECTIONS = Object.freeze({
@@ -18,6 +26,7 @@ const ID_KEYS = Object.freeze({
 })
 
 let immutableImport
+let immutableResourceLibrary
 
 function baseRelease(version) {
   if (version !== SUPPORTED_RELEASE) {
@@ -104,8 +113,10 @@ async function materialize(authoring, actorUserRef, draftId, expectedRevision) {
   if (draft.revision !== expectedRevision) {
     throw Object.assign(new Error('curriculum_revision_conflict'), { code: 'conflict' })
   }
-  const liveSummaries = draft.entities.filter((entity) => !entity.tombstoned)
-  const details = await mapConcurrent(liveSummaries, 12, (entity) => authoring.readEntity(
+  const requiredSummaries = draft.entities.filter((entity) =>
+    !entity.tombstoned || entity.entityType === 'media_resource',
+  )
+  const details = await mapConcurrent(requiredSummaries, 12, (entity) => authoring.readEntity(
     actorUserRef,
     draftId,
     entity.entityType,
@@ -118,14 +129,14 @@ async function materialize(authoring, actorUserRef, draftId, expectedRevision) {
     throw Object.assign(new Error('curriculum_revision_conflict'), { code: 'conflict' })
   }
   if (details.some((detail, index) => {
-    const summary = liveSummaries[index]
+    const summary = requiredSummaries[index]
     return detail.draftId !== draftId
       || detail.entityType !== summary.entityType
       || detail.entityRef !== summary.entityRef
       || detail.origin !== summary.origin
       || detail.revision !== summary.revision
       || detail.position !== summary.position
-      || detail.tombstoned
+      || Boolean(detail.tombstoned) !== summary.tombstoned
       || detail.digest !== summary.digest
   })) throw new Error('curriculum_authoring_unavailable')
   const detailByKey = new Map(details.map((detail) => [`${detail.entityType}:${detail.entityRef}`, detail]))
@@ -150,7 +161,30 @@ async function materialize(authoring, actorUserRef, draftId, expectedRevision) {
       payload: detail.payload,
     })
   }
-  return { draft, entities: [...composed.values()] }
+  const tombstonedResources = draft.entities
+    .filter((entity) => entity.tombstoned && entity.entityType === 'media_resource')
+    .map((summary) => {
+      const detail = detailByKey.get(`${summary.entityType}:${summary.entityRef}`)
+      if (!detail) throw new Error('curriculum_authoring_unavailable')
+      return {
+        entityType: summary.entityType,
+        entityRef: summary.entityRef,
+        origin: summary.origin,
+        revision: summary.revision,
+        position: summary.position,
+        tombstoned: true,
+        payload: detail.payload,
+      }
+    })
+  const entities = [...composed.values()]
+  return {
+    draft,
+    entities,
+    resourceAnalysisEntities: [
+      ...entities.map((entity) => ({ ...entity, tombstoned: false })),
+      ...tombstonedResources,
+    ],
+  }
 }
 
 function snapshotFromMaterialization(materialization) {
@@ -187,7 +221,48 @@ function snapshotFromMaterialization(materialization) {
   }
 }
 
-export function createAdminCurriculumStudioService({ authoring } = {}) {
+function resourceLibraryForBase(version) {
+  if (immutableResourceLibrary) return immutableResourceLibrary
+  const snapshot = baseRelease(version)
+  const validation = validateCurriculumSnapshot(snapshot, {
+    origin: 'published-release',
+    snapshotId: `release:${version}`,
+    expectedVersion: version,
+  })
+  immutableResourceLibrary = buildCurriculumResourceLibrary({
+    origin: 'published-release',
+    baseReleaseVersion: version,
+    entities: baseEntities(version).map((entity) => ({ ...entity, tombstoned: false })),
+    validation,
+  })
+  return immutableResourceLibrary
+}
+
+function draftSnapshotAndValidation(materialization) {
+  const snapshot = snapshotFromMaterialization(materialization)
+  const validation = validateCurriculumSnapshot(snapshot, {
+    origin: 'draft',
+    snapshotId: `${materialization.draft.draftId}@${materialization.draft.revision}`,
+    expectedVersion: materialization.draft.targetVersion,
+  })
+  return { snapshot, validation }
+}
+
+async function draftStandardsEvidence(standardsReview, actorUserRef, materialization) {
+  const snapshot = snapshotFromMaterialization(materialization)
+  const occurrences = collectCurriculumStandardsReviewOccurrences(snapshot)
+  const ledger = standardsReview
+    ? await standardsReview.list(actorUserRef, 'draft', materialization.draft.draftId)
+    : { decisions: [] }
+  const queue = buildCurriculumStandardsReviewQueue(occurrences, {
+    kind: 'draft',
+    ref: materialization.draft.draftId,
+  }, ledger.decisions)
+  const decisions = queue.flatMap((item) => item.decision ? [item.decision] : [])
+  return { snapshot, occurrences, decisions }
+}
+
+export function createAdminCurriculumStudioService({ authoring, approval, staging, standardsReview } = {}) {
   if (!authoring) throw new Error('curriculum_authoring_service_required')
   return Object.freeze({
     readBaseIndex(version) {
@@ -197,6 +272,7 @@ export function createAdminCurriculumStudioService({ authoring } = {}) {
         entities: baseEntities(version).map((entity) => entityEntry(
           entity.entityType, entity.payload, entity.origin, entity.revision, entity.position,
         )),
+        resourceLibrary: resourceLibraryForBase(version),
       }
     },
     readBaseEntity(version, entityType, ref) {
@@ -214,6 +290,7 @@ export function createAdminCurriculumStudioService({ authoring } = {}) {
     },
     async readMaterialization(actorUserRef, draftId, expectedRevision) {
       const value = await materialize(authoring, actorUserRef, draftId, expectedRevision)
+      const { validation } = draftSnapshotAndValidation(value)
       return {
         schemaVersion: 1,
         draftId,
@@ -222,21 +299,81 @@ export function createAdminCurriculumStudioService({ authoring } = {}) {
         entities: value.entities.map((entity) => entityEntry(
           entity.entityType, entity.payload, entity.origin, entity.revision, entity.position,
         )),
+        resourceLibrary: buildCurriculumResourceLibrary({
+          origin: 'draft',
+          baseReleaseVersion: value.draft.baseReleaseVersion,
+          draftId,
+          draftRevision: value.draft.revision,
+          entities: value.resourceAnalysisEntities,
+          validation,
+        }),
       }
     },
     async validateDraft(actorUserRef, draftId, expectedRevision) {
       const value = await materialize(authoring, actorUserRef, draftId, expectedRevision)
-      const snapshot = snapshotFromMaterialization(value)
+      const evidence = await draftStandardsEvidence(standardsReview, actorUserRef, value)
+      const run = validateCurriculumSnapshot(evidence.snapshot, {
+        origin: 'draft',
+        snapshotId: `${draftId}@${value.draft.revision}`,
+        expectedVersion: value.draft.targetVersion,
+        standardsReviewDecisions: approvedStandardsReviewDecisions(evidence.decisions),
+      })
+      if (!approval) throw new Error('curriculum_approval_service_required')
+      const validationSnapshot = await approval.recordValidation(actorUserRef, {
+        draftId,
+        draftRevision: value.draft.revision,
+        engineVersion: run.engineVersion,
+        resultDigest: createHash('sha256').update(JSON.stringify(run)).digest('hex'),
+        status: run.status,
+        publicationReady: run.publicationReady,
+        blockingCount: run.summary.blocking,
+        blockingErrorCount: run.findings.filter((finding) => finding.blocking && finding.severity === 'error').length,
+        humanReviewBlockerCount: run.findings.filter((finding) => finding.blocking && finding.rule === 'standards.human_review_required').length,
+      })
       return {
         schemaVersion: 1,
         draftId,
         draftRevision: value.draft.revision,
-        run: validateCurriculumSnapshot(snapshot, {
-          origin: 'draft',
-          snapshotId: `${draftId}@${value.draft.revision}`,
-          expectedVersion: value.draft.targetVersion,
-        }),
+        baseReleaseVersion: value.draft.baseReleaseVersion,
+        targetVersion: value.draft.targetVersion,
+        validationSnapshot,
+        run,
       }
+    },
+    async readStandardsReview(actorUserRef, draftId, expectedRevision) {
+      const value = await materialize(authoring, actorUserRef, draftId, expectedRevision)
+      const evidence = await draftStandardsEvidence(standardsReview, actorUserRef, value)
+      return {
+        schemaVersion: 1,
+        draftId,
+        draftRevision: value.draft.revision,
+        baseReleaseVersion: value.draft.baseReleaseVersion,
+        targetVersion: value.draft.targetVersion,
+        occurrences: evidence.occurrences,
+        decisions: evidence.decisions,
+      }
+    },
+    readStaging(actorUserRef, draftId) {
+      if (!staging) throw new Error('curriculum_staging_service_required')
+      return staging.read(actorUserRef, draftId)
+    },
+    async stageDraft(actorUserRef, draftId, expectedRevision, idempotencyKey) {
+      if (!approval) throw new Error('curriculum_approval_service_required')
+      if (!staging) throw new Error('curriculum_staging_service_required')
+      const approvalStatus = await approval.read(actorUserRef, draftId)
+      if (
+        !approvalStatus.publishGate.eligible
+        || approvalStatus.draftRevision !== expectedRevision
+        || approvalStatus.publishGate.draftRevision !== expectedRevision
+      ) throw Object.assign(new Error('curriculum_staging_gate_blocked'), { code: 'gate-blocked' })
+      const value = await materialize(authoring, actorUserRef, draftId, expectedRevision)
+      const snapshot = snapshotFromMaterialization(value)
+      const candidate = buildCurriculumStagedCandidate({
+        draft: value.draft,
+        snapshot,
+        approval: approvalStatus,
+      })
+      return staging.stage(actorUserRef, candidate, idempotencyKey)
     },
   })
 }
@@ -246,4 +383,5 @@ export const adminCurriculumStudioInternals = Object.freeze({
   baseEntities,
   entityEntry,
   snapshotFromMaterialization,
+  draftStandardsEvidence,
 })

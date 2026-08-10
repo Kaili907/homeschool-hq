@@ -12,13 +12,18 @@ import {
   CURRICULUM_AUTHORING_SCHEMA_VERSION,
   CurriculumDraftAuthoringError,
   validateCurriculumDraftEntity,
+  type AddCurriculumDraftCollaboratorInput,
+  type CurriculumDraftCollaborators,
   type CurriculumDraftDetail,
   type CurriculumDraftEntityPayload,
   type CurriculumDraftEntityType,
   type CurriculumDraftMaterialization,
   type CurriculumDraftSummary,
+  type CurriculumResourceLibrary,
+  type CurriculumResourceReference,
   type CurriculumStudioEntityIndexEntry,
   type CreateCurriculumDraftEntityInput,
+  type RevokeCurriculumDraftCollaboratorInput,
   type TombstoneCurriculumDraftEntityInput,
   type UpdateCurriculumDraftEntityInput,
 } from '../curriculum-authoring/contracts'
@@ -26,6 +31,12 @@ import type { ValidationIssue } from '../../curriculum-authoring/v2/schema'
 import type { CurriculumCatalog, CurriculumReadAuthorization } from './contracts'
 import { CurriculumValidationWorkspace } from '../../components/admin/CurriculumValidationWorkspace'
 import type { CurriculumDraftValidationResult } from '../curriculum-authoring/contracts'
+import {
+  CurriculumApprovalError,
+  type CurriculumApprovalDecision,
+  type CurriculumApprovalReasonCode,
+  type CurriculumApprovalStatusResult,
+} from '../curriculum-approval/contracts'
 import {
   buildMaterializedCurriculumStudioIndex,
   canWriteCurriculumDrafts,
@@ -40,12 +51,25 @@ import {
   type CurriculumTreeKey,
 } from './studioModel'
 import { StructuredEntityEditor } from './StructuredEntityEditor'
+import { CurriculumResourceLibraryView } from './CurriculumResourceLibrary'
 import { createDraftEntityPayload, CURRICULUM_ENTITY_REF_PATTERN } from './studioEditorModel'
+import { CurriculumApprovalReview } from './CurriculumApprovalReview'
+import { CurriculumReleaseStaging } from './CurriculumReleaseStaging'
+import {
+  CurriculumWorkflowNav,
+  type CurriculumWorkflowSnapshot,
+  type CurriculumWorkflowView,
+} from './CurriculumWorkflowNav'
+import {
+  CurriculumStagingError,
+  type CurriculumStagingStatusResult,
+} from '../curriculum-staging/contracts'
 import './curriculum-studio.css'
 
 const TREE_KEYS = new Set<CurriculumTreeKey>([
   'ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End', 'Enter', ' ',
 ])
+const ADMIN_PRINCIPAL_REF_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
 type SaveState =
   | { readonly kind: 'saved'; readonly message: string }
@@ -66,6 +90,15 @@ type PendingOperation =
     readonly createIdempotencyKey: string
     readonly tombstoneIdempotencyKey: string
   }
+
+type PendingCollaboratorOperation =
+  | { readonly kind: 'add'; readonly input: AddCurriculumDraftCollaboratorInput }
+  | { readonly kind: 'revoke'; readonly input: RevokeCurriculumDraftCollaboratorInput }
+
+type CollaboratorNotice = {
+  readonly kind: 'status' | 'error' | 'conflict'
+  readonly message: string
+}
 
 export interface CurriculumStudioProps {
   readonly authorization: CurriculumReadAuthorization
@@ -155,18 +188,30 @@ export function CurriculumStudioView({
   source,
   initialDrafts = [],
   initialBaseEntries = [],
+  initialOpenDraft = null,
+  initialCollaboration = null,
+  initialBaseResourceLibrary = null,
 }: {
   readonly catalog: CurriculumCatalog
   readonly capabilities: readonly AdminCapability[]
   readonly source: CurriculumStudioSource
   readonly initialDrafts?: readonly CurriculumDraftSummary[]
   readonly initialBaseEntries?: readonly CurriculumStudioEntityIndexEntry[]
+  readonly initialOpenDraft?: CurriculumDraftDetail | null
+  readonly initialCollaboration?: CurriculumDraftCollaborators | null
+  readonly initialBaseResourceLibrary?: CurriculumResourceLibrary | null
 }) {
   const [drafts, setDrafts] = useState(initialDrafts)
-  const [draftChoice, setDraftChoice] = useState(initialDrafts[0]?.draftId ?? '')
-  const [draft, setDraft] = useState<CurriculumDraftDetail | null>(null)
+  const [draftChoice, setDraftChoice] = useState(initialOpenDraft?.draftId ?? initialDrafts[0]?.draftId ?? '')
+  const [draft, setDraft] = useState<CurriculumDraftDetail | null>(initialOpenDraft)
   const [materialization, setMaterialization] = useState<CurriculumDraftMaterialization | null>(null)
   const [baseEntries, setBaseEntries] = useState<readonly CurriculumStudioEntityIndexEntry[]>(initialBaseEntries)
+  const [baseResourceLibrary, setBaseResourceLibrary] = useState<CurriculumResourceLibrary | null>(initialBaseResourceLibrary)
+  const initialWorkflowView = useMemo(() => curriculumStudioWorkflowViewFromHash(
+    typeof window === 'undefined' ? '' : window.location.hash,
+  ), [])
+  const [studioView, setStudioView] = useState<'curriculum' | 'resources'>(initialWorkflowView === 'resources' ? 'resources' : 'curriculum')
+  const [workflowView, setWorkflowView] = useState<CurriculumWorkflowView>(initialWorkflowView)
   const [workspaceMessage, setWorkspaceMessage] = useState('Select a draft or create a new workspace.')
   const [workspaceBusy, setWorkspaceBusy] = useState(initialBaseEntries.length === 0)
   const [targetVersion, setTargetVersion] = useState('')
@@ -192,19 +237,173 @@ export function CurriculumStudioView({
   const [validation, setValidation] = useState<CurriculumDraftValidationResult | null>(null)
   const [validationBusy, setValidationBusy] = useState(false)
   const [validationError, setValidationError] = useState<string | null>(null)
+  const [collaboration, setCollaboration] = useState<CurriculumDraftCollaborators | null>(initialCollaboration)
+  const [collaboratorBusy, setCollaboratorBusy] = useState(false)
+  const [collaboratorNotice, setCollaboratorNotice] = useState<CollaboratorNotice>({
+    kind: 'status',
+    message: initialCollaboration
+      ? `${initialCollaboration.collaborators.length} current collaborator${initialCollaboration.collaborators.length === 1 ? '' : 's'}.`
+      : 'Open a draft to view its collaborators.',
+  })
+  const [collaboratorPrincipalRef, setCollaboratorPrincipalRef] = useState('')
+  const [collaboratorResponsibility, setCollaboratorResponsibility] = useState<'editor' | 'reviewer'>('reviewer')
+  const [pendingCollaboratorOperation, setPendingCollaboratorOperation] = useState<PendingCollaboratorOperation | null>(null)
+  const [approval, setApproval] = useState<CurriculumApprovalStatusResult | null>(null)
+  const [approvalBusy, setApprovalBusy] = useState(false)
+  const [approvalError, setApprovalError] = useState<string | null>(null)
+  const [changeReason, setChangeReason] = useState<Exclude<CurriculumApprovalReasonCode, 'approval.ready'>>('changes.content_quality')
+  const [staging, setStaging] = useState<CurriculumStagingStatusResult | null>(null)
+  const [stagingBusy, setStagingBusy] = useState(false)
+  const [stagingError, setStagingError] = useState<string | null>(null)
+  const [stagingReload, setStagingReload] = useState(0)
+  const stagingRequest = useRef<{ readonly fingerprint: string; readonly idempotencyKey: string } | null>(null)
+  const approvalRequestKeys = useRef(new Map<string, string>())
+  const requestedDraftAttempted = useRef(false)
   const focusRequested = useRef(false)
   const nextLoadedSaveMessage = useRef('Saved')
   const itemRefs = useRef(new Map<string, HTMLButtonElement>())
   const draftCapable = canWriteCurriculumDrafts(capabilities)
-  const writeAllowed = draftCapable && serverWriteAllowed && draft !== null
+  const isDraftEditor = collaboration?.currentResponsibility === 'editor'
+  const writeAllowed = draftCapable && serverWriteAllowed && draft !== null && isDraftEditor
+  const approvalCapable = capabilities.includes('curriculum:approve')
+  const stagingCapable = capabilities.includes('curriculum:publish')
   const entries = materialization?.entities ?? baseEntries
+  const resourceLibrary = materialization?.resourceLibrary ?? baseResourceLibrary
   const index = useMemo(() => buildMaterializedCurriculumStudioIndex(entries), [entries])
   const visible = useMemo(() => visibleCurriculumStudioRows(index, expandedIds, query), [expandedIds, index, query])
   const selected = resolveCurriculumStudioEntity(index, selectedId) ?? index.rows[0] ?? null
   const effectiveFocusedId = focusedId || selected?.id || ''
   const selectedEntry = selected?.entity.kind === 'authoring' ? selected.entity.entry : null
   const dirty = curriculumPayloadDirty(payload, savedPayload)
-  const validationStale = validation !== null && draft !== null && validation.draftRevision !== draft.revision
+  const requestedWorkflowIdentity = useMemo(() => curriculumStudioIdentityFromSearch(
+    typeof window === 'undefined' ? '' : window.location.search,
+  ), [])
+  const validationStale = validation !== null && draft !== null
+    && (
+      validation.draftId !== draft.draftId
+      || validation.draftRevision !== draft.revision
+      || validation.baseReleaseVersion !== draft.baseReleaseVersion
+      || validation.targetVersion !== draft.targetVersion
+    )
+  const workflowSnapshot: CurriculumWorkflowSnapshot | null = draft ? {
+    draftId: draft.draftId,
+    draftRevision: draft.revision,
+    baseReleaseVersion: draft.baseReleaseVersion,
+    targetVersion: draft.targetVersion,
+    readOnly: !writeAllowed,
+    resourceLibraryReady: materialization?.draftRevision === draft.revision && resourceLibrary !== null,
+    validation: validation ? {
+      draftId: validation.draftId,
+      draftRevision: validation.draftRevision,
+      baseReleaseVersion: validation.baseReleaseVersion,
+      targetVersion: validation.targetVersion,
+      validationSnapshotId: validation.validationSnapshot.validationSnapshotId,
+      status: validation.run.status,
+      humanReviewBlockers: validation.validationSnapshot.humanReviewBlockerCount,
+    } : null,
+    approval: approval ? {
+      draftId: approval.draftId,
+      draftRevision: approval.draftRevision,
+      baseReleaseVersion: approval.baseReleaseVersion,
+      targetVersion: approval.targetVersion,
+      approvalId: approval.currentDecision?.approvalId ?? null,
+      validationSnapshotId: approval.latestValidation?.validationSnapshotId ?? null,
+      status: approval.status,
+    } : null,
+    staging: staging ? {
+      draftId: staging.draftId,
+      draftRevision: staging.draftRevision,
+      baseReleaseVersion: staging.baseReleaseVersion,
+      targetVersion: staging.targetVersion,
+      stagingId: staging.candidate?.stagingId ?? null,
+      stageState: staging.stageState,
+    } : null,
+  } : null
+
+  useEffect(() => {
+    if (initialOpenDraft || !requestedWorkflowIdentity || requestedDraftAttempted.current) return
+    requestedDraftAttempted.current = true
+    let current = true
+    setWorkspaceBusy(true)
+    setWorkspaceMessage(`Opening requested draft revision ${requestedWorkflowIdentity.draftRevision}…`)
+    void (async () => {
+      try {
+        const nextDraft = await source.readDraft(requestedWorkflowIdentity.draftId)
+        if (nextDraft.revision !== requestedWorkflowIdentity.draftRevision) {
+          throw new CurriculumDraftAuthoringError('conflict', 'revision-conflict')
+        }
+        const nextMaterialization = await source.readMaterialization(nextDraft.draftId, nextDraft.revision)
+        assertExactDraftMaterialization(nextDraft, nextMaterialization)
+        if (!current) return
+        setDraft(nextDraft)
+        setMaterialization(nextMaterialization)
+        setDraftChoice(nextDraft.draftId)
+        setDrafts((value) => replaceDraftSummary(value, nextDraft))
+        setWorkspaceMessage(`Requested draft revision ${nextDraft.revision} is open.`)
+        setServerWriteAllowed(true)
+        writeCurriculumWorkflowLocation(nextDraft)
+        try {
+          const nextCollaboration = await source.listCollaborators(nextDraft.draftId)
+          if (!current) return
+          if (nextCollaboration.draftRevision !== nextDraft.revision) {
+            throw new CurriculumDraftAuthoringError('conflict', 'revision-conflict')
+          }
+          setCollaboration(nextCollaboration)
+          setCollaboratorNotice({
+            kind: 'status',
+            message: nextCollaboration.collaborators.length === 0
+              ? 'No current collaborators.'
+              : `${nextCollaboration.collaborators.length} current collaborator${nextCollaboration.collaborators.length === 1 ? '' : 's'}.`,
+          })
+        } catch (reason) {
+          if (!current) return
+          setCollaboration(null)
+          setCollaboratorNotice({
+            kind: reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict' ? 'conflict' : 'error',
+            message: 'Collaborator evidence is unavailable for this exact revision. The workspace is read-only.',
+          })
+        }
+        try {
+          const nextApproval = await source.readApproval(nextDraft.draftId)
+          if (current) setApproval(nextApproval)
+        } catch (reason) {
+          if (current) setApprovalError(approvalErrorMessage(reason, 'The approval status could not be loaded.'))
+        }
+      } catch (reason) {
+        if (!current) return
+        if (isPermissionLoss(reason)) setServerWriteAllowed(false)
+        setWorkspaceMessage(authoringErrorMessage(reason, 'The requested draft revision could not be opened.'))
+      } finally {
+        if (current) setWorkspaceBusy(false)
+      }
+    })()
+    return () => { current = false }
+  }, [initialOpenDraft, requestedWorkflowIdentity, source])
+
+  useEffect(() => {
+    if (!draft) {
+      setStaging(null)
+      setStagingError(null)
+      return
+    }
+    let current = true
+    setStagingBusy(true)
+    setStagingError(null)
+    source.readStaging(draft.draftId).then(
+      (value) => {
+        if (!current) return
+        setStaging(value)
+        setStagingBusy(false)
+      },
+      (reason) => {
+        if (!current) return
+        setStaging(null)
+        setStagingError(stagingErrorMessage(reason, 'The release staging service is unavailable.'))
+        setStagingBusy(false)
+      },
+    )
+    return () => { current = false }
+  }, [draft?.draftId, draft?.revision, source, stagingReload])
 
   useEffect(() => {
     if (initialBaseEntries.length > 0) return
@@ -214,6 +413,7 @@ export function CurriculumStudioView({
       (value) => {
         if (!current) return
         setBaseEntries(value.entities)
+        setBaseResourceLibrary(value.resourceLibrary)
         setWorkspaceBusy(false)
       },
       (reason) => {
@@ -314,12 +514,36 @@ export function CurriculumStudioView({
     return () => window.removeEventListener('popstate', onPopState)
   }, [dirty, index])
 
-  function selectRow(row: CurriculumStudioRow, updateHistory = true) {
-    if (row.id !== selectedId && !confirmDiscard(dirty)) return
+  function selectRow(row: CurriculumStudioRow, updateHistory = true): boolean {
+    if (row.id !== selectedId && !confirmDiscard(dirty)) return false
     setSelectedId(row.id)
     setFocusedId(row.id)
     setExpandedIds((current) => unionSets(current, expandedAncestorsFor(index, row.id)))
     if (updateHistory) writeStudioEntityLocation(row.id)
+    return true
+  }
+
+  function openResourceEditor(resourceId: string) {
+    const row = index.byId.get(`media_resource:${resourceId}`)
+    if (row && selectRow(row)) {
+      setStudioView('curriculum')
+      setWorkflowView('draft')
+    }
+  }
+
+  function startResourceCreate() {
+    if (!writeAllowed) return
+    setNewEntityType('media_resource')
+    setStudioView('curriculum')
+    setWorkflowView('draft')
+  }
+
+  function jumpToResourceReference(reference: CurriculumResourceReference) {
+    const row = index.byId.get(reference.navigationId)
+    if (row && selectRow(row)) {
+      setStudioView('curriculum')
+      setWorkflowView('draft')
+    }
   }
 
   function toggleRow(row: CurriculumStudioRow) {
@@ -354,18 +578,69 @@ export function CurriculumStudioView({
     setFocusedId(action.focusId)
   }
 
-  async function openDraft(draftId: string) {
+  async function loadCollaborators(draftId: string, expectedDraftRevision: number) {
+    setCollaboratorBusy(true)
+    setCollaboratorNotice({ kind: 'status', message: 'Loading current collaborators…' })
+    try {
+      const value = await source.listCollaborators(draftId)
+      if (value.draftRevision !== expectedDraftRevision) {
+        throw new CurriculumDraftAuthoringError('conflict', 'revision-conflict')
+      }
+      setCollaboration(value)
+      setCollaboratorNotice({
+        kind: 'status',
+        message: value.collaborators.length === 0
+          ? 'No current collaborators.'
+          : `${value.collaborators.length} current collaborator${value.collaborators.length === 1 ? '' : 's'}.`,
+      })
+    } catch (reason) {
+      setCollaboration(null)
+      if (reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict') {
+        setCollaboratorNotice({
+          kind: 'conflict',
+          message: 'Collaborator state is stale. Refresh the draft before managing assignments.',
+        })
+      } else if (isPermissionLoss(reason)) {
+        setCollaboratorNotice({
+          kind: 'error',
+          message: 'Permission denied: this Admin principal is not assigned to the draft.',
+        })
+      } else {
+        setCollaboratorNotice({
+          kind: 'error',
+          message: 'Collaborators are unavailable. The draft remains conservatively read-only.',
+        })
+      }
+    } finally {
+      setCollaboratorBusy(false)
+    }
+  }
+
+  async function openDraft(draftId: string, expectedRevision?: number) {
     if (!draftId || !confirmDiscard(dirty)) return
     setWorkspaceBusy(true)
     setWorkspaceMessage('Opening revision-bound draft materialization…')
     try {
       const nextDraft = await source.readDraft(draftId)
+      if (expectedRevision !== undefined && nextDraft.revision !== expectedRevision) {
+        throw new CurriculumDraftAuthoringError('conflict', 'revision-conflict')
+      }
       const nextMaterialization = await source.readMaterialization(draftId, nextDraft.revision)
+      assertExactDraftMaterialization(nextDraft, nextMaterialization)
+      if (draft?.draftId !== nextDraft.draftId) {
+        setApproval(null)
+        setStaging(null)
+      }
       setDraft(nextDraft)
       setMaterialization(nextMaterialization)
       setDraftChoice(draftId)
+      setWorkflowView('draft')
+      writeCurriculumWorkflowLocation(nextDraft)
       setWorkspaceMessage(`Draft revision ${nextDraft.revision} is open.`)
       setServerWriteAllowed(true)
+      await loadCollaborators(draftId, nextDraft.revision)
+      setValidation((current) => current?.draftId === nextDraft.draftId ? current : null)
+      await refreshApproval(draftId)
     } catch (reason) {
       if (isPermissionLoss(reason)) setServerWriteAllowed(false)
       setWorkspaceMessage(authoringErrorMessage(reason, 'The draft could not be opened.'))
@@ -380,8 +655,10 @@ export function CurriculumStudioView({
     try {
       const nextDraft = await source.readDraft(draft.draftId)
       const nextMaterialization = await source.readMaterialization(draft.draftId, nextDraft.revision)
+      assertExactDraftMaterialization(nextDraft, nextMaterialization)
       setDraft(nextDraft)
       setMaterialization(nextMaterialization)
+      writeCurriculumWorkflowLocation(nextDraft)
       setDrafts((current) => replaceDraftSummary(current, nextDraft))
       if (options.selectId) {
         setSelectedId(options.selectId)
@@ -390,6 +667,9 @@ export function CurriculumStudioView({
       setWorkspaceMessage(`Draft revision ${nextDraft.revision} is current.`)
       setPendingOperation(null)
       setSaveState({ kind: 'saved', message: 'Saved' })
+      await loadCollaborators(nextDraft.draftId, nextDraft.revision)
+      setValidation((current) => current?.draftId === nextDraft.draftId ? current : null)
+      await refreshApproval(draft.draftId)
     } catch (reason) {
       setWorkspaceMessage(authoringErrorMessage(reason, 'The draft could not be refreshed.'))
     } finally {
@@ -413,11 +693,19 @@ export function CurriculumStudioView({
       setCreateRequestKey(null)
       const nextDraft = await source.readDraft(result.draftId)
       const nextMaterialization = await source.readMaterialization(result.draftId, nextDraft.revision)
+      assertExactDraftMaterialization(nextDraft, nextMaterialization)
+      setApproval(null)
+      setStaging(null)
       setDraft(nextDraft)
       setMaterialization(nextMaterialization)
+      setWorkflowView('draft')
+      writeCurriculumWorkflowLocation(nextDraft)
       setDrafts((current) => replaceDraftSummary(current, nextDraft))
       setDraftChoice(result.draftId)
       setWorkspaceMessage(result.replayed ? 'Draft creation replay confirmed.' : 'Draft created and opened.')
+      await loadCollaborators(nextDraft.draftId, nextDraft.revision)
+      setValidation(null)
+      await refreshApproval(result.draftId)
     } catch (reason) {
       if (isPermissionLoss(reason)) setServerWriteAllowed(false)
       setWorkspaceMessage(authoringErrorMessage(reason, 'Draft creation failed. Retry preserves the same idempotency key.'))
@@ -530,14 +818,19 @@ export function CurriculumStudioView({
     if (!draft) return
     const nextDraft = await source.readDraft(draft.draftId)
     const nextMaterialization = await source.readMaterialization(draft.draftId, nextDraft.revision)
+    assertExactDraftMaterialization(nextDraft, nextMaterialization)
     setDraft(nextDraft)
     setMaterialization(nextMaterialization)
+    writeCurriculumWorkflowLocation(nextDraft)
     setDrafts((current) => replaceDraftSummary(current, nextDraft))
     if (selectId) {
       setSelectedId(selectId)
       setFocusedId(selectId)
     }
     setWorkspaceMessage(`Draft revision ${nextDraft.revision} is current.`)
+    await loadCollaborators(nextDraft.draftId, nextDraft.revision)
+    await refreshApproval(draft.draftId)
+    setStagingReload((value) => value + 1)
   }
 
   async function handleMutationFailure(reason: unknown, operation: PendingOperation) {
@@ -616,6 +909,123 @@ export function CurriculumStudioView({
     setNewEntityRef('')
   }
 
+  async function addDraftCollaborator() {
+    if (
+      !draft || !writeAllowed || dirty
+      || !ADMIN_PRINCIPAL_REF_PATTERN.test(collaboratorPrincipalRef)
+    ) return
+    await executeCollaboratorOperation({
+      kind: 'add',
+      input: {
+        draftId: draft.draftId,
+        principalRef: collaboratorPrincipalRef.toLowerCase(),
+        responsibility: collaboratorResponsibility,
+        expectedDraftRevision: draft.revision,
+        idempotencyKey: uuid(),
+      },
+    })
+  }
+
+  async function revokeDraftCollaborator(principalRef: string, responsibility: 'editor' | 'reviewer') {
+    if (!draft || !writeAllowed || dirty) return
+    if (
+      typeof window !== 'undefined'
+      && !confirmCurriculumCollaboratorRevocation(
+        principalRef, responsibility, (message) => window.confirm(message),
+      )
+    ) return
+    await executeCollaboratorOperation({
+      kind: 'revoke',
+      input: {
+        draftId: draft.draftId,
+        principalRef,
+        expectedDraftRevision: draft.revision,
+        idempotencyKey: uuid(),
+      },
+    })
+  }
+
+  async function executeCollaboratorOperation(operation: PendingCollaboratorOperation) {
+    setPendingCollaboratorOperation(operation)
+    setCollaboratorBusy(true)
+    setCollaboratorNotice({
+      kind: 'status',
+      message: operation.kind === 'add' ? 'Adding verified Admin principal…' : 'Revoking collaborator…',
+    })
+    try {
+      const result = operation.kind === 'add'
+        ? await source.addCollaborator(operation.input)
+        : await source.revokeCollaborator(operation.input)
+      setPendingCollaboratorOperation(null)
+      if (operation.kind === 'add') setCollaboratorPrincipalRef('')
+      try {
+        const nextDraft = await source.readDraft(result.draftId)
+        const nextMaterialization = await source.readMaterialization(result.draftId, nextDraft.revision)
+        assertExactDraftMaterialization(nextDraft, nextMaterialization)
+        setDraft(nextDraft)
+        setMaterialization(nextMaterialization)
+        writeCurriculumWorkflowLocation(nextDraft)
+        setDrafts((current) => replaceDraftSummary(current, nextDraft))
+        await loadCollaborators(nextDraft.draftId, nextDraft.revision)
+        await refreshApproval(nextDraft.draftId)
+        setStagingReload((value) => value + 1)
+        setCollaboratorNotice({
+          kind: 'status',
+          message: result.replayed
+            ? 'Collaborator mutation replay confirmed.'
+            : operation.kind === 'add'
+              ? 'Collaborator added.'
+              : 'Collaborator revoked.',
+        })
+      } catch (refreshReason) {
+        if (isPermissionLoss(refreshReason)) {
+          setServerWriteAllowed(false)
+          setCollaboration(null)
+        }
+        setCollaboratorNotice({
+          kind: 'error',
+          message: 'The collaborator mutation succeeded, but the refreshed workspace is unavailable.',
+        })
+      }
+    } catch (reason) {
+      if (reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict') {
+        setPendingCollaboratorOperation(null)
+        setCollaboratorNotice({
+          kind: 'conflict',
+          message: reason.reason === 'idempotency-conflict'
+            ? 'Conflicting idempotency-key reuse was rejected.'
+            : reason.reason === 'already-assigned'
+              ? 'That Admin principal already has a current draft assignment.'
+              : 'Stale collaborator change: refresh the draft before trying again.',
+        })
+      } else if (isPermissionLoss(reason)) {
+        setPendingCollaboratorOperation(null)
+        setServerWriteAllowed(false)
+        setCollaboratorNotice({
+          kind: 'error',
+          message: 'Permission denied: current global capability and editor assignment are both required.',
+        })
+      } else if (reason instanceof CurriculumDraftAuthoringError && reason.code === 'invalid') {
+        setPendingCollaboratorOperation(null)
+        setCollaboratorNotice({
+          kind: 'error',
+          message: reason.reason === 'verified-principal-required'
+            ? 'Add failed: use a verified Admin principal with the capability required by this responsibility.'
+            : reason.reason === 'last-editor'
+              ? 'Revocation denied: every draft must retain at least one editor.'
+              : 'The collaborator request was rejected as invalid.',
+        })
+      } else {
+        setCollaboratorNotice({
+          kind: 'error',
+          message: 'Collaborator service unavailable. Retry will reuse the same idempotency key.',
+        })
+      }
+    } finally {
+      setCollaboratorBusy(false)
+    }
+  }
+
   async function runValidation() {
     if (!draft) return
     setValidationBusy(true)
@@ -623,6 +1033,9 @@ export function CurriculumStudioView({
     try {
       const result = await source.validateDraft(draft.draftId, draft.revision)
       setValidation(result)
+      setWorkflowView('validation')
+      await refreshApproval(draft.draftId)
+      setStagingReload((value) => value + 1)
     } catch (reason) {
       setValidationError(
         reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict'
@@ -634,11 +1047,106 @@ export function CurriculumStudioView({
     }
   }
 
+  async function refreshApproval(draftId: string) {
+    setApprovalError(null)
+    try {
+      setApproval(await source.readApproval(draftId))
+    } catch (reason) {
+      setApproval(null)
+      setApprovalError(approvalErrorMessage(reason, 'The approval status could not be loaded.'))
+    }
+  }
+
+  async function decideApproval(
+    decision: CurriculumApprovalDecision,
+    reasonCode: CurriculumApprovalReasonCode,
+  ) {
+    if (!draft || !approvalCapable || dirty) return
+    const validationSnapshotId = validation && !validationStale
+      ? validation.validationSnapshot.validationSnapshotId
+      : approval?.latestValidation?.draftRevision === draft.revision
+        ? approval.latestValidation.validationSnapshotId
+        : null
+    const fingerprint = [
+      draft.draftId, draft.revision, decision, reasonCode, validationSnapshotId ?? 'none',
+    ].join('|')
+    const idempotencyKey = approvalRequestKeys.current.get(fingerprint) ?? uuid()
+    approvalRequestKeys.current.set(fingerprint, idempotencyKey)
+    setApprovalBusy(true)
+    setApprovalError(null)
+    try {
+      const result = await source.decideApproval({
+        draftId: draft.draftId,
+        draftRevision: draft.revision,
+        decision,
+        reasonCode,
+        validationSnapshotId,
+        idempotencyKey,
+      })
+      setApproval(result)
+      setWorkflowView('approval')
+      approvalRequestKeys.current.delete(fingerprint)
+      setStagingReload((value) => value + 1)
+    } catch (reason) {
+      setApprovalError(approvalErrorMessage(reason, 'The decision could not be recorded. Retry will reuse the same request identity.'))
+    } finally {
+      setApprovalBusy(false)
+    }
+  }
+
+  async function stageRelease() {
+    if (!draft || !stagingCapable || dirty || !staging?.eligible) return
+    const fingerprint = `${draft.draftId}|${draft.revision}`
+    const idempotencyKey = stagingRequest.current?.fingerprint === fingerprint
+      ? stagingRequest.current.idempotencyKey
+      : uuid()
+    stagingRequest.current = { fingerprint, idempotencyKey }
+    setStagingBusy(true)
+    setStagingError(null)
+    try {
+      const result = await source.stageDraft({
+        draftId: draft.draftId,
+        draftRevision: draft.revision,
+        idempotencyKey,
+      })
+      setStaging(result)
+      setWorkflowView('staging')
+      stagingRequest.current = null
+    } catch (reason) {
+      setStagingError(stagingErrorMessage(
+        reason,
+        'Staging is unavailable. Retry will reuse the same request identity.',
+      ))
+    } finally {
+      setStagingBusy(false)
+    }
+  }
+
   function jumpToValidationEntity(entity: { readonly type: string; readonly id: string | null }) {
     if (!entity.id) return
     const type = entity.type === 'resource' ? 'media_resource' : entity.type
     const row = index.byId.get(`${type}:${entity.id}`)
     if (row) selectRow(row)
+  }
+
+  function navigateWorkflow(nextView: CurriculumWorkflowView, href: string) {
+    if (typeof window === 'undefined') return
+    const next = new URL(href, window.location.origin)
+    const staysInStudio = next.pathname === window.location.pathname
+    if (staysInStudio) {
+      setWorkflowView(nextView)
+      if (nextView === 'resources') setStudioView('resources')
+      else if (nextView !== 'studio') setStudioView('curriculum')
+      window.history.pushState({}, '', `${next.pathname}${next.search}${next.hash}`)
+      if (next.hash) {
+        const scroll = () => document.getElementById(next.hash.slice(1))?.scrollIntoView()
+        if (typeof window.requestAnimationFrame === 'function') window.requestAnimationFrame(scroll)
+        else scroll()
+      }
+      return
+    }
+    window.history.pushState({}, '', `${next.pathname}${next.search}${next.hash}`)
+    window.dispatchEvent(new PopStateEvent('popstate'))
   }
 
   return (
@@ -652,7 +1160,14 @@ export function CurriculumStudioView({
         <div className="curriculum-studio-connection is-connected" role="status"><span aria-hidden="true" />Draft service connected</div>
       </header>
 
-      <section className="curriculum-draft-toolbar" aria-label="Draft workspace controls">
+      <CurriculumWorkflowNav
+        current={draft ? workflowView : 'studio'}
+        snapshot={workflowSnapshot}
+        identity={workflowSnapshot ?? requestedWorkflowIdentity}
+        onNavigate={navigateWorkflow}
+      />
+
+      <section id="curriculum-draft-workspace" className="curriculum-draft-toolbar" aria-label="Draft workspace controls">
         <div className="curriculum-draft-open">
           <label htmlFor="curriculum-draft-choice">Draft workspace</label>
           <select id="curriculum-draft-choice" value={draftChoice} onChange={(event) => setDraftChoice(event.target.value)}>
@@ -678,11 +1193,16 @@ export function CurriculumStudioView({
           <div><dt>Target intent</dt><dd>{draft.targetVersion}</dd></div>
           <div><dt>Workspace revision</dt><dd>{draft.revision}</dd></div>
           <div><dt>Lifecycle</dt><dd>{draft.lifecycleState}</dd></div>
-          <div><dt>Access</dt><dd>{writeAllowed ? 'Editable' : 'Read-only'}</dd></div>
+          <div><dt>Access</dt><dd>{collaboration ? collaboration.currentResponsibility : writeAllowed ? 'Editor' : 'Read-only'}</dd></div>
         </dl>
       )}
 
-      <div className="curriculum-studio-grid">
+      <nav className="curriculum-studio-view-switcher" aria-label="Curriculum Studio views">
+        <button type="button" aria-pressed={studioView === 'curriculum'} onClick={() => { setStudioView('curriculum'); setWorkflowView(draft ? 'draft' : 'studio') }}>Navigator &amp; editor</button>
+        <button type="button" aria-pressed={studioView === 'resources'} onClick={() => { setStudioView('resources'); setWorkflowView('resources') }}>Resource Library <span>{resourceLibrary?.totals.resources ?? 0}</span></button>
+      </nav>
+
+      {studioView === 'curriculum' ? <div className="curriculum-studio-grid">
         <aside className="curriculum-studio-pane curriculum-studio-tree-pane" aria-label="Curriculum hierarchy">
           <div className="curriculum-studio-pane-heading"><div><p>Navigator</p><h3>Materialized snapshot</h3></div><span>{entries.length.toLocaleString()} entities</span></div>
           <label className="curriculum-studio-search"><span className="admin-sr-only">Filter curriculum hierarchy</span><input type="search" value={query} placeholder="Find an entity" onChange={(event) => setQuery(event.target.value)} /></label>
@@ -722,6 +1242,7 @@ export function CurriculumStudioView({
         </aside>
 
         <section className="curriculum-studio-pane curriculum-studio-editor" aria-label="Selected entity editor workspace">
+          {draft && collaboration?.currentResponsibility === 'reviewer' && <div className="curriculum-draft-notice" role="status"><strong>Reviewer assignment</strong><p>This draft resource assignment is read-only even when the global Admin role has broader capability.</p></div>}
           {selectedEntry ? (
             <>
               <header className="curriculum-editor-heading"><div><p>{entityTypeLabel(selectedEntry.entityType)} · {originLabel(selectedEntry.origin)}</p><h3>{selectedEntry.label}</h3><span>{selectedEntry.entityRef}</span></div><span className={writeAllowed ? 'curriculum-editable-badge' : 'curriculum-readonly-badge'}>{writeAllowed ? 'Schema v2 editor' : 'Read-only'}</span></header>
@@ -753,16 +1274,134 @@ export function CurriculumStudioView({
             <div className="curriculum-studio-pane-heading"><div><p>Inspector</p><h3>Metadata & status</h3></div></div>
             <InspectorSection title="Lifecycle"><StatusLine label="Published base" value={catalog.source.version} tone="positive" /><StatusLine label="Draft" value={draft ? draft.targetVersion : 'Not open'} tone={draft ? 'positive' : 'warning'} /><StatusLine label="Save state" value={dirty ? 'Unsaved changes' : saveState.message} tone={saveState.kind === 'failed' || saveState.kind === 'conflict' ? 'warning' : 'neutral'} /></InspectorSection>
             <InspectorSection title="Selection"><dl className="curriculum-inspector-list"><div><dt>Type</dt><dd>{selectedEntry ? entityTypeLabel(selectedEntry.entityType) : 'Group'}</dd></div><div><dt>Stable ID</dt><dd>{selectedEntry?.entityRef ?? selected?.id ?? 'None'}</dd></div><div><dt>Origin</dt><dd>{selectedEntry ? originLabel(selectedEntry.origin) : 'Virtual navigation'}</dd></div><div><dt>Entity rev</dt><dd>{selectedEntry?.revision ?? 'Base'}</dd></div></dl></InspectorSection>
-            <InspectorSection title="Authorization"><p>{writeAllowed ? 'Draft authoring enabled' : 'Read-only mode'}</p><small>All reads require curriculum:read. Every mutation is reauthorized for curriculum:drafts:write by the server.</small></InspectorSection>
+            <InspectorSection title="Authorization"><p>{writeAllowed ? 'Draft editor assignment active' : 'Read-only mode'}</p><small>Reads require curriculum:read plus a current draft assignment. Mutations require curriculum:drafts:write plus an editor assignment; the database reauthorizes both.</small></InspectorSection>
+            <InspectorSection title="Collaborators">
+              {!draft ? (
+                <p className="curriculum-collaborator-empty">Open a draft to view its resource assignments.</p>
+              ) : (
+                <>
+                  {collaboratorBusy && !collaboration && <p role="status">Loading collaborators…</p>}
+                  {collaboration && collaboration.collaborators.length === 0 && (
+                    <p className="curriculum-collaborator-empty" role="status">No current collaborators.</p>
+                  )}
+                  {collaboration && collaboration.collaborators.length > 0 && (
+                    <ul className="curriculum-collaborator-list" aria-label="Current draft collaborators">
+                      {collaboration.collaborators.map((collaborator) => (
+                        <li key={collaborator.principalRef}>
+                          <div><strong>{collaborator.responsibility}</strong><code>{collaborator.principalRef}</code></div>
+                          {writeAllowed && (
+                            <button
+                              type="button"
+                              className="curriculum-collaborator-revoke"
+                              aria-label={`Revoke ${collaborator.responsibility} collaborator ${collaborator.principalRef}`}
+                              disabled={collaboratorBusy || dirty || pendingCollaboratorOperation !== null}
+                              onClick={() => void revokeDraftCollaborator(collaborator.principalRef, collaborator.responsibility)}
+                            >Revoke</button>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {writeAllowed && (
+                    <fieldset className="curriculum-collaborator-add" disabled={collaboratorBusy || pendingCollaboratorOperation !== null}>
+                      <legend>Add verified Admin principal</legend>
+                      <label htmlFor="curriculum-collaborator-principal">Principal UUID</label>
+                      <input
+                        id="curriculum-collaborator-principal"
+                        value={collaboratorPrincipalRef}
+                        autoComplete="off"
+                        placeholder="00000000-0000-4000-8000-000000000000"
+                        onChange={(event) => setCollaboratorPrincipalRef(event.target.value)}
+                      />
+                      <label htmlFor="curriculum-collaborator-responsibility">Responsibility</label>
+                      <select
+                        id="curriculum-collaborator-responsibility"
+                        value={collaboratorResponsibility}
+                        onChange={(event) => setCollaboratorResponsibility(event.target.value as 'editor' | 'reviewer')}
+                      ><option value="reviewer">Reviewer</option><option value="editor">Editor</option></select>
+                      <button
+                        type="button"
+                        disabled={
+                          !ADMIN_PRINCIPAL_REF_PATTERN.test(collaboratorPrincipalRef)
+                          || collaboratorBusy || dirty || pendingCollaboratorOperation !== null
+                        }
+                        onClick={() => void addDraftCollaborator()}
+                      >Add collaborator</button>
+                      <small>Editor requires underlying curriculum:drafts:write. Reviewer requires curriculum:read.</small>
+                    </fieldset>
+                  )}
+                  {dirty && writeAllowed && <p className="curriculum-collaborator-dirty">Save or discard entity edits before changing collaborators.</p>}
+                  <p
+                    className={`curriculum-collaborator-notice is-${collaboratorNotice.kind}`}
+                    role={collaboratorNotice.kind === 'status' ? 'status' : 'alert'}
+                    aria-live="polite"
+                  >{collaboratorNotice.message}</p>
+                  {pendingCollaboratorOperation && collaboratorNotice.message.includes('unavailable') && (
+                    <button type="button" disabled={collaboratorBusy} onClick={() => void executeCollaboratorOperation(pendingCollaboratorOperation)}>Retry collaborator change</button>
+                  )}
+                  {collaboratorNotice.kind === 'conflict' && (
+                    <button type="button" disabled={workspaceBusy} onClick={() => void refreshDraft()}>Refresh collaborator state</button>
+                  )}
+                </>
+              )}
+            </InspectorSection>
             <InspectorSection title="Protected classes"><p>Server-owned and read-only</p><small>Schedules, policy sets, standards frameworks, protected assessment interpretations, schema versions, and entity identities are not exposed as unrestricted JSON.</small></InspectorSection>
             <InspectorSection title="Validation"><StatusLine label="Revision" value={validation ? String(validation.draftRevision) : 'Not run'} tone={validationStale ? 'warning' : validation ? 'positive' : 'neutral'} /><button type="button" disabled={!draft || validationBusy} onClick={() => void runValidation()}>{validationBusy ? 'Validating…' : `Validate${draft ? ` revision ${draft.revision}` : ''}`}</button>{validationError && <p role="alert">{validationError}</p>}</InspectorSection>
             {draft && <InspectorSection title="Preview / Diff"><p>Inspect the exact saved candidate</p><a href={curriculumPreviewHref(draft.draftId, draft.revision)}>Preview revision {draft.revision}</a><small>The preview is read-only and remains bound to this revision.</small></InspectorSection>}
           </div>
         </aside>
-      </div>
+      </div> : resourceLibrary ? (
+        <div id="curriculum-resource-library">
+          <CurriculumResourceLibraryView
+            library={resourceLibrary}
+            writeAllowed={writeAllowed}
+            onCreateResource={startResourceCreate}
+            onOpenResource={openResourceEditor}
+            onJumpToReference={jumpToResourceReference}
+          />
+        </div>
+      ) : (
+        <section className="curriculum-resource-library-unavailable" role={workspaceBusy ? 'status' : 'alert'}>
+          <h3>{workspaceBusy ? 'Loading Resource Library' : 'Resource Library unavailable'}</h3>
+          <p>{workspaceBusy ? 'Building the immutable resource inventory.' : 'The exact-snapshot resource analysis could not be loaded.'}</p>
+        </section>
+      )}
+
+      {draft && (
+        <>
+          <div id="curriculum-human-approval">
+            <CurriculumApprovalReview
+              draftId={draft.draftId}
+              draftRevision={draft.revision}
+              approval={approval}
+              validation={validation}
+              canApprove={approvalCapable}
+              hasUnsavedChanges={dirty}
+              busy={approvalBusy}
+              error={approvalError}
+              changeReason={changeReason}
+              onChangeReason={setChangeReason}
+              onDecision={(decision, reasonCode) => void decideApproval(decision, reasonCode)}
+            />
+          </div>
+          <div id="curriculum-release-staging">
+            <CurriculumReleaseStaging
+              status={staging}
+              busy={stagingBusy}
+              error={stagingError}
+              canStage={stagingCapable}
+              hasUnsavedChanges={dirty}
+              currentDraftId={draft.draftId}
+              currentDraftRevision={draft.revision}
+              onRefresh={() => setStagingReload((value) => value + 1)}
+              onStage={() => void stageRelease()}
+            />
+          </div>
+        </>
+      )}
 
       {validation && (
-        <section className="curriculum-studio-validation" aria-label="Revision-bound draft validation">
+        <section id="curriculum-draft-validation" className="curriculum-studio-validation" aria-label="Revision-bound draft validation">
           {validationStale && <div className="curriculum-validation-stale" role="alert"><strong>Validation is stale.</strong> This result is bound to revision {validation.draftRevision}; the open draft is revision {draft?.revision}. Run validation again before relying on it.</div>}
           <CurriculumValidationWorkspace run={validation.run} onJumpToEntity={jumpToValidationEntity} />
         </section>
@@ -773,6 +1412,38 @@ export function CurriculumStudioView({
 
 export function curriculumPreviewHref(draftId: string, revision: number): string {
   return `/academy/admin/curriculum/preview?draft=${encodeURIComponent(draftId)}&revision=${revision}`
+}
+
+export function assertExactDraftMaterialization(
+  draft: Pick<CurriculumDraftDetail, 'draftId' | 'revision' | 'baseReleaseVersion'>,
+  materialization: Pick<CurriculumDraftMaterialization, 'draftId' | 'draftRevision' | 'baseReleaseVersion'>,
+): void {
+  if (
+    materialization.draftId !== draft.draftId
+    || materialization.draftRevision !== draft.revision
+    || materialization.baseReleaseVersion !== draft.baseReleaseVersion
+  ) throw new CurriculumDraftAuthoringError('conflict', 'revision-conflict')
+}
+
+export function curriculumStudioIdentityFromSearch(search: string): {
+  readonly draftId: string
+  readonly draftRevision: number
+} | null {
+  const params = new URLSearchParams(search)
+  const draftId = params.get('draft')
+  const revision = params.get('revision')
+  if (!draftId || !ADMIN_PRINCIPAL_REF_PATTERN.test(draftId) || !revision || !/^[1-9][0-9]{0,14}$/.test(revision)) return null
+  const draftRevision = Number(revision)
+  return Number.isSafeInteger(draftRevision) ? { draftId: draftId.toLowerCase(), draftRevision } : null
+}
+
+function curriculumStudioWorkflowViewFromHash(hash: string): CurriculumWorkflowView {
+  if (hash === '#curriculum-resource-library') return 'resources'
+  if (hash === '#curriculum-draft-validation') return 'validation'
+  if (hash === '#curriculum-human-approval') return 'approval'
+  if (hash === '#curriculum-release-staging') return 'staging'
+  if (hash === '#curriculum-draft-workspace') return 'draft'
+  return 'studio'
 }
 
 function InspectorSection({ title, children }: { readonly title: string; readonly children: ReactNode }) {
@@ -817,6 +1488,33 @@ function isPermissionLoss(reason: unknown): boolean {
     && (reason.code === 'forbidden' || reason.code === 'unauthenticated')
 }
 
+function approvalErrorMessage(reason: unknown, fallback: string): string {
+  if (!(reason instanceof CurriculumApprovalError)) return fallback
+  if (reason.code === 'unauthenticated') return 'The Admin session is no longer authenticated.'
+  if (reason.code === 'forbidden') return 'The server denied curriculum:approve.'
+  if (reason.code === 'not-found') return 'The draft approval record is unavailable.'
+  if (reason.reason === 'validation-blocked') return 'Approval was blocked by the revision-bound validation result.'
+  if (reason.reason === 'decision-conflict') return 'This revision already has a terminal review decision.'
+  if (reason.reason === 'idempotency-conflict') return 'Conflicting reuse of the decision request identity was rejected.'
+  if (reason.code === 'conflict') return 'The draft revision changed before the decision was recorded.'
+  if (reason.code === 'invalid') return 'The server rejected the bounded approval decision.'
+  return fallback
+}
+
+function stagingErrorMessage(reason: unknown, fallback: string): string {
+  if (!(reason instanceof CurriculumStagingError)) return fallback
+  if (reason.code === 'unauthenticated') return 'The Admin session is no longer authenticated.'
+  if (reason.code === 'forbidden') return 'Permission denied: the server requires curriculum:publish.'
+  if (reason.code === 'not-found') return 'The exact draft staging record is unavailable.'
+  if (reason.reason === 'gate-blocked') return 'Staging failed closed because validation or approval is no longer eligible.'
+  if (reason.reason === 'target-version-collision') return 'The target version already exists and cannot be overwritten.'
+  if (reason.reason === 'package-conflict') return 'This exact revision already has a different immutable candidate identity.'
+  if (reason.reason === 'idempotency-conflict') return 'Conflicting reuse of the staging request identity was rejected.'
+  if (reason.code === 'conflict') return 'The draft revision changed before staging completed.'
+  if (reason.code === 'invalid') return 'The server rejected the candidate package contract.'
+  return fallback
+}
+
 export function curriculumPayloadDirty(
   payload: CurriculumDraftEntityPayload | null,
   savedPayload: CurriculumDraftEntityPayload | null,
@@ -830,6 +1528,14 @@ export function confirmCurriculumNavigation(dirty: boolean, confirm: () => boole
 
 export function curriculumSavedMessage(replayed: boolean): string {
   return replayed ? 'Saved · replay confirmed' : 'Saved'
+}
+
+export function confirmCurriculumCollaboratorRevocation(
+  principalRef: string,
+  responsibility: 'editor' | 'reviewer',
+  confirm: (message: string) => boolean,
+): boolean {
+  return confirm(`Revoke ${responsibility} access for Admin principal ${principalRef}?`)
 }
 
 function confirmDiscard(dirty: boolean): boolean {
@@ -854,6 +1560,14 @@ export function writeStudioEntityLocation(entityId: string): void {
   const next = new URL(window.location.href)
   next.searchParams.set('entity', entityId)
   window.history.pushState({}, '', `${next.pathname}${next.search}${next.hash}`)
+}
+
+export function writeCurriculumWorkflowLocation(draft: Pick<CurriculumDraftDetail, 'draftId' | 'revision'>): void {
+  if (typeof window === 'undefined') return
+  const next = new URL(window.location.href)
+  next.searchParams.set('draft', draft.draftId)
+  next.searchParams.set('revision', String(draft.revision))
+  window.history.replaceState({}, '', `${next.pathname}${next.search}${next.hash}`)
 }
 
 function unionSets(left: ReadonlySet<string>, right: ReadonlySet<string>): ReadonlySet<string> {

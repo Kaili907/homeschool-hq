@@ -1,8 +1,9 @@
 import { createHash } from 'node:crypto'
 import { validateCurriculumSnapshot } from '../../../src/admin/curriculum-validation/engine.ts'
+import { approvedStandardsReviewDecisions } from '../../../src/admin/curriculum-standards-review/model.ts'
 import { adminCurriculumStudioInternals } from './admin-curriculum-studio.js'
 
-const { baseEntities, entityEntry, materialize, snapshotFromMaterialization } = adminCurriculumStudioInternals
+const { baseEntities, draftStandardsEvidence, entityEntry, materialize } = adminCurriculumStudioInternals
 
 const ENTITY_ORDER = Object.freeze(['course', 'unit', 'lesson', 'assessment', 'media_resource'])
 const ID_FIELDS = new Set(['course_id', 'unit_id', 'lesson_id', 'assessment_id', 'resource_id'])
@@ -302,16 +303,18 @@ function buildDiff(materialization) {
   }
 }
 
-export function createAdminCurriculumPreviewService({ authoring } = {}) {
+export function createAdminCurriculumPreviewService({ authoring, standardsReview } = {}) {
   if (!authoring) throw new Error('curriculum_authoring_service_required')
   return Object.freeze({
     async read(actorUserRef, draftId, expectedRevision) {
       const value = await materialize(authoring, actorUserRef, draftId, expectedRevision)
       const diff = buildDiff(value)
-      const validation = validateCurriculumSnapshot(snapshotFromMaterialization(value), {
+      const evidence = await draftStandardsEvidence(standardsReview, actorUserRef, value)
+      const validation = validateCurriculumSnapshot(evidence.snapshot, {
         origin: 'draft',
         snapshotId: `${draftId}@${value.draft.revision}`,
         expectedVersion: value.draft.targetVersion,
+        standardsReviewDecisions: approvedStandardsReviewDecisions(evidence.decisions),
       })
       const standardsBlockers = validation.findings.filter((finding) =>
         finding.blocking && finding.category === 'standards').length

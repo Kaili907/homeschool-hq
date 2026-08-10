@@ -97,6 +97,28 @@ describe('Admin audit service reader', () => {
       .resolves.toEqual({ events: [entityEvent], hasMore: false })
   })
 
+  it('accepts minimized standards-review status while rejecting mapping evidence in audit', async () => {
+    const reviewEvent = {
+      ...EVENT,
+      action: 'curriculum_standard_review.update',
+      resourceType: 'curriculum_standard_review',
+      resourceRef: 'csr-1234567890abcdef',
+      previousValue: { status: 'in_review', revision: 1 },
+      newValue: { status: 'approved_mapping', revision: 2 },
+      reasonCode: 'curriculum.approved',
+    }
+    const client = clientWith({ schemaVersion: 2, events: [reviewEvent], hasMore: false })
+    await expect(createAdminAuditReader({ client }).list({ limit: 50 }))
+      .resolves.toEqual({ events: [reviewEvent], hasMore: false })
+    client.abortSignal.mockResolvedValue({ data: {
+      schemaVersion: 2,
+      events: [{ ...reviewEvent, newValue: { status: 'approved_mapping', evidence_source: 'private evidence' } }],
+      hasMore: false,
+    }, error: null })
+    await expect(createAdminAuditReader({ client }).list({ limit: 50 }))
+      .rejects.toMatchObject({ code: 'source_unavailable' })
+  })
+
   it.each([
     { ...EVENT, actorRole: 'student' },
     { ...EVENT, action: 'configuration.*' },

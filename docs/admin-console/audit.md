@@ -26,6 +26,9 @@ accepts a caller-supplied actor/role as fact.
 - Role changes, configuration changes, engine controls, safety triage, incident
   acknowledgement, curriculum draft changes/approval/publication, and release
   activation/rollback are audited.
+- Standards-review decisions use the additive
+  `curriculum_standard_review.update` action. Their audit values contain status
+  and revision only, never mapping evidence or affected curriculum entities.
 - The protected mutation and its audit append succeed atomically. If the audit
   event cannot be appended, the mutation fails.
 - Audit rows cannot be updated or deleted through application roles. Corrections

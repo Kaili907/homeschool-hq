@@ -78,6 +78,17 @@ export interface CurriculumSnapshotValidationOptions {
   readonly snapshotId?: string
   /** Release/draft version asserted by the source envelope, when one exists. */
   readonly expectedVersion?: string
+  /** Server-read standards decisions. Browser-authored approval claims are not authoritative. */
+  readonly standardsReviewDecisions?: readonly CurriculumStandardsReviewDecision[]
+}
+
+export interface CurriculumStandardsReviewDecision {
+  readonly status: 'unreviewed' | 'in_review' | 'approved_mapping' | 'rejected_mapping' | 'needs_evidence'
+  readonly findingIds: readonly string[]
+  readonly canonicalStandardId: string | null
+  readonly frameworkVersion: string | null
+  readonly canonicalTitle: string | null
+  readonly evidenceSource: string | null
 }
 
 export interface CurriculumSnapshotValidationRun {
@@ -180,6 +191,47 @@ function findingId(seed: FindingSeed): string {
     seed.explanation,
   ].join('|')
   return `cvf-${hashFinding(identity, 0x811c9dc5)}${hashFinding(identity, 0x9e3779b9)}`
+}
+
+export function createHumanStandardsReviewFinding(input: {
+  readonly entity: CurriculumEntityReference
+  readonly path: string
+  readonly legacyLabel: string | null
+}): CurriculumValidationFinding {
+  const seed: FindingSeed = {
+    severity: 'error',
+    category: 'standards',
+    entity: input.entity,
+    path: input.path,
+    rule: 'standards.human_review_required',
+    explanation: `The preserved standards label ${JSON.stringify(input.legacyLabel ?? 'unlabeled')} requires human mapping approval.`,
+    blocking: true,
+    remediation: 'Keep the preserved label in the review queue until an authorized human approves a verified mapping; do not invent an official ID.',
+  }
+  return { ...seed, id: findingId(seed) }
+}
+
+function boundedEvidence(value: string | null, minimum: number, maximum: number): boolean {
+  return typeof value === 'string'
+    && value.trim() === value
+    && value.length >= minimum
+    && value.length <= maximum
+    && !/[\u0000-\u001f\u007f]/.test(value)
+}
+
+function hasApprovedStandardsDecision(
+  finding: CurriculumValidationFinding,
+  decisions: readonly CurriculumStandardsReviewDecision[] = [],
+): boolean {
+  return decisions.some((decision) => (
+    decision.status === 'approved_mapping'
+    && Array.isArray(decision.findingIds)
+    && decision.findingIds.includes(finding.id)
+    && boundedEvidence(decision.canonicalStandardId, 1, 160)
+    && boundedEvidence(decision.frameworkVersion, 1, 160)
+    && boundedEvidence(decision.canonicalTitle, 1, 500)
+    && boundedEvidence(decision.evidenceSource, 8, 1_000)
+  ))
 }
 
 function materializeFindings(seeds: readonly FindingSeed[]): readonly CurriculumValidationFinding[] {
@@ -428,7 +480,10 @@ function schemaSeeds(snapshot: Record<string, unknown>): FindingSeed[] {
   return seeds
 }
 
-function standardsReviewSeeds(snapshot: CurriculumAuthoringSet): FindingSeed[] {
+function standardsReviewSeeds(
+  snapshot: CurriculumAuthoringSet,
+  decisions: readonly CurriculumStandardsReviewDecision[] = [],
+): FindingSeed[] {
   const seeds: FindingSeed[] = []
   const references: Array<{
     readonly values: readonly StandardReference[]
@@ -458,16 +513,15 @@ function standardsReviewSeeds(snapshot: CurriculumAuthoringSet): FindingSeed[] {
   references.forEach((owner) => owner.values.forEach((reference, index) => {
     const path = `${owner.path}[${index}]`
     if (reference.mapping_status === 'human-review') {
-      seeds.push({
-        severity: 'error',
-        category: 'standards',
+      const finding = createHumanStandardsReviewFinding({
         entity: owner.entity,
         path,
-        rule: 'standards.human_review_required',
-        explanation: `The preserved standards label ${JSON.stringify(reference.legacy_label ?? 'unlabeled')} requires human mapping approval.`,
-        blocking: true,
-        remediation: 'Keep the preserved label in the review queue until an authorized human approves a verified mapping; do not invent an official ID.',
+        legacyLabel: reference.legacy_label ?? null,
       })
+      if (!hasApprovedStandardsDecision(finding, decisions)) {
+        const { id: _id, ...seed } = finding
+        seeds.push(seed)
+      }
     } else if (reference.mapping_status === 'unverified') {
       seeds.push({
         severity: 'warning',
@@ -632,7 +686,7 @@ export function createCurriculumSnapshotValidator(
         throw new Error('inconsistent semantic validation report')
       }
       seeds.push(...semanticReport.issues.map((issue) => seedFromAuthoringIssue(issue, snapshot)))
-      seeds.push(...standardsReviewSeeds(typedSnapshot))
+      seeds.push(...standardsReviewSeeds(typedSnapshot, options.standardsReviewDecisions))
       if (options.expectedVersion && options.expectedVersion !== typedSnapshot.manifest.draft_version) {
         seeds.push({
           severity: 'error',

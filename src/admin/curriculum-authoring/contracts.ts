@@ -11,7 +11,8 @@ import {
   type Unit,
 } from '../../curriculum-authoring/v2/contracts'
 import { validateWithSchema, type AuthoringSchema, type ValidationIssue } from '../../curriculum-authoring/v2/schema'
-import type { CurriculumSnapshotValidationRun } from '../curriculum-validation/engine'
+import type { CurriculumSnapshotValidationRun, CurriculumValidationFinding } from '../curriculum-validation/engine'
+import type { CurriculumValidationSnapshotSummary } from '../curriculum-approval/contracts'
 
 export const CURRICULUM_DRAFT_SCHEMA_VERSION = 1 as const
 export const CURRICULUM_AUTHORING_SCHEMA_VERSION = '2.0.0' as const
@@ -29,6 +30,7 @@ export const CURRICULUM_DRAFT_ENTITY_TYPES = [
 export type CurriculumDraftEntityType = (typeof CURRICULUM_DRAFT_ENTITY_TYPES)[number]
 export type CurriculumDraftEntityOrigin = 'base_override' | 'draft_created'
 export type CurriculumDraftEntityPayload = Course | Unit | Lesson | Assessment | MediaResource
+export type CurriculumDraftCollaboratorResponsibility = 'editor' | 'reviewer'
 
 const schemas: Readonly<Record<CurriculumDraftEntityType, AuthoringSchema<unknown>>> = Object.freeze({
   course: courseSchema,
@@ -118,6 +120,31 @@ export interface CurriculumDraftMutationResult {
   readonly entity?: CurriculumDraftEntitySummary
 }
 
+export interface CurriculumDraftCollaborator {
+  readonly principalRef: string
+  readonly responsibility: CurriculumDraftCollaboratorResponsibility
+  readonly status: 'active' | 'revoked'
+  readonly assignmentRevision: number
+  readonly assignedAt: string
+  readonly revokedAt: string | null
+}
+
+export interface CurriculumDraftCollaborators {
+  readonly schemaVersion: typeof CURRICULUM_DRAFT_SCHEMA_VERSION
+  readonly draftId: string
+  readonly draftRevision: number
+  readonly currentResponsibility: CurriculumDraftCollaboratorResponsibility
+  readonly collaborators: readonly CurriculumDraftCollaborator[]
+}
+
+export interface CurriculumDraftCollaboratorMutationResult {
+  readonly schemaVersion: typeof CURRICULUM_DRAFT_SCHEMA_VERSION
+  readonly replayed: boolean
+  readonly draftId: string
+  readonly draftRevision: number
+  readonly collaborator: CurriculumDraftCollaborator
+}
+
 export interface CurriculumStudioEntityIndexEntry {
   readonly entityType: CurriculumDraftEntityType
   readonly entityRef: string
@@ -133,10 +160,77 @@ export interface CurriculumStudioEntityIndexEntry {
   readonly unitRef?: string
 }
 
+export type CurriculumResourceKind = MediaResource['kind']
+export type CurriculumResourceOrigin = 'base' | CurriculumDraftEntityOrigin | 'missing' | 'invalid'
+export type CurriculumResourceLifecycle = 'active' | 'tombstoned' | 'missing' | 'invalid'
+export type CurriculumResourceReferenceStatus =
+  | 'referenced'
+  | 'unreferenced'
+  | 'missing-reference'
+  | 'tombstoned-but-referenced'
+  | 'invalid-reference'
+export type CurriculumResourceValidationStatus = 'valid' | 'invalid' | 'not-applicable'
+
+export interface CurriculumResourceReference {
+  readonly entityType: 'lesson' | 'assessment'
+  readonly entityRef: string
+  readonly entityTitle: string
+  readonly promptRef: string | null
+  readonly path: string
+  readonly navigationId: string
+  readonly valid: boolean
+}
+
+export interface CurriculumResourceLibraryItem {
+  /** Stable UI identity. Missing and invalid references do not masquerade as entities. */
+  readonly key: string
+  readonly resourceId: string | null
+  readonly metadata: MediaResource | null
+  readonly title: string
+  readonly kind: CurriculumResourceKind | null
+  readonly required: boolean | null
+  readonly origin: CurriculumResourceOrigin
+  readonly revision: number | null
+  readonly position: number | null
+  readonly lifecycle: CurriculumResourceLifecycle
+  readonly overridden: boolean
+  readonly referenceStatus: CurriculumResourceReferenceStatus
+  readonly referenceCount: number
+  readonly referencingEntityCount: number
+  readonly references: readonly CurriculumResourceReference[]
+  readonly validationStatus: CurriculumResourceValidationStatus
+  readonly validationFindings: readonly CurriculumValidationFinding[]
+}
+
+export interface CurriculumResourceLibrary {
+  readonly schemaVersion: 1
+  readonly source: {
+    readonly origin: 'published-release' | 'draft'
+    readonly baseReleaseVersion: string
+    readonly draftId: string | null
+    readonly draftRevision: number | null
+  }
+  readonly totals: {
+    readonly resources: number
+    readonly active: number
+    readonly referenced: number
+    readonly unreferenced: number
+    readonly overridden: number
+    readonly draftCreated: number
+    readonly tombstoned: number
+    readonly missingReferences: number
+    readonly invalidReferences: number
+    readonly referenceOccurrences: number
+    readonly validationInvalid: number
+  }
+  readonly items: readonly CurriculumResourceLibraryItem[]
+}
+
 export interface CurriculumBaseAuthoringIndex {
   readonly schemaVersion: 1
   readonly baseReleaseVersion: string
   readonly entities: readonly CurriculumStudioEntityIndexEntry[]
+  readonly resourceLibrary: CurriculumResourceLibrary
 }
 
 export interface CurriculumBaseAuthoringEntity {
@@ -153,12 +247,16 @@ export interface CurriculumDraftMaterialization {
   readonly draftRevision: number
   readonly baseReleaseVersion: string
   readonly entities: readonly CurriculumStudioEntityIndexEntry[]
+  readonly resourceLibrary: CurriculumResourceLibrary
 }
 
 export interface CurriculumDraftValidationResult {
   readonly schemaVersion: 1
   readonly draftId: string
   readonly draftRevision: number
+  readonly baseReleaseVersion: string
+  readonly targetVersion: string
+  readonly validationSnapshot: CurriculumValidationSnapshotSummary
   readonly run: CurriculumSnapshotValidationRun
 }
 
@@ -284,6 +382,21 @@ export interface TombstoneCurriculumDraftEntityInput {
   readonly idempotencyKey: string
 }
 
+export interface AddCurriculumDraftCollaboratorInput {
+  readonly draftId: string
+  readonly principalRef: string
+  readonly responsibility: CurriculumDraftCollaboratorResponsibility
+  readonly expectedDraftRevision: number
+  readonly idempotencyKey: string
+}
+
+export interface RevokeCurriculumDraftCollaboratorInput {
+  readonly draftId: string
+  readonly principalRef: string
+  readonly expectedDraftRevision: number
+  readonly idempotencyKey: string
+}
+
 export interface CurriculumDraftAuthoringSource {
   listDrafts(): Promise<{ readonly schemaVersion: 1; readonly drafts: readonly CurriculumDraftSummary[] }>
   readDraft(draftId: string): Promise<CurriculumDraftDetail>
@@ -292,6 +405,9 @@ export interface CurriculumDraftAuthoringSource {
   createEntity(input: CreateCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
   updateEntity(input: UpdateCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
   tombstoneEntity(input: TombstoneCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
+  listCollaborators(draftId: string): Promise<CurriculumDraftCollaborators>
+  addCollaborator(input: AddCurriculumDraftCollaboratorInput): Promise<CurriculumDraftCollaboratorMutationResult>
+  revokeCollaborator(input: RevokeCurriculumDraftCollaboratorInput): Promise<CurriculumDraftCollaboratorMutationResult>
   readBaseIndex(baseReleaseVersion: string): Promise<CurriculumBaseAuthoringIndex>
   readBaseEntity(
     baseReleaseVersion: string,
@@ -305,7 +421,13 @@ export interface CurriculumDraftAuthoringSource {
 
 export class CurriculumDraftAuthoringError extends Error {
   readonly code: 'unauthenticated' | 'forbidden' | 'invalid' | 'conflict' | 'not-found' | 'unavailable'
-  readonly reason?: 'revision-conflict' | 'idempotency-conflict' | 'schema-v2-rejected'
+  readonly reason?:
+    | 'revision-conflict'
+    | 'idempotency-conflict'
+    | 'schema-v2-rejected'
+    | 'verified-principal-required'
+    | 'last-editor'
+    | 'already-assigned'
 
   constructor(code: CurriculumDraftAuthoringError['code'], reason?: CurriculumDraftAuthoringError['reason']) {
     super(code)

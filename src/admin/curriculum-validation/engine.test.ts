@@ -254,6 +254,63 @@ describe('curriculum snapshot validation engine', () => {
     expect(finding?.remediation).toContain('do not invent an official ID')
   })
 
+  it('clears only the exact blocker backed by a complete approved decision', () => {
+    const snapshot = validSnapshot() as unknown as {
+      lessons: Array<{ standards: Array<Record<string, unknown>> }>
+    }
+    snapshot.lessons[0].standards[0] = {
+      framework_ref: 'michigan-framework', legacy_label: '2', mapping_status: 'human-review',
+    }
+    const unresolved = validateCurriculumSnapshot(snapshot, draftOptions())
+    const finding = unresolved.findings.find((item) => item.rule === 'standards.human_review_required')!
+    const approved = validateCurriculumSnapshot(snapshot, {
+      ...draftOptions(),
+      standardsReviewDecisions: [{
+        status: 'approved_mapping',
+        findingIds: [finding.id],
+        canonicalStandardId: 'verified-id-from-human-evidence',
+        frameworkVersion: 'verified-framework-version',
+        canonicalTitle: 'Verified human-readable standard title',
+        evidenceSource: 'Official evidence reference supplied by the reviewer',
+      }],
+    })
+
+    expect(approved.status).toBe('valid')
+    expect(approved.publicationReady).toBe(true)
+    expect(approved.findings).not.toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: finding.id }),
+    ]))
+  })
+
+  it.each(['rejected_mapping', 'needs_evidence', 'approved_mapping'] as const)(
+    'keeps the blocker when the review decision is %s or approval evidence is incomplete',
+    (status) => {
+      const snapshot = validSnapshot() as unknown as {
+        lessons: Array<{ standards: Array<Record<string, unknown>> }>
+      }
+      snapshot.lessons[0].standards[0] = {
+        framework_ref: 'michigan-framework', legacy_label: '2', mapping_status: 'human-review',
+      }
+      const unresolved = validateCurriculumSnapshot(snapshot, draftOptions())
+      const finding = unresolved.findings.find((item) => item.rule === 'standards.human_review_required')!
+      const result = validateCurriculumSnapshot(snapshot, {
+        ...draftOptions(),
+        standardsReviewDecisions: [{
+          status,
+          findingIds: [finding.id],
+          canonicalStandardId: status === 'approved_mapping' ? 'verified-id' : null,
+          frameworkVersion: status === 'approved_mapping' ? 'verified-version' : null,
+          canonicalTitle: status === 'approved_mapping' ? 'Verified title' : null,
+          evidenceSource: null,
+        }],
+      })
+
+      expect(result.status).toBe('invalid')
+      expect(result.publicationReady).toBe(false)
+      expect(result.findings).toEqual(expect.arrayContaining([expect.objectContaining({ id: finding.id })]))
+    },
+  )
+
   it('classifies a protected Tutor authority violation', () => {
     const snapshot = validSnapshot() as unknown as {
       policy_sets: Array<{ tutor_authority: { reveals_answers: boolean } }>
