@@ -333,7 +333,8 @@ function Overview({ model }: { model: AdminOverviewModel }) {
             {billingDispositionLabel(model.ai.spend.billingDisposition)}. {safeCompletenessMessage(model.ai.spend.completeness)}
             {safeCostReasonMessage(model.ai.spend.resultReasonCode) && ` ${safeCostReasonMessage(model.ai.spend.resultReasonCode)}`}
           </p>
-          <p className="admin-disclosure">Calculated values are usage-derived estimates, not reconciled provider invoices.</p>
+          <p className="admin-disclosure">Calculated values are usage-derived marginal provider cost for recorded provider attempts using verified effective-dated pricing terms. They do not represent reconciled provider-invoice economics.</p>
+          <p className="admin-disclosure">Overview does not establish aggregate query coverage, provider-traffic coverage, or accounting-gap evidence. Open AI &amp; Costs for those separate contract v3 signals.</p>
         </section>
       </div>
 

@@ -36,6 +36,46 @@ describe('authorized Admin costs browser reader', () => {
     )).rejects.toEqual(expect.any(AdminCostsReadError))
   })
 
+  it('maps malformed JSON and transport failures to unavailable, not unauthorized', async () => {
+    await expect(readAdminCosts(
+      { kind: 'preset', preset: 'today' },
+      {
+        getAccessToken: async () => 'verified-token',
+        fetchImpl: async () => { throw new Error('network detail must not escape') },
+      },
+    )).rejects.toMatchObject({ code: 'costs_unavailable' })
+    await expect(readAdminCosts(
+      { kind: 'preset', preset: 'today' },
+      {
+        getAccessToken: async () => 'verified-token',
+        fetchImpl: async () => ({
+          status: 200,
+          json: async () => { throw new SyntaxError('malformed response detail') },
+        }),
+      },
+    )).rejects.toMatchObject({ code: 'costs_unavailable' })
+    await expect(readAdminCosts(
+      { kind: 'preset', preset: 'today' },
+      {
+        getAccessToken: async () => 'verified-token',
+        fetchImpl: async () => ({ status: 503, json: async () => ({ malformed: true }) }),
+      },
+    )).rejects.toMatchObject({ code: 'costs_unavailable' })
+  })
+
+  it('maps its own request deadline to the bounded timeout state', async () => {
+    await expect(readAdminCosts(
+      { kind: 'preset', preset: 'today' },
+      {
+        getAccessToken: async () => 'verified-token',
+        timeoutMs: 1,
+        fetchImpl: async (_input, init) => await new Promise<never>((_resolve, reject) => {
+          init.signal?.addEventListener('abort', () => reject(new Error('aborted')), { once: true })
+        }),
+      },
+    )).rejects.toMatchObject({ code: 'costs_timeout' })
+  })
+
   it('does not contact the endpoint without an access token', async () => {
     const fetchImpl = vi.fn()
     await expect(readAdminCosts(

@@ -2,7 +2,9 @@
 
 This server-only contract records privacy-safe Anthropic and ElevenLabs usage
 without changing learner responses, gateway security, quota ordering, or
-provider retry behavior. It implements ADMIN contract version 2.
+provider retry behavior. The canonical ledger row remains
+`AdminUsageCostRecord` version 2; the authorized Admin Costs aggregate response
+is contract version 3.
 
 ## Canonical usage and identity
 

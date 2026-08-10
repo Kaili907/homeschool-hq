@@ -186,7 +186,11 @@ describe('AdminConsole canonical overview presentation', () => {
     expect(markup).toContain('2,100')
     expect(markup).toContain('Cached input write tokens')
     expect(markup).toContain('425')
-    expect(markup).toContain('not reconciled provider invoices')
+    expect(markup).toContain('usage-derived marginal provider cost for recorded provider attempts')
+    expect(markup).toContain('do not represent reconciled provider-invoice economics')
+    expect(markup).toContain('Overview does not establish aggregate query coverage')
+    expect(markup).toContain('provider-traffic coverage, or accounting-gap evidence')
+    expect(markup).toContain('AI &amp; Costs')
   })
 
   it('labels reconciled cost explicitly', () => {
