@@ -32,6 +32,12 @@ import {
   trustedUsageVersions,
   usageRequestKey,
 } from './_shared/usage-accounting.js'
+import {
+  beginGatewayProviderAttempt,
+  createGatewayProviderAttemptJournal,
+  finishGatewayProviderAttempt,
+  gatewayProviderExecutionKey,
+} from './_shared/provider-gateway-attempt.js'
 
 const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages'
 const ANTHROPIC_VERSION = '2023-06-01'
@@ -65,7 +71,7 @@ export function createAnthropicHandler(overrides = {}) {
       const entitlement = await access.requireEntitlement(auth.user.id)
 
       const startedAt = Date.now()
-      const requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
+      let requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
       const authority = entitlement
       const telemetry = overrides.telemetry
         ?? createGatewayOperationalTelemetry({ env, access })
@@ -92,6 +98,12 @@ export function createAnthropicHandler(overrides = {}) {
 
       const request = validateAnthropicRequest(readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES))
       mode = request.mode
+      requestKey = gatewayProviderExecutionKey({
+        event,
+        accountRef: auth.user.id,
+        engine: request.mode,
+        fallbackRequestKey: requestKey,
+      })
       const versions = trustedUsageVersions(env, request.mode)
 
       const apiKey = typeof env.ANTHROPIC_API_KEY === 'string' ? env.ANTHROPIC_API_KEY.trim() : ''
@@ -111,31 +123,54 @@ export function createAnthropicHandler(overrides = {}) {
       let upstream
       let providerData
       const providerBody = buildAnthropicProviderBody(request)
-      const occurredAt = new Date().toISOString()
-      const recordUsage = async (result, resultReasonCode, usage, billingDisposition) => {
-        providerReceiptDurationMs = elapsedMilliseconds(startedAt)
-        return persistProviderUsage(access, {
-          requestKey,
-          occurredAt,
+      const journal = overrides.providerAttemptJournal
+        ?? createGatewayProviderAttemptJournal({ env, access })
+      const providerAttempt = await beginGatewayProviderAttempt({
+        journal,
+        requestKey,
+        engine: request.mode,
+        purpose: request.mode === 'tutor' ? 'tutor_turn' : 'jarvis_turn',
+        provider: 'anthropic',
+        providerProductId: providerBody.model,
+        providerModelId: providerBody.model,
+        logicalModelTier: request.modelTier,
+        authority: {
           accountRef: auth.user.id,
           householdRef: entitlement.householdRef,
           householdAttribution: entitlement.householdAttribution,
-          ...versions,
-          engine: request.mode,
-          provider: 'anthropic',
-          logicalModelTier: request.modelTier,
-          providerProductId: providerBody.model,
-          providerModelId: providerBody.model,
-          inputTokens: usage?.inputTokens,
-          outputTokens: usage?.outputTokens,
-          cachedInputReadTokens: usage?.cacheReadInputTokens,
-          cachedInputWriteTokens: usage?.cacheWriteInputTokens,
-          ttsCharacters: null,
-          latencyMs: providerReceiptDurationMs,
-          result,
-          resultReasonCode,
-          billingDisposition,
+        },
+        versions,
+      })
+      const recordUsage = async (result, resultReasonCode, usage, billingDisposition) => {
+        providerReceiptDurationMs = elapsedMilliseconds(startedAt)
+        const finalized = await finishGatewayProviderAttempt({
+          journal,
+          attempt: providerAttempt,
+          outcomeResult: result,
+          persistUsage: () => persistProviderUsage(access, {
+            requestKey: providerAttempt.ledgerExecutionKey,
+            occurredAt: new Date().toISOString(),
+            accountRef: auth.user.id,
+            householdRef: entitlement.householdRef,
+            householdAttribution: entitlement.householdAttribution,
+            ...versions,
+            engine: request.mode,
+            provider: 'anthropic',
+            logicalModelTier: request.modelTier,
+            providerProductId: providerBody.model,
+            providerModelId: providerBody.model,
+            inputTokens: usage?.inputTokens,
+            outputTokens: usage?.outputTokens,
+            cachedInputReadTokens: usage?.cacheReadInputTokens,
+            cachedInputWriteTokens: usage?.cacheWriteInputTokens,
+            ttsCharacters: null,
+            latencyMs: providerReceiptDurationMs,
+            result,
+            resultReasonCode,
+            billingDisposition,
+          }),
         })
+        return finalized.accountingAvailable
       }
       const signal = AbortSignal.timeout(ANTHROPIC_TIMEOUT_MS)
       try {

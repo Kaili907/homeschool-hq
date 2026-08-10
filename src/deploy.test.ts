@@ -42,6 +42,7 @@ describe('secured Anthropic gateway client', () => {
         getAccessToken: async () => 'SUPABASE_ACCESS_TOKEN',
         fetchImpl: spy,
         isOnline: () => true,
+        createOperationId: () => '10000000-0000-4000-8000-000000000001',
       },
       tutorRequest,
     )
@@ -56,6 +57,7 @@ describe('secured Anthropic gateway client', () => {
     expect(init.headers).toEqual({
       Authorization: 'Bearer SUPABASE_ACCESS_TOKEN',
       'content-type': 'application/json',
+      'x-academy-operation-id': '10000000-0000-4000-8000-000000000001',
     })
     expect(JSON.parse(init.body)).toEqual({
       mode: 'tutor',
@@ -104,6 +106,7 @@ describe('secured TTS gateway client', () => {
       fetchImpl: spy,
       isOnline: () => true,
       usage: meter(),
+      createOperationId: () => '20000000-0000-4000-8000-000000000001',
     })
     expect(synth.available()).toBe(true)
     await synth.synthesize({ text: 'hello', voiceId: 'abc' })
@@ -118,6 +121,7 @@ describe('secured TTS gateway client', () => {
       Authorization: 'Bearer SUPABASE_ACCESS_TOKEN',
       'content-type': 'application/json',
       accept: 'audio/mpeg',
+      'x-academy-operation-id': '20000000-0000-4000-8000-000000000001',
     })
     expect(JSON.parse(init.body)).toEqual({ text: 'hello', voiceId: 'abc' })
   })

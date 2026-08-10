@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { createSupabaseOperationalTelemetryStore } from '../../../src/telemetry/supabaseOperationalTelemetry.ts'
 import { reject } from './http.js'
+import { createSupabaseProviderAttemptStore } from './provider-attempt-journal.js'
 
 const ACCESS_TIMEOUT_MS = 5_000
 const MAX_DAILY_LIMIT = 100_000
@@ -41,6 +42,10 @@ export function createGatewayAccess({ env, fetchImpl, client } = {}) {
   return {
     createOperationalTelemetryStore() {
       return createSupabaseOperationalTelemetryStore(getClient())
+    },
+
+    createProviderAttemptStore() {
+      return createSupabaseProviderAttemptStore(getClient())
     },
 
     async requireEntitlement(userId) {

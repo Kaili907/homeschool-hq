@@ -300,6 +300,8 @@ export function createElevenLabsSynth(deps: {
   isOnline: () => boolean
   usage: UsageMeter
   endpointBase?: string
+  /** Test seam; production uses a fresh browser-generated UUID per synthesis. */
+  createOperationId?: () => string
 }): ElevenLabsSynth {
   const base = deps.endpointBase?.trim() || ELEVENLABS_ENDPOINT_BASE
   return {
@@ -315,6 +317,7 @@ export function createElevenLabsSynth(deps: {
           Authorization: `Bearer ${accessToken}`,
           'content-type': 'application/json',
           accept: 'audio/mpeg',
+          'x-academy-operation-id': (deps.createOperationId ?? (() => crypto.randomUUID()))(),
         },
         body: JSON.stringify({ text, voiceId }),
       })

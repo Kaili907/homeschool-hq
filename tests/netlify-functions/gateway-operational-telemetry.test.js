@@ -4,8 +4,9 @@ import {
   createGatewayOperationalTelemetry,
   recordGatewayTerminal,
 } from '../../netlify/functions/_shared/gateway-telemetry.js'
-import { createAnthropicHandler } from '../../netlify/functions/anthropic.js'
-import { createTtsHandler } from '../../netlify/functions/tts.js'
+import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netlify/functions/anthropic.js'
+import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
+import { createTestProviderAttemptJournal } from './provider-attempt-test-helpers.js'
 
 const HOUSEHOLD_ID = '10000000-0000-4000-8000-000000000001'
 const ENV = Object.freeze({
@@ -35,6 +36,20 @@ function access(overrides = {}) {
 
 function telemetry() {
   return { record: vi.fn(async () => ({ status: 'recorded' })) }
+}
+
+function createAnthropicHandler(overrides = {}) {
+  return createBaseAnthropicHandler({
+    providerAttemptJournal: createTestProviderAttemptJournal(),
+    ...overrides,
+  })
+}
+
+function createTtsHandler(overrides = {}) {
+  return createBaseTtsHandler({
+    providerAttemptJournal: createTestProviderAttemptJournal(),
+    ...overrides,
+  })
 }
 
 function anthropicEvent(body) {

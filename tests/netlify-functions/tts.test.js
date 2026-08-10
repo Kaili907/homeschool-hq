@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { TTS_REQUEST_LIMIT_BYTES, TTS_TEXT_LIMIT } from '../../netlify/functions/_shared/tts-policy.js'
 import { GatewayError } from '../../netlify/functions/_shared/http.js'
 import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
+import { createTestProviderAttemptJournal } from './provider-attempt-test-helpers.js'
 
 const ENV = Object.freeze({
   SUPABASE_URL: 'https://academy.supabase.co',
@@ -37,7 +38,11 @@ function testAccess({
 }
 
 function createTtsHandler(overrides = {}) {
-  return createBaseTtsHandler({ gatewayAccess: testAccess(), ...overrides })
+  return createBaseTtsHandler({
+    gatewayAccess: testAccess(),
+    providerAttemptJournal: createTestProviderAttemptJournal(),
+    ...overrides,
+  })
 }
 
 afterEach(() => {

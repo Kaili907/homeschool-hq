@@ -7,6 +7,7 @@ import {
 } from '../../netlify/functions/_shared/anthropic-policy.js'
 import { GatewayError } from '../../netlify/functions/_shared/http.js'
 import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netlify/functions/anthropic.js'
+import { createTestProviderAttemptJournal } from './provider-attempt-test-helpers.js'
 
 const ENV = Object.freeze({
   SUPABASE_URL: 'https://academy.supabase.co',
@@ -41,7 +42,11 @@ function testAccess({
 }
 
 function createAnthropicHandler(overrides = {}) {
-  return createBaseAnthropicHandler({ gatewayAccess: testAccess(), ...overrides })
+  return createBaseAnthropicHandler({
+    gatewayAccess: testAccess(),
+    providerAttemptJournal: createTestProviderAttemptJournal(),
+    ...overrides,
+  })
 }
 
 afterEach(() => {

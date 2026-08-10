@@ -247,7 +247,12 @@ describe('MT-2 Anthropic client', () => {
   it('uses only the same-origin gateway schema with bearer authentication', async () => {
     const spy = okFetch('Here is a small hint.')
     const res = await askTutor(
-      { getAccessToken: async () => 'access-token', fetchImpl: spy, isOnline: () => true },
+      {
+        getAccessToken: async () => 'access-token',
+        fetchImpl: spy,
+        isOnline: () => true,
+        createOperationId: () => '30000000-0000-4000-8000-000000000001',
+      },
       request,
     )
     expect(res).toEqual({ ok: true, text: 'Here is a small hint.' })
@@ -256,6 +261,7 @@ describe('MT-2 Anthropic client', () => {
     expect(init.headers).toEqual({
       Authorization: 'Bearer access-token',
       'content-type': 'application/json',
+      'x-academy-operation-id': '30000000-0000-4000-8000-000000000001',
     })
     const body = JSON.parse(init.body)
     expect(body.modelTier).toBe('sonnet')
