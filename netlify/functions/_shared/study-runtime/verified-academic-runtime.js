@@ -18,15 +18,38 @@ const SESSION_LIFECYCLE_OPERATIONS = new Set([
   'checkpoint:read',
   'checkpoint:compare-and-swap',
 ])
-const CALLER_AUTHORITY_KEY = /^(?:household|household_?id|student|student_?id|learner|learner_?ref|grant|grant_?id|session_?epoch|authorization_?revision|membership|relationship|role|accepted_?at|completed_?at|started_?at)$/i
-const PROTECTED_RESPONSE_KEY = /(?:private.?notes?|raw.?safety|tutor.?chat|raw.?answer|assessment.?answers?|transcript|emotional.?inference|personality.?inference|diagnostic.?inference|adult.?private|credential|service.?role|token.?digest|raw.?db|secret)/i
+const CALLER_AUTHORITY_KEY = /^(?:household|household_?id|student|student_?id|learner|learner_?ref|grant|grant_?id|session_?epoch|authorization_?revision|membership|relationship|role|capabilit(?:y|ies)|accepted_?at|completed_?at|started_?at)$/i
+const PROTECTED_RESPONSE_KEY = /(?:private.?notes?|raw.?safety|learner.?answers?|tutor.?(?:chat|conversations?)|raw.?answers?|assessment.?(?:answers?|responses?)|transcript|emotional.?(?:inference|labels?)|personality.?(?:inference|labels?)|diagnostic.?(?:inference|labels?)|adult.?private|credential|service.?role|token.?digest|raw.?(?:db|database)|raw.?provider|secret|sql)/i
 const NON_PRODUCTION_SENTINEL = /(?:^|[._:/-])(sentinel|demo|preview|fixture|synthetic|local-release-candidate)(?:$|[._:/-])/i
-const SAFE_REF = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,191}$/
+const SAFE_REF = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,159}$/
 const RELEASE_VERSION = /^[0-9]+\.[0-9]+\.[0-9]+$/
 const SHA256 = /^[0-9a-f]{64}$/
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+const INSTANT = /^(\d{4}-\d{2}-\d{2})T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/
 const SESSION_STATES = new Set([
   'active', 'paused', 'approved-break', 'student-requested-break',
   'technical-interruption', 'completed', 'abandoned',
+])
+const DASHBOARD_SESSION_STATES = new Set([
+  'planned', 'active', 'paused', 'approved_break',
+  'student_requested_break', 'technical_interruption',
+  'completed', 'abandoned',
+])
+const CALENDAR_BLOCK_TYPES = new Set([
+  'lesson', 'review', 'resume', 'break', 'assessment',
+])
+const CALENDAR_STATES = new Set([
+  'scheduled', 'available', 'in_progress', 'completed', 'cancelled',
+])
+const TUTOR_PHASES = new Set([
+  'assessment', 'identify-missing-concept', 'teach-visually',
+  'guided-practice', 'independent-attempt', 'reassess',
+  'advance', 'reteach', 'escalated',
+])
+const INTERRUPTION_STATES = new Set(['none', 'active', 'recovering'])
+const INTERRUPTION_CATEGORIES = new Set([
+  'none', 'network-unavailable', 'device-power', 'application-restart',
+  'audio-unavailable', 'input-unavailable', 'unknown-technical',
 ])
 const TRANSITION_TYPES = new Set([
   'session-started', 'segment-started', 'segment-completed', 'pause-started',
@@ -94,6 +117,26 @@ function releaseVersion(value) {
   return typeof value === 'string' && RELEASE_VERSION.test(value)
 }
 
+function validDate(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
+  const parsed = new Date(`${value}T00:00:00.000Z`)
+  return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value
+}
+
+function validInstant(value) {
+  if (typeof value !== 'string') return false
+  const match = INSTANT.exec(value)
+  return match !== null && validDate(match[1]) && Number.isFinite(Date.parse(value))
+}
+
+function safeInteger(value, minimum = 0, maximum = Number.MAX_SAFE_INTEGER) {
+  return Number.isSafeInteger(value) && value >= minimum && value <= maximum
+}
+
+function nullableSafeRef(value) {
+  return value === null || safeRef(value)
+}
+
 function denyInvalidRequest() {
   throw new VerifiedAcademicRuntimeDeniedError('runtime_request_invalid')
 }
@@ -124,8 +167,7 @@ function assertOperationRequest(operation, request) {
     if (!safeRef(request.idempotencyKey) || !safeRef(request.lessonId) ||
         !safeRef(request.subjectId) || !safeRef(request.initialSegmentId) ||
         (request.studyPlanId !== null && !safeRef(request.studyPlanId)) ||
-        typeof request.intendedLocalDate !== 'string' ||
-        !/^\d{4}-\d{2}-\d{2}$/.test(request.intendedLocalDate) ||
+        !validDate(request.intendedLocalDate) ||
         !releaseVersion(context.releaseVersion) || !safeRef(context.lessonRef) ||
         context.lessonRef !== request.lessonId || !Array.isArray(context.skillRefs) ||
         context.skillRefs.length > 64 || context.skillRefs.some((ref) => !safeRef(ref)) ||
@@ -160,8 +202,7 @@ function assertOperationRequest(operation, request) {
     ]) || !safeRef(request.sessionId) || !safeRef(request.mutationId) ||
         !Number.isSafeInteger(request.expectedRevision) || request.expectedRevision < 0 ||
         !releaseVersion(request.curriculumReleaseVersion) ||
-        !request.checkpoint || typeof request.checkpoint !== 'object' ||
-        Array.isArray(request.checkpoint)) denyInvalidRequest()
+        request.checkpoint === null || !isCheckpoint(request.checkpoint)) denyInvalidRequest()
     return
   }
   denyInvalidRequest()
@@ -172,7 +213,8 @@ function isBindingResult(value) {
   if (value.status === 'bound') return exactObject(value, [
     'schemaVersion', 'status', 'releaseId', 'packageId', 'releaseVersion',
     'curriculumManifestSha256',
-  ]) && value.schemaVersion === 1 && safeRef(value.releaseId) &&
+  ]) && value.schemaVersion === 1 && typeof value.releaseId === 'string' &&
+    UUID.test(value.releaseId) &&
     safeRef(value.packageId) && releaseVersion(value.releaseVersion) &&
     typeof value.curriculumManifestSha256 === 'string' &&
     SHA256.test(value.curriculumManifestSha256)
@@ -188,15 +230,19 @@ function isSettings(value) {
     'reducedMotion', 'noAudio', 'largeText', 'readAloud', 'speechInputAllowed',
   ])
   return exact && ['visible', 'hidden', 'count_up', 'count_down'].includes(value.timerMode) &&
-    ['maximumWorkMinutes', 'breakMinimumMinutes', 'breakMaximumMinutes',
-      'minimumBreakCount', 'requiredBreakIntervalMinutes']
-      .every((key) => Number.isSafeInteger(value[key]) && value[key] >= 0) &&
+    safeInteger(value.maximumWorkMinutes, 1, 480) &&
+    safeInteger(value.breakMinimumMinutes, 1, 120) &&
+    safeInteger(value.breakMaximumMinutes, 1, 180) &&
+    value.breakMinimumMinutes <= value.breakMaximumMinutes &&
+    safeInteger(value.minimumBreakCount, 0, 12) &&
+    safeInteger(value.requiredBreakIntervalMinutes, 1, 240) &&
     ['reducedMotion', 'noAudio', 'largeText', 'readAloud', 'speechInputAllowed']
       .every((key) => typeof value[key] === 'boolean')
 }
 
 function isCheckpoint(value) {
-  return value === null || (exactObject(value, [
+  if (value === null) return true
+  if (!exactObject(value, [
     'contract', 'contractVersion', 'checkpointId', 'revision', 'createdAt',
     'updatedAt', 'sessionId', 'lessonId', 'segmentId',
     'safeInstructionalCursor', 'completedSegmentIds', 'perSegmentActiveTime',
@@ -204,7 +250,65 @@ function isCheckpoint(value) {
     'protectedTutorStateRef', 'lastAcceptedEventId', 'eventVersion',
     'tutorInteractionRef', 'technicalInterruption', 'rawAnswerIncluded',
     'transcriptIncluded',
-  ]) && value.rawAnswerIncluded === false && value.transcriptIncluded === false)
+  ])) return false
+  const cursor = value.safeInstructionalCursor
+  const interruption = value.technicalInterruption
+  const completed = value.completedSegmentIds
+  const segmentTimes = value.perSegmentActiveTime
+  if (value.contract !== 'study-core-bridge.recovery-checkpoint.v1' ||
+      value.contractVersion !== 1 || value.eventVersion !== 1 ||
+      !safeRef(value.checkpointId) || !safeInteger(value.revision, 1) ||
+      !validInstant(value.createdAt) || !validInstant(value.updatedAt) ||
+      Date.parse(value.updatedAt) < Date.parse(value.createdAt) ||
+      !safeRef(value.sessionId) || !safeRef(value.lessonId) || !safeRef(value.segmentId) ||
+      !exactObject(cursor, [
+        'tutorPhase', 'cycleNumber', 'currentItemId',
+        'currentItemIndex', 'teachingTurnIndex',
+      ]) || !TUTOR_PHASES.has(cursor.tutorPhase) ||
+      !safeInteger(cursor.cycleNumber) || !nullableSafeRef(cursor.currentItemId) ||
+      !safeInteger(cursor.currentItemIndex) || !safeInteger(cursor.teachingTurnIndex) ||
+      !Array.isArray(completed) || completed.length > 512 ||
+      completed.some((segmentId) => !safeRef(segmentId)) ||
+      new Set(completed).size !== completed.length ||
+      !Array.isArray(segmentTimes) || segmentTimes.length > 512 ||
+      segmentTimes.some((entry) => !exactObject(entry, ['segmentId', 'activeSeconds']) ||
+        !safeRef(entry.segmentId) || !safeInteger(entry.activeSeconds)) ||
+      new Set(segmentTimes.map((entry) => entry.segmentId)).size !== segmentTimes.length ||
+      !safeInteger(value.pausedSeconds) || !safeInteger(value.breakSeconds) ||
+      !(value.protectedDraftRef === null ||
+        (typeof value.protectedDraftRef === 'string' &&
+          /^draft:[A-Za-z0-9][A-Za-z0-9._:/-]{0,119}$/.test(value.protectedDraftRef))) ||
+      typeof value.protectedTutorStateRef !== 'string' ||
+      !/^tutor-state:[A-Za-z0-9][A-Za-z0-9._:/-]{0,113}$/.test(value.protectedTutorStateRef) ||
+      !nullableSafeRef(value.lastAcceptedEventId) || !safeRef(value.tutorInteractionRef) ||
+      !exactObject(interruption, ['status', 'interruptionId', 'category', 'startedAt']) ||
+      !INTERRUPTION_STATES.has(interruption.status) ||
+      !INTERRUPTION_CATEGORIES.has(interruption.category) ||
+      value.rawAnswerIncluded !== false || value.transcriptIncluded !== false) return false
+  return interruption.status === 'none'
+    ? interruption.category === 'none' && interruption.interruptionId === null && interruption.startedAt === null
+    : interruption.category !== 'none' && safeRef(interruption.interruptionId) && validInstant(interruption.startedAt)
+}
+
+function isDashboardResponse(value) {
+  return exactObject(value, ['sessions']) && Array.isArray(value.sessions) &&
+    value.sessions.length <= 50 && value.sessions.every((session) =>
+      exactObject(session, ['sessionId', 'state', 'lessonId', 'revision', 'updatedAt']) &&
+      safeRef(session.sessionId) && DASHBOARD_SESSION_STATES.has(session.state) &&
+      safeRef(session.lessonId) && safeInteger(session.revision, 1) &&
+      validInstant(session.updatedAt))
+}
+
+function isCalendarResponse(value) {
+  return exactObject(value, ['blocks']) && Array.isArray(value.blocks) &&
+    value.blocks.length <= 100 && value.blocks.every((block) =>
+      exactObject(block, [
+        'blockId', 'blockType', 'sourceReference', 'scheduledStart',
+        'intendedLocalDate', 'state', 'revision',
+      ]) && safeRef(block.blockId) && CALENDAR_BLOCK_TYPES.has(block.blockType) &&
+      safeRef(block.sourceReference) && validInstant(block.scheduledStart) &&
+      validDate(block.intendedLocalDate) && CALENDAR_STATES.has(block.state) &&
+      safeInteger(block.revision, 1))
 }
 
 function isSessionProjection(value, statuses, resume = false) {
@@ -217,9 +321,15 @@ function isSessionProjection(value, statuses, resume = false) {
   return exactObject(value, keys) && value.schemaVersion === 2 &&
     statuses.includes(value.status) && safeRef(value.sessionId) &&
     SESSION_STATES.has(value.state) &&
-    Number.isSafeInteger(value.revision) && value.revision >= 1 &&
+    safeInteger(value.revision, 1) && validInstant(value.acceptedAt) &&
+    validInstant(value.updatedAt) && Date.parse(value.updatedAt) >= Date.parse(value.acceptedAt) &&
+    safeRef(value.lessonId) && safeRef(value.subjectId) && nullableSafeRef(value.studyPlanId) &&
+    validDate(value.intendedLocalDate) && nullableSafeRef(value.currentSegmentId) &&
+    (value.completedAt === null || (validInstant(value.completedAt) &&
+      Date.parse(value.completedAt) >= Date.parse(value.acceptedAt))) &&
     exactObject(value.lastTransition, ['type', 'acceptedAt']) &&
     TRANSITION_TYPES.has(value.lastTransition.type) &&
+    validInstant(value.lastTransition.acceptedAt) &&
     isBindingResult(value.curriculumBinding) &&
     value.curriculumBinding.status === 'bound' && isSettings(value.effectiveSettings) &&
     (!resume || isCheckpoint(value.checkpoint))
@@ -280,6 +390,16 @@ function assertLifecycleResponse(operation, value) {
   throw new VerifiedAcademicRuntimeUnavailableError('runtime_contract')
 }
 
+function assertOperationResponse(operation, value) {
+  if (operation === 'dashboard:read' && isDashboardResponse(value)) return
+  if (operation === 'calendar:read' && isCalendarResponse(value)) return
+  if (SESSION_LIFECYCLE_OPERATIONS.has(operation)) {
+    assertLifecycleResponse(operation, value)
+    return
+  }
+  throw new VerifiedAcademicRuntimeUnavailableError('runtime_contract')
+}
+
 export function createVerifiedAcademicRuntimeGateway(options = {}) {
   const rpc = options.rpc ?? createSupabaseServiceRpc(options)
   return Object.freeze({
@@ -306,7 +426,11 @@ export function createVerifiedAcademicRuntimeGateway(options = {}) {
       } catch {
         throw new VerifiedAcademicRuntimeUnavailableError('runtime_unavailable')
       }
-      if (result?.schemaVersion !== 1 || result?.operation !== operation) {
+      const resultKeys = result?.status === 'denied'
+        ? ['schemaVersion', 'status', 'operation']
+        : ['schemaVersion', 'status', 'operation', 'body']
+      if (!exactObject(result, resultKeys) ||
+          result.schemaVersion !== 1 || result.operation !== operation) {
         throw new VerifiedAcademicRuntimeUnavailableError('runtime_contract')
       }
       if (result.status === 'denied') throw new VerifiedAcademicRuntimeDeniedError('runtime_authority_denied')
@@ -314,9 +438,12 @@ export function createVerifiedAcademicRuntimeGateway(options = {}) {
         throw new VerifiedAcademicRuntimeUnavailableError('runtime_contract')
       }
       if (SESSION_LIFECYCLE_OPERATIONS.has(operation)) {
-        assertLifecycleResponse(operation, result.body)
+        assertOperationResponse(operation, result.body)
+        assertSafeTree(result.body, { response: true })
+      } else {
+        assertSafeTree(result.body, { response: true })
+        assertOperationResponse(operation, result.body)
       }
-      assertSafeTree(result.body, { response: true })
       return Object.freeze({ schemaVersion: 1, status: 'ok', operation, body: result.body })
     },
   })
