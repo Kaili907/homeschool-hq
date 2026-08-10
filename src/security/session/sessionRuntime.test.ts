@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { SECURITY_LIFECYCLE_EVENT_TYPES } from '../contracts/lifecycle'
-import { parseProfileId } from '../contracts/profileId'
+import { parseProfileId, type ProfileId } from '../contracts/profileId'
 import { SECURITY_SESSION_POLICY } from '../contracts/sessionPolicy'
 import { createLocalSessionId } from '../contracts/sessions'
 import { studyCancellationReasonFor } from '../contracts/studyBridge'
@@ -692,6 +692,56 @@ describe('Parent session and one-operation step-up', () => {
 })
 
 describe('Lock/Switch state machine and Study lifecycle seam', () => {
+  const invalidProfileIds = ['P1', 'p6', ' p1', 'p1 ', 'p0', 'p01', 'ｐ１', '😀']
+
+  it.each(invalidProfileIds)('rejects invalid runtime authentication profile ID without actions: %s', (profileId) => {
+    expect(() => transitionLearnerAccess(INITIAL_LEARNER_ACCESS_STATE, {
+      type: 'authenticated',
+      profileId: profileId as ProfileId,
+      sessionId: createLocalSessionId(() => UUID_A),
+      occurredAt: '2026-08-09T12:00:00.000Z',
+    })).toThrow('Learner profile ID is invalid')
+  })
+
+  it.each(invalidProfileIds)('rejects invalid runtime switch target without revocation or PIN: %s', async (targetProfileId) => {
+    const active = {
+      status: 'active' as const,
+      profileId: P1,
+      sessionId: createLocalSessionId(() => UUID_A),
+    }
+    expect(() => transitionLearnerAccess(active, {
+      type: 'learner-switch',
+      targetProfileId: targetProfileId as ProfileId,
+      occurredAt: '2026-08-09T12:01:00.000Z',
+    })).toThrow('Learner target profile ID is invalid')
+    expect(active).toMatchObject({ status: 'active', profileId: 'p1' })
+  })
+
+  it('prevalidates forged action profile IDs before any authority-changing effect', async () => {
+    const clearLocal = vi.fn()
+    const revoke = vi.fn()
+    const onLifecycle = vi.fn()
+    const requestLearnerPin = vi.fn()
+    await expect(executeLearnerAccessActions([
+      { type: 'clear-local-session' },
+      { type: 'request-learner-pin', profileId: 'p6' as ProfileId },
+    ], {
+      learnerSession: { clearLocal },
+      revocation: {
+        currentEpoch: () => 0,
+        subscribe: () => () => undefined,
+        revoke,
+        close: () => undefined,
+      },
+      onLifecycle,
+      requestLearnerPin,
+    })).rejects.toThrow('Learner action profile ID is invalid')
+    expect(clearLocal).not.toHaveBeenCalled()
+    expect(revoke).not.toHaveBeenCalled()
+    expect(onLifecycle).not.toHaveBeenCalled()
+    expect(requestLearnerPin).not.toHaveBeenCalled()
+  })
+
   it('revokes Learner A before requesting Learner B PIN and leaves cancel locked', () => {
     const active = transitionLearnerAccess(INITIAL_LEARNER_ACCESS_STATE, {
       type: 'authenticated',

@@ -1,10 +1,17 @@
 import { describe, expect, it, vi } from 'vitest'
 import { parseProfileId } from '../contracts/profileId'
+import type { StudyCancellationReason } from '../../study/lifecycle/StudyLifecycle'
+import { cancelStudyForSecurityLifecycleEvent } from '../study/authStudyCancellationBridge'
 import {
   LearnerSessionController,
   type LearnerSessionOwnershipLock,
   type LearnerSessionOwnershipLockManager,
 } from './learnerSession'
+import {
+  executeLearnerAccessActions,
+  transitionLearnerAccess,
+  type LearnerAccessEvent,
+} from './lockSwitchStateMachine'
 import {
   GLOBAL_REVOCATION_LOCK_NAME,
   GlobalRevocationCoordinator,
@@ -17,6 +24,7 @@ const START = Date.parse('2026-08-09T12:00:00.000Z')
 const UUID_A = 'd9428888-122b-4f9b-9424-1f35c63d5750'
 const UUID_B = 'b3d48c11-53bb-4d8f-bb8b-d2f311abf5ef'
 const P1 = parseProfileId('p1')!
+const P2 = parseProfileId('p2')!
 
 class MemoryStorage implements SecurityStorage {
   readonly values = new Map<string, string>()
@@ -142,6 +150,91 @@ describe('causeful global revocation transport', () => {
     localCoordinator.close()
     remoteCoordinator.close()
   })
+
+  it.each([
+    [{ type: 'lock', occurredAt: new Date(START).toISOString() }, 'learner-lock', 'logout'],
+    [{ type: 'logout', occurredAt: new Date(START).toISOString() }, 'learner-sign-out', 'logout'],
+    [{
+      type: 'learner-switch',
+      targetProfileId: P2,
+      occurredAt: new Date(START).toISOString(),
+    }, 'learner-switch-start', 'learner-switch'],
+    [{
+      type: 'authorization-loss',
+      source: 'learner-credential-reset',
+      occurredAt: new Date(START).toISOString(),
+    }, 'learner-credential-reset', 'authorization-loss'],
+  ] as const)(
+    'emits one initiating-tab cancellation for %s and preserves remote cause',
+    async (event, expectedCause, expectedReason) => {
+      const storage = new MemoryStorage()
+      const hub = new BroadcastHub()
+      const localCoordinator = new GlobalRevocationCoordinator({
+        storage,
+        clock: () => START,
+        channelFactory: hub.create,
+        lockManager: new RevocationLocks(),
+      })
+      const remoteCoordinator = new GlobalRevocationCoordinator({
+        storage,
+        clock: () => START,
+        channelFactory: hub.create,
+      })
+      const localAutonomous: StudyCancellationReason[] = []
+      const localSpecific: StudyCancellationReason[] = []
+      const remoteSpecific: StudyCancellationReason[] = []
+      const remoteCauses: string[] = []
+      remoteCoordinator.subscribe((notice) => { remoteCauses.push(notice.cause) })
+      const local = new LearnerSessionController({
+        storage: new MemoryStorage(),
+        revocation: localCoordinator,
+        ownershipLockManager: new OwnershipLocks(),
+        clock: () => START,
+        randomUUID: () => UUID_A,
+        onLifecycleEvent: (lifecycleEvent) => cancelStudyForSecurityLifecycleEvent(lifecycleEvent, {
+          cancel: (reason) => { localAutonomous.push(reason) },
+        }),
+      })
+      const remote = new LearnerSessionController({
+        storage: new MemoryStorage(),
+        revocation: remoteCoordinator,
+        ownershipLockManager: new OwnershipLocks(),
+        clock: () => START,
+        randomUUID: () => UUID_B,
+        onLifecycleEvent: (lifecycleEvent) => cancelStudyForSecurityLifecycleEvent(lifecycleEvent, {
+          cancel: (reason) => { remoteSpecific.push(reason) },
+        }),
+      })
+      const localRecord = await local.create(P1)
+      await remote.create(P1)
+      localAutonomous.length = 0
+      remoteSpecific.length = 0
+
+      const transition = transitionLearnerAccess({
+        status: 'active', profileId: P1, sessionId: localRecord.sessionId,
+      }, event as LearnerAccessEvent)
+      await executeLearnerAccessActions(transition.actions, {
+        learnerSession: local,
+        revocation: localCoordinator,
+        onLifecycle: (lifecycleEvent) => cancelStudyForSecurityLifecycleEvent(lifecycleEvent, {
+          cancel: (reason) => { localSpecific.push(reason) },
+        }),
+        requestLearnerPin: () => undefined,
+      })
+      await remote.whenLifecycleIdle()
+
+      expect(localSpecific).toEqual([expectedReason])
+      expect(localAutonomous).toEqual([])
+      expect(remoteSpecific).toEqual([expectedReason])
+      expect(remoteCauses).toEqual([expectedCause])
+      expect(remote.session).toBeNull()
+
+      await local.close()
+      await remote.close()
+      localCoordinator.close()
+      remoteCoordinator.close()
+    },
+  )
 
   it('fails closed with generic global-revocation for a malformed cause envelope', async () => {
     const storage = new MemoryStorage()

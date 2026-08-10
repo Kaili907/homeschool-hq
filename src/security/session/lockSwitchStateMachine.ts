@@ -1,5 +1,5 @@
 import type { SecurityLifecycleEvent, SecurityLifecycleEventType } from '../contracts/lifecycle'
-import type { ProfileId } from '../contracts/profileId'
+import { parseProfileId, type ProfileId } from '../contracts/profileId'
 import type { LocalSessionId } from '../contracts/sessions'
 import { studyCancellationReasonFor } from '../contracts/studyBridge'
 import type { StudyCancellationReason } from '../../study/lifecycle/StudyLifecycle'
@@ -69,12 +69,22 @@ export function transitionLearnerAccess(
   state: LearnerAccessState,
   event: LearnerAccessEvent,
 ): LearnerAccessTransition {
+  if (state.status === 'active' && !parseProfileId(state.profileId)) {
+    throw new Error('Active learner profile ID is invalid.')
+  }
+  if (
+    state.status === 'switching' &&
+    (!parseProfileId(state.previousProfileId) || !parseProfileId(state.targetProfileId))
+  ) throw new Error('Switching learner profile ID is invalid.')
   switch (event.type) {
-    case 'authenticated':
+    case 'authenticated': {
+      const profileId = parseProfileId(event.profileId)
+      if (!profileId) throw new Error('Learner profile ID is invalid.')
       return Object.freeze({
-        state: Object.freeze({ status: 'active', profileId: event.profileId, sessionId: event.sessionId }),
+        state: Object.freeze({ status: 'active', profileId, sessionId: event.sessionId }),
         actions: Object.freeze([lifecycle('learner-authenticated', event.occurredAt)]),
       })
+    }
     case 'lock':
       return Object.freeze({
         state: locked('lock'),
@@ -93,21 +103,24 @@ export function transitionLearnerAccess(
           lifecycle('learner-sign-out', event.occurredAt),
         ]),
       })
-    case 'learner-switch':
+    case 'learner-switch': {
+      const targetProfileId = parseProfileId(event.targetProfileId)
+      if (!targetProfileId) throw new Error('Learner target profile ID is invalid.')
       if (state.status !== 'active') return Object.freeze({ state, actions: Object.freeze([]) })
       return Object.freeze({
         state: Object.freeze({
           status: 'switching',
           previousProfileId: state.profileId,
-          targetProfileId: event.targetProfileId,
+          targetProfileId,
         }),
         actions: Object.freeze([
           Object.freeze({ type: 'clear-local-session' }),
           Object.freeze({ type: 'revoke-global', cause: 'learner-switch-start' }),
           lifecycle('learner-switch-start', event.occurredAt),
-          Object.freeze({ type: 'request-learner-pin', profileId: event.targetProfileId }),
+          Object.freeze({ type: 'request-learner-pin', profileId: targetProfileId }),
         ]),
       })
+    }
     case 'cancel-switch':
       return Object.freeze({
         state: state.status === 'switching' ? locked('switch-cancelled') : state,
@@ -165,6 +178,11 @@ export async function executeLearnerAccessActions(
   actions: readonly LearnerAccessAction[],
   ports: LearnerAccessActionPorts,
 ): Promise<void> {
+  for (const action of actions) {
+    if (action.type === 'request-learner-pin' && !parseProfileId(action.profileId)) {
+      throw new Error('Learner action profile ID is invalid.')
+    }
+  }
   for (const action of actions) {
     switch (action.type) {
       case 'clear-local-session':

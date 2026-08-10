@@ -18,13 +18,17 @@ export class SerializedLifecycleDelivery {
     this.#sink = sink
   }
 
-  enqueue(event: SecurityLifecycleEvent, onRejected: () => void): Promise<boolean> {
+  enqueue(
+    event: SecurityLifecycleEvent,
+    onRejected: () => void | Promise<void>,
+  ): Promise<boolean> {
     let delivered = true
-    const rejectSafely = () => {
+    const rejectSafely = async () => {
+      if (!delivered) return
       delivered = false
       this.#failed = true
       try {
-        onRejected()
+        await onRejected()
       } catch {
         // Rejection handling must itself remain contained.
       }
@@ -34,17 +38,27 @@ export class SerializedLifecycleDelivery {
       try {
         await this.#sink(event)
       } catch {
-        rejectSafely()
+        await rejectSafely()
       }
     })
-    this.#tail = run.catch(() => {
-      rejectSafely()
+    this.#tail = run.catch(async () => {
+      await rejectSafely()
     })
     return this.#tail.then(() => delivered)
   }
 
   whenIdle(): Promise<void> {
     return this.#tail
+  }
+
+  /** Drains the authoritative queue and rejects permanently after any failure. */
+  async requireClean(): Promise<void> {
+    for (;;) {
+      const observedTail = this.#tail
+      await observedTail
+      if (this.#failed) throw new Error('Security lifecycle delivery failed closed.')
+      if (observedTail === this.#tail) return
+    }
   }
 
   get failed(): boolean {

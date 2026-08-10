@@ -45,6 +45,7 @@ export type LearnerSessionEndReason =
   | 'absolute-expired'
   | 'clock-anomaly'
   | 'global-revocation'
+  | 'lifecycle-failed'
 
 export type LearnerSessionCheck =
   | Readonly<{ status: 'active'; session: LearnerSessionRecord }>
@@ -202,12 +203,16 @@ export class LearnerSessionController {
     const profileId = parseProfileId(profileIdInput)
     if (!profileId) throw new Error('Learner profile ID is invalid.')
     if (this.#closed) throw new Error('Learner session controller is closed.')
+    await this.#lifecycle.requireClean()
     await this.clearLocal()
+    await this.#lifecycle.requireClean()
     const sessionId = createLocalSessionId(this.#randomUUID)
     if (!await this.#claimOwnership(sessionId)) {
+      if (this.#lifecycle.failed) await this.#lifecycle.requireClean()
       throw new Error('Learner session ownership is unavailable.')
     }
     try {
+      await this.#lifecycle.requireClean()
       const now = requireSafeTimestamp(this.#clock)
       const epoch = this.#revocation.currentEpoch()
       if (epoch === null) throw new Error('Global revocation epoch is unavailable.')
@@ -220,6 +225,12 @@ export class LearnerSessionController {
         absoluteExpiresAt: new Date(now + SECURITY_SESSION_POLICY.learner.absoluteTimeoutMs).toISOString(),
         globalRevocationEpoch: epoch,
       })
+      const delivered = await this.#emit('learner-authenticated', now)
+      if (!delivered) throw new Error('Learner lifecycle delivery failed closed.')
+      await this.#lifecycle.requireClean()
+      if (this.#revocation.currentEpoch() !== epoch) {
+        throw new Error('Learner session was revoked before publication.')
+      }
       const serialized = JSON.stringify(record)
       this.#storage.setItem(LEARNER_SESSION_STORAGE_KEY, serialized)
       if (this.#storage.getItem(LEARNER_SESSION_STORAGE_KEY) !== serialized) {
@@ -229,11 +240,6 @@ export class LearnerSessionController {
       this.#lastObservedAt = now
       this.#lastStorageWriteAt = now
       this.#lastEndReason = 'none'
-      const delivered = await this.#emit('learner-authenticated', now)
-      if (!delivered || !this.#session) {
-        await this.clearLocal()
-        throw new Error('Learner lifecycle delivery failed closed.')
-      }
       return record
     } catch (error) {
       await this.clearLocal()
@@ -243,6 +249,12 @@ export class LearnerSessionController {
 
   async restore(): Promise<LearnerSessionCheck> {
     if (this.#closed) return Object.freeze({ status: 'ended', reason: 'ownership-unavailable' })
+    try {
+      await this.#lifecycle.requireClean()
+    } catch {
+      await this.#failClosedForLifecycle()
+      return Object.freeze({ status: 'ended', reason: 'lifecycle-failed' })
+    }
     let serialized: string | null
     try {
       serialized = this.#storage.getItem(LEARNER_SESSION_STORAGE_KEY)
@@ -259,17 +271,29 @@ export class LearnerSessionController {
     if (!parsed) {
       const ended = this.#end('malformed-record')
       await this.#lifecycle.whenIdle()
-      return ended
+      return this.#lifecycle.failed
+        ? Object.freeze({ status: 'ended', reason: 'lifecycle-failed' })
+        : ended
     }
     if (!this.#ownershipLockManager) {
       const ended = this.#end('ownership-unavailable')
       await this.#lifecycle.whenIdle()
-      return ended
+      return this.#lifecycle.failed
+        ? Object.freeze({ status: 'ended', reason: 'lifecycle-failed' })
+        : ended
     }
     if (!await this.#claimOwnership(parsed.record.sessionId)) {
       const ended = this.#end('ownership-conflict')
       await this.#lifecycle.whenIdle()
-      return ended
+      return this.#lifecycle.failed
+        ? Object.freeze({ status: 'ended', reason: 'lifecycle-failed' })
+        : ended
+    }
+    try {
+      await this.#lifecycle.requireClean()
+    } catch {
+      await this.#failClosedForLifecycle()
+      return Object.freeze({ status: 'ended', reason: 'lifecycle-failed' })
     }
     this.#session = parsed.record
     this.#lastObservedAt = null
@@ -334,7 +358,7 @@ export class LearnerSessionController {
     this.#session = null
     this.#lastObservedAt = null
     this.#lastStorageWriteAt = null
-    this.#lastEndReason = 'none'
+    this.#lastEndReason = this.#lifecycle.failed ? 'lifecycle-failed' : 'none'
     await this.#releaseOwnership()
   }
 
@@ -421,13 +445,7 @@ export class LearnerSessionController {
       type,
       occurredAt: new Date(timestamp).toISOString(),
     })
-    return this.#lifecycle.enqueue(event, () => {
-      safeRemove(this.#storage, LEARNER_SESSION_STORAGE_KEY)
-      this.#session = null
-      this.#lastObservedAt = null
-      this.#lastStorageWriteAt = null
-      void this.#releaseOwnership()
-    })
+    return this.#lifecycle.enqueue(event, () => this.#failClosedForLifecycle())
   }
 
   async #handleRevocation(notice: GlobalRevocationNotice): Promise<void> {
@@ -439,13 +457,19 @@ export class LearnerSessionController {
   }
 
   async #claimOwnership(sessionId: LocalSessionId): Promise<boolean> {
-    if (!this.#ownershipLockManager || this.#closed || this.#ownership || this.#pendingOwnership) return false
+    if (
+      !this.#ownershipLockManager ||
+      this.#closed ||
+      this.#lifecycle.failed ||
+      this.#ownership ||
+      this.#pendingOwnership
+    ) return false
     const pending = acquireLearnerSessionOwnership(this.#ownershipLockManager, sessionId)
     this.#pendingOwnership = pending
     const ownership = await pending
     if (this.#pendingOwnership === pending) this.#pendingOwnership = null
     if (!ownership) return false
-    if (this.#closed) {
+    if (this.#closed || this.#lifecycle.failed) {
       await ownership.release()
       return false
     }
@@ -457,6 +481,15 @@ export class LearnerSessionController {
     const ownership = this.#ownership
     this.#ownership = null
     return ownership?.release().catch(() => undefined) ?? Promise.resolve()
+  }
+
+  async #failClosedForLifecycle(): Promise<void> {
+    safeRemove(this.#storage, LEARNER_SESSION_STORAGE_KEY)
+    this.#session = null
+    this.#lastObservedAt = null
+    this.#lastStorageWriteAt = null
+    this.#lastEndReason = 'lifecycle-failed'
+    await this.#releaseOwnership()
   }
 }
 

@@ -137,6 +137,18 @@ describe('failed PIN attempt ledger', () => {
     )).toThrow('invalid')
   })
 
+  it.each([' p1', 'p1 ', 'P1', 'p0', 'p01', 'p6', '\u{1F600}'])(
+    'rejects invalid learner attempt activity before lock or storage side effects: %s',
+    async (profileId) => {
+      const runtime = setup()
+      const subject = { kind: 'learner', profileId } as unknown as FailedAttemptSubject
+
+      await expect(runtime.ledger.recordFailure(subject)).rejects.toThrow('invalid')
+      expect(runtime.locks.names).toEqual([])
+      expect(runtime.storage.values.size).toBe(0)
+    },
+  )
+
   it('keeps learner and Parent counters separate and applies the Parent lock duration', async () => {
     const runtime = setup()
     const learner = { kind: 'learner' as const, profileId: P1 }
