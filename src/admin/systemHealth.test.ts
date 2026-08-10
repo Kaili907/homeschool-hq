@@ -7,6 +7,7 @@ import {
   type SystemHealthAggregateEvidence,
   type SystemHealthAggregateSummary,
   type SystemHealthEngineAggregateSummary,
+  type SystemHealthServiceAggregateSummary,
   type SystemHealthWindowAggregate,
 } from './systemHealth'
 
@@ -85,12 +86,20 @@ function aggregateEngine(
   }
 }
 
+function aggregateService(
+  serviceId: SystemHealthServiceAggregateSummary['serviceId'],
+  overrides: Partial<SystemHealthServiceAggregateSummary> = {},
+): SystemHealthServiceAggregateSummary {
+  return { ...aggregateSummary(), serviceId, ...overrides }
+}
+
 function aggregateWindow(
   engines: readonly SystemHealthEngineAggregateSummary[] = [],
   summary: SystemHealthAggregateSummary = aggregateSummary(),
   incidentGroups: SystemHealthWindowAggregate['incidentGroups'] = [],
+  services: readonly SystemHealthServiceAggregateSummary[] = [],
 ): SystemHealthWindowAggregate {
-  return { summary, engines, services: [], incidentGroups }
+  return { summary, engines, services, incidentGroups }
 }
 
 function aggregateEvidence(
@@ -363,6 +372,33 @@ describe('deterministic System Health aggregation', () => {
     expect(projection.engines[0].reasonCodes).toContain('safety_policy_working')
   })
 
+  it('preserves mapped service counts, health, and exact aggregate latency', () => {
+    const observedAt = '2026-08-08T11:59:50.000Z'
+    const gateway = aggregateEngine('gateway', {
+      eventCount: 20, successCount: 18, providerErrorCount: 2, durationCount: 20,
+      durationP50Ms: 120, durationP95Ms: 6_000,
+      firstOccurredAt: '2026-08-08T11:30:00.000Z', lastOccurredAt: observedAt,
+    })
+    const anthropic = aggregateService('anthropic_gateway', {
+      eventCount: 20, successCount: 18, providerErrorCount: 2, durationCount: 20,
+      durationP50Ms: 120, durationP95Ms: 6_000,
+      firstOccurredAt: '2026-08-08T11:30:00.000Z', lastOccurredAt: observedAt,
+    })
+    const total = aggregateSummary({
+      eventCount: 20, successCount: 18, providerErrorCount: 2, durationCount: 20,
+      durationP50Ms: 120, durationP95Ms: 6_000,
+      firstOccurredAt: '2026-08-08T11:30:00.000Z', lastOccurredAt: observedAt,
+    })
+    const projection = buildSystemHealthProjectionFromAggregates(
+      aggregateEvidence(aggregateWindow([gateway], total, [], [anthropic])),
+      { now: NOW },
+    )
+    expect(projection.services.find((service) => service.serviceId === 'anthropic_gateway')).toMatchObject({
+      health: 'degraded', eventCount: 20, failureCount: 2, p95LatencyMs: 6_000,
+      reasonCodes: expect.arrayContaining(['elevated_provider_error_rate', 'elevated_latency']),
+    })
+  })
+
   it('preserves critical unavailable precedence with aggregate evidence', () => {
     const observedAt = '2026-08-08T11:59:50.000Z'
     const engines = ADMIN_ENGINE_IDS.map((engineId) => aggregateEngine(engineId, {
@@ -404,7 +440,9 @@ describe('deterministic System Health aggregation', () => {
     expect(projection.historyMetrics).toMatchObject({ eventCount: 501, providerErrorCount: 3 })
     expect(projection.currentFailureCount).toBe(3)
     expect(projection.incidents).toHaveLength(1)
-    expect(projection.incidents[0]).toMatchObject({ reasonCode: 'provider_failure' })
+    expect(projection.incidents[0]).toMatchObject({
+      serviceId: 'anthropic_gateway', reasonCode: 'provider_failure',
+    })
   })
 
   it('preserves degraded, stale, and disabled decisions on the aggregate path', () => {

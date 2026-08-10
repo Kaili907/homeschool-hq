@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import { PGlite } from '@electric-sql/pglite'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { decodeSystemHealthAggregate } from '../netlify/functions/_shared/admin-health-source.js'
 
 const HOUSEHOLD_ID = '10000000-0000-4000-8000-000000000001'
 const OTHER_HOUSEHOLD_ID = '10000000-0000-4000-8000-000000000002'
@@ -310,7 +311,7 @@ describe('ADMIN-0 v2 operational event database contract', () => {
     const end = new Date(Date.now() + 60_000)
     const start = new Date(end.getTime() - 24 * 60 * 60 * 1_000)
     const response = await aggregateAsService(database, [
-      start.toISOString(), end.toISOString(), 'study', null, null, null, 'engines:read',
+      start.toISOString(), end.toISOString(), null, null, null, null, 'health:read',
     ])
     const aggregate = response.rows[0].aggregate as any
     expect(aggregate).toMatchObject({
@@ -336,6 +337,7 @@ describe('ADMIN-0 v2 operational event database contract', () => {
     expect(JSON.stringify(aggregate)).not.toMatch(
       /eventId|executionKey|householdRef|learnerRef|metadata|conversation|prompt|response|audio|assessmentAnswer/i,
     )
+    expect(decodeSystemHealthAggregate(aggregate)).not.toBeNull()
   })
 
   it('returns exact cross-group latency summaries for health engines and services', async () => {
@@ -381,6 +383,33 @@ describe('ADMIN-0 v2 operational event database contract', () => {
       { category: 'operational_standard', retainedDays: 90, complete: true },
       { category: 'safety_extended', retainedDays: 365, complete: true },
     ])
+  })
+
+  it('fails closed when aggregate grouping exceeds the bounded group limit', async () => {
+    const database = databases[0]
+    await database.exec(`
+      insert into public.academy_operational_events (
+        event_id, execution_key, schema_version, occurred_at, scope,
+        household_id, learner_id, engine, app_version, engine_version,
+        curriculum_version, course_ref, unit_ref, lesson_ref, skill_ref,
+        event_type, result, duration_ms, metadata, retention_category, expires_at
+      )
+      select
+        gen_random_uuid(), 'overflow:execution:' || seeded.series::text, 2,
+        seeded.occurred_at, 'system', null, null, 'study', 'deploy.2026.08.08',
+        'study.v2', null, null, null, null, null, 'study.session', 'success', 1,
+        jsonb_build_object('operation', 'op-' || seeded.series::text),
+        'diagnostic_short', seeded.occurred_at + interval '30 days'
+      from (
+        select series, statement_timestamp() - interval '1 minute' as occurred_at
+        from generate_series(1, 4097) as series
+      ) as seeded
+    `)
+    const end = new Date(Date.now() + 60_000)
+    const start = new Date(end.getTime() - 60 * 60 * 1_000)
+    await expect(aggregateAsService(database, [
+      start.toISOString(), end.toISOString(), null, null, null, null, 'health:read',
+    ])).rejects.toThrow(/OPERATIONAL_TELEMETRY_AGGREGATE_GROUP_LIMIT/)
   })
 
   it('enforces Admin authorization and deterministic aggregate range bounds', async () => {
