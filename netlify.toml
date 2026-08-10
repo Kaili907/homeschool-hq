@@ -16,6 +16,12 @@
   VITE_USE_PROXY = "true"
   NODE_VERSION = "22"
 
+# Platform-private Study adult-review worker. Netlify Scheduled Functions do
+# not expose a production URL; the public/manual worker below remains a
+# separate, secret-authorized endpoint.
+[functions."study-adult-review-scheduled-worker"]
+  schedule = "*/5 * * * *"
+
 # ---- API proxies (MUST precede the SPA fallback) ----
 [[redirects]]
   from = "/api/anthropic/*"
