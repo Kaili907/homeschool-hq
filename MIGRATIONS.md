@@ -10,6 +10,26 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: Study bound curriculum content authority (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810154000_academy_study_bound_content_authority.sql`.
+
+No table or column is added. The migration adds one service-role-only function
+that authenticates an opaque Study bearer digest, reads exactly one session in
+that learner scope, joins its immutable release binding back to the published
+registry row, and returns only bounded session/release refs plus eligible
+course refs. Browser roles cannot execute the projection, and curriculum
+content never enters database or operational telemetry storage.
+
+The server runtime uses that projection to open the exact immutable
+`source_root`, verify the stored curriculum-manifest digest, and prove the
+Academy schedule-day/lesson membership before returning learner-safe content.
+It never reads the active pointer during content resolution and never falls
+back to another release, demo, preview, or latest output. See
+`docs/study-bound-curriculum-content-runtime.md` and the focused Netlify and
+PGlite tests. The migration has not been applied to a hosted project.
+
 ## Supabase: Study / Admin release registry bridge (2026-08-10)
 
 Tracked migrations:
