@@ -27,6 +27,12 @@ import type { CurriculumCatalog, CurriculumReadAuthorization } from './contracts
 import { CurriculumValidationWorkspace } from '../../components/admin/CurriculumValidationWorkspace'
 import type { CurriculumDraftValidationResult } from '../curriculum-authoring/contracts'
 import {
+  CurriculumApprovalError,
+  type CurriculumApprovalDecision,
+  type CurriculumApprovalReasonCode,
+  type CurriculumApprovalStatusResult,
+} from '../curriculum-approval/contracts'
+import {
   buildMaterializedCurriculumStudioIndex,
   canWriteCurriculumDrafts,
   CURRICULUM_STUDIO_NAVIGATION_REQUEST,
@@ -41,6 +47,7 @@ import {
 } from './studioModel'
 import { StructuredEntityEditor } from './StructuredEntityEditor'
 import { createDraftEntityPayload, CURRICULUM_ENTITY_REF_PATTERN } from './studioEditorModel'
+import { CurriculumApprovalReview } from './CurriculumApprovalReview'
 import './curriculum-studio.css'
 
 const TREE_KEYS = new Set<CurriculumTreeKey>([
@@ -192,10 +199,16 @@ export function CurriculumStudioView({
   const [validation, setValidation] = useState<CurriculumDraftValidationResult | null>(null)
   const [validationBusy, setValidationBusy] = useState(false)
   const [validationError, setValidationError] = useState<string | null>(null)
+  const [approval, setApproval] = useState<CurriculumApprovalStatusResult | null>(null)
+  const [approvalBusy, setApprovalBusy] = useState(false)
+  const [approvalError, setApprovalError] = useState<string | null>(null)
+  const [changeReason, setChangeReason] = useState<Exclude<CurriculumApprovalReasonCode, 'approval.ready'>>('changes.content_quality')
+  const approvalRequestKeys = useRef(new Map<string, string>())
   const focusRequested = useRef(false)
   const nextLoadedSaveMessage = useRef('Saved')
   const itemRefs = useRef(new Map<string, HTMLButtonElement>())
   const draftCapable = canWriteCurriculumDrafts(capabilities)
+  const approvalCapable = capabilities.includes('curriculum:approve')
   const writeAllowed = draftCapable && serverWriteAllowed && draft !== null
   const entries = materialization?.entities ?? baseEntries
   const index = useMemo(() => buildMaterializedCurriculumStudioIndex(entries), [entries])
@@ -366,6 +379,8 @@ export function CurriculumStudioView({
       setDraftChoice(draftId)
       setWorkspaceMessage(`Draft revision ${nextDraft.revision} is open.`)
       setServerWriteAllowed(true)
+      setValidation((current) => current?.draftRevision === nextDraft.revision ? current : null)
+      await refreshApproval(draftId)
     } catch (reason) {
       if (isPermissionLoss(reason)) setServerWriteAllowed(false)
       setWorkspaceMessage(authoringErrorMessage(reason, 'The draft could not be opened.'))
@@ -390,6 +405,8 @@ export function CurriculumStudioView({
       setWorkspaceMessage(`Draft revision ${nextDraft.revision} is current.`)
       setPendingOperation(null)
       setSaveState({ kind: 'saved', message: 'Saved' })
+      setValidation((current) => current?.draftRevision === nextDraft.revision ? current : null)
+      await refreshApproval(draft.draftId)
     } catch (reason) {
       setWorkspaceMessage(authoringErrorMessage(reason, 'The draft could not be refreshed.'))
     } finally {
@@ -418,6 +435,8 @@ export function CurriculumStudioView({
       setDrafts((current) => replaceDraftSummary(current, nextDraft))
       setDraftChoice(result.draftId)
       setWorkspaceMessage(result.replayed ? 'Draft creation replay confirmed.' : 'Draft created and opened.')
+      setValidation(null)
+      await refreshApproval(result.draftId)
     } catch (reason) {
       if (isPermissionLoss(reason)) setServerWriteAllowed(false)
       setWorkspaceMessage(authoringErrorMessage(reason, 'Draft creation failed. Retry preserves the same idempotency key.'))
@@ -538,6 +557,8 @@ export function CurriculumStudioView({
       setFocusedId(selectId)
     }
     setWorkspaceMessage(`Draft revision ${nextDraft.revision} is current.`)
+    setValidation((current) => current?.draftRevision === nextDraft.revision ? current : null)
+    await refreshApproval(draft.draftId)
   }
 
   async function handleMutationFailure(reason: unknown, operation: PendingOperation) {
@@ -623,6 +644,7 @@ export function CurriculumStudioView({
     try {
       const result = await source.validateDraft(draft.draftId, draft.revision)
       setValidation(result)
+      await refreshApproval(draft.draftId)
     } catch (reason) {
       setValidationError(
         reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict'
@@ -631,6 +653,51 @@ export function CurriculumStudioView({
       )
     } finally {
       setValidationBusy(false)
+    }
+  }
+
+  async function refreshApproval(draftId: string) {
+    setApprovalError(null)
+    try {
+      setApproval(await source.readApproval(draftId))
+    } catch (reason) {
+      setApproval(null)
+      setApprovalError(approvalErrorMessage(reason, 'The approval status could not be loaded.'))
+    }
+  }
+
+  async function decideApproval(
+    decision: CurriculumApprovalDecision,
+    reasonCode: CurriculumApprovalReasonCode,
+  ) {
+    if (!draft || !approvalCapable || dirty) return
+    const validationSnapshotId = validation?.draftRevision === draft.revision
+      ? validation.validationSnapshot.validationSnapshotId
+      : approval?.latestValidation?.draftRevision === draft.revision
+        ? approval.latestValidation.validationSnapshotId
+        : null
+    const fingerprint = [
+      draft.draftId, draft.revision, decision, reasonCode, validationSnapshotId ?? 'none',
+    ].join('|')
+    const idempotencyKey = approvalRequestKeys.current.get(fingerprint) ?? uuid()
+    approvalRequestKeys.current.set(fingerprint, idempotencyKey)
+    setApprovalBusy(true)
+    setApprovalError(null)
+    try {
+      const result = await source.decideApproval({
+        draftId: draft.draftId,
+        draftRevision: draft.revision,
+        decision,
+        reasonCode,
+        validationSnapshotId,
+        idempotencyKey,
+      })
+      setApproval(result)
+      approvalRequestKeys.current.delete(fingerprint)
+    } catch (reason) {
+      setApprovalError(approvalErrorMessage(reason, 'The decision could not be recorded. Retry will reuse the same request identity.'))
+    } finally {
+      setApprovalBusy(false)
     }
   }
 
@@ -760,6 +827,22 @@ export function CurriculumStudioView({
         </aside>
       </div>
 
+      {draft && (
+        <CurriculumApprovalReview
+          draftId={draft.draftId}
+          draftRevision={draft.revision}
+          approval={approval}
+          validation={validation}
+          canApprove={approvalCapable}
+          hasUnsavedChanges={dirty}
+          busy={approvalBusy}
+          error={approvalError}
+          changeReason={changeReason}
+          onChangeReason={setChangeReason}
+          onDecision={(decision, reasonCode) => void decideApproval(decision, reasonCode)}
+        />
+      )}
+
       {validation && (
         <section className="curriculum-studio-validation" aria-label="Revision-bound draft validation">
           {validationStale && <div className="curriculum-validation-stale" role="alert"><strong>Validation is stale.</strong> This result is bound to revision {validation.draftRevision}; the open draft is revision {draft?.revision}. Run validation again before relying on it.</div>}
@@ -810,6 +893,19 @@ function authoringErrorMessage(reason: unknown, fallback: string): string {
 function isPermissionLoss(reason: unknown): boolean {
   return reason instanceof CurriculumDraftAuthoringError
     && (reason.code === 'forbidden' || reason.code === 'unauthenticated')
+}
+
+function approvalErrorMessage(reason: unknown, fallback: string): string {
+  if (!(reason instanceof CurriculumApprovalError)) return fallback
+  if (reason.code === 'unauthenticated') return 'The Admin session is no longer authenticated.'
+  if (reason.code === 'forbidden') return 'The server denied curriculum:approve.'
+  if (reason.code === 'not-found') return 'The draft approval record is unavailable.'
+  if (reason.reason === 'validation-blocked') return 'Approval was blocked by the revision-bound validation result.'
+  if (reason.reason === 'decision-conflict') return 'This revision already has a terminal review decision.'
+  if (reason.reason === 'idempotency-conflict') return 'Conflicting reuse of the decision request identity was rejected.'
+  if (reason.code === 'conflict') return 'The draft revision changed before the decision was recorded.'
+  if (reason.code === 'invalid') return 'The server rejected the bounded approval decision.'
+  return fallback
 }
 
 export function curriculumPayloadDirty(
