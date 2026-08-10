@@ -1,4 +1,7 @@
-import { createSupabaseStudySafetyPorts } from '../study-adult-review/supabase-ports.js'
+import {
+  createSupabaseServiceRpc,
+  createSupabaseStudySafetyPorts,
+} from '../study-adult-review/supabase-ports.js'
 import { createTrustedStudySessionVerifier } from '../study-identity/supabase.js'
 import { createAnthropicSafetyClassifier } from '../study-safety/provider.js'
 
@@ -150,6 +153,9 @@ export function createStudyProductionReadinessService(options = {}) {
   const ttlMs = Math.max(1_000, Math.min(60_000, options.ttlMs ?? 5_000))
   const identityVerifier = options.identityVerifier ?? createTrustedStudySessionVerifier({ env, fetchImpl })
   const durablePorts = options.durablePorts ?? createSupabaseStudySafetyPorts({ env, fetchImpl })
+  const bindingRpc = options.bindingRpc ?? createSupabaseServiceRpc({ env, fetchImpl })
+  const curriculumBindingReadiness = options.curriculumBindingReadiness ?? (() =>
+    bindingRpc.call('academy_study_curriculum_binding_readiness_v1'))
   const classifier = options.classifier ?? createAnthropicSafetyClassifier({ env, fetchImpl })
   const session17 = options.session17 ?? Object.freeze({})
   let cached = null
@@ -160,6 +166,7 @@ export function createStudyProductionReadinessService(options = {}) {
     const [
       identity,
       academic,
+      curriculumBinding,
       effectiveSettings,
       safetyDurable,
       policyEvidence,
@@ -176,6 +183,7 @@ export function createStudyProductionReadinessService(options = {}) {
     ] = await Promise.all([
       identityState(identityVerifier),
       optionalOperationalState(options.academicReadiness),
+      effectiveSettingsState(curriculumBindingReadiness),
       effectiveSettingsState(options.effectiveSettingsReadiness),
       durableState(durablePorts),
       productionPolicyState(durablePorts),
@@ -214,6 +222,10 @@ export function createStudyProductionReadinessService(options = {}) {
     // The safety reconciliation probe does not prove the Session 13 academic
     // RPC set. Those adapters require their own injected live probe.
     for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) statusByDependency.set(key, academic)
+    statusByDependency.set(
+      'study-session-adapter',
+      weakestState(academic, curriculumBinding),
+    )
     statusByDependency.set(
       'parent-settings-adapter',
       weakestState(academic, effectiveSettings),

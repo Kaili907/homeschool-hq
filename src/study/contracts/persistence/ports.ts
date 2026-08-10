@@ -5,6 +5,7 @@ import type {
   StoredResult,
   StudyCalendarBlockRecord,
   StudyCheckpointRecord,
+  StudyCurriculumBindingResult,
   StudyParentSettingsRecord,
   StudyReviewRecord,
   StudySessionRecord,
@@ -13,10 +14,25 @@ import type {
 import type { StudyEffectiveSettingsResult } from '../../effectiveSettings'
 
 export interface StudyPersistencePort {
+  resolveCurriculumBinding(input: {
+    studentId: Uuid
+    subjectId: string
+    intendedLocalDate: string
+    requestedReleaseVersion: string
+  }): Promise<StudyCurriculumBindingResult>
   createSession(
     session: StudySessionRecord,
     idempotencyKey: string,
-  ): Promise<{ status: 'created'; sessionId: string; revision: number } | { status: 'idempotency-collision' }>
+  ): Promise<
+    | {
+        status: 'created'
+        sessionId: string
+        revision: number
+        curriculumBinding: Extract<StudyCurriculumBindingResult, { status: 'bound' }>
+      }
+    | { status: 'idempotency-collision' }
+    | Exclude<StudyCurriculumBindingResult, { status: 'bound' }>
+  >
   transitionSession(input: {
     sessionId: string
     expectedRevision: number
