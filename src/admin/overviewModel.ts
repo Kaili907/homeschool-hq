@@ -12,6 +12,7 @@ import type {
 import type { AdminMonthlyCostAlert, AdminProviderAccountingCoverage } from './costsModel'
 
 export const ADMIN_SECTIONS = [
+  'attention',
   'overview',
   'learners',
   'engines',

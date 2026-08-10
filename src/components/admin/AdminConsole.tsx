@@ -26,6 +26,7 @@ import {
 import './admin-console.css'
 
 const NAVIGATION: readonly { id: AdminSection; label: string; capability: AdminCapability }[] = [
+  { id: 'attention', label: 'Attention Center', capability: 'overview:read' },
   { id: 'overview', label: 'Overview', capability: 'overview:read' },
   { id: 'learners', label: 'Learners', capability: 'learners:read' },
   { id: 'engines', label: 'Engine Performance', capability: 'engines:read' },
@@ -531,7 +532,7 @@ function BrandMark() {
 
 function NavIcon({ section }: { section: AdminSection }) {
   const icons: Record<AdminSection, string> = {
-    overview: '⌂', learners: '◉', engines: '◇', costs: '✦', curriculum: '▤',
+    attention: '!', overview: '⌂', learners: '◉', engines: '◇', costs: '✦', curriculum: '▤',
     safety: '◆', 'system-health': '⌁', configuration: '⚙', 'audit-log': '≡', access: '⌘', releases: '↑',
   }
   return <span className="admin-nav-icon" aria-hidden="true">{icons[section]}</span>
