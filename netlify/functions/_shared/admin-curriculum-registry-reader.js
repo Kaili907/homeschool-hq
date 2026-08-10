@@ -147,10 +147,12 @@ function adaptPointer(value) {
     || !VERSION.test(value.releaseVersion)
     || integer(value.revision) === null
     || value.revision < 1
-    || value.changeKind !== 'migration_seed'
-    || value.bindingMode !== 'registry_only'
-    || value.registryOnly !== true
-    || value.runtimeBinding !== 'hard-coded'
+    || !['migration_seed', 'activation', 'rollback'].includes(value.changeKind)
+    || !['registry_only', 'default_authority'].includes(value.bindingMode)
+    || value.registryOnly !== (value.bindingMode === 'registry_only')
+    || value.runtimeBinding !== (value.bindingMode === 'registry_only'
+      ? 'hard-coded' : 'default-authority')
+    || (value.bindingMode === 'default_authority' && value.existingLearnersRepinned !== false)
     || timestamp(value.registeredAt) === null
   ) return null
   return Object.freeze({
@@ -161,8 +163,9 @@ function adaptPointer(value) {
     revision: value.revision,
     changeKind: value.changeKind,
     bindingMode: value.bindingMode,
-    registryOnly: true,
+    registryOnly: value.registryOnly,
     runtimeBinding: value.runtimeBinding,
+    existingLearnersRepinned: value.existingLearnersRepinned ?? false,
     registeredAt: value.registeredAt,
   })
 }

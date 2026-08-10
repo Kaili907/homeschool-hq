@@ -112,4 +112,28 @@ describe('ADMIN-16A curriculum registry reader', () => {
     await expect(createAdminCurriculumRegistryReader({ client: errorClient }).list())
       .rejects.toThrow('curriculum_registry_unavailable')
   })
+
+  it('projects governed default authority without claiming existing learner repins', async () => {
+    const values = structuredClone(projections)
+    values.academy_admin_read_curriculum_production_pointer_v1 = {
+      ...values.academy_admin_read_curriculum_production_pointer_v1,
+      releaseVersion: '2.0.0',
+      revision: 2,
+      changeKind: 'activation',
+      bindingMode: 'default_authority',
+      registryOnly: false,
+      runtimeBinding: 'default-authority',
+      existingLearnersRepinned: false,
+    }
+    await expect(createAdminCurriculumRegistryReader({ client: clientFor(values) }).productionPointer())
+      .resolves.toMatchObject({
+        releaseVersion: '2.0.0', revision: 2, changeKind: 'activation',
+        bindingMode: 'default_authority', registryOnly: false,
+        runtimeBinding: 'default-authority', existingLearnersRepinned: false,
+      })
+
+    delete values.academy_admin_read_curriculum_production_pointer_v1.existingLearnersRepinned
+    await expect(createAdminCurriculumRegistryReader({ client: clientFor(values) }).productionPointer())
+      .rejects.toThrow('curriculum_registry_unavailable')
+  })
 })
