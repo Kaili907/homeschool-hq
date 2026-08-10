@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { ADMIN_OVERVIEW_ENDPOINT, AdminOverviewReadError, parseAdminOverview, readAdminOverview } from './overviewHttpSource'
+import { providerAccountingCoverageFixture } from './costsTestFixtures'
 
 const metric = <T,>(value: T) => ({ status: 'available', value })
 const unavailable = { status: 'unavailable' }
@@ -34,7 +35,7 @@ function wire() {
       currency: 'USD', requests: metric(2), inputTokens: metric(10), outputTokens: metric(4), cachedInputReadTokens: metric(3),
       cachedInputWriteTokens: metric(2), ttsCharacters: metric(0), calculatedCost: { status: 'available', micros: '9007199254740993', currency: 'USD' },
       reconciledCost: { status: 'available', micros: '2100000', currency: 'USD' }, billingDispositionCounts: { billable: 2, notBillable: 0, unknown: 0 },
-      reasons: [],
+      reasons: [], providerAccountingCoverage: providerAccountingCoverageFixture(),
     }, { freshness: 'unknown', observationStatus: 'unknown', window: { kind: 'requested', label: 'Requested UTC range', startInclusive: '2026-08-03T00:00:00.000Z', endExclusive: '2026-08-10T00:00:00.000Z', observedAt: null } }),
     safety: domain({ openSafetyStops: metric(0), adultReviewsPending: metric(1), failClosedEvents: metric(0) }, { freshness: 'unknown', observationStatus: 'unknown' }),
     system: domain({ apiErrorRatePercent: unavailable, medianLatencyMs: metric(120), syncFailures: metric(0), persistenceFailures: metric(0) }),
@@ -54,6 +55,10 @@ describe('Admin Overview HTTP source', () => {
     expect(model.learners.activeLearners).toEqual(metric(3))
     expect(model.ai.spend).toMatchObject({ status: 'available', costMicros: '9007199254740993', costKind: 'calculated' })
     expect(model.ai.reconciledSpend).toMatchObject({ status: 'available', costMicros: '2100000', costKind: 'reconciled' })
+    expect(model.ai.providerAccounting).toMatchObject({
+      status: 'partial', journalStatus: 'complete_for_journaled_attempts',
+      invoiceCompletenessClaim: false,
+    })
     expect(model.enginePerformance).toEqual([{ engineId: 'tutor', evidenceState: 'partial' }])
     expect(model.curriculum?.coverageWarning).toEqual(unavailable)
   })

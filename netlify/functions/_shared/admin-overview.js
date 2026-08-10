@@ -3,6 +3,7 @@ import { buildCurriculumValidationReadModel } from '../../../src/admin/curriculu
 import { buildEnginePerformanceProjectionFromAggregate } from '../../../src/admin/enginePerformanceModel.ts'
 import { buildSystemHealthProjection } from '../../../src/admin/systemHealth.ts'
 import { buildAdminCostProjection, ADMIN_COST_RECORD_LIMIT } from './admin-cost-projection.js'
+import { readAdminProviderAccountingCoverage } from './admin-provider-coverage.js'
 
 const DAY_MS = 24 * 60 * 60 * 1_000
 const PERFORMANCE_RETENTION_MARGIN_MS = 60 * 60 * 1_000
@@ -312,8 +313,17 @@ export async function composeAdminOverview({ principal, accessToken, range, gene
       })
     }),
     isolatedDomain(capabilities, 'costs', requestedWindow, async () => {
-      const records = await sources.costs({ limit: ADMIN_COST_RECORD_LIMIT, before: range.endExclusive })
-      const projection = buildAdminCostProjection(records, costWindow(range), new Date(generatedAt))
+      const providerRange = costWindow(range)
+      const [records, providerAccountingCoverage] = await Promise.all([
+        sources.costs({ limit: ADMIN_COST_RECORD_LIMIT, before: range.endExclusive }),
+        readAdminProviderAccountingCoverage(sources.providerAttemptCoverage, providerRange),
+      ])
+      const projection = buildAdminCostProjection(
+        records,
+        providerRange,
+        new Date(generatedAt),
+        providerAccountingCoverage,
+      )
       const completeness = projection.source.reasons.includes('source_record_limit')
         ? 'truncated'
         : projection.source.status === 'partial' ? 'partial' : 'complete'
@@ -332,6 +342,7 @@ export async function composeAdminOverview({ principal, accessToken, range, gene
         attributionCounts: projection.summary.attributionCounts,
         usageUnavailableCount: projection.summary.usageUnavailableCount,
         reasons: projection.source.reasons,
+        providerAccountingCoverage: projection.providerAccountingCoverage,
       }, {
         freshness: 'unknown',
         completeness,

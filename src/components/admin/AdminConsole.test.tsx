@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest'
 import type { AdminEngineId } from '../../admin/admin0Vocabulary'
 import { adaptAdminOverview, type AdminOverviewSource, type CostSource } from '../../admin/overviewAdapter'
 import type { AdminConsoleProps, EngineObservation } from '../../admin/overviewModel'
+import { providerAccountingCoverageFixture } from '../../admin/costsTestFixtures'
 import { AdminConsole, AdminShell, applyAdminRoutePresentation } from './AdminConsole'
 
 const OBSERVED_AT = '2026-08-08T14:00:00.000Z'
@@ -217,6 +218,26 @@ describe('AdminConsole authorization and load states', () => {
 })
 
 describe('AdminConsole canonical overview presentation', () => {
+  it('shows the same partial provider-accounting status used by Costs', () => {
+    const base = adaptAdminOverview(completeSource())
+    const model = {
+      ...base,
+      ai: { ...base.ai, providerAccounting: providerAccountingCoverageFixture() },
+    }
+    const markup = renderToStaticMarkup(
+      <AdminConsole
+        authorization={AUTHORIZED}
+        overview={{ status: 'ready', model }}
+        selectedRange={{ kind: 'preset', preset: 'today' }}
+        onRangeChange={() => {}}
+      />,
+    )
+    expect(markup).toContain('Provider accounting:')
+    expect(markup).toContain('Partial')
+    expect(markup).toContain('Tutor covered; Jarvis covered; TTS covered; Study pending')
+    expect(markup).toContain('does not establish provider-bill completeness')
+  })
+
   it('renders all eight canonical engines through separate display labels', () => {
     const markup = authorized()
     for (const label of ['Tutor', 'Study', 'Assessment', 'Curriculum', 'Jarvis', 'TTS', 'Gateway', 'Sync']) {

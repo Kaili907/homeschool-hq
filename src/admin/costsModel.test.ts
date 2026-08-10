@@ -48,9 +48,18 @@ describe('Admin costs browser contract', () => {
   it('accepts only vetted provider accounting coverage and preserves the false invoice ruling', () => {
     const model = parseAdminCostsModel(costsModelFixture())
     expect(model?.providerAccountingCoverage).toMatchObject({
-      status: 'complete_for_journaled_attempts',
+      status: 'partial',
+      journalStatus: 'complete_for_journaled_attempts',
       reconciliationState: 'clear_for_journaled_attempts',
-      gatewayInstrumentation: 'incomplete',
+      providerInstrumentation: {
+        status: 'partial',
+        engines: expect.arrayContaining([
+          { key: 'tutor', status: 'covered' },
+          { key: 'jarvis', status: 'covered' },
+          { key: 'tts', status: 'covered' },
+          { key: 'study', status: 'pending' },
+        ]),
+      },
       invoiceCompletenessClaim: false,
       metrics: { reservedAttempts: 3, ledgerLinkedAttempts: 2 },
     })

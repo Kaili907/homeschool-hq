@@ -46,6 +46,9 @@ export function createAdminOverviewHandler(overrides = {}) {
     health: () => healthSource.list(),
     enginePerformance: (input) => performanceReader.aggregate(input),
     costs: (input) => gatewayAccess.readProviderUsageCosts(input),
+    providerAttemptCoverage: typeof gatewayAccess.readProviderAttemptCoverage === 'function'
+      ? (input) => gatewayAccess.readProviderAttemptCoverage(input)
+      : undefined,
     safety: (input) => safetyReader.read(input),
     curriculumCatalog: () => curriculumSource.loadCatalog(),
     curriculumValidation: loadAdminCurriculumValidationEvidence,

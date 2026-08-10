@@ -360,6 +360,17 @@ function Overview({ model }: { model: AdminOverviewModel }) {
             {safeCostReasonMessage(model.ai.spend.resultReasonCode) && ` ${safeCostReasonMessage(model.ai.spend.resultReasonCode)}`}
           </p>
           <p className="admin-disclosure">Calculated values are usage-derived estimates, not reconciled provider invoices.</p>
+          {model.ai.providerAccounting && (
+            <p className="admin-disclosure">
+              <strong>Provider accounting:</strong>{' '}
+              {model.ai.providerAccounting.status === 'partial' ? 'Partial' : model.ai.providerAccounting.status.replaceAll('_', ' ')}.
+              {' '}Journal: {model.ai.providerAccounting.journalStatus.replaceAll('_', ' ')}.
+              {' '}Instrumentation: {model.ai.providerAccounting.providerInstrumentation.engines
+                .map((engine) => `${ENGINE_LABELS[engine.key]} ${engine.status}`)
+                .join('; ')}.
+              {' '}This does not establish provider-bill completeness.
+            </p>
+          )}
           <DomainStatus status={model.domainStatuses?.costs} />
         </section>
       </div>

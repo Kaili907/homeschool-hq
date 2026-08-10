@@ -118,11 +118,12 @@ journal relationship remain a summary metric because purpose cannot be inferred
 safely. The projection explicitly returns `invoiceCompletenessClaim: false` and
 names `academy_provider_usage_ledger` as cost authority.
 
-The Admin Costs projection treats this as accounting-trail coverage only. Until
-the separately delivered gateway instrumentation is integrated across every
-relevant provider path, a clear result means only
-`complete_for_journaled_attempts`; it does not establish that stored activity
-equals a provider bill.
+The Admin Costs and Overview projections use the same provider-accounting
+reducer. Tutor, Jarvis, and premium TTS instrumentation are `covered`; Study
+safety instrumentation is `pending`. Therefore a clear journal can be
+`complete_for_journaled_attempts` while overall provider coverage remains
+`partial`. Neither status establishes that stored activity equals a provider
+bill, and `invoiceCompletenessClaim` remains `false`.
 
 ## Privacy
 

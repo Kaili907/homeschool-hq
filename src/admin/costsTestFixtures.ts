@@ -25,15 +25,25 @@ export function providerAccountingCoverageFixture(
     observedOutcomes: 0,
     ledgerLinkedAttempts: 2,
     accountingGaps: 0,
+    gapPending: 0,
     reconciliationConflicts: 0,
     confirmedNotDispatched: 1,
     unresolvable: 0,
   }
   const row = { key: 'tutor', status: 'complete_for_journaled_attempts' as const, ...metrics }
   return {
-    status: 'complete_for_journaled_attempts',
+    status: 'partial',
+    journalStatus: 'complete_for_journaled_attempts',
     reconciliationState: 'clear_for_journaled_attempts',
-    gatewayInstrumentation: 'incomplete',
+    providerInstrumentation: {
+      status: 'partial',
+      engines: [
+        { key: 'tutor', status: 'covered' },
+        { key: 'jarvis', status: 'covered' },
+        { key: 'tts', status: 'covered' },
+        { key: 'study', status: 'pending' },
+      ],
+    },
     invoiceCompletenessClaim: false,
     metrics,
     breakdowns: {

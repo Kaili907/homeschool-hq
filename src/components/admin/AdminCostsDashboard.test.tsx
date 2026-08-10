@@ -129,19 +129,25 @@ describe('Admin AI and Costs dashboard', () => {
   it('renders journal-bounded accounting coverage, safe dimensions, and the instrumentation boundary', () => {
     const markup = render()
     expect(markup).toContain('Provider accounting coverage')
+    expect(markup).toContain('Partial')
     expect(markup).toContain('Complete for journaled attempts')
     expect(markup).toContain('Reserved attempts')
     expect(markup).toContain('Dispatch-possible')
     expect(markup).toContain('Observed outcomes')
     expect(markup).toContain('Ledger-linked attempts')
     expect(markup).toContain('Accounting gaps')
+    expect(markup).toContain('Gap pending')
     expect(markup).toContain('Reconciliation conflicts')
     expect(markup).toContain('Confirmed not dispatched')
     expect(markup).toContain('Unresolvable')
     expect(markup).toContain('Coverage by engine')
     expect(markup).toContain('Coverage by purpose')
     expect(markup).toContain('Coverage by provider')
-    expect(markup).toContain('Provider gateway instrumentation is not yet complete')
+    expect(markup).toContain('Tutor provider instrumentation: covered')
+    expect(markup).toContain('Jarvis provider instrumentation: covered')
+    expect(markup).toContain('Text to speech provider instrumentation: covered')
+    expect(markup).toContain('Study safety provider instrumentation: pending')
+    expect(markup).toContain('keeps overall provider coverage partial')
     expect(markup).toContain('not a provider bill comparison')
     expect(markup.toLowerCase()).not.toContain('invoice complete')
     expect(markup).toContain('role="note"')
@@ -153,6 +159,7 @@ describe('Admin AI and Costs dashboard', () => {
     const model = costsModelFixture({
       providerAccountingCoverage: providerAccountingCoverageFixture({
         status: 'reconciliation_conflict',
+        journalStatus: 'reconciliation_conflict',
         reconciliationState: 'conflict',
         metrics: {
           reservedAttempts: 4,
@@ -160,6 +167,7 @@ describe('Admin AI and Costs dashboard', () => {
           observedOutcomes: 0,
           ledgerLinkedAttempts: 1,
           accountingGaps: 2,
+          gapPending: 1,
           reconciliationConflicts: 1,
           confirmedNotDispatched: 0,
           unresolvable: 1,
@@ -179,6 +187,7 @@ describe('Admin AI and Costs dashboard', () => {
   it('keeps cost evidence visible while provider accounting coverage is retryably unavailable', () => {
     const coverage = providerAccountingCoverageFixture({
       status: 'unavailable',
+      journalStatus: 'unavailable',
       reconciliationState: 'unavailable',
       metrics: null,
       breakdowns: { engines: [], purposes: [], providers: [] },
