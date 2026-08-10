@@ -116,7 +116,7 @@ remains canonical IntegerMicros and never passes through JavaScript `Number`.
 Query coverage is separate from unverified provider-traffic coverage. Retained
 TEL-AI accounting-persistence gap evidence is reported separately and never
 fabricates usage or cost. This migration seeds no prices and has not been
-applied hosted. Architecture is in `docs/admin-costs-aggregate-v2.md`.
+applied hosted. Architecture is in `docs/admin-costs-contract-v3.md`.
 
 ## Supabase: authorized Admin safety projection (2026-08-08)
 

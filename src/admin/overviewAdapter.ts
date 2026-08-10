@@ -129,7 +129,7 @@ export const COST_REASON_MESSAGES: Readonly<Record<CostResultReasonCode, string>
 }
 
 export const COMPLETENESS_MESSAGES: Readonly<Record<AggregateCompleteness, string>> = {
-  complete: 'Aggregate includes all available usage.',
+  complete: 'Recorded usage has no known attribution or usage-quantity limitation.',
   partial_attribution_ambiguous: 'Aggregate is partial because some household attribution was ambiguous.',
   partial_attribution_unresolved: 'Aggregate is partial because some attribution could not be resolved.',
   partial_usage_unavailable: 'Aggregate is partial because some trustworthy usage was unavailable.',

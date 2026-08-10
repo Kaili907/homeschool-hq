@@ -1,7 +1,12 @@
 import { isCanonicalIntegerMicros, type IntegerMicros } from './contracts'
 
+export const ADMIN_COST_CONTRACT_VERSION = 3 as const
+export const ADMIN_COST_GROUP_LIMIT = 384 as const
 export const ADMIN_COST_PRESETS = ['today', '7-days', '30-days', 'month'] as const
 export type AdminCostPreset = (typeof ADMIN_COST_PRESETS)[number]
+export type AdminCostQueryCoverage = 'complete'
+export type AdminCostProviderTrafficCoverage = 'coverage_unverified'
+export type AdminCostGapRetentionCoverage = 'within_retention' | 'retention_limited'
 
 export type AdminCostRangeSelection =
   | { readonly kind: 'preset'; readonly preset: AdminCostPreset }
@@ -62,8 +67,17 @@ export interface AdminCostBreakdownRow extends AdminCostAggregate {
   readonly label: string
 }
 
+export interface AdminCostCoverageEvidence {
+  readonly queryCoverage: AdminCostQueryCoverage
+  readonly providerTrafficCoverage: AdminCostProviderTrafficCoverage
+  readonly accountingGapEvidence: {
+    readonly observedCount: number
+    readonly retentionCoverage: AdminCostGapRetentionCoverage
+  }
+}
+
 export interface AdminCostsModel {
-  readonly contractVersion: 3
+  readonly contractVersion: typeof ADMIN_COST_CONTRACT_VERSION
   readonly generatedAt: string
   readonly currency: 'USD'
   readonly range: {
@@ -74,18 +88,12 @@ export interface AdminCostsModel {
     readonly endExclusive: string
     readonly days: number
   }
-  readonly source: {
+  readonly source: AdminCostCoverageEvidence & {
     readonly status: 'complete' | 'partial'
     readonly reasons: readonly AdminCostCompletenessReason[]
-    readonly queryCoverage: 'complete'
-    readonly providerTrafficCoverage: 'coverage_unverified'
-    readonly groupLimit: 384
+    readonly groupLimit: typeof ADMIN_COST_GROUP_LIMIT
     readonly groupCount: number
     readonly recordsIncluded: number
-    readonly accountingGapEvidence: {
-      readonly observedCount: number
-      readonly retentionCoverage: 'within_retention' | 'retention_limited'
-    }
   }
   readonly monthlyCostThreshold: AdminMonthlyCostThreshold
   readonly summary: AdminCostSummary
@@ -140,6 +148,7 @@ export type AdminCostsReadState =
 export type AdminCostsErrorCode = 'costs_timeout' | 'costs_unavailable' | 'invalid_range'
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/
+const DAY_MS = 86_400_000
 const METRIC_STATUSES = new Set<AdminCostMetricStatus>(['available', 'partial', 'unavailable'])
 const REASONS = new Set<AdminCostCompletenessReason>([
   'ambiguous_attribution',
@@ -148,22 +157,22 @@ const REASONS = new Set<AdminCostCompletenessReason>([
   'calculated_cost_unavailable',
   'accounting_gap_evidence',
 ])
-const BREAKDOWN_LABELS = new Set([
-  'Tutor',
-  'Jarvis',
-  'Text to speech',
-  'Anthropic',
-  'ElevenLabs',
-  'Anthropic Sonnet tier',
-  'Anthropic Haiku tier',
-  'No logical tier (speech)',
-  'Calculated',
-  'Reconciled',
-  'Unavailable',
-  'Billable',
-  'Not billable',
-  'Unknown',
-])
+const AGGREGATE_KEYS = [
+  'totalRequests', 'aiRequests', 'ttsRequests', 'inputTokens', 'outputTokens',
+  'cachedInputReadTokens', 'cachedInputWriteTokens', 'ttsCharacters',
+  'calculatedCost', 'reconciledCost', 'unavailableCostCount',
+] as const
+const BREAKDOWN_LABELS = {
+  engines: { tutor: 'Tutor', jarvis: 'Jarvis', tts: 'Text to speech' },
+  providers: { anthropic: 'Anthropic', elevenlabs: 'ElevenLabs' },
+  models: {
+    'anthropic:sonnet': 'Anthropic Sonnet tier',
+    'anthropic:haiku': 'Anthropic Haiku tier',
+    speech: 'No logical tier (speech)',
+  },
+  costKinds: { calculated: 'Calculated', reconciled: 'Reconciled', unavailable: 'Unavailable' },
+  billingDispositions: { billable: 'Billable', not_billable: 'Not billable', unknown: 'Unknown' },
+} as const
 const THRESHOLD_STATUSES = new Set<AdminMonthlyCostThresholdStatus>([
   'not_applicable', 'unavailable', 'below_warning', 'warning', 'critical',
 ])
@@ -179,13 +188,35 @@ function record(value: unknown): Record<string, unknown> | null {
     : null
 }
 
+function hasExactKeys(source: Record<string, unknown>, keys: readonly string[]): boolean {
+  const actual = Object.keys(source).sort()
+  const expected = [...keys].sort()
+  return actual.length === expected.length
+    && actual.every((key, index) => key === expected[index])
+}
+
+function calendarDate(value: unknown): value is string {
+  if (typeof value !== 'string' || !DATE.test(value)) return false
+  const parsed = new Date(`${value}T00:00:00.000Z`)
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value
+}
+
+function canonicalTimestamp(value: unknown): value is string {
+  if (typeof value !== 'string') return false
+  const parsed = new Date(value)
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString() === value
+}
+
 function safeCount(value: unknown): number | null {
   return Number.isSafeInteger(value) && (value as number) >= 0 ? value as number : null
 }
 
 function countMetric(value: unknown): AdminCostCountMetric | null {
   const source = record(value)
-  if (!source || !METRIC_STATUSES.has(source.status as AdminCostMetricStatus)) return null
+  if (
+    !source || !hasExactKeys(source, ['status', 'value'])
+    || !METRIC_STATUSES.has(source.status as AdminCostMetricStatus)
+  ) return null
   if (source.status === 'unavailable') {
     return source.value === null ? { status: 'unavailable', value: null } : null
   }
@@ -195,7 +226,10 @@ function countMetric(value: unknown): AdminCostCountMetric | null {
 
 function moneyMetric(value: unknown): AdminCostMoneyMetric | null {
   const source = record(value)
-  if (!source || !METRIC_STATUSES.has(source.status as AdminCostMetricStatus) || source.currency !== 'USD') return null
+  if (
+    !source || !hasExactKeys(source, ['status', 'micros', 'currency'])
+    || !METRIC_STATUSES.has(source.status as AdminCostMetricStatus) || source.currency !== 'USD'
+  ) return null
   if (source.status === 'unavailable') {
     return source.micros === null ? { status: 'unavailable', micros: null, currency: 'USD' } : null
   }
@@ -203,9 +237,9 @@ function moneyMetric(value: unknown): AdminCostMoneyMetric | null {
   return { status: source.status, micros: source.micros, currency: 'USD' } as AdminCostMoneyMetric
 }
 
-function aggregate(value: unknown): AdminCostAggregate | null {
+function aggregate(value: unknown, extraKeys: readonly string[] = []): AdminCostAggregate | null {
   const source = record(value)
-  if (!source) return null
+  if (!source || !hasExactKeys(source, [...AGGREGATE_KEYS, ...extraKeys])) return null
   const totalRequests = countMetric(source.totalRequests)
   const aiRequests = countMetric(source.aiRequests)
   const ttsRequests = countMetric(source.ttsRequests)
@@ -239,7 +273,7 @@ function aggregate(value: unknown): AdminCostAggregate | null {
 
 function fixedCounts(value: unknown, keys: readonly string[]): Record<string, number> | null {
   const source = record(value)
-  if (!source || Object.keys(source).length !== keys.length) return null
+  if (!source || !hasExactKeys(source, keys)) return null
   const result: Record<string, number> = {}
   for (const key of keys) {
     const count = safeCount(source[key])
@@ -249,16 +283,21 @@ function fixedCounts(value: unknown, keys: readonly string[]): Record<string, nu
   return result
 }
 
-function breakdownRows(value: unknown): AdminCostBreakdownRow[] | null {
+function breakdownRows(
+  value: unknown,
+  allowed: Readonly<Record<string, string>>,
+): AdminCostBreakdownRow[] | null {
   if (!Array.isArray(value) || value.length > 32) return null
   const rows: AdminCostBreakdownRow[] = []
+  const keys = new Set<string>()
   for (const item of value) {
     const source = record(item)
-    const values = aggregate(item)
+    const values = aggregate(item, ['key', 'label'])
     if (
-      !source || !values || typeof source.key !== 'string' || source.key.length > 80
-      || typeof source.label !== 'string' || !BREAKDOWN_LABELS.has(source.label)
+      !source || !values || typeof source.key !== 'string'
+      || source.label !== allowed[source.key] || keys.has(source.key)
     ) return null
+    keys.add(source.key)
     rows.push({ key: source.key, label: source.label, ...values })
   }
   return rows
@@ -268,7 +307,10 @@ function monthlyCostThreshold(value: unknown): AdminMonthlyCostThreshold | null 
   const source = record(value)
   if (
     !source
-    || Object.keys(source).length !== 7
+    || !hasExactKeys(source, [
+      'status', 'reason', 'basis', 'observedMicros', 'warningMicros',
+      'criticalMicros', 'configurationRevisions',
+    ])
     || !THRESHOLD_STATUSES.has(source.status as AdminMonthlyCostThresholdStatus)
     || source.basis !== 'calculated_usage_estimate'
     || !(source.reason === null || THRESHOLD_REASONS.has(source.reason as string))
@@ -330,53 +372,92 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const sourceState = record(source?.source)
   const gapEvidence = record(sourceState?.accountingGapEvidence)
   const summarySource = record(source?.summary)
-  const summaryAggregate = aggregate(summarySource)
+  const summaryAggregate = aggregate(summarySource, [
+    'usageUnavailableCount', 'billingDispositionCounts', 'costKindCounts', 'attributionCounts',
+  ])
   const billing = fixedCounts(summarySource?.billingDispositionCounts, ['billable', 'notBillable', 'unknown'])
   const costKinds = fixedCounts(summarySource?.costKindCounts, ['calculated', 'reconciled', 'unavailable'])
   const attribution = fixedCounts(summarySource?.attributionCounts, ['resolved', 'ambiguous', 'unresolved'])
   const usageUnavailableCount = safeCount(summarySource?.usageUnavailableCount)
   const threshold = monthlyCostThreshold(source?.monthlyCostThreshold)
+  const startMs = calendarDate(range?.start) ? Date.parse(`${range.start}T00:00:00.000Z`) : Number.NaN
+  const endMs = calendarDate(range?.end) ? Date.parse(`${range.end}T00:00:00.000Z`) : Number.NaN
+  const expectedDays = Number.isNaN(startMs) || Number.isNaN(endMs)
+    ? Number.NaN
+    : (endMs - startMs) / DAY_MS + 1
   if (
-    !source || source.contractVersion !== 3 || source.currency !== 'USD'
-    || typeof source.generatedAt !== 'string' || Number.isNaN(Date.parse(source.generatedAt))
-    || !range || !(ADMIN_COST_PRESETS as readonly string[]).concat('custom').includes(range.kind as string)
-    || typeof range.start !== 'string' || !DATE.test(range.start)
-    || typeof range.end !== 'string' || !DATE.test(range.end)
-    || typeof range.startAt !== 'string' || Number.isNaN(Date.parse(range.startAt))
-    || typeof range.endExclusive !== 'string' || Number.isNaN(Date.parse(range.endExclusive))
-    || safeCount(range.days) === null || (range.days as number) < 1 || (range.days as number) > 366
-    || !sourceState || !['complete', 'partial'].includes(sourceState.status as string)
-    || !Array.isArray(sourceState.reasons) || sourceState.reasons.some((reason) => !REASONS.has(reason))
+    !source || !hasExactKeys(source, [
+      'contractVersion', 'generatedAt', 'currency', 'range', 'source',
+      'monthlyCostThreshold', 'summary', 'trend', 'breakdowns',
+    ])
+    || source.contractVersion !== ADMIN_COST_CONTRACT_VERSION || source.currency !== 'USD'
+    || !canonicalTimestamp(source.generatedAt)
+    || !range || !hasExactKeys(range, ['kind', 'start', 'end', 'startAt', 'endExclusive', 'days'])
+    || !(ADMIN_COST_PRESETS as readonly string[]).concat('custom').includes(range.kind as string)
+    || !calendarDate(range.start) || !calendarDate(range.end) || range.start > range.end
+    || range.startAt !== `${range.start}T00:00:00.000Z`
+    || range.endExclusive !== new Date(endMs + DAY_MS).toISOString()
+    || safeCount(range.days) === null || range.days !== expectedDays
+    || (range.days as number) < 1 || (range.days as number) > 366
+    || !sourceState || !hasExactKeys(sourceState, [
+      'status', 'reasons', 'queryCoverage', 'providerTrafficCoverage',
+      'groupLimit', 'groupCount', 'recordsIncluded', 'accountingGapEvidence',
+    ])
+    || !['complete', 'partial'].includes(sourceState.status as string)
+    || !Array.isArray(sourceState.reasons)
+    || sourceState.reasons.some((reason) => !REASONS.has(reason))
+    || new Set(sourceState.reasons).size !== sourceState.reasons.length
     || (sourceState.status === 'complete') !== (sourceState.reasons.length === 0)
     || sourceState.queryCoverage !== 'complete'
     || sourceState.providerTrafficCoverage !== 'coverage_unverified'
-    || sourceState.groupLimit !== 384
+    || sourceState.groupLimit !== ADMIN_COST_GROUP_LIMIT
     || safeCount(sourceState.groupCount) === null || (sourceState.groupCount as number) < 1
-    || (sourceState.groupCount as number) > 384
+    || (sourceState.groupCount as number) > ADMIN_COST_GROUP_LIMIT
     || safeCount(sourceState.recordsIncluded) === null
-    || !gapEvidence || safeCount(gapEvidence.observedCount) === null
+    || !gapEvidence || !hasExactKeys(gapEvidence, ['observedCount', 'retentionCoverage'])
+    || safeCount(gapEvidence.observedCount) === null
     || !['within_retention', 'retention_limited'].includes(
       gapEvidence.retentionCoverage as string,
     )
     || !summaryAggregate || !billing || !costKinds || !attribution || usageUnavailableCount === null
     || !threshold
+    || summaryAggregate.totalRequests.status !== 'available'
+    || summaryAggregate.totalRequests.value !== sourceState.recordsIncluded
+    || sourceState.reasons.includes('ambiguous_attribution') !== (attribution.ambiguous > 0)
+    || sourceState.reasons.includes('unresolved_attribution') !== (attribution.unresolved > 0)
+    || sourceState.reasons.includes('usage_unavailable') !== (usageUnavailableCount > 0)
+    || sourceState.reasons.includes('calculated_cost_unavailable') !== (costKinds.unavailable > 0)
+    || sourceState.reasons.includes('accounting_gap_evidence') !== ((gapEvidence.observedCount as number) > 0)
     || !Array.isArray(source.trend) || source.trend.length > 366
   ) return null
 
   const trend: AdminCostTrendPoint[] = []
+  const trendDates = new Set<string>()
   for (const item of source.trend) {
     const trendSource = record(item)
-    const values = aggregate(item)
-    if (!trendSource || !values || typeof trendSource.date !== 'string' || !DATE.test(trendSource.date)) return null
+    const values = aggregate(item, ['date'])
+    if (
+      !trendSource || !values || !calendarDate(trendSource.date)
+      || trendSource.date < range.start || trendSource.date > range.end
+      || trendDates.has(trendSource.date)
+    ) return null
+    trendDates.add(trendSource.date)
     trend.push({ date: trendSource.date, ...values })
   }
 
   const breakdownsSource = record(source.breakdowns)
-  const engines = breakdownRows(breakdownsSource?.engines)
-  const providers = breakdownRows(breakdownsSource?.providers)
-  const models = breakdownRows(breakdownsSource?.models)
-  const breakdownCostKinds = breakdownRows(breakdownsSource?.costKinds)
-  const billingDispositions = breakdownRows(breakdownsSource?.billingDispositions)
+  if (!breakdownsSource || !hasExactKeys(
+    breakdownsSource,
+    ['engines', 'providers', 'models', 'costKinds', 'billingDispositions'],
+  )) return null
+  const engines = breakdownRows(breakdownsSource.engines, BREAKDOWN_LABELS.engines)
+  const providers = breakdownRows(breakdownsSource.providers, BREAKDOWN_LABELS.providers)
+  const models = breakdownRows(breakdownsSource.models, BREAKDOWN_LABELS.models)
+  const breakdownCostKinds = breakdownRows(breakdownsSource.costKinds, BREAKDOWN_LABELS.costKinds)
+  const billingDispositions = breakdownRows(
+    breakdownsSource.billingDispositions,
+    BREAKDOWN_LABELS.billingDispositions,
+  )
   if (
     !engines || !providers || !models || !breakdownCostKinds || !billingDispositions
     || sourceState.groupCount !== 1 + trend.length + engines.length + providers.length
@@ -384,7 +465,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   ) return null
 
   return {
-    contractVersion: 3,
+    contractVersion: ADMIN_COST_CONTRACT_VERSION,
     generatedAt: source.generatedAt,
     currency: 'USD',
     range: range as unknown as AdminCostsModel['range'],
@@ -393,12 +474,12 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
       reasons: [...sourceState.reasons] as AdminCostCompletenessReason[],
       queryCoverage: 'complete',
       providerTrafficCoverage: 'coverage_unverified',
-      groupLimit: 384,
+      groupLimit: ADMIN_COST_GROUP_LIMIT,
       groupCount: sourceState.groupCount as number,
       recordsIncluded: sourceState.recordsIncluded as number,
       accountingGapEvidence: {
         observedCount: gapEvidence.observedCount as number,
-        retentionCoverage: gapEvidence.retentionCoverage as 'within_retention' | 'retention_limited',
+        retentionCoverage: gapEvidence.retentionCoverage as AdminCostGapRetentionCoverage,
       },
     },
     monthlyCostThreshold: threshold,
