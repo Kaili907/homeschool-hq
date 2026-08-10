@@ -26,6 +26,8 @@ import {
   responseForError,
 } from './_shared/http.js'
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
+import { createGatewayAccess } from './_shared/gateway-access.js'
+import { usageRequestKey } from './_shared/usage-accounting.js'
 
 const CLASSIFY_PATHS = new Set(['/api/study/safety/classify', '/.netlify/functions/study-safety-classify'])
 const READINESS_PATH = '/api/study/safety/readiness'
@@ -50,6 +52,8 @@ export function createProductionStudySafetyHandler(overrides = {}) {
     env,
     fetchImpl,
     monitoring,
+    gatewayAccess: overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl }),
+    providerAttemptJournal: overrides.providerAttemptJournal,
   })
   if (
     classifier?.mode !== 'production' ||
@@ -88,7 +92,13 @@ function createStudySafetyHandler(overrides = {}) {
   const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
   const productionPorts = overrides.productionPorts ?? createSupabaseStudySafetyPorts({ env, fetchImpl })
   const effectiveMonitoring = overrides.monitoring ?? productionPorts.monitoring ?? NOOP_MONITORING_PORT
-  const classifier = overrides.classifier ?? createAnthropicSafetyClassifier({ env, fetchImpl, monitoring: effectiveMonitoring })
+  const classifier = overrides.classifier ?? createAnthropicSafetyClassifier({
+    env,
+    fetchImpl,
+    monitoring: effectiveMonitoring,
+    gatewayAccess: overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl }),
+    providerAttemptJournal: overrides.providerAttemptJournal,
+  })
   const learnerAuthorization = overrides.learnerAuthorization
     ? overrides.learnerAuthorization
     : createVerifiedStudySessionAuthorizationPort({ env, fetchImpl })
@@ -130,7 +140,7 @@ function createStudySafetyHandler(overrides = {}) {
     }
   }
 
-  return async (event) => {
+  return async (event, context) => {
     if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
     if (event?.httpMethod === 'GET' && event?.path === READINESS_PATH && !hasQuery(event)) {
       if (usesProductionPorts) await productionPorts.refreshReadiness()
@@ -214,7 +224,12 @@ function createStudySafetyHandler(overrides = {}) {
         return errorResponse(503, 'service_not_ready')
       }
 
-      const decision = await classifyTransientSafety(request.transientText, classifier)
+      const decision = await classifyTransientSafety(request.transientText, classifier, {
+        requestKey: usageRequestKey(event, context, overrides.requestIdFactory),
+        accountRef: auth.user.id,
+        householdRef: authorization.context.householdId,
+        householdAttribution: 'resolved',
+      })
       // The transient text is intentionally not retained beyond this point.
       if (decision.outcome === 'clear') return jsonResponse(200, learnerWireResult('clear'))
 

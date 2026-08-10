@@ -83,6 +83,18 @@ function ttsRecord(overrides = {}) {
   })
 }
 
+function studySafetyRecord(overrides = {}) {
+  return record({
+    usageId: 'study-safety-1',
+    engine: 'study',
+    engineVersion: 'study-safety-v1',
+    providerProductId: 'claude-haiku-4-5',
+    providerModelId: 'claude-haiku-4-5',
+    logicalModelTier: 'haiku',
+    ...overrides,
+  })
+}
+
 describe('Admin cost UTC date ranges', () => {
   it.each([
     [{ range: 'today' }, ['2026-08-08', '2026-08-08', 1]],
@@ -144,6 +156,18 @@ describe('Admin cost aggregate projection', () => {
     expect(model.trend).toHaveLength(1)
     expect(model.breakdowns.models.map((row) => row.label)).toEqual([
       'Anthropic Haiku tier', 'Anthropic Sonnet tier', 'ElevenLabs Turbo speech',
+    ])
+  })
+
+  it('keeps Study safety under its own engine while preserving AI totals', () => {
+    const model = buildAdminCostProjection([
+      studySafetyRecord({ inputTokens: 13, outputTokens: 5, costMicros: '19' }),
+    ], today, NOW)
+
+    expect(model.summary.aiRequests).toEqual({ status: 'available', value: 1 })
+    expect(model.summary.inputTokens.value).toBe(13)
+    expect(model.breakdowns.engines).toEqual([
+      expect.objectContaining({ key: 'study', label: 'Study safety' }),
     ])
   })
 

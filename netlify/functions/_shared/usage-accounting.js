@@ -7,6 +7,7 @@ const REQUEST_KEY_PATTERN = /^[A-Za-z0-9_-]{1,128}$/
 const VERSION_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:@/-]{0,127}$/
 const ENGINE_VERSION_ENV = Object.freeze({
   tutor: 'ACADEMY_TUTOR_ENGINE_VERSION',
+  study: 'ACADEMY_STUDY_ENGINE_VERSION',
   jarvis: 'ACADEMY_JARVIS_ENGINE_VERSION',
   tts: 'ACADEMY_TTS_ENGINE_VERSION',
 })

@@ -203,6 +203,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-provider-attempt-journal-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810151000",
+      "filename": "20260810151000_academy_study_safety_provider_accounting.sql",
+      "sha256": "5bcdc8891538613ada2c5872016b6cbe00e11c763b8ec6bacf4e6f354241cef6",
+      "dependency": "20260810130000_academy_provider_attempt_journal.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-study-safety-provider-accounting-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

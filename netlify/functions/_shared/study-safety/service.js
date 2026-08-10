@@ -16,7 +16,7 @@ function invalidDecision(reasonCode, classifierVersion = 'study-safety-validatio
 }
 
 /** Runs normalization, deterministic review, async provider review, and non-downgrade merge. */
-export async function classifyTransientSafety(transientText, classifier) {
+export async function classifyTransientSafety(transientText, classifier, accountingContext) {
   const normalizedTransientText = normalizeTransientText(transientText)
   if (!normalizedTransientText) return invalidDecision('safety-invalid-input-v1')
   const deterministic = deterministicSafetyAssessment(normalizedTransientText)
@@ -30,7 +30,7 @@ export async function classifyTransientSafety(transientText, classifier) {
       classificationVersion: 1,
       normalizedTransientText,
       deterministicAssessment: deterministic,
-    })
+    }, accountingContext)
   } catch {
     return invalidDecision('safety-invalid-provider-unavailable-v1', classifier.classifierVersion)
   }
