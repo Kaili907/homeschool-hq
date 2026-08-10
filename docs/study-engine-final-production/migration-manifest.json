@@ -205,8 +205,8 @@
       "supersessionStatus": "current"
     },
     {
-      "version": "20260810120000",
-      "filename": "20260810120000_academy_admin_audit_query_filters.sql",
+      "version": "20260810110000",
+      "filename": "20260810110000_academy_admin_audit_query_filters.sql",
       "sha256": "175a8c052742aacbf0e6cfd0ea2a389d217c432a9309ced03d776b905647fc4e",
       "dependency": "20260809150000_academy_logical_voice_profile_contract.sql",
       "classification": "executable",
@@ -215,10 +215,20 @@
       "supersessionStatus": "current"
     },
     {
-      "version": "20260810130000",
-      "filename": "20260810130000_academy_provider_attempt_journal.sql",
+      "version": "20260810120000",
+      "filename": "20260810120000_academy_curriculum_draft_authoring.sql",
+      "sha256": "f9839401260f328df70496c105cadcbe5a5e06477db58610ae6d7bde42ea9721",
+      "dependency": "20260809170000_academy_admin_curriculum_audit_vocabulary.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-curriculum-draft-authoring-v1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810131000",
+      "filename": "20260810131000_academy_provider_attempt_journal.sql",
       "sha256": "af93f20a14fefcc23f5873af853c9ac0c7ef4065f00d5b1d6f06dc891c0b7f44",
-      "dependency": "20260810120000_academy_admin_audit_query_filters.sql",
+      "dependency": "20260810110000_academy_admin_audit_query_filters.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-provider-attempt-journal-v1",
@@ -228,7 +238,7 @@
       "version": "20260810144700",
       "filename": "20260810144700_academy_admin_access_management.sql",
       "sha256": "56bb1b1efd798586f9abce6ada581e38f70bf0704ec4e93602062c6eef268bbe",
-      "dependency": "20260810120000_academy_admin_audit_query_filters.sql",
+      "dependency": "20260810110000_academy_admin_audit_query_filters.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-access-management-v1",
@@ -238,7 +248,7 @@
       "version": "20260810151000",
       "filename": "20260810151000_academy_study_safety_provider_accounting.sql",
       "sha256": "5bcdc8891538613ada2c5872016b6cbe00e11c763b8ec6bacf4e6f354241cef6",
-      "dependency": "20260810130000_academy_provider_attempt_journal.sql",
+      "dependency": "20260810131000_academy_provider_attempt_journal.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-study-safety-provider-accounting-v1",

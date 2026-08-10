@@ -34,7 +34,7 @@ This migration has not been applied to a hosted Supabase project.
 ## Supabase: Admin audit query filters (2026-08-10)
 
 Tracked migration:
-`supabase/migrations/20260810120000_academy_admin_audit_query_filters.sql`.
+`supabase/migrations/20260810110000_academy_admin_audit_query_filters.sql`.
 
 The additive migration keeps the existing immutable Admin audit storage and
 bounded cursor projection. It adds indexes and exact server-side filters for
@@ -57,6 +57,30 @@ validated check constraint composes this new rule with the existing CAS profile
 validator. Canonical LF SHA-256:
 `d111cd566a39fb016cade408b5a64adb46d98ec9a8155f1060ac67d62053cd74`.
 This migration has not been applied to a hosted Supabase project.
+## Supabase: Curriculum Studio draft authoring (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810120000_academy_curriculum_draft_authoring.sql`.
+
+The migration adds the controlled mutable draft plane after the immutable
+release registry and curriculum audit vocabulary. Every draft is bound by
+foreign key to one published base release, records target-version intent and
+Schema Set `2.0.0`, and remains in the `draft` lifecycle for this card. Draft
+entities are full Schema v2 `course`, `unit`, `lesson`, `assessment`, or
+`media_resource` records. System/policy/protected entity classes are excluded.
+
+Workspace and entity revisions provide optimistic CAS. Matching request UUID
+and request digest pairs replay their original result; reuse with changed input
+fails. Removal is a one-way tombstone revision and never deletes the stored
+payload. Trusted-server RPCs re-resolve the server-derived Admin actor and exact
+capability, use postgres-owned forced-RLS tables with no direct application-role
+grants, and append the existing curriculum audit action in the same transaction.
+
+The migration does not implement collaborators, full-set/final publication
+validation, preview, diff, approval, publication, pointer activation, or Studio
+UI. It has not been applied to hosted Supabase. Its tracked SHA-256 is in
+`docs/admin-console/curriculum-draft-authoring-migration.json`.
+
 ## Supabase: immutable curriculum release registry (2026-08-09)
 
 Tracked migration:

@@ -94,7 +94,7 @@ async function createDatabase() {
     'utf8',
   ))
   await database.exec(await readFile(
-    new URL('./migrations/20260810120000_academy_admin_audit_query_filters.sql', import.meta.url),
+    new URL('./migrations/20260810110000_academy_admin_audit_query_filters.sql', import.meta.url),
     'utf8',
   ))
   await database.exec(`
