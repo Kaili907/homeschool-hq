@@ -1,6 +1,10 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it, vi } from 'vitest'
 import type { AcademyStudyContext } from '../../academy/adapters/studyContextAdapter'
+import {
+  createStudyBoundContentClient,
+  type StudyBoundContentClient,
+} from '../client/studyBoundContentClient'
 import { StudyIdentityClientError } from '../client/studyIdentityClient'
 import type { StudyProductionReadinessClient } from '../client/studyProductionReadinessClient'
 import {
@@ -8,6 +12,7 @@ import {
   type StudyProductionSessionClient,
 } from '../client/studyProductionSessionClient'
 import type { StudyCheckpointRecord } from '../contracts/persistence/types'
+import type { StudyBoundContentReady } from '../contracts/production/content'
 import type {
   StudyProductionBeginResponse,
   StudyProductionCheckpointReadResponse,
@@ -134,6 +139,58 @@ const beginInput: StudyProductionBeginInput = Object.freeze({
   initialSegmentId: 'segment-bound-a',
 })
 
+function learnerLesson(lessonId: string) {
+  return Object.freeze({
+    lessonId,
+    courseId: lessonId.includes('science') ? 'ma-g5-science' : 'ma-g5-mathematics',
+    grade: 5 as const,
+    subject: lessonId.includes('science') ? 'science' : 'mathematics',
+    courseDay: 8,
+    unitNumber: 1,
+    unitTitle: 'Bound unit',
+    dayInUnit: 8,
+    title: `Bound ${lessonId}`,
+    standards: Object.freeze(['5.TEST.1']),
+    schemaVersion: '1.0',
+    learningObjectives: Object.freeze(['Learn the bound objective.']),
+    successCriteria: Object.freeze(['Meet the bound criterion.']),
+    materials: Object.freeze(['notebook']),
+    lessonFlow: Object.freeze([Object.freeze({
+      segment: 'Guided practice',
+      teacherOrTutorAction: 'Present the learner-safe activity.',
+    })]),
+    formativeCheck: 'Complete the learner-safe check.',
+    accommodations: Object.freeze(['Offer an accessible response mode.']),
+  })
+}
+
+function readyContent(overrides: Partial<StudyBoundContentReady> = {}): StudyBoundContentReady {
+  return Object.freeze({
+    schemaVersion: 1,
+    status: 'ready',
+    reasonCode: 'content-ready',
+    sessionRef: 'session:server-generated-a',
+    lessonRef: academyContext.lessonRef,
+    skillRefs: academyContext.skillRefs,
+    curriculumBinding: Object.freeze({
+      schemaVersion: 1,
+      releaseId: binding.releaseId,
+      packageId: binding.packageId,
+      releaseVersion: binding.releaseVersion,
+      curriculumManifestSha256: binding.curriculumManifestSha256,
+    }),
+    lessons: Object.freeze(academyContext.skillRefs.map(learnerLesson)),
+    ...overrides,
+  })
+}
+
+function contentMocks(overrides: Partial<StudyBoundContentClient> = {}): StudyBoundContentClient {
+  return {
+    load: vi.fn(async () => readyContent()),
+    ...overrides,
+  }
+}
+
 function readiness(status: 'ready' | 'not-ready' | 'degraded' = 'ready'):
 StudyProductionReadinessClient {
   const result = Object.freeze({
@@ -187,16 +244,19 @@ function sessionMocks(overrides: Partial<StudyProductionSessionClient> = {}): St
 function harness(input: {
   readonly sessions?: StudyProductionSessionClient
   readonly readiness?: StudyProductionReadinessClient
+  readonly content?: StudyBoundContentClient
 } = {}) {
   const sessions = input.sessions ?? sessionMocks()
   const ready = input.readiness ?? readiness()
+  const content = input.content ?? contentMocks()
   let mutationSequence = 0
   const controller = createStudyProductionController({
     sessions,
     readiness: ready,
+    content,
     createMutationId: (kind) => `mutation:${kind}:${++mutationSequence}`,
   })
-  return { controller, sessions, readiness: ready }
+  return { controller, sessions, content, readiness: ready }
 }
 
 async function begunController(sessions = sessionMocks()) {
@@ -217,7 +277,7 @@ describe('Study production controller foundation', () => {
   })
 
   it('begins from the Academy advisory handoff and sends no browser authority', async () => {
-    const { controller, sessions } = harness()
+    const { controller, sessions, content } = harness()
     const result = await controller.begin(beginInput)
     expect(result).toMatchObject({
       status: 'ready',
@@ -227,6 +287,10 @@ describe('Study production controller foundation', () => {
         lessonRef: 'grade-5:academy-week-2-day-3',
         scopeWeek: 2,
         scopeDay: 3,
+      },
+      content: {
+        status: 'ready',
+        curriculumBinding: { releaseVersion: '1.0.0' },
       },
     })
     const request = vi.mocked(sessions.begin).mock.calls[0]![0]
@@ -244,6 +308,13 @@ describe('Study production controller foundation', () => {
       },
     })
     expect(JSON.stringify(request)).not.toMatch(/household|learner|student|role|scopeWeek|scopeDay/i)
+    expect(vi.mocked(content.load)).toHaveBeenCalledWith({
+      sessionId: 'session:server-generated-a',
+      lessonRef: 'grade-5:academy-week-2-day-3',
+      skillRefs: ['ma-g5-mathematics-u01-l08', 'ma-g5-science-u01-l03'],
+    }, undefined)
+    expect(JSON.stringify(vi.mocked(content.load).mock.calls[0]![0]))
+      .not.toMatch(/releaseId|packageId|manifest|household|student|role/i)
   })
 
   it('replays an uncertain begin with the same server idempotency identity', async () => {
@@ -262,11 +333,90 @@ describe('Study production controller foundation', () => {
     expect(begin.mock.calls[0][0].idempotencyKey).toBe(begin.mock.calls[1][0].idempotencyKey)
   })
 
+  it('replays the same begin identity when the session succeeded but content delivery was uncertain', async () => {
+    const load = vi.fn()
+      .mockRejectedValueOnce(new StudyIdentityClientError('service-not-ready'))
+      .mockResolvedValueOnce(readyContent())
+    const sessions = sessionMocks()
+    const { controller } = harness({ sessions, content: contentMocks({ load }) })
+
+    await expect(controller.begin(beginInput)).resolves.toMatchObject({
+      status: 'network_failure',
+      session: { sessionId: 'session:server-generated-a' },
+      content: null,
+      pendingMutation: 'begin',
+    })
+    await expect(controller.begin(beginInput)).resolves.toMatchObject({
+      status: 'ready', content: { status: 'ready' }, pendingMutation: null,
+    })
+    expect(sessions.begin).toHaveBeenCalledTimes(2)
+    const beginCalls = vi.mocked(sessions.begin).mock.calls
+    expect(beginCalls[0]![0].idempotencyKey).toBe(beginCalls[1]![0].idempotencyKey)
+    expect(load).toHaveBeenCalledTimes(2)
+  })
+
+  it.each([
+    ['membership_mismatch', 'skill-not-eligible-for-learner'],
+    ['manifest_mismatch', 'curriculum-manifest-mismatch'],
+    ['unavailable', 'legacy-curriculum-binding-ambiguous'],
+  ] as const)('fails closed when bound content is %s', async (status, reasonCode) => {
+    const content = contentMocks({
+      load: vi.fn(async () => ({ schemaVersion: 1 as const, status, reasonCode })),
+    })
+    const { controller, sessions } = harness({ content })
+    await expect(controller.begin(beginInput)).resolves.toMatchObject({
+      status: 'unavailable',
+      session: { sessionId: 'session:server-generated-a' },
+      content: null,
+      pendingMutation: null,
+      recovery: { kind: 'content_unavailable', status, reasonCode },
+    })
+    await controller.transition({ type: 'pause-started', segmentId: 'segment-bound-a' })
+    await controller.readCheckpoint()
+    await controller.saveCheckpoint(checkpointDraft())
+    expect(sessions.transition).not.toHaveBeenCalled()
+    expect(sessions.readCheckpoint).not.toHaveBeenCalled()
+    expect(sessions.saveCheckpoint).not.toHaveBeenCalled()
+  })
+
+  it('rejects malformed or authority-bearing content responses at the client boundary', async () => {
+    const content = createStudyBoundContentClient({
+      runtime: {
+        readBoundContent: vi.fn(async () => ({
+          ...readyContent(),
+          serverAuthority: { releaseSourceRoot: 'private' },
+        })),
+      },
+      createAttemptRef: () => 'attempt:malformed-content',
+    })
+    const { controller } = harness({ content })
+    await expect(controller.begin(beginInput)).resolves.toMatchObject({
+      status: 'unavailable',
+      content: null,
+      pendingMutation: null,
+      recovery: { kind: 'contract_invalid' },
+    })
+  })
+
+  it('keeps the session and content on their old exact release after an active-pointer change', async () => {
+    const activePointer = { releaseVersion: '2.0.0' }
+    const load = vi.fn(async () => {
+      expect(activePointer.releaseVersion).toBe('2.0.0')
+      return readyContent()
+    })
+    const { controller } = harness({ content: contentMocks({ load }) })
+    const result = await controller.begin(beginInput)
+    expect(result.session?.curriculumBinding.releaseVersion).toBe('1.0.0')
+    expect(result.content?.curriculumBinding.releaseVersion).toBe('1.0.0')
+    expect(load).toHaveBeenCalledOnce()
+  })
+
   it('fails closed when a secure bounded mutation identity cannot be created', async () => {
     const sessions = sessionMocks()
     const controller = createStudyProductionController({
       sessions,
       readiness: readiness(),
+      content: contentMocks(),
       createMutationId: () => { throw new Error('unavailable random source') },
     })
     await expect(controller.begin(beginInput)).resolves.toMatchObject({
@@ -387,11 +537,12 @@ describe('Study production controller foundation', () => {
     const { controller } = harness({ sessions: sessionMocks({ resume }) })
     const result = await controller.resume({
       sessionId: 'session:server-generated-a',
-      curriculumReleaseVersion: '1.0.0',
+      academyContext,
     })
     expect(result).toMatchObject({
       status: 'ready',
       session: { revision: 5, currentSegmentId: 'segment-server-resume' },
+      content: { status: 'ready', skillRefs: academyContext.skillRefs },
       checkpoint: { revision: 2, segmentId: 'segment-server-resume' },
       acceptedCheckpointRevision: 2,
       selection: { segmentId: 'segment-server-resume' },
@@ -412,7 +563,7 @@ describe('Study production controller foundation', () => {
     const { controller } = await begunController(sessionMocks({ resume }))
     controller.selectSegment('segment-browser-stale')
     const result = await controller.resume({
-      sessionId: 'session:server-generated-a', curriculumReleaseVersion: '1.0.0',
+      sessionId: 'session:server-generated-a', academyContext,
     })
     expect(result.session).toMatchObject({ revision: 7, state: 'paused' })
     expect(result.selection.segmentId).toBe('segment-server-authority')
@@ -453,7 +604,7 @@ describe('Study production controller foundation', () => {
       })),
     }) })
     await expect(unavailable.controller.resume({
-      sessionId: 'session:server-generated-a', curriculumReleaseVersion: '1.0.0',
+      sessionId: 'session:server-generated-a', academyContext,
     })).resolves.toMatchObject({
       status: 'unavailable', recovery: { reasonCode: 'study-session-unavailable' },
     })
@@ -464,7 +615,7 @@ describe('Study production controller foundation', () => {
       }),
     }) })
     const result = await unauthorized.controller.resume({
-      sessionId: 'session:server-generated-a', curriculumReleaseVersion: '1.0.0',
+      sessionId: 'session:server-generated-a', academyContext,
     })
     expect(result).toMatchObject({
       status: 'resume_required', recovery: { kind: 'student_session_invalid' },
@@ -490,6 +641,7 @@ describe('Study production controller foundation', () => {
     const sources = [
       readFileSync(new URL('./sessionController.ts', import.meta.url), 'utf8'),
       readFileSync(new URL('../client/studyProductionSessionClient.ts', import.meta.url), 'utf8'),
+      readFileSync(new URL('../client/studyBoundContentClient.ts', import.meta.url), 'utf8'),
     ].join('\n')
     expect(sources).not.toMatch(/localDevelopmentPorts|mountedPorts|StudySessionRoute/)
 
@@ -529,7 +681,7 @@ describe('Study production controller foundation', () => {
       type: 'segment-completed', segmentId: 'segment-bound-a',
     })
     await expect(controller.resume({
-      sessionId: 'session:server-generated-a', curriculumReleaseVersion: '1.0.0',
+      sessionId: 'session:server-generated-a', academyContext,
     })).resolves.toMatchObject({
       status: 'resume_required', recovery: { kind: 'mutation_pending' },
     })
@@ -549,7 +701,7 @@ describe('Study production controller foundation', () => {
     const resume = vi.fn(() => resumed)
     const { controller } = harness({ sessions: sessionMocks({ resume }) })
     const request = {
-      sessionId: 'session:server-generated-a', curriculumReleaseVersion: '1.0.0',
+      sessionId: 'session:server-generated-a', academyContext,
     }
     const first = controller.resume(request)
     const second = controller.resume(request)
@@ -587,6 +739,12 @@ describe('Study production controller foundation', () => {
     expect(serialized).not.toMatch(
       /mutation:begin|household|studentId|learnerRef|private.?note|raw.?safety|raw.?answer|transcript|diagnostic|emotional|personality|secret|credential/i,
     )
+    expect(result.content?.lessons[0]).not.toHaveProperty('scoringGuidance')
+    expect(result.content?.lessons[0]).not.toHaveProperty('masteryRule')
+    expect(result.content?.lessons[0]).not.toHaveProperty('adaptiveTutorRoutes')
+    expect(result.content?.lessons[0]).not.toHaveProperty('safetyAndPrivacy')
+    expect(result.content?.lessons[0]).not.toHaveProperty('parentVisibility')
+    expect(result.content?.lessons[0]).not.toHaveProperty('source')
     expect(serialized).toContain('session:server-generated-a')
   })
 

@@ -82,7 +82,10 @@ function scheduleDays(raw, grade, lessonById) {
 function learnerLesson(detail) {
   const {
     scoringGuidance: _scoringGuidance,
+    masteryRule: _masteryRule,
     adaptiveTutorRoutes: _adaptiveTutorRoutes,
+    safetyAndPrivacy: _safetyAndPrivacy,
+    parentVisibility: _parentVisibility,
     assessment: _assessment,
     source: _source,
     ...content

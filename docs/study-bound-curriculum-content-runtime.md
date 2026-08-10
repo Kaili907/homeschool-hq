@@ -46,7 +46,8 @@ public build output is substituted.
 ## Privacy boundary
 
 Learner-facing projections omit the existing protected scoring guidance,
-adaptive tutor routes, assessment relationship, and source custody fields.
+mastery rules, adaptive tutor routes, assessment relationship, safety-policy
+text, guardian-only notes, and source custody fields.
 Operational decision hooks receive only bounded status/reason codes and opaque
 session/lesson/skill refs. Lesson text, questions, resources, answers, and raw
 curriculum bodies are not logged or written to operational telemetry.

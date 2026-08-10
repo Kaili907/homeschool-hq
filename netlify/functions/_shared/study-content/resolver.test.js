@@ -229,7 +229,11 @@ describe('immutable filesystem package source', () => {
     const lesson = await opened.learnerLesson(mathSkill)
     expect(lesson).toMatchObject({ lessonId: mathSkill, title: expect.any(String) })
     expect(lesson).not.toHaveProperty('scoringGuidance')
+    expect(lesson).not.toHaveProperty('masteryRule')
     expect(lesson).not.toHaveProperty('adaptiveTutorRoutes')
+    expect(lesson).not.toHaveProperty('safetyAndPrivacy')
+    expect(lesson).not.toHaveProperty('parentVisibility')
+    expect(lesson).not.toHaveProperty('assessment')
     expect(lesson).not.toHaveProperty('source')
   })
 

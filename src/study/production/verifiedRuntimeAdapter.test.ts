@@ -51,7 +51,7 @@ function deferred<T>() {
 
 describe('opaque verified production runtime adapter', () => {
   it('issues and verifies one selected learner without putting authority IDs in lifecycle state', async () => {
-    const fetchImpl = vi.fn(async (url: string) => {
+    const fetchImpl = vi.fn(async (url: string, _init?: RequestInit) => {
       if (url.endsWith('/issue')) return new Response(JSON.stringify(issued()), { status: 201 })
       if (url.endsWith('/verify')) return new Response(JSON.stringify(verified()), { status: 200 })
       throw new Error('unexpected request')
@@ -120,6 +120,45 @@ describe('opaque verified production runtime adapter', () => {
     const academic = fetchImpl.mock.calls.find(([url]) => String(url).endsWith('/academic-runtime'))!
     expect(academic[1]?.headers).toMatchObject({ Authorization: `Bearer ${REFERENCE_A}` })
     expect(String(academic[1]?.body)).not.toMatch(/studentId|householdId|grantId/)
+  })
+
+  it('reads bound content through the same lifecycle and opaque learner bearer', async () => {
+    const fetchImpl = vi.fn(async (url: string, _init?: RequestInit) => {
+      if (url.endsWith('/issue')) return new Response(JSON.stringify(issued()), { status: 201 })
+      if (url.endsWith('/verify')) return new Response(JSON.stringify(verified()), { status: 200 })
+      if (url.endsWith('/bound-content')) {
+        return new Response(JSON.stringify({
+          schemaVersion: 1,
+          status: 'unavailable',
+          reasonCode: 'curriculum-release-unavailable',
+        }), { status: 200 })
+      }
+      throw new Error('unexpected request')
+    })
+    const adapter = createVerifiedStudyRuntimeAdapter({
+      identityClient: createStudyIdentityClient(fetchImpl as typeof fetch),
+      lifecycle: new StudyLifecycleBoundary(),
+      now: () => NOW,
+    })
+    await adapter.launch(launchInput())
+    await expect(adapter.readBoundContent({
+      request: {
+        sessionId: 'session-a',
+        lessonRef: 'grade-5:academy-week-1-day-1',
+        skillRefs: ['ma-g5-mathematics-u01-l01'],
+      },
+      operationRef: 'bound-content:one',
+    })).resolves.toMatchObject({ status: 'unavailable' })
+
+    const verifyCalls = fetchImpl.mock.calls.filter(([url]) => String(url).endsWith('/verify'))
+    expect(verifyCalls).toHaveLength(2)
+    expect(JSON.parse(String(verifyCalls[1]![1]?.body))).toEqual({
+      schemaVersion: 1,
+      requiredCapability: 'student:progress:read',
+    })
+    const content = fetchImpl.mock.calls.find(([url]) => String(url).endsWith('/bound-content'))!
+    expect(content[1]?.headers).toMatchObject({ Authorization: `Bearer ${REFERENCE_A}` })
+    expect(String(content[1]?.body)).not.toMatch(/releaseId|packageId|manifest|studentId|householdId/i)
   })
 
   it.each([

@@ -1,5 +1,9 @@
 import type { AcademyStudyContext } from '../../academy/adapters/studyContextAdapter'
 import {
+  StudyBoundContentContractError,
+  type StudyBoundContentClient,
+} from '../client/studyBoundContentClient'
+import {
   StudyIdentityClientError,
 } from '../client/studyIdentityClient'
 import type { StudyProductionReadinessClient } from '../client/studyProductionReadinessClient'
@@ -8,6 +12,10 @@ import {
   type StudyProductionSessionClient,
 } from '../client/studyProductionSessionClient'
 import type { StudyCheckpointRecord } from '../contracts/persistence/types'
+import type {
+  StudyBoundContentFailure,
+  StudyBoundContentReady,
+} from '../contracts/production/content'
 import {
   isStudyProductionLocalDate,
   isStudyProductionReleaseVersion,
@@ -83,6 +91,12 @@ export type StudyProductionControllerRecovery =
       readonly kind: 'unavailable'
       readonly reasonCode: StudyProductionBindingReason | StudyProductionSettingsUnavailableReason
     }
+  | {
+      readonly kind: 'content_unavailable'
+      readonly status: StudyBoundContentFailure['status']
+      readonly reasonCode: StudyBoundContentFailure['reasonCode']
+      readonly rejectedSkillRef?: string
+    }
   | { readonly kind: 'checkpoint_integrity' }
   | { readonly kind: 'contract_invalid' }
   | { readonly kind: 'network_uncertain' }
@@ -98,6 +112,8 @@ export interface StudyProductionControllerSnapshot {
   readonly acceptedCheckpointRevision: number
   readonly selection: { readonly segmentId: string | null }
   readonly advisoryLaunch: StudyProductionAdvisoryLaunch | null
+  /** Exact learner-safe content for the authoritative session binding, or null. */
+  readonly content: StudyBoundContentReady | null
   readonly pendingMutation: StudyProductionMutationKind | null
   readonly recovery: StudyProductionControllerRecovery | null
 }
@@ -112,7 +128,7 @@ export interface StudyProductionBeginInput {
 
 export interface StudyProductionResumeInput {
   readonly sessionId: string
-  readonly curriculumReleaseVersion: string
+  readonly academyContext: AcademyStudyContext
 }
 
 export interface StudyProductionTransitionInput {
@@ -146,6 +162,7 @@ export interface StudyProductionController {
 export interface StudyProductionControllerOptions {
   readonly readiness: StudyProductionReadinessClient
   readonly sessions: StudyProductionSessionClient
+  readonly content: StudyBoundContentClient
   readonly createMutationId?: (kind: StudyProductionMutationKind) => string
 }
 
@@ -212,6 +229,33 @@ function sameSessionRequest(
     projection.curriculumBinding.releaseVersion === request.curriculumReleaseVersion
 }
 
+function sameCurriculumBinding(
+  left: StudyProductionSessionProjection['curriculumBinding'],
+  right: StudyProductionSessionProjection['curriculumBinding'],
+): boolean {
+  return left.schemaVersion === right.schemaVersion && left.status === right.status &&
+    left.releaseId === right.releaseId && left.packageId === right.packageId &&
+    left.releaseVersion === right.releaseVersion &&
+    left.curriculumManifestSha256 === right.curriculumManifestSha256
+}
+
+function boundContentMatches(
+  projection: StudyProductionSessionProjection,
+  advisory: StudyProductionAdvisoryLaunch,
+  value: StudyBoundContentReady,
+): boolean {
+  const binding = projection.curriculumBinding
+  return value.sessionRef === projection.sessionId &&
+    value.lessonRef === projection.lessonId &&
+    value.lessonRef === advisory.lessonRef &&
+    value.skillRefs.length === advisory.skillRefs.length &&
+    value.skillRefs.every((ref, index) => ref === advisory.skillRefs[index]) &&
+    value.curriculumBinding.releaseId === binding.releaseId &&
+    value.curriculumBinding.packageId === binding.packageId &&
+    value.curriculumBinding.releaseVersion === binding.releaseVersion &&
+    value.curriculumBinding.curriculumManifestSha256 === binding.curriculumManifestSha256
+}
+
 function unavailableStatus(
   value: StudyProductionUnavailableResponse,
 ): StudyProductionControllerStatus {
@@ -243,6 +287,7 @@ export function createStudyProductionController(
   let checkpointRevision = 0
   let selectedSegmentId: string | null = null
   let advisoryLaunch: StudyProductionAdvisoryLaunch | null = null
+  let content: StudyBoundContentReady | null = null
   let recovery: StudyProductionControllerRecovery | null = null
   let pending: PendingMutation | null = null
   let activeRead: ActiveRead | null = null
@@ -255,6 +300,7 @@ export function createStudyProductionController(
       acceptedCheckpointRevision: checkpointRevision,
       selection: Object.freeze({ segmentId: selectedSegmentId }),
       advisoryLaunch,
+      content,
       pendingMutation: pending?.kind ?? null,
       recovery,
     })
@@ -292,7 +338,8 @@ export function createStudyProductionController(
   }
 
   function knownFailure(error: unknown, mutationUncertain: boolean): StudyProductionControllerSnapshot {
-    if (error instanceof StudyProductionSessionContractError) {
+    if (error instanceof StudyProductionSessionContractError ||
+        error instanceof StudyBoundContentContractError) {
       if (pending) pending = null
       return publish('unavailable', Object.freeze({ kind: 'contract_invalid' }))
     }
@@ -377,17 +424,58 @@ export function createStudyProductionController(
     return operation
   }
 
-  function acceptSession(
+  function stageSession(
     projection: StudyProductionSessionProjection,
     nextCheckpointRevision: number,
     nextCheckpoint: StudyCheckpointRecord | null = acceptedCheckpoint,
-  ): StudyProductionControllerSnapshot {
+    resetContent = false,
+  ): void {
     const { checkpoint: _checkpoint, ...sessionProjection } = projection as
       StudyProductionSessionProjection & { readonly checkpoint?: StudyCheckpointRecord | null }
     session = Object.freeze(sessionProjection)
     acceptedCheckpoint = nextCheckpoint
     checkpointRevision = nextCheckpointRevision
     selectedSegmentId = projection.currentSegmentId
+    if (resetContent) content = null
+  }
+
+  function acceptSession(
+    projection: StudyProductionSessionProjection,
+    nextCheckpointRevision: number,
+    nextCheckpoint: StudyCheckpointRecord | null = acceptedCheckpoint,
+  ): StudyProductionControllerSnapshot {
+    stageSession(projection, nextCheckpointRevision, nextCheckpoint)
+    return publish('ready')
+  }
+
+  async function resolveBoundContent(
+    projection: StudyProductionSessionProjection,
+    advisory: StudyProductionAdvisoryLaunch,
+    signal?: AbortSignal,
+    mutationIdentity?: string,
+  ): Promise<StudyProductionControllerSnapshot> {
+    const value = await options.content.load(Object.freeze({
+      sessionId: projection.sessionId,
+      lessonRef: advisory.lessonRef,
+      skillRefs: advisory.skillRefs,
+    }), signal)
+    if (mutationIdentity && pending?.identity === mutationIdentity) pending = null
+    if (value.status !== 'ready') {
+      content = null
+      return publish('unavailable', Object.freeze({
+        kind: 'content_unavailable',
+        status: value.status,
+        reasonCode: value.reasonCode,
+        ...(value.rejectedSkillRef === undefined
+          ? {}
+          : { rejectedSkillRef: value.rejectedSkillRef }),
+      }))
+    }
+    if (!boundContentMatches(projection, advisory, value)) {
+      content = null
+      return publish('unavailable', Object.freeze({ kind: 'contract_invalid' }))
+    }
+    content = value
     return publish('ready')
   }
 
@@ -435,18 +523,20 @@ export function createStudyProductionController(
       })
       try {
         const value = await options.sessions.begin(request, signal)
-        if (pending?.identity === identity) pending = null
         if (value.status === 'begun') {
           if (value.revision !== 1 || value.lessonId !== request.lessonId ||
               value.subjectId !== request.subjectId || value.studyPlanId !== request.studyPlanId ||
               value.intendedLocalDate !== request.intendedLocalDate ||
               value.currentSegmentId !== request.initialSegmentId ||
               value.curriculumBinding.releaseVersion !== advisory.releaseVersion) {
+            if (pending?.identity === identity) pending = null
             return publish('unavailable', Object.freeze({ kind: 'contract_invalid' }))
           }
           advisoryLaunch = advisory
-          return acceptSession(value, 0, null)
+          stageSession(value, 0, null, true)
+          return await resolveBoundContent(value, advisory, signal, identity)
         }
+        if (pending?.identity === identity) pending = null
         if (value.status === 'idempotency-collision') {
           return publish('conflict', Object.freeze({ kind: 'idempotency_collision' }))
         }
@@ -461,21 +551,27 @@ export function createStudyProductionController(
     input: StudyProductionResumeInput,
     signal?: AbortSignal,
   ): Promise<StudyProductionControllerSnapshot> {
-    if (!isStudyProductionSafeRef(input.sessionId) ||
-        !isStudyProductionReleaseVersion(input.curriculumReleaseVersion)) {
+    const advisory = immutableAdvisory(input.academyContext)
+    if (!isStudyProductionSafeRef(input.sessionId) || !advisory) {
       return Promise.resolve(invalidInput())
     }
-    return startRead('resume', canonical(input), async () => {
+    const request = Object.freeze({
+      sessionId: input.sessionId,
+      curriculumReleaseVersion: advisory.releaseVersion,
+    })
+    return startRead('resume', canonical({ request, advisory }), async () => {
       try {
-        const value = await options.sessions.resume(Object.freeze({ ...input }), signal)
+        const value = await options.sessions.resume(request, signal)
         if (value.status === 'resumable' || value.status === 'closed') {
-          if (!sameSessionRequest(value, input) ||
+          if (!sameSessionRequest(value, request) || value.lessonId !== advisory.lessonRef ||
               (value.checkpoint && (value.checkpoint.sessionId !== value.sessionId ||
                 value.checkpoint.lessonId !== value.lessonId))) {
             return publish('unavailable', Object.freeze({ kind: 'contract_invalid' }))
           }
           pending = null
-          return acceptSession(value, value.checkpoint?.revision ?? 0, value.checkpoint)
+          advisoryLaunch = advisory
+          stageSession(value, value.checkpoint?.revision ?? 0, value.checkpoint, true)
+          return await resolveBoundContent(value, advisory, signal)
         }
         return isUnavailableResponse(value)
           ? applyUnavailable(value)
@@ -490,6 +586,7 @@ export function createStudyProductionController(
     input: StudyProductionTransitionInput,
     signal?: AbortSignal,
   ): Promise<StudyProductionControllerSnapshot> {
+    if (session && !content) return Promise.resolve(snapshot())
     if (!session || !TRANSITION_TYPES.has(input.type) ||
         (input.segmentId !== null && !isStudyProductionSafeRef(input.segmentId))) {
       return Promise.resolve(publish(session ? 'rejected' : 'resume_required', Object.freeze({
@@ -520,7 +617,8 @@ export function createStudyProductionController(
           await options.sessions.transition(request, signal)
         if (pending?.identity === identity) pending = null
         if (value.status === 'stored') {
-          if (!sameSessionRequest(value, request) || value.revision !== current.revision + 1) {
+          if (!sameSessionRequest(value, request) || value.revision !== current.revision + 1 ||
+              !sameCurriculumBinding(value.curriculumBinding, current.curriculumBinding)) {
             return publish('unavailable', Object.freeze({ kind: 'contract_invalid' }))
           }
           return acceptSession(value, checkpointRevision)
@@ -551,6 +649,7 @@ export function createStudyProductionController(
   }
 
   function readCheckpoint(signal?: AbortSignal): Promise<StudyProductionControllerSnapshot> {
+    if (session && !content) return Promise.resolve(snapshot())
     if (!session || pending || status === 'conflict' || status === 'resume_required') {
       return Promise.resolve(publish('resume_required', Object.freeze({ kind: 'mutation_pending' })))
     }
@@ -565,7 +664,8 @@ export function createStudyProductionController(
           await options.sessions.readCheckpoint(request, signal)
         if (value.status === 'found' || value.status === 'not-found' ||
             value.status === 'integrity-failed') {
-          if (value.curriculumBinding.releaseVersion !== request.curriculumReleaseVersion) {
+          if (value.curriculumBinding.releaseVersion !== request.curriculumReleaseVersion ||
+              !sameCurriculumBinding(value.curriculumBinding, current.curriculumBinding)) {
             return publish('unavailable', Object.freeze({ kind: 'contract_invalid' }))
           }
           if (value.sessionRevision !== current.revision || value.currentState !== current.state) {
@@ -599,6 +699,7 @@ export function createStudyProductionController(
     draft: StudyProductionCheckpointDraft,
     signal?: AbortSignal,
   ): Promise<StudyProductionControllerSnapshot> {
+    if (session && !content) return Promise.resolve(snapshot())
     if (!session) {
       return Promise.resolve(publish('resume_required', Object.freeze({ kind: 'mutation_pending' })))
     }
@@ -635,7 +736,8 @@ export function createStudyProductionController(
         if (pending?.identity === identity) pending = null
         if (value.status === 'stored') {
           if (value.checkpointRevision !== request.expectedRevision + 1 ||
-              value.curriculumBinding.releaseVersion !== request.curriculumReleaseVersion) {
+              value.curriculumBinding.releaseVersion !== request.curriculumReleaseVersion ||
+              !sameCurriculumBinding(value.curriculumBinding, current.curriculumBinding)) {
             return publish('unavailable', Object.freeze({ kind: 'contract_invalid' }))
           }
           if (value.sessionRevision !== current.revision || value.currentState !== current.state) {

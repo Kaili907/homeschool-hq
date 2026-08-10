@@ -25,6 +25,11 @@ describe('Study identity browser client', () => {
         operation: 'calendar:read',
         body: { blocks: [] },
       }), { status: 200 }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({
+        schemaVersion: 1,
+        status: 'unavailable',
+        reasonCode: 'curriculum-release-unavailable',
+      }), { status: 200 }))
     const client = createStudyIdentityClient(fetchImpl)
 
     await client.issueGuardianLaunch({
@@ -47,6 +52,22 @@ describe('Study identity browser client', () => {
       request: { cursor: null },
     })).resolves.toEqual({ blocks: [] })
     expect(fetchImpl.mock.calls[2][1].headers.Authorization).toBe(`Bearer ${reference}`)
+    await expect(client.executeBoundContentOperation({
+      request: {
+        sessionId: 'session-a',
+        lessonRef: 'grade-5:academy-week-1-day-1',
+        skillRefs: ['ma-g5-mathematics-u01-l01'],
+      },
+    })).resolves.toMatchObject({ status: 'unavailable' })
+    expect(fetchImpl.mock.calls[3][0]).toBe('/api/study/bound-content')
+    expect(fetchImpl.mock.calls[3][1].headers.Authorization).toBe(`Bearer ${reference}`)
+    expect(JSON.parse(fetchImpl.mock.calls[3][1].body)).toEqual({
+      schemaVersion: 1,
+      sessionId: 'session-a',
+      lessonRef: 'grade-5:academy-week-1-day-1',
+      skillRefs: ['ma-g5-mathematics-u01-l01'],
+    })
+    expect(fetchImpl.mock.calls[3][1].body).not.toMatch(/releaseId|packageId|manifest|studentId|householdId/i)
   })
 
   it('clears the in-memory reference on local clear, invalid verification, and revoke', async () => {
