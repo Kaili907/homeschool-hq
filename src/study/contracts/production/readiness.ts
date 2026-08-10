@@ -51,7 +51,9 @@ interface DependencySpecification {
 export const PRODUCTION_DEPENDENCY_SPECIFICATIONS: Readonly<Record<ProductionDependencyKey, DependencySpecification>> = Object.freeze({
   'session-verifying-authorizer': dependency('trusted-server', 'stateless', ['verify']),
   'household-learner-resolver': dependency('trusted-server', 'durable', ['resolveGuardian', 'resolveStudentSession', 'resolveStaff']),
-  'study-session-adapter': dependency('authenticated-rpc', 'durable', ['createSession', 'transitionSession']),
+  'study-session-adapter': dependency('authenticated-rpc', 'durable', [
+    'resolveCurriculumBinding', 'createSession', 'transitionSession',
+  ]),
   'checkpoint-adapter': dependency('authenticated-rpc', 'durable', ['readCheckpoint', 'compareAndSwapCheckpoint']),
   'review-queue': dependency('authenticated-rpc', 'durable', ['upsertReview']),
   'calendar-adapter': dependency('authenticated-rpc', 'durable', ['upsertCalendarBlock']),

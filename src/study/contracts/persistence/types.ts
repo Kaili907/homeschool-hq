@@ -1,6 +1,31 @@
 export type StudyId = string
 export type Uuid = string
 
+export interface StudyCurriculumBinding {
+  schemaVersion: 1
+  status: 'bound'
+  releaseId: Uuid
+  packageId: StudyId
+  releaseVersion: string
+  curriculumManifestSha256: string
+}
+
+export interface StudyCurriculumBindingUnavailable {
+  schemaVersion: 1
+  status: 'unavailable' | 'manual-review'
+  reasonCode:
+    | 'curriculum-release-missing'
+    | 'curriculum-release-unsupported'
+    | 'curriculum-release-unavailable'
+    | 'curriculum-release-mismatch'
+    | 'legacy-curriculum-binding-ambiguous'
+    | 'study-session-unavailable'
+}
+
+export type StudyCurriculumBindingResult =
+  | StudyCurriculumBinding
+  | StudyCurriculumBindingUnavailable
+
 export interface StudySessionRecord {
   id: StudyId
   schemaVersion: 1
@@ -20,6 +45,8 @@ export interface StudySessionRecord {
   startedAt: string | null
   completedAt: string | null
   intendedLocalDate: string
+  /** Browser advisory only; the server resolves and snapshots authority. */
+  curriculumReleaseVersion: string
   revision?: number
 }
 
