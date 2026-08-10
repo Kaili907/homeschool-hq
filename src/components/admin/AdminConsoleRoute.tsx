@@ -76,14 +76,24 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
   if (!suffix) return 'overview'
   if (suffix === 'curriculum/validation') return 'curriculum-validation'
+  if (suffix === 'learners' || adminRouteLearnerRef(pathname)) return 'learners'
+  if (suffix.startsWith('learners/')) return 'unknown'
   if (suffix === 'health' || suffix.startsWith('health/')) return 'system-health'
   if (suffix === 'engines') return 'engines'
   if (suffix.startsWith('engines/')) return adminRouteEngine(pathname) ? 'engines' : 'unknown'
   const section = suffix.split('/')[0]
   return [
-    'learners', 'costs', 'curriculum', 'safety', 'system-health',
+    'costs', 'curriculum', 'safety', 'system-health',
     'configuration', 'audit-log', 'releases',
   ].includes(section) ? section as AdminSection : 'unknown'
+}
+
+export function adminRouteLearnerRef(pathname: string): string | null {
+  if (!isAdminConsolePath(pathname)) return null
+  const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
+  const segments = suffix.split('/')
+  if (segments.length !== 2 || segments[0] !== 'learners') return null
+  return /^p[1-5]$/.test(segments[1]) ? segments[1] : null
 }
 
 export function adminRouteEngine(pathname: string): AdminEngineId | null {
@@ -428,6 +438,14 @@ export function AdminConsoleRoute() {
     setPathname(nextPath)
   }
 
+  function navigateLearner(learnerRef: string | null) {
+    const nextPath = learnerRef
+      ? `${ADMIN_CONSOLE_PATH}/learners/${learnerRef}`
+      : `${ADMIN_CONSOLE_PATH}/learners`
+    window.history.pushState({}, '', nextPath)
+    setPathname(nextPath)
+  }
+
   function applyAuditFilters(filters: AdminAuditFilters) {
     setAuditReadState({ status: 'loading' })
     setAuditFilters(filters)
@@ -477,7 +495,7 @@ export function AdminConsoleRoute() {
     : section === 'system-health' ? 'System Health'
       : section === 'engines' ? `${ENGINE_PAGE_LABELS[selectedEngine]} Engine Performance`
         : section === 'costs' ? 'AI & Costs'
-          : section === 'learners' ? 'Learner Analytics'
+          : section === 'learners' ? (adminRouteLearnerRef(pathname) ? 'Learner Detail' : 'Learner Operations')
             : section === 'safety' ? 'Safety Operations'
               : section === 'audit-log' ? 'Audit Log'
                 : section === 'configuration' ? 'Configuration'
@@ -491,7 +509,12 @@ export function AdminConsoleRoute() {
       onNavigate={navigate}
     >
         {section === 'learners' && (
-          <LearnerAnalytics state={learnerState} onRetry={() => setLearnerRetry((value) => value + 1)} />
+          <LearnerAnalytics
+            state={learnerState}
+            selectedLearnerRef={adminRouteLearnerRef(pathname)}
+            onLearnerSelect={navigateLearner}
+            onRetry={() => setLearnerRetry((value) => value + 1)}
+          />
         )}
         {section === 'engines' && (
           <EnginePerformanceDashboard

@@ -23,6 +23,11 @@ function learner(id = 'p1', name = 'Ada') {
   profile.missions['2026-09-09'] = { items: [{ id: 'one', label: 'One', done: true }] }
   profile.attendance = { log: [{ date: '2026-09-09', hours: 3.5 }] }
   profile.skills.ratio6 = { attempts: 4, correct: 3, mastery: 75, lastSeen: '2026-09-09' }
+  profile.workingLevels = { mathematics: '5' }
+  profile.academy = {
+    releaseVersion: '1.0.0', grade: '5', enrolledAt: '2026-09-01T12:00:00.000Z',
+    courseIds: ['ma-g5-mathematics'], lessons: {}, assessments: {},
+  }
   profile.tutorFlags = { ratio6: { since: '2026-09-09', reason: 'PRIVATE FLAG REASON', sessionCount: 3, weekCount: 2 } }
   profile.assessments = {
     assigned: [{ testId: 'hs-math-diagnostic', startCode: 'SECRET START CODE', assignedAt: '2026-09-01T12:00:00.000Z' }],
@@ -75,6 +80,8 @@ describe('authorized household learner projection reader', () => {
     expect(builder.select).toHaveBeenCalledWith('profile_id,data,updated_at')
     expect(builder.limit).toHaveBeenCalledWith(LEARNER_ANALYTICS_LIMITS.learners + 1)
     expect(snapshot.learners[0]).toMatchObject({ learnerRef: 'p1', displayName: 'Ada', needsDadCount: 1 })
+    expect(snapshot.learners[0].curriculum).toMatchObject({ status: 'available', releaseVersion: '1.0.0', enrolledCourseCount: 1 })
+    expect(snapshot.details.p1.curriculum).toMatchObject({ status: 'available', releaseVersion: '1.0.0', grade: '5' })
     expect(snapshot.learners[0].attendance).toEqual({ recordedToday: true, instructionalDaysYtd: 1, instructionalHoursYtd: 3.5 })
     expect(snapshot.details.p1.assessments[0]).toMatchObject({ percent: 80, requiresAdultScoring: true })
     expect(snapshot.details.p1.study).toEqual({ status: 'unavailable', reason: 'study-not-integrated' })

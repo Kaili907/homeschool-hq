@@ -96,6 +96,23 @@ describe('authorized learner analytics endpoint', () => {
     expect(response.body).not.toContain('SQL PRIVATE DATA')
   })
 
+  it('refuses to serialize fields outside the learner operations allowlist', async () => {
+    const reader = {
+      readSnapshot: vi.fn(async () => ({
+        observedAt: '2026-09-09T18:00:00.000Z',
+        learners: [],
+        details: {},
+        messages: [{ prompt: 'RAW LEARNER PROMPT', response: 'RAW MODEL RESPONSE' }],
+      })),
+      readDetail: vi.fn(),
+    }
+    const response = await createAdminLearnersHandler({ authorization: permitted(), reader })(event())
+    expect(response.statusCode).toBe(503)
+    expect(JSON.parse(response.body)).toEqual({ error: { code: 'learner_source_unavailable' } })
+    expect(response.body).not.toContain('RAW LEARNER PROMPT')
+    expect(response.body).not.toContain('RAW MODEL RESPONSE')
+  })
+
   it('accepts no browser household, role, capability, or mutation input', async () => {
     const authorization = permitted('viewer')
     const reader = { readSnapshot: vi.fn(), readDetail: vi.fn() }

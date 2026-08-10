@@ -163,11 +163,22 @@ describe('learner analytics projection', () => {
     })
 
     expect(snapshot.learners).toHaveLength(1)
-    expect(snapshot.learners[0]).toMatchObject({ displayName: 'Ada', nominalGrade: '6', needsDadCount: 1, openReviewCount: 3 })
+    expect(snapshot.learners[0]).toMatchObject({
+      displayName: 'Ada', nominalGrade: '6', needsDadCount: 1, openReviewCount: 3,
+      curriculum: {
+        status: 'available', releaseVersion: '1.0.0', grade: '5',
+        enrolledCourseCount: 1, matchedCourseCount: 1,
+      },
+    })
     expect(snapshot.learners[0].todayCompletion).toEqual({ status: 'available', value: { completed: 1, total: 2, percent: 50, complete: false } })
     expect(snapshot.learners[0].attendance).toEqual({ recordedToday: true, instructionalDaysYtd: 2, instructionalHoursYtd: 7.5 })
 
     const detail = snapshot.details['learner-1']
+    expect(detail.curriculum).toMatchObject({ status: 'available', releaseVersion: '1.0.0', enrolledAt: '2026-09-01T12:00:00.000Z' })
+    expect(detail.availability).toEqual({
+      overview: 'available', curriculum: 'available', progress: 'available',
+      assessments: 'available', study: 'available', operationalStatus: 'partial',
+    })
     expect(detail.courses).toMatchObject({ status: 'available', value: [{ completed: 1, total: 2, mastered: 1, reteach: 1 }] })
     expect(detail.mathMastery.find((skill) => skill.skillRef === 'ratio6')).toMatchObject({ mastery: 82, status: 'mastered' })
     expect(detail.attendance.recentDays).toHaveLength(2)
@@ -183,7 +194,39 @@ describe('learner analytics projection', () => {
     expect(row.attendance).toEqual({ recordedToday: false, instructionalDaysYtd: 0, instructionalHoursYtd: 0 })
     expect(row.mastery).toMatchObject({ status: 'available', value: { mastered: 0, developing: 0, notStarted: 11, total: 11 } })
     expect(row.study).toEqual({ status: 'unavailable', reason: 'study-not-integrated' })
+    expect(row.curriculum).toEqual({ status: 'not-configured' })
+    expect(snapshot.details.zero.availability).toMatchObject({ curriculum: 'not-configured', assessments: 'not-configured', study: 'unavailable' })
     expect(snapshot.details.zero.assessments).toEqual([])
+  })
+
+  it('preserves the authoritative release pin while marking an incomplete catalog match partial', () => {
+    const profile = populated()
+    profile.academy!.courseIds.push('release-course-not-loaded')
+    const snapshot = buildLearnerAnalyticsSnapshot({
+      profiles: [profile], today: TODAY, observedAt: `${TODAY}T12:00:00.000Z`, academyCatalogs: [catalog()],
+    })
+    expect(snapshot.learners[0].curriculum).toEqual({
+      status: 'partial', releaseVersion: '1.0.0', grade: '5',
+      enrolledAt: '2026-09-01T12:00:00.000Z', enrolledCourseCount: 2, matchedCourseCount: 1,
+    })
+    expect(snapshot.details['learner-1'].courses).toMatchObject({
+      status: 'partial', reason: 'catalog-partially-integrated', value: [expect.objectContaining({ courseRef: 'ma-g5-mathematics' })],
+    })
+    expect(snapshot.details['learner-1'].availability).toMatchObject({ curriculum: 'partial', progress: 'partial', study: 'unavailable' })
+  })
+
+  it('does not calculate Academy progress against a different curriculum release', () => {
+    const profile = populated()
+    profile.academy!.releaseVersion = '0.9.0'
+    const snapshot = buildLearnerAnalyticsSnapshot({
+      profiles: [profile], today: TODAY, observedAt: `${TODAY}T12:00:00.000Z`, academyCatalogs: [catalog()],
+    })
+    expect(snapshot.details['learner-1'].curriculum).toMatchObject({
+      status: 'partial', releaseVersion: '0.9.0', enrolledCourseCount: 1, matchedCourseCount: 0,
+    })
+    expect(snapshot.details['learner-1'].courses).toEqual({
+      status: 'partial', value: [], reason: 'catalog-partially-integrated',
+    })
   })
 
   it('reports enrolled Academy content with no lesson state as real zero mastery', () => {
@@ -195,6 +238,7 @@ describe('learner analytics projection', () => {
     const snapshot = buildLearnerAnalyticsSnapshot({ profiles: [zero], today: TODAY, observedAt: `${TODAY}T12:00:00.000Z`, academyCatalogs: [catalog()] })
     expect(snapshot.learners[0].mastery).toEqual({ status: 'available', value: { mastered: 0, developing: 0, notStarted: 2, total: 2 } })
     expect(snapshot.details['academy-zero'].courses).toMatchObject({ status: 'available', value: [{ completed: 0, total: 2, mastered: 0, reteach: 0 }] })
+    expect(snapshot.details['academy-zero'].curriculum).toMatchObject({ status: 'available', releaseVersion: '1.0.0' })
   })
 
   it('keeps an available empty Study feed distinct from missing work-block settings', () => {
