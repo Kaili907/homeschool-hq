@@ -1,0 +1,176 @@
+import {
+  assessmentSchema,
+  courseSchema,
+  lessonSchema,
+  mediaResourceSchema,
+  unitSchema,
+  type Assessment,
+  type Course,
+  type Lesson,
+  type MediaResource,
+  type Unit,
+} from '../../curriculum-authoring/v2/contracts'
+import { validateWithSchema, type AuthoringSchema, type ValidationIssue } from '../../curriculum-authoring/v2/schema'
+
+export const CURRICULUM_DRAFT_SCHEMA_VERSION = 1 as const
+export const CURRICULUM_AUTHORING_SCHEMA_VERSION = '2.0.0' as const
+export const CURRICULUM_DRAFT_READ_CAPABILITY = 'curriculum:read' as const
+export const CURRICULUM_DRAFT_WRITE_CAPABILITY = 'curriculum:drafts:write' as const
+
+export const CURRICULUM_DRAFT_ENTITY_TYPES = [
+  'course',
+  'unit',
+  'lesson',
+  'assessment',
+  'media_resource',
+] as const
+
+export type CurriculumDraftEntityType = (typeof CURRICULUM_DRAFT_ENTITY_TYPES)[number]
+export type CurriculumDraftEntityOrigin = 'base_override' | 'draft_created'
+export type CurriculumDraftEntityPayload = Course | Unit | Lesson | Assessment | MediaResource
+
+const schemas: Readonly<Record<CurriculumDraftEntityType, AuthoringSchema<unknown>>> = Object.freeze({
+  course: courseSchema,
+  unit: unitSchema,
+  lesson: lessonSchema,
+  assessment: assessmentSchema,
+  media_resource: mediaResourceSchema,
+})
+
+const identityKeys: Readonly<Record<CurriculumDraftEntityType, string>> = Object.freeze({
+  course: 'course_id',
+  unit: 'unit_id',
+  lesson: 'lesson_id',
+  assessment: 'assessment_id',
+  media_resource: 'resource_id',
+})
+
+export type CurriculumDraftEntityValidation =
+  | { readonly success: true; readonly payload: CurriculumDraftEntityPayload }
+  | { readonly success: false; readonly issues: readonly ValidationIssue[] }
+
+/**
+ * Save-time validation is deliberately entity-local. Cross-entity referential,
+ * count, schedule, projection, and publication checks remain ADMIN-18 work.
+ */
+export function validateCurriculumDraftEntity(
+  entityType: CurriculumDraftEntityType,
+  entityRef: string,
+  payload: unknown,
+): CurriculumDraftEntityValidation {
+  const result = validateWithSchema(schemas[entityType], payload)
+  if (!result.success) return result
+  const identityKey = identityKeys[entityType]
+  const identity = (result.data as Record<string, unknown>)[identityKey]
+  if (identity !== entityRef) {
+    return {
+      success: false,
+      issues: [{
+        code: 'invalid_value',
+        path: `$.${identityKey}`,
+        message: `must equal the authoritative entity reference ${entityRef}`,
+      }],
+    }
+  }
+  return { success: true, payload: result.data as CurriculumDraftEntityPayload }
+}
+
+export interface CurriculumDraftSummary {
+  readonly schemaVersion: typeof CURRICULUM_DRAFT_SCHEMA_VERSION
+  readonly draftId: string
+  readonly baseReleaseVersion: string
+  readonly targetVersion: string
+  readonly authoringSchemaVersion: typeof CURRICULUM_AUTHORING_SCHEMA_VERSION
+  readonly lifecycleState: 'draft'
+  readonly revision: number
+  readonly createdAt: string
+  readonly updatedAt: string
+}
+
+export interface CurriculumDraftEntitySummary {
+  readonly entityType: CurriculumDraftEntityType
+  readonly entityRef: string
+  readonly origin: CurriculumDraftEntityOrigin
+  readonly revision: number
+  readonly position: number
+  readonly tombstoned: boolean
+  readonly digest: string
+  readonly createdAt: string
+  readonly updatedAt: string
+}
+
+export interface CurriculumDraftDetail extends CurriculumDraftSummary {
+  readonly entities: readonly CurriculumDraftEntitySummary[]
+}
+
+export interface CurriculumDraftEntityDetail extends CurriculumDraftEntitySummary {
+  readonly schemaVersion: typeof CURRICULUM_DRAFT_SCHEMA_VERSION
+  readonly draftId: string
+  readonly payload: CurriculumDraftEntityPayload
+}
+
+export interface CurriculumDraftMutationResult {
+  readonly schemaVersion: typeof CURRICULUM_DRAFT_SCHEMA_VERSION
+  readonly replayed: boolean
+  readonly draftId: string
+  readonly draftRevision: number
+  readonly entity?: CurriculumDraftEntitySummary
+}
+
+export interface CreateCurriculumDraftInput {
+  readonly baseReleaseVersion: string
+  readonly targetVersion: string
+  readonly authoringSchemaVersion: typeof CURRICULUM_AUTHORING_SCHEMA_VERSION
+  readonly idempotencyKey: string
+}
+
+export interface CreateCurriculumDraftEntityInput {
+  readonly draftId: string
+  readonly entityType: CurriculumDraftEntityType
+  readonly entityRef: string
+  readonly origin: CurriculumDraftEntityOrigin
+  readonly position: number
+  readonly payload: CurriculumDraftEntityPayload
+  readonly expectedDraftRevision: number
+  readonly idempotencyKey: string
+}
+
+export interface UpdateCurriculumDraftEntityInput {
+  readonly draftId: string
+  readonly entityType: CurriculumDraftEntityType
+  readonly entityRef: string
+  readonly position: number
+  readonly payload: CurriculumDraftEntityPayload
+  readonly expectedRevision: number
+  readonly expectedDraftRevision: number
+  readonly idempotencyKey: string
+}
+
+export interface TombstoneCurriculumDraftEntityInput {
+  readonly draftId: string
+  readonly entityType: CurriculumDraftEntityType
+  readonly entityRef: string
+  readonly expectedRevision: number
+  readonly expectedDraftRevision: number
+  readonly idempotencyKey: string
+}
+
+export interface CurriculumDraftAuthoringSource {
+  listDrafts(): Promise<{ readonly schemaVersion: 1; readonly drafts: readonly CurriculumDraftSummary[] }>
+  readDraft(draftId: string): Promise<CurriculumDraftDetail>
+  readEntity(draftId: string, entityType: CurriculumDraftEntityType, entityRef: string): Promise<CurriculumDraftEntityDetail>
+  createDraft(input: CreateCurriculumDraftInput): Promise<CurriculumDraftMutationResult>
+  createEntity(input: CreateCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
+  updateEntity(input: UpdateCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
+  tombstoneEntity(input: TombstoneCurriculumDraftEntityInput): Promise<CurriculumDraftMutationResult>
+}
+
+export class CurriculumDraftAuthoringError extends Error {
+  readonly code: 'unauthenticated' | 'forbidden' | 'invalid' | 'conflict' | 'not-found' | 'unavailable'
+
+  constructor(code: CurriculumDraftAuthoringError['code']) {
+    super(code)
+    this.name = 'CurriculumDraftAuthoringError'
+    this.code = code
+  }
+}
