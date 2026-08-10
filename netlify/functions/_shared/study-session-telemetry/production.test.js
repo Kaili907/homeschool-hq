@@ -25,6 +25,9 @@ describe('production Study session telemetry composition', () => {
       if (name === 'academy_claim_study_session_telemetry_outbox_v1') {
         return { data: [CLAIM], error: null }
       }
+      if (name === 'academy_study_session_telemetry_outbox_readiness_v1') {
+        return { data: { schemaVersion: 1, status: 'ready' }, error: null }
+      }
       if (name === 'academy_record_operational_event_v2') {
         const facts = parameters.p_facts
         return {
@@ -67,6 +70,13 @@ describe('production Study session telemetry composition', () => {
       client: { rpc },
     })
     await expect(worker.run()).resolves.toMatchObject({ delivered: 1 })
+    await expect(worker.health({ deliveryResultCategory: 'processed' })).resolves.toEqual({
+      schemaVersion: 1,
+      worker: 'available',
+      pendingCount: null,
+      oldestPendingAgeBucket: null,
+      deliveryResultCategory: 'processed',
+    })
     const write = rpc.mock.calls.find(([name]) =>
       name === 'academy_record_operational_event_v2')
     expect(write[1]).toEqual({
@@ -88,5 +98,12 @@ describe('production Study session telemetry composition', () => {
       }),
     })
     expect(JSON.stringify(write)).not.toMatch(/acceptedAt|sessionRevision|checkpointRevision|student/i)
+  })
+
+  it('fails composition closed when trusted deployment versions are unavailable', () => {
+    expect(() => createProductionStudySessionTelemetryWorker({
+      env: {},
+      client: { rpc: vi.fn() },
+    })).toThrow('telemetry_app_version_invalid')
   })
 })

@@ -26,6 +26,7 @@ const CLAIM_FIELDS = new Set([
   'acceptedAt', 'curriculumVersion', 'lessonRef', 'reasonCode',
   'attemptCount', 'leaseToken',
 ])
+const READINESS_FIELDS = new Set(['schemaVersion', 'status'])
 
 function plainRecord(value) {
   if (value === null || typeof value !== 'object' || Array.isArray(value)) return false
@@ -64,6 +65,17 @@ function decodeClaim(value) {
   return Object.freeze({ ...value })
 }
 
+function decodeReadiness(value) {
+  if (!plainRecord(value)
+      || Object.keys(value).length !== READINESS_FIELDS.size
+      || Object.keys(value).some((key) => !READINESS_FIELDS.has(key))
+      || value.schemaVersion !== 1
+      || !['ready', 'not-ready'].includes(value.status)) {
+    throw new StudySessionTelemetryOutboxStoreError('database-contract')
+  }
+  return Object.freeze({ ...value })
+}
+
 function mappedError(error) {
   if (error?.code === '42501') return 'unauthorized'
   if (['22023', '22P02', '23503', '23514'].includes(error?.code)) return 'invalid-request'
@@ -95,6 +107,14 @@ export function createStudySessionTelemetryOutboxStore(client) {
     throw new TypeError('study_session_telemetry_outbox_store_invalid')
   }
   return Object.freeze({
+    async readiness() {
+      return decodeReadiness(await rpc(
+        client,
+        'academy_study_session_telemetry_outbox_readiness_v1',
+        {},
+      ))
+    },
+
     async claim({ limit = 25, leaseSeconds = 30 } = {}) {
       if (!Number.isSafeInteger(limit) || limit < 1 || limit > 100
           || !Number.isSafeInteger(leaseSeconds)

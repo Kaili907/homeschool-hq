@@ -29,6 +29,7 @@ function claim(overrides = {}) {
 function dependencies({ claims = [claim()], record } = {}) {
   return {
     outbox: {
+      readiness: vi.fn(async () => ({ schemaVersion: 1, status: 'ready' })),
       claim: vi.fn(async () => claims),
       complete: vi.fn(async () => undefined),
       retry: vi.fn(async () => undefined),
@@ -46,10 +47,13 @@ describe('Study session telemetry outbox worker', () => {
     const ports = dependencies()
     const worker = createStudySessionTelemetryWorker(ports)
     await expect(worker.run({ limit: 10, leaseSeconds: 45 })).resolves.toEqual({
+      schemaVersion: 1,
+      category: 'processed',
       claimed: 1,
       delivered: 1,
       replayed: 0,
       retryScheduled: 0,
+      leaseLost: 0,
       acknowledgementFailed: 0,
     })
     expect(ports.outbox.claim).toHaveBeenCalledWith({ limit: 10, leaseSeconds: 45 })
@@ -83,6 +87,44 @@ describe('Study session telemetry outbox worker', () => {
     )
   })
 
+  it('reports no work without invoking telemetry or acknowledgements', async () => {
+    const ports = dependencies({ claims: [] })
+    await expect(createStudySessionTelemetryWorker(ports).run()).resolves.toEqual({
+      schemaVersion: 1,
+      category: 'no_work',
+      claimed: 0,
+      delivered: 0,
+      replayed: 0,
+      retryScheduled: 0,
+      leaseLost: 0,
+      acknowledgementFailed: 0,
+    })
+    expect(ports.telemetry.record).not.toHaveBeenCalled()
+    expect(ports.outbox.complete).not.toHaveBeenCalled()
+    expect(ports.outbox.retry).not.toHaveBeenCalled()
+  })
+
+  it('processes multiple claims and classifies a mixed batch as partially retryable', async () => {
+    const second = claim({
+      outboxId: '10000000-0000-4000-8000-000000000002',
+      executionKey: 'study:session:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+      leaseToken: '30000000-0000-4000-8000-000000000002',
+    })
+    const ports = dependencies({ claims: [claim(), second] })
+    ports.telemetry.record
+      .mockResolvedValueOnce({ status: 'recorded', event: { eventId: EVENT_ID } })
+      .mockResolvedValueOnce({ status: 'not-recorded' })
+
+    await expect(createStudySessionTelemetryWorker(ports).run()).resolves.toMatchObject({
+      category: 'partial_with_retryable_failures',
+      claimed: 2,
+      delivered: 1,
+      retryScheduled: 1,
+    })
+    expect(ports.outbox.complete).toHaveBeenCalledTimes(1)
+    expect(ports.outbox.retry).toHaveBeenCalledTimes(1)
+  })
+
   it('replays safely after telemetry persisted but durable acknowledgement failed', async () => {
     const ports = dependencies()
     ports.outbox.complete
@@ -111,7 +153,7 @@ describe('Study session telemetry outbox worker', () => {
   ])('keeps non-delivery %j retryable without acknowledging success', async (result, code) => {
     const ports = dependencies({ record: vi.fn(async () => result) })
     await expect(createStudySessionTelemetryWorker(ports).run()).resolves.toMatchObject({
-      delivered: 0, retryScheduled: 1,
+      category: 'failed', delivered: 0, retryScheduled: 1,
     })
     expect(ports.outbox.complete).not.toHaveBeenCalled()
     expect(ports.outbox.retry).toHaveBeenCalledWith({
@@ -143,6 +185,56 @@ describe('Study session telemetry outbox worker', () => {
       delivered: 0,
       retryScheduled: 0,
       acknowledgementFailed: 1,
+    })
+  })
+
+  it('reports claim storage outages as unavailable without exposing raw failures', async () => {
+    const ports = dependencies()
+    ports.outbox.claim.mockRejectedValue(new Error('SUPABASE_SERVICE_ROLE_KEY raw database row'))
+    const result = await createStudySessionTelemetryWorker(ports).run()
+    expect(result).toEqual({
+      schemaVersion: 1,
+      category: 'unavailable',
+      claimed: 0,
+      delivered: 0,
+      replayed: 0,
+      retryScheduled: 0,
+      leaseLost: 0,
+      acknowledgementFailed: 0,
+    })
+    expect(JSON.stringify(result)).not.toMatch(/supabase|service.role|database|raw/i)
+  })
+
+  it('distinguishes lease loss from other acknowledgement failures', async () => {
+    const ports = dependencies()
+    ports.outbox.complete.mockRejectedValue(Object.assign(new Error('private'), {
+      code: 'lease-lost',
+    }))
+    await expect(createStudySessionTelemetryWorker(ports).run()).resolves.toMatchObject({
+      category: 'failed',
+      delivered: 0,
+      leaseLost: 1,
+      acknowledgementFailed: 0,
+    })
+  })
+
+  it('exposes bounded health without learner rows or fabricated backlog facts', async () => {
+    const ports = dependencies()
+    const worker = createStudySessionTelemetryWorker(ports)
+    await expect(worker.health({ deliveryResultCategory: 'processed' })).resolves.toEqual({
+      schemaVersion: 1,
+      worker: 'available',
+      pendingCount: null,
+      oldestPendingAgeBucket: null,
+      deliveryResultCategory: 'processed',
+    })
+    ports.outbox.readiness.mockRejectedValue(new Error('raw database failure'))
+    await expect(worker.health({ deliveryResultCategory: 'unavailable' })).resolves.toEqual({
+      schemaVersion: 1,
+      worker: 'unavailable',
+      pendingCount: null,
+      oldestPendingAgeBucket: null,
+      deliveryResultCategory: 'unavailable',
     })
   })
 })

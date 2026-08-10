@@ -4,8 +4,8 @@ import type {
   OperationalTelemetryReadAuthorization,
   OperationalTelemetryReadFilter,
   OperationalTelemetryStore,
-} from './operationalTelemetry'
-import { decodeStoredOperationalEvents } from './operationalTelemetry'
+} from './operationalTelemetry.ts'
+import { decodeStoredOperationalEvents } from './operationalTelemetry.ts'
 
 interface DatabaseErrorLike {
   readonly code?: string
