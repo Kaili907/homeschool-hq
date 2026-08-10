@@ -15,7 +15,7 @@ const PATHS = new Set([
   '/.netlify/functions/admin-engine-performance',
 ])
 const ALLOWED_QUERY = new Set(['window', 'engine', 'engineVersion', 'course', 'unit'])
-const WINDOWS = Object.freeze({ '7d': 7, '30d': 30, '90d': 90 })
+const WINDOWS = Object.freeze({ '7d': 7, '30d': 30 })
 const SAFE_VERSION = /^[A-Za-z0-9][A-Za-z0-9._+-]{0,127}$/
 const SAFE_REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
 

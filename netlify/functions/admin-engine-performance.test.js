@@ -88,6 +88,7 @@ describe('ADMIN-4 engine performance endpoint', () => {
     const reader = { list: vi.fn() }
     const handler = createAdminEnginePerformanceHandler({ authorization, reader, now: () => NOW })
     for (const event of [
+      request({ queryStringParameters: { window: '90d' } }),
       request({ queryStringParameters: { window: '365d' } }),
       request({ queryStringParameters: { engine: 'unknown' } }),
       request({ queryStringParameters: { grade: '5' } }),

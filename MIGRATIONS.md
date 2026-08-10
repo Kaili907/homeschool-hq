@@ -43,10 +43,27 @@ The integrated ADMIN-R1 migration order is:
 2. `20260808121000_academy_operational_events.sql`
 3. `20260808122000_academy_provider_usage_cost_ledger.sql`
 4. `20260808123000_academy_admin_safety_operations.sql`
+5. `20260809120000_academy_operational_telemetry_foundation.sql`
 
 The telemetry manifest entry depends on authorization, and the provider
 usage/cost entry depends on telemetry. These unique versions replace the
 parallel-branch timestamp collision; none has been applied to hosted Supabase.
+
+## Supabase: operational telemetry foundation (2026-08-09)
+
+Tracked migration:
+`supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql`.
+
+The additive migration leaves the ADMIN-0 version-2 event vocabulary and the
+existing event ledger unchanged. It adds a service-only, authorization-asserting
+`academy_aggregate_operational_events_v2` RPC and a range index. Queries are
+half-open, limited to 366 days and 4,096 allowlisted groups, and fail instead of
+silently truncating. The result contains counts, bounded operational dimensions,
+duration summaries, explicit group completeness, and completeness for each
+retention class; it contains no event IDs, execution keys, household/learner
+identity, raw metadata, or raw rows. Logically expired rows are excluded even if
+the bounded purge job has not removed them yet. This migration has not been
+applied to a hosted Supabase project.
 
 ## Supabase: authorized Admin safety projection (2026-08-08)
 

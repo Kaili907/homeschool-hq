@@ -32,6 +32,7 @@ The Wave 2 chain is unique and ordered after the existing Study migrations:
 2. `20260808121000_academy_operational_events.sql`
 3. `20260808122000_academy_provider_usage_cost_ledger.sql`
 4. `20260808123000_academy_admin_safety_operations.sql`
+5. `20260809120000_academy_operational_telemetry_foundation.sql`
 
 The cost ledger retains only the integrated `122000` filename. Its request-unit
 pricing correction is included in that file; no `120000` cost-ledger migration
@@ -53,9 +54,12 @@ exists.
   Only canonical `safety_stop` evidence becomes a safety event; provider errors,
   timeouts, fallbacks, and ordinary rejections do not.
 
-These fixed bounds are appropriate for R1 safety and privacy, but Costs and
-Health need cursor-based or pre-aggregated storage before their totals can scale
-beyond the current 500-row source seams.
+The telemetry foundation now provides a bounded database aggregate that is
+complete beyond 500 raw events for supported ranges. The existing Health and
+Engine Performance projections remain conservative raw-reader consumers until
+their dedicated follow-up cards adopt that seam; exactly 500 rows still means
+unknown/partial, never a complete population. Cost scaling remains separately
+owned by the provider usage ledger.
 
 ## Privacy and state semantics
 
