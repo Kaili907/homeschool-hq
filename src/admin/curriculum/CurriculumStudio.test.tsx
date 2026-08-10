@@ -449,6 +449,7 @@ describe('Curriculum Studio shell', () => {
     expect(markup).toContain('href="/academy/admin/curriculum"')
     expect(markup).toContain('href="/academy/admin/curriculum/studio"')
     expect(markup).toContain('href="/academy/admin/curriculum/integrity"')
+    expect(markup).toContain('href="/academy/admin/curriculum/history"')
     expect(markup).toContain('Standards Review')
     expect(markup).toContain('Preview / Diff')
     expect(markup).toContain('Human Approval')

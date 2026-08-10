@@ -1,6 +1,7 @@
 export type CurriculumWorkflowView =
   | 'published'
   | 'integrity'
+  | 'history'
   | 'studio'
   | 'draft'
   | 'resources'
@@ -86,6 +87,7 @@ export function curriculumWorkflowDestinations(
   if (!snapshot && !identity) return [
     { id: 'published', label: 'Published', path: '/academy/admin/curriculum', state: 'complete', detail: 'Immutable active source' },
     { id: 'integrity', label: 'Release integrity', path: '/academy/admin/curriculum/integrity', state: 'ready', detail: 'Verify active release provenance' },
+    { id: 'history', label: 'Release History', path: '/academy/admin/curriculum/history', state: 'ready', detail: 'Review immutable governance history' },
     { id: 'studio', label: 'Studio', path: '/academy/admin/curriculum/studio', state: 'ready', detail: 'Select or create a draft' },
     blocked('draft', 'Draft'),
     blocked('resources', 'Resource Library'),
@@ -103,6 +105,7 @@ export function curriculumWorkflowDestinations(
     return [
       { id: 'published', label: 'Published', path: '/academy/admin/curriculum', state: 'complete', detail: 'Immutable active source' },
       { id: 'integrity', label: 'Release integrity', path: '/academy/admin/curriculum/integrity', state: 'ready', detail: 'Verify active release provenance' },
+      { id: 'history', label: 'Release History', path: '/academy/admin/curriculum/history', state: 'ready', detail: 'Review immutable governance history' },
       { id: 'studio', label: 'Studio', path: exactDraft(), state: 'complete', detail: `Draft revision ${identity.draftRevision}` },
       { id: 'draft', label: 'Draft', path: exactDraft('curriculum-draft-workspace'), state: 'ready', detail: `Revision ${identity.draftRevision}` },
       { id: 'resources', label: 'Resource Library', path: exactDraft('curriculum-resource-library'), state: 'pending', detail: 'Return to exact draft workspace' },
@@ -152,6 +155,7 @@ export function curriculumWorkflowDestinations(
   return [
     { id: 'published', label: 'Published', path: '/academy/admin/curriculum', state: 'complete', detail: `Base ${snapshot.baseReleaseVersion}` },
     { id: 'integrity', label: 'Release integrity', path: '/academy/admin/curriculum/integrity', state: 'ready', detail: 'Verify active release provenance' },
+    { id: 'history', label: 'Release History', path: '/academy/admin/curriculum/history', state: 'ready', detail: 'Review immutable governance history' },
     { id: 'studio', label: 'Studio', path: draftPath(snapshot), state: 'complete', detail: `Target ${snapshot.targetVersion}` },
     { id: 'draft', label: 'Draft', path: draftPath(snapshot, 'curriculum-draft-workspace'), state: snapshot.readOnly ? 'read-only' : 'complete', detail: `Revision ${snapshot.draftRevision}` },
     { id: 'resources', label: 'Resource Library', path: draftPath(snapshot, 'curriculum-resource-library'), state: snapshot.resourceLibraryReady ? 'complete' : 'pending', detail: 'Exact materialization' },

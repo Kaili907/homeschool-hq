@@ -134,6 +134,7 @@ function routeFromPath(path) {
   if (resource === 'catalog') return { kind: 'catalog' }
   if (resource === 'validation') return { kind: 'validation' }
   if (resource === 'integrity') return { kind: 'integrity' }
+  if (resource === 'history') return { kind: 'history' }
   if (resource === 'activation') return { kind: 'activation' }
   if (resource === 'releases') return { kind: 'releases' }
   if (resource === 'production-pointer') return { kind: 'production-pointer' }
@@ -715,6 +716,17 @@ export function createAdminCurriculumHandler(overrides = {}) {
     const authorized = await authorization.require(event, 'curriculum:read')
     if (!authorized.ok) return authorized.response
     try {
+      if (route.kind === 'history') {
+        const [releaseRegistry, activationStatus] = await Promise.all([
+          registry.list(),
+          activation.read(authorized.principal.userId),
+        ])
+        return jsonResponse(200, {
+          schemaVersion: 1,
+          releaseRegistry,
+          activation: activationStatus,
+        })
+      }
       const value = route.kind === 'integrity'
         ? await integrity.verify(authorized.principal.userId)
         : route.kind === 'catalog'
@@ -735,6 +747,9 @@ export function createAdminCurriculumHandler(overrides = {}) {
       return jsonResponse(200, value)
     } catch (error) {
       const code = error && typeof error === 'object' && 'code' in error ? error.code : null
+      if (route.kind === 'history' && code === 'forbidden') {
+        return errorResponse(403, 'admin_access_denied')
+      }
       if (code === 'not-found') return errorResponse(
         404,
         route.kind === 'release' || route.kind === 'release-authoring-index'

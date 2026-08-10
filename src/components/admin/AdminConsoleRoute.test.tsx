@@ -30,6 +30,7 @@ describe('Admin Console integration route', () => {
     ['/academy/admin/curriculum/preview', 'curriculum-preview'],
     ['/academy/admin/curriculum/standards-review', 'curriculum-standards-review'],
     ['/academy/admin/curriculum/activation', 'curriculum-activation'],
+    ['/academy/admin/curriculum/history', 'curriculum-history'],
     ['/academy/admin/health', 'system-health'],
     ['/academy/admin/health/gateway', 'system-health'],
     ['/academy/admin/system-health', 'system-health'],
