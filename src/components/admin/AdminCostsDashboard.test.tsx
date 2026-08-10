@@ -1,10 +1,16 @@
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/costsModel'
-import { costAggregateFixture, costsModelFixture } from '../../admin/costsTestFixtures'
+import {
+  costAggregateFixture,
+  costsModelFixture,
+  providerAccountingCoverageFixture,
+} from '../../admin/costsTestFixtures'
 import { AdminCostsDashboard } from './AdminCostsDashboard'
 
 const RANGE = { kind: 'preset', preset: 'today' } as const
+const COST_STYLES = readFileSync(new URL('./admin-costs.css', import.meta.url), 'utf8')
 
 function render(
   state: AdminCostsReadState = { status: 'ready', model: costsModelFixture(), freshness: 'current' },
@@ -118,5 +124,80 @@ describe('Admin AI and Costs dashboard', () => {
     const error = render({ status: 'error', code: 'costs_timeout' })
     expect(error).toContain('costs request timed out')
     expect(error).not.toContain('exception.message')
+  })
+
+  it('renders journal-bounded accounting coverage, safe dimensions, and the instrumentation boundary', () => {
+    const markup = render()
+    expect(markup).toContain('Provider accounting coverage')
+    expect(markup).toContain('Complete for journaled attempts')
+    expect(markup).toContain('Reserved attempts')
+    expect(markup).toContain('Dispatch-possible')
+    expect(markup).toContain('Observed outcomes')
+    expect(markup).toContain('Ledger-linked attempts')
+    expect(markup).toContain('Accounting gaps')
+    expect(markup).toContain('Reconciliation conflicts')
+    expect(markup).toContain('Confirmed not dispatched')
+    expect(markup).toContain('Unresolvable')
+    expect(markup).toContain('Coverage by engine')
+    expect(markup).toContain('Coverage by purpose')
+    expect(markup).toContain('Coverage by provider')
+    expect(markup).toContain('Provider gateway instrumentation is not yet complete')
+    expect(markup).toContain('not a provider bill comparison')
+    expect(markup.toLowerCase()).not.toContain('invoice complete')
+    expect(markup).toContain('role="note"')
+    expect(markup).toContain('tabindex="0"')
+  })
+
+  it('renders gaps, conflicts, and unresolvable evidence without exposing identifiers', () => {
+    const source = costsModelFixture()
+    const model = costsModelFixture({
+      providerAccountingCoverage: providerAccountingCoverageFixture({
+        status: 'reconciliation_conflict',
+        reconciliationState: 'conflict',
+        metrics: {
+          reservedAttempts: 4,
+          dispatchPossibleAttempts: 0,
+          observedOutcomes: 0,
+          ledgerLinkedAttempts: 1,
+          accountingGaps: 2,
+          reconciliationConflicts: 1,
+          confirmedNotDispatched: 0,
+          unresolvable: 1,
+        },
+        breakdowns: source.providerAccountingCoverage.breakdowns,
+      }),
+    })
+    const markup = render({ status: 'ready', model, freshness: 'current' })
+    expect(markup).toContain('Reconciliation conflict')
+    expect(markup).toContain('Conflicting durable facts')
+    expect(markup).toContain('Closed without recoverable resolution')
+    expect(markup).not.toContain('attempt_id')
+    expect(markup).not.toContain('usage_id')
+    expect(markup).not.toContain('ledger_execution_key')
+  })
+
+  it('keeps cost evidence visible while provider accounting coverage is retryably unavailable', () => {
+    const coverage = providerAccountingCoverageFixture({
+      status: 'unavailable',
+      reconciliationState: 'unavailable',
+      metrics: null,
+      breakdowns: { engines: [], purposes: [], providers: [] },
+    })
+    const markup = render({
+      status: 'ready',
+      model: costsModelFixture({ providerAccountingCoverage: coverage }),
+      freshness: 'current',
+    })
+    expect(markup).toContain('Calculated provider cost (estimate)')
+    expect(markup).toContain('Coverage unavailable')
+    expect(markup).toContain('Retry coverage')
+    expect(markup).toContain('role="status"')
+  })
+
+  it('keeps coverage status and metrics responsive at tablet and narrow-phone widths', () => {
+    expect(COST_STYLES).toContain('@media (max-width: 800px)')
+    expect(COST_STYLES).toContain('.admin-provider-coverage__status { grid-template-columns: 1fr; }')
+    expect(COST_STYLES).toContain('@media (max-width: 520px)')
+    expect(COST_STYLES).toContain('.admin-provider-coverage__metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }')
   })
 })

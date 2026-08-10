@@ -106,8 +106,17 @@ Tutor/Jarvis cost row.
 projection over a bounded half-open range. It reports recorded attempts,
 ledger-linked attempts, journaled attempts missing a ledger relationship,
 ledger rows without a journal relationship, current lifecycle counts, and a
-coverage status. It explicitly returns `invoiceCompletenessClaim: false` and
+coverage status. Safe journal-only breakdowns by engine, purpose, and provider
+use the same current-state coverage logic; unmatched ledger rows without a
+journal relationship remain a summary metric because purpose cannot be inferred
+safely. The projection explicitly returns `invoiceCompletenessClaim: false` and
 names `academy_provider_usage_ledger` as cost authority.
+
+The Admin Costs projection treats this as accounting-trail coverage only. Until
+the separately delivered gateway instrumentation is integrated across every
+relevant provider path, a clear result means only
+`complete_for_journaled_attempts`; it does not establish that stored activity
+equals a provider bill.
 
 ## Privacy
 

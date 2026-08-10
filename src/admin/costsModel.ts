@@ -62,8 +62,54 @@ export interface AdminCostBreakdownRow extends AdminCostAggregate {
   readonly label: string
 }
 
+export type AdminProviderAccountingCoverageStatus =
+  | 'complete_for_journaled_attempts'
+  | 'partial'
+  | 'gaps_detected'
+  | 'reconciliation_conflict'
+  | 'unavailable'
+  | 'insufficient_evidence'
+
+export type AdminProviderAccountingReconciliationState =
+  | 'clear_for_journaled_attempts'
+  | 'in_progress'
+  | 'gaps_detected'
+  | 'conflict'
+  | 'unavailable'
+  | 'insufficient_evidence'
+
+export interface AdminProviderAccountingCoverageMetrics {
+  readonly reservedAttempts: number
+  readonly dispatchPossibleAttempts: number
+  readonly observedOutcomes: number
+  readonly ledgerLinkedAttempts: number
+  readonly accountingGaps: number
+  readonly reconciliationConflicts: number
+  readonly confirmedNotDispatched: number
+  readonly unresolvable: number
+}
+
+export interface AdminProviderAccountingCoverageBreakdownRow
+  extends AdminProviderAccountingCoverageMetrics {
+  readonly key: string
+  readonly status: Exclude<AdminProviderAccountingCoverageStatus, 'unavailable'>
+}
+
+export interface AdminProviderAccountingCoverage {
+  readonly status: AdminProviderAccountingCoverageStatus
+  readonly reconciliationState: AdminProviderAccountingReconciliationState
+  readonly gatewayInstrumentation: 'incomplete'
+  readonly invoiceCompletenessClaim: false
+  readonly metrics: AdminProviderAccountingCoverageMetrics | null
+  readonly breakdowns: {
+    readonly engines: readonly AdminProviderAccountingCoverageBreakdownRow[]
+    readonly purposes: readonly AdminProviderAccountingCoverageBreakdownRow[]
+    readonly providers: readonly AdminProviderAccountingCoverageBreakdownRow[]
+  }
+}
+
 export interface AdminCostsModel {
-  readonly contractVersion: 2
+  readonly contractVersion: 3
   readonly generatedAt: string
   readonly currency: 'USD'
   readonly range: {
@@ -89,6 +135,7 @@ export interface AdminCostsModel {
     readonly costKinds: readonly AdminCostBreakdownRow[]
     readonly billingDispositions: readonly AdminCostBreakdownRow[]
   }
+  readonly providerAccountingCoverage: AdminProviderAccountingCoverage
 }
 
 export type AdminCostCompletenessReason =
@@ -131,6 +178,37 @@ const BREAKDOWN_LABELS = new Set([
   'Not billable',
   'Unknown',
 ])
+const PROVIDER_COVERAGE_STATUSES = new Set<AdminProviderAccountingCoverageStatus>([
+  'complete_for_journaled_attempts',
+  'partial',
+  'gaps_detected',
+  'reconciliation_conflict',
+  'unavailable',
+  'insufficient_evidence',
+])
+const PROVIDER_RECONCILIATION_STATES = new Set<AdminProviderAccountingReconciliationState>([
+  'clear_for_journaled_attempts',
+  'in_progress',
+  'gaps_detected',
+  'conflict',
+  'unavailable',
+  'insufficient_evidence',
+])
+const PROVIDER_COVERAGE_METRIC_KEYS = [
+  'reservedAttempts',
+  'dispatchPossibleAttempts',
+  'observedOutcomes',
+  'ledgerLinkedAttempts',
+  'accountingGaps',
+  'reconciliationConflicts',
+  'confirmedNotDispatched',
+  'unresolvable',
+] as const
+const PROVIDER_COVERAGE_DIMENSIONS = {
+  engines: new Set<string>(['tutor', 'study', 'jarvis', 'tts']),
+  purposes: new Set<string>(['tutor_turn', 'jarvis_turn', 'tts_synthesis', 'safety_classification']),
+  providers: new Set<string>(['anthropic', 'elevenlabs']),
+} as const
 
 function record(value: unknown): Record<string, unknown> | null {
   return value && typeof value === 'object' && !Array.isArray(value)
@@ -223,6 +301,111 @@ function breakdownRows(value: unknown): AdminCostBreakdownRow[] | null {
   return rows
 }
 
+function providerCoverageMetrics(value: unknown): AdminProviderAccountingCoverageMetrics | null {
+  const source = record(value)
+  if (!source || Object.keys(source).length !== PROVIDER_COVERAGE_METRIC_KEYS.length) return null
+  const metrics: Record<string, number> = {}
+  for (const key of PROVIDER_COVERAGE_METRIC_KEYS) {
+    const metric = safeCount(source[key])
+    if (metric === null) return null
+    metrics[key] = metric
+  }
+  return metrics as unknown as AdminProviderAccountingCoverageMetrics
+}
+
+function providerCoverageRows(
+  value: unknown,
+  dimension: keyof typeof PROVIDER_COVERAGE_DIMENSIONS,
+): AdminProviderAccountingCoverageBreakdownRow[] | null {
+  if (!Array.isArray(value) || value.length > PROVIDER_COVERAGE_DIMENSIONS[dimension].size) return null
+  const rows: AdminProviderAccountingCoverageBreakdownRow[] = []
+  const seen = new Set<string>()
+  for (const item of value) {
+    const source = record(item)
+    const metrics = source
+      ? providerCoverageMetrics(Object.fromEntries(
+        PROVIDER_COVERAGE_METRIC_KEYS.map((key) => [key, source[key]]),
+      ))
+      : null
+    if (
+      !source || !metrics || typeof source.key !== 'string'
+      || !PROVIDER_COVERAGE_DIMENSIONS[dimension].has(source.key)
+      || seen.has(source.key)
+      || !PROVIDER_COVERAGE_STATUSES.has(source.status as AdminProviderAccountingCoverageStatus)
+      || source.status === 'unavailable'
+      || Object.keys(source).length !== PROVIDER_COVERAGE_METRIC_KEYS.length + 2
+    ) return null
+    rows.push({
+      key: source.key,
+      status: source.status as AdminProviderAccountingCoverageBreakdownRow['status'],
+      ...metrics,
+    })
+    seen.add(source.key)
+  }
+  return rows
+}
+
+function providerAccountingCoverage(value: unknown): AdminProviderAccountingCoverage | null {
+  const source = record(value)
+  const breakdownsSource = record(source?.breakdowns)
+  if (
+    !source || !PROVIDER_COVERAGE_STATUSES.has(source.status as AdminProviderAccountingCoverageStatus)
+    || !PROVIDER_RECONCILIATION_STATES.has(
+      source.reconciliationState as AdminProviderAccountingReconciliationState,
+    )
+    || source.gatewayInstrumentation !== 'incomplete'
+    || source.invoiceCompletenessClaim !== false
+    || !breakdownsSource || Object.keys(breakdownsSource).length !== 3
+  ) return null
+
+  const engines = providerCoverageRows(breakdownsSource.engines, 'engines')
+  const purposes = providerCoverageRows(breakdownsSource.purposes, 'purposes')
+  const providers = providerCoverageRows(breakdownsSource.providers, 'providers')
+  if (!engines || !purposes || !providers) return null
+
+  const expectedReconciliation = {
+    complete_for_journaled_attempts: 'clear_for_journaled_attempts',
+    partial: 'in_progress',
+    gaps_detected: 'gaps_detected',
+    reconciliation_conflict: 'conflict',
+    unavailable: 'unavailable',
+    insufficient_evidence: 'insufficient_evidence',
+  } as const
+  if (
+    source.reconciliationState
+    !== expectedReconciliation[source.status as AdminProviderAccountingCoverageStatus]
+  ) return null
+
+  if (source.status === 'unavailable') {
+    if (
+      source.metrics !== null || source.reconciliationState !== 'unavailable'
+      || engines.length > 0 || purposes.length > 0 || providers.length > 0
+    ) return null
+    return {
+      status: 'unavailable',
+      reconciliationState: 'unavailable',
+      gatewayInstrumentation: 'incomplete',
+      invoiceCompletenessClaim: false,
+      metrics: null,
+      breakdowns: { engines, purposes, providers },
+    }
+  }
+
+  const metrics = providerCoverageMetrics(source.metrics)
+  if (!metrics) return null
+  return {
+    status: source.status as Exclude<AdminProviderAccountingCoverageStatus, 'unavailable'>,
+    reconciliationState: source.reconciliationState as Exclude<
+      AdminProviderAccountingReconciliationState,
+      'unavailable'
+    >,
+    gatewayInstrumentation: 'incomplete',
+    invoiceCompletenessClaim: false,
+    metrics,
+    breakdowns: { engines, purposes, providers },
+  }
+}
+
 export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const source = record(value)
   const range = record(source?.range)
@@ -233,8 +416,9 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const costKinds = fixedCounts(summarySource?.costKindCounts, ['calculated', 'reconciled', 'unavailable'])
   const attribution = fixedCounts(summarySource?.attributionCounts, ['resolved', 'ambiguous', 'unresolved'])
   const usageUnavailableCount = safeCount(summarySource?.usageUnavailableCount)
+  const coverage = providerAccountingCoverage(source?.providerAccountingCoverage)
   if (
-    !source || source.contractVersion !== 2 || source.currency !== 'USD'
+    !source || source.contractVersion !== 3 || source.currency !== 'USD'
     || typeof source.generatedAt !== 'string' || Number.isNaN(Date.parse(source.generatedAt))
     || !range || !(ADMIN_COST_PRESETS as readonly string[]).concat('custom').includes(range.kind as string)
     || typeof range.start !== 'string' || !DATE.test(range.start)
@@ -246,6 +430,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
     || !Array.isArray(sourceState.reasons) || sourceState.reasons.some((reason) => !REASONS.has(reason))
     || sourceState.recordLimit !== 500 || safeCount(sourceState.recordsIncluded) === null
     || !summaryAggregate || !billing || !costKinds || !attribution || usageUnavailableCount === null
+    || !coverage
     || !Array.isArray(source.trend) || source.trend.length > 366
   ) return null
 
@@ -266,7 +451,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   if (!engines || !providers || !models || !breakdownCostKinds || !billingDispositions) return null
 
   return {
-    contractVersion: 2,
+    contractVersion: 3,
     generatedAt: source.generatedAt,
     currency: 'USD',
     range: range as unknown as AdminCostsModel['range'],
@@ -285,6 +470,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
     },
     trend,
     breakdowns: { engines, providers, models, costKinds: breakdownCostKinds, billingDispositions },
+    providerAccountingCoverage: coverage,
   }
 }
 

@@ -804,6 +804,7 @@ declare
   missing_relationship_count bigint;
   ledger_without_journal_count bigint;
   coverage_status text;
+  coverage_breakdowns jsonb;
 begin
   if not academy_private.provider_attempt_is_trusted_server()
      or auth.uid() is not null
@@ -888,6 +889,95 @@ begin
     else 'covered'
   end;
 
+  with current_attempts as (
+    select
+      attempt.engine,
+      attempt.purpose,
+      attempt.provider,
+      transition.to_state,
+      link.attempt_id is not null as ledger_linked
+    from public.academy_provider_attempts as attempt
+    left join public.academy_provider_attempt_ledger_links as link
+      on link.attempt_id = attempt.attempt_id
+    cross join lateral (
+      select history.to_state
+      from public.academy_provider_attempt_transitions as history
+      where history.attempt_id = attempt.attempt_id
+      order by history.sequence desc
+      limit 1
+    ) as transition
+    where attempt.reserved_at >= p_start_at
+      and attempt.reserved_at < p_end_exclusive
+  ), dimension_attempts as (
+    select 'engines'::text as dimension, engine as key, to_state, ledger_linked
+    from current_attempts
+    union all
+    select 'purposes'::text, purpose, to_state, ledger_linked
+    from current_attempts
+    union all
+    select 'providers'::text, provider, to_state, ledger_linked
+    from current_attempts
+  ), grouped as (
+    select
+      dimension,
+      key,
+      count(*) as recorded_provider_attempts,
+      count(*) filter (where ledger_linked) as ledger_linked_attempts,
+      count(*) filter (
+        where not ledger_linked
+          and to_state in (
+            'outcome_observed', 'gap_pending',
+            'reconciliation_conflict', 'unresolvable'
+          )
+      ) as journaled_missing_ledger_relationship,
+      jsonb_build_object(
+        'reserved', count(*) filter (where to_state = 'reserved'),
+        'dispatchPossible', count(*) filter (where to_state = 'dispatch_possible'),
+        'outcomeObserved', count(*) filter (where to_state = 'outcome_observed'),
+        'ledgered', count(*) filter (where to_state = 'ledgered'),
+        'gapPending', count(*) filter (where to_state = 'gap_pending'),
+        'reconciliationConflict', count(*) filter (
+          where to_state = 'reconciliation_conflict'
+        ),
+        'reconciled', count(*) filter (where to_state = 'reconciled'),
+        'confirmedNotDispatched', count(*) filter (
+          where to_state = 'confirmed_not_dispatched'
+        ),
+        'unresolvable', count(*) filter (where to_state = 'unresolvable')
+      ) as states
+    from dimension_attempts
+    group by dimension, key
+  ), aggregated as (
+    select
+      dimension,
+      jsonb_agg(
+        jsonb_build_object(
+          'key', key,
+          'recordedProviderAttempts', recorded_provider_attempts,
+          'ledgerLinkedAttempts', ledger_linked_attempts,
+          'journaledMissingLedgerRelationship',
+            journaled_missing_ledger_relationship,
+          'states', states
+        ) order by key
+      ) as rows
+    from grouped
+    group by dimension
+  )
+  select jsonb_build_object(
+    'engines', coalesce(
+      (select rows from aggregated where dimension = 'engines'),
+      '[]'::jsonb
+    ),
+    'purposes', coalesce(
+      (select rows from aggregated where dimension = 'purposes'),
+      '[]'::jsonb
+    ),
+    'providers', coalesce(
+      (select rows from aggregated where dimension = 'providers'),
+      '[]'::jsonb
+    )
+  ) into coverage_breakdowns;
+
   return jsonb_build_object(
     'schemaVersion', 1,
     'coverageStatus', coverage_status,
@@ -910,6 +1000,7 @@ begin
       'confirmedNotDispatched', not_dispatched_count,
       'unresolvable', unresolvable_count
     ),
+    'breakdowns', coverage_breakdowns,
     'costAuthority', 'academy_provider_usage_ledger',
     'invoiceCompletenessClaim', false
   );

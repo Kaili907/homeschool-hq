@@ -44,4 +44,41 @@ describe('Admin costs browser contract', () => {
     expect(validateAdminCostCustomRange('2026-08-08', '2026-08-09', '2026-08-08')).toContain('future')
     expect(validateAdminCostCustomRange('2025-08-07', '2026-08-08', '2026-08-08')).toContain('366')
   })
+
+  it('accepts only vetted provider accounting coverage and preserves the false invoice ruling', () => {
+    const model = parseAdminCostsModel(costsModelFixture())
+    expect(model?.providerAccountingCoverage).toMatchObject({
+      status: 'complete_for_journaled_attempts',
+      reconciliationState: 'clear_for_journaled_attempts',
+      gatewayInstrumentation: 'incomplete',
+      invoiceCompletenessClaim: false,
+      metrics: { reservedAttempts: 3, ledgerLinkedAttempts: 2 },
+    })
+
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel({
+      ...source,
+      providerAccountingCoverage: {
+        ...source.providerAccountingCoverage,
+        invoiceCompletenessClaim: true,
+      },
+    })).toBeNull()
+  })
+
+  it('drops unknown coverage fields instead of exposing content or raw provider diagnostics', () => {
+    const source = costsModelFixture()
+    const model = parseAdminCostsModel({
+      ...source,
+      providerAccountingCoverage: {
+        ...source.providerAccountingCoverage,
+        prompt: 'PRIVATE LEARNER CONTENT',
+        rawProviderError: 'SECRET PROVIDER BODY',
+      },
+    })
+    const wire = JSON.stringify(model?.providerAccountingCoverage)
+    expect(wire).not.toContain('PRIVATE')
+    expect(wire).not.toContain('SECRET')
+    expect(wire).not.toContain('prompt')
+    expect(wire).not.toContain('rawProviderError')
+  })
 })

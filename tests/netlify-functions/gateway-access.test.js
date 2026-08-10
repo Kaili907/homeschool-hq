@@ -135,6 +135,20 @@ describe('gateway service-role access', () => {
     })
   })
 
+  it('reads provider attempt coverage with the fixed costs capability and bounded range', async () => {
+    const data = { schemaVersion: 1, invoiceCompletenessClaim: false }
+    const client = { rpc: vi.fn(() => ({ abortSignal: vi.fn(async () => ({ data, error: null })) })) }
+    await expect(createGatewayAccess({ client }).readProviderAttemptCoverage({
+      startAt: '2026-08-08T00:00:00.000Z',
+      endExclusive: '2026-08-09T00:00:00.000Z',
+    })).resolves.toBe(data)
+    expect(client.rpc).toHaveBeenCalledWith('academy_read_provider_attempt_coverage_v1', {
+      p_start_at: '2026-08-08T00:00:00.000Z',
+      p_end_exclusive: '2026-08-09T00:00:00.000Z',
+      p_required_capability: 'costs:read',
+    })
+  })
+
   it('uses safe defaults for absent, malformed, zero, or excessive limits', () => {
     expect(dailyLimit({}, 'LIMIT', 50)).toBe(50)
     expect(dailyLimit({ LIMIT: 'nope' }, 'LIMIT', 50)).toBe(50)

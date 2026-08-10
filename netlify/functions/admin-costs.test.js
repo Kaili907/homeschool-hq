@@ -17,7 +17,7 @@ function event(overrides = {}) {
 function readyHandler(overrides = {}) {
   return createAdminCostsHandler({
     authorization: { require: vi.fn(async () => ({ ok: true, principal })) },
-    projection: { read: vi.fn(async () => ({ contractVersion: 2, currency: 'USD' })) },
+    projection: { read: vi.fn(async () => ({ contractVersion: 3, currency: 'USD' })) },
     ...overrides,
   })
 }
@@ -25,7 +25,7 @@ function readyHandler(overrides = {}) {
 describe('authorized Admin costs endpoint', () => {
   it('requires costs:read for every direct API request', async () => {
     const authorization = { require: vi.fn(async () => ({ ok: true, principal })) }
-    const projection = { read: vi.fn(async () => ({ contractVersion: 2, currency: 'USD' })) }
+    const projection = { read: vi.fn(async () => ({ contractVersion: 3, currency: 'USD' })) }
     const response = await readyHandler({ authorization, projection })(event())
     expect(response.statusCode).toBe(200)
     expect(authorization.require).toHaveBeenCalledWith(expect.anything(), 'costs:read')
