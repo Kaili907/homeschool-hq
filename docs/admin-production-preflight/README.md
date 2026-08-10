@@ -34,6 +34,13 @@ Two files such as `20260810120000_a.sql` and `20260810120000_b.sql` are always a
 migration-identity blocker, even if both appear in the manifest. Parallel
 branches must be renumbered and reconciled during final integration.
 
+When this duplicate-version condition causes
+`BLOCKED_BY_MIGRATION_IDENTITY`, the machine and operator reports include the
+read-only reconciliation-planner command. The planner inventories the collision
+and validates a candidate mapping; it does not hide the duplicate from this
+gate or rename any migration. See
+[`migration-reconciliation-planner.md`](./migration-reconciliation-planner.md).
+
 ## Pricing, accounting, and Study truthfulness
 
 Pricing architecture and verified account pricing are separate gates. The

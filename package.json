@@ -18,6 +18,8 @@
     "test:sync-db": "vitest run supabase/academy-cas.db.test.ts",
     "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts",
     "test:admin-auth": "vitest run src/admin/authorization.test.ts netlify/functions/_shared/admin-authorization.test.js netlify/functions/admin-authorization.test.js supabase/academy-admin-authorization.db.test.ts",
+    "plan:migration-reconciliation": "node scripts/migration-reconciliation-planner.mjs --format operator",
+    "plan:migration-reconciliation:json": "node scripts/migration-reconciliation-planner.mjs --format json",
     "preflight:admin-production": "node scripts/admin-production-preflight.mjs --format operator",
     "preflight:admin-production:json": "node scripts/admin-production-preflight.mjs --format json",
     "test:engine": "vitest run --config adaptive-tutor/study-engine/tests/final-assembly/component-vitest.config.mjs",

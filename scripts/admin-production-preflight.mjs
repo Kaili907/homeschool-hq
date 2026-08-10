@@ -1,5 +1,6 @@
 import { readFile, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { MIGRATION_RECONCILIATION_PLANNER_COMMAND } from './migration-reconciliation-planner.mjs'
 import { validateMigrationManifest } from './study-migration-preflight.mjs'
 
 export const ADMIN_PREFLIGHT_SCHEMA_VERSION = 1
@@ -164,6 +165,14 @@ export async function evaluateAdminProductionPreflight({
     migrationDirectory,
     contract?.migrationIdentity,
   )
+  const reconciliationPlanner = migrationIdentity.reasons.some((reason) =>
+    reason === 'duplicate-migration-version' || reason.startsWith('duplicate-migration-version:'),
+  )
+    ? Object.freeze({
+        mode: 'READ_ONLY',
+        command: MIGRATION_RECONCILIATION_PLANNER_COMMAND,
+      })
+    : null
   const gates = await evaluateGates(contract, evidence, contractErrors, evidenceRoot)
   const classification = classificationFor(contract, migrationIdentity, gates, contractErrors)
   const summary = Object.freeze({
@@ -189,6 +198,7 @@ export async function evaluateAdminProductionPreflight({
     migrationIdentity: Object.freeze({
       status: migrationIdentity.valid ? 'PASS' : 'BLOCKING',
       reasons: Object.freeze([...migrationIdentity.reasons]),
+      reconciliationPlanner,
     }),
     contractErrors: Object.freeze(contractErrors),
     gates,
@@ -210,6 +220,12 @@ export function formatOperatorReport(report) {
   if (report.migrationIdentity.reasons.length > 0) {
     lines.push('Migration blockers:')
     for (const reason of report.migrationIdentity.reasons) lines.push(`- ${reason}`)
+  }
+  if (report.migrationIdentity.reconciliationPlanner) {
+    lines.push(
+      'Migration reconciliation planner (read-only):',
+      `- ${report.migrationIdentity.reconciliationPlanner.command}`,
+    )
   }
   if (report.contractErrors.length > 0) {
     lines.push('Contract errors:')
