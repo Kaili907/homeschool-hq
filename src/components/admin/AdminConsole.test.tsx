@@ -173,6 +173,31 @@ describe('AdminConsole authorization and load states', () => {
     expect(markup).toContain('aria-current="page"')
   })
 
+  it('includes the safe Access & Permissions view for the canonical baseline read capability', () => {
+    const markup = renderToStaticMarkup(
+      <AdminShell
+        authorization={{ status: 'authorized', role: 'viewer', capabilities: ['overview:read'] }}
+        activeSection="access"
+        title="Access & Permissions"
+      ><section>Safe access surface</section></AdminShell>,
+    )
+    expect(markup).toContain('aria-label="Access &amp; Permissions"')
+    expect(markup).toContain('aria-current="page"')
+  })
+
+  it('shows Production Readiness only with releases read access', () => {
+    const markup = renderToStaticMarkup(
+      <AdminShell
+        authorization={{ status: 'authorized', role: 'viewer', capabilities: ['releases:read'] }}
+        activeSection="releases"
+        title="Production Readiness"
+      ><section>Read-only readiness surface</section></AdminShell>,
+    )
+    expect(markup).toContain('aria-label="Production Readiness"')
+    expect(markup).toContain('aria-current="page"')
+    expect(markup).not.toContain('aria-label="Configuration"')
+  })
+
   it('updates the route title and moves focus to the route heading', () => {
     const focus = vi.fn()
     const documentTarget = { title: '' }

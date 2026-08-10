@@ -2,6 +2,7 @@ import { getGatewayAccessToken } from '../tutor/gatewayAuth'
 import {
   LEARNER_ANALYTICS_LIMITS,
   LEARNERS_READ_CAPABILITY,
+  hasOnlyLearnerOperationsFields,
   type LearnerAnalyticsReadSource,
   type LearnerAnalyticsSnapshot,
 } from './learnerAnalyticsModel'
@@ -17,7 +18,9 @@ const PROHIBITED_KEYS = new Set([
   'messages', 'conversation', 'transcript', 'tutorChats', 'assistant',
   'privateJournalText', 'journal', 'answers', 'startCode', 'correctAnswer',
   'herAnswer', 'problem', 'note', 'adultPrivateNotes', 'audio', 'rawAudio',
-  'serviceRoleKey', 'credentials', 'tokens', 'costMicros', 'learnerCost',
+  'prompt', 'modelResponse', 'essayText', 'privateNotes', 'emotionalLabel',
+  'personalityJudgment', 'diagnosticInference', 'rawError', 'providerData',
+  'serviceRoleKey', 'credentials', 'tokens', 'costMicros', 'learnerCost', 'secrets',
 ])
 
 function hasProhibitedKey(value: unknown, depth = 0): boolean {
@@ -50,7 +53,7 @@ function exactSnapshot(value: unknown): value is LearnerAnalyticsSnapshot {
     if (!Array.isArray(detail.assessments) || detail.assessments.length > LEARNER_ANALYTICS_LIMITS.assessments) return false
     if (!Array.isArray(detail.recentEvidence) || detail.recentEvidence.length > LEARNER_ANALYTICS_LIMITS.recentEvidence) return false
   }
-  return !hasProhibitedKey(value)
+  return !hasProhibitedKey(value) && hasOnlyLearnerOperationsFields(value)
 }
 
 /** Browser adapter. It sends only the verified bearer; no household, learner,

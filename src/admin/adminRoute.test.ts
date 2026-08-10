@@ -7,6 +7,7 @@ describe('admin console mount path', () => {
     expect(isAdminConsolePath('/academy/admin')).toBe(true)
     expect(isAdminConsolePath('/academy/admin/')).toBe(true)
     expect(isAdminConsolePath('/academy/admin/audit-log')).toBe(true)
+    expect(isAdminConsolePath('/academy/admin/access')).toBe(true)
     expect(isAdminConsolePath('/academy/admin/engines/tutor')).toBe(true)
     expect(isAdminConsolePath('/academy')).toBe(false)
     expect(isAdminConsolePath('/academy/administrator')).toBe(false)

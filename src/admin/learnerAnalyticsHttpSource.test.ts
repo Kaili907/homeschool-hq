@@ -1,8 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
+import { emptyProfile } from '../migration'
 import {
   ADMIN_LEARNERS_ENDPOINT,
   createAdminLearnerAnalyticsHttpSource,
 } from './learnerAnalyticsHttpSource'
+import { buildLearnerAnalyticsSnapshot, hasOnlyLearnerOperationsFields } from './learnerAnalyticsModel'
 
 const snapshot = {
   observedAt: '2026-09-09T18:00:00.000Z',
@@ -27,6 +29,19 @@ describe('ADMIN-6B browser learner source', () => {
     expect(JSON.stringify(request)).not.toMatch(/household|role|capabilities|service.role/i)
   })
 
+  it('accepts the complete current allowlisted projection contract', async () => {
+    const profile = emptyProfile('p1', 'Ada', '5')
+    profile.missions['2026-09-09'] = { items: [{ id: 'math', label: 'Math', done: true }] }
+    const fullSnapshot = buildLearnerAnalyticsSnapshot({
+      profiles: [profile], today: '2026-09-09', observedAt: '2026-09-09T18:00:00.000Z',
+    })
+    const source = createAdminLearnerAnalyticsHttpSource({
+      getAccessToken: async () => 'token',
+      fetchImpl: async () => ({ status: 200, json: async () => fullSnapshot }),
+    })
+    await expect(source.read({ capability: 'learners:read', today: '2026-09-09' })).resolves.toBe(fullSnapshot)
+  })
+
   it('fails closed without a bearer or for malformed/private server payloads', async () => {
     const noTokenFetch = vi.fn()
     await expect(createAdminLearnerAnalyticsHttpSource({
@@ -37,6 +52,7 @@ describe('ADMIN-6B browser learner source', () => {
 
     for (const value of [
       { ...snapshot, private: { transcript: 'secret' } },
+      { ...snapshot, details: { p1: { ...snapshot.details.p1, moodLabel: 'unexpected even without a prohibited key' } } },
       { ...snapshot, details: { p1: { ...snapshot.details.p1, answers: { one: 'secret' } } } },
       { ...snapshot, details: {} },
       { ...snapshot, learners: [...snapshot.learners, ...Array.from({ length: 5 }, () => snapshot.learners[0])] },
@@ -47,6 +63,12 @@ describe('ADMIN-6B browser learner source', () => {
       })
       await expect(source.read({ capability: 'learners:read', today: '2026-09-09' })).rejects.toThrow('learner source unavailable')
     }
+  })
+
+  it('uses an allowlist rather than relying only on known prohibited field names', () => {
+    expect(hasOnlyLearnerOperationsFields(snapshot)).toBe(true)
+    expect(hasOnlyLearnerOperationsFields({ ...snapshot, diagnostics: { harmlessLooking: true } })).toBe(false)
+    expect(hasOnlyLearnerOperationsFields({ ...snapshot, details: { p1: { ...snapshot.details.p1, provider: 'hidden' } } })).toBe(false)
   })
 
   it('maps arbitrary backend errors to the existing safe ADMIN-6 error state', async () => {

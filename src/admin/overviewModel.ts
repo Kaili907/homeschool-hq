@@ -20,6 +20,7 @@ export const ADMIN_SECTIONS = [
   'system-health',
   'configuration',
   'audit-log',
+  'access',
   'releases',
 ] as const
 

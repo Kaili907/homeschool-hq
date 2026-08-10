@@ -3,6 +3,7 @@ import {
   AdminLearnerProjectionError,
   createAdminLearnerReader,
 } from './_shared/admin-learner-reader.js'
+import { hasOnlyLearnerOperationsFields } from '../../src/admin/learnerAnalyticsModel.ts'
 import { errorResponse, jsonResponse } from './_shared/http.js'
 
 const API_PREFIX = '/api/admin/v1/learners'
@@ -82,6 +83,9 @@ export function createAdminLearnersHandler(overrides = {}) {
             learnerRef: route.learnerRef,
             ...(date.today ? { today: date.today } : {}),
           })
+      if (!hasOnlyLearnerOperationsFields(projection)) {
+        return errorResponse(503, 'learner_source_unavailable')
+      }
       return jsonResponse(200, projection)
     } catch (error) {
       if (error instanceof AdminLearnerProjectionError && error.code === 'learner_not_found') {

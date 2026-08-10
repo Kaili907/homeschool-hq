@@ -57,6 +57,17 @@ import {
   type AdminConfigurationCommitResult,
 } from '../../admin/configurationHttpSource'
 import { getVoiceCatalogAccess } from '../../tutor/voiceCatalog'
+import { createAdminAccessHttpSource, AdminAccessError } from '../../admin/accessHttpSource'
+import type { AdminAccessReadState } from '../../admin/accessModel'
+import { AdminAccessPermissions } from './AdminAccessPermissions'
+import {
+  AdminProductionReadinessError,
+  readAdminProductionReadiness,
+} from '../../admin/productionReadinessHttpSource'
+import {
+  ProductionReadinessCenter,
+  type ProductionReadinessReadState,
+} from './ProductionReadinessCenter'
 
 export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
 
@@ -76,14 +87,25 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
   if (!suffix) return 'overview'
   if (suffix === 'curriculum/validation') return 'curriculum-validation'
+  if (suffix === 'learners' || adminRouteLearnerRef(pathname)) return 'learners'
+  if (suffix.startsWith('learners/')) return 'unknown'
   if (suffix === 'health' || suffix.startsWith('health/')) return 'system-health'
   if (suffix === 'engines') return 'engines'
   if (suffix.startsWith('engines/')) return adminRouteEngine(pathname) ? 'engines' : 'unknown'
+  if (suffix === 'production-readiness' || suffix === 'readiness') return 'releases'
   const section = suffix.split('/')[0]
   return [
-    'learners', 'costs', 'curriculum', 'safety', 'system-health',
-    'configuration', 'audit-log', 'releases',
+    'costs', 'curriculum', 'safety', 'system-health',
+    'configuration', 'audit-log', 'access', 'releases',
   ].includes(section) ? section as AdminSection : 'unknown'
+}
+
+export function adminRouteLearnerRef(pathname: string): string | null {
+  if (!isAdminConsolePath(pathname)) return null
+  const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
+  const segments = suffix.split('/')
+  if (segments.length !== 2 || segments[0] !== 'learners') return null
+  return /^p[1-5]$/.test(segments[1]) ? segments[1] : null
 }
 
 export function adminRouteEngine(pathname: string): AdminEngineId | null {
@@ -129,6 +151,7 @@ function hasCapability(
 
 export function AdminConsoleRoute() {
   const [authorizationState, setAuthorizationState] = useState<AdminAuthorizationState | { status: 'resolving' }>({ status: 'resolving' })
+  const [authorizationReload, setAuthorizationReload] = useState(0)
   const [pathname, setPathname] = useState(() => window.location.pathname)
   const [range, setRange] = useState<OverviewRange>({ kind: 'preset', preset: 'today' })
   const [overviewState, setOverviewState] = useState<OverviewLoadState>({ status: 'loading' })
@@ -158,10 +181,15 @@ export function AdminConsoleRoute() {
   const [configurationRetry, setConfigurationRetry] = useState(0)
   const [voiceCatalogState, setVoiceCatalogState] = useState<AdminVoiceCatalogReadState>({ status: 'loading' })
   const [configurationDirty, setConfigurationDirty] = useState(false)
+  const [accessReadState, setAccessReadState] = useState<AdminAccessReadState>({ status: 'loading' })
+  const [accessRetry, setAccessRetry] = useState(0)
+  const [readinessState, setReadinessState] = useState<ProductionReadinessReadState>({ status: 'loading' })
+  const [readinessRetry, setReadinessRetry] = useState(0)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const configurationSource = useMemo(() => createAdminConfigurationHttpSource(), [])
   const voiceCatalogSource = useMemo(() => getVoiceCatalogAccess(), [])
+  const accessSource = useMemo(() => createAdminAccessHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
   const section = adminRouteSection(pathname) ?? 'unknown'
   const auditCursor = auditCursors.at(-1) ?? null
@@ -177,7 +205,37 @@ export function AdminConsoleRoute() {
       if (!controller.signal.aborted) setAuthorizationState(state)
     })
     return () => controller.abort()
-  }, [])
+  }, [authorizationReload])
+
+  useEffect(() => {
+    if (section !== 'access') return
+    if (!hasCapability(authorization, 'overview:read')) {
+      setAccessReadState({ status: 'unauthorized' })
+      return
+    }
+    const controller = new AbortController()
+    setAccessReadState({ status: 'loading' })
+    void accessSource.read({ signal: controller.signal }).then(
+      (projection) => {
+        if (!controller.signal.aborted) setAccessReadState({ status: 'ready', projection })
+      },
+      (error) => {
+        if (controller.signal.aborted) return
+        if (error instanceof AdminAccessError && error.code === 'access_unauthorized') {
+          setAccessReadState({ status: 'unauthorized' })
+          return
+        }
+        setAccessReadState({
+          status: 'error',
+          code: error instanceof AdminAccessError && error.code === 'access_timeout'
+            ? 'access_timeout'
+            : error instanceof AdminAccessError && error.code === 'access_malformed'
+              ? 'access_malformed' : 'access_unavailable',
+        })
+      },
+    )
+    return () => controller.abort()
+  }, [accessRetry, accessSource, authorizationState, section])
 
   useEffect(() => {
     if (section !== 'overview') return
@@ -394,6 +452,35 @@ export function AdminConsoleRoute() {
   }, [authorizationState, section, healthWindow, healthReload])
 
   useEffect(() => {
+    if (section !== 'releases') return
+    if (!hasCapability(authorization, 'releases:read')) {
+      setReadinessState({ status: 'denied' })
+      return
+    }
+    const controller = new AbortController()
+    setReadinessState({ status: 'loading' })
+    void readAdminProductionReadiness({ signal: controller.signal }).then(
+      (projection) => {
+        if (!controller.signal.aborted) setReadinessState({ status: 'ready', projection })
+      },
+      (error) => {
+        if (controller.signal.aborted) return
+        if (error instanceof AdminProductionReadinessError && error.code === 'unauthorized') {
+          setReadinessState({ status: 'denied' })
+          return
+        }
+        setReadinessState({
+          status: 'error',
+          code: error instanceof AdminProductionReadinessError
+            && (error.code === 'timeout' || error.code === 'malformed')
+            ? error.code : 'unavailable',
+        })
+      },
+    )
+    return () => controller.abort()
+  }, [authorizationState, readinessRetry, section])
+
+  useEffect(() => {
     const onPopState = () => {
       if (adminRouteSection(pathnameRef.current) === 'configuration'
         && configurationDirtyRef.current
@@ -416,6 +503,8 @@ export function AdminConsoleRoute() {
       ? ADMIN_CONSOLE_PATH
       : next === 'system-health'
         ? `${ADMIN_CONSOLE_PATH}/health`
+        : next === 'releases'
+          ? `${ADMIN_CONSOLE_PATH}/production-readiness`
         : `${ADMIN_CONSOLE_PATH}/${next}`
     window.history.pushState({}, '', nextPath)
     setPathname(nextPath)
@@ -424,6 +513,14 @@ export function AdminConsoleRoute() {
 
   function navigateEngine(engine: AdminEngineId) {
     const nextPath = `${ADMIN_CONSOLE_PATH}/engines/${engine}`
+    window.history.pushState({}, '', nextPath)
+    setPathname(nextPath)
+  }
+
+  function navigateLearner(learnerRef: string | null) {
+    const nextPath = learnerRef
+      ? `${ADMIN_CONSOLE_PATH}/learners/${learnerRef}`
+      : `${ADMIN_CONSOLE_PATH}/learners`
     window.history.pushState({}, '', nextPath)
     setPathname(nextPath)
   }
@@ -477,11 +574,13 @@ export function AdminConsoleRoute() {
     : section === 'system-health' ? 'System Health'
       : section === 'engines' ? `${ENGINE_PAGE_LABELS[selectedEngine]} Engine Performance`
         : section === 'costs' ? 'AI & Costs'
-          : section === 'learners' ? 'Learner Analytics'
+          : section === 'learners' ? (adminRouteLearnerRef(pathname) ? 'Learner Detail' : 'Learner Operations')
             : section === 'safety' ? 'Safety Operations'
               : section === 'audit-log' ? 'Audit Log'
+                : section === 'access' ? 'Access & Permissions'
                 : section === 'configuration' ? 'Configuration'
-                : section === 'curriculum' ? 'Curriculum' : 'Admin section unavailable'
+                : section === 'curriculum' ? 'Curriculum'
+                  : section === 'releases' ? 'Production Readiness' : 'Admin section unavailable'
 
   return (
     <AdminShell
@@ -491,7 +590,12 @@ export function AdminConsoleRoute() {
       onNavigate={navigate}
     >
         {section === 'learners' && (
-          <LearnerAnalytics state={learnerState} onRetry={() => setLearnerRetry((value) => value + 1)} />
+          <LearnerAnalytics
+            state={learnerState}
+            selectedLearnerRef={adminRouteLearnerRef(pathname)}
+            onLearnerSelect={navigateLearner}
+            onRetry={() => setLearnerRetry((value) => value + 1)}
+          />
         )}
         {section === 'engines' && (
           <EnginePerformanceDashboard
@@ -580,7 +684,24 @@ export function AdminConsoleRoute() {
             onDirtyChange={setConfigurationDirty}
           />
         )}
-        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'configuration', 'audit-log'].includes(section) && (
+        {section === 'access' && (
+          <AdminAccessPermissions
+            authorization={authorization}
+            state={accessReadState}
+            source={accessSource}
+            onMutated={() => {
+              setAccessRetry((value) => value + 1)
+              setAuthorizationReload((value) => value + 1)
+            }}
+          />
+        )}
+        {section === 'releases' && (
+          <ProductionReadinessCenter
+            state={readinessState}
+            onRetry={() => setReadinessRetry((value) => value + 1)}
+          />
+        )}
+        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>

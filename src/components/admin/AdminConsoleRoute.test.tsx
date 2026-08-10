@@ -3,6 +3,7 @@ import type { AdminEngineId } from '../../admin/admin0Vocabulary'
 import { ADMIN_ROLE_CAPABILITIES } from '../../admin/contracts'
 import {
   adminRouteEngine,
+  adminRouteLearnerRef,
   adminRouteSection,
   configurationReadStateAfterCommit,
   configurationRetryAfterCommit,
@@ -14,6 +15,7 @@ describe('Admin Console integration route', () => {
     ['/academy/admin', 'overview'],
     ['/academy/admin/', 'overview'],
     ['/academy/admin/learners', 'learners'],
+    ['/academy/admin/learners/p1', 'learners'],
     ['/academy/admin/engines', 'engines'],
     ['/academy/admin/engines/tutor', 'engines'],
     ['/academy/admin/costs', 'costs'],
@@ -25,6 +27,10 @@ describe('Admin Console integration route', () => {
     ['/academy/admin/system-health', 'system-health'],
     ['/academy/admin/configuration', 'configuration'],
     ['/academy/admin/audit-log', 'audit-log'],
+    ['/academy/admin/access', 'access'],
+    ['/academy/admin/production-readiness', 'releases'],
+    ['/academy/admin/readiness', 'releases'],
+    ['/academy/admin/releases', 'releases'],
   ] as const)('maps %s to %s', (pathname, section) => {
     expect(adminRouteSection(pathname)).toBe(section)
   })
@@ -41,6 +47,15 @@ describe('Admin Console integration route', () => {
     expect(adminRouteEngine('/academy/admin/engines/not-an-engine')).toBeNull()
     expect(adminRouteSection('/academy/admin/engines/not-an-engine')).toBe('unknown')
     expect(adminRouteSection('/academy/admin/engines/tutor/details')).toBe('unknown')
+  })
+
+  it('supports only canonical learner detail deep links and fails closed for unknown references', () => {
+    expect(adminRouteLearnerRef('/academy/admin/learners/p1')).toBe('p1')
+    expect(adminRouteLearnerRef('/academy/admin/learners/p5/')).toBe('p5')
+    expect(adminRouteLearnerRef('/academy/admin/learners')).toBeNull()
+    expect(adminRouteLearnerRef('/academy/admin/learners/other')).toBeNull()
+    expect(adminRouteSection('/academy/admin/learners/other')).toBe('unknown')
+    expect(adminRouteSection('/academy/admin/learners/p1/history')).toBe('unknown')
   })
 
   it('never matches the learner administrator-like path', () => {

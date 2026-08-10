@@ -1,4 +1,5 @@
 import type { AcademyGrade } from '../types'
+import productionReleaseRegistry from '../../curriculum-content/manuel-academy/production-release-registry.json'
 
 /**
  * CURR-1 — shapes of the generated curriculum chunks served from
@@ -7,7 +8,7 @@ import type { AcademyGrade } from '../types'
  * MINUS the protected fields, which never appear in student chunks.
  */
 
-export const ACADEMY_RELEASE_VERSION = '1.0.0'
+export const ACADEMY_RELEASE_VERSION = productionReleaseRegistry.currentRelease
 
 /** One instructional segment of a lesson's flow. */
 export interface AcademyLessonSegment {
