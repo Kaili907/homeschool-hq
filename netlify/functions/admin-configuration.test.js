@@ -67,12 +67,12 @@ function runtimeState(setting) {
   const isTts = setting.key === 'runtime.tts.enabled'
     || setting.key === 'quota.tts.requests_per_account_day'
   return Object.freeze({
-    classification: isCost ? 'NOT_YET_ENFORCEABLE' : 'ENFORCEABLE_NOW',
-    effectiveValue: isCost ? null : setting.value,
-    enforcement: isCost ? 'unavailable' : 'enforced',
-    resolution: isCost ? 'unavailable' : 'saved',
-    reason: isCost ? 'runtime_consumer_unavailable' : 'saved_value_enforced',
-    trustedConsumer: isCost ? null : isTts ? 'tts_gateway' : 'anthropic_gateway',
+    classification: 'ENFORCEABLE_NOW',
+    effectiveValue: setting.value,
+    enforcement: 'enforced',
+    resolution: 'saved',
+    reason: 'saved_value_enforced',
+    trustedConsumer: isCost ? 'cost_alert_evaluator' : isTts ? 'tts_gateway' : 'anthropic_gateway',
     studyStatus: isCost ? 'not_applicable' : 'unavailable',
   })
 }

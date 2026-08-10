@@ -1,8 +1,38 @@
 import type {
   AdminCostAggregate,
   AdminCostsModel,
+  AdminMonthlyCostAlert,
   AdminProviderAccountingCoverage,
 } from './costsModel'
+
+export function monthlyCostAlertFixture(
+  overrides: Partial<AdminMonthlyCostAlert> = {},
+): AdminMonthlyCostAlert {
+  return {
+    contractVersion: 1,
+    generatedAt: '2026-08-08T18:30:00.000Z',
+    currency: 'USD',
+    window: {
+      timezone: 'UTC',
+      startAt: '2026-08-01T00:00:00.000Z',
+      endExclusive: '2026-09-01T00:00:00.000Z',
+    },
+    costAuthority: 'academy_provider_usage_ledger',
+    scope: 'recorded_usage_derived_calculated_provider_cost',
+    providerInvoiceTotalClaim: false,
+    automaticProviderShutdown: false,
+    completeness: 'complete',
+    status: 'normal',
+    reason: 'complete',
+    activeCritical: false,
+    monthlyCostMicros: '9000000',
+    warningThresholdMicros: '10000000',
+    criticalThresholdMicros: '25000000',
+    remainingToWarningMicros: '1000000',
+    remainingToCriticalMicros: '16000000',
+    ...overrides,
+  }
+}
 
 export function costAggregateFixture(overrides: Partial<AdminCostAggregate> = {}): AdminCostAggregate {
   const count = (value: number) => ({ status: 'available' as const, value })
@@ -59,7 +89,7 @@ export function costsModelFixture(overrides: Partial<AdminCostsModel> = {}): Adm
   const values = costAggregateFixture()
   const row = { key: 'tutor', label: 'Tutor', ...values }
   return {
-    contractVersion: 3,
+    contractVersion: 4,
     generatedAt: '2026-08-08T18:30:00.000Z',
     currency: 'USD',
     range: {
@@ -83,6 +113,7 @@ export function costsModelFixture(overrides: Partial<AdminCostsModel> = {}): Adm
       billingDispositions: [{ ...row, key: 'billable', label: 'Billable' }],
     },
     providerAccountingCoverage: providerAccountingCoverageFixture(),
+    monthlyCostAlert: monthlyCostAlertFixture(),
     ...overrides,
   }
 }

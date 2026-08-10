@@ -11,6 +11,7 @@ import {
   type AdminCostRangeSelection,
   type AdminCostsModel,
   type AdminCostsReadState,
+  type AdminMonthlyCostAlert,
   type AdminProviderAccountingCoverage,
   type AdminProviderAccountingCoverageBreakdownRow,
   type AdminProviderAccountingCoverageStatus,
@@ -230,6 +231,8 @@ function CostsContent({
         </section>
       )}
 
+      <MonthlyCostAlertSection alert={model.monthlyCostAlert} />
+
       <section aria-labelledby="cost-summary-title">
         <SectionHeading id="cost-summary-title" eyebrow={`${model.range.start} through ${model.range.end} UTC`} title="Usage summary" />
         <div className="admin-costs-card-grid">
@@ -315,6 +318,61 @@ function CostsContent({
         Projection generated <time dateTime={model.generatedAt}>{formatUtc(model.generatedAt)}</time>. {model.source.recordsIncluded.toLocaleString()} bounded ledger records included.
       </footer>
     </>
+  )
+}
+
+const MONTHLY_ALERT_LABELS: Readonly<Record<AdminMonthlyCostAlert['status'], string>> = {
+  normal: 'Normal',
+  warning: 'Warning',
+  critical: 'Critical',
+  partial: 'Partial — exact state unavailable',
+  unavailable: 'Unavailable',
+}
+
+function exactUsd(micros: string | null): string {
+  if (micros === null) return 'Unavailable'
+  const value = BigInt(micros)
+  const whole = value / 1_000_000n
+  const exactFraction = (value % 1_000_000n).toString().padStart(6, '0')
+  const fraction = exactFraction.replace(/0+$/, '').padEnd(2, '0')
+  return `$${whole.toLocaleString('en-US')}.${fraction}`
+}
+
+function MonthlyCostAlertSection({ alert }: { alert: AdminMonthlyCostAlert }) {
+  const incomplete = alert.completeness === 'partial'
+  return (
+    <section
+      className={`admin-cost-alert admin-cost-alert--${alert.status}`}
+      aria-labelledby="monthly-cost-alert-title"
+      role={alert.activeCritical ? 'alert' : 'status'}
+    >
+      <SectionHeading
+        id="monthly-cost-alert-title"
+        eyebrow={`${alert.window.startAt.slice(0, 10)} through ${new Date(Date.parse(alert.window.endExclusive) - 1).toISOString().slice(0, 10)} UTC`}
+        title="Monthly usage-derived cost alert"
+      />
+      <div className="admin-cost-alert__status">
+        <span>Alert state</span>
+        <strong>{MONTHLY_ALERT_LABELS[alert.status]}</strong>
+      </div>
+      <dl className="admin-cost-alert__values">
+        <div><dt>Recorded usage-derived cost</dt><dd>{exactUsd(alert.monthlyCostMicros)}</dd></div>
+        <div><dt>Warning threshold</dt><dd>{exactUsd(alert.warningThresholdMicros)}</dd></div>
+        <div><dt>Critical threshold</dt><dd>{exactUsd(alert.criticalThresholdMicros)}</dd></div>
+        <div><dt>Remaining to warning</dt><dd>{alert.remainingToWarningMicros === null ? '—' : exactUsd(alert.remainingToWarningMicros)}</dd></div>
+        <div><dt>Remaining to critical</dt><dd>{alert.remainingToCriticalMicros === null ? '—' : exactUsd(alert.remainingToCriticalMicros)}</dd></div>
+      </dl>
+      {incomplete && (
+        <p><strong>Completeness caveat:</strong> the recorded amount is an incomplete lower bound. It is only classified critical when that lower bound itself reaches the critical threshold; otherwise the exact state remains partial.</p>
+      )}
+      {alert.completeness === 'unavailable' && (
+        <p><strong>Completeness caveat:</strong> the authoritative monthly calculated-cost aggregate is unavailable, so no threshold state is claimed.</p>
+      )}
+      {alert.reason === 'configuration_unavailable' && (
+        <p><strong>Configuration caveat:</strong> the saved warning and critical thresholds could not be resolved safely.</p>
+      )}
+      <p className="admin-costs-disclosure">Scope: current recorded calculated provider cost derived from authoritative usage ledger entries. This is not a provider invoice total or a spending hard cap, and it does not disable or reroute AI or speech providers.</p>
+    </section>
   )
 }
 

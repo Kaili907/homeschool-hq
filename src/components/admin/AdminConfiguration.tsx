@@ -164,12 +164,12 @@ const SETTING_PRESENTATION: Readonly<Record<AdminConfigurationKey, {
   },
   'cost.warning.monthly_micros': {
     title: 'Monthly cost warning',
-    description: 'Stored USD threshold for an administrative warning.',
+    description: 'Effective USD threshold for the authoritative monthly cost alert.',
     group: 'cost',
   },
   'cost.critical.monthly_micros': {
     title: 'Monthly cost critical threshold',
-    description: 'Stored USD threshold for a critical administrative warning.',
+    description: 'Effective USD threshold for a critical monthly cost alert; not a provider hard cap.',
     group: 'cost',
   },
   'ai.approved_tiers': {
@@ -187,7 +187,7 @@ const SETTING_PRESENTATION: Readonly<Record<AdminConfigurationKey, {
 const GROUPS = [
   ['runtime', 'Runtime controls', 'Saved policy constrained by deployment and subsystem safety.'],
   ['quota', 'Daily quotas', 'Authoritative per-account gateway request ceilings.'],
-  ['cost', 'Cost thresholds', 'Saved exactly; no authoritative alert consumer exists yet.'],
+  ['cost', 'Cost thresholds', 'Exact alert thresholds only; they do not shut down or reroute providers.'],
   ['ai', 'AI model policy', 'Server-enforced logical tiers only; provider model identifiers stay private.'],
 ] as const
 
@@ -330,8 +330,8 @@ export function AdminConfiguration({
       <section className="admin-config-notice" role="status" aria-labelledby="configuration-status-title">
         <span aria-hidden="true">!</span>
         <div>
-          <h2 id="configuration-status-title">Runtime enforcement is partially available</h2>
-          <p>Six settings are resolved and consumed by the trusted AI/TTS gateways. Cost thresholds remain saved-only until an authoritative alert consumer exists; Study guardian and safety policy is not bypassed.</p>
+          <h2 id="configuration-status-title">Trusted runtime consumers are active</h2>
+          <p>All eight settings are resolved and consumed by trusted server components. Cost thresholds are effective for alerting only; they do not disable, reroute, or impose a provider spending hard cap. Study guardian and safety policy is not bypassed.</p>
         </div>
       </section>
 
@@ -688,7 +688,9 @@ function voiceIsOperational(voice: PublicVoiceCatalogEntry): boolean {
 }
 
 function runtimeEnforcementLabel(setting: AdminRuntimeConfigurationSetting): string {
-  if (setting.runtime.enforcement === 'enforced') return 'Enforced'
+  if (setting.runtime.enforcement === 'enforced') {
+    return setting.key.startsWith('cost.') ? 'Effective — cost alert threshold' : 'Enforced'
+  }
   if (setting.runtime.enforcement === 'error') return 'Error'
   return 'Unavailable'
 }
@@ -717,10 +719,12 @@ function runtimeReasonLabel(setting: AdminRuntimeConfigurationSetting): string {
 function trustedConsumerLabel(setting: AdminRuntimeConfigurationSetting): string {
   if (setting.runtime.trustedConsumer === 'anthropic_gateway') return 'Anthropic gateway'
   if (setting.runtime.trustedConsumer === 'tts_gateway') return 'TTS gateway'
+  if (setting.runtime.trustedConsumer === 'cost_alert_evaluator') return 'Monthly cost alert evaluator'
   return 'Unavailable'
 }
 
 function studyStatusLabel(setting: AdminRuntimeConfigurationSetting): string {
+  if (setting.key.startsWith('cost.')) return 'Not applicable — operational alert threshold only'
   return setting.runtime.studyStatus === 'unavailable'
     ? 'Unavailable — no Study effective-settings authority'
     : 'Not applicable — runtime enforcement unavailable'

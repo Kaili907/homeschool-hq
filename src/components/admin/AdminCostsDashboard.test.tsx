@@ -5,6 +5,7 @@ import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/c
 import {
   costAggregateFixture,
   costsModelFixture,
+  monthlyCostAlertFixture,
   providerAccountingCoverageFixture,
 } from '../../admin/costsTestFixtures'
 import { AdminCostsDashboard } from './AdminCostsDashboard'
@@ -46,6 +47,47 @@ describe('Admin AI and Costs dashboard', () => {
     expect(markup).toContain('Cached input write tokens')
     expect(markup).toContain('TTS characters')
     expect(markup).toContain('not provider-invoice truth')
+  })
+
+  it('renders the authoritative monthly alert scope, thresholds, remaining amounts, and no hard-cap claim', () => {
+    const markup = render()
+    expect(markup).toContain('Monthly usage-derived cost alert')
+    expect(markup).toContain('Recorded usage-derived cost')
+    expect(markup).toContain('Warning threshold')
+    expect(markup).toContain('Critical threshold')
+    expect(markup).toContain('Remaining to warning')
+    expect(markup).toContain('$1.00')
+    expect(markup).toContain('not a provider invoice total or a spending hard cap')
+    expect(markup).toContain('does not disable or reroute')
+  })
+
+  it('renders partial and active critical lower-bound states truthfully', () => {
+    const partial = monthlyCostAlertFixture({
+      completeness: 'partial',
+      status: 'partial',
+      reason: 'partial_lower_bound',
+      monthlyCostMicros: '10000000',
+      remainingToWarningMicros: null,
+      remainingToCriticalMicros: null,
+    })
+    expect(render({
+      status: 'ready', model: costsModelFixture({ monthlyCostAlert: partial }), freshness: 'current',
+    })).toContain('incomplete lower bound')
+
+    const critical = monthlyCostAlertFixture({
+      completeness: 'partial',
+      status: 'critical',
+      reason: 'partial_lower_bound_critical',
+      activeCritical: true,
+      monthlyCostMicros: '25000000',
+      remainingToWarningMicros: null,
+      remainingToCriticalMicros: null,
+    })
+    const criticalMarkup = render({
+      status: 'ready', model: costsModelFixture({ monthlyCostAlert: critical }), freshness: 'current',
+    })
+    expect(criticalMarkup).toContain('role="alert"')
+    expect(criticalMarkup).toContain('Critical')
   })
 
   it('renders unavailable cost explicitly and never as $0', () => {

@@ -120,8 +120,46 @@ export interface AdminProviderAccountingCoverage {
   }
 }
 
+export type AdminMonthlyCostAlertStatus =
+  | 'normal'
+  | 'warning'
+  | 'critical'
+  | 'partial'
+  | 'unavailable'
+
+export type AdminMonthlyCostAlertReason =
+  | 'complete'
+  | 'partial_lower_bound'
+  | 'partial_lower_bound_critical'
+  | 'aggregate_unavailable'
+  | 'configuration_unavailable'
+
+export interface AdminMonthlyCostAlert {
+  readonly contractVersion: 1
+  readonly generatedAt: string
+  readonly currency: 'USD'
+  readonly window: {
+    readonly timezone: 'UTC'
+    readonly startAt: string
+    readonly endExclusive: string
+  }
+  readonly costAuthority: 'academy_provider_usage_ledger'
+  readonly scope: 'recorded_usage_derived_calculated_provider_cost'
+  readonly providerInvoiceTotalClaim: false
+  readonly automaticProviderShutdown: false
+  readonly completeness: 'complete' | 'partial' | 'unavailable'
+  readonly status: AdminMonthlyCostAlertStatus
+  readonly reason: AdminMonthlyCostAlertReason
+  readonly activeCritical: boolean
+  readonly monthlyCostMicros: IntegerMicros | null
+  readonly warningThresholdMicros: IntegerMicros | null
+  readonly criticalThresholdMicros: IntegerMicros | null
+  readonly remainingToWarningMicros: IntegerMicros | null
+  readonly remainingToCriticalMicros: IntegerMicros | null
+}
+
 export interface AdminCostsModel {
-  readonly contractVersion: 3
+  readonly contractVersion: 4
   readonly generatedAt: string
   readonly currency: 'USD'
   readonly range: {
@@ -148,6 +186,7 @@ export interface AdminCostsModel {
     readonly billingDispositions: readonly AdminCostBreakdownRow[]
   }
   readonly providerAccountingCoverage: AdminProviderAccountingCoverage
+  readonly monthlyCostAlert: AdminMonthlyCostAlert
 }
 
 export type AdminCostCompletenessReason =
@@ -228,6 +267,14 @@ const PROVIDER_COVERAGE_DIMENSIONS = {
   purposes: new Set<string>(['tutor_turn', 'jarvis_turn', 'tts_synthesis', 'safety_classification']),
   providers: new Set<string>(['anthropic', 'elevenlabs']),
 } as const
+
+const MONTHLY_ALERT_STATUSES = new Set<AdminMonthlyCostAlertStatus>([
+  'normal', 'warning', 'critical', 'partial', 'unavailable',
+])
+const MONTHLY_ALERT_REASONS = new Set<AdminMonthlyCostAlertReason>([
+  'complete', 'partial_lower_bound', 'partial_lower_bound_critical',
+  'aggregate_unavailable', 'configuration_unavailable',
+])
 
 function record(value: unknown): Record<string, unknown> | null {
   return value && typeof value === 'object' && !Array.isArray(value)
@@ -455,6 +502,103 @@ export function parseAdminProviderAccountingCoverage(value: unknown): AdminProvi
   }
 }
 
+function nullableMicros(value: unknown): IntegerMicros | null | undefined {
+  if (value === null) return null
+  return typeof value === 'string' && value.length <= 24 && isCanonicalIntegerMicros(value)
+    ? value
+    : undefined
+}
+
+export function parseAdminMonthlyCostAlert(value: unknown): AdminMonthlyCostAlert | null {
+  const source = record(value)
+  const window = record(source?.window)
+  const expectedKeys = [
+    'contractVersion', 'generatedAt', 'currency', 'window', 'costAuthority', 'scope',
+    'providerInvoiceTotalClaim', 'automaticProviderShutdown', 'completeness', 'status',
+    'reason', 'activeCritical', 'monthlyCostMicros', 'warningThresholdMicros',
+    'criticalThresholdMicros', 'remainingToWarningMicros', 'remainingToCriticalMicros',
+  ]
+  if (!source || !window
+    || Object.keys(source).length !== expectedKeys.length
+    || expectedKeys.some((key) => !Object.hasOwn(source, key))
+    || Object.keys(window).length !== 3) return null
+  const startMs = typeof window.startAt === 'string' ? Date.parse(window.startAt) : Number.NaN
+  const endMs = typeof window.endExclusive === 'string'
+    ? Date.parse(window.endExclusive)
+    : Number.NaN
+  const startDate = new Date(startMs)
+  const expectedEnd = Number.isNaN(startMs)
+    ? null
+    : new Date(Date.UTC(startDate.getUTCFullYear(), startDate.getUTCMonth() + 1, 1)).toISOString()
+  if (
+    source.contractVersion !== 1
+    || typeof source.generatedAt !== 'string' || Number.isNaN(Date.parse(source.generatedAt))
+    || source.currency !== 'USD'
+    || window.timezone !== 'UTC'
+    || typeof window.startAt !== 'string' || typeof window.endExclusive !== 'string'
+    || Number.isNaN(startMs) || Number.isNaN(endMs)
+    || !window.startAt.endsWith('-01T00:00:00.000Z')
+    || !window.endExclusive.endsWith('-01T00:00:00.000Z')
+    || window.endExclusive !== expectedEnd
+    || startMs >= endMs
+    || Date.parse(source.generatedAt) < startMs
+    || Date.parse(source.generatedAt) >= endMs
+    || source.costAuthority !== 'academy_provider_usage_ledger'
+    || source.scope !== 'recorded_usage_derived_calculated_provider_cost'
+    || source.providerInvoiceTotalClaim !== false
+    || source.automaticProviderShutdown !== false
+    || !['complete', 'partial', 'unavailable'].includes(String(source.completeness))
+    || !MONTHLY_ALERT_STATUSES.has(source.status as AdminMonthlyCostAlertStatus)
+    || !MONTHLY_ALERT_REASONS.has(source.reason as AdminMonthlyCostAlertReason)
+    || typeof source.activeCritical !== 'boolean'
+  ) return null
+  const monthly = nullableMicros(source.monthlyCostMicros)
+  const warning = nullableMicros(source.warningThresholdMicros)
+  const critical = nullableMicros(source.criticalThresholdMicros)
+  const remainingWarning = nullableMicros(source.remainingToWarningMicros)
+  const remainingCritical = nullableMicros(source.remainingToCriticalMicros)
+  if (monthly === undefined || warning === undefined || critical === undefined
+    || remainingWarning === undefined || remainingCritical === undefined) return null
+  if (source.activeCritical !== (source.status === 'critical')) return null
+  if ((source.completeness === 'unavailable') !== (monthly === null)) return null
+
+  const configured = warning !== null && critical !== null
+    && BigInt(warning) >= 1n
+    && BigInt(critical) <= 1_000_000_000_000n
+    && BigInt(warning) < BigInt(critical)
+  if ((warning === null) !== (critical === null) || (warning !== null && !configured)) return null
+  if (source.reason === 'configuration_unavailable') {
+    if (configured || source.status !== 'unavailable' || remainingWarning !== null || remainingCritical !== null) return null
+  } else if (source.reason === 'aggregate_unavailable') {
+    if (!configured || monthly !== null || source.completeness !== 'unavailable'
+      || source.status !== 'unavailable' || remainingWarning !== null || remainingCritical !== null) return null
+  } else if (!configured || monthly === null) return null
+
+  if (configured && monthly !== null) {
+    const total = BigInt(monthly)
+    const exactStatus = total >= BigInt(critical)
+      ? 'critical'
+      : total >= BigInt(warning) ? 'warning' : 'normal'
+    if (source.reason === 'complete') {
+      if (source.completeness !== 'complete' || source.status !== exactStatus) return null
+      const expectedWarning = BigInt(warning) > total ? (BigInt(warning) - total).toString() : null
+      const expectedCritical = BigInt(critical) > total ? (BigInt(critical) - total).toString() : null
+      if (remainingWarning !== expectedWarning || remainingCritical !== expectedCritical) return null
+    } else if (source.reason === 'partial_lower_bound') {
+      if (source.completeness !== 'partial' || source.status !== 'partial'
+        || total >= BigInt(critical) || remainingWarning !== null || remainingCritical !== null) return null
+    } else if (source.reason === 'partial_lower_bound_critical') {
+      if (source.completeness !== 'partial' || source.status !== 'critical'
+        || total < BigInt(critical) || remainingWarning !== null || remainingCritical !== null) return null
+    } else if (source.reason === 'aggregate_unavailable') return null
+  }
+
+  return Object.freeze({
+    ...(source as unknown as AdminMonthlyCostAlert),
+    window: Object.freeze(window as unknown as AdminMonthlyCostAlert['window']),
+  })
+}
+
 export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const source = record(value)
   const range = record(source?.range)
@@ -466,8 +610,9 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   const attribution = fixedCounts(summarySource?.attributionCounts, ['resolved', 'ambiguous', 'unresolved'])
   const usageUnavailableCount = safeCount(summarySource?.usageUnavailableCount)
   const coverage = parseAdminProviderAccountingCoverage(source?.providerAccountingCoverage)
+  const monthlyCostAlert = parseAdminMonthlyCostAlert(source?.monthlyCostAlert)
   if (
-    !source || source.contractVersion !== 3 || source.currency !== 'USD'
+    !source || source.contractVersion !== 4 || source.currency !== 'USD'
     || typeof source.generatedAt !== 'string' || Number.isNaN(Date.parse(source.generatedAt))
     || !range || !(ADMIN_COST_PRESETS as readonly string[]).concat('custom').includes(range.kind as string)
     || typeof range.start !== 'string' || !DATE.test(range.start)
@@ -479,7 +624,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
     || !Array.isArray(sourceState.reasons) || sourceState.reasons.some((reason) => !REASONS.has(reason))
     || sourceState.recordLimit !== 500 || safeCount(sourceState.recordsIncluded) === null
     || !summaryAggregate || !billing || !costKinds || !attribution || usageUnavailableCount === null
-    || !coverage
+    || !coverage || !monthlyCostAlert
     || !Array.isArray(source.trend) || source.trend.length > 366
   ) return null
 
@@ -500,7 +645,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
   if (!engines || !providers || !models || !breakdownCostKinds || !billingDispositions) return null
 
   return {
-    contractVersion: 3,
+    contractVersion: 4,
     generatedAt: source.generatedAt,
     currency: 'USD',
     range: range as unknown as AdminCostsModel['range'],
@@ -520,6 +665,7 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
     trend,
     breakdowns: { engines, providers, models, costKinds: breakdownCostKinds, billingDispositions },
     providerAccountingCoverage: coverage,
+    monthlyCostAlert,
   }
 }
 

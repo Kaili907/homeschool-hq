@@ -360,6 +360,13 @@ function Overview({ model }: { model: AdminOverviewModel }) {
             {safeCostReasonMessage(model.ai.spend.resultReasonCode) && ` ${safeCostReasonMessage(model.ai.spend.resultReasonCode)}`}
           </p>
           <p className="admin-disclosure">Calculated values are usage-derived estimates, not reconciled provider invoices.</p>
+          {model.ai.monthlyCostAlert?.activeCritical && (
+            <p className="admin-disclosure" role="alert">
+              <strong>Critical monthly cost alert active.</strong>{' '}
+              The authoritative recorded usage-derived calculated cost has reached the configured critical alert threshold.
+              This operational alert does not shut down or reroute providers.
+            </p>
+          )}
           {model.ai.providerAccounting && (
             <p className="admin-disclosure">
               <strong>Provider accounting:</strong>{' '}

@@ -34,12 +34,12 @@ function setting(key: AdminConfigurationKey) {
     deploymentCeilingType: isRuntime ? 'boolean_enablement' as const : quota ? 'integer_maximum' as const : money ? 'integer_micros_maximum' as const : approved ? 'allowlist_subset' as const : 'allowlist_member' as const,
     registryVersion: 1 as const, integrationStatus: 'pending_runtime_integration' as const,
     runtime: money ? {
-      classification: 'NOT_YET_ENFORCEABLE' as const,
-      effectiveValue: null,
-      enforcement: 'unavailable' as const,
-      resolution: 'unavailable' as const,
-      reason: 'runtime_consumer_unavailable' as const,
-      trustedConsumer: null,
+      classification: 'ENFORCEABLE_NOW' as const,
+      effectiveValue: key === 'cost.warning.monthly_micros' ? '10000000' : '25000000',
+      enforcement: 'enforced' as const,
+      resolution: 'saved' as const,
+      reason: 'saved_value_enforced' as const,
+      trustedConsumer: 'cost_alert_evaluator' as const,
       studyStatus: 'not_applicable' as const,
     } : {
       classification: 'ENFORCEABLE_NOW' as const,
@@ -98,9 +98,9 @@ function render(capabilities: readonly ('configuration:read' | 'configuration:ma
 describe('Admin Configuration page', () => {
   it('gives a viewer current stored values and source/status without mutation controls', () => {
     const markup = render(['configuration:read'])
-    expect(markup).toContain('Runtime enforcement is partially available')
+    expect(markup).toContain('Trusted runtime consumers are active')
     expect(markup).toContain('Saved configuration</dt><dd>Durable Admin registry')
-    expect(markup).toContain('Runtime effective / enforced state</dt><dd>6 enforced · 2 unavailable')
+    expect(markup).toContain('Runtime effective / enforced state</dt><dd>8 enforced · 0 unavailable')
     expect(markup).toContain('Runtime effective value</dt><dd>100')
     expect(markup).toContain('Resolution</dt><dd>Saved')
     expect(markup).toContain('Constraint — deployment quota ceiling (saved/deployment conflict)')
@@ -108,8 +108,11 @@ describe('Admin Configuration page', () => {
     expect(markup).toContain('Error — configuration resolution failed')
     expect(markup).toContain('Trusted consumer</dt><dd>Anthropic gateway')
     expect(markup).toContain('Trusted consumer</dt><dd>TTS gateway')
+    expect(markup).toContain('Trusted consumer</dt><dd>Monthly cost alert evaluator')
+    expect(markup).toContain('Effective — cost alert threshold')
     expect(markup).toContain('Study effective settings</dt><dd>Unavailable — no Study effective-settings authority')
-    expect(markup).toContain('Not applicable — runtime enforcement unavailable')
+    expect(markup).toContain('Not applicable — operational alert threshold only')
+    expect(markup).toContain('do not disable, reroute, or impose a provider spending hard cap')
     expect(markup).toContain('Read only')
     expect(markup).not.toContain('<button')
     expect(markup).not.toContain('<form')

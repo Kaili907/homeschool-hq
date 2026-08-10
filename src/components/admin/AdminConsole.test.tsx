@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest'
 import type { AdminEngineId } from '../../admin/admin0Vocabulary'
 import { adaptAdminOverview, type AdminOverviewSource, type CostSource } from '../../admin/overviewAdapter'
 import type { AdminConsoleProps, EngineObservation } from '../../admin/overviewModel'
-import { providerAccountingCoverageFixture } from '../../admin/costsTestFixtures'
+import { monthlyCostAlertFixture, providerAccountingCoverageFixture } from '../../admin/costsTestFixtures'
 import { AdminConsole, AdminShell, applyAdminRoutePresentation } from './AdminConsole'
 
 const OBSERVED_AT = '2026-08-08T14:00:00.000Z'
@@ -236,6 +236,32 @@ describe('AdminConsole canonical overview presentation', () => {
     expect(markup).toContain('Partial')
     expect(markup).toContain('Tutor covered; Jarvis covered; TTS covered; Study pending')
     expect(markup).toContain('does not establish provider-bill completeness')
+  })
+
+  it('reports the evaluator-owned active critical monthly cost seam without shutdown semantics', () => {
+    const base = adaptAdminOverview(completeSource())
+    const alert = monthlyCostAlertFixture({
+      status: 'critical',
+      reason: 'complete',
+      activeCritical: true,
+      monthlyCostMicros: '25000000',
+      remainingToWarningMicros: null,
+      remainingToCriticalMicros: null,
+    })
+    const model = {
+      ...base,
+      ai: { ...base.ai, monthlyCostAlert: alert, activeCriticalCostAlert: true },
+    }
+    const markup = renderToStaticMarkup(
+      <AdminConsole
+        authorization={AUTHORIZED}
+        overview={{ status: 'ready', model }}
+        selectedRange={{ kind: 'preset', preset: 'today' }}
+        onRangeChange={() => {}}
+      />,
+    )
+    expect(markup).toContain('Critical monthly cost alert active')
+    expect(markup).toContain('does not shut down or reroute providers')
   })
 
   it('renders all eight canonical engines through separate display labels', () => {

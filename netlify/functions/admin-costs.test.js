@@ -17,7 +17,16 @@ function event(overrides = {}) {
 function readyHandler(overrides = {}) {
   return createAdminCostsHandler({
     authorization: { require: vi.fn(async () => ({ ok: true, principal })) },
-    projection: { read: vi.fn(async () => ({ contractVersion: 3, currency: 'USD' })) },
+    projection: { read: vi.fn(async () => ({
+      contractVersion: 3,
+      generatedAt: '2026-08-10T18:30:00.000Z',
+      currency: 'USD',
+    })) },
+    monthlyCostAlertEvaluator: { read: vi.fn(async () => ({
+      contractVersion: 1,
+      status: 'normal',
+      activeCritical: false,
+    })) },
     ...overrides,
   })
 }
@@ -25,11 +34,23 @@ function readyHandler(overrides = {}) {
 describe('authorized Admin costs endpoint', () => {
   it('requires costs:read for every direct API request', async () => {
     const authorization = { require: vi.fn(async () => ({ ok: true, principal })) }
-    const projection = { read: vi.fn(async () => ({ contractVersion: 3, currency: 'USD' })) }
-    const response = await readyHandler({ authorization, projection })(event())
+    const projection = { read: vi.fn(async () => ({
+      contractVersion: 3,
+      generatedAt: '2026-08-10T18:30:00.000Z',
+      currency: 'USD',
+    })) }
+    const monthlyCostAlertEvaluator = { read: vi.fn(async () => ({ status: 'warning' })) }
+    const response = await readyHandler({ authorization, projection, monthlyCostAlertEvaluator })(event())
     expect(response.statusCode).toBe(200)
     expect(authorization.require).toHaveBeenCalledWith(expect.anything(), 'costs:read')
     expect(projection.read).toHaveBeenCalledOnce()
+    expect(monthlyCostAlertEvaluator.read).toHaveBeenCalledWith({
+      generatedAt: '2026-08-10T18:30:00.000Z',
+    })
+    expect(JSON.parse(response.body)).toMatchObject({
+      contractVersion: 4,
+      monthlyCostAlert: { status: 'warning' },
+    })
   })
 
   it.each([
@@ -41,25 +62,32 @@ describe('authorized Admin costs endpoint', () => {
     ['authorization uncertainty', 503, 'authorization_unavailable'],
   ])('rejects %s before reading costs', async (_label, statusCode, code) => {
     const projection = { read: vi.fn() }
+    const monthlyCostAlertEvaluator = { read: vi.fn() }
     const authorization = {
       require: vi.fn(async () => ({
         ok: false,
         response: { statusCode, body: JSON.stringify({ error: { code } }) },
       })),
     }
-    const response = await readyHandler({ authorization, projection })(event())
+    const response = await readyHandler({
+      authorization, projection, monthlyCostAlertEvaluator,
+    })(event())
     expect(response.statusCode).toBe(statusCode)
     expect(projection.read).not.toHaveBeenCalled()
+    expect(monthlyCostAlertEvaluator.read).not.toHaveBeenCalled()
   })
 
   it('rejects alternate paths and methods without reading data', async () => {
     const projection = { read: vi.fn() }
+    const monthlyCostAlertEvaluator = { read: vi.fn() }
     const authorization = { require: vi.fn() }
-    const handler = readyHandler({ authorization, projection })
+    const handler = readyHandler({ authorization, projection, monthlyCostAlertEvaluator })
     expect((await handler(event({ httpMethod: 'POST' }))).statusCode).toBe(405)
     expect((await handler(event({ path: '/api/admin/v1/costs/raw' }))).statusCode).toBe(404)
+    expect((await handler(event({ body: '{"monthlyCostMicros":"1"}' }))).statusCode).toBe(400)
     expect(authorization.require).not.toHaveBeenCalled()
     expect(projection.read).not.toHaveBeenCalled()
+    expect(monthlyCostAlertEvaluator.read).not.toHaveBeenCalled()
   })
 
   it('maps source failures to bounded error codes without raw exception text', async () => {

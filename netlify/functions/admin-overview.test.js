@@ -153,6 +153,29 @@ function sources(overrides = {}) {
       endExclusive: input.endExclusive,
     })),
     costs: vi.fn(async () => []),
+    monthlyCostAlert: vi.fn(async () => ({
+      contractVersion: 1,
+      generatedAt: NOW.toISOString(),
+      currency: 'USD',
+      window: {
+        timezone: 'UTC',
+        startAt: '2026-08-01T00:00:00.000Z',
+        endExclusive: '2026-09-01T00:00:00.000Z',
+      },
+      costAuthority: 'academy_provider_usage_ledger',
+      scope: 'recorded_usage_derived_calculated_provider_cost',
+      providerInvoiceTotalClaim: false,
+      automaticProviderShutdown: false,
+      completeness: 'complete',
+      status: 'normal',
+      reason: 'complete',
+      activeCritical: false,
+      monthlyCostMicros: '0',
+      warningThresholdMicros: '10000000',
+      criticalThresholdMicros: '25000000',
+      remainingToWarningMicros: '10000000',
+      remainingToCriticalMicros: '25000000',
+    })),
     providerAttemptCoverage: vi.fn(async (range) => providerCoverage(range)),
     safety: vi.fn(async () => ({
       observedAt: '2026-08-09T14:20:00.000Z',
@@ -212,6 +235,7 @@ describe('Admin Overview authorization composition', () => {
     expect(domainSources.learners).not.toHaveBeenCalled()
     expect(domainSources.enginePerformance).not.toHaveBeenCalled()
     expect(domainSources.costs).not.toHaveBeenCalled()
+    expect(domainSources.monthlyCostAlert).not.toHaveBeenCalled()
     expect(domainSources.providerAttemptCoverage).not.toHaveBeenCalled()
     expect(domainSources.safety).not.toHaveBeenCalled()
     expect(domainSources.curriculumCatalog).not.toHaveBeenCalled()
@@ -485,5 +509,28 @@ describe('Admin Overview domain semantics and isolation', () => {
       invoiceCompletenessClaim: false,
     })
     expect(response.body).not.toMatch(/private-account|private-household|attemptId|ledgerExecutionKey/)
+  })
+
+  it('exposes the evaluator-owned active critical cost alert as a readiness seam', async () => {
+    const domainSources = sources({
+      monthlyCostAlert: vi.fn(async () => ({
+        ...(await sources().monthlyCostAlert()),
+        status: 'critical',
+        activeCritical: true,
+        monthlyCostMicros: '25000000',
+        remainingToWarningMicros: null,
+        remainingToCriticalMicros: null,
+      })),
+    })
+    const response = await handler({ sources: domainSources })(event())
+    expect(body(response).costs.data).toMatchObject({
+      activeCriticalCostAlert: true,
+      monthlyCostAlert: {
+        status: 'critical',
+        activeCritical: true,
+        automaticProviderShutdown: false,
+        providerInvoiceTotalClaim: false,
+      },
+    })
   })
 })
