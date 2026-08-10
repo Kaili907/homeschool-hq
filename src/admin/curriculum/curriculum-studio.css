@@ -484,6 +484,30 @@
 .curriculum-studio-state button { min-height: 2.6rem; border: 0; border-radius: .4rem; padding: .55rem .8rem; background: var(--admin-green); color: white; font: inherit; font-size: .72rem; font-weight: 700; cursor: pointer; }
 .curriculum-preview-state div { margin-top: 1rem; border-left: 3px solid var(--admin-amber); padding: .65rem .8rem; background: var(--admin-amber-soft); color: #6b4816; font-size: .7rem; line-height: 1.5; }
 
+.curriculum-release-staging {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: .9rem;
+  background: #fff;
+}
+.curriculum-release-staging > header,
+.curriculum-staging-actions { display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
+.curriculum-staging-state { padding: .35rem .65rem; border-radius: 999px; background: #fff7ed; color: #9a3412; }
+.curriculum-staging-state.is-staged,
+.curriculum-staging-state.is-eligible { background: #ecfdf5; color: #166534; }
+.curriculum-staging-facts,
+.curriculum-staging-manifest dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .65rem; }
+.curriculum-staging-facts div,
+.curriculum-staging-manifest dl div { min-width: 0; padding: .65rem; border-radius: .6rem; background: #f8fafc; }
+.curriculum-staging-facts dt,
+.curriculum-staging-manifest dt { color: #64748b; font-size: .78rem; }
+.curriculum-staging-facts dd,
+.curriculum-staging-manifest dd { margin: .2rem 0 0; overflow-wrap: anywhere; }
+.curriculum-staging-blockers { margin: .8rem 0; padding: .75rem; border-left: 4px solid #c2410c; background: #fff7ed; }
+.curriculum-staging-manifest code { font-size: .72rem; overflow-wrap: anywhere; }
+.curriculum-staging-permission { color: #9a3412; }
+
 @container (max-width: 1050px) {
   .curriculum-studio-grid {
     grid-template-columns: minmax(15rem, 17rem) minmax(0, 1fr);

@@ -13,6 +13,7 @@ import type {
   CurriculumStudioEntityIndexEntry,
 } from '../curriculum-authoring/contracts'
 import type { CurriculumApprovalSource } from '../curriculum-approval/contracts'
+import type { CurriculumStagingSource } from '../curriculum-staging/contracts'
 
 export const CURRICULUM_STUDIO_RENDER_LIMIT = 250 as const
 export const CURRICULUM_STUDIO_NAVIGATION_REQUEST = 'curriculum-studio:navigation-request' as const
@@ -26,7 +27,7 @@ export type CurriculumStudioEntity =
   | { readonly kind: 'authoring'; readonly id: string; readonly entry: CurriculumStudioEntityIndexEntry }
   | { readonly kind: 'group'; readonly id: string; readonly label: string }
 
-export interface CurriculumStudioSource extends CurriculumDraftAuthoringSource, CurriculumApprovalSource {
+export interface CurriculumStudioSource extends CurriculumDraftAuthoringSource, CurriculumApprovalSource, CurriculumStagingSource {
   loadPublishedCatalog(): Promise<CurriculumCatalog>
 }
 
@@ -73,10 +74,12 @@ export function createCurriculumStudioSource(
   publishedSource: Pick<CurriculumBrowserSource, 'loadCatalog'>,
   authoringSource: CurriculumDraftAuthoringSource,
   approvalSource: CurriculumApprovalSource,
+  stagingSource: CurriculumStagingSource,
 ): CurriculumStudioSource {
   return {
     ...authoringSource,
     ...approvalSource,
+    ...stagingSource,
     loadPublishedCatalog: () => publishedSource.loadCatalog(),
   }
 }

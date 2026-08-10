@@ -8,7 +8,28 @@ Every schema version bump is documented here. Rules (from the build spec):
   Snapshots are downloadable from the Grown-Ups panel.
 - Migration logic lives in `src/migration.ts` and is covered by
   `src/migration.test.ts`. Tests run before the migration ever executes in the
-  app: `npm test`.
+app: `npm test`.
+
+## Supabase: Curriculum release staging (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810150000_academy_curriculum_release_staging.sql`.
+
+The migration creates an immutable candidate plane distinct from the published
+release registry. One exact current draft revision, validation snapshot, and
+human approval are bound to a target version. The postgres-owned staging RPC
+independently reauthorizes `curriculum:publish`, rechecks the approval
+`publishGate`, rejects release or staged-version collisions, and writes the
+candidate, complete deterministic Schema v2 artifacts, receipt, and bounded
+audit event in one transaction. Exact and semantic retries resolve to the same
+candidate; conflicting identity reuse fails closed.
+
+Candidate and artifact rows are append-only, forced-RLS, and inaccessible by
+application roles. Their state is only `staged` / `not_published`; no published
+release row, active pointer, learner pin, runtime cache, or production artifact
+is changed. The migration is repository-only and has not been applied hosted.
+Its tracked SHA-256 is in
+`docs/admin-console/curriculum-release-staging-migration.json`.
 
 ## Supabase: Curriculum Studio draft authoring (2026-08-10)
 

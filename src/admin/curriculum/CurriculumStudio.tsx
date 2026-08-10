@@ -48,6 +48,11 @@ import {
 import { StructuredEntityEditor } from './StructuredEntityEditor'
 import { createDraftEntityPayload, CURRICULUM_ENTITY_REF_PATTERN } from './studioEditorModel'
 import { CurriculumApprovalReview } from './CurriculumApprovalReview'
+import { CurriculumReleaseStaging } from './CurriculumReleaseStaging'
+import {
+  CurriculumStagingError,
+  type CurriculumStagingStatusResult,
+} from '../curriculum-staging/contracts'
 import './curriculum-studio.css'
 
 const TREE_KEYS = new Set<CurriculumTreeKey>([
@@ -203,12 +208,18 @@ export function CurriculumStudioView({
   const [approvalBusy, setApprovalBusy] = useState(false)
   const [approvalError, setApprovalError] = useState<string | null>(null)
   const [changeReason, setChangeReason] = useState<Exclude<CurriculumApprovalReasonCode, 'approval.ready'>>('changes.content_quality')
+  const [staging, setStaging] = useState<CurriculumStagingStatusResult | null>(null)
+  const [stagingBusy, setStagingBusy] = useState(false)
+  const [stagingError, setStagingError] = useState<string | null>(null)
+  const [stagingReload, setStagingReload] = useState(0)
+  const stagingRequestKey = useRef<string | null>(null)
   const approvalRequestKeys = useRef(new Map<string, string>())
   const focusRequested = useRef(false)
   const nextLoadedSaveMessage = useRef('Saved')
   const itemRefs = useRef(new Map<string, HTMLButtonElement>())
   const draftCapable = canWriteCurriculumDrafts(capabilities)
   const approvalCapable = capabilities.includes('curriculum:approve')
+  const stagingCapable = capabilities.includes('curriculum:publish')
   const writeAllowed = draftCapable && serverWriteAllowed && draft !== null
   const entries = materialization?.entities ?? baseEntries
   const index = useMemo(() => buildMaterializedCurriculumStudioIndex(entries), [entries])
@@ -218,6 +229,31 @@ export function CurriculumStudioView({
   const selectedEntry = selected?.entity.kind === 'authoring' ? selected.entity.entry : null
   const dirty = curriculumPayloadDirty(payload, savedPayload)
   const validationStale = validation !== null && draft !== null && validation.draftRevision !== draft.revision
+
+  useEffect(() => {
+    if (!draft) {
+      setStaging(null)
+      setStagingError(null)
+      return
+    }
+    let current = true
+    setStagingBusy(true)
+    setStagingError(null)
+    source.readStaging(draft.draftId).then(
+      (value) => {
+        if (!current) return
+        setStaging(value)
+        setStagingBusy(false)
+      },
+      (reason) => {
+        if (!current) return
+        setStaging(null)
+        setStagingError(stagingErrorMessage(reason, 'The release staging service is unavailable.'))
+        setStagingBusy(false)
+      },
+    )
+    return () => { current = false }
+  }, [draft?.draftId, draft?.revision, source, stagingReload])
 
   useEffect(() => {
     if (initialBaseEntries.length > 0) return
@@ -645,6 +681,7 @@ export function CurriculumStudioView({
       const result = await source.validateDraft(draft.draftId, draft.revision)
       setValidation(result)
       await refreshApproval(draft.draftId)
+      setStagingReload((value) => value + 1)
     } catch (reason) {
       setValidationError(
         reason instanceof CurriculumDraftAuthoringError && reason.code === 'conflict'
@@ -694,10 +731,35 @@ export function CurriculumStudioView({
       })
       setApproval(result)
       approvalRequestKeys.current.delete(fingerprint)
+      setStagingReload((value) => value + 1)
     } catch (reason) {
       setApprovalError(approvalErrorMessage(reason, 'The decision could not be recorded. Retry will reuse the same request identity.'))
     } finally {
       setApprovalBusy(false)
+    }
+  }
+
+  async function stageRelease() {
+    if (!draft || !stagingCapable || dirty || !staging?.eligible) return
+    const idempotencyKey = stagingRequestKey.current ?? uuid()
+    stagingRequestKey.current = idempotencyKey
+    setStagingBusy(true)
+    setStagingError(null)
+    try {
+      const result = await source.stageDraft({
+        draftId: draft.draftId,
+        draftRevision: draft.revision,
+        idempotencyKey,
+      })
+      setStaging(result)
+      stagingRequestKey.current = null
+    } catch (reason) {
+      setStagingError(stagingErrorMessage(
+        reason,
+        'Staging is unavailable. Retry will reuse the same request identity.',
+      ))
+    } finally {
+      setStagingBusy(false)
     }
   }
 
@@ -828,19 +890,30 @@ export function CurriculumStudioView({
       </div>
 
       {draft && (
-        <CurriculumApprovalReview
-          draftId={draft.draftId}
-          draftRevision={draft.revision}
-          approval={approval}
-          validation={validation}
-          canApprove={approvalCapable}
-          hasUnsavedChanges={dirty}
-          busy={approvalBusy}
-          error={approvalError}
-          changeReason={changeReason}
-          onChangeReason={setChangeReason}
-          onDecision={(decision, reasonCode) => void decideApproval(decision, reasonCode)}
-        />
+        <>
+          <CurriculumApprovalReview
+            draftId={draft.draftId}
+            draftRevision={draft.revision}
+            approval={approval}
+            validation={validation}
+            canApprove={approvalCapable}
+            hasUnsavedChanges={dirty}
+            busy={approvalBusy}
+            error={approvalError}
+            changeReason={changeReason}
+            onChangeReason={setChangeReason}
+            onDecision={(decision, reasonCode) => void decideApproval(decision, reasonCode)}
+          />
+          <CurriculumReleaseStaging
+            status={staging}
+            busy={stagingBusy}
+            error={stagingError}
+            canStage={stagingCapable}
+            hasUnsavedChanges={dirty}
+            onRefresh={() => setStagingReload((value) => value + 1)}
+            onStage={() => void stageRelease()}
+          />
+        </>
       )}
 
       {validation && (
@@ -905,6 +978,20 @@ function approvalErrorMessage(reason: unknown, fallback: string): string {
   if (reason.reason === 'idempotency-conflict') return 'Conflicting reuse of the decision request identity was rejected.'
   if (reason.code === 'conflict') return 'The draft revision changed before the decision was recorded.'
   if (reason.code === 'invalid') return 'The server rejected the bounded approval decision.'
+  return fallback
+}
+
+function stagingErrorMessage(reason: unknown, fallback: string): string {
+  if (!(reason instanceof CurriculumStagingError)) return fallback
+  if (reason.code === 'unauthenticated') return 'The Admin session is no longer authenticated.'
+  if (reason.code === 'forbidden') return 'Permission denied: the server requires curriculum:publish.'
+  if (reason.code === 'not-found') return 'The exact draft staging record is unavailable.'
+  if (reason.reason === 'gate-blocked') return 'Staging failed closed because validation or approval is no longer eligible.'
+  if (reason.reason === 'target-version-collision') return 'The target version already exists and cannot be overwritten.'
+  if (reason.reason === 'package-conflict') return 'This exact revision already has a different immutable candidate identity.'
+  if (reason.reason === 'idempotency-conflict') return 'Conflicting reuse of the staging request identity was rejected.'
+  if (reason.code === 'conflict') return 'The draft revision changed before staging completed.'
+  if (reason.code === 'invalid') return 'The server rejected the candidate package contract.'
   return fallback
 }
 

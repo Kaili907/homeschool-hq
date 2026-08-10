@@ -56,7 +56,7 @@ describe('ADMIN-0 shared vocabulary', () => {
     ])
   })
 
-  it('extends audit version 2 with only the immediate granular curriculum vocabulary', () => {
+  it('extends audit version 2 with the current granular curriculum workflow vocabulary', () => {
     expect(ADMIN_CONTRACT_VERSION).toBe(2)
     expect(ADMIN_AUDIT_ACTIONS).toEqual([
       'admin_role.assign',
@@ -74,6 +74,7 @@ describe('ADMIN-0 shared vocabulary', () => {
       'curriculum_draft.collaborator.revoke',
       'curriculum_approval.approve',
       'curriculum_approval.changes_requested',
+      'curriculum_release.stage',
       'curriculum.approve',
       'curriculum.publish',
       'release.activate',

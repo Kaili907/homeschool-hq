@@ -20,6 +20,7 @@ import type { AdminAuditFilters, AdminAuditReadState } from '../../admin/auditLo
 import { createAdminCurriculumHttpSource } from '../../admin/curriculum/httpSource'
 import { createCurriculumDraftAuthoringHttpSource } from '../../admin/curriculum-authoring/httpSource'
 import { createCurriculumApprovalHttpSource } from '../../admin/curriculum-approval/httpSource'
+import { createCurriculumStagingHttpSource } from '../../admin/curriculum-staging/httpSource'
 import {
   createCurriculumStudioSource,
   CURRICULUM_STUDIO_NAVIGATION_REQUEST,
@@ -156,13 +157,15 @@ export function AdminConsoleRoute() {
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const curriculumAuthoringSource = useMemo(() => createCurriculumDraftAuthoringHttpSource(), [])
   const curriculumApprovalSource = useMemo(() => createCurriculumApprovalHttpSource(), [])
+  const curriculumStagingSource = useMemo(() => createCurriculumStagingHttpSource(), [])
   const curriculumStudioSource = useMemo(
     () => createCurriculumStudioSource(
       curriculumSource,
       curriculumAuthoringSource,
       curriculumApprovalSource,
+      curriculumStagingSource,
     ),
-    [curriculumApprovalSource, curriculumAuthoringSource, curriculumSource],
+    [curriculumApprovalSource, curriculumAuthoringSource, curriculumSource, curriculumStagingSource],
   )
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)

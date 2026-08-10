@@ -412,6 +412,7 @@ export const ADMIN_AUDIT_ACTIONS = [
   'curriculum_draft.collaborator.revoke',
   'curriculum_approval.approve',
   'curriculum_approval.changes_requested',
+  'curriculum_release.stage',
   'curriculum.approve',
   'curriculum.publish',
   'release.activate',

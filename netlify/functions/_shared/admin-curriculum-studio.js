@@ -1,6 +1,7 @@
 import { importImmutableV1 } from '../../../src/curriculum-authoring/v2/v1Importer.node.ts'
 import { validateCurriculumSnapshot } from '../../../src/admin/curriculum-validation/engine.ts'
 import { createHash } from 'node:crypto'
+import { buildCurriculumStagedCandidate } from './admin-curriculum-staging.js'
 
 const SUPPORTED_RELEASE = '1.0.0'
 const ENTITY_COLLECTIONS = Object.freeze({
@@ -171,7 +172,7 @@ function snapshotFromMaterialization(materialization) {
   }
 }
 
-export function createAdminCurriculumStudioService({ authoring, approval } = {}) {
+export function createAdminCurriculumStudioService({ authoring, approval, staging } = {}) {
   if (!authoring) throw new Error('curriculum_authoring_service_required')
   return Object.freeze({
     readBaseIndex(version) {
@@ -235,6 +236,28 @@ export function createAdminCurriculumStudioService({ authoring, approval } = {})
         validationSnapshot,
         run,
       }
+    },
+    readStaging(actorUserRef, draftId) {
+      if (!staging) throw new Error('curriculum_staging_service_required')
+      return staging.read(actorUserRef, draftId)
+    },
+    async stageDraft(actorUserRef, draftId, expectedRevision, idempotencyKey) {
+      if (!approval) throw new Error('curriculum_approval_service_required')
+      if (!staging) throw new Error('curriculum_staging_service_required')
+      const approvalStatus = await approval.read(actorUserRef, draftId)
+      if (
+        !approvalStatus.publishGate.eligible
+        || approvalStatus.draftRevision !== expectedRevision
+        || approvalStatus.publishGate.draftRevision !== expectedRevision
+      ) throw Object.assign(new Error('curriculum_staging_gate_blocked'), { code: 'gate-blocked' })
+      const value = await materialize(authoring, actorUserRef, draftId, expectedRevision)
+      const snapshot = snapshotFromMaterialization(value)
+      const candidate = buildCurriculumStagedCandidate({
+        draft: value.draft,
+        snapshot,
+        approval: approvalStatus,
+      })
+      return staging.stage(actorUserRef, candidate, idempotencyKey)
     },
   })
 }
