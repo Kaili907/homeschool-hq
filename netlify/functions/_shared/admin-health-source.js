@@ -19,12 +19,12 @@ function serviceConfig(env) {
   }
 }
 
-/** Exact-default-off server gates are authoritative disabled evidence. */
-export function disabledHealthEngines(env) {
+/** Study remains env-owned; AI/TTS use trusted runtime-effective values. */
+export function disabledHealthEngines(env, runtimeValues) {
   const disabled = new Set()
   if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) disabled.add('study')
-  if (!envFlagEnabled(env, 'ACADEMY_TTS_ENABLED')) disabled.add('tts')
-  if (!envFlagEnabled(env, 'ACADEMY_AI_ENABLED')) disabled.add('gateway')
+  if (runtimeValues?.ttsEnabled !== true) disabled.add('tts')
+  if (runtimeValues?.aiEnabled !== true) disabled.add('gateway')
   return disabled
 }
 

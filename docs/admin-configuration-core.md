@@ -1,12 +1,14 @@
 # ADMIN-14A durable configuration core
 
-Status: implemented locally; migration not applied hosted; runtime enforcement deferred to ADMIN-14B.
+Status: durable core implemented locally; migration not applied hosted;
+supported runtime enforcement is implemented by ADMIN-14B without changing this
+database contract. See `admin-configuration-runtime.md`.
 
 `20260809140000_academy_admin_configuration_core.sql` adds the durable Admin
-configuration data/control authority on top of ADMIN-15. Nothing in this card
-changes the Anthropic gateway, TTS gateway, or Study runtime. Every database and
-HTTP projection reports `pending_runtime_integration` so a stored value cannot
-be mistaken for an enforced production value.
+configuration data/control authority on top of ADMIN-15. Its database read and
+mutation DTOs continue to report `pending_runtime_integration`; ADMIN-14B layers
+a separate trusted, contextual runtime projection over that saved snapshot.
+Runtime state is deliberately not written back into the immutable registry.
 
 ## Authority and storage
 
@@ -96,9 +98,10 @@ Requests are exact key-specific objects, not a generic JSON editor. Responses
 contain no environment value, credential, bearer, actor identity, assignment,
 or raw database row.
 
-ADMIN-14A itself mounts no configuration UI and provides no runtime-effective
-projection. A later UI layered on this core must label commits as saved
-configuration with `pending_runtime_integration`, keep runtime effective or
-enforced state unavailable, and never describe a successful save as active
-production enforcement. ADMIN-14B owns runtime consumption,
-deployment-ceiling resolution, and protective disable-only behavior.
+ADMIN-14B preserves these mutation DTOs and derives runtime status only on a
+trusted server. Its UI distinguishes the saved value from the exact effective
+value, enforcement, stronger constraints, safe fallback, and unavailable
+consumers. After a commit the browser performs another authoritative read; it
+does not infer that the submitted value became effective. The two cost
+thresholds remain truthfully unavailable because no runtime alert evaluator is
+implemented, and Study remains outside this authority.

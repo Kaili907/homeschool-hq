@@ -8,6 +8,7 @@ import { loadAdminCurriculumValidationEvidence } from './_shared/admin-curriculu
 import { createFilesystemCurriculumSource } from '../../src/admin/curriculum/filesystemSource.node.ts'
 import { composeAdminOverview, resolveAdminOverviewRange } from './_shared/admin-overview.js'
 import { errorResponse, jsonResponse } from './_shared/http.js'
+import { createRuntimeConfigurationResolver } from './_shared/admin-runtime-configuration.js'
 
 const PATHS = new Set([
   '/api/admin/v1/overview',
@@ -43,7 +44,6 @@ export function createAdminOverviewHandler(overrides = {}) {
   const sources = overrides.sources ?? {
     learners: (input) => learnerReader.readSnapshot(input),
     health: () => healthSource.list(),
-    disabledEngines: disabledHealthEngines(env),
     enginePerformance: (limit) => performanceReader.list(limit),
     costs: (input) => gatewayAccess.readProviderUsageCosts(input),
     safety: (input) => safetyReader.read(input),
@@ -73,12 +73,31 @@ export function createAdminOverviewHandler(overrides = {}) {
     }
 
     try {
+      let runtimeValues = { aiEnabled: false, ttsEnabled: false }
+      if (overrides.disabledEngines === undefined) {
+        try {
+          const runtimeConfigurationResolver = overrides.runtimeConfigurationResolver
+            ?? createRuntimeConfigurationResolver({
+              env,
+              fetchImpl,
+              source: overrides.runtimeConfigurationSource,
+              serviceClient: overrides.configurationClient,
+            })
+          runtimeValues = (await runtimeConfigurationResolver.resolve()).values
+        } catch {
+          // Injected resolvers fail closed just like the production resolver.
+        }
+      }
+      const effectiveSources = {
+        ...sources,
+        disabledEngines: overrides.disabledEngines ?? disabledHealthEngines(env, runtimeValues),
+      }
       const response = await composeAdminOverview({
         principal: authorized.principal,
         accessToken: authorized.accessToken,
         range,
         generatedAt: observedAt.toISOString(),
-        sources,
+        sources: effectiveSources,
         env,
       })
       return jsonResponse(200, response)

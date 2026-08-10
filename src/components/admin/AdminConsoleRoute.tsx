@@ -97,6 +97,14 @@ export function adminRouteEngine(pathname: string): AdminEngineId | null {
     : null
 }
 
+export function configurationReadStateAfterCommit(): AdminConfigurationReadState {
+  return { status: 'loading' }
+}
+
+export function configurationRetryAfterCommit(current: number): number {
+  return current + 1
+}
+
 export function presentationAuthorization(
   state: AdminAuthorizationState | { readonly status: 'resolving' },
 ): ServerResolvedAdminAuthorization {
@@ -428,19 +436,9 @@ export function AdminConsoleRoute() {
     setAuditCursors((current) => current.length > 1 ? current.slice(0, -1) : current)
   }
 
-  function applyConfigurationCommit(result: AdminConfigurationCommitResult) {
-    setConfigurationReadState((current) => {
-      if (current.status !== 'ready') return current
-      return {
-        status: 'ready',
-        projection: {
-          ...current.projection,
-          settings: current.projection.settings.map((setting) => setting.key === result.settingKey
-            ? { ...setting, value: result.value, revision: result.revision }
-            : setting),
-        },
-      }
-    })
+  function applyConfigurationCommit(_result: AdminConfigurationCommitResult) {
+    setConfigurationReadState(configurationReadStateAfterCommit())
+    setConfigurationRetry(configurationRetryAfterCommit)
   }
 
   if (authorization.status === 'resolving') return <AdminConsole authorization={authorization} />

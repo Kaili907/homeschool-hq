@@ -11,6 +11,13 @@ repository has no verified audition or deployment mapping. Browser speech is
 therefore the production fallback until separately approved data is supplied.
 Synthetic provider mappings exist only in server tests.
 
+ADMIN-14B resolves `runtime.tts.enabled` on the trusted server. New premium
+synthesis requires the saved enablement ceiling, the stronger deployment gate,
+and at least one active approved deployment-available logical voice. The
+catalog and synthesis endpoints resolve this independently on each request, so
+a browser cannot forge `synthesisEnabled`. A disabled or unavailable effective
+gate does not block readable text or browser-native speech.
+
 `GET /api/tts/catalog` returns the authenticated sanitized projection. It never
 returns provider identifiers, credentials, or server mapping details. The
 client uses the projection to present catalog choices and enforce revocation or

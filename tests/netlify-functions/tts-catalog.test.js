@@ -4,7 +4,8 @@ import {
   createTtsVoiceCatalog,
   projectPublicTtsCatalog,
 } from '../../netlify/functions/_shared/tts-catalog.js'
-import { createTtsHandler } from '../../netlify/functions/tts.js'
+import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
+import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
 
 const PROVIDER_SENTINEL = 'server-only-provider-voice-sentinel'
 const ENV = Object.freeze({
@@ -15,6 +16,13 @@ const ENV = Object.freeze({
   ACADEMY_TTS_ENABLED: 'true',
   ACADEMY_APP_VERSION: 'catalog-test-build',
 })
+
+function createTtsHandler(overrides) {
+  const runtimeConfigurationSource = overrides.runtimeConfigurationSource ?? {
+    read: vi.fn(async () => savedRuntimeConfigurationProjection()),
+  }
+  return createBaseTtsHandler({ runtimeConfigurationSource, ...overrides })
+}
 
 function entry(overrides = {}) {
   return {
@@ -129,15 +137,65 @@ describe('server-owned TTS catalog contract', () => {
     expect(result.body).not.toContain(PROVIDER_SENTINEL)
   })
 
+  it('re-resolves synthesis independently from the advisory catalog response', async () => {
+    const values = {
+      aiEnabled: false,
+      ttsEnabled: true,
+      aiDailyLimit: 50,
+      ttsDailyLimit: 100,
+      approvedTiers: ['sonnet', 'haiku'],
+      defaultTier: 'sonnet',
+    }
+    const runtimeConfigurationResolver = {
+      resolve: vi.fn()
+        .mockResolvedValueOnce({ values })
+        .mockResolvedValueOnce({ values: { ...values, ttsEnabled: false } }),
+    }
+    const gatewayAccess = access()
+    const handler = createTtsHandler({
+      env: ENV,
+      catalog: catalog(),
+      fetchImpl: authFetch(),
+      gatewayAccess,
+      runtimeConfigurationResolver,
+    })
+
+    expect(JSON.parse((await handler(catalogEvent())).body).synthesisEnabled).toBe(true)
+    expect(JSON.parse((await handler(synthEvent())).body)).toEqual({
+      error: { code: 'gateway_disabled' },
+    })
+    expect(runtimeConfigurationResolver.resolve).toHaveBeenCalledTimes(2)
+    expect(runtimeConfigurationResolver.resolve).toHaveBeenNthCalledWith(1, { catalog: expect.anything() })
+    expect(runtimeConfigurationResolver.resolve).toHaveBeenNthCalledWith(2, { catalog: expect.anything() })
+    expect(gatewayAccess.requireEntitlement).not.toHaveBeenCalled()
+    expect(gatewayAccess.consumeUsage).not.toHaveBeenCalled()
+  })
+
+  it('keeps the zero-voice production catalog on browser-native fallback', async () => {
+    const gatewayAccess = access()
+    const handler = createTtsHandler({
+      env: ENV,
+      catalog: TTS_VOICE_CATALOG,
+      fetchImpl: authFetch(),
+      gatewayAccess,
+    })
+    const publicCatalog = JSON.parse((await handler(catalogEvent())).body)
+    expect(publicCatalog).toMatchObject({ synthesisEnabled: false, voices: [] })
+    expect(JSON.parse((await handler(synthEvent())).body)).toEqual({
+      error: { code: 'gateway_disabled' },
+    })
+    expect(gatewayAccess.requireEntitlement).not.toHaveBeenCalled()
+  })
+
   it.each([
-    ['unknown_voice_ref', [entry()], { voiceRef: 'academy.tts.unknown', voiceVersion: 'v1' }, ENV],
-    ['stale_voice_ref', [entry()], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'old' }, ENV],
-    ['voice_ref_disabled', [entry({ status: 'disabled' })], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, ENV],
-    ['legacy_voice_ref', [entry({ status: 'legacy' })], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, ENV],
-    ['voice_ref_not_approved', [entry({ adminApproved: false })], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, ENV],
-    ['voice_deployment_mismatch', [entry()], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, { ...ENV, ELEVENLABS_ALLOWED_VOICE_IDS: 'different' }],
-    ['provider_unavailable', [entry()], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, { ...ENV, ELEVENLABS_API_KEY: '' }],
-  ])('returns %s before consuming quota', async (code, voices, selection, env) => {
+    ['unknown voice', 'unknown_voice_ref', [entry()], { voiceRef: 'academy.tts.unknown', voiceVersion: 'v1' }, ENV],
+    ['stale voice', 'stale_voice_ref', [entry()], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'old' }, ENV],
+    ['zero deployable disabled voices', 'gateway_disabled', [entry({ status: 'disabled' })], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, ENV],
+    ['zero deployable legacy voices', 'gateway_disabled', [entry({ status: 'legacy' })], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, ENV],
+    ['zero deployable unapproved voices', 'gateway_disabled', [entry({ adminApproved: false })], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, ENV],
+    ['zero deployment-allowed voices', 'gateway_disabled', [entry()], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, { ...ENV, ELEVENLABS_ALLOWED_VOICE_IDS: 'different' }],
+    ['unconfigured premium provider', 'gateway_disabled', [entry()], { voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, { ...ENV, ELEVENLABS_API_KEY: '' }],
+  ])('returns the safe %s result before consuming quota', async (_scenario, code, voices, selection, env) => {
     const gatewayAccess = access()
     const result = await createTtsHandler({
       env,

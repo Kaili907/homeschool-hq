@@ -3,6 +3,7 @@ import { TTS_REQUEST_LIMIT_BYTES, TTS_TEXT_LIMIT } from '../../netlify/functions
 import { GatewayError } from '../../netlify/functions/_shared/http.js'
 import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catalog.js'
 import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
+import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
 
 const ENV = Object.freeze({
   SUPABASE_URL: 'https://academy.supabase.co',
@@ -54,7 +55,25 @@ function testAccess({
 }
 
 function createTtsHandler(overrides = {}) {
-  return createBaseTtsHandler({ gatewayAccess: testAccess(), catalog: TEST_CATALOG, ...overrides })
+  const runtimeConfigurationSource = overrides.runtimeConfigurationSource ?? {
+    read: vi.fn(async () => savedRuntimeConfigurationProjection()),
+  }
+  return createBaseTtsHandler({
+    gatewayAccess: testAccess(), catalog: TEST_CATALOG, runtimeConfigurationSource, ...overrides,
+  })
+}
+
+function runtimeResolver(overrides = {}) {
+  return {
+    resolve: vi.fn(async () => ({
+      values: {
+        aiEnabled: false, ttsEnabled: true,
+        aiDailyLimit: 50, ttsDailyLimit: 100,
+        approvedTiers: ['sonnet', 'haiku'], defaultTier: 'sonnet',
+        ...overrides,
+      },
+    })),
+  }
 }
 
 afterEach(() => {
@@ -184,6 +203,8 @@ describe('authenticated TTS gateway', () => {
     ['path', '/v1/voices'],
     ['url', 'https://api.elevenlabs.io/v1/voices'],
     ['seed', 123],
+    ['effectiveValue', true],
+    ['enforcement', 'enforced'],
   ])('rejects arbitrary provider setting %s', async (field, value) => {
     const fetchImpl = fetchRouter()
     const result = await createTtsHandler({ fetchImpl, env: ENV })(
@@ -220,7 +241,7 @@ describe('authenticated TTS gateway', () => {
     })(event())
     expect(result.statusCode).toBe(503)
     expect(responseJson(result)).toEqual({
-      error: { code: 'voice_deployment_mismatch' },
+      error: { code: 'gateway_disabled' },
     })
   })
 
@@ -353,6 +374,35 @@ describe('authenticated TTS gateway', () => {
     expect(result.statusCode).toBe(200)
     expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
     expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 125)
+  })
+
+  it('uses only the trusted resolved gate and exact effective daily quota', async () => {
+    const access = testAccess()
+    const disabled = await createTtsHandler({
+      fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
+      runtimeConfigurationResolver: runtimeResolver({ ttsEnabled: false, ttsDailyLimit: 19 }),
+    })(event())
+    expect(disabled.statusCode).toBe(503)
+    expect(access.requireEntitlement).not.toHaveBeenCalled()
+
+    const enabled = await createTtsHandler({
+      fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
+      runtimeConfigurationResolver: runtimeResolver({ ttsDailyLimit: 19 }),
+    })(event())
+    expect(enabled.statusCode).toBe(200)
+    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 19)
+  })
+
+  it('fails closed when the trusted resolver itself throws', async () => {
+    const access = testAccess()
+    const result = await createTtsHandler({
+      fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
+      runtimeConfigurationResolver: { resolve: vi.fn(async () => { throw new Error('SECRET') }) },
+    })(event())
+    expect(result.statusCode).toBe(503)
+    expect(responseJson(result)).toEqual({ error: { code: 'gateway_disabled' } })
+    expect(result.body).not.toContain('SECRET')
+    expect(access.requireEntitlement).not.toHaveBeenCalled()
   })
 
   it('returns usage_limit before the provider call when the ledger is at cap', async () => {

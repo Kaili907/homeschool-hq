@@ -13,29 +13,54 @@ const CONFIRMATION_ID = '20000000-0000-4000-8000-000000000101'
 const REQUEST_ID = '10000000-0000-4000-8000-000000000101'
 
 function setting(key: AdminConfigurationKey) {
-  const runtime = key.startsWith('runtime.')
+  const isRuntime = key.startsWith('runtime.')
   const quota = key.startsWith('quota.')
   const money = key.startsWith('cost.')
   const approved = key === 'ai.approved_tiers'
   return {
     key,
-    value: runtime ? false : key === 'quota.ai.requests_per_account_day' ? 50
+    value: isRuntime ? false : key === 'quota.ai.requests_per_account_day' ? 50
       : key === 'quota.tts.requests_per_account_day' ? 200
         : key === 'cost.warning.monthly_micros' ? '10000000'
           : key === 'cost.critical.monthly_micros' ? '25000000'
             : approved ? ['sonnet', 'haiku'] : 'sonnet',
     revision: '1', requiredCapability: 'configuration:manage',
-    protectiveCapability: runtime ? 'engines:operate' : null,
-    warningLevel: runtime || approved || key === 'cost.critical.monthly_micros' ? 'critical' : 'warning',
+    protectiveCapability: isRuntime ? 'engines:operate' : null,
+    warningLevel: isRuntime || approved || key === 'cost.critical.monthly_micros' ? 'critical' : 'warning',
     bounds: quota ? { minimum: '1', maximum: key.includes('.ai.') ? '200' : '1000' } : money ? { minimum: '1', maximum: '1000000000000' } : null,
     allowlist: key.startsWith('ai.') ? ['sonnet', 'haiku'] : null,
-    deploymentCeilingType: runtime ? 'boolean_enablement' : quota ? 'integer_maximum' : money ? 'integer_micros_maximum' : approved ? 'allowlist_subset' : 'allowlist_member',
+    deploymentCeilingType: isRuntime ? 'boolean_enablement' : quota ? 'integer_maximum' : money ? 'integer_micros_maximum' : approved ? 'allowlist_subset' : 'allowlist_member',
     registryVersion: 1, integrationStatus: 'pending_runtime_integration',
+    runtime: money ? {
+      classification: 'NOT_YET_ENFORCEABLE', effectiveValue: null,
+      enforcement: 'unavailable', resolution: 'unavailable',
+      reason: 'runtime_consumer_unavailable', trustedConsumer: null,
+      studyStatus: 'not_applicable',
+    } : {
+      classification: 'ENFORCEABLE_NOW',
+      effectiveValue: isRuntime ? false
+        : key === 'quota.ai.requests_per_account_day' ? 50
+          : key === 'quota.tts.requests_per_account_day' ? 100
+            : approved ? ['sonnet', 'haiku'] : 'sonnet',
+      enforcement: 'enforced',
+      resolution: key === 'quota.tts.requests_per_account_day' ? 'constraint' : 'saved',
+      reason: key === 'quota.tts.requests_per_account_day'
+        ? 'deployment_quota_ceiling' : 'saved_value_enforced',
+      trustedConsumer: key === 'runtime.tts.enabled'
+        || key === 'quota.tts.requests_per_account_day'
+        ? 'tts_gateway' : 'anthropic_gateway',
+      studyStatus: 'unavailable',
+    },
   }
 }
 
 function projection() {
-  return { schemaVersion: 2, integrationStatus: 'pending_runtime_integration', settings: ADMIN_CONFIGURATION_KEYS.map(setting) }
+  return {
+    schemaVersion: 2,
+    integrationStatus: 'pending_runtime_integration',
+    runtimeStatus: 'partial_runtime_enforcement',
+    settings: ADMIN_CONFIGURATION_KEYS.map(setting),
+  }
 }
 
 function response(status: number, body: unknown) {
@@ -101,6 +126,48 @@ describe('Admin configuration HTTP source', () => {
       settingKey: 'runtime.ai.enabled', expectedRevision: '1', newValue: true,
       reasonCode: 'operator.request',
     })).rejects.toEqual(new AdminConfigurationError('configuration_unavailable'))
+  })
+
+  it.each([
+    ['extra top-level role', (value: ReturnType<typeof projection>) => ({ ...value, role: 'owner' })],
+    ['extra top-level capabilities', (value: ReturnType<typeof projection>) => ({
+      ...value, capabilities: ['configuration:manage'],
+    })],
+    ['forged runtime status', (value: ReturnType<typeof projection>) => ({
+      ...value, runtimeStatus: 'complete_runtime_enforcement',
+    })],
+    ['extra enforced claim', (value: ReturnType<typeof projection>) => ({
+      ...value,
+      settings: value.settings.map((entry, index) => index === 0
+        ? { ...entry, runtime: { ...entry.runtime, enforced: true } }
+        : entry),
+    })],
+    ['forged effective value', (value: ReturnType<typeof projection>) => ({
+      ...value,
+      settings: value.settings.map((entry, index) => index === 0
+        ? { ...entry, runtime: { ...entry.runtime, effectiveValue: 'enabled' } }
+        : entry),
+    })],
+    ['forged trusted consumer', (value: ReturnType<typeof projection>) => ({
+      ...value,
+      settings: value.settings.map((entry, index) => index === 0
+        ? { ...entry, runtime: { ...entry.runtime, trustedConsumer: 'browser' } }
+        : entry),
+    })],
+    ['mismatched resolution reason', (value: ReturnType<typeof projection>) => ({
+      ...value,
+      settings: value.settings.map((entry, index) => index === 0
+        ? { ...entry, runtime: { ...entry.runtime, resolution: 'constraint' } }
+        : entry),
+    })],
+  ])('rejects %s in the runtime projection', async (_label, forge) => {
+    const source = createAdminConfigurationHttpSource({
+      getAccessToken: async () => 'access-token',
+      fetchImpl: async () => response(200, forge(projection())),
+    })
+    await expect(source.read()).rejects.toEqual(
+      new AdminConfigurationError('configuration_unavailable'),
+    )
   })
 
   it.each([

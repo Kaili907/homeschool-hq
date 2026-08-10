@@ -3,9 +3,9 @@ import {
   ADMIN_CONFIGURATION_INTEGRATION_STATUS,
   isAdminConfigurationKey,
   isAdminConfigurationValue,
-  sanitizeAdminConfigurationProjection,
+  sanitizeAdminRuntimeConfigurationProjection,
   type AdminConfigurationKey,
-  type AdminConfigurationProjection,
+  type AdminRuntimeConfigurationProjection,
   type AdminConfigurationValue,
 } from './configurationModel'
 import type { AdminConfigurationReasonCode } from './configurationUiModel'
@@ -87,7 +87,7 @@ export interface AdminConfigurationRequestOptions {
 }
 
 export interface AdminConfigurationSource {
-  read(options?: AdminConfigurationRequestOptions): Promise<AdminConfigurationProjection>
+  read(options?: AdminConfigurationRequestOptions): Promise<AdminRuntimeConfigurationProjection>
   preview(
     request: AdminConfigurationChangeRequest,
     options?: AdminConfigurationRequestOptions,
@@ -236,7 +236,7 @@ export function createAdminConfigurationHttpSource(
 
   return Object.freeze({
     async read(options = {}) {
-      const projection = sanitizeAdminConfigurationProjection(
+      const projection = sanitizeAdminRuntimeConfigurationProjection(
         await request(ADMIN_CONFIGURATION_ENDPOINT, 'GET', null, options),
       )
       if (!projection) throw new AdminConfigurationError('configuration_unavailable')

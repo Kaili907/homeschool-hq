@@ -3,7 +3,7 @@ import {
   ADMIN_CONFIGURATION_INTEGRATION_STATUS,
   isAdminConfigurationKey,
   isAdminConfigurationValue,
-  sanitizeAdminConfigurationProjection,
+  sanitizeSavedAdminConfigurationProjection,
 } from '../../../src/admin/configurationModel.ts'
 
 const SOURCE_TIMEOUT_MS = 5_000
@@ -160,7 +160,7 @@ export function createAdminConfigurationSource({
     async read() {
       return invoke(getReader(), 'academy_admin_read_configuration_v1', {
         p_required_capability: 'configuration:read',
-      }, sanitizeAdminConfigurationProjection)
+      }, sanitizeSavedAdminConfigurationProjection)
     },
     async preview(accessToken, request, confirmationDigest) {
       return invoke(getWriter(accessToken), 'academy_admin_preview_configuration_change_v1', {

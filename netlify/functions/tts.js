@@ -2,7 +2,6 @@
 
 import {
   GatewayError,
-  envFlagEnabled,
   errorResponse,
   hasQuery,
   isTimeoutError,
@@ -12,7 +11,11 @@ import {
   responseForError,
 } from './_shared/http.js'
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
-import { createGatewayAccess, dailyLimit } from './_shared/gateway-access.js'
+import { createGatewayAccess } from './_shared/gateway-access.js'
+import {
+  createRuntimeConfigurationResolver,
+  safeRuntimeConfigurationFallback,
+} from './_shared/admin-runtime-configuration.js'
 import {
   createGatewayOperationalTelemetry,
   gatewayErrorTerminal,
@@ -42,8 +45,6 @@ const CATALOG_PATHS = new Set(['/api/tts/catalog', '/.netlify/functions/tts/cata
 // Leaves room for base64 expansion beneath Netlify's buffered response ceiling.
 const MAX_AUDIO_BYTES = 4 * 1024 * 1024
 const TTS_TIMEOUT_MS = 30_000
-const DEFAULT_TTS_DAILY_LIMIT = 100
-
 export function createTtsHandler(overrides = {}) {
   return async (event, context) => {
     const path = event?.path ?? ''
@@ -66,11 +67,29 @@ export function createTtsHandler(overrides = {}) {
       if (!auth.ok) return auth.response
 
       const catalog = overrides.catalog ?? TTS_VOICE_CATALOG
+      const runtimeConfigurationResolver = overrides.runtimeConfigurationResolver
+        ?? createRuntimeConfigurationResolver({
+          env,
+          fetchImpl,
+          source: overrides.runtimeConfigurationSource,
+          serviceClient: overrides.configurationClient,
+        })
+      let runtimeConfiguration
+      try {
+        runtimeConfiguration = await runtimeConfigurationResolver.resolve({ catalog })
+      } catch {
+        runtimeConfiguration = safeRuntimeConfigurationFallback()
+      }
+      const publicCatalog = projectPublicTtsCatalog(
+        catalog,
+        env,
+        runtimeConfiguration.values.ttsEnabled,
+      )
       if (isCatalog) {
-        return jsonResponse(200, projectPublicTtsCatalog(catalog, env))
+        return jsonResponse(200, publicCatalog)
       }
 
-      if (!envFlagEnabled(env, 'ACADEMY_TTS_ENABLED')) {
+      if (!publicCatalog.synthesisEnabled) {
         return errorResponse(503, 'gateway_disabled')
       }
 
@@ -120,7 +139,7 @@ export function createTtsHandler(overrides = {}) {
       await access.consumeUsage(
         auth.user.id,
         'tts',
-        dailyLimit(env, 'ACADEMY_TTS_DAILY_LIMIT', DEFAULT_TTS_DAILY_LIMIT),
+        runtimeConfiguration.values.ttsDailyLimit,
       )
 
       let upstream

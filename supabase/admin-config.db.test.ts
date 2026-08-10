@@ -221,6 +221,16 @@ describe('ADMIN-14A durable configuration database core', () => {
     ))).rejects.toThrow(/READ_REQUIRED/)
   })
 
+  it('does not append audit events while trusted servers read or resolve configuration', async () => {
+    const database = databases[0]
+    await asRole(database, 'service_role', null, async () => {
+      await database.query(`select public.academy_admin_read_configuration_v1('configuration:read')`)
+      await database.query(`select public.academy_admin_read_configuration_v1('configuration:read')`)
+    })
+    expect((await database.query(`select count(*)::integer as count
+      from academy_private.admin_audit_events`)).rows).toEqual([{ count: 0 }])
+  })
+
   it('denies Admin, Viewer, and non-Admin mutation while allowing Owner preview', async () => {
     const database = databases[0]
     await expect(preview(database, { actor: ADMIN_ID })).rejects.toThrow(/MANAGE_REQUIRED/)

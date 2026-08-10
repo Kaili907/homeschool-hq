@@ -3,9 +3,12 @@ import {
   ADMIN_CONFIGURATION_KEYS,
   isAdminConfigurationValue,
   sanitizeAdminConfigurationProjection,
+  sanitizeAdminRuntimeConfigurationProjection,
 } from './configurationModel'
 
-function setting(key: (typeof ADMIN_CONFIGURATION_KEYS)[number]) {
+type ConfigurationKey = (typeof ADMIN_CONFIGURATION_KEYS)[number]
+
+function setting(key: ConfigurationKey) {
   const runtime = key.startsWith('runtime.')
   const quota = key.startsWith('quota.')
   const money = key.startsWith('cost.')
@@ -43,12 +46,50 @@ function projection() {
   }
 }
 
+function runtimeState(key: ConfigurationKey) {
+  const money = key.startsWith('cost.')
+  const tts = key === 'runtime.tts.enabled' || key === 'quota.tts.requests_per_account_day'
+  return money ? {
+    classification: 'NOT_YET_ENFORCEABLE',
+    effectiveValue: null,
+    enforcement: 'unavailable',
+    resolution: 'unavailable',
+    reason: 'runtime_consumer_unavailable',
+    trustedConsumer: null,
+    studyStatus: 'not_applicable',
+  } : {
+    classification: 'ENFORCEABLE_NOW',
+    effectiveValue: key.startsWith('runtime.') ? false
+      : key === 'quota.ai.requests_per_account_day' ? 50
+        : key === 'quota.tts.requests_per_account_day' ? 100
+          : key === 'ai.approved_tiers' ? ['sonnet', 'haiku'] : 'sonnet',
+    enforcement: 'enforced',
+    resolution: 'saved',
+    reason: 'saved_value_enforced',
+    trustedConsumer: tts ? 'tts_gateway' : 'anthropic_gateway',
+    studyStatus: 'unavailable',
+  }
+}
+
+function runtimeProjection() {
+  return {
+    ...projection(),
+    runtimeStatus: 'partial_runtime_enforcement',
+    settings: ADMIN_CONFIGURATION_KEYS.map((key) => ({
+      ...setting(key),
+      runtime: runtimeState(key),
+    })),
+  }
+}
+
 describe('Admin configuration browser model', () => {
-  it('accepts only the exact eight-key sanitized projection', () => {
+  it('preserves the exact saved eight-key projection contract', () => {
     const model = sanitizeAdminConfigurationProjection(projection())
+    expect(model?.integrationStatus).toBe('pending_runtime_integration')
     expect(model?.settings.map((item) => item.key)).toEqual(ADMIN_CONFIGURATION_KEYS)
     expect(model?.settings.every((item) => item.integrationStatus === 'pending_runtime_integration'))
       .toBe(true)
+    expect(sanitizeAdminConfigurationProjection(runtimeProjection())).toBeNull()
   })
 
   it.each([
@@ -66,7 +107,7 @@ describe('Admin configuration browser model', () => {
     expect(isAdminConfigurationValue(key, value)).toBe(expected)
   })
 
-  it('rejects extra secret-bearing fields, missing keys, and wrong value kinds', () => {
+  it('rejects secret-bearing fields, missing settings, and wrong saved value kinds', () => {
     const secret = projection()
     secret.settings[0] = { ...secret.settings[0], providerSecret: 'do-not-expose' } as any
     expect(sanitizeAdminConfigurationProjection(secret)).toBeNull()
@@ -78,5 +119,34 @@ describe('Admin configuration browser model', () => {
     const wrongMoney = projection()
     wrongMoney.settings[4] = { ...wrongMoney.settings[4], value: 10_000_000 }
     expect(sanitizeAdminConfigurationProjection(wrongMoney)).toBeNull()
+  })
+
+  it('accepts and freezes the separate strict runtime projection', () => {
+    const model = sanitizeAdminRuntimeConfigurationProjection(runtimeProjection())
+    expect(model?.integrationStatus).toBe('pending_runtime_integration')
+    expect(model?.runtimeStatus).toBe('partial_runtime_enforcement')
+    expect(model?.settings.filter((item) => item.runtime.studyStatus === 'unavailable'))
+      .toHaveLength(6)
+    expect(model?.settings.filter((item) => item.runtime.studyStatus === 'not_applicable'))
+      .toHaveLength(2)
+    expect(Object.isFrozen(model)).toBe(true)
+    expect(Object.isFrozen(model?.settings)).toBe(true)
+    expect(Object.isFrozen(model?.settings[6].runtime.effectiveValue)).toBe(true)
+  })
+
+  it.each([
+    ['wrong runtime status', (value: any) => { value.runtimeStatus = 'runtime_enforcement_partial' }],
+    ['extra top-level field', (value: any) => { value.providerSecret = 'do-not-expose' }],
+    ['extra setting field', (value: any) => { value.settings[0].providerSecret = 'do-not-expose' }],
+    ['extra runtime field', (value: any) => { value.settings[0].runtime.forged = true }],
+    ['forged effective value', (value: any) => { value.settings[2].runtime.effectiveValue = 201 }],
+    ['unknown reason', (value: any) => { value.settings[0].runtime.reason = 'browser_claimed_active' }],
+    ['wrong trusted consumer', (value: any) => { value.settings[0].runtime.trustedConsumer = 'tts_gateway' }],
+    ['wrong Study status', (value: any) => { value.settings[0].runtime.studyStatus = 'not_applicable' }],
+    ['unavailable cost claimed enforced', (value: any) => { value.settings[4].runtime.enforcement = 'enforced' }],
+  ])('rejects %s in a browser runtime response', (_label, forge) => {
+    const candidate = runtimeProjection()
+    forge(candidate)
+    expect(sanitizeAdminRuntimeConfigurationProjection(candidate)).toBeNull()
   })
 })

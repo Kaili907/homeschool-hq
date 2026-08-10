@@ -37,6 +37,50 @@ describe('authorized Admin System Health endpoint', () => {
     })
   })
 
+  it('reports trusted saved-off AI/TTS runtime as disabled even when deployment gates are on', async () => {
+    const source = { list: vi.fn().mockResolvedValue({ events: [], rejectedRows: 0, sourceTruncated: false }) }
+    const runtimeConfigurationResolver = {
+      resolve: vi.fn(async () => ({ values: { aiEnabled: false, ttsEnabled: false } })),
+    }
+    const handler = createAdminHealthHandler({
+      authorization: { require: vi.fn().mockResolvedValue(authorized()) },
+      source,
+      env: {
+        ACADEMY_STUDY_ENABLED: 'true', ACADEMY_AI_ENABLED: 'true', ACADEMY_TTS_ENABLED: 'true',
+      },
+      runtimeConfigurationResolver,
+      now: () => NOW,
+    })
+    const body = JSON.parse((await handler(request())).body)
+    expect(runtimeConfigurationResolver.resolve).toHaveBeenCalledOnce()
+    expect(body.engines).toEqual(expect.arrayContaining([
+      expect.objectContaining({ engineId: 'gateway', health: 'disabled' }),
+      expect.objectContaining({ engineId: 'tts', health: 'disabled' }),
+    ]))
+  })
+
+  it('reports AI/TTS disabled when an injected runtime resolver throws', async () => {
+    const source = { list: vi.fn().mockResolvedValue({ events: [], rejectedRows: 0, sourceTruncated: false }) }
+    const handler = createAdminHealthHandler({
+      authorization: { require: vi.fn().mockResolvedValue(authorized()) },
+      source,
+      env: { ACADEMY_STUDY_ENABLED: 'true' },
+      runtimeConfigurationResolver: {
+        resolve: vi.fn(async () => { throw new Error('SECRET configuration detail') }),
+      },
+      now: () => NOW,
+    })
+    const response = await handler(request())
+    expect(response.statusCode).toBe(200)
+    expect(JSON.parse(response.body).engines).toEqual(expect.arrayContaining([
+      expect.objectContaining({ engineId: 'gateway', health: 'disabled' }),
+      expect.objectContaining({ engineId: 'tts', health: 'disabled' }),
+      expect.objectContaining({ engineId: 'study', health: 'unknown' }),
+    ]))
+    expect(response.body).not.toContain('SECRET')
+    expect(source.list).toHaveBeenCalledOnce()
+  })
+
   it.each([
     ['unauthenticated', 401],
     ['student', 403],

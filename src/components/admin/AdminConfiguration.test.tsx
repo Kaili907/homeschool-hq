@@ -2,7 +2,11 @@ import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it, vi } from 'vitest'
 import type { AdminConfigurationSource, AdminConfigurationPreview } from '../../admin/configurationHttpSource'
-import { ADMIN_CONFIGURATION_KEYS, type AdminConfigurationKey, type AdminConfigurationProjection } from '../../admin/configurationModel'
+import {
+  ADMIN_CONFIGURATION_KEYS,
+  type AdminConfigurationKey,
+  type AdminRuntimeConfigurationProjection,
+} from '../../admin/configurationModel'
 import type { PublicVoiceCatalog } from '../../tutor/voiceCatalog'
 import {
   AdminConfiguration,
@@ -11,29 +15,58 @@ import {
 } from './AdminConfiguration'
 
 function setting(key: AdminConfigurationKey) {
-  const runtime = key.startsWith('runtime.')
+  const isRuntime = key.startsWith('runtime.')
   const quota = key.startsWith('quota.')
   const money = key.startsWith('cost.')
   const approved = key === 'ai.approved_tiers'
   return {
     key,
-    value: runtime ? false : key === 'quota.ai.requests_per_account_day' ? 50
+    value: isRuntime ? false : key === 'quota.ai.requests_per_account_day' ? 50
       : key === 'quota.tts.requests_per_account_day' ? 200
         : key === 'cost.warning.monthly_micros' ? '10000000'
           : key === 'cost.critical.monthly_micros' ? '25000000'
             : approved ? ['sonnet', 'haiku'] as const : 'sonnet' as const,
     revision: '1', requiredCapability: 'configuration:manage' as const,
-    protectiveCapability: runtime ? 'engines:operate' as const : null,
-    warningLevel: runtime || approved || key === 'cost.critical.monthly_micros' ? 'critical' as const : 'warning' as const,
+    protectiveCapability: isRuntime ? 'engines:operate' as const : null,
+    warningLevel: isRuntime || approved || key === 'cost.critical.monthly_micros' ? 'critical' as const : 'warning' as const,
     bounds: quota ? { minimum: '1', maximum: key.includes('.ai.') ? '200' : '1000' } : money ? { minimum: '1', maximum: '1000000000000' } : null,
     allowlist: key.startsWith('ai.') ? ['sonnet', 'haiku'] as const : null,
-    deploymentCeilingType: runtime ? 'boolean_enablement' as const : quota ? 'integer_maximum' as const : money ? 'integer_micros_maximum' as const : approved ? 'allowlist_subset' as const : 'allowlist_member' as const,
+    deploymentCeilingType: isRuntime ? 'boolean_enablement' as const : quota ? 'integer_maximum' as const : money ? 'integer_micros_maximum' as const : approved ? 'allowlist_subset' as const : 'allowlist_member' as const,
     registryVersion: 1 as const, integrationStatus: 'pending_runtime_integration' as const,
+    runtime: money ? {
+      classification: 'NOT_YET_ENFORCEABLE' as const,
+      effectiveValue: null,
+      enforcement: 'unavailable' as const,
+      resolution: 'unavailable' as const,
+      reason: 'runtime_consumer_unavailable' as const,
+      trustedConsumer: null,
+      studyStatus: 'not_applicable' as const,
+    } : {
+      classification: 'ENFORCEABLE_NOW' as const,
+      effectiveValue: isRuntime ? false
+        : key === 'quota.ai.requests_per_account_day' ? 50
+          : key === 'quota.tts.requests_per_account_day' ? 100
+            : approved ? ['sonnet', 'haiku'] as const : 'sonnet' as const,
+      enforcement: 'enforced' as const,
+      resolution: key === 'runtime.tts.enabled' ? 'fallback' as const
+        : key === 'quota.tts.requests_per_account_day' ? 'constraint' as const
+          : key === 'ai.approved_tiers' ? 'error' as const : 'saved' as const,
+      reason: key === 'runtime.tts.enabled' ? 'browser_speech_fallback' as const
+        : key === 'quota.tts.requests_per_account_day' ? 'deployment_quota_ceiling' as const
+          : key === 'ai.approved_tiers' ? 'configuration_resolution_failed' as const
+            : 'saved_value_enforced' as const,
+      trustedConsumer: key === 'runtime.tts.enabled'
+        || key === 'quota.tts.requests_per_account_day'
+        ? 'tts_gateway' as const : 'anthropic_gateway' as const,
+      studyStatus: 'unavailable' as const,
+    },
   }
 }
 
-const PROJECTION: AdminConfigurationProjection = {
-  schemaVersion: 2, integrationStatus: 'pending_runtime_integration',
+const PROJECTION: AdminRuntimeConfigurationProjection = {
+  schemaVersion: 2,
+  integrationStatus: 'pending_runtime_integration',
+  runtimeStatus: 'partial_runtime_enforcement',
   settings: ADMIN_CONFIGURATION_KEYS.map(setting),
 }
 
@@ -65,10 +98,18 @@ function render(capabilities: readonly ('configuration:read' | 'configuration:ma
 describe('Admin Configuration page', () => {
   it('gives a viewer current stored values and source/status without mutation controls', () => {
     const markup = render(['configuration:read'])
-    expect(markup).toContain('Stored policy is not active runtime policy')
+    expect(markup).toContain('Runtime enforcement is partially available')
     expect(markup).toContain('Saved configuration</dt><dd>Durable Admin registry')
-    expect(markup).toContain('Runtime effective / enforced state</dt><dd>Unavailable')
-    expect(markup).toContain('Saved — runtime integration pending')
+    expect(markup).toContain('Runtime effective / enforced state</dt><dd>6 enforced · 2 unavailable')
+    expect(markup).toContain('Runtime effective value</dt><dd>100')
+    expect(markup).toContain('Resolution</dt><dd>Saved')
+    expect(markup).toContain('Constraint — deployment quota ceiling (saved/deployment conflict)')
+    expect(markup).toContain('Fallback — browser speech fallback')
+    expect(markup).toContain('Error — configuration resolution failed')
+    expect(markup).toContain('Trusted consumer</dt><dd>Anthropic gateway')
+    expect(markup).toContain('Trusted consumer</dt><dd>TTS gateway')
+    expect(markup).toContain('Study effective settings</dt><dd>Unavailable — no Study effective-settings authority')
+    expect(markup).toContain('Not applicable — runtime enforcement unavailable')
     expect(markup).toContain('Read only')
     expect(markup).not.toContain('<button')
     expect(markup).not.toContain('<form')
@@ -111,7 +152,7 @@ describe('Admin Configuration page', () => {
       learnerConversation: 'PRIVATE_TUTOR_CONVERSATION',
       settings: PROJECTION.settings.map((entry, index) => index === 0
         ? { ...entry, rawProviderObject: { token: 'SECRET_TOKEN' } } : entry),
-    } as unknown as AdminConfigurationProjection
+    } as unknown as AdminRuntimeConfigurationProjection
     const markup = renderToStaticMarkup(<AdminConfiguration
       authorization={{ capabilities: ['configuration:read'] }}
       state={{ status: 'ready', projection: unsafeProjection }}

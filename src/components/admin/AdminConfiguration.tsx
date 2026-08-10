@@ -13,6 +13,8 @@ import {
   type AdminConfigurationKey,
   type AdminConfigurationProjection,
   type AdminConfigurationSetting,
+  type AdminRuntimeConfigurationProjection,
+  type AdminRuntimeConfigurationSetting,
 } from '../../admin/configurationModel'
 import {
   ADMIN_CONFIGURATION_REASON_OPTIONS,
@@ -29,7 +31,7 @@ import './admin-configuration.css'
 export type AdminConfigurationReadState =
   | { readonly status: 'loading' }
   | { readonly status: 'unauthorized' }
-  | { readonly status: 'ready'; readonly projection: AdminConfigurationProjection }
+  | { readonly status: 'ready'; readonly projection: AdminRuntimeConfigurationProjection }
   | { readonly status: 'error'; readonly code: 'configuration_timeout' | 'configuration_unavailable' }
 
 export type AdminVoiceCatalogReadState =
@@ -183,10 +185,10 @@ const SETTING_PRESENTATION: Readonly<Record<AdminConfigurationKey, {
 }
 
 const GROUPS = [
-  ['runtime', 'Runtime controls', 'Desired enablement ceilings; runtime enforcement is not integrated.'],
-  ['quota', 'Daily quotas', 'Stored per-account request ceilings.'],
-  ['cost', 'Cost thresholds', 'Stored warning policy; values cross the boundary as exact IntegerMicros.'],
-  ['ai', 'AI model policy', 'Logical Academy tiers only; provider model identifiers are not exposed.'],
+  ['runtime', 'Runtime controls', 'Saved policy constrained by deployment and subsystem safety.'],
+  ['quota', 'Daily quotas', 'Authoritative per-account gateway request ceilings.'],
+  ['cost', 'Cost thresholds', 'Saved exactly; no authoritative alert consumer exists yet.'],
+  ['ai', 'AI model policy', 'Server-enforced logical tiers only; provider model identifiers stay private.'],
 ] as const
 
 export interface AdminConfigurationProps {
@@ -243,6 +245,15 @@ export function AdminConfiguration({
   }
 
   const projection = state.projection
+  const enforcementCounts = projection.settings.reduce((counts, setting) => ({
+    ...counts,
+    [setting.runtime.enforcement]: counts[setting.runtime.enforcement] + 1,
+  }), { enforced: 0, unavailable: 0, error: 0 })
+  const enforcementSummary = [
+    `${enforcementCounts.enforced} enforced`,
+    `${enforcementCounts.unavailable} unavailable`,
+    ...(enforcementCounts.error > 0 ? [`${enforcementCounts.error} error`] : []),
+  ].join(' · ')
 
   async function previewChange(editing: EditingState) {
     const parsed = parseAdminConfigurationDraft(editing.setting.key, editing.draft, projection)
@@ -306,7 +317,7 @@ export function AdminConfiguration({
   }
 
   const statusMessage = editor.status === 'success'
-    ? `Saved configuration for ${SETTING_PRESENTATION[editor.result.settingKey].title} at revision ${editor.result.revision}. Runtime effective and enforced state remains unavailable.`
+    ? `Saved configuration for ${SETTING_PRESENTATION[editor.result.settingKey].title} at revision ${editor.result.revision}. Trusted runtime-effective state was re-read from the server.`
     : editor.status === 'confirming' && editor.operation === 'saving'
       ? 'Saving the confirmed configuration change.'
       : editor.status === 'confirming' && editor.operation === 'error' && editor.errorCode
@@ -319,15 +330,16 @@ export function AdminConfiguration({
       <section className="admin-config-notice" role="status" aria-labelledby="configuration-status-title">
         <span aria-hidden="true">!</span>
         <div>
-          <h2 id="configuration-status-title">Stored policy is not active runtime policy</h2>
-          <p>These values come from the durable Admin configuration registry. Runtime integration is pending, so effective runtime state is unavailable and a successful save does not change live behavior.</p>
+          <h2 id="configuration-status-title">Runtime enforcement is partially available</h2>
+          <p>Six settings are resolved and consumed by the trusted AI/TTS gateways. Cost thresholds remain saved-only until an authoritative alert consumer exists; Study guardian and safety policy is not bypassed.</p>
         </div>
       </section>
 
       <dl className="admin-config-summary" aria-label="Configuration authority summary">
         <div><dt>Saved configuration</dt><dd>Durable Admin registry</dd></div>
-        <div><dt>Runtime effective / enforced state</dt><dd>Unavailable</dd></div>
-        <div><dt>Integration</dt><dd>Pending runtime integration</dd></div>
+        <div><dt>Runtime effective / enforced state</dt><dd>{enforcementSummary}</dd></div>
+        <div><dt>Integration</dt><dd>{projection.runtimeStatus === 'partial_runtime_enforcement'
+          ? 'Partial runtime enforcement' : 'Unavailable'}</dd></div>
         <div><dt>Access</dt><dd>{canManage ? 'Manage capability confirmed' : 'Read only'}</dd></div>
       </dl>
 
@@ -381,8 +393,8 @@ function ConfigurationSettingCard({
   onCommit,
   onReload,
 }: {
-  readonly setting: AdminConfigurationSetting
-  readonly projection: AdminConfigurationProjection
+  readonly setting: AdminRuntimeConfigurationSetting
+  readonly projection: AdminRuntimeConfigurationProjection
   readonly canManage: boolean
   readonly editor: AdminConfigurationEditorState
   readonly dispatch: (action: AdminConfigurationEditorAction) => void
@@ -405,15 +417,22 @@ function ConfigurationSettingCard({
       </div>
       <dl className="admin-config-facts">
         <div><dt>Saved configuration</dt><dd>{formatAdminConfigurationValue(setting.key, setting.value)}</dd></div>
-        <div><dt>Runtime effective / enforced state</dt><dd>Unavailable</dd></div>
+        <div><dt>Runtime effective value</dt><dd>{setting.runtime.effectiveValue === null
+          ? 'Unavailable'
+          : formatAdminConfigurationValue(setting.key, setting.runtime.effectiveValue)}</dd></div>
+        <div><dt>Classification</dt><dd>{setting.runtime.classification}</dd></div>
+        <div><dt>Enforcement</dt><dd>{runtimeEnforcementLabel(setting)}</dd></div>
+        <div><dt>Resolution</dt><dd>{runtimeResolutionLabel(setting)}</dd></div>
+        <div><dt>Reason</dt><dd>{runtimeReasonLabel(setting)}</dd></div>
+        <div><dt>Trusted consumer</dt><dd>{trustedConsumerLabel(setting)}</dd></div>
+        <div><dt>Study effective settings</dt><dd>{studyStatusLabel(setting)}</dd></div>
         <div><dt>Source</dt><dd>Registry revision {setting.revision}</dd></div>
-        <div><dt>Status</dt><dd>Saved — runtime integration pending</dd></div>
       </dl>
 
       {success && (
         <div className="admin-config-success" role="status">
           <strong>Saved configuration at revision {editor.result.revision}</strong>
-          <span>Saved — runtime integration pending. The authoritative audit was committed atomically; runtime effective and enforced state remains unavailable.</span>
+          <span>The authoritative audit was committed atomically. The runtime-effective state shown above was re-read from the trusted server; no browser-submitted status was assumed.</span>
         </div>
       )}
 
@@ -472,7 +491,7 @@ function ConfigurationSettingCard({
           </dl>
           <p className="admin-config-confirmation__warning">
             {editor.preview.warningLevel === 'critical' ? 'Critical change. ' : ''}
-            Saving stores and audits this desired value; it does not activate runtime enforcement.
+            Saving stores and audits this value. The trusted resolver will apply deployment and stronger subsystem constraints before a runtime consumer uses it.
           </p>
           {editor.operation === 'error' && editor.errorCode && (
             <div className="admin-config-error" role="alert">
@@ -666,6 +685,45 @@ function VoiceCatalogCard({ state }: { readonly state: AdminVoiceCatalogReadStat
 
 function voiceIsOperational(voice: PublicVoiceCatalogEntry): boolean {
   return voice.status === 'active' && voice.deploymentAvailable
+}
+
+function runtimeEnforcementLabel(setting: AdminRuntimeConfigurationSetting): string {
+  if (setting.runtime.enforcement === 'enforced') return 'Enforced'
+  if (setting.runtime.enforcement === 'error') return 'Error'
+  return 'Unavailable'
+}
+
+function runtimeResolutionLabel(setting: AdminRuntimeConfigurationSetting): string {
+  const { resolution, reason } = setting.runtime
+  if (resolution === 'saved') return 'Saved'
+  if (resolution === 'constraint') {
+    return reason === 'deployment_disabled'
+      ? 'Constraint — deployment disabled (saved/deployment conflict)'
+      : 'Constraint — deployment quota ceiling (saved/deployment conflict)'
+  }
+  if (resolution === 'fallback') {
+    if (reason === 'browser_speech_fallback') return 'Fallback — browser speech fallback'
+    if (reason === 'safe_fallback_quota_ceiling') return 'Fallback — safe quota ceiling'
+    return 'Fallback — safe disabled state'
+  }
+  if (resolution === 'error') return 'Error — configuration resolution failed'
+  return 'Unavailable — runtime consumer unavailable'
+}
+
+function runtimeReasonLabel(setting: AdminRuntimeConfigurationSetting): string {
+  return setting.runtime.reason.split('_').join(' ')
+}
+
+function trustedConsumerLabel(setting: AdminRuntimeConfigurationSetting): string {
+  if (setting.runtime.trustedConsumer === 'anthropic_gateway') return 'Anthropic gateway'
+  if (setting.runtime.trustedConsumer === 'tts_gateway') return 'TTS gateway'
+  return 'Unavailable'
+}
+
+function studyStatusLabel(setting: AdminRuntimeConfigurationSetting): string {
+  return setting.runtime.studyStatus === 'unavailable'
+    ? 'Unavailable — no Study effective-settings authority'
+    : 'Not applicable — runtime enforcement unavailable'
 }
 
 function voiceStatusLabel(voice: PublicVoiceCatalogEntry): string {
