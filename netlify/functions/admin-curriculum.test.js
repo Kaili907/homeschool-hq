@@ -19,27 +19,48 @@ function sources() {
       details: vi.fn().mockResolvedValue({ schemaVersion: 1, version: '1.0.0' }),
       productionPointer: vi.fn().mockResolvedValue({ releaseVersion: '1.0.0', registryOnly: true }),
     },
+    activation: {
+      read: vi.fn().mockResolvedValue({
+        schemaVersion: 1,
+        pointer: { releaseVersion: '1.0.0', revision: 1 },
+        candidates: [],
+        history: [],
+      }),
+    },
   }
 }
 
 describe('admin curriculum handler', () => {
   it('authorizes filesystem and immutable registry reads independently on the server', async () => {
     const authorization = { require: vi.fn().mockResolvedValue({ ok: true, principal }) }
-    const { source, registry } = sources()
-    const handler = createAdminCurriculumHandler({ authorization, source, registry })
+    const { source, registry, activation } = sources()
+    const handler = createAdminCurriculumHandler({ authorization, source, registry, activation })
 
     expect((await handler(event('/api/admin/curriculum/catalog'))).statusCode).toBe(200)
     expect((await handler(event('/api/admin/curriculum/lessons/ma-g5-mathematics-u01-l01'))).statusCode).toBe(200)
     expect((await handler(event('/api/admin/curriculum/validation'))).statusCode).toBe(200)
+    const history = await handler(event('/api/admin/curriculum/history'))
+    expect(history.statusCode).toBe(200)
     expect((await handler(event('/api/admin/curriculum/releases'))).statusCode).toBe(200)
     expect((await handler(event('/api/admin/curriculum/releases/1.0.0'))).statusCode).toBe(200)
     expect((await handler(event('/api/admin/curriculum/production-pointer'))).statusCode).toBe(200)
-    expect(authorization.require).toHaveBeenCalledTimes(6)
+    expect(authorization.require).toHaveBeenCalledTimes(7)
     for (const call of authorization.require.mock.calls) expect(call[1]).toBe('curriculum:read')
     expect(source.loadCatalog).toHaveBeenCalledOnce()
     expect(source.loadLesson).toHaveBeenCalledWith('ma-g5-mathematics-u01-l01')
     expect(source.loadValidationEvidence).toHaveBeenCalledOnce()
-    expect(registry.list).toHaveBeenCalledOnce()
+    expect(registry.list).toHaveBeenCalledTimes(2)
+    expect(activation.read).toHaveBeenCalledWith(principal.userId)
+    expect(JSON.parse(history.body)).toEqual({
+      schemaVersion: 1,
+      releaseRegistry: { schemaVersion: 1, releases: [] },
+      activation: {
+        schemaVersion: 1,
+        pointer: { releaseVersion: '1.0.0', revision: 1 },
+        candidates: [],
+        history: [],
+      },
+    })
     expect(registry.details).toHaveBeenCalledWith('1.0.0')
     expect(registry.productionPointer).toHaveBeenCalledOnce()
   })
@@ -60,16 +81,19 @@ describe('admin curriculum handler', () => {
   })
 
   it('fails closed before touching curriculum when authorization is denied', async () => {
-    const { source, registry } = sources()
+    const { source, registry, activation } = sources()
     const handler = createAdminCurriculumHandler({
       authorization: { require: vi.fn().mockResolvedValue({ ok: false, response: { statusCode: 403, body: '{}' } }) },
       source,
       registry,
+      activation,
     })
     expect((await handler(event('/api/admin/curriculum/catalog'))).statusCode).toBe(403)
     expect((await handler(event('/api/admin/curriculum/releases'))).statusCode).toBe(403)
+    expect((await handler(event('/api/admin/curriculum/history'))).statusCode).toBe(403)
     expect(source.loadCatalog).not.toHaveBeenCalled()
     expect(registry.list).not.toHaveBeenCalled()
+    expect(activation.read).not.toHaveBeenCalled()
   })
 
   it('permits only GET, no query input, and vetted immutable references', async () => {
@@ -94,6 +118,23 @@ describe('admin curriculum handler', () => {
     const response = await handler(event('/api/admin/curriculum/catalog'))
     expect(response.statusCode).toBe(503)
     expect(response.body).not.toContain('private')
+  })
+
+  it('keeps release history GET-only and returns no raw registry or pointer errors', async () => {
+    const { source, registry, activation } = sources()
+    activation.read.mockRejectedValue(Object.assign(new Error('private actor and pointer detail'), {
+      code: 'unavailable',
+    }))
+    const handler = createAdminCurriculumHandler({
+      authorization: { require: vi.fn().mockResolvedValue({ ok: true, principal }) },
+      source,
+      registry,
+      activation,
+    })
+    expect((await handler(event('/api/admin/curriculum/history', 'POST'))).statusCode).toBe(405)
+    const response = await handler(event('/api/admin/curriculum/history'))
+    expect(response.statusCode).toBe(503)
+    expect(response.body).not.toMatch(/private|actor|pointer detail/i)
   })
 
   it.each(['student', 'guardian'])('denies a %s identity with no active Admin assignment', async (identity) => {

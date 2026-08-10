@@ -281,6 +281,7 @@ describe('Curriculum Studio shell', () => {
     const markup = renderToStaticMarkup(<CurriculumWorkflowNav current="studio" />)
     expect(markup).toContain('href="/academy/admin/curriculum"')
     expect(markup).toContain('href="/academy/admin/curriculum/studio"')
+    expect(markup).toContain('href="/academy/admin/curriculum/history"')
     expect(markup).toContain('href="/academy/admin/curriculum/validation"')
     expect(markup).toContain('href="/academy/admin/curriculum/preview"')
     expect(markup).toContain('aria-current="page"')
