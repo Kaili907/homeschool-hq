@@ -194,7 +194,9 @@ export function AdminConsoleRoute() {
       return
     }
     const controller = new AbortController()
-    setAuditReadState({ status: 'loading' })
+    setAuditReadState((current) => current.status === 'loading-page'
+      ? current
+      : { status: 'loading' })
     void readAdminAuditPage(auditFilters, auditCursor, { signal: controller.signal }).then(
       (page) => {
         if (controller.signal.aborted) return
@@ -211,7 +213,10 @@ export function AdminConsoleRoute() {
         setAuditReadState({
           status: 'error',
           code: error instanceof AdminAuditReadError && error.code === 'audit_timeout'
-            ? 'audit_timeout' : 'audit_unavailable',
+            ? 'audit_timeout'
+            : error instanceof AdminAuditReadError && error.code === 'audit_malformed'
+              ? 'audit_malformed'
+              : 'audit_unavailable',
         })
       },
     )
@@ -353,15 +358,22 @@ export function AdminConsoleRoute() {
   }
 
   function applyAuditFilters(filters: AdminAuditFilters) {
+    setAuditReadState({ status: 'loading' })
     setAuditFilters(filters)
     setAuditCursors([null])
   }
 
   function showOlderAuditEvents(cursor: string) {
+    setAuditReadState((current) => current.status === 'ready'
+      ? { status: 'loading-page', page: current.page, direction: 'older' }
+      : current)
     setAuditCursors((current) => [...current, cursor])
   }
 
   function showNewerAuditEvents() {
+    setAuditReadState((current) => current.status === 'ready'
+      ? { status: 'loading-page', page: current.page, direction: 'newer' }
+      : current)
     setAuditCursors((current) => current.length > 1 ? current.slice(0, -1) : current)
   }
 

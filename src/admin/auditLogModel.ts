@@ -25,6 +25,11 @@ export interface AdminAuditFilters {
   readonly action?: AdminAuditAction
   readonly resourceType?: AdminAuditResourceType
   readonly resourceRef?: string
+  readonly actorRole?: AdminRole
+  readonly occurredFrom?: string
+  readonly occurredTo?: string
+  readonly correlationId?: string
+  readonly reasonCode?: string
   readonly limit: number
 }
 
@@ -35,7 +40,15 @@ export interface AdminAuditPage {
 
 export type AdminAuditReadState =
   | { readonly status: 'loading' }
+  | {
+      readonly status: 'loading-page'
+      readonly page: AdminAuditPage
+      readonly direction: 'older' | 'newer'
+    }
   | { readonly status: 'unauthorized' }
   | { readonly status: 'empty' }
   | { readonly status: 'ready'; readonly page: AdminAuditPage }
-  | { readonly status: 'error'; readonly code: 'audit_unavailable' | 'audit_timeout' }
+  | {
+      readonly status: 'error'
+      readonly code: 'audit_unavailable' | 'audit_timeout' | 'audit_malformed'
+    }

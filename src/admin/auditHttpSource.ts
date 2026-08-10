@@ -18,10 +18,19 @@ const REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$/
 const TOKEN = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
 
 export class AdminAuditReadError extends Error {
-  constructor(readonly code: 'audit_unauthorized' | 'audit_unavailable' | 'audit_timeout' | 'invalid_query') {
+  constructor(readonly code:
+    | 'audit_unauthorized'
+    | 'audit_unavailable'
+    | 'audit_timeout'
+    | 'audit_malformed'
+    | 'invalid_query') {
     super(code)
     this.name = 'AdminAuditReadError'
   }
+}
+
+function malformed(): never {
+  throw new AdminAuditReadError('audit_malformed')
 }
 
 interface ReadOptions {
@@ -33,11 +42,11 @@ interface ReadOptions {
 
 function safeValue(value: unknown): AdminAuditLogEvent['previousValue'] {
   if (value === null) return null
-  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new AdminAuditReadError('audit_unavailable')
+  if (!value || typeof value !== 'object' || Array.isArray(value)) malformed()
   const source = value as Record<string, unknown>
   const keys = Object.keys(source)
   if (keys.length < 1 || keys.length > 8 || keys.some((key) => !VALUE_KEYS.has(key))) {
-    throw new AdminAuditReadError('audit_unavailable')
+    malformed()
   }
   const result: Record<string, string | number | boolean | null | readonly (string | number | boolean | null)[]> = {}
   for (const key of keys) {
@@ -49,14 +58,14 @@ function safeValue(value: unknown): AdminAuditLogEvent['previousValue'] {
       return typeof item !== 'string' || item.length > 128 || !TOKEN.test(item)
         || item.includes('://')
         || /(?:^|[._:/-])(?:sk|pk|secret|credential|bearer|token|password|jwt|api.?key)(?:[._:/-]|$)|^eyj/i.test(item)
-    })) throw new AdminAuditReadError('audit_unavailable')
+    })) malformed()
     result[key] = candidate as typeof result[string]
   }
   return Object.freeze(result)
 }
 
 function safeEvent(value: unknown): AdminAuditLogEvent {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new AdminAuditReadError('audit_unavailable')
+  if (!value || typeof value !== 'object' || Array.isArray(value)) malformed()
   const row = value as Record<string, unknown>
   if (
     row.schemaVersion !== 2 || typeof row.eventId !== 'string' || !UUID.test(row.eventId)
@@ -69,7 +78,7 @@ function safeEvent(value: unknown): AdminAuditLogEvent {
     || (row.resourceRevision !== null && (typeof row.resourceRevision !== 'string' || !TOKEN.test(row.resourceRevision)))
     || (row.reasonCode !== null && (typeof row.reasonCode !== 'string' || !TOKEN.test(row.reasonCode)))
     || typeof row.correlationId !== 'string' || !UUID.test(row.correlationId)
-  ) throw new AdminAuditReadError('audit_unavailable')
+  ) malformed()
   return Object.freeze({
     schemaVersion: 2,
     eventId: row.eventId.toLowerCase(),
@@ -88,12 +97,12 @@ function safeEvent(value: unknown): AdminAuditLogEvent {
 }
 
 function safePage(value: unknown): AdminAuditPage {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new AdminAuditReadError('audit_unavailable')
+  if (!value || typeof value !== 'object' || Array.isArray(value)) malformed()
   const source = value as Record<string, unknown>
   if (
     source.schemaVersion !== 2 || !Array.isArray(source.events) || source.events.length > 100
     || (source.nextCursor !== null && (typeof source.nextCursor !== 'string' || !/^[A-Za-z0-9_-]{1,512}$/.test(source.nextCursor)))
-  ) throw new AdminAuditReadError('audit_unavailable')
+  ) malformed()
   return Object.freeze({
     events: Object.freeze(source.events.map(safeEvent)),
     nextCursor: source.nextCursor as string | null,
@@ -102,9 +111,14 @@ function safePage(value: unknown): AdminAuditPage {
 
 function queryFor(filters: AdminAuditFilters, cursor: string | null) {
   const query = new URLSearchParams()
+  if (filters.occurredFrom) query.set('occurredFrom', filters.occurredFrom)
+  if (filters.occurredTo) query.set('occurredTo', filters.occurredTo)
   if (filters.action) query.set('action', filters.action)
   if (filters.resourceType) query.set('resourceType', filters.resourceType)
   if (filters.resourceRef) query.set('resourceRef', filters.resourceRef)
+  if (filters.actorRole) query.set('actorRole', filters.actorRole)
+  if (filters.reasonCode) query.set('reasonCode', filters.reasonCode)
+  if (filters.correlationId) query.set('correlationId', filters.correlationId)
   query.set('limit', String(filters.limit))
   if (cursor) query.set('cursor', cursor)
   return query.toString()
@@ -135,7 +149,13 @@ export async function readAdminAuditPage(
     if (response.status === 400) throw new AdminAuditReadError('invalid_query')
     if (response.status === 504) throw new AdminAuditReadError('audit_timeout')
     if (response.status !== 200) throw new AdminAuditReadError('audit_unavailable')
-    return safePage(await response.json())
+    let body: unknown
+    try {
+      body = await response.json()
+    } catch {
+      malformed()
+    }
+    return safePage(body)
   } catch (error) {
     if (error instanceof AdminAuditReadError) throw error
     throw new AdminAuditReadError(controller.signal.aborted ? 'audit_timeout' : 'audit_unavailable')

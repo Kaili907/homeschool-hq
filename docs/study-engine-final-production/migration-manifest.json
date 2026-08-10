@@ -183,6 +183,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "profiles_logical_voice_contract_check",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810120000",
+      "filename": "20260810120000_academy_admin_audit_query_filters.sql",
+      "sha256": "64dff0578273dd429d389d2f01c18486b4f4d9ea24460fca89956c443bb7e8e3",
+      "dependency": "20260809150000_academy_logical_voice_profile_contract.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-admin-audit-query-filters-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

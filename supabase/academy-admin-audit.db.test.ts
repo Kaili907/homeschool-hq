@@ -89,6 +89,10 @@ async function createDatabase() {
     new URL('./migrations/20260809130000_academy_admin_audit_foundation.sql', import.meta.url),
     'utf8',
   ))
+  await database.exec(await readFile(
+    new URL('./migrations/20260810120000_academy_admin_audit_query_filters.sql', import.meta.url),
+    'utf8',
+  ))
   await database.exec(`
     create function public.test_admin_audit_append(
       p_action text,
@@ -169,6 +173,14 @@ async function readAudit(
   return asRole(database, 'service_role', null, () => database.query<{ projection: any }>(`
     select public.academy_admin_read_audit_events_v1(
       $1, $2, $3, $4, $5, $6, $7
+    ) as projection
+  `, values))
+}
+
+async function readFilteredAudit(database: PGlite, values: unknown[]) {
+  return asRole(database, 'service_role', null, () => database.query<{ projection: any }>(`
+    select public.academy_admin_read_audit_events_v1(
+      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
     ) as projection
   `, values))
 }
@@ -407,6 +419,60 @@ describe('ADMIN-15 append-only Admin audit database foundation', () => {
       'a0000000-0000-4000-8000-000000000001',
     ])
     expect(second.hasMore).toBe(false)
+  })
+
+  it('filters bounded pages by safe DTO facts without exposing actor identity', async () => {
+    const database = databases[0]
+    const assignments = await database.query<{ id: string; role: string }>(`
+      select id, role from public.academy_admin_role_assignments
+      where user_id in ('${OWNER_ID}', '${ADMIN_ID}')
+    `)
+    const ownerAssignment = assignments.rows.find((row) => row.role === 'owner')?.id
+    const adminAssignment = assignments.rows.find((row) => row.role === 'admin')?.id
+    await database.exec(`insert into academy_private.admin_audit_events (
+      event_id, occurred_at, actor_user_ref, actor_role, actor_assignment_ref,
+      action, resource_type, resource_ref, previous_value, new_value,
+      reason_code, correlation_id
+    ) values
+      ('b0000000-0000-4000-8000-000000000001', '2026-08-09T13:00:00Z',
+       '${OWNER_ID}', 'owner', '${ownerAssignment}', 'engine.control', 'engine',
+       'tts', '{"state":"enabled"}', '{"state":"disabled"}',
+       'engine.controlled', '20000000-0000-4000-8000-000000000001'),
+      ('b0000000-0000-4000-8000-000000000002', '2026-08-10T13:00:00Z',
+       '${ADMIN_ID}', 'admin', '${adminAssignment}', 'safety.triage', 'safety_case',
+       'case-safe-ref', null, '{"status":"triaged"}',
+       'safety.reviewed', '20000000-0000-4000-8000-000000000002')`)
+
+    const projection = (await readFilteredAudit(database, [
+      50, null, null, 'engine.control', 'engine', 'tts', 'audit:read', 'owner',
+      '2026-08-09T12:00:00Z', '2026-08-09T14:00:00Z',
+      '20000000-0000-4000-8000-000000000001', 'engine.controlled',
+    ])).rows[0].projection
+    expect(projection.events).toHaveLength(1)
+    expect(projection.events[0]).toMatchObject({
+      eventId: 'b0000000-0000-4000-8000-000000000001',
+      actorRole: 'owner',
+      correlationId: '20000000-0000-4000-8000-000000000001',
+    })
+    expect(JSON.stringify(projection)).not.toMatch(/actorUser|assignment/i)
+
+    const noMatch = (await readFilteredAudit(database, [
+      50, null, null, null, null, null, 'audit:read', 'viewer',
+      null, null, null, null,
+    ])).rows[0].projection
+    expect(noMatch.events).toEqual([])
+  })
+
+  it('rejects invalid extended audit filter values in the database', async () => {
+    const database = databases[0]
+    await expect(readFilteredAudit(database, [
+      50, null, null, null, null, null, 'audit:read', 'student',
+      null, null, null, null,
+    ])).rejects.toThrow(/QUERY_INVALID/)
+    await expect(readFilteredAudit(database, [
+      50, null, null, null, null, null, 'audit:read', null,
+      '2026-08-10T00:00:00Z', '2026-08-09T00:00:00Z', null, null,
+    ])).rejects.toThrow(/QUERY_INVALID/)
   })
 
   it('rolls the caller mutation back when audit append fails', async () => {
