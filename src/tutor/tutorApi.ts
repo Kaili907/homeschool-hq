@@ -93,6 +93,8 @@ export interface TutorApiDeps {
   getAccessToken?: () => Promise<string | null>
   fetchImpl: FetchLike
   isOnline: () => boolean
+  /** Test seam; production uses a fresh browser-generated UUID per logical turn. */
+  createOperationId?: () => string
   /** Test seam only; production uses ANTHROPIC_ENDPOINT_BASE. */
   endpointBase?: string
   modelId?: string
@@ -138,6 +140,7 @@ export async function askTutor(
       headers: {
         Authorization: `Bearer ${accessToken}`,
         'content-type': 'application/json',
+        'x-academy-operation-id': (deps.createOperationId ?? (() => crypto.randomUUID()))(),
       },
       body: JSON.stringify({
         mode: req.gateway.mode,

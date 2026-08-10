@@ -1,7 +1,8 @@
 # Provider Attempt Journal foundation
 
-Status: foundation contract version 1. This migration is repository-only and
-has not been applied to hosted Supabase.
+Status: contract version 1 with Tutor, Jarvis, and premium TTS gateway
+instrumentation. The foundation migration is repository-only and has not been
+applied to hosted Supabase.
 
 ## Authority boundary
 
@@ -20,9 +21,10 @@ Provider dispatch integrations follow this ordering:
 4. dispatch to the provider; and
 5. append normalized outcome and accounting/reconciliation transitions.
 
-If reservation fails, a future Study safety integration must fail closed rather
-than dispatching and later describing that call as fully accounted. This card
-provides the foundation; it does not yet change every provider gateway.
+If reservation fails, Tutor and Jarvis use their existing safe gateway failure
+path, premium TTS falls through its existing voice-adapter behavior, and a
+future Study safety integration must fail closed rather than dispatching and
+later describing that call as fully accounted.
 
 ## Physical attempts and idempotency
 
@@ -33,9 +35,13 @@ prevents the same logical mutation from creating the same physical attempt
 twice. A real retry increments `physical_retry_index` and has distinct
 reservation, operational telemetry, and cost-ledger execution keys.
 
-An identical replay returns the original attempt ID. Reusing any reservation,
-logical-retry slot, telemetry key, or ledger key with different facts raises
-`reconciliation_conflict`; no evidence is overwritten.
+An identical replay returns the original attempt ID. The account-scoped digest
+of the browser's `x-academy-operation-id` is the gateway execution identity;
+the raw UUID is not stored. An exact HTTP replay therefore reaches the same
+reservation even if the hosting platform assigns the replay a different
+invocation ID, and the gateway refuses a second physical dispatch. Reusing any
+reservation, logical-retry slot, telemetry key, or ledger key with different
+facts raises `reconciliation_conflict`; no evidence is overwritten.
 
 The ledger execution key deliberately uses the existing cost ledger's stricter
 `[A-Za-z0-9_-]` contract. Operational telemetry has its own stable correlation
@@ -118,13 +124,43 @@ audio, journal/private note, emotional/personality/diagnostic inference, or
 secret field. Product/model/version identifiers and reason codes are bounded;
 arbitrary metadata JSON is not stored.
 
-## Remaining instrumentation
+## Instrumented gateways
 
-Later gateway cards must reserve immediately before each actual physical
-provider attempt, including every Study classifier retry; use distinct retry
-indices and correlation keys; mark dispatch readiness and outcome; write the
-existing authoritative cost receipt; and link or mark the accounting gap.
+`netlify/functions/anthropic.js` reserves only validated, entitled, quota-
+admitted Tutor and Jarvis physical calls. The mode fixes the journal dimensions
+to `tutor/tutor_turn` or `jarvis/jarvis_turn`; scripted browser responses never
+reach this server seam and create no attempt. The handler currently makes one
+physical request per logical operation, so its retry index is zero.
 
-The cost-ledger contract still needs an additive, independently reviewed change
-before Study safety usage can become a valid `study` ledger row. Existing Tutor,
-Jarvis, and TTS gateway behavior is not rewired by this foundation migration.
+`netlify/functions/tts.js` reserves only validated, entitled, quota-admitted
+ElevenLabs synthesis. Browser speech, cache playback, disabled synthesis, local
+voice behavior, and pre-dispatch rejections do not reach this seam. The journal
+stores the server-owned ElevenLabs model identity, never the provider voice ID,
+text, or audio.
+
+Both handlers use `provider-gateway-attempt.js` for the same ordering: reserve,
+`dispatch_possible`, physical request, `outcome_observed`, authoritative usage
+ledger persistence, and journal linkage. A missing ledger becomes
+`gap_pending`; a mismatched or already-linked ledger becomes
+`reconciliation_conflict`. All linkage states come from the journal RPC rather
+than gateway inference. The coordinator accepts a stable logical operation,
+distinct physical execution key, and explicit retry index so any future
+internal retry produces its own attempt and usage receipt.
+
+## Remaining Study integration seam
+
+Study is intentionally unchanged. Its physical request loop is
+`createAnthropicSafetyClassifier().classify()` in
+`netlify/functions/_shared/study-safety/provider.js`, immediately around the
+`fetchImpl(PROVIDER_URL, ...)` call. A later Study card must thread a
+content-free trusted accounting context from the authorized
+`study-safety-classify.js` request into that classifier, reserve separately
+inside the loop for every `attempt` value, and establish `dispatch_possible`
+before each fetch. Reservation/readiness failure must retain the current
+fail-closed invalid safety result.
+
+That integration must remain `engine = study` and
+`purpose = safety_classification`. Before its successful provider receipts can
+be ledgered, the cost-ledger contract needs an additive, independently reviewed
+change admitting `study`; until then, journaled Study calls would truthfully end
+in `gap_pending`. No Study call is relabeled as Tutor or Jarvis.
