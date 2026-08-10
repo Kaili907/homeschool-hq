@@ -4,13 +4,18 @@ import {
   type AdminEngineId,
 } from './contracts'
 import {
+  ADMIN_OPERATIONAL_RESULTS,
+  ADMIN_TELEMETRY_EVENT_TYPES,
   decodeStoredOperationalEvents,
   type AdminOperationalEvent,
+  type AdminOperationalResult,
+  type AdminTelemetryEventType,
 } from '../telemetry/operationalTelemetry'
 
 export const ENGINE_PERFORMANCE_RATE_MIN_SAMPLE = 10
 export const ENGINE_PERFORMANCE_VERSION_COMPARISON_MIN_SAMPLE = 20
 export const ENGINE_PERFORMANCE_SOURCE_LIMIT = 500
+export const ENGINE_PERFORMANCE_AGGREGATE_GROUP_LIMIT = 4_096
 
 // Ordinary successful observations retain for 30 days. Longer performance
 // windows would compare them with longer-retained failures and bias rates.
@@ -104,7 +109,11 @@ export interface EnginePerformanceProjection {
     readonly rateMinimumSample: typeof ENGINE_PERFORMANCE_RATE_MIN_SAMPLE
     readonly versionComparisonMinimumSample: typeof ENGINE_PERFORMANCE_VERSION_COMPARISON_MIN_SAMPLE
   }
-  readonly source: {
+  readonly source: EnginePerformanceRawSource | EnginePerformanceAggregateSource
+  readonly engines: readonly EnginePerformanceSummary[]
+}
+
+export interface EnginePerformanceRawSource {
     readonly rawRowCount: number
     readonly acceptedEventCount: number
     readonly rejectedRowCount: number
@@ -112,15 +121,51 @@ export interface EnginePerformanceProjection {
     readonly limit: typeof ENGINE_PERFORMANCE_SOURCE_LIMIT
     readonly limitReached: boolean
     readonly completeness: 'complete' | 'partial'
+}
+
+export interface EnginePerformanceRetentionClass {
+  readonly category: 'diagnostic_short' | 'operational_standard' | 'safety_extended'
+  readonly retainedDays: 30 | 90 | 365
+  readonly complete: boolean
+}
+
+export interface EnginePerformanceAggregateSource {
+  readonly mode: 'aggregate'
+  readonly acceptedEventCount: number
+  readonly filteredEventCount: number
+  readonly groupCount: number
+  readonly groupLimit: typeof ENGINE_PERFORMANCE_AGGREGATE_GROUP_LIMIT
+  readonly grouping: 'complete' | 'partial'
+  readonly completeness: 'complete' | 'partial' | 'retention_limited'
+  readonly retention: {
+    readonly status: 'complete' | 'retention_limited'
+    readonly allRetentionClasses: boolean
+    readonly classes: readonly EnginePerformanceRetentionClass[]
   }
-  readonly engines: readonly EnginePerformanceSummary[]
+}
+
+export class EnginePerformanceAggregateError extends Error {
+  constructor(readonly code: 'aggregate_malformed') {
+    super(code)
+    this.name = 'EnginePerformanceAggregateError'
+  }
+}
+
+type EnginePerformanceEvidence = {
+  readonly engine: AdminEngineId
+  readonly engineVersion: string
+  readonly eventType: AdminTelemetryEventType
+  readonly result: AdminOperationalResult
+  readonly metadata: Readonly<{ operation?: string; reason_code?: string }>
+  readonly eventCount: number
+  readonly lastOccurredAt: string
 }
 
 type MetricDefinition = {
   readonly id: string
   readonly label: string
   readonly kind: 'count' | 'rate'
-  build(events: readonly AdminOperationalEvent[], window: EnginePerformanceFilters): EnginePerformanceMetric
+  build(events: readonly EnginePerformanceEvidence[], window: EnginePerformanceFilters): EnginePerformanceMetric
 }
 
 const PRIMARY_EVENT: Readonly<Record<AdminEngineId, AdminOperationalEvent['eventType']>> = {
@@ -175,17 +220,17 @@ function unavailableMetric(
 function countMetric(
   id: string,
   label: string,
-  events: readonly AdminOperationalEvent[],
+  events: readonly EnginePerformanceEvidence[],
   window: EnginePerformanceFilters,
-  predicate: (event: AdminOperationalEvent) => boolean,
+  predicate: (event: EnginePerformanceEvidence) => boolean,
   evidenceAvailable = events.length > 0,
 ): EnginePerformanceMetric {
   if (!evidenceAvailable) return unavailableMetric(id, label, 'count', window)
-  const value = events.filter(predicate).length
+  const value = weightedCount(events, predicate)
   return Object.freeze({
     ...metricBase(id, label, 'count', window),
     availability: 'available', value, numerator: value, denominator: null,
-    sampleCount: events.length, reasonCode: null,
+    sampleCount: weightedCount(events), reasonCode: null,
   })
 }
 
@@ -220,14 +265,14 @@ function rateMetric(
 
 function primaryEvents(
   engine: AdminEngineId,
-  events: readonly AdminOperationalEvent[],
-): readonly AdminOperationalEvent[] {
+  events: readonly EnginePerformanceEvidence[],
+): readonly EnginePerformanceEvidence[] {
   return events.filter((event) => event.eventType === PRIMARY_EVENT[engine])
 }
 
 function hasOperationEvidence(
   engine: AdminEngineId,
-  events: readonly AdminOperationalEvent[],
+  events: readonly EnginePerformanceEvidence[],
 ): boolean {
   return events.length > 0 && events.every((event) => {
     const operation = event.metadata.operation
@@ -235,18 +280,25 @@ function hasOperationEvidence(
   })
 }
 
-function operationCount(events: readonly AdminOperationalEvent[], operation: string): number {
-  return events.filter((event) => event.metadata.operation === operation).length
+function weightedCount(
+  events: readonly EnginePerformanceEvidence[],
+  predicate: (event: EnginePerformanceEvidence) => boolean = () => true,
+): number {
+  return events.reduce((total, event) => predicate(event) ? total + event.eventCount : total, 0)
+}
+
+function operationCount(events: readonly EnginePerformanceEvidence[], operation: string): number {
+  return weightedCount(events, (event) => event.metadata.operation === operation)
 }
 
 function resultRate(
   id: string,
   label: string,
-  events: readonly AdminOperationalEvent[],
-  result: AdminOperationalEvent['result'],
+  events: readonly EnginePerformanceEvidence[],
+  result: AdminOperationalResult,
   window: EnginePerformanceFilters,
 ): EnginePerformanceMetric {
-  return rateMetric(id, label, events.filter((event) => event.result === result).length, events.length, window)
+  return rateMetric(id, label, weightedCount(events, (event) => event.result === result), weightedCount(events), window)
 }
 
 function operationCountDefinition(id: string, label: string, engine: AdminEngineId, operation: string): MetricDefinition {
@@ -314,7 +366,7 @@ const DEFINITIONS: Readonly<Record<AdminEngineId, readonly MetricDefinition[]>> 
       build(events, window) {
         const primary = primaryEvents('study', events)
         const resumes = primary.filter((event) => event.metadata.operation === 'resume')
-        return rateMetric('resume_success_rate', 'Resume success rate', resumes.filter((event) => event.result === 'success').length, resumes.length, window, hasOperationEvidence('study', primary))
+        return rateMetric('resume_success_rate', 'Resume success rate', weightedCount(resumes, (event) => event.result === 'success'), weightedCount(resumes), window, hasOperationEvidence('study', primary))
       },
     },
     operationCountDefinition('prerequisite_redirects', 'Prerequisite redirects', 'study', 'prerequisite_redirect'),
@@ -396,7 +448,7 @@ const UNSUPPORTED: Readonly<Record<AdminEngineId, readonly UnsupportedEngineMetr
 
 function metricsForEngine(
   engine: AdminEngineId,
-  events: readonly AdminOperationalEvent[],
+  events: readonly EnginePerformanceEvidence[],
   filters: EnginePerformanceFilters,
 ): readonly EnginePerformanceMetric[] {
   return Object.freeze(DEFINITIONS[engine].map((definition) => definition.build(events, filters)))
@@ -412,13 +464,13 @@ function evidenceState(metrics: readonly EnginePerformanceMetric[]): EnginePerfo
 
 function versionComparison(
   engine: AdminEngineId,
-  events: readonly AdminOperationalEvent[],
+  events: readonly EnginePerformanceEvidence[],
   filters: EnginePerformanceFilters,
 ): EngineVersionComparison {
   const comparableEvents = primaryEvents(engine, events)
   const latestByVersion = new Map<string, number>()
   for (const event of comparableEvents) {
-    latestByVersion.set(event.engineVersion, Math.max(latestByVersion.get(event.engineVersion) ?? 0, Date.parse(event.occurredAt)))
+    latestByVersion.set(event.engineVersion, Math.max(latestByVersion.get(event.engineVersion) ?? 0, Date.parse(event.lastOccurredAt)))
   }
   const versions = [...latestByVersion].sort((left, right) => left[1] - right[1]).map(([version]) => version)
   const currentVersion = versions.at(-1) ?? null
@@ -473,6 +525,40 @@ function normalizeFilters(filters: EnginePerformanceFilters): EnginePerformanceF
   return Object.freeze({ ...filters })
 }
 
+function projectEvidence(
+  evidence: readonly EnginePerformanceEvidence[],
+  options: { readonly generatedAt: string; readonly filters: EnginePerformanceFilters },
+  source: EnginePerformanceProjection['source'],
+): EnginePerformanceProjection {
+  const engines = ADMIN_ENGINE_IDS.map((engineId): EnginePerformanceSummary => {
+    const events = evidence.filter((event) => event.engine === engineId)
+    const metrics = metricsForEngine(engineId, events, options.filters)
+    const sampleCount = weightedCount(events)
+    const state = evidenceState(metrics)
+    return Object.freeze({
+      engineId,
+      evidenceState: source.completeness !== 'complete' && sampleCount > 0 ? 'partial' : state,
+      sampleCount,
+      versions: Object.freeze([...new Set(events.map((event) => event.engineVersion))].sort()),
+      metrics,
+      unsupportedMetrics: UNSUPPORTED[engineId],
+      versionComparison: versionComparison(engineId, events, options.filters),
+      technicalHealthReference: Object.freeze({ label: 'View technical system health' as const, path: '/academy/admin/health' as const }),
+    })
+  })
+  return Object.freeze({
+    contractVersion: ADMIN_CONTRACT_VERSION,
+    generatedAt: options.generatedAt,
+    filters: options.filters,
+    thresholds: Object.freeze({
+      rateMinimumSample: ENGINE_PERFORMANCE_RATE_MIN_SAMPLE,
+      versionComparisonMinimumSample: ENGINE_PERFORMANCE_VERSION_COMPARISON_MIN_SAMPLE,
+    }),
+    source: Object.freeze(source),
+    engines: Object.freeze(engines),
+  })
+}
+
 export function buildEnginePerformanceProjection(
   rows: unknown,
   options: {
@@ -494,29 +580,19 @@ export function buildEnginePerformanceProjection(
     && (filters.courseRef === null || event.courseRef === filters.courseRef)
     && (filters.unitRef === null || event.unitRef === filters.unitRef),
   )
-  const engines = ADMIN_ENGINE_IDS.map((engineId): EnginePerformanceSummary => {
-    const events = filtered.filter((event) => event.engine === engineId)
-    const metrics = metricsForEngine(engineId, events, filters)
-    return Object.freeze({
-      engineId,
-      evidenceState: evidenceState(metrics),
-      sampleCount: events.length,
-      versions: Object.freeze([...new Set(events.map((event) => event.engineVersion))].sort()),
-      metrics,
-      unsupportedMetrics: UNSUPPORTED[engineId],
-      versionComparison: versionComparison(engineId, events, filters),
-      technicalHealthReference: Object.freeze({ label: 'View technical system health' as const, path: '/academy/admin/health' as const }),
-    })
-  })
-  return Object.freeze({
-    contractVersion: ADMIN_CONTRACT_VERSION,
-    generatedAt: options.generatedAt,
-    filters,
-    thresholds: Object.freeze({
-      rateMinimumSample: ENGINE_PERFORMANCE_RATE_MIN_SAMPLE,
-      versionComparisonMinimumSample: ENGINE_PERFORMANCE_VERSION_COMPARISON_MIN_SAMPLE,
+  const evidence = filtered.map((event): EnginePerformanceEvidence => Object.freeze({
+    engine: event.engine,
+    engineVersion: event.engineVersion,
+    eventType: event.eventType,
+    result: event.result,
+    metadata: Object.freeze({
+      ...(typeof event.metadata.operation === 'string' ? { operation: event.metadata.operation } : {}),
+      ...(typeof event.metadata.reason_code === 'string' ? { reason_code: event.metadata.reason_code } : {}),
     }),
-    source: Object.freeze({
+    eventCount: 1,
+    lastOccurredAt: event.occurredAt,
+  }))
+  return projectEvidence(evidence, { generatedAt: options.generatedAt, filters }, {
       rawRowCount,
       acceptedEventCount: decoded.events.length,
       rejectedRowCount: decoded.rejectedRows,
@@ -524,8 +600,183 @@ export function buildEnginePerformanceProjection(
       limit: ENGINE_PERFORMANCE_SOURCE_LIMIT,
       limitReached: rawRowCount >= sourceLimit,
       completeness: rawRowCount >= sourceLimit || decoded.rejectedRows > 0 ? 'partial' as const : 'complete' as const,
+  })
+}
+
+const AGGREGATE_ROOT_FIELDS = [
+  'schemaVersion', 'range', 'filters', 'completeness', 'totalEventCount', 'groups',
+] as const
+const AGGREGATE_GROUP_FIELDS = [
+  'retentionCategory', 'engine', 'appVersion', 'engineVersion', 'curriculumVersion',
+  'courseRef', 'unitRef', 'eventType', 'result', 'operation', 'reasonCode',
+  'provider', 'route', 'eventCount', 'durationCount', 'durationTotalMs',
+  'durationP50Ms', 'durationP95Ms', 'firstOccurredAt', 'lastOccurredAt',
+] as const
+const SAFE_VERSION = /^[A-Za-z0-9][A-Za-z0-9._+-]{0,127}$/
+const SAFE_REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
+const SAFE_TOKEN = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/
+const RETENTION_DAYS = Object.freeze({
+  diagnostic_short: 30,
+  operational_standard: 90,
+  safety_extended: 365,
+} as const)
+
+function aggregateMalformed(): never {
+  throw new EnginePerformanceAggregateError('aggregate_malformed')
+}
+
+function normalizedInstant(value: unknown): string | null {
+  if (typeof value !== 'string') return null
+  const parsed = new Date(value)
+  return Number.isFinite(parsed.getTime()) ? parsed.toISOString() : null
+}
+
+function nullableToken(value: unknown): value is string | null {
+  return value === null || (typeof value === 'string' && SAFE_TOKEN.test(value))
+}
+
+function nullableVersion(value: unknown): value is string | null {
+  return value === null || (typeof value === 'string' && SAFE_VERSION.test(value))
+}
+
+function nullableReference(value: unknown): value is string | null {
+  return value === null || (typeof value === 'string' && SAFE_REFERENCE.test(value))
+}
+
+function validAggregateEventEngine(engine: AdminEngineId, eventType: AdminTelemetryEventType): boolean {
+  if (eventType === 'safety.classification') {
+    return ['tutor', 'study', 'assessment', 'jarvis', 'gateway'].includes(engine)
+  }
+  return eventType === 'persistence.operation' || PRIMARY_EVENT[engine] === eventType
+}
+
+function decodeAggregateGroup(
+  value: unknown,
+  filters: EnginePerformanceFilters,
+): EnginePerformanceEvidence {
+  if (!isRecord(value) || !hasExactKeys(value, AGGREGATE_GROUP_FIELDS)) aggregateMalformed()
+  if (!ADMIN_ENGINE_IDS.includes(value.engine as AdminEngineId)) aggregateMalformed()
+  const engine = value.engine as AdminEngineId
+  if (!ADMIN_TELEMETRY_EVENT_TYPES.includes(value.eventType as AdminTelemetryEventType)) aggregateMalformed()
+  const eventType = value.eventType as AdminTelemetryEventType
+  if (!validAggregateEventEngine(engine, eventType)) aggregateMalformed()
+  if (!ADMIN_OPERATIONAL_RESULTS.includes(value.result as AdminOperationalResult)) aggregateMalformed()
+  if (typeof value.appVersion !== 'string' || !SAFE_VERSION.test(value.appVersion)) aggregateMalformed()
+  if (typeof value.engineVersion !== 'string' || !SAFE_VERSION.test(value.engineVersion)) aggregateMalformed()
+  if (!nullableVersion(value.curriculumVersion)) aggregateMalformed()
+  if (!nullableReference(value.courseRef) || !nullableReference(value.unitRef)) aggregateMalformed()
+  if (!nullableToken(value.operation) || !nullableToken(value.reasonCode)
+    || !nullableToken(value.provider) || !nullableToken(value.route)) aggregateMalformed()
+  if (typeof value.retentionCategory !== 'string'
+    || !Object.hasOwn(RETENTION_DAYS, value.retentionCategory)) aggregateMalformed()
+  if (!safeCount(value.eventCount) || value.eventCount < 1
+    || !safeCount(value.durationCount) || value.durationCount > value.eventCount
+    || !safeCount(value.durationTotalMs)
+    || !nullableSafeCount(value.durationP50Ms) || !nullableSafeCount(value.durationP95Ms)) aggregateMalformed()
+  const firstOccurredAt = normalizedInstant(value.firstOccurredAt)
+  const lastOccurredAt = normalizedInstant(value.lastOccurredAt)
+  if (!firstOccurredAt || !lastOccurredAt || firstOccurredAt > lastOccurredAt
+    || firstOccurredAt < filters.start || lastOccurredAt >= filters.end) aggregateMalformed()
+  if ((value.courseRef !== null || value.unitRef !== null) && value.curriculumVersion === null) aggregateMalformed()
+  if ((filters.engine !== null && engine !== filters.engine)
+    || (filters.engineVersion !== null && value.engineVersion !== filters.engineVersion)
+    || (filters.courseRef !== null && value.courseRef !== filters.courseRef)
+    || (filters.unitRef !== null && value.unitRef !== filters.unitRef)) aggregateMalformed()
+  return Object.freeze({
+    engine,
+    engineVersion: value.engineVersion,
+    eventType,
+    result: value.result as AdminOperationalResult,
+    metadata: Object.freeze({
+      ...(value.operation === null ? {} : { operation: value.operation }),
+      ...(value.reasonCode === null ? {} : { reason_code: value.reasonCode }),
     }),
-    engines: Object.freeze(engines),
+    eventCount: value.eventCount,
+    lastOccurredAt,
+  })
+}
+
+function decodeAggregateRetention(value: unknown): {
+  readonly allRetentionClasses: boolean
+  readonly classes: readonly EnginePerformanceRetentionClass[]
+} {
+  if (!isRecord(value)
+    || !hasExactKeys(value, ['grouping', 'groupCount', 'groupLimit', 'allRetentionClasses', 'retentionClasses'])
+    || (value.grouping !== 'complete' && value.grouping !== 'partial')
+    || !safeCount(value.groupCount)
+    || value.groupLimit !== ENGINE_PERFORMANCE_AGGREGATE_GROUP_LIMIT
+    || value.groupCount > value.groupLimit
+    || typeof value.allRetentionClasses !== 'boolean'
+    || !Array.isArray(value.retentionClasses)
+    || value.retentionClasses.length !== 3) aggregateMalformed()
+  const byCategory = new Map<string, EnginePerformanceRetentionClass>()
+  for (const candidate of value.retentionClasses) {
+    if (!isRecord(candidate)
+      || !hasExactKeys(candidate, ['category', 'retainedDays', 'complete'])
+      || typeof candidate.category !== 'string'
+      || !Object.hasOwn(RETENTION_DAYS, candidate.category)
+      || candidate.retainedDays !== RETENTION_DAYS[candidate.category as keyof typeof RETENTION_DAYS]
+      || typeof candidate.complete !== 'boolean'
+      || byCategory.has(candidate.category as string)) aggregateMalformed()
+    byCategory.set(candidate.category as string, Object.freeze({
+      category: candidate.category as EnginePerformanceRetentionClass['category'],
+      retainedDays: candidate.retainedDays as EnginePerformanceRetentionClass['retainedDays'],
+      complete: candidate.complete,
+    }))
+  }
+  const classes = Object.keys(RETENTION_DAYS).map((category) => byCategory.get(category)!)
+  if (classes.some((candidate) => !candidate)
+    || value.allRetentionClasses !== classes.every((candidate) => candidate.complete)) aggregateMalformed()
+  return Object.freeze({
+    allRetentionClasses: value.allRetentionClasses,
+    classes: Object.freeze(classes),
+  })
+}
+
+export function buildEnginePerformanceProjectionFromAggregate(
+  aggregate: unknown,
+  options: { readonly generatedAt: string; readonly filters: EnginePerformanceFilters },
+): EnginePerformanceProjection {
+  if (!isInstant(options.generatedAt)) throw new TypeError('engine_performance_generated_at_invalid')
+  const filters = normalizeFilters(options.filters)
+  if (!isRecord(aggregate) || !hasExactKeys(aggregate, AGGREGATE_ROOT_FIELDS)
+    || aggregate.schemaVersion !== ADMIN_CONTRACT_VERSION
+    || !safeCount(aggregate.totalEventCount)
+    || !Array.isArray(aggregate.groups)) aggregateMalformed()
+  if (!isRecord(aggregate.range)
+    || !hasExactKeys(aggregate.range, ['start', 'endExclusive', 'maximumDays'])
+    || normalizedInstant(aggregate.range.start) !== filters.start
+    || normalizedInstant(aggregate.range.endExclusive) !== filters.end
+    || aggregate.range.maximumDays !== 366) aggregateMalformed()
+  if (!isRecord(aggregate.filters)
+    || !hasExactKeys(aggregate.filters, ['engine', 'engineVersion', 'courseRef', 'unitRef'])
+    || aggregate.filters.engine !== filters.engine
+    || aggregate.filters.engineVersion !== filters.engineVersion
+    || aggregate.filters.courseRef !== filters.courseRef
+    || aggregate.filters.unitRef !== filters.unitRef) aggregateMalformed()
+  const retention = decodeAggregateRetention(aggregate.completeness)
+  const completeness = aggregate.completeness as Record<string, unknown>
+  if (completeness.groupCount !== aggregate.groups.length) aggregateMalformed()
+  const evidence = aggregate.groups.map((group) => decodeAggregateGroup(group, filters))
+  const representedCount = evidence.reduce((total, group) => total + group.eventCount, 0)
+  if (!Number.isSafeInteger(representedCount) || representedCount !== aggregate.totalEventCount) aggregateMalformed()
+  const grouping = completeness.grouping as 'complete' | 'partial'
+  const sourceCompleteness = grouping === 'partial'
+    ? 'partial' as const
+    : retention.allRetentionClasses ? 'complete' as const : 'retention_limited' as const
+  return projectEvidence(evidence, { generatedAt: options.generatedAt, filters }, {
+    mode: 'aggregate',
+    acceptedEventCount: representedCount,
+    filteredEventCount: representedCount,
+    groupCount: evidence.length,
+    groupLimit: ENGINE_PERFORMANCE_AGGREGATE_GROUP_LIMIT,
+    grouping,
+    completeness: sourceCompleteness,
+    retention: Object.freeze({
+      status: retention.allRetentionClasses ? 'complete' as const : 'retention_limited' as const,
+      allRetentionClasses: retention.allRetentionClasses,
+      classes: retention.classes,
+    }),
   })
 }
 
@@ -589,8 +840,44 @@ function validWireThresholds(value: unknown): boolean {
 }
 
 function validWireSource(value: unknown): boolean {
-  return isRecord(value)
-    && hasExactKeys(value, ['rawRowCount', 'acceptedEventCount', 'rejectedRowCount', 'filteredEventCount', 'limit', 'limitReached', 'completeness'])
+  if (!isRecord(value)) return false
+  if (value.mode === 'aggregate') {
+    if (!hasExactKeys(value, [
+      'mode', 'acceptedEventCount', 'filteredEventCount', 'groupCount', 'groupLimit',
+      'grouping', 'completeness', 'retention',
+    ])
+      || !safeCount(value.acceptedEventCount)
+      || value.filteredEventCount !== value.acceptedEventCount
+      || !safeCount(value.groupCount)
+      || value.groupLimit !== ENGINE_PERFORMANCE_AGGREGATE_GROUP_LIMIT
+      || value.groupCount > value.groupLimit
+      || (value.grouping !== 'complete' && value.grouping !== 'partial')
+      || !isRecord(value.retention)
+      || !hasExactKeys(value.retention, ['status', 'allRetentionClasses', 'classes'])
+      || (value.retention.status !== 'complete' && value.retention.status !== 'retention_limited')
+      || typeof value.retention.allRetentionClasses !== 'boolean'
+      || !Array.isArray(value.retention.classes)
+      || value.retention.classes.length !== 3) return false
+    const categories = new Set<string>()
+    for (const candidate of value.retention.classes) {
+      if (!isRecord(candidate)
+        || !hasExactKeys(candidate, ['category', 'retainedDays', 'complete'])
+        || typeof candidate.category !== 'string'
+        || !Object.hasOwn(RETENTION_DAYS, candidate.category)
+        || candidate.retainedDays !== RETENTION_DAYS[candidate.category as keyof typeof RETENTION_DAYS]
+        || typeof candidate.complete !== 'boolean'
+        || categories.has(candidate.category as string)) return false
+      categories.add(candidate.category as string)
+    }
+    const retentionComplete = value.retention.classes.every((candidate) => (candidate as Record<string, unknown>).complete === true)
+    return categories.size === 3
+      && value.retention.allRetentionClasses === retentionComplete
+      && value.retention.status === (retentionComplete ? 'complete' : 'retention_limited')
+      && value.completeness === (
+        value.grouping === 'partial' ? 'partial' : retentionComplete ? 'complete' : 'retention_limited'
+      )
+  }
+  return hasExactKeys(value, ['rawRowCount', 'acceptedEventCount', 'rejectedRowCount', 'filteredEventCount', 'limit', 'limitReached', 'completeness'])
     && safeCount(value.rawRowCount)
     && safeCount(value.acceptedEventCount)
     && safeCount(value.rejectedRowCount)
@@ -599,9 +886,7 @@ function validWireSource(value: unknown): boolean {
     && typeof value.limitReached === 'boolean'
     && (value.completeness === 'complete' || value.completeness === 'partial')
     && value.limitReached === ((value.rawRowCount as number) >= ENGINE_PERFORMANCE_SOURCE_LIMIT)
-    && value.completeness === (
-      value.limitReached || (value.rejectedRowCount as number) > 0 ? 'partial' : 'complete'
-    )
+    && value.completeness === (value.limitReached || (value.rejectedRowCount as number) > 0 ? 'partial' : 'complete')
 }
 
 function validWireMetric(value: unknown): boolean {

@@ -17,7 +17,7 @@ export type EnginePerformanceReadState =
   | { readonly status: 'loading' }
   | { readonly status: 'ready'; readonly model: EnginePerformanceProjection }
   | { readonly status: 'unauthorized' }
-  | { readonly status: 'error'; readonly code: 'unavailable' | 'timeout' | 'invalid_response' }
+  | { readonly status: 'error'; readonly code: 'unavailable' | 'timeout' | 'incomplete' | 'malformed' | 'invalid_response' }
 
 export async function readAdminEnginePerformance(options: {
   readonly window: EnginePerformanceWindowPreset
@@ -46,6 +46,13 @@ export async function readAdminEnginePerformance(options: {
     })
     if (response.status === 401 || response.status === 403) return { status: 'unauthorized' }
     if (response.status === 504) return { status: 'error', code: 'timeout' }
+    if (response.status === 502) return { status: 'error', code: 'malformed' }
+    if (response.status === 503) {
+      const payload = await response.json().catch(() => null) as { error?: { code?: unknown } } | null
+      return payload?.error?.code === 'engine_performance_incomplete'
+        ? { status: 'error', code: 'incomplete' }
+        : { status: 'error', code: 'unavailable' }
+    }
     if (response.status !== 200) return { status: 'error', code: 'unavailable' }
     const candidate = await response.json()
     return isEnginePerformanceProjection(candidate)

@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createAdminOperationalAggregateReader } from './admin-operational-aggregate-reader.js'
+import {
+  AdminOperationalAggregateReadError,
+  createAdminOperationalAggregateReader,
+} from './admin-operational-aggregate-reader.js'
 
 describe('Admin operational aggregate reader', () => {
   it('calls only the bounded aggregate RPC with an asserted Admin capability', async () => {
@@ -24,5 +27,26 @@ describe('Admin operational aggregate reader', () => {
       p_unit_ref: 'unit-1',
       p_required_capability: 'engines:read',
     })
+  })
+
+  it('preserves the fail-closed aggregate group-limit signal without exposing database detail', async () => {
+    const rpc = vi.fn(() => ({
+      abortSignal: vi.fn(async () => ({
+        data: null,
+        error: { code: '54000', message: 'OPERATIONAL_TELEMETRY_AGGREGATE_GROUP_LIMIT private detail' },
+      })),
+    }))
+    const reader = createAdminOperationalAggregateReader({ client: { rpc } })
+    await expect(reader.aggregate({
+      start: '2026-08-08T00:00:00.000Z',
+      endExclusive: '2026-08-09T00:00:00.000Z',
+      capability: 'engines:read',
+    })).rejects.toEqual(expect.objectContaining({
+      name: 'AdminOperationalAggregateReadError',
+      code: 'source_group_limit',
+      message: 'source_group_limit',
+    }))
+    await expect(Promise.reject(new AdminOperationalAggregateReadError('source_unavailable')))
+      .rejects.not.toHaveProperty('message', expect.stringContaining('private detail'))
   })
 })

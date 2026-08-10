@@ -22,6 +22,13 @@ export class AdminOperationalAggregateReadError extends Error {
   }
 }
 
+function isAggregateGroupLimit(error) {
+  if (!error || typeof error !== 'object') return false
+  if (error.code === '54000') return true
+  return [error.message, error.details, error.hint].some((value) =>
+    typeof value === 'string' && value.includes('OPERATIONAL_TELEMETRY_AGGREGATE_GROUP_LIMIT'))
+}
+
 /** Server-only adapter over the bounded, raw-row-free telemetry aggregate. */
 export function createAdminOperationalAggregateReader({ env, fetchImpl, client } = {}) {
   let serviceClient = client
@@ -54,7 +61,11 @@ export function createAdminOperationalAggregateReader({ env, fetchImpl, client }
           ? await builder.abortSignal(signal)
           : await builder
         if (signal.aborted) throw new AdminOperationalAggregateReadError('source_timeout')
-        if (error) throw new AdminOperationalAggregateReadError('source_unavailable')
+        if (error) {
+          throw new AdminOperationalAggregateReadError(
+            isAggregateGroupLimit(error) ? 'source_group_limit' : 'source_unavailable',
+          )
+        }
         return data
       } catch (error) {
         if (error instanceof AdminOperationalAggregateReadError) throw error

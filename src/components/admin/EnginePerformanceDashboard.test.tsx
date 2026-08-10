@@ -93,6 +93,35 @@ describe('EnginePerformanceDashboard', () => {
     expect(html).toContain('Some malformed stored evidence was rejected')
   })
 
+  it('renders aggregate grouping and retention qualification without hiding supported metrics', () => {
+    const qualifiedModel = {
+      ...model,
+      source: {
+        mode: 'aggregate' as const,
+        acceptedEventCount: 67,
+        filteredEventCount: 67,
+        groupCount: 6,
+        groupLimit: 4096 as const,
+        grouping: 'partial' as const,
+        completeness: 'partial' as const,
+        retention: {
+          status: 'retention_limited' as const,
+          allRetentionClasses: false,
+          classes: [
+            { category: 'diagnostic_short' as const, retainedDays: 30 as const, complete: false },
+            { category: 'operational_standard' as const, retainedDays: 90 as const, complete: true },
+            { category: 'safety_extended' as const, retainedDays: 365 as const, complete: true },
+          ],
+        },
+      },
+    }
+    const html = readyMarkup(qualifiedModel)
+    expect(html).toContain('aggregate evidence is incomplete')
+    expect(html).toContain('Retention does not fully cover this evidence window')
+    expect(html).toContain('Completion rate')
+    expect(html).not.toMatch(/healthy|successful engine/i)
+  })
+
   it('provides loading, unauthorized, and safe error states with accessibility landmarks', () => {
     const loading = renderToStaticMarkup(<EnginePerformanceDashboard state={{ status: 'loading' }} selectedEngine="tutor" selectedWindow="7d" selectedVersion={null} />)
     const denied = renderToStaticMarkup(<EnginePerformanceDashboard state={{ status: 'unauthorized' }} selectedEngine="tutor" selectedWindow="7d" selectedVersion={null} />)
