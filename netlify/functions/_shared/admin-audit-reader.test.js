@@ -32,6 +32,11 @@ describe('Admin audit service reader', () => {
       action: 'configuration.update',
       resourceType: 'configuration',
       resourceRef: 'ai.enabled',
+      actorRole: 'admin',
+      occurredFrom: '2026-08-01T00:00:00.000Z',
+      occurredTo: '2026-08-09T23:59:59.000Z',
+      correlationId: EVENT.correlationId,
+      reasonCode: 'configuration.changed',
       cursor: { occurredAt: EVENT.occurredAt, eventId: EVENT.eventId },
     })).resolves.toEqual({ events: [EVENT], hasMore: false })
     expect(client.rpc).toHaveBeenCalledWith('academy_admin_read_audit_events_v1', {
@@ -42,6 +47,11 @@ describe('Admin audit service reader', () => {
       p_resource_type: 'configuration',
       p_resource_ref: 'ai.enabled',
       p_required_capability: 'audit:read',
+      p_actor_role: 'admin',
+      p_occurred_from: '2026-08-01T00:00:00.000Z',
+      p_occurred_to: '2026-08-09T23:59:59.000Z',
+      p_correlation_id: EVENT.correlationId,
+      p_reason_code: 'configuration.changed',
     })
   })
 

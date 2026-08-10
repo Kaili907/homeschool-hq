@@ -17,7 +17,17 @@ const EVENT = {
   correlationId: '20000000-0000-4000-8000-000000000001',
 } as const
 
-const filters = { action: 'configuration.update', resourceType: 'configuration', resourceRef: 'ai.enabled', limit: 50 } as const
+const filters = {
+  occurredFrom: '2026-08-01T00:00:00.000Z',
+  occurredTo: '2026-08-09T23:59:59.000Z',
+  action: 'configuration.update',
+  resourceType: 'configuration',
+  resourceRef: 'ai.enabled',
+  actorRole: 'viewer',
+  reasonCode: 'configuration.changed',
+  correlationId: '20000000-0000-4000-8000-000000000001',
+  limit: 50,
+} as const
 
 describe('authorized Admin audit browser reader', () => {
   it('sends only the bearer, safe filters, limit, and cursor', async () => {
@@ -28,13 +38,13 @@ describe('authorized Admin audit browser reader', () => {
       getAccessToken: async () => 'verified-token', fetchImpl: fetchImpl as unknown as typeof fetch,
     })).resolves.toEqual({ events: [EVENT], nextCursor: 'opaque_cursor' })
     expect(fetchImpl).toHaveBeenCalledWith(
-      '/api/admin/v1/audit?action=configuration.update&resourceType=configuration&resourceRef=ai.enabled&limit=50&cursor=older_cursor',
+      '/api/admin/v1/audit?occurredFrom=2026-08-01T00%3A00%3A00.000Z&occurredTo=2026-08-09T23%3A59%3A59.000Z&action=configuration.update&resourceType=configuration&resourceRef=ai.enabled&actorRole=viewer&reasonCode=configuration.changed&correlationId=20000000-0000-4000-8000-000000000001&limit=50&cursor=older_cursor',
       {
         method: 'GET', headers: { Accept: 'application/json', Authorization: 'Bearer verified-token' },
         credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer', signal: expect.any(AbortSignal),
       },
     )
-    expect(JSON.stringify(fetchImpl.mock.calls)).not.toMatch(/role|capabilit|assignment/)
+    expect(JSON.stringify(fetchImpl.mock.calls)).not.toMatch(/capabilit|assignment|actorUser|bearerToken/)
   })
 
   it('does not contact the endpoint without an access token', async () => {
@@ -69,7 +79,17 @@ describe('authorized Admin audit browser reader', () => {
         status: 200,
         json: async () => ({ schemaVersion: 2, events: [event], nextCursor: null }),
       })) as unknown as typeof fetch,
-    })).rejects.toEqual(expect.any(AdminAuditReadError))
+    })).rejects.toMatchObject({ code: 'audit_malformed' })
+  })
+
+  it('fails closed with a distinct malformed response state for invalid JSON', async () => {
+    await expect(readAdminAuditPage({ limit: 50 }, null, {
+      getAccessToken: async () => 'token',
+      fetchImpl: (async () => ({
+        status: 200,
+        json: async () => { throw new SyntaxError('raw response body') },
+      })) as unknown as typeof fetch,
+    })).rejects.toMatchObject({ code: 'audit_malformed' })
   })
 
   it('rebuilds the DTO without unexpected raw fields', async () => {

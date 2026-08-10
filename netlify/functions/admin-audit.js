@@ -2,17 +2,33 @@ import {
   ADMIN_AUDIT_ACTIONS,
   ADMIN_AUDIT_RESOURCE_TYPES,
   ADMIN_CONTRACT_VERSION,
+  ADMIN_ROLES,
 } from '../../src/admin/contracts.ts'
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import { AdminAuditReadError, createAdminAuditReader } from './_shared/admin-audit-reader.js'
 import { errorResponse, jsonResponse, reject, responseForError } from './_shared/http.js'
 
 const PATHS = new Set(['/api/admin/v1/audit', '/.netlify/functions/admin-audit'])
-const ALLOWED_QUERY_KEYS = new Set(['action', 'resourceType', 'resourceRef', 'limit', 'cursor'])
+const ALLOWED_QUERY_KEYS = new Set([
+  'occurredFrom', 'occurredTo', 'action', 'resourceType', 'resourceRef',
+  'actorRole', 'reasonCode', 'correlationId', 'limit', 'cursor',
+])
 const ACTIONS = new Set(ADMIN_AUDIT_ACTIONS)
 const RESOURCE_TYPES = new Set(ADMIN_AUDIT_RESOURCE_TYPES)
+const ROLES = new Set(ADMIN_ROLES)
 const REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$/
+const TOKEN = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+const TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/
+
+function parseTimestamp(value) {
+  if (typeof value !== 'string' || value.length > 40 || !TIMESTAMP.test(value)) {
+    reject(400, 'invalid_query')
+  }
+  const parsed = new Date(value)
+  if (!Number.isFinite(parsed.getTime())) reject(400, 'invalid_query')
+  return parsed.toISOString()
+}
 
 function entriesFor(event) {
   const raw = typeof event?.rawQueryString === 'string'
@@ -69,11 +85,22 @@ export function parseAuditQuery(event) {
   if (values.action !== undefined && !ACTIONS.has(values.action)) reject(400, 'invalid_query')
   if (values.resourceType !== undefined && !RESOURCE_TYPES.has(values.resourceType)) reject(400, 'invalid_query')
   if (values.resourceRef !== undefined && !REFERENCE.test(values.resourceRef)) reject(400, 'invalid_query')
+  if (values.actorRole !== undefined && !ROLES.has(values.actorRole)) reject(400, 'invalid_query')
+  if (values.reasonCode !== undefined && !TOKEN.test(values.reasonCode)) reject(400, 'invalid_query')
+  if (values.correlationId !== undefined && !UUID.test(values.correlationId)) reject(400, 'invalid_query')
   if (values.limit !== undefined && !/^(?:[1-9]|[1-9][0-9]|100)$/.test(values.limit)) reject(400, 'invalid_query')
+  const occurredFrom = values.occurredFrom === undefined ? undefined : parseTimestamp(values.occurredFrom)
+  const occurredTo = values.occurredTo === undefined ? undefined : parseTimestamp(values.occurredTo)
+  if (occurredFrom && occurredTo && occurredFrom > occurredTo) reject(400, 'invalid_query')
   return Object.freeze({
+    occurredFrom,
+    occurredTo,
     action: values.action,
     resourceType: values.resourceType,
     resourceRef: values.resourceRef,
+    actorRole: values.actorRole,
+    reasonCode: values.reasonCode,
+    correlationId: values.correlationId?.toLowerCase(),
     limit: values.limit === undefined ? 50 : Number(values.limit),
     cursor: values.cursor === undefined ? undefined : decodeAuditCursor(values.cursor),
   })

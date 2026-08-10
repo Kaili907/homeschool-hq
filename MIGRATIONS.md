@@ -10,6 +10,19 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: Admin audit query filters (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810120000_academy_admin_audit_query_filters.sql`.
+
+The additive migration keeps the existing immutable Admin audit storage and
+bounded cursor projection. It adds indexes and exact server-side filters for
+the DTO's time, actor-role, correlation, and reason-code facts. Actor identity
+and assignment references remain excluded from the projection. Canonical LF
+SHA-256:
+`64dff0578273dd429d389d2f01c18486b4f4d9ea24460fca89956c443bb7e8e3`.
+This migration has not been applied to a hosted Supabase project.
+
 ## Supabase: logical TTS voice profile contract (2026-08-09)
 
 Tracked migration:

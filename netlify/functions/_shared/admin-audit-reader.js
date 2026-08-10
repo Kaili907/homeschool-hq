@@ -144,6 +144,11 @@ export function createAdminAuditReader({ env, fetchImpl, client } = {}) {
           p_resource_type: query.resourceType ?? null,
           p_resource_ref: query.resourceRef ?? null,
           p_required_capability: 'audit:read',
+          p_actor_role: query.actorRole ?? null,
+          p_occurred_from: query.occurredFrom ?? null,
+          p_occurred_to: query.occurredTo ?? null,
+          p_correlation_id: query.correlationId ?? null,
+          p_reason_code: query.reasonCode ?? null,
         })
         const { data, error } = typeof builder.abortSignal === 'function'
           ? await builder.abortSignal(signal)

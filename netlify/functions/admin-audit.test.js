@@ -54,7 +54,9 @@ describe('GET /api/admin/v1/audit', () => {
     expect(JSON.parse(response.body)).toEqual({ schemaVersion: 2, events: [EVENT], nextCursor: null })
     expect(authorization.require).toHaveBeenCalledWith(expect.anything(), 'audit:read')
     expect(reader.list).toHaveBeenCalledWith({
+      occurredFrom: undefined, occurredTo: undefined,
       action: undefined, resourceType: undefined, resourceRef: undefined,
+      actorRole: undefined, reasonCode: undefined, correlationId: undefined,
       limit: 50, cursor: undefined,
     })
     expect(response.headers['cache-control']).toBe('no-store')
@@ -80,12 +82,16 @@ describe('GET /api/admin/v1/audit', () => {
     const cursor = encodeAuditCursor({ occurredAt: EVENT.occurredAt, eventId: EVENT.eventId })
     const { handler, reader } = handlerWith()
     const response = await handler(event({ rawQueryString: new URLSearchParams({
+      occurredFrom: '2026-08-01T00:00:00Z', occurredTo: '2026-08-09T13:00:00Z',
       action: 'engine.control', resourceType: 'engine', resourceRef: 'tts',
+      actorRole: 'owner', reasonCode: 'engine.controlled', correlationId: EVENT.correlationId,
       limit: '100', cursor,
     }).toString() }))
     expect(response.statusCode).toBe(200)
     expect(reader.list).toHaveBeenCalledWith({
+      occurredFrom: '2026-08-01T00:00:00.000Z', occurredTo: '2026-08-09T13:00:00.000Z',
       action: 'engine.control', resourceType: 'engine', resourceRef: 'tts', limit: 100,
+      actorRole: 'owner', reasonCode: 'engine.controlled', correlationId: EVENT.correlationId,
       cursor: { occurredAt: EVENT.occurredAt, eventId: EVENT.eventId },
     })
     expect(decodeAuditCursor(cursor)).toEqual({ occurredAt: EVENT.occurredAt, eventId: EVENT.eventId })
@@ -103,6 +109,9 @@ describe('GET /api/admin/v1/audit', () => {
   it.each([
     'limit=0', 'limit=101', 'limit=050', 'limit=1&limit=2',
     'action=wildcard.*', 'resourceType=all', 'resourceRef=has%20spaces',
+    'actorRole=student', 'reasonCode=has%20spaces', 'correlationId=not-a-uuid',
+    'occurredFrom=not-a-date', 'occurredFrom=August%209%2C%202026',
+    'occurredFrom=2026-08-10T00%3A00%3A00Z&occurredTo=2026-08-09T00%3A00%3A00Z',
     'search=anything',
   ])('rejects unsafe query %s', async (rawQueryString) => {
     const { handler, reader } = handlerWith()
