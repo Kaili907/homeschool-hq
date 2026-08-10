@@ -4,6 +4,7 @@ import { createSupabaseInAppPersistence } from '../study-delivery/supabase-in-ap
 import { MONITORING_EVENT_CATALOG, createMonitoringService, createStructuredServerLog } from '../study-monitoring/monitoring.js'
 import { createSupabaseAdultReviewMonitoringSink } from '../study-monitoring/supabase-sink.js'
 import {
+  createNetlifyScheduledWorkerCredentialSource,
   createNetlifyWorkerCredentialVerifier,
   createNetlifyWorkerInvocationAuthorization,
 } from '../study-worker/credential.js'
@@ -263,11 +264,13 @@ export async function createProductionAdultReviewWorkerComposition(options = {})
     env,
     monitor: monitoring,
   })
-  if (workerAuthorization.isReady() !== true) fail('worker_invocation_authority_not_configured')
+  const scheduledWorkerCredentialSource = createNetlifyScheduledWorkerCredentialSource({ env })
+  if (scheduledWorkerCredentialSource.isReady() !== true) fail('worker_credential_not_configured')
 
   return Object.freeze({
     worker: Object.freeze({ ready: worker.ready, run: worker.run }),
     workerAuthorization,
+    scheduledWorkerCredentialSource,
     // Exposed so the composition's one-instance and route guarantees are
     // provable from outside, not merely asserted in a comment.
     operations,
