@@ -25,7 +25,7 @@ const PRESET_LABELS = {
 } as const
 
 const PROVIDER_COVERAGE_STATUS_LABELS: Readonly<Record<AdminProviderAccountingCoverageStatus, string>> = {
-  complete_for_journaled_attempts: 'Complete for journaled attempts',
+  complete_for_journaled_attempts: 'Complete for currently journaled/instrumented provider-attempt paths',
   partial: 'Partial',
   gaps_detected: 'Gaps detected',
   reconciliation_conflict: 'Reconciliation conflict',
@@ -34,7 +34,7 @@ const PROVIDER_COVERAGE_STATUS_LABELS: Readonly<Record<AdminProviderAccountingCo
 }
 
 const PROVIDER_COVERAGE_STATUS_COPY: Readonly<Record<AdminProviderAccountingCoverageStatus, string>> = {
-  complete_for_journaled_attempts: 'Every journaled attempt in this range has a supported terminal accounting resolution.',
+  complete_for_journaled_attempts: 'Every journaled attempt in this range has a supported terminal accounting resolution, and every currently implemented external provider-attempt path is instrumented.',
   partial: 'Provider accounting coverage is partial. Instrumented paths and journal lifecycle evidence are shown below.',
   gaps_detected: 'The journal knows about missing accounting relationships or attempts that could not be resolved.',
   reconciliation_conflict: 'At least one journaled attempt conflicts with the authoritative usage ledger.',
@@ -418,7 +418,7 @@ function CoverageScopeDisclosure({ coverage }: { coverage: AdminProviderAccounti
           </li>
         ))}
       </ul>
-      <p>The instrumentation rows above are the server-owned coverage contract. Any pending path keeps overall provider coverage partial.</p>
+      <p>The instrumentation rows above are the server-owned coverage contract. Coverage is complete only for the currently implemented, instrumented provider-attempt paths.</p>
       <p>This is an accounting-trail check, not a provider bill comparison. It cannot establish that stored activity equals a provider bill.</p>
     </div>
   )

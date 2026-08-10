@@ -29,12 +29,12 @@ const DIMENSIONS = Object.freeze({
 })
 
 const PROVIDER_INSTRUMENTATION = Object.freeze({
-  status: 'partial',
+  status: 'complete',
   engines: Object.freeze([
     Object.freeze({ key: 'tutor', status: 'covered' }),
     Object.freeze({ key: 'jarvis', status: 'covered' }),
     Object.freeze({ key: 'tts', status: 'covered' }),
-    Object.freeze({ key: 'study', status: 'pending' }),
+    Object.freeze({ key: 'study', status: 'covered' }),
   ]),
 })
 
@@ -131,9 +131,10 @@ function presentMetrics({ recorded, linked, missing, orphan = 0, states }) {
 }
 
 function overallStatusFor(journalStatus) {
-  return journalStatus === 'complete_for_journaled_attempts'
-    ? PROVIDER_INSTRUMENTATION.status
-    : journalStatus
+  if (journalStatus !== 'complete_for_journaled_attempts') return journalStatus
+  return PROVIDER_INSTRUMENTATION.status === 'complete'
+    ? journalStatus
+    : 'partial'
 }
 
 function expectedRawStatus(metrics, states) {

@@ -28,7 +28,7 @@ async function createDatabase() {
   `)
   for (const name of [
     '20260808122000_academy_provider_usage_cost_ledger.sql',
-    '20260810120000_academy_provider_attempt_journal.sql',
+    '20260810130000_academy_provider_attempt_journal.sql',
     '20260810151000_academy_study_safety_provider_accounting.sql',
   ]) {
     const migration = await readFile(new URL(`./migrations/${name}`, import.meta.url), 'utf8')

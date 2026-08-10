@@ -363,7 +363,11 @@ function Overview({ model }: { model: AdminOverviewModel }) {
           {model.ai.providerAccounting && (
             <p className="admin-disclosure">
               <strong>Provider accounting:</strong>{' '}
-              {model.ai.providerAccounting.status === 'partial' ? 'Partial' : model.ai.providerAccounting.status.replaceAll('_', ' ')}.
+              {model.ai.providerAccounting.status === 'complete_for_journaled_attempts'
+                ? 'Complete for currently journaled/instrumented provider-attempt paths'
+                : model.ai.providerAccounting.status === 'partial'
+                  ? 'Partial'
+                  : model.ai.providerAccounting.status.replaceAll('_', ' ')}.
               {' '}Journal: {model.ai.providerAccounting.journalStatus.replaceAll('_', ' ')}.
               {' '}Instrumentation: {model.ai.providerAccounting.providerInstrumentation.engines
                 .map((engine) => `${ENGINE_LABELS[engine.key]} ${engine.status}`)
