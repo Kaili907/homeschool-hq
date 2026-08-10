@@ -81,9 +81,15 @@ describe('Study private scheduled worker execution', () => {
   it('uses the production composition seam for one bounded scheduled cycle', async () => {
     const worker = readyWorker({ claimed: 1, delivered: 1, indeterminate: 0, failed: 0 })
     const credentialSource = readyCredentialSource()
+    const runEvidence = {
+      isDurable: true,
+      isReady: () => true,
+      record: vi.fn(async () => ({ recorded: true, replayed: false })),
+    }
     const compose = vi.fn(async () => ({
       worker,
       scheduledWorkerCredentialSource: credentialSource,
+      runEvidence,
     }))
     const handler = createStudyAdultReviewScheduledWorkerHandler({ env: ENV, compose })
 
@@ -108,6 +114,7 @@ describe('Study private scheduled worker execution', () => {
       workerCredential: WORKER_CREDENTIAL,
       limit: STUDY_ADULT_REVIEW_SCHEDULED_BATCH_LIMIT,
     }, { limit: STUDY_ADULT_REVIEW_SCHEDULED_BATCH_LIMIT })
+    expect(runEvidence.record).toHaveBeenCalledOnce()
   })
 
   it('does not let forged browser headers replace missing scheduled authority', async () => {
@@ -149,6 +156,74 @@ describe('Study private scheduled worker execution', () => {
     const response = await handler()
     expect(response.statusCode).toBe(statusCode)
     expect(body(response)).toEqual({ status, ...result })
+  })
+
+  it('persists one content-free receipt for a scheduled invocation', async () => {
+    const runEvidence = {
+      isDurable: true,
+      isReady: () => true,
+      record: vi.fn(async () => ({ recorded: true, replayed: false })),
+    }
+    const handler = createStudyAdultReviewScheduledWorkerHandler({
+      env: ENV,
+      worker: readyWorker({
+        claimed: 3, delivered: 1, indeterminate: 0, cancelled: 1, failed: 1,
+      }),
+      scheduledWorkerCredentialSource: readyCredentialSource(),
+      runEvidence,
+      createRunId: () => '00000000-0000-4000-8000-000000000102',
+      now: vi.fn()
+        .mockReturnValueOnce(new Date('2026-08-10T12:05:00.000Z'))
+        .mockReturnValueOnce(new Date('2026-08-10T12:05:02.000Z')),
+    })
+    expect(body(await handler()).status).toBe('partial_with_retryable_failures')
+    expect(runEvidence.record).toHaveBeenCalledWith({
+      runId: '00000000-0000-4000-8000-000000000102',
+      startedAt: '2026-08-10T12:05:00.000Z',
+      completedAt: '2026-08-10T12:05:02.000Z',
+      resultCategory: 'partial_with_retryable_failures',
+      claimedCount: 3,
+      processedCount: 1,
+      retryableFailureCount: 1,
+      terminalFailureCount: 1,
+      invocationKind: 'scheduled',
+      reasonCode: 'retryable-failures',
+    })
+    expect(JSON.stringify(runEvidence.record.mock.calls)).not.toMatch(
+      /student|learner|payload|content|provider|transcript|note|secret/i,
+    )
+  })
+
+  it('records a bounded unavailable result and fails closed if evidence cannot persist', async () => {
+    const runEvidence = {
+      isDurable: true,
+      isReady: () => true,
+      record: vi.fn(async () => ({ recorded: true, replayed: false })),
+    }
+    const worker = readyWorker()
+    worker.run.mockRejectedValueOnce(new Error('durable_port_unavailable'))
+    const handler = createStudyAdultReviewScheduledWorkerHandler({
+      env: ENV,
+      worker,
+      scheduledWorkerCredentialSource: readyCredentialSource(),
+      runEvidence,
+      createRunId: () => '00000000-0000-4000-8000-000000000103',
+      now: () => new Date('2026-08-10T12:10:00.000Z'),
+    })
+    expect(body(await handler()).status).toBe('unavailable')
+    expect(runEvidence.record).toHaveBeenCalledWith(expect.objectContaining({
+      resultCategory: 'unavailable',
+      claimedCount: 0,
+      processedCount: 0,
+      retryableFailureCount: 0,
+      terminalFailureCount: 0,
+      reasonCode: 'dependency-unavailable',
+    }))
+
+    runEvidence.record.mockRejectedValueOnce(new Error('private database detail'))
+    expect(body(await handler())).toEqual({
+      status: 'unavailable', claimed: 0, delivered: 0, indeterminate: 0, failed: 0,
+    })
   })
 
   it.each([

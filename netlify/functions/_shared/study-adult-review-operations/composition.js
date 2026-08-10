@@ -9,6 +9,7 @@ import {
   createNetlifyWorkerInvocationAuthorization,
 } from '../study-worker/credential.js'
 import { createSupabaseAdultReviewOperations } from './supabase-operations.js'
+import { createSupabaseAdultReviewRunEvidence } from './run-evidence.js'
 import { createAdultReviewWorker } from './worker.js'
 
 /**
@@ -194,6 +195,12 @@ export async function createProductionAdultReviewWorkerComposition(options = {})
 
   const credentialVerifier = createNetlifyWorkerCredentialVerifier({ env })
   if (credentialVerifier.isReady() !== true) fail('worker_credential_not_configured')
+  const runEvidence = createSupabaseAdultReviewRunEvidence({
+    rpc,
+    workerIdentity: credentialVerifier.workerIdentity,
+    credentialVersion: credentialVerifier.credentialVersion,
+  })
+  if (runEvidence.isReady() !== true) fail('worker_run_evidence_not_ready')
 
   // Durable policy source. The in-app delivery policy is read from the durable
   // adult-review readiness RPC, never from an environment flag, so an enabled
@@ -271,6 +278,7 @@ export async function createProductionAdultReviewWorkerComposition(options = {})
     worker: Object.freeze({ ready: worker.ready, run: worker.run }),
     workerAuthorization,
     scheduledWorkerCredentialSource,
+    runEvidence,
     // Exposed so the composition's one-instance and route guarantees are
     // provable from outside, not merely asserted in a comment.
     operations,
