@@ -153,6 +153,24 @@ describe('Sync Protocol v2 RPC declarations', () => {
     })
     expect(rpc).not.toHaveBeenCalled()
   })
+
+  it.each([' p1', 'p1 ', 'P1', 'p6', 'learner-one', '\uff50\uff11'])(
+    'rejects noncanonical mutation profile identity %j before dispatch',
+    async (profileId) => {
+      const { client, rpc } = mockRpcClient()
+      const request = mutationRequest()
+      const result = await new AcademySyncV2Client(client).applyMutation({
+        ...request,
+        profiles: [{ ...request.profiles[0], profile_id: profileId }],
+      })
+      expect(result).toMatchObject({
+        ok: false,
+        classification: 'authentication-provenance-mismatch',
+        state: { status: 'normal' },
+      })
+      expect(rpc).not.toHaveBeenCalled()
+    },
+  )
 })
 
 describe('v2 snapshot compatibility reader', () => {
@@ -233,6 +251,29 @@ describe('v2 snapshot compatibility reader', () => {
       expect(JSON.stringify(result)).not.toContain(secret)
     },
   )
+
+  it.each([' p1', 'p1 ', 'P1', 'p6', 'learner-one', '\uff50\uff11'])(
+    'does not accept a cloud row under noncanonical identity %j',
+    async (profileId) => {
+      const { client, rpc } = mockRpcClient()
+      rpc.mockResolvedValue(
+        snapshotResponse([
+          {
+            profile_id: profileId,
+            data: { ...profile(), id: profileId },
+            updated_at: '2026-08-09T12:00:00.000Z',
+          },
+        ]),
+      )
+      await expect(
+        new AcademySyncV2Client(client).snapshot(),
+      ).resolves.toMatchObject({
+        ok: false,
+        classification: 'authentication-provenance-mismatch',
+        state: { status: 'normal' },
+      })
+    },
+  )
 })
 
 describe('strict protocol-v2 response shapes', () => {
@@ -310,7 +351,10 @@ describe('v2 maintenance and update-required controls', () => {
     const wait = vi.fn(async () => undefined)
     const blocked = await runWithNetworkRetry(
       () => sync.applyMutation(mutationRequest()),
-      { wait, maxAttempts: 5 },
+      {
+        wait,
+        maxAttempts: 5,
+      },
     )
     expect(blocked).toMatchObject({
       ok: false,
@@ -337,7 +381,10 @@ describe('v2 maintenance and update-required controls', () => {
     const wait = vi.fn(async () => undefined)
     const result = await runWithNetworkRetry(
       () => sync.snapshot({ intent: 'maintenance-probe' }),
-      { wait, maxAttempts: 5 },
+      {
+        wait,
+        maxAttempts: 5,
+      },
     )
     expect(result).toMatchObject({
       ok: false,
@@ -355,6 +402,7 @@ describe('v2 maintenance and update-required controls', () => {
     rpc.mockResolvedValue({
       data: {
         status: 'update-required',
+        mode: 'update-required',
         sync_protocol_version: 3,
         minimum_supported_sync_version: 3,
       },
@@ -391,6 +439,277 @@ describe('v2 maintenance and update-required controls', () => {
     })
     expect(rpc).toHaveBeenCalledOnce()
   })
+
+  it('accepts a valid typed update-required transport error without parsing its message', async () => {
+    const { client, rpc } = mockRpcClient()
+    rpc.mockResolvedValue({
+      data: null,
+      error: {
+        message: 'opaque server control',
+        status: 'update-required',
+        mode: 'update-required',
+        syncProtocolVersion: 3,
+        minimumSupportedSyncVersion: 3,
+      },
+    })
+
+    await expect(
+      new AcademySyncV2Client(client).snapshot(),
+    ).resolves.toMatchObject({
+      ok: false,
+      classification: 'unsupported-protocol-update-required',
+      state: {
+        status: 'update-required',
+        syncProtocolVersion: 3,
+        minimumSupportedSyncVersion: 3,
+      },
+    })
+  })
+
+  it('accepts a valid typed maintenance transport error with authoritative fields', async () => {
+    const { client, rpc } = mockRpcClient()
+    rpc.mockResolvedValue({
+      data: null,
+      error: {
+        message: 'opaque server control',
+        status: 'maintenance',
+        mode: 'maintenance',
+        syncProtocolVersion: 2,
+        minimumSupportedSyncVersion: 2,
+        retryAfter: '2026-08-09T12:15:00.000Z',
+      },
+    })
+
+    await expect(
+      new AcademySyncV2Client(client).snapshot(),
+    ).resolves.toMatchObject({
+      ok: false,
+      classification: 'maintenance',
+      state: {
+        status: 'maintenance',
+        syncProtocolVersion: 2,
+        minimumSupportedSyncVersion: 2,
+        retryAfter: '2026-08-09T12:15:00.000Z',
+      },
+    })
+  })
+})
+
+describe('structured compatibility authority', () => {
+  const misleadingMessages = [
+    'update-required minimum supported protocol is 99',
+    'maintenance',
+    'please upgrade',
+    'protocol unsupported',
+    'minimum version 3',
+  ] as const
+
+  it.each(misleadingMessages)(
+    'does not derive protocol-control state from thrown Error message %j',
+    async (message) => {
+      const { client, rpc } = mockRpcClient()
+      rpc.mockRejectedValue(new Error(message))
+      const result = await new AcademySyncV2Client(client).snapshot()
+      expect(result).toMatchObject({
+        ok: false,
+        classification: 'network-transient',
+        state: { status: 'normal', syncProtocolVersion: 2 },
+      })
+      expect(result.state).not.toHaveProperty('minimumSupportedSyncVersion')
+    },
+  )
+
+  it.each(['ACADEMY_SYNC_MAINTENANCE', 'ACADEMY_SYNC_UNSUPPORTED_PROTOCOL'])(
+    'does not treat code-only transport error %s as compatibility authority',
+    async (code) => {
+      const { client, rpc } = mockRpcClient()
+      rpc.mockResolvedValue({
+        data: null,
+        error: { message: 'opaque', code },
+      })
+      const result = await new AcademySyncV2Client(client).snapshot()
+      expect(result).toMatchObject({
+        ok: false,
+        classification: 'authentication-provenance-mismatch',
+        state: { status: 'normal', syncProtocolVersion: 2 },
+      })
+      expect(result.state).not.toHaveProperty('minimumSupportedSyncVersion')
+    },
+  )
+
+  it.each(misleadingMessages)(
+    'does not derive protocol-control state from RPC error message %j',
+    async (message) => {
+      const { client, rpc } = mockRpcClient()
+      rpc.mockResolvedValue({ data: null, error: { message } })
+      const result = await new AcademySyncV2Client(client).snapshot()
+      expect(result).toMatchObject({
+        ok: false,
+        classification: 'authentication-provenance-mismatch',
+        state: { status: 'normal', syncProtocolVersion: 2 },
+      })
+      expect(result.state).not.toHaveProperty('minimumSupportedSyncVersion')
+    },
+  )
+
+  const malformedResponseControls = [
+    [
+      'missing minimum version',
+      {
+        status: 'update-required',
+        mode: 'update-required',
+        sync_protocol_version: 3,
+      },
+    ],
+    [
+      'unknown status',
+      {
+        status: 'future-control',
+        mode: 'future-control',
+        sync_protocol_version: 3,
+        minimum_supported_sync_version: 3,
+      },
+    ],
+    [
+      'normal and update-required mismatch',
+      {
+        status: 'normal',
+        mode: 'normal',
+        sync_protocol_version: 3,
+        minimum_supported_sync_version: 3,
+        revision: '1',
+        rows: [],
+      },
+    ],
+    [
+      'update-required status in normal mode',
+      {
+        status: 'update-required',
+        mode: 'normal',
+        sync_protocol_version: 3,
+        minimum_supported_sync_version: 3,
+      },
+    ],
+    [
+      'bad protocol types',
+      {
+        status: 'update-required',
+        mode: 'update-required',
+        sync_protocol_version: '3',
+        minimum_supported_sync_version: 3,
+      },
+    ],
+    [
+      'negative versions',
+      {
+        status: 'maintenance',
+        mode: 'maintenance',
+        sync_protocol_version: -1,
+        minimum_supported_sync_version: -1,
+      },
+    ],
+    [
+      'impossible version range',
+      {
+        status: 'update-required',
+        mode: 'update-required',
+        sync_protocol_version: 2,
+        minimum_supported_sync_version: 3,
+      },
+    ],
+    [
+      'unknown field',
+      {
+        status: 'update-required',
+        mode: 'update-required',
+        sync_protocol_version: 3,
+        minimum_supported_sync_version: 3,
+        unexpected: true,
+      },
+    ],
+  ] as const
+
+  it.each(malformedResponseControls)(
+    'fails closed on structured response with %s',
+    async (_label, data) => {
+      const { client, rpc } = mockRpcClient()
+      rpc.mockResolvedValue({ data, error: null })
+      const result = await new AcademySyncV2Client(client).snapshot()
+      expect(result).toMatchObject({
+        ok: false,
+        classification: 'authentication-provenance-mismatch',
+        state: { status: 'normal', syncProtocolVersion: 2 },
+      })
+      expect(result.state).not.toHaveProperty('minimumSupportedSyncVersion')
+    },
+  )
+
+  const malformedErrorControls = [
+    {
+      message: 'opaque',
+      status: 'update-required',
+      mode: 'update-required',
+      syncProtocolVersion: 3,
+    },
+    {
+      message: 'opaque',
+      status: 'unknown',
+      mode: 'unknown',
+      syncProtocolVersion: 3,
+      minimumSupportedSyncVersion: 3,
+    },
+    {
+      message: 'opaque',
+      status: 'update-required',
+      mode: 'normal',
+      syncProtocolVersion: 3,
+      minimumSupportedSyncVersion: 3,
+    },
+    {
+      message: 'opaque',
+      status: 'maintenance',
+      mode: 'maintenance',
+      syncProtocolVersion: 2,
+      minimumSupportedSyncVersion: '2',
+    },
+    {
+      message: 'opaque',
+      status: 'maintenance',
+      mode: 'maintenance',
+      syncProtocolVersion: -1,
+      minimumSupportedSyncVersion: -1,
+    },
+    {
+      message: 'opaque',
+      status: 'update-required',
+      mode: 'update-required',
+      syncProtocolVersion: 2,
+      minimumSupportedSyncVersion: 3,
+    },
+    {
+      message: 'opaque',
+      status: 'update-required',
+      mode: 'update-required',
+      syncProtocolVersion: 3,
+      minimumSupportedSyncVersion: 3,
+      unexpected: true,
+    },
+  ] as const
+
+  it.each(malformedErrorControls)(
+    'fails closed on malformed typed control error %#',
+    async (error) => {
+      const { client, rpc } = mockRpcClient()
+      rpc.mockResolvedValue({ data: null, error })
+      const result = await new AcademySyncV2Client(client).snapshot()
+      expect(result).toMatchObject({
+        ok: false,
+        classification: 'authentication-provenance-mismatch',
+        state: { status: 'normal', syncProtocolVersion: 2 },
+      })
+      expect(result.state).not.toHaveProperty('minimumSupportedSyncVersion')
+    },
+  )
 })
 
 describe('v2 outcome and retry classification', () => {
@@ -402,7 +721,11 @@ describe('v2 outcome and retry classification', () => {
     const wait = vi.fn(async () => undefined)
     const result = await runWithNetworkRetry(
       () => new AcademySyncV2Client(client).snapshot(),
-      { wait, maxAttempts: 3, baseDelayMs: 200 },
+      {
+        wait,
+        maxAttempts: 3,
+        baseDelayMs: 200,
+      },
     )
     expect(result).toMatchObject({ ok: true, revision: '7' })
     expect(rpc).toHaveBeenCalledTimes(2)
@@ -417,7 +740,10 @@ describe('v2 outcome and retry classification', () => {
     const wait = vi.fn(async () => undefined)
     const result = await runWithNetworkRetry(
       () => sync.applyMutation(mutationRequest()),
-      { wait, maxAttempts: 5 },
+      {
+        wait,
+        maxAttempts: 5,
+      },
     )
     expect(result).toMatchObject({
       ok: false,

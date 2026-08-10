@@ -1,5 +1,9 @@
-import { assertCredentialFreeEducationalStructure } from '../security/contracts'
-import type { CredentialFreeEducationalProfile } from '../security/contracts'
+import {
+  assertCredentialFreeEducationalStructure,
+  parseProfileId,
+  type CredentialFreeEducationalProfile,
+  type ProfileId,
+} from '../security/contracts'
 import type { Profile } from '../types'
 import { profileHash } from './engine'
 import {
@@ -395,9 +399,12 @@ function projectEducationalValue(
 
 export type EducationalProfileInput = Profile | CredentialFreeEducationalProfile
 
+export type CanonicalCredentialFreeEducationalProfile =
+  CredentialFreeEducationalProfile & Readonly<{ id: ProfileId }>
+
 function credentialFreeBoundary(
   profile: EducationalProfileInput,
-): CredentialFreeEducationalProfile {
+): CanonicalCredentialFreeEducationalProfile {
   try {
     assertCredentialFreeEducationalStructure(profile, {
       allowLegacyRootPin: true,
@@ -414,15 +421,20 @@ function credentialFreeBoundary(
       EDUCATIONAL_PROFILE_SCHEMA,
       'profile',
     ) as CredentialFreeEducationalProfile
-    const validationProfile = { ...projected, pin: '' } as Profile
-    if (!validateProfileForSync(projected.id, validationProfile)) {
+    const profileId = parseProfileId(projected.id)
+    if (!profileId) throw new InvalidEducationalProfileError()
+    const canonical = projected as CanonicalCredentialFreeEducationalProfile
+    const validationProfile = { ...canonical, pin: '' } as Profile
+    if (!validateProfileForSync(profileId, validationProfile)) {
       throw new InvalidEducationalProfileError()
     }
-    return projected
+    return canonical
   } catch (cause) {
     if (
       cause instanceof Error &&
-      /credential-like material is forbidden/i.test(cause.message)
+      /credential-like material is forbidden|portable security material is forbidden/i.test(
+        cause.message,
+      )
     ) {
       throw new CredentialBearingProfileError(cause.message)
     }
@@ -434,12 +446,12 @@ function credentialFreeBoundary(
 /** Explicit recursive Sync Protocol v2 educational-profile serializer. */
 export function serializeCredentialFreeEducationalProfile(
   profile: EducationalProfileInput,
-): CredentialFreeEducationalProfile {
+): CanonicalCredentialFreeEducationalProfile {
   return credentialFreeBoundary(profile)
 }
 
 export interface LegacyPinConsumer {
-  (profileId: string, pin: string): Promise<void>
+  (profileId: ProfileId, pin: string): Promise<void>
 }
 
 /**
@@ -450,14 +462,14 @@ export interface LegacyPinConsumer {
  */
 export interface LegacyPinHandoff {
   readonly kind: 'legacy-pin'
-  readonly profileId: string
+  readonly profileId: ProfileId
   readonly migrationRequired: true
   readonly consumed: boolean
   consume(consumer: LegacyPinConsumer): Promise<void>
   discard(): void
   toJSON(): Readonly<{
     kind: 'legacy-pin'
-    profileId: string
+    profileId: ProfileId
     migrationRequired: true
     consumed: boolean
     secret: '[redacted]'
@@ -471,7 +483,7 @@ class OneUseLegacyPinHandoff implements LegacyPinHandoff {
   #consuming = false
 
   constructor(
-    readonly profileId: string,
+    readonly profileId: ProfileId,
     pin: string,
   ) {
     this.#pin = pin
@@ -521,7 +533,7 @@ export type EducationalProfileReadResult =
   | Readonly<{
       ok: true
       source: 'legacy' | 'credential-free-v2'
-      profile: CredentialFreeEducationalProfile
+      profile: CanonicalCredentialFreeEducationalProfile
       legacyCredentialHandoff: LegacyPinHandoff | null
     }>
   | Readonly<{

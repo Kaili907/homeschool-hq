@@ -1,12 +1,15 @@
 import {
   ACADEMY_SYNC_PROTOCOL_VERSION,
   type CredentialFreeEducationalProfile,
+  parseProfileId,
+  type ProfileId,
 } from '../security/contracts'
 import {
   CredentialBearingProfileError,
   InvalidEducationalProfileError,
   readEducationalProfile,
   serializeCredentialFreeEducationalProfile,
+  type CanonicalCredentialFreeEducationalProfile,
   type EducationalProfileInput,
   type LegacyPinHandoff,
 } from './credentialFreeProfile'
@@ -24,8 +27,8 @@ export interface AcademySyncSnapshotV2Params {
 }
 
 export interface CredentialFreeProfileMutationRow {
-  readonly profile_id: string
-  readonly data: CredentialFreeEducationalProfile
+  readonly profile_id: ProfileId
+  readonly data: CanonicalCredentialFreeEducationalProfile
   readonly updated_at: string
 }
 
@@ -41,11 +44,34 @@ export interface AcademySyncV2RpcParamsByName {
   readonly academy_apply_profile_mutation_v2: AcademyApplyProfileMutationV2Params
 }
 
-export interface AcademySyncV2RpcError {
+export interface AcademySyncV2TransportError {
   readonly message: string
   readonly code?: string
   readonly status?: number
 }
+
+export type AcademySyncV2ProtocolControlError =
+  | Readonly<{
+      message: string
+      code?: string
+      status: 'maintenance'
+      mode: 'maintenance'
+      syncProtocolVersion: number
+      minimumSupportedSyncVersion: number
+      retryAfter?: string
+    }>
+  | Readonly<{
+      message: string
+      code?: string
+      status: 'update-required'
+      mode: 'update-required'
+      syncProtocolVersion: number
+      minimumSupportedSyncVersion: number
+      retryAfter?: never
+    }>
+
+export type AcademySyncV2RpcError =
+  AcademySyncV2TransportError | AcademySyncV2ProtocolControlError
 
 export interface AcademySyncV2RpcResponse {
   readonly data: unknown
@@ -150,8 +176,8 @@ export interface AcademySyncV2Failure {
 }
 
 export interface RemoteEducationalProfileRowV2 {
-  readonly profile_id: string
-  readonly data: CredentialFreeEducationalProfile
+  readonly profile_id: ProfileId
+  readonly data: CanonicalCredentialFreeEducationalProfile
   readonly updated_at: string
 }
 
@@ -201,26 +227,215 @@ function plainRecord(value: unknown): value is Record<string, unknown> {
   return prototype === Object.prototype || prototype === null
 }
 
-function safeInteger(value: unknown): number | null {
-  return typeof value === 'number' && Number.isSafeInteger(value) && value >= 0
+function positiveSafeInteger(value: unknown): number | null {
+  return typeof value === 'number' && Number.isSafeInteger(value) && value > 0
     ? value
     : null
 }
 
-function advertisedProtocol(record: Record<string, unknown>): number | null {
-  return safeInteger(record.sync_protocol_version ?? record.syncProtocolVersion)
+function aliasedPositiveInteger(
+  record: Record<string, unknown>,
+  snakeCaseKey: string,
+  camelCaseKey: string,
+): number | null {
+  const hasSnakeCase = Object.prototype.hasOwnProperty.call(
+    record,
+    snakeCaseKey,
+  )
+  const hasCamelCase = Object.prototype.hasOwnProperty.call(
+    record,
+    camelCaseKey,
+  )
+  if (hasSnakeCase === hasCamelCase) return null
+  return positiveSafeInteger(record[hasSnakeCase ? snakeCaseKey : camelCaseKey])
 }
 
-function advertisedMinimum(record: Record<string, unknown>): number | null {
-  return safeInteger(
-    record.minimum_supported_sync_version ?? record.minimumSupportedSyncVersion,
+function advertisedProtocol(record: Record<string, unknown>): number | null {
+  return aliasedPositiveInteger(
+    record,
+    'sync_protocol_version',
+    'syncProtocolVersion',
   )
 }
 
-function normalizedStatus(value: unknown): string {
-  return typeof value === 'string'
-    ? value.trim().toLowerCase().replace(/_/g, '-')
-    : ''
+function advertisedMinimum(record: Record<string, unknown>): number | null {
+  return aliasedPositiveInteger(
+    record,
+    'minimum_supported_sync_version',
+    'minimumSupportedSyncVersion',
+  )
+}
+
+type ValidatedProtocolControl =
+  | Readonly<{
+      status: 'maintenance'
+      mode: 'maintenance'
+      syncProtocolVersion: number
+      minimumSupportedSyncVersion: number
+      retryAfter?: string
+    }>
+  | Readonly<{
+      status: 'update-required'
+      mode: 'update-required'
+      syncProtocolVersion: number
+      minimumSupportedSyncVersion: number
+    }>
+
+type ProtocolControlParseResult =
+  | Readonly<{ kind: 'not-control' }>
+  | Readonly<{ kind: 'invalid-control' }>
+  | Readonly<{ kind: 'valid-control'; control: ValidatedProtocolControl }>
+
+const CONTROL_STATUSES = new Set(['maintenance', 'update-required'])
+
+type ProtocolControlSource = 'response' | 'typed-error'
+
+const RESPONSE_CONTROL_KEYS = new Set([
+  'status',
+  'mode',
+  'sync_protocol_version',
+  'syncProtocolVersion',
+  'minimum_supported_sync_version',
+  'minimumSupportedSyncVersion',
+  'retry_after',
+  'retryAfter',
+])
+
+const TYPED_ERROR_CONTROL_KEYS = new Set([
+  'message',
+  'code',
+  'status',
+  'mode',
+  'syncProtocolVersion',
+  'minimumSupportedSyncVersion',
+  'retryAfter',
+])
+
+function hasOnlyDataProperties(
+  record: Record<string, unknown>,
+  allowedKeys: ReadonlySet<string>,
+): boolean {
+  try {
+    return Reflect.ownKeys(record).every((key) => {
+      if (typeof key !== 'string' || !allowedKeys.has(key)) return false
+      const descriptor = Object.getOwnPropertyDescriptor(record, key)
+      return !!descriptor && descriptor.enumerable && 'value' in descriptor
+    })
+  } catch {
+    return false
+  }
+}
+
+function aliasedOptionalRetryAfter(record: Record<string, unknown>): {
+  readonly valid: boolean
+  readonly value?: string
+} {
+  const hasSnakeCase = Object.prototype.hasOwnProperty.call(
+    record,
+    'retry_after',
+  )
+  const hasCamelCase = Object.prototype.hasOwnProperty.call(
+    record,
+    'retryAfter',
+  )
+  if (hasSnakeCase && hasCamelCase) return { valid: false }
+  if (!hasSnakeCase && !hasCamelCase) return { valid: true }
+  const value = record[hasSnakeCase ? 'retry_after' : 'retryAfter']
+  return typeof value === 'string' && value.length > 0 && value.length <= 256
+    ? { valid: true, value }
+    : { valid: false }
+}
+
+function parseProtocolControl(
+  record: Record<string, unknown>,
+  source: ProtocolControlSource,
+): ProtocolControlParseResult {
+  const status = record.status
+  const mode = record.mode
+  const isCandidate =
+    (typeof status === 'string' && CONTROL_STATUSES.has(status)) ||
+    (typeof mode === 'string' && CONTROL_STATUSES.has(mode))
+  if (!isCandidate) return { kind: 'not-control' }
+  const allowedKeys =
+    source === 'response' ? RESPONSE_CONTROL_KEYS : TYPED_ERROR_CONTROL_KEYS
+  if (!hasOnlyDataProperties(record, allowedKeys)) {
+    return { kind: 'invalid-control' }
+  }
+  if (
+    source === 'typed-error' &&
+    (typeof record.message !== 'string' ||
+      (Object.prototype.hasOwnProperty.call(record, 'code') &&
+        typeof record.code !== 'string') ||
+      Object.prototype.hasOwnProperty.call(record, 'sync_protocol_version') ||
+      Object.prototype.hasOwnProperty.call(
+        record,
+        'minimum_supported_sync_version',
+      ) ||
+      Object.prototype.hasOwnProperty.call(record, 'retry_after'))
+  ) {
+    return { kind: 'invalid-control' }
+  }
+  if (
+    (status !== 'maintenance' && status !== 'update-required') ||
+    mode !== status
+  ) {
+    return { kind: 'invalid-control' }
+  }
+
+  const syncProtocolVersion = advertisedProtocol(record)
+  const minimumSupportedSyncVersion = advertisedMinimum(record)
+  if (
+    syncProtocolVersion === null ||
+    minimumSupportedSyncVersion === null ||
+    syncProtocolVersion < minimumSupportedSyncVersion
+  ) {
+    return { kind: 'invalid-control' }
+  }
+
+  const retryAfter = aliasedOptionalRetryAfter(record)
+  if (!retryAfter.valid) return { kind: 'invalid-control' }
+  if (status === 'update-required') {
+    if (
+      minimumSupportedSyncVersion <= ACADEMY_SYNC_PROTOCOL_VERSION ||
+      retryAfter.value !== undefined
+    ) {
+      return { kind: 'invalid-control' }
+    }
+    return {
+      kind: 'valid-control',
+      control: {
+        status,
+        mode: status,
+        syncProtocolVersion,
+        minimumSupportedSyncVersion,
+      },
+    }
+  }
+  if (minimumSupportedSyncVersion > ACADEMY_SYNC_PROTOCOL_VERSION) {
+    return { kind: 'invalid-control' }
+  }
+  return {
+    kind: 'valid-control',
+    control: {
+      status,
+      mode: status,
+      syncProtocolVersion,
+      minimumSupportedSyncVersion,
+      ...(retryAfter.value ? { retryAfter: retryAfter.value } : {}),
+    },
+  }
+}
+
+function isValidNormalProtocolAdvertisement(
+  record: Record<string, unknown>,
+): boolean {
+  const syncProtocolVersion = advertisedProtocol(record)
+  const minimumSupportedSyncVersion = advertisedMinimum(record)
+  return (
+    syncProtocolVersion === ACADEMY_SYNC_PROTOCOL_VERSION &&
+    minimumSupportedSyncVersion !== null &&
+    minimumSupportedSyncVersion <= ACADEMY_SYNC_PROTOCOL_VERSION
+  )
 }
 
 function parseRevision(value: unknown): string | null {
@@ -234,19 +449,13 @@ function parseRevision(value: unknown): string | null {
 }
 
 function maintenanceState(
-  record: Record<string, unknown>,
+  control: Extract<ValidatedProtocolControl, { status: 'maintenance' }>,
 ): Extract<AcademySyncV2ClientState, { status: 'maintenance' }> {
-  const retryAfter =
-    typeof (record.retry_after ?? record.retryAfter) === 'string'
-      ? String(record.retry_after ?? record.retryAfter)
-      : undefined
   return {
     status: 'maintenance',
-    syncProtocolVersion:
-      advertisedProtocol(record) ?? ACADEMY_SYNC_PROTOCOL_VERSION,
-    minimumSupportedSyncVersion:
-      advertisedMinimum(record) ?? ACADEMY_SYNC_PROTOCOL_VERSION,
-    ...(retryAfter ? { retryAfter } : {}),
+    syncProtocolVersion: control.syncProtocolVersion,
+    minimumSupportedSyncVersion: control.minimumSupportedSyncVersion,
+    ...(control.retryAfter ? { retryAfter: control.retryAfter } : {}),
     message:
       'Academy cloud sync is paused for maintenance. Unsynced educational work remains on this device.',
     controls: {
@@ -260,14 +469,12 @@ function maintenanceState(
 }
 
 function updateRequiredState(
-  record: Record<string, unknown>,
+  control: Extract<ValidatedProtocolControl, { status: 'update-required' }>,
 ): Extract<AcademySyncV2ClientState, { status: 'update-required' }> {
   return {
     status: 'update-required',
-    syncProtocolVersion:
-      advertisedProtocol(record) ?? ACADEMY_SYNC_PROTOCOL_VERSION,
-    minimumSupportedSyncVersion:
-      advertisedMinimum(record) ?? ACADEMY_SYNC_PROTOCOL_VERSION + 1,
+    syncProtocolVersion: control.syncProtocolVersion,
+    minimumSupportedSyncVersion: control.minimumSupportedSyncVersion,
     refreshRequired: true,
     message:
       'This Academy client must be refreshed before cloud sync can continue. Unsynced educational work remains on this device.',
@@ -330,36 +537,19 @@ function errorClassification(
   error: AcademySyncV2RpcError,
 ): AcademySyncV2OutcomeClass {
   const code = (error.code ?? '').toUpperCase()
-  const message = error.message.toLowerCase()
   if (
-    error.status === 408 ||
-    error.status === 425 ||
-    error.status === 429 ||
-    (typeof error.status === 'number' && error.status >= 500) ||
+    (typeof error.status === 'number' &&
+      (error.status === 408 ||
+        error.status === 425 ||
+        error.status === 429 ||
+        error.status >= 500)) ||
     /^08/.test(code) ||
     ['PGRST000', 'PGRST001', '53300', '57P01'].includes(code)
   ) {
     return 'network-transient'
   }
-  if (
-    code === 'ACADEMY_SYNC_CAS_CONFLICT' ||
-    /\bcas conflict\b/.test(message)
-  ) {
-    return 'cas-conflict'
-  }
-  if (code === 'ACADEMY_SYNC_MAINTENANCE' || /\bmaintenance\b/.test(message)) {
-    return 'maintenance'
-  }
-  if (
-    code === 'ACADEMY_SYNC_UNSUPPORTED_PROTOCOL' ||
-    /unsupported (sync )?protocol|update required/.test(message)
-  ) {
-    return 'unsupported-protocol-update-required'
-  }
-  if (
-    code === 'ACADEMY_SYNC_CREDENTIAL_PAYLOAD' ||
-    /credential-bearing|credential payload/.test(message)
-  ) {
+  if (code === 'ACADEMY_SYNC_CAS_CONFLICT') return 'cas-conflict'
+  if (code === 'ACADEMY_SYNC_CREDENTIAL_PAYLOAD') {
     return 'credential-bearing-payload-rejection'
   }
   return 'authentication-provenance-mismatch'
@@ -392,22 +582,24 @@ function mutationPayload(
       'Too many profiles were supplied for synchronization.',
     )
   }
-  const ids = new Set<string>()
+  const ids = new Set<ProfileId>()
   return rows.map((row) => {
+    const profileId = parseProfileId(row.profile_id)
     if (
-      !/^p[1-5]$/.test(row.profile_id) ||
-      ids.has(row.profile_id) ||
-      row.data.id !== row.profile_id ||
+      !profileId ||
+      ids.has(profileId) ||
       typeof row.updated_at !== 'string' ||
       row.updated_at.length > 64 ||
       Number.isNaN(Date.parse(row.updated_at))
     ) {
       throw new InvalidEducationalProfileError()
     }
-    ids.add(row.profile_id)
+    const data = serializeCredentialFreeEducationalProfile(row.data)
+    if (data.id !== profileId) throw new InvalidEducationalProfileError()
+    ids.add(profileId)
     return {
-      profile_id: row.profile_id,
-      data: serializeCredentialFreeEducationalProfile(row.data),
+      profile_id: profileId,
+      data,
       updated_at: row.updated_at,
     }
   })
@@ -445,7 +637,7 @@ function parseSnapshotRows(
       NORMAL_STATE,
     )
   }
-  const ids = new Set<string>()
+  const ids = new Set<ProfileId>()
   const rows: RemoteEducationalProfileRowV2[] = []
   const handoffs: LegacyPinHandoff[] = []
   for (const candidate of value) {
@@ -456,11 +648,10 @@ function parseSnapshotRows(
         NORMAL_STATE,
       )
     }
-    const profileId = candidate.profile_id
+    const profileId = parseProfileId(candidate.profile_id)
     const updatedAt = candidate.updated_at
     if (
-      typeof profileId !== 'string' ||
-      !/^p[1-5]$/.test(profileId) ||
+      !profileId ||
       ids.has(profileId) ||
       typeof updatedAt !== 'string' ||
       updatedAt.length > 64 ||
@@ -578,10 +769,12 @@ export class AcademySyncV2Client {
     }
     const controlled = this.#serverControl(response.data)
     if (controlled) return controlled
-    const status = normalizedStatus(response.data.status)
-    const mode = normalizedStatus(response.data.mode)
+    const status = response.data.status
+    const mode = response.data.mode
     const acceptedSnapshotShape =
-      mode === 'normal' && (status === 'ok' || status === 'normal')
+      isValidNormalProtocolAdvertisement(response.data) &&
+      mode === 'normal' &&
+      (status === 'ok' || status === 'normal')
     if (!acceptedSnapshotShape) {
       return failure(
         'authentication-provenance-mismatch',
@@ -690,10 +883,13 @@ export class AcademySyncV2Client {
     }
     const controlled = this.#serverControl(response.data)
     if (controlled) return controlled
-    const status = normalizedStatus(response.data.status)
-    const mode = normalizedStatus(response.data.mode)
+    const status = response.data.status
+    const mode = response.data.mode
     const revision = parseRevision(response.data.revision)
-    if (mode !== '' && mode !== 'normal') {
+    if (
+      !isValidNormalProtocolAdvertisement(response.data) ||
+      (mode !== undefined && mode !== 'normal')
+    ) {
       return failure(
         'authentication-provenance-mismatch',
         'The cloud returned an unknown Sync Protocol v2 mutation result.',
@@ -747,41 +943,56 @@ export class AcademySyncV2Client {
   }
 
   #serverControl(record: Record<string, unknown>): AcademySyncV2Failure | null {
-    const status = normalizedStatus(record.status)
-    const mode = normalizedStatus(record.mode)
-    const protocol = advertisedProtocol(record)
-    const minimum = advertisedMinimum(record)
-    if (
-      status === 'update-required' ||
-      status === 'unsupported-protocol' ||
-      protocol !== ACADEMY_SYNC_PROTOCOL_VERSION ||
-      minimum !== ACADEMY_SYNC_PROTOCOL_VERSION
-    ) {
-      this.#state = updateRequiredState(record)
+    const parsed = parseProtocolControl(record, 'response')
+    if (parsed.kind === 'not-control') return null
+    if (parsed.kind === 'invalid-control') {
+      return failure(
+        'authentication-provenance-mismatch',
+        'The cloud returned malformed Sync Protocol v2 compatibility state.',
+        this.#state,
+      )
+    }
+    if (parsed.control.status === 'maintenance') {
+      this.#state = maintenanceState(parsed.control)
+      return failure('maintenance', this.#state.message, this.#state)
+    }
+    this.#state = updateRequiredState(parsed.control)
+    return failure(
+      'unsupported-protocol-update-required',
+      this.#state.message,
+      this.#state,
+    )
+  }
+
+  #failureFromRpcError(error: AcademySyncV2RpcError): AcademySyncV2Failure {
+    if (!plainRecord(error)) {
+      return failure(
+        'authentication-provenance-mismatch',
+        messageForClassification('authentication-provenance-mismatch'),
+        this.#state,
+      )
+    }
+    const parsed = parseProtocolControl(error, 'typed-error')
+    if (parsed.kind === 'invalid-control') {
+      return failure(
+        'authentication-provenance-mismatch',
+        'The cloud returned malformed Sync Protocol v2 compatibility state.',
+        this.#state,
+      )
+    }
+    if (parsed.kind === 'valid-control') {
+      if (parsed.control.status === 'maintenance') {
+        this.#state = maintenanceState(parsed.control)
+        return failure('maintenance', this.#state.message, this.#state)
+      }
+      this.#state = updateRequiredState(parsed.control)
       return failure(
         'unsupported-protocol-update-required',
         this.#state.message,
         this.#state,
       )
     }
-    if (status === 'maintenance' && mode === 'maintenance') {
-      this.#state = maintenanceState(record)
-      return failure('maintenance', this.#state.message, this.#state)
-    }
-    return null
-  }
-
-  #failureFromRpcError(error: AcademySyncV2RpcError): AcademySyncV2Failure {
     const classification = errorClassification(error)
-    if (classification === 'maintenance') {
-      this.#state = maintenanceState(
-        Object.create(null) as Record<string, unknown>,
-      )
-    } else if (classification === 'unsupported-protocol-update-required') {
-      this.#state = updateRequiredState(
-        Object.create(null) as Record<string, unknown>,
-      )
-    }
     return failure(
       classification,
       messageForClassification(classification),

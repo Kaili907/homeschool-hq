@@ -1,10 +1,16 @@
 import { describe, expect, it, vi } from 'vitest'
 import { emptyProfile } from '../migration'
-import type { CredentialFreeEducationalProfile } from '../security/contracts'
+import {
+  CANONICAL_PROFILE_IDS,
+  isProhibitedPortableSecurityKey,
+  PROHIBITED_PORTABLE_SECURITY_KEY_ALIASES,
+  type CredentialFreeEducationalProfile,
+} from '../security/contracts'
 import type { Profile } from '../types'
 import {
   CredentialBearingProfileError,
   credentialFreeProfileFingerprint,
+  InvalidEducationalProfileError,
   readEducationalProfile,
   reconcileStoredProfileFingerprint,
   serializeCredentialFreeEducationalProfile,
@@ -31,6 +37,95 @@ const missionItem = (extra: Record<string, unknown> = {}) => ({
   label: 'Write about why a password should stay private.',
   done: false,
   ...extra,
+})
+
+const PORTABLE_POLICY_REJECTED_KEYS = [
+  ...PROHIBITED_PORTABLE_SECURITY_KEY_ALIASES,
+  'lessonCredentialHint',
+  'parent-authorization-state',
+  'bearer_metadata',
+  'derivedVerifierBytes',
+  'passwordReminder',
+  'sharedSecretMaterial',
+  'identityToken',
+  'pinEntry',
+  'backupPin',
+  'saltMaterial',
+  'derivedSalt',
+  'replacementGrant',
+  'sessionRuntime',
+  'classSession',
+] as const
+
+function withPortableKeyAtAllowedDepths(key: string): Profile[] {
+  return [
+    {
+      ...legacyProfile(),
+      skills: {
+        [key]: {
+          attempts: 0,
+          correct: 0,
+          mastery: 0,
+        },
+      },
+    },
+    {
+      ...legacyProfile(),
+      tutor: {
+        voiceURI: '',
+        rate: 1,
+        voiceOptIn: false,
+        voiceMap: {
+          [key]: { provider: 'browser', ref: 'voice', label: 'Voice' },
+        },
+      },
+    },
+    {
+      ...legacyProfile(),
+      academy: {
+        releaseVersion: 'v1',
+        grade: '5',
+        enrolledAt: '2026-08-09T12:00:00.000Z',
+        courseIds: [],
+        lessons: {},
+        assessments: { [key]: [] },
+      },
+    },
+  ] as unknown as Profile[]
+}
+
+describe('canonical ProfileId adoption', () => {
+  it.each(CANONICAL_PROFILE_IDS)(
+    'accepts %s unchanged in serialization, reading, and fingerprinting',
+    async (id) => {
+      const candidate = { ...emptyProfile(id, 'Ada', '5'), pin: '1234' }
+      expect(serializeCredentialFreeEducationalProfile(candidate).id).toBe(id)
+      expect(readEducationalProfile(candidate)).toMatchObject({
+        ok: true,
+        profile: { id },
+      })
+      await expect(
+        credentialFreeProfileFingerprint(candidate),
+      ).resolves.toMatch(/^academy-profile-v2:sha256:[0-9a-f]{64}$/)
+    },
+  )
+
+  it.each([' p1', 'p1 ', 'P1', 'p6', 'learner-one', '\uff50\uff11'])(
+    'rejects noncanonical identity %j at every profile boundary',
+    async (id) => {
+      const candidate = { ...emptyProfile(id, 'Ada', '5'), pin: '1234' }
+      expect(() =>
+        serializeCredentialFreeEducationalProfile(candidate),
+      ).toThrow(InvalidEducationalProfileError)
+      expect(readEducationalProfile(candidate)).toMatchObject({
+        ok: false,
+        classification: 'invalid-profile',
+      })
+      await expect(credentialFreeProfileFingerprint(candidate)).rejects.toThrow(
+        InvalidEducationalProfileError,
+      )
+    },
+  )
 })
 
 describe('credential-free educational profile serializer', () => {
@@ -142,6 +237,35 @@ describe('credential-free educational profile serializer', () => {
     expect(() => serializeCredentialFreeEducationalProfile(candidate)).toThrow(
       /unapproved synchronization field/i,
     )
+  })
+})
+
+describe('shared portable-security parity', () => {
+  it.each(PORTABLE_POLICY_REJECTED_KEYS)(
+    'rejects shared-policy key %s in serializer, dual reader, and fingerprint canonicalization',
+    async (key) => {
+      expect(isProhibitedPortableSecurityKey(key)).toBe(true)
+      for (const candidate of withPortableKeyAtAllowedDepths(key)) {
+        expect(() =>
+          serializeCredentialFreeEducationalProfile(candidate),
+        ).toThrow(CredentialBearingProfileError)
+        expect(readEducationalProfile(candidate)).toMatchObject({
+          ok: false,
+          classification: 'credential-bearing-payload-rejection',
+        })
+        await expect(
+          credentialFreeProfileFingerprint(candidate),
+        ).rejects.toThrow(CredentialBearingProfileError)
+      }
+    },
+  )
+
+  it('preserves only the shared educational session plural/count exceptions admitted by the schema', () => {
+    const candidate = legacyProfile()
+    expect(candidate.totals.sessions).toEqual(expect.any(Number))
+    expect(() =>
+      serializeCredentialFreeEducationalProfile(candidate),
+    ).not.toThrow()
   })
 })
 
@@ -281,7 +405,10 @@ describe('dual profile reader and legacy credential handoff', () => {
   it('rejects malformed legacy PIN handoff material', () => {
     expect(
       readEducationalProfile({ ...legacyProfile(), pin: 'not-a-pin' }),
-    ).toMatchObject({ ok: false, classification: 'invalid-profile' })
+    ).toMatchObject({
+      ok: false,
+      classification: 'invalid-profile',
+    })
   })
 })
 

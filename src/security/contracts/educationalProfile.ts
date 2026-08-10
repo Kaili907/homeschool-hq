@@ -1,4 +1,8 @@
 import type { Profile } from '../../types'
+import {
+  assertPortableSecurityKeyFree,
+  PortableSecurityStructureError,
+} from './portableSecurity'
 
 /** Fields that can never cross the credential-free educational boundary. */
 export interface ForbiddenSyncedSecurityFields {
@@ -35,116 +39,49 @@ export type CredentialFreeEducationalProfile = Readonly<
   Omit<Profile, 'pin'> & ForbiddenSyncedSecurityFields
 >
 
-const FORBIDDEN_SECURITY_KEYS = new Set([
-  'pin',
-  'parentpin',
-  'rawpin',
-  'learnerpin',
-  'pinhash',
-  'pinverifier',
-  'pinsalt',
-  'verifier',
-  'verifierbase64',
-  'verifierscheme',
-  'verifierschemeversion',
-  'salt',
-  'saltbase64',
-  'password',
-  'credential',
-  'credentials',
-  'credentialkind',
-  'credentialmetadata',
-  'credentialstate',
-  'costparameters',
-  'activelearnerauthorization',
-  'activelearnersession',
-  'learnersession',
-  'session',
-  'sessiontoken',
-  'accesstoken',
-  'refreshtoken',
-  'authorization',
-  'bearer',
-  'grant',
-  'secret',
-  'recoverysecret',
-  'recoverytoken',
-])
-
-function normalizedKey(key: string): string {
-  return key.replace(/[^a-z0-9]/gi, '').toLowerCase()
-}
-
-function isForbiddenSecurityKey(key: string): boolean {
-  const normalized = normalizedKey(key)
-  if (FORBIDDEN_SECURITY_KEYS.has(normalized)) return true
-  if (
-    normalized.includes('credential') ||
-    normalized.includes('authorization') ||
-    normalized.includes('bearer') ||
-    normalized.includes('verifier') ||
-    normalized.includes('password') ||
-    normalized.includes('secret') ||
-    normalized.includes('recoverytoken') ||
-    normalized.endsWith('token') ||
-    normalized.endsWith('pin') ||
-    normalized.startsWith('pin') ||
-    normalized.endsWith('salt') ||
-    normalized.startsWith('salt') ||
-    normalized.endsWith('grant')
-  ) {
-    return true
-  }
-  return (
-    normalized !== 'sessions' &&
-    normalized !== 'sessioncount' &&
-    (normalized.startsWith('session') || normalized.endsWith('session'))
-  )
-}
-
-function assertCredentialFreeValue(
-  value: unknown,
-  path: string,
-  active: Set<object>,
-  allowLegacyRootPin: boolean,
-): void {
-  if (Array.isArray(value)) {
-    if (active.has(value))
-      throw new Error('Credential-free educational data cannot be cyclic.')
-    active.add(value)
-    value.forEach((item, index) =>
-      assertCredentialFreeValue(
-        item,
-        `${path}[${index}]`,
-        active,
-        allowLegacyRootPin,
-      ),
-    )
-    active.delete(value)
-    return
-  }
-  if (value === null || typeof value !== 'object') return
-
-  if (active.has(value))
-    throw new Error('Credential-free educational data cannot be cyclic.')
-  active.add(value)
-  for (const [key, child] of Object.entries(value)) {
+function assertPortableStructureAllowingLegacyRootPin(value: unknown): void {
+  try {
     if (
-      !(allowLegacyRootPin && path === 'profile' && key === 'pin') &&
-      isForbiddenSecurityKey(key)
+      value === null ||
+      typeof value !== 'object' ||
+      Array.isArray(value) ||
+      !Object.prototype.hasOwnProperty.call(value, 'pin')
     ) {
-      throw new Error(
-        `Credential-like material is forbidden in synchronized Profile data at ${path}.${key}`,
-      )
+      assertPortableSecurityKeyFree(value)
+      return
     }
-    assertCredentialFreeValue(
-      child,
-      `${path}.${key}`,
-      active,
-      allowLegacyRootPin,
+
+    const portableView = Object.create(Object.getPrototypeOf(value)) as Record<
+      PropertyKey,
+      unknown
+    >
+    for (const key of Reflect.ownKeys(value)) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, key)
+      if (!descriptor) {
+        throw new PortableSecurityStructureError(
+          '$',
+          'Portable data could not be safely inspected',
+        )
+      }
+      if (key === 'pin') {
+        if (!descriptor.enumerable || !('value' in descriptor)) {
+          throw new PortableSecurityStructureError(
+            '$.pin',
+            'Portable data contains a non-JSON or accessor property',
+          )
+        }
+        continue
+      }
+      Object.defineProperty(portableView, key, descriptor)
+    }
+    assertPortableSecurityKeyFree(portableView)
+  } catch (cause) {
+    if (cause instanceof PortableSecurityStructureError) throw cause
+    throw new PortableSecurityStructureError(
+      '$',
+      'Portable data could not be safely inspected',
     )
   }
-  active.delete(value)
 }
 
 /**
@@ -156,12 +93,23 @@ export function assertCredentialFreeEducationalStructure(
   value: unknown,
   options: Readonly<{ allowLegacyRootPin?: boolean }> = {},
 ): void {
-  assertCredentialFreeValue(
-    value,
-    'profile',
-    new Set<object>(),
-    options.allowLegacyRootPin === true,
-  )
+  try {
+    if (options.allowLegacyRootPin === true) {
+      assertPortableStructureAllowingLegacyRootPin(value)
+      return
+    }
+    assertPortableSecurityKeyFree(value)
+  } catch (cause) {
+    if (
+      cause instanceof PortableSecurityStructureError &&
+      /portable security material is forbidden/i.test(cause.message)
+    ) {
+      throw new Error(
+        `Credential-like material is forbidden in synchronized Profile data at ${cause.path}`,
+      )
+    }
+    throw cause
+  }
 }
 
 function cloneEducationalValue(value: unknown): unknown {

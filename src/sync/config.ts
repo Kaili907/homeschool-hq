@@ -1,3 +1,4 @@
+import { isProfileId } from '../security/contracts'
 import type { AppState } from '../types'
 import {
   createOperationId,
@@ -109,7 +110,7 @@ function isHouseholdMeta(
     profiles.length <= 5 &&
     profiles.every(
       ([id, profile]) =>
-        /^p[1-5]$/.test(id) &&
+        isProfileId(id) &&
         !!profile &&
         typeof profile === 'object' &&
         !Array.isArray(profile) &&
@@ -144,7 +145,7 @@ function isHouseholdMeta(
     Array.isArray(meta.conflictProfileIds) &&
     meta.conflictProfileIds.length <= 5 &&
     meta.conflictProfileIds.every(
-      (id) => typeof id === 'string' && /^p[1-5]$/.test(id),
+      (id) => isProfileId(id),
     ) &&
     new Set(meta.conflictProfileIds).size === meta.conflictProfileIds.length &&
     (meta.pauseReason === undefined ||
