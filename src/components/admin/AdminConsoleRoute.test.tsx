@@ -14,6 +14,7 @@ describe('Admin Console integration route', () => {
   it.each([
     ['/academy/admin', 'overview'],
     ['/academy/admin/', 'overview'],
+    ['/academy/admin/attention', 'attention'],
     ['/academy/admin/learners', 'learners'],
     ['/academy/admin/learners/p1', 'learners'],
     ['/academy/admin/engines', 'engines'],

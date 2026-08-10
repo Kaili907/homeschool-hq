@@ -11,6 +11,7 @@ import type {
 } from './admin0Vocabulary'
 
 export const ADMIN_SECTIONS = [
+  'attention',
   'overview',
   'learners',
   'engines',

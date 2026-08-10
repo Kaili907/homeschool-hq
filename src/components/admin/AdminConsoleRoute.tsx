@@ -68,6 +68,11 @@ import {
   ProductionReadinessCenter,
   type ProductionReadinessReadState,
 } from './ProductionReadinessCenter'
+import { loadAdminAttentionCenter } from '../../admin/attentionLoader'
+import {
+  AdminAttentionCenter,
+  type AdminAttentionReadState,
+} from './AdminAttentionCenter'
 
 export type AdminRouteSection = AdminSection | 'curriculum-validation' | 'unknown'
 
@@ -86,6 +91,7 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (!isAdminConsolePath(pathname)) return null
   const suffix = pathname.slice(ADMIN_CONSOLE_PATH.length).replace(/^\/+|\/+$/g, '')
   if (!suffix) return 'overview'
+  if (suffix === 'attention') return 'attention'
   if (suffix === 'curriculum/validation') return 'curriculum-validation'
   if (suffix === 'learners' || adminRouteLearnerRef(pathname)) return 'learners'
   if (suffix.startsWith('learners/')) return 'unknown'
@@ -185,6 +191,8 @@ export function AdminConsoleRoute() {
   const [accessRetry, setAccessRetry] = useState(0)
   const [readinessState, setReadinessState] = useState<ProductionReadinessReadState>({ status: 'loading' })
   const [readinessRetry, setReadinessRetry] = useState(0)
+  const [attentionState, setAttentionState] = useState<AdminAttentionReadState>({ status: 'loading' })
+  const [attentionRetry, setAttentionRetry] = useState(0)
   const curriculumSource = useMemo(() => createAdminCurriculumHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const configurationSource = useMemo(() => createAdminConfigurationHttpSource(), [])
@@ -206,6 +214,28 @@ export function AdminConsoleRoute() {
     })
     return () => controller.abort()
   }, [authorizationReload])
+
+  useEffect(() => {
+    if (section !== 'attention') return
+    if (!hasCapability(authorization, 'overview:read')) {
+      setAttentionState({ status: 'error' })
+      return
+    }
+    const controller = new AbortController()
+    setAttentionState({ status: 'loading' })
+    void loadAdminAttentionCenter(authorization.capabilities, {
+      signal: controller.signal,
+      today: isoToday(),
+    }).then(
+      (model) => {
+        if (!controller.signal.aborted) setAttentionState({ status: 'ready', model })
+      },
+      () => {
+        if (!controller.signal.aborted) setAttentionState({ status: 'error' })
+      },
+    )
+    return () => controller.abort()
+  }, [attentionRetry, authorizationState, section])
 
   useEffect(() => {
     if (section !== 'access') return
@@ -571,7 +601,8 @@ export function AdminConsoleRoute() {
     : section === 'unknown' ? 'overview' : section
   const title = section === 'curriculum-validation'
     ? 'Curriculum validation'
-    : section === 'system-health' ? 'System Health'
+    : section === 'attention' ? 'Admin Attention Center'
+      : section === 'system-health' ? 'System Health'
       : section === 'engines' ? `${ENGINE_PAGE_LABELS[selectedEngine]} Engine Performance`
         : section === 'costs' ? 'AI & Costs'
           : section === 'learners' ? (adminRouteLearnerRef(pathname) ? 'Learner Detail' : 'Learner Operations')
@@ -589,6 +620,12 @@ export function AdminConsoleRoute() {
       title={title}
       onNavigate={navigate}
     >
+        {section === 'attention' && (
+          <AdminAttentionCenter
+            state={attentionState}
+            onRetry={() => setAttentionRetry((value) => value + 1)}
+          />
+        )}
         {section === 'learners' && (
           <LearnerAnalytics
             state={learnerState}
@@ -701,7 +738,7 @@ export function AdminConsoleRoute() {
             onRetry={() => setReadinessRetry((value) => value + 1)}
           />
         )}
-        {!['learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
+        {!['attention', 'learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-validation', 'system-health', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>

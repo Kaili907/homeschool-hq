@@ -159,6 +159,7 @@ describe('AdminConsole authorization and load states', () => {
     for (const label of ['Overview', 'Learners', 'Engine Performance']) {
       expect(markup).toContain('aria-label="' + label + '"')
     }
+    expect(markup).toContain('aria-label="Attention Center"')
   })
 
   it('includes Configuration navigation only with the server-resolved read capability', () => {
