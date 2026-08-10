@@ -145,6 +145,35 @@ describe('Admin production migration identity', () => {
     ]))
   })
 
+  it('routes a duplicate-version blocker to the read-only reconciliation planner', async () => {
+    const specs = [
+      { filename: '20260810120000_provider_pricing.sql', source: 'select 1;\n' },
+      { filename: '20260810120000_study_settings.sql', source: 'select 2;\n' },
+    ]
+    const manifest = manifestFor(specs)
+    const checkedInContract = await loadJson(contractUrl)
+    const contract = { ...checkedInContract, migrationIdentity: migrationOptions(manifest) }
+    const result = await withMigrationDirectory(specs, (migrationDirectory) =>
+      evaluateAdminProductionPreflight({
+        contract,
+        evidence: allPassEvidence(contract),
+        manifest,
+        migrationDirectory,
+      }))
+
+    expect(result).toMatchObject({
+      classification: 'BLOCKED_BY_MIGRATION_IDENTITY',
+      migrationIdentity: {
+        status: 'BLOCKING',
+        reconciliationPlanner: {
+          mode: 'READ_ONLY',
+          command: 'npm.cmd run plan:migration-reconciliation -- --proposal <path>',
+        },
+      },
+    })
+    expect(formatOperatorReport(result)).toContain('Migration reconciliation planner (read-only):')
+  })
+
   it('rejects a migration file with no manifest entry', async () => {
     const specs = [
       { filename: '20260810110000_foundation.sql', source: 'select 1;\n' },
