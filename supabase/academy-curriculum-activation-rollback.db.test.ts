@@ -2,6 +2,10 @@ import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import { PGlite } from '@electric-sql/pglite'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import {
+  canonicalJson,
+  verifyStagedCandidate,
+} from '../netlify/functions/_shared/admin-curriculum-integrity.js'
 
 const migrations = [
   './migrations/20260808120000_academy_admin_authorization.sql',
@@ -11,7 +15,8 @@ const migrations = [
   './migrations/20260810120000_academy_curriculum_draft_authoring.sql',
   './migrations/20260810140000_academy_curriculum_human_approval.sql',
   './migrations/20260810150000_academy_curriculum_release_staging.sql',
-  './migrations/20260810160000_academy_curriculum_activation_rollback.sql',
+  './migrations/20260810160000_academy_curriculum_release_publishing.sql',
+  './migrations/20260810170000_academy_curriculum_activation_rollback.sql',
 ].map((path) => new URL(path, import.meta.url))
 
 const OWNER = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
@@ -23,6 +28,10 @@ const RELEASE_2 = '26000000-0000-4000-8000-000000000002'
 const HASH_A = 'a'.repeat(64)
 const HASH_B = 'b'.repeat(64)
 const databases: PGlite[] = []
+const COLLECTIONS = [
+  'courses', 'units', 'lessons', 'assessments', 'assessment_interpretations',
+  'schedules', 'standard_frameworks', 'resources', 'policy_sets',
+] as const
 
 const bootstrap = `
   create role anon nologin;
@@ -59,6 +68,147 @@ async function setService(database: PGlite) {
 
 async function reset(database: PGlite) {
   await database.exec("reset role; select set_config('request.jwt.claim.sub', '', false); select set_config('request.jwt.claim.role', '', false)")
+}
+
+function sha256(value: string) {
+  return createHash('sha256').update(value).digest('hex')
+}
+
+function stagedPackage(
+  draftId: string,
+  targetVersion: string,
+  validationSnapshotId: string,
+  approvalId: string,
+) {
+  const values = Object.fromEntries(COLLECTIONS.map((name) => [
+    name,
+    name === 'courses' ? [{ course_id: 'course-1' }] : [],
+  ]))
+  const contentByPath = {
+    'snapshot/manifest.json': { schema_set_version: '2.0.0' },
+    ...Object.fromEntries(COLLECTIONS.map((name) => [`snapshot/${name}.json`, values[name]])),
+  }
+  const artifacts = Object.entries(contentByPath).map(([relativePath, content]) => {
+    const canonicalContent = canonicalJson(content)
+    return {
+      relativePath,
+      byteCount: Buffer.byteLength(canonicalContent),
+      sha256: sha256(canonicalContent),
+      canonicalContent,
+    }
+  }).sort((left, right) => left.relativePath.localeCompare(right.relativePath))
+  const entityCounts = Object.fromEntries(COLLECTIONS.map((name) => [name, values[name].length]))
+  const byteCount = artifacts.reduce((sum, artifact) => sum + artifact.byteCount, 0)
+  const contentHash = sha256(artifacts.map((artifact) => (
+    `${artifact.relativePath}\0${artifact.byteCount}\0${artifact.sha256}\n`
+  )).join(''))
+  const manifest = {
+    schemaVersion: 1,
+    packageFormat: 'manuel-academy-curriculum-staged-v1',
+    releaseIdentity: {
+      packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
+      version: targetVersion,
+    },
+    baseReleaseVersion: '1.0.0',
+    targetVersion,
+    schemaSetVersion: '2.0.0',
+    draft: { id: draftId, revision: 1 },
+    validation: { id: validationSnapshotId, resultDigest: HASH_A },
+    approval: { id: approvalId },
+    entityCounts,
+    fileCount: artifacts.length,
+    byteCount,
+    files: artifacts.map(({ relativePath, byteCount: bytes, sha256: digest }) => ({
+      relativePath,
+      byteCount: bytes,
+      sha256: digest,
+    })),
+    contentHash,
+  }
+  const manifestCanonical = canonicalJson(manifest)
+  const manifestHash = sha256(manifestCanonical)
+  return {
+    artifacts,
+    byteCount,
+    contentHash,
+    entityCounts,
+    manifest,
+    manifestCanonical,
+    manifestHash,
+    packageHash: sha256(
+      `manuel-academy-curriculum-staged-v1\n${contentHash}\n${manifestHash}\n`,
+    ),
+  }
+}
+
+async function stageVerifyPublish(database: PGlite, targetVersion: string) {
+  const stageRequest = crypto.randomUUID()
+  const publishRequest = crypto.randomUUID()
+  await setService(database)
+  try {
+    const draft = (await database.query<{ value: any }>(`
+      select public.academy_admin_create_curriculum_draft_v1(
+        $1, '1.0.0', $2, '2.0.0', $3, $4, 'curriculum:drafts:write'
+      ) as value
+    `, [ADMIN, targetVersion, crypto.randomUUID(), HASH_A])).rows[0].value
+    const validation = (await database.query<{ value: any }>(`
+      select public.academy_admin_record_curriculum_validation_v1(
+        $1, $2, 1, 'curriculum-validation-v2', $3, 'valid',
+        true, 0, 0, 0, 'curriculum:read'
+      ) as value
+    `, [ADMIN, draft.draftId, HASH_A])).rows[0].value
+    const approval = (await database.query<{ value: any }>(`
+      select public.academy_admin_decide_curriculum_approval_v1(
+        $1, $2, 1, 'approved', 'approval.ready', $3, $4, $5,
+        'curriculum:approve'
+      ) as value
+    `, [OWNER, draft.draftId, validation.validationSnapshotId, crypto.randomUUID(), HASH_A])).rows[0].value
+    const packageValue = stagedPackage(
+      draft.draftId,
+      targetVersion,
+      validation.validationSnapshotId,
+      approval.currentDecision.approvalId,
+    )
+    const stageArgs = [
+      OWNER, draft.draftId, validation.validationSnapshotId,
+      approval.currentDecision.approvalId, JSON.stringify(packageValue.manifest),
+      packageValue.manifestCanonical, JSON.stringify(packageValue.artifacts),
+      packageValue.contentHash, packageValue.manifestHash, packageValue.packageHash,
+      stageRequest, HASH_A,
+    ]
+    const staged = (await database.query<{ value: any }>(`
+      select public.academy_admin_stage_curriculum_release_v1(
+        $1, $2, 1, $3, $4, $5::jsonb, $6, $7::jsonb,
+        $8, $9, $10, $11, $12, 'curriculum:publish'
+      ) as value
+    `, stageArgs)).rows[0].value
+    const stagingId = staged.candidate.stagingId
+    const evidence = (await database.query<{ value: any }>(`
+      select public.academy_admin_read_curriculum_staging_integrity_v1(
+        $1, 'curriculum:read'
+      ) as value
+    `, [VIEWER])).rows[0].value.candidates.find(
+      (candidate: any) => candidate.stagingId === stagingId,
+    )
+    const publication = (await database.query<{ value: any }>(`
+      select public.academy_admin_publish_curriculum_release_v1(
+        $1, $2, $3, $4, 'curriculum:publish'
+      ) as value
+    `, [OWNER, stagingId, publishRequest, HASH_A])).rows[0].value
+    return {
+      draft,
+      evidence,
+      packageValue,
+      publication,
+      publishRequest,
+      stageArgs,
+      stageRequest,
+      staged,
+      stagingId,
+    }
+  } finally {
+    await reset(database)
+  }
 }
 
 async function transition(database: PGlite, input: {
@@ -197,6 +347,133 @@ beforeEach(async () => {
 afterEach(async () => Promise.all(databases.splice(0).map((database) => database.close())))
 
 describe('curriculum activation and rollback database boundary', () => {
+  it('runs stage → verify → publish → activate with independent exact replay and continuous provenance', async () => {
+    const database = databases[0]
+    const targetVersion = '3.0.0-rc.1'
+    const learnerBefore = (await database.query<any>(`
+      select data from public.profiles where profile_id = 'learner-one'
+    `)).rows[0]
+    const pipeline = await stageVerifyPublish(database, targetVersion)
+
+    expect(verifyStagedCandidate(pipeline.evidence)).toMatchObject({
+      state: 'STAGED',
+      status: 'VERIFIED',
+      packageStatus: 'VERIFIED',
+      provenance: { status: 'VERIFIED' },
+    })
+    expect(pipeline.publication).toMatchObject({
+      replayed: false,
+      publicationState: 'published',
+      published: {
+        version: targetVersion,
+        status: 'published',
+        activationStatus: 'not_active',
+        stagingId: pipeline.stagingId,
+        contentHash: pipeline.packageValue.contentHash,
+        manifestHash: pipeline.packageValue.manifestHash,
+        packageHash: pipeline.packageValue.packageHash,
+      },
+    })
+    expect((await database.query<any>(`
+      select release.version, pointer.revision
+      from public.academy_curriculum_active_pointers as pointer
+      join public.academy_curriculum_releases as release
+        on release.release_id = pointer.release_id
+      where pointer.environment = 'production'
+    `)).rows[0]).toEqual({ version: '1.0.0', revision: 1 })
+
+    await setService(database)
+    try {
+      const stageReplay = (await database.query<{ value: any }>(`
+        select public.academy_admin_stage_curriculum_release_v1(
+          $1, $2, 1, $3, $4, $5::jsonb, $6, $7::jsonb,
+          $8, $9, $10, $11, $12, 'curriculum:publish'
+        ) as value
+      `, pipeline.stageArgs)).rows[0].value
+      const publishReplay = (await database.query<{ value: any }>(`
+        select public.academy_admin_publish_curriculum_release_v1(
+          $1, $2, $3, $4, 'curriculum:publish'
+        ) as value
+      `, [OWNER, pipeline.stagingId, pipeline.publishRequest, HASH_A])).rows[0].value
+      expect(stageReplay.replayed).toBe(true)
+      expect(publishReplay.replayed).toBe(true)
+    } finally {
+      await reset(database)
+    }
+
+    const activationRequest = '59000000-0000-4000-8000-000000000001'
+    const activated = await transition(database, {
+      target: targetVersion,
+      request: activationRequest,
+    })
+    const activationReplay = await transition(database, {
+      target: targetVersion,
+      request: activationRequest,
+    })
+    expect(activated).toMatchObject({
+      replayed: false,
+      existingLearnersRepinned: false,
+      pointer: {
+        releaseVersion: targetVersion,
+        revision: 2,
+        transitionKind: 'activation',
+      },
+    })
+    expect(activationReplay).toMatchObject({
+      replayed: true,
+      pointer: { releaseVersion: targetVersion, revision: 2 },
+    })
+    expect((await database.query<any>(`
+      select staged.draft_id, staged.draft_revision,
+        staged.validation_snapshot_id, staged.approval_id,
+        release.staging_id, release.publication_content_sha256,
+        release.publication_manifest_sha256, release.publication_package_sha256,
+        pointer.revision as pointer_revision
+      from public.academy_curriculum_releases as release
+      join public.academy_curriculum_staged_releases as staged
+        on staged.staging_id = release.staging_id
+      join public.academy_curriculum_active_pointers as pointer
+        on pointer.release_id = release.release_id
+      where release.version = $1
+    `, [targetVersion])).rows[0]).toMatchObject({
+      draft_id: pipeline.draft.draftId,
+      draft_revision: 1,
+      validation_snapshot_id: pipeline.evidence.validationSnapshotId,
+      approval_id: pipeline.evidence.approvalId,
+      staging_id: pipeline.stagingId,
+      publication_content_sha256: pipeline.packageValue.contentHash,
+      publication_manifest_sha256: pipeline.packageValue.manifestHash,
+      publication_package_sha256: pipeline.packageValue.packageHash,
+      pointer_revision: 2,
+    })
+    expect((await database.query<any>(`
+      select data from public.profiles where profile_id = 'learner-one'
+    `)).rows[0]).toEqual(learnerBefore)
+  })
+
+  it('rejects activation when immutable staged-publish evidence is tampered', async () => {
+    const database = databases[0]
+    const pipeline = await stageVerifyPublish(database, '3.1.0')
+    await database.exec(`
+      alter table public.academy_curriculum_release_files
+        disable trigger academy_curriculum_release_files_immutable;
+    `)
+    await database.query(`
+      update public.academy_curriculum_release_files
+      set sha256 = $2
+      where release_id = $1 and relative_path = 'snapshot/manifest.json'
+    `, [pipeline.stagingId, HASH_B])
+    await expect(transition(database, { target: '3.1.0', request: crypto.randomUUID() }))
+      .rejects.toThrow('CURRICULUM_ACTIVATION_ARTIFACTS_UNAVAILABLE')
+    expect((await database.query<any>(`
+      select release.version, pointer.revision
+      from public.academy_curriculum_active_pointers as pointer
+      join public.academy_curriculum_releases as release
+        on release.release_id = pointer.release_id
+      where pointer.environment = 'production'
+    `)).rows[0]).toEqual({ version: '1.0.0', revision: 1 })
+  })
+
   it('activates only an artifact-complete immutable PUBLISHED release with pointer CAS', async () => {
     const database = databases[0]
     const releaseBefore = (await database.query(

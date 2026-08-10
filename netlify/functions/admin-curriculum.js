@@ -36,7 +36,7 @@ import { loadAdminCurriculumValidationEvidence } from './_shared/admin-curriculu
 const API_PREFIX = '/api/admin/curriculum/'
 const FUNCTION_PREFIX = '/.netlify/functions/admin-curriculum/'
 const LESSON_REF = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/
-const RELEASE_VERSION = /^[0-9]+\.[0-9]+\.[0-9]+$/
+const RELEASE_VERSION = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9.-]+)?$/
 const TARGET_VERSION = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9.-]+)?$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const ENTITY_REF = /^[a-z0-9][a-z0-9:-]{2,127}$/

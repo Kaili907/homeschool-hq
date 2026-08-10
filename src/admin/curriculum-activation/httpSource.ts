@@ -12,7 +12,7 @@ import {
 } from './contracts'
 
 type FetchLike = (input: string, init: RequestInit) => Promise<Pick<Response, 'ok' | 'status' | 'json'>>
-const VERSION = /^\d+\.\d+\.\d+$/
+const VERSION = /^\d+\.\d+\.\d+(?:-[a-z0-9.-]+)?$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
 function record(value: unknown): value is Record<string, unknown> {

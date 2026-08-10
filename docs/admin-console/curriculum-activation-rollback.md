@@ -18,9 +18,12 @@ not publish curriculum, mutate immutable published releases, or repin learners.
 
 - A target must exist in `academy_curriculum_releases` with `published` state.
 - Its immutable file inventory must match the registered count and byte total.
-- Every file locator must match the release's commit-pinned source root.
-- Package, checksum, curriculum-manifest, manifest-verification, and validation
-  evidence must all be present and match the registered digests where defined.
+- A legacy import must retain its commit-pinned locator chain and its package,
+  checksum, curriculum-manifest, manifest-verification, and validation evidence.
+- A staged-publish release must join the immutable staging row by `staging_id`,
+  not by timestamp. Its draft revision, validation, approval, content hash,
+  manifest hash, package hash, canonical artifact bytes, and registry artifact
+  copies must still form one exact verified chain.
 - Staged-only and nonexistent targets fail closed.
 - Every transition supplies the expected current pointer revision. The
   database locks the pointer and performs a compare-and-swap update.

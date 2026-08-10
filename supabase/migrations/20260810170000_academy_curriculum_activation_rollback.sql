@@ -148,7 +148,7 @@ insert into public.academy_curriculum_pointer_transitions (
   request_sha256, transitioned_at
 )
 select
-  '16000000-0000-4000-8000-000000000002', pointer.environment,
+  '17000000-0000-4000-8000-000000000002', pointer.environment,
   pointer.revision, null, pointer.release_id, 'migration_seed', null, null,
   null, null, pointer.registered_at
 from public.academy_curriculum_active_pointers as pointer
@@ -235,40 +235,121 @@ as $$
         from public.academy_curriculum_release_files as file
         where file.release_id = release.release_id
       ) = release.byte_count
-      and not exists (
-        select 1 from public.academy_curriculum_release_files as file
-        where file.release_id = release.release_id
-          and file.immutable_locator <> 'git_commit_path:'
-            || release.source_commit || ':' || release.source_root || '/'
-            || file.relative_path
-      )
-      and exists (
-        select 1 from public.academy_curriculum_release_files as file
-        where file.release_id = release.release_id
-          and file.relative_path = 'MANIFEST.json'
-          and file.sha256 = release.package_manifest_sha256
-      )
-      and exists (
-        select 1 from public.academy_curriculum_release_files as file
-        where file.release_id = release.release_id
-          and file.relative_path = 'SHA256SUMS.txt'
-          and file.sha256 = release.checksum_manifest_sha256
-      )
-      and exists (
-        select 1 from public.academy_curriculum_release_files as file
-        where file.release_id = release.release_id
-          and file.relative_path = 'curriculum-manifest.json'
-          and file.sha256 = release.curriculum_manifest_sha256
-      )
-      and exists (
-        select 1 from public.academy_curriculum_release_files as file
-        where file.release_id = release.release_id
-          and file.relative_path = 'validation/manifest-verification.txt'
-      )
-      and exists (
-        select 1 from public.academy_curriculum_release_files as file
-        where file.release_id = release.release_id
-          and file.relative_path = 'validation/validation.json'
+      and (
+        (
+          release.provenance_class = 'legacy_import'
+          and not exists (
+            select 1 from public.academy_curriculum_release_files as file
+            where file.release_id = release.release_id
+              and file.immutable_locator <> 'git_commit_path:'
+                || release.source_commit || ':' || release.source_root || '/'
+                || file.relative_path
+          )
+          and exists (
+            select 1 from public.academy_curriculum_release_files as file
+            where file.release_id = release.release_id
+              and file.relative_path = 'MANIFEST.json'
+              and file.sha256 = release.package_manifest_sha256
+          )
+          and exists (
+            select 1 from public.academy_curriculum_release_files as file
+            where file.release_id = release.release_id
+              and file.relative_path = 'SHA256SUMS.txt'
+              and file.sha256 = release.checksum_manifest_sha256
+          )
+          and exists (
+            select 1 from public.academy_curriculum_release_files as file
+            where file.release_id = release.release_id
+              and file.relative_path = 'curriculum-manifest.json'
+              and file.sha256 = release.curriculum_manifest_sha256
+          )
+          and exists (
+            select 1 from public.academy_curriculum_release_files as file
+            where file.release_id = release.release_id
+              and file.relative_path = 'validation/manifest-verification.txt'
+          )
+          and exists (
+            select 1 from public.academy_curriculum_release_files as file
+            where file.release_id = release.release_id
+              and file.relative_path = 'validation/validation.json'
+          )
+        )
+        or (
+          release.provenance_class = 'staged_publish'
+          and release.release_id = release.staging_id
+          and exists (
+            select 1
+            from public.academy_curriculum_staged_releases as staged
+            where staged.staging_id = release.staging_id
+              and staged.target_version = release.version
+              and staged.file_count = release.file_count
+              and staged.byte_count = release.byte_count
+              and staged.content_sha256 = release.publication_content_sha256
+              and staged.manifest_sha256 = release.publication_manifest_sha256
+              and staged.package_sha256 = release.publication_package_sha256
+              and academy_private.curriculum_publication_verification(staged.staging_id)
+                @> '{"artifactSetComplete":true,"contentVerified":true,"manifestVerified":true,"packageVerified":true}'::jsonb
+          )
+          and not exists (
+            select 1
+            from public.academy_curriculum_release_files as file
+            where file.release_id = release.release_id
+              and (
+                file.safe_classification <> 'immutable_embedded_json'
+                or file.immutable_locator <> 'curriculum_registry:'
+                  || release.staging_id::text || ':' || file.relative_path
+                or file.content is null
+                or file.canonical_content is null
+                or octet_length(file.canonical_content) <> file.byte_count
+                or file.canonical_content::jsonb <> file.content
+                or encode(
+                  sha256(convert_to(file.canonical_content, 'UTF8')), 'hex'
+                ) <> file.sha256
+              )
+          )
+          and not exists (
+            select 1
+            from public.academy_curriculum_release_files as file
+            where file.release_id = release.release_id
+              and not exists (
+                select 1
+                from public.academy_curriculum_staged_release_artifacts as artifact
+                where artifact.staging_id = release.staging_id
+                  and artifact.relative_path = file.relative_path
+                  and artifact.byte_count = file.byte_count
+                  and artifact.sha256 = file.sha256
+                  and artifact.content = file.content
+                  and artifact.canonical_content = file.canonical_content
+              )
+          )
+          and not exists (
+            select 1
+            from public.academy_curriculum_staged_release_artifacts as artifact
+            where artifact.staging_id = release.staging_id
+              and not exists (
+                select 1
+                from public.academy_curriculum_release_files as file
+                where file.release_id = release.release_id
+                  and file.relative_path = artifact.relative_path
+                  and file.byte_count = artifact.byte_count
+                  and file.sha256 = artifact.sha256
+                  and file.content = artifact.content
+                  and file.canonical_content = artifact.canonical_content
+              )
+          )
+          and (
+            select encode(sha256(decode(coalesce(string_agg(
+              encode(
+                convert_to(file.relative_path, 'UTF8') || decode('00', 'hex') ||
+                convert_to(file.byte_count::text, 'UTF8') || decode('00', 'hex') ||
+                convert_to(file.sha256, 'UTF8') || convert_to(E'\n', 'UTF8'),
+                'hex'
+              ), '' order by file.relative_path
+            ), ''), 'hex')), 'hex')
+            from public.academy_curriculum_release_files as file
+            where file.release_id = release.release_id
+          ) = release.publication_content_sha256
+        )
       )
   );
 $$;
@@ -477,7 +558,7 @@ begin
   );
 
   if p_target_version is null
-     or p_target_version !~ '^[0-9]+\.[0-9]+\.[0-9]+$'
+     or p_target_version !~ '^[0-9]+\.[0-9]+\.[0-9]+(-[a-z0-9.-]+)?$'
      or p_expected_pointer_revision is null
      or p_expected_pointer_revision < 1
      or p_transition_kind not in ('activation', 'rollback')
