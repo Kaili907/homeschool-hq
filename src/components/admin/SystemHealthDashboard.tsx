@@ -5,6 +5,7 @@ import {
   SYSTEM_HEALTH_WINDOWS,
   type EngineHealthProjection,
   type HealthFreshness,
+  type SystemHealthEvidenceCompleteness,
   type SystemHealthReasonCode,
   type SystemHealthWindow,
   type SystemIncidentReasonCode,
@@ -48,7 +49,7 @@ const REASON_MESSAGES: Readonly<Record<SystemHealthReasonCode, string>> = {
   elevated_timeout_rate: 'The bounded timeout rate is elevated.',
   elevated_provider_error_rate: 'The bounded provider-error rate is elevated.',
   elevated_fallback_rate: 'The bounded fallback rate is elevated.',
-  elevated_latency: 'P95 latency exceeds the declared objective.',
+  elevated_latency: 'Worst grouped P95 latency exceeds the declared objective.',
   core_operation_unavailable: 'Recent evidence indicates the core operation cannot serve reliably.',
   safety_policy_working: 'Safety stops were observed without treating policy enforcement as a service failure.',
 }
@@ -61,6 +62,35 @@ const INCIDENT_MESSAGES: Readonly<Record<SystemIncidentReasonCode, string>> = {
   persistence_failed: 'A persistence operation failed.',
   sync_failed: 'A sync operation failed.',
   operational_detail_unavailable: 'Additional operational detail is unavailable.',
+}
+const EVIDENCE_MESSAGES: Readonly<Record<Exclude<SystemHealthEvidenceCompleteness, 'complete'>, {
+  readonly title: string
+  readonly message: string
+}>> = {
+  partial: {
+    title: 'Partial aggregate evidence',
+    message: 'One or more required health windows could not be established, so health remains unknown.',
+  },
+  retention_limited: {
+    title: 'Retention-limited evidence',
+    message: 'The requested evidence is not complete across every declared retention class, so health remains unknown.',
+  },
+  malformed: {
+    title: 'Malformed aggregate evidence',
+    message: 'The aggregate contract failed validation, so no health conclusion is shown.',
+  },
+  unavailable: {
+    title: 'Aggregate evidence unavailable',
+    message: 'The trusted aggregate source could not be reached, so health remains unknown.',
+  },
+  timeout: {
+    title: 'Aggregate evidence timed out',
+    message: 'The trusted aggregate source did not complete within its bound, so health remains unknown.',
+  },
+  group_incomplete: {
+    title: 'Aggregate groups incomplete',
+    message: 'The declared group bound or returned group set was incomplete, so health remains unknown.',
+  },
 }
 
 function hasHealthRead(authorization: ServerResolvedAdminAuthorization): boolean {
@@ -122,6 +152,9 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
 }) {
   const [selectedEngine, setSelectedEngine] = useState<AdminEngineId>('tutor')
   const detail = projection.engines.find((engine) => engine.engineId === selectedEngine) ?? projection.engines[0]
+  const incompleteEvidence = projection.evidenceCompleteness === 'complete'
+    ? null
+    : EVIDENCE_MESSAGES[projection.evidenceCompleteness]
 
   return (
     <main id="admin-main" className="health-dashboard" tabIndex={-1}>
@@ -132,8 +165,8 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
         </div>
       </header>
 
-      {projection.evidenceCompleteness !== 'complete' && (
-        <div className="health-banner" role="status"><strong>Incomplete bounded evidence</strong><span>Health remains unknown where the source could not support a trustworthy conclusion.</span></div>
+      {incompleteEvidence && (
+        <div className="health-banner" role="status"><strong>{incompleteEvidence.title}</strong><span>{incompleteEvidence.message}</span></div>
       )}
 
       <section className="health-overall" aria-labelledby="overall-health-title">
@@ -179,8 +212,8 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
           <Metric label="Provider error" value={countRate(detail.providerErrorCount, detail.providerErrorRatePercent)} />
           <Metric label="Rejected (excluded from health failures)" value={detail.rejectedCount} />
           <Metric label="Safety stops (not infrastructure failures)" value={detail.safetyStopCount} />
-          <Metric label="P50 latency" value={latency(detail.p50LatencyMs)} />
-          <Metric label="P95 latency" value={latency(detail.p95LatencyMs)} />
+          <Metric label="Worst grouped P50 latency" value={latency(detail.p50LatencyMs)} />
+          <Metric label="Worst grouped P95 latency" value={latency(detail.p95LatencyMs)} />
         </dl>
       </section>
 
@@ -191,7 +224,7 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
             <article key={service.serviceId}>
               <div><strong>{SERVICE_LABELS[service.serviceId]}</strong><HealthBadge health={service.health} /></div>
               <p>{service.reasonCodes.map(safeReason).join(' ')}</p>
-              <dl><Metric label="Events" value={service.eventCount} /><Metric label="Failures" value={service.failureCount} /><Metric label="P95" value={latency(service.p95LatencyMs)} /></dl>
+              <dl><Metric label="Events" value={service.eventCount} /><Metric label="Failures" value={service.failureCount} /><Metric label="Worst grouped P95" value={latency(service.p95LatencyMs)} /></dl>
             </article>
           ))}
         </div>
@@ -203,9 +236,9 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
           <Metric label="Timeouts" value={countRate(projection.historyMetrics.timeoutCount, projection.historyMetrics.timeoutRatePercent)} />
           <Metric label="Provider errors" value={countRate(projection.historyMetrics.providerErrorCount, projection.historyMetrics.providerErrorRatePercent)} />
           <Metric label="Fallbacks" value={countRate(projection.historyMetrics.fallbackCount, projection.historyMetrics.fallbackRatePercent)} />
-          <Metric label="Evidence rows" value={projection.historyMetrics.eventCount} />
-          <Metric label="P50 latency" value={latency(projection.historyMetrics.p50LatencyMs)} />
-          <Metric label="P95 latency" value={latency(projection.historyMetrics.p95LatencyMs)} />
+          <Metric label="Represented events" value={projection.historyMetrics.eventCount} />
+          <Metric label="Worst grouped P50 latency" value={latency(projection.historyMetrics.p50LatencyMs)} />
+          <Metric label="Worst grouped P95 latency" value={latency(projection.historyMetrics.p95LatencyMs)} />
         </dl>
       </section>
 

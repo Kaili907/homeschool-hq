@@ -28,6 +28,17 @@ describe('System Health browser read boundary', () => {
       ...projection,
       incidents: [{ ...projection.incidents[0], reasonCode: 'raw_exception_SECRET' }],
     })).toBeNull()
+    for (const evidenceCompleteness of [
+      'complete', 'partial', 'retention_limited', 'malformed',
+      'unavailable', 'timeout', 'group_incomplete',
+    ] as const) {
+      expect(decodeSystemHealthProjection({ ...projection, evidenceCompleteness }))
+        .toMatchObject({ evidenceCompleteness })
+    }
+    expect(decodeSystemHealthProjection({
+      ...projection,
+      evidenceCompleteness: 'raw_backend_error',
+    })).toBeNull()
   })
 
   it('uses bearer authorization, no credentials, and the selected bounded window', async () => {

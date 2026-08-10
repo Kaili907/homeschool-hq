@@ -236,7 +236,7 @@ describe('deterministic System Health aggregation', () => {
     expect(buildSystemHealthProjection(healthy, { now: NOW, sourceTruncated: true }).engines[0]).toMatchObject({
       health: 'unknown', reasonCodes: ['telemetry_incomplete'],
     })
-    expect(buildSystemHealthProjection(healthy, { now: NOW, rejectedRows: 1 }).evidenceCompleteness).toBe('invalid_rows_rejected')
+    expect(buildSystemHealthProjection(healthy, { now: NOW, rejectedRows: 1 }).evidenceCompleteness).toBe('malformed')
   })
 
   it('derives overall health using critical dependency precedence', () => {
@@ -339,7 +339,7 @@ describe('deterministic System Health aggregation', () => {
       engine.health === 'healthy' && engine.eventCount === 501)).toBe(true)
   })
 
-  it('uses exact aggregate p50/p95 samples and keeps safety stops separate', () => {
+  it('uses bounded aggregate latency evidence and keeps safety stops separate', () => {
     const observedAt = '2026-08-08T11:59:50.000Z'
     const tutor = aggregateEngine('tutor', {
       eventCount: 20,
@@ -372,7 +372,7 @@ describe('deterministic System Health aggregation', () => {
     expect(projection.engines[0].reasonCodes).toContain('safety_policy_working')
   })
 
-  it('preserves mapped service counts, health, and exact aggregate latency', () => {
+  it('preserves mapped service counts, health, and worst-group latency', () => {
     const observedAt = '2026-08-08T11:59:50.000Z'
     const gateway = aggregateEngine('gateway', {
       eventCount: 20, successCount: 18, providerErrorCount: 2, durationCount: 20,
@@ -481,9 +481,43 @@ describe('deterministic System Health aggregation', () => {
 
   it('fails invalid or unavailable aggregate evidence closed to unknown', () => {
     const projection = buildSystemHealthProjectionFromAggregates(null, { now: NOW })
-    expect(projection.evidenceCompleteness).toBe('invalid_rows_rejected')
+    expect(projection.evidenceCompleteness).toBe('unavailable')
     expect(projection.overallHealth).toBe('unknown')
     expect(projection.engines.every((engine) => engine.health === 'unknown')).toBe(true)
     expect(projection.failureTrend).toBe('unknown')
+  })
+
+  it.each([
+    'partial',
+    'retention_limited',
+    'malformed',
+    'unavailable',
+    'timeout',
+    'group_incomplete',
+  ] as const)('fails %s aggregate evidence closed while preserving disabled truth', (evidenceCompleteness) => {
+    const healthy = aggregateEngine('tutor', {
+      eventCount: 10,
+      successCount: 10,
+      firstOccurredAt: '2026-08-08T11:30:00.000Z',
+      lastOccurredAt: '2026-08-08T11:59:50.000Z',
+    })
+    const projection = buildSystemHealthProjectionFromAggregates(
+      aggregateEvidence(aggregateWindow([healthy], aggregateSummary({
+        ...healthy,
+      }))),
+      {
+        now: NOW,
+        evidenceCompleteness,
+        disabledEngines: new Set<AdminEngineId>(['study']),
+      },
+    )
+    expect(projection.evidenceCompleteness).toBe(evidenceCompleteness)
+    expect(projection.overallHealth).toBe('unknown')
+    expect(projection.engines[0]).toMatchObject({
+      health: 'unknown', reasonCodes: ['telemetry_incomplete'],
+    })
+    expect(projection.engines[1]).toMatchObject({
+      health: 'disabled', reasonCodes: ['feature_disabled'],
+    })
   })
 })

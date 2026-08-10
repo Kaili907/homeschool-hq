@@ -10,6 +10,18 @@ import {
 export const SYSTEM_HEALTH_WINDOWS = ['1h', 'today', '24h', '7d'] as const
 export type SystemHealthWindow = (typeof SYSTEM_HEALTH_WINDOWS)[number]
 
+export const SYSTEM_HEALTH_EVIDENCE_COMPLETENESS = [
+  'complete',
+  'partial',
+  'retention_limited',
+  'malformed',
+  'unavailable',
+  'timeout',
+  'group_incomplete',
+] as const
+export type SystemHealthEvidenceCompleteness =
+  (typeof SYSTEM_HEALTH_EVIDENCE_COMPLETENESS)[number]
+
 export const SYSTEM_HEALTH_THRESHOLDS = Object.freeze({
   primaryEvaluationWindowMs: 60 * 60 * 1_000,
   currentEvidenceMaxAgeMs: 15 * 60 * 1_000,
@@ -131,7 +143,7 @@ export interface SystemHealthProjection {
   readonly selectedWindow: SystemHealthWindow
   readonly historyWindow: { readonly start: string; readonly end: string }
   readonly evaluationWindow: { readonly start: string; readonly end: string }
-  readonly evidenceCompleteness: 'complete' | 'truncated' | 'invalid_rows_rejected'
+  readonly evidenceCompleteness: SystemHealthEvidenceCompleteness
   readonly overallHealth: AdminHealthState
   readonly overallReasonCodes: readonly SystemHealthReasonCode[]
   readonly observedAt: string | null
@@ -171,8 +183,8 @@ export interface SystemHealthAggregateSummary {
 
 export interface SystemHealthEngineAggregateSummary extends SystemHealthAggregateSummary {
   readonly engineId: AdminEngineId
-  readonly appVersion: string
-  readonly engineVersion: string
+  readonly appVersion: string | null
+  readonly engineVersion: string | null
   readonly curriculumVersion: string | null
 }
 
@@ -202,6 +214,13 @@ export interface SystemHealthAggregateEvidence {
   readonly evaluation: SystemHealthWindowAggregate
   readonly history: SystemHealthWindowAggregate
   readonly previous: SystemHealthWindowAggregate
+}
+
+export interface BuildSystemHealthAggregateOptions {
+  readonly now?: Date
+  readonly selectedWindow?: SystemHealthWindow
+  readonly disabledEngines?: ReadonlySet<AdminEngineId>
+  readonly evidenceCompleteness?: SystemHealthEvidenceCompleteness
 }
 
 export interface SystemHealthAggregateRange {
@@ -596,9 +615,9 @@ export function buildSystemHealthProjection(
     historyWindow: Object.freeze({ start: new Date(historyStart).toISOString(), end: now.toISOString() }),
     evaluationWindow: Object.freeze({ start: new Date(evaluationStart).toISOString(), end: now.toISOString() }),
     evidenceCompleteness: (options.rejectedRows ?? 0) > 0
-      ? 'invalid_rows_rejected'
+      ? 'malformed'
       : options.sourceTruncated
-        ? 'truncated'
+        ? 'partial'
         : 'complete',
     overallHealth: overall.health,
     overallReasonCodes: Object.freeze([...overall.reasons]),
@@ -639,6 +658,8 @@ function aggregateLatency(
   summary: SystemHealthAggregateSummary,
   percentileValue: 50 | 95,
 ): number | null {
+  // The frozen RPC supplies per-group percentiles. The trusted source adapter
+  // stores the worst applicable group value here; counts remain exact sums.
   const minimum = percentileValue === 50
     ? SYSTEM_HEALTH_THRESHOLDS.minimumP50Samples
     : SYSTEM_HEALTH_THRESHOLDS.minimumP95Samples
@@ -719,14 +740,16 @@ function aggregateIncidentReason(
 
 export function buildSystemHealthProjectionFromAggregates(
   evidence: SystemHealthAggregateEvidence | null,
-  options: Pick<BuildSystemHealthOptions, 'now' | 'selectedWindow' | 'disabledEngines'> = {},
+  options: BuildSystemHealthAggregateOptions = {},
 ): SystemHealthProjection {
   const now = options.now ?? new Date()
   const nowMs = now.getTime()
   if (!Number.isFinite(nowMs)) throw new TypeError('valid observation time required')
   const selectedWindow = options.selectedWindow ?? '1h'
   const ranges = systemHealthAggregateRanges(now, selectedWindow)
-  const incomplete = evidence === null
+  const evidenceCompleteness = options.evidenceCompleteness
+    ?? (evidence === null ? 'unavailable' : 'complete')
+  const incomplete = evidence === null || evidenceCompleteness !== 'complete'
   const evaluation = evidence?.evaluation
 
   const engines = ADMIN_ENGINE_IDS.map((engineId): EngineHealthProjection => {
@@ -832,7 +855,7 @@ export function buildSystemHealthProjectionFromAggregates(
     selectedWindow,
     historyWindow: Object.freeze({ start: ranges.history.start, end: now.toISOString() }),
     evaluationWindow: Object.freeze({ start: ranges.evaluation.start, end: now.toISOString() }),
-    evidenceCompleteness: evidence === null ? 'invalid_rows_rejected' : 'complete',
+    evidenceCompleteness,
     overallHealth: overall.health,
     overallReasonCodes: Object.freeze([...overall.reasons]),
     observedAt: latest?.lastOccurredAt ?? null,

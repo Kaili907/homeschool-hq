@@ -54,7 +54,11 @@ export function createAdminOperationalAggregateReader({ env, fetchImpl, client }
           ? await builder.abortSignal(signal)
           : await builder
         if (signal.aborted) throw new AdminOperationalAggregateReadError('source_timeout')
-        if (error) throw new AdminOperationalAggregateReadError('source_unavailable')
+        if (error) {
+          throw new AdminOperationalAggregateReadError(
+            error.code === '54000' ? 'source_group_incomplete' : 'source_unavailable',
+          )
+        }
         return data
       } catch (error) {
         if (error instanceof AdminOperationalAggregateReadError) throw error

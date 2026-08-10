@@ -1,5 +1,6 @@
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import {
+  AdminHealthSourceReadError,
   createAdminHealthSource,
   disabledHealthEngines,
 } from './_shared/admin-health-source.js'
@@ -61,11 +62,14 @@ export function createAdminHealthHandler(overrides = {}) {
         disabledEngines: overrides.disabledEngines ?? disabledHealthEngines(env),
       })
       return jsonResponse(200, projection)
-    } catch {
+    } catch (error) {
       return jsonResponse(200, buildSystemHealthProjectionFromAggregates(null, {
         now: observationTime,
         selectedWindow: window,
         disabledEngines: overrides.disabledEngines ?? disabledHealthEngines(env),
+        evidenceCompleteness: error instanceof AdminHealthSourceReadError
+          ? error.code
+          : 'unavailable',
       }))
     }
   }

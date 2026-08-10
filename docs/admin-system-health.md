@@ -2,9 +2,9 @@
 
 ADMIN-9 adds the read-only `/academy/admin/health` surface and the
 authorized `GET /api/admin/v1/health` projection. It uses Admin contract version
-2 and TEL-FOUNDATION's `academy_aggregate_operational_events_v2` seam. It does
-not add a health event ledger or a new migration; the unreleased telemetry
-foundation migration carries the exact health summary extension.
+2 and TEL-FOUNDATION's existing `academy_aggregate_operational_events_v2` seam.
+It does not add a health event ledger, change the frozen telemetry migration, or
+add a new migration.
 
 ## Authorization and privacy
 
@@ -27,8 +27,13 @@ examples, remain the complete health truth. Unknown codes render generic copy.
   windows. Event volume above the former 500-row raw-read ceiling does not make
   otherwise valid health evidence unknown.
 - Aggregate grouping is bounded at 4,096 groups and fails closed rather than
-  truncating. Malformed, incomplete, unavailable, or retention-unsafe aggregate
-  evidence produces unknown health.
+  truncating. Declared limits, returned group counts, represented-event totals,
+  range, filters, retention metadata, canonical dimensions, and group contents
+  are independently validated.
+- Completeness is reported as `complete`, `partial`, `retention_limited`,
+  `malformed`, `unavailable`, `timeout`, or `group_incomplete`. Every state other
+  than `complete` forces health to `unknown` except an authoritative disabled
+  gate, which remains `disabled`.
 - Primary health evaluation is always the last rolling hour. UI history windows
   are Last hour, Today (UTC), rolling 24 hours, and rolling 7 days.
 - Failure trend compares the selected history window with the immediately
@@ -67,12 +72,12 @@ entitlement, policy, input, quota, and disabled-gate rejection is not an
 infrastructure failure. Timeouts, provider errors, and validation errors are
 core failures. Fallbacks are a quality-degradation signal.
 
-P50 is the integer median (half values rounded to the nearest integer). P95 is
-the nearest-rank value. TEL-FOUNDATION computes those exact percentiles across
-the complete total, engine, and service populations; group percentiles are not
-combined or substituted, and average latency is never used as a percentile. A
-percentile remains null until its sample minimum is met; the UI says that
-samples are insufficient instead of fabricating a value.
+TEL-FOUNDATION returns nearest-rank P50 and P95 evidence for every complete
+group. ADMIN-9 sums group counts exactly for weighted result rates and uses the
+worst applicable group percentile as a conservative latency signal; it does not
+average or claim that group percentiles form an exact population percentile.
+The UI labels this value as worst grouped latency. A latency value remains null
+until the represented duration count meets its sample minimum.
 
 ## Health and safety semantics
 
