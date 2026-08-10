@@ -106,7 +106,7 @@ describe('secured TTS gateway client', () => {
       usage: meter(),
     })
     expect(synth.available()).toBe(true)
-    await synth.synthesize({ text: 'hello', voiceId: 'abc' })
+    await synth.synthesize({ text: 'hello', voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' })
 
     const [url, init] = (
       spy as unknown as {
@@ -119,7 +119,7 @@ describe('secured TTS gateway client', () => {
       'content-type': 'application/json',
       accept: 'audio/mpeg',
     })
-    expect(JSON.parse(init.body)).toEqual({ text: 'hello', voiceId: 'abc' })
+    expect(JSON.parse(init.body)).toEqual({ text: 'hello', voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' })
   })
 
   it('fails closed without a Supabase token and never calls the gateway', async () => {
@@ -130,7 +130,7 @@ describe('secured TTS gateway client', () => {
       isOnline: () => true,
       usage: meter(),
     })
-    await expect(synth.synthesize({ text: 'hello', voiceId: 'abc' })).rejects.toMatchObject({
+    await expect(synth.synthesize({ text: 'hello', voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' })).rejects.toMatchObject({
       code: 'unauthenticated',
     })
     expect(spy).not.toHaveBeenCalled()
@@ -150,7 +150,7 @@ describe('secured TTS gateway client', () => {
         isOnline: () => true,
         usage: meter(),
       })
-      await expect(synth.synthesize({ text: 'hello', voiceId: 'abc' })).rejects.toEqual(
+      await expect(synth.synthesize({ text: 'hello', voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' })).rejects.toEqual(
         new VoiceGatewayError(code),
       )
     },

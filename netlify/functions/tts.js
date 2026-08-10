@@ -6,6 +6,7 @@ import {
   errorResponse,
   hasQuery,
   isTimeoutError,
+  jsonResponse,
   readBoundedResponseBytes,
   readJsonBody,
   responseForError,
@@ -24,6 +25,11 @@ import {
   validateTtsRequest,
 } from './_shared/tts-policy.js'
 import {
+  TTS_VOICE_CATALOG,
+  projectPublicTtsCatalog,
+  resolveTtsCatalogVoice,
+} from './_shared/tts-catalog.js'
+import {
   elapsedMilliseconds,
   persistProviderUsage,
   submittedCharacterCount,
@@ -31,7 +37,8 @@ import {
   usageRequestKey,
 } from './_shared/usage-accounting.js'
 
-const ALLOWED_PATHS = new Set(['/api/tts/synthesize', '/.netlify/functions/tts'])
+const SYNTHESIS_PATHS = new Set(['/api/tts/synthesize', '/.netlify/functions/tts'])
+const CATALOG_PATHS = new Set(['/api/tts/catalog', '/.netlify/functions/tts/catalog'])
 // Leaves room for base64 expansion beneath Netlify's buffered response ceiling.
 const MAX_AUDIO_BYTES = 4 * 1024 * 1024
 const TTS_TIMEOUT_MS = 30_000
@@ -39,10 +46,14 @@ const DEFAULT_TTS_DAILY_LIMIT = 100
 
 export function createTtsHandler(overrides = {}) {
   return async (event, context) => {
-    if (event?.httpMethod !== 'POST') {
-      return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
+    const path = event?.path ?? ''
+    const isSynthesis = SYNTHESIS_PATHS.has(path)
+    const isCatalog = CATALOG_PATHS.has(path)
+    if (!isSynthesis && !isCatalog) return errorResponse(404, 'not_found')
+    const expectedMethod = isCatalog ? 'GET' : 'POST'
+    if (event?.httpMethod !== expectedMethod) {
+      return errorResponse(405, 'method_not_allowed', { allow: expectedMethod })
     }
-    if (!ALLOWED_PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
 
     const env = overrides.env ?? process.env
@@ -53,6 +64,11 @@ export function createTtsHandler(overrides = {}) {
     try {
       const auth = await verifySupabaseBearer(event, { fetchImpl, env })
       if (!auth.ok) return auth.response
+
+      const catalog = overrides.catalog ?? TTS_VOICE_CATALOG
+      if (isCatalog) {
+        return jsonResponse(200, projectPublicTtsCatalog(catalog, env))
+      }
 
       if (!envFlagEnabled(env, 'ACADEMY_TTS_ENABLED')) {
         return errorResponse(503, 'gateway_disabled')
@@ -85,14 +101,20 @@ export function createTtsHandler(overrides = {}) {
         })
       }
 
-      const request = validateTtsRequest(readJsonBody(event, TTS_REQUEST_LIMIT_BYTES), env)
+      const request = validateTtsRequest(readJsonBody(event, TTS_REQUEST_LIMIT_BYTES))
+      const resolvedVoice = resolveTtsCatalogVoice(
+        catalog,
+        request.voiceRef,
+        request.voiceVersion,
+        env,
+      )
       const versions = trustedUsageVersions(env, 'tts')
       const apiKey = typeof env.ELEVENLABS_API_KEY === 'string' ? env.ELEVENLABS_API_KEY.trim() : ''
       if (!apiKey) {
         await finalizeTelemetry({
-          result: 'provider_error', statusCode: 503, reasonCode: 'service_unavailable',
+          result: 'provider_error', statusCode: 503, reasonCode: 'provider_unavailable',
         })
-        return errorResponse(503, 'service_unavailable')
+        return errorResponse(503, 'provider_unavailable')
       }
 
       await access.consumeUsage(
@@ -131,7 +153,7 @@ export function createTtsHandler(overrides = {}) {
       }
       const signal = AbortSignal.timeout(TTS_TIMEOUT_MS)
       try {
-        upstream = await fetchImpl(elevenLabsUrl(request.voiceId), {
+        upstream = await fetchImpl(elevenLabsUrl(resolvedVoice.providerVoiceId), {
           method: 'POST',
           redirect: 'error',
           signal,

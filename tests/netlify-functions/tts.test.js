@@ -1,15 +1,32 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { TTS_REQUEST_LIMIT_BYTES, TTS_TEXT_LIMIT } from '../../netlify/functions/_shared/tts-policy.js'
 import { GatewayError } from '../../netlify/functions/_shared/http.js'
+import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catalog.js'
 import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
 
 const ENV = Object.freeze({
   SUPABASE_URL: 'https://academy.supabase.co',
   SUPABASE_ANON_KEY: 'public-anon-key',
   ELEVENLABS_API_KEY: 'elevenlabs-provider-secret',
-  ELEVENLABS_ALLOWED_VOICE_IDS: 'voice-1,voice_2',
+  ELEVENLABS_ALLOWED_VOICE_IDS: 'synthetic-provider-voice-secret',
   ACADEMY_TTS_ENABLED: 'enabled',
   ACADEMY_APP_VERSION: 'academy-test-build',
+})
+
+const TEST_CATALOG = createTtsVoiceCatalog({
+  catalogVersion: 'test-v1',
+  defaultVoiceRef: 'academy.tts.synthetic',
+  voices: [{
+    voiceRef: 'academy.tts.synthetic',
+    displayLabel: 'Synthetic test voice',
+    providerClass: 'premium',
+    provider: 'elevenlabs',
+    providerVoiceId: 'synthetic-provider-voice-secret',
+    voiceVersion: 'v1',
+    status: 'active',
+    cachedPlayback: 'allow',
+    adminApproved: true,
+  }],
 })
 
 function testAccess({
@@ -37,7 +54,7 @@ function testAccess({
 }
 
 function createTtsHandler(overrides = {}) {
-  return createBaseTtsHandler({ gatewayAccess: testAccess(), ...overrides })
+  return createBaseTtsHandler({ gatewayAccess: testAccess(), catalog: TEST_CATALOG, ...overrides })
 }
 
 afterEach(() => {
@@ -45,7 +62,7 @@ afterEach(() => {
   vi.restoreAllMocks()
 })
 
-function event(body = { text: 'Let us work through one small step.', voiceId: 'voice-1' }, overrides = {}) {
+function event(body = { text: 'Let us work through one small step.', voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }, overrides = {}) {
   return {
     httpMethod: 'POST',
     path: '/api/tts/synthesize',
@@ -85,7 +102,7 @@ function fetchRouter({
         headers: { 'content-type': 'application/json' },
       })
     }
-    if (url === 'https://api.elevenlabs.io/v1/text-to-speech/voice-1?output_format=mp3_44100_128') {
+    if (url === 'https://api.elevenlabs.io/v1/text-to-speech/synthetic-provider-voice-secret?output_format=mp3_44100_128') {
       return providerStatus >= 200 && providerStatus < 300
         ? new Response(audio, {
             status: providerStatus,
@@ -170,32 +187,32 @@ describe('authenticated TTS gateway', () => {
   ])('rejects arbitrary provider setting %s', async (field, value) => {
     const fetchImpl = fetchRouter()
     const result = await createTtsHandler({ fetchImpl, env: ENV })(
-      event({ text: 'hello', voiceId: 'voice-1', [field]: value }),
+      event({ text: 'hello', voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1', [field]: value }),
     )
     expect(result.statusCode).toBe(400)
     expect(fetchImpl).toHaveBeenCalledTimes(1)
   })
 
-  it('rejects unsupported voices and excessive text', async () => {
+  it('rejects unknown logical refs and excessive text', async () => {
     const handler = createTtsHandler({ fetchImpl: fetchRouter(), env: ENV })
-    const unsupported = await handler(event({ text: 'hello', voiceId: 'not-approved' }))
+    const unsupported = await handler(event({ text: 'hello', voiceRef: 'academy.tts.unknown', voiceVersion: 'v1' }))
     expect(unsupported.statusCode).toBe(400)
     expect(responseJson(unsupported)).toEqual({
-      error: { code: 'unsupported_voice' },
+      error: { code: 'unknown_voice_ref' },
     })
     expect(
       (
         await handler(
           event({
             text: 'x'.repeat(TTS_TEXT_LIMIT + 1),
-            voiceId: 'voice-1',
+            voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1',
           }),
         )
       ).statusCode,
     ).toBe(400)
   })
 
-  it('fails closed when no server voice allowlist is configured', async () => {
+  it('fails closed when the resolved voice is absent from the deployment allowlist', async () => {
     const { ELEVENLABS_ALLOWED_VOICE_IDS: _removed, ...withoutAllowlist } = ENV
     const result = await createTtsHandler({
       fetchImpl: fetchRouter(),
@@ -203,7 +220,7 @@ describe('authenticated TTS gateway', () => {
     })(event())
     expect(result.statusCode).toBe(503)
     expect(responseJson(result)).toEqual({
-      error: { code: 'service_unavailable' },
+      error: { code: 'voice_deployment_mismatch' },
     })
   })
 
@@ -221,7 +238,7 @@ describe('authenticated TTS gateway', () => {
     expect(fetchImpl).toHaveBeenCalledTimes(2)
 
     const [url, init] = fetchImpl.mock.calls[1]
-    expect(url).toBe('https://api.elevenlabs.io/v1/text-to-speech/voice-1?output_format=mp3_44100_128')
+    expect(url).toBe('https://api.elevenlabs.io/v1/text-to-speech/synthetic-provider-voice-secret?output_format=mp3_44100_128')
     expect(init.headers.Authorization).toBeUndefined()
     expect(init.headers['xi-api-key']).toBe('elevenlabs-provider-secret')
     expect(init.redirect).toBe('error')
@@ -411,7 +428,7 @@ describe('authenticated TTS gateway', () => {
 
   it('persists exact submitted characters and approved voice without storing text or audio', async () => {
     const access = testAccess()
-    const request = { text: 'Count 🚀 exactly.', voiceId: 'voice-1' }
+    const request = { text: 'Count 🚀 exactly.', voiceRef: 'academy.tts.synthetic', voiceVersion: 'v1' }
     const result = await createTtsHandler({
       fetchImpl: fetchRouter(),
       env: ENV,

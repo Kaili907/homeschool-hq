@@ -5,30 +5,14 @@ export const TTS_TEXT_LIMIT = 1000
 export const ELEVENLABS_MODEL_ID = 'eleven_turbo_v2_5'
 export const ELEVENLABS_OUTPUT_FORMAT = 'mp3_44100_128'
 
-function allowedVoiceIds(env) {
-  const configured = env?.ELEVENLABS_ALLOWED_VOICE_IDS
-  if (typeof configured !== 'string') return []
-  return [
-    ...new Set(
-      configured
-        .split(',')
-        .map((item) => item.trim())
-        .filter(Boolean),
-    ),
-  ]
-}
-
-export function validateTtsRequest(value, env) {
-  const request = assertExactObject(value, ['text', 'voiceId'])
+export function validateTtsRequest(value) {
+  const request = assertExactObject(value, ['text', 'voiceRef', 'voiceVersion'])
   const text = boundedString(request.text, { max: TTS_TEXT_LIMIT })
-  const voiceId = boundedString(request.voiceId, { max: 64, singleLine: true })
-  if (!/^[A-Za-z0-9_-]+$/.test(voiceId)) reject(400, 'invalid_request')
-
-  const allowlist = allowedVoiceIds(env)
-  if (allowlist.length === 0) reject(503, 'service_unavailable')
-  if (!allowlist.includes(voiceId)) reject(400, 'unsupported_voice')
-
-  return { text, voiceId }
+  const voiceRef = boundedString(request.voiceRef, { max: 128, singleLine: true })
+  const voiceVersion = boundedString(request.voiceVersion, { max: 64, singleLine: true })
+  if (!/^academy\.tts\.[a-z0-9]+(?:[.-][a-z0-9]+)*$/.test(voiceRef)) reject(400, 'invalid_request')
+  if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/.test(voiceVersion)) reject(400, 'invalid_request')
+  return { text, voiceRef, voiceVersion }
 }
 
 export function elevenLabsUrl(voiceId) {

@@ -6,8 +6,18 @@ import {
 } from '../../netlify/functions/_shared/gateway-telemetry.js'
 import { createAnthropicHandler } from '../../netlify/functions/anthropic.js'
 import { createTtsHandler } from '../../netlify/functions/tts.js'
+import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catalog.js'
 
 const HOUSEHOLD_ID = '10000000-0000-4000-8000-000000000001'
+const TTS_CATALOG = createTtsVoiceCatalog({
+  catalogVersion: 'telemetry-test-v1',
+  defaultVoiceRef: 'academy.tts.telemetry-test',
+  voices: [{
+    voiceRef: 'academy.tts.telemetry-test', displayLabel: 'Telemetry test',
+    providerClass: 'premium', provider: 'elevenlabs', providerVoiceId: 'voice-1',
+    voiceVersion: 'v1', status: 'active', cachedPlayback: 'allow', adminApproved: true,
+  }],
+})
 const ENV = Object.freeze({
   SUPABASE_URL: 'https://academy.supabase.co',
   SUPABASE_ANON_KEY: 'public-anon-key',
@@ -102,7 +112,7 @@ function ttsEvent(text = 'Private speech text.') {
       authorization: 'Bearer header.payload.signature',
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ text, voiceId: 'voice-1' }),
+    body: JSON.stringify({ text, voiceRef: 'academy.tts.telemetry-test', voiceVersion: 'v1' }),
   }
 }
 
@@ -217,7 +227,7 @@ describe('production gateway operational telemetry', () => {
     const providerAccess = access()
     const text = 'Private TTS input.'
     const response = await createTtsHandler({
-      env: ENV, fetchImpl: authThenTts(), gatewayAccess: providerAccess, telemetry: sink,
+      env: ENV, catalog: TTS_CATALOG, fetchImpl: authThenTts(), gatewayAccess: providerAccess, telemetry: sink,
       requestIdFactory: () => 'tts-parity',
     })(ttsEvent(text))
     expect(response.statusCode).toBe(200)
@@ -228,6 +238,8 @@ describe('production gateway operational telemetry', () => {
     expect(sink.record.mock.calls.some(([event]) => event.eventType === 'tts.synthesis')).toBe(false)
     expect(JSON.stringify(sink.record.mock.calls)).not.toContain(text)
     expect(JSON.stringify(sink.record.mock.calls)).not.toContain(response.body)
+    expect(JSON.stringify(sink.record.mock.calls)).not.toContain('voice-1')
+    expect(sink.record).toHaveBeenCalledTimes(1)
   })
 
   it('marks provider success with unavailable accounting without changing the response', async () => {

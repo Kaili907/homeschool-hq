@@ -173,6 +173,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-configuration-core-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260809150000",
+      "filename": "20260809150000_academy_logical_voice_profile_contract.sql",
+      "sha256": "d111cd566a39fb016cade408b5a64adb46d98ec9a8155f1060ac67d62053cd74",
+      "dependency": "20260809120000_academy_operational_telemetry_foundation.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "profiles_logical_voice_contract_check",
+      "supersessionStatus": "current"
     }
   ]
 }

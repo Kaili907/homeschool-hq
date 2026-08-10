@@ -10,6 +10,20 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
   app: `npm test`.
 
+## Supabase: logical TTS voice profile contract (2026-08-09)
+
+Tracked migration:
+`supabase/migrations/20260809150000_academy_logical_voice_profile_contract.sql`.
+
+The additive migration reserves the approved timestamp and adds validation only
+for tagged `tutor.voiceSelections` values. It accepts bounded logical catalog
+references with exact voice versions and separate browser-native voice
+selections. Existing `tutor.voiceMap` JSON remains untouched and readable. A
+validated check constraint composes this new rule with the existing CAS profile
+validator. Canonical LF SHA-256:
+`d111cd566a39fb016cade408b5a64adb46d98ec9a8155f1060ac67d62053cd74`.
+This migration has not been applied to a hosted Supabase project.
+
 ## Supabase: Academy Admin authorization foundation (2026-08-08)
 
 Tracked migration:

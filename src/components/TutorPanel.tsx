@@ -1,5 +1,5 @@
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
-import type { AppState, Profile, VoiceProviderId, VoiceSlot } from '../types'
+import type { AppState, Profile, VoiceSelection, VoiceSlot } from '../types'
 import { SKILL_BY_ID } from '../skills'
 import { updateProfile } from '../appState'
 import {
@@ -18,18 +18,19 @@ import {
   VOICE_SLOTS,
   clearTutorFlag,
   flaggedSkills,
-  getSlotRef,
+  getSlotSelection,
+  hasLegacyPremiumSelection,
   getVoicePrefs,
   isMuted,
   isTeen,
-  migrateLegacyVoiceToDefault,
   prewarmTargets,
   resolveSlotRef,
   setRate,
   setMuted,
-  setSlotRef,
+  setVoiceSelection,
   setVoiceOptIn,
 } from '../tutor/tutorState'
+import { getVoiceCatalogAccess, type PublicVoiceCatalogEntry } from '../tutor/voiceCatalog'
 
 type SetState = Dispatch<SetStateAction<AppState>>
 
@@ -50,23 +51,10 @@ export function TutorControls({
 }) {
   const voices = useVoices()
   const muted = isMuted(state)
+  const [catalogVoices, setCatalogVoices] = useState<readonly PublicVoiceCatalogEntry[]>([])
 
-  // MT-V: migrate any MT-1 single voice into the `default` slot, once. Idempotent —
-  // returns `prev` unchanged when there's nothing to move, so React bails the render.
   useEffect(() => {
-    onStateChange((prev) => {
-      let changed = false
-      const profiles = { ...prev.profiles }
-      for (const [id, p] of Object.entries(prev.profiles)) {
-        const migrated = migrateLegacyVoiceToDefault(p)
-        if (migrated !== p) {
-          profiles[id] = migrated
-          changed = true
-        }
-      }
-      return changed ? { ...prev, profiles } : prev
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    void getVoiceCatalogAccess().load().then((catalog) => setCatalogVoices(catalog.voices))
   }, [])
 
   // Functional per-profile writer (H1 contract): base derives from the updater's
@@ -100,7 +88,7 @@ export function TutorControls({
       {voices.length === 0 && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs font-semibold text-amber-800">
           No system voices detected in this browser yet. The tutor still shows every step as
-          text; premium voices work regardless once a key + voice are set.
+          text; Academy premium voices appear only when an approved deployment is available.
         </div>
       )}
 
@@ -143,9 +131,10 @@ export function TutorControls({
             <VoiceGrid
               profile={p}
               voices={voices}
+              catalogVoices={catalogVoices}
               rate={prefs.rate}
               canPlay={!muted && prefs.enabled}
-              onSlotChange={(slot, ref) => patchProfile(p.id, (pp) => setSlotRef(pp, slot, ref))}
+              onSlotChange={(slot, ref) => patchProfile(p.id, (pp) => setVoiceSelection(pp, slot, ref))}
             />
           </div>
         )
@@ -156,17 +145,19 @@ export function TutorControls({
 
 // ---------- per-girl, per-subject voice grid ----------
 
-type CellRef = { provider: VoiceProviderId; ref: string; label: string }
+type CellRef = VoiceSelection
 
 function VoiceGrid({
   profile,
   voices,
+  catalogVoices,
   rate,
   canPlay,
   onSlotChange,
 }: {
   profile: Profile
   voices: SpeechSynthesisVoice[]
+  catalogVoices: readonly PublicVoiceCatalogEntry[]
   rate: number
   canPlay: boolean
   onSlotChange: (slot: VoiceSlot, ref: CellRef | undefined) => void
@@ -181,6 +172,7 @@ function VoiceGrid({
           slotHint={hint}
           profile={profile}
           voices={voices}
+          catalogVoices={catalogVoices}
           rate={rate}
           canPlay={canPlay}
           onChange={(ref) => onSlotChange(slot, ref)}
@@ -190,14 +182,13 @@ function VoiceGrid({
   )
 }
 
-const SUGGESTED_LABELS = ['Rachel — warm', 'Bella — bright', 'Elli — gentle', 'Josh — steady']
-
 function SlotRow({
   slot,
   slotLabel,
   slotHint,
   profile,
   voices,
+  catalogVoices,
   rate,
   canPlay,
   onChange,
@@ -207,23 +198,37 @@ function SlotRow({
   slotHint: string
   profile: Profile
   voices: SpeechSynthesisVoice[]
+  catalogVoices: readonly PublicVoiceCatalogEntry[]
   rate: number
   canPlay: boolean
   onChange: (ref: CellRef | undefined) => void
 }) {
-  const current = getSlotRef(profile, slot)
+  const current = getSlotSelection(profile, slot)
   const resolved = resolveSlotRef(profile, slot)
-  const [provider, setProvider] = useState<VoiceProviderId>(current?.provider ?? 'browser')
-  const [elId, setElId] = useState(current?.provider === 'elevenlabs' ? current.ref : '')
-  const [elLabel, setElLabel] = useState(current?.provider === 'elevenlabs' ? current.label : '')
+  const legacyPremium = hasLegacyPremiumSelection(profile, slot)
+  const selectedValue = current?.kind === 'catalog'
+    ? `catalog:${current.voiceRef}:${current.voiceVersion}`
+    : current?.kind === 'browser' ? `browser:${current.voiceURI}` : ''
 
-  // Play what this slot ACTUALLY resolves to (fall-through included), at the girl's rate.
   const test = () => speak(SAMPLE, { voiceURI: encodeVoiceRef(resolved), rate })
-
-  const saveEl = () => {
-    const id = elId.trim()
-    if (!id) return onChange(undefined)
-    onChange({ provider: 'elevenlabs', ref: id, label: elLabel.trim() || SUGGESTED_LABELS[0] })
+  const select = (value: string) => {
+    if (!value) return onChange(undefined)
+    if (value.startsWith('browser:')) {
+      const voiceURI = value.slice('browser:'.length)
+      const voice = voices.find((candidate) => candidate.voiceURI === voiceURI)
+      return onChange({ kind: 'browser', voiceURI, displayLabel: voice?.name ?? 'System voice' })
+    }
+    const entry = catalogVoices.find(
+      (candidate) => `catalog:${candidate.voiceRef}:${candidate.voiceVersion}` === value,
+    )
+    if (entry) {
+      onChange({
+        kind: 'catalog',
+        voiceRef: entry.voiceRef,
+        voiceVersion: entry.voiceVersion,
+        displayLabel: entry.displayLabel,
+      })
+    }
   }
 
   return (
@@ -234,59 +239,31 @@ function SlotRow({
       </div>
 
       <select
-        value={provider}
-        onChange={(e) => {
-          const next = e.target.value as VoiceProviderId
-          setProvider(next)
-          // switching to Browser clears any EL mapping; pick the voice in the select below
-          if (next === 'browser' && current?.provider === 'elevenlabs') onChange(undefined)
-        }}
-        className={inp}
-        aria-label={`${profile.name} ${slotLabel} provider`}
+        value={selectedValue}
+        onChange={(event) => select(event.target.value)}
+        className={`${inp} max-w-72`}
+        aria-label={`${profile.name} ${slotLabel} voice`}
       >
-        <option value="browser">Browser</option>
-        <option value="elevenlabs">ElevenLabs</option>
-      </select>
-
-      {provider === 'browser' ? (
-        <select
-          value={current?.provider === 'browser' ? current.ref : ''}
-          onChange={(e) => {
-            const uri = e.target.value
-            if (!uri) return onChange(undefined)
-            const v = voices.find((vv) => vv.voiceURI === uri)
-            onChange({ provider: 'browser', ref: uri, label: v?.name ?? 'System voice' })
-          }}
-          className={`${inp} max-w-52`}
-          aria-label={`${profile.name} ${slotLabel} browser voice`}
-        >
-          <option value="">{slot === 'default' ? 'System default' : 'Use default slot'}</option>
-          {voices.map((v) => (
-            <option key={v.voiceURI} value={v.voiceURI}>
-              {v.name} ({v.lang})
+        <option value="">{slot === 'default' ? 'System default' : 'Use default slot'}</option>
+        <optgroup label="Browser voices">
+          {voices.map((voice) => (
+            <option key={voice.voiceURI} value={`browser:${voice.voiceURI}`}>
+              {voice.name} ({voice.lang})
             </option>
           ))}
-        </select>
-      ) : (
-        <span className="flex items-center gap-1">
-          <input
-            value={elId}
-            onChange={(e) => setElId(e.target.value)}
-            onBlur={saveEl}
-            placeholder="ElevenLabs voice ID"
-            className={`${inp} w-40`}
-            aria-label={`${profile.name} ${slotLabel} ElevenLabs voice id`}
-          />
-          <input
-            value={elLabel}
-            onChange={(e) => setElLabel(e.target.value)}
-            onBlur={saveEl}
-            placeholder={SUGGESTED_LABELS[0]}
-            className={`${inp} w-32`}
-            aria-label={`${profile.name} ${slotLabel} ElevenLabs label`}
-          />
-        </span>
-      )}
+        </optgroup>
+        <optgroup label="Academy premium catalog">
+          {catalogVoices.filter((entry) => entry.status === 'active').map((entry) => (
+            <option
+              key={`${entry.voiceRef}:${entry.voiceVersion}`}
+              value={`catalog:${entry.voiceRef}:${entry.voiceVersion}`}
+              disabled={!entry.deploymentAvailable && !entry.cachedPlaybackAllowed}
+            >
+              {entry.displayLabel}{entry.deploymentAvailable ? '' : ' (cache only)'}
+            </option>
+          ))}
+        </optgroup>
+      </select>
 
       <button
         onClick={test}
@@ -297,21 +274,17 @@ function SlotRow({
         ▶ Test
       </button>
       {current && (
-        <button
-          onClick={() => {
-            setProvider('browser')
-            setElId('')
-            setElLabel('')
-            onChange(undefined)
-          }}
-          className={btn}
-          title="Clear this slot (falls back to the default slot)"
-        >
-          ✕
+        <button onClick={() => onChange(undefined)} className={btn} title="Clear this slot">
+          ×
         </button>
       )}
-      {!current && resolved && (
-        <span className="text-[11px] italic text-slate-400">↳ {resolved.label}</span>
+      {legacyPremium && !current && (
+        <span className="text-[11px] font-semibold text-amber-600">
+          Legacy premium selection hidden · browser fallback
+        </span>
+      )}
+      {!current && resolved && resolved.kind !== 'legacy' && (
+        <span className="text-[11px] italic text-slate-400">↳ {resolved.displayLabel}</span>
       )}
     </div>
   )
@@ -346,11 +319,11 @@ function PremiumVoicePanel({ state }: { state: AppState }) {
     setTestMsg('Testing…')
     const target = targets[0]
     if (!target) {
-      setTestMsg('Map an ElevenLabs voice for a girl below, then test.')
+      setTestMsg('Choose an available Academy premium voice below, then test.')
       return
     }
     const used = await getVoiceAdapter()
-      .speak({ text: SAMPLE, voiceRef: target.voiceRef, rate: target.rate })
+      .speak({ text: SAMPLE, voiceRef: target.voiceRef, voiceVersion: target.voiceVersion, rate: target.rate })
       .catch(() => 'none' as const)
     refreshUsage()
     refreshCache()
@@ -387,7 +360,7 @@ function PremiumVoicePanel({ state }: { state: AppState }) {
         setPrewarmMsg(`Downloading… ${done + skipped + 1}/${totalUnits}`)
         // eslint-disable-next-line no-await-in-loop
         const ok = await adapter
-          .prewarmLine({ text: line, voiceRef: t.voiceRef, rate: t.rate })
+          .prewarmLine({ text: line, voiceRef: t.voiceRef, voiceVersion: t.voiceVersion, rate: t.rate })
           .catch(() => false)
         if (ok) done++
         else skipped++
@@ -471,7 +444,7 @@ function PremiumVoicePanel({ state }: { state: AppState }) {
           className={`${btn} disabled:opacity-40`}
           title={
             targets.length === 0
-              ? 'Map at least one ElevenLabs voice first'
+              ? 'Choose at least one available Academy premium voice first'
               : 'Synthesize & cache every static tutor line for offline use'
           }
         >
