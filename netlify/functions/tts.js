@@ -13,6 +13,11 @@ import {
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
 import { createGatewayAccess, dailyLimit } from './_shared/gateway-access.js'
 import {
+  createGatewayOperationalTelemetry,
+  gatewayErrorTerminal,
+  recordGatewayTerminal,
+} from './_shared/gateway-telemetry.js'
+import {
   ELEVENLABS_MODEL_ID,
   TTS_REQUEST_LIMIT_BYTES,
   elevenLabsUrl,
@@ -42,6 +47,8 @@ export function createTtsHandler(overrides = {}) {
 
     const env = overrides.env ?? process.env
     const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
+    let finalizeTelemetry
+    let telemetryRecorded = false
 
     try {
       const auth = await verifySupabaseBearer(event, { fetchImpl, env })
@@ -54,10 +61,39 @@ export function createTtsHandler(overrides = {}) {
       const access = overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl })
       const entitlement = await access.requireEntitlement(auth.user.id)
 
+      const startedAt = Date.now()
+      const requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
+      const telemetry = overrides.telemetry
+        ?? createGatewayOperationalTelemetry({ env, access })
+      let providerReceiptDurationMs
+      finalizeTelemetry = async ({
+        result, statusCode, reasonCode, accountingAvailable,
+      }) => {
+        telemetryRecorded = true
+        return recordGatewayTerminal(telemetry, {
+          requestKey,
+          authority: entitlement,
+          mode: 'tts',
+          operation: 'tts_synthesis',
+          provider: 'elevenlabs',
+          route: 'tts',
+          result,
+          statusCode,
+          durationMs: providerReceiptDurationMs ?? elapsedMilliseconds(startedAt),
+          reasonCode,
+          accountingAvailable,
+        })
+      }
+
       const request = validateTtsRequest(readJsonBody(event, TTS_REQUEST_LIMIT_BYTES), env)
       const versions = trustedUsageVersions(env, 'tts')
       const apiKey = typeof env.ELEVENLABS_API_KEY === 'string' ? env.ELEVENLABS_API_KEY.trim() : ''
-      if (!apiKey) return errorResponse(503, 'service_unavailable')
+      if (!apiKey) {
+        await finalizeTelemetry({
+          result: 'provider_error', statusCode: 503, reasonCode: 'service_unavailable',
+        })
+        return errorResponse(503, 'service_unavailable')
+      }
 
       await access.consumeUsage(
         auth.user.id,
@@ -68,10 +104,9 @@ export function createTtsHandler(overrides = {}) {
       let upstream
       let bytes
       const occurredAt = new Date().toISOString()
-      const startedAt = Date.now()
-      const requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
-      const recordUsage = async (result, resultReasonCode, billingDisposition) =>
-        persistProviderUsage(access, {
+      const recordUsage = async (result, resultReasonCode, billingDisposition) => {
+        providerReceiptDurationMs = elapsedMilliseconds(startedAt)
+        return persistProviderUsage(access, {
           requestKey,
           occurredAt,
           accountRef: auth.user.id,
@@ -88,11 +123,12 @@ export function createTtsHandler(overrides = {}) {
           cachedInputReadTokens: null,
           cachedInputWriteTokens: null,
           ttsCharacters: submittedCharacterCount(request.text),
-          latencyMs: elapsedMilliseconds(startedAt),
+          latencyMs: providerReceiptDurationMs,
           result,
           resultReasonCode,
           billingDisposition,
         })
+      }
       const signal = AbortSignal.timeout(TTS_TIMEOUT_MS)
       try {
         upstream = await fetchImpl(elevenLabsUrl(request.voiceId), {
@@ -110,38 +146,67 @@ export function createTtsHandler(overrides = {}) {
           }),
         })
         if (upstream.status === 429) {
-          await recordUsage('rejected', 'provider_throttled', 'unknown')
+          const accountingAvailable = await recordUsage('rejected', 'provider_throttled', 'unknown')
+          await finalizeTelemetry({
+            result: 'rejected', statusCode: 429, reasonCode: 'provider_throttled',
+            accountingAvailable,
+          })
           return errorResponse(429, 'usage_limit')
         }
         if (!upstream.ok) {
-          await recordUsage('provider_error', 'provider_rejected', 'unknown')
+          const accountingAvailable = await recordUsage('provider_error', 'provider_rejected', 'unknown')
+          await finalizeTelemetry({
+            result: 'provider_error', statusCode: 502, reasonCode: 'provider_rejected',
+            accountingAvailable,
+          })
           return errorResponse(502, 'provider_failure')
         }
         const contentType = upstream.headers?.get?.('content-type') ?? ''
         if (!/^audio\/mpeg(?:\s*;|$)/i.test(contentType)) {
-          await recordUsage('provider_error', 'invalid_provider_audio', 'billable')
+          const accountingAvailable = await recordUsage('provider_error', 'invalid_provider_audio', 'billable')
+          await finalizeTelemetry({
+            result: 'provider_error', statusCode: 502, reasonCode: 'invalid_provider_audio',
+            accountingAvailable,
+          })
           return errorResponse(502, 'provider_failure')
         }
         bytes = await readBoundedResponseBytes(upstream, MAX_AUDIO_BYTES)
       } catch (error) {
         if (isTimeoutError(error, signal)) {
-          await recordUsage('timeout', 'upstream_timeout', 'unknown')
+          const accountingAvailable = await recordUsage('timeout', 'upstream_timeout', 'unknown')
+          await finalizeTelemetry({
+            result: 'timeout', statusCode: 504, reasonCode: 'upstream_timeout',
+            accountingAvailable,
+          })
           return errorResponse(504, 'upstream_timeout')
         }
-        await recordUsage(
+        const reasonCode = upstream?.ok ? 'invalid_provider_audio' : 'provider_transport_error'
+        const accountingAvailable = await recordUsage(
           'provider_error',
-          upstream?.ok ? 'invalid_provider_audio' : 'provider_transport_error',
+          reasonCode,
           upstream?.ok ? 'billable' : 'unknown',
         )
+        await finalizeTelemetry({
+          result: 'provider_error', statusCode: 502, reasonCode,
+          accountingAvailable,
+        })
         if (error instanceof GatewayError) throw error
         return errorResponse(502, 'provider_failure')
       }
       if (bytes.byteLength === 0) {
-        await recordUsage('provider_error', 'invalid_provider_audio', 'billable')
+        const accountingAvailable = await recordUsage('provider_error', 'invalid_provider_audio', 'billable')
+        await finalizeTelemetry({
+          result: 'provider_error', statusCode: 502, reasonCode: 'invalid_provider_audio',
+          accountingAvailable,
+        })
         return errorResponse(502, 'provider_failure')
       }
 
-      await recordUsage('success', null, 'billable')
+      const accountingAvailable = await recordUsage('success', null, 'billable')
+      await finalizeTelemetry({
+        result: 'success', statusCode: 200, reasonCode: 'completed',
+        accountingAvailable,
+      })
 
       return {
         statusCode: 200,
@@ -154,6 +219,9 @@ export function createTtsHandler(overrides = {}) {
         isBase64Encoded: true,
       }
     } catch (error) {
+      if (finalizeTelemetry && !telemetryRecorded) {
+        await finalizeTelemetry(gatewayErrorTerminal(error))
+      }
       return responseForError(error)
     }
   }
