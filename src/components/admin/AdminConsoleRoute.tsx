@@ -25,6 +25,7 @@ import { createCurriculumApprovalHttpSource } from '../../admin/curriculum-appro
 import { createCurriculumStagingHttpSource } from '../../admin/curriculum-staging/httpSource'
 import { createCurriculumIntegrityHttpSource } from '../../admin/curriculum-integrity/httpSource'
 import { createCurriculumPublishingHttpSource } from '../../admin/curriculum-publishing/httpSource'
+import { createCurriculumActivationHttpSource } from '../../admin/curriculum-activation/httpSource'
 import {
   createCurriculumStudioSource,
   CURRICULUM_STUDIO_NAVIGATION_REQUEST,
@@ -42,6 +43,7 @@ import type { SafetyOperationsReadState } from '../../admin/safetyOperationsMode
 import { CurriculumBrowser } from '../../admin/curriculum/CurriculumBrowser'
 import { CurriculumStudio } from '../../admin/curriculum/CurriculumStudio'
 import { CurriculumReleaseIntegrity } from '../../admin/curriculum/CurriculumReleaseIntegrity'
+import { CurriculumActivationControl } from '../../admin/curriculum/CurriculumActivationControl'
 import {
   CurriculumWorkflowNav,
   type CurriculumWorkflowView,
@@ -112,6 +114,7 @@ export type AdminRouteSection = AdminSection
   | 'curriculum-validation'
   | 'curriculum-preview'
   | 'curriculum-standards-review'
+  | 'curriculum-activation'
   | 'unknown'
 
 const ENGINE_PAGE_LABELS: Readonly<Record<AdminEngineId, string>> = {
@@ -151,6 +154,7 @@ export function adminRouteSection(pathname: string): AdminRouteSection | null {
   if (suffix === 'curriculum/standards-review') return 'curriculum-standards-review'
   if (suffix === 'learners' || adminRouteLearnerRef(pathname)) return 'learners'
   if (suffix.startsWith('learners/')) return 'unknown'
+  if (suffix === 'curriculum/activation') return 'curriculum-activation'
   if (suffix === 'health' || suffix.startsWith('health/')) return 'system-health'
   if (suffix === 'engines') return 'engines'
   if (suffix.startsWith('engines/')) return adminRouteEngine(pathname) ? 'engines' : 'unknown'
@@ -275,6 +279,7 @@ export function AdminConsoleRoute() {
   const curriculumStagingSource = useMemo(() => createCurriculumStagingHttpSource(), [])
   const curriculumIntegritySource = useMemo(() => createCurriculumIntegrityHttpSource(), [])
   const curriculumPublishingSource = useMemo(() => createCurriculumPublishingHttpSource(), [])
+  const curriculumActivationSource = useMemo(() => createCurriculumActivationHttpSource(), [])
   const curriculumStudioSource = useMemo(
     () => createCurriculumStudioSource(
       curriculumSource,
@@ -838,6 +843,7 @@ export function AdminConsoleRoute() {
     || section === 'curriculum-validation'
     || section === 'curriculum-preview'
     || section === 'curriculum-standards-review'
+    || section === 'curriculum-activation'
   )
     ? 'curriculum'
     : section === 'unknown' ? 'overview' : section
@@ -847,8 +853,9 @@ export function AdminConsoleRoute() {
     : section === 'curriculum-validation' ? 'Curriculum validation'
       : section === 'curriculum-preview' ? 'Curriculum Preview / Diff'
         : section === 'curriculum-standards-review' ? 'Curriculum standards review'
-          : section === 'attention' ? 'Admin Attention Center'
-            : section === 'system-health' ? 'System Health'
+          : section === 'curriculum-activation' ? 'Curriculum Activation & Rollback'
+            : section === 'attention' ? 'Admin Attention Center'
+              : section === 'system-health' ? 'System Health'
       : section === 'engines' ? `${ENGINE_PAGE_LABELS[selectedEngine]} Engine Performance`
         : section === 'costs' ? 'AI & Costs'
           : section === 'learners' ? (adminRouteLearnerRef(pathname) ? 'Learner Detail' : 'Learner Operations')
@@ -985,6 +992,17 @@ export function AdminConsoleRoute() {
             />
           </>
         )}
+        {section === 'curriculum-activation' && (
+          <>
+            <CurriculumWorkflowNav current="activation" onNavigate={navigateCurriculum} />
+            <CurriculumActivationControl
+              authorization={hasCapability(authorization, 'curriculum:read')
+                ? { status: 'authorized', capabilities: authorization.capabilities }
+                : { status: 'denied' }}
+              source={curriculumActivationSource}
+            />
+          </>
+        )}
         {section === 'system-health' && (
           <SystemHealthDashboard
             authorization={authorization}
@@ -1049,7 +1067,7 @@ export function AdminConsoleRoute() {
             onRetry={() => setReadinessRetry((value) => value + 1)}
           />
         )}
-        {!['attention', 'learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-studio', 'curriculum-integrity', 'curriculum-validation', 'curriculum-standards-review', 'curriculum-preview', 'system-health', 'incidents', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
+        {!['attention', 'learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-studio', 'curriculum-integrity', 'curriculum-validation', 'curriculum-standards-review', 'curriculum-preview', 'curriculum-activation', 'system-health', 'incidents', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
             <h1 className="text-2xl font-bold">Admin section unavailable</h1>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>

@@ -9,6 +9,7 @@ export type CurriculumWorkflowView =
   | 'preview'
   | 'approval'
   | 'staging'
+  | 'activation'
 
 export type CurriculumWorkflowStepState =
   | 'complete'
@@ -93,6 +94,7 @@ export function curriculumWorkflowDestinations(
     blocked('preview', 'Preview / Diff'),
     blocked('approval', 'Human Approval'),
     blocked('staging', 'Release Staging'),
+    { id: 'activation', label: 'Activation / Rollback', path: '/academy/admin/curriculum/activation', state: 'ready', detail: 'Manage the published release pointer' },
   ]
 
   if (!snapshot && identity) {
@@ -109,6 +111,7 @@ export function curriculumWorkflowDestinations(
       { id: 'preview', label: 'Preview / Diff', path: `/academy/admin/curriculum/preview?${query}`, state: 'ready', detail: `Revision ${identity.draftRevision}` },
       { id: 'approval', label: 'Human Approval', path: exactDraft('curriculum-human-approval'), state: 'pending', detail: 'Check exact-revision evidence in Studio' },
       { id: 'staging', label: 'Release Staging', path: exactDraft('curriculum-release-staging'), state: 'pending', detail: 'Check exact-revision evidence in Studio' },
+      { id: 'activation', label: 'Activation / Rollback', path: '/academy/admin/curriculum/activation', state: 'ready', detail: 'Manage the published release pointer' },
     ]
   }
 
@@ -157,6 +160,7 @@ export function curriculumWorkflowDestinations(
     { id: 'preview', label: 'Preview / Diff', path: `/academy/admin/curriculum/preview?${query}`, state: 'ready', detail: `Open revision ${snapshot.draftRevision}` },
     { id: 'approval', label: 'Human Approval', path: draftPath(snapshot, 'curriculum-human-approval'), state: approvalState, detail: snapshot.approval?.status.replaceAll('_', ' ') ?? 'Awaiting exact-revision validation' },
     { id: 'staging', label: 'Release Staging', path: draftPath(snapshot, 'curriculum-release-staging'), state: stagingState, detail: snapshot.staging?.stageState ?? 'Awaiting approval' },
+    { id: 'activation', label: 'Activation / Rollback', path: '/academy/admin/curriculum/activation', state: 'ready', detail: 'Manage the published release pointer' },
   ]
 }
 

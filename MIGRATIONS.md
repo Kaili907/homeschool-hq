@@ -10,6 +10,33 @@ Every schema version bump is documented here. Rules (from the build spec):
   `src/migration.test.ts`. Tests run before the migration ever executes in the
 app: `npm test`.
 
+## Supabase: Curriculum activation and rollback (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810160000_academy_curriculum_activation_rollback.sql`.
+
+The migration converts the existing registry-only production pointer into a
+CAS-governed default/current authority without changing its seeded release. It
+adds append-only pointer revisions and private exact-request receipts. Only an
+artifact-complete immutable `published` registry release can be selected.
+Staged-only, nonexistent, malformed, and evidence-incomplete targets fail
+closed. A rollback is a new pointer revision to a previously active published
+release; no release or history row is deleted or rewritten.
+
+The trusted-server transition RPC independently reauthorizes the frozen
+`releases:manage` capability against the actor's current assignment, locks the
+pointer, checks the expected revision, and atomically writes the current
+pointer, transition history, bounded audit event, and receipt. Exact replay is
+safe, changed request reuse conflicts, and an already-active target is a
+truthful no-op with no duplicate history.
+
+The RPC never reads or writes learner profiles. Existing
+`Profile.academy.releaseVersion` pins remain unchanged; any repin requires a
+separate governed migration. The migration and control surface are local only:
+no hosted migration, pointer transition, deployment, or push occurred. Its
+tracked SHA-256 is in
+`docs/admin-console/curriculum-activation-rollback-migration.json`.
+
 ## Supabase: Curriculum release staging (2026-08-10)
 
 Tracked migration:
