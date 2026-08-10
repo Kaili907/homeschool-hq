@@ -13,6 +13,7 @@ import {
   responseForSystemicError,
   resultResponse,
 } from './_shared/study-adult-review-operations/entrypoint-result.js'
+import { executeAdultReviewWorkerRun } from './_shared/study-adult-review-operations/run-evidence.js'
 
 const PATHS = new Set([
   '/api/study/adult-review/worker',
@@ -34,7 +35,11 @@ export function createStudyAdultReviewWorkerHandler(overrides = {}) {
    */
   async function composition() {
     if (injected) {
-      return { worker: overrides.worker, authorization: overrides.workerAuthorization }
+      return {
+        worker: overrides.worker,
+        authorization: overrides.workerAuthorization,
+        runEvidence: overrides.runEvidence,
+      }
     }
     if (!pending) pending = compose({ env }).catch(() => null)
     const composed = await pending
@@ -42,22 +47,31 @@ export function createStudyAdultReviewWorkerHandler(overrides = {}) {
       pending = null
       return {}
     }
-    return { worker: composed.worker, authorization: composed.workerAuthorization }
+    return {
+      worker: composed.worker,
+      authorization: composed.workerAuthorization,
+      runEvidence: composed.runEvidence,
+    }
   }
 
-  const ready = (worker, authorization) => typeof worker?.ready === 'function'
+  const ready = (worker, authorization, runEvidence) => typeof worker?.ready === 'function'
     && typeof worker.run === 'function'
     && authorization?.isDurable === true
     && authorization?.isReady?.() === true
     && typeof authorization.credentialForEvent === 'function'
+    && (injected || (
+      runEvidence?.isDurable === true
+      && runEvidence?.isReady?.() === true
+      && typeof runEvidence.record === 'function'
+    ))
 
   return async (event) => {
     if (!envFlagEnabled(env, 'ACADEMY_STUDY_ENABLED')) return errorResponse(503, 'gateway_disabled')
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
     if (event?.httpMethod !== 'POST') return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
-    const { worker, authorization } = await composition()
-    if (!ready(worker, authorization)) return resultResponse(503, 'unavailable')
+    const { worker, authorization, runEvidence } = await composition()
+    if (!ready(worker, authorization, runEvidence)) return resultResponse(503, 'unavailable')
     try {
       let limit = 10
       const body = assertExactObject(readJsonBody(event, 512), ['schemaVersion', 'action'], ['limit'])
@@ -84,6 +98,17 @@ export function createStudyAdultReviewWorkerHandler(overrides = {}) {
           })
         }
         return errorResponse(403, 'worker_not_authorized')
+      }
+      if (runEvidence) {
+        return executeAdultReviewWorkerRun({
+          worker,
+          runEvidence,
+          invocationKind: trigger,
+          workerCredential: credentialContext.workerCredential,
+          limit,
+          now: overrides.now,
+          createRunId: overrides.createRunId,
+        })
       }
       return responseForRun(await worker.run({
         trigger,
