@@ -461,7 +461,7 @@ describe('Admin Overview domain semantics and isolation', () => {
     expect(response.body).not.toMatch(/private-account|private-household|private-provider-model/)
   })
 
-  it('uses the same partial provider-accounting truth as Costs without an invoice claim', async () => {
+  it('uses the same complete-for-instrumented-paths truth as Costs without an invoice claim', async () => {
     const domainSources = sources()
     const response = await handler({ sources: domainSources })(event())
     const coverage = body(response).costs.data.providerAccountingCoverage
@@ -471,15 +471,15 @@ describe('Admin Overview domain semantics and isolation', () => {
       endExclusive: '2026-08-10T00:00:00.000Z',
     })
     expect(coverage).toMatchObject({
-      status: 'partial',
+      status: 'complete_for_journaled_attempts',
       journalStatus: 'complete_for_journaled_attempts',
       providerInstrumentation: {
-        status: 'partial',
+        status: 'complete',
         engines: expect.arrayContaining([
           { key: 'tutor', status: 'covered' },
           { key: 'jarvis', status: 'covered' },
           { key: 'tts', status: 'covered' },
-          { key: 'study', status: 'pending' },
+          { key: 'study', status: 'covered' },
         ]),
       },
       invoiceCompletenessClaim: false,

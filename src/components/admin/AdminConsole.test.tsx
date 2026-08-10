@@ -243,7 +243,7 @@ describe('AdminConsole authorization and load states', () => {
 })
 
 describe('AdminConsole canonical overview presentation', () => {
-  it('shows the same partial provider-accounting status used by Costs', () => {
+  it('shows the same complete-for-instrumented-paths provider-accounting status used by Costs', () => {
     const base = adaptAdminOverview(completeSource())
     const model = {
       ...base,
@@ -258,8 +258,8 @@ describe('AdminConsole canonical overview presentation', () => {
       />,
     )
     expect(markup).toContain('Provider accounting:')
-    expect(markup).toContain('Partial')
-    expect(markup).toContain('Tutor covered; Jarvis covered; TTS covered; Study pending')
+    expect(markup).toContain('Complete for currently journaled/instrumented provider-attempt paths')
+    expect(markup).toContain('Tutor covered; Jarvis covered; TTS covered; Study covered')
     expect(markup).toContain('does not establish provider-bill completeness')
   })
 

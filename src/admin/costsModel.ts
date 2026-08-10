@@ -90,10 +90,10 @@ export interface AdminProviderAccountingCoverageMetrics {
   readonly unresolvable: number
 }
 
-export type AdminProviderInstrumentationStatus = 'covered' | 'pending'
+export type AdminProviderInstrumentationStatus = 'covered'
 
 export interface AdminProviderInstrumentationCoverage {
-  readonly status: 'partial'
+  readonly status: 'complete'
   readonly engines: readonly {
     readonly key: 'tutor' | 'jarvis' | 'tts' | 'study'
     readonly status: AdminProviderInstrumentationStatus
@@ -222,7 +222,7 @@ const PROVIDER_INSTRUMENTATION_STATUSES = Object.freeze({
   tutor: 'covered',
   jarvis: 'covered',
   tts: 'covered',
-  study: 'pending',
+  study: 'covered',
 } as const)
 const PROVIDER_COVERAGE_DIMENSIONS = {
   engines: new Set<string>(['tutor', 'study', 'jarvis', 'tts']),
@@ -368,7 +368,7 @@ function providerCoverageRows(
 function providerInstrumentationCoverage(value: unknown): AdminProviderInstrumentationCoverage | null {
   const source = record(value)
   if (
-    !source || source.status !== 'partial' || Object.keys(source).length !== 2
+    !source || source.status !== 'complete' || Object.keys(source).length !== 2
     || !Array.isArray(source.engines) || source.engines.length !== 4
   ) return null
   const seen = new Set<string>()
@@ -383,7 +383,7 @@ function providerInstrumentationCoverage(value: unknown): AdminProviderInstrumen
     engines.push({ key, status: row.status as AdminProviderInstrumentationStatus })
     seen.add(key)
   }
-  return { status: 'partial', engines }
+  return { status: 'complete', engines }
 }
 
 export function parseAdminProviderAccountingCoverage(value: unknown): AdminProviderAccountingCoverage | null {
@@ -419,7 +419,7 @@ export function parseAdminProviderAccountingCoverage(value: unknown): AdminProvi
     !== expectedReconciliation[source.journalStatus as AdminProviderAccountingCoverageStatus]
   ) return null
   const expectedOverall = source.journalStatus === 'complete_for_journaled_attempts'
-    ? instrumentation.status
+    ? instrumentation.status === 'complete' ? source.journalStatus : 'partial'
     : source.journalStatus
   if (source.status !== expectedOverall) return null
 

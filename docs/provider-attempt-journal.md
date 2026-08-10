@@ -119,11 +119,11 @@ safely. The projection explicitly returns `invoiceCompletenessClaim: false` and
 names `academy_provider_usage_ledger` as cost authority.
 
 The Admin Costs and Overview projections use the same provider-accounting
-reducer. Tutor, Jarvis, and premium TTS instrumentation are `covered`; Study
-safety instrumentation is `pending`. Therefore a clear journal can be
-`complete_for_journaled_attempts` while overall provider coverage remains
-`partial`. Neither status establishes that stored activity equals a provider
-bill, and `invoiceCompletenessClaim` remains `false`.
+reducer. Tutor, Jarvis, premium TTS, and Study safety instrumentation are all
+`covered`. A clear journal is therefore complete for the currently journaled
+and instrumented provider-attempt paths. This bounded status does not establish
+that stored activity equals a provider bill, and `invoiceCompletenessClaim`
+remains `false`.
 
 ## Privacy
 
@@ -148,7 +148,7 @@ voice behavior, and pre-dispatch rejections do not reach this seam. The journal
 stores the server-owned ElevenLabs model identity, never the provider voice ID,
 text, or audio.
 
-All three provider paths use `provider-gateway-attempt.js` for the same ordering: reserve,
+All four provider paths use `provider-gateway-attempt.js` for the same ordering: reserve,
 `dispatch_possible`, physical request, `outcome_observed`, authoritative usage
 ledger persistence, and journal linkage. A missing ledger becomes
 `gap_pending`; a mismatched or already-linked ledger becomes

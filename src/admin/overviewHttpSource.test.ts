@@ -56,7 +56,7 @@ describe('Admin Overview HTTP source', () => {
     expect(model.ai.spend).toMatchObject({ status: 'available', costMicros: '9007199254740993', costKind: 'calculated' })
     expect(model.ai.reconciledSpend).toMatchObject({ status: 'available', costMicros: '2100000', costKind: 'reconciled' })
     expect(model.ai.providerAccounting).toMatchObject({
-      status: 'partial', journalStatus: 'complete_for_journaled_attempts',
+      status: 'complete_for_journaled_attempts', journalStatus: 'complete_for_journaled_attempts',
       invoiceCompletenessClaim: false,
     })
     expect(model.enginePerformance).toEqual([{ engineId: 'tutor', evidenceState: 'partial' }])

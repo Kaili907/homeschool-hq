@@ -32,16 +32,16 @@ export function providerAccountingCoverageFixture(
   }
   const row = { key: 'tutor', status: 'complete_for_journaled_attempts' as const, ...metrics }
   return {
-    status: 'partial',
+    status: 'complete_for_journaled_attempts',
     journalStatus: 'complete_for_journaled_attempts',
     reconciliationState: 'clear_for_journaled_attempts',
     providerInstrumentation: {
-      status: 'partial',
+      status: 'complete',
       engines: [
         { key: 'tutor', status: 'covered' },
         { key: 'jarvis', status: 'covered' },
         { key: 'tts', status: 'covered' },
-        { key: 'study', status: 'pending' },
+        { key: 'study', status: 'covered' },
       ],
     },
     invoiceCompletenessClaim: false,
