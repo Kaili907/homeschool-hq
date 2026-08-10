@@ -410,6 +410,8 @@ export function validateAuthoringSet(input: CurriculumAuthoringSet): AuthoringVa
     }
     if (unit.assessment_ref && !assessments.has(unit.assessment_ref)) {
       add(issues, 'BAD_REFERENCE', `units[${index}].assessment_ref`, 'assessment does not exist')
+    } else if (unit.assessment_ref && assessments.get(unit.assessment_ref)?.unit_ref !== unit.unit_id) {
+      add(issues, 'BAD_REFERENCE', `units[${index}].assessment_ref`, 'assessment belongs to another unit')
     }
     validateStandardReferences(unit.standards, frameworks, `units[${index}].standards`, issues)
     if (policy) validateExtensions(unit.extensions, policy, `units[${index}].extensions`, issues)
@@ -502,6 +504,18 @@ export function validateAuthoringSet(input: CurriculumAuthoringSet): AuthoringVa
       add(issues, 'ASSESSMENT_POINT_MISMATCH', `assessments[${index}].total_points`, `declares ${assessment.total_points} but prompts sum to ${pointSum}`)
     }
     uniqueBy(assessment.prompts, (prompt) => prompt.prompt_id, `assessments[${index}].prompts`, issues)
+    assessment.prompts.forEach((prompt, promptIndex) => {
+      prompt.resource_refs.forEach((resourceRef, resourceIndex) => {
+        if (!resources.has(resourceRef)) {
+          add(
+            issues,
+            'BAD_REFERENCE',
+            `assessments[${index}].prompts[${promptIndex}].resource_refs[${resourceIndex}]`,
+            'resource does not exist',
+          )
+        }
+      })
+    })
     const interpretation = interpretations.get(assessment.protected_interpretation_ref)
     if (!interpretation || interpretation.assessment_ref !== assessment.assessment_id) {
       add(issues, 'BAD_REFERENCE', `assessments[${index}].protected_interpretation_ref`, 'protected interpretation is missing or belongs to another assessment')
