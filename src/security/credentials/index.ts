@@ -14,7 +14,14 @@ export {
   type LegacyMigrationStage,
   type LegacyPinClassification,
 } from './migration'
-export * from './parentMigration'
+export {
+  migrateLegacyParentCredential,
+  type DurableParentMigrationPersistence,
+  type DurableParentMigrationSnapshot,
+  type LegacyParentCredentialMigrationOptions,
+  type LegacyParentCredentialMigrationOutcome,
+  type LegacyParentCredentialMigrationResult,
+} from './parentMigration'
 export { PARENT_PIN_VERIFIER_DOMAIN } from './parentPinVerifier'
 export {
   PARENT_CREDENTIAL_STORAGE_NAMESPACE,
@@ -24,10 +31,16 @@ export {
   parentCredentialStorageKey,
   parentFailedAttemptSubject,
   readParentCredentialState,
+  recoverParentPinAuthorized,
   rotateParentPinAuthorized,
   verifyParentPin,
   type ParentCredentialAvailability,
+  type ParentCredentialGenerationAuthority,
+  type ParentCredentialGenerationSnapshot,
   type ParentCredentialMutationResult,
+  type ParentCredentialOperationOptions,
+  type ParentCredentialRecoveryAuthorization,
+  type ParentCredentialRecoveryAuthorizationContext,
   type ParentCredentialResetAuthorization,
   type ParentCredentialResetAuthorizationContext,
   type ParentCredentialRotationAuthorization,

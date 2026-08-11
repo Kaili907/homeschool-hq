@@ -10,25 +10,39 @@ import {
 } from '../contracts'
 import {
   base64ToBytes,
-  isFourDigitPin,
   isSupportedPinCostParameters,
   LEARNER_PIN_COST_PARAMETERS_V1,
   LEARNER_PIN_COST_PARAMETERS_VERSION,
   LEARNER_PIN_DERIVED_KEY_BYTES,
   LEARNER_PIN_SALT_BYTES,
 } from './pinVerifier'
-import {
-  createParentPinVerifier,
-  createUnusableParentPinVerifier,
-  verifyParentPinVerifier,
-} from './parentPinVerifier'
-import type { CredentialOperationOptions, CredentialStorage } from './vault'
+import type { CredentialOperationOptions } from './vault'
 
 export const PARENT_CREDENTIAL_STORAGE_NAMESPACE =
-  'homeschool-hq:security:parent-credentials:v1' as const
+  'homeschool-hq:security:parent-credentials:v2' as const
 
 export interface StoredParentCredentialRecord extends ParentCredentialRecord {
   readonly costParametersVersion: typeof LEARNER_PIN_COST_PARAMETERS_VERSION
+}
+
+export interface ParentCredentialGenerationSnapshot {
+  readonly generation: number
+  readonly activeGeneration: number | null
+  readonly recordCommitmentBase64: string | null
+  /** Immutable completed-migration anchor held outside device-local storage. */
+  readonly migrationCommitmentBase64: string | null
+}
+
+/** Must not share a rollback domain with the device-local credential blob. */
+export interface ParentCredentialGenerationAuthority {
+  read(
+    binding: ParentCredentialBindingReference,
+  ): ParentCredentialGenerationSnapshot | Promise<ParentCredentialGenerationSnapshot>
+  compareAndSwap(
+    binding: ParentCredentialBindingReference,
+    expected: ParentCredentialGenerationSnapshot,
+    replacement: ParentCredentialGenerationSnapshot,
+  ): boolean | Promise<boolean>
 }
 
 export type ParentCredentialVaultErrorCode =
@@ -38,6 +52,9 @@ export type ParentCredentialVaultErrorCode =
   | 'credential-conflict'
   | 'authorization-required'
   | 'coordination-unavailable'
+  | 'generation-authority-unavailable'
+  | 'generation-conflict'
+  | 'generation-mismatch'
   | 'binding-mismatch'
   | 'malformed-record'
   | 'unsupported-version'
@@ -62,6 +79,7 @@ export interface ParentCredentialLockManager {
 }
 
 export interface ParentCredentialOperationOptions extends CredentialOperationOptions {
+  readonly generationAuthority: ParentCredentialGenerationAuthority
   readonly lockManager?: ParentCredentialLockManager
 }
 
@@ -73,6 +91,7 @@ export type ParentFailedAttemptSubject = Readonly<{
 
 export type ParentCredentialAvailability = Readonly<
   | { status: 'enrolled'; subject: ParentFailedAttemptSubject }
+  | { status: 'prepared'; subject: ParentFailedAttemptSubject }
   | { status: 'parent-setup-required'; subject: ParentFailedAttemptSubject }
   | { status: 'reset-required'; subject: ParentFailedAttemptSubject }
 >
@@ -86,6 +105,7 @@ export type ParentPinVerificationResult = Readonly<
 
 export interface ParentCredentialMutationResult {
   readonly status: 'enrolled' | 'reset-required'
+  readonly generation: number
   readonly binding: ParentCredentialBindingReference
   readonly subject: ParentFailedAttemptSubject
   readonly createdAt: string
@@ -95,6 +115,7 @@ export interface ParentCredentialMutationResult {
 export interface ParentCredentialRotationAuthorizationContext {
   readonly operationId: 'parent-pin:rotate'
   readonly binding: ParentCredentialBindingReference
+  readonly credentialGeneration: number
   readonly credentialCreatedAt: string
   readonly credentialRotatedAt?: string
 }
@@ -109,13 +130,26 @@ export interface ParentCredentialRotationAuthorization {
 export interface ParentCredentialResetAuthorizationContext {
   readonly operationId: 'parent-pin:reset-required'
   readonly binding: ParentCredentialBindingReference
-  readonly priorState: 'enrolled' | 'reset-required' | 'missing'
+  readonly priorState: 'prepared' | 'enrolled' | 'reset-required' | 'missing' | 'unavailable'
+  readonly priorGeneration: number
 }
 
 /** Integration must consume installation claim/recovery authority here. */
 export interface ParentCredentialResetAuthorization {
   consumeParentCredentialResetAuthorization(
     context: ParentCredentialResetAuthorizationContext,
+  ): boolean | Promise<boolean>
+}
+
+export interface ParentCredentialRecoveryAuthorizationContext {
+  readonly operationId: 'parent-pin:recover'
+  readonly binding: ParentCredentialBindingReference
+  readonly priorGeneration: number
+}
+
+export interface ParentCredentialRecoveryAuthorization {
+  consumeParentCredentialRecoveryAuthorization(
+    context: ParentCredentialRecoveryAuthorizationContext,
   ): boolean | Promise<boolean>
 }
 
@@ -131,6 +165,7 @@ const REQUIRED_RECORD_KEYS = Object.freeze([
   'verifierBase64',
   'costParameters',
   'state',
+  'generation',
   'createdAt',
 ] as const)
 
@@ -140,11 +175,10 @@ const BINDING_REFERENCE_KEYS = Object.freeze([
   'householdId',
 ] as const)
 
-function plainRecord(value: unknown): value is Record<string, unknown> {
-  if (value === null || typeof value !== 'object' || Array.isArray(value)) return false
-  const prototype = Object.getPrototypeOf(value)
-  return prototype === Object.prototype || prototype === null
-}
+const ACTIVE_BINDING_KEYS = Object.freeze([
+  'schemaVersion', 'bindingId', 'installationId', 'householdId',
+  'datasetEpoch', 'verifiedActorId', 'status', 'boundAt',
+] as const)
 
 function invalidBinding(message: string): never {
   throw new ParentCredentialVaultError('invalid-installation-binding', message)
@@ -154,20 +188,42 @@ function malformed(message: string): never {
   throw new ParentCredentialVaultError('malformed-record', message)
 }
 
-function recordDataProperty(record: Record<string, unknown>, key: string): unknown {
-  const descriptor = Object.getOwnPropertyDescriptor(record, key)
-  if (!descriptor || !descriptor.enumerable || !('value' in descriptor)) {
-    malformed(`Parent credential field ${key} is missing or unsafe.`)
-  }
-  return descriptor.value
-}
+const PROTOTYPE_SENSITIVE_KEYS = new Set(['__proto__', 'prototype', 'constructor'])
 
-function dataProperty(record: Record<string, unknown>, key: string): unknown {
-  const descriptor = Object.getOwnPropertyDescriptor(record, key)
-  if (!descriptor || !descriptor.enumerable || !('value' in descriptor)) {
-    invalidBinding(`Installation binding field ${key} is missing or unsafe.`)
+function ownDataFields(
+  value: unknown,
+  requiredKeys: readonly string[],
+  optionalKeys: readonly string[],
+  fail: (message: string) => never,
+): ReadonlyMap<string, unknown> {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) {
+    fail('Expected a plain object.')
   }
-  return descriptor.value
+  let prototype: object | null
+  let keys: readonly PropertyKey[]
+  try {
+    prototype = Object.getPrototypeOf(value)
+    keys = Reflect.ownKeys(value)
+  } catch {
+    fail('Object structure could not be inspected safely.')
+  }
+  if (prototype !== Object.prototype && prototype !== null) fail('Expected a plain object.')
+  const allowed = new Set([...requiredKeys, ...optionalKeys])
+  const fields = new Map<string, unknown>()
+  for (const key of keys) {
+    if (typeof key !== 'string') fail('Symbol keys are forbidden.')
+    if (PROTOTYPE_SENSITIVE_KEYS.has(key)) fail(`Prototype-sensitive field ${key} is forbidden.`)
+    if (!allowed.has(key)) fail(`Unexpected field ${key}.`)
+    const descriptor = Object.getOwnPropertyDescriptor(value, key)
+    if (!descriptor || !descriptor.enumerable || !('value' in descriptor)) {
+      fail(`Field ${key} must be an enumerable data property.`)
+    }
+    fields.set(key, descriptor.value)
+  }
+  for (const key of requiredKeys) {
+    if (!fields.has(key)) fail(`Required field ${key} is missing.`)
+  }
+  return fields
 }
 
 function hasUnpairedSurrogate(value: string): boolean {
@@ -208,16 +264,17 @@ function validIsoTimestamp(value: unknown): value is string {
 export function parentCredentialBindingReference(
   value: unknown,
 ): ParentCredentialBindingReference {
-  if (!plainRecord(value)) invalidBinding('An authoritative active InstallationBinding is required.')
-  const schemaVersion = dataProperty(value, 'schemaVersion')
-  const installationId = dataProperty(value, 'installationId')
-  const householdId = dataProperty(value, 'householdId')
-  const bindingId = dataProperty(value, 'bindingId')
-  const datasetEpoch = dataProperty(value, 'datasetEpoch')
-  const verifiedActorId = dataProperty(value, 'verifiedActorId')
-  const status = dataProperty(value, 'status')
-  const boundAt = dataProperty(value, 'boundAt')
-  const revokedAt = Object.getOwnPropertyDescriptor(value, 'revokedAt')
+  const fields = ownDataFields(value, ACTIVE_BINDING_KEYS, ['revokedAt'], (message) =>
+    invalidBinding(`Installation binding is invalid: ${message}`))
+  const schemaVersion = fields.get('schemaVersion')
+  const installationId = fields.get('installationId')
+  const householdId = fields.get('householdId')
+  const bindingId = fields.get('bindingId')
+  const datasetEpoch = fields.get('datasetEpoch')
+  const verifiedActorId = fields.get('verifiedActorId')
+  const status = fields.get('status')
+  const boundAt = fields.get('boundAt')
+  const revokedAt = fields.get('revokedAt')
 
   if (
     schemaVersion !== INSTALLATION_BINDING_SCHEMA_VERSION ||
@@ -228,8 +285,7 @@ export function parentCredentialBindingReference(
     !isExactBoundedIdentifier(verifiedActorId) ||
     status !== 'active' ||
     !validIsoTimestamp(boundAt) ||
-    (revokedAt !== undefined &&
-      (!revokedAt.enumerable || !('value' in revokedAt) || revokedAt.value !== undefined))
+    revokedAt !== undefined
   ) {
     invalidBinding('Installation binding is invalid, inactive, or incomplete.')
   }
@@ -245,28 +301,27 @@ function activeInstallationBindingSnapshot(
   value: InstallationBinding,
 ): InstallationBinding {
   const reference = parentCredentialBindingReference(value)
-  const record = value as unknown as Record<string, unknown>
+  const fields = ownDataFields(value, ACTIVE_BINDING_KEYS, ['revokedAt'], (message) =>
+    invalidBinding(`Installation binding is invalid: ${message}`))
   return Object.freeze({
     schemaVersion: INSTALLATION_BINDING_SCHEMA_VERSION,
-    bindingId: dataProperty(record, 'bindingId') as string,
+    bindingId: fields.get('bindingId') as string,
     installationId: reference.installationId,
     householdId: reference.householdId,
-    datasetEpoch: dataProperty(record, 'datasetEpoch') as string,
-    verifiedActorId: dataProperty(record, 'verifiedActorId') as string,
+    datasetEpoch: fields.get('datasetEpoch') as string,
+    verifiedActorId: fields.get('verifiedActorId') as string,
     status: 'active',
-    boundAt: dataProperty(record, 'boundAt') as string,
+    boundAt: fields.get('boundAt') as string,
   })
 }
 
 function parseStoredBindingReference(value: unknown): ParentCredentialBindingReference {
-  if (!plainRecord(value)) malformed('Parent credential binding is not an object.')
-  const keys = Object.keys(value)
-  const schemaVersion = recordDataProperty(value, 'schemaVersion')
-  const installationId = recordDataProperty(value, 'installationId')
-  const householdId = recordDataProperty(value, 'householdId')
+  const fields = ownDataFields(value, BINDING_REFERENCE_KEYS, [], (message) =>
+    malformed(`Parent credential binding is malformed: ${message}`))
+  const schemaVersion = fields.get('schemaVersion')
+  const installationId = fields.get('installationId')
+  const householdId = fields.get('householdId')
   if (
-    keys.length !== BINDING_REFERENCE_KEYS.length ||
-    !keys.every((key) => BINDING_REFERENCE_KEYS.includes(key as never)) ||
     schemaVersion !== PARENT_CREDENTIAL_BINDING_SCHEMA_VERSION ||
     !isInstallationId(installationId) ||
     !isExactBoundedIdentifier(householdId)
@@ -281,9 +336,7 @@ function parseStoredBindingReference(value: unknown): ParentCredentialBindingRef
 }
 
 function validStoredCostParameters(value: unknown): boolean {
-  if (!plainRecord(value) || Object.keys(value).length !== 2) return false
-  return recordDataProperty(value, 'iterations') === LEARNER_PIN_COST_PARAMETERS_V1.iterations &&
-    recordDataProperty(value, 'derivedKeyBytes') === LEARNER_PIN_COST_PARAMETERS_V1.derivedKeyBytes
+  return isSupportedPinCostParameters(LEARNER_PIN_COST_PARAMETERS_VERSION, value)
 }
 
 function bindingMatches(
@@ -291,25 +344,6 @@ function bindingMatches(
   right: ParentCredentialBindingReference,
 ): boolean {
   return left.installationId === right.installationId && left.householdId === right.householdId
-}
-
-function storageFrom(options?: ParentCredentialOperationOptions): CredentialStorage {
-  if (options?.storage) return options.storage
-  try {
-    if (typeof localStorage !== 'undefined') return localStorage
-  } catch {
-    // Fall through to the fail-closed error.
-  }
-  throw new ParentCredentialVaultError(
-    'storage-unavailable',
-    'Device-local Parent credential storage is unavailable.',
-  )
-}
-
-function timestamp(options?: ParentCredentialOperationOptions): string {
-  const value = (options?.now ?? (() => new Date()))().toISOString()
-  if (!validIsoTimestamp(value)) throw new Error('Parent credential clock returned an invalid timestamp.')
-  return value
 }
 
 function storageKeyForReference(binding: ParentCredentialBindingReference): string {
@@ -335,7 +369,7 @@ function mutationLockName(reference: ParentCredentialBindingReference): string {
 /** @internal Shared by the migration so every Parent mutation uses one lock. */
 export async function withParentCredentialMutationLock<T>(
   binding: InstallationBinding,
-  options: ParentCredentialOperationOptions | undefined,
+  options: ParentCredentialOperationOptions,
   operation: (bindingSnapshot: InstallationBinding) => T | Promise<T>,
 ): Promise<T> {
   const bindingSnapshot = activeInstallationBindingSnapshot(binding)
@@ -360,30 +394,22 @@ export function parseParentCredentialRecord(
   value: unknown,
   expectedBinding?: unknown,
 ): StoredParentCredentialRecord {
-  if (!plainRecord(value)) malformed('Parent credential record is not an object.')
-  const rotatedAtDescriptor = Object.getOwnPropertyDescriptor(value, 'rotatedAt')
-  const allowedKeys = rotatedAtDescriptor === undefined
-    ? REQUIRED_RECORD_KEYS
-    : [...REQUIRED_RECORD_KEYS, 'rotatedAt']
-  const keys = Object.keys(value)
-  if (keys.length !== allowedKeys.length || !keys.every((key) => allowedKeys.includes(key as never))) {
-    malformed('Parent credential record contains missing or unexpected fields.')
-  }
-  const schemaVersion = recordDataProperty(value, 'schemaVersion')
-  const storage = recordDataProperty(value, 'storage')
-  const bindingValue = recordDataProperty(value, 'binding')
-  const credentialKind = recordDataProperty(value, 'credentialKind')
-  const verifierScheme = recordDataProperty(value, 'verifierScheme')
-  const verifierSchemeVersion = recordDataProperty(value, 'verifierSchemeVersion')
-  const costParametersVersion = recordDataProperty(value, 'costParametersVersion')
-  const saltBase64 = recordDataProperty(value, 'saltBase64')
-  const verifierBase64 = recordDataProperty(value, 'verifierBase64')
-  const costParameters = recordDataProperty(value, 'costParameters')
-  const state = recordDataProperty(value, 'state')
-  const createdAt = recordDataProperty(value, 'createdAt')
-  const rotatedAt = rotatedAtDescriptor === undefined
-    ? undefined
-    : recordDataProperty(value, 'rotatedAt')
+  const fields = ownDataFields(value, REQUIRED_RECORD_KEYS, ['rotatedAt'], (message) =>
+    malformed(`Parent credential record is malformed: ${message}`))
+  const schemaVersion = fields.get('schemaVersion')
+  const storage = fields.get('storage')
+  const bindingValue = fields.get('binding')
+  const credentialKind = fields.get('credentialKind')
+  const verifierScheme = fields.get('verifierScheme')
+  const verifierSchemeVersion = fields.get('verifierSchemeVersion')
+  const costParametersVersion = fields.get('costParametersVersion')
+  const saltBase64 = fields.get('saltBase64')
+  const verifierBase64 = fields.get('verifierBase64')
+  const costParameters = fields.get('costParameters')
+  const state = fields.get('state')
+  const generation = fields.get('generation')
+  const createdAt = fields.get('createdAt')
+  const rotatedAt = fields.get('rotatedAt')
   if (
     schemaVersion !== PARENT_CREDENTIAL_SCHEMA_VERSION ||
     verifierSchemeVersion !== PARENT_PIN_VERIFIER_SCHEME_VERSION ||
@@ -410,9 +436,13 @@ export function parseParentCredentialRecord(
     storage !== 'device-local-only' ||
     credentialKind !== 'parent-pin' ||
     verifierScheme !== 'pbkdf2-sha256' ||
-    (state !== 'enrolled' && state !== 'reset-required') ||
+    (state !== 'prepared' && state !== 'enrolled' && state !== 'reset-required') ||
+    !Number.isSafeInteger(generation) ||
+    Number(generation) <= 0 ||
     !isSupportedPinCostParameters(costParametersVersion, costParameters) ||
     !validStoredCostParameters(costParameters) ||
+    typeof saltBase64 !== 'string' ||
+    typeof verifierBase64 !== 'string' ||
     !validIsoTimestamp(createdAt) ||
     (rotatedAt !== undefined && !validIsoTimestamp(rotatedAt)) ||
     (typeof rotatedAt === 'string' && Date.parse(rotatedAt) < Date.parse(createdAt))
@@ -421,8 +451,8 @@ export function parseParentCredentialRecord(
   }
 
   try {
-    base64ToBytes(saltBase64 as string, LEARNER_PIN_SALT_BYTES)
-    base64ToBytes(verifierBase64 as string, LEARNER_PIN_DERIVED_KEY_BYTES)
+    base64ToBytes(saltBase64, LEARNER_PIN_SALT_BYTES)
+    base64ToBytes(verifierBase64, LEARNER_PIN_DERIVED_KEY_BYTES)
   } catch {
     malformed('Parent credential record contains malformed verifier material.')
   }
@@ -434,316 +464,72 @@ export function parseParentCredentialRecord(
     verifierScheme: 'pbkdf2-sha256',
     verifierSchemeVersion: PARENT_PIN_VERIFIER_SCHEME_VERSION,
     costParametersVersion: LEARNER_PIN_COST_PARAMETERS_VERSION,
-    saltBase64: saltBase64 as string,
-    verifierBase64: verifierBase64 as string,
+    saltBase64,
+    verifierBase64,
     costParameters: Object.freeze({ ...LEARNER_PIN_COST_PARAMETERS_V1 }),
     state,
+    generation: generation as number,
     createdAt,
     ...(rotatedAt === undefined ? {} : { rotatedAt }),
   })
 }
 
-function parseStoredRecord(
-  raw: string,
+export async function readParentCredentialState(
   binding: InstallationBinding,
-): StoredParentCredentialRecord {
-  let parsed: unknown
-  try {
-    parsed = JSON.parse(raw) as unknown
-  } catch {
-    malformed('Parent credential record is not valid JSON.')
-  }
-  return parseParentCredentialRecord(parsed, binding)
-}
-
-/** @internal Legacy migration reads this strict record; integration should use state/verify APIs. */
-export function readParentCredentialRecord(
-  binding: InstallationBinding,
-  options?: ParentCredentialOperationOptions,
-): StoredParentCredentialRecord | null {
-  const key = parentCredentialStorageKey(binding)
-  const storage = storageFrom(options)
-  let raw: string | null
-  try {
-    raw = storage.getItem(key)
-  } catch {
-    throw new ParentCredentialVaultError(
-      'storage-unavailable',
-      'Device-local Parent credential storage could not be read.',
-    )
-  }
-  return raw === null ? null : parseStoredRecord(raw, binding)
-}
-
-/** @internal All writes are exact-binding and read-back verified. */
-export function writeParentCredentialRecord(
-  binding: InstallationBinding,
-  record: unknown,
-  options?: ParentCredentialOperationOptions,
-): StoredParentCredentialRecord {
-  const validated = parseParentCredentialRecord(record, binding)
-  const storage = storageFrom(options)
-  const key = parentCredentialStorageKey(binding)
-  const serialized = JSON.stringify(validated)
-  try {
-    storage.setItem(key, serialized)
-    const persistedRaw = storage.getItem(key)
-    if (persistedRaw !== serialized) {
-      throw new ParentCredentialVaultError(
-        'persistence-verification-failed',
-        'Parent credential did not pass durable read-back verification.',
-      )
-    }
-    return parseStoredRecord(persistedRaw, binding)
-  } catch (cause) {
-    if (cause instanceof ParentCredentialVaultError) throw cause
-    throw new ParentCredentialVaultError(
-      'storage-unavailable',
-      'Device-local Parent credential storage could not be written.',
-    )
-  }
-}
-
-/** @internal The only unauthenticated creation path is exact legacy migration. */
-export async function createParentCredentialRecordForMigration(
-  binding: InstallationBinding,
-  pin: string,
-  options?: ParentCredentialOperationOptions,
-): Promise<StoredParentCredentialRecord> {
-  const reference = parentCredentialBindingReference(binding)
-  const verifier = await createParentPinVerifier(reference, pin, options?.crypto)
-  return {
-    schemaVersion: PARENT_CREDENTIAL_SCHEMA_VERSION,
-    storage: 'device-local-only',
-    binding: reference,
-    credentialKind: 'parent-pin',
-    verifierScheme: 'pbkdf2-sha256',
-    verifierSchemeVersion: PARENT_PIN_VERIFIER_SCHEME_VERSION,
-    ...verifier,
-    state: 'enrolled',
-    createdAt: timestamp(options),
-  }
-}
-
-export async function verifyParentCredentialRecord(
-  record: unknown,
-  binding: InstallationBinding,
-  pin: unknown,
-  options?: ParentCredentialOperationOptions,
-): Promise<boolean> {
-  let validated: StoredParentCredentialRecord
-  try {
-    validated = parseParentCredentialRecord(record, binding)
-  } catch {
-    return false
-  }
-  return validated.state === 'enrolled' &&
-    verifyParentPinVerifier(validated.binding, pin, validated, options?.crypto)
-}
-
-function recordRejection(cause: unknown): boolean {
-  return cause instanceof ParentCredentialVaultError &&
-    (cause.code === 'malformed-record' ||
-      cause.code === 'unsupported-version' ||
-      cause.code === 'binding-mismatch')
-}
-
-export function readParentCredentialState(
-  binding: InstallationBinding,
-  options?: ParentCredentialOperationOptions,
-): ParentCredentialAvailability {
-  const subject = parentFailedAttemptSubject(binding)
-  const record = readParentCredentialRecord(binding, options)
-  if (!record) return { status: 'parent-setup-required', subject }
-  return { status: record.state, subject }
+  options: ParentCredentialOperationOptions,
+): Promise<ParentCredentialAvailability> {
+  const internal = await import('./parentVault.internal')
+  return internal.readParentCredentialState(binding, options)
 }
 
 export async function verifyParentPin(
   binding: InstallationBinding,
   pin: unknown,
-  options?: ParentCredentialOperationOptions,
+  options: ParentCredentialOperationOptions,
 ): Promise<ParentPinVerificationResult> {
-  const subject = parentFailedAttemptSubject(binding)
-  let record: StoredParentCredentialRecord | null
-  try {
-    record = readParentCredentialRecord(binding, options)
-  } catch (cause) {
-    if (recordRejection(cause)) return { status: 'not-verified', subject }
-    throw cause
-  }
-  if (!record) return { status: 'parent-setup-required', subject }
-  if (record.state === 'reset-required') return { status: 'reset-required', subject }
-  return (await verifyParentPinVerifier(record.binding, pin, record, options?.crypto))
-    ? { status: 'verified', subject }
-    : { status: 'not-verified', subject }
-}
-
-/** @internal Used only after the Parent migration preflights the full raw state. */
-export async function enrollLegacyParentPinForMigration(
-  binding: InstallationBinding,
-  pin: string,
-  options?: ParentCredentialOperationOptions,
-): Promise<StoredParentCredentialRecord> {
-  const existing = readParentCredentialRecord(binding, options)
-  if (existing) {
-    if (await verifyParentCredentialRecord(existing, binding, pin, options)) return existing
-    throw new ParentCredentialVaultError(
-      'credential-conflict',
-      'Existing Parent credential does not verify the exact legacy PIN.',
-    )
-  }
-
-  const record = await createParentCredentialRecordForMigration(binding, pin, options)
-  const persisted = writeParentCredentialRecord(binding, record, options)
-  if (await verifyParentCredentialRecord(persisted, binding, pin, options)) return persisted
-
-  try {
-    const storage = storageFrom(options)
-    const key = parentCredentialStorageKey(binding)
-    storage.removeItem(key)
-  } catch {
-    // Authentication still fails closed if best-effort cleanup is unavailable.
-  }
-  throw new ParentCredentialVaultError(
-    'persistence-verification-failed',
-    'Persisted Parent credential could not verify its source PIN.',
-  )
-}
-
-/** @internal Migration and authorized recovery share the unusable tombstone writer. */
-export async function markParentCredentialResetRequiredForMigration(
-  binding: InstallationBinding,
-  options?: ParentCredentialOperationOptions,
-): Promise<StoredParentCredentialRecord> {
-  const reference = parentCredentialBindingReference(binding)
-  const existing = readParentCredentialRecord(binding, options)
-  if (existing?.state === 'reset-required') return existing
-  const now = timestamp(options)
-  const verifier = await createUnusableParentPinVerifier(reference, options?.crypto)
-  if (existing) {
-    return writeParentCredentialRecord(
-      binding,
-      { ...existing, ...verifier, state: 'reset-required', rotatedAt: now },
-      options,
-    )
-  }
-  return writeParentCredentialRecord(
-    binding,
-    {
-      schemaVersion: PARENT_CREDENTIAL_SCHEMA_VERSION,
-      storage: 'device-local-only',
-      binding: reference,
-      credentialKind: 'parent-pin',
-      verifierScheme: 'pbkdf2-sha256',
-      verifierSchemeVersion: PARENT_PIN_VERIFIER_SCHEME_VERSION,
-      ...verifier,
-      state: 'reset-required',
-      createdAt: now,
-    },
-    options,
-  )
-}
-
-function mutationResult(record: StoredParentCredentialRecord): ParentCredentialMutationResult {
-  const binding = Object.freeze({ ...record.binding })
-  const result: ParentCredentialMutationResult = {
-    status: record.state,
-    binding,
-    subject: Object.freeze({ kind: 'parent', householdId: binding.householdId }),
-    createdAt: record.createdAt,
-    ...(record.rotatedAt === undefined ? {} : { rotatedAt: record.rotatedAt }),
-  }
-  return Object.freeze(result)
+  const internal = await import('./parentVault.internal')
+  return internal.verifyParentPin(binding, pin, options)
 }
 
 export async function rotateParentPinAuthorized(
   binding: InstallationBinding,
   replacementPin: string,
   authorization: ParentCredentialRotationAuthorization,
-  options?: ParentCredentialOperationOptions,
+  options: ParentCredentialOperationOptions,
 ): Promise<ParentCredentialMutationResult> {
-  if (!isFourDigitPin(replacementPin)) {
-    throw new Error('A Parent PIN must contain exactly four decimal digits.')
-  }
-  if (!authorization || typeof authorization.consumeParentCredentialRotationAuthorization !== 'function') {
-    throw new ParentCredentialVaultError('authorization-required', 'Parent rotation authorization is required.')
-  }
-  return withParentCredentialMutationLock(binding, options, async (lockedBinding) => {
-    const previous = readParentCredentialRecord(lockedBinding, options)
-    if (!previous || previous.state !== 'enrolled') {
-      throw new ParentCredentialVaultError('credential-missing', 'An enrolled Parent credential is required.')
-    }
-    const previousSerialized = JSON.stringify(previous)
-    const accepted = await authorization.consumeParentCredentialRotationAuthorization({
-      operationId: 'parent-pin:rotate',
-      binding: parentCredentialBindingReference(lockedBinding),
-      credentialCreatedAt: previous.createdAt,
-      ...(previous.rotatedAt === undefined ? {} : { credentialRotatedAt: previous.rotatedAt }),
-    })
-    if (accepted !== true) {
-      throw new ParentCredentialVaultError('authorization-required', 'Parent rotation authorization was denied.')
-    }
-
-    const replacement = await createParentCredentialRecordForMigration(lockedBinding, replacementPin, options)
-    const current = readParentCredentialRecord(lockedBinding, options)
-    if (!current || JSON.stringify(current) !== previousSerialized) {
-      throw new ParentCredentialVaultError(
-        'credential-conflict',
-        'Parent credential changed while rotation authorization was being consumed.',
-      )
-    }
-    const rotated: StoredParentCredentialRecord = {
-      ...replacement,
-      createdAt: previous.createdAt,
-      rotatedAt: timestamp(options),
-    }
-    try {
-      const persisted = writeParentCredentialRecord(lockedBinding, rotated, options)
-      if (await verifyParentCredentialRecord(persisted, lockedBinding, replacementPin, options)) {
-        return mutationResult(persisted)
-      }
-      throw new ParentCredentialVaultError(
-        'persistence-verification-failed',
-        'Rotated Parent credential failed verification.',
-      )
-    } catch (cause) {
-      try {
-        writeParentCredentialRecord(lockedBinding, previous, options)
-      } catch {
-        // The controlling error remains fail-closed even if rollback is unavailable.
-      }
-      throw cause
-    }
-  })
+  const internal = await import('./parentVault.internal')
+  return internal.rotateParentPinAuthorized(
+    binding,
+    replacementPin,
+    authorization,
+    options,
+  )
 }
 
 export async function markParentCredentialResetRequiredAuthorized(
   binding: InstallationBinding,
   authorization: ParentCredentialResetAuthorization,
-  options?: ParentCredentialOperationOptions,
+  options: ParentCredentialOperationOptions,
 ): Promise<ParentCredentialMutationResult> {
-  if (!authorization || typeof authorization.consumeParentCredentialResetAuthorization !== 'function') {
-    throw new ParentCredentialVaultError('authorization-required', 'Parent recovery authorization is required.')
-  }
-  return withParentCredentialMutationLock(binding, options, async (lockedBinding) => {
-    const reference = parentCredentialBindingReference(lockedBinding)
-    const previous = readParentCredentialRecord(lockedBinding, options)
-    const previousSerialized = previous === null ? null : JSON.stringify(previous)
-    const accepted = await authorization.consumeParentCredentialResetAuthorization({
-      operationId: 'parent-pin:reset-required',
-      binding: reference,
-      priorState: previous?.state ?? 'missing',
-    })
-    if (accepted !== true) {
-      throw new ParentCredentialVaultError('authorization-required', 'Parent recovery authorization was denied.')
-    }
-    const current = readParentCredentialRecord(lockedBinding, options)
-    if ((current === null ? null : JSON.stringify(current)) !== previousSerialized) {
-      throw new ParentCredentialVaultError(
-        'credential-conflict',
-        'Parent credential changed while recovery authorization was being consumed.',
-      )
-    }
-    return mutationResult(await markParentCredentialResetRequiredForMigration(lockedBinding, options))
-  })
+  const internal = await import('./parentVault.internal')
+  return internal.markParentCredentialResetRequiredAuthorized(
+    binding,
+    authorization,
+    options,
+  )
+}
+
+export async function recoverParentPinAuthorized(
+  binding: InstallationBinding,
+  replacementPin: string,
+  authorization: ParentCredentialRecoveryAuthorization,
+  options: ParentCredentialOperationOptions,
+): Promise<ParentCredentialMutationResult> {
+  const internal = await import('./parentVault.internal')
+  return internal.recoverParentPinAuthorized(
+    binding,
+    replacementPin,
+    authorization,
+    options,
+  )
 }

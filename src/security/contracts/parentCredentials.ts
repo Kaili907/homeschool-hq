@@ -1,11 +1,11 @@
 import type { LearnerPinCostParameters } from './credentials'
 import type { InstallationId } from './installation'
 
-export const PARENT_CREDENTIAL_SCHEMA_VERSION = 1 as const
+export const PARENT_CREDENTIAL_SCHEMA_VERSION = 2 as const
 export const PARENT_PIN_VERIFIER_SCHEME_VERSION = 1 as const
 export const PARENT_CREDENTIAL_BINDING_SCHEMA_VERSION = 1 as const
 
-export type ParentCredentialState = 'enrolled' | 'reset-required'
+export type ParentCredentialState = 'prepared' | 'enrolled' | 'reset-required'
 export type ParentPinCostParameters = LearnerPinCostParameters
 
 /**
@@ -31,6 +31,8 @@ export interface ParentCredentialRecord {
   readonly verifierBase64: string
   readonly costParameters: ParentPinCostParameters
   readonly state: ParentCredentialState
+  /** Monotonic revision controlled by the rollback-resistant generation authority. */
+  readonly generation: number
   readonly createdAt: string
   readonly rotatedAt?: string
 }

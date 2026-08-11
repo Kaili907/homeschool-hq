@@ -81,11 +81,33 @@ export function isSupportedPinCostParameters(version: unknown, value: unknown): 
   ) {
     return false
   }
-  const candidate = value as Record<string, unknown>
+  const prototype = Object.getPrototypeOf(value)
+  if (prototype !== Object.prototype && prototype !== null) return false
+  const keys = Reflect.ownKeys(value)
+  if (
+    keys.length !== 2 ||
+    keys.some((key) =>
+      typeof key !== 'string' ||
+      (key !== 'iterations' && key !== 'derivedKeyBytes')
+    )
+  ) {
+    return false
+  }
+  const iterations = Object.getOwnPropertyDescriptor(value, 'iterations')
+  const derivedKeyBytes = Object.getOwnPropertyDescriptor(value, 'derivedKeyBytes')
+  if (
+    !iterations ||
+    !iterations.enumerable ||
+    !('value' in iterations) ||
+    !derivedKeyBytes ||
+    !derivedKeyBytes.enumerable ||
+    !('value' in derivedKeyBytes)
+  ) {
+    return false
+  }
   return (
-    Object.keys(candidate).length === 2 &&
-    candidate.iterations === LEARNER_PIN_COST_PARAMETERS_V1.iterations &&
-    candidate.derivedKeyBytes === LEARNER_PIN_COST_PARAMETERS_V1.derivedKeyBytes
+    iterations.value === LEARNER_PIN_COST_PARAMETERS_V1.iterations &&
+    derivedKeyBytes.value === LEARNER_PIN_COST_PARAMETERS_V1.derivedKeyBytes
   )
 }
 

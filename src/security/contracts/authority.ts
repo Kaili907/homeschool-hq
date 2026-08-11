@@ -24,6 +24,7 @@ export type SecurityAuthorityDomain =
   | 'installation-manager'
   | 'study'
   | 'study-guardian'
+  | 'supabase-identity'
   | 'admin'
   | 'staff'
 
@@ -38,7 +39,8 @@ export const AUTHORITY_SEPARATION_RULES: readonly AuthoritySeparationRule[] = Ob
     'parent', 'installation-manager', 'study-guardian', 'admin', 'staff',
   ] as const) }),
   Object.freeze({ source: 'parent' as const, cannotEstablish: Object.freeze([
-    'installation-manager', 'study-guardian', 'admin', 'staff',
+    'learner', 'guardian-membership', 'installation-manager', 'study', 'study-guardian',
+    'supabase-identity', 'admin', 'staff',
   ] as const) }),
   Object.freeze({ source: 'guardian-membership' as const, cannotEstablish: Object.freeze([
     'installation-manager', 'study-guardian', 'admin', 'staff',

@@ -186,9 +186,26 @@ describe('installation-manager and authority separation contracts', () => {
   it('does not interchange learner, Parent, installation, Study, Admin, or staff authority', () => {
     expect(isAuthorityEstablishmentForbidden('learner', 'parent')).toBe(true)
     expect(isAuthorityEstablishmentForbidden('learner', 'admin')).toBe(true)
+    expect(isAuthorityEstablishmentForbidden('parent', 'learner')).toBe(true)
+    expect(isAuthorityEstablishmentForbidden('parent', 'guardian-membership')).toBe(true)
+    expect(isAuthorityEstablishmentForbidden('parent', 'installation-manager')).toBe(true)
+    expect(isAuthorityEstablishmentForbidden('parent', 'study')).toBe(true)
+    expect(isAuthorityEstablishmentForbidden('parent', 'study-guardian')).toBe(true)
+    expect(isAuthorityEstablishmentForbidden('parent', 'supabase-identity')).toBe(true)
     expect(isAuthorityEstablishmentForbidden('parent', 'admin')).toBe(true)
     expect(isAuthorityEstablishmentForbidden('parent', 'staff')).toBe(true)
-    expect(isAuthorityEstablishmentForbidden('parent', 'study-guardian')).toBe(true)
+    expect(
+      AUTHORITY_SEPARATION_RULES.find((rule) => rule.source === 'parent')?.cannotEstablish,
+    ).toEqual([
+      'learner',
+      'guardian-membership',
+      'installation-manager',
+      'study',
+      'study-guardian',
+      'supabase-identity',
+      'admin',
+      'staff',
+    ])
     expect(isAuthorityEstablishmentForbidden('guardian-membership', 'installation-manager')).toBe(true)
     expect(isAuthorityEstablishmentForbidden('study', 'parent')).toBe(true)
     expect(AUTHORITY_SEPARATION_RULES).toHaveLength(5)

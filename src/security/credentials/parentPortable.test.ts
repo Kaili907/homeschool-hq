@@ -16,15 +16,16 @@ import { sanitizeAndEnrollLegacyImportCredentials } from './importCompatibility'
 import {
   LEGACY_PARENT_CREDENTIAL_MIGRATION_NAMESPACE,
   migrateLegacyParentCredential,
+  type DurableParentMigrationPersistence,
 } from './parentMigration'
 import { PARENT_PIN_VERIFIER_DOMAIN } from './parentPinVerifier'
 import {
-  createParentCredentialRecordForMigration,
   parentFailedAttemptSubject,
   PARENT_CREDENTIAL_STORAGE_NAMESPACE,
   type ParentCredentialLockManager,
   type StoredParentCredentialRecord,
 } from './parentVault'
+import { createPreparedParentCredentialRecordForTest } from './parentVault.internal'
 import { MemoryCredentialStorage } from './testStorage'
 
 const INSTALLATION_ID = 'd9428888-122b-4f9b-9424-1f35c63d5750'
@@ -59,25 +60,16 @@ function legacyEducationalData(additional: Record<string, unknown> = {}): Record
   }
 }
 
-class ImmediateLockManager implements ParentCredentialLockManager {
-  async request<T>(
-    _name: string,
-    _options: { readonly mode: 'exclusive' },
-    callback: () => T | Promise<T>,
-  ): Promise<T> {
-    return callback()
-  }
-}
-
-const lockManager = new ImmediateLockManager()
-
 describe('Parent credential portable-data boundaries', () => {
   let parentCredential: StoredParentCredentialRecord
 
   beforeAll(async () => {
-    parentCredential = await createParentCredentialRecordForMigration(binding, '8642', {
-      now: () => new Date(NOW),
-    })
+    parentCredential = await createPreparedParentCredentialRecordForTest(
+      binding,
+      '8642',
+      1,
+      { now: () => new Date(NOW) },
+    )
   })
 
   it('builds realistic verifier metadata and rejects it at the whole-dataset sanitizer', () => {
@@ -85,7 +77,7 @@ describe('Parent credential portable-data boundaries', () => {
       storage: 'device-local-only',
       credentialKind: 'parent-pin',
       verifierScheme: 'pbkdf2-sha256',
-      state: 'enrolled',
+      state: 'prepared',
     })
     expect(parentCredential.saltBase64).not.toBe('')
     expect(parentCredential.verifierBase64).not.toBe('')
@@ -119,26 +111,76 @@ describe('Parent credential portable-data boundaries', () => {
     )
   })
 
-  it('rejects Parent verifier metadata during Parent migration preflight before any write', async () => {
+  it('rejects authoritative Parent verifier metadata before writes or authority access', async () => {
     const storage = new MemoryCredentialStorage()
-    const writeIfUnchanged = vi.fn(() => true)
-    const read = vi.fn()
+    const durableWrite = vi.fn()
+    const durableRead = vi.fn()
+    const durableCommitLock = vi.fn()
+    const credentialLock = vi.fn()
+    const authorityRead = vi.fn()
+    const authorityWrite = vi.fn()
+    const authoritativeSnapshot = {
+      educationalData: legacyEducationalData({
+        deviceLocalMaterial: parentCredential,
+      }),
+      revision: 'portable-preflight-r1',
+      migrationReceiptBase64: null,
+      migrationPreparationCommitmentBase64: null,
+      migrationCompletionCommitmentBase64: null,
+    }
+    const educationalDataPersistence: DurableParentMigrationPersistence = {
+      writeIfUnchanged(): never {
+        durableWrite()
+        throw new Error('Parent migration preflight unexpectedly wrote durable state.')
+      },
+      read() {
+        durableRead()
+        return authoritativeSnapshot
+      },
+      withMigrationCommitLock<T>(): T | Promise<T> {
+        durableCommitLock()
+        throw new Error('Parent migration preflight unexpectedly acquired the commit lock.')
+      },
+    }
+    const preflightLockManager: ParentCredentialLockManager = {
+      async request<T>(
+        _name: string,
+        _options: { readonly mode: 'exclusive' },
+        callback: () => T | Promise<T>,
+      ): Promise<T> {
+        credentialLock()
+        return callback()
+      },
+    }
 
     await expect(
       migrateLegacyParentCredential(
-        legacyEducationalData({ deviceLocalMaterial: parentCredential }),
         binding,
         {
           storage,
-          lockManager,
-          educationalDataPersistence: { writeIfUnchanged, read },
+          generationAuthority: {
+            read(): never {
+              authorityRead()
+              throw new Error('Parent migration preflight unexpectedly read authority.')
+            },
+            compareAndSwap(): never {
+              authorityWrite()
+              throw new Error('Parent migration preflight unexpectedly changed authority.')
+            },
+          },
+          lockManager: preflightLockManager,
+          educationalDataPersistence,
         },
       ),
     ).rejects.toBeInstanceOf(CredentialSanitizationError)
 
     expect(storage.entries()).toEqual([])
-    expect(writeIfUnchanged).not.toHaveBeenCalled()
-    expect(read).not.toHaveBeenCalled()
+    expect(durableWrite).not.toHaveBeenCalled()
+    expect(durableRead).toHaveBeenCalledTimes(1)
+    expect(durableCommitLock).not.toHaveBeenCalled()
+    expect(credentialLock).toHaveBeenCalledTimes(1)
+    expect(authorityRead).not.toHaveBeenCalled()
+    expect(authorityWrite).not.toHaveBeenCalled()
   })
 
   it('rejects Parent verifier metadata during legacy import preflight before any write', async () => {
@@ -162,6 +204,7 @@ describe('Parent credential portable-data boundaries', () => {
   })
 
   it('does not expose unauthenticated Parent enrollment or raw record creation centrally', () => {
+    expect(credentials.migrateLegacyParentCredential).toBe(migrateLegacyParentCredential)
     for (const forbiddenExport of [
       'enrollParentPin',
       'setParentPin',
@@ -175,18 +218,51 @@ describe('Parent credential portable-data boundaries', () => {
       'persistAndVerifyEducationalData',
       'prepareLegacyEducationalCredentials',
       'finalizePreparedLegacyEducationalCredentials',
+      'classifyLegacyParentPin',
+      'readLegacyParentCredentialMigrationRecord',
+      'LEGACY_PARENT_CREDENTIAL_MIGRATION_NAMESPACE',
+      'LEGACY_PARENT_CREDENTIAL_MIGRATION_SCHEMA_VERSION',
+      'createPreparedParentCredentialRecordForTest',
+      'prepareLegacyParentPinForMigration',
+      'prepareParentCredential',
+      'prepareMigrationAttempt',
+      'publishPreparedMigration',
+      'stagePreparedParentCredentialForMigration',
+      'stagePreparedParentResetForMigration',
+      'activateParentCredentialForMigration',
+      'resolveOrStageParentPromotion',
+      'verifyPreparedParentCredentialForMigration',
+      'verifyParentCredentialRecord',
+      'parseParentCredentialRecord',
+      'readParentCredentialRecord',
+      'readParentCredentialSnapshot',
+      'persistParentCredentialRecord',
+      'parentCredentialRecordCommitment',
+      'persistJournalRecord',
+      'ensurePreparedJournal',
+      'advanceMigrationStage',
+      'assertCompletionSeal',
+      'finishCompletedMigration',
+      'compareAndSwapParentGeneration',
+      'parentGenerationSnapshotsEqual',
+      'parentCredentialSnapshotsEqual',
     ]) {
       expect(Object.hasOwn(credentials, forbiddenExport)).toBe(false)
     }
+    expect(
+      Object.keys(credentials).filter((name) =>
+        /parent.*migration|migration.*parent/i.test(name),
+      ),
+    ).toEqual([])
   })
 
   it('freezes the Parent domain, device-local namespaces, and attempt-ledger subject shape', () => {
     expect(PARENT_PIN_VERIFIER_DOMAIN).toBe('manuel-academy:parent-pin:v1')
     expect(PARENT_CREDENTIAL_STORAGE_NAMESPACE).toBe(
-      'homeschool-hq:security:parent-credentials:v1',
+      'homeschool-hq:security:parent-credentials:v2',
     )
     expect(LEGACY_PARENT_CREDENTIAL_MIGRATION_NAMESPACE).toBe(
-      'homeschool-hq:security:parent-pin-migration:v1',
+      'homeschool-hq:security:parent-pin-migration:v2',
     )
 
     const subject = parentFailedAttemptSubject(binding)

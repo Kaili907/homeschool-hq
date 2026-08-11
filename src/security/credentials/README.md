@@ -8,7 +8,7 @@ namespace, one record per profile:
 The namespace is structurally separate from `homeschool-hq:app:v2`. Nothing in
 this module adds credentials to `Profile`, `AppState`, normal backups, sync,
 Admin, staff, installation-manager, or Study identity. Migration journals use
-their own `homeschool-hq:security:*:v1` namespaces and contain only non-secret
+their own versioned `homeschool-hq:security:*` namespaces and contain only non-secret
 state, binding, identifiers, and integrity commitments. They never contain a
 PIN, verifier, salt, or recovery secret.
 
@@ -70,7 +70,11 @@ successful verification of the source PIN.
 
 The Parent convenience lock uses a separate record, parser, and namespace:
 
-`homeschool-hq:security:parent-credentials:v1:<installation-id>:<household-id>`
+`homeschool-hq:security:parent-credentials:v2:<installation-id>:<household-id>`
+
+Schema-v1 blobs are never reinterpreted as schema v2. They remain inert and
+require an installation-authorized reset/recovery operation before a new
+schema-v2 credential can become authoritative.
 
 It reuses the reviewed PBKDF2 cost, salt generation, canonical Base64 parsing,
 length framing, and constant-time comparison. Its immutable domain is
@@ -86,6 +90,14 @@ never creates or guesses installation identity. Missing credentials produce
 or first-visitor setup API. Parent verification returns the structural
 `{ kind: 'parent', householdId }` seam used by the shared failed-attempt ledger,
 but this vault stores no attempt counters or lockout state.
+
+Every supported Parent operation also requires a rollback-resistant generation
+authority outside the device-local credential-blob domain. It binds the exact
+record commitment, monotonic generation, active generation, and immutable
+migration-completion commitment. Verification reads this authority and record
+both before and after PBKDF2; a concurrent reset, rotation, recovery, or stale
+record restoration therefore fails closed. `prepared` and inactive `enrolled`
+records never authenticate.
 
 Rotation is exposed only through `rotateParentPinAuthorized`, whose integration
 port must consume live Parent credential/session step-up authority and verify
@@ -123,23 +135,40 @@ PINs. Both learner-only entry points reject a pending non-empty root
 `parentPin`; that credential must go through the binding-aware coordinated
 Parent migration so one domain cannot erase the other.
 
-Parent migration uses its own binding-scoped journal:
+Parent migration uses its own binding-scoped schema-v2 journal:
 
-`classified -> credential-persisted -> verifier-verified -> educational-data-persisted -> complete`
+`prepared -> educational-committed -> credential-promoted -> completed`
 
-Only exact root `AppState.parentPin` is consumed. Missing or empty legacy state
-returns `parent-setup-required`; malformed legacy state becomes a bound,
-unusable reset tombstone. Non-JSON or executable values in either accepted
-legacy credential field fail preflight. The full shared portable-security
-sanitizer runs before local writes, so nested or aliased Parent PIN/verifier
-fields fail closed.
+The supported API accepts only the installation binding and operation ports.
+It never accepts a credential-bearing caller snapshot. Under the exclusive
+Parent lock it obtains the exact legacy root `AppState.parentPin` directly from
+authoritative durable persistence. Missing or empty legacy state returns
+`parent-setup-required`; malformed legacy state becomes a bound, unusable reset
+tombstone. Non-JSON or executable values in Parent or learner credential fields
+fail descriptor-safe preflight. The full portable-security sanitizer runs
+before mutation, so nested or aliased PIN/verifier material fails closed.
 
-The coordinator prepares and verifies the Parent record and every legacy
-learner record before one credential-free educational-state publication. That
-publication must be an atomic compare-and-swap against the exact raw snapshot;
-an exclusive binding-scoped lock and a frozen active-binding snapshot cover the
-operation. The Parent journal commits to the expected credential-free dataset
-and the complete device-local credential set. If a crash occurs after the CAS
-removed plaintext, the exact binding, verifier-verified journal, matching
-commitments, strict records, and durable read-back allow a no-plaintext retry.
-No PIN, salt, or verifier is written to the journal.
+The durable integration port atomically reads educational data with an opaque,
+ABA-resistant revision, a random 32-byte migration receipt, and an immutable
+prepared-transaction commitment plus completion commitment. Its
+compare-and-swap writes the credential-free data, receipt, and exact prepared
+journal invariant together. A false result or exception always ends that call
+with Parent inactive. If exact read-back proves the unpredictable receipt,
+prepared commitment, and credential-free data were committed, only a later
+fresh invocation may resume. Ordinary writers must preserve the migration
+metadata and change the revision on every write.
+
+Parent and learner material is prepared before publication, but Parent
+`prepared` state is explicitly non-authenticating. After exact CAS/read-back,
+learner completion, credential promotion, and a sealed completed journal, the
+adapter acquires its educational-writer lock, atomically installs the immutable
+completion commitment, and holds the lock through the external Parent authority
+CAS. Coordinated learner credential/journal writers must acquire that same
+integration lock while Parent migration is finalizing. The coordinator checks
+the exact learner set both before and after completion anchoring. The Parent CAS
+anchors the same completion commitment and activates only the
+exact enrolled generation. Reset-required and setup-required completion are
+anchored without activating a PIN. A crash at any boundary resumes from the
+receipt, journal, pending record, and external anchors; it cannot turn an
+unproven preparation into Parent authority. No PIN, salt, or verifier is stored
+in the journal or returned as educational data.

@@ -35,9 +35,12 @@ server request, changes an RPC, or wires session lifecycle into `App`.
   membership alone is not installation-management authority.
 - `credentials/parentVault.ts` requires an externally supplied active
   installation binding, binds the Parent verifier to its exact installation
-  and household, and exposes no fresh-install enrollment. Its verification
-  result carries the later shared failed-attempt-ledger subject without
-  duplicating rate-limit state.
+  and household, and exposes no fresh-install enrollment. Its schema-v2 vault
+  also requires an external monotonic generation/completion authority; the
+  supported migration derives credentials only from authoritative persistence
+  and activates only under the adapter's durable completion lock. Its
+  verification result carries the later shared failed-attempt-ledger subject
+  without duplicating rate-limit state.
 - `studyBridge.ts` maps security lifecycle events into the existing Study
   cancellation vocabulary without changing `src/study/**`.
 
