@@ -18,6 +18,7 @@ import {
   boundedInteger,
   boundedJsonResponse,
   errorResponse,
+  hasBody,
   hasQuery,
   readJsonBody,
   responseForError,
@@ -569,6 +570,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
 
   return async (event) => {
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
+    if (event?.httpMethod === 'GET' && hasBody(event)) return errorResponse(400, 'invalid_request')
     const route = routeFromPath(event?.path)
     if (!route) return errorResponse(404, 'not_found')
 

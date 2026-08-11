@@ -6,7 +6,7 @@ import {
   readAdminProviderAccountingCoverage,
   unavailableProviderAccountingCoverage,
 } from './admin-provider-coverage.js'
-import { reject } from './http.js'
+import { readQueryEntries, reject } from './http.js'
 
 export const ADMIN_COST_RECORD_LIMIT = 500
 export const ADMIN_COST_MAX_RANGE_DAYS = 366
@@ -42,24 +42,7 @@ function midnightUtc(date) {
 }
 
 function parseQuery(event) {
-  const raw = typeof event?.rawQueryString === 'string'
-    ? event.rawQueryString
-    : typeof event?.rawQuery === 'string'
-      ? event.rawQuery
-      : null
-  const multi = event?.multiValueQueryStringParameters
-  if (multi && typeof multi === 'object' && !Array.isArray(multi)) {
-    for (const values of Object.values(multi)) {
-      if (!Array.isArray(values) || values.length !== 1 || typeof values[0] !== 'string') {
-        reject(400, 'invalid_range')
-      }
-    }
-  }
-  const entries = raw !== null
-    ? [...new URLSearchParams(raw).entries()]
-    : multi && typeof multi === 'object' && !Array.isArray(multi)
-      ? Object.entries(multi).map(([key, values]) => [key, values[0]])
-      : Object.entries(event?.queryStringParameters ?? {}).filter(([, value]) => value !== null)
+  const entries = readQueryEntries(event, 'invalid_range')
   const allowed = new Set(['range', 'start', 'end'])
   if (entries.length < 1 || entries.some(([key, value]) => !allowed.has(key) || typeof value !== 'string')) {
     reject(400, 'invalid_range')

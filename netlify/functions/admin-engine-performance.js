@@ -8,7 +8,7 @@ import {
   AdminOperationalAggregateReadError,
   createAdminOperationalAggregateReader,
 } from './_shared/admin-operational-aggregate-reader.js'
-import { errorResponse, jsonResponse } from './_shared/http.js'
+import { errorResponse, hasBody, jsonResponse, readQueryEntries } from './_shared/http.js'
 
 const PATHS = new Set([
   '/api/admin/v1/engine-performance',
@@ -19,24 +19,23 @@ const WINDOWS = Object.freeze({ '7d': 7, '30d': 30 })
 const SAFE_VERSION = /^[A-Za-z0-9][A-Za-z0-9._+-]{0,127}$/
 const SAFE_REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
 
-function invalidQuery(event) {
-  const query = event?.queryStringParameters
-  if (query !== null && query !== undefined && (typeof query !== 'object' || Array.isArray(query))) return true
-  if (query && Object.keys(query).some((key) => !ALLOWED_QUERY.has(key))) return true
-  const multi = event?.multiValueQueryStringParameters
-  if (multi && (typeof multi !== 'object' || Array.isArray(multi))) return true
-  return !!multi && Object.entries(multi).some(([key, values]) =>
-    !ALLOWED_QUERY.has(key) || !Array.isArray(values) || values.length !== 1)
-}
-
 function optionalToken(value, pattern) {
   if (value === undefined || value === null || value === '') return null
   return typeof value === 'string' && pattern.test(value) ? value : undefined
 }
 
 export function enginePerformanceFilters(event, now) {
-  if (invalidQuery(event)) return null
-  const query = event?.queryStringParameters ?? {}
+  let entries
+  try {
+    entries = readQueryEntries(event)
+  } catch {
+    return null
+  }
+  const query = {}
+  for (const [key, value] of entries) {
+    if (!ALLOWED_QUERY.has(key) || Object.hasOwn(query, key)) return null
+    query[key] = value
+  }
   const windowName = query.window ?? '30d'
   if (!Object.hasOwn(WINDOWS, windowName)) return null
   const engine = optionalToken(query.engine, /^[a-z]+$/)
@@ -78,6 +77,7 @@ export function createAdminEnginePerformanceHandler(overrides = {}) {
   return async (event) => {
     if (event?.httpMethod !== 'GET') return errorResponse(405, 'method_not_allowed', { allow: 'GET' })
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
+    if (hasBody(event)) return errorResponse(400, 'invalid_request')
     const generatedAt = now()
     const filters = enginePerformanceFilters(event, generatedAt)
     if (!filters) return errorResponse(400, 'invalid_request')

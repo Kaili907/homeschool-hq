@@ -3,7 +3,7 @@ import {
   createAdminHealthSource,
   disabledHealthEngines,
 } from './_shared/admin-health-source.js'
-import { errorResponse, jsonResponse } from './_shared/http.js'
+import { errorResponse, hasBody, jsonResponse, readQueryEntries } from './_shared/http.js'
 import { createRuntimeConfigurationResolver } from './_shared/admin-runtime-configuration.js'
 import {
   SYSTEM_HEALTH_WINDOWS,
@@ -16,11 +16,14 @@ const ADMIN_HEALTH_PATHS = new Set([
 ])
 
 function selectedWindow(event) {
-  const query = event?.queryStringParameters
-  if (query === null || query === undefined) return '1h'
-  if (!query || typeof query !== 'object' || Array.isArray(query)) return null
-  if (Object.keys(query).some((key) => key !== 'window')) return null
-  const value = query.window ?? '1h'
+  let entries
+  try {
+    entries = readQueryEntries(event)
+  } catch {
+    return null
+  }
+  if (entries.length > 1 || (entries.length === 1 && entries[0][0] !== 'window')) return null
+  const value = entries.length === 0 ? '1h' : entries[0][1]
   return SYSTEM_HEALTH_WINDOWS.includes(value) ? value : null
 }
 
@@ -42,6 +45,7 @@ export function createAdminHealthHandler(overrides = {}) {
   return async (event) => {
     if (event?.httpMethod !== 'GET') return errorResponse(405, 'method_not_allowed', { allow: 'GET' })
     if (!ADMIN_HEALTH_PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
+    if (hasBody(event)) return errorResponse(400, 'invalid_request')
     const window = selectedWindow(event)
     if (window === null) return errorResponse(400, 'invalid_request')
 

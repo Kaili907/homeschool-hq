@@ -76,6 +76,34 @@ export function getHeader(headers, name) {
   return found
 }
 
+function eventHeader(event, name) {
+  const wanted = name.toLowerCase()
+  const headers = event?.headers
+  if (headers !== undefined && headers !== null && !isRecord(headers)) return null
+  const singleEntries = headers
+    ? Object.entries(event.headers).filter(([key]) => key.toLowerCase() === wanted)
+    : []
+  if (
+    singleEntries.length > 1
+    || (singleEntries.length === 1 && typeof singleEntries[0][1] !== 'string')
+  ) return null
+
+  let value = singleEntries.length === 1 ? singleEntries[0][1] : ''
+  const multiValueHeaders = event?.multiValueHeaders
+  if (multiValueHeaders !== undefined && multiValueHeaders !== null && !isRecord(multiValueHeaders)) return null
+  const multiEntries = multiValueHeaders
+    ? Object.entries(multiValueHeaders).filter(([key]) => key.toLowerCase() === wanted)
+    : []
+  if (multiEntries.length > 1) return null
+  if (multiEntries.length === 1) {
+    const values = multiEntries[0][1]
+    if (!Array.isArray(values) || values.length !== 1 || typeof values[0] !== 'string') return null
+    if (value && value.trim().toLowerCase() !== values[0].trim().toLowerCase()) return null
+    value = values[0]
+  }
+  return value
+}
+
 export function isRecord(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
@@ -115,12 +143,51 @@ function decodeBody(event) {
   return Buffer.from(event.body, 'base64')
 }
 
+function hasWellFormedUnicode(value) {
+  for (let index = 0; index < value.length; index += 1) {
+    const code = value.charCodeAt(index)
+    if (code >= 0xd800 && code <= 0xdbff) {
+      const next = value.charCodeAt(index + 1)
+      if (!(next >= 0xdc00 && next <= 0xdfff)) return false
+      index += 1
+    } else if (code >= 0xdc00 && code <= 0xdfff) {
+      return false
+    }
+  }
+  return true
+}
+
+function validateJsonTree(root, maxDepth = 64) {
+  const pending = [{ value: root, depth: 1 }]
+  while (pending.length > 0) {
+    const { value, depth } = pending.pop()
+    if (depth > maxDepth) reject(400, 'invalid_request')
+    if (typeof value === 'string') {
+      if (!hasWellFormedUnicode(value)) reject(400, 'invalid_request')
+      continue
+    }
+    if (value === null || typeof value !== 'object') continue
+    if (Array.isArray(value)) {
+      for (const child of value) pending.push({ value: child, depth: depth + 1 })
+    } else {
+      for (const [key, child] of Object.entries(value)) {
+        if (!hasWellFormedUnicode(key)) reject(400, 'invalid_request')
+        pending.push({ value: child, depth: depth + 1 })
+      }
+    }
+  }
+}
+
 export function readJsonBody(event, maxBytes) {
-  const contentType = getHeader(event?.headers, 'content-type').toLowerCase()
-  if (!/^application\/json(?:\s*;|$)/.test(contentType)) {
+  const contentTypeValue = eventHeader(event, 'content-type')
+  if (contentTypeValue === null) reject(415, 'unsupported_content_type')
+  const contentType = contentTypeValue.toLowerCase()
+  if (!/^application\/json(?:\s*;\s*charset\s*=\s*(?:utf-8|"utf-8"))?\s*$/.test(contentType)) {
     reject(415, 'unsupported_content_type')
   }
-  const contentEncoding = getHeader(event?.headers, 'content-encoding').trim().toLowerCase()
+  const contentEncodingValue = eventHeader(event, 'content-encoding')
+  if (contentEncodingValue === null) reject(415, 'unsupported_content_type')
+  const contentEncoding = contentEncodingValue.trim().toLowerCase()
   if (contentEncoding && contentEncoding !== 'identity') {
     reject(415, 'unsupported_content_type')
   }
@@ -130,23 +197,94 @@ export function readJsonBody(event, maxBytes) {
 
   let parsed
   try {
-    parsed = JSON.parse(bytes.toString('utf8'))
+    parsed = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes))
   } catch {
     reject(400, 'malformed_json')
   }
   if (!isRecord(parsed)) reject(400, 'invalid_request')
+  validateJsonTree(parsed)
   return parsed
 }
 
+export function hasBody(event) {
+  return event?.body !== undefined && event.body !== null && event.body !== ''
+}
+
+function sortedEntries(entries) {
+  return [...entries].sort(([leftKey, leftValue], [rightKey, rightValue]) => {
+    if (leftKey !== rightKey) return leftKey < rightKey ? -1 : 1
+    if (leftValue === rightValue) return 0
+    return leftValue < rightValue ? -1 : 1
+  })
+}
+
+function sameEntries(left, right) {
+  if (left.length !== right.length) return false
+  const sortedLeft = sortedEntries(left)
+  const sortedRight = sortedEntries(right)
+  return sortedLeft.every(([key, value], index) =>
+    key === sortedRight[index][0] && value === sortedRight[index][1])
+}
+
+/**
+ * Returns one canonical decoded query representation. Netlify supplies raw,
+ * single-value, and multi-value views depending on its runtime version. When
+ * more than one is present they must describe the same request exactly.
+ */
+export function readQueryEntries(event, code = 'invalid_request') {
+  const fail = () => reject(400, code)
+  const rawValues = []
+  for (const key of ['rawQueryString', 'rawQuery']) {
+    const value = event?.[key]
+    if (value === undefined || value === null) continue
+    if (typeof value !== 'string') fail()
+    rawValues.push(value)
+  }
+  if (rawValues.length === 2 && rawValues[0] !== rawValues[1]) fail()
+
+  let rawEntries = null
+  if (rawValues.length > 0) {
+    const raw = rawValues[0]
+    if (/%(?![0-9A-Fa-f]{2})/.test(raw)) fail()
+    rawEntries = [...new URLSearchParams(raw).entries()]
+  }
+
+  const queryValue = event?.queryStringParameters
+  let queryEntries = null
+  if (queryValue !== undefined && queryValue !== null) {
+    if (!isRecord(queryValue)) fail()
+    queryEntries = Object.entries(queryValue)
+    if (queryEntries.some(([, value]) => typeof value !== 'string')) fail()
+    if (queryEntries.length === 0) queryEntries = null
+  }
+
+  const multiValue = event?.multiValueQueryStringParameters
+  let multiEntries = null
+  if (multiValue !== undefined && multiValue !== null) {
+    if (!isRecord(multiValue)) fail()
+    multiEntries = []
+    for (const [key, values] of Object.entries(multiValue)) {
+      if (!Array.isArray(values) || values.length === 0 || values.some((value) => typeof value !== 'string')) fail()
+      for (const value of values) multiEntries.push([key, value])
+    }
+    if (multiEntries.length === 0) multiEntries = null
+  }
+
+  const representations = [rawEntries, queryEntries, multiEntries].filter((value) => value !== null)
+  const first = representations[0] ?? []
+  if (representations.some((entries) => !sameEntries(first, entries))) fail()
+  return first
+}
+
 export function hasQuery(event) {
-  if (typeof event?.rawQuery === 'string' && event.rawQuery !== '') return true
-  if (typeof event?.rawQueryString === 'string' && event.rawQueryString !== '') return true
-  if (isRecord(event?.queryStringParameters) && Object.keys(event.queryStringParameters).length > 0) return true
-  if (
-    isRecord(event?.multiValueQueryStringParameters) &&
-    Object.keys(event.multiValueQueryStringParameters).length > 0
-  ) {
-    return true
+  for (const key of ['rawQuery', 'rawQueryString']) {
+    const value = event?.[key]
+    if (value !== undefined && value !== null && (typeof value !== 'string' || value !== '')) return true
+  }
+  for (const key of ['queryStringParameters', 'multiValueQueryStringParameters']) {
+    const value = event?.[key]
+    if (value === undefined || value === null) continue
+    if (!isRecord(value) || Object.keys(value).length > 0) return true
   }
   return false
 }
