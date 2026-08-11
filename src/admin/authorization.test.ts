@@ -34,6 +34,31 @@ describe('ADMIN-0 v2 route authorization state', () => {
     expect(fetchImpl).not.toHaveBeenCalled()
   })
 
+  it('bounds an expired-session refresh that never settles before the Admin request begins', async () => {
+    const fetchImpl = vi.fn()
+    await expect(readAdminAuthorization({
+      getAccessToken: () => new Promise(() => {}),
+      fetchImpl,
+      timeoutMs: 5,
+    })).resolves.toEqual({ status: 'unavailable' })
+    expect(fetchImpl).not.toHaveBeenCalled()
+  })
+
+  it('does not begin token lookup or a request for an already-aborted authorization read', async () => {
+    const controller = new AbortController()
+    const getAccessToken = vi.fn(() => new Promise<string | null>(() => {}))
+    const fetchImpl = vi.fn()
+    controller.abort()
+
+    await expect(readAdminAuthorization({
+      getAccessToken,
+      fetchImpl,
+      signal: controller.signal,
+    })).resolves.toEqual({ status: 'unavailable' })
+    expect(getAccessToken).not.toHaveBeenCalled()
+    expect(fetchImpl).not.toHaveBeenCalled()
+  })
+
   it.each(['viewer', 'admin', 'owner'] as const)(
     'accepts the exact canonical v2 %s state',
     async (role) => {

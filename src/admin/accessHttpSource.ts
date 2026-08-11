@@ -73,6 +73,9 @@ export function createAdminAccessHttpSource(options: AdminAccessHttpSourceOption
           method: 'GET',
           signal,
           headers: { authorization: `Bearer ${token}`, accept: 'application/json' },
+          cache: 'no-store',
+          credentials: 'omit',
+          referrerPolicy: 'no-referrer',
         })
         if (response.status === 401 || response.status === 403) {
           throw new AdminAccessError('access_unauthorized')
@@ -100,6 +103,9 @@ export function createAdminAccessHttpSource(options: AdminAccessHttpSourceOption
             accept: 'application/json',
             'content-type': 'application/json',
           },
+          cache: 'no-store',
+          credentials: 'omit',
+          referrerPolicy: 'no-referrer',
           body: JSON.stringify(body),
         })
         const value = await response.json().catch(() => null)

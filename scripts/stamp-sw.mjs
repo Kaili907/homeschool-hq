@@ -1,7 +1,8 @@
 // Post-build step: stamp the built service worker with a unique per-build id so
-// every deploy gets a fresh cache name (the SW's activate step then deletes old
-// caches → cache-bust). public/sw.js ships the literal `__BUILD_ID__`; Vite copies
-// it to dist/sw.js, and this replaces it. Runs as part of `npm run build`.
+// every deploy gets a fresh application cache name. The worker keeps immutable,
+// versioned Curriculum content in a separate stable cache while retiring stale
+// app caches. public/sw.js ships the literal `__BUILD_ID__`; Vite copies it to
+// dist/sw.js, and this replaces it. Runs as part of `npm run build`.
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 

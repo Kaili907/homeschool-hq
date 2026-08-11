@@ -31,6 +31,29 @@ export interface ReadAdminAuthorizationOptions {
   readonly timeoutMs?: number
 }
 
+function accessTokenBeforeAbort(
+  getAccessToken: () => Promise<string | null>,
+  signal: AbortSignal,
+): Promise<string | null | undefined> {
+  if (signal.aborted) return Promise.resolve(undefined)
+
+  return new Promise((resolve) => {
+    let settled = false
+    const finish = (value: string | null | undefined) => {
+      if (settled) return
+      settled = true
+      signal.removeEventListener('abort', aborted)
+      resolve(value)
+    }
+    const aborted = () => finish(undefined)
+    signal.addEventListener('abort', aborted, { once: true })
+    void getAccessToken().then(
+      (value) => finish(value),
+      () => finish(undefined),
+    )
+  })
+}
+
 function exactAuthorization(value: unknown): AdminAuthorizationState | null {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null
   const record = value as Record<string, unknown>
@@ -69,22 +92,18 @@ export async function readAdminAuthorization(
   const getAccessToken = options.getAccessToken ?? getGatewayAccessToken
   const fetchImpl = options.fetchImpl ?? ((url, init) => fetch(url, init))
 
-  let accessToken: string | null
-  try {
-    accessToken = await getAccessToken()
-  } catch {
-    return { status: 'unavailable' }
-  }
-  if (!accessToken || options.signal?.aborted) return { status: 'unauthenticated' }
-
   const controller = new AbortController()
   const cancel = () => controller.abort(options.signal?.reason)
   options.signal?.addEventListener('abort', cancel, { once: true })
+  if (options.signal?.aborted) cancel()
   const timer = globalThis.setTimeout(
     () => controller.abort(),
     options.timeoutMs ?? ADMIN_AUTHORIZATION_TIMEOUT_MS,
   )
   try {
+    const accessToken = await accessTokenBeforeAbort(getAccessToken, controller.signal)
+    if (accessToken === undefined || controller.signal.aborted) return { status: 'unavailable' }
+    if (!accessToken) return { status: 'unauthenticated' }
     const response = await fetchImpl(ADMIN_AUTHORIZATION_ENDPOINT, {
       method: 'GET',
       headers: { Authorization: `Bearer ${accessToken}` },
