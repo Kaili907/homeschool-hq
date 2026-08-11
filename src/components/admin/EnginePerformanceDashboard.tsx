@@ -47,7 +47,7 @@ export function EnginePerformanceDashboard({
     return <div className="engine-performance" aria-busy="true"><p role="status">Loading engine performance evidence…</p></div>
   }
   if (state.status === 'unauthorized') {
-    return <div className="engine-performance"><section role="alert"><h1>Engine analytics unavailable</h1><p>Your verified Admin assignment does not include <code>engines:read</code>.</p><a href="/academy">Back to Academy</a></section></div>
+    return <div className="engine-performance"><section role="alert"><h2>Engine analytics unavailable</h2><p>Your verified Admin assignment does not include <code>engines:read</code>.</p><a href="/academy">Back to Academy</a></section></div>
   }
   if (state.status === 'error') {
     const message = state.code === 'timeout'
@@ -57,7 +57,7 @@ export function EnginePerformanceDashboard({
         : state.code === 'malformed' || state.code === 'invalid_response'
           ? 'The authorized aggregate response was malformed.'
           : 'The authorized performance projection could not be loaded.'
-    return <div className="engine-performance"><section role="alert"><h1>Engine analytics unavailable</h1><p>{message} No substitute data is shown.</p>{onRetry && <button type="button" onClick={onRetry}>Try again</button>}</section></div>
+    return <div className="engine-performance"><section role="alert"><h2>Engine analytics unavailable</h2><p>{message} No substitute data is shown.</p>{onRetry && <button type="button" onClick={onRetry}>Try again</button>}</section></div>
   }
 
   const selected = state.model.engines.find((engine) => engine.engineId === selectedEngine) ?? state.model.engines[0]
@@ -67,7 +67,7 @@ export function EnginePerformanceDashboard({
       <header className="engine-performance__header">
         <div>
           <p className="engine-performance__eyebrow">Educational and operational outcomes</p>
-          <h1 id="engine-performance-title">Engine performance analytics</h1>
+          <h2 id="engine-performance-title">Engine performance analytics</h2>
           <p>Performance evidence is separate from technical health. No composite quality score is calculated.</p>
         </div>
         <a href={selected.technicalHealthReference.path}>{selected.technicalHealthReference.label}</a>

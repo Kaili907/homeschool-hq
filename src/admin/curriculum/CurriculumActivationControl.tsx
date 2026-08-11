@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import type { AdminCapability } from '../contracts'
 import {
   CurriculumActivationError,
@@ -149,12 +149,55 @@ export function CurriculumActivationView({
   readonly onRefresh: () => void
 }) {
   const candidates = status?.candidates ?? []
+  const confirmationRef = useRef<HTMLElement>(null)
+  const confirmationTriggerRef = useRef<HTMLButtonElement | null>(null)
+  const cancelButtonRef = useRef<HTMLButtonElement>(null)
+  const activationHeadingRef = useRef<HTMLHeadingElement>(null)
+  const confirmationWasOpenRef = useRef(false)
+
+  useEffect(() => {
+    if (confirmation) {
+      confirmationWasOpenRef.current = true
+      cancelButtonRef.current?.focus()
+      return
+    }
+    if (!confirmationWasOpenRef.current) return
+    confirmationWasOpenRef.current = false
+    globalThis.setTimeout(() => {
+      const trigger = confirmationTriggerRef.current
+      if (trigger?.isConnected) trigger.focus()
+      else activationHeadingRef.current?.focus()
+    }, 0)
+  }, [confirmation])
+
+  function handleConfirmationKeyDown(event: KeyboardEvent<HTMLElement>) {
+    if (event.key === 'Escape' && !busy) {
+      event.preventDefault()
+      onCancel()
+      return
+    }
+    if (event.key !== 'Tab') return
+    const focusable = Array.from(confirmationRef.current?.querySelectorAll<HTMLElement>(
+      'button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), a[href]',
+    ) ?? [])
+    const first = focusable[0]
+    const last = focusable.at(-1)
+    if (!first || !last) return
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault()
+      last.focus()
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault()
+      first.focus()
+    }
+  }
+
   return (
     <section className="curriculum-activation" aria-labelledby="curriculum-activation-title">
       <header className="curriculum-activation-header">
         <div>
           <p className="curriculum-studio-eyebrow">Default authority control plane</p>
-          <h2 id="curriculum-activation-title">Activation &amp; Rollback</h2>
+          <h2 ref={activationHeadingRef} id="curriculum-activation-title" tabIndex={-1}>Activation &amp; Rollback</h2>
           <p>Only immutable, artifact-complete PUBLISHED releases are eligible.</p>
         </div>
         <button type="button" onClick={onRefresh} disabled={busy}>Refresh authority</button>
@@ -217,7 +260,10 @@ export function CurriculumActivationView({
                       <button
                         type="button"
                         disabled={!canManage || busy || !candidate.eligible}
-                        onClick={() => onRequestTransition(candidate)}
+                        onClick={(event) => {
+                          confirmationTriggerRef.current = event.currentTarget
+                          onRequestTransition(candidate)
+                        }}
                       >
                         {kind === 'rollback' ? 'Rollback to this release' : 'Activate this release'}
                       </button>
@@ -250,36 +296,42 @@ export function CurriculumActivationView({
 
       {status && confirmation && (
         <section
+          ref={confirmationRef}
           className="curriculum-activation-confirmation"
           role="alertdialog"
           aria-modal="true"
           aria-labelledby="curriculum-transition-confirm-title"
+          aria-describedby="curriculum-transition-confirm-description curriculum-transition-confirm-reason"
+          onKeyDown={handleConfirmationKeyDown}
         >
-          <p className="curriculum-studio-eyebrow">Final confirmation</p>
-          <h3 id="curriculum-transition-confirm-title">
-            {confirmation.previouslyActive ? 'Confirm rollback' : 'Confirm activation'} to {confirmation.releaseVersion}
-          </h3>
-          <p>
-            This will compare-and-swap production pointer revision {status.pointer.revision} and create
-            a new auditable revision. It will not delete or mutate release {status.pointer.releaseVersion}.
-          </p>
-          <p><strong>Reason:</strong>{' '}
-            {confirmation.previouslyActive ? 'release.rolled_back' : 'release.activated'}
-          </p>
-          <label>
-            <input
-              type="checkbox"
-              checked={acknowledged}
-              onChange={(event) => onAcknowledge(event.target.checked)}
-            />
-            I understand this changes the default authority and DOES NOT repin existing learners.
-          </label>
-          <div>
-            <button type="button" className="is-secondary" onClick={onCancel} disabled={busy}>Cancel</button>
-            <button type="button" onClick={onConfirm} disabled={!acknowledged || busy}>
-              {busy ? 'Submitting governed transition…'
-                : confirmation.previouslyActive ? 'Confirm rollback' : 'Confirm activation'}
-            </button>
+          <div className="curriculum-activation-confirmation__panel">
+            <p className="curriculum-studio-eyebrow">Final confirmation</p>
+            <h3 id="curriculum-transition-confirm-title">
+              {confirmation.previouslyActive ? 'Confirm rollback' : 'Confirm activation'} to {confirmation.releaseVersion}
+            </h3>
+            <p id="curriculum-transition-confirm-description">
+              This will compare-and-swap production pointer revision {status.pointer.revision} and create
+              a new auditable revision. It will not delete or mutate release {status.pointer.releaseVersion}.
+            </p>
+            <p id="curriculum-transition-confirm-reason"><strong>Reason:</strong>{' '}
+              {confirmation.previouslyActive ? 'release.rolled_back' : 'release.activated'}
+            </p>
+            <label>
+              <input
+                type="checkbox"
+                checked={acknowledged}
+                disabled={busy}
+                onChange={(event) => onAcknowledge(event.target.checked)}
+              />
+              I understand this changes the default authority and DOES NOT repin existing learners.
+            </label>
+            <div className="curriculum-activation-confirmation__actions">
+              <button ref={cancelButtonRef} type="button" className="is-secondary" onClick={onCancel} disabled={busy}>Cancel</button>
+              <button type="button" onClick={onConfirm} disabled={!acknowledged || busy}>
+                {busy ? 'Submitting governed transition…'
+                  : confirmation.previouslyActive ? 'Confirm rollback' : 'Confirm activation'}
+              </button>
+            </div>
           </div>
         </section>
       )}

@@ -214,9 +214,9 @@ export function CurriculumValidationWorkspace({
         <header className="flex flex-col gap-5 border-b border-slate-700 pb-7 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300">Curriculum Studio</p>
-            <h1 id="curriculum-validation-workspace-title" className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 id="curriculum-validation-workspace-title" className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
               Validation workspace
-            </h1>
+            </h2>
             <p className="mt-2 max-w-3xl text-slate-300">Deterministic validation for one explicit curriculum snapshot.</p>
           </div>
           <section className={`rounded-xl border px-5 py-4 ${status.style}`} aria-label="Validation and publication readiness" role="status">

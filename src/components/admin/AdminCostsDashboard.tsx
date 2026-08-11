@@ -77,7 +77,7 @@ export function AdminCostsDashboard({
     return (
       <section className="admin-costs-message" role="alert">
         <p className="admin-costs-eyebrow">AI &amp; Costs</p>
-        <h1>Costs access unavailable</h1>
+        <h2>Costs access unavailable</h2>
         <p>Cost data remains private because current administrator authorization could not be confirmed.</p>
       </section>
     )
@@ -88,7 +88,7 @@ export function AdminCostsDashboard({
       <header className="admin-costs-header">
         <div>
           <p className="admin-costs-eyebrow">Provider usage ledger</p>
-          <h1>AI &amp; Costs</h1>
+          <h2>AI &amp; Costs</h2>
           <p>Read-only usage and provider-cost evidence. All calendar boundaries are UTC.</p>
         </div>
         <div className="admin-costs-header__controls">

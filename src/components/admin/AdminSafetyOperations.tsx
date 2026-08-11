@@ -68,7 +68,7 @@ function SafetyAuthorizationGate({ resolving }: { resolving: boolean }) {
     <div className="safety-ops-gate" aria-busy={resolving}>
       <section aria-live="polite" aria-labelledby="safety-access-title">
         <p className="safety-ops-eyebrow">Safety operations</p>
-        <h1 id="safety-access-title">{resolving ? 'Verifying safety access' : 'Safety data unavailable'}</h1>
+        <h2 id="safety-access-title">{resolving ? 'Verifying safety access' : 'Safety data unavailable'}</h2>
         <p>{resolving
           ? 'Safety evidence remains hidden until the canonical administrator read capability is confirmed.'
           : 'The canonical safety read capability is required. Household guardian membership does not grant Admin access.'}</p>
@@ -82,7 +82,7 @@ function SafetyLoading() {
   return (
     <div className="safety-ops-state" aria-busy="true" aria-live="polite">
       <p className="safety-ops-eyebrow">Safety operations</p>
-      <h1>Loading authorized safety evidence</h1>
+      <h2>Loading authorized safety evidence</h2>
     </div>
   )
 }
@@ -91,7 +91,7 @@ function SafetyUnavailable({ onRetry }: { onRetry?: () => void }) {
   return (
     <div className="safety-ops-state" role="alert">
       <p className="safety-ops-eyebrow">Safety operations</p>
-      <h1>Safety evidence is unavailable</h1>
+      <h2>Safety evidence is unavailable</h2>
       <p>No safety counts or event details are shown because the authorized read source could not be confirmed.</p>
       {onRetry && <button type="button" onClick={onRetry}>Try again</button>}
     </div>
@@ -112,7 +112,7 @@ function AuthorizedSafetyOperations({ readState }: { readState: Extract<SafetyOp
       <header className="safety-ops-header">
         <div>
           <p className="safety-ops-eyebrow">Read-only operations</p>
-          <h1>Safety</h1>
+          <h2>Safety</h2>
           <p>Centralized, data-minimized visibility into existing Study safety evidence.</p>
         </div>
         {model.observedAt && <p className="safety-ops-observed">Observed <time dateTime={model.observedAt}>{formatTime(model.observedAt)}</time></p>}

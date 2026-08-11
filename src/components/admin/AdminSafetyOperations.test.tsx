@@ -272,7 +272,7 @@ describe('ADMIN-10 read-only Safety Operations', () => {
   it('provides accessible landmarks, labels, table semantics, times, and drilldowns', () => {
     const html = render(snapshot([OPEN_STOP]))
     expect(html).not.toContain('<main')
-    expect(html).toContain('<h1>Safety</h1>')
+    expect(html).toContain('<h2>Safety</h2>')
     expect(html).toContain('<fieldset')
     expect(html).toContain('<legend>Filter safety events</legend>')
     expect(html).toContain('aria-controls="safety-events-results"')

@@ -231,8 +231,27 @@ describe('AdminConsole authorization and load states', () => {
     expect(tablet).not.toMatch(/\.admin-nav-text[^}]*display:\s*none/)
     expect(mobile).toContain('.admin-sidebar nav::after')
     expect(mobile).toContain('overflow-x: auto')
+    expect(mobile).toContain('max-width: 100vw')
+    expect(mobile).toContain('max-width: 100%')
+    expect(css).toContain('.admin-sidebar { position: sticky; top: 0; display: flex; min-width: 0;')
     expect(mobile).toContain('.admin-main { padding: 1rem .75rem 2.5rem; }')
     expect(css).toContain('overflow-x: clip')
+  })
+
+  it('reserves the page-level h1 for the unified Admin shell', () => {
+    const mountedChildren = [
+      './LearnerAnalytics.tsx',
+      './EnginePerformanceDashboard.tsx',
+      './AdminCostsDashboard.tsx',
+      './SystemHealthDashboard.tsx',
+      './AdminSafetyOperations.tsx',
+      './CurriculumValidationDashboard.tsx',
+      './CurriculumValidationWorkspace.tsx',
+      '../../admin/curriculum/CurriculumBrowser.tsx',
+    ]
+    for (const child of mountedChildren) {
+      expect(readFileSync(new URL(child, import.meta.url), 'utf8')).not.toMatch(/<h1\b/)
+    }
   })
 
   it('renders loading without numeric-looking metric placeholders', () => {

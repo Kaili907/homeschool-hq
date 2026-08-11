@@ -99,7 +99,7 @@ function HealthAccessState({ busy = false, title, message, onRetry }: { busy?: b
   return (
     <div className="health-state" aria-busy={busy} aria-live="polite">
       <span className={`health-state__glyph ${busy ? 'is-loading' : ''}`} aria-hidden="true">{busy ? '' : '!'}</span>
-      <h1>{title}</h1><p>{message}</p>
+      <h2>{title}</h2><p>{message}</p>
       {onRetry && <button type="button" onClick={onRetry}>Try again</button>}
       {!busy && <a href="/academy">Back to Academy</a>}
     </div>
@@ -127,7 +127,7 @@ function HealthReady({ projection, selectedWindow, onWindowChange }: {
   return (
     <div className="health-dashboard">
       <header className="health-heading">
-        <div><p>Read-only operations</p><h1>System Health</h1><span>Deterministic status from bounded trusted telemetry.</span></div>
+        <div><p>Read-only operations</p><h2>System Health</h2><span>Deterministic status from bounded trusted telemetry.</span></div>
         <div className="health-window" role="group" aria-label="System Health history window">
           {SYSTEM_HEALTH_WINDOWS.map((window) => <button key={window} type="button" aria-pressed={selectedWindow === window} className={selectedWindow === window ? 'is-active' : ''} onClick={() => onWindowChange(window)}>{WINDOW_LABELS[window]}</button>)}
         </div>

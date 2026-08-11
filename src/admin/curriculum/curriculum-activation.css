@@ -90,12 +90,18 @@
 .curriculum-activation-error p { margin: .3rem 0 .65rem; font-size: .72rem; }
 
 .curriculum-activation-confirmation {
-  position: absolute;
-  z-index: 4;
-  inset: 1.5rem;
-  max-width: 36rem;
-  height: fit-content;
-  margin: auto;
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(19 28 43 / .58);
+}
+.curriculum-activation-confirmation__panel {
+  width: min(36rem, 100%);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
   border: 2px solid #2f7258;
   border-radius: .65rem;
   padding: 1.25rem;
@@ -106,12 +112,13 @@
 .curriculum-activation-confirmation p { color: var(--admin-muted); font-size: .75rem; line-height: 1.5; }
 .curriculum-activation-confirmation label { display: flex; align-items: flex-start; gap: .65rem; margin: 1rem 0; color: #684614; font-size: .75rem; font-weight: 700; }
 .curriculum-activation-confirmation input { width: 1.1rem; height: 1.1rem; flex: none; }
-.curriculum-activation-confirmation > div { display: flex; justify-content: flex-end; gap: .5rem; }
+.curriculum-activation-confirmation__actions { display: flex; justify-content: flex-end; gap: .5rem; }
 .curriculum-activation-confirmation button.is-secondary { border-color: #9aa9a2; background: white; color: var(--admin-ink); }
 
 @media (max-width: 760px) {
   .curriculum-pointer-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .curriculum-pointer-facts div:nth-child(2) { border-right: 0; }
   .curriculum-activation-history li { grid-template-columns: 1fr 1fr; }
-  .curriculum-activation-confirmation { inset: .75rem; }
+  .curriculum-activation-confirmation { padding: .75rem; }
+  .curriculum-activation-confirmation__panel { max-height: calc(100vh - 1.5rem); }
 }

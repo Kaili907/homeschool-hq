@@ -99,7 +99,7 @@ export function LearnerAnalytics({
         <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Admin console</p>
         <div className="mt-1 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h1 id="learner-operations-title" className="text-3xl font-bold text-slate-950">Learner operations</h1>
+            <h2 id="learner-operations-title" className="text-3xl font-bold text-slate-950">Learner operations</h2>
             <p className="mt-1 max-w-3xl text-sm text-slate-600">Read-only operational evidence from trusted learner state. Conversations, prompts, answers, essays, journals, audio, private notes, and diagnostic inference are structurally absent.</p>
           </div>
           <p className="text-xs font-semibold text-slate-500">Observed {formatDateTime(observedAt)}</p>
@@ -215,7 +215,7 @@ function AuthorizedEmptyState({ observedAt }: { observedAt: string }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-6" aria-labelledby="learner-operations-title">
       <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Admin console</p>
-      <h1 id="learner-operations-title" className="mt-1 text-3xl font-bold text-slate-950">Learner operations</h1>
+      <h2 id="learner-operations-title" className="mt-1 text-3xl font-bold text-slate-950">Learner operations</h2>
       <StatusBadge status="not-configured" className="mt-4" />
       <p className="mt-2 text-slate-600">No learner records are available to this authorized view.</p>
       <p className="mt-2 text-xs font-semibold text-slate-500">Observed {formatDateTime(observedAt)}</p>
@@ -228,7 +228,7 @@ function AccessState({ busy = false, title, message, alert = false, onRetry, bac
     <div className="flex min-h-72 items-center justify-center rounded-2xl border border-slate-200 bg-white p-6" aria-busy={busy}>
       <section className="max-w-lg text-center" aria-live="polite" role={alert ? 'alert' : undefined}>
         <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Learner operations</p>
-        <h1 className="mt-2 text-2xl font-bold text-slate-950">{title}</h1>
+        <h2 className="mt-2 text-2xl font-bold text-slate-950">{title}</h2>
         <p className="mt-2 text-slate-600">{message}</p>
         {onRetry && <button type="button" onClick={onRetry} className="mt-4 min-h-11 rounded-lg bg-slate-950 px-4 py-2 font-bold text-white">Try again</button>}
         {backToAcademy && <a href="/academy" className="mt-4 inline-flex min-h-11 items-center rounded-lg border border-slate-400 px-4 py-2 font-bold text-slate-900">Back to Academy</a>}
