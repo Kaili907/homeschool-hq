@@ -13,7 +13,7 @@ const files = [
   './migrations/20260801170000_academy_study_adult_review_operations.sql',
   './migrations/20260801190000_academy_study_final_production_reconciliation.sql',
   './tests/study_engine_fixtures.sql',
-  './migrations/20260810120000_academy_study_effective_settings_v2.sql',
+  './migrations/20260810120200_academy_study_effective_settings_v2.sql',
   './migrations/20260810150000_academy_study_curriculum_binding.sql',
 ] as const
 

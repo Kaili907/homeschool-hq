@@ -530,7 +530,7 @@ update academy_private.study_persistence_metadata
 set effective_settings_version = 2,
     migration_names = array_append(
       migration_names,
-      '20260810120000_academy_study_effective_settings_v2'
+      '20260810120200_academy_study_effective_settings_v2'
     )
 where singleton;
 

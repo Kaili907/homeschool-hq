@@ -81,7 +81,7 @@ async function createDatabase() {
   `)
   for (const migration of [
     '20260809130000_academy_admin_audit_foundation.sql',
-    '20260810120000_academy_provider_pricing_terms.sql',
+    '20260810120300_academy_provider_pricing_terms.sql',
   ]) {
     await database.exec(await readFile(new URL(`./migrations/${migration}`, import.meta.url), 'utf8'))
   }

@@ -41,7 +41,7 @@ This migration has not been applied to a hosted Supabase project.
 ## Supabase: Study Effective Settings V2 (2026-08-10)
 
 Tracked migration:
-`supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql`.
+`supabase/migrations/20260810120200_academy_study_effective_settings_v2.sql`.
 
 The additive migration creates typed private Admin-default and safety-policy
 singletons plus the authorized `academy_study_effective_settings_v2(uuid,date)`
@@ -93,9 +93,14 @@ The integrated ADMIN-R1 migration order is:
 7. `20260809130000_academy_admin_audit_foundation.sql`
 8. `20260809140000_academy_admin_configuration_core.sql`
 9. `20260809150000_academy_logical_voice_profile_contract.sql`
-10. `20260810120000_academy_provider_pricing_terms.sql`
-11. `20260810140000_academy_admin_configuration_runtime_enforcement.sql`
-12. `20260810141000_academy_study_provider_cost_accounting.sql`
+10. `20260810120200_academy_study_effective_settings_v2.sql`
+11. `20260810120300_academy_provider_pricing_terms.sql`
+12. `20260810140000_academy_admin_configuration_runtime_enforcement.sql`
+13. `20260810141000_academy_study_provider_cost_accounting.sql`
+14. `20260810150000_academy_study_curriculum_binding.sql`
+15. `20260810152000_academy_study_in_app_receipt_timestamp.sql`
+16. `20260810152100_academy_study_worker_operations_contract.sql`
+17. `20260810159000_academy_study_worker_run_evidence.sql`
 
 The manifest is a strict linear chain in filename order. These unique versions
 replace the parallel-branch timestamp collision; none has been applied to
@@ -139,7 +144,7 @@ applied hosted. Architecture is in `docs/admin-costs-contract-v3.md`.
 
 ## Admin provider pricing terms foundation (2026-08-10, not applied hosted)
 
-`supabase/migrations/20260810120000_academy_provider_pricing_terms.sql` adds the
+`supabase/migrations/20260810120300_academy_provider_pricing_terms.sql` adds the
 private effective-dated pricing-term authority used by new provider ledger rows.
 It depends on the exact cost aggregate and ADMIN-15 audit migrations, requires
 the legacy catalog/rate tables to be empty, and seeds no provider price.

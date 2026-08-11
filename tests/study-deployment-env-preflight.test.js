@@ -227,10 +227,11 @@ describe('Study production deployment environment preflight', () => {
     expect(output).toContain('Passing does not prove that Study migrations are applied')
   })
 
-  it('reports the repository scheduled-worker gap with a complete fixture environment', async () => {
+  it('reports the integrated repository schedule as ready with a complete fixture environment', async () => {
     const result = await runLocalStudyDeploymentPreflight({ env: readyEnvironment() })
-    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
-    expect(byId(result, 'netlify.scheduled_target')).toMatchObject({ status: 'missing' })
-    expect(byId(result, 'netlify.scheduled_function_file')).toMatchObject({ status: 'missing' })
+    expect(result.overall).toBe('READY_FOR_DEPLOYMENT_ENVIRONMENT')
+    expect(result.ready).toBe(true)
+    expect(byId(result, 'netlify.scheduled_target')).toMatchObject({ status: 'present' })
+    expect(byId(result, 'netlify.scheduled_function_file')).toMatchObject({ status: 'present' })
   })
 })

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "reconciliations": [
+    {
+      "filename": "20260810120000_academy_study_effective_settings_v2.sql",
+      "replacementVersion": "20260810120200"
+    },
+    {
+      "filename": "20260810120000_academy_provider_pricing_terms.sql",
+      "replacementVersion": "20260810120300"
+    }
+  ]
+}

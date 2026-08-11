@@ -26,6 +26,9 @@ export const EXPECTED_STUDY_SCHEDULE = '*/5 * * * *'
 export const EXPECTED_NODE_VERSION = '22'
 export const EXPECTED_STUDY_SAFETY_MODEL = 'claude-haiku-4-5'
 
+const STUDY_SCHEDULE_CONTRACT_MODULE = './_shared/study-adult-review-operations/schedule.js'
+const STUDY_SCHEDULE_CONTRACT_PATH = 'netlify/functions/_shared/study-adult-review-operations/schedule.js'
+
 const EXPECTED_STUDY_SCHEDULE_CONTRACT = Object.freeze({
   scheduled: 'configured',
   cadence: EXPECTED_STUDY_SCHEDULE,
@@ -573,11 +576,19 @@ export async function runLocalStudyDeploymentPreflight({ rootDirectory = process
     // Missing function directory is represented by deterministic missing gates.
   }
   try {
-    const source = await readFile(resolve(
+    const entrypointSource = await readFile(resolve(
       rootDirectory,
       `netlify/functions/${EXPECTED_STUDY_SCHEDULED_FUNCTION}.js`,
     ), 'utf8')
-    scheduledFunctionContract = parseStudyScheduledFunctionContract(source)
+    scheduledFunctionContract = parseStudyScheduledFunctionContract(entrypointSource)
+    const exactSharedContractReexport = new RegExp(
+      `export\\s*\\{\\s*STUDY_ADULT_REVIEW_SCHEDULE\\s*\\}\\s*from\\s*['"]${STUDY_SCHEDULE_CONTRACT_MODULE.replaceAll('.', '\\.')}['"]`,
+      'u',
+    ).test(entrypointSource)
+    if (!scheduledFunctionContract && exactSharedContractReexport) {
+      const sharedContractSource = await readFile(resolve(rootDirectory, STUDY_SCHEDULE_CONTRACT_PATH), 'utf8')
+      scheduledFunctionContract = parseStudyScheduledFunctionContract(sharedContractSource)
+    }
   } catch {
     // Missing or unreadable source is represented by deterministic configuration gates.
   }

@@ -4,9 +4,11 @@
   "scope": "local-only",
   "gates": {
     "local_integration_reconciled": {
-      "status": "BLOCKING",
-      "reasonCode": "PARALLEL_FEATURES_NOT_RECONCILED",
-      "evidenceRefs": ["docs/admin-production-preflight/README.md"]
+      "status": "PASS",
+      "evidenceRefs": [
+        "docs/admin-production-preflight/windows-admin-delta-reconciliation.json",
+        "docs/study-engine-final-production/migration-manifest.json"
+      ]
     },
     "admin_authorization_foundation": {
       "status": "PASS",
@@ -35,15 +37,18 @@
       "evidenceRefs": ["netlify/functions/_shared/admin-engine-performance-reader.js"]
     },
     "system_health_scalable_aggregate": {
-      "status": "BLOCKING",
-      "reasonCode": "SCALABLE_AGGREGATE_READER_NOT_ADOPTED",
-      "evidenceRefs": ["netlify/functions/_shared/admin-health-source.js"]
+      "status": "PASS",
+      "evidenceRefs": [
+        "netlify/functions/_shared/admin-operational-aggregate-reader.js",
+        "netlify/functions/_shared/admin-health-source.js",
+        "docs/admin-system-health.md"
+      ]
     },
     "admin_configuration_runtime_enforcement": {
-      "status": "BLOCKING",
-      "reasonCode": "PRODUCTION_ENFORCEMENT_NOT_VERIFIED",
+      "status": "PASS",
       "evidenceRefs": [
         "docs/admin-configuration-runtime.md",
+        "netlify/functions/_shared/effective-configuration.js",
         "supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql"
       ]
     },
@@ -87,14 +92,18 @@
       "evidenceRefs": ["docs/admin-console/cost-accounting.md"]
     },
     "study_effective_settings_v2": {
-      "status": "BLOCKING",
-      "reasonCode": "STUDY_SETTINGS_V2_MISSING",
-      "evidenceRefs": ["docs/admin-configuration-runtime.md"]
+      "status": "PASS",
+      "evidenceRefs": [
+        "docs/study-effective-settings-v2.md",
+        "supabase/migrations/20260810120200_academy_study_effective_settings_v2.sql"
+      ]
     },
     "study_curriculum_binding": {
-      "status": "BLOCKING",
-      "reasonCode": "STUDY_CURRICULUM_BINDING_MISSING",
-      "evidenceRefs": ["docs/admin-console/curriculum-versioning.md"]
+      "status": "PASS",
+      "evidenceRefs": [
+        "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+        "src/study/persistence/SupabaseStudyPersistenceAdapter.ts"
+      ]
     },
     "study_session_composition": {
       "status": "PASS",
@@ -104,14 +113,20 @@
       ]
     },
     "study_adult_review_worker": {
-      "status": "BLOCKING",
-      "reasonCode": "PRODUCTION_WORKER_NOT_COMPOSED",
-      "evidenceRefs": ["netlify/functions/study-adult-review-worker.js"]
+      "status": "PASS",
+      "evidenceRefs": [
+        "netlify/functions/_shared/study-adult-review-operations/composition.js",
+        "netlify/functions/_shared/study-adult-review-operations/run-evidence.js",
+        "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql"
+      ]
     },
     "study_worker_schedule": {
-      "status": "BLOCKING",
-      "reasonCode": "PRODUCTION_WORKER_SCHEDULE_MISSING",
-      "evidenceRefs": ["netlify.toml"]
+      "status": "PASS",
+      "evidenceRefs": [
+        "netlify.toml",
+        "netlify/functions/study-adult-review-scheduled-worker.js",
+        "netlify/functions/_shared/study-adult-review-operations/schedule.js"
+      ]
     },
     "study_production_mount": {
       "status": "PASS",

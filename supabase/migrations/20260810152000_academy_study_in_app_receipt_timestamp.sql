@@ -28,7 +28,7 @@ begin
      or not (marker.migration_names @> array[
        '20260801170000_academy_study_adult_review_operations',
        '20260801190000_academy_study_final_production_reconciliation',
-       '20260810120000_academy_study_effective_settings_v2',
+       '20260810120200_academy_study_effective_settings_v2',
        '20260810150000_academy_study_curriculum_binding'
      ]::text[]) then
     raise exception 'Study in-app receipt timestamp predecessor marker mismatch';

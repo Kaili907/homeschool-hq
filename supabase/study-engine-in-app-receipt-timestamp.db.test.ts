@@ -17,7 +17,7 @@ const baseFiles = [
   './migrations/20260801160000_academy_study_verified_identity.sql',
   './migrations/20260801170000_academy_study_adult_review_operations.sql',
   './migrations/20260801190000_academy_study_final_production_reconciliation.sql',
-  './migrations/20260810120000_academy_study_effective_settings_v2.sql',
+  './migrations/20260810120200_academy_study_effective_settings_v2.sql',
   './migrations/20260810150000_academy_study_curriculum_binding.sql',
 ] as const
 const CORRECTION = './migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql'
@@ -400,7 +400,7 @@ describe.sequential('verified in-app receipt deliveredAt normalization', () => {
       '20260801160000_academy_study_verified_identity',
       '20260801170000_academy_study_adult_review_operations',
       '20260801190000_academy_study_final_production_reconciliation',
-      '20260810120000_academy_study_effective_settings_v2',
+      '20260810120200_academy_study_effective_settings_v2',
       '20260810150000_academy_study_curriculum_binding',
       '20260810152000_academy_study_in_app_receipt_timestamp',
     ])

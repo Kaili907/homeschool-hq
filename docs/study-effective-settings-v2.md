@@ -44,7 +44,7 @@ safety maximum can lower the effective maximum. A minimum above the maximum is
 
 ## Persistence and authorization
 
-`20260810120000_academy_study_effective_settings_v2.sql` adds two typed private
+`20260810120200_academy_study_effective_settings_v2.sql` adds two typed private
 singleton records:
 
 - `study_effective_settings_admin_defaults`
