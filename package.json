@@ -9,6 +9,7 @@
     "curriculum:build": "node scripts/build-curriculum.mjs",
     "migration:check": "node scripts/check-migration-collisions.mjs",
     "migration:replay:admin": "node scripts/replay-admin-migration-union.mjs",
+    "rehearse:admin-upgrade": "node scripts/admin-upgrade-path-rehearsal.mjs",
     "curriculum:v2:compatibility": "node --experimental-strip-types src/curriculum-authoring/v2/compatibilityCli.node.ts",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
