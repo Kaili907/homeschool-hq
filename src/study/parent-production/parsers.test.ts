@@ -1,16 +1,28 @@
 import { describe, expect, it } from 'vitest'
 import {
+  parseAdultPrivateCommitNoteInput,
   parseAdultPrivateCommitNoteResult,
+  parseCalendarCreateContinuationInput,
   parseCalendarCreateContinuationResult,
+  parseCalendarListInput,
   parseCalendarListResult,
+  parseCalendarPauseInput,
   parseCalendarPauseResult,
+  parseNotificationsListInput,
   parseNotificationsListResult,
+  parseNotificationsMarkReadInput,
   parseNotificationsMarkReadResult,
+  parseReviewsDecideInput,
   parseReviewsDecideResult,
+  parseReviewsListInput,
   parseReviewsListResult,
+  parseSafetyReviewAndClearInput,
   parseSafetyReviewAndClearResult,
+  parseSafetyReviewListOpenInput,
   parseSafetyReviewListOpenResult,
+  parseSettingsApplyInput,
   parseSettingsApplyResult,
+  parseSettingsReadInput,
   parseSettingsReadResult,
 } from './parsers'
 
@@ -37,6 +49,87 @@ const notification = {
   readAt: null,
   safeActionRef: 'safety-review.1',
 } as const
+const studentRef = 'student.1'
+const mutation = { studentRef, expectedRevision: 2, mutationId: 'mutation.1' } as const
+const list = { studentRef, cursor: 'cursor.1', limit: 50 } as const
+const safetyDecision = {
+  studentRef,
+  safetyReviewRef: 'safety.1',
+  sessionRef: 'session.1',
+  blockRef: 'block.1',
+  decision: 'resume-approved',
+  reasonCode: 'adult-safety-review-completed',
+  expectedSafetyRevision: 3,
+  expectedSessionRevision: 7,
+  expectedCalendarRevision: 9,
+  mutationId: 'mutation.safety.1',
+} as const
+
+describe('Parent Hub production request parsers', () => {
+  it('strictly parses every read and list input', () => {
+    expect(parseSettingsReadInput({ studentRef })).toEqual({ studentRef })
+    expect(parseReviewsListInput(list)).toEqual(list)
+    expect(parseCalendarListInput(list)).toEqual(list)
+    expect(parseSafetyReviewListOpenInput({ studentRef })).toEqual({ studentRef })
+    expect(parseNotificationsListInput(list)).toEqual(list)
+
+    expect(parseSettingsReadInput({ studentRef, actorRole: 'guardian' })).toBeNull()
+    expect(parseReviewsListInput({ ...list, limit: 101 })).toBeNull()
+    expect(parseCalendarListInput({ ...list, cursor: 'x'.repeat(513) })).toBeNull()
+    expect(parseNotificationsListInput({ ...list, studentRef: `s${'x'.repeat(128)}` })).toBeNull()
+  })
+
+  it('strictly parses every ordinary mutation input without client-owned transition times', () => {
+    const settingsInput = { ...mutation, changes: { maximumWorkMinutes: 45, breakMinimumMinutes: 5, breakMaximumMinutes: 15 } }
+    const reviewInput = { ...mutation, reviewRef: 'review.1', decision: 'accepted' }
+    const pauseInput = { ...mutation, blockRef: 'block.1', reason: 'requested-break' }
+    const continuationInput = {
+      ...mutation, sourceBlockRef: 'block.1', requestedScheduledAt: at, durationMinutes: 30,
+    }
+    const noteInput = { ...mutation, noteRef: 'note.1', category: 'follow-up', body: 'Check in tomorrow.' }
+    const markReadInput = { ...mutation, notificationId: 'notification.1' }
+
+    expect(parseSettingsApplyInput(settingsInput)).toEqual(settingsInput)
+    expect(parseReviewsDecideInput(reviewInput)).toEqual(reviewInput)
+    expect(parseCalendarPauseInput(pauseInput)).toEqual(pauseInput)
+    expect(parseCalendarCreateContinuationInput(continuationInput)).toEqual(continuationInput)
+    expect(parseAdultPrivateCommitNoteInput(noteInput)).toEqual(noteInput)
+    expect(parseNotificationsMarkReadInput(markReadInput)).toEqual(markReadInput)
+
+    expect(parseCalendarPauseInput({ ...pauseInput, pausedAt: at })).toBeNull()
+    expect(parseCalendarCreateContinuationInput({ ...continuationInput, requestedScheduledAt: '2026-02-30T12:00:00.000Z' })).toBeNull()
+    expect(parseCalendarCreateContinuationInput({ ...continuationInput, durationMinutes: 481 })).toBeNull()
+    expect(parseReviewsDecideInput({ ...reviewInput, mutationId: `m${'x'.repeat(128)}` })).toBeNull()
+    expect(parseAdultPrivateCommitNoteInput({ ...noteInput, body: 'x'.repeat(4_001) })).toBeNull()
+    expect(parseAdultPrivateCommitNoteInput({ ...noteInput, category: 'learner-visible' })).toBeNull()
+    expect(parseNotificationsMarkReadInput({ ...markReadInput, expectedRevision: Number.MAX_SAFE_INTEGER + 1 })).toBeNull()
+    expect(parseNotificationsMarkReadInput({ ...markReadInput, expectedRevision: -1 })).toBeNull()
+  })
+
+  it('enforces plausible settings ranges and relationships without truncating changes', () => {
+    expect(parseSettingsApplyInput({ ...mutation, changes: {} })).toBeNull()
+    expect(parseSettingsApplyInput({ ...mutation, changes: { maximumWorkMinutes: 4 } })).toBeNull()
+    expect(parseSettingsApplyInput({ ...mutation, changes: { requiredBreaks: 13 } })).toBeNull()
+    expect(parseSettingsApplyInput({
+      ...mutation, changes: { breakMinimumMinutes: 20, breakMaximumMinutes: 10 },
+    })).toBeNull()
+    expect(parseSettingsApplyInput({
+      ...mutation, changes: { maximumWorkMinutes: 10, breakMaximumMinutes: 15 },
+    })).toBeNull()
+    expect(parseSettingsApplyInput({ ...mutation, changes: { maximumWorkMinutes: undefined } })).toBeNull()
+    expect(parseSettingsApplyInput({ ...mutation, changes: { maximumWorkMinutes: 45, extra: true } })).toBeNull()
+  })
+
+  it('binds each adult safety decision to the proposal, session, and calendar revisions', () => {
+    expect(parseSafetyReviewAndClearInput(safetyDecision)).toEqual(safetyDecision)
+    expect(parseSafetyReviewAndClearInput({ ...safetyDecision, decision: 'end-session' })).not.toBeNull()
+    expect(parseSafetyReviewAndClearInput({ ...safetyDecision, reviewedAt: at })).toBeNull()
+    expect(parseSafetyReviewAndClearInput({ ...safetyDecision, expectedRevision: 3 })).toBeNull()
+    expect(parseSafetyReviewAndClearInput({ ...safetyDecision, expectedSessionRevision: -1 })).toBeNull()
+    expect(parseSafetyReviewAndClearInput({ ...safetyDecision, reasonCode: 'adult-resumed-learner' })).toBeNull()
+    expect(parseSafetyReviewAndClearInput({ ...safetyDecision, sessionRef: 'x'.repeat(129) })).toBeNull()
+  })
+})
 
 describe('Parent Hub production response parsers', () => {
   it('accepts bounded settings results and rejects unknown placement keys', () => {
@@ -65,10 +158,18 @@ describe('Parent Hub production response parsers', () => {
     expect(parseCalendarCreateContinuationResult({ status: 'paused', revision: 2, pausedAt: at })).toBeNull()
     expect(parseSafetyReviewListOpenResult({
       status: 'listed',
-      reviews: [{ safetyReviewRef: 'safety.1', studentRef: 'student.1', category: 'urgent-safety', urgency: 'urgent', heldAt: at, revision: 3 }],
+      reviews: [{
+        safetyReviewRef: 'safety.1', studentRef: 'student.1', sessionRef: 'session.1', blockRef: 'block.1',
+        category: 'urgent-safety', urgency: 'urgent', heldAt: at,
+        safetyRevision: 3, sessionRevision: 7, calendarRevision: 9,
+      }],
     })).not.toBeNull()
-    expect(parseSafetyReviewAndClearResult({ status: 'safety-state-changed', revision: 4 })).not.toBeNull()
-    expect(parseSafetyReviewAndClearResult({ status: 'stale-revision', currentRevision: 4 })).not.toBeNull()
+    expect(parseSafetyReviewAndClearResult({
+      status: 'safety-state-changed', safetyRevision: 4, sessionRevision: 7, calendarRevision: 9,
+    })).not.toBeNull()
+    expect(parseSafetyReviewAndClearResult({
+      status: 'stale-revision', currentSafetyRevision: 4, currentSessionRevision: 7, currentCalendarRevision: 9,
+    })).not.toBeNull()
     expect(parseSafetyReviewAndClearResult({ status: 'failed', code: 'safety-state-changed' })).toBeNull()
   })
 
@@ -100,5 +201,28 @@ describe('Parent Hub production response parsers', () => {
     expect(parseNotificationsListResult({ status: 'failed', code: 'unknown' })).toBeNull()
     expect(parseNotificationsListResult({ status: 'failed', code: 'rate-limited', retryAfterSeconds: 0 })).toBeNull()
     expect(parseNotificationsListResult({ status: 'failed', code: 'adult-unauthorized', detail: 'secret' })).toBeNull()
+  })
+
+  it('accepts server-authoritative transition timestamps and rejects malformed values', () => {
+    expect(parseCalendarPauseResult({ status: 'paused', revision: 3, pausedAt: at })).not.toBeNull()
+    expect(parseCalendarPauseResult({ status: 'paused', revision: 3, pausedAt: '2026-02-30T12:00:00.000Z' })).toBeNull()
+    expect(parseSafetyReviewAndClearResult({
+      status: 'cleared', decision: 'resume-approved', safetyRevision: 4, sessionRevision: 8,
+      calendarRevision: 10, reviewedAt: at, clearedAt: at,
+    })).not.toBeNull()
+    expect(parseSafetyReviewAndClearResult({
+      status: 'cleared', decision: 'end-session', safetyRevision: 4, sessionRevision: 8,
+      calendarRevision: 10, reviewedAt: 'tomorrow', clearedAt: at,
+    })).toBeNull()
+  })
+
+  it('rejects mutation-only and unrelated failure codes on reads and lists', () => {
+    expect(parseSettingsReadResult({ status: 'failed', code: 'idempotency-collision' })).toBeNull()
+    expect(parseReviewsListResult({ status: 'failed', code: 'already-decided' })).toBeNull()
+    expect(parseCalendarListResult({ status: 'failed', code: 'stale-revision' })).toBeNull()
+    expect(parseSafetyReviewListOpenResult({ status: 'failed', code: 'safety-state-changed' })).toBeNull()
+    expect(parseNotificationsListResult({ status: 'failed', code: 'idempotency-collision' })).toBeNull()
+    expect(parseSettingsApplyResult({ status: 'failed', code: 'already-decided' })).toBeNull()
+    expect(parseReviewsDecideResult({ status: 'failed', code: 'safety-state-changed' })).toBeNull()
   })
 })

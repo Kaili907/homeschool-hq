@@ -5,13 +5,29 @@ import { describe, expect, it } from 'vitest'
 import {
   ADULT_PRODUCTION_FAILURE_CODES,
   type AdultPrivateCommitNoteResult,
+  type AdultMutationFailureCode,
+  type AdultReadFailureCode,
+  type CalendarCreateContinuationResult,
+  type CalendarListResult,
+  type CalendarPauseResult,
+  type NotificationsListResult,
+  type NotificationsMarkReadResult,
   type ParentHubAdultPrivatePort,
+  type ParentHubCalendarPort,
   type ParentHubNotificationsPort,
   type ParentHubReviewSummary,
   type ParentHubReviewsPort,
+  type ParentHubSafetyDecision,
+  type ParentHubSafetyDecisionReason,
   type ParentHubSafetyReviewPort,
   type ParentHubSettingsChanges,
   type ProductionStudyParentHubPorts,
+  type ReviewsDecideResult,
+  type ReviewsListResult,
+  type SafetyReviewAndClearResult,
+  type SafetyReviewListOpenResult,
+  type SettingsApplyResult,
+  type SettingsReadResult,
 } from './contracts'
 import {
   PARENT_HUB_PRODUCTION_CONTRACT_COMPLETE,
@@ -29,6 +45,7 @@ const reviewMethodsAreExact: Equal<keyof ParentHubReviewsPort, 'list' | 'decide'
 const safetyMethodsAreExact: Equal<keyof ParentHubSafetyReviewPort, 'listOpen' | 'reviewAndClear'> = true
 const adultPrivateMethodsAreExact: Equal<keyof ParentHubAdultPrivatePort, 'commitNote'> = true
 const notificationSurfaceIsExact: Equal<keyof ParentHubNotificationsPort, 'delivery' | 'list' | 'markRead'> = true
+const notificationDeliveryIsInAppOnly: Equal<ParentHubNotificationsPort['delivery'], 'in-app'> = true
 const settingsChangesAreExact: Equal<keyof ParentHubSettingsChanges,
   | 'timerMode' | 'maximumWorkMinutes' | 'breakMinimumMinutes' | 'breakMaximumMinutes'
   | 'requiredBreaks' | 'reducedMotion' | 'noAudio' | 'largeText' | 'readAloud' | 'speechInputAllowed'> = true
@@ -36,6 +53,31 @@ const reviewProjectionIsExact: Equal<keyof ParentHubReviewSummary,
   'reviewRef' | 'studentRef' | 'kind' | 'dueAt' | 'priority' | 'state' | 'revision'> = true
 const committedNoteProjectionIsExact: Equal<keyof Extract<AdultPrivateCommitNoteResult, { status: 'committed' }>,
   'status' | 'noteRef' | 'revision' | 'committedAt'> = true
+const calendarPauseInputIsExact: Equal<keyof Parameters<ParentHubCalendarPort['pause']>[0],
+  'studentRef' | 'expectedRevision' | 'mutationId' | 'blockRef' | 'reason'> = true
+const safetyReviewInputIsExact: Equal<keyof Parameters<ParentHubSafetyReviewPort['reviewAndClear']>[0],
+  | 'studentRef' | 'safetyReviewRef' | 'sessionRef' | 'blockRef' | 'decision' | 'reasonCode'
+  | 'expectedSafetyRevision' | 'expectedSessionRevision' | 'expectedCalendarRevision' | 'mutationId'> = true
+const safetyDecisionIsExact: Equal<ParentHubSafetyDecision, 'resume-approved' | 'end-session'> = true
+const safetyReasonIsFixed: Equal<ParentHubSafetyDecisionReason, 'adult-safety-review-completed'> = true
+const pauseSuccessIsServerTimestamped: Equal<keyof Extract<CalendarPauseResult, { status: 'paused' }>,
+  'status' | 'revision' | 'pausedAt'> = true
+const safetySuccessIsServerTimestamped: Equal<keyof Extract<SafetyReviewAndClearResult, { status: 'cleared' }>,
+  | 'status' | 'decision' | 'safetyRevision' | 'sessionRevision' | 'calendarRevision'
+  | 'reviewedAt' | 'clearedAt'> = true
+type FailureCodeOf<Result> = Extract<Result, { status: 'failed' }> extends { code: infer Code } ? Code : never
+const settingsReadFailuresAreExact: Equal<FailureCodeOf<SettingsReadResult>, AdultReadFailureCode> = true
+const reviewsListFailuresAreExact: Equal<FailureCodeOf<ReviewsListResult>, AdultReadFailureCode> = true
+const calendarListFailuresAreExact: Equal<FailureCodeOf<CalendarListResult>, AdultReadFailureCode> = true
+const safetyListFailuresAreExact: Equal<FailureCodeOf<SafetyReviewListOpenResult>, AdultReadFailureCode> = true
+const notificationsListFailuresAreExact: Equal<FailureCodeOf<NotificationsListResult>, AdultReadFailureCode> = true
+const settingsApplyFailuresAreExact: Equal<FailureCodeOf<SettingsApplyResult>, AdultMutationFailureCode> = true
+const reviewsDecideFailuresAreExact: Equal<FailureCodeOf<ReviewsDecideResult>, AdultMutationFailureCode> = true
+const calendarPauseFailuresAreExact: Equal<FailureCodeOf<CalendarPauseResult>, AdultMutationFailureCode> = true
+const continuationFailuresAreExact: Equal<FailureCodeOf<CalendarCreateContinuationResult>, AdultMutationFailureCode> = true
+const safetyDecisionFailuresAreExact: Equal<FailureCodeOf<SafetyReviewAndClearResult>, AdultMutationFailureCode> = true
+const commitNoteFailuresAreExact: Equal<FailureCodeOf<AdultPrivateCommitNoteResult>, AdultMutationFailureCode> = true
+const markReadFailuresAreExact: Equal<FailureCodeOf<NotificationsMarkReadResult>, AdultMutationFailureCode> = true
 
 const here = dirname(fileURLToPath(import.meta.url))
 const productionSource = readdirSync(here)
@@ -51,8 +93,14 @@ describe('Parent Hub production contract boundary', () => {
     expect(PARENT_HUB_PRODUCTION_CONTRACT_COMPLETE).toBe(true)
     expect([
       rootIsExact, reviewMethodsAreExact, safetyMethodsAreExact, adultPrivateMethodsAreExact,
-      notificationSurfaceIsExact, settingsChangesAreExact, reviewProjectionIsExact,
-      committedNoteProjectionIsExact,
+      notificationSurfaceIsExact, notificationDeliveryIsInAppOnly, settingsChangesAreExact, reviewProjectionIsExact,
+      committedNoteProjectionIsExact, calendarPauseInputIsExact, safetyReviewInputIsExact,
+      safetyDecisionIsExact, safetyReasonIsFixed, pauseSuccessIsServerTimestamped,
+      safetySuccessIsServerTimestamped, settingsReadFailuresAreExact, reviewsListFailuresAreExact,
+      calendarListFailuresAreExact, safetyListFailuresAreExact, notificationsListFailuresAreExact,
+      settingsApplyFailuresAreExact, reviewsDecideFailuresAreExact, calendarPauseFailuresAreExact,
+      continuationFailuresAreExact, safetyDecisionFailuresAreExact, commitNoteFailuresAreExact,
+      markReadFailuresAreExact,
     ]).not.toContain(false)
   })
 
@@ -95,5 +143,23 @@ describe('Parent Hub production contract boundary', () => {
       'already-decided',
       'safety-state-changed',
     ])
+  })
+
+  it('keeps transition authority server-side and models adult safety clearance without learner resume', () => {
+    expect(calendarPauseInputIsExact).toBe(true)
+    expect(safetyReviewInputIsExact).toBe(true)
+    expect(safetyDecisionIsExact).toBe(true)
+    expect(safetyReasonIsFixed).toBe(true)
+    expect(pauseSuccessIsServerTimestamped).toBe(true)
+    expect(safetySuccessIsServerTimestamped).toBe(true)
+  })
+
+  it('narrows failures by operation', () => {
+    expect([
+      settingsReadFailuresAreExact, reviewsListFailuresAreExact, calendarListFailuresAreExact,
+      safetyListFailuresAreExact, notificationsListFailuresAreExact, settingsApplyFailuresAreExact,
+      reviewsDecideFailuresAreExact, calendarPauseFailuresAreExact, continuationFailuresAreExact,
+      safetyDecisionFailuresAreExact, commitNoteFailuresAreExact, markReadFailuresAreExact,
+    ]).not.toContain(false)
   })
 })
