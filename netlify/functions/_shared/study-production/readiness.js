@@ -1,6 +1,12 @@
 import { createSupabaseStudySafetyPorts } from '../study-adult-review/supabase-ports.js'
 import { createTrustedStudySessionVerifier } from '../study-identity/supabase.js'
 import { createAnthropicSafetyClassifier } from '../study-safety/provider.js'
+import {
+  academicDependenciesUnavailable,
+  academicDependencyMap,
+  combineAcademicReadiness,
+  createSupabaseStudyAcademicReadiness,
+} from './academic-readiness.js'
 
 export const STUDY_PRODUCTION_READINESS_SCHEMA_VERSION = 1
 export const STUDY_PRODUCTION_READINESS_STATES = Object.freeze([
@@ -114,6 +120,22 @@ async function optionalOperationalState(probe) {
   }
 }
 
+/**
+ * The durable half of academic readiness. Absent transport, a rejected read and
+ * a malformed body already resolve to every-dependency-not-ready inside the port,
+ * and the map is revalidated here rather than trusted: a partial map read key by
+ * key would let the dependencies it mentions pass while the ones it omits fail,
+ * so a truncated result would open a dependency instead of closing all of them.
+ */
+async function academicDatabaseState(probe) {
+  if (typeof probe?.read !== 'function') return academicDependenciesUnavailable()
+  try {
+    return academicDependencyMap(await probe.read())
+  } catch {
+    return academicDependenciesUnavailable()
+  }
+}
+
 function aggregateStatus(registrations) {
   if (registrations.some(({ status }) => status === 'not-ready')) return 'not-ready'
   if (registrations.some(({ status }) => status === 'degraded')) return 'degraded'
@@ -134,6 +156,11 @@ export function createStudyProductionReadinessService(options = {}) {
   const identityVerifier = options.identityVerifier ?? createTrustedStudySessionVerifier({ env, fetchImpl })
   const durablePorts = options.durablePorts ?? createSupabaseStudySafetyPorts({ env, fetchImpl })
   const classifier = options.classifier ?? createAnthropicSafetyClassifier({ env, fetchImpl })
+  // The durable academic probe has a real default; the operation-surface probe
+  // deliberately does not. Both must agree before an academic dependency reads
+  // ready, so wiring the durable half cannot by itself move readiness.
+  const academicDatabase = options.academicDatabaseReadiness
+    ?? createSupabaseStudyAcademicReadiness({ env, fetchImpl })
   const session17 = options.session17 ?? Object.freeze({})
   let cached = null
   let inFlight = null
@@ -143,6 +170,7 @@ export function createStudyProductionReadinessService(options = {}) {
     const [
       identity,
       academic,
+      academicDatabaseFacts,
       safetyDurable,
       policyEvidence,
       recipient,
@@ -158,6 +186,7 @@ export function createStudyProductionReadinessService(options = {}) {
     ] = await Promise.all([
       identityState(identityVerifier),
       optionalOperationalState(options.academicReadiness),
+      academicDatabaseState(academicDatabase),
       durableState(durablePorts),
       productionPolicyState(durablePorts),
       optionalOperationalState(session17.authorizedRecipientResolver),
@@ -193,8 +222,14 @@ export function createStudyProductionReadinessService(options = {}) {
     const statusByDependency = new Map()
     for (const key of IDENTITY_DEPENDENCIES) statusByDependency.set(key, identity)
     // The safety reconciliation probe does not prove the Session 13 academic
-    // RPC set. Those adapters require their own injected live probe.
-    for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) statusByDependency.set(key, academic)
+    // RPC set. Those adapters require their own injected live probe — and, since
+    // the durable readiness RPC landed, agreement from it as well. The operation
+    // surface says Netlify composition supports the dependency; the durable probe
+    // says the underlying server contract exists in the expected shape. Neither
+    // is allowed to report a dependency ready on its own.
+    for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) {
+      statusByDependency.set(key, combineAcademicReadiness(academic, academicDatabaseFacts[key]))
+    }
     for (const key of SAFETY_DURABLE_DEPENDENCIES) statusByDependency.set(key, safetyDurable)
     statusByDependency.set('outbox-store', adultReviewStatus)
     statusByDependency.set('rate-limiter', limiter === 'ready' ? adultReviewStatus : limiter)

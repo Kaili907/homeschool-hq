@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "recordType": "hosted-applied-provenance",
+  "recordedOn": "2026-08-07",
+  "projectRef": "ymtvzmqhfvwjtxjdmybs",
+  "supersedes": {
+    "hosted-foundation-baseline-evidence.json": "Authored while hosted access was unavailable. Its facts stand as written; its historicalVersions list names three versions and its authorization flags remain deliberately closed. This record does not reopen them.",
+    "hosted-re-preflight-report.md": "Its headline — hosted re-preflight not performed, verified access unavailable — was true when written and remains true of that sitting. Later evidence, not a later re-preflight, established what follows."
+  },
+  "claimBoundary": {
+    "newHostedVerificationThisSession": false,
+    "statement": "This record performs NO hosted contact of any kind. It transcribes provenance already recorded in this repository into the migration manifest, so that the manifest stops describing ten already-applied migrations as executable work. Every fact below was established elsewhere and earlier; nothing here was observed by the session that wrote this file.",
+    "authorizesHostedMutation": false
+  },
+  "ledgerRecordedVersions": [
+    "20260724074106",
+    "20260724230000",
+    "20260726120000",
+    "20260731120000",
+    "20260801010000",
+    "20260801011000",
+    "20260801012000",
+    "20260801160000",
+    "20260801170000",
+    "20260801190000"
+  ],
+  "evidenceBasis": {
+    "foundationFour": {
+      "versions": [
+        "20260724074106",
+        "20260724230000",
+        "20260726120000",
+        "20260731120000"
+      ],
+      "event": "The Aug 2 2026 hosted reset ended at a clean four-row migration ledger, local and remote.",
+      "source": "PARKED.md CL5(i); transcript recovered from the dispatch thread; laptop PSReadLine lines 67-88 recorded as the complete operation; link stamp 2026-08-02 11:12:52 ET.",
+      "strength": "PARTIAL",
+      "knownDiscrepancy": "hosted-foundation-baseline-evidence.json lists only three historicalVersions and omits 20260731120000. The four-row count in CL5(i) and the four foundation content_md5 fingerprints below both cover four versions. The two records disagree on membership, and the four-member reading rests on the ledger row count and the fingerprint table rather than on an enumerated four-version list in the evidence JSON. This disagreement is recorded, not resolved; resolving it requires hosted access this record does not have."
+    },
+    "studySix": {
+      "versions": [
+        "20260801010000",
+        "20260801011000",
+        "20260801012000",
+        "20260801160000",
+        "20260801170000",
+        "20260801190000"
+      ],
+      "event": "Postgres logs witness a single 19-second DDL burst, 2026-08-03 23:19:10-29 UTC: 561 statements, CLI ledger preamble first, the Study chain in order, 20260801160000's readiness function at 23:19:22, PostgREST schema reload +0.2s — a supabase db push applying the six Study migrations.",
+      "source": "PARKED.md CL5(ii) and CL14; ruled hosted state EQUIVALENT-TO-AUDITED with the ten-migration chain fully applied as of the Aug 3 2026 A5 sitting.",
+      "strength": "PARTIAL",
+      "attribution": "A credential census across two machines and a full worktree sweep found exactly two link events ever — laptop 2026-08-02 11:12 ET and PC 2026-08-03 18:54 ET, both the same operator. No unattributed actor exists in the record."
+    }
+  },
+  "byteEquivalence": {
+    "strong": {
+      "version": "20260801160000",
+      "filename": "20260801160000_academy_study_verified_identity.sql",
+      "method": "Read-only dashboard capture of the applied SQL compared against the local file under blank-line-stripped normalization. 529 captured lines against 546 local lines, 509 substantive lines on both sides.",
+      "blankLineNormalizedSha256": "af22430400802faeb51ab6f8b0dfd99fb5701f660c9c9f55689b74d9531ab172",
+      "localRawByteSha256": "f803fbd3aa2c93ac94775c37f262e476d142d2974d5a3c5162050133dc6f9414",
+      "canonicalLfSha256": "4501be3757cb0baf53edc200e7673744b12626eeb84dd56d6fc2899e3d25338e",
+      "source": "PARKED.md CL14."
+    },
+    "partial": {
+      "versions": [
+        "20260724074106",
+        "20260724230000",
+        "20260726120000",
+        "20260731120000",
+        "20260801010000",
+        "20260801011000",
+        "20260801012000",
+        "20260801170000",
+        "20260801190000"
+      ],
+      "method": "Version-ledger match plus structural reconciliation — function inventory and RLS map — and NOT byte comparison. The per-file byte procedure is recorded as proven at roughly ten minutes per file but was never run for these nine.",
+      "source": "PARKED.md accepted residual R2(i)."
+    }
+  },
+  "hostedContentMd5ByVersion": {
+    "note": "md5 of the joined statements array per version, captured read-only from the hosted dashboard in Chrome round 1. Accepted residual R2(ii) records that these were NOT independently reproduced locally; they are belt-and-braces corroboration and are not load-bearing for any claim in this file.",
+    "20260724074106": "993aceade5a8fade17b68c641342472c",
+    "20260724230000": "3cda983cb7e5d757dd8089f09c5b651a",
+    "20260726120000": "6ca96f3dda460c0b140d1e6d5a9da7fa",
+    "20260731120000": "1dcf1a94e9939663cf184e8555357a82",
+    "20260801010000": "0186a78f2a0cbd4b5be4d144e41bab7e",
+    "20260801011000": "7533a2a9bc8fa3a3cf14b050b98ea905",
+    "20260801012000": "224af074257a637fc75eb5b98cbe484d",
+    "20260801160000": "59187949a5044a2fedbbc6e1020523de",
+    "20260801170000": "6d6e3c9ca4ab64c71c4c031b6a07c70a",
+    "20260801190000": "b00965f64b371e63923a2f377e32ba99"
+  },
+  "localRawByteSha256AtCommit6e78632": {
+    "note": "Raw-byte SHA-256 of the six Study migration files as checked out at master 6e78632, recorded from the A5-PRE pre-flight paste; 20260801160000 re-witnessed fresh Aug 4 2026. These are RAW-BYTE hashes and are deliberately not the manifest's canonical LF hashes — on this Windows estate a checkout can inflate LF files to CRLF, so the two differ by normalization and must never be compared directly.",
+    "20260801010000": "2d3123ce42fc7d602745d43fc5392359b7e383946b6ff646f19fe46c09b364b1",
+    "20260801011000": "72f43830f0c80145a016847dbad266b2c348bd2d3e8727500ec382932501b2ac",
+    "20260801012000": "6e9fc40845e51e090bc0b5561e3b68ae69dc360b0445ae484dbc4682e101ba34",
+    "20260801160000": "f803fbd3aa2c93ac94775c37f262e476d142d2974d5a3c5162050133dc6f9414",
+    "20260801170000": "fece2318c482b8421d88572d1facb9e6293c0b3e8add521f5ff6f062dfda6107",
+    "20260801190000": "83c27caec34b3c685e86fe0b070aca00b4882263df146c829ae06920ac244c6a"
+  },
+  "correctedBytesWereTheAppliedBytes": {
+    "question": "20260801170000 was corrected in place to supersede the unsafe Session 17 bytes. Once the Aug 3 2026 burst is known to have applied that migration, 'corrected before first application' stops being a plan and becomes a checkable claim: were the corrected bytes the ones that ran?",
+    "method": "Derived in-repository, no hosted contact. Each checked-in migration file was hashed as checked out on a CRLF working tree and compared against the A5-PRE raw-byte record taken at master 6e78632 — the tree the Aug 3 burst pushed from.",
+    "result": "Both files whose raw-byte hashes the A5-PRE record preserves reproduce exactly: 20260801170000 hashes to fece2318c482b8421d88572d1facb9e6293c0b3e8add521f5ff6f062dfda6107 and 20260801160000 to f803fbd3aa2c93ac94775c37f262e476d142d2974d5a3c5162050133dc6f9414, matching the record. The current file's canonical LF hash is 562b67462148d9e94933b0fd9007fad37a3b0a08cb8432383c0b228088c0d8eb, the CORRECTED checksum, not the unsafe 46c68426d21a79b90a3011d5fbfcca19044393887636dd845ca362f6e4e69443.",
+    "conclusion": "The migration bytes at 6e78632 were the corrected bytes, so the Aug 3 burst applied the corrected definition. supersessionStatus 'supersedes-before-first-application' remains accurate: the supersession did precede first application, and first application has now occurred.",
+    "limitation": "This proves what the LOCAL tree held at 6e78632. It does not independently observe what the hosted project received. The link from local tree to hosted apply is the PARKED.md CL5(ii) log evidence, which carries that section's PARTIAL strength."
+  },
+  "provenanceLimitations": [
+    "PARKED.md is a SECONDARY repository summary. It is a record of rulings and witnessed findings written after the fact, not a primary artifact.",
+    "The PRIMARY artifacts — hosted Postgres logs, the dashboard captures, and the dispatch-thread terminal transcripts — are NOT checked into this repository and cannot be re-read from it.",
+    "The hosted organization is on the Supabase FREE plan with one-day log retention, and log_connections/log_disconnections are off. The Aug 3 2026 DDL-burst log window expired long before this record was written, so the primary evidence for the six Study migrations is permanently unrecoverable. It cannot be re-derived by any later session, authorized or not.",
+    "Nine of the ten migrations rest on version-ledger match and structural reconciliation rather than byte comparison. Only 20260801160000 carries a side-by-side content comparison.",
+    "The foundation-four membership disagrees with hosted-foundation-baseline-evidence.json as recorded above.",
+    "This file records that these migrations ARE in hosted history. It does NOT record that the hosted objects are byte-identical to the current repository files, and nothing here licenses skipping a future equivalence check."
+  ],
+  "consequenceForThisRepository": {
+    "derivedAsOf": "2026-08-08",
+    "derivedAsOfNote": "This consequence section — and only this section — was restated after the C2 operations contract was composed onto this reconciliation. The restatement is arithmetic on the current lineage, not new provenance: no hosted contact was made, no historical evidence above this section was reopened, re-derived, or weakened, and every claim about what is in hosted history still rests exactly on the record as originally written. The prior text named a single remaining executable migration and was accurate on the eleven-file lineage it was written against; the lineage grew to twelve files and that count had fallen behind. It was extended again the same day, to thirteen files, when the actor-bound session verification overload was appended — recorded here in the same derived section and under the same limits. Nothing here promotes, demotes, or re-approves any migration, and no evidence flag is set: the preflight gate still returns allowed:false.",
+    "manifest": "All ten are classified historical-baseline with applicationStatus hosted-applied-ledger-recorded in migration-manifest.json.",
+    "frozenFloor": "All ten are members of FROZEN_HISTORICAL_BASELINE_FILENAMES in scripts/study-migration-preflight.mjs, so no manifest this estate can present may offer any of them as executable work.",
+    "remainingExecutable": [
+      "20260806120000_academy_study_in_app_receipt_timestamp.sql",
+      "20260806140000_academy_study_c2_operations_contract.sql",
+      "20260808120000_academy_study_actor_bound_session_verification.sql"
+    ],
+    "remainingExecutableNote": "The first two were authored Aug 6 2026 and the third Aug 8 2026, all after the Aug 3 burst, each depending on the one before it. None has ever run against the hosted project; all stay classified executable with applicationStatus not-applied-hosted. This list is the executable set as of derivedAsOf and is expected to grow as forward migrations are appended — it is a statement of the current lineage, never a ceiling on it. The load-bearing invariant is the frozen floor above, which no append can move. Listing a migration here asserts only that it has NOT been applied; it is not an approval to apply it, and no checksum here is approved for execution.",
+    "gateState": "The preflight authorization gate remains allowed:false. This record does not set, and must not be read as setting, any of its evidence flags."
+  }
+}

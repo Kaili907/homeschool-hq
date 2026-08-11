@@ -6,9 +6,9 @@ import {
 } from './external-provider.js'
 
 const delivery = Object.freeze({
-  idempotencyKey: `study-safety-delivery:${'a'.repeat(64)}`,
+  idempotencyKey: `delivery:${'a'.repeat(64)}`,
   attemptId: 'attempt:synthetic-1',
-  recipientRef: 'recipient:synthetic-guardian',
+  recipientRef: `recipient:${'c'.repeat(64)}`,
   routeRef: 'email-route:synthetic-guardian',
   templateCode: 'study-safety-adult-review-v1',
 })

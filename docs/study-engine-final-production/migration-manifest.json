@@ -9,7 +9,7 @@
       "sha256": "16c609d24efb9b9694b410a2313e5f2f7228db5118e2ccc4fa779f03c1d53c51",
       "dependency": null,
       "classification": "historical-baseline",
-      "applicationStatus": "hosted-equivalent-baseline-pending-authorization",
+      "applicationStatus": "hosted-applied-ledger-recorded",
       "requiredMarkerTransition": "academy-foundation-profiles-base",
       "supersessionStatus": "current"
     },
@@ -19,7 +19,7 @@
       "sha256": "2c7825ba957b68a39413a1e2da81aebaa72fb35dde7abeeba6ea8a493ecf3bde",
       "dependency": "20260724074106_academy_profiles_base.sql",
       "classification": "historical-baseline",
-      "applicationStatus": "hosted-equivalent-baseline-pending-authorization",
+      "applicationStatus": "hosted-applied-ledger-recorded",
       "requiredMarkerTransition": "academy-foundation-identity-v1",
       "supersessionStatus": "current"
     },
@@ -29,7 +29,7 @@
       "sha256": "0d5556db9f1dc406234e08180051e8d54807870084223b25db18017b1648c268",
       "dependency": "20260724230000_academy_student_identity_foundation.sql",
       "classification": "historical-baseline",
-      "applicationStatus": "hosted-equivalent-baseline-pending-authorization",
+      "applicationStatus": "hosted-applied-ledger-recorded",
       "requiredMarkerTransition": "academy-household-revision-cas-v1",
       "supersessionStatus": "current"
     },
@@ -39,7 +39,7 @@
       "sha256": "9eb92005e9c98e94f3fa365351ab527d01cee47da2d0ceac3db0a4e60d82c86f",
       "dependency": "20260726120000_academy_household_revision_cas.sql",
       "classification": "historical-baseline",
-      "applicationStatus": "hosted-equivalent-baseline-pending-authorization",
+      "applicationStatus": "hosted-applied-ledger-recorded",
       "requiredMarkerTransition": "academy-gateway-usage-v1",
       "supersessionStatus": "current"
     },
@@ -48,8 +48,8 @@
       "filename": "20260801010000_academy_study_engine_storage.sql",
       "sha256": "7ebb25b0517f3b79b36e0399757715826a634fbdf731a9716fdeeb4dad9da0fa",
       "dependency": "20260731120000_academy_gateway_usage.sql",
-      "classification": "executable",
-      "applicationStatus": "not-applied-hosted",
+      "classification": "historical-baseline",
+      "applicationStatus": "hosted-applied-ledger-recorded",
       "requiredMarkerTransition": "storage_version:0->1",
       "supersessionStatus": "current"
     },
@@ -58,8 +58,8 @@
       "filename": "20260801011000_academy_study_engine_authorization.sql",
       "sha256": "3e4fe306b9edfb17cf3fbf0f62b4c5565fdccc9abde1726d7205c60d822acfad",
       "dependency": "20260801010000_academy_study_engine_storage.sql",
-      "classification": "executable",
-      "applicationStatus": "not-applied-hosted",
+      "classification": "historical-baseline",
+      "applicationStatus": "hosted-applied-ledger-recorded",
       "requiredMarkerTransition": "authorization_version:0->1",
       "supersessionStatus": "current"
     },
@@ -68,8 +68,8 @@
       "filename": "20260801012000_academy_study_engine_production_reconciliation.sql",
       "sha256": "8675afe9f5c802689234fc769e09a4f42bf7a19eba6c88bfeadb816a048910d3",
       "dependency": "20260801011000_academy_study_engine_authorization.sql",
-      "classification": "executable",
-      "applicationStatus": "not-applied-hosted",
+      "classification": "historical-baseline",
+      "applicationStatus": "hosted-applied-ledger-recorded",
       "requiredMarkerTransition": "production_reconciliation_version:0->1",
       "supersessionStatus": "current"
     },
@@ -78,8 +78,8 @@
       "filename": "20260801160000_academy_study_verified_identity.sql",
       "sha256": "4501be3757cb0baf53edc200e7673744b12626eeb84dd56d6fc2899e3d25338e",
       "dependency": "20260801012000_academy_study_engine_production_reconciliation.sql",
-      "classification": "executable",
-      "applicationStatus": "not-applied-hosted",
+      "classification": "historical-baseline",
+      "applicationStatus": "hosted-applied-ledger-recorded",
       "requiredMarkerTransition": "verified_identity_version:0->1",
       "supersessionStatus": "current"
     },
@@ -88,8 +88,8 @@
       "filename": "20260801170000_academy_study_adult_review_operations.sql",
       "sha256": "562b67462148d9e94933b0fd9007fad37a3b0a08cb8432383c0b228088c0d8eb",
       "dependency": "20260801160000_academy_study_verified_identity.sql",
-      "classification": "executable",
-      "applicationStatus": "not-applied-hosted",
+      "classification": "historical-baseline",
+      "applicationStatus": "hosted-applied-ledger-recorded",
       "requiredMarkerTransition": "adult_review_operations_version:0->2",
       "supersessionStatus": "supersedes-before-first-application",
       "supersedesSha256": "46c68426d21a79b90a3011d5fbfcca19044393887636dd845ca362f6e4e69443"
@@ -99,9 +99,49 @@
       "filename": "20260801190000_academy_study_final_production_reconciliation.sql",
       "sha256": "d4ccea295aac2bda67dbfd310650e1c625de867485ecc47f5e993f74c8006d00",
       "dependency": "20260801170000_academy_study_adult_review_operations.sql",
+      "classification": "historical-baseline",
+      "applicationStatus": "hosted-applied-ledger-recorded",
+      "requiredMarkerTransition": "final_production_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260806120000",
+      "filename": "20260806120000_academy_study_in_app_receipt_timestamp.sql",
+      "sha256": "b690c634b9c629149d570c9ffc5e1664b060be1d9f45f76cb461503de2c6f3b6",
+      "dependency": "20260801190000_academy_study_final_production_reconciliation.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
-      "requiredMarkerTransition": "final_production_version:0->1",
+      "requiredMarkerTransition": "security_manifest.in_app_receipt_delivered_at_normalized:absent->true",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260806140000",
+      "filename": "20260806140000_academy_study_c2_operations_contract.sql",
+      "sha256": "8448c6d1d6eec2247a913cfb18bd21b8fd9f6793bab5acd81b414878e5333baf",
+      "dependency": "20260806120000_academy_study_in_app_receipt_timestamp.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "c2_operations_contract_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260808120000",
+      "filename": "20260808120000_academy_study_actor_bound_session_verification.sql",
+      "sha256": "21462128be7f207cd31e60620acc1ec125f61e2e62fa2c41bb7272a764750f83",
+      "dependency": "20260806140000_academy_study_c2_operations_contract.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "actor_binding_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260808150000",
+      "filename": "20260808150000_academy_study_academic_readiness_contract.sql",
+      "sha256": "c53d383e56601700eddf6dbc683cfcc3a23b3612e33ec7386dfe0210befcf58d",
+      "dependency": "20260808120000_academy_study_actor_bound_session_verification.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academic_readiness_version:0->1",
       "supersessionStatus": "current"
     }
   ]

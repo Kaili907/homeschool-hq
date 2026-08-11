@@ -27,6 +27,7 @@ export function createStudyProductionReadinessHandler(overrides = {}) {
     identityVerifier: overrides.identityVerifier,
     durablePorts: overrides.durablePorts,
     academicReadiness: overrides.academicReadiness,
+    academicDatabaseReadiness: overrides.academicDatabaseReadiness,
     classifier: overrides.classifier,
     session17: overrides.session17,
   })
