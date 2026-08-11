@@ -116,6 +116,95 @@ function validParentHubPorts(): ProductionStudyParentHubPorts {
   }
 }
 
+const exactRoleError = 'exactly the six adult roles'
+type ExactRoleValidator = (ports: object) => void
+const exactRoleValidatorCases: readonly Readonly<{
+  name: string
+  validate: ExactRoleValidator
+}>[] = [
+  {
+    name: 'completeness assertion',
+    validate: (ports) => assertCompleteProductionStudyParentHubPorts(
+      ports as Partial<ProductionStudyParentHubPorts>,
+    ),
+  },
+  {
+    name: 'six-role constructor',
+    validate: (ports) => {
+      defineProductionStudyParentHubPorts(ports as unknown as ProductionStudyParentHubPorts)
+    },
+  },
+]
+
+describe.each(exactRoleValidatorCases)('$name exact-role boundary', ({ validate }) => {
+  it('rejects a hidden required role', () => {
+    const ports = validParentHubPorts()
+    Object.defineProperty(ports, 'settings', {
+      value: ports.settings,
+      enumerable: false,
+      configurable: true,
+    })
+    expect(() => validate(ports)).toThrow(exactRoleError)
+  })
+
+  it('rejects a hidden extra role', () => {
+    const ports = validParentHubPorts()
+    Object.defineProperty(ports, 'hiddenSeventh', { value: {}, enumerable: false })
+    expect(() => validate(ports)).toThrow(exactRoleError)
+  })
+
+  it('rejects a symbol extra role', () => {
+    const ports = validParentHubPorts() as ProductionStudyParentHubPorts & Record<PropertyKey, unknown>
+    ports[Symbol('seventh')] = {}
+    expect(() => validate(ports)).toThrow(exactRoleError)
+  })
+
+  it('rejects an accessor role without invoking it', () => {
+    const ports = validParentHubPorts()
+    let reads = 0
+    Object.defineProperty(ports, 'settings', {
+      get: () => { reads += 1; return validParentHubPorts().settings },
+      enumerable: true,
+    })
+    expect(() => validate(ports)).toThrow(exactRoleError)
+    expect(reads).toBe(0)
+  })
+
+  it('rejects an inherited role', () => {
+    const valid = validParentHubPorts()
+    const ports = Object.assign(
+      Object.create({ settings: valid.settings }) as Record<PropertyKey, unknown>,
+      valid,
+    )
+    delete (ports as unknown as Record<PropertyKey, unknown>).settings
+    expect(() => validate(ports)).toThrow(exactRoleError)
+  })
+
+  it('rejects a missing role', () => {
+    const ports = validParentHubPorts() as unknown as Record<PropertyKey, unknown>
+    delete ports.settings
+    expect(() => validate(ports)).toThrow(exactRoleError)
+  })
+
+  it('rejects an extra seventh role', () => {
+    const ports = validParentHubPorts() as ProductionStudyParentHubPorts & Record<PropertyKey, unknown>
+    ports.seventh = {}
+    expect(() => validate(ports)).toThrow(exactRoleError)
+  })
+
+  it('converts property-inspection failures into controlled refusal', () => {
+    const ownKeysFailure = new Proxy(validParentHubPorts(), {
+      ownKeys: () => { throw new Error('hostile ownKeys') },
+    })
+    expect(() => validate(ownKeysFailure)).toThrow(exactRoleError)
+
+    const descriptorFailure = new Proxy(validParentHubPorts(), {
+      getOwnPropertyDescriptor: () => { throw new Error('hostile descriptor') },
+    })
+    expect(() => validate(descriptorFailure)).toThrow(exactRoleError)
+  })
+})
+
 describe('Parent Hub production contract boundary', () => {
   it('declares exactly the six complete adult roles', () => {
     expect(PARENT_HUB_PRODUCTION_ROLE_KEYS).toEqual([
@@ -136,72 +225,43 @@ describe('Parent Hub production contract boundary', () => {
   })
 
   it('fails clearly when any adult role is missing', () => {
-    expect(() => assertCompleteProductionStudyParentHubPorts({})).toThrow(
-      'missing settings, reviews, calendar, safetyReview, adultPrivate, notifications port',
-    )
+    expect(() => assertCompleteProductionStudyParentHubPorts({})).toThrow(exactRoleError)
   })
 
-  it('defines a detached frozen snapshot of exactly six own data roles', () => {
+  it('accepts ordinary and null-prototype exact-role records and defines a detached frozen snapshot', () => {
     const ports = validParentHubPorts()
+    expect(() => assertCompleteProductionStudyParentHubPorts(ports)).not.toThrow()
     const defined = defineProductionStudyParentHubPorts(ports)
 
     expect(defined).not.toBe(ports)
     expect(Object.isFrozen(defined)).toBe(true)
     expect(Reflect.ownKeys(defined)).toEqual(PARENT_HUB_PRODUCTION_ROLE_KEYS)
     for (const role of PARENT_HUB_PRODUCTION_ROLE_KEYS) expect(defined[role]).toBe(ports[role])
+
+    const nullPrototype = Object.assign(
+      Object.create(null) as ProductionStudyParentHubPorts,
+      ports,
+    )
+    expect(() => assertCompleteProductionStudyParentHubPorts(nullPrototype)).not.toThrow()
+    expect(defineProductionStudyParentHubPorts(nullPrototype)).toEqual(defined)
   })
 
-  it('rejects symbol and hidden seventh capabilities', () => {
-    const withSymbol = validParentHubPorts() as ProductionStudyParentHubPorts & Record<PropertyKey, unknown>
-    withSymbol[Symbol('seventh')] = {}
-    expect(() => defineProductionStudyParentHubPorts(withSymbol)).toThrow('exactly the six adult roles')
+  it('makes one descriptor read per accepted role and never reads caller properties', () => {
+    for (const { validate } of exactRoleValidatorCases) {
+      const ports = validParentHubPorts()
+      const descriptorReads = new Map<PropertyKey, number>()
+      const guarded = new Proxy(ports, {
+        get: () => { throw new Error('caller property read') },
+        getOwnPropertyDescriptor: (target, key) => {
+          descriptorReads.set(key, (descriptorReads.get(key) ?? 0) + 1)
+          return Reflect.getOwnPropertyDescriptor(target, key)
+        },
+      })
 
-    const withHidden = validParentHubPorts()
-    Object.defineProperty(withHidden, 'hiddenSeventh', { value: {}, enumerable: false })
-    expect(() => defineProductionStudyParentHubPorts(withHidden)).toThrow('exactly the six adult roles')
-  })
-
-  it('rejects accessor roles without invoking them', () => {
-    const withAccessor = validParentHubPorts()
-    let reads = 0
-    Object.defineProperty(withAccessor, 'settings', {
-      get: () => { reads += 1; return validParentHubPorts().settings },
-      enumerable: true,
-    })
-
-    expect(() => defineProductionStudyParentHubPorts(withAccessor)).toThrow('exactly the six adult roles')
-    expect(reads).toBe(0)
-  })
-
-  it('rejects inherited, missing, and extra roles', () => {
-    const inherited = Object.create({ settings: validParentHubPorts().settings }) as ProductionStudyParentHubPorts
-    Object.assign(inherited, validParentHubPorts())
-    delete (inherited as unknown as Record<string, unknown>).settings
-
-    expect(() => defineProductionStudyParentHubPorts(inherited)).toThrow('exactly the six adult roles')
-    expect(() => defineProductionStudyParentHubPorts({
-      ...validParentHubPorts(), settings: undefined,
-    } as unknown as ProductionStudyParentHubPorts)).toThrow('exactly the six adult roles')
-    expect(() => defineProductionStudyParentHubPorts({
-      ...validParentHubPorts(), seventh: {},
-    } as unknown as ProductionStudyParentHubPorts)).toThrow('exactly the six adult roles')
-  })
-
-  it('reads each role descriptor exactly once and never reads the caller through getters', () => {
-    const ports = validParentHubPorts()
-    const descriptorReads = new Map<PropertyKey, number>()
-    const guarded = new Proxy(ports, {
-      get: () => { throw new Error('caller property read') },
-      getOwnPropertyDescriptor: (target, key) => {
-        descriptorReads.set(key, (descriptorReads.get(key) ?? 0) + 1)
-        return Reflect.getOwnPropertyDescriptor(target, key)
-      },
-    })
-
-    const defined = defineProductionStudyParentHubPorts(guarded)
-    for (const role of PARENT_HUB_PRODUCTION_ROLE_KEYS) {
-      expect(descriptorReads.get(role)).toBe(1)
-      expect(defined[role]).toBe(ports[role])
+      expect(() => validate(guarded)).not.toThrow()
+      for (const role of PARENT_HUB_PRODUCTION_ROLE_KEYS) {
+        expect(descriptorReads.get(role)).toBe(1)
+      }
     }
   })
 

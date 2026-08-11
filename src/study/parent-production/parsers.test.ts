@@ -189,9 +189,90 @@ const resultParserCases: readonly RequestParserCase[] = [
   },
 ]
 
+type StrictListParserCase = Readonly<{
+  name: string
+  parse: RequestParser
+  field: 'reviews' | 'blocks' | 'notifications'
+  validItem: () => Record<string, unknown>
+}>
+
+const strictListParserCases: readonly StrictListParserCase[] = [
+  {
+    name: 'reviews list result', parse: parseReviewsListResult, field: 'reviews',
+    validItem: () => ({ ...review }),
+  },
+  {
+    name: 'calendar list result', parse: parseCalendarListResult, field: 'blocks',
+    validItem: () => ({ ...calendarBlock }),
+  },
+  {
+    name: 'safety review list result', parse: parseSafetyReviewListOpenResult, field: 'reviews',
+    validItem: () => ({ ...safetyReview }),
+  },
+  {
+    name: 'notifications list result', parse: parseNotificationsListResult, field: 'notifications',
+    validItem: () => ({ ...notification }),
+  },
+]
+
 function expectRefusalWithoutThrow(parse: RequestParser, value: unknown): void {
   expect(() => expect(parse(value)).toBeNull()).not.toThrow()
 }
+
+function listResult(field: StrictListParserCase['field'], value: unknown): Record<string, unknown> {
+  return { status: 'listed', [field]: value }
+}
+
+describe.each(strictListParserCases)('$name strict-array boundary', ({ parse, field, validItem }) => {
+  it('rejects a symbol property', () => {
+    const items = [validItem()]
+    Object.defineProperty(items, Symbol('array-capability'), { value: true, enumerable: true })
+    expectRefusalWithoutThrow(parse, listResult(field, items))
+  })
+
+  it('rejects a hidden custom property', () => {
+    const items = [validItem()]
+    Object.defineProperty(items, 'hiddenCapability', { value: true, enumerable: false })
+    expectRefusalWithoutThrow(parse, listResult(field, items))
+  })
+
+  it('rejects an enumerable custom property', () => {
+    const items = [validItem()] as unknown as Record<PropertyKey, unknown>
+    items.customCapability = true
+    expectRefusalWithoutThrow(parse, listResult(field, items))
+  })
+
+  it('rejects accessor indices and properties without invoking them', () => {
+    const accessorIndex = [validItem()]
+    let indexReads = 0
+    Object.defineProperty(accessorIndex, '0', {
+      get: () => { indexReads += 1; return validItem() },
+      enumerable: true,
+    })
+    expectRefusalWithoutThrow(parse, listResult(field, accessorIndex))
+    expect(indexReads).toBe(0)
+
+    const accessorProperty = [validItem()]
+    let propertyReads = 0
+    Object.defineProperty(accessorProperty, 'customCapability', {
+      get: () => { propertyReads += 1; return true },
+      enumerable: true,
+    })
+    expectRefusalWithoutThrow(parse, listResult(field, accessorProperty))
+    expect(propertyReads).toBe(0)
+  })
+
+  it('rejects a sparse array', () => {
+    const items = new Array(1) as unknown[]
+    expectRefusalWithoutThrow(parse, listResult(field, items))
+  })
+
+  it('rejects a nonstandard array prototype', () => {
+    const items = [validItem()]
+    Object.setPrototypeOf(items, null)
+    expectRefusalWithoutThrow(parse, listResult(field, items))
+  })
+})
 
 describe.each(requestParserCases)('$name request own-property boundary', ({ parse, valid, requiredField }) => {
   it('rejects an unknown symbol key', () => {
