@@ -30,6 +30,13 @@ continue to reauthorize the global write capability, while a draft update
 trigger independently requires the database-current editor assignment. An
 assignment therefore never grants a missing global capability.
 
+Draft-context standards reads, approval status, and staging status apply the
+same assignment requirement inside their service-role RPCs. Standards
+decisions, validation persistence, approval decisions, and staging mutations
+require a database-current editor assignment in addition to their existing
+global capability. The prior unscoped implementations are retained only as
+ungranted implementation functions behind those wrappers.
+
 Collaborator add/revoke RPCs require global draft-write capability plus an
 active editor assignment. Targets are database-verified current Admin
 principals; an editor target must currently be an `admin` or `owner`, while a

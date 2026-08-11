@@ -59,7 +59,10 @@ function setup(authorizationResult = {
     readStaging: vi.fn(async () => stageStatus()),
     stageDraft: vi.fn(async () => stageStatus(false)),
   }
-  const authoring = { read: vi.fn(async () => ({ draftId: DRAFT, revision: 3 })) }
+  const authoring = {
+    read: vi.fn(async () => ({ draftId: DRAFT, revision: 3 })),
+    listCollaborators: vi.fn(async () => ({ currentResponsibility: 'editor' })),
+  }
   const handler = createAdminCurriculumHandler({
     authorization,
     studio,
@@ -93,6 +96,18 @@ describe('Admin curriculum release staging HTTP boundary', () => {
     expect(studio.readStaging).toHaveBeenCalledWith(ACTOR, DRAFT)
     expect(studio.stageDraft).toHaveBeenCalledWith(ACTOR, DRAFT, 3, REQUEST)
     expect(JSON.parse(stage.body).candidate.publicationStatus).toBe('not_published')
+  })
+
+  it('keeps a globally authorized reviewer from staging', async () => {
+    const { authoring, studio, handler } = setup()
+    authoring.listCollaborators.mockResolvedValue({ currentResponsibility: 'reviewer' })
+    expect((await handler(event('GET', `/api/admin/curriculum/drafts/${DRAFT}/staging`))).statusCode).toBe(200)
+    const response = await handler(event('POST', `/api/admin/curriculum/drafts/${DRAFT}/staging`, {
+      draftRevision: 3, idempotencyKey: REQUEST,
+    }))
+    expect(response.statusCode).toBe(403)
+    expect(response.body).not.toContain('reviewer')
+    expect(studio.stageDraft).not.toHaveBeenCalled()
   })
 
   it('ignores forged role headers and fails before staging when authorization denies', async () => {

@@ -38,4 +38,17 @@ describe('curriculum standards review HTTP source', () => {
     await expect(createCurriculumStandardsReviewHttpSource(fetchImpl, async () => 'token').list('published_release', '1.0.0'))
       .rejects.toMatchObject({ code: 'unavailable' })
   })
+
+  it('rejects nested unexpected keys and cross-context decision identities', async () => {
+    for (const injected of [
+      { ...decision, reviewerNote: null, providerData: { secret: true } },
+      { ...decision, contextRef: '2.0.0' },
+    ]) {
+      const fetchImpl = vi.fn().mockResolvedValue({
+        ok: true, status: 200, json: async () => ({ schemaVersion: 1, decisions: [injected] }),
+      })
+      await expect(createCurriculumStandardsReviewHttpSource(fetchImpl, async () => 'token')
+        .list('published_release', '1.0.0')).rejects.toMatchObject({ code: 'unavailable' })
+    }
+  })
 })

@@ -4,6 +4,43 @@ import { adaptCurriculumPreview, createCurriculumDraftAuthoringHttpSource } from
 const DRAFT = '10000000-0000-4000-8000-000000000001'
 const REQUEST = '20000000-0000-4000-8000-000000000001'
 
+const emptyTotals = {
+  resources: 0, active: 0, referenced: 0, unreferenced: 0, overridden: 0,
+  draftCreated: 0, tombstoned: 0, missingReferences: 0, invalidReferences: 0,
+  referenceOccurrences: 0, validationInvalid: 0,
+}
+
+function emptyLibrary(origin: 'published-release' | 'draft') {
+  return {
+    schemaVersion: 1,
+    source: {
+      origin, baseReleaseVersion: '1.0.0',
+      draftId: origin === 'draft' ? DRAFT : null,
+      draftRevision: origin === 'draft' ? 4 : null,
+    },
+    totals: emptyTotals,
+    items: [],
+  }
+}
+
+function validationResult() {
+  return {
+    schemaVersion: 1, draftId: DRAFT, draftRevision: 4,
+    baseReleaseVersion: '1.0.0', targetVersion: '2.0.0-draft.1',
+    validationSnapshot: {
+      validationSnapshotId: '30000000-0000-4000-8000-000000000001', draftRevision: 4,
+      engineVersion: 'curriculum-validation-v2', resultDigest: 'b'.repeat(64), status: 'valid',
+      publicationReady: true, blockingCount: 0, blockingErrorCount: 0,
+      humanReviewBlockerCount: 0, validatedAt: '2026-08-10T12:00:00Z',
+    },
+    run: {
+      engineVersion: 'curriculum-validation-v2', status: 'valid', statusMessage: 'Valid.', publicationReady: true,
+      source: { origin: 'draft', snapshotId: `${DRAFT}@4`, curriculumVersion: '2.0.0-draft.1', schemaSetVersion: '2.0.0' },
+      summary: { total: 0, errors: 0, warnings: 0, info: 0, blocking: 0, nonBlocking: 0 }, findings: [],
+    },
+  }
+}
+
 function preview(validationRevision = 4) {
   const zero = { unchanged: 0, added: 0, modified: 0, removed: 0 }
   return {
@@ -92,7 +129,31 @@ describe('Curriculum Studio authoring HTTP source', () => {
   })
 
   it('uses narrow GET routes for immutable entities, materialization, and revision-bound validation', async () => {
-    const fetchImpl = vi.fn().mockResolvedValue({ ok: true, status: 200, json: vi.fn().mockResolvedValue({ schemaVersion: 1 }) })
+    const fetchImpl = vi.fn().mockImplementation(async (path: string) => ({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue(
+        path.includes('/authoring/entities/') ? {
+          schemaVersion: 1,
+          baseReleaseVersion: '1.0.0',
+          entityType: 'course',
+          entityRef: 'course:math-5',
+          payload: {
+            schema_set_version: '2.0.0', course_id: 'course:math-5', grade: 5,
+            subject: 'mathematics', title: 'Mathematics 5',
+            description: 'A complete fifth grade mathematics course.', days: 180, order: 1,
+            unit_refs: ['unit:math-5-1'],
+            standards: [{ framework_ref: 'framework:legacy', legacy_label: '5.NBT', mapping_status: 'human-review' }],
+          },
+        } : path.endsWith('/authoring-index') ? {
+          schemaVersion: 1, baseReleaseVersion: '1.0.0', entities: [],
+          resourceLibrary: emptyLibrary('published-release'),
+        } : path.includes('/materialization/') ? {
+          schemaVersion: 1, draftId: DRAFT, draftRevision: 4, baseReleaseVersion: '1.0.0',
+          entities: [], resourceLibrary: emptyLibrary('draft'),
+        } : validationResult(),
+      ),
+    }))
     const source = createCurriculumDraftAuthoringHttpSource(fetchImpl, async () => 'verified-token')
     await source.readBaseIndex('1.0.0')
     await source.readBaseEntity('1.0.0', 'course', 'course:math-5')
@@ -104,6 +165,25 @@ describe('Curriculum Studio authoring HTTP source', () => {
       [`/api/admin/curriculum/drafts/${DRAFT}/materialization/4`, 'GET'],
       [`/api/admin/curriculum/drafts/${DRAFT}/validation/4`, 'GET'],
     ])
+  })
+
+  it('rejects unexpected keys from materialization and validation success DTOs', async () => {
+    for (const injected of [
+      { ...validationResult(), rawBackendError: '/private/database' },
+      {
+        schemaVersion: 1, draftId: DRAFT, draftRevision: 4, baseReleaseVersion: '1.0.0', entities: [],
+        resourceLibrary: { ...emptyLibrary('draft'), providerData: { signedUrl: 'secret' } },
+      },
+    ]) {
+      const source = createCurriculumDraftAuthoringHttpSource(
+        vi.fn().mockResolvedValue({ ok: true, status: 200, json: vi.fn().mockResolvedValue(injected) }),
+        async () => 'verified-token',
+      )
+      const operation = 'run' in injected
+        ? source.validateDraft(DRAFT, 4)
+        : source.readMaterialization(DRAFT, 4)
+      await expect(operation).rejects.toMatchObject({ code: 'unavailable' })
+    }
   })
 
   it('loads preview through the exact revision GET route and rejects malformed/raw payload responses', async () => {

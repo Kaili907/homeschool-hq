@@ -36,7 +36,7 @@ export function createCurriculumStagingHttpSource(
   getAccessToken: () => Promise<string | null> = getGatewayAccessToken,
   basePath = '/api/admin/curriculum/drafts',
 ): CurriculumStagingSource {
-  async function request<T>(path: string, method = 'GET', body?: object): Promise<T> {
+  async function request(path: string, method = 'GET', body?: object): Promise<unknown> {
     let token: string | null
     try {
       token = await getAccessToken()
@@ -72,7 +72,7 @@ export function createCurriculumStagingHttpSource(
       throw failure(response.status, responseCode)
     }
     try {
-      return await response.json() as T
+      return await response.json()
     } catch {
       throw new CurriculumStagingError('unavailable')
     }
@@ -82,9 +82,94 @@ export function createCurriculumStagingHttpSource(
     `${basePath}/${encodeURIComponent(draftId)}/staging`
 
   return Object.freeze({
-    readStaging: (draftId: string) =>
-      request<CurriculumStagingStatusResult>(stagingPath(draftId)),
-    stageDraft: ({ draftId, ...body }: CurriculumStagingInput) =>
-      request<CurriculumStagingMutationResult>(stagingPath(draftId), 'POST', body),
+    async readStaging(draftId: string) {
+      const projected = adaptStaging(
+        await request(stagingPath(draftId)), draftId, false,
+      ) as CurriculumStagingStatusResult | null
+      if (!projected) throw new CurriculumStagingError('unavailable')
+      return projected
+    },
+    async stageDraft({ draftId, ...body }: CurriculumStagingInput) {
+      const projected = adaptStaging(
+        await request(stagingPath(draftId), 'POST', body), draftId, true,
+      ) as CurriculumStagingMutationResult | null
+      if (!projected) throw new CurriculumStagingError('unavailable')
+      return projected
+    },
+  })
+}
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+const VERSION = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$/
+const HASH = /^[0-9a-f]{64}$/
+const BLOCKERS = new Set([
+  'validation_missing', 'validation_blocked', 'approval_missing', 'approval_stale',
+  'changes_requested', 'target_version_collision', 'revision_mismatch', 'schema_set_unsupported',
+])
+
+function record(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+}
+
+function exact(value: Record<string, unknown>, keys: readonly string[]): boolean {
+  return Object.keys(value).every((key) => keys.includes(key)) && keys.every((key) => key in value)
+}
+
+function integer(value: unknown, minimum = 0): value is number {
+  return Number.isSafeInteger(value) && Number(value) >= minimum
+}
+
+function timestamp(value: unknown): value is string {
+  return typeof value === 'string' && value.length <= 40 && !Number.isNaN(Date.parse(value))
+}
+
+function candidate(value: unknown) {
+  if (!record(value) || !exact(value, [
+    'stagingId', 'status', 'publicationStatus', 'validationSnapshotId', 'approvalId',
+    'entityCounts', 'fileCount', 'byteCount', 'contentHash', 'manifestHash', 'packageHash',
+    'stagedAt', 'authority',
+  ]) || typeof value.stagingId !== 'string' || !UUID.test(value.stagingId) || value.status !== 'staged'
+    || value.publicationStatus !== 'not_published' || typeof value.validationSnapshotId !== 'string'
+    || !UUID.test(value.validationSnapshotId) || typeof value.approvalId !== 'string' || !UUID.test(value.approvalId)
+    || !record(value.entityCounts) || Object.keys(value.entityCounts).length > 100
+    || Object.entries(value.entityCounts).some(([key, count]) => !/^[a-z][a-z_]{0,63}$/.test(key) || !integer(count))
+    || !integer(value.fileCount, 1) || !integer(value.byteCount, 1)
+    || typeof value.contentHash !== 'string' || !HASH.test(value.contentHash)
+    || typeof value.manifestHash !== 'string' || !HASH.test(value.manifestHash)
+    || typeof value.packageHash !== 'string' || !HASH.test(value.packageHash)
+    || !timestamp(value.stagedAt) || value.authority !== 'curriculum:publish') return null
+  return Object.freeze({ ...value, entityCounts: Object.freeze({ ...value.entityCounts }) })
+}
+
+function adaptStaging(value: unknown, expectedDraftId: string, mutation: boolean) {
+  const keys = [
+    'schemaVersion', ...(mutation ? ['replayed'] : []), 'draftId', 'draftRevision',
+    'baseReleaseVersion', 'targetVersion', 'schemaSetVersion', 'stageState', 'eligible',
+    'blockingReasons', 'validation', 'approval', 'candidate',
+  ]
+  if (!record(value) || !exact(value, keys) || value.schemaVersion !== 1
+    || (mutation && typeof value.replayed !== 'boolean') || value.draftId !== expectedDraftId
+    || !integer(value.draftRevision, 1) || typeof value.baseReleaseVersion !== 'string' || !VERSION.test(value.baseReleaseVersion)
+    || typeof value.targetVersion !== 'string' || !VERSION.test(value.targetVersion)
+    || value.schemaSetVersion !== '2.0.0' || !['blocked', 'eligible', 'staged'].includes(String(value.stageState))
+    || typeof value.eligible !== 'boolean' || !Array.isArray(value.blockingReasons) || value.blockingReasons.length > BLOCKERS.size
+    || value.blockingReasons.some((reason) => typeof reason !== 'string' || !BLOCKERS.has(reason))
+    || new Set(value.blockingReasons).size !== value.blockingReasons.length) return null
+  const validation = value.validation
+  const approval = value.approval
+  const stagedCandidate = value.candidate === null ? null : candidate(value.candidate)
+  if ((validation !== null && (!record(validation) || !exact(validation, ['status', 'validationSnapshotId'])
+      || !['valid', 'invalid', 'incomplete', 'unavailable', 'error'].includes(String(validation.status))
+      || typeof validation.validationSnapshotId !== 'string' || !UUID.test(validation.validationSnapshotId)))
+    || (approval !== null && (!record(approval) || !exact(approval, ['status', 'approvalId'])
+      || !['approved', 'changes_requested', 'stale'].includes(String(approval.status))
+      || (approval.approvalId !== null && (typeof approval.approvalId !== 'string' || !UUID.test(approval.approvalId)))))
+    || (value.candidate !== null && !stagedCandidate)) return null
+  return Object.freeze({
+    ...value,
+    blockingReasons: Object.freeze([...value.blockingReasons]),
+    validation: validation === null ? null : Object.freeze({ ...validation }),
+    approval: approval === null ? null : Object.freeze({ ...approval }),
+    candidate: stagedCandidate,
   })
 }

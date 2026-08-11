@@ -23,6 +23,11 @@ entity endpoints. This foundation performs save-time entity validation only;
 cross-entity references, counts, schedule coverage, candidate projections, and
 publication completeness remain part of ADMIN-18 final validation.
 
+The bulk resource inventory projects only provider-safe metadata and omits the
+stored resource locator from response, search, and detail rendering. Editors
+can still open the authoritative resource entity through the existing
+draft-entity workflow when a locator is required for authoring.
+
 ## CAS, replay, tombstones, and audit
 
 Every entity mutation supplies both the expected workspace revision and, for

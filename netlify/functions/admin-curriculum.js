@@ -14,6 +14,7 @@ import {
   hasQuery,
   jsonResponse,
   readJsonBody,
+  responseForError,
 } from './_shared/http.js'
 import { createFilesystemCurriculumSource } from '../../src/admin/curriculum/filesystemSource.node.ts'
 import {
@@ -416,6 +417,13 @@ function serviceError(error, unavailableCode = 'curriculum_authoring_unavailable
   return errorResponse(503, unavailableCode)
 }
 
+async function requireDraftEditor(authoring, actorUserRef, draftId) {
+  const collaboration = await authoring.listCollaborators(actorUserRef, draftId)
+  if (collaboration.currentResponsibility !== 'editor') {
+    throw Object.assign(new Error('curriculum_collaboration_required'), { code: 'forbidden' })
+  }
+}
+
 export function createAdminCurriculumHandler(overrides = {}) {
   const authorization = overrides.authorization ?? createAdminAuthorization({
     env: overrides.env ?? process.env,
@@ -470,11 +478,17 @@ export function createAdminCurriculumHandler(overrides = {}) {
       const authorized = await authorization.require(event, 'curriculum:read')
       if (!authorized.ok) return authorized.response
       try {
+        if (route.contextKind === 'draft') {
+          await authoring.read(authorized.principal.userId, route.contextRef)
+        }
         return jsonResponse(200, await standardsReview.list(
           authorized.principal.userId, route.contextKind, route.contextRef,
         ))
-      } catch {
-        return errorResponse(503, 'curriculum_standards_review_unavailable')
+      } catch (error) {
+        if (route.contextKind === 'draft' && (error?.code === 'forbidden' || error?.code === 'not-found')) {
+          return serviceError(error)
+        }
+        return serviceError(error, 'curriculum_standards_review_unavailable')
       }
     }
 
@@ -484,6 +498,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
       try {
         input = parseStandardsReview(event)
       } catch (error) {
+        if (error?.name === 'GatewayError') return responseForError(error)
         return errorResponse(error?.evidence ? 422 : 400, error?.evidence ? 'standards_mapping_evidence_required' : 'invalid_request')
       }
       const authorized = await authorization.require(
@@ -494,6 +509,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
       try {
         if (input.contextKind === 'draft') {
           await authoring.read(authorized.principal.userId, input.contextRef)
+          await requireDraftEditor(authoring, authorized.principal.userId, input.contextRef)
         }
         return jsonResponse(200, await standardsReview.update(authorized.principal.userId, input))
       } catch (error) {
@@ -517,6 +533,8 @@ export function createAdminCurriculumHandler(overrides = {}) {
           ? 'curriculum:approve'
           : route.kind === 'draft-staging' && writing
             ? 'curriculum:publish'
+          : route.kind === 'draft-validation'
+            ? 'curriculum:drafts:write'
           : writing ? 'curriculum:drafts:write' : 'curriculum:read',
       )
       if (!authorized.ok) return authorized.response
@@ -528,6 +546,12 @@ export function createAdminCurriculumHandler(overrides = {}) {
           } catch (error) {
             return serviceError(error)
           }
+        }
+        if (
+          route.kind !== 'drafts'
+          && (writing || route.kind === 'draft-validation')
+        ) {
+          await requireDraftEditor(authoring, actor, route.draftId)
         }
         let value
         if (route.kind === 'drafts' && event.httpMethod === 'GET') {
@@ -576,7 +600,8 @@ export function createAdminCurriculumHandler(overrides = {}) {
         )
       } catch (error) {
         if (error?.schema) return errorResponse(422, 'schema_v2_rejected')
-        if (error?.request || error?.name === 'GatewayError') return errorResponse(400, 'invalid_request')
+        if (error?.name === 'GatewayError') return responseForError(error)
+        if (error?.request) return errorResponse(400, 'invalid_request')
         return serviceError(
           error,
           route.kind === 'draft-approval'

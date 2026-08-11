@@ -13,9 +13,8 @@ const SAFE_FIELDS = Object.freeze({
   lesson: new Set([
     'course_ref', 'unit_ref', 'grade', 'subject', 'course_day', 'day_in_unit', 'title', 'phase', 'focus',
     'estimated_duration', 'standards', 'essential_question', 'learning_objectives', 'success_criteria',
-    'materials', 'lesson_flow', 'student_activity', 'formative_check', 'scoring_guidance', 'mastery',
-    'tutor_routes', 'extension_activity', 'accessibility', 'safety_privacy', 'resource_refs',
-    'guardian_visibility_note', 'home_connection', 'extensions',
+    'materials', 'lesson_flow', 'student_activity', 'formative_check',
+    'extension_activity', 'accessibility', 'resource_refs', 'home_connection', 'extensions',
   ]),
   assessment: new Set(['course_ref', 'unit_ref', 'title', 'standards', 'total_points', 'prompts', 'rubric_dimensions', 'accommodation_note', 'extensions']),
   media_resource: new Set(['kind', 'title', 'rights', 'required', 'text_fallback', 'caption_or_transcript', 'alt_text', 'long_description']),

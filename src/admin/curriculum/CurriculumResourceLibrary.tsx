@@ -90,7 +90,7 @@ export function CurriculumResourceLibraryView({
       </dl>
 
       <div className="curriculum-resource-filters" role="search" aria-label="Filter resource inventory">
-        <label className="curriculum-resource-query"><span>Search</span><input type="search" value={query} placeholder="Title, ID, locator, or referencing entity" onChange={(event) => setQuery(event.target.value)} /></label>
+        <label className="curriculum-resource-query"><span>Search</span><input type="search" value={query} placeholder="Title, ID, rights, or referencing entity" onChange={(event) => setQuery(event.target.value)} /></label>
         <ResourceSelect label="Type / category" value={kind} onChange={(value) => setKind(value as typeof kind)}>
           <option value="all">All types</option>{KINDS.map((value) => <option key={value} value={value}>{label(value)}</option>)}
         </ResourceSelect>
@@ -187,7 +187,6 @@ function ResourceDetails({
         <div><dt>Reference status</dt><dd>{label(item.referenceStatus)}</dd></div>
         <div><dt>Referencing entities</dt><dd>{item.referencingEntityCount}</dd></div>
         {metadata && <>
-          <div className="is-wide"><dt>Locator</dt><dd>{metadata.locator}</dd></div>
           <div className="is-wide"><dt>Rights statement</dt><dd>{metadata.rights}</dd></div>
           <div className="is-wide"><dt>Text fallback</dt><dd>{metadata.text_fallback}</dd></div>
           {metadata.caption_or_transcript && <div className="is-wide"><dt>Caption or transcript</dt><dd>{metadata.caption_or_transcript}</dd></div>}
