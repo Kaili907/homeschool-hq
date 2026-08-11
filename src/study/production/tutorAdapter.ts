@@ -62,63 +62,12 @@ import {
 } from '../../../adaptive-tutor/study-engine/schemas/learning-evidence.schema.ts'
 import type { AcceptedEventLedgerPort } from '../../../adaptive-tutor/study-engine/runtime/src/ledger.ts'
 import { toLayeredSafetyConfiguration } from '../../../adaptive-tutor/study-engine/runtime/src/safety.ts'
+import { resolveTutorSubjectRegistration } from '../../../adaptive-tutor/study-engine/runtime/src/subject-registry.ts'
+import { STUDY_TUTOR_INELIGIBLE_REASONS } from '../contracts/tutor/eligibility'
 import {
-  resolveTutorSubjectRegistration,
-  selectTutorProgram,
-} from '../../../adaptive-tutor/study-engine/runtime/src/subject-registry.ts'
-
-/**
- * D1 — the grade band this adapter sends, and the whole of what it means.
- *
- * `StudyContextV1.gradeBand` is a closed three-member union the bridge
- * validates for membership and folds into the accepted event's digest. For the
- * currently reviewed frozen Tutor content it is otherwise semantically inert:
- * nothing in `orchestrateStudyCoreBridge`, the Core engine, the projection or
- * the recommendation branches on it, and no program is selected by it — program
- * selection is by subject and routing id (see `selectTutorProgram`).
- *
- * It is therefore a CONTENT-COMPATIBILITY CONSTANT owned by this wrapper. It is
- * derived from what the reviewed frozen content declares, and it is not derived
- * from and does not describe any learner:
- *
- *  - it is NOT the learner's nominal grade,
- *  - it is NOT her working level,
- *  - it is NOT a browser-supplied or student-supplied grade,
- *  - it carries NO authority: it cannot place, promote, or hold back a child,
- *    and `STUDY_TUTOR_FORBIDDEN_KEYS` keeps every one of those vocabularies out
- *    of the contract in both directions.
- *
- * The reason no `gradeBand` field was added to `StudyTutorLaunch` or
- * `StudyTutorTurn` is exactly that. A field would be a channel, and the only
- * values a host could put in it are the learner's real grade or her working
- * level — the two things a Tutor must not be told.
- *
- * THE LIMIT OF THIS CONSTANT. It is compatible with the content reviewed as of
- * this card, and with nothing else. It says nothing about Grade 7 or Grade 8
- * material, and a later card that registers such a program MUST reopen this
- * constant rather than let it ride: `middle-6-8` content sent as `elementary-3-5`
- * would be a false statement about what a child is being taught, recorded in a
- * durable event digest. `assertReviewedV1GradeBand` below is what stops that
- * happening silently.
- */
-export const STUDY_TUTOR_V1_GRADE_BAND: StudyGradeBand = 'elementary-3-5'
-
-/**
- * The envelope the constant above was chosen against, read off the frozen
- * content rather than assumed.
- *
- * The frozen Math R1 manifest declares grades 4–6 and the English program
- * declares 4–6 with items from 3. Those are the two registrations
- * `resolveTutorSubjectRegistration` can return today, and `elementary-3-5` is
- * the legal union member that covers them.
- *
- * A program declaring anything outside this window is content this wrapper was
- * not reviewed for, and it fails closed rather than being relabelled.
- */
-export const STUDY_TUTOR_V1_REVIEWED_GRADE_ENVELOPE = Object.freeze({
-  minimumGrade: 3,
-  maximumGrade: 6,
-})
+  evaluateReviewedTutorContent,
+  selectEligibleTutorProgram,
+} from './tutorContentEligibility'
 
 /**
  * Structural reason codes. Every one is operator vocabulary about the WRAPPER
@@ -126,10 +75,15 @@ export const STUDY_TUTOR_V1_REVIEWED_GRADE_ENVELOPE = Object.freeze({
  * to `quarantined`, which the host fails closed on without recording a safety
  * incident. Each satisfies `isStudyTutorReasonCode`: lower-case, hyphenated,
  * well inside 64 characters.
+ *
+ * The CONTENT reason codes are not here. They belong to the eligibility
+ * contract — `STUDY_TUTOR_INELIGIBLE_REASONS` in
+ * ../contracts/tutor/eligibility.ts — and this adapter returns whichever one the
+ * decision carried rather than restating it, so there is one vocabulary for
+ * "the Tutor cannot teach this" and a server check and this wrapper cannot
+ * disagree about which refusal happened.
  */
 export const STUDY_TUTOR_ADAPTER_REASON_CODES = Object.freeze({
-  /** The selected program is outside the content D1's constant was reviewed for. */
-  unreviewedContent: 'tutor-program-outside-reviewed-v1-content',
   /** An accepted turn carried adult-review or parent-control work V1 cannot route. */
   actionableProposal: 'tutor-adult-review-proposal-not-routable',
   /** The subject registry or the Core engine refused before any turn was evaluated. */
@@ -219,25 +173,6 @@ export type StudyTutorAdapterResult =
   | { readonly status: 'wrapper-quarantined'; readonly reasonCode: string }
 
 const OUTPUT_BLOCKED = Symbol('tutor-output-blocked')
-
-/**
- * D1's fail-closed half. Returns the compatibility constant only for content
- * inside the reviewed envelope, and `null` for anything else.
- *
- * `null` is not an error and not a stop: it is "this wrapper has not been
- * reviewed for this content", which is a statement about the CARD, not about
- * the child sitting in front of it.
- */
-export function reviewedV1GradeBand(program: TutorProgram): StudyGradeBand | null {
-  const band = program.gradeBand
-  if (
-    !Number.isSafeInteger(band.min) ||
-    !Number.isSafeInteger(band.max) ||
-    band.min < STUDY_TUTOR_V1_REVIEWED_GRADE_ENVELOPE.minimumGrade ||
-    band.max > STUDY_TUTOR_V1_REVIEWED_GRADE_ENVELOPE.maximumGrade
-  ) return null
-  return STUDY_TUTOR_V1_GRADE_BAND
-}
 
 /**
  * Restated from the frozen bridge's unexported helper of the same shape. The
@@ -420,16 +355,69 @@ export async function runProductionTutorTurn(
   let program: TutorProgram
   let hooks: ReturnType<typeof resolveTutorSubjectRegistration>['hooks']
   let gradeBand: StudyGradeBand
+
+  /**
+   * PHASE 9 — content eligibility, and it is the FIRST thing this adapter does.
+   *
+   * At this card's base these lines read `selectTutorProgram(registration,
+   * skillRef, lessonRef)` followed by a grade-band check on whatever came back.
+   * That was two mistakes compounding. `selectTutorProgram` answers an unmatched
+   * routing id with `registration.programs[0]`, so a turn for fractions came
+   * back holding the place-value program; the band check then read THAT
+   * program's band, found `elementary-3-5`, and passed. Driven at the base, a
+   * turn carrying `lessonRef: 'lesson:fractions-week-3'` and
+   * `skillRef: 'skill:equivalent-fractions'` was `accepted` and asked the
+   * learner a place-value comparison question.
+   *
+   * `evaluateReviewedTutorContent` asks the same two questions in an order where
+   * the answers mean something, and has no default program to fall into. An
+   * ineligible answer quarantines the turn carrying the decision's own reason
+   * code — structural, operator-facing, and a statement about the CONTENT rather
+   * than about the child, so nothing durable is written about her and no safety
+   * incident is recorded.
+   *
+   * The ROUTING IDS are passed in the same order as before, so eligible content
+   * routes to exactly the program it always did. The subject and task-type
+   * checks are not repeated here: this adapter is downstream of `bridgeSubject`
+   * and `bridgeTaskType` in ./tutorRuntime.ts, which already quarantine an
+   * unteachable subject or task before a turn is built, and re-asking from
+   * bridge vocabulary would mean guessing which host subject an `english` turn
+   * came from. The pre-launch check that owns both is
+   * `evaluateStudyTutorContentEligibility`.
+   */
+  const eligibility = evaluateReviewedTutorContent(request.subject, [
+    request.skillRef,
+    request.lessonRef,
+  ])
+  if (!eligibility.eligible) {
+    // `unvouchedDecision` is the evaluator saying the subject REGISTRY refused
+    // — a subject with no registration, or frozen content that failed its own
+    // schema validation at registration time. At this adapter that is an
+    // assembly failure and not a statement about the block's content, so it
+    // keeps the code the wrapper already had for exactly that case. Every other
+    // reason is a content decision and travels as itself.
+    return {
+      status: 'wrapper-quarantined',
+      reasonCode: eligibility.reason === STUDY_TUTOR_INELIGIBLE_REASONS.unvouchedDecision
+        ? STUDY_TUTOR_ADAPTER_REASON_CODES.assemblyFailed
+        : eligibility.reason,
+    }
+  }
+
   try {
     const registration = resolveTutorSubjectRegistration(request.subject)
-    const baseProgram = selectTutorProgram(registration, request.skillRef, request.lessonRef)
-    const reviewed = reviewedV1GradeBand(baseProgram)
-    if (reviewed === null) {
-      return { status: 'wrapper-quarantined', reasonCode: STUDY_TUTOR_ADAPTER_REASON_CODES.unreviewedContent }
+    // The same fail-closed selector the decision above used, and in the same
+    // order, so the program that RUNS is the program that was found eligible.
+    // A miss here would mean the two disagreed, which is an assembly failure
+    // rather than a content one: there is nothing to fall back to and nothing
+    // is invented.
+    const matched = selectEligibleTutorProgram(registration, request.skillRef, request.lessonRef)
+    if (matched === null || matched.program.id !== eligibility.programRef) {
+      return { status: 'wrapper-quarantined', reasonCode: STUDY_TUTOR_ADAPTER_REASON_CODES.assemblyFailed }
     }
-    gradeBand = reviewed
+    gradeBand = eligibility.gradeBand
     hooks = registration.hooks
-    program = adaptProgramToExpectedAnswer(baseProgram, request.expectedAnswer)
+    program = adaptProgramToExpectedAnswer(matched.program, request.expectedAnswer)
   } catch {
     return { status: 'wrapper-quarantined', reasonCode: STUDY_TUTOR_ADAPTER_REASON_CODES.assemblyFailed }
   }

@@ -171,11 +171,19 @@ describe('production Tutor wrapper import closure', () => {
     // added — which is the whole cost, and it is the right cost for the one
     // boundary that keeps a release-candidate surface out of production.
     //
-    // 89 as measured on this card: 70 under adaptive-tutor/ (the frozen bridge
+    // 91 as measured on this card: 70 under adaptive-tutor/ (the frozen bridge
     // primitives, the frozen Core, the subject registry and the aliased frozen
-    // Math R1 package) and 19 under src/study/ (the Tutor contract, the host
+    // Math R1 package) and 21 under src/study/ (the Tutor contract, the host
     // ports and types, the lifecycle, and the wrapper's own five modules).
-    expect(closure.files.length).toBe(89)
-    expect(closure.files.filter((file) => file.startsWith('src/study/'))).toHaveLength(19)
+    //
+    // STUDY-A1-TUTOR-CONTENT-ELIGIBILITY-CONTRACT added the two, both under
+    // src/study/ and neither reaching anything new: contracts/tutor/eligibility.ts
+    // (the transport-facing vocabulary and parsers, which see no content at
+    // all) and production/tutorContentEligibility.ts (the decision, which sees
+    // the subject registry the adapter already reached). The adaptive-tutor/
+    // half is unchanged, and that is the half this guard exists for.
+    expect(closure.files.length).toBe(91)
+    expect(closure.files.filter((file) => file.startsWith('src/study/'))).toHaveLength(21)
+    expect(closure.files.filter((file) => file.startsWith('adaptive-tutor/'))).toHaveLength(70)
   })
 })

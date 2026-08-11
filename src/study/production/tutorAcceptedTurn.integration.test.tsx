@@ -51,7 +51,11 @@ import { createLocalDevelopmentStudyPorts } from '../localDevelopmentPorts'
 import type { StudyPortBundle, StudySafetyPort } from '../ports'
 import { readLocalSafetyStops, isSessionStoppedByLocalLedger } from '../safety/localStopLedger'
 import { studyBridgeSessionRef } from '../studyBridgeSessionRef'
-import { createSyntheticMathBlock, createSyntheticParentCreatedBlock } from '../testing/syntheticStudyFixtures'
+import {
+  REVIEWED_TUTOR_MATH_SKILL_REF,
+  createSyntheticMathBlock,
+  createSyntheticParentCreatedBlock,
+} from '../testing/syntheticStudyFixtures'
 import type { StudyCalendarEntry, StudySafeEvent, StudySessionSnapshot } from '../types'
 import { ProductionStudyTutorRuntime } from './tutorRuntime'
 
@@ -254,10 +258,20 @@ describe('an accepted production Tutor turn through the real Study session conta
   async function mount(options: MountOptions): Promise<void> {
     const local = createLocalDevelopmentStudyPorts()
     base = { ...local.ports, safety: clearSafety }
-    entry = (await (options.completionOnly ? createSyntheticParentCreatedBlock : createSyntheticMathBlock)(
-      base,
-      { suffix: options.suffix },
-    )).entry
+    // STUDY-A1-TUTOR-CONTENT-ELIGIBILITY-CONTRACT — this file's turns are
+    // supposed to be ACCEPTED, so the block has to carry content the reviewed
+    // Tutor can actually teach. The default synthetic skill reference is
+    // Study-namespace and routes to no registered program; before this card it
+    // silently reached sequence 01 through the `programs[0]` fallback, so every
+    // "accepted turn" below was an accepted turn of the wrong lesson.
+    entry = (
+      await (options.completionOnly
+        ? createSyntheticParentCreatedBlock(base, { suffix: options.suffix })
+        : createSyntheticMathBlock(base, {
+            suffix: options.suffix,
+            skillRefs: [REVIEWED_TUTOR_MATH_SKILL_REF],
+          }))
+    ).entry
     const sessionRef = `${entry.blockRef}:session`
     const scope = { householdRef: context.householdRef, learnerRef: context.learnerRef, sessionRef }
 
