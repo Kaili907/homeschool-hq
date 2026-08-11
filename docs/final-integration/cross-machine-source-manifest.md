@@ -1,183 +1,159 @@
 # Cross-machine final integration source manifest
 
-Classification: **BLOCKED_BY_MISSING_SOURCES**
+Classification: **CROSS_MACHINE_SOURCE_MANIFEST_READY**
 
-This manifest is an inventory of Git facts for final Manuel Academy integration. It does not authorize or perform product integration. It was generated on Windows after `git fetch origin --prune`; no prior chat summary was used as evidence.
+This is a read-only product-source inventory for the final Manuel Academy integration. Git objects, refs, ancestry, stable patch IDs, changed paths, migration paths, and blob OIDs were verified independently on Windows after `git fetch origin --prune`. The Mac provenance audit is supporting evidence only; its product-provenance claims were not accepted without a corresponding Git check where the source object was available.
 
 ## Verification boundary
 
 - Repository: `https://github.com/Kaili907/homeschool-hq.git`
 - Inventory branch: `win/final-cross-machine-source-verifier`
-- Required and observed starting HEAD: `ffd1cc5a7ff706abfde00a07bc284b22687ffe0f`
-- Starting inventory worktree: clean
-- Fetch completed: `2026-08-11T01:18:45.9078906Z`
-- Local branches: 76 total, including 44 `win/*` branches and no `mac/*` branches
-- Origin branches after prune: 219 total, with no `origin/win/*` or `origin/mac/*` branches
-- Reachable commits: 457 from local branches, 570 from origin refs, and 659 from all refs
-- Registered worktrees: 97
-- Advertised GitHub pull-request heads checked: 1; none pointed at a requested Mac SHA
+- Required and observed starting HEAD: `a438b00e8ae6a78ba16b69a73767279d3393bd3e`
+- Inventory worktree: registered at the requested path and clean before fetch
+- Fetch: `git fetch origin --prune` completed successfully
+- Shared comparison baseline: `d65d1511dd602db586a204bb7ccb2800fd7a89e2`
+- Product-source mutations: none
+- Hosted Supabase / deploy / push / merge / rebase / reset / cherry-pick: none
 
-`Available on origin` below means that the commit is reachable from an advertised `refs/remotes/origin/*` ref after the fetch. `Migrations since baseline` means SQL files added between the shared Windows baseline `d65d1511dd602db586a204bb7ccb2800fd7a89e2` and the source tip. The JSON companion records exact arrays.
+## Authoritative final sources
 
-## Windows final sources verified
+Every named ref resolves exactly to the requested commit object.
 
-Every requested Windows SHA exists as a commit object and is the exact tip of the named local branch. None is reachable from an origin branch.
-
-| Artifact | Branch and exact SHA | Commit subject | Direct parent | Local / origin | Registered worktree |
-| --- | --- | --- | --- | --- | --- |
-| Study Production Mount R5 | `win/study-production-mount-r5` at `87a21b748d8855fc814435551c4d65e47f3ff126` | `study: mount hardened production learner workspace` | `db1857642f1030b66fdc50052184cb3b6d8335d3` | yes / no | clean |
-| Study Recovery correction | `win/study-recovery-chaos-gate` at `50ae5c05a09e12e2e573dfe9ecf984f95a7badc0` | `fix(study): harden production recovery` | `27254fd65db26e820eb88bf714bb7db9a7376541` | yes / no | clean |
-| Study Worker Run Evidence | `win/study-worker-run-evidence` at `e97c80beb3d7c73ebc24b2a243fdf0d45a8e5e76` | `study: persist adult review worker run evidence` | `96fac0361e174225ca345d5253852ed6ba056236` | yes / no | clean |
-| Study Telemetry Invocation | `win/study-telemetry-invocation` at `833860eb1d70121f9bc8c58f985b49f4c6d93788` | `study: authorize telemetry delivery invocation` | `fa1e3e3f7c5d846ba6e516d8e16e2a4c391f6c2d` | yes / no | clean |
-| Windows Admin Costs final browser line | `win/admin-costs-browser-gate` at `de3d81fed1817144fcd6fab4ed50ae821edeb5e2` | `fix(admin): harden Costs and Provider Pricing browser UX` | `86003e57cfea8bfc83c3e1d41d3abde26d16abf8` | yes / no | clean |
-| Admin Study Operations Evidence R2 | `win/admin-study-ops-evidence-r2` at `7e9d0c6166c022ad3b5a45f12a4365981ab7f5fd` | `admin: connect Study Operations to worker run evidence` | `7f703a2f18ec4f6b36a97de11a9f33aa51116940` | yes / no | clean |
-| System Health aggregate | `win/admin-9-aggregate-r2` at `c72f9918244ad525182f2414d3afd281c51c8b07` | `admin: adopt scalable aggregates for system health` | `f5492e2e21ae51fad5e1979e555fa1e247c983a5` | yes / no | clean |
-| ADMIN-14B | `win/admin-14b-runtime` at `e43a1320021fbe4e004af74c26a563532990545c` | `admin-14b: enforce effective runtime configuration` | `cf29ff6b3e851f42eb257a108f1bc473599c0ff1` | yes / no | clean |
-| Unified preflight | `win/admin-unified-preflight-orchestrator` at `28ce1a938a0f06617bd92d31ff1ec7ef95fb541c` | `admin: unify local production preflight` | `f9b1278fed23048d1e0d18b4ae1d4e9e4e295919` | yes / no | clean |
-
-### Composed Windows source tips
-
-These local-only tips reduce the Windows source set, but they are divergent compositions rather than one final integration branch.
-
-| Source | Exact tip | Direct parent | Origin | Worktree state |
+| Role | Exact ref | Exact SHA | Parent | Subject |
 | --- | --- | --- | --- | --- |
-| `win/final-study-rc1` | `8ef764772c43f63b08403248c1e98273c35c5f4f` — `test(study): add local production smoke harness` | `dcfb37f2ce83c38fd96595a1fcea034ae8ab5e9b` | unavailable | currently modified: `MIGRATIONS.md` and `docs/study-engine-final-production/migration-manifest.json`; the branch ref remains at the recorded SHA |
-| `win/final-admin-delta-rc1` | `e3f62dced44b8ddd7e932ec992756a39f30f3495` — `admin: unify local production preflight` | `b0e5b42eca478bceb5755e31b7d3ce7c19e04b6b` | unavailable | clean |
+| Mac Final RC4 | `refs/remotes/origin/mac/admin-final-rc4-assembly` | `6f952509236daa4e17849c4a5399241e42816553` | `d630456883a33d01a30eb1b18d55b8506645db90` | `admin: assemble provenance-corrected RC4` |
+| Mac provenance audit | `refs/remotes/origin/mac/admin-final-rc3-provenance-audit` | `d6a0754d9acd1192ba9a2037fe2fc077441ba080` | `af84dee724088e4f61e4bf84fc17c75adb61e0fa` | `docs: audit Mac RC3 source provenance` |
+| Windows Final Study RC1 | `refs/heads/win/final-study-rc1` | `f93f0736b48736252e0678f9b57ce83652e2dab5` | `8ef764772c43f63b08403248c1e98273c35c5f4f` | `fix(study): enforce session timestamp coherence` |
+| Windows Final Admin Delta RC1 | `refs/heads/win/final-admin-delta-rc1` | `ae2c9b32445a59b82a972f3b67af8ea11dc50b79` | `e3f62dced44b8ddd7e932ec992756a39f30f3495` | `integrate: finalize Windows Admin delta RC1` |
 
-Their merge base is exactly `d65d1511dd602db586a204bb7ccb2800fd7a89e2`. Neither tip is an ancestor of the other. Relative to that base, Study RC changes 142 paths, Admin RC changes 230 paths, and the sets overlap on 65 paths.
+Both registered Windows final-source worktrees were clean when checked. The audit commit is a parallel child of RC3, not an RC4 ancestor: its merge base with RC4 is its parent `af84dee...`. It is evidence, not a product integration input.
 
-## Mac final sources unavailable
+## Ancestry, patch equivalence, and supersession proof
 
-The seven supplied Mac SHAs are absent as local commit objects, absent from every origin branch, and absent from the advertised GitHub pull-request heads. Consequently their commit subjects, parents, migrations, exact refs, cleanliness, ancestry, and supersession relationships cannot be verified on this machine.
+### Final-tip ancestry
 
-| Artifact | Expected SHA supplied for verification | Git result |
-| --- | --- | --- |
-| Curriculum 16B | `8cac699a9b263c7b0bb1e33e3b5d7e5a59ca03de` | `TRANSFER_REQUIRED`; object and ref unavailable |
-| Curriculum Studio shell | `a0064c00052ed9024c9b1b4f703a8e0eca0e3867` | `TRANSFER_REQUIRED`; object and ref unavailable |
-| Curriculum Validation | `54b314e61be1ca979ac5248a55ce499f8acd0cd3` | `TRANSFER_REQUIRED`; object and ref unavailable |
-| Provider Attempt Journal | `a552b2ec343defb3f533f3c0412cae6b8d01355b` | `TRANSFER_REQUIRED`; object and ref unavailable |
-| R2 Configuration UI | `178f85c0a43cf9876b296119f7a04142bdf37ae0` | `TRANSFER_REQUIRED`; object and ref unavailable |
-| R2 Audit UX | `9305ec5c5f6207e24a1e1116bdb02c5c8793a7ea` | `TRANSFER_REQUIRED`; object and ref unavailable |
-| Engine Performance aggregate | `92b73d0dc85b1310d0567976388b14ba72284c74` | `TRANSFER_REQUIRED`; object and ref unavailable |
+- Mac RC1 `4e404e7...`, RC2 `053b565...`, and RC3 `af84dee...` are exact ancestors of RC4.
+- Prior Study RC tip `8ef7647...` is the direct parent of `f93f073...`; Study Production Mount R5 `87a21b7...` is also an exact ancestor.
+- Prior Admin Delta tip `e3f62dc...` is the direct parent of `ae2c9b3...`; ADMIN-14B `e43a132...` is also an exact ancestor.
+- No final tip is an ancestor of either of the other two final tips.
+- Merge bases and left/right commit counts are:
 
-The following requested Mac branches have no matching local or origin ref. No SHA can be assigned without fabrication:
+| Pair | Merge base | Left / right unique commits |
+| --- | --- | ---: |
+| Mac RC4 / Study RC1 | `d65d1511dd602db586a204bb7ccb2800fd7a89e2` | 62 / 21 |
+| Mac RC4 / Admin Delta RC1 | `b948b3fd6552221eeb3883c8e7cc924129ad616a` | 57 / 26 |
+| Study RC1 / Admin Delta RC1 | `d65d1511dd602db586a204bb7ccb2800fd7a89e2` | 21 / 31 |
 
-| Transfer-required branch | Expected SHA | Current owner | Reason integration cannot consume it |
-| --- | --- | --- | --- |
-| `mac/admin-provider-gateway-instrumentation` | unknown | Mac, per the requested machine classification; not independently provable here | no Windows object and no advertised origin ref |
-| `mac/admin-curr-17b-studio-integration` | unknown | Mac, per the requested machine classification; not independently provable here | no Windows object and no advertised origin ref |
-| `mac/admin-curr-standards-review` | unknown | Mac, per the requested machine classification; not independently provable here | no Windows object and no advertised origin ref |
-| `mac/admin-curr-19-preview-diff` | unknown | Mac, per the requested machine classification; not independently provable here | no Windows object and no advertised origin ref |
-| `mac/admin-curr-20a-release-staging` | unknown | Mac, per the requested machine classification; not independently provable here | no Windows object and no advertised origin ref |
-| `mac/admin-r2-wave-integration` | unknown | Mac, per the requested machine classification; not independently provable here | no Windows object and no advertised origin ref |
+### RC4 transferred production corrections
 
-Transfer must make each final branch tip reachable through an advertised Git ref, or supply a Git bundle containing the exact branch ref and its reachable history. The seven supplied SHAs must then pass `git cat-file -e <sha>^{commit}` and ref-containment checks before integration.
+RC4 contains a linear six-commit extension of RC3: five correction replays followed by the RC4 assembly commit. Each replay is an exact RC4 ancestor, has the same subject as its source, and records the source SHA in a `(cherry picked from commit ...)` trailer.
 
-## Supersession and composition graph
+Whole-commit stable patch IDs differ because the changes were replayed onto RC3 and reconciled with the composed tree. The stronger scoped result is shown below: most source-owned paths retain identical stable per-path patches; the remaining paths are integration-adjusted. Four replays preserve the exact changed-path set. The DB replay omits the source's `supabase/academy-cas.db.test.ts` PGlite-socket workaround and retains RC3's different in-process PGlite harness blob; this is an explicit test-harness integration adjustment, not patch equivalence.
 
-Do not integrate both sides of any arrow separately.
+| Transferred source | RC4 replay | Source / replay stable patch ID | Exact per-path patches | Result |
+| --- | --- | --- | ---: | --- |
+| `origin/mac/admin-api-contract-fuzz` `5de0065...` | `d78f8d8...` | `202d8ce...` / `2c024de...` | 16 / 17 | integration-adjusted at `netlify/functions/admin-curriculum.js` |
+| `origin/mac/admin-browser-cache-compat` `c7a2ce0...` | `13a6ef2...` | `7552f7d...` / `d960341...` | 15 / 18 | integration-adjusted package manifests and Admin CSS |
+| `origin/mac/admin-time-boundary-audit` `cb6f954...` | `fdbdca1...` | `5c5b8a3...` / `9698603...` | 29 / 32 | integration-adjusted correlations and curriculum-history model paths; both SQL patches are exact |
+| `origin/mac/admin-failure-chaos` `5ee417c...` | `bf12ef5...` | `0b808aa...` / `2de50ec...` | 40 / 43 | integration-adjusted authorization, curriculum HTTP source, and Admin route |
+| `origin/mac/admin-db-security-audit` `47c315f...` | `d630456...` | `cd216c0...` / `6e7b615...` | 5 / 7 | migration and audit script patches exact; manifest integrated; already-present CAS postimage omitted |
 
-```text
-win/study-production-mount-r5 @ 87a21b7
-  -- exact ancestor --> win/final-study-rc1 @ 8ef7647
+The final `6f952509...` assembly commit reconciles six shared paths: `package.json`, `package-lock.json`, `src/admin/authorization.ts`, `src/admin/authorization.test.ts`, `src/admin/curriculum/httpSource.ts`, and `supabase/admin-database-security.db.test.ts`.
 
-win/study-recovery-chaos-gate @ 50ae5c0
-  -- identical stable patch-id 2a86a5c... replayed as dcfb37f --> final Study RC
+### Windows constituent replay proof
 
-win/study-worker-run-evidence @ e97c80b
-  -- identical stable patch-id 5df914c... replayed as 6f4994a --> final Study RC
-  -- identical stable patch-id 5df914c... replayed as 3628350 --> final Admin RC
+The Windows final refs supersede their constituent tips. Git independently reproduced these stable patch matches, and each replay is an ancestor of the indicated final ref:
 
-win/study-telemetry-invocation @ 833860e
-  -- conflict-resolved replay as 62e06df --> final Study RC
+| Source -> replay | Stable patch ID |
+| --- | --- |
+| `50ae5c0...` Study recovery -> `dcfb37f...` in Study final | `2a86a5cb7638a9e108eac40b5e6b583973afc27c` |
+| `e97c80b...` worker evidence -> `6f4994a...` in Study final | `5df914cbdf39e0ea46c671ebaa88e5a6b5cb2c73` |
+| `e97c80b...` worker evidence -> `3628350...` in Admin final | `5df914cbdf39e0ea46c671ebaa88e5a6b5cb2c73` |
+| `de3d81f...` Costs browser -> `37f2263...` in Admin final | `0a144231e3549544de644e2c784f7c5e9a6783ad` |
+| `7e9d0c6...` Study Operations evidence -> `44282b5...` in Admin final | `07d83e86927d3c11bc320de6850a316442515ef4` |
+| `c72f991...` System Health aggregate -> `475203f...` in Admin final | `569f1ffa0ca7681326c7f695ece507b690b25811` |
+| `28ce1a9...` unified preflight -> `e3f62dc...` in Admin final | `791dcfab69461646ffb260123117e5dd2546e260` |
 
-win/admin-costs-accounting-integration @ 86003e5
-  -- exact ancestor --> win/admin-costs-browser-gate @ de3d81f
-  -- identical patch replay as 37f2263 --> final Admin RC
+Telemetry invocation `833860e...` is an integration-adjusted replay at `62e06df...` in Study final: both commits touch the same 13 paths, but their whole stable patch IDs differ (`6dcb053...` versus `73fe751...`) because `netlify.toml` already carried the scheduled worker block.
 
-win/admin-study-operations @ 286ce75
-  -- exact ancestor --> win/admin-study-ops-browser-gate @ efbf2d7
-  -- exact ancestor --> win/admin-study-ops-evidence-r2 @ 7e9d0c6
-  -- identical patch replay as 44282b5 --> final Admin RC
+### Former missing Mac constituents
 
-win/admin-9-aggregate-r2 @ c72f991
-  -- identical patch replay as 475203f --> final Admin RC
+The seven historical SHA objects and six historical leaf refs recorded by the blocked report are still not advertised. They are no longer required integration inputs: RC4 is the authoritative composed source, and the corresponding replacement commits are exact RC4 ancestors. The audit additionally records exact or integration-adjusted provenance for the source lines it inspected. Because the original objects are absent on Windows, no new claim of literal ancestry or whole-patch equivalence is made for those historical SHA objects.
 
-win/admin-14b-runtime @ e43a132
-  -- exact ancestor --> final Admin RC
+Replacement ancestry includes:
 
-win/admin-unified-preflight-orchestrator @ 28ce1a9
-  -- identical patch replay as e3f62dc --> final Admin RC
-```
+- curriculum authoring `f9ecb3b...`, Studio shell `20a604c...`, validation `f952423...`, Studio integration `a640bd1...`, preview/diff `1862d65...`, and workflow/release staging `307588a...`;
+- provider attempt foundation `32f9f6b...` and gateway journaling `fcf67a7...`;
+- R2 configuration UI `79ae45a...`, audit UX `f5acc32...`, dashboard integration `1d24076...`, and engine aggregate `2a107b3...`.
 
-For telemetry invocation, the replay's stable patch-id differs because `netlify.toml` already contained the scheduled adult-review worker block. All other changed file postimages are identical; the replay preserves the telemetry comment and redirect alongside that existing schedule. This is evidence of a conflict-resolved replay, not literal ancestry.
+The provenance audit's two directly indexed historical source lines agree with the RC history: Provider Attempt Journal maps to stable-patch-equivalent `32f9f6b...`, and Curriculum 16B maps to integration-adjusted `f9ecb3b...`; both replacements are RC4 ancestors.
 
-The two Windows RCs themselves must both be reconciled into the eventual cross-machine integration, but their shared Study lineage must not be applied twice. Mac shell-versus-Studio and R2 constituent-versus-wave supersession is unresolved until the missing Git histories arrive.
+## Minimum final integration source set
 
-## Minimum recommended final source set
+The minimum source-tip set is exactly:
 
-Provisional Windows minimum:
+1. `origin/mac/admin-final-rc4-assembly@6f952509236daa4e17849c4a5399241e42816553`
+2. `win/final-study-rc1@f93f0736b48736252e0678f9b57ce83652e2dab5`
+3. `win/final-admin-delta-rc1@ae2c9b32445a59b82a972f3b67af8ea11dc50b79`
 
-1. `win/final-study-rc1` at `8ef764772c43f63b08403248c1e98273c35c5f4f`.
-2. `win/final-admin-delta-rc1` at `e3f62dced44b8ddd7e932ec992756a39f30f3495`.
-3. One explicit reconciliation of their 65-path overlap; do not separately integrate the nine constituent Windows branches listed above.
+Do not separately integrate RC3, the five transferred Mac correction branches, the old Mac constituents, or the Windows constituent branches. The audit ref remains supporting documentation only. Final integration must reconcile the three divergent tips and their overlaps once.
 
-No authoritative cross-machine minimum can be completed yet. After transfer, recompute ancestry for the six `mac/*` final branches against the seven supplied Mac SHAs. Prefer a composed Mac branch only when Git proves it contains or supersedes its constituents.
+## Final changed-path overlap
 
-## Overlap hotspots
+Against common baseline `d65d151...`:
 
-Confirmed overlap between the two Windows RCs:
+| Source | Changed paths |
+| --- | ---: |
+| Mac RC4 | 418 |
+| Study RC1 | 143 |
+| Admin Delta RC1 | 231 |
 
-- `MIGRATIONS.md`
-- `docs/study-engine-final-production/migration-manifest.json`
-- `netlify.toml`
-- `src/study/generated/studyDatabase.ts`
-- 61 additional shared Study worker, delivery, persistence, test, documentation, and migration paths; the JSON records the overlap count and shared migration paths
+| Intersection | Paths |
+| --- | ---: |
+| Mac / Study | 15 |
+| Mac / Admin | 105 |
+| Study / Admin | 64 |
+| All three | 6 |
 
-Confirmed single-RC touches that must be rechecked against the unavailable Mac sources:
+The six triple-touch hotspots are `MIGRATIONS.md`, `docs/study-engine-final-production/migration-manifest.json`, `netlify.toml`, `package.json`, and the operational telemetry writer implementation/test pair.
 
-- `src/App.tsx`, Study production route/workspace, and `src/study/client/studyBoundContentClient.ts`: Study RC
-- `src/components/admin/AdminConsoleRoute.tsx`: Admin RC
-- Admin shell/navigation, content-client changes outside the paths above, and all Mac-side routing/configuration collisions: **indeterminate until transfer**
+Additional high-risk areas:
 
-## Migration-producing sources
+- Mac / Admin: Admin routing and console CSS/components, authorization/configuration/audit/cost/health sources, provider gateway functions, package/build configuration, and foundational Admin SQL.
+- Study / Admin: adult-review worker and delivery code, Study persistence/contracts, `src/study/generated/studyDatabase.ts`, deployment configuration, and shared Study SQL.
+- Mac / Study: curriculum release registry, telemetry writer, curriculum Admin endpoint, package/deployment configuration, and migration documentation.
 
-The exact tip commits themselves add SQL only in these two cases:
+The JSON companion contains the complete exact path arrays for all three pairwise intersections and the triple intersection.
 
-- `e97c80b...` adds `20260810159000_academy_study_worker_run_evidence.sql`.
-- `e43a132...` adds `20260810140000_academy_admin_configuration_runtime_enforcement.sql`.
+## Migration-producing sources and collision hotspots
 
-The composed Study RC adds ten SQL paths since the shared baseline:
+- Mac RC4 adds 22 SQL paths relative to the common baseline. Within the transferred correction set, Time Boundary modifies `20260809120000_academy_operational_telemetry_foundation.sql` and `20260810180000_academy_admin_correlation_runtime_read.sql`; DB Security adds `20260810190000_academy_curriculum_write_reauthorization.sql`.
+- Study RC1 adds 11 SQL paths, including final-tip addition `20260810159100_academy_study_session_timestamp_coherence.sql`.
+- Admin Delta RC1 adds 13 final SQL paths. Its final tip replaces the duplicate `20260810120000` Study/provider names with `20260810120200` and `20260810120300`, and modifies the `20260810152000` and `20260810152100` SQL blobs.
 
-- `20260809160000_academy_curriculum_release_registry.sql`
-- `20260810120000_academy_study_effective_settings_v2.sql`
-- `20260810150000_academy_study_curriculum_binding.sql`
-- `20260810151000_academy_study_session_semantics_v2.sql`
-- `20260810152000_academy_study_in_app_receipt_timestamp.sql`
-- `20260810152100_academy_study_worker_operations_contract.sql`
-- `20260810153000_academy_study_release_registry_bridge.sql`
-- `20260810154000_academy_study_bound_content_authority.sql`
-- `20260810155000_academy_study_session_telemetry_outbox.sql`
-- `20260810159000_academy_study_worker_run_evidence.sql`
+Same-path overlap is not uniformly byte-identical:
 
-The composed Admin RC adds thirteen SQL paths since the shared baseline:
+- Byte-identical across sources: `20260809130000`, `20260809140000`, `20260809150000`, `20260809160000`, `20260810150000` Study binding, and `20260810159000` worker evidence.
+- Same path but different blobs: Mac/Admin `20260809120000` operational telemetry; Study/Admin `20260810152000` receipt timestamp and `20260810152100` worker operations.
+- Same version but different filenames: `20260810120000`, `20260810140000`, `20260810150000`, `20260810151000`, `20260810153000`, and `20260810155000` across the three final tips.
 
-- `20260809120000_academy_operational_telemetry_foundation.sql`
-- `20260809121000_academy_provider_usage_cost_aggregate.sql`
-- `20260809130000_academy_admin_audit_foundation.sql`
-- `20260809140000_academy_admin_configuration_core.sql`
-- `20260809150000_academy_logical_voice_profile_contract.sql`
-- `20260810120000_academy_provider_pricing_terms.sql`
-- `20260810120000_academy_study_effective_settings_v2.sql`
-- `20260810140000_academy_admin_configuration_runtime_enforcement.sql`
-- `20260810141000_academy_study_provider_cost_accounting.sql`
-- `20260810150000_academy_study_curriculum_binding.sql`
-- `20260810152000_academy_study_in_app_receipt_timestamp.sql`
-- `20260810152100_academy_study_worker_operations_contract.sql`
-- `20260810159000_academy_study_worker_run_evidence.sql`
+These are integration reconciliation hotspots only. This verification did not apply, rename, or contact any migration target. The JSON companion records every final migration path, collision filename, and relevant blob OID.
 
-The Admin RC contains two distinct migrations with timestamp `20260810120000`; final reconciliation must preserve the repository's migration-manifest policy rather than ordering them by timestamp guesswork. Five migration paths are shared verbatim by both Windows RC change sets. Mac migration production is unknown until transfer.
+## Explicitly excluded unrelated sources
 
-## Hold point
+These fetched refs exist but are excluded from the Admin final source set because they belong to the separate auth/study workstream pending custody/security classification:
 
-Final product integration is blocked until the missing Mac refs and objects are transferred and verified. No product code was changed, cherry-picked, merged, rebased, reset, pushed, deployed, or migrated by this inventory session.
+| Excluded ref | Exact SHA |
+| --- | --- |
+| `origin/integration/study-a1-final-r8` | `c433fa1ba1c1c6af518e1c11daf36e228e7c8c99` |
+| `origin/study-a1-production-integration-base-c-r2` | `0e62cdf9562a4e6579f97a87023bb5f639c2a7b1` |
+| `origin/study-a1-server-tutor-prebundle-t1-h2` | `860d52e9bfb011f83aa6acf128fd870868cb33b9` |
+| `origin/study-a1-tutor-host-mapping-t2-h2` | `b0e111ca3a7327def7a95a2577ae7bdabb661681` |
+
+## Completeness and hold point
+
+No required Mac production source remains missing. The authoritative RC4 ref, provenance audit ref, five transferred correction refs, and their Git objects are all present. Historical constituent objects/leaf refs that remain absent are superseded and are not members of the minimum final source set.
+
+Final classification: **CROSS_MACHINE_SOURCE_MANIFEST_READY**
+
+HOLD. This manifest does not authorize product integration, migration application, push, deploy, or hosted contact.
