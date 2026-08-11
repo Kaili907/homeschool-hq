@@ -136,7 +136,7 @@ function fetchRouter({
   })
 }
 
-describe('authenticated Anthropic gateway', () => {
+describe('ACTUAL PRODUCTION CONSUMER TEST: authenticated Anthropic gateway', () => {
   it('rejects unsupported methods before any external call', async () => {
     const fetchImpl = fetchRouter()
     const result = await createAnthropicHandler({ fetchImpl, env: ENV })(event(undefined, { httpMethod: 'GET' }))

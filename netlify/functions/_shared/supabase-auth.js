@@ -1,7 +1,7 @@
 import { errorResponse, isTimeoutError } from './http.js'
+import { validUuid } from './study-identity/contracts.js'
 
 const MAX_BEARER_LENGTH = 4096
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 export const SUPABASE_AUTH_TIMEOUT_MS = 5_000
 
 function authConfig(env) {
@@ -114,16 +114,21 @@ export async function verifySupabaseBearer(event, { fetchImpl, env, timeoutMs })
     return { ok: false, failure: 'not-configured', response: errorResponse(503, 'service_unavailable') }
   }
 
-  let response
   // Positive integer overrides are honored up to the absolute maximum; larger
   // values are capped and every other value falls back to that maximum.
   const effectiveTimeoutMs =
     Number.isInteger(timeoutMs) && timeoutMs > 0
       ? Math.min(timeoutMs, SUPABASE_AUTH_TIMEOUT_MS)
       : SUPABASE_AUTH_TIMEOUT_MS
-  const signal = AbortSignal.timeout(effectiveTimeoutMs)
+  const controller = new AbortController()
+  const signal = controller.signal
+  const timeout = setTimeout(
+    () => controller.abort(new DOMException('Supabase Auth deadline exceeded', 'TimeoutError')),
+    effectiveTimeoutMs,
+  )
+
   try {
-    response = await withDeadline(
+    const response = await withDeadline(
       () =>
         fetchImpl(`${config.url}/auth/v1/user`, {
           method: 'GET',
@@ -137,41 +142,30 @@ export async function verifySupabaseBearer(event, { fetchImpl, env, timeoutMs })
         }),
       signal,
     )
-  } catch (error) {
-    if (isTimeoutError(error, signal)) {
-      return { ok: false, failure: 'upstream-timeout', response: errorResponse(504, 'upstream_timeout') }
+    if ([400, 401, 403].includes(response?.status)) {
+      return { ok: false, failure: 'unauthenticated', response: errorResponse(401, 'unauthenticated') }
     }
-    return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
-  }
-
-  if ([400, 401, 403].includes(response?.status)) {
-    return { ok: false, failure: 'unauthenticated', response: errorResponse(401, 'unauthenticated') }
-  }
-  if (response?.status !== 200) {
-    return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
-  }
-
-  let user
-  try {
+    if (response?.status !== 200) {
+      return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
+    }
     if (typeof response.json !== 'function') throw new TypeError('Invalid auth response')
-    user = await withDeadline(() => response.json(), signal)
+    const user = await withDeadline(() => response.json(), signal)
+    if (!user || typeof user !== 'object' || Array.isArray(user) || !validUuid(user.id)) {
+      return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
+    }
+
+    return {
+      ok: true,
+      user: { id: user.id },
+      // Internal-only credential for same-session RLS authorization calls.
+      accessToken: token,
+    }
   } catch (error) {
     if (isTimeoutError(error, signal)) {
       return { ok: false, failure: 'upstream-timeout', response: errorResponse(504, 'upstream_timeout') }
     }
     return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
-  }
-  if (signal.aborted) {
-    return { ok: false, failure: 'upstream-timeout', response: errorResponse(504, 'upstream_timeout') }
-  }
-  if (!user || typeof user !== 'object' || Array.isArray(user) || !UUID.test(user.id)) {
-    return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
-  }
-
-  return {
-    ok: true,
-    user: { id: user.id },
-    // Internal-only credential for same-session RLS authorization calls.
-    accessToken: token,
+  } finally {
+    clearTimeout(timeout)
   }
 }

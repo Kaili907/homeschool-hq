@@ -96,7 +96,7 @@ function fetchRouter({
   })
 }
 
-describe('authenticated TTS gateway', () => {
+describe('ACTUAL PRODUCTION CONSUMER TEST: authenticated TTS gateway', () => {
   it('rejects unsupported methods before any external call', async () => {
     const fetchImpl = fetchRouter()
     const result = await createTtsHandler({ fetchImpl, env: ENV })(event(undefined, { httpMethod: 'GET' }))

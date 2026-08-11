@@ -38,13 +38,8 @@ function expectFailure(result, failure, statusCode, code) {
   expect(responseJson(result)).toEqual({ error: { code } })
 }
 
-function installFakeAbortTimeout() {
+function installFakeTimers() {
   vi.useFakeTimers()
-  vi.spyOn(AbortSignal, 'timeout').mockImplementation((milliseconds) => {
-    const controller = new AbortController()
-    setTimeout(() => controller.abort(new DOMException('timed out', 'TimeoutError')), milliseconds)
-    return controller.signal
-  })
 }
 
 function hangingFetch() {
@@ -201,20 +196,23 @@ describe('verifySupabaseBearer upstream availability decisions', () => {
   })
 
   it('times out during fetch even when the fetch implementation ignores its signal', async () => {
-    installFakeAbortTimeout()
+    installFakeTimers()
     const pending = verifySupabaseBearer(event(), { fetchImpl: hangingFetch(), env: ENV })
 
     await vi.advanceTimersByTimeAsync(SUPABASE_AUTH_TIMEOUT_MS)
     const result = await pending
 
     expectFailure(result, 'upstream-timeout', 504, 'upstream_timeout')
+    expect(vi.getTimerCount()).toBe(0)
   })
 
   it('uses the same absolute deadline for connection and body processing', async () => {
-    installFakeAbortTimeout()
+    installFakeTimers()
     let finishFetch
+    let authSignal
     const fetchImpl = vi.fn(
-      () => new Promise((resolve) => {
+      (_url, init) => new Promise((resolve) => {
+        authSignal = init.signal
         finishFetch = resolve
       }),
     )
@@ -233,8 +231,8 @@ describe('verifySupabaseBearer upstream availability decisions', () => {
     await vi.advanceTimersByTimeAsync(1)
     const result = await pending
     expectFailure(result, 'upstream-timeout', 504, 'upstream_timeout')
-    expect(AbortSignal.timeout).toHaveBeenCalledTimes(1)
-    expect(AbortSignal.timeout).toHaveBeenCalledWith(SUPABASE_AUTH_TIMEOUT_MS)
+    expect(vi.getTimerCount()).toBe(0)
+    expect(String(authSignal.reason)).not.toContain(ACCESS_TOKEN)
   })
 
   it('maps malformed provider JSON to auth-unavailable', async () => {
@@ -255,8 +253,15 @@ describe('verifySupabaseBearer upstream availability decisions', () => {
     ['null response body', null],
     ['array response body', [{ id: USER_ID }]],
     ['missing id', { email: 'dad@example.test' }],
-    ['blank id', { id: '   ' }],
-    ['malformed UUID id', { id: 'household-user' }],
+    ['malformed length', { id: '123e4567-e89b-42d3-a456-42661417400' }],
+    ['missing hyphens', { id: '123e4567e89b42d3a456426614174000' }],
+    ['nonhex', { id: 'g23e4567-e89b-42d3-a456-426614174000' }],
+    ['leading whitespace', { id: ` ${USER_ID}` }],
+    ['trailing whitespace', { id: `${USER_ID} ` }],
+    ['braces', { id: `{${USER_ID}}` }],
+    ['arbitrary text', { id: 'household-user' }],
+    ['null id', { id: null }],
+    ['non-string id', { id: 42 }],
   ])('maps a 2xx %s to auth-unavailable, never unauthenticated', async (_name, body) => {
     const result = await verifySupabaseBearer(event(), {
       fetchImpl: vi.fn(async () => providerResponse(body)),
@@ -266,56 +271,141 @@ describe('verifySupabaseBearer upstream availability decisions', () => {
     expectFailure(result, 'auth-unavailable', 503, 'auth_unavailable')
   })
 
-  it('accepts a UUID matching the repository identity rule', async () => {
+  it.each([
+    ['repository-standard lowercase UUID', USER_ID],
+    ['uppercase hexadecimal UUID', USER_ID.toUpperCase()],
+    ['shape-valid UUID with non-RFC version and variant nibbles', '123e4567-e89b-f2d3-7456-426614174000'],
+    ['all-zero shape-valid UUID', '00000000-0000-0000-0000-000000000000'],
+  ])('accepts %s', async (_name, userId) => {
     const result = await verifySupabaseBearer(event(), {
-      fetchImpl: vi.fn(async () => providerResponse({ id: USER_ID })),
+      fetchImpl: vi.fn(async () => providerResponse({ id: userId })),
       env: ENV,
     })
 
-    expect(result).toEqual({ ok: true, user: { id: USER_ID }, accessToken: ACCESS_TOKEN })
+    expect(result).toEqual({ ok: true, user: { id: userId }, accessToken: ACCESS_TOKEN })
   })
 })
 
 describe('verifySupabaseBearer timeout bounds', () => {
+  it('clears the deadline after successful body processing with no late abort', async () => {
+    installFakeTimers()
+    let authSignal
+    const fetchImpl = vi.fn(async (_url, init) => {
+      authSignal = init.signal
+      return providerResponse({ id: USER_ID })
+    })
+
+    const result = await verifySupabaseBearer(event(), { fetchImpl, env: ENV })
+
+    expect(result).toEqual({ ok: true, user: { id: USER_ID }, accessToken: ACCESS_TOKEN })
+    expect(authSignal.aborted).toBe(false)
+    expect(vi.getTimerCount()).toBe(0)
+    await vi.advanceTimersByTimeAsync(SUPABASE_AUTH_TIMEOUT_MS)
+    expect(authSignal.aborted).toBe(false)
+    expect(fetchImpl).toHaveBeenCalledOnce()
+  })
+
+  it('clears the deadline when the provider refuses credentials before timeout', async () => {
+    installFakeTimers()
+    let authSignal
+    const result = await verifySupabaseBearer(event(), {
+      fetchImpl: vi.fn(async (_url, init) => {
+        authSignal = init.signal
+        return providerResponse({ message: 'refused' }, 401)
+      }),
+      env: ENV,
+    })
+
+    expectFailure(result, 'unauthenticated', 401, 'unauthenticated')
+    expect(authSignal.aborted).toBe(false)
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it('clears the deadline when the network rejects immediately', async () => {
+    installFakeTimers()
+    const result = await verifySupabaseBearer(event(), {
+      fetchImpl: vi.fn(async () => {
+        throw new TypeError('network unavailable')
+      }),
+      env: ENV,
+    })
+
+    expectFailure(result, 'auth-unavailable', 503, 'auth_unavailable')
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it('clears the deadline after local response parsing rejects', async () => {
+    installFakeTimers()
+    const result = await verifySupabaseBearer(event(), {
+      fetchImpl: vi.fn(async () => ({
+        status: 200,
+        json: vi.fn(async () => {
+          throw new SyntaxError('bad json')
+        }),
+      })),
+      env: ENV,
+    })
+
+    expectFailure(result, 'auth-unavailable', 503, 'auth_unavailable')
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
   it('honors a 3000ms caller override', async () => {
-    installFakeAbortTimeout()
+    installFakeTimers()
     const pending = verifySupabaseBearer(event(), {
       fetchImpl: hangingFetch(),
       env: ENV,
       timeoutMs: 3_000,
     })
 
+    expect(vi.getTimerCount()).toBe(1)
     await vi.advanceTimersByTimeAsync(3_000)
     expectFailure(await pending, 'upstream-timeout', 504, 'upstream_timeout')
-    expect(AbortSignal.timeout).toHaveBeenCalledWith(3_000)
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it('honors an explicit 5000ms maximum', async () => {
+    installFakeTimers()
+    const pending = verifySupabaseBearer(event(), {
+      fetchImpl: hangingFetch(),
+      env: ENV,
+      timeoutMs: SUPABASE_AUTH_TIMEOUT_MS,
+    })
+
+    expect(vi.getTimerCount()).toBe(1)
+    await vi.advanceTimersByTimeAsync(SUPABASE_AUTH_TIMEOUT_MS)
+    expectFailure(await pending, 'upstream-timeout', 504, 'upstream_timeout')
+    expect(vi.getTimerCount()).toBe(0)
   })
 
   it('caps overrides above 5000ms at the hard maximum', async () => {
-    installFakeAbortTimeout()
+    installFakeTimers()
     const pending = verifySupabaseBearer(event(), {
       fetchImpl: hangingFetch(),
       env: ENV,
       timeoutMs: 60_000,
     })
 
+    expect(vi.getTimerCount()).toBe(1)
     await vi.advanceTimersByTimeAsync(SUPABASE_AUTH_TIMEOUT_MS)
     expectFailure(await pending, 'upstream-timeout', 504, 'upstream_timeout')
-    expect(AbortSignal.timeout).toHaveBeenCalledWith(SUPABASE_AUTH_TIMEOUT_MS)
+    expect(vi.getTimerCount()).toBe(0)
   })
 
-  it.each([0, -1, 1.5, Number.NaN, 'fast', null])(
+  it.each([0, -1, 1.5, Number.NaN, 'fast', null, undefined])(
     'falls back to 5000ms for invalid timeout override %s',
     async (timeoutMs) => {
-      installFakeAbortTimeout()
+      installFakeTimers()
       const pending = verifySupabaseBearer(event(), {
         fetchImpl: hangingFetch(),
         env: ENV,
         timeoutMs,
       })
 
+      expect(vi.getTimerCount()).toBe(1)
       await vi.advanceTimersByTimeAsync(SUPABASE_AUTH_TIMEOUT_MS)
       expectFailure(await pending, 'upstream-timeout', 504, 'upstream_timeout')
-      expect(AbortSignal.timeout).toHaveBeenCalledWith(SUPABASE_AUTH_TIMEOUT_MS)
+      expect(vi.getTimerCount()).toBe(0)
     },
   )
 })
@@ -327,44 +417,5 @@ describe('canonical failure predicate', () => {
     expect(isTransientBearerAuthFailure({ failure: 'unauthenticated' })).toBe(false)
     expect(isTransientBearerAuthFailure({ failure: 'not-configured' })).toBe(false)
     expect(isTransientBearerAuthFailure({ ok: false })).toBe(false)
-  })
-})
-
-describe('representative consumer compatibility', () => {
-  const consumers = [
-    [
-      'Admin shared authorization',
-      (auth) => ({ actorUserId: auth.user.id, accessToken: auth.accessToken }),
-    ],
-    ['Parent installation', (auth) => ({ userId: auth.user.id, accessToken: auth.accessToken })],
-    ['Study', (auth) => ({ actorUserId: auth.user.id, accessToken: auth.accessToken })],
-    ['Anthropic/TTS gateway', (auth) => ({ userId: auth.user.id })],
-  ]
-
-  it.each(consumers)('supplies the %s server-side authorization inputs', async (_name, project) => {
-    const auth = await verifySupabaseBearer(event(), {
-      fetchImpl: vi.fn(async () => providerResponse({ id: USER_ID })),
-      env: ENV,
-    })
-    const privileged = vi.fn(async (inputs) => inputs)
-
-    if (auth.ok) await privileged(project(auth))
-
-    expect(privileged).toHaveBeenCalledOnce()
-    expect(privileged.mock.calls[0][0]).toEqual(project(auth))
-  })
-
-  it.each(consumers)('prevents %s privileged downstream work after bearer failure', async (_name, project) => {
-    const auth = await verifySupabaseBearer(event(), {
-      fetchImpl: vi.fn(async () => providerResponse({ error: 'outage' }, 500)),
-      env: ENV,
-    })
-    const privileged = vi.fn(async (inputs) => inputs)
-
-    if (auth.ok) await privileged(project(auth))
-
-    expectFailure(auth, 'auth-unavailable', 503, 'auth_unavailable')
-    expect(privileged).not.toHaveBeenCalled()
-    expect(auth.response.statusCode).not.toBe(424)
   })
 })
