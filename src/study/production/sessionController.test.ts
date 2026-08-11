@@ -380,22 +380,28 @@ describe('Study production controller foundation', () => {
   })
 
   it('rejects malformed or authority-bearing content responses at the client boundary', async () => {
+    const readBoundContent = vi.fn()
+      .mockResolvedValueOnce({
+        ...readyContent(),
+        serverAuthority: { releaseSourceRoot: 'private' },
+      })
+      .mockResolvedValueOnce(readyContent())
     const content = createStudyBoundContentClient({
-      runtime: {
-        readBoundContent: vi.fn(async () => ({
-          ...readyContent(),
-          serverAuthority: { releaseSourceRoot: 'private' },
-        })),
-      },
+      runtime: { readBoundContent },
       createAttemptRef: () => 'attempt:malformed-content',
     })
-    const { controller } = harness({ content })
+    const { controller, sessions } = harness({ content })
     await expect(controller.begin(beginInput)).resolves.toMatchObject({
       status: 'unavailable',
       content: null,
-      pendingMutation: null,
+      pendingMutation: 'begin',
       recovery: { kind: 'contract_invalid' },
     })
+    await expect(controller.begin(beginInput)).resolves.toMatchObject({
+      status: 'ready', content: { status: 'ready' }, pendingMutation: null,
+    })
+    const beginCalls = vi.mocked(sessions.begin).mock.calls
+    expect(beginCalls[0]![0].idempotencyKey).toBe(beginCalls[1]![0].idempotencyKey)
   })
 
   it('keeps the session and content on their old exact release after an active-pointer change', async () => {

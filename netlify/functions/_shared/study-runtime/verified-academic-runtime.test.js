@@ -244,4 +244,39 @@ describe('verified academic runtime gateway', () => {
     expect(response.body).not.toMatch(/student|household|grant|token|credential/i)
     expect((await handler({ httpMethod: 'POST', path: '/api/study/academic-runtime', headers: {} })).statusCode).toBe(401)
   })
+
+  it('bounds an unavailable database seam without exposing private diagnostics', async () => {
+    const call = vi.fn(async () => {
+      throw new Error('select * from academy_private.study_mutation_receipts; password=forbidden')
+    })
+    const gateway = createVerifiedAcademicRuntimeGateway({
+      rpc: { isConfigured: () => true, call },
+    })
+    await expect(gateway.execute({
+      sessionReference: reference,
+      operation: 'session:begin',
+      request: beginRequest(),
+    })).rejects.toMatchObject({ message: 'runtime_unavailable' })
+
+    const handler = createStudyAcademicRuntimeHandler({
+      env: { ACADEMY_STUDY_ENABLED: 'true' },
+      gateway,
+    })
+    const response = await handler({
+      httpMethod: 'POST',
+      path: '/api/study/academic-runtime',
+      headers: {
+        authorization: `Bearer ${reference}`,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        schemaVersion: 1,
+        operation: 'session:begin',
+        request: beginRequest(),
+      }),
+    })
+    expect(response.statusCode).toBe(500)
+    expect(JSON.parse(response.body)).toEqual({ error: { code: 'internal_error' } })
+    expect(response.body).not.toMatch(/select|sql|academy_private|password|forbidden|stack/i)
+  })
 })
