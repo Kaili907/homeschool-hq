@@ -236,7 +236,10 @@ export async function beginGatewayProviderAttempt({
       reasonCode: null,
       reconciliationRef: null,
     })
-    if (ready?.state !== 'dispatch_possible') throw serviceUnavailable()
+    if (
+      ready?.attemptId !== reservation.attemptId
+      || ready?.state !== 'dispatch_possible'
+    ) throw serviceUnavailable()
   } catch {
     await confirmNotDispatched(
       journal,

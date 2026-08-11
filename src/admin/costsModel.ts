@@ -80,12 +80,14 @@ export type AdminProviderAccountingReconciliationState =
 
 export interface AdminProviderAccountingCoverageMetrics {
   readonly reservedAttempts: number
+  readonly reservationOnlyAttempts: number
   readonly dispatchPossibleAttempts: number
   readonly observedOutcomes: number
   readonly ledgerLinkedAttempts: number
   readonly accountingGaps: number
   readonly gapPending: number
   readonly reconciliationConflicts: number
+  readonly reconciledAttempts: number
   readonly confirmedNotDispatched: number
   readonly unresolvable: number
 }
@@ -248,12 +250,14 @@ const PROVIDER_RECONCILIATION_STATES = new Set<AdminProviderAccountingReconcilia
 ])
 const PROVIDER_COVERAGE_METRIC_KEYS = [
   'reservedAttempts',
+  'reservationOnlyAttempts',
   'dispatchPossibleAttempts',
   'observedOutcomes',
   'ledgerLinkedAttempts',
   'accountingGaps',
   'gapPending',
   'reconciliationConflicts',
+  'reconciledAttempts',
   'confirmedNotDispatched',
   'unresolvable',
 ] as const
@@ -380,6 +384,50 @@ function providerCoverageMetrics(value: unknown): AdminProviderAccountingCoverag
   return metrics as unknown as AdminProviderAccountingCoverageMetrics
 }
 
+function providerCoverageStatusForMetrics(
+  metrics: AdminProviderAccountingCoverageMetrics,
+): Exclude<AdminProviderAccountingCoverageStatus, 'unavailable'> {
+  if (metrics.reconciliationConflicts > 0) return 'reconciliation_conflict'
+  if (metrics.accountingGaps > 0 || metrics.gapPending > 0 || metrics.unresolvable > 0) {
+    return 'gaps_detected'
+  }
+  if (metrics.reservedAttempts === 0) return 'insufficient_evidence'
+  if (
+    metrics.reservationOnlyAttempts
+    + metrics.dispatchPossibleAttempts
+    + metrics.observedOutcomes > 0
+  ) return 'partial'
+  return 'complete_for_journaled_attempts'
+}
+
+function providerCoverageMetricsAreConsistent(
+  metrics: AdminProviderAccountingCoverageMetrics,
+  allowOrphanLedgerRows: boolean,
+): boolean {
+  const currentStates = [
+    metrics.reservationOnlyAttempts,
+    metrics.dispatchPossibleAttempts,
+    metrics.observedOutcomes,
+    metrics.ledgerLinkedAttempts,
+    metrics.gapPending,
+    metrics.reconciliationConflicts,
+    metrics.reconciledAttempts,
+    metrics.confirmedNotDispatched,
+    metrics.unresolvable,
+  ]
+  const stateTotal = currentStates.reduce((total, count) => total + count, 0)
+  const missingRelationships = metrics.observedOutcomes
+    + metrics.gapPending
+    + metrics.reconciliationConflicts
+    + metrics.unresolvable
+  return Number.isSafeInteger(stateTotal)
+    && Number.isSafeInteger(missingRelationships)
+    && stateTotal === metrics.reservedAttempts
+    && (allowOrphanLedgerRows
+      ? metrics.accountingGaps >= missingRelationships
+      : metrics.accountingGaps === missingRelationships)
+}
+
 function providerCoverageRows(
   value: unknown,
   dimension: keyof typeof PROVIDER_COVERAGE_DIMENSIONS,
@@ -400,6 +448,8 @@ function providerCoverageRows(
       || seen.has(source.key)
       || !PROVIDER_COVERAGE_STATUSES.has(source.status as AdminProviderAccountingCoverageStatus)
       || source.status === 'unavailable'
+      || !providerCoverageMetricsAreConsistent(metrics, false)
+      || source.status !== providerCoverageStatusForMetrics(metrics)
       || Object.keys(source).length !== PROVIDER_COVERAGE_METRIC_KEYS.length + 2
     ) return null
     rows.push({
@@ -410,6 +460,39 @@ function providerCoverageRows(
     seen.add(source.key)
   }
   return rows
+}
+
+function sumProviderCoverageMetric(
+  rows: readonly AdminProviderAccountingCoverageBreakdownRow[],
+  key: keyof AdminProviderAccountingCoverageMetrics,
+): number | null {
+  let total = 0
+  for (const row of rows) {
+    total += row[key]
+    if (!Number.isSafeInteger(total)) return null
+  }
+  return total
+}
+
+function providerCoverageRowsMatchSummary(
+  rows: readonly AdminProviderAccountingCoverageBreakdownRow[],
+  metrics: AdminProviderAccountingCoverageMetrics,
+): boolean {
+  const exactKeys: readonly (keyof AdminProviderAccountingCoverageMetrics)[] = [
+    'reservedAttempts',
+    'reservationOnlyAttempts',
+    'dispatchPossibleAttempts',
+    'observedOutcomes',
+    'ledgerLinkedAttempts',
+    'gapPending',
+    'reconciliationConflicts',
+    'reconciledAttempts',
+    'confirmedNotDispatched',
+    'unresolvable',
+  ]
+  return exactKeys.every((key) => sumProviderCoverageMetric(rows, key) === metrics[key])
+    && (sumProviderCoverageMetric(rows, 'accountingGaps') ?? Number.POSITIVE_INFINITY)
+      <= metrics.accountingGaps
 }
 
 function providerInstrumentationCoverage(value: unknown): AdminProviderInstrumentationCoverage | null {
@@ -489,6 +572,13 @@ export function parseAdminProviderAccountingCoverage(value: unknown): AdminProvi
 
   const metrics = providerCoverageMetrics(source.metrics)
   if (!metrics) return null
+  if (
+    !providerCoverageMetricsAreConsistent(metrics, true)
+    || source.journalStatus !== providerCoverageStatusForMetrics(metrics)
+    || !providerCoverageRowsMatchSummary(engines, metrics)
+    || !providerCoverageRowsMatchSummary(purposes, metrics)
+    || !providerCoverageRowsMatchSummary(providers, metrics)
+  ) return null
   return {
     status: source.status as Exclude<AdminProviderAccountingCoverageStatus, 'unavailable'>,
     journalStatus: source.journalStatus as Exclude<AdminProviderAccountingCoverageStatus, 'unavailable'>,

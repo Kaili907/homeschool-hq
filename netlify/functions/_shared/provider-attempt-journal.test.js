@@ -119,6 +119,20 @@ describe('trusted provider attempt journal seam', () => {
     expect(store.reserve).not.toHaveBeenCalled()
   })
 
+  it.each([
+    ['learnerIdentity', { id: 'private-learner' }],
+    ['classifierText', 'private classifier output'],
+    ['audio', new Uint8Array([1, 2, 3])],
+    ['answer', 'private learner answer'],
+    ['providerRawObject', { error: 'private provider body' }],
+  ])('rejects injected %s evidence before persistence', async (field, value) => {
+    const { journal, store } = setup()
+    await expect(journal.reserve({ ...input(), [field]: value }, {})).rejects.toBeInstanceOf(
+      ProviderAttemptJournalError,
+    )
+    expect(store.reserve).not.toHaveBeenCalled()
+  })
+
   it('accepts only normalized transition evidence', async () => {
     const { journal, store } = setup()
     await journal.transition({
@@ -152,6 +166,28 @@ describe('trusted provider attempt journal seam', () => {
       code: 'provider_attempt_store_invalid',
     })
   })
+
+  it('rejects transition receipts bound to a different attempt', async () => {
+    const { journal } = setup({
+      store: {
+        reserve: vi.fn(),
+        transition: vi.fn(async () => ({
+          status: 'created',
+          attemptId: '00000000-0000-4000-8000-000000000099',
+          state: 'dispatch_possible',
+        })),
+        linkLedger: vi.fn(),
+      },
+    })
+    await expect(journal.transition({
+      attemptId: ATTEMPT_ID,
+      transitionKey: 'transition.wrong-attempt',
+      toState: 'dispatch_possible',
+      outcomeResult: null,
+      reasonCode: null,
+      reconciliationRef: null,
+    })).rejects.toMatchObject({ code: 'provider_attempt_store_invalid' })
+  })
 })
 
 describe('provider attempt Supabase store', () => {
@@ -184,5 +220,27 @@ describe('provider attempt Supabase store', () => {
     ])
     expect(rpc.mock.calls[0][1].p_facts).not.toHaveProperty('prompt')
     expect(rpc.mock.calls[0][1].p_facts).not.toHaveProperty('response')
+  })
+
+  it('bounds a reservation RPC that never returns', async () => {
+    const rpc = vi.fn(() => ({
+      abortSignal: (signal) => new Promise((resolve, reject) => {
+        signal.addEventListener('abort', () => reject(new Error('aborted')), { once: true })
+      }),
+    }))
+    const store = createSupabaseProviderAttemptStore({ rpc }, { timeoutMs: 5 })
+    const record = {
+      ...input(),
+      accountRef: ACCOUNT_ID,
+      householdRef: HOUSEHOLD_ID,
+      householdAttribution: 'resolved',
+      appVersion: 'academy.v1',
+      engineVersion: 'tutor.v1',
+      curriculumVersion: null,
+    }
+
+    await expect(store.reserve(record)).rejects.toMatchObject({
+      code: 'provider_attempt_store_unavailable',
+    })
   })
 })

@@ -119,6 +119,15 @@ describe('gateway service-role access', () => {
       result: 'success',
       resultReasonCode: null,
       billingDisposition: 'billable',
+      prompt: 'PRIVATE PROMPT SENTINEL',
+      response: 'PRIVATE RESPONSE SENTINEL',
+      learnerIdentity: 'PRIVATE LEARNER SENTINEL',
+      classifierText: 'PRIVATE CLASSIFIER SENTINEL',
+      audio: new Uint8Array([80, 82, 73, 86, 65, 84, 69]),
+      answer: 'PRIVATE ANSWER SENTINEL',
+      rawProviderError: 'PRIVATE ERROR SENTINEL',
+      providerSecret: 'PRIVATE SECRET SENTINEL',
+      providerRawObject: { private: true },
     })
     expect(client.rpc).toHaveBeenCalledWith('academy_record_provider_usage', {
       p_execution_key: 'request-key',
@@ -144,6 +153,7 @@ describe('gateway service-role access', () => {
       p_result_reason_code: null,
       p_billing_disposition: 'billable',
     })
+    expect(JSON.stringify(client.rpc.mock.calls)).not.toContain('PRIVATE')
   })
 
   it('reports ambiguous household attribution without guessing a household', async () => {

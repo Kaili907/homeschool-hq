@@ -87,7 +87,9 @@ describe('Admin provider accounting coverage projection', () => {
       invoiceCompletenessClaim: false,
       metrics: {
         reservedAttempts: 2,
+        reservationOnlyAttempts: 0,
         ledgerLinkedAttempts: 1,
+        reconciledAttempts: 0,
         confirmedNotDispatched: 1,
         accountingGaps: 0,
         gapPending: 0,
@@ -185,5 +187,17 @@ describe('Admin provider accounting coverage projection', () => {
     expect(buildAdminProviderAccountingCoverage(rawCoverage({
       range: { ...RANGE, endExclusive: '2026-08-10T00:00:00.000Z' },
     }), RANGE).status).toBe('unavailable')
+  })
+
+  it('rejects false complete evidence when ledgered states have no durable links', () => {
+    const forged = rawCoverage({
+      ledgerLinkedAttempts: 0,
+      states: states({ ledgered: 1, confirmedNotDispatched: 1 }),
+    })
+    expect(buildAdminProviderAccountingCoverage(forged, RANGE)).toMatchObject({
+      status: 'unavailable',
+      journalStatus: 'unavailable',
+      invoiceCompletenessClaim: false,
+    })
   })
 })

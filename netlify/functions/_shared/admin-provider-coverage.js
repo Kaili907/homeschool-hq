@@ -119,15 +119,27 @@ function presentMetrics({ recorded, linked, missing, orphan = 0, states }) {
   if (accountingGaps === null) return null
   return {
     reservedAttempts: recorded,
+    reservationOnlyAttempts: states.reserved,
     dispatchPossibleAttempts: states.dispatchPossible,
     observedOutcomes: states.outcomeObserved,
     ledgerLinkedAttempts: linked,
     accountingGaps,
     gapPending: states.gapPending,
     reconciliationConflicts: states.reconciliationConflict,
+    reconciledAttempts: states.reconciled,
     confirmedNotDispatched: states.confirmedNotDispatched,
     unresolvable: states.unresolvable,
   }
+}
+
+function relationshipsMatchStates({ linked, missing, states }) {
+  const statesMissingRelationship = safeAdd(
+    states.outcomeObserved,
+    states.gapPending,
+    states.reconciliationConflict,
+    states.unresolvable,
+  )
+  return linked === states.ledgered && missing === statesMissingRelationship
 }
 
 function overallStatusFor(journalStatus) {
@@ -166,6 +178,7 @@ function readBreakdownRows(value, dimension) {
       || recorded === null || linked === null || missing === null
       || linked > recorded || missing > recorded
       || safeAdd(...STATE_KEYS.map((key) => states[key])) !== recorded
+      || !relationshipsMatchStates({ linked, missing, states })
     ) return null
     const metrics = presentMetrics({ recorded, linked, missing, states })
     if (!metrics) return null
@@ -215,6 +228,7 @@ export function buildAdminProviderAccountingCoverage(value, range) {
     || recorded === null || linked === null || missing === null || orphan === null
     || linked > recorded || missing > recorded
     || !states || safeAdd(...STATE_KEYS.map((key) => states[key])) !== recorded
+    || !relationshipsMatchStates({ linked, missing, states })
     || source.costAuthority !== 'academy_provider_usage_ledger'
     || source.invoiceCompletenessClaim !== false
     || !breakdowns
