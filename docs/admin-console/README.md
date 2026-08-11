@@ -2,10 +2,13 @@
 
 Status: controlling ADMIN-0 contract, version 2. Version 2 refines only the
 provider usage/cost shape; the authorization, telemetry, health, routing, audit,
-and curriculum decisions remain unchanged.
+and curriculum decisions remain unchanged. This document records the original
+contract freeze. The integrated Admin Console implementation is present in RC1;
+statements below about later implementation or non-goals describe ADMIN-0's
+scope, not the current repository feature inventory.
 
 The Admin Console is an authenticated operator surface at `/academy/admin`. It
-will aggregate operational views and narrowly approved controls without becoming
+aggregates operational views and narrowly approved controls without becoming
 a second identity system, a raw learner-data warehouse, or a curriculum editor
 that can mutate a published release.
 
@@ -78,10 +81,14 @@ but only the server/API and database policies authorize data or actions.
 - [Curriculum human approval](curriculum-human-approval.md)
 - [Curriculum release staging](curriculum-release-staging.md)
 - [Integration guidance](integration-guidance.md)
+- [RC2 release evidence](rc2-release-evidence.md)
+- [RC2 GO / NO-GO operator package](rc2-go-no-go.md)
 - Shared TypeScript vocabulary: `src/admin/contracts.ts`
 
-## Non-goals for ADMIN-0
+## Non-goals for the original ADMIN-0 contract freeze
 
 No production schema, hosted configuration, route, UI, authorization helper,
 telemetry writer, pricing catalog, gateway mutation, curriculum draft store, or
-published curriculum change is part of this contract freeze.
+published curriculum change was part of the ADMIN-0 contract-freeze change.
+Later Admin commits implement repository-local versions of these capabilities;
+their hosted state remains a separate release-evidence question.

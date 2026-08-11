@@ -103,5 +103,5 @@ trusted server. Its UI distinguishes the saved value from the exact effective
 value, enforcement, stronger constraints, safe fallback, and unavailable
 consumers. After a commit the browser performs another authoritative read; it
 does not infer that the submitted value became effective. The two cost
-thresholds remain truthfully unavailable because no runtime alert evaluator is
-implemented, and Study remains outside this authority.
+thresholds feed the trusted monthly cost-alert evaluator and remain alert-only;
+they do not impose a provider hard cap. Study remains outside this authority.

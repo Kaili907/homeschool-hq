@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "snapshotAt": "2026-08-11T01:24:39Z",
+  "artifactHash": "sha256-exact-bytes",
+  "migrationHash": "sha256-lf-normalized-utf8",
+  "release": {
+    "rc1Sha": "4e404e7bce1ba7e843824e18c338148c23ac1896",
+    "rc2Sha": "PENDING",
+    "rc2LocalRef": "refs/heads/mac/admin-final-rc2-assembly",
+    "observedPartialRc2Sha": "d00bc6c8be3e83828f7a36a37c95724a00a1ccc5",
+    "observedPartialRc2Base": "4e404e7bce1ba7e843824e18c338148c23ac1896",
+    "observedPartialRc2Classification": "required-source-cherry-picks-present-but-dirty-in-progress-assembly-not-a-release-candidate"
+  },
+  "rc1MigrationManifest": {
+    "commit": "4e404e7bce1ba7e843824e18c338148c23ac1896",
+    "path": "docs/study-engine-final-production/migration-manifest.json",
+    "sha256": "955982ea02f456f065c59d67795017d38ab430973f8b9d73d7db374a4a7b2ad6",
+    "expectedMigrationCount": 32
+  },
+  "sources": [
+    {
+      "id": "rc1",
+      "branchObserved": "mac/admin-final-rc1-assembly",
+      "commit": "4e404e7bce1ba7e843824e18c338148c23ac1896",
+      "artifacts": [
+        {
+          "type": "migration-manifest",
+          "path": "docs/study-engine-final-production/migration-manifest.json",
+          "sha256": "955982ea02f456f065c59d67795017d38ab430973f8b9d73d7db374a4a7b2ad6"
+        },
+        {
+          "type": "feature-inventory",
+          "path": "src/components/admin/AdminConsoleRoute.tsx",
+          "sha256": "37a1801bbc5f990db972f8b5d5638dd0ad7c67c413f88db78da2e39b8f5db9cd"
+        },
+        {
+          "type": "readiness-policy",
+          "path": "netlify/functions/_shared/admin-production-readiness/service.js",
+          "sha256": "2aa814ca88bb8a97ce9df72e4e7545037f538d69bcd0c2c36889917b499a9c38"
+        },
+        {
+          "type": "cost-alert-contract",
+          "path": "docs/admin-configuration-runtime.md",
+          "sha256": "b23845f418e9b16fe3f11160dbe4fe0108671144c597c102e122d2c9e511b89b"
+        }
+      ]
+    },
+    {
+      "id": "security-red-team",
+      "branchObserved": "mac/admin-security-redteam",
+      "commit": "25d2001001c89734c3ddea7581a7ad6156b9c624",
+      "artifacts": [
+        {
+          "type": "report",
+          "path": "docs/admin-security-redteam-w7-3.md",
+          "sha256": "5d520736f6988e50624f971aed4310d7034e2b0ea8fa8a21d67b6e53d67ca593"
+        },
+        {
+          "type": "regression-test",
+          "path": "netlify/functions/admin-security-redteam.test.js",
+          "sha256": "f7f3ca1ba6d7ed15a748062980599ed623ae191df8ded58428e416d643bb1bb3"
+        },
+        {
+          "type": "migration",
+          "path": "supabase/migrations/20260810153000_academy_admin_configuration_reauthorization.sql",
+          "sha256": "e533b15b04157cd1a7015221b59fe483b3f67691ccf6f5a497e592398c978308"
+        }
+      ]
+    },
+    {
+      "id": "curriculum-privacy-red-team",
+      "branchObserved": "mac/admin-curr-privacy-redteam",
+      "commit": "076190b1812f2eb8b77b24335943a2e46283cca9",
+      "artifacts": [
+        {
+          "type": "migration-record",
+          "path": "docs/admin-console/curriculum-privacy-hardening-migration.json",
+          "sha256": "6c4a87bb786951c4b4a3a89eeffff7cd9e1be429831ce241c7eb6bddcb520761"
+        },
+        {
+          "type": "regression-test",
+          "path": "netlify/functions/_shared/admin-curriculum-preview.test.js",
+          "sha256": "d0ddf2d6b24ea1a726dd19862bf533d94aa30fe5fa285bb5997e3d2e174edb98"
+        },
+        {
+          "type": "migration",
+          "path": "supabase/migrations/20260810160000_academy_curriculum_privacy_hardening.sql",
+          "sha256": "e905cfd2bf1191a97dccb933e4b918c2d6d4bb3eb0e3660958fb5fe3302a7886"
+        }
+      ]
+    },
+    {
+      "id": "curriculum-release-control-red-team",
+      "branchObserved": "mac/admin-curr-release-redteam",
+      "commit": "af0f7f25331f98e0de1a3921330d10ec1ecb7a66",
+      "artifacts": [
+        {
+          "type": "release-control-contract",
+          "path": "MIGRATIONS.md",
+          "sha256": "9ba188f551719ee6ce0d13adde7aeeacf6bee1f384fa1bc3eb5c404b9e4bea44"
+        },
+        {
+          "type": "migration-record",
+          "path": "docs/admin-console/curriculum-release-staging-migration.json",
+          "sha256": "ad32cd1ba713ac6062a81094ca1d338b891597b2eb489e6263bb67cd516c079e"
+        },
+        {
+          "type": "migration-record",
+          "path": "docs/admin-console/curriculum-release-publishing-migration.json",
+          "sha256": "2a642870311de0018b373569b06e68fcbae20884e6b6535fc2cf495947f9c417"
+        },
+        {
+          "type": "migration-record",
+          "path": "docs/admin-console/curriculum-activation-rollback-migration.json",
+          "sha256": "ef53b7c1518c330a0657a2cc01cd9bb9c741672d7e7c72ff734eb88f425955a5"
+        },
+        {
+          "type": "regression-test",
+          "path": "supabase/academy-curriculum-activation-rollback.db.test.ts",
+          "sha256": "bfd9ff54198bf19b2da9f82180ceefa07310753ad13604454a28601d9b7322ab"
+        },
+        {
+          "type": "migration",
+          "path": "supabase/migrations/20260810150000_academy_curriculum_release_staging.sql",
+          "sha256": "c7976b3680a529d2cfb35650c50de065b2b08ff455097878daf1db09fd9144ca"
+        },
+        {
+          "type": "migration",
+          "path": "supabase/migrations/20260810160000_academy_curriculum_release_publishing.sql",
+          "sha256": "5e5b1df65106561399cb36b29c2585fc758f8d1c1b255ca39d38881c628e930e"
+        },
+        {
+          "type": "migration",
+          "path": "supabase/migrations/20260810170000_academy_curriculum_activation_rollback.sql",
+          "sha256": "4af0aedaae7a781da811652d967d399d5614d9372fbfe10fdbc158724c9273ec"
+        }
+      ]
+    },
+    {
+      "id": "provider-accounting-red-team",
+      "branchObserved": "mac/admin-provider-accounting-redteam",
+      "commit": "4b059e6de2fd109eab6f46e9f8d56897d4f4550d",
+      "artifacts": [
+        {
+          "type": "report",
+          "path": "docs/provider-attempt-journal.md",
+          "sha256": "006072d8cd2aa99948a7d301939e9874865e973664eeadf556fbfbebda29aa48"
+        },
+        {
+          "type": "regression-test",
+          "path": "tests/netlify-functions/provider-gateway-attempt.test.js",
+          "sha256": "538e37c37f93816fe42b6b1e3350fe66c7c6e01a01dfeb6b7529520530a8edec"
+        },
+        {
+          "type": "migration",
+          "path": "supabase/migrations/20260810130000_academy_provider_attempt_journal.sql",
+          "sha256": "92dc0d47e22d8fff03b4c4034bfc558351e8ca16373ec464e75b75d42a7bd192"
+        },
+        {
+          "type": "migration",
+          "path": "supabase/migrations/20260810151000_academy_study_safety_provider_accounting.sql",
+          "sha256": "5bcdc8891538613ada2c5872016b6cbe00e11c763b8ec6bacf4e6f354241cef6"
+        }
+      ]
+    },
+    {
+      "id": "migration-audit",
+      "branchObserved": "mac/admin-migration-chain-audit",
+      "commit": "1643df521d2dbc406e85795d25cbbfe7ba2542ae",
+      "artifacts": [
+        {
+          "type": "report",
+          "path": "docs/admin-migration-chain-audit.md",
+          "sha256": "3ea7059c0171c4eb192667ec6736e50b1599c909dbee8674a57d75b4dd5b496f"
+        },
+        {
+          "type": "replay-tool",
+          "path": "scripts/replay-admin-migration-union.mjs",
+          "sha256": "d82ba031b18b0d32393a61e9abbf8d853ab33e8970b1c5ba0ca5f2fb4307b601"
+        },
+        {
+          "type": "collision-detector",
+          "path": "scripts/migration-collision-detector.mjs",
+          "sha256": "708c1f735da31e7e11e88684ff230b2a9f7527715a9094542a71ef0b5cdc0879"
+        },
+        {
+          "type": "regression-test",
+          "path": "tests/migration-collision-detector.test.js",
+          "sha256": "7f42267923e613e1d059251496b06f2c20cda187c43e33d161ee48d9c0543833"
+        }
+      ]
+    },
+    {
+      "id": "release-rehearsal",
+      "branchObserved": "mac/admin-release-rehearsal",
+      "commit": "cf9ead79454c6950112fceebb66036cfe480161c",
+      "artifacts": [
+        {
+          "type": "report",
+          "path": "docs/admin-console/production-release-rehearsal.md",
+          "sha256": "ccca061ea209134250dc755642959e28855bf94b0da3d1923805a3036aa1801c"
+        },
+        {
+          "type": "runbook",
+          "path": "docs/admin-console/production-release-runbook.md",
+          "sha256": "cd63969263c61774793ad97a3ed34282bf7f9dd6f2a649926a6054ef33ec8f4c"
+        },
+        {
+          "type": "rehearsal-tool",
+          "path": "scripts/admin-release-rehearsal.mjs",
+          "sha256": "00c2e9a588b003c9be618404a7c86fa994dd689a01d5e5ed6fee23c114242cd2"
+        }
+      ]
+    },
+    {
+      "id": "monthly-cost-alert",
+      "branchObserved": "mac/admin-cost-threshold-runtime",
+      "commit": "275d02fe976f8600e780bd8bc48e78fdd440f4bd",
+      "artifacts": [
+        {
+          "type": "contract",
+          "path": "docs/admin-configuration-runtime.md",
+          "sha256": "b23845f418e9b16fe3f11160dbe4fe0108671144c597c102e122d2c9e511b89b"
+        },
+        {
+          "type": "runtime",
+          "path": "netlify/functions/_shared/admin-monthly-cost-alert.js",
+          "sha256": "440117b3375f18ba09813cddd0520027a590cc08f2a907e7ddcdf8bf6bf2ba5b"
+        },
+        {
+          "type": "regression-test",
+          "path": "netlify/functions/_shared/admin-monthly-cost-alert.test.js",
+          "sha256": "c3f3b81e8a6b62da62b047bb3d7309b504f863239bb5c55f8b7141c850fc93db"
+        }
+      ]
+    }
+  ]
+}
