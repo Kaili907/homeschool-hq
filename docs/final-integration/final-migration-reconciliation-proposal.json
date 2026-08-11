@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 1,
+  "proposalId": "final-cross-machine-rc-migration-reconciliation-v1",
+  "classification": "BLOCKED",
+  "candidateMappingStatus": "CONCRETE_PROVISIONAL",
+  "mutationPerformed": false,
+  "target": {
+    "worktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-final-migration-proposal",
+    "branch": "win/final-migration-proposal",
+    "exactBase": "666bf260843f67a4d6c959a0d4081ccf656cb55a"
+  },
+  "allocationPolicy": {
+    "rule": "Topologically order dependencies first, retain the first safe source version, then allocate the smallest unused 100-step versions; use filename order only for nodes proven independent.",
+    "reservedWindow": {
+      "first": "20260810120000",
+      "last": "20260810139999"
+    },
+    "protectedFirstLaterVersion": "20260810140000",
+    "productionDependencyProofComplete": false,
+    "reason": "The checked-in planner fixture supplies this exact four-entry order, but it is synthetic. Two production source migrations and their manifests are not present in any fetched ref or local worktree, so the fixture cannot substitute for the required production SQL/manifest graph."
+  },
+  "collisionGroups": [
+    {
+      "version": "20260810120000",
+      "filenames": [
+        "20260810120000_academy_provider_attempt_journal.sql",
+        "20260810120000_academy_curriculum_draft_authoring.sql",
+        "20260810120000_academy_study_effective_settings_v2.sql",
+        "20260810120000_academy_provider_pricing_terms.sql"
+      ],
+      "locallyObservedProductionFilenames": [
+        "20260810120000_academy_provider_pricing_terms.sql",
+        "20260810120000_academy_study_effective_settings_v2.sql"
+      ],
+      "sourceUnavailableLocally": [
+        "20260810120000_academy_provider_attempt_journal.sql",
+        "20260810120000_academy_curriculum_draft_authoring.sql"
+      ],
+      "additionalCollisionGroupsDiscovered": false
+    }
+  ],
+  "reconciliations": [
+    {
+      "filename": "20260810120000_academy_provider_attempt_journal.sql",
+      "replacementVersion": "20260810120000",
+      "oldFilename": "20260810120000_academy_provider_attempt_journal.sql",
+      "oldVersion": "20260810120000",
+      "proposedFilename": "20260810120000_academy_provider_attempt_journal.sql",
+      "proposedVersion": "20260810120000",
+      "dependencies": {
+        "productionManifest": "SOURCE_MANIFEST_UNAVAILABLE",
+        "productionSql": "SOURCE_SQL_UNAVAILABLE",
+        "plannerFixtureOnly": []
+      },
+      "reason": "Retain the original version as the first slot in the existing deterministic four-way planner candidate, minimizing filename churn. Production dependency confirmation remains required.",
+      "contentBytesExpectedToChange": false,
+      "existingSqlSha256": "SOURCE_SHA256_UNAVAILABLE",
+      "checksumConsequence": "PRESERVE_EXISTING_SHA256_IF_SOURCE_BYTES_MATCH_AND_NO_CONTENT_EDIT",
+      "manifestReferences": [
+        "SOURCE_MANIFEST_UNAVAILABLE",
+        "docs/study-engine-final-production/migration-manifest.json (future consolidated entry)"
+      ],
+      "testReferences": [
+        "SOURCE_TEST_REFERENCES_UNAVAILABLE"
+      ],
+      "docReferences": [
+        "SOURCE_DOC_REFERENCES_UNAVAILABLE"
+      ],
+      "hostedStatus": "HOSTED_STATUS_UNVERIFIED",
+      "safetyClassification": "UNAPPLIED_CANDIDATE_SOURCE_AND_HOSTED_STATUS_UNVERIFIED"
+    },
+    {
+      "filename": "20260810120000_academy_curriculum_draft_authoring.sql",
+      "replacementVersion": "20260810120100",
+      "oldFilename": "20260810120000_academy_curriculum_draft_authoring.sql",
+      "oldVersion": "20260810120000",
+      "proposedFilename": "20260810120100_academy_curriculum_draft_authoring.sql",
+      "proposedVersion": "20260810120100",
+      "dependencies": {
+        "productionManifest": "SOURCE_MANIFEST_UNAVAILABLE",
+        "productionSql": "SOURCE_SQL_UNAVAILABLE",
+        "plannerFixtureOnly": [
+          "20260810120000_academy_provider_attempt_journal.sql"
+        ]
+      },
+      "reason": "Allocate the smallest unused slot after the retained provider-attempt migration in the existing deterministic planner candidate. The production edge must be verified before apply.",
+      "contentBytesExpectedToChange": true,
+      "existingSqlSha256": "SOURCE_SHA256_UNAVAILABLE",
+      "checksumConsequence": "RECOMPUTE_AFTER_CONTENT_EDIT",
+      "manifestReferences": [
+        "SOURCE_MANIFEST_UNAVAILABLE",
+        "docs/study-engine-final-production/migration-manifest.json (future consolidated entry and dependency references)"
+      ],
+      "testReferences": [
+        "SOURCE_TEST_REFERENCES_UNAVAILABLE"
+      ],
+      "docReferences": [
+        "SOURCE_DOC_REFERENCES_UNAVAILABLE"
+      ],
+      "hostedStatus": "HOSTED_STATUS_UNVERIFIED",
+      "safetyClassification": "RENUMBER_PROPOSED_SOURCE_AND_HOSTED_STATUS_UNVERIFIED_RECOMPUTE_REQUIRED"
+    },
+    {
+      "filename": "20260810120000_academy_study_effective_settings_v2.sql",
+      "replacementVersion": "20260810120200",
+      "oldFilename": "20260810120000_academy_study_effective_settings_v2.sql",
+      "oldVersion": "20260810120000",
+      "proposedFilename": "20260810120200_academy_study_effective_settings_v2.sql",
+      "proposedVersion": "20260810120200",
+      "dependencies": {
+        "productionManifest": [
+          "20260809160000_academy_curriculum_release_registry.sql (win/final-study-rc1)",
+          "20260808123000_academy_admin_safety_operations.sql (win/final-admin-delta-rc1)"
+        ],
+        "productionSqlPrerequisites": [
+          "public.academy_study_parent_settings",
+          "public.academy_study_accommodations",
+          "public.academy_study_can_view(uuid,uuid)",
+          "academy_private.study_persistence_metadata"
+        ],
+        "plannerFixtureOnly": [
+          "20260810120100_academy_curriculum_draft_authoring.sql"
+        ]
+      },
+      "reason": "Allocate the next 100-step slot in the existing deterministic candidate. Available production manifests and SQL prove only dependencies on earlier non-colliding foundations; the curriculum-authoring edge is fixture-only until its production source arrives.",
+      "contentBytesExpectedToChange": true,
+      "existingSqlSha256": "67b3c2b2792260c4fb779cd814e08901579f06bef8a1765002c3cc1e98837fae",
+      "checksumConsequence": "RECOMPUTE_AFTER_CONTENT_EDIT",
+      "contentEditReason": "The migration stores its own old versioned identity in academy_private.study_persistence_metadata.migration_names.",
+      "manifestReferences": [
+        "docs/study-engine-final-production/migration-manifest.json: effective-settings entry",
+        "docs/study-engine-final-production/migration-manifest.json: 20260810150000 curriculum-binding dependency"
+      ],
+      "testReferences": [
+        "supabase/study-effective-settings-v2.db.test.ts",
+        "supabase/study-curriculum-binding.db.test.ts",
+        "supabase/study-engine-adult-review.db.test.ts",
+        "supabase/study-engine-in-app-receipt-timestamp.db.test.ts",
+        "supabase/study-worker-run-evidence.db.test.ts",
+        "supabase/study-production-security-adversarial.db.test.ts",
+        "supabase/study-session-semantics-v2.db.test.ts",
+        "supabase/study-session-telemetry-outbox.db.test.ts",
+        "scripts/study-production-local-smoke.mjs"
+      ],
+      "docReferences": [
+        "MIGRATIONS.md",
+        "docs/study-effective-settings-v2.md"
+      ],
+      "hostedStatus": "HOSTED_STATUS_UNVERIFIED",
+      "safetyClassification": "RENUMBER_PROPOSED_UNFROZEN_HOSTED_STATUS_UNVERIFIED_RECOMPUTE_REQUIRED"
+    },
+    {
+      "filename": "20260810120000_academy_provider_pricing_terms.sql",
+      "replacementVersion": "20260810120300",
+      "oldFilename": "20260810120000_academy_provider_pricing_terms.sql",
+      "oldVersion": "20260810120000",
+      "proposedFilename": "20260810120300_academy_provider_pricing_terms.sql",
+      "proposedVersion": "20260810120300",
+      "dependencies": {
+        "productionManifest": [
+          "20260809150000_academy_logical_voice_profile_contract.sql (win/final-admin-delta-rc1)",
+          "20260809130000_academy_admin_audit_foundation.sql (win/provider-pricing-terms)"
+        ],
+        "productionSqlPrerequisites": [
+          "20260808122000_academy_provider_usage_cost_ledger.sql",
+          "20260809121000_academy_provider_usage_cost_aggregate.sql",
+          "20260809130000_academy_admin_audit_foundation.sql"
+        ],
+        "plannerFixtureOnly": [
+          "20260810120200_academy_study_effective_settings_v2.sql"
+        ]
+      },
+      "reason": "Allocate the fourth minimal 100-step slot in the existing deterministic candidate. Available production SQL has no dependency on effective settings, so that collision-group edge remains fixture-only pending the missing sources and final manifest.",
+      "contentBytesExpectedToChange": false,
+      "existingSqlSha256": "40baeb9f0554059462a5fd22ff7e3159273133c35f85522421c763ac33d8e6ff",
+      "checksumConsequence": "PRESERVE_SHA256_IF_RENAME_ONLY",
+      "manifestReferences": [
+        "docs/study-engine-final-production/migration-manifest.json: provider-pricing entry",
+        "docs/study-engine-final-production/migration-manifest.json: 20260810140000 runtime-enforcement dependency"
+      ],
+      "testReferences": [
+        "supabase/academy-provider-pricing-terms.db.test.ts",
+        "supabase/academy-study-provider-cost-accounting.db.test.ts"
+      ],
+      "docReferences": [
+        "MIGRATIONS.md"
+      ],
+      "hostedStatus": "HOSTED_STATUS_UNVERIFIED",
+      "safetyClassification": "RENAME_ONLY_PROPOSED_UNFROZEN_HOSTED_STATUS_UNVERIFIED_CHECKSUM_PRESERVED"
+    }
+  ],
+  "dependentContentRecomputations": [
+    {
+      "filename": "20260810152000_academy_study_in_app_receipt_timestamp.sql",
+      "reason": "Its prerequisite identity array embeds 20260810120000_academy_study_effective_settings_v2.",
+      "currentSha256": "6d9656bcda6d5a2493947ddc4bb396dfb82d1ec6e575e468fbbe71620ba62f93",
+      "futureSha256": "RECOMPUTE_AFTER_CONTENT_EDIT"
+    },
+    {
+      "filename": "20260810152100_academy_study_worker_operations_contract.sql",
+      "reason": "Its prerequisite identity array embeds 20260810120000_academy_study_effective_settings_v2.",
+      "currentSha256": "0ab55c40fe1aacc614b150b9d395415f10b48e1503a8ba090288ebefddfc31d6",
+      "futureSha256": "RECOMPUTE_AFTER_CONTENT_EDIT"
+    }
+  ],
+  "unchangedChecksumEntries": [
+    {
+      "filename": "20260810120000_academy_provider_pricing_terms.sql",
+      "proposedFilename": "20260810120300_academy_provider_pricing_terms.sql",
+      "sha256": "40baeb9f0554059462a5fd22ff7e3159273133c35f85522421c763ac33d8e6ff"
+    }
+  ],
+  "protectedUniqueMigrations": [
+    "20260809121000_academy_provider_usage_cost_aggregate.sql",
+    "20260809160000_academy_curriculum_release_registry.sql",
+    "20260809170000_academy_admin_curriculum_audit_vocabulary.sql",
+    "20260810140000_academy_admin_configuration_runtime_enforcement.sql",
+    "20260810141000_academy_study_provider_cost_accounting.sql",
+    "20260810150000_academy_study_curriculum_binding.sql",
+    "20260810151000_academy_study_session_semantics_v2.sql",
+    "20260810152000_academy_study_in_app_receipt_timestamp.sql",
+    "20260810152100_academy_study_worker_operations_contract.sql",
+    "20260810153000_academy_study_release_registry_bridge.sql",
+    "20260810154000_academy_study_bound_content_authority.sql",
+    "20260810155000_academy_study_session_telemetry_outbox.sql",
+    "20260810159000_academy_study_worker_run_evidence.sql"
+  ],
+  "sourceInventory": {
+    "remoteRefreshPerformed": true,
+    "hostedSupabaseContactPerformed": false,
+    "inspectedLocalWinRefsWithFinalEraMigrations": 39,
+    "inspectedWinRefs": [
+      "win/admin-14b-runtime",
+      "win/admin-costs-accounting-integration",
+      "win/admin-costs-browser-gate",
+      "win/admin-costs-v3-integration",
+      "win/admin-migration-reconciliation-planner",
+      "win/admin-preflight-r3",
+      "win/admin-study-operations",
+      "win/admin-study-ops-browser-gate",
+      "win/admin-study-ops-evidence-r2",
+      "win/admin-unified-preflight-orchestrator",
+      "win/final-admin-delta-rc1",
+      "win/final-migration-proposal",
+      "win/final-production-activation-runbook",
+      "win/final-rc-validation-harness",
+      "win/final-study-rc1",
+      "win/provider-pricing-terms",
+      "win/provider-pricing-ui",
+      "win/study-bound-content-runtime",
+      "win/study-curriculum-binding",
+      "win/study-deployment-env-preflight",
+      "win/study-effective-settings-v2",
+      "win/study-learner-path-r4",
+      "win/study-private-scheduled-worker",
+      "win/study-production-client-controller",
+      "win/study-production-core-r3",
+      "win/study-production-mount-r5",
+      "win/study-production-smoke-harness",
+      "win/study-production-ux-shell",
+      "win/study-provider-cost-accounting",
+      "win/study-recovery-chaos-gate",
+      "win/study-release-registry-bridge",
+      "win/study-security-adversarial-r4",
+      "win/study-session-semantics-v2",
+      "win/study-session-telemetry-outbox",
+      "win/study-telemetry-delivery-worker",
+      "win/study-telemetry-invocation",
+      "win/study-worker-production-composition",
+      "win/study-worker-run-evidence",
+      "win/study-worker-schedule"
+    ],
+    "canonicalAvailableSources": [
+      {
+        "ref": "win/final-admin-delta-rc1",
+        "head": "e3f62dced44b8ddd7e932ec992756a39f30f3495",
+        "initialWorktreeState": "CLEAN",
+        "committedPlannerResult": "BLOCKED",
+        "committedPlannerErrors": [
+          "MISSING_MANIFEST_ENTRY:20260810159000_academy_study_worker_run_evidence.sql",
+          "DESTINATION_VERSION_REUSED:20260810120000"
+        ],
+        "finalObservedWorktreeState": "DIRTY_CONCURRENT_EXTERNAL_RECONCILIATION",
+        "finalObservedPlannerResult": "VALID_CANDIDATE_PLAN",
+        "externalMutationAttributedToThisCard": false
+      },
+      {
+        "ref": "win/final-study-rc1",
+        "head": "8ef764772c43f63b08403248c1e98273c35c5f4f",
+        "worktreeState": "DIRTY_SOURCE_EVIDENCE_ONLY",
+        "dirtyPaths": [
+          "MIGRATIONS.md",
+          "docs/study-engine-final-production/migration-manifest.json"
+        ],
+        "plannerResultWithWorktreeManifest": "VALID_CANDIDATE_PLAN"
+      },
+      {
+        "ref": "feat/curriculum-audit-contract",
+        "head": "40845a4c26d7bd157195e6d8822ad4e34018cad4",
+        "worktreeState": "CLEAN",
+        "uniqueMigration": "20260809170000_academy_admin_curriculum_audit_vocabulary.sql"
+      }
+    ],
+    "sameFilenameContentVariantCollisions": [],
+    "productionSourceFilesNotFoundAfterFetch": [
+      "20260810120000_academy_provider_attempt_journal.sql",
+      "20260810120000_academy_curriculum_draft_authoring.sql"
+    ]
+  },
+  "safety": {
+    "frozenHistoricalRenumberingProposed": false,
+    "knownAppliedRenumberingProposed": false,
+    "hostedApplyStatus": "HOSTED_STATUS_UNVERIFIED",
+    "actualReconciliationBlocker": "Hosted apply history must be verified before any later migration rename or content edit.",
+    "sqlMigrationFilesModified": false,
+    "migrationFilesRenamed": false,
+    "manifestFilesModified": false
+  },
+  "validation": {
+    "allCandidateDestinationIdsUnique": true,
+    "noProtectedDestinationReuse": true,
+    "noFrozenHistoricalViolationInCandidate": true,
+    "manifestUpdatesIdentifiableForAvailableSources": true,
+    "productionFourWayDependencyOrderLegal": "UNVERIFIED",
+    "plannerFixtureProjection": "VALID_CANDIDATE_PLAN",
+    "availableAdminSubsetAfterConcurrentExternalReconciliation": "VALID_CANDIDATE_PLAN",
+    "productionFourWayPlannerResult": "BLOCKED_SOURCE_INVENTORY_INCOMPLETE",
+    "proposalFixtureValidation": "PASS:SCHEMA_UNIQUENESS_AND_VALID_PLANNER_FIXTURE_MUTATION_FALSE",
+    "plannerTests": "PASS",
+    "r3PreflightTests": "PASS",
+    "manifestTests": "PASS",
+    "focusedTestSummary": "4 files passed; 51 tests passed",
+    "typecheck": "PASS",
+    "build": "PASS_WITH_EXISTING_CHUNK_SIZE_WARNING",
+    "gitDiffCheck": "PASS",
+    "mutationPerformed": false
+  },
+  "blockers": [
+    "PRODUCTION_SOURCE_SQL_UNAVAILABLE:20260810120000_academy_provider_attempt_journal.sql",
+    "PRODUCTION_SOURCE_MANIFEST_UNAVAILABLE:20260810120000_academy_provider_attempt_journal.sql",
+    "PRODUCTION_SOURCE_SQL_UNAVAILABLE:20260810120000_academy_curriculum_draft_authoring.sql",
+    "PRODUCTION_SOURCE_MANIFEST_UNAVAILABLE:20260810120000_academy_curriculum_draft_authoring.sql",
+    "PRODUCTION_FOUR_WAY_DEPENDENCY_GRAPH_UNPROVEN",
+    "FINAL_ADMIN_RC_MANIFEST_ENTRY_MISSING:20260810159000_academy_study_worker_run_evidence.sql",
+    "HOSTED_STATUS_UNVERIFIED"
+  ]
+}
