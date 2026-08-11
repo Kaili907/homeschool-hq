@@ -19,6 +19,7 @@
     "test:sync-db": "vitest run supabase/academy-cas.db.test.ts",
     "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts",
     "test:admin-auth": "vitest run src/admin/authorization.test.ts netlify/functions/_shared/admin-authorization.test.js netlify/functions/admin-authorization.test.js supabase/academy-admin-authorization.db.test.ts",
+    "smoke:study-production-local": "vitest run --config scripts/study-production-local-smoke.vitest.config.mjs",
     "test:engine": "vitest run --config adaptive-tutor/study-engine/tests/final-assembly/component-vitest.config.mjs",
     "test:tutor": "npm --prefix adaptive-tutor run test",
     "test:calendar": "npm --prefix adaptive-tutor/study-engine/integration-labs/calendar-parent-runtime run test",
