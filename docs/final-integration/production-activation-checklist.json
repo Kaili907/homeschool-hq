@@ -1,0 +1,931 @@
+{
+  "schemaVersion": 1,
+  "checklistId": "manuel-academy-production-activation-v1",
+  "classification": "PRODUCTION_ACTIVATION_RUNBOOK_READY",
+  "runbookPath": "docs/final-integration/production-activation-runbook.md",
+  "mode": "operator-controlled-gates",
+  "authoringContext": {
+    "baseSha": "28ce1a938a0f06617bd92d31ff1ec7ef95fb541c",
+    "branch": "win/final-production-activation-runbook",
+    "productionReadinessClaimed": false,
+    "note": "This checklist defines the activation workflow. It does not claim that the authoring base or a future release candidate is production-ready."
+  },
+  "targetTransition": {
+    "from": "READY_FOR_HOSTED_PREFLIGHT",
+    "to": "PRODUCTION_SMOKE_ACCEPTED",
+    "failureTerminal": "STOPPED"
+  },
+  "safetyBoundaries": {
+    "defaultAction": "STOP",
+    "noHostedContactWithoutSeparateAuthorization": true,
+    "noSecretValuesInEvidence": true,
+    "noLearnerContentInEvidence": true,
+    "noMigrationHistoryForce": true,
+    "noDestructiveAutomaticDatabaseRollback": true,
+    "existingStudySessionBindingsAreImmutable": true,
+    "applicationRollbackDoesNotImplyDatabaseRollback": true
+  },
+  "operatorRecord": {
+    "requiredFields": [
+      "changeRecordRef",
+      "authorizationRef",
+      "operatorRefs",
+      "startedAt",
+      "releaseSha",
+      "releaseBranch",
+      "supabaseProjectRef",
+      "netlifySiteId",
+      "netlifyProductionBranch",
+      "migrationManifestGitBlob",
+      "approvedMigrationEntries",
+      "configurationPresenceRecord",
+      "configurationRevisionRefs",
+      "deployId",
+      "deployCommitRef",
+      "preflightArtifactRef",
+      "smokeArtifactRef",
+      "finalDecision",
+      "completedAt"
+    ],
+    "forbiddenFields": [
+      "secretValues",
+      "accessTokens",
+      "refreshTokens",
+      "serviceRoleKey",
+      "providerKeys",
+      "workerCredential",
+      "workerInvocationSecret",
+      "learnerContent",
+      "learnerAnswers",
+      "tutorConversation",
+      "providerPayload",
+      "recipientContact"
+    ]
+  },
+  "commandCatalog": [
+    {
+      "id": "root-tests",
+      "type": "npm_script",
+      "script": "test",
+      "command": "npm.cmd test",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "typecheck",
+      "type": "npm_script",
+      "script": "typecheck",
+      "command": "npm.cmd run typecheck",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "build",
+      "type": "npm_script",
+      "script": "build",
+      "command": "npm.cmd run build",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "secondary-gates",
+      "type": "npm_script",
+      "script": "test:secondary",
+      "command": "npm.cmd run test:secondary",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "student-browser",
+      "type": "npm_script",
+      "script": "test:student-browser",
+      "command": "npm.cmd run test:student-browser",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "ui-browser",
+      "type": "npm_script",
+      "script": "test:ui-browser",
+      "command": "npm.cmd run test:ui-browser",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "assembly-browser",
+      "type": "npm_script",
+      "script": "test:assembly-browser",
+      "command": "npm.cmd run test:assembly-browser",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "migration-reconciliation-plan",
+      "type": "npm_script",
+      "script": "plan:migration-reconciliation",
+      "command": "npm.cmd run plan:migration-reconciliation",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "admin-production-preflight-r3",
+      "type": "npm_script",
+      "script": "preflight:admin-production:json",
+      "command": "npm.cmd run preflight:admin-production:json",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "study-deployment-environment-preflight",
+      "type": "npm_script",
+      "script": "preflight:study-deployment-env",
+      "command": "npm.cmd run preflight:study-deployment-env -- --format json",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "unified-local-production-preflight",
+      "type": "npm_script",
+      "script": "preflight:production-local:json",
+      "command": "npm.cmd run preflight:production-local:json",
+      "availability": "authoring_base",
+      "hostedContact": false,
+      "requiredResult": "READY_FOR_HOSTED_PREFLIGHT"
+    },
+    {
+      "id": "study-local-production-smoke",
+      "type": "npm_script",
+      "script": "smoke:study-production-local",
+      "command": "npm.cmd run smoke:study-production-local",
+      "availability": "reachable_repository_commit",
+      "sourceCommit": "a3c9a9483fde5054ac9b7606d34ae0d8863a8630",
+      "requiredOnReleaseSha": true,
+      "hostedContact": false,
+      "requiredResult": "STUDY_LOCAL_PRODUCTION_SMOKE_READY"
+    },
+    {
+      "id": "study-security-adversarial-r4",
+      "type": "targeted_vitest",
+      "command": "npx.cmd vitest run netlify/functions/_shared/study-runtime/verified-academic-runtime.adversarial.test.js supabase/study-production-security-adversarial.db.test.ts",
+      "availability": "reachable_repository_commit",
+      "sourceCommit": "0841d4a50e02cb0406331ab962d21824b4bc3bc7",
+      "requiredOnReleaseSha": true,
+      "hostedContact": false
+    },
+    {
+      "id": "study-recovery-chaos",
+      "type": "targeted_vitest",
+      "command": "npx.cmd vitest run src/study/production/studyRecoveryChaos.test.ts src/study/production/sessionController.test.ts netlify/functions/_shared/study-runtime/verified-academic-runtime.test.js",
+      "availability": "reachable_repository_commit",
+      "sourceCommit": "50ae5c05a09e12e2e573dfe9ecf984f95a7badc0",
+      "requiredOnReleaseSha": true,
+      "hostedContact": false
+    },
+    {
+      "id": "final-rc-validation-harness",
+      "type": "release_discovery",
+      "command": null,
+      "availability": "not_reachable_at_authoring_base",
+      "requiredOnReleaseSha": false,
+      "instruction": "If the final release SHA contains a named RC validation package script, record and run that exact script. Do not invent a command."
+    },
+    {
+      "id": "validate-runbook-structure",
+      "type": "npm_script",
+      "script": "validate:production-activation-runbook",
+      "command": "npm.cmd run validate:production-activation-runbook",
+      "availability": "authoring_base",
+      "hostedContact": false
+    },
+    {
+      "id": "hosted-migration-ledger-read",
+      "type": "hosted_procedure",
+      "command": null,
+      "availability": "separate_read_only_authorization_required",
+      "hostedContact": true,
+      "mutation": false,
+      "instruction": "Select and record the current supported authenticated Supabase ledger-export procedure. The authoring base does not pin or install a hosted CLI."
+    },
+    {
+      "id": "hosted-migration-dry-run",
+      "type": "hosted_procedure",
+      "command": null,
+      "availability": "separate_migration_authorization_required",
+      "hostedContact": true,
+      "mutation": false,
+      "instruction": "Use the exact dry-run mode of the operator-approved Supabase migration runner and record tool, version, target identity, invocation, and plan without credentials."
+    },
+    {
+      "id": "hosted-migration-apply",
+      "type": "hosted_procedure",
+      "command": null,
+      "availability": "separate_migration_authorization_required",
+      "hostedContact": true,
+      "mutation": true,
+      "instruction": "Use the same operator-approved Supabase migration runner whose dry-run exactly matched approvedMigrationEntries. The authoring base supplies no copy-paste hosted apply command."
+    }
+  ],
+  "releaseRequiredEnvironmentNames": {
+    "publicClientConfiguration": [
+      "VITE_STUDY_ENGINE_ENABLED",
+      "VITE_STUDY_ENGINE_PREVIEW",
+      "VITE_ALLOW_BROWSER_PROVIDER_KEYS",
+      "VITE_SUPABASE_URL",
+      "VITE_SUPABASE_ANON_KEY",
+      "VITE_USE_PROXY"
+    ],
+    "serverConfiguration": [
+      "SUPABASE_URL",
+      "SUPABASE_ANON_KEY",
+      "ACADEMY_STUDY_ENABLED",
+      "ACADEMY_AI_ENABLED",
+      "ACADEMY_TTS_ENABLED",
+      "ACADEMY_APP_VERSION",
+      "ACADEMY_TUTOR_ENGINE_VERSION",
+      "ACADEMY_JARVIS_ENGINE_VERSION",
+      "ACADEMY_TTS_ENGINE_VERSION",
+      "ACADEMY_STUDY_ADULT_REVIEW_WORKER_ID",
+      "ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL_ID",
+      "ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL_VERSION",
+      "ACADEMY_STUDY_ADULT_REVIEW_WORKER_CONFIGURATION_VERSION"
+    ],
+    "secretPresenceOnly": [
+      "SUPABASE_SERVICE_ROLE_KEY",
+      "STUDY_SAFETY_RATE_LIMIT_HMAC_KEY",
+      "ANTHROPIC_API_KEY",
+      "ELEVENLABS_API_KEY",
+      "ACADEMY_STUDY_ADULT_REVIEW_WORKER_CREDENTIAL",
+      "ACADEMY_STUDY_ADULT_REVIEW_WORKER_INVOCATION_SECRET"
+    ],
+    "ttsPrivateConfiguration": [
+      "ELEVENLABS_ALLOWED_VOICE_IDS"
+    ],
+    "hostProvidedDeploymentIdentity": [
+      "COMMIT_REF",
+      "DEPLOY_ID"
+    ]
+  },
+  "migrationApprovalModel": {
+    "authoritativeManifest": "docs/study-engine-final-production/migration-manifest.json at operatorRecord.releaseSha",
+    "authoritativeDirectory": "supabase/migrations at operatorRecord.releaseSha",
+    "approvedEntriesRule": "The concrete ordered entries copied into operatorRecord.approvedMigrationEntries after Phase 1 reconciliation are the only entries approved for Phase 2.",
+    "historicalBaselineRule": "Historical-equivalent objects are never replayed. Any ledger baseline operation requires separate explicit approval and the current supported Supabase history procedure.",
+    "newExecutableRule": "Only manifest entries whose exact version, filename, canonical checksum, dependency, marker transition, and hosted absence all match may be applied.",
+    "mismatchRule": "Any mismatch, extra hosted migration, ambiguous history, missing dependency, or changed checksum stops the line.",
+    "applyMechanism": "An operator-approved, version-recorded Supabase migration runner applies the tracked migration directory to the independently verified project after its exact dry-run matches approvedMigrationEntries. The authoring base does not pin or install a hosted CLI, so the exact supported tool and invocation must be selected during authorization. No SQL copy/paste and no ad hoc ledger mutation are permitted."
+  },
+  "phases": [
+    {
+      "id": "phase-0-local-rc-gate",
+      "order": 0,
+      "authorization": "local_only",
+      "entryCondition": "A named final RC branch and immutable release SHA exist locally.",
+      "exitCondition": "Unified local production preflight returns READY_FOR_HOSTED_PREFLIGHT and every other local gate is green.",
+      "steps": [
+        {
+          "id": "p0-01-open-record",
+          "order": 10,
+          "action": "Open a bounded activation record and capture the release SHA, release branch, operator refs, change record, and planned authorization boundaries.",
+          "evidence": ["activation record reference", "release SHA", "release branch"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-02-clean-rc",
+          "order": 20,
+          "action": "Verify the RC worktree is clean, HEAD equals the recorded release SHA, and no generated or untracked source is required for the build.",
+          "commands": ["git status --porcelain", "git rev-parse HEAD"],
+          "evidence": ["empty porcelain status", "HEAD SHA"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-03-source-custody",
+          "order": 30,
+          "action": "Reconcile the final integration inventory against the RC and prove every approved source commit is an ancestor or otherwise recorded in the final reviewed diff.",
+          "evidence": ["source inventory", "ancestor or reviewed-diff result", "final diff review"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-04-migration-identity",
+          "order": 40,
+          "action": "Run the migration reconciliation planner and Admin R3 migration identity checks; require unique numeric versions, exact manifest/file mapping, dependency order, markers, and canonical checksums.",
+          "commandRefs": ["migration-reconciliation-plan", "admin-production-preflight-r3"],
+          "evidence": ["planner JSON or operator artifact", "Admin R3 JSON", "manifest Git blob"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-05-root-tests",
+          "order": 50,
+          "action": "Run the complete root test gate without exclusions or assertion weakening.",
+          "commandRefs": ["root-tests"],
+          "evidence": ["exit code", "test summary"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-06-typecheck",
+          "order": 60,
+          "action": "Run the repository TypeScript gate.",
+          "commandRefs": ["typecheck"],
+          "evidence": ["exit code"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-07-build-and-bundle",
+          "order": 70,
+          "action": "Build the production artifact and scan the built client for direct provider routes, server-only environment names, credential-shaped literals, preview adapters, and synthetic production authority.",
+          "commandRefs": ["build"],
+          "evidence": ["build result", "service-worker stamp", "zero-match bundle scan"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-08-browser-gates",
+          "order": 80,
+          "action": "Run secondary package gates including Student Runtime, prototype UI, and final assembly browser projects; retain desktop/mobile, accessibility, keyboard, reduced-motion, and recovery results.",
+          "commandRefs": ["secondary-gates", "student-browser", "ui-browser", "assembly-browser"],
+          "evidence": ["secondary summary", "browser project summaries", "manual accessibility/device record if required by the RC"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-09-security-adversarial",
+          "order": 90,
+          "action": "Require the Study production security/adversarial R4 files on the release SHA and run their exact Netlify and database suites.",
+          "commandRefs": ["study-security-adversarial-r4"],
+          "evidence": ["release-SHA file presence", "adversarial test summary"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-10-recovery-chaos",
+          "order": 100,
+          "action": "Require the Study recovery/chaos gate on the release SHA and run its uncertain-commit, replay, refresh, stale-revision, content-loss, and immutable-binding scenarios.",
+          "commandRefs": ["study-recovery-chaos"],
+          "evidence": ["release-SHA file presence", "chaos test summary"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-11-local-study-smoke",
+          "order": 110,
+          "action": "Require and run the local Study production smoke harness from the release SHA; require zero external-contact attempts and STUDY_LOCAL_PRODUCTION_SMOKE_READY.",
+          "commandRefs": ["study-local-production-smoke"],
+          "evidence": ["smoke JSON line", "operator checklist", "zero external-contact count"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-12-local-preflights",
+          "order": 120,
+          "action": "Run Admin Production Preflight R3, Study deployment-environment preflight, migration reconciliation, and the unified local production preflight in a value-silent environment.",
+          "commandRefs": ["admin-production-preflight-r3", "study-deployment-environment-preflight", "migration-reconciliation-plan", "unified-local-production-preflight"],
+          "evidence": ["four bounded result artifacts"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-13-final-rc-harness",
+          "order": 130,
+          "action": "Discover whether the release SHA contains a named final RC validation harness. If present, run its exact repository command; if absent, record that fact and do not invent one.",
+          "commandRefs": ["final-rc-validation-harness"],
+          "evidence": ["package script discovery result", "harness result when present"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p0-14-ready",
+          "order": 140,
+          "action": "Confirm the unified result is exactly READY_FOR_HOSTED_PREFLIGHT and freeze all Phase 0 artifacts to the release SHA.",
+          "evidence": ["READY_FOR_HOSTED_PREFLIGHT classification", "artifact index"],
+          "onFailure": "STOP"
+        }
+      ]
+    },
+    {
+      "id": "phase-1-hosted-read-only-preflight",
+      "order": 10,
+      "authorization": "separate_read_only_hosted_authorization",
+      "entryCondition": "Phase 0 is green and authorization names the exact Supabase project and Netlify site.",
+      "exitCondition": "Hosted state exactly matches the release expectations; no write occurred.",
+      "steps": [
+        {
+          "id": "p1-01-authorize-read-only",
+          "order": 10,
+          "action": "Record a read-only authorization naming the exact project, site, operator, time window, and permitted queries. Verify no migration, configuration, deploy, secret read, or provider call is authorized.",
+          "evidence": ["authorization reference", "scope and expiry"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p1-02-project-identity",
+          "order": 20,
+          "action": "Verify Supabase organization, project reference, environment, database host, and API hostname from authenticated hosted state against the approved Manuel Academy target.",
+          "evidence": ["project reference", "organization ref", "environment label", "hostname fingerprint"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p1-03-migration-ledger",
+          "order": 30,
+          "action": "Export the hosted migration ledger read-only and reconcile every version with the release-SHA manifest. Classify equivalent historical objects separately from executable missing migrations.",
+          "procedureRefs": ["hosted-migration-ledger-read"],
+          "evidence": ["bounded ledger export", "ordered reconciliation", "unexpected-version count"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p1-04-schema-prerequisites",
+          "order": 40,
+          "action": "Read-only compare markers, relation kinds, columns, constraints, indexes, functions, owners, search paths, policies, triggers, grants, forced-RLS state, required roles/extensions, exposed schemas, and candidate-name collisions.",
+          "evidence": ["catalog comparison artifact", "marker versions", "collision count", "private-schema exposure result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p1-05-owner-admin-state",
+          "order": 50,
+          "action": "Record count-only owner/admin assignment state and bootstrap readiness. Do not record user IDs or email addresses. If no reviewed owner bootstrap or owner-management path exists for the observed state, stop.",
+          "evidence": ["active owner count", "active admin count", "bootstrap path reference or blocker"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p1-06-environment-presence",
+          "order": 60,
+          "action": "Verify required Netlify environment variable names, scopes, and context presence only; verify public URL/anon configuration points to the same project without copying values.",
+          "evidence": ["name/scope/presence matrix", "same-project result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p1-07-netlify-identity",
+          "order": 70,
+          "action": "Verify Netlify team/site identity, production branch, deploy contexts, auto-publish behavior, build/publish/functions configuration, Node version, redirects, schedule, current production deploy ID, and commit ref. Resolve the repository main/master documentation conflict from hosted truth.",
+          "evidence": ["site ID", "production branch", "deploy trigger mode", "current deploy ID and commit ref", "schedule presence"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p1-08-hosted-ruling",
+          "order": 80,
+          "action": "Compare all hosted evidence with expected state. Any difference, unknown, partial ledger, or missing prerequisite ends the phase as STOPPED without a write.",
+          "evidence": ["hosted preflight result", "zero-write attestation"],
+          "onFailure": "STOP"
+        }
+      ]
+    },
+    {
+      "id": "phase-2-migrations",
+      "order": 20,
+      "authorization": "separate_migration_authorization",
+      "entryCondition": "Phase 1 matched exactly, a backup is restorable, and the concrete ordered migration list is approved.",
+      "exitCondition": "Every approved entry committed in order and all post-apply checks pass.",
+      "steps": [
+        {
+          "id": "p2-01-approve-exact-list",
+          "order": 10,
+          "action": "Copy the concrete release-manifest entries into approvedMigrationEntries with version, filename, checksum, dependency, marker transition, hosted pre-state, and approved action. Approve exactly that ordered list.",
+          "evidence": ["approved migration entries", "manifest Git blob", "migration authorization reference"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p2-02-backup-recovery",
+          "order": 20,
+          "action": "Verify a fresh restorable database backup or platform recovery point, recovery owner, retention window, restore target, and rehearsed recovery procedure before any mutation.",
+          "evidence": ["backup/recovery reference", "recovery owner", "restore verification result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p2-03-baseline-history",
+          "order": 30,
+          "action": "Resolve historical-equivalent objects through a separately approved current supported Supabase history procedure without replaying their SQL. Re-read the ledger and objects afterward.",
+          "evidence": ["baseline authorization", "supported procedure reference", "post-baseline ledger result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p2-04-dry-run",
+          "order": 40,
+          "action": "Run the linked-project migration dry-run and require its exact order to equal approvedMigrationEntries with no extra, skipped, repeated, or changed entry.",
+          "procedureRefs": ["hosted-migration-dry-run"],
+          "evidence": ["dry-run plan", "exact-list comparison"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p2-05-dark-state",
+          "order": 50,
+          "action": "Confirm new Study entry, new provider calls, and worker claims are dark or fail-closed for the migration window while audit and incident evidence remain available.",
+          "evidence": ["feature state", "provider state", "worker claim state"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p2-06-apply",
+          "order": 60,
+          "action": "Apply only the approved tracked migrations through the linked-project Supabase CLI. One unexpected prompt, plan difference, checksum difference, or transaction failure stops further application.",
+          "procedureRefs": ["hosted-migration-apply"],
+          "evidence": ["bounded runner result", "committed versions", "transaction outcomes"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p2-07-post-apply",
+          "order": 70,
+          "action": "Re-read ledger, markers, object definitions, owners, search paths, RLS/FORCE, grants, policies, triggers, constraints, indexes, object counts, private-schema exposure, and exact denial probes. Verify no partial object or unexpected grant exists.",
+          "evidence": ["post-apply ledger", "marker transitions", "catalog diff", "role/RLS probe summary"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p2-08-failure-handling",
+          "order": 80,
+          "action": "On any failure, stop consumers and workers, preserve evidence, classify transaction rollback versus post-commit fault, and open a forward-repair review. Do not continue to later migrations unless the line is re-authorized.",
+          "evidence": ["failure classification", "last verified ledger state", "forward-repair reference if needed"],
+          "onFailure": "STOP"
+        }
+      ]
+    },
+    {
+      "id": "phase-3-production-configuration",
+      "order": 30,
+      "authorization": "separate_configuration_authorization",
+      "entryCondition": "Phase 2 is verified and configuration owners have approved value sources without exposing values to the activation record.",
+      "exitCondition": "All required names are present in correct scopes, durable configuration is revisioned, and fail-closed gates are verified.",
+      "steps": [
+        {
+          "id": "p3-01-configuration-plan",
+          "order": 10,
+          "action": "Approve a name/scope/source/revision plan for every environment and durable configuration input. Evidence contains names, presence, scope, revision, and verification reference only.",
+          "evidence": ["configuration plan", "configuration authorization"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p3-02-provider-pricing",
+          "order": 20,
+          "action": "Publish independently verified effective-dated provider pricing terms through the owner-authorized preview/commit path. Match provider, product, model, logical tier, usage unit, currency, unit size, IntegerMicros rate, interval, revision, and verification reference. Missing or ambiguous billable pricing remains unavailable, never zero.",
+          "evidence": ["pricing term IDs/revisions", "verification references", "non-overlap and exact-dimension result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p3-03-ai-tts",
+          "order": 30,
+          "action": "Set AI/TTS deployment ceilings, server-only provider credential presence, model/tier policy, logical voice catalog and private voice allowlist. Enable premium TTS only when an approved catalog mapping exists; otherwise retain browser fallback and disabled synthesis.",
+          "evidence": ["AI/TTS name/scope presence", "durable setting revisions", "logical voice catalog revision", "credential presence only"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p3-04-study-environment",
+          "order": 40,
+          "action": "Configure the Study client/server gates, matching Supabase public/server identities, safety limiter secret presence, provider secret presence, proxy-only mode, and preview/browser-provider-key prohibitions exactly as the Study deployment preflight requires.",
+          "evidence": ["Study environment presence matrix", "unsafe exposure result", "preflight result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p3-05-worker",
+          "order": 50,
+          "action": "Configure worker identity, credential ID/version, configuration version, credential presence, manual invocation secret presence, exact five-minute scheduled function, least-privilege registry scopes, and production composition readiness. Keep external email/SMS routes unavailable unless separately governed and approved.",
+          "evidence": ["worker refs/versions", "secret presence only", "schedule declaration", "scope/readiness summary"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p3-06-deployment-versions",
+          "order": 60,
+          "action": "Bind ACADEMY_APP_VERSION to the immutable release identifier and record independently versioned Tutor, Jarvis, and TTS engine values where applicable. Require host COMMIT_REF to equal releaseSha after deployment.",
+          "evidence": ["application version", "engine version refs", "expected release SHA"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p3-07-feature-gates",
+          "order": 70,
+          "action": "Record intended client/server Study, AI, TTS, worker, curriculum pointer, and cohort states. Durable provider enablement must remain bounded by deployment ceilings and all safety/authorization/readiness gates.",
+          "evidence": ["feature-gate state matrix", "durable configuration revisions", "curriculum pointer revision"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p3-08-configuration-ruling",
+          "order": 80,
+          "action": "Re-run value-silent configuration/preflight checks and freeze the configuration state record for deployment.",
+          "commandRefs": ["study-deployment-environment-preflight", "unified-local-production-preflight"],
+          "evidence": ["configuration state record", "preflight artifacts"],
+          "onFailure": "STOP"
+        }
+      ]
+    },
+    {
+      "id": "phase-4-deploy",
+      "order": 40,
+      "authorization": "separate_deployment_authorization",
+      "entryCondition": "Migration and configuration records are frozen, and hosted Netlify trigger behavior is verified.",
+      "exitCondition": "One production deploy is published with deploy commit ref equal to releaseSha and immediate readiness checks pass.",
+      "steps": [
+        {
+          "id": "p4-01-freeze-release",
+          "order": 10,
+          "action": "Approve the release SHA, verified migration state, verified configuration state, Netlify site ID, production branch, deploy context, and rollback deploy ID as one deployment packet.",
+          "evidence": ["deployment authorization", "deployment packet"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p4-02-select-trigger",
+          "order": 20,
+          "action": "Use only the hosted-verified Netlify production trigger: the verified auto-publish branch or the verified manual production deploy control. Do not infer the branch from conflicting repository documentation.",
+          "evidence": ["verified trigger mode", "verified production branch"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p4-03-deploy-once",
+          "order": 30,
+          "action": "Trigger one controlled production deploy for the approved release SHA. Do not clear caches or trigger a second build unless a new authorization records why.",
+          "evidence": ["deploy ID", "deploy start/end timestamps", "build result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p4-04-verify-deploy-identity",
+          "order": 40,
+          "action": "Verify site/team/context, deploy ID, deploy commit ref, release SHA, build command, publish/functions paths, Node version, redirects, function inventory, schedule, and configuration-state linkage.",
+          "evidence": ["deploy identity record", "COMMIT_REF equality result", "configuration linkage"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p4-05-immediate-readiness",
+          "order": 50,
+          "action": "Before broad navigation, verify the application shell, service-worker version, Admin authorization boundary, Study readiness boundary, and worker health return bounded expected states without secret or private-data exposure.",
+          "evidence": ["readiness status codes", "bounded reason codes", "service-worker release identity"],
+          "onFailure": "STOP"
+        }
+      ]
+    },
+    {
+      "id": "phase-5-production-smoke",
+      "order": 50,
+      "authorization": "production_smoke_authorization",
+      "entryCondition": "Deploy identity is exact and operator-safe synthetic identities/data are available.",
+      "exitCondition": "Every smoke family passes with no stop condition and the release is accepted or rolled back.",
+      "steps": [
+        {
+          "id": "p5-01-safe-fixtures",
+          "order": 10,
+          "action": "Use an approved operator/admin account and synthetic/operator-safe learner fixture. Never require or copy real learner content into smoke evidence.",
+          "evidence": ["fixture classification", "operator identity class", "no-real-content attestation"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-02-admin-shell-overview",
+          "order": 20,
+          "action": "Open /academy/admin and verify Admin shell authorization, navigation, Overview data freshness/completeness labels, and denial for an unassigned or insufficient-role account.",
+          "evidence": ["authorized result", "denial result", "Overview status/reason codes"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-03-audit-configuration",
+          "order": 30,
+          "action": "Verify Audit pagination/filtering and Configuration effective revisions, deployment ceilings, protective disable behavior, and no credential/raw-row exposure. Do not perform an unplanned configuration mutation.",
+          "evidence": ["Audit read result", "Configuration read result", "redaction result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-04-engines-health-costs-pricing",
+          "order": 40,
+          "action": "Verify Engine Performance, System Health, Costs, and Provider Pricing show honest completeness, exact versions, exact decimal-string money, correct thresholds, configured pricing intervals, and unavailable rather than invented zero when evidence is absent.",
+          "evidence": ["four surface results", "pricing revision refs", "cost arithmetic fixture result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-05-study-ops-curriculum-studio",
+          "order": 50,
+          "action": "Verify Study Operations worker/backlog/readiness evidence and Curriculum Studio published/draft/validation/release state within the operator's capabilities. Confirm immutable published artifacts and current active pointer.",
+          "evidence": ["Study Operations state", "Curriculum Studio state", "active pointer revision"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-06-study-route",
+          "order": 60,
+          "action": "Open /study-engine for the synthetic learner, verify server-derived authority, ready/unavailable honesty, route refresh behavior, learner-switch cancellation, logout cancellation, and no preview or synthetic-authority fallback.",
+          "evidence": ["route status", "authority denial probes", "switch/logout results"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-07-begin-resume-content",
+          "order": 70,
+          "action": "Begin one synthetic Study session, verify exact published release/settings binding and bound content, checkpoint safely, refresh/resume, and test an idempotent replay. Do not complete or rewrite an existing real learner session.",
+          "evidence": ["opaque session evidence ref", "release/settings versions", "checkpoint/resume/replay reason codes"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-08-worker",
+          "order": 80,
+          "action": "Verify the private scheduled function cadence and one bounded worker run evidence record. Confirm credential/config versions, one claim/attempt path, duplicate suppression, and no unverified delivered claim. Use manual invocation only when separately authorized.",
+          "evidence": ["schedule evidence", "worker run evidence ref", "attempt/receipt reason codes", "duplicate-suppression result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-09-telemetry",
+          "order": 90,
+          "action": "Verify one synthetic operational event and provider-attempt/cost path is delivered and aggregated exactly once with correct app/engine/curriculum versions and privacy-safe dimensions.",
+          "evidence": ["event/attempt refs", "writer result", "aggregate before/after counts", "version dimensions"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-10-authorization-privacy",
+          "order": 100,
+          "action": "Run authorized/unauthorized/cross-household/forged-role probes against Admin and Study boundaries. Inspect browser network and bundles for secret values, provider credentials, private notes, learner answers, Tutor content, raw provider bodies, and backend errors.",
+          "evidence": ["authorization matrix", "privacy scan result", "bounded response codes"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-11-mobile-deep-link",
+          "order": 110,
+          "action": "Verify /academy/admin and /study-engine deep links/refreshes, SPA fallback, 320px/390px reflow, touch targets, keyboard focus, reduced motion, and service-worker update on an approved desktop and mobile-class browser.",
+          "evidence": ["deep-link matrix", "mobile/accessibility result", "service-worker result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "p5-12-final-ruling",
+          "order": 120,
+          "action": "Review all stop conditions. Record PRODUCTION_SMOKE_ACCEPTED only when every smoke step passes; otherwise execute the bounded rollback matrix and record STOPPED.",
+          "evidence": ["smoke summary", "final decision", "rollback record if used"],
+          "onFailure": "STOP"
+        }
+      ]
+    },
+    {
+      "id": "rollback-and-stop-the-line",
+      "order": 60,
+      "authorization": "incident_or_rollback_authorization",
+      "entryCondition": "A stop condition, smoke failure, or operator rollback decision occurs.",
+      "exitCondition": "New risk is contained, evidence is preserved, and the resulting deploy/configuration/migration state is recorded.",
+      "steps": [
+        {
+          "id": "rb-01-stop-new-effects",
+          "order": 10,
+          "action": "Stop new Study entry, new provider work, and new worker claims as applicable before changing artifacts. Preserve attempts, receipts, proposals, telemetry, and audit evidence.",
+          "evidence": ["containment timestamps", "gate/worker/provider states"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "rb-02-select-control",
+          "order": 20,
+          "action": "Select the smallest compatible rollback control from rollbackMatrix and record its preconditions, owner, expected scope, and verification plan.",
+          "evidence": ["selected rollback entry", "rollback authorization"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "rb-03-forward-repair",
+          "order": 30,
+          "action": "Treat committed database migrations as forward-only unless an independently reviewed recovery plan proves otherwise. Use an additive forward repair for post-commit defects; never rewrite existing Study bindings or erase evidence.",
+          "evidence": ["database state classification", "forward-repair review reference"],
+          "onFailure": "STOP"
+        }
+      ]
+    },
+    {
+      "id": "incident-evidence-and-closeout",
+      "order": 70,
+      "authorization": "operator_closeout",
+      "entryCondition": "Activation is accepted or stopped.",
+      "exitCondition": "The bounded evidence packet is complete and contains no secrets or learner content.",
+      "steps": [
+        {
+          "id": "cl-01-capture",
+          "order": 10,
+          "action": "Capture release SHA, deploy ID/commit ref, migration versions/hashes, preflight result, configuration revisions/presence, smoke result, bounded error/reason codes, final state, and timestamps.",
+          "evidence": ["incident or activation evidence packet"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "cl-02-privacy-review",
+          "order": 20,
+          "action": "Review the packet and remove any secret value, token, credential, learner content, Tutor conversation, provider body, contact value, or raw database error before distribution.",
+          "evidence": ["privacy review result"],
+          "onFailure": "STOP"
+        },
+        {
+          "id": "cl-03-close",
+          "order": 30,
+          "action": "Record the final decision, current deploy/configuration/migration state, remaining follow-up owners, and whether activation is accepted or held.",
+          "evidence": ["signed closeout decision"],
+          "onFailure": "STOP"
+        }
+      ]
+    }
+  ],
+  "rollbackMatrix": [
+    {
+      "id": "application-rollback",
+      "trigger": "Application regression with schema compatibility preserved",
+      "control": "Publish the previously recorded green immutable Netlify deploy through the verified production control.",
+      "preserves": ["database migrations", "audit evidence", "Study session bindings"],
+      "verification": ["deploy ID changed to approved rollback ID", "commit ref matches rollback artifact", "Admin/Study fail-closed smoke passes"]
+    },
+    {
+      "id": "feature-gate-disable",
+      "trigger": "Study runtime or authority risk",
+      "control": "Disable the server Study gate immediately and the client Study gate in the next controlled build; keep preview and browser-provider-key modes off.",
+      "preserves": ["sessions", "checkpoints", "bindings", "audit evidence"],
+      "verification": ["new Study entry denied", "existing data unchanged", "no preview fallback"]
+    },
+    {
+      "id": "worker-schedule-disable",
+      "trigger": "Duplicate, unauthorized, indeterminate, or unsafe worker behavior",
+      "control": "Stop new scheduled/manual claims using the verified Netlify schedule control and worker readiness/credential controls; do not erase leases, attempts, receipts, or jobs.",
+      "preserves": ["attempts", "receipts", "proposals", "jobs", "monitoring evidence"],
+      "verification": ["no new claims", "leased/indeterminate inventory recorded", "duplicate-delivery risk reconciled before re-enable"]
+    },
+    {
+      "id": "provider-ai-tts-disable",
+      "trigger": "Provider safety, pricing, accounting, credential, or output risk",
+      "control": "Set deployment and durable AI/TTS enablement to false through approved controls. Rotate a credential only when compromise requires it; never record the value.",
+      "preserves": ["usage ledger", "attempt journal", "pricing history", "audit history"],
+      "verification": ["new provider calls denied", "catalog fallback state honest", "no quota or ledger mutation on denied calls"]
+    },
+    {
+      "id": "curriculum-active-pointer-rollback",
+      "trigger": "Published curriculum release defect",
+      "control": "Use the owner-authorized audited release operation to point new resolution to a previously published immutable release.",
+      "preserves": ["published releases", "pointer history", "existing session bindings", "learner event versions"],
+      "verification": ["new pointer revision", "new sessions resolve prior release", "already-bound sessions remain unchanged"]
+    },
+    {
+      "id": "new-study-session-release-rollback",
+      "trigger": "Unexpected behavior in sessions created against the newly active release",
+      "control": "Disable new Study begins while changing the active pointer to the prior published release, then re-enable only after smoke. Already-bound Study sessions remain pinned to their original immutable release and settings snapshot.",
+      "preserves": ["all existing Study session bindings", "checkpoints", "idempotency receipts", "release history"],
+      "verification": ["new begin resolves prior release", "resume resolves each session's stored release", "no binding rewrite occurred"]
+    },
+    {
+      "id": "database-forward-repair",
+      "trigger": "Post-commit migration defect or incompatible live behavior",
+      "control": "Keep consumers dark, preserve evidence, and ship a separately reviewed additive forward repair. A failed transaction is verified as rolled back; a committed migration is not treated as trivially reversible.",
+      "preserves": ["durable data", "immutable history", "RLS posture", "audit/attempt/receipt evidence"],
+      "verification": ["ledger and marker state known", "repair checksum approved", "post-repair catalog and denial probes pass"]
+    }
+  ],
+  "stopTheLine": [
+    {
+      "id": "migration-checksum-mismatch",
+      "trigger": "Any release file, manifest, dry-run, hosted ledger, or recorded checksum differs",
+      "action": "Stop before further migration or deploy work and require a new reviewed migration plan."
+    },
+    {
+      "id": "unexpected-hosted-migration",
+      "trigger": "Hosted ledger contains an extra, partial, reordered, or unknown version",
+      "action": "Stop read-only; do not hide, overwrite, replay, or bypass the history."
+    },
+    {
+      "id": "authorization-failure",
+      "trigger": "Admin, guardian, learner, worker, or service operation permits too much, denies the required operator unexpectedly, or uses caller-authored authority",
+      "action": "Disable the affected entry point and preserve bounded denial evidence."
+    },
+    {
+      "id": "privacy-leak",
+      "trigger": "Any secret, credential, contact, learner content, Tutor conversation, provider body, raw SQL/error, or private note crosses an unauthorized boundary",
+      "action": "Contain the surface, revoke/rotate only if required, preserve minimized evidence, and begin privacy incident handling."
+    },
+    {
+      "id": "provider-pricing-wrong",
+      "trigger": "A provider/product/model/tier/unit/currency/rate/interval or account-specific term is missing, ambiguous, stale, or incorrect",
+      "action": "Disable the affected provider path; never substitute a default or zero cost."
+    },
+    {
+      "id": "cost-arithmetic-wrong",
+      "trigger": "IntegerMicros calculation, rounding, threshold, component, request-unit, or aggregate result differs from the approved fixture",
+      "action": "Disable affected provider work and cost reporting until corrected and reconciled."
+    },
+    {
+      "id": "study-authority-bypass",
+      "trigger": "Preview/synthetic/caller-authored identity, role, release, settings, revision, or content becomes production authority",
+      "action": "Disable Study immediately and preserve bounded authority reason codes."
+    },
+    {
+      "id": "worker-duplicate-delivery",
+      "trigger": "More than one provider effect or delivered claim occurs for one attempt/idempotency identity",
+      "action": "Stop worker claims and provider delivery, retain all immutable evidence, and reconcile before re-enable."
+    },
+    {
+      "id": "telemetry-duplicate-counting",
+      "trigger": "One logical event/attempt is persisted or aggregated more than once, or replay changes its facts",
+      "action": "Stop affected reporting/provider activation and reconcile writer, ledger, and aggregate identities."
+    },
+    {
+      "id": "production-smoke-failure",
+      "trigger": "Any required Phase 5 check fails, is unavailable unexpectedly, leaks data, or cannot prove the expected state",
+      "action": "Do not accept the release; select the smallest rollback control."
+    },
+    {
+      "id": "unexpected-release-binding-behavior",
+      "trigger": "A resumed session re-resolves a pointer/settings snapshot, or an active-pointer rollback rewrites an existing session",
+      "action": "Disable new Study entry, preserve the affected opaque references, and roll back application/pointer for new sessions only."
+    }
+  ],
+  "incidentEvidence": {
+    "record": [
+      "releaseSha",
+      "deployId",
+      "deployCommitRef",
+      "supabaseProjectRef",
+      "netlifySiteId",
+      "migrationVersionsAndHashes",
+      "migrationManifestGitBlob",
+      "preflightResultAndArtifactRef",
+      "configurationRevisionsAndPresence",
+      "smokeResultAndArtifactRef",
+      "boundedErrorAndReasonCodes",
+      "featureWorkerProviderPointerStates",
+      "timestamps",
+      "finalDecision"
+    ],
+    "neverRecord": [
+      "secretValues",
+      "tokens",
+      "credentials",
+      "learnerContent",
+      "learnerAnswers",
+      "TutorConversation",
+      "providerRequestOrResponseBody",
+      "recipientContact",
+      "privateAdultNotes",
+      "rawDatabaseErrors"
+    ]
+  }
+}

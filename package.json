@@ -56,7 +56,8 @@
     "test:ui-browser": "npm --prefix adaptive-tutor/study-engine/prototype run test:ui",
     "test:assembly": "npm --prefix adaptive-tutor/study-engine/runtime run test",
     "test:assembly-browser": "npm --prefix adaptive-tutor/study-engine/runtime run test:browser",
-    "test:secondary": "npm run test:engine && npm run test:tutor && npm run test:calendar && npm run test:student && npm run test:ui && npm run test:assembly && npm run test:student-browser && npm run test:ui-browser && npm run test:assembly-browser"
+    "test:secondary": "npm run test:engine && npm run test:tutor && npm run test:calendar && npm run test:student && npm run test:ui && npm run test:assembly && npm run test:student-browser && npm run test:ui-browser && npm run test:assembly-browser",
+    "validate:production-activation-runbook": "node scripts/validate-production-activation-runbook.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.8",
