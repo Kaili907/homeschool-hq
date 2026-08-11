@@ -242,13 +242,16 @@ export type StudyRuntimeInterruption =
     }
   | { readonly kind: 'rate-limit' }
   /**
-   * STUDY-A1-AUTH-INFRA-BOUNDARY-C — the gateway's learner-authorization
-   * verifier could not be reached, which happens before the classifier sees any
-   * learner text. Retryable, and carries no reason: unlike
+   * STUDY-A1-AUTH-INFRA-BOUNDARY-C — a trusted authorization dependency of the
+   * request could not produce a usable authorization answer, which happens
+   * before the classifier sees any learner text. It is one semantic category
+   * and deliberately not one producer: any of the request's authorization
+   * dependencies may raise it, and which one did is a server detail this type
+   * does not carry. Retryable, and carries no reason: unlike
    * `session-authorization` there is nothing for an adult to do and nothing to
-   * re-issue, because neither half of the authorization pair was refused. It
-   * fails closed like the other two — no Tutor work continues — but it makes no
-   * claim about the learner and never clears verified identity.
+   * re-issue, because nothing was refused — the question simply went
+   * unanswered. It fails closed like the other two — no Tutor work continues —
+   * but it makes no claim about the learner and never clears verified identity.
    */
   | { readonly kind: 'authorization-infrastructure' }
 

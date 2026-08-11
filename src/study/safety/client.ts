@@ -71,12 +71,23 @@ function failClosed(reasonCode: string): StudySafetyClassificationResponseV1 {
  * Which thing could not be obtained. `session-authorization` means the adult
  * bearer or the learner's Study session was missing, expired, revoked, or
  * refused; `rate-limit` means the gateway shed the request;
- * `authorization-infrastructure` means the gateway's learner-authorization
- * verifier was itself unreachable, so nothing was refused and nothing was
- * judged; `classifier` means everything else that stopped a classification. All
- * four fail closed — none may continue tutoring — but only the last is a
- * safety-classifier incident, so an ordinary session expiry, a rate limit and an
- * authorization outage are never reported as one.
+ * `authorization-infrastructure` means a trusted authorization dependency of
+ * this request could not produce a usable authorization answer at all — the
+ * question went unanswered rather than answered "no", so nothing was refused and
+ * nothing was judged; `classifier` means everything else that stopped a
+ * classification. All four fail closed — none may continue tutoring — but only
+ * the last is a safety-classifier incident, so an ordinary session expiry, a
+ * rate limit and an authorization outage are never reported as one.
+ *
+ * `authorization-infrastructure` is defined by that semantics and not by its
+ * producer: any of the request's authorization-verification dependencies may
+ * raise it, and which one did is a server detail this client must not have to
+ * care about — the set is a server contract, enumerated and pinned there. It is
+ * correspondingly narrower than "the gateway failed": an authorization answer of
+ * "no" is an identity refusal and stays `session-authorization`, and a server
+ * error or an unavailability that is not this signal stays `classifier`. What
+ * the category buys the learner is a technical retry interruption instead of a
+ * learner-safety classification.
  */
 export type StudySafetyFailureCategory =
   | 'session-authorization'
@@ -193,13 +204,20 @@ export async function classifyStudySafetyWithCaptureStatus(
       if (response.status === 429) {
         return { response: failClosed('client-rate-limited'), serverCaptureStatus: 'server-acceptance-not-confirmed', failureCategory: 'rate-limit' }
       }
-      // STUDY-A1-AUTH-INFRA-BOUNDARY-C — 424 Failed Dependency, which this
-      // gateway emits for exactly one state: its learner-authorization verifier
-      // was unreachable. The verifier runs strictly before the classifier, so
-      // the learner's text was never read, let alone judged. It carries no
-      // `failureMode`, which is the local safety ledger's vocabulary, so a
-      // caller writing on `failureMode` alone still cannot make a durable safety
-      // record out of it.
+      // STUDY-A1-AUTH-INFRA-BOUNDARY-C — 424 Failed Dependency, the gateway's
+      // `authorization-infrastructure` category: an authorization dependency of
+      // this request could not answer at all. It is one semantic category and
+      // deliberately not one producer — it may come from any of the request's
+      // authorization-verification dependencies, and STUDY-A1-AUTH-INFRA-
+      // BOUNDARY-H2 added the adult bearer verifier's outage states to the
+      // learner/session verifier that first raised it. Which dependency it was
+      // is a server detail this client must not have to care about; the exact
+      // set is a server contract, enumerated and pinned there.
+      //
+      // Every one of them runs strictly before the classifier, so the learner's
+      // text was never read, let alone judged. None carries a `failureMode`,
+      // which is the local safety ledger's vocabulary, so a caller writing on
+      // `failureMode` alone still cannot make a durable safety record out of it.
       //
       // Only the status decides this. The body is never read or parsed here, so
       // a gateway — or anything that can answer as one — cannot talk its way
