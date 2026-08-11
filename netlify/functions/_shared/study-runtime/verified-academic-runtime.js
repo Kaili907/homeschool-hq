@@ -58,25 +58,32 @@ const SETTINGS_SOURCES = new Set([
 export class VerifiedAcademicRuntimeDeniedError extends Error {}
 export class VerifiedAcademicRuntimeUnavailableError extends Error {}
 
-function assertSafeTree(value, { response = false, depth = 0 } = {}) {
+function assertSafeTree(value, { response = false, depth = 0, path = [] } = {}) {
   if (depth > 8) throw new VerifiedAcademicRuntimeDeniedError('runtime_payload_depth')
   if (typeof value === 'string' && NON_PRODUCTION_SENTINEL.test(value)) {
     throw new VerifiedAcademicRuntimeDeniedError('production_sentinel_rejected')
   }
   if (Array.isArray(value)) {
     if (value.length > 200) throw new VerifiedAcademicRuntimeDeniedError('runtime_payload_size')
-    for (const item of value) assertSafeTree(item, { response, depth: depth + 1 })
+    for (const item of value) assertSafeTree(item, { response, depth: depth + 1, path })
     return
   }
   if (!value || typeof value !== 'object') return
   const entries = Object.entries(value)
   if (entries.length > 100) throw new VerifiedAcademicRuntimeDeniedError('runtime_payload_size')
   for (const [key, nested] of entries) {
-    if ((!response && CALLER_AUTHORITY_KEY.test(key)) ||
-        (response && PROTECTED_RESPONSE_KEY.test(key))) {
+    const nestedPath = [...path, key]
+    const joinedPath = nestedPath.join('.')
+    const canonicalCheckpointTimestamp = !response &&
+      joinedPath === 'checkpoint.technicalInterruption.startedAt'
+    const canonicalCheckpointPrivacyAttestation = response && nested === false &&
+      (joinedPath === 'checkpoint.rawAnswerIncluded' ||
+        joinedPath === 'checkpoint.transcriptIncluded')
+    if ((!response && !canonicalCheckpointTimestamp && CALLER_AUTHORITY_KEY.test(key)) ||
+        (response && !canonicalCheckpointPrivacyAttestation && PROTECTED_RESPONSE_KEY.test(key))) {
       throw new VerifiedAcademicRuntimeDeniedError('runtime_authority_boundary')
     }
-    assertSafeTree(nested, { response, depth: depth + 1 })
+    assertSafeTree(nested, { response, depth: depth + 1, path: nestedPath })
   }
 }
 

@@ -118,6 +118,100 @@ describe('verified academic runtime gateway', () => {
     expect(JSON.stringify(call.mock.calls[0][1])).not.toMatch(/studentId|householdId/)
   })
 
+  it('allows canonical checkpoint transport fields without opening authority or raw content', async () => {
+    const call = vi.fn(async () => ({
+      schemaVersion: 1,
+      status: 'ok',
+      operation: 'checkpoint:compare-and-swap',
+      body: {
+        schemaVersion: 2,
+        status: 'stored',
+        checkpointRevision: 1,
+        sessionRevision: 3,
+        currentState: 'active',
+        curriculumBinding: binding,
+      },
+    }))
+    const gateway = createVerifiedAcademicRuntimeGateway({
+      rpc: { isConfigured: () => true, call },
+    })
+    const checkpoint = {
+      contract: 'study-core-bridge.recovery-checkpoint.v1',
+      contractVersion: 1,
+      checkpointId: 'checkpoint-server-generated-a',
+      revision: 1,
+      createdAt: '2026-08-10T15:01:00.000Z',
+      updatedAt: '2026-08-10T15:02:00.000Z',
+      sessionId: 'session:server-generated-a',
+      lessonId: 'lesson-bound-a',
+      segmentId: 'segment-bound-a',
+      safeInstructionalCursor: {
+        tutorPhase: 'guided-practice', cycleNumber: 1,
+        currentItemId: 'task-bound-a', currentItemIndex: 0, teachingTurnIndex: 1,
+      },
+      completedSegmentIds: [],
+      perSegmentActiveTime: [],
+      pausedSeconds: 0,
+      breakSeconds: 0,
+      protectedDraftRef: null,
+      protectedTutorStateRef: 'tutor-state:server-generated-a',
+      lastAcceptedEventId: null,
+      eventVersion: 1,
+      tutorInteractionRef: 'interaction-bound-a',
+      technicalInterruption: {
+        status: 'none', interruptionId: null, category: 'none', startedAt: null,
+      },
+      rawAnswerIncluded: false,
+      transcriptIncluded: false,
+    }
+
+    await expect(gateway.execute({
+      sessionReference: reference,
+      operation: 'checkpoint:compare-and-swap',
+      request: {
+        sessionId: 'session:server-generated-a',
+        expectedRevision: 0,
+        mutationId: 'checkpoint-mutation-a',
+        checkpoint,
+        curriculumReleaseVersion: '1.0.0',
+      },
+    })).resolves.toMatchObject({ body: { status: 'stored', checkpointRevision: 1 } })
+    expect(call).toHaveBeenCalledTimes(1)
+
+    await expect(gateway.execute({
+      sessionReference: reference,
+      operation: 'checkpoint:compare-and-swap',
+      request: {
+        sessionId: 'session:server-generated-a',
+        expectedRevision: 0,
+        mutationId: 'checkpoint-mutation-forged',
+        checkpoint: { ...checkpoint, startedAt: '1999-01-01T00:00:00.000Z' },
+        curriculumReleaseVersion: '1.0.0',
+      },
+    })).rejects.toThrow('runtime_authority_boundary')
+    expect(call).toHaveBeenCalledTimes(1)
+
+    call.mockResolvedValueOnce({
+      schemaVersion: 1,
+      status: 'ok',
+      operation: 'session:resume',
+      body: begunBody({ status: 'resumable', checkpoint }),
+    })
+    await expect(gateway.execute({
+      sessionReference: reference,
+      operation: 'session:resume',
+      request: {
+        sessionId: 'session:server-generated-a',
+        curriculumReleaseVersion: '1.0.0',
+      },
+    })).resolves.toMatchObject({
+      body: {
+        status: 'resumable',
+        checkpoint: { rawAnswerIncluded: false, transcriptIncluded: false },
+      },
+    })
+  })
+
   it('rejects caller-authored begin authority and exact-response additions', async () => {
     const gateway = createVerifiedAcademicRuntimeGateway({
       rpc: { isConfigured: () => true, call: vi.fn() },
