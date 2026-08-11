@@ -1,7 +1,9 @@
 import { createHash } from 'node:crypto'
-import { mkdtemp, readFile, rm, unlink, writeFile } from 'node:fs/promises'
+import { spawnSync } from 'node:child_process'
+import { copyFile, mkdtemp, readFile, realpath, rm, unlink, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { afterAll, describe, expect, it } from 'vitest'
 import {
   ALLOWED_APPLICATION_STATUS,
@@ -10,6 +12,7 @@ import {
   EXPECTED_STUDY_PROJECT_REF,
   FROZEN_HISTORICAL_BASELINE_DEMOTED,
   FROZEN_HISTORICAL_BASELINE_FILENAMES,
+  isDirectExecution,
   UNSAFE_SESSION_17_SHA256,
   validateMigrationManifest,
 } from './study-migration-preflight.mjs'
@@ -38,6 +41,14 @@ const CHECKED_IN_MANIFEST_URL = new URL(
   import.meta.url,
 )
 const CHECKED_IN_MIGRATIONS_URL = new URL('../supabase/migrations/', import.meta.url)
+const REPOSITORY_ROOT = fileURLToPath(new URL('../', import.meta.url))
+const CLI_RELATIVE_PATH = 'scripts/study-migration-preflight.mjs'
+const CLI_ABSOLUTE_PATH = fileURLToPath(new URL('./study-migration-preflight.mjs', import.meta.url))
+const CLI_EVIDENCE_PATH = fileURLToPath(new URL(
+  '../docs/study-engine-final-production/hosted-foundation-baseline-evidence.json',
+  import.meta.url,
+))
+const CLI_MANIFEST_PATH = fileURLToPath(CHECKED_IN_MANIFEST_URL)
 
 const temporaryDirectories: string[] = []
 
@@ -48,6 +59,85 @@ afterAll(async () => {
 function canonicalSha256(source: string) {
   return createHash('sha256').update(source.replaceAll('\r\n', '\n')).digest('hex')
 }
+
+function runCli(scriptPath: string, args = [
+  '--evidence', CLI_EVIDENCE_PATH,
+  '--manifest', CLI_MANIFEST_PATH,
+]) {
+  return spawnSync(process.execPath, [scriptPath, ...args], {
+    cwd: REPOSITORY_ROOT,
+    encoding: 'utf8',
+  })
+}
+
+function expectBlockedCliResult(run: ReturnType<typeof runCli>) {
+  expect(run.error).toBeUndefined()
+  expect(run.status).toBe(2)
+  expect(run.stderr).toBe('')
+  const lines = run.stdout.trim().split('\n')
+  expect(lines).toHaveLength(1)
+  expect(JSON.parse(lines[0])).toMatchObject({
+    allowed: false,
+    reasons: expect.arrayContaining([
+      'foundation-equivalence-not-reconfirmed',
+      'historical-baseline-authorization-absent',
+      'migration-history-unresolved',
+      'final-metadata-repreflight-not-passed',
+      'final-checksum-set-not-approved',
+    ]),
+  })
+}
+
+describe('direct CLI execution', () => {
+  it('compares canonically equivalent entry paths as file URLs', () => {
+    const nonCanonicalPath = join(REPOSITORY_ROOT, 'scripts', '..', 'scripts', 'study-migration-preflight.mjs')
+    expect(pathToFileURL(CLI_ABSOLUTE_PATH).href).toBe(new URL('./study-migration-preflight.mjs', import.meta.url).href)
+    expect(isDirectExecution(pathToFileURL(CLI_ABSOLUTE_PATH).href, nonCanonicalPath)).toBe(true)
+    expect(isDirectExecution(pathToFileURL(CLI_ABSOLUTE_PATH).href, undefined)).toBe(false)
+  })
+
+  it('executes from a relative POSIX script path', () => {
+    expectBlockedCliResult(runCli(CLI_RELATIVE_PATH))
+  })
+
+  it('executes from an absolute POSIX script path', () => {
+    expectBlockedCliResult(runCli(CLI_ABSOLUTE_PATH))
+  })
+
+  it('executes when the absolute script path contains spaces', async () => {
+    const directory = await mkdtemp(join(await realpath(tmpdir()), 'study migration preflight cli '))
+    temporaryDirectories.push(directory)
+    const scriptPath = join(directory, 'study migration preflight.mjs')
+    await copyFile(CLI_ABSOLUTE_PATH, scriptPath)
+    expectBlockedCliResult(runCli(scriptPath))
+  })
+
+  it('reports usage and exits 1 when arguments are missing', () => {
+    const run = runCli(CLI_RELATIVE_PATH, [])
+    expect(run.error).toBeUndefined()
+    expect(run.status).toBe(1)
+    expect(run.stdout).toBe('')
+    expect(run.stderr).toBe('Usage: study-migration-preflight --evidence <path> --manifest <path>\n')
+  })
+
+  it('reports an invalid manifest as blocked JSON with a nonzero exit', async () => {
+    const directory = await mkdtemp(join(await realpath(tmpdir()), 'study migration preflight invalid '))
+    temporaryDirectories.push(directory)
+    const manifestPath = join(directory, 'manifest.json')
+    await writeFile(manifestPath, JSON.stringify({ schemaVersion: 1, migrations: [] }), 'utf8')
+    const run = runCli(CLI_RELATIVE_PATH, [
+      '--evidence', CLI_EVIDENCE_PATH,
+      '--manifest', manifestPath,
+    ])
+    expect(run.error).toBeUndefined()
+    expect(run.status).toBe(2)
+    expect(run.stderr).toBe('')
+    expect(JSON.parse(run.stdout)).toMatchObject({
+      allowed: false,
+      reasons: expect.arrayContaining(['manifest-invalid-or-empty']),
+    })
+  })
+})
 
 /**
  * Any hosted application status the classification declares. A classification now

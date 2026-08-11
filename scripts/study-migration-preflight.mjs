@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 import { readdir, readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { pathToFileURL } from 'node:url'
 
 export const EXPECTED_STUDY_PROJECT_REF = 'ymtvzmqhfvwjtxjdmybs'
 export const UNSAFE_SESSION_17_SHA256 = '46c68426d21a79b90a3011d5fbfcca19044393887636dd845ca362f6e4e69443'
@@ -231,6 +232,10 @@ export function evaluateMigrationPreflight(evidence, manifest) {
   return Object.freeze({ allowed: reasons.length === 0, reasons: Object.freeze(reasons), checksums: Object.freeze(checksums) })
 }
 
+export function isDirectExecution(moduleUrl, entrypoint) {
+  return typeof entrypoint === 'string' && moduleUrl === pathToFileURL(resolve(entrypoint)).href
+}
+
 async function main() {
   const args = process.argv.slice(2)
   const evidenceArg = args.indexOf('--evidence')
@@ -249,7 +254,7 @@ async function main() {
   if (!allowed) process.exitCode = 2
 }
 
-if (process.argv[1] && import.meta.url === new URL(`file:///${process.argv[1].replaceAll('\\', '/')}`).href) {
+if (isDirectExecution(import.meta.url, process.argv[1])) {
   main().catch((error) => {
     process.stderr.write(`${error instanceof Error ? error.message : 'preflight_failed'}\n`)
     process.exitCode = 1
