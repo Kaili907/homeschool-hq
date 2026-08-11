@@ -127,5 +127,9 @@ export function createFilesystemCurriculumSource(
     return parseCurriculumLesson(rawLine, summary, catalog.source, assessment)
   }
 
-  return { loadCatalog, loadLesson }
+  return {
+    loadIdentity: async () => (await loadCatalog()).source,
+    loadCatalog,
+    loadLesson,
+  }
 }

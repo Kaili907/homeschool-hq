@@ -53,7 +53,8 @@ function assertDeterministicHistory(
   releases: readonly CurriculumReleaseRegistrySummary[],
   activation: CurriculumActivationStatus,
 ): void {
-  const releaseVersions = new Set(releases.map((release) => release.version))
+  const releaseByVersion = new Map(releases.map((release) => [release.version, release]))
+  const releaseVersions = new Set(releaseByVersion.keys())
   if (releaseVersions.size !== releases.length
     || !releaseVersions.has(activation.pointer.releaseVersion)
     || activation.candidates.some((candidate) => !releaseVersions.has(candidate.releaseVersion))
@@ -68,7 +69,7 @@ function assertDeterministicHistory(
       throw new Error('curriculum_release_history_inconsistent')
     }
     candidateVersions.add(candidate.releaseVersion)
-    const release = releases.find((item) => item.version === candidate.releaseVersion)
+    const release = releaseByVersion.get(candidate.releaseVersion)
     if (!release || release.registeredAt !== candidate.registeredAt) {
       throw new Error('curriculum_release_history_inconsistent')
     }
@@ -88,8 +89,9 @@ function assertDeterministicHistory(
     || oldest.transitionKind !== 'migration_seed'
   )) throw new Error('curriculum_release_history_inconsistent')
 
+  const activatedVersions = new Set(activation.history.map((entry) => entry.newReleaseVersion))
   for (const candidate of activation.candidates) {
-    if (activation.history.some((entry) => entry.newReleaseVersion === candidate.releaseVersion)
+    if (activatedVersions.has(candidate.releaseVersion)
       && !candidate.previouslyActive) {
       throw new Error('curriculum_release_history_inconsistent')
     }
@@ -104,11 +106,15 @@ export function buildCurriculumReleaseHistoryModel(
   const candidates = new Map(
     activation.candidates.map((candidate) => [candidate.releaseVersion, candidate]),
   )
+  const pointerRevisionsByVersion = new Map<string, number[]>()
+  for (const transition of activation.history) {
+    const revisions = pointerRevisionsByVersion.get(transition.newReleaseVersion) ?? []
+    revisions.push(transition.pointerRevision)
+    pointerRevisionsByVersion.set(transition.newReleaseVersion, revisions)
+  }
   const entries: CurriculumReleaseGovernanceEntry[] = releases.map((release) => {
     const candidate = candidates.get(release.version)
-    const pointerRevisions = activation.history
-      .filter((transition) => transition.newReleaseVersion === release.version)
-      .map((transition) => transition.pointerRevision)
+    const pointerRevisions = pointerRevisionsByVersion.get(release.version) ?? []
     const lifecycle = candidate?.active
       ? 'active'
       : candidate?.previouslyActive ? 'previously_active' : 'published'

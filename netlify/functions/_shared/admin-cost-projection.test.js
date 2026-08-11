@@ -278,6 +278,11 @@ describe('Admin cost aggregate projection', () => {
     expect(model.summary.calculatedCost.status).toBe('partial')
   })
 
+  it('rejects limit + 1 as explicitly incomplete instead of aggregating an unbounded source', () => {
+    const records = Array.from({ length: ADMIN_COST_RECORD_LIMIT + 1 }, (_, index) => record({ usageId: `usage-${index}` }))
+    expect(() => buildAdminCostProjection(records, today, NOW)).toThrow('cost_source_incomplete')
+  })
+
   it('uses only the bounded ADMIN-3 server read seam', async () => {
     const gatewayAccess = {
       readProviderUsageCosts: vi.fn(async () => [record()]),

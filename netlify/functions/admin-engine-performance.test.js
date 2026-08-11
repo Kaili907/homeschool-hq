@@ -161,6 +161,36 @@ describe('ADMIN-4 engine performance endpoint', () => {
     expect(study.metrics.find((item) => item.id === 'completion_rate')).toMatchObject({ value: 75, numerator: 750, denominator: 1_000 })
   })
 
+  it('reduces the deterministic 4,096-group maximum without returning aggregate dimensions', async () => {
+    const groups = Array.from({ length: 4_096 }, (_, index) => group({
+      reasonCode: `stress_group_${index}`,
+      eventCount: 1_000,
+      durationCount: 1_000,
+      durationTotalMs: 120_000,
+    }))
+    const handler = createAdminEnginePerformanceHandler({
+      authorization: { require: vi.fn().mockResolvedValue({ ok: true }) },
+      reader: { aggregate: vi.fn().mockResolvedValue(aggregate(groups)) },
+      now: () => NOW,
+    })
+    const started = performance.now()
+    const response = await handler(request())
+    const elapsedMs = performance.now() - started
+    const body = JSON.parse(response.body)
+    console.info(`[admin-performance] 4096 telemetry groups / 4096000 events ${elapsedMs.toFixed(1)}ms`)
+
+    expect(response.statusCode).toBe(200)
+    expect(body.source).toMatchObject({
+      groupCount: 4_096,
+      groupLimit: 4_096,
+      acceptedEventCount: 4_096_000,
+      completeness: 'complete',
+    })
+    expect(body.engines.find((item) => item.engineId === 'study').sampleCount).toBe(4_096_000)
+    expect(response.body.length).toBeLessThan(100_000)
+    expect(response.body).not.toContain('stress_group_')
+  })
+
   it('rejects malformed aggregates instead of calculating from inconsistent totals', async () => {
     const malformed = aggregate([group()], { root: { totalEventCount: 2 } })
     const handler = createAdminEnginePerformanceHandler({

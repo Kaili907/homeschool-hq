@@ -218,4 +218,33 @@ describe('curriculum release history governance model', () => {
     expect(() => buildCurriculumReleaseHistoryModel([one, two], malformed))
       .toThrow('curriculum_release_history_inconsistent')
   })
+
+  it('joins the deterministic 1,000-release registry maximum without quadratic scans', () => {
+    const base = release('1.0.0', 9)
+    if (base.provenanceClass !== 'legacy_import') throw new Error('legacy fixture required')
+    const legacyBase = base
+    const releases = Array.from({ length: 1_000 }, (_, index): CurriculumReleaseRegistrySummary => ({
+      ...legacyBase,
+      packageId: `manuel-academy-curriculum-${index + 1}`,
+      version: `${index + 1}.0.0`,
+      registeredAt: new Date(Date.parse(legacyBase.registeredAt) + index).toISOString(),
+      sourceRoot: `curriculum-content/manuel-academy/${index + 1}.0.0`,
+    }))
+    const candidates = releases.map((item, index) => candidate(item, {
+      active: index === 0,
+      previouslyActive: index === 0,
+    }))
+    const activation = status(
+      releases,
+      candidates,
+      [transition(1, null, releases[0].version, 'migration_seed')],
+    )
+    const started = performance.now()
+    const model = buildCurriculumReleaseHistoryModel(releases, activation)
+    const elapsedMs = performance.now() - started
+    console.info(`[admin-performance] 1000-release governance join ${elapsedMs.toFixed(1)}ms`)
+    expect(model.releases).toHaveLength(1_000)
+    expect(model.releases[0]).toMatchObject({ version: '1.0.0', active: true, pointerRevisions: [1] })
+    expect(model.transitions).toHaveLength(1)
+  })
 })

@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createAdminCurriculumHandler } from './admin-curriculum.js'
+import {
+  ADMIN_CURRICULUM_MAX_RESPONSE_BYTES,
+  createAdminCurriculumHandler,
+} from './admin-curriculum.js'
 
 const principal = { userId: 'adult-ref', role: 'viewer', capabilities: ['curriculum:read'] }
 const stagingId = '20000000-0000-4000-8000-000000000001'
@@ -126,6 +129,27 @@ describe('admin curriculum handler', () => {
     })
     expect(registry.details).toHaveBeenCalledWith('1.0.0')
     expect(registry.productionPointer).toHaveBeenCalledOnce()
+  })
+
+  it('loads a narrow catalog identity and fails closed on an oversized browser response', async () => {
+    const authorization = { require: vi.fn().mockResolvedValue({ ok: true, principal }) }
+    const oversizedCatalog = {
+      source: { version: '1.0.0' },
+      deterministicPadding: 'x'.repeat(ADMIN_CURRICULUM_MAX_RESPONSE_BYTES),
+    }
+    const source = {
+      loadCatalog: vi.fn().mockResolvedValue(oversizedCatalog),
+    }
+    const handler = createAdminCurriculumHandler({ authorization, source })
+
+    const identity = await handler(event('/api/admin/curriculum/catalog-identity'))
+    expect(identity.statusCode).toBe(200)
+    expect(JSON.parse(identity.body)).toEqual({ version: '1.0.0' })
+
+    const catalog = await handler(event('/api/admin/curriculum/catalog'))
+    expect(catalog.statusCode).toBe(503)
+    expect(JSON.parse(catalog.body)).toEqual({ error: { code: 'curriculum_response_incomplete' } })
+    expect(catalog.body.length).toBeLessThan(200)
   })
 
   it('authorizes narrow immutable Schema v2 index and entity reads', async () => {

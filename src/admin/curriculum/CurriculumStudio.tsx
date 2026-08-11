@@ -113,7 +113,7 @@ export interface CurriculumStudioProps {
 export function CurriculumStudio({ authorization, source }: CurriculumStudioProps) {
   const canRead = authorization.status === 'authorized'
     && authorization.capabilities.includes('curriculum:read')
-  const [catalog, setCatalog] = useState<CurriculumCatalog | null>(null)
+  const [catalog, setCatalog] = useState<Pick<CurriculumCatalog, 'source'> | null>(null)
   const [drafts, setDrafts] = useState<readonly CurriculumDraftSummary[]>([])
   const [error, setError] = useState<string | null>(null)
   const [reload, setReload] = useState(0)
@@ -197,7 +197,7 @@ export function CurriculumStudioView({
   initialCollaboration = null,
   initialBaseResourceLibrary = null,
 }: {
-  readonly catalog: CurriculumCatalog
+  readonly catalog: Pick<CurriculumCatalog, 'source'>
   readonly capabilities: readonly AdminCapability[]
   readonly source: CurriculumStudioSource
   readonly initialDrafts?: readonly CurriculumDraftSummary[]

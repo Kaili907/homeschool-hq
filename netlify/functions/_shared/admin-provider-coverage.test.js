@@ -158,6 +158,35 @@ describe('Admin provider accounting coverage projection', () => {
     })
   })
 
+  it('reduces one million provider attempts to fixed-size aggregate evidence', () => {
+    const attempts = 1_000_000
+    const aggregateStates = states({ ledgered: attempts })
+    const row = {
+      recordedProviderAttempts: attempts,
+      ledgerLinkedAttempts: attempts,
+      journaledMissingLedgerRelationship: 0,
+      states: aggregateStates,
+    }
+    const started = performance.now()
+    const coverage = buildAdminProviderAccountingCoverage(rawCoverage({
+      recordedProviderAttempts: attempts,
+      ledgerLinkedAttempts: attempts,
+      states: aggregateStates,
+      breakdowns: {
+        engines: [{ key: 'tutor', ...row }],
+        purposes: [{ key: 'tutor_turn', ...row }],
+        providers: [{ key: 'anthropic', ...row }],
+      },
+    }), RANGE)
+    console.info(`[admin-performance] 1000000 provider-attempt aggregate ${(performance.now() - started).toFixed(1)}ms`)
+    expect(coverage).toMatchObject({
+      status: 'complete_for_journaled_attempts',
+      metrics: { reservedAttempts: attempts, ledgerLinkedAttempts: attempts },
+    })
+    expect(coverage.breakdowns.engines).toHaveLength(1)
+    expect(JSON.stringify(coverage).length).toBeLessThan(5_000)
+  })
+
   it('isolates unavailable or malformed coverage and strips private or raw fields', () => {
     expect(unavailableProviderAccountingCoverage()).toMatchObject({
       status: 'unavailable', metrics: null, invoiceCompletenessClaim: false,

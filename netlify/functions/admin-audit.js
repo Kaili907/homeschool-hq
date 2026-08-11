@@ -133,9 +133,11 @@ export function createAdminAuditHandler(overrides = {}) {
       })
     } catch (error) {
       if (error instanceof AdminAuditReadError) {
+        const timeout = error.code === 'source_timeout'
+        const incomplete = error.code === 'source_limit'
         return errorResponse(
-          error.code === 'source_timeout' ? 504 : 503,
-          error.code === 'source_timeout' ? 'audit_source_timeout' : 'audit_source_unavailable',
+          timeout ? 504 : 503,
+          timeout ? 'audit_source_timeout' : incomplete ? 'audit_source_incomplete' : 'audit_source_unavailable',
         )
       }
       return responseForError(error)

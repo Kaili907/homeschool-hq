@@ -173,6 +173,24 @@ describe('GET /api/admin/v1/correlations', () => {
     expect(JSON.parse(changed.body).error.code).toBe('invalid_cursor')
   })
 
+  it('merges a maximum 100-event correlation page and keeps older evidence behind a cursor', async () => {
+    const events = Array.from({ length: 100 }, (_, index) => runtimeEvent({
+      eventId: `10000000-0000-4000-8000-${String(index + 1).padStart(12, '0')}`,
+      occurredAt: new Date(Date.parse(NOW) - (index + 1) * 1_000).toISOString(),
+    }))
+    const { handler } = setup({ runtime: success(events, { hasMore: true }) })
+    const started = performance.now()
+    const response = await handler(request('domain=runtime&limit=100'))
+    console.info(`[admin-performance] 100-event correlation page ${(performance.now() - started).toFixed(1)}ms`)
+    const body = JSON.parse(response.body)
+    expect(response.statusCode).toBe(200)
+    expect(body.events).toHaveLength(100)
+    expect(body.nextCursor).toMatch(/^[A-Za-z0-9_-]+$/)
+    expect(body.events[0].occurredAt).toBe(events.at(-1).occurredAt)
+    expect(body.events.at(-1).occurredAt).toBe(events[0].occurredAt)
+    expect(response.body.length).toBeLessThan(150_000)
+  })
+
   it('applies domain, time, engine, result, and audit filters server-side', async () => {
     const { handler, authorization, reader } = setup()
     const query = new URLSearchParams({

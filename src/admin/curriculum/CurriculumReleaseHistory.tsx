@@ -28,6 +28,7 @@ interface ReleaseFilters {
 }
 
 const INITIAL_FILTERS: ReleaseFilters = { query: '', lifecycle: 'all', eligibility: 'all' }
+export const CURRICULUM_RELEASE_HISTORY_RENDER_LIMIT = 100 as const
 
 export function CurriculumReleaseHistory({
   authorization,
@@ -133,22 +134,23 @@ export function CurriculumReleaseHistoryView({
       ].some((value) => value !== null && value.toLocaleLowerCase().includes(query))
     })
   }, [filters, model.releases])
-  const selectedRelease = filteredReleases.find((release) => release.version === selectedVersion)
-    ?? filteredReleases[0]
+  const displayedReleases = filteredReleases.slice(0, CURRICULUM_RELEASE_HISTORY_RENDER_LIMIT)
+  const selectedRelease = displayedReleases.find((release) => release.version === selectedVersion)
+    ?? displayedReleases[0]
 
   function handleReleaseKeyDown(
     event: KeyboardEvent<HTMLButtonElement>,
     release: CurriculumReleaseGovernanceEntry,
   ) {
-    const currentIndex = filteredReleases.findIndex((item) => item.version === release.version)
+    const currentIndex = displayedReleases.findIndex((item) => item.version === release.version)
     let nextIndex: number | null = null
-    if (event.key === 'ArrowDown') nextIndex = Math.min(currentIndex + 1, filteredReleases.length - 1)
+    if (event.key === 'ArrowDown') nextIndex = Math.min(currentIndex + 1, displayedReleases.length - 1)
     if (event.key === 'ArrowUp') nextIndex = Math.max(currentIndex - 1, 0)
     if (event.key === 'Home') nextIndex = 0
-    if (event.key === 'End') nextIndex = filteredReleases.length - 1
+    if (event.key === 'End') nextIndex = displayedReleases.length - 1
     if (nextIndex === null || nextIndex === currentIndex) return
     event.preventDefault()
-    const next = filteredReleases[nextIndex]
+    const next = displayedReleases[nextIndex]
     setSelectedVersion(next.version)
     releaseButtons.current.get(next.version)?.focus()
   }
@@ -232,8 +234,14 @@ export function CurriculumReleaseHistoryView({
           ) : filteredReleases.length === 0 ? (
             <p className="curriculum-history-empty" role="status">No releases match the current search and filters.</p>
           ) : (
-            <ul role="listbox" aria-label="Published curriculum releases">
-              {filteredReleases.map((release) => (
+            <>
+              {filteredReleases.length > CURRICULUM_RELEASE_HISTORY_RENDER_LIMIT && (
+                <p className="curriculum-history-truncated" role="note">
+                  Showing the first {CURRICULUM_RELEASE_HISTORY_RENDER_LIMIT} of {filteredReleases.length} matching releases. Refine the search or filters to inspect another release.
+                </p>
+              )}
+              <ul role="listbox" aria-label="Published curriculum releases">
+              {displayedReleases.map((release) => (
                 <li key={release.version} role="none">
                   <button
                     type="button"
@@ -264,7 +272,8 @@ export function CurriculumReleaseHistoryView({
                   </button>
                 </li>
               ))}
-            </ul>
+              </ul>
+            </>
           )}
         </section>
 

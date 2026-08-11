@@ -3,6 +3,7 @@ import {
   type CurriculumBrowserSource,
   type CurriculumCatalog,
   type CurriculumLessonDetail,
+  type CurriculumSourceIdentity,
 } from './contracts'
 import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
 
@@ -55,6 +56,7 @@ export function createAdminCurriculumHttpSource(
   getAccessToken: () => Promise<string | null> = getGatewayAccessToken,
 ): CurriculumBrowserSource {
   return {
+    loadIdentity: () => getJson<CurriculumSourceIdentity>(fetcher, getAccessToken, `${basePath}/catalog-identity`),
     loadCatalog: () => getJson<CurriculumCatalog>(fetcher, getAccessToken, `${basePath}/catalog`),
     loadLesson: (lessonId) => getJson<CurriculumLessonDetail>(
       fetcher,

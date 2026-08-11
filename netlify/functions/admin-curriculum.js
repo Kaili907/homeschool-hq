@@ -16,9 +16,9 @@ import { createAdminCurriculumPreviewService } from './_shared/admin-curriculum-
 import {
   assertExactObject,
   boundedInteger,
+  boundedJsonResponse,
   errorResponse,
   hasQuery,
-  jsonResponse,
   readJsonBody,
 } from './_shared/http.js'
 import { createFilesystemCurriculumSource } from '../../src/admin/curriculum/filesystemSource.node.ts'
@@ -46,6 +46,16 @@ const ENTITY_TYPES = new Set(CURRICULUM_DRAFT_ENTITY_TYPES)
 const APPROVAL_DECISIONS = new Set(CURRICULUM_APPROVAL_DECISIONS)
 const APPROVAL_REASON_CODES = new Set(CURRICULUM_APPROVAL_REASON_CODES)
 const MAX_BODY_BYTES = 1_100_000
+export const ADMIN_CURRICULUM_MAX_RESPONSE_BYTES = 6_000_000
+
+function curriculumResponse(statusCode, payload) {
+  return boundedJsonResponse(
+    statusCode,
+    payload,
+    ADMIN_CURRICULUM_MAX_RESPONSE_BYTES,
+    'curriculum_response_incomplete',
+  )
+}
 
 function decode(value) {
   try {
@@ -131,6 +141,7 @@ function routeFromPath(path) {
   }
   const authoringRoute = draftRoute(resource)
   if (authoringRoute) return authoringRoute
+  if (resource === 'catalog-identity') return { kind: 'catalog-identity' }
   if (resource === 'catalog') return { kind: 'catalog' }
   if (resource === 'validation') return { kind: 'validation' }
   if (resource === 'integrity') return { kind: 'integrity' }
@@ -441,6 +452,7 @@ function authoringMethod(route, method) {
 }
 
 function serviceError(error, unavailableCode = 'curriculum_authoring_unavailable') {
+  if (error?.code === 'incomplete') return errorResponse(503, 'curriculum_authoring_incomplete')
   if (error?.code === 'not-found') return errorResponse(404, 'curriculum_draft_unavailable')
   if (error?.code === 'forbidden') return errorResponse(
     403,
@@ -557,7 +569,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
       const authorized = await authorization.require(event, 'curriculum:read')
       if (!authorized.ok) return authorized.response
       try {
-        return jsonResponse(200, await standardsReview.list(
+        return curriculumResponse(200, await standardsReview.list(
           authorized.principal.userId, route.contextKind, route.contextRef,
         ))
       } catch {
@@ -582,7 +594,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
         if (input.contextKind === 'draft') {
           await authoring.read(authorized.principal.userId, input.contextRef)
         }
-        return jsonResponse(200, await standardsReview.update(authorized.principal.userId, input))
+        return curriculumResponse(200, await standardsReview.update(authorized.principal.userId, input))
       } catch (error) {
         if (error?.code === 'forbidden' || error?.code === 'not-found') {
           return serviceError(error)
@@ -660,7 +672,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
         } else {
           value = await authoring.tombstoneEntity(actor, parseTombstone(event, route))
         }
-        return jsonResponse(
+        return curriculumResponse(
           writing && value.replayed === false
             && ['drafts', 'draft-entities', 'draft-collaborators', 'draft-approval', 'draft-staging', 'draft-publishing'].includes(route.kind)
             ? 201 : 200,
@@ -699,7 +711,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
             parseActivationRequest(event),
           )
           : await activation.read(authorized.principal.userId)
-        return jsonResponse(
+        return curriculumResponse(
           writing && value.transition.state === 'transitioned' && !value.replayed ? 201 : 200,
           value,
         )
@@ -721,7 +733,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
           registry.list(),
           activation.read(authorized.principal.userId),
         ])
-        return jsonResponse(200, {
+        return curriculumResponse(200, {
           schemaVersion: 1,
           releaseRegistry,
           activation: activationStatus,
@@ -729,6 +741,8 @@ export function createAdminCurriculumHandler(overrides = {}) {
       }
       const value = route.kind === 'integrity'
         ? await integrity.verify(authorized.principal.userId)
+        : route.kind === 'catalog-identity'
+          ? (await source.loadCatalog()).source
         : route.kind === 'catalog'
         ? await source.loadCatalog()
         : route.kind === 'validation'
@@ -744,7 +758,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
                   : route.kind === 'release-authoring-entity'
                     ? await studio.readBaseEntity(route.version, route.entityType, route.entityRef)
                 : await registry.productionPointer()
-      return jsonResponse(200, value)
+      return curriculumResponse(200, value)
     } catch (error) {
       const code = error && typeof error === 'object' && 'code' in error ? error.code : null
       if (route.kind === 'history' && code === 'forbidden') {
@@ -756,6 +770,7 @@ export function createAdminCurriculumHandler(overrides = {}) {
           ? 'curriculum_release_unavailable'
           : 'curriculum_record_unavailable',
       )
+      if (code === 'incomplete') return errorResponse(503, 'curriculum_source_incomplete')
       return errorResponse(
         503,
         route.kind === 'integrity' ? 'curriculum_integrity_unavailable' : 'curriculum_source_unavailable',

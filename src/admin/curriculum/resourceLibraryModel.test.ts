@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { CurriculumValidationFinding } from '../curriculum-validation/engine'
 import {
   CURRICULUM_RESOURCE_LIBRARY_RENDER_LIMIT,
+  CURRICULUM_RESOURCE_REFERENCE_LIMIT,
   buildCurriculumResourceLibrary,
   filterCurriculumResourceLibrary,
   type CurriculumResourceAnalysisEntity,
@@ -150,5 +151,52 @@ describe('Curriculum Resource Library analysis', () => {
     const nextPage = filterCurriculumResourceLibrary(result, { kind: 'all' }, 100, 100)
     expect(nextPage.items).toHaveLength(100)
     expect(nextPage.items[0]?.key).not.toBe(result.items[0]?.key)
+  })
+
+  it('caps per-resource reference materialization while preserving authoritative totals', () => {
+    const owners = Array.from({ length: CURRICULUM_RESOURCE_REFERENCE_LIMIT + 37 }, (_, index) => entity(
+      'lesson',
+      `lesson-${String(index).padStart(3, '0')}`,
+      { lesson_id: `lesson-${index}`, title: `Lesson ${index}`, resource_refs: ['shared-resource'] },
+      { position: index },
+    ))
+    const result = library([
+      entity('media_resource', 'shared-resource', resource('shared-resource')),
+      ...owners,
+    ])
+    const shared = result.items.find((item) => item.resourceId === 'shared-resource')!
+    expect(shared.referenceCount).toBe(CURRICULUM_RESOURCE_REFERENCE_LIMIT + 37)
+    expect(shared.referencingEntityCount).toBe(CURRICULUM_RESOURCE_REFERENCE_LIMIT + 37)
+    expect(shared.references).toHaveLength(CURRICULUM_RESOURCE_REFERENCE_LIMIT)
+    expect(shared.referencesLimited).toBe(true)
+    expect(filterCurriculumResourceLibrary(result, { query: 'lesson-136' }).searchIncomplete).toBe(true)
+  })
+
+  it('reduces 10,000 resource-reference occurrences to a bounded detail sample', () => {
+    const owners = Array.from({ length: 500 }, (_, index) => entity(
+      'lesson',
+      `stress-lesson-${String(index).padStart(3, '0')}`,
+      {
+        lesson_id: `stress-lesson-${index}`,
+        title: `Stress lesson ${index}`,
+        resource_refs: Array.from({ length: 20 }, () => 'shared-resource'),
+      },
+      { position: index },
+    ))
+    const started = performance.now()
+    const result = library([
+      entity('media_resource', 'shared-resource', resource('shared-resource')),
+      ...owners,
+    ])
+    const elapsedMs = performance.now() - started
+    const shared = result.items.find((item) => item.resourceId === 'shared-resource')!
+    console.info(`[admin-performance] 10000 resource references ${elapsedMs.toFixed(1)}ms`)
+
+    expect(result.totals.referenceOccurrences).toBe(10_000)
+    expect(shared.referenceCount).toBe(10_000)
+    expect(shared.referencingEntityCount).toBe(500)
+    expect(shared.references).toHaveLength(CURRICULUM_RESOURCE_REFERENCE_LIMIT)
+    expect(shared.referencesLimited).toBe(true)
+    expect(JSON.stringify(shared).length).toBeLessThan(50_000)
   })
 })

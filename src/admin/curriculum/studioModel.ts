@@ -29,7 +29,7 @@ export type CurriculumStudioEntity =
   | { readonly kind: 'group'; readonly id: string; readonly label: string }
 
 export interface CurriculumStudioSource extends CurriculumDraftAuthoringSource, CurriculumApprovalSource, CurriculumStagingSource, CurriculumPublishingSource {
-  loadPublishedCatalog(): Promise<CurriculumCatalog>
+  loadPublishedCatalog(): Promise<Pick<CurriculumCatalog, 'source'>>
 }
 
 export interface CurriculumStudioRow {
@@ -72,7 +72,7 @@ export interface CurriculumTreeKeyboardAction {
 
 /** Combines the immutable published read with the server-authoritative draft seam. */
 export function createCurriculumStudioSource(
-  publishedSource: Pick<CurriculumBrowserSource, 'loadCatalog'>,
+  publishedSource: Pick<CurriculumBrowserSource, 'loadIdentity'> | Pick<CurriculumBrowserSource, 'loadCatalog'>,
   authoringSource: CurriculumDraftAuthoringSource,
   approvalSource: CurriculumApprovalSource,
   stagingSource: CurriculumStagingSource,
@@ -83,7 +83,9 @@ export function createCurriculumStudioSource(
     ...approvalSource,
     ...stagingSource,
     ...publishingSource,
-    loadPublishedCatalog: () => publishedSource.loadCatalog(),
+    loadPublishedCatalog: async () => 'loadIdentity' in publishedSource
+      ? { source: await publishedSource.loadIdentity() }
+      : { source: (await publishedSource.loadCatalog()).source },
   }
 }
 
@@ -93,6 +95,41 @@ export function canWriteCurriculumDrafts(capabilities: readonly AdminCapability[
 
 export function buildCurriculumStudioIndex(catalog: CurriculumCatalog): CurriculumStudioIndex {
   const rows: CurriculumStudioRow[] = []
+  const coursesByGrade = new Map<number, CurriculumCourseSummary[]>()
+  const unitsByCourse = new Map<string, CurriculumUnitSummary[]>()
+  const lessonsByUnit = new Map<string, CurriculumLessonSummary[]>()
+  const assessmentsByUnit = new Map<string, CurriculumAssessmentEvidence[]>()
+  const unitKey = (courseId: string, unitNumber: number) => `${courseId}\u0000${unitNumber}`
+  for (const course of catalog.courses) {
+    const courses = coursesByGrade.get(course.grade) ?? []
+    courses.push(course)
+    coursesByGrade.set(course.grade, courses)
+  }
+  for (const unit of catalog.units) {
+    const units = unitsByCourse.get(unit.courseId) ?? []
+    units.push(unit)
+    unitsByCourse.set(unit.courseId, units)
+  }
+  for (const lesson of catalog.lessons) {
+    const key = unitKey(lesson.courseId, lesson.unitNumber)
+    const lessons = lessonsByUnit.get(key) ?? []
+    lessons.push(lesson)
+    lessonsByUnit.set(key, lessons)
+  }
+  for (const assessment of catalog.assessments) {
+    const key = unitKey(assessment.courseId, assessment.unitNumber)
+    const assessments = assessmentsByUnit.get(key) ?? []
+    assessments.push(assessment)
+    assessmentsByUnit.set(key, assessments)
+  }
+  coursesByGrade.forEach((courses) => courses.sort((a, b) =>
+    a.title.localeCompare(b.title) || a.courseId.localeCompare(b.courseId)))
+  unitsByCourse.forEach((units) => units.sort((a, b) =>
+    a.unitNumber - b.unitNumber || a.unitId.localeCompare(b.unitId)))
+  lessonsByUnit.forEach((lessons) => lessons.sort((a, b) =>
+    a.dayInUnit - b.dayInUnit || a.lessonId.localeCompare(b.lessonId)))
+  assessmentsByUnit.forEach((assessments) => assessments.sort((a, b) =>
+    a.assessmentId.localeCompare(b.assessmentId)))
   const add = (
     entity: CurriculumStudioEntity,
     parentId: string | null,
@@ -113,9 +150,7 @@ export function buildCurriculumStudioIndex(catalog: CurriculumCatalog): Curricul
 
   for (const grade of [...catalog.grades].sort((a, b) => a - b)) {
     const gradeId = `grade:${grade}`
-    const courses = catalog.courses
-      .filter((course) => course.grade === grade)
-      .sort((a, b) => a.title.localeCompare(b.title) || a.courseId.localeCompare(b.courseId))
+    const courses = coursesByGrade.get(grade) ?? []
     add(
       { kind: 'grade', id: gradeId, grade },
       null,
@@ -128,9 +163,7 @@ export function buildCurriculumStudioIndex(catalog: CurriculumCatalog): Curricul
     for (const course of courses) {
       const courseId = `course:${course.courseId}`
       const courseAncestors = [gradeId]
-      const units = catalog.units
-        .filter((unit) => unit.courseId === course.courseId)
-        .sort((a, b) => a.unitNumber - b.unitNumber || a.unitId.localeCompare(b.unitId))
+      const units = unitsByCourse.get(course.courseId) ?? []
       add(
         { kind: 'course', id: courseId, course },
         gradeId,
@@ -143,12 +176,9 @@ export function buildCurriculumStudioIndex(catalog: CurriculumCatalog): Curricul
       for (const unit of units) {
         const unitId = `unit:${unit.unitId}`
         const unitAncestors = [...courseAncestors, courseId]
-        const lessons = catalog.lessons
-          .filter((lesson) => lesson.courseId === course.courseId && lesson.unitNumber === unit.unitNumber)
-          .sort((a, b) => a.dayInUnit - b.dayInUnit || a.lessonId.localeCompare(b.lessonId))
-        const assessments = catalog.assessments
-          .filter((assessment) => assessment.courseId === course.courseId && assessment.unitNumber === unit.unitNumber)
-          .sort((a, b) => a.assessmentId.localeCompare(b.assessmentId))
+        const key = unitKey(course.courseId, unit.unitNumber)
+        const lessons = lessonsByUnit.get(key) ?? []
+        const assessments = assessmentsByUnit.get(key) ?? []
         add(
           { kind: 'unit', id: unitId, unit },
           courseId,
@@ -215,23 +245,47 @@ export function buildMaterializedCurriculumStudioIndex(
   const sort = (left: CurriculumStudioEntityIndexEntry, right: CurriculumStudioEntityIndexEntry) =>
     left.position - right.position || left.label.localeCompare(right.label) || left.entityRef.localeCompare(right.entityRef)
   const added = new Set<string>()
+  const coursesByParent = new Map<string, CurriculumStudioEntityIndexEntry[]>()
+  const unitsByParent = new Map<string, CurriculumStudioEntityIndexEntry[]>()
+  const childrenByParent = new Map<string, CurriculumStudioEntityIndexEntry[]>()
+  const resources: CurriculumStudioEntityIndexEntry[] = []
+  const gradesSet = new Set<number>()
+  const addTo = (groups: Map<string, CurriculumStudioEntityIndexEntry[]>, entry: CurriculumStudioEntityIndexEntry) => {
+    const group = groups.get(entry.parentId) ?? []
+    group.push(entry)
+    groups.set(entry.parentId, group)
+  }
+  for (const entry of entries) {
+    if (entry.entityType === 'course') {
+      if (entry.grade) gradesSet.add(entry.grade)
+      addTo(coursesByParent, entry)
+    } else if (entry.entityType === 'unit') {
+      addTo(unitsByParent, entry)
+    } else if (entry.entityType === 'lesson' || entry.entityType === 'assessment') {
+      addTo(childrenByParent, entry)
+    } else if (entry.entityType === 'media_resource') {
+      resources.push(entry)
+    }
+  }
+  coursesByParent.forEach((items) => items.sort(sort))
+  unitsByParent.forEach((items) => items.sort(sort))
+  childrenByParent.forEach((items) => items.sort(sort))
+  resources.sort(sort)
 
-  const grades = [...new Set(entries.filter((entry) => entry.entityType === 'course' && entry.grade).map((entry) => entry.grade!))]
+  const grades = [...gradesSet]
     .sort((left, right) => left - right)
   for (const grade of grades) {
     const gradeId = `grade:${grade}`
-    const courses = entries.filter((entry) => entry.entityType === 'course' && entry.parentId === gradeId).sort(sort)
+    const courses = coursesByParent.get(gradeId) ?? []
     add({ kind: 'grade', id: gradeId, grade: grade as CurriculumGrade }, null, [], `Grade ${grade}`, `${courses.length} courses`, courses.length > 0)
     for (const course of courses) {
       const courseId = `course:${course.entityRef}`
-      const units = entries.filter((entry) => entry.entityType === 'unit' && entry.parentId === courseId).sort(sort)
+      const units = unitsByParent.get(courseId) ?? []
       add({ kind: 'authoring', id: courseId, entry: course }, gradeId, [gradeId], course.label, course.context, units.length > 0)
       added.add(courseId)
       for (const unit of units) {
         const unitId = `unit:${unit.entityRef}`
-        const children = entries
-          .filter((entry) => (entry.entityType === 'lesson' || entry.entityType === 'assessment') && entry.parentId === unitId)
-          .sort(sort)
+        const children = childrenByParent.get(unitId) ?? []
         add({ kind: 'authoring', id: unitId, entry: unit }, courseId, [gradeId, courseId], unit.label, unit.context, children.length > 0)
         added.add(unitId)
         for (const child of children) {
@@ -243,7 +297,6 @@ export function buildMaterializedCurriculumStudioIndex(
     }
   }
 
-  const resources = entries.filter((entry) => entry.entityType === 'media_resource').sort(sort)
   if (resources.length) {
     const resourceRoot = 'resources:all'
     add({ kind: 'group', id: resourceRoot, label: 'Media resources' }, null, [], 'Media resources', `${resources.length} resources`, true)

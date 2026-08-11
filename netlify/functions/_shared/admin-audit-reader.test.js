@@ -154,4 +154,14 @@ describe('Admin audit service reader', () => {
     await expect(createAdminAuditReader({ env: {} }).list({ limit: 50 }))
       .rejects.toEqual(expect.any(AdminAuditReadError))
   })
+
+  it('classifies a page-size overflow as incomplete instead of accepting silent truncation', async () => {
+    const client = clientWith({
+      schemaVersion: 2,
+      events: Array.from({ length: 101 }, () => EVENT),
+      hasMore: true,
+    })
+    await expect(createAdminAuditReader({ client }).list({ limit: 100 }))
+      .rejects.toMatchObject({ code: 'source_limit' })
+  })
 })

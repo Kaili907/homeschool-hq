@@ -118,6 +118,7 @@ export interface CurriculumLessonDetail extends CurriculumLessonSummary {
 }
 
 export interface CurriculumBrowserSource {
+  loadIdentity(): Promise<CurriculumSourceIdentity>
   loadCatalog(): Promise<CurriculumCatalog>
   loadLesson(lessonId: string): Promise<CurriculumLessonDetail>
 }

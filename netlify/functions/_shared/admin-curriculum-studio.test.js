@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createAdminCurriculumStudioService } from './admin-curriculum-studio.js'
+import {
+  ADMIN_CURRICULUM_STUDIO_INDEX_LIMIT,
+  createAdminCurriculumStudioService,
+} from './admin-curriculum-studio.js'
 import { buildCurriculumStandardsReviewQueue } from '../../../src/admin/curriculum-standards-review/model.ts'
 
 const DRAFT_ID = '10000000-0000-4000-8000-000000000001'
@@ -31,6 +34,7 @@ describe('Curriculum Studio materialization service', () => {
     const service = createAdminCurriculumStudioService({ authoring: {} })
     const result = service.readBaseIndex('1.0.0')
     expect(result.entities).toHaveLength(30 + 232 + 2736 + 232 + 18)
+    expect(result.entities.length).toBeLessThanOrEqual(ADMIN_CURRICULUM_STUDIO_INDEX_LIMIT)
     expect(new Set(result.entities.map((entity) => `${entity.entityType}:${entity.entityRef}`)).size)
       .toBe(result.entities.length)
     expect(new Set(result.entities.map((entity) => entity.entityType))).toEqual(new Set([
@@ -43,6 +47,38 @@ describe('Curriculum Studio materialization service', () => {
       totals: { resources: 18, active: 18, referenced: 0, unreferenced: 18 },
     })
     expect(result.resourceLibrary.items.every((item) => item.metadata?.schema_set_version === '2.0.0')).toBe(true)
+  })
+
+  it('uses one revision-pinned batch instead of an entity-count-shaped RPC fanout', async () => {
+    const bootstrap = createAdminCurriculumStudioService({ authoring: {} })
+    const courseEntry = bootstrap.readBaseIndex('1.0.0').entities.find((entity) => entity.entityType === 'course')
+    const unitEntry = bootstrap.readBaseIndex('1.0.0').entities.find((entity) => entity.entityType === 'unit')
+    const course = bootstrap.readBaseEntity('1.0.0', 'course', courseEntry.entityRef).payload
+    const unit = bootstrap.readBaseEntity('1.0.0', 'unit', unitEntry.entityRef).payload
+    const summaries = [
+      summary('course', courseEntry.entityRef, 'base_override', courseEntry.position),
+      summary('unit', unitEntry.entityRef, 'base_override', unitEntry.position),
+    ]
+    const authoring = {
+      read: vi.fn(async () => detail(summaries, 9)),
+      readEntities: vi.fn(async () => ({
+        schemaVersion: 1,
+        draftId: DRAFT_ID,
+        draftRevision: 9,
+        entities: [
+          { schemaVersion: 1, draftId: DRAFT_ID, ...summaries[0], payload: course },
+          { schemaVersion: 1, draftId: DRAFT_ID, ...summaries[1], payload: unit },
+        ],
+      })),
+      readEntity: vi.fn(),
+    }
+    const result = await createAdminCurriculumStudioService({ authoring })
+      .readMaterialization('actor', DRAFT_ID, 9)
+    expect(result.entities).toHaveLength(30 + 232 + 2736 + 232 + 18)
+    expect(authoring.readEntities).toHaveBeenCalledOnce()
+    expect(authoring.readEntities).toHaveBeenCalledWith('actor', DRAFT_ID, 9)
+    expect(authoring.readEntity).not.toHaveBeenCalled()
+    expect(authoring.read).toHaveBeenCalledTimes(2)
   })
 
   it('composes base plus one override plus draft-created entities minus tombstones without duplication', async () => {
