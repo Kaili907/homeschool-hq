@@ -1,7 +1,8 @@
 import { createHash } from 'node:crypto'
+import { realpathSync } from 'node:fs'
 import { readdir, readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
-import { pathToFileURL } from 'node:url'
+import { fileURLToPath } from 'node:url'
 
 export const EXPECTED_STUDY_PROJECT_REF = 'ymtvzmqhfvwjtxjdmybs'
 export const UNSAFE_SESSION_17_SHA256 = '46c68426d21a79b90a3011d5fbfcca19044393887636dd845ca362f6e4e69443'
@@ -233,7 +234,8 @@ export function evaluateMigrationPreflight(evidence, manifest) {
 }
 
 export function isDirectExecution(moduleUrl, entrypoint) {
-  return typeof entrypoint === 'string' && moduleUrl === pathToFileURL(resolve(entrypoint)).href
+  return typeof entrypoint === 'string' &&
+    realpathSync(fileURLToPath(moduleUrl)) === realpathSync(resolve(entrypoint))
 }
 
 async function main() {

@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 import { spawnSync } from 'node:child_process'
-import { copyFile, mkdtemp, readFile, realpath, rm, unlink, writeFile } from 'node:fs/promises'
+import { copyFile, mkdtemp, readFile, realpath, rm, symlink, unlink, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
@@ -76,7 +76,8 @@ function expectBlockedCliResult(run: ReturnType<typeof runCli>) {
   expect(run.stderr).toBe('')
   const lines = run.stdout.trim().split('\n')
   expect(lines).toHaveLength(1)
-  expect(JSON.parse(lines[0])).toMatchObject({
+  const result = JSON.parse(lines[0])
+  expect(result).toMatchObject({
     allowed: false,
     reasons: expect.arrayContaining([
       'foundation-equivalence-not-reconfirmed',
@@ -86,14 +87,20 @@ function expectBlockedCliResult(run: ReturnType<typeof runCli>) {
       'final-checksum-set-not-approved',
     ]),
   })
+  expect(result.reasons.length).toBeGreaterThan(0)
 }
 
 describe('direct CLI execution', () => {
-  it('compares canonically equivalent entry paths as file URLs', () => {
+  it('compares canonical filesystem identities', () => {
     const nonCanonicalPath = join(REPOSITORY_ROOT, 'scripts', '..', 'scripts', 'study-migration-preflight.mjs')
     expect(pathToFileURL(CLI_ABSOLUTE_PATH).href).toBe(new URL('./study-migration-preflight.mjs', import.meta.url).href)
     expect(isDirectExecution(pathToFileURL(CLI_ABSOLUTE_PATH).href, nonCanonicalPath)).toBe(true)
     expect(isDirectExecution(pathToFileURL(CLI_ABSOLUTE_PATH).href, undefined)).toBe(false)
+  })
+
+  it('does not hide entrypoint canonicalization failures', () => {
+    const missingPath = join(REPOSITORY_ROOT, 'scripts', 'missing-study-migration-preflight.mjs')
+    expect(() => isDirectExecution(pathToFileURL(CLI_ABSOLUTE_PATH).href, missingPath)).toThrow()
   })
 
   it('executes from a relative POSIX script path', () => {
@@ -112,12 +119,70 @@ describe('direct CLI execution', () => {
     expectBlockedCliResult(runCli(scriptPath))
   })
 
+  it('executes through a symlink without pre-canonicalizing the invocation path', async ({ skip }) => {
+    const directory = await mkdtemp(join(await realpath(tmpdir()), 'study-migration-preflight-link-'))
+    temporaryDirectories.push(directory)
+    const scriptPath = join(directory, 'alternate-preflight.mjs')
+    try {
+      await symlink(CLI_ABSOLUTE_PATH, scriptPath, 'file')
+    } catch (error) {
+      if (error && typeof error === 'object' && 'code' in error &&
+          ['EACCES', 'EPERM', 'ENOSYS', 'ENOTSUP'].includes(String(error.code))) {
+        skip()
+        return
+      }
+      throw error
+    }
+    expect(scriptPath).not.toBe(await realpath(scriptPath))
+    expectBlockedCliResult(runCli(scriptPath))
+  })
+
+  it.runIf(process.platform === 'darwin')('executes through the /var to /private/var macOS alias', async () => {
+    const directory = await mkdtemp(join(tmpdir(), 'study-migration-preflight-var-alias-'))
+    temporaryDirectories.push(directory)
+    const scriptPath = join(directory, 'study-migration-preflight.mjs')
+    await copyFile(CLI_ABSOLUTE_PATH, scriptPath)
+    expect(scriptPath).toMatch(/^\/var\//)
+    expect(await realpath(scriptPath)).toMatch(/^\/private\/var\//)
+    expectBlockedCliResult(runCli(scriptPath))
+  })
+
+  it('stays inert when imported by another module', () => {
+    const run = spawnSync(process.execPath, [
+      '--input-type=module',
+      '--eval',
+      `import(${JSON.stringify(pathToFileURL(CLI_ABSOLUTE_PATH).href)})`,
+    ], {
+      cwd: REPOSITORY_ROOT,
+      encoding: 'utf8',
+    })
+    expect(run.error).toBeUndefined()
+    expect(run.status).toBe(0)
+    expect(run.stdout).toBe('')
+    expect(run.stderr).toBe('')
+  })
+
   it('reports usage and exits 1 when arguments are missing', () => {
     const run = runCli(CLI_RELATIVE_PATH, [])
     expect(run.error).toBeUndefined()
     expect(run.status).toBe(1)
     expect(run.stdout).toBe('')
     expect(run.stderr).toBe('Usage: study-migration-preflight --evidence <path> --manifest <path>\n')
+  })
+
+  it('reports invalid JSON and exits 1', async () => {
+    const directory = await mkdtemp(join(await realpath(tmpdir()), 'study migration preflight json '))
+    temporaryDirectories.push(directory)
+    const evidencePath = join(directory, 'evidence.json')
+    await writeFile(evidencePath, '{ invalid json', 'utf8')
+    const run = runCli(CLI_RELATIVE_PATH, [
+      '--evidence', evidencePath,
+      '--manifest', CLI_MANIFEST_PATH,
+    ])
+    expect(run.error).toBeUndefined()
+    expect(run.status).toBe(1)
+    expect(run.stdout).toBe('')
+    expect(run.stderr).toMatch(/JSON/)
   })
 
   it('reports an invalid manifest as blocked JSON with a nonzero exit', async () => {
@@ -132,10 +197,14 @@ describe('direct CLI execution', () => {
     expect(run.error).toBeUndefined()
     expect(run.status).toBe(2)
     expect(run.stderr).toBe('')
-    expect(JSON.parse(run.stdout)).toMatchObject({
+    const lines = run.stdout.trim().split('\n')
+    expect(lines).toHaveLength(1)
+    const result = JSON.parse(lines[0])
+    expect(result).toMatchObject({
       allowed: false,
       reasons: expect.arrayContaining(['manifest-invalid-or-empty']),
     })
+    expect(result.reasons.length).toBeGreaterThan(0)
   })
 })
 
