@@ -1,8 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import { PGlite } from '@electric-sql/pglite'
-import { PGLiteSocketServer } from '@electric-sql/pglite-socket'
-import pg from 'pg'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { defaultAppState } from '../src/migration'
 import { academyProfileContractFixtures } from './academy-profile-contract.fixtures'
@@ -33,28 +31,32 @@ function profileRow(
   }
 }
 
+// This suite runs entirely against a direct, in-process PGlite instance (no
+// PGLiteSocketServer, no pg.Client). Assertions that require expected
+// PostgreSQL error recovery, real multiple pg.Client connections, or true
+// concurrent CAS behavior live in academy-cas.postgres.test.ts against the
+// native EmbeddedPostgres fixture instead -- the socket-backed runtime this
+// suite used to share with those assertions could become PostgreSQL-protocol
+// desynchronized after expected SQL errors. Direct in-process PGlite does not
+// exhibit that failure mode, which is why migration/catalog and other
+// deterministic single-connection checks remain here.
 describe('Academy household server revision CAS migration', () => {
   let database: PGlite
-  let server: PGLiteSocketServer
-  let clientA: pg.Client
-  let clientB: pg.Client
-  let connection: pg.ClientConfig
 
-  async function configureClient(client: pg.Client, householdId: string) {
-    await client.query(
+  async function configureClient(householdId: string) {
+    await database.query(
       `select set_config('request.jwt.claim.sub', $1, false)`,
       [householdId],
     )
-    await client.query('set role authenticated')
+    await database.query('set role authenticated')
   }
 
   async function mutate(
-    client: pg.Client,
     expectedRevision: number,
     mutationId: string,
     profiles: unknown[],
   ) {
-    const result = await client.query<{ result: Record<string, unknown> }>(
+    const result = await database.query<{ result: Record<string, unknown> }>(
       `select public.academy_apply_profile_mutation($1, $2, $3::jsonb) as result`,
       [expectedRevision, mutationId, JSON.stringify(profiles)],
     )
@@ -62,56 +64,22 @@ describe('Academy household server revision CAS migration', () => {
   }
 
   async function mutateJson(
-    client: pg.Client,
     expectedRevision: number,
     mutationId: string,
     profilesJson: string,
   ) {
-    const result = await client.query<{ result: Record<string, unknown> }>(
+    const result = await database.query<{ result: Record<string, unknown> }>(
       `select public.academy_apply_profile_mutation($1, $2, $3::jsonb) as result`,
       [expectedRevision, mutationId, profilesJson],
     )
     return result.rows[0].result
   }
 
-  async function snapshot(client: pg.Client) {
-    const result = await client.query<{ result: Record<string, unknown> }>(
+  async function snapshot() {
+    const result = await database.query<{ result: Record<string, unknown> }>(
       'select public.academy_sync_snapshot() as result',
     )
     return result.rows[0].result
-  }
-
-  async function withIsolatedClient<T>(
-    householdId: string,
-    callback: (client: pg.Client) => Promise<T>,
-  ): Promise<T> {
-    const client = new pg.Client({
-      ...connection,
-      // Reject a single stuck socket query before the surrounding bounded
-      // structural-limit test can time out.
-      query_timeout: 20_000,
-    })
-    let operationError: unknown
-    try {
-      await client.connect()
-      await configureClient(client, householdId)
-      return await callback(client)
-    } catch (cause) {
-      operationError = cause
-      throw cause
-    } finally {
-      try {
-        await client.end()
-      } catch (cleanupError) {
-        if (operationError) {
-          throw new AggregateError(
-            [operationError, cleanupError],
-            'Academy PGlite operation and isolated-client cleanup both failed.',
-          )
-        }
-        throw cleanupError
-      }
-    }
   }
 
   beforeAll(async () => {
@@ -141,134 +109,70 @@ describe('Academy household server revision CAS migration', () => {
     // The tracked migration must remain safe when the local migration runner
     // encounters it a second time.
     await database.exec(migration)
-
-    server = new PGLiteSocketServer({
-      db: database,
-      host: '127.0.0.1',
-      port: 0,
-      maxConnections: 4,
-    })
-    await server.start()
-    const port = Number(server.getServerConn().split(':').at(-1))
-    connection = {
-      host: '127.0.0.1',
-      port,
-      database: 'postgres',
-      user: 'postgres',
-      ssl: false,
-    }
-    clientA = new pg.Client(connection)
-    clientB = new pg.Client(connection)
-    await Promise.all([clientA.connect(), clientB.connect()])
-    await configureClient(clientA, HOUSEHOLD_A)
-    await configureClient(clientB, HOUSEHOLD_A)
+    await configureClient(HOUSEHOLD_A)
   }, 60_000)
 
   afterAll(async () => {
-    const errors: unknown[] = []
-    const clients = await Promise.allSettled([clientA?.end(), clientB?.end()])
-    for (const result of clients) {
-      if (result.status === 'rejected') errors.push(result.reason)
-    }
-    try {
-      await server?.stop()
-    } catch (cause) {
-      errors.push(cause)
-    }
-    try {
-      await database?.close()
-    } catch (cause) {
-      errors.push(cause)
-    }
-    if (errors.length > 0) {
-      throw new AggregateError(errors, 'Academy PGlite cleanup failed.')
-    }
+    await database?.close()
   }, 30_000)
-
-  it('allows exactly one of two clients to consume the same empty-cloud revision', async () => {
-    const [first, second] = await Promise.all([
-      mutate(clientA, 0, 'empty-a', [profileRow('p1', 'First')]),
-      mutate(clientB, 0, 'empty-b', [profileRow('p1', 'Second')]),
-    ])
-    expect([first.status, second.status].sort()).toEqual([
-      'applied',
-      'conflict',
-    ])
-    expect(first.revision).toBe('1')
-    expect(second.revision).toBe('1')
-    expect((await snapshot(clientA)).revision).toBe('1')
-  })
-
-  it('advances a nonzero revision once and returns a typed conflict to the loser', async () => {
-    const [first, second] = await Promise.all([
-      mutate(clientA, 1, 'revision-a', [profileRow('p2', 'First')]),
-      mutate(clientB, 1, 'revision-b', [profileRow('p2', 'Second')]),
-    ])
-    expect([first.status, second.status].sort()).toEqual([
-      'applied',
-      'conflict',
-    ])
-    expect(first.revision).toBe('2')
-    expect(second.revision).toBe('2')
-  })
 
   it('replays the same mutation id without applying or incrementing twice', async () => {
     const payload = [profileRow('p3', 'Idempotent')]
-    const applied = await mutate(clientA, 2, 'retry-a', payload)
-    const replayed = await mutate(clientA, 2, 'retry-a', payload)
-    expect(applied).toEqual({ status: 'applied', revision: '3' })
-    expect(replayed).toEqual({ status: 'replayed', revision: '3' })
-    expect((await snapshot(clientA)).revision).toBe('3')
+    const applied = await mutate(0, 'retry-a', payload)
+    const replayed = await mutate(0, 'retry-a', payload)
+    expect(applied).toEqual({ status: 'applied', revision: '1' })
+    expect(replayed).toEqual({ status: 'replayed', revision: '1' })
+    expect((await snapshot()).revision).toBe('1')
   })
 
   it('rejects altered payload or expected revision under an applied mutation id', async () => {
-    await configureClient(clientA, HOUSEHOLD_A)
+    await configureClient(HOUSEHOLD_A)
     await expect(
-      mutate(clientA, 2, 'retry-a', [profileRow('p3', 'Altered')]),
+      mutate(0, 'retry-a', [profileRow('p3', 'Altered')]),
     ).rejects.toThrow(/reused with different input/)
     await expect(
-      mutate(clientA, 3, 'retry-a', [profileRow('p3', 'Idempotent')]),
+      mutate(1, 'retry-a', [profileRow('p3', 'Idempotent')]),
     ).rejects.toThrow(/reused with different input/)
-    expect((await snapshot(clientA)).revision).toBe('3')
+    expect((await snapshot()).revision).toBe('1')
   })
 
   it('performs no profile writes for a stale expected revision', async () => {
-    const before = await snapshot(clientA)
-    const conflict = await mutate(clientA, 2, 'stale-a', [
+    const before = await snapshot()
+    const conflict = await mutate(0, 'stale-a', [
       profileRow('p4', 'Must not exist'),
     ])
-    const after = await snapshot(clientA)
-    expect(conflict).toEqual({ status: 'conflict', revision: '3' })
+    const after = await snapshot()
+    expect(conflict).toEqual({ status: 'conflict', revision: '1' })
     expect(after).toEqual(before)
   })
 
   it('persists an immutable conflict receipt and replays its original result', async () => {
-    await configureClient(clientA, HOUSEHOLD_C)
-    expect(
-      await mutate(clientA, 0, 'c-applied', [profileRow('p1', 'Baseline')]),
-    ).toEqual({ status: 'applied', revision: '1' })
+    await configureClient(HOUSEHOLD_C)
+    expect(await mutate(0, 'c-applied', [profileRow('p1', 'Baseline')])).toEqual(
+      { status: 'applied', revision: '1' },
+    )
     const conflictingPayload = [profileRow('p2', 'Conflict payload')]
-    expect(await mutate(clientA, 0, 'c-conflict', conflictingPayload)).toEqual({
+    expect(await mutate(0, 'c-conflict', conflictingPayload)).toEqual({
       status: 'conflict',
       revision: '1',
     })
-    expect(
-      await mutate(clientA, 1, 'c-advance', [profileRow('p3', 'Advance')]),
-    ).toEqual({ status: 'applied', revision: '2' })
-    expect(await mutate(clientA, 0, 'c-conflict', conflictingPayload)).toEqual({
+    expect(await mutate(1, 'c-advance', [profileRow('p3', 'Advance')])).toEqual(
+      { status: 'applied', revision: '2' },
+    )
+    expect(await mutate(0, 'c-conflict', conflictingPayload)).toEqual({
       status: 'conflict',
       revision: '1',
       replayed: true,
     })
     await expect(
-      mutate(clientA, 1, 'c-conflict', conflictingPayload),
+      mutate(1, 'c-conflict', conflictingPayload),
     ).rejects.toThrow(/reused with different input/)
     await expect(
-      mutate(clientA, 0, 'c-conflict', [profileRow('p2', 'Altered')]),
+      mutate(0, 'c-conflict', [profileRow('p2', 'Altered')]),
     ).rejects.toThrow(/reused with different input/)
-    expect((await snapshot(clientA)).revision).toBe('2')
-    await clientA.query('reset role')
-    const receipt = await clientA.query<{
+    expect((await snapshot()).revision).toBe('2')
+    await database.query('reset role')
+    const receipt = await database.query<{
       result_type: string
       observed_revision: string
       resulting_revision: string | null
@@ -285,43 +189,43 @@ describe('Academy household server revision CAS migration', () => {
         resulting_revision: null,
       },
     ])
-    await configureClient(clientA, HOUSEHOLD_A)
+    await configureClient(HOUSEHOLD_A)
   })
 
   it('enforces the shared Academy profile contract before writes or receipts', async () => {
-    await configureClient(clientA, HOUSEHOLD_C)
-    const before = await snapshot(clientA)
+    await configureClient(HOUSEHOLD_C)
+    const before = await snapshot()
     for (const [index, fixture] of academyProfileContractFixtures().entries()) {
       const row = {
         profile_id: fixture.profileId,
         data: fixture.data,
         updated_at: '2026-07-26T12:00:00Z',
       }
-      await clientA.query('reset role')
-      const result = await clientA.query<{ valid: boolean }>(
+      await database.query('reset role')
+      const result = await database.query<{ valid: boolean }>(
         `select public.academy_sync_profile_is_valid($1, $2::jsonb) as valid`,
         [fixture.profileId, JSON.stringify(fixture.data)],
       )
       expect(result.rows[0].valid, fixture.name).toBe(fixture.valid)
-      await configureClient(clientA, HOUSEHOLD_C)
+      await configureClient(HOUSEHOLD_C)
       if (fixture.valid) {
         continue
       }
       await expect(
-        mutate(clientA, Number(before.revision), `invalid-${index}`, [row]),
+        mutate(Number(before.revision), `invalid-${index}`, [row]),
         fixture.name,
       ).rejects.toThrow(/invalid row/)
     }
-    expect(await snapshot(clientA)).toEqual(before)
-    await clientA.query('reset role')
-    const receipts = await clientA.query<{ count: string }>(
+    expect(await snapshot()).toEqual(before)
+    await database.query('reset role')
+    const receipts = await database.query<{ count: string }>(
       `select count(*)::text as count
          from public.academy_household_sync_mutations
         where household_id = $1::uuid and mutation_id like 'invalid-%'`,
       [HOUSEHOLD_C],
     )
     expect(receipts.rows[0].count).toBe('0')
-    await configureClient(clientA, HOUSEHOLD_A)
+    await configureClient(HOUSEHOLD_A)
   })
 
   it.each([
@@ -330,19 +234,19 @@ describe('Academy household server revision CAS migration', () => {
     ['free-form timestamp', 'July 26, 2026'],
     ['date-only timestamp', '2026-07-26'],
   ])('rejects %s transactionally', async (_label, updatedAt) => {
-    await configureClient(clientA, HOUSEHOLD_C)
-    const before = await snapshot(clientA)
+    await configureClient(HOUSEHOLD_C)
+    const before = await snapshot()
     await expect(
-      mutate(clientA, Number(before.revision), `bad-time-${updatedAt}`, [
+      mutate(Number(before.revision), `bad-time-${updatedAt}`, [
         profileRow('p4', 'Bad time', updatedAt),
       ]),
     ).rejects.toThrow(/invalid row|mutation id is invalid/)
-    expect(await snapshot(clientA)).toEqual(before)
+    expect(await snapshot()).toEqual(before)
   })
 
   it('rejects invalid profile envelopes without revision or receipt changes', async () => {
-    await configureClient(clientA, HOUSEHOLD_C)
-    const before = await snapshot(clientA)
+    await configureClient(HOUSEHOLD_C)
+    const before = await snapshot()
     const mismatch = profileRow('p1', 'Mismatch')
     mismatch.data.id = 'p2'
     const sixRows = [
@@ -372,12 +276,12 @@ describe('Academy household server revision CAS migration', () => {
       ],
     ] as const) {
       await expect(
-        mutate(clientA, Number(before.revision), id, [...payload]),
+        mutate(Number(before.revision), id, [...payload]),
       ).rejects.toThrow()
-      expect(await snapshot(clientA)).toEqual(before)
+      expect(await snapshot()).toEqual(before)
     }
-    await clientA.query('reset role')
-    const receipts = await clientA.query<{ count: string }>(
+    await database.query('reset role')
+    const receipts = await database.query<{ count: string }>(
       `select count(*)::text as count
          from public.academy_household_sync_mutations
         where household_id = $1::uuid
@@ -391,124 +295,113 @@ describe('Academy household server revision CAS migration', () => {
   })
 
   it('rejects reserved nested keys, huge JavaScript-incompatible numerics, and mixed invalid rows', async () => {
-    await configureClient(clientA, HOUSEHOLD_C)
-    const before = await snapshot(clientA)
+    await configureClient(HOUSEHOLD_C)
+    const before = await snapshot()
     const valid = profileRow('p4', 'Valid')
     const reserved = structuredClone(valid)
     reserved.data.skills = JSON.parse(
       '{"__proto__":{"attempts":1,"correct":1,"mastery":1}}',
     )
     await expect(
-      mutate(clientA, Number(before.revision), 'reserved-nested', [reserved]),
+      mutate(Number(before.revision), 'reserved-nested', [reserved]),
     ).rejects.toThrow()
     const hugeNumericJson = JSON.stringify([
       profileRow('p5', 'Huge numeric'),
     ]).replace('"sessions":0', '"sessions":1e400')
     await expect(
-      mutateJson(
-        clientA,
-        Number(before.revision),
-        'huge-numeric',
-        hugeNumericJson,
-      ),
+      mutateJson(Number(before.revision), 'huge-numeric', hugeNumericJson),
     ).rejects.toThrow()
     const malformed = profileRow('p5', 'Malformed')
     delete (malformed.data as Partial<typeof malformed.data>).totals
     await expect(
-      mutate(clientA, Number(before.revision), 'mixed-invalid', [
-        valid,
-        malformed,
-      ]),
+      mutate(Number(before.revision), 'mixed-invalid', [valid, malformed]),
     ).rejects.toThrow()
-    expect(await snapshot(clientA)).toEqual(before)
+    expect(await snapshot()).toEqual(before)
   })
 
   it('enforces depth, entry, key, string, and total-payload limits before receipts', async () => {
-    await withIsolatedClient(HOUSEHOLD_C, async (limitClient) => {
-      const before = await snapshot(limitClient)
-      const deep = profileRow('p4', 'Deep') as ReturnType<typeof profileRow> & {
-        data: Record<string, unknown>
-      }
-      let nested: Record<string, unknown> = {}
-      deep.data.additive = nested
-      for (let index = 0; index < 129; index += 1) {
-        nested.next = {}
-        nested = nested.next as Record<string, unknown>
-      }
-      const excessiveArray = profileRow('p4', 'Array') as ReturnType<
-        typeof profileRow
-      > & { data: Record<string, unknown> }
-      excessiveArray.data.additive = Array.from({ length: 50_001 }, () => 0)
-      const oversizedKey = profileRow('p4', 'Key') as ReturnType<
-        typeof profileRow
-      > & { data: Record<string, unknown> }
-      oversizedKey.data['k'.repeat(257)] = true
-      const oversizedString = profileRow('p4', 'String') as ReturnType<
-        typeof profileRow
-      > & { data: Record<string, unknown> }
-      oversizedString.data.additive = 'x'.repeat(1_000_001)
-      const excessiveObject = profileRow('p4', 'Object') as ReturnType<
-        typeof profileRow
-      > & { data: Record<string, unknown> }
-      excessiveObject.data.additive = Object.fromEntries(
-        Array.from({ length: 50_001 }, (_, index) => [`key-${index}`, index]),
-      )
-      const excessiveNodes = profileRow('p4', 'Nodes') as ReturnType<
-        typeof profileRow
-      > & { data: Record<string, unknown> }
-      excessiveNodes.data.additive = Array.from({ length: 10_001 }, () =>
-        Array.from({ length: 50 }, () => 0),
-      )
-      for (const [id, row] of [
-        ['deep-profile', deep],
-        ['excessive-array', excessiveArray],
-        ['excessive-object', excessiveObject],
-        ['excessive-nodes', excessiveNodes],
-        ['oversized-key', oversizedKey],
-        ['oversized-string', oversizedString],
-      ] as const) {
-        await expect(
-          mutate(limitClient, Number(before.revision), id, [row]),
-        ).rejects.toThrow()
-        expect(await snapshot(limitClient)).toEqual(before)
-      }
-      const overPayload = profileRow('p4', 'Payload') as ReturnType<
-        typeof profileRow
-      > & { data: Record<string, unknown> }
-      overPayload.data.additive = 'x'.repeat(10_000_001)
+    await configureClient(HOUSEHOLD_C)
+    const before = await snapshot()
+    const deep = profileRow('p4', 'Deep') as ReturnType<typeof profileRow> & {
+      data: Record<string, unknown>
+    }
+    let nested: Record<string, unknown> = {}
+    deep.data.additive = nested
+    for (let index = 0; index < 129; index += 1) {
+      nested.next = {}
+      nested = nested.next as Record<string, unknown>
+    }
+    const excessiveArray = profileRow('p4', 'Array') as ReturnType<
+      typeof profileRow
+    > & { data: Record<string, unknown> }
+    excessiveArray.data.additive = Array.from({ length: 50_001 }, () => 0)
+    const oversizedKey = profileRow('p4', 'Key') as ReturnType<
+      typeof profileRow
+    > & { data: Record<string, unknown> }
+    oversizedKey.data['k'.repeat(257)] = true
+    const oversizedString = profileRow('p4', 'String') as ReturnType<
+      typeof profileRow
+    > & { data: Record<string, unknown> }
+    oversizedString.data.additive = 'x'.repeat(1_000_001)
+    const excessiveObject = profileRow('p4', 'Object') as ReturnType<
+      typeof profileRow
+    > & { data: Record<string, unknown> }
+    excessiveObject.data.additive = Object.fromEntries(
+      Array.from({ length: 50_001 }, (_, index) => [`key-${index}`, index]),
+    )
+    const excessiveNodes = profileRow('p4', 'Nodes') as ReturnType<
+      typeof profileRow
+    > & { data: Record<string, unknown> }
+    excessiveNodes.data.additive = Array.from({ length: 10_001 }, () =>
+      Array.from({ length: 50 }, () => 0),
+    )
+    for (const [id, row] of [
+      ['deep-profile', deep],
+      ['excessive-array', excessiveArray],
+      ['excessive-object', excessiveObject],
+      ['excessive-nodes', excessiveNodes],
+      ['oversized-key', oversizedKey],
+      ['oversized-string', oversizedString],
+    ] as const) {
       await expect(
-        mutate(limitClient, Number(before.revision), 'over-payload', [
-          overPayload,
-        ]),
+        mutate(Number(before.revision), id, [row]),
       ).rejects.toThrow()
-      await limitClient.query('reset role')
-      const receipts = await limitClient.query<{ count: string }>(
-        `select count(*)::text as count
-           from public.academy_household_sync_mutations
-          where household_id = $1::uuid
-            and mutation_id in (
-              'deep-profile', 'excessive-array', 'oversized-key',
-              'excessive-object', 'excessive-nodes', 'oversized-string',
-              'over-payload'
-            )`,
-        [HOUSEHOLD_C],
-      )
-      expect(receipts.rows[0].count).toBe('0')
-    })
+      expect(await snapshot()).toEqual(before)
+    }
+    const overPayload = profileRow('p4', 'Payload') as ReturnType<
+      typeof profileRow
+    > & { data: Record<string, unknown> }
+    overPayload.data.additive = 'x'.repeat(10_000_001)
+    await expect(
+      mutate(Number(before.revision), 'over-payload', [overPayload]),
+    ).rejects.toThrow()
+    await database.query('reset role')
+    const receipts = await database.query<{ count: string }>(
+      `select count(*)::text as count
+         from public.academy_household_sync_mutations
+        where household_id = $1::uuid
+          and mutation_id in (
+            'deep-profile', 'excessive-array', 'oversized-key',
+            'excessive-object', 'excessive-nodes', 'oversized-string',
+            'over-payload'
+          )`,
+      [HOUSEHOLD_C],
+    )
+    expect(receipts.rows[0].count).toBe('0')
     // Recursive node and 10 MB payload probes are intentionally expensive in
-    // PGlite. Keep only this isolated proof above Vitest's five-second default.
+    // PGlite. Keep this proof above Vitest's five-second default.
   }, 30_000)
 
   it('rolls back the entire multi-profile mutation when any row fails', async () => {
-    await configureClient(clientA, HOUSEHOLD_A)
+    await configureClient(HOUSEHOLD_A)
     await expect(
-      mutate(clientA, 3, 'rollback-a', [
+      mutate(1, 'rollback-a', [
         profileRow('p4', 'Would otherwise write'),
         profileRow('p5', 'Invalid timestamp', 'not-a-date'),
       ]),
     ).rejects.toThrow()
-    const current = await snapshot(clientA)
-    expect(current.revision).toBe('3')
+    const current = await snapshot()
+    expect(current.revision).toBe('1')
     expect(current.rows).not.toEqual(
       expect.arrayContaining([
         expect.objectContaining({ profile_id: 'p4' }),
@@ -517,60 +410,29 @@ describe('Academy household server revision CAS migration', () => {
     )
   })
 
-  it('isolates authenticated households and derives identity without a caller household parameter', async () => {
-    const householdB = new pg.Client({
-      host: '127.0.0.1',
-      port: Number(server.getServerConn().split(':').at(-1)),
-      database: 'postgres',
-      user: 'postgres',
-      ssl: false,
-    })
-    await householdB.connect()
-    try {
-      await configureClient(householdB, HOUSEHOLD_B)
-      expect(
-        await mutate(householdB, 0, 'household-b-write', [
-          profileRow('p1', 'Household B'),
-        ]),
-      ).toEqual({ status: 'applied', revision: '1' })
-      // pglite-socket multiplexes one embedded PostgreSQL session, so its GUC
-      // is intentionally reset before each isolation assertion. The two-client
-      // CAS tests above still use distinct PostgreSQL protocol connections.
-      await configureClient(clientA, HOUSEHOLD_A)
-      const a = await snapshot(clientA)
-      await configureClient(householdB, HOUSEHOLD_B)
-      const b = await snapshot(householdB)
-      expect(a.revision).toBe('3')
-      expect(b.revision).toBe('1')
-      expect(JSON.stringify(a)).not.toContain('Household B')
-    } finally {
-      await householdB.end()
-    }
-  })
-
   it('keeps the same mutation id independent between households', async () => {
-    await configureClient(clientA, HOUSEHOLD_B)
-    const beforeB = await snapshot(clientA)
+    await configureClient(HOUSEHOLD_B)
+    const beforeB = await snapshot()
     expect(
-      await mutate(clientA, Number(beforeB.revision), 'shared-household-id', [
+      await mutate(Number(beforeB.revision), 'shared-household-id', [
         profileRow('p2', 'Household B shared ID'),
       ]),
     ).toEqual({
       status: 'applied',
       revision: String(Number(beforeB.revision) + 1),
     })
-    await configureClient(clientA, HOUSEHOLD_C)
-    const beforeC = await snapshot(clientA)
+    await configureClient(HOUSEHOLD_C)
+    const beforeC = await snapshot()
     expect(
-      await mutate(clientA, Number(beforeC.revision), 'shared-household-id', [
+      await mutate(Number(beforeC.revision), 'shared-household-id', [
         profileRow('p2', 'Household C shared ID'),
       ]),
     ).toEqual({
       status: 'applied',
       revision: String(Number(beforeC.revision) + 1),
     })
-    await clientA.query('reset role')
-    const receipts = await clientA.query<{
+    await database.query('reset role')
+    const receipts = await database.query<{
       household_id: string
       count: string
     }>(
@@ -587,38 +449,26 @@ describe('Academy household server revision CAS migration', () => {
   })
 
   it('rejects missing authentication and anonymous execution', async () => {
-    const unauthenticated = new pg.Client({
-      host: '127.0.0.1',
-      port: Number(server.getServerConn().split(':').at(-1)),
-      database: 'postgres',
-      user: 'postgres',
-      ssl: false,
-    })
-    await unauthenticated.connect()
-    try {
-      await unauthenticated.query(
-        `select set_config('request.jwt.claim.sub', '', false)`,
-      )
-      await unauthenticated.query('set role authenticated')
-      await expect(
-        mutate(unauthenticated, 0, 'missing-auth', [
-          profileRow('p1', 'Rejected'),
-        ]),
-      ).rejects.toThrow()
-      await unauthenticated.query('reset role')
-      await unauthenticated.query('set role anon')
-      await expect(
-        unauthenticated.query('select public.academy_sync_snapshot()'),
-      ).rejects.toThrow()
-    } finally {
-      await unauthenticated.end()
-    }
+    await database.query(
+      `select set_config('request.jwt.claim.sub', '', false)`,
+    )
+    await database.query('set role authenticated')
+    await expect(
+      mutate(0, 'missing-auth', [profileRow('p1', 'Rejected')]),
+    ).rejects.toThrow()
+    await database.query('reset role')
+    await database.query('set role anon')
+    await expect(
+      database.query('select public.academy_sync_snapshot()'),
+    ).rejects.toThrow()
+    await database.query('reset role')
+    await configureClient(HOUSEHOLD_A)
   })
 
   it('removes the unconditional authenticated table-write path', async () => {
-    await configureClient(clientA, HOUSEHOLD_A)
+    await configureClient(HOUSEHOLD_A)
     await expect(
-      clientA.query(
+      database.query(
         `insert into public.profiles (profile_id, data)
          values ('p5', '{"id":"p5","name":"bypass"}'::jsonb)`,
       ),
@@ -626,8 +476,8 @@ describe('Academy household server revision CAS migration', () => {
   })
 
   it('owns security-definer RPCs as postgres with fixed search paths and narrow grants', async () => {
-    await clientA.query('reset role')
-    const functions = await clientA.query<{
+    await database.query('reset role')
+    const functions = await database.query<{
       name: string
       owner: string
       configuration: string[]
@@ -663,7 +513,7 @@ describe('Academy household server revision CAS migration', () => {
         (procedure) => procedure.name === 'academy_apply_profile_mutation',
       )?.arguments,
     ).toBe('p_expected_revision bigint, p_mutation_id text, p_profiles jsonb')
-    const helpers = await clientA.query<{
+    const helpers = await database.query<{
       name: string
       owner: string
       configuration: string[]
@@ -694,19 +544,19 @@ describe('Academy household server revision CAS migration', () => {
       expect(helper.acl).not.toContain('authenticated=X/')
       expect(helper.acl).not.toContain('anon=X/')
     }
-    await clientA.query('set role authenticated')
+    await database.query('set role authenticated')
   })
 
   it('leaves no residual fixture mutation beyond the expected household rows', async () => {
-    await clientA.query('reset role')
-    const result = await clientA.query<{ count: string }>(
+    await database.query('reset role')
+    const result = await database.query<{ count: string }>(
       `select count(*)::text as count
          from public.profiles
         where household_id not in ($1::uuid, $2::uuid, $3::uuid)`,
       [HOUSEHOLD_A, HOUSEHOLD_B, HOUSEHOLD_C],
     )
     expect(result.rows[0].count).toBe('0')
-    await clientA.query('set role authenticated')
+    await database.query('set role authenticated')
   })
 })
 

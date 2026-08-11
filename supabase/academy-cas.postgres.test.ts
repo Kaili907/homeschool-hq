@@ -103,6 +103,7 @@ describe('Academy CAS on independent PostgreSQL backends', () => {
   let controller: pg.Client
   let clientA: pg.Client
   let clientB: pg.Client
+  let clientHouseholdB: pg.Client
   let serverProcess: ChildProcess | undefined
   let cleanupPromise: Promise<void> | null = null
 
@@ -114,6 +115,7 @@ describe('Academy CAS on independent PostgreSQL backends', () => {
         controller?.end(),
         clientA?.end(),
         clientB?.end(),
+        clientHouseholdB?.end(),
       ])
       for (const result of clients) {
         if (result.status === 'rejected') errors.push(result.reason)
@@ -171,6 +173,13 @@ describe('Academy CAS on independent PostgreSQL backends', () => {
     const result = await client.query<{ result: Record<string, unknown> }>(
       `select public.academy_apply_profile_mutation($1, $2, $3::jsonb) as result`,
       [expectedRevision, mutationId, payload],
+    )
+    return result.rows[0].result
+  }
+
+  async function snapshot(client: pg.Client) {
+    const result = await client.query<{ result: Record<string, unknown> }>(
+      'select public.academy_sync_snapshot() as result',
     )
     return result.rows[0].result
   }
@@ -236,10 +245,12 @@ describe('Academy CAS on independent PostgreSQL backends', () => {
       controller = server.getPgClient()
       clientA = server.getPgClient()
       clientB = server.getPgClient()
+      clientHouseholdB = server.getPgClient()
       await Promise.all([
         controller.connect(),
         clientA.connect(),
         clientB.connect(),
+        clientHouseholdB.connect(),
       ])
       await controller.query(`
       create role anon;
@@ -263,6 +274,7 @@ describe('Academy CAS on independent PostgreSQL backends', () => {
       await Promise.all([
         configure(clientA, HOUSEHOLD_A),
         configure(clientB, HOUSEHOLD_A),
+        configure(clientHouseholdB, HOUSEHOLD_B),
       ])
     } catch (cause) {
       try {
@@ -412,5 +424,66 @@ describe('Academy CAS on independent PostgreSQL backends', () => {
       [HOUSEHOLD_A],
     )
     expect(state.rows).toEqual([{ revision: '3', receipts: '1' }])
+  })
+
+  it('recovers the same connection after a rejected mutation reuse', async () => {
+    const before = await snapshot(clientA)
+    const baseline = Number(before.revision)
+    expect(
+      await mutatePayload(
+        clientA,
+        baseline,
+        'protocol-recovery',
+        JSON.stringify([profileRow('p1', 'Baseline recovery')]),
+      ),
+    ).toEqual({ status: 'applied', revision: String(baseline + 1) })
+    const afterBaseline = await snapshot(clientA)
+    // Reusing the mutation id with an altered payload must surface a real
+    // PostgreSQL ERROR on this connection.
+    await expect(
+      mutatePayload(
+        clientA,
+        baseline,
+        'protocol-recovery',
+        JSON.stringify([profileRow('p1', 'Altered payload')]),
+      ),
+    ).rejects.toThrow(/reused with different input/)
+    // Reusing the mutation id with the original payload but a different
+    // expected revision must also surface a real PostgreSQL ERROR.
+    await expect(
+      mutatePayload(
+        clientA,
+        Number(afterBaseline.revision),
+        'protocol-recovery',
+        JSON.stringify([profileRow('p1', 'Baseline recovery')]),
+      ),
+    ).rejects.toThrow(/reused with different input/)
+    expect((await snapshot(clientA)).revision).toBe(afterBaseline.revision)
+    // The same clientA connection must keep serving unrelated CAS calls
+    // after recovering from both rejected queries above -- this is the
+    // exact recovery path the PGLiteSocketServer-backed suite could not
+    // reliably provide.
+    const followUp = await mutate(
+      clientA,
+      Number(afterBaseline.revision),
+      'protocol-recovery-followup',
+      'Recovered',
+    )
+    expect(followUp).toEqual({
+      status: 'applied',
+      revision: String(Number(afterBaseline.revision) + 1),
+    })
+  })
+
+  it('isolates authenticated households across genuinely independent backend sessions', async () => {
+    const beforeA = await snapshot(clientA)
+    expect(
+      await mutate(clientHouseholdB, 0, 'household-b-write', 'Household B'),
+    ).toEqual({ status: 'applied', revision: '1' })
+    const afterA = await snapshot(clientA)
+    const householdB = await snapshot(clientHouseholdB)
+    expect(afterA.revision).toBe(beforeA.revision)
+    expect(householdB.revision).toBe('1')
+    expect(JSON.stringify(afterA)).not.toContain('Household B')
   })
 })
