@@ -2,7 +2,6 @@ import { readFile, readdir } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { ANTHROPIC_MODELS } from '../netlify/functions/_shared/anthropic-policy.js'
-import { STUDY_ADULT_REVIEW_SCHEDULE } from '../netlify/functions/study-adult-review-scheduled-worker.js'
 
 export const STUDY_DEPLOYMENT_PREFLIGHT_SCHEMA_VERSION = 1
 export const STUDY_DEPLOYMENT_OUTCOMES = Object.freeze([
@@ -26,6 +25,11 @@ export const STUDY_MANUAL_WORKER_FUNCTION = 'study-adult-review-worker'
 export const EXPECTED_STUDY_SCHEDULE = '*/5 * * * *'
 export const EXPECTED_NODE_VERSION = '22'
 export const EXPECTED_STUDY_SAFETY_MODEL = 'claude-haiku-4-5'
+
+const EXPECTED_STUDY_SCHEDULE_CONTRACT = Object.freeze({
+  scheduled: 'configured',
+  cadence: EXPECTED_STUDY_SCHEDULE,
+})
 
 const WORKER_REF = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$/u
 const SECRET_MIN_LENGTH = 32
@@ -266,7 +270,7 @@ function referencedFunctionNames(config) {
   return [...names].sort()
 }
 
-function netlifyGates(netlifyToml, functionFiles) {
+function netlifyGates(netlifyToml, functionFiles, scheduledFunctionContract) {
   const config = parseNetlifyDeploymentConfig(netlifyToml)
   const scheduled = [...config.functions.entries()].filter(([, settings]) => typeof settings.schedule === 'string')
   const expected = config.functions.get(EXPECTED_STUDY_SCHEDULED_FUNCTION)
@@ -280,8 +284,8 @@ function netlifyGates(netlifyToml, functionFiles) {
   const scheduledFilePresent = functionFiles.has(EXPECTED_STUDY_SCHEDULED_FUNCTION)
   const expectedCadence = expected?.schedule
   const cadencePresent = expectedCadence === EXPECTED_STUDY_SCHEDULE &&
-    STUDY_ADULT_REVIEW_SCHEDULE?.cadence === EXPECTED_STUDY_SCHEDULE &&
-    STUDY_ADULT_REVIEW_SCHEDULE?.scheduled === 'configured'
+    scheduledFunctionContract?.cadence === EXPECTED_STUDY_SCHEDULE &&
+    scheduledFunctionContract?.scheduled === 'configured'
   const manualScheduled = config.functions.get(STUDY_MANUAL_WORKER_FUNCTION)?.schedule !== undefined
   const scheduledRedirected = config.redirects.some((redirect) =>
     redirect.to === `/.netlify/functions/${EXPECTED_STUDY_SCHEDULED_FUNCTION}`)
@@ -499,12 +503,17 @@ function overallFor(gates) {
   return 'READY_FOR_DEPLOYMENT_ENVIRONMENT'
 }
 
-export function evaluateStudyDeploymentPreflight({ env = {}, netlifyToml = '', functionFiles = new Set() } = {}) {
+export function evaluateStudyDeploymentPreflight({
+  env = {},
+  netlifyToml = '',
+  functionFiles = new Set(),
+  scheduledFunctionContract = EXPECTED_STUDY_SCHEDULE_CONTRACT,
+} = {}) {
   const files = functionFiles instanceof Set ? functionFiles : new Set(functionFiles)
   const gates = Object.freeze([
     ...environmentGates(env),
     ...exposureGates(env),
-    ...netlifyGates(netlifyToml, files),
+    ...netlifyGates(netlifyToml, files, scheduledFunctionContract),
     ...contractGates(),
   ])
   const overall = overallFor(gates)
@@ -540,9 +549,19 @@ export function formatStudyDeploymentPreflight(result) {
   return `${lines.join('\n')}\n`
 }
 
+export function parseStudyScheduledFunctionContract(source) {
+  if (typeof source !== 'string') return null
+  const contractDeclaration = /STUDY_ADULT_REVIEW_SCHEDULE\s*=\s*Object\.freeze\(\s*\{([\s\S]*?)\}\s*\)/u.exec(source)?.[1]
+  if (!contractDeclaration) return null
+  const configured = /\bscheduled\s*:\s*['"]configured['"]/u.test(contractDeclaration)
+  const exactCadence = /\bcadence\s*:\s*['"]\*\/5 \* \* \* \*['"]/u.test(contractDeclaration)
+  return configured && exactCadence ? EXPECTED_STUDY_SCHEDULE_CONTRACT : null
+}
+
 export async function runLocalStudyDeploymentPreflight({ rootDirectory = process.cwd(), env = process.env } = {}) {
   let netlifyToml = ''
   let entries = []
+  let scheduledFunctionContract = null
   try {
     netlifyToml = await readFile(resolve(rootDirectory, 'netlify.toml'), 'utf8')
   } catch {
@@ -553,12 +572,26 @@ export async function runLocalStudyDeploymentPreflight({ rootDirectory = process
   } catch {
     // Missing function directory is represented by deterministic missing gates.
   }
+  try {
+    const source = await readFile(resolve(
+      rootDirectory,
+      `netlify/functions/${EXPECTED_STUDY_SCHEDULED_FUNCTION}.js`,
+    ), 'utf8')
+    scheduledFunctionContract = parseStudyScheduledFunctionContract(source)
+  } catch {
+    // Missing or unreadable source is represented by deterministic configuration gates.
+  }
   const functionFiles = new Set(entries.flatMap((entry) => {
     if (entry.isDirectory()) return [entry.name]
     const match = /^(.+)\.(?:js|mjs|ts)$/u.exec(entry.name)
     return match ? [match[1]] : []
   }))
-  return evaluateStudyDeploymentPreflight({ env, netlifyToml, functionFiles })
+  return evaluateStudyDeploymentPreflight({
+    env,
+    netlifyToml,
+    functionFiles,
+    scheduledFunctionContract,
+  })
 }
 
 function argumentValue(args, flag) {

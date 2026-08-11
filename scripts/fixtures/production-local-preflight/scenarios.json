@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "scenarios": {
+    "all-local-pass": {
+      "expectedOverall": "READY_FOR_HOSTED_PREFLIGHT"
+    },
+    "migration-collision": {
+      "expectedOverall": "BLOCKED_BY_MIGRATION_IDENTITY"
+    },
+    "missing-env": {
+      "unset": "VITE_STUDY_ENGINE_ENABLED",
+      "expectedOverall": "BLOCKED_BY_MISSING_ENV"
+    },
+    "unsafe-env": {
+      "set": "VITE_SUPABASE_SERVICE_ROLE_KEY",
+      "expectedOverall": "BLOCKED_BY_UNSAFE_ENV"
+    },
+    "admin-blocker": {
+      "reasonCode": "FIXTURE_ADMIN_BLOCKER",
+      "expectedOverall": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    "multiple-simultaneous-blockers": {
+      "expectedOverall": "BLOCKED_BY_MIGRATION_IDENTITY",
+      "expectedBlockerCount": 3
+    },
+    "secret-redaction": {
+      "sentinel": "unified-secret-sentinel-never-print"
+    },
+    "json-output": {
+      "expectedPreflight": "unified-local-production-preflight"
+    },
+    "operator-output": {
+      "expectedTitle": "Unified local production preflight"
+    }
+  }
+}

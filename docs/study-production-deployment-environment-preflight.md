@@ -23,6 +23,11 @@ The command exits `0` only for `READY_FOR_DEPLOYMENT_ENVIRONMENT`. A blocked
 result exits `2`; CLI usage or an unexpected local execution failure exits `1`.
 No output contains an environment value.
 
+The unified local operator command is
+`npm.cmd run preflight:production-local`. It retains this preflight's full
+result alongside Admin R3 and migration reconciliation; see
+[`production-local-preflight.md`](./production-local-preflight.md).
+
 ## Environment inventory
 
 Only names consumed by repository code are deployment inputs. The preflight
@@ -80,6 +85,12 @@ The checked-in configuration must:
 - keep the scheduled entrypoint out of public redirects;
 - contain the scheduled function file and every function file referenced by a redirect;
 - set `VITE_USE_PROXY` to `true` and pin `NODE_VERSION` to `22`.
+
+The scheduled entrypoint contract is inspected as local source text. This keeps
+the preflight executable even when the entrypoint is absent and makes that
+absence a deterministic `BLOCKED_BY_DEPLOYMENT_CONFIG` result instead of a
+module-load failure. The preflight does not execute function code while checking
+the schedule contract.
 
 ## Results and authority boundary
 

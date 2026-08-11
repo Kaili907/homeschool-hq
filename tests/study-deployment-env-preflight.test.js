@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   evaluateStudyDeploymentPreflight,
   formatStudyDeploymentPreflight,
+  parseStudyScheduledFunctionContract,
   runLocalStudyDeploymentPreflight,
   serializeStudyDeploymentPreflight,
   STUDY_DEPLOYMENT_GATE_STATUSES,
@@ -158,6 +159,22 @@ describe('Study production deployment environment preflight', () => {
     })
   })
 
+  it('fails closed when the scheduled entrypoint source contract is unavailable', () => {
+    const result = evaluate({ scheduledFunctionContract: null })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.scheduled_cadence')).toMatchObject({
+      status: 'malformed', reasonCode: 'SCHEDULE_CADENCE_WRONG',
+    })
+  })
+
+  it('parses only the exact reviewed scheduled entrypoint source contract', () => {
+    const exact = `export const STUDY_ADULT_REVIEW_SCHEDULE = Object.freeze({\n  scheduled: 'configured',\n  cadence: '*/5 * * * *',\n})`
+    expect(parseStudyScheduledFunctionContract(exact)).toEqual({
+      scheduled: 'configured', cadence: '*/5 * * * *',
+    })
+    expect(parseStudyScheduledFunctionContract(exact.replace('*/5', '*/10'))).toBeNull()
+  })
+
   it('blocks the public/manual worker when it is accidentally scheduled', () => {
     const source = `${validNetlifyConfig()}\n[functions."study-adult-review-worker"]\n  schedule = "*/5 * * * *"\n`
     const result = evaluate({ netlifyToml: source })
@@ -210,10 +227,10 @@ describe('Study production deployment environment preflight', () => {
     expect(output).toContain('Passing does not prove that Study migrations are applied')
   })
 
-  it('accepts the repository Netlify configuration and function file set with a complete fixture environment', async () => {
+  it('reports the repository scheduled-worker gap with a complete fixture environment', async () => {
     const result = await runLocalStudyDeploymentPreflight({ env: readyEnvironment() })
-    expect(result.overall).toBe('READY_FOR_DEPLOYMENT_ENVIRONMENT')
-    expect(byId(result, 'netlify.scheduled_cadence')).toMatchObject({ status: 'present' })
-    expect(byId(result, 'netlify.referenced_function_files')).toMatchObject({ status: 'present' })
+    expect(result.overall).toBe('BLOCKED_BY_DEPLOYMENT_CONFIG')
+    expect(byId(result, 'netlify.scheduled_target')).toMatchObject({ status: 'missing' })
+    expect(byId(result, 'netlify.scheduled_function_file')).toMatchObject({ status: 'missing' })
   })
 })
