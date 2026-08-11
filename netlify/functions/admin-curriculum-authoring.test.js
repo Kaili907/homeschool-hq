@@ -81,7 +81,7 @@ function handler(overrides = {}) {
 }
 
 describe('ADMIN-16B curriculum authoring API', () => {
-  it('serves authorized revision-bound materialization, validation, and preview without granting a write', async () => {
+  it('serves revision-bound reads and requires an editor write grant for persisted validation', async () => {
     const service = authoring()
     const resourceLibrary = {
       schemaVersion: 1,
@@ -112,7 +112,24 @@ describe('ADMIN-16B curriculum authoring API', () => {
     expect(studio.readMaterialization).toHaveBeenCalledWith(principal.userId, DRAFT_ID, 3)
     expect(studio.validateDraft).toHaveBeenCalledWith(principal.userId, DRAFT_ID, 3)
     expect(preview.read).toHaveBeenCalledWith(principal.userId, DRAFT_ID, 3)
-    expect(authorization.require.mock.calls.map((call) => call[1])).toEqual(['curriculum:read', 'curriculum:read', 'curriculum:read'])
+    expect(authorization.require.mock.calls.map((call) => call[1])).toEqual([
+      'curriculum:read', 'curriculum:drafts:write', 'curriculum:read',
+    ])
+  })
+
+  it('does not let a globally capable reviewer persist validation state', async () => {
+    const service = authoring()
+    service.listCollaborators.mockResolvedValue({ currentResponsibility: 'reviewer' })
+    const studio = { validateDraft: vi.fn(), readBaseIndex: vi.fn(), readBaseEntity: vi.fn() }
+    const handle = handler({
+      authoring: service,
+      studio,
+      authorization: { require: vi.fn().mockResolvedValue({ ok: true, principal }) },
+    })
+    const response = await handle(event(`/api/admin/curriculum/drafts/${DRAFT_ID}/validation/3`))
+    expect(response.statusCode).toBe(403)
+    expect(response.body).not.toContain('reviewer')
+    expect(studio.validateDraft).not.toHaveBeenCalled()
   })
 
   it('keeps preview read-only and maps exact-revision conflicts without leaking server detail', async () => {
@@ -337,5 +354,20 @@ describe('ADMIN-16B curriculum authoring API', () => {
     expect(response.statusCode).toBe(409)
     expect(response.body).toContain('revision_conflict')
     expect(response.body).not.toContain('private')
+  })
+
+  it('rejects oversized authoring DTOs before mutation access', async () => {
+    const service = authoring()
+    const handle = handler({
+      authoring: service,
+      authorization: { require: vi.fn().mockResolvedValue({ ok: true, principal }) },
+    })
+    const response = await handle({
+      ...event(`/api/admin/curriculum/drafts/${DRAFT_ID}/entities`, 'POST', {}),
+      body: JSON.stringify({ padding: 'x'.repeat(1_100_001) }),
+    })
+    expect(response.statusCode).toBe(413)
+    expect(response.body).toContain('request_too_large')
+    expect(service.createEntity).not.toHaveBeenCalled()
   })
 })

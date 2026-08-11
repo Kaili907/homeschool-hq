@@ -38,7 +38,9 @@ describe('Curriculum Resource Library analysis', () => {
   it('classifies published resources as referenced or orphaned and preserves only safe Schema v2 metadata', () => {
     const result = library([
       entity('media_resource', 'source-used', {
-        ...resource('source-used', 'Used source'), private_note: 'do not expose', provider_token: 'secret',
+        ...resource('source-used', 'Used source'),
+        locator: 'https://provider.example/signed?token=locator-secret',
+        private_note: 'do not expose', provider_token: 'secret',
       }),
       entity('media_resource', 'source-orphan', resource('source-orphan', 'Orphan source')),
       entity('lesson', 'lesson-one', {
@@ -56,6 +58,8 @@ describe('Curriculum Resource Library analysis', () => {
     const serialized = JSON.stringify(result)
     expect(serialized).not.toContain('private_note')
     expect(serialized).not.toContain('provider_token')
+    expect(serialized).not.toContain('locator-secret')
+    expect(serialized).not.toContain('provider.example')
     expect(serialized).not.toContain('protected-scoring-secret')
     expect(serialized).not.toContain('learner-secret')
   })

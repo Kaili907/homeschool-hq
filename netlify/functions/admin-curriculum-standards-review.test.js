@@ -70,6 +70,23 @@ describe('curriculum standards review API', () => {
     expect(standardsReview.list).toHaveBeenCalledWith(ACTOR, 'published_release', '1.0.0')
   })
 
+  it('does not expose draft decisions to a globally capable unassigned principal', async () => {
+    const standardsReview = { list: vi.fn(), update: vi.fn() }
+    const authoring = {
+      read: vi.fn().mockRejectedValue(Object.assign(new Error('private draft row'), { code: 'forbidden' })),
+    }
+    const handle = handler({
+      authoring,
+      standardsReview,
+      authorization: { require: vi.fn().mockResolvedValue({ ok: true, principal }) },
+    })
+    const response = await handle(event(`/api/admin/curriculum/standards-reviews/draft/${DRAFT}`))
+    expect(response.statusCode).toBe(403)
+    expect(response.body).toContain('curriculum_collaboration_required')
+    expect(response.body).not.toContain('private')
+    expect(standardsReview.list).not.toHaveBeenCalled()
+  })
+
   it('uses draft write capability for workflow states and preserves unresolved labels', async () => {
     const standardsReview = { list: vi.fn(), update: vi.fn().mockResolvedValue({ schemaVersion: 1, replayed: false }) }
     const authorization = { require: vi.fn().mockResolvedValue({ ok: true, principal }) }
@@ -108,6 +125,25 @@ describe('curriculum standards review API', () => {
     })))
     expect(response.statusCode).toBe(403)
     expect(response.body).toContain('curriculum_collaboration_required')
+    expect(standardsReview.update).not.toHaveBeenCalled()
+  })
+
+  it('keeps an assigned globally capable reviewer from changing standards evidence', async () => {
+    const standardsReview = { list: vi.fn(), update: vi.fn() }
+    const authoring = {
+      read: vi.fn().mockResolvedValue({ draftId: DRAFT }),
+      listCollaborators: vi.fn().mockResolvedValue({ currentResponsibility: 'reviewer' }),
+    }
+    const handle = handler({
+      authoring,
+      standardsReview,
+      authorization: { require: vi.fn().mockResolvedValue({ ok: true, principal }) },
+    })
+    const response = await handle(event('/api/admin/curriculum/standards-reviews', 'POST', body({
+      contextKind: 'draft', contextRef: DRAFT,
+    })))
+    expect(response.statusCode).toBe(403)
+    expect(response.body).not.toContain('reviewer')
     expect(standardsReview.update).not.toHaveBeenCalled()
   })
 

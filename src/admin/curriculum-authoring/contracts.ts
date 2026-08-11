@@ -161,6 +161,7 @@ export interface CurriculumStudioEntityIndexEntry {
 }
 
 export type CurriculumResourceKind = MediaResource['kind']
+export type CurriculumResourceMetadata = Omit<MediaResource, 'locator'>
 export type CurriculumResourceOrigin = 'base' | CurriculumDraftEntityOrigin | 'missing' | 'invalid'
 export type CurriculumResourceLifecycle = 'active' | 'tombstoned' | 'missing' | 'invalid'
 export type CurriculumResourceReferenceStatus =
@@ -185,7 +186,8 @@ export interface CurriculumResourceLibraryItem {
   /** Stable UI identity. Missing and invalid references do not masquerade as entities. */
   readonly key: string
   readonly resourceId: string | null
-  readonly metadata: MediaResource | null
+  /** Bulk inventory metadata deliberately excludes the provider/storage locator. */
+  readonly metadata: CurriculumResourceMetadata | null
   readonly title: string
   readonly kind: CurriculumResourceKind | null
   readonly required: boolean | null

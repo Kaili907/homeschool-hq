@@ -212,7 +212,10 @@ describe('ADMIN-11 read-only Admin surface', () => {
     const calls: { path: string; init: RequestInit }[] = []
     const fetcher = vi.fn(async (path: string, init: RequestInit) => {
       calls.push({ path, init })
-      return { ok: true, status: 200, json: async () => path.endsWith('/catalog') ? catalog : knownLesson }
+      return {
+        ok: true, status: 200,
+        json: async () => path.endsWith('/catalog') ? catalog : { ...knownLesson, lessonId: 'lesson id/with spaces' },
+      }
     })
     const httpSource = createAdminCurriculumHttpSource(fetcher, '/api/admin/curriculum', async () => 'test-access-token')
     await httpSource.loadCatalog()
@@ -225,5 +228,17 @@ describe('ADMIN-11 read-only Admin surface', () => {
       && call.init.credentials === 'omit'
       && (call.init.headers as Record<string, string>).Authorization === 'Bearer test-access-token')).toBe(true)
     expect(JSON.stringify(calls)).not.toMatch(/role|capabilit|actor/i)
+  })
+
+  it('rejects unexpected fields in successful browser DTOs', async () => {
+    const httpSource = createAdminCurriculumHttpSource(
+      vi.fn(async () => ({
+        ok: true, status: 200,
+        json: async () => ({ ...catalog, protectedExtension: { privateNote: 'must not cross' } }),
+      })),
+      '/api/admin/curriculum',
+      async () => 'test-access-token',
+    )
+    await expect(httpSource.loadCatalog()).rejects.toMatchObject({ code: 'malformed' })
   })
 })

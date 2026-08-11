@@ -34,6 +34,6 @@ Field changes are structured, bounded summaries rather than raw JSON. The comple
 
 Validation is computed from the same materialization and carries the same draft revision. A client adapter refuses to treat validation as current unless its revision, snapshot ID, target version, and Schema Set all match the preview authority.
 
-Schema/system identity, protected assessment interpretations, protected extensions, and media locators are excluded from before/after values. The diff may state that protected metadata changed, but it does not return that metadata. Protected validation findings are reduced to a generic review finding. Learner data, student work, assessment responses, Tutor conversations, private notes, provider data, secrets, and raw server errors are outside the response contract.
+Schema/system identity, protected assessment interpretations, protected extensions, media locators, lesson scoring guidance, mastery policy, Tutor routing, safety/privacy directives, and guardian-visibility notes are excluded from before/after values. The diff may state that protected metadata changed, but it does not return that metadata. Protected validation findings are reduced to a generic review finding. Learner data, student work, assessment responses, Tutor conversations, private notes, provider data, secrets, and raw server errors are outside the response contract.
 
 No database migration is required; preview is composed from existing authoritative release and draft reads.

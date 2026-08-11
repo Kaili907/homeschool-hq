@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { validateCurriculumDraftEntity } from '../../../src/admin/curriculum-authoring/contracts.ts'
 
 const TIMEOUT_MS = 5_000
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
@@ -84,7 +85,11 @@ function adaptEntity(value) {
   if (!record(value) || value.schemaVersion !== 1 || typeof value.draftId !== 'string' || !UUID.test(value.draftId) || !record(value.payload)) return null
   const { schemaVersion, draftId, payload, ...summaryValue } = value
   const summary = entity(summaryValue)
-  return summary ? Object.freeze({ schemaVersion, draftId, ...summary, payload: Object.freeze(payload) }) : null
+  if (!summary) return null
+  const validation = validateCurriculumDraftEntity(summary.entityType, summary.entityRef, payload)
+  return validation.success
+    ? Object.freeze({ schemaVersion, draftId, ...summary, payload: Object.freeze(validation.payload) })
+    : null
 }
 
 function adaptMutation(value) {

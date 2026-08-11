@@ -5,6 +5,12 @@ const ACTOR = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
 const DRAFT = '10000000-0000-4000-8000-000000000001'
 const REQUEST = '20000000-0000-4000-8000-000000000001'
 const HASH = 'a'.repeat(64)
+const COURSE = {
+  schema_set_version: '2.0.0', course_id: 'course:math-5', grade: 5,
+  subject: 'mathematics', title: 'Mathematics 5', description: 'Course.',
+  days: 180, order: 1, unit_refs: ['unit:math-5-1'],
+  standards: [{ framework_ref: 'framework:legacy', legacy_label: '5.NBT', mapping_status: 'human-review' }],
+}
 
 function client(value, error = null) {
   const abortSignal = vi.fn().mockResolvedValue({ data: value, error })
@@ -49,6 +55,26 @@ describe('Admin curriculum authoring server service', () => {
 
     const malformed = createAdminCurriculumAuthoringService({ client: client({ ...valid, actorUserRef: ACTOR }) })
     await expect(malformed.list(ACTOR)).rejects.toMatchObject({ code: 'unavailable' })
+  })
+
+  it('validates entity payload projections deeply before they can cross the server boundary', async () => {
+    const summary = {
+      entityType: 'course', entityRef: 'course:math-5', origin: 'base_override', revision: 1,
+      position: 0, tombstoned: false, digest: HASH,
+      createdAt: '2026-08-10T12:00:00Z', updatedAt: '2026-08-10T12:00:00Z',
+    }
+    const valid = createAdminCurriculumAuthoringService({ client: client({
+      schemaVersion: 1, draftId: DRAFT, ...summary, payload: COURSE,
+    }) })
+    await expect(valid.readEntity(ACTOR, DRAFT, 'course', 'course:math-5'))
+      .resolves.toMatchObject({ payload: COURSE })
+
+    const injected = createAdminCurriculumAuthoringService({ client: client({
+      schemaVersion: 1, draftId: DRAFT, ...summary,
+      payload: { ...COURSE, privateNote: 'must never cross' },
+    }) })
+    await expect(injected.readEntity(ACTOR, DRAFT, 'course', 'course:math-5'))
+      .rejects.toMatchObject({ code: 'unavailable' })
   })
 
   it('maps database CAS and replay markers to stable server-only errors', async () => {

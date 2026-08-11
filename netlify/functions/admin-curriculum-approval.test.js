@@ -45,7 +45,10 @@ function createHandler(overrides = {}) {
   return createAdminCurriculumHandler({
     source: { loadCatalog: vi.fn(), loadLesson: vi.fn(), loadValidationEvidence: vi.fn() },
     registry: { list: vi.fn(), details: vi.fn(), productionPointer: vi.fn() },
-    authoring: { read: vi.fn().mockResolvedValue({ draftId: DRAFT, revision: 3 }) },
+    authoring: {
+      read: vi.fn().mockResolvedValue({ draftId: DRAFT, revision: 3 }),
+      listCollaborators: vi.fn().mockResolvedValue({ currentResponsibility: 'editor' }),
+    },
     ...overrides,
   })
 }
@@ -88,6 +91,26 @@ describe('curriculum human approval API', () => {
     expect(approval.read).toHaveBeenCalledWith(principal.userId, DRAFT)
     expect(approval.decide).toHaveBeenCalledWith(principal.userId, expect.objectContaining(body))
     expect(approval.decide.mock.calls[0][1].requestDigest).toMatch(/^[0-9a-f]{64}$/)
+  })
+
+  it('keeps a globally authorized reviewer read-only', async () => {
+    const approval = { read: vi.fn().mockResolvedValue(status()), decide: vi.fn(), recordValidation: vi.fn() }
+    const handler = createHandler({
+      approval,
+      authoring: {
+        read: vi.fn().mockResolvedValue({ draftId: DRAFT, revision: 3 }),
+        listCollaborators: vi.fn().mockResolvedValue({ currentResponsibility: 'reviewer' }),
+      },
+      authorization: { require: vi.fn().mockResolvedValue({ ok: true, principal }) },
+    })
+    expect((await handler(event())).statusCode).toBe(200)
+    const response = await handler(event('POST', {
+      draftRevision: 3, decision: 'approved', reasonCode: 'approval.ready',
+      validationSnapshotId: VALIDATION, idempotencyKey: REQUEST,
+    }))
+    expect(response.statusCode).toBe(403)
+    expect(response.body).not.toContain('reviewer')
+    expect(approval.decide).not.toHaveBeenCalled()
   })
 
   it('accepts bounded changes-request reasons without requiring a validation identity', async () => {

@@ -1,9 +1,9 @@
-import type { MediaResource } from '../../curriculum-authoring/v2/contracts'
 import type { CurriculumSnapshotValidationRun, CurriculumValidationFinding } from '../curriculum-validation/engine'
 import type {
   CurriculumDraftEntityOrigin,
   CurriculumDraftEntityType,
   CurriculumResourceKind,
+  CurriculumResourceMetadata,
   CurriculumResourceLibrary,
   CurriculumResourceLibraryItem,
   CurriculumResourceReference,
@@ -51,7 +51,7 @@ function string(value: unknown, fallback: string): string {
   return typeof value === 'string' && value.trim() ? value.trim() : fallback
 }
 
-function resourceMetadata(value: unknown): MediaResource | null {
+function resourceMetadata(value: unknown): CurriculumResourceMetadata | null {
   const candidate = record(value)
   if (
     !candidate
@@ -71,14 +71,13 @@ function resourceMetadata(value: unknown): MediaResource | null {
     resource_id: candidate.resource_id,
     kind: candidate.kind as CurriculumResourceKind,
     title: candidate.title,
-    locator: candidate.locator,
     rights: candidate.rights,
     required: candidate.required,
     text_fallback: candidate.text_fallback,
     ...optional('caption_or_transcript'),
     ...optional('alt_text'),
     ...optional('long_description'),
-  } as MediaResource
+  }
 }
 
 function referenceStatus(
@@ -97,9 +96,9 @@ function entitySort(left: CurriculumResourceAnalysisEntity, right: CurriculumRes
 }
 
 /**
- * Deterministically projects only Schema v2 media metadata and the minimum
+ * Deterministically projects only provider-safe Schema v2 media metadata and the minimum
  * curriculum identities needed to navigate its references. No lesson bodies,
- * prompts, protected interpretations, or runtime/learner records are returned.
+ * prompts, protected interpretations, locators, or runtime/learner records are returned.
  */
 export function buildCurriculumResourceLibrary(input: {
   readonly origin: 'published-release' | 'draft'
@@ -320,7 +319,7 @@ export function filterCurriculumResourceLibrary(
     if (query) {
       const search = [
         item.resourceId ?? '', item.title, item.kind ?? '', item.origin, item.lifecycle,
-        item.referenceStatus, item.metadata?.locator ?? '', item.metadata?.rights ?? '',
+        item.referenceStatus, item.metadata?.rights ?? '',
         ...item.references.flatMap((reference) => [reference.entityRef, reference.entityTitle, reference.promptRef ?? '']),
       ].join(' ').toLocaleLowerCase('en-US')
       if (!search.includes(query)) return false

@@ -64,7 +64,20 @@ function fixture() {
         },
       ],
     }],
-    [`lesson:${lessonEntry.entityRef}`, lesson],
+    [`lesson:${lessonEntry.entityRef}`, {
+      ...lesson,
+      scoring_guidance: 'protected scoring answer must never be returned',
+      mastery: { ...lesson.mastery, policy_ref: 'protected-policy-ref' },
+      tutor_routes: [{
+        signal: 'prerequisite-gap', strategy: 'prerequisite-reteach',
+        parameters: { representation: 'worked-example' },
+      }],
+      safety_privacy: {
+        ...lesson.safety_privacy,
+        privacy_declarations: ['protected privacy instruction must never be returned'],
+      },
+      guardian_visibility_note: 'protected guardian note must never be returned',
+    }],
     [`assessment:${assessmentEntry.entityRef}`, {
       ...assessment,
       protected_interpretation_ref: 'interpretation:protected-new',
@@ -108,14 +121,14 @@ describe('ADMIN-19 revision-bound curriculum preview service', () => {
     expect(byKey.get(`course:${baseOnly.entityRef}`)).toMatchObject({ changeType: 'unchanged' })
     expect(byKey.get(`course:${entries.courseEntry.entityRef}`)).toMatchObject({ changeType: 'modified' })
     expect(byKey.get(`unit:${entries.unitEntry.entityRef}`)).toMatchObject({ changeType: 'removed' })
-    expect(byKey.get(`lesson:${entries.lessonEntry.entityRef}`)).toMatchObject({ changeType: 'unchanged' })
+    expect(byKey.get(`lesson:${entries.lessonEntry.entityRef}`)).toMatchObject({ changeType: 'modified' })
     expect(byKey.get('media_resource:draft-resource')).toMatchObject({ changeType: 'added' })
     expect(first.entities.filter((entity) => entity.entityType === 'course' && entity.entityRef === entries.courseEntry.entityRef)).toHaveLength(1)
 
     expect(first.summary.baseEntities).toBe(index.entities.length)
     expect(first.summary.candidateEntities).toBe(index.entities.length)
     expect(first.summary.totalCompared).toBe(index.entities.length + 1)
-    expect(first.summary).toMatchObject({ added: 1, modified: 2, removed: 1 })
+    expect(first.summary).toMatchObject({ added: 1, modified: 3, removed: 1 })
     expect(first.summary.unchanged + first.summary.modified + first.summary.removed).toBe(first.summary.baseEntities)
     expect(first.summary.unchanged + first.summary.modified + first.summary.added).toBe(first.summary.candidateEntities)
     expect(adaptCurriculumPreview(first, DRAFT_ID, 7)).not.toBeNull()
@@ -126,6 +139,7 @@ describe('ADMIN-19 revision-bound curriculum preview service', () => {
     const result = await createAdminCurriculumPreviewService({ authoring }).read(ACTOR, DRAFT_ID, 7)
     const course = result.entities.find((entity) => entity.entityType === 'course' && entity.entityRef === entries.courseEntry.entityRef)
     const assessment = result.entities.find((entity) => entity.entityType === 'assessment' && entity.entityRef === entries.assessmentEntry.entityRef)
+    const lesson = result.entities.find((entity) => entity.entityType === 'lesson' && entity.entityRef === entries.lessonEntry.entityRef)
     const resource = result.entities.find((entity) => entity.entityRef === 'draft-resource')
 
     expect(course.fieldChanges).toEqual(expect.arrayContaining([
@@ -138,6 +152,9 @@ describe('ADMIN-19 revision-bound curriculum preview service', () => {
       expect.objectContaining({ path: 'total_points', category: 'assessment-structure' }),
       expect.objectContaining({ path: 'protected_metadata', category: 'protected' }),
     ]))
+    expect(lesson.fieldChanges).toEqual([
+      expect.objectContaining({ path: 'protected_metadata', category: 'protected' }),
+    ])
     const promptChange = assessment.fieldChanges.find((change) => change.path === 'prompts')
     expect(promptChange.before.display).not.toBe(promptChange.after.display)
     expect(resource.fieldChanges).toEqual(expect.arrayContaining([
@@ -147,6 +164,10 @@ describe('ADMIN-19 revision-bound curriculum preview service', () => {
     expect(serialized).not.toContain('private note must never be returned')
     expect(serialized).not.toContain('secret=never-return')
     expect(serialized).not.toContain('interpretation:protected-new')
+    expect(serialized).not.toContain('protected scoring answer')
+    expect(serialized).not.toContain('protected-policy-ref')
+    expect(serialized).not.toContain('protected privacy instruction')
+    expect(serialized).not.toContain('protected guardian note')
     expect(serialized).not.toContain('payload')
   })
 
