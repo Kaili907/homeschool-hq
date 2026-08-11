@@ -18,6 +18,7 @@ const files = [
   './migrations/20260810150000_academy_study_curriculum_binding.sql',
   './migrations/20260810151000_academy_study_session_semantics_v2.sql',
   './migrations/20260810153000_academy_study_release_registry_bridge.sql',
+  './migrations/20260810159100_academy_study_session_timestamp_coherence.sql',
 ] as const
 
 const sql = Promise.all(files.map((path) => readFile(new URL(path, import.meta.url), 'utf8')))
@@ -296,7 +297,24 @@ describe.sequential('authoritative production Study session semantics V2', () =>
     sessionId = begun.body.sessionId as string
     expect(sessionId).toMatch(/^session:[0-9a-f]{32}$/)
     expect(begun.body.acceptedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/)
+    expect(Date.parse(begun.body.updatedAt as string)).toBeGreaterThanOrEqual(
+      Date.parse(begun.body.acceptedAt as string),
+    )
     expect(JSON.stringify(begun.body)).not.toContain(STUDENT_A)
+
+    const timestampMarker = await database.query<{
+      session_timestamp_coherence_version: number
+      marker: string
+    }>(`
+      select session_timestamp_coherence_version,
+        migration_names[array_length(migration_names, 1)] as marker
+      from academy_private.study_persistence_metadata
+      where singleton
+    `)
+    expect(timestampMarker.rows).toEqual([{
+      session_timestamp_coherence_version: 1,
+      marker: '20260810159100_academy_study_session_timestamp_coherence',
+    }])
 
     const stored = await database.query<{
       household_id: string

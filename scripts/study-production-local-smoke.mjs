@@ -44,6 +44,7 @@ const SQL_FILES = Object.freeze([
   '../supabase/migrations/20260810151000_academy_study_session_semantics_v2.sql',
   '../supabase/migrations/20260810153000_academy_study_release_registry_bridge.sql',
   '../supabase/migrations/20260810154000_academy_study_bound_content_authority.sql',
+  '../supabase/migrations/20260810159100_academy_study_session_timestamp_coherence.sql',
   './fixtures/study-production-local-smoke.sql',
 ])
 
@@ -428,7 +429,9 @@ export async function runStudyProductionLocalSmoke() {
     await check(steps, 'session-begin', 'session begin', 'server-bound-session-v2', async () => {
       const response = await academic('session:begin', startRequest)
       const result = responseJson(response)
-      invariant(response.statusCode === 200, 'session-begin-http')
+      invariant(response.statusCode === 200,
+        `session-begin-http-${response.statusCode}-${
+          result.error?.code ?? result.body?.reasonCode ?? 'none'}`)
       invariant(result?.body?.status === 'begun' && result.body.revision === 1,
         'session-begin-result')
       invariant(result.body.curriculumBinding?.releaseId === RELEASE_ID &&

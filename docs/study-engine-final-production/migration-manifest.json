@@ -188,7 +188,7 @@
       "version": "20260810152000",
       "filename": "20260810152000_academy_study_in_app_receipt_timestamp.sql",
       "sha256": "6d9656bcda6d5a2493947ddc4bb396dfb82d1ec6e575e468fbbe71620ba62f93",
-      "dependency": "20260810150000_academy_study_curriculum_binding.sql",
+      "dependency": "20260810151000_academy_study_session_semantics_v2.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "security_manifest.in_app_receipt_delivered_at_normalized:absent->true",
@@ -208,7 +208,7 @@
       "version": "20260810153000",
       "filename": "20260810153000_academy_study_release_registry_bridge.sql",
       "sha256": "7021be59d3c10e74d5ca213efdec6108da1553e17e5ae8f0864bd2505faff50f",
-      "dependency": "20260810151000_academy_study_session_semantics_v2.sql",
+      "dependency": "20260810152100_academy_study_worker_operations_contract.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "curriculum_binding_version:1->2",
@@ -228,10 +228,30 @@
       "version": "20260810155000",
       "filename": "20260810155000_academy_study_session_telemetry_outbox.sql",
       "sha256": "f3685d4457141a9a00ddf32a23be27daa3f552d7061b42838fb41b4645e4f340",
-      "dependency": "20260810151000_academy_study_session_semantics_v2.sql",
+      "dependency": "20260810154000_academy_study_bound_content_authority.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "session_telemetry_outbox_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810159000",
+      "filename": "20260810159000_academy_study_worker_run_evidence.sql",
+      "sha256": "5f3af03d266bc89a01178c5064955fd2a5d52158b1e38f71660e7795e15ec808",
+      "dependency": "20260810155000_academy_study_session_telemetry_outbox.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "worker_run_evidence_version:0->1",
+      "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810159100",
+      "filename": "20260810159100_academy_study_session_timestamp_coherence.sql",
+      "sha256": "72632e01008843c662677b36ca3bbe9582f18c850d80b2d77a7390e05c14b465",
+      "dependency": "20260810159000_academy_study_worker_run_evidence.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "session_timestamp_coherence_version:0->1",
       "supersessionStatus": "current"
     }
   ]

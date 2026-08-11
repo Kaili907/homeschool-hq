@@ -105,6 +105,39 @@ signature or vocabulary. It depends on migrations `20260810151000` and
 not been applied to a hosted project. See
 `docs/study-session-telemetry-outbox.md`.
 
+## Supabase: Study adult-review worker run evidence (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql`.
+
+The additive migration depends on the existing Study worker operations
+contract and records one immutable, privacy-safe receipt per server-generated
+adult-review worker invocation. Evidence is bounded to worker/version,
+timestamps, result category, aggregate counts, invocation kind, and a safe
+reason code; it contains no learner, household, review, delivery, provider,
+content, transcript, note, diagnostic, secret, or raw-error field. Browser
+roles have neither table access nor RPC execution, and replay is idempotent for
+the same run identity while conflicting evidence is rejected. Its normalized
+SHA-256 is
+`5f3af03d266bc89a01178c5064955fd2a5d52158b1e38f71660e7795e15ec808`,
+and it has not been applied to a hosted project.
+
+## Supabase: Study session timestamp coherence (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810159100_academy_study_session_timestamp_coherence.sql`.
+
+The additive correction preserves every existing migration identity and fixes
+the production Session Semantics V2 projection discovered by the local smoke
+gate. The storage default for `updated_at` uses transaction time, while trusted
+session acceptance uses wall-clock time; a long-running transaction could
+therefore begin a session whose `updatedAt` preceded `acceptedAt`. A narrow
+postgres-owned, non-executable-by-browser trigger now normalizes only new V2
+session inserts so `updated_at` never precedes the immutable acceptance time.
+The strict runtime validator remains unchanged. Its normalized SHA-256 is
+`72632e01008843c662677b36ca3bbe9582f18c850d80b2d77a7390e05c14b465`,
+and it has not been applied to a hosted project.
+
 ## Supabase: Study Effective Settings V2 (2026-08-10)
 
 Tracked migration:
