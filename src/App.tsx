@@ -98,6 +98,7 @@ import {
   createVerifiedStudyRuntimeAdapter,
   type VerifiedStudyRuntimeAdapter,
 } from './study/production/verifiedRuntimeAdapter'
+import { VerifiedStudyDashboard } from './components/study/VerifiedStudyDashboard'
 
 /**
  * STUDY-A1-COMP Phase 5 — the only thing an install refusal is allowed to
@@ -925,7 +926,7 @@ export default function App() {
         )
       }
       return (
-        <VerifiedProductionStudyHost
+        <VerifiedStudyDashboard
           runtime={verifiedRuntime}
           onBack={() => {
             void verifiedRuntime.cancel('navigation-away')
@@ -1286,51 +1287,6 @@ function StudyUnavailable({ reason, onBack }: { reason: string; onBack: () => vo
         <p className="mt-2">{reason}</p>
         <p className="mt-2 text-sm">No Study persistence or safety request was made.</p>
         <button className="mt-4 min-h-11 rounded-lg border border-amber-500 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
-      </div>
-    </main>
-  )
-}
-
-function VerifiedProductionStudyHost({
-  runtime,
-  onBack,
-}: {
-  runtime: VerifiedStudyRuntimeAdapter
-  onBack: () => void
-}) {
-  const headingRef = useRef<HTMLHeadingElement>(null)
-  const operationRef = useRef(`production-dashboard:${Date.now()}:${Math.random().toString(36).slice(2)}`)
-  const [status, setStatus] = useState<'loading' | 'ready' | 'unavailable'>('loading')
-
-  useEffect(() => {
-    const controller = new AbortController()
-    void runtime.execute({
-      operation: 'dashboard:read',
-      request: Object.freeze({}),
-      operationRef: operationRef.current,
-      signal: controller.signal,
-    }).then(() => {
-      if (!controller.signal.aborted) setStatus('ready')
-    }).catch(() => {
-      if (!controller.signal.aborted) setStatus('unavailable')
-    })
-    return () => controller.abort('navigation-away')
-  }, [runtime])
-
-  useEffect(() => { headingRef.current?.focus() }, [status])
-
-  return (
-    <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900" aria-busy={status === 'loading'}>
-      <div className="mx-auto max-w-xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h1 ref={headingRef} className="text-2xl font-bold" tabIndex={-1}>Verified Study workspace</h1>
-        {status === 'loading' && <p className="mt-2" role="status">Checking your current Study planÃ¢â‚¬Â¦</p>}
-        {status === 'ready' && (
-          <p className="mt-2" role="status">Your Study workspace is ready for this learner.</p>
-        )}
-        {status === 'unavailable' && (
-          <p className="mt-2" role="alert">Study took a safe pause. No late result was applied.</p>
-        )}
-        <button className="mt-4 min-h-11 rounded-lg border border-slate-400 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
       </div>
     </main>
   )

@@ -60,7 +60,10 @@ vi.mock('./study/production/verifiedRuntimeAdapter', () => ({
       harness.runtimeReady = true
       return { status: 'ready' }
     },
-    execute: async () => ({}),
+    // STUDY-A1-PROD-DASH-1: the production surface now parses these bodies
+    // strictly, so the stub answers each read with the server's empty shape.
+    execute: async ({ operation }: { operation: string }) =>
+      operation === 'dashboard:read' ? { sessions: [] } : { blocks: [] },
     cancel: async (reason: string) => {
       harness.cancels.push(reason)
       harness.runtimeReady = false
@@ -240,7 +243,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
 
   async function reachStudySurface() {
     await waitFor(() => harness.launches.length >= 1)
-    await waitFor(() => hasText(container, 'Verified Study workspace'))
+    await waitFor(() => hasText(container, 'Your Study plan'))
   }
 
   it('reaches the study surface on fresh navigation to /study-engine with a persisted active profile', async () => {
@@ -261,7 +264,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
     await mountApp(persisted)
     await waitFor(() => harness.launches.length >= 2)
-    await waitFor(() => hasText(container, 'Verified Study workspace'))
+    await waitFor(() => hasText(container, 'Your Study plan'))
     expect(harness.picker).toBeNull()
     expect(harness.launches[1]).toEqual({ student: 'p1', host: 'household-a' })
     // A4-X: mid-session the pathname stays /study-engine, so refresh re-enters.
@@ -282,7 +285,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     expect(harness.pin?.title).toBe('Hi, Riley!')
     await act(async () => { harness.pin?.onComplete('2222') })
     await waitFor(() => hasText(container, 'Hi, Riley!'))
-    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(hasText(container, 'Your Study plan')).toBe(false)
     const afterSwitch = harness.launches.slice(launchesBeforeSwitch)
     expect(afterSwitch.every((launch) => launch.student === 'p2')).toBe(true)
   })
@@ -290,7 +293,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
   it('keeps the picker for a signed-out direct link (no active profile)', async () => {
     await mountApp(seeded(null))
     expect(harness.picker).not.toBeNull()
-    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(hasText(container, 'Your Study plan')).toBe(false)
     expect(hasText(container, 'Study is not available')).toBe(false)
     expect(harness.launches).toEqual([])
   })
@@ -300,7 +303,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     state.activeProfileId = 'ghost'
     await mountApp(state)
     expect(harness.picker).not.toBeNull()
-    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(hasText(container, 'Your Study plan')).toBe(false)
     expect(harness.launches).toEqual([])
   })
 
@@ -311,7 +314,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     await act(async () => harness.picker?.onPick('p1'))
     await act(async () => { harness.pin?.onComplete('1234') })
     await waitFor(() => hasText(container, 'Hi, Sam!'))
-    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(hasText(container, 'Your Study plan')).toBe(false)
     expect(hasText(container, 'Study is not available')).toBe(false)
     expect(hasText(container, 'Today’s Study plan')).toBe(false)
     expect(harness.launches).toEqual([])
@@ -337,7 +340,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     // background (existing MOUNT-2 behavior); what must not happen is the
     // Study surface rendering instead of the normal start screen.
     expect(harness.picker).not.toBeNull()
-    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(hasText(container, 'Your Study plan')).toBe(false)
   })
 
   it('normalizes the pathname on sign-out when /study-engine lingers at sign-out time', async () => {
@@ -370,7 +373,7 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     expect(persisted.activeProfileId).toBe('p2')
     await mountApp(persisted)
     expect(harness.picker).not.toBeNull()
-    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(hasText(container, 'Your Study plan')).toBe(false)
     expect(pathname).toBe('/')
   })
 
@@ -378,6 +381,6 @@ describe('App study route lifecycle (MOUNT-2)', () => {
     pathname = '/'
     await mountApp(seeded('p1'))
     expect(harness.picker).not.toBeNull()
-    expect(hasText(container, 'Verified Study workspace')).toBe(false)
+    expect(hasText(container, 'Your Study plan')).toBe(false)
   })
 })
