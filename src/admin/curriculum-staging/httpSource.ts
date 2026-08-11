@@ -1,6 +1,8 @@
 import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from '../adminDependencyTimeout'
 import {
   CurriculumStagingError,
+  type CurriculumStagedCandidate,
   type CurriculumStagingInput,
   type CurriculumStagingMutationResult,
   type CurriculumStagingSource,
@@ -35,18 +37,23 @@ export function createCurriculumStagingHttpSource(
   fetchImpl: FetchLike = fetch,
   getAccessToken: () => Promise<string | null> = getGatewayAccessToken,
   basePath = '/api/admin/curriculum/drafts',
+  timeoutMs = 10_000,
 ): CurriculumStagingSource {
+  const boundedToken = () => withAdminDependencyTimeout(() => getAccessToken(), timeoutMs)
+  const boundedFetch: FetchLike = (input, init) => withAdminDependencyTimeout(
+    (signal) => fetchImpl(input, { ...init, signal }), timeoutMs,
+  )
   async function request(path: string, method = 'GET', body?: object): Promise<unknown> {
     let token: string | null
     try {
-      token = await getAccessToken()
+      token = await boundedToken()
     } catch {
       throw new CurriculumStagingError('unavailable')
     }
     if (!token) throw new CurriculumStagingError('unauthenticated')
     let response: Pick<Response, 'ok' | 'status' | 'json'>
     try {
-      response = await fetchImpl(path, {
+      response = await boundedFetch(path, {
         method,
         headers: {
           Accept: 'application/json',
@@ -93,7 +100,10 @@ export function createCurriculumStagingHttpSource(
       const projected = adaptStaging(
         await request(stagingPath(draftId), 'POST', body), draftId, true,
       ) as CurriculumStagingMutationResult | null
-      if (!projected) throw new CurriculumStagingError('unavailable')
+      if (!projected || projected.stageState !== 'staged'
+        || projected.candidate?.publicationStatus !== 'not_published') {
+        throw new CurriculumStagingError('unavailable')
+      }
       return projected
     },
   })
@@ -123,13 +133,14 @@ function timestamp(value: unknown): value is string {
   return typeof value === 'string' && value.length <= 40 && !Number.isNaN(Date.parse(value))
 }
 
-function candidate(value: unknown) {
+function candidate(value: unknown): CurriculumStagedCandidate | null {
   if (!record(value) || !exact(value, [
     'stagingId', 'status', 'publicationStatus', 'validationSnapshotId', 'approvalId',
     'entityCounts', 'fileCount', 'byteCount', 'contentHash', 'manifestHash', 'packageHash',
     'stagedAt', 'authority',
   ]) || typeof value.stagingId !== 'string' || !UUID.test(value.stagingId) || value.status !== 'staged'
-    || value.publicationStatus !== 'not_published' || typeof value.validationSnapshotId !== 'string'
+    || !['not_published', 'published'].includes(String(value.publicationStatus))
+    || typeof value.validationSnapshotId !== 'string'
     || !UUID.test(value.validationSnapshotId) || typeof value.approvalId !== 'string' || !UUID.test(value.approvalId)
     || !record(value.entityCounts) || Object.keys(value.entityCounts).length > 100
     || Object.entries(value.entityCounts).some(([key, count]) => !/^[a-z][a-z_]{0,63}$/.test(key) || !integer(count))
@@ -138,7 +149,10 @@ function candidate(value: unknown) {
     || typeof value.manifestHash !== 'string' || !HASH.test(value.manifestHash)
     || typeof value.packageHash !== 'string' || !HASH.test(value.packageHash)
     || !timestamp(value.stagedAt) || value.authority !== 'curriculum:publish') return null
-  return Object.freeze({ ...value, entityCounts: Object.freeze({ ...value.entityCounts }) })
+  return Object.freeze({
+    ...value,
+    entityCounts: Object.freeze({ ...value.entityCounts }),
+  }) as unknown as CurriculumStagedCandidate
 }
 
 function adaptStaging(value: unknown, expectedDraftId: string, mutation: boolean) {
@@ -165,6 +179,19 @@ function adaptStaging(value: unknown, expectedDraftId: string, mutation: boolean
       || !['approved', 'changes_requested', 'stale'].includes(String(approval.status))
       || (approval.approvalId !== null && (typeof approval.approvalId !== 'string' || !UUID.test(approval.approvalId)))))
     || (value.candidate !== null && !stagedCandidate)) return null
+  const eligibleState = value.stageState === 'eligible'
+  const validEvidence = validation !== null && validation.status === 'valid'
+    && approval !== null && approval.status === 'approved' && approval.approvalId !== null
+  if (
+    value.eligible !== eligibleState
+    || (eligibleState && (!validEvidence || value.blockingReasons.length !== 0 || stagedCandidate !== null))
+    || (value.stageState === 'blocked' && (value.blockingReasons.length === 0 || stagedCandidate !== null))
+    || (value.stageState === 'staged' && (
+      value.eligible || value.blockingReasons.length !== 0 || !validEvidence || stagedCandidate === null
+      || stagedCandidate.validationSnapshotId !== validation?.validationSnapshotId
+      || stagedCandidate.approvalId !== approval?.approvalId
+    ))
+  ) return null
   return Object.freeze({
     ...value,
     blockingReasons: Object.freeze([...value.blockingReasons]),

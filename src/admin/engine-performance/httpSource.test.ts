@@ -55,4 +55,21 @@ describe('authorized engine performance HTTP source', () => {
       fetchImpl: vi.fn().mockResolvedValue({ status: 503, json: async () => ({ error: { code: 'engine_performance_unavailable' } }) }),
     })).resolves.toEqual({ status: 'error', code: 'unavailable' })
   })
+
+  it('bounds a dependency that never settles and exposes a retryable timeout state', async () => {
+    vi.useFakeTimers()
+    try {
+      const read = readAdminEnginePerformance({
+        window: '7d', engine: 'study', timeoutMs: 25,
+        getAccessToken: async () => 'token',
+        fetchImpl: vi.fn((_input, init) => new Promise<never>((_resolve, reject) => {
+          init.signal?.addEventListener('abort', () => reject(new Error('private timeout body')), { once: true })
+        })),
+      })
+      await vi.advanceTimersByTimeAsync(26)
+      await expect(read).resolves.toEqual({ status: 'error', code: 'timeout' })
+    } finally {
+      vi.useRealTimers()
+    }
+  })
 })

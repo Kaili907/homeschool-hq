@@ -101,6 +101,25 @@ describe('Admin costs browser contract', () => {
     })).toBeNull()
   })
 
+  it('rejects false-complete source metadata and impossible partial-row aggregates', () => {
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, status: 'complete', reasons: ['usage_unavailable'] },
+    })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, recordsIncluded: 501 },
+    })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...source,
+      summary: {
+        ...source.summary,
+        attributionCounts: { ...source.summary.attributionCounts, unresolved: 1 },
+      },
+    })).toBeNull()
+  })
+
   it('distinguishes reconciled terminal evidence from an interrupted dispatch', () => {
     const source = costsModelFixture()
     const coverage = source.providerAccountingCoverage

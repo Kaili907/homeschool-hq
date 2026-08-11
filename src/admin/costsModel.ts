@@ -713,10 +713,22 @@ export function parseAdminCostsModel(value: unknown): AdminCostsModel | null {
     || safeCount(range.days) === null || (range.days as number) < 1 || (range.days as number) > 366
     || !sourceState || !['complete', 'partial'].includes(sourceState.status as string)
     || !Array.isArray(sourceState.reasons) || sourceState.reasons.some((reason) => !REASONS.has(reason))
+    || new Set(sourceState.reasons).size !== sourceState.reasons.length
+    || sourceState.status !== (sourceState.reasons.length === 0 ? 'complete' : 'partial')
     || sourceState.recordLimit !== 500 || safeCount(sourceState.recordsIncluded) === null
+    || Number(sourceState.recordsIncluded) > 500
     || !summaryAggregate || !billing || !costKinds || !attribution || usageUnavailableCount === null
     || !coverage || !monthlyCostAlert
     || !Array.isArray(source.trend) || source.trend.length > 366
+  ) return null
+
+  const reasons = new Set(sourceState.reasons as AdminCostCompletenessReason[])
+  if (
+    reasons.has('source_record_limit') !== (sourceState.recordsIncluded === 500)
+    || reasons.has('ambiguous_attribution') !== (Number(attribution.ambiguous) > 0)
+    || reasons.has('unresolved_attribution') !== (Number(attribution.unresolved) > 0)
+    || reasons.has('usage_unavailable') !== (usageUnavailableCount > 0)
+    || reasons.has('calculated_cost_unavailable') !== (Number(costKinds.unavailable) > 0)
   ) return null
 
   const trend: AdminCostTrendPoint[] = []

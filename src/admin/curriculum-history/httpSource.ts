@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from '../adminDependencyTimeout'
 import { parseCurriculumActivationStatus } from '../curriculum-activation/httpSource'
 import type { CurriculumActivationStatus } from '../curriculum-activation'
 import {
@@ -119,19 +120,24 @@ export function createCurriculumReleaseHistoryHttpSource(
   fetchImpl: FetchLike = fetch,
   getAccessToken: () => Promise<string | null> = getGatewayAccessToken,
   path = '/api/admin/curriculum/history',
+  timeoutMs = 10_000,
 ): CurriculumReleaseHistorySource {
+  const boundedToken = () => withAdminDependencyTimeout(() => getAccessToken(), timeoutMs)
+  const boundedFetch: FetchLike = (input, init) => withAdminDependencyTimeout(
+    (signal) => fetchImpl(input, { ...init, signal }), timeoutMs,
+  )
   return Object.freeze({
     async read() {
       let token: string | null
       try {
-        token = await getAccessToken()
+        token = await boundedToken()
       } catch {
         throw new CurriculumReleaseHistoryError('unavailable')
       }
       if (!token) throw new CurriculumReleaseHistoryError('unauthenticated')
       let response: Pick<Response, 'ok' | 'status' | 'json'>
       try {
-        response = await fetchImpl(path, {
+        response = await boundedFetch(path, {
           method: 'GET',
           headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
           cache: 'no-store',

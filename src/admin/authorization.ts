@@ -6,6 +6,7 @@ import {
   hasAdminCapability,
 } from './contracts'
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from './adminDependencyTimeout'
 
 export const ADMIN_AUTHORIZATION_ENDPOINT = '/api/admin/v1/authorization'
 export const ADMIN_AUTHORIZATION_TIMEOUT_MS = 5_000
@@ -92,26 +93,32 @@ export async function readAdminAuthorization(
   const getAccessToken = options.getAccessToken ?? getGatewayAccessToken
   const fetchImpl = options.fetchImpl ?? ((url, init) => fetch(url, init))
 
+  if (options.signal?.aborted) return { status: 'unavailable' }
   const controller = new AbortController()
   const cancel = () => controller.abort(options.signal?.reason)
   options.signal?.addEventListener('abort', cancel, { once: true })
   if (options.signal?.aborted) cancel()
-  const timer = globalThis.setTimeout(
-    () => controller.abort(),
-    options.timeoutMs ?? ADMIN_AUTHORIZATION_TIMEOUT_MS,
-  )
   try {
-    const accessToken = await accessTokenBeforeAbort(getAccessToken, controller.signal)
+    const accessToken = await withAdminDependencyTimeout(
+      (timeoutSignal) => accessTokenBeforeAbort(
+        getAccessToken,
+        AbortSignal.any([controller.signal, timeoutSignal]),
+      ),
+      options.timeoutMs ?? ADMIN_AUTHORIZATION_TIMEOUT_MS,
+    )
     if (accessToken === undefined || controller.signal.aborted) return { status: 'unavailable' }
     if (!accessToken) return { status: 'unauthenticated' }
-    const response = await fetchImpl(ADMIN_AUTHORIZATION_ENDPOINT, {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${accessToken}` },
-      signal: controller.signal,
-      cache: 'no-store',
-      credentials: 'omit',
-      referrerPolicy: 'no-referrer',
-    })
+    const response = await withAdminDependencyTimeout(
+      (timeoutSignal) => fetchImpl(ADMIN_AUTHORIZATION_ENDPOINT, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${accessToken}` },
+        signal: AbortSignal.any([controller.signal, timeoutSignal]),
+        cache: 'no-store',
+        credentials: 'omit',
+        referrerPolicy: 'no-referrer',
+      }),
+      options.timeoutMs ?? ADMIN_AUTHORIZATION_TIMEOUT_MS,
+    )
     if (response.status === 401) return { status: 'unauthenticated' }
     if (response.status === 403) return { status: 'forbidden' }
     if (response.status !== 200) return { status: 'unavailable' }
@@ -119,7 +126,6 @@ export async function readAdminAuthorization(
   } catch {
     return { status: 'unavailable' }
   } finally {
-    globalThis.clearTimeout(timer)
     options.signal?.removeEventListener('abort', cancel)
   }
 }

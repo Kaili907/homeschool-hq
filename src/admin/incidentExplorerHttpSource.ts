@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from './adminDependencyTimeout'
 import {
   ADMIN_AUDIT_ACTIONS,
   ADMIN_AUDIT_RESOURCE_TYPES,
@@ -297,19 +298,23 @@ export async function readAdminIncidentPage(
   const controller = new AbortController()
   const forwardAbort = () => controller.abort(options.signal?.reason)
   options.signal?.addEventListener('abort', forwardAbort, { once: true })
+  if (options.signal?.aborted) controller.abort(options.signal.reason)
   const timer = globalThis.setTimeout(() => controller.abort(), options.timeoutMs ?? 10_000)
   try {
-    const accessToken = await (options.getAccessToken ?? getGatewayAccessToken)()
-    if (!accessToken || controller.signal.aborted) throw new AdminIncidentReadError('incident_unauthorized')
-    const response = await (options.fetchImpl ?? fetch)(
+    const accessToken = await withAdminDependencyTimeout(
+      () => (options.getAccessToken ?? getGatewayAccessToken)(), options.timeoutMs ?? 10_000,
+    )
+    if (controller.signal.aborted) throw new AdminIncidentReadError('incident_timeout')
+    if (!accessToken) throw new AdminIncidentReadError('incident_unauthorized')
+    const response = await withAdminDependencyTimeout((timeoutSignal) => (options.fetchImpl ?? fetch)(
       `/api/admin/v1/correlations?${queryFor(filters, cursor)}`,
       {
         method: 'GET',
         headers: { Accept: 'application/json', Authorization: `Bearer ${accessToken}` },
         credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer',
-        signal: controller.signal,
+        signal: AbortSignal.any([controller.signal, timeoutSignal]),
       },
-    )
+    ), options.timeoutMs ?? 10_000)
     if (response.status === 401 || response.status === 403) throw new AdminIncidentReadError('incident_unauthorized')
     if (response.status === 400) throw new AdminIncidentReadError('invalid_query')
     if (response.status === 504) throw new AdminIncidentReadError('incident_timeout')

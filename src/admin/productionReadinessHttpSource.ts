@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from './adminDependencyTimeout'
 import {
   parseProductionReadinessProjection,
   type ProductionReadinessProjection,
@@ -30,16 +31,20 @@ export async function readAdminProductionReadiness(options: {
   if (options.signal?.aborted) controller.abort(options.signal.reason)
   const timer = globalThis.setTimeout(() => controller.abort(), options.timeoutMs ?? 15_000)
   try {
-    const token = await (options.getAccessToken ?? getGatewayAccessToken)()
-    if (!token || controller.signal.aborted) throw new AdminProductionReadinessError('unauthorized')
-    const response = await (options.fetchImpl ?? fetch)(ADMIN_PRODUCTION_READINESS_ENDPOINT, {
+    const timeoutMs = options.timeoutMs ?? 15_000
+    const token = await withAdminDependencyTimeout(
+      () => (options.getAccessToken ?? getGatewayAccessToken)(), timeoutMs,
+    )
+    if (controller.signal.aborted) throw new AdminProductionReadinessError('timeout')
+    if (!token) throw new AdminProductionReadinessError('unauthorized')
+    const response = await withAdminDependencyTimeout((timeoutSignal) => (options.fetchImpl ?? fetch)(ADMIN_PRODUCTION_READINESS_ENDPOINT, {
       method: 'GET',
       headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
       credentials: 'omit',
       cache: 'no-store',
       referrerPolicy: 'no-referrer',
-      signal: controller.signal,
-    })
+      signal: AbortSignal.any([controller.signal, timeoutSignal]),
+    }), timeoutMs)
     if (response.status === 401 || response.status === 403) {
       throw new AdminProductionReadinessError('unauthorized')
     }

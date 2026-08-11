@@ -14,6 +14,7 @@ import type {
 } from '../../admin/overviewModel'
 import { AdminOverviewReadError, readAdminOverview } from '../../admin/overviewHttpSource'
 import { readAdminCosts, AdminCostsReadError } from '../../admin/costsHttpSource'
+import { withAdminDependencyTimeout } from '../../admin/adminDependencyTimeout'
 import type { AdminCostRangeSelection, AdminCostsReadState } from '../../admin/costsModel'
 import { readAdminAuditPage, AdminAuditReadError } from '../../admin/auditHttpSource'
 import type { AdminAuditFilters, AdminAuditReadState } from '../../admin/auditLogModel'
@@ -92,7 +93,7 @@ import {
   createAdminConfigurationHttpSource,
   type AdminConfigurationCommitResult,
 } from '../../admin/configurationHttpSource'
-import { getVoiceCatalogAccess } from '../../tutor/voiceCatalog'
+import { createVoiceCatalogAccess } from '../../tutor/voiceCatalog'
 import { createAdminAccessHttpSource, AdminAccessError } from '../../admin/accessHttpSource'
 import { getSupabaseClient } from '../../sync/supabase'
 import type { AdminAccessReadState } from '../../admin/accessModel'
@@ -299,7 +300,6 @@ export function AdminConsoleRoute() {
   const standardsReviewSource = useMemo(() => createCurriculumStandardsReviewHttpSource(), [])
   const learnerSource = useMemo(() => createAdminLearnerAnalyticsHttpSource(), [])
   const configurationSource = useMemo(() => createAdminConfigurationHttpSource(), [])
-  const voiceCatalogSource = useMemo(() => getVoiceCatalogAccess(), [])
   const accessSource = useMemo(() => createAdminAccessHttpSource(), [])
   const authorization = presentationAuthorization(authorizationState)
   const section = adminRouteSection(pathname) ?? 'unknown'
@@ -516,6 +516,9 @@ export function AdminConsoleRoute() {
       return
     }
     const controller = new AbortController()
+    const voiceCatalogSource = createVoiceCatalogAccess({
+      fetchImpl: (url, init) => fetch(url, init as RequestInit),
+    })
     setConfigurationReadState({ status: 'loading' })
     setVoiceCatalogState({ status: 'loading' })
     void configurationSource.read({ signal: controller.signal }).then(
@@ -531,11 +534,19 @@ export function AdminConsoleRoute() {
         })
       },
     )
-    void voiceCatalogSource.load().then((catalog) => {
-      if (!controller.signal.aborted) setVoiceCatalogState({ status: 'ready', catalog })
-    })
+    void withAdminDependencyTimeout(() => voiceCatalogSource.load()).then(
+      (catalog) => {
+        if (controller.signal.aborted) return
+        setVoiceCatalogState(catalog.catalogVersion === 'unavailable'
+          ? { status: 'unavailable' }
+          : { status: 'ready', catalog })
+      },
+      () => {
+        if (!controller.signal.aborted) setVoiceCatalogState({ status: 'unavailable' })
+      },
+    )
     return () => controller.abort()
-  }, [authorizationState, configurationRetry, configurationSource, section, voiceCatalogSource])
+  }, [authorizationState, configurationRetry, configurationSource, section])
 
   useEffect(() => {
     if (section !== 'curriculum-validation') {

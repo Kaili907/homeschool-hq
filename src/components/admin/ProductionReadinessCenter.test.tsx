@@ -82,5 +82,22 @@ describe('Production Readiness Center presentation', () => {
         ? { ...domain, checks: [{ ...domain.checks[0], status: 'READY', extra: 'raw' }, domain.checks[1]] }
         : domain),
     })).toBeNull()
+    expect(parseProductionReadinessProjection({
+      ...projection,
+      domains: projection.domains.map((domain) => domain.id === 'application'
+        ? {
+            ...domain,
+            checks: domain.checks.map((item, index) => index === 0
+              ? { ...item, status: 'READY' as const, evidence: { ...item.evidence, status: 'UNVERIFIED' as const } }
+              : item),
+          }
+        : domain),
+    })).toBeNull()
+    expect(parseProductionReadinessProjection({
+      ...projection,
+      domains: projection.domains.map((domain) => domain.id === 'database'
+        ? { ...domain, status: 'READY' as const }
+        : domain),
+    })).toBeNull()
   })
 })

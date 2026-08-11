@@ -38,4 +38,35 @@ describe('Admin Attention Center loader authorization', () => {
     expect(model.visibleDomains).toEqual(['health'])
     expect(model.evidence.status).toBe('complete')
   })
+
+  it('keeps sibling evidence available and never emits an all-clear when one required source fails', async () => {
+    const unavailable = vi.fn(async () => { throw new Error('private provider failure') })
+    const readHealth = vi.fn(async () => ({
+      status: 'ready' as const,
+      projection: buildSystemHealthProjection([], { now: new Date('2026-08-10T18:00:00.000Z') }),
+    }))
+    const dependencies = {
+      readReadiness: unavailable,
+      readHealth,
+      readConfiguration: unavailable,
+      readLearners: unavailable,
+      readSafety: unavailable,
+      readCosts: unavailable,
+    } as unknown as AdminAttentionLoaderDependencies
+
+    const model = await loadAdminAttentionCenter(['health:read', 'costs:read'], {
+      signal: new AbortController().signal,
+      today: '2026-08-10',
+      dependencies,
+    })
+
+    expect(readHealth).toHaveBeenCalledOnce()
+    expect(model.evidence).toMatchObject({
+      status: 'partial', expectedSourceCount: 2, availableSourceCount: 1,
+      unavailableDomains: ['costs'],
+    })
+    expect(model.items).toEqual(expect.arrayContaining([
+      expect.objectContaining({ domain: 'costs', itemType: 'evidence-unavailable', retryable: true }),
+    ]))
+  })
 })

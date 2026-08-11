@@ -10,6 +10,7 @@ import {
   type CurriculumUnitSummary,
 } from './contracts'
 import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from '../adminDependencyTimeout'
 
 export type CurriculumBrowserFetch = (
   input: string,
@@ -20,18 +21,20 @@ async function getJson(
   fetcher: CurriculumBrowserFetch,
   getAccessToken: () => Promise<string | null>,
   path: string,
+  timeoutMs: number,
 ): Promise<unknown> {
   let response: Pick<Response, 'ok' | 'status' | 'json'>
   try {
-    const accessToken = await getAccessToken()
+    const accessToken = await withAdminDependencyTimeout(() => getAccessToken(), timeoutMs)
     if (!accessToken) throw new CurriculumSourceError('unavailable', 'Administrator authorization is unavailable')
-    response = await fetcher(path, {
+    response = await withAdminDependencyTimeout((signal) => fetcher(path, {
       method: 'GET',
       credentials: 'omit',
       cache: 'no-store',
       referrerPolicy: 'no-referrer',
       headers: { Accept: 'application/json', Authorization: `Bearer ${accessToken}` },
-    })
+      signal,
+    }), timeoutMs)
   } catch {
     throw new CurriculumSourceError('unavailable', 'The authorized curriculum service is unavailable')
   }
@@ -58,6 +61,7 @@ export function createAdminCurriculumHttpSource(
   fetcher: CurriculumBrowserFetch = fetch,
   basePath = '/api/admin/curriculum',
   getAccessToken: () => Promise<string | null> = getGatewayAccessToken,
+  timeoutMs = 10_000,
 ): CurriculumBrowserSource {
   return {
     async loadIdentity() {
@@ -68,13 +72,13 @@ export function createAdminCurriculumHttpSource(
     },
     async loadCatalog() {
       return requireProjection(
-        await getJson(fetcher, getAccessToken, `${basePath}/catalog`),
+        await getJson(fetcher, getAccessToken, `${basePath}/catalog`, timeoutMs),
         adaptCatalog,
       )
     },
     async loadLesson(lessonId) {
       return requireProjection(
-        await getJson(fetcher, getAccessToken, `${basePath}/lessons/${encodeURIComponent(lessonId)}`),
+        await getJson(fetcher, getAccessToken, `${basePath}/lessons/${encodeURIComponent(lessonId)}`, timeoutMs),
         (value) => adaptLesson(value, lessonId),
       )
     },

@@ -36,6 +36,7 @@ export type AdminConfigurationReadState =
 
 export type AdminVoiceCatalogReadState =
   | { readonly status: 'loading' }
+  | { readonly status: 'unavailable' }
   | { readonly status: 'ready'; readonly catalog: PublicVoiceCatalog }
 
 type EditingState = {
@@ -638,6 +639,17 @@ function VoiceCatalogCard({ state }: { readonly state: AdminVoiceCatalogReadStat
     return (
       <article className="admin-config-card" aria-busy="true">
         <div className="admin-config-card__heading"><div><h3>TTS voice defaults</h3><p>Loading the sanitized logical-voice catalog.</p></div></div>
+      </article>
+    )
+  }
+  if (state.status === 'unavailable') {
+    return (
+      <article className="admin-config-card" role="status">
+        <div className="admin-config-card__heading"><div>
+          <h3>TTS voice defaults</h3>
+          <p>The sanitized logical-voice catalog is unavailable.</p>
+        </div><span className="admin-config-severity">unavailable</span></div>
+        <p className="admin-config-unavailable-copy">No catalog default is inferred or replaced with cached provider authority.</p>
       </article>
     )
   }

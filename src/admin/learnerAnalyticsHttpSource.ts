@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from './adminDependencyTimeout'
 import {
   LEARNER_ANALYTICS_LIMITS,
   LEARNERS_READ_CAPABILITY,
@@ -62,6 +63,7 @@ export function createAdminLearnerAnalyticsHttpSource(options: {
   readonly fetchImpl?: FetchLike
   readonly getAccessToken?: () => Promise<string | null>
   readonly endpoint?: string
+  readonly timeoutMs?: number
 } = {}): LearnerAnalyticsReadSource {
   const fetchImpl = options.fetchImpl ?? fetch
   const getAccessToken = options.getAccessToken ?? getGatewayAccessToken
@@ -69,17 +71,27 @@ export function createAdminLearnerAnalyticsHttpSource(options: {
   return {
     async read(request) {
       if (request.capability !== LEARNERS_READ_CAPABILITY) throw new Error('learner source unavailable')
-      const accessToken = await getAccessToken()
+      const timeoutSignal = AbortSignal.timeout(options.timeoutMs ?? 10_000)
+      let accessToken: string | null
+      try {
+        accessToken = await withAdminDependencyTimeout(
+          () => getAccessToken(), options.timeoutMs ?? 10_000,
+        )
+      } catch {
+        throw new Error('learner source unavailable')
+      }
       if (!accessToken) throw new Error('learner source unavailable')
+      if (timeoutSignal.aborted) throw new Error('learner source unavailable')
       let response: Awaited<ReturnType<FetchLike>>
       try {
-        response = await fetchImpl(`${endpoint}?today=${encodeURIComponent(request.today)}`, {
+        response = await withAdminDependencyTimeout((signal) => fetchImpl(`${endpoint}?today=${encodeURIComponent(request.today)}`, {
           method: 'GET',
           headers: { Accept: 'application/json', Authorization: `Bearer ${accessToken}` },
           credentials: 'omit',
           cache: 'no-store',
           referrerPolicy: 'no-referrer',
-        })
+          signal: AbortSignal.any([timeoutSignal, signal]),
+        }), options.timeoutMs ?? 10_000)
       } catch {
         throw new Error('learner source unavailable')
       }

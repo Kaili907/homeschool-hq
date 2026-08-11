@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from '../adminDependencyTimeout'
 import {
   CurriculumActivationError,
   type CurriculumActivationCandidate,
@@ -161,18 +162,23 @@ export function createCurriculumActivationHttpSource(
   fetchImpl: FetchLike = fetch,
   getAccessToken: () => Promise<string | null> = getGatewayAccessToken,
   path = '/api/admin/curriculum/activation',
+  timeoutMs = 10_000,
 ): CurriculumActivationSource {
+  const boundedToken = () => withAdminDependencyTimeout(() => getAccessToken(), timeoutMs)
+  const boundedFetch: FetchLike = (input, init) => withAdminDependencyTimeout(
+    (signal) => fetchImpl(input, { ...init, signal }), timeoutMs,
+  )
   async function request(method: 'GET' | 'POST', body?: CurriculumActivationInput): Promise<unknown> {
     let token: string | null
     try {
-      token = await getAccessToken()
+      token = await boundedToken()
     } catch {
       throw new CurriculumActivationError('unavailable')
     }
     if (!token) throw new CurriculumActivationError('unauthenticated')
     let response: Pick<Response, 'ok' | 'status' | 'json'>
     try {
-      response = await fetchImpl(path, {
+      response = await boundedFetch(path, {
         method,
         headers: {
           Accept: 'application/json',

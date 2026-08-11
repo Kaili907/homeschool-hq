@@ -62,4 +62,24 @@ describe('ADMIN-10B browser safety source', () => {
       fetchImpl: async () => ({ status: 200, json: async () => ({ rawMetadata: 'private' }) }),
     })).resolves.toEqual({ status: 'unavailable', reasonCode: 'read_failed' })
   })
+
+  it('rejects malformed partial rows instead of displaying a false zero-safety summary', async () => {
+    const malformed = {
+      ...snapshot(),
+      events: [{ eventId: 'raw-event', rawException: 'private safety provider response' }],
+    }
+    await expect(readAdminSafetyOperations({
+      getAccessToken: async () => 'token',
+      fetchImpl: async () => ({ status: 200, json: async () => malformed }),
+    })).resolves.toEqual({ status: 'unavailable', reasonCode: 'read_failed' })
+
+    const extraAggregate = snapshot()
+    await expect(readAdminSafetyOperations({
+      getAccessToken: async () => 'token',
+      fetchImpl: async () => ({
+        status: 200,
+        json: async () => ({ ...extraAggregate, summary: { ...extraAggregate.summary, hiddenFailures: 1 } }),
+      }),
+    })).resolves.toEqual({ status: 'unavailable', reasonCode: 'read_failed' })
+  })
 })

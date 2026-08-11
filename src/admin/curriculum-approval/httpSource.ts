@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from '../adminDependencyTimeout'
 import {
   CURRICULUM_APPROVAL_DECISIONS,
   CURRICULUM_APPROVAL_REASON_CODES,
@@ -35,18 +36,23 @@ export function createCurriculumApprovalHttpSource(
   fetchImpl: FetchLike = fetch,
   getAccessToken: () => Promise<string | null> = getGatewayAccessToken,
   basePath = '/api/admin/curriculum/drafts',
+  timeoutMs = 10_000,
 ): CurriculumApprovalSource {
+  const boundedToken = () => withAdminDependencyTimeout(() => getAccessToken(), timeoutMs)
+  const boundedFetch: FetchLike = (input, init) => withAdminDependencyTimeout(
+    (signal) => fetchImpl(input, { ...init, signal }), timeoutMs,
+  )
   async function request(path: string, method = 'GET', body?: object): Promise<unknown> {
     let token: string | null
     try {
-      token = await getAccessToken()
+      token = await boundedToken()
     } catch {
       throw new CurriculumApprovalError('unavailable')
     }
     if (!token) throw new CurriculumApprovalError('unauthenticated')
     let response: Pick<Response, 'ok' | 'status' | 'json'>
     try {
-      response = await fetchImpl(path, {
+      response = await boundedFetch(path, {
         method,
         headers: {
           Accept: 'application/json',
@@ -137,6 +143,12 @@ function validation(value: unknown) {
     || !integer(value.blockingErrorCount) || value.blockingErrorCount > value.blockingCount
     || !integer(value.humanReviewBlockerCount) || value.humanReviewBlockerCount > value.blockingCount
     || !timestamp(value.validatedAt)) return null
+  if (value.publicationReady !== (
+    value.status === 'valid'
+    && value.blockingCount === 0
+    && value.blockingErrorCount === 0
+    && value.humanReviewBlockerCount === 0
+  )) return null
   return Object.freeze({ ...value })
 }
 
@@ -176,8 +188,23 @@ function adaptApproval(value: unknown, expectedDraftId: string, mutation: boolea
     || !exact(gate, ['eligible', 'reason', 'approvalId', 'draftRevision', 'validationSnapshotId'])
     || typeof gate.eligible !== 'boolean' || typeof gate.reason !== 'string' || !GATE_REASONS.has(gate.reason)
     || (gate.approvalId !== null && (typeof gate.approvalId !== 'string' || !UUID.test(gate.approvalId)))
-    || !integer(gate.draftRevision, 1)
+    || !integer(gate.draftRevision, 1) || gate.draftRevision !== value.draftRevision
     || (gate.validationSnapshotId !== null && (typeof gate.validationSnapshotId !== 'string' || !UUID.test(gate.validationSnapshotId)))) return null
+  const eligible = gate.eligible === true
+  if (eligible !== (gate.reason === 'approved') || eligible !== (value.status === 'approved')) return null
+  if (eligible && (
+    !latestValidation || latestValidation.draftRevision !== value.draftRevision
+    || !latestValidation.publicationReady
+    || !currentDecision || currentDecision.decision !== 'approved'
+    || currentDecision.bindingStatus !== 'current'
+    || currentDecision.draftRevision !== value.draftRevision
+    || currentDecision.validationSnapshotId !== latestValidation.validationSnapshotId
+    || currentDecision.validationResultDigest !== latestValidation.resultDigest
+    || gate.approvalId !== currentDecision.approvalId
+    || gate.validationSnapshotId !== latestValidation.validationSnapshotId
+  )) return null
+  if ((value.status === 'changes_requested') !== (gate.reason === 'changes_requested')) return null
+  if ((value.status === 'stale') !== (gate.reason === 'approval_stale')) return null
   return Object.freeze({
     ...value,
     latestValidation,

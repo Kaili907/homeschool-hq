@@ -85,4 +85,23 @@ describe('curriculum approval HTTP source', () => {
       validationSnapshotId: VALIDATION, idempotencyKey: REQUEST,
     })).rejects.toMatchObject({ code: 'unavailable' })
   })
+
+  it('rejects an approved/eligible claim without current validation and approval evidence', async () => {
+    const forged = {
+      ...status(),
+      status: 'approved',
+      publishGate: {
+        eligible: true, reason: 'approved', approvalId: REQUEST,
+        draftRevision: 3, validationSnapshotId: VALIDATION,
+      },
+    }
+    const source = createCurriculumApprovalHttpSource(
+      vi.fn().mockResolvedValue({ ok: true, status: 201, json: vi.fn().mockResolvedValue(forged) }),
+      async () => 'token',
+    )
+    await expect(source.decideApproval({
+      draftId: DRAFT, draftRevision: 3, decision: 'approved', reasonCode: 'approval.ready',
+      validationSnapshotId: VALIDATION, idempotencyKey: REQUEST,
+    })).rejects.toMatchObject({ code: 'unavailable' })
+  })
 })

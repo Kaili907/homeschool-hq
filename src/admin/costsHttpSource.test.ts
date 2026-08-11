@@ -58,8 +58,8 @@ describe('authorized Admin costs browser reader', () => {
   it.each([
     [503, 'cost_source_unavailable', 'costs_unavailable'],
     [504, 'cost_source_timeout', 'costs_timeout'],
-    [503, 'authorization_unavailable', 'costs_unauthorized'],
-    [504, 'upstream_timeout', 'costs_unauthorized'],
+    [503, 'authorization_unavailable', 'costs_unavailable'],
+    [504, 'upstream_timeout', 'costs_timeout'],
   ])('distinguishes authorized source state from authorization uncertainty', async (status, serverCode, clientCode) => {
     await expect(readAdminCosts(
       { kind: 'preset', preset: 'today' },
@@ -71,5 +71,23 @@ describe('authorized Admin costs browser reader', () => {
         }),
       },
     )).rejects.toMatchObject({ code: clientCode })
+  })
+
+  it('does not misreport connection, token-provider, or generic server failures as permission denial', async () => {
+    await expect(readAdminCosts(
+      { kind: 'preset', preset: 'today' },
+      { getAccessToken: async () => { throw new Error('private auth transport') } },
+    )).rejects.toMatchObject({ code: 'costs_unavailable' })
+    await expect(readAdminCosts(
+      { kind: 'preset', preset: 'today' },
+      {
+        getAccessToken: async () => 'token',
+        fetchImpl: async () => { throw new Error('private connection detail') },
+      },
+    )).rejects.toMatchObject({ code: 'costs_unavailable' })
+    await expect(readAdminCosts(
+      { kind: 'preset', preset: 'today' },
+      { getAccessToken: async () => 'token', fetchImpl: async () => ({ status: 500, json: async () => ({}) }) },
+    )).rejects.toMatchObject({ code: 'costs_unavailable' })
   })
 })
