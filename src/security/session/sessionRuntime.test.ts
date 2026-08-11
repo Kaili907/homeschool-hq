@@ -719,26 +719,31 @@ describe('Lock/Switch state machine and Study lifecycle seam', () => {
 
   it('prevalidates forged action profile IDs before any authority-changing effect', async () => {
     const clearLocal = vi.fn()
+    const deliverLifecycle = vi.fn()
     const revoke = vi.fn()
-    const onLifecycle = vi.fn()
     const requestLearnerPin = vi.fn()
     await expect(executeLearnerAccessActions([
-      { type: 'clear-local-session' },
+      {
+        type: 'security-lifecycle',
+        event: { type: 'learner-lock', occurredAt: '2026-08-09T12:00:00.000Z' },
+        studyCancellationReason: 'logout',
+        clearLocal: true,
+        revokeCause: 'learner-lock',
+      },
       { type: 'request-learner-pin', profileId: 'p6' as ProfileId },
     ], {
-      learnerSession: { clearLocal },
+      learnerSession: { clearLocal, deliverLifecycle },
       revocation: {
         currentEpoch: () => 0,
         subscribe: () => () => undefined,
         revoke,
         close: () => undefined,
       },
-      onLifecycle,
       requestLearnerPin,
     })).rejects.toThrow('Learner action profile ID is invalid')
     expect(clearLocal).not.toHaveBeenCalled()
     expect(revoke).not.toHaveBeenCalled()
-    expect(onLifecycle).not.toHaveBeenCalled()
+    expect(deliverLifecycle).not.toHaveBeenCalled()
     expect(requestLearnerPin).not.toHaveBeenCalled()
   })
 
@@ -755,12 +760,14 @@ describe('Lock/Switch state machine and Study lifecycle seam', () => {
       occurredAt: '2026-08-09T12:01:00.000Z',
     })
     expect(switching.actions.map((action) => action.type)).toEqual([
-      'clear-local-session',
-      'revoke-global',
       'security-lifecycle',
       'request-learner-pin',
     ])
-    expect(switching.actions[2]).toMatchObject({ studyCancellationReason: 'learner-switch' })
+    expect(switching.actions[0]).toMatchObject({
+      studyCancellationReason: 'learner-switch',
+      clearLocal: true,
+      revokeCause: 'learner-switch-start',
+    })
     expect(transitionLearnerAccess(switching.state, { type: 'cancel-switch' }).state).toEqual({
       status: 'locked',
       reason: 'switch-cancelled',
@@ -783,8 +790,11 @@ describe('Lock/Switch state machine and Study lifecycle seam', () => {
       ownershipLockManager: new ExclusiveOwnershipLockManager(),
       clock: () => START,
       randomUUID: () => UUID_A,
-      onLifecycleEvent: (event) => {
-        if (event.type === 'global-revocation') order.push('generic-cancel')
+      onLifecycleEvent: async (event) => {
+        if (event.type !== 'learner-switch-start') return
+        order.push('cancel-start')
+        await cancellation
+        order.push('cancel-done')
       },
     })
     const record = await session.create(P1)
@@ -800,12 +810,6 @@ describe('Lock/Switch state machine and Study lifecycle seam', () => {
     const execution = executeLearnerAccessActions(transition.actions, {
       learnerSession: session,
       revocation,
-      onLifecycle: async (event) => {
-        expect(event.type).toBe('learner-switch-start')
-        order.push('cancel-start')
-        await cancellation
-        order.push('cancel-done')
-      },
       requestLearnerPin: () => { order.push('PIN') },
     })
     await vi.waitFor(() => {

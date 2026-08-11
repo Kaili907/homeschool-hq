@@ -362,6 +362,28 @@ export class LearnerSessionController {
     await this.#releaseOwnership()
   }
 
+  /**
+   * Enters initiating cleanup into the same serialized, terminally-latched
+   * lifecycle domain used by autonomous cleanup and authority publication.
+   * The enqueue occurs before the caller can yield, so create/restore cannot
+   * pass the barrier between authority removal and lifecycle delivery.
+   * Order: lifecycle queue -> ownership release -> caller revocation lock ->
+   * lifecycle sink. This controller never acquires an attempt-ledger lock.
+   */
+  async deliverLifecycle(
+    event: SecurityLifecycleEvent,
+    beforeDelivery?: () => void | Promise<void>,
+  ): Promise<void> {
+    if (this.#closed) throw new Error('Learner session controller is closed.')
+    await this.#lifecycle.enqueue(
+      event,
+      () => this.#failClosedForLifecycle(),
+      beforeDelivery,
+      true,
+    )
+    await this.#lifecycle.requireClean()
+  }
+
   async close(): Promise<void> {
     if (this.#closed) return
     this.#closed = true

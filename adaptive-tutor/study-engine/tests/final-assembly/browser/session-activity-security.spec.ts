@@ -149,12 +149,13 @@ test("nonqualifying scroll cannot move the actual learner idle boundary", async 
     const session = new LearnerSessionController({
       storage: window.sessionStorage,
       revocation,
+      ownershipLockManager: navigator.locks,
       clock: () => now,
       randomUUID: () => "d9428888-122b-4f9b-9424-1f35c63d5750",
       activityWriteThrottleMs: 0,
     });
     let controller = createBrowserLearnerActivityController(session);
-    session.create("learner-a");
+    await session.create("p1");
     controller.start();
     Object.assign(window, {
       __securityIdleBoundaryTest: {
@@ -162,10 +163,10 @@ test("nonqualifying scroll cannot move the actual learner idle boundary", async 
         setNow: (value: number) => { now = value; },
         check: () => session.recheck(),
         lastActivity: () => session.session?.lastMeaningfulActivityAt ?? null,
-        restart: (value: number) => {
+        restart: async (value: number) => {
           controller.stop();
           now = value;
-          session.create("learner-a");
+          await session.create("p1");
           controller = createBrowserLearnerActivityController(session);
           controller.start();
         },
@@ -227,11 +228,11 @@ test("nonqualifying scroll cannot move the actual learner idle boundary", async 
   }, firstActivityAt + first.idleTimeoutMs)).toEqual({ status: "ended", reason: "idle-expired" });
 
   const secondStartedAt = firstActivityAt + first.idleTimeoutMs + 10_000;
-  await page.evaluate((value) => {
+  await page.evaluate(async (value) => {
     const state = (window as unknown as {
-      __securityIdleBoundaryTest: { restart: (now: number) => void };
+      __securityIdleBoundaryTest: { restart: (now: number) => Promise<void> };
     }).__securityIdleBoundaryTest;
-    state.restart(value);
+    await state.restart(value);
   }, secondStartedAt);
   const secondActivityAt = secondStartedAt + first.idleTimeoutMs - 1;
   await page.evaluate((value) => {

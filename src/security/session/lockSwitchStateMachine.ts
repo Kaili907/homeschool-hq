@@ -30,12 +30,12 @@ export type LearnerAccessEvent =
   | Readonly<{ type: 'household-switch'; occurredAt: string }>
 
 export type LearnerAccessAction =
-  | Readonly<{ type: 'clear-local-session' }>
-  | Readonly<{ type: 'revoke-global'; cause: GlobalRevocationCause }>
   | Readonly<{
       type: 'security-lifecycle'
       event: SecurityLifecycleEvent
       studyCancellationReason: StudyCancellationReason | null
+      clearLocal: boolean
+      revokeCause: GlobalRevocationCause | null
     }>
   | Readonly<{ type: 'request-learner-pin'; profileId: ProfileId }>
 
@@ -49,12 +49,21 @@ export const INITIAL_LEARNER_ACCESS_STATE: LearnerAccessState = Object.freeze({
   reason: 'initial',
 })
 
-function lifecycle(type: SecurityLifecycleEventType, occurredAt: string): LearnerAccessAction {
+function lifecycle(
+  type: SecurityLifecycleEventType,
+  occurredAt: string,
+  options: Readonly<{
+    clearLocal?: boolean
+    revokeCause?: GlobalRevocationCause
+  }> = {},
+): LearnerAccessAction {
   const event: SecurityLifecycleEvent = Object.freeze({ type, occurredAt })
   return Object.freeze({
     type: 'security-lifecycle',
     event,
     studyCancellationReason: studyCancellationReasonFor(type),
+    clearLocal: options.clearLocal ?? false,
+    revokeCause: options.revokeCause ?? null,
   })
 }
 
@@ -89,18 +98,20 @@ export function transitionLearnerAccess(
       return Object.freeze({
         state: locked('lock'),
         actions: Object.freeze([
-          Object.freeze({ type: 'clear-local-session' }),
-          Object.freeze({ type: 'revoke-global', cause: 'learner-lock' }),
-          lifecycle('learner-lock', event.occurredAt),
+          lifecycle('learner-lock', event.occurredAt, {
+            clearLocal: true,
+            revokeCause: 'learner-lock',
+          }),
         ]),
       })
     case 'logout':
       return Object.freeze({
         state: locked('logout'),
         actions: Object.freeze([
-          Object.freeze({ type: 'clear-local-session' }),
-          Object.freeze({ type: 'revoke-global', cause: 'learner-sign-out' }),
-          lifecycle('learner-sign-out', event.occurredAt),
+          lifecycle('learner-sign-out', event.occurredAt, {
+            clearLocal: true,
+            revokeCause: 'learner-sign-out',
+          }),
         ]),
       })
     case 'learner-switch': {
@@ -114,9 +125,10 @@ export function transitionLearnerAccess(
           targetProfileId,
         }),
         actions: Object.freeze([
-          Object.freeze({ type: 'clear-local-session' }),
-          Object.freeze({ type: 'revoke-global', cause: 'learner-switch-start' }),
-          lifecycle('learner-switch-start', event.occurredAt),
+          lifecycle('learner-switch-start', event.occurredAt, {
+            clearLocal: true,
+            revokeCause: 'learner-switch-start',
+          }),
           Object.freeze({ type: 'request-learner-pin', profileId: targetProfileId }),
         ]),
       })
@@ -135,22 +147,19 @@ export function transitionLearnerAccess(
       return Object.freeze({
         state: locked('authorization-loss'),
         actions: Object.freeze([
-          ...(event.source === 'global-revocation'
-            ? []
-            : [
-                Object.freeze({ type: 'clear-local-session' as const }),
-                Object.freeze({ type: 'revoke-global' as const, cause: event.source }),
-              ]),
-          lifecycle(event.source, event.occurredAt),
+          lifecycle(event.source, event.occurredAt, event.source === 'global-revocation'
+            ? { clearLocal: true }
+            : { clearLocal: true, revokeCause: event.source }),
         ]),
       })
     case 'household-switch':
       return Object.freeze({
         state: locked('household-switch'),
         actions: Object.freeze([
-          Object.freeze({ type: 'clear-local-session' }),
-          Object.freeze({ type: 'revoke-global', cause: 'household-switch' }),
-          lifecycle('household-switch', event.occurredAt),
+          lifecycle('household-switch', event.occurredAt, {
+            clearLocal: true,
+            revokeCause: 'household-switch',
+          }),
         ]),
       })
   }
@@ -159,6 +168,10 @@ export function transitionLearnerAccess(
 export interface LearnerAccessActionPorts {
   readonly learnerSession: Readonly<{
     clearLocal: () => void | Promise<void>
+    deliverLifecycle: (
+      event: SecurityLifecycleEvent,
+      beforeDelivery?: () => void | Promise<void>,
+    ) => Promise<void>
   }>
   readonly revocation: GlobalRevocationSource & Readonly<{
     revoke: (
@@ -166,10 +179,6 @@ export interface LearnerAccessActionPorts {
     ) => GlobalRevocationNotice | Promise<GlobalRevocationNotice>
     close: () => void
   }>
-  readonly onLifecycle: (
-    event: SecurityLifecycleEvent,
-    studyCancellationReason: StudyCancellationReason | null,
-  ) => void | Promise<unknown>
   readonly requestLearnerPin: (profileId: ProfileId) => void | Promise<void>
 }
 
@@ -185,14 +194,11 @@ export async function executeLearnerAccessActions(
   }
   for (const action of actions) {
     switch (action.type) {
-      case 'clear-local-session':
-        await ports.learnerSession.clearLocal()
-        break
-      case 'revoke-global':
-        await ports.revocation.revoke(action.cause)
-        break
       case 'security-lifecycle':
-        await ports.onLifecycle(action.event, action.studyCancellationReason)
+        await ports.learnerSession.deliverLifecycle(action.event, async () => {
+          if (action.clearLocal) await ports.learnerSession.clearLocal()
+          if (action.revokeCause) await ports.revocation.revoke(action.revokeCause)
+        })
         break
       case 'request-learner-pin':
         await ports.requestLearnerPin(action.profileId)

@@ -1,14 +1,15 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { parseProfileId } from '../contracts/profileId'
 import { createLocalSessionId } from '../contracts/sessions'
 import type { StudyCancellationReason } from '../../study/lifecycle/StudyLifecycle'
-import { studyCancellationReasonFor } from '../contracts/studyBridge'
 import { SerializedLifecycleDelivery, type SecurityLifecycleSink } from './lifecycleDelivery'
 import {
   executeLearnerAccessActions,
   transitionLearnerAccess,
-  type LearnerAccessActionPorts,
 } from './lockSwitchStateMachine'
+import { LearnerSessionController } from './learnerSession'
+import { GlobalRevocationCoordinator } from './revocation'
+import type { SecurityStorage } from './runtime'
 import {
   cancelStudyForSecurityLifecycleEvent,
   type StudyCancellationPort,
@@ -28,38 +29,54 @@ describe('safe Study Bridge compatibility', () => {
       targetProfileId: parseProfileId('p2')!,
       occurredAt: '2026-08-09T12:01:00.000Z',
     })
-    const execution = executeLearnerAccessActions(transition.actions, {
-      learnerSession: { clearLocal: () => undefined },
-      revocation: {
-        currentEpoch: () => 0,
-        subscribe: () => () => undefined,
-        revoke: async (cause) => {
-          trace.push('revoke')
-          return Object.freeze({
-            schemaVersion: 1 as const,
-            epoch: 1,
-            cause,
-            occurredAt: '2026-08-09T12:01:00.000Z',
-          })
-        },
-        close: () => undefined,
+    const values = new Map<string, string>()
+    const storage: SecurityStorage = {
+      getItem: (key) => values.get(key) ?? null,
+      setItem: (key, value) => { values.set(key, value) },
+      removeItem: (key) => { values.delete(key) },
+    }
+    const revocation = new GlobalRevocationCoordinator({
+      storage,
+      lockManager: {
+        request: (_name, _options, callback) => Promise.resolve(callback()),
       },
-      onLifecycle: (event) => cancelStudyForSecurityLifecycleEvent(event, {
+    })
+    const session = new LearnerSessionController({
+      storage,
+      revocation,
+      ownershipLockManager: {
+        request: (_name, _options, callback) => Promise.resolve(callback({ name: 'owner' })),
+      },
+      onLifecycleEvent: (event) => cancelStudyForSecurityLifecycleEvent(event, {
         cancel: async () => {
           trace.push('cancel-start')
           await cancellation
           trace.push('cancel-done')
         },
       }),
+    })
+    const originalRevoke = revocation.revoke.bind(revocation)
+    const tracedRevocation = {
+      currentEpoch: () => revocation.currentEpoch(),
+      subscribe: revocation.subscribe.bind(revocation),
+      revoke: async (cause: Parameters<typeof revocation.revoke>[0]) => {
+        trace.push('revoke')
+        return originalRevoke(cause)
+      },
+      close: revocation.close.bind(revocation),
+    }
+    const execution = executeLearnerAccessActions(transition.actions, {
+      learnerSession: session,
+      revocation: tracedRevocation,
       requestLearnerPin: () => { trace.push('PIN') },
     })
-    await Promise.resolve()
-    await Promise.resolve()
-    expect(trace).toEqual(['revoke', 'cancel-start'])
+    await vi.waitFor(() => expect(trace).toEqual(['revoke', 'cancel-start']))
 
     finishCancellation()
     await execution
     expect(trace).toEqual(['revoke', 'cancel-start', 'cancel-done', 'PIN'])
+    await session.close()
+    revocation.close()
   })
 
   it('accepts the bridge Promise directly and awaits its asynchronous cancel port', async () => {
@@ -73,13 +90,7 @@ describe('safe Study Bridge compatibility', () => {
         trace.push(`cancel-done:${reason}`)
       },
     }
-    const actionPortSink: LearnerAccessActionPorts['onLifecycle'] = (event) => (
-      cancelStudyForSecurityLifecycleEvent(event, port)
-    )
-    const sink: SecurityLifecycleSink = (event) => actionPortSink(
-      event,
-      studyCancellationReasonFor(event.type),
-    )
+    const sink: SecurityLifecycleSink = (event) => cancelStudyForSecurityLifecycleEvent(event, port)
     const delivery = new SerializedLifecycleDelivery(sink)
     const delivered = delivery.enqueue({
       type: 'learner-switch-start',

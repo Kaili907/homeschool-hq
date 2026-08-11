@@ -5,8 +5,8 @@ export type SecurityLifecycleSink = (
 ) => void | Promise<unknown>
 
 /**
- * Keeps autonomous lifecycle effects ordered and observes every returned
- * Promise. Rejections are contained so browser event callbacks never create an
+ * Keeps lifecycle effects ordered and observes every returned Promise.
+ * Rejections are contained so browser event callbacks never create an
  * unhandled rejection; the owning controller supplies the fail-closed action.
  */
 export class SerializedLifecycleDelivery {
@@ -21,6 +21,8 @@ export class SerializedLifecycleDelivery {
   enqueue(
     event: SecurityLifecycleEvent,
     onRejected: () => void | Promise<void>,
+    beforeDelivery?: () => void | Promise<void>,
+    stopAfterFailure = false,
   ): Promise<boolean> {
     let delivered = true
     const rejectSafely = async () => {
@@ -34,9 +36,13 @@ export class SerializedLifecycleDelivery {
       }
     }
     const run = this.#tail.then(async () => {
-      if (!this.#sink) return
+      if (stopAfterFailure && this.#failed) {
+        delivered = false
+        return
+      }
       try {
-        await this.#sink(event)
+        await beforeDelivery?.()
+        await this.#sink?.(event)
       } catch {
         await rejectSafely()
       }

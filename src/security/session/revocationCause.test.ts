@@ -4,6 +4,7 @@ import type { StudyCancellationReason } from '../../study/lifecycle/StudyLifecyc
 import { cancelStudyForSecurityLifecycleEvent } from '../study/authStudyCancellationBridge'
 import {
   LearnerSessionController,
+  LEARNER_SESSION_STORAGE_KEY,
   type LearnerSessionOwnershipLock,
   type LearnerSessionOwnershipLockManager,
 } from './learnerSession'
@@ -181,7 +182,6 @@ describe('causeful global revocation transport', () => {
         channelFactory: hub.create,
       })
       const localAutonomous: StudyCancellationReason[] = []
-      const localSpecific: StudyCancellationReason[] = []
       const remoteSpecific: StudyCancellationReason[] = []
       const remoteCauses: string[] = []
       remoteCoordinator.subscribe((notice) => { remoteCauses.push(notice.cause) })
@@ -216,15 +216,11 @@ describe('causeful global revocation transport', () => {
       await executeLearnerAccessActions(transition.actions, {
         learnerSession: local,
         revocation: localCoordinator,
-        onLifecycle: (lifecycleEvent) => cancelStudyForSecurityLifecycleEvent(lifecycleEvent, {
-          cancel: (reason) => { localSpecific.push(reason) },
-        }),
         requestLearnerPin: () => undefined,
       })
       await remote.whenLifecycleIdle()
 
-      expect(localSpecific).toEqual([expectedReason])
-      expect(localAutonomous).toEqual([])
+      expect(localAutonomous).toEqual([expectedReason])
       expect(remoteSpecific).toEqual([expectedReason])
       expect(remoteCauses).toEqual([expectedCause])
       expect(remote.session).toBeNull()
@@ -267,5 +263,85 @@ describe('causeful global revocation transport', () => {
     expect(session.recheck()).toEqual({ status: 'ended', reason: 'global-revocation' })
     await session.close()
     coordinator.close()
+  })
+
+  it('blocks and terminally fails remote replacement authority when exact-cause cleanup rejects', async () => {
+    const storage = new MemoryStorage()
+    const hub = new BroadcastHub()
+    const localCoordinator = new GlobalRevocationCoordinator({
+      storage,
+      clock: () => START,
+      channelFactory: hub.create,
+      lockManager: new RevocationLocks(),
+    })
+    const remoteCoordinator = new GlobalRevocationCoordinator({
+      storage,
+      clock: () => START,
+      channelFactory: hub.create,
+    })
+    const localStorage = new MemoryStorage()
+    const remoteStorage = new MemoryStorage()
+    const remoteEvents: string[] = []
+    let rejectRemoteCancellation!: (error: Error) => void
+    const remoteCancellation = new Promise<void>((_resolve, reject) => {
+      rejectRemoteCancellation = reject
+    })
+    const local = new LearnerSessionController({
+      storage: localStorage,
+      revocation: localCoordinator,
+      ownershipLockManager: new OwnershipLocks(),
+      clock: () => START,
+      randomUUID: () => UUID_A,
+      onLifecycleEvent: (event) => cancelStudyForSecurityLifecycleEvent(event, {
+        cancel: () => undefined,
+      }),
+    })
+    const remote = new LearnerSessionController({
+      storage: remoteStorage,
+      revocation: remoteCoordinator,
+      ownershipLockManager: new OwnershipLocks(),
+      clock: () => START,
+      randomUUID: () => UUID_B,
+      onLifecycleEvent: (event) => {
+        remoteEvents.push(event.type)
+        return cancelStudyForSecurityLifecycleEvent(event, {
+          cancel: () => remoteCancellation,
+        })
+      },
+    })
+    const localRecord = await local.create(P1)
+    await remote.create(P1)
+    remoteEvents.length = 0
+
+    const transition = transitionLearnerAccess({
+      status: 'active', profileId: P1, sessionId: localRecord.sessionId,
+    }, {
+      type: 'learner-switch',
+      targetProfileId: P2,
+      occurredAt: new Date(START + 60_000).toISOString(),
+    })
+    await executeLearnerAccessActions(transition.actions, {
+      learnerSession: local,
+      revocation: localCoordinator,
+      requestLearnerPin: () => undefined,
+    })
+    await vi.waitFor(() => expect(remoteEvents).toEqual(['learner-switch-start']))
+
+    let createSettled = false
+    const replacement = remote.create(P2).finally(() => { createSettled = true })
+    await Promise.resolve()
+    expect(createSettled).toBe(false)
+    expect(remote.session).toBeNull()
+    expect(remoteStorage.getItem(LEARNER_SESSION_STORAGE_KEY)).toBeNull()
+
+    rejectRemoteCancellation(new Error('Remote Study cancellation failed'))
+    await expect(replacement).rejects.toThrow('Security lifecycle delivery failed closed')
+    expect(remote.lifecycleDeliveryFailed).toBe(true)
+    await expect(remote.restore()).resolves.toEqual({ status: 'ended', reason: 'lifecycle-failed' })
+
+    await local.close()
+    await remote.close()
+    localCoordinator.close()
+    remoteCoordinator.close()
   })
 })
