@@ -63,6 +63,11 @@ npm.cmd run preflight:admin-production
 npm.cmd run preflight:admin-production:json
 ```
 
+For the local-only aggregate that also retains the migration planner and Study
+deployment-environment authority results, run
+`npm.cmd run preflight:production-local`. See
+[`../production-local-preflight.md`](../production-local-preflight.md).
+
 The operator form prints only contract-owned gate IDs and bounded reason codes.
 The JSON form is deterministic and similarly excludes arbitrary evidence
 values. A blocked result exits with code 2.
