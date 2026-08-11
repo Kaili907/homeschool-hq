@@ -142,6 +142,21 @@ describe('calendar read and explicit commands', () => {
     expect(parseProductionCalendarCommandRequestV1(request)?.command).toBe(request.command)
   })
 
+  it('rejects an accessor command before invoking it', () => {
+    const request = command('start')
+    let reads = 0
+    Object.defineProperty(request, 'command', {
+      enumerable: true,
+      get() {
+        reads += 1
+        return 'start'
+      },
+    })
+
+    expect(parseProductionCalendarCommandRequestV1(request)).toBeNull()
+    expect(reads).toBe(0)
+  })
+
   it('keeps complete-block and complete-segment separate in both directions', () => {
     const completeBlock = command('complete-block')
     const completeSegment = { ...command('complete-segment'), segmentRef: 'segment:one' }

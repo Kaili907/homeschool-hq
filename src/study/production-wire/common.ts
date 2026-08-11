@@ -53,6 +53,17 @@ function identifier<T extends string>(value: unknown): T | null {
   return typeof value === 'string' && IDENTIFIER_PATTERN.test(value) ? value as T : null
 }
 
+function namespacedIdentifier<T extends string>(
+  value: unknown,
+  prefixes: readonly string[],
+): T | null {
+  const parsed = identifier<string>(value)
+  if (parsed === null) return null
+  return prefixes.some((prefix) => parsed.startsWith(prefix) && parsed.length > prefix.length)
+    ? parsed as T
+    : null
+}
+
 export const parseProductionSessionRefV1 = (value: unknown): ProductionSessionRefV1 | null =>
   identifier<ProductionSessionRefV1>(value)
 export const parseProductionCheckpointRefV1 = (value: unknown): ProductionCheckpointRefV1 | null =>
@@ -68,15 +79,15 @@ export const parseProductionContentVersionRefV1 = (value: unknown): ProductionCo
 export const parseProductionSourceRefV1 = (value: unknown): ProductionSourceRefV1 | null =>
   identifier<ProductionSourceRefV1>(value)
 export const parseProductionEventIdV1 = (value: unknown): ProductionEventIdV1 | null =>
-  identifier<ProductionEventIdV1>(value)
+  namespacedIdentifier<ProductionEventIdV1>(value, ['event:id-', 'ledger-event:'])
 export const parseProductionEventRefV1 = (value: unknown): ProductionEventRefV1 | null =>
-  identifier<ProductionEventRefV1>(value)
+  namespacedIdentifier<ProductionEventRefV1>(value, ['event:ref-', 'tutor:event-ref-', 'tutor-event:'])
 export const parseProductionIdempotencyKeyV1 = (value: unknown): ProductionIdempotencyKeyV1 | null =>
-  identifier<ProductionIdempotencyKeyV1>(value)
+  namespacedIdentifier<ProductionIdempotencyKeyV1>(value, ['idem:', 'idempotency:'])
 export const parseProductionMutationRefV1 = (value: unknown): ProductionMutationRefV1 | null =>
-  identifier<ProductionMutationRefV1>(value)
+  namespacedIdentifier<ProductionMutationRefV1>(value, ['mutation:'])
 export const parseProductionOperationRefV1 = (value: unknown): ProductionOperationRefV1 | null =>
-  identifier<ProductionOperationRefV1>(value)
+  namespacedIdentifier<ProductionOperationRefV1>(value, ['operation:'])
 
 export type ProductionWireInfrastructureFailureV1 =
   | Readonly<{ schemaVersion: 1; status: 'auth-refused' }>
@@ -91,15 +102,46 @@ export const PRODUCTION_WIRE_INFRASTRUCTURE_STATUSES = Object.freeze([
   'server-unavailable',
 ] as const)
 
+/**
+ * Canonical data-only record boundary. The returned object is detached from
+ * the caller: every own data descriptor is copied once, then only the frozen
+ * null-prototype snapshot may be read by a parser.
+ */
+export function snapshotDataRecord(value: unknown): Record<string, unknown> | null {
+  try {
+    if (value === null || typeof value !== 'object' || Array.isArray(value)) return null
+    const prototype = Object.getPrototypeOf(value)
+    if (prototype !== Object.prototype && prototype !== null) return null
+
+    const ownKeys = Reflect.ownKeys(value)
+    if (ownKeys.some((key) => typeof key !== 'string')) return null
+
+    const snapshot = Object.create(null) as Record<string, unknown>
+    for (const key of ownKeys as string[]) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, key)
+      if (!descriptor || descriptor.enumerable !== true || !Object.hasOwn(descriptor, 'value')) return null
+      const snapshotValue = descriptor.value
+      Object.defineProperty(snapshot, key, {
+        value: snapshotValue,
+        enumerable: true,
+        configurable: false,
+        writable: false,
+      })
+    }
+    return Object.freeze(snapshot)
+  } catch {
+    return null
+  }
+}
+
 export function exactRecord(value: unknown, keys: readonly string[]): Record<string, unknown> | null {
-  if (value === null || typeof value !== 'object' || Array.isArray(value)) return null
-  const prototype = Object.getPrototypeOf(value)
-  if (prototype !== Object.prototype && prototype !== null) return null
-  const record = value as Record<string, unknown>
+  const record = snapshotDataRecord(value)
+  if (!record) return null
+  const expectedKeys = new Set(keys)
+  if (expectedKeys.size !== keys.length) return null
   const ownKeys = Reflect.ownKeys(record)
-  if (ownKeys.length !== keys.length) return null
-  if (!keys.every((key) => Object.hasOwn(record, key))) return null
-  return record
+  if (ownKeys.length !== expectedKeys.size) return null
+  return ownKeys.every((key) => typeof key === 'string' && expectedKeys.has(key)) ? record : null
 }
 
 export function member<T extends string>(value: unknown, allowed: readonly T[]): T | null {
@@ -151,17 +193,47 @@ export function distinctArray<T extends string>(
   maximum: number,
   parse: (entry: unknown) => T | null,
 ): readonly T[] | null {
-  if (!Array.isArray(value)) return null
-  const count = value.length
-  if (count > maximum) return null
-  const parsed: T[] = []
-  for (let index = 0; index < count; index += 1) {
-    const entry = parse(value[index])
-    if (entry === null || parsed.includes(entry)) return null
-    parsed.push(entry)
+  try {
+    if (!Array.isArray(value)) return null
+    if (Object.getPrototypeOf(value) !== Array.prototype) return null
+    const ownKeys = Reflect.ownKeys(value)
+    if (ownKeys.some((key) => typeof key !== 'string')) return null
+
+    const lengthDescriptor = Object.getOwnPropertyDescriptor(value, 'length')
+    if (
+      !lengthDescriptor ||
+      !Object.hasOwn(lengthDescriptor, 'value') ||
+      lengthDescriptor.enumerable !== false ||
+      lengthDescriptor.configurable !== false
+    ) return null
+    const count = lengthDescriptor.value
+    if (!Number.isSafeInteger(count) || count < 0 || count > maximum) return null
+
+    const expectedKeys = new Set<string>(['length'])
+    for (let index = 0; index < count; index += 1) expectedKeys.add(String(index))
+    if (
+      ownKeys.length !== expectedKeys.size ||
+      !ownKeys.every((key) => typeof key === 'string' && expectedKeys.has(key))
+    ) return null
+
+    const snapshot: unknown[] = []
+    for (let index = 0; index < count; index += 1) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, String(index))
+      if (!descriptor || descriptor.enumerable !== true || !Object.hasOwn(descriptor, 'value')) return null
+      const snapshotValue = descriptor.value
+      snapshot.push(snapshotValue)
+    }
+
+    const parsed: T[] = []
+    for (const snapshotValue of snapshot) {
+      const entry = parse(snapshotValue)
+      if (entry === null || parsed.includes(entry)) return null
+      parsed.push(entry)
+    }
+    return Object.freeze(parsed)
+  } catch {
+    return null
   }
-  if (value.length !== count) return null
-  return Object.freeze(parsed)
 }
 
 export function parseProductionWireInfrastructureFailureV1(

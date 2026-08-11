@@ -15,6 +15,7 @@ import {
   parseProductionSessionRefV1,
   revision,
   safely,
+  snapshotDataRecord,
   type ProductionCheckpointRefV1,
   type ProductionEventRefV1,
   type ProductionLessonRefV1,
@@ -186,10 +187,12 @@ export function parseProductionCheckpointReadResultV1(
   value: unknown,
 ): ProductionCheckpointReadResultV1 | null {
   return safely(() => {
-    const infrastructure = parseProductionWireInfrastructureFailureV1(value)
+    const record = snapshotDataRecord(value)
+    if (!record) return null
+    const infrastructure = parseProductionWireInfrastructureFailureV1(record)
     if (infrastructure) return infrastructure
 
-    const short = exactRecord(value, ['schemaVersion', 'status'])
+    const short = exactRecord(record, ['schemaVersion', 'status'])
     if (short && short.schemaVersion === 1) {
       if (short.status === 'not-found') return Object.freeze({ schemaVersion: 1 as const, status: 'not-found' as const })
       if (short.status === 'integrity-failed') {
@@ -197,7 +200,7 @@ export function parseProductionCheckpointReadResultV1(
       }
     }
 
-    const found = exactRecord(value, [
+    const found = exactRecord(record, [
       'schemaVersion',
       'status',
       'sessionRef',
@@ -226,10 +229,12 @@ export function parseProductionCheckpointCasResultV1(
   value: unknown,
 ): ProductionCheckpointCasResultV1 | null {
   return safely(() => {
-    const infrastructure = parseProductionWireInfrastructureFailureV1(value)
+    const record = snapshotDataRecord(value)
+    if (!record) return null
+    const infrastructure = parseProductionWireInfrastructureFailureV1(record)
     if (infrastructure) return infrastructure
 
-    const short = exactRecord(value, ['schemaVersion', 'status'])
+    const short = exactRecord(record, ['schemaVersion', 'status'])
     if (short && short.schemaVersion === 1) {
       if (short.status === 'not-found' ||
         short.status === 'idempotency-collision' ||
@@ -239,7 +244,7 @@ export function parseProductionCheckpointCasResultV1(
       }
     }
 
-    const conflict = exactRecord(value, ['schemaVersion', 'status', 'currentRevision'])
+    const conflict = exactRecord(record, ['schemaVersion', 'status', 'currentRevision'])
     if (conflict && conflict.schemaVersion === 1 && conflict.status === 'revision-conflict') {
       const currentRevision = revision(conflict.currentRevision)
       return currentRevision === null ? null : Object.freeze({
@@ -249,7 +254,7 @@ export function parseProductionCheckpointCasResultV1(
       })
     }
 
-    const stored = exactRecord(value, ['schemaVersion', 'status', 'revision', 'storedAt'])
+    const stored = exactRecord(record, ['schemaVersion', 'status', 'revision', 'storedAt'])
     if (!stored || stored.schemaVersion !== 1 ||
       stored.status !== 'stored' && stored.status !== 'duplicate-replay') return null
     const storedRevision = revision(stored.revision)

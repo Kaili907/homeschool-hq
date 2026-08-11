@@ -14,6 +14,7 @@ import {
   parseProductionSourceRefV1,
   revision,
   safely,
+  snapshotDataRecord,
   type ProductionCalendarBlockRefV1,
   type ProductionIdempotencyKeyV1,
   type ProductionOperationRefV1,
@@ -315,14 +316,14 @@ export function parseProductionCalendarCommandRequestV1(
   value: unknown,
 ): ProductionCalendarCommandRequestV1 | null {
   return safely(() => {
-    if (value === null || typeof value !== 'object' || Array.isArray(value)) return null
-    const command = (value as Record<string, unknown>).command
-    switch (command) {
-      case 'start': return parseProductionCalendarStartRequestV1(value)
-      case 'pause': return parseProductionCalendarPauseRequestV1(value)
-      case 'resume': return parseProductionCalendarResumeRequestV1(value)
-      case 'complete-block': return parseProductionCalendarCompleteBlockRequestV1(value)
-      case 'complete-segment': return parseProductionCalendarCompleteSegmentRequestV1(value)
+    const record = snapshotDataRecord(value)
+    if (!record) return null
+    switch (record.command) {
+      case 'start': return parseProductionCalendarStartRequestV1(record)
+      case 'pause': return parseProductionCalendarPauseRequestV1(record)
+      case 'resume': return parseProductionCalendarResumeRequestV1(record)
+      case 'complete-block': return parseProductionCalendarCompleteBlockRequestV1(record)
+      case 'complete-segment': return parseProductionCalendarCompleteSegmentRequestV1(record)
       default: return null
     }
   })
@@ -332,16 +333,18 @@ export function parseProductionCalendarBlockReadResultV1(
   value: unknown,
 ): ProductionCalendarBlockReadResultV1 | null {
   return safely(() => {
-    const infrastructure = parseProductionWireInfrastructureFailureV1(value)
+    const record = snapshotDataRecord(value)
+    if (!record) return null
+    const infrastructure = parseProductionWireInfrastructureFailureV1(record)
     if (infrastructure) return infrastructure
-    const short = exactRecord(value, ['schemaVersion', 'status'])
+    const short = exactRecord(record, ['schemaVersion', 'status'])
     if (short && short.schemaVersion === 1) {
       if (short.status === 'not-found') return Object.freeze({ schemaVersion: 1 as const, status: 'not-found' as const })
       if (short.status === 'integrity-failed') {
         return Object.freeze({ schemaVersion: 1 as const, status: 'integrity-failed' as const })
       }
     }
-    const found = exactRecord(value, ['schemaVersion', 'status', 'entry'])
+    const found = exactRecord(record, ['schemaVersion', 'status', 'entry'])
     if (!found || found.schemaVersion !== 1 || found.status !== 'found') return null
     const entry = parseProductionStudyCalendarEntryV1(found.entry)
     return entry === null
@@ -363,14 +366,16 @@ function parseCalendarMutationResult<S extends ProductionCalendarBlockStatusV1>(
   allowedSuccessStatus: S,
 ): CalendarStoredResultV1<S> | CalendarMutationFailureV1 | null {
   return safely(() => {
-    const infrastructure = parseProductionWireInfrastructureFailureV1(value)
+    const record = snapshotDataRecord(value)
+    if (!record) return null
+    const infrastructure = parseProductionWireInfrastructureFailureV1(record)
     if (infrastructure) return infrastructure
-    const short = exactRecord(value, ['schemaVersion', 'status'])
+    const short = exactRecord(record, ['schemaVersion', 'status'])
     if (short && short.schemaVersion === 1) {
       const status = member(short.status, CALENDAR_FAILURES_WITHOUT_REVISION)
       if (status) return Object.freeze({ schemaVersion: 1 as const, status })
     }
-    const conflict = exactRecord(value, ['schemaVersion', 'status', 'currentRevision'])
+    const conflict = exactRecord(record, ['schemaVersion', 'status', 'currentRevision'])
     if (conflict && conflict.schemaVersion === 1 && conflict.status === 'revision-conflict') {
       const currentRevision = revision(conflict.currentRevision)
       return currentRevision === null ? null : Object.freeze({
@@ -379,7 +384,7 @@ function parseCalendarMutationResult<S extends ProductionCalendarBlockStatusV1>(
         currentRevision,
       })
     }
-    const stored = exactRecord(value, ['schemaVersion', 'status', 'entry'])
+    const stored = exactRecord(record, ['schemaVersion', 'status', 'entry'])
     if (!stored || stored.schemaVersion !== 1 ||
       stored.status !== 'stored' && stored.status !== 'duplicate-replay') return null
     const entry = parseProductionStudyCalendarEntryV1(stored.entry)

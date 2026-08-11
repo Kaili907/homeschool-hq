@@ -12,6 +12,7 @@ import {
   parseProductionSessionRefV1,
   revision,
   safely,
+  snapshotDataRecord,
   type ProductionCalendarBlockRefV1,
   type ProductionContentVersionRefV1,
   type ProductionIdempotencyKeyV1,
@@ -340,16 +341,16 @@ export function parseProductionSessionCommandRequestV1(
   value: unknown,
 ): ProductionSessionCommandRequestV1 | null {
   return safely(() => {
-    if (value === null || typeof value !== 'object' || Array.isArray(value)) return null
-    const command = (value as Record<string, unknown>).command
-    switch (command) {
-      case 'begin': return parseProductionSessionBeginRequestV1(value)
-      case 'activate': return parseProductionSessionActivateRequestV1(value)
-      case 'resume': return parseProductionSessionResumeRequestV1(value)
-      case 'pause': return parseProductionSessionPauseRequestV1(value)
-      case 'interrupt': return parseProductionSessionInterruptRequestV1(value)
-      case 'complete': return parseProductionSessionCompleteRequestV1(value)
-      case 'abandon': return parseProductionSessionAbandonRequestV1(value)
+    const record = snapshotDataRecord(value)
+    if (!record) return null
+    switch (record.command) {
+      case 'begin': return parseProductionSessionBeginRequestV1(record)
+      case 'activate': return parseProductionSessionActivateRequestV1(record)
+      case 'resume': return parseProductionSessionResumeRequestV1(record)
+      case 'pause': return parseProductionSessionPauseRequestV1(record)
+      case 'interrupt': return parseProductionSessionInterruptRequestV1(record)
+      case 'complete': return parseProductionSessionCompleteRequestV1(record)
+      case 'abandon': return parseProductionSessionAbandonRequestV1(record)
       default: return null
     }
   })
@@ -359,16 +360,18 @@ export function parseProductionSessionReadResultV1(
   value: unknown,
 ): ProductionSessionReadResultV1 | null {
   return safely(() => {
-    const infrastructure = parseProductionWireInfrastructureFailureV1(value)
+    const record = snapshotDataRecord(value)
+    if (!record) return null
+    const infrastructure = parseProductionWireInfrastructureFailureV1(record)
     if (infrastructure) return infrastructure
-    const short = exactRecord(value, ['schemaVersion', 'status'])
+    const short = exactRecord(record, ['schemaVersion', 'status'])
     if (short && short.schemaVersion === 1) {
       if (short.status === 'not-found') return Object.freeze({ schemaVersion: 1 as const, status: 'not-found' as const })
       if (short.status === 'integrity-failed') {
         return Object.freeze({ schemaVersion: 1 as const, status: 'integrity-failed' as const })
       }
     }
-    const found = exactRecord(value, ['schemaVersion', 'status', 'session'])
+    const found = exactRecord(record, ['schemaVersion', 'status', 'session'])
     if (!found || found.schemaVersion !== 1 || found.status !== 'found') return null
     const session = parseProductionSessionDescriptorV1(found.session)
     return session === null
@@ -391,16 +394,18 @@ function parseSessionMutationResult<S extends ProductionSessionStatusV1>(
   allowRevisionConflict: boolean,
 ): SessionStoredResultV1<S> | SessionMutationFailureV1 | null {
   return safely(() => {
-    const infrastructure = parseProductionWireInfrastructureFailureV1(value)
+    const record = snapshotDataRecord(value)
+    if (!record) return null
+    const infrastructure = parseProductionWireInfrastructureFailureV1(record)
     if (infrastructure) return infrastructure
 
-    const short = exactRecord(value, ['schemaVersion', 'status'])
+    const short = exactRecord(record, ['schemaVersion', 'status'])
     if (short && short.schemaVersion === 1) {
       const status = member(short.status, FAILURE_WITHOUT_REVISION)
       if (status) return Object.freeze({ schemaVersion: 1 as const, status })
     }
 
-    const conflict = exactRecord(value, ['schemaVersion', 'status', 'currentRevision'])
+    const conflict = exactRecord(record, ['schemaVersion', 'status', 'currentRevision'])
     if (allowRevisionConflict && conflict && conflict.schemaVersion === 1 && conflict.status === 'revision-conflict') {
       const currentRevision = revision(conflict.currentRevision)
       return currentRevision === null ? null : Object.freeze({
@@ -410,7 +415,7 @@ function parseSessionMutationResult<S extends ProductionSessionStatusV1>(
       })
     }
 
-    const stored = exactRecord(value, ['schemaVersion', 'status', 'session'])
+    const stored = exactRecord(record, ['schemaVersion', 'status', 'session'])
     if (!stored || stored.schemaVersion !== 1 ||
       stored.status !== 'stored' && stored.status !== 'duplicate-replay') return null
     const session = parseProductionSessionDescriptorV1(stored.session)

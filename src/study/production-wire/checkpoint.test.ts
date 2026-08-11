@@ -97,6 +97,101 @@ describe('ProductionCheckpointWireV1 privacy and bounds', () => {
       expect(parseProductionCheckpointWireV1(checkpoint({ elapsedActiveSecondsInSegment: invalid }))).toBeNull()
     }
   })
+
+  it('rejects privacy, hidden, and symbol payloads attached to progress arrays', () => {
+    for (const key of ['rawAnswer', 'transcript', 'protectedWork']) {
+      const carryingPrivacy = Object.assign(['segment:warm-up'], { [key]: 'secret' })
+      expect(parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs: carryingPrivacy })), key).toBeNull()
+    }
+
+    const hidden = ['segment:warm-up']
+    Object.defineProperty(hidden, 'rawAnswer', { value: 'secret', enumerable: false })
+    expect(parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs: hidden }))).toBeNull()
+
+    const symbol = Object.assign(['segment:warm-up'], { [Symbol('transcript')]: 'secret' })
+    expect(parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs: symbol }))).toBeNull()
+  })
+
+  it('rejects sparse, inherited, and accessor-filled progress arrays', () => {
+    const sparse = new Array<string>(1)
+    expect(parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs: sparse }))).toBeNull()
+
+    const inherited = new Array<string>(1)
+    const inheritedIndex = Object.create(Array.prototype) as unknown[]
+    Object.defineProperty(inheritedIndex, '0', { value: 'segment:warm-up', enumerable: true })
+    Object.setPrototypeOf(inherited, inheritedIndex)
+    expect(inherited[0]).toBe('segment:warm-up')
+    expect(parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs: inherited }))).toBeNull()
+
+    const accessor = ['segment:warm-up']
+    let reads = 0
+    Object.defineProperty(accessor, '0', {
+      enumerable: true,
+      get() {
+        reads += 1
+        return 'segment:warm-up'
+      },
+    })
+    expect(parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs: accessor }))).toBeNull()
+    expect(reads).toBe(0)
+  })
+
+  it('rejects dense arrays carrying inherited privacy or symbol payloads', () => {
+    const inheritedPrivacy = ['segment:warm-up']
+    const privacyPrototype = Object.create(Array.prototype) as unknown[]
+    Object.defineProperty(privacyPrototype, 'rawAnswer', { value: 'secret', enumerable: true })
+    Object.setPrototypeOf(inheritedPrivacy, privacyPrototype)
+    expect(parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs: inheritedPrivacy }))).toBeNull()
+
+    const inheritedSymbol = ['segment:warm-up']
+    const symbolPrototype = Object.create(Array.prototype) as unknown[]
+    Object.defineProperty(symbolPrototype, Symbol('transcript'), { value: 'secret', enumerable: true })
+    Object.setPrototypeOf(inheritedSymbol, symbolPrototype)
+    expect(parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs: inheritedSymbol }))).toBeNull()
+  })
+
+  it('uses one descriptor snapshot per array field and no live array reads', () => {
+    const source = ['segment:warm-up']
+    const descriptorReads = new Map<PropertyKey, number>()
+    const snapshotOnly = new Proxy(source, {
+      get() {
+        throw new Error('live array read')
+      },
+      getOwnPropertyDescriptor(target, key) {
+        descriptorReads.set(key, (descriptorReads.get(key) ?? 0) + 1)
+        return Reflect.getOwnPropertyDescriptor(target, key)
+      },
+    })
+
+    expect(parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs: snapshotOnly }))).not.toBeNull()
+    expect([...descriptorReads.entries()]).toEqual([
+      ['length', 1],
+      ['0', 1],
+    ])
+  })
+
+  it('returns null for hostile array key and descriptor traps', () => {
+    const hostilePrototype = new Proxy(['segment:warm-up'], {
+      getPrototypeOf() {
+        throw new Error('hostile-array-prototype')
+      },
+    })
+    const hostileKeys = new Proxy(['segment:warm-up'], {
+      ownKeys() {
+        throw new Error('hostile-array-keys')
+      },
+    })
+    const hostileDescriptor = new Proxy(['segment:warm-up'], {
+      getOwnPropertyDescriptor() {
+        throw new Error('hostile-array-descriptor')
+      },
+    })
+
+    for (const completedSegmentRefs of [hostilePrototype, hostileKeys, hostileDescriptor]) {
+      expect(() => parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs }))).not.toThrow()
+      expect(parseProductionCheckpointWireV1(checkpoint({ completedSegmentRefs }))).toBeNull()
+    }
+  })
 })
 
 describe('checkpoint network requests', () => {

@@ -8,6 +8,7 @@ import {
   parseProductionOperationRefV1,
   parseProductionSessionRefV1,
   safely,
+  snapshotDataRecord,
   type ProductionEventIdV1,
   type ProductionEventRefV1,
   type ProductionIdempotencyKeyV1,
@@ -99,9 +100,11 @@ export function parseProductionLearnerEventAppendResultV1(
   value: unknown,
 ): ProductionLearnerEventAppendResultV1 | null {
   return safely(() => {
-    const infrastructure = parseProductionWireInfrastructureFailureV1(value)
+    const record = snapshotDataRecord(value)
+    if (!record) return null
+    const infrastructure = parseProductionWireInfrastructureFailureV1(record)
     if (infrastructure) return infrastructure
-    const short = exactRecord(value, ['schemaVersion', 'status'])
+    const short = exactRecord(record, ['schemaVersion', 'status'])
     if (short && short.schemaVersion === 1 && (
       short.status === 'not-found' ||
       short.status === 'idempotency-collision' ||
@@ -110,7 +113,7 @@ export function parseProductionLearnerEventAppendResultV1(
     )) {
       return Object.freeze({ schemaVersion: 1 as const, status: short.status }) as ProductionLearnerEventAppendResultV1
     }
-    const stored = exactRecord(value, [
+    const stored = exactRecord(record, [
       'schemaVersion',
       'status',
       'eventId',

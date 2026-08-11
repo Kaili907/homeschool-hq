@@ -126,6 +126,21 @@ describe('explicit production session commands', () => {
     expect(parseProductionSessionCommandRequestV1(command)?.command).toBe(command.command)
   })
 
+  it('rejects an accessor command before invoking it', () => {
+    const request = revisionCommand('activate')
+    let reads = 0
+    Object.defineProperty(request, 'command', {
+      enumerable: true,
+      get() {
+        reads += 1
+        return 'activate'
+      },
+    })
+
+    expect(parseProductionSessionCommandRequestV1(request)).toBeNull()
+    expect(reads).toBe(0)
+  })
+
   it('rejects broad snapshot/status commands and guessed stopped state', () => {
     expect(parseProductionSessionCommandRequestV1(revisionCommand('save-snapshot', { status: 'active' }))).toBeNull()
     expect(parseProductionSessionCommandRequestV1(revisionCommand('stop', { status: 'stopped' }))).toBeNull()
@@ -173,6 +188,21 @@ describe('operation-specific session results', () => {
     expect(parseProductionSessionInterruptResultV1(stored('stored', 'technical_interruption'))?.status).toBe('stored')
     expect(parseProductionSessionCompleteResultV1(stored('stored', 'completed'))?.status).toBe('stored')
     expect(parseProductionSessionAbandonResultV1(stored('stored', 'abandoned'))?.status).toBe('stored')
+  })
+
+  it('rejects a changing status getter before stored or illegal-transition can be trusted', () => {
+    const result = stored('stored', 'active')
+    let reads = 0
+    Object.defineProperty(result, 'status', {
+      enumerable: true,
+      get() {
+        reads += 1
+        return reads === 1 ? 'stored' : 'illegal-transition'
+      },
+    })
+
+    expect(parseProductionSessionActivateResultV1(result)).toBeNull()
+    expect(reads).toBe(0)
   })
 
   it('refuses a success state belonging to a different operation', () => {
