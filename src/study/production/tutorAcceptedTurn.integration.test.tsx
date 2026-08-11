@@ -28,7 +28,7 @@
 import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { StudySessionContainer } from '../../components/study/StudySessionContainer'
+import { ProductionStudySessionContainer } from '../../components/study/ProductionStudySessionContainer'
 import {
   createHostStudyLifecycleSeam,
   type HostStudyLifecycleSeam,
@@ -51,7 +51,11 @@ import { createLocalDevelopmentStudyPorts } from '../localDevelopmentPorts'
 import type { StudyPortBundle, StudySafetyPort } from '../ports'
 import { readLocalSafetyStops, isSessionStoppedByLocalLedger } from '../safety/localStopLedger'
 import { studyBridgeSessionRef } from '../studyBridgeSessionRef'
-import { createSyntheticMathBlock } from '../testing/syntheticStudyFixtures'
+import {
+  REVIEWED_TUTOR_MATH_SKILL_REF,
+  createSyntheticMathBlock,
+  createSyntheticParentCreatedBlock,
+} from '../testing/syntheticStudyFixtures'
 import type { StudyCalendarEntry, StudySafeEvent, StudySessionSnapshot } from '../types'
 import { ProductionStudyTutorRuntime } from './tutorRuntime'
 
@@ -235,6 +239,12 @@ describe('an accepted production Tutor turn through the real Study session conta
     readonly suffix: string
     /** Fires as the bridge's own accepted-event append lands, for the M19 attack. */
     readonly onAcceptedEventAppend?: () => void
+    /**
+     * STUDY-A1-PRODUCTION-SAFE-CONTAINER — mount a `completion-only` block
+     * instead of a Tutor-governed one. The default stays Tutor-governed, so
+     * every existing test in this file is untouched.
+     */
+    readonly completionOnly?: boolean
   }
 
   /**
@@ -248,7 +258,20 @@ describe('an accepted production Tutor turn through the real Study session conta
   async function mount(options: MountOptions): Promise<void> {
     const local = createLocalDevelopmentStudyPorts()
     base = { ...local.ports, safety: clearSafety }
-    entry = (await createSyntheticMathBlock(base, { suffix: options.suffix })).entry
+    // STUDY-A1-TUTOR-CONTENT-ELIGIBILITY-CONTRACT — this file's turns are
+    // supposed to be ACCEPTED, so the block has to carry content the reviewed
+    // Tutor can actually teach. The default synthetic skill reference is
+    // Study-namespace and routes to no registered program; before this card it
+    // silently reached sequence 01 through the `programs[0]` fallback, so every
+    // "accepted turn" below was an accepted turn of the wrong lesson.
+    entry = (
+      await (options.completionOnly
+        ? createSyntheticParentCreatedBlock(base, { suffix: options.suffix })
+        : createSyntheticMathBlock(base, {
+            suffix: options.suffix,
+            skillRefs: [REVIEWED_TUTOR_MATH_SKILL_REF],
+          }))
+    ).entry
     const sessionRef = `${entry.blockRef}:session`
     const scope = { householdRef: context.householdRef, learnerRef: context.learnerRef, sessionRef }
 
@@ -291,7 +314,7 @@ describe('an accepted production Tutor turn through the real Study session conta
     roots.push(root)
     await act(async () => {
       root.render(
-        <StudySessionContainer
+        <ProductionStudySessionContainer
           context={context}
           initialEntry={entry}
           ports={ports}
@@ -547,5 +570,66 @@ describe('an accepted production Tutor turn through the real Study session conta
     expect(durable.events.map((event) => event.type)).not.toContain('session-completed')
     expect(durable.sessions.map((session) => session.status)).toEqual(['active'])
     expect(readLocalSafetyStops(storage)).toEqual([])
+  })
+
+  it('writes no learner text to the session row when a completion-only block completes', async () => {
+    /**
+     * STUDY-A1-PRODUCTION-SAFE-CONTAINER — found by this card's mutation
+     * campaign (M12), not by design, and the branch it covers is one the product
+     * ships rather than one only a test can reach.
+     *
+     * `masteryAuthority` is `completion-only` for a parent-created activity and
+     * for a Romeo Virtual Academy activity (curriculumAdapter.ts). On that path
+     * the container asks no Tutor anything, so `acceptedEventRef` stays null all
+     * the way to `persistence.saveSession`, and the row is written with
+     * `lastAcceptedEventRef: null`.
+     *
+     * Every mounted test before this one drove a Tutor-governed block, where
+     * `acceptedEventRef` is always a real reference by the time that line runs.
+     * So `lastAcceptedEventRef: acceptedEventRef ?? transient` — one `??` — put
+     * the sentence a girl typed into her father's permanent Study record on the
+     * only path where the fallback can fire, and the whole suite stayed green.
+     *
+     * The needle is a sentence, not a word, and it is asserted over the WHOLE
+     * durable footprint rather than over the one field: a later card moving the
+     * value to a different key would still be caught.
+     */
+    await mount({ suffix: 'completion-only-privacy', completionOnly: true })
+    expect(entry.masteryAuthority).toBe('completion-only')
+
+    const typed = 'I finished the poster with mom and it took me an hour'
+    await submitAnswer(typed)
+
+    // No Tutor was asked, so no result exists to have carried a reference.
+    expect(runtime.turns).toEqual([])
+    expect(runtime.results).toEqual([])
+
+    // The segment really did complete — this is the positive half, without which
+    // a container that simply refused completion-only work would pass below.
+    expect(durable.sessions).not.toHaveLength(0)
+    const completion = durable.sessions.at(-1)!
+    expect(completion.segmentRef).toBe(entry.segments[0]!.segmentRef)
+
+    // And the row carries NO reference at all, rather than her sentence.
+    for (const session of durable.sessions) {
+      expect(session.lastAcceptedEventRef).toBeNull()
+      expect(session.rawAnswerIncluded).toBe(false)
+      expect(session.transcriptIncluded).toBe(false)
+    }
+    expect(JSON.stringify(durable)).not.toContain(typed)
+    // Local storage too, read through the Storage API this fixture implements.
+    const stored = Array.from({ length: storage.length }, (_, index) => storage.key(index))
+      .map((key) => `${key}=${key === null ? '' : storage.getItem(key)}`)
+      .join('\n')
+    expect(stored).not.toContain(typed)
+    // The host recorded a completion and invented no mastery decision. A
+    // parent-created block has one segment, so completing it finishes the block
+    // and the surface is the completed one rather than the caption view.
+    expect(durable.events.map((event) => event.type)).toContain('session-completed')
+    expect(completion.status).toBe('completed')
+    expect(hasText(container, 'Study block complete')).toBe(true)
+    expect(hasText(container, 'No host mastery decision was invented')).toBe(true)
+    // No Tutor event was ever appended, because no Tutor was asked.
+    expect(durable.events.map((event) => event.type)).not.toContain('tutor-directive')
   })
 })

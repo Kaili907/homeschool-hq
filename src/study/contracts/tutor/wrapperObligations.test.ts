@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
@@ -12,6 +12,7 @@ import {
 import { STUDY_TUTOR_CONTRACT_VERSION, type StudyTutorLaunch, type StudyTutorRuntime, type StudyTutorTurn } from './runtime'
 import {
   STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT,
+  STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT,
   STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT,
   STUDY_TUTOR_WRAPPER_LANDING_REQUIREMENTS,
 } from './wrapperObligations'
@@ -193,8 +194,8 @@ describe('F1 — launch must be awaited before durable preparation', () => {
 })
 
 describe('wrapper landing requirements', () => {
-  it('names both conditions the contract cannot close by itself', () => {
-    expect(STUDY_TUTOR_WRAPPER_LANDING_REQUIREMENTS).toHaveLength(2)
+  it('names every condition the contract cannot close by itself', () => {
+    expect(STUDY_TUTOR_WRAPPER_LANDING_REQUIREMENTS).toHaveLength(3)
     for (const requirement of STUDY_TUTOR_WRAPPER_LANDING_REQUIREMENTS) {
       expect(requirement.id).toBe('WRAPPER_LANDING_REQUIREMENT')
       // Whatever the status, the enforcement stays with the wrapper's own
@@ -207,6 +208,39 @@ describe('wrapper landing requirements', () => {
     expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.condition).toBe('F1')
     expect(STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.requirement).toBe('AWAIT_LAUNCH_BEFORE_DURABLE_PREPARATION')
     expect(STUDY_TUTOR_PARSE_BEFORE_HOST_REQUIREMENT.condition).toBe('F4')
+    expect(STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT.condition).toBe('F5')
+    // Each condition appears exactly once: a duplicated entry would let a card
+    // "add" a requirement without adding one.
+    expect(new Set(STUDY_TUTOR_WRAPPER_LANDING_REQUIREMENTS.map((r) => r.condition)).size).toBe(3)
+  })
+
+  it('records F5 as open, with the legacy fallback deliberately left in place', () => {
+    // The card's own summary, as data. `legacySelectorRemainsFallback` is the
+    // one a later reader most needs: `selectTutorProgram` STILL answers an
+    // unmatched routing id with `registration.programs[0]`, because the mounted
+    // preview host depends on it, and the production selector is a separate
+    // function that answers `null`. A card that removed the fallback and left
+    // this `true` would be lying here rather than silently.
+    expect(STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT.status).toBe('open')
+    expect(STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT.legacySelectorRemainsFallback).toBe(true)
+    expect(STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT.productionSelector).toBe('selectEligibleTutorProgram')
+    expect(STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT.malformedReferencePolicy).toBe('reject-not-truncate')
+    // No learner grade authority, stated as data so a later card cannot quietly
+    // introduce one and leave the claim standing.
+    expect(STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT.usesLearnerGradeAuthority).toBe(false)
+    expect(STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT.residualBypass)
+      .toBe('calling-settleStudyTutorLaunch-directly')
+  })
+
+  it('pins the four steps content eligibility must precede, launch first', () => {
+    // ZERO DURABLE WORK. The launch is first because eligibility is knowable
+    // before a Tutor session is opened, and F1's three durable preparations
+    // follow it — so this list is F1's with the launch prepended, and the
+    // assertion says exactly that rather than repeating three strings by hand.
+    expect([...STUDY_TUTOR_CONTENT_ELIGIBILITY_REQUIREMENT.mustPrecede]).toEqual([
+      'tutor-launch-settlement',
+      ...STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT.mustPrecede,
+    ])
   })
 
   it('pins the three durable preparations a launch must precede', () => {
@@ -345,11 +379,22 @@ describe('wrapper landing requirements', () => {
     // live inside the helper, so the container reaching them any other way
     // would show up as the container calling the ports directly during
     // preparation — which is what the integration test proves it does not.
-    const container = readFileSync(
-      join(root, '..', 'components', 'study', 'StudySessionContainer.tsx'),
-      'utf8',
-    )
-    expect(container).toMatch(/await settleStudyTutorLaunch\(/)
-    expect(container).toMatch(/prepareDurableStudySession\(settled,/)
+    //
+    // STUDY-A1-PRODUCTION-SAFE-CONTAINER — the host body is now
+    // studySessionSurface.tsx, rendered by both the preview and the production
+    // container. Reading it here is reading the one place the ordering exists.
+    const hostDirectory = join(root, '..', 'components', 'study')
+    const surface = readFileSync(join(hostDirectory, 'studySessionSurface.tsx'), 'utf8')
+    expect(surface).toMatch(/await settleStudyTutorLaunch\(/)
+    expect(surface).toMatch(/prepareDurableStudySession\(settled,/)
+
+    // ONE implementation, not two that agree. A production container with its
+    // own copy of the ordering would satisfy every assertion above while being
+    // free to drift from the preview one, and F1 would be closed for whichever
+    // of the two a later card happened to look at.
+    const orderingCallers = readdirSync(hostDirectory)
+      .filter((name) => (name.endsWith('.ts') || name.endsWith('.tsx')) && !name.includes('.test.'))
+      .filter((name) => readFileSync(join(hostDirectory, name), 'utf8').includes('settleStudyTutorLaunch'))
+    expect(orderingCallers).toEqual(['studySessionSurface.tsx'])
   })
 })

@@ -8,14 +8,14 @@ const root = resolve(import.meta.dirname, '..')
 const censusPath = join(root, 'src', 'study', 'studyConsumerPortInjectionCensus.test.ts')
 const portsPath = join(root, 'src', 'study', 'ports.ts')
 const tutorLaunchOrderingPath = join(root, 'src', 'study', 'production', 'tutorLaunchOrdering.ts')
-const studySessionContainerPath = join(root, 'src', 'components', 'study', 'StudySessionContainer.tsx')
+const studySessionSurfacePath = join(root, 'src', 'components', 'study', 'studySessionSurface.tsx')
 const tscPath = join(root, 'node_modules', 'typescript', 'bin', 'tsc')
 const vitestPath = join(root, 'node_modules', 'vitest', 'vitest.mjs')
 const originalBytes = new Map([
   [censusPath, readFileSync(censusPath)],
   [portsPath, readFileSync(portsPath)],
   [tutorLaunchOrderingPath, readFileSync(tutorLaunchOrderingPath)],
-  [studySessionContainerPath, readFileSync(studySessionContainerPath)],
+  [studySessionSurfacePath, readFileSync(studySessionSurfacePath)],
 ])
 const originals = new Map([...originalBytes].map(([file, contents]) => [file, contents.toString('utf8')]))
 const digest = (contents) => createHash('sha256').update(contents).digest('hex')
@@ -452,7 +452,7 @@ const cardMutants = [
   {
     id: 'M16',
     name: 'direct full bundle handed to production preparation',
-    file: studySessionContainerPath,
+    file: studySessionSurfacePath,
     needle:
       `      return await prepareDurableStudySession(settled, {\n` +
       `        token: surface.token,\n` +

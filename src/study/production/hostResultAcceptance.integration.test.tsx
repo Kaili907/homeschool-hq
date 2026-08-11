@@ -28,15 +28,18 @@
  * assertion in this file is the single one inside `ForgingTutorRuntime.submit`,
  * which IS the attack.
  */
+import { readFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { ProductionStudySessionContainer } from '../../components/study/ProductionStudySessionContainer'
 import {
   STUDY_BUSY_RETRY_MESSAGE,
   STUDY_SESSION_UNAVAILABLE_MESSAGE,
   STUDY_UNAVAILABLE_RETRY_MESSAGE,
-  StudySessionContainer,
-} from '../../components/study/StudySessionContainer'
+} from '../../components/study/studySessionSurface'
 import {
   createHostStudyLifecycleSeam,
   type HostStudyLifecycleSeam,
@@ -213,6 +216,12 @@ interface DurableWrites {
   readonly sessions: StudySessionSnapshot[]
 }
 
+function deferred(): { readonly promise: Promise<void>; readonly resolve: () => void } {
+  let resolve!: () => void
+  const promise = new Promise<void>((done) => { resolve = done })
+  return { promise, resolve }
+}
+
 describe('the production host reparses every Tutor result before it can act on one', () => {
   let container: FakeElement
   let documentTarget: FakeDocument
@@ -317,7 +326,7 @@ describe('the production host reparses every Tutor result before it can act on o
     roots.push(root)
     await act(async () => {
       root.render(
-        <StudySessionContainer
+        <ProductionStudySessionContainer
           context={options.hostContext ?? context}
           initialEntry={entry}
           ports={ports}
@@ -348,6 +357,62 @@ describe('the production host reparses every Tutor result before it can act on o
       await onClick()
     })
     await settle()
+  }
+
+  async function beginAnswerSubmission(text: string): Promise<{ readonly completion: Promise<void> }> {
+    const textarea = tags(container, 'TEXTAREA')[0]
+    if (!textarea) throw new Error('The live Study surface never rendered a response field.')
+    await act(async () => {
+      const onChange = reactProps(textarea).onChange as unknown as (event: unknown) => void
+      onChange({ target: { value: text } })
+    })
+    const send = control('Send through Tutor boundary')
+    if (!send) throw new Error('The live Study surface never rendered a submit control.')
+    let completion!: Promise<void>
+    await act(async () => {
+      const onClick = reactProps(send).onClick as unknown as () => void | Promise<void>
+      completion = Promise.resolve(onClick()).then(() => undefined)
+      await Promise.resolve()
+    })
+    return { completion }
+  }
+
+  function holdSafetyLedgerLock(): {
+    readonly entered: Promise<void>
+    readonly release: () => void
+  } {
+    const entered = deferred()
+    const released = deferred()
+    Object.assign(globalThis.navigator, {
+      locks: {
+        request: async <T,>(_name: string, callback: () => Promise<T>): Promise<T> => {
+          entered.resolve()
+          await released.promise
+          return callback()
+        },
+      },
+    })
+    return { entered: entered.promise, release: released.resolve }
+  }
+
+  async function beginHeldCanonicalStop(suffix: string): Promise<{
+    readonly epochA: ReturnType<HostStudyLifecycleSeam['boundary']['token']>
+    readonly completion: Promise<void>
+    readonly release: () => void
+  }> {
+    const heldLock = holdSafetyLedgerLock()
+    await mount({
+      suffix,
+      forge: () => acceptStudyTutorResult({
+        status: 'stopped',
+        reasonCode: 'mounted-input-safety-urgent',
+        deliveryStatus: 'proposed-not-delivered',
+      }),
+    })
+    const epochA = seam.boundary.token()
+    const { completion } = await beginAnswerSubmission('ready')
+    await heldLock.entered
+    return { epochA, completion, release: heldLock.release }
   }
 
   /** The whole durable footprint plus local storage, as one searchable string. */
@@ -559,6 +624,7 @@ describe('the production host reparses every Tutor result before it can act on o
         deliveryStatus: 'proposed-not-delivered',
       }),
     })
+    const originatingEpoch = seam.boundary.token()
     await submitAnswer('ready')
 
     // The reparse must not have cost a real stop its durability. This is the
@@ -573,6 +639,194 @@ describe('the production host reparses every Tutor result before it can act on o
     })
     expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(true)
     expect(hasText(container, 'Study paused')).toBe(true)
+    expect(originatingEpoch.isCurrent()).toBe(false)
+    expect(seam.boundary.lastReason).toBe('safety-stop')
+  })
+
+  it('does not let an old safety-stop completion cancel the newer learner epoch', async () => {
+    const { epochA, completion: oldCompletion, release } = await beginHeldCanonicalStop(
+      'stale-safety-stop-epoch-a',
+    )
+
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-stale-authority:epoch-b',
+      learnerRef: 'learner:epoch-b',
+      launchGrantRef: 'opaque-grant-epoch:2',
+      authorizationRevision: 2,
+    })
+    const epochB = seam.boundary.token()
+    expect(epochA.isCurrent()).toBe(false)
+    expect(epochB.isCurrent()).toBe(true)
+
+    release()
+    await act(async () => { await oldCompletion })
+    await settle()
+
+    expect(epochB.isCurrent()).toBe(true)
+    expect(seam.boundary.binding?.learnerRef).toBe('learner:epoch-b')
+    expect(seam.boundary.lastReason).not.toBe('safety-stop')
+    expect(durable.events.map((event) => event.type)).not.toContain('safety-stop')
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(false)
+    const records = readLocalSafetyStops(storage)
+    expect(records).toHaveLength(1)
+    expect(records[0]).toMatchObject({ studentRef: context.learnerRef, sessionRef })
+    expect(records.some((record) => record.studentRef === 'learner:epoch-b')).toBe(false)
+  })
+
+  it('does not let Epoch A cancel Epoch C after two authority rotations while its lock waits', async () => {
+    const { epochA, completion, release } = await beginHeldCanonicalStop(
+      'stale-safety-stop-epoch-a-to-b-to-c',
+    )
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-stale-authority:epoch-b',
+      learnerRef: 'learner:epoch-b',
+      launchGrantRef: 'opaque-grant-epoch:2',
+      authorizationRevision: 2,
+    })
+    const epochB = seam.boundary.token()
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-stale-authority:epoch-c',
+      learnerRef: 'learner:epoch-c',
+      launchGrantRef: 'opaque-grant-epoch:3',
+      authorizationRevision: 3,
+    })
+    const epochC = seam.boundary.token()
+    expect(epochA.isCurrent()).toBe(false)
+    expect(epochB.isCurrent()).toBe(false)
+    expect(epochC.isCurrent()).toBe(true)
+
+    release()
+    await act(async () => { await completion })
+    await settle()
+
+    expect(epochB.isCurrent()).toBe(false)
+    expect(epochC.isCurrent()).toBe(true)
+    expect(seam.boundary.binding?.learnerRef).toBe('learner:epoch-c')
+    expect(durable.events.map((event) => event.type)).not.toContain('safety-stop')
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(false)
+  })
+
+  it('uses epoch identity rather than learner equality for a same-learner replacement session', async () => {
+    const { epochA, completion, release } = await beginHeldCanonicalStop(
+      'stale-safety-stop-same-learner-new-epoch',
+    )
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-stale-authority:same-learner-epoch-b',
+      launchGrantRef: 'opaque-grant-same-learner-epoch:2',
+      authorizationRevision: 2,
+    })
+    const replacementEpoch = seam.boundary.token()
+    expect(epochA.binding.learnerRef).toBe(replacementEpoch.binding.learnerRef)
+    expect(epochA.isCurrent()).toBe(false)
+    expect(replacementEpoch.isCurrent()).toBe(true)
+
+    release()
+    await act(async () => { await completion })
+    await settle()
+
+    expect(replacementEpoch.isCurrent()).toBe(true)
+    expect(seam.boundary.binding?.authenticatedSessionRef).toContain('same-learner-epoch-b')
+    expect(durable.events.map((event) => event.type)).not.toContain('safety-stop')
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(false)
+  })
+
+  it('stops after a swallowed stale event-append rejection instead of finalizing against Epoch B', async () => {
+    await mount({
+      suffix: 'stale-during-safety-event-append',
+      forge: () => acceptStudyTutorResult({
+        status: 'stopped',
+        reasonCode: 'mounted-input-safety-urgent',
+        deliveryStatus: 'proposed-not-delivered',
+      }),
+    })
+    const appendEntered = deferred()
+    const appendReleased = deferred()
+    Object.assign(ports, { eventLedger: {
+      append: async () => {
+        appendEntered.resolve()
+        await appendReleased.promise
+        throw new Error('event ledger unavailable')
+      },
+    } })
+    const epochA = seam.boundary.token()
+    const { completion } = await beginAnswerSubmission('ready')
+    await appendEntered.promise
+
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-stale-append:epoch-b',
+      learnerRef: 'learner:stale-append-epoch-b',
+      launchGrantRef: 'opaque-grant-stale-append:2',
+      authorizationRevision: 2,
+    })
+    const epochB = seam.boundary.token()
+    expect(epochA.isCurrent()).toBe(false)
+    expect(epochB.isCurrent()).toBe(true)
+
+    appendReleased.resolve()
+    await act(async () => { await completion })
+    await settle()
+
+    expect(epochB.isCurrent()).toBe(true)
+    expect(seam.boundary.lastReason).not.toBe('safety-stop')
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(false)
+    expect(durable.events.map((event) => event.type)).not.toContain('safety-stop')
+  })
+
+  it('does not let an unmounted Epoch A completion cancel a newly mounted current epoch', async () => {
+    const { epochA, completion, release } = await beginHeldCanonicalStop(
+      'stale-safety-stop-unmounted-epoch-a',
+    )
+    const oldRoot = roots.pop()
+    if (!oldRoot) throw new Error('The Epoch A root was not mounted.')
+    await act(async () => { oldRoot.unmount() })
+
+    const epochBContext = { ...context, learnerRef: 'learner:newly-mounted-epoch-b' }
+    seam.boundary.beginEpoch({
+      ...seam.binding,
+      authenticatedSessionRef: 'host-lifecycle:study-a1-unmount:epoch-b',
+      learnerRef: epochBContext.learnerRef,
+      launchGrantRef: 'opaque-grant-unmount:2',
+      authorizationRevision: 2,
+    })
+    const epochBBinding = seam.boundary.binding
+    if (!epochBBinding) throw new Error('Epoch B did not bind.')
+    const epochBSeam: HostStudyLifecycleSeam = Object.freeze({
+      boundary: seam.boundary,
+      binding: epochBBinding,
+    })
+    const epochB = seam.boundary.token()
+    container = documentTarget.createElement('div')
+    documentTarget.body.appendChild(container)
+    const newRoot = createRoot(container as unknown as Element)
+    roots.push(newRoot)
+    await act(async () => {
+      newRoot.render(
+        <ProductionStudySessionContainer
+          context={epochBContext}
+          initialEntry={entry}
+          ports={ports}
+          studyLifecycle={epochBSeam}
+          tutorRuntime={runtime}
+          onBack={() => {}}
+        />,
+      )
+    })
+    await settle()
+    expect(epochA.isCurrent()).toBe(false)
+    expect(epochB.isCurrent()).toBe(true)
+
+    release()
+    await act(async () => { await completion })
+    await settle()
+
+    expect(epochB.isCurrent()).toBe(true)
+    expect(seam.boundary.binding?.learnerRef).toBe(epochBContext.learnerRef)
+    expect(seam.boundary.lastReason).not.toBe('safety-stop')
   })
 
   it('preserves a genuine rate-limit interruption whose result really is canonical', async () => {
@@ -770,6 +1024,103 @@ describe('the production host reparses every Tutor result before it can act on o
 
     expect(reasonCodeReads).toBe(1)
     expect(deliveryStatusReads).toBe(1)
+  })
+
+  it('reads a stopped child the HOST’s words, never words the Tutor smuggled past the parser', async () => {
+    /**
+     * STUDY-A1-PRODUCTION-SAFE-CONTAINER, and the honest version of what this
+     * card's mutation campaign found.
+     *
+     * Two mutants of the seam's stopped arm SURVIVED — `studentMessage` taken
+     * from the raw object, and `studentMessage` set to the operator reason code.
+     * Both are DECLARED EQUIVALENT, and the reason is worth stating because it
+     * is not the reason it first looked like.
+     *
+     * `StudyHostTurnResult`'s `studentMessage` reaches `setJarvisText` and stops
+     * there. The locked surface does not render `jarvisText`: it passes
+     * STUDY_LEARNER_STOP_MESSAGE directly, as a constant, and once `stopped` is
+     * true the branch that would have shown `jarvisText` is unreachable. So no
+     * value the seam puts in that field can be displayed to a stopped child by
+     * this surface, and no behavioural fixture can distinguish the mutants.
+     *
+     * The guarantee is therefore STRUCTURAL, and this test pins the structure
+     * rather than pretending a behavioural pin exists — the counterpart
+     * assertion at the end is the one that would fail if a later card wired the
+     * locked surface to `jarvisText` and made the field live.
+     *
+     * What IS behavioural here is the rest, and it is not vacuous: prose that a
+     * Tutor smuggles past the parser must reach no durable write, no safety
+     * ledger entry, no screen and no log, on the one path that genuinely writes.
+     *
+     * THE FIXTURE HAS TO DEFEAT THE PARSER TO REACH THE STOPPED BRANCH AT ALL.
+     * `parseStudyTutorResult` admits an exact key set per branch using
+     * `Reflect.ownKeys`, so an OWN `studentMessage` — enumerable or not — is
+     * rejected and the result becomes `quarantined`, which never enters the
+     * stopped branch. Inherited properties are not own keys, so the message
+     * rides the PROTOTYPE: the parser sees a clean two-key stopped result and
+     * accepts it, the stop is genuine and durable, and `raw.studentMessage`
+     * still resolves for anything that reaches back for it. That is not a
+     * contrived shape — it is what a transport wrapper returning a class
+     * instance produces.
+     */
+    const TUTOR_AUTHORED_WORDS = 'You are in serious trouble. Do not tell your parents about this.'
+    class TransportStoppedResult {
+      readonly status = 'stopped'
+      readonly reasonCode = 'mounted-input-safety-urgent'
+      readonly deliveryStatus = 'proposed-not-delivered'
+    }
+    // On the prototype, so it is invisible to Reflect.ownKeys and therefore to
+    // the parser's key check, while `forged.studentMessage` still reads it.
+    Object.defineProperty(TransportStoppedResult.prototype, 'studentMessage', {
+      value: TUTOR_AUTHORED_WORDS,
+      enumerable: false,
+    })
+    const forged = new TransportStoppedResult()
+    // The fixture cannot fail silently: if the parser ever starts rejecting this
+    // shape, the stopped branch stops running and the assertions below would be
+    // proving nothing. Both halves are stated.
+    expect(Reflect.ownKeys(forged)).toEqual(['status', 'reasonCode', 'deliveryStatus'])
+    expect((forged as { studentMessage?: string }).studentMessage).toBe(TUTOR_AUTHORED_WORDS)
+
+    await mount({ suffix: 'tutor-authored-stop-words', forge: () => forged })
+    await submitAnswer('ready')
+
+    // The stop is REAL: it parsed, it locked, and it was recorded. Without this
+    // the test would pass just as well against a container that quarantined.
+    expect(isLocked()).toBe(true)
+    expect(readLocalSafetyStops(storage)).toHaveLength(1)
+    expect(durable.events.find((event) => event.type === 'safety-stop')).toBeDefined()
+
+    // And she reads the host's words. Not the Tutor's — nowhere on the surface,
+    // nowhere durable, and nowhere in the log.
+    expect(hasText(container, STUDY_LEARNER_STOP_MESSAGE)).toBe(true)
+    expect(hasText(container, TUTOR_AUTHORED_WORDS)).toBe(false)
+    expect(hasText(container, 'Do not tell your parents')).toBe(false)
+    expect(durableFootprint()).not.toContain(TUTOR_AUTHORED_WORDS)
+    expect(durableFootprint()).not.toContain('Do not tell your parents')
+    expect(logged.join(' ')).not.toContain(TUTOR_AUTHORED_WORDS)
+
+    /**
+     * The structural counterpart, and the load-bearing half — see the note
+     * above on why the behavioural half cannot distinguish the two equivalent
+     * mutants.
+     *
+     * The locked surface renders the host's constant DIRECTLY. It does not
+     * render `jarvisText`, which is where a Tutor-authored message would have
+     * landed. Wiring those together is the one edit that would turn the
+     * equivalent mutants live, and it fails here.
+     */
+    const body = readFileSync(
+      resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', 'components', 'study', 'studySessionSurface.tsx'),
+      'utf8',
+    )
+    const lockedSurface = body.slice(body.indexOf('if (stopped) return ('), body.indexOf('if (loading) return'))
+    expect(lockedSurface).toContain('visibleText={STUDY_LEARNER_STOP_MESSAGE}')
+    expect(lockedSurface).not.toContain('jarvisText')
+    // And the slice really is the locked surface, so the two assertions above
+    // are about the screen a stopped child sees rather than about an empty
+    // string that trivially satisfies both.
+    expect(lockedSurface).toContain('data-study-stopped="true"')
   })
 
   it('holds the REBUILT interruption, not the Tutor object that produced it', async () => {

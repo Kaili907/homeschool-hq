@@ -6,6 +6,12 @@ import {
   type StudyStudentCapability,
   type VerifiedStudySession,
 } from '../contracts/identity/session'
+import type { StudyAcademicOperation } from '../contracts/identity/academicOperations'
+
+export {
+  STUDY_ACADEMIC_OPERATIONS,
+  type StudyAcademicOperation,
+} from '../contracts/identity/academicOperations'
 
 export type StudyIdentityClientErrorCode =
   | 'unauthenticated'
@@ -59,13 +65,7 @@ export interface StudyIdentityClient {
     readonly signal?: AbortSignal
   }): Promise<VerifiedStudySession>
   executeAcademicOperation(input: {
-    readonly operation:
-      | 'dashboard:read'
-      | 'calendar:read'
-      | 'session:begin'
-      | 'session:transition'
-      | 'checkpoint:read'
-      | 'checkpoint:compare-and-swap'
+    readonly operation: StudyAcademicOperation
     readonly request: Readonly<Record<string, unknown>>
     readonly signal?: AbortSignal
   }): Promise<unknown>

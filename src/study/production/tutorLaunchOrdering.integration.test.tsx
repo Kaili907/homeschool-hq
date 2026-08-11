@@ -3,9 +3,15 @@
  *
  * STUDY_TUTOR_AWAIT_LAUNCH_REQUIREMENT names three durable preparations that
  * must not precede a settled launch: calendar start, the session-launched event,
- * and session persistence. This file drives the REAL StudySessionContainer
- * against REAL Study ports that record what was actually called, and orders a
- * rejecting launch against every one of them.
+ * and session persistence. This file drives the REAL containers against REAL
+ * Study ports that record what was actually called, and orders a rejecting
+ * launch against every one of them.
+ *
+ * STUDY-A1-PRODUCTION-SAFE-CONTAINER — the production mounts moved to
+ * ProductionStudySessionContainer and the preview mount stayed on
+ * StudySessionContainer, which is the point of the last test in this file: both
+ * containers render one shared body, so the LaunchSettled witness they are held
+ * to is the same witness and not two that happen to agree today.
  *
  * Nothing here is faked at the point that matters. The ports are the local
  * development bundle wrapped in recorders, so `calendar.start` really transitions
@@ -23,6 +29,7 @@
 import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { ProductionStudySessionContainer } from '../../components/study/ProductionStudySessionContainer'
 import { StudySessionContainer } from '../../components/study/StudySessionContainer'
 import {
   createHostStudyLifecycleSeam,
@@ -303,7 +310,7 @@ describe('production Tutor launch ordering against the real host', () => {
   it('writes nothing durable when the production launch rejects', async () => {
     const tutor = new LateSettlingTutorRuntime(log, 'reject')
     await render(
-      <StudySessionContainer
+      <ProductionStudySessionContainer
         context={context}
         initialEntry={entry}
         ports={ports}
@@ -335,7 +342,7 @@ describe('production Tutor launch ordering against the real host', () => {
   it('writes all three durable records, and only after the launch settles', async () => {
     const tutor = new LateSettlingTutorRuntime(log, 'resolve')
     await render(
-      <StudySessionContainer
+      <ProductionStudySessionContainer
         context={context}
         initialEntry={entry}
         ports={ports}
@@ -367,7 +374,7 @@ describe('production Tutor launch ordering against the real host', () => {
       seam.boundary.cancel('learner-switch')
     })
     await render(
-      <StudySessionContainer
+      <ProductionStudySessionContainer
         context={context}
         initialEntry={entry}
         ports={ports}
