@@ -345,10 +345,20 @@
       "supersessionStatus": "current"
     },
     {
+      "version": "20260810190000",
+      "filename": "20260810190000_academy_curriculum_write_reauthorization.sql",
+      "sha256": "11263d264c80bc599aff13f73128c3a7b6cbb3726603277237d61fe8c951f522",
+      "dependency": "20260810180000_academy_admin_correlation_runtime_read.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-curriculum-write-reauthorization-v1",
+      "supersessionStatus": "current"
+    },
+    {
       "version": "20260810200000",
       "filename": "20260810200000_academy_admin_curriculum_performance_bounds.sql",
       "sha256": "d8ccaf7a6e9c9ae77dcf55e63d50ac12efc5d6d65ef175413cfd45c45745ee1a",
-      "dependency": "20260810180000_academy_admin_correlation_runtime_read.sql",
+      "dependency": "20260810190000_academy_curriculum_write_reauthorization.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-curriculum-performance-bounds-v1",
