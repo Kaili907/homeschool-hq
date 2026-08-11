@@ -318,6 +318,13 @@ describe('curriculum release staging database boundary', () => {
   it('rejects revision mismatch and target-version collision without overwriting a candidate', async () => {
     const database = databases[0]
     const first = await eligible(database, '2.0.0-collision.1')
+    const wrongIdentity = await eligible(database, '2.0.0-wrong-identity.1')
+    await expect(stage(database, {
+      draftId: first.draft.draftId, revision: 1, target: '2.0.0-collision.1',
+      validationId: wrongIdentity.validation.validationSnapshotId,
+      approvalId: first.approval.currentDecision.approvalId,
+      request: crypto.randomUUID(),
+    })).rejects.toThrow('CURRICULUM_STAGING_GATE_BLOCKED')
     await expect(stage(database, {
       draftId: first.draft.draftId, revision: 2, target: '2.0.0-collision.1',
       validationId: first.validation.validationSnapshotId,
@@ -356,6 +363,8 @@ describe('curriculum release staging database boundary', () => {
     expect(semantic.replayed).toBe(true)
     expect(semantic.candidate.stagingId).toBe(first.candidate.stagingId)
     await expect(stage(database, { ...input, requestDigest: HASH_B }))
+      .rejects.toThrow('CURRICULUM_STAGING_REPLAY_CONFLICT')
+    await expect(stage(database, { ...input, packageHash: HASH_B }))
       .rejects.toThrow('CURRICULUM_STAGING_REPLAY_CONFLICT')
     expect((await database.query('select count(*)::integer as count from public.academy_curriculum_staged_releases')).rows[0])
       .toEqual({ count: 1 })
@@ -422,6 +431,36 @@ describe('curriculum release staging database boundary', () => {
     expect(JSON.stringify(event)).not.toMatch(/payload|learning_objectives|scoring_guidance/i)
   })
 
+  it('rolls back candidate custody and receipt when the staging audit append fails', async () => {
+    const database = databases[0]
+    const ready = await eligible(database, '2.0.0-audit-failure.1')
+    await database.exec(`
+      create function public.test_staging_audit_failure()
+      returns trigger language plpgsql as $$
+      begin raise exception 'forced staging audit failure'; end;
+      $$;
+      create trigger test_staging_audit_failure
+      before insert on academy_private.admin_audit_events
+      for each row when (new.action = 'curriculum_release.stage')
+      execute function public.test_staging_audit_failure();
+    `)
+    await expect(stage(database, {
+      draftId: ready.draft.draftId, revision: 1,
+      target: '2.0.0-audit-failure.1',
+      validationId: ready.validation.validationSnapshotId,
+      approvalId: ready.approval.currentDecision.approvalId,
+      request: '56000000-0000-4000-8000-000000000001',
+    })).rejects.toThrow('forced staging audit failure')
+    expect((await database.query<any>(`
+      select
+        (select count(*) from public.academy_curriculum_staged_releases)::integer as candidates,
+        (select count(*) from public.academy_curriculum_staged_release_artifacts)::integer as artifacts,
+        (select count(*) from academy_private.curriculum_staging_request_receipts)::integer as receipts,
+        (select count(*) from academy_private.admin_audit_events
+          where action = 'curriculum_release.stage')::integer as audits
+    `)).rows[0]).toEqual({ candidates: 0, artifacts: 0, receipts: 0, audits: 0 })
+  })
+
   it('keeps storage forced-RLS, append-only, runtime-isolated, and migration-hash pinned', async () => {
     const database = databases[0]
     for (const table of [
@@ -461,7 +500,13 @@ describe('curriculum release staging database boundary', () => {
     })
     await expect(database.exec('delete from public.academy_curriculum_staged_releases'))
       .rejects.toThrow('immutable')
+    await expect(database.exec('update public.academy_curriculum_staged_releases set status = status'))
+      .rejects.toThrow('immutable')
     await expect(database.exec('update public.academy_curriculum_staged_release_artifacts set byte_count = 3'))
+      .rejects.toThrow('immutable')
+    await expect(database.exec('delete from public.academy_curriculum_staged_release_artifacts'))
+      .rejects.toThrow('immutable')
+    await expect(database.exec('delete from academy_private.curriculum_staging_request_receipts'))
       .rejects.toThrow('immutable')
 
     const runtime = await readFile(new URL('../src/academy/contentClient.ts', import.meta.url), 'utf8')

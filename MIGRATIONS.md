@@ -27,8 +27,12 @@ The trusted-server transition RPC independently reauthorizes the frozen
 `releases:manage` capability against the actor's current assignment, locks the
 pointer, checks the expected revision, and atomically writes the current
 pointer, transition history, bounded audit event, and receipt. Exact replay is
-safe, changed request reuse conflicts, and an already-active target is a
-truthful no-op with no duplicate history.
+safe only while its recorded pointer result remains current; a later governed
+transition makes the old receipt return a pointer conflict instead of stale
+success. Changed request reuse conflicts, and an already-active target is a
+truthful no-op with no duplicate history. Staged-publish activation also binds
+the published package identity and aggregate entity counts back to the exact
+staging manifest.
 
 The RPC never reads or writes learner profiles. Existing
 `Profile.academy.releaseVersion` pins remain unchanged; any repin requires a
@@ -46,6 +50,8 @@ The migration publishes one exact immutable staging identity into the release
 registry without changing the production pointer. It rechecks the persisted
 draft revision, validation and approval identities, every canonical artifact
 byte and SHA-256, the manifest inventory and SHA-256, and the package SHA-256.
+The manifest must name the canonical Manuel Academy curriculum package; a
+different but syntactically valid package identity fails verification.
 New releases retain their staging foreign key and the content, manifest, and
 package hashes; operational timestamps are never used to join provenance.
 
@@ -69,7 +75,9 @@ independently reauthorizes `curriculum:publish`, rechecks the approval
 `publishGate`, rejects release or staged-version collisions, and writes the
 candidate, complete deterministic Schema v2 artifacts, receipt, and bounded
 audit event in one transaction. Exact and semantic retries resolve to the same
-candidate; conflicting identity reuse fails closed.
+candidate; the receipt is rebound to the persisted draft, validation,
+approval, manifest, artifact, and package identities on replay, so conflicting
+identity reuse fails closed even if a caller repeats an old digest.
 
 Candidate and artifact rows are append-only, forced-RLS, and inaccessible by
 application roles. Their state is only `staged` / `not_published`; no published

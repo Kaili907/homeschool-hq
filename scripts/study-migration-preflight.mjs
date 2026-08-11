@@ -39,9 +39,11 @@ export async function validateMigrationManifest(manifest, migrationDirectory) {
   if (entries.some((entry, index) =>
     entry?.dependency !== (index === 0 ? null : filenames[index - 1])
   )) reasons.push('migration-dependency-invalid')
+  // The hosted-equivalent baseline is the four-migration v2.2 chain:
+  // profiles, student identity, household CAS, and gateway usage.
   if (entries.some((entry, index) =>
-    (index < 3 && entry?.classification !== 'historical-baseline') ||
-    (index >= 3 && entry?.classification !== 'executable') ||
+    (index < 4 && entry?.classification !== 'historical-baseline') ||
+    (index >= 4 && entry?.classification !== 'executable') ||
     typeof entry?.applicationStatus !== 'string' ||
     typeof entry?.requiredMarkerTransition !== 'string' ||
     entry.requiredMarkerTransition.length === 0 ||

@@ -197,7 +197,7 @@
     {
       "version": "20260810150000",
       "filename": "20260810150000_academy_curriculum_release_staging.sql",
-      "sha256": "e47f8d6b58843234f13315849d8b5fdb74f33433d13944733fd2fdea895c4aac",
+      "sha256": "c7976b3680a529d2cfb35650c50de065b2b08ff455097878daf1db09fd9144ca",
       "dependency": "20260810140000_academy_curriculum_human_approval.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
@@ -207,7 +207,7 @@
     {
       "version": "20260810160000",
       "filename": "20260810160000_academy_curriculum_release_publishing.sql",
-      "sha256": "ba9291c66af40dcc693532aef6db94f9bc4fa5b6937369407c8a3a7de2d5dece",
+      "sha256": "5e5b1df65106561399cb36b29c2585fc758f8d1c1b255ca39d38881c628e930e",
       "dependency": "20260810150000_academy_curriculum_release_staging.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
@@ -217,7 +217,7 @@
     {
       "version": "20260810170000",
       "filename": "20260810170000_academy_curriculum_activation_rollback.sql",
-      "sha256": "6d7d3cbbe740e1153aa6303ae90480beec2dcac7e29fff91754e05c58614f0da",
+      "sha256": "4af0aedaae7a781da811652d967d399d5614d9372fbfe10fdbc158724c9273ec",
       "dependency": "20260810160000_academy_curriculum_release_publishing.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",

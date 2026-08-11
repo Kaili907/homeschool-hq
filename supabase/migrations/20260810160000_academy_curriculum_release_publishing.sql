@@ -245,7 +245,8 @@ begin
   manifest_identity_verified :=
     candidate.manifest_canonical::jsonb = candidate.manifest
     and candidate.manifest ->> 'packageFormat' = 'manuel-academy-curriculum-staged-v1'
-    and candidate.manifest #>> '{releaseIdentity,packageId}' ~ '^[a-z0-9][a-z0-9-]{0,119}$'
+    and candidate.manifest #>> '{releaseIdentity,packageId}' =
+      'manuel-academy-grades-5-7-8-curriculum-v1'
     and candidate.manifest #>> '{releaseIdentity,version}' = candidate.target_version
     and candidate.manifest ->> 'baseReleaseVersion' = (
       select release.version from public.academy_curriculum_releases as release

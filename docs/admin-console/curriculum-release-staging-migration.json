@@ -1,6 +1,6 @@
 {
   "migration": "supabase/migrations/20260810150000_academy_curriculum_release_staging.sql",
-  "sha256": "e47f8d6b58843234f13315849d8b5fdb74f33433d13944733fd2fdea895c4aac",
+  "sha256": "c7976b3680a529d2cfb35650c50de065b2b08ff455097878daf1db09fd9144ca",
   "status": "repository-only-not-applied-hosted",
   "dependsOn": [
     "20260809160000_academy_curriculum_release_registry.sql",

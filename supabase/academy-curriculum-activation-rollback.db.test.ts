@@ -474,6 +474,29 @@ describe('curriculum activation and rollback database boundary', () => {
     `)).rows[0]).toEqual({ version: '1.0.0', revision: 1 })
   })
 
+  it('rejects activation when staged-publish release metadata no longer matches its manifest', async () => {
+    const database = databases[0]
+    const pipeline = await stageVerifyPublish(database, '3.1.1')
+    await database.exec(`
+      alter table public.academy_curriculum_releases
+        disable trigger academy_curriculum_releases_immutable;
+    `)
+    await database.query(`
+      update public.academy_curriculum_releases
+      set package_id = 'tampered-curriculum-package'
+      where release_id = $1
+    `, [pipeline.stagingId])
+    await expect(transition(database, { target: '3.1.1', request: crypto.randomUUID() }))
+      .rejects.toThrow('CURRICULUM_ACTIVATION_ARTIFACTS_UNAVAILABLE')
+    expect((await database.query<any>(`
+      select release.version, pointer.revision
+      from public.academy_curriculum_active_pointers as pointer
+      join public.academy_curriculum_releases as release
+        on release.release_id = pointer.release_id
+      where pointer.environment = 'production'
+    `)).rows[0]).toEqual({ version: '1.0.0', revision: 1 })
+  })
+
   it('activates only an artifact-complete immutable PUBLISHED release with pointer CAS', async () => {
     const database = databases[0]
     const releaseBefore = (await database.query(
@@ -503,6 +526,9 @@ describe('curriculum activation and rollback database boundary', () => {
 
   it('rejects staged-only, nonexistent, and missing-artifact targets', async () => {
     const database = databases[0]
+    await expect(transition(database, {
+      target: '2.0.0', kind: 'rollback', request: crypto.randomUUID(),
+    })).rejects.toThrow('CURRICULUM_ACTIVATION_KIND_CONFLICT')
     await insertStagedOnlyRelease(database)
     await expect(transition(database, { target: '3.0.0' }))
       .rejects.toThrow('CURRICULUM_ACTIVATION_TARGET_NOT_PUBLISHED')
@@ -541,6 +567,8 @@ describe('curriculum activation and rollback database boundary', () => {
       'select count(*)::integer count from public.academy_curriculum_pointer_transitions',
     )).rows[0]).toEqual({ count: 1 })
     await expect(transition(database, { target: '1.0.0', digest: HASH_B }))
+      .rejects.toThrow('CURRICULUM_ACTIVATION_REPLAY_CONFLICT')
+    await expect(transition(database, { target: '2.0.0' }))
       .rejects.toThrow('CURRICULUM_ACTIVATION_REPLAY_CONFLICT')
   })
 
@@ -586,6 +614,26 @@ describe('curriculum activation and rollback database boundary', () => {
     )).rows[0]).toEqual(learnerBefore)
   })
 
+  it('rejects a stale success receipt after the pointer has advanced again', async () => {
+    const database = databases[0]
+    const activationRequest = '53000000-0000-4000-8000-000000000001'
+    await transition(database, { request: activationRequest })
+    await transition(database, {
+      target: '1.0.0', expected: 2, kind: 'rollback',
+      request: '53000000-0000-4000-8000-000000000002',
+    })
+
+    await expect(transition(database, { request: activationRequest }))
+      .rejects.toThrow('CURRICULUM_ACTIVATION_POINTER_CONFLICT')
+    expect((await database.query<any>(`
+      select release.version, pointer.revision
+      from public.academy_curriculum_active_pointers as pointer
+      join public.academy_curriculum_releases as release
+        on release.release_id = pointer.release_id
+      where pointer.environment = 'production'
+    `)).rows[0]).toEqual({ version: '1.0.0', revision: 3 })
+  })
+
   it('reauthorizes releases:manage in the DB and requires a current assignment', async () => {
     const database = databases[0]
     await expect(transition(database, { actor: ADMIN }))
@@ -627,7 +675,18 @@ describe('curriculum activation and rollback database boundary', () => {
     expect(JSON.stringify(event)).not.toMatch(/payload|lesson|assessment|profile/i)
     expect(result.history[0].correlationId).toBe(event.correlation_id)
 
+    await expect(database.exec(`
+      update public.academy_curriculum_active_pointers
+      set revision = revision + 1
+      where environment = 'production'
+    `)).rejects.toThrow('governed forward transition')
+    await expect(database.exec(`
+      delete from public.academy_curriculum_active_pointers
+      where environment = 'production'
+    `)).rejects.toThrow('cannot be deleted')
     await expect(database.exec('delete from public.academy_curriculum_pointer_transitions'))
+      .rejects.toThrow('append-only')
+    await expect(database.exec('update public.academy_curriculum_pointer_transitions set revision = revision'))
       .rejects.toThrow('append-only')
     await expect(database.exec('update academy_private.curriculum_pointer_request_receipts set response = response'))
       .rejects.toThrow('append-only')
@@ -643,6 +702,66 @@ describe('curriculum activation and rollback database boundary', () => {
         expect(privilege.rows[0].allowed, `${role}:${table}`).toBe(false)
       }
     }
+  })
+
+  it('rolls back pointer, history, audit, and receipt together on audit failure', async () => {
+    const database = databases[0]
+    await database.exec(`
+      create function public.test_pointer_audit_failure()
+      returns trigger language plpgsql as $$
+      begin raise exception 'forced pointer audit failure'; end;
+      $$;
+      create trigger test_activation_audit_failure
+      before insert on academy_private.admin_audit_events
+      for each row when (new.action = 'release.activate')
+      execute function public.test_pointer_audit_failure();
+    `)
+    await expect(transition(database, {
+      request: '57000000-0000-4000-8000-000000000001',
+    })).rejects.toThrow('forced pointer audit failure')
+    expect((await database.query<any>(`
+      select release.version, pointer.revision,
+        (select count(*) from public.academy_curriculum_pointer_transitions)::integer as history_count,
+        (select count(*) from academy_private.curriculum_pointer_request_receipts)::integer as receipt_count,
+        (select count(*) from academy_private.admin_audit_events
+          where action = 'release.activate')::integer as audit_count
+      from public.academy_curriculum_active_pointers as pointer
+      join public.academy_curriculum_releases as release
+        on release.release_id = pointer.release_id
+      where pointer.environment = 'production'
+    `)).rows[0]).toEqual({
+      version: '1.0.0', revision: 1, history_count: 1,
+      receipt_count: 0, audit_count: 0,
+    })
+
+    await database.exec('drop trigger test_activation_audit_failure on academy_private.admin_audit_events')
+    await transition(database, {
+      request: '57000000-0000-4000-8000-000000000002',
+    })
+    await database.exec(`
+      create trigger test_rollback_audit_failure
+      before insert on academy_private.admin_audit_events
+      for each row when (new.action = 'release.rollback')
+      execute function public.test_pointer_audit_failure();
+    `)
+    await expect(transition(database, {
+      target: '1.0.0', expected: 2, kind: 'rollback',
+      request: '57000000-0000-4000-8000-000000000003',
+    })).rejects.toThrow('forced pointer audit failure')
+    expect((await database.query<any>(`
+      select release.version, pointer.revision,
+        (select count(*) from public.academy_curriculum_pointer_transitions)::integer as history_count,
+        (select count(*) from academy_private.curriculum_pointer_request_receipts)::integer as receipt_count,
+        (select count(*) from academy_private.admin_audit_events
+          where action = 'release.rollback')::integer as rollback_audit_count
+      from public.academy_curriculum_active_pointers as pointer
+      join public.academy_curriculum_releases as release
+        on release.release_id = pointer.release_id
+      where pointer.environment = 'production'
+    `)).rows[0]).toEqual({
+      version: '2.0.0', revision: 2, history_count: 2,
+      receipt_count: 1, rollback_audit_count: 0,
+    })
   })
 
   it('pins the repository-only migration custody hash', async () => {

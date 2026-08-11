@@ -543,7 +543,31 @@ begin
   from academy_private.curriculum_staging_request_receipts
   where actor_user_ref = p_actor_user_ref and request_id = p_request_id;
   if receipt.request_id is not null then
-    if receipt.request_sha256 <> p_request_digest then
+    select * into existing_candidate
+    from public.academy_curriculum_staged_releases
+    where staging_id = receipt.staging_id;
+    if receipt.request_sha256 <> p_request_digest
+       or existing_candidate.draft_id is distinct from p_draft_id
+       or existing_candidate.draft_revision is distinct from p_draft_revision
+       or existing_candidate.validation_snapshot_id
+          is distinct from p_validation_snapshot_id
+       or existing_candidate.approval_id is distinct from p_approval_id
+       or existing_candidate.content_sha256 is distinct from p_content_sha256
+       or existing_candidate.manifest_sha256 is distinct from p_manifest_sha256
+       or existing_candidate.package_sha256 is distinct from p_package_sha256
+       or existing_candidate.manifest is distinct from p_manifest
+       or existing_candidate.manifest_canonical
+          is distinct from p_manifest_canonical
+       or p_artifacts is distinct from coalesce((
+         select jsonb_agg(jsonb_build_object(
+           'relativePath', artifact.relative_path,
+           'byteCount', artifact.byte_count,
+           'sha256', artifact.sha256,
+           'canonicalContent', artifact.canonical_content
+         ) order by artifact.relative_path)
+         from public.academy_curriculum_staged_release_artifacts as artifact
+         where artifact.staging_id = receipt.staging_id
+       ), '[]'::jsonb) then
       raise exception 'CURRICULUM_STAGING_REPLAY_CONFLICT' using errcode = '23505';
     end if;
     return receipt.response || jsonb_build_object('replayed', true);
