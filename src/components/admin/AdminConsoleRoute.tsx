@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { isoToday } from '../../appState'
 import {
   readAdminAuthorization,
@@ -94,6 +94,7 @@ import {
 } from '../../admin/configurationHttpSource'
 import { getVoiceCatalogAccess } from '../../tutor/voiceCatalog'
 import { createAdminAccessHttpSource, AdminAccessError } from '../../admin/accessHttpSource'
+import { getSupabaseClient } from '../../sync/supabase'
 import type { AdminAccessReadState } from '../../admin/accessModel'
 import { AdminAccessPermissions } from './AdminAccessPermissions'
 import {
@@ -311,6 +312,11 @@ export function AdminConsoleRoute() {
   pathnameRef.current = pathname
   configurationDirtyRef.current = configurationDirty
 
+  const beginAuthorizationRefresh = useCallback(() => {
+    setAuthorizationState({ status: 'resolving' })
+    setAuthorizationReload((value) => value + 1)
+  }, [])
+
   useEffect(() => {
     const controller = new AbortController()
     void readAdminAuthorization({ signal: controller.signal }).then((state) => {
@@ -318,6 +324,31 @@ export function AdminConsoleRoute() {
     })
     return () => controller.abort()
   }, [authorizationReload])
+
+  useEffect(() => {
+    const onOnline = () => beginAuthorizationRefresh()
+    const onOffline = () => setAuthorizationState({ status: 'unavailable' })
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) beginAuthorizationRefresh()
+    }
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') beginAuthorizationRefresh()
+    }
+    window.addEventListener('online', onOnline)
+    window.addEventListener('offline', onOffline)
+    window.addEventListener('pageshow', onPageShow)
+    document.addEventListener('visibilitychange', onVisibilityChange)
+    const subscription = getSupabaseClient()?.auth.onAuthStateChange((event) => {
+      if (event !== 'INITIAL_SESSION') beginAuthorizationRefresh()
+    }).data.subscription
+    return () => {
+      window.removeEventListener('online', onOnline)
+      window.removeEventListener('offline', onOffline)
+      window.removeEventListener('pageshow', onPageShow)
+      document.removeEventListener('visibilitychange', onVisibilityChange)
+      subscription?.unsubscribe()
+    }
+  }, [beginAuthorizationRefresh])
 
   useEffect(() => {
     if (section !== 'attention') return
@@ -705,12 +736,13 @@ export function AdminConsoleRoute() {
       }
       configurationDirtyRef.current = false
       setConfigurationDirty(false)
+      beginAuthorizationRefresh()
       setPathname(window.location.pathname)
       setSearch(window.location.search)
     }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
-  }, [pathname, search])
+  }, [beginAuthorizationRefresh, pathname, search])
 
   function navigate(next: AdminSection) {
     if (section === 'configuration' && configurationDirty
@@ -724,6 +756,7 @@ export function AdminConsoleRoute() {
           ? `${ADMIN_CONSOLE_PATH}/production-readiness`
         : `${ADMIN_CONSOLE_PATH}/${next}`
     window.history.pushState({}, '', nextPath)
+    beginAuthorizationRefresh()
     setPathname(nextPath)
     setConfigurationDirty(false)
     setSearch('')
@@ -733,6 +766,7 @@ export function AdminConsoleRoute() {
     if (!requestCurriculumStudioNavigation()) return
     const nextPath = `${ADMIN_CONSOLE_PATH}/engines/${engine}`
     window.history.pushState({}, '', nextPath)
+    beginAuthorizationRefresh()
     setPathname(nextPath)
     setSearch('')
   }
@@ -742,6 +776,7 @@ export function AdminConsoleRoute() {
       ? `${ADMIN_CONSOLE_PATH}/learners/${learnerRef}`
       : `${ADMIN_CONSOLE_PATH}/learners`
     window.history.pushState({}, '', nextPath)
+    beginAuthorizationRefresh()
     setPathname(nextPath)
   }
 
@@ -749,6 +784,7 @@ export function AdminConsoleRoute() {
     if (!requestCurriculumStudioNavigation()) return
     const next = new URL(href, window.location.origin)
     window.history.pushState({}, '', `${next.pathname}${next.search}${next.hash}`)
+    beginAuthorizationRefresh()
     setPathname(next.pathname)
     setSearch(next.search)
   }
@@ -1075,7 +1111,7 @@ export function AdminConsoleRoute() {
             source={accessSource}
             onMutated={() => {
               setAccessRetry((value) => value + 1)
-              setAuthorizationReload((value) => value + 1)
+              beginAuthorizationRefresh()
             }}
           />
         )}

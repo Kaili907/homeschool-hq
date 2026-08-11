@@ -28,6 +28,11 @@ describe('Admin access HTTP source', () => {
     const [url, request] = fetchImpl.mock.calls[0]
     expect(url).toBe('/api/admin/v1/access')
     expect(request.method).toBe('GET')
+    expect(request).toMatchObject({
+      cache: 'no-store',
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer',
+    })
     expect(request).not.toHaveProperty('body')
     expect(JSON.stringify(request)).not.toMatch(/admin_roles:manage|service.?role|password/i)
   })
@@ -58,6 +63,12 @@ describe('Admin access HTTP source', () => {
     })
     const [url, request] = fetchImpl.mock.calls[0]
     expect(url).toBe('/api/admin/v1/access/change-role')
+    expect(request).toMatchObject({
+      method: 'POST',
+      cache: 'no-store',
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer',
+    })
     expect(JSON.parse(request.body as string)).toEqual({
       assignmentRef: ASSIGNMENT_REF,
       expectedRevision: '1',

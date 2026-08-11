@@ -21,6 +21,7 @@
     "test:sync-db": "vitest run supabase/academy-cas.db.test.ts",
     "test:academy-cas-postgres": "vitest run supabase/academy-cas.postgres.test.ts",
     "test:admin-auth": "vitest run src/admin/authorization.test.ts netlify/functions/_shared/admin-authorization.test.js netlify/functions/admin-authorization.test.js supabase/academy-admin-authorization.db.test.ts",
+    "test:admin-browser": "playwright test --config playwright.admin.config.ts",
     "test:admin-curriculum-authoring": "vitest run src/curriculum-authoring/v2/schemaSet.test.ts src/admin/curriculum-authoring src/admin/curriculum/CurriculumStudio.test.tsx netlify/functions/admin-curriculum.test.js netlify/functions/admin-curriculum-authoring.test.js netlify/functions/_shared/admin-curriculum-authoring.test.js supabase/academy-admin-audit.db.test.ts supabase/academy-curriculum-release-registry.db.test.ts supabase/academy-curriculum-draft-authoring.db.test.ts supabase/academy-curriculum-draft-collaborators.db.test.ts",
     "test:admin-curriculum-standards-review": "vitest run src/admin/curriculum-validation src/admin/curriculum-standards-review src/admin/contracts.test.ts src/admin/curriculum/CurriculumBrowser.test.tsx src/components/admin/AdminConsoleRoute.test.tsx src/components/admin/CurriculumStandardsReviewWorkspace.test.tsx netlify/functions/admin-curriculum.test.js netlify/functions/admin-curriculum-authoring.test.js netlify/functions/admin-curriculum-standards-review.test.js netlify/functions/_shared/admin-audit-reader.test.js netlify/functions/_shared/admin-curriculum-authoring.test.js netlify/functions/_shared/admin-curriculum-standards-review.test.js supabase/academy-curriculum-standards-review.db.test.ts",
     "test:admin-curriculum-approval": "vitest run src/admin/curriculum-approval src/admin/curriculum/CurriculumApprovalReview.test.tsx netlify/functions/admin-curriculum-approval.test.js netlify/functions/_shared/admin-curriculum-approval.test.js netlify/functions/_shared/admin-curriculum-studio.test.js supabase/academy-curriculum-approval.db.test.ts",
@@ -49,6 +50,8 @@
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.4",
+    "@electric-sql/pglite-socket": "^0.2.7",
+    "@playwright/test": "^1.54.1",
     "@tailwindcss/vite": "^4.1.11",
     "@types/pg": "^8.20.0",
     "@types/react": "^19.1.8",
