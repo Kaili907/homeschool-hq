@@ -224,6 +224,7 @@ describe('hosted-applied migrations are never executable work', () => {
         '20260808120000_academy_study_actor_bound_session_verification.sql',
         '20260808150000_academy_study_academic_readiness_contract.sql',
         '20260809120000_academy_study_learner_runtime_operations.sql',
+        '20260810120000_academy_study_production_wire_contract_v1.sql',
       ])
   })
 
