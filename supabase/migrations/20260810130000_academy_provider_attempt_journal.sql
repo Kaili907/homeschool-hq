@@ -666,6 +666,7 @@ declare
   usage public.academy_provider_usage_ledger%rowtype;
   existing_link public.academy_provider_attempt_ledger_links%rowtype;
   inserted_transition public.academy_provider_attempt_transitions%rowtype;
+  observed_outcome_result text;
   target_state text;
   target_reason text;
 begin
@@ -715,6 +716,12 @@ begin
   if current_transition.to_state not in ('outcome_observed', 'gap_pending') then
     raise exception 'PROVIDER_ATTEMPT_STATE_TRANSITION_INVALID' using errcode = '22023';
   end if;
+  select transition.outcome_result into observed_outcome_result
+  from public.academy_provider_attempt_transitions as transition
+  where transition.attempt_id = p_attempt_id
+    and transition.to_state = 'outcome_observed'
+  order by transition.sequence desc
+  limit 1;
 
   select ledger.* into usage
   from public.academy_provider_usage_ledger as ledger
@@ -736,6 +743,9 @@ begin
   ) then
     target_state := 'reconciliation_conflict';
     target_reason := 'ledger_already_linked';
+  elsif usage.result <> observed_outcome_result then
+    target_state := 'reconciliation_conflict';
+    target_reason := 'ledger_outcome_mismatch';
   elsif usage.occurred_at < attempt.reserved_at
      or usage.account_id <> attempt.account_id
      or usage.household_id is distinct from attempt.household_id

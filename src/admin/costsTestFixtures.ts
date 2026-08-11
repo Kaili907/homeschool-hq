@@ -21,12 +21,14 @@ export function providerAccountingCoverageFixture(
 ): AdminProviderAccountingCoverage {
   const metrics = {
     reservedAttempts: 3,
+    reservationOnlyAttempts: 0,
     dispatchPossibleAttempts: 0,
     observedOutcomes: 0,
     ledgerLinkedAttempts: 2,
     accountingGaps: 0,
     gapPending: 0,
     reconciliationConflicts: 0,
+    reconciledAttempts: 0,
     confirmedNotDispatched: 1,
     unresolvable: 0,
   }

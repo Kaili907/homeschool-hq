@@ -316,6 +316,27 @@ describe('real provider gateway attempt coordination', () => {
     ])
   })
 
+  it('does not dispatch when readiness returns a receipt for a different attempt', async () => {
+    const fetchImpl = anthropicFetch()
+    const journal = journalHarness([], {
+      transition: vi.fn(async (input) => ({
+        status: 'created',
+        attemptId: '90000000-0000-4000-8000-000000000002',
+        state: input.toState,
+      })),
+    })
+    const response = await createAnthropicHandler({
+      env: ANTHROPIC_ENV,
+      fetchImpl,
+      gatewayAccess: accessHarness(),
+      providerAttemptJournal: journal,
+      requestIdFactory: () => 'mismatched-readiness-receipt',
+    })(anthropicEvent())
+
+    expect(response.statusCode).toBe(503)
+    expect(providerCalls(fetchImpl, 'https://api.anthropic.com/v1/messages')).toHaveLength(0)
+  })
+
   it.each([
     ['success', {}, 'success', 200],
     ['timeout', { providerError: new DOMException('timed out', 'TimeoutError') }, 'timeout', 504],
@@ -348,6 +369,7 @@ describe('real provider gateway attempt coordination', () => {
   it.each([
     ['ledger success', undefined, 'ledgered'],
     ['ledger failure', new Error('database unavailable'), 'gap_pending'],
+    ['ledger timeout', new DOMException('timed out', 'TimeoutError'), 'gap_pending'],
     ['ledger relationship conflict', undefined, 'reconciliation_conflict'],
   ])('preserves the learner response for %s and records the journal state', async (
     _label, ledgerError, journalState,
@@ -415,6 +437,36 @@ describe('real provider gateway attempt coordination', () => {
     expect(first.ledgerExecutionKey).toBe(second.ledgerExecutionKey)
     expect(first.logicalOperationKey).toBe(second.logicalOperationKey)
     expect(first.ledgerExecutionKey).not.toContain('30000000-0000-4000-8000-000000000001')
+  })
+
+  it('serializes parallel duplicate HTTP operations to one physical dispatch', async () => {
+    let reservationCalls = 0
+    let releaseReservations
+    const bothReserved = new Promise((resolve) => { releaseReservations = resolve })
+    const journal = journalHarness([], {
+      reserve: vi.fn(async () => {
+        reservationCalls += 1
+        const position = reservationCalls
+        if (reservationCalls === 2) releaseReservations()
+        await bothReserved
+        return position === 1
+          ? { status: 'created', attemptId: TEST_PROVIDER_ATTEMPT_ID, state: 'reserved' }
+          : { status: 'replayed', attemptId: TEST_PROVIDER_ATTEMPT_ID, state: 'reserved' }
+      }),
+    })
+    const fetchImpl = anthropicFetch()
+    const handler = createAnthropicHandler({
+      env: ANTHROPIC_ENV,
+      fetchImpl,
+      gatewayAccess: accessHarness(),
+      providerAttemptJournal: journal,
+    })
+    const duplicate = anthropicEvent()
+    duplicate.headers['x-academy-operation-id'] = '60000000-0000-4000-8000-000000000001'
+
+    const responses = await Promise.all([handler(duplicate), handler(duplicate)])
+    expect(responses.map((response) => response.statusCode).sort()).toEqual([200, 503])
+    expect(providerCalls(fetchImpl, 'https://api.anthropic.com/v1/messages')).toHaveLength(1)
   })
 
   it('rejects malformed or ambiguous client operation IDs before reservation', async () => {

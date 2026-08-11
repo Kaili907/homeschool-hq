@@ -74,6 +74,70 @@ describe('Admin costs browser contract', () => {
     })).toBeNull()
   })
 
+  it('rejects a false complete label when the wire metrics contain accounting gaps', () => {
+    const source = costsModelFixture()
+    const forgedMetrics = {
+      ...source.providerAccountingCoverage.metrics!,
+      accountingGaps: 1,
+      gapPending: 1,
+      ledgerLinkedAttempts: 1,
+    }
+    const forgeRows = <T extends object>(rows: readonly T[]) => rows.map((row) => ({
+      ...row,
+      ...forgedMetrics,
+    }))
+    expect(parseAdminCostsModel({
+      ...source,
+      providerAccountingCoverage: {
+        ...source.providerAccountingCoverage,
+        metrics: forgedMetrics,
+        breakdowns: {
+          engines: forgeRows(source.providerAccountingCoverage.breakdowns.engines),
+          purposes: forgeRows(source.providerAccountingCoverage.breakdowns.purposes),
+          providers: forgeRows(source.providerAccountingCoverage.breakdowns.providers),
+        },
+      },
+    })).toBeNull()
+  })
+
+  it('distinguishes reconciled terminal evidence from an interrupted dispatch', () => {
+    const source = costsModelFixture()
+    const coverage = source.providerAccountingCoverage
+    const withEvidence = (
+      metrics: NonNullable<typeof coverage.metrics>,
+      status: 'complete_for_journaled_attempts' | 'partial',
+    ) => ({
+      ...coverage,
+      status,
+      journalStatus: status,
+      reconciliationState: status === 'partial' ? 'in_progress' as const : 'clear_for_journaled_attempts' as const,
+      metrics,
+      breakdowns: {
+        engines: coverage.breakdowns.engines.map((row) => ({ ...row, ...metrics, status })),
+        purposes: coverage.breakdowns.purposes.map((row) => ({ ...row, ...metrics, status })),
+        providers: coverage.breakdowns.providers.map((row) => ({ ...row, ...metrics, status })),
+      },
+    })
+    const reconciled = {
+      ...coverage.metrics!,
+      ledgerLinkedAttempts: 1,
+      reconciledAttempts: 1,
+    }
+    expect(parseAdminCostsModel(costsModelFixture({
+      providerAccountingCoverage: withEvidence(reconciled, 'complete_for_journaled_attempts'),
+    }))?.providerAccountingCoverage.status).toBe('complete_for_journaled_attempts')
+
+    const interrupted = {
+      ...coverage.metrics!,
+      ledgerLinkedAttempts: 1,
+      dispatchPossibleAttempts: 1,
+      confirmedNotDispatched: 1,
+    }
+    expect(parseAdminCostsModel(costsModelFixture({
+      providerAccountingCoverage: withEvidence(interrupted, 'partial'),
+    }))?.providerAccountingCoverage.status).toBe('partial')
+  })
+
   it('drops unknown coverage fields instead of exposing content or raw provider diagnostics', () => {
     const source = costsModelFixture()
     const model = parseAdminCostsModel({

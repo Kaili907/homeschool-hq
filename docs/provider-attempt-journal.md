@@ -100,7 +100,8 @@ cannot reserve, transition, link, or read the tables.
 physical journal attempt to one authoritative usage ledger row, and one usage
 ledger row to at most one attempt. Linking checks the pre-reserved ledger key,
 reservation-before-occurrence ordering, account/household attribution,
-engine/version snapshots, provider product/model, and logical tier.
+engine/version snapshots, provider product/model, logical tier, and the
+normalized outcome recorded before linkage.
 
 A missing row creates `gap_pending`. A mismatched or already-linked row creates
 `reconciliation_conflict` and is not linked. The additive Study accounting
@@ -156,6 +157,8 @@ ledger persistence, and journal linkage. A missing ledger becomes
 than gateway inference. The coordinator accepts a stable logical operation,
 distinct physical execution key, and explicit retry index so any future
 internal retry produces its own attempt and usage receipt.
+Journal RPCs are time-bounded; an unavailable or indeterminate reservation or
+dispatch-readiness receipt prevents provider dispatch.
 
 ## Study safety integration
 

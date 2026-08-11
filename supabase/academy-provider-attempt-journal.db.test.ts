@@ -378,6 +378,27 @@ describe('Academy Provider Attempt Journal foundation', () => {
     expect(links.rows).toEqual([])
   })
 
+  it('treats conflicting journal and ledger outcomes as reconciliation evidence', async () => {
+    const database = databases[0]
+    const receipt = await reserve(database, 'outcome-mismatch')
+    const attemptId = receipt.rows[0].result.attemptId
+    await transition(database, attemptId, 'outcome-mismatch.dispatch', 'dispatch_possible')
+    await transition(
+      database, attemptId, 'outcome-mismatch.outcome', 'outcome_observed', 'timeout',
+    )
+    await expect(linkLedger(database, attemptId, 'outcome-mismatch.missing')).resolves.toMatchObject({
+      rows: [{ result: { state: 'gap_pending' } }],
+    })
+    await recordLedger(database, 'ledger_outcome-mismatch')
+
+    await expect(linkLedger(database, attemptId, 'outcome-mismatch.link')).resolves.toMatchObject({
+      rows: [{ result: { state: 'reconciliation_conflict' } }],
+    })
+    expect((await states(database, attemptId)).at(-1)).toBe('reconciliation_conflict')
+    const links = await database.query(`select * from public.academy_provider_attempt_ledger_links`)
+    expect(links.rows).toEqual([])
+  })
+
   it('projects coverage gaps and orphan ledger rows without claiming invoice completeness', async () => {
     const database = databases[0]
     const linkedId = await readyOutcome(database, 'coverage-linked')

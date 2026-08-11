@@ -370,12 +370,14 @@ function ProviderAccountingCoverageSection({
       <div className="admin-provider-coverage__metrics" aria-label="Provider accounting coverage summary">
         {([
           ['Reserved attempts', metrics.reservedAttempts, 'Journal reservations in the selected range'],
+          ['Reservation-only attempts', metrics.reservationOnlyAttempts, 'Reservations not yet closed or dispatch-ready'],
           ['Dispatch-possible', metrics.dispatchPossibleAttempts, 'Current lifecycle state'],
           ['Observed outcomes', metrics.observedOutcomes, 'Awaiting final accounting state'],
           ['Ledger-linked attempts', metrics.ledgerLinkedAttempts, 'Exact authoritative ledger relationship'],
           ['Accounting gaps', metrics.accountingGaps, 'Missing journal or ledger relationships'],
           ['Gap pending', metrics.gapPending, 'Known provider attempts awaiting a ledger relationship'],
           ['Reconciliation conflicts', metrics.reconciliationConflicts, 'Conflicting durable facts'],
+          ['Reconciled attempts', metrics.reconciledAttempts, 'Closed with bounded reconciliation evidence'],
           ['Confirmed not dispatched', metrics.confirmedNotDispatched, 'Trusted evidence that no provider call occurred'],
           ['Unresolvable', metrics.unresolvable, 'Closed without recoverable resolution'],
         ] as const).map(([label, value, detail]) => (

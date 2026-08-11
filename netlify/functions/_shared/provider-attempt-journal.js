@@ -4,6 +4,7 @@ const LEDGER_KEY = /^[A-Za-z0-9_-]{1,128}$/
 const VERSION = /^[A-Za-z0-9][A-Za-z0-9._:@/+\-]{0,127}$/
 const REASON = /^[a-z0-9][a-z0-9._:-]{0,119}$/
 const PROHIBITED_FIELD = /(?:raw|messages?|conversation|transcript|prompt|response|audio|speech|emotion|personality|psycholog|diagnos|answer|journal|secret|credential|bearer|password|api.?key|body|content)/i
+const DEFAULT_STORE_TIMEOUT_MS = 5_000
 
 export const PROVIDER_ATTEMPT_STATES = Object.freeze([
   'reserved',
@@ -244,11 +245,21 @@ export function createServerProviderAttemptJournal({
     },
 
     async transition(input) {
-      return receipt(await store.transition(transition(input)))
+      const facts = transition(input)
+      const parsed = receipt(await store.transition(facts))
+      if (parsed.attemptId !== facts.attemptId) {
+        throw new ProviderAttemptJournalError('provider_attempt_store_invalid')
+      }
+      return parsed
     },
 
     async linkLedger(input) {
-      return receipt(await store.linkLedger(link(input)))
+      const facts = link(input)
+      const parsed = receipt(await store.linkLedger(facts))
+      if (parsed.attemptId !== facts.attemptId) {
+        throw new ProviderAttemptJournalError('provider_attempt_store_invalid')
+      }
+      return parsed
     },
   })
 }
@@ -264,15 +275,38 @@ function mappedStoreError(error) {
   return new ProviderAttemptJournalError('provider_attempt_store_unavailable')
 }
 
-async function rpc(client, name, parameters) {
-  const { data, error } = await client.rpc(name, parameters)
-  if (error) throw mappedStoreError(error)
-  return receipt(data)
+async function rpc(client, name, parameters, timeoutMs) {
+  const signal = AbortSignal.timeout(timeoutMs)
+  let abort
+  const timeout = new Promise((_, reject) => {
+    abort = () => reject(new ProviderAttemptJournalError('provider_attempt_store_unavailable'))
+    signal.addEventListener('abort', abort, { once: true })
+  })
+  try {
+    const request = client.rpc(name, parameters)
+    const operation = typeof request?.abortSignal === 'function'
+      ? request.abortSignal(signal)
+      : request
+    const { data, error } = await Promise.race([operation, timeout])
+    if (error) throw mappedStoreError(error)
+    return receipt(data)
+  } catch (error) {
+    if (error instanceof ProviderAttemptJournalError) throw error
+    throw mappedStoreError(error)
+  } finally {
+    signal.removeEventListener('abort', abort)
+  }
 }
 
 /** Service-role Supabase adapter; it exposes no browser credential or direct table access. */
-export function createSupabaseProviderAttemptStore(client) {
-  if (!client || typeof client.rpc !== 'function') {
+export function createSupabaseProviderAttemptStore(client, { timeoutMs = DEFAULT_STORE_TIMEOUT_MS } = {}) {
+  if (
+    !client
+    || typeof client.rpc !== 'function'
+    || !Number.isSafeInteger(timeoutMs)
+    || timeoutMs < 1
+    || timeoutMs > 30_000
+  ) {
     throw new TypeError('provider_attempt_store_configuration_invalid')
   }
   return Object.freeze({
@@ -298,7 +332,7 @@ export function createSupabaseProviderAttemptStore(client) {
           provider_model_id: record.providerModelId,
           logical_model_tier: record.logicalModelTier,
         },
-      })
+      }, timeoutMs)
     },
     transition(record) {
       return rpc(client, 'academy_transition_provider_attempt_v1', {
@@ -308,13 +342,13 @@ export function createSupabaseProviderAttemptStore(client) {
         p_outcome_result: record.outcomeResult,
         p_reason_code: record.reasonCode,
         p_reconciliation_ref: record.reconciliationRef,
-      })
+      }, timeoutMs)
     },
     linkLedger(record) {
       return rpc(client, 'academy_link_provider_attempt_ledger_v1', {
         p_attempt_id: record.attemptId,
         p_transition_key: record.transitionKey,
-      })
+      }, timeoutMs)
     },
   })
 }
