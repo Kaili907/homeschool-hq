@@ -34,12 +34,18 @@ export interface GlobalRevocationNotice {
   readonly occurredAt: string
 }
 
+export interface GlobalRevocationObservation {
+  readonly epoch: number
+  readonly notice: GlobalRevocationNotice | null
+}
+
 export type GlobalRevocationListener = (
   notice: GlobalRevocationNotice,
 ) => void | Promise<void>
 
 export interface GlobalRevocationSource {
   currentEpoch(): number | null
+  currentRevocation?(): GlobalRevocationObservation | null
   subscribe(listener: GlobalRevocationListener): () => void
 }
 
@@ -111,10 +117,54 @@ function parseStoredNotice(value: string | null): GlobalRevocationNotice | null 
   }
 }
 
-function parseStoredEpoch(value: string | null): number | null {
+function parseStoredRevocation(value: string | null): GlobalRevocationObservation | null {
   const legacy = parseLegacyEpoch(value)
-  if (legacy !== null) return legacy
-  return parseStoredNotice(value)?.epoch ?? null
+  if (legacy !== null) return Object.freeze({ epoch: legacy, notice: null })
+  const notice = parseStoredNotice(value)
+  return notice === null ? null : Object.freeze({ epoch: notice.epoch, notice })
+}
+
+function parseRevocationEpochHint(value: unknown): number | null {
+  if (typeof value === 'string') {
+    const legacy = parseLegacyEpoch(value)
+    if (legacy !== null) return legacy
+    try {
+      return parseRevocationEpochHint(JSON.parse(value))
+    } catch {
+      return null
+    }
+  }
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return null
+  const epoch = (value as Record<string, unknown>).epoch
+  return Number.isSafeInteger(epoch) && Number(epoch) >= 1 ? Number(epoch) : null
+}
+
+function parseRevocationTransport(
+  value: unknown,
+  source: 'storage' | 'channel',
+): GlobalRevocationObservation | null {
+  if (source === 'storage') {
+    return typeof value === 'string' || value === null ? parseStoredRevocation(value) : null
+  }
+  const notice = parseGlobalRevocationNotice(value)
+  return notice === null ? null : Object.freeze({ epoch: notice.epoch, notice })
+}
+
+export function getCurrentGlobalRevocation(
+  source: GlobalRevocationSource,
+): GlobalRevocationObservation | null {
+  if (source.currentRevocation) {
+    const observation = source.currentRevocation()
+    if (!observation || !Number.isSafeInteger(observation.epoch) || observation.epoch < 0) return null
+    if (observation.notice === null) {
+      return Object.freeze({ epoch: observation.epoch, notice: null })
+    }
+    const notice = parseGlobalRevocationNotice(observation.notice)
+    if (!notice || notice.epoch !== observation.epoch) return null
+    return Object.freeze({ epoch: observation.epoch, notice })
+  }
+  const epoch = source.currentEpoch()
+  return epoch === null ? null : Object.freeze({ epoch, notice: null })
 }
 
 /**
@@ -134,56 +184,41 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
   readonly #listeners = new Set<GlobalRevocationListener>()
   #deliveryTail: Promise<void> = Promise.resolve()
   #observedEpoch: number
+  #terminallyInvalid = false
   #closed = false
 
   readonly #onStorage = (event: RevocationStorageEvent): void => {
     if (event.key !== GLOBAL_REVOCATION_STORAGE_KEY || this.#closed) return
-    const epoch = parseStoredEpoch(event.newValue)
-    if (epoch === null || epoch < this.#observedEpoch) {
-      this.#deliverMalformed()
-      return
-    }
-    if (epoch === this.#observedEpoch) return
-    const notice = parseStoredNotice(event.newValue) ?? this.#genericNotice(epoch)
-    this.#observedEpoch = epoch
-    this.#enqueueDelivery(notice)
+    this.#reconcileTransport(event.newValue, 'storage')
   }
 
   constructor(options: GlobalRevocationCoordinatorOptions) {
     this.#storage = options.storage
     this.#clock = options.clock ?? systemSecurityClock
     this.#lockManager = options.lockManager
-    const initial = parseStoredEpoch(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY))
-    this.#observedEpoch = initial ?? -1
+    const initial = parseStoredRevocation(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY))
+    this.#observedEpoch = initial?.epoch ?? -1
     this.#storageEvents = options.storageEvents
     this.#storageEvents?.addEventListener('storage', this.#onStorage)
     this.#channel = options.channelFactory?.(GLOBAL_REVOCATION_CHANNEL_NAME) ?? null
     if (this.#channel) {
       this.#channel.onmessage = (event) => {
         if (this.#closed) return
-        const notice = parseGlobalRevocationNotice(event.data)
-        if (!notice) {
-          this.#deliverMalformed()
-          return
-        }
-        if (notice.epoch <= this.#observedEpoch) return
-        this.#observedEpoch = notice.epoch
-        this.#enqueueDelivery(notice)
+        this.#reconcileTransport(event.data, 'channel')
       }
     }
   }
 
-  currentEpoch(): number | null {
-    if (this.#closed) return null
-    let stored: number | null
-    try {
-      stored = parseStoredEpoch(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY))
-    } catch {
-      return null
-    }
-    if (stored === null || stored < this.#observedEpoch) return null
-    if (stored > this.#observedEpoch) this.#observedEpoch = stored
+  currentRevocation(): GlobalRevocationObservation | null {
+    if (this.#closed || this.#terminallyInvalid) return null
+    const stored = this.#readDurableRevocation()
+    if (stored === null || stored.epoch < this.#observedEpoch) return null
+    if (stored.epoch > this.#observedEpoch) this.#acceptDurable(stored)
     return stored
+  }
+
+  currentEpoch(): number | null {
+    return this.currentRevocation()?.epoch ?? null
   }
 
   async revoke(cause: GlobalRevocationCause): Promise<GlobalRevocationNotice> {
@@ -209,7 +244,12 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
         const serialized = JSON.stringify(notice)
         this.#storage.setItem(GLOBAL_REVOCATION_STORAGE_KEY, serialized)
         const verified = parseStoredNotice(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY))
-        if (!verified || verified.epoch !== notice.epoch || verified.cause !== notice.cause) {
+        if (
+          !verified ||
+          verified.epoch !== notice.epoch ||
+          verified.cause !== notice.cause ||
+          verified.occurredAt !== notice.occurredAt
+        ) {
           throw new Error('Global revocation epoch could not be verified.')
         }
         this.#observedEpoch = notice.epoch
@@ -256,12 +296,78 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
     })
   }
 
+  #readDurableRevocation(): GlobalRevocationObservation | null {
+    try {
+      return parseStoredRevocation(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY))
+    } catch {
+      return null
+    }
+  }
+
+  #acceptDurable(observation: GlobalRevocationObservation): void {
+    if (observation.epoch <= this.#observedEpoch) return
+    if (observation.epoch === 0) {
+      this.#observedEpoch = 0
+      return
+    }
+    this.#enqueueDelivery(observation.notice ?? this.#genericNotice(observation.epoch))
+    this.#observedEpoch = observation.epoch
+  }
+
+  #acceptGeneric(epoch: number): void {
+    if (epoch <= this.#observedEpoch) return
+    this.#enqueueDelivery(this.#genericNotice(epoch))
+    this.#observedEpoch = epoch
+  }
+
+  #reconcileTransport(value: unknown, source: 'storage' | 'channel'): void {
+    const previouslyObserved = this.#observedEpoch
+    const durable = this.#readDurableRevocation()
+    if (durable && durable.epoch > this.#observedEpoch) this.#acceptDurable(durable)
+
+    if (durable && durable.epoch < previouslyObserved) {
+      this.#deliverMalformed()
+      return
+    }
+
+    const transport = parseRevocationTransport(value, source)
+    const hintedEpoch = parseRevocationEpochHint(value)
+    if (durable === null) {
+      const unavailableEpoch = transport?.epoch ?? hintedEpoch
+      if (unavailableEpoch !== null && unavailableEpoch > this.#observedEpoch) {
+        this.#acceptGeneric(unavailableEpoch)
+      } else {
+        this.#deliverMalformed()
+      }
+      return
+    }
+
+    if (transport === null) {
+      if (
+        durable.epoch > previouslyObserved &&
+        (hintedEpoch === null || hintedEpoch <= durable.epoch)
+      ) return
+      if (hintedEpoch !== null && hintedEpoch > this.#observedEpoch) {
+        this.#acceptGeneric(hintedEpoch)
+      } else {
+        this.#deliverMalformed()
+      }
+      return
+    }
+
+    if (transport.epoch <= this.#observedEpoch) return
+    if (durable.epoch >= transport.epoch) return
+    this.#acceptGeneric(transport.epoch)
+  }
+
   #deliverMalformed(): void {
-    const nextEpoch = this.#observedEpoch < Number.MAX_SAFE_INTEGER
-      ? Math.max(1, this.#observedEpoch + 1)
-      : Number.MAX_SAFE_INTEGER
-    this.#observedEpoch = nextEpoch
-    this.#enqueueDelivery(this.#genericNotice(nextEpoch))
+    if (this.#observedEpoch === Number.MAX_SAFE_INTEGER) {
+      if (this.#terminallyInvalid) return
+      this.#terminallyInvalid = true
+      this.#enqueueDelivery(this.#genericNotice(Number.MAX_SAFE_INTEGER))
+      return
+    }
+    this.#acceptGeneric(Math.max(1, this.#observedEpoch + 1))
   }
 
   #enqueueDelivery(notice: GlobalRevocationNotice): Promise<void> {

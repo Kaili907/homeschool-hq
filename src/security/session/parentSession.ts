@@ -6,7 +6,11 @@ import {
   type ParentSessionRecord,
 } from '../contracts/sessions'
 import { SerializedLifecycleDelivery, type SecurityLifecycleSink } from './lifecycleDelivery'
-import type { GlobalRevocationNotice, GlobalRevocationSource } from './revocation'
+import {
+  getCurrentGlobalRevocation,
+  type GlobalRevocationNotice,
+  type GlobalRevocationSource,
+} from './revocation'
 import {
   parseCanonicalTimestamp,
   requireSafeTimestamp,
@@ -96,9 +100,24 @@ export class ParentSessionController {
       (this.#lastObservedAt !== null && now < this.#lastObservedAt)
     ) return this.#end('clock-anomaly', true, now)
     this.#lastObservedAt = now
-    const epoch = this.#revocation.currentEpoch()
+    const revocation = getCurrentGlobalRevocation(this.#revocation)
+    const epoch = revocation?.epoch ?? null
     if (epoch === null || epoch !== this.#session.globalRevocationEpoch) {
-      return this.#end('global-revocation', true, now, 'global-revocation')
+      const notice = revocation?.notice
+      const exactNotice = notice &&
+        notice.epoch === epoch &&
+        notice.epoch > this.#session.globalRevocationEpoch
+        ? notice
+        : null
+      const occurredAt = exactNotice
+        ? parseCanonicalTimestamp(exactNotice.occurredAt) ?? now
+        : now
+      return this.#end(
+        'global-revocation',
+        true,
+        occurredAt,
+        exactNotice?.cause ?? 'global-revocation',
+      )
     }
     if (now >= absoluteAt) return this.#end('absolute-expired', true, now)
     if (now - activityAt >= SECURITY_SESSION_POLICY.parent.idleTimeoutMs) {
@@ -191,7 +210,10 @@ export class ParentSessionController {
 
   async #handleRevocation(notice: GlobalRevocationNotice): Promise<void> {
     const session = this.#session
-    if (!session || notice.epoch <= session.globalRevocationEpoch) return
+    if (!session || notice.epoch < session.globalRevocationEpoch) return
+    if (notice.epoch === session.globalRevocationEpoch) {
+      if (notice.cause !== 'global-revocation' || this.#revocation.currentEpoch() !== null) return
+    }
     const occurredAt = parseCanonicalTimestamp(notice.occurredAt) ?? undefined
     this.#end('global-revocation', true, occurredAt, notice.cause)
     await this.#lifecycle.whenIdle()
