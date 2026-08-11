@@ -837,7 +837,7 @@ const REVIEWED_CENSUS = [
   'App.tsx | StudySettingsPorts | studyRuntime.ports',
   'components/hub/ParentHub.tsx | StudyParentControlPorts | study.ports',
   'components/hub/StudyParentPanel.tsx | StudyParentControlPorts | ports',
-  'components/study/StudySessionContainer.tsx | ProductionStudySessionPorts | ports',
+  'components/study/studySessionSurface.tsx | ProductionStudySessionPorts | ports',
 ]
 
 // ── capability roots and their provenance ─────────────────────────────────────
@@ -2931,14 +2931,14 @@ describe('narrow Study consumer contracts survive an AST census of their injecti
     expect(declaredOnFixture).toContain('StudyParentControlPorts | (positional)')
   })
 
-  it('leaves the pre-existing container casts out of scope while reviewing its narrow preparation', () => {
-    // The container genuinely requires all nine roles and asserts to reach them.
+  it('leaves the pre-existing session-surface casts out of scope while reviewing its narrow preparation', () => {
+    // The shared session surface genuinely requires all nine roles and asserts to reach them.
     // Those casts are pre-existing and outside this card; they are recorded here so
     // that fixing them is a visible change rather than a silent one. They are not
-    // injection sites themselves. The one reviewed container entry is instead the
+    // injection sites themselves. The one reviewed session-surface entry is instead the
     // ports hand-over to prepareDurableStudySession.
-    const source = program.getSourceFile(join(sourceRoot, 'components', 'study', 'StudySessionContainer.tsx'))
-    if (!source) throw new Error('StudySessionContainer is not in the program')
+    const source = program.getSourceFile(join(sourceRoot, 'components', 'study', 'studySessionSurface.tsx'))
+    if (!source) throw new Error('studySessionSurface is not in the program')
     let fullBundleAssertions = 0
     const visit = (node: ts.Node) => {
       if (isTypeErasure(node)) {
@@ -2949,8 +2949,8 @@ describe('narrow Study consumer contracts survive an AST census of their injecti
     }
     visit(source)
     expect(fullBundleAssertions).toBeGreaterThan(0)
-    expect(censusReport.filter((entry) => entry.startsWith('components/study/StudySessionContainer.tsx'))).toEqual([
-      'components/study/StudySessionContainer.tsx | ProductionStudySessionPorts | ports',
+    expect(censusReport.filter((entry) => entry.startsWith('components/study/studySessionSurface.tsx'))).toEqual([
+      'components/study/studySessionSurface.tsx | ProductionStudySessionPorts | ports',
     ])
   })
 
