@@ -1,4 +1,4 @@
-import { useEffect, useId, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { AdminCapability, AdminEngineId, AdminHealthState } from '../../admin/admin0Vocabulary'
 import {
   formatUsdMicros,
@@ -138,11 +138,20 @@ export function AdminShell({
   readonly onNavigate?: (section: AdminSection) => void
   readonly children: ReactNode
 }) {
+  const activeNavigationRef = useRef<HTMLButtonElement>(null)
+  const navigationListRef = useRef<HTMLUListElement>(null)
   const activeLabel = NAVIGATION.find((item) => item.id === activeSection)?.label ?? title
   const visibleNavigation = NAVIGATION.filter((item) => authorization.capabilities.includes(item.capability))
+  useEffect(() => {
+    const list = navigationListRef.current
+    const active = activeNavigationRef.current
+    if (!list || !active) return
+    const centered = active.offsetLeft - (list.clientWidth - active.offsetWidth) / 2
+    list.scrollLeft = Math.max(0, Math.min(centered, list.scrollWidth - list.clientWidth))
+  }, [activeSection])
   return (
     <div className="admin-shell">
-      <a className="admin-skip-link" href="#admin-main">Skip to {activeLabel.toLowerCase()}</a>
+      <a className="admin-skip-link" href="#admin-main">Skip to {title.toLowerCase()}</a>
       <aside className="admin-sidebar">
         <div className="admin-brand">
           <BrandMark />
@@ -150,11 +159,12 @@ export function AdminShell({
         </div>
         <nav aria-label="Admin sections">
           <p className="admin-nav-label">Workspace</p>
-          <ul>
+          <ul ref={navigationListRef}>
             {visibleNavigation.map((item) => (
               <li key={item.id}>
                 <button
                   type="button"
+                  ref={item.id === activeSection ? activeNavigationRef : undefined}
                   className={item.id === activeSection ? 'is-active' : ''}
                   aria-current={item.id === activeSection ? 'page' : undefined}
                   onClick={() => onNavigate?.(item.id)}

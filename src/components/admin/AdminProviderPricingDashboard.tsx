@@ -297,7 +297,7 @@ export function AdminProviderPricingDashboard({
     return (
       <section className="admin-pricing-message" role="alert">
         <p className="admin-pricing-eyebrow">Provider pricing</p>
-        <h1>Pricing access unavailable</h1>
+        <h2>Pricing access unavailable</h2>
         <p>Provider pricing remains private because the server did not confirm costs:read access.</p>
       </section>
     )
@@ -437,7 +437,7 @@ function PricingHeader({ onBack }: { readonly onBack?: () => void }) {
     <header className="admin-pricing-header">
       <div>
         <p className="admin-pricing-eyebrow">AI &amp; Costs / Provider Pricing</p>
-        <h1>Provider Pricing</h1>
+        <h2>Provider Pricing</h2>
         <p>Manage exact verified USD terms used to calculate recorded marginal provider cost.</p>
       </div>
       {onBack && <button type="button" className="admin-pricing-secondary" onClick={onBack}>Back to AI &amp; Costs</button>}
@@ -561,6 +561,7 @@ export function ProviderPricingEditor({
   readonly onSubmit: (event: FormEvent) => void
   readonly onCancel: () => void
 }) {
+  const editorRef = useRef<HTMLElement>(null)
   const replacement = draft.replacesTermId !== null
   const units = draft.provider === 'anthropic'
     ? ANTHROPIC_PRICING_UNITS
@@ -568,8 +569,16 @@ export function ProviderPricingEditor({
   const field = (name: keyof ProviderPricingDraft, value: string | null) => {
     onChange({ ...draft, [name]: value })
   }
+  useEffect(() => {
+    editorRef.current?.querySelector<HTMLElement>('select:not([disabled]), input:not([disabled])')?.focus()
+  }, [])
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      editorRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus()
+    }
+  }, [errors])
   return (
-    <section className="admin-pricing-editor" aria-labelledby="pricing-editor-title">
+    <section className="admin-pricing-editor" aria-labelledby="pricing-editor-title" ref={editorRef}>
       <p className="admin-pricing-eyebrow">Preview required</p>
       <h2 id="pricing-editor-title">{replacement ? 'Replace pricing term' : 'Create pricing term'}</h2>
       <p>Enter verified terms only. The exact price is never prefilled; review the server preview before committing.</p>

@@ -1,5 +1,5 @@
 import { useEffect, useId, useState, type FormEvent } from 'react'
-import { formatUsdMicros } from '../../admin/overviewAdapter'
+import { isCanonicalIntegerMicros, type IntegerMicros } from '../../admin/contracts'
 import {
   ADMIN_COST_COMPLETENESS_MESSAGES,
   ADMIN_COST_ERROR_MESSAGES,
@@ -52,7 +52,7 @@ export function AdminCostsDashboard({
     return (
       <section className="admin-costs-message" role="alert">
         <p className="admin-costs-eyebrow">AI &amp; Costs</p>
-        <h1>Costs access unavailable</h1>
+        <h2>Costs access unavailable</h2>
         <p>Cost data remains private because current administrator authorization could not be confirmed.</p>
       </section>
     )
@@ -63,7 +63,7 @@ export function AdminCostsDashboard({
       <header className="admin-costs-header">
         <div>
           <p className="admin-costs-eyebrow">Provider usage ledger</p>
-          <h1>AI &amp; Costs</h1>
+          <h2>AI &amp; Costs</h2>
           <p>Usage-derived marginal provider cost for recorded provider attempts, calculated from verified effective-dated pricing terms. All calendar boundaries are UTC.</p>
         </div>
         <div className="admin-costs-header__controls">
@@ -294,10 +294,10 @@ function CostThresholdBanner({ model }: { model: AdminCostsModel }) {
       </section>
     )
   }
-  const observed = formatUsdMicros(threshold.observedMicros!, 'USD')
+  const observed = formatExactCostUsdMicros(threshold.observedMicros!)
   const limit = threshold.status === 'critical'
-    ? formatUsdMicros(threshold.criticalMicros!, 'USD')
-    : formatUsdMicros(threshold.warningMicros!, 'USD')
+    ? formatExactCostUsdMicros(threshold.criticalMicros!)
+    : formatExactCostUsdMicros(threshold.warningMicros!)
   return (
     <section className="admin-costs-banner" role="status">
       <strong>{threshold.status === 'critical'
@@ -337,7 +337,7 @@ function CountValue({ metric }: { metric: AdminCostCountMetric }) {
 
 function MoneyValue({ metric }: { metric: AdminCostMoneyMetric }) {
   if (metric.status === 'unavailable' || metric.micros === null) return <>— <span className="admin-costs-value-status">Unavailable</span></>
-  return <>{formatUsdMicros(metric.micros, metric.currency)}{metric.status === 'partial' && <span className="admin-costs-value-status"> Partial</span>}</>
+  return <>{formatExactCostUsdMicros(metric.micros)}{metric.status === 'partial' && <span className="admin-costs-value-status"> Partial</span>}</>
 }
 
 function CombinedTokens({ point }: { point: AdminCostAggregateForView }) {
@@ -391,4 +391,12 @@ function formatUtc(value: string): string {
   return new Intl.DateTimeFormat('en-US', {
     dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC',
   }).format(new Date(value)) + ' UTC'
+}
+
+function formatExactCostUsdMicros(value: IntegerMicros): string {
+  if (!isCanonicalIntegerMicros(value)) throw new Error('Invalid canonical IntegerMicros value.')
+  const micros = BigInt(value)
+  const dollars = (micros / 1_000_000n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  const fraction = (micros % 1_000_000n).toString().padStart(6, '0')
+  return `$${dollars}.${fraction}`
 }
