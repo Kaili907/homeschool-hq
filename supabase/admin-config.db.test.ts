@@ -7,6 +7,7 @@ const OWNER_ID = '00000000-0000-4000-8000-000000000201'
 const ADMIN_ID = '00000000-0000-4000-8000-000000000202'
 const VIEWER_ID = '00000000-0000-4000-8000-000000000203'
 const STUDENT_ID = '00000000-0000-4000-8000-000000000204'
+const SECOND_OWNER_ID = '00000000-0000-4000-8000-000000000205'
 const databases: PGlite[] = []
 
 type Role = 'anon' | 'authenticated' | 'service_role'
@@ -40,7 +41,8 @@ async function createDatabase() {
     create schema academy_private authorization postgres;
     create table auth.users (id uuid primary key);
     insert into auth.users (id) values
-      ('${OWNER_ID}'), ('${ADMIN_ID}'), ('${VIEWER_ID}'), ('${STUDENT_ID}');
+      ('${OWNER_ID}'), ('${ADMIN_ID}'), ('${VIEWER_ID}'), ('${STUDENT_ID}'),
+      ('${SECOND_OWNER_ID}');
     create function auth.uid()
     returns uuid language sql stable set search_path = pg_catalog as $$
       select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid
@@ -76,6 +78,10 @@ async function createDatabase() {
   ))
   await database.exec(await readFile(
     new URL('./migrations/20260809140000_academy_admin_configuration_core.sql', import.meta.url),
+    'utf8',
+  ))
+  await database.exec(await readFile(
+    new URL('./migrations/20260810153000_academy_admin_configuration_reauthorization.sql', import.meta.url),
     'utf8',
   ))
   return database
@@ -199,6 +205,37 @@ describe('ADMIN-14A durable configuration database core', () => {
       preview_auth: true, commit_auth: true, read_service: true,
       read_auth: false, commit_service: false,
     })
+  })
+
+  it('keeps write-point reauthorization fixed-search-path, postgres-owned, and ungranted', async () => {
+    const database = databases[0]
+    const metadata = await database.query<any>(`
+      select owner.rolname as owner, function.prosecdef,
+        function.provolatile, function.proconfig,
+        has_function_privilege('anon', function.oid, 'execute') as anon_execute,
+        has_function_privilege('authenticated', function.oid, 'execute') as authenticated_execute,
+        has_function_privilege('service_role', function.oid, 'execute') as service_execute
+      from pg_proc as function
+      join pg_roles as owner on owner.oid = function.proowner
+      where function.oid =
+        'academy_private.admin_configuration_reauthorize_head_update()'::regprocedure
+    `)
+    expect(metadata.rows).toEqual([{
+      owner: 'postgres',
+      prosecdef: true,
+      provolatile: 'v',
+      proconfig: ['search_path=pg_catalog'],
+      anon_execute: false,
+      authenticated_execute: false,
+      service_execute: false,
+    }])
+    const trigger = await database.query<any>(`
+      select trigger.tgenabled, trigger.tgisinternal
+      from pg_trigger as trigger
+      where trigger.tgrelid = 'academy_private.admin_configuration_heads'::regclass
+        and trigger.tgname = 'admin_configuration_heads_reauthorize_update'
+    `)
+    expect(trigger.rows).toEqual([{ tgenabled: 'O', tgisinternal: false }])
   })
 
   it('returns a sanitized configuration:read projection with decimal-string revisions and money', async () => {
@@ -381,6 +418,63 @@ describe('ADMIN-14A durable configuration database core', () => {
     expect((await database.query(`select consumed_at from academy_private.admin_change_confirmations`)).rows)
       .toEqual([{ consumed_at: null }])
     expect((await database.query(`select * from academy_private.admin_mutation_receipts`)).rows).toEqual([])
+  })
+
+  it('fails closed when the Owner assignment changes after initial commit authorization', async () => {
+    const database = databases[0]
+    await database.exec(`insert into public.academy_admin_role_assignments
+      (user_id, role, assignment_reason_code)
+      values ('${SECOND_OWNER_ID}', 'owner', 'admin.bootstrap')`)
+    const change = await preview(database, { token: 'mid-request-role-change' })
+    await database.exec(`
+      create or replace function academy_private.admin_configuration_reason_is_allowed(
+        candidate text
+      ) returns boolean
+      language plpgsql volatile security definer set search_path = pg_catalog as $$
+      declare
+        prior_assignment uuid;
+      begin
+        select id into prior_assignment
+        from public.academy_admin_role_assignments
+        where user_id = '${OWNER_ID}' and role = 'owner' and status = 'active';
+        if prior_assignment is not null then
+          update public.academy_admin_role_assignments
+          set status = 'revoked', revision = 2, revoked_at = statement_timestamp(),
+              revoked_by = '${OWNER_ID}', revoked_by_role = 'owner',
+              revocation_reason_code = 'policy.enforcement',
+              revocation_correlation_id = '10000000-0000-4000-8000-000000000099'
+          where id = prior_assignment;
+          insert into public.academy_admin_role_assignments (
+            user_id, role, assigned_by, assigned_by_role,
+            assignment_reason_code, assignment_correlation_id
+          ) values (
+            '${OWNER_ID}', 'admin', '${OWNER_ID}', 'owner',
+            'policy.enforcement', '10000000-0000-4000-8000-000000000099'
+          );
+        end if;
+        return candidate = any (array[
+          'operator.request', 'scheduled.change', 'policy.enforcement',
+          'incident.response', 'corrective.action', 'emergency.response',
+          'configuration.changed'
+        ]::text[]);
+      end;
+      $$;
+    `)
+
+    await expect(commit(database, {
+      token: change.token,
+      requestId: '10000000-0000-4000-8000-000000000099',
+    })).rejects.toThrow(/ADMIN_CONFIGURATION_MANAGE_REQUIRED/)
+    expect((await database.query(`select current_revision
+      from academy_private.admin_configuration_heads
+      where setting_key = 'runtime.ai.enabled'`)).rows).toEqual([{ current_revision: 1 }])
+    expect((await database.query(`select role, status
+      from public.academy_admin_role_assignments
+      where user_id = '${OWNER_ID}'`)).rows).toEqual([{ role: 'owner', status: 'active' }])
+    expect((await database.query(`select count(*)::integer as count
+      from academy_private.admin_audit_events`)).rows).toEqual([{ count: 0 }])
+    expect((await database.query(`select count(*)::integer as count
+      from academy_private.admin_mutation_receipts`)).rows).toEqual([{ count: 0 }])
   })
 
   it('refuses revision update/delete and models rollback as another accepted revision', async () => {

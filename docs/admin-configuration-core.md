@@ -63,6 +63,14 @@ Preview and commit both require a positive decimal-string `expectedRevision`.
 Commit locks the head and rejects stale state with HTTP 409
 `revision_conflict`; there is no last-write-wins path.
 
+Migration `20260810153000_academy_admin_configuration_reauthorization.sql`
+adds the authorization linearization point at the head update. The trigger
+locks and re-resolves the authenticated actor's current assignment, requires it
+to remain an Owner assignment, and binds that assignment to the new revision's
+actor snapshot. If revocation, expiry, or demotion wins the assignment lock
+during an in-flight commit, the configuration revision, confirmation
+consumption, receipt, head update, and audit append all roll back.
+
 Preview validates the exact proposed value and creates an Owner-bound
 confirmation with a maximum five-minute lifetime. It binds actor and active
 assignment, setting, expected revision, new-value digest, exact reason code,

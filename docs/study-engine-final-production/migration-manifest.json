@@ -203,6 +203,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-access-management-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810153000",
+      "filename": "20260810153000_academy_admin_configuration_reauthorization.sql",
+      "sha256": "e533b15b04157cd1a7015221b59fe483b3f67691ccf6f5a497e592398c978308",
+      "dependency": "20260810144700_academy_admin_access_management.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-admin-configuration-reauthorization-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

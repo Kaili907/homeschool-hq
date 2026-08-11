@@ -9,14 +9,52 @@ const PATHS = new Set([
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 const ALLOWED_QUERY = new Set(['limit', 'cursor', 'household', 'learner'])
 
-function readQuery(event) {
-  const query = isRecord(event?.queryStringParameters) ? event.queryStringParameters : {}
-  const multi = isRecord(event?.multiValueQueryStringParameters) ? event.multiValueQueryStringParameters : {}
+function canonicalQuery(event) {
+  const queryValue = event?.queryStringParameters
+  const multiValue = event?.multiValueQueryStringParameters
+  if (queryValue !== null && queryValue !== undefined && !isRecord(queryValue)) return null
+  if (multiValue !== null && multiValue !== undefined && !isRecord(multiValue)) return null
+
+  const query = queryValue ?? {}
+  const multi = multiValue ?? {}
+  if (Object.entries(query).some(([key, value]) =>
+    !ALLOWED_QUERY.has(key) || typeof value !== 'string')) return null
+  if (Object.entries(multi).some(([key, values]) =>
+    !ALLOWED_QUERY.has(key)
+    || !Array.isArray(values)
+    || values.length !== 1
+    || typeof values[0] !== 'string')) return null
+
+  const represented = {}
+  for (const [key, value] of Object.entries(query)) represented[key] = value
+  for (const [key, values] of Object.entries(multi)) {
+    if (Object.hasOwn(represented, key) && represented[key] !== values[0]) return null
+    represented[key] = values[0]
+  }
+
+  const raw = typeof event?.rawQueryString === 'string'
+    ? event.rawQueryString
+    : typeof event?.rawQuery === 'string' ? event.rawQuery : null
+  if (raw === null) return represented
+
+  const canonical = {}
+  for (const [key, value] of new URLSearchParams(raw).entries()) {
+    if (!ALLOWED_QUERY.has(key) || Object.hasOwn(canonical, key)) return null
+    canonical[key] = value
+  }
+  const canonicalKeys = Object.keys(canonical).sort()
+  const representedKeys = Object.keys(represented).sort()
   if (
-    Object.keys(query).some((key) => !ALLOWED_QUERY.has(key))
-    || Object.keys(multi).some((key) => !ALLOWED_QUERY.has(key))
-    || Object.values(multi).some((values) => !Array.isArray(values) || values.length !== 1)
+    canonicalKeys.length !== representedKeys.length
+    || canonicalKeys.some((key, index) =>
+      key !== representedKeys[index] || canonical[key] !== represented[key])
   ) return null
+  return canonical
+}
+
+function readQuery(event) {
+  const query = canonicalQuery(event)
+  if (!query) return null
 
   const rawLimit = query.limit ?? '50'
   if (typeof rawLimit !== 'string' || !/^[1-9]\d{0,2}$/.test(rawLimit)) return null

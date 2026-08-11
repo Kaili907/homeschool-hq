@@ -80,6 +80,43 @@ describe('ADMIN-10B Safety Operations endpoint', () => {
     expect(reader.read).not.toHaveBeenCalled()
   })
 
+  it.each([
+    { queryStringParameters: 'limit=50' },
+    { multiValueQueryStringParameters: ['limit=50'] },
+    { multiValueQueryStringParameters: { limit: ['50', '100'] } },
+    {
+      queryStringParameters: { limit: '50' },
+      multiValueQueryStringParameters: { limit: ['100'] },
+    },
+    {
+      queryStringParameters: { limit: '50' },
+      rawQueryString: 'limit=50&limit=100',
+    },
+    {
+      queryStringParameters: { limit: '50' },
+      rawQueryString: 'limit=100',
+    },
+  ])('fails closed for malformed, duplicated, or conflicting query representations: %j', async (overrides) => {
+    const { handler, reader } = authorizedHandler()
+    const response = await handler(event(overrides))
+    expect(response.statusCode).toBe(400)
+    expect(JSON.parse(response.body)).toEqual({ error: { code: 'invalid_request' } })
+    expect(reader.read).not.toHaveBeenCalled()
+  })
+
+  it('accepts consistent single-value query representations', async () => {
+    const { handler, reader } = authorizedHandler()
+    const response = await handler(event({
+      queryStringParameters: { limit: '50' },
+      multiValueQueryStringParameters: { limit: ['50'] },
+      rawQueryString: 'limit=50',
+    }))
+    expect(response.statusCode).toBe(200)
+    expect(reader.read).toHaveBeenCalledWith({
+      limit: 50, cursor: null, householdRef: undefined, learnerRef: undefined,
+    })
+  })
+
   it('returns only a stable source error when the projection fails', async () => {
     const sentinel = 'SQL private learner body and SUPABASE_SERVICE_ROLE_KEY'
     const { handler } = authorizedHandler({ read: vi.fn(async () => { throw new Error(sentinel) }) })
