@@ -115,6 +115,7 @@ const readySnapshot: StudyProductionControllerSnapshot = {
   acceptedCheckpointRevision: 0,
   selection: { segmentId: null },
   advisoryLaunch: null,
+  content: null,
   pendingMutation: null,
   recovery: null,
 }

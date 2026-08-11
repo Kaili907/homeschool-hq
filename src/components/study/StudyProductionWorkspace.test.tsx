@@ -134,6 +134,7 @@ function snapshot(
     acceptedCheckpointRevision: currentSession ? 2 : 0,
     selection: { segmentId: currentSession?.currentSegmentId ?? null },
     advisoryLaunch: null,
+    content: null,
     pendingMutation: status === 'network_failure' ? 'transition' : null,
     recovery,
   }
@@ -185,7 +186,7 @@ const resumeLaunch: StudyProductionWorkspaceLaunch = {
   kind: 'resume',
   input: {
     sessionId: 'session:private-production-id',
-    curriculumReleaseVersion: '1.0.0',
+    academyContext: beginLaunch.input.academyContext,
   },
 }
 
@@ -250,6 +251,16 @@ describe('production Study workspace controller-state presentation', () => {
     expect(begin).toContain('Today&#x27;s goal')
     expect(resume).toContain('Resume exact step')
     expect(resume).toContain('restored from the server')
+  })
+
+  it('allows verification to begin without substituting unbound lesson content', () => {
+    const begin = render(snapshot('ready'), { status: 'loading' }, beginLaunch)
+    const resume = render(snapshot('ready'), { status: 'loading' }, resumeLaunch)
+    expect(begin).toContain('Verify today&#x27;s Study lesson')
+    expect(begin).toContain('Start Study')
+    expect(resume).toContain('Restore your saved Study lesson')
+    expect(resume).toContain('Resume exact step')
+    expect(begin).not.toContain('Today&#x27;s goal')
   })
 
   it('keeps an in-flight transition singular and disables other controls', () => {

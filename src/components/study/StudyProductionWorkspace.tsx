@@ -149,7 +149,8 @@ function contentMatchesLaunch(
 ): boolean {
   if (!isStudyProductionBoundContent(content)) return false
   if (launch.kind === 'resume') {
-    return content.releaseVersion === launch.input.curriculumReleaseVersion
+    return content.lessonId === launch.input.academyContext.lessonRef &&
+      content.releaseVersion === launch.input.academyContext.releaseVersion
   }
   return content.lessonId === launch.input.academyContext.lessonRef &&
     content.releaseVersion === launch.input.academyContext.releaseVersion &&
@@ -270,7 +271,7 @@ export function StudyProductionWorkspace({
     if (session) {
       void runOperation(() => controller.resume({
         sessionId: session.sessionId,
-        curriculumReleaseVersion: session.curriculumBinding.releaseVersion,
+        academyContext: launch.input.academyContext,
       }))
       return
     }
@@ -501,11 +502,9 @@ export function StudyProductionWorkspaceView({
               <p>Your progress did not move. Reload the saved session before choosing what comes next.</p>
             </StateCard>
           ) : !session ? (
-            content.status === 'loading' ? (
-              <StateCard title="Preparing lesson content"><p role="status">Checking the bound curriculum lesson.</p></StateCard>
-            ) : !bound ? (
+            content.status === 'unavailable' ? (
               <ContentUnavailable actions={actions} />
-            ) : (
+            ) : bound ? (
               <StateCard
                 title={bound.content.lessonTitle}
                 actions={<button type="button" className={primaryButton} onClick={actions.enter}>
@@ -515,6 +514,15 @@ export function StudyProductionWorkspaceView({
                 <p className="text-sm font-extrabold uppercase tracking-wide text-cyan-800">Today&apos;s goal</p>
                 <p className="mt-1 text-lg text-slate-800">{bound.content.goal}</p>
                 {launch.kind === 'resume' && <p className="mt-3">Your saved place will be restored from the server before the lesson opens.</p>}
+              </StateCard>
+            ) : (
+              <StateCard
+                title={launch.kind === 'resume' ? 'Restore your saved Study lesson' : 'Verify today\'s Study lesson'}
+                actions={<button type="button" className={primaryButton} onClick={actions.enter}>
+                  {launch.kind === 'resume' ? 'Resume exact step' : 'Start Study'}
+                </button>}
+              >
+                <p>The exact server-bound lesson will open only after this session is verified.</p>
               </StateCard>
             )
           ) : content.status === 'loading' ? (

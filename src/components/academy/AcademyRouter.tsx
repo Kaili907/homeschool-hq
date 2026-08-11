@@ -7,6 +7,10 @@ import { loadUnit } from '../../academy/contentClient'
 import { loadProgram, type AcademyProgram } from '../../academy/program'
 import type { AcademyProgramEntry } from '../../academy/workingLevel'
 import {
+  buildAcademyStudyContext,
+  type AcademyStudyContext,
+} from '../../academy/adapters/studyContextAdapter'
+import {
   ACADEMY_SUBJECT_LABELS,
   type AcademyCatalog,
   type AcademyCatalogCourse,
@@ -48,6 +52,7 @@ interface AcademyProps {
   route: AcademyRoute
   onNavigate: (route: AcademyRoute) => void
   onPatch: (update: (prev: Profile) => Profile) => void
+  onOpenStudy?: (context: AcademyStudyContext) => void
   onExit: () => void
 }
 
@@ -129,6 +134,7 @@ export function AcademyRouter(props: AcademyProps) {
     levelOf: program.levelOf,
     onNavigate,
     onPatch,
+    onOpenStudy: props.onOpenStudy,
     onExit,
     schoolYear: props.schoolYear,
   }
@@ -203,6 +209,7 @@ interface SharedViewProps {
   schoolYear: SchoolYear | undefined
   onNavigate: (route: AcademyRoute) => void
   onPatch: (update: (prev: Profile) => Profile) => void
+  onOpenStudy?: (context: AcademyStudyContext) => void
   onExit: () => void
 }
 
@@ -221,7 +228,16 @@ const courseLevelLabel = (
 
 // ---------- home: today's work + course catalog ----------
 
-function AcademyHome({ profile, catalog, schedule, levelOf, schoolYear, onNavigate, onExit }: SharedViewProps) {
+function AcademyHome({
+  profile,
+  catalog,
+  schedule,
+  levelOf,
+  schoolYear,
+  onNavigate,
+  onOpenStudy,
+  onExit,
+}: SharedViewProps) {
   const today = isoToday()
   const configured = isSchoolYearConfigured(schoolYear)
   const scopeWeek = configured ? derivedScopeWeek(schoolYear, today) : 1
@@ -229,6 +245,9 @@ function AcademyHome({ profile, catalog, schedule, levelOf, schoolYear, onNaviga
   const jsDay = new Date(`${today}T12:00:00`).getDay()
   const scopeDay = jsDay >= 1 && jsDay <= 5 ? jsDay : 0
   const day = schedule.days.find((d) => d.week === scopeWeek && d.day === scopeDay)
+  const studyContext = scopeDay > 0
+    ? buildAcademyStudyContext(profile, schedule, scopeWeek, scopeDay)
+    : null
   const findLesson = (lessonId: string) => {
     for (const course of catalog.courses) {
       for (const unit of course.units) {
@@ -293,6 +312,15 @@ function AcademyHome({ profile, catalog, schedule, levelOf, schoolYear, onNaviga
           </ul>
         ) : (
           <p className="mt-3 font-semibold text-slate-500">No lessons scheduled today.</p>
+        )}
+        {onOpenStudy && studyContext && day && day.lessons.length > 0 && (
+          <button
+            type="button"
+            onClick={() => onOpenStudy(studyContext)}
+            className="mt-4 min-h-11 w-full rounded-xl border border-cyan-700 bg-cyan-700 p-4 text-left font-extrabold text-white hover:bg-cyan-800"
+          >
+            Open today&apos;s verified Study workspace
+          </button>
         )}
       </section>
 
