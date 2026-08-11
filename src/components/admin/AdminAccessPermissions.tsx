@@ -74,9 +74,11 @@ export function AdminAccessPermissions({
   >({ status: 'idle' })
   const cancelButtonRef = useRef<HTMLButtonElement>(null)
   const confirmButtonRef = useRef<HTMLButtonElement>(null)
+  const confirmationTriggerRef = useRef<HTMLButtonElement | null>(null)
+  const principalsHeadingRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
-    if (confirmation) confirmButtonRef.current?.focus()
+    if (confirmation) cancelButtonRef.current?.focus()
   }, [confirmation])
 
   useEffect(() => {
@@ -89,6 +91,15 @@ export function AdminAccessPermissions({
   const activeOwnerCount = useMemo(() => state.status === 'ready'
     ? state.projection.principals.filter((principal) => principal.role === 'owner').length
     : 0, [state])
+
+  function closeConfirmation() {
+    setConfirmation(null)
+    globalThis.setTimeout(() => {
+      const trigger = confirmationTriggerRef.current
+      if (trigger?.isConnected) trigger.focus()
+      else principalsHeadingRef.current?.focus()
+    }, 0)
+  }
 
   async function commit(pending: PendingConfirmation) {
     setMutationState({ status: 'saving' })
@@ -104,7 +115,7 @@ export function AdminAccessPermissions({
       : { action: 'revoke', ...base }
     try {
       const result = await source.mutate(request)
-      setConfirmation(null)
+      closeConfirmation()
       setMutationState({
         status: 'success',
         message: result.status === 'revoked'
@@ -113,7 +124,7 @@ export function AdminAccessPermissions({
       })
       onMutated()
     } catch (error) {
-      setConfirmation(null)
+      closeConfirmation()
       setMutationState({ status: 'error', message: safeMutationMessage(error) })
       if (error instanceof AdminAccessError
         && (error.code === 'access_conflict' || error.code === 'access_timeout')) onMutated()
@@ -158,7 +169,7 @@ export function AdminAccessPermissions({
 
       <section className="admin-access__principals" aria-labelledby="admin-principals-heading">
         <div className="admin-access__section-heading">
-          <div><p>Current authority</p><h3 id="admin-principals-heading">Admin principals</h3></div>
+          <div><p>Current authority</p><h3 ref={principalsHeadingRef} id="admin-principals-heading" tabIndex={-1}>Admin principals</h3></div>
           {state.status === 'ready' && <span>{state.projection.principals.length} active</span>}
         </div>
 
@@ -235,18 +246,24 @@ export function AdminAccessPermissions({
                         <button
                           type="button"
                           disabled={busy || selectedRole === principal.role}
-                          onClick={() => setConfirmation({
-                            principal,
-                            action: 'change-role',
-                            newRole: selectedRole,
-                            reasonCode: reason,
-                          })}
+                          onClick={(event) => {
+                            confirmationTriggerRef.current = event.currentTarget
+                            setConfirmation({
+                              principal,
+                              action: 'change-role',
+                              newRole: selectedRole,
+                              reasonCode: reason,
+                            })
+                          }}
                         >Review role change</button>
                         <button
                           type="button"
                           className="is-danger"
                           disabled={busy || soleOwner}
-                          onClick={() => setConfirmation({ principal, action: 'revoke', reasonCode: reason })}
+                          onClick={(event) => {
+                            confirmationTriggerRef.current = event.currentTarget
+                            setConfirmation({ principal, action: 'revoke', reasonCode: reason })
+                          }}
                         >Revoke access</button>
                       </div>
                     </div>
@@ -273,7 +290,7 @@ export function AdminAccessPermissions({
           aria-labelledby="admin-access-confirm-title"
           aria-describedby="admin-access-confirm-description"
           onKeyDown={(event) => {
-            if (event.key === 'Escape' && mutationState.status !== 'saving') setConfirmation(null)
+            if (event.key === 'Escape' && mutationState.status !== 'saving') closeConfirmation()
             if (event.key === 'Tab') {
               const first = cancelButtonRef.current
               const last = confirmButtonRef.current
@@ -301,7 +318,7 @@ export function AdminAccessPermissions({
             </p>
             <code>{confirmation.principal.principalRef}</code>
             <div className="admin-access__confirm-actions">
-              <button ref={cancelButtonRef} type="button" onClick={() => setConfirmation(null)} disabled={mutationState.status === 'saving'}>Cancel</button>
+              <button ref={cancelButtonRef} type="button" onClick={closeConfirmation} disabled={mutationState.status === 'saving'}>Cancel</button>
               <button
                 ref={confirmButtonRef}
                 type="button"

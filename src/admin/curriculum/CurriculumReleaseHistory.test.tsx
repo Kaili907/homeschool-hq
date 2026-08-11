@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it, vi } from 'vitest'
 import type { CurriculumReleaseHistoryModel } from '../curriculum-history'
 import {
+  CURRICULUM_RELEASE_HISTORY_RENDER_LIMIT,
   CurriculumReleaseHistory,
   CurriculumReleaseHistoryState,
   CurriculumReleaseHistoryView,
@@ -126,6 +127,25 @@ describe('Curriculum Release History Admin surface', () => {
     expect(markup).toContain('aria-selected="true"')
     expect(markup).toContain('aria-controls="curriculum-release-governance-detail"')
     expect(markup).toContain('Release Integrity route unavailable')
+  })
+
+  it('caps a maximum-size registry projection without silently hiding the authoritative total', () => {
+    const baseline = model()
+    const releases = Array.from({ length: 1_000 }, (_, index) => ({
+      ...baseline.releases[index === 0 ? 0 : 1],
+      version: `${index + 1}.0.0`,
+      packageId: `manuel-academy-v${index + 1}`,
+      active: index === 0,
+      lifecycle: index === 0 ? 'active' as const : 'published' as const,
+    }))
+    const markup = renderToStaticMarkup(
+      <CurriculumReleaseHistoryView
+        model={{ ...baseline, activeReleaseVersion: releases[0].version, releases }}
+      />,
+    )
+    expect(markup.match(/role="option"/g)).toHaveLength(CURRICULUM_RELEASE_HISTORY_RENDER_LIMIT)
+    expect(markup).toContain('Showing the first 100 of 1000 matching releases')
+    expect(markup).toContain('1000 of 1000')
   })
 
   it('has explicit empty, unavailable, and authorization-denied states without private identities', () => {

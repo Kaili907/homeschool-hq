@@ -60,6 +60,12 @@ export function createAdminCurriculumHttpSource(
   getAccessToken: () => Promise<string | null> = getGatewayAccessToken,
 ): CurriculumBrowserSource {
   return {
+    async loadIdentity() {
+      return requireProjection(
+        await getJson(fetcher, getAccessToken, `${basePath}/catalog-identity`),
+        adaptSource,
+      )
+    },
     async loadCatalog() {
       return requireProjection(
         await getJson(fetcher, getAccessToken, `${basePath}/catalog`),

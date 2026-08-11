@@ -62,7 +62,7 @@ function LockedValidationSurface({ state }: { readonly state: 'unresolved' | 'de
     <div className="bg-slate-950 py-10 text-slate-100" aria-labelledby="validation-access-title">
       <section className="mx-auto max-w-xl rounded-2xl border border-slate-700 bg-slate-900 p-8 shadow-xl">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300">Admin Console</p>
-        <h1 id="validation-access-title" className="mt-3 text-2xl font-bold">Curriculum validation unavailable</h1>
+        <h2 id="validation-access-title" className="mt-3 text-2xl font-bold">Curriculum validation unavailable</h2>
         <p className="mt-4 text-slate-300" role={state === 'denied' ? 'alert' : 'status'}>
           {state === 'unresolved'
             ? 'Authorization is still being verified. Validation evidence remains hidden.'
@@ -85,7 +85,7 @@ function ValidationReadStateSurface({ state, onRetry }: { state: Exclude<Curricu
   return (
     <div className="bg-slate-950 py-10 text-slate-100" aria-busy={state.status === 'loading'}>
       <section className="mx-auto max-w-xl rounded-2xl border border-slate-700 bg-slate-900 p-8" role={content.role}>
-        <h1 className="text-2xl font-bold">{content.title}</h1>
+        <h2 className="text-2xl font-bold">{content.title}</h2>
         <p className="mt-3 text-slate-300">{content.message}</p>
         {(state.status === 'unavailable' || state.status === 'error') && onRetry && (
           <button type="button" onClick={onRetry} className="mt-4 min-h-11 rounded-lg bg-sky-700 px-4 py-2 font-bold text-white">Try again</button>
@@ -136,7 +136,7 @@ export function CurriculumValidationDashboard({
         <header className="flex flex-col gap-5 border-b border-slate-700 pb-7 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300">Admin Console · Read only</p>
-            <h1 id="validation-title" className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Curriculum Validation</h1>
+            <h2 id="validation-title" className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Curriculum Validation</h2>
             <p className="mt-2 max-w-2xl text-slate-300">Recorded validation evidence for the immutable curriculum package.</p>
             <nav aria-label="Curriculum administration" className="mt-4 flex gap-4 text-sm font-bold">
               <a href="/academy/admin/curriculum" className="text-sky-300">Curriculum browser</a>

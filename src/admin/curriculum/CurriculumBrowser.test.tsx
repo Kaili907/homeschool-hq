@@ -199,7 +199,7 @@ describe('ADMIN-11 read-only Admin surface', () => {
     expect(hasCurriculumReadAccess({ status: 'authorized', capabilities: ['overview:read'] })).toBe(false)
     expect(hasCurriculumReadAccess({ status: 'authorized', capabilities: ['curriculum:read'] })).toBe(true)
     const deniedSource: CurriculumBrowserSource = {
-      loadCatalog: vi.fn(), loadLesson: vi.fn(),
+      loadIdentity: vi.fn(), loadCatalog: vi.fn(), loadLesson: vi.fn(),
     }
     const markup = renderToStaticMarkup(
       <CurriculumBrowser authorization={{ status: 'denied' }} source={deniedSource} />,
@@ -214,13 +214,19 @@ describe('ADMIN-11 read-only Admin surface', () => {
       calls.push({ path, init })
       return {
         ok: true, status: 200,
-        json: async () => path.endsWith('/catalog') ? catalog : { ...knownLesson, lessonId: 'lesson id/with spaces' },
+        json: async () => path.endsWith('/catalog-identity')
+          ? catalog.source
+          : path.endsWith('/catalog')
+            ? catalog
+            : { ...knownLesson, lessonId: 'lesson id/with spaces' },
       }
     })
     const httpSource = createAdminCurriculumHttpSource(fetcher, '/api/admin/curriculum', async () => 'test-access-token')
+    await httpSource.loadIdentity()
     await httpSource.loadCatalog()
     await httpSource.loadLesson('lesson id/with spaces')
     expect(calls.map((call) => call.path)).toEqual([
+      '/api/admin/curriculum/catalog-identity',
       '/api/admin/curriculum/catalog',
       '/api/admin/curriculum/lessons/lesson%20id%2Fwith%20spaces',
     ])

@@ -113,7 +113,7 @@ export function CurriculumBrowserStateMessage({ role, title, children, onRetry }
   return (
     <div className="bg-slate-950 py-6 text-slate-100">
       <div role={role} className="mx-auto max-w-3xl rounded-xl border border-slate-700 bg-slate-900 p-6">
-        <h1 className="text-2xl font-bold">{title}</h1>
+        <h2 className="text-2xl font-bold">{title}</h2>
         <p className="mt-2 text-slate-300">{children}</p>
         {onRetry && <button type="button" onClick={onRetry} className="mt-4 min-h-11 rounded-lg bg-cyan-700 px-4 py-2 font-bold text-white">Try again</button>}
       </div>
@@ -174,9 +174,9 @@ export function CurriculumBrowserView({
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-400">Admin Console · Read-only</p>
-              <h1 ref={headingRef} tabIndex={-1} className="mt-1 text-2xl font-bold outline-none sm:text-3xl">
+              <h2 ref={headingRef} tabIndex={-1} className="mt-1 text-2xl font-bold outline-none sm:text-3xl">
                 Curriculum Browser
-              </h1>
+              </h2>
               <p className="mt-2 max-w-3xl text-sm text-slate-300">
                 Published package <strong>{catalog.source.packageId}</strong> · version <strong>{catalog.source.version}</strong>
                 {' '}· authored {catalog.source.authoredOn} · validation {catalog.source.validationStatus}

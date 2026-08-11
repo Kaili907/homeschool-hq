@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createAdminCurriculumAuthoringService } from './admin-curriculum-authoring.js'
+import {
+  ADMIN_CURRICULUM_DRAFT_ENTITY_LIMIT,
+  ADMIN_CURRICULUM_DRAFT_LIST_LIMIT,
+  createAdminCurriculumAuthoringService,
+} from './admin-curriculum-authoring.js'
 
 const ACTOR = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
 const DRAFT = '10000000-0000-4000-8000-000000000001'
@@ -10,6 +14,24 @@ const COURSE = {
   subject: 'mathematics', title: 'Mathematics 5', description: 'Course.',
   days: 180, order: 1, unit_refs: ['unit:math-5-1'],
   standards: [{ framework_ref: 'framework:legacy', legacy_label: '5.NBT', mapping_status: 'human-review' }],
+}
+const TIMESTAMP = '2026-08-10T12:00:00Z'
+
+function draftSummary() {
+  return {
+    schemaVersion: 1, draftId: DRAFT, baseReleaseVersion: '1.0.0',
+    targetVersion: '2.0.0-draft.1', authoringSchemaVersion: '2.0.0',
+    lifecycleState: 'draft', revision: 1, createdAt: TIMESTAMP, updatedAt: TIMESTAMP,
+  }
+}
+
+function entityDetail() {
+  return {
+    schemaVersion: 1, draftId: DRAFT, entityType: 'course',
+    entityRef: 'course:math-5', origin: 'base_override', revision: 1,
+    position: 0, tombstoned: false, digest: HASH,
+    createdAt: TIMESTAMP, updatedAt: TIMESTAMP, payload: COURSE,
+  }
 }
 
 function client(value, error = null) {
@@ -39,12 +61,7 @@ describe('Admin curriculum authoring server service', () => {
   it('projects bounded navigation reads and fails closed on malformed database output', async () => {
     const valid = {
       schemaVersion: 1,
-      drafts: [{
-        schemaVersion: 1, draftId: DRAFT, baseReleaseVersion: '1.0.0',
-        targetVersion: '2.0.0-draft.1', authoringSchemaVersion: '2.0.0',
-        lifecycleState: 'draft', revision: 1,
-        createdAt: '2026-08-10T12:00:00Z', updatedAt: '2026-08-10T12:00:00Z',
-      }],
+      drafts: [draftSummary()],
     }
     const database = client(valid)
     const service = createAdminCurriculumAuthoringService({ client: database })
@@ -75,6 +92,43 @@ describe('Admin curriculum authoring server service', () => {
     }) })
     await expect(injected.readEntity(ACTOR, DRAFT, 'course', 'course:math-5'))
       .rejects.toMatchObject({ code: 'unavailable' })
+  })
+
+  it('accepts one revision-pinned entity batch and rejects every authoritative overflow explicitly', async () => {
+    const entities = Array.from({ length: ADMIN_CURRICULUM_DRAFT_ENTITY_LIMIT }, entityDetail)
+    const database = client({
+      schemaVersion: 1, draftId: DRAFT, draftRevision: 7, entities,
+    })
+    const service = createAdminCurriculumAuthoringService({ client: database })
+    await expect(service.readEntities(ACTOR, DRAFT, 7)).resolves.toMatchObject({
+      draftId: DRAFT, draftRevision: 7,
+    })
+    expect(database.rpc).toHaveBeenCalledWith('academy_admin_read_curriculum_draft_entities_v1', {
+      p_actor_user_ref: ACTOR,
+      p_draft_id: DRAFT,
+      p_expected_revision: 7,
+      p_required_capability: 'curriculum:read',
+    })
+
+    const draftOverflow = createAdminCurriculumAuthoringService({ client: client({
+      schemaVersion: 1,
+      drafts: Array.from({ length: ADMIN_CURRICULUM_DRAFT_LIST_LIMIT + 1 }, draftSummary),
+    }) })
+    await expect(draftOverflow.list(ACTOR)).rejects.toMatchObject({ code: 'incomplete' })
+
+    const entityOverflow = createAdminCurriculumAuthoringService({ client: client({
+      ...draftSummary(),
+      entities: Array.from({ length: ADMIN_CURRICULUM_DRAFT_ENTITY_LIMIT + 1 }, () => {
+        const { schemaVersion: _schemaVersion, draftId: _draftId, payload: _payload, ...summary } = entityDetail()
+        return summary
+      }),
+    }) })
+    await expect(entityOverflow.read(ACTOR, DRAFT)).rejects.toMatchObject({ code: 'incomplete' })
+
+    const databaseOverflow = createAdminCurriculumAuthoringService({
+      client: client(null, { message: 'CURRICULUM_DRAFT_MATERIALIZATION_LIMIT' }),
+    })
+    await expect(databaseOverflow.read(ACTOR, DRAFT)).rejects.toMatchObject({ code: 'incomplete' })
   })
 
   it('maps database CAS and replay markers to stable server-only errors', async () => {

@@ -254,6 +254,57 @@ describe('Curriculum Studio shell', () => {
     expect(visible.total).toBe(404)
   })
 
+  it('indexes the deterministic 5,000-entity server maximum linearly and renders only 250 rows', () => {
+    const entries: CurriculumStudioEntityIndexEntry[] = []
+    const grades = [5, 7, 8] as const
+    for (let courseIndex = 0; courseIndex < 30; courseIndex += 1) {
+      const grade = grades[courseIndex % grades.length]
+      const courseRef = `stress-course-${courseIndex}`
+      entries.push({
+        entityType: 'course', entityRef: courseRef, origin: 'base', revision: null,
+        position: courseIndex, parentId: `grade:${grade}`, grade,
+        subject: 'stress-subject', label: `Stress course ${courseIndex}`, context: '8 units',
+      })
+      for (let unitIndex = 0; unitIndex < 8; unitIndex += 1) {
+        const unitRef = `${courseRef}-unit-${unitIndex}`
+        entries.push({
+          entityType: 'unit', entityRef: unitRef, origin: 'base', revision: null,
+          position: unitIndex, parentId: `course:${courseRef}`, grade,
+          subject: 'stress-subject', courseRef, label: `Unit ${unitIndex}`, context: '19 lessons',
+        })
+        for (let lessonIndex = 0; lessonIndex < 19; lessonIndex += 1) {
+          const entityRef = `${unitRef}-lesson-${lessonIndex}`
+          entries.push({
+            entityType: 'lesson', entityRef, origin: 'base', revision: null,
+            position: lessonIndex, parentId: `unit:${unitRef}`, grade,
+            subject: 'stress-subject', courseRef, unitRef,
+            label: `Lesson ${lessonIndex}`, context: 'deterministic stress fixture',
+          })
+        }
+      }
+    }
+    for (let resourceIndex = 0; resourceIndex < 170; resourceIndex += 1) {
+      entries.push({
+        entityType: 'media_resource', entityRef: `stress-resource-${resourceIndex}`,
+        origin: 'base', revision: null, position: resourceIndex,
+        parentId: 'resources:all', label: `Resource ${resourceIndex}`, context: 'text · optional',
+      })
+    }
+    expect(entries).toHaveLength(5_000)
+
+    const started = performance.now()
+    const index = buildMaterializedCurriculumStudioIndex(entries)
+    const elapsedMs = performance.now() - started
+    const expanded = new Set(index.rows.filter((row) => row.hasChildren).map((row) => row.id))
+    const visible = visibleCurriculumStudioRows(index, expanded, '')
+    console.info(`[admin-performance] 5000-entity curriculum index ${elapsedMs.toFixed(1)}ms`)
+
+    expect(index.rows).toHaveLength(5_004)
+    expect(visible.total).toBe(5_004)
+    expect(visible.rows).toHaveLength(CURRICULUM_STUDIO_RENDER_LIMIT)
+    expect(visible.limited).toBe(true)
+  })
+
   it('searches metadata while retaining the matching entity ancestry', () => {
     const index = buildCurriculumStudioIndex(catalog)
     const visible = visibleCurriculumStudioRows(index, new Set(), '5.OA.B.3')
@@ -435,12 +486,12 @@ describe('Curriculum Studio shell', () => {
   })
 
   it('combines the published read with the real draft authoring seam', async () => {
-    const loadCatalog = vi.fn(async () => catalog)
+    const loadIdentity = vi.fn(async () => catalog.source)
     const draftSource = authoringSource()
-    const source = createCurriculumStudioSource({ loadCatalog }, draftSource, approvalSource(), stagingSource(), publishingSource())
-    await expect(source.loadPublishedCatalog()).resolves.toBe(catalog)
+    const source = createCurriculumStudioSource({ loadIdentity }, draftSource, approvalSource(), stagingSource(), publishingSource())
+    await expect(source.loadPublishedCatalog()).resolves.toEqual({ source: catalog.source })
     await expect(source.listDrafts()).resolves.toEqual({ schemaVersion: 1, drafts: [] })
-    expect(loadCatalog).toHaveBeenCalledOnce()
+    expect(loadIdentity).toHaveBeenCalledOnce()
     expect(source.createEntity).toBe(draftSource.createEntity)
   })
 

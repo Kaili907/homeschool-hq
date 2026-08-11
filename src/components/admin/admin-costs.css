@@ -1,6 +1,6 @@
 .admin-costs { color: #172a3a; display: grid; gap: 1.5rem; }
 .admin-costs-header { align-items: flex-start; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
-.admin-costs-header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -.03em; }
+.admin-costs-header h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -.03em; }
 .admin-costs-header > div:first-child > p:last-child { color: #526474; margin-top: .35rem; }
 .admin-costs-header__controls { display: grid; gap: .6rem; justify-items: end; }
 .admin-costs-refresh { background: #173f4a; border-radius: .5rem; color: #fff; font-size: .78rem; font-weight: 800; min-height: 2.5rem; padding: .45rem .8rem; }

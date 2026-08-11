@@ -25,6 +25,32 @@ export function jsonResponse(statusCode, payload, headers = {}) {
   }
 }
 
+/**
+ * Serializes once and refuses to return an oversized browser payload. Callers
+ * choose a domain-specific error because exceeding a response budget means the
+ * requested projection is incomplete, not a successful empty result.
+ */
+export function boundedJsonResponse(
+  statusCode,
+  payload,
+  maxBytes,
+  overflowCode = 'response_too_large',
+  headers = {},
+) {
+  const body = JSON.stringify(payload)
+  if (!Number.isSafeInteger(maxBytes) || maxBytes < 1) {
+    throw new TypeError('bounded JSON responses require a positive byte limit')
+  }
+  if (Buffer.byteLength(body, 'utf8') > maxBytes) {
+    return errorResponse(503, overflowCode)
+  }
+  return {
+    statusCode,
+    headers: { ...JSON_HEADERS, ...headers },
+    body,
+  }
+}
+
 export function errorResponse(statusCode, code, headers = {}) {
   return jsonResponse(statusCode, { error: { code } }, headers)
 }

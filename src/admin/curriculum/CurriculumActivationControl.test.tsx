@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it, vi } from 'vitest'
 import type {
@@ -123,6 +124,21 @@ describe('Curriculum Activation & Rollback Admin surface', () => {
     expect(rollback).toContain('Confirm rollback to 1.0.0')
     expect(rollback).toContain('release.rolled_back')
     expect(rollback).toMatch(/Confirm rollback<\/button>/)
+  })
+
+  it('contains keyboard focus, Escape, description, and trigger-return safeguards', () => {
+    const sourceText = readFileSync(new URL('./CurriculumActivationControl.tsx', import.meta.url), 'utf8')
+    const css = readFileSync(new URL('./curriculum-activation.css', import.meta.url), 'utf8')
+    expect(sourceText).toContain('cancelButtonRef.current?.focus()')
+    expect(sourceText).toContain("event.key === 'Escape'")
+    expect(sourceText).toContain("event.key !== 'Tab'")
+    expect(sourceText).toContain('trigger?.isConnected')
+    expect(sourceText).toContain('activationHeadingRef.current?.focus()')
+    expect(sourceText).toContain('aria-describedby="curriculum-transition-confirm-description curriculum-transition-confirm-reason"')
+    expect(sourceText).toContain("'button:not(:disabled), input:not(:disabled)")
+    expect(css).toContain('.curriculum-activation-confirmation {\n  position: fixed;')
+    expect(css).toContain('background: rgb(19 28 43 / .58)')
+    expect(css).toContain('max-height: calc(100vh - 2rem)')
   })
 
   it('shows authorization, stale conflict, and unavailable states without enabling mutation', () => {

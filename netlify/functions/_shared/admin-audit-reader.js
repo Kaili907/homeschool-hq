@@ -139,10 +139,13 @@ function safeEvent(row) {
 }
 
 function safeProjection(data, limit) {
+  if (data && typeof data === 'object' && Array.isArray(data.events) && data.events.length > limit) {
+    throw new AdminAuditReadError('source_limit')
+  }
   if (
     !data || typeof data !== 'object' || Array.isArray(data)
     || data.schemaVersion !== ADMIN_CONTRACT_VERSION
-    || !Array.isArray(data.events) || data.events.length > limit
+    || !Array.isArray(data.events)
     || typeof data.hasMore !== 'boolean'
   ) fail()
   return Object.freeze({

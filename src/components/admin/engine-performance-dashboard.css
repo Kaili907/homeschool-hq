@@ -1,6 +1,6 @@
 .engine-performance { display: grid; gap: 1.5rem; color: #0f172a; }
 .engine-performance__header, .engine-performance__section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
-.engine-performance__header h1 { margin: .2rem 0 .5rem; font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.engine-performance__header h2 { margin: .2rem 0 .5rem; font-size: clamp(1.75rem, 3vw, 2.5rem); }
 .engine-performance__header a { border: 1px solid #94a3b8; border-radius: .65rem; padding: .7rem 1rem; background: white; font-weight: 700; }
 .engine-performance__eyebrow { margin: 0; color: #475569; font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .engine-performance__notice, .engine-performance__empty { border: 1px solid #f59e0b; border-radius: .75rem; background: #fffbeb; padding: 1rem; }

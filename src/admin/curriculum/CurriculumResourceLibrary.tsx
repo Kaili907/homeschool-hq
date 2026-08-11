@@ -8,6 +8,7 @@ import type {
 } from '../curriculum-authoring/contracts'
 import {
   CURRICULUM_RESOURCE_LIBRARY_RENDER_LIMIT,
+  CURRICULUM_RESOURCE_REFERENCE_LIMIT,
   filterCurriculumResourceLibrary,
 } from './resourceLibraryModel'
 
@@ -125,6 +126,11 @@ export function CurriculumResourceLibraryView({
               ))}
             </ul>
           )}
+          {filtered.searchIncomplete && (
+            <p className="curriculum-resource-unavailable" role="status">
+              Reference-name search is incomplete because one or more resources exceed the bounded reference sample. Resource metadata filters and authoritative reference totals remain available.
+            </p>
+          )}
           {filtered.total > CURRICULUM_RESOURCE_LIBRARY_RENDER_LIMIT && (
             <nav className="curriculum-resource-pagination" aria-label="Resource inventory pages">
               <button type="button" disabled={page === 0} onClick={() => setPage((value) => Math.max(0, value - 1))}>Previous</button>
@@ -212,14 +218,20 @@ function ResourceDetails({
             ))}
           </ul>
         )}
+        {item.referencesLimited && (
+          <p role="status">
+            Showing the first {CURRICULUM_RESOURCE_REFERENCE_LIMIT} of {item.referenceCount} references. The total is authoritative; additional reference details are unavailable in this bounded response.
+          </p>
+        )}
       </section>
 
       <section className="curriculum-resource-validation-section">
         <h5>Validation findings</h5>
-        {item.validationFindings.length === 0 ? <p role="status">No resource finding was reported by the existing validation rules for this exact snapshot.</p> : (
+        {item.validationFindingCount === 0 ? <p role="status">No resource finding was reported by the existing validation rules for this exact snapshot.</p> : (
           <ul>{item.validationFindings.slice(0, 20).map((finding) => <li key={finding.id}><strong>{finding.rule}</strong><span>{finding.explanation}</span><small>{finding.path}</small></li>)}</ul>
         )}
-        {item.validationFindings.length > 20 && <p>Showing 20 of {item.validationFindings.length} findings. Use the separate Validation workspace for the complete report.</p>}
+        {item.validationFindingCount > 20 && <p>Showing the first 20 of {item.validationFindingCount} findings. Use the separate Validation workspace for the complete report.</p>}
+        {item.validationFindingsLimited && <p role="note">Additional finding details are unavailable in this bounded Resource Library projection.</p>}
       </section>
       <p className="curriculum-resource-authority-note">Reference analysis is diagnostic only. It never repairs references; the existing validation run remains authoritative for publication blocking.</p>
     </aside>

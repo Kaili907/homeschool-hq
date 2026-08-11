@@ -9,6 +9,8 @@ const HASH = /^[0-9a-f]{64}$/
 const ENTITY_TYPES = new Set(['course', 'unit', 'lesson', 'assessment', 'media_resource'])
 const ORIGINS = new Set(['base_override', 'draft_created'])
 const COLLABORATOR_RESPONSIBILITIES = new Set(['editor', 'reviewer'])
+export const ADMIN_CURRICULUM_DRAFT_LIST_LIMIT = 1_000
+export const ADMIN_CURRICULUM_DRAFT_ENTITY_LIMIT = 500
 
 function config(env) {
   const rawUrl = (env?.SUPABASE_URL || env?.VITE_SUPABASE_URL || '').trim()
@@ -67,18 +69,46 @@ function draft(value) {
 }
 
 function adaptList(value) {
-  if (!exactKeys(value, ['schemaVersion', 'drafts']) || value.schemaVersion !== 1 || !Array.isArray(value.drafts) || value.drafts.length > 1_000) return null
+  if (record(value) && Array.isArray(value.drafts) && value.drafts.length > ADMIN_CURRICULUM_DRAFT_LIST_LIMIT) {
+    throw unavailable({ message: 'CURRICULUM_DRAFT_LIST_LIMIT' })
+  }
+  if (!exactKeys(value, ['schemaVersion', 'drafts']) || value.schemaVersion !== 1 || !Array.isArray(value.drafts) || value.drafts.length > ADMIN_CURRICULUM_DRAFT_LIST_LIMIT) return null
   const drafts = value.drafts.map(draft)
   return drafts.some((item) => item === null) ? null : Object.freeze({ schemaVersion: 1, drafts: Object.freeze(drafts) })
 }
 
 function adaptDraft(value) {
-  if (!record(value) || !Array.isArray(value.entities) || value.entities.length > 10_000) return null
+  if (record(value) && Array.isArray(value.entities) && value.entities.length > ADMIN_CURRICULUM_DRAFT_ENTITY_LIMIT) {
+    throw unavailable({ message: 'CURRICULUM_DRAFT_MATERIALIZATION_LIMIT' })
+  }
+  if (!record(value) || !Array.isArray(value.entities) || value.entities.length > ADMIN_CURRICULUM_DRAFT_ENTITY_LIMIT) return null
   const { entities, ...summaryValue } = value
   const summary = draft(summaryValue)
   const projectedEntities = entities.map(entity)
   if (!summary || projectedEntities.some((item) => item === null)) return null
   return Object.freeze({ ...summary, entities: Object.freeze(projectedEntities) })
+}
+
+function adaptEntityBatch(value) {
+  if (record(value) && Array.isArray(value.entities) && value.entities.length > ADMIN_CURRICULUM_DRAFT_ENTITY_LIMIT) {
+    throw unavailable({ message: 'CURRICULUM_DRAFT_MATERIALIZATION_LIMIT' })
+  }
+  if (
+    !exactKeys(value, ['schemaVersion', 'draftId', 'draftRevision', 'entities'])
+    || value.schemaVersion !== 1
+    || typeof value.draftId !== 'string' || !UUID.test(value.draftId)
+    || !integer(value.draftRevision, 1)
+    || !Array.isArray(value.entities)
+    || value.entities.length > ADMIN_CURRICULUM_DRAFT_ENTITY_LIMIT
+  ) return null
+  const entities = value.entities.map(adaptEntity)
+  if (entities.some((item) => item === null || item.draftId !== value.draftId)) return null
+  return Object.freeze({
+    schemaVersion: 1,
+    draftId: value.draftId,
+    draftRevision: value.draftRevision,
+    entities: Object.freeze(entities),
+  })
 }
 
 function adaptEntity(value) {
@@ -156,6 +186,8 @@ function adaptCollaboratorMutation(value) {
 function unavailable(error) {
   const message = error && typeof error === 'object' && typeof error.message === 'string' ? error.message : ''
   const known = [
+    ['CURRICULUM_DRAFT_LIST_LIMIT', 'incomplete'],
+    ['CURRICULUM_DRAFT_MATERIALIZATION_LIMIT', 'incomplete'],
     ['CURRICULUM_DRAFT_NOT_FOUND', 'not-found'],
     ['CURRICULUM_ENTITY_NOT_FOUND', 'not-found'],
     ['CURRICULUM_COLLABORATOR_NOT_FOUND', 'not-found'],
@@ -221,6 +253,14 @@ export function createAdminCurriculumAuthoringService({ env, fetchImpl, client }
         p_actor_user_ref: actorUserRef, p_draft_id: draftId, p_entity_type: entityType,
         p_entity_ref: entityRef, p_required_capability: 'curriculum:read',
       }, adaptEntity, true)
+    },
+    readEntities(actorUserRef, draftId, expectedRevision) {
+      return call('academy_admin_read_curriculum_draft_entities_v1', {
+        p_actor_user_ref: actorUserRef,
+        p_draft_id: draftId,
+        p_expected_revision: expectedRevision,
+        p_required_capability: 'curriculum:read',
+      }, adaptEntityBatch)
     },
     createDraft(actorUserRef, input) {
       return call('academy_admin_create_curriculum_draft_v1', {

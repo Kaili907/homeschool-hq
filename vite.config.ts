@@ -27,6 +27,7 @@ export default defineConfig({
             'tests/**/*.test.js',
             'scripts/**/*.test.ts',
           ],
+          setupFiles: ['./tests/node-test-setup.ts'],
           pool: 'threads',
           maxWorkers: 4,
           testTimeout: 120_000,

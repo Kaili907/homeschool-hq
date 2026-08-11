@@ -24,9 +24,11 @@ const ID_KEYS = Object.freeze({
   assessment: 'assessment_id',
   media_resource: 'resource_id',
 })
+export const ADMIN_CURRICULUM_STUDIO_INDEX_LIMIT = 5_000
 
 let immutableImport
 let immutableResourceLibrary
+let immutableBaseEntities
 
 function baseRelease(version) {
   if (version !== SUPPORTED_RELEASE) {
@@ -82,8 +84,9 @@ function entityEntry(entityType, payload, origin, revision, position) {
 }
 
 function baseEntities(version) {
+  if (version === SUPPORTED_RELEASE && immutableBaseEntities) return immutableBaseEntities
   const base = baseRelease(version)
-  return Object.entries(ENTITY_COLLECTIONS).flatMap(([entityType, collection]) =>
+  const entities = Object.entries(ENTITY_COLLECTIONS).flatMap(([entityType, collection]) =>
     base[collection].map((payload, position) => ({
       entityType,
       entityRef: entityRef(entityType, payload),
@@ -93,6 +96,11 @@ function baseEntities(version) {
       payload,
     })),
   )
+  if (entities.length > ADMIN_CURRICULUM_STUDIO_INDEX_LIMIT) {
+    throw Object.assign(new Error('curriculum_studio_index_incomplete'), { code: 'incomplete' })
+  }
+  if (version === SUPPORTED_RELEASE) immutableBaseEntities = Object.freeze(entities)
+  return immutableBaseEntities ?? entities
 }
 
 async function mapConcurrent(values, limit, mapper) {
@@ -116,12 +124,14 @@ async function materialize(authoring, actorUserRef, draftId, expectedRevision) {
   const requiredSummaries = draft.entities.filter((entity) =>
     !entity.tombstoned || entity.entityType === 'media_resource',
   )
-  const details = await mapConcurrent(requiredSummaries, 12, (entity) => authoring.readEntity(
-    actorUserRef,
-    draftId,
-    entity.entityType,
-    entity.entityRef,
-  ))
+  const details = typeof authoring.readEntities === 'function'
+    ? (await authoring.readEntities(actorUserRef, draftId, expectedRevision)).entities
+    : await mapConcurrent(requiredSummaries, 12, (entity) => authoring.readEntity(
+        actorUserRef,
+        draftId,
+        entity.entityType,
+        entity.entityRef,
+      ))
   // Entity reads are separate authorized RPCs. Confirm the workspace revision
   // again so a concurrent committed mutation cannot produce a mixed snapshot.
   const confirmedDraft = await authoring.read(actorUserRef, draftId)
@@ -177,6 +187,9 @@ async function materialize(authoring, actorUserRef, draftId, expectedRevision) {
       }
     })
   const entities = [...composed.values()]
+  if (entities.length > ADMIN_CURRICULUM_STUDIO_INDEX_LIMIT) {
+    throw Object.assign(new Error('curriculum_studio_index_incomplete'), { code: 'incomplete' })
+  }
   return {
     draft,
     entities,

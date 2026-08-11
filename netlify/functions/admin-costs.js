@@ -65,9 +65,12 @@ export function createAdminCostsHandler(overrides = {}) {
       })
     } catch (error) {
       if (error instanceof GatewayError && error.statusCode >= 500) {
+        const incomplete = error.code === 'cost_source_incomplete'
         return errorResponse(
           error.statusCode === 504 ? 504 : 503,
-          error.statusCode === 504 ? 'cost_source_timeout' : 'cost_source_unavailable',
+          error.statusCode === 504
+            ? 'cost_source_timeout'
+            : incomplete ? 'cost_source_incomplete' : 'cost_source_unavailable',
         )
       }
       return responseForError(error)

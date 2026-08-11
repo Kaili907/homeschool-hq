@@ -11,6 +11,8 @@ import type {
 } from '../curriculum-authoring/contracts'
 
 export const CURRICULUM_RESOURCE_LIBRARY_RENDER_LIMIT = 100 as const
+export const CURRICULUM_RESOURCE_REFERENCE_LIMIT = 100 as const
+export const CURRICULUM_RESOURCE_VALIDATION_FINDING_LIMIT = 100 as const
 const RESOURCE_REF = /^[a-z0-9][a-z0-9:-]{2,127}$/
 const RESOURCE_KINDS = new Set<CurriculumResourceKind>([
   'text', 'image', 'audio', 'video', 'interactive', 'document', 'physical',
@@ -39,6 +41,7 @@ export interface FilteredCurriculumResourceLibrary {
   readonly items: readonly CurriculumResourceLibraryItem[]
   readonly total: number
   readonly limited: boolean
+  readonly searchIncomplete: boolean
 }
 
 function record(value: unknown): Record<string, unknown> | null {
@@ -82,13 +85,14 @@ function resourceMetadata(value: unknown): CurriculumResourceMetadata | null {
 
 function referenceStatus(
   lifecycle: CurriculumResourceLibraryItem['lifecycle'],
-  references: readonly CurriculumResourceReference[],
+  referenceCount: number,
+  hasInvalidReference: boolean,
 ): CurriculumResourceReferenceStatus {
-  if (references.some((reference) => !reference.valid)) return 'invalid-reference'
+  if (hasInvalidReference) return 'invalid-reference'
   if (lifecycle === 'missing') return 'missing-reference'
   if (lifecycle === 'invalid') return 'invalid-reference'
-  if (lifecycle === 'tombstoned' && references.length > 0) return 'tombstoned-but-referenced'
-  return references.length > 0 ? 'referenced' : 'unreferenced'
+  if (lifecycle === 'tombstoned' && referenceCount > 0) return 'tombstoned-but-referenced'
+  return referenceCount > 0 ? 'referenced' : 'unreferenced'
 }
 
 function entitySort(left: CurriculumResourceAnalysisEntity, right: CurriculumResourceAnalysisEntity): number {
@@ -117,7 +121,16 @@ export function buildCurriculumResourceLibrary(input: {
   const referenceOwners = entities
     .filter((entity) => !entity.tombstoned && (entity.entityType === 'lesson' || entity.entityType === 'assessment'))
     .sort((left, right) => left.entityType.localeCompare(right.entityType) || entitySort(left, right))
-  const referencesByResource = new Map<string, CurriculumResourceReference[]>()
+  type ReferenceAggregate = {
+    count: number
+    hasInvalidReference: boolean
+    hasBlockingFinding: boolean
+    navigationIds: Set<string>
+    references: CurriculumResourceReference[]
+    findingIds: Set<string>
+    findings: CurriculumValidationFinding[]
+  }
+  const referencesByResource = new Map<string, ReferenceAggregate>()
   const invalidItems: Array<{ readonly key: string; readonly reference: CurriculumResourceReference }> = []
   const findingsByPath = new Map<string, CurriculumValidationFinding[]>()
   const findingsByResource = new Map<string, CurriculumValidationFinding[]>()
@@ -133,14 +146,43 @@ export function buildCurriculumResourceLibrary(input: {
   })
   const referenceFindings = (reference: CurriculumResourceReference) => findingsByPath.get(reference.path) ?? []
 
+  function referenceAggregate(resourceRef: string): ReferenceAggregate {
+    const existing = referencesByResource.get(resourceRef)
+    if (existing) return existing
+    const created: ReferenceAggregate = {
+      count: 0,
+      hasInvalidReference: false,
+      hasBlockingFinding: false,
+      navigationIds: new Set(),
+      references: [],
+      findingIds: new Set(),
+      findings: [],
+    }
+    referencesByResource.set(resourceRef, created)
+    return created
+  }
+
   function addReference(rawResourceRef: unknown, reference: Omit<CurriculumResourceReference, 'valid'>, duplicate: boolean) {
     if (typeof rawResourceRef !== 'string' || !RESOURCE_REF.test(rawResourceRef)) {
       invalidItems.push({ key: `invalid:${reference.entityType}:${reference.entityRef}:${reference.path}`, reference: { ...reference, valid: false } })
       return
     }
-    const references = referencesByResource.get(rawResourceRef) ?? []
-    references.push({ ...reference, valid: !duplicate })
-    referencesByResource.set(rawResourceRef, references)
+    const aggregate = referenceAggregate(rawResourceRef)
+    const projected = { ...reference, valid: !duplicate }
+    aggregate.count += 1
+    aggregate.hasInvalidReference ||= duplicate
+    aggregate.navigationIds.add(reference.navigationId)
+    if (aggregate.references.length < CURRICULUM_RESOURCE_REFERENCE_LIMIT) {
+      aggregate.references.push(projected)
+    }
+    for (const finding of referenceFindings(projected)) {
+      if (aggregate.findingIds.has(finding.id)) continue
+      aggregate.findingIds.add(finding.id)
+      aggregate.hasBlockingFinding ||= finding.blocking
+      if (aggregate.findings.length < CURRICULUM_RESOURCE_VALIDATION_FINDING_LIMIT) {
+        aggregate.findings.push(finding)
+      }
+    }
   }
 
   let lessonIndex = 0
@@ -190,15 +232,22 @@ export function buildCurriculumResourceLibrary(input: {
   const knownResourceIds = new Set(resourceEntities.map((entity) => entity.entityRef))
   const items: CurriculumResourceLibraryItem[] = resourceEntities.map((entity) => {
     const metadata = resourceMetadata(entity.payload)
-    const references = referencesByResource.get(entity.entityRef) ?? []
+    const aggregate = referencesByResource.get(entity.entityRef)
+    const references = aggregate?.references ?? []
+    const referenceCount = aggregate?.count ?? 0
     const lifecycle = entity.tombstoned ? 'tombstoned' as const : 'active' as const
-    const status = referenceStatus(lifecycle, references)
+    const status = referenceStatus(lifecycle, referenceCount, aggregate?.hasInvalidReference ?? false)
     const directFindings = findingsByResource.get(entity.entityRef) ?? []
-    const findings = [...directFindings, ...references.flatMap(referenceFindings)]
-    const uniqueFindings = [...new Map(findings.map((finding) => [finding.id, finding])).values()]
-    const validationStatus = lifecycle === 'tombstoned' && references.length === 0
+    const findingIds = new Set(aggregate?.findingIds ?? [])
+    directFindings.forEach((finding) => findingIds.add(finding.id))
+    const hasBlockingFinding = (aggregate?.hasBlockingFinding ?? false)
+      || directFindings.some((finding) => finding.blocking)
+    const uniqueFindings = [...new Map([...directFindings, ...(aggregate?.findings ?? [])]
+      .map((finding) => [finding.id, finding])).values()]
+      .slice(0, CURRICULUM_RESOURCE_VALIDATION_FINDING_LIMIT)
+    const validationStatus = lifecycle === 'tombstoned' && referenceCount === 0
       ? 'not-applicable' as const
-      : metadata === null || status === 'tombstoned-but-referenced' || status === 'invalid-reference' || uniqueFindings.some((finding) => finding.blocking)
+      : metadata === null || status === 'tombstoned-but-referenced' || status === 'invalid-reference' || hasBlockingFinding
         ? 'invalid' as const
         : 'valid' as const
     return {
@@ -214,17 +263,20 @@ export function buildCurriculumResourceLibrary(input: {
       lifecycle,
       overridden: entity.origin === 'base_override',
       referenceStatus: status,
-      referenceCount: references.length,
-      referencingEntityCount: new Set(references.map((reference) => reference.navigationId)).size,
+      referenceCount,
+      referencingEntityCount: aggregate?.navigationIds.size ?? 0,
+      referencesLimited: referenceCount > CURRICULUM_RESOURCE_REFERENCE_LIMIT,
       references,
       validationStatus,
+      validationFindingCount: findingIds.size,
+      validationFindingsLimited: findingIds.size > CURRICULUM_RESOURCE_VALIDATION_FINDING_LIMIT,
       validationFindings: uniqueFindings,
     }
   })
 
-  for (const [resourceId, references] of referencesByResource) {
+  for (const [resourceId, aggregate] of referencesByResource) {
     if (knownResourceIds.has(resourceId)) continue
-    const findings = references.flatMap(referenceFindings)
+    const findings = aggregate.findings
     items.push({
       key: `missing:${resourceId}`,
       resourceId,
@@ -238,11 +290,14 @@ export function buildCurriculumResourceLibrary(input: {
       lifecycle: 'missing',
       overridden: false,
       referenceStatus: 'missing-reference',
-      referenceCount: references.length,
-      referencingEntityCount: new Set(references.map((reference) => reference.navigationId)).size,
-      references,
+      referenceCount: aggregate.count,
+      referencingEntityCount: aggregate.navigationIds.size,
+      referencesLimited: aggregate.count > CURRICULUM_RESOURCE_REFERENCE_LIMIT,
+      references: aggregate.references,
       validationStatus: 'invalid',
-      validationFindings: [...new Map(findings.map((finding) => [finding.id, finding])).values()],
+      validationFindingCount: aggregate.findingIds.size,
+      validationFindingsLimited: aggregate.findingIds.size > CURRICULUM_RESOURCE_VALIDATION_FINDING_LIMIT,
+      validationFindings: findings,
     })
   }
 
@@ -263,8 +318,11 @@ export function buildCurriculumResourceLibrary(input: {
       referenceStatus: 'invalid-reference',
       referenceCount: 1,
       referencingEntityCount: 1,
+      referencesLimited: false,
       references: [reference],
       validationStatus: 'invalid',
+      validationFindingCount: findings.length,
+      validationFindingsLimited: false,
       validationFindings: findings,
     })
   })
@@ -332,5 +390,6 @@ export function filterCurriculumResourceLibrary(
     items: items.slice(safeOffset, safeOffset + safeLimit),
     total: items.length,
     limited: items.length > safeLimit,
+    searchIncomplete: Boolean(query) && library.items.some((item) => item.referencesLimited),
   }
 }

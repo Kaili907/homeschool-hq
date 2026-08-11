@@ -199,8 +199,13 @@ export interface CurriculumResourceLibraryItem {
   readonly referenceStatus: CurriculumResourceReferenceStatus
   readonly referenceCount: number
   readonly referencingEntityCount: number
+  /** True when references is a bounded sample and referenceCount remains authoritative. */
+  readonly referencesLimited: boolean
   readonly references: readonly CurriculumResourceReference[]
   readonly validationStatus: CurriculumResourceValidationStatus
+  /** Authoritative unique finding count; validationFindings may be a bounded sample. */
+  readonly validationFindingCount: number
+  readonly validationFindingsLimited: boolean
   readonly validationFindings: readonly CurriculumValidationFinding[]
 }
 

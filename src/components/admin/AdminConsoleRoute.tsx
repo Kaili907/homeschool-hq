@@ -1087,7 +1087,7 @@ export function AdminConsoleRoute() {
         )}
         {!['attention', 'learners', 'engines', 'costs', 'safety', 'curriculum', 'curriculum-studio', 'curriculum-integrity', 'curriculum-validation', 'curriculum-standards-review', 'curriculum-preview', 'curriculum-activation', 'curriculum-history', 'system-health', 'incidents', 'configuration', 'audit-log', 'access', 'releases'].includes(section) && (
           <section role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
-            <h1 className="text-2xl font-bold">Admin section unavailable</h1>
+            <h2 className="text-2xl font-bold">Admin section unavailable</h2>
             <p className="mt-3 text-slate-600">No authorized read projection is implemented for this section. No substitute data is shown.</p>
           </section>
         )}

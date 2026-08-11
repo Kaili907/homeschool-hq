@@ -18,6 +18,7 @@ const CONTENT_TYPES = new Set([
   'text/markdown;charset=utf-8',
   'text/plain;charset=utf-8',
 ])
+export const ADMIN_CURRICULUM_RELEASE_LIST_LIMIT = 1_000
 
 function serviceConfig(env) {
   const rawUrl = (env?.SUPABASE_URL || env?.VITE_SUPABASE_URL || '').trim()
@@ -99,7 +100,10 @@ function summary(value) {
 }
 
 function adaptList(value) {
-  if (!isRecord(value) || value.schemaVersion !== 1 || !Array.isArray(value.releases) || value.releases.length > 1000) return null
+  if (isRecord(value) && Array.isArray(value.releases) && value.releases.length > ADMIN_CURRICULUM_RELEASE_LIST_LIMIT) {
+    throw Object.assign(new Error('curriculum_registry_incomplete'), { code: 'incomplete' })
+  }
+  if (!isRecord(value) || value.schemaVersion !== 1 || !Array.isArray(value.releases) || value.releases.length > ADMIN_CURRICULUM_RELEASE_LIST_LIMIT) return null
   const releases = value.releases.map(summary)
   if (releases.some((release) => release === null)) return null
   return Object.freeze({ schemaVersion: 1, releases: Object.freeze(releases) })
@@ -224,7 +228,13 @@ export function createAdminCurriculumRegistryReader({ env, fetchImpl, client } =
     if (!database) throw new Error('curriculum_registry_unavailable')
     const signal = AbortSignal.timeout(READ_TIMEOUT_MS)
     const { data, error } = await database.rpc(name, args).abortSignal(signal)
-    if (signal.aborted || error) throw new Error('curriculum_registry_unavailable')
+    if (signal.aborted || error) {
+      const errorText = [error?.message, error?.details, error?.hint].filter((value) => typeof value === 'string').join(' ')
+      if (errorText.includes('CURRICULUM_RELEASE_LIST_LIMIT')) {
+        throw Object.assign(new Error('curriculum_registry_incomplete'), { code: 'incomplete' })
+      }
+      throw new Error('curriculum_registry_unavailable')
+    }
     if (missingIsNotFound && data === null) throw notFound()
     const projected = adapt(data)
     if (!projected) throw new Error('curriculum_registry_unavailable')

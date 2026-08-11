@@ -122,6 +122,25 @@ describe('GET /api/admin/v1/audit', () => {
     })
   })
 
+  it('returns exactly one bounded page from a deterministic long audit history', async () => {
+    const events = Array.from({ length: 100 }, (_, index) => ({
+      ...EVENT,
+      eventId: `10000000-0000-4000-8000-${String(index + 1).padStart(12, '0')}`,
+      occurredAt: new Date(Date.parse(EVENT.occurredAt) - index * 1_000).toISOString(),
+    }))
+    const { handler } = handlerWith({ result: { events, hasMore: true } })
+    const started = performance.now()
+    const response = await handler(event({ rawQueryString: 'limit=100' }))
+    console.info(`[admin-performance] 100-row audit page ${(performance.now() - started).toFixed(1)}ms`)
+    const body = JSON.parse(response.body)
+    expect(body.events).toHaveLength(100)
+    expect(decodeAuditCursor(body.nextCursor)).toEqual({
+      occurredAt: events.at(-1).occurredAt,
+      eventId: events.at(-1).eventId,
+    })
+    expect(response.body.length).toBeLessThan(150_000)
+  })
+
   it.each([
     'limit=0', 'limit=101', 'limit=050', 'limit=1&limit=2',
     'action=wildcard.*', 'resourceType=all', 'resourceRef=has%20spaces',
@@ -162,6 +181,7 @@ describe('GET /api/admin/v1/audit', () => {
   it.each([
     ['source_unavailable', 503, 'audit_source_unavailable'],
     ['source_timeout', 504, 'audit_source_timeout'],
+    ['source_limit', 503, 'audit_source_incomplete'],
   ])('maps %s to a bounded response', async (code, statusCode, responseCode) => {
     const { handler } = handlerWith({ error: new AdminAuditReadError(code) })
     const response = await handler(event())

@@ -339,6 +339,7 @@ export function buildAdminCostProjection(
   providerCoverage = unavailableProviderAccountingCoverage(),
 ) {
   if (!Array.isArray(records)) reject(503, 'cost_source_unavailable')
+  if (records.length > ADMIN_COST_RECORD_LIMIT) reject(503, 'cost_source_incomplete')
   const validated = records.map(validateRecord)
   const inRange = validated.filter(
     (record) => record.occurredMs >= Date.parse(range.startAt)

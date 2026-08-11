@@ -5,6 +5,7 @@ import type {
   CurriculumValidationFinding,
 } from '../../admin/curriculum-validation/engine.ts'
 import {
+  CURRICULUM_VALIDATION_RENDER_BATCH,
   CurriculumValidationWorkspace,
   filterCurriculumValidationFindings,
   groupCurriculumValidationFindings,
@@ -133,6 +134,46 @@ describe('CurriculumValidationWorkspace', () => {
       'ERROR severity',
       'WARNING severity',
     ])
+  })
+
+  it('searches 10,000 deterministic findings while bounding initial DOM materialization', () => {
+    const stressFindings = Array.from({ length: 10_000 }, (_, index): CurriculumValidationFinding => ({
+      id: `cvf-stress-${index}`,
+      severity: index % 2 === 0 ? 'warning' : 'info',
+      category: 'schema',
+      entity: { type: 'lesson', id: `stress-lesson-${index}` },
+      path: `lessons[${index}].schema_set_version`,
+      rule: 'schema.entity_valid',
+      explanation: `Deterministic validation finding ${index}`,
+      blocking: false,
+      remediation: undefined,
+    }))
+    const stressRun: CurriculumSnapshotValidationRun = {
+      ...run(),
+      status: 'invalid',
+      publicationReady: false,
+      summary: {
+        total: stressFindings.length,
+        errors: 0,
+        warnings: 5_000,
+        info: 5_000,
+        blocking: 0,
+        nonBlocking: stressFindings.length,
+      },
+      findings: stressFindings,
+    }
+    const started = performance.now()
+    const filtered = filterCurriculumValidationFindings(stressFindings, {
+      query: 'stress-lesson-9999', severity: 'all', category: 'all', blocking: 'all',
+    })
+    const html = renderToStaticMarkup(<CurriculumValidationWorkspace run={stressRun} />)
+    const elapsedMs = performance.now() - started
+    console.info(`[admin-performance] 10000 validation findings filter/render ${elapsedMs.toFixed(1)}ms`)
+
+    expect(filtered).toHaveLength(1)
+    expect(html.match(/<details/g)).toHaveLength(CURRICULUM_VALIDATION_RENDER_BATCH)
+    expect(html).toContain('Rendering 250 of 10000 matching findings (10000 total)')
+    expect(html).toContain('Show 250 more findings')
   })
 
   it('renders the jump-to-entity callback contract only for addressable findings', () => {

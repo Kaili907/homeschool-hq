@@ -102,6 +102,7 @@ describe('authorized Admin costs endpoint', () => {
 
   it.each([
     [new GatewayError(503, 'service_unavailable'), 503, 'cost_source_unavailable'],
+    [new GatewayError(503, 'cost_source_incomplete'), 503, 'cost_source_incomplete'],
     [new GatewayError(504, 'upstream_timeout'), 504, 'cost_source_timeout'],
   ])('distinguishes an authorized source failure from authorization uncertainty', async (failure, status, code) => {
     const handler = readyHandler({

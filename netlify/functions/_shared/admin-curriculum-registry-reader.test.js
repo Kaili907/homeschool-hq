@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createAdminCurriculumRegistryReader } from './admin-curriculum-registry-reader.js'
+import {
+  ADMIN_CURRICULUM_RELEASE_LIST_LIMIT,
+  createAdminCurriculumRegistryReader,
+} from './admin-curriculum-registry-reader.js'
 
 const summary = {
   packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
@@ -111,6 +114,38 @@ describe('ADMIN-16A curriculum registry reader', () => {
     const errorClient = { rpc: vi.fn(() => ({ abortSignal: vi.fn(async () => ({ data: null, error: { code: 'XX000' } })) })) }
     await expect(createAdminCurriculumRegistryReader({ client: errorClient }).list())
       .rejects.toThrow('curriculum_registry_unavailable')
+  })
+
+  it('accepts the structural registry maximum and marks limit + 1 as incomplete', async () => {
+    const releases = Array.from({ length: ADMIN_CURRICULUM_RELEASE_LIST_LIMIT }, (_, index) => ({
+      ...summary,
+      version: `${index + 1}.0.0`,
+      sourceRoot: `curriculum-content/manuel-academy/${index + 1}.0.0`,
+    }))
+    const reader = createAdminCurriculumRegistryReader({ client: clientFor({
+      ...projections,
+      academy_admin_list_curriculum_releases_v1: { schemaVersion: 1, releases },
+    }) })
+    await expect(reader.list()).resolves.toHaveProperty('releases.length', ADMIN_CURRICULUM_RELEASE_LIST_LIMIT)
+
+    const overflowReader = createAdminCurriculumRegistryReader({ client: clientFor({
+      ...projections,
+      academy_admin_list_curriculum_releases_v1: {
+        schemaVersion: 1,
+        releases: [...releases, { ...summary, version: '1001.0.0', sourceRoot: 'curriculum-content/manuel-academy/1001.0.0' }],
+      },
+    }) })
+    await expect(overflowReader.list()).rejects.toMatchObject({ code: 'incomplete' })
+
+    const databaseOverflow = {
+      rpc: vi.fn(() => ({
+        abortSignal: vi.fn(async () => ({
+          data: null, error: { message: 'CURRICULUM_RELEASE_LIST_LIMIT' },
+        })),
+      })),
+    }
+    await expect(createAdminCurriculumRegistryReader({ client: databaseOverflow }).list())
+      .rejects.toMatchObject({ code: 'incomplete' })
   })
 
   it('reads staged-publish registry metadata without exposing embedded artifact bodies', async () => {
