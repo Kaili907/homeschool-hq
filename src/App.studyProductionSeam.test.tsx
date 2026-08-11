@@ -408,6 +408,12 @@ describe('App Study production seam (STUDY-A1-PROD-SEAM)', () => {
     await settle()
   }
 
+  async function rerenderApp(): Promise<void> {
+    const App = (await import('./App')).default
+    await act(async () => root?.render(<App />))
+    await settle()
+  }
+
   async function signIn(profileId: string, pin: string): Promise<void> {
     if (!harness.picker) throw new Error('The picker is not rendered.')
     await act(async () => { harness.picker!.onPick(profileId) })
@@ -497,6 +503,8 @@ describe('App Study production seam (STUDY-A1-PROD-SEAM)', () => {
 
     it('keeps one seam object while the launch epoch is unchanged', async () => {
       await mountLaunched()
+      await rerenderApp()
+      await rerenderApp()
       const produced = counters.currentSeams.filter((seam) => seam !== null)
       expect(produced.length).toBeGreaterThan(1)
       // Every render after the launch handed back the same object, so a future
@@ -684,7 +692,10 @@ describe('App Study production seam (STUDY-A1-PROD-SEAM)', () => {
     it('keeps one seam object across ordinary re-renders', async () => {
       await mountApp(seeded(null))
       await signIn('p1', '1234')
-      await waitFor(() => counters.hostSeams.length > 2, 'several preview renders')
+      await waitFor(() => counters.hostSeams.length > 0, 'the preview host seam')
+      await rerenderApp()
+      await rerenderApp()
+      expect(counters.hostSeams.length).toBeGreaterThan(2)
       expect(new Set(counters.hostSeams).size).toBe(1)
     })
   })
