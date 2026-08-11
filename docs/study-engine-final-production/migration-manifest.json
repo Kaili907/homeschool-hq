@@ -343,6 +343,16 @@
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-admin-correlation-runtime-read-v1",
       "supersessionStatus": "current"
+    },
+    {
+      "version": "20260810190000",
+      "filename": "20260810190000_academy_curriculum_write_reauthorization.sql",
+      "sha256": "11263d264c80bc599aff13f73128c3a7b6cbb3726603277237d61fe8c951f522",
+      "dependency": "20260810180000_academy_admin_correlation_runtime_read.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-curriculum-write-reauthorization-v1",
+      "supersessionStatus": "current"
     }
   ]
 }

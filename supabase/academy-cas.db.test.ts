@@ -59,8 +59,16 @@ describe('Academy household server revision CAS migration', () => {
     profiles: unknown[],
   ) {
     const result = await client.query<{ result: Record<string, unknown> }>(
-      `select public.academy_apply_profile_mutation($1, $2, $3::jsonb) as result`,
-      [expectedRevision, mutationId, JSON.stringify(profiles)],
+      // Expected mutation failures are part of this suite. Keep them on the
+      // simple-query protocol because pglite-socket multiplexes one embedded
+      // protocol engine and can emit stale extended-protocol completion
+      // messages after an error. The real multi-backend PostgreSQL suite uses
+      // bound parameters; all literals here are escaped by node-postgres.
+      `select public.academy_apply_profile_mutation(
+         ${expectedRevision},
+         ${client.escapeLiteral(mutationId)},
+         ${client.escapeLiteral(JSON.stringify(profiles))}::jsonb
+       ) as result`,
     )
     return result.rows[0].result
   }
@@ -72,8 +80,11 @@ describe('Academy household server revision CAS migration', () => {
     profilesJson: string,
   ) {
     const result = await client.query<{ result: Record<string, unknown> }>(
-      `select public.academy_apply_profile_mutation($1, $2, $3::jsonb) as result`,
-      [expectedRevision, mutationId, profilesJson],
+      `select public.academy_apply_profile_mutation(
+         ${expectedRevision},
+         ${client.escapeLiteral(mutationId)},
+         ${client.escapeLiteral(profilesJson)}::jsonb
+       ) as result`,
     )
     return result.rows[0].result
   }

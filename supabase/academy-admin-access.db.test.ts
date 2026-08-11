@@ -276,6 +276,75 @@ describe('Admin access management database contract', () => {
     expect(JSON.stringify(events.rows)).not.toMatch(/email|password|token|session/i)
   })
 
+  it('rolls role history and the receipt back when the atomic audit append fails', async () => {
+    const database = databases[0]
+    await database.exec(`
+      create or replace function academy_private.append_admin_audit_event_v1(
+        p_action text, p_resource_type text, p_resource_ref text,
+        p_resource_version text default null, p_resource_revision text default null,
+        p_previous_value jsonb default null, p_new_value jsonb default null,
+        p_reason_code text default null, p_correlation_id uuid default null
+      ) returns uuid language plpgsql volatile security definer set search_path = pg_catalog as $$
+      begin raise exception 'FORCED_ACCESS_AUDIT_FAILURE'; end $$;
+    `)
+    await expect(mutate(database, OWNER_ID, {
+      requestId: '20000000-0000-4000-8000-000000000211',
+    })).rejects.toThrow(/FORCED_ACCESS_AUDIT_FAILURE/)
+    expect((await database.query(`
+      select role, status, revision
+      from public.academy_admin_role_assignments
+      where id = '${VIEWER_ASSIGNMENT}'
+    `)).rows).toEqual([{ role: 'viewer', status: 'active', revision: 1 }])
+    expect((await database.query(`
+      select count(*)::integer as count
+      from academy_private.admin_access_mutation_receipts
+    `)).rows).toEqual([{ count: 0 }])
+  })
+
+  it('fails closed when Owner authority changes after initial access authorization', async () => {
+    const database = databases[0]
+    await database.exec(`
+      create function public.test_demote_access_actor_at_receipt_write()
+      returns trigger language plpgsql security definer set search_path = pg_catalog as $$
+      begin
+        update public.academy_admin_role_assignments
+        set status = 'revoked', revision = 2,
+            revoked_at = statement_timestamp(), revoked_by = '${OWNER_ID}',
+            revoked_by_role = 'owner', revocation_reason_code = 'policy.enforcement',
+            revocation_correlation_id = '20000000-0000-4000-8000-000000000212'
+        where id = '${OWNER_ASSIGNMENT}';
+        insert into public.academy_admin_role_assignments (
+          user_id, role, assigned_by, assigned_by_role,
+          assignment_reason_code, assignment_correlation_id
+        ) values (
+          '${OWNER_ID}', 'admin', '${OWNER_ID}', 'owner',
+          'policy.enforcement', '20000000-0000-4000-8000-000000000212'
+        );
+        return new;
+      end;
+      $$;
+      create trigger test_demote_access_actor_at_receipt_write
+      before insert on academy_private.admin_access_mutation_receipts
+      for each row execute function public.test_demote_access_actor_at_receipt_write();
+    `)
+    await expect(mutate(database, OWNER_ID, {
+      requestId: '20000000-0000-4000-8000-000000000212',
+    })).rejects.toThrow(/ADMIN_ACCESS_MANAGE_REQUIRED/)
+    expect((await database.query(`
+      select role, status, revision
+      from public.academy_admin_role_assignments
+      where id = '${OWNER_ASSIGNMENT}'
+    `)).rows).toEqual([{ role: 'owner', status: 'active', revision: 1 }])
+    expect((await database.query(`
+      select count(*)::integer as count
+      from academy_private.admin_access_mutation_receipts
+    `)).rows).toEqual([{ count: 0 }])
+    expect((await database.query(`
+      select count(*)::integer as count
+      from academy_private.admin_audit_events
+    `)).rows).toEqual([{ count: 0 }])
+  })
+
   it('keeps receipts and role assignments inaccessible to application roles', async () => {
     const database = databases[0]
     for (const role of ['anon', 'authenticated', 'service_role'] as const) {
