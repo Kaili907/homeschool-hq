@@ -7,10 +7,11 @@ server request, changes an RPC, or wires session lifecycle into `App`.
 
 ## Contract ownership
 
-- `credentials.ts` and `educationalProfile.ts` separate device-local learner
-  credentials from synchronized educational data. The sanitizer strips the
-  accepted legacy `Profile.pin` and fails closed on other credential-like
-  material.
+- `credentials.ts`, `parentCredentials.ts`, and `educationalProfile.ts`
+  separate device-local learner and Parent convenience-lock credentials from
+  synchronized educational data. The sanitizer strips the accepted legacy
+  `Profile.pin` / exact root `AppState.parentPin` fields and fails closed on
+  other credential-like material.
 - `profileId.ts` defines the canonical learner identity (`p1` through `p5`).
   `portableSecurity.ts` owns the shared recursive structural-key policy used by
   Local and Sync portable-data boundaries.
@@ -32,6 +33,11 @@ server request, changes an RPC, or wires session lifecycle into `App`.
   identity, binding and one-time grant envelopes, plus the explicit
   installation-manager claim/recovery capabilities. Guardian or household
   membership alone is not installation-management authority.
+- `credentials/parentVault.ts` requires an externally supplied active
+  installation binding, binds the Parent verifier to its exact installation
+  and household, and exposes no fresh-install enrollment. Its verification
+  result carries the later shared failed-attempt-ledger subject without
+  duplicating rate-limit state.
 - `studyBridge.ts` maps security lifecycle events into the existing Study
   cancellation vocabulary without changing `src/study/**`.
 

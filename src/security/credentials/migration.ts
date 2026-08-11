@@ -221,7 +221,18 @@ function legacyProfilesFrom(value: unknown): LegacyProfileInput[] {
   })
 }
 
-function canonicalCredentialFreeJson(value: CredentialFreeJsonValue): string {
+function assertParentCredentialDoesNotRequireCoordination(value: unknown): void {
+  if (!plainRecord(value)) return
+  const descriptor = Object.getOwnPropertyDescriptor(value, 'parentPin')
+  if (descriptor === undefined || (descriptor.enumerable && 'value' in descriptor && descriptor.value === '')) {
+    return
+  }
+  throw new Error(
+    'A legacy root parentPin requires the binding-aware coordinated Parent credential migration.',
+  )
+}
+
+export function canonicalCredentialFreeJson(value: CredentialFreeJsonValue): string {
   if (value === null || typeof value !== 'object') return JSON.stringify(value)
   if (Array.isArray(value)) {
     return `[${value.map((entry) => canonicalCredentialFreeJson(entry)).join(',')}]`
@@ -232,15 +243,16 @@ function canonicalCredentialFreeJson(value: CredentialFreeJsonValue): string {
     .join(',')}}`
 }
 
-async function persistAndVerifyEducationalData(
+export async function persistAndVerifyEducationalData(
   educationalData: CredentialFreeJsonValue,
-  options?: LegacyCredentialMigrationOptions,
+  options?: Pick<LegacyCredentialMigrationOptions, 'educationalDataPersistence'>,
 ): Promise<void> {
   const persistence = options?.educationalDataPersistence
   if (!persistence) {
     throw new Error('Durable educational-data persistence and read-back are required to complete credential migration.')
   }
-  const expected = canonicalCredentialFreeJson(educationalData)
+  const sanitizedInput = sanitizeCredentialFreeEducationalData(educationalData)
+  const expected = canonicalCredentialFreeJson(sanitizedInput)
   const detachedForWrite = JSON.parse(expected) as CredentialFreeJsonValue
   await persistence.write(detachedForWrite)
   const readBack = await persistence.read()
@@ -250,6 +262,39 @@ async function persistAndVerifyEducationalData(
     canonicalCredentialFreeJson(readBack as CredentialFreeJsonValue) !== expected
   ) {
     throw new Error('Durable educational data failed exact credential-free read-back verification.')
+  }
+}
+
+/**
+ * Internal two-phase seam used by the coordinated Parent migration. No
+ * educational state is written until every credential domain is ready.
+ */
+export async function prepareLegacyEducationalCredentials(
+  value: unknown,
+  options?: LegacyCredentialMigrationOptions,
+): Promise<LegacyCredentialMigrationResult> {
+  const profiles = legacyProfilesFrom(value)
+  const educationalData = sanitizeCredentialFreeEducationalData(value)
+  const outcomes: LegacyCredentialMigrationOutcome[] = []
+  for (const profile of profiles) {
+    outcomes.push(await migrateOneProfile(profile, options))
+  }
+  return { educationalData, outcomes }
+}
+
+/** @internal Completes journals only after a shared credential-free write. */
+export async function finalizePreparedLegacyEducationalCredentials(
+  prepared: LegacyCredentialMigrationResult,
+  options?: LegacyCredentialMigrationOptions,
+): Promise<void> {
+  for (const outcome of prepared.outcomes) {
+    await advanceMigrationStage(
+      outcome.profileId,
+      outcome.classification,
+      'educational-data-sanitized',
+      options,
+    )
+    await advanceMigrationStage(outcome.profileId, outcome.classification, 'complete', options)
   }
 }
 
@@ -325,17 +370,12 @@ export async function migrateLegacyEducationalCredentials(
   value: unknown,
   options?: LegacyCredentialMigrationOptions,
 ): Promise<LegacyCredentialMigrationResult> {
-  const profiles = legacyProfilesFrom(value)
-  const educationalData = sanitizeCredentialFreeEducationalData(value)
-  const outcomes: LegacyCredentialMigrationOutcome[] = []
-  for (const profile of profiles) {
-    outcomes.push(await migrateOneProfile(profile, options))
-  }
-
-  await persistAndVerifyEducationalData(educationalData, options)
-  for (const profile of profiles) {
-    await advanceMigrationStage(profile.profileId, profile.classification, 'educational-data-sanitized', options)
-    await advanceMigrationStage(profile.profileId, profile.classification, 'complete', options)
-  }
-  return { educationalData, outcomes }
+  // The shared sanitizer removes both credential domains. Never let this
+  // learner-only public workflow erase a pending Parent credential.
+  sanitizeCredentialFreeEducationalData(value)
+  assertParentCredentialDoesNotRequireCoordination(value)
+  const prepared = await prepareLegacyEducationalCredentials(value, options)
+  await persistAndVerifyEducationalData(prepared.educationalData, options)
+  await finalizePreparedLegacyEducationalCredentials(prepared, options)
+  return prepared
 }

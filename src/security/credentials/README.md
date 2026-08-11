@@ -1,4 +1,4 @@
-# Device-local learner credential foundation
+# Device-local credential foundation
 
 This module stores learner convenience-lock credentials in a dedicated browser
 namespace, one record per profile:
@@ -8,8 +8,9 @@ namespace, one record per profile:
 The namespace is structurally separate from `homeschool-hq:app:v2`. Nothing in
 this module adds credentials to `Profile`, `AppState`, normal backups, sync,
 Admin, staff, installation-manager, or Study identity. Migration journals use
-their own `homeschool-hq:security:*:v1` namespaces and contain state labels and
-profile IDs only. They never contain a PIN, verifier, salt, or recovery secret.
+their own `homeschool-hq:security:*:v1` namespaces and contain only non-secret
+state, binding, identifiers, and integrity commitments. They never contain a
+PIN, verifier, salt, or recovery secret.
 
 ## Verifier scheme v2
 
@@ -65,6 +66,36 @@ tombstone material, so no previously usable verifier material survives.
 boundary. It resolves only after PBKDF2 derivation, vault write/read-back, and
 successful verification of the source PIN.
 
+## Device-local Parent credential
+
+The Parent convenience lock uses a separate record, parser, and namespace:
+
+`homeschool-hq:security:parent-credentials:v1:<installation-id>:<household-id>`
+
+It reuses the reviewed PBKDF2 cost, salt generation, canonical Base64 parsing,
+length framing, and constant-time comparison. Its immutable domain is
+`manuel-academy:parent-pin:v1`, framed with the exact installation ID,
+household ID, and PIN. The learner domain remains
+`manuel-academy:learner-pin:v2`; the record shapes and parsers are also
+mutually exclusive.
+
+Every Parent operation requires a caller-supplied active `InstallationBinding`.
+The credential stores only its stable installation/household reference and
+never creates or guesses installation identity. Missing credentials produce
+`parent-setup-required`; there is intentionally no general Parent enrollment
+or first-visitor setup API. Parent verification returns the structural
+`{ kind: 'parent', householdId }` seam used by the shared failed-attempt ledger,
+but this vault stores no attempt counters or lockout state.
+
+Rotation is exposed only through `rotateParentPinAuthorized`, whose integration
+port must consume live Parent credential/session step-up authority and verify
+that its actor/session household matches the exact binding in the supplied
+context. Recovery
+can only replace verifier material with an unusable `reset-required` tombstone
+after its installation claim/recovery authorization port approves. Neither API
+creates a recovery PIN or elevates Parent authority into installation-manager,
+Study, Admin, learner, or hosted authentication authority.
+
 ## Legacy migration state machine
 
 Per profile, migration advances monotonically through:
@@ -88,4 +119,27 @@ interruption visible and safe to retry independently for every profile.
 `sanitizeAndEnrollLegacyImportCredentials` provides the same behavior under a
 separate import journal namespace. Its result contains sanitized educational
 data and non-secret outcomes only; it never returns or persists raw imported
-PINs.
+PINs. Both learner-only entry points reject a pending non-empty root
+`parentPin`; that credential must go through the binding-aware coordinated
+Parent migration so one domain cannot erase the other.
+
+Parent migration uses its own binding-scoped journal:
+
+`classified -> credential-persisted -> verifier-verified -> educational-data-persisted -> complete`
+
+Only exact root `AppState.parentPin` is consumed. Missing or empty legacy state
+returns `parent-setup-required`; malformed legacy state becomes a bound,
+unusable reset tombstone. Non-JSON or executable values in either accepted
+legacy credential field fail preflight. The full shared portable-security
+sanitizer runs before local writes, so nested or aliased Parent PIN/verifier
+fields fail closed.
+
+The coordinator prepares and verifies the Parent record and every legacy
+learner record before one credential-free educational-state publication. That
+publication must be an atomic compare-and-swap against the exact raw snapshot;
+an exclusive binding-scoped lock and a frozen active-binding snapshot cover the
+operation. The Parent journal commits to the expected credential-free dataset
+and the complete device-local credential set. If a crash occurs after the CAS
+removed plaintext, the exact binding, verifier-verified journal, matching
+commitments, strict records, and durable read-back allow a no-plaintext retry.
+No PIN, salt, or verifier is written to the journal.

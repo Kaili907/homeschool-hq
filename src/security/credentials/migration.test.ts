@@ -16,7 +16,7 @@ function legacyData(pins: Record<string, unknown>): Record<string, unknown> {
   return {
     schemaVersion: 2,
     activeProfileId: Object.keys(pins)[0] ?? null,
-    parentPin: '9876',
+    parentPin: '',
     profiles: Object.fromEntries(
       Object.entries(pins).map(([profileId, pin]) => [
         profileId,
@@ -50,7 +50,7 @@ describe('legacy learner credential migration', () => {
         storage,
         educationalDataPersistence: durableEducationalDataPersistence(),
       }),
-    ).rejects.toThrow(/unsupported profile ID/i)
+    ).rejects.toThrow(/unsupported profile ID|canonical ProfileId/i)
     expect(storage.entries()).toEqual([])
   })
 
@@ -67,6 +67,28 @@ describe('legacy learner credential migration', () => {
       ),
     ).rejects.toBeInstanceOf(CredentialSanitizationError)
     expect(storage.entries()).toEqual([])
+  })
+
+  it('refuses to erase a pending root Parent PIN in the learner-only workflow', async () => {
+    const storage = new MemoryCredentialStorage()
+    let writes = 0
+    const source = legacyData({ p1: '1234' })
+    source.parentPin = '9876'
+
+    await expect(
+      migrateLegacyEducationalCredentials(source, {
+        storage,
+        educationalDataPersistence: {
+          write: () => {
+            writes += 1
+          },
+          read: () => undefined,
+        },
+      }),
+    ).rejects.toThrow(/binding-aware coordinated Parent credential migration/)
+
+    expect(storage.entries()).toEqual([])
+    expect(writes).toBe(0)
   })
 
   it('classifies an empty legacy PIN as unenrolled without creating a credential', async () => {

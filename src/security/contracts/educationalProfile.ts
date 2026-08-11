@@ -13,6 +13,9 @@ export interface ForbiddenSyncedSecurityFields {
   readonly learnerPin?: never
   readonly pinVerifier?: never
   readonly pinSalt?: never
+  readonly parentPin?: never
+  readonly parentPinVerifier?: never
+  readonly parentCredential?: never
   readonly credential?: never
   readonly credentials?: never
   readonly credentialMetadata?: never

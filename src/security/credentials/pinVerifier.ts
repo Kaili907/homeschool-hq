@@ -26,6 +26,16 @@ export interface PinVerifierCrypto {
   getRandomValues<T extends ArrayBufferView | null>(array: T): T
 }
 
+/**
+ * Length-framed inputs supplied by a credential-kind wrapper. The domain and
+ * binding parts are authenticated into the PBKDF2 input; they are never read
+ * from portable educational data.
+ */
+export interface BoundPinVerifierSpec {
+  readonly domain: string
+  readonly bindingParts: readonly string[]
+}
+
 const FOUR_DIGIT_PIN = /^\d{4}$/
 const BASE64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/
 
@@ -79,9 +89,20 @@ export function isSupportedPinCostParameters(version: unknown, value: unknown): 
   )
 }
 
-function framedProfileBoundSecret(profileId: ProfileId, secret: string): Uint8Array {
+function framedBoundSecret(spec: BoundPinVerifierSpec, secret: string): Uint8Array {
   const encoder = new TextEncoder()
-  const parts = [encoder.encode(LEARNER_PIN_VERIFIER_DOMAIN), encoder.encode(profileId), encoder.encode(secret)]
+  if (
+    typeof spec.domain !== 'string' ||
+    spec.domain.length === 0 ||
+    spec.domain.length > 512 ||
+    !Array.isArray(spec.bindingParts) ||
+    spec.bindingParts.length === 0 ||
+    spec.bindingParts.length > 8 ||
+    spec.bindingParts.some((part) => typeof part !== 'string' || part.length === 0 || part.length > 2_048)
+  ) {
+    throw new Error('Credential verifier binding is invalid.')
+  }
+  const parts = [spec.domain, ...spec.bindingParts, secret].map((part) => encoder.encode(part))
   const framed = new Uint8Array(parts.reduce((total, part) => total + 4 + part.byteLength, 0))
   const view = new DataView(framed.buffer)
   let offset = 0
@@ -95,14 +116,14 @@ function framedProfileBoundSecret(profileId: ProfileId, secret: string): Uint8Ar
 }
 
 async function deriveVerifier(
-  profileId: ProfileId,
+  spec: BoundPinVerifierSpec,
   secret: string,
   salt: Uint8Array,
   cryptoProvider: PinVerifierCrypto,
 ): Promise<Uint8Array> {
   const key = await cryptoProvider.subtle.importKey(
     'raw',
-    framedProfileBoundSecret(profileId, secret),
+    framedBoundSecret(spec, secret),
     'PBKDF2',
     false,
     ['deriveBits'],
@@ -129,20 +150,53 @@ function constantTimeEqual(left: Uint8Array, right: Uint8Array): boolean {
   return difference === 0
 }
 
-async function createVerifierForSecret(
-  profileId: ProfileId,
+export async function createBoundPinVerifier(
+  spec: BoundPinVerifierSpec,
   secret: string,
   cryptoProvider?: PinVerifierCrypto,
 ): Promise<PinVerifierMaterial> {
   const crypto = requireCrypto(cryptoProvider)
   const salt = crypto.getRandomValues(new Uint8Array(LEARNER_PIN_SALT_BYTES))
-  const verifier = await deriveVerifier(profileId, secret, salt, crypto)
+  const verifier = await deriveVerifier(spec, secret, salt, crypto)
   return {
     costParametersVersion: LEARNER_PIN_COST_PARAMETERS_VERSION,
     costParameters: { ...LEARNER_PIN_COST_PARAMETERS_V1 },
     saltBase64: bytesToBase64(salt),
     verifierBase64: bytesToBase64(verifier),
   }
+}
+
+export async function createUnusableBoundPinVerifier(
+  spec: BoundPinVerifierSpec,
+  cryptoProvider?: PinVerifierCrypto,
+): Promise<PinVerifierMaterial> {
+  const crypto = requireCrypto(cryptoProvider)
+  const discardedSecret = bytesToBase64(crypto.getRandomValues(new Uint8Array(LEARNER_PIN_DERIVED_KEY_BYTES)))
+  return createBoundPinVerifier(spec, discardedSecret, crypto)
+}
+
+export async function verifyBoundPinVerifier(
+  spec: BoundPinVerifierSpec,
+  secret: string,
+  material: PinVerifierMaterial,
+  cryptoProvider?: PinVerifierCrypto,
+): Promise<boolean> {
+  if (!isSupportedPinCostParameters(material.costParametersVersion, material.costParameters)) {
+    return false
+  }
+  try {
+    const crypto = requireCrypto(cryptoProvider)
+    const salt = base64ToBytes(material.saltBase64, LEARNER_PIN_SALT_BYTES)
+    const expected = base64ToBytes(material.verifierBase64, LEARNER_PIN_DERIVED_KEY_BYTES)
+    const actual = await deriveVerifier(spec, secret, salt, crypto)
+    return constantTimeEqual(actual, expected)
+  } catch {
+    return false
+  }
+}
+
+function learnerPinVerifierSpec(profileId: ProfileId): BoundPinVerifierSpec {
+  return { domain: LEARNER_PIN_VERIFIER_DOMAIN, bindingParts: [profileId] }
 }
 
 export async function createPinVerifier(
@@ -153,7 +207,7 @@ export async function createPinVerifier(
   if (!isFourDigitPin(pin)) {
     throw new Error('A learner PIN must contain exactly four decimal digits.')
   }
-  return createVerifierForSecret(profileId, pin, cryptoProvider)
+  return createBoundPinVerifier(learnerPinVerifierSpec(profileId), pin, cryptoProvider)
 }
 
 /**
@@ -164,9 +218,7 @@ export async function createUnusablePinVerifier(
   profileId: ProfileId,
   cryptoProvider?: PinVerifierCrypto,
 ): Promise<PinVerifierMaterial> {
-  const crypto = requireCrypto(cryptoProvider)
-  const discardedSecret = bytesToBase64(crypto.getRandomValues(new Uint8Array(LEARNER_PIN_DERIVED_KEY_BYTES)))
-  return createVerifierForSecret(profileId, discardedSecret, crypto)
+  return createUnusableBoundPinVerifier(learnerPinVerifierSpec(profileId), cryptoProvider)
 }
 
 export async function verifyPinVerifier(
@@ -176,16 +228,5 @@ export async function verifyPinVerifier(
   cryptoProvider?: PinVerifierCrypto,
 ): Promise<boolean> {
   if (!isFourDigitPin(pin)) return false
-  if (!isSupportedPinCostParameters(material.costParametersVersion, material.costParameters)) {
-    return false
-  }
-  try {
-    const crypto = requireCrypto(cryptoProvider)
-    const salt = base64ToBytes(material.saltBase64, LEARNER_PIN_SALT_BYTES)
-    const expected = base64ToBytes(material.verifierBase64, LEARNER_PIN_DERIVED_KEY_BYTES)
-    const actual = await deriveVerifier(profileId, pin, salt, crypto)
-    return constantTimeEqual(actual, expected)
-  } catch {
-    return false
-  }
+  return verifyBoundPinVerifier(learnerPinVerifierSpec(profileId), pin, material, cryptoProvider)
 }

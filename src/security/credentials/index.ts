@@ -1,4 +1,55 @@
-export * from './importCompatibility'
-export * from './migration'
-export * from './pinVerifier'
+export { sanitizeAndEnrollLegacyImportCredentials } from './importCompatibility'
+export {
+  LEGACY_CREDENTIAL_MIGRATION_NAMESPACE,
+  LEGACY_CREDENTIAL_MIGRATION_SCHEMA_VERSION,
+  LEGACY_IMPORT_CREDENTIAL_MIGRATION_NAMESPACE,
+  classifyLegacyPin,
+  migrateLegacyEducationalCredentials,
+  readLegacyCredentialMigrationRecord,
+  type DurableEducationalDataPersistence,
+  type LegacyCredentialMigrationOptions,
+  type LegacyCredentialMigrationOutcome,
+  type LegacyCredentialMigrationRecord,
+  type LegacyCredentialMigrationResult,
+  type LegacyMigrationStage,
+  type LegacyPinClassification,
+} from './migration'
+export * from './parentMigration'
+export { PARENT_PIN_VERIFIER_DOMAIN } from './parentPinVerifier'
+export {
+  PARENT_CREDENTIAL_STORAGE_NAMESPACE,
+  ParentCredentialVaultError,
+  markParentCredentialResetRequiredAuthorized,
+  parentCredentialBindingReference,
+  parentCredentialStorageKey,
+  parentFailedAttemptSubject,
+  readParentCredentialState,
+  rotateParentPinAuthorized,
+  verifyParentPin,
+  type ParentCredentialAvailability,
+  type ParentCredentialMutationResult,
+  type ParentCredentialResetAuthorization,
+  type ParentCredentialResetAuthorizationContext,
+  type ParentCredentialRotationAuthorization,
+  type ParentCredentialRotationAuthorizationContext,
+  type ParentCredentialVaultErrorCode,
+  type ParentFailedAttemptSubject,
+  type ParentPinVerificationResult,
+} from './parentVault'
+export {
+  LEARNER_PIN_COST_PARAMETERS_V1,
+  LEARNER_PIN_COST_PARAMETERS_VERSION,
+  LEARNER_PIN_DERIVED_KEY_BYTES,
+  LEARNER_PIN_SALT_BYTES,
+  LEARNER_PIN_VERIFIER_DOMAIN,
+  base64ToBytes,
+  bytesToBase64,
+  createPinVerifier,
+  createUnusablePinVerifier,
+  isFourDigitPin,
+  isSupportedPinCostParameters,
+  verifyPinVerifier,
+  type PinVerifierCrypto,
+  type PinVerifierMaterial,
+} from './pinVerifier'
 export * from './vault'
