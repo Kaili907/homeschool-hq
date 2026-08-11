@@ -295,10 +295,20 @@
       "supersessionStatus": "current"
     },
     {
+      "version": "20260810153000",
+      "filename": "20260810153000_academy_admin_configuration_reauthorization.sql",
+      "sha256": "e533b15b04157cd1a7015221b59fe483b3f67691ccf6f5a497e592398c978308",
+      "dependency": "20260810151000_academy_study_safety_provider_accounting.sql",
+      "classification": "executable",
+      "applicationStatus": "not-applied-hosted",
+      "requiredMarkerTransition": "academy-admin-configuration-reauthorization-v1",
+      "supersessionStatus": "current"
+    },
+    {
       "version": "20260810160000",
       "filename": "20260810160000_academy_curriculum_release_publishing.sql",
       "sha256": "ba9291c66af40dcc693532aef6db94f9bc4fa5b6937369407c8a3a7de2d5dece",
-      "dependency": "20260810151000_academy_study_safety_provider_accounting.sql",
+      "dependency": "20260810153000_academy_admin_configuration_reauthorization.sql",
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "academy-curriculum-release-publishing-v1",
