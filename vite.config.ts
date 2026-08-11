@@ -23,6 +23,7 @@ export default defineConfig({
         test: {
           name: 'root-app',
           include: ['src/**/*.test.{ts,tsx}', 'tests/**/*.test.js'],
+          setupFiles: ['./tests/node-test-setup.ts'],
           pool: 'threads',
           maxWorkers: 4,
           testTimeout: 120_000,
