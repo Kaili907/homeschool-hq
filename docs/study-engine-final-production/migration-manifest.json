@@ -91,7 +91,8 @@
       "classification": "executable",
       "applicationStatus": "not-applied-hosted",
       "requiredMarkerTransition": "adult_review_operations_version:0->2",
-      "supersessionStatus": "supersedes-before-first-application"
+      "supersessionStatus": "supersedes-before-first-application",
+      "supersedesSha256": "46c68426d21a79b90a3011d5fbfcca19044393887636dd845ca362f6e4e69443"
     },
     {
       "version": "20260801190000",

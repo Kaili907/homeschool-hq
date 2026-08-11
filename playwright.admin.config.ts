@@ -1,6 +1,6 @@
 import { defineConfig } from '@playwright/test'
 
-const PORT = 4179
+const PORT = Number(process.env.ADMIN_BROWSER_TEST_PORT ?? 4179)
 
 export default defineConfig({
   testDir: './tests/browser',

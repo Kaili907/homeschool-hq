@@ -23,6 +23,8 @@ const ENV = Object.freeze({
   ANTHROPIC_API_KEY: 'anthropic-provider-secret',
   ELEVENLABS_API_KEY: 'elevenlabs-provider-secret',
   ELEVENLABS_ALLOWED_VOICE_IDS: 'private-voice-1',
+  ACADEMY_AI_ENABLED: 'true',
+  ACADEMY_TTS_ENABLED: 'true',
   ACADEMY_APP_VERSION: 'academy-e2e-build',
   ACADEMY_STUDY_ENGINE_VERSION: 'study-safety-v1',
 })
@@ -43,16 +45,12 @@ const TTS_CATALOG = createTtsVoiceCatalog({
   }],
 })
 
-const runtimeConfigurationResolver = Object.freeze({
-  resolve: async () => ({
-    values: {
-      aiEnabled: true,
-      ttsEnabled: true,
-      aiDailyLimit: 50,
-      ttsDailyLimit: 100,
-      approvedTiers: ['sonnet', 'haiku'],
-      defaultTier: 'sonnet',
-    },
+const effectiveConfigurationReader = Object.freeze({
+  read: async () => ({
+    status: 'available',
+    runtime: { aiEnabled: true, ttsEnabled: true },
+    quotas: { aiRequestsPerAccountDay: 50, ttsRequestsPerAccountDay: 100 },
+    ai: { approvedTiers: ['sonnet', 'haiku'], defaultTier: 'sonnet' },
   }),
 })
 
@@ -172,6 +170,73 @@ function coverageRows(attempts, dimension) {
   }))
 }
 
+function aggregateSource(rows, startAt, endExclusive) {
+  const ai = rows.filter((row) => row.engine !== 'tts')
+  const tts = rows.filter((row) => row.engine === 'tts')
+  const usage = (records, field) => {
+    const known = records.filter((row) => row[field] !== null)
+    return {
+      total: String(known.reduce((total, row) => total + row[field], 0)),
+      known: String(known.length),
+      unavailable: String(records.length - known.length),
+    }
+  }
+  const count = (predicate) => String(rows.filter(predicate).length)
+  const summary = {
+    dimension: 'summary',
+    key: 'all',
+    records: String(rows.length),
+    requests: { total: String(rows.length), ai: String(ai.length), tts: String(tts.length) },
+    usage: {
+      inputTokens: usage(ai, 'inputTokens'),
+      outputTokens: usage(ai, 'outputTokens'),
+      cachedInputReadTokens: usage(ai, 'cachedInputReadTokens'),
+      cachedInputWriteTokens: usage(ai, 'cachedInputWriteTokens'),
+      ttsCharacters: usage(tts, 'ttsCharacters'),
+    },
+    cost: {
+      calculated: {
+        micros: '0',
+        known: count((row) => row.costKind === 'calculated'),
+        unavailable: count((row) => row.costKind !== 'calculated'),
+      },
+      reconciledMicros: '0',
+      unavailableCount: count((row) => row.costKind === 'unavailable'),
+    },
+    counts: {
+      usageUnavailable: count((row) => row.engine !== 'tts' && row.inputTokens === null),
+      billingDisposition: {
+        billable: count((row) => row.billingDisposition === 'billable'),
+        notBillable: count((row) => row.billingDisposition === 'not_billable'),
+        unknown: count((row) => row.billingDisposition === 'unknown'),
+      },
+      costKind: {
+        calculated: count((row) => row.costKind === 'calculated'),
+        reconciled: count((row) => row.costKind === 'reconciled'),
+        unavailable: count((row) => row.costKind === 'unavailable'),
+      },
+      attribution: {
+        resolved: count((row) => row.householdAttribution === 'resolved'),
+        ambiguous: count((row) => row.householdAttribution === 'ambiguous'),
+        unresolved: count((row) => !['resolved', 'ambiguous'].includes(row.householdAttribution)),
+      },
+    },
+  }
+  return {
+    schemaVersion: 1,
+    range: { startAt, endExclusive, maximumDays: 366 },
+    completeness: {
+      queryCoverage: 'complete',
+      providerTrafficCoverage: 'coverage_unverified',
+      groupCount: 1,
+      groupLimit: 384,
+    },
+    accountingGapEvidence: { observedCount: '0', retentionCoverage: 'within_retention' },
+    recordsIncluded: String(rows.length),
+    groups: [summary],
+  }
+}
+
 function accountingHarness({ ledgerFailure = false, conflict = false } = {}) {
   const timeline = []
   const usageRows = []
@@ -245,9 +310,9 @@ function accountingHarness({ ledgerFailure = false, conflict = false } = {}) {
         reconciliationRef: null,
       })
     }),
-    readProviderUsageCosts: vi.fn(async () => {
-      timeline.push('ledger_read')
-      return usageRows
+    aggregateProviderUsageCosts: vi.fn(async ({ start, endExclusive }) => {
+      timeline.push('aggregate_read')
+      return aggregateSource(usageRows, start, endExclusive)
     }),
     readProviderAttemptCoverage: vi.fn(async ({ startAt, endExclusive }) => {
       timeline.push('coverage_read')
@@ -291,7 +356,7 @@ async function dispatchAnthropic(harness, mode = 'tutor') {
     fetchImpl: fetchRouter(harness.timeline),
     gatewayAccess: harness.access,
     providerAttemptJournal: harness.journal,
-    runtimeConfigurationResolver,
+    effectiveConfigurationReader,
     requestIdFactory: () => `provider-accounting-e2e-${mode}`,
   })(event(mode))
 }
@@ -312,7 +377,7 @@ async function dispatchTts(harness) {
     fetchImpl,
     gatewayAccess: harness.access,
     providerAttemptJournal: harness.journal,
-    runtimeConfigurationResolver,
+    effectiveConfigurationReader,
     requestIdFactory: () => 'provider-accounting-e2e-tts',
     catalog: TTS_CATALOG,
   })(ttsEvent())
@@ -403,6 +468,15 @@ describe('provider accounting end-to-end contract', () => {
     const browserModel = parseAdminCostsModel({
       ...projection,
       contractVersion: 4,
+      monthlyCostThreshold: {
+        status: 'not_applicable',
+        reason: 'range_not_month',
+        basis: 'calculated_usage_estimate',
+        observedMicros: null,
+        warningMicros: null,
+        criticalMicros: null,
+        configurationRevisions: null,
+      },
       monthlyCostAlert: monthlyCostAlertFixture({ generatedAt: NOW.toISOString() }),
     })
     expect(harness.access.readProviderAttemptCoverage).toHaveBeenCalledWith({

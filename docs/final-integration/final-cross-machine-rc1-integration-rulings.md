@@ -65,6 +65,26 @@ readiness probe accept the governed trigger and default authority, so new Study
 sessions continue to bind to the current published release while existing
 session pins remain unchanged.
 
+## Final local-gate reconciliation
+
+- Authenticated Anthropic gateway requests initialize bounded operational
+  telemetry before request/configuration validation, using system-scoped
+  authority until entitlement resolves. Malformed authenticated requests are
+  therefore observable without fabricating household attribution; successful
+  entitlement upgrades later telemetry and provider-attempt evidence to the
+  trusted household authority.
+- The Admin browser harness accepts an isolated port and validates static-file
+  containment with `node:path` relative-path semantics. This preserves the
+  traversal boundary on both Windows and POSIX instead of returning the SPA
+  shell for every Windows asset path.
+- The Admin R3 local evidence ledger now reflects the composed aggregate
+  reader, Provider Attempt Journal, four instrumented provider paths, bounded
+  reconciliation projection, Study safety accounting, and curriculum registry.
+  It deliberately retains three activation blockers: verified account pricing,
+  hosted ledger operation, and approval of the Study telemetry delivery
+  cadence. Missing production environment values remain a separate unified
+  preflight blocker.
+
 ## Safety hold
 
 No Admin step-up implementation is invented or imported. Critical Admin writes

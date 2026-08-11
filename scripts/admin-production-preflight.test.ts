@@ -337,7 +337,7 @@ describe('Admin production activation gates', () => {
     expect(JSON.stringify(result)).not.toContain(secret)
   })
 
-  it('reports the checked-in local state as integration-blocked without hosted contact', async () => {
+  it('reports the reconciled local state as configuration-blocked without hosted contact', async () => {
     const [contract, evidence, manifest] = await Promise.all([
       loadJson(contractUrl),
       loadJson(evidenceUrl),
@@ -350,10 +350,28 @@ describe('Admin production activation gates', () => {
       migrationDirectory: new URL('../supabase/migrations/', import.meta.url),
     })
     expect(result).toMatchObject({
-      classification: 'BLOCKED_BY_LOCAL_INTEGRATION',
+      classification: 'BLOCKED_BY_CONFIGURATION',
       hostedContactPerformed: false,
       productionActivationAuthorized: false,
       migrationIdentity: { status: 'PASS' },
+      summary: { pass: 21, blocking: 3, notApplicable: 2 },
+      blockers: [
+        {
+          gateId: 'provider_pricing_account_configuration',
+          classification: 'BLOCKED_BY_CONFIGURATION',
+          reasonCode: 'ACCOUNT_PRICING_NOT_VERIFIED',
+        },
+        {
+          gateId: 'provider_cost_ledger_operational',
+          classification: 'BLOCKED_BY_PROVIDER_ACCOUNTING',
+          reasonCode: 'PRODUCTION_LEDGER_OPERATION_NOT_VERIFIED',
+        },
+        {
+          gateId: 'study_telemetry',
+          classification: 'BLOCKED_BY_STUDY',
+          reasonCode: 'STUDY_TELEMETRY_CADENCE_NOT_APPROVED',
+        },
+      ],
     })
   })
 })

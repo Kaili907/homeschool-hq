@@ -1,6 +1,6 @@
 import { createServer } from 'node:http'
 import { readFile, stat } from 'node:fs/promises'
-import { extname, resolve } from 'node:path'
+import { extname, isAbsolute, relative, resolve } from 'node:path'
 
 const port = Number(process.env.ADMIN_BROWSER_TEST_PORT ?? 4179)
 const distRoot = resolve(process.cwd(), 'dist')
@@ -57,7 +57,8 @@ function contentType(pathname) {
 
 async function staticResponse(response, pathname) {
   const filePath = resolve(distRoot, `.${pathname}`)
-  if (!filePath.startsWith(`${distRoot}/`)) return false
+  const relativePath = relative(distRoot, filePath)
+  if (relativePath.startsWith('..') || isAbsolute(relativePath)) return false
   try {
     if (!(await stat(filePath)).isFile()) return false
     let body = await readFile(filePath)

@@ -169,7 +169,7 @@ describe('full-chain Admin database security red team', () => {
         and relation.relkind in ('r', 'p')
       order by namespace.nspname, relation.relname
     `)
-    expect(relations.rows).toHaveLength(80)
+    expect(relations.rows).toHaveLength(87)
     expect(relations.rows.every((relation) => relation.rls_enabled)).toBe(true)
     expect(relations.rows.filter((relation) => !relation.rls_forced)
       .map((relation) => `${relation.schema_name}.${relation.table_name}`)).toEqual([
@@ -258,7 +258,7 @@ describe('full-chain Admin database security red team', () => {
         and routine.prosecdef
       order by namespace.nspname, routine.proname, identity_arguments
     `)
-    expect(routines.rows).toHaveLength(185)
+    expect(routines.rows).toHaveLength(219)
     expect(routines.rows.every(({ owner_name: owner }) => owner === 'postgres')).toBe(true)
     expect(routines.rows.every(({ configuration }) => (
       configuration?.length === 1
@@ -459,12 +459,12 @@ describe('full-chain Admin database security red team', () => {
       expect(publication.publicationState).toBe('published')
       const activation = (await database.query<{ value: any }>(`
         select public.academy_admin_transition_curriculum_pointer_v1(
-          $1, $2, 1, 'activation', 'release.activated', $3, $4,
+          $1, $2, 2, 'activation', 'release.activated', $3, $4,
           'releases:manage'
         ) as value
       `, [OWNER, targetVersion, crypto.randomUUID(), HASH_A])).rows[0].value
       expect(activation).toMatchObject({
-        pointer: { releaseVersion: targetVersion, revision: 2 },
+        pointer: { releaseVersion: targetVersion, revision: 3 },
         transition: { state: 'transitioned', transitionKind: 'activation' },
       })
     })

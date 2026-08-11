@@ -43,24 +43,23 @@ const TTS_CATALOG = createTtsVoiceCatalog({
   }],
 })
 
-function runtimeConfigurationResolver(env = {}) {
+function effectiveConfigurationReader(env = {}) {
   return {
-    resolve: async () => ({
-      values: {
+    read: async () => ({
+      status: 'available',
+      runtime: {
         aiEnabled: env.ACADEMY_AI_ENABLED !== 'false',
         ttsEnabled: env.ACADEMY_TTS_ENABLED !== 'false',
-        aiDailyLimit: 50,
-        ttsDailyLimit: 100,
-        approvedTiers: ['sonnet', 'haiku'],
-        defaultTier: 'sonnet',
       },
+      quotas: { aiRequestsPerAccountDay: 50, ttsRequestsPerAccountDay: 100 },
+      ai: { approvedTiers: ['sonnet', 'haiku'], defaultTier: 'sonnet' },
     }),
   }
 }
 
 function createAnthropicHandler(overrides = {}) {
   return createBaseAnthropicHandler({
-    runtimeConfigurationResolver: runtimeConfigurationResolver(overrides.env),
+    effectiveConfigurationReader: effectiveConfigurationReader(overrides.env),
     ...overrides,
   })
 }
@@ -68,7 +67,7 @@ function createAnthropicHandler(overrides = {}) {
 function createTtsHandler(overrides = {}) {
   return createBaseTtsHandler({
     catalog: TTS_CATALOG,
-    runtimeConfigurationResolver: runtimeConfigurationResolver(overrides.env),
+    effectiveConfigurationReader: effectiveConfigurationReader(overrides.env),
     ...overrides,
   })
 }

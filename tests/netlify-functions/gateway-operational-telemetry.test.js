@@ -7,7 +7,6 @@ import {
 import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netlify/functions/anthropic.js'
 import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
 import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catalog.js'
-import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
 import { createTestProviderAttemptJournal } from './provider-attempt-test-helpers.js'
 
 const HOUSEHOLD_ID = '10000000-0000-4000-8000-000000000001'
@@ -42,24 +41,6 @@ const EFFECTIVE_CONFIGURATION = Object.freeze({
 function createAnthropicHandler(overrides = {}) {
   return createBaseAnthropicHandler({
     effectiveConfigurationReader: { read: vi.fn(async () => EFFECTIVE_CONFIGURATION) },
-    ...overrides,
-  })
-}
-
-function createTtsHandler(overrides = {}) {
-  return createBaseTtsHandler({
-    effectiveConfigurationReader: { read: vi.fn(async () => EFFECTIVE_CONFIGURATION) },
-    ...overrides,
-  })
-}
-
-const runtimeConfigurationSource = Object.freeze({
-  read: async () => savedRuntimeConfigurationProjection(),
-})
-
-function createAnthropicHandler(overrides = {}) {
-  return createBaseAnthropicHandler({
-    runtimeConfigurationSource,
     providerAttemptJournal: createTestProviderAttemptJournal(),
     ...overrides,
   })
@@ -68,7 +49,7 @@ function createAnthropicHandler(overrides = {}) {
 function createTtsHandler(overrides = {}) {
   return createBaseTtsHandler({
     catalog: TTS_CATALOG,
-    runtimeConfigurationSource,
+    effectiveConfigurationReader: { read: vi.fn(async () => EFFECTIVE_CONFIGURATION) },
     providerAttemptJournal: createTestProviderAttemptJournal(),
     ...overrides,
   })

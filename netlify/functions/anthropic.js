@@ -65,31 +65,13 @@ export function createAnthropicHandler(overrides = {}) {
       const auth = await verifySupabaseBearer(event, { fetchImpl, env })
       if (!auth.ok) return auth.response
 
-      const rawRequest = readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES)
-      const callerSelectedTier = Object.prototype.hasOwnProperty.call(rawRequest, 'modelTier')
-      const validatedRequest = validateAnthropicRequest(rawRequest)
-      let configuration
-      try {
-        configuration = await configurationReader.read()
-      } catch {
-        reject(503, 'configuration_unavailable')
-      }
-      if (configuration.status !== 'available') reject(503, 'configuration_unavailable')
-      if (!configuration.runtime.aiEnabled) reject(503, 'gateway_disabled')
-      const selectedTier = callerSelectedTier
-        ? validatedRequest.modelTier
-        : configuration.ai.defaultTier
-      if (!configuration.ai.approvedTiers.includes(selectedTier)) {
-        reject(403, 'model_tier_not_approved')
-      }
-      const request = Object.freeze({ ...validatedRequest, modelTier: selectedTier })
-
-      const access = overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl })
-      const entitlement = await access.requireEntitlement(auth.user.id)
-
       const startedAt = Date.now()
+      const access = overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl })
+      let authority = Object.freeze({
+        householdRef: null,
+        householdAttribution: 'lookup_unavailable',
+      })
       let requestKey = usageRequestKey(event, context, overrides.requestIdFactory)
-      const authority = entitlement
       const telemetry = overrides.telemetry
         ?? createGatewayOperationalTelemetry({ env, access })
       let mode
@@ -112,6 +94,28 @@ export function createAnthropicHandler(overrides = {}) {
           accountingAvailable,
         })
       }
+
+      const rawRequest = readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES)
+      const callerSelectedTier = Object.prototype.hasOwnProperty.call(rawRequest, 'modelTier')
+      const validatedRequest = validateAnthropicRequest(rawRequest)
+      let configuration
+      try {
+        configuration = await configurationReader.read()
+      } catch {
+        reject(503, 'configuration_unavailable')
+      }
+      if (configuration.status !== 'available') reject(503, 'configuration_unavailable')
+      if (!configuration.runtime.aiEnabled) reject(503, 'gateway_disabled')
+      const selectedTier = callerSelectedTier
+        ? validatedRequest.modelTier
+        : configuration.ai.defaultTier
+      if (!configuration.ai.approvedTiers.includes(selectedTier)) {
+        reject(403, 'model_tier_not_approved')
+      }
+      const request = Object.freeze({ ...validatedRequest, modelTier: selectedTier })
+
+      const entitlement = await access.requireEntitlement(auth.user.id)
+      authority = entitlement
 
       mode = request.mode
       requestKey = gatewayProviderExecutionKey({

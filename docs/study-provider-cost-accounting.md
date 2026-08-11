@@ -1,6 +1,6 @@
 # Study safety provider cost accounting
 
-Status: ready locally; not instrumented, not applied hosted, and no price seeded.
+Status: ready and instrumented locally; not applied hosted, and no price seeded.
 
 ## Authority and exact dimensions
 
@@ -41,9 +41,9 @@ component snapshots the term ID and revision, exact provider dimensions,
 effective interval, unit size, IntegerMicros price, quantity, and result. Later
 term publication, replacement, or ending does not scan or recompute old rows.
 
-## Future Provider Attempt Journal seam
+## Provider Attempt Journal integration
 
-The later instrumentation must call the service-role-only
+The integrated Study safety provider adapter calls the service-role-only
 `academy_record_provider_usage_v2` once for each physical Study safety provider
 attempt. It must pass the physical attempt's stable execution key, exact trusted
 provider usage and dimensions, occurrence, latency, result, billing disposition,
@@ -56,9 +56,12 @@ The RPC returns:
 { "usageId": "<ledger uuid>", "idempotencyResult": "created|replayed" }
 ```
 
-The Provider Attempt Journal can retain that returned `usageId` as its ledger
-link. This branch intentionally creates no journal table and does not modify the
-Study safety provider adapter.
+The Provider Attempt Journal retains that returned `usageId` as its ledger link.
+The journal migration remains a separate canonical migration, while the final
+runtime instruments the Study safety adapter through the shared physical-attempt
+coordinator. Reservation, dispatch readiness, outcome observation, ledger
+persistence, and linkage are all fail-closed and covered by the local gateway,
+accounting, and database contract suites.
 
 ## Privacy
 
