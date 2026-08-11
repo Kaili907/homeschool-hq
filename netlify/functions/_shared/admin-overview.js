@@ -5,6 +5,7 @@ import { buildSystemHealthProjection } from '../../../src/admin/systemHealth.ts'
 import { buildAdminCostProjection, ADMIN_COST_RECORD_LIMIT } from './admin-cost-projection.js'
 import { evaluateAdminMonthlyCostAlert } from './admin-monthly-cost-alert.js'
 import { readAdminProviderAccountingCoverage } from './admin-provider-coverage.js'
+import { readQueryEntries } from './http.js'
 
 const DAY_MS = 24 * 60 * 60 * 1_000
 const PERFORMANCE_RETENTION_MARGIN_MS = 60 * 60 * 1_000
@@ -40,26 +41,11 @@ function midnight(date) {
 }
 
 function queryEntries(event) {
-  const raw = typeof event?.rawQueryString === 'string'
-    ? event.rawQueryString
-    : typeof event?.rawQuery === 'string'
-      ? event.rawQuery
-      : null
-  const multi = event?.multiValueQueryStringParameters
-  if (multi !== null && multi !== undefined) {
-    if (!multi || typeof multi !== 'object' || Array.isArray(multi)) rejectRange()
-    for (const values of Object.values(multi)) {
-      if (!Array.isArray(values) || values.length !== 1 || typeof values[0] !== 'string') rejectRange()
-    }
+  try {
+    return readQueryEntries(event, 'invalid_range')
+  } catch {
+    rejectRange()
   }
-  if (raw !== null) return [...new URLSearchParams(raw).entries()]
-  if (multi && Object.keys(multi).length > 0) {
-    return Object.entries(multi).map(([key, values]) => [key, values[0]])
-  }
-  const query = event?.queryStringParameters
-  if (query === null || query === undefined) return []
-  if (!query || typeof query !== 'object' || Array.isArray(query)) rejectRange()
-  return Object.entries(query).filter(([, value]) => value !== null)
 }
 
 /** Resolves the requested UTC date range once for every range-aware domain. */

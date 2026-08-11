@@ -8,7 +8,7 @@ import { createAdminSafetyReader } from './_shared/admin-safety-reader.js'
 import { loadAdminCurriculumValidationEvidence } from './_shared/admin-curriculum-evidence.js'
 import { createFilesystemCurriculumSource } from '../../src/admin/curriculum/filesystemSource.node.ts'
 import { composeAdminOverview, resolveAdminOverviewRange } from './_shared/admin-overview.js'
-import { errorResponse, jsonResponse } from './_shared/http.js'
+import { errorResponse, hasBody, jsonResponse } from './_shared/http.js'
 import { createRuntimeConfigurationResolver } from './_shared/admin-runtime-configuration.js'
 import { createAdminMonthlyCostAlertEvaluator } from './_shared/admin-monthly-cost-alert.js'
 
@@ -68,7 +68,7 @@ export function createAdminOverviewHandler(overrides = {}) {
   return async (event) => {
     if (event?.httpMethod !== 'GET') return errorResponse(405, 'method_not_allowed', { allow: 'GET' })
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
-    if (typeof event?.body === 'string' && event.body !== '') return errorResponse(400, 'invalid_request')
+    if (hasBody(event)) return errorResponse(400, 'invalid_request')
 
     let authorized
     try {

@@ -11,7 +11,7 @@ import {
 } from './_shared/admin-monthly-cost-alert.js'
 import { readAdminProviderAccountingCoverage } from './_shared/admin-provider-coverage.js'
 import { createGatewayAccess } from './_shared/gateway-access.js'
-import { errorResponse, hasQuery, jsonResponse } from './_shared/http.js'
+import { errorResponse, hasBody, hasQuery, jsonResponse } from './_shared/http.js'
 import {
   projectPublicTtsCatalog,
   TTS_VOICE_CATALOG,
@@ -132,7 +132,7 @@ export function createAdminProductionReadinessHandler(overrides = {}) {
   return async (event) => {
     if (event?.httpMethod !== 'GET') return errorResponse(405, 'method_not_allowed', { allow: 'GET' })
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
-    if (hasQuery(event) || (typeof event?.body === 'string' && event.body !== '')) {
+    if (hasQuery(event) || hasBody(event)) {
       return errorResponse(400, 'invalid_request')
     }
     let authorized

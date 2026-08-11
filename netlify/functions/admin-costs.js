@@ -3,7 +3,7 @@ import { createAdminConfigurationSource } from './_shared/admin-configuration-so
 import { createAdminCostProjection } from './_shared/admin-cost-projection.js'
 import { createAdminMonthlyCostAlertEvaluator } from './_shared/admin-monthly-cost-alert.js'
 import { createGatewayAccess } from './_shared/gateway-access.js'
-import { errorResponse, GatewayError, jsonResponse, responseForError } from './_shared/http.js'
+import { errorResponse, GatewayError, hasBody, jsonResponse, responseForError } from './_shared/http.js'
 
 const ADMIN_COST_PATHS = new Set([
   '/api/admin/v1/costs',
@@ -46,7 +46,7 @@ export function createAdminCostsHandler(overrides = {}) {
       return errorResponse(405, 'method_not_allowed', { allow: 'GET' })
     }
     if (!ADMIN_COST_PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
-    if (typeof event?.body === 'string' && event.body !== '') {
+    if (hasBody(event)) {
       return errorResponse(400, 'invalid_request')
     }
 

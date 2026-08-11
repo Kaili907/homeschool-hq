@@ -2,7 +2,7 @@ import {
   adminAuthorizationWire,
   createAdminAuthorization,
 } from './_shared/admin-authorization.js'
-import { errorResponse, hasQuery, jsonResponse } from './_shared/http.js'
+import { errorResponse, hasBody, hasQuery, jsonResponse } from './_shared/http.js'
 
 const ADMIN_AUTHORIZATION_PATHS = new Set([
   '/api/admin/v1/authorization',
@@ -26,7 +26,7 @@ export function createAdminAuthorizationHandler(overrides = {}) {
     if (!ADMIN_AUTHORIZATION_PATHS.has(event?.path ?? '')) {
       return errorResponse(404, 'not_found')
     }
-    if (hasQuery(event)) return errorResponse(400, 'invalid_request')
+    if (hasQuery(event) || hasBody(event)) return errorResponse(400, 'invalid_request')
 
     const result = await authorization.require(event, 'overview:read')
     if (!result.ok) return result.response

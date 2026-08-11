@@ -8,6 +8,7 @@ import {
 import {
   assertExactObject,
   errorResponse,
+  hasBody,
   hasQuery,
   jsonResponse,
   readJsonBody,
@@ -106,6 +107,7 @@ export function createAdminAccessHandler(overrides = {}) {
       return errorResponse(404, 'not_found')
     }
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
+    if (isRead && hasBody(event)) return errorResponse(400, 'invalid_request')
 
     const requiredCapability = isRead ? 'overview:read' : 'admin_roles:manage'
     const authorized = await authorization.require(event, requiredCapability)

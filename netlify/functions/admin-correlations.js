@@ -11,7 +11,7 @@ import {
   AdminCorrelationReadError,
   createAdminCorrelationReader,
 } from './_shared/admin-correlation-reader.js'
-import { errorResponse, jsonResponse, reject, responseForError } from './_shared/http.js'
+import { errorResponse, hasBody, jsonResponse, readQueryEntries, reject, responseForError } from './_shared/http.js'
 
 const PATHS = new Set([
   '/api/admin/v1/correlations',
@@ -42,17 +42,7 @@ const MAX_RANGE_MS = 90 * 24 * 60 * 60 * 1_000
 const DIAGNOSTIC_RETENTION_MS = 30 * 24 * 60 * 60 * 1_000
 
 function entriesFor(event) {
-  const raw = typeof event?.rawQueryString === 'string'
-    ? event.rawQueryString
-    : typeof event?.rawQuery === 'string' ? event.rawQuery : null
-  if (raw !== null) return [...new URLSearchParams(raw).entries()]
-  const entries = []
-  for (const [key, values] of Object.entries(event?.multiValueQueryStringParameters ?? {})) {
-    if (!Array.isArray(values)) reject(400, 'invalid_query')
-    for (const value of values) entries.push([key, value])
-  }
-  if (entries.length > 0) return entries
-  return Object.entries(event?.queryStringParameters ?? {})
+  return readQueryEntries(event, 'invalid_query')
 }
 
 function timestamp(value) {
@@ -220,6 +210,7 @@ export function createAdminCorrelationsHandler(overrides = {}) {
   return async (event) => {
     if (event?.httpMethod !== 'GET') return errorResponse(405, 'method_not_allowed', { allow: 'GET' })
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
+    if (hasBody(event)) return errorResponse(400, 'invalid_request')
     try {
       const parsed = parseCorrelationQuery(event, now())
       const selected = selectedSources(parsed.query.domain)

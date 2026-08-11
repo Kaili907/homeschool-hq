@@ -16,6 +16,7 @@ import { TTS_VOICE_CATALOG } from './_shared/tts-catalog.js'
 import {
   assertExactObject,
   errorResponse,
+  hasBody,
   hasQuery,
   jsonResponse,
   readJsonBody,
@@ -136,6 +137,7 @@ export function createAdminConfigurationHandler(overrides = {}) {
       return errorResponse(404, 'not_found')
     }
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
+    if (isRead && hasBody(event)) return errorResponse(400, 'invalid_request')
 
     const capability = isRead ? 'configuration:read' : 'configuration:manage'
     const authorized = await authorization.require(event, capability)
