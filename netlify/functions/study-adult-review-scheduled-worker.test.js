@@ -65,6 +65,7 @@ describe('Study private scheduled worker configuration', () => {
     expect(STUDY_ADULT_REVIEW_SCHEDULE).toEqual({
       scheduled: 'configured',
       cadence: '*/5 * * * *',
+      contractVersion: 'netlify-schedule.5m.v1',
     })
   })
 

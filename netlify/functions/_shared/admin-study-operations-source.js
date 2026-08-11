@@ -1,11 +1,14 @@
 import {
   STUDY_OPERATION_STATUSES,
   STUDY_OPERATIONS_SCHEMA_VERSION,
+  decodeStudyWorkerEvidence,
   deriveStudyOperationsStatus,
 } from '../../../src/admin/studyOperationsModel.ts'
 import { ADMIN_CONTRACT_VERSION } from '../../../src/admin/contracts.ts'
 import { createAdminHealthSource } from './admin-health-source.js'
+import { createAdminStudyWorkerEvidenceSource } from './admin-study-worker-evidence-source.js'
 import { envFlagEnabled } from './http.js'
+import { STUDY_ADULT_REVIEW_SCHEDULE } from './study-adult-review-operations/schedule.js'
 import {
   createStudyProductionReadinessService,
 } from './study-production/readiness.js'
@@ -282,9 +285,134 @@ function defaultMountGate(env, snapshot, explicitResult) {
   )
 }
 
+function normalizedWorkerEvidence(result) {
+  return result.kind === 'available' ? decodeStudyWorkerEvidence(result.value) : null
+}
+
+function workerCompositionGate(evidence) {
+  if (!evidence) {
+    return gate(
+      'adult_review_worker_composition',
+      'unavailable',
+      'source_unavailable',
+      'study-adult-review.operations.v2',
+      null,
+      'retry_evidence',
+    )
+  }
+  const configured = evidence.configuredState === 'configured'
+  return gate(
+    'adult_review_worker_composition',
+    configured ? 'ready' : 'not_configured',
+    configured ? 'adult_review_worker_composed' : 'adult_review_worker_not_composed',
+    'study-adult-review.operations.v2',
+    null,
+    configured ? 'none' : 'compose_worker',
+  )
+}
+
+function workerScheduleGate(schedule, observedAt) {
+  const configured = schedule?.scheduled === 'configured'
+    && schedule?.cadence === '*/5 * * * *'
+    && version(schedule?.contractVersion) !== null
+  return gate(
+    'adult_review_worker_schedule',
+    configured ? 'ready' : 'not_configured',
+    configured
+      ? 'adult_review_worker_schedule_configured'
+      : 'adult_review_worker_schedule_absent',
+    configured ? schedule.contractVersion : null,
+    configured ? observedAt : null,
+    configured ? 'none' : 'configure_worker_schedule',
+  )
+}
+
+function workerRunEvidenceGate(evidence) {
+  if (!evidence) {
+    return gate(
+      'adult_review_worker_run_evidence',
+      'unavailable',
+      'source_unavailable',
+      'study-worker-run-evidence.v1',
+      null,
+      'retry_evidence',
+    )
+  }
+  if (evidence.configuredState !== 'configured') {
+    return gate(
+      'adult_review_worker_run_evidence',
+      'not_configured',
+      'adult_review_worker_not_composed',
+      'study-worker-run-evidence.v1',
+      evidence.latestRunTimestamp,
+      'compose_worker',
+    )
+  }
+  if (evidence.stalenessClassification === 'unknown') {
+    return gate(
+      'adult_review_worker_run_evidence',
+      'unknown',
+      'adult_review_worker_no_run_evidence',
+      'study-worker-run-evidence.v1',
+      null,
+      'inspect_worker_runs',
+    )
+  }
+  if (evidence.stalenessClassification === 'unavailable') {
+    return gate(
+      'adult_review_worker_run_evidence',
+      'unavailable',
+      'adult_review_worker_unavailable',
+      evidence.workerVersion ?? 'study-worker-run-evidence.v1',
+      evidence.latestRunTimestamp,
+      'restore_worker_runtime',
+    )
+  }
+  if (evidence.latestResultCategory === 'failed') {
+    return gate(
+      'adult_review_worker_run_evidence',
+      'blocked',
+      'adult_review_worker_failed',
+      evidence.workerVersion ?? 'study-worker-run-evidence.v1',
+      evidence.latestRunTimestamp,
+      'restore_worker_runtime',
+    )
+  }
+  if (evidence.latestResultCategory === 'partial_with_retryable_failures') {
+    return gate(
+      'adult_review_worker_run_evidence',
+      'partial',
+      'adult_review_worker_partial',
+      evidence.workerVersion ?? 'study-worker-run-evidence.v1',
+      evidence.latestRunTimestamp,
+      'inspect_worker_runs',
+    )
+  }
+  if (evidence.stalenessClassification === 'degraded') {
+    return gate(
+      'adult_review_worker_run_evidence',
+      'partial',
+      'adult_review_worker_run_stale',
+      evidence.workerVersion ?? 'study-worker-run-evidence.v1',
+      evidence.latestRunTimestamp,
+      'inspect_worker_runs',
+    )
+  }
+  return gate(
+    'adult_review_worker_run_evidence',
+    'ready',
+    evidence.latestResultCategory === 'no_work'
+      ? 'adult_review_worker_no_work'
+      : 'adult_review_worker_processed',
+    evidence.workerVersion ?? 'study-worker-run-evidence.v1',
+    evidence.latestRunTimestamp,
+    'none',
+  )
+}
+
 /**
- * Server-only composition. Optional evidence readers are clean integration
- * seams for future authorities; their absence never upgrades a gate.
+ * Server-only composition. Optional evidence readers remain fail-closed;
+ * durable worker status is read from its authoritative server-only RPC.
  */
 export function createAdminStudyOperationsSource(options = {}) {
   const env = options.env ?? process.env
@@ -301,6 +429,16 @@ export function createAdminStudyOperationsSource(options = {}) {
       fetchImpl: options.fetchImpl ?? globalThis.fetch,
       client: options.telemetryClient,
     })
+  const workerEvidenceSource = options.workerEvidenceSource
+    ?? createAdminStudyWorkerEvidenceSource({
+      env,
+      fetchImpl: options.fetchImpl ?? globalThis.fetch,
+      client: options.workerEvidenceClient,
+      now,
+    })
+  const workerSchedule = options.workerSchedule === undefined
+    ? STUDY_ADULT_REVIEW_SCHEDULE
+    : options.workerSchedule
   const evidence = options.evidence ?? {}
 
   return Object.freeze({
@@ -311,7 +449,7 @@ export function createAdminStudyOperationsSource(options = {}) {
         effectiveSettings,
         curriculumBinding,
         boundContent,
-        workerHealth,
+        workerEvidenceResult,
         costAccounting,
         attemptCoverage,
         productionMount,
@@ -321,18 +459,14 @@ export function createAdminStudyOperationsSource(options = {}) {
         safeRead(evidence.effectiveSettingsV2),
         safeRead(evidence.curriculumReleaseBinding),
         safeRead(evidence.boundContentRuntime),
-        safeRead(evidence.workerHealth),
+        safeRead(workerEvidenceSource),
         safeRead(evidence.providerCostAccounting),
         safeRead(evidence.providerAttemptCoverage),
         safeRead(evidence.productionMount),
       ])
 
-      const workerComposition = workerHealth.kind === 'available'
-        ? { kind: 'available', value: workerHealth.value?.composition }
-        : workerHealth
-      const workerSchedule = workerHealth.kind === 'available'
-        ? { kind: 'available', value: workerHealth.value?.schedule }
-        : workerHealth
+      const generatedAt = now().toISOString()
+      const workerEvidence = normalizedWorkerEvidence(workerEvidenceResult)
 
       const gates = Object.freeze([
         gateFromProbe({
@@ -354,21 +488,9 @@ export function createAdminStudyOperationsSource(options = {}) {
           missingReason: 'bound_content_runtime_not_integrated',
           action: 'integrate_bound_content',
         }),
-        gateFromProbe({
-          id: 'adult_review_worker_composition',
-          result: workerComposition,
-          missingReason: 'adult_review_worker_not_composed',
-          defaultContractVersion: 'study-adult-review.operations.v2',
-          action: 'compose_worker',
-        }),
-        gateFromProbe({
-          id: 'adult_review_worker_schedule',
-          result: workerSchedule,
-          missingReason: workerHealth.kind === 'missing'
-            ? 'adult_review_worker_schedule_absent'
-            : 'adult_review_worker_schedule_unverified',
-          action: 'configure_worker_schedule',
-        }),
+        workerCompositionGate(workerEvidence),
+        workerScheduleGate(workerSchedule, generatedAt),
+        workerRunEvidenceGate(workerEvidence),
         telemetryGate(telemetry),
         gateFromProbe({
           id: 'provider_cost_accounting',
@@ -388,8 +510,9 @@ export function createAdminStudyOperationsSource(options = {}) {
       return Object.freeze({
         contractVersion: ADMIN_CONTRACT_VERSION,
         schemaVersion: STUDY_OPERATIONS_SCHEMA_VERSION,
-        generatedAt: now().toISOString(),
+        generatedAt,
         overallStatus: deriveStudyOperationsStatus(gates),
+        workerEvidence,
         gates,
       })
     },

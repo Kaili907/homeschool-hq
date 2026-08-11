@@ -7,6 +7,7 @@ import type {
   StudyOperationStatus,
   StudyOperationsProjection,
   StudyOperationsReadState,
+  StudyWorkerEvidence,
 } from '../../admin/studyOperationsModel'
 import './admin-study-operations.css'
 
@@ -23,6 +24,7 @@ const GATE_LABELS: Readonly<Record<StudyOperationGateId, string>> = {
   bound_content_runtime: 'Bound Content Runtime',
   adult_review_worker_composition: 'Adult Review Worker Composition',
   adult_review_worker_schedule: 'Adult Review Worker Schedule',
+  adult_review_worker_run_evidence: 'Adult Review Worker Run Evidence',
   study_telemetry: 'Study Telemetry',
   provider_cost_accounting: 'Provider Cost Accounting',
   provider_attempt_coverage: 'Provider Attempt Coverage',
@@ -49,8 +51,17 @@ const REASON_MESSAGES: Readonly<Record<StudyOperationReasonCode, string>> = {
   session_semantics_not_ready: 'One or more durable session-semantics dependencies are not ready.',
   bound_content_runtime_not_integrated: 'No authority currently proves that the runtime is bound to released content.',
   adult_review_worker_not_composed: 'A production adult-review worker composition is not available to this dashboard.',
+  adult_review_worker_composed: 'The durable adult-review worker registry has an active production composition.',
   adult_review_worker_schedule_absent: 'No authoritative worker schedule evidence is connected.',
   adult_review_worker_schedule_unverified: 'The declared worker schedule has not been verified in the hosted runtime.',
+  adult_review_worker_schedule_configured: 'The private worker deployment manifest declares the five-minute schedule.',
+  adult_review_worker_no_run_evidence: 'The worker is configured, but no durable run evidence has been recorded.',
+  adult_review_worker_no_work: 'The latest durable run is within the freshness window and found no work.',
+  adult_review_worker_processed: 'The latest durable run is within the freshness window and processed work.',
+  adult_review_worker_partial: 'The latest durable run recorded retryable failures and is degraded.',
+  adult_review_worker_failed: 'The latest durable run failed and does not establish operational health.',
+  adult_review_worker_unavailable: 'The latest durable run could not reach a required dependency.',
+  adult_review_worker_run_stale: 'The latest successful result is older than the server-owned 15-minute freshness window.',
   study_telemetry_verified: 'A bounded Study telemetry event was verified by the operational telemetry source.',
   study_telemetry_partial: 'The bounded telemetry source was truncated or rejected invalid rows.',
   study_telemetry_absent: 'The telemetry source is available, but no Study session evidence was observed.',
@@ -71,6 +82,8 @@ const ACTION_MESSAGES: Readonly<Record<StudyOperationAction, string>> = {
   integrate_bound_content: 'Connect the bound-content runtime authority.',
   compose_worker: 'Complete and verify the production worker composition.',
   configure_worker_schedule: 'Configure and verify the hosted worker schedule.',
+  inspect_worker_runs: 'Inspect the private worker runtime and restore durable five-minute evidence.',
+  restore_worker_runtime: 'Restore the worker dependency or execution path, then verify a durable run.',
   inspect_telemetry: 'Verify the Study telemetry writer and bounded read projection.',
   integrate_cost_accounting: 'Integrate Study provider calls with the approved cost ledger.',
   complete_attempt_coverage: 'Add complete provider-attempt coverage without assuming cost-ledger completeness.',
@@ -98,7 +111,11 @@ const GROUPS: readonly {
     id: 'study-worker-gates',
     eyebrow: 'Adult review',
     title: 'Worker readiness',
-    gateIds: ['adult_review_worker_composition', 'adult_review_worker_schedule'],
+    gateIds: [
+      'adult_review_worker_composition',
+      'adult_review_worker_schedule',
+      'adult_review_worker_run_evidence',
+    ],
   },
   {
     id: 'study-observability-gates',
@@ -194,7 +211,13 @@ function StudyOperationsReady({
             <h2 id={group.id}>{group.title}</h2>
           </header>
           <div className="study-ops__grid">
-            {group.gateIds.map((id) => <GateCard gate={byId.get(id)!} key={id} />)}
+            {group.gateIds.map((id) => (
+              <GateCard
+                gate={byId.get(id)!}
+                workerEvidence={projection.workerEvidence}
+                key={id}
+              />
+            ))}
           </div>
         </section>
       ))}
@@ -202,13 +225,14 @@ function StudyOperationsReady({
   )
 }
 
-function GateCard({ gate }: { gate: StudyOperationGate }) {
+function GateCard({
+  gate,
+  workerEvidence,
+}: {
+  gate: StudyOperationGate
+  workerEvidence: StudyWorkerEvidence | null
+}) {
   const titleId = `study-gate-${gate.id}`
-  const verifiedLabel = gate.id === 'adult_review_worker_schedule'
-    ? 'Last run'
-    : gate.id === 'adult_review_worker_composition'
-      ? 'Last composition check'
-      : 'Last verified'
   return (
     <article className={`study-ops__card study-ops__card--${gate.status}`} aria-labelledby={titleId}>
       <div className="study-ops__card-heading">
@@ -216,21 +240,97 @@ function GateCard({ gate }: { gate: StudyOperationGate }) {
         <StatusBadge status={gate.status} />
       </div>
       <p className="study-ops__reason">{REASON_MESSAGES[gate.reasonCode]}</p>
-      <dl>
-        <div><dt>Contract / version</dt><dd>{gate.contractVersion ?? 'Not integrated'}</dd></div>
-        <div>
-          <dt>{verifiedLabel}</dt>
-          <dd>{gate.lastVerifiedAt
-            ? <time dateTime={gate.lastVerifiedAt}>{gate.lastVerifiedAt}</time>
-            : 'Unknown'}</dd>
-        </div>
-      </dl>
+      <GateFacts gate={gate} workerEvidence={workerEvidence} />
       <div className="study-ops__action">
         <span aria-hidden="true">&gt;</span>
         <p><strong>Operator action</strong>{ACTION_MESSAGES[gate.operatorAction]}</p>
       </div>
     </article>
   )
+}
+
+function GateFacts({
+  gate,
+  workerEvidence,
+}: {
+  gate: StudyOperationGate
+  workerEvidence: StudyWorkerEvidence | null
+}) {
+  if (gate.id === 'adult_review_worker_composition') {
+    return (
+      <dl>
+        <div>
+          <dt>Configured state</dt>
+          <dd>{workerEvidence
+            ? workerEvidence.configuredState === 'configured' ? 'Configured' : 'Not configured'
+            : 'Unknown'}</dd>
+        </div>
+        <div><dt>Contract</dt><dd>{gate.contractVersion ?? 'Not integrated'}</dd></div>
+      </dl>
+    )
+  }
+  if (gate.id === 'adult_review_worker_schedule') {
+    return (
+      <dl>
+        <div><dt>Configured state</dt><dd>{gate.status === 'ready' ? 'Configured' : 'Not configured'}</dd></div>
+        <div><dt>Cadence</dt><dd>{gate.status === 'ready' ? 'Every 5 minutes' : 'Unknown'}</dd></div>
+      </dl>
+    )
+  }
+  if (gate.id === 'adult_review_worker_run_evidence') {
+    return (
+      <dl>
+        <TimestampFact label="Latest run" value={workerEvidence?.latestRunTimestamp ?? null} />
+        <TimestampFact
+          label="Latest successful run"
+          value={workerEvidence?.latestSuccessfulRunTimestamp ?? null}
+        />
+        <div>
+          <dt>Latest category</dt>
+          <dd>{workerResultLabel(workerEvidence?.latestResultCategory ?? null)}</dd>
+        </div>
+        <div>
+          <dt>Staleness</dt>
+          <dd>{workerStalenessLabel(workerEvidence?.stalenessClassification ?? null)}</dd>
+        </div>
+        <div><dt>Worker version</dt><dd>{workerEvidence?.workerVersion ?? 'Unknown'}</dd></div>
+      </dl>
+    )
+  }
+  return (
+    <dl>
+      <div><dt>Contract / version</dt><dd>{gate.contractVersion ?? 'Not integrated'}</dd></div>
+      <TimestampFact label="Last verified" value={gate.lastVerifiedAt} />
+    </dl>
+  )
+}
+
+function TimestampFact({ label, value }: { label: string; value: string | null }) {
+  return (
+    <div>
+      <dt>{label}</dt>
+      <dd>{value ? <time dateTime={value}>{value}</time> : 'Unknown'}</dd>
+    </div>
+  )
+}
+
+function workerResultLabel(value: StudyWorkerEvidence['latestResultCategory']): string {
+  if (value === 'no_work') return 'No work'
+  if (value === 'processed') return 'Processed'
+  if (value === 'partial_with_retryable_failures') return 'Partial with retryable failures'
+  if (value === 'failed') return 'Failed'
+  if (value === 'unavailable') return 'Unavailable'
+  return 'No evidence'
+}
+
+function workerStalenessLabel(
+  value: StudyWorkerEvidence['stalenessClassification'] | null,
+): string {
+  if (value === 'healthy') return 'Healthy (15 minutes or less)'
+  if (value === 'degraded') return 'Degraded'
+  if (value === 'unknown') return 'Unknown'
+  if (value === 'unavailable') return 'Unavailable'
+  return 'Unknown'
 }
 
 function StatusBadge({ status }: { status: StudyOperationStatus }) {

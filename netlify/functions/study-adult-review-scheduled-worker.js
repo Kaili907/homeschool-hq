@@ -6,11 +6,7 @@ import {
   resultResponse,
 } from './_shared/study-adult-review-operations/entrypoint-result.js'
 import { executeAdultReviewWorkerRun } from './_shared/study-adult-review-operations/run-evidence.js'
-
-export const STUDY_ADULT_REVIEW_SCHEDULE = Object.freeze({
-  scheduled: 'configured',
-  cadence: '*/5 * * * *',
-})
+export { STUDY_ADULT_REVIEW_SCHEDULE } from './_shared/study-adult-review-operations/schedule.js'
 
 export const STUDY_ADULT_REVIEW_SCHEDULED_BATCH_LIMIT = 10
 

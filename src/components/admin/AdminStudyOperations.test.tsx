@@ -10,9 +10,19 @@ import {
 import { AdminStudyOperations } from './AdminStudyOperations'
 
 const STATUSES: readonly StudyOperationStatus[] = [
-  'ready', 'partial', 'manual_review', 'unavailable', 'not_configured',
-  'blocked', 'unknown', 'ready', 'unavailable', 'blocked',
+  'ready', 'partial', 'manual_review', 'unavailable', 'ready',
+  'ready', 'ready', 'unknown', 'unavailable', 'blocked', 'not_configured',
 ]
+
+const WORKER_EVIDENCE = {
+  schemaVersion: 1 as const,
+  configuredState: 'configured' as const,
+  latestRunTimestamp: '2026-08-10T15:55:00.000Z',
+  latestSuccessfulRunTimestamp: '2026-08-10T15:55:00.000Z',
+  latestResultCategory: 'no_work' as const,
+  stalenessClassification: 'healthy' as const,
+  workerVersion: 'adult-review-worker.v2',
+}
 
 function projection(): StudyOperationsProjection {
   const gates = STUDY_OPERATION_GATE_IDS.map((id, index) => ({
@@ -23,12 +33,14 @@ function projection(): StudyOperationsProjection {
       : id === 'provider_attempt_coverage'
         ? 'provider_attempt_coverage_not_integrated' as const
         : id === 'adult_review_worker_composition'
-          ? 'adult_review_worker_not_composed' as const
+          ? 'adult_review_worker_composed' as const
           : id === 'adult_review_worker_schedule'
-            ? 'adult_review_worker_schedule_absent' as const
-            : id === 'production_mount'
-              ? 'production_mount_blocked' as const
-              : 'unknown_evidence' as const,
+            ? 'adult_review_worker_schedule_configured' as const
+            : id === 'adult_review_worker_run_evidence'
+              ? 'adult_review_worker_no_work' as const
+              : id === 'production_mount'
+                ? 'production_mount_unverified' as const
+                : 'unknown_evidence' as const,
     contractVersion: index % 2 === 0 ? 'study-production.v1' : null,
     lastVerifiedAt: index === 0 ? '2026-08-10T15:55:00.000Z' : null,
     operatorAction: id === 'provider_cost_accounting'
@@ -36,16 +48,19 @@ function projection(): StudyOperationsProjection {
       : id === 'provider_attempt_coverage'
         ? 'complete_attempt_coverage' as const
         : id === 'adult_review_worker_composition'
-          ? 'compose_worker' as const
+          ? 'none' as const
           : id === 'adult_review_worker_schedule'
-            ? 'configure_worker_schedule' as const
-            : 'retry_evidence' as const,
+            ? 'none' as const
+            : id === 'adult_review_worker_run_evidence'
+              ? 'none' as const
+              : 'retry_evidence' as const,
   }))
   return {
     contractVersion: 2,
-    schemaVersion: 1,
+    schemaVersion: 2,
     generatedAt: '2026-08-10T16:00:00.000Z',
     overallStatus: deriveStudyOperationsStatus(gates),
+    workerEvidence: WORKER_EVIDENCE,
     gates,
   }
 }
@@ -58,7 +73,8 @@ describe('Admin Study Operations dashboard', () => {
     for (const label of [
       'Effective Settings V2', 'Curriculum Release Authority / Binding', 'Session Semantics',
       'Bound Content Runtime', 'Adult Review Worker Composition',
-      'Adult Review Worker Schedule', 'Study Telemetry', 'Provider Cost Accounting',
+      'Adult Review Worker Schedule', 'Adult Review Worker Run Evidence',
+      'Study Telemetry', 'Provider Cost Accounting',
       'Provider Attempt Coverage', 'Production Mount',
     ]) expect(markup).toContain(label)
     for (const status of [
@@ -66,13 +82,17 @@ describe('Admin Study Operations dashboard', () => {
     ]) expect(markup).toContain(status)
   })
 
-  it('keeps worker composition, schedule, and last-run evidence truthful', () => {
+  it('keeps worker composition, schedule, and durable run evidence separate', () => {
     const markup = renderToStaticMarkup(
       <AdminStudyOperations authorized state={{ status: 'ready', projection: projection() }} />,
     )
-    expect(markup).toMatch(/Adult Review Worker Composition[\s\S]*?production adult-review worker composition is not available/)
-    expect(markup).toMatch(/Adult Review Worker Schedule[\s\S]*?No authoritative worker schedule evidence/)
-    expect(markup).toMatch(/Last run<\/dt><dd>Unknown/)
+    expect(markup).toMatch(/Adult Review Worker Composition[\s\S]*?durable adult-review worker registry has an active production composition/)
+    expect(markup).toMatch(/Adult Review Worker Schedule[\s\S]*?private worker deployment manifest declares the five-minute schedule/)
+    expect(markup).toMatch(/Adult Review Worker Run Evidence[\s\S]*?Latest run<\/dt><dd><time dateTime="2026-08-10T15:55:00.000Z"/)
+    expect(markup).toMatch(/Latest successful run[\s\S]*?2026-08-10T15:55:00.000Z/)
+    expect(markup).toMatch(/Latest category<\/dt><dd>No work/)
+    expect(markup).toMatch(/Staleness<\/dt><dd>Healthy \(15 minutes or less\)/)
+    expect(markup).toMatch(/Worker version<\/dt><dd>adult-review-worker.v2/)
     expect(markup).not.toContain('Worker healthy')
   })
 
@@ -120,7 +140,7 @@ describe('Admin Study Operations dashboard', () => {
     expect(markup).toContain('aria-labelledby="study-ops-summary-title"')
     expect(markup).toContain('aria-labelledby="study-core-gates"')
     expect(markup).toContain('role="status"')
-    expect(markup).toContain('Study Operations loaded. 2 of 10 gates ready.')
+    expect(markup).toContain('Study Operations loaded. 4 of 11 gates ready.')
     expect(markup).toContain('<dl>')
     expect(markup).toContain('<dt>Contract / version</dt>')
   })

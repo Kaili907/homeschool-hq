@@ -26,17 +26,31 @@ function allEvidence(status = 'ready') {
     effectiveSettingsV2: probe(status),
     curriculumReleaseBinding: probe(status),
     boundContentRuntime: probe(status),
-    workerHealth: {
-      read: async () => ({ composition: await probe(status).read(), schedule: await probe(status).read() }),
-    },
     providerCostAccounting: probe(status, 'admin-usage-cost.v2'),
     providerAttemptCoverage: probe(status),
     productionMount: probe(status, 'study-production.v1'),
   }
 }
 
+function workerEvidence(overrides = {}) {
+  return {
+    schemaVersion: 1,
+    configuredState: 'configured',
+    latestRunTimestamp: '2026-08-10T15:55:00.000Z',
+    latestSuccessfulRunTimestamp: '2026-08-10T15:55:00.000Z',
+    latestResultCategory: 'processed',
+    stalenessClassification: 'healthy',
+    workerVersion: 'adult-review-worker.v2',
+    ...overrides,
+  }
+}
+
+function workerSource(value = workerEvidence()) {
+  return { read: async () => value }
+}
+
 describe('Admin Study Operations server source', () => {
-  it('keeps unfinished integrations unavailable and worker schedule absent', async () => {
+  it('keeps unfinished integrations unavailable while preserving the configured schedule', async () => {
     const source = createAdminStudyOperationsSource({
       env: { ACADEMY_STUDY_ENABLED: 'true' },
       now: () => NOW,
@@ -51,10 +65,13 @@ describe('Admin Study Operations server source', () => {
     })
     expect(byId.session_semantics).toMatchObject({ status: 'blocked', reasonCode: 'session_semantics_not_ready' })
     expect(byId.adult_review_worker_composition).toMatchObject({
-      status: 'unavailable', reasonCode: 'adult_review_worker_not_composed',
+      status: 'unavailable', reasonCode: 'source_unavailable',
     })
     expect(byId.adult_review_worker_schedule).toMatchObject({
-      status: 'unavailable', reasonCode: 'adult_review_worker_schedule_absent', lastVerifiedAt: null,
+      status: 'ready', reasonCode: 'adult_review_worker_schedule_configured',
+    })
+    expect(byId.adult_review_worker_run_evidence).toMatchObject({
+      status: 'unavailable', reasonCode: 'source_unavailable', lastVerifiedAt: null,
     })
     expect(byId.provider_cost_accounting.reasonCode).toBe('provider_cost_accounting_not_integrated')
     expect(byId.provider_attempt_coverage.reasonCode).toBe('provider_attempt_coverage_not_integrated')
@@ -80,6 +97,7 @@ describe('Admin Study Operations server source', () => {
           sourceTruncated: false,
         }),
       },
+      workerEvidenceSource: workerSource(),
       evidence,
     })
     const projection = await source.read()
@@ -116,6 +134,7 @@ describe('Admin Study Operations server source', () => {
           sourceTruncated: false,
         }),
       },
+      workerEvidenceSource: workerSource(),
       evidence: allEvidence(),
     })
     const serialized = JSON.stringify(await source.read())
@@ -145,5 +164,114 @@ describe('Admin Study Operations server source', () => {
     })
     const mount = (await source.read()).gates.find((gate) => gate.id === 'production_mount')
     expect(mount).toMatchObject({ status: 'not_configured', reasonCode: 'study_feature_disabled' })
+  })
+
+  it.each([
+    ['no run evidence', workerEvidence({
+      latestRunTimestamp: null,
+      latestSuccessfulRunTimestamp: null,
+      latestResultCategory: null,
+      stalenessClassification: 'unknown',
+      workerVersion: null,
+    }), 'unknown', 'adult_review_worker_no_run_evidence'],
+    ['fresh no_work', workerEvidence({ latestResultCategory: 'no_work' }), 'ready', 'adult_review_worker_no_work'],
+    ['fresh processed', workerEvidence(), 'ready', 'adult_review_worker_processed'],
+    ['fresh partial', workerEvidence({
+      latestSuccessfulRunTimestamp: null,
+      latestResultCategory: 'partial_with_retryable_failures',
+      stalenessClassification: 'degraded',
+    }), 'partial', 'adult_review_worker_partial'],
+    ['failed', workerEvidence({
+      latestSuccessfulRunTimestamp: null,
+      latestResultCategory: 'failed',
+      stalenessClassification: 'degraded',
+    }), 'blocked', 'adult_review_worker_failed'],
+    ['unavailable', workerEvidence({
+      latestSuccessfulRunTimestamp: null,
+      latestResultCategory: 'unavailable',
+      stalenessClassification: 'unavailable',
+    }), 'unavailable', 'adult_review_worker_unavailable'],
+    ['greater-than-15-minute stale result', workerEvidence({
+      stalenessClassification: 'degraded',
+    }), 'partial', 'adult_review_worker_run_stale'],
+  ])('maps %s conservatively from server-derived evidence', async (
+    _label,
+    evidenceValue,
+    expectedStatus,
+    expectedReason,
+  ) => {
+    const source = createAdminStudyOperationsSource({
+      env: { ACADEMY_STUDY_ENABLED: 'true' },
+      now: () => NOW,
+      readinessService: readiness(),
+      telemetrySource: { list: async () => ({ events: [], rejectedRows: 0, sourceTruncated: false }) },
+      workerEvidenceSource: workerSource(evidenceValue),
+    })
+    const projection = await source.read()
+    const byId = Object.fromEntries(projection.gates.map((item) => [item.id, item]))
+    expect(byId.adult_review_worker_composition.status).toBe('ready')
+    expect(byId.adult_review_worker_schedule.status).toBe('ready')
+    expect(byId.adult_review_worker_run_evidence).toMatchObject({
+      status: expectedStatus,
+      reasonCode: expectedReason,
+      lastVerifiedAt: evidenceValue.latestRunTimestamp,
+    })
+    expect(projection.workerEvidence).toEqual(evidenceValue)
+  })
+
+  it('keeps schedule configuration independent from durable run health', async () => {
+    const source = createAdminStudyOperationsSource({
+      env: { ACADEMY_STUDY_ENABLED: 'true' },
+      now: () => NOW,
+      readinessService: readiness(),
+      telemetrySource: { list: async () => ({ events: [], rejectedRows: 0, sourceTruncated: false }) },
+      workerEvidenceSource: workerSource(workerEvidence({
+        latestRunTimestamp: null,
+        latestSuccessfulRunTimestamp: null,
+        latestResultCategory: null,
+        stalenessClassification: 'unknown',
+        workerVersion: null,
+      })),
+    })
+    const byId = Object.fromEntries((await source.read()).gates.map((item) => [item.id, item]))
+    expect(byId.adult_review_worker_schedule.status).toBe('ready')
+    expect(byId.adult_review_worker_run_evidence.status).toBe('unknown')
+  })
+
+  it('reports a missing schedule without collapsing configured worker evidence', async () => {
+    const source = createAdminStudyOperationsSource({
+      env: { ACADEMY_STUDY_ENABLED: 'true' },
+      now: () => NOW,
+      readinessService: readiness(),
+      telemetrySource: { list: async () => ({ events: [], rejectedRows: 0, sourceTruncated: false }) },
+      workerEvidenceSource: workerSource(),
+      workerSchedule: null,
+    })
+    const byId = Object.fromEntries((await source.read()).gates.map((item) => [item.id, item]))
+    expect(byId.adult_review_worker_composition.status).toBe('ready')
+    expect(byId.adult_review_worker_schedule).toMatchObject({
+      status: 'not_configured', reasonCode: 'adult_review_worker_schedule_absent',
+    })
+    expect(byId.adult_review_worker_run_evidence.status).toBe('ready')
+  })
+
+  it.each([
+    ['malformed projection', { read: async () => ({ ...workerEvidence(), learnerId: 'private' }) }],
+    ['permission denied', { read: async () => { throw new Error('permission denied: private SQL') } }],
+  ])('fails closed for %s without exposing source detail', async (_label, workerEvidenceSource) => {
+    const source = createAdminStudyOperationsSource({
+      env: { ACADEMY_STUDY_ENABLED: 'true' },
+      now: () => NOW,
+      readinessService: readiness(),
+      telemetrySource: { list: async () => ({ events: [], rejectedRows: 0, sourceTruncated: false }) },
+      workerEvidenceSource,
+    })
+    const projection = await source.read()
+    const byId = Object.fromEntries(projection.gates.map((item) => [item.id, item]))
+    expect(projection.workerEvidence).toBeNull()
+    expect(byId.adult_review_worker_composition.reasonCode).toBe('source_unavailable')
+    expect(byId.adult_review_worker_schedule.status).toBe('ready')
+    expect(byId.adult_review_worker_run_evidence.reasonCode).toBe('source_unavailable')
+    expect(JSON.stringify(projection)).not.toMatch(/learner|private SQL|permission denied/i)
   })
 })

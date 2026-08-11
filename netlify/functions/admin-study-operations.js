@@ -24,6 +24,9 @@ export function createAdminStudyOperationsHandler(overrides = {}) {
     readinessService: overrides.readinessService,
     telemetrySource: overrides.telemetrySource,
     telemetryClient: overrides.telemetryClient,
+    workerEvidenceSource: overrides.workerEvidenceSource,
+    workerEvidenceClient: overrides.workerEvidenceClient,
+    workerSchedule: overrides.workerSchedule,
     evidence: overrides.evidence,
   })
 
