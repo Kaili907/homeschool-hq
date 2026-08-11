@@ -41,7 +41,7 @@ bounded cursor projection. It adds indexes and exact server-side filters for
 the DTO's time, actor-role, correlation, and reason-code facts. Actor identity
 and assignment references remain excluded from the projection. Canonical LF
 SHA-256:
-`64dff0578273dd429d389d2f01c18486b4f4d9ea24460fca89956c443bb7e8e3`.
+`175a8c052742aacbf0e6cfd0ea2a389d217c432a9309ced03d776b905647fc4e`.
 This migration has not been applied to a hosted Supabase project.
 
 ## Supabase: logical TTS voice profile contract (2026-08-09)

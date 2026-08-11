@@ -57,12 +57,21 @@ begin
        'admin_role.assign', 'admin_role.revoke', 'configuration.update',
        'engine.control', 'safety.triage', 'incident.acknowledge',
        'curriculum_draft.create', 'curriculum_draft.update',
+       'curriculum_entity.create', 'curriculum_entity.update',
+       'curriculum_entity.tombstone',
+       'curriculum_draft.collaborator.add',
+       'curriculum_draft.collaborator.revoke',
+       'curriculum_standard_review.update',
+       'curriculum_approval.approve',
+       'curriculum_approval.changes_requested',
+       'curriculum_release.stage',
        'curriculum.approve', 'curriculum.publish',
        'release.activate', 'release.rollback'
      ))
      or (p_resource_type is not null and p_resource_type not in (
        'admin_role_assignment', 'configuration', 'engine', 'safety_case',
-       'incident', 'curriculum_draft', 'curriculum_release',
+       'incident', 'curriculum_draft', 'curriculum_entity',
+       'curriculum_standard_review', 'curriculum_approval', 'curriculum_release',
        'application_release'
      ))
      or (p_actor_role is not null and p_actor_role not in (

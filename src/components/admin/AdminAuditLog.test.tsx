@@ -138,14 +138,17 @@ describe('production Admin Audit Log experience', () => {
       },
       reasonCode: 'curriculum.authored',
     }
-    const markup = render({
-      status: 'ready',
-      page: { events: [entityEvent], nextCursor: null },
-    })
+    const markup = renderToStaticMarkup(<EventDetailPanel
+      event={entityEvent}
+      panelId="curriculum-audit-detail"
+      headingId="curriculum-audit-detail-heading"
+      closeRef={createRef<HTMLButtonElement>()}
+      onClose={() => {}}
+    />)
     expect(markup).toContain('curriculum_entity.tombstone')
     expect(markup).toContain('curriculum_entity')
-    expect(markup).toContain('entity ref')
-    expect(markup).toContain('draft revision')
+    expect(markup).toContain('Entity ref')
+    expect(markup).toContain('Draft revision')
     expect(markup).toContain('lesson-1')
     expect(markup).not.toMatch(/raw JSON|lesson body|assessment prompt/i)
   })
