@@ -340,7 +340,7 @@ export function createStudyProductionController(
   function knownFailure(error: unknown, mutationUncertain: boolean): StudyProductionControllerSnapshot {
     if (error instanceof StudyProductionSessionContractError ||
         error instanceof StudyBoundContentContractError) {
-      if (pending) pending = null
+      if (!mutationUncertain && pending) pending = null
       return publish('unavailable', Object.freeze({ kind: 'contract_invalid' }))
     }
     if (error instanceof StudyIdentityClientError) {
