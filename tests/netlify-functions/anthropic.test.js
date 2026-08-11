@@ -19,7 +19,7 @@ function testAccess({
   memberships = [
     {
       id: 'active-membership',
-      user_id: 'household-user',
+      user_id: '123e4567-e89b-42d3-a456-426614174000',
       status: 'active',
       revoked_at: null,
     },
@@ -110,7 +110,7 @@ function installFakeAbortTimeout() {
 
 function fetchRouter({
   authStatus = 200,
-  authBody = { id: 'household-user', email: 'dad@example.test' },
+  authBody = { id: '123e4567-e89b-42d3-a456-426614174000', email: 'dad@example.test' },
   providerStatus = 200,
   providerBody = {
     id: 'provider-id',
@@ -487,7 +487,7 @@ describe('authenticated Anthropic gateway', () => {
       memberships: [
         {
           id: 'revoked-membership',
-          user_id: 'household-user',
+          user_id: '123e4567-e89b-42d3-a456-426614174000',
           status: 'revoked',
           revoked_at: '2026-07-31T18:00:00.000Z',
         },
@@ -511,8 +511,8 @@ describe('authenticated Anthropic gateway', () => {
       gatewayAccess: access,
     })(event())
     expect(result.statusCode).toBe(200)
-    expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
-    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 73)
+    expect(access.requireEntitlement).toHaveBeenCalledWith('123e4567-e89b-42d3-a456-426614174000')
+    expect(access.consumeUsage).toHaveBeenCalledWith('123e4567-e89b-42d3-a456-426614174000', 'anthropic', 73)
   })
 
   it('returns usage_limit before the provider call when the ledger is at cap', async () => {
@@ -560,7 +560,7 @@ describe('authenticated Anthropic gateway', () => {
     installFakeAbortTimeout()
     const fetchImpl = vi.fn(async (url, init) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '123e4567-e89b-42d3-a456-426614174000' }), { status: 200 })
       }
       return new Promise((_resolve, reject) => {
         init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true })
@@ -577,7 +577,7 @@ describe('authenticated Anthropic gateway', () => {
     const declaredFetch = fetchRouter()
     declaredFetch.mockImplementation(async (url) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '123e4567-e89b-42d3-a456-426614174000' }), { status: 200 })
       }
       return new Response('{}', {
         status: 200,
@@ -589,7 +589,7 @@ describe('authenticated Anthropic gateway', () => {
 
     declaredFetch.mockImplementation(async (url) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '123e4567-e89b-42d3-a456-426614174000' }), { status: 200 })
       }
       return new Response('{}', {
         status: 200,
@@ -601,7 +601,7 @@ describe('authenticated Anthropic gateway', () => {
 
     const streamedFetch = vi.fn(async (url) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '123e4567-e89b-42d3-a456-426614174000' }), { status: 200 })
       }
       return new Response(new Uint8Array(256 * 1024 + 1), {
         status: 200,

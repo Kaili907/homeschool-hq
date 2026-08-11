@@ -15,7 +15,7 @@ function testAccess({
   memberships = [
     {
       id: 'active-membership',
-      user_id: 'household-user',
+      user_id: '123e4567-e89b-42d3-a456-426614174000',
       status: 'active',
       revoked_at: null,
     },
@@ -69,7 +69,7 @@ function installFakeAbortTimeout() {
 
 function fetchRouter({
   authStatus = 200,
-  authBody = { id: 'household-user' },
+  authBody = { id: '123e4567-e89b-42d3-a456-426614174000' },
   providerStatus = 200,
   audio = new Uint8Array([1, 2, 3, 4]),
   providerError = { detail: 'elevenlabs-provider-secret' },
@@ -240,7 +240,7 @@ describe('authenticated TTS gateway', () => {
   it('rejects non-audio provider responses and maps throttling safely', async () => {
     const wrongTypeFetch = vi.fn(async (url) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), {
+        return new Response(JSON.stringify({ id: '123e4567-e89b-42d3-a456-426614174000' }), {
           status: 200,
           headers: { 'content-type': 'application/json' },
         })
@@ -304,7 +304,7 @@ describe('authenticated TTS gateway', () => {
       memberships: [
         {
           id: 'revoked-membership',
-          user_id: 'household-user',
+          user_id: '123e4567-e89b-42d3-a456-426614174000',
           status: 'revoked',
           revoked_at: '2026-07-31T18:00:00.000Z',
         },
@@ -330,8 +330,8 @@ describe('authenticated TTS gateway', () => {
       gatewayAccess: access,
     })(event())
     expect(result.statusCode).toBe(200)
-    expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
-    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 125)
+    expect(access.requireEntitlement).toHaveBeenCalledWith('123e4567-e89b-42d3-a456-426614174000')
+    expect(access.consumeUsage).toHaveBeenCalledWith('123e4567-e89b-42d3-a456-426614174000', 'tts', 125)
   })
 
   it('returns usage_limit before the provider call when the ledger is at cap', async () => {
@@ -362,7 +362,7 @@ describe('authenticated TTS gateway', () => {
     installFakeAbortTimeout()
     const fetchImpl = vi.fn(async (url, init) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '123e4567-e89b-42d3-a456-426614174000' }), { status: 200 })
       }
       return new Promise((_resolve, reject) => {
         init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true })
@@ -378,7 +378,7 @@ describe('authenticated TTS gateway', () => {
   it('rejects declared and streamed TTS responses above 4 MiB', async () => {
     const declaredFetch = vi.fn(async (url) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '123e4567-e89b-42d3-a456-426614174000' }), { status: 200 })
       }
       return new Response(new Uint8Array([1]), {
         status: 200,
@@ -390,7 +390,7 @@ describe('authenticated TTS gateway', () => {
 
     const streamedFetch = vi.fn(async (url) => {
       if (url === 'https://academy.supabase.co/auth/v1/user') {
-        return new Response(JSON.stringify({ id: 'household-user' }), { status: 200 })
+        return new Response(JSON.stringify({ id: '123e4567-e89b-42d3-a456-426614174000' }), { status: 200 })
       }
       return new Response(new Uint8Array(4 * 1024 * 1024 + 1), {
         status: 200,

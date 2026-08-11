@@ -1,15 +1,28 @@
 import { errorResponse, isTimeoutError } from './http.js'
 
 const MAX_BEARER_LENGTH = 4096
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 export const SUPABASE_AUTH_TIMEOUT_MS = 5_000
 
 function authConfig(env) {
-  const rawUrl = (env?.SUPABASE_URL || env?.VITE_SUPABASE_URL || '').trim()
-  const anonKey = (env?.SUPABASE_ANON_KEY || env?.VITE_SUPABASE_ANON_KEY || '').trim()
+  const urlValue = env?.SUPABASE_URL || env?.VITE_SUPABASE_URL
+  const keyValue = env?.SUPABASE_ANON_KEY || env?.VITE_SUPABASE_ANON_KEY
+  if (typeof urlValue !== 'string' || typeof keyValue !== 'string') return null
+
+  const rawUrl = urlValue.trim()
+  const anonKey = keyValue.trim()
+  if (!/^https:\/\/[^/?#\\]+\/?$/.test(rawUrl) || !anonKey) return null
   try {
     const url = new URL(rawUrl)
-    if (url.protocol !== 'https:' || url.username || url.password) return null
-    return anonKey ? { url: url.toString().replace(/\/+$/, ''), anonKey } : null
+    if (
+      url.protocol !== 'https:' ||
+      url.username ||
+      url.password ||
+      url.pathname !== '/' ||
+      url.search ||
+      url.hash
+    ) return null
+    return { url: url.origin, anonKey }
   } catch {
     return null
   }
@@ -48,6 +61,35 @@ export function supabaseAuthConfigured(env) {
   return authConfig(env) !== null
 }
 
+/** True only when bearer verification failed for a retryable upstream reason. */
+export function isTransientBearerAuthFailure(auth) {
+  return auth?.failure === 'auth-unavailable' || auth?.failure === 'upstream-timeout'
+}
+
+function withDeadline(operation, signal) {
+  return new Promise((resolve, reject) => {
+    if (signal.aborted) {
+      reject(signal.reason)
+      return
+    }
+
+    const onAbort = () => reject(signal.reason)
+    signal.addEventListener('abort', onAbort, { once: true })
+    Promise.resolve()
+      .then(operation)
+      .then(
+        (value) => {
+          signal.removeEventListener('abort', onAbort)
+          resolve(value)
+        },
+        (error) => {
+          signal.removeEventListener('abort', onAbort)
+          reject(error)
+        },
+      )
+  })
+}
+
 /**
  * Validate a Supabase access token with the project's Auth server. The returned
  * user id is the same value used by the current profiles RLS policy as the
@@ -59,52 +101,71 @@ export function supabaseAuthConfigured(env) {
  */
 export async function verifySupabaseBearer(event, { fetchImpl, env, timeoutMs }) {
   const token = bearerToken(event)
-  if (!token) return { ok: false, response: errorResponse(401, 'unauthenticated') }
+  if (!token) {
+    return {
+      ok: false,
+      failure: 'unauthenticated',
+      response: errorResponse(401, 'unauthenticated'),
+    }
+  }
 
   const config = authConfig(env)
-  if (!config) return { ok: false, response: errorResponse(503, 'service_unavailable') }
+  if (!config || typeof fetchImpl !== 'function') {
+    return { ok: false, failure: 'not-configured', response: errorResponse(503, 'service_unavailable') }
+  }
 
   let response
+  // Positive integer overrides are honored up to the absolute maximum; larger
+  // values are capped and every other value falls back to that maximum.
   const effectiveTimeoutMs =
-    Number.isInteger(timeoutMs) && timeoutMs > 0 ? timeoutMs : SUPABASE_AUTH_TIMEOUT_MS
+    Number.isInteger(timeoutMs) && timeoutMs > 0
+      ? Math.min(timeoutMs, SUPABASE_AUTH_TIMEOUT_MS)
+      : SUPABASE_AUTH_TIMEOUT_MS
   const signal = AbortSignal.timeout(effectiveTimeoutMs)
   try {
-    response = await fetchImpl(`${config.url}/auth/v1/user`, {
-      method: 'GET',
-      redirect: 'error',
+    response = await withDeadline(
+      () =>
+        fetchImpl(`${config.url}/auth/v1/user`, {
+          method: 'GET',
+          redirect: 'error',
+          signal,
+          headers: {
+            apikey: config.anonKey,
+            Authorization: `Bearer ${token}`,
+            accept: 'application/json',
+          },
+        }),
       signal,
-      headers: {
-        apikey: config.anonKey,
-        Authorization: `Bearer ${token}`,
-        accept: 'application/json',
-      },
-    })
+    )
   } catch (error) {
     if (isTimeoutError(error, signal)) {
-      return { ok: false, response: errorResponse(504, 'upstream_timeout') }
+      return { ok: false, failure: 'upstream-timeout', response: errorResponse(504, 'upstream_timeout') }
     }
-    return { ok: false, response: errorResponse(503, 'auth_unavailable') }
+    return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
   }
 
-  if ([400, 401, 403].includes(response.status)) {
-    return { ok: false, response: errorResponse(401, 'unauthenticated') }
+  if ([400, 401, 403].includes(response?.status)) {
+    return { ok: false, failure: 'unauthenticated', response: errorResponse(401, 'unauthenticated') }
   }
-  if (!response.ok) return { ok: false, response: errorResponse(503, 'auth_unavailable') }
+  if (response?.status !== 200) {
+    return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
+  }
 
   let user
   try {
-    user = await response.json()
+    if (typeof response.json !== 'function') throw new TypeError('Invalid auth response')
+    user = await withDeadline(() => response.json(), signal)
   } catch (error) {
     if (isTimeoutError(error, signal)) {
-      return { ok: false, response: errorResponse(504, 'upstream_timeout') }
+      return { ok: false, failure: 'upstream-timeout', response: errorResponse(504, 'upstream_timeout') }
     }
-    return { ok: false, response: errorResponse(503, 'auth_unavailable') }
+    return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
   }
   if (signal.aborted) {
-    return { ok: false, response: errorResponse(504, 'upstream_timeout') }
+    return { ok: false, failure: 'upstream-timeout', response: errorResponse(504, 'upstream_timeout') }
   }
-  if (!user || typeof user !== 'object' || typeof user.id !== 'string' || user.id.trim() === '') {
-    return { ok: false, response: errorResponse(401, 'unauthenticated') }
+  if (!user || typeof user !== 'object' || Array.isArray(user) || !UUID.test(user.id)) {
+    return { ok: false, failure: 'auth-unavailable', response: errorResponse(503, 'auth_unavailable') }
   }
 
   return {
