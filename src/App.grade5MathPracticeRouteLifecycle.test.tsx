@@ -374,8 +374,8 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     pathname = '/'
     await mountApp(seededLeveled(null, '6', { mathematics: '5' }))
     await signIn('p3', '3333')
-    expect(hasText(container, 'Hi, Nina!')).toBe(true)
-    expect(hasText(container, HOME_CARD_MARKER)).toBe(true)
+    expect(hasText(container, 'Student Dashboard for Nina')).toBe(true)
+    expect(harness.dashboard?.tools.some((tool) => tool.id === 'grade-5-math')).toBe(true)
     await press(findButton('Grade 5 Math'))
     await waitForSurface()
   })
@@ -386,7 +386,7 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
       pathname = '/'
       await mountApp(seededLeveled(null, grade, { mathematics: '5' }))
       await signIn('p3', '3333')
-      expect(hasText(container, HOME_CARD_MARKER)).toBe(true)
+      expect(harness.dashboard?.tools.some((tool) => tool.id === 'grade-5-math')).toBe(true)
       await press(findButton('Grade 5 Math'))
       await waitForSurface()
     },
@@ -436,7 +436,7 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
     await waitForSurface()
     await press(findButton('Back home'))
-    expect(hasText(container, 'Hi, Nina!')).toBe(true)
+    expect(hasText(container, 'Student Dashboard for Nina')).toBe(true)
     pathname = '/practice/grade-5-math'
     await press(findButton('Sign out'))
     expect(harness.picker).not.toBeNull()
@@ -451,7 +451,7 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await press(findButton('Sign out'))
     expect(pathname).toBe('/')
     await signIn('p1', '1234') // Sam, grade 3, no working levels
-    expect(hasText(container, 'Hi, Sam!')).toBe(true)
+    expect(hasText(container, 'Student Dashboard for Sam')).toBe(true)
     expect(findButton('Grade 5 Math')).toBeNull()
     await expectSurfaceUnreachable()
   })
@@ -468,7 +468,7 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     await press(findButton('Back home'))
     await press(findButton('Sign out'))
     await signIn('p1', '1234')
-    expect(hasText(container, 'Hi, Sam!')).toBe(true)
+    expect(hasText(container, 'Student Dashboard for Sam')).toBe(true)
     expect(hasText(container, SURFACE_MARKER)).toBe(false)
     await expectSurfaceUnreachable()
   })
@@ -479,7 +479,7 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
     pathname = '/'
     await mountApp(seededLeveled(null, '6', { mathematics: '5' }))
     await signIn('p1', '1234')
-    expect(hasText(container, 'Hi, Sam!')).toBe(true)
+    expect(hasText(container, 'Student Dashboard for Sam')).toBe(true)
     expect(findButton('Grade 5 Math')).toBeNull()
     await press(findButton('Sign out'))
     await signIn('p3', '3333')
