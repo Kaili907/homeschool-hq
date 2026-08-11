@@ -51,4 +51,30 @@ describe('Study session telemetry trusted manual entrypoint', () => {
     expect(result.health.worker).toBe('unavailable')
     expect(JSON.stringify(result)).not.toMatch(/secret|raw|database|exception/i)
   })
+
+  it('bounds unexpected worker and health failures without raw errors', async () => {
+    const runFailure = createStudySessionTelemetryDeliveryEntrypoint({
+      createWorker: () => ({
+        run: async () => { throw new Error('learner transcript database secret') },
+        health: vi.fn(),
+      }),
+    })
+    const failedRun = await runFailure()
+    expect(failedRun.delivery.category).toBe('unavailable')
+    expect(JSON.stringify(failedRun)).not.toMatch(/learner|transcript|database|secret/i)
+
+    const healthFailure = createStudySessionTelemetryDeliveryEntrypoint({
+      createWorker: () => ({
+        run: async () => DELIVERY,
+        health: async () => { throw new Error('provider raw object') },
+      }),
+    })
+    const failedHealth = await healthFailure()
+    expect(failedHealth.delivery.category).toBe('processed')
+    expect(failedHealth.health).toMatchObject({
+      worker: 'unavailable',
+      deliveryResultCategory: 'processed',
+    })
+    expect(JSON.stringify(failedHealth)).not.toMatch(/provider|raw|object/i)
+  })
 })

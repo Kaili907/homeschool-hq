@@ -100,10 +100,28 @@ describe('production Study session telemetry composition', () => {
     expect(JSON.stringify(write)).not.toMatch(/acceptedAt|sessionRevision|checkpointRevision|student/i)
   })
 
-  it('fails composition closed when trusted deployment versions are unavailable', () => {
+  it('fails composition closed when trusted deployment versions are unavailable or mutable', () => {
     expect(() => createProductionStudySessionTelemetryWorker({
       env: {},
       client: { rpc: vi.fn() },
     })).toThrow('telemetry_app_version_invalid')
+    expect(() => createProductionStudySessionTelemetryWorker({
+      env: { ACADEMY_APP_VERSION: 'deploy.2026.08.10' },
+      client: { rpc: vi.fn() },
+    })).toThrow('telemetry_engine_version_invalid')
+    expect(() => createProductionStudySessionTelemetryWorker({
+      env: {
+        ACADEMY_APP_VERSION: 'latest',
+        ACADEMY_STUDY_ENGINE_VERSION: 'study.v2',
+      },
+      client: { rpc: vi.fn() },
+    })).toThrow('telemetry_app_version_invalid')
+    expect(() => createProductionStudySessionTelemetryWorker({
+      env: {
+        ACADEMY_APP_VERSION: 'deploy.2026.08.10',
+        ACADEMY_STUDY_ENGINE_VERSION: 'LATEST',
+      },
+      client: { rpc: vi.fn() },
+    })).toThrow('telemetry_engine_version_invalid')
   })
 })

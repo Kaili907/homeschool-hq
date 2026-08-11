@@ -44,7 +44,11 @@ function exactObservation(value) {
 }
 
 function requiredVersion(value, code) {
-  if (typeof value !== 'string' || !VERSION.test(value)) {
+  if (
+    typeof value !== 'string' ||
+    !VERSION.test(value) ||
+    value.toLowerCase() === 'latest'
+  ) {
     throw new OperationalTelemetryValidationError(code)
   }
   return value

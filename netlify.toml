@@ -22,6 +22,9 @@
 [functions."study-adult-review-scheduled-worker"]
   schedule = "*/5 * * * *"
 
+# Study session telemetry scheduling is intentionally unbound until its cadence
+# is approved. The input-free adapter remains private under functions/_shared.
+
 # ---- API proxies (MUST precede the SPA fallback) ----
 [[redirects]]
   from = "/api/anthropic/*"
@@ -61,6 +64,11 @@
 [[redirects]]
   from = "/api/admin/v1/health"
   to = "/.netlify/functions/admin-health"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/v1/study-telemetry-delivery"
+  to = "/.netlify/functions/study-session-telemetry-deliver"
   status = 200
 
 [[redirects]]

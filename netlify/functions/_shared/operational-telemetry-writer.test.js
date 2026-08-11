@@ -96,6 +96,12 @@ describe('trusted server operational telemetry writer dependency', () => {
     expect(() => resolveTrustedEngineVersion({}, 'study')).toThrow(
       expect.objectContaining({ code: 'telemetry_engine_version_invalid' }),
     )
+    expect(() => resolveTrustedAppVersion({ ACADEMY_APP_VERSION: 'latest' })).toThrow(
+      expect.objectContaining({ code: 'telemetry_app_version_invalid' }),
+    )
+    expect(() => resolveTrustedEngineVersion({
+      ACADEMY_STUDY_ENGINE_VERSION: 'LATEST',
+    }, 'study')).toThrow(expect.objectContaining({ code: 'telemetry_engine_version_invalid' }))
   })
 
   it('inherits privacy and metadata allowlist validation', async () => {
