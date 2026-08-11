@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { createAdminProductionReadinessHandler } from './admin-production-readiness.js'
 import { createRepositoryProductionReadinessSource } from './_shared/admin-production-readiness/repository.js'
 import { createAdminProductionReadinessService } from './_shared/admin-production-readiness/service.js'
+import { fixedDateClock } from './_shared/admin-time-test-fixtures.js'
 
 const NOW = new Date('2026-08-10T18:00:00.000Z')
 const SECRET_VALUES = {
@@ -207,6 +208,56 @@ describe('Admin Production Readiness evidence composition', () => {
     expect(findCheck(unsafe, 'telemetry.monthly_cost_alert')).toMatchObject({
       status: 'BLOCKED', evidence: { status: 'MISMATCH' },
     })
+  })
+
+  it('captures one server observation time across a UTC month-boundary readiness check', async () => {
+    const observedAt = new Date('2027-01-31T23:59:59.999Z')
+    const now = vi.fn(fixedDateClock(observedAt))
+    const probes = dependencies({
+      now,
+      monthlyCostAlert: vi.fn(async ({ generatedAt }) => ({
+        ...READY_MONTHLY_ALERT,
+        generatedAt,
+        window: {
+          timezone: 'UTC',
+          startAt: '2027-01-01T00:00:00.000Z',
+          endExclusive: '2027-02-01T00:00:00.000Z',
+        },
+      })),
+    })
+    const projection = await createAdminProductionReadinessService(probes).check(OWNER)
+    expect(projection.generatedAt).toBe(observedAt.toISOString())
+    expect(now).toHaveBeenCalledOnce()
+    for (const probe of [
+      probes.repository, probes.configuration, probes.hostedMigrations,
+      probes.ownerBootstrap, probes.telemetry, probes.accounting,
+      probes.monthlyCostAlert, probes.study,
+    ]) {
+      expect(probe).toHaveBeenCalledWith({
+        observedAt,
+        generatedAt: observedAt.toISOString(),
+      })
+    }
+    expect(findCheck(projection, 'telemetry.monthly_cost_alert').status).toBe('READY')
+  })
+
+  it.each([
+    ['stale', '2026-07-31T23:59:59.999Z', '2026-07-01T00:00:00.000Z', '2026-08-01T00:00:00.000Z'],
+    ['future', '2026-09-01T00:00:00.000Z', '2026-09-01T00:00:00.000Z', '2026-10-01T00:00:00.000Z'],
+  ])('does not accept %s monthly alert evidence as current readiness state', async (
+    _label, generatedAt, startAt, endExclusive,
+  ) => {
+    const projection = await createAdminProductionReadinessService(dependencies({
+      monthlyCostAlert: async () => ({
+        ...READY_MONTHLY_ALERT,
+        generatedAt,
+        window: { timezone: 'UTC', startAt, endExclusive },
+      }),
+    })).check(OWNER)
+    expect(findCheck(projection, 'telemetry.monthly_cost_alert')).toMatchObject({
+      status: 'UNAVAILABLE', evidence: { status: 'UNAVAILABLE' },
+    })
+    expect(projection.status).toBe('BLOCKED')
   })
 
   it('requires every checked-in local curriculum release control without implying hosted state', async () => {

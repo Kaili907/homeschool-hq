@@ -61,7 +61,7 @@ linear order are recorded later.
 | M12 | `20260808121000_academy_operational_events.sql` | R3 | `50e8f86bd76cfa049accf6c9ed0ecac46a73589147870d3c93dd268701ef3a66` | M11 | Operational event ledger | No |
 | M13 | `20260808122000_academy_provider_usage_cost_ledger.sql` | R3 | `316816f94959193d96ce10c2ff059bedd1124570ffb139e1ec8b92c0251d915d` | M12 | Provider usage/cost authority | No |
 | M14 | `20260808123000_academy_admin_safety_operations.sql` | R3 | `eb52636bd163661666d6c44ac92340c8f460c791315bf9602190b032ec99e033` | M13 | Safety operations projection | No |
-| M15 | `20260809120000_academy_operational_telemetry_foundation.sql` | R3 | `5646d92084f85dd1a5b5463cff3f97970dc1e9017c85a809443266d8dcb1c23d` | M14 | Retention-aware telemetry aggregates | No |
+| M15 | `20260809120000_academy_operational_telemetry_foundation.sql` | R3 | `e3dec4a9c4034d0756383578b635b7475c03f51c0e9f11fa3e28b38769b02c83` | M14 | Retention-aware telemetry aggregates | No |
 | M16 | `20260809130000_academy_admin_audit_foundation.sql` | R3 | `b422853994fb86983eabe39ca53e0cb375511306bd5e694d45585ce5f335ac25` | M15 | Append-only Admin audit | No; identical across inspected branches |
 | M17 | `20260809140000_academy_admin_configuration_core.sql` | R3 | `d700ed2a03f0ad27714b461845c05a9128323de229359f39477c60047a9298ae` | M16 | Runtime configuration authority | No |
 | M18 | `20260809150000_academy_logical_voice_profile_contract.sql` | R3 | `d111cd566a39fb016cade408b5a64adb46d98ec9a8155f1060ac67d62053cd74` | M17 | Logical voice contract | No |
@@ -78,7 +78,7 @@ linear order are recorded later.
 | M29 | `20260810151000_academy_study_safety_provider_accounting.sql` | PA | `5bcdc8891538613ada2c5872016b6cbe00e11c763b8ec6bacf4e6f354241cef6` | M23 | Study safety cost dimensions | No |
 | M30 | `20260810160000_academy_curriculum_release_publishing.sql` | RC | `ba9291c66af40dcc693532aef6db94f9bc4fa5b6937369407c8a3a7de2d5dece` | M28 | Publish staged curriculum | No |
 | M31 | `20260810170000_academy_curriculum_activation_rollback.sql` | RC | `6d7d3cbbe740e1153aa6303ae90480beec2dcac7e29fff91754e05c58614f0da` | M30 | Activation/default-pointer rollback | **Yes**; derived from and materially extends Release History's `20260810160000` artifact |
-| M32 | `20260810180000_academy_admin_correlation_runtime_read.sql` | CX | `604d1ea775c666f5210b55ce531f86f73595518dcdfbf13f66ade2b50035be0d` | M27 | Correlation explorer runtime seam | No |
+| M32 | `20260810180000_academy_admin_correlation_runtime_read.sql` | CX | `7499d60258f5b61c1f9aec2bb3537834b0cb65c4648bc475b487dfb02d2b10d4` | M27 | Correlation explorer runtime seam | No |
 
 Cost Threshold Runtime contributes no unique migration bytes. It carries M23
 unchanged and consumes the R3 configuration foundation.

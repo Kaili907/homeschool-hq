@@ -57,6 +57,7 @@ type ReserveOverrides = Partial<{
   providerProductId: string
   providerModelId: string
   logicalModelTier: string | null
+  occurredAt: string
   extraFacts: Record<string, unknown>
 }>
 
@@ -122,7 +123,7 @@ async function recordLedger(database: PGlite, executionKey: string, overrides: R
     )`,
     [
       executionKey,
-      new Date(Date.now() + 1_000).toISOString(),
+      overrides.occurredAt ?? new Date(Date.now() + 1_000).toISOString(),
       overrides.accountRef ?? ACCOUNT_ID,
       overrides.householdRef === undefined ? HOUSEHOLD_ID : overrides.householdRef,
       overrides.householdAttribution ?? 'resolved',
@@ -182,6 +183,63 @@ describe('Academy Provider Attempt Journal foundation', () => {
       `select attempt_id, usage_id from public.academy_provider_attempt_ledger_links`,
     )
     expect(link.rows).toHaveLength(1)
+  })
+
+  it('uses sequence and explicit transitions when all accounting timestamps are equal', async () => {
+    const database = databases[0]
+    const attemptId = await readyOutcome(database, 'same-instant')
+    const attempt = await database.query<{ reserved_at: Date }>(
+      `select reserved_at from public.academy_provider_attempts where attempt_id = $1`,
+      [attemptId],
+    )
+    const sameInstant = new Date(attempt.rows[0].reserved_at).toISOString()
+    await recordLedger(database, 'ledger_same-instant', { occurredAt: sameInstant })
+    await linkLedger(database, attemptId, 'same-instant.link')
+    await database.exec(`
+      alter table public.academy_provider_attempt_transitions
+        disable trigger academy_provider_attempt_transitions_append_only;
+      update public.academy_provider_attempt_transitions
+        set transitioned_at = '${sameInstant}' where attempt_id = '${attemptId}';
+      alter table public.academy_provider_attempt_transitions
+        enable trigger academy_provider_attempt_transitions_append_only;
+    `)
+    const ordered = await database.query<{ sequence: number; to_state: string; transitioned_at: Date }>(
+      `select sequence, to_state, transitioned_at
+       from public.academy_provider_attempt_transitions
+       where attempt_id = $1 order by sequence`,
+      [attemptId],
+    )
+    expect(new Set(ordered.rows.map((row) => new Date(row.transitioned_at).toISOString()))).toEqual(
+      new Set([sameInstant]),
+    )
+    expect(ordered.rows.map((row) => [row.sequence, row.to_state])).toEqual([
+      [1, 'reserved'], [2, 'dispatch_possible'], [3, 'outcome_observed'], [4, 'ledgered'],
+    ])
+  })
+
+  it('uses a half-open provider coverage window at the exact reservation instant', async () => {
+    const database = databases[0]
+    const receipt = await reserve(database, 'coverage-boundary')
+    const attemptId = receipt.rows[0].result.attemptId
+    const attempt = await database.query<{ reserved_at: Date }>(
+      `select reserved_at from public.academy_provider_attempts where attempt_id = $1`,
+      [attemptId],
+    )
+    const instant = new Date(attempt.rows[0].reserved_at).valueOf()
+    const readCoverage = (startAt: string, endExclusive: string) =>
+      database.query<{ coverage: Record<string, any> }>(`
+        select public.academy_read_provider_attempt_coverage_v1(
+          $1, $2, 'costs:read'
+        ) as coverage
+      `, [startAt, endExclusive])
+    const included = await readCoverage(
+      new Date(instant).toISOString(), new Date(instant + 1).toISOString(),
+    )
+    const excluded = await readCoverage(
+      new Date(instant - 1).toISOString(), new Date(instant).toISOString(),
+    )
+    expect(included.rows[0].coverage.recordedProviderAttempts).toBe(1)
+    expect(excluded.rows[0].coverage.recordedProviderAttempts).toBe(0)
   })
 
   it('records a missing ledger gap and supports explicit reconciliation or unresolvable closure', async () => {

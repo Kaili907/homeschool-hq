@@ -160,7 +160,7 @@ metadata, content, and raw errors.
 The `20260810180000` prefix was selected after scanning migration filenames in
 all active Academy worktrees; the latest observed prefix was `20260810170000`.
 Canonical LF SHA-256:
-`604d1ea775c666f5210b55ce531f86f73595518dcdfbf13f66ade2b50035be0d`.
+`7499d60258f5b61c1f9aec2bb3537834b0cb65c4648bc475b487dfb02d2b10d4`.
 This migration has not been applied to a hosted Supabase project.
 
 ## Supabase: Admin audit query filters (2026-08-10)

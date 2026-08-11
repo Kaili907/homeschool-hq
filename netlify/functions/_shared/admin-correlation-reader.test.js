@@ -110,6 +110,7 @@ describe('Admin correlation source sanitizers', () => {
         select: vi.fn((...args) => { calls.push(['select', ...args]); return value }),
         gte: vi.fn((...args) => { calls.push(['gte', ...args]); return value }),
         lt: vi.fn((...args) => { calls.push(['lt', ...args]); return value }),
+        lte: vi.fn((...args) => { calls.push(['lte', ...args]); return value }),
         eq: vi.fn((...args) => { calls.push(['eq', ...args]); return value }),
         order: vi.fn((...args) => { calls.push(['order', ...args]); return value }),
         limit: vi.fn((...args) => { calls.push(['limit', ...args]); return value }),
@@ -120,7 +121,11 @@ describe('Admin correlation source sanitizers', () => {
     }
     const providerBuilder = builder([provider()])
     const runtimeRpcBuilder = { abortSignal: vi.fn(async () => ({
-      data: { schemaVersion: 2, events: [runtime()], hasMore: false }, error: null,
+      data: {
+        schemaVersion: 2, events: [runtime()], hasMore: false,
+        diagnosticRetentionComplete: true,
+      },
+      error: null,
     })) }
     const auditBuilder = { abortSignal: vi.fn(async () => ({
       data: { schemaVersion: 2, events: [audit()], hasMore: false }, error: null,
@@ -142,6 +147,7 @@ describe('Admin correlation source sanitizers', () => {
 
     expect(client.from).toHaveBeenCalledWith('academy_provider_usage_ledger')
     expect(providerBuilder.select.mock.calls[0][0]).not.toMatch(/account|household|learner|token|cost_micros/i)
+    expect(providerBuilder.lte).toHaveBeenCalledWith('occurred_at', query.occurredTo)
     expect(client.rpc).toHaveBeenCalledWith('academy_admin_read_incident_runtime_v1', {
       p_limit: 25, p_before_at: null, p_before_event_id: null,
       p_occurred_from: query.occurredFrom, p_occurred_to: query.occurredTo,

@@ -61,7 +61,7 @@ export function encodeAuditCursor(cursor) {
   return Buffer.from(JSON.stringify(cursor), 'utf8').toString('base64url')
 }
 
-export function parseAuditQuery(event) {
+export function parseAuditQuery(event, now = new Date()) {
   const entries = entriesFor(event)
   const seen = new Set()
   const values = {}
@@ -82,6 +82,12 @@ export function parseAuditQuery(event) {
   const occurredFrom = values.occurredFrom === undefined ? undefined : parseTimestamp(values.occurredFrom)
   const occurredTo = values.occurredTo === undefined ? undefined : parseTimestamp(values.occurredTo)
   if (occurredFrom && occurredTo && occurredFrom > occurredTo) reject(400, 'invalid_query')
+  const serverNow = now instanceof Date ? now : new Date(now)
+  if (!Number.isFinite(serverNow.getTime())) reject(500, 'invalid_server_clock')
+  const serverNowIso = serverNow.toISOString()
+  if ((occurredFrom && occurredFrom > serverNowIso) || (occurredTo && occurredTo > serverNowIso)) {
+    reject(400, 'invalid_query')
+  }
   return Object.freeze({
     occurredFrom,
     occurredTo,
@@ -105,6 +111,7 @@ export function createAdminAuditHandler(overrides = {}) {
   const reader = overrides.reader ?? createAdminAuditReader({
     env, fetchImpl, client: overrides.serviceClient,
   })
+  const now = overrides.now ?? (() => new Date())
   return async (event) => {
     if (event?.httpMethod !== 'GET') return errorResponse(405, 'method_not_allowed', { allow: 'GET' })
     if (!PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
@@ -112,7 +119,7 @@ export function createAdminAuditHandler(overrides = {}) {
     const authorized = await authorization.require(event, 'audit:read')
     if (!authorized.ok) return authorized.response
     try {
-      const query = parseAuditQuery(event)
+      const query = parseAuditQuery(event, now())
       const result = await reader.list(query)
       const last = result.events.at(-1)
       return jsonResponse(200, {

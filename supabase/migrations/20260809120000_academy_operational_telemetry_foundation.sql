@@ -216,22 +216,22 @@ begin
       'groupCount', detected_groups,
       'groupLimit', maximum_groups,
       'allRetentionClasses',
-        p_start >= reference_time - interval '30 days',
+        p_start > reference_time - interval '30 days',
       'retentionClasses', jsonb_build_array(
         jsonb_build_object(
           'category', 'diagnostic_short',
           'retainedDays', 30,
-          'complete', p_start >= reference_time - interval '30 days'
+          'complete', p_start > reference_time - interval '30 days'
         ),
         jsonb_build_object(
           'category', 'operational_standard',
           'retainedDays', 90,
-          'complete', p_start >= reference_time - interval '90 days'
+          'complete', p_start > reference_time - interval '90 days'
         ),
         jsonb_build_object(
           'category', 'safety_extended',
           'retainedDays', 365,
-          'complete', p_start >= reference_time - interval '365 days'
+          'complete', p_start > reference_time - interval '365 days'
         )
       )
     ),

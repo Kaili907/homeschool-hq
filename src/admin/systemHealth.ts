@@ -318,6 +318,11 @@ function inWindow(event: AdminOperationalEvent, start: number, end: number): boo
   return occurredAt !== null && occurredAt >= start && occurredAt <= end
 }
 
+function inPrecedingWindow(event: AdminOperationalEvent, start: number, endExclusive: number): boolean {
+  const occurredAt = instantMs(event.occurredAt)
+  return occurredAt !== null && occurredAt >= start && occurredAt < endExclusive
+}
+
 function serviceFor(event: AdminOperationalEvent): SystemServiceId | 'academy_engine' {
   if (event.metadata.operation === 'authorization' || event.metadata.route === 'admin') return 'admin_api'
   if (event.eventType === 'persistence.operation') return 'persistence'
@@ -455,7 +460,8 @@ export function buildSystemHealthProjection(
   const currentFailures = failureEvents(historyEvents).length
   const historyRates = rateMetrics(historyEvents)
   const historyDurations = historyEvents.flatMap((event) => event.durationMs === null ? [] : [event.durationMs])
-  const previousEvents = events.filter((event) => inWindow(event, previousStart, historyStart))
+  const previousEvents = events.filter((event) =>
+    inPrecedingWindow(event, previousStart, historyStart))
   const previousFailures = failureEvents(previousEvents).length
   const canTrend = !incomplete && (historyEvents.length > 0 || previousEvents.length > 0)
   const failureTrend = !canTrend

@@ -118,14 +118,18 @@ Retention is declared at write time and enforced by expiry:
 | `safety_extended` | 365 days | safety classifications and `safety_stop` results |
 
 Reporting is trustworthy only when every population used by a count/rate is
-complete for the requested range. `diagnostic_short` is complete through 30
-days, `operational_standard` through 90 days, and `safety_extended` through 365
-days. The aggregate reports these independently and filters logically expired
-rows even before physical purge. Ordinary performance rates include successful
+complete for the requested range. `diagnostic_short` is retained for 30 days,
+`operational_standard` for 90 days, and `safety_extended` for 365 days. Each
+retention boundary is strict: a range beginning at the exact expiry
+instant is retention-limited because rows expiring at the reference time are
+already excluded. The aggregate reports these independently and filters
+logically expired rows even before physical purge. Ordinary performance rates include successful
 diagnostic events, so Admin Engine Performance is limited to 7- and 30-day
 windows; the former 90-day option is rejected rather than comparing 30-day
 successes with 90-day failures. Admin Health's longest window is 7 days and is
-retention-safe for all three categories.
+retention-safe for all three categories. Health's current as-of window includes
+its exact observation endpoint; its preceding trend window excludes the shared
+boundary so one event is never counted in both periods.
 
 Expired rows are removed only by the bounded service-role purge RPC. The
 ledger migration is `20260808121000_academy_operational_events.sql`; the additive

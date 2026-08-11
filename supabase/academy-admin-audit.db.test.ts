@@ -614,6 +614,16 @@ describe('ADMIN-15 append-only Admin audit database foundation', () => {
       'a0000000-0000-4000-8000-000000000001',
     ])
     expect(second.hasMore).toBe(false)
+
+    const exact = (await readFilteredAudit(database, [
+      50, null, null, 'engine.control', 'engine', null, 'audit:read', null,
+      '2026-08-09T13:00:00.000Z', '2026-08-09T13:00:00.000Z', null, null,
+    ])).rows[0].projection
+    expect(exact.events.map((event: any) => event.eventId)).toEqual([
+      'a0000000-0000-4000-8000-000000000003',
+      'a0000000-0000-4000-8000-000000000002',
+      'a0000000-0000-4000-8000-000000000001',
+    ])
   })
 
   it('filters bounded pages by safe DTO facts without exposing actor identity', async () => {

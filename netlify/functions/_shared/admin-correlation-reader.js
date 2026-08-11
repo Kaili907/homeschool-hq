@@ -311,10 +311,14 @@ export function createAdminCorrelationReader({ env, fetchImpl, client } = {}) {
     }).abortSignal(signal)
     if (signal.aborted) throw new AdminCorrelationReadError('source_timeout')
     if (error || !plainRecord(data) || data.schemaVersion !== 2
-      || !Array.isArray(data.events) || typeof data.hasMore !== 'boolean') {
+      || !Array.isArray(data.events) || typeof data.hasMore !== 'boolean'
+      || typeof data.diagnosticRetentionComplete !== 'boolean') {
       throw new AdminCorrelationReadError('source_unavailable')
     }
-    return sanitizeCorrelationRows(data.events, sanitizeRuntimeEntry, data.hasMore, query.limit)
+    return Object.freeze({
+      ...sanitizeCorrelationRows(data.events, sanitizeRuntimeEntry, data.hasMore, query.limit),
+      retentionComplete: data.diagnosticRetentionComplete,
+    })
   })
 
   const audit = boundedRead(async (signal, query, cursor) => {
@@ -346,7 +350,7 @@ export function createAdminCorrelationReader({ env, fetchImpl, client } = {}) {
   const providerAccounting = boundedRead(async (signal, query, cursor) => {
     let builder = getClient().from('academy_provider_usage_ledger')
       .select('id,execution_key,occurred_at,engine,provider,provider_product_id,logical_model_tier,result,result_reason_code,billing_disposition,cost_kind,currency')
-      .gte('occurred_at', query.occurredFrom).lt('occurred_at', query.occurredTo)
+      .gte('occurred_at', query.occurredFrom).lte('occurred_at', query.occurredTo)
       .order('occurred_at', { ascending: false }).order('id', { ascending: false })
       .limit(query.limit + 1)
     if (query.correlationId) builder = builder.eq('execution_key', query.correlationId)

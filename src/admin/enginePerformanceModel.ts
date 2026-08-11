@@ -519,7 +519,7 @@ function isInstant(value: string): boolean {
 }
 
 function normalizeFilters(filters: EnginePerformanceFilters): EnginePerformanceFilters {
-  if (!isInstant(filters.start) || !isInstant(filters.end) || filters.start > filters.end) {
+  if (!isInstant(filters.start) || !isInstant(filters.end) || filters.start >= filters.end) {
     throw new TypeError('engine_performance_filter_invalid')
   }
   return Object.freeze({ ...filters })
@@ -574,7 +574,7 @@ export function buildEnginePerformanceProjection(
   const decoded = decodeStoredOperationalEvents(rows)
   const filtered = decoded.events.filter((event) =>
     event.occurredAt >= filters.start
-    && event.occurredAt <= filters.end
+    && event.occurredAt < filters.end
     && (filters.engine === null || event.engine === filters.engine)
     && (filters.engineVersion === null || event.engineVersion === filters.engineVersion)
     && (filters.courseRef === null || event.courseRef === filters.courseRef)
