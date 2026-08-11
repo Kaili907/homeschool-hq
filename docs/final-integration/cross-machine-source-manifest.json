@@ -1,0 +1,570 @@
+{
+  "schemaVersion": 1,
+  "classification": "BLOCKED_BY_MISSING_SOURCES",
+  "generatedAt": "2026-08-11T01:18:45.9078906Z",
+  "repository": {
+    "name": "Kaili907/homeschool-hq",
+    "originUrl": "https://github.com/Kaili907/homeschool-hq.git",
+    "inventoryBranch": "win/final-cross-machine-source-verifier",
+    "requiredStartingHead": "ffd1cc5a7ff706abfde00a07bc284b22687ffe0f",
+    "observedStartingHead": "ffd1cc5a7ff706abfde00a07bc284b22687ffe0f",
+    "startingWorktreeClean": true,
+    "windowsBaseline": "d65d1511dd602db586a204bb7ccb2800fd7a89e2"
+  },
+  "inventory": {
+    "fetchCommand": "git fetch origin --prune",
+    "localBranchCount": 76,
+    "originBranchCount": 219,
+    "localWinBranchCount": 44,
+    "localMacBranchCount": 0,
+    "originWinBranchCount": 0,
+    "originMacBranchCount": 0,
+    "localBranchReachableCommitCount": 457,
+    "originReachableCommitCount": 570,
+    "allRefReachableCommitCount": 659,
+    "registeredWorktreeCount": 97,
+    "advertisedPullHeadCount": 1,
+    "requestedMacShaPullHeadMatchCount": 0,
+    "availabilitySemantics": {
+      "availableLocally": "Commit object exists in the shared Windows repository and is reachable from a local source ref.",
+      "availableOnOrigin": "Commit is reachable from refs/remotes/origin/* after fetch --prune."
+    }
+  },
+  "windowsSources": [
+    {
+      "artifact": "Study Production Mount R5",
+      "machineOrigin": "Windows (proved by win/* source ref)",
+      "branch": "win/study-production-mount-r5",
+      "sha": "87a21b748d8855fc814435551c4d65e47f3ff126",
+      "commitSubject": "study: mount hardened production learner workspace",
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "exactRefs": ["refs/heads/win/study-production-mount-r5"],
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-study-production-mount-r5",
+      "cleanWorktreeIfRegistered": true,
+      "parents": ["db1857642f1030b66fdc50052184cb3b6d8335d3"],
+      "importantAncestors": [
+        "27254fd65db26e820eb88bf714bb7db9a7376541",
+        "01237423fbf5ea6e34850174c8827fceaf010820",
+        "d65d1511dd602db586a204bb7ccb2800fd7a89e2"
+      ],
+      "migrationsAddedByTipCommit": [],
+      "migrationsAddedSinceBaseline": [
+        "supabase/migrations/20260809160000_academy_curriculum_release_registry.sql",
+        "supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql",
+        "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+        "supabase/migrations/20260810151000_academy_study_session_semantics_v2.sql",
+        "supabase/migrations/20260810153000_academy_study_release_registry_bridge.sql",
+        "supabase/migrations/20260810154000_academy_study_bound_content_authority.sql"
+      ],
+      "supersedes": ["db1857642f1030b66fdc50052184cb3b6d8335d3"],
+      "supersededBy": ["win/final-study-rc1@8ef764772c43f63b08403248c1e98273c35c5f4f (exact ancestor)"]
+    },
+    {
+      "artifact": "Study Recovery correction",
+      "machineOrigin": "Windows (proved by win/* source ref)",
+      "branch": "win/study-recovery-chaos-gate",
+      "sha": "50ae5c05a09e12e2e573dfe9ecf984f95a7badc0",
+      "commitSubject": "fix(study): harden production recovery",
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "exactRefs": ["refs/heads/win/study-recovery-chaos-gate"],
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-study-recovery-chaos-gate",
+      "cleanWorktreeIfRegistered": true,
+      "parents": ["27254fd65db26e820eb88bf714bb7db9a7376541"],
+      "importantAncestors": [
+        "01237423fbf5ea6e34850174c8827fceaf010820",
+        "d65d1511dd602db586a204bb7ccb2800fd7a89e2"
+      ],
+      "migrationsAddedByTipCommit": [],
+      "migrationsAddedSinceBaseline": [
+        "supabase/migrations/20260809160000_academy_curriculum_release_registry.sql",
+        "supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql",
+        "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+        "supabase/migrations/20260810151000_academy_study_session_semantics_v2.sql",
+        "supabase/migrations/20260810153000_academy_study_release_registry_bridge.sql",
+        "supabase/migrations/20260810154000_academy_study_bound_content_authority.sql"
+      ],
+      "supersedes": [],
+      "supersededBy": ["dcfb37f2ce83c38fd96595a1fcea034ae8ab5e9b on win/final-study-rc1 (stable patch-id 2a86a5cb7638a9e108eac40b5e6b583973afc27c)"]
+    },
+    {
+      "artifact": "Study Worker Run Evidence",
+      "machineOrigin": "Windows (proved by win/* source ref)",
+      "branch": "win/study-worker-run-evidence",
+      "sha": "e97c80beb3d7c73ebc24b2a243fdf0d45a8e5e76",
+      "commitSubject": "study: persist adult review worker run evidence",
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "exactRefs": ["refs/heads/win/study-worker-run-evidence"],
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-study-worker-run-evidence",
+      "cleanWorktreeIfRegistered": true,
+      "parents": ["96fac0361e174225ca345d5253852ed6ba056236"],
+      "importantAncestors": [
+        "e09770aa8e68c1a675729c592330da87951143d7",
+        "a2a514b585690313903f3a624e7036eaec69b2a9",
+        "d65d1511dd602db586a204bb7ccb2800fd7a89e2"
+      ],
+      "migrationsAddedByTipCommit": ["supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql"],
+      "migrationsAddedSinceBaseline": [
+        "supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql",
+        "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+        "supabase/migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql",
+        "supabase/migrations/20260810152100_academy_study_worker_operations_contract.sql",
+        "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql"
+      ],
+      "supersedes": [],
+      "supersededBy": [
+        "6f4994a61dca952f0758c847e45bf914a1a649dd on win/final-study-rc1 (stable patch-id 5df914cbdf39e0ea46c671ebaa88e5a6b5cb2c73)",
+        "362835012d4069b39c703305a174977d5e06720d on win/final-admin-delta-rc1 (stable patch-id 5df914cbdf39e0ea46c671ebaa88e5a6b5cb2c73)"
+      ]
+    },
+    {
+      "artifact": "Study Telemetry Invocation",
+      "machineOrigin": "Windows (proved by win/* source ref)",
+      "branch": "win/study-telemetry-invocation",
+      "sha": "833860eb1d70121f9bc8c58f985b49f4c6d93788",
+      "commitSubject": "study: authorize telemetry delivery invocation",
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "exactRefs": ["refs/heads/win/study-telemetry-invocation"],
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-study-telemetry-invocation",
+      "cleanWorktreeIfRegistered": true,
+      "parents": ["fa1e3e3f7c5d846ba6e516d8e16e2a4c391f6c2d"],
+      "importantAncestors": [
+        "01095378f4b0ed17c537b63498aaf9f8590277ca",
+        "ac3e7518cba4decfb29c93b85a79010954925955",
+        "d65d1511dd602db586a204bb7ccb2800fd7a89e2"
+      ],
+      "migrationsAddedByTipCommit": [],
+      "migrationsAddedSinceBaseline": [
+        "supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql",
+        "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+        "supabase/migrations/20260810151000_academy_study_session_semantics_v2.sql",
+        "supabase/migrations/20260810155000_academy_study_session_telemetry_outbox.sql"
+      ],
+      "supersedes": [],
+      "supersededBy": ["62e06dfd371076126e812cdd9f493a23aa6b8fb4 on win/final-study-rc1 (conflict-resolved semantic replay; all non-netlify.toml changed file postimages identical)"]
+    },
+    {
+      "artifact": "Windows Admin Costs final browser line",
+      "machineOrigin": "Windows (proved by win/* source ref)",
+      "branch": "win/admin-costs-browser-gate",
+      "sha": "de3d81fed1817144fcd6fab4ed50ae821edeb5e2",
+      "commitSubject": "fix(admin): harden Costs and Provider Pricing browser UX",
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "exactRefs": ["refs/heads/win/admin-costs-browser-gate"],
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-admin-costs-browser-gate",
+      "cleanWorktreeIfRegistered": true,
+      "parents": ["86003e57cfea8bfc83c3e1d41d3abde26d16abf8"],
+      "importantAncestors": [
+        "e43a1320021fbe4e004af74c26a563532990545c",
+        "d65d1511dd602db586a204bb7ccb2800fd7a89e2"
+      ],
+      "migrationsAddedByTipCommit": [],
+      "migrationsAddedSinceBaseline": [
+        "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+        "supabase/migrations/20260809121000_academy_provider_usage_cost_aggregate.sql",
+        "supabase/migrations/20260809130000_academy_admin_audit_foundation.sql",
+        "supabase/migrations/20260809140000_academy_admin_configuration_core.sql",
+        "supabase/migrations/20260809150000_academy_logical_voice_profile_contract.sql",
+        "supabase/migrations/20260810120000_academy_provider_pricing_terms.sql",
+        "supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql",
+        "supabase/migrations/20260810141000_academy_study_provider_cost_accounting.sql"
+      ],
+      "supersedes": ["win/admin-costs-accounting-integration@86003e57cfea8bfc83c3e1d41d3abde26d16abf8"],
+      "supersededBy": ["37f22633311d270afe5fbed0f5c3cb4f4c2aab16 on win/final-admin-delta-rc1 (stable patch-id 4cb4fa5f36c2d3f7c647f1a7ad508a8d4ecc936a)"]
+    },
+    {
+      "artifact": "Admin Study Operations Evidence R2",
+      "machineOrigin": "Windows (proved by win/* source ref)",
+      "branch": "win/admin-study-ops-evidence-r2",
+      "sha": "7e9d0c6166c022ad3b5a45f12a4365981ab7f5fd",
+      "commitSubject": "admin: connect Study Operations to worker run evidence",
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "exactRefs": ["refs/heads/win/admin-study-ops-evidence-r2"],
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-admin-study-ops-evidence-r2",
+      "cleanWorktreeIfRegistered": true,
+      "parents": ["7f703a2f18ec4f6b36a97de11a9f33aa51116940"],
+      "importantAncestors": [
+        "efbf2d796b95315a6152c3415d4de8aac3a33672",
+        "286ce7507336f3e963b5126ed15c087843b83248",
+        "e43a1320021fbe4e004af74c26a563532990545c",
+        "d65d1511dd602db586a204bb7ccb2800fd7a89e2"
+      ],
+      "migrationsAddedByTipCommit": [],
+      "migrationsAddedSinceBaseline": [
+        "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+        "supabase/migrations/20260809130000_academy_admin_audit_foundation.sql",
+        "supabase/migrations/20260809140000_academy_admin_configuration_core.sql",
+        "supabase/migrations/20260809150000_academy_logical_voice_profile_contract.sql",
+        "supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql",
+        "supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql",
+        "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+        "supabase/migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql",
+        "supabase/migrations/20260810152100_academy_study_worker_operations_contract.sql",
+        "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql"
+      ],
+      "supersedes": [
+        "win/admin-study-operations@286ce7507336f3e963b5126ed15c087843b83248",
+        "win/admin-study-ops-browser-gate@efbf2d796b95315a6152c3415d4de8aac3a33672"
+      ],
+      "supersededBy": ["44282b56385d8fd1d55cdfd91e79e6cef9344d5b on win/final-admin-delta-rc1 (stable patch-id 07d83e86927d3c11bc320de6850a316442515ef4)"]
+    },
+    {
+      "artifact": "System Health aggregate",
+      "machineOrigin": "Windows (proved by win/* source ref)",
+      "branch": "win/admin-9-aggregate-r2",
+      "sha": "c72f9918244ad525182f2414d3afd281c51c8b07",
+      "commitSubject": "admin: adopt scalable aggregates for system health",
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "exactRefs": ["refs/heads/win/admin-9-aggregate-r2"],
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-admin-9-aggregate-r2",
+      "cleanWorktreeIfRegistered": true,
+      "parents": ["f5492e2e21ae51fad5e1979e555fa1e247c983a5"],
+      "importantAncestors": [
+        "2d8c911d432f5d2eafe6d18ec6d01d65fe24c5be",
+        "d55c5dc6c5d9109952ba6fdc3e9a75a412e5b69a",
+        "d65d1511dd602db586a204bb7ccb2800fd7a89e2"
+      ],
+      "migrationsAddedByTipCommit": [],
+      "migrationsAddedSinceBaseline": ["supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql"],
+      "supersedes": [],
+      "supersededBy": ["475203fb14c96a9d7fe6ff6db78ec2ffeb445715 on win/final-admin-delta-rc1 (stable patch-id 569f1ffa0ca7681326c7f695ece507b690b25811)"]
+    },
+    {
+      "artifact": "ADMIN-14B",
+      "machineOrigin": "Windows (proved by win/* source ref)",
+      "branch": "win/admin-14b-runtime",
+      "sha": "e43a1320021fbe4e004af74c26a563532990545c",
+      "commitSubject": "admin-14b: enforce effective runtime configuration",
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "exactRefs": ["refs/heads/win/admin-14b-runtime"],
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-admin-14b-runtime",
+      "cleanWorktreeIfRegistered": true,
+      "parents": ["cf29ff6b3e851f42eb257a108f1bc473599c0ff1"],
+      "importantAncestors": [
+        "8751ead4b1db937781c2d60ebb39f773fb716b48",
+        "e13466faf6dc4bb835fd20d763e5cde35f78afd9",
+        "d55c5dc6c5d9109952ba6fdc3e9a75a412e5b69a",
+        "d65d1511dd602db586a204bb7ccb2800fd7a89e2"
+      ],
+      "migrationsAddedByTipCommit": ["supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql"],
+      "migrationsAddedSinceBaseline": [
+        "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+        "supabase/migrations/20260809130000_academy_admin_audit_foundation.sql",
+        "supabase/migrations/20260809140000_academy_admin_configuration_core.sql",
+        "supabase/migrations/20260809150000_academy_logical_voice_profile_contract.sql",
+        "supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql"
+      ],
+      "supersedes": [],
+      "supersededBy": ["win/final-admin-delta-rc1@e3f62dced44b8ddd7e932ec992756a39f30f3495 (exact ancestor)"]
+    },
+    {
+      "artifact": "Unified preflight",
+      "machineOrigin": "Windows (proved by win/* source ref)",
+      "branch": "win/admin-unified-preflight-orchestrator",
+      "sha": "28ce1a938a0f06617bd92d31ff1ec7ef95fb541c",
+      "commitSubject": "admin: unify local production preflight",
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "exactRefs": [
+        "refs/heads/win/admin-unified-preflight-orchestrator",
+        "refs/heads/win/final-production-activation-runbook",
+        "refs/heads/win/final-rc-validation-harness"
+      ],
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-admin-unified-preflight-orchestrator",
+      "cleanWorktreeIfRegistered": true,
+      "parents": ["f9b1278fed23048d1e0d18b4ae1d4e9e4e295919"],
+      "importantAncestors": [
+        "40abc78b0f4482fecf612ad0b6f5280cc2a96607",
+        "353e5448914ab2494e3e58449997e9ee2a284690",
+        "e43a1320021fbe4e004af74c26a563532990545c",
+        "d65d1511dd602db586a204bb7ccb2800fd7a89e2"
+      ],
+      "migrationsAddedByTipCommit": [],
+      "migrationsAddedSinceBaseline": [
+        "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+        "supabase/migrations/20260809130000_academy_admin_audit_foundation.sql",
+        "supabase/migrations/20260809140000_academy_admin_configuration_core.sql",
+        "supabase/migrations/20260809150000_academy_logical_voice_profile_contract.sql",
+        "supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql"
+      ],
+      "supersedes": [],
+      "supersededBy": ["e3f62dced44b8ddd7e932ec992756a39f30f3495 on win/final-admin-delta-rc1 (stable patch-id 791dcfab69461646ffb260123117e5dd2546e260)"]
+    }
+  ],
+  "composedWindowsSources": [
+    {
+      "branch": "win/final-study-rc1",
+      "sha": "8ef764772c43f63b08403248c1e98273c35c5f4f",
+      "commitSubject": "test(study): add local production smoke harness",
+      "parents": ["dcfb37f2ce83c38fd96595a1fcea034ae8ab5e9b"],
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-final-study-rc1",
+      "cleanWorktreeIfRegistered": false,
+      "worktreeModifications": [
+        "MIGRATIONS.md",
+        "docs/study-engine-final-production/migration-manifest.json"
+      ],
+      "migrationsAddedSinceBaseline": [
+        "supabase/migrations/20260809160000_academy_curriculum_release_registry.sql",
+        "supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql",
+        "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+        "supabase/migrations/20260810151000_academy_study_session_semantics_v2.sql",
+        "supabase/migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql",
+        "supabase/migrations/20260810152100_academy_study_worker_operations_contract.sql",
+        "supabase/migrations/20260810153000_academy_study_release_registry_bridge.sql",
+        "supabase/migrations/20260810154000_academy_study_bound_content_authority.sql",
+        "supabase/migrations/20260810155000_academy_study_session_telemetry_outbox.sql",
+        "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql"
+      ]
+    },
+    {
+      "branch": "win/final-admin-delta-rc1",
+      "sha": "e3f62dced44b8ddd7e932ec992756a39f30f3495",
+      "commitSubject": "admin: unify local production preflight",
+      "parents": ["b0e5b42eca478bceb5755e31b7d3ce7c19e04b6b"],
+      "availableLocally": true,
+      "availableOnOrigin": false,
+      "registeredWorktree": "C:/Users/Empower Gaming/manuel-academy-dev/admin-worktrees/win-final-admin-delta-rc1",
+      "cleanWorktreeIfRegistered": true,
+      "worktreeModifications": [],
+      "migrationsAddedSinceBaseline": [
+        "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+        "supabase/migrations/20260809121000_academy_provider_usage_cost_aggregate.sql",
+        "supabase/migrations/20260809130000_academy_admin_audit_foundation.sql",
+        "supabase/migrations/20260809140000_academy_admin_configuration_core.sql",
+        "supabase/migrations/20260809150000_academy_logical_voice_profile_contract.sql",
+        "supabase/migrations/20260810120000_academy_provider_pricing_terms.sql",
+        "supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql",
+        "supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql",
+        "supabase/migrations/20260810141000_academy_study_provider_cost_accounting.sql",
+        "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+        "supabase/migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql",
+        "supabase/migrations/20260810152100_academy_study_worker_operations_contract.sql",
+        "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql"
+      ]
+    }
+  ],
+  "macArtifacts": [
+    {
+      "artifact": "Curriculum 16B",
+      "machineOrigin": "Mac (classification supplied by verification request; not independently provable from available Git refs)",
+      "branch": null,
+      "sha": "8cac699a9b263c7b0bb1e33e3b5d7e5a59ca03de",
+      "commitSubject": null,
+      "availableLocally": false,
+      "availableOnOrigin": false,
+      "cleanWorktreeIfRegistered": null,
+      "parents": null,
+      "importantAncestors": null,
+      "migrationsAdded": null,
+      "supersedes": null,
+      "supersededBy": null,
+      "status": "TRANSFER_REQUIRED"
+    },
+    {
+      "artifact": "Curriculum Studio shell",
+      "machineOrigin": "Mac (classification supplied by verification request; not independently provable from available Git refs)",
+      "branch": null,
+      "sha": "a0064c00052ed9024c9b1b4f703a8e0eca0e3867",
+      "commitSubject": null,
+      "availableLocally": false,
+      "availableOnOrigin": false,
+      "cleanWorktreeIfRegistered": null,
+      "parents": null,
+      "importantAncestors": null,
+      "migrationsAdded": null,
+      "supersedes": null,
+      "supersededBy": null,
+      "status": "TRANSFER_REQUIRED"
+    },
+    {
+      "artifact": "Curriculum Validation",
+      "machineOrigin": "Mac (classification supplied by verification request; not independently provable from available Git refs)",
+      "branch": null,
+      "sha": "54b314e61be1ca979ac5248a55ce499f8acd0cd3",
+      "commitSubject": null,
+      "availableLocally": false,
+      "availableOnOrigin": false,
+      "cleanWorktreeIfRegistered": null,
+      "parents": null,
+      "importantAncestors": null,
+      "migrationsAdded": null,
+      "supersedes": null,
+      "supersededBy": null,
+      "status": "TRANSFER_REQUIRED"
+    },
+    {
+      "artifact": "Provider Attempt Journal",
+      "machineOrigin": "Mac (classification supplied by verification request; not independently provable from available Git refs)",
+      "branch": null,
+      "sha": "a552b2ec343defb3f533f3c0412cae6b8d01355b",
+      "commitSubject": null,
+      "availableLocally": false,
+      "availableOnOrigin": false,
+      "cleanWorktreeIfRegistered": null,
+      "parents": null,
+      "importantAncestors": null,
+      "migrationsAdded": null,
+      "supersedes": null,
+      "supersededBy": null,
+      "status": "TRANSFER_REQUIRED"
+    },
+    {
+      "artifact": "R2 Configuration UI",
+      "machineOrigin": "Mac (classification supplied by verification request; not independently provable from available Git refs)",
+      "branch": null,
+      "sha": "178f85c0a43cf9876b296119f7a04142bdf37ae0",
+      "commitSubject": null,
+      "availableLocally": false,
+      "availableOnOrigin": false,
+      "cleanWorktreeIfRegistered": null,
+      "parents": null,
+      "importantAncestors": null,
+      "migrationsAdded": null,
+      "supersedes": null,
+      "supersededBy": null,
+      "status": "TRANSFER_REQUIRED"
+    },
+    {
+      "artifact": "R2 Audit UX",
+      "machineOrigin": "Mac (classification supplied by verification request; not independently provable from available Git refs)",
+      "branch": null,
+      "sha": "9305ec5c5f6207e24a1e1116bdb02c5c8793a7ea",
+      "commitSubject": null,
+      "availableLocally": false,
+      "availableOnOrigin": false,
+      "cleanWorktreeIfRegistered": null,
+      "parents": null,
+      "importantAncestors": null,
+      "migrationsAdded": null,
+      "supersedes": null,
+      "supersededBy": null,
+      "status": "TRANSFER_REQUIRED"
+    },
+    {
+      "artifact": "Engine Performance aggregate",
+      "machineOrigin": "Mac (classification supplied by verification request; not independently provable from available Git refs)",
+      "branch": null,
+      "sha": "92b73d0dc85b1310d0567976388b14ba72284c74",
+      "commitSubject": null,
+      "availableLocally": false,
+      "availableOnOrigin": false,
+      "cleanWorktreeIfRegistered": null,
+      "parents": null,
+      "importantAncestors": null,
+      "migrationsAdded": null,
+      "supersedes": null,
+      "supersededBy": null,
+      "status": "TRANSFER_REQUIRED"
+    }
+  ],
+  "transferRequiredBranches": [
+    {
+      "branch": "mac/admin-provider-gateway-instrumentation",
+      "expectedSha": null,
+      "currentOwner": "Mac per request classification; not independently provable from available Git refs",
+      "reason": "No matching Windows ref, origin ref, or reachable commit metadata."
+    },
+    {
+      "branch": "mac/admin-curr-17b-studio-integration",
+      "expectedSha": null,
+      "currentOwner": "Mac per request classification; not independently provable from available Git refs",
+      "reason": "No matching Windows ref, origin ref, or reachable commit metadata."
+    },
+    {
+      "branch": "mac/admin-curr-standards-review",
+      "expectedSha": null,
+      "currentOwner": "Mac per request classification; not independently provable from available Git refs",
+      "reason": "No matching Windows ref, origin ref, or reachable commit metadata."
+    },
+    {
+      "branch": "mac/admin-curr-19-preview-diff",
+      "expectedSha": null,
+      "currentOwner": "Mac per request classification; not independently provable from available Git refs",
+      "reason": "No matching Windows ref, origin ref, or reachable commit metadata."
+    },
+    {
+      "branch": "mac/admin-curr-20a-release-staging",
+      "expectedSha": null,
+      "currentOwner": "Mac per request classification; not independently provable from available Git refs",
+      "reason": "No matching Windows ref, origin ref, or reachable commit metadata."
+    },
+    {
+      "branch": "mac/admin-r2-wave-integration",
+      "expectedSha": null,
+      "currentOwner": "Mac per request classification; not independently provable from available Git refs",
+      "reason": "No matching Windows ref, origin ref, or reachable commit metadata."
+    }
+  ],
+  "supersessionEvidence": {
+    "exactAncestry": [
+      "win/study-production-mount-r5 -> win/final-study-rc1",
+      "win/admin-costs-accounting-integration -> win/admin-costs-browser-gate",
+      "win/admin-study-operations -> win/admin-study-ops-evidence-r2",
+      "win/admin-study-ops-browser-gate -> win/admin-study-ops-evidence-r2",
+      "win/admin-14b-runtime -> win/final-admin-delta-rc1"
+    ],
+    "stablePatchEquivalentReplays": [
+      "50ae5c05a09e12e2e573dfe9ecf984f95a7badc0 -> dcfb37f2ce83c38fd96595a1fcea034ae8ab5e9b : 2a86a5cb7638a9e108eac40b5e6b583973afc27c",
+      "e97c80beb3d7c73ebc24b2a243fdf0d45a8e5e76 -> 6f4994a61dca952f0758c847e45bf914a1a649dd : 5df914cbdf39e0ea46c671ebaa88e5a6b5cb2c73",
+      "e97c80beb3d7c73ebc24b2a243fdf0d45a8e5e76 -> 362835012d4069b39c703305a174977d5e06720d : 5df914cbdf39e0ea46c671ebaa88e5a6b5cb2c73",
+      "de3d81fed1817144fcd6fab4ed50ae821edeb5e2 -> 37f22633311d270afe5fbed0f5c3cb4f4c2aab16 : 4cb4fa5f36c2d3f7c647f1a7ad508a8d4ecc936a",
+      "7e9d0c6166c022ad3b5a45f12a4365981ab7f5fd -> 44282b56385d8fd1d55cdfd91e79e6cef9344d5b : 07d83e86927d3c11bc320de6850a316442515ef4",
+      "c72f9918244ad525182f2414d3afd281c51c8b07 -> 475203fb14c96a9d7fe6ff6db78ec2ffeb445715 : 569f1ffa0ca7681326c7f695ece507b690b25811",
+      "28ce1a938a0f06617bd92d31ff1ec7ef95fb541c -> e3f62dced44b8ddd7e932ec992756a39f30f3495 : 791dcfab69461646ffb260123117e5dd2546e260"
+    ],
+    "conflictResolvedReplays": [
+      "833860eb1d70121f9bc8c58f985b49f4c6d93788 -> 62e06dfd371076126e812cdd9f493a23aa6b8fb4; non-netlify.toml changed file postimages identical, telemetry netlify additions preserved beside pre-existing schedule"
+    ],
+    "unresolvedBecauseMissing": [
+      "Curriculum Studio shell vs mac/admin-curr-17b-studio-integration",
+      "R2 Configuration UI and R2 Audit UX vs mac/admin-r2-wave-integration",
+      "all other Mac constituent-to-composition relationships"
+    ]
+  },
+  "minimumRecommendedSourceSet": {
+    "status": "provisional_windows_only",
+    "windows": [
+      "win/final-study-rc1@8ef764772c43f63b08403248c1e98273c35c5f4f",
+      "win/final-admin-delta-rc1@e3f62dced44b8ddd7e932ec992756a39f30f3495"
+    ],
+    "requiredReconciliation": "The RCs diverge at d65d1511dd602db586a204bb7ccb2800fd7a89e2 and overlap on 65 changed paths; integrate shared Study lineage once.",
+    "mac": null
+  },
+  "overlapHotspots": {
+    "windowsRcMergeBase": "d65d1511dd602db586a204bb7ccb2800fd7a89e2",
+    "studyRcChangedPathCount": 142,
+    "adminRcChangedPathCount": 230,
+    "intersectionPathCount": 65,
+    "confirmedSharedPaths": [
+      "MIGRATIONS.md",
+      "docs/study-engine-final-production/migration-manifest.json",
+      "netlify.toml",
+      "src/study/generated/studyDatabase.ts"
+    ],
+    "sharedMigrationPaths": [
+      "supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql",
+      "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+      "supabase/migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql",
+      "supabase/migrations/20260810152100_academy_study_worker_operations_contract.sql",
+      "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql"
+    ],
+    "studyOnlyNamedHotspots": [
+      "src/App.tsx",
+      "src/components/study/StudyProductionRoute.tsx",
+      "src/components/study/StudyProductionWorkspace.tsx",
+      "src/study/client/studyBoundContentClient.ts"
+    ],
+    "adminOnlyNamedHotspots": ["src/components/admin/AdminConsoleRoute.tsx"],
+    "macCollisionStatus": "indeterminate until transfer"
+  },
+  "hold": true
+}
