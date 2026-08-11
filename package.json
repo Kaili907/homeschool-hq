@@ -51,7 +51,6 @@
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.4",
-    "@electric-sql/pglite-socket": "^0.2.7",
     "@playwright/test": "^1.54.1",
     "@tailwindcss/vite": "^4.1.11",
     "@types/pg": "^8.20.0",

@@ -32,15 +32,15 @@ export interface ReadAdminAuthorizationOptions {
   readonly timeoutMs?: number
 }
 
-function accessTokenBeforeAbort(
-  getAccessToken: () => Promise<string | null>,
+function valueBeforeAbort<T>(
+  operation: () => Promise<T>,
   signal: AbortSignal,
-): Promise<string | null | undefined> {
+): Promise<T | undefined> {
   if (signal.aborted) return Promise.resolve(undefined)
 
   return new Promise((resolve) => {
     let settled = false
-    const finish = (value: string | null | undefined) => {
+    const finish = (value: T | undefined) => {
       if (settled) return
       settled = true
       signal.removeEventListener('abort', aborted)
@@ -48,7 +48,7 @@ function accessTokenBeforeAbort(
     }
     const aborted = () => finish(undefined)
     signal.addEventListener('abort', aborted, { once: true })
-    void getAccessToken().then(
+    void Promise.resolve().then(operation).then(
       (value) => finish(value),
       () => finish(undefined),
     )
@@ -92,40 +92,55 @@ export async function readAdminAuthorization(
 ): Promise<AdminAuthorizationState> {
   const getAccessToken = options.getAccessToken ?? getGatewayAccessToken
   const fetchImpl = options.fetchImpl ?? ((url, init) => fetch(url, init))
+  const timeoutMs = options.timeoutMs ?? ADMIN_AUTHORIZATION_TIMEOUT_MS
 
   if (options.signal?.aborted) return { status: 'unavailable' }
   const controller = new AbortController()
   const cancel = () => controller.abort(options.signal?.reason)
   options.signal?.addEventListener('abort', cancel, { once: true })
   if (options.signal?.aborted) cancel()
+  const timer = globalThis.setTimeout(() => controller.abort(), timeoutMs)
   try {
     const accessToken = await withAdminDependencyTimeout(
-      (timeoutSignal) => accessTokenBeforeAbort(
+      (timeoutSignal) => valueBeforeAbort(
         getAccessToken,
         AbortSignal.any([controller.signal, timeoutSignal]),
       ),
-      options.timeoutMs ?? ADMIN_AUTHORIZATION_TIMEOUT_MS,
+      timeoutMs,
     )
     if (accessToken === undefined || controller.signal.aborted) return { status: 'unavailable' }
     if (!accessToken) return { status: 'unauthenticated' }
     const response = await withAdminDependencyTimeout(
-      (timeoutSignal) => fetchImpl(ADMIN_AUTHORIZATION_ENDPOINT, {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${accessToken}` },
-        signal: AbortSignal.any([controller.signal, timeoutSignal]),
-        cache: 'no-store',
-        credentials: 'omit',
-        referrerPolicy: 'no-referrer',
-      }),
-      options.timeoutMs ?? ADMIN_AUTHORIZATION_TIMEOUT_MS,
+      (timeoutSignal) => {
+        const signal = AbortSignal.any([controller.signal, timeoutSignal])
+        return valueBeforeAbort(() => fetchImpl(ADMIN_AUTHORIZATION_ENDPOINT, {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${accessToken}` },
+          signal,
+          cache: 'no-store',
+          credentials: 'omit',
+          referrerPolicy: 'no-referrer',
+        }), signal)
+      },
+      timeoutMs,
     )
+    if (!response || controller.signal.aborted) return { status: 'unavailable' }
     if (response.status === 401) return { status: 'unauthenticated' }
     if (response.status === 403) return { status: 'forbidden' }
     if (response.status !== 200) return { status: 'unavailable' }
-    return exactAuthorization(await response.json()) ?? { status: 'unavailable' }
+    const body = await withAdminDependencyTimeout(
+      (timeoutSignal) => valueBeforeAbort(
+        () => response.json(),
+        AbortSignal.any([controller.signal, timeoutSignal]),
+      ),
+      timeoutMs,
+    )
+    if (body === undefined || controller.signal.aborted) return { status: 'unavailable' }
+    return exactAuthorization(body) ?? { status: 'unavailable' }
   } catch {
     return { status: 'unavailable' }
   } finally {
+    globalThis.clearTimeout(timer)
     options.signal?.removeEventListener('abort', cancel)
   }
 }

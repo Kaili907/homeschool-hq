@@ -66,7 +66,7 @@ export function createAdminCurriculumHttpSource(
   return {
     async loadIdentity() {
       return requireProjection(
-        await getJson(fetcher, getAccessToken, `${basePath}/catalog-identity`),
+        await getJson(fetcher, getAccessToken, `${basePath}/catalog-identity`, timeoutMs),
         adaptSource,
       )
     },

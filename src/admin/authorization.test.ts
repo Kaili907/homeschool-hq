@@ -121,6 +121,26 @@ describe('ADMIN-0 v2 route authorization state', () => {
     }
   })
 
+  it('fails closed when an authorization response body never settles', async () => {
+    vi.useFakeTimers()
+    try {
+      const fetchImpl = vi.fn(async () => ({
+        status: 200,
+        json: () => new Promise<never>(() => {}),
+      }))
+      const read = readAdminAuthorization({
+        timeoutMs: 25,
+        getAccessToken: async () => 'verified.access.token',
+        fetchImpl,
+      })
+      await vi.advanceTimersByTimeAsync(26)
+      await expect(read).resolves.toEqual({ status: 'unavailable' })
+      expect(fetchImpl).toHaveBeenCalledOnce()
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
   it('gives ADMIN-5 an advisory canonical overview:read seam', () => {
     const viewer = wire('viewer')
     expect(hasAdminAuthorizationCapability(viewer, 'overview:read')).toBe(true)
