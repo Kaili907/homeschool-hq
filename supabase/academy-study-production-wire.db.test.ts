@@ -1,6 +1,12 @@
+import type { ChildProcess } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { readFile } from 'node:fs/promises'
+import { access, mkdtemp, readFile, rm } from 'node:fs/promises'
+import { createServer } from 'node:net'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { PGlite } from '@electric-sql/pglite'
+import EmbeddedPostgres from 'embedded-postgres'
+import pg from 'pg'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 const PRODUCTION_WIRE_MIGRATION =
@@ -374,6 +380,24 @@ describe('minimal checkpoint CAS', () => {
       sessionRef: 'session.checkpoint.main',
     })
     expect(read.body).toEqual({ status: 'found', checkpoint })
+    const canonicalDraft = await database.query<{
+      stored_draft_ref: string | null
+      fingerprint_draft_type: string
+    }>(`
+      select checkpoint.response_draft_ref as stored_draft_ref,
+             jsonb_typeof(receipt.request_fingerprint #>
+               '{checkpoint,responseDraftRef}') as fingerprint_draft_type
+      from academy_private.study_production_session_checkpoints as checkpoint
+      join academy_private.study_mutation_receipts as receipt
+        on receipt.actor_scope = 'session:' || checkpoint.session_id
+       and receipt.operation_kind = 'production_checkpoint_cas_v1'
+       and receipt.idempotency_key = 'mutation.checkpoint.main'
+      where checkpoint.session_id = 'session.checkpoint.main'
+    `)
+    expect(canonicalDraft.rows[0]).toEqual({
+      stored_draft_ref: null,
+      fingerprint_draft_type: 'null',
+    })
   })
 
   it('has no storage path for private learner content and quarantines malformed input', async () => {
@@ -408,6 +432,70 @@ describe('minimal checkpoint CAS', () => {
     expect(count.rows[0].count).toBe(0)
   })
 
+  it('rejects caller-controlled response draft references without persisting or echoing them', async () => {
+    const sessionRef = 'session.checkpoint.raw-draft'
+    const mutationRef = 'mutation.checkpoint.raw-draft'
+    const rawDraftRef = 'draft:my_raw_answer_is_four'
+    await begin(digestA, sessionRef)
+
+    const rejected = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: null,
+      mutationRef,
+      checkpoint: checkpointRequest(sessionRef, 1, { responseDraftRef: rawDraftRef }),
+    })
+    const durable = await database.query<{
+      checkpoints: number
+      receipts: number
+      audits: number
+      leaked: boolean
+    }>(`
+      select
+        (
+          select count(*)::integer
+          from academy_private.study_production_session_checkpoints
+          where session_id = $1
+        ) as checkpoints,
+        (
+          select count(*)::integer
+          from academy_private.study_mutation_receipts
+          where actor_scope = 'session:' || $1
+            and operation_kind = 'production_checkpoint_cas_v1'
+            and idempotency_key = $2
+        ) as receipts,
+        (
+          select count(*)::integer
+          from public.academy_study_audit_events
+          where event_type = 'checkpoint.save'
+            and target_id = $3
+        ) as audits,
+        exists (
+          select 1
+          from academy_private.study_production_session_checkpoints
+          where response_draft_ref = $4
+          union all
+          select 1
+          from academy_private.study_mutation_receipts
+          where strpos(request_fingerprint::text, $4) > 0
+             or strpos(result::text, $4) > 0
+          union all
+          select 1
+          from public.academy_study_audit_events
+          where strpos(metadata::text, $4) > 0
+             or strpos(coalesce(reason_code, ''), $4) > 0
+        ) as leaked
+    `, [sessionRef, mutationRef, `checkpoint.${sessionRef}.1`, rawDraftRef])
+
+    expect(rejected.body).toEqual({ status: 'quarantined' })
+    expect(JSON.stringify(rejected)).not.toContain(rawDraftRef)
+    expect(durable.rows[0]).toEqual({
+      checkpoints: 0,
+      receipts: 0,
+      audits: 0,
+      leaked: false,
+    })
+  })
+
   it('quarantines a checkpoint whose stored integrity no longer verifies', async () => {
     await begin(digestA, 'session.checkpoint.integrity')
     await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
@@ -429,6 +517,85 @@ describe('minimal checkpoint CAS', () => {
       sessionRef: 'session.checkpoint.integrity',
     })
     expect(read.body).toEqual({ status: 'quarantined', reasonCode: 'integrity-failed' })
+  })
+
+  it('refuses checkpoint writes when the core session diverges from its projection', async () => {
+    const sessionRef = 'session.checkpoint.core-divergence'
+    const mutationRef = 'mutation.checkpoint.core-divergence'
+    const checkpointRef = `checkpoint.${sessionRef}.1`
+    await begin(digestA, sessionRef)
+    await database.exec(`
+      update public.academy_study_sessions
+      set lesson_id = 'lesson.production.diverged',
+          state = 'paused'
+      where id = '${sessionRef}';
+    `)
+
+    const exactRead = await execute(digestA, PROGRESS, 'session:read', { sessionRef })
+    const rejected = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: null,
+      mutationRef,
+      checkpoint: checkpointRequest(sessionRef, 1),
+    })
+    const state = await database.query<{
+      core_lesson: string
+      projection_lesson: string
+      core_state: string
+      projection_state: string
+      core_revision: number
+      projection_revision: number
+      checkpoints: number
+      receipts: number
+      audits: number
+    }>(`
+      select
+        core.lesson_id as core_lesson,
+        projection.lesson_ref as projection_lesson,
+        core.state as core_state,
+        projection.status as projection_state,
+        core.revision::integer as core_revision,
+        projection.revision::integer as projection_revision,
+        (
+          select count(*)::integer
+          from academy_private.study_production_session_checkpoints
+          where session_id = $1
+        ) as checkpoints,
+        (
+          select count(*)::integer
+          from academy_private.study_mutation_receipts
+          where actor_scope = 'session:' || $1
+            and operation_kind = 'production_checkpoint_cas_v1'
+            and idempotency_key = $2
+        ) as receipts,
+        (
+          select count(*)::integer
+          from public.academy_study_audit_events
+          where event_type = 'checkpoint.save'
+            and target_id = $3
+        ) as audits
+      from public.academy_study_sessions as core
+      join academy_private.study_production_sessions as projection
+        on projection.session_id = core.id
+      where core.id = $1
+    `, [sessionRef, mutationRef, checkpointRef])
+
+    expect(exactRead.body).toEqual({
+      status: 'quarantined',
+      reasonCode: 'integrity-failed',
+    })
+    expect(rejected.body).toEqual({ status: 'quarantined' })
+    expect(state.rows[0]).toEqual({
+      core_lesson: 'lesson.production.diverged',
+      projection_lesson: 'lesson.production.1',
+      core_state: 'paused',
+      projection_state: 'active',
+      core_revision: 2,
+      projection_revision: 1,
+      checkpoints: 0,
+      receipts: 0,
+      audits: 0,
+    })
   })
 })
 
@@ -619,6 +786,486 @@ describe('authority, isolation and readiness', () => {
   })
 })
 
+const POSTGRES_CLEANUP_TIMEOUT_MS = 10_000
+const POSTGRES_CLEANUP_RETRY_MS = 100
+
+function postgresDelay(ms: number) {
+  return new Promise<void>((resolve) => setTimeout(resolve, ms))
+}
+
+async function waitForPostgresProcessExit(process: ChildProcess) {
+  if (process.exitCode !== null || process.signalCode !== null) return
+  await new Promise<void>((resolve, reject) => {
+    const exited = () => {
+      clearTimeout(timeout)
+      resolve()
+    }
+    const timeout = setTimeout(() => {
+      process.removeListener('exit', exited)
+      reject(new Error('Production wire PostgreSQL process did not exit in time.'))
+    }, POSTGRES_CLEANUP_TIMEOUT_MS)
+    process.once('exit', exited)
+    if (process.exitCode !== null || process.signalCode !== null) {
+      process.removeListener('exit', exited)
+      clearTimeout(timeout)
+      resolve()
+    }
+  })
+  if (process.exitCode === null && process.signalCode === null) {
+    throw new Error('Production wire PostgreSQL process still appears to be running.')
+  }
+}
+
+async function removePostgresDirectory(databaseDir: string) {
+  const deadline = Date.now() + POSTGRES_CLEANUP_TIMEOUT_MS
+  while (true) {
+    try {
+      await rm(databaseDir, { recursive: true, force: true })
+      try {
+        await access(databaseDir)
+      } catch (cause) {
+        if ((cause as NodeJS.ErrnoException).code === 'ENOENT') return
+        throw cause
+      }
+      throw new Error('Production wire PostgreSQL directory still exists after removal.')
+    } catch (cause) {
+      const code = (cause as NodeJS.ErrnoException).code
+      if (
+        !['EBUSY', 'EPERM', 'ENOTEMPTY'].includes(code ?? '') ||
+        Date.now() >= deadline
+      ) {
+        throw cause
+      }
+      await postgresDelay(POSTGRES_CLEANUP_RETRY_MS)
+    }
+  }
+}
+
+async function availablePostgresPort(): Promise<number> {
+  return new Promise((resolve, reject) => {
+    const server = createServer()
+    server.once('error', reject)
+    server.listen(0, '127.0.0.1', () => {
+      const address = server.address()
+      if (!address || typeof address === 'string') {
+        server.close()
+        reject(new Error('Could not allocate a production wire PostgreSQL test port.'))
+        return
+      }
+      server.close((error) => (error ? reject(error) : resolve(address.port)))
+    })
+  })
+}
+
+describe('production session begin on independent PostgreSQL backends', () => {
+  let databaseDir: string
+  let server: EmbeddedPostgres
+  let controller: pg.Client
+  let clientA: pg.Client
+  let clientB: pg.Client
+  let serverProcess: ChildProcess | undefined
+  let cleanupPromise: Promise<void> | null = null
+  let postgresDigestA: string
+  let postgresNowIso: string
+
+  async function cleanupServer() {
+    if (cleanupPromise) return cleanupPromise
+    cleanupPromise = (async () => {
+      const errors: unknown[] = []
+      const clients = await Promise.allSettled([
+        controller?.end(),
+        clientA?.end(),
+        clientB?.end(),
+      ])
+      for (const result of clients) {
+        if (result.status === 'rejected') errors.push(result.reason)
+      }
+      try {
+        if (server) await server.stop()
+      } catch (cause) {
+        errors.push(cause)
+      }
+      try {
+        if (serverProcess) await waitForPostgresProcessExit(serverProcess)
+      } catch (cause) {
+        errors.push(cause)
+      }
+      try {
+        if (databaseDir) await removePostgresDirectory(databaseDir)
+      } catch (cause) {
+        errors.push(cause)
+      }
+      if (errors.length > 0) {
+        throw new AggregateError(errors, 'Production wire PostgreSQL cleanup failed.')
+      }
+    })()
+    return cleanupPromise
+  }
+
+  async function configurePostgresRole(
+    client: pg.Client,
+    role: 'authenticated' | 'service_role',
+    subject: string | null,
+  ) {
+    const claims = JSON.stringify({ role, ...(subject ? { sub: subject } : {}) })
+    await client.query(
+      `select set_config('request.jwt.claim.sub', $1, false),
+              set_config('request.jwt.claims', $2, false),
+              set_config('request.jwt.claim.role', $3, false)`,
+      [subject ?? '', claims, role],
+    )
+    await client.query(`set role ${role}`)
+  }
+
+  async function resetPostgresRole(client: pg.Client) {
+    await client.query(`
+      reset role;
+      select set_config('request.jwt.claim.sub', '', false),
+             set_config('request.jwt.claims', '', false),
+             set_config('request.jwt.claim.role', '', false)
+    `)
+  }
+
+  async function executePostgresBegin(
+    client: pg.Client,
+    sessionRef: string,
+    mutationRef: string,
+    overrides: Record<string, unknown> = {},
+  ): Promise<RuntimeEnvelope> {
+    const request = {
+      session: {
+        sessionRef,
+        lessonRef: 'lesson.production.1',
+        subjectRef: 'math',
+        studyPlanRef: null,
+        segmentRef: 'segment.1',
+        startedAt: postgresNowIso,
+        intendedLocalDate: postgresNowIso.slice(0, 10),
+        lastAcceptedEventRef: null,
+        rawAnswerIncluded: false,
+        transcriptIncluded: false,
+        ...overrides,
+      },
+      mutationRef,
+    }
+    const result = await client.query<{ result: RuntimeEnvelope }>(
+      `select public.academy_study_execute_verified_runtime_v2(
+        $1::text, $2::text, 'session:begin', $3::jsonb
+      ) as result`,
+      [postgresDigestA, ATTEMPTS, JSON.stringify(request)],
+    )
+    return result.rows[0].result
+  }
+
+  async function waitForSerializedBackends(pids: number[], controllerPid: number) {
+    const deadline = Date.now() + 10_000
+    let lastActivity: Array<{
+      pid: number
+      wait_event_type: string | null
+      wait_event: string | null
+    }> = []
+    let lastAdvisory: Array<{ pid: number; granted: boolean }> = []
+    while (Date.now() < deadline) {
+      const activity = await controller.query<{
+        pid: number
+        wait_event_type: string | null
+        wait_event: string | null
+      }>(`
+        select pid, wait_event_type, wait_event
+        from pg_catalog.pg_stat_activity
+        where pid = any($1::integer[])
+      `, [pids])
+      const advisoryLocks = await controller.query<{ pid: number; granted: boolean }>(`
+        select pid, granted
+        from pg_catalog.pg_locks
+        where locktype = 'advisory'
+          and pid = any($1::integer[])
+        order by granted, pid
+      `, [[...pids, controllerPid]])
+      lastActivity = activity.rows
+      lastAdvisory = advisoryLocks.rows
+      if (
+        activity.rows.length === pids.length &&
+        activity.rows.every((row) => row.wait_event_type === 'Lock') &&
+        advisoryLocks.rows.length === 3 &&
+        advisoryLocks.rows[0].granted === false &&
+        advisoryLocks.rows[1].granted === false &&
+        advisoryLocks.rows[2].pid === controllerPid &&
+        advisoryLocks.rows[2].granted === true
+      ) {
+        return [
+          { granted: false, count: 2 },
+          { granted: true, count: 1 },
+        ]
+      }
+      await postgresDelay(20)
+    }
+    throw new Error(
+      `Production session begin backends did not reach the serialized barrier: activity=${JSON.stringify(lastActivity)} advisory=${JSON.stringify(lastAdvisory)}`,
+    )
+  }
+
+  async function runBeginBarrier(
+    sessionRef: string,
+    mutationRefA: string,
+    mutationRefB: string,
+    overridesA: Record<string, unknown> = {},
+    overridesB: Record<string, unknown> = {},
+  ) {
+    let barrierOpen = false
+    let settledPromise: Promise<PromiseSettledResult<RuntimeEnvelope>[]> | undefined
+    try {
+      await controller.query('begin')
+      barrierOpen = true
+      await controller.query(
+        `select pg_catalog.pg_advisory_xact_lock(
+          pg_catalog.hashtext('academy:study:production-session:v1'),
+          pg_catalog.hashtext($1)
+        )`,
+        [sessionRef],
+      )
+      const [controllerPidResult, ...pids] = await Promise.all([
+        controller.query<{ pid: number }>('select pg_backend_pid() as pid'),
+        clientA.query<{ pid: number }>('select pg_backend_pid() as pid'),
+        clientB.query<{ pid: number }>('select pg_backend_pid() as pid'),
+      ])
+      settledPromise = Promise.allSettled([
+        executePostgresBegin(clientA, sessionRef, mutationRefA, overridesA),
+        executePostgresBegin(clientB, sessionRef, mutationRefB, overridesB),
+      ])
+      const backendPids = pids.map((result) => result.rows[0].pid)
+      const advisory = await waitForSerializedBackends(
+        backendPids,
+        controllerPidResult.rows[0].pid,
+      )
+      await controller.query('commit')
+      barrierOpen = false
+      const settled = await settledPromise
+      return { advisory, backendPids, settled }
+    } finally {
+      if (barrierOpen) await controller.query('rollback')
+      if (settledPromise) await settledPromise
+    }
+  }
+
+  async function sessionWriteCounts(sessionRef: string) {
+    const result = await controller.query<{
+      core_rows: number
+      projection_rows: number
+      receipt_rows: number
+      audit_rows: number
+    }>(`
+      select
+        (select count(*)::integer from public.academy_study_sessions
+          where id = $1) as core_rows,
+        (select count(*)::integer from academy_private.study_production_sessions
+          where session_id = $1) as projection_rows,
+        (select count(*)::integer from academy_private.study_mutation_receipts
+          where actor_scope = 'session:' || $1
+            and operation_kind = 'production_session_begin_v1') as receipt_rows,
+        (select count(*)::integer from public.academy_study_audit_events
+          where event_type = 'session.start' and target_id = $1) as audit_rows
+    `, [sessionRef])
+    return result.rows[0]
+  }
+
+  beforeAll(async () => {
+    try {
+      databaseDir = await mkdtemp(join(tmpdir(), 'academy-production-wire-postgres-'))
+      server = new EmbeddedPostgres({
+        databaseDir,
+        port: await availablePostgresPort(),
+        user: 'postgres',
+        password: 'academy-test-only',
+        persistent: true,
+        initdbFlags: ['--encoding=UTF8', '--locale=C'],
+        postgresFlags: [
+          '-c',
+          'listen_addresses=127.0.0.1',
+          '-c',
+          'io_method=sync',
+        ],
+        onLog: () => undefined,
+        onError: () => undefined,
+      })
+      await server.initialise()
+      await server.start()
+      serverProcess = (server as unknown as { process?: ChildProcess }).process
+      if (!serverProcess?.pid) {
+        throw new Error('Production wire PostgreSQL child process was not tracked.')
+      }
+      controller = server.getPgClient()
+      clientA = server.getPgClient()
+      clientB = server.getPgClient()
+      await Promise.all([controller.connect(), clientA.connect(), clientB.connect()])
+      await controller.query(bootstrap)
+      const sources = await Promise.all(
+        files.map((path) => readFile(new URL(path, import.meta.url), 'utf8')),
+      )
+      for (const [index, migration] of sources.entries()) {
+        try {
+          await controller.query(migration)
+        } catch (error) {
+          throw new Error(`Failed to apply ${files[index]} to PostgreSQL`, { cause: error })
+        }
+      }
+      await controller.query(`
+        update public.academy_guardian_student_access
+        set permission_level = 'identity_manager'
+        where id = '00000000-0000-0000-0000-0000000001a1'::uuid
+      `)
+      await configurePostgresRole(controller, 'authenticated', GUARDIAN_A)
+      const issued = await controller.query<{ result: Record<string, unknown> }>(
+        'select public.academy_study_issue_guardian_launch_v1($1::text, $2::text) as result',
+        ['academy-student-id', STUDENT_A],
+      )
+      postgresDigestA = createHash('sha256')
+        .update(String(issued.rows[0].result.sessionReference), 'ascii')
+        .digest('hex')
+      await resetPostgresRole(controller)
+      const clock = await controller.query<{ now: string }>(`
+        select to_char(
+          clock_timestamp() at time zone 'UTC',
+          'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'
+        ) as now
+      `)
+      postgresNowIso = clock.rows[0].now
+      await Promise.all([
+        configurePostgresRole(clientA, 'service_role', null),
+        configurePostgresRole(clientB, 'service_role', null),
+      ])
+    } catch (cause) {
+      try {
+        await cleanupServer()
+      } catch (cleanupCause) {
+        throw new AggregateError(
+          [cause, cleanupCause],
+          'Production wire PostgreSQL setup and cleanup both failed.',
+        )
+      }
+      throw cause
+    }
+  }, 120_000)
+
+  afterAll(async () => {
+    await cleanupServer()
+  }, 60_000)
+
+  it('uses three genuinely independent PostgreSQL backends', async () => {
+    const pids = await Promise.all([
+      controller.query<{ pid: number }>('select pg_backend_pid() as pid'),
+      clientA.query<{ pid: number }>('select pg_backend_pid() as pid'),
+      clientB.query<{ pid: number }>('select pg_backend_pid() as pid'),
+    ])
+    expect(new Set(pids.map((result) => result.rows[0].pid)).size).toBe(3)
+  })
+
+  it('serializes identical simultaneous begins into one saved result and one replay', async () => {
+    const sessionRef = 'session.production.concurrent-identical'
+    const mutationRef = 'mutation.session.concurrent-identical'
+    const { advisory, backendPids, settled } = await runBeginBarrier(
+      sessionRef,
+      mutationRef,
+      mutationRef,
+    )
+    console.info(
+      `Production begin identical outcomes: ${settled.map((result) =>
+        result.status === 'fulfilled'
+          ? `fulfilled:${result.value.body?.status}`
+          : `rejected:${String((result.reason as { code?: unknown }).code ?? 'unknown')}`
+      ).join(',')}`,
+    )
+    expect(advisory).toEqual([
+      { granted: false, count: 2 },
+      { granted: true, count: 1 },
+    ])
+    expect(settled.every((result) => result.status === 'fulfilled')).toBe(true)
+    const bodies = settled.map((result) => {
+      if (result.status === 'rejected') throw result.reason
+      return result.value.body
+    })
+    expect(bodies).toEqual([
+      { status: 'saved', sessionRef, revision: 1 },
+      { status: 'saved', sessionRef, revision: 1 },
+    ])
+    expect(await sessionWriteCounts(sessionRef)).toEqual({
+      core_rows: 1,
+      projection_rows: 1,
+      receipt_rows: 1,
+      audit_rows: 1,
+    })
+    console.info(
+      `Production begin identical concurrency: backends=${backendPids.join(',')} advisory=${JSON.stringify(advisory)}`,
+    )
+  }, 30_000)
+
+  it('collides simultaneous different intent under the same mutation identity', async () => {
+    const sessionRef = 'session.production.concurrent-different-intent'
+    const mutationRef = 'mutation.session.concurrent-different-intent'
+    const { advisory, settled } = await runBeginBarrier(
+      sessionRef,
+      mutationRef,
+      mutationRef,
+      { segmentRef: 'segment.concurrent.a' },
+      { segmentRef: 'segment.concurrent.b' },
+    )
+    expect(advisory).toEqual([
+      { granted: false, count: 2 },
+      { granted: true, count: 1 },
+    ])
+    expect(settled.every((result) => result.status === 'fulfilled')).toBe(true)
+    const bodies = settled.map((result) => {
+      if (result.status === 'rejected') throw result.reason
+      return result.value.body
+    })
+    expect(bodies.map((body) => body?.status).sort()).toEqual([
+      'idempotency-collision',
+      'saved',
+    ])
+    expect(await sessionWriteCounts(sessionRef)).toEqual({
+      core_rows: 1,
+      projection_rows: 1,
+      receipt_rows: 1,
+      audit_rows: 1,
+    })
+  }, 30_000)
+
+  it('rechecks missing-session state after serialization for distinct mutations', async () => {
+    const sessionRef = 'session.production.concurrent-distinct'
+    const { advisory, settled } = await runBeginBarrier(
+      sessionRef,
+      'mutation.session.concurrent-distinct-a',
+      'mutation.session.concurrent-distinct-b',
+    )
+    console.info(
+      `Production begin distinct-mutation outcomes: ${settled.map((result) =>
+        result.status === 'fulfilled'
+          ? `fulfilled:${result.value.body?.status}`
+          : `rejected:${String((result.reason as { code?: unknown }).code ?? 'unknown')}`
+      ).join(',')}`,
+    )
+    expect(advisory).toEqual([
+      { granted: false, count: 2 },
+      { granted: true, count: 1 },
+    ])
+    expect(settled.every((result) => result.status === 'fulfilled')).toBe(true)
+    const bodies = settled.map((result) => {
+      if (result.status === 'rejected') throw result.reason
+      return result.value.body
+    })
+    expect(bodies.map((body) => body?.status).sort()).toEqual([
+      'idempotency-collision',
+      'saved',
+    ])
+    expect(await sessionWriteCounts(sessionRef)).toEqual({
+      core_rows: 1,
+      projection_rows: 1,
+      receipt_rows: 2,
+      audit_rows: 1,
+    })
+  }, 30_000)
+})
+
 describe('RPC census and migration custody', () => {
   const expected = new Map<string, {
     names: string[] | null
@@ -631,7 +1278,7 @@ describe('RPC census and migration custody', () => {
     ['academy_study_begin_production_session_v1(jsonb,text)', {
       names: ['p_session', 'p_mutation_ref'], types: 'jsonb, text', defaults: 0,
       defaultExpr: null, volatility: 'v',
-      fingerprint: 'a5722360035e5a9c2fa0d0702e17bc56f2d01bb2ead659f871d0fa082ce37cc9',
+      fingerprint: '952ce152c0ccd1283fb64559f68c66a50942eb8edaf9c17bbc42cc243a7272c9',
     }],
     ['academy_study_read_production_session_v1(text)', {
       names: ['p_session_ref'], types: 'text', defaults: 0,
@@ -654,7 +1301,7 @@ describe('RPC census and migration custody', () => {
       names: ['p_session_ref', 'p_expected_revision', 'p_mutation_ref', 'p_checkpoint'],
       types: 'text, bigint, text, jsonb', defaults: 0,
       defaultExpr: null, volatility: 'v',
-      fingerprint: '0972c92dc7ca75dd8f1faabd2ceac14b53e1c710b7867526e5beb42ed60d2357',
+      fingerprint: 'a0664dc9eb7a1db5f6d0c344344d0fc114694655b612ab931892ac44ea1c2952',
     }],
     ['academy_study_list_production_calendar_v1(text)', {
       names: ['p_cursor'], types: 'text', defaults: 1,

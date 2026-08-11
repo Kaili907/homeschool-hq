@@ -138,8 +138,9 @@ create table academy_private.study_production_sessions (
 );
 
 -- Minimal checkpoint storage.  Raw answers, Tutor text/audio/transcripts,
--- diagnostic labels and adult work have no columns here.  A response draft may
--- be represented only by an opaque draft reference.
+-- diagnostic labels and adult work have no columns here.  Response drafts have
+-- no durable representation until an independently reviewed server authority
+-- can issue and validate opaque references.
 create table academy_private.study_production_session_checkpoints (
   session_id text primary key,
   checkpoint_ref text not null unique
@@ -157,11 +158,7 @@ create table academy_private.study_production_session_checkpoints (
     ),
   elapsed_active_seconds_in_segment bigint not null default 0
     check (elapsed_active_seconds_in_segment between 0 and 9007199254740991),
-  response_draft_ref text
-    check (
-      response_draft_ref is null
-      or response_draft_ref ~ '^draft:[A-Za-z0-9][A-Za-z0-9._:/-]{0,119}$'
-    ),
+  response_draft_ref text check (response_draft_ref is null),
   captured_at timestamptz not null,
   revision bigint not null default 1 check (revision > 0),
   integrity_digest text not null check (integrity_digest ~ '^[0-9a-f]{64}$'),
@@ -310,14 +307,7 @@ as $$
     and jsonb_typeof(p_candidate -> 'elapsedActiveSecondsInSegment') = 'number'
     and (p_candidate ->> 'elapsedActiveSecondsInSegment')::numeric
       between 0 and 9007199254740991
-    and (
-      jsonb_typeof(p_candidate -> 'responseDraftRef') = 'null'
-      or (
-        jsonb_typeof(p_candidate -> 'responseDraftRef') = 'string'
-        and (p_candidate ->> 'responseDraftRef') ~
-          '^draft:[A-Za-z0-9][A-Za-z0-9._:/-]{0,119}$'
-      )
-    )
+    and jsonb_typeof(p_candidate -> 'responseDraftRef') = 'null'
     and p_candidate -> 'rawAnswerIncluded' = 'false'::jsonb
     and p_candidate -> 'transcriptIncluded' = 'false'::jsonb;
 $$;
@@ -513,6 +503,14 @@ begin
   ) then
     raise exception 'STUDY_HOUSEHOLD_TIMEZONE_REQUIRED' using errcode = '23514';
   end if;
+
+  -- The core session identifier is global.  Serialize its entire begin
+  -- transaction before observing either session or receipt state.  Hash
+  -- collisions may over-serialize unrelated sessions but cannot admit a race.
+  perform pg_catalog.pg_advisory_xact_lock(
+    pg_catalog.hashtext('academy:study:production-session:v1'),
+    pg_catalog.hashtext(p_session ->> 'sessionRef')
+  );
 
   -- Resolve an existing core row before consulting its mutation receipt.  A
   -- foreign learner reusing a guessed session/mutation pair must receive the
@@ -930,6 +928,7 @@ set search_path = pg_catalog
 as $$
 declare
   projection academy_private.study_production_sessions%rowtype;
+  core public.academy_study_sessions%rowtype;
   current_checkpoint academy_private.study_production_session_checkpoints%rowtype;
   resolved_household_id uuid;
   expected_revision bigint := coalesce(p_expected_revision, 0);
@@ -961,6 +960,10 @@ begin
      or projection.lesson_ref is distinct from p_checkpoint ->> 'lessonRef' then
     raise exception 'STUDY_OPERATION_NOT_AVAILABLE' using errcode = '42501';
   end if;
+  select * into core
+  from public.academy_study_sessions
+  where id = projection.session_id
+  for update;
   resolved_household_id := academy_private.study_authorized_household(
     projection.student_id,
     'student:attempts:create',
@@ -970,23 +973,42 @@ begin
     raise exception 'STUDY_OPERATION_NOT_AVAILABLE' using errcode = '42501';
   end if;
   if projection.integrity_digest is distinct from
-       academy_private.study_production_session_integrity(projection) then
+       academy_private.study_production_session_integrity(projection)
+     or projection.session_id is distinct from core.id
+     or projection.household_id is distinct from core.household_id
+     or projection.student_id is distinct from core.student_id
+     or projection.lesson_ref is distinct from core.lesson_id
+     or projection.revision is distinct from core.revision
+     or (projection.status = 'active' and core.state <> 'active')
+     or (projection.status = 'paused' and core.state <> 'paused')
+     or (projection.status = 'completed' and core.state <> 'completed')
+     or (projection.status = 'stopped' and core.state <> 'abandoned') then
     return jsonb_build_object('status', 'quarantined');
   end if;
   select * into current_checkpoint
   from academy_private.study_production_session_checkpoints
   where session_id = p_session_ref
   for update;
-  if current_checkpoint.session_id is not null
-     and current_checkpoint.integrity_digest is distinct from
-       academy_private.study_production_checkpoint_integrity(current_checkpoint) then
+  if current_checkpoint.session_id is not null and (
+       current_checkpoint.integrity_digest is distinct from
+         academy_private.study_production_checkpoint_integrity(current_checkpoint)
+       or current_checkpoint.session_id is distinct from projection.session_id
+       or current_checkpoint.household_id is distinct from projection.household_id
+       or current_checkpoint.student_id is distinct from projection.student_id
+       or current_checkpoint.lesson_ref is distinct from projection.lesson_ref
+     ) then
     return jsonb_build_object('status', 'quarantined');
   end if;
 
   fingerprint := jsonb_build_object(
     'session_ref', p_session_ref,
     'expected_revision', p_expected_revision,
-    'checkpoint', p_checkpoint
+    'checkpoint', jsonb_set(
+      p_checkpoint,
+      '{responseDraftRef}',
+      'null'::jsonb,
+      false
+    )
   );
   request_digest := academy_private.study_sha256_json(fingerprint);
   select * into receipt
@@ -1024,7 +1046,7 @@ begin
         p_checkpoint ->> 'lessonRef', p_checkpoint ->> 'segmentRef',
         completed_refs,
         (p_checkpoint ->> 'elapsedActiveSecondsInSegment')::bigint,
-        p_checkpoint ->> 'responseDraftRef',
+        null,
         (p_checkpoint ->> 'capturedAt')::timestamptz,
         desired_revision, repeat('0', 64)
       );
@@ -1036,7 +1058,7 @@ begin
           completed_segment_refs = completed_refs,
           elapsed_active_seconds_in_segment =
             (p_checkpoint ->> 'elapsedActiveSecondsInSegment')::bigint,
-          response_draft_ref = p_checkpoint ->> 'responseDraftRef',
+          response_draft_ref = null,
           captured_at = (p_checkpoint ->> 'capturedAt')::timestamptz
       where session_id = p_session_ref;
     end if;
