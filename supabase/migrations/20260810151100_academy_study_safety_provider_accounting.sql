@@ -15,8 +15,8 @@ end;
 $$;
 
 alter table public.academy_provider_usage_ledger
-  drop constraint academy_provider_usage_ledger_engine_check,
-  drop constraint academy_provider_usage_provider_shape_check;
+  drop constraint if exists academy_provider_usage_ledger_engine_check,
+  drop constraint if exists academy_provider_usage_provider_shape_check;
 
 alter table public.academy_provider_usage_ledger
   add constraint academy_provider_usage_ledger_engine_check
@@ -57,7 +57,7 @@ alter table public.academy_provider_usage_ledger
   );
 
 alter table public.academy_provider_usage_ledger
-  add column purpose text generated always as (
+  add column if not exists purpose text generated always as (
     case engine
       when 'tutor' then 'tutor_turn'
       when 'study' then 'safety_classification'
@@ -65,6 +65,14 @@ alter table public.academy_provider_usage_ledger
       when 'tts' then 'tts_synthesis'
     end
   ) stored not null;
+
+-- The Admin cost-accounting delta may already have installed the exact-pricing
+-- V2 seam. Preserve its established V1 implementation as the private legacy
+-- path before composing the Study-compatible public entry point below.
+alter function public.academy_record_provider_usage(
+  text,timestamptz,uuid,uuid,text,text,text,text,text,text,text,text,text,
+  bigint,bigint,bigint,bigint,bigint,integer,text,text,text
+) set schema academy_private;
 
 create or replace function public.academy_record_provider_usage(
   p_execution_key text,
@@ -112,6 +120,64 @@ declare
   has_priced_component boolean := false;
   request_quantity bigint;
 begin
+  if p_engine = 'study'
+     and to_regprocedure(
+       'public.academy_record_provider_usage_v2(text,timestamptz,uuid,uuid,text,text,text,text,text,text,text,text,text,text,bigint,bigint,bigint,bigint,bigint,integer,text,text,text)'
+     ) is not null then
+    return public.academy_record_provider_usage_v2(
+      p_execution_key,
+      p_occurred_at,
+      p_account_id,
+      p_household_id,
+      p_household_attribution,
+      p_app_version,
+      p_engine_version,
+      p_curriculum_version,
+      p_engine,
+      'safety_classification',
+      p_provider,
+      p_provider_product_id,
+      p_provider_model_id,
+      p_logical_model_tier,
+      p_input_tokens,
+      p_output_tokens,
+      p_cached_input_read_tokens,
+      p_cached_input_write_tokens,
+      p_tts_characters,
+      p_latency_ms,
+      p_result,
+      p_result_reason_code,
+      p_billing_disposition
+    );
+  end if;
+
+  if p_engine <> 'study' then
+    return academy_private.academy_record_provider_usage(
+      p_execution_key,
+      p_occurred_at,
+      p_account_id,
+      p_household_id,
+      p_household_attribution,
+      p_app_version,
+      p_engine_version,
+      p_curriculum_version,
+      p_engine,
+      p_provider,
+      p_provider_product_id,
+      p_provider_model_id,
+      p_logical_model_tier,
+      p_input_tokens,
+      p_output_tokens,
+      p_cached_input_read_tokens,
+      p_cached_input_write_tokens,
+      p_tts_characters,
+      p_latency_ms,
+      p_result,
+      p_result_reason_code,
+      p_billing_disposition
+    );
+  end if;
+
   if p_execution_key is null or p_execution_key !~ '^[A-Za-z0-9_-]{1,128}$'
     or p_occurred_at is null
     or p_account_id is null
@@ -444,6 +510,19 @@ begin
   return jsonb_build_object('usageId', new_usage_id, 'idempotencyResult', 'created');
 end;
 $$;
+
+revoke all on function academy_private.academy_record_provider_usage(
+  text,timestamptz,uuid,uuid,text,text,text,text,text,text,text,text,text,
+  bigint,bigint,bigint,bigint,bigint,integer,text,text,text
+) from public, anon, authenticated, service_role;
+revoke all on function public.academy_record_provider_usage(
+  text,timestamptz,uuid,uuid,text,text,text,text,text,text,text,text,text,
+  bigint,bigint,bigint,bigint,bigint,integer,text,text,text
+) from public, anon, authenticated, service_role;
+grant execute on function public.academy_record_provider_usage(
+  text,timestamptz,uuid,uuid,text,text,text,text,text,text,text,text,text,
+  bigint,bigint,bigint,bigint,bigint,integer,text,text,text
+) to service_role;
 
 
 comment on column public.academy_provider_usage_ledger.purpose is

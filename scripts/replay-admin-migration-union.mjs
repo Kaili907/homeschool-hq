@@ -31,6 +31,13 @@ const expectedServiceGrantRevocations = new Map([
   ['20260810110000', new Set(['academy_admin_read_audit_events_v1'])],
 ])
 
+const expectedServiceRelationGrantRevocations = new Map([
+  ['20260810120300', new Set([
+    'public.academy_provider_prices:INSERT',
+    'public.academy_provider_pricing_catalogs:INSERT',
+  ])],
+])
+
 const requiredFinalServiceRoutines = [
   'academy_reserve_provider_attempt_v1',
   'academy_transition_provider_attempt_v1',
@@ -104,6 +111,11 @@ function forcedTablesFrom(source) {
     .map((match) => match[1])
 }
 
+function droppedTablesFrom(source) {
+  return [...source.matchAll(/drop\s+table\s+(?:if\s+exists\s+)?(?:public\.|academy_private\.)?([a-z0-9_]+)/gi)]
+    .map((match) => match[1])
+}
+
 async function main() {
   const database = await PGlite.create()
   const requiredForcedTables = new Set()
@@ -117,12 +129,14 @@ async function main() {
       const source = sourceFor(entry)
       for (const table of forcedTablesFrom(source)) requiredForcedTables.add(table)
       await database.exec(source)
+      for (const table of droppedTablesFrom(source)) requiredForcedTables.delete(table)
       const current = await directServiceGrants(database)
       for (const grant of serviceGrants) {
         if (!current.has(grant)) {
           const routineName = /^public\.([a-z0-9_]+)\(/.exec(grant)?.[1]
           const revoked = { version: entry.version, grant }
-          if (routineName && expectedServiceGrantRevocations.get(entry.version)?.has(routineName)) {
+          if ((routineName && expectedServiceGrantRevocations.get(entry.version)?.has(routineName))
+            || expectedServiceRelationGrantRevocations.get(entry.version)?.has(grant)) {
             intentionalServiceGrantRevocations.push(revoked)
           } else {
             unexpectedServiceGrantRevocations.push(revoked)

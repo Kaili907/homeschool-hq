@@ -39,7 +39,7 @@ const SQL_FILES = Object.freeze([
   '../supabase/migrations/20260801190000_academy_study_final_production_reconciliation.sql',
   '../supabase/tests/study_engine_fixtures.sql',
   '../supabase/migrations/20260809160000_academy_curriculum_release_registry.sql',
-  '../supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql',
+  '../supabase/migrations/20260810120200_academy_study_effective_settings_v2.sql',
   '../supabase/migrations/20260810150000_academy_study_curriculum_binding.sql',
   '../supabase/migrations/20260810151000_academy_study_session_semantics_v2.sql',
   '../supabase/migrations/20260810153000_academy_study_release_registry_bridge.sql',

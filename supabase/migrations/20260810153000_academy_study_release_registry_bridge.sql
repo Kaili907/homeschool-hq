@@ -293,7 +293,7 @@ begin
     on release.release_id = pointer.release_id
    and release.status = 'published'
   where pointer.environment = 'production'
-    and pointer.binding_mode = 'study_new_sessions'
+    and pointer.binding_mode in ('study_new_sessions', 'default_authority')
   order by pointer.revision desc
   limit 1;
   if active_release.release_id is null then
@@ -408,7 +408,7 @@ begin
         on release.release_id = pointer.release_id
        and release.status = 'published'
       where pointer.environment = 'production'
-        and pointer.binding_mode = 'study_new_sessions'
+        and pointer.binding_mode in ('study_new_sessions', 'default_authority')
         and pointer.revision = (
           select max(latest.revision)
           from public.academy_curriculum_active_pointers as latest
@@ -427,17 +427,27 @@ begin
         and tgname = 'academy_study_sessions_curriculum_binding_immutable'
         and tgenabled <> 'D'
     )
-    and exists (
-      select 1 from pg_catalog.pg_trigger
-      where tgrelid = 'public.academy_curriculum_active_pointers'::regclass
-        and tgname = 'academy_curriculum_active_pointers_immutable'
-        and tgenabled <> 'D'
-    )
-    and exists (
-      select 1 from pg_catalog.pg_trigger
-      where tgrelid = 'public.academy_curriculum_active_pointers'::regclass
-        and tgname = 'academy_curriculum_active_pointers_append_guard'
-        and tgenabled <> 'D'
+    and (
+      exists (
+        select 1 from pg_catalog.pg_trigger
+        where tgrelid = 'public.academy_curriculum_active_pointers'::regclass
+          and tgname = 'academy_curriculum_active_pointers_governed'
+          and tgenabled <> 'D'
+      )
+      or (
+        exists (
+          select 1 from pg_catalog.pg_trigger
+          where tgrelid = 'public.academy_curriculum_active_pointers'::regclass
+            and tgname = 'academy_curriculum_active_pointers_immutable'
+            and tgenabled <> 'D'
+        )
+        and exists (
+          select 1 from pg_catalog.pg_trigger
+          where tgrelid = 'public.academy_curriculum_active_pointers'::regclass
+            and tgname = 'academy_curriculum_active_pointers_append_guard'
+            and tgenabled <> 'D'
+        )
+      )
     )
     and not exists (
       select 1 from information_schema.role_table_grants

@@ -30,7 +30,7 @@ deployment, hosted migration, push, or merge.
   assignment, allowing an Owner-only configuration write with inconsistent
   audit authority.
 - Fix: migration
-  `20260810153000_academy_admin_configuration_reauthorization.sql` adds a
+  `20260810153100_academy_admin_configuration_reauthorization.sql` adds a
   fixed-search-path, ungranted write-point trigger. It locks the current
   assignment, requires a current Owner, and requires the new revision's actor
   user, assignment, and role snapshot to match. Losing the race now raises

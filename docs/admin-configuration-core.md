@@ -65,7 +65,7 @@ Preview and commit both require a positive decimal-string `expectedRevision`.
 Commit locks the head and rejects stale state with HTTP 409
 `revision_conflict`; there is no last-write-wins path.
 
-Migration `20260810153000_academy_admin_configuration_reauthorization.sql`
+Migration `20260810153100_academy_admin_configuration_reauthorization.sql`
 adds the authorization linearization point at the head update. The trigger
 locks and re-resolves the authenticated actor's current assignment, requires it
 to remain an Owner assignment, and binds that assignment to the new revision's

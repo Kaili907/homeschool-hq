@@ -66,7 +66,7 @@ SHA-256 is in
 ## Supabase: Curriculum release staging (2026-08-10)
 
 Tracked migration:
-`supabase/migrations/20260810150000_academy_curriculum_release_staging.sql`.
+`supabase/migrations/20260810150100_academy_curriculum_release_staging.sql`.
 
 The migration creates an immutable candidate plane distinct from the published
 release registry. One exact current draft revision, validation snapshot, and
@@ -109,7 +109,7 @@ SHA-256 is in
 ## Supabase: Curriculum human approval (2026-08-10)
 
 Tracked migration:
-`supabase/migrations/20260810140000_academy_curriculum_human_approval.sql`.
+`supabase/migrations/20260810140100_academy_curriculum_human_approval.sql`.
 
 The migration stores immutable validation snapshots and exact-revision human
 decisions. Approval requires `curriculum:approve`, a current publication-ready
@@ -402,7 +402,7 @@ and it has not been applied to a hosted project.
 ## Supabase: Study Effective Settings V2 (2026-08-10)
 
 Tracked migration:
-`supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql`.
+`supabase/migrations/20260810120200_academy_study_effective_settings_v2.sql`.
 
 The additive migration creates typed private Admin-default and safety-policy
 singletons plus the authorized `academy_study_effective_settings_v2(uuid,date)`

@@ -22,8 +22,8 @@ const requiredMigrations = [
   '20260809160000_academy_curriculum_release_registry.sql',
   '20260809170000_academy_admin_curriculum_audit_vocabulary.sql',
   '20260810120000_academy_curriculum_draft_authoring.sql',
-  '20260810140000_academy_curriculum_human_approval.sql',
-  '20260810150000_academy_curriculum_release_staging.sql',
+  '20260810140100_academy_curriculum_human_approval.sql',
+  '20260810150100_academy_curriculum_release_staging.sql',
   '20260810160000_academy_curriculum_release_publishing.sql',
   '20260810170000_academy_curriculum_activation_rollback.sql',
 ]

@@ -9,7 +9,7 @@ const migrations = [
   './migrations/20260809160000_academy_curriculum_release_registry.sql',
   './migrations/20260809170000_academy_admin_curriculum_audit_vocabulary.sql',
   './migrations/20260810120000_academy_curriculum_draft_authoring.sql',
-  './migrations/20260810140000_academy_curriculum_human_approval.sql',
+  './migrations/20260810140100_academy_curriculum_human_approval.sql',
 ].map((path) => new URL(path, import.meta.url))
 
 const OWNER = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'

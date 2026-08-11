@@ -12,18 +12,41 @@ begin
 end;
 $$;
 
-alter table public.academy_curriculum_active_pointers
-  drop constraint academy_curriculum_active_pointers_change_kind_check,
-  drop constraint academy_curriculum_active_pointers_binding_mode_check;
-
-alter table public.academy_curriculum_active_pointers
-  add constraint academy_curriculum_active_pointers_change_kind_check
-    check (change_kind in ('migration_seed', 'activation', 'rollback')),
-  add constraint academy_curriculum_active_pointers_binding_mode_check
-    check (binding_mode in ('registry_only', 'default_authority'));
+-- The Study registry bridge represents pointer authority as append-only rows.
+-- Preserve that history while converging on this migration's single governed
+-- current pointer plus separate immutable transition journal.
+create temporary table academy_curriculum_pointer_history
+on commit drop
+as select * from public.academy_curriculum_active_pointers;
 
 drop trigger academy_curriculum_active_pointers_immutable
   on public.academy_curriculum_active_pointers;
+drop trigger if exists academy_curriculum_active_pointers_append_guard
+  on public.academy_curriculum_active_pointers;
+drop function if exists public.academy_curriculum_active_pointer_append_guard();
+
+delete from public.academy_curriculum_active_pointers as pointer
+where pointer.revision <> (
+  select max(latest.revision)
+  from academy_curriculum_pointer_history as latest
+  where latest.environment = pointer.environment
+);
+
+alter table public.academy_curriculum_active_pointers
+  drop constraint academy_curriculum_active_pointers_pkey,
+  drop constraint academy_curriculum_active_pointers_change_kind_check,
+  drop constraint academy_curriculum_active_pointers_binding_mode_check,
+  add constraint academy_curriculum_active_pointers_pkey primary key (environment);
+
+update public.academy_curriculum_active_pointers
+set binding_mode = 'default_authority'
+where binding_mode = 'study_new_sessions';
+
+alter table public.academy_curriculum_active_pointers
+  add constraint academy_curriculum_active_pointers_change_kind_check
+    check (change_kind in ('migration_seed', 'bridge_activation', 'activation', 'rollback')),
+  add constraint academy_curriculum_active_pointers_binding_mode_check
+    check (binding_mode in ('registry_only', 'default_authority'));
 
 create table public.academy_curriculum_pointer_transitions (
   transition_id uuid not null,
@@ -31,7 +54,9 @@ create table public.academy_curriculum_pointer_transitions (
   revision bigint not null check (revision >= 1),
   previous_release_id uuid references public.academy_curriculum_releases (release_id) on delete restrict,
   new_release_id uuid not null references public.academy_curriculum_releases (release_id) on delete restrict,
-  transition_kind text not null check (transition_kind in ('migration_seed', 'activation', 'rollback')),
+  transition_kind text not null check (
+    transition_kind in ('migration_seed', 'bridge_activation', 'activation', 'rollback')
+  ),
   reason_code text check (
     reason_code is null or reason_code in ('release.activated', 'release.rolled_back')
   ),
@@ -47,6 +72,15 @@ create table public.academy_curriculum_pointer_transitions (
       transition_kind = 'migration_seed'
       and revision = 1
       and previous_release_id is null
+      and reason_code is null
+      and actor_user_ref is null
+      and correlation_id is null
+      and request_sha256 is null
+    )
+    or (
+      transition_kind = 'bridge_activation'
+      and revision = 2
+      and previous_release_id is not null
       and reason_code is null
       and actor_user_ref is null
       and correlation_id is null
@@ -148,11 +182,26 @@ insert into public.academy_curriculum_pointer_transitions (
   request_sha256, transitioned_at
 )
 select
-  '17000000-0000-4000-8000-000000000002', pointer.environment,
-  pointer.revision, null, pointer.release_id, 'migration_seed', null, null,
-  null, null, pointer.registered_at
-from public.academy_curriculum_active_pointers as pointer
-where pointer.environment = 'production' and pointer.revision = 1;
+  case pointer.revision
+    when 1 then '17000000-0000-4000-8000-000000000002'::uuid
+    else '17000000-0000-4000-8000-000000000003'::uuid
+  end,
+  pointer.environment,
+  pointer.revision,
+  case when pointer.revision = 1 then null else prior.release_id end,
+  pointer.release_id,
+  pointer.change_kind,
+  null,
+  null,
+  null,
+  null,
+  pointer.registered_at
+from academy_curriculum_pointer_history as pointer
+left join academy_curriculum_pointer_history as prior
+  on prior.environment = pointer.environment
+ and prior.revision = pointer.revision - 1
+where pointer.environment = 'production'
+order by pointer.revision;
 
 create function academy_private.admin_frozen_capability_v2(
   p_role text,

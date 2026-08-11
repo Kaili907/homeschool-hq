@@ -204,10 +204,10 @@ describe('hosted Study migration authorization evidence', () => {
     )
 
     expect(checksums.filter((value) =>
-      value === '5646d92084f85dd1a5b5463cff3f97970dc1e9017c85a809443266d8dcb1c23d',
+      value === 'e3dec4a9c4034d0756383578b635b7475c03f51c0e9f11fa3e28b38769b02c83',
     )).toHaveLength(1)
     expect(telemetryEntries).toEqual([expect.objectContaining({
-      sha256: '5646d92084f85dd1a5b5463cff3f97970dc1e9017c85a809443266d8dcb1c23d',
+      sha256: 'e3dec4a9c4034d0756383578b635b7475c03f51c0e9f11fa3e28b38769b02c83',
     })])
   })
 

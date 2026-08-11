@@ -177,7 +177,7 @@ function adaptPointer(value) {
     && value?.bindingMode === 'registry_only'
     && value?.registryOnly === true
     && value?.runtimeBinding === 'hard-coded'
-  const defaultAuthority = ['activation', 'rollback'].includes(value?.changeKind)
+  const defaultAuthority = ['bridge_activation', 'activation', 'rollback'].includes(value?.changeKind)
     && value?.bindingMode === 'default_authority'
     && value?.registryOnly === false
     && value?.runtimeBinding === 'default-authority'

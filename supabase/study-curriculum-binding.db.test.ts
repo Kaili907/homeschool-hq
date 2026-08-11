@@ -14,7 +14,7 @@ const files = [
   './migrations/20260801190000_academy_study_final_production_reconciliation.sql',
   './tests/study_engine_fixtures.sql',
   './migrations/20260809160000_academy_curriculum_release_registry.sql',
-  './migrations/20260810120000_academy_study_effective_settings_v2.sql',
+  './migrations/20260810120200_academy_study_effective_settings_v2.sql',
   './migrations/20260810150000_academy_study_curriculum_binding.sql',
   './migrations/20260810153000_academy_study_release_registry_bridge.sql',
   './migrations/20260810154000_academy_study_bound_content_authority.sql',

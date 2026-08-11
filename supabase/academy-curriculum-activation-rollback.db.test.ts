@@ -13,8 +13,8 @@ const migrations = [
   './migrations/20260809160000_academy_curriculum_release_registry.sql',
   './migrations/20260809170000_academy_admin_curriculum_audit_vocabulary.sql',
   './migrations/20260810120000_academy_curriculum_draft_authoring.sql',
-  './migrations/20260810140000_academy_curriculum_human_approval.sql',
-  './migrations/20260810150000_academy_curriculum_release_staging.sql',
+  './migrations/20260810140100_academy_curriculum_human_approval.sql',
+  './migrations/20260810150100_academy_curriculum_release_staging.sql',
   './migrations/20260810160000_academy_curriculum_release_publishing.sql',
   './migrations/20260810170000_academy_curriculum_activation_rollback.sql',
 ].map((path) => new URL(path, import.meta.url))

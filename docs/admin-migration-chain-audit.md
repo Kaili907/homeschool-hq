@@ -71,11 +71,11 @@ linear order are recorded later.
 | M22 | `20260810120000_academy_curriculum_draft_authoring.sql` | CW | `f9839401260f328df70496c105cadcbe5a5e06477db58610ae6d7bde42ea9721` | M20 | Curriculum draft plane | No |
 | M23 | `20260810130000_academy_provider_attempt_journal.sql` | PA | `af93f20a14fefcc23f5873af853c9ac0c7ef4065f00d5b1d6f06dc891c0b7f44` | M21 | Provider attempt journal | Reused byte-for-byte by Cost Threshold Runtime; normalize filename only |
 | M24 | `20260810130000_academy_curriculum_standards_review.sql` | CW | `bb014de57a1a8cedce97020becf041e5f3af69d26186988fab2095af4bcac739` | M22 | Standards review decisions | No |
-| M25 | `20260810140000_academy_curriculum_human_approval.sql` | CW | `ca9c7ec2e2f83c106804a9290d53dc18235075c34ce7653fbf89ecb75a96e6ce` | M24 | Exact-revision human approval | No |
+| M25 | `20260810140100_academy_curriculum_human_approval.sql` | CW | `ca9c7ec2e2f83c106804a9290d53dc18235075c34ce7653fbf89ecb75a96e6ce` | M24 | Exact-revision human approval | No |
 | M26 | `20260810141500_academy_curriculum_draft_collaborators.sql` | CW | `7c234539d46619ab41f6941a809d4fcdf834241f5dc8a5c3411ed4e398510121` | M25 | Draft-scoped collaborators | No |
 | M27 | `20260810144700_academy_admin_access_management.sql` | R3 | `56bb1b1efd798586f9abce6ada581e38f70bf0704ec4e93602062c6eef268bbe` | M21 | Admin access management | No |
-| M28 | `20260810150000_academy_curriculum_release_staging.sql` | RC | `e47f8d6b58843234f13315849d8b5fdb74f33433d13944733fd2fdea895c4aac` | M25 | Immutable release staging + integrity projection | **Yes**; extends frozen `1b54aed6…` staging bytes in place |
-| M29 | `20260810151000_academy_study_safety_provider_accounting.sql` | PA | `5bcdc8891538613ada2c5872016b6cbe00e11c763b8ec6bacf4e6f354241cef6` | M23 | Study safety cost dimensions | No |
+| M28 | `20260810150100_academy_curriculum_release_staging.sql` | RC | `e47f8d6b58843234f13315849d8b5fdb74f33433d13944733fd2fdea895c4aac` | M25 | Immutable release staging + integrity projection | **Yes**; extends frozen `1b54aed6…` staging bytes in place |
+| M29 | `20260810151100_academy_study_safety_provider_accounting.sql` | PA | `b0033d7337770abb5c68fc1330d3a0fc73ee733538115899461ce0020f0a998f` | M23 | Study safety cost dimensions composed with exact-pricing V2 | Final RC integration adjustment |
 | M30 | `20260810160000_academy_curriculum_release_publishing.sql` | RC | `ba9291c66af40dcc693532aef6db94f9bc4fa5b6937369407c8a3a7de2d5dece` | M28 | Publish staged curriculum | No |
 | M31 | `20260810170000_academy_curriculum_activation_rollback.sql` | RC | `6d7d3cbbe740e1153aa6303ae90480beec2dcac7e29fff91754e05c58614f0da` | M30 | Activation/default-pointer rollback | **Yes**; derived from and materially extends Release History's `20260810160000` artifact |
 | M32 | `20260810180000_academy_admin_correlation_runtime_read.sql` | CX | `7499d60258f5b61c1f9aec2bb3537834b0cb65c4648bc475b487dfb02d2b10d4` | M27 | Correlation explorer runtime seam | No |
@@ -87,7 +87,7 @@ unchanged and consumes the R3 configuration foundation.
 
 | Artifact | Source | SHA-256 | Ruling |
 | --- | --- | --- | --- |
-| `20260810150000_academy_curriculum_release_staging.sql` | CW / Release History | `1b54aed6f038051c1a1636e933a7ac312681484ce3019cd25e2c719941ee9c60` | Superseded by M28, which adds the service-only integrity projection and preserves its grant. |
+| `20260810150100_academy_curriculum_release_staging.sql` | CW / Release History | `1b54aed6f038051c1a1636e933a7ac312681484ce3019cd25e2c719941ee9c60` | Superseded by M28, which adds the service-only integrity projection and preserves its grant. |
 | `20260810160000_academy_curriculum_activation_rollback.sql` | Release History | `e3283b843b8503d4634ab7fda771529b6eccba1626d23d4fac9cb28dc48c3bf0` | Superseded by M31 after publishing; it lacks staged-publish activation verification and conflicts with M30's prefix. |
 
 No two differently named selected migrations have the same SHA-256. Manual

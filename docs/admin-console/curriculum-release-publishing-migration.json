@@ -4,8 +4,8 @@
   "status": "repository-only-not-applied-hosted",
   "dependsOn": [
     "20260809160000_academy_curriculum_release_registry.sql",
-    "20260810140000_academy_curriculum_human_approval.sql",
-    "20260810150000_academy_curriculum_release_staging.sql"
+    "20260810140100_academy_curriculum_human_approval.sql",
+    "20260810150100_academy_curriculum_release_staging.sql"
   ],
   "terminalState": "PUBLISHED, NOT ACTIVE"
 }

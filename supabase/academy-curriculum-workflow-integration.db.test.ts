@@ -11,10 +11,10 @@ const migrationUrls = [
   './migrations/20260810110000_academy_admin_audit_query_filters.sql',
   './migrations/20260810120000_academy_curriculum_draft_authoring.sql',
   './migrations/20260810130000_academy_curriculum_standards_review.sql',
-  './migrations/20260810140000_academy_curriculum_human_approval.sql',
+  './migrations/20260810140100_academy_curriculum_human_approval.sql',
   './migrations/20260810141500_academy_curriculum_draft_collaborators.sql',
-  './migrations/20260810150000_academy_curriculum_release_staging.sql',
-  './migrations/20260810155000_academy_curriculum_privacy_hardening.sql',
+  './migrations/20260810150100_academy_curriculum_release_staging.sql',
+  './migrations/20260810155100_academy_curriculum_privacy_hardening.sql',
 ].map((path) => new URL(path, import.meta.url))
 
 const bootstrap = `
