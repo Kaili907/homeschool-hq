@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { SKILL_BY_ID, type SkillId } from './skills'
-import type { AnswerRecord, AppState, Profile } from './types'
+import type { AnswerRecord, AppState, AutoKind, Profile } from './types'
 import { generateFresh } from './generators'
 import {
   downloadJson,
@@ -58,9 +58,15 @@ import type { DrillResult } from './typing/engine'
 import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
+import { currentWeek } from './mindset/mindset'
+import {
+  StudentDashboard,
+  type StudentDashboardComposition,
+} from './components/academy/dashboard/StudentDashboard'
+import type { AcademyCatalog, AcademySchedule } from './academy/contentTypes'
 import { isStudyEngineEnabledFromHost, isStudyEnginePreviewEnabledFromHost } from './study/featureFlag'
 import { isStudyEnginePath, leaveStudyEnginePath } from './studyEngineRoute'
-import { enabledAcademyEntries, hasEnabledAcademyProgram } from './academy/workingLevel'
+import { enabledAcademyEntries } from './academy/workingLevel'
 import { grade5MathPracticeAvailableFromHost } from './curriculum/practice/featureFlag'
 import {
   isGrade5MathPracticePath,
@@ -124,12 +130,22 @@ const StudySettings = import.meta.env.DEV
   ? lazy(() => import('./components/study/StudySettings').then((module) => ({ default: module.StudySettings })))
   : null
 
-// CURR-1: the Grade 5/7/8 curriculum surface. Lazy — the chunk (and the
-// curriculum content it fetches) loads only when an enabled academy grade opens
-// it, never on initial application load.
+// CURR-1: Grade 5/7/8 curriculum routing stays lazy; the universal dashboard
+// shell is synchronous so learner actions never disappear behind this chunk.
 const AcademyRouter = lazy(() =>
   import('./components/academy/AcademyRouter').then((module) => ({ default: module.AcademyRouter })),
 )
+
+const EMPTY_STUDENT_DASHBOARD_CATALOG: AcademyCatalog = {
+  releaseVersion: '',
+  grade: '5',
+  courses: [],
+}
+const EMPTY_STUDENT_DASHBOARD_SCHEDULE: AcademySchedule = {
+  releaseVersion: '',
+  grade: '5',
+  days: [],
+}
 
 // MOUNT-G5-MATH: the Grade 5 math practice surface. Lazy for the same reason as
 // the academy chunk — the ten unit generators load only when an enabled grade-5
@@ -145,6 +161,7 @@ type Screen =
   | { kind: 'kidPin'; profileId: string }
   | { kind: 'kidPinCreate'; profileId: string; firstEntry?: string }
   | { kind: 'home' }
+  | { kind: 'classicHome' }
   | { kind: 'placement'; order: SkillId[] }
   | { kind: 'placementResults'; results: PlacementSkillResult[] }
   | { kind: 'practice'; plan: PlanItem[] }
@@ -221,9 +238,9 @@ export default function App() {
     if (studyEnabled && loaded.state.activeProfileId && isStudyEnginePath(window.location.pathname)) {
       return { kind: 'studyDashboard' }
     }
-    // CURR-1 (MOUNT-2 pattern): an /academy deep link with a valid persisted
-    // profile that reaches an enabled academy level lands on the academy
-    // surface; any other case falls through to the picker/normal app.
+    // UI-HOME-1 (MOUNT-2 pattern): an /academy deep link with a valid persisted
+    // profile lands on the dashboard shell. Program entries gate the curriculum
+    // inside that shell; no persisted learner still falls through to the picker.
     const bootProfile = loaded.state.activeProfileId
       ? loaded.state.profiles[loaded.state.activeProfileId]
       : null
@@ -238,7 +255,7 @@ export default function App() {
     ) {
       return { kind: 'g5MathPractice' }
     }
-    if (bootProfile && hasEnabledAcademyProgram(bootProfile)) {
+    if (bootProfile) {
       const academyRoute = parseAcademyPath(window.location.pathname)
       if (academyRoute) return { kind: 'academy', route: academyRoute }
     }
@@ -711,6 +728,154 @@ export default function App() {
     setScreen({ kind: 'practice', plan: buildPracticePlan(p) })
   }
 
+  const today = isoToday()
+  const missionHomeScreen =
+    screen.kind === 'home' ||
+    screen.kind === 'classicHome' ||
+    (screen.kind === 'academy' && screen.route.kind === 'home')
+  const activeMissionDay = active?.missions[today]
+  useEffect(() => {
+    const profileId = active?.id
+    if (!missionHomeScreen || !profileId || activeMissionDay) return
+    setState((s) => patchProfile(s, profileId, (p) => ensureToday(p, today)))
+  }, [active?.id, activeMissionDay, missionHomeScreen, today])
+
+  const toggleMissionItem = (itemId: string, done: boolean) =>
+    patchActive((p) => {
+      const after = setItemDone(p, itemId, done)
+      // MS: a manual check that completes the day pays the mission (+weekly) bonus.
+      return starsEnabled(p) ? awardMissionEvents(p, after, getStarsConfig(state).rates) : after
+    })
+
+  const openStudentScreen = (next: Screen) => {
+    leaveAcademyPath()
+    setScreen(next)
+  }
+  const openClassicHome = () => openStudentScreen({ kind: 'classicHome' })
+  const trainerReady = active?.grade === '3' || active?.grade === '4' || active?.grade === '6'
+  const highSchool = active?.grade === '10' || active?.grade === '12'
+  const mindsetUnlocked = currentWeek(state.mindsetStartDate, today) > 0
+  const launchableMissionKinds: AutoKind[] = active
+    ? [
+        ...(trainerReady ? (['math'] as const) : []),
+        ...(!highSchool ? (['typing', 'reading'] as const) : []),
+        ...(mindsetUnlocked ? (['mindset'] as const) : []),
+      ]
+    : []
+  const launchMission = (kind: AutoKind) => {
+    if (!active || !launchableMissionKinds.includes(kind)) return
+    leaveAcademyPath()
+    if (kind === 'math') startPractice(active)
+    else if (kind === 'typing') setScreen({ kind: 'typing' })
+    else if (kind === 'reading') setScreen({ kind: 'reading' })
+    else if (kind === 'mindset') setScreen({ kind: 'mindset' })
+  }
+
+  const dashboardComposition: StudentDashboardComposition | undefined = active
+    ? {
+        onSignOut: signOut,
+        mission: {
+          day: activeMissionDay,
+          launchableKinds: launchableMissionKinds,
+          onToggle: toggleMissionItem,
+          onLaunch: launchMission,
+        },
+        tools: [
+          ...assignedOpenTests(active).map(({ test, status }) => ({
+            id: `assessment:${test.id}`,
+            title: test.title,
+            description:
+              status === 'in-progress'
+                ? 'In progress — see Dad to continue'
+                : 'Placement — see Dad before starting',
+            onOpen: () => openStudentScreen({ kind: 'assessment', testId: test.id }),
+          })),
+          ...(!highSchool
+            ? [
+                {
+                  id: 'reading',
+                  title: 'Reading',
+                  description: "Read today's passage aloud",
+                  onOpen: () => openStudentScreen({ kind: 'reading' }),
+                },
+                {
+                  id: 'typing',
+                  title: 'Typing — 5 min',
+                  description: 'Practice the current typing drill',
+                  onOpen: () => openStudentScreen({ kind: 'typing' }),
+                },
+              ]
+            : []),
+          ...(trainerReady
+            ? [
+                {
+                  id: 'placement',
+                  title: active.placementDone ? 'Retake Placement Quest' : 'Placement Quest',
+                  description: 'Map out your current math skills',
+                  onOpen: () =>
+                    openStudentScreen({ kind: 'placement', order: placementOrder(active.grade) }),
+                },
+                {
+                  id: 'practice',
+                  title: 'Daily Practice',
+                  description: 'Practice questions picked for you',
+                  onOpen: () => {
+                    leaveAcademyPath()
+                    startPractice(active)
+                  },
+                },
+              ]
+            : []),
+          ...(grade5MathPracticeAvailableFromHost(active)
+            ? [
+                {
+                  id: 'grade-5-math',
+                  title: 'Grade 5 Math',
+                  description: 'Practice a curriculum unit',
+                  onOpen: () => openStudentScreen({ kind: 'g5MathPractice' }),
+                },
+              ]
+            : []),
+          ...(mindsetUnlocked
+            ? [
+                {
+                  id: 'mindset',
+                  title: 'Mindset',
+                  description: 'Open this week’s reflection',
+                  onOpen: () => launchMission('mindset'),
+                },
+              ]
+            : []),
+          ...(studyPreviewReady || studyProductionSelected
+            ? [
+                {
+                  id: 'study',
+                  title: 'Today’s Study plan',
+                  description: studyPreviewReady
+                    ? 'Launch the explicit local Study preview'
+                    : 'Check whether Study is available',
+                  onOpen: () => openStudentScreen({ kind: 'studyDashboard' }),
+                },
+              ]
+            : []),
+          {
+            id: 'classic-home',
+            title: highSchool ? 'High-school workspace' : 'More learning tools',
+            description: 'Open the classic learning workspace',
+            onOpen: openClassicHome,
+          },
+        ],
+        ...(starsEnabled(active)
+          ? {
+              rewards: {
+                stars: getStars(active).balance,
+                onOpenShop: () => openStudentScreen({ kind: 'prizeShop' }),
+              },
+            }
+          : {}),
+      }
+    : undefined
+
   // ---------- profile-free screens ----------
 
   if (screen.kind === 'picker') {
@@ -907,6 +1072,24 @@ export default function App() {
   }
 
   // MA mount point — self-styled (clean), rendered full-bleed outside the theme wrapper
+  const navigateAcademy = (route: AcademyRoute) => {
+    syncAcademyPath(route)
+    setScreen({ kind: 'academy', route })
+  }
+  const loadingStudentDashboard = (
+    <StudentDashboard
+      profile={active}
+      catalog={EMPTY_STUDENT_DASHBOARD_CATALOG}
+      schedule={EMPTY_STUDENT_DASHBOARD_SCHEDULE}
+      levelOf={{}}
+      schoolYear={state.schoolYear}
+      academyStatus="loading"
+      onNavigate={navigateAcademy}
+      onExit={openClassicHome}
+      dashboard={dashboardComposition}
+    />
+  )
+
   if (
     screen.kind === 'studyDashboard' ||
     screen.kind === 'studySettings' ||
@@ -1010,37 +1193,43 @@ export default function App() {
     )
   }
 
+  // The normal learner home is the Academy dashboard shell. Curriculum entries
+  // decide what appears inside it; they do not decide whether the shell mounts.
+  if (screen.kind === 'home') {
+    return (
+      <Suspense fallback={loadingStudentDashboard}>
+        <AcademyRouter
+          profile={active}
+          entries={academyEntries}
+          schoolYear={state.schoolYear}
+          route={{ kind: 'home' }}
+          onNavigate={navigateAcademy}
+          onPatch={patchActive}
+          onExit={openClassicHome}
+          dashboard={dashboardComposition}
+        />
+      </Suspense>
+    )
+  }
+
   // CURR-1 academy mount point — self-styled, rendered full-bleed like Study.
   if (screen.kind === 'academy') {
-    if (academyEntries.length === 0) {
-      // Flag off, or a girl with no enabled working level, signed in behind a
-      // stale /academy URL.
-      return (
-        <StudyUnavailable
-          reason="The Academy curriculum is not enabled for this learner."
-          onBack={() => {
-            leaveAcademyPath()
-            setScreen({ kind: 'home' })
-          }}
-        />
-      )
-    }
     return (
-      <Suspense fallback={<StudyLoading />}>
+      <Suspense
+        fallback={screen.route.kind === 'home' ? loadingStudentDashboard : <AcademyRouteLoading />}
+      >
         <AcademyRouter
           profile={active}
           entries={academyEntries}
           schoolYear={state.schoolYear}
           route={screen.route}
-          onNavigate={(route) => {
-            syncAcademyPath(route)
-            setScreen({ kind: 'academy', route })
-          }}
+          onNavigate={navigateAcademy}
           onPatch={patchActive}
           onExit={() => {
             leaveAcademyPath()
             setScreen({ kind: 'home' })
           }}
+          dashboard={dashboardComposition}
         />
       </Suspense>
     )
@@ -1160,46 +1349,48 @@ export default function App() {
           />
         )}
 
-        {screen.kind === 'home' && (
-          <Home
-            profile={active}
-            muted={isMuted(state)}
-            onEnsureToday={() => patchActive((p) => ensureToday(p))}
-            onToggleItem={(itemId, done) =>
-              patchActive((p) => {
-                const after = setItemDone(p, itemId, done)
-                // MS: a manual check that completes the day pays the mission (+weekly) bonus
-                return starsEnabled(p)
-                  ? awardMissionEvents(p, after, getStarsConfig(state).rates)
-                  : after
-              })
-            }
-            onProfileChange={patchActive}
-            onSignOut={signOut}
-            onPlacement={() => setScreen({ kind: 'placement', order: placementOrder(active.grade) })}
-            onPractice={() => startPractice(active)}
-            onOpenShop={() => setScreen({ kind: 'prizeShop' })}
-            onOpenAssessment={(testId) => setScreen({ kind: 'assessment', testId })}
-            onOpenTyping={() => setScreen({ kind: 'typing' })}
-            onOpenReading={() => setScreen({ kind: 'reading' })}
-            onOpenMindset={() => setScreen({ kind: 'mindset' })}
-            onOpenStudy={studyPreviewReady || studyProductionSelected ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
-            studyMode={studyPreviewReady ? 'preview' : studyProductionSelected ? 'unavailable' : undefined}
-            onOpenAcademy={
-              academyEntries.length > 0
-                ? () => {
-                    syncAcademyPath({ kind: 'home' })
-                    setScreen({ kind: 'academy', route: { kind: 'home' } })
-                  }
-                : undefined
-            }
-            onOpenG5MathPractice={
-              grade5MathPracticeAvailableFromHost(active)
-                ? () => setScreen({ kind: 'g5MathPractice' })
-                : undefined
-            }
-            mindsetStartDate={state.mindsetStartDate}
-          />
+        {screen.kind === 'classicHome' && (
+          <>
+            <div className="mx-auto w-full max-w-4xl px-4 pt-4">
+              <button
+                type="button"
+                className={`${tokens.secondaryBtn} min-h-11 px-4 py-2 text-sm`}
+                onClick={() => setScreen({ kind: 'home' })}
+              >
+                ← Student Dashboard
+              </button>
+            </div>
+            <Home
+              profile={active}
+              muted={isMuted(state)}
+              onToggleItem={toggleMissionItem}
+              onProfileChange={patchActive}
+              onSignOut={signOut}
+              onPlacement={() => setScreen({ kind: 'placement', order: placementOrder(active.grade) })}
+              onPractice={() => startPractice(active)}
+              onOpenShop={() => setScreen({ kind: 'prizeShop' })}
+              onOpenAssessment={(testId) => setScreen({ kind: 'assessment', testId })}
+              onOpenTyping={() => setScreen({ kind: 'typing' })}
+              onOpenReading={() => setScreen({ kind: 'reading' })}
+              onOpenMindset={() => setScreen({ kind: 'mindset' })}
+              onOpenStudy={studyPreviewReady || studyProductionSelected ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
+              studyMode={studyPreviewReady ? 'preview' : studyProductionSelected ? 'unavailable' : undefined}
+              onOpenAcademy={
+                academyEntries.length > 0
+                  ? () => {
+                      syncAcademyPath({ kind: 'home' })
+                      setScreen({ kind: 'academy', route: { kind: 'home' } })
+                    }
+                  : undefined
+              }
+              onOpenG5MathPractice={
+                grade5MathPracticeAvailableFromHost(active)
+                  ? () => setScreen({ kind: 'g5MathPractice' })
+                  : undefined
+              }
+              mindsetStartDate={state.mindsetStartDate}
+            />
+          </>
         )}
 
         {/*
@@ -1277,17 +1468,35 @@ export default function App() {
   )
 }
 
-function StudyUnavailable({ reason, onBack }: { reason: string; onBack: () => void }) {
+function StudyUnavailable({
+  title = 'Study is not available yet',
+  reason,
+  note = 'No Study persistence or safety request was made.',
+  onBack,
+}: {
+  title?: string
+  reason: string
+  note?: string | null
+  onBack: () => void
+}) {
   const headingRef = useRef<HTMLHeadingElement>(null)
   useEffect(() => { headingRef.current?.focus() }, [])
   return (
     <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900">
       <div className="mx-auto max-w-xl rounded-2xl border border-amber-200 bg-amber-50 p-6">
-        <h1 ref={headingRef} className="text-2xl font-bold" tabIndex={-1}>Study is not available yet</h1>
+        <h1 ref={headingRef} className="text-2xl font-bold" tabIndex={-1}>{title}</h1>
         <p className="mt-2">{reason}</p>
-        <p className="mt-2 text-sm">No Study persistence or safety request was made.</p>
+        {note && <p className="mt-2 text-sm">{note}</p>}
         <button className="mt-4 min-h-11 rounded-lg border border-amber-500 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
       </div>
+    </main>
+  )
+}
+
+function AcademyRouteLoading() {
+  return (
+    <main className="min-h-screen bg-slate-50 p-6 text-slate-900" aria-busy="true">
+      <p role="status">Loading Academy…</p>
     </main>
   )
 }
@@ -1305,7 +1514,6 @@ function StudyLoading() {
 function Home({
   profile,
   muted,
-  onEnsureToday,
   onToggleItem,
   onProfileChange,
   onSignOut,
@@ -1324,7 +1532,6 @@ function Home({
 }: {
   profile: Profile
   muted: boolean
-  onEnsureToday: () => void
   onToggleItem: (itemId: string, done: boolean) => void
   onProfileChange: (update: (prev: Profile) => Profile) => void
   onSignOut: () => void
@@ -1346,10 +1553,6 @@ function Home({
   const t = useTheme()
   const assessmentCards = assignedOpenTests(profile)
   const isTrainerReady = profile.grade === '3' || profile.grade === '4' || profile.grade === '6'
-  const hasToday = !!profile.missions[isoToday()]
-  useEffect(() => {
-    if (!hasToday) onEnsureToday()
-  }, [hasToday, onEnsureToday])
   // M4 mount point: the two teens get high-school mode (real code in HighSchoolHome)
   if (profile.grade === '10' || profile.grade === '12') {
     return (
@@ -1358,7 +1561,6 @@ function Home({
         onProfileChange={onProfileChange}
         onSignOut={onSignOut}
         onToggleItem={onToggleItem}
-        muted={muted}
         assessmentCards={assessmentCards}
         onOpenAssessment={onOpenAssessment}
         onOpenMindset={onOpenMindset}
@@ -1463,7 +1665,7 @@ function Home({
           <span>
             <span className="block text-2xl font-extrabold">Manuel Academy</span>
             <span className="block font-bold opacity-90">
-              Today&apos;s lessons, your courses, and the year schedule
+              Academy lessons, your courses, and the year schedule
             </span>
           </span>
         </button>

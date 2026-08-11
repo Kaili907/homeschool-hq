@@ -71,11 +71,32 @@ site URL. Add a key in **Grown-Ups → AI Tutor** is **no longer needed** on the
 deployed site — the proxy supplies it. (The in-app key field still works and is
 only used if you ever run the direct/local build.)
 
-## Step 6 — Redeploying later
-Any `git push` to `main` auto-deploys. To redeploy without code changes:
-Netlify → **Deploys → Trigger deploy → Clear cache and deploy site**. Each deploy
-gets a fresh service-worker cache id, so returning visitors pick up the new
-version automatically (old offline caches are cleared).
+## Step 6 — Production builds and controlled publication
+A push to the production branch may cause Netlify to create a production build
+candidate. When **Auto Publishing is OFF / locked**, a successful candidate does
+**not** automatically become the live production deploy.
+
+Use this controlled publication procedure:
+
+1. Push the reviewed exact `master` SHA. Never push `master` merely to trigger a
+   redeploy.
+2. Allow Netlify to create the candidate, or find the candidate Netlify already
+   created for that push.
+3. Verify the site, branch, deploy ID, and exact Git SHA.
+4. Verify the candidate build is successful and ready.
+5. Record the currently published deploy as the rollback deploy.
+6. Use **Publish deploy** on that exact identified candidate.
+7. Do **not** enable ongoing auto-publishing merely to publish the candidate.
+8. Verify the exact candidate becomes **Published**.
+9. Verify production remains **Published & locked**.
+10. Verify **Auto Publishing remains OFF**.
+11. Perform the production smoke.
+12. Record the deploy ID, exact Git SHA, publication time, and final custody.
+
+Do not infer deploy identity from appearance, publish an unidentified deploy, or
+unlock continuous auto-publishing as a routine publication step. A manually
+triggered rebuild is also only a candidate until the same identity, readiness,
+publication, lock, and smoke checks are complete.
 
 ## Step 7 — Verify the keys are NOT in the client bundle
 Two easy checks:
@@ -224,5 +245,8 @@ identified, the migration is applied there, and the hosted role plus two-client 
 pass.
 
 ## Rolling back
-Netlify → **Deploys** → pick a previous green deploy → **Publish deploy**. Or in
-git, deploy an older tag by pushing it as `main`.
+Netlify → **Deploys** → identify the recorded rollback deploy by exact deploy ID
+and source SHA, verify it is ready, then use **Publish deploy**. Re-verify the
+published deploy identity, production smoke, **Published & locked** state, and
+that **Auto Publishing remains OFF**. Do not push an older tag to the production
+branch or publish a deploy identified only by appearance.
