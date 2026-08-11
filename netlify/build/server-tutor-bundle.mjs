@@ -25,6 +25,17 @@ export const SERVER_TUTOR_BUNDLE_FILE = 'server-tutor.mjs'
 export const SERVER_TUTOR_MANIFEST_FILE = 'server-tutor.manifest.json'
 export const SERVER_TUTOR_ENTRY_POINT = 'netlify/build/server-tutor-entry.ts'
 export const DEFAULT_SERVER_TUTOR_OUTPUT_DIRECTORY = 'netlify/build/generated'
+export const HOST_CONTENT_MAPPING_SCHEMA_VERSION = 'study-tutor-host-mapping.v1'
+
+const TEST_HOST_CONTENT_MAPPING_SCHEMA_VERSION = 'study-host-content-mapping.test-fixture.v1'
+const PRODUCTION_MAPPING_ARTIFACT_KIND = 'production-reviewed'
+const TEST_MAPPING_ARTIFACT_KIND = 'test-fixture'
+const TEST_MAPPING_COMPATIBILITY_STATUS = 'test-fixture-only'
+const PRODUCTION_MAPPING_COMPATIBILITY_STATUSES = new Set([
+  'approved',
+  'no-approved-mapping-under-current-frozen-runtime',
+])
+const ACADEMY_MANIFEST_PATH = 'curriculum-content/manuel-academy/1.0.0/MANIFEST.json'
 
 /** The complete production Tutor surface retained for the feasibility gate. */
 export const PRODUCTION_TUTOR_ENTRY_POINTS = Object.freeze([
@@ -185,7 +196,141 @@ function validSha256(value) {
   return typeof value === 'string' && /^[0-9a-f]{64}$/.test(value)
 }
 
-async function resolveHostContentMapping(mapping) {
+function requiredRecord(value, label) {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error(`${label} is required.`)
+  }
+  return value
+}
+
+function requiredString(value, label) {
+  if (typeof value !== 'string' || value.trim() === '') throw new Error(`${label} is required.`)
+  return value
+}
+
+function requiredSha256(value, label) {
+  if (!validSha256(value)) throw new Error(`${label} must be a lower-case SHA-256 value.`)
+  return value
+}
+
+function mappingVersion(value, label) {
+  if (!Number.isSafeInteger(value) || value <= 0) {
+    throw new Error(`${label} must be a positive integer.`)
+  }
+  return value
+}
+
+function resolveTestMappingArtifact(bytes) {
+  const artifact = requiredRecord(parseJson(bytes, 'Test host-content mapping fixture'), 'Test mapping envelope')
+  if (artifact.schemaVersion !== TEST_HOST_CONTENT_MAPPING_SCHEMA_VERSION) {
+    throw new Error(`Test mapping schemaVersion must be ${TEST_HOST_CONTENT_MAPPING_SCHEMA_VERSION}.`)
+  }
+  if (artifact.artifactKind !== TEST_MAPPING_ARTIFACT_KIND) {
+    throw new Error(`Test mapping artifactKind must be ${TEST_MAPPING_ARTIFACT_KIND}.`)
+  }
+  const version = mappingVersion(artifact.mappingVersion, 'Test mappingVersion')
+  if (artifact.compatibilityStatus !== TEST_MAPPING_COMPATIBILITY_STATUS) {
+    throw new Error(`Test mapping compatibilityStatus must be ${TEST_MAPPING_COMPATIBILITY_STATUS}.`)
+  }
+  return Object.freeze({
+    schemaVersion: artifact.schemaVersion,
+    artifactKind: artifact.artifactKind,
+    mappingVersion: version,
+    compatibilityStatus: artifact.compatibilityStatus,
+  })
+}
+
+async function resolveProductionMappingArtifact(bytes, frozen) {
+  const artifact = requiredRecord(
+    parseJson(bytes, 'Production host-content mapping artifact'),
+    'Production mapping envelope',
+  )
+  if (artifact.schemaVersion === undefined) {
+    throw new Error('Production mapping schemaVersion is required.')
+  }
+  if (artifact.schemaVersion !== HOST_CONTENT_MAPPING_SCHEMA_VERSION) {
+    throw new Error(`Unsupported production mapping schemaVersion: ${String(artifact.schemaVersion)}`)
+  }
+  if (artifact.artifactKind !== PRODUCTION_MAPPING_ARTIFACT_KIND) {
+    throw new Error(`Production mapping artifactKind must be ${PRODUCTION_MAPPING_ARTIFACT_KIND}.`)
+  }
+  if (artifact.mappingVersion === undefined) {
+    throw new Error('Production mappingVersion is required.')
+  }
+  const version = mappingVersion(artifact.mappingVersion, 'Production mappingVersion')
+  if (!PRODUCTION_MAPPING_COMPATIBILITY_STATUSES.has(artifact.compatibilityStatus)) {
+    throw new Error('Production mapping compatibilityStatus is unsupported.')
+  }
+
+  const sourceCustody = requiredRecord(artifact.sourceCustody, 'Production mapping sourceCustody')
+  const academy = requiredRecord(sourceCustody.academy, 'Production mapping Academy custody')
+  const frozenTutor = requiredRecord(sourceCustody.frozenTutor, 'Production mapping frozen Tutor custody')
+  const academyPackageId = requiredString(academy.packageId, 'Production mapping Academy packageId')
+  const academyRelease = requiredString(academy.release, 'Production mapping Academy release')
+  const academyManifestSha256 = requiredSha256(
+    academy.manifestSha256,
+    'Production mapping Academy manifestSha256',
+  )
+  const frozenPackageName = requiredString(
+    frozenTutor.packageName,
+    'Production mapping frozen Tutor packageName',
+  )
+  const frozenPackageVersion = requiredString(
+    frozenTutor.packageVersion,
+    'Production mapping frozen Tutor packageVersion',
+  )
+  const frozenChecksumManifestSha256 = requiredSha256(
+    frozenTutor.checksumManifestSha256,
+    'Production mapping frozen Tutor checksumManifestSha256',
+  )
+
+  const academyManifestBytes = await requiredFile(
+    fileURLToPath(new URL(ACADEMY_MANIFEST_PATH, repoRoot)),
+    'Academy curriculum manifest',
+  )
+  const academyManifest = parseJson(academyManifestBytes, 'Academy curriculum manifest')
+  if (academyPackageId !== academyManifest.package_id) {
+    throw new Error(`Production mapping Academy package mismatch: ${academyPackageId}`)
+  }
+  if (academyRelease !== academyManifest.version) {
+    throw new Error(`Production mapping Academy release mismatch: ${academyRelease}`)
+  }
+  if (academyManifestSha256 !== sha256(academyManifestBytes)) {
+    throw new Error(`Production mapping Academy manifest digest mismatch: ${academyManifestSha256}`)
+  }
+  if (frozenPackageName !== frozen.packageName) {
+    throw new Error(`Production mapping frozen Tutor package mismatch: ${frozenPackageName}`)
+  }
+  if (frozenPackageVersion !== frozen.packageVersion) {
+    throw new Error(`Production mapping frozen Tutor version mismatch: ${frozenPackageVersion}`)
+  }
+  if (frozenChecksumManifestSha256 !== frozen.checksumManifestSha256) {
+    throw new Error(
+      `Production mapping frozen Tutor checksum manifest mismatch: ${frozenChecksumManifestSha256}`,
+    )
+  }
+
+  return Object.freeze({
+    schemaVersion: artifact.schemaVersion,
+    artifactKind: artifact.artifactKind,
+    mappingVersion: version,
+    compatibilityStatus: artifact.compatibilityStatus,
+    sourceCustody: Object.freeze({
+      academy: Object.freeze({
+        packageId: academyPackageId,
+        release: academyRelease,
+        manifestSha256: academyManifestSha256,
+      }),
+      frozenTutor: Object.freeze({
+        packageName: frozenPackageName,
+        packageVersion: frozenPackageVersion,
+        checksumManifestSha256: frozenChecksumManifestSha256,
+      }),
+    }),
+  })
+}
+
+async function resolveHostContentMapping(mapping, frozen) {
   if (mapping?.mode === 'test') {
     if (!mapping.fixturePath) throw new Error('Test mode requires a dedicated mapping fixture.')
     if (mapping.artifactPath || mapping.expectedSha256) {
@@ -193,8 +338,10 @@ async function resolveHostContentMapping(mapping) {
     }
     const fixturePath = resolveRepoArtifact(mapping.fixturePath, 'Test host-content mapping fixture')
     const bytes = await requiredFile(fixturePath, 'Test host-content mapping fixture')
+    const metadata = resolveTestMappingArtifact(bytes)
     return Object.freeze({
       status: 'test-fixture',
+      ...metadata,
       artifactPath: repoRelativePath(fixturePath),
       sha256: sha256(bytes),
     })
@@ -206,9 +353,6 @@ async function resolveHostContentMapping(mapping) {
   if (!mapping.artifactPath || !mapping.expectedSha256) {
     throw new Error('Production mode requires a reviewed mapping artifact and SHA-256 digest.')
   }
-  if (/\.test\.[^/\\]+$/i.test(mapping.artifactPath)) {
-    throw new Error('A test mapping fixture cannot be used in production mode.')
-  }
   if (!validSha256(mapping.expectedSha256)) {
     throw new Error('Production mapping digest must be a lower-case SHA-256 value.')
   }
@@ -218,8 +362,10 @@ async function resolveHostContentMapping(mapping) {
   if (actual !== mapping.expectedSha256) {
     throw new Error(`Production host-content mapping digest mismatch: ${actual}`)
   }
+  const metadata = await resolveProductionMappingArtifact(bytes, frozen)
   return Object.freeze({
     status: 'production-reviewed',
+    ...metadata,
     artifactPath: repoRelativePath(artifactPath),
     sha256: actual,
   })
@@ -277,11 +423,11 @@ function assertServerOnlyModuleGraph(metafile) {
 
 /** Builds and atomically publishes the server-only bundle and manifest. */
 export async function buildServerTutorPrebundle({ mapping, outputDirectory, buildSourceSha } = {}) {
-  const [frozen, hostContentMapping, adapterContractVersion] = await Promise.all([
+  const [frozen, adapterContractVersion] = await Promise.all([
     verifyFrozenTutorCustody(),
-    resolveHostContentMapping(mapping),
     readTutorContractVersion(),
   ])
+  const hostContentMapping = await resolveHostContentMapping(mapping, frozen)
   const outputRoot = safeOutputDirectory(outputDirectory, mapping?.mode === 'test')
   const result = await build({
     ...NETLIFY_FUNCTION_BUILD,

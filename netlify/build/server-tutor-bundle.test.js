@@ -17,13 +17,14 @@ import { createHash } from 'node:crypto'
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, relative } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest'
 import { viteConfig } from '../../vite.config'
 import {
   DEFAULT_SERVER_TUTOR_OUTPUT_DIRECTORY,
   FROZEN_PACKAGE_ALIAS_SOURCES,
+  HOST_CONTENT_MAPPING_SCHEMA_VERSION,
   NETLIFY_FUNCTION_BUILD,
   PRODUCTION_TUTOR_ENTRY_POINTS,
   SERVER_TUTOR_ARTIFACT_SCHEMA_VERSION,
@@ -299,6 +300,35 @@ describe('server-side Tutor build feasibility', () => {
 
 const repoRootPath = fileURLToPath(repoRoot)
 const TEST_MAPPING_FIXTURE = 'netlify/build/host-content-mapping.test.json'
+const ACADEMY_MANIFEST_SHA256 = '38e6f27c24ec5371e4647364c088984fa0e1dbe25e1312847108a6d56d7404be'
+
+function productionMappingArtifact(overrides = {}) {
+  return {
+    schemaVersion: HOST_CONTENT_MAPPING_SCHEMA_VERSION,
+    artifactKind: 'production-reviewed',
+    mappingVersion: 1,
+    compatibilityStatus: 'approved',
+    sourceCustody: {
+      academy: {
+        packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
+        release: '1.0.0',
+        manifestSha256: ACADEMY_MANIFEST_SHA256,
+      },
+      frozenTutor: {
+        packageName: '@manuel-academy/adaptive-tutor-math-content',
+        packageVersion: '1.0.2',
+        checksumManifestSha256: 'a9c44585d36e120dfac6b95aade0cf77763cabeff1026490672244dbc87f27ee',
+      },
+    },
+    lessonMappings: [
+      {
+        lessonRef: 'math-lesson-04-multistep-word-problem-reasoning',
+        skillRef: SEQUENCE_04_ID,
+      },
+    ],
+    ...overrides,
+  }
+}
 
 async function relativeFiles(root) {
   const entries = await readdir(root, { recursive: true, withFileTypes: true })
@@ -310,6 +340,7 @@ async function relativeFiles(root) {
 
 describe('production-grade server Tutor prebundle', () => {
   let workingDirectory
+  let productionFixtureDirectory
   let first
   let second
   let bundleText
@@ -318,6 +349,7 @@ describe('production-grade server Tutor prebundle', () => {
 
   beforeAll(async () => {
     workingDirectory = await mkdtemp(join(tmpdir(), 'study-server-tutor-prebundle-'))
+    productionFixtureDirectory = await mkdtemp(join(repoRootPath, 'netlify', 'build', '.mapping-test-'))
     functionFilesBefore = await relativeFiles(join(repoRootPath, 'netlify', 'functions'))
     first = await buildServerTutorPrebundle({
       mapping: { mode: 'test', fixturePath: TEST_MAPPING_FIXTURE },
@@ -336,7 +368,35 @@ describe('production-grade server Tutor prebundle', () => {
 
   afterAll(async () => {
     if (workingDirectory) await rm(workingDirectory, { recursive: true, force: true })
+    if (productionFixtureDirectory) {
+      await rm(productionFixtureDirectory, { recursive: true, force: true })
+    }
   })
+
+  async function writeProductionArtifact(name, artifact) {
+    const bytes = Buffer.isBuffer(artifact)
+      ? artifact
+      : Buffer.from(typeof artifact === 'string' ? artifact : `${JSON.stringify(artifact, null, 2)}\n`)
+    const artifactPath = join(productionFixtureDirectory, name)
+    await writeFile(artifactPath, bytes)
+    return {
+      artifactPath: relative(repoRootPath, artifactPath).replaceAll('\\', '/'),
+      sha256: createHash('sha256').update(bytes).digest('hex'),
+    }
+  }
+
+  async function buildProductionArtifact(name, artifact, expectedSha256) {
+    const written = await writeProductionArtifact(name, artifact)
+    return buildServerTutorPrebundle({
+      mapping: {
+        mode: 'production',
+        artifactPath: written.artifactPath,
+        expectedSha256: expectedSha256 ?? written.sha256,
+      },
+      outputDirectory: join(productionFixtureDirectory, `output-${name}`),
+      buildSourceSha: null,
+    })
+  }
 
   it('feeds browser Vite and server esbuild from one canonical alias authority', () => {
     expect(viteConfig.resolve?.alias).toBe(frozenPackageAliases)
@@ -417,6 +477,10 @@ describe('production-grade server Tutor prebundle', () => {
       },
       hostContentMapping: {
         status: 'test-fixture',
+        schemaVersion: 'study-host-content-mapping.test-fixture.v1',
+        artifactKind: 'test-fixture',
+        mappingVersion: 1,
+        compatibilityStatus: 'test-fixture-only',
         artifactPath: TEST_MAPPING_FIXTURE,
         sha256: expectedMappingDigest,
       },
@@ -451,15 +515,111 @@ describe('production-grade server Tutor prebundle', () => {
   })
 
   it('allows the dedicated mapping fixture only in explicit test mode', async () => {
-    await expect(buildServerTutorPrebundle({
-      mapping: {
-        mode: 'production',
-        artifactPath: TEST_MAPPING_FIXTURE,
-        expectedSha256: '0'.repeat(64),
-      },
-      outputDirectory: join(workingDirectory, 'fixture-in-production'),
-    })).rejects.toThrow('test mapping fixture cannot be used in production mode')
-    expect(first.manifest.hostContentMapping.status).toBe('test-fixture')
+    const fixtureBytes = await readFile(fileURLToPath(new URL(TEST_MAPPING_FIXTURE, repoRoot)))
+    await expect(buildProductionArtifact('reviewed-production-mapping.json', fixtureBytes))
+      .rejects.toThrow('Unsupported production mapping schemaVersion')
+    expect(first.manifest.hostContentMapping).toMatchObject({
+      status: 'test-fixture',
+      schemaVersion: 'study-host-content-mapping.test-fixture.v1',
+      artifactKind: 'test-fixture',
+      mappingVersion: 1,
+      compatibilityStatus: 'test-fixture-only',
+    })
+  })
+
+  it('accepts a reviewed approved artifact according to contents even under a .test filename', async () => {
+    const result = await buildProductionArtifact('whatever.test.json', productionMappingArtifact())
+    expect(result.manifest.hostContentMapping).toEqual({
+      status: 'production-reviewed',
+      schemaVersion: HOST_CONTENT_MAPPING_SCHEMA_VERSION,
+      artifactKind: 'production-reviewed',
+      mappingVersion: 1,
+      compatibilityStatus: 'approved',
+      sourceCustody: productionMappingArtifact().sourceCustody,
+      artifactPath: expect.stringMatching(/whatever\.test\.json$/),
+      sha256: expect.stringMatching(/^[0-9a-f]{64}$/),
+    })
+  })
+
+  it('accepts an honestly empty reviewed production compatibility artifact', async () => {
+    const result = await buildProductionArtifact('no-approved-mapping.json', productionMappingArtifact({
+      compatibilityStatus: 'no-approved-mapping-under-current-frozen-runtime',
+      lessonMappings: [],
+    }))
+    expect(result.manifest.hostContentMapping.compatibilityStatus)
+      .toBe('no-approved-mapping-under-current-frozen-runtime')
+  })
+
+  it('rejects test artifactKind even when the production schemaVersion is claimed', async () => {
+    await expect(buildProductionArtifact('test-kind.json', productionMappingArtifact({
+      artifactKind: 'test-fixture',
+    }))).rejects.toThrow('artifactKind must be production-reviewed')
+  })
+
+  it('rejects an unsupported production mapping schemaVersion', async () => {
+    await expect(buildProductionArtifact('wrong-schema.json', productionMappingArtifact({
+      schemaVersion: 'study-tutor-host-mapping.v2',
+    }))).rejects.toThrow('Unsupported production mapping schemaVersion')
+  })
+
+  it('rejects a missing production mapping schemaVersion', async () => {
+    const artifact = productionMappingArtifact()
+    delete artifact.schemaVersion
+    await expect(buildProductionArtifact('missing-schema.json', artifact))
+      .rejects.toThrow('Production mapping schemaVersion is required')
+  })
+
+  it('rejects a missing production mappingVersion', async () => {
+    const artifact = productionMappingArtifact()
+    delete artifact.mappingVersion
+    await expect(buildProductionArtifact('missing-version.json', artifact))
+      .rejects.toThrow('Production mappingVersion is required')
+  })
+
+  it('rejects a non-positive production mappingVersion', async () => {
+    await expect(buildProductionArtifact('wrong-version.json', productionMappingArtifact({
+      mappingVersion: 0,
+    }))).rejects.toThrow('Production mappingVersion must be a positive integer')
+  })
+
+  it('rejects missing reviewed source custody pins', async () => {
+    await expect(buildProductionArtifact('missing-custody.json', productionMappingArtifact({
+      sourceCustody: undefined,
+    }))).rejects.toThrow('Production mapping sourceCustody is required')
+  })
+
+  it('rejects a mapping pinned to another frozen Tutor package', async () => {
+    const artifact = productionMappingArtifact()
+    artifact.sourceCustody.frozenTutor.packageName = '@manuel-academy/other-tutor-content'
+    await expect(buildProductionArtifact('wrong-frozen-package.json', artifact))
+      .rejects.toThrow('Production mapping frozen Tutor package mismatch')
+  })
+
+  it('rejects a mapping pinned to another frozen checksum manifest', async () => {
+    const artifact = productionMappingArtifact()
+    artifact.sourceCustody.frozenTutor.checksumManifestSha256 = '0'.repeat(64)
+    await expect(buildProductionArtifact('wrong-frozen-checksum.json', artifact))
+      .rejects.toThrow('Production mapping frozen Tutor checksum manifest mismatch')
+  })
+
+  it('rejects a mapping whose Academy manifest pin does not match custody', async () => {
+    const artifact = productionMappingArtifact()
+    artifact.sourceCustody.academy.manifestSha256 = '0'.repeat(64)
+    await expect(buildProductionArtifact('wrong-academy-manifest.json', artifact))
+      .rejects.toThrow('Production mapping Academy manifest digest mismatch')
+  })
+
+  it('rejects a production mapping digest mismatch independently of its envelope', async () => {
+    await expect(buildProductionArtifact(
+      'wrong-artifact-digest.json',
+      productionMappingArtifact(),
+      '0'.repeat(64),
+    )).rejects.toThrow('Production host-content mapping digest mismatch')
+  })
+
+  it('rejects invalid production mapping JSON with its correct digest', async () => {
+    await expect(buildProductionArtifact('invalid-json.json', '{not-json}\n'))
+      .rejects.toThrow('Production host-content mapping artifact is not valid JSON')
   })
 
   it('exports only the server factory and contract version', () => {

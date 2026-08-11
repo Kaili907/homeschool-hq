@@ -23,15 +23,51 @@ reviewed host-content mapping artifact and its independently reviewed SHA-256:
 npm run server-tutor:bundle -- --mapping-artifact <repo-relative-path> --mapping-digest <lower-case-sha256>
 ```
 
-The build hashes the artifact and refuses a mismatch. It records that digest in
-`hostContentMapping.sha256`; no production mapping digest is embedded or
-invented here. A file named as a test fixture is rejected in production mode.
+The build hashes the artifact and refuses a mismatch. Digest custody is an
+independent gate; a matching digest does not make arbitrary bytes a reviewed
+mapping. Production mode also parses the artifact and requires this envelope:
+
+```json
+{
+  "schemaVersion": "study-tutor-host-mapping.v1",
+  "artifactKind": "production-reviewed",
+  "mappingVersion": 1,
+  "compatibilityStatus": "approved",
+  "sourceCustody": {
+    "academy": {
+      "packageId": "manuel-academy-grades-5-7-8-curriculum-v1",
+      "release": "1.0.0",
+      "manifestSha256": "<lower-case-sha256>"
+    },
+    "frozenTutor": {
+      "packageName": "@manuel-academy/adaptive-tutor-math-content",
+      "packageVersion": "1.0.2",
+      "checksumManifestSha256": "<lower-case-sha256>"
+    }
+  }
+}
+```
+
+`mappingVersion` must be a positive integer. `compatibilityStatus` may instead
+be `no-approved-mapping-under-current-frozen-runtime`; an honestly empty
+reviewed artifact remains valid build custody and does not invent a Tutor route.
+The Academy fields are cross-checked against the repository release manifest,
+and the frozen fields are cross-checked against the same verified 91-file
+custody result used by the server bundle. Mapping rows remain T2 review scope.
+
+The manifest records the envelope metadata, source pins, artifact path and
+digest under `hostContentMapping`. Artifact contents, not the filename, decide
+whether production mode accepts it, so renaming a test fixture cannot promote
+it and renaming a valid production artifact cannot demote it.
 
 Tests may opt in to the dedicated non-production fixture only explicitly:
 
 ```text
 npm run server-tutor:bundle -- --mode test --test-fixture-mapping netlify/build/host-content-mapping.test.json
 ```
+
+That fixture declares its own test-only schema, `artifactKind` and
+`compatibilityStatus`; production mode cannot accept that identity.
 
 ## Production build order
 
