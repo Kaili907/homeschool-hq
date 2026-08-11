@@ -23,9 +23,10 @@ function projection() {
   }))
   return {
     contractVersion: 2,
-    schemaVersion: 1,
+    schemaVersion: 2,
     generatedAt: '2026-08-10T16:00:00.000Z',
     overallStatus: 'unknown',
+    workerEvidence: null,
     gates,
   }
 }
@@ -40,7 +41,7 @@ describe('authorized Admin Study Operations endpoint', () => {
     expect(response.statusCode).toBe(200)
     expect(require).toHaveBeenCalledWith(expect.anything(), 'health:read')
     expect(source.read).toHaveBeenCalledOnce()
-    expect(JSON.parse(response.body).gates).toHaveLength(10)
+    expect(JSON.parse(response.body).gates).toHaveLength(11)
   })
 
   it('fails closed before probing sources when permission is denied', async () => {

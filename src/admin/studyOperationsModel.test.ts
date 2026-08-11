@@ -8,8 +8,18 @@ import {
 
 const STATUSES: readonly StudyOperationStatus[] = [
   'ready', 'partial', 'manual_review', 'unavailable', 'not_configured',
-  'blocked', 'unknown', 'ready', 'partial', 'manual_review',
+  'blocked', 'unknown', 'ready', 'partial', 'manual_review', 'unavailable',
 ]
+
+const WORKER_EVIDENCE = {
+  schemaVersion: 1 as const,
+  configuredState: 'configured' as const,
+  latestRunTimestamp: '2026-08-10T14:00:00.000Z',
+  latestSuccessfulRunTimestamp: '2026-08-10T14:00:00.000Z',
+  latestResultCategory: 'processed' as const,
+  stalenessClassification: 'healthy' as const,
+  workerVersion: 'adult-review-worker.v2',
+}
 
 function projection() {
   const gates = STUDY_OPERATION_GATE_IDS.map((id, index) => ({
@@ -22,15 +32,16 @@ function projection() {
   }))
   return {
     contractVersion: 2,
-    schemaVersion: 1,
+    schemaVersion: 2,
     generatedAt: '2026-08-10T14:05:00.000Z',
     overallStatus: deriveStudyOperationsStatus(gates),
+    workerEvidence: WORKER_EVIDENCE,
     gates,
   }
 }
 
 describe('Admin Study Operations wire model', () => {
-  it('accepts the exact ordered ten-gate projection and every readiness status', () => {
+  it('accepts the exact ordered eleven-gate projection and every readiness status', () => {
     const decoded = decodeStudyOperationsProjection(projection())
     expect(decoded?.gates.map((gate) => gate.id)).toEqual(STUDY_OPERATION_GATE_IDS)
     expect(new Set(decoded?.gates.map((gate) => gate.status))).toEqual(new Set([
@@ -61,5 +72,13 @@ describe('Admin Study Operations wire model', () => {
 
     expect(decodeStudyOperationsProjection({ ...projection(), overallStatus: 'ready' })).toBeNull()
     expect(decodeStudyOperationsProjection({ ...projection(), generatedAt: 'yesterday' })).toBeNull()
+    expect(decodeStudyOperationsProjection({
+      ...projection(),
+      workerEvidence: { ...WORKER_EVIDENCE, rawError: 'provider SECRET' },
+    })).toBeNull()
+    expect(decodeStudyOperationsProjection({
+      ...projection(),
+      workerEvidence: { ...WORKER_EVIDENCE, stalenessClassification: 'healthy', latestResultCategory: 'failed' },
+    })).toBeNull()
   })
 })
