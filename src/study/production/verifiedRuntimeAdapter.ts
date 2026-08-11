@@ -33,6 +33,11 @@ export interface VerifiedRuntimeExecuteInput {
   readonly operationRef: string
   readonly signal?: AbortSignal
 }
+export interface VerifiedRuntimeBoundContentInput {
+  readonly request: Readonly<Record<string, unknown>>
+  readonly operationRef: string
+  readonly signal?: AbortSignal
+}
 
 export interface VerifiedRuntimeSnapshot {
   readonly status: 'ready' | 'not-ready'
@@ -42,6 +47,7 @@ export interface VerifiedRuntimeSnapshot {
 export interface VerifiedStudyRuntimeAdapter {
   launch(input: VerifiedRuntimeLaunchInput): Promise<VerifiedRuntimeSnapshot>
   execute(input: VerifiedRuntimeExecuteInput): Promise<unknown>
+  readBoundContent(input: VerifiedRuntimeBoundContentInput): Promise<unknown>
   cancel(reason: StudyCancellationReason): Promise<void>
   applyReadiness(readiness: StudyProductionReadinessWire): Promise<void>
   snapshot(): VerifiedRuntimeSnapshot
@@ -59,6 +65,7 @@ const CAPABILITY_BY_OPERATION: Readonly<Record<VerifiedAcademicOperation, StudyS
   'dashboard:read': 'student:progress:read',
   'calendar:read': 'student:assignments:read',
   'session:begin': 'student:attempts:create',
+  'session:resume': 'student:progress:read',
   'session:transition': 'student:attempts:create',
   'checkpoint:read': 'student:progress:read',
   'checkpoint:compare-and-swap': 'student:attempts:create',
@@ -256,6 +263,31 @@ export function createVerifiedStudyRuntimeAdapter(
     })
   }
 
+  async function readBoundContent(input: VerifiedRuntimeBoundContentInput): Promise<unknown> {
+    if (!input.operationRef) throw new Error('verified_runtime_operation_invalid')
+    if (!activeExpiresAt || Date.parse(activeExpiresAt) <= now() || !identity.hasSession()) {
+      await cancel('authorization-loss')
+      throw new StudyLifecycleAbortError('authorization-loss')
+    }
+    const token = lifecycle.token()
+    return runCurrentStudyWork(token, async (signal, context) => {
+      await identity.verify({
+        requiredCapability: 'student:progress:read',
+        signal,
+      })
+      context.assertCurrent()
+      const result = await identity.executeBoundContentOperation({
+        request: input.request,
+        signal,
+      })
+      context.assertCurrent()
+      return result
+    }, {
+      operationRef: input.operationRef,
+      signals: input.signal ? [input.signal] : undefined,
+    })
+  }
+
   async function applyReadiness(readiness: StudyProductionReadinessWire): Promise<void> {
     if (!readinessIsCurrent(readiness, now())) await cancel('authorization-loss')
   }
@@ -263,6 +295,7 @@ export function createVerifiedStudyRuntimeAdapter(
   return Object.freeze({
     launch,
     execute,
+    readBoundContent,
     cancel,
     applyReadiness,
     snapshot,

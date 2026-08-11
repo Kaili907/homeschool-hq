@@ -59,7 +59,7 @@ import ReadingView from './components/reading/ReadingView'
 import { MindsetLesson } from './components/mindset/MindsetLesson'
 import { MindsetCard } from './components/mindset/MindsetCard'
 import { isStudyEngineEnabledFromHost, isStudyEnginePreviewEnabledFromHost } from './study/featureFlag'
-import { isStudyEnginePath, leaveStudyEnginePath } from './studyEngineRoute'
+import { enterStudyEnginePath, isStudyEnginePath, leaveStudyEnginePath } from './studyEngineRoute'
 import { enabledAcademyEntries, hasEnabledAcademyProgram } from './academy/workingLevel'
 import { grade5MathPracticeAvailableFromHost } from './curriculum/practice/featureFlag'
 import {
@@ -89,6 +89,7 @@ import {
   type VerifiedStudyRuntimeAdapter,
 } from './study/production/verifiedRuntimeAdapter'
 import { StudyLifecycleBoundary } from './study/lifecycle'
+import type { AcademyStudyContext } from './academy/adapters/studyContextAdapter'
 
 const loadPreviewPorts = import.meta.env.DEV
   ? () => import('./study/mountedPorts').then(({ createMountedStudyPorts }) => createMountedStudyPorts())
@@ -102,6 +103,11 @@ const StudySessionRoute = import.meta.env.DEV
 const StudySettings = import.meta.env.DEV
   ? lazy(() => import('./components/study/StudySettings').then((module) => ({ default: module.StudySettings })))
   : null
+const StudyProductionRoute = lazy(() =>
+  import('./components/study/StudyProductionRoute').then((module) => ({
+    default: module.StudyProductionRoute,
+  })),
+)
 
 // CURR-1: the Grade 5/7/8 curriculum surface. Lazy — the chunk (and the
 // curriculum content it fetches) loads only when an enabled academy grade opens
@@ -141,7 +147,7 @@ type Screen =
   | { kind: 'typing' }
   | { kind: 'reading' }
   | { kind: 'mindset' }
-  | { kind: 'studyDashboard' }
+  | { kind: 'studyDashboard'; academyContext?: AcademyStudyContext }
   | { kind: 'studySettings' }
   | { kind: 'studySession'; blockRef: string; learnerRef: string }
   | { kind: 'academy'; route: AcademyRoute }
@@ -653,14 +659,21 @@ export default function App() {
         )
       }
       return (
-        <VerifiedProductionStudyHost
-          runtime={verifiedRuntime}
-          onBack={() => {
-            void verifiedRuntime.cancel('navigation-away')
-            leaveStudyEnginePath()
-            setScreen({ kind: 'home' })
-          }}
-        />
+        <Suspense fallback={<StudyLoading production />}>
+          <StudyProductionRoute
+            runtime={verifiedRuntime}
+            readiness={studyReadinessClientRef.current!}
+            profile={active}
+            entries={academyEntries}
+            schoolYear={state.schoolYear}
+            academyContext={screen.kind === 'studyDashboard' ? screen.academyContext : undefined}
+            onExit={() => {
+              void verifiedRuntime.cancel('navigation-away')
+              leaveStudyEnginePath()
+              setScreen({ kind: 'home' })
+            }}
+          />
+        </Suspense>
       )
     }
     if (
@@ -760,6 +773,12 @@ export default function App() {
             setScreen({ kind: 'academy', route })
           }}
           onPatch={patchActive}
+          onOpenStudy={studyProductionSelected
+            ? (academyContext) => {
+                enterStudyEnginePath()
+                setScreen({ kind: 'studyDashboard', academyContext })
+              }
+            : undefined}
           onExit={() => {
             leaveAcademyPath()
             setScreen({ kind: 'home' })
@@ -906,8 +925,17 @@ export default function App() {
             onOpenTyping={() => setScreen({ kind: 'typing' })}
             onOpenReading={() => setScreen({ kind: 'reading' })}
             onOpenMindset={() => setScreen({ kind: 'mindset' })}
-            onOpenStudy={studyPreviewReady || studyProductionSelected ? () => setScreen({ kind: 'studyDashboard' }) : undefined}
-            studyMode={studyPreviewReady ? 'preview' : studyProductionSelected ? 'unavailable' : undefined}
+            onOpenStudy={studyPreviewReady || studyProductionSelected
+              ? () => {
+                  enterStudyEnginePath()
+                  setScreen({ kind: 'studyDashboard' })
+                }
+              : undefined}
+            studyMode={studyPreviewReady
+              ? 'preview'
+              : studyProductionSelected
+                ? studyProductionStatus === 'ready' ? 'production' : 'unavailable'
+                : undefined}
             onOpenAcademy={
               academyEntries.length > 0
                 ? () => {
@@ -1004,55 +1032,12 @@ function StudyUnavailable({ reason, onBack }: { reason: string; onBack: () => vo
   )
 }
 
-function VerifiedProductionStudyHost({
-  runtime,
-  onBack,
-}: {
-  runtime: VerifiedStudyRuntimeAdapter
-  onBack: () => void
-}) {
-  const headingRef = useRef<HTMLHeadingElement>(null)
-  const operationRef = useRef(`production-dashboard:${Date.now()}:${Math.random().toString(36).slice(2)}`)
-  const [status, setStatus] = useState<'loading' | 'ready' | 'unavailable'>('loading')
-
-  useEffect(() => {
-    const controller = new AbortController()
-    void runtime.execute({
-      operation: 'dashboard:read',
-      request: Object.freeze({}),
-      operationRef: operationRef.current,
-      signal: controller.signal,
-    }).then(() => {
-      if (!controller.signal.aborted) setStatus('ready')
-    }).catch(() => {
-      if (!controller.signal.aborted) setStatus('unavailable')
-    })
-    return () => controller.abort('navigation-away')
-  }, [runtime])
-
-  useEffect(() => { headingRef.current?.focus() }, [status])
-
-  return (
-    <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900" aria-busy={status === 'loading'}>
-      <div className="mx-auto max-w-xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h1 ref={headingRef} className="text-2xl font-bold" tabIndex={-1}>Verified Study workspace</h1>
-        {status === 'loading' && <p className="mt-2" role="status">Checking your current Study planÃ¢â‚¬Â¦</p>}
-        {status === 'ready' && (
-          <p className="mt-2" role="status">Your Study workspace is ready for this learner.</p>
-        )}
-        {status === 'unavailable' && (
-          <p className="mt-2" role="alert">Study took a safe pause. No late result was applied.</p>
-        )}
-        <button className="mt-4 min-h-11 rounded-lg border border-slate-400 bg-white px-4 py-2 font-bold" onClick={onBack}>Back home</button>
-      </div>
-    </main>
-  )
-}
-
-function StudyLoading() {
+function StudyLoading({ production = false }: { readonly production?: boolean } = {}) {
   return (
     <main className="study-runtime-host min-h-screen bg-slate-50 p-6 text-slate-900" aria-busy="true">
-      <p role="status">Loading the explicit local Study previewâ€¦</p>
+      <p role="status">{production
+        ? 'Loading the verified Study workspace…'
+        : 'Loading the explicit local Study previewâ€¦'}</p>
     </main>
   )
 }
@@ -1093,7 +1078,7 @@ function Home({
   onOpenReading: () => void
   onOpenMindset: () => void
   onOpenStudy?: () => void
-  studyMode?: 'preview' | 'unavailable'
+  studyMode?: 'preview' | 'production' | 'unavailable'
   /** CURR-1: present only when this profile's academy grade flag is enabled. */
   onOpenAcademy?: () => void
   /** MOUNT-G5-MATH: present only for a grade-5 profile with the practice flag on. */
@@ -1236,7 +1221,11 @@ function Home({
           }
         >
           <span className="text-4xl" aria-hidden="true">🧭</span>
-          <span><span className="block text-2xl font-extrabold">Today’s Study plan</span><span className="block font-bold opacity-90">{studyMode === 'preview' ? 'Launch the explicit local Study preview' : 'Check whether Study is available'}</span></span>
+          <span><span className="block text-2xl font-extrabold">Today’s Study plan</span><span className="block font-bold opacity-90">{studyMode === 'preview'
+            ? 'Launch the explicit local Study preview'
+            : studyMode === 'production'
+              ? 'Open the verified production Study workspace'
+              : 'Check whether Study is available'}</span></span>
         </button>
       )}
 

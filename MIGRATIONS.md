@@ -271,6 +271,151 @@ V1 remains unchanged. This migration has not been applied to a hosted project.
 See `docs/study-effective-settings-v2.md` and
 `supabase/study-effective-settings-v2.db.test.ts`.
 
+## Supabase: Study bound curriculum content authority (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810154000_academy_study_bound_content_authority.sql`.
+
+No table or column is added. The migration adds one service-role-only function
+that authenticates an opaque Study bearer digest, reads exactly one session in
+that learner scope, joins its immutable release binding back to the published
+registry row, and returns only bounded session/release refs plus eligible
+course refs. Browser roles cannot execute the projection, and curriculum
+content never enters database or operational telemetry storage.
+
+The server runtime uses that projection to open the exact immutable
+`source_root`, verify the stored curriculum-manifest digest, and prove the
+Academy schedule-day/lesson membership before returning learner-safe content.
+It never reads the active pointer during content resolution and never falls
+back to another release, demo, preview, or latest output. See
+`docs/study-bound-curriculum-content-runtime.md` and the focused Netlify and
+PGlite tests. The migration has not been applied to a hosted project.
+
+## Supabase: Study / Admin release registry bridge (2026-08-10)
+
+Tracked migrations:
+
+- `supabase/migrations/20260810150000_academy_study_curriculum_binding.sql`
+- `supabase/migrations/20260810153000_academy_study_release_registry_bridge.sql`
+
+The first migration introduced immutable Study session snapshots while the
+Admin release registry dependency was unavailable. The additive bridge now
+removes that migration's private approval table and makes immutable published
+`academy_curriculum_releases` rows the only release authority. Session release
+UUID, package, version, and curriculum-manifest digest have a direct composite
+foreign key to the registry. Active subject enrollment remains an additional
+Study eligibility restriction.
+
+The historical registry-only production pointer is preserved as immutable
+revision 1. The bridge makes the pointer history append-only and records
+revision 2 as the new-session Study binding transition. A later activation or
+rollback can append a revision that affects new sessions only; bound sessions
+never repin, and legacy ambiguous sessions remain manual-review. Browser roles
+have no release/pointer table grants and cannot author identity, publication,
+digest, or active-pointer facts. See `docs/study-release-registry-bridge.md` and
+`supabase/study-curriculum-binding.db.test.ts`. Neither migration has been
+applied to a hosted project.
+
+## Supabase: immutable curriculum release registry (2026-08-09)
+
+Tracked migration:
+`supabase/migrations/20260809160000_academy_curriculum_release_registry.sql`.
+
+The migration adds only the immutable published-release registry, its complete
+file custody inventory, and a registry-only production pointer. Release 1.0.0
+is registered from source commit
+`4056e31d8beb36622be5ac27ea7f20145266343b` as a `legacy_import`:
+182 files / 23,196,845 bytes, 30 courses, 232 units, 2,736 lessons, 232
+assessments, 18 original texts, and three schedules. The unavailable historical
+source ZIP digest is intentionally not recorded as verified provenance.
+
+Published release, release-file, and pointer rows reject updates and deletes.
+All three tables are postgres-owned with RLS enabled and forced and no direct
+application-role grants. The only database reads are three fixed-search-path,
+service-role RPCs behind the server-derived `curriculum:read` capability. The
+production pointer is revision 1 / `migration_seed` / `registry_only`;
+the learner runtime remains hard-coded to 1.0.0 and does not read the pointer.
+
+Permanent local validation is in
+`supabase/academy-curriculum-release-registry.db.test.ts`, the Admin
+curriculum endpoint/reader tests, and the repository migration manifest. The
+migration has not been applied to a hosted project. Editable drafts remain
+deferred to ADMIN-16B after ADMIN-15 audit foundations, curriculum audit
+vocabulary, and Curriculum Schema Set v2.
+## Supabase: Study session telemetry outbox (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810155000_academy_study_session_telemetry_outbox.sql`.
+
+The additive migration creates a forced-RLS, server-private transactional
+outbox for accepted Study session begin, resume, transition, checkpoint,
+completion, and abandonment facts. Failed or rejected Study operations create
+no false success receipt. Service-only claim/lease, completion, retry, and
+readiness RPCs feed the existing ADMIN operational telemetry V2 writer using a
+stable server-derived execution key; duplicate delivery replays without
+double-counting, and delivery failure never rolls back a committed session.
+
+The outbox has no learner identifier and accepts no learner content, transcript,
+answer, note, audio, inference, prompt/response, secret, provider object, raw
+exception, or raw database error. The migration also repairs the existing V2
+telemetry writer's provisional `academy_students.status` binding to the
+integrated identity contract's `lifecycle_status` without changing its public
+signature or vocabulary. It depends on migrations `20260810151000` and
+`20260808121000`, has normalized SHA-256
+`f3685d4457141a9a00ddf32a23be27daa3f552d7061b42838fb41b4645e4f340`, and has
+not been applied to a hosted project. See
+`docs/study-session-telemetry-outbox.md`.
+
+## Supabase: Study adult-review worker run evidence (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql`.
+
+The additive migration depends on the existing Study worker operations
+contract and records one immutable, privacy-safe receipt per server-generated
+adult-review worker invocation. Evidence is bounded to worker/version,
+timestamps, result category, aggregate counts, invocation kind, and a safe
+reason code; it contains no learner, household, review, delivery, provider,
+content, transcript, note, diagnostic, secret, or raw-error field. Browser
+roles have neither table access nor RPC execution, and replay is idempotent for
+the same run identity while conflicting evidence is rejected. Its normalized
+SHA-256 is
+`5f3af03d266bc89a01178c5064955fd2a5d52158b1e38f71660e7795e15ec808`,
+and it has not been applied to a hosted project.
+
+## Supabase: Study session timestamp coherence (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810159100_academy_study_session_timestamp_coherence.sql`.
+
+The additive correction preserves every existing migration identity and fixes
+the production Session Semantics V2 projection discovered by the local smoke
+gate. The storage default for `updated_at` uses transaction time, while trusted
+session acceptance uses wall-clock time; a long-running transaction could
+therefore begin a session whose `updatedAt` preceded `acceptedAt`. A narrow
+postgres-owned, non-executable-by-browser trigger now normalizes only new V2
+session inserts so `updated_at` never precedes the immutable acceptance time.
+The strict runtime validator remains unchanged. Its normalized SHA-256 is
+`72632e01008843c662677b36ca3bbe9582f18c850d80b2d77a7390e05c14b465`,
+and it has not been applied to a hosted project.
+
+## Supabase: Study Effective Settings V2 (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql`.
+
+The additive migration creates typed private Admin-default and safety-policy
+singletons plus the authorized `academy_study_effective_settings_v2(uuid,date)`
+RPC. The RPC preserves `admin_default < guardian < accommodation < safety`,
+keeps Admin `required_break_interval_minutes` separate from guardian
+`minimumBreakCount`, returns only `ready`, `manual_review`, or `unavailable`, and
+exposes minimized per-field source categories without private content. Both
+tables use forced RLS with no application-role table grants; only
+`authenticated` can execute the RPC, which derives household access server-side.
+V1 remains unchanged. This migration has not been applied to a hosted project.
+See `docs/study-effective-settings-v2.md` and
+`supabase/study-effective-settings-v2.db.test.ts`.
+
 ## Supabase: Academy Admin authorization foundation (2026-08-08)
 
 Tracked migration:

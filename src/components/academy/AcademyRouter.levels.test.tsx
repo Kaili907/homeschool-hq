@@ -6,7 +6,13 @@ import type { AcademyGrade, Profile } from '../../types'
 import type { AcademyCatalog, AcademySchedule } from '../../academy/contentTypes'
 import { resetAcademyContentCache } from '../../academy/contentClient'
 import type { AcademyProgramEntry } from '../../academy/workingLevel'
+import type { AcademyStudyContext } from '../../academy/adapters/studyContextAdapter'
 import { AcademyRouter } from './AcademyRouter'
+
+vi.mock('../../appState', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../../appState')>()),
+  isoToday: () => '2026-08-10',
+}))
 
 /**
  * ACADEMY-LEVEL-DECOUPLE — the headline claim, on the surface the girl actually
@@ -60,6 +66,17 @@ class FakeDocument extends EventTarget {
 
 function text(node: FakeElement): string {
   return `${node.textContent} ${node.childNodes.map(text).join(' ')}`
+}
+
+function findButton(label: string, node: FakeElement): FakeElement | null {
+  if (node.tagName === 'BUTTON' && text(node).replaceAll(/\s+/g, '').includes(label.replaceAll(/\s+/g, ''))) {
+    return node
+  }
+  for (const child of node.childNodes) {
+    const found = findButton(label, child)
+    if (found) return found
+  }
+  return null
 }
 
 // ---- fixture content, one course per level ----
@@ -122,6 +139,7 @@ describe('the student academy surface serves a decoupled program', () => {
   let documentTarget: FakeDocument
   let container: FakeElement
   let latest: Profile
+  let studyHandoff: AcademyStudyContext | null
 
   beforeEach(() => {
     resetAcademyContentCache()
@@ -145,6 +163,7 @@ describe('the student academy surface serves a decoupled program', () => {
       })
     })
     container = documentTarget.createElement('div')
+    studyHandoff = null
   })
 
   afterEach(async () => {
@@ -167,6 +186,7 @@ describe('the student academy surface serves a decoupled program', () => {
           route={{ kind: 'home' }}
           onNavigate={() => {}}
           onPatch={(update) => setP(update)}
+          onOpenStudy={(context) => { studyHandoff = context }}
           onExit={() => {}}
         />
       )
@@ -200,5 +220,30 @@ describe('the student academy surface serves a decoupled program', () => {
     expect(rendered).toContain('Mathematics · Grade 5')
     expect(rendered).not.toContain('English Language Arts')
     expect(latest.academy?.courseIds).toEqual(['ma-g5-mathematics'])
+  })
+
+  it('hands the versioned Academy advisory fields to the production Study entry without authority', async () => {
+    await mount(MIXED, emptyProfile('p3', 'Sixth Grader', '6'))
+    const button = findButton('Open today\'s verified Study workspace', container)
+    expect(button).not.toBeNull()
+    const reactKey = Object.keys(button!).find((key) => key.startsWith('__reactProps$'))
+    expect(reactKey).toBeDefined()
+    const props = (button as unknown as Record<string, { onClick?: () => void }>)[reactKey!]
+    await act(async () => props.onClick?.())
+
+    expect(studyHandoff).toEqual({
+      adapterVersion: 1,
+      releaseVersion: '1.0.0',
+      lessonRef: 'grade-5:academy-week-1-day-1',
+      skillRefs: [
+        'ma-g5-mathematics-u01-l01',
+        'ma-g7-english-language-arts-u01-l01',
+      ],
+      scopeWeek: 1,
+      scopeDay: 1,
+    })
+    expect(Object.keys(studyHandoff!).sort()).toEqual([
+      'adapterVersion', 'lessonRef', 'releaseVersion', 'scopeDay', 'scopeWeek', 'skillRefs',
+    ])
   })
 })

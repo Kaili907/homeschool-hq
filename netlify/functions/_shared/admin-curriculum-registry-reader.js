@@ -173,6 +173,19 @@ function adaptDetails(value) {
 }
 
 function adaptPointer(value) {
+  const historical = value?.changeKind === 'migration_seed'
+    && value?.bindingMode === 'registry_only'
+    && value?.registryOnly === true
+    && value?.runtimeBinding === 'hard-coded'
+  const defaultAuthority = ['activation', 'rollback'].includes(value?.changeKind)
+    && value?.bindingMode === 'default_authority'
+    && value?.registryOnly === false
+    && value?.runtimeBinding === 'default-authority'
+    && value?.existingLearnersRepinned === false
+  const studyBound = ['bridge_activation', 'activate', 'rollback'].includes(value?.changeKind)
+    && value?.bindingMode === 'study_new_sessions'
+    && value?.registryOnly === false
+    && value?.runtimeBinding === 'study-new-sessions'
   if (
     !isRecord(value)
     || value.schemaVersion !== 1
@@ -182,12 +195,7 @@ function adaptPointer(value) {
     || !VERSION.test(value.releaseVersion)
     || integer(value.revision) === null
     || value.revision < 1
-    || !['migration_seed', 'activation', 'rollback'].includes(value.changeKind)
-    || !['registry_only', 'default_authority'].includes(value.bindingMode)
-    || value.registryOnly !== (value.bindingMode === 'registry_only')
-    || value.runtimeBinding !== (value.bindingMode === 'registry_only'
-      ? 'hard-coded' : 'default-authority')
-    || (value.bindingMode === 'default_authority' && value.existingLearnersRepinned !== false)
+    || (!historical && !defaultAuthority && !studyBound)
     || timestamp(value.registeredAt) === null
   ) return null
   return Object.freeze({

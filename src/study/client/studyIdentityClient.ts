@@ -35,9 +35,14 @@ export interface StudyIdentityClient {
       | 'dashboard:read'
       | 'calendar:read'
       | 'session:begin'
+      | 'session:resume'
       | 'session:transition'
       | 'checkpoint:read'
       | 'checkpoint:compare-and-swap'
+    readonly request: Readonly<Record<string, unknown>>
+    readonly signal?: AbortSignal
+  }): Promise<unknown>
+  executeBoundContentOperation(input: {
     readonly request: Readonly<Record<string, unknown>>
     readonly signal?: AbortSignal
   }): Promise<unknown>
@@ -179,6 +184,39 @@ export function createStudyIdentityClient(
         throw new StudyIdentityClientError('student-session-invalid')
       }
       return (result as Record<string, unknown>).body
+    },
+
+    async executeBoundContentOperation({ request, signal }) {
+      const current = sessionReference
+      const requestGeneration = generation
+      if (!current) throw new StudyIdentityClientError('student-session-invalid')
+      let response: Response
+      try {
+        response = await fetchImpl('/api/study/bound-content', {
+          method: 'POST',
+          signal,
+          headers: {
+            Authorization: `Bearer ${current}`,
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({ schemaVersion: 1, ...request }),
+        })
+      } catch {
+        throw new StudyIdentityClientError('service-not-ready')
+      }
+      if (!response.ok) {
+        if (response.status === 401 && requestGeneration === generation && sessionReference === current) {
+          generation += 1
+          sessionReference = null
+          throw new StudyIdentityClientError('student-session-invalid')
+        }
+        throw mappedError(response.status)
+      }
+      const result = await json(response)
+      if (requestGeneration !== generation || sessionReference !== current || signal?.aborted) {
+        throw new StudyIdentityClientError('student-session-invalid')
+      }
+      return result
     },
 
     async revoke(signal) {

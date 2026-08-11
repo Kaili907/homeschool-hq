@@ -221,4 +221,25 @@ describe('ADMIN-16A curriculum registry reader', () => {
     await expect(createAdminCurriculumRegistryReader({ client: clientFor(values) }).productionPointer())
       .rejects.toThrow('curriculum_registry_unavailable')
   })
+
+  it('projects the Study bridge for new sessions without repinning existing sessions', async () => {
+    const values = structuredClone(projections)
+    values.academy_admin_read_curriculum_production_pointer_v1 = {
+      ...values.academy_admin_read_curriculum_production_pointer_v1,
+      revision: 2,
+      changeKind: 'bridge_activation',
+      bindingMode: 'study_new_sessions',
+      registryOnly: false,
+      runtimeBinding: 'study-new-sessions',
+    }
+    await expect(createAdminCurriculumRegistryReader({ client: clientFor(values) }).productionPointer())
+      .resolves.toMatchObject({
+        revision: 2,
+        changeKind: 'bridge_activation',
+        bindingMode: 'study_new_sessions',
+        registryOnly: false,
+        runtimeBinding: 'study-new-sessions',
+        existingLearnersRepinned: false,
+      })
+  })
 })

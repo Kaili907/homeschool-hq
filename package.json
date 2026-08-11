@@ -11,6 +11,7 @@
     "migration:replay:admin": "node scripts/replay-admin-migration-union.mjs",
     "db:security:audit": "node scripts/audit-database-security.mjs",
     "curriculum:v2:compatibility": "node --experimental-strip-types src/curriculum-authoring/v2/compatibilityCli.node.ts",
+    "study:telemetry:deliver": "node --disable-warning=ExperimentalWarning --experimental-transform-types scripts/deliver-study-session-telemetry.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -42,6 +43,7 @@
     "preflight:production-local": "node scripts/production-local-preflight.mjs --format operator",
     "preflight:production-local:json": "node scripts/production-local-preflight.mjs --format json",
     "test:production-local-preflight": "vitest run --project root-app scripts/production-local-preflight.test.ts",
+    "smoke:study-production-local": "vitest run --config scripts/study-production-local-smoke.vitest.config.mjs",
     "test:engine": "vitest run --config adaptive-tutor/study-engine/tests/final-assembly/component-vitest.config.mjs",
     "test:tutor": "npm --prefix adaptive-tutor run test",
     "test:calendar": "npm --prefix adaptive-tutor/study-engine/integration-labs/calendar-parent-runtime run test",
@@ -60,6 +62,7 @@
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.4",
+    "@electric-sql/pglite-socket": "^0.2.7",
     "@playwright/test": "^1.54.1",
     "@tailwindcss/vite": "^4.1.11",
     "@types/pg": "^8.20.0",

@@ -46,6 +46,14 @@ vi.mock('./components/PinPad', () => ({
 vi.mock('./components/hub/ParentHub', () => ({
   ParentHub: () => <main data-surface="parent-hub">Parent Hub</main>,
 }))
+vi.mock('./components/study/StudyProductionRoute', () => ({
+  StudyProductionRoute: ({ onExit }: { onExit: () => void }) => (
+    <main data-surface="production-study">
+      <h1>Verified Study workspace</h1>
+      <button type="button" onClick={onExit}>Back home</button>
+    </main>
+  ),
+}))
 vi.mock('./study/client/studyProductionReadinessClient', () => ({
   createStudyProductionReadinessClient: () => ({
     read: async () => harness.readiness(),

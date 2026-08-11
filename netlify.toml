@@ -126,6 +126,11 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/v1/study-telemetry-delivery"
+  to = "/.netlify/functions/study-session-telemetry-deliver"
+  status = 200
+
+[[redirects]]
   from = "/api/admin/v1/safety-operations"
   to = "/.netlify/functions/admin-safety-operations"
   status = 200
@@ -233,6 +238,11 @@
 [[redirects]]
   from = "/api/study/academic-runtime"
   to = "/.netlify/functions/study-academic-runtime"
+  status = 200
+
+[[redirects]]
+  from = "/api/study/bound-content"
+  to = "/.netlify/functions/study-bound-content"
   status = 200
 
 # ---- SPA fallback: every other path serves the cached app shell ----
