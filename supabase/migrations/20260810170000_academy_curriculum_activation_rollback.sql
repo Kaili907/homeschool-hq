@@ -281,9 +281,23 @@ as $$
             select 1
             from public.academy_curriculum_staged_releases as staged
             where staged.staging_id = release.staging_id
+              and release.package_id =
+                staged.manifest #>> '{releaseIdentity,packageId}'
               and staged.target_version = release.version
               and staged.file_count = release.file_count
               and staged.byte_count = release.byte_count
+              and to_jsonb(release.course_count) =
+                staged.entity_counts -> 'courses'
+              and to_jsonb(release.unit_count) =
+                staged.entity_counts -> 'units'
+              and to_jsonb(release.lesson_count) =
+                staged.entity_counts -> 'lessons'
+              and to_jsonb(release.assessment_count) =
+                staged.entity_counts -> 'assessments'
+              and to_jsonb(release.text_count) =
+                staged.entity_counts -> 'resources'
+              and to_jsonb(release.schedule_count) =
+                staged.entity_counts -> 'schedules'
               and staged.content_sha256 = release.publication_content_sha256
               and staged.manifest_sha256 = release.publication_manifest_sha256
               and staged.package_sha256 = release.publication_package_sha256
@@ -575,8 +589,39 @@ begin
   from academy_private.curriculum_pointer_request_receipts
   where actor_user_ref = p_actor_user_ref and request_id = p_request_id;
   if receipt.request_id is not null then
-    if receipt.request_sha256 <> p_request_digest then
+    if receipt.request_sha256 <> p_request_digest
+       or (receipt.response #>> '{transition,newReleaseVersion}')
+          is distinct from p_target_version
+       or (receipt.response #>> '{transition,transitionKind}')
+          is distinct from p_transition_kind
+       or (receipt.response #>> '{transition,pointerRevision}')::bigint
+          <> p_expected_pointer_revision + (case
+            when (receipt.response #>> '{transition,state}') = 'transitioned' then 1
+            else 0
+          end) then
       raise exception 'CURRICULUM_ACTIVATION_REPLAY_CONFLICT' using errcode = '23505';
+    end if;
+
+    -- A receipt is an idempotency record, not a durable claim that its target
+    -- is still current. Once another governed transition advances the pointer,
+    -- returning the stored status would falsely report the old release active.
+    select * into pointer_row
+    from public.academy_curriculum_active_pointers
+    where environment = 'production'
+    for update;
+    if pointer_row.environment is null then
+      raise exception 'CURRICULUM_ACTIVATION_POINTER_UNAVAILABLE' using errcode = '55000';
+    end if;
+    if pointer_row.revision <>
+         (receipt.response #>> '{pointer,revision}')::bigint
+       or not exists (
+         select 1
+         from public.academy_curriculum_releases as release
+         where release.release_id = pointer_row.release_id
+           and release.version =
+             (receipt.response #>> '{pointer,releaseVersion}')
+       ) then
+      raise exception 'CURRICULUM_ACTIVATION_POINTER_CONFLICT' using errcode = '40001';
     end if;
     return receipt.response || jsonb_build_object('replayed', true);
   end if;

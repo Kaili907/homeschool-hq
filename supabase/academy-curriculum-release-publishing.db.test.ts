@@ -135,13 +135,19 @@ function packageInput(draftId: string, target: string, validationId: string, app
   }
 }
 
-async function stage(database: PGlite, ready: Awaited<ReturnType<typeof eligible>>, request = crypto.randomUUID()) {
+async function stage(
+  database: PGlite,
+  ready: Awaited<ReturnType<typeof eligible>>,
+  request = crypto.randomUUID(),
+  mutate?: (value: ReturnType<typeof packageInput>) => void,
+) {
   const value = packageInput(
     ready.draft.draftId,
     ready.draft.targetVersion,
     ready.validation.validationSnapshotId,
     ready.approval.currentDecision.approvalId,
   )
+  mutate?.(value)
   await setService(database)
   try {
     const result = (await database.query<{ value: any }>(`
@@ -333,6 +339,26 @@ describe('curriculum release publication database boundary', () => {
     `)).rows[0]).toEqual({ count: 0 })
   })
 
+  it('rejects a self-consistent staged package with the wrong curriculum package identity', async () => {
+    const database = databases[0]
+    const ready = await eligible(database, '2.0.0-identity.1')
+    const staged = await stage(database, ready, crypto.randomUUID(), (value) => {
+      value.manifest.releaseIdentity.packageId = 'wrong-curriculum-package'
+      value.manifestCanonical = JSON.stringify(value.manifest)
+      value.manifestHash = sha256(value.manifestCanonical)
+      value.packageHash = sha256(
+        `manuel-academy-curriculum-staged-v1\n${value.contentHash}\n${value.manifestHash}\n`,
+      )
+    })
+
+    await expect(publish(database, staged.stagingId, { request: crypto.randomUUID() }))
+      .rejects.toThrow('CURRICULUM_PUBLICATION_MANIFEST_MISMATCH')
+    expect((await database.query<any>(`
+      select count(*)::integer as count from public.academy_curriculum_releases
+      where version = '2.0.0-identity.1'
+    `)).rows[0]).toEqual({ count: 0 })
+  })
+
   it('rejects stale approval, invalid validation, and a reappeared human-review blocker', async () => {
     const database = databases[0]
     const stale = await eligible(database, '2.0.0-stale.1')
@@ -409,6 +435,8 @@ describe('curriculum release publication database boundary', () => {
     await expect(database.exec(`delete from public.academy_curriculum_releases where version = '2.0.0-replay.1'`))
       .rejects.toThrow('immutable')
     await expect(database.exec(`update public.academy_curriculum_release_files set byte_count = byte_count where release_id = '${staged.stagingId}'`))
+      .rejects.toThrow('immutable')
+    await expect(database.exec(`delete from public.academy_curriculum_release_files where release_id = '${staged.stagingId}'`))
       .rejects.toThrow('immutable')
   })
 
@@ -492,6 +520,36 @@ describe('curriculum release publication database boundary', () => {
       select count(*)::integer as count from academy_private.curriculum_publication_request_receipts
       where staging_id = $1
     `, [staged.stagingId])).rows[0]).toEqual({ count: 0 })
+  })
+
+  it('rolls back release custody and receipt when the publication audit append fails', async () => {
+    const database = databases[0]
+    const ready = await eligible(database, '2.0.0-audit-failure.1')
+    const staged = await stage(database, ready)
+    await database.exec(`
+      create function public.test_publication_audit_failure()
+      returns trigger language plpgsql as $$
+      begin raise exception 'forced publication audit failure'; end;
+      $$;
+      create trigger test_publication_audit_failure
+      before insert on academy_private.admin_audit_events
+      for each row when (new.action = 'curriculum.publish')
+      execute function public.test_publication_audit_failure();
+    `)
+    await expect(publish(database, staged.stagingId, {
+      request: '96000000-0000-4000-8000-000000000001',
+    })).rejects.toThrow('forced publication audit failure')
+    expect((await database.query<any>(`
+      select
+        (select count(*) from public.academy_curriculum_releases
+          where version = '2.0.0-audit-failure.1')::integer as releases,
+        (select count(*) from public.academy_curriculum_release_files
+          where release_id = $1)::integer as artifacts,
+        (select count(*) from academy_private.curriculum_publication_request_receipts
+          where staging_id = $1)::integer as receipts,
+        (select count(*) from academy_private.admin_audit_events
+          where action = 'curriculum.publish' and resource_ref = $1::text)::integer as audits
+    `, [staged.stagingId])).rows[0]).toEqual({ releases: 0, artifacts: 0, receipts: 0, audits: 0 })
   })
 
   it('keeps publication service-only, runtime-isolated, and migration-hash pinned', async () => {

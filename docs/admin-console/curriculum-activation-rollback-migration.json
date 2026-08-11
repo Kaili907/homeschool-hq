@@ -1,6 +1,6 @@
 {
   "migration": "supabase/migrations/20260810170000_academy_curriculum_activation_rollback.sql",
-  "sha256": "6d7d3cbbe740e1153aa6303ae90480beec2dcac7e29fff91754e05c58614f0da",
+  "sha256": "4af0aedaae7a781da811652d967d399d5614d9372fbfe10fdbc158724c9273ec",
   "status": "repository-only-not-applied-hosted",
   "dependsOn": [
     "20260808120000_academy_admin_authorization.sql",
