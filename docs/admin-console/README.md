@@ -67,6 +67,8 @@ but only the server/API and database policies authorize data or actions.
 
 ## Contract index
 
+- [Production release and rollback runbook](production-release-runbook.md)
+- [Local production release rehearsal](production-release-rehearsal.md)
 - [Authorization](authorization.md)
 - [Telemetry and privacy](telemetry-privacy.md)
 - [AI and TTS cost accounting](cost-accounting.md)

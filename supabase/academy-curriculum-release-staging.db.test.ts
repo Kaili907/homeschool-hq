@@ -272,6 +272,19 @@ describe('curriculum release staging database boundary', () => {
       request: crypto.randomUUID(),
     })).rejects.toThrow('CURRICULUM_STAGING_GATE_BLOCKED')
 
+    const missingApproval = await createDraft(database, '2.0.0-no-approval.1')
+    const missingApprovalValidation = await recordValidation(database, missingApproval.draftId, 1)
+    const missingApprovalStatus = await readStatus(database, missingApproval.draftId)
+    expect(missingApprovalStatus.blockingReasons).toContain('approval_missing')
+    await expect(stage(database, {
+      draftId: missingApproval.draftId,
+      revision: 1,
+      target: '2.0.0-no-approval.1',
+      validationId: missingApprovalValidation.validationSnapshotId,
+      approvalId: crypto.randomUUID(),
+      request: crypto.randomUUID(),
+    })).rejects.toThrow('CURRICULUM_STAGING_GATE_BLOCKED')
+
     for (const [suffix, state] of [
       ['invalid', { status: 'invalid', ready: false, blocking: 1 }],
       ['incomplete', { status: 'incomplete', ready: false, blocking: 1 }],

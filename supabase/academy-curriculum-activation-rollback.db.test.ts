@@ -240,6 +240,24 @@ async function transition(database: PGlite, input: {
   }
 }
 
+async function immutableReleaseSnapshot(database: PGlite, version: string) {
+  return {
+    release: (await database.query(`
+      select release.*
+      from public.academy_curriculum_releases as release
+      where release.version = $1
+    `, [version])).rows,
+    artifacts: (await database.query(`
+      select file.*
+      from public.academy_curriculum_release_files as file
+      join public.academy_curriculum_releases as release
+        on release.release_id = file.release_id
+      where release.version = $1
+      order by file.relative_path
+    `, [version])).rows,
+  }
+}
+
 async function insertPublishedRelease(database: PGlite) {
   await database.exec(`
     insert into public.academy_curriculum_releases
@@ -347,6 +365,96 @@ beforeEach(async () => {
 afterEach(async () => Promise.all(databases.splice(0).map((database) => database.close())))
 
 describe('curriculum activation and rollback database boundary', () => {
+  it('rehearses two local pointer transitions and rollback without changing learner pins or immutable releases', async () => {
+    const database = databases[0]
+    const firstVersion = '3.2.0-rehearsal.1'
+    const secondVersion = '3.3.0-rehearsal.1'
+    const learnerBefore = (await database.query(
+      "select data from public.profiles where profile_id = 'learner-one'",
+    )).rows[0]
+
+    const first = await stageVerifyPublish(database, firstVersion)
+    expect(verifyStagedCandidate(first.evidence)).toMatchObject({
+      state: 'STAGED', status: 'VERIFIED', packageStatus: 'VERIFIED',
+    })
+    expect(first.publication).toMatchObject({
+      publicationState: 'published',
+      published: {
+        version: firstVersion,
+        status: 'published',
+        activationStatus: 'not_active',
+      },
+    })
+    expect((await database.query<any>(`
+      select release.version, pointer.revision
+      from public.academy_curriculum_active_pointers as pointer
+      join public.academy_curriculum_releases as release
+        on release.release_id = pointer.release_id
+      where pointer.environment = 'production'
+    `)).rows[0]).toEqual({ version: '1.0.0', revision: 1 })
+    const firstImmutableBefore = await immutableReleaseSnapshot(database, firstVersion)
+
+    const firstActivation = await transition(database, {
+      target: firstVersion,
+      expected: 1,
+      request: '5a000000-0000-4000-8000-000000000001',
+    })
+    expect(firstActivation.pointer).toMatchObject({
+      releaseVersion: firstVersion,
+      revision: 2,
+      transitionKind: 'activation',
+    })
+    expect(firstActivation.existingLearnersRepinned).toBe(false)
+    expect((await database.query(
+      "select data from public.profiles where profile_id = 'learner-one'",
+    )).rows[0]).toEqual(learnerBefore)
+
+    const second = await stageVerifyPublish(database, secondVersion)
+    expect(verifyStagedCandidate(second.evidence).status).toBe('VERIFIED')
+    expect(second.publication.published.activationStatus).toBe('not_active')
+    const secondImmutableBefore = await immutableReleaseSnapshot(database, secondVersion)
+    const secondActivation = await transition(database, {
+      target: secondVersion,
+      expected: 2,
+      request: '5a000000-0000-4000-8000-000000000002',
+    })
+    expect(secondActivation.pointer).toMatchObject({
+      releaseVersion: secondVersion,
+      revision: 3,
+      transitionKind: 'activation',
+    })
+
+    const rollback = await transition(database, {
+      target: firstVersion,
+      expected: 3,
+      kind: 'rollback',
+      request: '5a000000-0000-4000-8000-000000000003',
+    })
+    expect(rollback.pointer).toMatchObject({
+      releaseVersion: firstVersion,
+      revision: 4,
+      transitionKind: 'rollback',
+    })
+    expect(rollback.history.map((entry: any) => [
+      entry.pointerRevision,
+      entry.transitionKind,
+      entry.newReleaseVersion,
+    ])).toEqual([
+      [4, 'rollback', firstVersion],
+      [3, 'activation', secondVersion],
+      [2, 'activation', firstVersion],
+      [1, 'migration_seed', '1.0.0'],
+    ])
+    expect((await database.query(
+      'select count(*)::integer as count from public.academy_curriculum_releases',
+    )).rows[0]).toEqual({ count: 4 })
+    expect((await database.query(
+      "select data from public.profiles where profile_id = 'learner-one'",
+    )).rows[0]).toEqual(learnerBefore)
+    expect(await immutableReleaseSnapshot(database, firstVersion)).toEqual(firstImmutableBefore)
+    expect(await immutableReleaseSnapshot(database, secondVersion)).toEqual(secondImmutableBefore)
+  })
+
   it('runs stage → verify → publish → activate with independent exact replay and continuous provenance', async () => {
     const database = databases[0]
     const targetVersion = '3.0.0-rc.1'
