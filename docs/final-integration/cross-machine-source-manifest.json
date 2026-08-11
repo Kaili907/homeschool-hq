@@ -1,0 +1,877 @@
+{
+  "schemaVersion": 2,
+  "classification": "CROSS_MACHINE_SOURCE_MANIFEST_READY",
+  "generatedAt": "2026-08-11T04:59:55.5524232Z",
+  "repository": {
+    "name": "Kaili907/homeschool-hq",
+    "originUrl": "https://github.com/Kaili907/homeschool-hq.git",
+    "inventoryBranch": "win/final-cross-machine-source-verifier",
+    "requiredStartingHead": "a438b00e8ae6a78ba16b69a73767279d3393bd3e",
+    "observedStartingHead": "a438b00e8ae6a78ba16b69a73767279d3393bd3e",
+    "startingWorktreeClean": true,
+    "fetchCommand": "git fetch origin --prune",
+    "fetchCompleted": true,
+    "commonComparisonBaseline": "d65d1511dd602db586a204bb7ccb2800fd7a89e2",
+    "productSourceModified": false,
+    "hostedContactOccurred": false
+  },
+  "authoritativeSources": {
+    "macFinalRc4": {
+      "ref": "refs/remotes/origin/mac/admin-final-rc4-assembly",
+      "sha": "6f952509236daa4e17849c4a5399241e42816553",
+      "expectedSha": "6f952509236daa4e17849c4a5399241e42816553",
+      "exactRefMatch": true,
+      "commitObjectExists": true,
+      "parent": "d630456883a33d01a30eb1b18d55b8506645db90",
+      "subject": "admin: assemble provenance-corrected RC4"
+    },
+    "macProvenanceAudit": {
+      "ref": "refs/remotes/origin/mac/admin-final-rc3-provenance-audit",
+      "sha": "d6a0754d9acd1192ba9a2037fe2fc077441ba080",
+      "expectedSha": "d6a0754d9acd1192ba9a2037fe2fc077441ba080",
+      "exactRefMatch": true,
+      "commitObjectExists": true,
+      "parent": "af84dee724088e4f61e4bf84fc17c75adb61e0fa",
+      "subject": "docs: audit Mac RC3 source provenance",
+      "role": "supporting_evidence_only",
+      "ancestorOfRc4": false,
+      "mergeBaseWithRc4": "af84dee724088e4f61e4bf84fc17c75adb61e0fa"
+    },
+    "windowsFinalStudyRc1": {
+      "ref": "refs/heads/win/final-study-rc1",
+      "sha": "f93f0736b48736252e0678f9b57ce83652e2dab5",
+      "expectedSha": "f93f0736b48736252e0678f9b57ce83652e2dab5",
+      "exactRefMatch": true,
+      "commitObjectExists": true,
+      "parent": "8ef764772c43f63b08403248c1e98273c35c5f4f",
+      "subject": "fix(study): enforce session timestamp coherence",
+      "registeredWorktreeClean": true
+    },
+    "windowsFinalAdminDeltaRc1": {
+      "ref": "refs/heads/win/final-admin-delta-rc1",
+      "sha": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+      "expectedSha": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+      "exactRefMatch": true,
+      "commitObjectExists": true,
+      "parent": "e3f62dced44b8ddd7e932ec992756a39f30f3495",
+      "subject": "integrate: finalize Windows Admin delta RC1",
+      "registeredWorktreeClean": true
+    }
+  },
+  "finalTipRelationships": {
+    "noneIsAncestorOfAnother": true,
+    "pairwise": [
+      {
+        "left": "6f952509236daa4e17849c4a5399241e42816553",
+        "right": "f93f0736b48736252e0678f9b57ce83652e2dab5",
+        "mergeBase": "d65d1511dd602db586a204bb7ccb2800fd7a89e2",
+        "leftUniqueCommitCount": 62,
+        "rightUniqueCommitCount": 21
+      },
+      {
+        "left": "6f952509236daa4e17849c4a5399241e42816553",
+        "right": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+        "mergeBase": "b948b3fd6552221eeb3883c8e7cc924129ad616a",
+        "leftUniqueCommitCount": 57,
+        "rightUniqueCommitCount": 26
+      },
+      {
+        "left": "f93f0736b48736252e0678f9b57ce83652e2dab5",
+        "right": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+        "mergeBase": "d65d1511dd602db586a204bb7ccb2800fd7a89e2",
+        "leftUniqueCommitCount": 21,
+        "rightUniqueCommitCount": 31
+      }
+    ]
+  },
+  "supersessionEvidence": {
+    "exactAncestry": [
+      {
+        "source": "4e404e7bce1ba7e843824e18c338148c23ac1896",
+        "supersededBy": "6f952509236daa4e17849c4a5399241e42816553",
+        "label": "Mac RC1 -> RC4"
+      },
+      {
+        "source": "053b56557f96fae2c75526d3b5466901bc7a1ec2",
+        "supersededBy": "6f952509236daa4e17849c4a5399241e42816553",
+        "label": "Mac RC2 -> RC4"
+      },
+      {
+        "source": "af84dee724088e4f61e4bf84fc17c75adb61e0fa",
+        "supersededBy": "6f952509236daa4e17849c4a5399241e42816553",
+        "label": "Mac RC3 -> RC4"
+      },
+      {
+        "source": "87a21b748d8855fc814435551c4d65e47f3ff126",
+        "supersededBy": "f93f0736b48736252e0678f9b57ce83652e2dab5",
+        "label": "Study Production Mount R5 -> final Study RC1"
+      },
+      {
+        "source": "8ef764772c43f63b08403248c1e98273c35c5f4f",
+        "supersededBy": "f93f0736b48736252e0678f9b57ce83652e2dab5",
+        "label": "prior composed Study RC -> final Study RC1"
+      },
+      {
+        "source": "e43a1320021fbe4e004af74c26a563532990545c",
+        "supersededBy": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+        "label": "ADMIN-14B -> final Admin Delta RC1"
+      },
+      {
+        "source": "e3f62dced44b8ddd7e932ec992756a39f30f3495",
+        "supersededBy": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+        "label": "prior composed Admin Delta RC -> final Admin Delta RC1"
+      }
+    ],
+    "windowsStablePatchEquivalentReplays": [
+      {
+        "source": "50ae5c05a09e12e2e573dfe9ecf984f95a7badc0",
+        "replay": "dcfb37f2ce83c38fd96595a1fcea034ae8ab5e9b",
+        "final": "f93f0736b48736252e0678f9b57ce83652e2dab5",
+        "stablePatchId": "2a86a5cb7638a9e108eac40b5e6b583973afc27c"
+      },
+      {
+        "source": "e97c80beb3d7c73ebc24b2a243fdf0d45a8e5e76",
+        "replay": "6f4994a61dca952f0758c847e45bf914a1a649dd",
+        "final": "f93f0736b48736252e0678f9b57ce83652e2dab5",
+        "stablePatchId": "5df914cbdf39e0ea46c671ebaa88e5a6b5cb2c73"
+      },
+      {
+        "source": "e97c80beb3d7c73ebc24b2a243fdf0d45a8e5e76",
+        "replay": "362835012d4069b39c703305a174977d5e06720d",
+        "final": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+        "stablePatchId": "5df914cbdf39e0ea46c671ebaa88e5a6b5cb2c73"
+      },
+      {
+        "source": "de3d81fed1817144fcd6fab4ed50ae821edeb5e2",
+        "replay": "37f22633311d270afe5fbed0f5c3cb4f4c2aab16",
+        "final": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+        "stablePatchId": "0a144231e3549544de644e2c784f7c5e9a6783ad"
+      },
+      {
+        "source": "7e9d0c6166c022ad3b5a45f12a4365981ab7f5fd",
+        "replay": "44282b56385d8fd1d55cdfd91e79e6cef9344d5b",
+        "final": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+        "stablePatchId": "07d83e86927d3c11bc320de6850a316442515ef4"
+      },
+      {
+        "source": "c72f9918244ad525182f2414d3afd281c51c8b07",
+        "replay": "475203fb14c96a9d7fe6ff6db78ec2ffeb445715",
+        "final": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+        "stablePatchId": "569f1ffa0ca7681326c7f695ece507b690b25811"
+      },
+      {
+        "source": "28ce1a938a0f06617bd92d31ff1ec7ef95fb541c",
+        "replay": "e3f62dced44b8ddd7e932ec992756a39f30f3495",
+        "final": "ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+        "stablePatchId": "791dcfab69461646ffb260123117e5dd2546e260"
+      }
+    ],
+    "windowsIntegrationAdjustedReplays": [
+      {
+        "source": "833860eb1d70121f9bc8c58f985b49f4c6d93788",
+        "sourceStablePatchId": "6dcb053d2bbf311eb6906d1e319e269deab83d2c",
+        "replay": "62e06dfd371076126e812cdd9f493a23aa6b8fb4",
+        "replayStablePatchId": "73fe7512e284cde69abe445af446810c82f3efbc",
+        "final": "f93f0736b48736252e0678f9b57ce83652e2dab5",
+        "sourceChangedPathCount": 13,
+        "replayChangedPathCount": 13,
+        "reason": "netlify.toml retained the telemetry additions beside a pre-existing scheduled-worker block"
+      }
+    ],
+    "macTransferredCorrectionReplays": [
+      {
+        "sourceRef": "refs/remotes/origin/mac/admin-api-contract-fuzz",
+        "sourceSha": "5de0065ff106298ec5b9cf1dff6cc6b1821384d1",
+        "sourceStablePatchId": "202d8ceec34af919b14b1d27a3e57408c3ed13db",
+        "replaySha": "d78f8d825b6aaeb5f632c016186c458f42889092",
+        "replayStablePatchId": "2c024de4a8d23e23b88b27d66fd78e435e0ee4ea",
+        "replayAncestorOfRc4": true,
+        "sourceAncestorOfRc4": false,
+        "cherryPickTrailerMatchesSource": true,
+        "sameChangedPathSet": true,
+        "sourceChangedPathCount": 17,
+        "replayChangedPathCount": 17,
+        "stablePatchEquivalentPathCount": 16,
+        "integrationAdjustedPaths": ["netlify/functions/admin-curriculum.js"]
+      },
+      {
+        "sourceRef": "refs/remotes/origin/mac/admin-browser-cache-compat",
+        "sourceSha": "c7a2ce032aff455e3cccf4ef1aa395149210323e",
+        "sourceStablePatchId": "7552f7d8533823f9b72a3c9259012da4d3589f72",
+        "replaySha": "13a6ef2013fadac7b830f9d082d0c1a9a98d1f75",
+        "replayStablePatchId": "d96034178a8414e59088cdac804aba660f71cb36",
+        "replayAncestorOfRc4": true,
+        "sourceAncestorOfRc4": false,
+        "cherryPickTrailerMatchesSource": true,
+        "sameChangedPathSet": true,
+        "sourceChangedPathCount": 18,
+        "replayChangedPathCount": 18,
+        "stablePatchEquivalentPathCount": 15,
+        "integrationAdjustedPaths": [
+          "package-lock.json",
+          "package.json",
+          "src/components/admin/admin-console.css"
+        ]
+      },
+      {
+        "sourceRef": "refs/remotes/origin/mac/admin-time-boundary-audit",
+        "sourceSha": "cb6f95479aeddcd130351fedafa5b333a3ff8575",
+        "sourceStablePatchId": "5c5b8a33fbb1e3721bbffd0f7f64e6346a6efd08",
+        "replaySha": "fdbdca191bfe12a45863eb1180505fff4bc0ad64",
+        "replayStablePatchId": "969860310f63ebb5c1aac710de203af4df15e484",
+        "replayAncestorOfRc4": true,
+        "sourceAncestorOfRc4": false,
+        "cherryPickTrailerMatchesSource": true,
+        "sameChangedPathSet": true,
+        "sourceChangedPathCount": 32,
+        "replayChangedPathCount": 32,
+        "stablePatchEquivalentPathCount": 29,
+        "integrationAdjustedPaths": [
+          "netlify/functions/admin-correlations.js",
+          "netlify/functions/admin-correlations.test.js",
+          "src/admin/curriculum-history/model.ts"
+        ],
+        "sqlPathPatchesStableEquivalent": true
+      },
+      {
+        "sourceRef": "refs/remotes/origin/mac/admin-failure-chaos",
+        "sourceSha": "5ee417c052294d4a28509561513796d3ea38a85a",
+        "sourceStablePatchId": "0b808aae4e571354cbaf0eb4660f97d0b6ba22fe",
+        "replaySha": "bf12ef5a342610bbfaf08f6d22433f80aeaeb01f",
+        "replayStablePatchId": "2de50eceac399a71c252fe5ac172ee297d8f0e64",
+        "replayAncestorOfRc4": true,
+        "sourceAncestorOfRc4": false,
+        "cherryPickTrailerMatchesSource": true,
+        "sameChangedPathSet": true,
+        "sourceChangedPathCount": 43,
+        "replayChangedPathCount": 43,
+        "stablePatchEquivalentPathCount": 40,
+        "integrationAdjustedPaths": [
+          "src/admin/authorization.ts",
+          "src/admin/curriculum/httpSource.ts",
+          "src/components/admin/AdminConsoleRoute.tsx"
+        ]
+      },
+      {
+        "sourceRef": "refs/remotes/origin/mac/admin-db-security-audit",
+        "sourceSha": "47c315f767c216cd59b8b71e5b59f7bc6d2a7a17",
+        "sourceStablePatchId": "cd216c07187e2dea6172066186ff8eed9b7d6e18",
+        "replaySha": "d630456883a33d01a30eb1b18d55b8506645db90",
+        "replayStablePatchId": "6e7b6154bb498cf34baa2ba86208c895c6150530",
+        "replayAncestorOfRc4": true,
+        "sourceAncestorOfRc4": false,
+        "cherryPickTrailerMatchesSource": true,
+        "sameChangedPathSet": false,
+        "sourceChangedPathCount": 7,
+        "replayChangedPathCount": 6,
+        "stablePatchEquivalentPathCount": 5,
+        "integrationAdjustedPaths": [
+          "docs/study-engine-final-production/migration-manifest.json"
+        ],
+        "sourceOnlyTestHarnessPath": {
+          "path": "supabase/academy-cas.db.test.ts",
+          "sourcePostimageBlob": "5a71cc2bf0915ef9f0953aa4f030c12a91d57ae8",
+          "retainedRc3Blob": "8be2e1c65ab2c1d287a2d5a324e5de2e3f1acd85",
+          "reason": "Source changed a PGlite-socket query workaround; RC3 uses a different in-process PGlite harness, so the source path was omitted during integration."
+        },
+        "migrationPatchStableEquivalent": true
+      }
+    ],
+    "rc4FinalAssemblyAdjustedPaths": [
+      "package-lock.json",
+      "package.json",
+      "src/admin/authorization.test.ts",
+      "src/admin/authorization.ts",
+      "src/admin/curriculum/httpSource.ts",
+      "supabase/admin-database-security.db.test.ts"
+    ]
+  },
+  "historicalFormerBlockers": {
+    "disposition": "not_required_superseded_by_authoritative_rc4",
+    "proofBoundary": "The historical source objects/leaf refs remain absent, so literal source ancestry and whole-patch equivalence were not recomputed. The listed replacement commits and their exact ancestry into RC4 were independently verified.",
+    "historicalShaObjects": [
+      {
+        "artifact": "Curriculum 16B",
+        "historicalSha": "8cac699a9b263c7b0bb1e33e3b5d7e5a59ca03de",
+        "objectExists": false,
+        "rc4Replacement": "f9ecb3b24b34a565faa7686ebc83a5efdc9f3ee0",
+        "replacementSubject": "admin: add curriculum draft authoring foundation",
+        "replacementAncestorOfRc4": true,
+        "auditSupport": "integration-adjusted source line"
+      },
+      {
+        "artifact": "Curriculum Studio shell",
+        "historicalSha": "a0064c00052ed9024c9b1b4f703a8e0eca0e3867",
+        "objectExists": false,
+        "rc4Replacement": "20a604ce25b8561afcfa9be32c92c48515633efe",
+        "replacementSubject": "admin: build curriculum studio workspace shell",
+        "replacementAncestorOfRc4": true
+      },
+      {
+        "artifact": "Curriculum Validation",
+        "historicalSha": "54b314e61be1ca979ac5248a55ce499f8acd0cd3",
+        "objectExists": false,
+        "rc4Replacement": "f952423416697507b7e280095467a651a2382f13",
+        "replacementSubject": "admin: build curriculum validation workspace",
+        "replacementAncestorOfRc4": true
+      },
+      {
+        "artifact": "Provider Attempt Journal",
+        "historicalSha": "a552b2ec343defb3f533f3c0412cae6b8d01355b",
+        "objectExists": false,
+        "rc4Replacement": "32f9f6b79b18dcdf887c35db3772af04c874efe7",
+        "replacementSubject": "admin: add provider attempt journal foundation",
+        "replacementAncestorOfRc4": true,
+        "auditSupport": "stable-patch-equivalent source line"
+      },
+      {
+        "artifact": "R2 Configuration UI",
+        "historicalSha": "178f85c0a43cf9876b296119f7a04142bdf37ae0",
+        "objectExists": false,
+        "rc4Replacement": "79ae45ab73ad73ce9b2efabb80e382fcd04a6488",
+        "replacementSubject": "admin: build configuration console UI",
+        "replacementAncestorOfRc4": true
+      },
+      {
+        "artifact": "R2 Audit UX",
+        "historicalSha": "9305ec5c5f6207e24a1e1116bdb02c5c8793a7ea",
+        "objectExists": false,
+        "rc4Replacement": "f5acc327597daadf157d7b10adc7665637f4f66b",
+        "replacementSubject": "admin: complete audit log experience",
+        "replacementAncestorOfRc4": true
+      },
+      {
+        "artifact": "Engine Performance aggregate",
+        "historicalSha": "92b73d0dc85b1310d0567976388b14ba72284c74",
+        "objectExists": false,
+        "rc4Replacement": "2a107b3473999c6478617f7be619745f5d847d66",
+        "replacementSubject": "admin-4: adopt scalable engine performance aggregates",
+        "replacementAncestorOfRc4": true
+      }
+    ],
+    "historicalLeafRefs": [
+      {
+        "ref": "refs/remotes/origin/mac/admin-provider-gateway-instrumentation",
+        "refExists": false,
+        "rc4Replacement": "fcf67a78f14313b02bab73f89f0c364417f7e9a6",
+        "replacementSubject": "admin: journal real provider gateway attempts",
+        "replacementAncestorOfRc4": true
+      },
+      {
+        "ref": "refs/remotes/origin/mac/admin-curr-17b-studio-integration",
+        "refExists": false,
+        "rc4Replacement": "a640bd1990752363265442b96351ded0d9ce9633",
+        "replacementSubject": "admin: connect curriculum studio to draft authoring",
+        "replacementAncestorOfRc4": true
+      },
+      {
+        "ref": "refs/remotes/origin/mac/admin-curr-standards-review",
+        "refExists": false,
+        "rc4Replacement": "307588aa8af678073123f5500f09582f1a55dc5e",
+        "replacementSubject": "admin: integrate curriculum studio release workflow",
+        "replacementAncestorOfRc4": true
+      },
+      {
+        "ref": "refs/remotes/origin/mac/admin-curr-19-preview-diff",
+        "refExists": false,
+        "rc4Replacement": "1862d65b486b3b2acba61c8c072bf871e3166e9b",
+        "replacementSubject": "admin: add curriculum preview and revision diff",
+        "replacementAncestorOfRc4": true
+      },
+      {
+        "ref": "refs/remotes/origin/mac/admin-curr-20a-release-staging",
+        "refExists": false,
+        "rc4Replacement": "307588aa8af678073123f5500f09582f1a55dc5e",
+        "replacementSubject": "admin: integrate curriculum studio release workflow",
+        "replacementAncestorOfRc4": true
+      },
+      {
+        "ref": "refs/remotes/origin/mac/admin-r2-wave-integration",
+        "refExists": false,
+        "rc4Replacement": "1d24076ce2c43b69bfee3b0f6d52c14faaf81c04",
+        "replacementSubject": "admin: integrate R2 dashboard improvements",
+        "replacementAncestorOfRc4": true
+      }
+    ]
+  },
+  "minimumFinalIntegrationSourceSet": {
+    "sources": [
+      "origin/mac/admin-final-rc4-assembly@6f952509236daa4e17849c4a5399241e42816553",
+      "win/final-study-rc1@f93f0736b48736252e0678f9b57ce83652e2dab5",
+      "win/final-admin-delta-rc1@ae2c9b32445a59b82a972f3b67af8ea11dc50b79"
+    ],
+    "supportingEvidenceNotProductSource": "origin/mac/admin-final-rc3-provenance-audit@d6a0754d9acd1192ba9a2037fe2fc077441ba080",
+    "doNotIntegrateSeparately": [
+      "Mac RC3",
+      "five transferred Mac correction refs",
+      "historical Mac constituent refs",
+      "Windows constituent refs"
+    ],
+    "requiredReconciliation": "Reconcile the three divergent final tips and all overlap/migration collisions exactly once."
+  },
+  "changedPathOverlap": {
+    "baseline": "d65d1511dd602db586a204bb7ccb2800fd7a89e2",
+    "changedPathCounts": {
+      "macFinalRc4": 418,
+      "windowsFinalStudyRc1": 143,
+      "windowsFinalAdminDeltaRc1": 231
+    },
+    "intersectionCounts": {
+      "macStudy": 15,
+      "macAdmin": 105,
+      "studyAdmin": 64,
+      "allThree": 6
+    },
+    "macStudy": [
+      "docs/admin-console/curriculum-release-registry.md",
+      "docs/admin-console/curriculum-release-registry-migration.json",
+      "docs/study-engine-final-production/migration-manifest.json",
+      "MIGRATIONS.md",
+      "netlify.toml",
+      "netlify/functions/_shared/admin-curriculum-registry-reader.js",
+      "netlify/functions/_shared/admin-curriculum-registry-reader.test.js",
+      "netlify/functions/_shared/operational-telemetry-writer.js",
+      "netlify/functions/_shared/operational-telemetry-writer.test.js",
+      "netlify/functions/admin-curriculum.js",
+      "netlify/functions/admin-curriculum.test.js",
+      "package.json",
+      "scripts/generate-curriculum-release-registry.mjs",
+      "supabase/academy-curriculum-release-registry.db.test.ts",
+      "supabase/migrations/20260809160000_academy_curriculum_release_registry.sql"
+    ],
+    "macAdmin": [
+      "docs/admin-audit-foundation.md",
+      "docs/admin-configuration-core.md",
+      "docs/admin-configuration-runtime.md",
+      "docs/admin-console/audit.md",
+      "docs/admin-console/cost-accounting.md",
+      "docs/admin-console/README.md",
+      "docs/admin-operational-telemetry.md",
+      "docs/admin-r1-wave2-integration.md",
+      "docs/admin-system-health.md",
+      "docs/study-engine-final-production/migration-manifest.json",
+      "docs/tel-ai-gateways.md",
+      "docs/tts-logical-voice-catalog.md",
+      "MIGRATIONS.md",
+      "netlify.toml",
+      "netlify/functions/_shared/admin-audit-reader.js",
+      "netlify/functions/_shared/admin-audit-reader.test.js",
+      "netlify/functions/_shared/admin-configuration-source.js",
+      "netlify/functions/_shared/admin-configuration-source.test.js",
+      "netlify/functions/_shared/admin-cost-projection.js",
+      "netlify/functions/_shared/admin-cost-projection.test.js",
+      "netlify/functions/_shared/admin-health-source.js",
+      "netlify/functions/_shared/admin-health-source.test.js",
+      "netlify/functions/_shared/admin-operational-aggregate-reader.js",
+      "netlify/functions/_shared/admin-operational-aggregate-reader.test.js",
+      "netlify/functions/_shared/anthropic-policy.js",
+      "netlify/functions/_shared/gateway-access.js",
+      "netlify/functions/_shared/gateway-telemetry.js",
+      "netlify/functions/_shared/operational-telemetry-writer.js",
+      "netlify/functions/_shared/operational-telemetry-writer.test.js",
+      "netlify/functions/_shared/tts-catalog.js",
+      "netlify/functions/_shared/tts-policy.js",
+      "netlify/functions/admin-audit.js",
+      "netlify/functions/admin-audit.test.js",
+      "netlify/functions/admin-configuration.js",
+      "netlify/functions/admin-configuration.test.js",
+      "netlify/functions/admin-configuration-runtime-boundary.test.js",
+      "netlify/functions/admin-costs.js",
+      "netlify/functions/admin-costs.test.js",
+      "netlify/functions/admin-engine-performance.js",
+      "netlify/functions/admin-engine-performance.test.js",
+      "netlify/functions/admin-health.js",
+      "netlify/functions/admin-health.test.js",
+      "netlify/functions/anthropic.js",
+      "netlify/functions/tts.js",
+      "package.json",
+      "scripts/study-migration-preflight.mjs",
+      "src/admin/auditHttpSource.test.ts",
+      "src/admin/auditHttpSource.ts",
+      "src/admin/auditLogModel.ts",
+      "src/admin/configurationModel.test.ts",
+      "src/admin/configurationModel.ts",
+      "src/admin/costsHttpSource.test.ts",
+      "src/admin/costsHttpSource.ts",
+      "src/admin/costsModel.test.ts",
+      "src/admin/costsModel.ts",
+      "src/admin/costsTestFixtures.ts",
+      "src/admin/enginePerformanceModel.ts",
+      "src/admin/index.ts",
+      "src/admin/overviewModel.ts",
+      "src/admin/systemHealth.test.ts",
+      "src/admin/systemHealth.ts",
+      "src/admin/systemHealthClient.test.ts",
+      "src/admin/systemHealthClient.ts",
+      "src/components/admin/admin-audit-log.css",
+      "src/components/admin/AdminAuditLog.test.tsx",
+      "src/components/admin/AdminAuditLog.tsx",
+      "src/components/admin/admin-console.css",
+      "src/components/admin/AdminConsole.test.tsx",
+      "src/components/admin/AdminConsole.tsx",
+      "src/components/admin/AdminConsoleRoute.test.tsx",
+      "src/components/admin/AdminConsoleRoute.tsx",
+      "src/components/admin/admin-costs.css",
+      "src/components/admin/AdminCostsDashboard.test.tsx",
+      "src/components/admin/AdminCostsDashboard.tsx",
+      "src/components/admin/EnginePerformanceDashboard.tsx",
+      "src/components/admin/SystemHealthDashboard.test.tsx",
+      "src/components/admin/SystemHealthDashboard.tsx",
+      "src/components/TutorPanel.tsx",
+      "src/deploy.test.ts",
+      "src/study/production/providerBundleSecurity.test.ts",
+      "src/sync/profileVoiceContract.test.ts",
+      "src/sync/provenance.ts",
+      "src/tutor/tutorState.ts",
+      "src/tutor/voice.test.ts",
+      "src/tutor/voice.ts",
+      "src/tutor/voiceCatalog.test.ts",
+      "src/tutor/voiceCatalog.ts",
+      "src/tutor/voicePrivacy.test.ts",
+      "src/types.ts",
+      "supabase/academy-admin-audit.db.test.ts",
+      "supabase/academy-cas.db.test.ts",
+      "supabase/academy-operational-events.db.test.ts",
+      "supabase/academy-profile-contract.fixtures.ts",
+      "supabase/academy-provider-usage-cost-ledger.db.test.ts",
+      "supabase/admin-config.db.test.ts",
+      "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+      "supabase/migrations/20260809130000_academy_admin_audit_foundation.sql",
+      "supabase/migrations/20260809140000_academy_admin_configuration_core.sql",
+      "supabase/migrations/20260809150000_academy_logical_voice_profile_contract.sql",
+      "tests/netlify-functions/anthropic.test.js",
+      "tests/netlify-functions/gateway-access.test.js",
+      "tests/netlify-functions/gateway-operational-telemetry.test.js",
+      "tests/netlify-functions/tts.test.js",
+      "tests/netlify-functions/tts-catalog.test.js",
+      "vite.config.ts"
+    ],
+    "studyAdmin": [
+      "docs/study-effective-settings-v2.md",
+      "docs/study-engine-final-production/migration-manifest.json",
+      "docs/study-engine-production-reconciliation/12-production-readiness-matrix.md",
+      "MIGRATIONS.md",
+      "netlify.toml",
+      "netlify/functions/_shared/operational-telemetry-writer.js",
+      "netlify/functions/_shared/operational-telemetry-writer.test.js",
+      "netlify/functions/_shared/study-adult-review/delivery.js",
+      "netlify/functions/_shared/study-adult-review/guardian-notifications.js",
+      "netlify/functions/_shared/study-adult-review/memory-store.js",
+      "netlify/functions/_shared/study-adult-review/outbox-worker.js",
+      "netlify/functions/_shared/study-adult-review-operations/composition.js",
+      "netlify/functions/_shared/study-adult-review-operations/composition.test.js",
+      "netlify/functions/_shared/study-adult-review-operations/entrypoint-result.js",
+      "netlify/functions/_shared/study-adult-review-operations/run-evidence.js",
+      "netlify/functions/_shared/study-adult-review-operations/run-evidence.test.js",
+      "netlify/functions/_shared/study-adult-review-operations/supabase-operations.js",
+      "netlify/functions/_shared/study-adult-review-operations/supabase-operations.test.js",
+      "netlify/functions/_shared/study-adult-review-operations/worker.js",
+      "netlify/functions/_shared/study-adult-review-operations/worker.test.js",
+      "netlify/functions/_shared/study-delivery/durable-identifier-contract.test.js",
+      "netlify/functions/_shared/study-delivery/external-provider.js",
+      "netlify/functions/_shared/study-delivery/external-provider.test.js",
+      "netlify/functions/_shared/study-delivery/in-app-provider.js",
+      "netlify/functions/_shared/study-delivery/in-app-provider.test.js",
+      "netlify/functions/_shared/study-delivery/in-app-receipt-validator.js",
+      "netlify/functions/_shared/study-delivery/in-app-receipt-validator.test.js",
+      "netlify/functions/_shared/study-delivery/receipt-contract.js",
+      "netlify/functions/_shared/study-delivery/server-identifier-hardening.test.js",
+      "netlify/functions/_shared/study-delivery/supabase-in-app.js",
+      "netlify/functions/_shared/study-delivery/supabase-in-app.test.js",
+      "netlify/functions/_shared/study-production/readiness.js",
+      "netlify/functions/_shared/study-production/readiness.test.js",
+      "netlify/functions/_shared/study-runtime/verified-academic-runtime.js",
+      "netlify/functions/_shared/study-runtime/verified-academic-runtime.test.js",
+      "netlify/functions/_shared/study-worker/credential.js",
+      "netlify/functions/_shared/study-worker/credential.test.js",
+      "netlify/functions/study-adult-review-scheduled-worker.js",
+      "netlify/functions/study-adult-review-scheduled-worker.test.js",
+      "netlify/functions/study-adult-review-worker.js",
+      "netlify/functions/study-production-readiness.js",
+      "package.json",
+      "src/academy/adapters/adapters.test.ts",
+      "src/academy/adapters/studyContextAdapter.ts",
+      "src/study/composition/durableAcademicProductionPorts.test.ts",
+      "src/study/contracts/persistence/ports.ts",
+      "src/study/contracts/persistence/types.ts",
+      "src/study/contracts/production/readiness.ts",
+      "src/study/effectiveSettings.test.ts",
+      "src/study/effectiveSettings.ts",
+      "src/study/generated/studyDatabase.ts",
+      "src/study/persistence/SupabaseStudyParentSettingsAdapter.test.ts",
+      "src/study/persistence/SupabaseStudyParentSettingsAdapter.ts",
+      "src/study/persistence/SupabaseStudyPersistenceAdapter.test.ts",
+      "src/study/persistence/SupabaseStudyPersistenceAdapter.ts",
+      "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+      "supabase/migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql",
+      "supabase/migrations/20260810152100_academy_study_worker_operations_contract.sql",
+      "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql",
+      "supabase/study-curriculum-binding.db.test.ts",
+      "supabase/study-effective-settings-v2.db.test.ts",
+      "supabase/study-engine-adult-review.db.test.ts",
+      "supabase/study-engine-in-app-receipt-timestamp.db.test.ts",
+      "supabase/study-worker-run-evidence.db.test.ts"
+    ],
+    "allThree": [
+      "docs/study-engine-final-production/migration-manifest.json",
+      "MIGRATIONS.md",
+      "netlify.toml",
+      "netlify/functions/_shared/operational-telemetry-writer.js",
+      "netlify/functions/_shared/operational-telemetry-writer.test.js",
+      "package.json"
+    ]
+  },
+  "migrations": {
+    "sourceManifests": [
+      {
+        "source": "origin/mac/admin-final-rc4-assembly@6f952509236daa4e17849c4a5399241e42816553",
+        "addedSinceBaseline": [
+          "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+          "supabase/migrations/20260809130000_academy_admin_audit_foundation.sql",
+          "supabase/migrations/20260809140000_academy_admin_configuration_core.sql",
+          "supabase/migrations/20260809150000_academy_logical_voice_profile_contract.sql",
+          "supabase/migrations/20260809160000_academy_curriculum_release_registry.sql",
+          "supabase/migrations/20260809170000_academy_admin_curriculum_audit_vocabulary.sql",
+          "supabase/migrations/20260810110000_academy_admin_audit_query_filters.sql",
+          "supabase/migrations/20260810120000_academy_curriculum_draft_authoring.sql",
+          "supabase/migrations/20260810130000_academy_curriculum_standards_review.sql",
+          "supabase/migrations/20260810131000_academy_provider_attempt_journal.sql",
+          "supabase/migrations/20260810140000_academy_curriculum_human_approval.sql",
+          "supabase/migrations/20260810141500_academy_curriculum_draft_collaborators.sql",
+          "supabase/migrations/20260810144700_academy_admin_access_management.sql",
+          "supabase/migrations/20260810150000_academy_curriculum_release_staging.sql",
+          "supabase/migrations/20260810151000_academy_study_safety_provider_accounting.sql",
+          "supabase/migrations/20260810153000_academy_admin_configuration_reauthorization.sql",
+          "supabase/migrations/20260810155000_academy_curriculum_privacy_hardening.sql",
+          "supabase/migrations/20260810160000_academy_curriculum_release_publishing.sql",
+          "supabase/migrations/20260810170000_academy_curriculum_activation_rollback.sql",
+          "supabase/migrations/20260810180000_academy_admin_correlation_runtime_read.sql",
+          "supabase/migrations/20260810190000_academy_curriculum_write_reauthorization.sql",
+          "supabase/migrations/20260810200000_academy_admin_curriculum_performance_bounds.sql"
+        ]
+      },
+      {
+        "source": "win/final-study-rc1@f93f0736b48736252e0678f9b57ce83652e2dab5",
+        "addedSinceBaseline": [
+          "supabase/migrations/20260809160000_academy_curriculum_release_registry.sql",
+          "supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql",
+          "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+          "supabase/migrations/20260810151000_academy_study_session_semantics_v2.sql",
+          "supabase/migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql",
+          "supabase/migrations/20260810152100_academy_study_worker_operations_contract.sql",
+          "supabase/migrations/20260810153000_academy_study_release_registry_bridge.sql",
+          "supabase/migrations/20260810154000_academy_study_bound_content_authority.sql",
+          "supabase/migrations/20260810155000_academy_study_session_telemetry_outbox.sql",
+          "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql",
+          "supabase/migrations/20260810159100_academy_study_session_timestamp_coherence.sql"
+        ]
+      },
+      {
+        "source": "win/final-admin-delta-rc1@ae2c9b32445a59b82a972f3b67af8ea11dc50b79",
+        "addedSinceBaseline": [
+          "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+          "supabase/migrations/20260809121000_academy_provider_usage_cost_aggregate.sql",
+          "supabase/migrations/20260809130000_academy_admin_audit_foundation.sql",
+          "supabase/migrations/20260809140000_academy_admin_configuration_core.sql",
+          "supabase/migrations/20260809150000_academy_logical_voice_profile_contract.sql",
+          "supabase/migrations/20260810120200_academy_study_effective_settings_v2.sql",
+          "supabase/migrations/20260810120300_academy_provider_pricing_terms.sql",
+          "supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql",
+          "supabase/migrations/20260810141000_academy_study_provider_cost_accounting.sql",
+          "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+          "supabase/migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql",
+          "supabase/migrations/20260810152100_academy_study_worker_operations_contract.sql",
+          "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql"
+        ]
+      }
+    ],
+    "transferredCorrectionEffects": [
+      {
+        "sourceRef": "origin/mac/admin-time-boundary-audit",
+        "modified": [
+          "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+          "supabase/migrations/20260810180000_academy_admin_correlation_runtime_read.sql"
+        ]
+      },
+      {
+        "sourceRef": "origin/mac/admin-db-security-audit",
+        "added": ["supabase/migrations/20260810190000_academy_curriculum_write_reauthorization.sql"]
+      }
+    ],
+    "finalTipCommitEffects": [
+      {
+        "source": "win/final-study-rc1",
+        "added": ["supabase/migrations/20260810159100_academy_study_session_timestamp_coherence.sql"]
+      },
+      {
+        "source": "win/final-admin-delta-rc1",
+        "deleted": [
+          "supabase/migrations/20260810120000_academy_provider_pricing_terms.sql",
+          "supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql"
+        ],
+        "added": [
+          "supabase/migrations/20260810120200_academy_study_effective_settings_v2.sql",
+          "supabase/migrations/20260810120300_academy_provider_pricing_terms.sql"
+        ],
+        "modified": [
+          "supabase/migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql",
+          "supabase/migrations/20260810152100_academy_study_worker_operations_contract.sql"
+        ]
+      }
+    ],
+    "samePathCrossSourceBlobs": [
+      {
+        "path": "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+        "sources": ["mac", "admin"],
+        "sameBlob": false,
+        "blobs": {
+          "mac": "baff778c6e7e09aba12094cd0d20e0ba21c8a0c9",
+          "admin": "23d4686138831b7c6485e8a0254f228ecf85596f"
+        }
+      },
+      {
+        "path": "supabase/migrations/20260809130000_academy_admin_audit_foundation.sql",
+        "sources": ["mac", "admin"],
+        "sameBlob": true,
+        "blob": "dd0caa5ef2ae4a209b821440f3324334b97c402f"
+      },
+      {
+        "path": "supabase/migrations/20260809140000_academy_admin_configuration_core.sql",
+        "sources": ["mac", "admin"],
+        "sameBlob": true,
+        "blob": "4566758081868f81e8d1a9a05d0537c9164effe5"
+      },
+      {
+        "path": "supabase/migrations/20260809150000_academy_logical_voice_profile_contract.sql",
+        "sources": ["mac", "admin"],
+        "sameBlob": true,
+        "blob": "28a816712a4adc2dfbfba3160af070782aa8ef32"
+      },
+      {
+        "path": "supabase/migrations/20260809160000_academy_curriculum_release_registry.sql",
+        "sources": ["mac", "study"],
+        "sameBlob": true,
+        "blob": "886250d21d709e88bb768c5dc26f523a621d585c"
+      },
+      {
+        "path": "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+        "sources": ["study", "admin"],
+        "sameBlob": true,
+        "blob": "0ab1da30b35a82bd3f5a2d1832c4a95fd95bfbad"
+      },
+      {
+        "path": "supabase/migrations/20260810152000_academy_study_in_app_receipt_timestamp.sql",
+        "sources": ["study", "admin"],
+        "sameBlob": false,
+        "blobs": {
+          "study": "036e64e7392efc089b2c25a96816491d6d1cce3f",
+          "admin": "710371814f233c1a089780aa539f147f50ef47f2"
+        }
+      },
+      {
+        "path": "supabase/migrations/20260810152100_academy_study_worker_operations_contract.sql",
+        "sources": ["study", "admin"],
+        "sameBlob": false,
+        "blobs": {
+          "study": "7ae12206adcd661348ea3c4b234bcc557cd922e5",
+          "admin": "effc0ee0031e4ccc8db9d533686f5167f566864b"
+        }
+      },
+      {
+        "path": "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql",
+        "sources": ["study", "admin"],
+        "sameBlob": true,
+        "blob": "5d868f351a1c25f03dcd2a214d03073a61ad04ee"
+      }
+    ],
+    "sameVersionDifferentFilenameCollisions": [
+      {
+        "version": "20260810120000",
+        "entries": [
+          "mac:supabase/migrations/20260810120000_academy_curriculum_draft_authoring.sql@ab106c085c0ddce930ab8bcb2ce1577cd152ed34",
+          "study:supabase/migrations/20260810120000_academy_study_effective_settings_v2.sql@c01dc9b5c700221a173e76556dac1159aa3e7e7b"
+        ]
+      },
+      {
+        "version": "20260810140000",
+        "entries": [
+          "mac:supabase/migrations/20260810140000_academy_curriculum_human_approval.sql@ad07d691af3f71f990078fa8cca9ccd56713ade8",
+          "admin:supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql@138797d7c68d48279e291f09b1af79ce7460efd7"
+        ]
+      },
+      {
+        "version": "20260810150000",
+        "entries": [
+          "mac:supabase/migrations/20260810150000_academy_curriculum_release_staging.sql@2ef36d9b09da1d8da549bd2201efa0679bc243e3",
+          "study:supabase/migrations/20260810150000_academy_study_curriculum_binding.sql@0ab1da30b35a82bd3f5a2d1832c4a95fd95bfbad",
+          "admin:supabase/migrations/20260810150000_academy_study_curriculum_binding.sql@0ab1da30b35a82bd3f5a2d1832c4a95fd95bfbad"
+        ]
+      },
+      {
+        "version": "20260810151000",
+        "entries": [
+          "mac:supabase/migrations/20260810151000_academy_study_safety_provider_accounting.sql@80a091a79db9c0eecdf2044492f94232c63e3842",
+          "study:supabase/migrations/20260810151000_academy_study_session_semantics_v2.sql@1448532fdabbf88a4e83765e644863904c915588"
+        ]
+      },
+      {
+        "version": "20260810153000",
+        "entries": [
+          "mac:supabase/migrations/20260810153000_academy_admin_configuration_reauthorization.sql@01179b86df6fcfbb772117408d882a2ab3db1f50",
+          "study:supabase/migrations/20260810153000_academy_study_release_registry_bridge.sql@b71577fb1b2afd7dd58e20daefaa847cd02e346e"
+        ]
+      },
+      {
+        "version": "20260810155000",
+        "entries": [
+          "mac:supabase/migrations/20260810155000_academy_curriculum_privacy_hardening.sql@0eac5230da3280eda41f1bf281f1657266f1a411",
+          "study:supabase/migrations/20260810155000_academy_study_session_telemetry_outbox.sql@dc2ccfe79b96ebe54d055c2fd279b29ddbb66f6e"
+        ]
+      }
+    ],
+    "mutationPerformed": false,
+    "hostedTargetContacted": false
+  },
+  "excludedUnrelatedSources": [
+    {
+      "ref": "refs/remotes/origin/integration/study-a1-final-r8",
+      "sha": "c433fa1ba1c1c6af518e1c11daf36e228e7c8c99",
+      "subject": "test: drive study seam rerenders explicitly",
+      "reason": "separate auth/study workstream pending custody/security classification"
+    },
+    {
+      "ref": "refs/remotes/origin/study-a1-production-integration-base-c-r2",
+      "sha": "0e62cdf9562a4e6579f97a87023bb5f639c2a7b1",
+      "subject": "test(study): reconcile integrated production guards",
+      "reason": "separate auth/study workstream pending custody/security classification"
+    },
+    {
+      "ref": "refs/remotes/origin/study-a1-server-tutor-prebundle-t1-h2",
+      "sha": "860d52e9bfb011f83aa6acf128fd870868cb33b9",
+      "subject": "fix(study): validate production Tutor mapping schema",
+      "reason": "separate auth/study workstream pending custody/security classification"
+    },
+    {
+      "ref": "refs/remotes/origin/study-a1-tutor-host-mapping-t2-h2",
+      "sha": "b0e111ca3a7327def7a95a2577ae7bdabb661681",
+      "subject": "fix(study): make Tutor host mapping reflect executable routing",
+      "reason": "separate auth/study workstream pending custody/security classification"
+    }
+  ],
+  "completeness": {
+    "requiredMacSourceMissing": false,
+    "authoritativeMacFinalPresent": true,
+    "macProvenanceAuditPresent": true,
+    "allFiveTransferredProductionCorrectionRefsPresent": true,
+    "historicalConstituentObjectsOrLeafRefsStillAbsent": true,
+    "historicalAbsenceBlocksFinalSourceSet": false,
+    "minimumFinalSourceSetComplete": true
+  },
+  "validation": {
+    "jsonParses": true,
+    "markdownJsonAgreementChecked": true,
+    "onlyReportFilesChanged": true,
+    "productFilesChanged": false
+  },
+  "hold": true
+}
