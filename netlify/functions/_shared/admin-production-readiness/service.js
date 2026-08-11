@@ -18,6 +18,18 @@ export const READINESS_EVIDENCE_STATUSES = Object.freeze([
 const POSITIVE = new Set(['1', 'true', 'on', 'enabled'])
 const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?$/
 const MIGRATION_VERSION = /^\d{14}$/
+const INTEGER_MICROS = /^(0|[1-9][0-9]*)$/
+const PROVIDER_ENGINE_KEYS = Object.freeze(['tutor', 'jarvis', 'tts', 'study'])
+const PROVIDER_JOURNAL_STATUSES = new Set([
+  'complete_for_journaled_attempts',
+  'partial',
+  'gaps_detected',
+  'reconciliation_conflict',
+  'insufficient_evidence',
+  'unavailable',
+])
+const MONTHLY_ALERT_STATUSES = new Set(['normal', 'warning', 'critical', 'partial', 'unavailable'])
+const MONTHLY_ALERT_COMPLETENESS = new Set(['complete', 'partial', 'unavailable'])
 
 function exactKeys(value, keys) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
@@ -92,7 +104,9 @@ function repositoryResult(result) {
   const source = result.ok && result.value && typeof result.value === 'object' ? result.value : null
   const migrations = source?.migrations
   const curriculum = source?.curriculum
-  const validMigrations = exactKeys(source, ['migrations', 'curriculum'])
+  const releaseControls = source?.releaseControls
+  const validSource = exactKeys(source, ['migrations', 'curriculum', 'releaseControls'])
+  const validMigrations = validSource
     && exactKeys(migrations, [
       'state', 'migrationCount', 'manifestCount', 'collisionVersions',
       'orderingHazardCount', 'hashMismatchCount',
@@ -109,16 +123,31 @@ function repositoryResult(result) {
         && migrations.collisionVersions.length === 0
         && migrations.orderingHazardCount === 0
         && migrations.hashMismatchCount === 0))
-  const validCurriculum = exactKeys(source, ['migrations', 'curriculum'])
+  const validCurriculum = validSource
     && exactKeys(curriculum, ['state', 'activeVersion', 'registeredReleaseCount', 'validationState'])
     && (curriculum.state === 'ready' || curriculum.state === 'blocked')
     && VERSION.test(curriculum.activeVersion)
     && Number.isSafeInteger(curriculum.registeredReleaseCount)
     && curriculum.registeredReleaseCount >= 1
     && (curriculum.validationState === 'passed' || curriculum.validationState === 'failed')
+  const validReleaseControls = validSource
+    && exactKeys(releaseControls, [
+      'state', 'registry', 'staging', 'integrity', 'publishing', 'activationRollback',
+    ])
+    && (releaseControls.state === 'ready' || releaseControls.state === 'blocked')
+    && ['registry', 'staging', 'integrity', 'publishing', 'activationRollback']
+      .every((key) => typeof releaseControls[key] === 'boolean')
+    && (releaseControls.state === 'ready') === [
+      releaseControls.registry,
+      releaseControls.staging,
+      releaseControls.integrity,
+      releaseControls.publishing,
+      releaseControls.activationRollback,
+    ].every(Boolean)
   return Object.freeze({
     migrations: validMigrations ? migrations : null,
     curriculum: validCurriculum ? curriculum : null,
+    releaseControls: validReleaseControls ? releaseControls : null,
   })
 }
 
@@ -326,6 +355,212 @@ function probeAvailability({ result, id, title, source, unavailableSummary, acti
   })
 }
 
+function providerAccountingCheck(result) {
+  const value = result.ok && result.value && typeof result.value === 'object'
+    ? result.value : null
+  const instrumentation = value?.providerInstrumentation
+  const engines = instrumentation?.engines
+  const structurallyValid = exactKeys(value, [
+    'status', 'journalStatus', 'reconciliationState', 'providerInstrumentation',
+    'invoiceCompletenessClaim', 'metrics', 'breakdowns',
+  ])
+    && exactKeys(instrumentation, ['status', 'engines'])
+    && ['complete', 'partial'].includes(instrumentation.status)
+    && Array.isArray(engines)
+    && engines.length <= PROVIDER_ENGINE_KEYS.length
+    && engines.every((engine) => exactKeys(engine, ['key', 'status'])
+      && PROVIDER_ENGINE_KEYS.includes(engine.key)
+      && ['covered', 'pending'].includes(engine.status))
+    && new Set(engines.map((engine) => engine.key)).size === engines.length
+    && PROVIDER_JOURNAL_STATUSES.has(value?.journalStatus)
+    && typeof value?.reconciliationState === 'string'
+    && typeof value?.invoiceCompletenessClaim === 'boolean'
+
+  if (!structurallyValid) return check({
+    id: 'telemetry.provider_accounting', title: 'Provider accounting instrumentation',
+    status: 'UNAVAILABLE',
+    summary: 'The bounded provider-attempt coverage contract is unavailable or malformed.',
+    action: 'Restore the privacy-minimized provider-attempt coverage projection and retry.',
+    source: 'Provider attempt coverage contract', evidenceStatus: 'UNAVAILABLE',
+  })
+
+  if (value.invoiceCompletenessClaim !== false) return check({
+    id: 'telemetry.provider_accounting', title: 'Provider accounting instrumentation',
+    status: 'BLOCKED',
+    summary: 'The accounting projection made an unsupported provider-invoice completeness claim.',
+    action: 'Restore the explicit false invoice-completeness boundary before production activation.',
+    source: 'Provider attempt coverage contract', evidenceStatus: 'MISMATCH',
+  })
+
+  const completeInstrumentation = instrumentation.status === 'complete'
+    && engines.length === PROVIDER_ENGINE_KEYS.length
+    && PROVIDER_ENGINE_KEYS.every((key) => engines.some((engine) =>
+      engine.key === key && engine.status === 'covered'))
+  if (!completeInstrumentation) return check({
+    id: 'telemetry.provider_accounting', title: 'Provider accounting instrumentation',
+    status: 'BLOCKED',
+    summary: 'Tutor, Jarvis, premium TTS, and Study safety are not all covered by the current-path instrumentation contract.',
+    action: 'Complete every known external provider-attempt path before production activation.',
+    source: 'Provider attempt coverage contract', evidenceStatus: 'MISMATCH',
+  })
+
+  if (value.journalStatus === 'unavailable') return check({
+    id: 'telemetry.provider_accounting', title: 'Provider accounting instrumentation',
+    status: 'UNAVAILABLE',
+    summary: 'Current-path instrumentation is complete, but bounded journal evidence is unavailable.',
+    action: 'Restore the provider-attempt coverage read without weakening the instrumentation contract.',
+    source: 'Provider attempt coverage contract', evidenceStatus: 'UNAVAILABLE',
+  })
+  if (value.journalStatus === 'partial') return check({
+    id: 'telemetry.provider_accounting', title: 'Provider accounting instrumentation',
+    status: 'PARTIAL',
+    summary: 'All current provider paths are instrumented, but some bounded-window attempts have not reached terminal accounting state.',
+    action: 'Allow or reconcile the in-progress provider-attempt lifecycle before production activation.',
+    source: 'Provider attempt coverage contract', evidenceStatus: 'REPORTED',
+  })
+  if (value.journalStatus === 'gaps_detected'
+    || value.journalStatus === 'reconciliation_conflict') return check({
+    id: 'telemetry.provider_accounting', title: 'Provider accounting instrumentation',
+    status: 'BLOCKED',
+    summary: value.journalStatus === 'reconciliation_conflict'
+      ? 'All current provider paths are instrumented, but journal and ledger evidence conflict.'
+      : 'All current provider paths are instrumented, but bounded journal evidence contains accounting gaps.',
+    action: 'Reconcile the accounting evidence without replacing or relabeling physical provider attempts.',
+    source: 'Provider attempt coverage contract', evidenceStatus: 'MISMATCH',
+  })
+
+  return check({
+    id: 'telemetry.provider_accounting', title: 'Provider accounting instrumentation',
+    status: 'READY',
+    summary: value.journalStatus === 'insufficient_evidence'
+      ? 'Tutor, Jarvis, premium TTS, and Study safety are covered by the current-path instrumentation contract; no attempts were observed in the bounded window. This is not a provider-invoice completeness claim.'
+      : 'Tutor, Jarvis, premium TTS, and Study safety are covered by the current-path instrumentation contract, with terminal bounded-window accounting. This is not a provider-invoice completeness claim.',
+    source: 'Provider attempt coverage contract', evidenceStatus: 'VERIFIED',
+  })
+}
+
+function monthlyCostAlertCheck(result) {
+  const value = result.ok && result.value && typeof result.value === 'object'
+    ? result.value : null
+  const window = value?.window
+  const exactShape = exactKeys(value, [
+    'contractVersion', 'generatedAt', 'currency', 'window', 'costAuthority', 'scope',
+    'providerInvoiceTotalClaim', 'automaticProviderShutdown', 'completeness', 'status',
+    'reason', 'activeCritical', 'monthlyCostMicros', 'warningThresholdMicros',
+    'criticalThresholdMicros', 'remainingToWarningMicros', 'remainingToCriticalMicros',
+  ]) && exactKeys(window, ['timezone', 'startAt', 'endExclusive'])
+  if (!exactShape) return check({
+    id: 'telemetry.monthly_cost_alert', title: 'Monthly cost alert runtime',
+    status: 'UNAVAILABLE',
+    summary: 'The authoritative monthly cost alert contract is unavailable or malformed.',
+    action: 'Restore the bounded monthly cost evaluator and saved threshold projection.',
+    source: 'Monthly provider-cost alert evaluator', evidenceStatus: 'UNAVAILABLE',
+  })
+
+  const semanticBoundary = value.contractVersion === 1
+    && value.currency === 'USD'
+    && value.costAuthority === 'academy_provider_usage_ledger'
+    && value.scope === 'recorded_usage_derived_calculated_provider_cost'
+    && value.providerInvoiceTotalClaim === false
+    && value.automaticProviderShutdown === false
+  if (!semanticBoundary) return check({
+    id: 'telemetry.monthly_cost_alert', title: 'Monthly cost alert runtime',
+    status: 'BLOCKED',
+    summary: 'The monthly threshold projection violated its alert-only, ledger-authoritative safety boundary.',
+    action: 'Restore false provider-invoice and automatic-shutdown claims before production activation.',
+    source: 'Monthly provider-cost alert evaluator', evidenceStatus: 'MISMATCH',
+  })
+
+  const warning = value.warningThresholdMicros
+  const critical = value.criticalThresholdMicros
+  const configured = typeof warning === 'string' && INTEGER_MICROS.test(warning)
+    && typeof critical === 'string' && INTEGER_MICROS.test(critical)
+    && BigInt(warning) < BigInt(critical)
+  const commonValid = typeof value.generatedAt === 'string'
+    && !Number.isNaN(Date.parse(value.generatedAt))
+    && window.timezone === 'UTC'
+    && typeof window.startAt === 'string' && !Number.isNaN(Date.parse(window.startAt))
+    && typeof window.endExclusive === 'string' && !Number.isNaN(Date.parse(window.endExclusive))
+    && MONTHLY_ALERT_COMPLETENESS.has(value.completeness)
+    && MONTHLY_ALERT_STATUSES.has(value.status)
+    && typeof value.reason === 'string'
+    && typeof value.activeCritical === 'boolean'
+    && value.activeCritical === (value.status === 'critical')
+  if (!commonValid || !configured) return check({
+    id: 'telemetry.monthly_cost_alert', title: 'Monthly cost alert runtime',
+    status: 'UNAVAILABLE',
+    summary: 'Monthly warning and critical alert thresholds could not be established safely.',
+    action: 'Restore valid saved alert thresholds and the authoritative monthly aggregate.',
+    source: 'Monthly provider-cost alert evaluator', evidenceStatus: 'UNAVAILABLE',
+  })
+
+  if (value.completeness === 'complete'
+    && value.reason === 'complete'
+    && ['normal', 'warning', 'critical'].includes(value.status)) return check({
+    id: 'telemetry.monthly_cost_alert', title: 'Monthly cost alert runtime',
+    status: 'READY',
+    summary: `The authoritative monthly evaluator reports ${value.status} alert state. Thresholds are alerts only; provider auto-shutdown and provider-invoice-total claims remain false.`,
+    source: 'Monthly provider-cost alert evaluator', evidenceStatus: 'VERIFIED',
+  })
+
+  if (value.completeness === 'partial'
+    && ['partial_lower_bound', 'partial_lower_bound_critical'].includes(value.reason)
+    && ['partial', 'critical'].includes(value.status)) return check({
+    id: 'telemetry.monthly_cost_alert', title: 'Monthly cost alert runtime',
+    status: 'PARTIAL',
+    summary: 'The alert-only monthly evaluator has lower-bound cost evidence; it does not invent normal state or trigger provider shutdown.',
+    action: 'Restore complete authoritative ledger aggregation while preserving the alert-only boundary.',
+    source: 'Monthly provider-cost alert evaluator', evidenceStatus: 'REPORTED',
+  })
+
+  if (value.completeness === 'unavailable'
+    && value.status === 'unavailable'
+    && ['configuration_unavailable', 'aggregate_unavailable'].includes(value.reason)) return check({
+    id: 'telemetry.monthly_cost_alert', title: 'Monthly cost alert runtime',
+    status: 'UNAVAILABLE',
+    summary: 'The alert-only runtime is present, but authoritative threshold or aggregate evidence is unavailable.',
+    action: 'Restore the saved thresholds and authoritative usage-cost aggregate.',
+    source: 'Monthly provider-cost alert evaluator', evidenceStatus: 'UNAVAILABLE',
+  })
+
+  return check({
+    id: 'telemetry.monthly_cost_alert', title: 'Monthly cost alert runtime',
+    status: 'BLOCKED',
+    summary: 'The monthly alert status is inconsistent with its completeness and reason evidence.',
+    action: 'Reconcile the evaluator contract without adding automatic provider controls.',
+    source: 'Monthly provider-cost alert evaluator', evidenceStatus: 'MISMATCH',
+  })
+}
+
+function releaseControlsCheck(releaseControls) {
+  if (!releaseControls) return check({
+    id: 'curriculum.release_controls', title: 'Local curriculum release controls',
+    status: 'UNAVAILABLE',
+    summary: 'Checked-in curriculum release-control evidence is unavailable or malformed.',
+    action: 'Restore the local release-control module and migration inventory.',
+    source: 'Checked-in release controls and local migration manifest', evidenceStatus: 'UNAVAILABLE',
+  })
+  const controls = [
+    ['Release registry', releaseControls.registry],
+    ['Exact-revision staging', releaseControls.staging],
+    ['Integrity verification', releaseControls.integrity],
+    ['Immutable publishing', releaseControls.publishing],
+    ['Activation and rollback', releaseControls.activationRollback],
+  ]
+  const ready = releaseControls.state === 'ready'
+  return check({
+    id: 'curriculum.release_controls', title: 'Local curriculum release controls',
+    status: ready ? 'READY' : 'BLOCKED',
+    summary: ready
+      ? 'Exact-revision staging, integrity verification, immutable publishing, and activation/rollback are assembled locally. This does not prove hosted migration application.'
+      : 'One or more checked-in curriculum release controls or local migration contracts are missing.',
+    action: ready ? null : 'Restore the missing local control-plane module or migration before any hosted release card.',
+    source: 'Checked-in release controls and local migration manifest',
+    evidenceStatus: ready ? 'VERIFIED' : 'MISMATCH',
+    observations: controls.map(([label, available]) => observation(label, available ? 'present' : 'missing')),
+  })
+}
+
 /**
  * Compose bounded facts. Every probe is isolated so one failed domain cannot
  * erase other evidence or become a false READY result.
@@ -336,13 +571,22 @@ export function createAdminProductionReadinessService(options = {}) {
 
   return Object.freeze({
     async check(principal) {
-      const [repositoryRaw, configurationRaw, hostedMigrations, ownerBootstrap, telemetry, accounting] = await Promise.all([
+      const [
+        repositoryRaw,
+        configurationRaw,
+        hostedMigrations,
+        ownerBootstrap,
+        telemetry,
+        accounting,
+        monthlyCostAlert,
+      ] = await Promise.all([
         settle(options.repository),
         settle(options.configuration),
         settle(options.hostedMigrations),
         settle(options.ownerBootstrap),
         settle(options.telemetry),
         settle(options.accounting),
+        settle(options.monthlyCostAlert),
       ])
       const repository = repositoryResult(repositoryRaw)
       const configuration = configurationResult(configurationRaw)
@@ -368,22 +612,22 @@ export function createAdminProductionReadinessService(options = {}) {
       const migration = repository.migrations
       const repositoryMigrationCheck = migration
         ? check({
-            id: 'database.repository_migrations', title: 'Repository migration manifest',
+            id: 'database.repository_migrations', title: 'Local repository migration chain',
             status: migration.state === 'ready' ? 'READY' : 'BLOCKED',
             summary: migration.state === 'ready'
-              ? `${migration.migrationCount} migrations have unique ordered versions and matching manifest hashes.`
+              ? `${migration.migrationCount} local migrations have unique ordered versions, earlier dependencies, and matching manifest hashes.`
               : migration.collisionVersions.length > 0
                 ? `Duplicate migration version prefixes were found: ${migration.collisionVersions.join(', ')}.`
                 : 'Migration ordering, manifest coverage, or file hashes do not match.',
             action: migration.state === 'ready' ? null : 'Report and reconcile repository migration hazards before any hosted migration card.',
-            source: 'Repository migration files and manifest',
+            source: 'Local repository migration files and manifest',
             evidenceStatus: migration.state === 'ready' ? 'VERIFIED' : 'MISMATCH',
           })
         : check({
-            id: 'database.repository_migrations', title: 'Repository migration manifest', status: 'UNAVAILABLE',
-            summary: 'Repository migration evidence is missing or malformed.',
+            id: 'database.repository_migrations', title: 'Local repository migration chain', status: 'UNAVAILABLE',
+            summary: 'Local repository migration evidence is missing or malformed.',
             action: 'Restore the local manifest and collision-check inputs.',
-            source: 'Repository migration files and manifest', evidenceStatus: 'UNAVAILABLE',
+            source: 'Local repository migration files and manifest', evidenceStatus: 'UNAVAILABLE',
           })
       const database = domain('database', 'Database', 'Expected local migrations and separately sourced hosted evidence.', [
         repositoryMigrationCheck,
@@ -425,32 +669,19 @@ export function createAdminProductionReadinessService(options = {}) {
       ])
 
       const aiTts = domain('ai_tts', 'AI & TTS', 'Effective provider state and logical voice deployability.', configChecks.slice(1))
-      const providerApplicable = configuration
-        ? configuration.aiRequested || configuration.ttsRequested
-        : true
       const telemetryChecks = [
         probeAvailability({
           result: telemetry, id: 'telemetry.operational_aggregate', title: 'Operational aggregate availability',
           source: 'Operational telemetry aggregate', unavailableSummary: 'The bounded operational aggregate could not be read.',
           action: 'Restore the read-only aggregate contract and retry.',
         }),
-        providerApplicable
-          ? probeAvailability({
-              result: accounting, id: 'telemetry.provider_accounting', title: 'Provider accounting coverage',
-              source: 'Provider usage accounting ledger', unavailableSummary: 'Provider accounting coverage could not be established.',
-              action: 'Restore the bounded provider accounting projection before enabling provider traffic.',
-            })
-          : check({
-              id: 'telemetry.provider_accounting', title: 'Provider accounting coverage',
-              required: false, status: 'NOT_APPLICABLE',
-              summary: 'No provider traffic is requested by authoritative runtime configuration.',
-              source: 'Effective provider configuration', evidenceStatus: 'REPORTED',
-            }),
+        providerAccountingCheck(accounting),
+        monthlyCostAlertCheck(monthlyCostAlert),
       ]
-      const telemetryDomain = domain('telemetry', 'Telemetry', 'Operational and provider-accounting observability.', telemetryChecks)
+      const telemetryDomain = domain('telemetry', 'Telemetry', 'Operational, provider-accounting, and alert-only cost evidence.', telemetryChecks)
 
       const curriculum = repository.curriculum
-      const curriculumDomain = domain('curriculum', 'Curriculum', 'Pinned production release and immutable validation.', [
+      const curriculumDomain = domain('curriculum', 'Curriculum', 'Pinned release, validation, and local-only release controls.', [
         curriculum
           ? check({
               id: 'curriculum.release_registry', title: 'Production release registry',
@@ -481,6 +712,7 @@ export function createAdminProductionReadinessService(options = {}) {
               summary: 'Active curriculum validation evidence is unavailable.',
               source: 'Active curriculum validation artifact', evidenceStatus: 'UNAVAILABLE',
             }),
+        releaseControlsCheck(repository.releaseControls),
       ])
 
       const studyMounted = positiveFlag(env, 'ACADEMY_STUDY_ENABLED')

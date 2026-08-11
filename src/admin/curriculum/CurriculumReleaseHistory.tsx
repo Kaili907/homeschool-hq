@@ -129,7 +129,8 @@ export function CurriculumReleaseHistoryView({
         release.provenanceCompleteness,
         release.sourceCommit,
         release.sourceRoot,
-      ].some((value) => value.toLocaleLowerCase().includes(query))
+        release.stagingId,
+      ].some((value) => value !== null && value.toLocaleLowerCase().includes(query))
     })
   }, [filters, model.releases])
   const selectedRelease = filteredReleases.find((release) => release.version === selectedVersion)
@@ -322,16 +323,29 @@ function ReleaseGovernanceDetail({
         <section aria-labelledby="curriculum-history-provenance-title">
           <h4 id="curriculum-history-provenance-title">Integrity &amp; provenance</h4>
           <div className="curriculum-history-evidence-badges">
-            <span className="curriculum-provenance-badge">Legacy</span>
-            <span className="curriculum-provenance-badge is-incomplete">Incomplete provenance</span>
+            <span className="curriculum-provenance-badge">
+              {release.provenanceKind === 'legacy' ? 'Legacy import' : 'Staged publish'}
+            </span>
+            <span className={`curriculum-provenance-badge is-${release.provenanceCompleteness}`}>
+              {release.provenanceCompleteness === 'complete'
+                ? 'Complete staged provenance'
+                : 'Incomplete provenance'}
+            </span>
             <span className={`curriculum-integrity-badge is-${release.integrityState}`}>
               {integrityLabel(release.integrityState)}
             </span>
           </div>
-          <dl>
-            <div><dt>Source commit</dt><dd><code>{release.sourceCommit}</code></dd></div>
-            <div><dt>Source root</dt><dd><code>{release.sourceRoot}</code></dd></div>
-          </dl>
+          {release.provenanceKind === 'legacy' ? (
+            <dl>
+              <div><dt>Source commit</dt><dd><code>{release.sourceCommit}</code></dd></div>
+              <div><dt>Source root</dt><dd><code>{release.sourceRoot}</code></dd></div>
+            </dl>
+          ) : (
+            <dl>
+              <div><dt>Staging identity</dt><dd><code>{release.stagingId}</code></dd></div>
+              <div><dt>Source custody</dt><dd>Immutable staged release artifacts</dd></div>
+            </dl>
+          )}
           {integrityHref ? (
             <a className="curriculum-history-integrity-link" href={integrityHref}>Open Release Integrity</a>
           ) : (

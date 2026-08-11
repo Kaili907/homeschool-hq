@@ -811,84 +811,6 @@ begin
 end;
 $$;
 
--- Keep the audit query boundary aware of the additive approval vocabulary.
-create or replace function public.academy_admin_read_audit_events_v1(
-  p_limit integer default 50,
-  p_before_at timestamptz default null,
-  p_before_event_id uuid default null,
-  p_action text default null,
-  p_resource_type text default null,
-  p_resource_ref text default null,
-  p_required_capability text default null
-)
-returns jsonb
-language plpgsql
-stable
-security definer
-set search_path = pg_catalog
-as $$
-declare
-  projection jsonb;
-begin
-  if auth.uid() is not null
-     or not academy_private.operational_is_trusted_server()
-     or p_required_capability <> 'audit:read' then
-    raise exception 'ADMIN_AUDIT_READ_REQUIRED' using errcode = '42501';
-  end if;
-  if p_limit is null or p_limit < 1 or p_limit > 100
-     or ((p_before_at is null) <> (p_before_event_id is null))
-     or (p_action is not null and p_action not in (
-       'admin_role.assign', 'admin_role.revoke', 'configuration.update',
-       'engine.control', 'safety.triage', 'incident.acknowledge',
-       'curriculum_draft.create', 'curriculum_draft.update',
-       'curriculum_entity.create', 'curriculum_entity.update',
-       'curriculum_entity.tombstone',
-       'curriculum_draft.collaborator.add', 'curriculum_draft.collaborator.revoke',
-       'curriculum_standard_review.update',
-       'curriculum_approval.approve', 'curriculum_approval.changes_requested',
-       'curriculum.approve', 'curriculum.publish',
-       'release.activate', 'release.rollback'
-     ))
-     or (p_resource_type is not null and p_resource_type not in (
-       'admin_role_assignment', 'configuration', 'engine', 'safety_case',
-       'incident', 'curriculum_draft', 'curriculum_entity',
-       'curriculum_standard_review', 'curriculum_approval',
-       'curriculum_release', 'application_release'
-     ))
-     or (p_resource_ref is not null and (
-       length(p_resource_ref) not between 1 and 160
-       or p_resource_ref !~ '^[A-Za-z0-9][A-Za-z0-9._:/-]{0,159}$'
-     )) then
-    raise exception 'ADMIN_AUDIT_QUERY_INVALID' using errcode = '22023';
-  end if;
-  with bounded as (
-    select event.*
-    from academy_private.admin_audit_events as event
-    where (p_before_at is null or (event.occurred_at, event.event_id) <
-      (p_before_at, p_before_event_id))
-      and (p_action is null or event.action = p_action)
-      and (p_resource_type is null or event.resource_type = p_resource_type)
-      and (p_resource_ref is null or event.resource_ref = p_resource_ref)
-    order by event.occurred_at desc, event.event_id desc
-    limit p_limit + 1
-  ), visible as (
-    select * from bounded order by occurred_at desc, event_id desc limit p_limit
-  )
-  select jsonb_build_object(
-    'schemaVersion', 2,
-    'events', coalesce((select jsonb_agg(jsonb_build_object(
-      'eventId', event_id, 'schemaVersion', schema_version, 'occurredAt', occurred_at,
-      'actorRole', actor_role, 'action', action, 'resourceType', resource_type,
-      'resourceRef', resource_ref, 'resourceVersion', resource_version,
-      'resourceRevision', resource_revision, 'previousValue', previous_value,
-      'newValue', new_value, 'reasonCode', reason_code, 'correlationId', correlation_id
-    ) order by occurred_at desc, event_id desc) from visible), '[]'::jsonb),
-    'hasMore', (select count(*) > p_limit from bounded)
-  ) into projection;
-  return projection;
-end;
-$$;
-
 alter function academy_private.admin_audit_action_resource_is_allowed(text, text) owner to postgres;
 alter function academy_private.curriculum_approval_reject_mutation() owner to postgres;
 alter function academy_private.curriculum_approval_require_actor(uuid, text) owner to postgres;
@@ -901,7 +823,6 @@ alter function academy_private.curriculum_approval_append_audit(uuid, uuid, text
 alter function public.academy_admin_record_curriculum_validation_v1(uuid, uuid, bigint, text, text, text, boolean, integer, integer, integer, text) owner to postgres;
 alter function public.academy_admin_read_curriculum_approval_v1(uuid, uuid, text) owner to postgres;
 alter function public.academy_admin_decide_curriculum_approval_v1(uuid, uuid, bigint, text, text, uuid, uuid, text, text) owner to postgres;
-alter function public.academy_admin_read_audit_events_v1(integer, timestamptz, uuid, text, text, text, text) owner to postgres;
 
 revoke all on table public.academy_curriculum_draft_validation_snapshots
   from public, anon, authenticated, service_role;
@@ -933,16 +854,12 @@ revoke all on function public.academy_admin_read_curriculum_approval_v1(uuid, uu
   from public, anon, authenticated, service_role;
 revoke all on function public.academy_admin_decide_curriculum_approval_v1(uuid, uuid, bigint, text, text, uuid, uuid, text, text)
   from public, anon, authenticated, service_role;
-revoke all on function public.academy_admin_read_audit_events_v1(integer, timestamptz, uuid, text, text, text, text)
-  from public, anon, authenticated, service_role;
 
 grant execute on function public.academy_admin_record_curriculum_validation_v1(uuid, uuid, bigint, text, text, text, boolean, integer, integer, integer, text)
   to service_role;
 grant execute on function public.academy_admin_read_curriculum_approval_v1(uuid, uuid, text)
   to service_role;
 grant execute on function public.academy_admin_decide_curriculum_approval_v1(uuid, uuid, bigint, text, text, uuid, uuid, text, text)
-  to service_role;
-grant execute on function public.academy_admin_read_audit_events_v1(integer, timestamptz, uuid, text, text, text, text)
   to service_role;
 
 comment on table public.academy_curriculum_draft_validation_snapshots is

@@ -1,6 +1,10 @@
 import { createHash } from 'node:crypto'
 import { readFile, readdir } from 'node:fs/promises'
 import { analyzeMigrationCollisions } from '../../../../scripts/migration-collision-detector.mjs'
+import { createAdminCurriculumActivationPersistence } from '../admin-curriculum-activation.js'
+import { createAdminCurriculumIntegrityService } from '../admin-curriculum-integrity.js'
+import { createAdminCurriculumPublishingPersistence } from '../admin-curriculum-publishing.js'
+import { createAdminCurriculumStagingPersistence } from '../admin-curriculum-staging.js'
 
 const ROOT = new URL('../../../../', import.meta.url)
 const MIGRATIONS = new URL('supabase/migrations/', ROOT)
@@ -8,6 +12,12 @@ const MIGRATION_MANIFEST = new URL('docs/study-engine-final-production/migration
 const RELEASE_REGISTRY = new URL('curriculum-content/manuel-academy/production-release-registry.json', ROOT)
 const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?$/
 const SHA256 = /^[0-9a-f]{64}$/
+const RELEASE_CONTROL_MIGRATION_SUFFIXES = Object.freeze({
+  registry: '_academy_curriculum_release_registry.sql',
+  staging: '_academy_curriculum_release_staging.sql',
+  publishing: '_academy_curriculum_release_publishing.sql',
+  activationRollback: '_academy_curriculum_activation_rollback.sql',
+})
 
 function exactObject(value, keys) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
@@ -91,15 +101,38 @@ async function curriculumEvidence() {
   })
 }
 
+async function releaseControlEvidence() {
+  const filenames = await readdir(MIGRATIONS)
+  const hasMigration = (suffix) => filenames.some((filename) => filename.endsWith(suffix))
+  const registry = hasMigration(RELEASE_CONTROL_MIGRATION_SUFFIXES.registry)
+  const staging = hasMigration(RELEASE_CONTROL_MIGRATION_SUFFIXES.staging)
+    && typeof createAdminCurriculumStagingPersistence === 'function'
+  const integrity = typeof createAdminCurriculumIntegrityService === 'function'
+  const publishing = hasMigration(RELEASE_CONTROL_MIGRATION_SUFFIXES.publishing)
+    && typeof createAdminCurriculumPublishingPersistence === 'function'
+  const activationRollback = hasMigration(RELEASE_CONTROL_MIGRATION_SUFFIXES.activationRollback)
+    && typeof createAdminCurriculumActivationPersistence === 'function'
+  return Object.freeze({
+    state: registry && staging && integrity && publishing && activationRollback
+      ? 'ready' : 'blocked',
+    registry,
+    staging,
+    integrity,
+    publishing,
+    activationRollback,
+  })
+}
+
 /** Repository-only facts. No network client or hosted credential is accepted. */
 export function createRepositoryProductionReadinessSource() {
   return Object.freeze({
     async read() {
-      const [migrations, curriculum] = await Promise.all([
+      const [migrations, curriculum, releaseControls] = await Promise.all([
         migrationEvidence(),
         curriculumEvidence(),
+        releaseControlEvidence(),
       ])
-      return Object.freeze({ migrations, curriculum })
+      return Object.freeze({ migrations, curriculum, releaseControls })
     },
   })
 }

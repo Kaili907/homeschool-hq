@@ -12,19 +12,31 @@ export interface CurriculumReleaseRegistryCounts {
   readonly schedules: number
 }
 
-export interface CurriculumReleaseRegistrySummary {
+interface CurriculumReleaseRegistrySummaryBase {
   readonly packageId: string
   readonly version: string
   readonly status: 'published'
   readonly registeredAt: string
   readonly authoredOn: string | null
-  readonly provenanceClass: 'legacy_import'
-  readonly sourceCommit: string
-  readonly sourceRoot: string
   readonly fileCount: number
   readonly byteCount: number
   readonly counts: CurriculumReleaseRegistryCounts
 }
+
+export type CurriculumReleaseRegistrySummary = CurriculumReleaseRegistrySummaryBase & (
+  | {
+    readonly provenanceClass: 'legacy_import'
+    readonly sourceCommit: string
+    readonly sourceRoot: string
+    readonly stagingId: null
+  }
+  | {
+    readonly provenanceClass: 'staged_publish'
+    readonly sourceCommit: null
+    readonly sourceRoot: null
+    readonly stagingId: string
+  }
+)
 
 export type CurriculumReleaseLifecycle = 'active' | 'previously_active' | 'published'
 export type CurriculumRollbackEligibilityState = 'eligible' | 'ineligible' | 'unverified'
@@ -46,7 +58,7 @@ export interface CurriculumRollbackEligibility {
   readonly explanation: string
 }
 
-export interface CurriculumReleaseGovernanceEntry {
+interface CurriculumReleaseGovernanceEntryBase {
   readonly packageId: string
   readonly version: string
   readonly publishedAt: string
@@ -57,15 +69,28 @@ export interface CurriculumReleaseGovernanceEntry {
   readonly previouslyActive: boolean
   readonly pointerRevisions: readonly number[]
   readonly integrityState: CurriculumReleaseIntegrityState
-  readonly provenanceKind: 'legacy'
-  readonly provenanceCompleteness: 'incomplete'
   readonly provenanceEvidenceAvailable: true
-  readonly sourceCommit: string
-  readonly sourceRoot: string
   readonly baseReleaseVersion: null
   readonly rollbackEligibility: CurriculumRollbackEligibility
   readonly counts: CurriculumReleaseRegistryCounts
 }
+
+export type CurriculumReleaseGovernanceEntry = CurriculumReleaseGovernanceEntryBase & (
+  | {
+    readonly provenanceKind: 'legacy'
+    readonly provenanceCompleteness: 'incomplete'
+    readonly sourceCommit: string
+    readonly sourceRoot: string
+    readonly stagingId: null
+  }
+  | {
+    readonly provenanceKind: 'staged_publish'
+    readonly provenanceCompleteness: 'complete'
+    readonly sourceCommit: null
+    readonly sourceRoot: null
+    readonly stagingId: string
+  }
+)
 
 export interface CurriculumReleaseTransition {
   readonly pointerRevision: number

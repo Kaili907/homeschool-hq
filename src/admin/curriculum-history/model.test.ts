@@ -23,9 +23,27 @@ function release(version: string, day: number): CurriculumReleaseRegistrySummary
     provenanceClass: 'legacy_import',
     sourceCommit: String(day).repeat(40).slice(0, 40),
     sourceRoot: `curriculum-content/manuel-academy/${version}`,
+    stagingId: null,
     fileCount: 10,
     byteCount: 100,
     counts: { courses: 1, units: 2, lessons: 3, assessments: 1, texts: 1, schedules: 1 },
+  }
+}
+
+function stagedRelease(version: string, day: number): CurriculumReleaseRegistrySummary {
+  return {
+    packageId: 'manuel-academy-curriculum-v1',
+    version,
+    status: 'published',
+    registeredAt: `2026-08-${String(day).padStart(2, '0')}T15:00:00.000Z`,
+    authoredOn: null,
+    provenanceClass: 'staged_publish',
+    sourceCommit: null,
+    sourceRoot: null,
+    stagingId: '20000000-0000-4000-8000-000000000001',
+    fileCount: 12,
+    byteCount: 4096,
+    counts: { courses: 1, units: 2, lessons: 3, assessments: 1, texts: 0, schedules: 1 },
   }
 }
 
@@ -103,6 +121,36 @@ describe('curriculum release history governance model', () => {
       provenanceKind: 'legacy',
       provenanceCompleteness: 'incomplete',
       provenanceEvidenceAvailable: true,
+      baseReleaseVersion: null,
+      rollbackEligibility: { state: 'ineligible', blockingReason: 'current_release' },
+    })
+  })
+
+  it('preserves prerelease staged-publish identity without inventing legacy source evidence', () => {
+    const legacy = release('1.0.0', 9)
+    const staged = stagedRelease('2.0.0-rc.1', 10)
+    const activation = status(
+      [legacy, staged],
+      [
+        candidate(legacy, { previouslyActive: true }),
+        candidate(staged, { active: true, previouslyActive: true }),
+      ],
+      [
+        transition(2, '1.0.0', '2.0.0-rc.1', 'activation'),
+        transition(1, null, '1.0.0', 'migration_seed'),
+      ],
+    )
+    const model = buildCurriculumReleaseHistoryModel([legacy, staged], activation)
+    expect(model).toMatchObject({ activeReleaseVersion: '2.0.0-rc.1', pointerRevision: 2 })
+    expect(model.releases.find((item) => item.version === staged.version)).toMatchObject({
+      lifecycle: 'active',
+      integrityState: 'verified_evidence_available',
+      provenanceKind: 'staged_publish',
+      provenanceCompleteness: 'complete',
+      provenanceEvidenceAvailable: true,
+      sourceCommit: null,
+      sourceRoot: null,
+      stagingId: staged.stagingId,
       baseReleaseVersion: null,
       rollbackEligibility: { state: 'ineligible', blockingReason: 'current_release' },
     })

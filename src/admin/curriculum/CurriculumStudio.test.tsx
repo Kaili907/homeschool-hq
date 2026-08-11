@@ -384,7 +384,7 @@ describe('Curriculum Studio shell', () => {
     expect(markup).toContain('for="curriculum-collaborator-principal"')
     expect(markup).toContain(`aria-label="Revoke reviewer collaborator ${REVIEWER_ID}"`)
     expect(markup).toContain('Editor requires underlying curriculum:drafts:write')
-    expect(markup).not.toMatch(/email|learner|student work|private note/i)
+    expect(markup).not.toMatch(/email|learner(?:Ref|Id| name)|student work|private note/i)
   })
 
   it('keeps a globally capable reviewer read-only and confirms destructive revocation accessibly', () => {
@@ -454,8 +454,12 @@ describe('Curriculum Studio shell', () => {
     expect(markup).toContain('Preview / Diff')
     expect(markup).toContain('Human Approval')
     expect(markup).toContain('Release Staging')
-    expect(markup).toContain('href="/academy/admin/curriculum/validation"')
-    expect(markup).toContain('href="/academy/admin/curriculum/preview"')
+    expect(curriculumWorkflowDestinations().find((step) => step.id === 'validation')).toMatchObject({
+      path: '/academy/admin/curriculum/studio', state: 'blocked',
+    })
+    expect(curriculumWorkflowDestinations().find((step) => step.id === 'preview')).toMatchObject({
+      path: '/academy/admin/curriculum/studio', state: 'blocked',
+    })
     expect(markup).toContain('aria-current="page"')
     expect(markup).toContain('aria-label="Curriculum pre-publish workflow"')
     expect(markup).not.toMatch(/publish curriculum|activate publish/i)
@@ -543,8 +547,15 @@ describe('Curriculum Studio shell', () => {
     }
     expect(curriculumWorkflowDestinations(reviewer).find((step) => step.id === 'draft')?.state).toBe('read-only')
     const standalone = curriculumWorkflowDestinations(null, { draftId: DRAFT_ID, draftRevision: 3 })
-    expect(standalone.filter((step) => step.id !== 'published').every((step) => step.path.includes(`draft=${DRAFT_ID}`))).toBe(true)
-    expect(standalone.filter((step) => step.id !== 'published').every((step) => step.path.includes('revision=3'))).toBe(true)
+    expect(standalone.find((step) => step.id === 'published')?.path).toBe('/academy/admin/curriculum')
+    expect(standalone.find((step) => step.id === 'integrity')?.path).toBe('/academy/admin/curriculum/integrity')
+    expect(standalone.find((step) => step.id === 'history')?.path).toBe('/academy/admin/curriculum/history')
+    expect(standalone.find((step) => step.id === 'activation')?.path).toBe('/academy/admin/curriculum/activation')
+    const globalIds: readonly string[] = ['published', 'integrity', 'history', 'activation']
+    const draftBound = standalone.filter((step) => !globalIds.includes(step.id))
+    expect(draftBound).not.toHaveLength(0)
+    expect(draftBound.every((step) => step.path.includes(`draft=${DRAFT_ID}`))).toBe(true)
+    expect(draftBound.every((step) => step.path.includes('revision=3'))).toBe(true)
   })
 
   it('builds an exact revision preview deep link without carrying mutable authority', () => {

@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import { PGlite } from '@electric-sql/pglite'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { ACADEMY_RELEASE_VERSION } from '../src/academy/contentTypes'
 
 const migrations = [
   './migrations/20260808120000_academy_admin_authorization.sql',
@@ -519,8 +520,15 @@ describe('curriculum release publication database boundary', () => {
 
     const runtimeTypes = await readFile(new URL('../src/academy/contentTypes.ts', import.meta.url), 'utf8')
     const compiler = await readFile(new URL('../scripts/build-curriculum.mjs', import.meta.url), 'utf8')
-    expect(runtimeTypes).toContain("ACADEMY_RELEASE_VERSION = '1.0.0'")
-    expect(compiler).toContain("const VERSION = '1.0.0'")
+    const productionRegistry = JSON.parse(await readFile(
+      new URL('../curriculum-content/manuel-academy/production-release-registry.json', import.meta.url),
+      'utf8',
+    ))
+    const activeReleases = productionRegistry.releases.filter((release: { status?: unknown }) =>
+      release.status === 'active')
+    expect(ACADEMY_RELEASE_VERSION).toBe(productionRegistry.currentRelease)
+    expect(activeReleases).toHaveLength(1)
+    expect(activeReleases[0].version).toBe(ACADEMY_RELEASE_VERSION)
     expect(runtimeTypes).not.toMatch(/read_curriculum_publication|staged_publish/i)
     expect(compiler).not.toMatch(/read_curriculum_publication|staged_publish/i)
 

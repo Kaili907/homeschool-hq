@@ -70,6 +70,7 @@
 .curriculum-lifecycle-badge.is-activation,
 .curriculum-eligibility-badge.is-eligible,
 .curriculum-integrity-badge.is-verified_evidence_available { border-color: #79ad94; background: #e7f4ed; color: #245b46; }
+.curriculum-provenance-badge.is-complete { border-color: #79ad94; background: #e7f4ed; color: #245b46; }
 .curriculum-lifecycle-badge.is-previously_active,
 .curriculum-lifecycle-badge.is-rollback { border-color: #80a5bd; background: #e9f3f8; color: #24546f; }
 .curriculum-eligibility-badge.is-ineligible,

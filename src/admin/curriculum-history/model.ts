@@ -112,6 +112,21 @@ export function buildCurriculumReleaseHistoryModel(
     const lifecycle = candidate?.active
       ? 'active'
       : candidate?.previouslyActive ? 'previously_active' : 'published'
+    const provenance = release.provenanceClass === 'legacy_import'
+      ? {
+        provenanceKind: 'legacy' as const,
+        provenanceCompleteness: 'incomplete' as const,
+        sourceCommit: release.sourceCommit,
+        sourceRoot: release.sourceRoot,
+        stagingId: null,
+      }
+      : {
+        provenanceKind: 'staged_publish' as const,
+        provenanceCompleteness: 'complete' as const,
+        sourceCommit: null,
+        sourceRoot: null,
+        stagingId: release.stagingId,
+      }
     return Object.freeze({
       packageId: release.packageId,
       version: release.version,
@@ -123,11 +138,8 @@ export function buildCurriculumReleaseHistoryModel(
       previouslyActive: candidate?.previouslyActive ?? false,
       pointerRevisions: Object.freeze(pointerRevisions),
       integrityState: integrityState(candidate),
-      provenanceKind: 'legacy',
-      provenanceCompleteness: 'incomplete',
       provenanceEvidenceAvailable: true,
-      sourceCommit: release.sourceCommit,
-      sourceRoot: release.sourceRoot,
+      ...provenance,
       baseReleaseVersion: null,
       rollbackEligibility: rollbackEligibility(candidate),
       counts: release.counts,

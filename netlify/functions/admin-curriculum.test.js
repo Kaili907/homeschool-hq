@@ -2,6 +2,79 @@ import { describe, expect, it, vi } from 'vitest'
 import { createAdminCurriculumHandler } from './admin-curriculum.js'
 
 const principal = { userId: 'adult-ref', role: 'viewer', capabilities: ['curriculum:read'] }
+const stagingId = '20000000-0000-4000-8000-000000000001'
+const legacyRegisteredAt = '2026-08-09T16:00:00.000Z'
+const stagedRegisteredAt = '2026-08-10T15:00:00.000Z'
+const releaseRegistry = {
+  schemaVersion: 1,
+  releases: [
+    {
+      packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
+      version: '1.0.0',
+      status: 'published',
+      registeredAt: legacyRegisteredAt,
+      authoredOn: '2026-08-03',
+      provenanceClass: 'legacy_import',
+      sourceCommit: '4056e31d8beb36622be5ac27ea7f20145266343b',
+      sourceRoot: 'curriculum-content/manuel-academy/1.0.0',
+      stagingId: null,
+      fileCount: 182,
+      byteCount: 23196845,
+      counts: { courses: 30, units: 232, lessons: 2736, assessments: 232, texts: 18, schedules: 3 },
+    },
+    {
+      packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
+      version: '2.0.0-rc.1',
+      status: 'published',
+      registeredAt: stagedRegisteredAt,
+      authoredOn: null,
+      provenanceClass: 'staged_publish',
+      sourceCommit: null,
+      sourceRoot: null,
+      stagingId,
+      fileCount: 12,
+      byteCount: 4096,
+      counts: { courses: 1, units: 2, lessons: 3, assessments: 1, texts: 0, schedules: 1 },
+    },
+  ],
+}
+const activationStatus = {
+  schemaVersion: 1,
+  environment: 'production',
+  authority: 'default_current_curriculum',
+  existingLearnersRepinned: false,
+  pointer: {
+    releaseVersion: '2.0.0-rc.1',
+    revision: 2,
+    transitionKind: 'activation',
+    bindingMode: 'default_authority',
+    transitionedAt: '2026-08-10T16:00:00.000Z',
+  },
+  candidates: [
+    {
+      releaseVersion: '1.0.0', status: 'published', registeredAt: legacyRegisteredAt,
+      artifactState: 'available', eligible: true, previouslyActive: true, active: false,
+    },
+    {
+      releaseVersion: '2.0.0-rc.1', status: 'published', registeredAt: stagedRegisteredAt,
+      artifactState: 'available', eligible: true, previouslyActive: true, active: true,
+    },
+  ],
+  history: [
+    {
+      pointerRevision: 2, previousReleaseVersion: '1.0.0', newReleaseVersion: '2.0.0-rc.1',
+      transitionKind: 'activation', reasonCode: 'release.activated',
+      correlationId: '50000000-0000-4000-8000-000000000001',
+      transitionedAt: '2026-08-10T16:00:00.000Z',
+    },
+    {
+      pointerRevision: 1, previousReleaseVersion: null, newReleaseVersion: '1.0.0',
+      transitionKind: 'migration_seed', reasonCode: null, correlationId: null,
+      transitionedAt: legacyRegisteredAt,
+    },
+  ],
+  historyTruncated: false,
+}
 
 function event(path, httpMethod = 'GET') {
   return { path, httpMethod, headers: { authorization: 'Bearer token' }, queryStringParameters: null }
@@ -15,17 +88,12 @@ function sources() {
       loadValidationEvidence: vi.fn().mockResolvedValue({ validation: { overall: 'PASS' } }),
     },
     registry: {
-      list: vi.fn().mockResolvedValue({ schemaVersion: 1, releases: [] }),
+      list: vi.fn().mockResolvedValue(releaseRegistry),
       details: vi.fn().mockResolvedValue({ schemaVersion: 1, version: '1.0.0' }),
       productionPointer: vi.fn().mockResolvedValue({ releaseVersion: '1.0.0', registryOnly: true }),
     },
     activation: {
-      read: vi.fn().mockResolvedValue({
-        schemaVersion: 1,
-        pointer: { releaseVersion: '1.0.0', revision: 1 },
-        candidates: [],
-        history: [],
-      }),
+      read: vi.fn().mockResolvedValue(activationStatus),
     },
   }
 }
@@ -53,13 +121,8 @@ describe('admin curriculum handler', () => {
     expect(activation.read).toHaveBeenCalledWith(principal.userId)
     expect(JSON.parse(history.body)).toEqual({
       schemaVersion: 1,
-      releaseRegistry: { schemaVersion: 1, releases: [] },
-      activation: {
-        schemaVersion: 1,
-        pointer: { releaseVersion: '1.0.0', revision: 1 },
-        candidates: [],
-        history: [],
-      },
+      releaseRegistry,
+      activation: activationStatus,
     })
     expect(registry.details).toHaveBeenCalledWith('1.0.0')
     expect(registry.productionPointer).toHaveBeenCalledOnce()

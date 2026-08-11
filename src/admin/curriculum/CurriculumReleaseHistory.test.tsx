@@ -8,6 +8,8 @@ import {
   CurriculumReleaseHistoryView,
 } from './CurriculumReleaseHistory'
 
+const STAGING_ID = '20000000-0000-4000-8000-000000000001'
+
 function model(): CurriculumReleaseHistoryModel {
   return {
     schemaVersion: 1,
@@ -26,6 +28,7 @@ function model(): CurriculumReleaseHistoryModel {
         integrityState: 'verified_evidence_available', provenanceKind: 'legacy',
         provenanceCompleteness: 'incomplete', provenanceEvidenceAvailable: true,
         sourceCommit: '1'.repeat(40), sourceRoot: 'curriculum-content/manuel-academy/1.0.0',
+        stagingId: null,
         baseReleaseVersion: null,
         rollbackEligibility: {
           state: 'ineligible', blockingReason: 'current_release',
@@ -34,13 +37,13 @@ function model(): CurriculumReleaseHistoryModel {
         counts: { courses: 30, units: 230, lessons: 2700, assessments: 230, texts: 18, schedules: 3 },
       },
       {
-        packageId: 'manuel-academy-v2', version: '2.0.0',
-        publishedAt: '2026-08-10T15:00:00.000Z', authoredOn: '2026-08-10',
+        packageId: 'manuel-academy-v2', version: '2.0.0-rc.1',
+        publishedAt: '2026-08-10T15:00:00.000Z', authoredOn: null,
         publishedStatus: 'published', lifecycle: 'previously_active', active: false,
         previouslyActive: true, pointerRevisions: [2],
-        integrityState: 'verified_evidence_available', provenanceKind: 'legacy',
-        provenanceCompleteness: 'incomplete', provenanceEvidenceAvailable: true,
-        sourceCommit: '2'.repeat(40), sourceRoot: 'curriculum-content/manuel-academy/2.0.0',
+        integrityState: 'verified_evidence_available', provenanceKind: 'staged_publish',
+        provenanceCompleteness: 'complete', provenanceEvidenceAvailable: true,
+        sourceCommit: null, sourceRoot: null, stagingId: STAGING_ID,
         baseReleaseVersion: null,
         rollbackEligibility: {
           state: 'eligible', blockingReason: null,
@@ -51,12 +54,12 @@ function model(): CurriculumReleaseHistoryModel {
     ],
     transitions: [
       {
-        pointerRevision: 3, previousReleaseVersion: '2.0.0', newReleaseVersion: '1.0.0',
+        pointerRevision: 3, previousReleaseVersion: '2.0.0-rc.1', newReleaseVersion: '1.0.0',
         transitionKind: 'rollback', reasonCode: 'release.rolled_back',
         transitionedAt: '2026-08-10T18:00:00.000Z',
       },
       {
-        pointerRevision: 2, previousReleaseVersion: '1.0.0', newReleaseVersion: '2.0.0',
+        pointerRevision: 2, previousReleaseVersion: '1.0.0', newReleaseVersion: '2.0.0-rc.1',
         transitionKind: 'activation', reasonCode: 'release.activated',
         transitionedAt: '2026-08-10T16:00:00.000Z',
       },
@@ -84,7 +87,7 @@ describe('Curriculum Release History Admin surface', () => {
     expect(markup).toContain('Pointer revision')
     expect(markup).toContain('Previously active')
     expect(markup).toContain('Rollback eligible')
-    expect(markup).toContain('Legacy')
+    expect(markup).toContain('Legacy import')
     expect(markup).toContain('Incomplete provenance')
     expect(markup).toContain('Verified evidence available')
     expect(markup).toContain('Unavailable in published registry')
@@ -93,6 +96,25 @@ describe('Curriculum Release History Admin surface', () => {
     expect(markup).toContain('Revision 3')
     expect(markup).toContain('Open Release Integrity')
     expect(markup).not.toMatch(/confirm rollback|rollback to this release|activate this release/i)
+  })
+
+  it('shows staged-publish custody without rendering nullable legacy sources', () => {
+    const history = model()
+    const markup = renderToStaticMarkup(
+      <CurriculumReleaseHistoryView
+        model={{ ...history, activeReleaseVersion: '2.0.0-rc.1' }}
+        releaseIntegrityHref={() => '/academy/admin/curriculum/integrity'}
+      />,
+    )
+    expect(markup).toContain('Version 2.0.0-rc.1')
+    expect(markup).toContain('Staged publish')
+    expect(markup).toContain('Complete staged provenance')
+    expect(markup).toContain('Staging identity')
+    expect(markup).toContain(STAGING_ID)
+    expect(markup).toContain('Immutable staged release artifacts')
+    expect(markup).not.toContain('<dt>Source commit</dt>')
+    expect(markup).not.toContain('<dt>Source root</dt>')
+    expect(markup).not.toMatch(/>null</i)
   })
 
   it('provides native search/filter controls and listbox keyboard-navigation semantics', () => {

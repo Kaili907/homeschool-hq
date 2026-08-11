@@ -10,10 +10,11 @@ import {
 import { buildCurriculumReleaseHistoryModel } from './model'
 
 type FetchLike = (input: string, init: RequestInit) => Promise<Pick<Response, 'ok' | 'status' | 'json'>>
-const VERSION = /^\d+\.\d+\.\d+$/
+const VERSION = /^\d+\.\d+\.\d+(?:-[a-z0-9.-]+)?$/
 const PACKAGE_ID = /^[a-z0-9][a-z0-9-]{0,119}$/
 const COMMIT = /^[0-9a-f]{40}$/
 const SOURCE_ROOT = /^curriculum-content\/manuel-academy\/\d+\.\d+\.\d+$/
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 const DATE = /^\d{4}-\d{2}-\d{2}$/
 
 function record(value: unknown): value is Record<string, unknown> {
@@ -42,33 +43,51 @@ function counts(value: unknown): CurriculumReleaseRegistryCounts | null {
 function releaseSummary(value: unknown): CurriculumReleaseRegistrySummary | null {
   if (!exact(value, [
     'packageId', 'version', 'status', 'registeredAt', 'authoredOn', 'provenanceClass',
-    'sourceCommit', 'sourceRoot', 'fileCount', 'byteCount', 'counts',
+    'sourceCommit', 'sourceRoot', 'stagingId', 'fileCount', 'byteCount', 'counts',
   ]) || typeof value.packageId !== 'string' || !PACKAGE_ID.test(value.packageId)
     || typeof value.version !== 'string' || !VERSION.test(value.version)
     || value.status !== 'published' || !timestamp(value.registeredAt)
     || (value.authoredOn !== null
       && (typeof value.authoredOn !== 'string' || !DATE.test(value.authoredOn)))
-    || value.provenanceClass !== 'legacy_import'
-    || typeof value.sourceCommit !== 'string' || !COMMIT.test(value.sourceCommit)
-    || typeof value.sourceRoot !== 'string' || !SOURCE_ROOT.test(value.sourceRoot)
-    || value.sourceRoot !== `curriculum-content/manuel-academy/${value.version}`
     || !integer(value.fileCount) || value.fileCount < 1
     || !integer(value.byteCount) || value.byteCount < 1) return null
   const projectedCounts = counts(value.counts)
   if (!projectedCounts) return null
-  return Object.freeze({
+  const common = {
     packageId: value.packageId,
     version: value.version,
     status: 'published',
     registeredAt: value.registeredAt,
     authoredOn: value.authoredOn as string | null,
-    provenanceClass: 'legacy_import',
-    sourceCommit: value.sourceCommit,
-    sourceRoot: value.sourceRoot,
     fileCount: value.fileCount,
     byteCount: value.byteCount,
     counts: projectedCounts,
-  })
+  } as const
+  if (value.provenanceClass === 'legacy_import') {
+    if (typeof value.sourceCommit !== 'string' || !COMMIT.test(value.sourceCommit)
+      || typeof value.sourceRoot !== 'string' || !SOURCE_ROOT.test(value.sourceRoot)
+      || value.sourceRoot !== `curriculum-content/manuel-academy/${value.version}`
+      || value.stagingId !== null) return null
+    return Object.freeze({
+      ...common,
+      provenanceClass: 'legacy_import',
+      sourceCommit: value.sourceCommit,
+      sourceRoot: value.sourceRoot,
+      stagingId: null,
+    })
+  }
+  if (value.provenanceClass === 'staged_publish') {
+    if (value.sourceCommit !== null || value.sourceRoot !== null
+      || typeof value.stagingId !== 'string' || !UUID.test(value.stagingId)) return null
+    return Object.freeze({
+      ...common,
+      provenanceClass: 'staged_publish',
+      sourceCommit: null,
+      sourceRoot: null,
+      stagingId: value.stagingId,
+    })
+  }
+  return null
 }
 
 export function parseCurriculumReleaseHistory(value: unknown) {

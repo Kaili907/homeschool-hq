@@ -7,6 +7,7 @@ const migrationUrls = [
   './migrations/20260809130000_academy_admin_audit_foundation.sql',
   './migrations/20260809160000_academy_curriculum_release_registry.sql',
   './migrations/20260809170000_academy_admin_curriculum_audit_vocabulary.sql',
+  './migrations/20260810110000_academy_admin_audit_query_filters.sql',
   './migrations/20260810120000_academy_curriculum_draft_authoring.sql',
   './migrations/20260810130000_academy_curriculum_standards_review.sql',
   './migrations/20260810140000_academy_curriculum_human_approval.sql',
@@ -51,6 +52,33 @@ const expectedWorkflowFunctions = [
   'academy_admin_update_curriculum_standard_review_v1',
 ]
 
+const curriculumAuditActions = [
+  'curriculum_draft.create',
+  'curriculum_draft.update',
+  'curriculum_entity.create',
+  'curriculum_entity.update',
+  'curriculum_entity.tombstone',
+  'curriculum_draft.collaborator.add',
+  'curriculum_draft.collaborator.revoke',
+  'curriculum_standard_review.update',
+  'curriculum_approval.approve',
+  'curriculum_approval.changes_requested',
+  'curriculum_release.stage',
+  'curriculum.approve',
+  'curriculum.publish',
+  'release.activate',
+  'release.rollback',
+]
+
+const curriculumAuditResources = [
+  'curriculum_draft',
+  'curriculum_entity',
+  'curriculum_standard_review',
+  'curriculum_approval',
+  'curriculum_release',
+  'application_release',
+]
+
 describe('Curriculum pre-publish migration assembly', () => {
   it('applies every frozen migration in timestamp order without losing sibling feature vocabulary', async () => {
     const database = new PGlite()
@@ -69,22 +97,45 @@ describe('Curriculum pre-publish migration assembly', () => {
       `, [expectedWorkflowFunctions])
       expect(functions.rows.map((row) => row.proname)).toEqual([...expectedWorkflowFunctions].sort())
 
+      const auditReaders = await database.query<{
+        argument_count: number
+        default_argument_count: number
+        definition: string
+      }>(`
+        select candidate.pronargs::integer as argument_count,
+          candidate.pronargdefaults::integer as default_argument_count,
+          pg_catalog.pg_get_functiondef(candidate.oid) as definition
+        from pg_catalog.pg_proc as candidate
+        where candidate.pronamespace = 'public'::regnamespace
+          and candidate.proname = 'academy_admin_read_audit_events_v1'
+      `)
+      expect(auditReaders.rows).toHaveLength(1)
+      expect(auditReaders.rows[0]).toMatchObject({
+        argument_count: 12,
+        default_argument_count: 12,
+      })
+      for (const value of [...curriculumAuditActions, ...curriculumAuditResources]) {
+        expect(auditReaders.rows[0].definition).toContain(`'${value}'`)
+      }
+
       const actionConstraint = await database.query<{ definition: string }>(`
         select pg_catalog.pg_get_constraintdef(oid) as definition
         from pg_catalog.pg_constraint
         where conname = 'admin_audit_events_action_check'
       `)
       expect(actionConstraint.rows).toHaveLength(1)
-      for (const action of [
-        'curriculum_draft.create',
-        'curriculum_entity.update',
-        'curriculum_standard_review.update',
-        'curriculum_approval.approve',
-        'curriculum_draft.collaborator.add',
-        'curriculum_draft.collaborator.revoke',
-        'curriculum_release.stage',
-      ]) {
+      for (const action of curriculumAuditActions) {
         expect(actionConstraint.rows[0].definition).toContain(action)
+      }
+
+      const resourceConstraint = await database.query<{ definition: string }>(`
+        select pg_catalog.pg_get_constraintdef(oid) as definition
+        from pg_catalog.pg_constraint
+        where conname = 'admin_audit_events_resource_type_check'
+      `)
+      expect(resourceConstraint.rows).toHaveLength(1)
+      for (const resource of curriculumAuditResources) {
+        expect(resourceConstraint.rows[0].definition).toContain(resource)
       }
     } finally {
       await database.close()

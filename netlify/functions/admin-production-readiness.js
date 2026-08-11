@@ -5,6 +5,11 @@ import {
   resolveEffectiveRuntimeConfiguration,
 } from './_shared/admin-runtime-configuration.js'
 import { createAdminOperationalAggregateReader } from './_shared/admin-operational-aggregate-reader.js'
+import {
+  createAdminMonthlyCostAlertEvaluator,
+  resolveAdminMonthlyCostWindow,
+} from './_shared/admin-monthly-cost-alert.js'
+import { readAdminProviderAccountingCoverage } from './_shared/admin-provider-coverage.js'
 import { createGatewayAccess } from './_shared/gateway-access.js'
 import { errorResponse, hasQuery, jsonResponse } from './_shared/http.js'
 import {
@@ -71,6 +76,12 @@ export function createAdminProductionReadinessHandler(overrides = {}) {
     fetchImpl,
     client: overrides.serviceClient,
   })
+  const monthlyCostAlertEvaluator = overrides.monthlyCostAlertEvaluator
+    ?? createAdminMonthlyCostAlertEvaluator({
+      gatewayAccess,
+      configurationSource,
+      now,
+    })
   const studyReadiness = overrides.studyReadiness ?? createStudyProductionReadinessService({
     env,
     fetchImpl,
@@ -107,9 +118,14 @@ export function createAdminProductionReadinessHandler(overrides = {}) {
       return Object.freeze({ state: 'available' })
     }),
     accounting: overrides.accounting ?? (async () => {
-      await gatewayAccess.readProviderUsageCosts({ limit: 1, before: now().toISOString() })
-      return Object.freeze({ state: 'available' })
+      const range = resolveAdminMonthlyCostWindow(now())
+      return readAdminProviderAccountingCoverage(
+        (boundedRange) => gatewayAccess.readProviderAttemptCoverage(boundedRange),
+        range,
+      )
     }),
+    monthlyCostAlert: overrides.monthlyCostAlert
+      ?? (() => monthlyCostAlertEvaluator.read({ generatedAt: now() })),
     study: overrides.study ?? (() => studyReadiness.check({ force: true })),
   })
 

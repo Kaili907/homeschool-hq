@@ -5,26 +5,45 @@ import {
 } from './httpSource'
 
 const COMMIT = '4056e31d8beb36622be5ac27ea7f20145266343b'
+const STAGING_ID = '20000000-0000-4000-8000-000000000001'
 
 function envelope(): any {
-  const registeredAt = '2026-08-09T16:00:00.000Z'
+  const legacyRegisteredAt = '2026-08-09T16:00:00.000Z'
+  const stagedRegisteredAt = '2026-08-10T15:00:00.000Z'
   return {
     schemaVersion: 1,
     releaseRegistry: {
       schemaVersion: 1,
-      releases: [{
-        packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
-        version: '1.0.0',
-        status: 'published',
-        registeredAt,
-        authoredOn: '2026-08-03',
-        provenanceClass: 'legacy_import',
-        sourceCommit: COMMIT,
-        sourceRoot: 'curriculum-content/manuel-academy/1.0.0',
-        fileCount: 182,
-        byteCount: 23196845,
-        counts: { courses: 30, units: 232, lessons: 2736, assessments: 232, texts: 18, schedules: 3 },
-      }],
+      releases: [
+        {
+          packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
+          version: '1.0.0',
+          status: 'published',
+          registeredAt: legacyRegisteredAt,
+          authoredOn: '2026-08-03',
+          provenanceClass: 'legacy_import',
+          sourceCommit: COMMIT,
+          sourceRoot: 'curriculum-content/manuel-academy/1.0.0',
+          stagingId: null,
+          fileCount: 182,
+          byteCount: 23196845,
+          counts: { courses: 30, units: 232, lessons: 2736, assessments: 232, texts: 18, schedules: 3 },
+        },
+        {
+          packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
+          version: '2.0.0-rc.1',
+          status: 'published',
+          registeredAt: stagedRegisteredAt,
+          authoredOn: null,
+          provenanceClass: 'staged_publish',
+          sourceCommit: null,
+          sourceRoot: null,
+          stagingId: STAGING_ID,
+          fileCount: 12,
+          byteCount: 4096,
+          counts: { courses: 1, units: 2, lessons: 3, assessments: 1, texts: 0, schedules: 1 },
+        },
+      ],
     },
     activation: {
       schemaVersion: 1,
@@ -32,18 +51,32 @@ function envelope(): any {
       authority: 'default_current_curriculum',
       existingLearnersRepinned: false,
       pointer: {
-        releaseVersion: '1.0.0', revision: 1, transitionKind: 'migration_seed',
-        bindingMode: 'registry_only', transitionedAt: registeredAt,
+        releaseVersion: '2.0.0-rc.1', revision: 2, transitionKind: 'activation',
+        bindingMode: 'default_authority', transitionedAt: '2026-08-10T16:00:00.000Z',
       },
-      candidates: [{
-        releaseVersion: '1.0.0', status: 'published', registeredAt,
-        artifactState: 'available', eligible: true, previouslyActive: true, active: true,
-      }],
-      history: [{
-        pointerRevision: 1, previousReleaseVersion: null, newReleaseVersion: '1.0.0',
-        transitionKind: 'migration_seed', reasonCode: null, correlationId: null,
-        transitionedAt: registeredAt,
-      }],
+      candidates: [
+        {
+          releaseVersion: '1.0.0', status: 'published', registeredAt: legacyRegisteredAt,
+          artifactState: 'available', eligible: true, previouslyActive: true, active: false,
+        },
+        {
+          releaseVersion: '2.0.0-rc.1', status: 'published', registeredAt: stagedRegisteredAt,
+          artifactState: 'available', eligible: true, previouslyActive: true, active: true,
+        },
+      ],
+      history: [
+        {
+          pointerRevision: 2, previousReleaseVersion: '1.0.0', newReleaseVersion: '2.0.0-rc.1',
+          transitionKind: 'activation', reasonCode: 'release.activated',
+          correlationId: '50000000-0000-4000-8000-000000000001',
+          transitionedAt: '2026-08-10T16:00:00.000Z',
+        },
+        {
+          pointerRevision: 1, previousReleaseVersion: null, newReleaseVersion: '1.0.0',
+          transitionKind: 'migration_seed', reasonCode: null, correlationId: null,
+          transitionedAt: legacyRegisteredAt,
+        },
+      ],
       historyTruncated: false,
     },
   }
@@ -57,7 +90,17 @@ describe('curriculum release history HTTP source', () => {
       async () => 'verified-token',
       '/api/admin/curriculum/history',
     )
-    await expect(source.read()).resolves.toMatchObject({ activeReleaseVersion: '1.0.0' })
+    await expect(source.read()).resolves.toMatchObject({
+      activeReleaseVersion: '2.0.0-rc.1',
+      releases: expect.arrayContaining([expect.objectContaining({
+        version: '2.0.0-rc.1',
+        provenanceKind: 'staged_publish',
+        provenanceCompleteness: 'complete',
+        sourceCommit: null,
+        sourceRoot: null,
+        stagingId: STAGING_ID,
+      })]),
+    })
     expect(fetcher).toHaveBeenCalledWith('/api/admin/curriculum/history', {
       method: 'GET',
       headers: { Accept: 'application/json', Authorization: 'Bearer verified-token' },
@@ -72,6 +115,22 @@ describe('curriculum release history HTTP source', () => {
     const malformedProvenance = envelope()
     malformedProvenance.releaseRegistry.releases[0].sourceRoot = '../private'
     expect(() => parseCurriculumReleaseHistory(malformedProvenance)).toThrow('unavailable')
+
+    const crossedStagedProvenance = envelope()
+    crossedStagedProvenance.releaseRegistry.releases[1].sourceCommit = COMMIT
+    expect(() => parseCurriculumReleaseHistory(crossedStagedProvenance)).toThrow('unavailable')
+
+    const crossedLegacyProvenance = envelope()
+    crossedLegacyProvenance.releaseRegistry.releases[0].stagingId = STAGING_ID
+    expect(() => parseCurriculumReleaseHistory(crossedLegacyProvenance)).toThrow('unavailable')
+
+    const malformedStagingIdentity = envelope()
+    malformedStagingIdentity.releaseRegistry.releases[1].stagingId = '../private'
+    expect(() => parseCurriculumReleaseHistory(malformedStagingIdentity)).toThrow('unavailable')
+
+    const missingControlsFinalField = envelope()
+    delete missingControlsFinalField.releaseRegistry.releases[0].stagingId
+    expect(() => parseCurriculumReleaseHistory(missingControlsFinalField)).toThrow('unavailable')
 
     const malformedTransition = envelope()
     malformedTransition.activation.history[0].actorUserRef = 'full-actor-identity'
