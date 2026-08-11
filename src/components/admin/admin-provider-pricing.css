@@ -1,6 +1,6 @@
 .admin-pricing { color: #172a3a; display: grid; gap: 1.25rem; min-width: 0; }
 .admin-pricing-header { align-items: flex-start; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
-.admin-pricing-header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -.03em; }
+.admin-pricing-header h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -.03em; }
 .admin-pricing-header > div > p:last-child { color: #526474; margin-top: .35rem; max-width: 54rem; }
 .admin-pricing-eyebrow, .admin-pricing-section-heading p { color: #196b6b; font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .admin-pricing-support { background: #fff; border: 1px solid #d8e1e4; border-radius: .9rem; display: grid; gap: 1rem; grid-template-columns: minmax(0, 1.3fr) minmax(18rem, .7fr); min-width: 0; padding: 1.1rem; }
@@ -14,7 +14,7 @@
 .admin-pricing-success { background: #edf8f3; border: 1px solid #91c7ad; color: #15523a; }
 .admin-pricing-mutation-error { background: #fff1ef; border: 1px solid #d9a39c; color: #7d2923; }
 .admin-pricing-mutation-error button { justify-self: start; margin-top: .35rem; }
-.admin-pricing-primary, .admin-pricing-secondary, .admin-pricing-danger, .admin-pricing-message button, .admin-pricing-actions button, .admin-pricing-mutation-error button { border: 1px solid transparent; border-radius: .5rem; font-size: .82rem; font-weight: 800; min-height: 2.5rem; padding: .5rem .85rem; }
+.admin-pricing-primary, .admin-pricing-secondary, .admin-pricing-danger, .admin-pricing-message button, .admin-pricing-actions button, .admin-pricing-mutation-error button { border: 1px solid transparent; border-radius: .5rem; font-size: .82rem; font-weight: 800; min-height: 2.75rem; padding: .5rem .85rem; }
 .admin-pricing-primary { background: #173f4a; color: #fff; justify-self: start; }
 .admin-pricing-secondary, .admin-pricing-actions button, .admin-pricing-mutation-error button { background: #fff; border-color: #9fb7be; color: #173f4a; }
 .admin-pricing-danger { background: #963c34; color: #fff; }
@@ -30,7 +30,7 @@
 .admin-pricing-form-grid { display: grid; gap: .85rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .admin-pricing-field { align-content: start; display: grid; gap: .3rem; }
 .admin-pricing-field > label { font-size: .78rem; font-weight: 800; }
-.admin-pricing-field input, .admin-pricing-field select { background: #fff; border: 1px solid #9fb2ba; border-radius: .45rem; min-height: 2.65rem; min-width: 0; padding: .45rem .55rem; width: 100%; }
+.admin-pricing-field input, .admin-pricing-field select { background: #fff; border: 1px solid #9fb2ba; border-radius: .45rem; min-height: 2.75rem; min-width: 0; padding: .45rem .55rem; width: 100%; }
 .admin-pricing-field input:disabled, .admin-pricing-field select:disabled { background: #edf1f2; color: #3d505c; opacity: 1; }
 .admin-pricing-field [aria-invalid="true"] { border-color: #a53b33; }
 .admin-pricing-field small { color: #60727d; font-size: .72rem; }
@@ -47,6 +47,7 @@
 .admin-pricing thead th { color: #526474; font-size: .7rem; letter-spacing: .04em; text-transform: uppercase; }
 .admin-pricing tbody th { font-weight: 400; min-width: 16rem; }
 .admin-pricing-dimension, .admin-pricing-interval, .admin-pricing-price, .admin-pricing td:nth-child(4) { display: grid; gap: .18rem; }
+.admin-pricing-dimension > * { overflow-wrap: anywhere; }
 .admin-pricing-dimension span, .admin-pricing-interval span, .admin-pricing-price span, .admin-pricing td:nth-child(4) > span:not(.admin-pricing-status) { color: #586b77; }
 .admin-pricing-price strong { font-size: .95rem; font-variant-numeric: tabular-nums; }
 .admin-pricing-status { border-radius: 999px; font-size: .68rem; font-weight: 800; justify-self: start; padding: .2rem .5rem; text-transform: capitalize; }

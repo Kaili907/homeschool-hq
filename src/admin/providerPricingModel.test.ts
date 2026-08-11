@@ -112,11 +112,19 @@ describe('provider pricing model', () => {
       ok: false,
       message: 'Use plain USD digits without spaces, currency symbols, or commas.',
     })
+    expect(exactUsdToIntegerMicros('0.000001 ')).toEqual({
+      ok: false,
+      message: 'Use plain USD digits without spaces, currency symbols, or commas.',
+    })
     expect(exactUsdToIntegerMicros('1000.000001')).toEqual({
       ok: false,
       message: 'The exact price must not exceed $1,000.000000 USD.',
     })
     expect(exactUsdToIntegerMicros('01.00').ok).toBe(false)
+    expect(exactUsdToIntegerMicros('0.0000010').ok).toBe(false)
+    const roundTrip = exactUsdToIntegerMicros('1.230000')
+    expect(roundTrip).toEqual({ ok: true, micros: '1230000' })
+    if (roundTrip.ok) expect(formatExactUsdMicros(roundTrip.micros)).toBe('$1.230000')
   })
 
   it('builds only canonical preview requests and reports every invalid field', () => {

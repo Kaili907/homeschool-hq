@@ -35,8 +35,10 @@ describe('Admin AI and Costs dashboard', () => {
   it('renders exact calculated and reconciled semantics with separate cache token classes', () => {
     const markup = render()
     expect(markup).toContain('Usage-derived marginal provider cost')
+    expect(markup).toContain('<h2>AI &amp; Costs</h2>')
+    expect(markup).not.toContain('<h1>')
     expect(markup).toContain('Reconciled cost')
-    expect(markup).toContain('$9,007,199,254.74')
+    expect(markup).toContain('$9,007,199,254.740993')
     expect(markup).toContain('Cached input read tokens')
     expect(markup).toContain('Cached input write tokens')
     expect(markup).toContain('TTS characters')
@@ -66,7 +68,7 @@ describe('Admin AI and Costs dashboard', () => {
       kind: 'preset', preset: 'month',
     })
     expect(markup).toContain('Monthly cost warning threshold reached')
-    expect(markup).toContain('$11.00 calculated usage cost')
+    expect(markup).toContain('$11.000000 calculated usage cost')
     expect(markup).toContain('not provider-invoice economics')
   })
 
@@ -87,6 +89,19 @@ describe('Admin AI and Costs dashboard', () => {
     expect(markup).toContain('Unavailable, not $0')
     expect(markup).toContain('no trustworthy calculated cost')
     expect(markup).not.toMatch(/Calculated \/ estimated provider cost[\s\S]{0,180}?\$0\.00/)
+  })
+
+  it('renders sub-cent canonical costs at exact microdollar precision', () => {
+    const source = costsModelFixture()
+    const model = costsModelFixture({
+      summary: {
+        ...source.summary,
+        calculatedCost: { status: 'available', micros: '1', currency: 'USD' },
+      },
+    })
+    const markup = render({ status: 'ready', model, freshness: 'current' })
+    expect(markup).toContain('$0.000001')
+    expect(markup).not.toMatch(/Usage-derived marginal provider cost[\s\S]{0,120}?\$0\.00(?:<|\s)/)
   })
 
   it('renders partial attribution, billing, and cost kinds as independent counts', () => {
@@ -151,7 +166,7 @@ describe('Admin AI and Costs dashboard', () => {
     const markup = render({ status: 'ready', model, freshness: 'current' })
     expect(markup).toContain('zero recorded AI and TTS ledger attempts')
     expect(markup).toContain('does not prove zero provider traffic')
-    expect(markup).toContain('$0.00')
+    expect(markup).toContain('$0.000000')
     expect(markup).toContain('No real daily usage points')
   })
 

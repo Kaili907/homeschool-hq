@@ -112,6 +112,8 @@ describe('Admin Provider Pricing dashboard', () => {
       term({ termId: '00000000-0000-4000-8000-000000000304', effectiveFrom: '2026-10-01T00:00:00.000Z', status: 'disabled' }),
     ]), true)
     expect(markup).toContain('Current effective terms')
+    expect(markup).toContain('<h2>Provider Pricing</h2>')
+    expect(markup).not.toContain('<h1>')
     expect(markup).toContain('Future effective terms')
     expect(markup).toContain('Historical terms')
     expect(markup).toContain('Disabled future terms')
@@ -253,6 +255,8 @@ describe('Admin Provider Pricing dashboard', () => {
     expect(css).toContain('grid-template-columns: 1fr')
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
     expect(css).toContain('overflow-x: auto')
+    expect(css).toContain('min-height: 2.75rem')
+    expect(css).toContain('overflow-wrap: anywhere')
     const shellCss = readFileSync(fileURLToPath(new URL('./admin-console.css', import.meta.url)), 'utf8')
     expect(shellCss).toContain('max-width: 100vw')
     expect(shellCss).toContain('.admin-sidebar nav { min-width: 0; overflow: hidden; }')

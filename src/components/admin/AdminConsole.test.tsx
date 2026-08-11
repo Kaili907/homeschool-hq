@@ -323,7 +323,7 @@ describe('AdminConsole canonical overview presentation', () => {
 
   it('retains accessibility and keyboard affordances', () => {
     const markup = authorized()
-    expect(markup).toContain('Skip to overview')
+    expect(markup).toContain('Skip to academy overview')
     expect(markup).toContain('aria-label="Admin sections"')
     expect(markup).toContain('aria-current="page"')
     expect(markup).toContain('aria-label="Overview time range"')
