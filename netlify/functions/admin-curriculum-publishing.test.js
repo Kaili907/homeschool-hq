@@ -47,17 +47,20 @@ function setup(authorizationResult = {
     read: vi.fn(async () => result()),
     publish: vi.fn(async () => result(false)),
   }
+  const authoring = {
+    listCollaborators: vi.fn(async () => ({ currentResponsibility: 'editor' })),
+  }
   const handler = createAdminCurriculumHandler({
     authorization,
     publishing,
-    studio: {}, authoring: {}, approval: {}, staging: {}, registry: {}, source: {},
+    studio: {}, authoring, approval: {}, staging: {}, registry: {}, source: {},
   })
-  return { authorization, publishing, handler }
+  return { authorization, authoring, publishing, handler }
 }
 
 describe('Admin curriculum publishing HTTP boundary', () => {
   it('reads with curriculum:read and publishes with curriculum:publish', async () => {
-    const { authorization, publishing, handler } = setup()
+    const { authorization, authoring, publishing, handler } = setup()
     const read = await handler(event('GET', `/api/admin/curriculum/drafts/${DRAFT}/publishing`))
     const publish = await handler(event('POST', `/api/admin/curriculum/drafts/${DRAFT}/publishing`, {
       stagingId: STAGING,
@@ -69,8 +72,21 @@ describe('Admin curriculum publishing HTTP boundary', () => {
       'curriculum:read', 'curriculum:publish',
     ])
     expect(publishing.read).toHaveBeenCalledWith(ACTOR, DRAFT)
+    expect(authoring.listCollaborators).toHaveBeenCalledWith(ACTOR, DRAFT)
     expect(publishing.publish).toHaveBeenCalledWith(ACTOR, STAGING, REQUEST)
     expect(JSON.parse(publish.body).published.activationStatus).toBe('not_active')
+  })
+
+  it('rejects publishing when the verified actor is not the assigned draft editor', async () => {
+    const { authoring, publishing, handler } = setup()
+    authoring.listCollaborators.mockResolvedValueOnce({ currentResponsibility: 'reviewer' })
+    const response = await handler(event('POST', `/api/admin/curriculum/drafts/${DRAFT}/publishing`, {
+      stagingId: STAGING,
+      idempotencyKey: REQUEST,
+    }))
+    expect(response.statusCode).toBe(403)
+    expect(JSON.parse(response.body).error.code).toBe('admin_access_denied')
+    expect(publishing.publish).not.toHaveBeenCalled()
   })
 
   it('ignores browser role claims, rejects extra fields, and exposes no activation action', async () => {
