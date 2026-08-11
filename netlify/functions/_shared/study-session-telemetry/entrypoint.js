@@ -19,6 +19,62 @@ const UNAVAILABLE_HEALTH = Object.freeze({
   deliveryResultCategory: 'unavailable',
 })
 
+const DELIVERY_CATEGORIES = new Set([
+  'no_work',
+  'processed',
+  'partial_with_retryable_failures',
+  'failed',
+  'unavailable',
+])
+
+function count(value) {
+  return Number.isSafeInteger(value) && value >= 0 ? value : 0
+}
+
+function deliveryWire(value) {
+  if (!DELIVERY_CATEGORIES.has(value?.category)) return UNAVAILABLE_DELIVERY
+  return Object.freeze({
+    schemaVersion: 1,
+    category: value.category,
+    claimed: count(value.claimed),
+    delivered: count(value.delivered),
+    replayed: count(value.replayed),
+    retryScheduled: count(value.retryScheduled),
+    leaseLost: count(value.leaseLost),
+    acknowledgementFailed: count(value.acknowledgementFailed),
+  })
+}
+
+function healthWire(value, deliveryResultCategory) {
+  if (!['available', 'unavailable'].includes(value?.worker)) {
+    return Object.freeze({ ...UNAVAILABLE_HEALTH, deliveryResultCategory })
+  }
+  return Object.freeze({
+    schemaVersion: 1,
+    worker: value.worker,
+    pendingCount: null,
+    oldestPendingAgeBucket: null,
+    deliveryResultCategory,
+  })
+}
+
+export function studySessionTelemetryDeliveryWireResult(value) {
+  const delivery = deliveryWire(value?.delivery)
+  return Object.freeze({
+    schemaVersion: 1,
+    delivery,
+    health: healthWire(value?.health, delivery.category),
+  })
+}
+
+export function unavailableStudySessionTelemetryDeliveryResult() {
+  return Object.freeze({
+    schemaVersion: 1,
+    delivery: UNAVAILABLE_DELIVERY,
+    health: UNAVAILABLE_HEALTH,
+  })
+}
+
 /**
  * Server-only manual invocation seam. It emits bounded results and deliberately
  * exposes neither an HTTP handler nor scheduling policy.
@@ -34,15 +90,25 @@ export function createStudySessionTelemetryDeliveryEntrypoint({
     try {
       worker = createWorker({ env })
     } catch {
-      return Object.freeze({
-        schemaVersion: 1,
-        delivery: UNAVAILABLE_DELIVERY,
-        health: UNAVAILABLE_HEALTH,
-      })
+      return unavailableStudySessionTelemetryDeliveryResult()
     }
 
-    const delivery = await worker.run({ limit, leaseSeconds })
-    const health = await worker.health({ deliveryResultCategory: delivery.category })
+    let delivery
+    try {
+      delivery = deliveryWire(await worker.run({ limit, leaseSeconds }))
+    } catch {
+      return unavailableStudySessionTelemetryDeliveryResult()
+    }
+
+    let health
+    try {
+      health = healthWire(
+        await worker.health({ deliveryResultCategory: delivery.category }),
+        delivery.category,
+      )
+    } catch {
+      health = healthWire(null, delivery.category)
+    }
     return Object.freeze({ schemaVersion: 1, delivery, health })
   }
 }

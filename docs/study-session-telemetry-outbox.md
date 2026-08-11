@@ -96,19 +96,46 @@ reported separately from another acknowledgement outage; both remain safe for
 lease-expiry recovery. A claim-storage outage returns `unavailable` without
 serializing the underlying exception or database object.
 
-The production composition exposes no HTTP handler or schedule. The trusted
-manual/server entrypoint runs one bounded batch and is available locally as
-`npm run study:telemetry:deliver`; it requires the existing service-role
-Supabase configuration plus `ACADEMY_APP_VERSION` and
-`ACADEMY_STUDY_ENGINE_VERSION`. It prints only the bounded delivery and health
-projection and exits nonzero for unavailable, failed, or partial delivery. No
-cadence is defined or implied.
+The production composition is reused by both invocation paths. The trusted
+local server entrypoint remains available as `npm run study:telemetry:deliver`.
+The authorized manual HTTP boundary is
+`POST /api/admin/v1/study-telemetry-delivery`; it requires the canonical
+server-derived Admin `engines:operate` capability and accepts only
+`{"schemaVersion":1,"action":"deliver"}`. Browser headers, worker identity,
+batch size, lease duration, and deployment versions are not authority or input.
+
+The Netlify scheduled adapter lives under `_shared` and accepts no request
+input. Netlify makes a function platform-private only when an actual
+`config.schedule`/`netlify.toml` schedule binds it. Repository search found no
+approved Study telemetry-delivery cadence; the earlier five-minute schedule is
+explicitly scoped to the separate adult-review worker. Therefore no deployable
+scheduled function or cron configuration is present. Approving the Study
+telemetry cadence is the single remaining decision; that approval can bind the
+existing adapter without changing the worker implementation.
+
+Both paths require service-role Supabase configuration plus trusted immutable
+deployment versions. `ACADEMY_APP_VERSION` is preferred, with Netlify
+`COMMIT_REF` or `DEPLOY_ID` accepted as the existing trusted application-version
+fallback, and `ACADEMY_STUDY_ENGINE_VERSION` is required explicitly. The mutable
+label `latest` is rejected case-insensitively. Versions are never accepted from
+browser requests.
+
+The manual boundary prints or returns only the bounded delivery and health
+projection. The local script exits nonzero for unavailable, failed, or partial
+delivery. No telemetry cadence is defined or implied.
 
 Health uses the existing service-only readiness RPC and reports worker
 `available` or `unavailable` plus the current delivery result category. The
 current database contract has no aggregate backlog RPC, so `pendingCount` and
 `oldestPendingAgeBucket` are explicitly `null`; no learner rows or fabricated
 last-success timestamp are exposed.
+
+Authorized `GET /api/admin/v1/study-telemetry-delivery` exposes only invocation
+readiness categories: worker code, manual authority, scheduled entrypoint,
+schedule configuration, deployment-version configuration, and the locally
+knowable telemetry-writer availability. It contains no learner data,
+configuration values, worker identity, provider details, raw errors, or
+database diagnostics.
 
 ## Migration and validation
 
@@ -124,6 +151,10 @@ persistence metadata marker. It has not been applied to a hosted project.
 
 WIN-17 requires no new migration. It reuses those frozen receipt, lease,
 retry, readiness, and operational-event persistence contracts unchanged.
+
+WIN-27 also requires no migration. Invocation authority, Netlify binding,
+deployment-version validation, and minimized readiness are server-code and
+deployment-configuration concerns.
 
 Permanent focused coverage lives in
 `supabase/study-session-telemetry-outbox.db.test.ts` and
