@@ -88,10 +88,12 @@ function harness(options = {}) {
     })
   })
   const handler = createTestStudySafetyHandler({
-    env: ENV,
+    env: options.env ?? ENV,
     fetchImpl,
     classifier,
-    proposalPersistence: store,
+    proposalPersistence: options.proposalPersistenceReady === false
+      ? { ...store, isReady: () => false }
+      : store,
     outbox: store,
     recipientResolver: {
       isDurable: true,
@@ -99,7 +101,11 @@ function harness(options = {}) {
       resolve: async () => ({ state: 'unavailable' }),
       reauthorizeForDelivery: async () => ({ status: 'denied' }),
     },
-    rateLimiter: { isDurable: true, isReady: () => true, reserve: async () => ({ allowed: true }) },
+    rateLimiter: {
+      isDurable: true,
+      isReady: () => true,
+      reserve: async () => ({ allowed: options.rateLimitAllowed !== false, retryAfterSeconds: 30 }),
+    },
     monitoring: { isDurable: true, isReady: () => true, record: async () => {} },
     deliveryProviders: [{
       channel: 'in-app', isDurable: true, isReady: () => true,
@@ -324,12 +330,60 @@ describe('A6-3 durable Study-session authorization in the default composition', 
     const spy = vi.spyOn(classifier, 'classify')
     const result = await handler(event({ 'x-study-session': SESSION_REFERENCE }))
 
-    expect(result.statusCode).toBe(503)
+    // STUDY-A1-AUTH-INFRA-BOUNDARY-C — 424 Failed Dependency, not 503. The
+    // verifier is a dependency of this request that could not be reached, and it
+    // runs strictly before the classifier, so nothing about this learner was
+    // evaluated. 503 was indistinguishable from a safety-service outage and the
+    // host recorded it as a learner safety incident. The response is otherwise
+    // byte-identical: same code, same absence of secrets, same fail-closed.
+    expect(result.statusCode).toBe(424)
     expect(JSON.parse(result.body)).toEqual({ error: { code: 'authorization_unavailable' } })
     expect(spy).not.toHaveBeenCalled()
     expect(proposals.size).toBe(0)
     for (const secret of [
       SERVICE_KEY, SESSION_REFERENCE, IDS.household, IDS.student, IDS.learnerSession, 'hurt myself',
     ]) expect(result.body).not.toContain(secret)
+  })
+
+  // STUDY-A1-AUTH-INFRA-BOUNDARY-C — 424 is for the unreachable verifier and
+  // nothing else. Everything below still answers on its existing status, so the
+  // new category cannot be reached by a broad server failure.
+  it('keeps a denied learner on 403, not on the infrastructure status', async () => {
+    const { handler, proposals } = harness({
+      rpcBody: { schemaVersion: 1, status: 'denied', code: 'student-session-invalid' },
+    })
+    const result = await handler(event({ 'x-study-session': SESSION_REFERENCE }))
+
+    expect(result.statusCode).toBe(403)
+    expect(JSON.parse(result.body)).toEqual({ error: { code: 'learner_not_authorized' } })
+    expect(proposals.size).toBe(0)
+  })
+
+  it('keeps a not-ready safety service on 503', async () => {
+    const { handler } = harness({
+      // A safety dependency that is present but not ready is a safety-service
+      // outage, which is exactly what 503 has always meant here.
+      proposalPersistenceReady: false,
+    })
+    const result = await handler(event({ 'x-study-session': SESSION_REFERENCE }))
+
+    expect(result.statusCode).toBe(503)
+    expect(JSON.parse(result.body)).toEqual({ error: { code: 'service_not_ready' } })
+  })
+
+  it('keeps the disabled feature flag on 503 gateway_disabled', async () => {
+    const { handler } = harness({ env: { ...ENV, ACADEMY_STUDY_ENABLED: 'false' } })
+    const result = await handler(event({ 'x-study-session': SESSION_REFERENCE }))
+
+    expect(result.statusCode).toBe(503)
+    expect(JSON.parse(result.body)).toEqual({ error: { code: 'gateway_disabled' } })
+  })
+
+  it('keeps a rate-limited request on 429', async () => {
+    const { handler } = harness({ rateLimitAllowed: false })
+    const result = await handler(event({ 'x-study-session': SESSION_REFERENCE }))
+
+    expect(result.statusCode).toBe(429)
+    expect(JSON.parse(result.body).error.code).toBe('rate_limited')
   })
 })

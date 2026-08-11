@@ -25,7 +25,7 @@ import {
   readJsonBody,
   responseForError,
 } from './_shared/http.js'
-import { verifySupabaseBearer } from './_shared/supabase-auth.js'
+import { isAuthorizationInfrastructureFailure, verifySupabaseBearer } from './_shared/supabase-auth.js'
 
 const CLASSIFY_PATHS = new Set(['/api/study/safety/classify', '/.netlify/functions/study-safety-classify'])
 const READINESS_PATH = '/api/study/safety/readiness'
@@ -145,7 +145,27 @@ function createStudySafetyHandler(overrides = {}) {
       const auth = await authVerifier(event, { fetchImpl, env, timeoutMs: 3_000 })
       if (!auth.ok) {
         await record('study_safety.request_unauthorized', 'warning', 'request-unauthorized')
-        return auth.response
+        // STUDY-A1-AUTH-INFRA-BOUNDARY-H2 — the adult bearer verifier is this
+        // request's other authorization dependency, and it runs even earlier
+        // than the learner-authorization one below. When it cannot answer at
+        // all, nothing about this child was evaluated either: the classifier is
+        // far downstream of here. It answered 503 `auth_unavailable` and 504
+        // `upstream_timeout`, which the host could only read as a safety-service
+        // outage and record as a learner safety incident — the same defect the
+        // 424 below fixed for the sibling verifier, on the sibling dependency.
+        //
+        // Both now share one status because they are one semantic category: an
+        // authorization dependency of this request was unreachable. Which of the
+        // two it was is a server detail the browser must not have to care about.
+        //
+        // This reads the verifier's own typed failure identity, never its
+        // response prose, and it is scoped to that verifier: a 503 or a 504
+        // raised anywhere else on this route — `gateway_disabled`,
+        // `service_not_ready`, `service_unavailable`, the rate limiter's
+        // failures — is untouched and keeps its status and its meaning.
+        return isAuthorizationInfrastructureFailure(auth)
+          ? errorResponse(424, 'authorization_unavailable')
+          : auth.response
       }
       if (usesProductionPorts) await productionPorts.refreshReadiness()
       const readiness = evaluateStudySafetyReadiness(dependencies, env)
@@ -185,8 +205,16 @@ function createStudySafetyHandler(overrides = {}) {
         if (authorization?.status === 'denied') {
           await record('study_safety.request_unauthorized', 'warning', 'learner-not-authorized')
         }
+        // STUDY-A1-AUTH-INFRA-BOUNDARY-C — 424 Failed Dependency, and only for
+        // this exact case. The learner-authorization verifier is a dependency of
+        // this request that could not be reached, so nothing about this child was
+        // ever evaluated: the classifier runs strictly after this point. 503 said
+        // "this safety service is unavailable", which the host could only read as
+        // a safety-classifier outage and record as a learner safety incident.
+        // Every other 503 here — `gateway_disabled`, `service_not_ready`, the
+        // rate-limiter's own failures — keeps its status and its meaning.
         return authorization?.status === 'unavailable'
-          ? errorResponse(503, 'authorization_unavailable')
+          ? errorResponse(424, 'authorization_unavailable')
           : errorResponse(403, 'learner_not_authorized')
       }
 

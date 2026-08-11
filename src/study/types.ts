@@ -218,10 +218,51 @@ export interface StudySafetyRequest {
   readonly transientText: string
 }
 
+/**
+ * Why a Study turn could not be evaluated, when the reason was never the
+ * learner. A refused adult bearer, a refused Study session and a shed request
+ * all fail closed exactly like a safety stop, but none of them is one: the
+ * classifier never judged this child, so nothing about her may be recorded,
+ * locked, or shown to her parent as an incident.
+ *
+ * The whole value is this closed set of codes. There is deliberately no field
+ * for a message, a status, a session reference, a bearer, an identifier, or a
+ * server body, so nothing a caller reads here can leak, and nothing a caller
+ * writes has to be parsed out of a string.
+ */
+export type StudyRuntimeInterruption =
+  | {
+      readonly kind: 'session-authorization'
+      /**
+       * The two halves need different recovery: a refused bearer needs the
+       * adult to sign in again, a refused session needs the learner's Study
+       * session cleared and re-issued.
+       */
+      readonly reason: 'adult-authentication-rejected' | 'study-session-rejected'
+    }
+  | { readonly kind: 'rate-limit' }
+  /**
+   * STUDY-A1-AUTH-INFRA-BOUNDARY-C — the gateway's learner-authorization
+   * verifier could not be reached, which happens before the classifier sees any
+   * learner text. Retryable, and carries no reason: unlike
+   * `session-authorization` there is nothing for an adult to do and nothing to
+   * re-issue, because neither half of the authorization pair was refused. It
+   * fails closed like the other two — no Tutor work continues — but it makes no
+   * claim about the learner and never clears verified identity.
+   */
+  | { readonly kind: 'authorization-infrastructure' }
+
 export interface StudySafetyResult {
   readonly outcome: 'clear' | 'urgent' | 'uncertain' | 'invalid'
   readonly mayContinue: boolean
   readonly adultHelpState: 'not-needed' | 'proposed-not-delivered' | 'not-confirmed'
+  /**
+   * Set only by the trusted mounted client/port boundary, and only on a
+   * fail-closed `invalid` result. A server response can never carry one: the
+   * safety client validates the wire body against an exact four-key shape and
+   * reduces anything else to a plain classifier failure.
+   */
+  readonly interruption?: StudyRuntimeInterruption
 }
 
 export interface StudyAccommodation {

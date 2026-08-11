@@ -3,7 +3,7 @@ import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { APP_STATE_STORAGE_KEY } from './sync/provenance'
 import { defaultAppState } from './migration'
-import type { AppState } from './types'
+import type { AppState, Grade, WorkingLevels } from './types'
 
 // MOUNT-G5-MATH route lifecycle. Harness adapted from
 // App.academyRouteLifecycle.test.tsx. The practice surface itself is NOT mocked:
@@ -102,6 +102,20 @@ function seeded(active: string | null): AppState {
   const state = defaultAppState()
   state.profiles.p1 = { ...state.profiles.p1, name: 'Sam', pin: '1234' }
   state.profiles.p2 = { ...state.profiles.p2, name: 'Riley', pin: '2222', grade: '5' }
+  state.activeProfileId = active
+  return state
+}
+
+/** ACADEMY-LEVEL-DECOUPLE: p3 is the family's 6th grader. Reshaping her nominal
+ * grade and mathematics working level is how this card's cases are expressed —
+ * `grade` is what she IS, `workingLevels.mathematics` is what she RECEIVES. */
+function seededLeveled(
+  active: string | null,
+  grade: Grade,
+  workingLevels: WorkingLevels,
+): AppState {
+  const state = seeded(active)
+  state.profiles.p3 = { ...state.profiles.p3, name: 'Nina', pin: '3333', grade, workingLevels }
   state.activeProfileId = active
   return state
 }
@@ -301,6 +315,160 @@ describe('App Grade 5 math practice route lifecycle (MOUNT-G5-MATH)', () => {
   it('keeps the picker for a signed-out direct link', async () => {
     await mountApp(seeded(null))
     expect(harness.picker).not.toBeNull()
+    await expectSurfaceUnreachable()
+  })
+
+  // ---------- CE1: eligibility follows the mathematics WORKING LEVEL ----------
+
+  it('boots a nominal grade-6 learner with mathematics working level 5 onto the surface', async () => {
+    await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
+    await waitForSurface()
+    expect(harness.picker).toBeNull()
+    expect(pathname).toBe('/practice/grade-5-math')
+  })
+
+  it('offers the home card to a nominal grade-6 learner working at mathematics level 5', async () => {
+    pathname = '/'
+    await mountApp(seededLeveled(null, '6', { mathematics: '5' }))
+    await signIn('p3', '3333')
+    expect(hasText(container, 'Hi, Nina!')).toBe(true)
+    expect(hasText(container, HOME_CARD_MARKER)).toBe(true)
+    await press(findButton('Grade 5 Math'))
+    await waitForSurface()
+  })
+
+  it.each(['3', '4'] as const)(
+    'offers the surface to a nominal grade-%s learner working at mathematics level 5',
+    async (grade) => {
+      pathname = '/'
+      await mountApp(seededLeveled(null, grade, { mathematics: '5' }))
+      await signIn('p3', '3333')
+      expect(hasText(container, HOME_CARD_MARKER)).toBe(true)
+      await press(findButton('Grade 5 Math'))
+      await waitForSurface()
+    },
+  )
+
+  it('never changes the nominal grade a working-level learner is reported at', async () => {
+    await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
+    await waitForSurface()
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(persisted.profiles.p3.grade).toBe('6')
+    expect(persisted.profiles.p3.workingLevels).toEqual({ mathematics: '5' })
+  })
+
+  it.each(['7', '8'] as const)(
+    'denies a nominal grade-5 learner whose mathematics working level is %s',
+    async (level) => {
+      await mountApp(seededLeveled('p3', '5', { mathematics: level }))
+      expect(harness.picker).not.toBeNull()
+      await expectSurfaceUnreachable()
+      await signIn('p3', '3333')
+      expect(findButton('Grade 5 Math')).toBeNull()
+      await expectSurfaceUnreachable()
+    },
+  )
+
+  it('does not grant math practice when only another subject sits at level 5', async () => {
+    await mountApp(seededLeveled('p3', '6', { 'english-language-arts': '5' }))
+    expect(harness.picker).not.toBeNull()
+    await expectSurfaceUnreachable()
+    await signIn('p3', '3333')
+    expect(findButton('Grade 5 Math')).toBeNull()
+    await expectSurfaceUnreachable()
+  })
+
+  it('re-enters the surface after a refresh-equivalent remount for a working-level learner', async () => {
+    await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
+    await waitForSurface()
+    await act(async () => root?.unmount())
+    root = null
+    container = documentTarget.createElement('div')
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    await mountApp(persisted)
+    await waitForSurface()
+  })
+
+  it('sign-out normalizes a lingering practice pathname for a working-level learner', async () => {
+    await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
+    await waitForSurface()
+    await press(findButton('Back home'))
+    expect(hasText(container, 'Hi, Nina!')).toBe(true)
+    pathname = '/practice/grade-5-math'
+    await press(findButton('Sign out'))
+    expect(harness.picker).not.toBeNull()
+    expect(pathname).toBe('/')
+  })
+
+  it('does not let the next learner inherit the working-level learner’s practice route', async () => {
+    await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
+    await waitForSurface()
+    await press(findButton('Back home'))
+    pathname = '/practice/grade-5-math'
+    await press(findButton('Sign out'))
+    expect(pathname).toBe('/')
+    await signIn('p1', '1234') // Sam, grade 3, no working levels
+    expect(hasText(container, 'Hi, Sam!')).toBe(true)
+    expect(findButton('Grade 5 Math')).toBeNull()
+    await expectSurfaceUnreachable()
+  })
+
+  // STUDY-A1-COMP Phase 11 — CE1's App-integration follow-ups. Eligibility is
+  // re-checked while the surface is MOUNTED, not only at the entry point, so a
+  // learner switch cannot leave an ineligible girl on a surface she reached as
+  // somebody else.
+  it('drops an ineligible learner off the mounted practice surface', async () => {
+    await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
+    await waitForSurface()
+    // Nina is on the surface. Sam is a grade-3 girl with no mathematics working
+    // level, so the same mounted screen must not stay open for her.
+    await press(findButton('Back home'))
+    await press(findButton('Sign out'))
+    await signIn('p1', '1234')
+    expect(hasText(container, 'Hi, Sam!')).toBe(true)
+    expect(hasText(container, SURFACE_MARKER)).toBe(false)
+    await expectSurfaceUnreachable()
+  })
+
+  it('lets an eligible learner reach the surface after an ineligible one', async () => {
+    // The reverse direction, so the re-check cannot have become a permanent
+    // refusal once it has fired for an ineligible girl.
+    pathname = '/'
+    await mountApp(seededLeveled(null, '6', { mathematics: '5' }))
+    await signIn('p1', '1234')
+    expect(hasText(container, 'Hi, Sam!')).toBe(true)
+    expect(findButton('Grade 5 Math')).toBeNull()
+    await press(findButton('Sign out'))
+    await signIn('p3', '3333')
+    await press(findButton('Grade 5 Math'))
+    await waitForSurface()
+    expect(hasText(container, SURFACE_MARKER)).toBe(true)
+  })
+
+  it('writes a working-level learner’s practice result to her profile only', async () => {
+    await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
+    await waitForSurface()
+    await press(findButton('Unit 6'))
+    const answerButtons: FakeElement[] = []
+    const collect = (node: FakeElement) => {
+      if (node.tagName === 'BUTTON' && !hasText(node, '✕')) answerButtons.push(node)
+      node.childNodes.forEach(collect)
+    }
+    collect(container)
+    await press(answerButtons[0])
+    const persisted = JSON.parse(localStorage.getItem(APP_STATE_STORAGE_KEY)!) as AppState
+    expect(Object.keys(persisted.profiles.p3.hsStats ?? {}).length).toBeGreaterThan(0)
+    expect(persisted.profiles.p1.hsStats ?? {}).toEqual({})
+    expect(persisted.profiles.p2.hsStats ?? {}).toEqual({})
+  })
+
+  it('a working-level learner reaches nothing when the flag is off', async () => {
+    vi.stubEnv('VITE_GRADE5_MATH_PRACTICE_ENABLED', '')
+    await mountApp(seededLeveled('p3', '6', { mathematics: '5' }))
+    expect(harness.picker).not.toBeNull()
+    await expectSurfaceUnreachable()
+    await signIn('p3', '3333')
+    expect(findButton('Grade 5 Math')).toBeNull()
     await expectSurfaceUnreachable()
   })
 

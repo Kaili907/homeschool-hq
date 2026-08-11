@@ -11,9 +11,11 @@ import { assertCompleteStudyPortBundle, type StudyPortBundle } from './ports'
 import { assertAcceptedStudyRuntime } from './runtimeCompatibility'
 import { learnerSafeResult } from './safety/learnerSafe'
 import { recordLocalPreAcceptanceSafetyStop } from './safety/localStopLedger'
+import { studyBridgeSessionRef } from './studyBridgeSessionRef'
 import type {
   HostStudyLaunchContext,
   StudyCalendarEntry,
+  StudyRuntimeInterruption,
   StudySafetyResult,
   StudyScope,
 } from './types'
@@ -53,6 +55,20 @@ export type StudyTutorTurnResult =
       readonly deliveryStatus: 'proposed-not-delivered' | 'not-confirmed'
       readonly studentMessage: string
     }
+  /**
+   * The turn could not be evaluated, and the reason was not the learner. This
+   * deliberately carries no classification, reason code, delivery status,
+   * student message, identifier or server detail: there is nothing to record
+   * about this child, so there is nothing here for a caller to record.
+   * `coreSubmitInvocations` is kept only so a caller can see whether Tutor Core
+   * ran before the refusal — 0 whenever the learner's own input was refused,
+   * which is every case except a session refused between the two safety checks.
+   */
+  | {
+      readonly status: 'interrupted'
+      readonly interruption: StudyRuntimeInterruption
+      readonly coreSubmitInvocations: 0 | 1
+    }
   | { readonly status: 'quarantined'; readonly reasonCode: string }
 
 export class Rc1LocalLearnerBindingAdapter {
@@ -72,7 +88,11 @@ export class Rc1LocalLearnerBindingAdapter {
       result.bridgeVersion !== '1.0.1' ||
       result.bridgeContractVersion !== 1 ||
       result.minimizedProjection.evidence.studentId !== RC1_LOCAL_LEARNER_SENTINEL ||
-      result.minimizedProjection.evidence.sessionId !== scope.sessionRef
+      // The projection echoes the identifier the bridge was GIVEN, so this must
+      // ask for the same one — the durable session reference is not what
+      // crossed the boundary. `this.#sessions` above still keys on the durable
+      // reference: that map is the host's own identity binding, not transport.
+      result.minimizedProjection.evidence.sessionId !== studyBridgeSessionRef(scope.sessionRef)
     ) {
       throw new Error('RC1 accepted result identity or version mismatch; projection quarantined.')
     }
@@ -108,11 +128,77 @@ function invalidSafetyResult(): StudySafetyResult {
   }
 }
 
+type StudySessionAuthorizationReason =
+  Extract<StudyRuntimeInterruption, { kind: 'session-authorization' }>['reason']
+
+const SESSION_AUTHORIZATION_REASONS: ReadonlySet<string> =
+  new Set<StudySessionAuthorizationReason>(['adult-authentication-rejected', 'study-session-rejected'])
+
+/** Narrows to the reason union, so only a checked primitive can be kept. */
+function isSessionAuthorizationReason(value: unknown): value is StudySessionAuthorizationReason {
+  return typeof value === 'string' && SESSION_AUTHORIZATION_REASONS.has(value)
+}
+
+/**
+ * Exact, and closed on both sides: an unrecognised kind, an unrecognised reason,
+ * a missing reason, and any extra field are all rejected.
+ *
+ * STUDY-A1-COMP Phase 10 — validates and rebuilds in ONE pass, returning the
+ * frozen copy or null.
+ *
+ * The type check comes first and membership is asked of the primitive itself.
+ * Coercing with String() let an object whose `toString` returned an approved
+ * code through, and the object that was admitted — not the code it printed —
+ * then travelled onward as the reason. Anything it closed over went with it.
+ *
+ * Validating and rebuilding together is what makes that hold. Each field is read
+ * exactly once and the value that is KEPT is the value that was CHECKED, so an
+ * own accessor cannot answer the check with an approved string and then hand
+ * something else to whatever is built afterwards. Only primitives leave here.
+ *
+ * Null means "not an interruption", which is not an error: it simply is not
+ * honoured, leaving the result on the true safety-stop path. That is the safer
+ * direction — the worst outcome of over-rejecting is a stop a parent has to
+ * clear, while the worst outcome of under-rejecting is a real safety stop
+ * silently downgraded.
+ */
+function narrowedInterruption(value: unknown): StudyRuntimeInterruption | null {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null
+  const candidate = value as Record<string, unknown>
+  const keys = Object.keys(candidate)
+  const kind = candidate.kind
+  if (kind === 'rate-limit') return keys.length === 1 ? Object.freeze({ kind: 'rate-limit' as const }) : null
+  // STUDY-A1-AUTH-INFRA-BOUNDARY-C — reason-less, so the key count is the whole
+  // check, exactly as for 'rate-limit'. An extra field is still a rejection.
+  if (kind === 'authorization-infrastructure') {
+    return keys.length === 1 ? Object.freeze({ kind: 'authorization-infrastructure' as const }) : null
+  }
+  if (kind !== 'session-authorization' || keys.length !== 2 || !Object.hasOwn(candidate, 'reason')) return null
+  const reason = candidate.reason
+  return isSessionAuthorizationReason(reason)
+    ? Object.freeze({ kind: 'session-authorization' as const, reason })
+    : null
+}
+
+/** Exact, and closed on both sides: see `narrowedInterruption`. */
+function validInterruption(value: unknown): value is StudyRuntimeInterruption {
+  return narrowedInterruption(value) !== null
+}
+
 function validSafetyResult(value: unknown): value is StudySafetyResult {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
   const result = value as Record<string, unknown>
+  // An interruption may accompany a fail-closed `invalid` result and nothing
+  // else, so a port cannot use one to soften a real flag or to buy a learner
+  // past the safety gate.
+  if (Object.hasOwn(result, 'interruption')) {
+    if (
+      Object.keys(result).length !== 4 ||
+      result.outcome !== 'invalid' ||
+      !validInterruption(result.interruption)
+    ) return false
+  } else if (Object.keys(result).length !== 3) return false
   if (
-    Object.keys(result).length !== 3 ||
     !['outcome', 'mayContinue', 'adultHelpState'].every((key) => Object.hasOwn(result, key)) ||
     !['urgent', 'uncertain', 'clear', 'invalid'].includes(String(result.outcome)) ||
     typeof result.mayContinue !== 'boolean'
@@ -120,6 +206,77 @@ function validSafetyResult(value: unknown): value is StudySafetyResult {
   if (result.outcome === 'clear') return result.mayContinue === true && result.adultHelpState === 'not-needed'
   if (result.outcome === 'invalid') return result.mayContinue === false && result.adultHelpState === 'not-confirmed'
   return result.mayContinue === false && result.adultHelpState === 'proposed-not-delivered'
+}
+
+type BridgeStopOrQuarantine =
+  Extract<SafeTutorBridgeResult, { readonly status: 'stopped-or-quarantined' }>['result']
+
+/**
+ * STUDY-A1-BRIDGE-STATUS-C.
+ *
+ * `stopped-or-quarantined` is one arm of the bridge result holding two different
+ * things, and its name says so. Everything in it used to become a host `stopped`
+ * result, which StudySessionContainer writes to the durable A6-5-C safety
+ * ledger — so a ledger collision, a replayed turn or an over-long legacy
+ * identifier became a learner safety incident that survives a refresh and stands
+ * in her dad's record as one.
+ *
+ * The split is drawn from the bridge's own discriminated union. It cannot be
+ * drawn from the learner message: every non-clear classification deliberately
+ * shows the same wording (A6-5), so the copy carries no provenance at all.
+ *
+ * The pre-Core safety gateway runs first and returns before anything downstream,
+ * so any status other than its own means the gateway already cleared this
+ * learner's text. Those are structural. `stop-invalid-input` is the one status
+ * the gateway and the orchestrator both emit, so it is split by the gateway's
+ * own reason code rather than by which of them produced it.
+ */
+const STRUCTURAL_BRIDGE_STATUSES: ReadonlySet<string> = new Set([
+  // Contract, projection or event-ledger failure, always after the gateway cleared.
+  'quarantined',
+  // The accepted event was already appended; a replay is not a determination.
+  'duplicate-ignored',
+])
+
+/**
+ * The gateway refuses a malformed context *before* it reads the learner's text,
+ * and the orchestrator emits the same reason for its own downstream-context
+ * check after the text was cleared. Either way nothing judged this child.
+ *
+ * The other two reasons stay on the safety side and must: `input-limit` means
+ * the text was refused before it could be normalized or classified, and
+ * `invalid-classifier` means the classifier itself could not answer. The
+ * gateway's reviewed deterministic layer runs on every turn and may escalate
+ * above the host's own classifier, so text it never saw cannot be called clear.
+ */
+const STRUCTURAL_GATEWAY_REASONS: ReadonlySet<string> = new Set([
+  'urgent-gateway-invalid-context',
+])
+
+/**
+ * Both fields are read once, up front, and the value that is CHECKED is the
+ * value the reason code is BUILT from — the same discipline `narrowedInterruption`
+ * keeps. Anything unrecognised, missing or non-primitive falls through to the
+ * learner-safety side, which is the direction a fail-closed host must miss in.
+ */
+function classifiedBridgeFailure(
+  inner: BridgeStopOrQuarantine,
+): { readonly kind: 'structural' | 'learner-safety'; readonly reasonCode: string } {
+  const candidate = inner as { readonly status?: unknown; readonly reasonCode?: unknown }
+  const status = candidate.status
+  const reason = candidate.reasonCode
+  const named = typeof status === 'string' ? status : 'unrecognised'
+  if (STRUCTURAL_BRIDGE_STATUSES.has(named)) {
+    return { kind: 'structural', reasonCode: `bridge-${named}` }
+  }
+  if (
+    named === 'stop-invalid-input' &&
+    typeof reason === 'string' &&
+    STRUCTURAL_GATEWAY_REASONS.has(reason)
+  ) {
+    return { kind: 'structural', reasonCode: `bridge-${reason}` }
+  }
+  return { kind: 'learner-safety', reasonCode: `bridge-${named}` }
 }
 
 function stoppedResult(
@@ -150,7 +307,7 @@ export class AcceptedRc1HostRuntime {
     const scope = { householdRef: context.householdRef, learnerRef: context.learnerRef, sessionRef }
     this.#identity.bind(scope)
     return launchStudentSession({
-      sessionId: sessionRef,
+      sessionId: studyBridgeSessionRef(sessionRef),
       lessonId: entry.lessonRef,
       calendarBlockId: entry.blockRef,
       householdTimeZone: context.householdTimeZone,
@@ -189,6 +346,16 @@ export class AcceptedRc1HostRuntime {
       }
     }
     if (inputSafety.outcome !== 'clear' || inputSafety.mayContinue !== true) {
+      // A refused session or a shed request is not a stop. It is returned
+      // before any safety bookkeeping, so nothing durable is written and the
+      // caller has no stop-shaped result it could write one from. Tutor Core
+      // has not been reached at this point.
+      // One read of the port's field, narrowed in the same pass. A null falls
+      // through to the genuine safety-stop path below.
+      const interruption = narrowedInterruption(inputSafety.interruption)
+      if (interruption) {
+        return { status: 'interrupted', interruption, coreSubmitInvocations: 0 }
+      }
       const classification = inputSafety.outcome === 'clear' ? 'invalid' : inputSafety.outcome
       if (safetyPort.mode !== 'production') {
         await recordLocalPreAcceptanceSafetyStop({
@@ -208,6 +375,12 @@ export class AcceptedRc1HostRuntime {
           : 'not-confirmed',
       )
     }
+    // STUDY-A1-SESSIONREF-C. Bounded here, at the one seam that calls the
+    // bridge, rather than at each caller: the durable `scope.sessionRef` stays
+    // whole everywhere else in this method — the safety port, the event ledger,
+    // persistence and the identity binding all still use it — and only what
+    // crosses the bridge is bounded.
+    const bridgeSessionRef = studyBridgeSessionRef(input.scope.sessionRef)
     const classifier: UrgentSafetyClassifierPort = {
       classifierVersion: PRECHECKED_CLASSIFIER_VERSION,
       classify: () => ({
@@ -220,7 +393,10 @@ export class AcceptedRc1HostRuntime {
     }
     const eventLedger: AcceptedEventLedgerPort = {
       appendAcceptedEvent: async (sessionId, eventId, eventVersion, idempotencyKey) => {
-        if (sessionId !== input.scope.sessionRef || (input.isCurrentBinding && !input.isCurrentBinding())) {
+        // The bridge hands back the identifier it was given, so this compares
+        // against that one. The append below is still scoped by the durable
+        // `input.scope`, which is what the host event ledger is keyed on.
+        if (sessionId !== bridgeSessionRef || (input.isCurrentBinding && !input.isCurrentBinding())) {
           return { status: 'idempotency-collision' as const }
         }
         const status = await ports.eventLedger.append(input.scope, {
@@ -232,12 +408,13 @@ export class AcceptedRc1HostRuntime {
         return { status }
       },
     }
+    let outputInterruption: StudyRuntimeInterruption | undefined
     let result: SafeTutorBridgeResult
     try {
       result = await submitStudentTurn(
         {
           requestId: input.requestRef,
-          sessionId: input.scope.sessionRef,
+          sessionId: bridgeSessionRef,
           lessonId: input.entry.lessonRef,
           segmentId: input.segmentRef,
           subject: subjectForBridge(input.context.subject),
@@ -262,6 +439,10 @@ export class AcceptedRc1HostRuntime {
                 transientText: request.transientTutorText,
               })
               const decision = validSafetyResult(candidate) ? candidate : invalidSafetyResult()
+              // The bridge's decision shape carries no interruption, so it is
+              // kept here instead. Reassigned on every call, so a later clear
+              // answer cannot inherit an earlier refusal.
+              outputInterruption = decision.interruption
               return {
                 classification: decision.outcome,
                 mayContinue: decision.mayContinue,
@@ -278,6 +459,15 @@ export class AcceptedRc1HostRuntime {
       return { status: 'quarantined', reasonCode: 'stale-host-binding' }
     }
     if (result.status === 'output-blocked') {
+      // The session can be refused between the learner-input check and the
+      // Tutor-output one. Tutor Core has run by then and its text is discarded
+      // either way, but the refusal is still a lifecycle event: dressing it up
+      // as a safety stop would tell this child's parent she wrote something
+      // unsafe when the classifier never judged her at all.
+      const interruption = narrowedInterruption(outputInterruption)
+      if (interruption) {
+        return { status: 'interrupted', interruption, coreSubmitInvocations: 1 }
+      }
       return stoppedResult(
         result.classification,
         `mounted-tutor-output-safety-${result.classification}`,
@@ -286,12 +476,15 @@ export class AcceptedRc1HostRuntime {
       )
     }
     if (result.status !== 'accepted') {
-      return stoppedResult(
-        'invalid',
-        `bridge-${result.result.status}`,
-        result.coreSubmitInvocations,
-        'not-confirmed',
-      )
+      // A structural refusal is returned in the shape that carries no
+      // classification, no delivery status and no student message, so the caller
+      // has nothing it could write a safety record from — the same reason the
+      // interruption arm above is shaped the way it is.
+      const failure = classifiedBridgeFailure(result.result)
+      if (failure.kind === 'structural') {
+        return { status: 'quarantined', reasonCode: failure.reasonCode }
+      }
+      return stoppedResult('invalid', failure.reasonCode, result.coreSubmitInvocations, 'not-confirmed')
     }
     try {
       this.#identity.verifyAccepted(input.scope, result)

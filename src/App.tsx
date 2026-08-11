@@ -81,16 +81,37 @@ import {
 import type { StudyAdultAuthorization } from './study/types'
 import type { StudyPortBundle } from './study/ports'
 import { getGatewayAccessToken } from './tutor/gatewayAuth'
-import { createStudyIdentityClient } from './study/client/studyIdentityClient'
 import { createStudyProductionReadinessClient } from './study/client/studyProductionReadinessClient'
+import {
+  createAppStudySessionComposition,
+  type AppStudySessionComposition,
+  type StudySessionInstallFailureCode,
+} from './study/composition/appStudySession'
+import {
+  createHostStudyLifecycleSeam,
+  currentHostStudyLifecycleSeam,
+  hostStudyLifecycleBoundary,
+  type HostStudyLifecycleSeam,
+} from './study/composition/hostStudyLifecycle'
+import type { StudySessionAuthorizationFailure } from './study/safety/client'
 import {
   createVerifiedStudyRuntimeAdapter,
   type VerifiedStudyRuntimeAdapter,
 } from './study/production/verifiedRuntimeAdapter'
-import { StudyLifecycleBoundary } from './study/lifecycle'
+
+/**
+ * STUDY-A1-COMP Phase 5 — the only thing an install refusal is allowed to
+ * produce. Never `error.message`, never the grant, never the reference, never a
+ * server body: one of two fixed words, and nothing reaches a surface at all.
+ */
+function reportStudySessionInstallRejected(code: StudySessionInstallFailureCode): void {
+  console.warn('study-session-install-rejected', code)
+}
 
 const loadPreviewPorts = import.meta.env.DEV
-  ? () => import('./study/mountedPorts').then(({ createMountedStudyPorts }) => createMountedStudyPorts())
+  ? (deps: Parameters<
+      typeof import('./study/mountedPorts')['createMountedStudyPorts']
+    >[0]) => import('./study/mountedPorts').then(({ createMountedStudyPorts }) => createMountedStudyPorts(deps))
   : null
 const StudyDashboard = import.meta.env.DEV
   ? lazy(() => import('./components/study/StudyDashboard').then((module) => ({ default: module.StudyDashboard })))
@@ -150,21 +171,42 @@ export default function App() {
   const [studyProductionStatus, setStudyProductionStatus] = useState<
     'disabled' | 'unauthenticated' | 'checking' | 'not-ready' | 'degraded' | 'ready'
   >(studyEnabled && !studyPreviewEnabled ? 'unauthenticated' : 'disabled')
-  const studyProductionLifecycleRef = useRef<StudyLifecycleBoundary | null>(null)
   const studyReadinessClientRef = useRef<ReturnType<typeof createStudyProductionReadinessClient> | null>(null)
-  const studyIdentityClientRef = useRef<ReturnType<typeof createStudyIdentityClient> | null>(null)
+  // STUDY-A1-COMP Phase 4 — the single Study session trio for this running app:
+  // one transport, one lifecycle, one identity client, built once and held in a
+  // ref rather than in state. It must never be serialized, so it is deliberately
+  // outside AppState, outside React state, and outside anything persisted.
+  const studySessionRef = useRef<AppStudySessionComposition | null>(null)
   const studyVerifiedRuntimeRef = useRef<VerifiedStudyRuntimeAdapter | null>(null)
   const studySelectedProfileRef = useRef<string | null>(null)
-  if (!studyProductionLifecycleRef.current) {
-    studyProductionLifecycleRef.current = new StudyLifecycleBoundary()
-  }
-  if (!studyIdentityClientRef.current) {
-    studyIdentityClientRef.current = createStudyIdentityClient()
+  // Owner token for the one host Study lifecycle boundary the route and the
+  // container share (Phase 8). An empty object identity, nothing more.
+  //
+  // STUDY-A1-PROD-SEAM — this owner names the ONE boundary for this running app.
+  // The App previously also held a separate `new StudyLifecycleBoundary()` for
+  // the verified production runtime: two authorities, so a production launch
+  // could never begin the epoch a production host surface would join, and
+  // cancelling either left the other live. The runtime now takes this boundary.
+  //
+  // Every cancellation path reaches it through this owner rather than through a
+  // ref holding the last seam: the boundary exists whether or not an epoch was
+  // ever begun on it, so no cancellation can be skipped for want of a seam.
+  const studyHostLifecycleOwnerRef = useRef({})
+  if (!studySessionRef.current) {
+    studySessionRef.current = createAppStudySessionComposition({
+      onInstallRejected: reportStudySessionInstallRejected,
+    })
   }
   if (!studyVerifiedRuntimeRef.current) {
     studyVerifiedRuntimeRef.current = createVerifiedStudyRuntimeAdapter({
-      identityClient: studyIdentityClientRef.current,
-      lifecycle: studyProductionLifecycleRef.current,
+      // The composition's client, not a second identity authority.
+      identityClient: studySessionRef.current.identity,
+      // The app's one boundary, not a second lifecycle authority: the epoch this
+      // launch begins is the epoch a host surface joins.
+      lifecycle: hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current),
+      // Phase 5: the issued grant goes straight into the app-owned lifecycle.
+      // A refusal throws, which cancels the launch and leaves Study unavailable.
+      onSessionGrantIssued: (grant) => { studySessionRef.current!.installIssuedGrant(grant) },
     })
   }
   const [state, setState] = useState<AppState>(loaded.state)
@@ -185,11 +227,12 @@ export default function App() {
       ? loaded.state.profiles[loaded.state.activeProfileId]
       : null
     // MOUNT-G5-MATH (MOUNT-2 pattern): the Grade 5 math practice deep link is
-    // honoured only for a grade-5 profile with the flag on; every other case —
-    // flag off, wrong grade, no persisted profile — falls through to the picker.
+    // honoured only for a profile whose mathematics working level is 5 with the
+    // flag on; every other case — flag off, another working level, no persisted
+    // profile — falls through to the picker.
     if (
       bootProfile &&
-      grade5MathPracticeAvailableFromHost(bootProfile.grade) &&
+      grade5MathPracticeAvailableFromHost(bootProfile) &&
       isGrade5MathPracticePath(window.location.pathname)
     ) {
       return { kind: 'g5MathPractice' }
@@ -206,13 +249,64 @@ export default function App() {
   // MT-1: start of the current practice session, for the "3+ this session" escalation count.
   const sessionStartRef = useRef(Date.now())
 
+  /**
+   * STUDY-A1-COMP Phase 7. The whole payload is a reason code. Neither branch is
+   * a learner-safety signal, neither writes anything durable, and neither
+   * retries the refused request — the recovery is an explicit adult or learner
+   * action, so there is no automatic request loop.
+   */
+  const handleStudySessionAuthorizationFailure = (reason: StudySessionAuthorizationFailure) => {
+    // STUDY-A1-PROD-SEAM — recovery in a fixed order, and unconditional at every
+    // step.
+    //
+    // 1. The session authority. This used to be `identity.clear()` alone, which
+    //    reaches the transport only through the invalidation notice the identity
+    //    client emits IF it is still holding a reference — so whether the
+    //    recovery emptied anything depended on state the App does not control.
+    //    The composition's own clear empties the transport first and the identity
+    //    client after, whatever either was holding.
+    // 2. The one lifecycle epoch, taken from the owner rather than from the seam
+    //    ref, which is null until a launch or a ready host context exists.
+    // 3. The verified runtime, last, because its cancel is the only asynchronous
+    //    step and nothing above may wait on it.
+    //
+    // None of the three is a learner-safety signal, none writes anything durable,
+    // and none retries the refused request — recovery is an explicit adult or
+    // learner action, so there is no automatic request loop.
+    studySessionRef.current?.clear('logout')
+    hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current).cancel('authorization-loss')
+    void studyVerifiedRuntimeRef.current?.cancel('authorization-loss')
+    studySelectedProfileRef.current = null
+    if (reason === 'adult-authentication-rejected') {
+      // The adult bearer was refused, not the child. Reacquiring it is the
+      // existing host auth path, so drop the local adult authorization and send
+      // Study back to its unauthenticated state.
+      setParentStudyAuthorization(null)
+      setStudyProductionStatus('unauthenticated')
+      return
+    }
+    // study-session-rejected: only the Study session is gone. The learner
+    // returns to the launch surface, where a new session is issued by an
+    // explicit relaunch and never by a retry of the refused request.
+    setScreen((current) =>
+      current.kind === 'studySession' || current.kind === 'studySettings'
+        ? { kind: 'studyDashboard' }
+        : current,
+    )
+  }
+
   useEffect(() => {
     let current = true
     if (!studyPreviewEnabled || !loadPreviewPorts) {
       setStudyRuntime(null)
       return () => { current = false }
     }
-    void loadPreviewPorts().then((runtime) => {
+    // Phase 7: the mounted safety port authorizes each request through the one
+    // app-owned lifecycle, and reports a refusal back to this composition.
+    void loadPreviewPorts({
+      sessionAuthorization: studySessionRef.current!.authorization,
+      onSessionAuthorizationFailure: handleStudySessionAuthorizationFailure,
+    }).then((runtime) => {
       if (current) setStudyRuntime(runtime)
     }).catch(() => {
       if (current) setStudyRuntime(null)
@@ -233,19 +327,51 @@ export default function App() {
   const sync = useSync(state, setState)
   const active = state.activeProfileId ? state.profiles[state.activeProfileId] : null
 
+  // STUDY-A1-COMP Phase 6 — the learner change, watched in one place and for
+  // both compositions. Declared BEFORE the Study reconcile effect below, so
+  // React runs it first: child A's Study session is already empty by the time
+  // anything can issue or install one for child B. A transition to "no learner"
+  // is a sign-out, which clears with its own reason rather than this one.
+  const studyActiveLearnerRef = useRef(loaded.state.activeProfileId)
+  useEffect(() => {
+    const previous = studyActiveLearnerRef.current
+    studyActiveLearnerRef.current = state.activeProfileId
+    if (!previous || !state.activeProfileId || previous === state.activeProfileId) return
+    studySessionRef.current?.clear('learner-changed')
+    // STUDY-A1-PROD-SEAM — the one boundary, not the seam ref, which is null
+    // until a launch or a ready host context has produced one.
+    hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current).cancel('learner-switch')
+  }, [state.activeProfileId])
+
   useEffect(() => {
     const productionSelected = studyEnabled && !studyPreviewEnabled
-    const lifecycle = studyProductionLifecycleRef.current!
+    const lifecycle = hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current)
     const runtime = studyVerifiedRuntimeRef.current!
+    const studySession = studySessionRef.current!
+    // STUDY-A1-COMP Phase 6. Every exit from a live Study session empties the
+    // app-owned lifecycle FIRST and explicitly, before the runtime is cancelled
+    // and before any later grant can be issued. A dropped adult session and a
+    // disabled feature are logout; losing the selected learner is a learner
+    // change. Neither depends on the identity client noticing on its own.
     if (!productionSelected) {
-      lifecycle.cancel('feature-disabled')
-      void runtime.cancel('feature-disabled')
+      // STUDY-A1-PROD-SEAM. Study being switched off is a session event, and the
+      // one boundary must be emptied with it. The preview composition simply
+      // being the selected one is not: it installs nothing, the verified runtime
+      // never launched, and the boundary that would be cancelled here is now the
+      // very epoch the preview surfaces are running in — cancelling it every time
+      // this effect re-ran would restart their sessions under them.
+      if (!studyEnabled) {
+        studySession.clear('logout')
+        lifecycle.cancel('feature-disabled')
+        void runtime.cancel('feature-disabled')
+      }
       studyReadinessClientRef.current?.invalidate()
       studySelectedProfileRef.current = null
       setStudyProductionStatus('disabled')
       return
     }
     if (!sync.status.user || sync.status.binding !== 'bound' || sync.status.provenance !== 'verified') {
+      studySession.clear('logout')
       lifecycle.cancel('authorization-loss')
       void runtime.cancel('authorization-loss')
       studyReadinessClientRef.current?.invalidate()
@@ -254,6 +380,7 @@ export default function App() {
       return
     }
     if (!active) {
+      studySession.clear('learner-changed')
       lifecycle.cancel('learner-switch')
       void runtime.cancel('learner-switch')
       studySelectedProfileRef.current = null
@@ -279,6 +406,10 @@ export default function App() {
       try {
         const previousProfile = studySelectedProfileRef.current
         if (previousProfile && previousProfile !== verifiedActiveProfileId) {
+          // Phase 6: child A's Study session is gone before child B's launch is
+          // even attempted, so B can never inherit A's header, and there is no
+          // window in which the previous reference would still authorize.
+          studySession.clear('learner-changed')
           await runtime.cancel('learner-switch')
         }
         studySelectedProfileRef.current = verifiedActiveProfileId
@@ -331,9 +462,128 @@ export default function App() {
     sync.status.user?.id,
   ])
 
-  useEffect(() => () => {
-    void studyVerifiedRuntimeRef.current?.cancel('navigation-away')
-  }, [])
+  /**
+   * STUDY-A1-PREVIEW-AUTH-DEGRADE — the preview half of the reconciliation the
+   * effect above performs, for the one case that effect returns early on.
+   *
+   * `buildHostStudyContext` refuses to build a preview host context the moment
+   * the adult sync binding or its provenance degrades, so the learner's Study
+   * surface correctly disappears. But the reconcile effect returns at
+   * `!productionSelected` BEFORE it reaches its own authorization check, so
+   * nothing retired the epoch that vanished context had been derived from: the
+   * one boundary was left bound, current, and with no reason recorded, holding
+   * App authority for a host context that was no longer authorized.
+   *
+   * The signal is the App's own authorization state — the same tuple the
+   * production branch reads, and the same tuple the context builder refuses on.
+   * Never the surface's unmount, its absence from the DOM, or a timer: those say
+   * something about a surface, and this is an authority decision.
+   *
+   * `authorization-loss` is the existing canonical reason for exactly this, used
+   * by the production reconciliation and by the session-authorization-failure
+   * recovery alike. No second safety meaning is introduced: a degraded household
+   * binding is not a learner safety incident, so nothing durable is written and
+   * no safety event is raised. This retires authority and nothing else.
+   *
+   * The live epoch is the guard, and it is what keeps this honest in three ways:
+   *  - it cannot fire before an authorized host was ever established, because at
+   *    startup the boundary is unbound while the adult session is still
+   *    resolving — which is unknown, not degraded;
+   *  - it cannot fire twice, because the first cancel unbinds the boundary;
+   *  - it cannot relabel a retirement another path already made. A logout, a
+   *    learner switch and a switched-off feature each leave the boundary
+   *    unbound, so their own reason stands as the one meaningful outcome.
+   */
+  const studyHostAuthorized = Boolean(
+    sync.status.user && sync.status.binding === 'bound' && sync.status.provenance === 'verified',
+  )
+
+  /**
+   * STUDY-A1-PREVIEW-PROFILE-LOSS — the same reconciliation again, for the
+   * LEARNER rather than for the adult.
+   *
+   * The adult can stay signed in, bound and verified while the synced household
+   * profile set stops containing the girl the epoch was established for. Her
+   * Study surface correctly disappears — `buildHostStudyContext` cannot resolve
+   * a learner — but nothing retired the App-owned epoch it had been derived
+   * from, so preview authority was left bound to a learner who is no longer an
+   * eligible profile. Production has always treated this as a learner-switch
+   * authority transition (the `!active` branch of the reconcile effect above);
+   * preview returns early at `!productionSelected` before reaching it, which is
+   * the whole of the gap.
+   *
+   * The signal is the App's own two authorities, compared in one vocabulary:
+   * the learner the LIVE epoch names, against the learner refs the current
+   * synced profile set derives. Both sides come from `deriveStudyLearnerRef`, so
+   * "the same learner" means here exactly what it meant when the binding was
+   * built. Never the surface's unmount, its absence from the DOM, or a timer.
+   *
+   * The live epoch is what separates "she has gone" from "we do not know yet".
+   * A previously-current learner is precisely one this App established an epoch
+   * for, so an unbound boundary — startup, a profile set that has not arrived,
+   * a retirement some other path already made — has no previously-valid learner
+   * to have lost, and this reads as nothing at all. That also makes it
+   * idempotent: the first cancel unbinds the boundary, so a StrictMode effect
+   * replay and every later render find nothing to retire.
+   *
+   * Precedence is explicit rather than positional: this refuses to act at all
+   * while `studyHostAuthorized` is false, which is the exact condition the
+   * authorization-loss retirement below acts on. So when a degraded binding and
+   * a vanished learner arrive in the same render, the authorization loss is the
+   * one recorded, and a profile loss can never take that reason's place.
+   *
+   * `activeProfileId` is deliberately not consulted. The existing sync
+   * architecture already reconciles it — `appStateWithProfiles` in
+   * sync/useSync.ts nulls the selection in the same commit that replaces the
+   * profile set — but it does so only when the sync engine publishes, and the
+   * App is genuinely in the in-between state until then. Reading the profile set
+   * directly is correct in both shapes and invents no second profile store.
+   *
+   * `learner-switch` is the existing canonical reason for this and introduces no
+   * second safety meaning: a girl leaving the household profile set is not a
+   * learner safety incident, so nothing durable is written and no safety event
+   * is raised. This retires authority and nothing else. The preview composition
+   * installs no Study session (only a verified production launch can), so unlike
+   * the shared learner-change effect there is nothing here to clear.
+   */
+  useEffect(() => {
+    if (!studyEnabled || !studyPreviewEnabled || !studyHostAuthorized) return
+    const lifecycle = hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current)
+    const epochLearnerRef = lifecycle.binding?.learnerRef
+    const authenticatedUserRef = sync.status.user?.id
+    if (!epochLearnerRef || !authenticatedUserRef) return
+    const stillEligible = Object.keys(state.profiles).some(
+      (hostProfileRef) => deriveStudyLearnerRef(authenticatedUserRef, hostProfileRef) === epochLearnerRef,
+    )
+    if (!stillEligible) lifecycle.cancel('learner-switch')
+  }, [studyEnabled, studyPreviewEnabled, studyHostAuthorized, state.profiles, sync.status.user?.id])
+
+  useEffect(() => {
+    if (!studyEnabled || !studyPreviewEnabled || studyHostAuthorized) return
+    const lifecycle = hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current)
+    if (lifecycle.binding) lifecycle.cancel('authorization-loss')
+  }, [studyEnabled, studyPreviewEnabled, studyHostAuthorized])
+
+  // STUDY-A1-PREVIEW-AUTH-DEGRADE — the App's own unmount cleanup used to run
+  // `studyVerifiedRuntimeRef.current?.cancel('navigation-away')` here, and that
+  // is the same defect 72ed777 removed from the route and the container, one
+  // level up.
+  //
+  // `main.tsx` wraps this App in <StrictMode>, which replays effect
+  // setup → cleanup → setup inside the mount commit — so this cleanup fired on
+  // every real mount, and `runtime.cancel` reaches the ONE shared boundary. The
+  // App therefore cancelled its own epoch as `navigation-away` while starting up
+  // (and revoked the Study session with it), and only a later render put the
+  // epoch back. A surface that mounted in that same commit would have attached
+  // to the cancelled epoch, been handed a token that authorizes nothing, and
+  // stayed on "Rechecking…" — the very blocker the seam cache exists to prevent.
+  //
+  // An App unmount is not an authorization event. Every retirement that means
+  // something already has an explicit owner-state path: logout, learner switch,
+  // feature-disabled, authorization-loss above, and `navigation-away` from the
+  // production host's own Back control. In-flight launch work is separately
+  // aborted by the reconcile effect's own controller, which is surface-scoped
+  // and correct there.
 
   // SE-B attendance: when the signed-in girl's mission day is complete, append one
   // attendance day (invisible to her, append-only). recordAttendance is idempotent
@@ -373,6 +623,33 @@ export default function App() {
     studyContextResult.status === 'ready',
   )
   const studyProductionSelected = studyEnabled && !studyPreviewEnabled
+  // STUDY-A1-COMP Phase 8 — the one Study lifecycle boundary the route and the
+  // container share, derived here from the verified launch context rather than
+  // invented inside either of them. A learner or household change alters the
+  // binding, which re-epochs the same boundary and makes every token the
+  // previous learner's surfaces still hold stale.
+  //
+  // STUDY-A1-PROD-SEAM — one boundary, two ways of naming its epoch, and never
+  // both at once (preview and production are mutually exclusive selections):
+  //  - production: the verified runtime launch is the only thing entitled to bind
+  //    this boundary, because only it holds server-verified authority. The host
+  //    joins the epoch that launch began and invents no binding of its own; there
+  //    is simply no epoch, and therefore no seam, until it has launched.
+  //  - preview: the local development context is the authority, so the App does
+  //    derive the binding. Gated on the feature being on as well, so Study OFF
+  //    leaves the boundary unbound rather than bound-then-cancelled.
+  const studyHostLifecycle: HostStudyLifecycleSeam | null = studyProductionSelected
+    ? currentHostStudyLifecycleSeam(studyHostLifecycleOwnerRef.current)
+    : studyEnabled && studyPreviewEnabled && studyContextResult.status === 'ready'
+      ? createHostStudyLifecycleSeam(studyHostLifecycleOwnerRef.current, {
+          authenticatedSessionRef: `host-study-epoch:${sync.status.user?.id ?? 'unbound'}`,
+          householdRef: studyContextResult.context.householdRef,
+          learnerRef: studyContextResult.context.learnerRef,
+          launchGrantRef: `host-study-launch:${studyContextResult.context.hostProfileRef}`,
+          featureEnabled: true,
+          authorizationRevision: 1,
+        })
+      : null
   const studyProductionUnavailableReason = studyProductionStatus === 'checking'
     ? 'Study is being checked. Please try again in a moment.'
     : studyProductionStatus === 'unauthenticated'
@@ -411,7 +688,15 @@ export default function App() {
     leaveAcademyPath()
     leaveGrade5MathPracticePath()
     void purgeVoiceCache()
-    studyProductionLifecycleRef.current?.cancel('logout')
+    // STUDY-A1-COMP Phase 6 — before sign-out completes, and before anything
+    // asynchronous. The Study session reference is gone from memory by the time
+    // the picker renders; nothing survives a reload, because nothing was stored.
+    studySessionRef.current?.clear('logout')
+    // The route/container epoch goes with it, so any work either surface still
+    // has in flight is stale before the next screen renders. Taken from the
+    // owner, not from the seam ref: the one boundary exists whether or not an
+    // epoch was ever begun on it, so this cannot be skipped.
+    hostStudyLifecycleBoundary(studyHostLifecycleOwnerRef.current).cancel('logout')
     void studyVerifiedRuntimeRef.current?.cancel('logout')
     studyReadinessClientRef.current?.invalidate()
     studySelectedProfileRef.current = null
@@ -654,6 +939,9 @@ export default function App() {
       !studyPreviewReady ||
       !studyRuntime ||
       studyContextResult.status !== 'ready' ||
+      // Phase 8: without the host lifecycle there is no epoch for the session
+      // surfaces to run in, so Study is unavailable rather than unbound.
+      !studyHostLifecycle ||
       !StudyDashboard ||
       !StudySessionRoute ||
       !StudySettings
@@ -691,6 +979,7 @@ export default function App() {
           <StudySessionRoute
             context={studyContextResult.context}
             ports={studyRuntime.ports}
+            studyLifecycle={studyHostLifecycle}
             blockRef={screen.blockRef}
             learnerRef={screen.learnerRef}
             onBack={() => setScreen({ kind: 'studyDashboard' })}
@@ -904,7 +1193,7 @@ export default function App() {
                 : undefined
             }
             onOpenG5MathPractice={
-              grade5MathPracticeAvailableFromHost(active.grade)
+              grade5MathPracticeAvailableFromHost(active)
                 ? () => setScreen({ kind: 'g5MathPractice' })
                 : undefined
             }
@@ -912,8 +1201,19 @@ export default function App() {
           />
         )}
 
-        {/* MOUNT-G5-MATH — Grade 5 curriculum math practice (flag-gated, grade 5 only) */}
-        {screen.kind === 'g5MathPractice' && (
+        {/*
+          MOUNT-G5-MATH — Grade 5 curriculum math practice. CE1: gated on the
+          MATHEMATICS working level being 5, with the flag on — not on the
+          nominal grade. Re-checked here, not just at the entry point, so a
+          learner switch or a working-level change while this screen is open
+          cannot leave an ineligible girl on it.
+        */}
+        {screen.kind === 'g5MathPractice' && !grade5MathPracticeAvailableFromHost(active) && (
+          <p className={`px-4 py-10 text-center font-bold ${tokens.sub}`} role="status">
+            Grade 5 Math practice is not available for this learner.
+          </p>
+        )}
+        {screen.kind === 'g5MathPractice' && grade5MathPracticeAvailableFromHost(active) && (
           <Suspense
             fallback={
               <p className={`px-4 py-10 text-center font-bold ${tokens.sub}`} role="status">
