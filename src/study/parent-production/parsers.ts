@@ -35,6 +35,11 @@ import {
   type SettingsReadInput,
   type SettingsReadResult,
 } from './contracts'
+import {
+  snapshotExactRecord,
+  type ExactRecordShape,
+  type ExactRecordSnapshot,
+} from './exactRecord'
 
 const OPAQUE_REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:-]*$/
 const OPAQUE_CURSOR = /^[A-Za-z0-9][A-Za-z0-9._~:/+=-]*$/
@@ -43,15 +48,18 @@ const SETTINGS_KEYS = [
   'timerMode', 'maximumWorkMinutes', 'breakMinimumMinutes', 'breakMaximumMinutes',
   'requiredBreaks', 'reducedMotion', 'noAudio', 'largeText', 'readAloud', 'speechInputAllowed',
 ] as const
+const MUTATION_KEYS = ['studentRef', 'expectedRevision', 'mutationId'] as const
+const FAILURE_SHAPES = [
+  { required: ['status', 'code'] },
+  { required: ['status', 'code', 'retryAfterSeconds'] },
+] as const satisfies readonly ExactRecordShape[]
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return value !== null && typeof value === 'object' && !Array.isArray(value)
-}
-
-function hasExactKeys(value: Record<string, unknown>, required: readonly string[], optional: readonly string[] = []): boolean {
-  const keys = Object.keys(value)
-  return required.every((key) => Object.hasOwn(value, key)) &&
-    keys.every((key) => required.includes(key) || optional.includes(key))
+function exactRecord(
+  value: unknown,
+  required: readonly string[],
+  optional: readonly string[] = [],
+): ExactRecordSnapshot | null {
+  return snapshotExactRecord(value, [{ required, optional }])
 }
 
 function isEnum<const Values extends readonly string[]>(value: unknown, values: Values): value is Values[number] {
@@ -89,27 +97,59 @@ function isBoundedInteger(value: unknown, minimum: number, maximum: number): val
   return Number.isSafeInteger(value) && (value as number) >= minimum && (value as number) <= maximum
 }
 
-function parseFailure<const Codes extends readonly AdultProductionFailureCode[]>(
-  value: unknown,
+function parseFailureSnapshot<const Codes extends readonly AdultProductionFailureCode[]>(
+  value: ExactRecordSnapshot,
   allowedCodes: Codes,
 ): AdultProductionFailure<Codes[number]> | null {
-  if (!isRecord(value) || value.status !== 'failed' ||
-    !hasExactKeys(value, ['status', 'code'], ['retryAfterSeconds']) ||
-    !isEnum(value.code, allowedCodes) ||
+  if (value.status !== 'failed' || !isEnum(value.code, allowedCodes) ||
     (value.retryAfterSeconds !== undefined &&
       (value.code !== 'rate-limited' || !isBoundedInteger(value.retryAfterSeconds, 1, 86_400)))) return null
   return value as unknown as AdultProductionFailure<Codes[number]>
 }
 
-function parseOrFailure<Success, const Codes extends readonly AdultProductionFailureCode[]>(
+function parseResult<Success, const Codes extends readonly AdultProductionFailureCode[]>(
   value: unknown,
-  parseSuccess: (candidate: unknown) => Success | null,
+  successShapes: readonly ExactRecordShape[],
+  parseSuccess: (candidate: ExactRecordSnapshot) => Success | null,
   allowedFailureCodes: Codes,
 ): Success | AdultProductionFailure<Codes[number]> | null {
-  return parseSuccess(value) ?? parseFailure(value, allowedFailureCodes)
+  const candidate = snapshotExactRecord(value, [...successShapes, ...FAILURE_SHAPES])
+  if (!candidate) return null
+  return parseSuccess(candidate) ?? parseFailureSnapshot(candidate, allowedFailureCodes)
 }
 
-function hasPlausibleSettingsRelationships(value: Record<string, unknown>): boolean {
+function snapshotArray<Parsed>(
+  value: unknown,
+  maximumLength: number,
+  parseItem: (item: unknown) => Parsed | null,
+): readonly Parsed[] | null {
+  try {
+    if (!Array.isArray(value) || Reflect.getPrototypeOf(value) !== Array.prototype) return null
+    const keys = Reflect.ownKeys(value)
+    const lengthDescriptor = Reflect.getOwnPropertyDescriptor(value, 'length')
+    if (!lengthDescriptor || lengthDescriptor.enumerable || !Object.hasOwn(lengthDescriptor, 'value') ||
+      !isBoundedInteger(lengthDescriptor.value, 0, maximumLength)) return null
+
+    const length = lengthDescriptor.value as number
+    if (keys.length !== length + 1 || !keys.includes('length') ||
+      keys.some((key) => typeof key !== 'string' ||
+        (key !== 'length' && (!/^\d+$/.test(key) || Number(key) >= length)))) return null
+
+    const snapshot: Parsed[] = []
+    for (let index = 0; index < length; index += 1) {
+      const descriptor = Reflect.getOwnPropertyDescriptor(value, String(index))
+      if (!descriptor || !descriptor.enumerable || !Object.hasOwn(descriptor, 'value')) return null
+      const parsed = parseItem(descriptor.value)
+      if (parsed === null) return null
+      snapshot.push(parsed)
+    }
+    return Object.freeze(snapshot)
+  } catch {
+    return null
+  }
+}
+
+function hasPlausibleSettingsRelationships(value: ExactRecordSnapshot): boolean {
   if (typeof value.breakMinimumMinutes === 'number' && typeof value.breakMaximumMinutes === 'number' &&
     value.breakMinimumMinutes > value.breakMaximumMinutes) return false
   if (typeof value.maximumWorkMinutes === 'number' && typeof value.breakMaximumMinutes === 'number' &&
@@ -126,7 +166,7 @@ function isValidSettingValue(key: typeof SETTINGS_KEYS[number], value: unknown):
   return typeof value === 'boolean'
 }
 
-function hasValidSettingsValues(value: Record<string, unknown>): boolean {
+function hasValidSettingsValues(value: ExactRecordSnapshot): boolean {
   return Object.keys(value).every((key) =>
     SETTINGS_KEYS.includes(key as typeof SETTINGS_KEYS[number]) &&
     isValidSettingValue(key as typeof SETTINGS_KEYS[number], value[key])) &&
@@ -134,28 +174,33 @@ function hasValidSettingsValues(value: Record<string, unknown>): boolean {
 }
 
 function parseSettings(value: unknown): ParentHubSettings | null {
-  if (!isRecord(value) || !hasExactKeys(value, SETTINGS_KEYS) || !hasValidSettingsValues(value)) return null
-  return value as unknown as ParentHubSettings
+  const candidate = exactRecord(value, SETTINGS_KEYS)
+  if (!candidate || !hasValidSettingsValues(candidate)) return null
+  return candidate as unknown as ParentHubSettings
 }
 
 function parseSettingsChanges(value: unknown): ParentHubSettingsChanges | null {
-  if (!isRecord(value) || Object.keys(value).length === 0 || !hasValidSettingsValues(value)) return null
-  return value as ParentHubSettingsChanges
+  const candidate = exactRecord(value, [], SETTINGS_KEYS)
+  if (!candidate || Object.keys(candidate).length === 0 || !hasValidSettingsValues(candidate)) return null
+  return candidate as ParentHubSettingsChanges
 }
 
 function parseStudentSelector(value: unknown): SettingsReadInput | SafetyReviewListOpenInput | null {
-  if (!isRecord(value) || !hasExactKeys(value, ['studentRef']) || !isOpaqueReference(value.studentRef)) return null
-  return value as unknown as SettingsReadInput
+  const candidate = exactRecord(value, ['studentRef'])
+  if (!candidate || !isOpaqueReference(candidate.studentRef)) return null
+  return candidate as unknown as SettingsReadInput
 }
 
 function parseListInput(value: unknown): CalendarListInput | NotificationsListInput | ReviewsListInput | null {
-  if (!isRecord(value) || !hasExactKeys(value, ['studentRef'], ['cursor', 'limit']) ||
-    !isOpaqueReference(value.studentRef) || (value.cursor !== undefined && !isCursor(value.cursor)) ||
-    (value.limit !== undefined && !isBoundedInteger(value.limit, 1, PARENT_HUB_REQUEST_LIMITS.listLimit))) return null
-  return value as unknown as ReviewsListInput
+  const candidate = exactRecord(value, ['studentRef'], ['cursor', 'limit'])
+  if (!candidate || !isOpaqueReference(candidate.studentRef) ||
+    (candidate.cursor !== undefined && !isCursor(candidate.cursor)) ||
+    (candidate.limit !== undefined &&
+      !isBoundedInteger(candidate.limit, 1, PARENT_HUB_REQUEST_LIMITS.listLimit))) return null
+  return candidate as unknown as ReviewsListInput
 }
 
-function hasValidMutationBase(value: Record<string, unknown>): boolean {
+function hasValidMutationBase(value: ExactRecordSnapshot): boolean {
   return isOpaqueReference(value.studentRef) && isRevision(value.expectedRevision) && isMutationId(value.mutationId)
 }
 
@@ -164,9 +209,11 @@ export function parseSettingsReadInput(value: unknown): SettingsReadInput | null
 }
 
 export function parseSettingsApplyInput(value: unknown): SettingsApplyInput | null {
-  if (!isRecord(value) || !hasExactKeys(value, ['studentRef', 'expectedRevision', 'mutationId', 'changes']) ||
-    !hasValidMutationBase(value) || !parseSettingsChanges(value.changes)) return null
-  return value as unknown as SettingsApplyInput
+  const candidate = exactRecord(value, [...MUTATION_KEYS, 'changes'])
+  if (!candidate || !hasValidMutationBase(candidate)) return null
+  const changes = parseSettingsChanges(candidate.changes)
+  if (!changes) return null
+  return Object.freeze({ ...candidate, changes }) as unknown as SettingsApplyInput
 }
 
 export function parseReviewsListInput(value: unknown): ReviewsListInput | null {
@@ -174,10 +221,10 @@ export function parseReviewsListInput(value: unknown): ReviewsListInput | null {
 }
 
 export function parseReviewsDecideInput(value: unknown): ReviewsDecideInput | null {
-  if (!isRecord(value) || !hasExactKeys(value, ['studentRef', 'expectedRevision', 'mutationId', 'reviewRef', 'decision']) ||
-    !hasValidMutationBase(value) || !isOpaqueReference(value.reviewRef) ||
-    !isEnum(value.decision, ['accepted', 'rejected'] as const)) return null
-  return value as unknown as ReviewsDecideInput
+  const candidate = exactRecord(value, [...MUTATION_KEYS, 'reviewRef', 'decision'])
+  if (!candidate || !hasValidMutationBase(candidate) || !isOpaqueReference(candidate.reviewRef) ||
+    !isEnum(candidate.decision, ['accepted', 'rejected'] as const)) return null
+  return candidate as unknown as ReviewsDecideInput
 }
 
 export function parseCalendarListInput(value: unknown): CalendarListInput | null {
@@ -185,20 +232,24 @@ export function parseCalendarListInput(value: unknown): CalendarListInput | null
 }
 
 export function parseCalendarPauseInput(value: unknown): CalendarPauseInput | null {
-  if (!isRecord(value) ||
-    !hasExactKeys(value, ['studentRef', 'expectedRevision', 'mutationId', 'blockRef', 'reason']) ||
-    !hasValidMutationBase(value) || !isOpaqueReference(value.blockRef) ||
-    !isEnum(value.reason, ['planned-break', 'requested-break', 'outside-interruption', 'technical-interruption'] as const)) return null
-  return value as unknown as CalendarPauseInput
+  const candidate = exactRecord(value, [...MUTATION_KEYS, 'blockRef', 'reason'])
+  if (!candidate || !hasValidMutationBase(candidate) || !isOpaqueReference(candidate.blockRef) ||
+    !isEnum(candidate.reason, [
+      'planned-break', 'requested-break', 'outside-interruption', 'technical-interruption',
+    ] as const)) return null
+  return candidate as unknown as CalendarPauseInput
 }
 
 export function parseCalendarCreateContinuationInput(value: unknown): CalendarCreateContinuationInput | null {
-  if (!isRecord(value) || !hasExactKeys(value, [
-    'studentRef', 'expectedRevision', 'mutationId', 'sourceBlockRef', 'requestedScheduledAt', 'durationMinutes',
-  ]) || !hasValidMutationBase(value) || !isOpaqueReference(value.sourceBlockRef) ||
-    !isTimestamp(value.requestedScheduledAt) ||
-    !isBoundedInteger(value.durationMinutes, 1, PARENT_HUB_REQUEST_LIMITS.continuationDurationMinutes)) return null
-  return value as unknown as CalendarCreateContinuationInput
+  const candidate = exactRecord(value, [
+    ...MUTATION_KEYS, 'sourceBlockRef', 'requestedScheduledAt', 'durationMinutes',
+  ])
+  if (!candidate || !hasValidMutationBase(candidate) || !isOpaqueReference(candidate.sourceBlockRef) ||
+    !isTimestamp(candidate.requestedScheduledAt) ||
+    !isBoundedInteger(
+      candidate.durationMinutes, 1, PARENT_HUB_REQUEST_LIMITS.continuationDurationMinutes,
+    )) return null
+  return candidate as unknown as CalendarCreateContinuationInput
 }
 
 export function parseSafetyReviewListOpenInput(value: unknown): SafetyReviewListOpenInput | null {
@@ -206,26 +257,27 @@ export function parseSafetyReviewListOpenInput(value: unknown): SafetyReviewList
 }
 
 export function parseSafetyReviewAndClearInput(value: unknown): SafetyReviewAndClearInput | null {
-  if (!isRecord(value) || !hasExactKeys(value, [
+  const candidate = exactRecord(value, [
     'studentRef', 'safetyReviewRef', 'sessionRef', 'blockRef', 'decision', 'reasonCode',
     'expectedSafetyRevision', 'expectedSessionRevision', 'expectedCalendarRevision', 'mutationId',
-  ]) || !isOpaqueReference(value.studentRef) || !isOpaqueReference(value.safetyReviewRef) ||
-    !isOpaqueReference(value.sessionRef) || !isOpaqueReference(value.blockRef) ||
-    !isEnum(value.decision, ['resume-approved', 'end-session'] as const) ||
-    value.reasonCode !== 'adult-safety-review-completed' ||
-    !isRevision(value.expectedSafetyRevision) || !isRevision(value.expectedSessionRevision) ||
-    !isRevision(value.expectedCalendarRevision) || !isMutationId(value.mutationId)) return null
-  return value as unknown as SafetyReviewAndClearInput
+  ])
+  if (!candidate || !isOpaqueReference(candidate.studentRef) ||
+    !isOpaqueReference(candidate.safetyReviewRef) || !isOpaqueReference(candidate.sessionRef) ||
+    !isOpaqueReference(candidate.blockRef) ||
+    !isEnum(candidate.decision, ['resume-approved', 'end-session'] as const) ||
+    candidate.reasonCode !== 'adult-safety-review-completed' ||
+    !isRevision(candidate.expectedSafetyRevision) || !isRevision(candidate.expectedSessionRevision) ||
+    !isRevision(candidate.expectedCalendarRevision) || !isMutationId(candidate.mutationId)) return null
+  return candidate as unknown as SafetyReviewAndClearInput
 }
 
 export function parseAdultPrivateCommitNoteInput(value: unknown): AdultPrivateCommitNoteInput | null {
-  if (!isRecord(value) || !hasExactKeys(value, [
-    'studentRef', 'expectedRevision', 'mutationId', 'noteRef', 'category', 'body',
-  ]) || !hasValidMutationBase(value) || !isOpaqueReference(value.noteRef) ||
-    !isEnum(value.category, ['instructional', 'accommodation', 'follow-up', 'administrative'] as const) ||
-    typeof value.body !== 'string' || value.body.length > PARENT_HUB_REQUEST_LIMITS.noteBodyLength ||
-    value.body.trim().length === 0 || value.body.includes('\0')) return null
-  return value as unknown as AdultPrivateCommitNoteInput
+  const candidate = exactRecord(value, [...MUTATION_KEYS, 'noteRef', 'category', 'body'])
+  if (!candidate || !hasValidMutationBase(candidate) || !isOpaqueReference(candidate.noteRef) ||
+    !isEnum(candidate.category, ['instructional', 'accommodation', 'follow-up', 'administrative'] as const) ||
+    typeof candidate.body !== 'string' || candidate.body.length > PARENT_HUB_REQUEST_LIMITS.noteBodyLength ||
+    candidate.body.trim().length === 0 || candidate.body.includes('\0')) return null
+  return candidate as unknown as AdultPrivateCommitNoteInput
 }
 
 export function parseNotificationsListInput(value: unknown): NotificationsListInput | null {
@@ -233,203 +285,268 @@ export function parseNotificationsListInput(value: unknown): NotificationsListIn
 }
 
 export function parseNotificationsMarkReadInput(value: unknown): NotificationsMarkReadInput | null {
-  if (!isRecord(value) ||
-    !hasExactKeys(value, ['studentRef', 'expectedRevision', 'mutationId', 'notificationId']) ||
-    !hasValidMutationBase(value) || !isOpaqueReference(value.notificationId)) return null
-  return value as unknown as NotificationsMarkReadInput
+  const candidate = exactRecord(value, [...MUTATION_KEYS, 'notificationId'])
+  if (!candidate || !hasValidMutationBase(candidate) || !isOpaqueReference(candidate.notificationId)) return null
+  return candidate as unknown as NotificationsMarkReadInput
 }
 
 export function parseSettingsReadResult(value: unknown): SettingsReadResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || candidate.status !== 'settings' ||
-      !hasExactKeys(candidate, ['status', 'settings', 'revision', 'updatedAt']) ||
-      !parseSettings(candidate.settings) || !isRevision(candidate.revision) || !isTimestamp(candidate.updatedAt)) return null
-    return candidate as unknown as SettingsReadResult
+  return parseResult(value, [{ required: ['status', 'settings', 'revision', 'updatedAt'] }], (candidate) => {
+    if (candidate.status !== 'settings' || !isRevision(candidate.revision) ||
+      !isTimestamp(candidate.updatedAt)) return null
+    const parsedSettings = parseSettings(candidate.settings)
+    if (!parsedSettings) return null
+    return Object.freeze({ ...candidate, settings: parsedSettings }) as unknown as SettingsReadResult
   }, ADULT_READ_FAILURE_CODES)
 }
 
 export function parseSettingsApplyResult(value: unknown): SettingsApplyResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || typeof candidate.status !== 'string') return null
-    if (candidate.status === 'applied' && hasExactKeys(candidate, ['status', 'revision', 'appliedAt']) &&
-      isRevision(candidate.revision) && isTimestamp(candidate.appliedAt)) return candidate as unknown as SettingsApplyResult
-    if (candidate.status === 'duplicate-replay' && hasExactKeys(candidate, ['status', 'revision']) &&
-      isRevision(candidate.revision)) return candidate as unknown as SettingsApplyResult
-    if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) &&
-      isRevision(candidate.currentRevision)) return candidate as unknown as SettingsApplyResult
+  return parseResult(value, [
+    { required: ['status', 'revision', 'appliedAt'] },
+    { required: ['status', 'revision'] },
+    { required: ['status', 'currentRevision'] },
+  ], (candidate) => {
+    if (candidate.status === 'applied' && isRevision(candidate.revision) && isTimestamp(candidate.appliedAt)) {
+      return candidate as unknown as SettingsApplyResult
+    }
+    if (candidate.status === 'duplicate-replay' && isRevision(candidate.revision)) {
+      return candidate as unknown as SettingsApplyResult
+    }
+    if (candidate.status === 'stale-revision' && isRevision(candidate.currentRevision)) {
+      return candidate as unknown as SettingsApplyResult
+    }
     return null
   }, ADULT_MUTATION_FAILURE_CODES)
 }
 
 function parseReview(value: unknown): ParentHubReviewSummary | null {
-  if (!isRecord(value) || !hasExactKeys(value, ['reviewRef', 'studentRef', 'kind', 'dueAt', 'priority', 'state', 'revision']) ||
-    !isOpaqueReference(value.reviewRef) || !isOpaqueReference(value.studentRef) ||
-    !isEnum(value.kind, ['spaced', 'reteach', 'prerequisite', 'manual'] as const) || !isTimestamp(value.dueAt) ||
-    !isBoundedInteger(value.priority, 0, 100) || !isEnum(value.state, ['pending', 'decided'] as const) ||
-    !isRevision(value.revision)) return null
-  return value as unknown as ParentHubReviewSummary
+  const candidate = exactRecord(value, [
+    'reviewRef', 'studentRef', 'kind', 'dueAt', 'priority', 'state', 'revision',
+  ])
+  if (!candidate || !isOpaqueReference(candidate.reviewRef) || !isOpaqueReference(candidate.studentRef) ||
+    !isEnum(candidate.kind, ['spaced', 'reteach', 'prerequisite', 'manual'] as const) ||
+    !isTimestamp(candidate.dueAt) || !isBoundedInteger(candidate.priority, 0, 100) ||
+    !isEnum(candidate.state, ['pending', 'decided'] as const) || !isRevision(candidate.revision)) return null
+  return candidate as unknown as ParentHubReviewSummary
 }
 
 export function parseReviewsListResult(value: unknown): ReviewsListResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || candidate.status !== 'listed' ||
-      !hasExactKeys(candidate, ['status', 'reviews'], ['nextCursor']) || !Array.isArray(candidate.reviews) ||
-      candidate.reviews.length > PARENT_HUB_REQUEST_LIMITS.listLimit || candidate.reviews.some((review) => !parseReview(review)) ||
+  return parseResult(value, [{ required: ['status', 'reviews'], optional: ['nextCursor'] }], (candidate) => {
+    if (candidate.status !== 'listed' ||
       (candidate.nextCursor !== undefined && !isCursor(candidate.nextCursor))) return null
-    return candidate as unknown as ReviewsListResult
+    const reviews = snapshotArray(candidate.reviews, PARENT_HUB_REQUEST_LIMITS.listLimit, parseReview)
+    if (!reviews) return null
+    return Object.freeze({ ...candidate, reviews }) as unknown as ReviewsListResult
   }, ADULT_READ_FAILURE_CODES)
 }
 
 export function parseReviewsDecideResult(value: unknown): ReviewsDecideResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || typeof candidate.status !== 'string') return null
-    if (candidate.status === 'decided' && hasExactKeys(candidate, ['status', 'decision', 'revision', 'decidedAt']) &&
-      isEnum(candidate.decision, ['accepted', 'rejected'] as const) && isRevision(candidate.revision) &&
-      isTimestamp(candidate.decidedAt)) return candidate as unknown as ReviewsDecideResult
-    if (candidate.status === 'duplicate-replay' && hasExactKeys(candidate, ['status', 'revision']) &&
-      isRevision(candidate.revision)) return candidate as unknown as ReviewsDecideResult
-    if (candidate.status === 'already-decided' && hasExactKeys(candidate, ['status', 'decision', 'revision']) &&
-      isEnum(candidate.decision, ['accepted', 'rejected'] as const) && isRevision(candidate.revision)) return candidate as unknown as ReviewsDecideResult
-    if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) &&
-      isRevision(candidate.currentRevision)) return candidate as unknown as ReviewsDecideResult
+  return parseResult(value, [
+    { required: ['status', 'decision', 'revision', 'decidedAt'] },
+    { required: ['status', 'revision'] },
+    { required: ['status', 'decision', 'revision'] },
+    { required: ['status', 'currentRevision'] },
+  ], (candidate) => {
+    if (candidate.status === 'decided' && isEnum(candidate.decision, ['accepted', 'rejected'] as const) &&
+      isRevision(candidate.revision) && isTimestamp(candidate.decidedAt)) {
+      return candidate as unknown as ReviewsDecideResult
+    }
+    if (candidate.status === 'duplicate-replay' && isRevision(candidate.revision)) {
+      return candidate as unknown as ReviewsDecideResult
+    }
+    if (candidate.status === 'already-decided' &&
+      isEnum(candidate.decision, ['accepted', 'rejected'] as const) && isRevision(candidate.revision)) {
+      return candidate as unknown as ReviewsDecideResult
+    }
+    if (candidate.status === 'stale-revision' && isRevision(candidate.currentRevision)) {
+      return candidate as unknown as ReviewsDecideResult
+    }
     return null
   }, ADULT_MUTATION_FAILURE_CODES)
 }
 
 function parseCalendarBlock(value: unknown): ParentHubCalendarSummary | null {
-  if (!isRecord(value) || !hasExactKeys(value, ['blockRef', 'studentRef', 'category', 'scheduledAt', 'durationMinutes', 'state', 'revision']) ||
-    !isOpaqueReference(value.blockRef) || !isOpaqueReference(value.studentRef) ||
-    !isEnum(value.category, ['lesson', 'review', 'resume', 'break', 'assessment'] as const) || !isTimestamp(value.scheduledAt) ||
-    !isBoundedInteger(value.durationMinutes, 1, PARENT_HUB_REQUEST_LIMITS.continuationDurationMinutes) ||
-    !isEnum(value.state, ['scheduled', 'available', 'in-progress', 'paused', 'completed', 'cancelled'] as const) ||
-    !isRevision(value.revision)) return null
-  return value as unknown as ParentHubCalendarSummary
+  const candidate = exactRecord(value, [
+    'blockRef', 'studentRef', 'category', 'scheduledAt', 'durationMinutes', 'state', 'revision',
+  ])
+  if (!candidate || !isOpaqueReference(candidate.blockRef) || !isOpaqueReference(candidate.studentRef) ||
+    !isEnum(candidate.category, ['lesson', 'review', 'resume', 'break', 'assessment'] as const) ||
+    !isTimestamp(candidate.scheduledAt) ||
+    !isBoundedInteger(candidate.durationMinutes, 1, PARENT_HUB_REQUEST_LIMITS.continuationDurationMinutes) ||
+    !isEnum(candidate.state, [
+      'scheduled', 'available', 'in-progress', 'paused', 'completed', 'cancelled',
+    ] as const) || !isRevision(candidate.revision)) return null
+  return candidate as unknown as ParentHubCalendarSummary
 }
 
 export function parseCalendarListResult(value: unknown): CalendarListResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || candidate.status !== 'listed' ||
-      !hasExactKeys(candidate, ['status', 'blocks'], ['nextCursor']) || !Array.isArray(candidate.blocks) ||
-      candidate.blocks.length > PARENT_HUB_REQUEST_LIMITS.listLimit || candidate.blocks.some((block) => !parseCalendarBlock(block)) ||
+  return parseResult(value, [{ required: ['status', 'blocks'], optional: ['nextCursor'] }], (candidate) => {
+    if (candidate.status !== 'listed' ||
       (candidate.nextCursor !== undefined && !isCursor(candidate.nextCursor))) return null
-    return candidate as unknown as CalendarListResult
+    const blocks = snapshotArray(candidate.blocks, PARENT_HUB_REQUEST_LIMITS.listLimit, parseCalendarBlock)
+    if (!blocks) return null
+    return Object.freeze({ ...candidate, blocks }) as unknown as CalendarListResult
   }, ADULT_READ_FAILURE_CODES)
 }
 
-function parseCalendarConflict(value: unknown): CalendarPauseResult | CalendarCreateContinuationResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || typeof candidate.status !== 'string') return null
-    if (candidate.status === 'duplicate-replay' && hasExactKeys(candidate, ['status', 'revision']) &&
-      isRevision(candidate.revision)) return candidate as unknown as CalendarPauseResult
-    if (candidate.status === 'calendar-state-changed' && hasExactKeys(candidate, ['status', 'currentState', 'revision']) &&
-      isEnum(candidate.currentState, ['scheduled', 'available', 'in-progress', 'paused', 'completed', 'cancelled'] as const) &&
-      isRevision(candidate.revision)) return candidate as unknown as CalendarPauseResult
-    if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) &&
-      isRevision(candidate.currentRevision)) return candidate as unknown as CalendarPauseResult
+function parseCalendarMutationResult(
+  value: unknown,
+  success: 'paused' | 'continuation-created',
+): CalendarPauseResult | CalendarCreateContinuationResult | null {
+  const successShape = success === 'paused'
+    ? { required: ['status', 'revision', 'pausedAt'] }
+    : { required: ['status', 'blockRef', 'revision', 'createdAt'] }
+  return parseResult(value, [
+    successShape,
+    { required: ['status', 'revision'] },
+    { required: ['status', 'currentState', 'revision'] },
+    { required: ['status', 'currentRevision'] },
+  ], (candidate) => {
+    if (success === 'paused' && candidate.status === 'paused' &&
+      isRevision(candidate.revision) && isTimestamp(candidate.pausedAt)) {
+      return candidate as unknown as CalendarPauseResult
+    }
+    if (success === 'continuation-created' && candidate.status === 'continuation-created' &&
+      isOpaqueReference(candidate.blockRef) && isRevision(candidate.revision) && isTimestamp(candidate.createdAt)) {
+      return candidate as unknown as CalendarCreateContinuationResult
+    }
+    if (candidate.status === 'duplicate-replay' && isRevision(candidate.revision)) {
+      return candidate as unknown as CalendarPauseResult
+    }
+    if (candidate.status === 'calendar-state-changed' &&
+      isEnum(candidate.currentState, [
+        'scheduled', 'available', 'in-progress', 'paused', 'completed', 'cancelled',
+      ] as const) && isRevision(candidate.revision)) return candidate as unknown as CalendarPauseResult
+    if (candidate.status === 'stale-revision' && isRevision(candidate.currentRevision)) {
+      return candidate as unknown as CalendarPauseResult
+    }
     return null
   }, ADULT_MUTATION_FAILURE_CODES)
 }
 
 export function parseCalendarPauseResult(value: unknown): CalendarPauseResult | null {
-  if (isRecord(value) && value.status === 'paused' && hasExactKeys(value, ['status', 'revision', 'pausedAt']) &&
-    isRevision(value.revision) && isTimestamp(value.pausedAt)) return value as unknown as CalendarPauseResult
-  return parseCalendarConflict(value) as CalendarPauseResult | null
+  return parseCalendarMutationResult(value, 'paused') as CalendarPauseResult | null
 }
 
 export function parseCalendarCreateContinuationResult(value: unknown): CalendarCreateContinuationResult | null {
-  if (isRecord(value) && value.status === 'continuation-created' &&
-    hasExactKeys(value, ['status', 'blockRef', 'revision', 'createdAt']) && isOpaqueReference(value.blockRef) &&
-    isRevision(value.revision) && isTimestamp(value.createdAt)) return value as unknown as CalendarCreateContinuationResult
-  return parseCalendarConflict(value) as CalendarCreateContinuationResult | null
+  return parseCalendarMutationResult(value, 'continuation-created') as CalendarCreateContinuationResult | null
 }
 
 function parseSafetyReview(value: unknown): ParentHubSafetyReviewSummary | null {
-  if (!isRecord(value) || !hasExactKeys(value, [
+  const candidate = exactRecord(value, [
     'safetyReviewRef', 'studentRef', 'sessionRef', 'blockRef', 'category', 'urgency', 'heldAt',
     'safetyRevision', 'sessionRevision', 'calendarRevision',
-  ]) || !isOpaqueReference(value.safetyReviewRef) || !isOpaqueReference(value.studentRef) ||
-    !isOpaqueReference(value.sessionRef) || !isOpaqueReference(value.blockRef) ||
-    !isEnum(value.category, ['urgent-safety', 'wellbeing'] as const) || !isEnum(value.urgency, ['urgent', 'high'] as const) ||
-    !isTimestamp(value.heldAt) || !isRevision(value.safetyRevision) || !isRevision(value.sessionRevision) ||
-    !isRevision(value.calendarRevision)) return null
-  return value as unknown as ParentHubSafetyReviewSummary
+  ])
+  if (!candidate || !isOpaqueReference(candidate.safetyReviewRef) ||
+    !isOpaqueReference(candidate.studentRef) || !isOpaqueReference(candidate.sessionRef) ||
+    !isOpaqueReference(candidate.blockRef) ||
+    !isEnum(candidate.category, ['urgent-safety', 'wellbeing'] as const) ||
+    !isEnum(candidate.urgency, ['urgent', 'high'] as const) || !isTimestamp(candidate.heldAt) ||
+    !isRevision(candidate.safetyRevision) || !isRevision(candidate.sessionRevision) ||
+    !isRevision(candidate.calendarRevision)) return null
+  return candidate as unknown as ParentHubSafetyReviewSummary
 }
 
 export function parseSafetyReviewListOpenResult(value: unknown): SafetyReviewListOpenResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || candidate.status !== 'listed' || !hasExactKeys(candidate, ['status', 'reviews']) ||
-      !Array.isArray(candidate.reviews) || candidate.reviews.length > PARENT_HUB_REQUEST_LIMITS.listLimit ||
-      candidate.reviews.some((review) => !parseSafetyReview(review))) return null
-    return candidate as unknown as SafetyReviewListOpenResult
+  return parseResult(value, [{ required: ['status', 'reviews'] }], (candidate) => {
+    if (candidate.status !== 'listed') return null
+    const reviews = snapshotArray(candidate.reviews, PARENT_HUB_REQUEST_LIMITS.listLimit, parseSafetyReview)
+    if (!reviews) return null
+    return Object.freeze({ ...candidate, reviews }) as unknown as SafetyReviewListOpenResult
   }, ADULT_READ_FAILURE_CODES)
 }
 
 export function parseSafetyReviewAndClearResult(value: unknown): SafetyReviewAndClearResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || typeof candidate.status !== 'string') return null
-    if (candidate.status === 'cleared' && hasExactKeys(candidate, [
-      'status', 'decision', 'safetyRevision', 'sessionRevision', 'calendarRevision', 'reviewedAt', 'clearedAt',
-    ]) && isEnum(candidate.decision, ['resume-approved', 'end-session'] as const) &&
-      isRevision(candidate.safetyRevision) && isRevision(candidate.sessionRevision) && isRevision(candidate.calendarRevision) &&
-      isTimestamp(candidate.reviewedAt) && isTimestamp(candidate.clearedAt)) return candidate as unknown as SafetyReviewAndClearResult
+  return parseResult(value, [
+    {
+      required: [
+        'status', 'decision', 'safetyRevision', 'sessionRevision', 'calendarRevision', 'reviewedAt', 'clearedAt',
+      ],
+    },
+    { required: ['status', 'safetyRevision', 'sessionRevision', 'calendarRevision'] },
+    {
+      required: [
+        'status', 'currentSafetyRevision', 'currentSessionRevision', 'currentCalendarRevision',
+      ],
+    },
+  ], (candidate) => {
+    if (candidate.status === 'cleared' &&
+      isEnum(candidate.decision, ['resume-approved', 'end-session'] as const) &&
+      isRevision(candidate.safetyRevision) && isRevision(candidate.sessionRevision) &&
+      isRevision(candidate.calendarRevision) && isTimestamp(candidate.reviewedAt) &&
+      isTimestamp(candidate.clearedAt)) return candidate as unknown as SafetyReviewAndClearResult
     if ((candidate.status === 'duplicate-replay' || candidate.status === 'safety-state-changed') &&
-      hasExactKeys(candidate, ['status', 'safetyRevision', 'sessionRevision', 'calendarRevision']) &&
       isRevision(candidate.safetyRevision) && isRevision(candidate.sessionRevision) &&
       isRevision(candidate.calendarRevision)) return candidate as unknown as SafetyReviewAndClearResult
-    if (candidate.status === 'stale-revision' && hasExactKeys(candidate, [
-      'status', 'currentSafetyRevision', 'currentSessionRevision', 'currentCalendarRevision',
-    ]) && isRevision(candidate.currentSafetyRevision) && isRevision(candidate.currentSessionRevision) &&
-      isRevision(candidate.currentCalendarRevision)) return candidate as unknown as SafetyReviewAndClearResult
+    if (candidate.status === 'stale-revision' && isRevision(candidate.currentSafetyRevision) &&
+      isRevision(candidate.currentSessionRevision) && isRevision(candidate.currentCalendarRevision)) {
+      return candidate as unknown as SafetyReviewAndClearResult
+    }
     return null
   }, ADULT_MUTATION_FAILURE_CODES)
 }
 
 export function parseAdultPrivateCommitNoteResult(value: unknown): AdultPrivateCommitNoteResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || typeof candidate.status !== 'string') return null
-    if (candidate.status === 'committed' && hasExactKeys(candidate, ['status', 'noteRef', 'revision', 'committedAt']) &&
-      isOpaqueReference(candidate.noteRef) && isRevision(candidate.revision) &&
-      isTimestamp(candidate.committedAt)) return candidate as unknown as AdultPrivateCommitNoteResult
-    if (candidate.status === 'duplicate-replay' && hasExactKeys(candidate, ['status', 'revision']) &&
-      isRevision(candidate.revision)) return candidate as unknown as AdultPrivateCommitNoteResult
-    if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) &&
-      isRevision(candidate.currentRevision)) return candidate as unknown as AdultPrivateCommitNoteResult
+  return parseResult(value, [
+    { required: ['status', 'noteRef', 'revision', 'committedAt'] },
+    { required: ['status', 'revision'] },
+    { required: ['status', 'currentRevision'] },
+  ], (candidate) => {
+    if (candidate.status === 'committed' && isOpaqueReference(candidate.noteRef) &&
+      isRevision(candidate.revision) && isTimestamp(candidate.committedAt)) {
+      return candidate as unknown as AdultPrivateCommitNoteResult
+    }
+    if (candidate.status === 'duplicate-replay' && isRevision(candidate.revision)) {
+      return candidate as unknown as AdultPrivateCommitNoteResult
+    }
+    if (candidate.status === 'stale-revision' && isRevision(candidate.currentRevision)) {
+      return candidate as unknown as AdultPrivateCommitNoteResult
+    }
     return null
   }, ADULT_MUTATION_FAILURE_CODES)
 }
 
 function parseNotification(value: unknown): ParentHubNotificationSummary | null {
-  if (!isRecord(value) || !hasExactKeys(value, [
+  const candidate = exactRecord(value, [
     'notificationId', 'studentRef', 'title', 'category', 'urgency', 'createdAt', 'readAt', 'safeActionRef',
-  ]) || !isOpaqueReference(value.notificationId) || !isOpaqueReference(value.studentRef) ||
-    !isEnum(value.title, ['Review ready', 'Schedule changed', 'Safety review required', 'Settings updated'] as const) ||
-    !isEnum(value.category, ['review', 'calendar', 'safety', 'settings'] as const) ||
-    !isEnum(value.urgency, ['routine', 'important', 'urgent'] as const) || !isTimestamp(value.createdAt) ||
-    (value.readAt !== null && !isTimestamp(value.readAt)) ||
-    (value.safeActionRef !== null && !isOpaqueReference(value.safeActionRef))) return null
-  return value as unknown as ParentHubNotificationSummary
+  ])
+  if (!candidate || !isOpaqueReference(candidate.notificationId) || !isOpaqueReference(candidate.studentRef) ||
+    !isEnum(candidate.title, [
+      'Review ready', 'Schedule changed', 'Safety review required', 'Settings updated',
+    ] as const) || !isEnum(candidate.category, ['review', 'calendar', 'safety', 'settings'] as const) ||
+    !isEnum(candidate.urgency, ['routine', 'important', 'urgent'] as const) ||
+    !isTimestamp(candidate.createdAt) || (candidate.readAt !== null && !isTimestamp(candidate.readAt)) ||
+    (candidate.safeActionRef !== null && !isOpaqueReference(candidate.safeActionRef))) return null
+  return candidate as unknown as ParentHubNotificationSummary
 }
 
 export function parseNotificationsListResult(value: unknown): NotificationsListResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || candidate.status !== 'listed' ||
-      !hasExactKeys(candidate, ['status', 'notifications'], ['nextCursor']) || !Array.isArray(candidate.notifications) ||
-      candidate.notifications.length > PARENT_HUB_REQUEST_LIMITS.listLimit ||
-      candidate.notifications.some((item) => !parseNotification(item)) ||
+  return parseResult(value, [{ required: ['status', 'notifications'], optional: ['nextCursor'] }], (candidate) => {
+    if (candidate.status !== 'listed' ||
       (candidate.nextCursor !== undefined && !isCursor(candidate.nextCursor))) return null
-    return candidate as unknown as NotificationsListResult
+    const notifications = snapshotArray(
+      candidate.notifications, PARENT_HUB_REQUEST_LIMITS.listLimit, parseNotification,
+    )
+    if (!notifications) return null
+    return Object.freeze({ ...candidate, notifications }) as unknown as NotificationsListResult
   }, ADULT_READ_FAILURE_CODES)
 }
 
 export function parseNotificationsMarkReadResult(value: unknown): NotificationsMarkReadResult | null {
-  return parseOrFailure(value, (candidate) => {
-    if (!isRecord(candidate) || typeof candidate.status !== 'string') return null
-    if (candidate.status === 'marked-read' && hasExactKeys(candidate, ['status', 'revision', 'readAt']) &&
-      isRevision(candidate.revision) && isTimestamp(candidate.readAt)) return candidate as unknown as NotificationsMarkReadResult
-    if (candidate.status === 'duplicate-replay' && hasExactKeys(candidate, ['status', 'revision']) &&
-      isRevision(candidate.revision)) return candidate as unknown as NotificationsMarkReadResult
-    if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) &&
-      isRevision(candidate.currentRevision)) return candidate as unknown as NotificationsMarkReadResult
+  return parseResult(value, [
+    { required: ['status', 'revision', 'readAt'] },
+    { required: ['status', 'revision'] },
+    { required: ['status', 'currentRevision'] },
+  ], (candidate) => {
+    if (candidate.status === 'marked-read' && isRevision(candidate.revision) && isTimestamp(candidate.readAt)) {
+      return candidate as unknown as NotificationsMarkReadResult
+    }
+    if (candidate.status === 'duplicate-replay' && isRevision(candidate.revision)) {
+      return candidate as unknown as NotificationsMarkReadResult
+    }
+    if (candidate.status === 'stale-revision' && isRevision(candidate.currentRevision)) {
+      return candidate as unknown as NotificationsMarkReadResult
+    }
     return null
   }, ADULT_MUTATION_FAILURE_CODES)
 }

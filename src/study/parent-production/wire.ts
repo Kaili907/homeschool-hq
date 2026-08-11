@@ -1,4 +1,5 @@
 import type { ProductionStudyParentHubPorts } from './contracts'
+import { snapshotExactRecord } from './exactRecord'
 
 export const PARENT_HUB_PRODUCTION_ROLE_KEYS = [
   'settings',
@@ -30,11 +31,16 @@ export function assertCompleteProductionStudyParentHubPorts(
 export function defineProductionStudyParentHubPorts(
   ports: ProductionStudyParentHubPorts,
 ): Readonly<ProductionStudyParentHubPorts> {
-  const keys = Object.keys(ports)
-  if (keys.length !== PARENT_HUB_PRODUCTION_ROLE_KEYS.length ||
-    keys.some((key) => !PARENT_HUB_PRODUCTION_ROLE_KEYS.includes(key as DeclaredRole))) {
+  const snapshot = snapshotExactRecord(ports, [{ required: PARENT_HUB_PRODUCTION_ROLE_KEYS }])
+  if (!snapshot || PARENT_HUB_PRODUCTION_ROLE_KEYS.some((role) => !snapshot[role])) {
     throw new Error('Parent Hub production contract must contain exactly the six adult roles.')
   }
-  assertCompleteProductionStudyParentHubPorts(ports)
-  return Object.freeze({ ...ports })
+  return Object.freeze({
+    settings: snapshot.settings,
+    reviews: snapshot.reviews,
+    calendar: snapshot.calendar,
+    safetyReview: snapshot.safetyReview,
+    adultPrivate: snapshot.adultPrivate,
+    notifications: snapshot.notifications,
+  }) as Readonly<ProductionStudyParentHubPorts>
 }
