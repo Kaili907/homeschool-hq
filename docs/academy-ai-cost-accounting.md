@@ -2,7 +2,11 @@
 
 This server-only contract records privacy-safe Anthropic and ElevenLabs usage
 without changing learner responses, gateway security, quota ordering, or
-provider retry behavior. It implements ADMIN contract version 2.
+provider retry behavior. The canonical ledger row remains
+`AdminUsageCostRecord` version 2; the authorized Admin Costs aggregate response
+is contract version 3. Study provider usage is bounded to Anthropic safety
+classification with `engine = study` and `purpose = safety_classification`; it
+is never reported as Tutor, Jarvis, TTS, or gateway usage.
 
 ## Canonical usage and identity
 
@@ -27,20 +31,26 @@ because no Academy tier exists. No tier is invented.
 There are no columns or RPC parameters for prompts, messages, conversations,
 assessment answers, provider responses or request IDs, audio, or raw usage.
 
+The nullable accounting purpose is exact: Tutor, Jarvis, and TTS rows retain a
+null purpose, while Study rows require `safety_classification`. No other Study
+purpose is admitted.
+
 ## Pricing and exact calculation
 
-`academy_provider_pricing_catalogs` contains immutable, non-overlapping USD
-catalog versions with half-open applicability periods `[effectiveFrom,
-effectiveTo)`. Exactly one catalog must apply at the occurrence time. Rates are
-immutable and confined to their catalog period. For a provider/product/tier,
-each billing unit has non-overlapping half-open rate intervals. There is no
-"latest wins" rule.
+`academy_private.provider_pricing_terms` contains verified private,
+non-overlapping USD terms with half-open applicability periods
+`[effectiveFrom, effectiveUntil)`. The exact lookup key is provider, provider
+product, provider model, logical tier, usage unit, and currency. There is no
+"latest wins" rule. Legacy catalog/rate tables are not a writable pricing
+source after the pricing-terms migration.
 
-The independently priced units are `input_token`, `output_token`,
-`cached_input_read_token`, `cached_input_write_token`, `tts_character`, and
-`request`. Every calculated component snapshots its rate ID, catalog version,
-provider/product/model/tier dimensions, interval, USD currency, unit size,
-integer-micros price, quantity, and component result.
+The supported independently priced units are Anthropic `input_token`,
+`output_token`, `cached_input_read_token`, and `request`, plus ElevenLabs
+`tts_character` and `request`. Anthropic cache-write pricing is deliberately
+unsupported until the runtime retains trusted per-TTL quantities. Every
+calculated component snapshots its term ID/revision, provider/product/model/tier
+dimensions, interval, USD currency, unit size, integer-micros price, quantity,
+and component result.
 
 The trusted request quantity is the ledger's server-owned `requestCount`, which
 is exactly one for each recorded provider execution. When one effective
@@ -65,9 +75,9 @@ every integer-micros price and cost is explicitly cast to a decimal string;
 JavaScript never converts it through `number`.
 
 The migration deliberately seeds no prices. Production requires an authorized
-operator to publish independently verified, effective-dated Anthropic and
-account-specific ElevenLabs USD catalogs. Test prices are deterministic
-fixtures only. This migration is not applied to a hosted project in this work.
+owner to publish independently verified, effective-dated Anthropic and
+account-specific ElevenLabs USD terms. Test prices are deterministic fixtures
+only. This migration is not applied to a hosted project in this work.
 
 ## Result, billing, and cost semantics
 
@@ -90,10 +100,28 @@ record as a replay. Reusing it with different facts raises
 `reconciliation_conflict`; the first record is not silently accepted or
 overwritten.
 
+## Scalable Admin aggregate
+
+ADMIN-8 uses `academy_aggregate_provider_usage_costs_v1`, not the newest-500
+raw ledger projection, for authoritative supported-range totals. The RPC covers
+every matching stored ledger row in a positive half-open range of at most 366
+days and returns only fixed summary, UTC-day, engine, provider, approved logical
+tier/no-tier speech, cost-kind, and billing-disposition groups. Results are
+capped at 384 groups and fail rather than truncate.
+
+Every database integer/numeric aggregate crosses JSON as a decimal string.
+IntegerMicros remains a string through the server and browser. Successful query
+coverage is `complete`; provider-traffic coverage remains `coverage_unverified`.
+Retained accounting-persistence gap telemetry is reported separately and is
+never converted to usage or cost. The dashboard claim is limited to
+usage-derived marginal provider cost for recorded provider attempts calculated
+from verified effective-dated pricing terms, not complete invoice economics.
 ## Access boundary
 
-Catalog, rate, ledger, and component tables use forced RLS with no browser-role
-access. Recording and the canonical projection are service-role-only RPCs.
+Pricing-term, confirmation, receipt, ledger, and component tables use forced
+RLS with no broad application-role access. Recording and the canonical cost
+projection are service-role-only RPCs; pricing mutations are narrow,
+owner-authorized RPCs that atomically append ADMIN-15 audit.
 The narrow application seam calls an ADMIN-1-supplied authorization check for
 the exact `costs:read` capability before invoking that projection. Browser role
 claims are never accepted, raw provider internals are not projected, and no

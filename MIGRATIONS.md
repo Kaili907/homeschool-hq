@@ -176,6 +176,20 @@ SHA-256:
 `175a8c052742aacbf0e6cfd0ea2a389d217c432a9309ced03d776b905647fc4e`.
 This migration has not been applied to a hosted Supabase project.
 
+## Supabase: Admin configuration runtime enforcement (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql`.
+
+After the durable configuration core and logical TTS profile contract, this
+migration advances the eight code-owned registry entries from
+`pending_runtime_integration` to `runtime_enforced`. It preserves the immutable
+registry trigger, revision history, grants, and trusted-server read boundary;
+the read projection reports the effective integration status without exposing
+credentials or raw database rows. Canonical LF SHA-256:
+`b8833bd7fcaf3cc9a5a0d2744500b98e2a461bf3521aa0099b6890727026a984`.
+This migration has not been applied to a hosted Supabase project.
+
 ## Supabase: logical TTS voice profile contract (2026-08-09)
 
 Tracked migration:
@@ -240,6 +254,23 @@ migration has not been applied to a hosted project. Editable drafts remain
 deferred to ADMIN-16B after ADMIN-15 audit foundations, curriculum audit
 vocabulary, and Curriculum Schema Set v2.
 
+## Supabase: Study Effective Settings V2 (2026-08-10)
+
+Tracked migration:
+`supabase/migrations/20260810120200_academy_study_effective_settings_v2.sql`.
+
+The additive migration creates typed private Admin-default and safety-policy
+singletons plus the authorized `academy_study_effective_settings_v2(uuid,date)`
+RPC. The RPC preserves `admin_default < guardian < accommodation < safety`,
+keeps Admin `required_break_interval_minutes` separate from guardian
+`minimumBreakCount`, returns only `ready`, `manual_review`, or `unavailable`, and
+exposes minimized per-field source categories without private content. Both
+tables use forced RLS with no application-role table grants; only
+`authenticated` can execute the RPC, which derives household access server-side.
+V1 remains unchanged. This migration has not been applied to a hosted project.
+See `docs/study-effective-settings-v2.md` and
+`supabase/study-effective-settings-v2.db.test.ts`.
+
 ## Supabase: Academy Admin authorization foundation (2026-08-08)
 
 Tracked migration:
@@ -274,10 +305,22 @@ The integrated ADMIN-R1 migration order is:
 3. `20260808122000_academy_provider_usage_cost_ledger.sql`
 4. `20260808123000_academy_admin_safety_operations.sql`
 5. `20260809120000_academy_operational_telemetry_foundation.sql`
+6. `20260809121000_academy_provider_usage_cost_aggregate.sql`
+7. `20260809130000_academy_admin_audit_foundation.sql`
+8. `20260809140000_academy_admin_configuration_core.sql`
+9. `20260809150000_academy_logical_voice_profile_contract.sql`
+10. `20260810120200_academy_study_effective_settings_v2.sql`
+11. `20260810120300_academy_provider_pricing_terms.sql`
+12. `20260810140000_academy_admin_configuration_runtime_enforcement.sql`
+13. `20260810141000_academy_study_provider_cost_accounting.sql`
+14. `20260810150000_academy_study_curriculum_binding.sql`
+15. `20260810152000_academy_study_in_app_receipt_timestamp.sql`
+16. `20260810152100_academy_study_worker_operations_contract.sql`
+17. `20260810159000_academy_study_worker_run_evidence.sql`
 
-The telemetry manifest entry depends on authorization, and the provider
-usage/cost entry depends on telemetry. These unique versions replace the
-parallel-branch timestamp collision; none has been applied to hosted Supabase.
+The manifest is a strict linear chain in filename order. These unique versions
+replace the parallel-branch timestamp collision; none has been applied to
+hosted Supabase.
 
 ## Supabase: operational telemetry foundation (2026-08-09)
 
@@ -294,6 +337,64 @@ retention class; it contains no event IDs, execution keys, household/learner
 identity, raw metadata, or raw rows. Logically expired rows are excluded even if
 the bounded purge job has not removed them yet. This migration has not been
 applied to a hosted Supabase project.
+
+## Supabase: scalable provider usage cost aggregate (2026-08-09)
+
+Tracked migration:
+`supabase/migrations/20260809121000_academy_provider_usage_cost_aggregate.sql`.
+
+The additive migration leaves provider usage rows and ADMIN-3-R2 pricing rules
+unchanged. It adds the service-role-only, `costs:read`-asserting
+`academy_aggregate_provider_usage_costs_v1` RPC. Queries use half-open ranges,
+cover at most 366 days, aggregate every matching ledger row, and return only
+fixed daily/engine/provider/logical-tier/cost-kind/billing-disposition groups.
+The 384-group ceiling fails explicitly; successful results are never silently
+truncated and return no raw ledger rows or identity/provider internals.
+
+All database integer/numeric aggregates cross JSON as decimal strings. Money
+remains canonical IntegerMicros and never passes through JavaScript `Number`.
+Query coverage is separate from unverified provider-traffic coverage. Retained
+TEL-AI accounting-persistence gap evidence is reported separately and never
+fabricates usage or cost. This migration seeds no prices and has not been
+applied hosted. Architecture is in `docs/admin-costs-contract-v3.md`.
+
+## Admin provider pricing terms foundation (2026-08-10, not applied hosted)
+
+`supabase/migrations/20260810120300_academy_provider_pricing_terms.sql` adds the
+private effective-dated pricing-term authority used by new provider ledger rows.
+It depends on the exact cost aggregate and ADMIN-15 audit migrations, requires
+the legacy catalog/rate tables to be empty, and seeds no provider price.
+
+Terms use the ledger's provider/product/model/logical-tier/usage-unit dimensions,
+fixed USD, bigint IntegerMicros, half-open non-overlapping periods, immutable
+dimension/rate facts, per-dimension revisions, server-derived Owner authority,
+and audited future replacement/end/disable operations. Direct application-role
+table access remains denied. Missing terms return `pricing_unconfigured` or
+leave billable cost unavailable; old ledger rows are never recomputed.
+
+Anthropic cache-write pricing remains unsupported because current accounting
+does not retain a trusted five-minute versus one-hour TTL quantity split. The
+migration, Admin API, and database lookup reject that pricing dimension; a
+positive cache-write usage row fails closed to unavailable cost.
+
+## Supabase: Study safety provider cost accounting (2026-08-10, not applied hosted)
+
+`supabase/migrations/20260810141000_academy_study_provider_cost_accounting.sql`
+adds the bounded nullable ledger `purpose` dimension and the service-only
+`academy_record_provider_usage_v2` RPC. Existing Tutor, Jarvis, and TTS calls
+delegate to the unchanged v1 recorder with a null purpose. The only newly
+admitted tuple is `engine=study`, `purpose=safety_classification`, and
+`provider=anthropic`.
+
+Study billable usage is calculated only by the existing insert-time,
+effective-dated provider-pricing trigger. No price is seeded. No matching term
+leaves `cost_kind=unavailable` and `cost_micros=null`, including all-zero
+billable usage; positive Anthropic
+cache-write usage remains unavailable. Immutable component snapshots retain
+exact bigint IntegerMicros rates and results, and later terms do not recompute
+old rows. The v2 RPC returns the canonical ledger `usageId` so later Provider
+Attempt Journal instrumentation can store that linkage without this migration
+duplicating journal tables. See `docs/study-provider-cost-accounting.md`.
 
 ## Supabase: authorized Admin safety projection (2026-08-08)
 

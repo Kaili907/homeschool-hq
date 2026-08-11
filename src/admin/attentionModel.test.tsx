@@ -70,7 +70,7 @@ function configuration(resolution: 'saved' | 'fallback' | 'error'): AdminRuntime
   return {
     schemaVersion: 2,
     integrationStatus: 'pending_runtime_integration',
-    runtimeStatus: 'partial_runtime_enforcement',
+    runtimeStatus: 'runtime_enforced',
     settings: [{
       key: 'runtime.ai.enabled',
       value: true,

@@ -137,6 +137,7 @@ describe('AdminConsole authorization and load states', () => {
     )
     expect(markup).toContain('AI &amp; Costs')
     expect(markup).toContain('System Health')
+    expect(markup).toContain('Study Operations')
     expect(markup).toContain('aria-current="page"')
     expect(markup).not.toContain('>Overview<')
     expect(markup).not.toContain('>Learners<')
@@ -345,7 +346,11 @@ describe('AdminConsole canonical overview presentation', () => {
     expect(markup).toContain('2,100')
     expect(markup).toContain('Cached input write tokens')
     expect(markup).toContain('425')
-    expect(markup).toContain('not reconciled provider invoices')
+    expect(markup).toContain('usage-derived marginal provider cost for recorded provider attempts')
+    expect(markup).toContain('do not represent reconciled provider-invoice economics')
+    expect(markup).toContain('Overview does not establish aggregate query coverage')
+    expect(markup).toContain('provider-traffic coverage, or accounting-gap evidence')
+    expect(markup).toContain('AI &amp; Costs')
   })
 
   it('labels reconciled cost explicitly', () => {
@@ -478,11 +483,19 @@ describe('AdminConsole canonical overview presentation', () => {
 
   it('retains accessibility and keyboard affordances', () => {
     const markup = authorized()
-    expect(markup).toContain('Skip to overview')
+    expect(markup).toContain('Skip to academy overview')
     expect(markup).toContain('aria-label="Admin sections"')
     expect(markup).toContain('aria-current="page"')
     expect(markup).toContain('aria-label="Overview time range"')
     expect(markup).toContain('Viewer operator session')
+  })
+
+  it('contains mobile navigation overflow without widening the page', () => {
+    const css = readFileSync(new URL('./admin-console.css', import.meta.url), 'utf8')
+    expect(css).toContain('.admin-shell { grid-template-columns: minmax(0, 1fr); }')
+    expect(css).toContain('.admin-sidebar { position: static; width: auto; min-width: 0;')
+    expect(css).toContain('.admin-sidebar nav { min-width: 0; overflow: hidden; }')
+    expect(css).toContain('.admin-sidebar nav ul { display: flex; overflow-x: auto; }')
   })
 
   it('renders the custom range editor without calculating data locally', () => {

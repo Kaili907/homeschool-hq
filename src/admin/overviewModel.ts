@@ -21,6 +21,7 @@ export const ADMIN_SECTIONS = [
   'safety',
   'system-health',
   'incidents',
+  'study-operations',
   'configuration',
   'audit-log',
   'access',

@@ -2,6 +2,10 @@ import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import { createAdminConfigurationSource } from './_shared/admin-configuration-source.js'
 import { createAdminCostProjection } from './_shared/admin-cost-projection.js'
 import { createAdminMonthlyCostAlertEvaluator } from './_shared/admin-monthly-cost-alert.js'
+import {
+  createEffectiveConfigurationReader,
+  evaluateMonthlyCostThreshold,
+} from './_shared/effective-configuration.js'
 import { createGatewayAccess } from './_shared/gateway-access.js'
 import { errorResponse, GatewayError, hasBody, jsonResponse, responseForError } from './_shared/http.js'
 
@@ -40,6 +44,8 @@ export function createAdminCostsHandler(overrides = {}) {
       configurationSource,
       now,
     })
+  const configurationReader = overrides.effectiveConfigurationReader
+    ?? createEffectiveConfigurationReader({ env, fetchImpl })
 
   return async (event) => {
     if (event?.httpMethod !== 'GET') {
@@ -54,14 +60,20 @@ export function createAdminCostsHandler(overrides = {}) {
     if (!authorized.ok) return authorized.response
 
     try {
-      const model = await projection.read(event)
-      const monthlyCostAlert = await monthlyCostAlertEvaluator.read({
-        generatedAt: model.generatedAt,
-      })
+      const costs = await projection.read(event)
+      const [monthlyCostAlert, configuration] = await Promise.all([
+        monthlyCostAlertEvaluator.read({ generatedAt: costs.generatedAt }),
+        configurationReader.read(),
+      ])
       return jsonResponse(200, {
-        ...model,
+        ...costs,
         contractVersion: 4,
         monthlyCostAlert,
+        monthlyCostThreshold: evaluateMonthlyCostThreshold({
+          rangeKind: costs.range?.kind,
+          calculatedCost: costs.summary?.calculatedCost,
+          configuration,
+        }),
       })
     } catch (error) {
       if (error instanceof GatewayError && error.statusCode >= 500) {

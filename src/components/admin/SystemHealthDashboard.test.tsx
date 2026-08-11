@@ -1,7 +1,11 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { ADMIN_ROLE_CAPABILITIES, type AdminOperationalEvent } from '../../admin/contracts'
-import { buildSystemHealthProjection, type SystemHealthProjection } from '../../admin/systemHealth'
+import {
+  buildSystemHealthProjection,
+  buildSystemHealthProjectionFromAggregates,
+  type SystemHealthProjection,
+} from '../../admin/systemHealth'
 import { SystemHealthDashboard } from './SystemHealthDashboard'
 
 const NOW = new Date('2026-08-08T12:00:00.000Z')
@@ -105,5 +109,20 @@ describe('System Health dashboard states and privacy', () => {
     expect(markup).toContain('id="health-engine-detail"')
     expect(markup).not.toContain('<main')
     expect(markup).not.toContain('id="admin-main"')
+  })
+
+  it.each([
+    ['partial', 'Partial aggregate evidence'],
+    ['retention_limited', 'Retention-limited evidence'],
+    ['malformed', 'Malformed aggregate evidence'],
+    ['unavailable', 'Aggregate evidence unavailable'],
+    ['timeout', 'Aggregate evidence timed out'],
+    ['group_incomplete', 'Aggregate groups incomplete'],
+  ] as const)('renders truthful %s evidence status without a healthy ruling', (evidenceCompleteness, label) => {
+    const value = buildSystemHealthProjectionFromAggregates(null, { now: NOW, evidenceCompleteness })
+    const markup = renderReady(value)
+    expect(markup).toContain(label)
+    expect(markup).toContain('Unknown')
+    expect(markup).not.toContain('health-badge--healthy')
   })
 })

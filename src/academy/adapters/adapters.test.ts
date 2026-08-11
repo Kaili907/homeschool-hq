@@ -108,4 +108,13 @@ describe('CURR-1 study context adapter (contract v1)', () => {
       buildAcademyStudyContext(emptyProfile('p3', 'Sixth', '6'), schedule, 2, 3),
     ).toBeNull()
   })
+
+  it('fails closed when browser schedule and enrollment versions disagree', () => {
+    expect(buildAcademyStudyContext(
+      profile,
+      { ...schedule, releaseVersion: '2.0.0' },
+      2,
+      3,
+    )).toBeNull()
+  })
 })

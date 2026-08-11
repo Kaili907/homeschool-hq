@@ -66,7 +66,7 @@ function setting(key: AdminConfigurationKey) {
 const PROJECTION: AdminRuntimeConfigurationProjection = {
   schemaVersion: 2,
   integrationStatus: 'pending_runtime_integration',
-  runtimeStatus: 'partial_runtime_enforcement',
+  runtimeStatus: 'runtime_enforced',
   settings: ADMIN_CONFIGURATION_KEYS.map(setting),
 }
 

@@ -8,14 +8,12 @@ import {
   jsonResponse,
   readBoundedResponseBytes,
   readJsonBody,
+  reject,
   responseForError,
 } from './_shared/http.js'
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
 import { createGatewayAccess } from './_shared/gateway-access.js'
-import {
-  createRuntimeConfigurationResolver,
-  safeRuntimeConfigurationFallback,
-} from './_shared/admin-runtime-configuration.js'
+import { createEffectiveConfigurationReader } from './_shared/effective-configuration.js'
 import {
   createGatewayOperationalTelemetry,
   gatewayErrorTerminal,
@@ -52,6 +50,10 @@ const CATALOG_PATHS = new Set(['/api/tts/catalog', '/.netlify/functions/tts/cata
 const MAX_AUDIO_BYTES = 4 * 1024 * 1024
 const TTS_TIMEOUT_MS = 30_000
 export function createTtsHandler(overrides = {}) {
+  const env = overrides.env ?? process.env
+  const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
+  const configurationReader = overrides.effectiveConfigurationReader
+    ?? createEffectiveConfigurationReader({ env, fetchImpl })
   return async (event, context) => {
     const path = event?.path ?? ''
     const isSynthesis = SYNTHESIS_PATHS.has(path)
@@ -63,8 +65,6 @@ export function createTtsHandler(overrides = {}) {
     }
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
 
-    const env = overrides.env ?? process.env
-    const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
     let finalizeTelemetry
     let telemetryRecorded = false
 
@@ -73,31 +73,44 @@ export function createTtsHandler(overrides = {}) {
       if (!auth.ok) return auth.response
 
       const catalog = overrides.catalog ?? TTS_VOICE_CATALOG
-      const runtimeConfigurationResolver = overrides.runtimeConfigurationResolver
-        ?? createRuntimeConfigurationResolver({
+      if (isCatalog) {
+        let configuration
+        try {
+          configuration = await configurationReader.read()
+        } catch {
+          configuration = { status: 'unavailable' }
+        }
+        const publicCatalog = projectPublicTtsCatalog(
+          catalog,
           env,
-          fetchImpl,
-          source: overrides.runtimeConfigurationSource,
-          serviceClient: overrides.configurationClient,
-        })
-      let runtimeConfiguration
+          configuration.status === 'available' && configuration.runtime.ttsEnabled,
+        )
+        return jsonResponse(200, publicCatalog)
+      }
+
+      const request = validateTtsRequest(readJsonBody(event, TTS_REQUEST_LIMIT_BYTES))
+      let configuration
       try {
-        runtimeConfiguration = await runtimeConfigurationResolver.resolve({ catalog })
+        configuration = await configurationReader.read()
       } catch {
-        runtimeConfiguration = safeRuntimeConfigurationFallback()
+        reject(503, 'configuration_unavailable')
       }
       const publicCatalog = projectPublicTtsCatalog(
         catalog,
         env,
-        runtimeConfiguration.values.ttsEnabled,
+        configuration.status === 'available' && configuration.runtime.ttsEnabled,
       )
-      if (isCatalog) {
-        return jsonResponse(200, publicCatalog)
-      }
-
+      if (configuration.status !== 'available') reject(503, 'configuration_unavailable')
       if (!publicCatalog.synthesisEnabled) {
         return errorResponse(503, 'gateway_disabled')
       }
+
+      const resolvedVoice = resolveTtsCatalogVoice(
+        catalog,
+        request.voiceRef,
+        request.voiceVersion,
+        env,
+      )
 
       const access = overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl })
       const entitlement = await access.requireEntitlement(auth.user.id)
@@ -126,13 +139,6 @@ export function createTtsHandler(overrides = {}) {
         })
       }
 
-      const request = validateTtsRequest(readJsonBody(event, TTS_REQUEST_LIMIT_BYTES))
-      const resolvedVoice = resolveTtsCatalogVoice(
-        catalog,
-        request.voiceRef,
-        request.voiceVersion,
-        env,
-      )
       requestKey = gatewayProviderExecutionKey({
         event,
         accountRef: auth.user.id,
@@ -151,7 +157,7 @@ export function createTtsHandler(overrides = {}) {
       await access.consumeUsage(
         auth.user.id,
         'tts',
-        runtimeConfiguration.values.ttsDailyLimit,
+        configuration.quotas.ttsRequestsPerAccountDay,
       )
 
       let upstream

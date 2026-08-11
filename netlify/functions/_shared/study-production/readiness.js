@@ -1,4 +1,7 @@
-import { createSupabaseStudySafetyPorts } from '../study-adult-review/supabase-ports.js'
+import {
+  createSupabaseServiceRpc,
+  createSupabaseStudySafetyPorts,
+} from '../study-adult-review/supabase-ports.js'
 import { createTrustedStudySessionVerifier } from '../study-identity/supabase.js'
 import { createAnthropicSafetyClassifier } from '../study-safety/provider.js'
 
@@ -114,6 +117,23 @@ async function optionalOperationalState(probe) {
   }
 }
 
+async function effectiveSettingsState(probe) {
+  if (typeof probe !== 'function') return 'not-ready'
+  try {
+    const result = await probe()
+    const status = typeof result === 'string' ? result : result?.status
+    return status === 'ready' ? 'ready' : 'not-ready'
+  } catch {
+    return 'not-ready'
+  }
+}
+
+function weakestState(...states) {
+  if (states.includes('not-ready')) return 'not-ready'
+  if (states.includes('degraded')) return 'degraded'
+  return 'ready'
+}
+
 function aggregateStatus(registrations) {
   if (registrations.some(({ status }) => status === 'not-ready')) return 'not-ready'
   if (registrations.some(({ status }) => status === 'degraded')) return 'degraded'
@@ -133,6 +153,9 @@ export function createStudyProductionReadinessService(options = {}) {
   const ttlMs = Math.max(1_000, Math.min(60_000, options.ttlMs ?? 5_000))
   const identityVerifier = options.identityVerifier ?? createTrustedStudySessionVerifier({ env, fetchImpl })
   const durablePorts = options.durablePorts ?? createSupabaseStudySafetyPorts({ env, fetchImpl })
+  const bindingRpc = options.bindingRpc ?? createSupabaseServiceRpc({ env, fetchImpl })
+  const curriculumBindingReadiness = options.curriculumBindingReadiness ?? (() =>
+    bindingRpc.call('academy_study_curriculum_binding_readiness_v1'))
   const classifier = options.classifier ?? createAnthropicSafetyClassifier({ env, fetchImpl })
   const session17 = options.session17 ?? Object.freeze({})
   let cached = null
@@ -143,6 +166,8 @@ export function createStudyProductionReadinessService(options = {}) {
     const [
       identity,
       academic,
+      curriculumBinding,
+      effectiveSettings,
       safetyDurable,
       policyEvidence,
       recipient,
@@ -158,6 +183,8 @@ export function createStudyProductionReadinessService(options = {}) {
     ] = await Promise.all([
       identityState(identityVerifier),
       optionalOperationalState(options.academicReadiness),
+      effectiveSettingsState(curriculumBindingReadiness),
+      effectiveSettingsState(options.effectiveSettingsReadiness),
       durableState(durablePorts),
       productionPolicyState(durablePorts),
       optionalOperationalState(session17.authorizedRecipientResolver),
@@ -195,6 +222,14 @@ export function createStudyProductionReadinessService(options = {}) {
     // The safety reconciliation probe does not prove the Session 13 academic
     // RPC set. Those adapters require their own injected live probe.
     for (const key of ACADEMIC_SESSION_13_DEPENDENCIES) statusByDependency.set(key, academic)
+    statusByDependency.set(
+      'study-session-adapter',
+      weakestState(academic, curriculumBinding),
+    )
+    statusByDependency.set(
+      'parent-settings-adapter',
+      weakestState(academic, effectiveSettings),
+    )
     for (const key of SAFETY_DURABLE_DEPENDENCIES) statusByDependency.set(key, safetyDurable)
     statusByDependency.set('outbox-store', adultReviewStatus)
     statusByDependency.set('rate-limiter', limiter === 'ready' ? adultReviewStatus : limiter)

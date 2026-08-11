@@ -82,7 +82,7 @@ const RUNTIME = Object.freeze(Object.fromEntries(
 const EFFECTIVE_READ_RESULT = Object.freeze({
   schemaVersion: 2,
   integrationStatus: 'pending_runtime_integration',
-  runtimeStatus: 'partial_runtime_enforcement',
+  runtimeStatus: 'runtime_enforced',
   settings: SETTINGS.map((setting) => Object.freeze({
     ...setting,
     runtime: RUNTIME[setting.key],
@@ -263,7 +263,7 @@ describe('Admin configuration API', () => {
     [previewBody({ effectiveValue: true })],
     [previewBody({ enforcement: 'enforced' })],
     [previewBody({ enforced: true })],
-    [previewBody({ runtimeStatus: 'partial_runtime_enforcement' })],
+    [previewBody({ runtimeStatus: 'runtime_enforced' })],
     [previewBody({ role: 'owner' })],
     [previewBody({ capabilities: ['configuration:manage'] })],
     [{ ...previewBody(), requestId: REQUEST_ID }],
@@ -285,7 +285,7 @@ describe('Admin configuration API', () => {
     [commitBody({ settingKey: 'ai.approved_tiers', newValue: ['opus'] })],
     [commitBody({ effectiveValue: true })],
     [commitBody({ enforced: true })],
-    [commitBody({ runtimeStatus: 'partial_runtime_enforcement' })],
+    [commitBody({ runtimeStatus: 'runtime_enforced' })],
     [commitBody({ role: 'owner' })],
     [commitBody({ capabilities: ['configuration:manage'] })],
   ])('rejects narrow commit request %j', async (body) => {

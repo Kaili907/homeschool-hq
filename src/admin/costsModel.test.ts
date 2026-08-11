@@ -1,12 +1,29 @@
 import { describe, expect, it } from 'vitest'
 import {
   parseAdminMonthlyCostAlert,
+  ADMIN_COST_CONTRACT_VERSION,
+  ADMIN_COST_GROUP_LIMIT,
   parseAdminCostsModel,
   validateAdminCostCustomRange,
 } from './costsModel'
 import { costsModelFixture, monthlyCostAlertFixture } from './costsTestFixtures'
 
 describe('Admin costs browser contract', () => {
+  it('decodes the exact v3 coverage and group-bound source contract', () => {
+    const model = parseAdminCostsModel(costsModelFixture())
+    expect(model).toMatchObject({
+      contractVersion: ADMIN_COST_CONTRACT_VERSION,
+      source: {
+        queryCoverage: 'complete',
+        providerTrafficCoverage: 'coverage_unverified',
+        accountingGapEvidence: { observedCount: 0, retentionCoverage: 'within_retention' },
+        groupLimit: ADMIN_COST_GROUP_LIMIT,
+        groupCount: 7,
+        recordsIncluded: 3,
+      },
+    })
+  })
+
   it('accepts exact IntegerMicros beyond Number safe range without converting it', () => {
     const model = parseAdminCostsModel(costsModelFixture())
     expect(model?.summary.calculatedCost.micros).toBe('9007199254740993')
@@ -25,18 +42,137 @@ describe('Admin costs browser contract', () => {
         models: [{ ...costsModelFixture().breakdowns.models[0], label: 'raw provider SECRET' }],
       },
     })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...costsModelFixture(),
+      breakdowns: {
+        ...costsModelFixture().breakdowns,
+        providers: [{
+          ...costsModelFixture().breakdowns.providers[0],
+          calculatedCost: { status: 'available', micros: '01', currency: 'USD' },
+        }],
+      },
+    })).toBeNull()
+  })
+
+  it('accepts the bounded Study cost breakdown label', () => {
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel({
+      ...source,
+      breakdowns: {
+        ...source.breakdowns,
+        engines: [{ ...source.breakdowns.engines[0], key: 'study', label: 'Study' }],
+      },
+    })?.breakdowns.engines[0]).toMatchObject({ key: 'study', label: 'Study' })
   })
 
   it('keeps unavailable money null and never coerces it to zero', () => {
     const source = costsModelFixture()
     const model = parseAdminCostsModel({
       ...source,
+      source: {
+        ...source.source,
+        status: 'partial',
+        reasons: ['calculated_cost_unavailable'],
+      },
       summary: {
         ...source.summary,
         calculatedCost: { status: 'unavailable', micros: null, currency: 'USD' },
+        unavailableCostCount: 3,
+        costKindCounts: { calculated: 0, reconciled: 0, unavailable: 3 },
       },
     })
     expect(model?.summary.calculatedCost).toEqual({ status: 'unavailable', micros: null, currency: 'USD' })
+  })
+
+  it('keeps configured monthly thresholds and observed cost as exact decimal strings', () => {
+    const model = parseAdminCostsModel(costsModelFixture({
+      monthlyCostThreshold: {
+        status: 'warning', reason: null, basis: 'calculated_usage_estimate',
+        observedMicros: '9007199254740993', warningMicros: '10000000',
+        criticalMicros: '25000000', configurationRevisions: { warning: '2', critical: '3' },
+      },
+    }))
+    expect(model?.monthlyCostThreshold).toMatchObject({
+      status: 'warning', observedMicros: '9007199254740993',
+    })
+    expect(typeof model?.monthlyCostThreshold.observedMicros).toBe('string')
+  })
+
+  it('rejects classified thresholds with missing or out-of-registry bounds', () => {
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel({
+      ...source,
+      monthlyCostThreshold: {
+        status: 'critical', reason: null, basis: 'calculated_usage_estimate',
+        observedMicros: '2', warningMicros: null, criticalMicros: '1',
+        configurationRevisions: { warning: '1', critical: '1' },
+      },
+    })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...source,
+      monthlyCostThreshold: {
+        status: 'warning', reason: null, basis: 'calculated_usage_estimate',
+        observedMicros: '2', warningMicros: '1000000000001', criticalMicros: '1000000000002',
+        configurationRevisions: { warning: '1', critical: '1' },
+      },
+    })).toBeNull()
+  })
+
+  it('requires complete query coverage without promoting provider traffic coverage', () => {
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel(source)?.source).toMatchObject({
+      queryCoverage: 'complete',
+      providerTrafficCoverage: 'coverage_unverified',
+      groupLimit: 384,
+      groupCount: 7,
+    })
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, queryCoverage: 'unavailable' },
+    })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, providerTrafficCoverage: 'complete' },
+    })).toBeNull()
+  })
+
+  it('keeps accounting-gap evidence independent and requires its reason to agree', () => {
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel({
+      ...source,
+      source: {
+        ...source.source,
+        status: 'partial',
+        reasons: ['accounting_gap_evidence'],
+        accountingGapEvidence: { observedCount: 2, retentionCoverage: 'retention_limited' },
+      },
+    })?.source).toMatchObject({
+      queryCoverage: 'complete',
+      providerTrafficCoverage: 'coverage_unverified',
+      accountingGapEvidence: { observedCount: 2, retentionCoverage: 'retention_limited' },
+    })
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, status: 'partial', reasons: ['accounting_gap_evidence'] },
+    })).toBeNull()
+  })
+
+  it('rejects old v2 fixtures, hybrid record-limit fields, extra keys, and invalid group bounds', () => {
+    const source = costsModelFixture()
+    expect(parseAdminCostsModel({ ...source, contractVersion: 2 })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, recordLimit: 500 },
+    })).toBeNull()
+    expect(parseAdminCostsModel({ ...source, unexpectedCoverageClaim: true })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, groupLimit: 500 },
+    })).toBeNull()
+    expect(parseAdminCostsModel({
+      ...source,
+      source: { ...source.source, groupCount: ADMIN_COST_GROUP_LIMIT + 1 },
+    })).toBeNull()
   })
 
   it('validates calendar order, future dates, and the 366-day maximum', () => {

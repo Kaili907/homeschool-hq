@@ -1,7 +1,6 @@
 /** Authenticated, policy-owned Netlify gateway for Anthropic Messages. */
 
 import {
-  ANTHROPIC_MODELS,
   ANTHROPIC_REQUEST_LIMIT_BYTES,
   buildAnthropicProviderBody,
   extractAnthropicText,
@@ -16,14 +15,12 @@ import {
   jsonResponse,
   readBoundedResponseBytes,
   readJsonBody,
+  reject,
   responseForError,
 } from './_shared/http.js'
 import { verifySupabaseBearer } from './_shared/supabase-auth.js'
 import { createGatewayAccess } from './_shared/gateway-access.js'
-import {
-  createRuntimeConfigurationResolver,
-  safeRuntimeConfigurationFallback,
-} from './_shared/admin-runtime-configuration.js'
+import { createEffectiveConfigurationReader } from './_shared/effective-configuration.js'
 import {
   createGatewayOperationalTelemetry,
   gatewayErrorTerminal,
@@ -50,6 +47,10 @@ const MAX_ANTHROPIC_RESPONSE_BYTES = 256 * 1024
 const ALLOWED_PATHS = new Set(['/api/anthropic/v1/messages', '/.netlify/functions/anthropic'])
 
 export function createAnthropicHandler(overrides = {}) {
+  const env = overrides.env ?? process.env
+  const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
+  const configurationReader = overrides.effectiveConfigurationReader
+    ?? createEffectiveConfigurationReader({ env, fetchImpl })
   return async (event, context) => {
     if (event?.httpMethod !== 'POST') {
       return errorResponse(405, 'method_not_allowed', { allow: 'POST' })
@@ -57,8 +58,6 @@ export function createAnthropicHandler(overrides = {}) {
     if (!ALLOWED_PATHS.has(event?.path ?? '')) return errorResponse(404, 'not_found')
     if (hasQuery(event)) return errorResponse(400, 'invalid_request')
 
-    const env = overrides.env ?? process.env
-    const fetchImpl = overrides.fetchImpl ?? globalThis.fetch
     let finalizeTelemetry
     let telemetryRecorded = false
 
@@ -66,22 +65,24 @@ export function createAnthropicHandler(overrides = {}) {
       const auth = await verifySupabaseBearer(event, { fetchImpl, env })
       if (!auth.ok) return auth.response
 
-      const runtimeConfigurationResolver = overrides.runtimeConfigurationResolver
-        ?? createRuntimeConfigurationResolver({
-          env,
-          fetchImpl,
-          source: overrides.runtimeConfigurationSource,
-          serviceClient: overrides.configurationClient,
-        })
-      let runtimeConfiguration
+      const rawRequest = readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES)
+      const callerSelectedTier = Object.prototype.hasOwnProperty.call(rawRequest, 'modelTier')
+      const validatedRequest = validateAnthropicRequest(rawRequest)
+      let configuration
       try {
-        runtimeConfiguration = await runtimeConfigurationResolver.resolve()
+        configuration = await configurationReader.read()
       } catch {
-        runtimeConfiguration = safeRuntimeConfigurationFallback()
+        reject(503, 'configuration_unavailable')
       }
-      if (!runtimeConfiguration.values.aiEnabled) {
-        return errorResponse(503, 'gateway_disabled')
+      if (configuration.status !== 'available') reject(503, 'configuration_unavailable')
+      if (!configuration.runtime.aiEnabled) reject(503, 'gateway_disabled')
+      const selectedTier = callerSelectedTier
+        ? validatedRequest.modelTier
+        : configuration.ai.defaultTier
+      if (!configuration.ai.approvedTiers.includes(selectedTier)) {
+        reject(403, 'model_tier_not_approved')
       }
+      const request = Object.freeze({ ...validatedRequest, modelTier: selectedTier })
 
       const access = overrides.gatewayAccess ?? createGatewayAccess({ env, fetchImpl })
       const entitlement = await access.requireEntitlement(auth.user.id)
@@ -112,19 +113,6 @@ export function createAnthropicHandler(overrides = {}) {
         })
       }
 
-      const preferredRequest = validateAnthropicRequest(
-        readJsonBody(event, ANTHROPIC_REQUEST_LIMIT_BYTES),
-        {
-          approvedTiers: Object.keys(ANTHROPIC_MODELS),
-          defaultTier: runtimeConfiguration.values.defaultTier,
-        },
-      )
-      const request = {
-        ...preferredRequest,
-        modelTier: runtimeConfiguration.values.approvedTiers.includes(preferredRequest.modelTier)
-          ? preferredRequest.modelTier
-          : runtimeConfiguration.values.defaultTier,
-      }
       mode = request.mode
       requestKey = gatewayProviderExecutionKey({
         event,
@@ -145,7 +133,7 @@ export function createAnthropicHandler(overrides = {}) {
       await access.consumeUsage(
         auth.user.id,
         'anthropic',
-        runtimeConfiguration.values.aiDailyLimit,
+        configuration.quotas.aiRequestsPerAccountDay,
       )
 
       let upstream

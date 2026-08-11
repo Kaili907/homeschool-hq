@@ -1,9 +1,8 @@
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
   ADMIN_COST_MAX_RANGE_DAYS,
   ADMIN_COST_RECORD_LIMIT,
   buildAdminCostProjection,
-  createAdminCostProjection,
   resolveAdminCostRange,
 } from './admin-cost-projection.js'
 
@@ -95,7 +94,7 @@ function studySafetyRecord(overrides = {}) {
   })
 }
 
-describe('Admin cost UTC date ranges', () => {
+describe('Admin Costs v3 UTC date ranges', () => {
   it.each([
     [{ range: 'today' }, ['2026-08-08', '2026-08-08', 1]],
     [{ range: '7-days' }, ['2026-08-02', '2026-08-08', 7]],
@@ -294,39 +293,6 @@ describe('Admin cost aggregate projection', () => {
   it('rejects limit + 1 as explicitly incomplete instead of aggregating an unbounded source', () => {
     const records = Array.from({ length: ADMIN_COST_RECORD_LIMIT + 1 }, (_, index) => record({ usageId: `usage-${index}` }))
     expect(() => buildAdminCostProjection(records, today, NOW)).toThrow('cost_source_incomplete')
-  })
-
-  it('uses only the bounded ADMIN-3 server read seam', async () => {
-    const gatewayAccess = {
-      readProviderUsageCosts: vi.fn(async () => [record()]),
-      readProviderAttemptCoverage: vi.fn(async () => null),
-    }
-    const projection = createAdminCostProjection({ gatewayAccess, now: () => NOW })
-    const model = await projection.read(event({ range: '7-days' }))
-    expect(model.summary.aiRequests.value).toBe(1)
-    expect(model.providerAccountingCoverage.status).toBe('unavailable')
-    expect(gatewayAccess.readProviderUsageCosts).toHaveBeenCalledWith({
-      limit: ADMIN_COST_RECORD_LIMIT,
-      before: '2026-08-09T00:00:00.000Z',
-    })
-    expect(gatewayAccess.readProviderAttemptCoverage).toHaveBeenCalledWith({
-      startAt: '2026-08-02T00:00:00.000Z',
-      endExclusive: '2026-08-09T00:00:00.000Z',
-    })
-  })
-
-  it('keeps authorized cost data available when the coverage RPC is unavailable', async () => {
-    const gatewayAccess = {
-      readProviderUsageCosts: vi.fn(async () => [record()]),
-      readProviderAttemptCoverage: vi.fn(async () => { throw new Error('PRIVATE SQL ERROR') }),
-    }
-    const model = await createAdminCostProjection({ gatewayAccess, now: () => NOW })
-      .read(event({ range: 'today' }))
-    expect(model.summary.totalRequests.value).toBe(1)
-    expect(model.providerAccountingCoverage).toMatchObject({
-      status: 'unavailable', metrics: null, invoiceCompletenessClaim: false,
-    })
-    expect(JSON.stringify(model)).not.toContain('PRIVATE SQL ERROR')
   })
 
   it('fails closed for malformed ledger rows rather than surfacing raw fields', () => {

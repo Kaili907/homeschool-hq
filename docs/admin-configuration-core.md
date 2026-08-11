@@ -1,14 +1,16 @@
 # ADMIN-14A durable configuration core
 
 Status: durable core implemented locally; migration not applied hosted;
-supported runtime enforcement is implemented by ADMIN-14B without changing this
-database contract. See `admin-configuration-runtime.md`.
+ADMIN-14B runtime enforcement is implemented locally and documented in
+`admin-configuration-runtime.md`.
 
 `20260809140000_academy_admin_configuration_core.sql` adds the durable Admin
-configuration data/control authority on top of ADMIN-15. Its database read and
-mutation DTOs continue to report `pending_runtime_integration`; ADMIN-14B layers
-a separate trusted, contextual runtime projection over that saved snapshot.
-Runtime state is deliberately not written back into the immutable registry.
+configuration data/control authority on top of ADMIN-15. At the ADMIN-14A
+migration stage, the HTTP projection reports
+`pending_runtime_integration` so a stored value cannot be mistaken for an
+enforced production value. The ADMIN-14B follow-up migration advances this
+status only alongside the runtime consumers. Runtime state is not written back
+into immutable revision history.
 
 ## Authority and storage
 
@@ -111,5 +113,6 @@ trusted server. Its UI distinguishes the saved value from the exact effective
 value, enforcement, stronger constraints, safe fallback, and unavailable
 consumers. After a commit the browser performs another authoritative read; it
 does not infer that the submitted value became effective. The two cost
-thresholds remain truthfully unavailable because no runtime alert evaluator is
-implemented, and Study remains outside this authority.
+thresholds are consumed by the exact calculated-usage alert evaluators. Study
+Effective Settings remains a separate authority. The UI is bounded to the eight
+registered keys and does not expose a generic browser configuration authority.

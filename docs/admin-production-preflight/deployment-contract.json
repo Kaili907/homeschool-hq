@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "contractId": "admin-production-activation-r3",
+  "localOnly": true,
+  "deploymentMode": "admin-read-only-with-study-production-dependencies",
+  "classificationPriority": [
+    "BLOCKED_BY_LOCAL_INTEGRATION",
+    "BLOCKED_BY_CONFIGURATION",
+    "BLOCKED_BY_STUDY",
+    "BLOCKED_BY_PROVIDER_ACCOUNTING"
+  ],
+  "migrationIdentity": {
+    "frozenHistoricalMigrations": [
+      {
+        "filename": "20260724074106_academy_profiles_base.sql",
+        "sha256": "16c609d24efb9b9694b410a2313e5f2f7228db5118e2ccc4fa779f03c1d53c51"
+      },
+      {
+        "filename": "20260724230000_academy_student_identity_foundation.sql",
+        "sha256": "2c7825ba957b68a39413a1e2da81aebaa72fb35dde7abeeba6ea8a493ecf3bde"
+      },
+      {
+        "filename": "20260726120000_academy_household_revision_cas.sql",
+        "sha256": "0d5556db9f1dc406234e08180051e8d54807870084223b25db18017b1648c268"
+      },
+      {
+        "filename": "20260731120000_academy_gateway_usage.sql",
+        "sha256": "9eb92005e9c98e94f3fa365351ab527d01cee47da2d0ceac3db0a4e60d82c86f"
+      }
+    ],
+    "approvedHistoricalReconciliations": []
+  },
+  "gates": [
+    {
+      "id": "local_integration_reconciled",
+      "area": "integration",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "admin_authorization_foundation",
+      "area": "admin",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "admin_audit",
+      "area": "admin",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "operational_telemetry",
+      "area": "admin",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "engine_performance_scalable_aggregate",
+      "area": "admin",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "system_health_scalable_aggregate",
+      "area": "admin",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "admin_configuration_runtime_enforcement",
+      "area": "configuration",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_CONFIGURATION"
+    },
+    {
+      "id": "provider_pricing_architecture",
+      "area": "configuration",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "provider_pricing_account_configuration",
+      "area": "configuration",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_CONFIGURATION"
+    },
+    {
+      "id": "costs_contract_version_compatibility",
+      "area": "costs",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "provider_cost_ledger_operational",
+      "area": "provider_accounting",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_PROVIDER_ACCOUNTING"
+    },
+    {
+      "id": "provider_attempt_journal",
+      "area": "provider_accounting",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_PROVIDER_ACCOUNTING"
+    },
+    {
+      "id": "provider_attempt_instrumentation",
+      "area": "provider_accounting",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_PROVIDER_ACCOUNTING"
+    },
+    {
+      "id": "provider_attempt_reconciliation",
+      "area": "provider_accounting",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_PROVIDER_ACCOUNTING"
+    },
+    {
+      "id": "study_effective_settings_v2",
+      "area": "study",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_STUDY"
+    },
+    {
+      "id": "study_curriculum_binding",
+      "area": "study",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_STUDY"
+    },
+    {
+      "id": "study_session_composition",
+      "area": "study",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_STUDY"
+    },
+    {
+      "id": "study_adult_review_worker",
+      "area": "study",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_STUDY"
+    },
+    {
+      "id": "study_worker_schedule",
+      "area": "study",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_STUDY"
+    },
+    {
+      "id": "study_production_mount",
+      "area": "study",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_STUDY"
+    },
+    {
+      "id": "study_telemetry",
+      "area": "study",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_STUDY"
+    },
+    {
+      "id": "study_accounting",
+      "area": "study",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_PROVIDER_ACCOUNTING"
+    },
+    {
+      "id": "curriculum_release_registry",
+      "area": "curriculum",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "curriculum_authoring",
+      "area": "curriculum",
+      "applicability": "not_applicable",
+      "notApplicableReason": "READ_ONLY_CURRICULUM_STUDIO_OUT_OF_SCOPE",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "curriculum_validation",
+      "area": "curriculum",
+      "applicability": "required",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    },
+    {
+      "id": "curriculum_publish_pipeline",
+      "area": "curriculum",
+      "applicability": "not_applicable",
+      "notApplicableReason": "READ_ONLY_CURRICULUM_STUDIO_OUT_OF_SCOPE",
+      "blockerClassification": "BLOCKED_BY_LOCAL_INTEGRATION"
+    }
+  ]
+}

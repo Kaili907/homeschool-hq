@@ -10,7 +10,8 @@ import { createStudyAdultReviewHealthHandler } from '../../study-adult-review-he
 import { createStudyParentNotificationsHandler } from '../../study-parent-notifications.js'
 
 const NOW = new Date('2026-08-01T12:00:00.000Z')
-const DELIVERY_KEY = `study-safety-delivery:${'a'.repeat(64)}`
+const DELIVERY_KEY = `delivery:${'a'.repeat(64)}`
+const ROUTE_REF = `route:${'b'.repeat(64)}`
 const CLAIM = Object.freeze({
   claimId: 'claim:1',
   deliveryId: 'job:1',
@@ -18,8 +19,8 @@ const CLAIM = Object.freeze({
   proposalId: 'proposal:1',
   householdId: 'household:1',
   studentId: 'student:1',
-  recipientRef: 'recipient:1',
-  routeRef: 'in-app-route:1',
+  recipientRef: `recipient:${'c'.repeat(64)}`,
+  routeRef: ROUTE_REF,
   idempotencyKey: DELIVERY_KEY,
   templateCode: 'study-safety-adult-review-v1',
   attemptId: 'attempt:1',
@@ -240,8 +241,8 @@ describe('credential-bound adult-review worker', () => {
   it.each([
     ['wrong job', { jobId: 'job:other' }],
     ['wrong attempt', { attemptId: 'attempt:other' }],
-    ['wrong route', { routeRef: 'in-app-route:other' }],
-    ['wrong recipient', { recipientRef: 'recipient:other' }],
+    ['wrong route', { routeRef: `route:${'c'.repeat(64)}` }],
+    ['wrong recipient', { recipientRef: `recipient:${'d'.repeat(64)}` }],
     ['wrong household', { householdId: 'household:other' }],
     ['wrong student', { studentId: 'student:other' }],
     ['wrong provider version', { providerConfigVersion: 'in-app-config-v0' }],
@@ -293,8 +294,9 @@ describe('credential-bound adult-review worker', () => {
 })
 
 describe('adult-review HTTP boundaries', () => {
-  it('supports authenticated scheduled invocation and minimized health', async () => {
+  it('supports an authorized manual invocation and minimized health', async () => {
     const runWorker = vi.fn(async () => ({ claimed: 2, delivered: 1, indeterminate: 1, failed: 0 }))
+    const recordRun = vi.fn(async () => ({ recorded: true, replayed: false }))
     const handler = createStudyAdultReviewWorkerHandler({
       worker: { ready: async () => ({ ready: true }), run: runWorker },
       workerAuthorization: readyPort({
@@ -304,21 +306,39 @@ describe('adult-review HTTP boundaries', () => {
           workerCredential: 'opaque-worker-credential-0000000000000001',
         }),
       }),
+      runEvidence: readyPort({ isDurable: true, record: recordRun }),
+      createRunId: () => '00000000-0000-4000-8000-000000000101',
+      now: vi.fn()
+        .mockReturnValueOnce(new Date('2026-08-10T12:00:00.000Z'))
+        .mockReturnValueOnce(new Date('2026-08-10T12:00:01.000Z')),
     })
     const response = await handler({
       httpMethod: 'POST',
       path: '/.netlify/functions/study-adult-review-worker',
-      headers: { 'x-nf-event': 'schedule' },
+      headers: { 'content-type': 'application/json', 'x-nf-event': 'schedule' },
+      body: JSON.stringify({ schemaVersion: 2, action: 'process-pending' }),
     })
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body)).toEqual({
       status: 'processed', claimed: 2, delivered: 1, indeterminate: 1, failed: 0,
     })
     expect(runWorker).toHaveBeenCalledWith({
-      trigger: 'scheduled',
+      trigger: 'manual',
       workerCredential: 'opaque-worker-credential-0000000000000001',
       limit: 10,
     }, { limit: 10 })
+    expect(recordRun).toHaveBeenCalledWith({
+      runId: '00000000-0000-4000-8000-000000000101',
+      startedAt: '2026-08-10T12:00:00.000Z',
+      completedAt: '2026-08-10T12:00:01.000Z',
+      resultCategory: 'processed',
+      claimedCount: 2,
+      processedCount: 2,
+      retryableFailureCount: 0,
+      terminalFailureCount: 0,
+      invocationKind: 'manual',
+      reasonCode: 'completed',
+    })
     const health = createStudyAdultReviewHealthHandler({
       readiness: readyPort({
         isDurable: true,
@@ -345,7 +365,8 @@ describe('adult-review HTTP boundaries', () => {
     const response = await handler({
       httpMethod: 'POST',
       path: '/.netlify/functions/study-adult-review-worker',
-      headers: { 'x-nf-event': 'schedule' },
+      headers: { 'content-type': 'application/json', 'x-nf-event': 'schedule' },
+      body: JSON.stringify({ schemaVersion: 2, action: 'process-pending' }),
     })
     expect(response.statusCode).toBe(403)
     expect(runWorker).not.toHaveBeenCalled()
@@ -353,6 +374,59 @@ describe('adult-review HTTP boundaries', () => {
       eventName: 'study.adult_review.unauthorized_worker',
       reasonCode: 'worker-auth-failed',
     })
+  })
+
+  it.each([
+    ['no_work', { claimed: 0, delivered: 0, indeterminate: 0, failed: 0 }, 200],
+    ['processed', { claimed: 3, delivered: 2, indeterminate: 1, failed: 0 }, 200],
+    ['partial_with_retryable_failures', { claimed: 3, delivered: 1, indeterminate: 0, failed: 1 }, 503],
+    ['failed', { claimed: 2, delivered: 0, indeterminate: 0, failed: 2 }, 503],
+  ])('returns bounded %s worker results', async (status, result, statusCode) => {
+    const handler = createStudyAdultReviewWorkerHandler({
+      worker: { ready: async () => ({ ready: true }), run: vi.fn(async () => result) },
+      workerAuthorization: readyPort({
+        isDurable: true,
+        credentialForEvent: async () => ({
+          authorized: true,
+          workerCredential: 'opaque-worker-credential-0000000000000001',
+        }),
+      }),
+    })
+    const response = await handler({
+      httpMethod: 'POST',
+      path: '/.netlify/functions/study-adult-review-worker',
+      headers: { 'content-type': 'application/json', 'x-nf-event': 'schedule' },
+      body: JSON.stringify({ schemaVersion: 2, action: 'process-pending', limit: 3 }),
+    })
+    expect(response.statusCode).toBe(statusCode)
+    expect(JSON.parse(response.body)).toEqual({ status, ...result })
+  })
+
+  it.each([
+    ['durable_port_unavailable', 503, 'unavailable'],
+    ['raw private database exception with learner work', 500, 'failed'],
+  ])('returns a privacy-safe systemic result for %s', async (message, statusCode, status) => {
+    const handler = createStudyAdultReviewWorkerHandler({
+      worker: { ready: async () => ({ ready: true }), run: vi.fn(async () => { throw new Error(message) }) },
+      workerAuthorization: readyPort({
+        isDurable: true,
+        credentialForEvent: async () => ({
+          authorized: true,
+          workerCredential: 'opaque-worker-credential-0000000000000001',
+        }),
+      }),
+    })
+    const response = await handler({
+      httpMethod: 'POST',
+      path: '/.netlify/functions/study-adult-review-worker',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ schemaVersion: 2, action: 'process-pending' }),
+    })
+    expect(response.statusCode).toBe(statusCode)
+    expect(JSON.parse(response.body)).toEqual({
+      status, claimed: 0, delivered: 0, indeterminate: 0, failed: 0,
+    })
+    expect(response.body).not.toContain(message)
   })
 
   it('requires durable parent-read limiting before guardian projection access', async () => {

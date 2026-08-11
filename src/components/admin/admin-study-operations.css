@@ -1,0 +1,145 @@
+.study-ops {
+  --study-ops-ink: #17231f;
+  --study-ops-muted: #63716b;
+  --study-ops-line: #dfe6e2;
+  --study-ops-green: #145c46;
+  --study-ops-amber: #8a5a16;
+  --study-ops-red: #a23832;
+  display: grid;
+  gap: 1.5rem;
+  color: var(--study-ops-ink);
+}
+
+.study-ops__summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(260px, .75fr);
+  gap: 1.5rem;
+  align-items: center;
+  border: 1px solid var(--study-ops-line);
+  border-radius: .75rem;
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+  background: linear-gradient(135deg, #fff 0%, #f4f8f6 100%);
+  box-shadow: 0 8px 24px rgba(19, 38, 31, .04);
+}
+
+.study-ops__eyebrow {
+  margin: 0 0 .3rem;
+  color: var(--study-ops-green);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.study-ops__summary h2,
+.study-ops__group h2,
+.study-ops-state h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+}
+
+.study-ops__summary h2 { font-size: clamp(1.55rem, 3vw, 2.1rem); }
+.study-ops__summary > div > p:last-child {
+  max-width: 680px;
+  margin: .65rem 0 0;
+  color: var(--study-ops-muted);
+  font-size: .8rem;
+  line-height: 1.6;
+}
+
+.study-ops__score {
+  display: grid;
+  justify-items: start;
+  gap: .5rem;
+  border-left: 1px solid var(--study-ops-line);
+  padding-left: 1.4rem;
+}
+
+.study-ops__score strong { font-size: .88rem; }
+.study-ops__score > span:last-child { color: var(--study-ops-muted); font-size: .66rem; line-height: 1.4; }
+
+.study-ops__banner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem .65rem;
+  border: 1px solid #e1bd7d;
+  border-radius: .58rem;
+  padding: .82rem 1rem;
+  background: #fbefd9;
+  color: #694613;
+  font-size: .76rem;
+}
+
+.study-ops__banner--blocked { border-color: #d9a49f; background: #fae8e5; color: #7d2d28; }
+.study-ops__group { display: grid; gap: .75rem; }
+.study-ops__group h2 { font-size: 1.18rem; }
+.study-ops__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
+
+.study-ops__card {
+  display: grid;
+  min-width: 0;
+  gap: .9rem;
+  border: 1px solid var(--study-ops-line);
+  border-top: 3px solid #87958f;
+  border-radius: .68rem;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 7px 20px rgba(19, 38, 31, .035);
+}
+
+.study-ops__card--ready { border-top-color: #3b8a6d; }
+.study-ops__card--partial,
+.study-ops__card--manual_review { border-top-color: #c28a37; }
+.study-ops__card--blocked { border-top-color: #bb514a; }
+.study-ops__card-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.study-ops__card h3 { margin: 0; font-size: .84rem; line-height: 1.35; }
+.study-ops__reason { min-height: 3.35rem; margin: 0; color: var(--study-ops-muted); font-size: .7rem; line-height: 1.55; }
+.study-ops__card dl { display: grid; grid-template-columns: 1fr 1fr; margin: 0; border-top: 1px solid var(--study-ops-line); }
+.study-ops__card dl > div { min-width: 0; padding: .72rem .5rem 0 0; }
+.study-ops__card dt { color: var(--study-ops-muted); font-size: .61rem; }
+.study-ops__card dd { overflow-wrap: anywhere; margin: .22rem 0 0; font-size: .68rem; font-weight: 700; }
+
+.study-ops__action { display: flex; gap: .55rem; align-items: flex-start; border-radius: .45rem; padding: .7rem; background: #f4f7f5; }
+.study-ops__action > span { color: var(--study-ops-green); font-weight: 800; }
+.study-ops__action p { margin: 0; color: var(--study-ops-muted); font-size: .66rem; line-height: 1.45; }
+.study-ops__action strong { display: block; margin-bottom: .13rem; color: var(--study-ops-ink); }
+
+.study-ops__badge { display: inline-flex; flex: 0 0 auto; align-items: center; gap: .35rem; color: #586760; font-size: .66rem; font-weight: 800; white-space: nowrap; }
+.study-ops__badge > span { display: inline-grid; width: 1.18rem; height: 1.18rem; place-items: center; border-radius: 50%; background: #e7edeb; }
+.study-ops__badge--ready { color: var(--study-ops-green); }
+.study-ops__badge--ready > span { background: #e4f0eb; }
+.study-ops__badge--partial,
+.study-ops__badge--manual_review { color: var(--study-ops-amber); }
+.study-ops__badge--partial > span,
+.study-ops__badge--manual_review > span { background: #fbefd9; }
+.study-ops__badge--blocked { color: var(--study-ops-red); }
+.study-ops__badge--blocked > span { background: #fae8e5; }
+.study-ops__badge--unknown { color: #2e6174; }
+.study-ops__badge--unknown > span { background: #e7f0f3; }
+
+.study-ops-state { max-width: 570px; margin: 10vh auto; padding: 2rem; text-align: center; }
+.study-ops-state p { color: var(--study-ops-muted); line-height: 1.6; }
+.study-ops-state button { min-width: 2.75rem; min-height: 2.75rem; border: 0; border-radius: .42rem; padding: .65rem .9rem; background: var(--study-ops-green); color: white; font: inherit; font-weight: 750; cursor: pointer; }
+.study-ops-state button:focus-visible { outline: 3px solid #4d9c80; outline-offset: 3px; }
+.study-ops-state__glyph { display: inline-grid; width: 2.25rem; height: 2.25rem; margin-bottom: .6rem; place-items: center; border: 1px solid #80978e; border-radius: 50%; }
+.study-ops__skeleton { min-height: 230px; border-radius: .68rem; background: linear-gradient(90deg, #e8eeeb, #f4f7f5, #e8eeeb); background-size: 200% 100%; animation: study-ops-shimmer 1.3s linear infinite; }
+.study-ops__skeleton--summary { min-height: 165px; }
+.study-ops__sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+@keyframes study-ops-shimmer { to { background-position: -200% 0; } }
+
+@media (max-width: 1050px) {
+  .study-ops__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 680px) {
+  .study-ops__summary { grid-template-columns: 1fr; }
+  .study-ops__score { border-top: 1px solid var(--study-ops-line); border-left: 0; padding-top: 1rem; padding-left: 0; }
+  .study-ops__grid { grid-template-columns: 1fr; }
+  .study-ops__card dl { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .study-ops__skeleton { animation: none; }
+}

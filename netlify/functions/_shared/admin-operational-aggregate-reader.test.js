@@ -29,7 +29,7 @@ describe('Admin operational aggregate reader', () => {
     })
   })
 
-  it('preserves the fail-closed aggregate group-limit signal without exposing database detail', async () => {
+  it('maps aggregate group overflow to incomplete evidence without exposing database detail', async () => {
     const rpc = vi.fn(() => ({
       abortSignal: vi.fn(async () => ({
         data: null,
@@ -40,11 +40,11 @@ describe('Admin operational aggregate reader', () => {
     await expect(reader.aggregate({
       start: '2026-08-08T00:00:00.000Z',
       endExclusive: '2026-08-09T00:00:00.000Z',
-      capability: 'engines:read',
+      capability: 'health:read',
     })).rejects.toEqual(expect.objectContaining({
       name: 'AdminOperationalAggregateReadError',
-      code: 'source_group_limit',
-      message: 'source_group_limit',
+      code: 'source_group_incomplete',
+      message: 'source_group_incomplete',
     }))
     await expect(Promise.reject(new AdminOperationalAggregateReadError('source_unavailable')))
       .rejects.not.toHaveProperty('message', expect.stringContaining('private detail'))

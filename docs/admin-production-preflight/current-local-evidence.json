@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "contractId": "admin-production-activation-r3",
+  "scope": "local-only",
+  "gates": {
+    "local_integration_reconciled": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "docs/admin-production-preflight/windows-admin-delta-reconciliation.json",
+        "docs/study-engine-final-production/migration-manifest.json"
+      ]
+    },
+    "admin_authorization_foundation": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "supabase/migrations/20260808120000_academy_admin_authorization.sql",
+        "netlify/functions/_shared/admin-authorization.js"
+      ]
+    },
+    "admin_audit": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "supabase/migrations/20260809130000_academy_admin_audit_foundation.sql",
+        "netlify/functions/_shared/admin-audit-reader.js"
+      ]
+    },
+    "operational_telemetry": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "supabase/migrations/20260809120000_academy_operational_telemetry_foundation.sql",
+        "src/telemetry/operationalTelemetry.ts"
+      ]
+    },
+    "engine_performance_scalable_aggregate": {
+      "status": "BLOCKING",
+      "reasonCode": "SCALABLE_AGGREGATE_READER_NOT_ADOPTED",
+      "evidenceRefs": ["netlify/functions/_shared/admin-engine-performance-reader.js"]
+    },
+    "system_health_scalable_aggregate": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "netlify/functions/_shared/admin-operational-aggregate-reader.js",
+        "netlify/functions/_shared/admin-health-source.js",
+        "docs/admin-system-health.md"
+      ]
+    },
+    "admin_configuration_runtime_enforcement": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "docs/admin-configuration-runtime.md",
+        "netlify/functions/_shared/effective-configuration.js",
+        "supabase/migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql"
+      ]
+    },
+    "provider_pricing_architecture": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "docs/admin-console/cost-accounting.md",
+        "supabase/migrations/20260808122000_academy_provider_usage_cost_ledger.sql"
+      ]
+    },
+    "provider_pricing_account_configuration": {
+      "status": "BLOCKING",
+      "reasonCode": "ACCOUNT_PRICING_NOT_VERIFIED",
+      "evidenceRefs": ["docs/academy-ai-cost-accounting.md"]
+    },
+    "costs_contract_version_compatibility": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "docs/admin-console/cost-accounting.md",
+        "src/admin/contracts.ts"
+      ]
+    },
+    "provider_cost_ledger_operational": {
+      "status": "BLOCKING",
+      "reasonCode": "PRODUCTION_LEDGER_OPERATION_NOT_VERIFIED",
+      "evidenceRefs": ["docs/academy-ai-cost-accounting.md"]
+    },
+    "provider_attempt_journal": {
+      "status": "BLOCKING",
+      "reasonCode": "PROVIDER_ATTEMPT_JOURNAL_MISSING",
+      "evidenceRefs": ["docs/tel-ai-gateways.md"]
+    },
+    "provider_attempt_instrumentation": {
+      "status": "BLOCKING",
+      "reasonCode": "ATTEMPT_INSTRUMENTATION_INCOMPLETE",
+      "evidenceRefs": ["docs/tel-ai-gateways.md"]
+    },
+    "provider_attempt_reconciliation": {
+      "status": "BLOCKING",
+      "reasonCode": "ATTEMPT_RECONCILIATION_NOT_PROVEN",
+      "evidenceRefs": ["docs/admin-console/cost-accounting.md"]
+    },
+    "study_effective_settings_v2": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "docs/study-effective-settings-v2.md",
+        "supabase/migrations/20260810120200_academy_study_effective_settings_v2.sql"
+      ]
+    },
+    "study_curriculum_binding": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "supabase/migrations/20260810150000_academy_study_curriculum_binding.sql",
+        "src/study/persistence/SupabaseStudyPersistenceAdapter.ts"
+      ]
+    },
+    "study_session_composition": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "src/App.tsx",
+        "src/study/production/verifiedRuntimeAdapter.ts"
+      ]
+    },
+    "study_adult_review_worker": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "netlify/functions/_shared/study-adult-review-operations/composition.js",
+        "netlify/functions/_shared/study-adult-review-operations/run-evidence.js",
+        "supabase/migrations/20260810159000_academy_study_worker_run_evidence.sql"
+      ]
+    },
+    "study_worker_schedule": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "netlify.toml",
+        "netlify/functions/study-adult-review-scheduled-worker.js",
+        "netlify/functions/_shared/study-adult-review-operations/schedule.js"
+      ]
+    },
+    "study_production_mount": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "src/App.tsx",
+        "src/study/production/verifiedRuntimeAdapter.ts"
+      ]
+    },
+    "study_telemetry": {
+      "status": "BLOCKING",
+      "reasonCode": "STUDY_PRODUCTION_TELEMETRY_INCOMPLETE",
+      "evidenceRefs": ["docs/tel-ai-gateways.md"]
+    },
+    "study_accounting": {
+      "status": "BLOCKING",
+      "reasonCode": "STUDY_PROVIDER_ACCOUNTING_INCOMPLETE",
+      "evidenceRefs": ["docs/tel-ai-gateways.md"]
+    },
+    "curriculum_release_registry": {
+      "status": "BLOCKING",
+      "reasonCode": "CURRICULUM_RELEASE_REGISTRY_MISSING",
+      "evidenceRefs": ["docs/admin-console/curriculum-versioning.md"]
+    },
+    "curriculum_validation": {
+      "status": "PASS",
+      "evidenceRefs": [
+        "src/admin/curriculum-validation/model.ts",
+        "src/components/admin/CurriculumValidationDashboard.tsx"
+      ]
+    }
+  }
+}

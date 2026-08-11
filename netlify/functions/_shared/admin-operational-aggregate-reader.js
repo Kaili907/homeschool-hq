@@ -63,7 +63,7 @@ export function createAdminOperationalAggregateReader({ env, fetchImpl, client }
         if (signal.aborted) throw new AdminOperationalAggregateReadError('source_timeout')
         if (error) {
           throw new AdminOperationalAggregateReadError(
-            isAggregateGroupLimit(error) ? 'source_group_limit' : 'source_unavailable',
+            isAggregateGroupLimit(error) ? 'source_group_incomplete' : 'source_unavailable',
           )
         }
         return data

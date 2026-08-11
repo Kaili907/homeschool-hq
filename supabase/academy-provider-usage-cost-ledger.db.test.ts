@@ -14,7 +14,8 @@ async function createDatabase() {
     create role authenticated nologin;
     create role service_role nologin bypassrls;
     create schema auth authorization postgres;
-    create function auth.uid() returns uuid language sql stable set search_path = pg_catalog as $$
+    create or replace function auth.uid()
+    returns uuid language sql stable set search_path = pg_catalog as $$
       select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid
     $$;
     create table auth.users (id uuid primary key);
@@ -23,11 +24,22 @@ async function createDatabase() {
       id uuid primary key,
       household_id uuid not null references public.academy_households (id)
     );
+    create table public.academy_operational_events (
+      event_id uuid primary key default gen_random_uuid(),
+      occurred_at timestamptz not null,
+      expires_at timestamptz not null,
+      engine text not null,
+      event_type text not null,
+      metadata jsonb not null
+    );
+    grant usage on schema auth to anon, authenticated, service_role;
+    grant execute on function auth.uid() to anon, authenticated, service_role;
     insert into auth.users (id) values ('${ACCOUNT_ID}');
     insert into public.academy_households (id, status) values ('${HOUSEHOLD_ID}', 'active');
   `)
   for (const name of [
     '20260808122000_academy_provider_usage_cost_ledger.sql',
+    '20260809121000_academy_provider_usage_cost_aggregate.sql',
     '20260810131000_academy_provider_attempt_journal.sql',
     '20260810151000_academy_study_safety_provider_accounting.sql',
   ]) {
@@ -166,6 +178,34 @@ async function components(database: PGlite, executionKey: string) {
     [executionKey],
   )
   return result.rows
+}
+
+type DatabaseRole = 'anon' | 'authenticated' | 'service_role'
+
+async function asRole<T>(
+  database: PGlite,
+  role: DatabaseRole,
+  userId: string | null,
+  operation: () => Promise<T>,
+): Promise<T> {
+  await database.query(`select set_config('request.jwt.claim.sub', $1, false)`, [userId ?? ''])
+  await database.query(`select set_config('request.jwt.claim.role', $1, false)`, [role])
+  await database.exec(`set role ${role}`)
+  try {
+    return await operation()
+  } finally {
+    await database.exec('reset role')
+    await database.query(`select set_config('request.jwt.claim.sub', '', false)`)
+    await database.query(`select set_config('request.jwt.claim.role', '', false)`)
+  }
+}
+
+async function aggregateAsService(database: PGlite, parameters: unknown[]) {
+  return asRole(database, 'service_role', null, () =>
+    database.query<{ aggregate: Record<string, any> }>(
+      `select public.academy_aggregate_provider_usage_costs_v1($1, $2, $3, $4) as aggregate`,
+      parameters,
+    ))
 }
 
 beforeEach(createDatabase)
@@ -443,5 +483,203 @@ describe('Academy provider usage cost ledger v2', () => {
     expect(String((await ledger(database, 'rounding')).cost_micros)).toBe('1')
     await expect(database.exec(`update public.academy_provider_prices set price_micros = 2`)).rejects.toThrow(/immutable/)
     await expect(database.exec(`delete from public.academy_provider_pricing_catalogs`)).rejects.toThrow(/immutable/)
+  })
+
+  it('returns exact complete summaries and every fixed Costs breakdown from database aggregates', async () => {
+    const database = databases[0]
+    await insertCatalog(database)
+    await insertRate(database, { unit: 'input_token', priceMicros: 2, unitQuantity: 1 })
+    await insertRate(database, { unit: 'output_token', priceMicros: 3, unitQuantity: 1 })
+    await insertRate(database, { unit: 'cached_input_read_token', priceMicros: 5, unitQuantity: 1 })
+    await insertRate(database, { unit: 'cached_input_write_token', priceMicros: 7, unitQuantity: 1 })
+    await insertRate(database, { unit: 'request', priceMicros: 11, unitQuantity: 1 })
+    await insertRate(database, {
+      product: 'claude-haiku-4-5', model: 'claude-haiku-4-5', tier: 'haiku',
+      unit: 'request', priceMicros: 13, unitQuantity: 1,
+    })
+    await insertRate(database, {
+      provider: 'elevenlabs', tier: null, unit: 'tts_character',
+      priceMicros: 2, unitQuantity: 1,
+    })
+    await insertRate(database, {
+      provider: 'elevenlabs', tier: null, unit: 'request',
+      priceMicros: 3, unitQuantity: 1,
+    })
+
+    await record(database, {
+      executionKey: 'aggregate-sonnet', inputTokens: 1, outputTokens: 1,
+      cachedInputReadTokens: 1, cachedInputWriteTokens: 1,
+    })
+    await record(database, {
+      executionKey: 'aggregate-haiku', product: 'claude-haiku-4-5',
+      model: 'claude-haiku-4-5', tier: 'haiku', engine: 'jarvis',
+    })
+    await record(database, {
+      executionKey: 'aggregate-tts', provider: 'elevenlabs', engine: 'tts',
+      ttsCharacters: 10,
+    })
+    await record(database, {
+      executionKey: 'aggregate-unavailable', householdRef: null,
+      householdAttribution: 'ambiguous', inputTokens: null, outputTokens: null,
+      cachedInputReadTokens: null, cachedInputWriteTokens: null,
+      billingDisposition: 'unknown', result: 'timeout', reason: 'upstream_timeout',
+    })
+    await record(database, {
+      executionKey: 'aggregate-reconciled', inputTokens: null, outputTokens: null,
+      cachedInputReadTokens: null, cachedInputWriteTokens: null,
+      billingDisposition: 'unknown', result: 'timeout', reason: 'upstream_timeout',
+    })
+    await database.exec(`update public.academy_provider_usage_ledger set
+      cost_kind = 'reconciled', cost_micros = 31, billing_disposition = 'billable',
+      reconciliation_ref = 'invoice-line-test'
+      where execution_key = 'aggregate-reconciled'`)
+    await database.exec(`insert into public.academy_operational_events
+      (occurred_at, expires_at, engine, event_type, metadata)
+      values (
+        '2026-06-15T12:05:00Z', '2027-01-01T00:00:00Z', 'gateway', 'gateway.request',
+        '{"reason_code":"accounting_unavailable","failure_stage":"accounting_persistence"}'::jsonb
+      )`)
+
+    const response = await aggregateAsService(database, [
+      '2026-06-01T00:00:00Z', '2026-07-01T00:00:00Z', 'costs:read', 384,
+    ])
+    const aggregate = response.rows[0].aggregate
+    const summary = aggregate.groups.find((item: any) => item.dimension === 'summary')
+    expect(aggregate).toMatchObject({
+      schemaVersion: 1,
+      completeness: {
+        queryCoverage: 'complete', providerTrafficCoverage: 'coverage_unverified',
+        groupLimit: 384,
+      },
+      accountingGapEvidence: { observedCount: '1', retentionCoverage: 'retention_limited' },
+      recordsIncluded: '5',
+    })
+    expect(summary).toMatchObject({
+      records: '5',
+      requests: { total: '5', ai: '4', tts: '1' },
+      usage: {
+        inputTokens: { total: '1', known: '2', unavailable: '2' },
+        outputTokens: { total: '1', known: '2', unavailable: '2' },
+        cachedInputReadTokens: { total: '1', known: '2', unavailable: '2' },
+        cachedInputWriteTokens: { total: '1', known: '2', unavailable: '2' },
+        ttsCharacters: { total: '10', known: '1', unavailable: '0' },
+      },
+      cost: {
+        calculated: { micros: '64', known: '3', unavailable: '2' },
+        reconciledMicros: '31', unavailableCount: '1',
+      },
+      counts: {
+        billingDisposition: { billable: '4', notBillable: '0', unknown: '1' },
+        costKind: { calculated: '3', reconciled: '1', unavailable: '1' },
+        attribution: { resolved: '4', ambiguous: '1', unresolved: '0' },
+      },
+    })
+    expect(new Set(aggregate.groups.map((item: any) => item.dimension))).toEqual(new Set([
+      'summary', 'day', 'engine', 'provider', 'logical_tier',
+      'cost_kind', 'billing_disposition',
+    ]))
+    expect(JSON.stringify(aggregate)).not.toMatch(
+      /executionKey|usageId|accountRef|householdRef|learnerRef|providerModelId|costComponents|prompt|response|audio/i,
+    )
+  })
+
+  it('aggregates all 501 rows instead of treating the raw-reader ceiling as partial', async () => {
+    const database = databases[0]
+    await insertCatalog(database)
+    await insertRate(database, { unit: 'request', priceMicros: 1, unitQuantity: 1 })
+    await asRole(database, 'service_role', null, () => database.query(`
+      select public.academy_record_provider_usage(
+        'aggregate-bulk-' || series::text,
+        '2026-06-20T00:00:00Z'::timestamptz + series * interval '1 second',
+        '${ACCOUNT_ID}'::uuid, '${HOUSEHOLD_ID}'::uuid, 'resolved',
+        'academy-build-1', 'tutor-engine-1', null,
+        'tutor', 'anthropic', 'claude-sonnet-4-6', 'claude-sonnet-4-6', 'sonnet',
+        0, 0, 0, 0, null, 25, 'success', null, 'billable'
+      )
+      from generate_series(1, 501) as series
+    `))
+    const response = await aggregateAsService(database, [
+      '2026-06-20T00:00:00Z', '2026-06-21T00:00:00Z', 'costs:read', 384,
+    ])
+    const summary = response.rows[0].aggregate.groups.find(
+      (item: any) => item.dimension === 'summary',
+    )
+    expect(response.rows[0].aggregate.completeness.queryCoverage).toBe('complete')
+    expect(summary).toMatchObject({
+      records: '501', requests: { total: '501', ai: '501', tts: '0' },
+      cost: { calculated: { micros: '501', known: '501', unavailable: '0' } },
+    })
+  })
+
+  it('keeps summed IntegerMicros exact beyond JavaScript safe integers', async () => {
+    const database = databases[0]
+    await insertCatalog(database)
+    await insertRate(database, {
+      unit: 'input_token', priceMicros: 1_000_000_000, unitQuantity: 1,
+    })
+    await record(database, { executionKey: 'aggregate-large-1', inputTokens: 1_000_000_000 })
+    await record(database, { executionKey: 'aggregate-large-2', inputTokens: 1_000_000_000 })
+    const response = await aggregateAsService(database, [
+      '2026-06-01T00:00:00Z', '2026-07-01T00:00:00Z', 'costs:read', 384,
+    ])
+    const summary = response.rows[0].aggregate.groups.find(
+      (item: any) => item.dimension === 'summary',
+    )
+    expect(summary.cost.calculated.micros).toBe('2000000000000000000')
+    expect(typeof summary.cost.calculated.micros).toBe('string')
+  })
+
+  it('fails closed for browser roles, wrong capability, invalid ranges, and group ceilings', async () => {
+    const database = databases[0]
+    const todayStart = new Date()
+    todayStart.setUTCHours(0, 0, 0, 0)
+    const tomorrow = new Date(todayStart.getTime() + 86_400_000)
+    const dayAfterTomorrow = new Date(todayStart.getTime() + 2 * 86_400_000)
+    await record(database, { executionKey: 'aggregate-bounds', billingDisposition: 'not_billable' })
+    await expect(asRole(database, 'authenticated', ACCOUNT_ID, () =>
+      database.query(`select public.academy_aggregate_provider_usage_costs_v1(
+        '2026-06-01', '2026-07-01', 'costs:read', 384
+      )`))).rejects.toThrow()
+    await expect(aggregateAsService(database, [
+      '2026-06-01', '2026-07-01', 'health:read', 384,
+    ])).rejects.toThrow(/PROVIDER_COST_AGGREGATE_ADMIN_REQUIRED/)
+    await expect(aggregateAsService(database, [
+      todayStart.toISOString(), tomorrow.toISOString(), 'costs:read', 384,
+    ])).resolves.toBeDefined()
+    await expect(aggregateAsService(database, [
+      todayStart.toISOString(), dayAfterTomorrow.toISOString(), 'costs:read', 384,
+    ])).rejects.toThrow(/PROVIDER_COST_AGGREGATE_RANGE_INVALID/)
+    await expect(aggregateAsService(database, [
+      '2025-08-01', '2026-08-02', 'costs:read', 384,
+    ])).resolves.toBeDefined()
+    await expect(aggregateAsService(database, [
+      '2025-08-01', '2026-08-03', 'costs:read', 384,
+    ])).rejects.toThrow(/PROVIDER_COST_AGGREGATE_RANGE_INVALID/)
+    await expect(aggregateAsService(database, [
+      '2026-07-01', '2026-06-01', 'costs:read', 384,
+    ])).rejects.toThrow(/PROVIDER_COST_AGGREGATE_RANGE_INVALID/)
+    await expect(aggregateAsService(database, [
+      '2026-06-01', '2026-07-01', 'costs:read', 1,
+    ])).rejects.toThrow(/PROVIDER_COST_AGGREGATE_GROUP_LIMIT/)
+  })
+
+  it('reports retained accounting-gap evidence without fabricating a cost record', async () => {
+    const database = databases[0]
+    await database.exec(`insert into public.academy_operational_events
+      (occurred_at, expires_at, engine, event_type, metadata)
+      values (
+        '2026-08-01T12:00:00Z', '2027-01-01T00:00:00Z', 'gateway', 'gateway.request',
+        '{"reason_code":"accounting_unavailable","failure_stage":"accounting_persistence"}'::jsonb
+      )`)
+    const response = await aggregateAsService(database, [
+      '2026-08-01T00:00:00Z', '2026-08-02T00:00:00Z', 'costs:read', 384,
+    ])
+    const aggregate = response.rows[0].aggregate
+    const summary = aggregate.groups.find((item: any) => item.dimension === 'summary')
+    expect(aggregate.accountingGapEvidence.observedCount).toBe('1')
+    expect(aggregate.recordsIncluded).toBe('0')
+    expect(summary.requests.total).toBe('0')
+    expect(summary.cost.calculated.micros).toBe('0')
+    expect(summary.cost.unavailableCount).toBe('0')
   })
 })

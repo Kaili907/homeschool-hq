@@ -267,7 +267,7 @@ describe('trusted Admin runtime configuration resolver', () => {
     const browser = projectEffectiveAdminConfiguration(saved, resolved)
 
     expect(browser.integrationStatus).toBe('pending_runtime_integration')
-    expect(browser.runtimeStatus).toBe('partial_runtime_enforcement')
+    expect(browser.runtimeStatus).toBe('runtime_enforced')
     expect(browser.settings[0]).toHaveProperty('value', true)
     expect(browser.settings[0]).toHaveProperty('runtime.effectiveValue', true)
     expect(Object.keys(browser.settings[0].runtime).sort()).toEqual([

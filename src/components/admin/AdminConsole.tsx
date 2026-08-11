@@ -32,6 +32,7 @@ const NAVIGATION: readonly { id: AdminSection; label: string; capabilities: read
   { id: 'engines', label: 'Engine Performance', capabilities: ['engines:read'] },
   { id: 'costs', label: 'AI & Costs', capabilities: ['costs:read'] },
   { id: 'system-health', label: 'System Health', capabilities: ['health:read'] },
+  { id: 'study-operations', label: 'Study Operations', capabilities: ['health:read'] },
   { id: 'incidents', label: 'Incident Explorer', capabilities: ['engines:read', 'audit:read', 'costs:read'] },
   { id: 'safety', label: 'Safety', capabilities: ['safety:read'] },
   { id: 'curriculum', label: 'Curriculum', capabilities: ['curriculum:read'] },
@@ -147,6 +148,8 @@ export function AdminShell({
 }) {
   const headingRef = useRef<HTMLHeadingElement>(null)
   const previousTitle = useRef<string | null>(null)
+  const activeNavigationRef = useRef<HTMLButtonElement>(null)
+  const navigationListRef = useRef<HTMLUListElement>(null)
   const activeLabel = NAVIGATION.find((item) => item.id === activeSection)?.label ?? title
   const visibleNavigation = NAVIGATION.filter((item) =>
     item.capabilities.some((capability) => authorization.capabilities.includes(capability)))
@@ -154,9 +157,25 @@ export function AdminShell({
     applyAdminRoutePresentation(title, document, headingRef.current, previousTitle.current !== null)
     previousTitle.current = title
   }, [title])
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const navigation = navigationListRef.current
+      const active = activeNavigationRef.current
+      if (!navigation || !active || navigation.scrollWidth <= navigation.clientWidth) return
+      const navigationRect = navigation.getBoundingClientRect()
+      const activeRect = active.getBoundingClientRect()
+      const focusOutlineClearance = 4
+      if (activeRect.left < navigationRect.left + focusOutlineClearance) {
+        navigation.scrollLeft -= navigationRect.left - activeRect.left + focusOutlineClearance
+      } else if (activeRect.right > navigationRect.right - focusOutlineClearance) {
+        navigation.scrollLeft += activeRect.right - navigationRect.right + focusOutlineClearance
+      }
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [activeSection])
   return (
     <div className="admin-shell">
-      <a className="admin-skip-link" href="#admin-main">Skip to {activeLabel.toLowerCase()}</a>
+      <a className="admin-skip-link" href="#admin-main">Skip to {title.toLowerCase()}</a>
       <aside className="admin-sidebar">
         <div className="admin-brand">
           <BrandMark />
@@ -164,11 +183,12 @@ export function AdminShell({
         </div>
         <nav aria-label="Admin sections">
           <p className="admin-nav-label">Workspace</p>
-          <ul>
+          <ul ref={navigationListRef}>
             {visibleNavigation.map((item) => (
               <li key={item.id}>
                 <button
                   type="button"
+                  ref={item.id === activeSection ? activeNavigationRef : undefined}
                   className={item.id === activeSection ? 'is-active' : ''}
                   aria-label={item.label}
                   aria-current={item.id === activeSection ? 'page' : undefined}
@@ -388,6 +408,8 @@ function Overview({ model }: { model: AdminOverviewModel }) {
             </p>
           )}
           <DomainStatus status={model.domainStatuses?.costs} />
+          <p className="admin-disclosure">Calculated values are usage-derived marginal provider cost for recorded provider attempts using verified effective-dated pricing terms. They do not represent reconciled provider-invoice economics.</p>
+          <p className="admin-disclosure">Overview does not establish aggregate query coverage, provider-traffic coverage, or accounting-gap evidence. Open AI &amp; Costs for those separate contract v3 signals.</p>
         </section>
       </div>
 
@@ -536,6 +558,7 @@ function NavIcon({ section }: { section: AdminSection }) {
   const icons: Record<AdminSection, string> = {
     attention: '!', overview: '⌂', learners: '◉', engines: '◇', costs: '✦', curriculum: '▤',
     safety: '◆', 'system-health': '⌁', incidents: '◎', configuration: '⚙', 'audit-log': '≡', access: '⌘', releases: '↑',
+    'study-operations': 'S',
   }
   return <span className="admin-nav-icon" aria-hidden="true">{icons[section]}</span>
 }

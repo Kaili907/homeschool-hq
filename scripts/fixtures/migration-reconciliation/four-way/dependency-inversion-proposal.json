@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "reconciliations": [
+    {
+      "filename": "20260810120000_provider_attempt_journal.sql",
+      "replacementVersion": "20260810120000"
+    },
+    {
+      "filename": "20260810120000_curriculum_draft_authoring.sql",
+      "replacementVersion": "20260810120300"
+    },
+    {
+      "filename": "20260810120000_study_effective_settings_v2.sql",
+      "replacementVersion": "20260810120200"
+    },
+    {
+      "filename": "20260810120000_provider_pricing_terms.sql",
+      "replacementVersion": "20260810120400"
+    }
+  ]
+}

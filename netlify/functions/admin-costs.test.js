@@ -21,12 +21,15 @@ function readyHandler(overrides = {}) {
       contractVersion: 3,
       generatedAt: '2026-08-10T18:30:00.000Z',
       currency: 'USD',
+      range: { kind: 'today' },
+      summary: { calculatedCost: { status: 'available', micros: '1', currency: 'USD' } },
     })) },
     monthlyCostAlertEvaluator: { read: vi.fn(async () => ({
       contractVersion: 1,
       status: 'normal',
       activeCritical: false,
     })) },
+    effectiveConfigurationReader: { read: vi.fn(async () => ({ status: 'unavailable' })) },
     ...overrides,
   })
 }
@@ -38,6 +41,8 @@ describe('authorized Admin costs endpoint', () => {
       contractVersion: 3,
       generatedAt: '2026-08-10T18:30:00.000Z',
       currency: 'USD',
+      range: { kind: 'today' },
+      summary: { calculatedCost: { status: 'available', micros: '1', currency: 'USD' } },
     })) }
     const monthlyCostAlertEvaluator = { read: vi.fn(async () => ({ status: 'warning' })) }
     const response = await readyHandler({ authorization, projection, monthlyCostAlertEvaluator })(event())
@@ -111,5 +116,55 @@ describe('authorized Admin costs endpoint', () => {
     const response = await handler(event())
     expect(response.statusCode).toBe(status)
     expect(JSON.parse(response.body)).toEqual({ error: { code } })
+  })
+
+  it('adds an exact monthly calculated-cost threshold classification', async () => {
+    const projection = {
+      read: vi.fn(async () => ({
+        contractVersion: 2,
+        currency: 'USD',
+        range: { kind: 'month' },
+        summary: {
+          calculatedCost: { status: 'available', micros: '9007199254740993', currency: 'USD' },
+        },
+      })),
+    }
+    const configuration = {
+      status: 'available',
+      revisions: {
+        'cost.warning.monthly_micros': '3',
+        'cost.critical.monthly_micros': '4',
+      },
+      costThresholds: {
+        warningMonthlyMicros: '10000000',
+        criticalMonthlyMicros: '25000000',
+      },
+    }
+    const response = await readyHandler({
+      projection,
+      effectiveConfigurationReader: { read: vi.fn(async () => configuration) },
+    })(event())
+    expect(JSON.parse(response.body).monthlyCostThreshold).toEqual({
+      status: 'critical',
+      reason: null,
+      basis: 'calculated_usage_estimate',
+      observedMicros: '9007199254740993',
+      warningMicros: '10000000',
+      criticalMicros: '25000000',
+      configurationRevisions: { warning: '3', critical: '4' },
+    })
+  })
+
+  it('keeps cost evidence readable while marking unavailable configuration explicitly', async () => {
+    const response = await readyHandler({
+      projection: { read: vi.fn(async () => ({
+        contractVersion: 2, currency: 'USD', range: { kind: 'month' },
+        summary: { calculatedCost: { status: 'available', micros: '1', currency: 'USD' } },
+      })) },
+    })(event())
+    expect(response.statusCode).toBe(200)
+    expect(JSON.parse(response.body).monthlyCostThreshold).toMatchObject({
+      status: 'unavailable', reason: 'configuration_unavailable',
+    })
   })
 })

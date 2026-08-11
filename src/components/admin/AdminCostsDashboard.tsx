@@ -1,5 +1,5 @@
 import { useEffect, useId, useState, type FormEvent } from 'react'
-import { formatUsdMicros } from '../../admin/overviewAdapter'
+import { isCanonicalIntegerMicros, type IntegerMicros } from '../../admin/contracts'
 import {
   ADMIN_COST_COMPLETENESS_MESSAGES,
   ADMIN_COST_ERROR_MESSAGES,
@@ -56,12 +56,21 @@ const PROVIDER_COVERAGE_DIMENSION_LABELS: Readonly<Record<string, string>> = {
   elevenlabs: 'ElevenLabs',
 }
 
+const QUERY_COVERAGE_LABELS: Readonly<Record<AdminCostsModel['source']['queryCoverage'], string>> = {
+  complete: 'Complete for stored ledger rows',
+}
+
+const PROVIDER_TRAFFIC_COVERAGE_LABELS: Readonly<Record<AdminCostsModel['source']['providerTrafficCoverage'], string>> = {
+  coverage_unverified: 'Unverified',
+}
+
 export interface AdminCostsDashboardProps {
   readonly authorized: boolean
   readonly state: AdminCostsReadState
   readonly range: AdminCostRangeSelection
   readonly onRangeChange: (range: AdminCostRangeSelection) => void
   readonly onRetry?: () => void
+  readonly onOpenProviderPricing?: () => void
   readonly today?: string
 }
 
@@ -71,6 +80,7 @@ export function AdminCostsDashboard({
   range,
   onRangeChange,
   onRetry,
+  onOpenProviderPricing,
   today = new Date().toISOString().slice(0, 10),
 }: AdminCostsDashboardProps) {
   if (!authorized || state.status === 'unauthorized') {
@@ -89,9 +99,10 @@ export function AdminCostsDashboard({
         <div>
           <p className="admin-costs-eyebrow">Provider usage ledger</p>
           <h2>AI &amp; Costs</h2>
-          <p>Read-only usage and provider-cost evidence. All calendar boundaries are UTC.</p>
+          <p>Usage-derived marginal provider cost for recorded provider attempts, calculated from verified effective-dated pricing terms. All calendar boundaries are UTC.</p>
         </div>
         <div className="admin-costs-header__controls">
+          {onOpenProviderPricing && <button className="admin-costs-pricing" type="button" onClick={onOpenProviderPricing}>Provider Pricing</button>}
           <CostRangeControl range={range} onChange={onRangeChange} today={today} />
           {state.status === 'ready' && onRetry && <button className="admin-costs-refresh" type="button" onClick={onRetry}>Refresh data</button>}
         </div>
@@ -218,16 +229,17 @@ function CostsContent({
       )}
       {model.source.status === 'partial' && (
         <section className="admin-costs-banner admin-costs-banner--partial" aria-labelledby="costs-partial-title">
-          <strong id="costs-partial-title">Partial totals</strong>
+          <strong id="costs-partial-title">Evidence limitations</strong>
           <ul>
             {model.source.reasons.map((reason) => <li key={reason}>{ADMIN_COST_COMPLETENESS_MESSAGES[reason]}</li>)}
           </ul>
         </section>
       )}
+      <CostThresholdBanner model={model} />
       {empty && (
         <section className="admin-costs-empty" role="status">
           <h2>No recorded provider usage</h2>
-          <p>The complete authorized projection proves zero stored AI and TTS requests for this range.</p>
+          <p>The complete database query found zero recorded AI and TTS ledger attempts for this range. It does not prove zero provider traffic.</p>
         </section>
       )}
 
@@ -243,15 +255,15 @@ function CostsContent({
           <MetricCard label="Cached input read tokens" metric={model.summary.cachedInputReadTokens} />
           <MetricCard label="Cached input write tokens" metric={model.summary.cachedInputWriteTokens} />
           <MetricCard label="TTS characters" metric={model.summary.ttsCharacters} />
-          <MoneyCard label="Calculated provider cost (estimate)" metric={model.summary.calculatedCost} />
-          <MoneyCard label="Reconciled provider cost" metric={model.summary.reconciledCost} />
+          <MoneyCard label="Usage-derived marginal provider cost" metric={model.summary.calculatedCost} />
+          <MoneyCard label="Reconciled cost" metric={model.summary.reconciledCost} />
           <article className="admin-costs-card">
             <p>Unavailable costs</p>
             <strong>{model.summary.unavailableCostCount.toLocaleString()}</strong>
             <span>records without trustworthy cost</span>
           </article>
         </div>
-        <p className="admin-costs-disclosure">Calculated provider cost is a usage-derived estimate, not provider-invoice truth. Reconciled provider cost is reported separately.</p>
+        <p className="admin-costs-disclosure">Calculated cost is usage-derived marginal provider cost for recorded provider attempts using verified effective-dated pricing terms. It excludes subscription or plan fees, taxes, credits, included allowances, rollover, account adjustments, and unrepresented discounts. Reconciled provider-invoice economics remain separate and are not inferred.</p>
       </section>
 
       <ProviderAccountingCoverageSection
@@ -277,8 +289,14 @@ function CostsContent({
             ['Reconciled', model.summary.costKindCounts.reconciled],
             ['Unavailable', model.summary.costKindCounts.unavailable],
           ]} />
+          <div><h3>Coverage</h3><dl>
+            <div><dt>Aggregate query</dt><dd>{QUERY_COVERAGE_LABELS[model.source.queryCoverage]}</dd></div>
+            <div><dt>Provider traffic</dt><dd>{PROVIDER_TRAFFIC_COVERAGE_LABELS[model.source.providerTrafficCoverage]}</dd></div>
+            <div><dt>Observed accounting gaps</dt><dd>{model.source.accountingGapEvidence.observedCount.toLocaleString()}</dd></div>
+          </dl></div>
         </div>
         <p className="admin-costs-disclosure">No learner-cost breakdown is shown because the integrated ledger does not contain trusted learner attribution for these provider calls.</p>
+        <p className="admin-costs-disclosure">Accounting-gap evidence is retained telemetry only and never becomes fabricated usage or cost. A zero count cannot prove complete provider-attempt coverage{model.source.accountingGapEvidence.retentionCoverage === 'retention_limited' ? ', and this range extends beyond the conservative telemetry-retention window' : ''}.</p>
       </section>
 
       <section className="admin-costs-panel" aria-labelledby="cost-trend-title">
@@ -315,7 +333,7 @@ function CostsContent({
       </div>
 
       <footer className="admin-costs-footer">
-        Projection generated <time dateTime={model.generatedAt}>{formatUtc(model.generatedAt)}</time>. {model.source.recordsIncluded.toLocaleString()} bounded ledger records included.
+        Projection generated <time dateTime={model.generatedAt}>{formatUtc(model.generatedAt)}</time>. Exact database aggregate of {model.source.recordsIncluded.toLocaleString()} recorded attempts across {model.source.groupCount.toLocaleString()} of {model.source.groupLimit.toLocaleString()} allowed groups. Provider traffic: {PROVIDER_TRAFFIC_COVERAGE_LABELS[model.source.providerTrafficCoverage].toLowerCase()}.
       </footer>
     </>
   )
@@ -523,6 +541,33 @@ function CoverageBreakdownTable({
   )
 }
 
+function CostThresholdBanner({ model }: { model: AdminCostsModel }) {
+  const threshold = model.monthlyCostThreshold
+  if (threshold.status === 'not_applicable') return null
+  if (threshold.status === 'unavailable') {
+    return (
+      <section className="admin-costs-banner admin-costs-banner--partial" role="status">
+        <strong>Monthly cost threshold unavailable</strong>
+        <span>The durable threshold or a complete calculated usage-cost total could not be established.</span>
+      </section>
+    )
+  }
+  const observed = formatExactCostUsdMicros(threshold.observedMicros!)
+  const limit = threshold.status === 'critical'
+    ? formatExactCostUsdMicros(threshold.criticalMicros!)
+    : formatExactCostUsdMicros(threshold.warningMicros!)
+  return (
+    <section className="admin-costs-banner" role="status">
+      <strong>{threshold.status === 'critical'
+        ? 'Critical monthly cost threshold reached'
+        : threshold.status === 'warning'
+          ? 'Monthly cost warning threshold reached'
+          : 'Below the monthly cost warning threshold'}</strong>
+      <span>{observed} calculated usage cost; configured comparison threshold {limit}. This is not provider-invoice economics.</span>
+    </section>
+  )
+}
+
 function MetricCard({ label, metric }: { label: string; metric: AdminCostCountMetric }) {
   return (
     <article className={`admin-costs-card admin-costs-card--${metric.status}`}>
@@ -550,7 +595,7 @@ function CountValue({ metric }: { metric: AdminCostCountMetric }) {
 
 function MoneyValue({ metric }: { metric: AdminCostMoneyMetric }) {
   if (metric.status === 'unavailable' || metric.micros === null) return <>— <span className="admin-costs-value-status">Unavailable</span></>
-  return <>{formatUsdMicros(metric.micros, metric.currency)}{metric.status === 'partial' && <span className="admin-costs-value-status"> Partial</span>}</>
+  return <>{formatExactCostUsdMicros(metric.micros)}{metric.status === 'partial' && <span className="admin-costs-value-status"> Partial</span>}</>
 }
 
 function CombinedTokens({ point }: { point: AdminCostAggregateForView }) {
@@ -604,4 +649,12 @@ function formatUtc(value: string): string {
   return new Intl.DateTimeFormat('en-US', {
     dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC',
   }).format(new Date(value)) + ' UTC'
+}
+
+function formatExactCostUsdMicros(value: IntegerMicros): string {
+  if (!isCanonicalIntegerMicros(value)) throw new Error('Invalid canonical IntegerMicros value.')
+  const micros = BigInt(value)
+  const dollars = (micros / 1_000_000n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  const fraction = (micros % 1_000_000n).toString().padStart(6, '0')
+  return `$${dollars}.${fraction}`
 }

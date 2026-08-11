@@ -72,6 +72,7 @@ but only the server/API and database policies authorize data or actions.
 - [Authorization](authorization.md)
 - [Telemetry and privacy](telemetry-privacy.md)
 - [AI and TTS cost accounting](cost-accounting.md)
+- [Effective-dated provider pricing terms](../admin-provider-pricing-terms.md)
 - [Engines and health](health-engines.md)
 - [Administrative audit](audit.md)
 - [Curriculum and versioning](curriculum-versioning.md)

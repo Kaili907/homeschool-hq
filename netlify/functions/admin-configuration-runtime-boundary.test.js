@@ -1,7 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises'
 import { describe, expect, it } from 'vitest'
 
-const CONFIG_CONSUMPTION = /academy_admin_(?:read|preview|commit)_configuration|admin-(?:runtime-)?configuration-source|admin-runtime-configuration|runtime\.(?:ai|tts)\.enabled|quota\.(?:ai|tts)\.requests_per_account_day/
+const CONFIG_CONSUMPTION = /academy_admin_(?:read|preview|commit)_configuration|admin-(?:runtime-)?configuration-source|admin-runtime-configuration|effective-configuration|runtime\.(?:ai|tts)\.enabled|quota\.(?:ai|tts)\.requests_per_account_day/
 
 async function filesBelow(url) {
   const entries = await readdir(url, { withFileTypes: true })
@@ -15,15 +15,13 @@ async function filesBelow(url) {
 }
 
 describe('ADMIN-14B runtime integration boundary', () => {
-  it('wires the trusted runtime resolver into Anthropic and TTS gateways', async () => {
+  it('wires durable effective configuration into Anthropic and TTS gateways', async () => {
     const gateways = [
       new URL('./anthropic.js', import.meta.url),
       new URL('./tts.js', import.meta.url),
     ]
     for (const gateway of gateways) {
-      const source = await readFile(gateway, 'utf8')
-      expect(source, gateway.pathname).toMatch(/admin-runtime-configuration/)
-      expect(source, gateway.pathname).toMatch(/runtimeConfigurationResolver\.resolve/)
+      expect(await readFile(gateway, 'utf8'), gateway.pathname).toMatch(/effective-configuration/)
     }
   })
 

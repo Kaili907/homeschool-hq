@@ -154,5 +154,21 @@ export function createGatewayAccess({ env, fetchImpl, client } = {}) {
       if (error) reject(503, 'service_unavailable')
       return data
     },
+
+    async aggregateProviderUsageCosts({ start, endExclusive }) {
+      const signal = AbortSignal.timeout(ACCESS_TIMEOUT_MS)
+      const { data, error } = await getClient()
+        .rpc('academy_aggregate_provider_usage_costs_v1', {
+          p_start: start,
+          p_end_exclusive: endExclusive,
+          p_required_capability: 'costs:read',
+          p_group_limit: 384,
+        })
+        .abortSignal(signal)
+
+      if (signal.aborted) reject(504, 'upstream_timeout')
+      if (error) reject(503, 'service_unavailable')
+      return data
+    },
   }
 }

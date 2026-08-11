@@ -339,8 +339,7 @@ export function AdminConfiguration({
       <dl className="admin-config-summary" aria-label="Configuration authority summary">
         <div><dt>Saved configuration</dt><dd>Durable Admin registry</dd></div>
         <div><dt>Runtime effective / enforced state</dt><dd>{enforcementSummary}</dd></div>
-        <div><dt>Integration</dt><dd>{projection.runtimeStatus === 'partial_runtime_enforcement'
-          ? 'Partial runtime enforcement' : 'Unavailable'}</dd></div>
+        <div><dt>Integration</dt><dd>Runtime enforced</dd></div>
         <div><dt>Access</dt><dd>{canManage ? 'Manage capability confirmed' : 'Read only'}</dd></div>
       </dl>
 

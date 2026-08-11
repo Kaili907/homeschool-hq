@@ -28,6 +28,18 @@ describe('System Health browser read boundary', () => {
       ...projection,
       incidents: [{ ...projection.incidents[0], reasonCode: 'raw_exception_SECRET' }],
     })).toBeNull()
+    for (const evidenceCompleteness of [
+      'partial', 'retention_limited', 'malformed',
+      'unavailable', 'timeout', 'group_incomplete',
+    ] as const) {
+      // A completeness relabel without the corresponding fail-closed health
+      // states is internally inconsistent and must be rejected.
+      expect(decodeSystemHealthProjection({ ...projection, evidenceCompleteness })).toBeNull()
+    }
+    expect(decodeSystemHealthProjection({
+      ...projection,
+      evidenceCompleteness: 'raw_backend_error',
+    })).toBeNull()
   })
 
   it('rejects false healthy labels and internally invalid aggregate metadata', () => {

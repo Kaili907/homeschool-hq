@@ -530,4 +530,36 @@ describe('ADMIN-14A durable configuration database core', () => {
         { revision: 3, value: false },
       ])
   })
+
+  it('advances all eight registered settings to runtime-enforced projections', async () => {
+    const database = databases[0]
+    await database.exec(await readFile(
+      new URL('./migrations/20260810140000_academy_admin_configuration_runtime_enforcement.sql', import.meta.url),
+      'utf8',
+    ))
+    const rows = await database.query<{ setting_key: string; integration_status: string }>(`
+      select setting_key, integration_status
+      from academy_private.admin_configuration_registry
+      order by setting_key
+    `)
+    expect(rows.rows).toHaveLength(8)
+    expect(rows.rows.every((row) => row.integration_status === 'runtime_enforced')).toBe(true)
+
+    const read = await asRole(database, 'service_role', null, () =>
+      database.query<{ projection: any }>(`
+        select public.academy_admin_read_configuration_v1('configuration:read') as projection
+      `))
+    expect(read.rows[0].projection.integrationStatus).toBe('runtime_enforced')
+    expect(read.rows[0].projection.settings.every(
+      (setting: any) => setting.integrationStatus === 'runtime_enforced',
+    )).toBe(true)
+
+    const change = await preview(database, { token: 'runtime-status' })
+    expect(change.projection.integrationStatus).toBe('runtime_enforced')
+    await expect(database.exec(`
+      update academy_private.admin_configuration_registry
+      set integration_status = 'pending_runtime_integration'
+      where setting_key = 'runtime.ai.enabled'
+    `)).rejects.toThrow(/immutable/)
+  })
 })

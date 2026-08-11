@@ -20,6 +20,8 @@ function readyDependencies(overrides = {}) {
       })),
     },
     academicReadiness: vi.fn(async () => 'ready'),
+    curriculumBindingReadiness: vi.fn(async () => ({ status: 'ready' })),
+    effectiveSettingsReadiness: vi.fn(async () => ({ status: 'ready' })),
     classifier: {
       isConfigured: () => true,
       circuitState: () => 'closed',
@@ -60,6 +62,39 @@ describe('Study production readiness assembly', () => {
       status: 'not-ready',
     })
     expect(snapshot.registrations).toContainEqual({ dependency: 'rate-limiter', status: 'ready' })
+  })
+
+  it('blocks session start readiness when curriculum binding authority is absent', async () => {
+    const snapshot = await createStudyProductionReadinessService(readyDependencies({
+      curriculumBindingReadiness: undefined,
+      bindingRpc: { call: vi.fn(async () => ({ status: 'not-ready' })) },
+    })).check()
+    expect(snapshot.status).toBe('not-ready')
+    expect(snapshot.registrations).toContainEqual({
+      dependency: 'study-session-adapter',
+      status: 'not-ready',
+    })
+    expect(snapshot.registrations).toContainEqual({
+      dependency: 'parent-settings-adapter',
+      status: 'ready',
+    })
+  })
+
+  it('keeps parent settings not-ready for manual-review, unavailable, or absent V2 resolution', async () => {
+    for (const effectiveSettingsReadiness of [
+      vi.fn(async () => ({ status: 'manual_review' })),
+      vi.fn(async () => ({ status: 'unavailable' })),
+      undefined,
+    ]) {
+      const snapshot = await createStudyProductionReadinessService(readyDependencies({
+        effectiveSettingsReadiness,
+      })).check()
+      expect(snapshot.status).toBe('not-ready')
+      expect(snapshot.registrations).toContainEqual({
+        dependency: 'parent-settings-adapter',
+        status: 'not-ready',
+      })
+    }
   })
 
   it('uses live identity and durable probes, caches only through TTL, and then revalidates', async () => {

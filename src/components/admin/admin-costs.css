@@ -1,19 +1,23 @@
-.admin-costs { color: #172a3a; display: grid; gap: 1.5rem; }
+.admin-costs { color: #172a3a; display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr); min-width: 0; }
 .admin-costs-header { align-items: flex-start; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+.admin-costs-header > * { min-width: 0; }
 .admin-costs-header h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -.03em; }
 .admin-costs-header > div:first-child > p:last-child { color: #526474; margin-top: .35rem; }
 .admin-costs-header__controls { display: grid; gap: .6rem; justify-items: end; }
-.admin-costs-refresh { background: #173f4a; border-radius: .5rem; color: #fff; font-size: .78rem; font-weight: 800; min-height: 2.5rem; padding: .45rem .8rem; }
+.admin-costs-refresh { background: #173f4a; border-radius: .5rem; color: #fff; font-size: .78rem; font-weight: 800; min-height: 2.75rem; padding: .45rem .8rem; }
+.admin-costs-pricing { background: #fff; border: 1px solid #9fb7be; border-radius: .5rem; color: #173f4a; font-size: .78rem; font-weight: 800; min-height: 2.75rem; padding: .45rem .8rem; }
 .admin-costs-refresh:hover, .admin-costs-refresh:focus-visible { background: #196b6b; outline: 2px solid #196b6b; outline-offset: 2px; }
+.admin-costs-pricing:hover, .admin-costs-pricing:focus-visible { border-color: #196b6b; outline: 2px solid #196b6b; outline-offset: 2px; }
 .admin-costs-eyebrow, .admin-costs-section-heading p { color: #196b6b; font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .admin-costs-range { display: grid; gap: .6rem; justify-items: end; }
 .admin-costs-range__presets { background: #e9f0f1; border-radius: .7rem; display: flex; flex-wrap: wrap; gap: .2rem; padding: .25rem; }
-.admin-costs-range button, .admin-costs-message button { border: 1px solid transparent; border-radius: .5rem; font-weight: 700; min-height: 2.5rem; padding: .45rem .75rem; }
-.admin-costs-range button:hover, .admin-costs-range button:focus-visible, .admin-costs-message button:hover, .admin-costs-message button:focus-visible { border-color: #196b6b; outline: 2px solid transparent; }
+.admin-costs-range button, .admin-costs-message button { border: 1px solid transparent; border-radius: .5rem; font-weight: 700; min-height: 2.75rem; padding: .45rem .75rem; }
+.admin-costs-range button:hover, .admin-costs-message button:hover { border-color: #196b6b; }
+.admin-costs button:focus-visible, .admin-costs input:focus-visible { outline: 3px solid #70b7aa; outline-offset: 2px; }
 .admin-costs-range button.is-active { background: #fff; border-color: #bdd1d4; box-shadow: 0 1px 3px #172a3a1a; }
 .admin-costs-range__custom { align-items: end; background: #fff; border: 1px solid #cbd8dc; border-radius: .75rem; display: flex; flex-wrap: wrap; gap: .65rem; padding: .75rem; }
 .admin-costs-range__custom label { display: grid; font-size: .75rem; font-weight: 700; gap: .2rem; }
-.admin-costs-range__custom input { border: 1px solid #9fb2ba; border-radius: .4rem; min-height: 2.5rem; padding: .35rem .5rem; }
+.admin-costs-range__custom input { border: 1px solid #9fb2ba; border-radius: .4rem; min-height: 2.75rem; padding: .35rem .5rem; }
 .admin-costs-range__custom p { color: #9d2d25; flex-basis: 100%; font-size: .8rem; font-weight: 700; }
 .admin-costs-card-grid { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); }
 .admin-costs-card { background: #fff; border: 1px solid #d8e1e4; border-radius: .85rem; min-height: 8.4rem; padding: 1rem; }
@@ -30,7 +34,7 @@
 .admin-costs-message { background: #fff; border-color: #d8e1e4; padding: 1.5rem; }
 .admin-costs-message h1, .admin-costs-message h2 { font-size: 1.5rem; font-weight: 800; }
 .admin-costs-message button { background: #173f4a; color: #fff; justify-self: start; margin-top: .5rem; }
-.admin-costs-panel { background: #fff; border: 1px solid #d8e1e4; border-radius: .85rem; padding: 1rem; }
+.admin-costs-panel { background: #fff; border: 1px solid #d8e1e4; border-radius: .85rem; min-width: 0; padding: 1rem; }
 .admin-cost-alert { background: #edf8f6; border: 1px solid #9bcac2; border-left: .4rem solid #196b6b; border-radius: .85rem; display: grid; gap: .85rem; padding: 1rem; }
 .admin-cost-alert--warning, .admin-cost-alert--partial { background: #fff9e9; border-color: #e5bd62; border-left-color: #b16a13; }
 .admin-cost-alert--critical, .admin-cost-alert--unavailable { background: #fff2ef; border-color: #e5aaa3; border-left-color: #a53b33; }
@@ -72,7 +76,7 @@
 .admin-costs-completeness-grid dl { display: grid; gap: .3rem; margin-top: .4rem; }
 .admin-costs-completeness-grid dl div { display: flex; justify-content: space-between; }
 .admin-costs-completeness-grid dd { font-variant-numeric: tabular-nums; font-weight: 800; }
-.admin-costs-table-wrap { overflow-x: auto; }
+.admin-costs-table-wrap { max-width: 100%; min-width: 0; overflow-x: auto; }
 .admin-costs-table-wrap:focus-visible { outline: 2px solid #196b6b; outline-offset: 2px; }
 .admin-costs table { border-collapse: collapse; min-width: 46rem; width: 100%; }
 .admin-costs caption { height: 1px; overflow: hidden; position: absolute; width: 1px; clip: rect(0 0 0 0); }
@@ -81,7 +85,7 @@
 .admin-costs thead th { color: #526474; font-size: .7rem; letter-spacing: .04em; text-transform: uppercase; }
 .admin-costs tbody th { font-weight: 800; }
 .admin-costs-table-empty { color: #627581; font-size: .85rem; }
-.admin-costs-two-column { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.admin-costs-two-column { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); min-width: 0; }
 .admin-costs-loading { display: grid; gap: 1rem; }
 .admin-costs-skeleton { animation: admin-costs-pulse 1.5s ease-in-out infinite; background: #dce6e8; border-radius: .85rem; min-height: 8rem; }
 .admin-costs-skeleton--wide { min-height: 5rem; }
@@ -93,7 +97,7 @@
   .admin-costs-range { justify-items: stretch; width: 100%; }
   .admin-costs-range__presets { width: 100%; }
   .admin-costs-range__presets button { flex: 1 1 auto; }
-  .admin-costs-two-column { grid-template-columns: 1fr; }
+  .admin-costs-two-column { grid-template-columns: minmax(0, 1fr); }
   .admin-provider-coverage__status { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {

@@ -34,6 +34,9 @@ export function buildAcademyStudyContext(
   scopeDay: number,
 ): AcademyStudyContext | null {
   if (!profile.academy) return null
+  // This remains advisory launch context, but it must never paper over a
+  // browser-visible schedule/profile version disagreement.
+  if (schedule.releaseVersion !== profile.academy.releaseVersion) return null
   const day = schedule.days.find((d) => d.week === scopeWeek && d.day === scopeDay)
   if (!day) return null
   return {

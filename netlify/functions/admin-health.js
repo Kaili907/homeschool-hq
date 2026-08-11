@@ -1,13 +1,14 @@
 import { createAdminAuthorization } from './_shared/admin-authorization.js'
 import {
+  AdminHealthSourceReadError,
   createAdminHealthSource,
   disabledHealthEngines,
 } from './_shared/admin-health-source.js'
 import { errorResponse, hasBody, jsonResponse, readQueryEntries } from './_shared/http.js'
-import { createRuntimeConfigurationResolver } from './_shared/admin-runtime-configuration.js'
+import { createEffectiveConfigurationReader } from './_shared/effective-configuration.js'
 import {
   SYSTEM_HEALTH_WINDOWS,
-  buildSystemHealthProjection,
+  buildSystemHealthProjectionFromAggregates,
 } from '../../src/admin/systemHealth.ts'
 
 const ADMIN_HEALTH_PATHS = new Set([
@@ -41,6 +42,8 @@ export function createAdminHealthHandler(overrides = {}) {
     client: overrides.telemetryClient,
   })
   const now = overrides.now ?? (() => new Date())
+  const configurationReader = overrides.effectiveConfigurationReader
+    ?? createEffectiveConfigurationReader({ env, fetchImpl: overrides.fetchImpl ?? globalThis.fetch })
 
   return async (event) => {
     if (event?.httpMethod !== 'GET') return errorResponse(405, 'method_not_allowed', { allow: 'GET' })
@@ -57,33 +60,38 @@ export function createAdminHealthHandler(overrides = {}) {
     }
     if (!authorized.ok) return authorized.response
 
+    const observationTime = now()
     try {
-      let runtimeValues = { aiEnabled: false, ttsEnabled: false }
+      let configuration = null
       if (overrides.disabledEngines === undefined) {
         try {
-          const runtimeConfigurationResolver = overrides.runtimeConfigurationResolver
-            ?? createRuntimeConfigurationResolver({
-              env,
-              fetchImpl: overrides.fetchImpl ?? globalThis.fetch,
-              source: overrides.runtimeConfigurationSource,
-              serviceClient: overrides.configurationClient,
-            })
-          runtimeValues = (await runtimeConfigurationResolver.resolve()).values
+          configuration = await configurationReader.read()
         } catch {
-          // Injected resolvers fail closed just like the production resolver.
+          configuration = { status: 'unavailable' }
         }
       }
-      const evidence = await source.list()
-      const projection = buildSystemHealthProjection(evidence.events, {
-        now: now(),
+      const runtimeValues = configuration?.status === 'available'
+        ? { aiEnabled: configuration.runtime.aiEnabled, ttsEnabled: configuration.runtime.ttsEnabled }
+        : { aiEnabled: false, ttsEnabled: false }
+      const evidence = await source.read({ now: observationTime, selectedWindow: window })
+      const projection = buildSystemHealthProjectionFromAggregates(evidence, {
+        now: observationTime,
         selectedWindow: window,
         disabledEngines: overrides.disabledEngines ?? disabledHealthEngines(env, runtimeValues),
-        sourceTruncated: evidence.sourceTruncated,
-        rejectedRows: evidence.rejectedRows,
       })
       return jsonResponse(200, projection)
-    } catch {
-      return errorResponse(503, 'health_source_unavailable')
+    } catch (error) {
+      return jsonResponse(200, buildSystemHealthProjectionFromAggregates(null, {
+        now: observationTime,
+        selectedWindow: window,
+        disabledEngines: overrides.disabledEngines ?? disabledHealthEngines(env, {
+          aiEnabled: false,
+          ttsEnabled: false,
+        }),
+        evidenceCompleteness: error instanceof AdminHealthSourceReadError
+          ? error.code
+          : 'unavailable',
+      }))
     }
   }
 }

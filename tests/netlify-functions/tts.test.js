@@ -3,7 +3,6 @@ import { TTS_REQUEST_LIMIT_BYTES, TTS_TEXT_LIMIT } from '../../netlify/functions
 import { GatewayError } from '../../netlify/functions/_shared/http.js'
 import { createTtsVoiceCatalog } from '../../netlify/functions/_shared/tts-catalog.js'
 import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
-import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
 import { createTestProviderAttemptJournal } from './provider-attempt-test-helpers.js'
 
 const ENV = Object.freeze({
@@ -29,6 +28,11 @@ const TEST_CATALOG = createTtsVoiceCatalog({
     cachedPlayback: 'allow',
     adminApproved: true,
   }],
+})
+const EFFECTIVE_CONFIGURATION = Object.freeze({
+  status: 'available',
+  runtime: Object.freeze({ ttsEnabled: true }),
+  quotas: Object.freeze({ ttsRequestsPerAccountDay: 100 }),
 })
 
 function testAccess({
@@ -56,26 +60,27 @@ function testAccess({
 }
 
 function createTtsHandler(overrides = {}) {
-  const runtimeConfigurationSource = overrides.runtimeConfigurationSource ?? {
-    read: vi.fn(async () => savedRuntimeConfigurationProjection()),
-  }
   return createBaseTtsHandler({
     gatewayAccess: testAccess(),
     catalog: TEST_CATALOG,
     providerAttemptJournal: createTestProviderAttemptJournal(),
-    runtimeConfigurationSource,
+    effectiveConfigurationReader: { read: vi.fn(async () => EFFECTIVE_CONFIGURATION) },
     ...overrides,
   })
 }
 
 function runtimeResolver(overrides = {}) {
   return {
-    resolve: vi.fn(async () => ({
-      values: {
-        aiEnabled: false, ttsEnabled: true,
-        aiDailyLimit: 50, ttsDailyLimit: 100,
-        approvedTiers: ['sonnet', 'haiku'], defaultTier: 'sonnet',
-        ...overrides,
+    read: vi.fn(async () => ({
+      ...EFFECTIVE_CONFIGURATION,
+      runtime: {
+        ...EFFECTIVE_CONFIGURATION.runtime,
+        ttsEnabled: overrides.ttsEnabled ?? EFFECTIVE_CONFIGURATION.runtime.ttsEnabled,
+      },
+      quotas: {
+        ...EFFECTIVE_CONFIGURATION.quotas,
+        ttsRequestsPerAccountDay: overrides.ttsDailyLimit
+          ?? EFFECTIVE_CONFIGURATION.quotas.ttsRequestsPerAccountDay,
       },
     })),
   }
@@ -378,21 +383,64 @@ describe('authenticated TTS gateway', () => {
     })(event())
     expect(result.statusCode).toBe(200)
     expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
-    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 125)
+    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 100)
+  })
+
+  it.each([
+    ['unavailable authority', { status: 'unavailable' }, 'configuration_unavailable'],
+    ['durable disablement', { ...EFFECTIVE_CONFIGURATION,
+      runtime: { ttsEnabled: false } }, 'gateway_disabled'],
+  ])('fails closed for %s before quota or provider synthesis', async (_label, configuration, code) => {
+    const access = testAccess()
+    const fetchImpl = fetchRouter()
+    const result = await createTtsHandler({
+      fetchImpl,
+      env: ENV,
+      gatewayAccess: access,
+      effectiveConfigurationReader: { read: vi.fn(async () => configuration) },
+    })(event())
+    expect(responseJson(result)).toEqual({ error: { code } })
+    expect(access.consumeUsage).not.toHaveBeenCalled()
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('uses the effective TTS quota and keeps raw provider authority rejection ahead of config', async () => {
+    const access = testAccess()
+    const reader = { read: vi.fn(async () => ({
+      ...EFFECTIVE_CONFIGURATION,
+      quotas: { ttsRequestsPerAccountDay: 37 },
+    })) }
+    const result = await createTtsHandler({
+      fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
+      effectiveConfigurationReader: reader,
+    })(event())
+    expect(result.statusCode).toBe(200)
+    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 37)
+
+    const configReader = { read: vi.fn(async () => ({ status: 'unavailable' })) }
+    const rejected = await createTtsHandler({
+      fetchImpl: fetchRouter(), env: ENV,
+      effectiveConfigurationReader: configReader,
+    })(event({
+      text: 'No browser provider authority.', voiceRef: 'academy.tts.synthetic',
+      voiceVersion: 'v1', voiceId: 'raw-provider-id',
+    }))
+    expect(responseJson(rejected)).toEqual({ error: { code: 'invalid_request' } })
+    expect(configReader.read).not.toHaveBeenCalled()
   })
 
   it('uses only the trusted resolved gate and exact effective daily quota', async () => {
     const access = testAccess()
     const disabled = await createTtsHandler({
       fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
-      runtimeConfigurationResolver: runtimeResolver({ ttsEnabled: false, ttsDailyLimit: 19 }),
+      effectiveConfigurationReader: runtimeResolver({ ttsEnabled: false, ttsDailyLimit: 19 }),
     })(event())
     expect(disabled.statusCode).toBe(503)
     expect(access.requireEntitlement).not.toHaveBeenCalled()
 
     const enabled = await createTtsHandler({
       fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
-      runtimeConfigurationResolver: runtimeResolver({ ttsDailyLimit: 19 }),
+      effectiveConfigurationReader: runtimeResolver({ ttsDailyLimit: 19 }),
     })(event())
     expect(enabled.statusCode).toBe(200)
     expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'tts', 19)
@@ -402,10 +450,10 @@ describe('authenticated TTS gateway', () => {
     const access = testAccess()
     const result = await createTtsHandler({
       fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
-      runtimeConfigurationResolver: { resolve: vi.fn(async () => { throw new Error('SECRET') }) },
+      effectiveConfigurationReader: { read: vi.fn(async () => { throw new Error('SECRET') }) },
     })(event())
     expect(result.statusCode).toBe(503)
-    expect(responseJson(result)).toEqual({ error: { code: 'gateway_disabled' } })
+    expect(responseJson(result)).toEqual({ error: { code: 'configuration_unavailable' } })
     expect(result.body).not.toContain('SECRET')
     expect(access.requireEntitlement).not.toHaveBeenCalled()
   })

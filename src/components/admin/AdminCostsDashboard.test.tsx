@@ -25,6 +25,7 @@ function render(
       range={range}
       onRangeChange={() => {}}
       onRetry={() => {}}
+      onOpenProviderPricing={() => {}}
       today="2026-08-08"
     />,
   )
@@ -40,13 +41,42 @@ describe('Admin AI and Costs dashboard', () => {
 
   it('renders exact calculated and reconciled semantics with separate cache token classes', () => {
     const markup = render()
-    expect(markup).toContain('Calculated provider cost (estimate)')
-    expect(markup).toContain('Reconciled provider cost')
-    expect(markup).toContain('$9,007,199,254.74')
+    expect(markup).toContain('Usage-derived marginal provider cost')
+    expect(markup).toContain('<h2>AI &amp; Costs</h2>')
+    expect(markup).not.toContain('<h1>')
+    expect(markup).toContain('Reconciled cost')
+    expect(markup).toContain('$9,007,199,254.740993')
     expect(markup).toContain('Cached input read tokens')
     expect(markup).toContain('Cached input write tokens')
     expect(markup).toContain('TTS characters')
-    expect(markup).toContain('not provider-invoice truth')
+    expect(markup).toContain('Usage-derived marginal provider cost')
+    expect(markup).toContain('Reconciled provider-invoice economics remain separate and are not inferred')
+    expect(markup).toContain('Complete for stored ledger rows')
+    expect(markup).toContain('Provider traffic')
+    expect(markup).toContain('Unverified')
+    expect(markup).not.toContain('500-record')
+    expect(markup).not.toContain('All provider traffic accounted for')
+    expect(markup).toContain('Provider Pricing')
+  })
+
+  it('renders the enforced monthly threshold as calculated evidence, not invoice economics', () => {
+    const model = costsModelFixture({
+      range: {
+        kind: 'month', start: '2026-08-01', end: '2026-08-08',
+        startAt: '2026-08-01T00:00:00.000Z', endExclusive: '2026-08-09T00:00:00.000Z', days: 8,
+      },
+      monthlyCostThreshold: {
+        status: 'warning', reason: null, basis: 'calculated_usage_estimate',
+        observedMicros: '11000000', warningMicros: '10000000',
+        criticalMicros: '25000000', configurationRevisions: { warning: '2', critical: '3' },
+      },
+    })
+    const markup = render({ status: 'ready', model, freshness: 'current' }, true, {
+      kind: 'preset', preset: 'month',
+    })
+    expect(markup).toContain('Monthly cost warning threshold reached')
+    expect(markup).toContain('$11.000000 calculated usage cost')
+    expect(markup).toContain('not provider-invoice economics')
   })
 
   it('renders the authoritative monthly alert scope, thresholds, remaining amounts, and no hard-cap claim', () => {
@@ -93,7 +123,10 @@ describe('Admin AI and Costs dashboard', () => {
   it('renders unavailable cost explicitly and never as $0', () => {
     const source = costsModelFixture()
     const model = costsModelFixture({
-      source: { status: 'partial', reasons: ['calculated_cost_unavailable'], recordLimit: 500, recordsIncluded: 1 },
+      source: {
+        ...source.source, status: 'partial',
+        reasons: ['calculated_cost_unavailable'], recordsIncluded: 1,
+      },
       summary: {
         ...source.summary,
         calculatedCost: { status: 'unavailable', micros: null, currency: 'USD' },
@@ -106,12 +139,25 @@ describe('Admin AI and Costs dashboard', () => {
     expect(markup).not.toMatch(/Calculated \/ estimated provider cost[\s\S]{0,180}?\$0\.00/)
   })
 
+  it('renders sub-cent canonical costs at exact microdollar precision', () => {
+    const source = costsModelFixture()
+    const model = costsModelFixture({
+      summary: {
+        ...source.summary,
+        calculatedCost: { status: 'available', micros: '1', currency: 'USD' },
+      },
+    })
+    const markup = render({ status: 'ready', model, freshness: 'current' })
+    expect(markup).toContain('$0.000001')
+    expect(markup).not.toMatch(/Usage-derived marginal provider cost[\s\S]{0,120}?\$0\.00(?:<|\s)/)
+  })
+
   it('renders partial attribution, billing, and cost kinds as independent counts', () => {
     const source = costsModelFixture()
     const model = costsModelFixture({
       source: {
-        status: 'partial', reasons: ['ambiguous_attribution', 'unresolved_attribution'],
-        recordLimit: 500, recordsIncluded: 3,
+        ...source.source, status: 'partial',
+        reasons: ['ambiguous_attribution', 'unresolved_attribution'], recordsIncluded: 3,
       },
       summary: {
         ...source.summary,
@@ -121,13 +167,33 @@ describe('Admin AI and Costs dashboard', () => {
       },
     })
     const markup = render({ status: 'ready', model, freshness: 'current' })
-    expect(markup).toContain('Partial totals')
+    expect(markup).toContain('Evidence limitations')
     expect(markup).toContain('ambiguous household attribution')
     expect(markup).toContain('Billing disposition')
     expect(markup).toContain('Cost kind')
     expect(markup).toContain('No learner-cost breakdown')
     expect(markup).not.toContain('accountRef')
     expect(markup).not.toContain('householdRef')
+  })
+
+  it('renders accounting-gap evidence separately from query and provider-traffic coverage', () => {
+    const source = costsModelFixture()
+    const model = costsModelFixture({
+      source: {
+        ...source.source,
+        status: 'partial',
+        reasons: ['accounting_gap_evidence'],
+        accountingGapEvidence: { observedCount: 2, retentionCoverage: 'retention_limited' },
+      },
+    })
+    const markup = render({ status: 'ready', model, freshness: 'current' })
+    expect(markup).toContain('Aggregate query')
+    expect(markup).toContain('Complete for stored ledger rows')
+    expect(markup).toContain('Provider traffic')
+    expect(markup).toContain('Unverified')
+    expect(markup).toMatch(/Observed accounting gaps<\/dt><dd>2/)
+    expect(markup).toContain('extends beyond the conservative telemetry-retention window')
+    expect(markup).not.toContain('All provider traffic accounted for')
   })
 
   it('distinguishes a proven empty range from unavailable and creates no fake trend points', () => {
@@ -141,13 +207,14 @@ describe('Admin AI and Costs dashboard', () => {
     })
     const source = costsModelFixture()
     const model = costsModelFixture({
-      source: { status: 'complete', reasons: [], recordLimit: 500, recordsIncluded: 0 },
+      source: { ...source.source, status: 'complete', reasons: [], recordsIncluded: 0 },
       summary: { ...source.summary, ...zero, usageUnavailableCount: 0 },
       trend: [], breakdowns: { engines: [], providers: [], models: [], costKinds: [], billingDispositions: [] },
     })
     const markup = render({ status: 'ready', model, freshness: 'current' })
-    expect(markup).toContain('proves zero stored AI and TTS requests')
-    expect(markup).toContain('$0.00')
+    expect(markup).toContain('zero recorded AI and TTS ledger attempts')
+    expect(markup).toContain('does not prove zero provider traffic')
+    expect(markup).toContain('$0.000000')
     expect(markup).toContain('No real daily usage points')
   })
 
@@ -240,7 +307,7 @@ describe('Admin AI and Costs dashboard', () => {
       model: costsModelFixture({ providerAccountingCoverage: coverage }),
       freshness: 'current',
     })
-    expect(markup).toContain('Calculated provider cost (estimate)')
+    expect(markup).toContain('Usage-derived marginal provider cost')
     expect(markup).toContain('Coverage unavailable')
     expect(markup).toContain('Retry coverage')
     expect(markup).toContain('role="status"')

@@ -107,7 +107,7 @@ function deploymentAvailable(entry, env) {
   return entry.status === 'active' && entry.adminApproved && providerConfigured(entry, env)
 }
 
-export function projectPublicTtsCatalog(catalog, env, synthesisAllowed = envFlagEnabled(env, 'ACADEMY_TTS_ENABLED')) {
+export function projectPublicTtsCatalog(catalog, env, synthesisPermitted = false) {
   const voices = catalog.voices.map((entry) => Object.freeze({
     voiceRef: entry.voiceRef,
     voiceVersion: entry.voiceVersion,
@@ -119,7 +119,8 @@ export function projectPublicTtsCatalog(catalog, env, synthesisAllowed = envFlag
   }))
   return Object.freeze({
     catalogVersion: catalog.catalogVersion,
-    synthesisEnabled: synthesisAllowed
+    synthesisEnabled: synthesisPermitted
+      && envFlagEnabled(env, 'ACADEMY_TTS_ENABLED')
       && voices.some((voice) => voice.status === 'active' && voice.deploymentAvailable),
     defaultVoiceRef: catalog.defaultVoiceRef,
     voices: Object.freeze(voices),

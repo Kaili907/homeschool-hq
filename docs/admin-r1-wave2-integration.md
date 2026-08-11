@@ -33,6 +33,7 @@ The Wave 2 chain is unique and ordered after the existing Study migrations:
 3. `20260808122000_academy_provider_usage_cost_ledger.sql`
 4. `20260808123000_academy_admin_safety_operations.sql`
 5. `20260809120000_academy_operational_telemetry_foundation.sql`
+6. `20260809121000_academy_provider_usage_cost_aggregate.sql`
 
 The cost ledger retains only the integrated `122000` filename. Its request-unit
 pricing correction is included in that file; no `120000` cost-ledger migration
@@ -40,8 +41,9 @@ exists.
 
 ## Evidence and bounded-source behavior
 
-- Costs reads at most 500 ledger rows. A full 500-row read is visibly `partial`;
-  the dashboard never presents it as a complete total.
+- Costs uses the exact service-only database aggregate for every supported
+  half-open range. More than 500 ledger rows remain query-complete; the fixed
+  384-group ceiling fails explicitly instead of truncating successful totals.
 - System Health reads at most 500 operational events. A full read is treated
   conservatively as truncated, so affected health evidence remains `unknown`
   instead of being promoted to healthy.
@@ -58,8 +60,10 @@ The telemetry foundation now provides a bounded database aggregate that is
 complete beyond 500 raw events for supported ranges. The existing Health and
 Engine Performance projections remain conservative raw-reader consumers until
 their dedicated follow-up cards adopt that seam; exactly 500 rows still means
-unknown/partial, never a complete population. Cost scaling remains separately
-owned by the provider usage ledger.
+unknown/partial, never a complete population. Cost scaling is now provided by
+the additive provider usage aggregate. Its complete query coverage applies only
+to stored ledger rows and remains separate from unverified provider-attempt
+coverage.
 
 ## Privacy and state semantics
 

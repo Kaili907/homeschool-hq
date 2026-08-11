@@ -10,6 +10,18 @@ import {
 export const SYSTEM_HEALTH_WINDOWS = ['1h', 'today', '24h', '7d'] as const
 export type SystemHealthWindow = (typeof SYSTEM_HEALTH_WINDOWS)[number]
 
+export const SYSTEM_HEALTH_EVIDENCE_COMPLETENESS = [
+  'complete',
+  'partial',
+  'retention_limited',
+  'malformed',
+  'unavailable',
+  'timeout',
+  'group_incomplete',
+] as const
+export type SystemHealthEvidenceCompleteness =
+  (typeof SYSTEM_HEALTH_EVIDENCE_COMPLETENESS)[number]
+
 export const SYSTEM_HEALTH_THRESHOLDS = Object.freeze({
   primaryEvaluationWindowMs: 60 * 60 * 1_000,
   currentEvidenceMaxAgeMs: 15 * 60 * 1_000,
@@ -27,7 +39,6 @@ export const SYSTEM_HEALTH_THRESHOLDS = Object.freeze({
   degradedFallbackCount: 3,
   degradedFallbackRatePercent: 30,
   degradedP95LatencyMs: 5_000,
-  maximumSourceEvents: 500,
   maximumIncidents: 25,
 })
 
@@ -132,7 +143,7 @@ export interface SystemHealthProjection {
   readonly selectedWindow: SystemHealthWindow
   readonly historyWindow: { readonly start: string; readonly end: string }
   readonly evaluationWindow: { readonly start: string; readonly end: string }
-  readonly evidenceCompleteness: 'complete' | 'truncated' | 'invalid_rows_rejected'
+  readonly evidenceCompleteness: SystemHealthEvidenceCompleteness
   readonly overallHealth: AdminHealthState
   readonly overallReasonCodes: readonly SystemHealthReasonCode[]
   readonly observedAt: string | null
@@ -152,6 +163,69 @@ export interface BuildSystemHealthOptions {
   readonly disabledEngines?: ReadonlySet<AdminEngineId>
   readonly sourceTruncated?: boolean
   readonly rejectedRows?: number
+}
+
+export interface SystemHealthAggregateSummary {
+  readonly eventCount: number
+  readonly successCount: number
+  readonly fallbackCount: number
+  readonly rejectedCount: number
+  readonly timeoutCount: number
+  readonly providerErrorCount: number
+  readonly validationErrorCount: number
+  readonly safetyStopCount: number
+  readonly durationCount: number
+  readonly durationP50Ms: number | null
+  readonly durationP95Ms: number | null
+  readonly firstOccurredAt: string | null
+  readonly lastOccurredAt: string | null
+}
+
+export interface SystemHealthEngineAggregateSummary extends SystemHealthAggregateSummary {
+  readonly engineId: AdminEngineId
+  readonly appVersion: string | null
+  readonly engineVersion: string | null
+  readonly curriculumVersion: string | null
+}
+
+export interface SystemHealthServiceAggregateSummary extends SystemHealthAggregateSummary {
+  readonly serviceId: SystemServiceId
+}
+
+export interface SystemHealthAggregateIncidentGroup {
+  readonly engineId: AdminEngineId
+  readonly eventType: string
+  readonly result: AdminOperationalResult
+  readonly operation: string | null
+  readonly provider: string | null
+  readonly route: string | null
+  readonly eventCount: number
+  readonly lastOccurredAt: string
+}
+
+export interface SystemHealthWindowAggregate {
+  readonly summary: SystemHealthAggregateSummary
+  readonly engines: readonly SystemHealthEngineAggregateSummary[]
+  readonly services: readonly SystemHealthServiceAggregateSummary[]
+  readonly incidentGroups: readonly SystemHealthAggregateIncidentGroup[]
+}
+
+export interface SystemHealthAggregateEvidence {
+  readonly evaluation: SystemHealthWindowAggregate
+  readonly history: SystemHealthWindowAggregate
+  readonly previous: SystemHealthWindowAggregate
+}
+
+export interface BuildSystemHealthAggregateOptions {
+  readonly now?: Date
+  readonly selectedWindow?: SystemHealthWindow
+  readonly disabledEngines?: ReadonlySet<AdminEngineId>
+  readonly evidenceCompleteness?: SystemHealthEvidenceCompleteness
+}
+
+export interface SystemHealthAggregateRange {
+  readonly start: string
+  readonly endExclusive: string
 }
 
 const CRITICAL_ENGINES = new Set<AdminEngineId>([
@@ -234,6 +308,24 @@ function rateMetrics(events: readonly AdminOperationalEvent[]): HealthRateMetric
   }
 }
 
+function aggregateRateMetrics(summary: SystemHealthAggregateSummary): HealthRateMetrics {
+  const eligibleEventCount = summary.eventCount - summary.rejectedCount - summary.safetyStopCount
+  return {
+    eligibleEventCount,
+    successCount: summary.successCount,
+    successRatePercent: percentage(summary.successCount, eligibleEventCount),
+    fallbackCount: summary.fallbackCount,
+    fallbackRatePercent: percentage(summary.fallbackCount, eligibleEventCount),
+    rejectedCount: summary.rejectedCount,
+    timeoutCount: summary.timeoutCount,
+    timeoutRatePercent: percentage(summary.timeoutCount, eligibleEventCount),
+    providerErrorCount: summary.providerErrorCount,
+    providerErrorRatePercent: percentage(summary.providerErrorCount, eligibleEventCount),
+    validationErrorCount: summary.validationErrorCount,
+    safetyStopCount: summary.safetyStopCount,
+  }
+}
+
 interface Evaluation {
   readonly health: AdminHealthState
   readonly reasons: readonly SystemHealthReasonCode[]
@@ -252,6 +344,17 @@ function evaluate(
   const durations = events.flatMap((event) => event.durationMs === null ? [] : [event.durationMs])
   const p50LatencyMs = percentile(durations, 50)
   const p95LatencyMs = percentile(durations, 95)
+  return evaluateMetrics(metrics, p50LatencyMs, p95LatencyMs, freshness, disabled, incomplete)
+}
+
+function evaluateMetrics(
+  metrics: HealthRateMetrics,
+  p50LatencyMs: number | null,
+  p95LatencyMs: number | null,
+  freshness: HealthFreshness,
+  disabled: boolean,
+  incomplete: boolean,
+): Evaluation {
   const base = { metrics, p50LatencyMs, p95LatencyMs }
   if (disabled) return { ...base, health: 'disabled', reasons: ['feature_disabled'] }
   if (incomplete) return { ...base, health: 'unknown', reasons: ['telemetry_incomplete'] }
@@ -311,6 +414,33 @@ function selectedHistoryStart(now: Date, window: SystemHealthWindow): number {
       ? 24 * 60 * 60 * 1_000
       : 7 * 24 * 60 * 60 * 1_000
   return nowMs - duration
+}
+
+export function systemHealthAggregateRanges(
+  now: Date,
+  selectedWindow: SystemHealthWindow,
+): Readonly<{
+  evaluation: SystemHealthAggregateRange
+  history: SystemHealthAggregateRange
+  previous: SystemHealthAggregateRange
+}> {
+  const nowMs = now.getTime()
+  if (!Number.isFinite(nowMs)) throw new TypeError('valid observation time required')
+  if (!SYSTEM_HEALTH_WINDOWS.includes(selectedWindow)) throw new TypeError('invalid health window')
+  const historyStart = selectedHistoryStart(now, selectedWindow)
+  const previousStart = historyStart - (nowMs - historyStart)
+  const endExclusive = new Date(nowMs + 1).toISOString()
+  return Object.freeze({
+    evaluation: Object.freeze({
+      start: new Date(nowMs - SYSTEM_HEALTH_THRESHOLDS.primaryEvaluationWindowMs).toISOString(),
+      endExclusive,
+    }),
+    history: Object.freeze({ start: new Date(historyStart).toISOString(), endExclusive }),
+    previous: Object.freeze({
+      start: new Date(previousStart).toISOString(),
+      endExclusive: new Date(historyStart).toISOString(),
+    }),
+  })
 }
 
 function inWindow(event: AdminOperationalEvent, start: number, end: number): boolean {
@@ -491,9 +621,9 @@ export function buildSystemHealthProjection(
     historyWindow: Object.freeze({ start: new Date(historyStart).toISOString(), end: now.toISOString() }),
     evaluationWindow: Object.freeze({ start: new Date(evaluationStart).toISOString(), end: now.toISOString() }),
     evidenceCompleteness: (options.rejectedRows ?? 0) > 0
-      ? 'invalid_rows_rejected'
+      ? 'malformed'
       : options.sourceTruncated
-        ? 'truncated'
+        ? 'partial'
         : 'complete',
     overallHealth: overall.health,
     overallReasonCodes: Object.freeze([...overall.reasons]),
@@ -507,6 +637,243 @@ export function buildSystemHealthProjection(
       ...historyRates,
       p50LatencyMs: percentile(historyDurations, 50),
       p95LatencyMs: percentile(historyDurations, 95),
+    }),
+    engines: Object.freeze(engines),
+    services: Object.freeze(services),
+    incidents: Object.freeze(incidents),
+  })
+}
+
+const EMPTY_AGGREGATE_SUMMARY: SystemHealthAggregateSummary = Object.freeze({
+  eventCount: 0,
+  successCount: 0,
+  fallbackCount: 0,
+  rejectedCount: 0,
+  timeoutCount: 0,
+  providerErrorCount: 0,
+  validationErrorCount: 0,
+  safetyStopCount: 0,
+  durationCount: 0,
+  durationP50Ms: null,
+  durationP95Ms: null,
+  firstOccurredAt: null,
+  lastOccurredAt: null,
+})
+
+function aggregateLatency(
+  summary: SystemHealthAggregateSummary,
+  percentileValue: 50 | 95,
+): number | null {
+  // The frozen RPC supplies per-group percentiles. The trusted source adapter
+  // stores the worst applicable group value here; counts remain exact sums.
+  const minimum = percentileValue === 50
+    ? SYSTEM_HEALTH_THRESHOLDS.minimumP50Samples
+    : SYSTEM_HEALTH_THRESHOLDS.minimumP95Samples
+  if (summary.durationCount < minimum) return null
+  return percentileValue === 50 ? summary.durationP50Ms : summary.durationP95Ms
+}
+
+function aggregateFreshness(observedAt: string | null, nowMs: number): HealthFreshness {
+  if (observedAt === null) return 'no_evidence'
+  const observedMs = instantMs(observedAt)
+  if (observedMs === null || observedMs > nowMs) return 'stale'
+  return nowMs - observedMs <= SYSTEM_HEALTH_THRESHOLDS.currentEvidenceMaxAgeMs
+    ? 'current'
+    : 'stale'
+}
+
+function latestByObservation<T extends { readonly lastOccurredAt: string | null }>(
+  candidates: readonly T[],
+): T | null {
+  return candidates.reduce<T | null>((latest, candidate) => {
+    if (candidate.lastOccurredAt === null) return latest
+    if (latest === null || (latest.lastOccurredAt ?? '') < candidate.lastOccurredAt) return candidate
+    return latest
+  }, null)
+}
+
+function engineAggregate(
+  evidence: SystemHealthAggregateEvidence,
+  engineId: AdminEngineId,
+): SystemHealthEngineAggregateSummary | null {
+  return latestByObservation([
+    ...evidence.evaluation.engines.filter((engine) => engine.engineId === engineId),
+    ...evidence.history.engines.filter((engine) => engine.engineId === engineId),
+    ...evidence.previous.engines.filter((engine) => engine.engineId === engineId),
+  ])
+}
+
+function serviceAggregate(
+  evidence: SystemHealthAggregateEvidence,
+  serviceId: SystemServiceId,
+): SystemHealthServiceAggregateSummary | null {
+  return latestByObservation([
+    ...evidence.evaluation.services.filter((service) => service.serviceId === serviceId),
+    ...evidence.history.services.filter((service) => service.serviceId === serviceId),
+    ...evidence.previous.services.filter((service) => service.serviceId === serviceId),
+  ])
+}
+
+function aggregateServiceFor(group: SystemHealthAggregateIncidentGroup): SystemServiceId | 'academy_engine' {
+  if (group.operation === 'authorization' || group.route === 'admin') return 'admin_api'
+  if (group.eventType === 'persistence.operation') return 'persistence'
+  if (group.engineId === 'tts' || group.provider === 'elevenlabs') return 'tts_gateway'
+  if (group.engineId === 'gateway' || group.provider === 'anthropic') return 'anthropic_gateway'
+  if (group.engineId === 'sync') return 'sync'
+  if (group.engineId === 'curriculum') return 'curriculum_read'
+  return 'academy_engine'
+}
+
+function aggregateIncidentReason(
+  result: SystemHealthIncident['result'],
+  service: SystemServiceId | 'academy_engine',
+): SystemIncidentReasonCode {
+  if (result === 'fallback') return 'fallback_used'
+  if (result === 'timeout') {
+    return service === 'anthropic_gateway' || service === 'tts_gateway'
+      ? 'provider_timeout'
+      : 'request_timeout'
+  }
+  if (result === 'provider_error') {
+    if (service === 'persistence') return 'persistence_failed'
+    if (service === 'sync') return 'sync_failed'
+    return 'provider_failure'
+  }
+  if (service === 'persistence') return 'persistence_failed'
+  if (service === 'sync') return 'sync_failed'
+  return 'validation_failed'
+}
+
+export function buildSystemHealthProjectionFromAggregates(
+  evidence: SystemHealthAggregateEvidence | null,
+  options: BuildSystemHealthAggregateOptions = {},
+): SystemHealthProjection {
+  const now = options.now ?? new Date()
+  const nowMs = now.getTime()
+  if (!Number.isFinite(nowMs)) throw new TypeError('valid observation time required')
+  const selectedWindow = options.selectedWindow ?? '1h'
+  const ranges = systemHealthAggregateRanges(now, selectedWindow)
+  const evidenceCompleteness = options.evidenceCompleteness
+    ?? (evidence === null ? 'unavailable' : 'complete')
+  const incomplete = evidence === null || evidenceCompleteness !== 'complete'
+  const evaluation = evidence?.evaluation
+
+  const engines = ADMIN_ENGINE_IDS.map((engineId): EngineHealthProjection => {
+    const summary = evaluation?.engines.find((engine) => engine.engineId === engineId)
+      ?? EMPTY_AGGREGATE_SUMMARY
+    const latest = evidence ? engineAggregate(evidence, engineId) : null
+    const freshness = aggregateFreshness(latest?.lastOccurredAt ?? null, nowMs)
+    const evaluated = evaluateMetrics(
+      aggregateRateMetrics(summary),
+      aggregateLatency(summary, 50),
+      aggregateLatency(summary, 95),
+      freshness,
+      options.disabledEngines?.has(engineId) === true,
+      incomplete,
+    )
+    return Object.freeze({
+      engineId,
+      health: evaluated.health,
+      freshness,
+      observedAt: latest?.lastOccurredAt ?? null,
+      windowStart: ranges.evaluation.start,
+      windowEnd: now.toISOString(),
+      appVersion: latest?.appVersion ?? null,
+      engineVersion: latest?.engineVersion ?? null,
+      curriculumVersion: latest?.curriculumVersion ?? null,
+      eventCount: summary.eventCount,
+      ...evaluated.metrics,
+      p50LatencyMs: evaluated.p50LatencyMs,
+      p95LatencyMs: evaluated.p95LatencyMs,
+      reasonCodes: Object.freeze([...evaluated.reasons]),
+    })
+  })
+
+  const services = SERVICE_IDS.map((serviceId): ServiceHealthProjection => {
+    const summary = evaluation?.services.find((service) => service.serviceId === serviceId)
+      ?? EMPTY_AGGREGATE_SUMMARY
+    const latest = evidence ? serviceAggregate(evidence, serviceId) : null
+    const freshness = aggregateFreshness(latest?.lastOccurredAt ?? null, nowMs)
+    const disabled = (serviceId === 'anthropic_gateway' && options.disabledEngines?.has('gateway') === true)
+      || (serviceId === 'tts_gateway' && options.disabledEngines?.has('tts') === true)
+    const evaluated = evaluateMetrics(
+      aggregateRateMetrics(summary),
+      aggregateLatency(summary, 50),
+      aggregateLatency(summary, 95),
+      freshness,
+      disabled,
+      incomplete,
+    )
+    return Object.freeze({
+      serviceId,
+      health: evaluated.health,
+      freshness,
+      observedAt: latest?.lastOccurredAt ?? null,
+      eventCount: summary.eventCount,
+      failureCount: evaluated.metrics.timeoutCount
+        + evaluated.metrics.providerErrorCount
+        + evaluated.metrics.validationErrorCount,
+      p95LatencyMs: evaluated.p95LatencyMs,
+      reasonCodes: Object.freeze([...evaluated.reasons]),
+    })
+  })
+
+  const overall = overallHealth(engines)
+  const latest = evidence
+    ? latestByObservation([
+        evidence.evaluation.summary,
+        evidence.history.summary,
+        evidence.previous.summary,
+      ])
+    : null
+  const history = evidence?.history.summary ?? EMPTY_AGGREGATE_SUMMARY
+  const previous = evidence?.previous.summary ?? EMPTY_AGGREGATE_SUMMARY
+  const currentFailures = history.timeoutCount + history.providerErrorCount + history.validationErrorCount
+  const previousFailures = previous.timeoutCount + previous.providerErrorCount + previous.validationErrorCount
+  const canTrend = evidence !== null && (history.eventCount > 0 || previous.eventCount > 0)
+  const failureTrend = !canTrend
+    ? 'unknown'
+    : currentFailures > previousFailures
+      ? 'increasing'
+      : currentFailures < previousFailures
+        ? 'decreasing'
+        : 'stable'
+  const incidents = (evidence?.history.incidentGroups ?? [])
+    .filter((group): group is SystemHealthAggregateIncidentGroup & { result: SystemHealthIncident['result'] } =>
+      ['fallback', 'timeout', 'provider_error', 'validation_error'].includes(group.result))
+    .sort((left, right) => right.lastOccurredAt.localeCompare(left.lastOccurredAt))
+    .slice(0, SYSTEM_HEALTH_THRESHOLDS.maximumIncidents)
+    .map((group) => {
+      const serviceId = aggregateServiceFor(group)
+      return Object.freeze({
+        occurredAt: group.lastOccurredAt,
+        engineId: group.engineId,
+        serviceId,
+        result: group.result,
+        reasonCode: aggregateIncidentReason(group.result, serviceId),
+      })
+    })
+  const historyRates = aggregateRateMetrics(history)
+
+  return Object.freeze({
+    contractVersion: ADMIN_CONTRACT_VERSION,
+    generatedAt: now.toISOString(),
+    selectedWindow,
+    historyWindow: Object.freeze({ start: ranges.history.start, end: now.toISOString() }),
+    evaluationWindow: Object.freeze({ start: ranges.evaluation.start, end: now.toISOString() }),
+    evidenceCompleteness,
+    overallHealth: overall.health,
+    overallReasonCodes: Object.freeze([...overall.reasons]),
+    observedAt: latest?.lastOccurredAt ?? null,
+    freshness: aggregateFreshness(latest?.lastOccurredAt ?? null, nowMs),
+    failureTrend,
+    currentFailureCount: canTrend ? currentFailures : null,
+    previousFailureCount: canTrend ? previousFailures : null,
+    historyMetrics: Object.freeze({
+      eventCount: history.eventCount,
+      ...historyRates,
+      p50LatencyMs: aggregateLatency(history, 50),
+      p95LatencyMs: aggregateLatency(history, 95),
     }),
     engines: Object.freeze(engines),
     services: Object.freeze(services),

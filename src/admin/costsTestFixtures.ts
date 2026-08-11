@@ -98,7 +98,17 @@ export function costsModelFixture(overrides: Partial<AdminCostsModel> = {}): Adm
       kind: 'today', start: '2026-08-08', end: '2026-08-08',
       startAt: '2026-08-08T00:00:00.000Z', endExclusive: '2026-08-09T00:00:00.000Z', days: 1,
     },
-    source: { status: 'complete', reasons: [], recordLimit: 500, recordsIncluded: 3 },
+    source: {
+      status: 'complete', reasons: [], queryCoverage: 'complete',
+      providerTrafficCoverage: 'coverage_unverified', groupLimit: 384,
+      groupCount: 7, recordsIncluded: 3,
+      accountingGapEvidence: { observedCount: 0, retentionCoverage: 'within_retention' },
+    },
+    monthlyCostThreshold: {
+      status: 'not_applicable', reason: 'range_not_month', basis: 'calculated_usage_estimate',
+      observedMicros: null, warningMicros: null, criticalMicros: null,
+      configurationRevisions: null,
+    },
     summary: {
       ...values,
       usageUnavailableCount: 0,

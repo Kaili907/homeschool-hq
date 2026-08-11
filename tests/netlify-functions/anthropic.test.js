@@ -7,7 +7,6 @@ import {
 } from '../../netlify/functions/_shared/anthropic-policy.js'
 import { GatewayError } from '../../netlify/functions/_shared/http.js'
 import { createAnthropicHandler as createBaseAnthropicHandler } from '../../netlify/functions/anthropic.js'
-import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
 import { createTestProviderAttemptJournal } from './provider-attempt-test-helpers.js'
 
 const ENV = Object.freeze({
@@ -16,6 +15,12 @@ const ENV = Object.freeze({
   ANTHROPIC_API_KEY: 'anthropic-provider-secret',
   ACADEMY_AI_ENABLED: 'true',
   ACADEMY_APP_VERSION: 'academy-test-build',
+})
+const EFFECTIVE_CONFIGURATION = Object.freeze({
+  status: 'available',
+  runtime: Object.freeze({ aiEnabled: true }),
+  quotas: Object.freeze({ aiRequestsPerAccountDay: 50 }),
+  ai: Object.freeze({ approvedTiers: Object.freeze(['sonnet', 'haiku']), defaultTier: 'sonnet' }),
 })
 
 function testAccess({
@@ -43,25 +48,36 @@ function testAccess({
 }
 
 function createAnthropicHandler(overrides = {}) {
-  const runtimeConfigurationSource = overrides.runtimeConfigurationSource ?? {
-    read: vi.fn(async () => savedRuntimeConfigurationProjection()),
-  }
+  const env = overrides.env ?? ENV
+  const rawFlag = env.ACADEMY_AI_ENABLED
+  const enabled = typeof rawFlag === 'string'
+    && rawFlag === rawFlag.trim()
+    && ['1', 'true', 'on', 'enabled'].includes(rawFlag.toLowerCase())
   return createBaseAnthropicHandler({
     gatewayAccess: testAccess(),
     providerAttemptJournal: createTestProviderAttemptJournal(),
-    runtimeConfigurationSource,
+    effectiveConfigurationReader: runtimeResolver({ aiEnabled: enabled }),
     ...overrides,
   })
 }
 
 function runtimeResolver(overrides = {}) {
   return {
-    resolve: vi.fn(async () => ({
-      values: {
-        aiEnabled: true, ttsEnabled: false,
-        aiDailyLimit: 50, ttsDailyLimit: 100,
-        approvedTiers: ['sonnet', 'haiku'], defaultTier: 'sonnet',
-        ...overrides,
+    read: vi.fn(async () => ({
+      ...EFFECTIVE_CONFIGURATION,
+      runtime: {
+        ...EFFECTIVE_CONFIGURATION.runtime,
+        aiEnabled: overrides.aiEnabled ?? EFFECTIVE_CONFIGURATION.runtime.aiEnabled,
+      },
+      quotas: {
+        ...EFFECTIVE_CONFIGURATION.quotas,
+        aiRequestsPerAccountDay: overrides.aiDailyLimit
+          ?? EFFECTIVE_CONFIGURATION.quotas.aiRequestsPerAccountDay,
+      },
+      ai: {
+        ...EFFECTIVE_CONFIGURATION.ai,
+        approvedTiers: overrides.approvedTiers ?? EFFECTIVE_CONFIGURATION.ai.approvedTiers,
+        defaultTier: overrides.defaultTier ?? EFFECTIVE_CONFIGURATION.ai.defaultTier,
       },
     })),
   }
@@ -541,49 +557,125 @@ describe('authenticated Anthropic gateway', () => {
     })(event())
     expect(result.statusCode).toBe(200)
     expect(access.requireEntitlement).toHaveBeenCalledWith('household-user')
-    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 73)
+    expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 50)
+  })
+
+  it.each([
+    ['unavailable authority', { status: 'unavailable' }, 'configuration_unavailable'],
+    ['durable disablement', { ...EFFECTIVE_CONFIGURATION,
+      runtime: { aiEnabled: false } }, 'gateway_disabled'],
+  ])('fails closed for %s before quota or provider use', async (_label, configuration, code) => {
+    const access = testAccess()
+    const fetchImpl = fetchRouter()
+    const result = await createAnthropicHandler({
+      fetchImpl,
+      env: ENV,
+      gatewayAccess: access,
+      effectiveConfigurationReader: { read: vi.fn(async () => configuration) },
+    })(event())
+    expect(responseJson(result)).toEqual({ error: { code } })
+    expect(access.consumeUsage).not.toHaveBeenCalled()
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('enforces approved tiers and uses the durable default when the caller omits a tier', async () => {
+    const configuration = {
+      ...EFFECTIVE_CONFIGURATION,
+      quotas: { aiRequestsPerAccountDay: 17 },
+      ai: { approvedTiers: ['haiku'], defaultTier: 'haiku' },
+    }
+    const reader = { read: vi.fn(async () => configuration) }
+    const deniedAccess = testAccess()
+    const deniedFetch = fetchRouter()
+    const denied = await createAnthropicHandler({
+      fetchImpl: deniedFetch, env: ENV, gatewayAccess: deniedAccess,
+      effectiveConfigurationReader: reader,
+    })(event(tutorRequest()))
+    expect(responseJson(denied)).toEqual({ error: { code: 'model_tier_not_approved' } })
+    expect(deniedAccess.consumeUsage).not.toHaveBeenCalled()
+    expect(deniedFetch).toHaveBeenCalledTimes(1)
+
+    const selectedAccess = testAccess()
+    const selectedFetch = fetchRouter()
+    const withoutTier = tutorRequest()
+    delete withoutTier.modelTier
+    const selected = await createAnthropicHandler({
+      fetchImpl: selectedFetch, env: ENV, gatewayAccess: selectedAccess,
+      effectiveConfigurationReader: reader,
+    })(event(withoutTier))
+    expect(selected.statusCode).toBe(200)
+    expect(JSON.parse(selectedFetch.mock.calls.find(
+      ([url]) => url === 'https://api.anthropic.com/v1/messages',
+    )[1].body).model).toBe('claude-haiku-4-5')
+    expect(selectedAccess.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 17)
+    expect(selectedAccess.recordProviderUsage).toHaveBeenCalledWith(
+      expect.objectContaining({ logicalModelTier: 'haiku' }),
+    )
+  })
+
+  it('keeps graded-work safety first and fails closed on configuration before entitlement', async () => {
+    const unavailable = { read: vi.fn(async () => ({ status: 'unavailable' })) }
+    const deniedAccess = testAccess({ memberships: [] })
+    const notEntitled = await createAnthropicHandler({
+      fetchImpl: fetchRouter(), env: ENV, gatewayAccess: deniedAccess,
+      effectiveConfigurationReader: unavailable,
+    })(event())
+    expect(responseJson(notEntitled)).toEqual({ error: { code: 'configuration_unavailable' } })
+    expect(unavailable.read).toHaveBeenCalledOnce()
+    expect(deniedAccess.requireEntitlement).not.toHaveBeenCalled()
+
+    const graded = tutorRequest()
+    graded.context.graded = true
+    const safetyReader = { read: vi.fn(async () => ({ status: 'unavailable' })) }
+    const safety = await createAnthropicHandler({
+      fetchImpl: fetchRouter(), env: ENV,
+      effectiveConfigurationReader: safetyReader,
+    })(event(graded))
+    expect(responseJson(safety)).toEqual({ error: { code: 'graded_assistance_denied' } })
+    expect(safetyReader.read).not.toHaveBeenCalled()
   })
 
   it('uses only the trusted resolved gate and exact effective daily quota', async () => {
     const access = testAccess()
     const disabled = await createAnthropicHandler({
       fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
-      runtimeConfigurationResolver: runtimeResolver({ aiEnabled: false, aiDailyLimit: 17 }),
+      effectiveConfigurationReader: runtimeResolver({ aiEnabled: false, aiDailyLimit: 17 }),
     })(event())
     expect(disabled.statusCode).toBe(503)
     expect(access.requireEntitlement).not.toHaveBeenCalled()
 
     const enabled = await createAnthropicHandler({
       fetchImpl: fetchRouter(), env: ENV, gatewayAccess: access,
-      runtimeConfigurationResolver: runtimeResolver({ aiDailyLimit: 17 }),
+      effectiveConfigurationReader: runtimeResolver({ aiDailyLimit: 17 }),
     })(event())
     expect(enabled.statusCode).toBe(200)
     expect(access.consumeUsage).toHaveBeenCalledWith('household-user', 'anthropic', 17)
   })
 
-  it('treats a known browser tier as a preference and uses the trusted default when needed', async () => {
+  it('rejects an unapproved browser tier and uses the trusted default when omitted', async () => {
     const fetchImpl = fetchRouter()
     const policy = runtimeResolver({ approvedTiers: ['haiku'], defaultTier: 'haiku' })
     const access = testAccess()
     const selectedFallback = await createAnthropicHandler({
-      fetchImpl, env: ENV, runtimeConfigurationResolver: policy,
+      fetchImpl, env: ENV, effectiveConfigurationReader: policy,
       gatewayAccess: access,
     })(event(tutorRequest()))
-    expect(selectedFallback.statusCode).toBe(200)
+    expect(selectedFallback.statusCode).toBe(403)
+    expect(responseJson(selectedFallback)).toEqual({ error: { code: 'model_tier_not_approved' } })
 
     const withoutTier = tutorRequest()
     delete withoutTier.modelTier
     const allowed = await createAnthropicHandler({
-      fetchImpl, env: ENV, runtimeConfigurationResolver: policy,
+      fetchImpl, env: ENV, effectiveConfigurationReader: policy,
       gatewayAccess: access,
     })(event(withoutTier))
     expect(allowed.statusCode).toBe(200)
     const providerCalls = fetchImpl.mock.calls.filter(([url]) =>
       url === 'https://api.anthropic.com/v1/messages')
-    expect(providerCalls).toHaveLength(2)
+    expect(providerCalls).toHaveLength(1)
     expect(providerCalls.map(([, init]) => JSON.parse(init.body).model))
-      .toEqual(['claude-haiku-4-5', 'claude-haiku-4-5'])
-    expect(access.recordProviderUsage).toHaveBeenCalledTimes(2)
+      .toEqual(['claude-haiku-4-5'])
+    expect(access.recordProviderUsage).toHaveBeenCalledTimes(1)
     expect(access.recordProviderUsage.mock.calls.every(([usage]) =>
       usage.logicalModelTier === 'haiku' && usage.providerModelId === 'claude-haiku-4-5'))
       .toBe(true)
@@ -594,10 +686,10 @@ describe('authenticated Anthropic gateway', () => {
     const access = testAccess()
     const result = await createAnthropicHandler({
       fetchImpl, env: ENV, gatewayAccess: access,
-      runtimeConfigurationResolver: { resolve: vi.fn(async () => { throw new Error('SECRET') }) },
+      effectiveConfigurationReader: { read: vi.fn(async () => { throw new Error('SECRET') }) },
     })(event())
     expect(result.statusCode).toBe(503)
-    expect(responseJson(result)).toEqual({ error: { code: 'gateway_disabled' } })
+    expect(responseJson(result)).toEqual({ error: { code: 'configuration_unavailable' } })
     expect(result.body).not.toContain('SECRET')
     expect(access.requireEntitlement).not.toHaveBeenCalled()
   })

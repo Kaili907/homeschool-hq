@@ -5,7 +5,6 @@ import {
   projectPublicTtsCatalog,
 } from '../../netlify/functions/_shared/tts-catalog.js'
 import { createTtsHandler as createBaseTtsHandler } from '../../netlify/functions/tts.js'
-import { savedRuntimeConfigurationProjection } from './admin-runtime-configuration-fixture.js'
 
 const PROVIDER_SENTINEL = 'server-only-provider-voice-sentinel'
 const ENV = Object.freeze({
@@ -16,12 +15,17 @@ const ENV = Object.freeze({
   ACADEMY_TTS_ENABLED: 'true',
   ACADEMY_APP_VERSION: 'catalog-test-build',
 })
+const EFFECTIVE_CONFIGURATION = Object.freeze({
+  status: 'available',
+  runtime: Object.freeze({ ttsEnabled: true }),
+  quotas: Object.freeze({ ttsRequestsPerAccountDay: 100 }),
+})
 
-function createTtsHandler(overrides) {
-  const runtimeConfigurationSource = overrides.runtimeConfigurationSource ?? {
-    read: vi.fn(async () => savedRuntimeConfigurationProjection()),
-  }
-  return createBaseTtsHandler({ runtimeConfigurationSource, ...overrides })
+function createTtsHandler(overrides = {}) {
+  return createBaseTtsHandler({
+    effectiveConfigurationReader: { read: vi.fn(async () => EFFECTIVE_CONFIGURATION) },
+    ...overrides,
+  })
 }
 
 function entry(overrides = {}) {
@@ -107,7 +111,7 @@ describe('server-owned TTS catalog contract', () => {
       entry({ voiceRef: 'academy.tts.legacy', providerVoiceId: 'legacy-private', status: 'legacy' }),
       entry({ voiceRef: 'academy.tts.revoked', providerVoiceId: 'revoked-private', status: 'revoked' }),
     ])
-    const projected = projectPublicTtsCatalog(privateCatalog, ENV)
+    const projected = projectPublicTtsCatalog(privateCatalog, ENV, true)
     expect(projected.synthesisEnabled).toBe(true)
     expect(projected.voices.map((voice) => voice.status)).toEqual([
       'active', 'disabled', 'legacy', 'revoked',
@@ -137,54 +141,24 @@ describe('server-owned TTS catalog contract', () => {
     expect(result.body).not.toContain(PROVIDER_SENTINEL)
   })
 
-  it('re-resolves synthesis independently from the advisory catalog response', async () => {
-    const values = {
-      aiEnabled: false,
-      ttsEnabled: true,
-      aiDailyLimit: 50,
-      ttsDailyLimit: 100,
-      approvedTiers: ['sonnet', 'haiku'],
-      defaultTier: 'sonnet',
-    }
-    const runtimeConfigurationResolver = {
-      resolve: vi.fn()
-        .mockResolvedValueOnce({ values })
-        .mockResolvedValueOnce({ values: { ...values, ttsEnabled: false } }),
-    }
-    const gatewayAccess = access()
-    const handler = createTtsHandler({
+  it('reports provider synthesis disabled without revoking safe cached playback', async () => {
+    const result = await createTtsHandler({
       env: ENV,
       catalog: catalog(),
       fetchImpl: authFetch(),
-      gatewayAccess,
-      runtimeConfigurationResolver,
+      gatewayAccess: access(),
+      effectiveConfigurationReader: { read: vi.fn(async () => ({
+        status: 'available', runtime: { ttsEnabled: false },
+      })) },
+    })(catalogEvent())
+    const body = JSON.parse(result.body)
+    expect(body.synthesisEnabled).toBe(false)
+    expect(body.voices[0]).toMatchObject({
+      voiceRef: 'academy.tts.synthetic',
+      deploymentAvailable: true,
+      cachedPlaybackAllowed: true,
     })
-
-    expect(JSON.parse((await handler(catalogEvent())).body).synthesisEnabled).toBe(true)
-    expect(JSON.parse((await handler(synthEvent())).body)).toEqual({
-      error: { code: 'gateway_disabled' },
-    })
-    expect(runtimeConfigurationResolver.resolve).toHaveBeenCalledTimes(2)
-    expect(runtimeConfigurationResolver.resolve).toHaveBeenNthCalledWith(1, { catalog: expect.anything() })
-    expect(runtimeConfigurationResolver.resolve).toHaveBeenNthCalledWith(2, { catalog: expect.anything() })
-    expect(gatewayAccess.requireEntitlement).not.toHaveBeenCalled()
-    expect(gatewayAccess.consumeUsage).not.toHaveBeenCalled()
-  })
-
-  it('keeps the zero-voice production catalog on browser-native fallback', async () => {
-    const gatewayAccess = access()
-    const handler = createTtsHandler({
-      env: ENV,
-      catalog: TTS_VOICE_CATALOG,
-      fetchImpl: authFetch(),
-      gatewayAccess,
-    })
-    const publicCatalog = JSON.parse((await handler(catalogEvent())).body)
-    expect(publicCatalog).toMatchObject({ synthesisEnabled: false, voices: [] })
-    expect(JSON.parse((await handler(synthEvent())).body)).toEqual({
-      error: { code: 'gateway_disabled' },
-    })
-    expect(gatewayAccess.requireEntitlement).not.toHaveBeenCalled()
+    expect(result.body).not.toContain(PROVIDER_SENTINEL)
   })
 
   it.each([

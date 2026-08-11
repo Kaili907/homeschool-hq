@@ -10,6 +10,7 @@ import {
   type AdminEngineId,
 } from './contracts'
 import {
+  SYSTEM_HEALTH_EVIDENCE_COMPLETENESS,
   SYSTEM_HEALTH_REASON_CODES,
   SYSTEM_HEALTH_THRESHOLDS,
   SYSTEM_HEALTH_WINDOWS,
@@ -282,7 +283,7 @@ export function decodeSystemHealthProjection(value: unknown): SystemHealthProjec
     || !SYSTEM_HEALTH_WINDOWS.includes(candidate.selectedWindow as never)
     || !windowRange(candidate.historyWindow)
     || !windowRange(candidate.evaluationWindow)
-    || !['complete', 'truncated', 'invalid_rows_rejected'].includes(candidate.evidenceCompleteness as string)
+    || !SYSTEM_HEALTH_EVIDENCE_COMPLETENESS.includes(candidate.evidenceCompleteness as never)
     || !ADMIN_HEALTH_STATES.includes(candidate.overallHealth as never)
     || !knownReasons(candidate.overallReasonCodes)
     || !nullableInstant(candidate.observedAt)

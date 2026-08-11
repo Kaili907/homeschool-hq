@@ -1,105 +1,84 @@
-# ADMIN-14B runtime configuration enforcement
+# ADMIN-14B effective runtime configuration
 
-ADMIN-14B resolves the durable ADMIN-14A snapshot on trusted servers and uses
-the same effective values in the Admin read projection, Tutor/Jarvis gateway,
-TTS catalog and synthesis gateway, System Health, and Admin Overview. Runtime
-resolution is a read operation and does not append an audit event.
+Status: implemented locally; migrations not applied hosted; no deployment.
 
-The database contract is unchanged. Its `pending_runtime_integration` value is
-storage metadata for the ADMIN-14A mutation DTOs; contextual runtime status is
-derived by the server and is not persisted. No ADMIN-14B migration is needed.
+ADMIN-14B connects the eight ADMIN-14A registry values to existing server-owned
+runtime consumers. `effective-configuration.js` reads only the sanitized
+service-role RPC, validates the code-owned registry projection, and returns a
+deeply frozen effective view. Browser state never becomes configuration
+authority and the view contains no environment values, credentials, provider
+voice IDs, raw database rows, or actor data.
 
-## Precedence
+## Authority, revisions, and cache
 
-Resolution applies these authorities without allowing a lower layer to weaken
-a higher one:
+The reader caches an available projection for at most 15 seconds and an error
+for at most one second. Concurrent reads coalesce. Each of the eight independent
+setting revisions remains visible in the server view. A lower observed revision,
+or a changed value at the same revision, makes the view unavailable instead of
+serving potentially broadened stale authority. Once an available cache expires,
+a failed refresh returns safe unavailable defaults; an expired enabling value is
+not used as stale authority.
 
-1. Fixed code, privacy, authorization, and hard safety invariants.
-2. The authoritative saved Admin value.
-3. Stronger deployment, catalog, guardian, accommodation, or subsystem safety
-   constraints.
-4. A fail-closed code fallback when the saved snapshot or a required constraint
-   cannot be trusted.
+Provider-enabling consumers require `runtime_enforced` from migration
+`20260810140000_academy_admin_configuration_runtime_enforcement.sql`. Deploying
+runtime code before that status migration therefore fails closed. The migration
+does not mutate revision history or grants and restores the immutable registry
+trigger after advancing the eight code-owned integration statuses.
 
-Admin values never alter Study's safety classifier, guardian precedence,
-accommodations, immutable privacy rules, authorization, or hard Tutor/Jarvis
-policy. Study has no ADMIN-14A effective-settings consumer on this branch.
+## Effective settings
 
-## Classification and consumers
+| Durable key | Runtime behavior |
+| --- | --- |
+| `runtime.ai.enabled` | ANDed with `ACADEMY_AI_ENABLED`; either false disables new Anthropic calls. |
+| `runtime.tts.enabled` | ANDed with `ACADEMY_TTS_ENABLED`; either false disables new provider synthesis. |
+| `quota.ai.requests_per_account_day` | Atomic gateway quota uses the lesser of the durable value and the bounded deployment ceiling. |
+| `quota.tts.requests_per_account_day` | Same lesser-of rule for TTS. |
+| `ai.approved_tiers` | A validated requested tier must be in this server allowlist. |
+| `ai.default_tier` | Selects the tier only when the bounded request omits `modelTier`; it must remain approved. |
+| `cost.warning.monthly_micros` | Current-month calculated usage cost is compared as exact decimal-string IntegerMicros. |
+| `cost.critical.monthly_micros` | Same exact comparison for the critical state. |
 
-| Setting | Classification | Effective consumer |
-| --- | --- | --- |
-| `runtime.ai.enabled` | `ENFORCEABLE_NOW` | Tutor/Jarvis Anthropic gateway |
-| `runtime.tts.enabled` | `ENFORCEABLE_NOW` | TTS catalog and synthesis gateway |
-| `quota.ai.requests_per_account_day` | `ENFORCEABLE_NOW` | Atomic Anthropic account/day limiter |
-| `quota.tts.requests_per_account_day` | `ENFORCEABLE_NOW` | Atomic TTS account/day limiter |
-| `ai.approved_tiers` | `ENFORCEABLE_NOW` | Server logical-tier admission |
-| `ai.default_tier` | `ENFORCEABLE_NOW` | Server fallback for a known but unapproved browser preference |
-| `cost.warning.monthly_micros` | `ENFORCEABLE_NOW` | Monthly cost alert evaluator |
-| `cost.critical.monthly_micros` | `ENFORCEABLE_NOW` | Monthly cost alert evaluator |
+Configuration is an additional ceiling. It cannot enable a deployment-disabled
+provider, raise a deployment quota, add a provider model, add a logical voice,
+or bypass authentication, authorization, entitlement, safety validation,
+provider accounting, or privacy controls.
 
-No registered setting is `UNSUPPORTED`. The cost thresholds remain durable and
-editable and are effective only as operational alert thresholds. They are not
-provider spending hard caps and do not disable AI/TTS, change quotas or tiers,
-or alter provider routing.
+## Gateway ordering and failure
 
-## Monthly cost alert authority
+Anthropic keeps the existing order: bounded route/method checks, bearer
+verification, deployment kill switch, entitlement, and Tutor/Jarvis request and
+graded-work validation. Only then does effective configuration select/restrict
+the model tier and quota. A missing or invalid effective view returns the stable
+`configuration_unavailable` error before quota or provider use. Durable AI
+disablement returns `gateway_disabled`; an otherwise valid but disallowed tier
+returns `model_tier_not_approved`.
 
-The trusted monthly evaluator owns threshold calculation for Costs, Overview,
-and future Production Readiness consumers. It derives a full UTC calendar-month
-window from server observation time: the inclusive first instant of the month
-through the exclusive first instant of the next month. Browser dates, totals,
-threshold status, and invoice claims are never accepted.
+TTS likewise preserves authentication, deployment gating, entitlement, bounded
+request validation, and logical voice resolution ahead of configuration. It
+continues to reject browser-supplied provider fields and never returns provider
+voice IDs. Durable TTS disablement prevents new provider synthesis and quota
+consumption. Catalog reads remain available for browser fallback: their
+`synthesisEnabled` value becomes false while per-voice cached-playback policy is
+left intact. The production catalog still has zero approved premium voices and
+no provider mapping was invented.
 
-The sole amount under evaluation is the authoritative ledger's recorded
-`calculated` provider cost: an exact decimal-string IntegerMicros total derived
-from provider usage and the effective pricing catalog. Reconciled cost remains
-separate. The evaluated amount is therefore a usage-derived operational
-estimate, not a provider invoice total. The provider-attempt journal supplies
-coverage evidence only and is never used to calculate cost or threshold state.
+## Cost thresholds
 
-The evaluator returns `normal`, `warning`, `critical`, `partial`, or
-`unavailable`, along with the recorded monthly total, both thresholds, and
-positive remaining amounts when a complete total makes them exact. Recorded
-costs are non-negative and additive, so an incomplete total is a lower bound.
-That lower bound can safely prove `critical` once it reaches the critical
-threshold. Below critical, it cannot distinguish normal, warning, or a hidden
-critical total, so the result remains `partial`; it is never falsely classified
-normal. An unavailable aggregate or invalid/missing threshold projection yields
-`unavailable` without inventing zero.
+The existing Admin costs endpoint adds a current-month threshold state derived
+only from its calculated usage-cost metric. Comparisons use `BigInt` over
+canonical IntegerMicros strings; money is never converted to `Number`. Partial
+evidence can prove warning/critical once its lower bound crosses a threshold,
+but cannot prove `below_warning`. Other ranges are `not_applicable`, and source
+or configuration uncertainty is explicit `unavailable`.
 
-Cost alert reads stay behind `costs:read`. Configuration reads and mutations
-retain their existing Configuration authority, confirmation, CAS, and audit
-boundaries. This integration uses the existing configuration and usage ledger;
-it adds no migration.
+The UI labels this basis as a calculated usage estimate. The configured
+threshold is not represented as provider invoice, tax, credit, contractual, or
+other invoice economics, and reconciled cost remains separate.
 
-## Effective rules and fallback
+## Scope boundary
 
-AI and TTS enablement require both the saved value and their deployment-owned
-enablement ceiling. A saved disable always wins. The daily account limits use
-the lower of the saved ceiling and the existing deployment/code ceiling. The
-current safe code ceilings remain 50 AI requests and 100 TTS requests when a
-valid deployment value is absent.
-
-The effective AI tier set is restricted to the code-owned logical `sonnet` and
-`haiku` mappings. A valid browser tier is only a preference: the gateway keeps
-it when approved and otherwise selects the saved effective default. Unknown or
-provider-native tiers remain invalid; the browser cannot select provider IDs.
-
-Premium TTS additionally requires an active, approved, deployment-available
-entry in the existing logical voice catalog. The production catalog currently
-has zero entries, so new premium synthesis remains unavailable and
-browser-native speech is the safe fallback. Provider voice IDs stay server-only.
-
-If configuration loading, validation, or resolution fails, new AI and premium
-TTS provider work is disabled before entitlement lookup, quota consumption, or
-provider access. The browser never supplies roles, effective values,
-enforcement claims, or fallback state.
-
-## Mutation and audit boundary
-
-Preview and commit still use the ADMIN-14A Owner-only bearer/RPC flow. CAS,
-five-minute confirmation binding, actor/request idempotency, revision append,
-head advance, and the canonical ADMIN-15 audit append remain one database
-transaction. A successful commit triggers a new trusted read for contextual
-runtime status; the browser never derives `effective` from the submitted value.
+All eight registered ADMIN-14A settings have a current runtime consumer. Study
+Effective Settings V2 remains a separate card: no Study setting was added, no
+guardian setting was overwritten, and Study safety behavior remains unchanged.
+Reads create no Admin audit event; ADMIN-14A mutations retain sole ownership of
+configuration audit writes.

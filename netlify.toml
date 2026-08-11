@@ -58,6 +58,12 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Platform-private Study adult-review worker. Netlify Scheduled Functions do
+# not expose a production URL; the public/manual worker below remains a
+# separate, secret-authorized endpoint.
+[functions."study-adult-review-scheduled-worker"]
+  schedule = "*/5 * * * *"
+
 # ---- API proxies (MUST precede the SPA fallback) ----
 [[redirects]]
   from = "/api/anthropic/*"
@@ -115,6 +121,11 @@
   status = 200
 
 [[redirects]]
+  from = "/api/admin/v1/study-operations"
+  to = "/.netlify/functions/admin-study-operations"
+  status = 200
+
+[[redirects]]
   from = "/api/admin/v1/safety-operations"
   to = "/.netlify/functions/admin-safety-operations"
   status = 200
@@ -147,6 +158,16 @@
 [[redirects]]
   from = "/api/admin/v1/production-readiness"
   to = "/.netlify/functions/admin-production-readiness"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/v1/provider-pricing-terms/*"
+  to = "/.netlify/functions/admin-provider-pricing-terms/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/v1/provider-pricing-terms"
+  to = "/.netlify/functions/admin-provider-pricing-terms"
   status = 200
 
 [[redirects]]

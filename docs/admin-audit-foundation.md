@@ -72,3 +72,10 @@ Each successful mutation must invoke the internal append helper before its
 transaction commits. ADMIN-14 must not grant the helper to browser or service
 roles, expand the frozen ADMIN-0 action/resource vocabulary, accept unrestricted
 JSON, or turn the local reason allowlist into free text.
+
+## Provider pricing use
+
+The provider-pricing foundation uses the existing
+`configuration.update` / `configuration` pair. It records only allowlisted
+status, revision, IntegerMicros value, and logical tier fields; the protected
+term mutation and audit append are one transaction.

@@ -194,6 +194,25 @@ describe('gateway service-role access', () => {
     })
   })
 
+  it('reads only exact bounded cost aggregates with the costs capability marker', async () => {
+    const data = {
+      schemaVersion: 1,
+      completeness: { queryCoverage: 'complete' },
+      groups: [],
+    }
+    const client = { rpc: vi.fn(() => ({ abortSignal: vi.fn(async () => ({ data, error: null })) })) }
+    await expect(createGatewayAccess({ client }).aggregateProviderUsageCosts({
+      start: '2026-08-01T00:00:00.000Z',
+      endExclusive: '2026-08-09T00:00:00.000Z',
+    })).resolves.toBe(data)
+    expect(client.rpc).toHaveBeenCalledWith('academy_aggregate_provider_usage_costs_v1', {
+      p_start: '2026-08-01T00:00:00.000Z',
+      p_end_exclusive: '2026-08-09T00:00:00.000Z',
+      p_required_capability: 'costs:read',
+      p_group_limit: 384,
+    })
+  })
+
   it('uses safe defaults for absent, malformed, zero, or excessive limits', () => {
     expect(dailyLimit({}, 'LIMIT', 50)).toBe(50)
     expect(dailyLimit({ LIMIT: 'nope' }, 'LIMIT', 50)).toBe(50)

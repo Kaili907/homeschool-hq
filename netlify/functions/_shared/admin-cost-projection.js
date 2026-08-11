@@ -7,6 +7,7 @@ import {
   unavailableProviderAccountingCoverage,
 } from './admin-provider-coverage.js'
 import { readQueryEntries, reject } from './http.js'
+import { buildAdminCostAggregateProjection } from './admin-cost-aggregate.js'
 
 export const ADMIN_COST_RECORD_LIMIT = 500
 export const ADMIN_COST_MAX_RANGE_DAYS = 366
@@ -414,26 +415,29 @@ export function buildAdminCostProjection(
 
 export function createAdminCostProjection({ gatewayAccess, now = () => new Date() }) {
   if (
-    !gatewayAccess || typeof gatewayAccess.readProviderUsageCosts !== 'function'
+    !gatewayAccess || typeof gatewayAccess.aggregateProviderUsageCosts !== 'function'
     || typeof gatewayAccess.readProviderAttemptCoverage !== 'function'
   ) {
-    throw new TypeError('admin cost projection requires provider usage and attempt coverage read seams')
+    throw new TypeError('admin cost projection requires aggregate and attempt coverage read seams')
   }
   return Object.freeze({
     async read(event) {
       const observedAt = now()
       const range = resolveAdminCostRange(event, observedAt)
-      const [records, coverage] = await Promise.all([
-        gatewayAccess.readProviderUsageCosts({
-          limit: ADMIN_COST_RECORD_LIMIT,
-          before: range.endExclusive,
+      const [aggregate, coverage] = await Promise.all([
+        gatewayAccess.aggregateProviderUsageCosts({
+          start: range.startAt,
+          endExclusive: range.endExclusive,
         }),
         readAdminProviderAccountingCoverage(
           (input) => gatewayAccess.readProviderAttemptCoverage(input),
           range,
         ),
       ])
-      return buildAdminCostProjection(records, range, observedAt, coverage)
+      return Object.freeze({
+        ...buildAdminCostAggregateProjection(aggregate, range, observedAt),
+        providerAccountingCoverage: coverage,
+      })
     },
   })
 }
