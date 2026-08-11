@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from './adminDependencyTimeout'
 import {
   parseAdminCostsModel,
   type AdminCostRangeSelection,
@@ -59,11 +60,22 @@ export async function readAdminCosts(
   const controller = new AbortController()
   const forwardAbort = () => controller.abort(options.signal?.reason)
   options.signal?.addEventListener('abort', forwardAbort, { once: true })
+  if (options.signal?.aborted) controller.abort(options.signal.reason)
   const timer = globalThis.setTimeout(() => controller.abort(), options.timeoutMs ?? 10_000)
   try {
-    const token = await (options.getAccessToken ?? getGatewayAccessToken)()
-    if (!token || controller.signal.aborted) throw new AdminCostsReadError('costs_unauthorized')
-    const response = await (options.fetchImpl ?? fetch)(
+    let token: string | null
+    try {
+      token = await withAdminDependencyTimeout(
+        () => (options.getAccessToken ?? getGatewayAccessToken)(), options.timeoutMs ?? 10_000,
+      )
+    } catch {
+      throw new AdminCostsReadError(
+        controller.signal.aborted ? 'costs_timeout' : 'costs_unavailable',
+      )
+    }
+    if (controller.signal.aborted) throw new AdminCostsReadError('costs_timeout')
+    if (!token) throw new AdminCostsReadError('costs_unauthorized')
+    const response = await withAdminDependencyTimeout((timeoutSignal) => (options.fetchImpl ?? fetch)(
       `/api/admin/v1/costs?${queryForRange(range)}`,
       {
         method: 'GET',
@@ -71,25 +83,28 @@ export async function readAdminCosts(
         credentials: 'omit',
         cache: 'no-store',
         referrerPolicy: 'no-referrer',
-        signal: controller.signal,
+        signal: AbortSignal.any([controller.signal, timeoutSignal]),
       },
-    )
+    ), options.timeoutMs ?? 10_000)
     if (response.status === 401 || response.status === 403) throw new AdminCostsReadError('costs_unauthorized')
     if (response.status === 400) throw new AdminCostsReadError('invalid_range')
+    if (response.status === 504) throw new AdminCostsReadError('costs_timeout')
     if (response.status !== 200) {
       const code = await exactErrorCode(response)
       if (code === 'cost_source_unavailable' || code === 'internal_error') {
         throw new AdminCostsReadError('costs_unavailable')
       }
       if (code === 'cost_source_timeout') throw new AdminCostsReadError('costs_timeout')
-      throw new AdminCostsReadError('costs_unauthorized')
+      throw new AdminCostsReadError('costs_unavailable')
     }
     const model = parseAdminCostsModel(await response.json())
     if (!model) throw new AdminCostsReadError('costs_unavailable')
     return model
   } catch (error) {
     if (error instanceof AdminCostsReadError) throw error
-    throw new AdminCostsReadError('costs_unauthorized')
+    throw new AdminCostsReadError(
+      controller.signal.aborted ? 'costs_timeout' : 'costs_unavailable',
+    )
   } finally {
     globalThis.clearTimeout(timer)
     options.signal?.removeEventListener('abort', forwardAbort)

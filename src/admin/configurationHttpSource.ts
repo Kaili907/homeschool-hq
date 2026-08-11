@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from './adminDependencyTimeout'
 import {
   ADMIN_CONFIGURATION_INTEGRATION_STATUS,
   isAdminConfigurationKey,
@@ -204,11 +205,11 @@ export function createAdminConfigurationHttpSource(
     if (options.signal?.aborted) controller.abort(options.signal.reason)
     const timer = globalThis.setTimeout(() => controller.abort(), dependencies.timeoutMs ?? 10_000)
     try {
-      const token = await getAccessToken()
-      if (!token || controller.signal.aborted) {
-        throw new AdminConfigurationError('configuration_unauthorized')
-      }
-      const response = await fetchImpl(endpoint, {
+      const timeoutMs = dependencies.timeoutMs ?? 10_000
+      const token = await withAdminDependencyTimeout(() => getAccessToken(), timeoutMs)
+      if (controller.signal.aborted) throw new AdminConfigurationError('configuration_timeout')
+      if (!token) throw new AdminConfigurationError('configuration_unauthorized')
+      const response = await withAdminDependencyTimeout((timeoutSignal) => fetchImpl(endpoint, {
         method,
         headers: {
           Accept: 'application/json',
@@ -219,8 +220,8 @@ export function createAdminConfigurationHttpSource(
         credentials: 'omit',
         cache: 'no-store',
         referrerPolicy: 'no-referrer',
-        signal: controller.signal,
-      })
+        signal: AbortSignal.any([controller.signal, timeoutSignal]),
+      }), timeoutMs)
       if (response.status !== 200) throw await responseError(response)
       return await response.json()
     } catch (error) {

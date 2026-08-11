@@ -78,4 +78,36 @@ describe('Admin Overview HTTP source', () => {
       getAccessToken: async () => 'token', fetchImpl: async () => ({ status: 403, json: async () => ({}) }),
     })).rejects.toEqual(expect.objectContaining<Partial<AdminOverviewReadError>>({ code: 'overview_unauthorized' }))
   })
+
+  it('degrades an unavailable domain without consuming stale data or failing healthy siblings', () => {
+    const source = wire()
+    const projected = parseAdminOverview({
+      ...source,
+      learners: domain(
+        { activeLearners: metric(999), privateFailure: 'raw database error' },
+        {
+          availability: 'unavailable', freshness: 'unknown', completeness: 'unknown',
+          observationStatus: 'unavailable', reasonCode: 'learner_source_unavailable',
+        },
+      ),
+    })
+    expect(projected?.domainStatuses?.learners.availability).toBe('unavailable')
+    expect(projected?.learners.activeLearners).toEqual({ status: 'unknown' })
+    expect(projected?.ai.requests).toEqual(metric(2))
+    expect(JSON.stringify(projected)).not.toContain('raw database error')
+  })
+
+  it('rejects contradictory per-domain aggregate metadata', () => {
+    const source = wire()
+    expect(parseAdminOverview({
+      ...source,
+      safety: domain({}, { availability: 'unavailable', observationStatus: 'current' }),
+    })).toBeNull()
+  })
+
+  it('does not turn credential transport failure into permission denial', async () => {
+    await expect(readAdminOverview({ kind: 'preset', preset: 'today' }, {
+      getAccessToken: async () => { throw new Error('private credential transport') },
+    })).rejects.toMatchObject({ code: 'overview_unavailable' })
+  })
 })

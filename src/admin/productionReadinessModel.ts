@@ -171,13 +171,23 @@ function readinessDomain(value: unknown): ProductionReadinessDomain | null {
   const checks = source.checks.map(readinessCheck)
   if (checks.some((item) => item === null)) return null
   const domainId = source.id as ProductionReadinessDomainId
-  if ((checks as ProductionReadinessCheck[]).some((item) => !item.id.startsWith(`${domainId}.`))) return null
+  const trustedChecks = checks as ProductionReadinessCheck[]
+  if (trustedChecks.some((item) => !item.id.startsWith(`${domainId}.`))) return null
+  const required = trustedChecks.filter((item) => item.required)
+  const derivedStatus: ProductionReadinessStatus = required.some((item) => item.status === 'BLOCKED') ? 'BLOCKED'
+    : required.some((item) => item.status === 'UNVERIFIED') ? 'UNVERIFIED'
+      : required.some((item) => item.status === 'UNAVAILABLE') ? 'UNAVAILABLE'
+        : required.some((item) => item.status === 'PARTIAL') ? 'PARTIAL'
+          : required.some((item) => !['READY', 'NOT_APPLICABLE'].includes(item.status)) ? 'BLOCKED'
+            : trustedChecks.some((item) => ['BLOCKED', 'PARTIAL', 'UNVERIFIED', 'UNAVAILABLE'].includes(item.status))
+              ? 'PARTIAL' : 'READY'
+  if (source.status !== derivedStatus) return null
   return Object.freeze({
     id: domainId,
     label: source.label,
     status: source.status,
     summary: source.summary,
-    checks: Object.freeze(checks as ProductionReadinessCheck[]),
+    checks: Object.freeze(trustedChecks),
   })
 }
 
@@ -204,7 +214,12 @@ export function parseProductionReadinessProjection(value: unknown): ProductionRe
   const checks = (domains as ProductionReadinessDomain[]).flatMap((item) => item.checks)
   if (new Set(checks.map((item) => item.id)).size !== checks.length) return null
   const requiredChecks = checks.filter((item) => item.required)
-  const ready = requiredChecks.filter((item) => item.status === 'READY').length
+  const ready = requiredChecks.filter((item) => (
+    item.status === 'READY' && item.evidence.status === 'VERIFIED'
+  )).length
+  if (checks.some((item) => item.status === 'READY' && item.evidence.status !== 'VERIFIED')) {
+    return null
+  }
   if (requiredChecks.length !== requiredSummary.total
     || ready !== requiredSummary.ready
     || requiredChecks.length - ready !== requiredSummary.blocking) return null

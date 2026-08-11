@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from './adminDependencyTimeout'
 import {
   ADMIN_AUDIT_ACTIONS,
   ADMIN_AUDIT_RESOURCE_TYPES,
@@ -171,19 +172,23 @@ export async function readAdminAuditPage(
   const controller = new AbortController()
   const forwardAbort = () => controller.abort(options.signal?.reason)
   options.signal?.addEventListener('abort', forwardAbort, { once: true })
+  if (options.signal?.aborted) controller.abort(options.signal.reason)
   const timer = globalThis.setTimeout(() => controller.abort(), options.timeoutMs ?? 10_000)
   try {
-    const token = await (options.getAccessToken ?? getGatewayAccessToken)()
-    if (!token || controller.signal.aborted) throw new AdminAuditReadError('audit_unauthorized')
-    const response = await (options.fetchImpl ?? fetch)(
+    const token = await withAdminDependencyTimeout(
+      () => (options.getAccessToken ?? getGatewayAccessToken)(), options.timeoutMs ?? 10_000,
+    )
+    if (controller.signal.aborted) throw new AdminAuditReadError('audit_timeout')
+    if (!token) throw new AdminAuditReadError('audit_unauthorized')
+    const response = await withAdminDependencyTimeout((timeoutSignal) => (options.fetchImpl ?? fetch)(
       `/api/admin/v1/audit?${queryFor(filters, cursor)}`,
       {
         method: 'GET',
         headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
         credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer',
-        signal: controller.signal,
+        signal: AbortSignal.any([controller.signal, timeoutSignal]),
       },
-    )
+    ), options.timeoutMs ?? 10_000)
     if (response.status === 401 || response.status === 403) throw new AdminAuditReadError('audit_unauthorized')
     if (response.status === 400) throw new AdminAuditReadError('invalid_query')
     if (response.status === 504) throw new AdminAuditReadError('audit_timeout')

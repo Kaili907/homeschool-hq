@@ -22,4 +22,22 @@ describe('Admin Production Readiness HTTP source', () => {
     })).rejects.toEqual(expect.objectContaining<Partial<AdminProductionReadinessError>>({ code: 'unauthorized' }))
     expect(fetchImpl).not.toHaveBeenCalled()
   })
+
+  it('distinguishes a timed-out dependency from permission denial', async () => {
+    vi.useFakeTimers()
+    try {
+      const read = readAdminProductionReadiness({
+        timeoutMs: 25,
+        getAccessToken: async () => 'token',
+        fetchImpl: vi.fn((_input, init) => new Promise<never>((_resolve, reject) => {
+          init.signal?.addEventListener('abort', () => reject(new Error('private readiness timeout')), { once: true })
+        })),
+      })
+      const rejected = expect(read).rejects.toMatchObject({ code: 'timeout' })
+      await vi.advanceTimersByTimeAsync(26)
+      await rejected
+    } finally {
+      vi.useRealTimers()
+    }
+  })
 })

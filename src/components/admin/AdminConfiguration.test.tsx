@@ -173,6 +173,13 @@ describe('Admin Configuration page', () => {
     const markup = render(['configuration:read'], empty)
     expect(markup).toContain('No approved premium logical voices are available')
     expect(markup).toContain('Browser-native speech remains the safe production fallback')
+    const unavailableCatalog = renderToStaticMarkup(<AdminConfiguration
+      {...common}
+      state={{ status: 'ready', projection: PROJECTION }}
+      voiceCatalog={{ status: 'unavailable' }}
+    />)
+    expect(unavailableCatalog).toContain('sanitized logical-voice catalog is unavailable')
+    expect(unavailableCatalog).toContain('No catalog default is inferred')
   })
 
   it('has responsive reflow and visible keyboard focus rules', () => {

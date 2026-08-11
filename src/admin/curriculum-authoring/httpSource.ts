@@ -1,4 +1,5 @@
 import { getGatewayAccessToken } from '../../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from '../adminDependencyTimeout'
 import {
   CURRICULUM_DRAFT_ENTITY_TYPES,
   CurriculumDraftAuthoringError,
@@ -60,18 +61,23 @@ export function createCurriculumDraftAuthoringHttpSource(
   fetchImpl: FetchLike = fetch,
   getAccessToken: () => Promise<string | null> = getGatewayAccessToken,
   basePath = '/api/admin/curriculum/drafts',
+  timeoutMs = 10_000,
 ): CurriculumDraftAuthoringSource {
+  const boundedToken = () => withAdminDependencyTimeout(() => getAccessToken(), timeoutMs)
+  const boundedFetch: FetchLike = (input, init) => withAdminDependencyTimeout(
+    (signal) => fetchImpl(input, { ...init, signal }), timeoutMs,
+  )
   async function request(path: string, method = 'GET', body?: object): Promise<unknown> {
     let token: string | null
     try {
-      token = await getAccessToken()
+      token = await boundedToken()
     } catch {
       throw new CurriculumDraftAuthoringError('unavailable')
     }
     if (!token) throw new CurriculumDraftAuthoringError('unauthenticated')
     let response: Pick<Response, 'ok' | 'status' | 'json'>
     try {
-      response = await fetchImpl(path, {
+      response = await boundedFetch(path, {
         method,
         headers: {
           Accept: 'application/json',

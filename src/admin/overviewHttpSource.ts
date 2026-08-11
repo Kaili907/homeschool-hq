@@ -1,5 +1,9 @@
 import { ADMIN_CONTRACT_VERSION, ADMIN_ENGINE_IDS, ADMIN_HEALTH_STATES, isCanonicalIntegerMicros, type AdminBillingDisposition, type AdminCostKind, type AdminEngineId, type AdminHealthState } from './contracts'
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
+import {
+  AdminDependencyTimeoutError,
+  withAdminDependencyTimeout,
+} from './adminDependencyTimeout'
 import type { AdminOverviewModel, Metric, OverviewDomain, OverviewDomainStatus, OverviewRange, PresentedSpend } from './overviewModel'
 import { parseAdminMonthlyCostAlert, parseAdminProviderAccountingCoverage } from './costsModel'
 
@@ -66,6 +70,12 @@ function domainStatus(value: unknown): OverviewDomainStatus | null {
     || !['current', 'stale', 'partial', 'unavailable', 'unknown'].includes(String(source.observationStatus))
     || typeof sourceWindow.label !== 'string' || sourceWindow.label.length > 160
   ) return null
+  if (source.availability === 'unavailable' && (
+    source.freshness !== 'unknown'
+    || source.completeness !== 'unknown'
+    || source.observationStatus !== 'unavailable'
+  )) return null
+  if (source.availability === 'available' && source.observationStatus === 'unavailable') return null
   return {
     availability: source.availability as OverviewDomainStatus['availability'],
     freshness: source.freshness as OverviewDomainStatus['freshness'],
@@ -145,16 +155,19 @@ export function parseAdminOverview(value: unknown): AdminOverviewModel | null {
     if (!status) return null
     statuses[name] = status
   }
-  const academy = record(record(source.academy)?.data) ?? {}
-  const learners = record(record(source.learners)?.data) ?? {}
-  const health = record(record(source.engineHealth)?.data) ?? {}
-  const performance = record(record(source.enginePerformance)?.data) ?? {}
-  const costs = record(record(source.costs)?.data) ?? {}
+  const domainData = (name: OverviewDomain) => statuses[name].availability === 'available'
+    ? record(record(source[name])?.data) ?? {}
+    : {}
+  const academy = domainData('academy')
+  const learners = domainData('learners')
+  const health = domainData('engineHealth')
+  const performance = domainData('enginePerformance')
+  const costs = domainData('costs')
   const providerAccounting = parseAdminProviderAccountingCoverage(costs.providerAccountingCoverage)
   const monthlyCostAlert = parseAdminMonthlyCostAlert(costs.monthlyCostAlert)
-  const safety = record(record(source.safety)?.data) ?? {}
-  const system = record(record(source.system)?.data) ?? {}
-  const curriculum = record(record(source.curriculum)?.data) ?? {}
+  const safety = domainData('safety')
+  const system = domainData('system')
+  const curriculum = domainData('curriculum')
   const healthEngines = Array.isArray(health.engines) ? health.engines : []
   const engines = healthEngines.flatMap((value) => {
     const engine = record(value)
@@ -260,17 +273,28 @@ function queryFor(range: OverviewRange): string {
 export async function readAdminOverview(range: OverviewRange, options: ReadOptions = {}): Promise<AdminOverviewModel> {
   const getAccessToken = options.getAccessToken ?? getGatewayAccessToken
   const fetchImpl = options.fetchImpl ?? ((url, init) => fetch(url, init))
-  const token = await getAccessToken().catch(() => null)
+  let token: string | null
+  try {
+    token = await withAdminDependencyTimeout(() => getAccessToken(), options.timeoutMs ?? TIMEOUT_MS)
+  } catch (error) {
+    throw new AdminOverviewReadError(
+      error instanceof AdminDependencyTimeoutError ? 'overview_timeout' : 'overview_unavailable',
+    )
+  }
   if (!token) throw new AdminOverviewReadError('overview_unauthorized')
   const controller = new AbortController()
   const cancel = () => controller.abort(options.signal?.reason)
   options.signal?.addEventListener('abort', cancel, { once: true })
+  if (options.signal?.aborted) controller.abort(options.signal.reason)
   const timer = globalThis.setTimeout(() => controller.abort(), options.timeoutMs ?? TIMEOUT_MS)
   try {
-    const response = await fetchImpl(`${ADMIN_OVERVIEW_ENDPOINT}?${queryFor(range)}`, {
-      method: 'GET', headers: { Authorization: `Bearer ${token}` }, signal: controller.signal,
-      cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer',
-    })
+    const response = await withAdminDependencyTimeout((timeoutSignal) => (
+      fetchImpl(`${ADMIN_OVERVIEW_ENDPOINT}?${queryFor(range)}`, {
+        method: 'GET', headers: { Authorization: `Bearer ${token}` },
+        signal: AbortSignal.any([controller.signal, timeoutSignal]),
+        cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer',
+      })
+    ), options.timeoutMs ?? TIMEOUT_MS)
     if (response.status === 401 || response.status === 403) throw new AdminOverviewReadError('overview_unauthorized')
     if (response.status === 400) throw new AdminOverviewReadError('invalid_range')
     if (response.status !== 200) throw new AdminOverviewReadError('overview_unavailable')

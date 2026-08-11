@@ -30,6 +30,21 @@ describe('System Health browser read boundary', () => {
     })).toBeNull()
   })
 
+  it('rejects false healthy labels and internally invalid aggregate metadata', () => {
+    const projection = buildSystemHealthProjection([EVENT], { now: NOW })
+    expect(decodeSystemHealthProjection({ ...projection, overallHealth: 'healthy' })).toBeNull()
+    expect(decodeSystemHealthProjection({
+      ...projection,
+      engines: projection.engines.map((engine) => engine.engineId === 'gateway'
+        ? { ...engine, health: 'healthy', reasonCodes: ['operating_normally'] }
+        : engine),
+    })).toBeNull()
+    expect(decodeSystemHealthProjection({
+      ...projection,
+      historyMetrics: { ...projection.historyMetrics, providerErrorCount: 0 },
+    })).toBeNull()
+  })
+
   it('uses bearer authorization, no credentials, and the selected bounded window', async () => {
     const projection = buildSystemHealthProjection([EVENT], { now: NOW, selectedWindow: '24h' })
     const fetchImpl = vi.fn(async () => ({ status: 200, json: async () => projection }))

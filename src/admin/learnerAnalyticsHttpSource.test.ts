@@ -78,4 +78,23 @@ describe('ADMIN-6B browser learner source', () => {
     })
     await expect(source.read({ capability: 'learners:read', today: '2026-09-09' })).rejects.toThrow('learner source unavailable')
   })
+
+  it('bounds a learner dependency timeout and forwards an abort signal to the read', async () => {
+    vi.useFakeTimers()
+    try {
+      const source = createAdminLearnerAnalyticsHttpSource({
+        timeoutMs: 25,
+        getAccessToken: async () => 'token',
+        fetchImpl: vi.fn((_input, init) => new Promise<never>((_resolve, reject) => {
+          init.signal?.addEventListener('abort', () => reject(new Error('private learner timeout')), { once: true })
+        })),
+      })
+      const read = source.read({ capability: 'learners:read', today: '2026-09-09' })
+      const rejected = expect(read).rejects.toThrow('learner source unavailable')
+      await vi.advanceTimersByTimeAsync(26)
+      await rejected
+    } finally {
+      vi.useRealTimers()
+    }
+  })
 })

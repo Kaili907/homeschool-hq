@@ -83,4 +83,34 @@ describe('Curriculum staging HTTP source', () => {
     )
     await expect(source.readStaging(DRAFT)).rejects.toEqual(new CurriculumStagingError('unavailable'))
   })
+
+  it('rejects an eligible claim backed by unavailable or stale gate evidence', async () => {
+    const forged = status()
+    forged.validation.status = 'unavailable'
+    const source = createCurriculumStagingHttpSource(
+      vi.fn(async () => ({ ok: true, status: 200, json: async () => forged })),
+      async () => 'token',
+    )
+    await expect(source.readStaging(DRAFT)).rejects.toEqual(new CurriculumStagingError('unavailable'))
+  })
+
+  it('keeps a published staged candidate readable but requires a stage mutation to actually stage', async () => {
+    const { replayed: _replayed, ...published } = status(false)
+    published.candidate!.publicationStatus = 'published'
+    const readSource = createCurriculumStagingHttpSource(
+      vi.fn(async () => ({ ok: true, status: 200, json: async () => published })),
+      async () => 'token',
+    )
+    await expect(readSource.readStaging(DRAFT)).resolves.toMatchObject({
+      stageState: 'staged', candidate: { publicationStatus: 'published' },
+    })
+
+    const noStage = createCurriculumStagingHttpSource(
+      vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ ...status(), replayed: false }) })),
+      async () => 'token',
+    )
+    await expect(noStage.stageDraft({
+      draftId: DRAFT, draftRevision: 9, idempotencyKey: REQUEST,
+    })).rejects.toEqual(new CurriculumStagingError('unavailable'))
+  })
 })

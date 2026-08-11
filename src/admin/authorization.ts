@@ -6,6 +6,7 @@ import {
   hasAdminCapability,
 } from './contracts'
 import { getGatewayAccessToken } from '../tutor/gatewayAuth'
+import { withAdminDependencyTimeout } from './adminDependencyTimeout'
 
 export const ADMIN_AUTHORIZATION_ENDPOINT = '/api/admin/v1/authorization'
 export const ADMIN_AUTHORIZATION_TIMEOUT_MS = 5_000
@@ -71,11 +72,14 @@ export async function readAdminAuthorization(
 
   let accessToken: string | null
   try {
-    accessToken = await getAccessToken()
+    accessToken = await withAdminDependencyTimeout(
+      () => getAccessToken(), options.timeoutMs ?? ADMIN_AUTHORIZATION_TIMEOUT_MS,
+    )
   } catch {
     return { status: 'unavailable' }
   }
-  if (!accessToken || options.signal?.aborted) return { status: 'unauthenticated' }
+  if (options.signal?.aborted) return { status: 'unavailable' }
+  if (!accessToken) return { status: 'unauthenticated' }
 
   const controller = new AbortController()
   const cancel = () => controller.abort(options.signal?.reason)
@@ -85,14 +89,17 @@ export async function readAdminAuthorization(
     options.timeoutMs ?? ADMIN_AUTHORIZATION_TIMEOUT_MS,
   )
   try {
-    const response = await fetchImpl(ADMIN_AUTHORIZATION_ENDPOINT, {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${accessToken}` },
-      signal: controller.signal,
-      cache: 'no-store',
-      credentials: 'omit',
-      referrerPolicy: 'no-referrer',
-    })
+    const response = await withAdminDependencyTimeout(
+      (timeoutSignal) => fetchImpl(ADMIN_AUTHORIZATION_ENDPOINT, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${accessToken}` },
+        signal: AbortSignal.any([controller.signal, timeoutSignal]),
+        cache: 'no-store',
+        credentials: 'omit',
+        referrerPolicy: 'no-referrer',
+      }),
+      options.timeoutMs ?? ADMIN_AUTHORIZATION_TIMEOUT_MS,
+    )
     if (response.status === 401) return { status: 'unauthenticated' }
     if (response.status === 403) return { status: 'forbidden' }
     if (response.status !== 200) return { status: 'unavailable' }

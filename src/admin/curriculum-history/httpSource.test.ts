@@ -101,13 +101,14 @@ describe('curriculum release history HTTP source', () => {
         stagingId: STAGING_ID,
       })]),
     })
-    expect(fetcher).toHaveBeenCalledWith('/api/admin/curriculum/history', {
+    expect(fetcher).toHaveBeenCalledWith('/api/admin/curriculum/history', expect.objectContaining({
       method: 'GET',
       headers: { Accept: 'application/json', Authorization: 'Bearer verified-token' },
       cache: 'no-store',
       credentials: 'omit',
       referrerPolicy: 'no-referrer',
-    })
+      signal: expect.any(AbortSignal),
+    }))
     expect(JSON.stringify(fetcher.mock.calls)).not.toMatch(/releases:manage|actor|learner|student/i)
   })
 
