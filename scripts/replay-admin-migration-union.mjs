@@ -1,58 +1,15 @@
 #!/usr/bin/env node
-import { execFileSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { PGlite } from '@electric-sql/pglite'
 
-const BASE = 'cf9d2bb9d8ca1a0a4a4c64cb245df6fe5d4afd64'
-const PROVIDER = '70701599e4d2689a472cfab22d6af2235862ad5a'
-const CURRICULUM = 'd8ba41f0dde5e9f06203ca5a07b57cade9cf1803'
-const RELEASES = '0e5a1278183ac560658c0bd24ea670c7ba5bae38'
-const CORRELATION = '8faa9eb23bd55f1d37d83d17c784d851722a12cf'
-
-const migration = (version, ref, filename) => ({
-  version,
-  ref,
-  filename,
-  repositoryPath: `supabase/migrations/${filename}`,
-})
-
-// Versions here are the collision-free order recommended by this audit. SQL
-// bytes are always read from immutable source commits and are never rewritten.
-const migrations = [
-  ...[
-    '20260724074106_academy_profiles_base.sql',
-    '20260724230000_academy_student_identity_foundation.sql',
-    '20260726120000_academy_household_revision_cas.sql',
-    '20260731120000_academy_gateway_usage.sql',
-    '20260801010000_academy_study_engine_storage.sql',
-    '20260801011000_academy_study_engine_authorization.sql',
-    '20260801012000_academy_study_engine_production_reconciliation.sql',
-    '20260801160000_academy_study_verified_identity.sql',
-    '20260801170000_academy_study_adult_review_operations.sql',
-    '20260801190000_academy_study_final_production_reconciliation.sql',
-    '20260808120000_academy_admin_authorization.sql',
-    '20260808121000_academy_operational_events.sql',
-    '20260808122000_academy_provider_usage_cost_ledger.sql',
-    '20260808123000_academy_admin_safety_operations.sql',
-    '20260809120000_academy_operational_telemetry_foundation.sql',
-    '20260809130000_academy_admin_audit_foundation.sql',
-    '20260809140000_academy_admin_configuration_core.sql',
-    '20260809150000_academy_logical_voice_profile_contract.sql',
-  ].map((filename) => migration(filename.slice(0, 14), BASE, filename)),
-  migration('20260809160000', CURRICULUM, '20260809160000_academy_curriculum_release_registry.sql'),
-  migration('20260809170000', CURRICULUM, '20260809170000_academy_admin_curriculum_audit_vocabulary.sql'),
-  migration('20260810110000', BASE, '20260810120000_academy_admin_audit_query_filters.sql'),
-  migration('20260810120000', CURRICULUM, '20260810120000_academy_curriculum_draft_authoring.sql'),
-  migration('20260810130000', CURRICULUM, '20260810130000_academy_curriculum_standards_review.sql'),
-  migration('20260810131000', PROVIDER, '20260810130000_academy_provider_attempt_journal.sql'),
-  migration('20260810140000', CURRICULUM, '20260810140000_academy_curriculum_human_approval.sql'),
-  migration('20260810141500', CURRICULUM, '20260810141500_academy_curriculum_draft_collaborators.sql'),
-  migration('20260810144700', BASE, '20260810144700_academy_admin_access_management.sql'),
-  migration('20260810150000', RELEASES, '20260810150000_academy_curriculum_release_staging.sql'),
-  migration('20260810151000', PROVIDER, '20260810151000_academy_study_safety_provider_accounting.sql'),
-  migration('20260810160000', RELEASES, '20260810160000_academy_curriculum_release_publishing.sql'),
-  migration('20260810170000', RELEASES, '20260810170000_academy_curriculum_activation_rollback.sql'),
-  migration('20260810180000', CORRELATION, '20260810180000_academy_admin_correlation_runtime_read.sql'),
-]
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const manifest = JSON.parse(readFileSync(
+  resolve(root, 'docs/study-engine-final-production/migration-manifest.json'),
+  'utf8',
+))
+const migrations = manifest.migrations.map(({ version, filename }) => ({ version, filename }))
 
 const expectedServiceGrantRevocations = new Map([
   ['20260801012000', new Set([
@@ -110,10 +67,7 @@ const bootstrap = `
 `
 
 function sourceFor(entry) {
-  return execFileSync('git', ['show', `${entry.ref}:${entry.repositoryPath}`], {
-    encoding: 'utf8',
-    maxBuffer: 32 * 1024 * 1024,
-  })
+  return readFileSync(resolve(root, 'supabase/migrations', entry.filename), 'utf8')
 }
 
 async function directServiceGrants(database) {
@@ -176,7 +130,7 @@ async function main() {
         }
       }
       serviceGrants = current
-      process.stdout.write(`applied ${entry.version} ${entry.filename} @ ${entry.ref.slice(0, 12)}\n`)
+      process.stdout.write(`applied ${entry.version} ${entry.filename}\n`)
     }
 
     const rls = await database.query(`

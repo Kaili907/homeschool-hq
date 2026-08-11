@@ -246,5 +246,16 @@ socket failure occurred.
 
 **ADMIN_MIGRATION_CHAIN_AUDIT_READY**
 
+## RC2 assembly follow-up
+
+The final RC2 assembly retained the pure collision/hash verifier and adapted
+`scripts/replay-admin-migration-union.mjs` to read the finalized repository
+manifest and migration files instead of the earlier frozen source tips. This
+keeps the audit local and disposable while ensuring the replay includes the
+configuration reauthorization and curriculum privacy hardening successors.
+The finalized 34-migration RC2 chain replayed successfully with no missing
+forced-RLS table, unexpected owner, missing required service routine, or
+unexpected service-grant revocation.
+
 Actual migration renames, the complete generated manifest, and updates to stale
 tests/docs remain owned by the final assembly card.
