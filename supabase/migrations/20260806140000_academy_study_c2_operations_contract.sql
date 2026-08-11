@@ -18,6 +18,7 @@ declare
   marker academy_private.study_persistence_metadata%rowtype;
   claim_body text;
   delivery_body text;
+  event_body text;
 begin
   if current_user <> 'postgres' then
     raise exception 'Study Engine migrations must run as postgres';
@@ -83,6 +84,9 @@ begin
      ) is null
      or to_regprocedure(
        'public.academy_study_release_delivery_lease_v2(text,uuid,uuid,bigint)'
+     ) is null
+     or to_regprocedure(
+       'public.academy_study_record_attempt_event_v2(text,jsonb)'
      ) is null then
     raise exception 'STUDY_C2 expected v2 contract predecessor missing';
   end if;
@@ -92,11 +96,16 @@ begin
   delivery_body := pg_get_functiondef(
     'academy_private.study_deliver_in_app_notification_internal_v2(text,jsonb)'::regprocedure
   );
+  event_body := pg_get_functiondef(
+    'public.academy_study_record_attempt_event_v2(text,jsonb)'::regprocedure
+  );
   if claim_body not like '%STUDY_DELIVERY_CLAIM_INVALID%'
      or claim_body not like '%lease-expired-after-submit%'
      or claim_body not like '%leaseGeneration%'
      or delivery_body not like '%STUDY_IN_APP_ATTEMPT_NOT_ACCEPTED%'
-     or delivery_body not like '%STUDY_IN_APP_DELIVERY_BINDING_MISMATCH%' then
+     or delivery_body not like '%STUDY_IN_APP_DELIVERY_BINDING_MISMATCH%'
+     or event_body not like '%STUDY_ATTEMPT_EVENT_TRANSITION_INVALID%'
+     or event_body not like '%event.occurred_at desc, event.event_id desc%' then
     raise exception 'STUDY_C2 predecessor function body mismatch';
   end if;
 
@@ -108,6 +117,9 @@ begin
      ) is not null
      or to_regprocedure(
        'public.academy_study_cancel_delivery_job_v2(text,uuid,uuid,bigint,text)'
+     ) is not null
+     or to_regprocedure(
+       'academy_private.study_allocate_adult_review_attempt_event_ordinal()'
      ) is not null then
     raise exception 'STUDY_C2 object collision';
   end if;
@@ -119,6 +131,236 @@ begin
   ) then
     raise exception 'STUDY_C2 expected lease constraint missing';
   end if;
+  if exists (
+    select 1
+    from pg_attribute
+    where attrelid = 'academy_private.study_adult_review_attempt_events'::regclass
+      and attname = 'event_ordinal'
+      and not attisdropped
+  ) then
+    raise exception 'STUDY_C2 object collision';
+  end if;
+end;
+$$;
+
+-- M7. Event UUIDs identify immutable evidence; they do not order it. The
+-- predecessor schema has no event-level monotonic field, while both legitimate
+-- writers already serialize each job with FOR UPDATE. Add a per-attempt causal
+-- ordinal, backfill only histories that form one legal state-machine path, and
+-- allocate every future value while holding the immutable parent attempt row.
+alter table academy_private.study_adult_review_attempt_events
+  add column event_ordinal bigint;
+
+do $$
+begin
+  if exists (
+    select 1
+    from academy_private.study_adult_review_attempt_events
+    group by attempt_id
+    having count(*) filter (where state = 'created') <> 1
+      or count(*) filter (where state in (
+        'provider-accepted', 'provider-rejected', 'timeout-indeterminate'
+      )) > 1
+      or count(*) filter (where state in (
+        'receipt-verified', 'receipt-rejected'
+      )) > 1
+      or (
+        count(*) filter (where state in (
+          'provider-accepted', 'provider-rejected', 'timeout-indeterminate'
+        )) > 0
+        and count(*) filter (where state = 'submitted') <> 1
+      )
+      or (
+        count(*) filter (where state = 'receipt-verified') > 0
+        and count(*) filter (where state = 'provider-accepted') <> 1
+      )
+      or (
+        count(*) filter (where state = 'receipt-rejected') > 0
+        and count(*) filter (where state in (
+          'provider-accepted', 'timeout-indeterminate'
+        )) <> 1
+      )
+      or (
+        count(*) filter (where state = 'receipt-verified') > 0
+        and count(*) filter (where state = 'permanent-failure') > 0
+      )
+  ) then
+    raise exception 'STUDY_C2 attempt event chronology predecessor mismatch';
+  end if;
+end;
+$$;
+
+-- ALTER TABLE holds an exclusive lock for this transactional backfill, so the
+-- immutable-evidence trigger can be suspended without exposing a write window.
+alter table academy_private.study_adult_review_attempt_events
+  disable trigger study_attempt_events_immutable;
+with causal_order as (
+  select event_id,
+    row_number() over (
+      partition by attempt_id
+      order by case state
+        when 'created' then 1
+        when 'submitted' then 2
+        when 'provider-accepted' then 3
+        when 'provider-rejected' then 3
+        when 'timeout-indeterminate' then 3
+        when 'receipt-verified' then 4
+        when 'receipt-rejected' then 4
+        when 'permanent-failure' then 5
+      end
+    )::bigint as event_ordinal
+  from academy_private.study_adult_review_attempt_events
+)
+update academy_private.study_adult_review_attempt_events as event
+set event_ordinal = causal_order.event_ordinal
+from causal_order
+where causal_order.event_id = event.event_id;
+alter table academy_private.study_adult_review_attempt_events
+  enable trigger study_attempt_events_immutable;
+
+alter table academy_private.study_adult_review_attempt_events
+  alter column event_ordinal set not null,
+  add constraint study_attempt_events_event_ordinal_check
+    check (event_ordinal > 0),
+  add constraint study_attempt_events_event_ordinal_key
+    unique (attempt_id, event_ordinal);
+
+create function academy_private.study_allocate_adult_review_attempt_event_ordinal()
+returns trigger
+language plpgsql
+security definer
+set search_path = pg_catalog
+as $$
+begin
+  -- The parent lock is the causal serialization authority. It also makes the
+  -- max-plus-one allocation safe for privileged maintenance inserts that do
+  -- not arrive through either normal job-locking writer.
+  perform 1
+  from academy_private.study_adult_review_delivery_attempts
+  where attempt_id = new.attempt_id and job_id = new.job_id
+  for update;
+  if not found then
+    raise exception 'STUDY_ATTEMPT_EVENT_BINDING_MISMATCH' using errcode = '42501';
+  end if;
+  select coalesce(max(event.event_ordinal), 0) + 1
+  into new.event_ordinal
+  from academy_private.study_adult_review_attempt_events as event
+  where event.attempt_id = new.attempt_id;
+  return new;
+end;
+$$;
+
+alter function academy_private.study_allocate_adult_review_attempt_event_ordinal()
+  owner to postgres;
+revoke all on function academy_private.study_allocate_adult_review_attempt_event_ordinal()
+  from public, anon, authenticated, service_role;
+
+create trigger study_attempt_events_allocate_ordinal
+before insert on academy_private.study_adult_review_attempt_events
+for each row execute function
+  academy_private.study_allocate_adult_review_attempt_event_ordinal();
+
+-- Replace the inherited transition reader in this forward migration. Its
+-- contract and write shape stay unchanged; only chronology moves from wall
+-- clock plus random UUID to the server-managed causal ordinal.
+create or replace function public.academy_study_record_attempt_event_v2(
+  p_worker_id text,
+  p_event jsonb
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = pg_catalog
+as $$
+declare
+  attempt academy_private.study_adult_review_delivery_attempts%rowtype;
+  job academy_private.study_adult_review_delivery_jobs%rowtype;
+  prior_state text;
+  requested_state text;
+begin
+  if not academy_private.study_adult_review_worker_is_authorized(
+    p_worker_id, 'delivery-attempt'
+  ) then
+    raise exception 'STUDY_WORKER_NOT_AUTHORIZED' using errcode = '42501';
+  end if;
+  if not public.academy_study_json_has_exact_keys(
+    p_event,
+    array[
+      'attemptId', 'jobId', 'state', 'structuredResult', 'timeoutState',
+      'retryDecision', 'errorCode'
+    ]::text[]
+  ) then
+    raise exception 'STUDY_ATTEMPT_EVENT_INVALID' using errcode = '22023';
+  end if;
+  select * into attempt
+  from academy_private.study_adult_review_delivery_attempts
+  where attempt_id = p_event ->> 'attemptId'
+    and job_id = (p_event ->> 'jobId')::uuid;
+  select * into job
+  from academy_private.study_adult_review_delivery_jobs
+  where id = attempt.job_id for update;
+  if attempt.attempt_id is null or job.id is null
+     or job.state <> 'leased' or job.lease_owner <> p_worker_id
+     or job.lease_expires_at <= clock_timestamp()
+     or attempt.lease_generation <> job.lease_generation
+     or attempt.attempt_ordinal <> job.attempt_count then
+    raise exception 'STUDY_ATTEMPT_EVENT_BINDING_MISMATCH' using errcode = '42501';
+  end if;
+  requested_state := p_event ->> 'state';
+  if requested_state not in (
+    'created', 'submitted', 'provider-accepted', 'provider-rejected',
+    'timeout-indeterminate', 'receipt-rejected',
+    'permanent-failure'
+  ) or not public.academy_study_identifier_is_valid(
+    p_event ->> 'structuredResult'
+  ) or p_event ->> 'timeoutState' not in (
+    'not-timed-out', 'before-submit', 'after-submit'
+  ) or p_event ->> 'retryDecision' not in (
+    'not-applicable', 'safe-retry', 'do-not-retry', 'reconcile'
+  ) or (
+    p_event ->> 'errorCode' is not null
+    and not public.academy_study_identifier_is_valid(p_event ->> 'errorCode')
+  ) then
+    raise exception 'STUDY_ATTEMPT_EVENT_INVALID' using errcode = '22023';
+  end if;
+  select event.state into prior_state
+  from academy_private.study_adult_review_attempt_events as event
+  where event.attempt_id = attempt.attempt_id
+  order by event.event_ordinal desc limit 1;
+  if not (
+    (prior_state is null and requested_state = 'created')
+    or (prior_state = 'created' and requested_state in ('submitted', 'permanent-failure'))
+    or (prior_state = 'submitted' and requested_state in (
+      'provider-accepted', 'provider-rejected', 'timeout-indeterminate',
+      'permanent-failure'
+    ))
+    or (prior_state in ('provider-accepted', 'timeout-indeterminate')
+      and requested_state in ('receipt-rejected', 'permanent-failure'))
+    or (prior_state in ('provider-rejected', 'receipt-rejected')
+      and requested_state = 'permanent-failure')
+  ) then
+    raise exception 'STUDY_ATTEMPT_EVENT_TRANSITION_INVALID' using errcode = '22023';
+  end if;
+  insert into academy_private.study_adult_review_attempt_events (
+    attempt_id, job_id, state, occurred_at, completed_at, structured_result,
+    timeout_state, retry_decision, error_code, lease_generation,
+    provider_name, provider_config_version, delivery_idempotency_key,
+    event_idempotency_key
+  ) values (
+    attempt.attempt_id, attempt.job_id, requested_state, clock_timestamp(),
+    case when requested_state in (
+      'provider-rejected', 'receipt-verified', 'receipt-rejected',
+      'permanent-failure'
+    ) then clock_timestamp() else null end,
+    p_event ->> 'structuredResult', p_event ->> 'timeoutState',
+    p_event ->> 'retryDecision', nullif(p_event ->> 'errorCode', ''),
+    attempt.lease_generation, attempt.provider_name,
+    attempt.provider_config_version, attempt.delivery_idempotency_key,
+    'attempt-event:' || academy_private.study_sha256_json(jsonb_build_object(
+      'attemptId', attempt.attempt_id, 'state', requested_state
+    ))
+  );
+  return jsonb_build_object('recorded', true, 'state', requested_state);
 end;
 $$;
 
@@ -627,7 +869,7 @@ begin
   select event.state into latest_state
   from academy_private.study_adult_review_attempt_events as event
   where event.attempt_id = attempt.attempt_id
-  order by event.occurred_at desc, event.event_id desc
+  order by event.event_ordinal desc
   limit 1;
   -- M6. The provider transition belongs to this transaction, so the caller must
   -- arrive with 'submitted' as the latest recorded state. A pre-recorded
@@ -776,6 +1018,8 @@ alter function public.academy_study_prove_current_attempt_v2(text, uuid, text, u
   owner to postgres;
 alter function public.academy_study_cancel_delivery_job_v2(text, uuid, uuid, bigint, text)
   owner to postgres;
+alter function public.academy_study_record_attempt_event_v2(text, jsonb)
+  owner to postgres;
 alter function academy_private.study_deliver_in_app_notification_internal_v2(text, jsonb)
   owner to postgres;
 
@@ -787,6 +1031,8 @@ revoke all on function public.academy_study_prove_current_attempt_v2(text, uuid,
   from public, anon, authenticated, service_role;
 revoke all on function public.academy_study_cancel_delivery_job_v2(text, uuid, uuid, bigint, text)
   from public, anon, authenticated, service_role;
+revoke all on function public.academy_study_record_attempt_event_v2(text, jsonb)
+  from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_deliver_in_app_notification_internal_v2(text, jsonb)
   from public, anon, authenticated, service_role;
 
@@ -797,6 +1043,8 @@ grant execute on function public.academy_study_prove_delivery_lease_v2(text, uui
 grant execute on function public.academy_study_prove_current_attempt_v2(text, uuid, text, uuid)
   to service_role;
 grant execute on function public.academy_study_cancel_delivery_job_v2(text, uuid, uuid, bigint, text)
+  to service_role;
+grant execute on function public.academy_study_record_attempt_event_v2(text, jsonb)
   to service_role;
 
 alter table academy_private.study_persistence_metadata
@@ -816,6 +1064,7 @@ set c2_operations_contract_version = 1,
       'targeted_lease_bound_cancellation', true,
       'terminal_lease_retained_as_evidence', true,
       'provider_accepted_recorded_in_delivery_transaction', true,
+      'adult_review_event_chronology', 'per-attempt-server-ordinal-v1',
       'delivery_idempotency_key_format', 'unchanged',
       'route_identifier_format', 'unchanged'
     ),
@@ -828,5 +1077,7 @@ comment on function public.academy_study_prove_current_attempt_v2(text, uuid, te
   'Read-only current-attempt proof projected from stored durable attempt fields. Creates no attempt event.';
 comment on function public.academy_study_cancel_delivery_job_v2(text, uuid, uuid, bigint, text) is
   'Targeted single-job cancellation bound to the current lease, exact token, and exact revision. Reasons are limited to invalid_delivery and invalid_recipient.';
+comment on column academy_private.study_adult_review_attempt_events.event_ordinal is
+  'Server-managed causal sequence within one immutable delivery attempt; timestamps and event UUIDs are evidence, not chronology.';
 
 commit;

@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import { PGlite } from '@electric-sql/pglite'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
@@ -1260,6 +1261,32 @@ async function c2Event(job: ClaimedJob, attemptId: string, state: string): Promi
   ))
 }
 
+async function c2RewriteAttemptEventEvidence(
+  attemptId: string,
+  updates: Array<{ state: string; occurredAt: string; eventId?: string }>,
+): Promise<void> {
+  await c2.exec(`
+    alter table academy_private.study_adult_review_attempt_events
+      disable trigger study_attempt_events_immutable;
+  `)
+  try {
+    for (const update of updates) {
+      await c2.query(
+        `update academy_private.study_adult_review_attempt_events
+         set occurred_at = $1::timestamptz,
+             event_id = coalesce($2::uuid, event_id)
+         where attempt_id = $3 and state = $4`,
+        [update.occurredAt, update.eventId ?? null, attemptId, update.state],
+      )
+    }
+  } finally {
+    await c2.exec(`
+      alter table academy_private.study_adult_review_attempt_events
+        enable trigger study_attempt_events_immutable;
+    `)
+  }
+}
+
 async function c2Deliver(
   job: ClaimedJob,
   attemptId: string,
@@ -1287,17 +1314,7 @@ async function c2Deliver(
   ))
 }
 
-beforeAll(async () => {
-  c2 = await PGlite.create()
-  await c2.exec(bootstrap)
-  for (const path of c2Files) {
-    const source = await c2Read(path)
-    if (source === null) {
-      if (path === C2_MIGRATION) continue
-      throw new Error(`missing required migration ${path}`)
-    }
-    await c2.exec(source)
-  }
+async function c2ConfigureRuntime(): Promise<void> {
   // Director-owned in-app delivery policy approval and one authorized worker
   // schedule. Both are hosted-operator prerequisites, not contract surface.
   await c2.exec(`
@@ -1372,6 +1389,20 @@ beforeAll(async () => {
       })],
     ))
   }
+}
+
+beforeAll(async () => {
+  c2 = await PGlite.create()
+  await c2.exec(bootstrap)
+  for (const path of c2Files) {
+    const source = await c2Read(path)
+    if (source === null) {
+      if (path === C2_MIGRATION) continue
+      throw new Error(`missing required migration ${path}`)
+    }
+    await c2.exec(source)
+  }
+  await c2ConfigureRuntime()
 }, 180_000)
 
 afterAll(async () => c2.close())
@@ -1387,6 +1418,97 @@ describe.sequential('STUDY-C2 v2 operations contract', () => {
     expect(marker.rows[0].names.at(-1)).toBe(
       '20260806140000_academy_study_c2_operations_contract',
     )
+  })
+
+  it('installs a server-managed immutable event chronology authority', async () => {
+    const column = await c2.query<{ nullable: string; type: string }>(`
+      select is_nullable as nullable, data_type as type
+      from information_schema.columns
+      where table_schema = 'academy_private'
+        and table_name = 'study_adult_review_attempt_events'
+        and column_name = 'event_ordinal'
+    `)
+    expect(column.rows).toEqual([{ nullable: 'NO', type: 'bigint' }])
+
+    const constraints = await c2.query<{ name: string; type: string }>(`
+      select conname as name, contype::text as type
+      from pg_constraint
+      where conrelid = 'academy_private.study_adult_review_attempt_events'::regclass
+        and conname in (
+          'study_attempt_events_event_ordinal_check',
+          'study_attempt_events_event_ordinal_key'
+        )
+      order by conname
+    `)
+    expect(constraints.rows).toEqual([
+      { name: 'study_attempt_events_event_ordinal_check', type: 'c' },
+      { name: 'study_attempt_events_event_ordinal_key', type: 'u' },
+    ])
+
+    const allocator = await c2.query<{
+      definition: string; secdef: boolean; owner: string; config: string[] | null
+      service: boolean; guardian: boolean; everyone: boolean
+    }>(`
+      select pg_get_functiondef(procedure.oid) as definition,
+        procedure.prosecdef as secdef, authority.rolname as owner,
+        procedure.proconfig as config,
+        has_function_privilege(
+          'service_role', procedure.oid, 'execute'
+        ) as service,
+        has_function_privilege(
+          'authenticated', procedure.oid, 'execute'
+        ) as guardian,
+        has_function_privilege(
+          'public', procedure.oid, 'execute'
+        ) as everyone
+      from pg_proc as procedure
+      join pg_namespace as namespace on namespace.oid = procedure.pronamespace
+      join pg_roles as authority on authority.oid = procedure.proowner
+      where namespace.nspname = 'academy_private'
+        and procedure.proname = 'study_allocate_adult_review_attempt_event_ordinal'
+    `)
+    expect(allocator.rows).toHaveLength(1)
+    expect(allocator.rows[0]).toMatchObject({
+      secdef: true, owner: 'postgres', service: false,
+      guardian: false, everyone: false,
+    })
+    expect(allocator.rows[0].config).toContain('search_path=pg_catalog')
+    expect(allocator.rows[0].definition).toContain('for update')
+    expect(allocator.rows[0].definition).toContain('max(event.event_ordinal)')
+
+    const trigger = await c2.query<{ definition: string }>(`
+      select pg_get_triggerdef(oid) as definition
+      from pg_trigger
+      where tgrelid = 'academy_private.study_adult_review_attempt_events'::regclass
+        and tgname = 'study_attempt_events_allocate_ordinal'
+        and not tgisinternal
+    `)
+    expect(trigger.rows).toHaveLength(1)
+    expect(trigger.rows[0].definition).toContain('BEFORE INSERT')
+    const immutableTrigger = await c2.query<{ enabled: string }>(`
+      select tgenabled::text as enabled
+      from pg_trigger
+      where tgrelid = 'academy_private.study_adult_review_attempt_events'::regclass
+        and tgname = 'study_attempt_events_immutable'
+        and not tgisinternal
+    `)
+    expect(immutableTrigger.rows).toEqual([{ enabled: 'O' }])
+
+    const readers = await c2.query<{ record: string; delivery: string }>(`
+      select
+        pg_get_functiondef(
+          'public.academy_study_record_attempt_event_v2(text,jsonb)'::regprocedure
+        ) as record,
+        pg_get_functiondef(
+          'academy_private.study_deliver_in_app_notification_internal_v2(text,jsonb)'::regprocedure
+        ) as delivery
+    `)
+    expect(readers.rows[0].record).toContain('event.event_ordinal desc')
+    expect(readers.rows[0].delivery).toContain('event.event_ordinal desc')
+    expect(readers.rows[0].record).not.toContain('event.event_id desc')
+    expect(readers.rows[0].delivery).not.toContain('event.event_id desc')
+    expect(readers.rows[0].record).not.toContain('event.occurred_at desc')
+    expect(readers.rows[0].delivery).not.toContain('event.occurred_at desc')
   })
 
   it('projects claimId, raw household/student identity, and the template code', async () => {
@@ -1718,13 +1840,15 @@ describe.sequential('STUDY-C2 v2 operations contract', () => {
     const delivered = await c2Deliver(job, attemptId, revision)
     expect(delivered).toMatchObject({ state: 'delivered', attemptId, jobId: job.jobId })
 
-    const events = await c2.query<{ state: string }>(`
-      select state from academy_private.study_adult_review_attempt_events
-      where attempt_id = '${attemptId}' order by occurred_at, event_id
+    const events = await c2.query<{ state: string; ordinal: number }>(`
+      select state, event_ordinal::integer as ordinal
+      from academy_private.study_adult_review_attempt_events
+      where attempt_id = '${attemptId}' order by event_ordinal
     `)
     expect(events.rows.map((row) => row.state)).toEqual([
       'created', 'submitted', 'provider-accepted', 'receipt-verified',
     ])
+    expect(events.rows.map((row) => row.ordinal)).toEqual([1, 2, 3, 4])
 
     const terminal = await c2.query<{
       state: string; token: string | null; owner: string | null; expires: string | null
@@ -2070,15 +2194,217 @@ describe.sequential('STUDY-C2 v2 operations contract', () => {
     )).toThrow('receipt_schema_mismatch')
   })
 
-  it('refuses delivery when provider-accepted was pre-recorded by the adapter', async () => {
-    const [job] = await c2Provision('pre-accepted')
+  it('orders same-time causal events independently of repeatedly randomized UUIDs', async () => {
+    const [job, independentJob] = await c2Provision('pre-accepted')
     const attemptId = 'attempt:c2-pre-accepted'
     const revision = await c2Attempt(job, attemptId)
     await c2Event(job, attemptId, 'created')
+    await c2RewriteAttemptEventEvidence(attemptId, [{
+      state: 'created', occurredAt: '2026-08-11T12:00:00.000Z',
+    }])
     await c2Event(job, attemptId, 'submitted')
+    // The older event owns the larger UUID. The legacy reader therefore sees
+    // created, but the corrected transition reader must see submitted.
+    await c2RewriteAttemptEventEvidence(attemptId, [
+      {
+        state: 'created', occurredAt: '2026-08-11T12:00:01.000Z',
+        eventId: 'ffffffff-ffff-4fff-8fff-fffffffffff0',
+      },
+      {
+        state: 'submitted', occurredAt: '2026-08-11T12:00:01.000Z',
+        eventId: '00000000-0000-4000-8000-000000000010',
+      },
+    ])
+    const legacyBeforeProvider = await c2.query<{ state: string }>(`
+      select state from academy_private.study_adult_review_attempt_events
+      where attempt_id = '${attemptId}'
+      order by occurred_at desc, event_id desc limit 1
+    `)
+    expect(legacyBeforeProvider.rows[0].state).toBe('created')
     await c2Event(job, attemptId, 'provider-accepted')
+
+    const causalStates = await c2.query<{ state: string; ordinal: number }>(`
+      select state, event_ordinal::integer as ordinal
+      from academy_private.study_adult_review_attempt_events
+      where attempt_id = '${attemptId}' order by event_ordinal
+    `)
+    expect(causalStates.rows).toEqual([
+      { state: 'created', ordinal: 1 },
+      { state: 'submitted', ordinal: 2 },
+      { state: 'provider-accepted', ordinal: 3 },
+    ])
+
+    // A separate attempt starts its own ordinal and can deliver from submitted
+    // even when its older created UUID wins the legacy tie-break.
+    const independentAttemptId = 'attempt:c2-same-time-independent'
+    const independentRevision = await c2Attempt(independentJob, independentAttemptId)
+    await c2Event(independentJob, independentAttemptId, 'created')
+    await c2RewriteAttemptEventEvidence(independentAttemptId, [{
+      state: 'created', occurredAt: '2026-08-11T12:00:03.000Z',
+    }])
+    await c2Event(independentJob, independentAttemptId, 'submitted')
+    await c2RewriteAttemptEventEvidence(independentAttemptId, [
+      {
+        state: 'created', occurredAt: '2026-08-11T12:00:04.000Z',
+        eventId: 'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeee0',
+      },
+      {
+        state: 'submitted', occurredAt: '2026-08-11T12:00:04.000Z',
+        eventId: '00000000-0000-4000-8000-000000000020',
+      },
+    ])
+    const independentLegacy = await c2.query<{ state: string }>(`
+      select state from academy_private.study_adult_review_attempt_events
+      where attempt_id = '${independentAttemptId}'
+      order by occurred_at desc, event_id desc limit 1
+    `)
+    expect(independentLegacy.rows[0].state).toBe('created')
+    await expect(c2Deliver(
+      independentJob, independentAttemptId, independentRevision,
+    )).resolves.toMatchObject({ state: 'delivered', attemptId: independentAttemptId })
+    const independentOrdinals = await c2.query<{ ordinal: number }>(`
+      select event_ordinal::integer as ordinal
+      from academy_private.study_adult_review_attempt_events
+      where attempt_id = '${independentAttemptId}' order by event_ordinal
+    `)
+    expect(independentOrdinals.rows.map((row) => row.ordinal)).toEqual([1, 2, 3, 4])
+
+    // Deterministic RED from the inherited implementation: causal order is
+    // submitted -> provider-accepted, but equal timestamps and the UUIDs below
+    // make the old delivery lookup select submitted and attempt a duplicate
+    // provider insert. The corrected lookup must refuse before any write.
+    const sameTimestamp = '2026-08-11T12:00:05.000Z'
+    await c2RewriteAttemptEventEvidence(attemptId, [
+      {
+        state: 'created', occurredAt: sameTimestamp,
+        eventId: '11111111-1111-4111-8111-111111111111',
+      },
+      {
+        state: 'submitted', occurredAt: sameTimestamp,
+        eventId: 'ffffffff-ffff-4fff-8fff-ffffffffffff',
+      },
+      {
+        state: 'provider-accepted', occurredAt: sameTimestamp,
+        eventId: '00000000-0000-4000-8000-000000000000',
+      },
+    ])
+    const legacyLatest = await c2.query<{ state: string }>(`
+      select state
+      from academy_private.study_adult_review_attempt_events
+      where attempt_id = '${attemptId}'
+      order by occurred_at desc, event_id desc
+      limit 1
+    `)
+    expect(legacyLatest.rows[0].state).toBe('submitted')
+
+    // Wall clock is evidence only. Even a fully inverted clock ordering cannot
+    // override the server-managed causal sequence.
+    await c2RewriteAttemptEventEvidence(attemptId, [
+      {
+        state: 'created', occurredAt: '2026-08-11T12:00:08.000Z',
+        eventId: '33333333-3333-4333-8333-333333333333',
+      },
+      {
+        state: 'submitted', occurredAt: '2026-08-11T12:00:07.000Z',
+        eventId: '44444444-4444-4444-8444-444444444444',
+      },
+      {
+        state: 'provider-accepted', occurredAt: '2026-08-11T12:00:06.000Z',
+        eventId: '55555555-5555-4555-8555-555555555555',
+      },
+    ])
+    const invertedClock = await c2.query<{ clock: string; causal: string }>(`
+      select
+        (select state
+         from academy_private.study_adult_review_attempt_events
+         where attempt_id = '${attemptId}'
+         order by occurred_at desc, event_id desc limit 1) as clock,
+        (select state
+         from academy_private.study_adult_review_attempt_events
+         where attempt_id = '${attemptId}'
+         order by event_ordinal desc limit 1) as causal
+    `)
+    expect(invertedClock.rows[0]).toEqual({
+      clock: 'created', causal: 'provider-accepted',
+    })
     await expect(c2Deliver(job, attemptId, revision))
       .rejects.toThrow(/STUDY_IN_APP_ATTEMPT_NOT_SUBMITTED/)
+
+    const countDurableRows = async () => (await c2.query<{
+      events: number; receipts: number; notifications: number
+    }>(`
+      select
+        (select count(*)::integer
+         from academy_private.study_adult_review_attempt_events
+         where job_id = '${job.jobId}') as events,
+        (select count(*)::integer
+         from academy_private.study_adult_review_delivery_receipts
+         where job_id = '${job.jobId}') as receipts,
+        (select count(*)::integer
+         from academy_private.study_parent_notifications
+         where job_id = '${job.jobId}') as notifications
+    `)).rows[0]
+    const before = await countDurableRows()
+    expect(before).toEqual({ events: 3, receipts: 0, notifications: 0 })
+
+    // Repeat with fresh random UUIDs in both possible relative orders. Sorting
+    // random values before assigning them makes the legacy outcome deliberate,
+    // while the causal outcome must remain provider-accepted on every run.
+    for (let run = 0; run < 32; run += 1) {
+      const [low, middle, high] = [randomUUID(), randomUUID(), randomUUID()].sort()
+      const submittedId = run % 2 === 0 ? high : middle
+      const providerId = run % 2 === 0 ? middle : high
+      await c2RewriteAttemptEventEvidence(attemptId, [
+        { state: 'created', occurredAt: sameTimestamp, eventId: low },
+        { state: 'submitted', occurredAt: sameTimestamp, eventId: submittedId },
+        { state: 'provider-accepted', occurredAt: sameTimestamp, eventId: providerId },
+      ])
+      const competingReaders = await c2.query<{
+        legacy: string; causal: string
+      }>(`
+        select
+          (select state
+           from academy_private.study_adult_review_attempt_events
+           where attempt_id = '${attemptId}'
+           order by occurred_at desc, event_id desc limit 1) as legacy,
+          (select state
+           from academy_private.study_adult_review_attempt_events
+           where attempt_id = '${attemptId}'
+           order by event_ordinal desc limit 1) as causal
+      `)
+      expect(competingReaders.rows[0]).toEqual({
+        legacy: run % 2 === 0 ? 'submitted' : 'provider-accepted',
+        causal: 'provider-accepted',
+      })
+      await expect(c2Deliver(job, attemptId, revision))
+        .rejects.toThrow(/STUDY_IN_APP_ATTEMPT_NOT_SUBMITTED/)
+    }
+
+    // Duplicate event replay is rejected by the state machine, not by a later
+    // idempotency-key collision, and none of the refused operations wrote rows.
+    await expect(c2Event(job, attemptId, 'provider-accepted'))
+      .rejects.toThrow(/STUDY_ATTEMPT_EVENT_TRANSITION_INVALID/)
+    expect(await countDurableRows()).toEqual(before)
+
+    // Once the lease expires, the already-recorded provider event quarantines
+    // this attempt before any retry; it can never be reclaimed for submission.
+    await c2.exec(`
+      update academy_private.study_adult_review_delivery_jobs
+      set lease_expires_at = clock_timestamp() - interval '1 minute'
+      where id = '${job.jobId}'
+    `)
+    const retrySweep = await c2AsWorker(() => c2Rpc<{ jobs: ClaimedJob[] }>(
+      `select public.academy_study_claim_delivery_jobs_v2('${C2_WORKER}', 50, 300) as result`,
+    ))
+    expect(retrySweep.jobs.map((candidate) => candidate.jobId)).not.toContain(job.jobId)
+    const quarantined = await c2.query<{ state: string; failure: string }>(`
+      select state, last_failure_code as failure
+      from academy_private.study_adult_review_delivery_jobs
+      where id = '${job.jobId}'
+    `)
+    expect(quarantined.rows[0]).toEqual({
+      state: 'indeterminate', failure: 'lease-expired-after-submit',
+    })
   })
 
   it('keeps timeout-indeterminate legal and preserves the sweep and release guard', async () => {
@@ -2125,6 +2451,7 @@ describe.sequential('STUDY-C2 v2 operations contract', () => {
       'public.academy_study_prove_current_attempt_v2(text, uuid, text, uuid)',
       'public.academy_study_cancel_delivery_job_v2(text, uuid, uuid, bigint, text)',
       'public.academy_study_claim_delivery_jobs_v2(text, integer, integer)',
+      'public.academy_study_record_attempt_event_v2(text, jsonb)',
     ]
     for (const signature of signatures) {
       const acl = await c2.query<{
@@ -2151,10 +2478,11 @@ describe.sequential('STUDY-C2 v2 operations contract', () => {
       where namespace.nspname = 'public' and procedure.proname in (
         'academy_study_prove_delivery_lease_v2',
         'academy_study_prove_current_attempt_v2',
-        'academy_study_cancel_delivery_job_v2'
+        'academy_study_cancel_delivery_job_v2',
+        'academy_study_record_attempt_event_v2'
       ) order by procedure.proname
     `)
-    expect(definition.rows).toHaveLength(3)
+    expect(definition.rows).toHaveLength(4)
     expect(definition.rows.every((row) => row.secdef)).toBe(true)
     expect(definition.rows.every((row) => row.owner === 'postgres')).toBe(true)
     expect(definition.rows.every(
@@ -2268,6 +2596,90 @@ describe.sequential('STUDY-C2 and G1 migration order', () => {
     expect(await applyChain(sorted)).toBeNull()
   }, 180_000)
 
+  it('backfills pre-C2 same-time histories by causal state without UUID chronology', async () => {
+    const primaryDatabase = c2
+    const predecessor = await PGlite.create()
+    try {
+      c2 = predecessor
+      await c2.exec(bootstrap)
+      for (const path of [
+        ...ORDER_BASE_CHAIN,
+        G1_MIGRATION,
+        './tests/study_engine_fixtures.sql',
+      ]) {
+        await c2.exec(await readFile(new URL(path, import.meta.url), 'utf8'))
+      }
+      await c2ConfigureRuntime()
+
+      const [legacyJob] = await c2Provision('legacy-chronology-backfill')
+      const attemptId = 'attempt:c2-legacy-chronology-backfill'
+      const revision = await c2Attempt(legacyJob, attemptId)
+      await c2Event(legacyJob, attemptId, 'created')
+      await c2RewriteAttemptEventEvidence(attemptId, [{
+        state: 'created', occurredAt: '2026-08-11T13:00:00.000Z',
+      }])
+      await c2Event(legacyJob, attemptId, 'submitted')
+      await c2RewriteAttemptEventEvidence(attemptId, [
+        { state: 'created', occurredAt: '2026-08-11T13:00:00.000Z' },
+        { state: 'submitted', occurredAt: '2026-08-11T13:00:01.000Z' },
+      ])
+      await c2Event(legacyJob, attemptId, 'provider-accepted')
+      await c2RewriteAttemptEventEvidence(attemptId, [
+        {
+          state: 'created', occurredAt: '2026-08-11T13:00:02.000Z',
+          eventId: '22222222-2222-4222-8222-222222222222',
+        },
+        {
+          state: 'submitted', occurredAt: '2026-08-11T13:00:02.000Z',
+          eventId: 'ffffffff-ffff-4fff-8fff-fffffffffff1',
+        },
+        {
+          state: 'provider-accepted', occurredAt: '2026-08-11T13:00:02.000Z',
+          eventId: '00000000-0000-4000-8000-000000000001',
+        },
+      ])
+      const legacyLatest = await c2.query<{ state: string }>(`
+        select state from academy_private.study_adult_review_attempt_events
+        where attempt_id = '${attemptId}'
+        order by occurred_at desc, event_id desc limit 1
+      `)
+      expect(legacyLatest.rows[0].state).toBe('submitted')
+
+      await c2.exec(await readFile(new URL(C2_MIGRATION, import.meta.url), 'utf8'))
+      const backfilled = await c2.query<{ state: string; ordinal: number }>(`
+        select state, event_ordinal::integer as ordinal
+        from academy_private.study_adult_review_attempt_events
+        where attempt_id = '${attemptId}' order by event_ordinal
+      `)
+      expect(backfilled.rows).toEqual([
+        { state: 'created', ordinal: 1 },
+        { state: 'submitted', ordinal: 2 },
+        { state: 'provider-accepted', ordinal: 3 },
+      ])
+
+      const durableJob = await c2.query<ClaimedJob>(`
+        select id::text as "jobId", id::text as "claimId",
+          proposal_id as "proposalId", household_id::text as "householdId",
+          student_id::text as "studentId", template_code as "templateCode",
+          recipient_ref as "recipientRef", route_ref as "routeRef",
+          channel as route, delivery_idempotency_key as "idempotencyKey",
+          lease_token::text as "leaseToken",
+          lease_expires_at::text as "leaseExpiresAt",
+          lease_generation::integer as "leaseGeneration",
+          revision::integer as revision
+        from academy_private.study_adult_review_delivery_jobs
+        where id = '${legacyJob.jobId}'
+      `)
+      await expect(c2Deliver(durableJob.rows[0], attemptId, revision))
+        .rejects.toThrow(/STUDY_IN_APP_ATTEMPT_NOT_SUBMITTED/)
+      await expect(c2Event(durableJob.rows[0], attemptId, 'provider-accepted'))
+        .rejects.toThrow(/STUDY_ATTEMPT_EVENT_TRANSITION_INVALID/)
+    } finally {
+      c2 = primaryDatabase
+      await predecessor.close()
+    }
+  }, 180_000)
+
   it('records both markers when the natural order is applied', async () => {
     const database = await PGlite.create()
     try {
@@ -2294,6 +2706,8 @@ describe.sequential('STUDY-C2 and G1 migration order', () => {
       expect(row.c2).toBe(1)
       expect(row.manifest.in_app_receipt_delivered_at_normalized).toBe(true)
       expect(row.manifest.c2_operations_contract_version).toBe(1)
+      expect(row.manifest.adult_review_event_chronology)
+        .toBe('per-attempt-server-ordinal-v1')
     } finally {
       await database.close()
     }

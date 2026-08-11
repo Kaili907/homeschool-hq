@@ -47,8 +47,11 @@ async function loadManifest(): Promise<Manifest> {
  * every equivalence claim in `hosted-applied-evidence.json` quietly stops being about
  * the files in this repository. This pin is what makes such a drift loud.
  *
- * A failure here is never fixed by updating the expected value. It means a migration's
- * bytes changed, which for the ten hosted-applied members is a defect by construction.
+ * For any of the ten hosted-applied members, a failure here is never fixed by updating
+ * the expected value: byte drift is a defect by construction. An executable member may
+ * be repinned only after local evidence proves it remains not applied to hosted and an
+ * authorized correction deliberately changes its bytes; the manifest and this
+ * independent literal are then updated together.
  */
 const CUSTODY_LF_SHA256: Readonly<Record<string, string>> = {
   '20260724074106_academy_profiles_base.sql':
@@ -74,7 +77,7 @@ const CUSTODY_LF_SHA256: Readonly<Record<string, string>> = {
   '20260806120000_academy_study_in_app_receipt_timestamp.sql':
     'b690c634b9c629149d570c9ffc5e1664b060be1d9f45f76cb461503de2c6f3b6',
   '20260806140000_academy_study_c2_operations_contract.sql':
-    '8448c6d1d6eec2247a913cfb18bd21b8fd9f6793bab5acd81b414878e5333baf',
+    '2b47c3005c84e11cf8fc2ca38ee90490cc2ef7eff05755fc08ba0bbca7d91e15',
   '20260808120000_academy_study_actor_bound_session_verification.sql':
     '21462128be7f207cd31e60620acc1ec125f61e2e62fa2c41bb7272a764750f83',
   '20260808150000_academy_study_academic_readiness_contract.sql':

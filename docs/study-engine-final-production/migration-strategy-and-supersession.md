@@ -29,6 +29,8 @@ The correct integration is therefore **rebase or compose C2 onto this reconcilia
 3. Change nothing else in the manifest. In particular, do not reintroduce `not-applied-hosted` on any of the ten.
 4. Expected result: two executable migrations, floor still ten, gate still `allowed:false` on evidence flags alone.
 
+> **Restated 2026-08-11.** Item 2 records the bytes at the 2026-08-07 C2 integration and is not the current checksum assertion. A later independent review found an equal-timestamp event-order race in that still-never-applied executable migration. The authorized local correction added server-managed per-attempt event chronology without changing its `executable` / `not-applied-hosted` classification or dependency. Its current canonical LF checksum is `2b47c3005c84e11cf8fc2ca38ee90490cc2ef7eff05755fc08ba0bbca7d91e15`; no hosted contact or application occurred.
+
 Any resolution that produces more than two executable entries on this lineage is wrong.
 
 > **Restated 2026-08-08.** The sentence above was a bound on *this integration*, and as a rule about C2's composition it still holds: composing C2 correctly yields exactly two executables, and it did. It is not a standing bound on the lineage. Appending a genuinely new forward migration legitimately produces a third executable entry, and a rule phrased as a count cannot tell that append apart from the demotion it was written to refuse. What refuses the demotion is the frozen historical floor — membership of the ten, checked in both the manifest validator and the authorization gate — not this count. Read the sentence as scoped to the C2 merge it describes.
