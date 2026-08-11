@@ -132,7 +132,7 @@ const mutants = [
     tests: authorityTests,
     mutate: (source) => stoppedBranch(source, (branch) => replaceExact(
       branch,
-      "          lifecycle.cancelIfCurrent(token, 'safety-stop')\n",
+      "          lifecycle.cancelIfCurrent(token, 'safety-stop')",
       '',
     )),
   },

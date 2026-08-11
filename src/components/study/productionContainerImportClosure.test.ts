@@ -213,6 +213,8 @@ describe('production Study container import closure', () => {
     expect(closure.files).toContain('src/study/contracts/tutor/results.ts')
     // HOST_AWAIT: the LaunchSettled witness, the same one the preview path uses.
     expect(closure.files).toContain('src/study/production/tutorLaunchOrdering.ts')
+    // Eligibility: the fail-closed pre-launch witness contract is reachable.
+    expect(closure.files).toContain('src/study/contracts/tutor/eligibility.ts')
     // The durable safety-stop ledger and the host's own learner-facing words.
     expect(closure.files).toContain('src/study/safety/localStopLedger.ts')
     expect(closure.files).toContain('src/study/safety/learnerSafe.ts')
@@ -226,17 +228,19 @@ describe('production Study container import closure', () => {
     // grows the closure updates this number and says in its message what it
     // added.
     //
-    // 27 as measured on this card: 2 under adaptive-tutor/ (the caption
-    // component and its stylesheet), 4 under src/components/study/ (the two
-    // wrappers' production half, the shared body and its stylesheet) and 21
+    // 28 after the reviewed Tutor eligibility composition: 2 under
+    // adaptive-tutor/ (the caption component and its stylesheet), 4 under
+    // src/components/study/ (the two
+    // wrappers' production half, the shared body and its stylesheet) and 22
     // under src/study/ (the Tutor contract, the production contracts, the host
-    // ports and types, the lifecycle, the launch ordering and the safety
-    // ledger).
+    // ports and types, the lifecycle, the launch ordering, the content
+    // eligibility decision and the safety ledger).
     //
-    // The preview container's closure is 98 files for the same surface. The
+    // The preview container's closure is 100 files after the same eligibility
+    // composition reaches its production Tutor adapter. The
     // difference is the whole of this card.
-    expect(closure.files.length).toBe(27)
-    expect(closure.files.filter((file) => file.startsWith('src/study/'))).toHaveLength(21)
-    expect(preview.files.length).toBe(98)
+    expect(closure.files.length).toBe(28)
+    expect(closure.files.filter((file) => file.startsWith('src/study/'))).toHaveLength(22)
+    expect(preview.files.length).toBe(100)
   })
 })
