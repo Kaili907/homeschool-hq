@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "scenarios": [
+    {
+      "name": "all-pass",
+      "overrides": {},
+      "expectedClassification": "READY_FOR_HOSTED_PREFLIGHT"
+    },
+    {
+      "name": "missing-required-gate",
+      "overrides": {
+        "study_recovery_chaos": {
+          "status": "MISSING",
+          "durationMs": 0,
+          "reason": "required Study recovery/chaos capability is absent"
+        }
+      },
+      "expectedClassification": "BLOCKED_BY_MISSING_GATE"
+    },
+    {
+      "name": "test-failure",
+      "overrides": {
+        "full_root_tests": {
+          "status": "FAILED",
+          "reason": "command failed with exit code 1"
+        }
+      },
+      "expectedClassification": "BLOCKED_BY_TEST_FAILURE"
+    },
+    {
+      "name": "migration-collision",
+      "overrides": {
+        "migration_identity_manifest_checksum": {
+          "status": "FAILED",
+          "reason": "migration identity, manifest, or checksum validation blocked"
+        }
+      },
+      "expectedClassification": "BLOCKED_BY_MIGRATION_IDENTITY"
+    },
+    {
+      "name": "preflight-block",
+      "overrides": {
+        "unified_local_production_preflight": {
+          "status": "FAILED",
+          "reason": "unified local production preflight blocked"
+        }
+      },
+      "expectedClassification": "BLOCKED_BY_LOCAL_PREFLIGHT"
+    },
+    {
+      "name": "build-failure",
+      "overrides": {
+        "production_build": {
+          "status": "FAILED",
+          "reason": "command failed with exit code 1"
+        }
+      },
+      "expectedClassification": "BLOCKED_BY_BUILD"
+    }
+  ]
+}
