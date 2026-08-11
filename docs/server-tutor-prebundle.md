@@ -14,69 +14,55 @@ artifact into a callable endpoint. The future handler card may move the same
 outputs to `netlify/functions/_shared/generated/` only when a reviewed handler
 owns that packaging step.
 
-## Production invocation and mapping seam
+## Production invocation and fixed mapping custody
 
-Production mode is the default and fails closed unless it receives both T2's
-reviewed host-content mapping artifact and its independently reviewed SHA-256:
+Production mode is the default and accepts no mapping path or digest from its
+caller:
 
 ```text
-npm run server-tutor:bundle -- --mapping-artifact <repo-relative-path> --mapping-digest <lower-case-sha256>
+npm run server-tutor:bundle
 ```
 
-The build hashes the artifact and refuses a mismatch. Digest custody is an
-independent gate; a matching digest does not make arbitrary bytes a reviewed
-mapping. Production mode also parses the artifact and requires this envelope:
+The only production authority is the repository-reviewed
+`src/study/server/tutorHostMapping.v1.json` plus its source-controlled canonical
+digest. The build invokes Mapping H2's exact parser and invariants, rechecks the
+Academy and 91-file frozen Tutor custody, and rejects caller-supplied production
+artifact or digest fields. The current reviewed result is intentionally empty:
+`no-approved-mapping-under-current-frozen-runtime` with zero approved mappings.
 
-```json
-{
-  "schemaVersion": "study-tutor-host-mapping.v1",
-  "artifactKind": "production-reviewed",
-  "mappingVersion": 1,
-  "compatibilityStatus": "approved",
-  "sourceCustody": {
-    "academy": {
-      "packageId": "manuel-academy-grades-5-7-8-curriculum-v1",
-      "release": "1.0.0",
-      "manifestSha256": "<lower-case-sha256>"
-    },
-    "frozenTutor": {
-      "packageName": "@manuel-academy/adaptive-tutor-math-content",
-      "packageVersion": "1.0.2",
-      "checksumManifestSha256": "<lower-case-sha256>"
-    }
-  }
-}
-```
+The canonical mapping SHA-256 hashes Mapping H2's canonical JSON and is recorded
+as `mappingSha256`. The optional raw source-file hash, which includes the final
+newline, is separately named `rawFileSha256`; the two meanings are never
+interchanged. `hostContentMapping` also records the actual `academySourcePins`,
+`frozenTutorPins`, schema, artifact kind, mapping version, compatibility status,
+and the generated bundle SHA.
 
-`mappingVersion` must be a positive integer. `compatibilityStatus` may instead
-be `no-approved-mapping-under-current-frozen-runtime`; an honestly empty
-reviewed artifact remains valid build custody and does not invent a Tutor route.
-The Academy fields are cross-checked against the repository release manifest,
-and the frozen fields are cross-checked against the same verified 91-file
-custody result used by the server bundle. Mapping rows remain T2 review scope.
-
-The manifest records the envelope metadata, source pins, artifact path and
-digest under `hostContentMapping`. Artifact contents, not the filename, decide
-whether production mode accepts it, so renaming a test fixture cannot promote
-it and renaming a valid production artifact cannot demote it.
+The validated full mapping and a recursively frozen custody descriptor are
+statically embedded and exported by `server-tutor.mjs`. The generated runtime
+does not load a mapping file and exposes no replacement seam.
 
 Tests may opt in to the dedicated non-production fixture only explicitly:
 
 ```text
-npm run server-tutor:bundle -- --mode test --test-fixture-mapping netlify/build/host-content-mapping.test.json
+npm run server-tutor:bundle -- --mode test \
+  --test-fixture-mapping netlify/build/host-content-mapping.test.json \
+  --output-dir <isolated-test-output>
 ```
 
 That fixture declares its own test-only schema, `artifactKind` and
-`compatibilityStatus`; production mode cannot accept that identity.
+`compatibilityStatus`; production mode cannot accept that identity. Test mode
+requires an explicit output under an existing nested operating-system temporary
+directory. Repository-local and symlink-aliased outputs are rejected, so a
+fixture cannot replace `netlify/build/generated/`.
 
 ## Production build order
 
-The default `npm run build` deliberately remains unchanged until T2's mapping
-artifact is merged and the future Tutor handlers are reviewed. When those
-prerequisites land, the required order is:
+The default `npm run build` deliberately remains unchanged until the future
+Tutor handler is independently reviewed. That future production packaging order
+must be:
 
 ```text
-curriculum:build -> server-tutor:bundle (reviewed mapping) -> vite build -> stamp-sw
+curriculum:build -> server-tutor:bundle -> vite build -> stamp-sw
 ```
 
 The server prebundle must complete before any handler bundling or packaging,

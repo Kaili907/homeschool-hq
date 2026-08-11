@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 import { readFileSync, readdirSync, statSync } from 'node:fs'
-import { dirname, join, relative, resolve } from 'node:path'
+import { basename, dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import {
@@ -406,7 +406,7 @@ describe('canonical JSON, digest, and server/browser boundary', () => {
     expect(TUTOR_HOST_MAPPING_SHA256).toMatch(/^[a-f0-9]{64}$/)
   })
 
-  it('has no browser or production-route importer, so the route stays dark', () => {
+  it('has only the reviewed server prebundle importer, with no browser or route importer', () => {
     const roots = ['src', 'netlify']
     const sourceFiles: string[] = []
     const visit = (directory: string): void => {
@@ -420,9 +420,16 @@ describe('canonical JSON, digest, and server/browser boundary', () => {
 
     const importers = sourceFiles
       .filter((path) => !path.startsWith(here))
+      .filter((path) => !(
+        path.startsWith(resolve(repoRoot, 'netlify', 'build')) &&
+        basename(path) === 'server-tutor.mjs'
+      ))
       .filter((path) => !/\.test\.[cm]?[jt]sx?$/.test(path))
       .filter((path) => /tutorHostMapping|study-tutor-host-mapping\.v1/.test(readFileSync(path, 'utf8')))
       .map((path) => relative(repoRoot, path).replaceAll('\\', '/'))
-    expect(importers).toEqual([])
+    expect(importers).toEqual(['netlify/build/server-tutor-bundle.mjs'])
+    const prebundle = text('netlify/build/server-tutor-bundle.mjs')
+    expect(prebundle).toContain('loadTutorHostMappingArtifact')
+    expect(prebundle).toContain('TUTOR_HOST_MAPPING_SHA256')
   })
 })

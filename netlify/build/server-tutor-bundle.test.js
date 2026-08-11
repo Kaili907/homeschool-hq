@@ -14,7 +14,8 @@
  * real alias, bundled by the real bundler, and executed as real JavaScript.
  */
 import { createHash } from 'node:crypto'
-import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
+import { spawnSync } from 'node:child_process'
+import { mkdtemp, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, relative } from 'node:path'
@@ -24,9 +25,9 @@ import { viteConfig } from '../../vite.config'
 import {
   DEFAULT_SERVER_TUTOR_OUTPUT_DIRECTORY,
   FROZEN_PACKAGE_ALIAS_SOURCES,
-  HOST_CONTENT_MAPPING_SCHEMA_VERSION,
   NETLIFY_FUNCTION_BUILD,
   PRODUCTION_TUTOR_ENTRY_POINTS,
+  PRODUCTION_HOST_CONTENT_MAPPING_ARTIFACT,
   SERVER_TUTOR_ARTIFACT_SCHEMA_VERSION,
   SERVER_TUTOR_BUNDLE_FILE,
   SERVER_TUTOR_MANIFEST_FILE,
@@ -36,6 +37,18 @@ import {
   frozenPackageAliases,
   verifyFrozenTutorCustody,
 } from './server-tutor-bundle.mjs'
+import {
+  ACADEMY_GRADE5_MATH_UNIT5_CENSUS,
+  ACADEMY_SOURCE_PINS,
+  FROZEN_TUTOR_SOURCE_PINS,
+  PRODUCTION_REVIEWED_TUTOR_HOST_MAPPING,
+  REVIEWED_HOST_SEGMENTS,
+  TUTOR_HOST_MAPPING_ARTIFACT_KIND,
+  TUTOR_HOST_MAPPING_SCHEMA_VERSION,
+  TUTOR_HOST_MAPPING_SHA256,
+  TUTOR_HOST_MAPPING_VERSION,
+  parseTutorHostMappingArtifact,
+} from '../../src/study/server/tutorHostMapping.ts'
 
 const repoRoot = new URL('../../', import.meta.url)
 const readRepoFile = (path) => readFileSync(fileURLToPath(new URL(path, repoRoot)), 'utf8')
@@ -300,35 +313,10 @@ describe('server-side Tutor build feasibility', () => {
 
 const repoRootPath = fileURLToPath(repoRoot)
 const TEST_MAPPING_FIXTURE = 'netlify/build/host-content-mapping.test.json'
-const ACADEMY_MANIFEST_SHA256 = '38e6f27c24ec5371e4647364c088984fa0e1dbe25e1312847108a6d56d7404be'
-
-function productionMappingArtifact(overrides = {}) {
-  return {
-    schemaVersion: HOST_CONTENT_MAPPING_SCHEMA_VERSION,
-    artifactKind: 'production-reviewed',
-    mappingVersion: 1,
-    compatibilityStatus: 'approved',
-    sourceCustody: {
-      academy: {
-        packageId: 'manuel-academy-grades-5-7-8-curriculum-v1',
-        release: '1.0.0',
-        manifestSha256: ACADEMY_MANIFEST_SHA256,
-      },
-      frozenTutor: {
-        packageName: '@manuel-academy/adaptive-tutor-math-content',
-        packageVersion: '1.0.2',
-        checksumManifestSha256: 'a9c44585d36e120dfac6b95aade0cf77763cabeff1026490672244dbc87f27ee',
-      },
-    },
-    lessonMappings: [
-      {
-        lessonRef: 'math-lesson-04-multistep-word-problem-reasoning',
-        skillRef: SEQUENCE_04_ID,
-      },
-    ],
-    ...overrides,
-  }
-}
+const CANONICAL_MAPPING_SHA256 =
+  '8a8cd0df920f47a7741460b7bf8e3b21ffcc8653df282b3853e4e046d5aaa23d'
+const RAW_MAPPING_FILE_SHA256 =
+  'c02fca57f61aaf74b950da1f3f5845cd76b38dba83997269198cf02b864e613d'
 
 async function relativeFiles(root) {
   const entries = await readdir(root, { recursive: true, withFileTypes: true })
@@ -340,7 +328,7 @@ async function relativeFiles(root) {
 
 describe('production-grade server Tutor prebundle', () => {
   let workingDirectory
-  let productionFixtureDirectory
+  let productionBuildDirectory
   let first
   let second
   let bundleText
@@ -349,16 +337,17 @@ describe('production-grade server Tutor prebundle', () => {
 
   beforeAll(async () => {
     workingDirectory = await mkdtemp(join(tmpdir(), 'study-server-tutor-prebundle-'))
-    productionFixtureDirectory = await mkdtemp(join(repoRootPath, 'netlify', 'build', '.mapping-test-'))
+    productionBuildDirectory = await mkdtemp(
+      join(repoRootPath, 'netlify', 'build', '.production-prebundle-test-'),
+    )
     functionFilesBefore = await relativeFiles(join(repoRootPath, 'netlify', 'functions'))
     first = await buildServerTutorPrebundle({
-      mapping: { mode: 'test', fixturePath: TEST_MAPPING_FIXTURE },
-      outputDirectory: join(workingDirectory, 'first'),
+      outputDirectory: join(productionBuildDirectory, 'first'),
       buildSourceSha: null,
     })
     second = await buildServerTutorPrebundle({
-      mapping: { mode: 'test', fixturePath: TEST_MAPPING_FIXTURE },
-      outputDirectory: join(workingDirectory, 'second'),
+      mapping: { mode: 'production' },
+      outputDirectory: join(productionBuildDirectory, 'second'),
       buildSourceSha: null,
     })
     const bundlePath = join(first.outputDirectory, SERVER_TUTOR_BUNDLE_FILE)
@@ -368,35 +357,10 @@ describe('production-grade server Tutor prebundle', () => {
 
   afterAll(async () => {
     if (workingDirectory) await rm(workingDirectory, { recursive: true, force: true })
-    if (productionFixtureDirectory) {
-      await rm(productionFixtureDirectory, { recursive: true, force: true })
+    if (productionBuildDirectory) {
+      await rm(productionBuildDirectory, { recursive: true, force: true })
     }
   })
-
-  async function writeProductionArtifact(name, artifact) {
-    const bytes = Buffer.isBuffer(artifact)
-      ? artifact
-      : Buffer.from(typeof artifact === 'string' ? artifact : `${JSON.stringify(artifact, null, 2)}\n`)
-    const artifactPath = join(productionFixtureDirectory, name)
-    await writeFile(artifactPath, bytes)
-    return {
-      artifactPath: relative(repoRootPath, artifactPath).replaceAll('\\', '/'),
-      sha256: createHash('sha256').update(bytes).digest('hex'),
-    }
-  }
-
-  async function buildProductionArtifact(name, artifact, expectedSha256) {
-    const written = await writeProductionArtifact(name, artifact)
-    return buildServerTutorPrebundle({
-      mapping: {
-        mode: 'production',
-        artifactPath: written.artifactPath,
-        expectedSha256: expectedSha256 ?? written.sha256,
-      },
-      outputDirectory: join(productionFixtureDirectory, `output-${name}`),
-      buildSourceSha: null,
-    })
-  }
 
   it('feeds browser Vite and server esbuild from one canonical alias authority', () => {
     expect(viteConfig.resolve?.alias).toBe(frozenPackageAliases)
@@ -442,9 +406,8 @@ describe('production-grade server Tutor prebundle', () => {
     }
   })
 
-  it('emits the exact v1 manifest schema and verified digests', async () => {
-    const fixtureBytes = await readFile(fileURLToPath(new URL(TEST_MAPPING_FIXTURE, repoRoot)))
-    const expectedMappingDigest = createHash('sha256').update(fixtureBytes).digest('hex')
+  it('uses the exact reviewed Mapping H2 artifact and names both digest semantics', async () => {
+    const mappingBytes = await readFile(fileURLToPath(new URL(PRODUCTION_HOST_CONTENT_MAPPING_ARTIFACT, repoRoot)))
     const manifestOnDisk = JSON.parse(await readFile(
       join(first.outputDirectory, SERVER_TUTOR_MANIFEST_FILE),
       'utf8',
@@ -476,16 +439,24 @@ describe('production-grade server Tutor prebundle', () => {
         sha256: createHash('sha256').update(Buffer.from(bundleText)).digest('hex'),
       },
       hostContentMapping: {
-        status: 'test-fixture',
-        schemaVersion: 'study-host-content-mapping.test-fixture.v1',
-        artifactKind: 'test-fixture',
+        status: 'production-reviewed',
+        artifactPath: PRODUCTION_HOST_CONTENT_MAPPING_ARTIFACT,
+        schemaVersion: TUTOR_HOST_MAPPING_SCHEMA_VERSION,
+        artifactKind: TUTOR_HOST_MAPPING_ARTIFACT_KIND,
         mappingVersion: 1,
-        compatibilityStatus: 'test-fixture-only',
-        artifactPath: TEST_MAPPING_FIXTURE,
-        sha256: expectedMappingDigest,
+        compatibilityStatus: 'no-approved-mapping-under-current-frozen-runtime',
+        academySourcePins: ACADEMY_SOURCE_PINS,
+        frozenTutorPins: FROZEN_TUTOR_SOURCE_PINS,
+        mappingSha256: CANONICAL_MAPPING_SHA256,
+        rawFileSha256: RAW_MAPPING_FILE_SHA256,
+        bundleSha256: first.manifest.bundle.sha256,
       },
       buildSourceSha: null,
     })
+    expect(TUTOR_HOST_MAPPING_SHA256).toBe(CANONICAL_MAPPING_SHA256)
+    expect(createHash('sha256').update(mappingBytes).digest('hex')).toBe(RAW_MAPPING_FILE_SHA256)
+    expect(first.manifest.hostContentMapping.mappingSha256)
+      .not.toBe(first.manifest.hostContentMapping.rawFileSha256)
     expect(manifestOnDisk).toEqual(first.manifest)
   })
 
@@ -497,137 +468,118 @@ describe('production-grade server Tutor prebundle', () => {
       .toEqual(await readFile(join(first.outputDirectory, SERVER_TUTOR_MANIFEST_FILE)))
   })
 
-  it('requires a reviewed mapping artifact and digest in production mode', async () => {
-    await expect(buildServerTutorPrebundle({
-      mapping: { mode: 'production' },
-      outputDirectory: join(workingDirectory, 'missing-production-mapping'),
-    })).rejects.toThrow('requires a reviewed mapping artifact and SHA-256 digest')
-  })
-
-  it('pins the future production order without weakening the current browser build', () => {
+  it('pins production prebundling without changing the current browser build order', () => {
     const packageJson = JSON.parse(readRepoFile('package.json'))
     const documentation = readRepoFile('docs/server-tutor-prebundle.md')
     expect(packageJson.scripts['server-tutor:bundle']).toBe('node netlify/build/server-tutor-bundle.mjs')
     expect(packageJson.scripts.build).not.toContain('server-tutor:bundle')
-    expect(documentation).toContain(
-      'curriculum:build -> server-tutor:bundle (reviewed mapping) -> vite build -> stamp-sw',
-    )
+    expect(documentation).toContain('server-tutor:bundle -> vite build -> stamp-sw')
   })
 
-  it('allows the dedicated mapping fixture only in explicit test mode', async () => {
-    const fixtureBytes = await readFile(fileURLToPath(new URL(TEST_MAPPING_FIXTURE, repoRoot)))
-    await expect(buildProductionArtifact('reviewed-production-mapping.json', fixtureBytes))
-      .rejects.toThrow('Unsupported production mapping schemaVersion')
-    expect(first.manifest.hostContentMapping).toMatchObject({
+  it('allows the dedicated fixture only in explicit test mode and isolated output', async () => {
+    const result = await buildServerTutorPrebundle({
+      mapping: { mode: 'test', fixturePath: TEST_MAPPING_FIXTURE },
+      outputDirectory: join(workingDirectory, 'isolated-test-fixture'),
+      buildSourceSha: null,
+    })
+    expect(result.manifest.hostContentMapping).toMatchObject({
       status: 'test-fixture',
       schemaVersion: 'study-host-content-mapping.test-fixture.v1',
       artifactKind: 'test-fixture',
       mappingVersion: 1,
       compatibilityStatus: 'test-fixture-only',
+      artifactPath: TEST_MAPPING_FIXTURE,
+      rawFileSha256: expect.stringMatching(/^[0-9a-f]{64}$/),
+      bundleSha256: expect.stringMatching(/^[0-9a-f]{64}$/),
     })
+    await expect(buildServerTutorPrebundle({
+      mapping: { mode: 'test', fixturePath: TEST_MAPPING_FIXTURE },
+    })).rejects.toThrow('explicit isolated output directory')
+    await expect(buildServerTutorPrebundle({
+      mapping: { mode: 'test', fixturePath: TEST_MAPPING_FIXTURE },
+      outputDirectory: DEFAULT_SERVER_TUTOR_OUTPUT_DIRECTORY,
+    })).rejects.toThrow('must be outside the repository')
+    await expect(buildServerTutorPrebundle({
+      mapping: { mode: 'test', fixturePath: TEST_MAPPING_FIXTURE },
+      outputDirectory: 'netlify/build/GENERATED',
+    })).rejects.toThrow('must be outside the repository')
+
+    const linkedRepositoryBuild = join(workingDirectory, 'linked-repository-build')
+    await symlink(join(repoRootPath, 'netlify', 'build'), linkedRepositoryBuild, 'dir')
+    await expect(buildServerTutorPrebundle({
+      mapping: { mode: 'test', fixturePath: TEST_MAPPING_FIXTURE },
+      outputDirectory: join(linkedRepositoryBuild, 'fixture-output'),
+    })).rejects.toThrow('must resolve inside a nested temporary directory')
   })
 
-  it('accepts a reviewed approved artifact according to contents even under a .test filename', async () => {
-    const result = await buildProductionArtifact('whatever.test.json', productionMappingArtifact())
-    expect(result.manifest.hostContentMapping).toEqual({
-      status: 'production-reviewed',
-      schemaVersion: HOST_CONTENT_MAPPING_SCHEMA_VERSION,
-      artifactKind: 'production-reviewed',
-      mappingVersion: 1,
-      compatibilityStatus: 'approved',
-      sourceCustody: productionMappingArtifact().sourceCustody,
-      artifactPath: expect.stringMatching(/whatever\.test\.json$/),
-      sha256: expect.stringMatching(/^[0-9a-f]{64}$/),
-    })
+  it('rejects every caller attempt to replace production mapping path or digest', async () => {
+    const hostileMappings = [
+      { mode: 'production', artifactPath: TEST_MAPPING_FIXTURE },
+      { mode: 'production', expectedSha256: '0'.repeat(64) },
+      { artifactPath: PRODUCTION_HOST_CONTENT_MAPPING_ARTIFACT },
+    ]
+    for (const [index, mapping] of hostileMappings.entries()) {
+      await expect(buildServerTutorPrebundle({
+        mapping,
+        outputDirectory: join(productionBuildDirectory, `hostile-${index}`),
+      })).rejects.toThrow('fixed to the repository-reviewed artifact')
+    }
+
+    const cli = spawnSync(process.execPath, [
+      'netlify/build/server-tutor-bundle.mjs',
+      '--mapping-artifact',
+      TEST_MAPPING_FIXTURE,
+    ], { cwd: repoRootPath, encoding: 'utf8' })
+    expect(cli.status).toBe(1)
+    expect(cli.stderr).toContain('Unknown server Tutor build option: --mapping-artifact')
+
+    const mixedMode = spawnSync(process.execPath, [
+      'netlify/build/server-tutor-bundle.mjs',
+      '--mode',
+      'production',
+      '--test-fixture-mapping',
+      TEST_MAPPING_FIXTURE,
+    ], { cwd: repoRootPath, encoding: 'utf8' })
+    expect(mixedMode.status).toBe(1)
+    expect(mixedMode.stderr).toContain('accepted only in test mode')
   })
 
-  it('accepts an honestly empty reviewed production compatibility artifact', async () => {
-    const result = await buildProductionArtifact('no-approved-mapping.json', productionMappingArtifact({
-      compatibilityStatus: 'no-approved-mapping-under-current-frozen-runtime',
-      lessonMappings: [],
-    }))
-    expect(result.manifest.hostContentMapping.compatibilityStatus)
-      .toBe('no-approved-mapping-under-current-frozen-runtime')
+  it('rejects a renamed test fixture by exact content identity', () => {
+    const renamedAsProduction = JSON.parse(readRepoFile(TEST_MAPPING_FIXTURE))
+    expect(renamedAsProduction.schemaVersion).toBe('study-host-content-mapping.test-fixture.v1')
+    expect(parseTutorHostMappingArtifact(renamedAsProduction)).toBeNull()
   })
 
-  it('rejects test artifactKind even when the production schemaVersion is claimed', async () => {
-    await expect(buildProductionArtifact('test-kind.json', productionMappingArtifact({
-      artifactKind: 'test-fixture',
-    }))).rejects.toThrow('artifactKind must be production-reviewed')
-  })
-
-  it('rejects an unsupported production mapping schemaVersion', async () => {
-    await expect(buildProductionArtifact('wrong-schema.json', productionMappingArtifact({
-      schemaVersion: 'study-tutor-host-mapping.v2',
-    }))).rejects.toThrow('Unsupported production mapping schemaVersion')
-  })
-
-  it('rejects a missing production mapping schemaVersion', async () => {
-    const artifact = productionMappingArtifact()
-    delete artifact.schemaVersion
-    await expect(buildProductionArtifact('missing-schema.json', artifact))
-      .rejects.toThrow('Production mapping schemaVersion is required')
-  })
-
-  it('rejects a missing production mappingVersion', async () => {
-    const artifact = productionMappingArtifact()
-    delete artifact.mappingVersion
-    await expect(buildProductionArtifact('missing-version.json', artifact))
-      .rejects.toThrow('Production mappingVersion is required')
-  })
-
-  it('rejects a non-positive production mappingVersion', async () => {
-    await expect(buildProductionArtifact('wrong-version.json', productionMappingArtifact({
-      mappingVersion: 0,
-    }))).rejects.toThrow('Production mappingVersion must be a positive integer')
-  })
-
-  it('rejects missing reviewed source custody pins', async () => {
-    await expect(buildProductionArtifact('missing-custody.json', productionMappingArtifact({
-      sourceCustody: undefined,
-    }))).rejects.toThrow('Production mapping sourceCustody is required')
-  })
-
-  it('rejects a mapping pinned to another frozen Tutor package', async () => {
-    const artifact = productionMappingArtifact()
-    artifact.sourceCustody.frozenTutor.packageName = '@manuel-academy/other-tutor-content'
-    await expect(buildProductionArtifact('wrong-frozen-package.json', artifact))
-      .rejects.toThrow('Production mapping frozen Tutor package mismatch')
-  })
-
-  it('rejects a mapping pinned to another frozen checksum manifest', async () => {
-    const artifact = productionMappingArtifact()
-    artifact.sourceCustody.frozenTutor.checksumManifestSha256 = '0'.repeat(64)
-    await expect(buildProductionArtifact('wrong-frozen-checksum.json', artifact))
-      .rejects.toThrow('Production mapping frozen Tutor checksum manifest mismatch')
-  })
-
-  it('rejects a mapping whose Academy manifest pin does not match custody', async () => {
-    const artifact = productionMappingArtifact()
-    artifact.sourceCustody.academy.manifestSha256 = '0'.repeat(64)
-    await expect(buildProductionArtifact('wrong-academy-manifest.json', artifact))
-      .rejects.toThrow('Production mapping Academy manifest digest mismatch')
-  })
-
-  it('rejects a production mapping digest mismatch independently of its envelope', async () => {
-    await expect(buildProductionArtifact(
-      'wrong-artifact-digest.json',
-      productionMappingArtifact(),
-      '0'.repeat(64),
-    )).rejects.toThrow('Production host-content mapping digest mismatch')
-  })
-
-  it('rejects invalid production mapping JSON with its correct digest', async () => {
-    await expect(buildProductionArtifact('invalid-json.json', '{not-json}\n'))
-      .rejects.toThrow('Production host-content mapping artifact is not valid JSON')
-  })
-
-  it('exports only the server factory and contract version', () => {
+  it('statically embeds a deeply frozen reviewed mapping and custody descriptor', () => {
     expect(Object.keys(serverEntry).sort()).toEqual([
       'SERVER_TUTOR_ADAPTER_CONTRACT_VERSION',
+      'SERVER_TUTOR_HOST_CONTENT_MAPPING',
+      'SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY',
       'createProductionServerTutorRuntime',
     ])
     expect(serverEntry.SERVER_TUTOR_ADAPTER_CONTRACT_VERSION).toBe('study-tutor.v1')
+    expect(serverEntry.SERVER_TUTOR_HOST_CONTENT_MAPPING)
+      .toEqual(PRODUCTION_REVIEWED_TUTOR_HOST_MAPPING)
+    expect(serverEntry.SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY).toEqual({
+      schemaVersion: TUTOR_HOST_MAPPING_SCHEMA_VERSION,
+      artifactKind: TUTOR_HOST_MAPPING_ARTIFACT_KIND,
+      mappingVersion: TUTOR_HOST_MAPPING_VERSION,
+      compatibilityStatus: 'no-approved-mapping-under-current-frozen-runtime',
+      academySourcePins: ACADEMY_SOURCE_PINS,
+      frozenTutorPins: FROZEN_TUTOR_SOURCE_PINS,
+      mappingSha256: CANONICAL_MAPPING_SHA256,
+      rawFileSha256: RAW_MAPPING_FILE_SHA256,
+    })
+    const visit = (value) => {
+      if (typeof value !== 'object' || value === null) return
+      expect(Object.isFrozen(value)).toBe(true)
+      for (const child of Object.values(value)) visit(child)
+    }
+    visit(serverEntry.SERVER_TUTOR_HOST_CONTENT_MAPPING)
+    visit(serverEntry.SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY)
+    expect(bundleText).not.toMatch(/\breadFileSync\s*\(/)
+    expect(bundleText).not.toContain('node:fs')
+    expect(bundleText).not.toContain('tutorHostMapping.v1.json')
   })
 
   it('executes a non-default frozen Tutor program through the server factory in Node', async () => {
@@ -675,12 +627,86 @@ describe('production-grade server Tutor prebundle', () => {
     expect(result.visibleText).not.toBe(DEFAULT_SEQUENCE_PROMPT)
   })
 
+  it('bundles the fail-closed selector and selects no Tutor program for all Unit 5 content', async () => {
+    const inputs = Object.keys(first.metafile.inputs).map((path) => path.replaceAll('\\', '/'))
+    expect(inputs.some((path) => path.endsWith('src/study/production/tutorContentEligibility.ts')))
+      .toBe(true)
+    const selector = /function selectEligibleTutorProgram[\s\S]*?\n}/.exec(bundleText)?.[0]
+    expect(selector).toContain('?? null')
+    expect(selector).not.toContain('programs[0]')
+    expect(bundleText).not.toContain('function selectTutorProgram(')
+    expect(serverEntry.SERVER_TUTOR_HOST_CONTENT_MAPPING.approvedMappings).toEqual([])
+
+    const unit5Lessons = readRepoFile(ACADEMY_SOURCE_PINS.lessonSourceReference)
+      .trim()
+      .split(/\r?\n/)
+      .map((line) => JSON.parse(line))
+      .filter((lesson) =>
+        lesson.course_id === ACADEMY_SOURCE_PINS.courseId && lesson.unit_number === 5)
+    expect(unit5Lessons.map((lesson) => lesson.lesson_id)).toEqual(
+      ACADEMY_GRADE5_MATH_UNIT5_CENSUS.map((lesson) => lesson.hostLessonRef),
+    )
+
+    let ledgerWrites = 0
+    let accepted = 0
+    const runtime = serverEntry.createProductionServerTutorRuntime({
+      scope: {
+        householdRef: 'household:unit5-zero-mapping',
+        learnerRef: 'learner:unit5-zero-mapping',
+        sessionRef: 'study-session:unit5-zero-mapping',
+      },
+      hostProfileRef: 'profile:unit5-zero-mapping',
+      safety: {
+        mode: 'production',
+        classifierVersion: 'unit5-zero-mapping-v1',
+        evaluate: async () => ({ outcome: 'clear', mayContinue: true, adultHelpState: 'not-needed' }),
+      },
+      eventLedger: {
+        append: async () => {
+          ledgerWrites += 1
+          return 'appended'
+        },
+      },
+      isCurrent: () => true,
+      bridgeSessionRef: 'study-session:unit5-zero-mapping',
+    })
+
+    for (const lesson of unit5Lessons) {
+      for (const segment of REVIEWED_HOST_SEGMENTS) {
+        const result = await runtime.submit({
+          requestRef: `study-turn:unit5-${lesson.course_day}-${segment.suffix}`,
+          sessionRef: 'study-session:unit5-zero-mapping',
+          lessonRef: lesson.lesson_id,
+          segmentRef: `${lesson.lesson_id}:segment:${segment.suffix}`,
+          skillRef: `${lesson.lesson_id}:completion`,
+          subject: 'math',
+          taskType: segment.taskType,
+          transientLearnerText: 'ready',
+          expectedAnswer: 'ready',
+          occurredAt: '2026-08-01T14:00:00.000Z',
+          learnerLocalDate: '2026-08-01',
+          householdTimeZone: 'America/Detroit',
+        })
+        if (result.status === 'accepted') accepted += 1
+        expect(result).toEqual({
+          status: 'quarantined',
+          reasonCode: 'tutor-content-lesson-not-routable',
+        })
+      }
+    }
+    expect(unit5Lessons).toHaveLength(18)
+    expect(REVIEWED_HOST_SEGMENTS).toHaveLength(5)
+    expect(accepted).toBe(0)
+    expect(ledgerWrites).toBe(0)
+  })
+
   it('keeps the server artifact out of browser inputs, dist and source maps', async () => {
     const inputs = Object.keys(first.metafile.inputs).map((path) => path.replaceAll('\\', '/'))
     expect(inputs.some((path) => path === 'src/App.tsx' || path.startsWith('src/components/'))).toBe(false)
     expect(inputs.some((path) => /\.(?:css|scss|sass|less)$/.test(path))).toBe(false)
     expect(bundleText).not.toContain('@frozen/tutor-math-r1')
     expect(bundleText).not.toMatch(/\bimport\s*\(/)
+    expect(bundleText).not.toMatch(/\b(?:window|document|localStorage)\s*\./)
 
     const distRoot = join(repoRootPath, 'dist')
     const distFiles = await relativeFiles(distRoot).catch(() => [])
@@ -693,6 +719,7 @@ describe('production-grade server Tutor prebundle', () => {
 
     const sourceFiles = (await relativeFiles(join(repoRootPath, 'src')))
       .filter((path) => /\.(?:ts|tsx|js|jsx)$/.test(path))
+      .filter((path) => !/\.test\.[cm]?[jt]sx?$/.test(path))
     for (const sourceFile of sourceFiles) {
       const source = await readFile(join(repoRootPath, 'src', sourceFile), 'utf8')
       expect(source).not.toContain(DEFAULT_SERVER_TUTOR_OUTPUT_DIRECTORY)

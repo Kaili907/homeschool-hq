@@ -6,7 +6,18 @@
  * until a separately reviewed handler copies or imports it deliberately.
  */
 import { createHash } from 'node:crypto'
-import { access, mkdir, mkdtemp, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises'
+import {
+  access,
+  mkdir,
+  mkdtemp,
+  readFile,
+  readdir,
+  realpath,
+  rename,
+  rm,
+  stat,
+  writeFile,
+} from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -16,6 +27,16 @@ import {
   FROZEN_TUTOR_PACKAGE,
   frozenPackageAliases,
 } from '../../scripts/frozen-package-aliases.mjs'
+import {
+  ACADEMY_SOURCE_PINS,
+  FROZEN_TUTOR_SOURCE_PINS,
+  TUTOR_HOST_MAPPING_ARTIFACT_KIND,
+  TUTOR_HOST_MAPPING_CANONICAL_JSON,
+  TUTOR_HOST_MAPPING_SCHEMA_VERSION,
+  TUTOR_HOST_MAPPING_SHA256,
+  TUTOR_HOST_MAPPING_VERSION,
+  loadTutorHostMappingArtifact,
+} from '../../src/study/server/tutorHostMapping.ts'
 
 const repoRoot = new URL('../../', import.meta.url)
 const repoRootPath = fileURLToPath(repoRoot)
@@ -25,17 +46,16 @@ export const SERVER_TUTOR_BUNDLE_FILE = 'server-tutor.mjs'
 export const SERVER_TUTOR_MANIFEST_FILE = 'server-tutor.manifest.json'
 export const SERVER_TUTOR_ENTRY_POINT = 'netlify/build/server-tutor-entry.ts'
 export const DEFAULT_SERVER_TUTOR_OUTPUT_DIRECTORY = 'netlify/build/generated'
-export const HOST_CONTENT_MAPPING_SCHEMA_VERSION = 'study-tutor-host-mapping.v1'
+export const HOST_CONTENT_MAPPING_SCHEMA_VERSION = TUTOR_HOST_MAPPING_SCHEMA_VERSION
+export const PRODUCTION_HOST_CONTENT_MAPPING_ARTIFACT =
+  'src/study/server/tutorHostMapping.v1.json'
+export const PRODUCTION_HOST_CONTENT_MAPPING_DIGEST_ARTIFACT =
+  'src/study/server/tutorHostMapping.v1.sha256'
 
 const TEST_HOST_CONTENT_MAPPING_SCHEMA_VERSION = 'study-host-content-mapping.test-fixture.v1'
-const PRODUCTION_MAPPING_ARTIFACT_KIND = 'production-reviewed'
 const TEST_MAPPING_ARTIFACT_KIND = 'test-fixture'
 const TEST_MAPPING_COMPATIBILITY_STATUS = 'test-fixture-only'
-const PRODUCTION_MAPPING_COMPATIBILITY_STATUSES = new Set([
-  'approved',
-  'no-approved-mapping-under-current-frozen-runtime',
-])
-const ACADEMY_MANIFEST_PATH = 'curriculum-content/manuel-academy/1.0.0/MANIFEST.json'
+const EMBEDDED_HOST_CONTENT_MAPPING_SPECIFIER = 'study-server-tutor:host-content-mapping'
 
 /** The complete production Tutor surface retained for the feasibility gate. */
 export const PRODUCTION_TUTOR_ENTRY_POINTS = Object.freeze([
@@ -44,6 +64,7 @@ export const PRODUCTION_TUTOR_ENTRY_POINTS = Object.freeze([
   'src/study/production/tutorPseudonym.ts',
   'src/study/production/tutorPresentation.ts',
   'src/study/production/tutorLaunchOrdering.ts',
+  'src/study/production/tutorContentEligibility.ts',
 ])
 
 export const TUTOR_ADAPTER_ENTRY_POINT = 'src/study/production/tutorAdapter.ts'
@@ -203,16 +224,6 @@ function requiredRecord(value, label) {
   return value
 }
 
-function requiredString(value, label) {
-  if (typeof value !== 'string' || value.trim() === '') throw new Error(`${label} is required.`)
-  return value
-}
-
-function requiredSha256(value, label) {
-  if (!validSha256(value)) throw new Error(`${label} must be a lower-case SHA-256 value.`)
-  return value
-}
-
 function mappingVersion(value, label) {
   if (!Number.isSafeInteger(value) || value <= 0) {
     throw new Error(`${label} must be a positive integer.`)
@@ -233,142 +244,124 @@ function resolveTestMappingArtifact(bytes) {
     throw new Error(`Test mapping compatibilityStatus must be ${TEST_MAPPING_COMPATIBILITY_STATUS}.`)
   }
   return Object.freeze({
-    schemaVersion: artifact.schemaVersion,
-    artifactKind: artifact.artifactKind,
-    mappingVersion: version,
-    compatibilityStatus: artifact.compatibilityStatus,
+    artifact,
+    metadata: Object.freeze({
+      schemaVersion: artifact.schemaVersion,
+      artifactKind: artifact.artifactKind,
+      mappingVersion: version,
+      compatibilityStatus: artifact.compatibilityStatus,
+    }),
   })
 }
 
-async function resolveProductionMappingArtifact(bytes, frozen) {
-  const artifact = requiredRecord(
-    parseJson(bytes, 'Production host-content mapping artifact'),
-    'Production mapping envelope',
-  )
-  if (artifact.schemaVersion === undefined) {
-    throw new Error('Production mapping schemaVersion is required.')
-  }
-  if (artifact.schemaVersion !== HOST_CONTENT_MAPPING_SCHEMA_VERSION) {
-    throw new Error(`Unsupported production mapping schemaVersion: ${String(artifact.schemaVersion)}`)
-  }
-  if (artifact.artifactKind !== PRODUCTION_MAPPING_ARTIFACT_KIND) {
-    throw new Error(`Production mapping artifactKind must be ${PRODUCTION_MAPPING_ARTIFACT_KIND}.`)
-  }
-  if (artifact.mappingVersion === undefined) {
-    throw new Error('Production mappingVersion is required.')
-  }
-  const version = mappingVersion(artifact.mappingVersion, 'Production mappingVersion')
-  if (!PRODUCTION_MAPPING_COMPATIBILITY_STATUSES.has(artifact.compatibilityStatus)) {
-    throw new Error('Production mapping compatibilityStatus is unsupported.')
-  }
+function hasOnlyKeys(value, expected) {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return false
+  const keys = Object.keys(value).sort()
+  const expectedKeys = [...expected].sort()
+  return keys.length === expected.length &&
+    keys.every((key, index) => key === expectedKeys[index])
+}
 
-  const sourceCustody = requiredRecord(artifact.sourceCustody, 'Production mapping sourceCustody')
-  const academy = requiredRecord(sourceCustody.academy, 'Production mapping Academy custody')
-  const frozenTutor = requiredRecord(sourceCustody.frozenTutor, 'Production mapping frozen Tutor custody')
-  const academyPackageId = requiredString(academy.packageId, 'Production mapping Academy packageId')
-  const academyRelease = requiredString(academy.release, 'Production mapping Academy release')
-  const academyManifestSha256 = requiredSha256(
-    academy.manifestSha256,
-    'Production mapping Academy manifestSha256',
-  )
-  const frozenPackageName = requiredString(
-    frozenTutor.packageName,
-    'Production mapping frozen Tutor packageName',
-  )
-  const frozenPackageVersion = requiredString(
-    frozenTutor.packageVersion,
-    'Production mapping frozen Tutor packageVersion',
-  )
-  const frozenChecksumManifestSha256 = requiredSha256(
-    frozenTutor.checksumManifestSha256,
-    'Production mapping frozen Tutor checksumManifestSha256',
-  )
+async function resolveProductionHostContentMapping(frozen) {
+  // This loader invokes Mapping H2's exact parser and canonical source/digest
+  // checks. The prebundle deliberately owns no second production parser.
+  const artifact = loadTutorHostMappingArtifact()
+  const [rawBytes, pinnedDigestBytes, academyManifestBytes] = await Promise.all([
+    requiredFile(
+      fileURLToPath(new URL(PRODUCTION_HOST_CONTENT_MAPPING_ARTIFACT, repoRoot)),
+      'Reviewed production host-content mapping artifact',
+    ),
+    requiredFile(
+      fileURLToPath(new URL(PRODUCTION_HOST_CONTENT_MAPPING_DIGEST_ARTIFACT, repoRoot)),
+      'Reviewed production host-content mapping digest',
+    ),
+    requiredFile(
+      fileURLToPath(new URL(ACADEMY_SOURCE_PINS.manifestSourceReference, repoRoot)),
+      'Academy curriculum manifest',
+    ),
+  ])
 
-  const academyManifestBytes = await requiredFile(
-    fileURLToPath(new URL(ACADEMY_MANIFEST_PATH, repoRoot)),
-    'Academy curriculum manifest',
-  )
+  const pinnedDigest = pinnedDigestBytes.toString('utf8').trim()
+  if (!validSha256(pinnedDigest) || pinnedDigest !== TUTOR_HOST_MAPPING_SHA256) {
+    throw new Error('Reviewed production mapping canonical digest pin is invalid.')
+  }
+  if (rawBytes.toString('utf8') !== `${TUTOR_HOST_MAPPING_CANONICAL_JSON}\n`) {
+    throw new Error('Reviewed production mapping raw bytes are not canonical JSON with a final newline.')
+  }
   const academyManifest = parseJson(academyManifestBytes, 'Academy curriculum manifest')
-  if (academyPackageId !== academyManifest.package_id) {
-    throw new Error(`Production mapping Academy package mismatch: ${academyPackageId}`)
+  if (
+    academyManifest.package_id !== ACADEMY_SOURCE_PINS.packageId ||
+    academyManifest.version !== ACADEMY_SOURCE_PINS.releaseVersion ||
+    sha256(academyManifestBytes) !== ACADEMY_SOURCE_PINS.manifestSha256
+  ) {
+    throw new Error('Reviewed production mapping Academy source custody does not match the repository.')
   }
-  if (academyRelease !== academyManifest.version) {
-    throw new Error(`Production mapping Academy release mismatch: ${academyRelease}`)
-  }
-  if (academyManifestSha256 !== sha256(academyManifestBytes)) {
-    throw new Error(`Production mapping Academy manifest digest mismatch: ${academyManifestSha256}`)
-  }
-  if (frozenPackageName !== frozen.packageName) {
-    throw new Error(`Production mapping frozen Tutor package mismatch: ${frozenPackageName}`)
-  }
-  if (frozenPackageVersion !== frozen.packageVersion) {
-    throw new Error(`Production mapping frozen Tutor version mismatch: ${frozenPackageVersion}`)
-  }
-  if (frozenChecksumManifestSha256 !== frozen.checksumManifestSha256) {
-    throw new Error(
-      `Production mapping frozen Tutor checksum manifest mismatch: ${frozenChecksumManifestSha256}`,
-    )
+  if (
+    frozen.packageName !== FROZEN_TUTOR_SOURCE_PINS.packageName ||
+    frozen.packageVersion !== FROZEN_TUTOR_SOURCE_PINS.packageVersion ||
+    frozen.manifestVersion !== FROZEN_TUTOR_SOURCE_PINS.manifestVersion ||
+    frozen.checksumManifestSha256 !== FROZEN_TUTOR_SOURCE_PINS.sha256SumsDigest
+  ) {
+    throw new Error('Reviewed production mapping frozen Tutor custody does not match the verified package.')
   }
 
   return Object.freeze({
-    schemaVersion: artifact.schemaVersion,
-    artifactKind: artifact.artifactKind,
-    mappingVersion: version,
-    compatibilityStatus: artifact.compatibilityStatus,
-    sourceCustody: Object.freeze({
-      academy: Object.freeze({
-        packageId: academyPackageId,
-        release: academyRelease,
-        manifestSha256: academyManifestSha256,
-      }),
-      frozenTutor: Object.freeze({
-        packageName: frozenPackageName,
-        packageVersion: frozenPackageVersion,
-        checksumManifestSha256: frozenChecksumManifestSha256,
-      }),
+    canonicalJson: TUTOR_HOST_MAPPING_CANONICAL_JSON,
+    custody: Object.freeze({
+      schemaVersion: TUTOR_HOST_MAPPING_SCHEMA_VERSION,
+      artifactKind: TUTOR_HOST_MAPPING_ARTIFACT_KIND,
+      mappingVersion: TUTOR_HOST_MAPPING_VERSION,
+      compatibilityStatus: artifact.compatibilityStatus,
+      academySourcePins: artifact.academySourcePins,
+      frozenTutorPins: artifact.frozenTutorPins,
+      mappingSha256: TUTOR_HOST_MAPPING_SHA256,
+      rawFileSha256: sha256(rawBytes),
+    }),
+    manifest: Object.freeze({
+      status: 'production-reviewed',
+      artifactPath: PRODUCTION_HOST_CONTENT_MAPPING_ARTIFACT,
+      schemaVersion: TUTOR_HOST_MAPPING_SCHEMA_VERSION,
+      artifactKind: TUTOR_HOST_MAPPING_ARTIFACT_KIND,
+      mappingVersion: TUTOR_HOST_MAPPING_VERSION,
+      compatibilityStatus: artifact.compatibilityStatus,
+      academySourcePins: artifact.academySourcePins,
+      frozenTutorPins: artifact.frozenTutorPins,
+      mappingSha256: TUTOR_HOST_MAPPING_SHA256,
+      rawFileSha256: sha256(rawBytes),
     }),
   })
 }
 
 async function resolveHostContentMapping(mapping, frozen) {
   if (mapping?.mode === 'test') {
-    if (!mapping.fixturePath) throw new Error('Test mode requires a dedicated mapping fixture.')
-    if (mapping.artifactPath || mapping.expectedSha256) {
-      throw new Error('Production mapping arguments are not accepted in test mode.')
+    if (!hasOnlyKeys(mapping, ['fixturePath', 'mode']) || !mapping.fixturePath) {
+      throw new Error('Test mode requires only a dedicated mapping fixture.')
     }
     const fixturePath = resolveRepoArtifact(mapping.fixturePath, 'Test host-content mapping fixture')
     const bytes = await requiredFile(fixturePath, 'Test host-content mapping fixture')
-    const metadata = resolveTestMappingArtifact(bytes)
+    const { artifact, metadata } = resolveTestMappingArtifact(bytes)
     return Object.freeze({
-      status: 'test-fixture',
-      ...metadata,
-      artifactPath: repoRelativePath(fixturePath),
-      sha256: sha256(bytes),
+      canonicalJson: JSON.stringify(artifact),
+      custody: Object.freeze({
+        ...metadata,
+        rawFileSha256: sha256(bytes),
+      }),
+      manifest: Object.freeze({
+        status: 'test-fixture',
+        ...metadata,
+        artifactPath: repoRelativePath(fixturePath),
+        rawFileSha256: sha256(bytes),
+      }),
     })
   }
 
-  if (mapping?.mode !== 'production') {
+  if (mapping !== undefined && !hasOnlyKeys(mapping, ['mode'])) {
+    throw new Error('Production mapping authority is fixed to the repository-reviewed artifact.')
+  }
+  if (mapping?.mode !== undefined && mapping.mode !== 'production') {
     throw new Error('A host-content mapping mode is required.')
   }
-  if (!mapping.artifactPath || !mapping.expectedSha256) {
-    throw new Error('Production mode requires a reviewed mapping artifact and SHA-256 digest.')
-  }
-  if (!validSha256(mapping.expectedSha256)) {
-    throw new Error('Production mapping digest must be a lower-case SHA-256 value.')
-  }
-  const artifactPath = resolveRepoArtifact(mapping.artifactPath, 'Production host-content mapping artifact')
-  const bytes = await requiredFile(artifactPath, 'Production host-content mapping artifact')
-  const actual = sha256(bytes)
-  if (actual !== mapping.expectedSha256) {
-    throw new Error(`Production host-content mapping digest mismatch: ${actual}`)
-  }
-  const metadata = await resolveProductionMappingArtifact(bytes, frozen)
-  return Object.freeze({
-    status: 'production-reviewed',
-    ...metadata,
-    artifactPath: repoRelativePath(artifactPath),
-    sha256: actual,
-  })
+  return resolveProductionHostContentMapping(frozen)
 }
 
 async function readTutorContractVersion() {
@@ -386,22 +379,63 @@ function availableBuildSourceSha() {
   return typeof revision === 'string' && /^[0-9a-f]{40}$/.test(revision) ? revision : null
 }
 
-function safeOutputDirectory(outputDirectory, testMode) {
+function isWithin(root, candidate) {
+  const path = relative(root, candidate)
+  return path === '' || (path !== '..' && !path.startsWith(`..${sep}`) && !isAbsolute(path))
+}
+
+async function existingDirectoryRealPath(path, label) {
+  try {
+    const info = await stat(path)
+    if (!info.isDirectory()) throw new Error(`${label} must be a directory.`)
+    return await realpath(path)
+  } catch (error) {
+    if (error?.code === 'ENOENT') return null
+    throw error
+  }
+}
+
+async function safeOutputDirectory(outputDirectory, testMode) {
+  if (testMode && outputDirectory === undefined) {
+    throw new Error('Test mode requires an explicit isolated output directory.')
+  }
   const resolved = resolve(repoRootPath, outputDirectory ?? DEFAULT_SERVER_TUTOR_OUTPUT_DIRECTORY)
   if (resolved === repoRootPath || dirname(resolved) === resolved) {
     throw new Error('Refusing an unsafe server Tutor output directory.')
   }
   const repoPath = relative(repoRootPath, resolved)
   const outsideRepo = repoPath === '..' || repoPath.startsWith(`..${sep}`)
-  if (!outsideRepo && !repoPath.split(sep).join('/').startsWith('netlify/build/')) {
-    throw new Error('Server Tutor output must remain under netlify/build/.')
-  }
-  if (outsideRepo) {
-    const temporaryPath = relative(tmpdir(), resolved)
-    const nestedTemporaryPath = temporaryPath.includes(sep)
-    if (!testMode || temporaryPath === '..' || temporaryPath.startsWith(`..${sep}`) || !nestedTemporaryPath) {
-      throw new Error('External server Tutor output is allowed only in a nested test temporary directory.')
+  const existingOutput = await existingDirectoryRealPath(resolved, 'Server Tutor output')
+
+  if (testMode) {
+    if (!outsideRepo) throw new Error('Test mode output must be outside the repository.')
+    const [temporaryRoot, outputParent] = await Promise.all([
+      realpath(tmpdir()),
+      realpath(dirname(resolved)),
+    ])
+    const parentPath = relative(temporaryRoot, outputParent)
+    if (
+      parentPath === '' ||
+      !isWithin(temporaryRoot, outputParent) ||
+      (existingOutput !== null && !isWithin(temporaryRoot, existingOutput))
+    ) {
+      throw new Error('Test mode output must resolve inside a nested temporary directory.')
     }
+    return resolved
+  }
+
+  if (outsideRepo || !repoPath.split(sep).join('/').startsWith('netlify/build/')) {
+    throw new Error('Production server Tutor output must remain under netlify/build/.')
+  }
+  const [buildRoot, outputParent] = await Promise.all([
+    realpath(resolve(repoRootPath, 'netlify/build')),
+    realpath(dirname(resolved)),
+  ])
+  if (
+    !isWithin(buildRoot, outputParent) ||
+    (existingOutput !== null && !isWithin(buildRoot, existingOutput))
+  ) {
+    throw new Error('Production server Tutor output must resolve under netlify/build/.')
   }
   return resolved
 }
@@ -421,18 +455,54 @@ function assertServerOnlyModuleGraph(metafile) {
   }
 }
 
+function embeddedHostContentMappingPlugin(mapping) {
+  const source = `
+function deepFreeze(value) {
+  if (typeof value !== 'object' || value === null || Object.isFrozen(value)) return value
+  for (const child of Object.values(value)) deepFreeze(child)
+  return Object.freeze(value)
+}
+export const SERVER_TUTOR_HOST_CONTENT_MAPPING = deepFreeze(${mapping.canonicalJson})
+export const SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY = deepFreeze(${JSON.stringify(mapping.custody)})
+`
+  return {
+    name: 'embedded-reviewed-host-content-mapping',
+    setup(context) {
+      context.onResolve(
+        { filter: /^study-server-tutor:host-content-mapping$/ },
+        () => ({ path: EMBEDDED_HOST_CONTENT_MAPPING_SPECIFIER, namespace: 'server-tutor-mapping' }),
+      )
+      context.onLoad(
+        { filter: /.*/, namespace: 'server-tutor-mapping' },
+        () => ({ contents: source, loader: 'js' }),
+      )
+    },
+  }
+}
+
 /** Builds and atomically publishes the server-only bundle and manifest. */
 export async function buildServerTutorPrebundle({ mapping, outputDirectory, buildSourceSha } = {}) {
   const [frozen, adapterContractVersion] = await Promise.all([
     verifyFrozenTutorCustody(),
     readTutorContractVersion(),
   ])
-  const hostContentMapping = await resolveHostContentMapping(mapping, frozen)
-  const outputRoot = safeOutputDirectory(outputDirectory, mapping?.mode === 'test')
+  const resolvedMapping = await resolveHostContentMapping(mapping, frozen)
+  const outputRoot = await safeOutputDirectory(outputDirectory, mapping?.mode === 'test')
   const result = await build({
     ...NETLIFY_FUNCTION_BUILD,
     absWorkingDir: repoRootPath,
-    entryPoints: [SERVER_TUTOR_ENTRY_POINT],
+    stdin: {
+      contents: `
+export * from './${SERVER_TUTOR_ENTRY_POINT}'
+export {
+  SERVER_TUTOR_HOST_CONTENT_MAPPING,
+  SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY,
+} from '${EMBEDDED_HOST_CONTENT_MAPPING_SPECIFIER}'
+`,
+      resolveDir: repoRootPath,
+      sourcefile: 'netlify/build/server-tutor-generated-entry.ts',
+      loader: 'ts',
+    },
     outfile: join(outputRoot, SERVER_TUTOR_BUNDLE_FILE),
     alias: frozenPackageAliases,
     charset: 'utf8',
@@ -444,6 +514,7 @@ export async function buildServerTutorPrebundle({ mapping, outputDirectory, buil
     splitting: false,
     treeShaking: true,
     write: false,
+    plugins: [embeddedHostContentMappingPlugin(resolvedMapping)],
   })
   if (result.outputFiles.length !== 1) throw new Error('Server Tutor build must emit exactly one module.')
   assertServerOnlyModuleGraph(result.metafile)
@@ -458,6 +529,11 @@ export async function buildServerTutorPrebundle({ mapping, outputDirectory, buil
   if (sourceSha !== null && !/^[0-9a-f]{40}$/.test(sourceSha)) {
     throw new Error('Build source SHA must be a Git commit SHA or null.')
   }
+  const bundleSha256 = sha256(bundleBytes)
+  const hostContentMapping = Object.freeze({
+    ...resolvedMapping.manifest,
+    bundleSha256,
+  })
   const manifest = Object.freeze({
     schemaVersion: SERVER_TUTOR_ARTIFACT_SCHEMA_VERSION,
     runtime: Object.freeze({ platform: 'node', nodeTarget: 'node22', moduleFormat: 'esm' }),
@@ -470,7 +546,7 @@ export async function buildServerTutorPrebundle({ mapping, outputDirectory, buil
       checksumEntryCount: frozen.checksumEntryCount,
     }),
     adapterContractVersion,
-    bundle: Object.freeze({ file: SERVER_TUTOR_BUNDLE_FILE, sha256: sha256(bundleBytes) }),
+    bundle: Object.freeze({ file: SERVER_TUTOR_BUNDLE_FILE, sha256: bundleSha256 }),
     hostContentMapping,
     buildSourceSha: sourceSha,
   })
@@ -500,8 +576,6 @@ function parseCommandLine(args) {
     const value = args[index + 1]
     if (!value || value.startsWith('--')) throw new Error(`Missing value for ${flag}`)
     if (flag === '--mode') options.mode = value
-    else if (flag === '--mapping-artifact') options.artifactPath = value
-    else if (flag === '--mapping-digest') options.expectedSha256 = value
     else if (flag === '--test-fixture-mapping') options.fixturePath = value
     else if (flag === '--output-dir') options.outputDirectory = value
     else throw new Error(`Unknown server Tutor build option: ${flag}`)
@@ -510,24 +584,25 @@ function parseCommandLine(args) {
   if (options.mode !== 'production' && options.mode !== 'test') {
     throw new Error('Server Tutor build mode must be production or test.')
   }
+  if (options.mode === 'production' && options.fixturePath !== undefined) {
+    throw new Error('A test mapping fixture is accepted only in test mode.')
+  }
   return options
 }
 
 async function main() {
   const options = parseCommandLine(process.argv.slice(2))
   const result = await buildServerTutorPrebundle({
-    mapping: {
-      mode: options.mode,
-      artifactPath: options.artifactPath,
-      expectedSha256: options.expectedSha256,
-      fixturePath: options.fixturePath,
-    },
+    mapping: options.mode === 'test'
+      ? { mode: 'test', fixturePath: options.fixturePath }
+      : { mode: 'production' },
     outputDirectory: options.outputDirectory,
   })
   process.stdout.write(`${JSON.stringify({
     outputDirectory: result.outputDirectory,
     bundleSha256: result.manifest.bundle.sha256,
-    mappingSha256: result.manifest.hostContentMapping.sha256,
+    mappingSha256: result.manifest.hostContentMapping.mappingSha256 ?? null,
+    rawMappingFileSha256: result.manifest.hostContentMapping.rawFileSha256,
   })}\n`)
 }
 
