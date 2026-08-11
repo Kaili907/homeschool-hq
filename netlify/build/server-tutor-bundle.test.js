@@ -555,7 +555,9 @@ describe('production-grade server Tutor prebundle', () => {
       'SERVER_TUTOR_ADAPTER_CONTRACT_VERSION',
       'SERVER_TUTOR_HOST_CONTENT_MAPPING',
       'SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY',
+      'SERVER_TUTOR_STATIC_CAPABILITY',
       'createProductionServerTutorRuntime',
+      'createServerTutorStaticCapability',
     ])
     expect(serverEntry.SERVER_TUTOR_ADAPTER_CONTRACT_VERSION).toBe('study-tutor.v1')
     expect(serverEntry.SERVER_TUTOR_HOST_CONTENT_MAPPING)
@@ -580,6 +582,149 @@ describe('production-grade server Tutor prebundle', () => {
     expect(bundleText).not.toMatch(/\breadFileSync\s*\(/)
     expect(bundleText).not.toContain('node:fs')
     expect(bundleText).not.toContain('tutorHostMapping.v1.json')
+  })
+
+  it('exposes one frozen static capability without exposing mapping or runtime state', () => {
+    const capability = serverEntry.SERVER_TUTOR_STATIC_CAPABILITY
+    expect(Object.isFrozen(capability)).toBe(true)
+    expect(Object.keys(capability).sort()).toEqual([
+      'createRuntime',
+      'deriveLearnerPseudonym',
+      'evaluateApprovedMapping',
+      'resolveApprovedMapping',
+      'schemaVersion',
+      'verifyAcademySourcePins',
+      'verifyFrozenTutorPins',
+    ])
+    expect(capability.schemaVersion).toBe('study-server-tutor-static-capability.v1')
+    expect(capability).not.toHaveProperty('mapping')
+    expect(capability).not.toHaveProperty('custody')
+    expect(capability).not.toHaveProperty('runtime')
+    expect(capability.verifyAcademySourcePins(ACADEMY_SOURCE_PINS)).toBe(true)
+    expect(capability.verifyFrozenTutorPins(FROZEN_TUTOR_SOURCE_PINS)).toBe(true)
+    expect(capability.verifyAcademySourcePins({
+      ...ACADEMY_SOURCE_PINS,
+      manifestSha256: '0'.repeat(64),
+    })).toBe(false)
+    expect(capability.verifyFrozenTutorPins({
+      ...FROZEN_TUTOR_SOURCE_PINS,
+      packageVersion: '1.0.3',
+    })).toBe(false)
+
+    const accessorPins = structuredClone(ACADEMY_SOURCE_PINS)
+    Object.defineProperty(accessorPins, 'packageId', {
+      enumerable: true,
+      get: () => ACADEMY_SOURCE_PINS.packageId,
+    })
+    expect(capability.verifyAcademySourcePins(accessorPins)).toBe(false)
+    const hiddenPins = structuredClone(ACADEMY_SOURCE_PINS)
+    Object.defineProperty(hiddenPins, 'hidden', { value: true })
+    expect(capability.verifyAcademySourcePins(hiddenPins)).toBe(false)
+    expect(capability.verifyAcademySourcePins(new Proxy({}, {
+      getPrototypeOf: () => { throw new Error('hostile proxy') },
+    }))).toBe(false)
+  })
+
+  it('returns null from the static capability for all 90 reviewed Unit 5 tuples', () => {
+    const capability = serverEntry.SERVER_TUTOR_STATIC_CAPABILITY
+    const unit5Lessons = readRepoFile(ACADEMY_SOURCE_PINS.lessonSourceReference)
+      .trim()
+      .split(/\r?\n/)
+      .map((line) => JSON.parse(line))
+      .filter((lesson) =>
+        lesson.course_id === ACADEMY_SOURCE_PINS.courseId && lesson.unit_number === 5)
+
+    let lookups = 0
+    for (const lesson of unit5Lessons) {
+      for (const segment of REVIEWED_HOST_SEGMENTS) {
+        lookups += 1
+        expect(capability.resolveApprovedMapping({
+          hostLessonRef: lesson.lesson_id,
+          hostSegmentRef: `${lesson.lesson_id}:segment:${segment.suffix}`,
+          taskType: segment.taskType,
+        })).toBeNull()
+      }
+    }
+    expect(unit5Lessons).toHaveLength(18)
+    expect(REVIEWED_HOST_SEGMENTS).toHaveLength(5)
+    expect(lookups).toBe(90)
+
+    // Null lookup is terminal. This test deliberately calls no evaluator,
+    // pseudonym derivation or runtime factory; those operations remain separate
+    // capability methods and cannot be reached through a null selection.
+    expect(capability.resolveApprovedMapping({
+      hostLessonRef: ACADEMY_GRADE5_MATH_UNIT5_CENSUS[0].hostLessonRef,
+      hostSegmentRef: `${ACADEMY_GRADE5_MATH_UNIT5_CENSUS[0].hostLessonRef}:segment:retrieve`,
+      taskType: REVIEWED_HOST_SEGMENTS[0].taskType,
+      mapping: 'browser-claimed',
+    })).toBeNull()
+  })
+
+  it('keeps a future approved fixture opaque and evaluates its exact frozen program', () => {
+    const lesson = ACADEMY_GRADE5_MATH_UNIT5_CENSUS[2]
+    const segment = REVIEWED_HOST_SEGMENTS[2]
+    const programRef = FROZEN_TUTOR_SOURCE_PINS.declaredMetadata.sequenceRoutingId
+    const approvedRow = {
+      hostLessonRef: lesson.hostLessonRef,
+      hostSegmentRef: `${lesson.hostLessonRef}:segment:${segment.suffix}`,
+      taskType: segment.taskType,
+      tutorPhase: segment.tutorPhase,
+      programRef,
+      reviewedRuntimeItemRefs:
+        FROZEN_TUTOR_SOURCE_PINS.effectiveExecutableRoutingAuthority.phaseItemRefs.guidedPractice,
+    }
+    const capability = serverEntry.createServerTutorStaticCapability({
+      approvedMappings: [approvedRow],
+    }, serverEntry.SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY)
+
+    expect(() => serverEntry.createServerTutorStaticCapability({
+      approvedMappings: [{ ...approvedRow, tutorPhase: 'reassess' }],
+    }, serverEntry.SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY))
+      .toThrow('exceeds frozen runtime authority')
+    expect(() => serverEntry.createServerTutorStaticCapability({
+      approvedMappings: [{
+        ...approvedRow,
+        reviewedRuntimeItemRefs: approvedRow.reviewedRuntimeItemRefs.slice(1),
+      }],
+    }, serverEntry.SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY))
+      .toThrow('exceeds frozen runtime authority')
+
+    const lookup = {
+      hostLessonRef: lesson.hostLessonRef,
+      hostSegmentRef: `${lesson.hostLessonRef}:segment:${segment.suffix}`,
+      taskType: segment.taskType,
+    }
+    const selection = capability.resolveApprovedMapping(lookup)
+    expect(selection).not.toBeNull()
+    expect(Object.isFrozen(selection)).toBe(true)
+    expect(Reflect.ownKeys(selection)).toEqual([])
+    expect(JSON.stringify(selection)).toBe('{}')
+
+    const evaluation = {
+      subject: 'math',
+      lessonRef: lesson.hostLessonRef,
+      taskType: segment.taskType,
+    }
+    const decision = capability.evaluateApprovedMapping(selection, evaluation)
+    expect(decision).toEqual({
+      eligible: true,
+      programRef,
+      gradeBand: 'elementary-3-5',
+    })
+    expect(Object.isFrozen(decision)).toBe(true)
+
+    const refused = {
+      eligible: false,
+      reason: 'tutor-eligibility-decision-not-vouched-for',
+    }
+    expect(capability.evaluateApprovedMapping(JSON.parse(JSON.stringify(selection)), evaluation))
+      .toEqual(refused)
+    expect(capability.evaluateApprovedMapping(structuredClone(selection), evaluation)).toEqual(refused)
+    expect(capability.evaluateApprovedMapping({ ...selection }, evaluation)).toEqual(refused)
+    expect(capability.evaluateApprovedMapping(selection, {
+      ...evaluation,
+      lessonRef: ACADEMY_GRADE5_MATH_UNIT5_CENSUS[3].hostLessonRef,
+    })).toEqual(refused)
   })
 
   it('executes a non-default frozen Tutor program through the server factory in Node', async () => {

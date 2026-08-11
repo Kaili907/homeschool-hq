@@ -493,11 +493,21 @@ export async function buildServerTutorPrebundle({ mapping, outputDirectory, buil
     absWorkingDir: repoRootPath,
     stdin: {
       contents: `
+import { createServerTutorStaticCapability } from './${SERVER_TUTOR_ENTRY_POINT}'
+import {
+  SERVER_TUTOR_HOST_CONTENT_MAPPING,
+  SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY,
+} from '${EMBEDDED_HOST_CONTENT_MAPPING_SPECIFIER}'
+
 export * from './${SERVER_TUTOR_ENTRY_POINT}'
 export {
   SERVER_TUTOR_HOST_CONTENT_MAPPING,
   SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY,
-} from '${EMBEDDED_HOST_CONTENT_MAPPING_SPECIFIER}'
+}
+export const SERVER_TUTOR_STATIC_CAPABILITY = createServerTutorStaticCapability(
+  SERVER_TUTOR_HOST_CONTENT_MAPPING,
+  SERVER_TUTOR_HOST_CONTENT_MAPPING_CUSTODY,
+)
 `,
       resolveDir: repoRootPath,
       sourcefile: 'netlify/build/server-tutor-generated-entry.ts',
