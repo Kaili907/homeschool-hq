@@ -121,7 +121,11 @@ describe('ADMIN-4 engine performance endpoint', () => {
 
   it('accepts only bounded canonical filters and rejects grade, learner, duplicates, and invalid values', async () => {
     expect(enginePerformanceFilters(request({ queryStringParameters: { window: '7d', engine: 'tutor', engineVersion: 'v2', course: 'course-1', unit: 'unit-1' } }), NOW)).toMatchObject({
-      engine: 'tutor', engineVersion: 'v2', courseRef: 'course-1', unitRef: 'unit-1', end: NOW,
+      start: '2026-08-24T12:00:00.000Z', end: NOW,
+      engine: 'tutor', engineVersion: 'v2', courseRef: 'course-1', unitRef: 'unit-1',
+    })
+    expect(enginePerformanceFilters(request(), NOW)).toMatchObject({
+      start: '2026-08-01T12:00:00.000Z', end: NOW,
     })
     const authorization = { require: vi.fn() }
     const reader = { aggregate: vi.fn() }
@@ -132,6 +136,7 @@ describe('ADMIN-4 engine performance endpoint', () => {
       request({ queryStringParameters: { engine: 'unknown' } }),
       request({ queryStringParameters: { grade: '5' } }),
       request({ queryStringParameters: { learner: 'child-1' } }),
+      request({ queryStringParameters: { window: '7d', occurredTo: '2099-01-01T00:00:00.000Z' } }),
       request({ multiValueQueryStringParameters: { engine: ['tutor', 'study'] } }),
     ]) {
       expect((await handler(event)).statusCode).toBe(400)

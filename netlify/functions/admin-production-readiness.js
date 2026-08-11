@@ -102,13 +102,11 @@ export function createAdminProductionReadinessHandler(overrides = {}) {
     }),
     hostedMigrations: overrides.hostedMigrations,
     ownerBootstrap: overrides.ownerBootstrap,
-    telemetry: overrides.telemetry ?? (async () => {
-      const end = now()
-      const endDate = end instanceof Date ? end : new Date(end)
-      const start = new Date(endDate.valueOf() - 60 * 60 * 1_000)
+    telemetry: overrides.telemetry ?? (async ({ observedAt }) => {
+      const start = new Date(observedAt.valueOf() - 60 * 60 * 1_000)
       await aggregateReader.aggregate({
         start: start.toISOString(),
-        endExclusive: endDate.toISOString(),
+        endExclusive: observedAt.toISOString(),
         engine: null,
         engineVersion: null,
         courseRef: null,
@@ -117,15 +115,15 @@ export function createAdminProductionReadinessHandler(overrides = {}) {
       })
       return Object.freeze({ state: 'available' })
     }),
-    accounting: overrides.accounting ?? (async () => {
-      const range = resolveAdminMonthlyCostWindow(now())
+    accounting: overrides.accounting ?? (async ({ observedAt }) => {
+      const range = resolveAdminMonthlyCostWindow(observedAt)
       return readAdminProviderAccountingCoverage(
         (boundedRange) => gatewayAccess.readProviderAttemptCoverage(boundedRange),
         range,
       )
     }),
     monthlyCostAlert: overrides.monthlyCostAlert
-      ?? (() => monthlyCostAlertEvaluator.read({ generatedAt: now() })),
+      ?? (({ observedAt }) => monthlyCostAlertEvaluator.read({ generatedAt: observedAt })),
     study: overrides.study ?? (() => studyReadiness.check({ force: true })),
   })
 

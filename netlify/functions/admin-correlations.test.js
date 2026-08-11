@@ -5,6 +5,7 @@ import {
   parseCorrelationQuery,
 } from './admin-correlations.js'
 import { AdminCorrelationReadError } from './_shared/admin-correlation-reader.js'
+import { fixedIsoClock } from './_shared/admin-time-test-fixtures.js'
 
 const NOW = '2026-08-10T16:00:00.000Z'
 const CORRELATION_ID = '20000000-0000-4000-8000-000000000001'
@@ -60,6 +61,7 @@ const success = (events = [], overrides = {}) => ({
   events,
   rejectedEntries: 0,
   hasMore: false,
+  retentionComplete: true,
   ...overrides,
 })
 
@@ -73,7 +75,7 @@ function setup({ authorization, runtime, audit, providerAccounting } = {}) {
   return {
     authorization: auth,
     reader,
-    handler: createAdminCorrelationsHandler({ authorization: auth, reader, now: () => NOW }),
+    handler: createAdminCorrelationsHandler({ authorization: auth, reader, now: fixedIsoClock(NOW) }),
   }
 }
 
@@ -173,6 +175,41 @@ describe('GET /api/admin/v1/correlations', () => {
     expect(JSON.parse(changed.body).error.code).toBe('invalid_cursor')
   })
 
+  it('paginates duplicate timestamps by unique identity without skips or duplicates', async () => {
+    const occurredAt = '2026-08-10T15:30:00.000Z'
+    const rows = ['4', '3', '2'].map((suffix) => runtimeEvent({
+      eventId: `10000000-0000-4000-8000-00000000000${suffix}`,
+      occurredAt,
+    }))
+    const { handler, reader } = setup()
+    reader.audit.mockResolvedValue(success())
+    reader.providerAccounting.mockResolvedValue(success())
+    reader.runtime.mockImplementation(async (_query, cursor) => cursor
+      ? success([rows[2]])
+      : success(rows.slice(0, 2), { hasMore: true }))
+
+    const query = 'domain=runtime&limit=2'
+    const first = JSON.parse((await handler(request(query))).body)
+    const second = JSON.parse((await handler(request(`${query}&cursor=${first.nextCursor}`))).body)
+    expect(first.events.map((item) => item.eventId)).toEqual([rows[1].eventId, rows[0].eventId])
+    expect(second.events.map((item) => item.eventId)).toEqual([rows[2].eventId])
+    expect(new Set([...first.events, ...second.events].map((item) => item.eventId)).size).toBe(3)
+    expect(reader.runtime.mock.calls[1][1]).toEqual({
+      occurredAt, eventId: rows[1].eventId,
+    })
+  })
+
+  it('uses database retention evidence at the exact boundary instead of handler-clock inference', async () => {
+    const { handler, reader } = setup()
+    reader.runtime.mockResolvedValue(success([], { retentionComplete: false }))
+    const body = JSON.parse((await handler(request(
+      'domain=runtime&occurredFrom=2026-07-11T16%3A00%3A00.000Z&occurredTo=2026-08-10T16%3A00%3A00.000Z',
+    ))).body)
+    expect(body.evidence).toEqual({
+      status: 'partial', reasons: ['runtime_retention_limited'], rejectedEntries: 0,
+    })
+  })
+
   it('applies domain, time, engine, result, and audit filters server-side', async () => {
     const { handler, authorization, reader } = setup()
     const query = new URLSearchParams({
@@ -195,6 +232,8 @@ describe('GET /api/admin/v1/correlations', () => {
     'occurredFrom=2026-08-10T00%3A00%3A00Z',
     'occurredFrom=2026-01-01T00%3A00%3A00Z&occurredTo=2026-08-10T00%3A00%3A00Z',
     'occurredFrom=2026-08-10T15%3A00%3A00Z&occurredTo=2026-08-10T14%3A00%3A00Z',
+    'occurredFrom=2026-08-10T15%3A00%3A00Z&occurredTo=2026-08-10T15%3A00%3A00Z',
+    'occurredFrom=2026-08-10T15%3A00%3A00Z&occurredTo=2026-08-10T16%3A00%3A00.001Z',
     'engine=unknown', 'result=raw_error', 'domain=logs', 'limit=101',
     'correlationId=bearer.secret', 'search=learner', 'limit=1&limit=2',
   ])('rejects unsafe or unbounded query %s before authorization', async (query) => {

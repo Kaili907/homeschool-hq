@@ -13,7 +13,9 @@ bounded time range, source domain, engine, operational result, Admin audit
 action/resource, page limit, and opaque cursor. The default range is the prior
 24 hours, the maximum range is 90 days, and each page is limited to 100 safe
 events. Cursors are bound to the canonical query so they cannot be silently
-reused with different filters.
+reused with different filters. Both supplied endpoints are inclusive, while
+the descending `(occurred_at, event_id)` cursor is exclusive. The server rejects
+an end time beyond its own observation clock.
 
 The service reads provider accounting through its existing indexed service-only
 table access and uses the existing bounded Admin audit RPC. Operational events
@@ -42,7 +44,8 @@ sources remain usable. The response labels every event with its source and
 reports source availability, rejected malformed entry count, retention limits,
 and a bounded `complete` or `partial` evidence state. Runtime, audit, and
 provider records remain separate semantic events even when their correlation
-IDs match.
+IDs match. Runtime retention completeness is reported by the database reference
+clock; the exact 30-day expiry boundary is retention-limited.
 
 ## Privacy and malformed data
 

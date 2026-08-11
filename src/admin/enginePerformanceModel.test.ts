@@ -84,6 +84,16 @@ describe('ADMIN-4 engine performance projection', () => {
     expect(model.engines[0].technicalHealthReference.path).toBe('/academy/admin/health')
   })
 
+  it('uses a half-open evidence window and rejects an empty window', () => {
+    const start = operationalEvent('study', { operation: 'start', occurredAt: START })
+    const last = operationalEvent('study', { operation: 'start', occurredAt: '2026-08-31T23:59:59.998Z' })
+    const end = operationalEvent('study', { operation: 'start', occurredAt: END })
+    const model = projection([start, last, end])
+    expect(model.source.filteredEventCount).toBe(2)
+    expect(metric(model, 'study', 'sessions_started')).toMatchObject({ value: 2 })
+    expect(() => projection([], { ...filters, start: END })).toThrow('engine_performance_filter_invalid')
+  })
+
   it('shows no evidence as unavailable and a sub-threshold rate as insufficient evidence', () => {
     expect(metric(projection([]), 'tutor', 'fallback_rate').availability).toBe('unavailable')
     const events = Array.from({ length: ENGINE_PERFORMANCE_RATE_MIN_SAMPLE - 1 }, () =>

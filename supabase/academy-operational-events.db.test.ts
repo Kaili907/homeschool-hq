@@ -342,6 +342,67 @@ describe('ADMIN-0 v2 operational event database contract', () => {
     ])
   })
 
+  it('marks the exact retention expiry instant incomplete for every frozen class', async () => {
+    const response = await asRole(databases[0], 'service_role', null, () =>
+      databases[0].query<{ exact: Record<string, unknown>; inside: Record<string, unknown> }>(`
+        select
+          public.academy_aggregate_operational_events_v2(
+            statement_timestamp() - interval '30 days', statement_timestamp(),
+            null, null, null, null, 'engines:read'
+          ) -> 'completeness' as exact,
+          public.academy_aggregate_operational_events_v2(
+            statement_timestamp() - interval '30 days' + interval '1 microsecond',
+            statement_timestamp(), null, null, null, null, 'engines:read'
+          ) -> 'completeness' as inside
+      `))
+    const exact = response.rows[0].exact as any
+    const inside = response.rows[0].inside as any
+    expect(exact.allRetentionClasses).toBe(false)
+    expect(exact.retentionClasses).toEqual([
+      { category: 'diagnostic_short', retainedDays: 30, complete: false },
+      { category: 'operational_standard', retainedDays: 90, complete: true },
+      { category: 'safety_extended', retainedDays: 365, complete: true },
+    ])
+    expect(inside.allRetentionClasses).toBe(true)
+
+    const longer = await asRole(databases[0], 'service_role', null, () =>
+      databases[0].query<{ standard: Record<string, unknown>; safety: Record<string, unknown> }>(`
+        select
+          public.academy_aggregate_operational_events_v2(
+            statement_timestamp() - interval '90 days', statement_timestamp(),
+            null, null, null, null, 'engines:read'
+          ) -> 'completeness' as standard,
+          public.academy_aggregate_operational_events_v2(
+            statement_timestamp() - interval '365 days', statement_timestamp(),
+            null, null, null, null, 'engines:read'
+          ) -> 'completeness' as safety
+      `))
+    expect((longer.rows[0].standard as any).retentionClasses[1].complete).toBe(false)
+    expect((longer.rows[0].safety as any).retentionClasses[2].complete).toBe(false)
+  })
+
+  it('includes the exact aggregate start and excludes the exact end', async () => {
+    const database = databases[0]
+    await recordAsService(database, 'aggregate:boundary:0001', facts())
+    const stored = await database.query<{ occurred_at: Date }>(
+      `select occurred_at from public.academy_operational_events
+       where execution_key = 'aggregate:boundary:0001'`,
+    )
+    const occurredAt = new Date(stored.rows[0].occurred_at).toISOString()
+    const included = await aggregateAsService(database, [
+      occurredAt,
+      new Date(Date.parse(occurredAt) + 1).toISOString(),
+      null, null, null, null, 'engines:read',
+    ])
+    const excluded = await aggregateAsService(database, [
+      new Date(Date.parse(occurredAt) - 1).toISOString(),
+      occurredAt,
+      null, null, null, null, 'engines:read',
+    ])
+    expect((included.rows[0].aggregate as any).totalEventCount).toBe(1)
+    expect((excluded.rows[0].aggregate as any).totalEventCount).toBe(0)
+  })
+
   it('enforces Admin authorization and deterministic aggregate range bounds', async () => {
     const database = databases[0]
     const end = new Date(Date.now() + 60_000)

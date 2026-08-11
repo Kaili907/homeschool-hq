@@ -39,7 +39,6 @@ const CORRELATION = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$/
 const SECRET_LIKE = /(?:^|[._:/-])(?:sk|pk|secret|credential|bearer|token|password|jwt|api.?key)(?:[._:/-]|$)|^eyj/i
 const TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/
 const MAX_RANGE_MS = 90 * 24 * 60 * 60 * 1_000
-const DIAGNOSTIC_RETENTION_MS = 30 * 24 * 60 * 60 * 1_000
 
 function entriesFor(event) {
   const raw = typeof event?.rawQueryString === 'string'
@@ -146,7 +145,10 @@ export function parseCorrelationQuery(event, now = new Date().toISOString()) {
     ? timestamp(values.occurredFrom)
     : new Date(new Date(generatedAt).getTime() - 24 * 60 * 60 * 1_000).toISOString()
   const rangeMs = new Date(occurredTo).getTime() - new Date(occurredFrom).getTime()
-  if (rangeMs <= 0 || rangeMs > MAX_RANGE_MS) reject(400, 'invalid_query')
+  if (
+    rangeMs <= 0 || rangeMs > MAX_RANGE_MS
+    || new Date(occurredTo).getTime() > new Date(generatedAt).getTime()
+  ) reject(400, 'invalid_query')
 
   if (
     values.correlationId !== undefined
@@ -293,8 +295,7 @@ export function createAdminCorrelationsHandler(overrides = {}) {
       }
       if (
         selected.includes('runtime') && sourceStatuses.runtime === 'available'
-        && new Date(parsed.query.occurredFrom).getTime()
-          < new Date(parsed.generatedAt).getTime() - DIAGNOSTIC_RETENTION_MS
+        && results.runtime.retentionComplete !== true
       ) reasons.push('runtime_retention_limited')
 
       return jsonResponse(200, {

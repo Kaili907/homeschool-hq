@@ -4,6 +4,7 @@ import {
   evaluateAdminMonthlyCostAlert,
   resolveAdminMonthlyCostWindow,
 } from './admin-monthly-cost-alert.js'
+import { fixedDateClock } from './admin-time-test-fixtures.js'
 
 const NOW = new Date('2026-08-10T18:30:45.123Z')
 const KEYS = [
@@ -147,12 +148,35 @@ describe('authoritative monthly cost alert evaluation', () => {
     })
   })
 
-  it('uses exact UTC calendar-month boundaries from trusted server time', () => {
-    expect(resolveAdminMonthlyCostWindow(new Date('2026-12-31T23:59:59.999Z'))).toEqual({
-      timezone: 'UTC',
-      startAt: '2026-12-01T00:00:00.000Z',
-      endExclusive: '2027-01-01T00:00:00.000Z',
+  it.each([
+    ['2026-01-01T00:00:00.000Z', '2026-01-01T00:00:00.000Z', '2026-02-01T00:00:00.000Z'],
+    ['2026-01-31T23:59:59.999Z', '2026-01-01T00:00:00.000Z', '2026-02-01T00:00:00.000Z'],
+    ['2026-02-01T00:00:00.000Z', '2026-02-01T00:00:00.000Z', '2026-03-01T00:00:00.000Z'],
+    ['2026-02-28T23:59:59.999Z', '2026-02-01T00:00:00.000Z', '2026-03-01T00:00:00.000Z'],
+    ['2028-02-29T23:59:59.999Z', '2028-02-01T00:00:00.000Z', '2028-03-01T00:00:00.000Z'],
+    ['2026-04-30T23:59:59.999Z', '2026-04-01T00:00:00.000Z', '2026-05-01T00:00:00.000Z'],
+    ['2026-12-31T23:59:59.999Z', '2026-12-01T00:00:00.000Z', '2027-01-01T00:00:00.000Z'],
+  ])('uses the exact UTC month for boundary instant %s', (instant, startAt, endExclusive) => {
+    expect(resolveAdminMonthlyCostWindow(fixedDateClock(instant)())).toEqual({
+      timezone: 'UTC', startAt, endExclusive,
     })
+  })
+
+  it.each([
+    '2026-03-08T01:59:59.999-05:00',
+    '2026-03-08T03:00:00.000-04:00',
+    '2026-11-01T01:59:59.999-04:00',
+    '2026-11-01T01:00:00.000-05:00',
+  ])('keeps US DST transition instant %s inside its UTC month', (instant) => {
+    const normalized = new Date(instant)
+    const expectedStart = new Date(Date.UTC(normalized.getUTCFullYear(), normalized.getUTCMonth(), 1)).toISOString()
+    const expectedEnd = new Date(Date.UTC(normalized.getUTCFullYear(), normalized.getUTCMonth() + 1, 1)).toISOString()
+    expect(resolveAdminMonthlyCostWindow(normalized)).toEqual({
+      timezone: 'UTC', startAt: expectedStart, endExclusive: expectedEnd,
+    })
+  })
+
+  it('preserves exact integer-micros threshold arithmetic', () => {
     expect(evaluate('999999999999', 'available', configuration({
       'cost.warning.monthly_micros': '999999999999',
       'cost.critical.monthly_micros': '1000000000000',

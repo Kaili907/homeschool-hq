@@ -100,6 +100,7 @@ describe('Admin correlation runtime database read seam', () => {
 
     expect(projection.schemaVersion).toBe(2)
     expect(projection.hasMore).toBe(false)
+    expect(projection.diagnosticRetentionComplete).toBe(true)
     expect(projection.events).toHaveLength(1)
     expect(projection.events[0]).toMatchObject({
       execution_key: 'request-correlation-1', engine: 'gateway',
@@ -118,9 +119,18 @@ describe('Admin correlation runtime database read seam', () => {
     const database = databases[0]
     await record(database, 'page-correlation-1')
     await record(database, 'page-correlation-2')
+    await database.exec(`update public.academy_operational_events
+      set occurred_at = statement_timestamp(),
+          expires_at = statement_timestamp() + interval '90 days'
+      where execution_key like 'page-correlation-%'`)
+    const timestamp = await database.query<{ occurred_at: Date }>(`
+      select occurred_at from public.academy_operational_events
+      where execution_key = 'page-correlation-1'
+    `)
+    const occurredAt = new Date(timestamp.rows[0].occurred_at).valueOf()
     const range = [
-      new Date(Date.now() - 60_000).toISOString(),
-      new Date(Date.now() + 60_000).toISOString(),
+      new Date(occurredAt - 1).toISOString(),
+      new Date(occurredAt).toISOString(),
     ]
     const first = (await readRuntime(database, [
       1, null, null, range[0], range[1], null, null, null, 'engines:read',
@@ -135,6 +145,34 @@ describe('Admin correlation runtime database read seam', () => {
     expect(second.events).toHaveLength(1)
     expect(second.events[0].event_id).not.toBe(cursor.event_id)
     expect(second.hasMore).toBe(false)
+  })
+
+  it('uses inclusive endpoints and strict database-clock retention completeness', async () => {
+    const database = databases[0]
+    await record(database, 'boundary-correlation')
+    await database.exec(`update public.academy_operational_events
+      set occurred_at = statement_timestamp(),
+          expires_at = statement_timestamp() + interval '90 days'
+      where execution_key = 'boundary-correlation'`)
+    const timestamp = await database.query<{ occurred_at: Date }>(`
+      select occurred_at from public.academy_operational_events
+      where execution_key = 'boundary-correlation'
+    `)
+    const occurredAt = new Date(timestamp.rows[0].occurred_at).valueOf()
+    const projection = (await readRuntime(database, [
+      50, null, null, new Date(occurredAt).toISOString(), new Date(occurredAt + 1).toISOString(),
+      'boundary-correlation', null, null, 'engines:read',
+    ])).rows[0].projection
+    expect(projection.events).toHaveLength(1)
+
+    const exactRetention = await asRole(database, 'service_role', null, () =>
+      database.query<{ projection: any }>(`
+        select public.academy_admin_read_incident_runtime_v1(
+          50, null, null, statement_timestamp() - interval '30 days',
+          statement_timestamp(), null, null, null, 'engines:read'
+        ) as projection
+      `))
+    expect(exactRetention.rows[0].projection.diagnosticRetentionComplete).toBe(false)
   })
 
   it('requires trusted service engines:read authority and preserves direct table denial', async () => {

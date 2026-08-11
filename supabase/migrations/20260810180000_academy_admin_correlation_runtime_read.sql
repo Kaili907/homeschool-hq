@@ -35,6 +35,7 @@ set search_path = pg_catalog
 as $$
 declare
   projection jsonb;
+  reference_time timestamptz := statement_timestamp();
 begin
   if auth.uid() is not null
      or not academy_private.operational_is_trusted_server()
@@ -62,9 +63,9 @@ begin
   with bounded as (
     select event.*
     from public.academy_operational_events as event
-    where event.expires_at > statement_timestamp()
+    where event.expires_at > reference_time
       and event.occurred_at >= p_occurred_from
-      and event.occurred_at < p_occurred_to
+      and event.occurred_at <= p_occurred_to
       and (p_before_at is null or (event.occurred_at, event.event_id) <
         (p_before_at, p_before_event_id))
       and (p_correlation_id is null or event.execution_key = p_correlation_id)
@@ -99,7 +100,9 @@ begin
       ) order by occurred_at desc, event_id desc)
       from visible
     ), '[]'::jsonb),
-    'hasMore', (select count(*) > p_limit from bounded)
+    'hasMore', (select count(*) > p_limit from bounded),
+    'diagnosticRetentionComplete',
+      p_occurred_from > reference_time - interval '30 days'
   ) into projection;
   return projection;
 end;

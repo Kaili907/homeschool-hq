@@ -83,7 +83,7 @@ function accountingHarness(options = {}) {
     delay: async () => {},
     maxAttempts: options.maxAttempts ?? 2,
     timeoutMs: options.timeoutMs ?? 100,
-    now: () => ++clock,
+    now: options.now ?? (() => ++clock),
   })
   return { classifier, fetchImpl, gatewayAccess, journal, timeline }
 }
@@ -123,6 +123,23 @@ describe('Study safety physical provider attempt accounting', () => {
       result: 'success',
       billingDisposition: 'billable',
     }))
+  })
+
+  it('orders reservation, outcome, and ledger transitions explicitly when every clock read is equal', async () => {
+    const instant = Date.parse('2026-08-10T12:00:00.000Z')
+    const harness = accountingHarness({ maxAttempts: 1, now: () => instant })
+    await harness.classifier.classify(REQUEST, CONTEXT)
+    expect(harness.timeline).toEqual([
+      'reserve:0',
+      'transition:dispatch_possible',
+      'provider',
+      'transition:outcome_observed',
+      'ledger',
+      'link:ledgered',
+    ])
+    expect(harness.gatewayAccess.recordProviderUsage).toHaveBeenCalledWith(
+      expect.objectContaining({ occurredAt: '2026-08-10T12:00:00.000Z', latencyMs: 0 }),
+    )
   })
 
   it('accounts for a physical retry independently without collapsing attempts', async () => {

@@ -198,6 +198,23 @@ describe('deterministic System Health aggregation', () => {
     })
   })
 
+  it('assigns the shared trend boundary only to the current window', () => {
+    const sharedBoundary = event('sync', 'timeout', 1, {
+      occurredAt: '2026-08-08T11:00:00.000Z',
+    })
+    const precedingStart = event('sync', 'timeout', 2, {
+      occurredAt: '2026-08-08T10:00:00.000Z',
+    })
+    const exactEnd = event('sync', 'timeout', 3, { occurredAt: NOW.toISOString() })
+    const projection = buildSystemHealthProjection(
+      [sharedBoundary, precedingStart, exactEnd],
+      { now: NOW, selectedWindow: '1h' },
+    )
+    expect(projection.historyMetrics.eventCount).toBe(2)
+    expect(projection.currentFailureCount).toBe(2)
+    expect(projection.previousFailureCount).toBe(1)
+  })
+
   it('keeps primary health on one hour while history metrics follow the selected window', () => {
     const older = event('gateway', 'timeout', 1, { occurredAt: '2026-08-08T10:30:00.000Z' })
     const oneHour = buildSystemHealthProjection([older], { now: NOW, selectedWindow: '1h' })

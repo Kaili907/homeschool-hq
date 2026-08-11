@@ -54,7 +54,13 @@ function assertDeterministicHistory(
   activation: CurriculumActivationStatus,
 ): void {
   const releaseVersions = new Set(releases.map((release) => release.version))
-  if (releaseVersions.size !== releases.length
+  const newest = activation.history[0]
+  if (!newest
+    || activation.pointer.revision !== newest.pointerRevision
+    || activation.pointer.releaseVersion !== newest.newReleaseVersion
+    || activation.pointer.transitionKind !== newest.transitionKind
+    || activation.pointer.transitionedAt !== newest.transitionedAt
+    || releaseVersions.size !== releases.length
     || !releaseVersions.has(activation.pointer.releaseVersion)
     || activation.candidates.some((candidate) => !releaseVersions.has(candidate.releaseVersion))
     || activation.history.some((entry) => !releaseVersions.has(entry.newReleaseVersion)

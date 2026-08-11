@@ -201,6 +201,43 @@ describe('curriculum release history governance model', () => {
     })
   })
 
+  it('follows pointer revisions when every transition timestamp is identical', () => {
+    const one = release('1.0.0', 9)
+    const two = release('2.0.0', 10)
+    const identicalTimestamp = '2026-08-20T16:00:00.000Z'
+    const history = [
+      { ...transition(2, '1.0.0', '2.0.0', 'activation'), transitionedAt: identicalTimestamp },
+      { ...transition(1, null, '1.0.0', 'migration_seed'), transitionedAt: identicalTimestamp },
+    ]
+    const activation = status([one, two], [
+      candidate(one, { previouslyActive: true }),
+      candidate(two, { active: true, previouslyActive: true }),
+    ], history)
+    const model = buildCurriculumReleaseHistoryModel([one, two], activation)
+    expect(model).toMatchObject({ activeReleaseVersion: '2.0.0', pointerRevision: 2 })
+    expect(model.transitions.map((item) => [item.pointerRevision, item.newReleaseVersion])).toEqual([
+      [2, '2.0.0'], [1, '1.0.0'],
+    ])
+    expect(new Set(model.transitions.map((item) => item.transitionedAt))).toEqual(
+      new Set([identicalTimestamp]),
+    )
+  })
+
+  it('rejects a current pointer that disagrees with the newest explicit revision identity', () => {
+    const one = release('1.0.0', 9)
+    const two = release('2.0.0', 10)
+    const activation = status([one, two], [
+      candidate(one, { previouslyActive: true }),
+      candidate(two, { active: true, previouslyActive: true }),
+    ], [
+      transition(2, '1.0.0', '2.0.0', 'activation'),
+      transition(1, null, '1.0.0', 'migration_seed'),
+    ])
+    const malformed = { ...activation, pointer: { ...activation.pointer, revision: 1 } }
+    expect(() => buildCurriculumReleaseHistoryModel([one, two], malformed))
+      .toThrow('curriculum_release_history_inconsistent')
+  })
+
   it('rejects malformed identity chains instead of inferring transitions from timestamps', () => {
     const one = release('1.0.0', 9)
     const two = release('2.0.0', 10)

@@ -395,6 +395,34 @@ describe('ADMIN-14A durable configuration database core', () => {
       .rejects.toThrow(/CONFIRMATION_REUSED/)
   })
 
+  it('rejects a confirmation at the exact server-clock expiry instant', async () => {
+    const database = databases[0]
+    const change = await preview(database, { token: 'exact-expiry' })
+    await database.exec(`
+      create function public.test_admin_commit_at_exact_expiry(p_digest text)
+      returns jsonb language plpgsql volatile security definer
+      set search_path = pg_catalog as $$
+      begin
+        update academy_private.admin_change_confirmations
+          set issued_at = statement_timestamp() - interval '5 minutes',
+              expires_at = statement_timestamp()
+          where token_digest = p_digest;
+        return public.academy_admin_commit_configuration_change_v1(
+          'runtime.ai.enabled', 1, 'true'::jsonb, 'operator.request',
+          '10000000-0000-4000-8000-000000000099', p_digest,
+          'configuration:manage'
+        );
+      end
+      $$;
+      alter function public.test_admin_commit_at_exact_expiry(text) owner to postgres;
+      grant execute on function public.test_admin_commit_at_exact_expiry(text) to authenticated;
+    `)
+    await expect(asRole(database, 'authenticated', OWNER_ID, () =>
+      database.query(`select public.test_admin_commit_at_exact_expiry($1)`, [
+        tokenDigest(change.token),
+      ]))).rejects.toThrow(/CONFIRMATION_EXPIRED/)
+  })
+
   it('rolls revision, head, confirmation, and receipt back when the ADMIN-15 audit append fails', async () => {
     const database = databases[0]
     const change = await preview(database)

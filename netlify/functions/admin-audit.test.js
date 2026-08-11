@@ -6,6 +6,9 @@ import {
   parseAuditQuery,
 } from './admin-audit.js'
 import { AdminAuditReadError } from './_shared/admin-audit-reader.js'
+import { fixedDateClock } from './_shared/admin-time-test-fixtures.js'
+
+const NOW = '2026-08-10T16:00:00.000Z'
 
 const EVENT = Object.freeze({
   schemaVersion: 2,
@@ -43,7 +46,11 @@ function handlerWith({ auth = authorized, result = { events: [EVENT], hasMore: f
     if (error) throw error
     return result
   }) }
-  return { handler: createAdminAuditHandler({ authorization, reader }), authorization, reader }
+  return {
+    handler: createAdminAuditHandler({ authorization, reader, now: fixedDateClock(NOW) }),
+    authorization,
+    reader,
+  }
 }
 
 describe('GET /api/admin/v1/audit', () => {
@@ -95,6 +102,26 @@ describe('GET /api/admin/v1/audit', () => {
       cursor: { occurredAt: EVENT.occurredAt, eventId: EVENT.eventId },
     })
     expect(decodeAuditCursor(cursor)).toEqual({ occurredAt: EVENT.occurredAt, eventId: EVENT.eventId })
+  })
+
+  it('accepts an exact equal-timestamp window and rejects browser-future authority', async () => {
+    const { handler, reader } = handlerWith()
+    const exact = new URLSearchParams({
+      occurredFrom: EVENT.occurredAt,
+      occurredTo: EVENT.occurredAt,
+    }).toString()
+    expect((await handler(event({ rawQueryString: exact }))).statusCode).toBe(200)
+    expect(reader.list).toHaveBeenLastCalledWith(expect.objectContaining({
+      occurredFrom: EVENT.occurredAt,
+      occurredTo: EVENT.occurredAt,
+    }))
+
+    const future = new URLSearchParams({
+      occurredFrom: NOW,
+      occurredTo: '2099-01-01T00:00:00.000Z',
+    }).toString()
+    expect((await handler(event({ rawQueryString: future }))).statusCode).toBe(400)
+    expect(reader.list).toHaveBeenCalledOnce()
   })
 
   it('accepts granular curriculum filters without changing pagination shape', async () => {

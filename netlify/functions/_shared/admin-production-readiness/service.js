@@ -1,3 +1,5 @@
+import { resolveAdminMonthlyCostWindow } from '../admin-monthly-cost-alert.js'
+
 export const PRODUCTION_READINESS_SCHEMA_VERSION = 1
 export const READINESS_STATUSES = Object.freeze([
   'READY',
@@ -91,10 +93,14 @@ function domain(id, label, summary, checks) {
   })
 }
 
-async function settle(probe) {
+async function settle(probe, context) {
   if (typeof probe !== 'function') return Object.freeze({ ok: false, value: null })
   try {
-    return Object.freeze({ ok: true, value: await probe() })
+    const isolatedContext = context === undefined ? undefined : Object.freeze({
+      observedAt: new Date(context.observedAt.valueOf()),
+      generatedAt: context.generatedAt,
+    })
+    return Object.freeze({ ok: true, value: await probe(isolatedContext) })
   } catch {
     return Object.freeze({ ok: false, value: null })
   }
@@ -439,10 +445,11 @@ function providerAccountingCheck(result) {
   })
 }
 
-function monthlyCostAlertCheck(result) {
+function monthlyCostAlertCheck(result, observedAt) {
   const value = result.ok && result.value && typeof result.value === 'object'
     ? result.value : null
   const window = value?.window
+  const expectedWindow = resolveAdminMonthlyCostWindow(observedAt)
   const exactShape = exactKeys(value, [
     'contractVersion', 'generatedAt', 'currency', 'window', 'costAuthority', 'scope',
     'providerInvoiceTotalClaim', 'automaticProviderShutdown', 'completeness', 'status',
@@ -477,10 +484,10 @@ function monthlyCostAlertCheck(result) {
     && typeof critical === 'string' && INTEGER_MICROS.test(critical)
     && BigInt(warning) < BigInt(critical)
   const commonValid = typeof value.generatedAt === 'string'
-    && !Number.isNaN(Date.parse(value.generatedAt))
+    && value.generatedAt === observedAt.toISOString()
     && window.timezone === 'UTC'
-    && typeof window.startAt === 'string' && !Number.isNaN(Date.parse(window.startAt))
-    && typeof window.endExclusive === 'string' && !Number.isNaN(Date.parse(window.endExclusive))
+    && window.startAt === expectedWindow.startAt
+    && window.endExclusive === expectedWindow.endExclusive
     && MONTHLY_ALERT_COMPLETENESS.has(value.completeness)
     && MONTHLY_ALERT_STATUSES.has(value.status)
     && typeof value.reason === 'string'
@@ -571,6 +578,15 @@ export function createAdminProductionReadinessService(options = {}) {
 
   return Object.freeze({
     async check(principal) {
+      const clockValue = now()
+      if (!(clockValue instanceof Date) || Number.isNaN(clockValue.valueOf())) {
+        throw new TypeError('invalid readiness clock')
+      }
+      const observedAt = new Date(clockValue.valueOf())
+      const probeContext = Object.freeze({
+        observedAt: new Date(observedAt.valueOf()),
+        generatedAt: observedAt.toISOString(),
+      })
       const [
         repositoryRaw,
         configurationRaw,
@@ -580,13 +596,13 @@ export function createAdminProductionReadinessService(options = {}) {
         accounting,
         monthlyCostAlert,
       ] = await Promise.all([
-        settle(options.repository),
-        settle(options.configuration),
-        settle(options.hostedMigrations),
-        settle(options.ownerBootstrap),
-        settle(options.telemetry),
-        settle(options.accounting),
-        settle(options.monthlyCostAlert),
+        settle(options.repository, probeContext),
+        settle(options.configuration, probeContext),
+        settle(options.hostedMigrations, probeContext),
+        settle(options.ownerBootstrap, probeContext),
+        settle(options.telemetry, probeContext),
+        settle(options.accounting, probeContext),
+        settle(options.monthlyCostAlert, probeContext),
       ])
       const repository = repositoryResult(repositoryRaw)
       const configuration = configurationResult(configurationRaw)
@@ -676,7 +692,7 @@ export function createAdminProductionReadinessService(options = {}) {
           action: 'Restore the read-only aggregate contract and retry.',
         }),
         providerAccountingCheck(accounting),
-        monthlyCostAlertCheck(monthlyCostAlert),
+        monthlyCostAlertCheck(monthlyCostAlert, observedAt),
       ]
       const telemetryDomain = domain('telemetry', 'Telemetry', 'Operational, provider-accounting, and alert-only cost evidence.', telemetryChecks)
 
@@ -717,7 +733,9 @@ export function createAdminProductionReadinessService(options = {}) {
 
       const studyMounted = positiveFlag(env, 'ACADEMY_STUDY_ENABLED')
         && positiveFlag(env, 'VITE_STUDY_ENGINE_ENABLED')
-      const studyRaw = studyMounted ? await settle(options.study) : Object.freeze({ ok: false, value: null })
+      const studyRaw = studyMounted
+        ? await settle(options.study, probeContext)
+        : Object.freeze({ ok: false, value: null })
       const studyState = studyRaw.ok && studyRaw.value && typeof studyRaw.value === 'object'
         ? studyRaw.value.status : null
       const studyStatus = studyState === 'ready' ? 'READY'
@@ -764,11 +782,9 @@ export function createAdminProductionReadinessService(options = {}) {
       const requiredChecks = domains.flatMap((item) => item.checks).filter((item) => item.required)
       const readyCount = requiredChecks.filter((item) => item.status === 'READY').length
       const blockingCount = requiredChecks.length - readyCount
-      const generatedAt = now()
-      if (!(generatedAt instanceof Date) || Number.isNaN(generatedAt.valueOf())) throw new TypeError('invalid readiness clock')
       return Object.freeze({
         schemaVersion: PRODUCTION_READINESS_SCHEMA_VERSION,
-        generatedAt: generatedAt.toISOString(),
+        generatedAt: observedAt.toISOString(),
         status: blockingCount === 0 ? 'READY' : 'BLOCKED',
         requiredSummary: Object.freeze({
           total: requiredChecks.length,

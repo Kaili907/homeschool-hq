@@ -269,6 +269,19 @@ describe('Admin cost aggregate projection', () => {
     expect(model.trend).toEqual([])
   })
 
+  it('includes the exact start and excludes the exact end of the UTC range', () => {
+    const model = buildAdminCostProjection([
+      record({ usageId: 'before', occurredAt: '2026-08-07T23:59:59.999Z', costMicros: '1' }),
+      record({ usageId: 'start', occurredAt: '2026-08-08T00:00:00.000Z', costMicros: '2' }),
+      record({ usageId: 'last', occurredAt: '2026-08-08T23:59:59.999Z', costMicros: '4' }),
+      record({ usageId: 'end', occurredAt: '2026-08-09T00:00:00.000Z', costMicros: '8' }),
+    ], today, NOW)
+    expect(model.source.recordsIncluded).toBe(2)
+    expect(model.summary.calculatedCost).toEqual({
+      status: 'available', micros: '6', currency: 'USD',
+    })
+  })
+
   it('marks totals partial when the existing server seam cannot prove more than its record ceiling', () => {
     const records = Array.from({ length: ADMIN_COST_RECORD_LIMIT }, (_, index) => record({ usageId: `usage-${index}` }))
     const model = buildAdminCostProjection(records, today, NOW)
