@@ -5,13 +5,24 @@ import { describe, expect, it } from 'vitest'
 import {
   ADULT_PRODUCTION_FAILURE_CODES,
   type AdultPrivateCommitNoteResult,
+  type CalendarListResult,
+  type CalendarPauseInput,
+  type NotificationsListResult,
   type ParentHubAdultPrivatePort,
+  type ParentHubMutationFailureCode,
   type ParentHubNotificationsPort,
+  type ParentHubReadFailureCode,
   type ParentHubReviewSummary,
   type ParentHubReviewsPort,
   type ParentHubSafetyReviewPort,
   type ParentHubSettingsChanges,
   type ProductionStudyParentHubPorts,
+  type ReviewsListResult,
+  type SafetyReviewAndClearInput,
+  type SafetyReviewAndClearResult,
+  type SafetyReviewListOpenResult,
+  type SettingsApplyResult,
+  type SettingsReadResult,
 } from './contracts'
 import {
   PARENT_HUB_PRODUCTION_CONTRACT_COMPLETE,
@@ -36,6 +47,21 @@ const reviewProjectionIsExact: Equal<keyof ParentHubReviewSummary,
   'reviewRef' | 'studentRef' | 'kind' | 'dueAt' | 'priority' | 'state' | 'revision'> = true
 const committedNoteProjectionIsExact: Equal<keyof Extract<AdultPrivateCommitNoteResult, { status: 'committed' }>,
   'status' | 'noteRef' | 'revision' | 'committedAt'> = true
+const calendarPauseInputIsExact: Equal<keyof CalendarPauseInput,
+  'studentRef' | 'expectedRevision' | 'mutationId' | 'blockRef' | 'reason'> = true
+const safetyClearanceInputIsExact: Equal<keyof SafetyReviewAndClearInput,
+  | 'studentRef' | 'safetyReviewRef' | 'proposalRevision' | 'sessionRevision' | 'calendarRevision'
+  | 'mutationId' | 'decision' | 'reasonCode'> = true
+const safetyDecisionsAreExact: Equal<SafetyReviewAndClearInput['decision'], 'resume-approved' | 'end-session'> = true
+const safetySuccessIsBoundToAllStates: Equal<keyof Extract<SafetyReviewAndClearResult, { status: 'cleared' }>,
+  'status' | 'decision' | 'proposalRevision' | 'sessionRevision' | 'calendarRevision' | 'clearedAt'> = true
+type FailureCode<Result> = Extract<Result, { status: 'failed' }> extends { code: infer Code } ? Code : never
+const settingsReadFailuresAreReadOnly: Equal<FailureCode<SettingsReadResult>, ParentHubReadFailureCode> = true
+const reviewsListFailuresAreReadOnly: Equal<FailureCode<ReviewsListResult>, ParentHubReadFailureCode> = true
+const calendarListFailuresAreReadOnly: Equal<FailureCode<CalendarListResult>, ParentHubReadFailureCode> = true
+const safetyListFailuresAreReadOnly: Equal<FailureCode<SafetyReviewListOpenResult>, ParentHubReadFailureCode> = true
+const notificationListFailuresAreReadOnly: Equal<FailureCode<NotificationsListResult>, ParentHubReadFailureCode> = true
+const settingsApplyFailuresAreMutationOnly: Equal<FailureCode<SettingsApplyResult>, ParentHubMutationFailureCode> = true
 
 const here = dirname(fileURLToPath(import.meta.url))
 const productionSource = readdirSync(here)
@@ -52,7 +78,10 @@ describe('Parent Hub production contract boundary', () => {
     expect([
       rootIsExact, reviewMethodsAreExact, safetyMethodsAreExact, adultPrivateMethodsAreExact,
       notificationSurfaceIsExact, settingsChangesAreExact, reviewProjectionIsExact,
-      committedNoteProjectionIsExact,
+      committedNoteProjectionIsExact, calendarPauseInputIsExact, safetyClearanceInputIsExact,
+      safetyDecisionsAreExact, safetySuccessIsBoundToAllStates, settingsReadFailuresAreReadOnly,
+      reviewsListFailuresAreReadOnly, calendarListFailuresAreReadOnly, safetyListFailuresAreReadOnly,
+      notificationListFailuresAreReadOnly, settingsApplyFailuresAreMutationOnly,
     ]).not.toContain(false)
   })
 

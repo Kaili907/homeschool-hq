@@ -2,6 +2,7 @@ import {
   ADULT_PRODUCTION_FAILURE_CODES,
   type AdultPrivateCommitNoteResult,
   type AdultProductionFailure,
+  type AdultProductionFailureCode,
   type CalendarCreateContinuationResult,
   type CalendarListResult,
   type CalendarPauseResult,
@@ -23,6 +24,17 @@ import {
 const OPAQUE_REFERENCE = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/
 const ISO_TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/
 const MAX_LIST_ITEMS = 100
+const READ_FAILURE_CODES = [
+  'adult-unauthorized',
+  'student-out-of-guardian-scope',
+  'authorization-infrastructure-unavailable',
+  'rate-limited',
+  'not-found',
+] as const satisfies readonly AdultProductionFailureCode[]
+const MUTATION_FAILURE_CODES = [
+  ...READ_FAILURE_CODES,
+  'idempotency-collision',
+] as const satisfies readonly AdultProductionFailureCode[]
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
@@ -54,20 +66,23 @@ function isBoundedInteger(value: unknown, minimum: number, maximum: number): val
   return Number.isSafeInteger(value) && (value as number) >= minimum && (value as number) <= maximum
 }
 
-function parseFailure(value: unknown, excludedCodes: readonly string[] = []): AdultProductionFailure | null {
+function parseFailure<Code extends AdultProductionFailureCode>(
+  value: unknown,
+  allowedCodes: readonly Code[],
+): AdultProductionFailure<Code> | null {
   if (!isRecord(value) || value.status !== 'failed' ||
     !hasExactKeys(value, ['status', 'code'], ['retryAfterSeconds']) ||
-    !isEnum(value.code, ADULT_PRODUCTION_FAILURE_CODES) || excludedCodes.includes(value.code) ||
+    !isEnum(value.code, ADULT_PRODUCTION_FAILURE_CODES) || !allowedCodes.includes(value.code as Code) ||
     (value.retryAfterSeconds !== undefined && !isBoundedInteger(value.retryAfterSeconds, 1, 86_400))) return null
-  return value as unknown as AdultProductionFailure
+  return value as unknown as AdultProductionFailure<Code>
 }
 
-function parseOrFailure<Success>(
+function parseOrFailure<Success, Code extends AdultProductionFailureCode>(
   value: unknown,
   parseSuccess: (candidate: unknown) => Success | null,
-  excludedFailureCodes: readonly string[] = [],
-): Success | AdultProductionFailure | null {
-  return parseSuccess(value) ?? parseFailure(value, excludedFailureCodes)
+  allowedFailureCodes: readonly Code[],
+): Success | AdultProductionFailure<Code> | null {
+  return parseSuccess(value) ?? parseFailure(value, allowedFailureCodes)
 }
 
 function parseSettings(value: unknown): ParentHubSettings | null {
@@ -91,7 +106,7 @@ export function parseSettingsReadResult(value: unknown): SettingsReadResult | nu
       !hasExactKeys(candidate, ['status', 'settings', 'revision', 'updatedAt']) ||
       !parseSettings(candidate.settings) || !isRevision(candidate.revision) || !isTimestamp(candidate.updatedAt)) return null
     return candidate as unknown as SettingsReadResult
-  })
+  }, READ_FAILURE_CODES)
 }
 
 export function parseSettingsApplyResult(value: unknown): SettingsApplyResult | null {
@@ -104,7 +119,7 @@ export function parseSettingsApplyResult(value: unknown): SettingsApplyResult | 
     if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) &&
       isRevision(candidate.currentRevision)) return candidate as unknown as SettingsApplyResult
     return null
-  }, ['stale-revision']) as SettingsApplyResult | null
+  }, MUTATION_FAILURE_CODES) as SettingsApplyResult | null
 }
 
 function parseReview(value: unknown): ParentHubReviewSummary | null {
@@ -123,7 +138,7 @@ export function parseReviewsListResult(value: unknown): ReviewsListResult | null
       candidate.reviews.length > MAX_LIST_ITEMS || candidate.reviews.some((review) => !parseReview(review)) ||
       (candidate.nextCursor !== undefined && !isOpaqueReference(candidate.nextCursor))) return null
     return candidate as unknown as ReviewsListResult
-  })
+  }, READ_FAILURE_CODES)
 }
 
 export function parseReviewsDecideResult(value: unknown): ReviewsDecideResult | null {
@@ -137,7 +152,7 @@ export function parseReviewsDecideResult(value: unknown): ReviewsDecideResult | 
       isEnum(candidate.decision, ['accepted', 'rejected'] as const) && isRevision(candidate.revision)) return candidate as unknown as ReviewsDecideResult
     if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) && isRevision(candidate.currentRevision)) return candidate as unknown as ReviewsDecideResult
     return null
-  }, ['already-decided', 'stale-revision']) as ReviewsDecideResult | null
+  }, MUTATION_FAILURE_CODES) as ReviewsDecideResult | null
 }
 
 function parseCalendarBlock(value: unknown): ParentHubCalendarSummary | null {
@@ -157,7 +172,7 @@ export function parseCalendarListResult(value: unknown): CalendarListResult | nu
       candidate.blocks.length > MAX_LIST_ITEMS || candidate.blocks.some((block) => !parseCalendarBlock(block)) ||
       (candidate.nextCursor !== undefined && !isOpaqueReference(candidate.nextCursor))) return null
     return candidate as unknown as CalendarListResult
-  })
+  }, READ_FAILURE_CODES)
 }
 
 function parseCalendarConflict(value: unknown): CalendarPauseResult | CalendarCreateContinuationResult | null {
@@ -169,7 +184,7 @@ function parseCalendarConflict(value: unknown): CalendarPauseResult | CalendarCr
       isRevision(candidate.revision)) return candidate as unknown as CalendarPauseResult
     if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) && isRevision(candidate.currentRevision)) return candidate as unknown as CalendarPauseResult
     return null
-  }, ['stale-revision']) as CalendarPauseResult | CalendarCreateContinuationResult | null
+  }, MUTATION_FAILURE_CODES) as CalendarPauseResult | CalendarCreateContinuationResult | null
 }
 
 export function parseCalendarPauseResult(value: unknown): CalendarPauseResult | null {
@@ -199,19 +214,28 @@ export function parseSafetyReviewListOpenResult(value: unknown): SafetyReviewLis
       !Array.isArray(candidate.reviews) || candidate.reviews.length > MAX_LIST_ITEMS ||
       candidate.reviews.some((review) => !parseSafetyReview(review))) return null
     return candidate as unknown as SafetyReviewListOpenResult
-  })
+  }, READ_FAILURE_CODES)
 }
 
 export function parseSafetyReviewAndClearResult(value: unknown): SafetyReviewAndClearResult | null {
   return parseOrFailure(value, (candidate) => {
     if (!isRecord(candidate) || typeof candidate.status !== 'string') return null
-    if (candidate.status === 'cleared' && hasExactKeys(candidate, ['status', 'revision', 'clearedAt']) &&
-      isRevision(candidate.revision) && isTimestamp(candidate.clearedAt)) return candidate as unknown as SafetyReviewAndClearResult
-    if ((candidate.status === 'duplicate-replay' || candidate.status === 'safety-state-changed') &&
-      hasExactKeys(candidate, ['status', 'revision']) && isRevision(candidate.revision)) return candidate as unknown as SafetyReviewAndClearResult
-    if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) && isRevision(candidate.currentRevision)) return candidate as unknown as SafetyReviewAndClearResult
+    const hasValidRevisions = isRevision(candidate.proposalRevision) &&
+      isRevision(candidate.sessionRevision) && isRevision(candidate.calendarRevision)
+    if (candidate.status === 'cleared' &&
+      hasExactKeys(candidate, ['status', 'decision', 'proposalRevision', 'sessionRevision', 'calendarRevision', 'clearedAt']) &&
+      isEnum(candidate.decision, ['resume-approved', 'end-session'] as const) && hasValidRevisions &&
+      isTimestamp(candidate.clearedAt)) return candidate as unknown as SafetyReviewAndClearResult
+    if (candidate.status === 'duplicate-replay' &&
+      hasExactKeys(candidate, ['status', 'decision', 'proposalRevision', 'sessionRevision', 'calendarRevision']) &&
+      isEnum(candidate.decision, ['resume-approved', 'end-session'] as const) && hasValidRevisions) {
+      return candidate as unknown as SafetyReviewAndClearResult
+    }
+    if (candidate.status === 'safety-state-changed' &&
+      hasExactKeys(candidate, ['status', 'proposalRevision', 'sessionRevision', 'calendarRevision']) &&
+      hasValidRevisions) return candidate as unknown as SafetyReviewAndClearResult
     return null
-  }, ['safety-state-changed', 'stale-revision']) as SafetyReviewAndClearResult | null
+  }, MUTATION_FAILURE_CODES) as SafetyReviewAndClearResult | null
 }
 
 export function parseAdultPrivateCommitNoteResult(value: unknown): AdultPrivateCommitNoteResult | null {
@@ -222,7 +246,7 @@ export function parseAdultPrivateCommitNoteResult(value: unknown): AdultPrivateC
     if (candidate.status === 'duplicate-replay' && hasExactKeys(candidate, ['status', 'revision']) && isRevision(candidate.revision)) return candidate as unknown as AdultPrivateCommitNoteResult
     if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) && isRevision(candidate.currentRevision)) return candidate as unknown as AdultPrivateCommitNoteResult
     return null
-  }, ['stale-revision']) as AdultPrivateCommitNoteResult | null
+  }, MUTATION_FAILURE_CODES) as AdultPrivateCommitNoteResult | null
 }
 
 function parseNotification(value: unknown): ParentHubNotificationSummary | null {
@@ -243,7 +267,7 @@ export function parseNotificationsListResult(value: unknown): NotificationsListR
       candidate.notifications.length > MAX_LIST_ITEMS || candidate.notifications.some((item) => !parseNotification(item)) ||
       (candidate.nextCursor !== undefined && !isOpaqueReference(candidate.nextCursor))) return null
     return candidate as unknown as NotificationsListResult
-  })
+  }, READ_FAILURE_CODES)
 }
 
 export function parseNotificationsMarkReadResult(value: unknown): NotificationsMarkReadResult | null {
@@ -254,5 +278,5 @@ export function parseNotificationsMarkReadResult(value: unknown): NotificationsM
     if (candidate.status === 'duplicate-replay' && hasExactKeys(candidate, ['status', 'revision']) && isRevision(candidate.revision)) return candidate as unknown as NotificationsMarkReadResult
     if (candidate.status === 'stale-revision' && hasExactKeys(candidate, ['status', 'currentRevision']) && isRevision(candidate.currentRevision)) return candidate as unknown as NotificationsMarkReadResult
     return null
-  }, ['stale-revision']) as NotificationsMarkReadResult | null
+  }, MUTATION_FAILURE_CODES) as NotificationsMarkReadResult | null
 }

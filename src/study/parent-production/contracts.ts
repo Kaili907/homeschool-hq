@@ -13,6 +13,14 @@ export const ADULT_PRODUCTION_FAILURE_CODES = [
 ] as const
 
 export type AdultProductionFailureCode = typeof ADULT_PRODUCTION_FAILURE_CODES[number]
+export type ParentHubReadFailureCode = Exclude<
+  AdultProductionFailureCode,
+  'stale-revision' | 'idempotency-collision' | 'already-decided' | 'safety-state-changed'
+>
+export type ParentHubMutationFailureCode = Exclude<
+  AdultProductionFailureCode,
+  'stale-revision' | 'already-decided' | 'safety-state-changed'
+>
 
 export type AdultProductionFailure<Code extends AdultProductionFailureCode = AdultProductionFailureCode> = Readonly<{
   status: 'failed'
@@ -45,17 +53,19 @@ export interface ParentHubSettings {
   readonly speechInputAllowed: boolean
 }
 export type ParentHubSettingsChanges = Readonly<Partial<ParentHubSettings>>
+export type SettingsReadInput = ParentHubStudentSelector
+export type SettingsApplyInput = ParentHubMutationInput & { readonly changes: ParentHubSettingsChanges }
 export type SettingsReadResult =
   | Readonly<{ status: 'settings'; settings: ParentHubSettings; revision: number; updatedAt: string }>
-  | AdultProductionFailure
+  | AdultProductionFailure<ParentHubReadFailureCode>
 export type SettingsApplyResult =
   | Readonly<{ status: 'applied'; revision: number; appliedAt: string }>
   | Readonly<{ status: 'duplicate-replay'; revision: number }>
   | Readonly<{ status: 'stale-revision'; currentRevision: number }>
-  | AdultProductionFailure<Exclude<AdultProductionFailureCode, 'stale-revision'>>
+  | AdultProductionFailure<ParentHubMutationFailureCode>
 export interface ParentHubSettingsPort {
-  read(input: ParentHubStudentSelector): Promise<SettingsReadResult>
-  apply(input: ParentHubMutationInput & { readonly changes: ParentHubSettingsChanges }): Promise<SettingsApplyResult>
+  read(input: SettingsReadInput): Promise<SettingsReadResult>
+  apply(input: SettingsApplyInput): Promise<SettingsApplyResult>
 }
 
 export type ParentHubReviewKind = 'spaced' | 'reteach' | 'prerequisite' | 'manual'
@@ -69,18 +79,23 @@ export interface ParentHubReviewSummary {
   readonly state: 'pending' | 'decided'
   readonly revision: number
 }
+export type ReviewsListInput = ParentHubListInput
+export type ReviewsDecideInput = ParentHubMutationInput & {
+  readonly reviewRef: string
+  readonly decision: ParentHubReviewDecision
+}
 export type ReviewsListResult =
   | Readonly<{ status: 'listed'; reviews: readonly ParentHubReviewSummary[]; nextCursor?: string }>
-  | AdultProductionFailure
+  | AdultProductionFailure<ParentHubReadFailureCode>
 export type ReviewsDecideResult =
   | Readonly<{ status: 'decided'; decision: ParentHubReviewDecision; revision: number; decidedAt: string }>
   | Readonly<{ status: 'duplicate-replay'; revision: number }>
   | Readonly<{ status: 'already-decided'; decision: ParentHubReviewDecision; revision: number }>
   | Readonly<{ status: 'stale-revision'; currentRevision: number }>
-  | AdultProductionFailure<Exclude<AdultProductionFailureCode, 'already-decided' | 'stale-revision'>>
+  | AdultProductionFailure<ParentHubMutationFailureCode>
 export interface ParentHubReviewsPort {
-  list(input: ParentHubListInput): Promise<ReviewsListResult>
-  decide(input: ParentHubMutationInput & { readonly reviewRef: string; readonly decision: ParentHubReviewDecision }): Promise<ReviewsDecideResult>
+  list(input: ReviewsListInput): Promise<ReviewsListResult>
+  decide(input: ReviewsDecideInput): Promise<ReviewsDecideResult>
 }
 
 export type ParentHubCalendarState = 'scheduled' | 'available' | 'in-progress' | 'paused' | 'completed' | 'cancelled'
@@ -94,14 +109,25 @@ export interface ParentHubCalendarSummary {
   readonly state: ParentHubCalendarState
   readonly revision: number
 }
+export type CalendarListInput = ParentHubListInput
+export type CalendarPauseInput = ParentHubMutationInput & {
+  readonly blockRef: string
+  readonly reason: 'planned-break' | 'requested-break' | 'outside-interruption' | 'technical-interruption'
+}
+export type CalendarCreateContinuationInput = ParentHubMutationInput & {
+  readonly sourceBlockRef: string
+  /** Requested future schedule time, not a client assertion of when the server acted. */
+  readonly scheduledAt: string
+  readonly durationMinutes: number
+}
 export type CalendarListResult =
   | Readonly<{ status: 'listed'; blocks: readonly ParentHubCalendarSummary[]; nextCursor?: string }>
-  | AdultProductionFailure
+  | AdultProductionFailure<ParentHubReadFailureCode>
 type ParentHubCalendarMutationConflict =
   | Readonly<{ status: 'duplicate-replay'; revision: number }>
   | Readonly<{ status: 'calendar-state-changed'; currentState: ParentHubCalendarState; revision: number }>
   | Readonly<{ status: 'stale-revision'; currentRevision: number }>
-  | AdultProductionFailure<Exclude<AdultProductionFailureCode, 'stale-revision'>>
+  | AdultProductionFailure<ParentHubMutationFailureCode>
 export type CalendarPauseResult =
   | Readonly<{ status: 'paused'; revision: number; pausedAt: string }>
   | ParentHubCalendarMutationConflict
@@ -109,17 +135,9 @@ export type CalendarCreateContinuationResult =
   | Readonly<{ status: 'continuation-created'; blockRef: string; revision: number; createdAt: string }>
   | ParentHubCalendarMutationConflict
 export interface ParentHubCalendarPort {
-  list(input: ParentHubListInput): Promise<CalendarListResult>
-  pause(input: ParentHubMutationInput & {
-    readonly blockRef: string
-    readonly pausedAt: string
-    readonly reason: 'planned-break' | 'requested-break' | 'outside-interruption' | 'technical-interruption'
-  }): Promise<CalendarPauseResult>
-  createContinuation(input: ParentHubMutationInput & {
-    readonly sourceBlockRef: string
-    readonly scheduledAt: string
-    readonly durationMinutes: number
-  }): Promise<CalendarCreateContinuationResult>
+  list(input: CalendarListInput): Promise<CalendarListResult>
+  pause(input: CalendarPauseInput): Promise<CalendarPauseResult>
+  createContinuation(input: CalendarCreateContinuationInput): Promise<CalendarCreateContinuationResult>
 }
 
 export interface ParentHubSafetyReviewSummary {
@@ -130,32 +148,62 @@ export interface ParentHubSafetyReviewSummary {
   readonly heldAt: string
   readonly revision: number
 }
+export const PARENT_HUB_SAFETY_REVIEW_DECISIONS = ['resume-approved', 'end-session'] as const
+export type ParentHubSafetyReviewDecision = typeof PARENT_HUB_SAFETY_REVIEW_DECISIONS[number]
+export type ParentHubSafetyReviewResolution =
+  | Readonly<{
+      /** Clears the adult hold only; this is not a learner resume command. */
+      decision: 'resume-approved'
+      reasonCode: 'adult-reviewed-resume-approved'
+    }>
+  | Readonly<{
+      /** Authorizes the server transaction to end the work bound to this review. */
+      decision: 'end-session'
+      reasonCode: 'adult-reviewed-end-session'
+    }>
+export type SafetyReviewListOpenInput = ParentHubStudentSelector
+export type SafetyReviewAndClearInput = ParentHubStudentSelector & ParentHubSafetyReviewResolution & {
+  readonly safetyReviewRef: string
+  readonly proposalRevision: number
+  readonly sessionRevision: number
+  readonly calendarRevision: number
+  readonly mutationId: string
+}
+export interface ParentHubSafetyStateRevisions {
+  readonly proposalRevision: number
+  readonly sessionRevision: number
+  readonly calendarRevision: number
+}
 export type SafetyReviewListOpenResult =
   | Readonly<{ status: 'listed'; reviews: readonly ParentHubSafetyReviewSummary[] }>
-  | AdultProductionFailure
+  | AdultProductionFailure<ParentHubReadFailureCode>
 export type SafetyReviewAndClearResult =
-  | Readonly<{ status: 'cleared'; revision: number; clearedAt: string }>
-  | Readonly<{ status: 'duplicate-replay'; revision: number }>
-  | Readonly<{ status: 'safety-state-changed'; revision: number }>
-  | Readonly<{ status: 'stale-revision'; currentRevision: number }>
-  | AdultProductionFailure<Exclude<AdultProductionFailureCode, 'safety-state-changed' | 'stale-revision'>>
+  | (Readonly<{
+      status: 'cleared'
+      decision: ParentHubSafetyReviewDecision
+      clearedAt: string
+    }> & ParentHubSafetyStateRevisions)
+  | (Readonly<{ status: 'duplicate-replay'; decision: ParentHubSafetyReviewDecision }> & ParentHubSafetyStateRevisions)
+  | (Readonly<{ status: 'safety-state-changed' }> & ParentHubSafetyStateRevisions)
+  | AdultProductionFailure<ParentHubMutationFailureCode>
 export interface ParentHubSafetyReviewPort {
-  listOpen(input: ParentHubStudentSelector): Promise<SafetyReviewListOpenResult>
-  reviewAndClear(input: ParentHubMutationInput & { readonly safetyReviewRef: string; readonly reviewedAt: string }): Promise<SafetyReviewAndClearResult>
+  listOpen(input: SafetyReviewListOpenInput): Promise<SafetyReviewListOpenResult>
+  reviewAndClear(input: SafetyReviewAndClearInput): Promise<SafetyReviewAndClearResult>
 }
 
 export type ParentHubAdultNoteCategory = 'instructional' | 'accommodation' | 'follow-up' | 'administrative'
+export type AdultPrivateCommitNoteInput = ParentHubMutationInput & {
+  readonly noteRef: string
+  readonly category: ParentHubAdultNoteCategory
+  readonly body: string
+}
 export type AdultPrivateCommitNoteResult =
   | Readonly<{ status: 'committed'; noteRef: string; revision: number; committedAt: string }>
   | Readonly<{ status: 'duplicate-replay'; revision: number }>
   | Readonly<{ status: 'stale-revision'; currentRevision: number }>
-  | AdultProductionFailure<Exclude<AdultProductionFailureCode, 'stale-revision'>>
+  | AdultProductionFailure<ParentHubMutationFailureCode>
 export interface ParentHubAdultPrivatePort {
-  commitNote(input: ParentHubMutationInput & {
-    readonly noteRef: string
-    readonly category: ParentHubAdultNoteCategory
-    readonly body: string
-  }): Promise<AdultPrivateCommitNoteResult>
+  commitNote(input: AdultPrivateCommitNoteInput): Promise<AdultPrivateCommitNoteResult>
 }
 
 export type ParentHubNotificationTitle = 'Review ready' | 'Schedule changed' | 'Safety review required' | 'Settings updated'
@@ -171,18 +219,20 @@ export interface ParentHubNotificationSummary {
   readonly readAt: string | null
   readonly safeActionRef: string | null
 }
+export type NotificationsListInput = ParentHubListInput
+export type NotificationsMarkReadInput = ParentHubMutationInput & { readonly notificationId: string }
 export type NotificationsListResult =
   | Readonly<{ status: 'listed'; notifications: readonly ParentHubNotificationSummary[]; nextCursor?: string }>
-  | AdultProductionFailure
+  | AdultProductionFailure<ParentHubReadFailureCode>
 export type NotificationsMarkReadResult =
   | Readonly<{ status: 'marked-read'; revision: number; readAt: string }>
   | Readonly<{ status: 'duplicate-replay'; revision: number }>
   | Readonly<{ status: 'stale-revision'; currentRevision: number }>
-  | AdultProductionFailure<Exclude<AdultProductionFailureCode, 'stale-revision'>>
+  | AdultProductionFailure<ParentHubMutationFailureCode>
 export interface ParentHubNotificationsPort {
   readonly delivery: 'in-app'
-  list(input: ParentHubListInput): Promise<NotificationsListResult>
-  markRead(input: ParentHubMutationInput & { readonly notificationId: string }): Promise<NotificationsMarkReadResult>
+  list(input: NotificationsListInput): Promise<NotificationsListResult>
+  markRead(input: NotificationsMarkReadInput): Promise<NotificationsMarkReadResult>
 }
 
 export interface ProductionStudyParentHubPorts {

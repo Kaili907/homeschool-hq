@@ -67,8 +67,18 @@ describe('Parent Hub production response parsers', () => {
       status: 'listed',
       reviews: [{ safetyReviewRef: 'safety.1', studentRef: 'student.1', category: 'urgent-safety', urgency: 'urgent', heldAt: at, revision: 3 }],
     })).not.toBeNull()
-    expect(parseSafetyReviewAndClearResult({ status: 'safety-state-changed', revision: 4 })).not.toBeNull()
-    expect(parseSafetyReviewAndClearResult({ status: 'stale-revision', currentRevision: 4 })).not.toBeNull()
+    expect(parseSafetyReviewAndClearResult({
+      status: 'cleared',
+      decision: 'resume-approved',
+      proposalRevision: 4,
+      sessionRevision: 7,
+      calendarRevision: 9,
+      clearedAt: at,
+    })).not.toBeNull()
+    expect(parseSafetyReviewAndClearResult({
+      status: 'safety-state-changed', proposalRevision: 4, sessionRevision: 7, calendarRevision: 9,
+    })).not.toBeNull()
+    expect(parseSafetyReviewAndClearResult({ status: 'stale-revision', currentRevision: 4 })).toBeNull()
     expect(parseSafetyReviewAndClearResult({ status: 'failed', code: 'safety-state-changed' })).toBeNull()
   })
 
@@ -97,8 +107,19 @@ describe('Parent Hub production response parsers', () => {
     })).toBeNull()
     expect(parseNotificationsListResult({ status: 'listed', notifications: Array(101).fill(notification) })).toBeNull()
     expect(parseNotificationsListResult({ status: 'failed', code: 'authorization-infrastructure-unavailable' })).not.toBeNull()
+    for (const parseListResult of [
+      parseSettingsReadResult, parseReviewsListResult, parseCalendarListResult,
+      parseSafetyReviewListOpenResult, parseNotificationsListResult,
+    ]) {
+      expect(parseListResult({ status: 'failed', code: 'idempotency-collision' })).toBeNull()
+      expect(parseListResult({ status: 'failed', code: 'stale-revision' })).toBeNull()
+      expect(parseListResult({ status: 'failed', code: 'already-decided' })).toBeNull()
+      expect(parseListResult({ status: 'failed', code: 'safety-state-changed' })).toBeNull()
+    }
     expect(parseNotificationsListResult({ status: 'failed', code: 'unknown' })).toBeNull()
     expect(parseNotificationsListResult({ status: 'failed', code: 'rate-limited', retryAfterSeconds: 0 })).toBeNull()
     expect(parseNotificationsListResult({ status: 'failed', code: 'adult-unauthorized', detail: 'secret' })).toBeNull()
+    expect(parseSettingsApplyResult({ status: 'failed', code: 'idempotency-collision' })).not.toBeNull()
+    expect(parseSettingsApplyResult({ status: 'failed', code: 'already-decided' })).toBeNull()
   })
 })
