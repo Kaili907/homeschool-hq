@@ -10,6 +10,7 @@ import {
 } from '../contracts/sessions'
 import { SerializedLifecycleDelivery, type SecurityLifecycleSink } from './lifecycleDelivery'
 import {
+  GLOBAL_REVOCATION_EXHAUSTED_EPOCH,
   getCurrentGlobalRevocation,
   type GlobalRevocationNotice,
   type GlobalRevocationSource,
@@ -187,6 +188,11 @@ export class LearnerSessionController {
   #lastObservedAt: number | null = null
   #lastStorageWriteAt: number | null = null
   #lastEndReason: LearnerSessionEndReason = 'none'
+  #terminalRevocation: GlobalRevocationNotice | null = null
+  #coveredTerminalRevocation: GlobalRevocationNotice | null = null
+  #pendingAuthorityOperations = 0
+  #authorityIdle: Promise<void> = Promise.resolve()
+  #resolveAuthorityIdle: (() => void) | null = null
   #closed = false
 
   constructor(options: LearnerSessionControllerOptions) {
@@ -204,21 +210,51 @@ export class LearnerSessionController {
   }
 
   async create(profileIdInput: ProfileId): Promise<LearnerSessionRecord> {
+    return this.#runAuthorityOperation(() => this.#create(profileIdInput))
+  }
+
+  async #create(profileIdInput: ProfileId): Promise<LearnerSessionRecord> {
     const profileId = parseProfileId(profileIdInput)
     if (!profileId) throw new Error('Learner profile ID is invalid.')
     if (this.#closed) throw new Error('Learner session controller is closed.')
     await this.#lifecycle.requireClean()
+    const initialRevocation = getCurrentGlobalRevocation(this.#revocation)
+    if (initialRevocation?.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
+      const notice = initialRevocation?.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+        ? initialRevocation.notice
+        : null
+      if (this.#session) {
+        this.#end(
+          'global-revocation',
+          true,
+          notice ? parseCanonicalTimestamp(notice.occurredAt) ?? undefined : undefined,
+          notice?.cause ?? 'global-revocation',
+          !this.#isTerminalLifecycleCovered(notice),
+        )
+        await this.#lifecycle.whenIdle()
+      } else {
+        await this.clearLocal()
+      }
+      throw new Error('Global revocation authority is exhausted.')
+    }
     await this.clearLocal()
     await this.#lifecycle.requireClean()
     const sessionId = createLocalSessionId(this.#randomUUID)
     if (!await this.#claimOwnership(sessionId)) {
       if (this.#lifecycle.failed) await this.#lifecycle.requireClean()
+      if (this.#terminalRevocation?.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
+        throw new Error('Global revocation authority is exhausted.')
+      }
       throw new Error('Learner session ownership is unavailable.')
     }
     try {
       await this.#lifecycle.requireClean()
       const now = requireSafeTimestamp(this.#clock)
-      const epoch = this.#revocation.currentEpoch()
+      const revocation = getCurrentGlobalRevocation(this.#revocation)
+      const epoch = revocation?.epoch ?? null
+      if (epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
+        throw new Error('Global revocation authority is exhausted.')
+      }
       if (epoch === null) throw new Error('Global revocation epoch is unavailable.')
       const record: LearnerSessionRecord = Object.freeze({
         schemaVersion: LOCAL_SESSION_SCHEMA_VERSION,
@@ -232,7 +268,21 @@ export class LearnerSessionController {
       const delivered = await this.#emit('learner-authenticated', now)
       if (!delivered) throw new Error('Learner lifecycle delivery failed closed.')
       await this.#lifecycle.requireClean()
-      if (this.#revocation.currentEpoch() !== epoch) {
+      const publishedRevocation = getCurrentGlobalRevocation(this.#revocation)
+      const publishedEpoch = publishedRevocation?.epoch ?? null
+      const exhausted = publishedEpoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+      if (publishedEpoch !== epoch || exhausted) {
+        if (exhausted) {
+          const notice = publishedEpoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+            ? publishedRevocation?.notice ?? null
+            : null
+          if (!this.#isTerminalLifecycleCovered(notice)) {
+            await this.#emit(
+              notice?.cause ?? 'global-revocation',
+              notice ? parseCanonicalTimestamp(notice.occurredAt) ?? now : now,
+            )
+          }
+        }
         throw new Error('Learner session was revoked before publication.')
       }
       const serialized = JSON.stringify(record)
@@ -252,12 +302,33 @@ export class LearnerSessionController {
   }
 
   async restore(): Promise<LearnerSessionCheck> {
+    return this.#runAuthorityOperation(() => this.#restore())
+  }
+
+  async #restore(): Promise<LearnerSessionCheck> {
     if (this.#closed) return Object.freeze({ status: 'ended', reason: 'ownership-unavailable' })
     try {
       await this.#lifecycle.requireClean()
     } catch {
       await this.#failClosedForLifecycle()
       return Object.freeze({ status: 'ended', reason: 'lifecycle-failed' })
+    }
+    const initialRevocation = getCurrentGlobalRevocation(this.#revocation)
+    if (initialRevocation?.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
+      const notice = initialRevocation?.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+        ? initialRevocation.notice
+        : null
+      const ended = this.#end(
+        'global-revocation',
+        true,
+        notice ? parseCanonicalTimestamp(notice.occurredAt) ?? undefined : undefined,
+        notice?.cause ?? 'global-revocation',
+        !this.#isTerminalLifecycleCovered(notice),
+      )
+      await this.#lifecycle.whenIdle()
+      return this.#lifecycle.failed
+        ? Object.freeze({ status: 'ended', reason: 'lifecycle-failed' })
+        : ended
     }
     let serialized: string | null
     try {
@@ -287,6 +358,20 @@ export class LearnerSessionController {
         : ended
     }
     if (!await this.#claimOwnership(parsed.record.sessionId)) {
+      const terminal = this.#terminalRevocation
+      if (terminal?.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
+        const ended = this.#end(
+          'global-revocation',
+          true,
+          parseCanonicalTimestamp(terminal.occurredAt) ?? undefined,
+          terminal.cause,
+          !this.#isTerminalLifecycleCovered(terminal),
+        )
+        await this.#lifecycle.whenIdle()
+        return this.#lifecycle.failed
+          ? Object.freeze({ status: 'ended', reason: 'lifecycle-failed' })
+          : ended
+      }
       const ended = this.#end('ownership-conflict')
       await this.#lifecycle.whenIdle()
       return this.#lifecycle.failed
@@ -323,7 +408,8 @@ export class LearnerSessionController {
 
     const revocation = getCurrentGlobalRevocation(this.#revocation)
     const epoch = revocation?.epoch ?? null
-    if (epoch === null || epoch !== parsed.record.globalRevocationEpoch) {
+    const exhausted = epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+    if (epoch === null || exhausted || epoch !== parsed.record.globalRevocationEpoch) {
       const notice = revocation?.notice
       const exactNotice = notice &&
         notice.epoch === epoch &&
@@ -338,6 +424,7 @@ export class LearnerSessionController {
         true,
         occurredAt,
         exactNotice?.cause ?? 'global-revocation',
+        !this.#isTerminalLifecycleCovered(exactNotice),
       )
     }
     if (now >= parsed.absoluteExpiresAt) return this.#end('absolute-expired', true, now)
@@ -394,10 +481,22 @@ export class LearnerSessionController {
     beforeDelivery?: () => void | Promise<void>,
   ): Promise<void> {
     if (this.#closed) throw new Error('Learner session controller is closed.')
+    const guardedBeforeDelivery = beforeDelivery
+      ? async () => {
+          await beforeDelivery()
+          const terminal = getCurrentGlobalRevocation(this.#revocation)
+          if (
+            terminal?.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH &&
+            terminal.notice?.cause === event.type
+          ) {
+            this.#coveredTerminalRevocation = terminal.notice
+          }
+        }
+      : undefined
     await this.#lifecycle.enqueue(
       event,
       () => this.#failClosedForLifecycle(),
-      beforeDelivery,
+      guardedBeforeDelivery,
       true,
     )
     await this.#lifecycle.requireClean()
@@ -452,9 +551,12 @@ export class LearnerSessionController {
     remove = true,
     occurredAt?: number,
     lifecycleType?: SecurityLifecycleEventType,
+    emit = true,
   ): LearnerSessionCheck {
     if (remove) safeRemove(this.#storage, LEARNER_SESSION_STORAGE_KEY)
-    const shouldEmit = reason !== 'none' && (this.#session !== null || this.#lastEndReason !== reason)
+    const shouldEmit = emit && reason !== 'none' && (
+      this.#session !== null || this.#lastEndReason !== reason
+    )
     this.#session = null
     this.#lastObservedAt = null
     this.#lastStorageWriteAt = null
@@ -489,14 +591,72 @@ export class LearnerSessionController {
     return this.#lifecycle.enqueue(event, () => this.#failClosedForLifecycle())
   }
 
+  async #runAuthorityOperation<T>(operation: () => Promise<T>): Promise<T> {
+    if (this.#pendingAuthorityOperations === 0) {
+      this.#authorityIdle = new Promise<void>((resolve) => {
+        this.#resolveAuthorityIdle = resolve
+      })
+    }
+    this.#pendingAuthorityOperations += 1
+    try {
+      return await operation()
+    } finally {
+      this.#pendingAuthorityOperations -= 1
+      if (this.#pendingAuthorityOperations === 0) {
+        const resolve = this.#resolveAuthorityIdle
+        this.#resolveAuthorityIdle = null
+        resolve?.()
+      }
+    }
+  }
+
+  async #whenAuthorityIdle(): Promise<void> {
+    for (;;) {
+      const idle = this.#authorityIdle
+      await idle
+      if (idle === this.#authorityIdle && this.#pendingAuthorityOperations === 0) return
+    }
+  }
+
+  #isTerminalLifecycleCovered(notice: GlobalRevocationNotice | null | undefined): boolean {
+    const covered = this.#coveredTerminalRevocation
+    return notice !== null && notice !== undefined && covered !== null &&
+      notice.epoch === covered.epoch &&
+      notice.cause === covered.cause &&
+      notice.occurredAt === covered.occurredAt
+  }
+
   async #handleRevocation(notice: GlobalRevocationNotice): Promise<void> {
+    const terminal = notice.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+    if (terminal) this.#terminalRevocation = notice
     const session = this.#session
-    if (!session || notice.epoch < session.globalRevocationEpoch) return
-    if (notice.epoch === session.globalRevocationEpoch) {
+    if (!session) {
+      if (terminal) {
+        safeRemove(this.#storage, LEARNER_SESSION_STORAGE_KEY)
+        this.#lastObservedAt = null
+        this.#lastStorageWriteAt = null
+        await this.#releaseOwnership()
+        await this.#whenAuthorityIdle()
+        await this.#lifecycle.whenIdle()
+      }
+      return
+    }
+    if (notice.epoch < session.globalRevocationEpoch) return
+    if (
+      notice.epoch === session.globalRevocationEpoch &&
+      notice.epoch !== GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+    ) {
       if (notice.cause !== 'global-revocation' || this.#revocation.currentEpoch() !== null) return
     }
     const occurredAt = parseCanonicalTimestamp(notice.occurredAt) ?? undefined
-    this.#end('global-revocation', true, occurredAt, notice.cause)
+    this.#end(
+      'global-revocation',
+      true,
+      occurredAt,
+      notice.cause,
+      !this.#isTerminalLifecycleCovered(notice),
+    )
+    if (terminal) await this.#whenAuthorityIdle()
     await this.#lifecycle.whenIdle()
   }
 
@@ -505,6 +665,7 @@ export class LearnerSessionController {
       !this.#ownershipLockManager ||
       this.#closed ||
       this.#lifecycle.failed ||
+      this.#terminalRevocation !== null ||
       this.#ownership ||
       this.#pendingOwnership
     ) return false
@@ -513,7 +674,7 @@ export class LearnerSessionController {
     const ownership = await pending
     if (this.#pendingOwnership === pending) this.#pendingOwnership = null
     if (!ownership) return false
-    if (this.#closed || this.#lifecycle.failed) {
+    if (this.#closed || this.#lifecycle.failed || this.#terminalRevocation !== null) {
       await ownership.release()
       return false
     }

@@ -720,6 +720,7 @@ describe('Lock/Switch state machine and Study lifecycle seam', () => {
   it('prevalidates forged action profile IDs before any authority-changing effect', async () => {
     const clearLocal = vi.fn()
     const deliverLifecycle = vi.fn()
+    const beginRevoke = vi.fn()
     const revoke = vi.fn()
     const requestLearnerPin = vi.fn()
     await expect(executeLearnerAccessActions([
@@ -736,12 +737,14 @@ describe('Lock/Switch state machine and Study lifecycle seam', () => {
       revocation: {
         currentEpoch: () => 0,
         subscribe: () => () => undefined,
+        beginRevoke,
         revoke,
         close: () => undefined,
       },
       requestLearnerPin,
     })).rejects.toThrow('Learner action profile ID is invalid')
     expect(clearLocal).not.toHaveBeenCalled()
+    expect(beginRevoke).not.toHaveBeenCalled()
     expect(revoke).not.toHaveBeenCalled()
     expect(deliverLifecycle).not.toHaveBeenCalled()
     expect(requestLearnerPin).not.toHaveBeenCalled()

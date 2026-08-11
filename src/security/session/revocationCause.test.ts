@@ -104,14 +104,42 @@ class RevocationLocks implements RevocationLockManager {
 
 class OwnershipLocks implements LearnerSessionOwnershipLockManager {
   #held = false
+  requests = 0
+  get held(): boolean { return this.#held }
   request<T>(
     name: string,
     _options: { readonly mode: 'exclusive'; readonly ifAvailable: true },
     callback: (lock: LearnerSessionOwnershipLock | null) => T | Promise<T>,
   ): Promise<T> {
+    this.requests += 1
     if (this.#held) return Promise.resolve(callback(null))
     this.#held = true
     return Promise.resolve(callback({ name })).finally(() => { this.#held = false })
+  }
+}
+
+class DeferredOwnershipLocks implements LearnerSessionOwnershipLockManager {
+  requests = 0
+  held = false
+  #allowRequest!: () => void
+  readonly #requestGate = new Promise<void>((resolve) => { this.#allowRequest = resolve })
+
+  allowRequest(): void { this.#allowRequest() }
+
+  request<T>(
+    name: string,
+    _options: { readonly mode: 'exclusive'; readonly ifAvailable: true },
+    callback: (lock: LearnerSessionOwnershipLock | null) => T | Promise<T>,
+  ): Promise<T> {
+    this.requests += 1
+    return this.#requestGate.then(async () => {
+      this.held = true
+      try {
+        return await callback({ name })
+      } finally {
+        this.held = false
+      }
+    })
   }
 }
 
@@ -137,10 +165,11 @@ async function setupRemoteRace() {
   })
   const lifecycleEvents: string[] = []
   const studyCancellations: StudyCancellationReason[] = []
+  const ownership = new OwnershipLocks()
   const session = new LearnerSessionController({
     storage: new MemoryStorage(),
     revocation: coordinator,
-    ownershipLockManager: new OwnershipLocks(),
+    ownershipLockManager: ownership,
     clock: () => START,
     randomUUID: () => UUID_A,
     onLifecycleEvent: (event) => {
@@ -153,7 +182,7 @@ async function setupRemoteRace() {
   await session.create(P1)
   lifecycleEvents.length = 0
   studyCancellations.length = 0
-  return { storage, hub, coordinator, session, lifecycleEvents, studyCancellations }
+  return { storage, hub, coordinator, session, ownership, lifecycleEvents, studyCancellations }
 }
 
 describe('causeful global revocation transport', () => {
@@ -489,15 +518,482 @@ describe('causeful global revocation transport', () => {
     coordinator.close()
   })
 
-  it('fails closed at the maximum safe epoch when malformed transport cannot advance', async () => {
+  it('releases the revocation lock after durable publication while delivery stays ordered', async () => {
+    const storage = new MemoryStorage()
+    storage.setItem(GLOBAL_REVOCATION_STORAGE_KEY, '0')
+    const coordinator = new GlobalRevocationCoordinator({
+      storage,
+      clock: () => START,
+      lockManager: new RevocationLocks(),
+    })
+    let releaseFirstDelivery!: () => void
+    const firstDelivery = new Promise<void>((resolve) => { releaseFirstDelivery = resolve })
+    const notices: GlobalRevocationCause[] = []
+    coordinator.subscribe(async (notice) => {
+      notices.push(notice.cause)
+      if (notice.epoch === 1) await firstDelivery
+    })
+
+    const first = coordinator.beginRevoke('learner-lock')
+    await expect(first.published).resolves.toMatchObject({ epoch: 1, cause: 'learner-lock' })
+    const second = coordinator.beginRevoke('learner-sign-out')
+    await expect(second.published).resolves.toMatchObject({ epoch: 2, cause: 'learner-sign-out' })
+    expect(JSON.parse(storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY)!)).toMatchObject({
+      epoch: 2,
+      cause: 'learner-sign-out',
+    })
+    expect(notices).toEqual(['learner-lock'])
+
+    releaseFirstDelivery()
+    await expect(first.settled).resolves.toMatchObject({ epoch: 1 })
+    await expect(second.settled).resolves.toMatchObject({ epoch: 2 })
+    expect(notices).toEqual(['learner-lock', 'learner-sign-out'])
+
+    coordinator.close()
+  })
+
+  it('denies fresh learner and Parent authority when durable revocation is already exhausted', async () => {
+    const storage = new MemoryStorage()
+    const sessionStorage = new MemoryStorage()
+    const ownership = new OwnershipLocks()
+    persistNotice(storage, revocationNotice('learner-lock', Number.MAX_SAFE_INTEGER))
+    const coordinator = new GlobalRevocationCoordinator({ storage, clock: () => START })
+    const lifecycleEvents: string[] = []
+    const learner = new LearnerSessionController({
+      storage: sessionStorage,
+      revocation: coordinator,
+      ownershipLockManager: ownership,
+      clock: () => START,
+      randomUUID: () => UUID_A,
+      onLifecycleEvent: (event) => { lifecycleEvents.push(event.type) },
+    })
+    const parent = new ParentSessionController({
+      revocation: coordinator,
+      clock: () => START,
+      randomUUID: () => UUID_B,
+      onLifecycleEvent: (event) => { lifecycleEvents.push(event.type) },
+    })
+
+    await expect(learner.create(P1)).rejects.toThrow('exhausted')
+    expect(() => parent.create('parent-a', 'household-a')).toThrow('exhausted')
+    expect(learner.session).toBeNull()
+    expect(parent.session).toBeNull()
+    expect(sessionStorage.getItem(LEARNER_SESSION_STORAGE_KEY)).toBeNull()
+    expect(ownership.requests).toBe(0)
+    expect(lifecycleEvents).not.toContain('learner-authenticated')
+
+    await learner.close()
+    parent.close()
+    coordinator.close()
+  })
+
+  it('does not terminal-latch a transport-only MAX without authoritative durable MAX', async () => {
     const storage = new MemoryStorage()
     const hub = new BroadcastHub()
-    persistNotice(storage, revocationNotice('learner-lock', Number.MAX_SAFE_INTEGER))
     const coordinator = new GlobalRevocationCoordinator({
       storage,
       clock: () => START,
       channelFactory: hub.create,
     })
+    const notices: GlobalRevocationNotice[] = []
+    coordinator.subscribe((notice) => { notices.push(notice) })
+    const transportOnly = revocationNotice('learner-lock', Number.MAX_SAFE_INTEGER)
+
+    hub.inject(transportOnly)
+    hub.inject(transportOnly)
+    await vi.waitFor(() => expect(notices.length).toBe(1))
+    expect(notices[0]).toMatchObject({ epoch: 1, cause: 'global-revocation' })
+    expect(coordinator.isExhausted()).toBe(false)
+    expect(coordinator.currentEpoch()).toBeNull()
+
+    persistNotice(storage, revocationNotice('learner-lock', 1))
+    expect(coordinator.currentEpoch()).toBe(1)
+    expect(coordinator.isExhausted()).toBe(false)
+    const learner = new LearnerSessionController({
+      storage: new MemoryStorage(),
+      revocation: coordinator,
+      ownershipLockManager: new OwnershipLocks(),
+      clock: () => START,
+      randomUUID: () => UUID_A,
+    })
+    await expect(learner.create(P1)).resolves.toMatchObject({ globalRevocationEpoch: 1 })
+
+    await learner.close()
+    coordinator.close()
+  })
+
+  it('fails closed at MAX-1 on malformed traffic without fabricating exhaustion', async () => {
+    const storage = new MemoryStorage()
+    const hub = new BroadcastHub()
+    persistNotice(storage, revocationNotice('learner-lock', Number.MAX_SAFE_INTEGER - 1))
+    const coordinator = new GlobalRevocationCoordinator({
+      storage,
+      clock: () => START,
+      channelFactory: hub.create,
+      lockManager: new RevocationLocks(),
+    })
+    const notices: GlobalRevocationCause[] = []
+    coordinator.subscribe((notice) => { notices.push(notice.cause) })
+    const lifecycleEvents: string[] = []
+    const session = new LearnerSessionController({
+      storage: new MemoryStorage(),
+      revocation: coordinator,
+      ownershipLockManager: new OwnershipLocks(),
+      clock: () => START,
+      randomUUID: () => UUID_A,
+      onLifecycleEvent: (event) => { lifecycleEvents.push(event.type) },
+    })
+    await session.create(P1)
+    lifecycleEvents.length = 0
+
+    hub.inject({ malformed: true })
+    hub.inject({ malformed: true })
+    await vi.waitFor(() => expect(notices).toEqual(['global-revocation']))
+    await vi.waitFor(() => expect(lifecycleEvents).toEqual(['global-revocation']))
+    await session.whenLifecycleIdle()
+    expect(session.session).toBeNull()
+    expect(lifecycleEvents).toEqual(['global-revocation'])
+    expect(coordinator.currentEpoch()).toBeNull()
+    expect(coordinator.isExhausted()).toBe(false)
+
+    await expect(coordinator.revoke('learner-lock')).resolves.toMatchObject({
+      epoch: Number.MAX_SAFE_INTEGER,
+      cause: 'learner-lock',
+    })
+    expect(coordinator.isExhausted()).toBe(true)
+    expect(JSON.parse(storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY)!)).toMatchObject({
+      epoch: Number.MAX_SAFE_INTEGER,
+      cause: 'learner-lock',
+    })
+    expect(notices).toEqual(['global-revocation', 'learner-lock'])
+
+    await session.close()
+    coordinator.close()
+  })
+
+  it('keeps MAX publication pending until an in-flight learner create compensates and releases ownership', async () => {
+    const storage = new MemoryStorage()
+    persistNotice(storage, revocationNotice('learner-lock', Number.MAX_SAFE_INTEGER - 1))
+    const coordinator = new GlobalRevocationCoordinator({
+      storage,
+      clock: () => START,
+      lockManager: new RevocationLocks(),
+    })
+    const ownership = new OwnershipLocks()
+    let releaseAuthentication!: () => void
+    const authentication = new Promise<void>((resolve) => { releaseAuthentication = resolve })
+    const lifecycleEvents: string[] = []
+    const session = new LearnerSessionController({
+      storage: new MemoryStorage(),
+      revocation: coordinator,
+      ownershipLockManager: ownership,
+      clock: () => START,
+      randomUUID: () => UUID_A,
+      onLifecycleEvent: async (event) => {
+        if (event.type === 'learner-authenticated') {
+          lifecycleEvents.push('learner-authenticated:start')
+          await authentication
+          lifecycleEvents.push('learner-authenticated:done')
+          return
+        }
+        lifecycleEvents.push(event.type)
+      },
+    })
+    const creating = session.create(P1).then(
+      () => null,
+      (error: unknown) => error,
+    )
+    await vi.waitFor(() => expect(lifecycleEvents).toEqual(['learner-authenticated:start']))
+    expect(ownership.held).toBe(true)
+
+    let revokeSettled = false
+    const revoking = coordinator.revoke('learner-lock').finally(() => { revokeSettled = true })
+    await vi.waitFor(() => expect(ownership.held).toBe(false))
+    expect(revokeSettled).toBe(false)
+    expect(session.session).toBeNull()
+
+    releaseAuthentication()
+    const creationError = await creating
+    expect(creationError).toBeInstanceOf(Error)
+    expect((creationError as Error).message).toContain('revoked before publication')
+    await expect(revoking).resolves.toMatchObject({
+      epoch: Number.MAX_SAFE_INTEGER,
+      cause: 'learner-lock',
+    })
+    expect(lifecycleEvents).toEqual([
+      'learner-authenticated:start',
+      'learner-authenticated:done',
+      'learner-lock',
+    ])
+    expect(session.session).toBeNull()
+    expect(ownership.held).toBe(false)
+    await expect(coordinator.revoke('learner-sign-out')).rejects.toThrow('exhausted')
+
+    await session.close()
+    coordinator.close()
+  })
+
+  it('does not deadlock terminal revocation inside queued initiating lifecycle cleanup', async () => {
+    const storage = new MemoryStorage()
+    persistNotice(storage, revocationNotice('learner-lock', Number.MAX_SAFE_INTEGER - 1))
+    const coordinator = new GlobalRevocationCoordinator({
+      storage,
+      clock: () => START,
+      lockManager: new RevocationLocks(),
+    })
+    const sessionStorage = new MemoryStorage()
+    const ownership = new OwnershipLocks()
+    const notices: GlobalRevocationCause[] = []
+    coordinator.subscribe((notice) => { notices.push(notice.cause) })
+    let releaseAuthentication!: () => void
+    const authentication = new Promise<void>((resolve) => { releaseAuthentication = resolve })
+    const lifecycleEvents: string[] = []
+    const session = new LearnerSessionController({
+      storage: sessionStorage,
+      revocation: coordinator,
+      ownershipLockManager: ownership,
+      clock: () => START,
+      randomUUID: () => UUID_A,
+      onLifecycleEvent: async (event) => {
+        if (event.type === 'learner-authenticated') {
+          lifecycleEvents.push('learner-authenticated:start')
+          await authentication
+          lifecycleEvents.push('learner-authenticated:done')
+          return
+        }
+        lifecycleEvents.push(event.type)
+      },
+    })
+    const creating = session.create(P1).then(
+      () => null,
+      (error: unknown) => error,
+    )
+    await vi.waitFor(() => expect(lifecycleEvents).toEqual(['learner-authenticated:start']))
+    expect(ownership.held).toBe(true)
+
+    let executionSettled = false
+    const executing = executeLearnerAccessActions([{
+      type: 'security-lifecycle',
+      event: {
+        type: 'learner-lock',
+        occurredAt: new Date(START + 60_000).toISOString(),
+      },
+      studyCancellationReason: 'logout',
+      clearLocal: true,
+      revokeCause: 'learner-lock',
+    }] as const, {
+      learnerSession: session,
+      revocation: coordinator,
+      requestLearnerPin: () => undefined,
+    }).finally(() => { executionSettled = true })
+    await Promise.resolve()
+    expect(executionSettled).toBe(false)
+
+    releaseAuthentication()
+    await vi.waitFor(() => expect(executionSettled).toBe(true), { timeout: 500 })
+    await expect(executing).resolves.toBeUndefined()
+    const creationError = await creating
+    expect(creationError).toBeInstanceOf(Error)
+    expect((creationError as Error).message).toContain('revoked before publication')
+    expect(lifecycleEvents).toEqual([
+      'learner-authenticated:start',
+      'learner-authenticated:done',
+      'learner-lock',
+    ])
+    expect(coordinator.currentEpoch()).toBe(Number.MAX_SAFE_INTEGER)
+    expect(coordinator.isExhausted()).toBe(true)
+    expect(JSON.parse(storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY)!)).toMatchObject({
+      epoch: Number.MAX_SAFE_INTEGER,
+      cause: 'learner-lock',
+    })
+    expect(notices).toEqual(['learner-lock'])
+    expect(session.session).toBeNull()
+    expect(sessionStorage.getItem(LEARNER_SESSION_STORAGE_KEY)).toBeNull()
+    expect(ownership.held).toBe(false)
+    await expect(coordinator.revoke('learner-sign-out')).rejects.toThrow('exhausted')
+    expect(lifecycleEvents).toHaveLength(3)
+
+    await session.close()
+    coordinator.close()
+  })
+
+  it('keeps MAX publication pending until an in-flight learner restore fails closed', async () => {
+    const storage = new MemoryStorage()
+    const sessionStorage = new MemoryStorage()
+    persistNotice(storage, revocationNotice('learner-lock', Number.MAX_SAFE_INTEGER - 1))
+    const bootstrapCoordinator = new GlobalRevocationCoordinator({ storage, clock: () => START })
+    const bootstrap = new LearnerSessionController({
+      storage: sessionStorage,
+      revocation: bootstrapCoordinator,
+      ownershipLockManager: new OwnershipLocks(),
+      clock: () => START,
+      randomUUID: () => UUID_A,
+    })
+    await bootstrap.create(P1)
+    await bootstrap.close()
+    bootstrapCoordinator.close()
+
+    const coordinator = new GlobalRevocationCoordinator({
+      storage,
+      clock: () => START,
+      lockManager: new RevocationLocks(),
+    })
+    const ownership = new DeferredOwnershipLocks()
+    const lifecycleEvents: string[] = []
+    const restored = new LearnerSessionController({
+      storage: sessionStorage,
+      revocation: coordinator,
+      ownershipLockManager: ownership,
+      clock: () => START,
+      randomUUID: () => UUID_B,
+      onLifecycleEvent: (event) => { lifecycleEvents.push(event.type) },
+    })
+    const restoring = restored.restore()
+    await vi.waitFor(() => expect(ownership.requests).toBe(1))
+
+    let revokeSettled = false
+    const revoking = coordinator.revoke('learner-lock').finally(() => { revokeSettled = true })
+    await vi.waitFor(() => expect(coordinator.isExhausted()).toBe(true))
+    expect(revokeSettled).toBe(false)
+    ownership.allowRequest()
+
+    await expect(restoring).resolves.toEqual({ status: 'ended', reason: 'global-revocation' })
+    await expect(revoking).resolves.toMatchObject({
+      epoch: Number.MAX_SAFE_INTEGER,
+      cause: 'learner-lock',
+    })
+    expect(lifecycleEvents).toEqual(['learner-lock'])
+    expect(restored.session).toBeNull()
+    expect(ownership.held).toBe(false)
+    expect(sessionStorage.getItem(LEARNER_SESSION_STORAGE_KEY)).toBeNull()
+
+    await restored.close()
+    coordinator.close()
+  })
+
+  it('delivers a specific MAX transition once across polling, browser races, repeats, and rollback', async () => {
+    const runtime = await setupRemoteRace()
+    const notices: GlobalRevocationCause[] = []
+    runtime.coordinator.subscribe((notice) => { notices.push(notice.cause) })
+    const terminal = revocationNotice('learner-switch-start', Number.MAX_SAFE_INTEGER)
+    const ownershipRequests = runtime.ownership.requests
+    persistNotice(runtime.storage, terminal)
+
+    expect(runtime.session.recheck()).toEqual({ status: 'ended', reason: 'global-revocation' })
+    runtime.hub.inject(terminal)
+    runtime.hub.inject(terminal)
+    runtime.session.recheck()
+    await runtime.session.whenLifecycleIdle()
+    await vi.waitFor(() => expect(notices).toEqual(['learner-switch-start']))
+    expect(runtime.lifecycleEvents).toEqual(['learner-switch-start'])
+    expect(runtime.studyCancellations).toEqual(['learner-switch'])
+
+    const rolledBack = revocationNotice('learner-lock', Number.MAX_SAFE_INTEGER - 1)
+    persistNotice(runtime.storage, rolledBack)
+    runtime.hub.inject(rolledBack)
+    runtime.hub.inject(revocationNotice('learner-lock', 1))
+    expect(runtime.coordinator.currentEpoch()).toBe(Number.MAX_SAFE_INTEGER)
+    await expect(runtime.session.create(P1)).rejects.toThrow('exhausted')
+    expect(runtime.ownership.requests).toBe(ownershipRequests)
+    expect(notices).toEqual(['learner-switch-start'])
+    expect(runtime.lifecycleEvents).toEqual(['learner-switch-start'])
+
+    await runtime.session.close()
+    runtime.coordinator.close()
+  })
+
+  it('delivers malformed MAX fallback generically exactly once', async () => {
+    const runtime = await setupRemoteRace()
+    const notices: GlobalRevocationCause[] = []
+    runtime.coordinator.subscribe((notice) => { notices.push(notice.cause) })
+    const malformed = {
+      schemaVersion: 1,
+      epoch: Number.MAX_SAFE_INTEGER,
+      cause: 'attacker-controlled-cause',
+      occurredAt: new Date(START).toISOString(),
+    }
+    runtime.storage.setItem(GLOBAL_REVOCATION_STORAGE_KEY, JSON.stringify(malformed))
+
+    expect(runtime.session.recheck()).toEqual({ status: 'ended', reason: 'global-revocation' })
+    runtime.hub.inject(malformed)
+    runtime.hub.inject(malformed)
+    await runtime.session.whenLifecycleIdle()
+    await vi.waitFor(() => expect(notices.length).toBeGreaterThanOrEqual(1))
+    await new Promise((resolve) => setTimeout(resolve, 0))
+    expect(notices).toEqual(['global-revocation'])
+    expect(runtime.lifecycleEvents).toEqual(['global-revocation'])
+    expect(runtime.studyCancellations).toEqual(['authorization-loss'])
+
+    await runtime.session.close()
+    runtime.coordinator.close()
+  })
+
+  it('delivers legacy MAX without a cause envelope generically exactly once', async () => {
+    const runtime = await setupRemoteRace()
+    const notices: GlobalRevocationCause[] = []
+    runtime.coordinator.subscribe((notice) => { notices.push(notice.cause) })
+    const legacyMaximum = String(Number.MAX_SAFE_INTEGER)
+    runtime.storage.setItem(GLOBAL_REVOCATION_STORAGE_KEY, legacyMaximum)
+
+    expect(runtime.session.recheck()).toEqual({ status: 'ended', reason: 'global-revocation' })
+    runtime.hub.inject(legacyMaximum)
+    runtime.hub.inject(legacyMaximum)
+    await runtime.session.whenLifecycleIdle()
+    await vi.waitFor(() => expect(notices.length).toBeGreaterThanOrEqual(1))
+    await new Promise((resolve) => setTimeout(resolve, 0))
+    expect(notices).toEqual(['global-revocation'])
+    expect(runtime.lifecycleEvents).toEqual(['global-revocation'])
+    expect(runtime.studyCancellations).toEqual(['authorization-loss'])
+
+    await runtime.session.close()
+    runtime.coordinator.close()
+  })
+
+  it('denies learner restoration at MAX before claiming ownership and removes the candidate', async () => {
+    const deviceStorage = new MemoryStorage()
+    const sessionStorage = new MemoryStorage()
+    const bootstrapCoordinator = new GlobalRevocationCoordinator({ storage: deviceStorage, clock: () => START })
+    const bootstrapSession = new LearnerSessionController({
+      storage: sessionStorage,
+      revocation: bootstrapCoordinator,
+      ownershipLockManager: new OwnershipLocks(),
+      clock: () => START,
+      randomUUID: () => UUID_A,
+    })
+    await bootstrapSession.create(P1)
+    await bootstrapSession.close()
+    bootstrapCoordinator.close()
+    persistNotice(
+      deviceStorage,
+      revocationNotice('learner-credential-reset', Number.MAX_SAFE_INTEGER),
+    )
+
+    const coordinator = new GlobalRevocationCoordinator({ storage: deviceStorage, clock: () => START })
+    const ownership = new OwnershipLocks()
+    const lifecycleEvents: GlobalRevocationCause[] = []
+    const restored = new LearnerSessionController({
+      storage: sessionStorage,
+      revocation: coordinator,
+      ownershipLockManager: ownership,
+      clock: () => START,
+      randomUUID: () => UUID_B,
+      onLifecycleEvent: (event) => { lifecycleEvents.push(event.type as GlobalRevocationCause) },
+    })
+
+    await expect(restored.restore()).resolves.toEqual({ status: 'ended', reason: 'global-revocation' })
+    await restored.whenLifecycleIdle()
+    expect(ownership.requests).toBe(0)
+    expect(restored.session).toBeNull()
+    expect(sessionStorage.getItem(LEARNER_SESSION_STORAGE_KEY)).toBeNull()
+    expect(lifecycleEvents).toEqual(['learner-credential-reset'])
+
+    await restored.close()
+    coordinator.close()
+  })
+
+  it('clears existing Parent authority and denies replacement when MAX is observed', async () => {
+    const storage = new MemoryStorage()
+    const coordinator = new GlobalRevocationCoordinator({ storage, clock: () => START })
     const lifecycleEvents: string[] = []
     const parent = new ParentSessionController({
       revocation: coordinator,
@@ -506,14 +1002,67 @@ describe('causeful global revocation transport', () => {
       onLifecycleEvent: (event) => { lifecycleEvents.push(event.type) },
     })
     parent.create('parent-a', 'household-a')
+    lifecycleEvents.length = 0
+    persistNotice(storage, revocationNotice('household-sign-out', Number.MAX_SAFE_INTEGER))
 
-    hub.inject({ malformed: true })
-    await vi.waitFor(() => expect(lifecycleEvents).toEqual(['global-revocation']))
+    expect(() => parent.create('parent-b', 'household-b')).toThrow('exhausted')
+    expect(parent.session).toBeNull()
     await parent.whenLifecycleIdle()
-    expect(parent.recheck()).toEqual({ status: 'ended', reason: 'global-revocation' })
-    expect(coordinator.currentEpoch()).toBeNull()
+    expect(lifecycleEvents).toEqual(['household-sign-out'])
 
     parent.close()
+    coordinator.close()
+  })
+
+  it('does not overflow or settle revoke-at-MAX until active authority cleanup completes', async () => {
+    const storage = new MemoryStorage()
+    const coordinator = new GlobalRevocationCoordinator({
+      storage,
+      clock: () => START,
+      lockManager: new RevocationLocks(),
+    })
+    let releaseCleanup!: () => void
+    const cleanup = new Promise<void>((resolve) => { releaseCleanup = resolve })
+    const lifecycleEvents: string[] = []
+    const session = new LearnerSessionController({
+      storage: new MemoryStorage(),
+      revocation: coordinator,
+      ownershipLockManager: new OwnershipLocks(),
+      clock: () => START,
+      randomUUID: () => UUID_A,
+      onLifecycleEvent: (event) => {
+        lifecycleEvents.push(event.type)
+        if (event.type === 'learner-lock') return cleanup
+      },
+    })
+    await session.create(P1)
+    lifecycleEvents.length = 0
+    const terminal = revocationNotice('learner-lock', Number.MAX_SAFE_INTEGER)
+    const serializedTerminal = JSON.stringify(terminal)
+    storage.setItem(GLOBAL_REVOCATION_STORAGE_KEY, serializedTerminal)
+
+    let settled = false
+    const attempted = coordinator.revoke('learner-sign-out').then(
+      () => null,
+      (error: unknown) => error,
+    ).finally(() => { settled = true })
+    await vi.waitFor(() => expect(lifecycleEvents).toEqual(['learner-lock']))
+    await Promise.resolve()
+    expect(session.session).toBeNull()
+    expect(settled).toBe(false)
+    expect(storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY)).toBe(serializedTerminal)
+
+    releaseCleanup()
+    const error = await attempted
+    expect(error).toBeInstanceOf(Error)
+    expect((error as Error).message).toContain('exhausted')
+    expect(settled).toBe(true)
+    expect(JSON.parse(storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY)!)).toMatchObject({
+      epoch: Number.MAX_SAFE_INTEGER,
+      cause: 'learner-lock',
+    })
+
+    await session.close()
     coordinator.close()
   })
 

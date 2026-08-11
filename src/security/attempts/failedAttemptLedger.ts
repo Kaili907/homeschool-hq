@@ -1,4 +1,5 @@
-import { isProfileId, type ProfileId } from '../contracts/profileId'
+import { isUuidV4 } from '../contracts/identifiers'
+import { parseProfileId, type ProfileId } from '../contracts/profileId'
 import {
   hasExactKeys,
   isPlainRecord,
@@ -79,17 +80,27 @@ const RECORD_KEYS = Object.freeze([
   'lockedUntil',
 ] as const)
 
-function subjectIdentity(subject: FailedAttemptSubject): { readonly id: string; readonly scope: 'profile' | 'household' } {
-  const id = subject.kind === 'learner' ? subject.profileId : subject.householdId
-  if (subject.kind === 'learner' && !isProfileId(id)) {
-    throw new Error('Attempt subject ID is invalid.')
+const LEARNER_SUBJECT_KEYS = Object.freeze(['kind', 'profileId'] as const)
+const PARENT_SUBJECT_KEYS = Object.freeze(['kind', 'householdId'] as const)
+
+function requireFailedAttemptSubject(value: unknown): FailedAttemptSubject {
+  if (!isPlainRecord(value)) throw new Error('Attempt subject ID is invalid.')
+  if (value.kind === 'learner' && hasExactKeys(value, LEARNER_SUBJECT_KEYS)) {
+    const profileId = parseProfileId(value.profileId)
+    if (profileId) return Object.freeze({ kind: 'learner', profileId })
   }
   if (
-    !id ||
-    id.trim() !== id ||
-    id.length > 512 ||
-    /[\u0000-\u001f\u007f]/.test(id)
-  ) throw new Error('Attempt subject ID is invalid.')
+    value.kind === 'parent' &&
+    hasExactKeys(value, PARENT_SUBJECT_KEYS) &&
+    isUuidV4(value.householdId)
+  ) {
+    return Object.freeze({ kind: 'parent', householdId: value.householdId })
+  }
+  throw new Error('Attempt subject ID is invalid.')
+}
+
+function subjectIdentity(subject: FailedAttemptSubject): { readonly id: string; readonly scope: 'profile' | 'household' } {
+  const id = subject.kind === 'learner' ? subject.profileId : subject.householdId
   return { id, scope: subject.kind === 'learner' ? 'profile' : 'household' }
 }
 
@@ -107,7 +118,7 @@ function subjectStorageKey(subject: FailedAttemptSubject): string {
 }
 
 export function failedAttemptLockName(subject: FailedAttemptSubject): string {
-  return `${FAILED_ATTEMPT_LOCK_PREFIX}${encodedSubject(subject)}`
+  return `${FAILED_ATTEMPT_LOCK_PREFIX}${encodedSubject(requireFailedAttemptSubject(subject))}`
 }
 
 function parseNullableTimestamp(value: unknown): number | null | undefined {
@@ -155,16 +166,16 @@ export class FailedAttemptLedger {
   }
 
   async status(subject: FailedAttemptSubject): Promise<FailedAttemptStatus> {
-    return this.#withSubjectLock(subject, () => {
+    return this.#withSubjectLock(subject, (validSubject) => {
       const now = requireSafeTimestamp(this.#clock)
-      return this.#statusAt(subject, now)
+      return this.#statusAt(validSubject, now)
     })
   }
 
   async recordFailure(subject: FailedAttemptSubject): Promise<FailedAttemptStatus> {
-    return this.#withSubjectLock(subject, () => {
+    return this.#withSubjectLock(subject, (validSubject) => {
       const now = requireSafeTimestamp(this.#clock)
-      const current = this.#statusAt(subject, now)
+      const current = this.#statusAt(validSubject, now)
       if (current.status === 'ledger-invalid') return current
       if (current.failedAttempts === Number.MAX_SAFE_INTEGER) {
         return Object.freeze({ status: 'ledger-invalid', failedAttempts: current.failedAttempts })
@@ -173,7 +184,7 @@ export class FailedAttemptLedger {
       // must be counted even if another tab established a cooldown while this
       // operation was in flight.
       const failedAttempts = current.failedAttempts + 1
-      const lockMs = subject.kind === 'learner'
+      const lockMs = validSubject.kind === 'learner'
         ? FAILED_ATTEMPT_POLICY.temporaryLockMs.learner
         : FAILED_ATTEMPT_POLICY.temporaryLockMs.parent
       const lockedUntil = failedAttempts >= FAILED_ATTEMPT_POLICY.temporaryLockAtAttempt
@@ -192,7 +203,7 @@ export class FailedAttemptLedger {
         retryAt,
         lockedUntil,
       })
-      if (!this.#writeVerified(subjectStorageKey(subject), record)) {
+      if (!this.#writeVerified(subjectStorageKey(validSubject), record)) {
         return Object.freeze({ status: 'ledger-invalid', failedAttempts })
       }
       if (lockedUntil) {
@@ -211,11 +222,11 @@ export class FailedAttemptLedger {
   }
 
   async recordSuccess(subject: FailedAttemptSubject): Promise<void> {
-    return this.#withSubjectLock(subject, () => {
+    return this.#withSubjectLock(subject, (validSubject) => {
       const now = requireSafeTimestamp(this.#clock)
-      const current = this.#statusAt(subject, now)
+      const current = this.#statusAt(validSubject, now)
       if (current.status === 'ledger-invalid') throw new Error('Failed-attempt ledger is invalid.')
-      const key = subjectStorageKey(subject)
+      const key = subjectStorageKey(validSubject)
       try {
         this.#storage.removeItem(key)
         if (this.#storage.getItem(key) !== null) throw new Error('Failed-attempt reset could not be verified.')
@@ -290,12 +301,20 @@ export class FailedAttemptLedger {
     }
   }
 
-  #withSubjectLock<T>(subject: FailedAttemptSubject, operation: () => T | Promise<T>): Promise<T> {
-    const lockName = failedAttemptLockName(subject)
+  #withSubjectLock<T>(
+    subject: FailedAttemptSubject,
+    operation: (validSubject: FailedAttemptSubject) => T | Promise<T>,
+  ): Promise<T> {
+    const validSubject = requireFailedAttemptSubject(subject)
+    const lockName = `${FAILED_ATTEMPT_LOCK_PREFIX}${encodedSubject(validSubject)}`
     if (!this.#lockManager) {
       return Promise.reject(new Error('Failed-attempt coordination is unavailable.'))
     }
-    return this.#lockManager.request(lockName, { mode: 'exclusive' }, operation)
+    return this.#lockManager.request(
+      lockName,
+      { mode: 'exclusive' },
+      () => operation(validSubject),
+    )
   }
 }
 

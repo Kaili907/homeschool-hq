@@ -55,14 +55,15 @@ describe('safe Study Bridge compatibility', () => {
         },
       }),
     })
-    const originalRevoke = revocation.revoke.bind(revocation)
+    const originalBeginRevoke = revocation.beginRevoke.bind(revocation)
     const tracedRevocation = {
       currentEpoch: () => revocation.currentEpoch(),
       subscribe: revocation.subscribe.bind(revocation),
-      revoke: async (cause: Parameters<typeof revocation.revoke>[0]) => {
+      beginRevoke: (cause: Parameters<typeof revocation.beginRevoke>[0]) => {
         trace.push('revoke')
-        return originalRevoke(cause)
+        return originalBeginRevoke(cause)
       },
+      revoke: revocation.revoke.bind(revocation),
       close: revocation.close.bind(revocation),
     }
     const execution = executeLearnerAccessActions(transition.actions, {

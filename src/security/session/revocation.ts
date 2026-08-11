@@ -12,6 +12,7 @@ export const GLOBAL_REVOCATION_STORAGE_KEY = 'manuel-academy.security.global-rev
 export const GLOBAL_REVOCATION_CHANNEL_NAME = 'manuel-academy.security.global-revocation.v1'
 export const GLOBAL_REVOCATION_LOCK_NAME = 'manuel-academy.security.global-revocation-epoch.v1'
 export const GLOBAL_REVOCATION_NOTICE_VERSION = 1 as const
+export const GLOBAL_REVOCATION_EXHAUSTED_EPOCH = Number.MAX_SAFE_INTEGER
 
 export const GLOBAL_REVOCATION_CAUSES = Object.freeze([
   'learner-lock',
@@ -39,6 +40,23 @@ export interface GlobalRevocationObservation {
   readonly notice: GlobalRevocationNotice | null
 }
 
+export interface GlobalRevocationAttempt {
+  readonly published: Promise<GlobalRevocationNotice>
+  readonly settled: Promise<GlobalRevocationNotice>
+}
+
+type RevocationPublication =
+  | Readonly<{
+      status: 'published'
+      notice: GlobalRevocationNotice
+      delivery: Promise<void>
+    }>
+  | Readonly<{
+      status: 'exhausted'
+      error: Error
+      delivery: Promise<void>
+    }>
+
 export type GlobalRevocationListener = (
   notice: GlobalRevocationNotice,
 ) => void | Promise<void>
@@ -46,10 +64,12 @@ export type GlobalRevocationListener = (
 export interface GlobalRevocationSource {
   currentEpoch(): number | null
   currentRevocation?(): GlobalRevocationObservation | null
+  isExhausted?(): boolean
   subscribe(listener: GlobalRevocationListener): () => void
 }
 
 export interface GlobalRevocationPort extends GlobalRevocationSource {
+  beginRevoke(cause: GlobalRevocationCause): GlobalRevocationAttempt
   revoke(cause: GlobalRevocationCause): Promise<GlobalRevocationNotice>
   close(): void
 }
@@ -84,6 +104,11 @@ export interface GlobalRevocationCoordinatorOptions {
   readonly channelFactory?: (name: string) => RevocationBroadcastPort | null
   readonly storageEvents?: RevocationStorageEventSource
   readonly lockManager?: RevocationLockManager
+}
+
+interface DurableRevocationState {
+  readonly observation: GlobalRevocationObservation | null
+  readonly epochHint: number | null
 }
 
 function parseLegacyEpoch(value: string | null): number | null {
@@ -167,6 +192,11 @@ export function getCurrentGlobalRevocation(
   return epoch === null ? null : Object.freeze({ epoch, notice: null })
 }
 
+export function isGlobalRevocationAuthorityExhausted(source: GlobalRevocationSource): boolean {
+  if (source.isExhausted?.()) return true
+  return getCurrentGlobalRevocation(source)?.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+}
+
 /**
  * Maintains a non-secret, monotonic device revocation epoch. New writes persist
  * the complete causeful envelope in the existing durable slot; numeric legacy
@@ -184,7 +214,11 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
   readonly #listeners = new Set<GlobalRevocationListener>()
   #deliveryTail: Promise<void> = Promise.resolve()
   #observedEpoch: number
-  #terminallyInvalid = false
+  #revocationAuthorityExhausted = false
+  #terminalObservation: GlobalRevocationObservation | null = null
+  #terminalDelivery: Promise<void> | null = null
+  #ceilingUnavailable = false
+  #untrustedMaximumPending = false
   #closed = false
 
   readonly #onStorage = (event: RevocationStorageEvent): void => {
@@ -196,8 +230,17 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
     this.#storage = options.storage
     this.#clock = options.clock ?? systemSecurityClock
     this.#lockManager = options.lockManager
-    const initial = parseStoredRevocation(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY))
-    this.#observedEpoch = initial?.epoch ?? -1
+    const initial = this.#readDurableState()
+    const initialEpoch = initial.observation?.epoch ?? initial.epochHint
+    this.#observedEpoch = initialEpoch ?? -1
+    if (initialEpoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
+      this.#revocationAuthorityExhausted = true
+      this.#terminalObservation = Object.freeze({
+        epoch: GLOBAL_REVOCATION_EXHAUSTED_EPOCH,
+        notice: initial.observation?.notice ?? null,
+      })
+      this.#terminalDelivery = Promise.resolve()
+    }
     this.#storageEvents = options.storageEvents
     this.#storageEvents?.addEventListener('storage', this.#onStorage)
     this.#channel = options.channelFactory?.(GLOBAL_REVOCATION_CHANNEL_NAME) ?? null
@@ -210,28 +253,111 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
   }
 
   currentRevocation(): GlobalRevocationObservation | null {
-    if (this.#closed || this.#terminallyInvalid) return null
-    const stored = this.#readDurableRevocation()
-    if (stored === null || stored.epoch < this.#observedEpoch) return null
-    if (stored.epoch > this.#observedEpoch) this.#acceptDurable(stored)
-    return stored
+    if (this.#closed) return null
+    if (this.#revocationAuthorityExhausted) return this.#terminalObservation
+    const durable = this.#readDurableState()
+    const durableEpoch = durable.observation?.epoch ?? durable.epochHint
+    if (durableEpoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
+      if (durable.observation) {
+        void this.#acceptDurable(durable.observation)
+      } else {
+        void this.#acceptGeneric(durableEpoch)
+      }
+      return this.#terminalObservation
+    }
+    if (this.#ceilingUnavailable) return null
+    if (durableEpoch === null || durableEpoch < this.#observedEpoch) return null
+    if (durableEpoch > this.#observedEpoch) {
+      if (durable.observation) {
+        void this.#acceptDurable(durable.observation)
+      } else {
+        void this.#acceptGeneric(durableEpoch)
+      }
+    }
+    if (durable.observation && durable.observation.epoch >= this.#observedEpoch) {
+      this.#untrustedMaximumPending = false
+    }
+    return durable.observation
   }
 
   currentEpoch(): number | null {
     return this.currentRevocation()?.epoch ?? null
   }
 
-  async revoke(cause: GlobalRevocationCause): Promise<GlobalRevocationNotice> {
+  isExhausted(): boolean {
+    if (!this.#closed && !this.#revocationAuthorityExhausted) this.currentRevocation()
+    return this.#revocationAuthorityExhausted
+  }
+
+  beginRevoke(cause: GlobalRevocationCause): GlobalRevocationAttempt {
+    let resolvePublished!: (notice: GlobalRevocationNotice) => void
+    let rejectPublished!: (error: unknown) => void
+    let publicationFinished = false
+    const published = new Promise<GlobalRevocationNotice>((resolve, reject) => {
+      resolvePublished = (notice) => {
+        if (publicationFinished) return
+        publicationFinished = true
+        resolve(notice)
+      }
+      rejectPublished = (error) => {
+        if (publicationFinished) return
+        publicationFinished = true
+        reject(error)
+      }
+    })
+    void published.catch(() => undefined)
+    const settled = this.#revoke(cause, resolvePublished, rejectPublished)
+    void settled.catch(rejectPublished)
+    return Object.freeze({ published, settled })
+  }
+
+  revoke(cause: GlobalRevocationCause): Promise<GlobalRevocationNotice> {
+    return this.beginRevoke(cause).settled
+  }
+
+  async #revoke(
+    cause: GlobalRevocationCause,
+    resolvePublished: (notice: GlobalRevocationNotice) => void,
+    rejectPublished: (error: unknown) => void,
+  ): Promise<GlobalRevocationNotice> {
     if (!isCause(cause)) throw new Error('Global revocation cause is invalid.')
     if (!this.#lockManager) {
       throw new Error('Global revocation coordination is unavailable.')
     }
-    return this.#lockManager.request(
+    const publication = await this.#lockManager.request<RevocationPublication>(
       GLOBAL_REVOCATION_LOCK_NAME,
       { mode: 'exclusive' },
       async () => {
-        const current = this.currentEpoch()
-        if (current === null || current === Number.MAX_SAFE_INTEGER) {
+        let current: number | null
+        if (this.#ceilingUnavailable) {
+          const durable = this.#readDurableState()
+          const durableEpoch = durable.observation?.epoch ?? durable.epochHint
+          if (durableEpoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
+            if (durable.observation) {
+              void this.#acceptDurable(durable.observation)
+            } else {
+              void this.#acceptGeneric(durableEpoch)
+            }
+          }
+          current = durable.observation?.epoch === this.#observedEpoch
+            ? durable.observation.epoch
+            : null
+        } else {
+          current = this.currentRevocation()?.epoch ?? null
+        }
+        if (
+          this.#revocationAuthorityExhausted ||
+          current === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+        ) {
+          const exhausted = new Error('Global revocation authority is exhausted.')
+          rejectPublished(exhausted)
+          return Object.freeze({
+            status: 'exhausted',
+            error: exhausted,
+            delivery: this.#terminalDelivery ?? Promise.resolve(),
+          })
+        }
+        if (current === null) {
           throw new Error('Global revocation epoch is unavailable.')
         }
         const now = requireSafeTimestamp(this.#clock)
@@ -252,16 +378,19 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
         ) {
           throw new Error('Global revocation epoch could not be verified.')
         }
-        this.#observedEpoch = notice.epoch
+        const delivery = this.#acceptDurable(Object.freeze({ epoch: notice.epoch, notice }))
         try {
           this.#channel?.postMessage(notice)
         } catch {
           // The durable envelope and storage event remain the cross-tab path.
         }
-        await this.#enqueueDelivery(notice)
-        return notice
+        resolvePublished(notice)
+        return Object.freeze({ status: 'published', notice, delivery })
       },
     )
+    await publication.delivery
+    if (publication.status === 'exhausted') throw publication.error
+    return publication.notice
   }
 
   subscribe(listener: GlobalRevocationListener): () => void {
@@ -296,46 +425,100 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
     })
   }
 
-  #readDurableRevocation(): GlobalRevocationObservation | null {
+  #readDurableState(): DurableRevocationState {
     try {
-      return parseStoredRevocation(this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY))
+      const serialized = this.#storage.getItem(GLOBAL_REVOCATION_STORAGE_KEY)
+      return Object.freeze({
+        observation: parseStoredRevocation(serialized),
+        epochHint: parseRevocationEpochHint(serialized),
+      })
     } catch {
-      return null
+      return Object.freeze({ observation: null, epochHint: null })
     }
   }
 
-  #acceptDurable(observation: GlobalRevocationObservation): void {
-    if (observation.epoch <= this.#observedEpoch) return
+  #acceptDurable(observation: GlobalRevocationObservation): Promise<void> {
+    if (observation.epoch <= this.#observedEpoch) {
+      return observation.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+        ? this.#terminalDelivery ?? Promise.resolve()
+        : Promise.resolve()
+    }
     if (observation.epoch === 0) {
       this.#observedEpoch = 0
-      return
+      return Promise.resolve()
     }
-    this.#enqueueDelivery(observation.notice ?? this.#genericNotice(observation.epoch))
-    this.#observedEpoch = observation.epoch
+    return this.#acceptNotice(observation.notice ?? this.#genericNotice(observation.epoch))
   }
 
-  #acceptGeneric(epoch: number): void {
-    if (epoch <= this.#observedEpoch) return
-    this.#enqueueDelivery(this.#genericNotice(epoch))
-    this.#observedEpoch = epoch
+  #acceptGeneric(epoch: number): Promise<void> {
+    if (epoch <= this.#observedEpoch) {
+      return epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+        ? this.#terminalDelivery ?? Promise.resolve()
+        : Promise.resolve()
+    }
+    return this.#acceptNotice(this.#genericNotice(epoch))
+  }
+
+  #acceptNotice(notice: GlobalRevocationNotice): Promise<void> {
+    if (notice.epoch <= this.#observedEpoch) {
+      return notice.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+        ? this.#terminalDelivery ?? Promise.resolve()
+        : Promise.resolve()
+    }
+    this.#observedEpoch = notice.epoch
+    const delivery = this.#enqueueDelivery(notice)
+    if (notice.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
+      this.#revocationAuthorityExhausted = true
+      this.#terminalObservation = Object.freeze({
+        epoch: GLOBAL_REVOCATION_EXHAUSTED_EPOCH,
+        notice,
+      })
+      this.#terminalDelivery = delivery
+      this.#ceilingUnavailable = false
+      this.#untrustedMaximumPending = false
+    }
+    return delivery
   }
 
   #reconcileTransport(value: unknown, source: 'storage' | 'channel'): void {
     const previouslyObserved = this.#observedEpoch
-    const durable = this.#readDurableRevocation()
-    if (durable && durable.epoch > this.#observedEpoch) this.#acceptDurable(durable)
+    const durableState = this.#readDurableState()
+    const durable = durableState.observation
+    const durableEpoch = durable?.epoch ?? durableState.epochHint
+    const transport = parseRevocationTransport(value, source)
+    const hintedEpoch = parseRevocationEpochHint(value)
+    const reportedEpoch = transport?.epoch ?? hintedEpoch
+    if (durableEpoch !== null && durableEpoch > this.#observedEpoch) {
+      if (durable) {
+        void this.#acceptDurable(durable)
+      } else {
+        void this.#acceptGeneric(durableEpoch)
+      }
+    }
 
-    if (durable && durable.epoch < previouslyObserved) {
+    if (this.#revocationAuthorityExhausted) return
+    if (this.#ceilingUnavailable) return
+    if (durable && durable.epoch >= this.#observedEpoch) {
+      this.#untrustedMaximumPending = false
+    }
+
+    if (
+      reportedEpoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH &&
+      durableEpoch !== GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+    ) {
+      this.#acceptUntrustedMaximum()
+      return
+    }
+
+    if (durableEpoch !== null && durableEpoch < previouslyObserved) {
       this.#deliverMalformed()
       return
     }
 
-    const transport = parseRevocationTransport(value, source)
-    const hintedEpoch = parseRevocationEpochHint(value)
-    if (durable === null) {
+    if (durableEpoch === null) {
       const unavailableEpoch = transport?.epoch ?? hintedEpoch
       if (unavailableEpoch !== null && unavailableEpoch > this.#observedEpoch) {
-        this.#acceptGeneric(unavailableEpoch)
+        void this.#acceptGeneric(unavailableEpoch)
       } else {
         this.#deliverMalformed()
       }
@@ -344,11 +527,11 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
 
     if (transport === null) {
       if (
-        durable.epoch > previouslyObserved &&
-        (hintedEpoch === null || hintedEpoch <= durable.epoch)
+        durableEpoch > previouslyObserved &&
+        (hintedEpoch === null || hintedEpoch <= durableEpoch)
       ) return
       if (hintedEpoch !== null && hintedEpoch > this.#observedEpoch) {
-        this.#acceptGeneric(hintedEpoch)
+        void this.#acceptGeneric(hintedEpoch)
       } else {
         this.#deliverMalformed()
       }
@@ -356,18 +539,33 @@ export class GlobalRevocationCoordinator implements GlobalRevocationPort {
     }
 
     if (transport.epoch <= this.#observedEpoch) return
-    if (durable.epoch >= transport.epoch) return
-    this.#acceptGeneric(transport.epoch)
+    if (durableEpoch >= transport.epoch) return
+    void this.#acceptGeneric(transport.epoch)
+  }
+
+  #acceptUntrustedMaximum(): void {
+    if (this.#untrustedMaximumPending || this.#revocationAuthorityExhausted) return
+    this.#untrustedMaximumPending = true
+    if (this.#observedEpoch >= GLOBAL_REVOCATION_EXHAUSTED_EPOCH - 1) {
+      this.#markCeilingUnavailable()
+      return
+    }
+    void this.#acceptGeneric(Math.max(1, this.#observedEpoch + 1))
+  }
+
+  #markCeilingUnavailable(): void {
+    if (this.#ceilingUnavailable) return
+    this.#ceilingUnavailable = true
+    void this.#enqueueDelivery(this.#genericNotice(Math.max(1, this.#observedEpoch)))
   }
 
   #deliverMalformed(): void {
-    if (this.#observedEpoch === Number.MAX_SAFE_INTEGER) {
-      if (this.#terminallyInvalid) return
-      this.#terminallyInvalid = true
-      this.#enqueueDelivery(this.#genericNotice(Number.MAX_SAFE_INTEGER))
+    if (this.#revocationAuthorityExhausted) return
+    if (this.#observedEpoch >= GLOBAL_REVOCATION_EXHAUSTED_EPOCH - 1) {
+      this.#markCeilingUnavailable()
       return
     }
-    this.#acceptGeneric(Math.max(1, this.#observedEpoch + 1))
+    void this.#acceptGeneric(Math.max(1, this.#observedEpoch + 1))
   }
 
   #enqueueDelivery(notice: GlobalRevocationNotice): Promise<void> {

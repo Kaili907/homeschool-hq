@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseProfileId } from '../contracts/profileId'
+import { CANONICAL_PROFILE_IDS, parseProfileId } from '../contracts/profileId'
 import {
   FAILED_ATTEMPT_LOCK_PREFIX,
   FAILED_ATTEMPT_POLICY,
@@ -15,19 +15,27 @@ import type { SecurityStorage } from '../session/runtime'
 const START = Date.parse('2026-08-09T12:00:00.000Z')
 const P1 = parseProfileId('p1')!
 const P2 = parseProfileId('p2')!
+const HOUSEHOLD_A = '11111111-1111-4111-8111-111111111111'
+const HOUSEHOLD_B = '22222222-2222-4222-8222-222222222222'
 
 class MemoryStorage implements SecurityStorage {
   readonly values = new Map<string, string>()
+  reads = 0
+  writes = 0
+  removals = 0
 
   getItem(key: string): string | null {
+    this.reads += 1
     return this.values.get(key) ?? null
   }
 
   setItem(key: string, value: string): void {
+    this.writes += 1
     this.values.set(key, value)
   }
 
   removeItem(key: string): void {
+    this.removals += 1
     this.values.delete(key)
   }
 }
@@ -53,12 +61,21 @@ function setup() {
   const storage = new MemoryStorage()
   const locks = new SerialAttemptLockManager()
   let now = START
-  const ledger = new FailedAttemptLedger({ storage, clock: () => now, lockManager: locks })
+  let clockReads = 0
+  const ledger = new FailedAttemptLedger({
+    storage,
+    clock: () => {
+      clockReads += 1
+      return now
+    },
+    lockManager: locks,
+  })
   return {
     ledger,
     storage,
     locks,
     now: () => now,
+    clockReads: () => clockReads,
     setNow: (value: number) => { now = value },
     advance: (ms: number) => { now += ms },
   }
@@ -114,7 +131,7 @@ describe('failed PIN attempt ledger', () => {
   it('uses unambiguous credential, authority, scope, and encoded-subject lock names', async () => {
     const runtime = setup()
     const learner = { kind: 'learner' as const, profileId: P1 }
-    const parent = { kind: 'parent' as const, householdId: 'p1' }
+    const parent = { kind: 'parent' as const, householdId: HOUSEHOLD_A }
 
     await Promise.all([runtime.ledger.status(learner), runtime.ledger.status(parent)])
 
@@ -149,10 +166,62 @@ describe('failed PIN attempt ledger', () => {
     },
   )
 
+  it.each(CANONICAL_PROFILE_IDS)('accepts canonical learner attempt subject %s', async (profileId) => {
+    const runtime = setup()
+    const subject = { kind: 'learner' as const, profileId: parseProfileId(profileId)! }
+
+    await expect(runtime.ledger.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 0 })
+    expect(runtime.locks.names).toEqual([failedAttemptLockName(subject)])
+  })
+
+  it.each([
+    ['guardian kind', { kind: 'guardian', householdId: HOUSEHOLD_A }],
+    ['admin kind', { kind: 'admin', householdId: HOUSEHOLD_A }],
+    ['empty object', {}],
+    ['missing kind', { profileId: 'p1' }],
+    ['null kind', { kind: null, householdId: HOUSEHOLD_A }],
+    ['numeric kind', { kind: 1, householdId: HOUSEHOLD_A }],
+    ['null subject', null],
+    ['array subject', []],
+    ['learner uppercase profile', { kind: 'learner', profileId: 'P1' }],
+    ['learner out-of-range profile', { kind: 'learner', profileId: 'p6' }],
+    ['learner whitespace profile', { kind: 'learner', profileId: ' p1' }],
+    ['learner missing profile', { kind: 'learner' }],
+    ['learner numeric profile', { kind: 'learner', profileId: 1 }],
+    ['learner extra representation', { kind: 'learner', profileId: 'p1', householdId: HOUSEHOLD_A }],
+    ['parent non-UUID household', { kind: 'parent', householdId: 'household-a' }],
+    ['parent whitespace household', { kind: 'parent', householdId: ` ${HOUSEHOLD_A}` }],
+    ['parent missing household', { kind: 'parent' }],
+    ['parent numeric household', { kind: 'parent', householdId: 1 }],
+    ['parent extra representation', { kind: 'parent', householdId: HOUSEHOLD_A, profileId: 'p1' }],
+  ] as const)(
+    'rejects malformed attempt subject before every side effect: %s',
+    async (_label, input) => {
+      const subject = input as unknown as FailedAttemptSubject
+      const operations = [
+        (ledger: FailedAttemptLedger) => ledger.status(subject),
+        (ledger: FailedAttemptLedger) => ledger.recordFailure(subject),
+        (ledger: FailedAttemptLedger) => ledger.recordSuccess(subject),
+      ]
+
+      expect(() => failedAttemptLockName(subject)).toThrow('Attempt subject ID is invalid.')
+      for (const operation of operations) {
+        const runtime = setup()
+        await expect(operation(runtime.ledger)).rejects.toThrow('Attempt subject ID is invalid.')
+        expect(runtime.clockReads()).toBe(0)
+        expect(runtime.locks.names).toEqual([])
+        expect(runtime.storage.reads).toBe(0)
+        expect(runtime.storage.writes).toBe(0)
+        expect(runtime.storage.removals).toBe(0)
+        expect(runtime.storage.values.size).toBe(0)
+      }
+    },
+  )
+
   it('keeps learner and Parent counters separate and applies the Parent lock duration', async () => {
     const runtime = setup()
     const learner = { kind: 'learner' as const, profileId: P1 }
-    const parent = { kind: 'parent' as const, householdId: 'p1' }
+    const parent = { kind: 'parent' as const, householdId: HOUSEHOLD_A }
 
     await runtime.ledger.recordFailure(learner)
     await expect(runtime.ledger.status(parent)).resolves.toEqual({ status: 'ready', failedAttempts: 0 })
@@ -235,7 +304,7 @@ describe('failed PIN attempt ledger', () => {
   })
 
   it('serializes success/failure races according to operation ordering', async () => {
-    const subject = { kind: 'parent' as const, householdId: 'household-race' }
+    const subject = { kind: 'parent' as const, householdId: HOUSEHOLD_A }
 
     const failureFirst = setup()
     await Promise.all([
@@ -270,7 +339,7 @@ describe('failed PIN attempt ledger', () => {
   it('reconstructs from persisted state after sleep and preserves lock and rollback protection', async () => {
     const storage = new MemoryStorage()
     const locks = new SerialAttemptLockManager()
-    const subject = { kind: 'parent' as const, householdId: 'household-sleep' }
+    const subject = { kind: 'parent' as const, householdId: HOUSEHOLD_B }
     let now = START
     {
       const original = new FailedAttemptLedger({ storage, clock: () => now, lockManager: locks })
@@ -292,7 +361,7 @@ describe('failed PIN attempt ledger', () => {
 
   it('resets all failure state after a successful attempt', async () => {
     const runtime = setup()
-    const subject = { kind: 'parent' as const, householdId: 'household-a' }
+    const subject = { kind: 'parent' as const, householdId: HOUSEHOLD_A }
     await runtime.ledger.recordFailure(subject)
     await runtime.ledger.recordFailure(subject)
     await expect(runtime.ledger.status(subject)).resolves.toEqual({ status: 'ready', failedAttempts: 2 })

@@ -4,6 +4,7 @@ import type { LocalSessionId } from '../contracts/sessions'
 import { studyCancellationReasonFor } from '../contracts/studyBridge'
 import type { StudyCancellationReason } from '../../study/lifecycle/StudyLifecycle'
 import type {
+  GlobalRevocationAttempt,
   GlobalRevocationCause,
   GlobalRevocationNotice,
   GlobalRevocationSource,
@@ -174,6 +175,7 @@ export interface LearnerAccessActionPorts {
     ) => Promise<void>
   }>
   readonly revocation: GlobalRevocationSource & Readonly<{
+    beginRevoke: (cause: GlobalRevocationCause) => GlobalRevocationAttempt
     revoke: (
       cause: GlobalRevocationCause,
     ) => GlobalRevocationNotice | Promise<GlobalRevocationNotice>
@@ -194,12 +196,26 @@ export async function executeLearnerAccessActions(
   }
   for (const action of actions) {
     switch (action.type) {
-      case 'security-lifecycle':
-        await ports.learnerSession.deliverLifecycle(action.event, async () => {
-          if (action.clearLocal) await ports.learnerSession.clearLocal()
-          if (action.revokeCause) await ports.revocation.revoke(action.revokeCause)
-        })
+      case 'security-lifecycle': {
+        const revocationState: { attempt?: GlobalRevocationAttempt } = {}
+        try {
+          await ports.learnerSession.deliverLifecycle(action.event, async () => {
+            if (action.clearLocal) await ports.learnerSession.clearLocal()
+            if (!action.revokeCause) return
+            const attempt = ports.revocation.beginRevoke(action.revokeCause)
+            void attempt.settled.catch(() => undefined)
+            revocationState.attempt = attempt
+            await attempt.published
+          })
+        } catch (error) {
+          if (revocationState.attempt) {
+            await revocationState.attempt.settled.catch(() => undefined)
+          }
+          throw error
+        }
+        if (revocationState.attempt) await revocationState.attempt.settled
         break
+      }
       case 'request-learner-pin':
         await ports.requestLearnerPin(action.profileId)
         break

@@ -7,6 +7,7 @@ import {
 } from '../contracts/sessions'
 import { SerializedLifecycleDelivery, type SecurityLifecycleSink } from './lifecycleDelivery'
 import {
+  GLOBAL_REVOCATION_EXHAUSTED_EPOCH,
   getCurrentGlobalRevocation,
   type GlobalRevocationNotice,
   type GlobalRevocationSource,
@@ -63,10 +64,24 @@ export class ParentSessionController {
       throw new Error('Verified Parent actor ID is required.')
     }
     if (!householdId || householdId.trim() !== householdId) throw new Error('Household ID is required.')
+    const revocation = getCurrentGlobalRevocation(this.#revocation)
+    const epoch = revocation?.epoch ?? null
+    const exhausted = epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+    if (epoch === null || exhausted) {
+      const notice = epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH ? revocation?.notice ?? null : null
+      if (this.#session) {
+        this.#end(
+          'global-revocation',
+          true,
+          notice ? parseCanonicalTimestamp(notice.occurredAt) ?? undefined : undefined,
+          notice?.cause ?? 'global-revocation',
+        )
+      }
+      if (exhausted) throw new Error('Global revocation authority is exhausted.')
+      throw new Error('Global revocation epoch is unavailable.')
+    }
     if (this.#session) this.#end('replaced', false)
     const now = requireSafeTimestamp(this.#clock)
-    const epoch = this.#revocation.currentEpoch()
-    if (epoch === null) throw new Error('Global revocation epoch is unavailable.')
     this.#session = Object.freeze({
       schemaVersion: LOCAL_SESSION_SCHEMA_VERSION,
       storage: SECURITY_SESSION_POLICY.parent.storage,
@@ -102,7 +117,8 @@ export class ParentSessionController {
     this.#lastObservedAt = now
     const revocation = getCurrentGlobalRevocation(this.#revocation)
     const epoch = revocation?.epoch ?? null
-    if (epoch === null || epoch !== this.#session.globalRevocationEpoch) {
+    const exhausted = epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+    if (epoch === null || exhausted || epoch !== this.#session.globalRevocationEpoch) {
       const notice = revocation?.notice
       const exactNotice = notice &&
         notice.epoch === epoch &&
@@ -210,8 +226,17 @@ export class ParentSessionController {
 
   async #handleRevocation(notice: GlobalRevocationNotice): Promise<void> {
     const session = this.#session
-    if (!session || notice.epoch < session.globalRevocationEpoch) return
-    if (notice.epoch === session.globalRevocationEpoch) {
+    if (!session) {
+      if (notice.epoch === GLOBAL_REVOCATION_EXHAUSTED_EPOCH) {
+        await this.#lifecycle.whenIdle()
+      }
+      return
+    }
+    if (notice.epoch < session.globalRevocationEpoch) return
+    if (
+      notice.epoch === session.globalRevocationEpoch &&
+      notice.epoch !== GLOBAL_REVOCATION_EXHAUSTED_EPOCH
+    ) {
       if (notice.cause !== 'global-revocation' || this.#revocation.currentEpoch() !== null) return
     }
     const occurredAt = parseCanonicalTimestamp(notice.occurredAt) ?? undefined

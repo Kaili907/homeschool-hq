@@ -1,5 +1,11 @@
 import type { SecurityLifecycleEvent } from '../contracts/lifecycle'
 
+/**
+ * Effect-only lifecycle consumer. A sink must not await a settlement-waiting
+ * global revocation from inside delivery: initiating revocation belongs in the
+ * controller's before-delivery phase, which publishes durably before the sink
+ * and awaits subscriber settlement after this serialized queue drains.
+ */
 export type SecurityLifecycleSink = (
   event: SecurityLifecycleEvent,
 ) => void | Promise<unknown>
