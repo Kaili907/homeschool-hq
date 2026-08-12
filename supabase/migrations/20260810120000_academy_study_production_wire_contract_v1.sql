@@ -63,6 +63,7 @@ begin
      or to_regprocedure('academy_private.study_production_checkpoint_integrity(academy_private.study_production_session_checkpoints)') is not null
      or to_regprocedure('academy_private.study_set_production_session_integrity()') is not null
      or to_regprocedure('academy_private.study_set_production_checkpoint_integrity()') is not null
+     or to_regprocedure('academy_private.study_production_session_ownership_guard()') is not null
      or to_regprocedure('academy_private.study_production_calendar_block_json(public.academy_study_calendar_blocks)') is not null
      or to_regprocedure('academy_private.study_production_runtime_operation_contract()') is not null
      or to_regprocedure('public.academy_study_begin_production_session_v1(jsonb,text)') is not null
@@ -141,9 +142,13 @@ create table academy_private.study_production_sessions (
 -- diagnostic labels and adult work have no columns here.  Response drafts have
 -- no durable representation until an independently reviewed server authority
 -- can issue and validate opaque references.
+-- The checkpoint reference is a caller-chosen identifier, so its uniqueness is
+-- scoped to the learner that chose it.  A globally unique key would let one
+-- one household learner discover, and permanently squat, references belonging to
+-- a household they cannot otherwise observe.
 create table academy_private.study_production_session_checkpoints (
   session_id text primary key,
-  checkpoint_ref text not null unique
+  checkpoint_ref text not null
     check (public.academy_study_identifier_is_valid(checkpoint_ref)),
   household_id uuid not null,
   student_id uuid not null,
@@ -164,6 +169,8 @@ create table academy_private.study_production_session_checkpoints (
   integrity_digest text not null check (integrity_digest ~ '^[0-9a-f]{64}$'),
   created_at timestamptz not null default clock_timestamp(),
   updated_at timestamptz not null default clock_timestamp(),
+  constraint study_production_checkpoint_ref_scope_key
+    unique (household_id, student_id, checkpoint_ref),
   constraint study_production_checkpoint_session_fk
     foreign key (session_id, household_id, student_id)
     references public.academy_study_sessions (id, household_id, student_id)
@@ -401,6 +408,204 @@ for each row execute function
 create trigger study_production_calendar_segment_immutable
 before update or delete on academy_private.study_production_calendar_segments
 for each row execute function academy_private.study_prevent_mutation();
+
+-- Once the production wire projects a core session, that core row may only move
+-- together with its projection.  The legacy lane advances core.revision and
+-- core.state without touching the projection, which permanently quarantines
+-- every production read, checkpoint and transition for that session and leaves
+-- no repair operation; an ordinary authorized learner can do it to their own
+-- session.  Both academy_study_transition_session and
+-- academy_study_create_session are granted directly to authenticated, so the
+-- guard belongs on the table rather than in any one caller.  It enforces exactly
+-- the invariant the production readers already verify, refusing before the write
+-- instead of detecting the damage afterwards.  Sessions the wire does not
+-- project are untouched, and deletion is already refused by the on delete
+-- restrict foreign key the projection carries.
+create function academy_private.study_production_session_ownership_guard()
+returns trigger
+language plpgsql
+set search_path = pg_catalog
+as $$
+declare
+  projection academy_private.study_production_sessions%rowtype;
+  expected_core_state text;
+begin
+  select * into projection
+  from academy_private.study_production_sessions
+  where session_id = old.id;
+  if projection.session_id is null then
+    return new;
+  end if;
+  -- An unmapped projection status yields null and refuses, so a status the
+  -- production vocabulary does not know can never authorize a core move.
+  expected_core_state := case projection.status
+    when 'active' then 'active'
+    when 'paused' then 'paused'
+    when 'completed' then 'completed'
+    when 'stopped' then 'abandoned'
+  end;
+  -- The revision arm is the load-bearing one: study_prepare_revision moves the
+  -- revision on every update of this table and refuses a caller-supplied value,
+  -- so no reachable writer can change any other column without tripping it.
+  -- The remaining arms are deliberate depth.  They are unforced today and stay
+  -- because they become the only guard if the revision trigger is ever dropped,
+  -- and because they cross-check the mapping the production transition itself
+  -- writes rather than trusting it.
+  if projection.revision is distinct from new.revision
+     or projection.lesson_ref is distinct from new.lesson_id
+     or projection.household_id is distinct from new.household_id
+     or projection.student_id is distinct from new.student_id
+     or new.state is distinct from expected_core_state then
+    raise exception 'STUDY_OPERATION_NOT_AVAILABLE' using errcode = '42501';
+  end if;
+  return new;
+end;
+$$;
+
+-- Fires after academy_study_sessions_revision, so new.revision is already the
+-- value the writer will durably store.
+create trigger study_production_session_30_ownership
+before update on public.academy_study_sessions
+for each row execute function
+  academy_private.study_production_session_ownership_guard();
+
+-- The core session identifier is global and both lanes create rows in it, so
+-- both lanes must serialize on the same key.  Without this, a legacy create
+-- that contests an uncommitted production begin sees no row, proceeds to its
+-- insert, blocks on the primary key and surfaces a raw 23505 naming an internal
+-- constraint.  Taking the same advisory key the production begin takes, before
+-- this function observes either session or receipt state, turns that race into
+-- the ordinary serialized answer: whichever lane runs second observes the
+-- committed row and returns its closed idempotency-collision result.  The body
+-- is otherwise unchanged from 20260801011000, and the signature, argument
+-- names, language, volatility and return type are identical, so the academic
+-- readiness metadata pins on this function continue to hold.
+create or replace function public.academy_study_create_session(
+  p_session jsonb,
+  p_idempotency_key text
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = pg_catalog
+as $$
+declare
+  target_household_id uuid;
+  target_student_id uuid;
+  receipt academy_private.study_mutation_receipts%rowtype;
+  fingerprint jsonb;
+  request_digest text;
+  result_value jsonb;
+  is_student_actor boolean;
+  correlation uuid := gen_random_uuid();
+begin
+  if auth.uid() is null then
+    raise exception 'STUDY_AUTH_REQUIRED' using errcode = '28000';
+  end if;
+  if not public.academy_study_json_has_exact_keys(
+      p_session,
+      array[
+        'id', 'schema_version', 'student_id', 'lesson_id', 'subject_id',
+        'study_plan_id', 'state', 'started_at', 'completed_at',
+        'intended_local_date'
+      ]::text[]
+    )
+    or not public.academy_study_payload_is_minimized(p_session, 8192)
+    or p_session ->> 'schema_version' <> '1'
+    or not public.academy_study_identifier_is_valid(p_session ->> 'id')
+    or not public.academy_study_identifier_is_valid(p_session ->> 'lesson_id')
+    or not public.academy_study_identifier_is_valid(p_session ->> 'subject_id')
+    or not public.academy_study_identifier_is_valid(p_idempotency_key) then
+    raise exception 'STUDY_SESSION_INVALID' using errcode = '22023';
+  end if;
+  target_student_id := (p_session ->> 'student_id')::uuid;
+  target_household_id := academy_private.study_authorized_household(
+    target_student_id,
+    'student:attempts:create',
+    false
+  );
+  if not exists (
+    select 1 from public.academy_study_household_settings
+    where household_id = target_household_id
+  ) then
+    raise exception 'STUDY_HOUSEHOLD_TIMEZONE_REQUIRED' using errcode = '23514';
+  end if;
+  perform pg_catalog.pg_advisory_xact_lock(
+    pg_catalog.hashtext('academy:study:production-session:v1'),
+    pg_catalog.hashtext(p_session ->> 'id')
+  );
+  fingerprint := jsonb_build_object('session', p_session);
+  request_digest := academy_private.study_sha256_json(fingerprint);
+  select * into receipt
+  from academy_private.study_mutation_receipts
+  where actor_scope = 'session:' || (p_session ->> 'id')
+    and operation_kind = 'session_create_v1'
+    and idempotency_key = p_idempotency_key;
+  if receipt.idempotency_key is not null then
+    if receipt.request_digest = request_digest
+       and receipt.request_fingerprint = fingerprint then
+      return receipt.result;
+    end if;
+    return jsonb_build_object('status', 'idempotency-collision');
+  end if;
+  if exists (
+    select 1 from public.academy_study_sessions
+    where id = p_session ->> 'id'
+  ) then
+    return jsonb_build_object('status', 'idempotency-collision');
+  end if;
+  is_student_actor := academy_private.study_jwt_claim_text(
+    'academy_principal_kind'
+  ) = 'student_session_grant';
+  insert into public.academy_study_sessions (
+    id, schema_version, household_id, student_id, lesson_id, subject_id,
+    study_plan_id, state, started_at, completed_at,
+    intended_local_date, household_timezone, created_by
+  ) values (
+    p_session ->> 'id',
+    1,
+    target_household_id,
+    target_student_id,
+    p_session ->> 'lesson_id',
+    p_session ->> 'subject_id',
+    p_session ->> 'study_plan_id',
+    p_session ->> 'state',
+    (p_session ->> 'started_at')::timestamptz,
+    (p_session ->> 'completed_at')::timestamptz,
+    (p_session ->> 'intended_local_date')::date,
+    'UTC',
+    case when is_student_actor then null else auth.uid() end
+  );
+  result_value := jsonb_build_object(
+    'status', 'created',
+    'sessionId', p_session ->> 'id',
+    'revision', 1
+  );
+  insert into academy_private.study_mutation_receipts (
+    actor_scope, operation_kind, idempotency_key, request_digest,
+    request_fingerprint, result, expires_at
+  ) values (
+    'session:' || (p_session ->> 'id'),
+    'session_create_v1',
+    p_idempotency_key,
+    request_digest,
+    fingerprint,
+    result_value,
+    now() + interval '90 days'
+  );
+  perform academy_private.study_append_audit(
+    target_household_id,
+    target_student_id,
+    'session.start',
+    'session',
+    p_session ->> 'id',
+    null,
+    correlation,
+    jsonb_build_object('revision', 1, 'result_code', 'created')
+  );
+  return result_value;
+end;
+$$;
 
 create function academy_private.study_production_calendar_block_json(
   p_block public.academy_study_calendar_blocks
@@ -805,15 +1010,18 @@ begin
       when 'completed' then 'completed'
       when 'stopped' then 'abandoned'
     end;
-    update public.academy_study_sessions
-    set state = target_core_state,
-        completed_at = case when target_core_state = 'completed' then p_at else null end
-    where id = p_session_ref;
+    -- The projection moves first so the core update lands on a projection that
+    -- already agrees with it; the ownership guard on the core table refuses any
+    -- core move its projection did not make.
     update academy_private.study_production_sessions
     set status = target_status,
         segment_ref = p_segment_ref,
         last_accepted_event_ref = p_last_accepted_event_ref
     where session_id = p_session_ref;
+    update public.academy_study_sessions
+    set state = target_core_state,
+        completed_at = case when target_core_state = 'completed' then p_at else null end
+    where id = p_session_ref;
     result_value := jsonb_build_object(
       'status', 'saved',
       'revision', p_expected_revision + 1
@@ -952,6 +1160,16 @@ begin
     return jsonb_build_object('status', 'quarantined');
   end if;
 
+  -- Serialize on the caller-chosen reference before observing checkpoint state.
+  -- Two sessions of this same learner could otherwise both pass the scope check
+  -- below and then collide on the durable key, turning a closed refusal into a
+  -- raw constraint error.  Hash collisions over-serialize unrelated references
+  -- but cannot admit a race.
+  perform pg_catalog.pg_advisory_xact_lock(
+    pg_catalog.hashtext('academy:study:production-checkpoint-ref:v1'),
+    pg_catalog.hashtext(p_checkpoint ->> 'checkpointRef')
+  );
+
   select * into projection
   from academy_private.study_production_sessions
   where session_id = p_session_ref
@@ -972,6 +1190,10 @@ begin
   if resolved_household_id is distinct from projection.household_id then
     raise exception 'STUDY_OPERATION_NOT_AVAILABLE' using errcode = '42501';
   end if;
+  -- projection.session_id vs core.id is unforced by construction: core is
+  -- selected by projection.session_id and the projection carries an on delete
+  -- restrict foreign key, so the two cannot disagree and core cannot be
+  -- missing.  It stays as an assertion of the join it depends on.
   if projection.integrity_digest is distinct from
        academy_private.study_production_session_integrity(projection)
      or projection.session_id is distinct from core.id
@@ -997,6 +1219,19 @@ begin
        or current_checkpoint.student_id is distinct from projection.student_id
        or current_checkpoint.lesson_ref is distinct from projection.lesson_ref
      ) then
+    return jsonb_build_object('status', 'quarantined');
+  end if;
+  -- Within the reference namespace of one learner a collision is a real conflict
+  -- and fails closed.  Outside it there is nothing to collide with, so a foreign
+  -- household learns nothing about which references exist.
+  if exists (
+    select 1
+    from academy_private.study_production_session_checkpoints as other
+    where other.household_id = projection.household_id
+      and other.student_id = projection.student_id
+      and other.checkpoint_ref = p_checkpoint ->> 'checkpointRef'
+      and other.session_id is distinct from p_session_ref
+  ) then
     return jsonb_build_object('status', 'quarantined');
   end if;
 
@@ -1450,9 +1685,13 @@ begin
 end;
 $$;
 
--- v1 is intentionally untouched.  v2 owns a separate closed operation map and
--- dispatches only production-wire operations plus the already-reviewed safe
--- learner event append needed by the five-role session port.
+-- The v1 executor body and operation map are untouched.  v2 owns a
+-- separate closed operation map and dispatches only production-wire operations
+-- plus the already-reviewed safe learner event append needed by the five-role
+-- session port.  Two legacy objects the v1 lane reaches are fenced above so the
+-- two lanes cannot corrupt one shared session: the core session table carries an
+-- ownership guard, and academy_study_create_session serializes on the same
+-- advisory key the production begin uses.
 create function public.academy_study_execute_verified_runtime_v2(
   p_token_digest text,
   p_required_capability text,
@@ -1710,6 +1949,7 @@ alter function academy_private.study_production_session_integrity(academy_privat
 alter function academy_private.study_production_checkpoint_integrity(academy_private.study_production_session_checkpoints) owner to postgres;
 alter function academy_private.study_set_production_session_integrity() owner to postgres;
 alter function academy_private.study_set_production_checkpoint_integrity() owner to postgres;
+alter function academy_private.study_production_session_ownership_guard() owner to postgres;
 alter function academy_private.study_production_calendar_block_json(public.academy_study_calendar_blocks) owner to postgres;
 alter function academy_private.study_production_runtime_operation_contract() owner to postgres;
 alter function public.academy_study_begin_production_session_v1(jsonb, text) owner to postgres;
@@ -1743,6 +1983,8 @@ revoke all on function academy_private.study_production_checkpoint_integrity(aca
 revoke all on function academy_private.study_set_production_session_integrity()
   from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_set_production_checkpoint_integrity()
+  from public, anon, authenticated, service_role;
+revoke all on function academy_private.study_production_session_ownership_guard()
   from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_production_calendar_block_json(public.academy_study_calendar_blocks)
   from public, anon, authenticated, service_role;
@@ -1798,7 +2040,10 @@ set production_wire_version = 1,
       'production_wire_calendar_paused_state_real', true,
       'production_wire_segment_completion_separate', true,
       'production_wire_readiness_ready', false,
-      'production_wire_hosted_application_claim', false
+      'production_wire_hosted_application_claim', false,
+      'production_wire_legacy_core_session_fenced', true,
+      'production_wire_legacy_begin_shares_advisory_key', true,
+      'production_wire_checkpoint_ref_uniqueness_scope', 'household_student'
     ),
     updated_at = clock_timestamp()
 where singleton;

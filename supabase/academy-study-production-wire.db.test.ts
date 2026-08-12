@@ -69,6 +69,44 @@ let database: PGlite
 let digestA: string
 let digestB: string
 let nowIso: string
+let localDateA: string
+let localDateB: string
+
+// Every prosrc fingerprint below pins the LF bytes this repository stores.  A
+// Windows checkout under core.autocrlf=true hands back CRLF, which would change
+// pg_proc.prosrc and fail the pins for a reason that has nothing to do with the
+// contract.  Normalise at load so the applied body is the committed body.
+async function loadSql(path: string): Promise<string> {
+  const source = await readFile(new URL(path, import.meta.url), 'utf8')
+  return source.replaceAll('\r\n', '\n')
+}
+
+// The local-date trigger compares started_at rendered in the household's own
+// timezone against intended_local_date.  Deriving the date from UTC makes the
+// whole suite fail between 00:00 and 04:00 UTC for an America/New_York
+// household, so both dates are derived from one instant per household.
+const CLOCK_QUERY = `
+  with anchor as (select clock_timestamp() as at)
+  select
+    to_char(anchor.at at time zone 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') as now,
+    to_char(
+      (anchor.at at time zone household_a.household_timezone)::date, 'YYYY-MM-DD'
+    ) as local_a,
+    to_char(
+      (anchor.at at time zone household_b.household_timezone)::date, 'YYYY-MM-DD'
+    ) as local_b
+  from anchor
+  cross join public.academy_study_household_settings as household_a
+  cross join public.academy_study_household_settings as household_b
+  where household_a.household_id = $1::uuid
+    and household_b.household_id = $2::uuid
+`
+
+interface ClockRow {
+  now: string
+  local_a: string
+  local_b: string
+}
 
 async function asRole<T>(
   role: 'authenticated' | 'service_role',
@@ -122,6 +160,26 @@ async function execute(
   })
 }
 
+// The legacy learner lane.  It is still granted to service_role and still
+// dispatches its own session mutations, so it is reachable by exactly the same
+// authorized learner that reaches the production wire.
+async function executeLegacy(
+  digest: string,
+  capability: string,
+  operation: string,
+  request: unknown,
+): Promise<RuntimeEnvelope> {
+  return asRole('service_role', null, async () => {
+    const result = await database.query<{ result: RuntimeEnvelope }>(
+      `select public.academy_study_execute_verified_runtime_v1(
+        $1::text, $2::text, $3::text, $4::jsonb
+      ) as result`,
+      [digest, capability, operation, JSON.stringify(request)],
+    )
+    return result.rows[0].result
+  })
+}
+
 function sessionRequest(sessionRef: string, overrides: Record<string, unknown> = {}) {
   return {
     sessionRef,
@@ -130,7 +188,7 @@ function sessionRequest(sessionRef: string, overrides: Record<string, unknown> =
     studyPlanRef: null,
     segmentRef: 'segment.1',
     startedAt: nowIso,
-    intendedLocalDate: nowIso.slice(0, 10),
+    intendedLocalDate: localDateA,
     lastAcceptedEventRef: null,
     rawAnswerIncluded: false,
     transcriptIncluded: false,
@@ -222,9 +280,7 @@ async function transitionBlock(
 beforeAll(async () => {
   database = await PGlite.create()
   await database.exec(bootstrap)
-  const sources = await Promise.all(
-    files.map((path) => readFile(new URL(path, import.meta.url), 'utf8')),
-  )
+  const sources = await Promise.all(files.map((path) => loadSql(path)))
   for (const [index, migration] of sources.entries()) {
     try {
       await database.exec(migration)
@@ -242,13 +298,10 @@ beforeAll(async () => {
   `)
   digestA = await issueDigest(GUARDIAN_A, STUDENT_A)
   digestB = await issueDigest(GUARDIAN_B, STUDENT_B)
-  const clock = await database.query<{ now: string }>(`
-    select to_char(
-      clock_timestamp() at time zone 'UTC',
-      'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'
-    ) as now
-  `)
+  const clock = await database.query<ClockRow>(CLOCK_QUERY, [HOUSEHOLD_A, HOUSEHOLD_B])
   nowIso = clock.rows[0].now
+  localDateA = clock.rows[0].local_a
+  localDateB = clock.rows[0].local_b
 })
 
 afterAll(async () => {
@@ -519,83 +572,634 @@ describe('minimal checkpoint CAS', () => {
     expect(read.body).toEqual({ status: 'quarantined', reasonCode: 'integrity-failed' })
   })
 
-  it('refuses checkpoint writes when the core session diverges from its projection', async () => {
-    const sessionRef = 'session.checkpoint.core-divergence'
-    const mutationRef = 'mutation.checkpoint.core-divergence'
-    const checkpointRef = `checkpoint.${sessionRef}.1`
-    await begin(digestA, sessionRef)
-    await database.exec(`
-      update public.academy_study_sessions
-      set lesson_id = 'lesson.production.diverged',
-          state = 'paused'
-      where id = '${sessionRef}';
-    `)
+})
 
-    const exactRead = await execute(digestA, PROGRESS, 'session:read', { sessionRef })
-    const rejected = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+// Each fixture below corrupts exactly ONE dimension and leaves every other
+// dimension verifying, so a mutation that removes a single integrity check has
+// no surviving check to hide behind.  Corruption runs with the revision and
+// ownership triggers suspended, which is the only way to move one dimension
+// without the server-managed revision moving with it.
+describe('projection integrity checks in isolation', () => {
+  const CORE_TRIGGERS = [
+    'academy_study_sessions_revision',
+    'study_production_session_30_ownership',
+  ]
+
+  async function withCoreTriggersOff(run: () => Promise<void>) {
+    await database.exec(CORE_TRIGGERS
+      .map((name) => `alter table public.academy_study_sessions disable trigger ${name};`)
+      .join('\n'))
+    try {
+      await run()
+    } finally {
+      await database.exec(CORE_TRIGGERS
+        .map((name) => `alter table public.academy_study_sessions enable trigger ${name};`)
+        .join('\n'))
+    }
+  }
+
+  async function corruptCore(sessionRef: string, assignments: string) {
+    await withCoreTriggersOff(async () => {
+      await database.exec(`
+        update public.academy_study_sessions
+        set ${assignments}
+        where id = '${sessionRef}';
+      `)
+    })
+  }
+
+  // The projection integrity trigger stays enabled so the stored digest is
+  // recomputed over the corrupted row.  The digest therefore still verifies and
+  // cannot mask the cross-table check under test.  The revision trigger is
+  // suspended so the projection revision keeps matching the core revision.
+  async function corruptProjection(sessionRef: string, assignments: string) {
+    await database.exec(`
+      alter table academy_private.study_production_sessions
+        disable trigger study_production_session_10_revision;
+      update academy_private.study_production_sessions
+      set ${assignments}
+      where session_id = '${sessionRef}';
+      alter table academy_private.study_production_sessions
+        enable trigger study_production_session_10_revision;
+    `)
+  }
+
+  async function corruptCheckpoint(sessionRef: string, assignments: string) {
+    await database.exec(`
+      alter table academy_private.study_production_session_checkpoints
+        disable trigger study_production_checkpoint_10_revision;
+      update academy_private.study_production_session_checkpoints
+      set ${assignments}
+      where session_id = '${sessionRef}';
+      alter table academy_private.study_production_session_checkpoints
+        enable trigger study_production_checkpoint_10_revision;
+    `)
+  }
+
+  async function saveCheckpoint(sessionRef: string, revision: number, mutationRef: string) {
+    return execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: revision === 1 ? null : revision - 1,
+      mutationRef,
+      checkpoint: checkpointRequest(sessionRef, revision),
+    })
+  }
+
+  async function casAfterCorruption(sessionRef: string, mutationRef: string) {
+    return execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
       sessionRef,
       expectedRevision: null,
       mutationRef,
       checkpoint: checkpointRequest(sessionRef, 1),
     })
-    const state = await database.query<{
-      core_lesson: string
-      projection_lesson: string
-      core_state: string
-      projection_state: string
-      core_revision: number
-      projection_revision: number
+  }
+
+  async function residue(sessionRef: string) {
+    const result = await database.query<{
       checkpoints: number
       receipts: number
       audits: number
     }>(`
       select
-        core.lesson_id as core_lesson,
-        projection.lesson_ref as projection_lesson,
-        core.state as core_state,
-        projection.status as projection_state,
-        core.revision::integer as core_revision,
-        projection.revision::integer as projection_revision,
-        (
-          select count(*)::integer
+        (select count(*)::integer
           from academy_private.study_production_session_checkpoints
-          where session_id = $1
-        ) as checkpoints,
-        (
-          select count(*)::integer
-          from academy_private.study_mutation_receipts
+          where session_id = $1) as checkpoints,
+        (select count(*)::integer from academy_private.study_mutation_receipts
           where actor_scope = 'session:' || $1
-            and operation_kind = 'production_checkpoint_cas_v1'
-            and idempotency_key = $2
-        ) as receipts,
-        (
-          select count(*)::integer
-          from public.academy_study_audit_events
+            and operation_kind = 'production_checkpoint_cas_v1') as receipts,
+        (select count(*)::integer from public.academy_study_audit_events
           where event_type = 'checkpoint.save'
-            and target_id = $3
-        ) as audits
+            and target_id = 'checkpoint.' || $1 || '.1') as audits
+    `, [sessionRef])
+    return result.rows[0]
+  }
+
+  // Verifies the corruption really did isolate one dimension: everything the
+  // other checks read still agrees.  Without this a fixture could silently
+  // corrupt two dimensions and stop proving what it claims.
+  async function assertOnlyDivergence(sessionRef: string, dimension: string) {
+    const row = await database.query<{
+      lesson_matches: boolean
+      revision_matches: boolean
+      state_maps: boolean
+      digest_verifies: boolean
+    }>(`
+      select
+        core.lesson_id is not distinct from projection.lesson_ref as lesson_matches,
+        core.revision is not distinct from projection.revision as revision_matches,
+        core.state is not distinct from case projection.status
+          when 'active' then 'active' when 'paused' then 'paused'
+          when 'completed' then 'completed' when 'stopped' then 'abandoned'
+        end as state_maps,
+        projection.integrity_digest is not distinct from
+          academy_private.study_production_session_integrity(projection)
+          as digest_verifies
       from public.academy_study_sessions as core
       join academy_private.study_production_sessions as projection
         on projection.session_id = core.id
       where core.id = $1
-    `, [sessionRef, mutationRef, checkpointRef])
+    `, [sessionRef])
+    expect(row.rows[0], sessionRef).toEqual({
+      lesson_matches: dimension !== 'lesson',
+      revision_matches: dimension !== 'revision',
+      state_maps: dimension !== 'state',
+      digest_verifies: dimension !== 'digest',
+    })
+  }
 
-    expect(exactRead.body).toEqual({
-      status: 'quarantined',
-      reasonCode: 'integrity-failed',
+  it('quarantines on core lesson divergence alone', async () => {
+    const sessionRef = 'session.isolated.lesson'
+    await begin(digestA, sessionRef)
+    await corruptCore(sessionRef, "lesson_id = 'lesson.production.diverged'")
+    await assertOnlyDivergence(sessionRef, 'lesson')
+
+    expect((await execute(digestA, PROGRESS, 'session:read', { sessionRef })).body)
+      .toEqual({ status: 'quarantined', reasonCode: 'integrity-failed' })
+    expect((await casAfterCorruption(sessionRef, 'mutation.isolated.lesson')).body)
+      .toEqual({ status: 'quarantined' })
+    expect(await residue(sessionRef)).toEqual({ checkpoints: 0, receipts: 0, audits: 0 })
+  })
+
+  it('quarantines on core revision divergence alone', async () => {
+    const sessionRef = 'session.isolated.revision'
+    await begin(digestA, sessionRef)
+    await corruptCore(sessionRef, 'revision = revision + 1')
+    await assertOnlyDivergence(sessionRef, 'revision')
+
+    expect((await execute(digestA, PROGRESS, 'session:read', { sessionRef })).body)
+      .toEqual({ status: 'quarantined', reasonCode: 'integrity-failed' })
+    expect((await casAfterCorruption(sessionRef, 'mutation.isolated.revision')).body)
+      .toEqual({ status: 'quarantined' })
+    expect(await residue(sessionRef)).toEqual({ checkpoints: 0, receipts: 0, audits: 0 })
+  })
+
+  it('quarantines on projection status divergence alone', async () => {
+    const sessionRef = 'session.isolated.projection-status'
+    await begin(digestA, sessionRef)
+    // Core stays active; only the projection claims a different status.  The
+    // digest is recomputed, so the digest check cannot be what fires.
+    await corruptProjection(sessionRef, "status = 'paused'")
+    await assertOnlyDivergence(sessionRef, 'state')
+
+    expect((await execute(digestA, PROGRESS, 'session:read', { sessionRef })).body)
+      .toEqual({ status: 'quarantined', reasonCode: 'integrity-failed' })
+    expect((await casAfterCorruption(sessionRef, 'mutation.isolated.projection-status')).body)
+      .toEqual({ status: 'quarantined' })
+    expect(await residue(sessionRef)).toEqual({ checkpoints: 0, receipts: 0, audits: 0 })
+  })
+
+  // One case per arm of the status mapping.  Removing any single arm leaves the
+  // other three passing, so only the matching case can fail.  completed_at is
+  // cleared alongside the completed arm purely to satisfy
+  // academy_study_sessions_completion_check; it takes part in no integrity
+  // check, so the corruption is still one integrity dimension wide.
+  const STATE_ARMS = [
+    { status: 'active', transition: null, corrupted: 'paused', extra: '' },
+    { status: 'paused', transition: 'pause', corrupted: 'active', extra: '' },
+    {
+      status: 'completed',
+      transition: 'complete',
+      corrupted: 'paused',
+      extra: ', completed_at = null',
+    },
+    { status: 'stopped', transition: 'stop', corrupted: 'paused', extra: '' },
+  ] as const
+
+  for (const arm of STATE_ARMS) {
+    it(`quarantines an unmapped core state under projection status ${arm.status}`, async () => {
+      const sessionRef = `session.isolated.state.${arm.status}`
+      await begin(digestA, sessionRef)
+      if (arm.transition) {
+        expect((await execute(digestA, ATTEMPTS, 'session:transition', {
+          sessionRef,
+          expectedRevision: 1,
+          transition: arm.transition,
+          segmentRef: 'segment.1',
+          lastAcceptedEventRef: null,
+          at: nowIso,
+          mutationRef: `mutation.isolated.state.${arm.status}`,
+        })).body).toEqual({ status: 'saved', revision: 2 })
+      }
+      const healthy = await execute(digestA, PROGRESS, 'session:read', { sessionRef })
+      expect(healthy.body).toMatchObject({ status: 'found', session: { status: arm.status } })
+
+      await corruptCore(sessionRef, `state = '${arm.corrupted}'${arm.extra}`)
+      await assertOnlyDivergence(sessionRef, 'state')
+      expect((await execute(digestA, PROGRESS, 'session:read', { sessionRef })).body)
+        .toEqual({ status: 'quarantined', reasonCode: 'integrity-failed' })
     })
-    expect(rejected.body).toEqual({ status: 'quarantined' })
-    expect(state.rows[0]).toEqual({
-      core_lesson: 'lesson.production.diverged',
-      projection_lesson: 'lesson.production.1',
-      core_state: 'paused',
-      projection_state: 'active',
-      core_revision: 2,
+  }
+
+  it('quarantines a legacy core state the production vocabulary cannot map', async () => {
+    const sessionRef = 'session.isolated.state.unmapped'
+    await begin(digestA, sessionRef)
+    // approved_break is legal for the core table and has no production mapping.
+    await corruptCore(sessionRef, "state = 'approved_break'")
+    await assertOnlyDivergence(sessionRef, 'state')
+
+    expect((await execute(digestA, PROGRESS, 'session:read', { sessionRef })).body)
+      .toEqual({ status: 'quarantined', reasonCode: 'integrity-failed' })
+    expect((await casAfterCorruption(sessionRef, 'mutation.isolated.unmapped')).body)
+      .toEqual({ status: 'quarantined' })
+  })
+
+  it('quarantines on stored checkpoint lesson divergence alone', async () => {
+    const sessionRef = 'session.isolated.checkpoint-lesson'
+    await begin(digestA, sessionRef)
+    expect((await saveCheckpoint(sessionRef, 1, 'mutation.isolated.cp.1')).body)
+      .toEqual({ status: 'saved', revision: 1 })
+    // Only the stored checkpoint diverges; the session pair still agrees and the
+    // checkpoint digest is recomputed over the corrupted row.
+    await corruptCheckpoint(sessionRef, "lesson_ref = 'lesson.production.diverged'")
+    await assertOnlyDivergence(sessionRef, 'none')
+    const digest = await database.query<{ verifies: boolean }>(`
+      select integrity_digest is not distinct from
+        academy_private.study_production_checkpoint_integrity(checkpoint) as verifies
+      from academy_private.study_production_session_checkpoints as checkpoint
+      where session_id = $1
+    `, [sessionRef])
+    expect(digest.rows[0].verifies).toBe(true)
+
+    expect((await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: 1,
+      mutationRef: 'mutation.isolated.cp.2',
+      checkpoint: checkpointRequest(sessionRef, 2),
+    })).body).toEqual({ status: 'quarantined' })
+  })
+
+  it('refuses to replay a cached receipt against a session corrupted afterwards', async () => {
+    const sessionRef = 'session.isolated.cached-receipt'
+    const mutationRef = 'mutation.isolated.cached-receipt'
+    await begin(digestA, sessionRef)
+    const saved = await saveCheckpoint(sessionRef, 1, mutationRef)
+    expect(saved.body).toEqual({ status: 'saved', revision: 1 })
+
+    // The receipt now exists and would replay a saved result.  Corrupt the
+    // session, then replay the identical request.
+    await corruptCore(sessionRef, "lesson_id = 'lesson.production.diverged'")
+    await assertOnlyDivergence(sessionRef, 'lesson')
+    const replay = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: null,
+      mutationRef,
+      checkpoint: checkpointRequest(sessionRef, 1),
+    })
+    expect(replay.body).toEqual({ status: 'quarantined' })
+
+    // The receipt is still on file: the refusal came from the integrity checks
+    // running first, not from the receipt having been discarded.
+    const receipts = await database.query<{ count: number }>(`
+      select count(*)::integer as count
+      from academy_private.study_mutation_receipts
+      where actor_scope = 'session:' || $1
+        and operation_kind = 'production_checkpoint_cas_v1'
+        and idempotency_key = $2
+    `, [sessionRef, mutationRef])
+    expect(receipts.rows[0].count).toBe(1)
+  })
+})
+
+describe('learner content stays out of durable state', () => {
+  // Scans every row of every table in both schemas rather than a list of
+  // suspect columns, so a canary that reaches a column nobody thought to
+  // enumerate -- a fingerprint, a receipt result, an audit payload, a reason
+  // code -- is still caught.
+  async function sweepDurableState(canary: string) {
+    const tables = await database.query<{ schema: string; name: string }>(`
+      select table_schema as schema, table_name as name
+      from information_schema.tables
+      where table_schema in ('public', 'academy_private')
+        and table_type = 'BASE TABLE'
+      order by table_schema, table_name
+    `)
+    expect(tables.rows.length).toBeGreaterThan(20)
+    const probe = tables.rows
+      .map((table) => `select '${table.schema}.${table.name}'::text as location
+        from ${table.schema}.${table.name} as row_under_test
+        where strpos(to_jsonb(row_under_test)::text, $1) > 0`)
+      .join('\nunion all\n')
+    const hits = await database.query<{ location: string }>(probe, [canary])
+    return hits.rows.map((row) => row.location)
+  }
+
+  it('refuses every learner-content carrier and leaves no canary in any table', async () => {
+    const canary = 'CANARY7913RAWLEARNERANSWERFOUR'
+    const sessionRef = 'session.privacy.canary'
+    await begin(digestA, sessionRef)
+
+    // Every shape that could carry learner prose into the wire.
+    const refusals = [
+      // A caller-chosen response draft reference.
+      execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+        sessionRef,
+        expectedRevision: null,
+        mutationRef: 'mutation.privacy.draft',
+        checkpoint: checkpointRequest(sessionRef, 1, { responseDraftRef: `draft:${canary}` }),
+      }),
+      // A raw answer smuggled as an extra key.
+      execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+        sessionRef,
+        expectedRevision: null,
+        mutationRef: 'mutation.privacy.extra',
+        checkpoint: { ...checkpointRequest(sessionRef, 1), rawAnswer: canary },
+      }),
+      // The declared-content flags flipped on.
+      execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+        sessionRef,
+        expectedRevision: null,
+        mutationRef: 'mutation.privacy.flag',
+        checkpoint: checkpointRequest(sessionRef, 1, {
+          rawAnswerIncluded: true,
+          transcriptIncluded: true,
+        }),
+      }),
+    ]
+    const settled = await Promise.allSettled(refusals)
+    for (const result of settled) {
+      if (result.status === 'rejected') continue
+      expect(result.value.body).toEqual({ status: 'quarantined' })
+      expect(JSON.stringify(result.value)).not.toContain(canary)
+    }
+
+    // A begin that declares learner content is refused before it can store the
+    // identifiers it carries.
+    await expect(begin(
+      digestA, 'session.privacy.canary.begin', 'mutation.privacy.begin',
+      { rawAnswerIncluded: true },
+    )).rejects.toThrow(/STUDY_PRODUCTION_SESSION_INVALID/)
+
+    expect(await sweepDurableState(canary)).toEqual([])
+
+    // The column itself has no non-null domain at all, in either direction.
+    const constrained = await database.query<{ nulls_only: boolean }>(`
+      select bool_and(response_draft_ref is null) as nulls_only
+      from academy_private.study_production_session_checkpoints
+    `)
+    expect(constrained.rows[0].nulls_only).not.toBe(false)
+    await expect(database.exec(`
+      insert into academy_private.study_production_session_checkpoints (
+        session_id, checkpoint_ref, household_id, student_id, lesson_ref,
+        segment_ref, response_draft_ref, captured_at, revision, integrity_digest
+      )
+      select session_id, 'checkpoint.privacy.direct', household_id, student_id,
+        lesson_ref, segment_ref, 'draft:${canary}', clock_timestamp(), 1, repeat('0', 64)
+      from academy_private.study_production_sessions
+      where session_id = '${sessionRef}'
+    `)).rejects.toThrow()
+    expect(await sweepDurableState(canary)).toEqual([])
+  })
+
+  it('keeps a stored checkpoint free of learner content on the accepted path', async () => {
+    const canary = 'CANARY7913ACCEPTEDPATHPROSE'
+    const sessionRef = 'session.privacy.accepted'
+    await begin(digestA, sessionRef)
+    expect((await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.privacy.accepted',
+      checkpoint: checkpointRequest(sessionRef, 1),
+    })).body).toEqual({ status: 'saved', revision: 1 })
+
+    // Nothing the learner could have typed is echoed into the stored row, its
+    // digest, its receipt or its audit entry.
+    expect(await sweepDurableState(canary)).toEqual([])
+    const stored = await database.query<{ row: Record<string, unknown> }>(`
+      select to_jsonb(checkpoint) as row
+      from academy_private.study_production_session_checkpoints as checkpoint
+      where session_id = $1
+    `, [sessionRef])
+    expect(stored.rows[0].row).toMatchObject({ response_draft_ref: null })
+  })
+})
+
+describe('cross-lane session ownership', () => {
+  async function sessionPair(sessionRef: string) {
+    const result = await database.query<{
+      core_state: string
+      core_revision: number
+      projection_status: string
+      projection_revision: number
+    }>(`
+      select core.state as core_state, core.revision::integer as core_revision,
+        projection.status as projection_status,
+        projection.revision::integer as projection_revision
+      from public.academy_study_sessions as core
+      join academy_private.study_production_sessions as projection
+        on projection.session_id = core.id
+      where core.id = $1
+    `, [sessionRef])
+    return result.rows[0]
+  }
+
+  it('refuses every legacy v1 mutation of a session the production wire owns', async () => {
+    const sessionRef = 'session.legacy.ownership'
+    await begin(digestA, sessionRef)
+    expect((await execute(digestA, PROGRESS, 'session:read', { sessionRef })).body)
+      .toMatchObject({ status: 'found' })
+
+    // Each of these is an ordinary authorized request from the session's own
+    // learner.  Every one of them would advance core state or revision without
+    // moving the projection the wire reads.  'active' is the case that changes
+    // no state at all: only the server-managed revision moves, and that alone
+    // is enough to quarantine the session permanently.
+    for (const state of [
+      'active', 'paused', 'technical_interruption', 'completed', 'abandoned',
+    ]) {
+      await expect(executeLegacy(digestA, ATTEMPTS, 'session:transition', {
+        sessionId: sessionRef,
+        expectedRevision: 1,
+        state,
+        completedAt: null,
+        idempotencyKey: `mutation.legacy.${state}`,
+      })).rejects.toThrow(/STUDY_OPERATION_NOT_AVAILABLE/)
+    }
+
+    // Nothing moved, and no legacy receipt or audit was minted.
+    expect(await sessionPair(sessionRef)).toEqual({
+      core_state: 'active',
+      core_revision: 1,
+      projection_status: 'active',
       projection_revision: 1,
-      checkpoints: 0,
-      receipts: 0,
-      audits: 0,
     })
+    const residue = await database.query<{ receipts: number; audits: number }>(`
+      select
+        (select count(*)::integer from academy_private.study_mutation_receipts
+          where actor_scope = 'session:' || $1
+            and operation_kind = 'session_transition_v1') as receipts,
+        (select count(*)::integer from public.academy_study_audit_events
+          where target_id = $1 and event_type = 'session.finish') as audits
+    `, [sessionRef])
+    expect(residue.rows[0]).toEqual({ receipts: 0, audits: 0 })
+
+    // The session is not bricked: every v2 operation still answers normally.
+    expect((await execute(digestA, PROGRESS, 'session:read', { sessionRef })).body)
+      .toMatchObject({ status: 'found', session: { revision: 1, status: 'active' } })
+    expect((await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.legacy.ownership.checkpoint',
+      checkpoint: checkpointRequest(sessionRef, 1),
+    })).body).toEqual({ status: 'saved', revision: 1 })
+    expect((await execute(digestA, ATTEMPTS, 'session:transition', {
+      sessionRef,
+      expectedRevision: 1,
+      transition: 'pause',
+      segmentRef: 'segment.1',
+      lastAcceptedEventRef: null,
+      at: nowIso,
+      mutationRef: 'mutation.legacy.ownership.pause',
+    })).body).toEqual({ status: 'saved', revision: 2 })
+    expect(await sessionPair(sessionRef)).toEqual({
+      core_state: 'paused',
+      core_revision: 2,
+      projection_status: 'paused',
+      projection_revision: 2,
+    })
+  })
+
+  it('leaves legacy sessions the production wire does not own fully mutable', async () => {
+    // The guard is ownership-scoped, not a blanket freeze of the legacy lane.
+    const legacyRef = 'session.legacy.unowned'
+    expect((await executeLegacy(digestA, ATTEMPTS, 'session:begin', {
+      session: {
+        id: legacyRef,
+        schema_version: 1,
+        lesson_id: 'lesson.production.1',
+        subject_id: 'math',
+        study_plan_id: null,
+        state: 'active',
+        started_at: nowIso,
+        completed_at: null,
+        intended_local_date: localDateA,
+      },
+      idempotencyKey: 'mutation.legacy.unowned.begin',
+    })).body).toMatchObject({ status: 'created' })
+    expect((await executeLegacy(digestA, ATTEMPTS, 'session:transition', {
+      sessionId: legacyRef,
+      expectedRevision: 1,
+      state: 'paused',
+      completedAt: null,
+      idempotencyKey: 'mutation.legacy.unowned.pause',
+    })).body).toEqual({ status: 'stored', revision: 2 })
+    const row = await database.query<{ state: string; revision: number }>(
+      'select state, revision::integer as revision from public.academy_study_sessions where id = $1',
+      [legacyRef],
+    )
+    expect(row.rows[0]).toEqual({ state: 'paused', revision: 2 })
+  })
+})
+
+describe('checkpoint reference namespace', () => {
+  it('scopes checkpoint references per learner and leaks no cross-household existence', async () => {
+    const sharedRef = 'checkpoint.contested.reference'
+    await begin(digestA, 'session.refspace.a')
+    expect((await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef: 'session.refspace.a',
+      expectedRevision: null,
+      mutationRef: 'mutation.refspace.a',
+      checkpoint: checkpointRequest('session.refspace.a', 1, { checkpointRef: sharedRef }),
+    })).body).toEqual({ status: 'saved', revision: 1 })
+
+    // A different household, a different learner, their own authorized session,
+    // and a checkpoint reference another household already used.
+    await begin(digestB, 'session.refspace.b', 'mutation.begin.session.refspace.b', {
+      intendedLocalDate: localDateB,
+    })
+    const foreign = await execute(digestB, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef: 'session.refspace.b',
+      expectedRevision: null,
+      mutationRef: 'mutation.refspace.b',
+      checkpoint: checkpointRequest('session.refspace.b', 1, { checkpointRef: sharedRef }),
+    })
+    expect(foreign.body).toEqual({ status: 'saved', revision: 1 })
+
+    // Both rows exist, each owned by its own learner.
+    const stored = await database.query<{ session_id: string; student_id: string }>(`
+      select session_id, student_id::text as student_id
+      from academy_private.study_production_session_checkpoints
+      where checkpoint_ref = $1
+      order by session_id
+    `, [sharedRef])
+    expect(stored.rows).toEqual([
+      { session_id: 'session.refspace.a', student_id: STUDENT_A },
+      { session_id: 'session.refspace.b', student_id: STUDENT_B },
+    ])
+  })
+
+  it('fails a same-learner cross-session reference collision closed', async () => {
+    const sharedRef = 'checkpoint.same.learner.reference'
+    await begin(digestA, 'session.refspace.a1')
+    await begin(digestA, 'session.refspace.a2')
+    expect((await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef: 'session.refspace.a1',
+      expectedRevision: null,
+      mutationRef: 'mutation.refspace.a1',
+      checkpoint: checkpointRequest('session.refspace.a1', 1, { checkpointRef: sharedRef }),
+    })).body).toEqual({ status: 'saved', revision: 1 })
+
+    const collided = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef: 'session.refspace.a2',
+      expectedRevision: null,
+      mutationRef: 'mutation.refspace.a2',
+      checkpoint: checkpointRequest('session.refspace.a2', 1, { checkpointRef: sharedRef }),
+    })
+    expect(collided.body).toEqual({ status: 'quarantined' })
+
+    // Closed result, nothing durable written for the second session, and the
+    // first session keeps the single row that legitimately owns the reference.
+    const residue = await database.query<{
+      second_checkpoints: number
+      receipts: number
+      audits: number
+      rows_holding_ref: number
+    }>(`
+      select
+        (select count(*)::integer from academy_private.study_production_session_checkpoints
+          where session_id = 'session.refspace.a2') as second_checkpoints,
+        (select count(*)::integer from academy_private.study_mutation_receipts
+          where actor_scope = 'session:session.refspace.a2'
+            and operation_kind = 'production_checkpoint_cas_v1') as receipts,
+        (select count(*)::integer from public.academy_study_audit_events
+          where event_type = 'checkpoint.save' and target_id = $1) as audits,
+        (select count(*)::integer from academy_private.study_production_session_checkpoints
+          where checkpoint_ref = $1) as rows_holding_ref
+    `, [sharedRef])
+    expect(residue.rows[0]).toEqual({
+      second_checkpoints: 0,
+      receipts: 0,
+      audits: 1,
+      rows_holding_ref: 1,
+    })
+  })
+
+  it('replays a same-session reference without treating it as a collision', async () => {
+    const sessionRef = 'session.refspace.replay'
+    const sharedRef = 'checkpoint.replay.reference'
+    await begin(digestA, sessionRef)
+    const first = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.refspace.replay',
+      checkpoint: checkpointRequest(sessionRef, 1, { checkpointRef: sharedRef }),
+    })
+    const replay = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.refspace.replay',
+      checkpoint: checkpointRequest(sessionRef, 1, { checkpointRef: sharedRef }),
+    })
+    expect(first.body).toEqual({ status: 'saved', revision: 1 })
+    expect(replay.body).toEqual(first.body)
+
+    // The same session advancing to its next revision keeps its own reference.
+    const advanced = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: 1,
+      mutationRef: 'mutation.refspace.replay.2',
+      checkpoint: checkpointRequest(sessionRef, 2, { checkpointRef: sharedRef }),
+    })
+    expect(advanced.body).toEqual({ status: 'saved', revision: 2 })
   })
 })
 
@@ -738,7 +1342,11 @@ describe('authority, isolation and readiness', () => {
   })
 
   it('isolates sessions and checkpoints across learners and sessions', async () => {
-    await begin(digestB, 'session.foreign.learner')
+    // Learner B's household keeps its own timezone, so its intended local date
+    // is derived from that household, not from learner A's.
+    await begin(digestB, 'session.foreign.learner', 'mutation.begin.session.foreign.learner', {
+      intendedLocalDate: localDateB,
+    })
     await expect(begin(
       digestA,
       'session.foreign.learner',
@@ -867,6 +1475,7 @@ describe('production session begin on independent PostgreSQL backends', () => {
   let cleanupPromise: Promise<void> | null = null
   let postgresDigestA: string
   let postgresNowIso: string
+  let postgresLocalDateA: string
 
   async function cleanupServer() {
     if (cleanupPromise) return cleanupPromise
@@ -940,7 +1549,7 @@ describe('production session begin on independent PostgreSQL backends', () => {
         studyPlanRef: null,
         segmentRef: 'segment.1',
         startedAt: postgresNowIso,
-        intendedLocalDate: postgresNowIso.slice(0, 10),
+        intendedLocalDate: postgresLocalDateA,
         lastAcceptedEventRef: null,
         rawAnswerIncluded: false,
         transcriptIncluded: false,
@@ -955,6 +1564,97 @@ describe('production session begin on independent PostgreSQL backends', () => {
       [postgresDigestA, ATTEMPTS, JSON.stringify(request)],
     )
     return result.rows[0].result
+  }
+
+  // The legacy lane, driven over its own backend.  The v1 executor supplies
+  // student_id itself, so the caller sends the other nine session keys.
+  async function executePostgresBeginLegacy(
+    client: pg.Client,
+    sessionRef: string,
+    idempotencyKey: string,
+  ): Promise<RuntimeEnvelope> {
+    const request = {
+      session: {
+        id: sessionRef,
+        schema_version: 1,
+        lesson_id: 'lesson.production.1',
+        subject_id: 'math',
+        study_plan_id: null,
+        state: 'active',
+        started_at: postgresNowIso,
+        completed_at: null,
+        intended_local_date: postgresLocalDateA,
+      },
+      idempotencyKey,
+    }
+    const result = await client.query<{ result: RuntimeEnvelope }>(
+      `select public.academy_study_execute_verified_runtime_v1(
+        $1::text, $2::text, 'session:begin', $3::jsonb
+      ) as result`,
+      [postgresDigestA, ATTEMPTS, JSON.stringify(request)],
+    )
+    return result.rows[0].result
+  }
+
+  async function executePostgresCheckpoint(
+    client: pg.Client,
+    sessionRef: string,
+    mutationRef: string,
+    checkpointRef = `checkpoint.${sessionRef}.1`,
+  ): Promise<RuntimeEnvelope> {
+    const result = await client.query<{ result: RuntimeEnvelope }>(
+      `select public.academy_study_execute_verified_runtime_v2(
+        $1::text, $2::text, 'checkpoint:compare-and-swap', $3::jsonb
+      ) as result`,
+      [postgresDigestA, ATTEMPTS, JSON.stringify({
+        sessionRef,
+        expectedRevision: null,
+        mutationRef,
+        checkpoint: {
+          checkpointRef,
+          sessionRef,
+          lessonRef: 'lesson.production.1',
+          segmentRef: 'segment.1',
+          revision: 1,
+          capturedAt: postgresNowIso,
+          completedSegmentRefs: [],
+          elapsedActiveSecondsInSegment: 10,
+          responseDraftRef: null,
+          rawAnswerIncluded: false,
+          transcriptIncluded: false,
+        },
+      })],
+    )
+    return result.rows[0].result
+  }
+
+  async function waitForBlockedOnLock(pid: number) {
+    const deadline = Date.now() + 10_000
+    let last: unknown = null
+    while (Date.now() < deadline) {
+      const activity = await controller.query<{
+        wait_event_type: string | null
+        wait_event: string | null
+      }>(
+        'select wait_event_type, wait_event from pg_catalog.pg_stat_activity where pid = $1',
+        [pid],
+      )
+      const locks = await controller.query<{ locktype: string }>(`
+        select locktype
+        from pg_catalog.pg_locks
+        where pid = $1 and not granted
+        order by locktype
+      `, [pid])
+      last = { activity: activity.rows, locks: locks.rows }
+      if (activity.rows[0]?.wait_event_type === 'Lock' && locks.rows.length > 0) {
+        return {
+          waitEventType: activity.rows[0].wait_event_type,
+          ungranted: locks.rows.map((row) => row.locktype),
+        }
+      }
+      await postgresDelay(20)
+    }
+    throw new Error(`Backend ${pid} never blocked on a lock: ${JSON.stringify(last)}`)
   }
 
   async function waitForSerializedBackends(pids: number[], controllerPid: number) {
@@ -1099,9 +1799,7 @@ describe('production session begin on independent PostgreSQL backends', () => {
       clientB = server.getPgClient()
       await Promise.all([controller.connect(), clientA.connect(), clientB.connect()])
       await controller.query(bootstrap)
-      const sources = await Promise.all(
-        files.map((path) => readFile(new URL(path, import.meta.url), 'utf8')),
-      )
+      const sources = await Promise.all(files.map((path) => loadSql(path)))
       for (const [index, migration] of sources.entries()) {
         try {
           await controller.query(migration)
@@ -1123,13 +1821,9 @@ describe('production session begin on independent PostgreSQL backends', () => {
         .update(String(issued.rows[0].result.sessionReference), 'ascii')
         .digest('hex')
       await resetPostgresRole(controller)
-      const clock = await controller.query<{ now: string }>(`
-        select to_char(
-          clock_timestamp() at time zone 'UTC',
-          'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'
-        ) as now
-      `)
+      const clock = await controller.query<ClockRow>(CLOCK_QUERY, [HOUSEHOLD_A, HOUSEHOLD_B])
       postgresNowIso = clock.rows[0].now
+      postgresLocalDateA = clock.rows[0].local_a
       await Promise.all([
         configurePostgresRole(clientA, 'service_role', null),
         configurePostgresRole(clientB, 'service_role', null),
@@ -1197,6 +1891,284 @@ describe('production session begin on independent PostgreSQL backends', () => {
     console.info(
       `Production begin identical concurrency: backends=${backendPids.join(',')} advisory=${JSON.stringify(advisory)}`,
     )
+  }, 30_000)
+
+  it('serializes a legacy begin that contests an uncommitted production begin', async () => {
+    const sessionRef = 'session.production.cross-lane'
+    const legacyPid = (await clientB.query<{ pid: number }>(
+      'select pg_backend_pid() as pid',
+    )).rows[0].pid
+
+    let transactionOpen = false
+    let legacySettled:
+      | { ok: true; value: RuntimeEnvelope }
+      | { ok: false; error: { code?: string; constraint?: string; message?: string } }
+      | undefined
+    let legacyPromise: Promise<typeof legacySettled> | undefined
+    let blocked: { waitEventType: string | null; ungranted: string[] } | undefined
+    try {
+      await clientA.query('begin')
+      transactionOpen = true
+      const wire = await executePostgresBegin(clientA, sessionRef, 'mutation.cross-lane.wire')
+      expect(wire.body).toEqual({ status: 'saved', sessionRef, revision: 1 })
+
+      // The production row now exists but is invisible to every other backend.
+      legacyPromise = executePostgresBeginLegacy(clientB, sessionRef, 'mutation.cross-lane.legacy')
+        .then(
+          (value) => ({ ok: true as const, value }),
+          (error) => ({ ok: false as const, error }),
+        )
+      blocked = await waitForBlockedOnLock(legacyPid)
+      await clientA.query('commit')
+      transactionOpen = false
+    } finally {
+      if (transactionOpen) await clientA.query('rollback')
+      if (legacyPromise) legacySettled = await legacyPromise
+    }
+
+    // The legacy lane waited on the same advisory key the production begin
+    // takes, before it could observe session state -- not on the primary key
+    // index after it had already committed to inserting.
+    expect(blocked).toEqual({ waitEventType: 'Lock', ungranted: ['advisory'] })
+    if (!legacySettled?.ok) {
+      throw new Error(
+        `Legacy begin raised instead of returning a semantic result: ${JSON.stringify({
+          code: legacySettled?.error?.code,
+          constraint: legacySettled?.error?.constraint,
+          message: legacySettled?.error?.message,
+        })}`,
+      )
+    }
+    expect(legacySettled.value.body).toEqual({ status: 'idempotency-collision' })
+
+    // One session, one projection, one production receipt, one audit -- and the
+    // legacy lane minted no receipt of its own.
+    const counts = await sessionWriteCounts(sessionRef)
+    const legacyReceipts = await controller.query<{ count: number }>(`
+      select count(*)::integer as count
+      from academy_private.study_mutation_receipts
+      where actor_scope = 'session:' || $1
+        and operation_kind = 'session_create_v1'
+    `, [sessionRef])
+    expect(counts).toEqual({
+      core_rows: 1,
+      projection_rows: 1,
+      receipt_rows: 1,
+      audit_rows: 1,
+    })
+    expect(legacyReceipts.rows[0].count).toBe(0)
+  }, 30_000)
+
+  it('serializes a production begin that contests an uncommitted legacy begin', async () => {
+    const sessionRef = 'session.production.cross-lane-reverse'
+    const wirePid = (await clientB.query<{ pid: number }>(
+      'select pg_backend_pid() as pid',
+    )).rows[0].pid
+
+    let transactionOpen = false
+    let wireSettled:
+      | { ok: true; value: RuntimeEnvelope }
+      | { ok: false; error: { code?: string; constraint?: string; message?: string } }
+      | undefined
+    let wirePromise: Promise<typeof wireSettled> | undefined
+    let blocked: { waitEventType: string | null; ungranted: string[] } | undefined
+    try {
+      await clientA.query('begin')
+      transactionOpen = true
+      const legacy = await executePostgresBeginLegacy(
+        clientA, sessionRef, 'mutation.cross-lane-reverse.legacy',
+      )
+      expect(legacy.body).toMatchObject({ status: 'created' })
+
+      wirePromise = executePostgresBegin(clientB, sessionRef, 'mutation.cross-lane-reverse.wire')
+        .then(
+          (value) => ({ ok: true as const, value }),
+          (error) => ({ ok: false as const, error }),
+        )
+      blocked = await waitForBlockedOnLock(wirePid)
+      await clientA.query('commit')
+      transactionOpen = false
+    } finally {
+      if (transactionOpen) await clientA.query('rollback')
+      if (wirePromise) wireSettled = await wirePromise
+    }
+
+    expect(blocked).toEqual({ waitEventType: 'Lock', ungranted: ['advisory'] })
+    if (!wireSettled?.ok) {
+      throw new Error(
+        `Production begin raised instead of returning a semantic result: ${JSON.stringify({
+          code: wireSettled?.error?.code,
+          constraint: wireSettled?.error?.constraint,
+          message: wireSettled?.error?.message,
+        })}`,
+      )
+    }
+    expect(wireSettled.value.body).toEqual({ status: 'idempotency-collision' })
+
+    // The legacy row stands alone: the production lane refused rather than
+    // projecting a session it did not create.
+    const counts = await sessionWriteCounts(sessionRef)
+    expect(counts).toEqual({
+      core_rows: 1,
+      projection_rows: 0,
+      receipt_rows: 1,
+      audit_rows: 1,
+    })
+  }, 30_000)
+
+  // The checkpoint compare-and-swap reads the core session FOR UPDATE.  Without
+  // that lock a concurrent corruption committed after the snapshot was taken is
+  // invisible under READ COMMITTED and the checkpoint writes straight through.
+  // A single-backend fixture cannot show this: the corruption has to be
+  // uncommitted while the compare-and-swap is already running.
+  it('blocks the checkpoint swap on the core row lock and refuses the corruption it then sees', async () => {
+    const sessionRef = 'session.production.lock-witness'
+    expect((await executePostgresBegin(
+      clientA, sessionRef, 'mutation.lock-witness.begin',
+    )).body).toEqual({ status: 'saved', sessionRef, revision: 1 })
+
+    const casPid = (await clientB.query<{ pid: number }>(
+      'select pg_backend_pid() as pid',
+    )).rows[0].pid
+
+    // Suspend the core triggers so the corrupting transaction moves lesson_id
+    // alone.  This happens outside the race, and the compare-and-swap under test
+    // never writes this table.
+    await controller.query(`
+      alter table public.academy_study_sessions
+        disable trigger academy_study_sessions_revision;
+      alter table public.academy_study_sessions
+        disable trigger study_production_session_30_ownership;
+    `)
+    let transactionOpen = false
+    let casSettled:
+      | { ok: true; value: RuntimeEnvelope }
+      | { ok: false; error: unknown }
+      | undefined
+    let casPromise: Promise<typeof casSettled> | undefined
+    let blocked: { waitEventType: string | null; ungranted: string[] } | undefined
+    // The corrupting backend writes the table directly, which service_role
+    // cannot do; it acts as the database owner for the duration of the race.
+    await resetPostgresRole(clientA)
+    try {
+      await clientA.query('begin')
+      transactionOpen = true
+      await clientA.query(`
+        update public.academy_study_sessions
+        set lesson_id = 'lesson.production.diverged'
+        where id = $1
+      `, [sessionRef])
+
+      casPromise = executePostgresCheckpoint(clientB, sessionRef, 'mutation.lock-witness.cas')
+        .then(
+          (value) => ({ ok: true as const, value }),
+          (error) => ({ ok: false as const, error }),
+        )
+      blocked = await waitForBlockedOnLock(casPid)
+      await clientA.query('commit')
+      transactionOpen = false
+    } finally {
+      if (transactionOpen) await clientA.query('rollback')
+      if (casPromise) casSettled = await casPromise
+      await controller.query(`
+        alter table public.academy_study_sessions
+          enable trigger academy_study_sessions_revision;
+        alter table public.academy_study_sessions
+          enable trigger study_production_session_30_ownership;
+      `)
+      await configurePostgresRole(clientA, 'service_role', null)
+    }
+
+    // Row contention, not the advisory key: the swap was already past its own
+    // lock and waiting on the core session row itself.
+    expect(blocked?.waitEventType).toBe('Lock')
+    expect(blocked?.ungranted).not.toContain('advisory')
+    expect(blocked?.ungranted.length).toBeGreaterThan(0)
+
+    if (!casSettled?.ok) throw casSettled?.error
+    expect(casSettled.value.body).toEqual({ status: 'quarantined' })
+
+    const residue = await controller.query<{
+      checkpoints: number
+      receipts: number
+      core_lesson: string
+    }>(`
+      select
+        (select count(*)::integer
+          from academy_private.study_production_session_checkpoints
+          where session_id = $1) as checkpoints,
+        (select count(*)::integer from academy_private.study_mutation_receipts
+          where actor_scope = 'session:' || $1
+            and operation_kind = 'production_checkpoint_cas_v1') as receipts,
+        (select lesson_id from public.academy_study_sessions where id = $1) as core_lesson
+    `, [sessionRef])
+    expect(residue.rows[0]).toEqual({
+      checkpoints: 0,
+      receipts: 0,
+      core_lesson: 'lesson.production.diverged',
+    })
+  }, 30_000)
+
+  // Two concurrent sessions of one learner contesting the same caller-chosen
+  // checkpoint reference.  Without a shared lock both pass the scope pre-check
+  // and the loser surfaces the durable unique key as a raw constraint error.
+  it('serializes concurrent sessions of one learner contesting one checkpoint reference', async () => {
+    const contestedRef = 'checkpoint.contested.concurrent'
+    for (const suffix of ['c1', 'c2']) {
+      expect((await executePostgresBegin(
+        clientA, `session.production.${suffix}`, `mutation.${suffix}.begin`,
+      )).body).toMatchObject({ status: 'saved' })
+    }
+    const pids = await Promise.all([
+      clientA.query<{ pid: number }>('select pg_backend_pid() as pid'),
+      clientB.query<{ pid: number }>('select pg_backend_pid() as pid'),
+    ])
+
+    let barrierOpen = false
+    let settled: PromiseSettledResult<RuntimeEnvelope>[] | undefined
+    let pending: Promise<PromiseSettledResult<RuntimeEnvelope>[]> | undefined
+    try {
+      await controller.query('begin')
+      barrierOpen = true
+      await controller.query(`
+        select pg_catalog.pg_advisory_xact_lock(
+          pg_catalog.hashtext('academy:study:production-checkpoint-ref:v1'),
+          pg_catalog.hashtext($1)
+        )
+      `, [contestedRef])
+      pending = Promise.allSettled([
+        executePostgresCheckpoint(clientA, 'session.production.c1', 'mutation.c1.cas', contestedRef),
+        executePostgresCheckpoint(clientB, 'session.production.c2', 'mutation.c2.cas', contestedRef),
+      ])
+      for (const result of pids) {
+        const blocked = await waitForBlockedOnLock(result.rows[0].pid)
+        expect(blocked.ungranted).toEqual(['advisory'])
+      }
+      await controller.query('commit')
+      barrierOpen = false
+    } finally {
+      if (barrierOpen) await controller.query('rollback')
+      if (pending) settled = await pending
+    }
+
+    // Neither backend raised; exactly one won the reference.
+    const rejected = settled!.filter((result) => result.status === 'rejected')
+    if (rejected.length > 0) {
+      throw new Error(`Contested checkpoint reference raised: ${JSON.stringify(
+        rejected.map((r) => (r as PromiseRejectedResult).reason?.code ?? 'unknown'),
+      )}`)
+    }
+    const bodies = settled!.map((result) =>
+      (result as PromiseFulfilledResult<RuntimeEnvelope>).value.body)
+    expect(bodies.filter((body) => body?.status === 'saved')).toHaveLength(1)
+    expect(bodies.filter((body) => body?.status === 'quarantined')).toHaveLength(1)
+
+    const holders = await controller.query<{ count: number }>(`
+      select count(*)::integer as count
+      from academy_private.study_production_session_checkpoints
+      where checkpoint_ref = $1
+    `, [contestedRef])
+    expect(holders.rows[0].count).toBe(1)
   }, 30_000)
 
   it('collides simultaneous different intent under the same mutation identity', async () => {
@@ -1290,7 +2262,7 @@ describe('RPC census and migration custody', () => {
         'p_last_accepted_event_ref', 'p_at', 'p_mutation_ref'],
       types: 'text, bigint, text, text, text, timestamp with time zone, text',
       defaults: 0, defaultExpr: null, volatility: 'v',
-      fingerprint: '7395c0a41466d02d5f12db8d9f4e363d6bc84ddab566e2d5202a8df309902a4c',
+      fingerprint: '7a82c5a17cf1c50ebf637a6323d9c38d568bfabc9e830e63df596d2b9e9fe74f',
     }],
     ['academy_study_read_session_checkpoint_v1(text)', {
       names: ['p_session_ref'], types: 'text', defaults: 0,
@@ -1301,7 +2273,7 @@ describe('RPC census and migration custody', () => {
       names: ['p_session_ref', 'p_expected_revision', 'p_mutation_ref', 'p_checkpoint'],
       types: 'text, bigint, text, jsonb', defaults: 0,
       defaultExpr: null, volatility: 'v',
-      fingerprint: 'a0664dc9eb7a1db5f6d0c344344d0fc114694655b612ab931892ac44ea1c2952',
+      fingerprint: 'fe4f1704f7448c4a6618acb6f2f49c3d80eff20a277c999d3bd43ffc0937812b',
     }],
     ['academy_study_list_production_calendar_v1(text)', {
       names: ['p_cursor'], types: 'text', defaults: 1,
@@ -1424,6 +2396,34 @@ describe('RPC census and migration custody', () => {
       readiness_authenticated: false,
       operation_service: false,
     })
+    // Exactly one legacy body changes, and only to share the advisory key.  The
+    // v1 executor, its operation map and the legacy transition are byte-identical
+    // to 20260809120000 / 20260801011000.
+    const legacy = await database.query<{ signature: string; fingerprint: string }>(`
+      select p.oid::regprocedure::text as signature,
+        encode(sha256(convert_to(p.prosrc, 'UTF8')), 'hex') as fingerprint
+      from pg_catalog.pg_proc as p
+      where p.oid in (
+        'public.academy_study_execute_verified_runtime_v1(text,text,text,jsonb)'::regprocedure,
+        'public.academy_study_transition_session(text,bigint,text,timestamptz,text)'::regprocedure,
+        'public.academy_study_create_session(jsonb,text)'::regprocedure
+      )
+      order by p.oid::regprocedure::text
+    `)
+    expect(legacy.rows).toEqual([
+      {
+        signature: 'academy_study_create_session(jsonb,text)',
+        fingerprint: 'f987ba72f35abae6bcffe2079b1fffca8c25480c92ce87ce77b2403df74c0893',
+      },
+      {
+        signature: 'academy_study_execute_verified_runtime_v1(text,text,text,jsonb)',
+        fingerprint: '309643cf3abae40bc926ee6ead20d8e569c6370e2f4af49c1fbd3e161ce7b953',
+      },
+      {
+        signature: 'academy_study_transition_session(text,bigint,text,timestamp with time zone,text)',
+        fingerprint: '5796f6c8077cf29015d07ff122176126f5af321ca46077a115cfb27c2cd8f484',
+      },
+    ])
     const v1 = await database.query<{ fingerprint: string }>(`
       select encode(sha256(convert_to(prosrc, 'UTF8')), 'hex') as fingerprint
       from pg_catalog.pg_proc
@@ -1458,7 +2458,7 @@ describe('RPC census and migration custody', () => {
       production_wire_readiness_ready: false,
       production_wire_hosted_application_claim: false,
     })
-    const source = await readFile(new URL(PRODUCTION_WIRE_MIGRATION, import.meta.url), 'utf8')
+    const source = await loadSql(PRODUCTION_WIRE_MIGRATION)
     await expect(database.exec(source)).rejects.toThrow(/STUDY_PRODUCTION_WIRE already applied/)
   })
 })
