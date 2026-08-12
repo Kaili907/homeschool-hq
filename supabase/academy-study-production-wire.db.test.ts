@@ -69,6 +69,12 @@ let database: PGlite
 let digestA: string
 let digestB: string
 let nowIso: string
+// The session insert trigger compares intended_local_date against started_at
+// rendered in the HOUSEHOLD's timezone, and household A is America/New_York.
+// A UTC date is the same calendar day only for part of the day, so the local
+// date is read from the household's own settings rather than sliced off nowIso.
+let localDateA: string
+let localDateB: string
 
 async function asRole<T>(
   role: 'authenticated' | 'service_role',
@@ -122,15 +128,16 @@ async function execute(
   })
 }
 
-function sessionRequest(sessionRef: string, overrides: Record<string, unknown> = {}) {
+// A begin request carries no session identity: the reference is issued by
+// academy_private.study_production_session_ref and comes back in the result.
+function sessionRequest(overrides: Record<string, unknown> = {}) {
   return {
-    sessionRef,
     lessonRef: 'lesson.production.1',
     subjectRef: 'math',
     studyPlanRef: null,
     segmentRef: 'segment.1',
     startedAt: nowIso,
-    intendedLocalDate: nowIso.slice(0, 10),
+    intendedLocalDate: localDateA,
     lastAcceptedEventRef: null,
     rawAnswerIncluded: false,
     transcriptIncluded: false,
@@ -140,14 +147,62 @@ function sessionRequest(sessionRef: string, overrides: Record<string, unknown> =
 
 async function begin(
   digest: string,
-  sessionRef: string,
-  mutationRef = `mutation.begin.${sessionRef}`,
+  mutationRef: string,
   overrides: Record<string, unknown> = {},
 ) {
   return execute(digest, ATTEMPTS, 'session:begin', {
-    session: sessionRequest(sessionRef, overrides),
+    session: sessionRequest(overrides),
     mutationRef,
   })
+}
+
+/** Begins and returns the reference the server issued, which is the only way to get one. */
+async function beginRef(
+  digest: string,
+  mutationRef: string,
+  overrides: Record<string, unknown> = {},
+): Promise<string> {
+  const created = await begin(digest, mutationRef, overrides)
+  const issued = (created.body as { sessionRef?: unknown } | undefined)?.sessionRef
+  if (typeof issued !== 'string') {
+    throw new Error(`Begin did not issue a session reference: ${JSON.stringify(created)}`)
+  }
+  return issued
+}
+
+/** The learner receipt scope, read from the authority that writes it. */
+async function learnerScope(
+  client: { query: (text: string, values: unknown[]) => Promise<{ rows: Array<{ scope: string }> }> },
+  student: string,
+): Promise<string> {
+  const result = await client.query(
+    'select academy_private.study_learner_ref($1::uuid) as scope',
+    [student],
+  )
+  return result.rows[0].scope
+}
+
+/**
+ * The issuing authority itself, read rather than re-implemented.
+ *
+ * The concurrency barrier has to take the same advisory lock the begin operation
+ * takes, and that lock is keyed on the issued reference. Deriving it here from a
+ * second copy of the formula would make the barrier agree with a formula instead
+ * of with the database.
+ */
+async function issuedSessionRef(
+  client: { query: (text: string, values: unknown[]) => Promise<{ rows: Array<{ ref: string }> }> },
+  household: string,
+  student: string,
+  mutationRef: string,
+): Promise<string> {
+  const result = await client.query(
+    `select academy_private.study_production_session_ref(
+      $1::uuid, $2::uuid, $3::text
+    ) as ref`,
+    [household, student, mutationRef],
+  )
+  return result.rows[0].ref
 }
 
 function checkpointRequest(
@@ -242,13 +297,27 @@ beforeAll(async () => {
   `)
   digestA = await issueDigest(GUARDIAN_A, STUDENT_A)
   digestB = await issueDigest(GUARDIAN_B, STUDENT_B)
-  const clock = await database.query<{ now: string }>(`
+  const clock = await database.query<{ now: string; local_a: string; local_b: string }>(`
     select to_char(
       clock_timestamp() at time zone 'UTC',
       'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'
-    ) as now
+    ) as now,
+    to_char(
+      (clock_timestamp() at time zone (
+        select household_timezone from public.academy_study_household_settings
+        where household_id = '${'00000000-0000-0000-0000-000000000011'}'::uuid
+      ))::date, 'YYYY-MM-DD'
+    ) as local_a,
+    to_char(
+      (clock_timestamp() at time zone (
+        select household_timezone from public.academy_study_household_settings
+        where household_id = '${'00000000-0000-0000-0000-000000000022'}'::uuid
+      ))::date, 'YYYY-MM-DD'
+    ) as local_b
   `)
   nowIso = clock.rows[0].now
+  localDateA = clock.rows[0].local_a
+  localDateB = clock.rows[0].local_b
 })
 
 afterAll(async () => {
@@ -256,22 +325,28 @@ afterAll(async () => {
 })
 
 describe('production session wire', () => {
-  it('begins a server-bound session and performs an exact narrow read', async () => {
-    const created = await begin(digestA, 'session.production.exact')
+  it('issues the session reference itself and performs an exact narrow read', async () => {
+    const created = await begin(digestA, 'mutation.begin.exact')
+    const sessionRef = (created.body as { sessionRef: string }).sessionRef
     expect(created).toMatchObject({
       schemaVersion: 2,
       status: 'ok',
       operation: 'session:begin',
-      body: { status: 'saved', sessionRef: 'session.production.exact', revision: 1 },
+      body: { status: 'saved', sessionRef, revision: 1 },
     })
+    // Server-owned: the reference is this wire's namespace plus a digest, and it
+    // is not anything the caller sent or could have predicted from its own input.
+    expect(sessionRef).toMatch(/^aca\.study\.session\.v1\.[0-9a-f]{64}$/)
+    expect(sessionRef).toBe(
+      await issuedSessionRef(database, HOUSEHOLD_A, STUDENT_A, 'mutation.begin.exact'),
+    )
+    expect(sessionRef).not.toContain('mutation.begin.exact')
 
-    const read = await execute(digestA, PROGRESS, 'session:read', {
-      sessionRef: 'session.production.exact',
-    })
+    const read = await execute(digestA, PROGRESS, 'session:read', { sessionRef })
     expect(read.body).toEqual({
       status: 'found',
       session: {
-        sessionRef: 'session.production.exact',
+        sessionRef,
         lessonRef: 'lesson.production.1',
         segmentRef: 'segment.1',
         status: 'active',
@@ -285,8 +360,22 @@ describe('production session wire', () => {
     expect(JSON.stringify(read)).not.toMatch(/household_id|student_id|approved_break|technical_interruption/)
   })
 
+  it('refuses a begin that tries to name its own session', async () => {
+    // The exact-key set has no sessionRef, so a caller proposing one is refused
+    // by the same rule that refuses any unknown key -- it is never ignored.
+    await expect(execute(digestA, ATTEMPTS, 'session:begin', {
+      session: { ...sessionRequest(), sessionRef: 'session.caller.named' },
+      mutationRef: 'mutation.begin.caller-named',
+    })).rejects.toThrow(/STUDY_PRODUCTION_SESSION_INVALID/)
+    const named = await database.query<{ count: number }>(`
+      select count(*)::integer as count from public.academy_study_sessions
+      where id = 'session.caller.named'
+    `)
+    expect(named.rows[0].count).toBe(0)
+  })
+
   it('returns the stable original result on duplicate replay and refuses a mutation collision', async () => {
-    const request = sessionRequest('session.production.replay')
+    const request = sessionRequest()
     const first = await execute(digestA, ATTEMPTS, 'session:begin', {
       session: request,
       mutationRef: 'mutation.session.replay',
@@ -304,10 +393,62 @@ describe('production session wire', () => {
     expect(collision.body).toEqual({ status: 'idempotency-collision' })
   })
 
+  it('keeps two mutation references from collapsing into one session', async () => {
+    // Distinct operations must stay distinct: two begins that differ only in
+    // their mutation reference are two begins, not one replayed.
+    const first = await beginRef(digestA, 'mutation.session.distinct.a')
+    const second = await beginRef(digestA, 'mutation.session.distinct.b')
+    expect(first).not.toBe(second)
+    const rows = await database.query<{ sessions: number; receipts: number }>(`
+      select
+        (select count(*)::integer from public.academy_study_sessions
+          where id = any($1::text[])) as sessions,
+        (select count(*)::integer from academy_private.study_mutation_receipts
+          where actor_scope = $2::text
+            and operation_kind = 'production_session_begin_v1'
+            and idempotency_key = any($3::text[])) as receipts
+    `, [
+      [first, second],
+      await learnerScope(database, STUDENT_A),
+      ['mutation.session.distinct.a', 'mutation.session.distinct.b'],
+    ])
+    expect(rows.rows[0]).toEqual({ sessions: 2, receipts: 2 })
+  })
+
+  it('never surfaces a raw unique-constraint failure when another lane already holds the reference', async () => {
+    // public.academy_study_create_session is still granted to authenticated and
+    // still inserts into public.academy_study_sessions without taking this
+    // wire's advisory lock. It can therefore, in principle, occupy a reference
+    // this authority would issue. When it has, begin must answer on its own
+    // closed terms -- never with a duplicate-key error naming a database object.
+    const mutationRef = 'mutation.session.foreign-lane'
+    const contested = await issuedSessionRef(database, HOUSEHOLD_A, STUDENT_A, mutationRef)
+    await database.query(`
+      insert into public.academy_study_sessions (
+        id, schema_version, household_id, student_id, lesson_id, subject_id,
+        study_plan_id, state, started_at, completed_at, intended_local_date,
+        household_timezone, created_by
+      ) values (
+        $1, 1, $2::uuid, $3::uuid, 'lesson.production.1', 'math', null,
+        'active', $4::timestamptz, null, $5::date, 'UTC', null
+      )
+    `, [contested, HOUSEHOLD_A, STUDENT_A, nowIso, localDateA])
+
+    const blocked = await begin(digestA, mutationRef)
+    expect(blocked.body).toEqual({ status: 'idempotency-collision' })
+    expect(JSON.stringify(blocked)).not.toMatch(/duplicate key|unique constraint|23505|_pkey/)
+
+    const projection = await database.query<{ count: number }>(`
+      select count(*)::integer as count
+      from academy_private.study_production_sessions where session_id = $1
+    `, [contested])
+    expect(projection.rows[0].count).toBe(0)
+  })
+
   it('enforces expected revision and a legal explicit state machine', async () => {
-    await begin(digestA, 'session.production.transitions')
+    const sessionRef = await beginRef(digestA, 'mutation.begin.transitions')
     const conflict = await execute(digestA, ATTEMPTS, 'session:transition', {
-      sessionRef: 'session.production.transitions',
+      sessionRef,
       expectedRevision: 9,
       transition: 'pause',
       segmentRef: 'segment.1',
@@ -318,7 +459,7 @@ describe('production session wire', () => {
     expect(conflict.body).toEqual({ status: 'revision-conflict', currentRevision: 1 })
 
     const paused = await execute(digestA, ATTEMPTS, 'session:transition', {
-      sessionRef: 'session.production.transitions',
+      sessionRef,
       expectedRevision: 1,
       transition: 'pause',
       segmentRef: 'segment.1',
@@ -329,7 +470,7 @@ describe('production session wire', () => {
     expect(paused.body).toEqual({ status: 'saved', revision: 2 })
 
     await expect(execute(digestA, ATTEMPTS, 'session:transition', {
-      sessionRef: 'session.production.transitions',
+      sessionRef,
       expectedRevision: 2,
       transition: 'pause',
       segmentRef: 'segment.1',
@@ -342,10 +483,10 @@ describe('production session wire', () => {
 
 describe('minimal checkpoint CAS', () => {
   it('stores, exactly reads, replays and refuses revision and mutation conflicts', async () => {
-    await begin(digestA, 'session.checkpoint.main')
-    const checkpoint = checkpointRequest('session.checkpoint.main', 1)
+    const sessionRef = await beginRef(digestA, 'mutation.begin.checkpoint-main')
+    const checkpoint = checkpointRequest(sessionRef, 1)
     const first = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
-      sessionRef: 'session.checkpoint.main',
+      sessionRef,
       expectedRevision: null,
       mutationRef: 'mutation.checkpoint.main',
       checkpoint,
@@ -353,7 +494,7 @@ describe('minimal checkpoint CAS', () => {
     expect(first.body).toEqual({ status: 'saved', revision: 1 })
 
     const replay = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
-      sessionRef: 'session.checkpoint.main',
+      sessionRef,
       expectedRevision: null,
       mutationRef: 'mutation.checkpoint.main',
       checkpoint,
@@ -361,24 +502,22 @@ describe('minimal checkpoint CAS', () => {
     expect(replay.body).toEqual(first.body)
 
     const collision = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
-      sessionRef: 'session.checkpoint.main',
+      sessionRef,
       expectedRevision: null,
       mutationRef: 'mutation.checkpoint.main',
-      checkpoint: { ...checkpoint, segmentRef: 'segment.collision' },
+      checkpoint: checkpointRequest(sessionRef, 1, { segmentRef: 'segment.other' }),
     })
     expect(collision.body).toEqual({ status: 'idempotency-collision' })
 
     const conflict = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
-      sessionRef: 'session.checkpoint.main',
+      sessionRef,
       expectedRevision: 5,
       mutationRef: 'mutation.checkpoint.conflict',
-      checkpoint: checkpointRequest('session.checkpoint.main', 6),
+      checkpoint: checkpointRequest(sessionRef, 6),
     })
     expect(conflict.body).toEqual({ status: 'revision-conflict', currentRevision: 1 })
 
-    const read = await execute(digestA, PROGRESS, 'checkpoint:read', {
-      sessionRef: 'session.checkpoint.main',
-    })
+    const read = await execute(digestA, PROGRESS, 'checkpoint:read', { sessionRef })
     expect(read.body).toEqual({ status: 'found', checkpoint })
     const canonicalDraft = await database.query<{
       stored_draft_ref: string | null
@@ -392,8 +531,8 @@ describe('minimal checkpoint CAS', () => {
         on receipt.actor_scope = 'session:' || checkpoint.session_id
        and receipt.operation_kind = 'production_checkpoint_cas_v1'
        and receipt.idempotency_key = 'mutation.checkpoint.main'
-      where checkpoint.session_id = 'session.checkpoint.main'
-    `)
+      where checkpoint.session_id = $1
+    `, [sessionRef])
     expect(canonicalDraft.rows[0]).toEqual({
       stored_draft_ref: null,
       fingerprint_draft_type: 'null',
@@ -401,13 +540,13 @@ describe('minimal checkpoint CAS', () => {
   })
 
   it('has no storage path for private learner content and quarantines malformed input', async () => {
-    await begin(digestA, 'session.checkpoint.privacy')
+    const sessionRef = await beginRef(digestA, 'mutation.begin.checkpoint-privacy')
     const poisoned = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
-      sessionRef: 'session.checkpoint.privacy',
+      sessionRef,
       expectedRevision: null,
       mutationRef: 'mutation.checkpoint.poisoned',
       checkpoint: {
-        ...checkpointRequest('session.checkpoint.privacy', 1),
+        ...checkpointRequest(sessionRef, 1),
         rawAnswer: 'learner answer must never persist',
       },
     })
@@ -427,16 +566,17 @@ describe('minimal checkpoint CAS', () => {
     const count = await database.query<{ count: number }>(`
       select count(*)::integer as count
       from academy_private.study_production_session_checkpoints
-      where session_id = 'session.checkpoint.privacy'
-    `)
+      where session_id = $1
+    `, [sessionRef])
     expect(count.rows[0].count).toBe(0)
   })
 
-  it('rejects caller-controlled response draft references without persisting or echoing them', async () => {
-    const sessionRef = 'session.checkpoint.raw-draft'
+  it('refuses a response draft reference on its own closed terms, not as a quarantine', async () => {
+    const sessionRef = await beginRef(digestA, 'mutation.begin.raw-draft')
     const mutationRef = 'mutation.checkpoint.raw-draft'
-    const rawDraftRef = 'draft:my_raw_answer_is_four'
-    await begin(digestA, sessionRef)
+    // High-entropy, so a substring scan over every durable text and jsonb column
+    // in the schema is a real search rather than a coincidence hunt.
+    const rawDraftRef = 'draft:zq7x4m2v9k1t6r8w3n5p0j-my-raw-answer-is-four'
 
     const rejected = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
       sessionRef,
@@ -444,6 +584,19 @@ describe('minimal checkpoint CAS', () => {
       mutationRef,
       checkpoint: checkpointRequest(sessionRef, 1, { responseDraftRef: rawDraftRef }),
     })
+
+    // Explicit closed semantics: its own status, naming the field and nothing else.
+    expect(rejected.body).toEqual({
+      status: 'unsupported-field',
+      field: 'responseDraftRef',
+    })
+    // Distinguishable from integrity quarantine, which is what the wire says when
+    // stored state disagrees with itself and no caller can act on it.
+    expect((rejected.body as { status: string }).status).not.toBe('quarantined')
+    // Never echoed.
+    expect(JSON.stringify(rejected)).not.toContain(rawDraftRef)
+    expect(JSON.stringify(rejected)).not.toContain('my-raw-answer-is-four')
+
     const durable = await database.query<{
       checkpoints: number
       receipts: number
@@ -478,6 +631,7 @@ describe('minimal checkpoint CAS', () => {
           from academy_private.study_mutation_receipts
           where strpos(request_fingerprint::text, $4) > 0
              or strpos(result::text, $4) > 0
+             or strpos(request_digest, $4) > 0
           union all
           select 1
           from public.academy_study_audit_events
@@ -486,8 +640,6 @@ describe('minimal checkpoint CAS', () => {
         ) as leaked
     `, [sessionRef, mutationRef, `checkpoint.${sessionRef}.1`, rawDraftRef])
 
-    expect(rejected.body).toEqual({ status: 'quarantined' })
-    expect(JSON.stringify(rejected)).not.toContain(rawDraftRef)
     expect(durable.rows[0]).toEqual({
       checkpoints: 0,
       receipts: 0,
@@ -496,40 +648,167 @@ describe('minimal checkpoint CAS', () => {
     })
   })
 
-  it('quarantines a checkpoint whose stored integrity no longer verifies', async () => {
-    await begin(digestA, 'session.checkpoint.integrity')
+  it('leaves the refused draft reference in no text or jsonb column anywhere', async () => {
+    // The targeted scan above knows where to look. This one does not: it asks the
+    // catalogue for every text and jsonb column the study surface owns and greps
+    // all of them, so a future column cannot become a quiet storage path.
+    const sessionRef = await beginRef(digestA, 'mutation.begin.raw-draft-sweep')
+    const rawDraftRef = 'draft:h3f8q1s5d9g2k7l4z0b6c-answer-text-sentinel'
     await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
-      sessionRef: 'session.checkpoint.integrity',
+      sessionRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.checkpoint.raw-draft-sweep',
+      checkpoint: checkpointRequest(sessionRef, 1, { responseDraftRef: rawDraftRef }),
+    })
+
+    const columns = await database.query<{
+      table_schema: string
+      table_name: string
+      column_name: string
+    }>(`
+      select columns.table_schema, columns.table_name, columns.column_name
+      from information_schema.columns as columns
+      join information_schema.tables as tables
+        on tables.table_schema = columns.table_schema
+       and tables.table_name = columns.table_name
+       and tables.table_type = 'BASE TABLE'
+      where columns.table_schema in ('academy_private', 'public')
+        and columns.data_type in ('text', 'jsonb', 'character varying', 'ARRAY')
+      order by columns.table_schema, columns.table_name, columns.column_name
+    `)
+    expect(columns.rows.length).toBeGreaterThan(50)
+
+    const hits: string[] = []
+    for (const column of columns.rows) {
+      const found = await database.query<{ hit: boolean }>(`
+        select exists (
+          select 1 from "${column.table_schema}"."${column.table_name}"
+          where strpos("${column.column_name}"::text, $1) > 0
+        ) as hit
+      `, [rawDraftRef])
+      if (found.rows[0].hit) {
+        hits.push(`${column.table_schema}.${column.table_name}.${column.column_name}`)
+      }
+    }
+    expect(hits).toEqual([])
+  })
+
+  it('fails closed on a refused draft reference at the null initial revision and at an established one', async () => {
+    const sessionRef = await beginRef(digestA, 'mutation.begin.raw-draft-closed')
+    const rawDraftRef = 'draft:p2w8e4r6t0y1u5i9o3a7s-closed'
+
+    // Null initial checkpoint revision: nothing exists, and the refusal creates nothing.
+    const atNull = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.checkpoint.closed.null',
+      checkpoint: checkpointRequest(sessionRef, 1, { responseDraftRef: rawDraftRef }),
+    })
+    expect(atNull.body).toEqual({ status: 'unsupported-field', field: 'responseDraftRef' })
+    const empty = await execute(digestA, PROGRESS, 'checkpoint:read', { sessionRef })
+    expect(empty.body).toEqual({ status: 'not-found' })
+
+    // Establish a real checkpoint, then refuse again and prove the revision did not move.
+    const saved = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.checkpoint.closed.saved',
+      checkpoint: checkpointRequest(sessionRef, 1),
+    })
+    expect(saved.body).toEqual({ status: 'saved', revision: 1 })
+
+    const before = await database.query<{ revision: number; digest: string }>(`
+      select revision::integer as revision, integrity_digest as digest
+      from academy_private.study_production_session_checkpoints where session_id = $1
+    `, [sessionRef])
+    const atOne = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: 1,
+      mutationRef: 'mutation.checkpoint.closed.established',
+      checkpoint: checkpointRequest(sessionRef, 2, { responseDraftRef: rawDraftRef }),
+    })
+    expect(atOne.body).toEqual({ status: 'unsupported-field', field: 'responseDraftRef' })
+    const after = await database.query<{ revision: number; digest: string }>(`
+      select revision::integer as revision, integrity_digest as digest
+      from academy_private.study_production_session_checkpoints where session_id = $1
+    `, [sessionRef])
+    expect(after.rows[0]).toEqual(before.rows[0])
+  })
+
+  it('still saves and exactly reads a checkpoint whose response draft reference is null', async () => {
+    const sessionRef = await beginRef(digestA, 'mutation.begin.raw-draft-null')
+    const checkpoint = checkpointRequest(sessionRef, 1)
+    const saved = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.checkpoint.null-draft',
+      checkpoint,
+    })
+    expect(saved.body).toEqual({ status: 'saved', revision: 1 })
+    const read = await execute(digestA, PROGRESS, 'checkpoint:read', { sessionRef })
+    expect(read.body).toEqual({ status: 'found', checkpoint })
+
+    // Omitting the key entirely is a shape violation, not an unsupported field,
+    // and stays on the quarantine token it has always used.
+    const { responseDraftRef: _omitted, ...withoutKey } = checkpointRequest(sessionRef, 2)
+    const missing = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: 1,
+      mutationRef: 'mutation.checkpoint.absent-draft',
+      checkpoint: withoutKey,
+    })
+    expect(missing.body).toEqual({ status: 'quarantined' })
+  })
+
+  it('quarantines a checkpoint whose stored integrity no longer verifies', async () => {
+    const sessionRef = await beginRef(digestA, 'mutation.begin.checkpoint-integrity')
+    await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
       expectedRevision: null,
       mutationRef: 'mutation.checkpoint.integrity',
-      checkpoint: checkpointRequest('session.checkpoint.integrity', 1),
+      checkpoint: checkpointRequest(sessionRef, 1),
     })
+    // The digest is trigger-maintained, so corrupting it means moving the data
+    // out from under it rather than writing a wrong digest.
     await database.exec(`
       alter table academy_private.study_production_session_checkpoints
         disable trigger study_production_checkpoint_20_integrity;
       update academy_private.study_production_session_checkpoints
       set elapsed_active_seconds_in_segment = 999
-      where session_id = 'session.checkpoint.integrity';
+      where session_id = '${sessionRef}';
       alter table academy_private.study_production_session_checkpoints
         enable trigger study_production_checkpoint_20_integrity;
     `)
-    const read = await execute(digestA, PROGRESS, 'checkpoint:read', {
-      sessionRef: 'session.checkpoint.integrity',
-    })
+    const stored = await database.query<{ revision: number }>(`
+      select revision::integer as revision
+      from academy_private.study_production_session_checkpoints where session_id = $1
+    `, [sessionRef])
+    const revision = stored.rows[0].revision
+
+    const read = await execute(digestA, PROGRESS, 'checkpoint:read', { sessionRef })
     expect(read.body).toEqual({ status: 'quarantined', reasonCode: 'integrity-failed' })
+    const rejected = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef,
+      expectedRevision: revision,
+      mutationRef: 'mutation.checkpoint.integrity.write',
+      checkpoint: checkpointRequest(sessionRef, revision + 1),
+    })
+    // Integrity disagreement stays fail-closed on the quarantine token, and that
+    // token is not the one an unsupported field gets.
+    expect(rejected.body).toEqual({ status: 'quarantined' })
+    expect((rejected.body as { status: string }).status).not.toBe('unsupported-field')
   })
 
   it('refuses checkpoint writes when the core session diverges from its projection', async () => {
-    const sessionRef = 'session.checkpoint.core-divergence'
+    const sessionRef = await beginRef(digestA, 'mutation.begin.core-divergence')
     const mutationRef = 'mutation.checkpoint.core-divergence'
     const checkpointRef = `checkpoint.${sessionRef}.1`
-    await begin(digestA, sessionRef)
-    await database.exec(`
+    await database.query(`
       update public.academy_study_sessions
       set lesson_id = 'lesson.production.diverged',
           state = 'paused'
-      where id = '${sessionRef}';
-    `)
+      where id = $1
+    `, [sessionRef])
 
     const exactRead = await execute(digestA, PROGRESS, 'session:read', { sessionRef })
     const rejected = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
@@ -697,7 +976,7 @@ describe('production calendar state and completion', () => {
 describe('authority, isolation and readiness', () => {
   it('denies an invalid grant and refuses direct operation execution', async () => {
     const denied = await execute('0'.repeat(64), ATTEMPTS, 'session:begin', {
-      session: sessionRequest('session.denied'),
+      session: sessionRequest(),
       mutationRef: 'mutation.denied',
     })
     expect(denied).toEqual({
@@ -724,7 +1003,7 @@ describe('authority, isolation and readiness', () => {
       await expect(database.query(`
         select public.academy_study_execute_verified_runtime_v2(
           '${digestA}', '${PROGRESS}', 'session:read',
-          '{"sessionRef":"session.production.exact"}'::jsonb
+          '{"sessionRef":"aca.study.session.v1.probe"}'::jsonb
         )
       `)).rejects.toThrow(/STUDY_TRUSTED_SERVER_REQUIRED/)
     } finally {
@@ -738,34 +1017,142 @@ describe('authority, isolation and readiness', () => {
   })
 
   it('isolates sessions and checkpoints across learners and sessions', async () => {
-    await begin(digestB, 'session.foreign.learner')
-    await expect(begin(
-      digestA,
-      'session.foreign.learner',
-      'mutation.begin.session.foreign.learner',
-    )).rejects.toThrow(/STUDY_OPERATION_NOT_AVAILABLE/)
+    // Household B keeps its own timezone, so its local date is its own too.
+    const foreignRef = await beginRef(digestB, 'mutation.begin.foreign-learner', {
+      intendedLocalDate: localDateB,
+    })
+
+    // Two learners reusing one mutation reference are still two begins: the
+    // reference is issued out of each learner's own binding, so learner A cannot
+    // land on learner B's session even by naming B's mutation identity.
+    const ownRef = await beginRef(digestA, 'mutation.begin.foreign-learner')
+    expect(ownRef).not.toBe(foreignRef)
+    expect(foreignRef).toBe(
+      await issuedSessionRef(database, HOUSEHOLD_B, STUDENT_B, 'mutation.begin.foreign-learner'),
+    )
+
     await execute(digestB, ATTEMPTS, 'checkpoint:compare-and-swap', {
-      sessionRef: 'session.foreign.learner',
+      sessionRef: foreignRef,
       expectedRevision: null,
       mutationRef: 'mutation.foreign.checkpoint',
-      checkpoint: checkpointRequest('session.foreign.learner', 1),
+      checkpoint: checkpointRequest(foreignRef, 1),
     })
     await expect(execute(digestA, PROGRESS, 'session:read', {
-      sessionRef: 'session.foreign.learner',
+      sessionRef: foreignRef,
     })).rejects.toThrow(/STUDY_OPERATION_NOT_AVAILABLE/)
     await expect(execute(digestA, PROGRESS, 'checkpoint:read', {
-      sessionRef: 'session.foreign.learner',
+      sessionRef: foreignRef,
     })).rejects.toThrow(/STUDY_OPERATION_NOT_AVAILABLE/)
 
-    await begin(digestA, 'session.cross.one')
-    await begin(digestA, 'session.cross.two')
+    const one = await beginRef(digestA, 'mutation.begin.cross-one')
+    const two = await beginRef(digestA, 'mutation.begin.cross-two')
     const crossSession = await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
-      sessionRef: 'session.cross.one',
+      sessionRef: one,
       expectedRevision: null,
       mutationRef: 'mutation.cross.session',
-      checkpoint: checkpointRequest('session.cross.two', 1),
+      checkpoint: checkpointRequest(two, 1),
     })
     expect(crossSession.body).toEqual({ status: 'quarantined' })
+  })
+
+  it('adds no idempotency contract over an identifier a caller can already name', async () => {
+    // Condition 1's sixth clause, proved against a real row of the older
+    // contract rather than by inference. academy_study_create_session is the
+    // begin the learner lane already had; it is still granted to authenticated
+    // and it keys session_create_v1 on 'session:' plus an id its caller picked.
+    const learner = await learnerScope(database, STUDENT_A)
+    const beganRef = await beginRef(digestA, 'mutation.census.begin')
+    await execute(digestA, ATTEMPTS, 'checkpoint:compare-and-swap', {
+      sessionRef: beganRef,
+      expectedRevision: null,
+      mutationRef: 'mutation.census.checkpoint',
+      checkpoint: checkpointRequest(beganRef, 1),
+    })
+    await asRole('authenticated', GUARDIAN_A, () => database.query(`
+      select public.academy_study_create_session($1::jsonb, $2::text)
+    `, [
+      JSON.stringify({
+        id: 'session.legacy.census',
+        schema_version: '1',
+        student_id: STUDENT_A,
+        lesson_id: 'lesson.production.1',
+        subject_id: 'math',
+        study_plan_id: null,
+        state: 'active',
+        started_at: nowIso,
+        completed_at: null,
+        intended_local_date: localDateA,
+      }),
+      'mutation.legacy.census',
+    ]))
+
+    const rows = await database.query<{ actor_scope: string; operation_kind: string }>(`
+      select distinct actor_scope, operation_kind
+      from academy_private.study_mutation_receipts
+      where operation_kind in ('session_create_v1', 'production_session_begin_v1')
+      order by operation_kind, actor_scope
+    `)
+    const legacy = rows.rows.filter((row) => row.operation_kind === 'session_create_v1')
+    const wire = rows.rows.filter((row) => row.operation_kind === 'production_session_begin_v1')
+    expect(legacy.length).toBeGreaterThan(0)
+    expect(wire.length).toBeGreaterThan(0)
+
+    // The older contract addresses a caller-chosen identifier; this one does not
+    // address an identifier at all. Disjoint key spaces, so neither can be
+    // reached by replaying the other's key.
+    expect(legacy.every((row) => row.actor_scope.startsWith('session:'))).toBe(true)
+    // Every begin receipt on this wire -- both learners' -- lives under a learner
+    // token, never under an identifier. Learner A's is A's own.
+    expect(wire.every((row) => /^learner:[0-9a-f]{64}$/.test(row.actor_scope))).toBe(true)
+    expect(wire.map((row) => row.actor_scope)).toContain(learner)
+    expect(learner).toMatch(/^learner:[0-9a-f]{64}$/)
+    expect(
+      legacy.some((row) => wire.some((other) => other.actor_scope === row.actor_scope)),
+    ).toBe(false)
+
+    // And the learner scope carries this one contract and nothing else.
+    const underLearner = await database.query<{ operation_kind: string }>(`
+      select distinct operation_kind from academy_private.study_mutation_receipts
+      where actor_scope = $1
+    `, [learner])
+    expect(underLearner.rows.map((row) => row.operation_kind))
+      .toEqual(['production_session_begin_v1'])
+  })
+
+  it('dispatches every operation the production authority admits', async () => {
+    // A map entry with no CASE arm falls out of the executor as case_not_found
+    // (20000), which is a different failure from a refused request. Every
+    // admitted operation must reach its own arm and refuse this one on its own
+    // terms, so an operation cannot be added to the map and go unrouted -- which
+    // is what keeps two operations from quietly sharing one arm.
+    const authority = await database.query<{ contract: Record<string, string> }>(
+      'select academy_private.study_production_runtime_operation_contract() as contract',
+    )
+    const contract = authority.rows[0].contract
+    expect(Object.keys(contract).length).toBe(10)
+    for (const [operation, capability] of Object.entries(contract)) {
+      await expect(
+        execute(digestA, capability, operation, { unroutableKey: 1 }),
+        operation,
+      ).rejects.toThrow(/STUDY_RUNTIME_REQUEST_INVALID/)
+    }
+  })
+
+  it('leaves the wire helpers executable by nobody', async () => {
+    const helpers = await database.query<{ name: string; anon: boolean; auth: boolean; svc: boolean }>(`
+      select p.oid::regprocedure::text as name,
+        has_function_privilege('anon', p.oid, 'execute') as anon,
+        has_function_privilege('authenticated', p.oid, 'execute') as auth,
+        has_function_privilege('service_role', p.oid, 'execute') as svc
+      from pg_catalog.pg_proc as p
+      join pg_catalog.pg_namespace as n on n.oid = p.pronamespace
+      where n.nspname = 'academy_private' and p.proname like 'study_production_%'
+      order by 1
+    `)
+    // Postgres grants EXECUTE to PUBLIC by default, so a helper added without a
+    // revoke would be reachable. Every one of them is named here by catalogue.
+    expect(helpers.rows.length).toBe(10)
+    expect(helpers.rows.filter((row) => row.anon || row.auth || row.svc)).toEqual([])
   })
 
   it('reports database contract presence but remains false before adapter composition', async () => {
@@ -867,6 +1254,7 @@ describe('production session begin on independent PostgreSQL backends', () => {
   let cleanupPromise: Promise<void> | null = null
   let postgresDigestA: string
   let postgresNowIso: string
+  let postgresLocalDateA: string
 
   async function cleanupServer() {
     if (cleanupPromise) return cleanupPromise
@@ -928,19 +1316,17 @@ describe('production session begin on independent PostgreSQL backends', () => {
 
   async function executePostgresBegin(
     client: pg.Client,
-    sessionRef: string,
     mutationRef: string,
     overrides: Record<string, unknown> = {},
   ): Promise<RuntimeEnvelope> {
     const request = {
       session: {
-        sessionRef,
         lessonRef: 'lesson.production.1',
         subjectRef: 'math',
         studyPlanRef: null,
         segmentRef: 'segment.1',
         startedAt: postgresNowIso,
-        intendedLocalDate: postgresNowIso.slice(0, 10),
+        intendedLocalDate: postgresLocalDateA,
         lastAcceptedEventRef: null,
         rawAnswerIncluded: false,
         transcriptIncluded: false,
@@ -957,7 +1343,11 @@ describe('production session begin on independent PostgreSQL backends', () => {
     return result.rows[0].result
   }
 
-  async function waitForSerializedBackends(pids: number[], controllerPid: number) {
+  async function waitForSerializedBackends(
+    pids: number[],
+    controllerPid: number,
+    controllerLocks: number,
+  ) {
     const deadline = Date.now() + 10_000
     let lastActivity: Array<{
       pid: number
@@ -984,18 +1374,18 @@ describe('production session begin on independent PostgreSQL backends', () => {
       `, [[...pids, controllerPid]])
       lastActivity = activity.rows
       lastAdvisory = advisoryLocks.rows
+      const ungranted = advisoryLocks.rows.filter((row) => !row.granted)
+      const granted = advisoryLocks.rows.filter((row) => row.granted)
       if (
         activity.rows.length === pids.length &&
         activity.rows.every((row) => row.wait_event_type === 'Lock') &&
-        advisoryLocks.rows.length === 3 &&
-        advisoryLocks.rows[0].granted === false &&
-        advisoryLocks.rows[1].granted === false &&
-        advisoryLocks.rows[2].pid === controllerPid &&
-        advisoryLocks.rows[2].granted === true
+        ungranted.length === pids.length &&
+        granted.length === controllerLocks &&
+        granted.every((row) => row.pid === controllerPid)
       ) {
         return [
-          { granted: false, count: 2 },
-          { granted: true, count: 1 },
+          { granted: false, count: ungranted.length },
+          { granted: true, count: granted.length },
         ]
       }
       await postgresDelay(20)
@@ -1005,50 +1395,65 @@ describe('production session begin on independent PostgreSQL backends', () => {
     )
   }
 
+  /**
+   * Holds the begin lock for each reference the two callers will be issued, so
+   * both backends are inside the operation and blocked before either is released.
+   *
+   * The lock key is read from academy_private.study_production_session_ref rather
+   * than recomputed here: the barrier has to contend with the operation, not with
+   * a second copy of the operation's formula.
+   */
   async function runBeginBarrier(
-    sessionRef: string,
     mutationRefA: string,
     mutationRefB: string,
     overridesA: Record<string, unknown> = {},
     overridesB: Record<string, unknown> = {},
   ) {
+    const refs = [
+      await issuedSessionRef(controller, HOUSEHOLD_A, STUDENT_A, mutationRefA),
+      await issuedSessionRef(controller, HOUSEHOLD_A, STUDENT_A, mutationRefB),
+    ]
+    const distinctRefs = [...new Set(refs)]
     let barrierOpen = false
     let settledPromise: Promise<PromiseSettledResult<RuntimeEnvelope>[]> | undefined
     try {
       await controller.query('begin')
       barrierOpen = true
-      await controller.query(
-        `select pg_catalog.pg_advisory_xact_lock(
-          pg_catalog.hashtext('academy:study:production-session:v1'),
-          pg_catalog.hashtext($1)
-        )`,
-        [sessionRef],
-      )
+      for (const ref of distinctRefs) {
+        await controller.query(
+          `select pg_catalog.pg_advisory_xact_lock(
+            pg_catalog.hashtext('academy:study:production-session:v1'),
+            pg_catalog.hashtext($1)
+          )`,
+          [ref],
+        )
+      }
       const [controllerPidResult, ...pids] = await Promise.all([
         controller.query<{ pid: number }>('select pg_backend_pid() as pid'),
         clientA.query<{ pid: number }>('select pg_backend_pid() as pid'),
         clientB.query<{ pid: number }>('select pg_backend_pid() as pid'),
       ])
       settledPromise = Promise.allSettled([
-        executePostgresBegin(clientA, sessionRef, mutationRefA, overridesA),
-        executePostgresBegin(clientB, sessionRef, mutationRefB, overridesB),
+        executePostgresBegin(clientA, mutationRefA, overridesA),
+        executePostgresBegin(clientB, mutationRefB, overridesB),
       ])
       const backendPids = pids.map((result) => result.rows[0].pid)
       const advisory = await waitForSerializedBackends(
         backendPids,
         controllerPidResult.rows[0].pid,
+        distinctRefs.length,
       )
       await controller.query('commit')
       barrierOpen = false
       const settled = await settledPromise
-      return { advisory, backendPids, settled }
+      return { advisory, backendPids, settled, refs, distinctRefs }
     } finally {
       if (barrierOpen) await controller.query('rollback')
       if (settledPromise) await settledPromise
     }
   }
 
-  async function sessionWriteCounts(sessionRef: string) {
+  async function sessionWriteCounts(sessionRefs: string[], mutationRefs: string[]) {
     const result = await controller.query<{
       core_rows: number
       projection_rows: number
@@ -1057,15 +1462,16 @@ describe('production session begin on independent PostgreSQL backends', () => {
     }>(`
       select
         (select count(*)::integer from public.academy_study_sessions
-          where id = $1) as core_rows,
+          where id = any($1::text[])) as core_rows,
         (select count(*)::integer from academy_private.study_production_sessions
-          where session_id = $1) as projection_rows,
+          where session_id = any($1::text[])) as projection_rows,
         (select count(*)::integer from academy_private.study_mutation_receipts
-          where actor_scope = 'session:' || $1
-            and operation_kind = 'production_session_begin_v1') as receipt_rows,
+          where actor_scope = $2::text
+            and operation_kind = 'production_session_begin_v1'
+            and idempotency_key = any($3::text[])) as receipt_rows,
         (select count(*)::integer from public.academy_study_audit_events
-          where event_type = 'session.start' and target_id = $1) as audit_rows
-    `, [sessionRef])
+          where event_type = 'session.start' and target_id = any($1::text[])) as audit_rows
+    `, [sessionRefs, await learnerScope(controller, STUDENT_A), mutationRefs])
     return result.rows[0]
   }
 
@@ -1123,13 +1529,20 @@ describe('production session begin on independent PostgreSQL backends', () => {
         .update(String(issued.rows[0].result.sessionReference), 'ascii')
         .digest('hex')
       await resetPostgresRole(controller)
-      const clock = await controller.query<{ now: string }>(`
+      const clock = await controller.query<{ now: string; local_a: string }>(`
         select to_char(
           clock_timestamp() at time zone 'UTC',
           'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'
-        ) as now
-      `)
+        ) as now,
+        to_char(
+          (clock_timestamp() at time zone (
+            select household_timezone from public.academy_study_household_settings
+            where household_id = $1::uuid
+          ))::date, 'YYYY-MM-DD'
+        ) as local_a
+      `, [HOUSEHOLD_A])
       postgresNowIso = clock.rows[0].now
+      postgresLocalDateA = clock.rows[0].local_a
       await Promise.all([
         configurePostgresRole(clientA, 'service_role', null),
         configurePostgresRole(clientB, 'service_role', null),
@@ -1161,13 +1574,12 @@ describe('production session begin on independent PostgreSQL backends', () => {
   })
 
   it('serializes identical simultaneous begins into one saved result and one replay', async () => {
-    const sessionRef = 'session.production.concurrent-identical'
     const mutationRef = 'mutation.session.concurrent-identical'
-    const { advisory, backendPids, settled } = await runBeginBarrier(
-      sessionRef,
+    const { advisory, backendPids, settled, distinctRefs } = await runBeginBarrier(
       mutationRef,
       mutationRef,
     )
+    const sessionRef = distinctRefs[0]
     console.info(
       `Production begin identical outcomes: ${settled.map((result) =>
         result.status === 'fulfilled'
@@ -1175,6 +1587,7 @@ describe('production session begin on independent PostgreSQL backends', () => {
           : `rejected:${String((result.reason as { code?: unknown }).code ?? 'unknown')}`
       ).join(',')}`,
     )
+    expect(distinctRefs).toHaveLength(1)
     expect(advisory).toEqual([
       { granted: false, count: 2 },
       { granted: true, count: 1 },
@@ -1184,11 +1597,13 @@ describe('production session begin on independent PostgreSQL backends', () => {
       if (result.status === 'rejected') throw result.reason
       return result.value.body
     })
+    // Both callers are told the same thing, including the same server-issued
+    // reference: the second is a replay of the first, not a second session.
     expect(bodies).toEqual([
       { status: 'saved', sessionRef, revision: 1 },
       { status: 'saved', sessionRef, revision: 1 },
     ])
-    expect(await sessionWriteCounts(sessionRef)).toEqual({
+    expect(await sessionWriteCounts([sessionRef], [mutationRef])).toEqual({
       core_rows: 1,
       projection_rows: 1,
       receipt_rows: 1,
@@ -1200,15 +1615,14 @@ describe('production session begin on independent PostgreSQL backends', () => {
   }, 30_000)
 
   it('collides simultaneous different intent under the same mutation identity', async () => {
-    const sessionRef = 'session.production.concurrent-different-intent'
     const mutationRef = 'mutation.session.concurrent-different-intent'
-    const { advisory, settled } = await runBeginBarrier(
-      sessionRef,
+    const { advisory, settled, distinctRefs } = await runBeginBarrier(
       mutationRef,
       mutationRef,
       { segmentRef: 'segment.concurrent.a' },
       { segmentRef: 'segment.concurrent.b' },
     )
+    const sessionRef = distinctRefs[0]
     expect(advisory).toEqual([
       { granted: false, count: 2 },
       { granted: true, count: 1 },
@@ -1222,7 +1636,7 @@ describe('production session begin on independent PostgreSQL backends', () => {
       'idempotency-collision',
       'saved',
     ])
-    expect(await sessionWriteCounts(sessionRef)).toEqual({
+    expect(await sessionWriteCounts([sessionRef], [mutationRef])).toEqual({
       core_rows: 1,
       projection_rows: 1,
       receipt_rows: 1,
@@ -1230,12 +1644,12 @@ describe('production session begin on independent PostgreSQL backends', () => {
     })
   }, 30_000)
 
-  it('rechecks missing-session state after serialization for distinct mutations', async () => {
-    const sessionRef = 'session.production.concurrent-distinct'
-    const { advisory, settled } = await runBeginBarrier(
-      sessionRef,
-      'mutation.session.concurrent-distinct-a',
-      'mutation.session.concurrent-distinct-b',
+  it('keeps two simultaneous mutation identities from collapsing into one session', async () => {
+    const mutationRefA = 'mutation.session.concurrent-distinct-a'
+    const mutationRefB = 'mutation.session.concurrent-distinct-b'
+    const { advisory, settled, refs, distinctRefs } = await runBeginBarrier(
+      mutationRefA,
+      mutationRefB,
     )
     console.info(
       `Production begin distinct-mutation outcomes: ${settled.map((result) =>
@@ -1244,25 +1658,97 @@ describe('production session begin on independent PostgreSQL backends', () => {
           : `rejected:${String((result.reason as { code?: unknown }).code ?? 'unknown')}`
       ).join(',')}`,
     )
+    // Two mutation identities are two begins. They are issued different
+    // references, so they contend with the barrier and never with each other.
+    expect(distinctRefs).toHaveLength(2)
     expect(advisory).toEqual([
       { granted: false, count: 2 },
-      { granted: true, count: 1 },
+      { granted: true, count: 2 },
     ])
     expect(settled.every((result) => result.status === 'fulfilled')).toBe(true)
     const bodies = settled.map((result) => {
       if (result.status === 'rejected') throw result.reason
       return result.value.body
     })
-    expect(bodies.map((body) => body?.status).sort()).toEqual([
-      'idempotency-collision',
-      'saved',
+    expect(bodies).toEqual([
+      { status: 'saved', sessionRef: refs[0], revision: 1 },
+      { status: 'saved', sessionRef: refs[1], revision: 1 },
     ])
-    expect(await sessionWriteCounts(sessionRef)).toEqual({
-      core_rows: 1,
-      projection_rows: 1,
+    expect(await sessionWriteCounts(distinctRefs, [mutationRefA, mutationRefB])).toEqual({
+      core_rows: 2,
+      projection_rows: 2,
       receipt_rows: 2,
-      audit_rows: 1,
+      audit_rows: 2,
     })
+  }, 30_000)
+
+  it('answers closed, never with a duplicate-key error, when another lane wins the reference', async () => {
+    // The one race this wire cannot lock away: public.academy_study_create_session
+    // is granted to authenticated and inserts into public.academy_study_sessions
+    // without taking this lock. Here it wins -- the row lands while a begin is
+    // already inside the operation and blocked -- and the begin still has to
+    // answer on its own terms rather than re-raise SQLSTATE 23505.
+    const mutationRef = 'mutation.session.concurrent-foreign-lane'
+    const contested = await issuedSessionRef(
+      controller, HOUSEHOLD_A, STUDENT_A, mutationRef,
+    )
+    let barrierOpen = false
+    let pending: Promise<RuntimeEnvelope> | undefined
+    let settled: PromiseSettledResult<RuntimeEnvelope>
+    try {
+      await controller.query('begin')
+      barrierOpen = true
+      await controller.query(
+        `select pg_catalog.pg_advisory_xact_lock(
+          pg_catalog.hashtext('academy:study:production-session:v1'),
+          pg_catalog.hashtext($1)
+        )`,
+        [contested],
+      )
+      const [controllerPid, backendPid] = await Promise.all([
+        controller.query<{ pid: number }>('select pg_backend_pid() as pid'),
+        clientA.query<{ pid: number }>('select pg_backend_pid() as pid'),
+      ])
+      pending = executePostgresBegin(clientA, mutationRef)
+      await waitForSerializedBackends(
+        [backendPid.rows[0].pid],
+        controllerPid.rows[0].pid,
+        1,
+      )
+      // The other lane's row, written exactly as academy_study_create_session
+      // writes it, while the begin is blocked and cannot see it yet.
+      await controller.query(`
+        insert into public.academy_study_sessions (
+          id, schema_version, household_id, student_id, lesson_id, subject_id,
+          study_plan_id, state, started_at, completed_at, intended_local_date,
+          household_timezone, created_by
+        ) values (
+          $1, 1, $2::uuid, $3::uuid, 'lesson.production.1', 'math', null,
+          'active', $4::timestamptz, null, $5::date, 'UTC', null
+        )
+      `, [contested, HOUSEHOLD_A, STUDENT_A, postgresNowIso, postgresLocalDateA])
+      await controller.query('commit')
+      barrierOpen = false
+      settled = (await Promise.allSettled([pending]))[0]
+    } finally {
+      if (barrierOpen) await controller.query('rollback')
+      if (pending) await Promise.allSettled([pending])
+    }
+
+    expect(settled.status).toBe('fulfilled')
+    if (settled.status === 'rejected') throw settled.reason
+    expect(settled.value.body).toEqual({ status: 'idempotency-collision' })
+    expect(JSON.stringify(settled.value))
+      .not.toMatch(/duplicate key|unique constraint|23505|_pkey/)
+
+    const rows = await controller.query<{ core: number; projection: number }>(`
+      select
+        (select count(*)::integer from public.academy_study_sessions
+          where id = $1) as core,
+        (select count(*)::integer from academy_private.study_production_sessions
+          where session_id = $1) as projection
+    `, [contested])
+    expect(rows.rows[0]).toEqual({ core: 1, projection: 0 })
   }, 30_000)
 })
 
@@ -1278,7 +1764,7 @@ describe('RPC census and migration custody', () => {
     ['academy_study_begin_production_session_v1(jsonb,text)', {
       names: ['p_session', 'p_mutation_ref'], types: 'jsonb, text', defaults: 0,
       defaultExpr: null, volatility: 'v',
-      fingerprint: '952ce152c0ccd1283fb64559f68c66a50942eb8edaf9c17bbc42cc243a7272c9',
+      fingerprint: '82bf3ebaec1d334bbf3f2ac6c3b914d896cf06b9262d33dbfd56d6a86ab7d7f5',
     }],
     ['academy_study_read_production_session_v1(text)', {
       names: ['p_session_ref'], types: 'text', defaults: 0,
@@ -1301,7 +1787,7 @@ describe('RPC census and migration custody', () => {
       names: ['p_session_ref', 'p_expected_revision', 'p_mutation_ref', 'p_checkpoint'],
       types: 'text, bigint, text, jsonb', defaults: 0,
       defaultExpr: null, volatility: 'v',
-      fingerprint: 'a0664dc9eb7a1db5f6d0c344344d0fc114694655b612ab931892ac44ea1c2952',
+      fingerprint: '139e61032e5b0752a0f07f5ae71271bae72c796668c15209d6fb1bcef574c4b1',
     }],
     ['academy_study_list_production_calendar_v1(text)', {
       names: ['p_cursor'], types: 'text', defaults: 1,
@@ -1451,6 +1937,9 @@ describe('RPC census and migration custody', () => {
       production_wire_version: 1,
       production_wire_rpc_count: 11,
       production_wire_browser_authority_fields: false,
+      production_wire_session_ref_owner: 'server',
+      production_wire_begin_replay_scope: 'learner_mutation_ref',
+      production_wire_checkpoint_response_draft_supported: false,
       production_wire_checkpoint_raw_answer_persisted: false,
       production_wire_checkpoint_transcript_persisted: false,
       production_wire_calendar_paused_state_real: true,

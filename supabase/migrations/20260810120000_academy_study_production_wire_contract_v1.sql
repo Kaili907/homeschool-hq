@@ -58,7 +58,10 @@ begin
      or to_regclass('academy_private.study_production_calendar_segments') is not null
      or to_regprocedure('academy_private.study_production_current_binding(text)') is not null
      or to_regprocedure('academy_private.study_production_session_request_is_valid(jsonb)') is not null
+     or to_regprocedure('academy_private.study_production_session_ref(uuid,uuid,text)') is not null
      or to_regprocedure('academy_private.study_production_checkpoint_is_valid(jsonb)') is not null
+     or to_regprocedure('academy_private.study_production_checkpoint_unsupported_field(jsonb)') is not null
+     or to_regprocedure('academy_private.study_production_checkpoint_normalized(jsonb)') is not null
      or to_regprocedure('academy_private.study_production_session_integrity(academy_private.study_production_sessions)') is not null
      or to_regprocedure('academy_private.study_production_checkpoint_integrity(academy_private.study_production_session_checkpoints)') is not null
      or to_regprocedure('academy_private.study_set_production_session_integrity()') is not null
@@ -228,6 +231,11 @@ begin
 end;
 $$;
 
+-- A begin request names a lesson, a subject, a plan, a segment and when it
+-- started.  It does not name a session: the reference is minted by
+-- academy_study_begin_production_session_v1, so 'sessionRef' is not a key this
+-- exact-key set admits and a caller offering one is refused by the same rule
+-- that refuses any other unknown key.
 create function academy_private.study_production_session_request_is_valid(
   p_candidate jsonb
 )
@@ -237,14 +245,13 @@ immutable
 set search_path = pg_catalog
 as $$
   select public.academy_study_json_has_exact_keys(p_candidate, array[
-      'sessionRef', 'lessonRef', 'subjectRef', 'studyPlanRef', 'segmentRef',
+      'lessonRef', 'subjectRef', 'studyPlanRef', 'segmentRef',
       'startedAt', 'intendedLocalDate', 'lastAcceptedEventRef',
       'rawAnswerIncluded', 'transcriptIncluded'
     ]::text[])
     and public.academy_study_payload_is_minimized(
       p_candidate - 'rawAnswerIncluded' - 'transcriptIncluded', 8192
     )
-    and public.academy_study_identifier_is_valid(p_candidate ->> 'sessionRef')
     and public.academy_study_identifier_is_valid(p_candidate ->> 'lessonRef')
     and public.academy_study_identifier_is_valid(p_candidate ->> 'subjectRef')
     and public.academy_study_identifier_is_valid(p_candidate ->> 'segmentRef')
@@ -271,6 +278,39 @@ as $$
     )
     and p_candidate -> 'rawAnswerIncluded' = 'false'::jsonb
     and p_candidate -> 'transcriptIncluded' = 'false'::jsonb;
+$$;
+
+-- The session reference this wire issues.
+--
+-- One authority, so the begin operation, the advisory lock that serializes it,
+-- and any proof written about either read one derivation instead of three
+-- copies of it.  The inputs are the two identifiers the server recovered from
+-- the verified grant plus the caller's mutation reference, and the output is a
+-- digest of them: a learner cannot derive another learner's reference, and a
+-- retry cannot derive a different one from the same request.
+--
+-- Deterministic rather than random on purpose.  A mutation receipt expires after
+-- ninety days; a derivation does not.  A retry arriving after its receipt has
+-- been reaped therefore lands on the reference it landed on the first time and
+-- finds the session already there, instead of quietly minting a second session
+-- for one begin.
+create function academy_private.study_production_session_ref(
+  p_household_id uuid,
+  p_student_id uuid,
+  p_mutation_ref text
+)
+returns text
+language sql
+immutable
+set search_path = pg_catalog
+as $$
+  select 'aca.study.session.v1.' || academy_private.study_sha256_json(
+    jsonb_build_object(
+      'household_id', p_household_id,
+      'student_id', p_student_id,
+      'mutation_ref', p_mutation_ref
+    )
+  );
 $$;
 
 create function academy_private.study_production_checkpoint_is_valid(
@@ -310,6 +350,53 @@ as $$
     and jsonb_typeof(p_candidate -> 'responseDraftRef') = 'null'
     and p_candidate -> 'rawAnswerIncluded' = 'false'::jsonb
     and p_candidate -> 'transcriptIncluded' = 'false'::jsonb;
+$$;
+
+-- Unsupported durable input.
+--
+-- responseDraftRef names learner-derived work, and this wire has no durable
+-- representation for it: the column exists only as a CHECK that it stays null.
+-- A candidate that carries one is refused on its own closed terms rather than
+-- folded into the integrity quarantine below, because the two mean different
+-- things -- "you sent something this wire does not accept" is a caller-fixable
+-- request fault, while "quarantined" means stored state disagrees with itself
+-- and no caller can act on it.  One token for both would tell an operator that
+-- a rejected draft reference and a tampered checkpoint are the same event.
+--
+-- Presence and type only.  The predicate never reads the value, and it returns
+-- the field NAME it refuses -- a literal written here -- so nothing derived
+-- from a learner's answer can reach the caller through the refusal itself.
+create function academy_private.study_production_checkpoint_unsupported_field(
+  p_candidate jsonb
+)
+returns text
+language sql
+immutable
+set search_path = pg_catalog
+as $$
+  select 'responseDraftRef'
+  where jsonb_typeof(p_candidate) = 'object'
+    and p_candidate ? 'responseDraftRef'
+    and jsonb_typeof(p_candidate -> 'responseDraftRef') <> 'null';
+$$;
+
+-- The durable boundary.  Everything a checkpoint request derives -- the request
+-- fingerprint, its sha256 digest, and the mutation receipt that stores both for
+-- ninety days -- is built from this normalization and never from the raw
+-- candidate.  The refusal above already turns a carried draft reference away, so
+-- this is the second stop rather than the first: if a later change ever relaxed
+-- the refusal or the exact-key list, the value still could not reach durable
+-- state.  create_if_missing is true deliberately, so the normalization does not
+-- depend on the key being present.
+create function academy_private.study_production_checkpoint_normalized(
+  p_candidate jsonb
+)
+returns jsonb
+language sql
+immutable
+set search_path = pg_catalog
+as $$
+  select jsonb_set(p_candidate, '{responseDraftRef}', 'null'::jsonb, true);
 $$;
 
 create function academy_private.study_production_session_integrity(
@@ -464,6 +551,56 @@ as $$
   );
 $$;
 
+-- Beginning a production session.
+--
+-- SERVER-OWNED SESSION REFERENCE
+--
+-- The learner-session runtime already carried a begin operation before this
+-- wire existed: academy_study_execute_verified_runtime_v1 dispatches
+-- session:begin to public.academy_study_create_session, which takes the core
+-- identifier straight from its caller.  That function is still reachable --
+-- it is granted to authenticated for the adult lane -- and it writes the same
+-- public.academy_study_sessions rows this operation writes.  Two authorities
+-- over one primary key, both fed a client-chosen identifier, is a race no
+-- amount of locking on this side can close: whichever one loses gets a raw
+-- unique-constraint error out of the database, and the same logical begin
+-- carries two idempotency identities that neither authority can see.
+--
+-- So this authority does not accept a session reference at all.  It issues one,
+-- from academy_private.study_production_session_ref, out of the two identifiers
+-- the server recovered from the grant and the mutation reference the caller
+-- owns.  The caller supplies nothing that could name a row, which makes four
+-- things true at once:
+--
+--   * the reference cannot collide with a row this authority did not create,
+--     because no caller can propose one and nothing else writes in this
+--     namespace;
+--   * the reference cannot address another learner's session -- a guessed one
+--     is not a thing that exists rather than a thing that gets refused;
+--   * the replay identity of a begin is the verified learner plus that mutation
+--     reference, which is exactly what an exact retry repeats, and it lives in a
+--     receipt scope the older session_create_v1 contract does not use, so this
+--     wire adds no second idempotency contract over any identifier a caller can
+--     already name;
+--   * the reference, the advisory lock and the receipt are one identity, so
+--     there is nothing for them to disagree about.
+--
+-- The caller's stability handle moves with the ownership: what used to be "reuse
+-- the same session reference for this block" is now "reuse the same mutation
+-- reference for this block".  A caller that instead retries a timed-out begin
+-- under a fresh mutation reference is asking for a second begin and gets one --
+-- the same answer the protocol has always given a fresh idempotency key, now
+-- applied to an identifier the server owns.  Bounding how many sessions one
+-- learner may hold open for one lesson is a policy question this wire does not
+-- answer and deliberately does not invent.
+--
+-- An exact retry finds its receipt and returns the original result verbatim,
+-- including the reference the first attempt issued.  The same mutation reference
+-- carrying a different intent gets the closed collision status and writes no
+-- session.  Two different mutation references are two different begins and are
+-- never folded into one.  And because the derivation outlives the ninety-day
+-- receipt, a retry that arrives after its receipt was reaped still lands on its
+-- own session rather than starting a second one.
 create function public.academy_study_begin_production_session_v1(
   p_session jsonb,
   p_mutation_ref text
@@ -480,6 +617,8 @@ declare
   fingerprint jsonb;
   request_digest text;
   result_value jsonb;
+  receipt_scope text;
+  session_ref text;
   target_session public.academy_study_sessions%rowtype;
   started_at timestamptz;
   correlation uuid := gen_random_uuid();
@@ -504,29 +643,23 @@ begin
     raise exception 'STUDY_HOUSEHOLD_TIMEZONE_REQUIRED' using errcode = '23514';
   end if;
 
-  -- The core session identifier is global.  Serialize its entire begin
-  -- transaction before observing either session or receipt state.  Hash
-  -- collisions may over-serialize unrelated sessions but cannot admit a race.
+  -- Issued here, from the verified binding, before anything is read.  The
+  -- reference, the lock and the receipt are then one identity rather than three
+  -- that have to agree.
+  session_ref := academy_private.study_production_session_ref(
+    binding.household_id, binding.student_id, p_mutation_ref
+  );
+  receipt_scope := academy_private.study_learner_ref(binding.student_id);
+
+  -- Serialize the replay identity, not an identifier the caller named.  Two
+  -- concurrent retries of one begin contend here and are decided by the receipt
+  -- below; two different mutation references are two different begins and never
+  -- contend at all.  Hash collisions may over-serialize unrelated begins but
+  -- cannot admit a race.
   perform pg_catalog.pg_advisory_xact_lock(
     pg_catalog.hashtext('academy:study:production-session:v1'),
-    pg_catalog.hashtext(p_session ->> 'sessionRef')
+    pg_catalog.hashtext(session_ref)
   );
-
-  -- Resolve an existing core row before consulting its mutation receipt.  A
-  -- foreign learner reusing a guessed session/mutation pair must receive the
-  -- same authorization refusal as every other cross-learner target, not an
-  -- idempotency answer that confirms the pair exists.
-  select * into target_session
-  from public.academy_study_sessions
-  where id = p_session ->> 'sessionRef'
-  for update;
-  if target_session.id is not null
-     and (
-       target_session.household_id is distinct from binding.household_id
-       or target_session.student_id is distinct from binding.student_id
-     ) then
-    raise exception 'STUDY_OPERATION_NOT_AVAILABLE' using errcode = '42501';
-  end if;
 
   fingerprint := jsonb_build_object(
     'session', p_session,
@@ -535,10 +668,10 @@ begin
   );
   request_digest := academy_private.study_sha256_json(fingerprint);
   select * into receipt
-  from academy_private.study_mutation_receipts
-  where actor_scope = 'session:' || (p_session ->> 'sessionRef')
-    and operation_kind = 'production_session_begin_v1'
-    and idempotency_key = p_mutation_ref;
+  from academy_private.study_mutation_receipts as stored
+  where stored.actor_scope = receipt_scope
+    and stored.operation_kind = 'production_session_begin_v1'
+    and stored.idempotency_key = p_mutation_ref;
   if receipt.idempotency_key is not null then
     if receipt.request_digest = request_digest
        and receipt.request_fingerprint = fingerprint then
@@ -547,16 +680,38 @@ begin
     return jsonb_build_object('status', 'idempotency-collision');
   end if;
 
+  -- The receipt is gone but the derivation is not, so a retry that outlived its
+  -- receipt arrives here and finds its own session already standing.  Answer
+  -- closed rather than insert over it.
+  select * into target_session
+  from public.academy_study_sessions
+  where id = session_ref
+  for update;
   if target_session.id is not null then
     result_value := jsonb_build_object('status', 'idempotency-collision');
-  else
+    insert into academy_private.study_mutation_receipts (
+      actor_scope, operation_kind, idempotency_key, request_digest,
+      request_fingerprint, result, expires_at
+    ) values (
+      receipt_scope,
+      'production_session_begin_v1',
+      p_mutation_ref,
+      request_digest,
+      fingerprint,
+      result_value,
+      clock_timestamp() + interval '90 days'
+    );
+    return result_value;
+  end if;
+
+  begin
     insert into public.academy_study_sessions (
       id, schema_version, household_id, student_id, lesson_id, subject_id,
       study_plan_id, state, started_at, completed_at, intended_local_date,
       household_timezone, created_by
     )
     select
-      p_session ->> 'sessionRef',
+      session_ref,
       1,
       binding.household_id,
       binding.student_id,
@@ -576,33 +731,45 @@ begin
       session_id, household_id, student_id, lesson_ref, segment_ref, status,
       last_accepted_event_ref, revision, integrity_digest, created_at, updated_at
     ) values (
-      p_session ->> 'sessionRef', binding.household_id, binding.student_id,
+      session_ref, binding.household_id, binding.student_id,
       p_session ->> 'lessonRef', p_session ->> 'segmentRef', 'active',
       p_session ->> 'lastAcceptedEventRef', 1, repeat('0', 64),
       started_at, started_at
     );
-    result_value := jsonb_build_object(
-      'status', 'saved',
-      'sessionRef', p_session ->> 'sessionRef',
-      'revision', 1
-    );
-    perform academy_private.study_append_audit(
-      binding.household_id,
-      binding.student_id,
-      'session.start',
-      'session',
-      p_session ->> 'sessionRef',
-      null,
-      correlation,
-      jsonb_build_object('revision', 1, 'result_code', 'saved')
-    );
-  end if;
+  exception when unique_violation then
+    -- Reachable, and deliberately kept.  The issued reference is returned to the
+    -- caller and echoed by session:read, and public.academy_study_create_session
+    -- is still granted to authenticated -- so a caller that has seen a reference
+    -- can hand it to that other lane, which takes none of the locks above.  The
+    -- probe a few lines up catches the row when it is already committed; this
+    -- catches it when the other lane commits inside this window.  Either way the
+    -- caller gets this wire's own closed status rather than a raw constraint
+    -- error naming a database object, and nothing is half-created: the failed
+    -- statement rolls back to this block and no receipt is written.
+    return jsonb_build_object('status', 'idempotency-collision');
+  end;
+
+  result_value := jsonb_build_object(
+    'status', 'saved',
+    'sessionRef', session_ref,
+    'revision', 1
+  );
+  perform academy_private.study_append_audit(
+    binding.household_id,
+    binding.student_id,
+    'session.start',
+    'session',
+    session_ref,
+    null,
+    correlation,
+    jsonb_build_object('revision', 1, 'result_code', 'saved')
+  );
 
   insert into academy_private.study_mutation_receipts (
     actor_scope, operation_kind, idempotency_key, request_digest,
     request_fingerprint, result, expires_at
   ) values (
-    'session:' || (p_session ->> 'sessionRef'),
+    receipt_scope,
     'production_session_begin_v1',
     p_mutation_ref,
     request_digest,
@@ -938,8 +1105,21 @@ declare
   fingerprint jsonb;
   request_digest text;
   result_value jsonb;
+  unsupported_field text;
   correlation uuid := gen_random_uuid();
 begin
+  -- First statement in the function, so a refused draft reference is turned away
+  -- before anything derived from the candidate exists: no fingerprint, no digest,
+  -- no receipt row, no checkpoint row, no integrity digest and no audit event.
+  -- The body carries two constants and nothing the caller sent.
+  unsupported_field :=
+    academy_private.study_production_checkpoint_unsupported_field(p_checkpoint);
+  if unsupported_field is not null then
+    return jsonb_build_object(
+      'status', 'unsupported-field',
+      'field', unsupported_field
+    );
+  end if;
   if not public.academy_study_identifier_is_valid(p_session_ref)
      or p_expected_revision is not null and p_expected_revision < 1
      or not public.academy_study_identifier_is_valid(p_mutation_ref)
@@ -1003,12 +1183,8 @@ begin
   fingerprint := jsonb_build_object(
     'session_ref', p_session_ref,
     'expected_revision', p_expected_revision,
-    'checkpoint', jsonb_set(
-      p_checkpoint,
-      '{responseDraftRef}',
-      'null'::jsonb,
-      false
-    )
+    'checkpoint',
+      academy_private.study_production_checkpoint_normalized(p_checkpoint)
   );
   request_digest := academy_private.study_sha256_json(fingerprint);
   select * into receipt
@@ -1705,7 +1881,10 @@ alter table academy_private.study_production_session_checkpoints owner to postgr
 alter table academy_private.study_production_calendar_segments owner to postgres;
 alter function academy_private.study_production_current_binding(text) owner to postgres;
 alter function academy_private.study_production_session_request_is_valid(jsonb) owner to postgres;
+alter function academy_private.study_production_session_ref(uuid, uuid, text) owner to postgres;
 alter function academy_private.study_production_checkpoint_is_valid(jsonb) owner to postgres;
+alter function academy_private.study_production_checkpoint_unsupported_field(jsonb) owner to postgres;
+alter function academy_private.study_production_checkpoint_normalized(jsonb) owner to postgres;
 alter function academy_private.study_production_session_integrity(academy_private.study_production_sessions) owner to postgres;
 alter function academy_private.study_production_checkpoint_integrity(academy_private.study_production_session_checkpoints) owner to postgres;
 alter function academy_private.study_set_production_session_integrity() owner to postgres;
@@ -1734,7 +1913,13 @@ revoke all on function academy_private.study_production_current_binding(text)
   from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_production_session_request_is_valid(jsonb)
   from public, anon, authenticated, service_role;
+revoke all on function academy_private.study_production_session_ref(uuid, uuid, text)
+  from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_production_checkpoint_is_valid(jsonb)
+  from public, anon, authenticated, service_role;
+revoke all on function academy_private.study_production_checkpoint_unsupported_field(jsonb)
+  from public, anon, authenticated, service_role;
+revoke all on function academy_private.study_production_checkpoint_normalized(jsonb)
   from public, anon, authenticated, service_role;
 revoke all on function academy_private.study_production_session_integrity(academy_private.study_production_sessions)
   from public, anon, authenticated, service_role;
@@ -1793,6 +1978,9 @@ set production_wire_version = 1,
       'production_wire_direct_operation_execute_role', 'none',
       'production_wire_executor_execute_role', 'service_role',
       'production_wire_browser_authority_fields', false,
+      'production_wire_session_ref_owner', 'server',
+      'production_wire_begin_replay_scope', 'learner_mutation_ref',
+      'production_wire_checkpoint_response_draft_supported', false,
       'production_wire_checkpoint_raw_answer_persisted', false,
       'production_wire_checkpoint_transcript_persisted', false,
       'production_wire_calendar_paused_state_real', true,
