@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u08-l07",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u08-l07",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Sampling and Statistical Inference",
+    "dayInUnit": 7,
+    "courseDay": 133,
+    "phase": "Investigation or close reading",
+    "focus": "populations and samples",
+    "title": "Investigation or close reading: populations and samples"
+  },
+  "standards": [
+    "7.SP.1",
+    "7.SP.2",
+    "7.SP.3",
+    "7.SP.4"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-population-vs-sample",
+          "standard": "7.SP.1",
+          "difficulty": 1,
+          "prompt": "A researcher wants to know about all 400 students at Lincoln Middle School. She randomly selects 40 of them to survey. What is the sample in this situation?",
+          "workedSolution": {
+            "steps": [
+              "The population is every member of the group being studied: all 400 students.",
+              "The sample is the subset actually surveyed: the 40 randomly selected students."
+            ],
+            "answer": "The 40 randomly selected students at Lincoln Middle School"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "sampling-method-bias-analysis",
+          "standard": "7.SP.1",
+          "difficulty": 2,
+          "prompt": "A student uses a random number generator to select 37 commuters on a train line from the full list, then surveys them. Is this sampling method likely to produce a representative sample?",
+          "choices": [
+            "Yes, likely representative, because the sample size is large enough.",
+            "Yes, likely representative — every member had a fair, known chance of being chosen.",
+            "No, likely not representative — the method favors certain members over others.",
+            "No, likely not representative, because the population is too large."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "estimate-population-from-sample-proportion",
+          "standard": "7.SP.2",
+          "difficulty": 3,
+          "prompt": "In a random sample of 20 visitors to a science museum, 10 preferred an extended weekend event. Based on this sample, about how many of the 200 visitors to a science museum would you expect to prefer an extended weekend event?",
+          "choices": [
+            "100",
+            "10",
+            "99",
+            "101"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "sample-estimate-variation-range",
+          "standard": "7.SP.2",
+          "difficulty": 2,
+          "prompt": "Five random samples of the same population produced these mean scores: 23, 19, 22, 10, 12. What is the range of these sample estimates?",
+          "choices": [
+            "16",
+            "15",
+            "23",
+            "13"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "sample-size-representativeness",
+          "standard": "7.SP.2",
+          "difficulty": 3,
+          "prompt": "A population has 3093 shoppers at a grocery store. Student A takes a random sample of 34. Student B takes a random sample of 8. Both use proper random selection. Whose sample is more likely to give an estimate closer to the true population value?",
+          "choices": [
+            "Both are equally likely to be accurate, because both are random.",
+            "Student A's sample of 34, because larger random samples tend to produce more consistent, accurate estimates.",
+            "Neither sample is reliable unless it includes the entire population.",
+            "Student B's sample of 8, because smaller samples are easier to analyze."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "generalization-validity-check",
+          "standard": "7.SP.1",
+          "difficulty": 3,
+          "prompt": "A student surveys 74 students at Lincoln Middle School using a convenience sample of her classmates only and records the results. Is it valid to generalize this result to all 2812 students at Lincoln Middle School?",
+          "choices": [
+            "Yes, because the sample size is large enough regardless of how it was chosen.",
+            "Yes, because the sample was selected randomly, so it is likely representative of the population.",
+            "No, because samples can never be generalized to a population.",
+            "No, because the sample was not randomly selected, so it may not represent the population."
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "compute-mean-median-range",
+          "standard": "7.SP.4",
+          "difficulty": 3,
+          "prompt": "A sample of 7 values is: 66, 65, 56, 59, 59, 65, 63. What is the median of this data set?",
+          "choices": [
+            "63",
+            "66",
+            "62",
+            "61 6/7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u08-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "mean-vs-median-with-outlier",
+          "standard": "7.SP.4",
+          "difficulty": 3,
+          "prompt": "A data set has 6 values: 32, 42, 33, 39, 40, 36. What is the new mean if an outlier of 85 is added to the data set, making 7 values in all?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g7-mathematics-u08-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "compute-mean-absolute-deviation",
+          "standard": "7.SP.3",
+          "difficulty": 3,
+          "prompt": "A data set is: 11, 17, 30, 24, 23, with a mean of 21. What is the mean absolute deviation (MAD) of this data set?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u08-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u08-l07"
+  }
+}

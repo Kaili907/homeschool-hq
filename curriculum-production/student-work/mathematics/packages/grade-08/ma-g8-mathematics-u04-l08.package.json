@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u04-l08",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u04-l08",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Slope, Lines, and Proportional Connections",
+    "dayInUnit": 8,
+    "courseDay": 62,
+    "phase": "Reteach and varied practice",
+    "focus": "similar triangles and slope",
+    "title": "Reteach and varied practice: similar triangles and slope"
+  },
+  "standards": [
+    "8.EE.5",
+    "8.EE.6"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "similar-triangle-point-on-line",
+          "standard": "8.EE.6",
+          "difficulty": 1,
+          "prompt": "A line passes through (1, 2). A slope triangle on the line has a horizontal leg (run) of 3 and a vertical leg (rise) of 2. A similar slope triangle further along the same line is 2 times as large. Which point also lies on the line?",
+          "workedSolution": {
+            "steps": [
+              "The base slope triangle shows a slope of 2/3.",
+              "Scaling the triangle by 2 gives a run of 6 and a rise of 4 from (1, 2).",
+              "The new point is (1 + 6, 2 + 4) = (7, 6)."
+            ],
+            "answer": "(7, 6)"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "slope-triangle-legs",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has a slope of 3/4. A right triangle drawn along the line has a horizontal leg (run) of 12 units. What is the length of the vertical leg (rise)?",
+          "workedSolution": {
+            "steps": [
+              "Slope = rise/run, so rise = slope × run.",
+              "rise = (3/4) × 12 = 9.",
+              "The vertical leg is 9 units long."
+            ],
+            "answer": "9"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "write-slope-intercept-equation",
+          "standard": "8.EE.6",
+          "difficulty": 1,
+          "prompt": "Write the equation, in slope-intercept form, of the line through (-5, 13) and (-4, 12).",
+          "choices": [
+            "y = -x + 8",
+            "y = x + 8",
+            "y = -x + 9",
+            "y = -x + 7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-slope-and-intercept",
+          "standard": "8.EE.6",
+          "difficulty": 1,
+          "prompt": "Identify the slope and y-intercept of the line y = -4x.",
+          "choices": [
+            "slope = 0, y-intercept = -4",
+            "slope = -3, y-intercept = 0",
+            "slope = -4, y-intercept = 0",
+            "slope = 4, y-intercept = 0"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-proportional-relationships",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "Relationship A: y = (7/2)x\nRelationship B (proportional):\nx: 2, 4, 6\ny: 5, 10, 15\nWhich relationship has the greater rate of change (unit rate)?",
+          "choices": [
+            "The rate of change cannot be determined from this information.",
+            "Relationship B",
+            "Relationship A",
+            "They have the same rate of change."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-linear-equation-at-x",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "For the line y = (-1/4)x + 5, find y when x = 5.",
+          "choices": [
+            "-15/4",
+            "15/4",
+            "-5/4",
+            "-25/4"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-parallel-lines",
+          "standard": "8.EE.6",
+          "difficulty": 1,
+          "prompt": "A line has equation y = -6x - 7. Which of these equations represents a line parallel to it?",
+          "choices": [
+            "y = -6x + 2",
+            "y = -3x - 8",
+            "y = -6x - 7",
+            "y = x - 10"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "parallel-line-through-point",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has equation y = -x + 5. Write the equation of the line through (-1, -8) that is parallel to this line.",
+          "choices": [
+            "y = -x - 9",
+            "y = x - 9",
+            "y = -x + 5",
+            "y = -x - 7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-slope-in-context",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "A plant's height is given by H = 1w + 4, where H is the height in centimeters and w is the number of weeks since it was measured. What does the slope represent in this context?",
+          "choices": [
+            "The plant was 1 centimeters tall when it was first measured.",
+            "The plant grows 1 centimeters per week.",
+            "The plant was 4 centimeters tall when it was first measured.",
+            "The plant grows 4 centimeters per week."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-y-intercept-in-context",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A plant's height is given by H = 9w + 20, where H is the height in centimeters and w is the number of weeks since it was measured. What does the y-intercept represent in this context?",
+          "choices": [
+            "The plant was 9 centimeters tall when it was first measured.",
+            "The plant grows 20 centimeters per week.",
+            "The plant was 20 centimeters tall when it was first measured.",
+            "The plant grows 9 centimeters per week."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-two-points",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "Find the slope of the line through (-8, 10) and (6, 18).",
+          "choices": [
+            "7/4",
+            "9/14",
+            "4/7",
+            "-4/7"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u04-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u04-l08"
+  }
+}

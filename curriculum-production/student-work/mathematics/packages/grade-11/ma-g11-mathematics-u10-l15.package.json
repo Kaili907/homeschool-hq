@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u10-l15",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u10-l15",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Statistical Inference Capstone",
+    "dayInUnit": 15,
+    "courseDay": 177,
+    "phase": "Assessment preparation",
+    "focus": "deciding whether a model is consistent with data",
+    "title": "Assessment preparation: deciding whether a model is consistent with data"
+  },
+  "standards": [
+    "S-ID.4",
+    "S-IC.1",
+    "S-IC.2",
+    "S-IC.3",
+    "S-IC.4",
+    "S-IC.5",
+    "S-IC.6",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u10-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "normal-empirical-rule",
+          "standard": "S-ID.4",
+          "difficulty": 1,
+          "prompt": "A quantity is approximately normal with mean 88 and standard deviation 10. Approximately what percentage of values lie between 78 and 98?",
+          "choices": [
+            "about 50%",
+            "about 68%",
+            "about 99.7%",
+            "about 95%"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "study-design-and-inference",
+          "standard": "S-IC.3",
+          "difficulty": 2,
+          "prompt": "A researcher runs a randomised controlled experiment with participants randomly assigned to treatments. What kind of conclusion does this design support?",
+          "choices": [
+            "It supports both generalisation and causation, provided the sample is large.",
+            "It supports generalising from the sample to the population, but not a causal claim.",
+            "It supports neither generalisation nor causation, because self-selection can bias both.",
+            "It supports a causal conclusion about the treatment, within the population studied."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "margin-of-error-interpretation",
+          "standard": "S-IC.4",
+          "difficulty": 2,
+          "prompt": "A random sample of 625 people gives a sample proportion of 65%. Using the conservative margin of error 1/√n, give the approximate margin of error and the resulting interval.",
+          "choices": [
+            "±65%, giving 0% to 130%",
+            "±0.2%, giving 64.8% to 65.2%",
+            "±8%, giving 57% to 73%",
+            "±4%, giving 61% to 69%"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "simulation-based-significance",
+          "standard": "S-IC.5",
+          "difficulty": 2,
+          "prompt": "In 100 simulations under the assumption of no difference, 3 produced a result at least as extreme as the one observed. What should be concluded?",
+          "choices": [
+            "The observed result is statistically significant: it occurred in only 3% of simulations, below the usual 5% threshold.",
+            "The simulation proves that the observed difference is real.",
+            "The simulation proves that there is no difference.",
+            "The observed result is not statistically significant: it occurred in 3% of simulations, which is not unusual."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "normal-empirical-rule",
+          "standard": "S-ID.4",
+          "difficulty": 3,
+          "prompt": "A quantity is approximately normal with mean 146 and standard deviation 14. Approximately what percentage of values lie between 118 and 174?",
+          "choices": [
+            "about 68%",
+            "about 50%",
+            "about 99.7%",
+            "about 95%"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "study-design-and-inference",
+          "standard": "S-IC.3",
+          "difficulty": 3,
+          "prompt": "A researcher runs an observational study of volunteers who chose their own group. What kind of conclusion does this design support?",
+          "choices": [
+            "It supports generalising from the sample to the population, but not a causal claim.",
+            "It supports a causal conclusion about the treatment, within the population studied.",
+            "It supports both generalisation and causation, provided the sample is large.",
+            "It supports neither generalisation nor causation, because self-selection can bias both."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "margin-of-error-interpretation",
+          "standard": "S-IC.4",
+          "difficulty": 3,
+          "prompt": "A random sample of 2500 people gives a sample proportion of 47%. Using the conservative margin of error 1/√n, give the approximate margin of error and the resulting interval.",
+          "choices": [
+            "±0%, giving 47% to 47%",
+            "±2%, giving 45% to 49%",
+            "±4%, giving 43% to 51%",
+            "±47%, giving 0% to 94%"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "simulation-based-significance",
+          "standard": "S-IC.5",
+          "difficulty": 3,
+          "prompt": "In 500 simulations under the assumption of no difference, 10 produced a result at least as extreme as the one observed. What should be concluded?",
+          "choices": [
+            "The observed result is statistically significant: it occurred in only 2% of simulations, below the usual 5% threshold.",
+            "The observed result is not statistically significant: it occurred in 2% of simulations, which is not unusual.",
+            "The simulation proves that the observed difference is real.",
+            "The simulation proves that there is no difference."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u10-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "normal-empirical-rule",
+          "standard": "S-ID.4",
+          "difficulty": 2,
+          "prompt": "A quantity is approximately normal with mean 75 and standard deviation 6. Approximately what percentage of values lie between 63 and 87?",
+          "choices": [
+            "about 68%",
+            "about 95%",
+            "about 50%",
+            "about 99.7%"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "study-design-and-inference",
+          "standard": "S-IC.3",
+          "difficulty": 2,
+          "prompt": "A researcher runs a sample survey with randomly selected participants. What kind of conclusion does this design support?",
+          "choices": [
+            "It supports both generalisation and causation, provided the sample is large.",
+            "It supports neither generalisation nor causation, because self-selection can bias both.",
+            "It supports a causal conclusion about the treatment, within the population studied.",
+            "It supports generalising from the sample to the population, but not a causal claim."
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "margin-of-error-interpretation",
+          "standard": "S-IC.4",
+          "difficulty": 3,
+          "prompt": "A random sample of 625 people gives a sample proportion of 75%. Using the conservative margin of error 1/√n, give the approximate margin of error and the resulting interval.",
+          "choices": [
+            "±0.2%, giving 74.8% to 75.2%",
+            "±75%, giving 0% to 150%",
+            "±8%, giving 67% to 83%",
+            "±4%, giving 71% to 79%"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u10-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "simulation-based-significance",
+          "standard": "S-IC.5",
+          "difficulty": 3,
+          "prompt": "In 100 simulations under the assumption of no difference, 2 produced a result at least as extreme as the one observed. What should be concluded?",
+          "choices": [
+            "The observed result is not statistically significant: it occurred in 2% of simulations, which is not unusual.",
+            "The observed result is statistically significant: it occurred in only 2% of simulations, below the usual 5% threshold.",
+            "The simulation proves that the observed difference is real.",
+            "The simulation proves that there is no difference."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u10-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u10-l15"
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u02-l13",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u02-l13",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Place Value, Powers of Ten, and Decimals",
+    "dayInUnit": 13,
+    "courseDay": 31,
+    "phase": "Skill consolidation",
+    "focus": "powers-of-ten patterns",
+    "title": "Skill consolidation: powers-of-ten patterns"
+  },
+  "standards": [
+    "5.NBT.1",
+    "5.NBT.2",
+    "5.NBT.3",
+    "5.NBT.4"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 1,
+          "prompt": "In 447, how does the value of the 4 in the tens place compare with the value of the 4 in the hundreds place?",
+          "choices": [
+            "100 times",
+            "1/10 as much",
+            "10 times",
+            "the same value"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "power-of-ten-notation",
+          "standard": "5.NBT.2",
+          "difficulty": 2,
+          "prompt": "10^2 = ?",
+          "choices": [
+            "100",
+            "10000",
+            "1000",
+            "1"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiply-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 2,
+          "prompt": "8.3 × 10^2 = ?",
+          "choices": [
+            "8300",
+            "83",
+            "8.3",
+            "830"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "divide-by-power-of-ten",
+          "standard": "5.NBT.2",
+          "difficulty": 2,
+          "prompt": "5.18 ÷ 10^1 = ?",
+          "choices": [
+            "5.18",
+            "0.518",
+            "51.8",
+            "0.0518"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-number-name",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "How is 460.630 written in words?",
+          "choices": [
+            "four hundred sixty and six hundred thirty thousandths",
+            "four hundred sixty-one and six hundred thirty thousandths",
+            "four hundred sixty and six hundred twenty-nine thousandths",
+            "four hundred sixty and six hundred thirty hundredths"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "number-name-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write “six hundred three and seven hundred twenty-one thousandths” as a decimal.",
+          "choices": [
+            "604.721",
+            "603.721",
+            "603.722",
+            "610.21"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "decimal-to-expanded-form",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write 356.171 in expanded form.",
+          "choices": [
+            "300 + 50 + 6 + 0.1 + 0.07 + 0.002",
+            "300 + 50 + 6 + 0.2 + 0.07 + 0.001",
+            "300 + 50 + 6 + 0.1 + 0.07 + 0.001",
+            "356.171"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "expanded-form-to-decimal",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Write 200 + 70 + 7 + 0.4 + 0.02 + 0.003 in standard form.",
+          "choices": [
+            "277.523",
+            "277.423",
+            "277.424",
+            "2774.23"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "compare-decimals",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "Compare 6.0 and 6.59 using <, >, or =.",
+          "choices": [
+            "<",
+            ">",
+            "="
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u02-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "round-decimal",
+          "standard": "5.NBT.4",
+          "difficulty": 2,
+          "prompt": "Round 856.656 to the nearest whole number.",
+          "choices": [
+            "860",
+            "856",
+            "857",
+            "859"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "decimal-number-line",
+          "standard": "5.NBT.3",
+          "difficulty": 3,
+          "prompt": "A number line from 8.900 to 8.910 has 10 equal intervals. Point P is 1 intervals after 8.900. What number is P?",
+          "choices": [
+            "8.901",
+            "8.909",
+            "8.900",
+            "89.01"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u02-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "place-value-chart",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "Place-value chart:\nthousands | hundreds | tens | ones | tenths | hundredths | thousandths\n6 | 5 | 8 | 2 | 4 | 9 | 1\nWhich place contains the digit 2?",
+          "choices": [
+            "thousands",
+            "tenths",
+            "hundredths",
+            "ones"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u02-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u02-l13"
+  }
+}

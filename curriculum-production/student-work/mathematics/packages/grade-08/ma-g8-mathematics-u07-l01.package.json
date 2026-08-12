@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u07-l01",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u07-l01",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations, Congruence, and Similarity",
+    "dayInUnit": 1,
+    "courseDay": 109,
+    "phase": "Launch and diagnostic",
+    "focus": "translations rotations reflections and dilations",
+    "title": "Launch and diagnostic: translations rotations reflections and dilations"
+  },
+  "standards": [
+    "8.G.1",
+    "8.G.2",
+    "8.G.3",
+    "8.G.4",
+    "8.G.5"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u07-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-translation-rule",
+          "standard": "8.G.1",
+          "difficulty": 1,
+          "prompt": "Point (2, -1) maps to (5, 3). What translation rule is used?",
+          "workedSolution": {
+            "steps": [
+              "Identify the rule and apply it to each coordinate or corresponding side.",
+              "Check that the resulting coordinates or ratios match the transformation."
+            ],
+            "answer": "(x + 3, y + 4)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u07-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "apply-translation",
+          "standard": "8.G.1",
+          "difficulty": 1,
+          "prompt": "Translate (0, 0) using (x + 1, y - 2).",
+          "choices": [
+            "(-2, 1)",
+            "(-1, 2)",
+            "(1, -2)",
+            "(1, 2)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "reflect-across-axis",
+          "standard": "8.G.1",
+          "difficulty": 1,
+          "prompt": "Reflect (1, -3) across the y-axis.",
+          "choices": [
+            "(1, 3)",
+            "(1, -3)",
+            "(-1, -3)",
+            "(-1, 3)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "rotate-90-degrees",
+          "standard": "8.G.1",
+          "difficulty": 2,
+          "prompt": "Rotate (3, 6) 90 degrees counterclockwise about the origin.",
+          "choices": [
+            "(-5, 4)",
+            "(-3, -6)",
+            "(-6, 3)",
+            "(3, 6)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "dilate-coordinate",
+          "standard": "8.G.3",
+          "difficulty": 2,
+          "prompt": "Dilate (-3, -4) about the origin by scale factor 4.",
+          "choices": [
+            "(-11, -15)",
+            "(-13, -17)",
+            "(-3, -16)",
+            "(-12, -16)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "find-scale-factor",
+          "standard": "8.G.3",
+          "difficulty": 3,
+          "prompt": "A segment of length 7 maps to a segment of length 21. What is the dilation scale factor?",
+          "choices": [
+            "4",
+            "7",
+            "3",
+            "6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u07-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-rigid-transformation",
+          "standard": "8.G.1",
+          "difficulty": 1,
+          "prompt": "Which transformation is described as a translation and preserves lengths and angle measures?",
+          "choices": [
+            "rotation",
+            "dilation",
+            "reflection",
+            "translation"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-congruent-figures",
+          "standard": "8.G.2",
+          "difficulty": 2,
+          "prompt": "Triangle A has side lengths 4, 5, 6. Triangle B has corresponding side lengths 8, 10, 12. Are the triangles congruent?",
+          "choices": [
+            "not congruent",
+            "only similar",
+            "cannot be determined",
+            "congruent"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u07-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u07-l01"
+  }
+}

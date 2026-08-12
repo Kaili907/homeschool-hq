@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u04-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u04-l05",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Slope, Lines, and Proportional Connections",
+    "dayInUnit": 5,
+    "courseDay": 59,
+    "phase": "Concept model B",
+    "focus": "parallel-line reasoning",
+    "title": "Concept model B: parallel-line reasoning"
+  },
+  "standards": [
+    "8.EE.5",
+    "8.EE.6"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-parallel-lines",
+          "standard": "8.EE.6",
+          "difficulty": 1,
+          "prompt": "A line has equation y = 2x - 1. Which of these equations represents a line parallel to it?",
+          "workedSolution": {
+            "steps": [
+              "Parallel lines have the same slope but different y-intercepts.",
+              "y = 2x + 4 has slope 2, the same as y = 2x - 1, but a different intercept.",
+              "So y = 2x + 4 is parallel to the given line."
+            ],
+            "answer": "y = 2x + 4"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "parallel-line-through-point",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has equation y = 2x + 1. Write the equation of the line through (3, 4) that is parallel to this line.",
+          "workedSolution": {
+            "steps": [
+              "A parallel line has the same slope, 2.",
+              "Use y = 2x + b and the point (3, 4): 4 = 2(3) + b.",
+              "4 = 6 + b, so b = -2, giving y = 2x - 2."
+            ],
+            "answer": "y = 2x - 2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-slope-in-context",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "A plant's height is given by H = 4w + 8, where H is the height in centimeters and w is the number of weeks since it was measured. What does the slope represent in this context?",
+          "choices": [
+            "The plant was 8 centimeters tall when it was first measured.",
+            "The plant grows 8 centimeters per week.",
+            "The plant grows 4 centimeters per week.",
+            "The plant was 4 centimeters tall when it was first measured."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-y-intercept-in-context",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A moving company's total cost is given by C = 13h + 6, where C is the total cost in dollars and h is the number of hours of labor. What does the y-intercept represent in this context?",
+          "choices": [
+            "The company charges $13 for each additional hour of labor.",
+            "The company charges a flat fee of $6 before any labor hours.",
+            "The company charges $6 for each additional hour of labor.",
+            "The company charges a flat fee of $13 before any labor hours."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-two-points",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "Find the slope of the line through (-12, 13) and (-14, 8).",
+          "choices": [
+            "2/5",
+            "-5/2",
+            "5/2",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-table",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "A line passes through these points:\nx: -3, -1, 1, 3\ny: 14, 19, 24, 29\nWhat is the slope (rate of change) of the line?",
+          "choices": [
+            "-5/2",
+            "2/5",
+            "15/2",
+            "5/2"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "similar-triangle-point-on-line",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line passes through (-6, 12). A slope triangle on the line has a horizontal leg (run) of 5 and a vertical leg (rise) of 2. A similar slope triangle further along the same line is 4 times as large. Which point also lies on the line?",
+          "choices": [
+            "(15, 20)",
+            "(14, 19)",
+            "(14, 20)",
+            "(14, 21)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "slope-triangle-legs",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A line has a slope of 1/9. A right triangle drawn along the line has a vertical leg (rise) of 59 units. What is the length of the other leg?",
+          "choices": [
+            "59",
+            "531",
+            "531/2",
+            "59/9"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "write-slope-intercept-equation",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "Write the equation, in slope-intercept form, of a line with slope 7 and y-intercept -10.",
+          "choices": [
+            "y = 7x - 11",
+            "y = 7x - 9",
+            "y = -7x - 10",
+            "y = 7x - 10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-slope-and-intercept",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "Identify the slope and y-intercept of the line y = (-5/2)x - 5.",
+          "choices": [
+            "slope = -5, y-intercept = -5/2",
+            "slope = -5/2, y-intercept = -5",
+            "slope = 5/2, y-intercept = -5",
+            "slope = -5/2, y-intercept = 5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-proportional-relationships",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "Relationship A: y = (11/6)x\nRelationship B (proportional):\nx: 1, 2, 3\ny: 1, 2, 3\nWhich relationship has the greater rate of change (unit rate)?",
+          "choices": [
+            "Relationship B",
+            "Relationship A",
+            "The rate of change cannot be determined from this information.",
+            "They have the same rate of change."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u04-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u04-l05"
+  }
+}

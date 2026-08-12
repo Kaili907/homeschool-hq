@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u04-l03",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Slope, Lines, and Proportional Connections",
+    "dayInUnit": 3,
+    "courseDay": 57,
+    "phase": "Guided practice A",
+    "focus": "slope-intercept form",
+    "title": "Guided practice A: slope-intercept form"
+  },
+  "standards": [
+    "8.EE.5",
+    "8.EE.6"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "write-slope-intercept-equation",
+          "standard": "8.EE.6",
+          "difficulty": 1,
+          "prompt": "Write the equation, in slope-intercept form, of a line with slope -2 and y-intercept 5.",
+          "workedSolution": {
+            "steps": [
+              "Slope-intercept form is y = mx + b.",
+              "Substitute m = -2 and b = 5.",
+              "The equation is y = -2x + 5."
+            ],
+            "answer": "y = -2x + 5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-slope-and-intercept",
+          "standard": "8.EE.6",
+          "difficulty": 1,
+          "prompt": "Identify the slope and y-intercept of the line y = -5x.",
+          "choices": [
+            "slope = 0, y-intercept = -5",
+            "slope = 5, y-intercept = 0",
+            "slope = -4, y-intercept = 0",
+            "slope = -5, y-intercept = 0"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-proportional-relationships",
+          "standard": "8.EE.5",
+          "difficulty": 1,
+          "prompt": "Relationship A: y = 3x\nRelationship B (proportional):\nx: 1, 2, 3\ny: 6, 12, 18\nWhich relationship has the greater rate of change (unit rate)?",
+          "choices": [
+            "Relationship A",
+            "They have the same rate of change.",
+            "Relationship B",
+            "The rate of change cannot be determined from this information."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-linear-equation-at-x",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "For the line y = (2/3)x + 6, find y when x = 12.",
+          "choices": [
+            "8",
+            "30",
+            "2",
+            "14"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-parallel-lines",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has equation y = (-9/2)x + 9. Which of these equations represents a line parallel to it?",
+          "choices": [
+            "y = (-9/2)x + 5",
+            "y = (-9/2)x + 9",
+            "y = (5/4)x - 6",
+            "y = (-7/2)x + 11"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "parallel-line-through-point",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has equation y = (-1/4)x + 13. Write the equation of the line through (-24, -4) that is parallel to this line.",
+          "choices": [
+            "y = (-1/4)x - 10",
+            "y = (-1/4)x + 13",
+            "y = (1/4)x - 10",
+            "y = (-1/4)x + 2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-slope-in-context",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "A moving company's total cost is given by C = 8h + 13, where C is the total cost in dollars and h is the number of hours of labor. What does the slope represent in this context?",
+          "choices": [
+            "The company charges a flat fee of $13 before any labor hours.",
+            "The company charges $13 for each additional hour of labor.",
+            "The company charges a flat fee of $8 before any labor hours.",
+            "The company charges $8 for each additional hour of labor."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-y-intercept-in-context",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "The amount of water in a tank is given by G = 10t + 11, where G is the number of gallons in the tank and t is the number of minutes since filling started. What does the y-intercept represent in this context?",
+          "choices": [
+            "The tank already had 11 gallons of water before filling started.",
+            "The tank already had 10 gallons of water before filling started.",
+            "The tank fills at a rate of 11 gallons per minute.",
+            "The tank fills at a rate of 10 gallons per minute."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-two-points",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "Find the slope of the line through (1, 12) and (-17, -8).",
+          "choices": [
+            "10/9",
+            "20/17",
+            "-10/9",
+            "9/10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-table",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "A line passes through these points:\nx: -15, -12, -9\ny: 5, 13, 21\nWhat is the slope (rate of change) of the line?",
+          "choices": [
+            "16/3",
+            "8/3",
+            "-8/3",
+            "3/8"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "similar-triangle-point-on-line",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line passes through (8, -11). A slope triangle on the line has a horizontal leg (run) of 5 and a vertical leg (rise) of 1. A similar slope triangle further along the same line is 4 times as large. Which point also lies on the line?",
+          "choices": [
+            "(29, -7)",
+            "(28, -8)",
+            "(28, -6)",
+            "(28, -7)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u04-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u04-l03"
+  }
+}

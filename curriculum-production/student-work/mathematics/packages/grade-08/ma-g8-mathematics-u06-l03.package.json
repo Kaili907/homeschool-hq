@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u06-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u06-l03",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Systems of Linear Equations",
+    "dayInUnit": 3,
+    "courseDay": 93,
+    "phase": "Guided practice A",
+    "focus": "substitution or equivalent reasoning",
+    "title": "Guided practice A: substitution or equivalent reasoning"
+  },
+  "standards": [
+    "8.EE.8"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-by-substitution",
+          "standard": "8.EE.8b",
+          "difficulty": 1,
+          "prompt": "Solve the system: y = 2x + 1 and 3x + y = 11.",
+          "workedSolution": {
+            "steps": [
+              "Substitute y = 2x + 1 into the second equation: 3x + (2x + 1) = 11.",
+              "Combine like terms: 5x + 1 = 11, so 5x = 10 and x = 2.",
+              "Substitute x = 2 back into y = 2x + 1 to get y = 5, so the solution is (2, 5)."
+            ],
+            "answer": "(2, 5)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-elimination",
+          "standard": "8.EE.8b",
+          "difficulty": 1,
+          "prompt": "Solve the system:\n2x + 3y = 25\n-4x - 3y = -35\nUse elimination to find the solution (x, y).",
+          "choices": [
+            "(6, 5)",
+            "(5, 5)",
+            "(5, 6)",
+            "(4, 5)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-solution-count",
+          "standard": "8.EE.8b",
+          "difficulty": 1,
+          "prompt": "Classify the system: y = x - 9 and y = x - 9. Does it have one solution, no solution, or infinitely many solutions?",
+          "choices": [
+            "no solution",
+            "infinitely many solutions",
+            "one solution"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-equivalent-or-inconsistent-equation",
+          "standard": "8.EE.8b",
+          "difficulty": 2,
+          "prompt": "The reference equation is y = -6x - 8. Which of these equations, paired with the reference, would give the system no solution?",
+          "choices": [
+            "-12x - 2y = 26",
+            "-12x + 3y = 54",
+            "-4x - 2y = 30",
+            "3x + y = -9"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "system-from-context-solve",
+          "standard": "8.EE.8c",
+          "difficulty": 2,
+          "prompt": "Plan A charges a $47 flat fee plus $8 per visit. Plan B charges a $51 flat fee plus $4 per visit. After how many visits do the two plans cost the same, and what is that cost?",
+          "choices": [
+            "(2, 55)",
+            "(0, 55)",
+            "(1, 56)",
+            "(1, 55)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "interpret-context-solution",
+          "standard": "8.EE.8c",
+          "difficulty": 2,
+          "prompt": "Plan A charges a $44 flat fee plus $4 per month. Plan B charges a $36 flat fee plus $8 per month. The solution to the system is (2, 52). What does this solution represent?",
+          "choices": [
+            "After 52 months, both plans cost $2.",
+            "After 2 months, both plans cost $52.",
+            "After 3 months, both plans cost $52.",
+            "Plan A costs $52 more than Plan B after 2 months."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "check-solution-against-system",
+          "standard": "8.EE.8",
+          "difficulty": 2,
+          "prompt": "System: y = 3x - 25 and y = 2x - 20. Does the point (5, -10) satisfy both equations, fail one, or fail both?",
+          "choices": [
+            "fails the second equation only",
+            "fails the first equation only",
+            "fails both equations",
+            "satisfies both equations"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-solution-meaning",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "Plan A charges a $33 flat fee plus $8 per visit. Plan B charges a $61 flat fee plus $6 per visit. The solution to the system is (14, 145). What does the x-coordinate of the solution represent?",
+          "choices": [
+            "The shared cost, in dollars, when the two plans are equal.",
+            "The number of visits after which the two plans cost the same.",
+            "The difference in cost between the two plans.",
+            "The flat fee charged by Plan A."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "verify-solution-of-system",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "System: y = 8x - 2 and y = -x - 2. Which point (x, y) satisfies both equations?",
+          "choices": [
+            "(0, -1)",
+            "(0, -2)",
+            "(1, -2)",
+            "(-1, -2)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-for-intersection-point",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "Solve the system: y = 2x and y = -x + 3. What is the intersection point (x, y)?",
+          "choices": [
+            "(0, 2)",
+            "(1, 2)",
+            "(1, 3)",
+            "(2, 2)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "intersection-from-two-tables",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "Relationship A: x: 9, 10, 11, 12 y: 4, 3, 2, 1. Relationship B: x: 9, 10, 11, 12 y: 4, 6, 8, 10. At which x-value do the two relationships have the same y-value?",
+          "choices": [
+            "10",
+            "11",
+            "9",
+            "12"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u06-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u06-l03"
+  }
+}

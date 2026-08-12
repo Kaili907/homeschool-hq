@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u01-l18",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u01-l18",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Quantitative Reasoning, Units, and Rational Exponents",
+    "dayInUnit": 18,
+    "courseDay": 18,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "sums and products of rational and irrational numbers",
+    "title": "Publication, presentation, or reflection: sums and products of rational and irrational numbers"
+  },
+  "standards": [
+    "N-Q.1",
+    "N-Q.2",
+    "N-Q.3",
+    "N-RN.1",
+    "N-RN.2",
+    "N-RN.3",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 1,
+          "prompt": "Evaluate 27^(2/3).",
+          "workedSolution": {
+            "steps": [
+              "27 = 3³.",
+              "27^(2/3) = (3³)^(2/3) = 3² = 9."
+            ],
+            "answer": "9"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Write √45 in simplest radical form.",
+          "choices": [
+            "5√3",
+            "3√5",
+            "6√5",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 2,
+          "prompt": "Classify the product of the non-zero rational number 4 and the irrational number √5 as rational or irrational, and be ready to justify it.",
+          "choices": [
+            "both rational and irrational",
+            "rational",
+            "irrational",
+            "undefined"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "Option A delivers 56 units of output over 7 hours. Option B delivers 120 units over 15 hours. Which has the greater output per hour?",
+          "choices": [
+            "The two rates are equal.",
+            "Option A",
+            "Option B",
+            "There is not enough information without knowing the total hours available."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 3,
+          "prompt": "A rectangular plot measures 24.2 m by 26.2 m, each measured to the nearest tenth of a metre. Report the area to 2 decimal places.",
+          "choices": [
+            "100.80 m²",
+            "634.0400 m²",
+            "634.04 m²",
+            "50.40 m²"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 3,
+          "prompt": "You are building a model of the population density of a county. Which unit should the modelled quantity be reported in?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "A bottling line operates at 37 grams per second. Express this rate in kilograms per hour.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u01-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u01-l18"
+  }
+}

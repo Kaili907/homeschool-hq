@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u04-l12",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u04-l12",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Slope, Lines, and Proportional Connections",
+    "dayInUnit": 12,
+    "courseDay": 66,
+    "phase": "Performance task build",
+    "focus": "interpreting intercepts",
+    "title": "Performance task build: interpreting intercepts"
+  },
+  "standards": [
+    "8.EE.5",
+    "8.EE.6"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-slope-in-context",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "The amount of water in a tank is given by G = 13t + 3, where G is the number of gallons in the tank and t is the number of minutes since filling started. What does the slope represent in this context?",
+          "choices": [
+            "The tank already had 13 gallons of water before filling started.",
+            "The tank fills at a rate of 3 gallons per minute.",
+            "The tank already had 3 gallons of water before filling started.",
+            "The tank fills at a rate of 13 gallons per minute."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-y-intercept-in-context",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A moving company's total cost is given by C = 1h + 17, where C is the total cost in dollars and h is the number of hours of labor. What does the y-intercept represent in this context?",
+          "choices": [
+            "The company charges a flat fee of $1 before any labor hours.",
+            "The company charges $1 for each additional hour of labor.",
+            "The company charges $17 for each additional hour of labor.",
+            "The company charges a flat fee of $17 before any labor hours."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-two-points",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "Find the slope of the line through (8, 10) and (11, 8).",
+          "choices": [
+            "-3/2",
+            "2/3",
+            "-2/3",
+            "-1/2"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-table",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "A line passes through these points:\nx: 1, 8, 15, 22\ny: 18, 7, -4, -15\nWhat is the slope (rate of change) of the line?",
+          "choices": [
+            "-7/11",
+            "11/7",
+            "-11/7",
+            "-11/3"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "similar-triangle-point-on-line",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A line passes through (-7, -15). A slope triangle on the line has a horizontal leg (run) of 8 and a vertical leg (rise) of 9. A similar slope triangle further along the same line is 2 times as large. Which point also lies on the line?",
+          "choices": [
+            "(10, 3)",
+            "(9, 3)",
+            "(9, 2)",
+            "(9, 4)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "slope-triangle-legs",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A line has a slope of -1/2. A right triangle drawn along the line has a horizontal leg (run) of 25 units. What is the length of the other leg?",
+          "choices": [
+            "25/2",
+            "50",
+            "13",
+            "25"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "write-slope-intercept-equation",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "Write the equation, in slope-intercept form, of the line through (3, -3) and (6, -1).",
+          "choices": [
+            "y = 2/3x - 5",
+            "y = (2/3)x - 6",
+            "y = (-2/3)x - 5",
+            "y = (2/3)x - 5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "identify-slope-and-intercept",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "Identify the slope and y-intercept of the line -11x + y = -10. Rearrange into slope-intercept form first.",
+          "choices": [
+            "slope = 11, y-intercept = 10",
+            "slope = -11, y-intercept = -10",
+            "slope = -10, y-intercept = 11",
+            "slope = 11, y-intercept = -10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "compare-proportional-relationships",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "Relationship A: y = (7/5)x\nRelationship B (proportional):\nx: 3, 6, 9\ny: 5, 10, 15\nBy how much does the greater rate of change exceed the lesser rate of change?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "evaluate-linear-equation-at-x",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "For the line y = (11/4)x + 19, find y when x = 0.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u04-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u04-l12"
+  }
+}

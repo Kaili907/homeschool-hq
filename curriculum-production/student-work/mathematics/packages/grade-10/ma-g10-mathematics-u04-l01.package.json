@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u04-l01",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u04-l01",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Proving Geometric Theorems",
+    "dayInUnit": 1,
+    "courseDay": 55,
+    "phase": "Launch and diagnostic",
+    "focus": "theorems about lines and angles",
+    "title": "Launch and diagnostic: theorems about lines and angles"
+  },
+  "standards": [
+    "G-CO.9",
+    "G-CO.10",
+    "G-CO.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u04-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "parallel-lines-angle-value",
+          "standard": "G-CO.9",
+          "difficulty": 1,
+          "prompt": "Parallel lines, transversal, one angle 70°. Alternate interior angle?",
+          "workedSolution": {
+            "steps": [
+              "Alternate interior angles are congruent.",
+              "The angle is 70°."
+            ],
+            "answer": "70°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u04-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "exterior-angle-theorem",
+          "standard": "G-CO.10",
+          "difficulty": 1,
+          "prompt": "In a triangle, the two remote interior angles measure 46° and 28°. Find the exterior angle at the third vertex.",
+          "choices": [
+            "18°",
+            "74°",
+            "116°",
+            "106°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "parallelogram-property",
+          "standard": "G-CO.11",
+          "difficulty": 1,
+          "prompt": "In a parallelogram, one angle measures 52°. Find the consecutive angle.",
+          "choices": [
+            "90°",
+            "128°",
+            "52°",
+            "26°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "triangle-midsegment-theorem",
+          "standard": "G-CO.10",
+          "difficulty": 2,
+          "prompt": "In a triangle, a segment joins the midpoints of two sides. The third side measures 50. Find the length of the midsegment and state its relationship to the third side.",
+          "choices": [
+            "25, and it is parallel to the third side",
+            "50, and it is parallel to the third side",
+            "100, and it is parallel to the third side",
+            "25, and it is perpendicular to the third side"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "proof-reasoning-gap",
+          "standard": "G-CO.9",
+          "difficulty": 2,
+          "prompt": "A proof concludes that vertical angles are congruent. Which statement supplies the missing justification?",
+          "choices": [
+            "Vertical angles are congruent by definition.",
+            "Each vertical angle is supplementary to the same adjacent angle, so both have the same measure.",
+            "The two lines are parallel, forcing the angles to match.",
+            "The angles are congruent because they are opposite in position."
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "parallel-lines-angle-value",
+          "standard": "G-CO.9",
+          "difficulty": 3,
+          "prompt": "Two parallel lines are cut by a transversal. One angle measures 42°. Find the measure of the corresponding angle.",
+          "choices": [
+            "138°",
+            "42°",
+            "21°",
+            "90°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u04-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "exterior-angle-theorem",
+          "standard": "G-CO.10",
+          "difficulty": 1,
+          "prompt": "In a triangle, the two remote interior angles measure 27° and 60°. Find the exterior angle at the third vertex.",
+          "choices": [
+            "93°",
+            "87°",
+            "103°",
+            "33°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "parallelogram-property",
+          "standard": "G-CO.11",
+          "difficulty": 2,
+          "prompt": "In a parallelogram, one angle measures 71°. Find the opposite angle.",
+          "choices": [
+            "90°",
+            "109°",
+            "35.5°",
+            "71°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u04-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u04-l01"
+  }
+}

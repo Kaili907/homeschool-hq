@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u01-l01",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u01-l01",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Quantitative Reasoning, Units, and Rational Exponents",
+    "dayInUnit": 1,
+    "courseDay": 1,
+    "phase": "Launch and diagnostic",
+    "focus": "quantities, units, and derived rates in context",
+    "title": "Launch and diagnostic: quantities, units, and derived rates in context"
+  },
+  "standards": [
+    "N-Q.1",
+    "N-Q.2",
+    "N-Q.3",
+    "N-RN.1",
+    "N-RN.2",
+    "N-RN.3",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 1,
+          "prompt": "A pump moves 12 liters per minute. Express this rate in liters per hour.",
+          "workedSolution": {
+            "steps": [
+              "One minute is 1/60 of an hour, so one liter per minute is 60 liters per hour.",
+              "Multiply: 12 × 60 = 720.",
+              "The rate is 720 liters per hour."
+            ],
+            "answer": "720 liters per hour"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 1,
+          "prompt": "Rewrite the square root expression √(x^3) using a rational exponent, in lowest terms.",
+          "choices": [
+            "x^(6)",
+            "x^(3/2)",
+            "x^(1)",
+            "x^(2/3)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 1,
+          "prompt": "Evaluate 16^(1) exactly.",
+          "choices": [
+            "16",
+            "18",
+            "32",
+            "64"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Write √117 in simplest radical form.",
+          "choices": [
+            "6√13",
+            "3√13",
+            "13√3",
+            "39"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 2,
+          "prompt": "Classify the product of the rational number 0 and the irrational number √5 as rational or irrational, and be ready to justify it.",
+          "choices": [
+            "both rational and irrational",
+            "rational",
+            "undefined",
+            "irrational"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "Option A delivers 54 units of output over 6 hours. Option B delivers 48 units over 12 hours. Which has the greater output per hour?",
+          "choices": [
+            "There is not enough information without knowing the total hours available.",
+            "Option B",
+            "The two rates are equal.",
+            "Option A"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 1,
+          "prompt": "A rectangular plot measures 27.7 m by 8.8 m, each measured to the nearest tenth of a metre. Report the area to 1 decimal place.",
+          "choices": [
+            "243.8 m²",
+            "73.0 m²",
+            "36.5 m²",
+            "243.760 m²"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 2,
+          "prompt": "You are building a model of the rate at which a reservoir is draining. Which unit should the modelled quantity be reported in?",
+          "choices": [
+            "cubic metres",
+            "hours per cubic metre",
+            "metres per hour",
+            "cubic metres per hour"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u01-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u01-l01"
+  }
+}

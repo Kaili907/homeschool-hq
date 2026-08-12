@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u01-l17",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u01-l17",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Real Numbers and Irrational Numbers",
+    "dayInUnit": 17,
+    "courseDay": 17,
+    "phase": "Targeted correction",
+    "focus": "comparing real numbers",
+    "title": "Targeted correction: comparing real numbers"
+  },
+  "standards": [
+    "8.NS.1",
+    "8.NS.2",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "order-real-numbers",
+          "standard": "8.NS.2",
+          "difficulty": 1,
+          "prompt": "Order √10, 3, and 10/3 from least to greatest.",
+          "workedSolution": {
+            "steps": [
+              "√10² = 10, 3² = 9, (10/3)² = 100/9 ≈ 11.1.",
+              "Comparing squares: 9 < 10 < 11.1, so 3 < √10 < 10/3... ",
+              "Recheck exactly with a common denominator of 9: 9 < 10 < 100/9 · 9 = 100, so 81 < 90 < 100 confirms 3 < √10 < 10/3."
+            ],
+            "answer": "√10 < 10/3 < 3"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "estimate-root-expression",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "Which whole number is closest to √73 + 4?",
+          "workedSolution": {
+            "steps": [
+              "The whole number closest to √73 is 9.",
+              "Add 4 to that estimate: 9 + 4 = 13."
+            ],
+            "answer": "13"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "real-number-word-problem",
+          "standard": "8.NS.2",
+          "difficulty": 1,
+          "prompt": "A square garden has an area of 29 square inches. Between which two consecutive whole numbers of inches is the side length?",
+          "choices": [
+            "3 and 4",
+            "5 and 6",
+            "4 and 5",
+            "6 and 7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "root-comparison-error-analysis",
+          "standard": "8.NS.2",
+          "difficulty": 2,
+          "prompt": "A student claims √78 > 12 because 78 > 12. Which statement correctly analyzes the claim?",
+          "choices": [
+            "The claim is correct; 78 > 12, so √78 > 12.",
+            "The claim is incorrect; √78 = 12 exactly.",
+            "The claim is incorrect; since 78 < 12² = 144, √78 < 12.",
+            "The claim cannot be evaluated without a calculator."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-rational-or-irrational",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "Classify 6/7 as rational or irrational.",
+          "choices": [
+            "rational",
+            "irrational"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "closure-classification",
+          "standard": "8.NS.1",
+          "difficulty": 3,
+          "prompt": "A nonzero rational number (10/13) is multiplied by an irrational number (√26). Is the result rational or irrational?",
+          "choices": [
+            "sometimes rational and sometimes irrational",
+            "cannot be determined without computing",
+            "rational",
+            "irrational"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u01-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-to-fraction",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "Write 0.939393... as a fraction in lowest terms.",
+          "choices": [
+            "32/33",
+            "31/34",
+            "93/100",
+            "31/33"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "repeating-decimal-error-analysis",
+          "standard": "8.NS.1",
+          "difficulty": 2,
+          "prompt": "A student writes 0.626262... = 62/100. Which statement best analyzes the claim?",
+          "choices": [
+            "The claim is correct; 62/100 equals 0.626262....",
+            "The correct fraction is 62/99; the denominator should be 99 (nine repeated once per repeating digit), not 100.",
+            "The claim is close; only the sign needs to be corrected.",
+            "The correct fraction is 62/99; the numerator should have one extra digit."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "consecutive-integers-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Between which two consecutive whole numbers does √427 lie?",
+          "choices": [
+            "20 and 21",
+            "21 and 22",
+            "20 and 22",
+            "18 and 19"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u01-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "nearest-tenth-for-root",
+          "standard": "8.NS.2",
+          "difficulty": 3,
+          "prompt": "Estimate √824 to the nearest tenth.",
+          "choices": [
+            "28.8",
+            "28",
+            "28.7",
+            "28.5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u01-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u01-l17"
+  }
+}

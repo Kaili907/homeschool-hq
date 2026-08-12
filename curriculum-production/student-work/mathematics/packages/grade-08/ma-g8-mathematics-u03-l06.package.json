@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u03-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u03-l06",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Linear Equations",
+    "dayInUnit": 6,
+    "courseDay": 42,
+    "phase": "Guided practice B",
+    "focus": "equations from contexts",
+    "title": "Guided practice B: equations from contexts"
+  },
+  "standards": [
+    "8.EE.7"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "equation-error-analysis",
+          "standard": "8.EE.7",
+          "difficulty": 1,
+          "prompt": "A student solves 3x + 4 = 19. They write 3x = 15, then say x = 15. Which statement best analyzes the error?",
+          "workedSolution": {
+            "steps": [
+              "3x = 15 is correct so far.",
+              "Dividing both sides by 3 gives x = 5, not 15."
+            ],
+            "answer": "The student forgot to divide both sides by 3; the correct solution is x = 5."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solution-type-error-analysis",
+          "standard": "8.EE.7",
+          "difficulty": 2,
+          "prompt": "A student says -2x + 9 = -2x + 9 has one solution because they can solve for x. Which statement correctly analyzes the equation?",
+          "choices": [
+            "The equation has exactly one solution, found by dividing both sides by the coefficient of x.",
+            "The equation has infinitely many solutions; both sides are identical for every x.",
+            "The equation cannot be classified without graphing it.",
+            "The equation has no solution; simplifying gives 9 = 9, which is never true."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-one-step-equation",
+          "standard": "8.EE.7",
+          "difficulty": 2,
+          "prompt": "Solve for x: 8x = 10.",
+          "choices": [
+            "1/4",
+            "2",
+            "9/4",
+            "5/4"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-two-step-equation",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Solve for x: -2x - 12 = 15.",
+          "choices": [
+            "-31/2",
+            "-29/2",
+            "-25/2",
+            "-27/2"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-with-distributive-property",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Solve for x: -3(x - 8) = -26.",
+          "choices": [
+            "56/3",
+            "44/3",
+            "26/3",
+            "50/3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-combining-like-terms",
+          "standard": "8.EE.7",
+          "difficulty": 2,
+          "prompt": "Solve for x: -x + 7x - 6 = 0.",
+          "choices": [
+            "1",
+            "2",
+            "0",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-variables-both-sides",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Solve for x: -6x - 13 = -13x + 9.",
+          "choices": [
+            "-22/7",
+            "22/7",
+            "15/7",
+            "8/7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-solution-type",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "How many solutions does -11x + 24 = -x + 15 have?",
+          "choices": [
+            "infinitely many solutions",
+            "no solution",
+            "one solution"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "check-a-solution",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Is x = 4 a solution to x + 5 = 10?",
+          "choices": [
+            "yes",
+            "no"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-solution-from-choices",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Which value of x solves -9x - 8 = 15?",
+          "choices": [
+            "-5/9",
+            "-41/9",
+            "-32/9",
+            "-23/9"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "write-equation-from-context",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "A phone plan costs $21 plus $26 per gigabyte of data. The bill was $307. Which equation represents the number of gigabytes, x?",
+          "choices": [
+            "21x + 26 = 307",
+            "26x - 21 = 307",
+            "26x + 21 = 307",
+            "26x + 21 = 328"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u03-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u03-l06"
+  }
+}

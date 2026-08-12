@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u09-l16",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u09-l16",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Volume and Bivariate Data",
+    "dayInUnit": 16,
+    "courseDay": 160,
+    "phase": "Unit assessment",
+    "focus": "lines of fit",
+    "title": "Unit assessment: lines of fit"
+  },
+  "standards": [
+    "8.G.9",
+    "8.SP.1",
+    "8.SP.2",
+    "8.SP.3",
+    "8.SP.4"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "cylinder-volume",
+          "standard": "8.G.9",
+          "difficulty": 1,
+          "prompt": "Find the exact volume of a cylinder with radius 3 units and height 12 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "216π cubic units",
+            "108π cubic units",
+            "111π cubic units",
+            "36π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "cone-volume",
+          "standard": "8.G.9",
+          "difficulty": 1,
+          "prompt": "Find the exact volume of a cone with radius 2 units and height 3 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "2π cubic units",
+            "12π cubic units",
+            "4π cubic units",
+            "6π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "sphere-volume",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "Find the exact volume of a sphere with radius 3 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "108π cubic units",
+            "27π cubic units",
+            "9π cubic units",
+            "36π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "compare-solid-volumes",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "A cylinder and cone each have radius 6 units and height 9 units. Which has the greater volume?",
+          "choices": [
+            "the cone",
+            "they have equal volume",
+            "the cylinder",
+            "not enough information"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-scatter-association",
+          "standard": "8.SP.1",
+          "difficulty": 2,
+          "prompt": "As x increases, y generally decreases. What association does this scatter plot describe?",
+          "choices": [
+            "none",
+            "causation",
+            "negative",
+            "positive"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "identify-outlier",
+          "standard": "8.SP.1",
+          "difficulty": 2,
+          "prompt": "Most plotted points follow y = 2x + 1. Of these points, (12, 25), (13, 27), (11, 23), (12, 37), which point is an outlier?",
+          "choices": [
+            "(12, 25)",
+            "(11, 23)",
+            "(13, 27)",
+            "(12, 37)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "line-of-fit-prediction",
+          "standard": "8.SP.2",
+          "difficulty": 3,
+          "prompt": "A line of fit is y = 6x - 3. Predict y when x = 8.",
+          "choices": [
+            "52",
+            "58",
+            "45",
+            "38"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "interpolation-or-extrapolation",
+          "standard": "8.SP.2",
+          "difficulty": 3,
+          "prompt": "A data set has x-values from 2 through 12. A prediction is made at x = 18. Is this interpolation or extrapolation?",
+          "choices": [
+            "a census",
+            "causation",
+            "interpolation",
+            "extrapolation"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "identify-outlier",
+          "standard": "8.SP.1",
+          "difficulty": 3,
+          "prompt": "Most plotted points follow y = 2x + 1. Of these points, (11, 23), (12, 25), (10, 21), (11, 38), which point is an outlier?",
+          "choices": [
+            "(11, 38)",
+            "(11, 23)",
+            "(10, 21)",
+            "(12, 25)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "8.SP.3",
+          "difficulty": 3,
+          "prompt": "Umbrella sales and rainy-day traffic delays are correlated. Which conclusion is justified?",
+          "choices": [
+            "There is no relationship at all.",
+            "They are correlated; this alone does not prove causation.",
+            "Umbrella sales cause traffic delays.",
+            "Traffic delays cause umbrella sales."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "cylinder-volume",
+          "standard": "8.G.9",
+          "difficulty": 3,
+          "prompt": "Find the exact volume of a cylinder with radius 3 units and height 15 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "138π cubic units",
+            "45π cubic units",
+            "135π cubic units",
+            "270π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "cone-volume",
+          "standard": "8.G.9",
+          "difficulty": 3,
+          "prompt": "Find the exact volume of a cone with radius 3 units and height 21 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "189π cubic units",
+            "63π cubic units",
+            "31.5π cubic units",
+            "66π cubic units"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u09-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u09-l16"
+  }
+}

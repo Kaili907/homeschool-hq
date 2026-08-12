@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u06-l10",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u06-l10",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Advanced Function Analysis and Graphing",
+    "dayInUnit": 10,
+    "courseDay": 100,
+    "phase": "Discussion or problem seminar",
+    "focus": "graphing exponential, logarithmic, and trigonometric functions",
+    "title": "Discussion or problem seminar: graphing exponential, logarithmic, and trigonometric functions"
+  },
+  "standards": [
+    "F-IF.7",
+    "F-IF.8",
+    "F-IF.9",
+    "MP.5"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-completed-square-form",
+          "standard": "F-IF.8",
+          "difficulty": 1,
+          "prompt": "Minimum of f(x) = 2(x − 3)² + 4?",
+          "workedSolution": {
+            "steps": [
+              "Square is zero at x = 3.",
+              "f(3) = 4."
+            ],
+            "answer": "minimum 4 at x = 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-end-behaviour",
+          "standard": "F-IF.7",
+          "difficulty": 2,
+          "prompt": "A polynomial has degree 4 and leading coefficient 4. Describe its end behaviour.",
+          "choices": [
+            "the left end falls and the right end rises",
+            "the left end rises and the right end falls",
+            "both ends rise",
+            "both ends fall"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "rational-function-asymptotes",
+          "standard": "F-IF.7",
+          "difficulty": 3,
+          "prompt": "For f(x) = (x + 7) / (x + 5), state the vertical asymptote and the horizontal asymptote.",
+          "choices": [
+            "vertical x = -5; horizontal y = 1",
+            "vertical x = -5; horizontal y = 0",
+            "vertical x = -7; horizontal y = 1",
+            "vertical x = -5; horizontal y = 7/5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-across-representations",
+          "standard": "F-IF.9",
+          "difficulty": 3,
+          "prompt": "Function f is given in vertex form as f(x) = −2(x − 2)² − 5, so it opens downward. Function g is given by a table whose greatest output is 0. Which function has the greater maximum, and by how much?",
+          "choices": [
+            "g, by 6",
+            "g, by -5",
+            "g, by 0",
+            "g, by 5"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-completed-square-form",
+          "standard": "F-IF.8",
+          "difficulty": 3,
+          "prompt": "The function f(x) = 3(x − 4)² − 2 opens upward. State its minimum value and where it occurs.",
+          "choices": [
+            "minimum 2 at x = 4",
+            "minimum -2 at x = -4",
+            "minimum -2 at x = 4",
+            "minimum 4 at x = -2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-end-behaviour",
+          "standard": "F-IF.7",
+          "difficulty": 3,
+          "prompt": "A polynomial has degree 2 and leading coefficient -1. Describe its end behaviour.",
+          "choices": [
+            "the left end falls and the right end rises",
+            "both ends fall",
+            "the left end rises and the right end falls",
+            "both ends rise"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "rational-function-asymptotes",
+          "standard": "F-IF.7",
+          "difficulty": 3,
+          "prompt": "For f(x) = (x − 3) / (x + 3), state the vertical asymptote and the horizontal asymptote.",
+          "choices": [
+            "vertical x = -3; horizontal y = 0",
+            "vertical x = -3; horizontal y = 1",
+            "vertical x = -3; horizontal y = -1",
+            "vertical x = 3; horizontal y = 1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u06-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "compare-functions-across-representations",
+          "standard": "F-IF.9",
+          "difficulty": 3,
+          "prompt": "Function f is given in vertex form as f(x) = −2(x − 4)² + 9, so it opens downward. Function g is given by a table whose greatest output is 13. Which function has the greater maximum, and by how much?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u06-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "interpret-completed-square-form",
+          "standard": "F-IF.8",
+          "difficulty": 3,
+          "prompt": "The function f(x) = (x + 7)² − 4 opens upward. State its minimum value and where it occurs.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u06-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u06-l10"
+  }
+}

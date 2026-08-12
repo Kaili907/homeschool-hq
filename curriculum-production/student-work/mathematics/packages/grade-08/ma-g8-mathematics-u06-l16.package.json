@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u06-l16",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u06-l16",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Systems of Linear Equations",
+    "dayInUnit": 16,
+    "courseDay": 106,
+    "phase": "Unit assessment",
+    "focus": "one no or infinitely many solutions",
+    "title": "Unit assessment: one no or infinitely many solutions"
+  },
+  "standards": [
+    "8.EE.8"
+  ],
+  "blueprint": {
+    "phase": "Unit assessment",
+    "profile": "unit-assessment",
+    "sectionKinds": [
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Unit assessment. Work alone, show your steps, and check your work before you finish.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-solution-count",
+          "standard": "8.EE.8b",
+          "difficulty": 1,
+          "prompt": "Classify the system: y = -x + 10 and y = -x + 1. Does it have one solution, no solution, or infinitely many solutions?",
+          "choices": [
+            "infinitely many solutions",
+            "no solution",
+            "one solution"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-equivalent-or-inconsistent-equation",
+          "standard": "8.EE.8b",
+          "difficulty": 1,
+          "prompt": "The reference equation is y = -3x - 3. Which of these equations, paired with the reference, would give the system no solution?",
+          "choices": [
+            "2x - y = 7",
+            "-6x + 2y = -8",
+            "-x - y = 8",
+            "-6x - 2y = 10"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "system-from-context-solve",
+          "standard": "8.EE.8c",
+          "difficulty": 2,
+          "prompt": "Plan A charges a $40 flat fee plus $5 per visit. Plan B charges a $60 flat fee plus $3 per visit. After how many visits do the two plans cost the same, and what is that cost?",
+          "choices": [
+            "(10, 90)",
+            "(11, 90)",
+            "(10, 91)",
+            "(9, 90)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-context-solution",
+          "standard": "8.EE.8c",
+          "difficulty": 2,
+          "prompt": "Plan A charges a $2 flat fee plus $8 per visit. Plan B charges a $10 flat fee plus $6 per visit. The solution to the system is (4, 34). What does this solution represent?",
+          "choices": [
+            "After 5 visits, both plans cost $34.",
+            "After 4 visits, both plans cost $34.",
+            "After 34 visits, both plans cost $4.",
+            "Plan A costs $34 more than Plan B after 4 visits."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-05",
+          "kind": "multiple-choice",
+          "itemType": "check-solution-against-system",
+          "standard": "8.EE.8",
+          "difficulty": 2,
+          "prompt": "System: y = -x + 8 and y = 2x + 14. Does the point (-1, 12) satisfy both equations, fail one, or fail both?",
+          "choices": [
+            "fails both equations",
+            "satisfies both equations",
+            "fails the second equation only",
+            "fails the first equation only"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-06",
+          "kind": "multiple-choice",
+          "itemType": "interpret-solution-meaning",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "Plan A charges a $50 flat fee plus $3 per visit. Plan B charges a $68 flat fee plus $1 per visit. The solution to the system is (9, 77). What does the x-coordinate of the solution represent?",
+          "choices": [
+            "The flat fee charged by Plan A.",
+            "The number of visits after which the two plans cost the same.",
+            "The shared cost, in dollars, when the two plans are equal.",
+            "The difference in cost between the two plans."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-07",
+          "kind": "multiple-choice",
+          "itemType": "verify-solution-of-system",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "System: y = 3x - 8 and y = 7x. Which point (x, y) satisfies both equations?",
+          "choices": [
+            "(-2, -13)",
+            "(-1, -14)",
+            "(-3, -14)",
+            "(-2, -14)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-08",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-for-intersection-point",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Solve the system: y = 8x - 63 and y = -3x + 3. What is the intersection point (x, y)?",
+          "choices": [
+            "(6, -14)",
+            "(6, -15)",
+            "(7, -15)",
+            "(5, -15)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-09",
+          "kind": "multiple-choice",
+          "itemType": "intersection-from-two-tables",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Relationship A: x: 16, 17, 18, 19 y: 3, 12, 21, 30. Relationship B: x: 16, 17, 18, 19 y: 3, -1, -5, -9. At which x-value do the two relationships have the same y-value?",
+          "choices": [
+            "18",
+            "16",
+            "19",
+            "17"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-10",
+          "kind": "multiple-choice",
+          "itemType": "identify-quadrant-of-intersection",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Solve the system: y = 4x + 22 and y = -6x - 18. In which quadrant does the intersection point lie, or does it lie on an axis?",
+          "choices": [
+            "Quadrant II",
+            "Quadrant IV",
+            "Quadrant I",
+            "on an axis"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-11",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-substitution",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "Solve the system:\ny = 9x + 106\nx - 2y = -25\nUse substitution to find the solution (x, y).",
+          "choices": [
+            "(-12, 7)",
+            "(-11, 7)",
+            "(-11, 8)",
+            "(-10, 7)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l16#mc-12",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-elimination",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "Solve the system:\n10x + 5y = -25\n3x + 5y = 45\nUse elimination to find the solution (x, y).",
+          "choices": [
+            "(-9, 15)",
+            "(-10, 16)",
+            "(-11, 15)",
+            "(-10, 15)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u06-l16.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u06-l16"
+  }
+}

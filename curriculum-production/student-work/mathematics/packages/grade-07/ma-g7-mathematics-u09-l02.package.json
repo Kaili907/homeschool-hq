@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g7-mathematics-u09-l02",
+  "lessonRef": {
+    "lessonId": "ma-g7-mathematics-u09-l02",
+    "courseId": "ma-g7-mathematics",
+    "grade": 7,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability and Simulation",
+    "dayInUnit": 2,
+    "courseDay": 146,
+    "phase": "Concept model A",
+    "focus": "experimental probability",
+    "title": "Concept model A: experimental probability"
+  },
+  "standards": [
+    "7.SP.5",
+    "7.SP.6",
+    "7.SP.7",
+    "7.SP.8"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "theoretical-probability",
+          "standard": "7.SP.7",
+          "difficulty": 1,
+          "prompt": "A bag has 2 red and 3 blue marbles. What is the theoretical probability of drawing red?",
+          "workedSolution": {
+            "steps": [
+              "Identify the favorable outcomes and the total possible outcomes.",
+              "Write the probability as a reduced fraction, or use it to predict or evaluate a count."
+            ],
+            "answer": "2/5"
+          }
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "compound-events",
+          "standard": "7.SP.8",
+          "difficulty": 2,
+          "prompt": "A fair coin is flipped and a 3-section spinner is spun. What is the probability of heads and landing on section 2?",
+          "workedSolution": {
+            "steps": [
+              "Identify the favorable outcomes and the total possible outcomes.",
+              "Write the probability as a reduced fraction, or use it to predict or evaluate a count."
+            ],
+            "answer": "1/6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "sample-spaces",
+          "standard": "7.SP.8",
+          "difficulty": 1,
+          "prompt": "A meal is made by choosing one main dish from 4 options and one side dish from 4 options. How many different meals are possible?",
+          "choices": [
+            "16",
+            "8",
+            "18",
+            "17"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "simulation-and-model-limitations",
+          "standard": "7.SP.7",
+          "difficulty": 1,
+          "prompt": "A probability model predicts a fair 4-section spinner lands on a chosen section about 28 times in 112 spins. A simulation of 112 spins landed on that section 26 times. How does the simulated count compare to the model's prediction?",
+          "choices": [
+            "3 fewer than predicted",
+            "1 fewer than predicted",
+            "2 fewer than predicted",
+            "2 more than predicted"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "probability-scale",
+          "standard": "7.SP.5",
+          "difficulty": 2,
+          "prompt": "An event has a probability of 0. How would you describe how likely the event is to happen?",
+          "choices": [
+            "certain",
+            "likely",
+            "equally likely to happen or not happen",
+            "impossible"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "experimental-probability",
+          "standard": "7.SP.6",
+          "difficulty": 1,
+          "prompt": "A spinner was spun 20 times and landed on blue 8 times. Based on this experiment, what is the experimental probability of landing on blue?",
+          "choices": [
+            "9/20",
+            "3/10",
+            "7/20",
+            "2/5"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "theoretical-probability",
+          "standard": "7.SP.7",
+          "difficulty": 2,
+          "prompt": "A bag has 2 red, 3 blue, and 6 green marbles. If one marble is drawn at random, what is the theoretical probability of drawing red, P(red)?",
+          "choices": [
+            "9/11",
+            "3/11",
+            "2/11",
+            "10/11"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compound-events",
+          "standard": "7.SP.8",
+          "difficulty": 2,
+          "prompt": "A fair coin is flipped and a spinner with 3 equal sections numbered 1 to 3 is spun. What is the probability of getting heads on the coin and landing on 1 on the spinner?",
+          "choices": [
+            "1/6",
+            "1/2",
+            "2/3",
+            "1/3"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "sample-spaces",
+          "standard": "7.SP.8",
+          "difficulty": 3,
+          "prompt": "A meal is made by choosing one main dish from 5 options and one side dish from 2 options. How many different meals are possible?",
+          "choices": [
+            "13",
+            "12",
+            "10",
+            "11"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g7-mathematics-u09-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "simulation-and-model-limitations",
+          "standard": "7.SP.7",
+          "difficulty": 2,
+          "prompt": "A probability model predicts a fair 10-section spinner lands on a chosen section about 27 times in 270 spins. A simulation of 270 spins landed on that section 22 times. How does the simulated count compare to the model's prediction?",
+          "choices": [
+            "5 more than predicted",
+            "5 fewer than predicted",
+            "4 fewer than predicted",
+            "6 fewer than predicted"
+          ]
+        },
+        {
+          "ref": "ma-g7-mathematics-u09-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "probability-scale",
+          "standard": "7.SP.5",
+          "difficulty": 2,
+          "prompt": "An event has a probability of 1/10. How would you describe how likely the event is to happen?",
+          "choices": [
+            "likely",
+            "equally likely to happen or not happen",
+            "impossible",
+            "unlikely"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-07/ma-g7-mathematics-u09-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g7-mathematics-u09-l02"
+  }
+}

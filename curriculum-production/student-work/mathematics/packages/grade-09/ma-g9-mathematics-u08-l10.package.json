@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u08-l10",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u08-l10",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Rate of Change and Building Functions",
+    "dayInUnit": 10,
+    "courseDay": 136,
+    "phase": "Discussion or problem seminar",
+    "focus": "combining functions arithmetically",
+    "title": "Discussion or problem seminar: combining functions arithmetically"
+  },
+  "standards": [
+    "F-IF.6",
+    "F-BF.1",
+    "F-BF.2",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 1,
+          "prompt": "R(x) = 9x + 4, C(x) = 5x. Find P(x).",
+          "workedSolution": {
+            "steps": [
+              "P = R − C = 9x + 4 − 5x.",
+              "P(x) = 4x + 4."
+            ],
+            "answer": "P(x) = 4x + 4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 2,
+          "prompt": "A table records output 28 at input 5 and output 42 at input 7. What is the average rate of change between these readings?",
+          "choices": [
+            "14 output units per input unit",
+            "-7 output units per input unit",
+            "7/6 output units per input unit",
+            "7 output units per input unit"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "For f(x) = 2x² + 7x − 2, find the average rate of change from x = 5 to x = 3.",
+          "choices": [
+            "23",
+            "-23",
+            "-23/4",
+            "-46"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 3,
+          "prompt": "A sequence has g(1) = 10 and g(n) = 4·g(n − 1). Write the explicit form and find g(7).",
+          "choices": [
+            "g(n) = 10·4^n; g(7) = 163840",
+            "g(n) = 4·10^(n−1); g(7) = 4000000",
+            "g(n) = 10 + 4(n − 1); g(7) = 34",
+            "g(n) = 10·4^(n−1); g(7) = 40960"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "build-function-from-context",
+          "standard": "F-BF.1",
+          "difficulty": 3,
+          "prompt": "A venue charges $185 to open plus $4 per attendee. Write C(n) for the total cost of n attendees, then find C(3).",
+          "choices": [
+            "C(n) = 4 + 185n; C(3) = 559",
+            "C(n) = 185 + 4n; C(3) = 197",
+            "C(n) = 189n; C(3) = 567",
+            "C(n) = 185n + 4; C(3) = 559"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "combine-functions",
+          "standard": "F-BF.1",
+          "difficulty": 3,
+          "prompt": "Revenue is R(x) = -1x + 10 and cost is C(x) = -2x. Write the profit function P(x) = R(x) − C(x) in simplest form.",
+          "choices": [
+            "P(x) = 1x − 10",
+            "P(x) = 1x + 10",
+            "P(x) = -3x + 10",
+            "P(x) = -1x + 10"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "rate-of-change-from-table",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "A table records output 15 at input 2 and output 20 at input 4. What is the average rate of change between these readings?",
+          "choices": [
+            "-5/2 output units per input unit",
+            "5/6 output units per input unit",
+            "5/2 output units per input unit",
+            "5 output units per input unit"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u08-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "average-rate-of-change",
+          "standard": "F-IF.6",
+          "difficulty": 3,
+          "prompt": "For f(x) = 1x² + 6x + 2, find the average rate of change from x = -5 to x = -2.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u08-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "geometric-sequence-explicit-form",
+          "standard": "F-BF.2",
+          "difficulty": 3,
+          "prompt": "A sequence has g(1) = 11 and g(n) = 2·g(n − 1). Write the explicit form and find g(4).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u08-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u08-l10"
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u04-l03",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u04-l03",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Proving Geometric Theorems",
+    "dayInUnit": 3,
+    "courseDay": 57,
+    "phase": "Guided practice A",
+    "focus": "theorems about parallelograms",
+    "title": "Guided practice A: theorems about parallelograms"
+  },
+  "standards": [
+    "G-CO.9",
+    "G-CO.10",
+    "G-CO.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u04-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "proof-reasoning-gap",
+          "standard": "G-CO.9",
+          "difficulty": 1,
+          "prompt": "Why are vertical angles congruent?",
+          "workedSolution": {
+            "steps": [
+              "Both are supplementary to the same angle.",
+              "Angles supplementary to the same angle are equal."
+            ],
+            "answer": "both supplementary to a common angle"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u04-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "parallel-lines-angle-value",
+          "standard": "G-CO.9",
+          "difficulty": 1,
+          "prompt": "Two parallel lines are cut by a transversal. One angle measures 69°. Find the measure of the corresponding angle.",
+          "choices": [
+            "111°",
+            "34.5°",
+            "90°",
+            "69°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "exterior-angle-theorem",
+          "standard": "G-CO.10",
+          "difficulty": 1,
+          "prompt": "In a triangle, the two remote interior angles measure 47° and 53°. Find the exterior angle at the third vertex.",
+          "choices": [
+            "100°",
+            "90°",
+            "80°",
+            "6°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "parallelogram-property",
+          "standard": "G-CO.11",
+          "difficulty": 2,
+          "prompt": "In a parallelogram, one angle measures 104°. Find the consecutive angle.",
+          "choices": [
+            "104°",
+            "76°",
+            "90°",
+            "52°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "triangle-midsegment-theorem",
+          "standard": "G-CO.10",
+          "difficulty": 2,
+          "prompt": "In a triangle, a segment joins the midpoints of two sides. The third side measures 34. Find the length of the midsegment and state its relationship to the third side.",
+          "choices": [
+            "68, and it is parallel to the third side",
+            "17, and it is parallel to the third side",
+            "17, and it is perpendicular to the third side",
+            "34, and it is parallel to the third side"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "proof-reasoning-gap",
+          "standard": "G-CO.9",
+          "difficulty": 2,
+          "prompt": "A proof concludes that vertical angles are congruent. Which statement supplies the missing justification?",
+          "choices": [
+            "Vertical angles are congruent by definition.",
+            "The two lines are parallel, forcing the angles to match.",
+            "Each vertical angle is supplementary to the same adjacent angle, so both have the same measure.",
+            "The angles are congruent because they are opposite in position."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u04-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "parallel-lines-angle-value",
+          "standard": "G-CO.9",
+          "difficulty": 2,
+          "prompt": "Two parallel lines are cut by a transversal. One angle measures 131°. Find the measure of the co-interior (same-side interior) angle.",
+          "choices": [
+            "49°",
+            "65.5°",
+            "90°",
+            "131°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "exterior-angle-theorem",
+          "standard": "G-CO.10",
+          "difficulty": 2,
+          "prompt": "In a triangle, the two remote interior angles measure 59° and 52°. Find the exterior angle at the third vertex.",
+          "choices": [
+            "79°",
+            "111°",
+            "69°",
+            "7°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "parallelogram-property",
+          "standard": "G-CO.11",
+          "difficulty": 3,
+          "prompt": "In a parallelogram, one angle measures 90°. Find the opposite angle.",
+          "choices": [
+            "91°",
+            "270°",
+            "90°",
+            "45°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u04-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "triangle-midsegment-theorem",
+          "standard": "G-CO.10",
+          "difficulty": 2,
+          "prompt": "In a triangle, a segment joins the midpoints of two sides. The third side measures 24. Find the length of the midsegment and state its relationship to the third side.",
+          "choices": [
+            "12, and it is perpendicular to the third side",
+            "12, and it is parallel to the third side",
+            "48, and it is parallel to the third side",
+            "24, and it is parallel to the third side"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u04-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "proof-reasoning-gap",
+          "standard": "G-CO.9",
+          "difficulty": 2,
+          "prompt": "A proof concludes that the diagonals of a parallelogram bisect each other. Which statement supplies the missing justification?",
+          "choices": [
+            "Every quadrilateral has diagonals that bisect each other.",
+            "The diagonals are congruent, so they must bisect each other.",
+            "Alternate interior angles give two pairs of congruent angles, and the opposite sides are congruent, so the triangles formed are congruent by ASA.",
+            "The diagonals are perpendicular, which forces bisection."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u04-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u04-l03"
+  }
+}

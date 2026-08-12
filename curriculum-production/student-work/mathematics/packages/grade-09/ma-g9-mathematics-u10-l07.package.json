@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u10-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u10-l07",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Distributions, Bivariate Data, and Correlation",
+    "dayInUnit": 7,
+    "courseDay": 169,
+    "phase": "Investigation or close reading",
+    "focus": "representing distributions with dot plots, histograms, and box plots",
+    "title": "Investigation or close reading: representing distributions with dot plots, histograms, and box plots"
+  },
+  "standards": [
+    "S-ID.1",
+    "S-ID.2",
+    "S-ID.3",
+    "S-ID.5",
+    "S-ID.6",
+    "S-ID.7",
+    "S-ID.8",
+    "S-ID.9",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 1,
+          "prompt": "Row 1 has 12 yes and 8 no. Fraction of row 1 saying yes?",
+          "workedSolution": {
+            "steps": [
+              "Row total 20.",
+              "12/20 = 3/5."
+            ],
+            "answer": "3/5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 2,
+          "prompt": "A least-squares line for a data set is ŷ = 8x + 45, where x is measured in kilometre travelleds and y in litres of fuel. Interpret the slope.",
+          "choices": [
+            "Each additional litres of fuel is associated with 8 more kilometre travelleds.",
+            "Each additional kilometre travelled is associated with an increase of about 8 litres of fuel.",
+            "The predicted value is 8 litres of fuel when x is 0.",
+            "Each additional kilometre travelled causes an increase of exactly 8 litres of fuel."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 3,
+          "prompt": "Towns with more fire engines report more fire damage. What conclusion is justified?",
+          "choices": [
+            "Random assignment makes a causal conclusion reasonable, because the groups differ only by the treatment.",
+            "A third variable — warm weather — plausibly drives both, so correlation here is not evidence of causation.",
+            "A strong correlation always establishes causation when the sample is large.",
+            "Larger towns have both more engines and more fires, so the association reflects town size rather than a causal link."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 2,
+          "prompt": "A data set records 4, 9, 13, 6, 10. Give the mean and the median.",
+          "choices": [
+            "mean 8.4, median 8",
+            "mean 8, median 9",
+            "mean 9, median 8.4",
+            "mean 8.4, median 9"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "outlier-effect-on-statistics",
+          "standard": "S-ID.3",
+          "difficulty": 3,
+          "prompt": "A data set of five values between 10 and 30 has one additional reading of 336 appended. Which statement best describes the effect on the mean and the median?",
+          "choices": [
+            "Both the mean and the median rise sharply.",
+            "Neither statistic changes, because one value cannot affect a summary.",
+            "The median rises sharply while the mean changes little.",
+            "The mean rises sharply while the median changes little, because the mean uses every value’s size."
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "two-way-table-conditional-frequency",
+          "standard": "S-ID.5",
+          "difficulty": 3,
+          "prompt": "A two-way table has row 1: 9 yes, 44 no; row 2: 35 yes, 16 no. Among row-1 respondents, what fraction answered yes?",
+          "choices": [
+            "9/53",
+            "44/53",
+            "9/104",
+            "9/44"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-regression-slope",
+          "standard": "S-ID.7",
+          "difficulty": 3,
+          "prompt": "A least-squares line for a data set is ŷ = 13x + 35, where x is measured in hour studieds and y in test points. Interpret the slope.",
+          "choices": [
+            "Each additional test points is associated with 13 more hour studieds.",
+            "Each additional hour studied causes an increase of exactly 13 test points.",
+            "The predicted value is 13 test points when x is 0.",
+            "Each additional hour studied is associated with an increase of about 13 test points."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u10-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "correlation-versus-causation",
+          "standard": "S-ID.9",
+          "difficulty": 3,
+          "prompt": "Ice cream sales and swimming-pool admissions are strongly positively correlated across a year. What conclusion is justified?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u10-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "centre-and-spread-from-data",
+          "standard": "S-ID.2",
+          "difficulty": 3,
+          "prompt": "A data set records 32, 5, 30, 13, 37, 2, 28. Give the mean and the median.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u10-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u10-l07"
+  }
+}

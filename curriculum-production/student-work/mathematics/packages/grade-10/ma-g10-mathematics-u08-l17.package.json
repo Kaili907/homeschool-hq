@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u08-l17",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u08-l17",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Circles",
+    "dayInUnit": 17,
+    "courseDay": 143,
+    "phase": "Targeted correction",
+    "focus": "proving angle properties of a quadrilateral inscribed in a circle",
+    "title": "Targeted correction: proving angle properties of a quadrilateral inscribed in a circle"
+  },
+  "standards": [
+    "G-C.1",
+    "G-C.2",
+    "G-C.3",
+    "G-C.5",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u08-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "inscribed-angle-measure",
+          "standard": "G-C.2",
+          "difficulty": 1,
+          "prompt": "An inscribed angle intercepts a 100° arc. Find it.",
+          "workedSolution": {
+            "steps": [
+              "Inscribed angle is half the arc.",
+              "100 ÷ 2 = 50°."
+            ],
+            "answer": "50°"
+          }
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "tangent-radius-perpendicularity",
+          "standard": "G-C.2",
+          "difficulty": 2,
+          "prompt": "Radius 3, external point 5 from centre. Tangent length?",
+          "workedSolution": {
+            "steps": [
+              "Right triangle with hypotenuse 5, leg 3.",
+              "√(25 − 9) = 4."
+            ],
+            "answer": "4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u08-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "arc-length-and-sector-area",
+          "standard": "G-C.5",
+          "difficulty": 1,
+          "prompt": "A circle has radius 4. Find the arc length and the sector area for a central angle of 90°, in terms of π.",
+          "choices": [
+            "arc 1π; sector 4π",
+            "arc 2π; sector 8π",
+            "arc 2π; sector 4π",
+            "arc 4π; sector 2π"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "cyclic-quadrilateral-angle",
+          "standard": "G-C.3",
+          "difficulty": 2,
+          "prompt": "A quadrilateral is inscribed in a circle. One angle measures 62°. Find the measure of the opposite angle.",
+          "choices": [
+            "62°",
+            "90°",
+            "298°",
+            "118°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-angle-measure",
+          "standard": "G-C.2",
+          "difficulty": 2,
+          "prompt": "An inscribed angle in a circle intercepts an arc of 96°. Find the measure of the inscribed angle.",
+          "choices": [
+            "96°",
+            "48°",
+            "192°",
+            "84°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "tangent-radius-perpendicularity",
+          "standard": "G-C.2",
+          "difficulty": 3,
+          "prompt": "A circle has radius 5. From an external point 13 from the centre, a tangent is drawn. Find the length of the tangent segment, and state the fact that makes this possible.",
+          "choices": [
+            "18, because the tangent extends beyond the circle",
+            "12, because the tangent bisects the radius",
+            "8, because the radius is perpendicular to the tangent at the point of tangency",
+            "12, because the radius is perpendicular to the tangent at the point of tangency"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u08-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "arc-length-and-sector-area",
+          "standard": "G-C.5",
+          "difficulty": 2,
+          "prompt": "A circle has radius 3. Find the arc length and the sector area for a central angle of 120°, in terms of π.",
+          "choices": [
+            "arc 2π; sector 6π",
+            "arc 2π; sector 3π",
+            "arc 3π; sector 2π",
+            "arc 1π; sector 3π"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "cyclic-quadrilateral-angle",
+          "standard": "G-C.3",
+          "difficulty": 2,
+          "prompt": "A quadrilateral is inscribed in a circle. One angle measures 111°. Find the measure of the opposite angle.",
+          "choices": [
+            "249°",
+            "90°",
+            "111°",
+            "69°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "inscribed-angle-measure",
+          "standard": "G-C.2",
+          "difficulty": 3,
+          "prompt": "An inscribed angle in a circle intercepts an arc of 168°. Find the measure of the inscribed angle.",
+          "choices": [
+            "84°",
+            "168°",
+            "336°",
+            "12°"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u08-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "tangent-radius-perpendicularity",
+          "standard": "G-C.2",
+          "difficulty": 3,
+          "prompt": "A circle has radius 3. From an external point 5 from the centre, a tangent is drawn. Find the length of the tangent segment, and state the fact that makes this possible.",
+          "choices": [
+            "8, because the tangent extends beyond the circle",
+            "4, because the tangent bisects the radius",
+            "4, because the radius is perpendicular to the tangent at the point of tangency",
+            "2, because the radius is perpendicular to the tangent at the point of tangency"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u08-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u08-l17"
+  }
+}

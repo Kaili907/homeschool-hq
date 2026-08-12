@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u03-l03",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multi-Digit Multiplication",
+    "dayInUnit": 3,
+    "courseDay": 39,
+    "phase": "Guided practice A",
+    "focus": "partial products",
+    "title": "Guided practice A: partial products"
+  },
+  "standards": [
+    "5.NBT.5",
+    "5.OA.1",
+    "5.OA.2"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "estimate-product",
+          "standard": "5.NBT.5",
+          "difficulty": 1,
+          "prompt": "Estimate 684 × 47 by rounding 684 to the nearest hundred and 47 to the nearest ten.",
+          "workedSolution": {
+            "steps": [
+              "684 rounds to 700 and 47 rounds to 50.",
+              "Multiply the rounded factors: 700 × 50.",
+              "The estimate is 35000, so an exact answer near that amount is reasonable."
+            ],
+            "answer": "35000"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "write-grouped-expression",
+          "standard": "5.OA.2",
+          "difficulty": 1,
+          "prompt": "Add 25 and 11. Then multiply the sum by 11. Which numerical expression represents the calculation?",
+          "choices": [
+            "25 × (11 + 11)",
+            "(25 + 11) × 11",
+            "25 + (11 × 11)",
+            "(25 × 11) + 11"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-grouped-expression",
+          "standard": "5.OA.1",
+          "difficulty": 1,
+          "prompt": "Evaluate: (30 + 9) × 6",
+          "choices": [
+            "233",
+            "234",
+            "244",
+            "235"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Without evaluating it, which statement describes 9 × (9 + 9)?",
+          "choices": [
+            "Multiply the sum of 9 and 9 by 9.",
+            "Add 9 and the product of 9 and 9.",
+            "Multiply 10 by the sum of 9 and 9.",
+            "Multiply 9 by the sum of 9 and 9."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-multiplication",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "For 4 event days, a booth sells 43 tickets each day at $5 per ticket. What projected revenue will the booth earn?",
+          "choices": [
+            "$215",
+            "$860",
+            "$192",
+            "$172"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Maya has 432 cards, which is 6 times as many as Leo. How many cards does Leo have?",
+          "choices": [
+            "438",
+            "426",
+            "72",
+            "432"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "area-model-product",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "An area model for 362 × 32 splits 362 into 300 + 60 + 2 and 32 into 30 + 2. What total product does the model represent?",
+          "choices": [
+            "11616",
+            "724",
+            "11946",
+            "11584"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "partial-products",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "Use partial products to calculate 554 × 38. Decompose both factors by place value, multiply each pair of parts, and add the partial products. What is the product?",
+          "choices": [
+            "21052",
+            "4432",
+            "1662",
+            "20498"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "standard-algorithm",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use the standard multiplication algorithm to calculate 1061 × 93.",
+          "choices": [
+            "99734",
+            "3183",
+            "98766",
+            "98673"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "estimate-product",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "Estimate 452 × 58 by rounding 452 to the nearest hundred and 58 to the nearest ten.",
+          "choices": [
+            "30000",
+            "25000",
+            "27120",
+            "29000"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "write-grouped-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Add 58 and 27. Then multiply the sum by 7. Which numerical expression represents the calculation?",
+          "choices": [
+            "58 + (27 × 7)",
+            "58 × (27 + 7)",
+            "(58 × 27) + 7",
+            "(58 + 27) × 7"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u03-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u03-l03"
+  }
+}

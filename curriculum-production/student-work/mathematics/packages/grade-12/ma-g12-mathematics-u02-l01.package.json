@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u02-l01",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u02-l01",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Inverse Trigonometric Functions and Composition",
+    "dayInUnit": 1,
+    "courseDay": 19,
+    "phase": "Launch and diagnostic",
+    "focus": "restricting a domain so an inverse can be constructed",
+    "title": "Launch and diagnostic: restricting a domain so an inverse can be constructed"
+  },
+  "standards": [
+    "F-TF.6",
+    "F-TF.7",
+    "F-BF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Launch and diagnostic",
+    "profile": "diagnostic-launch",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read the example first. You are not expected to know this yet.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l01#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-inverse-sine",
+          "standard": "F-TF.6",
+          "difficulty": 1,
+          "prompt": "Evaluate arcsin(1/2).",
+          "workedSolution": {
+            "steps": [
+              "Which angle in [−π/2, π/2] has sine 1/2?",
+              "30°, which is π/6."
+            ],
+            "answer": "π/6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Try each one. If you get stuck, write what you do know and move on.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l01#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "compose-trig-and-inverse",
+          "standard": "F-TF.7",
+          "difficulty": 1,
+          "prompt": "Evaluate cos(arcsin(1/2)) exactly.",
+          "choices": [
+            "√3/2",
+            "0",
+            "√2/2",
+            "1/2"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l01#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "why-domain-restriction-is-needed",
+          "standard": "F-BF.5",
+          "difficulty": 1,
+          "prompt": "Why does cosine on all real numbers not have an inverse function without further restriction?",
+          "choices": [
+            "It is not one-to-one — infinitely many inputs give the same output — so it has no inverse until the domain is restricted to [−π/2, π/2].",
+            "It is not one-to-one, so the domain is restricted to [0, π] to make an inverse possible.",
+            "It repeats with period π, so the domain is restricted to (−π/2, π/2) to make an inverse possible.",
+            "Because its outputs are not all positive."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l01#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-trig-equation-all-solutions",
+          "standard": "F-TF.7",
+          "difficulty": 2,
+          "prompt": "Find all solutions of sin θ = √2/2 for 0° ≤ θ < 360°.",
+          "choices": [
+            "θ = 45° or θ = 315°",
+            "θ = 45° or θ = 225°",
+            "θ = 45° or θ = 135°",
+            "θ = 45° only"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l01#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-inverse-sine",
+          "standard": "F-TF.6",
+          "difficulty": 2,
+          "prompt": "Evaluate arcsin(0) in radians, giving the principal value.",
+          "choices": [
+            "π/3",
+            "π/4",
+            "0",
+            "π/6"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l01#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "compose-trig-and-inverse",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Evaluate cos(arcsin(√3/2)) exactly.",
+          "choices": [
+            "0",
+            "√3/2",
+            "√2/2",
+            "1/2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Show what you can do so far. This sets the starting point, not a grade.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l01#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "why-domain-restriction-is-needed",
+          "standard": "F-BF.5",
+          "difficulty": 1,
+          "prompt": "Why does sine on all real numbers not have an inverse function without further restriction?",
+          "choices": [
+            "Because its outputs are not all positive.",
+            "It repeats with period π, so the domain is restricted to (−π/2, π/2) to make an inverse possible.",
+            "It is not one-to-one — infinitely many inputs give the same output — so it has no inverse until the domain is restricted to [−π/2, π/2].",
+            "It is not one-to-one, so the domain is restricted to [0, π] to make an inverse possible."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l01#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-trig-equation-all-solutions",
+          "standard": "F-TF.7",
+          "difficulty": 2,
+          "prompt": "Find all solutions of sin θ = √3/2 for 0° ≤ θ < 360°.",
+          "choices": [
+            "θ = 60° only",
+            "θ = 60° or θ = 300°",
+            "θ = 60° or θ = 240°",
+            "θ = 60° or θ = 120°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u02-l01.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u02-l01"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u05-l11",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u05-l11",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Functions",
+    "dayInUnit": 11,
+    "courseDay": 83,
+    "phase": "Performance task planning",
+    "focus": "constructing functions",
+    "title": "Performance task planning: constructing functions"
+  },
+  "standards": [
+    "8.F.1",
+    "8.F.2",
+    "8.F.3",
+    "8.F.4",
+    "8.F.5"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "construct-function-from-two-points",
+          "standard": "8.F.4",
+          "difficulty": 1,
+          "prompt": "A function contains the points (1, 5) and (3, 13). Write the function rule f(x) = mx + b.",
+          "workedSolution": {
+            "steps": [
+              "Find the slope: m = (13 - 5) / (3 - 1) = 8 / 2 = 4.",
+              "Use one point to find b: 5 = 4(1) + b, so b = 1.",
+              "The function rule is f(x) = 4x + 1."
+            ],
+            "answer": "f(x) = 4x + 1"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "construct-function-from-context",
+          "standard": "8.F.4",
+          "difficulty": 2,
+          "prompt": "A rental company charges a $84 base fee plus $20 per hour. Which function models the total cost f(x) for x hours?",
+          "choices": [
+            "f(x) = 20x + 84",
+            "f(x) = 21x + 84",
+            "f(x) = 20x + 83",
+            "f(x) = 84x + 20"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "match-graph-description-to-scenario",
+          "standard": "8.F.5",
+          "difficulty": 2,
+          "prompt": "A hiker climbs a steady, unchanging slope for the whole hike. Which description best matches the shape of the graph over time?",
+          "choices": [
+            "constant, then increasing",
+            "decreasing at a constant rate the whole time",
+            "increasing, then constant, then decreasing",
+            "increasing at a constant rate the whole time"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-interval-behavior",
+          "standard": "8.F.5",
+          "difficulty": 3,
+          "prompt": "A graph shows height over time.\nFrom t = 0 to t = 2, height goes from 0 to -8.\nFrom t = 2 to t = 6, height goes from -8 to -8.\nFrom t = 6 to t = 9, height goes from -8 to -7.\nWhich interval shows the height constant?",
+          "choices": [
+            "t = 0 to t = 2",
+            "t = 6 to t = 9",
+            "No interval shows this behavior.",
+            "t = 2 to t = 6"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "is-relation-a-function",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Consider the relation {(8, -10), (6, -15), (-4, -3), (-2, -11)}. Is this relation a function?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "function-graph-as-pairs",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Which set of ordered pairs does NOT represent a function?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "evaluate-function-notation",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Given f(x) = -2x - 11, find f(-3).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u05-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u05-l11"
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u04-l09",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u04-l09",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "The Complex Plane",
+    "dayInUnit": 9,
+    "courseDay": 63,
+    "phase": "Concept model C",
+    "focus": "addition, subtraction, and conjugation represented geometrically",
+    "title": "Concept model C: addition, subtraction, and conjugation represented geometrically"
+  },
+  "standards": [
+    "N-CN.3",
+    "N-CN.4",
+    "N-CN.5",
+    "N-CN.6",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 1,
+          "prompt": "For z = 3 + 4i, give z̄ and |z|.",
+          "workedSolution": {
+            "steps": [
+              "Negate the imaginary part: 3 − 4i.",
+              "|z| = √(9 + 16) = 5."
+            ],
+            "answer": "z̄ = 3 − 4i, |z| = 5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 2,
+          "prompt": "Write −1 + i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "choices": [
+            "modulus √2, argument 225°",
+            "modulus √2, argument 315°",
+            "modulus √2, argument 45°",
+            "modulus √2, argument 135°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 3,
+          "prompt": "Complex numbers z and w have modulus 6 and 2 and arguments 90° and 30°. Give the modulus and argument of zw.",
+          "choices": [
+            "modulus 12, argument 2700°",
+            "modulus 12, argument 120°",
+            "modulus 8, argument 120°",
+            "modulus 12, argument 60°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "distance-and-midpoint-in-complex-plane",
+          "standard": "N-CN.6",
+          "difficulty": 3,
+          "prompt": "Let z = -5 − 6i and w = -2 − 2i. Find the distance |z − w| and the midpoint of the segment joining them.",
+          "choices": [
+            "distance 7, midpoint -3.5 − 4i",
+            "distance 25, midpoint -3.5 − 4i",
+            "distance 5, midpoint 3 + 4i",
+            "distance 5, midpoint -3.5 − 4i"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 2,
+          "prompt": "For z = -7 − 24i, give the conjugate z̄ and the modulus |z|.",
+          "choices": [
+            "z̄ = -7 + 24i, |z| = 31",
+            "z̄ = 7 − 24i, |z| = 25",
+            "z̄ = -7 + 24i, |z| = 25",
+            "z̄ = 7 + 24i, |z| = 25"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 2,
+          "prompt": "Write 2i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "choices": [
+            "modulus √2, argument 135°",
+            "modulus √2, argument 225°",
+            "modulus 2, argument 90°",
+            "modulus √2, argument 45°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 3,
+          "prompt": "Complex numbers z and w have modulus 3 and 3 and arguments 90° and 60°. Give the modulus and argument of zw.",
+          "choices": [
+            "modulus 9, argument 150°",
+            "modulus 9, argument 30°",
+            "modulus 9, argument 5400°",
+            "modulus 6, argument 150°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "distance-and-midpoint-in-complex-plane",
+          "standard": "N-CN.6",
+          "difficulty": 3,
+          "prompt": "Let z = -7 − 4i and w = 1 + 11i. Find the distance |z − w| and the midpoint of the segment joining them.",
+          "choices": [
+            "distance 289, midpoint -3 + 3.5i",
+            "distance 17, midpoint 8 + 15i",
+            "distance 23, midpoint -3 + 3.5i",
+            "distance 17, midpoint -3 + 3.5i"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 3,
+          "prompt": "For z = -3 − 4i, give the conjugate z̄ and the modulus |z|.",
+          "choices": [
+            "z̄ = -3 + 4i, |z| = 5",
+            "z̄ = 3 − 4i, |z| = 5",
+            "z̄ = 3 + 4i, |z| = 5",
+            "z̄ = -3 + 4i, |z| = 7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 3,
+          "prompt": "Write 1 + i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "choices": [
+            "modulus √2, argument 135°",
+            "modulus √2, argument 315°",
+            "modulus √2, argument 45°",
+            "modulus √2, argument 225°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 3,
+          "prompt": "Complex numbers z and w have modulus 4 and 5 and arguments 60° and 60°. Give the modulus and argument of zw.",
+          "choices": [
+            "modulus 20, argument 3600°",
+            "modulus 9, argument 120°",
+            "modulus 20, argument 0°",
+            "modulus 20, argument 120°"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u04-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u04-l09"
+  }
+}

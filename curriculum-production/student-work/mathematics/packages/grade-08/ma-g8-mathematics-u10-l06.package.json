@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u10-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u10-l06",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Algebraic Modeling Capstone",
+    "dayInUnit": 6,
+    "courseDay": 168,
+    "phase": "Guided practice B",
+    "focus": "mathematical communication",
+    "title": "Guided practice B: mathematical communication"
+  },
+  "standards": [
+    "8.EE.7",
+    "8.EE.8",
+    "8.F.4",
+    "8.G.7",
+    "8.SP.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "define-variable",
+          "standard": "MP.4",
+          "difficulty": 1,
+          "prompt": "A trip cost depends on miles traveled. Define x.",
+          "workedSolution": {
+            "steps": [
+              "Define the relevant quantities and assumptions.",
+              "Use the selected model consistently.",
+              "State a conclusion with its limitation or evidence."
+            ],
+            "answer": "x = miles traveled"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "state-model-assumption",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A service is modeled by C = 12h + 25, where h is hours. Which assumption supports this model?",
+          "choices": [
+            "The flat fee changes each hour.",
+            "The number of hours is always zero.",
+            "The hourly charge remains $12 for every hour.",
+            "Every service has the same total cost."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "select-linear-or-nonlinear-model",
+          "standard": "8.F.4",
+          "difficulty": 2,
+          "prompt": "A savings balance increases by $15 each week. Which model type is appropriate?",
+          "choices": [
+            "constant",
+            "nonlinear",
+            "not a model",
+            "linear"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-equation",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "A model gives 7x - 7 = 21. What is x?",
+          "choices": [
+            "5",
+            "3",
+            "4",
+            "28"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-constraint",
+          "standard": "8.EE.8",
+          "difficulty": 3,
+          "prompt": "Two constraints are y = 5x + 3 and y = 11x - 15. What is their shared solution?",
+          "choices": [
+            "(4, 19)",
+            "(2, 19)",
+            "(3, 18)",
+            "(5, 17)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "geometry-measurement-model",
+          "standard": "8.G.7",
+          "difficulty": 2,
+          "prompt": "A rectangular design has side lengths 5 units and 12 units. What is its diagonal?",
+          "choices": [
+            "14 units",
+            "12 units",
+            "17 units",
+            "13 units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-data-trend",
+          "standard": "8.SP.3",
+          "difficulty": 3,
+          "prompt": "In a data set, hours of screen time increase and hours of sleep generally decrease. What association is shown?",
+          "choices": [
+            "no association",
+            "negative",
+            "positive",
+            "causation"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-model-limitation",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A line of fit was made from data for temperatures 40° through 80°. It is used to predict a temperature at 120°. Which limitation is most important?",
+          "choices": [
+            "The prediction is an extrapolation and may be less reliable.",
+            "The prediction must be exactly correct.",
+            "The line proves causation.",
+            "The data range no longer matters."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "choose-mathematical-evidence",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "Which action provides the strongest evidence that a model fits a situation?",
+          "choices": [
+            "show calculations and compare predictions to data",
+            "state an answer without units",
+            "choose the first equation written",
+            "ignore data that disagree"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "communicate-model-conclusion",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "Which conclusion communicates a mathematical model responsibly?",
+          "choices": [
+            "State the result, units, assumption, and limitation.",
+            "Claim the model is always correct.",
+            "Hide the assumption and data source.",
+            "State only a number."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "define-variable",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "A moving company charges by the number of hours worked. Which definition of x best models this situation?",
+          "choices": [
+            "x = number of workers",
+            "x = total cost in dollars",
+            "x = company name",
+            "x = number of hours worked"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u10-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u10-l06"
+  }
+}

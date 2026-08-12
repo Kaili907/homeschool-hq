@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u06-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u06-l10",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Vectors",
+    "dayInUnit": 10,
+    "courseDay": 100,
+    "phase": "Discussion or problem seminar",
+    "focus": "vector addition, the parallelogram rule, and component-wise sums",
+    "title": "Discussion or problem seminar: vector addition, the parallelogram rule, and component-wise sums"
+  },
+  "standards": [
+    "N-VM.1",
+    "N-VM.2",
+    "N-VM.3",
+    "N-VM.4",
+    "N-VM.5",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 1,
+          "prompt": "v = ⟨3, 4⟩, find −2v.",
+          "workedSolution": {
+            "steps": [
+              "⟨−6, −8⟩.",
+              "Magnitude 2 × 5 = 10, direction reversed."
+            ],
+            "answer": "⟨−6, −8⟩, magnitude 10, reversed"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "unit-vector",
+          "standard": "N-VM.3",
+          "difficulty": 2,
+          "prompt": "Find the unit vector in the direction of ⟨-5, 12⟩.",
+          "choices": [
+            "⟨-5/13, 12/13⟩",
+            "⟨-5, 12⟩",
+            "⟨13/-5, 13/12⟩",
+            "⟨-5/169, 12/169⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 3,
+          "prompt": "A vector has components ⟨5, -12⟩. Find its magnitude.",
+          "choices": [
+            "7",
+            "17",
+            "13",
+            "169"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "vector-addition-and-subtraction",
+          "standard": "N-VM.4",
+          "difficulty": 3,
+          "prompt": "Given u = ⟨-3, 11⟩ and v = ⟨4, 12⟩, find u − v.",
+          "choices": [
+            "⟨7, 1⟩",
+            "⟨-7, 23⟩",
+            "⟨-7, -1⟩",
+            "⟨1, 23⟩"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 3,
+          "prompt": "Let v = ⟨3, 4⟩, which has magnitude 5. Find -3v and its magnitude, and say how the direction changes.",
+          "choices": [
+            "⟨0, 1⟩, magnitude 15, direction unchanged",
+            "⟨-9, -12⟩, magnitude 15, direction reversed",
+            "⟨-9, -12⟩, magnitude 5, direction reversed",
+            "⟨-9, -12⟩, magnitude 15, direction unchanged"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "unit-vector",
+          "standard": "N-VM.3",
+          "difficulty": 3,
+          "prompt": "Find the unit vector in the direction of ⟨6, -8⟩.",
+          "choices": [
+            "⟨10/6, 10/-8⟩",
+            "⟨6, -8⟩",
+            "⟨6/10, -8/10⟩",
+            "⟨6/100, -8/100⟩"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "vector-magnitude-and-components",
+          "standard": "N-VM.1",
+          "difficulty": 3,
+          "prompt": "A vector has components ⟨-7, -24⟩. Find its magnitude.",
+          "choices": [
+            "17",
+            "31",
+            "25",
+            "625"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u06-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "vector-addition-and-subtraction",
+          "standard": "N-VM.4",
+          "difficulty": 3,
+          "prompt": "Given u = ⟨1, -6⟩ and v = ⟨10, -1⟩, find u − v.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u06-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "scalar-multiplication-effect",
+          "standard": "N-VM.5",
+          "difficulty": 3,
+          "prompt": "Let v = ⟨3, 4⟩, which has magnitude 5. Find -5v and its magnitude, and say how the direction changes.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u06-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u06-l10"
+  }
+}

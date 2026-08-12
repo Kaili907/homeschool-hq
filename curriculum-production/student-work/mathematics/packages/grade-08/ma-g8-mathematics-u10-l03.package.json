@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u10-l03",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u10-l03",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Algebraic Modeling Capstone",
+    "dayInUnit": 3,
+    "courseDay": 165,
+    "phase": "Guided practice A",
+    "focus": "systems and constraints",
+    "title": "Guided practice A: systems and constraints"
+  },
+  "standards": [
+    "8.EE.7",
+    "8.EE.8",
+    "8.F.4",
+    "8.G.7",
+    "8.SP.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-system-constraint",
+          "standard": "8.EE.8",
+          "difficulty": 1,
+          "prompt": "Solve y = 2x + 1 and y = x + 5.",
+          "workedSolution": {
+            "steps": [
+              "Define the relevant quantities and assumptions.",
+              "Use the selected model consistently.",
+              "State a conclusion with its limitation or evidence."
+            ],
+            "answer": "(4, 9)"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "geometry-measurement-model",
+          "standard": "8.G.7",
+          "difficulty": 1,
+          "prompt": "A rectangular design has side lengths 8 units and 15 units. What is its diagonal?",
+          "choices": [
+            "17 units",
+            "16 units",
+            "18 units",
+            "23 units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-data-trend",
+          "standard": "8.SP.3",
+          "difficulty": 1,
+          "prompt": "In a data set, hours practiced increase and performance scores generally increase. What association is shown?",
+          "choices": [
+            "negative",
+            "no association",
+            "causation",
+            "positive"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-model-limitation",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A line of fit was made from data for temperatures 40° through 80°. It is used to predict a temperature at 120°. Which limitation is most important?",
+          "choices": [
+            "The prediction must be exactly correct.",
+            "The line proves causation.",
+            "The prediction is an extrapolation and may be less reliable.",
+            "The data range no longer matters."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "choose-mathematical-evidence",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "Which action provides the strongest evidence that a model fits a situation?",
+          "choices": [
+            "state an answer without units",
+            "choose the first equation written",
+            "show calculations and compare predictions to data",
+            "ignore data that disagree"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "communicate-model-conclusion",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "Which conclusion communicates a mathematical model responsibly?",
+          "choices": [
+            "Claim the model is always correct.",
+            "Hide the assumption and data source.",
+            "State the result, units, assumption, and limitation.",
+            "State only a number."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "define-variable",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A moving company charges by the number of hours worked. Which definition of x best models this situation?",
+          "choices": [
+            "x = number of workers",
+            "x = company name",
+            "x = number of hours worked",
+            "x = total cost in dollars"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "state-model-assumption",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A service is modeled by C = 12h + 25, where h is hours. Which assumption supports this model?",
+          "choices": [
+            "Every service has the same total cost.",
+            "The number of hours is always zero.",
+            "The flat fee changes each hour.",
+            "The hourly charge remains $12 for every hour."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "select-linear-or-nonlinear-model",
+          "standard": "8.F.4",
+          "difficulty": 3,
+          "prompt": "The area of a square changes as its side length is squared. Which model type is appropriate?",
+          "choices": [
+            "not a model",
+            "constant",
+            "nonlinear",
+            "linear"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-equation",
+          "standard": "8.EE.7",
+          "difficulty": 2,
+          "prompt": "A model gives 4x - 9 = 19. What is x?",
+          "choices": [
+            "7",
+            "28",
+            "8",
+            "6"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-constraint",
+          "standard": "8.EE.8",
+          "difficulty": 2,
+          "prompt": "Two constraints are y = 1x + 2 and y = 12x - 64. What is their shared solution?",
+          "choices": [
+            "(5, 9)",
+            "(8, 7)",
+            "(6, 8)",
+            "(7, 9)"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u10-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u10-l03"
+  }
+}

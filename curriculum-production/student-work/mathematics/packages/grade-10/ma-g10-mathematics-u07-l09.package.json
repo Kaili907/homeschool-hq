@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u07-l09",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u07-l09",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Right Triangle Trigonometry",
+    "dayInUnit": 9,
+    "courseDay": 117,
+    "phase": "Concept model C",
+    "focus": "the relationship between sine and cosine of complementary angles",
+    "title": "Concept model C: the relationship between sine and cosine of complementary angles"
+  },
+  "standards": [
+    "G-SRT.6",
+    "G-SRT.7",
+    "G-SRT.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 1,
+          "prompt": "A 3-4-5 triangle, θ opposite the side 3. Find sin θ.",
+          "workedSolution": {
+            "steps": [
+              "Opposite 3, hypotenuse 5.",
+              "sin θ = 3/5."
+            ],
+            "answer": "3/5"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 2,
+          "prompt": "A right triangle has legs 9 and 12. Find the hypotenuse.",
+          "choices": [
+            "21",
+            "9",
+            "18",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 3,
+          "prompt": "Express sin 32° as a cosine of another angle, and explain why the two are equal.",
+          "choices": [
+            "cos 148°, because the angles are supplementary",
+            "cos 122°, because the angles differ by a right angle",
+            "cos 32°, because sine and cosine are always equal",
+            "cos 58°, because the two angles are complementary and swap the roles of opposite and adjacent"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "angle-of-elevation-application",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "From a point 120 m from the base of a tower, the angle of elevation to the top is θ, and the tower is 27 m tall. Which equation correctly determines θ?",
+          "choices": [
+            "sin θ = 27/120",
+            "tan θ = 120/27",
+            "tan θ = 27/120",
+            "cos θ = 27/120"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 2,
+          "prompt": "A right triangle has legs 8 and 15 and hypotenuse 17. Angle θ is opposite the leg of length 8. Find tan θ as an exact fraction in lowest terms.",
+          "choices": [
+            "8/17",
+            "15/17",
+            "8/15",
+            "15/8"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 2,
+          "prompt": "A right triangle has legs 5 and 12. Find the hypotenuse.",
+          "choices": [
+            "17",
+            "13",
+            "14",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 3,
+          "prompt": "Express sin 52° as a cosine of another angle, and explain why the two are equal.",
+          "choices": [
+            "cos 38°, because the two angles are complementary and swap the roles of opposite and adjacent",
+            "cos 142°, because the angles differ by a right angle",
+            "cos 128°, because the angles are supplementary",
+            "cos 52°, because sine and cosine are always equal"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "angle-of-elevation-application",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "From a point 21 m from the base of a tower, the angle of elevation to the top is θ, and the tower is 20 m tall. Which equation correctly determines θ?",
+          "choices": [
+            "cos θ = 20/21",
+            "tan θ = 20/21",
+            "sin θ = 20/21",
+            "tan θ = 21/20"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "trig-ratio-value",
+          "standard": "G-SRT.6",
+          "difficulty": 3,
+          "prompt": "A right triangle has legs 10 and 24 and hypotenuse 26. Angle θ is opposite the leg of length 10. Find sin θ as an exact fraction in lowest terms.",
+          "choices": [
+            "13/5",
+            "12/13",
+            "5/12",
+            "5/13"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u07-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-right-triangle-side",
+          "standard": "G-SRT.8",
+          "difficulty": 3,
+          "prompt": "A right triangle has hypotenuse 82 and one leg 18. Find the other leg.",
+          "choices": [
+            "84",
+            "64",
+            "82",
+            "80"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u07-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "complementary-sine-cosine",
+          "standard": "G-SRT.7",
+          "difficulty": 3,
+          "prompt": "Express sin 41° as a cosine of another angle, and explain why the two are equal.",
+          "choices": [
+            "cos 49°, because the two angles are complementary and swap the roles of opposite and adjacent",
+            "cos 139°, because the angles are supplementary",
+            "cos 41°, because sine and cosine are always equal",
+            "cos 131°, because the angles differ by a right angle"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u07-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u07-l09"
+  }
+}

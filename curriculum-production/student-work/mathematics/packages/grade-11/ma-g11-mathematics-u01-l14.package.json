@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u01-l14",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u01-l14",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Polynomial Arithmetic, Identities, and Zeros",
+    "dayInUnit": 14,
+    "courseDay": 14,
+    "phase": "Transfer challenge",
+    "focus": "the remainder theorem and evaluating by division",
+    "title": "Transfer challenge: the remainder theorem and evaluating by division"
+  },
+  "standards": [
+    "A-APR.1",
+    "A-APR.2",
+    "A-APR.3",
+    "A-APR.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 1,
+          "prompt": "Zeros of (x − 1)(x + 2)(x − 4)?",
+          "workedSolution": {
+            "steps": [
+              "Each factor zero gives a root.",
+              "x = 1, −2, 4; sorted: −2, 1, 4."
+            ],
+            "answer": "−2, 1, 4"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 3,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 8 and y = 5 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "39, 40, 89",
+            "39, 39, 80",
+            "39, 80, 89",
+            "5, 8, 13"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 3,
+          "prompt": "Expand and simplify: (4x − 2)(6x + 3).",
+          "choices": [
+            "24x^2 - 6x",
+            "24x^2 - 6",
+            "10x^2 + 1",
+            "24x^2 + 24x - 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 3,
+          "prompt": "Find the remainder when x^2 + 8x - 3 is divided by (x − 1).",
+          "choices": [
+            "12",
+            "6",
+            "7",
+            "-10"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 3,
+          "prompt": "A cubic polynomial factors as (x + 5)(x − 6)(x − 4). List its zeros in increasing order.",
+          "choices": [
+            "-4, 5, 7",
+            "-6, -4, 5",
+            "-5, 4, 6",
+            "-5, 6, 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "polynomial-identity",
+          "standard": "A-APR.4",
+          "difficulty": 3,
+          "prompt": "Use the identity (x² + y²)² = (x² − y²)² + (2xy)² with x = 5 and y = 8 to generate a Pythagorean triple. Give the triple in increasing order.",
+          "choices": [
+            "39, 80, 89",
+            "-39, 40, 89",
+            "-39, 39, 80",
+            "5, 8, 13"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u01-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "multiply-polynomials",
+          "standard": "A-APR.1",
+          "difficulty": 3,
+          "prompt": "Expand and simplify: (-2x − 3)(-3x + 8).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "remainder-theorem",
+          "standard": "A-APR.2",
+          "difficulty": 3,
+          "prompt": "Find the remainder when 7x^2 - 8x - 2 is divided by (x + 2).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g11-mathematics-u01-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "zeros-and-factored-form",
+          "standard": "A-APR.3",
+          "difficulty": 3,
+          "prompt": "A cubic polynomial factors as (x − 1)(x + 2)(x + 4). List its zeros in increasing order.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u01-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u01-l14"
+  }
+}

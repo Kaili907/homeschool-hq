@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u04-l10",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u04-l10",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "The Complex Plane",
+    "dayInUnit": 10,
+    "courseDay": 64,
+    "phase": "Discussion or problem seminar",
+    "focus": "multiplication as rotation and scaling",
+    "title": "Discussion or problem seminar: multiplication as rotation and scaling"
+  },
+  "standards": [
+    "N-CN.3",
+    "N-CN.4",
+    "N-CN.5",
+    "N-CN.6",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 1,
+          "prompt": "Moduli 2 and 3, arguments 30° and 45°. Find zw.",
+          "workedSolution": {
+            "steps": [
+              "Multiply moduli: 6.",
+              "Add arguments: 75°."
+            ],
+            "answer": "modulus 6, argument 75°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "distance-and-midpoint-in-complex-plane",
+          "standard": "N-CN.6",
+          "difficulty": 2,
+          "prompt": "Let z = -4 − 4i and w = 1 + 8i. Find the distance |z − w| and the midpoint of the segment joining them.",
+          "choices": [
+            "distance 13, midpoint -1.5 + 2i",
+            "distance 13, midpoint 5 + 12i",
+            "distance 17, midpoint -1.5 + 2i",
+            "distance 169, midpoint -1.5 + 2i"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 3,
+          "prompt": "For z = -3 + 4i, give the conjugate z̄ and the modulus |z|.",
+          "choices": [
+            "z̄ = 3 + 4i, |z| = 5",
+            "z̄ = -3 − 4i, |z| = 5",
+            "z̄ = -3 − 4i, |z| = 7",
+            "z̄ = 3 − 4i, |z| = 5"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 3,
+          "prompt": "Write −1 − i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "choices": [
+            "modulus √2, argument 225°",
+            "modulus √2, argument 135°",
+            "modulus √2, argument 315°",
+            "modulus √2, argument 45°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 3,
+          "prompt": "Complex numbers z and w have modulus 3 and 2 and arguments 30° and 60°. Give the modulus and argument of zw.",
+          "choices": [
+            "modulus 5, argument 90°",
+            "modulus 6, argument 90°",
+            "modulus 6, argument 1800°",
+            "modulus 6, argument 30°"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "distance-and-midpoint-in-complex-plane",
+          "standard": "N-CN.6",
+          "difficulty": 3,
+          "prompt": "Let z = 5 − 2i and w = 11 + 6i. Find the distance |z − w| and the midpoint of the segment joining them.",
+          "choices": [
+            "distance 14, midpoint 8 + 2i",
+            "distance 10, midpoint 8 + 2i",
+            "distance 100, midpoint 8 + 2i",
+            "distance 10, midpoint 6 + 8i"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "modulus-and-conjugate",
+          "standard": "N-CN.3",
+          "difficulty": 3,
+          "prompt": "For z = 3 − 4i, give the conjugate z̄ and the modulus |z|.",
+          "choices": [
+            "z̄ = 3 + 4i, |z| = 5",
+            "z̄ = -3 − 4i, |z| = 5",
+            "z̄ = -3 + 4i, |z| = 5",
+            "z̄ = 3 + 4i, |z| = 7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u04-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "polar-form-of-complex-number",
+          "standard": "N-CN.4",
+          "difficulty": 3,
+          "prompt": "Write 1 + i in polar form, giving the modulus and an argument in [0°, 360°).",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u04-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "multiplication-as-rotation",
+          "standard": "N-CN.5",
+          "difficulty": 3,
+          "prompt": "Complex numbers z and w have modulus 4 and 5 and arguments 60° and 30°. Give the modulus and argument of zw.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u04-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u04-l10"
+  }
+}

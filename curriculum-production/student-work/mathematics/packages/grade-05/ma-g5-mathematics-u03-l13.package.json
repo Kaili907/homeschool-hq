@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u03-l13",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u03-l13",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Multi-Digit Multiplication",
+    "dayInUnit": 13,
+    "courseDay": 49,
+    "phase": "Skill consolidation",
+    "focus": "multiplicative comparison",
+    "title": "Skill consolidation: multiplicative comparison"
+  },
+  "standards": [
+    "5.NBT.5",
+    "5.OA.1",
+    "5.OA.2"
+  ],
+  "blueprint": {
+    "phase": "Skill consolidation",
+    "profile": "consolidation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l13#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-grouped-expression",
+          "standard": "5.OA.1",
+          "difficulty": 1,
+          "prompt": "Evaluate: (12 + 2) × 5",
+          "choices": [
+            "71",
+            "70",
+            "80",
+            "69"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l13#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Without evaluating it, which statement describes 11 × (10 + 16)?",
+          "choices": [
+            "Add 10 and the product of 11 and 16.",
+            "Add 11 and the product of 10 and 16.",
+            "Multiply the sum of 11 and 10 by 16.",
+            "Multiply 11 by the sum of 10 and 16."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l13#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-multiplication",
+          "standard": "5.NBT.5",
+          "difficulty": 2,
+          "prompt": "For 5 event days, a booth sells 20 tickets each day at $11 per ticket. What projected revenue will the booth earn?",
+          "choices": [
+            "$1100",
+            "$1111",
+            "$155",
+            "$220"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l13#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "multiplicative-comparison",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Maya has 6 times as many cards as Leo. Leo has 78 cards. How many cards does Maya have?",
+          "choices": [
+            "474",
+            "468",
+            "462",
+            "78"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l13#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "area-model-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "An area model for 4034 × 65 splits 4034 into 4000 + 30 + 4 and 65 into 60 + 5. What total product does the model represent?",
+          "choices": [
+            "262210",
+            "20170",
+            "262145",
+            "24204"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l13#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "partial-products",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use partial products to calculate 7656 × 48. Decompose both factors by place value, multiply each pair of parts, and add the partial products. What is the product?",
+          "choices": [
+            "61248",
+            "30624",
+            "367488",
+            "375144"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l13#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "standard-algorithm",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "Use the standard multiplication algorithm to calculate 4146 × 51.",
+          "choices": [
+            "211497",
+            "211446",
+            "4146",
+            "20730"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l13#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "estimate-product",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "A student says 9702 × 824 = 7994448. Round 9702 to the nearest thousand and 824 to the nearest hundred. Is the claim reasonable?",
+          "choices": [
+            "Yes; the rounded estimate is 7000000.",
+            "No; the rounded estimate is 8000000.",
+            "Yes; the rounded estimate is 8000000.",
+            "No; the rounded estimate is 7000000."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l13#ip-09",
+          "kind": "multiple-choice",
+          "itemType": "write-grouped-expression",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Subtract 51 from 71. Then multiply the difference by 2. Which numerical expression represents the calculation?",
+          "choices": [
+            "71 - (51 × 2)",
+            "(71 - 51) × 2",
+            "(51 - 71) × 2",
+            "(71 × 2) - 51"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u03-l13#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-grouped-expression",
+          "standard": "5.OA.1",
+          "difficulty": 2,
+          "prompt": "Evaluate: [22 + (2 × 4)] × 3",
+          "choices": [
+            "100",
+            "80",
+            "89",
+            "90"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l13#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-expression",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Without evaluating it, which statement describes (30 - 13) × 7?",
+          "choices": [
+            "Subtract 13 from the product of 30 and 7.",
+            "Multiply the difference between 13 and 30 by 7.",
+            "Subtract the product of 13 and 7 from 30.",
+            "Multiply the difference between 30 and 13 by 7."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u03-l13#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "multi-step-multiplication",
+          "standard": "5.NBT.5",
+          "difficulty": 3,
+          "prompt": "For 6 event days, a booth sells 118 tickets each day at $21 per ticket. What projected revenue will the booth earn?",
+          "choices": [
+            "$14889",
+            "$14868",
+            "$834",
+            "$708"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u03-l13.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u03-l13"
+  }
+}

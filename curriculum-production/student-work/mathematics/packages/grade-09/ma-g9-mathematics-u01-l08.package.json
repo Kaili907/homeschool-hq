@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u01-l08",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u01-l08",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Quantitative Reasoning, Units, and Rational Exponents",
+    "dayInUnit": 8,
+    "courseDay": 8,
+    "phase": "Reteach and varied practice",
+    "focus": "descriptive modeling choices, scale, origin, and accuracy limits",
+    "title": "Reteach and varied practice: descriptive modeling choices, scale, origin, and accuracy limits"
+  },
+  "standards": [
+    "N-Q.1",
+    "N-Q.2",
+    "N-Q.3",
+    "N-RN.1",
+    "N-RN.2",
+    "N-RN.3",
+    "MP.2",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Reteach and varied practice",
+    "profile": "reteach",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "These two examples show the same idea in two different formats.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l08#ex-01",
+          "kind": "worked-example",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 1,
+          "prompt": "A plot measures 12.4 m by 5.3 m. Report the area to one decimal place.",
+          "workedSolution": {
+            "steps": [
+              "12.4 × 5.3 = 65.72 m².",
+              "The measurements carry one decimal place.",
+              "Report 65.7 m²."
+            ],
+            "answer": "65.7 m²"
+          }
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l08#ex-02",
+          "kind": "worked-example",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 2,
+          "prompt": "What unit should describe how quickly a tank fills?",
+          "workedSolution": {
+            "steps": [
+              "The model relates volume to time.",
+              "The derived unit is volume divided by time."
+            ],
+            "answer": "litres per minute"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l08#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 1,
+          "prompt": "A bottling line operates at 23 grams per second. Express this rate in kilograms per hour.",
+          "choices": [
+            "828 kilograms per hour",
+            "82.8 kilograms per hour",
+            "23 kilograms per hour",
+            "6.39 kilograms per hour"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l08#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "radical-to-rational-exponent",
+          "standard": "N-RN.1",
+          "difficulty": 1,
+          "prompt": "Rewrite the index-3 radical expression 3√(x^4) using a rational exponent, in lowest terms.",
+          "choices": [
+            "x^(3/4)",
+            "x^(1)",
+            "x^(12)",
+            "x^(4/3)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l08#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-rational-exponent",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Evaluate 16^(1) exactly.",
+          "choices": [
+            "18",
+            "32",
+            "16",
+            "64"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l08#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "simplify-radical-expression",
+          "standard": "N-RN.2",
+          "difficulty": 2,
+          "prompt": "Write √60 in simplest radical form.",
+          "choices": [
+            "2√15",
+            "30",
+            "4√15",
+            "15√2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u01-l08#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "rational-irrational-closure",
+          "standard": "N-RN.3",
+          "difficulty": 1,
+          "prompt": "Classify the sum of the rational number 7 and the irrational number √3 as rational or irrational, and be ready to justify it.",
+          "choices": [
+            "irrational",
+            "rational",
+            "undefined",
+            "both rational and irrational"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l08#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "unit-rate-comparison",
+          "standard": "N-Q.1",
+          "difficulty": 2,
+          "prompt": "Option A delivers 45 units of output over 5 hours. Option B delivers 48 units over 4 hours. Which has the greater output per hour?",
+          "choices": [
+            "The two rates are equal.",
+            "Option A",
+            "There is not enough information without knowing the total hours available.",
+            "Option B"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l08#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "report-to-limiting-precision",
+          "standard": "N-Q.3",
+          "difficulty": 2,
+          "prompt": "A rectangular plot measures 21.6 m by 7.9 m, each measured to the nearest tenth of a metre. Report the area to 1 decimal place.",
+          "choices": [
+            "29.5 m²",
+            "170.6 m²",
+            "170.640 m²",
+            "59.0 m²"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l08#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "choose-modelling-units",
+          "standard": "N-Q.2",
+          "difficulty": 3,
+          "prompt": "You are building a model of the cost effectiveness of two phone plans. Which unit should the modelled quantity be reported in?",
+          "choices": [
+            "gigabytes per month",
+            "gigabytes",
+            "dollars per gigabyte",
+            "dollars"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u01-l08#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "derived-rate-conversion",
+          "standard": "N-Q.1",
+          "difficulty": 3,
+          "prompt": "A bottling line operates at 43 grams per second. Express this rate in kilograms per hour.",
+          "choices": [
+            "154.8 kilograms per hour",
+            "43 kilograms per hour",
+            "11.94 kilograms per hour",
+            "1548 kilograms per hour"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u01-l08.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u01-l08"
+  }
+}

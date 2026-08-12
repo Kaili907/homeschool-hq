@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u04-l15",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u04-l15",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Slope, Lines, and Proportional Connections",
+    "dayInUnit": 15,
+    "courseDay": 69,
+    "phase": "Assessment preparation",
+    "focus": "slope-intercept form",
+    "title": "Assessment preparation: slope-intercept form"
+  },
+  "standards": [
+    "8.EE.5",
+    "8.EE.6"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "write-slope-intercept-equation",
+          "standard": "8.EE.6",
+          "difficulty": 1,
+          "prompt": "Write the equation, in slope-intercept form, of a line with slope -2 and y-intercept -6.",
+          "choices": [
+            "y = -2x - 6",
+            "y = 2x - 6",
+            "y = -2x - 5",
+            "y = -2x - 7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-slope-and-intercept",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "Identify the slope and y-intercept of the line y = (5/3)x + 15.",
+          "choices": [
+            "slope = 5/3, y-intercept = 15",
+            "slope = 5/3, y-intercept = -15",
+            "slope = 15, y-intercept = 5/3",
+            "slope = -5/3, y-intercept = 15"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-proportional-relationships",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "Relationship A (proportional):\nx: 1, 2, 3\ny: 5, 10, 15\nRelationship B: y = (7/2)x\nWhich relationship has the greater rate of change (unit rate)?",
+          "choices": [
+            "Relationship A",
+            "The rate of change cannot be determined from this information.",
+            "They have the same rate of change.",
+            "Relationship B"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-linear-equation-at-x",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "For the line y = x + 2, find y when x = 4.",
+          "choices": [
+            "6",
+            "4",
+            "2",
+            "-6"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-parallel-lines",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A line has equation y = (-7/6)x + 8. Which of these equations represents a line parallel to it?",
+          "choices": [
+            "y = (7/4)x + 18",
+            "y = (3/2)x + 19",
+            "y = (-7/6)x - 7",
+            "y = (-7/6)x + 8"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "parallel-line-through-point",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A line has equation y = (8/5)x - 17. Write the equation of the line through (-25, -23) that is parallel to this line.",
+          "choices": [
+            "y = (8/5)x - 63",
+            "y = (-8/5)x + 17",
+            "y = (8/5)x + 17",
+            "y = (8/5)x - 17"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "interpret-slope-in-context",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "A moving company's total cost is given by C = 5h + 3, where C is the total cost in dollars and h is the number of hours of labor. What does the slope represent in this context?",
+          "choices": [
+            "The company charges $3 for each additional hour of labor.",
+            "The company charges a flat fee of $3 before any labor hours.",
+            "The company charges a flat fee of $5 before any labor hours.",
+            "The company charges $5 for each additional hour of labor."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "interpret-y-intercept-in-context",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A moving company's total cost is given by C = 22h + 6, where C is the total cost in dollars and h is the number of hours of labor. What does the y-intercept represent in this context?",
+          "choices": [
+            "The company charges a flat fee of $6 before any labor hours.",
+            "The company charges $6 for each additional hour of labor.",
+            "The company charges $22 for each additional hour of labor.",
+            "The company charges a flat fee of $22 before any labor hours."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-two-points",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "Find the slope of the line through (15, 0) and (19, 2).",
+          "choices": [
+            "2",
+            "3/4",
+            "2/5",
+            "1/2"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-table",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "A line passes through these points:\nx: 15, 20, 25, 30\ny: -1, 5, 11, 17\nWhat is the slope (rate of change) of the line?",
+          "choices": [
+            "18/5",
+            "5/6",
+            "2",
+            "6/5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "similar-triangle-point-on-line",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A line passes through (12, -1). A slope triangle on the line has a horizontal leg (run) of 7 and a vertical leg (rise) of 3. A similar slope triangle further along the same line is 5 times as large. Which point also lies on the line?",
+          "choices": [
+            "(47, 15)",
+            "(48, 14)",
+            "(47, 14)",
+            "(47, 13)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "slope-triangle-legs",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "A line has a slope of 3. A right triangle drawn along the line has a vertical leg (rise) of 28 units. What is the length of the other leg?",
+          "choices": [
+            "7",
+            "28",
+            "28/3",
+            "29/3"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u04-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u04-l15"
+  }
+}

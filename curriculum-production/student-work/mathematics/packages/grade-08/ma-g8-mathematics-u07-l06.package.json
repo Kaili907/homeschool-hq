@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u07-l06",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u07-l06",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations, Congruence, and Similarity",
+    "dayInUnit": 6,
+    "courseDay": 114,
+    "phase": "Guided practice B",
+    "focus": "informal geometric arguments",
+    "title": "Guided practice B: informal geometric arguments"
+  },
+  "standards": [
+    "8.G.1",
+    "8.G.2",
+    "8.G.3",
+    "8.G.4",
+    "8.G.5"
+  ],
+  "blueprint": {
+    "phase": "Guided practice B",
+    "profile": "guided-practice-fading",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Read once, then cover the example and try the guided set from memory.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u07-l06#ex-01",
+          "kind": "worked-example",
+          "itemType": "angle-relationships",
+          "standard": "8.G.5",
+          "difficulty": 1,
+          "prompt": "Two supplementary angles include an angle of 68 degrees. Find the other angle.",
+          "workedSolution": {
+            "steps": [
+              "Identify the rule and apply it to each coordinate or corresponding side.",
+              "Check that the resulting coordinates or ratios match the transformation."
+            ],
+            "answer": "112°"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u07-l06#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "informal-geometric-argument",
+          "standard": "8.G.2",
+          "difficulty": 2,
+          "prompt": "A figure is mapped onto another figure by a translation. Which statement justifies that the figures are congruent?",
+          "choices": [
+            "The figures have the same position.",
+            "Congruent figures must have different orientations.",
+            "A translation preserves lengths and angle measures.",
+            "A dilation always preserves lengths."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l06#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-translation-rule",
+          "standard": "8.G.1",
+          "difficulty": 2,
+          "prompt": "Point (4, 2) maps to (0, -2). Which translation rule maps the point?",
+          "choices": [
+            "(x - 4, y - 4)",
+            "(x + 4, y + 4)",
+            "(x + 5, y + 5)",
+            "(x, y)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l06#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "apply-translation",
+          "standard": "8.G.1",
+          "difficulty": 3,
+          "prompt": "Translate (-3, -3) using (x + 10, y + 6).",
+          "choices": [
+            "(7, 3)",
+            "(3, 7)",
+            "(8, 4)",
+            "(-13, -9)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l06#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "reflect-across-axis",
+          "standard": "8.G.1",
+          "difficulty": 3,
+          "prompt": "Reflect (4, -10) across the y-axis.",
+          "choices": [
+            "(4, -10)",
+            "(4, 10)",
+            "(-4, -10)",
+            "(-4, 10)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u07-l06#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "rotate-90-degrees",
+          "standard": "8.G.1",
+          "difficulty": 2,
+          "prompt": "Rotate (-6, -6) 90 degrees clockwise about the origin.",
+          "choices": [
+            "(-6, -6)",
+            "(-5, 7)",
+            "(6, 6)",
+            "(-6, 6)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l06#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "dilate-coordinate",
+          "standard": "8.G.3",
+          "difficulty": 3,
+          "prompt": "Dilate (-3, -3) about the origin by scale factor 4.",
+          "choices": [
+            "(-3, -12)",
+            "(-12, -12)",
+            "(-11, -11)",
+            "(-12, -3)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l06#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "find-scale-factor",
+          "standard": "8.G.3",
+          "difficulty": 3,
+          "prompt": "A segment of length 3 maps to a segment of length 6. What is the dilation scale factor?",
+          "choices": [
+            "6",
+            "3",
+            "4",
+            "2"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l06#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-rigid-transformation",
+          "standard": "8.G.1",
+          "difficulty": 3,
+          "prompt": "Which transformation is described as a reflection and preserves lengths and angle measures?",
+          "choices": [
+            "rotation",
+            "translation",
+            "reflection",
+            "dilation"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u07-l06#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-congruent-figures",
+          "standard": "8.G.2",
+          "difficulty": 3,
+          "prompt": "Triangle A has side lengths 3, 4, 5. Triangle B has corresponding side lengths 3, 4, 5. Are the triangles congruent?",
+          "choices": [
+            "cannot be determined",
+            "only similar",
+            "congruent",
+            "not congruent"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u07-l06#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-similar-figures",
+          "standard": "8.G.4",
+          "difficulty": 3,
+          "prompt": "Rectangle A is 6 by 8. Rectangle B is 18 by 24. How are the rectangles related?",
+          "choices": [
+            "congruent",
+            "perpendicular",
+            "similar",
+            "neither similar nor congruent"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u07-l06.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u07-l06"
+  }
+}

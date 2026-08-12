@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u09-l09",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u09-l09",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Volume and Bivariate Data",
+    "dayInUnit": 9,
+    "courseDay": 153,
+    "phase": "Concept model C",
+    "focus": "association and outliers",
+    "title": "Concept model C: association and outliers"
+  },
+  "standards": [
+    "8.G.9",
+    "8.SP.1",
+    "8.SP.2",
+    "8.SP.3",
+    "8.SP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "line-of-fit-prediction",
+          "standard": "8.SP.2",
+          "difficulty": 1,
+          "prompt": "A line of fit is y = 3x + 2. Predict y for x = 4.",
+          "workedSolution": {
+            "steps": [
+              "Identify the quantities and the applicable model.",
+              "Compute using the stated relationship.",
+              "Check that the result answers the question."
+            ],
+            "answer": "14"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpolation-or-extrapolation",
+          "standard": "8.SP.2",
+          "difficulty": 2,
+          "prompt": "A data set has x-values from 4 through 15. A prediction is made at x = 7. Is this interpolation or extrapolation?",
+          "choices": [
+            "extrapolation",
+            "a census",
+            "causation",
+            "interpolation"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "8.SP.3",
+          "difficulty": 3,
+          "prompt": "Umbrella sales and rainy-day traffic delays are correlated. Which conclusion is justified?",
+          "choices": [
+            "There is no relationship at all.",
+            "They are correlated; this alone does not prove causation.",
+            "Traffic delays cause umbrella sales.",
+            "Umbrella sales cause traffic delays."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "cylinder-volume",
+          "standard": "8.G.9",
+          "difficulty": 3,
+          "prompt": "Find the exact volume of a cylinder with radius 5 units and height 18 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "455π cubic units",
+            "900π cubic units",
+            "150π cubic units",
+            "450π cubic units"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "cylinder-volume",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "Find the exact volume of a cylinder with radius 3 units and height 3 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "9π cubic units",
+            "27π cubic units",
+            "30π cubic units",
+            "54π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "cone-volume",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "Find the exact volume of a cone with radius 4 units and height 9 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "24π cubic units",
+            "52π cubic units",
+            "144π cubic units",
+            "48π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "sphere-volume",
+          "standard": "8.G.9",
+          "difficulty": 3,
+          "prompt": "Find the exact volume of a sphere with radius 9 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "729π cubic units",
+            "972π cubic units",
+            "243π cubic units",
+            "2916π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "compare-solid-volumes",
+          "standard": "8.G.9",
+          "difficulty": 3,
+          "prompt": "A cylinder and cone each have radius 6 units and height 12 units. Which has the greater volume?",
+          "choices": [
+            "the cylinder",
+            "they have equal volume",
+            "the cone",
+            "not enough information"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-scatter-association",
+          "standard": "8.SP.1",
+          "difficulty": 3,
+          "prompt": "As x increases, y generally decreases. What association does this scatter plot describe?",
+          "choices": [
+            "none",
+            "causation",
+            "negative",
+            "positive"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-outlier",
+          "standard": "8.SP.1",
+          "difficulty": 3,
+          "prompt": "Most plotted points follow y = 2x + 1. Of these points, (12, 25), (13, 27), (11, 23), (12, 37), which point is an outlier?",
+          "choices": [
+            "(11, 23)",
+            "(12, 25)",
+            "(13, 27)",
+            "(12, 37)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "line-of-fit-prediction",
+          "standard": "8.SP.2",
+          "difficulty": 3,
+          "prompt": "A line of fit is y = 4x - 2. Predict y when x = 2.",
+          "choices": [
+            "1",
+            "15",
+            "6",
+            "11"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u09-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u09-l09"
+  }
+}

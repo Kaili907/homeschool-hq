@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u09-l02",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u09-l02",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Probability Rules and Interpretation",
+    "dayInUnit": 2,
+    "courseDay": 146,
+    "phase": "Concept model A",
+    "focus": "the conditional probability formula as a fraction of outcomes",
+    "title": "Concept model A: the conditional probability formula as a fraction of outcomes"
+  },
+  "standards": [
+    "S-CP.5",
+    "S-CP.6",
+    "S-CP.7",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 1,
+          "prompt": "P(delay | rain) = P(delay). What does that mean?",
+          "workedSolution": {
+            "steps": [
+              "Conditioning changes nothing.",
+              "The events are independent."
+            ],
+            "answer": "They are independent"
+          }
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "10 items, 4 defective, draw 2 without replacement. Both defective?",
+          "workedSolution": {
+            "steps": [
+              "(4/10)(3/9) = 12/90.",
+              "Reduce: 2/15."
+            ],
+            "answer": "2/15"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 1,
+          "prompt": "Given P(A and B) = 6/20 and P(B) = 6/20, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "3/10",
+            "7/6",
+            "1",
+            "9/100"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 1,
+          "prompt": "Given P(A) = 5/20, P(B) = 6/20, and P(A and B) = 4/20, find P(A or B) in lowest terms.",
+          "choices": [
+            "11/20",
+            "3/20",
+            "7/20",
+            "3/4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 2,
+          "prompt": "In a study, P(has the condition | tested positive) is much smaller than P(tested positive | has the condition). What is the correct interpretation?",
+          "choices": [
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "The relationship proves that one event causes the other.",
+            "The two events are mutually exclusive.",
+            "The two conditional probabilities condition on different events, so they need not be close; a rare condition makes the first much smaller."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 1,
+          "prompt": "A box holds 6 items, of which 3 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "1/4",
+            "1/6",
+            "1/2",
+            "1/5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 2,
+          "prompt": "Given P(A and B) = 5/20 and P(B) = 16/20, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "1/4",
+            "5/16",
+            "1/5",
+            "16/5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "addition-rule-application",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "Given P(A) = 6/20, P(B) = 8/20, and P(A and B) = 4/20, find P(A or B) in lowest terms.",
+          "choices": [
+            "7/10",
+            "9/10",
+            "1/10",
+            "1/2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "interpret-conditional-in-context",
+          "standard": "S-CP.5",
+          "difficulty": 3,
+          "prompt": "In a study, the probability of a delay is the same whether or not it is raining. What is the correct interpretation?",
+          "choices": [
+            "Delay and rain are independent, because conditioning on rain does not change the probability of a delay.",
+            "The two conditional probabilities are equal, so the order of conditioning never matters.",
+            "The relationship proves that one event causes the other.",
+            "The two events are mutually exclusive."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u09-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "multiplication-rule-without-replacement",
+          "standard": "S-CP.7",
+          "difficulty": 2,
+          "prompt": "A box holds 7 items, of which 3 are defective. Two are drawn without replacement. Find the probability that both are defective, in lowest terms.",
+          "choices": [
+            "6/49",
+            "3/7",
+            "9/49",
+            "1/7"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u09-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "conditional-probability-formula",
+          "standard": "S-CP.6",
+          "difficulty": 2,
+          "prompt": "Given P(A and B) = 5/20 and P(B) = 7/20, find P(A | B) as a fraction in lowest terms.",
+          "choices": [
+            "1/4",
+            "7/80",
+            "5/7",
+            "7/5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u09-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u09-l02"
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u03-l09",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u03-l09",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Linear Equations",
+    "dayInUnit": 9,
+    "courseDay": 45,
+    "phase": "Concept model C",
+    "focus": "variables on both sides",
+    "title": "Concept model C: variables on both sides"
+  },
+  "standards": [
+    "8.EE.7"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "solve-variables-both-sides",
+          "standard": "8.EE.7",
+          "difficulty": 1,
+          "prompt": "Solve for x: 5x + 2 = 2x + 11.",
+          "workedSolution": {
+            "steps": [
+              "Subtract 2x from both sides: 3x + 2 = 11.",
+              "Subtract 2: 3x = 9.",
+              "Divide by 3: x = 3."
+            ],
+            "answer": "3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "classify-solution-type",
+          "standard": "8.EE.7",
+          "difficulty": 2,
+          "prompt": "How many solutions does 5x - 11 = 5x - 15 have?",
+          "choices": [
+            "no solution",
+            "one solution",
+            "infinitely many solutions"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "check-a-solution",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Is x = -12 a solution to 5x + 9 = -51?",
+          "choices": [
+            "yes",
+            "no"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-solution-from-choices",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Which value of x solves -4x - 13 = 27?",
+          "choices": [
+            "-11",
+            "-9",
+            "-8",
+            "-10"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "write-equation-from-context",
+          "standard": "8.EE.7",
+          "difficulty": 2,
+          "prompt": "A bike rental costs $5 plus $4 per hour. The total cost was $53. Which equation represents the number of hours, x?",
+          "choices": [
+            "4x + 5 = 58",
+            "4(x + 5) = 53",
+            "5x + 4 = 53",
+            "4x + 5 = 53"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-word-problem",
+          "standard": "8.EE.7",
+          "difficulty": 2,
+          "prompt": "A phone plan costs $4 plus $4 per gigabyte of data. If the bill was $46, how many gigabytes, x, were used?",
+          "choices": [
+            "21/2",
+            "19/2",
+            "23/2",
+            "17/2"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "equation-error-analysis",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "A student solves 14x - 5 = 191. They write 14x = 196, then say x = 196. Which statement best analyzes the error?",
+          "choices": [
+            "The student subtracted incorrectly; the correct solution is x = 93/7.",
+            "The student forgot to divide both sides by 14; the correct solution is x = 14.",
+            "The student should have multiplied by 14 instead of dividing; x = 2744.",
+            "The work is correct; x = 196."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solution-type-error-analysis",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "A student says -5x + 11 = -5x + 2 has one solution because they can solve for x. Which statement correctly analyzes the equation?",
+          "choices": [
+            "The equation has exactly one solution, found by dividing both sides by the coefficient of x.",
+            "The equation cannot be classified without graphing it.",
+            "The equation has infinitely many solutions; both sides are identical for every x.",
+            "The equation has no solution; simplifying gives 11 = 2, which is never true."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-one-step-equation",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Solve for x: x + 2 = -9.",
+          "choices": [
+            "-10",
+            "-7",
+            "-11",
+            "-9"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u03-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-two-step-equation",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Solve for x: 8x - 12 = 27.",
+          "choices": [
+            "23/8",
+            "55/8",
+            "39/8",
+            "15/8"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u03-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-with-distributive-property",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "Solve for x: 5(x - 8) = 33.",
+          "choices": [
+            "83/5",
+            "78/5",
+            "73/5",
+            "63/5"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u03-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u03-l09"
+  }
+}

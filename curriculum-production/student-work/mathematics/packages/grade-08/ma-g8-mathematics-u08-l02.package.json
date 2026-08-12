@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u08-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u08-l02",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 8,
+    "unitTitle": "Pythagorean Theorem and Coordinate Geometry",
+    "dayInUnit": 2,
+    "courseDay": 128,
+    "phase": "Concept model A",
+    "focus": "proof models",
+    "title": "Concept model A: proof models"
+  },
+  "standards": [
+    "8.G.6",
+    "8.G.7",
+    "8.G.8"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u08-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "find-hypotenuse",
+          "standard": "8.G.6",
+          "difficulty": 1,
+          "prompt": "A right triangle has legs 3 and 4. Find its hypotenuse.",
+          "workedSolution": {
+            "steps": [
+              "Identify the legs and the hypotenuse, the side opposite the right angle.",
+              "Use a² + b² = c² and take a square root only after finding c²."
+            ],
+            "answer": "5"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "verify-pythagorean-theorem",
+          "standard": "8.G.6",
+          "difficulty": 2,
+          "prompt": "Do side lengths 5, 12, 13 satisfy a² + b² = c²?",
+          "workedSolution": {
+            "steps": [
+              "Identify the legs and the hypotenuse, the side opposite the right angle.",
+              "Use a² + b² = c² and take a square root only after finding c²."
+            ],
+            "answer": "yes"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u08-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "converse-classification",
+          "standard": "8.G.7",
+          "difficulty": 1,
+          "prompt": "Classify a triangle with side lengths 5, 12, and 13 using the converse of the Pythagorean theorem.",
+          "choices": [
+            "isosceles triangle",
+            "right triangle",
+            "equilateral triangle",
+            "not a right triangle"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "distance-on-coordinate-plane",
+          "standard": "8.G.8",
+          "difficulty": 1,
+          "prompt": "What is the distance between (0, 0) and (5, 2) in simplest radical form?",
+          "choices": [
+            "sqrt(30)",
+            "sqrt(29)",
+            "29",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "right-triangle-from-coordinates",
+          "standard": "8.G.8",
+          "difficulty": 2,
+          "prompt": "Do the points (0, 0), (8, 0), and (0, 15) form a right triangle?",
+          "choices": [
+            "cannot be determined",
+            "no",
+            "yes",
+            "only when a = b"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u08-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "rectangle-diagonal",
+          "standard": "8.G.8",
+          "difficulty": 1,
+          "prompt": "A rectangle is 7 units by 8 units. What is the length of its diagonal in simplest radical form?",
+          "choices": [
+            "sqrt(114)",
+            "sqrt(113)",
+            "113",
+            "15"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "ladder-context",
+          "standard": "8.G.8",
+          "difficulty": 2,
+          "prompt": "A 5-ft ladder reaches 4 ft up a vertical wall. How far is its base from the wall?",
+          "choices": [
+            "7 ft",
+            "1 ft",
+            "4 ft",
+            "3 ft"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-error-analysis",
+          "standard": "8.G.6",
+          "difficulty": 2,
+          "prompt": "A student claims 7² + 24² = 31² for a right triangle. Is the claim correct?",
+          "choices": [
+            "No; the hypotenuse is 31.",
+            "No; 7² + 24² = 25², not 31².",
+            "Yes; add the legs to find the hypotenuse.",
+            "No; square only one leg."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "compare-right-triangle-distances",
+          "standard": "8.G.8",
+          "difficulty": 3,
+          "prompt": "Which is longer: a 3-by-4 rectangle diagonal or a 5-by-12 rectangle diagonal?",
+          "choices": [
+            "cannot be determined",
+            "they are equal",
+            "the 3-by-4 diagonal",
+            "the 5-by-12 diagonal"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u08-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "explain-pythagorean-theorem",
+          "standard": "8.G.6",
+          "difficulty": 2,
+          "prompt": "What does a² + b² = c² describe?",
+          "choices": [
+            "the angle sum of a triangle",
+            "the side lengths of a right triangle",
+            "the area of every rectangle",
+            "the perimeter of every triangle"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u08-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-hypotenuse",
+          "standard": "8.G.6",
+          "difficulty": 2,
+          "prompt": "In a right triangle, which side is the hypotenuse?",
+          "choices": [
+            "the shortest side",
+            "the side opposite the right angle",
+            "the side next to the right angle",
+            "either leg"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u08-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u08-l02"
+  }
+}

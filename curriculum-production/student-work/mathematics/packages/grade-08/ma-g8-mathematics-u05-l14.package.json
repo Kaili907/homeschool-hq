@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u05-l14",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u05-l14",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Functions",
+    "dayInUnit": 14,
+    "courseDay": 86,
+    "phase": "Transfer challenge",
+    "focus": "input output and notation",
+    "title": "Transfer challenge: input output and notation"
+  },
+  "standards": [
+    "8.F.1",
+    "8.F.2",
+    "8.F.3",
+    "8.F.4",
+    "8.F.5"
+  ],
+  "blueprint": {
+    "phase": "Transfer challenge",
+    "profile": "transfer",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "The example is from a different context than the problems below.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l14#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-function-notation",
+          "standard": "8.F.1",
+          "difficulty": 1,
+          "prompt": "Given f(x) = 3x + 4, find f(5).",
+          "workedSolution": {
+            "steps": [
+              "Substitute x = 5 into the rule: f(5) = 3(5) + 4.",
+              "Multiply first: 3 × 5 = 15.",
+              "Add the constant: 15 + 4 = 19."
+            ],
+            "answer": "19"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l14#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "find-input-from-output",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Given f(x) = 11x + 5, find the value of x for which f(x) = 49.",
+          "choices": [
+            "2",
+            "5",
+            "3",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l14#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-rate-of-change",
+          "standard": "8.F.2",
+          "difficulty": 3,
+          "prompt": "Function A is given by f(x) = -10x - 14. Function B is given by the table:\nx: 1, 2\ny: 23, 21\nWhich function has the greater rate of change?",
+          "choices": [
+            "Cannot be determined from the given information.",
+            "Function A",
+            "Function B",
+            "They have the same rate of change."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l14#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "compare-functions-value-at-x",
+          "standard": "8.F.2",
+          "difficulty": 3,
+          "prompt": "Function B is given by f(x) = 7x. Function A starts at 29 and increases by 11 each unit. Which function has the greater value when x = 2?",
+          "choices": [
+            "Cannot be determined without a graph.",
+            "The two functions have equal values at that input.",
+            "Function B",
+            "Function A"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l14#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-from-table",
+          "standard": "8.F.3",
+          "difficulty": 3,
+          "prompt": "A table shows:\nx: -3, 0, 3, 6\ny: -13, -1, 11, 23\nIs the relationship linear or nonlinear?",
+          "choices": [
+            "cannot be determined from a table",
+            "constant",
+            "linear",
+            "nonlinear"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l14#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "classify-linear-from-equation",
+          "standard": "8.F.3",
+          "difficulty": 3,
+          "prompt": "Classify the equation y = 7x + 17 as linear or nonlinear.",
+          "choices": [
+            "cannot be determined from an equation",
+            "constant",
+            "linear",
+            "nonlinear"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "These are meant to be hard. Show the reasoning even if you do not finish.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l14#xt-01",
+          "kind": "constructed-response",
+          "itemType": "construct-function-from-two-points",
+          "standard": "8.F.4",
+          "difficulty": 3,
+          "prompt": "A function contains the points (-3, -2) and (-6, -20). Write the function rule f(x) = mx + b.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l14#xt-02",
+          "kind": "constructed-response",
+          "itemType": "construct-function-from-context",
+          "standard": "8.F.4",
+          "difficulty": 3,
+          "prompt": "A gym charges a $101 sign-up fee plus $14 per month. Which function models the total cost f(x) after x months?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l14#xt-03",
+          "kind": "constructed-response",
+          "itemType": "match-graph-description-to-scenario",
+          "standard": "8.F.5",
+          "difficulty": 3,
+          "prompt": "A kettle of water heats up steadily, then boils at a constant temperature, then cools steadily once removed from heat. Which description best matches the shape of the graph over time?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u05-l14.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u05-l14"
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u07-l15",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u07-l15",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations and Inverse Functions",
+    "dayInUnit": 15,
+    "courseDay": 123,
+    "phase": "Assessment preparation",
+    "focus": "identifying transformations from an equation and from a graph",
+    "title": "Assessment preparation: identifying transformations from an equation and from a graph"
+  },
+  "standards": [
+    "F-BF.3",
+    "F-BF.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 1,
+          "prompt": "The graph of y = f(x) is transformed to y = f(x) + 3. Describe the transformation.",
+          "choices": [
+            "a vertical shift up by 3",
+            "a vertical stretch by a factor of 3",
+            "a horizontal shift right by 3",
+            "a horizontal compression by a factor of 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "Find the inverse of f(x) = 4x − 3.",
+          "choices": [
+            "f⁻¹(x) = (x + 3) / 4",
+            "f⁻¹(x) = 1 / (4x − 3)",
+            "f⁻¹(x) = 4x + 3",
+            "f⁻¹(x) = (x − 3) / 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "For f(x) = 2x + 2 and its inverse f⁻¹, evaluate f⁻¹(f(5)).",
+          "choices": [
+            "12",
+            "5",
+            "-5",
+            "7"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "Classify f(x) = x³ − 4x as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "even; its graph is symmetric about the y-axis",
+            "odd; its graph is symmetric about the origin",
+            "neither even nor odd",
+            "even; its graph is symmetric about the origin"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "The graph of y = f(x) is transformed to y = f(x − 6). Describe the transformation.",
+          "choices": [
+            "a vertical shift up by 6",
+            "a vertical stretch by a factor of 6",
+            "a horizontal compression by a factor of 6",
+            "a horizontal shift right by 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = -5x − 5.",
+          "choices": [
+            "f⁻¹(x) = -5x + 5",
+            "f⁻¹(x) = 1 / (-5x − 5)",
+            "f⁻¹(x) = (x − 5) / -5",
+            "f⁻¹(x) = (x + 5) / -5"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = -2x − 2 and its inverse f⁻¹, evaluate f⁻¹(f(4)).",
+          "choices": [
+            "2",
+            "-10",
+            "-4",
+            "4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "Classify f(x) = x² + x as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "neither even nor odd",
+            "even; its graph is symmetric about the origin",
+            "even; its graph is symmetric about the y-axis",
+            "odd; its graph is symmetric about the origin"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "The graph of y = f(x) is transformed to y = f(x − 2). Describe the transformation.",
+          "choices": [
+            "a vertical shift up by 2",
+            "a vertical stretch by a factor of 2",
+            "a horizontal compression by a factor of 2",
+            "a horizontal shift right by 2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "Find the inverse of f(x) = 3x + 3.",
+          "choices": [
+            "f⁻¹(x) = (x − 3) / 3",
+            "f⁻¹(x) = (x + 3) / 3",
+            "f⁻¹(x) = 3x − 3",
+            "f⁻¹(x) = 1 / (3x + 3)"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "For f(x) = 4x − 9 and its inverse f⁻¹, evaluate f⁻¹(f(6)).",
+          "choices": [
+            "15",
+            "-3",
+            "6",
+            "-6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "Classify f(x) = x⁴ − 3x² + 1 as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "odd; its graph is symmetric about the origin",
+            "even; its graph is symmetric about the origin",
+            "neither even nor odd",
+            "even; its graph is symmetric about the y-axis"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u07-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u07-l15"
+  }
+}

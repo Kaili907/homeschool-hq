@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u07-l17",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u07-l17",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 7,
+    "unitTitle": "Transformations and Inverse Functions",
+    "dayInUnit": 17,
+    "courseDay": 125,
+    "phase": "Targeted correction",
+    "focus": "finding the inverse of a function",
+    "title": "Targeted correction: finding the inverse of a function"
+  },
+  "standards": [
+    "F-BF.3",
+    "F-BF.4",
+    "MP.7"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 1,
+          "prompt": "Describe y = f(x − 3).",
+          "workedSolution": {
+            "steps": [
+              "The change is inside the function, so horizontal.",
+              "x − 3 shifts the graph right by 3."
+            ],
+            "answer": "a horizontal shift right by 3"
+          }
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "Find the inverse of f(x) = 3x + 6.",
+          "workedSolution": {
+            "steps": [
+              "x = 3y + 6.",
+              "3y = x − 6.",
+              "y = (x − 6)/3."
+            ],
+            "answer": "f⁻¹(x) = (x − 6)/3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 1,
+          "prompt": "For f(x) = -2x + 3 and its inverse f⁻¹, evaluate f⁻¹(f(-3)).",
+          "choices": [
+            "3",
+            "9",
+            "-3",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "Classify f(x) = x³ − 4x as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "even; its graph is symmetric about the origin",
+            "neither even nor odd",
+            "odd; its graph is symmetric about the origin",
+            "even; its graph is symmetric about the y-axis"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "The graph of y = f(x) is transformed to y = f(x) + 3. Describe the transformation.",
+          "choices": [
+            "a horizontal compression by a factor of 3",
+            "a vertical stretch by a factor of 3",
+            "a horizontal shift right by 3",
+            "a vertical shift up by 3"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = -2x + 4.",
+          "choices": [
+            "f⁻¹(x) = -2x − 4",
+            "f⁻¹(x) = (x + 4) / -2",
+            "f⁻¹(x) = (x − 4) / -2",
+            "f⁻¹(x) = 1 / (-2x + 4)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u07-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "verify-inverse-by-composition",
+          "standard": "F-BF.4",
+          "difficulty": 2,
+          "prompt": "For f(x) = 3x + 4 and its inverse f⁻¹, evaluate f⁻¹(f(-5)).",
+          "choices": [
+            "5",
+            "-5",
+            "-11",
+            "-1"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "even-odd-symmetry",
+          "standard": "F-BF.3",
+          "difficulty": 2,
+          "prompt": "Classify f(x) = x⁴ − 3x² + 1 as even, odd, or neither, and state the corresponding symmetry.",
+          "choices": [
+            "even; its graph is symmetric about the origin",
+            "even; its graph is symmetric about the y-axis",
+            "odd; its graph is symmetric about the origin",
+            "neither even nor odd"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-graph-transformation",
+          "standard": "F-BF.3",
+          "difficulty": 3,
+          "prompt": "The graph of y = f(x) is transformed to y = 6·f(x). Describe the transformation.",
+          "choices": [
+            "a vertical stretch by a factor of 6",
+            "a horizontal compression by a factor of 6",
+            "a horizontal shift right by 6",
+            "a vertical shift up by 6"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u07-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "find-inverse-function",
+          "standard": "F-BF.4",
+          "difficulty": 3,
+          "prompt": "Find the inverse of f(x) = -6x + 1.",
+          "choices": [
+            "f⁻¹(x) = -6x − 1",
+            "f⁻¹(x) = 1 / (-6x + 1)",
+            "f⁻¹(x) = (x − 1) / -6",
+            "f⁻¹(x) = (x + 1) / -6"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u07-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u07-l17"
+  }
+}

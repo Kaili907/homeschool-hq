@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g11-mathematics-u05-l17",
+  "lessonRef": {
+    "lessonId": "ma-g11-mathematics-u05-l17",
+    "courseId": "ma-g11-mathematics",
+    "grade": 11,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Trigonometric Functions and Periodic Models",
+    "dayInUnit": 17,
+    "courseDay": 89,
+    "phase": "Targeted correction",
+    "focus": "choosing a trigonometric function to model periodic phenomena",
+    "title": "Targeted correction: choosing a trigonometric function to model periodic phenomena"
+  },
+  "standards": [
+    "F-TF.1",
+    "F-TF.2",
+    "F-TF.5",
+    "F-TF.8",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 1,
+          "prompt": "Convert 60° to radians.",
+          "workedSolution": {
+            "steps": [
+              "60 × π/180.",
+              "Simplifies to π/3."
+            ],
+            "answer": "π/3"
+          }
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 2,
+          "prompt": "Give the exact value of sin(π/6).",
+          "workedSolution": {
+            "steps": [
+              "The unit circle point at 30° is (√3/2, 1/2).",
+              "The sine is the y-coordinate."
+            ],
+            "answer": "1/2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 1,
+          "prompt": "A model is f(t) = 5·sin(2t) + 2. State the amplitude, period, and midline.",
+          "choices": [
+            "amplitude 10; period π; midline y = 2",
+            "amplitude 5; period 2·2π; midline y = 2",
+            "amplitude 2; period π; midline y = 5",
+            "amplitude 5; period π; midline y = 2"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 2,
+          "prompt": "Given sin θ = 3/5 and θ is in the second quadrant, find cos θ exactly.",
+          "choices": [
+            "−4/5",
+            "3/5",
+            "4/5",
+            "5/4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 2,
+          "prompt": "Convert 90° to radian measure, in terms of π.",
+          "choices": [
+            "π/4",
+            "π/2",
+            "π/6",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 3,
+          "prompt": "Give the exact value of cos(π/2).",
+          "choices": [
+            "1/2",
+            "√2/2",
+            "0",
+            "√3/2"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g11-mathematics-u05-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "amplitude-period-midline",
+          "standard": "F-TF.5",
+          "difficulty": 2,
+          "prompt": "A model is f(t) = 5·sin(4t) + 4. State the amplitude, period, and midline.",
+          "choices": [
+            "amplitude 5; period 2π/4; midline y = 4",
+            "amplitude 5; period 4·2π; midline y = 4",
+            "amplitude 4; period 2π/4; midline y = 5",
+            "amplitude 10; period 2π/4; midline y = 4"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "pythagorean-identity",
+          "standard": "F-TF.8",
+          "difficulty": 2,
+          "prompt": "Given sin θ = 5/13 and θ is in the second quadrant, find cos θ exactly.",
+          "choices": [
+            "−12/13",
+            "5/13",
+            "12/13",
+            "13/12"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "degrees-to-radians",
+          "standard": "F-TF.1",
+          "difficulty": 3,
+          "prompt": "Convert 45° to radian measure, in terms of π.",
+          "choices": [
+            "π/6",
+            "π/3",
+            "π/4",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g11-mathematics-u05-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "exact-trig-value-unit-circle",
+          "standard": "F-TF.2",
+          "difficulty": 3,
+          "prompt": "Give the exact value of sin(π/3).",
+          "choices": [
+            "√3/2",
+            "√2/2",
+            "0",
+            "1/2"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-11/ma-g11-mathematics-u05-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g11-mathematics-u05-l17"
+  }
+}

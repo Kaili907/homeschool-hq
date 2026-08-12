@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u02-l11",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u02-l11",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 2,
+    "unitTitle": "Inverse Trigonometric Functions and Composition",
+    "dayInUnit": 11,
+    "courseDay": 29,
+    "phase": "Performance task planning",
+    "focus": "the inverse relationship between exponents and logarithms",
+    "title": "Performance task planning: the inverse relationship between exponents and logarithms"
+  },
+  "standards": [
+    "F-TF.6",
+    "F-TF.7",
+    "F-BF.5",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "evaluate-inverse-sine",
+          "standard": "F-TF.6",
+          "difficulty": 1,
+          "prompt": "Evaluate arcsin(1/2).",
+          "workedSolution": {
+            "steps": [
+              "Which angle in [−π/2, π/2] has sine 1/2?",
+              "30°, which is π/6."
+            ],
+            "answer": "π/6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "compose-trig-and-inverse",
+          "standard": "F-TF.7",
+          "difficulty": 2,
+          "prompt": "Evaluate cos(arcsin(√3/2)) exactly.",
+          "choices": [
+            "1/2",
+            "√2/2",
+            "√3/2",
+            "0"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "why-domain-restriction-is-needed",
+          "standard": "F-BF.5",
+          "difficulty": 2,
+          "prompt": "Why does sine on all real numbers not have an inverse function without further restriction?",
+          "choices": [
+            "Because its outputs are not all positive.",
+            "It is not one-to-one, so the domain is restricted to [0, π] to make an inverse possible.",
+            "It is not one-to-one — infinitely many inputs give the same output — so it has no inverse until the domain is restricted to [−π/2, π/2].",
+            "It repeats with period π, so the domain is restricted to (−π/2, π/2) to make an inverse possible."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-trig-equation-all-solutions",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Find all solutions of sin θ = √2/2 for 0° ≤ θ < 360°.",
+          "choices": [
+            "θ = 45° or θ = 315°",
+            "θ = 45° or θ = 135°",
+            "θ = 45° only",
+            "θ = 45° or θ = 225°"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u02-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "evaluate-inverse-sine",
+          "standard": "F-TF.6",
+          "difficulty": 3,
+          "prompt": "Evaluate arcsin(√3/2) in radians, giving the principal value.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "compose-trig-and-inverse",
+          "standard": "F-TF.7",
+          "difficulty": 3,
+          "prompt": "Evaluate cos(arcsin(1/2)) exactly.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g12-mathematics-u02-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "why-domain-restriction-is-needed",
+          "standard": "F-BF.5",
+          "difficulty": 3,
+          "prompt": "Why does cosine on all real numbers not have an inverse function without further restriction?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u02-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u02-l11"
+  }
+}

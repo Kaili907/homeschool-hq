@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u03-l18",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u03-l18",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Reasoning with Linear Equations and Inequalities",
+    "dayInUnit": 18,
+    "courseDay": 54,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "approximating solutions with tables and technology",
+    "title": "Publication, presentation, or reflection: approximating solutions with tables and technology"
+  },
+  "standards": [
+    "A-REI.1",
+    "A-REI.3",
+    "A-REI.10",
+    "A-REI.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 1,
+          "prompt": "f(x) = 2x + 1 and g(x) = 5x − 8 meet where?",
+          "workedSolution": {
+            "steps": [
+              "2x + 1 = 5x − 8.",
+              "−3x = −9, so x = 3."
+            ],
+            "answer": "x = 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve 5x − 5y = -4 for y.",
+          "choices": [
+            "y = (-4 + 5x)/-5",
+            "y = -4 − 5x",
+            "y = (5x − -4)/-5",
+            "y = (-4 − 5x)/-5"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x: -2x − 2 = 6x − 66.",
+          "choices": [
+            "x = -16",
+            "x = 8",
+            "x = 17/2",
+            "x = -8"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x and state the solution set: -10x − 9 < -16.",
+          "choices": [
+            "x > 5/2",
+            "x > -7/10",
+            "x < 7/10",
+            "x > 7/10"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 3,
+          "prompt": "In a solution, one line reads: From 3x + 12 = 21 to 3x = 9. Which property justifies that step?",
+          "choices": [
+            "dividing both sides by 3",
+            "subtracting 12 from both sides (subtraction property of equality)",
+            "the commutative property",
+            "the distributive property"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 3,
+          "prompt": "Does the point (-6, -20) lie on the graph of y = 5x + 10?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 3,
+          "prompt": "The graphs of f(x) = -2x − 8 and g(x) = 8x − 18 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u03-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u03-l18"
+  }
+}

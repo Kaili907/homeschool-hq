@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u10-l09",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u10-l09",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Measurement, Modeling, and Design Capstone",
+    "dayInUnit": 9,
+    "courseDay": 171,
+    "phase": "Concept model C",
+    "focus": "cross-sections of solids and solids of revolution",
+    "title": "Concept model C: cross-sections of solids and solids of revolution"
+  },
+  "standards": [
+    "G-GMD.1",
+    "G-GMD.3",
+    "G-GMD.4",
+    "G-MG.1",
+    "G-MG.2",
+    "G-MG.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "volume-of-solid",
+          "standard": "G-GMD.3",
+          "difficulty": 1,
+          "prompt": "Volume of a cone with radius 3 and height 4?",
+          "workedSolution": {
+            "steps": [
+              "Cylinder would be π(9)(4) = 36π.",
+              "A cone is one third: 12π."
+            ],
+            "answer": "12π"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "cross-section-identification",
+          "standard": "G-GMD.4",
+          "difficulty": 2,
+          "prompt": "Describe the cross-section formed by a cylinder cut by a plane parallel to its base.",
+          "choices": [
+            "a circle",
+            "a triangle",
+            "a square",
+            "a rectangle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "density-modelling",
+          "standard": "G-MG.2",
+          "difficulty": 3,
+          "prompt": "A solid object has mass 264 g and volume 22 cm³. Find its density, and state whether it would float in water (density 1 g/cm³).",
+          "choices": [
+            "12 g/cm³; it would sink",
+            "5808 g/cm³; it would sink",
+            "0.08 g/cm³; it would float",
+            "12 g/cm³; it would float"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "design-constraint-modelling",
+          "standard": "G-MG.3",
+          "difficulty": 3,
+          "prompt": "A square patio of side 12 m is to be paved at $10 per square metre. Find the total cost, and state which quantity the cost is proportional to.",
+          "choices": [
+            "$120; the cost is proportional to the area",
+            "$1440; the cost is proportional to the side length",
+            "$480; the cost is proportional to the perimeter",
+            "$1440; the cost is proportional to the area"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-solid",
+          "standard": "G-GMD.3",
+          "difficulty": 2,
+          "prompt": "Find the volume of a rectangular prism 3 by 6 by 3. Leave π in the answer where it appears.",
+          "choices": [
+            "54π/3",
+            "90",
+            "54π",
+            "54"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "cross-section-identification",
+          "standard": "G-GMD.4",
+          "difficulty": 2,
+          "prompt": "Describe the cross-section formed by a square pyramid cut by a plane parallel to its base.",
+          "choices": [
+            "a rectangle",
+            "a circle",
+            "a triangle",
+            "a square"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "density-modelling",
+          "standard": "G-MG.2",
+          "difficulty": 3,
+          "prompt": "A solid object has mass 65 g and volume 13 cm³. Find its density, and state whether it would float in water (density 1 g/cm³).",
+          "choices": [
+            "5 g/cm³; it would float",
+            "845 g/cm³; it would sink",
+            "0.2 g/cm³; it would float",
+            "5 g/cm³; it would sink"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "design-constraint-modelling",
+          "standard": "G-MG.3",
+          "difficulty": 3,
+          "prompt": "A square patio of side 3 m is to be paved at $21 per square metre. Find the total cost, and state which quantity the cost is proportional to.",
+          "choices": [
+            "$189; the cost is proportional to the area",
+            "$63; the cost is proportional to the area",
+            "$189; the cost is proportional to the side length",
+            "$252; the cost is proportional to the perimeter"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "volume-of-solid",
+          "standard": "G-GMD.3",
+          "difficulty": 3,
+          "prompt": "Find the volume of a cylinder of radius 6 and height 2. Leave π in the answer where it appears.",
+          "choices": [
+            "72",
+            "72π",
+            "72π/3",
+            "24π"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u10-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "cross-section-identification",
+          "standard": "G-GMD.4",
+          "difficulty": 3,
+          "prompt": "Describe the cross-section formed by a sphere cut by any plane that meets it in more than one point.",
+          "choices": [
+            "a circle",
+            "a rectangle",
+            "a square",
+            "a triangle"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u10-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "density-modelling",
+          "standard": "G-MG.2",
+          "difficulty": 3,
+          "prompt": "A solid object has mass 147 g and volume 21 cm³. Find its density, and state whether it would float in water (density 1 g/cm³).",
+          "choices": [
+            "7 g/cm³; it would sink",
+            "0.14 g/cm³; it would float",
+            "7 g/cm³; it would float",
+            "3087 g/cm³; it would sink"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u10-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u10-l09"
+  }
+}

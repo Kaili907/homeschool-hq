@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u03-l09",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u03-l09",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Triangle Laws for Non-Right Triangles",
+    "dayInUnit": 9,
+    "courseDay": 45,
+    "phase": "Concept model C",
+    "focus": "proving the Law of Cosines",
+    "title": "Concept model C: proving the Law of Cosines"
+  },
+  "standards": [
+    "G-SRT.9",
+    "G-SRT.10",
+    "G-SRT.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u03-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "law-of-cosines-side",
+          "standard": "G-SRT.10",
+          "difficulty": 1,
+          "prompt": "a = 5, b = 8, C = 60°. Find c².",
+          "workedSolution": {
+            "steps": [
+              "25 + 64 = 89.",
+              "2(5)(8)(0.5) = 40.",
+              "c² = 89 − 40 = 49."
+            ],
+            "answer": "49"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u03-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "law-of-sines-side",
+          "standard": "G-SRT.11",
+          "difficulty": 2,
+          "prompt": "In a triangle, angle A = 40°, angle B = 56°, and side a = 10 (opposite A). Find side b to two decimal places.",
+          "choices": [
+            "7.75",
+            "12.9",
+            "14",
+            "10"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "triangle-area-from-two-sides-and-angle",
+          "standard": "G-SRT.9",
+          "difficulty": 3,
+          "prompt": "A triangle has sides a = 26 and b = 13 enclosing an angle of 30°. Find its area exactly.",
+          "choices": [
+            "169",
+            "338",
+            "170",
+            "84.5"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "choose-triangle-law",
+          "standard": "G-SRT.11",
+          "difficulty": 3,
+          "prompt": "A triangle problem gives all three sides (SSS). Which law should be used first?",
+          "choices": [
+            "the law of cosines",
+            "the Pythagorean theorem",
+            "the law of sines",
+            "the law of sines, with a check for the ambiguous case"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u03-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "law-of-cosines-side",
+          "standard": "G-SRT.10",
+          "difficulty": 2,
+          "prompt": "In a triangle, sides a = 5 and b = 6 enclose an angle C = 60°. Find c², the square of the third side.",
+          "choices": [
+            "61",
+            "31",
+            "91",
+            "121"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "law-of-sines-side",
+          "standard": "G-SRT.11",
+          "difficulty": 2,
+          "prompt": "In a triangle, angle A = 64°, angle B = 42°, and side a = 13 (opposite A). Find side b to two decimal places.",
+          "choices": [
+            "13",
+            "17.46",
+            "8.53",
+            "9.68"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "triangle-area-from-two-sides-and-angle",
+          "standard": "G-SRT.9",
+          "difficulty": 3,
+          "prompt": "A triangle has sides a = 16 and b = 16 enclosing an angle of 90°. Find its area exactly.",
+          "choices": [
+            "128",
+            "256",
+            "257",
+            "129"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "choose-triangle-law",
+          "standard": "G-SRT.11",
+          "difficulty": 3,
+          "prompt": "A triangle problem gives two sides and the angle between them (SAS). Which law should be used first?",
+          "choices": [
+            "the law of sines",
+            "the Pythagorean theorem",
+            "the law of sines, with a check for the ambiguous case",
+            "the law of cosines"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "law-of-cosines-side",
+          "standard": "G-SRT.10",
+          "difficulty": 3,
+          "prompt": "In a triangle, sides a = 5 and b = 7 enclose an angle C = 120°. Find c², the square of the third side.",
+          "choices": [
+            "109",
+            "39",
+            "144",
+            "74"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u03-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "law-of-sines-side",
+          "standard": "G-SRT.11",
+          "difficulty": 3,
+          "prompt": "In a triangle, angle A = 31°, angle B = 44°, and side a = 14 (opposite A). Find side b to two decimal places.",
+          "choices": [
+            "14",
+            "10.38",
+            "18.88",
+            "19.87"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u03-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "triangle-area-from-two-sides-and-angle",
+          "standard": "G-SRT.9",
+          "difficulty": 3,
+          "prompt": "A triangle has sides a = 8 and b = 14 enclosing an angle of 150°. Find its area exactly.",
+          "choices": [
+            "112",
+            "56",
+            "28",
+            "57"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u03-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u03-l09"
+  }
+}

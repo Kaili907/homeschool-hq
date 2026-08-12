@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u06-l07",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u06-l07",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Creating Equations and Constraints",
+    "dayInUnit": 7,
+    "courseDay": 97,
+    "phase": "Investigation or close reading",
+    "focus": "creating linear, quadratic, rational, and exponential equations in one variable",
+    "title": "Investigation or close reading: creating linear, quadratic, rational, and exponential equations in one variable"
+  },
+  "standards": [
+    "A-CED.1",
+    "A-CED.2",
+    "A-CED.3",
+    "A-CED.4",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Investigation or close reading",
+    "profile": "investigation",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows the kind of reasoning the investigation asks for.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l07#ex-01",
+          "kind": "worked-example",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 1,
+          "prompt": "A costs $4, B costs $7, budget $50. Write the constraint.",
+          "workedSolution": {
+            "steps": [
+              "Total spend is 4a + 7b.",
+              "\"At most\" gives ≤.",
+              "4a + 7b ≤ 50."
+            ],
+            "answer": "4a + 7b ≤ 50"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Talk through what changes and what stays fixed before you answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l07#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A tank holds 95 litres and is filling at 5 litres per minute. After how many minutes does it hold 170 litres?",
+          "choices": [
+            "15 minutes",
+            "75 minutes",
+            "34 minutes",
+            "53 minutes"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l07#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A model gives the number of buses needed as 4.3. How should this solution be interpreted?",
+          "choices": [
+            "The model must be wrong, because the answer is not a whole number.",
+            "Report 4.3, because the model is exact.",
+            "Round up to 5; a fractional bus is not viable and rounding down leaves people behind.",
+            "Round down to 4, because 4.3 is closer to 4."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l07#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 2,
+          "prompt": "A repair service charges a $20 call-out fee plus $4 per hour. A job cost $40 in total. Which equation determines the number of hours h?",
+          "choices": [
+            "20h + 4 = 40",
+            "4 + 20h = 40",
+            "20 + 4h = 40",
+            "20 + 4 + h = 40"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l07#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "rearrange-formula-for-variable",
+          "standard": "A-CED.4",
+          "difficulty": 3,
+          "prompt": "The formula A = 5bh − 7 models a design constraint, where A, b, and h are positive. Solve it for h.",
+          "choices": [
+            "h = A / (5b) + 7",
+            "h = 5b(A + 7)",
+            "h = (A + 7) / (5b)",
+            "h = (A − 7) / (5b)"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l07#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "write-constraint-inequality",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "Item A costs $10 each and item B costs $24 each. You may spend at most $190 in total. Which inequality expresses this constraint on the counts a and b?",
+          "choices": [
+            "10a + 24b ≤ 190",
+            "10a + 24b = 190",
+            "a + b ≤ 190",
+            "10a + 24b ≥ 190"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l07#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-for-required-value",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A tank holds 30 litres and is filling at 5 litres per minute. After how many minutes does it hold 110 litres?",
+          "choices": [
+            "80 minutes",
+            "16 minutes",
+            "22 minutes",
+            "28 minutes"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Write out the reasoning in full sentences. A correct answer with no justification does not count here.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u06-l07#xt-01",
+          "kind": "constructed-response",
+          "itemType": "interpret-constraint-feasibility",
+          "standard": "A-CED.3",
+          "difficulty": 3,
+          "prompt": "A model gives a required side length of −6 metres. How should this solution be interpreted?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g9-mathematics-u06-l07#xt-02",
+          "kind": "constructed-response",
+          "itemType": "create-equation-from-context",
+          "standard": "A-CED.1",
+          "difficulty": 3,
+          "prompt": "A repair service charges a $290 call-out fee plus $13 per hour. A job cost $433 in total. Which equation determines the number of hours h?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u06-l07.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u06-l07"
+  }
+}

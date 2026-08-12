@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g9-mathematics-u03-l03",
+  "lessonRef": {
+    "lessonId": "ma-g9-mathematics-u03-l03",
+    "courseId": "ma-g9-mathematics",
+    "grade": 9,
+    "subject": "mathematics",
+    "unitNumber": 3,
+    "unitTitle": "Reasoning with Linear Equations and Inequalities",
+    "dayInUnit": 3,
+    "courseDay": 39,
+    "phase": "Guided practice A",
+    "focus": "solving linear inequalities and the sign-reversal rule",
+    "title": "Guided practice A: solving linear inequalities and the sign-reversal rule"
+  },
+  "standards": [
+    "A-REI.1",
+    "A-REI.3",
+    "A-REI.10",
+    "A-REI.11",
+    "MP.3"
+  ],
+  "blueprint": {
+    "phase": "Guided practice A",
+    "profile": "guided-practice-supported",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Use this example as the model for the guided set below.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l03#ex-01",
+          "kind": "worked-example",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 1,
+          "prompt": "f(x) = 2x + 1 and g(x) = 5x − 8 meet where?",
+          "workedSolution": {
+            "steps": [
+              "2x + 1 = 5x − 8.",
+              "−3x = −9, so x = 3."
+            ],
+            "answer": "x = 3"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l03#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 1,
+          "prompt": "Solve 2x + 3y = 3 for y.",
+          "choices": [
+            "y = (3 − 2x)/3",
+            "y = (2x − 3)/3",
+            "y = (3 + 2x)/3",
+            "y = 3 − 2x"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l03#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 1,
+          "prompt": "Solve for x: -3x + 2 = -4x + 6.",
+          "choices": [
+            "x = -4/7",
+            "x = -4",
+            "x = 4",
+            "x = 8"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l03#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x and state the solution set: -5x + 5 < 1.",
+          "choices": [
+            "x > -4/5",
+            "x < 4/5",
+            "x > -6/5",
+            "x > 4/5"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l03#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 2,
+          "prompt": "In a solution, one line reads: From 3(x + 4) = 21 to 3x + 12 = 21. Which property justifies that step?",
+          "choices": [
+            "the multiplicative inverse",
+            "the distributive property",
+            "combining like terms",
+            "the addition property of equality"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l03#gp-05",
+          "kind": "multiple-choice",
+          "itemType": "point-on-graph-membership",
+          "standard": "A-REI.10",
+          "difficulty": 2,
+          "prompt": "Does the point (2, -1) lie on the graph of y = 2x − 3?",
+          "choices": [
+            "Only if the graph is extended beyond the plotted window.",
+            "It cannot be determined without graphing the line.",
+            "Yes; the coordinates satisfy the equation.",
+            "No; substituting x = 2 gives y = 1, not -1."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l03#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "intersection-as-equation-solution",
+          "standard": "A-REI.11",
+          "difficulty": 2,
+          "prompt": "The graphs of f(x) = 4x + 1 and g(x) = -3x + 15 intersect at exactly one point. What is the solution of f(x) = g(x)?",
+          "choices": [
+            "x = -2",
+            "x = 16/7",
+            "x = 2",
+            "x = 14"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l03#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-literal-equation",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve -3x − 2y = -3 for y.",
+          "choices": [
+            "y = (-3 + -3x)/-2",
+            "y = (-3x − -3)/-2",
+            "y = -3 − -3x",
+            "y = (-3 − -3x)/-2"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l03#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-equation",
+          "standard": "A-REI.3",
+          "difficulty": 3,
+          "prompt": "Solve for x: -6x + 7 = 2x + 79.",
+          "choices": [
+            "x = 9",
+            "x = -43/4",
+            "x = -9",
+            "x = -18"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g9-mathematics-u03-l03#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-linear-inequality",
+          "standard": "A-REI.3",
+          "difficulty": 2,
+          "prompt": "Solve for x and state the solution set: 6x − 7 < 1.",
+          "choices": [
+            "x < 4/3",
+            "x > 4/3",
+            "x < -4/3",
+            "x < -1"
+          ]
+        },
+        {
+          "ref": "ma-g9-mathematics-u03-l03#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "justify-solution-step",
+          "standard": "A-REI.1",
+          "difficulty": 2,
+          "prompt": "In a solution, one line reads: From 3x + 12 = 21 to 3x = 9. Which property justifies that step?",
+          "choices": [
+            "the distributive property",
+            "subtracting 12 from both sides (subtraction property of equality)",
+            "the commutative property",
+            "dividing both sides by 3"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-09/ma-g9-mathematics-u03-l03.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g9-mathematics-u03-l03"
+  }
+}

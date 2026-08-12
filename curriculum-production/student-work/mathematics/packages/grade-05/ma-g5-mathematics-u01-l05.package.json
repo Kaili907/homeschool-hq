@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g5-mathematics-u01-l05",
+  "lessonRef": {
+    "lessonId": "ma-g5-mathematics-u01-l05",
+    "courseId": "ma-g5-mathematics",
+    "grade": 5,
+    "subject": "mathematics",
+    "unitNumber": 1,
+    "unitTitle": "Mathematical Habits and Whole-Number Reasoning",
+    "dayInUnit": 5,
+    "courseDay": 5,
+    "phase": "Concept model B",
+    "focus": "explaining strategies",
+    "title": "Concept model B: explaining strategies"
+  },
+  "standards": [
+    "5.OA.1",
+    "5.OA.2",
+    "5.NBT.1",
+    "MP.1",
+    "MP.3",
+    "MP.6"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "estimate-product",
+          "standard": "MP.6",
+          "difficulty": 1,
+          "prompt": "Round each factor to the nearest ten to estimate 47 × 62.",
+          "workedSolution": {
+            "steps": [
+              "Round 47 to 50 and 62 to 60.",
+              "Multiply the rounded factors: 50 × 60 = 3,000."
+            ],
+            "answer": "3,000"
+          }
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "reasonableness-check",
+          "standard": "MP.6",
+          "difficulty": 2,
+          "prompt": "A student says 347 + 281 = 628. Round each number to the nearest hundred to check the claim.",
+          "workedSolution": {
+            "steps": [
+              "Compute the exact sum: 347 + 281 = 628.",
+              "Round the addends: 300 + 300 = 600.",
+              "The exact result is close to the estimate, and the stated equality is correct."
+            ],
+            "answer": "The claim is exact; the rounded estimate is 600."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "expression-error-analysis",
+          "standard": "MP.3",
+          "difficulty": 2,
+          "prompt": "A student evaluates [27 + 7] × 3 - 20: “They multiply 7 by 3 first, then finish the calculation, so the value is 28.” Which statement best identifies the error?",
+          "choices": [
+            "The work is correct; 28 is the value.",
+            "The student multiplied before evaluating [27 + 7]; the grouped sum is 34, giving 82.",
+            "The first error is in the final addition or subtraction; the value should be 83.",
+            "The student used the right first step but made an arithmetic slip; the value should be 84."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "place-value-error-analysis",
+          "standard": "5.NBT.1",
+          "difficulty": 2,
+          "prompt": "A student says, “In 763779, the value of the 7 in the tens place is 100 times as much as the value of the 7 in the hundreds place.” Which statement best analyzes the error?",
+          "choices": [
+            "The values are 70 and 700; 70 is 100 times as much as 700, so the student's comparison is correct.",
+            "The places are adjacent, so 70 is 100 times as much as 700.",
+            "The values are 70 and 700; 70 is 1/10 as much as 700, so the student's comparison is incorrect.",
+            "Both digits have value 7; repeated digits always have the same value."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-numerical-expression",
+          "standard": "5.OA.1",
+          "difficulty": 2,
+          "prompt": "Evaluate [44 + (2 × 4)] - 21.",
+          "choices": [
+            "29",
+            "32",
+            "41",
+            "31"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "words-to-expression",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Which expression means: “Multiply 9 by 8, then subtract the product from 92.”",
+          "choices": [
+            "(92 - 9) × 8",
+            "(92 + 9) × 8",
+            "92 + (9 × 8)",
+            "92 - (9 × 8)"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "expression-to-words",
+          "standard": "5.OA.2",
+          "difficulty": 2,
+          "prompt": "Which phrase describes 118 - (17 × 4) without evaluating it?",
+          "choices": [
+            "Add 17 and 4, then subtract the sum from 118.",
+            "Add 118 and 17, then multiply the sum by 4.",
+            "Multiply 17 by 4, then subtract the product from 118.",
+            "Multiply 17 by 4, then add the product to 118."
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "expression-relationship",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "Let E represent 5797 + 1252. Without evaluating, how does 5 × (5797 + 1252) compare with E?",
+          "choices": [
+            "5 times as large as E",
+            "6 times as large as E",
+            "1/5 as large as E",
+            "5 greater than E"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "choose-expression-for-situation",
+          "standard": "5.OA.2",
+          "difficulty": 3,
+          "prompt": "A supply cart has 27 boxes with 74 markers in each box and 7 loose markers. Which expression represents the total number of markers?",
+          "choices": [
+            "27 × 74 - 7",
+            "(27 + 74) × 7",
+            "27 + 74 + 7",
+            "27 × 74 + 7"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g5-mathematics-u01-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-multistep-problem",
+          "standard": "MP.1",
+          "difficulty": 2,
+          "prompt": "A library has 21 shelves with 34 books on each shelf. Then 6 books are loaned out. How many books remain?",
+          "choices": [
+            "706",
+            "707",
+            "708",
+            "49"
+          ]
+        },
+        {
+          "ref": "ma-g5-mathematics-u01-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "adjacent-whole-number-place-value",
+          "standard": "5.NBT.1",
+          "difficulty": 3,
+          "prompt": "In 4493664, how does the value of the 4 in the hundred-thousands place compare with the value of the 4 in the millions place?",
+          "choices": [
+            "the same value",
+            "10 times as much",
+            "100 times as much",
+            "1/10 as much"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-05/ma-g5-mathematics-u01-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g5-mathematics-u01-l05"
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u05-l18",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u05-l18",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 5,
+    "unitTitle": "Functions",
+    "dayInUnit": 18,
+    "courseDay": 90,
+    "phase": "Publication, presentation, or reflection",
+    "focus": "qualitative graph interpretation",
+    "title": "Publication, presentation, or reflection: qualitative graph interpretation"
+  },
+  "standards": [
+    "8.F.1",
+    "8.F.2",
+    "8.F.3",
+    "8.F.4",
+    "8.F.5"
+  ],
+  "blueprint": {
+    "phase": "Publication, presentation, or reflection",
+    "profile": "publication-reflection",
+    "sectionKinds": [
+      "instructional-example",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Notice how the explanation names the reason for each step.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l18#ex-01",
+          "kind": "worked-example",
+          "itemType": "match-graph-description-to-scenario",
+          "standard": "8.F.5",
+          "difficulty": 1,
+          "prompt": "A car accelerates steadily, then travels at a constant speed, then decelerates to a stop. Which description best matches the shape of the graph over time?",
+          "workedSolution": {
+            "steps": [
+              "While accelerating, the speed graph rises, so it is increasing.",
+              "While traveling at a constant speed, the graph is flat, so it is constant.",
+              "While decelerating to a stop, the graph falls, so it is decreasing."
+            ],
+            "answer": "increasing, then constant, then decreasing"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l18#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-interval-behavior",
+          "standard": "8.F.5",
+          "difficulty": 2,
+          "prompt": "A graph shows height over time.\nFrom t = 0 to t = 4, height goes from 18 to 12.\nFrom t = 4 to t = 10, height goes from 12 to 19.\nFrom t = 10 to t = 16, height goes from 19 to 19.\nWhich interval shows the height decreasing?",
+          "choices": [
+            "t = 10 to t = 16",
+            "t = 0 to t = 4",
+            "No interval shows this behavior.",
+            "t = 4 to t = 10"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l18#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "is-relation-a-function",
+          "standard": "8.F.1",
+          "difficulty": 2,
+          "prompt": "Consider the relation {(9, -6), (-10, -10), (3, -8), (-7, -10)}. Is this relation a function?",
+          "choices": [
+            "Yes, this relation is a function.",
+            "It is a function only if every output is different.",
+            "No, this relation is not a function.",
+            "Cannot be determined from the given pairs."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l18#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "function-graph-as-pairs",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Which set of ordered pairs does NOT represent a function?",
+          "choices": [
+            "{(-7, 8), (5, 4), (13, 14), (-12, -16)}",
+            "{(0, 1), (4, -16), (1, -12), (4, 0)}",
+            "{(-10, 8), (3, 10), (-13, -8), (13, -8)}",
+            "{(-9, -5), (12, -15), (-12, -10), (6, -5)}"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l18#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "evaluate-function-notation",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Given f(x) = 12x - 3, find f(-12).",
+          "choices": [
+            "-146",
+            "-144",
+            "-145",
+            "-147"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Explain your method so that someone who has not done this unit could follow it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u05-l18#xt-01",
+          "kind": "constructed-response",
+          "itemType": "find-input-from-output",
+          "standard": "8.F.1",
+          "difficulty": 3,
+          "prompt": "Given f(x) = 4x - 11, find the value of x for which f(x) = 45.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u05-l18#xt-02",
+          "kind": "constructed-response",
+          "itemType": "compare-functions-rate-of-change",
+          "standard": "8.F.2",
+          "difficulty": 3,
+          "prompt": "Function A is given by f(x) = 3x + 17. Function B is given by the table:\nx: 4, 9\ny: 12, 47\nWhich function has the greater rate of change?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u05-l18.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u05-l18"
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u10-l11",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u10-l11",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Algebraic Modeling Capstone",
+    "dayInUnit": 11,
+    "courseDay": 173,
+    "phase": "Performance task planning",
+    "focus": "data trends and uncertainty",
+    "title": "Performance task planning: data trends and uncertainty"
+  },
+  "standards": [
+    "8.EE.7",
+    "8.EE.8",
+    "8.F.4",
+    "8.G.7",
+    "8.SP.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Performance task planning",
+    "profile": "performance-planning",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example shows how to justify a modelling choice.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l11#ex-01",
+          "kind": "worked-example",
+          "itemType": "define-variable",
+          "standard": "MP.4",
+          "difficulty": 1,
+          "prompt": "A trip cost depends on miles traveled. Define x.",
+          "workedSolution": {
+            "steps": [
+              "Define the relevant quantities and assumptions.",
+              "Use the selected model consistently.",
+              "State a conclusion with its limitation or evidence."
+            ],
+            "answer": "x = miles traveled"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Decide what the quantities are before you compute anything.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l11#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "state-model-assumption",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A service is modeled by C = 12h + 25, where h is hours. Which assumption supports this model?",
+          "choices": [
+            "Every service has the same total cost.",
+            "The number of hours is always zero.",
+            "The hourly charge remains $12 for every hour.",
+            "The flat fee changes each hour."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l11#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "select-linear-or-nonlinear-model",
+          "standard": "8.F.4",
+          "difficulty": 2,
+          "prompt": "A savings balance increases by $15 each week. Which model type is appropriate?",
+          "choices": [
+            "not a model",
+            "linear",
+            "constant",
+            "nonlinear"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l11#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-equation",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "A model gives 9x + 8 = 26. What is x?",
+          "choices": [
+            "2",
+            "3",
+            "18",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Plan in writing: what you will model, why that model, and how you will check it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l11#xt-01",
+          "kind": "constructed-response",
+          "itemType": "solve-system-constraint",
+          "standard": "8.EE.8",
+          "difficulty": 3,
+          "prompt": "Two constraints are y = 3x + 6 and y = 9x - 48. What is their shared solution?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l11#xt-02",
+          "kind": "constructed-response",
+          "itemType": "geometry-measurement-model",
+          "standard": "8.G.7",
+          "difficulty": 3,
+          "prompt": "A rectangular design has side lengths 5 units and 12 units. What is its diagonal?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l11#xt-03",
+          "kind": "constructed-response",
+          "itemType": "interpret-data-trend",
+          "standard": "8.SP.3",
+          "difficulty": 3,
+          "prompt": "In a data set, hours of screen time increase and hours of sleep generally decrease. What association is shown?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u10-l11.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u10-l11"
+  }
+}

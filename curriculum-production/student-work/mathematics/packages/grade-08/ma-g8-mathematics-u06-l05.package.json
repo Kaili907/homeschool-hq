@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u06-l05",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u06-l05",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Systems of Linear Equations",
+    "dayInUnit": 5,
+    "courseDay": 95,
+    "phase": "Concept model B",
+    "focus": "systems from contexts",
+    "title": "Concept model B: systems from contexts"
+  },
+  "standards": [
+    "8.EE.8"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "system-from-context-solve",
+          "standard": "8.EE.8c",
+          "difficulty": 1,
+          "prompt": "Plan A charges a $10 flat fee plus $3 per month. Plan B charges a $4 flat fee plus $5 per month. After how many months do the two plans cost the same, and what is that cost?",
+          "workedSolution": {
+            "steps": [
+              "Set the two cost expressions equal: 10 + 3x = 4 + 5x.",
+              "Subtract 3x and 4 from both sides: 6 = 2x, so x = 3.",
+              "Substitute x = 3 into either plan to get a cost of 19, so the plans cost the same after 3 months at $19."
+            ],
+            "answer": "(3, 19)"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "interpret-context-solution",
+          "standard": "8.EE.8c",
+          "difficulty": 2,
+          "prompt": "Plan A charges a $10 flat fee plus $3 per month. Plan B charges a $4 flat fee plus $5 per month. The solution to the system is (3, 19). What does this solution represent?",
+          "workedSolution": {
+            "steps": [
+              "The x-coordinate, 3, is the number of months in the solution.",
+              "The y-coordinate, 19, is the shared cost in dollars at that point.",
+              "Together, (3, 19) means both plans cost $19 after 3 months."
+            ],
+            "answer": "After 3 months, both plans cost $19."
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "check-solution-against-system",
+          "standard": "8.EE.8",
+          "difficulty": 2,
+          "prompt": "System: y = x + 4 and y = -3x + 24. Does the point (6, 10) satisfy both equations, fail one, or fail both?",
+          "choices": [
+            "satisfies both equations",
+            "fails the second equation only",
+            "fails both equations",
+            "fails the first equation only"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-solution-meaning",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "Plan A charges a $33 flat fee plus $9 per visit. Plan B charges a $66 flat fee plus $6 per visit. The solution to the system is (11, 132). What does the y-coordinate of the solution represent?",
+          "choices": [
+            "The difference in cost between the two plans.",
+            "The number of visits after which the two plans cost the same.",
+            "The rate Plan B charges per visit.",
+            "The shared cost, in dollars, when the two plans are equal."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "verify-solution-of-system",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "System: y = 5x + 15 and y = 6x + 19. Which point (x, y) satisfies both equations?",
+          "choices": [
+            "(-4, -5)",
+            "(-5, -5)",
+            "(-3, -5)",
+            "(-4, -4)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-for-intersection-point",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "Solve the system: y = -2x - 6 and y = -x + 1. What is the intersection point (x, y)?",
+          "choices": [
+            "(-6, 8)",
+            "(-7, 8)",
+            "(-8, 8)",
+            "(-7, 9)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "intersection-from-two-tables",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "Relationship A: x: 2, 3, 4, 5 y: 1, -4, -9, -14. Relationship B: x: 2, 3, 4, 5 y: 1, 2, 3, 4. At which x-value do the two relationships have the same y-value?",
+          "choices": [
+            "5",
+            "2",
+            "4",
+            "3"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "identify-quadrant-of-intersection",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Solve the system: y = -2x + 37 and y = 6x - 67. In which quadrant does the intersection point lie, or does it lie on an axis?",
+          "choices": [
+            "on an axis",
+            "Quadrant II",
+            "Quadrant IV",
+            "Quadrant I"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-substitution",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "Solve the system:\ny = 5x + 86\n6x + 10y = 76\nUse substitution to find the solution (x, y).",
+          "choices": [
+            "(-14, 17)",
+            "(-13, 16)",
+            "(-14, 16)",
+            "(-15, 16)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-elimination",
+          "standard": "8.EE.8b",
+          "difficulty": 2,
+          "prompt": "Solve the system:\nx + 2y = -22\n-2x + 2y = -16\nUse elimination to find the solution (x, y).",
+          "choices": [
+            "(-2, -9)",
+            "(-3, -10)",
+            "(-1, -10)",
+            "(-2, -10)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "classify-solution-count",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "Classify the system: y = 3x - 29 and y = 3x + 14. Does it have one solution, no solution, or infinitely many solutions?",
+          "choices": [
+            "infinitely many solutions",
+            "no solution",
+            "one solution"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u06-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u06-l05"
+  }
+}

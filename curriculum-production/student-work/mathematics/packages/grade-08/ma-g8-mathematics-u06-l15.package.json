@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u06-l15",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u06-l15",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Systems of Linear Equations",
+    "dayInUnit": 15,
+    "courseDay": 105,
+    "phase": "Assessment preparation",
+    "focus": "substitution or equivalent reasoning",
+    "title": "Assessment preparation: substitution or equivalent reasoning"
+  },
+  "standards": [
+    "8.EE.8"
+  ],
+  "blueprint": {
+    "phase": "Assessment preparation",
+    "profile": "assessment-preparation",
+    "sectionKinds": [
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l15#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-substitution",
+          "standard": "8.EE.8b",
+          "difficulty": 1,
+          "prompt": "Solve the system:\ny = x\nx - 4y = -9\nUse substitution to find the solution (x, y).",
+          "choices": [
+            "(3, 3)",
+            "(2, 3)",
+            "(3, 4)",
+            "(4, 3)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l15#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-elimination",
+          "standard": "8.EE.8b",
+          "difficulty": 2,
+          "prompt": "Solve the system:\nx - 5y = 21\n-x + 3y = -13\nUse elimination to find the solution (x, y).",
+          "choices": [
+            "(2, -4)",
+            "(1, -4)",
+            "(0, -4)",
+            "(1, -3)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l15#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "classify-solution-count",
+          "standard": "8.EE.8b",
+          "difficulty": 2,
+          "prompt": "Classify the system: y = -2x + 6 and y = -x. Does it have one solution, no solution, or infinitely many solutions?",
+          "choices": [
+            "no solution",
+            "one solution",
+            "infinitely many solutions"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l15#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-equivalent-or-inconsistent-equation",
+          "standard": "8.EE.8b",
+          "difficulty": 2,
+          "prompt": "The reference equation is y = 4x + 7. Which of these equations, paired with the reference, would give the system no solution?",
+          "choices": [
+            "-4x + y = 9",
+            "-10x - 2y = -4",
+            "10x - 2y = 8",
+            "6x + y = -12"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l15#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "system-from-context-solve",
+          "standard": "8.EE.8c",
+          "difficulty": 3,
+          "prompt": "Plan A charges a $85 flat fee plus $7 per week. Plan B charges a $121 flat fee plus $1 per week. After how many weeks do the two plans cost the same, and what is that cost?",
+          "choices": [
+            "(7, 127)",
+            "(5, 127)",
+            "(6, 127)",
+            "(6, 128)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l15#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "interpret-context-solution",
+          "standard": "8.EE.8c",
+          "difficulty": 3,
+          "prompt": "Plan A charges a $116 flat fee plus $4 per month. Plan B charges a $149 flat fee plus $1 per month. The solution to the system is (11, 160). What does this solution represent?",
+          "choices": [
+            "Plan A costs $160 more than Plan B after 11 months.",
+            "After 12 months, both plans cost $160.",
+            "After 160 months, both plans cost $11.",
+            "After 11 months, both plans cost $160."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l15#ip-07",
+          "kind": "multiple-choice",
+          "itemType": "check-solution-against-system",
+          "standard": "8.EE.8",
+          "difficulty": 3,
+          "prompt": "System: y = -3x + 41 and y = -5x + 67. Does the point (13, 2) satisfy both equations, fail one, or fail both?",
+          "choices": [
+            "satisfies both equations",
+            "fails the first equation only",
+            "fails the second equation only",
+            "fails both equations"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l15#ip-08",
+          "kind": "multiple-choice",
+          "itemType": "interpret-solution-meaning",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Plan A charges a $119 flat fee plus $5 per week. Plan B charges a $112 flat fee plus $6 per week. The solution to the system is (7, 154). What does the y-coordinate of the solution represent?",
+          "choices": [
+            "The difference in cost between the two plans.",
+            "The number of weeks after which the two plans cost the same.",
+            "The rate Plan B charges per week.",
+            "The shared cost, in dollars, when the two plans are equal."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l15#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "verify-solution-of-system",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "System: y = -5x + 27 and y = 4x - 18. Which point (x, y) satisfies both equations?",
+          "choices": [
+            "(5, 2)",
+            "(5, 3)",
+            "(4, 2)",
+            "(6, 2)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l15#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-for-intersection-point",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "Solve the system: y = -5x + 8 and y = 3x - 8. What is the intersection point (x, y)?",
+          "choices": [
+            "(2, -2)",
+            "(2, -1)",
+            "(1, -2)",
+            "(3, -2)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l15#mc-03",
+          "kind": "multiple-choice",
+          "itemType": "intersection-from-two-tables",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Relationship A: x: 10, 11, 12, 13 y: -4, -3, -2, -1. Relationship B: x: 10, 11, 12, 13 y: -5, -3, -1, 1. At which x-value do the two relationships have the same y-value?",
+          "choices": [
+            "13",
+            "12",
+            "10",
+            "11"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l15#mc-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-quadrant-of-intersection",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Solve the system: y = 3x + 17 and y = -8x - 5. In which quadrant does the intersection point lie, or does it lie on an axis?",
+          "choices": [
+            "Quadrant II",
+            "on an axis",
+            "Quadrant III",
+            "Quadrant I"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u06-l15.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u06-l15"
+  }
+}

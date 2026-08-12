@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u10-l09",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u10-l09",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Integrated Algebraic Modeling Capstone",
+    "dayInUnit": 9,
+    "courseDay": 171,
+    "phase": "Concept model C",
+    "focus": "systems and constraints",
+    "title": "Concept model C: systems and constraints"
+  },
+  "standards": [
+    "8.EE.7",
+    "8.EE.8",
+    "8.F.4",
+    "8.G.7",
+    "8.SP.3",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model C",
+    "profile": "concept-model-generalization",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "This example is written more briefly. Fill in the reasoning it leaves out.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l09#ex-01",
+          "kind": "worked-example",
+          "itemType": "interpret-data-trend",
+          "standard": "8.SP.3",
+          "difficulty": 1,
+          "prompt": "As study time increases, scores tend to increase. Identify the trend.",
+          "workedSolution": {
+            "steps": [
+              "Define the relevant quantities and assumptions.",
+              "Use the selected model consistently.",
+              "State a conclusion with its limitation or evidence."
+            ],
+            "answer": "positive"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l09#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-model-limitation",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A line of fit was made from data for temperatures 40° through 80°. It is used to predict a temperature at 120°. Which limitation is most important?",
+          "choices": [
+            "The prediction must be exactly correct.",
+            "The line proves causation.",
+            "The prediction is an extrapolation and may be less reliable.",
+            "The data range no longer matters."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l09#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "choose-mathematical-evidence",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "Which action provides the strongest evidence that a model fits a situation?",
+          "choices": [
+            "show calculations and compare predictions to data",
+            "state an answer without units",
+            "choose the first equation written",
+            "ignore data that disagree"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l09#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "communicate-model-conclusion",
+          "standard": "MP.4",
+          "difficulty": 3,
+          "prompt": "Which conclusion communicates a mathematical model responsibly?",
+          "choices": [
+            "State the result, units, assumption, and limitation.",
+            "Hide the assumption and data source.",
+            "Claim the model is always correct.",
+            "State only a number."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l09#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "define-variable",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A moving company charges by the number of hours worked. Which definition of x best models this situation?",
+          "choices": [
+            "x = total cost in dollars",
+            "x = number of workers",
+            "x = company name",
+            "x = number of hours worked"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l09#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "state-model-assumption",
+          "standard": "MP.4",
+          "difficulty": 2,
+          "prompt": "A service is modeled by C = 12h + 25, where h is hours. Which assumption supports this model?",
+          "choices": [
+            "The number of hours is always zero.",
+            "Every service has the same total cost.",
+            "The flat fee changes each hour.",
+            "The hourly charge remains $12 for every hour."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l09#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "select-linear-or-nonlinear-model",
+          "standard": "8.F.4",
+          "difficulty": 3,
+          "prompt": "The area of a square changes as its side length is squared. Which model type is appropriate?",
+          "choices": [
+            "nonlinear",
+            "constant",
+            "not a model",
+            "linear"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l09#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "solve-model-equation",
+          "standard": "8.EE.7",
+          "difficulty": 3,
+          "prompt": "A model gives 3x + 16 = 28. What is x?",
+          "choices": [
+            "4",
+            "12",
+            "3",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l09#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-constraint",
+          "standard": "8.EE.8",
+          "difficulty": 3,
+          "prompt": "Two constraints are y = 4x + 4 and y = 12x - 20. What is their shared solution?",
+          "choices": [
+            "(4, 17)",
+            "(3, 16)",
+            "(2, 17)",
+            "(5, 15)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u10-l09#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "geometry-measurement-model",
+          "standard": "8.G.7",
+          "difficulty": 3,
+          "prompt": "A rectangular design has side lengths 8 units and 15 units. What is its diagonal?",
+          "choices": [
+            "23 units",
+            "16 units",
+            "17 units",
+            "18 units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u10-l09#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-data-trend",
+          "standard": "8.SP.3",
+          "difficulty": 3,
+          "prompt": "In a data set, hours of screen time increase and hours of sleep generally decrease. What association is shown?",
+          "choices": [
+            "causation",
+            "negative",
+            "no association",
+            "positive"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u10-l09.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u10-l09"
+  }
+}

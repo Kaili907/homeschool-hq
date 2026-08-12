@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u04-l17",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u04-l17",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 4,
+    "unitTitle": "Slope, Lines, and Proportional Connections",
+    "dayInUnit": 17,
+    "courseDay": 71,
+    "phase": "Targeted correction",
+    "focus": "parallel-line reasoning",
+    "title": "Targeted correction: parallel-line reasoning"
+  },
+  "standards": [
+    "8.EE.5",
+    "8.EE.6"
+  ],
+  "blueprint": {
+    "phase": "Targeted correction",
+    "profile": "targeted-correction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Each example contains the correction, not just the answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l17#ex-01",
+          "kind": "worked-example",
+          "itemType": "identify-parallel-lines",
+          "standard": "8.EE.6",
+          "difficulty": 1,
+          "prompt": "A line has equation y = 2x - 1. Which of these equations represents a line parallel to it?",
+          "workedSolution": {
+            "steps": [
+              "Parallel lines have the same slope but different y-intercepts.",
+              "y = 2x + 4 has slope 2, the same as y = 2x - 1, but a different intercept.",
+              "So y = 2x + 4 is parallel to the given line."
+            ],
+            "answer": "y = 2x + 4"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l17#ex-02",
+          "kind": "worked-example",
+          "itemType": "parallel-line-through-point",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has equation y = 2x + 1. Write the equation of the line through (3, 4) that is parallel to this line.",
+          "workedSolution": {
+            "steps": [
+              "A parallel line has the same slope, 2.",
+              "Use y = 2x + b and the point (3, 4): 4 = 2(3) + b.",
+              "4 = 6 + b, so b = -2, giving y = 2x - 2."
+            ],
+            "answer": "y = 2x - 2"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Before solving, say which error the problem is testing for.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l17#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "interpret-slope-in-context",
+          "standard": "8.EE.5",
+          "difficulty": 1,
+          "prompt": "A plant's height is given by H = 7w + 9, where H is the height in centimeters and w is the number of weeks since it was measured. What does the slope represent in this context?",
+          "choices": [
+            "The plant was 7 centimeters tall when it was first measured.",
+            "The plant grows 7 centimeters per week.",
+            "The plant grows 9 centimeters per week.",
+            "The plant was 9 centimeters tall when it was first measured."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l17#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-y-intercept-in-context",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A taxi fare is given by F = 8m + 11, where F is the total fare in dollars and m is the number of miles traveled. What does the y-intercept represent in this context?",
+          "choices": [
+            "The fare increases by $11 for each additional mile traveled.",
+            "There is a base fare of $11 before any miles are traveled.",
+            "There is a base fare of $8 before any miles are traveled.",
+            "The fare increases by $8 for each additional mile traveled."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l17#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-two-points",
+          "standard": "8.EE.5",
+          "difficulty": 2,
+          "prompt": "Find the slope of the line through (3, 1) and (8, 10).",
+          "choices": [
+            "5/9",
+            "9/5",
+            "2",
+            "-9/5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l17#gp-04",
+          "kind": "multiple-choice",
+          "itemType": "slope-from-table",
+          "standard": "8.EE.5",
+          "difficulty": 3,
+          "prompt": "A line passes through these points:\nx: 0, 1, 2, 3\ny: 6, -2, -10, -18\nWhat is the slope (rate of change) of the line?",
+          "choices": [
+            "8",
+            "-24",
+            "-8",
+            "-1/8"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u04-l17#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "similar-triangle-point-on-line",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line passes through (-8, 12). A slope triangle on the line has a horizontal leg (run) of 5 and a vertical leg (rise) of 2. A similar slope triangle further along the same line is 2 times as large. Which point also lies on the line?",
+          "choices": [
+            "(2, 17)",
+            "(3, 16)",
+            "(2, 16)",
+            "(2, 15)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l17#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "slope-triangle-legs",
+          "standard": "8.EE.6",
+          "difficulty": 2,
+          "prompt": "A line has a slope of -6. A right triangle drawn along the line has a vertical leg (rise) of 25 units. What is the length of the other leg?",
+          "choices": [
+            "25",
+            "150",
+            "25/6",
+            "13/3"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l17#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "write-slope-intercept-equation",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "Write the equation, in slope-intercept form, of a line with slope -10 and y-intercept -14.",
+          "choices": [
+            "y = -10x - 14",
+            "y = 10x - 14",
+            "y = -10x - 15",
+            "y = -10x - 13"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u04-l17#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-slope-and-intercept",
+          "standard": "8.EE.6",
+          "difficulty": 3,
+          "prompt": "Identify the slope and y-intercept of the line y = 12x + 14.",
+          "choices": [
+            "slope = 14, y-intercept = 12",
+            "slope = 12, y-intercept = 14",
+            "slope = 12, y-intercept = -14",
+            "slope = -12, y-intercept = 14"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u04-l17.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u04-l17"
+  }
+}

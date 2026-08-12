@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g12-mathematics-u10-l05",
+  "lessonRef": {
+    "lessonId": "ma-g12-mathematics-u10-l05",
+    "courseId": "ma-g12-mathematics",
+    "grade": 12,
+    "subject": "mathematics",
+    "unitNumber": 10,
+    "unitTitle": "Decision Analysis and Expected Value Capstone",
+    "dayInUnit": 5,
+    "courseDay": 167,
+    "phase": "Concept model B",
+    "focus": "evaluating and comparing decision strategies",
+    "title": "Concept model B: evaluating and comparing decision strategies"
+  },
+  "standards": [
+    "S-MD.4",
+    "S-MD.5",
+    "S-MD.6",
+    "S-MD.7",
+    "MP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model B",
+    "profile": "concept-model-extension",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Compare these two examples. Find the step where they stop being the same.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u10-l05#ex-01",
+          "kind": "worked-example",
+          "itemType": "expected-value-of-a-wager",
+          "standard": "S-MD.5",
+          "difficulty": 1,
+          "prompt": "Costs $5, pays $40 with probability 1/10. Expected value?",
+          "workedSolution": {
+            "steps": [
+              "Expected winnings 40/10 = 4.",
+              "4 − 5 = −1, unfavourable."
+            ],
+            "answer": "−$1; unfavourable"
+          }
+        },
+        {
+          "ref": "ma-g12-mathematics-u10-l05#ex-02",
+          "kind": "worked-example",
+          "itemType": "insurance-expected-value",
+          "standard": "S-MD.5",
+          "difficulty": 2,
+          "prompt": "Premium $30, payout $1000 with probability 1/50. Expected profit?",
+          "workedSolution": {
+            "steps": [
+              "Expected payout 1000/50 = 20.",
+              "30 − 20 = $10."
+            ],
+            "answer": "$10"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u10-l05#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "compare-decisions-by-expected-value",
+          "standard": "S-MD.7",
+          "difficulty": 2,
+          "prompt": "Option A has expected payoff $24 and Option B has expected payoff $8. On expected value alone, which should be chosen, and what does this criterion ignore?",
+          "choices": [
+            "Neither; expected value cannot compare two options.",
+            "Option B; expected value ignores the spread of outcomes and the decider's tolerance for risk.",
+            "Option A; expected value ignores the spread of outcomes and the decider's tolerance for risk.",
+            "Option A; expected value already accounts for risk, so nothing is ignored."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u10-l05#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "fair-decision-mechanism",
+          "standard": "S-MD.6",
+          "difficulty": 2,
+          "prompt": "Assess whether this is a fair decision mechanism: choosing between two people using a single fair coin flip.",
+          "choices": [
+            "Fair; each person has probability 1/2, and the mechanism gives neither an advantage.",
+            "Not fair; the three probabilities are 3/6, 2/6, and 1/6, which are unequal.",
+            "Fair; each person receives probability 2/6 = 1/3, so the assignment is equal.",
+            "Fair, because any random device produces a fair decision."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u10-l05#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "expected-value-of-a-wager",
+          "standard": "S-MD.5",
+          "difficulty": 2,
+          "prompt": "A game costs $2 to play. It pays $20 with probability 1/4 and nothing otherwise. Find the expected value to the player, and say whether the game is fair.",
+          "choices": [
+            "$3; the game is favourable to the player",
+            "$5; the game is favourable to the player",
+            "$18; the game is favourable to the player",
+            "$-2; the game is unfavourable to the player"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u10-l05#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "insurance-expected-value",
+          "standard": "S-MD.5",
+          "difficulty": 2,
+          "prompt": "An insurer charges a premium of $10 and pays out $315 with probability 1/45. Find the insurer's expected profit per policy.",
+          "choices": [
+            "$-3",
+            "$3",
+            "$-305",
+            "$10"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u10-l05#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-decisions-by-expected-value",
+          "standard": "S-MD.7",
+          "difficulty": 2,
+          "prompt": "Option A has expected payoff $6 and Option B has expected payoff $13. On expected value alone, which should be chosen, and what does this criterion ignore?",
+          "choices": [
+            "Option B; expected value already accounts for risk, so nothing is ignored.",
+            "Option B; expected value ignores the spread of outcomes and the decider's tolerance for risk.",
+            "Option A; expected value ignores the spread of outcomes and the decider's tolerance for risk.",
+            "Neither; expected value cannot compare two options."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u10-l05#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "fair-decision-mechanism",
+          "standard": "S-MD.6",
+          "difficulty": 3,
+          "prompt": "Assess whether this is a fair decision mechanism: choosing between three people by rolling a standard die, assigning two faces to each.",
+          "choices": [
+            "Fair; each person receives probability 2/6 = 1/3, so the assignment is equal.",
+            "Fair, because any random device produces a fair decision.",
+            "Not fair; the three probabilities are 3/6, 2/6, and 1/6, which are unequal.",
+            "Fair; each person has probability 1/2, and the mechanism gives neither an advantage."
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u10-l05#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "expected-value-of-a-wager",
+          "standard": "S-MD.5",
+          "difficulty": 3,
+          "prompt": "A game costs $6 to play. It pays $204 with probability 1/17 and nothing otherwise. Find the expected value to the player, and say whether the game is fair.",
+          "choices": [
+            "$6; the game is favourable to the player",
+            "$198; the game is favourable to the player",
+            "$-6; the game is unfavourable to the player",
+            "$12; the game is favourable to the player"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g12-mathematics-u10-l05#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "insurance-expected-value",
+          "standard": "S-MD.5",
+          "difficulty": 2,
+          "prompt": "An insurer charges a premium of $13 and pays out $132 with probability 1/22. Find the insurer's expected profit per policy.",
+          "choices": [
+            "$-7",
+            "$13",
+            "$7",
+            "$-119"
+          ]
+        },
+        {
+          "ref": "ma-g12-mathematics-u10-l05#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "compare-decisions-by-expected-value",
+          "standard": "S-MD.7",
+          "difficulty": 3,
+          "prompt": "Option A has expected payoff $9 and Option B has expected payoff $6. On expected value alone, which should be chosen, and what does this criterion ignore?",
+          "choices": [
+            "Option B; expected value ignores the spread of outcomes and the decider's tolerance for risk.",
+            "Neither; expected value cannot compare two options.",
+            "Option A; expected value ignores the spread of outcomes and the decider's tolerance for risk.",
+            "Option A; expected value already accounts for risk, so nothing is ignored."
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-12/ma-g12-mathematics-u10-l05.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g12-mathematics-u10-l05"
+  }
+}

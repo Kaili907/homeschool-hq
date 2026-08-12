@@ -1,0 +1,96 @@
+{
+  "corpusVersion": "1.0.0",
+  "subject": "mathematics",
+  "generatedFrom": {
+    "canonicalPackage": "curriculum-content/manuel-academy/1.0.0 (grades 5, 7, 8)",
+    "highSchoolAuthoring": "curriculum-authoring/full-family-highschool-9-12/subjects/mathematics (grades 9-12)",
+    "excluded": "grades 3 and 4 — that mathematics authoring branch is still moving"
+  },
+  "totals": {
+    "lessons": 1260,
+    "items": 12798,
+    "gradedItems": 11550,
+    "workedExamples": 1248,
+    "keyedAnswers": 11550
+  },
+  "answerAuthority": {
+    "oracleRecomputed": 6600,
+    "generatorAuthority": 4950
+  },
+  "byGrade": [
+    {
+      "grade": 5,
+      "courseId": "ma-g5-mathematics",
+      "lessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "itemTypes": 89
+    },
+    {
+      "grade": 7,
+      "courseId": "ma-g7-mathematics",
+      "lessons": 180,
+      "items": 1818,
+      "gradedItems": 1650,
+      "workedExamples": 168,
+      "keyedAnswers": 1650,
+      "itemTypes": 72
+    },
+    {
+      "grade": 8,
+      "courseId": "ma-g8-mathematics",
+      "lessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "itemTypes": 114
+    },
+    {
+      "grade": 9,
+      "courseId": "ma-g9-mathematics",
+      "lessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "itemTypes": 55
+    },
+    {
+      "grade": 10,
+      "courseId": "ma-g10-mathematics",
+      "lessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "itemTypes": 43
+    },
+    {
+      "grade": 11,
+      "courseId": "ma-g11-mathematics",
+      "lessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "itemTypes": 40
+    },
+    {
+      "grade": 12,
+      "courseId": "ma-g12-mathematics",
+      "lessons": 180,
+      "items": 1830,
+      "gradedItems": 1650,
+      "workedExamples": 180,
+      "keyedAnswers": 1650,
+      "itemTypes": 40
+    }
+  ],
+  "paths": {
+    "studentPackages": "packages/grade-XX/<lessonId>.package.json",
+    "answerKeys": "answer-keys/grade-XX/<lessonId>.key.json"
+  }
+}

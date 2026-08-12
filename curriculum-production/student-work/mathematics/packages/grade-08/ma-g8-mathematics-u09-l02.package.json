@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u09-l02",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u09-l02",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Volume and Bivariate Data",
+    "dayInUnit": 2,
+    "courseDay": 146,
+    "phase": "Concept model A",
+    "focus": "scatter plots",
+    "title": "Concept model A: scatter plots"
+  },
+  "standards": [
+    "8.G.9",
+    "8.SP.1",
+    "8.SP.2",
+    "8.SP.3",
+    "8.SP.4"
+  ],
+  "blueprint": {
+    "phase": "Concept model A",
+    "profile": "concept-model-introduction",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "mastery-check"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "Study both examples. The second one drops some of the wording of the first.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l02#ex-01",
+          "kind": "worked-example",
+          "itemType": "sphere-volume",
+          "standard": "8.G.9",
+          "difficulty": 1,
+          "prompt": "Find the volume of a sphere with radius 3.",
+          "workedSolution": {
+            "steps": [
+              "Identify the quantities and the applicable model.",
+              "Compute using the stated relationship.",
+              "Check that the result answers the question."
+            ],
+            "answer": "36π cubic units"
+          }
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l02#ex-02",
+          "kind": "worked-example",
+          "itemType": "compare-solid-volumes",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "A cylinder and cone have the same radius and height. Which has greater volume?",
+          "workedSolution": {
+            "steps": [
+              "Identify the quantities and the applicable model.",
+              "Compute using the stated relationship.",
+              "Check that the result answers the question."
+            ],
+            "answer": "the cylinder"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Work these with your teaching parent. Say the reason for each step out loud before you write it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l02#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "identify-scatter-association",
+          "standard": "8.SP.1",
+          "difficulty": 1,
+          "prompt": "As x increases, y generally decreases. What association does this scatter plot describe?",
+          "choices": [
+            "causation",
+            "positive",
+            "negative",
+            "none"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l02#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "identify-outlier",
+          "standard": "8.SP.1",
+          "difficulty": 1,
+          "prompt": "Most plotted points follow y = 2x + 1. Of these points, (6, 13), (7, 15), (5, 11), (6, 28), which point is an outlier?",
+          "choices": [
+            "(6, 13)",
+            "(6, 28)",
+            "(7, 15)",
+            "(5, 11)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l02#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "line-of-fit-prediction",
+          "standard": "8.SP.2",
+          "difficulty": 2,
+          "prompt": "A line of fit is y = 3x + 1. Predict y when x = 3.",
+          "choices": [
+            "6",
+            "17",
+            "10",
+            "14"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l02#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "interpolation-or-extrapolation",
+          "standard": "8.SP.2",
+          "difficulty": 1,
+          "prompt": "A data set has x-values from 1 through 12. A prediction is made at x = 19. Is this interpolation or extrapolation?",
+          "choices": [
+            "a census",
+            "interpolation",
+            "extrapolation",
+            "causation"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l02#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "cone-volume",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "Find the exact volume of a cone with radius 4 units and height 9 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "48π cubic units",
+            "144π cubic units",
+            "52π cubic units",
+            "24π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l02#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "correlation-versus-causation",
+          "standard": "8.SP.3",
+          "difficulty": 2,
+          "prompt": "Umbrella sales and rainy-day traffic delays are correlated. Which conclusion is justified?",
+          "choices": [
+            "Umbrella sales cause traffic delays.",
+            "They are correlated; this alone does not prove causation.",
+            "Traffic delays cause umbrella sales.",
+            "There is no relationship at all."
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l02#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "cylinder-volume",
+          "standard": "8.G.9",
+          "difficulty": 3,
+          "prompt": "Find the exact volume of a cylinder with radius 2 units and height 12 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "50π cubic units",
+            "96π cubic units",
+            "16π cubic units",
+            "48π cubic units"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "mc",
+      "kind": "mastery-check",
+      "title": "Mastery check",
+      "directions": "Mastery check. Work without help, then stop and hand this section in.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u09-l02#mc-01",
+          "kind": "multiple-choice",
+          "itemType": "cone-volume",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "Find the exact volume of a cone with radius 3 units and height 3 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "4.5π cubic units",
+            "9π cubic units",
+            "27π cubic units",
+            "12π cubic units"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u09-l02#mc-02",
+          "kind": "multiple-choice",
+          "itemType": "sphere-volume",
+          "standard": "8.G.9",
+          "difficulty": 2,
+          "prompt": "Find the exact volume of a sphere with radius 6 units. Express your answer as a rational multiple of π.",
+          "choices": [
+            "288π cubic units",
+            "216π cubic units",
+            "72π cubic units",
+            "864π cubic units"
+          ]
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u09-l02.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u09-l02"
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g8-mathematics-u06-l12",
+  "lessonRef": {
+    "lessonId": "ma-g8-mathematics-u06-l12",
+    "courseId": "ma-g8-mathematics",
+    "grade": 8,
+    "subject": "mathematics",
+    "unitNumber": 6,
+    "unitTitle": "Systems of Linear Equations",
+    "dayInUnit": 12,
+    "courseDay": 102,
+    "phase": "Performance task build",
+    "focus": "checking and interpreting",
+    "title": "Performance task build: checking and interpreting"
+  },
+  "standards": [
+    "8.EE.8"
+  ],
+  "blueprint": {
+    "phase": "Performance task build",
+    "profile": "performance-build",
+    "sectionKinds": [
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "Set up the first two carefully; the rest of the build depends on them.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l12#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "check-solution-against-system",
+          "standard": "8.EE.8",
+          "difficulty": 2,
+          "prompt": "System: y = -2x - 14 and y = 3x + 26. Does the point (-7, 1) satisfy both equations, fail one, or fail both?",
+          "choices": [
+            "fails both equations",
+            "satisfies both equations",
+            "fails the first equation only",
+            "fails the second equation only"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l12#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "interpret-solution-meaning",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Plan A charges a $113 flat fee plus $4 per month. Plan B charges a $47 flat fee plus $10 per month. The solution to the system is (11, 157). What does the y-coordinate of the solution represent?",
+          "choices": [
+            "The number of months after which the two plans cost the same.",
+            "The shared cost, in dollars, when the two plans are equal.",
+            "The difference in cost between the two plans.",
+            "The rate Plan B charges per month."
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l12#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "verify-solution-of-system",
+          "standard": "8.EE.8a",
+          "difficulty": 2,
+          "prompt": "System: y = x + 3 and y = -4x + 3. Which point (x, y) satisfies both equations?",
+          "choices": [
+            "(-1, 3)",
+            "(0, 4)",
+            "(0, 3)",
+            "(1, 3)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l12#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "solve-system-for-intersection-point",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Solve the system: y = 8x + 16 and y = -8x - 16. What is the intersection point (x, y)?",
+          "choices": [
+            "(-1, 0)",
+            "(-2, 1)",
+            "(-2, 0)",
+            "(-3, 0)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l12#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "intersection-from-two-tables",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Relationship A: x: 4, 5, 6, 7 y: 15, 21, 27, 33. Relationship B: x: 4, 5, 6, 7 y: 15, 23, 31, 39. At which x-value do the two relationships have the same y-value?",
+          "choices": [
+            "7",
+            "4",
+            "6",
+            "5"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l12#ip-04",
+          "kind": "multiple-choice",
+          "itemType": "identify-quadrant-of-intersection",
+          "standard": "8.EE.8a",
+          "difficulty": 3,
+          "prompt": "Solve the system: y = 6x - 2 and y = 5x + 1. In which quadrant does the intersection point lie, or does it lie on an axis?",
+          "choices": [
+            "Quadrant II",
+            "Quadrant III",
+            "Quadrant I",
+            "on an axis"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l12#ip-05",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-substitution",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "Solve the system:\ny = -6x + 49\n8x - 6y = 146\nUse substitution to find the solution (x, y).",
+          "choices": [
+            "(10, -10)",
+            "(11, -11)",
+            "(9, -11)",
+            "(10, -11)"
+          ]
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l12#ip-06",
+          "kind": "multiple-choice",
+          "itemType": "solve-by-elimination",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "Solve the system:\n4x + 9y = 150\n-9x - 9y = -180\nUse elimination to find the solution (x, y).",
+          "choices": [
+            "(6, 15)",
+            "(7, 14)",
+            "(5, 14)",
+            "(6, 14)"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Carry the build to a result and state the check that would catch an error in it.",
+      "items": [
+        {
+          "ref": "ma-g8-mathematics-u06-l12#xt-01",
+          "kind": "constructed-response",
+          "itemType": "classify-solution-count",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "Classify the system: y = -7x - 23 and y = -7x + 9. Does it have one solution, no solution, or infinitely many solutions?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g8-mathematics-u06-l12#xt-02",
+          "kind": "constructed-response",
+          "itemType": "identify-equivalent-or-inconsistent-equation",
+          "standard": "8.EE.8b",
+          "difficulty": 3,
+          "prompt": "The reference equation is y = x + 22. Which of these equations, paired with the reference, would give the system no solution?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-08/ma-g8-mathematics-u06-l12.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "canonical-curriculum-generators@src/curriculum",
+    "seed": "1.0.0|ma-g8-mathematics-u06-l12"
+  }
+}

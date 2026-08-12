@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "swk-ma-g10-mathematics-u09-l10",
+  "lessonRef": {
+    "lessonId": "ma-g10-mathematics-u09-l10",
+    "courseId": "ma-g10-mathematics",
+    "grade": 10,
+    "subject": "mathematics",
+    "unitNumber": 9,
+    "unitTitle": "Coordinate Geometry",
+    "dayInUnit": 10,
+    "courseDay": 154,
+    "phase": "Discussion or problem seminar",
+    "focus": "proving geometric claims algebraically on the coordinate plane",
+    "title": "Discussion or problem seminar: proving geometric claims algebraically on the coordinate plane"
+  },
+  "standards": [
+    "G-GPE.1",
+    "G-GPE.2",
+    "G-GPE.4",
+    "G-GPE.5",
+    "G-GPE.6",
+    "G-GPE.7",
+    "MP.2"
+  ],
+  "blueprint": {
+    "phase": "Discussion or problem seminar",
+    "profile": "problem-seminar",
+    "sectionKinds": [
+      "instructional-example",
+      "guided-practice",
+      "independent-practice",
+      "extension"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "ex",
+      "kind": "instructional-example",
+      "title": "Instructional examples",
+      "directions": "One approach is shown. There is at least one other that works.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l10#ex-01",
+          "kind": "worked-example",
+          "itemType": "coordinate-distance-and-perimeter",
+          "standard": "G-GPE.7",
+          "difficulty": 1,
+          "prompt": "Right triangle with legs 3 and 4 on the axes. Perimeter and area?",
+          "workedSolution": {
+            "steps": [
+              "Hypotenuse 5.",
+              "Perimeter 12; area 6."
+            ],
+            "answer": "perimeter 12; area 6"
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "gp",
+      "kind": "guided-practice",
+      "title": "Guided practice",
+      "directions": "For each, name a second method before you solve it.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l10#gp-01",
+          "kind": "multiple-choice",
+          "itemType": "parabola-from-focus-and-directrix",
+          "standard": "G-GPE.2",
+          "difficulty": 2,
+          "prompt": "A parabola has focus (-3, -2) and directrix y = -6. Write its equation in vertex form.",
+          "choices": [
+            "y = 8(x + 3)² − 4",
+            "y = 1/8(x − 3)² − 4",
+            "y = 1/4(x + 3)² − 4",
+            "y = 1/8(x + 3)² − 4"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l10#gp-02",
+          "kind": "multiple-choice",
+          "itemType": "circle-equation-from-centre-radius",
+          "standard": "G-GPE.1",
+          "difficulty": 3,
+          "prompt": "Write the equation of the circle with centre (7, 1) and radius 2.",
+          "choices": [
+            "(x + 7)² + (y + 1)² = 4",
+            "(x − 7)² + (y − 1)² = 2",
+            "(x − 7)² − (y − 1)² = 4",
+            "(x − 7)² + (y − 1)² = 4"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l10#gp-03",
+          "kind": "multiple-choice",
+          "itemType": "parallel-perpendicular-slope",
+          "standard": "G-GPE.5",
+          "difficulty": 3,
+          "prompt": "A line has slope 3. What is the slope of a line parallel to it?",
+          "choices": [
+            "-1/3",
+            "-3",
+            "3",
+            "1/3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "ip",
+      "kind": "independent-practice",
+      "title": "Independent practice",
+      "directions": "Work on your own. Show the steps that produced each answer.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l10#ip-01",
+          "kind": "multiple-choice",
+          "itemType": "partition-segment-in-ratio",
+          "standard": "G-GPE.6",
+          "difficulty": 3,
+          "prompt": "Find the point that partitions the segment from A(4, -5) to B(0, -11) in the ratio 1:1 from A.",
+          "choices": [
+            "(3, -8)",
+            "(1, -8)",
+            "(2, -7)",
+            "(2, -8)"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l10#ip-02",
+          "kind": "multiple-choice",
+          "itemType": "coordinate-distance-and-perimeter",
+          "standard": "G-GPE.7",
+          "difficulty": 3,
+          "prompt": "A right triangle has vertices at (0, 0), (6, 0), and (6, 8). Find its perimeter and area.",
+          "choices": [
+            "perimeter 24; area 7",
+            "perimeter 24; area 24",
+            "perimeter 24; area 48",
+            "perimeter 14; area 24"
+          ]
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l10#ip-03",
+          "kind": "multiple-choice",
+          "itemType": "parabola-from-focus-and-directrix",
+          "standard": "G-GPE.2",
+          "difficulty": 3,
+          "prompt": "A parabola has focus (-2, 0) and directrix y = -6. Write its equation in vertex form.",
+          "choices": [
+            "y = 1/12(x − 2)² − 3",
+            "y = 12(x + 2)² − 3",
+            "y = 1/12(x + 2)² − 3",
+            "y = 1/6(x + 2)² − 3"
+          ]
+        }
+      ]
+    },
+    {
+      "sectionId": "xt",
+      "kind": "extension",
+      "title": "Extension and challenge",
+      "directions": "Argue for one method over another. Say what makes it better, not just that it is.",
+      "items": [
+        {
+          "ref": "ma-g10-mathematics-u09-l10#xt-01",
+          "kind": "constructed-response",
+          "itemType": "circle-equation-from-centre-radius",
+          "standard": "G-GPE.1",
+          "difficulty": 3,
+          "prompt": "Write the equation of the circle with centre (-4, 1) and radius 11.",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        },
+        {
+          "ref": "ma-g10-mathematics-u09-l10#xt-02",
+          "kind": "constructed-response",
+          "itemType": "parallel-perpendicular-slope",
+          "standard": "G-GPE.5",
+          "difficulty": 3,
+          "prompt": "A line has slope 5/2. What is the slope of a line perpendicular to it?",
+          "responseExpectation": "Give the result and the reasoning that produced it. Show enough work that someone else could check each step."
+        }
+      ]
+    }
+  ],
+  "answerKeyRef": "answer-keys/grade-10/ma-g10-mathematics-u09-l10.key.json",
+  "integrity": {
+    "corpusVersion": "1.0.0",
+    "itemSource": "hs912-student-work-generators@curriculum-production/student-work/mathematics/src/hs",
+    "seed": "1.0.0|ma-g10-mathematics-u09-l10"
+  }
+}
