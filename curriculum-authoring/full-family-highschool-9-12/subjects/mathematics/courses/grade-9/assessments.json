@@ -1,0 +1,694 @@
+[
+  {
+    "assessment_id": "ma-g9-mathematics-u01-assessment",
+    "unit_number": 1,
+    "unit_title": "Quantitative Reasoning, Units, and Rational Exponents",
+    "standards": [
+      "N-Q.1",
+      "N-Q.2",
+      "N-Q.3",
+      "N-RN.1",
+      "N-RN.2",
+      "N-RN.3",
+      "MP.2",
+      "MP.6"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain quantities, units, and derived rates in context in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of descriptive modeling choices, scale, origin, and accuracy limits.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply square and cube roots as solutions to x squared and x cubed equations in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving extending integer exponents to rational exponents; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect radical and rational-exponent notation and rewriting with sums and products of rational and irrational numbers. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Create a quantitative profile of a real system, defending every unit, scale, and accuracy choice.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-mathematics-u02-assessment",
+    "unit_number": 2,
+    "unit_title": "Expression Structure and Equivalence",
+    "standards": [
+      "A-SSE.1",
+      "A-SSE.2",
+      "MP.7"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain interpreting parts of an expression in context in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of terms, factors, and coefficients.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply interpreting a complicated expression by viewing parts as a single entity in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving using structure to rewrite an expression; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect equivalent forms and what each reveals with verifying equivalence rather than assuming it. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Take one context expression, produce three equivalent forms, and explain what each form reveals.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-mathematics-u03-assessment",
+    "unit_number": 3,
+    "unit_title": "Reasoning with Linear Equations and Inequalities",
+    "standards": [
+      "A-REI.1",
+      "A-REI.3",
+      "A-REI.10",
+      "A-REI.11",
+      "MP.3"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain justifying each solution step as an equation-preserving move in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of solving linear equations with letter coefficients.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply solving linear inequalities and the sign-reversal rule in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving graphs as the complete set of solutions; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect intersection of two graphs as a solution with approximating solutions with tables and technology. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Produce an annotated solution set showing that the algebraic and graphical answers agree.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-mathematics-u04-assessment",
+    "unit_number": 4,
+    "unit_title": "Systems of Linear Equations and Inequalities",
+    "standards": [
+      "A-REI.5",
+      "A-REI.6",
+      "A-REI.12",
+      "MP.1"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain proving that replacement by a sum preserves the solution set in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of why elimination is a justified move, not a trick.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply solving systems exactly and approximately in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving graphing half-planes as inequality solution sets; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect feasible regions from multiple constraints with interpreting and verifying a system solution in context. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Determine and defend a feasible region for a constrained real decision.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-mathematics-u05-assessment",
+    "unit_number": 5,
+    "unit_title": "Quadratic Expressions and Equations",
+    "standards": [
+      "A-SSE.3",
+      "A-REI.4",
+      "MP.7"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain factoring a quadratic to reveal its zeros in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of completing the square to reveal maximum or minimum.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply transforming exponential expressions with properties of exponents in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving solving quadratics by inspection, taking roots, and factoring; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect completing the square and deriving the quadratic formula with the discriminant and recognizing when no real solution exists. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Solve one quadratic situation four ways and explain what each form reveals that the others hide.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-mathematics-u06-assessment",
+    "unit_number": 6,
+    "unit_title": "Creating Equations and Constraints",
+    "standards": [
+      "A-CED.1",
+      "A-CED.2",
+      "A-CED.3",
+      "A-CED.4",
+      "MP.4"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain creating linear, quadratic, rational, and exponential equations in one variable in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of creating inequalities in one variable.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply two-variable relationships and their graphs in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving representing constraints by equations, inequalities, and systems; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect judging viable and non-viable options in a modeling context with rearranging formulas to highlight a chosen variable. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Model a resource-allocation decision with equations and constraints, then defend the recommended option.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-mathematics-u07-assessment",
+    "unit_number": 7,
+    "unit_title": "Functions: Concept, Notation, and Interpretation",
+    "standards": [
+      "F-IF.1",
+      "F-IF.2",
+      "F-IF.3",
+      "F-IF.4",
+      "F-IF.5",
+      "MP.2"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain function as a rule assigning exactly one output in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of domain, range, and function notation.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply evaluating and interpreting statements in function notation in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving sequences as functions on the integers; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect key features of graphs and tables with relating domain to a quantitative context. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Interpret one authentic graph completely: features, domain, and meaning in context.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-mathematics-u08-assessment",
+    "unit_number": 8,
+    "unit_title": "Rate of Change and Building Functions",
+    "standards": [
+      "F-IF.6",
+      "F-BF.1",
+      "F-BF.2",
+      "MP.4"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain average rate of change over an interval in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of estimating rate of change from a graph.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply writing a function that describes a context in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving combining functions arithmetically; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect composing functions with arithmetic and geometric sequences, recursive and explicit. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Build a function for a real process from scratch and validate it against data.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-mathematics-u09-assessment",
+    "unit_number": 9,
+    "unit_title": "Linear, Quadratic, and Exponential Models",
+    "standards": [
+      "F-LE.1",
+      "F-LE.2",
+      "F-LE.3",
+      "F-LE.5",
+      "MP.4"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain constant rate of change versus constant ratio in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of recognizing linear, quadratic, and exponential situations.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply constructing linear and exponential functions from data in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving comparing growth rates over the long run; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect why exponential growth eventually exceeds polynomial growth with interpreting model parameters in context. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Given a dataset, select, fit, and defend the model family that best describes it.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g9-mathematics-u10-assessment",
+    "unit_number": 10,
+    "unit_title": "Distributions, Bivariate Data, and Correlation",
+    "standards": [
+      "S-ID.1",
+      "S-ID.2",
+      "S-ID.3",
+      "S-ID.5",
+      "S-ID.6",
+      "S-ID.7",
+      "S-ID.8",
+      "S-ID.9",
+      "MP.4"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain representing distributions with dot plots, histograms, and box plots in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of comparing center and spread using standard deviation.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply shape, outliers, and their effect on summaries in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving two-way frequency tables, joint, marginal, and conditional relative frequencies; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect fitting a function to bivariate data and assessing fit with residual plots with the correlation coefficient, slope and intercept in context, and correlation versus causation. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Run a complete data investigation from question to defended conclusion, including a causation caveat.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  }
+]

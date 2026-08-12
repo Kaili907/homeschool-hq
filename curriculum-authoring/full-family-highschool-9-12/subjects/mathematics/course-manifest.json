@@ -1,0 +1,107 @@
+{
+  "package_id": "full-family-highschool-9-12:mathematics",
+  "title": "Manuel Academy High School Mathematics, Grades 9-12",
+  "draft_version": "1.0.0",
+  "status": "draft",
+  "subject": "mathematics",
+  "grades": [
+    9,
+    10,
+    11,
+    12
+  ],
+  "jurisdiction": "Michigan",
+  "standards_framework": {
+    "id": "michigan-hs-mathematics",
+    "title": "Michigan K-12 Standards \u2014 Mathematics (high school)",
+    "source": "standards/standards-custody.md",
+    "inventory": "standards/michigan-hs-mathematics-standards.json",
+    "map": "standards/standards-map.md",
+    "total_standards": 156,
+    "core_standards": 113,
+    "advanced_plus_standards": 43
+  },
+  "credit_model": {
+    "required_credits": 4,
+    "standards_defined_credits": 3,
+    "district_determined_credits": 1,
+    "basis": "Michigan Merit Curriculum Mathematics Course/Credit Requirements",
+    "note": "Michigan does not mandate a specific course sequence. See sequence-derivation.md."
+  },
+  "lesson_schema": "schemas/lesson.hs.schema.json",
+  "baseline_prerequisite": {
+    "course_id": "ma-g8-mathematics",
+    "path": "curriculum-content/manuel-academy/1.0.0/grades/grade-8/courses/mathematics",
+    "modified": false,
+    "note": "Referenced as the entry prerequisite. Not copied, renamed, rebuilt, or modified."
+  },
+  "counts": {
+    "courses": 4,
+    "units": 40,
+    "lessons": 720,
+    "assessments": 40,
+    "schedules": 4
+  },
+  "courses": [
+    {
+      "course_id": "ma-g9-mathematics",
+      "grade": 9,
+      "subject": "mathematics",
+      "title": "Algebra and Functions I",
+      "credit": "Michigan Merit Curriculum mathematics credit 1 of 4",
+      "order": 1,
+      "days": 180,
+      "units": 10,
+      "lessons": 180,
+      "assessments": 10,
+      "standards_count": 41,
+      "path": "courses/grade-9",
+      "prerequisite_course_id": "ma-g8-mathematics"
+    },
+    {
+      "course_id": "ma-g10-mathematics",
+      "grade": 10,
+      "subject": "mathematics",
+      "title": "Geometry: Congruence, Similarity, and Measurement",
+      "credit": "Michigan Merit Curriculum mathematics credit 2 of 4",
+      "order": 2,
+      "days": 180,
+      "units": 10,
+      "lessons": 180,
+      "assessments": 10,
+      "standards_count": 37,
+      "path": "courses/grade-10",
+      "prerequisite_course_id": "ma-g9-mathematics"
+    },
+    {
+      "course_id": "ma-g11-mathematics",
+      "grade": 11,
+      "subject": "mathematics",
+      "title": "Advanced Algebra, Functions, and Statistics",
+      "credit": "Michigan Merit Curriculum mathematics credit 3 of 4",
+      "order": 3,
+      "days": 180,
+      "units": 10,
+      "lessons": 180,
+      "assessments": 10,
+      "standards_count": 35,
+      "path": "courses/grade-11",
+      "prerequisite_course_id": "ma-g10-mathematics"
+    },
+    {
+      "course_id": "ma-g12-mathematics",
+      "grade": 12,
+      "subject": "mathematics",
+      "title": "Precalculus and Decision Mathematics",
+      "credit": "Michigan Merit Curriculum mathematics credit 4 of 4 (district-determined)",
+      "order": 4,
+      "days": 180,
+      "units": 10,
+      "lessons": 180,
+      "assessments": 10,
+      "standards_count": 43,
+      "path": "courses/grade-12",
+      "prerequisite_course_id": "ma-g11-mathematics"
+    }
+  ]
+}

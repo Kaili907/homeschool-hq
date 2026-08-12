@@ -1,0 +1,689 @@
+[
+  {
+    "assessment_id": "ma-g10-mathematics-u01-assessment",
+    "unit_number": 1,
+    "unit_title": "Geometric Foundations and Constructions",
+    "standards": [
+      "G-CO.1",
+      "G-CO.12",
+      "G-CO.13",
+      "MP.6"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain precise definitions of angle, circle, line, and segment in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of point, line, distance, and arc as undefined starting terms.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply formal constructions with compass, straightedge, and dynamic tools in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving copying segments and angles; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect bisectors, perpendiculars, and parallels through a point with inscribing equilateral triangles, squares, and hexagons in circles. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Produce a construction portfolio with a written justification for each step.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-mathematics-u02-assessment",
+    "unit_number": 2,
+    "unit_title": "Rigid Motions and Transformations",
+    "standards": [
+      "G-CO.2",
+      "G-CO.3",
+      "G-CO.4",
+      "G-CO.5",
+      "MP.5"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain transformations as functions taking points to points in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of distance-preserving versus non-distance-preserving transformations.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply rotations and reflections that carry a polygon onto itself in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving definitions of rotation, reflection, and translation; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect specifying a sequence of transformations with predicting and verifying the image of a figure. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Design a symmetry pattern and specify the exact transformation sequence that generates it.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-mathematics-u03-assessment",
+    "unit_number": 3,
+    "unit_title": "Congruence and Triangle Criteria",
+    "standards": [
+      "G-CO.6",
+      "G-CO.7",
+      "G-CO.8",
+      "MP.3"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain congruence defined by rigid motion in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of predicting the effect of a rigid motion on a figure.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply corresponding parts of congruent triangles in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving deriving ASA, SAS, and SSS from rigid motion; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect selecting an efficient criterion with congruence arguments in applied contexts. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Prove two figures congruent two different ways and compare the arguments.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-mathematics-u04-assessment",
+    "unit_number": 4,
+    "unit_title": "Proving Geometric Theorems",
+    "standards": [
+      "G-CO.9",
+      "G-CO.10",
+      "G-CO.11",
+      "MP.3"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain theorems about lines and angles in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of theorems about triangles and their centers.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply theorems about parallelograms in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving the structure of a deductive proof; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect counterexamples and why a proof fails with communicating a complete and checkable argument. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Write and defend a complete proof, then critique a flawed proof of the same claim.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-mathematics-u05-assessment",
+    "unit_number": 5,
+    "unit_title": "Dilations and Similarity",
+    "standards": [
+      "G-SRT.1",
+      "G-SRT.2",
+      "G-SRT.3",
+      "MP.7"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain dilation, center, and scale factor in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of the effect of dilation on lines through and off the center.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply similarity as a sequence of transformations in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving equal angles and proportional sides; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect establishing the AA criterion with distinguishing similarity from congruence. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Show that two figures are similar using transformations and verify with measurement.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-mathematics-u06-assessment",
+    "unit_number": 6,
+    "unit_title": "Similarity Proofs and Applications",
+    "standards": [
+      "G-SRT.4",
+      "G-SRT.5",
+      "MP.3"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain the triangle proportionality theorem in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of proving the Pythagorean theorem using similarity.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply using congruence and similarity criteria in proofs in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving indirect measurement of inaccessible lengths; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect scale drawings, models, and scale factor error with solving applied problems with similar figures. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Measure something unreachable using similarity and report the error bounds.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-mathematics-u07-assessment",
+    "unit_number": 7,
+    "unit_title": "Right Triangle Trigonometry",
+    "standards": [
+      "G-SRT.6",
+      "G-SRT.7",
+      "G-SRT.8",
+      "MP.4"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain side ratios determined by similarity, not by size in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of defining sine, cosine, and tangent.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply the relationship between sine and cosine of complementary angles in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving solving right triangles for sides and angles; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect angles of elevation and depression with applied right-triangle modeling with units and accuracy. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Solve an authentic right-triangle problem and justify the ratio selected.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-mathematics-u08-assessment",
+    "unit_number": 8,
+    "unit_title": "Circles",
+    "standards": [
+      "G-C.1",
+      "G-C.2",
+      "G-C.3",
+      "G-C.5",
+      "MP.7"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain why all circles are similar in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of central, inscribed, and circumscribed angles.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply chords, radii, tangents, and the inscribed right angle in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving inscribed and circumscribed circles of a triangle; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect proving angle properties of a quadrilateral inscribed in a circle with arc length, radian measure, and sector area derived from similarity. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Build a circle-relationship reference with a proof or derivation for each entry.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-mathematics-u09-assessment",
+    "unit_number": 9,
+    "unit_title": "Coordinate Geometry",
+    "standards": [
+      "G-GPE.1",
+      "G-GPE.2",
+      "G-GPE.4",
+      "G-GPE.5",
+      "G-GPE.6",
+      "G-GPE.7",
+      "MP.2"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain deriving the circle equation from the Pythagorean theorem in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of completing the square to find a circle's center and radius.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply deriving the equation of a parabola from focus and directrix in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving proving geometric claims algebraically on the coordinate plane; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect slope criteria for parallel and perpendicular lines with partitioning a directed segment and computing perimeter and area from coordinates. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Prove a geometric claim algebraically on the coordinate plane and confirm it synthetically.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  },
+  {
+    "assessment_id": "ma-g10-mathematics-u10-assessment",
+    "unit_number": 10,
+    "unit_title": "Measurement, Modeling, and Design Capstone",
+    "standards": [
+      "G-GMD.1",
+      "G-GMD.3",
+      "G-GMD.4",
+      "G-MG.1",
+      "G-MG.2",
+      "G-MG.3",
+      "MP.4"
+    ],
+    "total_points": 38,
+    "prompts": [
+      {
+        "type": "concept and vocabulary",
+        "prompt": "Explain informal arguments for circumference, area, and volume formulas in your own words and give or identify a valid example.",
+        "points": 4
+      },
+      {
+        "type": "representation or source",
+        "prompt": "Use a diagram, model, construction, data display, worked process, or demonstration to show understanding of volume of cylinders, pyramids, cones, and spheres.",
+        "points": 5
+      },
+      {
+        "type": "application",
+        "prompt": "Apply cross-sections of solids and solids of revolution in a new realistic situation. Show the process or cite evidence.",
+        "points": 6
+      },
+      {
+        "type": "error or claim analysis",
+        "prompt": "Analyze a plausible error, weak claim, unsafe choice, or design flaw involving modeling physical objects with geometric shapes; correct it and explain why.",
+        "points": 6
+      },
+      {
+        "type": "connection",
+        "prompt": "Connect density based on area and volume with geometric design under physical and cost constraints. Explain how the ideas support, constrain, contrast with, or build on one another.",
+        "points": 5
+      },
+      {
+        "type": "performance evidence",
+        "prompt": "Present the strongest evidence from the unit project: Design a physical object to meet stated constraints and justify every measurement decision.",
+        "points": 8
+      },
+      {
+        "type": "reflection and transfer",
+        "prompt": "Identify one skill you can now transfer, one check that improves accuracy or quality, and one next question.",
+        "points": 4
+      }
+    ],
+    "mastery_interpretation": {
+      "secure": "At least 85% with accurate independent application and adequate evidence/reasoning.",
+      "developing": "70–84% or inconsistent explanation; assign targeted review and a fresh transfer check.",
+      "not_yet": "Below 70% or a missing prerequisite; reteach the smallest gap and reassess with new evidence.",
+      "rule": "A unit score is one evidence source, not the sole basis for long-term mastery."
+    },
+    "rubric_dimensions": [
+      "accuracy or fidelity",
+      "evidence and reasoning",
+      "application or performance",
+      "checking and revision"
+    ],
+    "reassessment": {
+      "trigger": "Any result below Secure, or any standard without independent evidence on a second occasion.",
+      "sequence": "Targeted reteaching of the smallest identified gap, then fresh items that assess the same standards with different contexts and numbers.",
+      "evidence_required": "Accurate independent application plus explanation on a later occasion; the original attempt is never the sole record.",
+      "recording": "Record the improved evidence. Do not average a reassessment against the original attempt."
+    },
+    "accommodation_note": "Access supports may change format, pacing, quantity, setting, or response mode without changing the standard being assessed."
+  }
+]
